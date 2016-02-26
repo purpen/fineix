@@ -10,4 +10,8 @@
 
 @implementation DiscoverViewController
 
+- (void)viewDidLoad {
+
+}
+
 @end

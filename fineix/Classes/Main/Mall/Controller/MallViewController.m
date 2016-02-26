@@ -10,4 +10,8 @@
 
 @implementation MallViewController
 
+- (void)viewDidLoad {
+
+}
+
 @end

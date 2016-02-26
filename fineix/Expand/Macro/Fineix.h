@@ -9,6 +9,19 @@
 #ifndef Fineix_h
 #define Fineix_h
 
+#undef 宽高尺寸
+//  屏幕宽
+#define SCREEN_HEIGHT [[UIScreen mainScreen] bounds].size.height
+//  屏幕高
+#define SCREEN_WIDTH  [[UIScreen mainScreen] bounds].size.width
+//  宽度
+#define Bounds_width self.bounds.size.width
+//  高度
+#define Bounds_height self.bounds.size.height
+
+#undef 颜色
+#define color @"#FF3366"
+
 #undef  字体大小
 //  场景标题
 #define Font_SceneTitle 14
@@ -34,6 +47,15 @@
 #define Font_TabPrice 9
 
 
+#undef  创建属性
+//  strong
+#define pro_strong property (nonatomic, strong)
+//  weak
+#define pro_weak property (nonatomic, weak)
+//  assign
+#define pro_assign property (nonatomic, assign)
+//  copy
+#define pro_copy property (nonatomic, copy)
 
 
 #endif /* Fineix_h */

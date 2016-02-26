@@ -42,6 +42,7 @@
 		D8EFC59F1C802DF20002509D /* MallViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D8EFC59E1C802DF20002509D /* MallViewController.m */; };
 		D8EFC5A31C802E3D0002509D /* MyViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D8EFC5A11C802E3D0002509D /* MyViewController.m */; };
 		D8EFC5A41C802E3D0002509D /* MyViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D8EFC5A21C802E3D0002509D /* MyViewController.xib */; };
+		D8EFC5A91C80326E0002509D /* FBTabBar.m in Sources */ = {isa = PBXBuildFile; fileRef = D8EFC5A81C80326E0002509D /* FBTabBar.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -96,6 +97,8 @@
 		D8EFC5A01C802E3D0002509D /* MyViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyViewController.h; sourceTree = "<group>"; };
 		D8EFC5A11C802E3D0002509D /* MyViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyViewController.m; sourceTree = "<group>"; };
 		D8EFC5A21C802E3D0002509D /* MyViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MyViewController.xib; sourceTree = "<group>"; };
+		D8EFC5A71C80326E0002509D /* FBTabBar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FBTabBar.h; sourceTree = "<group>"; };
+		D8EFC5A81C80326E0002509D /* FBTabBar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FBTabBar.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -344,6 +347,8 @@
 			children = (
 				D8EFC5851C802B6C0002509D /* FBTabBarController.h */,
 				D8EFC5861C802B6C0002509D /* FBTabBarController.m */,
+				D8EFC5A71C80326E0002509D /* FBTabBar.h */,
+				D8EFC5A81C80326E0002509D /* FBTabBar.m */,
 			);
 			path = TabBar;
 			sourceTree = "<group>";
@@ -623,6 +628,7 @@
 				D8EFC5831C8024500002509D /* UIImageView+SDWedImage.m in Sources */,
 				D8EFC5871C802B6C0002509D /* FBTabBarController.m in Sources */,
 				D8EFC5A31C802E3D0002509D /* MyViewController.m in Sources */,
+				D8EFC5A91C80326E0002509D /* FBTabBar.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
