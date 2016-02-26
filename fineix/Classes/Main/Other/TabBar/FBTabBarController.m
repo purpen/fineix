@@ -36,6 +36,11 @@
 }
 
 #pragma mark 添加子控制器的方法
+/**
+ *  @param vc 控制器
+ *  @param image 默认图标
+ *  @Param seletedImage 点击后的图标
+ */
 - (void)setChildViewController:(UIViewController *)vc image:(UIImage *)image seletedImage:(UIImage *)seletedImage {
     vc.tabBarItem.image = image;
     vc.tabBarItem.selectedImage = seletedImage;
