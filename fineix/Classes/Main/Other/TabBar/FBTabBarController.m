@@ -30,9 +30,7 @@
     FBTabBar * tabBar = [[FBTabBar alloc] initWithFrame:self.tabBar.frame];
     [self setValue:tabBar forKey:@"tabBar"];
     [tabBar.createBtn addTarget:self action:@selector(createBtnClick) forControlEvents:(UIControlEventTouchUpInside)];
-    
-    //  设置tabBarItem点击的颜色
-    self.tabBar.tintColor = [UIColor colorWithHexString:color];
+
 }
 
 #pragma mark 添加子控制器的方法
@@ -41,9 +39,20 @@
  *  @param image 默认图标
  *  @Param seletedImage 点击后的图标
  */
-- (void)setChildViewController:(UIViewController *)vc image:(UIImage *)image seletedImage:(UIImage *)seletedImage {
-    vc.tabBarItem.image = image;
-    vc.tabBarItem.selectedImage = seletedImage;
+- (void)setChildViewController:(UIViewController *)vc image:(NSString *)image seletedImage:(NSString *)seletedImage {
+    vc.tabBarItem.image = [UIImage imageNamed:image];
+    vc.tabBarItem.selectedImage = [UIImage imageNamed:seletedImage];
+    
+    //  设置tabBarItem点击颜色为原图标颜色
+    UIImage * seletedimg = [UIImage imageNamed:seletedImage];
+    seletedimg = [seletedimg imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
+    vc.tabBarItem.selectedImage = seletedimg;
+    
+    //  设置tabBarItem图标居中
+    vc.tabBarItem.imageInsets = UIEdgeInsetsMake(5.0, 0, -5.0, 0);
+    
+    [self addChildViewController:vc];
+    
 }
 
 #pragma mark 设置tabBar
@@ -54,18 +63,13 @@
     MallViewController * mallVC = [[MallViewController alloc] init];
     MyViewController * myVC = [[MyViewController alloc] initWithNibName:@"MyViewController" bundle:nil];
     
-    [self setChildViewController:homeVC image:[UIImage imageNamed:@"homegray"] seletedImage:[UIImage imageNamed:@"homered"]];
-    [self setChildViewController:discoverVC image:[UIImage imageNamed:@"findgray"] seletedImage:[UIImage imageNamed:@"findred"]];
-    [self setChildViewController:mallVC image:[UIImage imageNamed:@"shopgray"] seletedImage:[UIImage imageNamed:@"shopred"]];
-    [self setChildViewController:myVC image:[UIImage imageNamed:@"minegray"] seletedImage:[UIImage imageNamed:@"minered"]];
+    [self setChildViewController:homeVC image:@"homegray" seletedImage:@"homered"];
+    [self setChildViewController:discoverVC image:@"findgray" seletedImage:@"findred"];
+    [self setChildViewController:mallVC image:@"shopgray" seletedImage:@"shopred"];
+    [self setChildViewController:myVC image:@"minegray" seletedImage:@"minered"];
     
     self.viewControllers = @[homeVC, discoverVC, mallVC, myVC];
-    
-    //  设置tabBarItem图标居中
-    CGFloat offset = 5.0f;
-    for (UITabBarItem *item in self.tabBar.items) {
-        item.imageInsets = UIEdgeInsetsMake(offset, 0, -offset, 0);
-    }
+
 }
 
 #pragma mark “创建情景”的按钮事件

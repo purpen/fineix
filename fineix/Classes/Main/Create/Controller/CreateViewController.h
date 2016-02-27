@@ -2,12 +2,15 @@
 //  CreateViewController.h
 //  fineix
 //
-//  Created by FLYang on 16/2/26.
+//  Created by FLYang on 16/2/27.
 //  Copyright © 2016年 taihuoniao. All rights reserved.
 //
 
-#import <UIKit/UIKit.h>
+#import "FBPictureViewController.h"
 
-@interface CreateViewController : UIViewController
+
+@interface CreateViewController : FBPictureViewController
+
+@pro_strong UIView  *   toolView;   //  底部功能选择视图
 
 @end

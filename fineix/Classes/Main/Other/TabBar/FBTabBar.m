@@ -27,8 +27,8 @@
 #pragma mark 调整tabBar上item的位置和尺寸
 - (void)layoutSubviews {
     [super layoutSubviews];
-    CGFloat width = Bounds_width;
-    CGFloat height = Bounds_height;
+    CGFloat width = self.bounds.size.width;
+    CGFloat height = self.bounds.size.height;
     
     CGFloat btnX = 0;
     CGFloat btnY = 0;

@@ -30,6 +30,9 @@
 		800507451C7A9CDD005AF0BE /* fineix.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 800507431C7A9CDD005AF0BE /* fineix.xcdatamodeld */; };
 		800507471C7A9CDD005AF0BE /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 800507461C7A9CDD005AF0BE /* Assets.xcassets */; };
 		8005074A1C7A9CDD005AF0BE /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 800507481C7A9CDD005AF0BE /* LaunchScreen.storyboard */; };
+		D8D8B64D1C80ABFF00DD6BBE /* FBPictureViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D8D8B64C1C80ABFF00DD6BBE /* FBPictureViewController.m */; };
+		D8D8B6501C80AF9F00DD6BBE /* CreateViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D8D8B64F1C80AF9F00DD6BBE /* CreateViewController.m */; };
+		D8D8B6531C80B8DF00DD6BBE /* FBFootView.m in Sources */ = {isa = PBXBuildFile; fileRef = D8D8B6521C80B8DF00DD6BBE /* FBFootView.m */; };
 		D8EFC5771C801C310002509D /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D8EFC5751C801C310002509D /* Main.storyboard */; };
 		D8EFC57A1C801E8C0002509D /* FBNavigationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D8EFC5791C801E8C0002509D /* FBNavigationViewController.m */; };
 		D8EFC5811C8024500002509D /* UIColor+Extension.m in Sources */ = {isa = PBXBuildFile; fileRef = D8EFC57B1C8024500002509D /* UIColor+Extension.m */; };
@@ -38,7 +41,6 @@
 		D8EFC5871C802B6C0002509D /* FBTabBarController.m in Sources */ = {isa = PBXBuildFile; fileRef = D8EFC5861C802B6C0002509D /* FBTabBarController.m */; };
 		D8EFC58A1C802D300002509D /* HomeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D8EFC5891C802D300002509D /* HomeViewController.m */; };
 		D8EFC5991C802DD40002509D /* DiscoverViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D8EFC5981C802DD40002509D /* DiscoverViewController.m */; };
-		D8EFC59C1C802DE70002509D /* CreateViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D8EFC59B1C802DE70002509D /* CreateViewController.m */; };
 		D8EFC59F1C802DF20002509D /* MallViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D8EFC59E1C802DF20002509D /* MallViewController.m */; };
 		D8EFC5A31C802E3D0002509D /* MyViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D8EFC5A11C802E3D0002509D /* MyViewController.m */; };
 		D8EFC5A41C802E3D0002509D /* MyViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D8EFC5A21C802E3D0002509D /* MyViewController.xib */; };
@@ -74,6 +76,12 @@
 		8005074B1C7A9CDD005AF0BE /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		B4C4D9FF10AA9DA389828C7D /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
 		BA7E5463E540D9166EC06720 /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
+		D8D8B64B1C80ABFF00DD6BBE /* FBPictureViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FBPictureViewController.h; sourceTree = "<group>"; };
+		D8D8B64C1C80ABFF00DD6BBE /* FBPictureViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FBPictureViewController.m; sourceTree = "<group>"; };
+		D8D8B64E1C80AF9F00DD6BBE /* CreateViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CreateViewController.h; sourceTree = "<group>"; };
+		D8D8B64F1C80AF9F00DD6BBE /* CreateViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CreateViewController.m; sourceTree = "<group>"; };
+		D8D8B6511C80B8DF00DD6BBE /* FBFootView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FBFootView.h; sourceTree = "<group>"; };
+		D8D8B6521C80B8DF00DD6BBE /* FBFootView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FBFootView.m; sourceTree = "<group>"; };
 		D8EFC5761C801C310002509D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		D8EFC5781C801E8C0002509D /* FBNavigationViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FBNavigationViewController.h; sourceTree = "<group>"; };
 		D8EFC5791C801E8C0002509D /* FBNavigationViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FBNavigationViewController.m; sourceTree = "<group>"; };
@@ -90,8 +98,6 @@
 		D8EFC5891C802D300002509D /* HomeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HomeViewController.m; sourceTree = "<group>"; };
 		D8EFC5971C802DD40002509D /* DiscoverViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DiscoverViewController.h; sourceTree = "<group>"; };
 		D8EFC5981C802DD40002509D /* DiscoverViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DiscoverViewController.m; sourceTree = "<group>"; };
-		D8EFC59A1C802DE70002509D /* CreateViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CreateViewController.h; sourceTree = "<group>"; };
-		D8EFC59B1C802DE70002509D /* CreateViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CreateViewController.m; sourceTree = "<group>"; };
 		D8EFC59D1C802DF20002509D /* MallViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MallViewController.h; sourceTree = "<group>"; };
 		D8EFC59E1C802DF20002509D /* MallViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MallViewController.m; sourceTree = "<group>"; };
 		D8EFC5A01C802E3D0002509D /* MyViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyViewController.h; sourceTree = "<group>"; };
@@ -222,6 +228,15 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
+		D8D8B64A1C80ABEC00DD6BBE /* Picture */ = {
+			isa = PBXGroup;
+			children = (
+				D8D8B64B1C80ABFF00DD6BBE /* FBPictureViewController.h */,
+				D8D8B64C1C80ABFF00DD6BBE /* FBPictureViewController.m */,
+			);
+			path = Picture;
+			sourceTree = "<group>";
+		};
 		D8EFC5611C801BE40002509D /* Classes */ = {
 			isa = PBXGroup;
 			children = (
@@ -319,6 +334,7 @@
 		D8EFC56B1C801BE40002509D /* Other */ = {
 			isa = PBXGroup;
 			children = (
+				D8D8B64A1C80ABEC00DD6BBE /* Picture */,
 				D8EFC56C1C801BE40002509D /* Navigation */,
 				D8EFC56D1C801BE40002509D /* Public */,
 				D8EFC56E1C801BE40002509D /* TabBar */,
@@ -425,8 +441,8 @@
 		D8EFC58E1C802DAD0002509D /* Controller */ = {
 			isa = PBXGroup;
 			children = (
-				D8EFC59A1C802DE70002509D /* CreateViewController.h */,
-				D8EFC59B1C802DE70002509D /* CreateViewController.m */,
+				D8D8B64E1C80AF9F00DD6BBE /* CreateViewController.h */,
+				D8D8B64F1C80AF9F00DD6BBE /* CreateViewController.m */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -441,6 +457,8 @@
 		D8EFC5901C802DAD0002509D /* View */ = {
 			isa = PBXGroup;
 			children = (
+				D8D8B6511C80B8DF00DD6BBE /* FBFootView.h */,
+				D8D8B6521C80B8DF00DD6BBE /* FBFootView.m */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -617,12 +635,14 @@
 			files = (
 				D8EFC59F1C802DF20002509D /* MallViewController.m in Sources */,
 				8005073C1C7A9CDD005AF0BE /* AppDelegate.m in Sources */,
+				D8D8B6531C80B8DF00DD6BBE /* FBFootView.m in Sources */,
+				D8D8B6501C80AF9F00DD6BBE /* CreateViewController.m in Sources */,
+				D8D8B64D1C80ABFF00DD6BBE /* FBPictureViewController.m in Sources */,
 				800507451C7A9CDD005AF0BE /* fineix.xcdatamodeld in Sources */,
 				D8EFC5811C8024500002509D /* UIColor+Extension.m in Sources */,
 				D8EFC57A1C801E8C0002509D /* FBNavigationViewController.m in Sources */,
 				800507391C7A9CDD005AF0BE /* main.m in Sources */,
 				D8EFC5991C802DD40002509D /* DiscoverViewController.m in Sources */,
-				D8EFC59C1C802DE70002509D /* CreateViewController.m in Sources */,
 				D8EFC58A1C802D300002509D /* HomeViewController.m in Sources */,
 				D8EFC5821C8024500002509D /* HttpTool.m in Sources */,
 				D8EFC5831C8024500002509D /* UIImageView+SDWedImage.m in Sources */,
