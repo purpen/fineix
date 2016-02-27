@@ -27,6 +27,7 @@
 - (void)addNavTitle;
 //  添加继续下一步的按钮
 - (void)addNextBtn;
+
 //  添加胶卷的按钮
 - (void)addPhotoAlbumBtn;
 
