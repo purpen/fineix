@@ -16,7 +16,12 @@
 #import "MallViewController.h"
 #import "MyViewController.h"
 
-@implementation FBTabBarController
+@implementation FBTabBarController {
+    FBNavigationViewController * _homeNav;
+    FBNavigationViewController * _discoverNav;
+    FBNavigationViewController * _mallNav;
+    FBNavigationViewController * _myNav;
+}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -63,12 +68,17 @@
     MallViewController * mallVC = [[MallViewController alloc] init];
     MyViewController * myVC = [[MyViewController alloc] initWithNibName:@"MyViewController" bundle:nil];
     
-    [self setChildViewController:homeVC image:@"homegray" seletedImage:@"homered"];
-    [self setChildViewController:discoverVC image:@"findgray" seletedImage:@"findred"];
-    [self setChildViewController:mallVC image:@"shopgray" seletedImage:@"shopred"];
-    [self setChildViewController:myVC image:@"minegray" seletedImage:@"minered"];
+    _homeNav = [[FBNavigationViewController alloc] initWithRootViewController:homeVC];
+    _discoverNav = [[FBNavigationViewController alloc] initWithRootViewController:discoverVC];
+    _mallNav = [[FBNavigationViewController alloc] initWithRootViewController:mallVC];
+    _myNav = [[FBNavigationViewController alloc] initWithRootViewController:myVC];
     
-    self.viewControllers = @[homeVC, discoverVC, mallVC, myVC];
+    [self setChildViewController:_homeNav image:@"homegray" seletedImage:@"homered"];
+    [self setChildViewController:_discoverNav image:@"findgray" seletedImage:@"findred"];
+    [self setChildViewController:_mallNav image:@"shopgray" seletedImage:@"shopred"];
+    [self setChildViewController:_myNav image:@"minegray" seletedImage:@"minered"];
+    
+    self.viewControllers = @[_homeNav, _discoverNav, _mallNav, _myNav];
 
 }
 

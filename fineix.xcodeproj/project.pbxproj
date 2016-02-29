@@ -31,6 +31,7 @@
 		800507471C7A9CDD005AF0BE /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 800507461C7A9CDD005AF0BE /* Assets.xcassets */; };
 		8005074A1C7A9CDD005AF0BE /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 800507481C7A9CDD005AF0BE /* LaunchScreen.storyboard */; };
 		D802D7791C821D41007AFA3D /* AssetsLibrary.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D802D7781C821D41007AFA3D /* AssetsLibrary.framework */; };
+		D802D7881C843890007AFA3D /* FBCameraView.m in Sources */ = {isa = PBXBuildFile; fileRef = D802D7871C843890007AFA3D /* FBCameraView.m */; };
 		D82DAF991C82026700E0650B /* FBPictureCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D82DAF981C82026700E0650B /* FBPictureCollectionViewCell.m */; };
 		D8BFA5F31C820F3600F5C1B7 /* FBPhoto.m in Sources */ = {isa = PBXBuildFile; fileRef = D8BFA5F21C820F3600F5C1B7 /* FBPhoto.m */; };
 		D8BFA5F61C8211DE00F5C1B7 /* FBLoadPhoto.m in Sources */ = {isa = PBXBuildFile; fileRef = D8BFA5F51C8211DE00F5C1B7 /* FBLoadPhoto.m */; };
@@ -81,6 +82,8 @@
 		B4C4D9FF10AA9DA389828C7D /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
 		BA7E5463E540D9166EC06720 /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
 		D802D7781C821D41007AFA3D /* AssetsLibrary.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AssetsLibrary.framework; path = System/Library/Frameworks/AssetsLibrary.framework; sourceTree = SDKROOT; };
+		D802D7861C843890007AFA3D /* FBCameraView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FBCameraView.h; sourceTree = "<group>"; };
+		D802D7871C843890007AFA3D /* FBCameraView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FBCameraView.m; sourceTree = "<group>"; };
 		D82DAF971C82026700E0650B /* FBPictureCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FBPictureCollectionViewCell.h; sourceTree = "<group>"; };
 		D82DAF981C82026700E0650B /* FBPictureCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FBPictureCollectionViewCell.m; sourceTree = "<group>"; };
 		D8BFA5F11C820F3600F5C1B7 /* FBPhoto.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FBPhoto.h; sourceTree = "<group>"; };
@@ -482,6 +485,8 @@
 		D8EFC5901C802DAD0002509D /* View */ = {
 			isa = PBXGroup;
 			children = (
+				D802D7861C843890007AFA3D /* FBCameraView.h */,
+				D802D7871C843890007AFA3D /* FBCameraView.m */,
 				D8D8B6511C80B8DF00DD6BBE /* FBFootView.h */,
 				D8D8B6521C80B8DF00DD6BBE /* FBFootView.m */,
 				D82DAF971C82026700E0650B /* FBPictureCollectionViewCell.h */,
@@ -571,6 +576,7 @@
 				TargetAttributes = {
 					800507331C7A9CDD005AF0BE = {
 						CreatedOnToolsVersion = 7.2.1;
+						DevelopmentTeam = XJ5P4B7MAV;
 					};
 				};
 			};
@@ -677,6 +683,7 @@
 				D82DAF991C82026700E0650B /* FBPictureCollectionViewCell.m in Sources */,
 				D8EFC5871C802B6C0002509D /* FBTabBarController.m in Sources */,
 				D8BFA5F61C8211DE00F5C1B7 /* FBLoadPhoto.m in Sources */,
+				D802D7881C843890007AFA3D /* FBCameraView.m in Sources */,
 				D8EFC5A31C802E3D0002509D /* MyViewController.m in Sources */,
 				D8EFC5A91C80326E0002509D /* FBTabBar.m in Sources */,
 			);
@@ -789,6 +796,7 @@
 			baseConfigurationReference = B4C4D9FF10AA9DA389828C7D /* Pods.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/fineix/Vendors/BaiduMapSDK",
@@ -807,6 +815,7 @@
 			baseConfigurationReference = BA7E5463E540D9166EC06720 /* Pods.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/fineix/Vendors/BaiduMapSDK",

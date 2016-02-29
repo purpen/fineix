@@ -12,23 +12,13 @@
 
 @interface FBPictureViewController : UIViewController
 
-@pro_strong UIView      *   navView;        //  顶部导航
-@pro_strong UIButton    *   cancelBtn;      //  取消按钮
-@pro_strong UIButton    *   backBtn;        //  返回按钮
-@pro_strong UILabel     *   navTitle;       //  页面标题
-@pro_strong UIButton    *   nextBtn;        //  继续按钮
-@pro_strong UIButton    *   photoAlbumBtn;  //  照片胶卷
+@pro_strong UIScrollView    *   navRollView;    //  顶部滚动栏
+@pro_strong NSMutableArray  *   navTitleArr;    //  顶部标题数组
+@pro_strong UIButton        *   cancelBtn;      //  取消按钮
+@pro_strong UIButton        *   backBtn;        //  返回按钮
+@pro_strong UIButton        *   doneBtn;        //  完成发布按钮
 
-//  添加取消按钮
-- (void)addCancelBtn;
-//  添加返回按钮
-- (void)addBackBtn;
-//  添加页面标题
-- (void)addNavTitle;
-//  添加继续下一步的按钮
-- (void)addNextBtn;
-
-//  添加胶卷的按钮
-- (void)addPhotoAlbumBtn;
+//  添加导航视图
+- (void)addNavView:(NSArray *)titleArr;
 
 @end
