@@ -30,7 +30,6 @@
 		800507451C7A9CDD005AF0BE /* fineix.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 800507431C7A9CDD005AF0BE /* fineix.xcdatamodeld */; };
 		800507471C7A9CDD005AF0BE /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 800507461C7A9CDD005AF0BE /* Assets.xcassets */; };
 		8005074A1C7A9CDD005AF0BE /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 800507481C7A9CDD005AF0BE /* LaunchScreen.storyboard */; };
-		D8EFC5771C801C310002509D /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D8EFC5751C801C310002509D /* Main.storyboard */; };
 		D8EFC57A1C801E8C0002509D /* FBNavigationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D8EFC5791C801E8C0002509D /* FBNavigationViewController.m */; };
 		D8EFC5811C8024500002509D /* UIColor+Extension.m in Sources */ = {isa = PBXBuildFile; fileRef = D8EFC57B1C8024500002509D /* UIColor+Extension.m */; };
 		D8EFC5821C8024500002509D /* HttpTool.m in Sources */ = {isa = PBXBuildFile; fileRef = D8EFC57D1C8024500002509D /* HttpTool.m */; };
@@ -74,7 +73,6 @@
 		8005074B1C7A9CDD005AF0BE /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		B4C4D9FF10AA9DA389828C7D /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
 		BA7E5463E540D9166EC06720 /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
-		D8EFC5761C801C310002509D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		D8EFC5781C801E8C0002509D /* FBNavigationViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FBNavigationViewController.h; sourceTree = "<group>"; };
 		D8EFC5791C801E8C0002509D /* FBNavigationViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FBNavigationViewController.m; sourceTree = "<group>"; };
 		D8EFC57B1C8024500002509D /* UIColor+Extension.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIColor+Extension.m"; sourceTree = "<group>"; };
@@ -215,7 +213,6 @@
 			isa = PBXGroup;
 			children = (
 				800507381C7A9CDD005AF0BE /* main.m */,
-				D8EFC5751C801C310002509D /* Main.storyboard */,
 				800507481C7A9CDD005AF0BE /* LaunchScreen.storyboard */,
 				8005074B1C7A9CDD005AF0BE /* Info.plist */,
 			);
@@ -526,6 +523,7 @@
 				TargetAttributes = {
 					800507331C7A9CDD005AF0BE = {
 						CreatedOnToolsVersion = 7.2.1;
+						DevelopmentTeam = 7ET6PJMCHV;
 					};
 				};
 			};
@@ -552,7 +550,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D8EFC5771C801C310002509D /* Main.storyboard in Resources */,
 				280045381C8060CE005F5C2E /* mapapi.bundle in Resources */,
 				8005074A1C7A9CDD005AF0BE /* LaunchScreen.storyboard in Resources */,
 				D8EFC5A41C802E3D0002509D /* MyViewController.xib in Resources */,
@@ -643,14 +640,6 @@
 			name = LaunchScreen.storyboard;
 			sourceTree = "<group>";
 		};
-		D8EFC5751C801C310002509D /* Main.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				D8EFC5761C801C310002509D /* Base */,
-			);
-			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
@@ -739,6 +728,7 @@
 			baseConfigurationReference = B4C4D9FF10AA9DA389828C7D /* Pods.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/fineix/Vendors/BaiduMapSDK",
@@ -757,6 +747,7 @@
 			baseConfigurationReference = BA7E5463E540D9166EC06720 /* Pods.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/fineix/Vendors/BaiduMapSDK",
