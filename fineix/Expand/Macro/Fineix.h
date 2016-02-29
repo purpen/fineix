@@ -9,20 +9,25 @@
 #ifndef Fineix_h
 #define Fineix_h
 
+#import "UIColor+Extension.h"
+
 #undef 宽高尺寸
 //  屏幕宽
 #define SCREEN_HEIGHT [[UIScreen mainScreen] bounds].size.height
 //  屏幕高
 #define SCREEN_WIDTH  [[UIScreen mainScreen] bounds].size.width
 //  宽度
-#define Bounds_width self.bounds.size.width
+#define Bounds_width self.view.bounds.size.width
 //  高度
-#define Bounds_height self.bounds.size.height
+#define Bounds_height self.view.bounds.size.height
 
 #undef 颜色
 #define color @"#FF3366"
+#define pictureNavColor @"#222222"
 
 #undef  字体大小
+//  页面标题
+#define Font_ControllerTitle 17
 //  场景标题
 #define Font_SceneTitle 14
 //  商品标题
