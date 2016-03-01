@@ -25,19 +25,24 @@
         _cameraNavView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 50)];
         _cameraNavView.backgroundColor = [UIColor colorWithHexString:pictureNavColor alpha:1];
         
-        [_cameraNavView addSubview:self.cameraBackBtn];
+        [_cameraNavView addSubview:self.cameraCancelBtn];
         [_cameraNavView addSubview:self.cameraTitlt];
     }
     return _cameraNavView;
 }
 
 #pragma mark - 返回按钮
-- (UIButton *)cameraBackBtn {
-    if (!_cameraBackBtn) {
-        _cameraBackBtn = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 50, 50)];
-        [_cameraBackBtn setImage:[UIImage imageNamed:@"icon_back"] forState:(UIControlStateNormal)];
+- (UIButton *)cameraCancelBtn {
+    if (!_cameraCancelBtn) {
+        _cameraCancelBtn = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 50, 50)];
+        [_cameraCancelBtn setImage:[UIImage imageNamed:@"icon_cancel"] forState:(UIControlStateNormal)];
+        [_cameraCancelBtn addTarget:self action:@selector(cameraCancelBtnClick) forControlEvents:(UIControlEventTouchUpInside)];
     }
-    return _cameraBackBtn;
+    return _cameraCancelBtn;
+}
+
+- (void)cameraCancelBtnClick {
+    [self.VC dismissViewControllerAnimated:YES completion:nil];
 }
 
 #pragma mark - 页面标题
@@ -46,7 +51,7 @@
         _cameraTitlt = [[UILabel alloc] initWithFrame:CGRectMake(60, 0, SCREEN_WIDTH - 120, 50)];
         _cameraTitlt.textColor = [UIColor whiteColor];
         _cameraTitlt.textAlignment = NSTextAlignmentCenter;
-        _cameraTitlt.text = @"照片";
+        _cameraTitlt.text = @"拍照";
         _cameraTitlt.font = [UIFont systemFontOfSize:Font_ControllerTitle];
     }
     return _cameraTitlt;

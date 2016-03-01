@@ -74,7 +74,7 @@
     
     //  返回按钮
     for (NSUInteger kdx = 0; kdx < titleArr.count -1; kdx ++) {
-        UIButton * backBtn = [[UIButton alloc] initWithFrame:CGRectMake(SCREEN_WIDTH + (SCREEN_WIDTH * kdx), 0, 50, 50)];
+        UIButton * backBtn = [[UIButton alloc] initWithFrame:CGRectMake(SCREEN_WIDTH + (SCREEN_WIDTH * kdx), 0, 60, 50)];
         [backBtn setImage:[UIImage imageNamed:@"icon_back"] forState:(UIControlStateNormal)];
         backBtn.tag = backBtnTag + kdx;
         [backBtn addTarget:self action:@selector(backBtnClick:) forControlEvents:(UIControlEventTouchUpInside)];

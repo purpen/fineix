@@ -23,7 +23,7 @@ const static NSInteger btnTag = 100;
 //  设置按钮视图
 - (UIScrollView *)buttonView {
     if (!_buttonView) {
-        _buttonView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 55)];
+        _buttonView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 49)];
         _buttonView.bounces = NO;
         _buttonView.showsHorizontalScrollIndicator = NO;
         _buttonView.showsVerticalScrollIndicator = NO;
@@ -33,7 +33,7 @@ const static NSInteger btnTag = 100;
 
 - (void)addFootViewButton {
     for (NSUInteger idx = 0; idx < self.titleArr.count; idx ++) {
-        UIButton * toolBtn = [[UIButton alloc] initWithFrame:CGRectMake(idx * SCREEN_WIDTH/self.titleArr.count, 0, SCREEN_WIDTH/self.titleArr.count, 53.0f)];
+        UIButton * toolBtn = [[UIButton alloc] initWithFrame:CGRectMake(idx * SCREEN_WIDTH/self.titleArr.count, 0, SCREEN_WIDTH/self.titleArr.count, 47)];
         [toolBtn setTitle:self.titleArr[idx] forState:(UIControlStateNormal)];
         [toolBtn setTitleColor:[UIColor whiteColor] forState:(UIControlStateNormal)];
         [toolBtn setTitleColor:[UIColor colorWithHexString:color alpha:1] forState:(UIControlStateSelected)];
@@ -72,7 +72,7 @@ const static NSInteger btnTag = 100;
 
 //  设置导航条
 - (void)showLineWithButton {
-    self.line = [[UILabel alloc] initWithFrame:CGRectMake(0, 53.0f, SCREEN_WIDTH/self.titleArr.count, 2.0f)];
+    self.line = [[UILabel alloc] initWithFrame:CGRectMake(0, 47, SCREEN_WIDTH/self.titleArr.count, 2)];
     self.line.backgroundColor = [UIColor colorWithHexString:color alpha:1];
     [self.buttonView addSubview:self.line];
 }

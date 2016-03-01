@@ -484,8 +484,8 @@
 		D8EFC5901C802DAD0002509D /* View */ = {
 			isa = PBXGroup;
 			children = (
-				D802D78B1C844197007AFA3D /* FBCameraView.m */,
 				D802D78C1C844197007AFA3D /* FBCameraView.h */,
+				D802D78B1C844197007AFA3D /* FBCameraView.m */,
 				D8D8B6511C80B8DF00DD6BBE /* FBFootView.h */,
 				D8D8B6521C80B8DF00DD6BBE /* FBFootView.m */,
 				D82DAF971C82026700E0650B /* FBPictureCollectionViewCell.h */,
@@ -575,7 +575,7 @@
 				TargetAttributes = {
 					800507331C7A9CDD005AF0BE = {
 						CreatedOnToolsVersion = 7.2.1;
-						DevelopmentTeam = 7ET6PJMCHV;
+						DevelopmentTeam = XJ5P4B7MAV;
 					};
 				};
 			};
