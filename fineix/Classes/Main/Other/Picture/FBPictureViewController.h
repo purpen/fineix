@@ -18,6 +18,9 @@
 @pro_strong UIButton        *   backBtn;        //  返回按钮
 @pro_strong UIButton        *   doneBtn;        //  完成发布按钮
 
+@pro_strong UIButton        *   cropBtn;        //  继续"裁剪"按钮
+@pro_strong UIButton        *   cropBack;       //  "裁剪"返回
+
 //  添加导航视图
 - (void)addNavView:(NSArray *)titleArr;
 

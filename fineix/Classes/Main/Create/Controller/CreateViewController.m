@@ -9,8 +9,11 @@
 #import "CreateViewController.h"
 #import "FBLoadPhoto.h"
 #import "FBPictureCollectionViewCell.h"
+#import "CropImageView.h"
 
 @interface CreateViewController () <FBFootViewDelegate, UICollectionViewDataSource, UICollectionViewDelegate, UIGestureRecognizerDelegate>
+
+@pro_strong CropImageView * cropImg;
 
 @end
 
@@ -32,6 +35,24 @@
 - (void)setNavViewUI {
     self.titleArr = [[NSMutableArray alloc] initWithObjects:@"照片胶卷",@"裁剪图片",@"标记产品",@"创建情景", nil];
     [self addNavView:self.titleArr];
+    
+    //  裁剪照片
+    [self.cropBtn addTarget:self action:@selector(cropBtnClick) forControlEvents:(UIControlEventTouchUpInside)];
+    //  裁剪返回
+    [self.cropBack addTarget:self action:@selector(cropBackClick) forControlEvents:(UIControlEventTouchUpInside)];
+    
+}
+#pragma mark - 进行照片的裁剪
+- (void)cropBtnClick {
+    self.cropImg = [[CropImageView alloc] initWithFrame:CGRectMake(0, 50, SCREEN_WIDTH, SCREEN_HEIGHT - 100)];
+    self.cropImg.image.image = self.photoImgView.image;
+    [self.view addSubview:self.cropImg];
+    [self.createView removeFromSuperview];
+}
+
+- (void)cropBackClick {
+    [self.cropImg removeFromSuperview];
+    [self.view addSubview:self.createView];
 }
 
 #pragma mark - 创建页面UI
@@ -123,6 +144,9 @@
 - (UIImageView *)photoImgView {
     if (!_photoImgView) {
         _photoImgView = [[UIImageView alloc] init];
+        _photoImgView.contentMode = UIViewContentModeScaleAspectFill;
+        _photoImgView.clipsToBounds  = YES;
+        [_photoImgView setContentScaleFactor:[[UIScreen mainScreen] scale]];
     }
     return _photoImgView;
 }

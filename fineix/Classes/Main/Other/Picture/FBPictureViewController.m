@@ -8,8 +8,8 @@
 
 #import "FBPictureViewController.h"
 
-#define nextBtnTag 66
-#define backBtnTag 77
+const NSInteger nextBtnTag = 66;
+const NSInteger backBtnTag = 77;
 
 @interface FBPictureViewController ()
 
@@ -62,11 +62,16 @@
     
     //  继续下一步按钮
     for (NSUInteger idx = 0; idx < titleArr.count - 1; idx ++) {
-        UIButton * nextBtn = [[UIButton alloc] initWithFrame:CGRectMake((SCREEN_WIDTH - 60) + (SCREEN_WIDTH * idx), 0, 60, 50)];
+        UIButton * nextBtn = [[UIButton alloc] initWithFrame:CGRectMake((SCREEN_WIDTH - 60) + (SCREEN_WIDTH * idx), 0, 50, 50)];
         [nextBtn setTitle:@"继续" forState:(UIControlStateNormal)];
         [nextBtn setTitleColor:[UIColor whiteColor] forState:(UIControlStateNormal)];
         nextBtn.titleLabel.font = [UIFont systemFontOfSize:Font_ControllerTitle];
         nextBtn.tag = nextBtnTag + idx;
+        
+        if (nextBtn.tag == nextBtnTag) {
+            self.cropBtn = nextBtn;
+        }
+        
         [nextBtn addTarget:self action:@selector(nextBtnClick:) forControlEvents:(UIControlEventTouchUpInside)];
         
         [_navRollView addSubview:nextBtn];
@@ -74,9 +79,14 @@
     
     //  返回按钮
     for (NSUInteger kdx = 0; kdx < titleArr.count -1; kdx ++) {
-        UIButton * backBtn = [[UIButton alloc] initWithFrame:CGRectMake(SCREEN_WIDTH + (SCREEN_WIDTH * kdx), 0, 60, 50)];
+        UIButton * backBtn = [[UIButton alloc] initWithFrame:CGRectMake(SCREEN_WIDTH + (SCREEN_WIDTH * kdx), 0, 50, 50)];
         [backBtn setImage:[UIImage imageNamed:@"icon_back"] forState:(UIControlStateNormal)];
         backBtn.tag = backBtnTag + kdx;
+        
+        if (backBtn.tag == backBtnTag) {
+            self.cropBack = backBtn;
+        }
+        
         [backBtn addTarget:self action:@selector(backBtnClick:) forControlEvents:(UIControlEventTouchUpInside)];
         
         [_navRollView addSubview:backBtn];
@@ -85,7 +95,7 @@
     //  发布创建按钮
     [_navRollView addSubview:self.doneBtn];
     [_doneBtn mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.size.mas_equalTo(CGSizeMake(60, 50));
+        make.size.mas_equalTo(CGSizeMake(50, 50));
         make.top.equalTo(self.navRollView.mas_top).with.offset(0);
         make.left.equalTo(self.navRollView.mas_left).with.offset(SCREEN_WIDTH * titleArr.count - 60);
     }];

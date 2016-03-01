@@ -15,6 +15,7 @@
     if (self) {
         
         [self addSubview:self.cameraNavView];
+        
     }
     return self;
 }
@@ -31,7 +32,7 @@
     return _cameraNavView;
 }
 
-#pragma mark - 返回按钮
+#pragma mark - 取消按钮
 - (UIButton *)cameraCancelBtn {
     if (!_cameraCancelBtn) {
         _cameraCancelBtn = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 50, 50)];
