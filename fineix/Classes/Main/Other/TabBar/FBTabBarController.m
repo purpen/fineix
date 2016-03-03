@@ -16,6 +16,8 @@
 #import "MallViewController.h"
 #import "MyViewController.h"
 
+#import "PictureToolViewController.h"
+
 @implementation FBTabBarController {
     FBNavigationViewController * _homeNav;
     FBNavigationViewController * _discoverNav;
@@ -84,8 +86,9 @@
 
 #pragma mark “创建情景”的按钮事件
 - (void)createBtnClick {
-    CreateViewController * createVC = [[CreateViewController alloc] init];
-    [self presentViewController:createVC animated:YES completion:nil];
+    PictureToolViewController * pictureToolVC = [[PictureToolViewController alloc] init];
+//    CreateViewController * createVC = [[CreateViewController alloc] init];
+    [self presentViewController:pictureToolVC animated:YES completion:nil];
 }
 
 @end

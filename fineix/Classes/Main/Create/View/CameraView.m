@@ -1,14 +1,14 @@
 //
-//  FBCameraView.m
+//  CameraView.m
 //  fineix
 //
 //  Created by FLYang on 16/2/29.
 //  Copyright © 2016年 taihuoniao. All rights reserved.
 //
 
-#import "FBCameraView.h"
+#import "CameraView.h"
 
-@implementation FBCameraView
+@implementation CameraView
 
 - (instancetype)initWithFrame:(CGRect)frame {
     self = [super initWithFrame:frame];

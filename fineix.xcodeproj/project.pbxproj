@@ -31,9 +31,14 @@
 		800507471C7A9CDD005AF0BE /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 800507461C7A9CDD005AF0BE /* Assets.xcassets */; };
 		8005074A1C7A9CDD005AF0BE /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 800507481C7A9CDD005AF0BE /* LaunchScreen.storyboard */; };
 		D802D7791C821D41007AFA3D /* AssetsLibrary.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D802D7781C821D41007AFA3D /* AssetsLibrary.framework */; };
-		D802D78D1C844197007AFA3D /* FBCameraView.m in Sources */ = {isa = PBXBuildFile; fileRef = D802D78B1C844197007AFA3D /* FBCameraView.m */; };
 		D82DAF991C82026700E0650B /* FBPictureCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D82DAF981C82026700E0650B /* FBPictureCollectionViewCell.m */; };
 		D8368FCD1C85A67700673306 /* CropImageView.m in Sources */ = {isa = PBXBuildFile; fileRef = D8368FCC1C85A67700673306 /* CropImageView.m */; };
+		D8368FD61C86C53800673306 /* CameraView.m in Sources */ = {isa = PBXBuildFile; fileRef = D8368FD31C86C48F00673306 /* CameraView.m */; };
+		D8368FDC1C86D31F00673306 /* ClipImageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D8368FDB1C86D31F00673306 /* ClipImageViewController.m */; };
+		D8368FDF1C86F24300673306 /* FiltersViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D8368FDE1C86F24300673306 /* FiltersViewController.m */; };
+		D8368FE21C86FC0900673306 /* PictureToolViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D8368FE11C86FC0900673306 /* PictureToolViewController.m */; };
+		D8368FE51C86FF7900673306 /* ReleaseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D8368FE41C86FF7900673306 /* ReleaseViewController.m */; };
+		D8368FE81C87E4C600673306 /* CropImageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D8368FE71C87E4C600673306 /* CropImageViewController.m */; };
 		D8BFA5F31C820F3600F5C1B7 /* FBPhoto.m in Sources */ = {isa = PBXBuildFile; fileRef = D8BFA5F21C820F3600F5C1B7 /* FBPhoto.m */; };
 		D8BFA5F61C8211DE00F5C1B7 /* FBLoadPhoto.m in Sources */ = {isa = PBXBuildFile; fileRef = D8BFA5F51C8211DE00F5C1B7 /* FBLoadPhoto.m */; };
 		D8D8B64D1C80ABFF00DD6BBE /* FBPictureViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D8D8B64C1C80ABFF00DD6BBE /* FBPictureViewController.m */; };
@@ -83,12 +88,22 @@
 		BA7E5463E540D9166EC06720 /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
 		D802D7781C821D41007AFA3D /* AssetsLibrary.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AssetsLibrary.framework; path = System/Library/Frameworks/AssetsLibrary.framework; sourceTree = SDKROOT; };
 		D802D7891C844101007AFA3D /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
-		D802D78B1C844197007AFA3D /* FBCameraView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FBCameraView.m; sourceTree = "<group>"; };
-		D802D78C1C844197007AFA3D /* FBCameraView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FBCameraView.h; sourceTree = "<group>"; };
 		D82DAF971C82026700E0650B /* FBPictureCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FBPictureCollectionViewCell.h; sourceTree = "<group>"; };
 		D82DAF981C82026700E0650B /* FBPictureCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FBPictureCollectionViewCell.m; sourceTree = "<group>"; };
 		D8368FCB1C85A67700673306 /* CropImageView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CropImageView.h; sourceTree = "<group>"; };
 		D8368FCC1C85A67700673306 /* CropImageView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CropImageView.m; sourceTree = "<group>"; };
+		D8368FD31C86C48F00673306 /* CameraView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CameraView.m; sourceTree = "<group>"; };
+		D8368FD41C86C48F00673306 /* CameraView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CameraView.h; sourceTree = "<group>"; };
+		D8368FDA1C86D31F00673306 /* ClipImageViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ClipImageViewController.h; path = ../View/ClipImageViewController.h; sourceTree = "<group>"; };
+		D8368FDB1C86D31F00673306 /* ClipImageViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ClipImageViewController.m; path = ../View/ClipImageViewController.m; sourceTree = "<group>"; };
+		D8368FDD1C86F24300673306 /* FiltersViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FiltersViewController.h; sourceTree = "<group>"; };
+		D8368FDE1C86F24300673306 /* FiltersViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FiltersViewController.m; sourceTree = "<group>"; };
+		D8368FE01C86FC0900673306 /* PictureToolViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PictureToolViewController.h; sourceTree = "<group>"; };
+		D8368FE11C86FC0900673306 /* PictureToolViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PictureToolViewController.m; sourceTree = "<group>"; };
+		D8368FE31C86FF7900673306 /* ReleaseViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ReleaseViewController.h; sourceTree = "<group>"; };
+		D8368FE41C86FF7900673306 /* ReleaseViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ReleaseViewController.m; sourceTree = "<group>"; };
+		D8368FE61C87E4C600673306 /* CropImageViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CropImageViewController.h; sourceTree = "<group>"; };
+		D8368FE71C87E4C600673306 /* CropImageViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CropImageViewController.m; sourceTree = "<group>"; };
 		D8BFA5F11C820F3600F5C1B7 /* FBPhoto.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FBPhoto.h; sourceTree = "<group>"; };
 		D8BFA5F21C820F3600F5C1B7 /* FBPhoto.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FBPhoto.m; sourceTree = "<group>"; };
 		D8BFA5F41C8211DE00F5C1B7 /* FBLoadPhoto.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FBLoadPhoto.h; sourceTree = "<group>"; };
@@ -473,6 +488,16 @@
 			children = (
 				D8D8B64E1C80AF9F00DD6BBE /* CreateViewController.h */,
 				D8D8B64F1C80AF9F00DD6BBE /* CreateViewController.m */,
+				D8368FE61C87E4C600673306 /* CropImageViewController.h */,
+				D8368FE71C87E4C600673306 /* CropImageViewController.m */,
+				D8368FDD1C86F24300673306 /* FiltersViewController.h */,
+				D8368FDE1C86F24300673306 /* FiltersViewController.m */,
+				D8368FE31C86FF7900673306 /* ReleaseViewController.h */,
+				D8368FE41C86FF7900673306 /* ReleaseViewController.m */,
+				D8368FE01C86FC0900673306 /* PictureToolViewController.h */,
+				D8368FE11C86FC0900673306 /* PictureToolViewController.m */,
+				D8368FDA1C86D31F00673306 /* ClipImageViewController.h */,
+				D8368FDB1C86D31F00673306 /* ClipImageViewController.m */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -487,14 +512,14 @@
 		D8EFC5901C802DAD0002509D /* View */ = {
 			isa = PBXGroup;
 			children = (
-				D802D78C1C844197007AFA3D /* FBCameraView.h */,
-				D802D78B1C844197007AFA3D /* FBCameraView.m */,
+				D8368FCB1C85A67700673306 /* CropImageView.h */,
+				D8368FCC1C85A67700673306 /* CropImageView.m */,
+				D8368FD41C86C48F00673306 /* CameraView.h */,
+				D8368FD31C86C48F00673306 /* CameraView.m */,
 				D8D8B6511C80B8DF00DD6BBE /* FBFootView.h */,
 				D8D8B6521C80B8DF00DD6BBE /* FBFootView.m */,
 				D82DAF971C82026700E0650B /* FBPictureCollectionViewCell.h */,
 				D82DAF981C82026700E0650B /* FBPictureCollectionViewCell.m */,
-				D8368FCB1C85A67700673306 /* CropImageView.h */,
-				D8368FCC1C85A67700673306 /* CropImageView.m */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -580,7 +605,7 @@
 				TargetAttributes = {
 					800507331C7A9CDD005AF0BE = {
 						CreatedOnToolsVersion = 7.2.1;
-						DevelopmentTeam = XJ5P4B7MAV;
+						DevelopmentTeam = QNKEA2Q4R9;
 					};
 				};
 			};
@@ -669,17 +694,22 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D8368FD61C86C53800673306 /* CameraView.m in Sources */,
 				D8EFC59F1C802DF20002509D /* MallViewController.m in Sources */,
 				8005073C1C7A9CDD005AF0BE /* AppDelegate.m in Sources */,
 				D8D8B6531C80B8DF00DD6BBE /* FBFootView.m in Sources */,
+				D8368FE81C87E4C600673306 /* CropImageViewController.m in Sources */,
 				D8D8B6501C80AF9F00DD6BBE /* CreateViewController.m in Sources */,
 				D8D8B64D1C80ABFF00DD6BBE /* FBPictureViewController.m in Sources */,
 				800507451C7A9CDD005AF0BE /* fineix.xcdatamodeld in Sources */,
+				D8368FE21C86FC0900673306 /* PictureToolViewController.m in Sources */,
 				D8EFC5811C8024500002509D /* UIColor+Extension.m in Sources */,
 				D8EFC57A1C801E8C0002509D /* FBNavigationViewController.m in Sources */,
 				D8BFA5F31C820F3600F5C1B7 /* FBPhoto.m in Sources */,
 				800507391C7A9CDD005AF0BE /* main.m in Sources */,
 				D8EFC5991C802DD40002509D /* DiscoverViewController.m in Sources */,
+				D8368FDF1C86F24300673306 /* FiltersViewController.m in Sources */,
+				D8368FDC1C86D31F00673306 /* ClipImageViewController.m in Sources */,
 				D8EFC58A1C802D300002509D /* HomeViewController.m in Sources */,
 				D8368FCD1C85A67700673306 /* CropImageView.m in Sources */,
 				D8EFC5821C8024500002509D /* HttpTool.m in Sources */,
@@ -687,8 +717,8 @@
 				D82DAF991C82026700E0650B /* FBPictureCollectionViewCell.m in Sources */,
 				D8EFC5871C802B6C0002509D /* FBTabBarController.m in Sources */,
 				D8BFA5F61C8211DE00F5C1B7 /* FBLoadPhoto.m in Sources */,
-				D802D78D1C844197007AFA3D /* FBCameraView.m in Sources */,
 				D8EFC5A31C802E3D0002509D /* MyViewController.m in Sources */,
+				D8368FE51C86FF7900673306 /* ReleaseViewController.m in Sources */,
 				D8EFC5A91C80326E0002509D /* FBTabBar.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -724,7 +754,8 @@
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Developer: Xiaoyi Tian (65JXH7V6N9)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Xiaoyi Tian (65JXH7V6N9)";
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
@@ -767,7 +798,8 @@
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Developer: Xiaoyi Tian (65JXH7V6N9)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Xiaoyi Tian (65JXH7V6N9)";
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_NS_ASSERTIONS = NO;
@@ -792,7 +824,7 @@
 			baseConfigurationReference = B4C4D9FF10AA9DA389828C7D /* Pods.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Developer: Xiaoyi Tian (65JXH7V6N9)";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/fineix/Vendors/BaiduMapSDK",
@@ -801,7 +833,7 @@
 				INFOPLIST_FILE = fineix/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.taihuoniao.fineix;
+				PRODUCT_BUNDLE_IDENTIFIER = com.THN.fineix;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Debug;
@@ -811,7 +843,7 @@
 			baseConfigurationReference = BA7E5463E540D9166EC06720 /* Pods.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Developer: Xiaoyi Tian (65JXH7V6N9)";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/fineix/Vendors/BaiduMapSDK",
@@ -820,7 +852,7 @@
 				INFOPLIST_FILE = fineix/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.taihuoniao.fineix;
+				PRODUCT_BUNDLE_IDENTIFIER = com.THN.fineix;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Release;

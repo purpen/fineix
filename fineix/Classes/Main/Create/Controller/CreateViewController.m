@@ -9,11 +9,10 @@
 #import "CreateViewController.h"
 #import "FBLoadPhoto.h"
 #import "FBPictureCollectionViewCell.h"
-#import "CropImageView.h"
+
+#import "CropImageViewController.h"
 
 @interface CreateViewController () <FBFootViewDelegate, UICollectionViewDataSource, UICollectionViewDelegate, UIGestureRecognizerDelegate>
-
-@pro_strong CropImageView * cropImg;
 
 @end
 
@@ -33,26 +32,20 @@
 
 #pragma mark - 设置顶部Nav
 - (void)setNavViewUI {
-    self.titleArr = [[NSMutableArray alloc] initWithObjects:@"照片胶卷",@"裁剪图片",@"标记产品",@"创建情景", nil];
-    [self addNavView:self.titleArr];
+    [self addNavViewTitle:@"照片胶卷"];
+    [self addCancelButton];
+    [self addNextButton];
     
-    //  裁剪照片
-    [self.cropBtn addTarget:self action:@selector(cropBtnClick) forControlEvents:(UIControlEventTouchUpInside)];
-    //  裁剪返回
-    [self.cropBack addTarget:self action:@selector(cropBackClick) forControlEvents:(UIControlEventTouchUpInside)];
-    
-}
-#pragma mark - 进行照片的裁剪
-- (void)cropBtnClick {
-    self.cropImg = [[CropImageView alloc] initWithFrame:CGRectMake(0, 50, SCREEN_WIDTH, SCREEN_HEIGHT - 100)];
-    self.cropImg.image.image = self.photoImgView.image;
-    [self.view addSubview:self.cropImg];
-    [self.createView removeFromSuperview];
+    [self.nextBtn addTarget:self action:@selector(nextButtonClick:) forControlEvents:(UIControlEventTouchUpInside)];
 }
 
-- (void)cropBackClick {
-    [self.cropImg removeFromSuperview];
-    [self.view addSubview:self.createView];
+#pragma mark - 点击“继续”
+- (void)nextButtonClick:(UIImage *)image {
+    CropImageViewController * cropVC = [[CropImageViewController alloc] init];
+    cropVC.clipImageVC.clipImage = self.photoImgView.image;
+    cropVC.view.frame = self.view.frame;
+
+    [self.navigationController pushViewController:cropVC animated:YES];
 }
 
 #pragma mark - 创建页面UI
@@ -132,9 +125,9 @@
 }
 
 #pragma mak - 打开相机的页面
-- (FBCameraView *)cameraView {
+- (CameraView *)cameraView {
     if (!_cameraView) {
-        _cameraView = [[FBCameraView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT - 49)];
+        _cameraView = [[CameraView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT - 49)];
         _cameraView.VC = self;
     }
     return _cameraView;
