@@ -19,11 +19,7 @@
         
         self.filters = [NSArray arrayWithObjects:
                         @"CIColorCrossPolynomial",
-                        @"CIColorCube",
-                        @"CIColorCubeWithColorSpace",
-                        @"CIColorInvert",
                         @"CIColorMonochrome",
-                        @"CIColorPosterize",
                         @"CIFalseColor",
                         @"CIMaskToAlpha",
                         @"CIMaximumComponent",
@@ -38,7 +34,6 @@
                         @"CIPhotoEffectTransfer",
                         @"CISepiaTone",
                         @"CIVignette", nil];
-        
         
         [self addSubview:self.filtersCollectionView];
     }
