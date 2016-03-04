@@ -27,11 +27,7 @@
     self.navTitle.textColor = [UIColor blackColor];
     [self addBackButton];
     [self addDoneButton];
-    
-    //  Nav跟内容的分割线
-    self.line = [[UILabel alloc] initWithFrame:CGRectMake(0, 49, SCREEN_WIDTH, 1)];
-    self.line.backgroundColor = [UIColor colorWithHexString:@"#F0F0F1" alpha:1];
-    [self.navView addSubview:self.line];
+    [self addLine];
 }
 
 @end

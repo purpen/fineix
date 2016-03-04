@@ -21,6 +21,7 @@
 
 @pro_strong UIButton            *   nextBtn;        //  继续按钮
 @pro_strong UIButton            *   cropBack;       //  "裁剪"返回
+@pro_strong UILabel             *   line;           //  视图分割线
 
 //  导航视图
 - (void)addNavViewTitle:(NSString *)title;
@@ -36,6 +37,9 @@
 
 //  发布按钮
 - (void)addDoneButton;
+
+//  视图的分割线
+- (void)addLine;
 
 
 @end

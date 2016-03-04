@@ -38,8 +38,6 @@
 
 //  “继续”
 - (void)nextBtnClick {
-    NSLog(@"＝＝＝＝＝＝＝＝＝＝＝＝＝ %@", [self.clipImageVC clippingImage]);
-    
     FiltersViewController * filtersVC = [[FiltersViewController alloc] init];
     filtersVC.filtersImg = [self.clipImageVC clippingImage];
     

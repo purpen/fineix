@@ -10,6 +10,7 @@
 #define Fineix_h
 
 #import "UIColor+Extension.h"
+#import "Masonry.h"
 
 #undef 宽高尺寸
 //  屏幕宽
@@ -50,6 +51,8 @@
 #define Font_TabTitle 10
 //  商品标记价格
 #define Font_TabPrice 9
+//  滤镜名称
+#define Font_filtersTitle 12
 
 
 #undef  创建属性

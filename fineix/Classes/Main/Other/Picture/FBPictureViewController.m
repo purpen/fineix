@@ -52,6 +52,11 @@
     [self.navView addSubview:self.doneBtn];
 }
 
+//  分割线
+- (void)addLine {
+    [self.navView addSubview:self.line];
+}
+
 #pragma mark - 顶部滚动的导航
 - (UIView *)navView {
     if (!_navView) {
@@ -71,6 +76,17 @@
     }
     return _navTitle;
 }
+
+#pragma mark - Nav跟内容的分割线
+- (UILabel *)line {
+    if (!_line) {
+        _line = [[UILabel alloc] initWithFrame:CGRectMake(0, 49, SCREEN_WIDTH, 1)];
+        _line.backgroundColor = [UIColor colorWithHexString:@"#F0F0F1" alpha:1];
+    }
+    return _line;
+}
+
+
 
 #pragma mark - 继续下一步的执行事件
 - (UIButton *)nextBtn {
