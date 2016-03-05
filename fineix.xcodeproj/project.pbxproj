@@ -64,6 +64,7 @@
 		D8F7C9771C896B5800B43D83 /* CoreImage.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D8F7C9761C896B5800B43D83 /* CoreImage.framework */; };
 		D8F7C9791C896B7700B43D83 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D8F7C9781C896B7700B43D83 /* UIKit.framework */; };
 		D8F7C97B1C896B7D00B43D83 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D8F7C97A1C896B7D00B43D83 /* Foundation.framework */; };
+		D8F7C9951C8ADEAF00B43D83 /* FBViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D8F7C9941C8ADEAF00B43D83 /* FBViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -160,6 +161,8 @@
 		D8F7C9761C896B5800B43D83 /* CoreImage.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreImage.framework; path = System/Library/Frameworks/CoreImage.framework; sourceTree = SDKROOT; };
 		D8F7C9781C896B7700B43D83 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		D8F7C97A1C896B7D00B43D83 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		D8F7C9931C8ADEAF00B43D83 /* FBViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FBViewController.h; sourceTree = "<group>"; };
+		D8F7C9941C8ADEAF00B43D83 /* FBViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FBViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -324,6 +327,7 @@
 		D8EFC5621C801BE40002509D /* Main */ = {
 			isa = PBXGroup;
 			children = (
+				D8F7C9921C8ADE9F00B43D83 /* BaseClass */,
 				D8EFC5651C801BE40002509D /* Home */,
 				D8EFC5641C801BE40002509D /* Discover */,
 				D8EFC5631C801BE40002509D /* Create */,
@@ -613,6 +617,15 @@
 			path = View;
 			sourceTree = "<group>";
 		};
+		D8F7C9921C8ADE9F00B43D83 /* BaseClass */ = {
+			isa = PBXGroup;
+			children = (
+				D8F7C9931C8ADEAF00B43D83 /* FBViewController.h */,
+				D8F7C9941C8ADEAF00B43D83 /* FBViewController.m */,
+			);
+			path = BaseClass;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -750,6 +763,7 @@
 				D8D8B64D1C80ABFF00DD6BBE /* FBPictureViewController.m in Sources */,
 				D8D476011C894DC6007AF764 /* StickersViewController.m in Sources */,
 				800507451C7A9CDD005AF0BE /* fineix.xcdatamodeld in Sources */,
+				D8F7C9951C8ADEAF00B43D83 /* FBViewController.m in Sources */,
 				D8D475FB1C894D9D007AF764 /* MarkGoodsViewController.m in Sources */,
 				D8368FE21C86FC0900673306 /* PictureToolViewController.m in Sources */,
 				D8EFC5811C8024500002509D /* UIColor+Extension.m in Sources */,
