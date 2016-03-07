@@ -13,11 +13,12 @@
 - (instancetype)initWithFrame:(CGRect)frame {
     self = [super initWithFrame:frame];
     if (self) {
-        [self.contentView addSubview:self.imageView];
+        [self addSubview:self.imageView];
     }
     return self;
 }
 
+#pragma mark - 相册照片
 - (UIImageView *)imageView {
     if (!_imageView) {
         _imageView = [[UIImageView alloc] initWithFrame:self.bounds];
@@ -26,9 +27,9 @@
     return _imageView;
 }
 
+#pragma mark - 选择照片时的边框状态
 - (void)setSelected:(BOOL)selected {
     [super setSelected:selected];
-    
     self.imageView.layer.borderWidth = selected ? 3 : 0;
 }
 
