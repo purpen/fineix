@@ -7,7 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "FBViewController.h"
 
-@interface MallViewController : UIViewController
+@interface MallViewController : FBViewController
 
 @end

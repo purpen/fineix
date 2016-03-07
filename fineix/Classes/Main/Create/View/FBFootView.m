@@ -35,10 +35,10 @@ const static NSInteger btnTag = 100;
     for (NSUInteger idx = 0; idx < self.titleArr.count; idx ++) {
         UIButton * toolBtn = [[UIButton alloc] initWithFrame:CGRectMake(idx * SCREEN_WIDTH/self.titleArr.count, 0, SCREEN_WIDTH/self.titleArr.count, 47)];
         [toolBtn setTitle:self.titleArr[idx] forState:(UIControlStateNormal)];
-        [toolBtn setTitleColor:[UIColor whiteColor] forState:(UIControlStateNormal)];
-        [toolBtn setTitleColor:[UIColor colorWithHexString:color alpha:1] forState:(UIControlStateSelected)];
-        toolBtn.backgroundColor = [UIColor colorWithHexString:@"#010101" alpha:1];
-        toolBtn.titleLabel.font = [UIFont systemFontOfSize:Font_GroupHeader];
+        [toolBtn setTitleColor:self.titleNormalColor forState:(UIControlStateNormal)];
+        [toolBtn setTitleColor:self.titleSeletedColor forState:(UIControlStateSelected)];
+        toolBtn.backgroundColor = self.btnBgColor;
+        toolBtn.titleLabel.font = [UIFont systemFontOfSize:self.titleFontSize];
         toolBtn.tag = btnTag + idx;
         
         if (toolBtn.tag == btnTag) {

@@ -8,9 +8,6 @@
 
 #import "FBPictureViewController.h"
 
-const NSInteger nextBtnTag = 66;
-const NSInteger backBtnTag = 77;
-
 @interface FBPictureViewController ()
 
 @end
@@ -19,9 +16,7 @@ const NSInteger backBtnTag = 77;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-
-    [self.view addSubview:self.navRollView];
-    
+    [self.view addSubview:self.navView];
 }
 
 #pragma mark - 隐藏系统状态栏
@@ -30,94 +25,93 @@ const NSInteger backBtnTag = 77;
     return YES;
 }
 
-#pragma mark - 顶部滚动的导航
-//  滚动视图
-- (UIScrollView *)navRollView {
-    if (!_navRollView) {
-        _navRollView = [[UIScrollView alloc] init];
-        _navRollView.backgroundColor = [UIColor colorWithHexString:pictureNavColor alpha:1];
-        _navRollView.showsHorizontalScrollIndicator = NO;
-        _navRollView.showsVerticalScrollIndicator = NO;
-        _navRollView.bounces = NO;
-    }
-    return _navRollView;
+#pragma mark - 添加控件
+//  页面标题
+- (void)addNavViewTitle:(NSString *)title {
+    self.navTitle.text = title;
+    [self.navView addSubview:self.navTitle];
 }
 
-- (void)addNavView:(NSMutableArray *)titleArr {
-    _navRollView.frame = CGRectMake(0, 0, SCREEN_WIDTH * titleArr.count, 50);
-    
-    //  取消创建按钮
-    [_navRollView addSubview:self.cancelBtn];
-    
-    //  页面的标题
-    for (NSUInteger jdx = 0; jdx < titleArr.count; jdx ++) {
-        UILabel * titleLab = [[UILabel alloc] initWithFrame:CGRectMake(50 + (SCREEN_WIDTH * jdx), 0, SCREEN_WIDTH - 100, 50)];
-        titleLab.font = [UIFont systemFontOfSize:Font_ControllerTitle];
-        titleLab.textColor = [UIColor whiteColor];
-        titleLab.textAlignment = NSTextAlignmentCenter;
-        titleLab.text = titleArr[jdx];
-        
-        [_navRollView addSubview:titleLab];
-    }
-    
-    //  继续下一步按钮
-    for (NSUInteger idx = 0; idx < titleArr.count - 1; idx ++) {
-        UIButton * nextBtn = [[UIButton alloc] initWithFrame:CGRectMake((SCREEN_WIDTH - 60) + (SCREEN_WIDTH * idx), 0, 50, 50)];
-        [nextBtn setTitle:@"继续" forState:(UIControlStateNormal)];
-        [nextBtn setTitleColor:[UIColor whiteColor] forState:(UIControlStateNormal)];
-        nextBtn.titleLabel.font = [UIFont systemFontOfSize:Font_ControllerTitle];
-        nextBtn.tag = nextBtnTag + idx;
-        
-        if (nextBtn.tag == nextBtnTag) {
-            self.cropBtn = nextBtn;
-        }
-        
-        [nextBtn addTarget:self action:@selector(nextBtnClick:) forControlEvents:(UIControlEventTouchUpInside)];
-        
-        [_navRollView addSubview:nextBtn];
-    }
-    
-    //  返回按钮
-    for (NSUInteger kdx = 0; kdx < titleArr.count -1; kdx ++) {
-        UIButton * backBtn = [[UIButton alloc] initWithFrame:CGRectMake(SCREEN_WIDTH + (SCREEN_WIDTH * kdx), 0, 50, 50)];
-        [backBtn setImage:[UIImage imageNamed:@"icon_back"] forState:(UIControlStateNormal)];
-        backBtn.tag = backBtnTag + kdx;
-        
-        if (backBtn.tag == backBtnTag) {
-            self.cropBack = backBtn;
-        }
-        
-        [backBtn addTarget:self action:@selector(backBtnClick:) forControlEvents:(UIControlEventTouchUpInside)];
-        
-        [_navRollView addSubview:backBtn];
-    }
-    
-    //  发布创建按钮
-    [_navRollView addSubview:self.doneBtn];
-    [_doneBtn mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.size.mas_equalTo(CGSizeMake(50, 50));
-        make.top.equalTo(self.navRollView.mas_top).with.offset(0);
-        make.left.equalTo(self.navRollView.mas_left).with.offset(SCREEN_WIDTH * titleArr.count - 60);
-    }];
-    
+//  取消创建按钮
+- (void)addCancelButton {
+    [self.navView addSubview:self.cancelBtn];
 }
+
+//  继续下一步
+- (void)addNextButton {
+    [self.navView addSubview:self.nextBtn];
+}
+
+//  返回上一步
+- (void)addBackButton {
+    [self.navView addSubview:self.backBtn];
+}
+
+//  发布按钮
+- (void)addDoneButton {
+    [self.navView addSubview:self.doneBtn];
+}
+
+//  分割线
+- (void)addLine {
+    [self.navView addSubview:self.line];
+}
+
+#pragma mark - 顶部滚动的导航
+- (UIView *)navView {
+    if (!_navView) {
+        _navView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 50)];
+        _navView.backgroundColor = [UIColor colorWithHexString:pictureNavColor alpha:1];
+    }
+    return _navView;
+}
+
+#pragma mark -  页面的标题
+- (UILabel *)navTitle {
+    if (!_navTitle) {
+        _navTitle = [[UILabel alloc] initWithFrame:CGRectMake(50, 0, (SCREEN_WIDTH - 100), 50)];
+        _navTitle.font = [UIFont systemFontOfSize:Font_ControllerTitle];
+        _navTitle.textColor = [UIColor whiteColor];
+        _navTitle.textAlignment = NSTextAlignmentCenter;
+    }
+    return _navTitle;
+}
+
+#pragma mark - Nav跟内容的分割线
+- (UILabel *)line {
+    if (!_line) {
+        _line = [[UILabel alloc] initWithFrame:CGRectMake(0, 49, SCREEN_WIDTH, 1)];
+        _line.backgroundColor = [UIColor colorWithHexString:@"#F0F0F1" alpha:1];
+    }
+    return _line;
+}
+
+
 
 #pragma mark - 继续下一步的执行事件
-- (void)nextBtnClick:(UIButton *)nextButton {
-    CGPoint navPoint = _navRollView.contentOffset;
-    navPoint.x = SCREEN_WIDTH * (nextButton.tag - nextBtnTag +1);
-    [UIView animateWithDuration:.3 animations:^{
-        _navRollView.contentOffset = navPoint;
-    }];
+- (UIButton *)nextBtn {
+    if (!_nextBtn) {
+        _nextBtn = [[UIButton alloc] initWithFrame:CGRectMake((SCREEN_WIDTH - 60), 0, 50, 50)];
+        [_nextBtn setTitle:@"继续" forState:(UIControlStateNormal)];
+        [_nextBtn setTitleColor:[UIColor whiteColor] forState:(UIControlStateNormal)];
+        _nextBtn.titleLabel.font = [UIFont systemFontOfSize:Font_ControllerTitle];
+
+    }
+    return _nextBtn;
 }
 
 #pragma mark - 返回上一步的执行事件 
-- (void)backBtnClick:(UIButton *)backButton {
-    CGPoint navPoint = _navRollView.contentOffset;
-    navPoint.x = SCREEN_WIDTH * (backButton.tag - backBtnTag);
-    [UIView animateWithDuration:.3 animations:^{
-        _navRollView.contentOffset = navPoint;
-    }];
+- (UIButton *)backBtn {
+    if (!_backBtn) {
+        _backBtn = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 50, 50)];
+        [_backBtn setImage:[UIImage imageNamed:@"icon_back"] forState:(UIControlStateNormal)];
+        [_backBtn addTarget:self action:@selector(backBtnClick) forControlEvents:(UIControlEventTouchUpInside)];
+    }
+    return _backBtn;
+}
+
+- (void)backBtnClick {
+    [self.navigationController popViewControllerAnimated:YES];
 }
 
 #pragma mark - 设置取消创建场景按钮
@@ -137,9 +131,9 @@ const NSInteger backBtnTag = 77;
 #pragma mark - 设置发布场景景按钮
 - (UIButton *)doneBtn {
     if (!_doneBtn) {
-        _doneBtn = [[UIButton alloc] init];
+        _doneBtn = [[UIButton alloc] initWithFrame:CGRectMake((SCREEN_WIDTH - 60), 0, 50, 50)];
         [_doneBtn setTitle:@"发布" forState:(UIControlStateNormal)];
-        [_doneBtn setTitleColor:[UIColor whiteColor] forState:(UIControlStateNormal)];
+        [_doneBtn setTitleColor:[UIColor blackColor] forState:(UIControlStateNormal)];
         _doneBtn.titleLabel.font = [UIFont systemFontOfSize:Font_ControllerTitle];
     }
     return _doneBtn;

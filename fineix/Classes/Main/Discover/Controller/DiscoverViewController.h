@@ -7,7 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "FBViewController.h"
 
-@interface DiscoverViewController : UIViewController
+@interface DiscoverViewController : FBViewController
 
 @end
