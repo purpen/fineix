@@ -18,6 +18,13 @@
 
 @implementation CreateViewController
 
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    if (self.cameraView.session) {
+        [self.cameraView.session startRunning];
+    }
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     
@@ -28,6 +35,7 @@
     [self loadAllPhotos];
     
     [self pictureViewZoom];
+    
 }
 
 #pragma mark - 设置顶部Nav
@@ -94,14 +102,14 @@
     return _createView;
 }
 
-#pragma mark 底部选项工具栏
+#pragma mark - 底部选项工具栏
 - (FBFootView *)footView {
     if (!_footView) {
         NSArray * arr = [NSArray arrayWithObjects:@"相册", @"拍照", nil];
         _footView = [[FBFootView alloc] init];
         _footView.backgroundColor = [UIColor blackColor];
         _footView.titleArr = arr;
-        _footView.titleFontSize = Font_GroupHeader;
+        _footView.titleFontSize = Font_ControllerTitle;
         _footView.btnBgColor = [UIColor blackColor];
         _footView.titleNormalColor = [UIColor whiteColor];
         _footView.titleSeletedColor = [UIColor colorWithHexString:color alpha:1];
@@ -333,16 +341,24 @@
 }
 
 #pragma mark - 获取所有的相薄
-- (void)loadAllPhotoAlbum {
-    [FBLoadPhoto loadAllPhotoAlbum:^(NSArray * photoAlbum, NSError *error) {
-        if (!error) {
-            self.photoAlbumArr = [NSArray arrayWithArray:photoAlbum];
-            NSLog(@"相册相册相册相册相册相册");
-        
-        } else {
-            NSLog(@"＝＝＝＝＝＝＝ 加载相册错误%@ ＝＝＝＝＝＝＝", error);
-        }
-    }];
+//- (void)loadAllPhotoAlbum {
+//    [FBLoadPhoto loadAllPhotoAlbum:^(NSArray * photoAlbum, NSError *error) {
+//        if (!error) {
+//            self.photoAlbumArr = [NSArray arrayWithArray:photoAlbum];
+//            NSLog(@"相册相册相册相册相册相册");
+//        
+//        } else {
+//            NSLog(@"＝＝＝＝＝＝＝ 加载相册错误%@ ＝＝＝＝＝＝＝", error);
+//        }
+//    }];
+//}
+
+- (void)viewDidDisappear:(BOOL)animated {
+    [super viewDidDisappear:animated];
+    if (self.cameraView.session) {
+        [self.cameraView.session stopRunning];
+    }
+    
 }
 
 

@@ -56,6 +56,11 @@
     
     self.filtersImageView.image = self.filtersImg;
     [self.view addSubview:self.filtersImageView];
+    [_filtersImageView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.size.mas_equalTo(CGSizeMake(SCREEN_WIDTH - 40, (SCREEN_WIDTH - 40) * 1.33));
+        make.left.equalTo(self.view.mas_left).with.offset(20);
+        make.centerY.equalTo(self.view);
+    }];
     
     [self.view addSubview:self.footView];
     [self.footView mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -89,14 +94,19 @@
     
     if (index == 0) {
         [self presentViewController:markGoodsVC animated:YES completion:nil];
-    
+        [self.filtersView removeFromSuperview];
+        
     } else if (index == 1) {
         [self presentViewController:addUrlVC animated:YES completion:nil];
-    
+        [self.filtersView removeFromSuperview];
+        
     } else if (index == 2) {
         [self presentViewController:stickersVC animated:YES completion:nil];
+        [self.filtersView removeFromSuperview];
     
     } else if (index == 3) {
+        [self.view addSubview:self.cancelFilter];
+        
         [self.view addSubview:self.filtersView];
         [_filtersView mas_makeConstraints:^(MASConstraintMaker *make) {
             make.size.mas_equalTo(CGSizeMake(SCREEN_WIDTH, 120));
@@ -110,8 +120,7 @@
 #pragma mark - 处理图片的视图
 - (UIImageView *)filtersImageView {
     if (!_filtersImageView) {
-        _filtersImageView = [[UIImageView alloc] initWithFrame:CGRectMake(30, 50, (SCREEN_WIDTH - 60), (SCREEN_HEIGHT - 100))];
-        
+        _filtersImageView = [[UIImageView alloc] init];
     }
     return _filtersImageView;
 }
@@ -120,9 +129,22 @@
 - (FiltersView *)filtersView {
     if (!_filtersView) {
         _filtersView = [[FiltersView alloc] init];
-
     }
     return _filtersView;
+}
+
+#pragma mark - 使滤镜视图消失
+- (UIButton *)cancelFilter {
+    if (!_cancelFilter) {
+        _cancelFilter = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT - 100)];
+        [_cancelFilter addTarget:self action:@selector(cancelFilterView) forControlEvents:(UIControlEventTouchUpInside)];
+    }
+    return _cancelFilter;
+}
+
+- (void)cancelFilterView {
+    [self.filtersView removeFromSuperview];
+    [self.cancelFilter removeFromSuperview];
 }
 
 

@@ -5,7 +5,7 @@
 //  Created by FLYang on 16/2/28.
 //  Copyright © 2016年 taihuoniao. All rights reserved.
 //
-
+#import <Photos/Photos.h>
 #import "FBLoadPhoto.h"
 #import "SVProgressHUD.h"
 
@@ -15,9 +15,9 @@
 @property (nonatomic, strong) ALAssetsLibrary   *   assetLibrary;
 @property (readwrite, copy, nonatomic) void(^loadBlock)(NSArray * photos, NSError * error);
 
-@property (nonatomic, strong) NSMutableArray    *   allPhotoAlbum;  //  相薄数组
-@property (nonatomic, strong) ALAssetsLibrary   *   albumAssetLibrary;
-@property (readwrite, copy, nonatomic) void(^loadPhotoAlbum)(NSArray * photoAlbum, NSError * error);
+//@property (nonatomic, strong) NSMutableArray    *   allPhotoAlbum;  //  相薄数组
+//@property (nonatomic, strong) ALAssetsLibrary   *   albumAssetLibrary;
+//@property (readwrite, copy, nonatomic) void(^loadPhotoAlbum)(NSArray * photoAlbum, NSError * error);
 
 @end
 
@@ -93,44 +93,62 @@
 }
 
 #pragma mark - 获取相薄
-- (NSMutableArray *)allPhotoAlbum {
-    if (!_allPhotoAlbum) {
-        _allPhotoAlbum = [NSMutableArray array];
-    }
-    return _allPhotoAlbum;
-}
-
-- (ALAssetsLibrary *)albumAssetLibrary {
-    if (!_albumAssetLibrary) {
-        _albumAssetLibrary = [[ALAssetsLibrary alloc] init];
-    }
-    return _albumAssetLibrary;
-}
-
-+ (void)loadAllPhotoAlbum:(void (^)(NSArray *, NSError *))done {
-    [[FBLoadPhoto shareLoad].allPhotoAlbum removeAllObjects];
-    [[FBLoadPhoto shareLoad] setLoadPhotoAlbum:done];
-    [[FBLoadPhoto shareLoad] startLoadingPhotoAlbum];
-}
-
-- (void)startLoadingPhotoAlbum {
-    [self.albumAssetLibrary enumerateGroupsWithTypes:(ALAssetsGroupAll) usingBlock:^(ALAssetsGroup *group, BOOL *stop) {
-        if (group) {
-            [group setAssetsFilter:[ALAssetsFilter allPhotos]];
-            
-            if ([group numberOfAssets] > 0) {
-                [self.allPhotoAlbum addObject:group];
-                NSLog(@"－－－－－－－－－－－－ %@", group);
-            }
-            
-            if (group == nil) {
-                self.loadPhotoAlbum(self.allPhotoAlbum, nil);
-            }
-        }
-        
-    } failureBlock:^(NSError *error) {
-        NSLog(@"＝＝＝＝＝＝＝＝ 获取相薄出错 %@ ＝＝＝＝＝＝＝", error);
-    }];
-}
+//- (NSMutableArray *)allPhotoAlbum {
+//    if (!_allPhotoAlbum) {
+//        _allPhotoAlbum = [NSMutableArray array];
+//    }
+//    return _allPhotoAlbum;
+//}
+//
+//- (ALAssetsLibrary *)albumAssetLibrary {
+//    if (!_albumAssetLibrary) {
+//        _albumAssetLibrary = [[ALAssetsLibrary alloc] init];
+//    }
+//    return _albumAssetLibrary;
+//}
+//
+//+ (void)loadAllPhotoAlbum:(void (^)(NSArray *, NSError *))done {
+//    
+//    //获取所有智能相册
+//    PHFetchResult * smartAlbums = [PHAssetCollection fetchAssetCollectionsWithType:PHAssetCollectionTypeSmartAlbum subtype:PHAssetCollectionSubtypeAlbumRegular options:nil];
+//    
+//    [smartAlbums enumerateObjectsUsingBlock:^(PHAssetCollection * _Nonnull collection, NSUInteger idx, BOOL *stop) {
+//        
+//        NSLog(@"＝＝＝＝＝＝＝＝相册名字:%@", collection.localizedTitle);
+//    }];
+//    
+//    //获取用户创建的相册
+//    PHFetchResult *userAlbums = [PHAssetCollection fetchAssetCollectionsWithType:PHAssetCollectionTypeAlbum subtype:PHAssetCollectionSubtypeSmartAlbumUserLibrary options:nil];
+//    
+//    [userAlbums enumerateObjectsUsingBlock:^(PHAssetCollection * _Nonnull collection, NSUInteger idx, BOOL * _Nonnull stop) {
+//        NSLog(@"＊＊＊＊＊＊＊＊相册名字:%@", collection.localizedTitle);
+//    }];
+//    
+//    
+//    [[FBLoadPhoto shareLoad].allPhotoAlbum removeAllObjects];
+//    [[FBLoadPhoto shareLoad] setLoadPhotoAlbum:done];
+////    [[FBLoadPhoto shareLoad] startLoadingPhotoAlbum];
+//}
+//
+//
+//- (void)startLoadingPhotoAlbum {
+//    [self.albumAssetLibrary enumerateGroupsWithTypes:(ALAssetsGroupAll) usingBlock:^(ALAssetsGroup *group, BOOL *stop) {
+//        if (group) {
+//            [group setAssetsFilter:[ALAssetsFilter allPhotos]];
+//            
+//            if ([group numberOfAssets] > 0) {
+//                [self.allPhotoAlbum addObject:group];
+//                NSLog(@"－－－－－－－－－－－－ %@", group);
+//            }
+//            
+//            if (group == nil) {
+//                self.loadPhotoAlbum(self.allPhotoAlbum, nil);
+//            }
+//        }
+//        
+//    } failureBlock:^(NSError *error) {
+//        NSLog(@"＝＝＝＝＝＝＝＝ 获取相薄出错 %@ ＝＝＝＝＝＝＝", error);
+//    }];
+//}
 
 @end
