@@ -136,11 +136,12 @@
     }
 }
 
-#pragma mak - 打开相机的页面
+#pragma mark - 打开相机的页面
 - (CameraView *)cameraView {
     if (!_cameraView) {
         _cameraView = [[CameraView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT - 49)];
         _cameraView.VC = self;
+        _cameraView.Nav = self.navigationController;
     }
     return _cameraView;
 }

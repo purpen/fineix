@@ -41,5 +41,7 @@
 //  视图的分割线
 - (void)addLine;
 
+//  页面提示框
+- (void)showMessage:(NSString *)message;
 
 @end

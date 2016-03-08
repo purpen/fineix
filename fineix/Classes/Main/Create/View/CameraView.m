@@ -7,6 +7,7 @@
 //
 
 #import "CameraView.h"
+#import "FiltersViewController.h"
 
 @implementation CameraView
 
@@ -83,19 +84,50 @@
 }
 
 - (void)flashBtnClick {
-
     AVCaptureDevice * device = [AVCaptureDevice defaultDeviceWithMediaType:AVMediaTypeVideo];
     [device lockForConfiguration:nil];
     if (_flashBtn.selected == NO) {
         device.flashMode = AVCaptureFlashModeOn;
         _flashBtn.selected = YES;
+        [self showMessage:@"闪光灯已打开"];
     
     } else if (_flashBtn.selected == YES) {
         device.flashMode = AVCaptureFlashModeOff;
         _flashBtn.selected = NO;
+        [self showMessage:@"闪光灯已关闭"];
     }
     
     [device unlockForConfiguration];
+}
+
+#pragma mark - 页面提示框
+- (void)showMessage:(NSString *)message {
+    UIWindow * window = [UIApplication sharedApplication].keyWindow;
+    UIView *showview =  [[UIView alloc]init];
+    showview.backgroundColor = [UIColor blackColor];
+    showview.alpha = 1.0f;
+    showview.layer.cornerRadius = 5.0f;
+    showview.layer.masksToBounds = YES;
+    [window addSubview:showview];
+    [showview mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.size.mas_equalTo(CGSizeMake(200,44));
+        make.centerX.equalTo(window);
+        make.centerY.equalTo(window);
+    }];
+    
+    UILabel *label = [[UILabel alloc]initWithFrame:CGRectMake(0, 0 , 200, 44)];
+    label.text = message;
+    label.textColor = [UIColor whiteColor];
+    label.textAlignment = NSTextAlignmentCenter;
+    label.backgroundColor = [UIColor clearColor];
+    label.font = [UIFont boldSystemFontOfSize:14];
+    [showview addSubview:label];
+    
+    [UIView animateWithDuration:2.0 animations:^{
+        showview.alpha = 0;
+    } completion:^(BOOL finished) {
+        [showview removeFromSuperview];
+    }];
 }
 
 #pragma mark - 拍照按钮
@@ -112,32 +144,90 @@
 - (void)takePhotosBtnClick {
     //  控制输入和输出
     AVCaptureConnection * photoConnection = [self.photosOutput connectionWithMediaType:AVMediaTypeVideo];
+
     //  设备的旋转方向
     UIDeviceOrientation deviceOrientation = [[UIDevice currentDevice] orientation];
     AVCaptureVideoOrientation videoOrientation = [self photoDeviceOrientation:deviceOrientation];
     [photoConnection setVideoOrientation:videoOrientation];
     //  焦距
     [photoConnection setVideoScaleAndCropFactor:1];
+
     
     [self.photosOutput captureStillImageAsynchronouslyFromConnection:photoConnection
                                                    completionHandler:^(CMSampleBufferRef imageDataSampleBuffer, NSError *error) {
+                                                       
                                                        NSData * photoData = [AVCaptureStillImageOutput jpegStillImageNSDataRepresentation:imageDataSampleBuffer];
-                                                       CFDictionaryRef photoRef = CMCopyDictionaryOfAttachments(kCFAllocatorDefault,
-                                                                                                                imageDataSampleBuffer,
-                                                                                                                kCMAttachmentMode_ShouldNotPropagate);
                                                        
                                                        //   监测摄像头的权限
                                                        ALAuthorizationStatus photoStatus = [ALAssetsLibrary authorizationStatus];
                                                        if (photoStatus == ALAuthorizationStatusRestricted || photoStatus == ALAuthorizationStatusDenied) {
                                                            NSLog(@"请开启摄像头的权限");
-                                                       }
                                                        
-                                                       //   保存到相册
-                                                       ALAssetsLibrary * photoLibrary = [[ALAssetsLibrary alloc] init];
-                                                       [photoLibrary writeImageDataToSavedPhotosAlbum:photoData metadata:(__bridge id)photoRef completionBlock:^(NSURL *assetURL, NSError *error) {
-                                                           NSLog(@"拍照成功");
-                                                       }];
+                                                       } else {
+                                                           UIImage * image = [UIImage imageWithData:photoData];
+                                                           UIImage * photo = [self cropImage:image withCropSize:CGSizeMake(SCREEN_WIDTH, SCREEN_WIDTH * 1.33)];
+                                                           //   跳转到“工具”视图
+                                                           FiltersViewController * filtersVC = [[FiltersViewController alloc] init];
+                                                           filtersVC.filtersImg = photo;
+                                                           [self.Nav pushViewController:filtersVC animated:YES];
+                                                       }
+                                                    
                                                    }];
+}
+
+#pragma mark 拍摄后裁剪照片尺寸
+- (UIImage *)cropImage:(UIImage *)image withCropSize:(CGSize)cropSize {
+    UIImage *newImage = nil;
+    
+    CGSize imageSize = image.size;
+    CGFloat width = imageSize.width;
+    CGFloat height = imageSize.height;
+    
+    CGFloat targetWidth = cropSize.width;
+    CGFloat targetHeight = cropSize.height;
+    
+    CGFloat scaleFactor = 0;
+    CGFloat scaledWidth = targetWidth;
+    CGFloat scaledHeight = targetHeight;
+    
+    CGPoint thumbnailPoint = CGPointMake(0, 0);
+    
+    if (CGSizeEqualToSize(imageSize, cropSize) == NO) {
+        CGFloat widthFactor = targetWidth / width;
+        CGFloat heightFactor = targetHeight / height;
+        
+        if (widthFactor > heightFactor) {
+            scaleFactor = widthFactor;
+        } else {
+            scaleFactor = heightFactor;
+        }
+        
+        scaledWidth  = width * scaleFactor;
+        scaledHeight = height * scaleFactor;
+        
+        
+        if (widthFactor > heightFactor) {
+            thumbnailPoint.y = (targetHeight - scaledHeight) * .5f;
+        } else {
+            if (widthFactor < heightFactor) {
+                thumbnailPoint.x = (targetWidth - scaledWidth) * .5f;
+            }
+        }
+    }
+    
+    UIGraphicsBeginImageContextWithOptions(cropSize, YES, 0);
+    
+    CGRect thumbnailRect = CGRectZero;
+    thumbnailRect.origin = thumbnailPoint;
+    thumbnailRect.size.width  = scaledWidth;
+    thumbnailRect.size.height = scaledHeight;
+    
+    [image drawInRect:thumbnailRect];
+    newImage = UIGraphicsGetImageFromCurrentImageContext();
+    
+    UIGraphicsEndImageContext();
+    
+    return newImage;
 }
 
 #pragma mark 获取设备的方向
