@@ -50,7 +50,7 @@
         _clipImageVC = [[ClipImageViewController alloc] init];
         
         _clipImageVC.view.frame = CGRectMake(0, 50, SCREEN_WIDTH, SCREEN_HEIGHT - 50);
-        _clipImageVC.clipImgRect = CGRectMake(20, 30, SCREEN_WIDTH - 40, (SCREEN_WIDTH - 40)*1.33);  //  裁剪的大小
+        _clipImageVC.clipImgRect = CGRectMake(0, SCREEN_WIDTH/6, SCREEN_WIDTH, SCREEN_WIDTH * 1.33);  //  裁剪的大小
         
         UIImageView * coverView = [[UIImageView alloc] initWithFrame:_clipImageVC.clipImgRect];
         [_clipImageVC.view addSubview:coverView];

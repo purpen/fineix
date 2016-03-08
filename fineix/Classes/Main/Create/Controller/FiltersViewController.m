@@ -57,9 +57,10 @@
     self.filtersImageView.image = self.filtersImg;
     [self.view addSubview:self.filtersImageView];
     [_filtersImageView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.size.mas_equalTo(CGSizeMake(SCREEN_WIDTH - 40, (SCREEN_WIDTH - 40) * 1.33));
-        make.left.equalTo(self.view.mas_left).with.offset(20);
-        make.centerY.equalTo(self.view);
+        make.size.mas_equalTo(CGSizeMake(SCREEN_WIDTH, SCREEN_WIDTH * 1.33));
+        make.top.equalTo(self.view.mas_top).with.offset(50);
+        make.left.equalTo(self.view.mas_left).with.offset(0);
+        make.centerX.equalTo(self.view);
     }];
     
     [self.view addSubview:self.footView];

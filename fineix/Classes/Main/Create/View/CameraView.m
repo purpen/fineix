@@ -15,7 +15,7 @@
     self = [super initWithFrame:frame];
     if (self) {
         
-        self.backgroundColor = [UIColor colorWithHexString:pictureNavColor alpha:1];
+        self.backgroundColor = [UIColor blackColor];
         
         [self addSubview:self.cameraNavView];
         
