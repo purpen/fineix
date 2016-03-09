@@ -44,7 +44,6 @@
 		D82399CF1C8D6EB5007428D1 /* PictureToolViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D82399C51C8D6EB5007428D1 /* PictureToolViewController.m */; };
 		D82399D01C8D6EB5007428D1 /* ClipImageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D82399C61C8D6EB5007428D1 /* ClipImageViewController.m */; };
 		D82399D31C8D6EBC007428D1 /* FBFilters.m in Sources */ = {isa = PBXBuildFile; fileRef = D82399D21C8D6EBC007428D1 /* FBFilters.m */; };
-		D82399D71C8D6ECE007428D1 /* FBViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D82399D61C8D6ECE007428D1 /* FBViewController.m */; };
 		D82DAF991C82026700E0650B /* FBPictureCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D82DAF981C82026700E0650B /* FBPictureCollectionViewCell.m */; };
 		D8368FCD1C85A67700673306 /* CropImageView.m in Sources */ = {isa = PBXBuildFile; fileRef = D8368FCC1C85A67700673306 /* CropImageView.m */; };
 		D83A64321C8E7765003DB8BB /* Photos.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D83A64311C8E7765003DB8BB /* Photos.framework */; };
@@ -58,6 +57,7 @@
 		D8D8B64D1C80ABFF00DD6BBE /* FBPictureViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D8D8B64C1C80ABFF00DD6BBE /* FBPictureViewController.m */; };
 		D8D8B6501C80AF9F00DD6BBE /* CreateViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D8D8B64F1C80AF9F00DD6BBE /* CreateViewController.m */; };
 		D8D8B6531C80B8DF00DD6BBE /* FBFootView.m in Sources */ = {isa = PBXBuildFile; fileRef = D8D8B6521C80B8DF00DD6BBE /* FBFootView.m */; };
+		D8E3E3AE1C8FCCB6000CA536 /* FBViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D8E3E3AD1C8FCCB6000CA536 /* FBViewController.m */; };
 		D8EFC57A1C801E8C0002509D /* FBNavigationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D8EFC5791C801E8C0002509D /* FBNavigationViewController.m */; };
 		D8EFC5811C8024500002509D /* UIColor+Extension.m in Sources */ = {isa = PBXBuildFile; fileRef = D8EFC57B1C8024500002509D /* UIColor+Extension.m */; };
 		D8EFC5821C8024500002509D /* HttpTool.m in Sources */ = {isa = PBXBuildFile; fileRef = D8EFC57D1C8024500002509D /* HttpTool.m */; };
@@ -128,8 +128,6 @@
 		D82399C81C8D6EB5007428D1 /* PictureToolViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PictureToolViewController.h; sourceTree = "<group>"; };
 		D82399D11C8D6EBC007428D1 /* FBFilters.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FBFilters.h; sourceTree = "<group>"; };
 		D82399D21C8D6EBC007428D1 /* FBFilters.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FBFilters.m; sourceTree = "<group>"; };
-		D82399D51C8D6ECE007428D1 /* FBViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FBViewController.h; sourceTree = "<group>"; };
-		D82399D61C8D6ECE007428D1 /* FBViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FBViewController.m; sourceTree = "<group>"; };
 		D82DAF971C82026700E0650B /* FBPictureCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FBPictureCollectionViewCell.h; sourceTree = "<group>"; };
 		D82DAF981C82026700E0650B /* FBPictureCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FBPictureCollectionViewCell.m; sourceTree = "<group>"; };
 		D8368FCB1C85A67700673306 /* CropImageView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CropImageView.h; sourceTree = "<group>"; };
@@ -149,6 +147,8 @@
 		D8D8B64F1C80AF9F00DD6BBE /* CreateViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CreateViewController.m; sourceTree = "<group>"; };
 		D8D8B6511C80B8DF00DD6BBE /* FBFootView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FBFootView.h; sourceTree = "<group>"; };
 		D8D8B6521C80B8DF00DD6BBE /* FBFootView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FBFootView.m; sourceTree = "<group>"; };
+		D8E3E3AC1C8FCCB6000CA536 /* FBViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FBViewController.h; sourceTree = "<group>"; };
+		D8E3E3AD1C8FCCB6000CA536 /* FBViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FBViewController.m; sourceTree = "<group>"; };
 		D8EFC5781C801E8C0002509D /* FBNavigationViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FBNavigationViewController.h; sourceTree = "<group>"; };
 		D8EFC5791C801E8C0002509D /* FBNavigationViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FBNavigationViewController.m; sourceTree = "<group>"; };
 		D8EFC57B1C8024500002509D /* UIColor+Extension.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIColor+Extension.m"; sourceTree = "<group>"; };
@@ -307,15 +307,6 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
-		D82399D41C8D6ECE007428D1 /* BaseClass */ = {
-			isa = PBXGroup;
-			children = (
-				D82399D51C8D6ECE007428D1 /* FBViewController.h */,
-				D82399D61C8D6ECE007428D1 /* FBViewController.m */,
-			);
-			path = BaseClass;
-			sourceTree = "<group>";
-		};
 		D82FC3CC1C820EF300DCAA7C /* Other */ = {
 			isa = PBXGroup;
 			children = (
@@ -338,9 +329,19 @@
 			path = Picture;
 			sourceTree = "<group>";
 		};
+		D8E3E3AB1C8FCCB6000CA536 /* BaseClass */ = {
+			isa = PBXGroup;
+			children = (
+				D8E3E3AC1C8FCCB6000CA536 /* FBViewController.h */,
+				D8E3E3AD1C8FCCB6000CA536 /* FBViewController.m */,
+			);
+			path = BaseClass;
+			sourceTree = "<group>";
+		};
 		D8EFC5611C801BE40002509D /* Classes */ = {
 			isa = PBXGroup;
 			children = (
+				D8E3E3AB1C8FCCB6000CA536 /* BaseClass */,
 				D8EFC5621C801BE40002509D /* Main */,
 			);
 			path = Classes;
@@ -349,7 +350,6 @@
 		D8EFC5621C801BE40002509D /* Main */ = {
 			isa = PBXGroup;
 			children = (
-				D82399D41C8D6ECE007428D1 /* BaseClass */,
 				D8EFC5651C801BE40002509D /* Home */,
 				D8EFC5641C801BE40002509D /* Discover */,
 				D8EFC5631C801BE40002509D /* Create */,
@@ -782,7 +782,7 @@
 				800507391C7A9CDD005AF0BE /* main.m in Sources */,
 				D8EFC5991C802DD40002509D /* DiscoverViewController.m in Sources */,
 				D82399C91C8D6EB5007428D1 /* CropImageViewController.m in Sources */,
-				D82399D71C8D6ECE007428D1 /* FBViewController.m in Sources */,
+				D8E3E3AE1C8FCCB6000CA536 /* FBViewController.m in Sources */,
 				D8EFC58A1C802D300002509D /* HomeViewController.m in Sources */,
 				D8368FCD1C85A67700673306 /* CropImageView.m in Sources */,
 				D8EFC5821C8024500002509D /* HttpTool.m in Sources */,

@@ -110,12 +110,12 @@
     showview.layer.masksToBounds = YES;
     [window addSubview:showview];
     [showview mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.size.mas_equalTo(CGSizeMake(200,44));
+        make.size.mas_equalTo(CGSizeMake(150,44));
         make.centerX.equalTo(window);
         make.centerY.equalTo(window);
     }];
     
-    UILabel *label = [[UILabel alloc]initWithFrame:CGRectMake(0, 0 , 200, 44)];
+    UILabel *label = [[UILabel alloc]initWithFrame:CGRectMake(0, 0 , 150, 44)];
     label.text = message;
     label.textColor = [UIColor whiteColor];
     label.textAlignment = NSTextAlignmentCenter;
