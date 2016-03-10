@@ -18,12 +18,6 @@
 
 @implementation CreateViewController
 
-- (void)viewWillAppear:(BOOL)animated {
-    [super viewWillAppear:animated];
-    if (self.cameraView.session) {
-        [self.cameraView.session startRunning];
-    }
-}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -127,12 +121,20 @@
         //  自定义相机的视图
         [self.view addSubview:self.cameraView];
         [self.recoveryFrameBtn removeFromSuperview];
+        //  打开相机
+        if (self.cameraView.session) {
+            [self.cameraView.session startRunning];
+        }
         
     } else if (index == 0) {
         //  清除相机的视图
         [self.cameraView removeFromSuperview];
         self.createView.hidden = NO;
         [self.view addSubview:self.recoveryFrameBtn];
+        //  停止相机
+        if (self.cameraView.session) {
+            [self.cameraView.session stopRunning];
+        }
     }
 }
 
@@ -308,52 +310,51 @@
         }];
 
     }
+    
+    NSLog(@"＊＊＊＊＊＊＊＊＊＊ 选中照片的经纬度：%@", self.locationMarr[indexPath.row]);
 
 }
 
 #pragma mark - 加载所有的相片
 - (void)loadAllPhotos {
     self.sortPhotosArr = [NSMutableArray array];
+    self.locationMarr = [NSMutableArray array];
     
-    [FBLoadPhoto loadAllPhotos:^(NSArray *photos, NSError *error) {
+    [FBLoadPhoto loadAllPhotos:^(NSArray *photos, NSArray *location, NSError *error) {
         if (!error) {
-            self.photosArr = [NSArray arrayWithArray:photos];
-            //  相片由近到远排序
-            NSEnumerator * enumerator = [self.photosArr reverseObjectEnumerator];
+    
+            //  相片倒序排列
+            NSEnumerator * enumerator = [photos reverseObjectEnumerator];
             while (id object = [enumerator nextObject]) {
                 [self.sortPhotosArr addObject:object];
             }
-
-            if (self.photosArr.count) {
+            
+            if (photos.count) {
                 //  默认加载第一张照片
                 FBPhoto * firstPhoto = [self.sortPhotosArr objectAtIndex:0];
                 self.photoImgView.image = firstPhoto.originalImage;
             }
+            
+            NSEnumerator * locationEnumerator = [location reverseObjectEnumerator];
+            while (id locationObj = [locationEnumerator nextObject]) {
+                [self.locationMarr addObject:locationObj];
+            }
+            NSLog(@"－－－－－－－－－－－照片的经纬度%@", self.locationMarr);
+            
+            
             [self.pictureView reloadData];
             //  默认选中照片列表第一个
             [self.pictureView selectItemAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0]
                                            animated:YES
                                      scrollPosition:(UICollectionViewScrollPositionNone)];
-
+            
         } else {
             NSLog(@"＝＝＝＝＝＝＝ 加载图片错误%@ ＝＝＝＝＝＝＝", error);
         }
     }];
 }
 
-#pragma mark - 获取所有的相薄
-//- (void)loadAllPhotoAlbum {
-//    [FBLoadPhoto loadAllPhotoAlbum:^(NSArray * photoAlbum, NSError *error) {
-//        if (!error) {
-//            self.photoAlbumArr = [NSArray arrayWithArray:photoAlbum];
-//            NSLog(@"相册相册相册相册相册相册");
-//        
-//        } else {
-//            NSLog(@"＝＝＝＝＝＝＝ 加载相册错误%@ ＝＝＝＝＝＝＝", error);
-//        }
-//    }];
-//}
-
+#pragma mark - 停止运行相机
 - (void)viewDidDisappear:(BOOL)animated {
     [super viewDidDisappear:animated];
     if (self.cameraView.session) {

@@ -11,8 +11,8 @@
 
 @interface FBPhoto : NSObject
 
-@property (nonatomic, readonly) UIImage     *       thumbnailImage;     //  缩略图
-@property (nonatomic, readonly) UIImage     *       originalImage;      //  原始图
-@property (nonatomic, strong)   ALAsset     *       asset;              //  相片对象
+@property (nonatomic, readonly) UIImage         *       thumbnailImage;     //  缩略图
+@property (nonatomic, readonly) UIImage         *       originalImage;      //  原始图
+@property (nonatomic, strong) ALAsset           *       asset;              //  相片对象
 
 @end

@@ -57,13 +57,15 @@
 
 #undef  创建属性
 //  strong
-#define pro_strong property (nonatomic, strong)
+#define pro_strong      property (nonatomic, strong)
 //  weak
-#define pro_weak property (nonatomic, weak)
+#define pro_weak        property (nonatomic, weak)
 //  assign
-#define pro_assign property (nonatomic, assign)
+#define pro_assign      property (nonatomic, assign)
 //  copy
-#define pro_copy property (nonatomic, copy)
+#define pro_copy        property (nonatomic, copy)
+//  readonly
+#define pro_readonly    property (nonatomic, readonly)
 
 
 #endif /* Fineix_h */

@@ -20,7 +20,7 @@
 @pro_strong CameraView          *   cameraView;         //  相机页面
 @pro_strong UIButton            *   recoveryFrameBtn;   //  恢复视图位置
 
-@pro_strong NSArray             *   photosArr;          //  全部的相片
+@pro_strong NSMutableArray      *   locationMarr;       //  照片的位置
 @pro_strong NSMutableArray      *   sortPhotosArr;      //  排序的相片
 @pro_strong NSArray             *   photoAlbumArr;      //  全部的相薄
 

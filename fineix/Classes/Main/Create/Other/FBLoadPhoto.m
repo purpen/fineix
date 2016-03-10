@@ -11,13 +11,10 @@
 
 @interface FBLoadPhoto()
 
-@property (nonatomic, strong) NSMutableArray    *   allPhotos;      //  相片数组
+@property (nonatomic, strong) NSMutableArray    *   allPhotos;          //  相片数组
 @property (nonatomic, strong) ALAssetsLibrary   *   assetLibrary;
-@property (readwrite, copy, nonatomic) void(^loadBlock)(NSArray * photos, NSError * error);
-
-//@property (nonatomic, strong) NSMutableArray    *   allPhotoAlbum;  //  相薄数组
-//@property (nonatomic, strong) ALAssetsLibrary   *   albumAssetLibrary;
-//@property (readwrite, copy, nonatomic) void(^loadPhotoAlbum)(NSArray * photoAlbum, NSError * error);
+@property (nonatomic, strong) NSMutableArray    *   locationMarr;       //  照片的经纬度
+@property (readwrite, copy, nonatomic) void(^loadBlock)(NSArray * photos, NSArray * location, NSError * error);
 
 @end
 
@@ -42,6 +39,14 @@
     return _allPhotos;
 }
 
+
+- (NSMutableArray *)locationMarr {
+    if (!_locationMarr) {
+        _locationMarr = [NSMutableArray array];
+    }
+    return _locationMarr;
+}
+
 - (ALAssetsLibrary *)assetLibrary {
     if (!_assetLibrary) {
         _assetLibrary = [[ALAssetsLibrary alloc] init];
@@ -50,105 +55,61 @@
 }
 
 //  加载相片
-+ (void)loadAllPhotos:(void (^)(NSArray *, NSError *))completion {
-    [[FBLoadPhoto shareLoad].allPhotos removeAllObjects];   //  删除重复
++ (void)loadAllPhotos:(void (^)(NSArray *, NSArray *, NSError *))completion {
+    [[FBLoadPhoto shareLoad].allPhotos removeAllObjects];
+    [[FBLoadPhoto shareLoad].locationMarr removeAllObjects];
     [[FBLoadPhoto shareLoad] setLoadBlock:completion];
-    [[FBLoadPhoto shareLoad] startLoading]; // 开始加载
-    
+    [[FBLoadPhoto shareLoad] startLoading];
 }
 
 //  开始加载所有相片
 - (void)startLoading {
-    //  获取相片
+    //  获取相片对象
     ALAssetsGroupEnumerationResultsBlock assetsEnumerationBlock = ^(ALAsset * result, NSUInteger index, BOOL * stop) {
         if (result) {
+            NSDictionary * imageMetadata = [[NSMutableDictionary alloc] initWithDictionary:result.defaultRepresentation.metadata];
+            NSDictionary * gpsDict = [imageMetadata objectForKey:@"{GPS}"];
+            
             FBPhoto * photo = [[FBPhoto alloc] init];
             photo.asset = result;
+            NSArray * locationArr = [NSArray arrayWithObjects:[NSString stringWithFormat:@"%f",[[gpsDict valueForKey:@"Longitude"] floatValue]],
+                                                              [NSString stringWithFormat:@"%f",[[gpsDict valueForKey:@"Latitude"] floatValue]], nil];
+//            NSLog(@"照片的GPS信息：经纬度%@", locationArr);
+            [self.locationMarr addObject:locationArr];
             [self.allPhotos insertObject:photo atIndex:index];
         }
     };
     
-    //  获取相册中的相片
+    //  获取相册
     ALAssetsLibraryGroupsEnumerationResultsBlock  listGroupBlock = ^(ALAssetsGroup * group, BOOL * stop) {
         ALAssetsFilter * onlyPhotoFilter = [ALAssetsFilter allPhotos];
         [group setAssetsFilter:onlyPhotoFilter];
         
         if ([group numberOfAssets] > 0) {
+
+            NSLog(@"＝＝＝＝相薄的名字： %@", [group valueForProperty:ALAssetsGroupPropertyName]);
+            NSLog(@"＝＝＝＝图片的数量： %zi", [group numberOfAssets]);
+            CGImageRef albumImg = [group posterImage];
+            UIImage * img = [UIImage imageWithCGImage:albumImg];
+            NSLog(@"＝＝＝＝相册的封面： %@", img);
+            
             if ([[group valueForProperty:ALAssetsGroupPropertyType] intValue] == ALAssetsGroupSavedPhotos) {
                 [group enumerateAssetsUsingBlock:assetsEnumerationBlock];
             }
         }
         
         if (group == nil) {
-            self.loadBlock(self.allPhotos, nil);
+            self.loadBlock(self.allPhotos, self.locationMarr, nil);
         }
         
     };
     
     [self.assetLibrary enumerateGroupsWithTypes:(ALAssetsGroupAll) usingBlock:listGroupBlock failureBlock:^(NSError *error) {
-        self.loadBlock(nil, error);
+        self.loadBlock(nil,nil, error);
         [SVProgressHUD showInfoWithStatus:@"请开启访问相册的权限"];
         
     }];
 }
 
-#pragma mark - 获取相薄
-//- (NSMutableArray *)allPhotoAlbum {
-//    if (!_allPhotoAlbum) {
-//        _allPhotoAlbum = [NSMutableArray array];
-//    }
-//    return _allPhotoAlbum;
-//}
-//
-//- (ALAssetsLibrary *)albumAssetLibrary {
-//    if (!_albumAssetLibrary) {
-//        _albumAssetLibrary = [[ALAssetsLibrary alloc] init];
-//    }
-//    return _albumAssetLibrary;
-//}
-//
-//+ (void)loadAllPhotoAlbum:(void (^)(NSArray *, NSError *))done {
-//    
-//    //获取所有智能相册
-//    PHFetchResult * smartAlbums = [PHAssetCollection fetchAssetCollectionsWithType:PHAssetCollectionTypeSmartAlbum subtype:PHAssetCollectionSubtypeAlbumRegular options:nil];
-//    
-//    [smartAlbums enumerateObjectsUsingBlock:^(PHAssetCollection * _Nonnull collection, NSUInteger idx, BOOL *stop) {
-//        
-//        NSLog(@"＝＝＝＝＝＝＝＝相册名字:%@", collection.localizedTitle);
-//    }];
-//    
-//    //获取用户创建的相册
-//    PHFetchResult *userAlbums = [PHAssetCollection fetchAssetCollectionsWithType:PHAssetCollectionTypeAlbum subtype:PHAssetCollectionSubtypeSmartAlbumUserLibrary options:nil];
-//    
-//    [userAlbums enumerateObjectsUsingBlock:^(PHAssetCollection * _Nonnull collection, NSUInteger idx, BOOL * _Nonnull stop) {
-//        NSLog(@"＊＊＊＊＊＊＊＊相册名字:%@", collection.localizedTitle);
-//    }];
-//    
-//    
-//    [[FBLoadPhoto shareLoad].allPhotoAlbum removeAllObjects];
-//    [[FBLoadPhoto shareLoad] setLoadPhotoAlbum:done];
-////    [[FBLoadPhoto shareLoad] startLoadingPhotoAlbum];
-//}
-//
-//
-//- (void)startLoadingPhotoAlbum {
-//    [self.albumAssetLibrary enumerateGroupsWithTypes:(ALAssetsGroupAll) usingBlock:^(ALAssetsGroup *group, BOOL *stop) {
-//        if (group) {
-//            [group setAssetsFilter:[ALAssetsFilter allPhotos]];
-//            
-//            if ([group numberOfAssets] > 0) {
-//                [self.allPhotoAlbum addObject:group];
-//                NSLog(@"－－－－－－－－－－－－ %@", group);
-//            }
-//            
-//            if (group == nil) {
-//                self.loadPhotoAlbum(self.allPhotoAlbum, nil);
-//            }
-//        }
-//        
-//    } failureBlock:^(NSError *error) {
-//        NSLog(@"＝＝＝＝＝＝＝＝ 获取相薄出错 %@ ＝＝＝＝＝＝＝", error);
-//    }];
-//}
 
 @end
