@@ -25,7 +25,7 @@
     
     [self setFiltersControllerUI];
     
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(changeFilter:) name:@"fitlerName" object:nil];
+    [self setNotification];
 }
 
 - (void)changeFilter:(NSNotification *)filterName {
@@ -143,10 +143,30 @@
     [self.cancelFilter removeFromSuperview];
 }
 
+#pragma mark - 接收消息通知
+- (void)setNotification {
+    //  from "FiltersView.m"
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(changeFilter:) name:@"fitlerName" object:nil];
+    
+    self.pictureView = [[PictureView alloc] init];
+    
+    //  from "PictureView.m"
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(locationData:) name:@"photoLocation" object:nil];
+}
+
 #pragma mark - 获取照片所在位置
-- (void)setPhotoLocation {
+- (void)locationData:(NSNotification *)locationArr {
+    [self setPhotoLocation:[locationArr object]];
+    
+}
+
+- (void)setPhotoLocation:(NSArray *)locationArr {
+
+    CLLocationDegrees n = [locationArr[0] floatValue];
+    CLLocationDegrees e = [locationArr[1] floatValue];
+    
     CLGeocoder * geocoder = [[CLGeocoder alloc] init];
-    CLLocation * location = [[CLLocation alloc] initWithLatitude:39.982975 longitude:116.4924166666667];
+    CLLocation * location = [[CLLocation alloc] initWithLatitude:e longitude:n];
     
     [geocoder reverseGeocodeLocation:location completionHandler:^(NSArray<CLPlacemark *> * _Nullable placemarks, NSError * _Nullable error) {
         if (!error) {
@@ -158,8 +178,9 @@
              *  locality            城市
              */
             
-            CLPlacemark * pl = [placemarks firstObject];
-            NSLog(@"＝＝＝＝%@ %@",pl.locality, pl.name);
+            CLPlacemark * placemark = [placemarks firstObject];
+            self.locationStr = placemark.name;
+            NSLog(@"＝＝＝＝ %@", self.locationStr);
             
         } else {
             NSLog(@"获取地理位置出错");
@@ -168,5 +189,8 @@
     }];
 }
 
+- (void)dealloc {
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:@"fitlerName" object:nil];
+}
 
 @end

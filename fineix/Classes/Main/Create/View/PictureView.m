@@ -15,7 +15,6 @@
 - (instancetype)initWithFrame:(CGRect)frame {
     self = [super initWithFrame:frame];
     if (self) {
-        
         [self loadAllPhotos];
         
         [self addSubview:self.createView];
@@ -63,7 +62,6 @@
     
     [FBLoadPhoto loadAllPhotos:^(NSArray *photos, NSArray *location, NSError *error) {
         if (!error) {
-            
             //  相片倒序排列
             NSEnumerator * enumerator = [photos reverseObjectEnumerator];
             while (id object = [enumerator nextObject]) {
@@ -80,8 +78,9 @@
             while (id locationObj = [locationEnumerator nextObject]) {
                 [self.locationMarr addObject:locationObj];
             }
-            NSLog(@"－－－－－－－－－－－照片的经纬度%@", self.locationMarr);
             
+            //  默认第一张照片的地址
+            [self setPhotoLocation:[self.locationMarr objectAtIndex:0]];
             
             [self.pictureView reloadData];
             //  默认选中照片列表第一个
@@ -166,6 +165,13 @@
     }
     
     NSLog(@"＊＊＊＊＊＊＊＊＊＊ 选中照片的经纬度：%@", self.locationMarr[indexPath.row]);
+    [self setPhotoLocation:self.locationMarr[indexPath.row]];
+}
+
+#pragma mark - 消息通知所取照片所在位置
+- (void)setPhotoLocation:(NSArray *)locationArr {
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"photoLocation" object:locationArr];
+    
 }
 
 #pragma mark - 上滑拉伸显示全部相片列表

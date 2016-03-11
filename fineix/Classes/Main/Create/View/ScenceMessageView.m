@@ -13,7 +13,7 @@
 - (instancetype)initWithFrame:(CGRect)frame {
     self = [super initWithFrame:frame];
     if (self) {
-        self.backgroundColor = [UIColor colorWithHexString:grayColor alpha:1];
+        self.backgroundColor = [UIColor colorWithHexString:grayLineColor alpha:1];
         
         [self addSubview:self.topView];
         

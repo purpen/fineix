@@ -133,7 +133,7 @@
     if (!_doneBtn) {
         _doneBtn = [[UIButton alloc] initWithFrame:CGRectMake((SCREEN_WIDTH - 60), 0, 50, 50)];
         [_doneBtn setTitle:@"发布" forState:(UIControlStateNormal)];
-        [_doneBtn setTitleColor:[UIColor blackColor] forState:(UIControlStateNormal)];
+        [_doneBtn setTitleColor:[UIColor colorWithHexString:color alpha:1] forState:(UIControlStateNormal)];
         _doneBtn.titleLabel.font = [UIFont systemFontOfSize:Font_ControllerTitle];
     }
     return _doneBtn;

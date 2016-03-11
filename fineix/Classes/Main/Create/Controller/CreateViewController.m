@@ -30,7 +30,7 @@
     [self setNavViewUI];
     
     [self setCreateControllerUI];
-    
+
 }
 
 #pragma mark - 设置顶部Nav

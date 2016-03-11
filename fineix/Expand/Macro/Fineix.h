@@ -24,10 +24,10 @@
 
 
 #undef 颜色
-#define color               @"#FF3366"
-#define grayColor           @"#F7F7F7"
-#define pictureNavColor     @"#222222"
-
+#define color                   @"#FF3366"
+#define grayLineColor           @"#F7F7F7"
+#define pictureNavColor         @"#222222"
+#define blackFont               @"#333333"
 
 #undef  字体大小
 //  页面标题

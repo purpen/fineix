@@ -35,6 +35,7 @@
 - (void)setReleaseViewUI {
     [self.view addSubview:self.scenceView];
     
+    [self.view addSubview:self.addView];
 }
 
 - (ScenceMessageView *)scenceView {
@@ -43,6 +44,14 @@
         
     }
     return _scenceView;
+}
+
+- (ScenceAddMoreView *)addView {
+    if (!_addView) {
+        _addView = [[ScenceAddMoreView alloc] initWithFrame:CGRectMake(0, 290, SCREEN_WIDTH, SCREEN_HEIGHT- 290)];
+        
+    }
+    return _addView;
 }
 
 @end

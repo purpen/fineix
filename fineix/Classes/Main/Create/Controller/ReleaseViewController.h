@@ -10,9 +10,11 @@
 #import "Fineix.h"
 
 #import "ScenceMessageView.h"
+#import "ScenceAddMoreView.h"
 
 @interface ReleaseViewController : FBPictureViewController
 
 @pro_strong ScenceMessageView   *   scenceView;     //  图片\描述\标题
+@pro_strong ScenceAddMoreView   *   addView;        //  添加地点\标签\场景
 
 @end
