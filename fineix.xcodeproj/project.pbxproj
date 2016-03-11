@@ -31,14 +31,12 @@
 		800507471C7A9CDD005AF0BE /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 800507461C7A9CDD005AF0BE /* Assets.xcassets */; };
 		8005074A1C7A9CDD005AF0BE /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 800507481C7A9CDD005AF0BE /* LaunchScreen.storyboard */; };
 		D802D7791C821D41007AFA3D /* AssetsLibrary.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D802D7781C821D41007AFA3D /* AssetsLibrary.framework */; };
-		D82399B51C8D6EAD007428D1 /* FBPictureView.m in Sources */ = {isa = PBXBuildFile; fileRef = D82399AE1C8D6EAD007428D1 /* FBPictureView.m */; };
 		D82399B61C8D6EAD007428D1 /* FBFiltersCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D82399AF1C8D6EAD007428D1 /* FBFiltersCollectionViewCell.m */; };
 		D82399B71C8D6EAD007428D1 /* FiltersView.m in Sources */ = {isa = PBXBuildFile; fileRef = D82399B01C8D6EAD007428D1 /* FiltersView.m */; };
 		D82399B81C8D6EAD007428D1 /* CameraView.m in Sources */ = {isa = PBXBuildFile; fileRef = D82399B31C8D6EAD007428D1 /* CameraView.m */; };
 		D82399C91C8D6EB5007428D1 /* CropImageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D82399B91C8D6EB5007428D1 /* CropImageViewController.m */; };
 		D82399CA1C8D6EB5007428D1 /* ReleaseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D82399BA1C8D6EB5007428D1 /* ReleaseViewController.m */; };
 		D82399CB1C8D6EB5007428D1 /* FiltersViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D82399BB1C8D6EB5007428D1 /* FiltersViewController.m */; };
-		D82399CC1C8D6EB5007428D1 /* StickersViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D82399BD1C8D6EB5007428D1 /* StickersViewController.m */; };
 		D82399CD1C8D6EB5007428D1 /* MarkGoodsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D82399BE1C8D6EB5007428D1 /* MarkGoodsViewController.m */; };
 		D82399CE1C8D6EB5007428D1 /* AddUrlViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D82399BF1C8D6EB5007428D1 /* AddUrlViewController.m */; };
 		D82399CF1C8D6EB5007428D1 /* PictureToolViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D82399C51C8D6EB5007428D1 /* PictureToolViewController.m */; };
@@ -52,6 +50,8 @@
 		D83A64371C8E7EBD003DB8BB /* CoreVideo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D83A64361C8E7EBD003DB8BB /* CoreVideo.framework */; };
 		D83A64391C8E7EC5003DB8BB /* CoreMedia.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D83A64381C8E7EC5003DB8BB /* CoreMedia.framework */; };
 		D83A643B1C8E7ED2003DB8BB /* CoreImage.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D83A643A1C8E7ED2003DB8BB /* CoreImage.framework */; };
+		D859B7981C91803400685CF6 /* ScenceMessageView.m in Sources */ = {isa = PBXBuildFile; fileRef = D859B7971C91803400685CF6 /* ScenceMessageView.m */; };
+		D859B79B1C926DBC00685CF6 /* PictureView.m in Sources */ = {isa = PBXBuildFile; fileRef = D859B79A1C926DBC00685CF6 /* PictureView.m */; };
 		D8BFA5F31C820F3600F5C1B7 /* FBPhoto.m in Sources */ = {isa = PBXBuildFile; fileRef = D8BFA5F21C820F3600F5C1B7 /* FBPhoto.m */; };
 		D8BFA5F61C8211DE00F5C1B7 /* FBLoadPhoto.m in Sources */ = {isa = PBXBuildFile; fileRef = D8BFA5F51C8211DE00F5C1B7 /* FBLoadPhoto.m */; };
 		D8D8B64D1C80ABFF00DD6BBE /* FBPictureViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D8D8B64C1C80ABFF00DD6BBE /* FBPictureViewController.m */; };
@@ -102,8 +102,6 @@
 		BA7E5463E540D9166EC06720 /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
 		D802D7781C821D41007AFA3D /* AssetsLibrary.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AssetsLibrary.framework; path = System/Library/Frameworks/AssetsLibrary.framework; sourceTree = SDKROOT; };
 		D802D7891C844101007AFA3D /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
-		D82399AD1C8D6EAD007428D1 /* FBPictureView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FBPictureView.h; sourceTree = "<group>"; };
-		D82399AE1C8D6EAD007428D1 /* FBPictureView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FBPictureView.m; sourceTree = "<group>"; };
 		D82399AF1C8D6EAD007428D1 /* FBFiltersCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FBFiltersCollectionViewCell.m; sourceTree = "<group>"; };
 		D82399B01C8D6EAD007428D1 /* FiltersView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FiltersView.m; sourceTree = "<group>"; };
 		D82399B11C8D6EAD007428D1 /* FiltersView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FiltersView.h; sourceTree = "<group>"; };
@@ -114,11 +112,9 @@
 		D82399BA1C8D6EB5007428D1 /* ReleaseViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ReleaseViewController.m; sourceTree = "<group>"; };
 		D82399BB1C8D6EB5007428D1 /* FiltersViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FiltersViewController.m; sourceTree = "<group>"; };
 		D82399BC1C8D6EB5007428D1 /* FiltersViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FiltersViewController.h; sourceTree = "<group>"; };
-		D82399BD1C8D6EB5007428D1 /* StickersViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StickersViewController.m; sourceTree = "<group>"; };
 		D82399BE1C8D6EB5007428D1 /* MarkGoodsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MarkGoodsViewController.m; sourceTree = "<group>"; };
 		D82399BF1C8D6EB5007428D1 /* AddUrlViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AddUrlViewController.m; sourceTree = "<group>"; };
 		D82399C01C8D6EB5007428D1 /* ReleaseViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ReleaseViewController.h; sourceTree = "<group>"; };
-		D82399C11C8D6EB5007428D1 /* StickersViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StickersViewController.h; sourceTree = "<group>"; };
 		D82399C21C8D6EB5007428D1 /* AddUrlViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AddUrlViewController.h; sourceTree = "<group>"; };
 		D82399C31C8D6EB5007428D1 /* MarkGoodsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MarkGoodsViewController.h; sourceTree = "<group>"; };
 		D82399C41C8D6EB5007428D1 /* ClipImageViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ClipImageViewController.h; sourceTree = "<group>"; };
@@ -137,6 +133,10 @@
 		D83A64361C8E7EBD003DB8BB /* CoreVideo.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreVideo.framework; path = System/Library/Frameworks/CoreVideo.framework; sourceTree = SDKROOT; };
 		D83A64381C8E7EC5003DB8BB /* CoreMedia.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMedia.framework; path = System/Library/Frameworks/CoreMedia.framework; sourceTree = SDKROOT; };
 		D83A643A1C8E7ED2003DB8BB /* CoreImage.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreImage.framework; path = System/Library/Frameworks/CoreImage.framework; sourceTree = SDKROOT; };
+		D859B7961C91803400685CF6 /* ScenceMessageView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ScenceMessageView.h; sourceTree = "<group>"; };
+		D859B7971C91803400685CF6 /* ScenceMessageView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ScenceMessageView.m; sourceTree = "<group>"; };
+		D859B7991C926DBC00685CF6 /* PictureView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PictureView.h; sourceTree = "<group>"; };
+		D859B79A1C926DBC00685CF6 /* PictureView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PictureView.m; sourceTree = "<group>"; };
 		D8BFA5F11C820F3600F5C1B7 /* FBPhoto.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FBPhoto.h; sourceTree = "<group>"; };
 		D8BFA5F21C820F3600F5C1B7 /* FBPhoto.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FBPhoto.m; sourceTree = "<group>"; };
 		D8BFA5F41C8211DE00F5C1B7 /* FBLoadPhoto.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FBLoadPhoto.h; sourceTree = "<group>"; };
@@ -544,8 +544,6 @@
 		D8EFC58E1C802DAD0002509D /* Controller */ = {
 			isa = PBXGroup;
 			children = (
-				D82399C11C8D6EB5007428D1 /* StickersViewController.h */,
-				D82399BD1C8D6EB5007428D1 /* StickersViewController.m */,
 				D82399C31C8D6EB5007428D1 /* MarkGoodsViewController.h */,
 				D82399BE1C8D6EB5007428D1 /* MarkGoodsViewController.m */,
 				D82399C21C8D6EB5007428D1 /* AddUrlViewController.h */,
@@ -576,20 +574,22 @@
 		D8EFC5901C802DAD0002509D /* View */ = {
 			isa = PBXGroup;
 			children = (
-				D82399AD1C8D6EAD007428D1 /* FBPictureView.h */,
-				D82399AE1C8D6EAD007428D1 /* FBPictureView.m */,
+				D859B7961C91803400685CF6 /* ScenceMessageView.h */,
+				D859B7971C91803400685CF6 /* ScenceMessageView.m */,
+				D859B7991C926DBC00685CF6 /* PictureView.h */,
+				D859B79A1C926DBC00685CF6 /* PictureView.m */,
+				D82399B41C8D6EAD007428D1 /* CameraView.h */,
+				D82399B31C8D6EAD007428D1 /* CameraView.m */,
 				D82399B21C8D6EAD007428D1 /* FBFiltersCollectionViewCell.h */,
 				D82399AF1C8D6EAD007428D1 /* FBFiltersCollectionViewCell.m */,
 				D82399B11C8D6EAD007428D1 /* FiltersView.h */,
 				D82399B01C8D6EAD007428D1 /* FiltersView.m */,
-				D82399B41C8D6EAD007428D1 /* CameraView.h */,
-				D82399B31C8D6EAD007428D1 /* CameraView.m */,
-				D8D8B6511C80B8DF00DD6BBE /* FBFootView.h */,
-				D8D8B6521C80B8DF00DD6BBE /* FBFootView.m */,
 				D82DAF971C82026700E0650B /* FBPictureCollectionViewCell.h */,
 				D82DAF981C82026700E0650B /* FBPictureCollectionViewCell.m */,
 				D8368FCB1C85A67700673306 /* CropImageView.h */,
 				D8368FCC1C85A67700673306 /* CropImageView.m */,
+				D8D8B6511C80B8DF00DD6BBE /* FBFootView.h */,
+				D8D8B6521C80B8DF00DD6BBE /* FBFootView.m */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -776,7 +776,6 @@
 				800507451C7A9CDD005AF0BE /* fineix.xcdatamodeld in Sources */,
 				D8EFC5811C8024500002509D /* UIColor+Extension.m in Sources */,
 				D8EFC57A1C801E8C0002509D /* FBNavigationViewController.m in Sources */,
-				D82399B51C8D6EAD007428D1 /* FBPictureView.m in Sources */,
 				D8BFA5F31C820F3600F5C1B7 /* FBPhoto.m in Sources */,
 				D82399B81C8D6EAD007428D1 /* CameraView.m in Sources */,
 				800507391C7A9CDD005AF0BE /* main.m in Sources */,
@@ -791,11 +790,12 @@
 				D8EFC5871C802B6C0002509D /* FBTabBarController.m in Sources */,
 				D82399CD1C8D6EB5007428D1 /* MarkGoodsViewController.m in Sources */,
 				D82399CF1C8D6EB5007428D1 /* PictureToolViewController.m in Sources */,
-				D82399CC1C8D6EB5007428D1 /* StickersViewController.m in Sources */,
 				D8BFA5F61C8211DE00F5C1B7 /* FBLoadPhoto.m in Sources */,
 				D8EFC5A31C802E3D0002509D /* MyViewController.m in Sources */,
 				D82399CB1C8D6EB5007428D1 /* FiltersViewController.m in Sources */,
+				D859B79B1C926DBC00685CF6 /* PictureView.m in Sources */,
 				D82399B71C8D6EAD007428D1 /* FiltersView.m in Sources */,
+				D859B7981C91803400685CF6 /* ScenceMessageView.m in Sources */,
 				D82399D01C8D6EB5007428D1 /* ClipImageViewController.m in Sources */,
 				D8EFC5A91C80326E0002509D /* FBTabBar.m in Sources */,
 			);

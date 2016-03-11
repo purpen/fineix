@@ -10,7 +10,6 @@
 #import "ReleaseViewController.h"
 #import "MarkGoodsViewController.h"
 #import "AddUrlViewController.h"
-#import "StickersViewController.h"
 
 #import "FBFilters.h"
 
@@ -46,6 +45,7 @@
 #pragma mark 继续按钮的点击事件
 - (void)nextBtnClick {
     ReleaseViewController * releaseVC = [[ReleaseViewController alloc] init];
+    releaseVC.scenceView.imageView.image = self.filtersImageView.image;
     [self.navigationController pushViewController:releaseVC animated:YES];
 }
 
@@ -75,7 +75,7 @@
 - (FBFootView *)footView {
     if (!_footView) {
         _footView = [[FBFootView alloc] init];
-        NSArray * titleArr = [[NSArray alloc] initWithObjects:@"标记产品",@"添加链接",@"贴纸",@"滤镜", nil];
+        NSArray * titleArr = [[NSArray alloc] initWithObjects:@"标记产品",@"添加链接",@"滤镜", nil];
         _footView.backgroundColor = [UIColor blackColor];
         _footView.titleArr = titleArr;
         _footView.titleFontSize = Font_GroupHeader;
@@ -91,7 +91,6 @@
 - (void)buttonDidSeletedWithIndex:(NSInteger)index {
     MarkGoodsViewController * markGoodsVC = [[MarkGoodsViewController alloc] init];
     AddUrlViewController * addUrlVC = [[AddUrlViewController alloc] init];
-    StickersViewController * stickersVC = [[StickersViewController alloc] init];
     
     if (index == 0) {
         [self presentViewController:markGoodsVC animated:YES completion:nil];
@@ -102,10 +101,6 @@
         [self.filtersView removeFromSuperview];
         
     } else if (index == 2) {
-        [self presentViewController:stickersVC animated:YES completion:nil];
-        [self.filtersView removeFromSuperview];
-    
-    } else if (index == 3) {
         [self.view addSubview:self.cancelFilter];
         
         [self.view addSubview:self.filtersView];
@@ -148,6 +143,30 @@
     [self.cancelFilter removeFromSuperview];
 }
 
+#pragma mark - 获取照片所在位置
+- (void)setPhotoLocation {
+    CLGeocoder * geocoder = [[CLGeocoder alloc] init];
+    CLLocation * location = [[CLLocation alloc] initWithLatitude:39.982975 longitude:116.4924166666667];
+    
+    [geocoder reverseGeocodeLocation:location completionHandler:^(NSArray<CLPlacemark *> * _Nullable placemarks, NSError * _Nullable error) {
+        if (!error) {
+            
+            /** CLPlacemark         地标
+             *  location            位置对象
+             *  addressDictionary   地址字典
+             *  name                地址详情
+             *  locality            城市
+             */
+            
+            CLPlacemark * pl = [placemarks firstObject];
+            NSLog(@"＝＝＝＝%@ %@",pl.locality, pl.name);
+            
+        } else {
+            NSLog(@"获取地理位置出错");
+        }
+        
+    }];
+}
 
 
 @end

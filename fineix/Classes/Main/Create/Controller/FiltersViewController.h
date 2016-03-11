@@ -5,7 +5,7 @@
 //  Created by FLYang on 16/3/2.
 //  Copyright © 2016年 taihuoniao. All rights reserved.
 //
-
+#import <CoreLocation/CoreLocation.h>
 #import "FBPictureViewController.h"
 #import "FBFootView.h"
 #import "FiltersView.h"

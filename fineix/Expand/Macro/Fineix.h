@@ -14,45 +14,48 @@
 
 #undef 宽高尺寸
 //  屏幕宽
-#define SCREEN_HEIGHT [[UIScreen mainScreen] bounds].size.height
+#define SCREEN_HEIGHT   [[UIScreen mainScreen] bounds].size.height
 //  屏幕高
-#define SCREEN_WIDTH  [[UIScreen mainScreen] bounds].size.width
+#define SCREEN_WIDTH    [[UIScreen mainScreen] bounds].size.width
 //  宽度
-#define Bounds_width self.view.bounds.size.width
+#define Bounds_width    self.view.bounds.size.width
 //  高度
-#define Bounds_height self.view.bounds.size.height
+#define Bounds_height   self.view.bounds.size.height
+
 
 #undef 颜色
-#define color @"#FF3366"
-#define pictureNavColor @"#222222"
+#define color               @"#FF3366"
+#define grayColor           @"#F7F7F7"
+#define pictureNavColor     @"#222222"
+
 
 #undef  字体大小
 //  页面标题
-#define Font_ControllerTitle 17
+#define Font_ControllerTitle    17
 //  场景标题
-#define Font_SceneTitle 14
+#define Font_SceneTitle         14
 //  商品标题
-#define Font_GoodsTitle 14
+#define Font_GoodsTitle         14
 //  商品价格
-#define Font_GoodsPrice 16
+#define Font_GoodsPrice         16
 //  标签
-#define Font_Tag 12
+#define Font_Tag                12
 //  组标题
-#define Font_GroupHeader 14
+#define Font_GroupHeader        14
 //  地点
-#define Font_Place 10
+#define Font_Place              10
 //  内容
-#define Font_Content 14
+#define Font_Content            14
 //  评论
-#define Font_Comment 12
+#define Font_Comment            12
 //  数字
-#define Font_Number 12
+#define Font_Number             12
 //  商品标记标题
-#define Font_TabTitle 10
+#define Font_TabTitle           10
 //  商品标记价格
-#define Font_TabPrice 9
+#define Font_TabPrice           9
 //  滤镜名称
-#define Font_filtersTitle 12
+#define Font_filtersTitle       12
 
 
 #undef  创建属性

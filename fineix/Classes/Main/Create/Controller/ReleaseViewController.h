@@ -7,7 +7,12 @@
 //
 
 #import "FBPictureViewController.h"
+#import "Fineix.h"
+
+#import "ScenceMessageView.h"
 
 @interface ReleaseViewController : FBPictureViewController
+
+@pro_strong ScenceMessageView   *   scenceView;     //  图片\描述\标题
 
 @end
