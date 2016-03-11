@@ -7,7 +7,6 @@
 //
 #import <Photos/Photos.h>
 #import "FBLoadPhoto.h"
-#import "SVProgressHUD.h"
 
 @interface FBLoadPhoto()
 
@@ -106,7 +105,6 @@
     
     [self.assetLibrary enumerateGroupsWithTypes:(ALAssetsGroupAll) usingBlock:listGroupBlock failureBlock:^(NSError *error) {
         self.loadBlock(nil,nil, error);
-        [SVProgressHUD showInfoWithStatus:@"请开启访问相册的权限"];
         
     }];
 }

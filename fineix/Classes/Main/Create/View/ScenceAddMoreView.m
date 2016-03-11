@@ -50,7 +50,6 @@
         _addLoacation = [[UIView alloc] init];
         _addLoacation.backgroundColor = [UIColor purpleColor];
         
-        
         UIButton * locationBtn = [[UIButton alloc] initWithFrame:CGRectMake(15, 50, 100, 35)];
         [locationBtn setTitle:@"推荐的地址" forState:(UIControlStateNormal)];
         locationBtn.backgroundColor = [UIColor blueColor];
@@ -62,6 +61,7 @@
     }
     return _addLoacation;
 }
+
 //  添加地点
 - (UIButton *)addLoacationBtn {
     if (!_addLoacationBtn) {

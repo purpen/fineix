@@ -164,7 +164,6 @@
         self.navView.hidden = NO;
     }
     
-    NSLog(@"＊＊＊＊＊＊＊＊＊＊ 选中照片的经纬度：%@", self.locationMarr[indexPath.row]);
     [self setPhotoLocation:self.locationMarr[indexPath.row]];
 }
 

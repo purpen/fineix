@@ -7,6 +7,7 @@
 //
 
 #import "FBPictureViewController.h"
+#import "UIView+TYAlertView.h"
 
 @interface FBPictureViewController ()
 
@@ -52,6 +53,11 @@
     [self.navView addSubview:self.doneBtn];
 }
 
+//  取消发布
+- (void)addCancelDoneButton {
+    [self.navView addSubview:self.cancelDoneBtn];
+}
+
 //  分割线
 - (void)addLine {
     [self.navView addSubview:self.line];
@@ -85,8 +91,6 @@
     }
     return _line;
 }
-
-
 
 #pragma mark - 继续下一步的执行事件
 - (UIButton *)nextBtn {
@@ -137,6 +141,28 @@
         _doneBtn.titleLabel.font = [UIFont systemFontOfSize:Font_ControllerTitle];
     }
     return _doneBtn;
+}
+
+#pragma mark - 取消发布按钮
+- (UIButton *)cancelDoneBtn {
+    if (!_cancelDoneBtn) {
+        _cancelDoneBtn = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 50, 50)];
+        [_cancelDoneBtn setImage:[UIImage imageNamed:@"icon_back"] forState:(UIControlStateNormal)];
+        [_cancelDoneBtn addTarget:self action:@selector(cancelDoneBtnClick) forControlEvents:(UIControlEventTouchUpInside)];
+    }
+    return _cancelDoneBtn;
+}
+
+- (void)cancelDoneBtnClick {
+    NSLog(@"取消发布");
+    TYAlertView * cancelAlertView = [TYAlertView alertViewWithTitle:@"取消创建" message:@"是否放弃创建情景？"];
+    [cancelAlertView addAction:[TYAlertAction actionWithTitle:@"取消" style:(TYAlertActionStyleCancle) handler:^(TYAlertAction *action) {
+        NSLog(@"取消放弃");
+    }]];
+    [cancelAlertView addAction:[TYAlertAction actionWithTitle:@"确定" style:(TYAlertActionStyleDefault) handler:^(TYAlertAction *action) {
+         [self dismissViewControllerAnimated:YES completion:nil];
+    }]];
+    [cancelAlertView showInWindowWithBackgoundTapDismissEnable:YES];
 }
 
 #pragma mark - 页面提示框

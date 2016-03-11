@@ -22,6 +22,7 @@
     [self.window makeKeyAndVisible];
     FBTabBarController * tabBarC = [[FBTabBarController alloc] init];
     self.window.rootViewController = tabBarC;
+    
     return YES;
 }
 

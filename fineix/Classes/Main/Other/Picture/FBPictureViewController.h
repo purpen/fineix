@@ -18,6 +18,7 @@
 @pro_strong UIButton            *   cancelBtn;      //  取消按钮
 @pro_strong UIButton            *   backBtn;        //  返回按钮
 @pro_strong UIButton            *   doneBtn;        //  完成发布按钮
+@pro_strong UIButton            *   cancelDoneBtn;  //  取消创建
 
 @pro_strong UIButton            *   nextBtn;        //  继续按钮
 @pro_strong UIButton            *   cropBack;       //  "裁剪"返回
@@ -40,6 +41,9 @@
 
 //  视图的分割线
 - (void)addLine;
+
+//  取消创建情景
+- (void)addCancelDoneButton;
 
 //  页面提示框
 - (void)showMessage:(NSString *)message;

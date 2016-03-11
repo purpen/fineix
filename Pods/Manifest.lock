@@ -33,6 +33,7 @@ PODS:
     - SDWebImage/Core (= 3.7.3)
   - SDWebImage/Core (3.7.3)
   - SVProgressHUD (1.1.3)
+  - TYAlertController (1.1.3)
 
 DEPENDENCIES:
   - AFNetworking (~> 2.0)
@@ -43,6 +44,7 @@ DEPENDENCIES:
   - SDCycleScrollView (~> 1.3)
   - SDWebImage (~> 3.7.1)
   - SVProgressHUD (~> 1.1.3)
+  - TYAlertController (~> 1.1.3)
 
 SPEC CHECKSUMS:
   AFNetworking: cb8d14a848e831097108418f5d49217339d4eb60
@@ -53,5 +55,6 @@ SPEC CHECKSUMS:
   SDCycleScrollView: 90e43636fcc8e6a7f74e8b64d87418a8e96549b4
   SDWebImage: 1d2b1a1efda1ade1b00b6f8498865f8ddedc8a84
   SVProgressHUD: 748080e4f36e603f6c02aec292664239df5279c1
+  TYAlertController: 849283e546e297d4c33708d81d12605901adbba7
 
 COCOAPODS: 0.39.0

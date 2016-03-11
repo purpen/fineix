@@ -27,7 +27,7 @@
     self.navView.backgroundColor = [UIColor whiteColor];
     [self addNavViewTitle:@"创建场景"];
     self.navTitle.textColor = [UIColor blackColor];
-    [self addBackButton];
+    [self addCancelDoneButton];
     [self addDoneButton];
     [self addLine];
 }
