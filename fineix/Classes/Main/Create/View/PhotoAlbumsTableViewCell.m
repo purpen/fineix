@@ -6,6 +6,7 @@
 //  Copyright © 2016年 taihuoniao. All rights reserved.
 //
 
+#import <AssetsLibrary/AssetsLibrary.h>
 #import "PhotoAlbumsTableViewCell.h"
 
 @implementation PhotoAlbumsTableViewCell
@@ -41,6 +42,13 @@
 }
 
 - (void)setPhotoAlbumsData:(NSDictionary *)photoAlbum {
+    NSLog(@"＝＝＝＝＝＝＝＝＝＝ 相册 ----- %@", [photoAlbum valueForKey:@"group"]);
+    
+//    [[photoAlbum valueForKey:@"group"] enumerateAssetsUsingBlock:^(ALAsset *result, NSUInteger index, BOOL *stop) {
+//        NSLog(@"＊＊＊＊＊＊＊＊ ＝＝＝ %@", result);
+//    }];
+    
+    
     UIImage * coverImage = [UIImage imageWithData:[photoAlbum valueForKey:@"coverImage"]];
     self.coverImage.image = coverImage;
     self.titleLab.text = [photoAlbum valueForKey:@"name"];

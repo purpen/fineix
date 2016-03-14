@@ -82,7 +82,6 @@
     }];
     
     [self.view addSubview:self.pictureView];
-    
 }
 
 #pragma mark - 底部选项工具栏

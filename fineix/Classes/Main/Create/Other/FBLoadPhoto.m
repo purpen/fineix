@@ -66,11 +66,9 @@
     //  获取相片对象
     ALAssetsGroupEnumerationResultsBlock assetsEnumerationBlock = ^(ALAsset * result, NSUInteger index, BOOL * stop) {
         if (result) {
-            
             FBPhoto * photo = [[FBPhoto alloc] init];
             photo.asset = result;
             [self.allPhotos insertObject:photo atIndex:index];
-
         }
     };
     
@@ -80,8 +78,10 @@
         [group setAssetsFilter:onlyPhotoFilter];
         
         if ([group numberOfAssets] > 0) {
+            
             NSData * imgData = UIImagePNGRepresentation([UIImage imageWithCGImage:[group posterImage]]);
             NSMutableDictionary * photoAlbumDict = [[NSMutableDictionary alloc] initWithObjectsAndKeys:
+                                                    group, @"group",
                                                     [group valueForProperty:ALAssetsGroupPropertyName],@"name",
                                                     [NSString stringWithFormat:@"%zi", [group numberOfAssets]],@"count",
                                                     imgData,@"coverImage", nil];

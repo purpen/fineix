@@ -11,6 +11,8 @@
 
 @interface ScenceAddMoreView : UIView
 
+@pro_strong UINavigationController  *   nav;
+
 @pro_strong UIView      *   addLoacation;       //  添加地点
 @pro_strong UIButton    *   addLoacationBtn;
 

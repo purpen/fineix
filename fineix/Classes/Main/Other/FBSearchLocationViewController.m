@@ -246,14 +246,12 @@
     
 }
 
-
 #pragma mark - UITableViewDelegate
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
     return _dataAry.count;
 }
 
 -(UITableViewCell*)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
-    
     
     static NSString *str = @"cell1";
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:str];
@@ -284,7 +282,6 @@
     _hud.labelText = @"Loading";
     return [textField resignFirstResponder];
     _address = textField.text;
-    
 }
 
 -(void)starGeoCode{

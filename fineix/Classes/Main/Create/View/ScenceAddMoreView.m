@@ -7,6 +7,7 @@
 //
 
 #import "ScenceAddMoreView.h"
+#import "SearchLocationViewController.h"
 
 @implementation ScenceAddMoreView
 
@@ -81,6 +82,8 @@
         make.height.equalTo(@88);
     }];
     
+    SearchLocationViewController * searchLocation = [[SearchLocationViewController alloc] init];
+    [self.nav pushViewController:searchLocation animated:YES];
 }
 
 - (void)locationFrame {

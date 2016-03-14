@@ -49,7 +49,7 @@
 - (ScenceAddMoreView *)addView {
     if (!_addView) {
         _addView = [[ScenceAddMoreView alloc] initWithFrame:CGRectMake(0, 290, SCREEN_WIDTH, SCREEN_HEIGHT- 290)];
-        
+        _addView.nav = self.navigationController;
     }
     return _addView;
 }

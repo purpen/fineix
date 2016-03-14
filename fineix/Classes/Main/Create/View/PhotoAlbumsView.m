@@ -66,6 +66,7 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     NSLog(@"=====打开相册 %zi", indexPath.row);
+    
 }
 
 - (void)dealloc {
