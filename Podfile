@@ -4,8 +4,6 @@ inhibit_all_warnings!
 pod "AFNetworking", "~> 2.0"
 pod 'SDWebImage', '~> 3.7.1'
 pod 'FMDB', '~> 2.4'
-pod 'MBProgressHUD', '~> 0.9'
-pod 'MBProgressHUDExtensions', '~> 0.0.1'
 pod 'MJRefresh', '~> 3.0.2'
 pod 'Masonry', '~> 0.6.3'
 pod 'SDCycleScrollView','~> 1.3'

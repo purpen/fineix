@@ -9,6 +9,9 @@
 #import "AppDelegate.h"
 #import "FBTabBarController.h"
 #import <BaiduMapAPI_Map/BMKMapComponent.h>
+#import <SVProgressHUD/SVProgressHUD.h>
+#import "Fineix.h"
+
 @interface AppDelegate ()
 {
     BMKMapManager *_mapManager;
@@ -25,6 +28,11 @@
     
     FBTabBarController * tabBarC = [[FBTabBarController alloc] init];
     self.window.rootViewController = tabBarC;
+    
+    //  设置SVP颜色
+    [SVProgressHUD setBackgroundColor:[UIColor whiteColor]];
+    [SVProgressHUD setForegroundColor:[UIColor colorWithHexString:color alpha:1]];
+    
     _mapManager = [[BMKMapManager alloc] init];
     BOOL ret = [_mapManager start:@"dcmbwcn8m1O2sZsshU4xL4Gn" generalDelegate:nil];
     if (!ret) {
