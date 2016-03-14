@@ -49,15 +49,35 @@
 			<key>orderHint</key>
 			<integer>9</integer>
 		</dict>
+		<key>TYAlertController.xcscheme</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>10</integer>
+		</dict>
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
+		<key>1D6761006889AE1EB4B8794C406539C3</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
 		<key>1F077A13FE19AEF85FA42588B86439EC</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
+		<key>20DC2ED843F2A193F325DCDFE149BC74</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
 		<key>3003AC125284BD65144D81075068C756</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>3B5870A9139DD9CEE835028C47E1F44F</key>
 		<dict>
 			<key>primary</key>
 			<true/>
@@ -73,6 +93,11 @@
 			<true/>
 		</dict>
 		<key>666A07B53E043E0EE0039144618CE62D</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>726B6CB188170A59D646286CC75C9BBC</key>
 		<dict>
 			<key>primary</key>
 			<true/>
@@ -93,6 +118,11 @@
 			<true/>
 		</dict>
 		<key>B23B3D15FFC0FC9893968F478086D58D</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>DC5CDA1F39ADD329F13D1D1C114151FD</key>
 		<dict>
 			<key>primary</key>
 			<true/>
