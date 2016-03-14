@@ -8,9 +8,11 @@
 
 #import "AppDelegate.h"
 #import "FBTabBarController.h"
-
+#import <BaiduMapAPI_Map/BMKMapComponent.h>
 @interface AppDelegate ()
-
+{
+    BMKMapManager *_mapManager;
+}
 @end
 
 @implementation AppDelegate
@@ -22,7 +24,12 @@
     [self.window makeKeyAndVisible];
     FBTabBarController * tabBarC = [[FBTabBarController alloc] init];
     self.window.rootViewController = tabBarC;
-    
+    _mapManager = [[BMKMapManager alloc] init];
+    BOOL ret = [_mapManager start:@"dcmbwcn8m1O2sZsshU4xL4Gn" generalDelegate:nil];
+    if (!ret) {
+        NSLog(@"manager start failed!");
+    }
+
     return YES;
 }
 
