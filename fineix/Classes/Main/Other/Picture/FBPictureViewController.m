@@ -33,6 +33,11 @@
     [self.navView addSubview:self.navTitle];
 }
 
+//  打开相薄
+- (void)addOpenPhotoAlbumsButton {
+    [self.navView addSubview:self.openPhotoAlbums];
+}
+
 //  取消创建按钮
 - (void)addCancelButton {
     [self.navView addSubview:self.cancelBtn];
@@ -194,5 +199,18 @@
         [showview removeFromSuperview];
     }];
 }
+
+#pragma mark - 打开相薄
+- (UIButton *)openPhotoAlbums {
+    if (!_openPhotoAlbums) {
+        _openPhotoAlbums = [[UIButton alloc] initWithFrame:CGRectMake(SCREEN_WIDTH/2 - 50, 0, 110, 50)];
+        [_openPhotoAlbums setImage:[UIImage imageNamed:@"icon_upward"] forState:(UIControlStateNormal)];
+        [_openPhotoAlbums setImage:[UIImage imageNamed:@"icon_down"] forState:(UIControlStateSelected)];
+        [_openPhotoAlbums setImageEdgeInsets:(UIEdgeInsetsMake(0, 90, 0, 0))];
+        _openPhotoAlbums.selected = NO;
+    }
+    return _openPhotoAlbums;
+}
+
 
 @end

@@ -10,10 +10,12 @@
 
 @interface FBLoadPhoto()
 
-@property (nonatomic, strong) NSMutableArray    *   allPhotos;          //  相片数组
 @property (nonatomic, strong) ALAssetsLibrary   *   assetLibrary;
+@property (nonatomic, strong) NSMutableArray    *   allPhotos;          //  相片数组
 @property (nonatomic, strong) NSMutableArray    *   locationMarr;       //  照片的经纬度
-@property (readwrite, copy, nonatomic) void(^loadBlock)(NSArray * photos, NSArray * location, NSError * error);
+@property (nonatomic, strong) NSMutableArray    *   allPhotoAlbums;     //  相册数组
+
+@property (readwrite, copy, nonatomic) void(^loadBlock)(NSArray * photos, NSArray * location, NSArray * photoAlbums, NSError * error);
 
 @end
 
@@ -46,6 +48,13 @@
     return _locationMarr;
 }
 
+- (NSMutableArray *)allPhotoAlbums {
+    if (!_allPhotoAlbums) {
+        _allPhotoAlbums = [NSMutableArray array];
+    }
+    return _allPhotoAlbums;
+}
+
 - (ALAssetsLibrary *)assetLibrary {
     if (!_assetLibrary) {
         _assetLibrary = [[ALAssetsLibrary alloc] init];
@@ -54,7 +63,7 @@
 }
 
 //  加载相片
-+ (void)loadAllPhotos:(void (^)(NSArray *, NSArray *, NSError *))completion {
++ (void)loadAllPhotos:(void (^)(NSArray *, NSArray *, NSArray *, NSError *))completion {
     [[FBLoadPhoto shareLoad].allPhotos removeAllObjects];
     [[FBLoadPhoto shareLoad].locationMarr removeAllObjects];
     [[FBLoadPhoto shareLoad] setLoadBlock:completion];
@@ -69,11 +78,11 @@
             NSDictionary * imageMetadata = [[NSMutableDictionary alloc] initWithDictionary:result.defaultRepresentation.metadata];
             NSDictionary * gpsDict = [imageMetadata objectForKey:@"{GPS}"];
             
+            //  获取照片保存的地理信息
             FBPhoto * photo = [[FBPhoto alloc] init];
             photo.asset = result;
             NSArray * locationArr = [NSArray arrayWithObjects:[NSString stringWithFormat:@"%f",[[gpsDict valueForKey:@"Longitude"] floatValue]],
                                                               [NSString stringWithFormat:@"%f",[[gpsDict valueForKey:@"Latitude"] floatValue]], nil];
-//            NSLog(@"照片的GPS信息：经纬度%@", locationArr);
             [self.locationMarr addObject:locationArr];
             [self.allPhotos insertObject:photo atIndex:index];
         }
@@ -85,12 +94,12 @@
         [group setAssetsFilter:onlyPhotoFilter];
         
         if ([group numberOfAssets] > 0) {
-
-            NSLog(@"＝＝＝＝相薄的名字： %@", [group valueForProperty:ALAssetsGroupPropertyName]);
-            NSLog(@"＝＝＝＝图片的数量： %zi", [group numberOfAssets]);
-            CGImageRef albumImg = [group posterImage];
-            UIImage * img = [UIImage imageWithCGImage:albumImg];
-            NSLog(@"＝＝＝＝相册的封面： %@", img);
+            NSData * imgData = UIImagePNGRepresentation([UIImage imageWithCGImage:[group posterImage]]);
+            NSMutableDictionary * photoAlbumDict = [[NSMutableDictionary alloc] initWithObjectsAndKeys:
+                                                    [group valueForProperty:ALAssetsGroupPropertyName],@"name",
+                                                    [NSString stringWithFormat:@"%zi", [group numberOfAssets]],@"count",
+                                                    imgData,@"coverImage", nil];
+            [self.allPhotoAlbums addObject:photoAlbumDict];
             
             if ([[group valueForProperty:ALAssetsGroupPropertyType] intValue] == ALAssetsGroupSavedPhotos) {
                 [group enumerateAssetsUsingBlock:assetsEnumerationBlock];
@@ -98,13 +107,13 @@
         }
         
         if (group == nil) {
-            self.loadBlock(self.allPhotos, self.locationMarr, nil);
+            self.loadBlock(self.allPhotos, self.locationMarr, self.allPhotoAlbums, nil);
         }
         
     };
     
     [self.assetLibrary enumerateGroupsWithTypes:(ALAssetsGroupAll) usingBlock:listGroupBlock failureBlock:^(NSError *error) {
-        self.loadBlock(nil,nil, error);
+        self.loadBlock(nil,nil,nil, error);
         
     }];
 }

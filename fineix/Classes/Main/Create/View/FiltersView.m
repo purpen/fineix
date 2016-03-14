@@ -21,19 +21,15 @@
                         @"CIColorCrossPolynomial",
                         @"CIColorMonochrome",
                         @"CIFalseColor",
-                        @"CIMaskToAlpha",
                         @"CIMaximumComponent",
                         @"CIMinimumComponent",
                         @"CIPhotoEffectChrome",
                         @"CIPhotoEffectFade",
                         @"CIPhotoEffectInstant",
-                        @"CIPhotoEffectMono",
                         @"CIPhotoEffectNoir",
                         @"CIPhotoEffectProcess",
-                        @"CIPhotoEffectTonal",
                         @"CIPhotoEffectTransfer",
-                        @"CISepiaTone",
-                        @"CIVignette", nil];
+                        @"CISepiaTone", nil];
         
         [self addSubview:self.filtersCollectionView];
     }

@@ -11,6 +11,7 @@
 #import "CameraView.h"
 #import "PictureView.h"
 
+
 @interface CreateViewController : FBPictureViewController
 
 @pro_strong FBFootView          *   footView;           //  底部功能选择视图

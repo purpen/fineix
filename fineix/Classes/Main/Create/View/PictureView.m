@@ -51,6 +51,10 @@
             make.right.equalTo(_createView.mas_right).with.offset(0);
         }];
         
+        [_createView addSubview:self.photoAlbumsView];
+        
+//        [_createView addSubview:self.openPhotoAlbums];
+        
     }
     return _createView;
 }
@@ -59,15 +63,15 @@
 - (void)loadAllPhotos {
     self.sortPhotosArr = [NSMutableArray array];
     self.locationMarr = [NSMutableArray array];
+    self.photoAlbumArr = [NSMutableArray array];
     
-    [FBLoadPhoto loadAllPhotos:^(NSArray *photos, NSArray *location, NSError *error) {
+    [FBLoadPhoto loadAllPhotos:^(NSArray *photos, NSArray *location, NSArray *photoAlbums, NSError *error) {
         if (!error) {
             //  相片倒序排列
             NSEnumerator * enumerator = [photos reverseObjectEnumerator];
             while (id object = [enumerator nextObject]) {
                 [self.sortPhotosArr addObject:object];
             }
-            
             if (photos.count) {
                 //  默认加载第一张照片
                 FBPhoto * firstPhoto = [self.sortPhotosArr objectAtIndex:0];
@@ -78,7 +82,6 @@
             while (id locationObj = [locationEnumerator nextObject]) {
                 [self.locationMarr addObject:locationObj];
             }
-            
             //  默认第一张照片的地址
             [self setPhotoLocation:[self.locationMarr objectAtIndex:0]];
             
@@ -87,6 +90,10 @@
             [self.pictureView selectItemAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0]
                                            animated:YES
                                      scrollPosition:(UICollectionViewScrollPositionNone)];
+            
+            //  获取全部的相册
+            self.photoAlbumArr = [photoAlbums copy];
+            [[NSNotificationCenter defaultCenter] postNotificationName:@"photoAlbums" object:self.photoAlbumArr];
             
         } else {
             NSLog(@"＝＝＝＝＝＝＝ 加载图片错误%@ ＝＝＝＝＝＝＝", error);
@@ -252,5 +259,31 @@
     }
     return _recoveryFrameBtn;
 }
+
+#pragma mark - 加载相薄页面
+- (PhotoAlbumsView *)photoAlbumsView {
+    if (!_photoAlbumsView) {
+        _photoAlbumsView = [[PhotoAlbumsView alloc] initWithFrame:CGRectMake(0, SCREEN_HEIGHT, SCREEN_WIDTH, SCREEN_HEIGHT-50)];
+    }
+    return _photoAlbumsView;
+}
+
+//#pragma mark - 打开相薄
+//- (UIButton *)openPhotoAlbums {
+//    if (!_openPhotoAlbums) {
+//        _openPhotoAlbums = [[UIButton alloc] initWithFrame:CGRectMake(SCREEN_WIDTH/2 - 50, -50, 100, 50)];
+//        _openPhotoAlbums.backgroundColor = [UIColor orangeColor];
+//        [_openPhotoAlbums addTarget:self action:@selector(openPhotoAlbumsClick) forControlEvents:(UIControlEventTouchUpInside)];
+//    }
+//    return _openPhotoAlbums;
+//}
+//
+//- (void)openPhotoAlbumsClick {
+//    NSLog(@"撒发生地方撒发撒大丰收的方式打发撒发生");
+//    CGRect openPhotoAlbumsRect = CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT-50);
+//    [UIView animateWithDuration:.3 animations:^{
+//        self.photoAlbumsView.frame = openPhotoAlbumsRect;
+//    }];
+//}
 
 @end

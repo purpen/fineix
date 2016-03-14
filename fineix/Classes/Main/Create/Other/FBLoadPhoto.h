@@ -12,6 +12,6 @@
 @interface FBLoadPhoto : NSObject
 
 //  加载相片
-+ (void)loadAllPhotos:(void (^)(NSArray * photos, NSArray * location, NSError * error))completion;
++ (void)loadAllPhotos:(void (^)(NSArray * photos, NSArray * location, NSArray * photoAlbums, NSError * error))completion;
 
 @end
