@@ -12,10 +12,9 @@
 
 @property (nonatomic, strong) ALAssetsLibrary   *   assetLibrary;
 @property (nonatomic, strong) NSMutableArray    *   allPhotos;          //  相片数组
-@property (nonatomic, strong) NSMutableArray    *   locationMarr;       //  照片的经纬度
 @property (nonatomic, strong) NSMutableArray    *   allPhotoAlbums;     //  相册数组
 
-@property (readwrite, copy, nonatomic) void(^loadBlock)(NSArray * photos, NSArray * location, NSArray * photoAlbums, NSError * error);
+@property (readwrite, copy, nonatomic) void(^loadBlock)(NSArray * photos, NSArray * photoAlbums, NSError * error);
 
 @end
 
@@ -40,14 +39,6 @@
     return _allPhotos;
 }
 
-
-- (NSMutableArray *)locationMarr {
-    if (!_locationMarr) {
-        _locationMarr = [NSMutableArray array];
-    }
-    return _locationMarr;
-}
-
 - (NSMutableArray *)allPhotoAlbums {
     if (!_allPhotoAlbums) {
         _allPhotoAlbums = [NSMutableArray array];
@@ -63,9 +54,9 @@
 }
 
 //  加载相片
-+ (void)loadAllPhotos:(void (^)(NSArray *, NSArray *, NSArray *, NSError *))completion {
++ (void)loadAllPhotos:(void (^)(NSArray *, NSArray *, NSError *))completion {
     [[FBLoadPhoto shareLoad].allPhotos removeAllObjects];
-    [[FBLoadPhoto shareLoad].locationMarr removeAllObjects];
+    [[FBLoadPhoto shareLoad].allPhotoAlbums removeAllObjects];
     [[FBLoadPhoto shareLoad] setLoadBlock:completion];
     [[FBLoadPhoto shareLoad] startLoading];
 }
@@ -75,16 +66,11 @@
     //  获取相片对象
     ALAssetsGroupEnumerationResultsBlock assetsEnumerationBlock = ^(ALAsset * result, NSUInteger index, BOOL * stop) {
         if (result) {
-//            NSDictionary * imageMetadata = [[NSMutableDictionary alloc] initWithDictionary:result.defaultRepresentation.metadata];
-//            NSDictionary * gpsDict = [imageMetadata objectForKey:@"{GPS}"];
             
-            //  获取照片保存的地理信息
             FBPhoto * photo = [[FBPhoto alloc] init];
             photo.asset = result;
-//            NSArray * locationArr = [NSArray arrayWithObjects:[NSString stringWithFormat:@"%f",[[gpsDict valueForKey:@"Longitude"] floatValue]],
-//                                                              [NSString stringWithFormat:@"%f",[[gpsDict valueForKey:@"Latitude"] floatValue]], nil];
-//            [self.locationMarr addObject:locationArr];
             [self.allPhotos insertObject:photo atIndex:index];
+
         }
     };
     
@@ -107,13 +93,13 @@
         }
         
         if (group == nil) {
-            self.loadBlock(self.allPhotos, self.locationMarr, self.allPhotoAlbums, nil);
+            self.loadBlock(self.allPhotos, self.allPhotoAlbums, nil);
         }
         
     };
     
     [self.assetLibrary enumerateGroupsWithTypes:(ALAssetsGroupAll) usingBlock:listGroupBlock failureBlock:^(NSError *error) {
-        self.loadBlock(nil,nil,nil, error);
+        self.loadBlock(nil, nil, error);
         
     }];
 }

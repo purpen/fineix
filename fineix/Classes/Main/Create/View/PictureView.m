@@ -9,6 +9,7 @@
 #import "PictureView.h"
 #import "FBPictureCollectionViewCell.h"
 #import "FBLoadPhoto.h"
+#import "SVProgressHUD.h"
 
 @implementation PictureView
 
@@ -60,10 +61,9 @@
 #pragma mark - 加载所有的相片
 - (void)loadAllPhotos {
     self.sortPhotosArr = [NSMutableArray array];
-    self.locationMarr = [NSMutableArray array];
     self.photoAlbumArr = [NSMutableArray array];
     
-    [FBLoadPhoto loadAllPhotos:^(NSArray *photos, NSArray *location, NSArray *photoAlbums, NSError *error) {
+    [FBLoadPhoto loadAllPhotos:^(NSArray *photos, NSArray *photoAlbums, NSError *error) {
         if (!error) {
             //  相片倒序排列
             NSEnumerator * enumerator = [photos reverseObjectEnumerator];
@@ -75,13 +75,7 @@
                 FBPhoto * firstPhoto = [self.sortPhotosArr objectAtIndex:0];
                 self.photoImgView.image = firstPhoto.originalImage;
             }
-            
-//            NSEnumerator * locationEnumerator = [location reverseObjectEnumerator];
-//            while (id locationObj = [locationEnumerator nextObject]) {
-//                [self.locationMarr addObject:locationObj];
-//            }
-//            //  默认第一张照片的地址
-//            [self setPhotoLocation:[self.locationMarr objectAtIndex:0]];
+
             
             [self.pictureView reloadData];
             //  默认选中照片列表第一个
@@ -149,6 +143,7 @@
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
     FBPhoto * photo = [self.sortPhotosArr objectAtIndex:indexPath.row];
     self.photoImgView.image = photo.originalImage;
+    [self getPhotoLocation:photo.asset.defaultRepresentation.metadata];
     
     if (self.pictureView.frame.size.height > 200) {
         //  显示画布的frame
@@ -168,14 +163,51 @@
         
         self.navView.hidden = NO;
     }
-    
-//    [self setPhotoLocation:self.locationMarr[indexPath.row]];
 }
 
-#pragma mark - 消息通知所取照片所在位置
-- (void)setPhotoLocation:(NSArray *)locationArr {
-    [[NSNotificationCenter defaultCenter] postNotificationName:@"photoLocation" object:locationArr];
+#pragma mark - 获取所选照片的经纬度
+- (void)getPhotoLocation:(NSDictionary *)location {
+    //  获取照片保存的地理信息
+    NSDictionary * imageMetadata = [[NSMutableDictionary alloc] initWithDictionary:location];
+    NSDictionary * gpsDict = [imageMetadata objectForKey:@"{GPS}"];
+    NSArray * locationArr = [NSArray arrayWithObjects:[NSString stringWithFormat:@"%f",[[gpsDict valueForKey:@"Longitude"] floatValue]],
+                             [NSString stringWithFormat:@"%f",[[gpsDict valueForKey:@"Latitude"] floatValue]], nil];
     
+    NSLog(@"＝＝＝＝＝＝＝＝＝＝＝ 经纬度%@", locationArr);
+    
+    [self setPhotoLocation:locationArr];
+}
+
+#pragma mark - 获取照片所在位置
+- (void)setPhotoLocation:(NSArray *)locationArr {
+    
+    CLLocationDegrees n = [locationArr[0] floatValue];
+    CLLocationDegrees e = [locationArr[1] floatValue];
+    
+    CLGeocoder * geocoder = [[CLGeocoder alloc] init];
+    CLLocation * location = [[CLLocation alloc] initWithLatitude:e longitude:n];
+    
+    [geocoder reverseGeocodeLocation:location completionHandler:^(NSArray<CLPlacemark *> * _Nullable placemarks, NSError * _Nullable error) {
+        if (!error) {
+            
+            /** CLPlacemark         地标
+             *  location            位置对象
+             *  addressDictionary   地址字典
+             *  name                地址详情
+             *  locality            城市
+             */
+            
+            CLPlacemark * placemark = [placemarks firstObject];
+            self.locationStr = placemark.name;
+            NSLog(@"＝＝＝＝ %@", self.locationStr);
+            [SVProgressHUD showSuccessWithStatus:self.locationStr];
+            
+        } else {
+            NSLog(@"照片没有地理位置");
+            [SVProgressHUD showErrorWithStatus:@"照片没有地理位置"];
+        }
+        
+    }];
 }
 
 #pragma mark - 上滑拉伸显示全部相片列表

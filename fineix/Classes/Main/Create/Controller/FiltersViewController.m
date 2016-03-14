@@ -147,46 +147,6 @@
 - (void)setNotification {
     //  from "FiltersView.m"
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(changeFilter:) name:@"fitlerName" object:nil];
-    
-    self.pictureView = [[PictureView alloc] init];
-    
-    //  from "PictureView.m"
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(locationData:) name:@"photoLocation" object:nil];
-}
-
-#pragma mark - 获取照片所在位置
-- (void)locationData:(NSNotification *)locationArr {
-    [self setPhotoLocation:[locationArr object]];
-    
-}
-
-- (void)setPhotoLocation:(NSArray *)locationArr {
-
-    CLLocationDegrees n = [locationArr[0] floatValue];
-    CLLocationDegrees e = [locationArr[1] floatValue];
-    
-    CLGeocoder * geocoder = [[CLGeocoder alloc] init];
-    CLLocation * location = [[CLLocation alloc] initWithLatitude:e longitude:n];
-    
-    [geocoder reverseGeocodeLocation:location completionHandler:^(NSArray<CLPlacemark *> * _Nullable placemarks, NSError * _Nullable error) {
-        if (!error) {
-            
-            /** CLPlacemark         地标
-             *  location            位置对象
-             *  addressDictionary   地址字典
-             *  name                地址详情
-             *  locality            城市
-             */
-            
-            CLPlacemark * placemark = [placemarks firstObject];
-            self.locationStr = placemark.name;
-            NSLog(@"＝＝＝＝ %@", self.locationStr);
-            
-        } else {
-            NSLog(@"获取地理位置出错");
-        }
-        
-    }];
 }
 
 - (void)dealloc {

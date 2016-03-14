@@ -9,6 +9,7 @@
 #ifndef Fineix_h
 #define Fineix_h
 
+#import "SVProgressHUD.h"
 #import "UIColor+Extension.h"
 #import "Masonry.h"
 
