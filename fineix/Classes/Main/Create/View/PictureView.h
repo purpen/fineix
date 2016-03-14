@@ -18,7 +18,6 @@
 @pro_strong UIImageView         *   photoImgView;       //  选中显示的照片
 @pro_strong UIButton            *   recoveryFrameBtn;   //  恢复视图位置
 @pro_strong PhotoAlbumsView     *   photoAlbumsView;    //  相薄页面
-//@pro_strong UIButton            *   openPhotoAlbums;    //  打开相薄
 
 @pro_strong NSMutableArray      *   locationMarr;       //  照片的位置
 @pro_strong NSMutableArray      *   sortPhotosArr;      //  排序的相片

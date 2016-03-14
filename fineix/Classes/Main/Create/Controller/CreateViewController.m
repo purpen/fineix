@@ -17,7 +17,6 @@
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
-    [self setCreateControllerUI];
     
     if (self.pictureView.hidden == YES) {
         if (self.cameraView.session) {
@@ -28,6 +27,8 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    [self setCreateControllerUI];
     
     [self setNavViewUI];
 
@@ -58,6 +59,7 @@
         CGRect openPhotoAlbumsRect = CGRectMake(0, SCREEN_HEIGHT, SCREEN_WIDTH, SCREEN_HEIGHT-50);
         [UIView animateWithDuration:.3 animations:^{
             self.pictureView.photoAlbumsView.frame = openPhotoAlbumsRect;
+            self.nextBtn.hidden = NO;
         }];
         
     } else if (self.openPhotoAlbums.selected == NO){
@@ -65,6 +67,7 @@
         CGRect openPhotoAlbumsRect = CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT-50);
         [UIView animateWithDuration:.3 animations:^{
             self.pictureView.photoAlbumsView.frame = openPhotoAlbumsRect;
+            self.nextBtn.hidden = YES;
         }];
     }
 }

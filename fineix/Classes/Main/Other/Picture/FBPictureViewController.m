@@ -161,8 +161,8 @@
 - (void)cancelDoneBtnClick {
     NSLog(@"取消发布");
     TYAlertView * cancelAlertView = [TYAlertView alertViewWithTitle:@"取消创建" message:@"是否放弃创建情景？"];
-    [cancelAlertView addAction:[TYAlertAction actionWithTitle:@"取消" style:(TYAlertActionStyleCancle) handler:^(TYAlertAction *action) {
-        NSLog(@"取消放弃");
+    [cancelAlertView addAction:[TYAlertAction actionWithTitle:@"返回上一步" style:(TYAlertActionStyleCancle) handler:^(TYAlertAction *action) {
+        [self.navigationController popViewControllerAnimated:YES];
     }]];
     [cancelAlertView addAction:[TYAlertAction actionWithTitle:@"确定" style:(TYAlertActionStyleDefault) handler:^(TYAlertAction *action) {
          [self dismissViewControllerAnimated:YES completion:nil];
@@ -204,8 +204,8 @@
 - (UIButton *)openPhotoAlbums {
     if (!_openPhotoAlbums) {
         _openPhotoAlbums = [[UIButton alloc] initWithFrame:CGRectMake(SCREEN_WIDTH/2 - 50, 0, 110, 50)];
-        [_openPhotoAlbums setImage:[UIImage imageNamed:@"icon_upward"] forState:(UIControlStateNormal)];
-        [_openPhotoAlbums setImage:[UIImage imageNamed:@"icon_down"] forState:(UIControlStateSelected)];
+        [_openPhotoAlbums setImage:[UIImage imageNamed:@"icon_down"] forState:(UIControlStateNormal)];
+        [_openPhotoAlbums setImage:[UIImage imageNamed:@"icon_upward"] forState:(UIControlStateSelected)];
         [_openPhotoAlbums setImageEdgeInsets:(UIEdgeInsetsMake(0, 90, 0, 0))];
         _openPhotoAlbums.selected = NO;
     }

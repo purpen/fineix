@@ -75,15 +75,15 @@
     //  获取相片对象
     ALAssetsGroupEnumerationResultsBlock assetsEnumerationBlock = ^(ALAsset * result, NSUInteger index, BOOL * stop) {
         if (result) {
-            NSDictionary * imageMetadata = [[NSMutableDictionary alloc] initWithDictionary:result.defaultRepresentation.metadata];
-            NSDictionary * gpsDict = [imageMetadata objectForKey:@"{GPS}"];
+//            NSDictionary * imageMetadata = [[NSMutableDictionary alloc] initWithDictionary:result.defaultRepresentation.metadata];
+//            NSDictionary * gpsDict = [imageMetadata objectForKey:@"{GPS}"];
             
             //  获取照片保存的地理信息
             FBPhoto * photo = [[FBPhoto alloc] init];
             photo.asset = result;
-            NSArray * locationArr = [NSArray arrayWithObjects:[NSString stringWithFormat:@"%f",[[gpsDict valueForKey:@"Longitude"] floatValue]],
-                                                              [NSString stringWithFormat:@"%f",[[gpsDict valueForKey:@"Latitude"] floatValue]], nil];
-            [self.locationMarr addObject:locationArr];
+//            NSArray * locationArr = [NSArray arrayWithObjects:[NSString stringWithFormat:@"%f",[[gpsDict valueForKey:@"Longitude"] floatValue]],
+//                                                              [NSString stringWithFormat:@"%f",[[gpsDict valueForKey:@"Latitude"] floatValue]], nil];
+//            [self.locationMarr addObject:locationArr];
             [self.allPhotos insertObject:photo atIndex:index];
         }
     };

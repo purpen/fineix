@@ -51,10 +51,8 @@
             make.right.equalTo(_createView.mas_right).with.offset(0);
         }];
         
+        //  相册列表
         [_createView addSubview:self.photoAlbumsView];
-        
-//        [_createView addSubview:self.openPhotoAlbums];
-        
     }
     return _createView;
 }
@@ -78,12 +76,12 @@
                 self.photoImgView.image = firstPhoto.originalImage;
             }
             
-            NSEnumerator * locationEnumerator = [location reverseObjectEnumerator];
-            while (id locationObj = [locationEnumerator nextObject]) {
-                [self.locationMarr addObject:locationObj];
-            }
-            //  默认第一张照片的地址
-            [self setPhotoLocation:[self.locationMarr objectAtIndex:0]];
+//            NSEnumerator * locationEnumerator = [location reverseObjectEnumerator];
+//            while (id locationObj = [locationEnumerator nextObject]) {
+//                [self.locationMarr addObject:locationObj];
+//            }
+//            //  默认第一张照片的地址
+//            [self setPhotoLocation:[self.locationMarr objectAtIndex:0]];
             
             [self.pictureView reloadData];
             //  默认选中照片列表第一个
@@ -171,7 +169,7 @@
         self.navView.hidden = NO;
     }
     
-    [self setPhotoLocation:self.locationMarr[indexPath.row]];
+//    [self setPhotoLocation:self.locationMarr[indexPath.row]];
 }
 
 #pragma mark - 消息通知所取照片所在位置
@@ -267,23 +265,5 @@
     }
     return _photoAlbumsView;
 }
-
-//#pragma mark - 打开相薄
-//- (UIButton *)openPhotoAlbums {
-//    if (!_openPhotoAlbums) {
-//        _openPhotoAlbums = [[UIButton alloc] initWithFrame:CGRectMake(SCREEN_WIDTH/2 - 50, -50, 100, 50)];
-//        _openPhotoAlbums.backgroundColor = [UIColor orangeColor];
-//        [_openPhotoAlbums addTarget:self action:@selector(openPhotoAlbumsClick) forControlEvents:(UIControlEventTouchUpInside)];
-//    }
-//    return _openPhotoAlbums;
-//}
-//
-//- (void)openPhotoAlbumsClick {
-//    NSLog(@"撒发生地方撒发撒大丰收的方式打发撒发生");
-//    CGRect openPhotoAlbumsRect = CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT-50);
-//    [UIView animateWithDuration:.3 animations:^{
-//        self.photoAlbumsView.frame = openPhotoAlbumsRect;
-//    }];
-//}
 
 @end
