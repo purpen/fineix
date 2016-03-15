@@ -152,7 +152,6 @@
     //  焦距
     [photoConnection setVideoScaleAndCropFactor:1];
 
-    
     [self.photosOutput captureStillImageAsynchronouslyFromConnection:photoConnection
                                                    completionHandler:^(CMSampleBufferRef imageDataSampleBuffer, NSError *error) {
                                                        

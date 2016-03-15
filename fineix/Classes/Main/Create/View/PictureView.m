@@ -54,6 +54,7 @@
         
         //  相册列表
         [_createView addSubview:self.photoAlbumsView];
+        
     }
     return _createView;
 }
@@ -65,25 +66,21 @@
     
     [FBLoadPhoto loadAllPhotos:^(NSArray *photos, NSArray *photoAlbums, NSError *error) {
         if (!error) {
-            //  相片倒序排列
             NSEnumerator * enumerator = [photos reverseObjectEnumerator];
             while (id object = [enumerator nextObject]) {
                 [self.sortPhotosArr addObject:object];
             }
-            if (photos.count) {
-                //  默认加载第一张照片
-                FBPhoto * firstPhoto = [self.sortPhotosArr objectAtIndex:0];
-                self.photoImgView.image = firstPhoto.originalImage;
-            }
-
             
             [self.pictureView reloadData];
-            //  默认选中照片列表第一个
+            
             [self.pictureView selectItemAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0]
                                            animated:YES
                                      scrollPosition:(UICollectionViewScrollPositionNone)];
             
-            //  获取全部的相册
+            if (photos.count) {
+                [self showFirstPhoto];
+            }
+            
             self.photoAlbumArr = [photoAlbums copy];
             [[NSNotificationCenter defaultCenter] postNotificationName:@"photoAlbums" object:self.photoAlbumArr];
             
@@ -102,6 +99,12 @@
         [_photoImgView setContentScaleFactor:[[UIScreen mainScreen] scale]];
     }
     return _photoImgView;
+}
+
+- (void)showFirstPhoto {
+    //  默认加载第一张照片
+    FBPhoto * firstPhoto = [self.sortPhotosArr objectAtIndex:0];
+    self.photoImgView.image = firstPhoto.originalImage;
 }
 
 #pragma mark - 相册的列表视图
@@ -135,7 +138,6 @@
     FBPictureCollectionViewCell * cell = [collectionView dequeueReusableCellWithReuseIdentifier:collectionViewCellIdentifier forIndexPath:indexPath];
     FBPhoto * photo = [self.sortPhotosArr objectAtIndex:indexPath.row];
     cell.imageView.image = photo.thumbnailImage;
-    
     return cell;
 }
 
@@ -294,6 +296,9 @@
 - (PhotoAlbumsView *)photoAlbumsView {
     if (!_photoAlbumsView) {
         _photoAlbumsView = [[PhotoAlbumsView alloc] initWithFrame:CGRectMake(0, SCREEN_HEIGHT, SCREEN_WIDTH, SCREEN_HEIGHT-50)];
+        self.sortPhotosArr = _photoAlbumsView.photosMarr;
+        _photoAlbumsView.collectionView = self.pictureView;
+        _photoAlbumsView.showImageView = self.photoImgView;
     }
     return _photoAlbumsView;
 }

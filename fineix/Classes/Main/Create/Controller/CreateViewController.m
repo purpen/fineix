@@ -126,8 +126,17 @@
     if (!_pictureView) {
         _pictureView = [[PictureView alloc] initWithFrame:CGRectMake(0, 50, SCREEN_WIDTH, SCREEN_HEIGHT - 100)];
         _pictureView.navView = self.navView;
+        _pictureView.photoAlbumsView.photoAlbumsBtn = self.openPhotoAlbums;
+        _pictureView.photoAlbumsView.nextBtn = self.nextBtn;
+        
+        //  from "PhotoAlbumsView.h"
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(changeViewTitle:) name:@"PhotoAlbumsName" object:nil];
     }
     return _pictureView;
+}
+
+- (void)changeViewTitle:(NSNotification *)title {
+    self.navTitle.text = [title object];
 }
 
 #pragma mark - 打开相机的页面
@@ -146,6 +155,10 @@
     if (self.cameraView.session) {
         [self.cameraView.session stopRunning];
     }
+}
+
+- (void)dealloc {
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:@"PhotoAlbumsName" object:nil];
 }
 
 
