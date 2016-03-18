@@ -8,6 +8,8 @@
 
 #import "ScenceAddMoreView.h"
 #import "SearchLocationViewController.h"
+#import "AddTagViewController.h"
+#import "SelectSceneViewController.h"
 
 @implementation ScenceAddMoreView
 
@@ -121,6 +123,9 @@
     [_addTag mas_updateConstraints:^(MASConstraintMaker *make) {
         make.height.equalTo(@88);
     }];
+    
+    AddTagViewController * addTagVC = [[AddTagViewController alloc] init];
+    [self.nav pushViewController:addTagVC animated:YES];
 }
 
 #pragma mark - 添加所属情景
@@ -152,6 +157,9 @@
     [_addScene mas_updateConstraints:^(MASConstraintMaker *make) {
         make.height.equalTo(@88);
     }];
+    
+    SelectSceneViewController * selectSceneVC = [[SelectSceneViewController alloc] init];
+    [self.nav pushViewController:selectSceneVC animated:YES];
 }
 
 @end

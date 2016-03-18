@@ -58,6 +58,8 @@
 		D859B7A31C92A5C300685CF6 /* ScenceAddMoreView.m in Sources */ = {isa = PBXBuildFile; fileRef = D859B7A21C92A5C300685CF6 /* ScenceAddMoreView.m */; };
 		D8BFA5F31C820F3600F5C1B7 /* FBPhoto.m in Sources */ = {isa = PBXBuildFile; fileRef = D8BFA5F21C820F3600F5C1B7 /* FBPhoto.m */; };
 		D8BFA5F61C8211DE00F5C1B7 /* FBLoadPhoto.m in Sources */ = {isa = PBXBuildFile; fileRef = D8BFA5F51C8211DE00F5C1B7 /* FBLoadPhoto.m */; };
+		D8C677111C9B9C320047A3C3 /* AddTagViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D8C677101C9B9C320047A3C3 /* AddTagViewController.m */; };
+		D8C677141C9B9C6B0047A3C3 /* SelectSceneViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D8C677131C9B9C6B0047A3C3 /* SelectSceneViewController.m */; };
 		D8D8B64D1C80ABFF00DD6BBE /* FBPictureViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D8D8B64C1C80ABFF00DD6BBE /* FBPictureViewController.m */; };
 		D8D8B6501C80AF9F00DD6BBE /* CreateViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D8D8B64F1C80AF9F00DD6BBE /* CreateViewController.m */; };
 		D8D8B6531C80B8DF00DD6BBE /* FBFootView.m in Sources */ = {isa = PBXBuildFile; fileRef = D8D8B6521C80B8DF00DD6BBE /* FBFootView.m */; };
@@ -155,6 +157,10 @@
 		D8BFA5F21C820F3600F5C1B7 /* FBPhoto.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FBPhoto.m; sourceTree = "<group>"; };
 		D8BFA5F41C8211DE00F5C1B7 /* FBLoadPhoto.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FBLoadPhoto.h; sourceTree = "<group>"; };
 		D8BFA5F51C8211DE00F5C1B7 /* FBLoadPhoto.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FBLoadPhoto.m; sourceTree = "<group>"; };
+		D8C6770F1C9B9C320047A3C3 /* AddTagViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AddTagViewController.h; sourceTree = "<group>"; };
+		D8C677101C9B9C320047A3C3 /* AddTagViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AddTagViewController.m; sourceTree = "<group>"; };
+		D8C677121C9B9C6B0047A3C3 /* SelectSceneViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SelectSceneViewController.h; sourceTree = "<group>"; };
+		D8C677131C9B9C6B0047A3C3 /* SelectSceneViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SelectSceneViewController.m; sourceTree = "<group>"; };
 		D8D8B64B1C80ABFF00DD6BBE /* FBPictureViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FBPictureViewController.h; sourceTree = "<group>"; };
 		D8D8B64C1C80ABFF00DD6BBE /* FBPictureViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FBPictureViewController.m; sourceTree = "<group>"; };
 		D8D8B64E1C80AF9F00DD6BBE /* CreateViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CreateViewController.h; sourceTree = "<group>"; };
@@ -577,14 +583,18 @@
 		D8EFC58E1C802DAD0002509D /* Controller */ = {
 			isa = PBXGroup;
 			children = (
+				D8C677121C9B9C6B0047A3C3 /* SelectSceneViewController.h */,
+				D8C677131C9B9C6B0047A3C3 /* SelectSceneViewController.m */,
+				D8C6770F1C9B9C320047A3C3 /* AddTagViewController.h */,
+				D8C677101C9B9C320047A3C3 /* AddTagViewController.m */,
 				D8FC11DB1C96CAC6009D7AFE /* SearchLocationViewController.h */,
 				D8FC11DC1C96CAC6009D7AFE /* SearchLocationViewController.m */,
+				D82399C01C8D6EB5007428D1 /* ReleaseViewController.h */,
+				D82399BA1C8D6EB5007428D1 /* ReleaseViewController.m */,
 				D82399C31C8D6EB5007428D1 /* MarkGoodsViewController.h */,
 				D82399BE1C8D6EB5007428D1 /* MarkGoodsViewController.m */,
 				D82399C21C8D6EB5007428D1 /* AddUrlViewController.h */,
 				D82399BF1C8D6EB5007428D1 /* AddUrlViewController.m */,
-				D82399C01C8D6EB5007428D1 /* ReleaseViewController.h */,
-				D82399BA1C8D6EB5007428D1 /* ReleaseViewController.m */,
 				D82399BC1C8D6EB5007428D1 /* FiltersViewController.h */,
 				D82399BB1C8D6EB5007428D1 /* FiltersViewController.m */,
 				D82399C41C8D6EB5007428D1 /* ClipImageViewController.h */,
@@ -842,8 +852,10 @@
 				D82399CB1C8D6EB5007428D1 /* FiltersViewController.m in Sources */,
 				D859B79B1C926DBC00685CF6 /* PictureView.m in Sources */,
 				D82399B71C8D6EAD007428D1 /* FiltersView.m in Sources */,
+				D8C677111C9B9C320047A3C3 /* AddTagViewController.m in Sources */,
 				D859B7981C91803400685CF6 /* ScenceMessageView.m in Sources */,
 				D82399D01C8D6EB5007428D1 /* ClipImageViewController.m in Sources */,
+				D8C677141C9B9C6B0047A3C3 /* SelectSceneViewController.m in Sources */,
 				D8EFC5A91C80326E0002509D /* FBTabBar.m in Sources */,
 				1FB14C781C96AD3C00319276 /* FBSearchLocationViewController.m in Sources */,
 			);
