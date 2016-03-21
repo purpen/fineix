@@ -7,8 +7,8 @@
 //
 
 #import "AddUrlViewController.h"
-
-@interface AddUrlViewController ()
+#import <SVProgressHUD/SVProgressHUD.h>
+@interface AddUrlViewController () <UIWebViewDelegate>
 
 @end
 
@@ -19,6 +19,27 @@
     self.view.backgroundColor = [UIColor whiteColor];
     
     [self setNavViewUI];
+    
+    UIButton * btn = [[UIButton alloc] initWithFrame:CGRectMake(100, 200, 100, 50)];
+    btn.backgroundColor = [UIColor redColor];
+    [btn addTarget:self action:@selector(open) forControlEvents:(UIControlEventTouchUpInside)];
+    
+    [self.view addSubview:btn];
+}
+
+- (void)open {
+    UIWebView * web = [[UIWebView alloc] initWithFrame:CGRectMake(0, 50, SCREEN_WIDTH, SCREEN_HEIGHT- 50)];
+    web.delegate = self;
+    [self.view addSubview:web];
+    [web loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:@"https://m.baidu.com"]]];
+
+}
+
+- (void)webViewDidFinishLoad:(UIWebView *)webView {
+    NSString * urlStr = webView.request.URL.absoluteString;
+    [SVProgressHUD showInfoWithStatus:urlStr];
+    NSString * theTitle=[webView stringByEvaluatingJavaScriptFromString:@"document.title"];
+    NSLog(@"当前页面的链接：%@， 标题是：%@", urlStr, theTitle);
 }
 
 - (void)setNavViewUI {

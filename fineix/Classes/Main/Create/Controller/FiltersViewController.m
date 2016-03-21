@@ -132,7 +132,7 @@
 #pragma mark - 使滤镜视图消失
 - (UIButton *)cancelFilter {
     if (!_cancelFilter) {
-        _cancelFilter = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT - 100)];
+        _cancelFilter = [[UIButton alloc] initWithFrame:CGRectMake(0, 50, SCREEN_WIDTH, SCREEN_HEIGHT - 100)];
         [_cancelFilter addTarget:self action:@selector(cancelFilterView) forControlEvents:(UIControlEventTouchUpInside)];
     }
     return _cancelFilter;
