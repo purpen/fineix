@@ -27,7 +27,6 @@
     [self mapView];
     [self startFixedPosition];
     
-    
 }
 
 -(void)mapView{

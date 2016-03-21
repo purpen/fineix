@@ -7,8 +7,9 @@
 //
 
 #import "SearchLocationViewController.h"
+#import <BaiduMapAPI_Search/BMKSearchComponent.h>
 
-@interface SearchLocationViewController ()
+@interface SearchLocationViewController () <BMKPoiSearchDelegate>
 
 @end
 
