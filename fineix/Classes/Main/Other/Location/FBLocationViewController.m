@@ -37,7 +37,9 @@
     [self TheLoadMore];
     //搜索输入
     _searchTF.delegate = self;
+    _searchTF.leftView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"Search2"]];
     
+    _searchTF.leftViewMode = UITextFieldViewModeAlways;
 }
 
 
@@ -101,7 +103,8 @@
         [self POIsearch:_m :@"景点"];
         _m++;
         NSLog(@"%d",_m);
-        self.tableV.mj_footer.hidden = YES;
+        //self.tableV.mj_footer.hidden = YES;
+        [self.tableV.mj_footer endRefreshing];
     }];
     
 }
@@ -144,7 +147,7 @@
     //发起检索
     BMKNearbySearchOption *option = [[BMKNearbySearchOption alloc]init];
     option.pageIndex = page;
-    option.pageCapacity = 30;
+    option.pageCapacity = 20;
     option.location = CLLocationCoordinate2DMake(_la , _lo);
     option.keyword = str;
     BOOL flag = [_poiSearcher poiSearchNearBy:option];

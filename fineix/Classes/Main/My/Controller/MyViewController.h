@@ -2,13 +2,12 @@
 //  MyViewController.h
 //  fineix
 //
-//  Created by FLYang on 16/2/26.
+//  Created by THN-Dong on 16/3/17.
 //  Copyright © 2016年 taihuoniao. All rights reserved.
 //
 
 #import <UIKit/UIKit.h>
-#import "FBViewController.h"
 
-@interface MyViewController : FBViewController
+@interface MyViewController : UIViewController
 
 @end

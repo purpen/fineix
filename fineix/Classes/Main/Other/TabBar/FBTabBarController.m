@@ -68,7 +68,8 @@
     HomeViewController * homeVC = [[HomeViewController alloc] init];
     DiscoverViewController * discoverVC = [[DiscoverViewController alloc] init];
     MallViewController * mallVC = [[MallViewController alloc] init];
-    MyViewController * myVC = [[MyViewController alloc] initWithNibName:@"MyViewController" bundle:nil];
+    UIStoryboard *myStory = [UIStoryboard storyboardWithName:@"My" bundle:[NSBundle mainBundle]];
+    MyViewController * myVC = [myStory instantiateViewControllerWithIdentifier:@"MyViewController"];
     
     _homeNav = [[FBNavigationViewController alloc] initWithRootViewController:homeVC];
     _discoverNav = [[FBNavigationViewController alloc] initWithRootViewController:discoverVC];
