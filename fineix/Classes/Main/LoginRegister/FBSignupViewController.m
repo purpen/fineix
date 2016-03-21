@@ -9,13 +9,17 @@
 #import "FBSignupViewController.h"
 #import "NSString+Helper.h"
 #import "Fineix.h"
+#import "FBRequest.h"
+#import "FBAPI.h"
 
-@interface FBSignupViewController ()
+
+@interface FBSignupViewController ()<FBRequestDelegate>
 
 @property (weak, nonatomic) IBOutlet UITextField *phoneNumTF;
 @property (weak, nonatomic) IBOutlet UITextField *pwdTF;
 @property (weak, nonatomic) IBOutlet UITextField *verificationCode;
 @end
+static NSString *const RegisterCodeURL = @"/auth/register";
 
 @implementation FBSignupViewController
 
@@ -48,8 +52,37 @@
                              @"verify_code": self.verificationCode.text,
                              @"from_to" : @1
                              };
+    FBRequest *request = [FBAPI postWithUrlString:RegisterCodeURL requestDictionary:params delegate:self];
+    request.flag = RegisterCodeURL;
+    [request startRequest];
+    [SVProgressHUD showWithMaskType:SVProgressHUDMaskTypeClear];
     
 }
+
+#pragma mark - FBRequest Delegate
+//-(void)requestSucess:(FBRequest *)request result:(id)result{
+//    if ([request.flag isEqualToString:RegisterCodeURL]) {
+//        if ([[result objectForKey:@"success"] isEqualToNumber:@1]) {
+//            UserInfo * userInfo = [UserInfo mj_objectWithKeyValues:[result objectForKey:@"data"]];
+//            [userInfo updateUserInfoEntity];
+//            UserInfoEntity * userEntity = [UserInfoEntity defaultUserInfoEntity];
+//            userEntity.isLogin = YES;
+//            dispatch_async(dispatch_get_global_queue(0, 0), ^{
+//                [userInfo saveOrUpdate];
+//                //                NSUserDefaults * userSet = [NSUserDefaults standardUserDefaults];
+//                //                [userSet setObject:[NSNumber numberWithBool:userEntity.isLogin] forKey:@"isLogin"];
+//                //                [userSet synchronize];
+//            });
+//            
+//            [self dismissViewControllerAnimated:YES completion:nil];
+//            [SVProgressHUD showSuccessWithStatus:@"注册成功"];
+//        } else {
+//            NSString * message = result[@"message"];
+//            [SVProgressHUD showInfoWithStatus:message];
+//        }
+//    }
+//
+//}
 
 /*
 #pragma mark - Navigation

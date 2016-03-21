@@ -42,7 +42,7 @@
 		1F0EE6D11CA00D53000631F0 /* FBAPI.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F0EE6CC1CA00D53000631F0 /* FBAPI.m */; };
 		1F0EE6D21CA00D53000631F0 /* FBRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F0EE6CE1CA00D53000631F0 /* FBRequest.m */; };
 		1F0EE6D31CA00D53000631F0 /* HttpTool.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F0EE6D01CA00D53000631F0 /* HttpTool.m */; };
-		1F17766E1C9BAA250080ADFC /* MyHomePageView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F17766D1C9BAA250080ADFC /* MyHomePageView.m */; };
+		1F0EE6E91CA01421000631F0 /* MyHomePageView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F0EE6E81CA01421000631F0 /* MyHomePageView.m */; };
 		1F1776721C9BB52F0080ADFC /* MyView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1F1776711C9BB52F0080ADFC /* MyView.xib */; };
 		1F1776B41C9BE8D50080ADFC /* ChanelView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F1776B31C9BE8D50080ADFC /* ChanelView.m */; };
 		1F1776B81C9BEF3A0080ADFC /* chanel.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1F1776B71C9BEF3A0080ADFC /* chanel.xib */; };
@@ -204,8 +204,8 @@
 		1F0EE6CF1CA00D53000631F0 /* HttpTool.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = HttpTool.h; path = Network/HttpTool.h; sourceTree = "<group>"; };
 		1F0EE6D01CA00D53000631F0 /* HttpTool.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = HttpTool.m; path = Network/HttpTool.m; sourceTree = "<group>"; };
 		1F0EE6D41CA00D5F000631F0 /* FBConfig.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FBConfig.h; sourceTree = "<group>"; };
-		1F17766C1C9BAA250080ADFC /* MyHomePageView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MyHomePageView.h; path = ../../../../../MyHomePageView.h; sourceTree = "<group>"; };
-		1F17766D1C9BAA250080ADFC /* MyHomePageView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MyHomePageView.m; path = ../../../../../MyHomePageView.m; sourceTree = "<group>"; };
+		1F0EE6E71CA01421000631F0 /* MyHomePageView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyHomePageView.h; sourceTree = "<group>"; };
+		1F0EE6E81CA01421000631F0 /* MyHomePageView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyHomePageView.m; sourceTree = "<group>"; };
 		1F1776711C9BB52F0080ADFC /* MyView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MyView.xib; sourceTree = "<group>"; };
 		1F1776B21C9BE8D50080ADFC /* ChanelView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChanelView.h; sourceTree = "<group>"; };
 		1F1776B31C9BE8D50080ADFC /* ChanelView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChanelView.m; sourceTree = "<group>"; };
@@ -505,11 +505,18 @@
 			path = Wechat;
 			sourceTree = "<group>";
 		};
+		1F0EE6EA1CA015FB000631F0 /* DataBase */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = DataBase;
+			sourceTree = "<group>";
+		};
 		1F1776701C9BAAE10080ADFC /* View */ = {
 			isa = PBXGroup;
 			children = (
-				1F17766C1C9BAA250080ADFC /* MyHomePageView.h */,
-				1F17766D1C9BAA250080ADFC /* MyHomePageView.m */,
+				1F0EE6E71CA01421000631F0 /* MyHomePageView.h */,
+				1F0EE6E81CA01421000631F0 /* MyHomePageView.m */,
 				1F1776711C9BB52F0080ADFC /* MyView.xib */,
 				1F1776B21C9BE8D50080ADFC /* ChanelView.h */,
 				1F1776B31C9BE8D50080ADFC /* ChanelView.m */,
@@ -855,19 +862,12 @@
 		D8EFC56F1C801BE40002509D /* Expand */ = {
 			isa = PBXGroup;
 			children = (
+				1F0EE6EA1CA015FB000631F0 /* DataBase */,
 				1F0EE6571C9F9E6F000631F0 /* Network */,
-				D8EFC5701C801BE40002509D /* DataBase */,
 				D8EFC5711C801BE40002509D /* Macro */,
 				D8EFC5731C801BE40002509D /* Tool */,
 			);
 			path = Expand;
-			sourceTree = "<group>";
-		};
-		D8EFC5701C801BE40002509D /* DataBase */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = DataBase;
 			sourceTree = "<group>";
 		};
 		D8EFC5711C801BE40002509D /* Macro */ = {
@@ -1197,6 +1197,7 @@
 				D8D8B64D1C80ABFF00DD6BBE /* FBPictureViewController.m in Sources */,
 				1F0EE6CA1CA00D34000631F0 /* NSString+Helper.m in Sources */,
 				800507451C7A9CDD005AF0BE /* fineix.xcdatamodeld in Sources */,
+				1F0EE6E91CA01421000631F0 /* MyHomePageView.m in Sources */,
 				D8EFC5811C8024500002509D /* UIColor+Extension.m in Sources */,
 				1F1776B41C9BE8D50080ADFC /* ChanelView.m in Sources */,
 				D8FC11DA1C966A48009D7AFE /* PhotoAlbumsTableViewCell.m in Sources */,
@@ -1214,7 +1215,6 @@
 				1FDD12E01C9A59DF00FE9C57 /* MyViewController.m in Sources */,
 				1FDD12EF1C9A90F300FE9C57 /* MyShippingAddressViewController.m in Sources */,
 				1F0EE6D11CA00D53000631F0 /* FBAPI.m in Sources */,
-				1F17766E1C9BAA250080ADFC /* MyHomePageView.m in Sources */,
 				1F0EE6D21CA00D53000631F0 /* FBRequest.m in Sources */,
 				D8E3E3AE1C8FCCB6000CA536 /* FBViewController.m in Sources */,
 				D8EFC58A1C802D300002509D /* HomeViewController.m in Sources */,
