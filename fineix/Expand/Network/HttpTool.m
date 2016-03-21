@@ -1,16 +1,16 @@
 //
 //  HttpTool.m
-//  fineix
+//  LoveLimitFree
 //
-//  Created by FLYang on 16/2/26.
-//  Copyright © 2016年 taihuoniao. All rights reserved.
+//  Created by andezhou on 15/9/8.
+//  Copyright (c) 2015年 周安德. All rights reserved.
 //
 
 #import "HttpTool.h"
 #import "AFNetworking.h"
 
 // 服务器地址
-static NSString *const kBaseURLString = @"http://www.baidu.com";
+static NSString *const kBaseURLString = @"http://t.taihuoniao.com/app/api";
 
 @implementation AFHttpClient
 

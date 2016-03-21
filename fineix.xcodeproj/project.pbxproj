@@ -46,7 +46,6 @@
 		D82399CE1C8D6EB5007428D1 /* AddUrlViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D82399BF1C8D6EB5007428D1 /* AddUrlViewController.m */; };
 		D82399CF1C8D6EB5007428D1 /* PictureToolViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D82399C51C8D6EB5007428D1 /* PictureToolViewController.m */; };
 		D82399D01C8D6EB5007428D1 /* ClipImageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D82399C61C8D6EB5007428D1 /* ClipImageViewController.m */; };
-		D82399D31C8D6EBC007428D1 /* FBFilters.m in Sources */ = {isa = PBXBuildFile; fileRef = D82399D21C8D6EBC007428D1 /* FBFilters.m */; };
 		D82DAF991C82026700E0650B /* FBPictureCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D82DAF981C82026700E0650B /* FBPictureCollectionViewCell.m */; };
 		D8368FCD1C85A67700673306 /* CropImageView.m in Sources */ = {isa = PBXBuildFile; fileRef = D8368FCC1C85A67700673306 /* CropImageView.m */; };
 		D83A64321C8E7765003DB8BB /* Photos.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D83A64311C8E7765003DB8BB /* Photos.framework */; };
@@ -58,17 +57,26 @@
 		D859B7981C91803400685CF6 /* ScenceMessageView.m in Sources */ = {isa = PBXBuildFile; fileRef = D859B7971C91803400685CF6 /* ScenceMessageView.m */; };
 		D859B79B1C926DBC00685CF6 /* PictureView.m in Sources */ = {isa = PBXBuildFile; fileRef = D859B79A1C926DBC00685CF6 /* PictureView.m */; };
 		D859B7A31C92A5C300685CF6 /* ScenceAddMoreView.m in Sources */ = {isa = PBXBuildFile; fileRef = D859B7A21C92A5C300685CF6 /* ScenceAddMoreView.m */; };
-		D8BFA5F31C820F3600F5C1B7 /* FBPhoto.m in Sources */ = {isa = PBXBuildFile; fileRef = D8BFA5F21C820F3600F5C1B7 /* FBPhoto.m */; };
+		D87A6B541C9C109100299BB4 /* libstdc++.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = D87A6B531C9C109100299BB4 /* libstdc++.tbd */; };
+		D87A6B561C9C10A200299BB4 /* libz.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = D87A6B551C9C10A200299BB4 /* libz.tbd */; };
 		D8BFA5F61C8211DE00F5C1B7 /* FBLoadPhoto.m in Sources */ = {isa = PBXBuildFile; fileRef = D8BFA5F51C8211DE00F5C1B7 /* FBLoadPhoto.m */; };
 		D8C677111C9B9C320047A3C3 /* AddTagViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D8C677101C9B9C320047A3C3 /* AddTagViewController.m */; };
 		D8C677141C9B9C6B0047A3C3 /* SelectSceneViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D8C677131C9B9C6B0047A3C3 /* SelectSceneViewController.m */; };
+		D8C677191C9B9F290047A3C3 /* FBPhoto.m in Sources */ = {isa = PBXBuildFile; fileRef = D8C677161C9B9F290047A3C3 /* FBPhoto.m */; };
+		D8C6771A1C9B9F290047A3C3 /* FBFilters.m in Sources */ = {isa = PBXBuildFile; fileRef = D8C677181C9B9F290047A3C3 /* FBFilters.m */; };
+		D8C6771D1C9BDB2F0047A3C3 /* SearchLocationView.m in Sources */ = {isa = PBXBuildFile; fileRef = D8C6771C1C9BDB2F0047A3C3 /* SearchLocationView.m */; };
+		D8C677241C9BE35D0047A3C3 /* HttpTool.m in Sources */ = {isa = PBXBuildFile; fileRef = D8C6771F1C9BE35D0047A3C3 /* HttpTool.m */; };
+		D8C6772B1C9BE4950047A3C3 /* NSString+FBMD5.m in Sources */ = {isa = PBXBuildFile; fileRef = D8C677271C9BE4950047A3C3 /* NSString+FBMD5.m */; };
+		D8C6772C1C9BE4950047A3C3 /* NSString+Helper.m in Sources */ = {isa = PBXBuildFile; fileRef = D8C6772A1C9BE4950047A3C3 /* NSString+Helper.m */; };
+		D8C6772F1C9BE9B10047A3C3 /* ImageIO.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D8C6772E1C9BE9B10047A3C3 /* ImageIO.framework */; };
+		D8C677351C9BF5BF0047A3C3 /* FBAPI.m in Sources */ = {isa = PBXBuildFile; fileRef = D8C677311C9BF5BF0047A3C3 /* FBAPI.m */; };
+		D8C677361C9BF5BF0047A3C3 /* FBRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = D8C677321C9BF5BF0047A3C3 /* FBRequest.m */; };
 		D8D8B64D1C80ABFF00DD6BBE /* FBPictureViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D8D8B64C1C80ABFF00DD6BBE /* FBPictureViewController.m */; };
 		D8D8B6501C80AF9F00DD6BBE /* CreateViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D8D8B64F1C80AF9F00DD6BBE /* CreateViewController.m */; };
 		D8D8B6531C80B8DF00DD6BBE /* FBFootView.m in Sources */ = {isa = PBXBuildFile; fileRef = D8D8B6521C80B8DF00DD6BBE /* FBFootView.m */; };
 		D8E3E3AE1C8FCCB6000CA536 /* FBViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D8E3E3AD1C8FCCB6000CA536 /* FBViewController.m */; };
 		D8EFC57A1C801E8C0002509D /* FBNavigationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D8EFC5791C801E8C0002509D /* FBNavigationViewController.m */; };
 		D8EFC5811C8024500002509D /* UIColor+Extension.m in Sources */ = {isa = PBXBuildFile; fileRef = D8EFC57B1C8024500002509D /* UIColor+Extension.m */; };
-		D8EFC5821C8024500002509D /* HttpTool.m in Sources */ = {isa = PBXBuildFile; fileRef = D8EFC57D1C8024500002509D /* HttpTool.m */; };
 		D8EFC5831C8024500002509D /* UIImageView+SDWedImage.m in Sources */ = {isa = PBXBuildFile; fileRef = D8EFC57F1C8024500002509D /* UIImageView+SDWedImage.m */; };
 		D8EFC5871C802B6C0002509D /* FBTabBarController.m in Sources */ = {isa = PBXBuildFile; fileRef = D8EFC5861C802B6C0002509D /* FBTabBarController.m */; };
 		D8EFC58A1C802D300002509D /* HomeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D8EFC5891C802D300002509D /* HomeViewController.m */; };
@@ -77,6 +85,7 @@
 		D8EFC5A31C802E3D0002509D /* MyViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D8EFC5A11C802E3D0002509D /* MyViewController.m */; };
 		D8EFC5A41C802E3D0002509D /* MyViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D8EFC5A21C802E3D0002509D /* MyViewController.xib */; };
 		D8EFC5A91C80326E0002509D /* FBTabBar.m in Sources */ = {isa = PBXBuildFile; fileRef = D8EFC5A81C80326E0002509D /* FBTabBar.m */; };
+		D8F597661C9F965200F6601D /* FBSearchView.m in Sources */ = {isa = PBXBuildFile; fileRef = D8F597651C9F965200F6601D /* FBSearchView.m */; };
 		D8FC11D71C9669AF009D7AFE /* PhotoAlbumsView.m in Sources */ = {isa = PBXBuildFile; fileRef = D8FC11D61C9669AF009D7AFE /* PhotoAlbumsView.m */; };
 		D8FC11DA1C966A48009D7AFE /* PhotoAlbumsTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D8FC11D91C966A48009D7AFE /* PhotoAlbumsTableViewCell.m */; };
 		D8FC11DD1C96CAC6009D7AFE /* SearchLocationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D8FC11DC1C96CAC6009D7AFE /* SearchLocationViewController.m */; };
@@ -141,8 +150,6 @@
 		D82399C61C8D6EB5007428D1 /* ClipImageViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ClipImageViewController.m; sourceTree = "<group>"; };
 		D82399C71C8D6EB5007428D1 /* CropImageViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CropImageViewController.h; sourceTree = "<group>"; };
 		D82399C81C8D6EB5007428D1 /* PictureToolViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PictureToolViewController.h; sourceTree = "<group>"; };
-		D82399D11C8D6EBC007428D1 /* FBFilters.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FBFilters.h; sourceTree = "<group>"; };
-		D82399D21C8D6EBC007428D1 /* FBFilters.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FBFilters.m; sourceTree = "<group>"; };
 		D82DAF971C82026700E0650B /* FBPictureCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FBPictureCollectionViewCell.h; sourceTree = "<group>"; };
 		D82DAF981C82026700E0650B /* FBPictureCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FBPictureCollectionViewCell.m; sourceTree = "<group>"; };
 		D8368FCB1C85A67700673306 /* CropImageView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CropImageView.h; sourceTree = "<group>"; };
@@ -158,14 +165,32 @@
 		D859B79A1C926DBC00685CF6 /* PictureView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PictureView.m; sourceTree = "<group>"; };
 		D859B7A11C92A5C300685CF6 /* ScenceAddMoreView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ScenceAddMoreView.h; sourceTree = "<group>"; };
 		D859B7A21C92A5C300685CF6 /* ScenceAddMoreView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ScenceAddMoreView.m; sourceTree = "<group>"; };
-		D8BFA5F11C820F3600F5C1B7 /* FBPhoto.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FBPhoto.h; sourceTree = "<group>"; };
-		D8BFA5F21C820F3600F5C1B7 /* FBPhoto.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FBPhoto.m; sourceTree = "<group>"; };
+		D87A6B531C9C109100299BB4 /* libstdc++.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = "libstdc++.tbd"; path = "usr/lib/libstdc++.tbd"; sourceTree = SDKROOT; };
+		D87A6B551C9C10A200299BB4 /* libz.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libz.tbd; path = usr/lib/libz.tbd; sourceTree = SDKROOT; };
 		D8BFA5F41C8211DE00F5C1B7 /* FBLoadPhoto.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FBLoadPhoto.h; sourceTree = "<group>"; };
 		D8BFA5F51C8211DE00F5C1B7 /* FBLoadPhoto.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FBLoadPhoto.m; sourceTree = "<group>"; };
 		D8C6770F1C9B9C320047A3C3 /* AddTagViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AddTagViewController.h; sourceTree = "<group>"; };
 		D8C677101C9B9C320047A3C3 /* AddTagViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AddTagViewController.m; sourceTree = "<group>"; };
 		D8C677121C9B9C6B0047A3C3 /* SelectSceneViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SelectSceneViewController.h; sourceTree = "<group>"; };
 		D8C677131C9B9C6B0047A3C3 /* SelectSceneViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SelectSceneViewController.m; sourceTree = "<group>"; };
+		D8C677151C9B9F290047A3C3 /* FBPhoto.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FBPhoto.h; sourceTree = "<group>"; };
+		D8C677161C9B9F290047A3C3 /* FBPhoto.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FBPhoto.m; sourceTree = "<group>"; };
+		D8C677171C9B9F290047A3C3 /* FBFilters.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FBFilters.h; sourceTree = "<group>"; };
+		D8C677181C9B9F290047A3C3 /* FBFilters.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FBFilters.m; sourceTree = "<group>"; };
+		D8C6771B1C9BDB2F0047A3C3 /* SearchLocationView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SearchLocationView.h; sourceTree = "<group>"; };
+		D8C6771C1C9BDB2F0047A3C3 /* SearchLocationView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SearchLocationView.m; sourceTree = "<group>"; };
+		D8C6771E1C9BE35D0047A3C3 /* HttpTool.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HttpTool.h; sourceTree = "<group>"; };
+		D8C6771F1C9BE35D0047A3C3 /* HttpTool.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HttpTool.m; sourceTree = "<group>"; };
+		D8C677271C9BE4950047A3C3 /* NSString+FBMD5.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+FBMD5.m"; sourceTree = "<group>"; };
+		D8C677281C9BE4950047A3C3 /* NSString+FBMD5.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+FBMD5.h"; sourceTree = "<group>"; };
+		D8C677291C9BE4950047A3C3 /* NSString+Helper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+Helper.h"; sourceTree = "<group>"; };
+		D8C6772A1C9BE4950047A3C3 /* NSString+Helper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+Helper.m"; sourceTree = "<group>"; };
+		D8C6772D1C9BE5C20047A3C3 /* FBConfig.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FBConfig.h; sourceTree = "<group>"; };
+		D8C6772E1C9BE9B10047A3C3 /* ImageIO.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ImageIO.framework; path = System/Library/Frameworks/ImageIO.framework; sourceTree = SDKROOT; };
+		D8C677311C9BF5BF0047A3C3 /* FBAPI.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FBAPI.m; sourceTree = "<group>"; };
+		D8C677321C9BF5BF0047A3C3 /* FBRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FBRequest.m; sourceTree = "<group>"; };
+		D8C677331C9BF5BF0047A3C3 /* FBAPI.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FBAPI.h; sourceTree = "<group>"; };
+		D8C677341C9BF5BF0047A3C3 /* FBRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FBRequest.h; sourceTree = "<group>"; };
 		D8D8B64B1C80ABFF00DD6BBE /* FBPictureViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FBPictureViewController.h; sourceTree = "<group>"; };
 		D8D8B64C1C80ABFF00DD6BBE /* FBPictureViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FBPictureViewController.m; sourceTree = "<group>"; };
 		D8D8B64E1C80AF9F00DD6BBE /* CreateViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CreateViewController.h; sourceTree = "<group>"; };
@@ -178,8 +203,6 @@
 		D8EFC5791C801E8C0002509D /* FBNavigationViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FBNavigationViewController.m; sourceTree = "<group>"; };
 		D8EFC57B1C8024500002509D /* UIColor+Extension.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIColor+Extension.m"; sourceTree = "<group>"; };
 		D8EFC57C1C8024500002509D /* UIImageView+SDWedImage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImageView+SDWedImage.h"; sourceTree = "<group>"; };
-		D8EFC57D1C8024500002509D /* HttpTool.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HttpTool.m; sourceTree = "<group>"; };
-		D8EFC57E1C8024500002509D /* HttpTool.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HttpTool.h; sourceTree = "<group>"; };
 		D8EFC57F1C8024500002509D /* UIImageView+SDWedImage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImageView+SDWedImage.m"; sourceTree = "<group>"; };
 		D8EFC5801C8024500002509D /* UIColor+Extension.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIColor+Extension.h"; sourceTree = "<group>"; };
 		D8EFC5841C80257F0002509D /* Fineix.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Fineix.h; sourceTree = "<group>"; };
@@ -196,6 +219,8 @@
 		D8EFC5A21C802E3D0002509D /* MyViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MyViewController.xib; sourceTree = "<group>"; };
 		D8EFC5A71C80326E0002509D /* FBTabBar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FBTabBar.h; sourceTree = "<group>"; };
 		D8EFC5A81C80326E0002509D /* FBTabBar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FBTabBar.m; sourceTree = "<group>"; };
+		D8F597641C9F965200F6601D /* FBSearchView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FBSearchView.h; sourceTree = "<group>"; };
+		D8F597651C9F965200F6601D /* FBSearchView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FBSearchView.m; sourceTree = "<group>"; };
 		D8FC11D51C9669AF009D7AFE /* PhotoAlbumsView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PhotoAlbumsView.h; sourceTree = "<group>"; };
 		D8FC11D61C9669AF009D7AFE /* PhotoAlbumsView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PhotoAlbumsView.m; sourceTree = "<group>"; };
 		D8FC11D81C966A48009D7AFE /* PhotoAlbumsTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PhotoAlbumsTableViewCell.h; sourceTree = "<group>"; };
@@ -209,6 +234,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D87A6B561C9C10A200299BB4 /* libz.tbd in Frameworks */,
+				D87A6B541C9C109100299BB4 /* libstdc++.tbd in Frameworks */,
+				D8C6772F1C9BE9B10047A3C3 /* ImageIO.framework in Frameworks */,
 				280045131C805B82005F5C2E /* QuartzCore.framework in Frameworks */,
 				280045191C805CA3005F5C2E /* CoreGraphics.framework in Frameworks */,
 				D83A643B1C8E7ED2003DB8BB /* CoreImage.framework in Frameworks */,
@@ -242,6 +270,8 @@
 		1FB14C7A1C96AD4600319276 /* Public */ = {
 			isa = PBXGroup;
 			children = (
+				D8F597641C9F965200F6601D /* FBSearchView.h */,
+				D8F597651C9F965200F6601D /* FBSearchView.m */,
 			);
 			name = Public;
 			sourceTree = "<group>";
@@ -295,6 +325,9 @@
 		4121957EDE4D4049941B2B88 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				D87A6B551C9C10A200299BB4 /* libz.tbd */,
+				D87A6B531C9C109100299BB4 /* libstdc++.tbd */,
+				D8C6772E1C9BE9B10047A3C3 /* ImageIO.framework */,
 				D83A643A1C8E7ED2003DB8BB /* CoreImage.framework */,
 				D83A64381C8E7EC5003DB8BB /* CoreMedia.framework */,
 				D83A64361C8E7EBD003DB8BB /* CoreVideo.framework */,
@@ -371,10 +404,6 @@
 		D82FC3CC1C820EF300DCAA7C /* Other */ = {
 			isa = PBXGroup;
 			children = (
-				D82399D11C8D6EBC007428D1 /* FBFilters.h */,
-				D82399D21C8D6EBC007428D1 /* FBFilters.m */,
-				D8BFA5F11C820F3600F5C1B7 /* FBPhoto.h */,
-				D8BFA5F21C820F3600F5C1B7 /* FBPhoto.m */,
 				D8BFA5F41C8211DE00F5C1B7 /* FBLoadPhoto.h */,
 				D8BFA5F51C8211DE00F5C1B7 /* FBLoadPhoto.m */,
 			);
@@ -549,6 +578,7 @@
 			isa = PBXGroup;
 			children = (
 				D8EFC5841C80257F0002509D /* Fineix.h */,
+				D8C6772D1C9BE5C20047A3C3 /* FBConfig.h */,
 			);
 			path = Macro;
 			sourceTree = "<group>";
@@ -556,6 +586,12 @@
 		D8EFC5721C801BE40002509D /* Network */ = {
 			isa = PBXGroup;
 			children = (
+				D8C677331C9BF5BF0047A3C3 /* FBAPI.h */,
+				D8C677311C9BF5BF0047A3C3 /* FBAPI.m */,
+				D8C677341C9BF5BF0047A3C3 /* FBRequest.h */,
+				D8C677321C9BF5BF0047A3C3 /* FBRequest.m */,
+				D8C6771E1C9BE35D0047A3C3 /* HttpTool.h */,
+				D8C6771F1C9BE35D0047A3C3 /* HttpTool.m */,
 			);
 			path = Network;
 			sourceTree = "<group>";
@@ -563,12 +599,14 @@
 		D8EFC5731C801BE40002509D /* Tool */ = {
 			isa = PBXGroup;
 			children = (
+				D8C677281C9BE4950047A3C3 /* NSString+FBMD5.h */,
+				D8C677271C9BE4950047A3C3 /* NSString+FBMD5.m */,
+				D8C677291C9BE4950047A3C3 /* NSString+Helper.h */,
+				D8C6772A1C9BE4950047A3C3 /* NSString+Helper.m */,
 				D8EFC5801C8024500002509D /* UIColor+Extension.h */,
 				D8EFC57B1C8024500002509D /* UIColor+Extension.m */,
 				D8EFC57C1C8024500002509D /* UIImageView+SDWedImage.h */,
 				D8EFC57F1C8024500002509D /* UIImageView+SDWedImage.m */,
-				D8EFC57E1C8024500002509D /* HttpTool.h */,
-				D8EFC57D1C8024500002509D /* HttpTool.m */,
 			);
 			path = Tool;
 			sourceTree = "<group>";
@@ -628,6 +666,10 @@
 		D8EFC58F1C802DAD0002509D /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				D8C677151C9B9F290047A3C3 /* FBPhoto.h */,
+				D8C677161C9B9F290047A3C3 /* FBPhoto.m */,
+				D8C677171C9B9F290047A3C3 /* FBFilters.h */,
+				D8C677181C9B9F290047A3C3 /* FBFilters.m */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -657,6 +699,8 @@
 				D859B7971C91803400685CF6 /* ScenceMessageView.m */,
 				D859B7A11C92A5C300685CF6 /* ScenceAddMoreView.h */,
 				D859B7A21C92A5C300685CF6 /* ScenceAddMoreView.m */,
+				D8C6771B1C9BDB2F0047A3C3 /* SearchLocationView.h */,
+				D8C6771C1C9BDB2F0047A3C3 /* SearchLocationView.m */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -835,13 +879,14 @@
 			files = (
 				D8EFC59F1C802DF20002509D /* MallViewController.m in Sources */,
 				1FB64EC41C995BB0003F4D02 /* FBLocationViewController.m in Sources */,
-				D82399D31C8D6EBC007428D1 /* FBFilters.m in Sources */,
 				8005073C1C7A9CDD005AF0BE /* AppDelegate.mm in Sources */,
 				D82399B61C8D6EAD007428D1 /* FBFiltersCollectionViewCell.m in Sources */,
 				D8D8B6531C80B8DF00DD6BBE /* FBFootView.m in Sources */,
 				D82399CE1C8D6EB5007428D1 /* AddUrlViewController.m in Sources */,
 				D82399CA1C8D6EB5007428D1 /* ReleaseViewController.m in Sources */,
 				D8D8B6501C80AF9F00DD6BBE /* CreateViewController.m in Sources */,
+				D8C6771A1C9B9F290047A3C3 /* FBFilters.m in Sources */,
+				D8C677191C9B9F290047A3C3 /* FBPhoto.m in Sources */,
 				D859B7A31C92A5C300685CF6 /* ScenceAddMoreView.m in Sources */,
 				D8D8B64D1C80ABFF00DD6BBE /* FBPictureViewController.m in Sources */,
 				800507451C7A9CDD005AF0BE /* fineix.xcdatamodeld in Sources */,
@@ -850,17 +895,21 @@
 				D8EFC57A1C801E8C0002509D /* FBNavigationViewController.m in Sources */,
 				D8FC11D71C9669AF009D7AFE /* PhotoAlbumsView.m in Sources */,
 				1FB64EBA1C990AFB003F4D02 /* FBMapLocatinViewController.m in Sources */,
-				D8BFA5F31C820F3600F5C1B7 /* FBPhoto.m in Sources */,
 				D82399B81C8D6EAD007428D1 /* CameraView.m in Sources */,
+				D8C677241C9BE35D0047A3C3 /* HttpTool.m in Sources */,
 				800507391C7A9CDD005AF0BE /* main.m in Sources */,
+				D8C677351C9BF5BF0047A3C3 /* FBAPI.m in Sources */,
 				D8EFC5991C802DD40002509D /* DiscoverViewController.m in Sources */,
+				D8C677361C9BF5BF0047A3C3 /* FBRequest.m in Sources */,
 				D82399C91C8D6EB5007428D1 /* CropImageViewController.m in Sources */,
 				D8E3E3AE1C8FCCB6000CA536 /* FBViewController.m in Sources */,
 				D8EFC58A1C802D300002509D /* HomeViewController.m in Sources */,
 				1FB14C7D1C96AFE200319276 /* MBProgressHUD.m in Sources */,
+				D8C6772B1C9BE4950047A3C3 /* NSString+FBMD5.m in Sources */,
+				D8C6771D1C9BDB2F0047A3C3 /* SearchLocationView.m in Sources */,
+				D8F597661C9F965200F6601D /* FBSearchView.m in Sources */,
 				D8FC11DD1C96CAC6009D7AFE /* SearchLocationViewController.m in Sources */,
 				D8368FCD1C85A67700673306 /* CropImageView.m in Sources */,
-				D8EFC5821C8024500002509D /* HttpTool.m in Sources */,
 				D8EFC5831C8024500002509D /* UIImageView+SDWedImage.m in Sources */,
 				D82DAF991C82026700E0650B /* FBPictureCollectionViewCell.m in Sources */,
 				D8EFC5871C802B6C0002509D /* FBTabBarController.m in Sources */,
@@ -876,6 +925,7 @@
 				D82399D01C8D6EB5007428D1 /* ClipImageViewController.m in Sources */,
 				D8C677141C9B9C6B0047A3C3 /* SelectSceneViewController.m in Sources */,
 				D8EFC5A91C80326E0002509D /* FBTabBar.m in Sources */,
+				D8C6772C1C9BE4950047A3C3 /* NSString+Helper.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -990,6 +1040,7 @@
 				INFOPLIST_FILE = fineix/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				OTHER_LIBTOOLFLAGS = "-ObjC";
 				PRODUCT_BUNDLE_IDENTIFIER = com.THN.fineix;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
@@ -1012,6 +1063,7 @@
 				INFOPLIST_FILE = fineix/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				OTHER_LIBTOOLFLAGS = "-ObjC";
 				PRODUCT_BUNDLE_IDENTIFIER = com.THN.fineix;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";

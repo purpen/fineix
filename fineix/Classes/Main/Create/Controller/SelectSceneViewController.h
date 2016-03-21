@@ -10,4 +10,6 @@
 
 @interface SelectSceneViewController : FBPictureViewController
 
+@pro_strong UIButton            *   sureBtn;            //  确定按钮
+
 @end
