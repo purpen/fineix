@@ -11,7 +11,7 @@
 
 @protocol FBSearchDelegate <NSObject>
 
-- (void)beginSearch;
+- (void)beginSearch:(NSString *)searchKeyword;
 
 @end
 

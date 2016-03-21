@@ -73,8 +73,8 @@
     return _searchView;
 }
 
-- (void)beginSearch {
-    NSLog(@"开始搜索地点");
+- (void)beginSearch:(NSString *)searchKeyword {
+    NSLog(@"开始搜索地点======== %@", searchKeyword);
 }
 
 

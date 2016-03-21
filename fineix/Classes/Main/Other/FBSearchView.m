@@ -50,8 +50,8 @@
 #pragma mark - UITextFieldDelegate
 - (BOOL)textFieldShouldReturn:(UITextField *)textField {
     [_searchInputBox resignFirstResponder];
-    if ([self.delegate respondsToSelector:@selector(beginSearch)]) {
-        [self.delegate beginSearch];
+    if ([self.delegate respondsToSelector:@selector(beginSearch:)]) {
+        [self.delegate beginSearch:textField.text];
     }
     return YES;
 }
