@@ -30,8 +30,6 @@
 		1F0EE6A51C9FA47B000631F0 /* libsqlite3.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 1F0EE6A41C9FA47B000631F0 /* libsqlite3.tbd */; };
 		1F0EE6A71C9FA4E7000631F0 /* libstdc++.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 1F0EE6A61C9FA4E7000631F0 /* libstdc++.tbd */; };
 		1F0EE6A91C9FA4F6000631F0 /* libz.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 1F0EE6A81C9FA4F6000631F0 /* libz.tbd */; };
-		1F0EE6AC1C9FD7A8000631F0 /* FBLoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F0EE6AB1C9FD7A8000631F0 /* FBLoginViewController.m */; };
-		1F0EE6B21C9FF9A7000631F0 /* FBSignupViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F0EE6B11C9FF9A7000631F0 /* FBSignupViewController.m */; };
 		1F0EE6BA1CA00CDB000631F0 /* FBFilters.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F0EE6B71CA00CDB000631F0 /* FBFilters.m */; };
 		1F0EE6BB1CA00CDB000631F0 /* FBPhoto.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F0EE6B91CA00CDB000631F0 /* FBPhoto.m */; };
 		1F0EE6BE1CA00CF5000631F0 /* FBSearchView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F0EE6BD1CA00CF5000631F0 /* FBSearchView.m */; };
@@ -46,9 +44,11 @@
 		1F1776721C9BB52F0080ADFC /* MyView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1F1776711C9BB52F0080ADFC /* MyView.xib */; };
 		1F1776B41C9BE8D50080ADFC /* ChanelView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F1776B31C9BE8D50080ADFC /* ChanelView.m */; };
 		1F1776B81C9BEF3A0080ADFC /* chanel.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1F1776B71C9BEF3A0080ADFC /* chanel.xib */; };
-		1F1776BF1C9C12DB0080ADFC /* FBLoginRegisterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F1776BE1C9C12DB0080ADFC /* FBLoginRegisterViewController.m */; };
 		1F1776C11C9C132F0080ADFC /* LoginRegisterController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1F1776C01C9C132F0080ADFC /* LoginRegisterController.storyboard */; };
 		1F59E5FC1C9ABBA500E96C60 /* Accelerate.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1F59E5FB1C9ABBA500E96C60 /* Accelerate.framework */; };
+		1F5AD4921CA0E2220020D15E /* FBLoginRegisterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F5AD48D1CA0E2220020D15E /* FBLoginRegisterViewController.m */; };
+		1F5AD4931CA0E2220020D15E /* FBLoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F5AD48F1CA0E2220020D15E /* FBLoginViewController.m */; };
+		1F5AD4941CA0E2220020D15E /* FBSignupViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F5AD4911CA0E2220020D15E /* FBSignupViewController.m */; };
 		1FB14C7D1C96AFE200319276 /* MBProgressHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = 1FB14C7C1C96AFE200319276 /* MBProgressHUD.m */; };
 		1FB64EBA1C990AFB003F4D02 /* FBMapLocatinViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1FB64EB61C990AFB003F4D02 /* FBMapLocatinViewController.m */; };
 		1FB64EBB1C990AFB003F4D02 /* FBMapLocatinViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1FB64EB71C990AFB003F4D02 /* FBMapLocatinViewController.xib */; };
@@ -179,10 +179,6 @@
 		1F0EE6A41C9FA47B000631F0 /* libsqlite3.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libsqlite3.tbd; path = usr/lib/libsqlite3.tbd; sourceTree = SDKROOT; };
 		1F0EE6A61C9FA4E7000631F0 /* libstdc++.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = "libstdc++.tbd"; path = "usr/lib/libstdc++.tbd"; sourceTree = SDKROOT; };
 		1F0EE6A81C9FA4F6000631F0 /* libz.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libz.tbd; path = usr/lib/libz.tbd; sourceTree = SDKROOT; };
-		1F0EE6AA1C9FD7A8000631F0 /* FBLoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FBLoginViewController.h; sourceTree = "<group>"; };
-		1F0EE6AB1C9FD7A8000631F0 /* FBLoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FBLoginViewController.m; sourceTree = "<group>"; };
-		1F0EE6B01C9FF9A7000631F0 /* FBSignupViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FBSignupViewController.h; sourceTree = "<group>"; };
-		1F0EE6B11C9FF9A7000631F0 /* FBSignupViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FBSignupViewController.m; sourceTree = "<group>"; };
 		1F0EE6B61CA00CDB000631F0 /* FBFilters.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FBFilters.h; sourceTree = "<group>"; };
 		1F0EE6B71CA00CDB000631F0 /* FBFilters.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FBFilters.m; sourceTree = "<group>"; };
 		1F0EE6B81CA00CDB000631F0 /* FBPhoto.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FBPhoto.h; sourceTree = "<group>"; };
@@ -210,10 +206,14 @@
 		1F1776B21C9BE8D50080ADFC /* ChanelView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChanelView.h; sourceTree = "<group>"; };
 		1F1776B31C9BE8D50080ADFC /* ChanelView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChanelView.m; sourceTree = "<group>"; };
 		1F1776B71C9BEF3A0080ADFC /* chanel.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = chanel.xib; sourceTree = "<group>"; };
-		1F1776BD1C9C12DB0080ADFC /* FBLoginRegisterViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FBLoginRegisterViewController.h; sourceTree = "<group>"; };
-		1F1776BE1C9C12DB0080ADFC /* FBLoginRegisterViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FBLoginRegisterViewController.m; sourceTree = "<group>"; };
 		1F1776C01C9C132F0080ADFC /* LoginRegisterController.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = LoginRegisterController.storyboard; sourceTree = "<group>"; };
 		1F59E5FB1C9ABBA500E96C60 /* Accelerate.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Accelerate.framework; path = System/Library/Frameworks/Accelerate.framework; sourceTree = SDKROOT; };
+		1F5AD48C1CA0E2220020D15E /* FBLoginRegisterViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FBLoginRegisterViewController.h; sourceTree = "<group>"; };
+		1F5AD48D1CA0E2220020D15E /* FBLoginRegisterViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FBLoginRegisterViewController.m; sourceTree = "<group>"; };
+		1F5AD48E1CA0E2220020D15E /* FBLoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FBLoginViewController.h; sourceTree = "<group>"; };
+		1F5AD48F1CA0E2220020D15E /* FBLoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FBLoginViewController.m; sourceTree = "<group>"; };
+		1F5AD4901CA0E2220020D15E /* FBSignupViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FBSignupViewController.h; sourceTree = "<group>"; };
+		1F5AD4911CA0E2220020D15E /* FBSignupViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FBSignupViewController.m; sourceTree = "<group>"; };
 		1FB14C7B1C96AFE200319276 /* MBProgressHUD.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MBProgressHUD.h; sourceTree = "<group>"; };
 		1FB14C7C1C96AFE200319276 /* MBProgressHUD.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MBProgressHUD.m; sourceTree = "<group>"; };
 		1FB64EB51C990AFB003F4D02 /* FBMapLocatinViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FBMapLocatinViewController.h; sourceTree = "<group>"; };
@@ -385,13 +385,6 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		1F0EE63A1C9F9093000631F0 /* DBModel */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			name = DBModel;
-			sourceTree = "<group>";
-		};
 		1F0EE6571C9F9E6F000631F0 /* Network */ = {
 			isa = PBXGroup;
 			children = (
@@ -528,8 +521,8 @@
 		1F1776B91C9C0DC30080ADFC /* LoginRegister */ = {
 			isa = PBXGroup;
 			children = (
-				1F1776BC1C9C0DF50080ADFC /* model */,
-				1F1776BB1C9C0DE40080ADFC /* controller */,
+				1F5AD4951CA0E22B0020D15E /* model */,
+				1F5AD48B1CA0E2220020D15E /* controller */,
 				1F1776BA1C9C0DDC0080ADFC /* view */,
 				1F1776C01C9C132F0080ADFC /* LoginRegisterController.storyboard */,
 			);
@@ -543,25 +536,32 @@
 			name = view;
 			sourceTree = "<group>";
 		};
-		1F1776BB1C9C0DE40080ADFC /* controller */ = {
+		1F5AD48B1CA0E2220020D15E /* controller */ = {
 			isa = PBXGroup;
 			children = (
-				1F1776BD1C9C12DB0080ADFC /* FBLoginRegisterViewController.h */,
-				1F1776BE1C9C12DB0080ADFC /* FBLoginRegisterViewController.m */,
-				1F0EE6AA1C9FD7A8000631F0 /* FBLoginViewController.h */,
-				1F0EE6AB1C9FD7A8000631F0 /* FBLoginViewController.m */,
-				1F0EE6B01C9FF9A7000631F0 /* FBSignupViewController.h */,
-				1F0EE6B11C9FF9A7000631F0 /* FBSignupViewController.m */,
+				1F5AD48C1CA0E2220020D15E /* FBLoginRegisterViewController.h */,
+				1F5AD48D1CA0E2220020D15E /* FBLoginRegisterViewController.m */,
+				1F5AD48E1CA0E2220020D15E /* FBLoginViewController.h */,
+				1F5AD48F1CA0E2220020D15E /* FBLoginViewController.m */,
+				1F5AD4901CA0E2220020D15E /* FBSignupViewController.h */,
+				1F5AD4911CA0E2220020D15E /* FBSignupViewController.m */,
 			);
-			name = controller;
+			path = controller;
 			sourceTree = "<group>";
 		};
-		1F1776BC1C9C0DF50080ADFC /* model */ = {
+		1F5AD4951CA0E22B0020D15E /* model */ = {
 			isa = PBXGroup;
 			children = (
-				1F0EE63A1C9F9093000631F0 /* DBModel */,
+				1F5AD4961CA0E22B0020D15E /* DBModel */,
 			);
-			name = model;
+			path = model;
+			sourceTree = "<group>";
+		};
+		1F5AD4961CA0E22B0020D15E /* DBModel */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = DBModel;
 			sourceTree = "<group>";
 		};
 		1FB14C7A1C96AD4600319276 /* Public */ = {
@@ -1181,6 +1181,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				D8EFC59F1C802DF20002509D /* MallViewController.m in Sources */,
+				1F5AD4941CA0E2220020D15E /* FBSignupViewController.m in Sources */,
 				1F0EE6BA1CA00CDB000631F0 /* FBFilters.m in Sources */,
 				1FB64EC41C995BB0003F4D02 /* FBLocationViewController.m in Sources */,
 				8005073C1C7A9CDD005AF0BE /* AppDelegate.mm in Sources */,
@@ -1202,12 +1203,12 @@
 				1F1776B41C9BE8D50080ADFC /* ChanelView.m in Sources */,
 				D8FC11DA1C966A48009D7AFE /* PhotoAlbumsTableViewCell.m in Sources */,
 				1F0EE6BE1CA00CF5000631F0 /* FBSearchView.m in Sources */,
+				1F5AD4931CA0E2220020D15E /* FBLoginViewController.m in Sources */,
 				D8EFC57A1C801E8C0002509D /* FBNavigationViewController.m in Sources */,
 				1F0EE6C41CA00D17000631F0 /* SelectSceneViewController.m in Sources */,
 				D8FC11D71C9669AF009D7AFE /* PhotoAlbumsView.m in Sources */,
 				1F0EE6BB1CA00CDB000631F0 /* FBPhoto.m in Sources */,
 				1FB64EBA1C990AFB003F4D02 /* FBMapLocatinViewController.m in Sources */,
-				1F0EE6B21C9FF9A7000631F0 /* FBSignupViewController.m in Sources */,
 				D82399B81C8D6EAD007428D1 /* CameraView.m in Sources */,
 				800507391C7A9CDD005AF0BE /* main.m in Sources */,
 				D8EFC5991C802DD40002509D /* DiscoverViewController.m in Sources */,
@@ -1223,12 +1224,11 @@
 				D8368FCD1C85A67700673306 /* CropImageView.m in Sources */,
 				1F0EE6C91CA00D34000631F0 /* NSString+FBMD5.m in Sources */,
 				1FDD12E61C9A8B8000FE9C57 /* MyFocusOnViewController.m in Sources */,
+				1F5AD4921CA0E2220020D15E /* FBLoginRegisterViewController.m in Sources */,
 				D8EFC5831C8024500002509D /* UIImageView+SDWedImage.m in Sources */,
 				D82DAF991C82026700E0650B /* FBPictureCollectionViewCell.m in Sources */,
-				1F0EE6AC1C9FD7A8000631F0 /* FBLoginViewController.m in Sources */,
 				D8EFC5871C802B6C0002509D /* FBTabBarController.m in Sources */,
 				D82399CD1C8D6EB5007428D1 /* MarkGoodsViewController.m in Sources */,
-				1F1776BF1C9C12DB0080ADFC /* FBLoginRegisterViewController.m in Sources */,
 				D82399CF1C8D6EB5007428D1 /* PictureToolViewController.m in Sources */,
 				D8BFA5F61C8211DE00F5C1B7 /* FBLoadPhoto.m in Sources */,
 				1F0EE6D31CA00D53000631F0 /* HttpTool.m in Sources */,
