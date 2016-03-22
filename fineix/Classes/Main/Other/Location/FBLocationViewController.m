@@ -148,6 +148,7 @@
     BMKNearbySearchOption *option = [[BMKNearbySearchOption alloc]init];
     option.pageIndex = page;
     option.pageCapacity = 20;
+    option.radius = 1000;
     option.location = CLLocationCoordinate2DMake(_la , _lo);
     option.keyword = str;
     BOOL flag = [_poiSearcher poiSearchNearBy:option];
