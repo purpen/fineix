@@ -15,6 +15,7 @@
 #import "UMSocialWechatHandler.h"
 #import "UMSocialQQHandler.h"
 #import "UMSocialSinaSSOHandler.h"
+#import "UserInfo.h"
 
 
 @interface AppDelegate ()
@@ -54,7 +55,19 @@ NSString *const QQAppKey = @"ba61849a6ab90421e849c116f4f4dea4";
         NSLog(@"manager start failed!");
     }
     
-    
+    //model属性名与字典key名映射
+    [UserInfo mj_setupReplacedKeyFromPropertyName:^NSDictionary *{
+        return @{
+                 @"userId" : @"id",
+                 @"firstLogin" : @"first_login",
+                 @"mediumAvatarUrl" : @"medium_avatar_url",
+                 @"trueNickname": @"true_nickname",
+                 @"level": @"rank_id",
+                 @"levelDesc": @"rank_title",
+                 @"birdCoin": @"bird_coin",
+                 //                 @"": @"",
+                 };
+    }];
    
 
     //设置友盟社会化组件appkey

@@ -10,6 +10,7 @@
 
 @interface FBLoginRegisterViewController ()
 
+
 @end
 
 @implementation FBLoginRegisterViewController
@@ -25,6 +26,8 @@
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
+
+
 
 /*
 #pragma mark - Navigation

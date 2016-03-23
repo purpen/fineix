@@ -49,7 +49,13 @@
 		1F5AD4921CA0E2220020D15E /* FBLoginRegisterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F5AD48D1CA0E2220020D15E /* FBLoginRegisterViewController.m */; };
 		1F5AD4931CA0E2220020D15E /* FBLoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F5AD48F1CA0E2220020D15E /* FBLoginViewController.m */; };
 		1F5AD4941CA0E2220020D15E /* FBSignupViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F5AD4911CA0E2220020D15E /* FBSignupViewController.m */; };
-		1FB14C7D1C96AFE200319276 /* MBProgressHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = 1FB14C7C1C96AFE200319276 /* MBProgressHUD.m */; };
+		1F5AD4A51CA0F4230020D15E /* JKDBHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F5AD4A21CA0F4230020D15E /* JKDBHelper.m */; };
+		1F5AD4A61CA0F4230020D15E /* JKDBModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F5AD4A41CA0F4230020D15E /* JKDBModel.m */; };
+		1F5AD4A91CA0F45E0020D15E /* UserInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F5AD4A81CA0F45E0020D15E /* UserInfo.m */; };
+		1F5AD4AC1CA0F5BD0020D15E /* UserInfoEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F5AD4AB1CA0F5BD0020D15E /* UserInfoEntity.m */; };
+		1F5AD4AF1CA0F9980020D15E /* NSString+UserModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F5AD4AE1CA0F9980020D15E /* NSString+UserModel.m */; };
+		1F5AD4B21CA0FA170020D15E /* NSNumber+UserModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F5AD4B11CA0FA170020D15E /* NSNumber+UserModel.m */; };
+		1F5AD4BB1CA143240020D15E /* ForgotPasswordViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F5AD4BA1CA143240020D15E /* ForgotPasswordViewController.m */; };
 		1FB64EBA1C990AFB003F4D02 /* FBMapLocatinViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1FB64EB61C990AFB003F4D02 /* FBMapLocatinViewController.m */; };
 		1FB64EBB1C990AFB003F4D02 /* FBMapLocatinViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1FB64EB71C990AFB003F4D02 /* FBMapLocatinViewController.xib */; };
 		1FB64EC41C995BB0003F4D02 /* FBLocationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1FB64EC21C995BB0003F4D02 /* FBLocationViewController.m */; };
@@ -214,8 +220,20 @@
 		1F5AD48F1CA0E2220020D15E /* FBLoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FBLoginViewController.m; sourceTree = "<group>"; };
 		1F5AD4901CA0E2220020D15E /* FBSignupViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FBSignupViewController.h; sourceTree = "<group>"; };
 		1F5AD4911CA0E2220020D15E /* FBSignupViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FBSignupViewController.m; sourceTree = "<group>"; };
-		1FB14C7B1C96AFE200319276 /* MBProgressHUD.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MBProgressHUD.h; sourceTree = "<group>"; };
-		1FB14C7C1C96AFE200319276 /* MBProgressHUD.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MBProgressHUD.m; sourceTree = "<group>"; };
+		1F5AD4A11CA0F4230020D15E /* JKDBHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JKDBHelper.h; sourceTree = "<group>"; };
+		1F5AD4A21CA0F4230020D15E /* JKDBHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JKDBHelper.m; sourceTree = "<group>"; };
+		1F5AD4A31CA0F4230020D15E /* JKDBModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JKDBModel.h; sourceTree = "<group>"; };
+		1F5AD4A41CA0F4230020D15E /* JKDBModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JKDBModel.m; sourceTree = "<group>"; };
+		1F5AD4A71CA0F45E0020D15E /* UserInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserInfo.h; sourceTree = "<group>"; };
+		1F5AD4A81CA0F45E0020D15E /* UserInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserInfo.m; sourceTree = "<group>"; };
+		1F5AD4AA1CA0F5BD0020D15E /* UserInfoEntity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserInfoEntity.h; sourceTree = "<group>"; };
+		1F5AD4AB1CA0F5BD0020D15E /* UserInfoEntity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserInfoEntity.m; sourceTree = "<group>"; };
+		1F5AD4AD1CA0F9980020D15E /* NSString+UserModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+UserModel.h"; sourceTree = "<group>"; };
+		1F5AD4AE1CA0F9980020D15E /* NSString+UserModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+UserModel.m"; sourceTree = "<group>"; };
+		1F5AD4B01CA0FA170020D15E /* NSNumber+UserModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSNumber+UserModel.h"; sourceTree = "<group>"; };
+		1F5AD4B11CA0FA170020D15E /* NSNumber+UserModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSNumber+UserModel.m"; sourceTree = "<group>"; };
+		1F5AD4B91CA143240020D15E /* ForgotPasswordViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ForgotPasswordViewController.h; sourceTree = "<group>"; };
+		1F5AD4BA1CA143240020D15E /* ForgotPasswordViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ForgotPasswordViewController.m; sourceTree = "<group>"; };
 		1FB64EB51C990AFB003F4D02 /* FBMapLocatinViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FBMapLocatinViewController.h; sourceTree = "<group>"; };
 		1FB64EB61C990AFB003F4D02 /* FBMapLocatinViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FBMapLocatinViewController.m; sourceTree = "<group>"; };
 		1FB64EB71C990AFB003F4D02 /* FBMapLocatinViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FBMapLocatinViewController.xib; sourceTree = "<group>"; };
@@ -545,6 +563,8 @@
 				1F5AD48F1CA0E2220020D15E /* FBLoginViewController.m */,
 				1F5AD4901CA0E2220020D15E /* FBSignupViewController.h */,
 				1F5AD4911CA0E2220020D15E /* FBSignupViewController.m */,
+				1F5AD4B91CA143240020D15E /* ForgotPasswordViewController.h */,
+				1F5AD4BA1CA143240020D15E /* ForgotPasswordViewController.m */,
 			);
 			path = controller;
 			sourceTree = "<group>";
@@ -560,6 +580,25 @@
 		1F5AD4961CA0E22B0020D15E /* DBModel */ = {
 			isa = PBXGroup;
 			children = (
+				1F5AD4A71CA0F45E0020D15E /* UserInfo.h */,
+				1F5AD4A81CA0F45E0020D15E /* UserInfo.m */,
+				1F5AD4AA1CA0F5BD0020D15E /* UserInfoEntity.h */,
+				1F5AD4AB1CA0F5BD0020D15E /* UserInfoEntity.m */,
+				1F5AD4AD1CA0F9980020D15E /* NSString+UserModel.h */,
+				1F5AD4AE1CA0F9980020D15E /* NSString+UserModel.m */,
+				1F5AD4B01CA0FA170020D15E /* NSNumber+UserModel.h */,
+				1F5AD4B11CA0FA170020D15E /* NSNumber+UserModel.m */,
+			);
+			path = DBModel;
+			sourceTree = "<group>";
+		};
+		1F5AD4A01CA0F4230020D15E /* DBModel */ = {
+			isa = PBXGroup;
+			children = (
+				1F5AD4A11CA0F4230020D15E /* JKDBHelper.h */,
+				1F5AD4A21CA0F4230020D15E /* JKDBHelper.m */,
+				1F5AD4A31CA0F4230020D15E /* JKDBModel.h */,
+				1F5AD4A41CA0F4230020D15E /* JKDBModel.m */,
 			);
 			path = DBModel;
 			sourceTree = "<group>";
@@ -571,15 +610,6 @@
 				1F0EE6BD1CA00CF5000631F0 /* FBSearchView.m */,
 			);
 			name = Public;
-			sourceTree = "<group>";
-		};
-		1FB14C7E1C96AFEA00319276 /* MBProgressHUD */ = {
-			isa = PBXGroup;
-			children = (
-				1FB14C7B1C96AFE200319276 /* MBProgressHUD.h */,
-				1FB14C7C1C96AFE200319276 /* MBProgressHUD.m */,
-			);
-			name = MBProgressHUD;
 			sourceTree = "<group>";
 		};
 		1FB64EB11C990AFB003F4D02 /* Location */ = {
@@ -598,9 +628,9 @@
 		280044F11C8057E6005F5C2E /* Vendors */ = {
 			isa = PBXGroup;
 			children = (
+				1F5AD4A01CA0F4230020D15E /* DBModel */,
 				1F0EE6581C9FA383000631F0 /* UMSocial_Sdk_5.0.1 */,
 				1F0EE6731C9FA383000631F0 /* UMSocial_Sdk_Extra_Frameworks */,
-				1FB14C7E1C96AFEA00319276 /* MBProgressHUD */,
 				280044F21C80582D005F5C2E /* BaiduMapSDK */,
 			);
 			path = Vendors;
@@ -1180,10 +1210,15 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1F5AD4BB1CA143240020D15E /* ForgotPasswordViewController.m in Sources */,
 				D8EFC59F1C802DF20002509D /* MallViewController.m in Sources */,
 				1F5AD4941CA0E2220020D15E /* FBSignupViewController.m in Sources */,
+				1F5AD4AF1CA0F9980020D15E /* NSString+UserModel.m in Sources */,
+				1F5AD4A91CA0F45E0020D15E /* UserInfo.m in Sources */,
+				1F5AD4A51CA0F4230020D15E /* JKDBHelper.m in Sources */,
 				1F0EE6BA1CA00CDB000631F0 /* FBFilters.m in Sources */,
 				1FB64EC41C995BB0003F4D02 /* FBLocationViewController.m in Sources */,
+				1F5AD4B21CA0FA170020D15E /* NSNumber+UserModel.m in Sources */,
 				8005073C1C7A9CDD005AF0BE /* AppDelegate.mm in Sources */,
 				D82399B61C8D6EAD007428D1 /* FBFiltersCollectionViewCell.m in Sources */,
 				D8D8B6531C80B8DF00DD6BBE /* FBFootView.m in Sources */,
@@ -1192,6 +1227,7 @@
 				D82399CE1C8D6EB5007428D1 /* AddUrlViewController.m in Sources */,
 				1FDD12F21C9A912900FE9C57 /* MyOrdersViewController.m in Sources */,
 				D82399CA1C8D6EB5007428D1 /* ReleaseViewController.m in Sources */,
+				1F5AD4A61CA0F4230020D15E /* JKDBModel.m in Sources */,
 				D8D8B6501C80AF9F00DD6BBE /* CreateViewController.m in Sources */,
 				1FDD12F51C9A915D00FE9C57 /* MySystemSettingsViewController.m in Sources */,
 				D859B7A31C92A5C300685CF6 /* ScenceAddMoreView.m in Sources */,
@@ -1219,9 +1255,9 @@
 				1F0EE6D21CA00D53000631F0 /* FBRequest.m in Sources */,
 				D8E3E3AE1C8FCCB6000CA536 /* FBViewController.m in Sources */,
 				D8EFC58A1C802D300002509D /* HomeViewController.m in Sources */,
-				1FB14C7D1C96AFE200319276 /* MBProgressHUD.m in Sources */,
 				D8FC11DD1C96CAC6009D7AFE /* SearchLocationViewController.m in Sources */,
 				D8368FCD1C85A67700673306 /* CropImageView.m in Sources */,
+				1F5AD4AC1CA0F5BD0020D15E /* UserInfoEntity.m in Sources */,
 				1F0EE6C91CA00D34000631F0 /* NSString+FBMD5.m in Sources */,
 				1FDD12E61C9A8B8000FE9C57 /* MyFocusOnViewController.m in Sources */,
 				1F5AD4921CA0E2220020D15E /* FBLoginRegisterViewController.m in Sources */,
