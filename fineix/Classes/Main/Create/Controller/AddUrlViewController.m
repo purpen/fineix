@@ -44,7 +44,7 @@
 
 - (void)setNavViewUI {
     self.navView.backgroundColor = [UIColor whiteColor];
-    [self addNavViewTitle:@"添加链接"];
+    [self addNavViewTitle:NSLocalizedString(@"addUrl", nil)];
     self.navTitle.textColor = [UIColor blackColor];
     [self addCancelButton];
     [self.cancelBtn addTarget:self action:@selector(cancelBtnClick) forControlEvents:(UIControlEventTouchUpInside)];

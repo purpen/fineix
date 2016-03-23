@@ -67,7 +67,7 @@
     if (!_content) {
         _content = [[UITextView alloc] init];
         _content.font = [UIFont systemFontOfSize:Font_GoodsPrice];
-        _content.text = @"添加描述";
+        _content.text = NSLocalizedString(@"addDescription", nil);
         _content.textColor = [UIColor colorWithHexString:@"#A2A2A2" alpha:1];
         _content.delegate = self;
         _content.returnKeyType = UIReturnKeyDone;
@@ -77,7 +77,7 @@
 
 #pragma mark UITextViewDelegate
 - (BOOL)textViewShouldBeginEditing:(UITextView *)textView {
-    if ([_content.text  isEqualToString:@"添加描述"]) {
+    if ([_content.text  isEqualToString:NSLocalizedString(@"addDescription", nil)]) {
         _content.text = @"";
     }
     _content.textColor = [UIColor blackColor];
@@ -89,7 +89,7 @@
     if ([text isEqualToString:@"\n"]) {
         [_content resignFirstResponder];
         if ([_content.text isEqualToString:@""]) {
-            _content.text = @"添加描述";
+            _content.text = NSLocalizedString(@"addDescription", nil);
             _content.textColor = [UIColor colorWithHexString:@"#A2A2A2" alpha:1];
         }
         return NO;
@@ -99,7 +99,7 @@
 
 - (void)textViewDidEndEditing:(UITextView *)textView {
     if ([_content.text isEqualToString:@""]) {
-        _content.text = @"添加描述";
+        _content.text = NSLocalizedString(@"addDescription", nil);
         _content.textColor = [UIColor colorWithHexString:@"#A2A2A2" alpha:1];
     }
 }
@@ -124,7 +124,7 @@
 - (UITextField *)title {
     if (!_title) {
         _title = [[UITextField alloc] init];
-        _title.placeholder = @"添加标题";
+        _title.placeholder = NSLocalizedString(@"addTitle", nil);
         _title.font = [UIFont systemFontOfSize:Font_GoodsPrice];
         _title.clearButtonMode = UITextFieldViewModeWhileEditing;
         _title.delegate = self;

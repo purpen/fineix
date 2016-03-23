@@ -36,7 +36,7 @@
 
 #pragma mark - 设置顶部Nav
 - (void)setNavViewUI {
-    [self addNavViewTitle:@"照片胶卷"];
+    [self addNavViewTitle:NSLocalizedString(@"createVcTitle", nil)];
     [self addCancelButton];
     [self addOpenPhotoAlbumsButton];
     [self.openPhotoAlbums addTarget:self action:@selector(openPhotoAlbumsClick) forControlEvents:(UIControlEventTouchUpInside)];
@@ -87,7 +87,7 @@
 #pragma mark - 底部选项工具栏
 - (FBFootView *)footView {
     if (!_footView) {
-        NSArray * arr = [NSArray arrayWithObjects:@"相册", @"拍照", nil];
+        NSArray * arr = [NSArray arrayWithObjects:NSLocalizedString(@"album", nil), NSLocalizedString(@"camera", nil), nil];
         _footView = [[FBFootView alloc] init];
         _footView.backgroundColor = [UIColor blackColor];
         _footView.titleArr = arr;

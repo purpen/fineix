@@ -65,7 +65,7 @@
         _cameraTitlt = [[UILabel alloc] initWithFrame:CGRectMake(60, 0, SCREEN_WIDTH - 120, 50)];
         _cameraTitlt.textColor = [UIColor whiteColor];
         _cameraTitlt.textAlignment = NSTextAlignmentCenter;
-        _cameraTitlt.text = @"拍照";
+        _cameraTitlt.text = NSLocalizedString(@"takePhotos", nil);
         _cameraTitlt.font = [UIFont systemFontOfSize:Font_ControllerTitle];
     }
     return _cameraTitlt;

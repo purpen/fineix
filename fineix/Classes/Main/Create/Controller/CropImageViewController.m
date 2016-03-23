@@ -30,7 +30,7 @@
 
 #pragma mark - 设置页面导航Nav
 - (void)setNavViewUI {
-    [self addNavViewTitle:@"裁剪图片"];
+    [self addNavViewTitle:NSLocalizedString(@"cropVcTitle", nil)];
     [self addBackButton];
     [self addNextButton];
     [self.nextBtn addTarget:self action:@selector(nextBtnClick) forControlEvents:(UIControlEventTouchUpInside)];
