@@ -38,6 +38,7 @@
     [self.view addSubview:self.scenceView];
     
     [self.view addSubview:self.addView];
+
 }
 
 - (ScenceMessageView *)scenceView {
@@ -52,6 +53,12 @@
     if (!_addView) {
         _addView = [[ScenceAddMoreView alloc] initWithFrame:CGRectMake(0, 290, SCREEN_WIDTH, SCREEN_HEIGHT- 290)];
         _addView.nav = self.navigationController;
+        
+        if ([self.locationArr[0] isEqualToString:@"0.000000"]) {
+            NSLog(@"照片上没有位置信息");
+        } else {
+            [_addView changeLocationFrame:self.locationArr];
+        }
     }
     return _addView;
 }

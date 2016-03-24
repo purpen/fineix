@@ -12,6 +12,7 @@
 
 @interface CropImageViewController : FBPictureViewController
 
+@pro_strong NSArray                     *   locationArr;
 @pro_strong ClipImageViewController     *   clipImageVC;
 @pro_strong UIImage                     *   clipImage;
 

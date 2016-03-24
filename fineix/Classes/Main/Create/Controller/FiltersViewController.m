@@ -26,6 +26,7 @@
     [self setFiltersControllerUI];
     
     [self setNotification];
+    
 }
 
 - (void)changeFilter:(NSNotification *)filterName {
@@ -45,8 +46,10 @@
 #pragma mark 继续按钮的点击事件
 - (void)nextBtnClick {
     ReleaseViewController * releaseVC = [[ReleaseViewController alloc] init];
+    releaseVC.locationArr = self.locationArr;
     releaseVC.scenceView.imageView.image = self.filtersImageView.image;
     [self.navigationController pushViewController:releaseVC animated:YES];
+
 }
 
 #pragma mark - 设置视图UI

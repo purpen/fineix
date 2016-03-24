@@ -14,6 +14,7 @@
 
 @interface ReleaseViewController : FBPictureViewController
 
+@pro_strong NSArray             *   locationArr;    //  照片位置
 @pro_strong ScenceMessageView   *   scenceView;     //  图片\描述\标题
 @pro_strong ScenceAddMoreView   *   addView;        //  添加地点\标签\场景
 

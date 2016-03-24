@@ -11,6 +11,8 @@
 #import "AddTagViewController.h"
 #import "SelectSceneViewController.h"
 
+static NSInteger btnTag = 100;
+
 @implementation ScenceAddMoreView
 
 - (instancetype)initWithFrame:(CGRect)frame {
@@ -20,13 +22,10 @@
         
         [self setUI];
         
-        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(getPhotoLocation:) name:@"photoLocation" object:nil];
+        [self initBMKSearch];
+
     }
     return self;
-}
-
-- (void)getPhotoLocation:(NSNotification *)photoLocation {
-    NSLog(@"＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊ 照片的位置： %@", [photoLocation object]);
 }
 
 #pragma mark - 设置UI
@@ -53,24 +52,122 @@
     }];
 }
 
+#pragma mark - 搜索照片所带位置的附近
+- (void)changeLocationFrame:(NSArray *)locationArr {
+    [self searchPhotoLocation:[locationArr[1] floatValue] withLongitude:[locationArr[0] floatValue]];
+
+}
+
+#pragma mark - 初始化geo地理编码搜索
+- (void)initBMKSearch {
+    _geoCodeSearch = [[BMKGeoCodeSearch alloc] init];
+    _geoCodeSearch.delegate = self;
+    
+    _nameMarr = [NSMutableArray array];
+    _cityMarr = [NSMutableArray array];
+}
+
+- (void)searchPhotoLocation:(CGFloat )latitude withLongitude:(CGFloat )longitude {
+    BMKReverseGeoCodeOption * option = [[BMKReverseGeoCodeOption alloc] init];
+    option.reverseGeoPoint = CLLocationCoordinate2DMake(latitude, longitude);
+    [_geoCodeSearch reverseGeoCode:option];
+}
+
+- (void)onGetReverseGeoCodeResult:(BMKGeoCodeSearch *)searcher result:(BMKReverseGeoCodeResult *)result errorCode:(BMKSearchErrorCode)error {
+    if (error == BMK_SEARCH_NO_ERROR) {
+        for (NSUInteger idx = 0; idx < 5; ++ idx) {
+            BMKPoiInfo * poi = [result.poiList objectAtIndex:idx];
+            [_nameMarr addObject:poi.name];
+            [_cityMarr addObject:poi.city];
+        }
+        //  最后一个为“搜索”按钮
+        [_nameMarr addObject:@"  搜索  "];
+        [self addLocationScrollView:_nameMarr];
+        
+    } else {
+        NSLog(@"搜索结果错误 －－－－－ %d", error);
+    }
+}
+
+- (void)dealloc {
+    _geoCodeSearch.delegate = nil;
+}
+
+- (void)addLocationScrollView:(NSMutableArray *)locationMarr {
+    
+    CGFloat width = 0;
+    CGFloat height = 8;
+
+    for (NSUInteger idx = 0; idx < locationMarr.count; ++ idx) {
+        UIButton * locationBtn = [[UIButton alloc] init];
+        CGFloat btnLength = [[locationMarr objectAtIndex:idx] boundingRectWithSize:CGSizeMake(320, 1000) options:(NSStringDrawingUsesLineFragmentOrigin) attributes:nil context:nil].size.width;
+        [locationBtn setTitle:locationMarr[idx] forState:(UIControlStateNormal)];
+        [locationBtn setTitleColor:[UIColor colorWithHexString:blackFont alpha:1] forState:(UIControlStateNormal)];
+        locationBtn.titleLabel.font = [UIFont systemFontOfSize:Font_Number];
+        locationBtn.layer.cornerRadius = 5;
+        locationBtn.layer.borderColor = [UIColor colorWithHexString:@"#979797" alpha:1].CGColor;
+        locationBtn.layer.borderWidth = 0.5f;
+        locationBtn.frame = CGRectMake(15 + width + (10 * idx), height, btnLength + 40, 29);
+        width = locationBtn.frame.size.width + width;
+        locationBtn.tag = btnTag + idx;
+        
+        if (locationBtn.tag == btnTag + 5) {
+            [locationBtn setImage:[UIImage imageNamed:@"Search"] forState:(UIControlStateNormal)];
+        }
+        
+        [locationBtn addTarget:self action:@selector(changeLocationName:) forControlEvents:(UIControlEventTouchUpInside)];
+        [self.locationScrollView addSubview:locationBtn];
+    }
+    self.locationScrollView.contentSize = CGSizeMake(width + 80, 0);
+    [_addLoacation addSubview:self.locationScrollView];
+    
+    //  分割线
+    UILabel * line = [[UILabel alloc] initWithFrame:CGRectMake(0, 43, SCREEN_WIDTH, .5)];
+    line.backgroundColor = [UIColor colorWithHexString:@"#E7E7E7" alpha:1];
+    [_addLoacation addSubview:line];
+    
+    [self onLocationFrame];
+   
+}
+
+#pragma mark - 选择推荐位置改变选择地点 
+- (void)changeLocationName:(UIButton *)button {
+    
+    //  搜索地点
+    if (button.tag == btnTag + 5) {
+        SearchLocationViewController * searchLocationVC = [[SearchLocationViewController alloc] init];
+        [self.nav pushViewController:searchLocationVC animated:YES];
+        
+    } else {
+        _location.text = [NSString stringWithFormat:@"%@ %@", _cityMarr[button.tag - btnTag], _nameMarr[button.tag - btnTag]];
+        _addLoacationBtn.hidden = YES;
+        _locationView.hidden = NO;
+        [self offLocationFrame];
+    }
+}
+
+#pragma mark - 创建根据照片位置推荐的五个附近
+- (UIScrollView *)locationScrollView {
+    if(!_locationScrollView) {
+        _locationScrollView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 44, SCREEN_WIDTH, 44)];
+        _locationScrollView.showsHorizontalScrollIndicator = NO;
+        _locationScrollView.showsVerticalScrollIndicator = NO;
+    }
+    return _locationScrollView;
+}
+
 #pragma mark - 添加地理位置
 - (UIView *)addLoacation {
     if (!_addLoacation) {
         _addLoacation = [[UIView alloc] init];
         _addLoacation.backgroundColor = [UIColor whiteColor];
         
-        UIButton * locationBtn = [[UIButton alloc] initWithFrame:CGRectMake(15, 50, 100, 35)];
-        [locationBtn setTitle:@"推荐的地址" forState:(UIControlStateNormal)];
-        locationBtn.backgroundColor = [UIColor blueColor];
-        [locationBtn addTarget:self action:@selector(locationFrame) forControlEvents:(UIControlEventTouchUpInside)];
-        
-        [_addLoacation addSubview:locationBtn];
-        
         [_addLoacation addSubview:self.addLoacationBtn];
         
         [_addLoacation addSubview:self.locationIcon];
         
         [_addLoacation addSubview:self.locationView];
+        
         self.locationView.hidden = YES;
         
     }
@@ -78,16 +175,25 @@
 }
 
 //  添加地理位置后恢复“添加地点”的高度
-- (void)locationFrame {
-    [_addLoacation mas_updateConstraints:^(MASConstraintMaker *make) {
-        make.height.equalTo(@44);
+- (void)offLocationFrame {
+    [UIView animateWithDuration:.3 animations:^{
+        [_addLoacation mas_updateConstraints:^(MASConstraintMaker *make) {
+            make.height.equalTo(@44);
+            
+            [_addLoacation layoutIfNeeded];
+        }];
     }];
+    
 }
 
-//  推荐地点时，改变“添加地点”的高度
-- (void)changeLocationFrame {
-    [_addLoacation mas_updateConstraints:^(MASConstraintMaker *make) {
-        make.height.equalTo(@88);
+//  如果有推荐的位置，更新“添加地点”的约束
+- (void)onLocationFrame {
+    [UIView animateWithDuration:.3 animations:^{
+        [_addLoacation mas_updateConstraints:^(MASConstraintMaker *make) {
+            make.height.equalTo(@88);
+        }];
+        
+        [_addLoacation layoutIfNeeded];
     }];
 }
 
@@ -122,7 +228,7 @@
         _location.text = [NSString stringWithFormat:@"%@ %@", city, location];
         _addLoacationBtn.hidden = YES;
         _locationView.hidden = NO;
-        [self locationFrame];
+        [self offLocationFrame];
     };
     [self.nav pushViewController:searchLocation animated:YES];
 }
@@ -150,7 +256,7 @@
     if (!_location) {
         _location = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH - 88, 44)];
         _location.textColor = [UIColor colorWithHexString:@"#333333" alpha:1];
-        _location.font = [UIFont systemFontOfSize:14];
+        _location.font = [UIFont systemFontOfSize:Font_GroupHeader];
     }
     return _location;
     

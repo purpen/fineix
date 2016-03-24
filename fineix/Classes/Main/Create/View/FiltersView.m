@@ -74,6 +74,7 @@
 }
 
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
+    // to "FiltersViewController.h"
     [[NSNotificationCenter defaultCenter] postNotificationName:@"fitlerName" object:self.filters[indexPath.row]];
 }
 
