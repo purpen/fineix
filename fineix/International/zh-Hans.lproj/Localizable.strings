@@ -32,3 +32,10 @@
 "locationVcTitle" = "位置";
 "addTagVcTitle" = "添加标签";
 "chooseSceneVcTitle" = "选择情境";
+
+//  提示信息
+"netError" = "网络连接错误";
+"searchLocationing" = "正在搜索附近的位置";
+"againLocationing" = "正在重新定位";
+"searchLocationError" = "搜索位置出错";
+"openGPS" = "请开启GPS定位服务";

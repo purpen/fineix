@@ -14,10 +14,10 @@
             buildForArchiving = "YES">
             <BuildableReference
                BuildableIdentifier = 'primary'
-               BlueprintIdentifier = 'EFC8B9C439834A8370351A7D'
-               BlueprintName = 'SVProgressHUD'
+               BlueprintIdentifier = 'A146223ED44E746F173AA163'
+               BlueprintName = 'HMSegmentedControl'
                ReferencedContainer = 'container:Pods.xcodeproj'
-               BuildableName = 'libSVProgressHUD.a'>
+               BuildableName = 'libHMSegmentedControl.a'>
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>

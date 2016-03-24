@@ -8,14 +8,14 @@
 
 #import "HomeViewController.h"
 #import "FBLocationViewController.h"
+#import "Fineix.h"
 
 @implementation HomeViewController
 
 - (void)viewDidLoad {
-
+  
     
 }
-
 
 @end
 

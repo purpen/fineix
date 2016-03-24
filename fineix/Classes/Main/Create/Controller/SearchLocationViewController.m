@@ -29,8 +29,15 @@
     [self.view addSubview:self.searchView];
     [self.view addSubview:self.locationTableView];
     [self initLocationMarr];
-    [self initBMKService];
-    [SVProgressHUD showWithStatus:@"正在搜索附近的位置"];
+    
+    //  判断是否开启GPS定位
+    if (([CLLocationManager locationServicesEnabled] && [CLLocationManager authorizationStatus] == kCLAuthorizationStatusAuthorizedWhenInUse) || [CLLocationManager authorizationStatus] == kCLAuthorizationStatusAuthorizedAlways) {
+        [self initBMKService];
+        [SVProgressHUD showWithStatus:NSLocalizedString(@"searchLocationing", nil)];
+        
+    } else {
+        [SVProgressHUD showInfoWithStatus:NSLocalizedString(@"openGPS", nil)];
+    }
 }
 
 #pragma mark - 设置顶部导航栏
@@ -54,7 +61,7 @@
 }
 
 - (void)positioningBtnClick {
-    [SVProgressHUD showWithStatus:@"正在重新定位"];
+    [SVProgressHUD showWithStatus:NSLocalizedString(@"againLocationing", nil)];
     _searchView.searchInputBox.text = @"";
     [self setDefaultLocation];
 }
@@ -116,9 +123,12 @@
         [self.locationTableView reloadData];
         [SVProgressHUD dismiss];
         
-    } else {
+    } else if (error == BMK_SEARCH_NETWOKR_ERROR) {
+        [SVProgressHUD showErrorWithStatus:NSLocalizedString(@"netError", nil)];
+    
+    }else {
         NSLog(@"搜索结果错误 －－－－－ %d", error);
-        [SVProgressHUD showErrorWithStatus:@"出错"];
+        [SVProgressHUD showErrorWithStatus:NSLocalizedString(@"searchLocationError", nil)];
     }
 }
 
@@ -154,7 +164,7 @@
 
 #pragma mark - 搜索地理位置
 - (void)beginSearchLocation:(NSString *)locationKeyword {
-    [SVProgressHUD showWithStatus:@"正在搜索附近的位置"];
+    [SVProgressHUD showWithStatus:NSLocalizedString(@"searchLocationing", nil)];
 
     BMKNearbySearchOption * nearbySearchOption = [[BMKNearbySearchOption alloc] init];
     nearbySearchOption.pageCapacity = 100;
@@ -182,9 +192,12 @@
         [self.locationTableView reloadData];
         [SVProgressHUD dismiss];
     
+    } else if (errorCode == BMK_SEARCH_NETWOKR_ERROR) {
+        [SVProgressHUD showErrorWithStatus:NSLocalizedString(@"netError", nil)];
+        
     } else {
         NSLog(@"搜索结果错误 －－－－－ %d", errorCode);
-        [SVProgressHUD showErrorWithStatus:@"出错"];
+        [SVProgressHUD showErrorWithStatus:NSLocalizedString(@"searchLocationError", nil)];
     }
 }
 
@@ -194,13 +207,11 @@
         _locationTableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 94, SCREEN_WIDTH, SCREEN_HEIGHT-94) style:(UITableViewStylePlain)];
         _locationTableView.showsHorizontalScrollIndicator = NO;
         _locationTableView.showsVerticalScrollIndicator = NO;
-        _locationTableView.bounces = NO;
+        _locationTableView.bounces = YES;
         _locationTableView.delegate = self;
         _locationTableView.dataSource = self;
-        
-        UIView * footerView = [[UIView alloc] init];
-        footerView.backgroundColor = [UIColor colorWithHexString:grayLineColor alpha:1];
-        _locationTableView.tableFooterView = footerView;
+        _locationTableView.backgroundColor = [UIColor colorWithHexString:grayLineColor alpha:1];
+        _locationTableView.tableFooterView = [[UIView alloc] init];
     }
     return _locationTableView;
 }

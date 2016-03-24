@@ -46,6 +46,8 @@
 
 #pragma mark - 点击“继续”
 - (void)nextButtonClick:(UIImage *)image {
+     [[NSNotificationCenter defaultCenter] postNotificationName:@"photoLocation" object:self.pictureView.locationArr];
+    
     CropImageViewController * cropVC = [[CropImageViewController alloc] init];
     cropVC.clipImageVC.clipImage = self.pictureView.photoImgView.image;
     cropVC.view.frame = self.view.frame;
@@ -128,7 +130,6 @@
         _pictureView.navView = self.navView;
         _pictureView.photoAlbumsView.photoAlbumsBtn = self.openPhotoAlbums;
         _pictureView.photoAlbumsView.nextBtn = self.nextBtn;
-        
         //  from "PhotoAlbumsView.h"
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(changeViewTitle:) name:@"PhotoAlbumsName" object:nil];
     }

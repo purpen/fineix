@@ -7,6 +7,7 @@
 //
 
 #import "ReleaseViewController.h"
+#import "CreateViewController.h"
 
 @interface ReleaseViewController ()
 
@@ -21,6 +22,7 @@
     [self setNavViewUI];
     
     [self setReleaseViewUI];
+
 }
 
 - (void)setNavViewUI {

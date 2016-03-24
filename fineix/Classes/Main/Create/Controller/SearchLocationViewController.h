@@ -6,6 +6,7 @@
 //  Copyright © 2016年 taihuoniao. All rights reserved.
 //
 
+#import <CoreLocation/CoreLocation.h>
 #import <BaiduMapAPI_Search/BMKSearchComponent.h>
 #import <BaiduMapAPI_Location/BMKLocationComponent.h>
 #import "FBPictureViewController.h"

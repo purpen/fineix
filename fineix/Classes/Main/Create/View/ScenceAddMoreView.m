@@ -19,8 +19,14 @@
         self.backgroundColor = [UIColor colorWithHexString:grayLineColor alpha:1];
         
         [self setUI];
+        
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(getPhotoLocation:) name:@"photoLocation" object:nil];
     }
     return self;
+}
+
+- (void)getPhotoLocation:(NSNotification *)photoLocation {
+    NSLog(@"＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊ 照片的位置： %@", [photoLocation object]);
 }
 
 #pragma mark - 设置UI

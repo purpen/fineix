@@ -172,45 +172,11 @@
     //  获取照片保存的地理信息
     NSDictionary * imageMetadata = [[NSMutableDictionary alloc] initWithDictionary:location];
     NSDictionary * gpsDict = [imageMetadata objectForKey:@"{GPS}"];
-    NSArray * locationArr = [NSArray arrayWithObjects:[NSString stringWithFormat:@"%f",[[gpsDict valueForKey:@"Longitude"] floatValue]],
+    _locationArr = [NSArray arrayWithObjects:[NSString stringWithFormat:@"%f",[[gpsDict valueForKey:@"Longitude"] floatValue]],
                              [NSString stringWithFormat:@"%f",[[gpsDict valueForKey:@"Latitude"] floatValue]], nil];
-    
-    NSLog(@"＝＝＝＝＝＝＝＝＝＝＝ 经纬度%@", locationArr);
-    
-    [self setPhotoLocation:locationArr];
+    NSLog(@"＝＝＝＝＝＝＝＝＝＝＝ 经纬度%@", _locationArr);
 }
 
-#pragma mark - 获取照片所在位置
-- (void)setPhotoLocation:(NSArray *)locationArr {
-    
-    CLLocationDegrees n = [locationArr[0] floatValue];
-    CLLocationDegrees e = [locationArr[1] floatValue];
-    
-    CLGeocoder * geocoder = [[CLGeocoder alloc] init];
-    CLLocation * location = [[CLLocation alloc] initWithLatitude:e longitude:n];
-    
-    [geocoder reverseGeocodeLocation:location completionHandler:^(NSArray<CLPlacemark *> * _Nullable placemarks, NSError * _Nullable error) {
-        if (!error) {
-            
-            /** CLPlacemark         地标
-             *  location            位置对象
-             *  addressDictionary   地址字典
-             *  name                地址详情
-             *  locality            城市
-             */
-            
-            CLPlacemark * placemark = [placemarks firstObject];
-            self.locationStr = placemark.name;
-            NSLog(@"＝＝＝＝ %@", self.locationStr);
-            [SVProgressHUD showSuccessWithStatus:self.locationStr];
-            
-        } else {
-            NSLog(@"照片没有地理位置");
-            [SVProgressHUD showErrorWithStatus:@"照片没有地理位置"];
-        }
-        
-    }];
-}
 
 #pragma mark - 上滑拉伸显示全部相片列表
 - (void)pictureViewZoom{
