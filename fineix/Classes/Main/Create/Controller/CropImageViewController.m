@@ -25,7 +25,6 @@
     [self setNavViewUI];
     
     [self addChildViewController:self.clipImageVC];
-    
 }
 
 #pragma mark - 设置页面导航Nav
@@ -39,8 +38,8 @@
 //  “继续”
 - (void)nextBtnClick {
     FiltersViewController * filtersVC = [[FiltersViewController alloc] init];
+    filtersVC.locationArr = self.locationArr;
     filtersVC.filtersImg = [self.clipImageVC clippingImage];
-    
     [self.navigationController pushViewController:filtersVC animated:YES];
 }
 

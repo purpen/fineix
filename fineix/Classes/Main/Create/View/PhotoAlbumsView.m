@@ -85,6 +85,7 @@
     
     //  显示选中相册的名字
     NSLog(@"－－－－－－－－－－－－ 相册名：%@",[self.photoAlbums[indexPath.row] valueForKey:@"name"]);
+    // to "CreateViewController.h"
     [[NSNotificationCenter defaultCenter] postNotificationName:@"PhotoAlbumsName" object:[self.photoAlbums[indexPath.row] valueForKey:@"name"]];
     
 }

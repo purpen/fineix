@@ -105,6 +105,8 @@
     //  默认加载第一张照片
     FBPhoto * firstPhoto = [self.sortPhotosArr objectAtIndex:0];
     self.photoImgView.image = firstPhoto.originalImage;
+    [self getPhotoLocation:firstPhoto.asset.defaultRepresentation.metadata];
+    
 }
 
 #pragma mark - 相册的列表视图

@@ -46,9 +46,9 @@
 
 #pragma mark - 点击“继续”
 - (void)nextButtonClick:(UIImage *)image {
-     [[NSNotificationCenter defaultCenter] postNotificationName:@"photoLocation" object:self.pictureView.locationArr];
     
     CropImageViewController * cropVC = [[CropImageViewController alloc] init];
+    cropVC.locationArr = self.pictureView.locationArr;
     cropVC.clipImageVC.clipImage = self.pictureView.photoImgView.image;
     cropVC.view.frame = self.view.frame;
     [self.navigationController pushViewController:cropVC animated:YES];

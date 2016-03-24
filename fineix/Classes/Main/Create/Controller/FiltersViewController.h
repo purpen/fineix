@@ -12,6 +12,7 @@
 
 @interface FiltersViewController : FBPictureViewController
 
+@pro_strong NSArray             *   locationArr;            //  照片位置
 @pro_strong FiltersView         *   filtersView;            //  滤镜视图
 @pro_strong FBFootView          *   footView;               //  底部工具栏
 @pro_strong UIImageView         *   filtersImageView;       //  需要处理的图片视图
