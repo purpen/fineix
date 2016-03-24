@@ -35,7 +35,7 @@
 
 #pragma mark - 设置顶部导航栏
 - (void)setNavViewUI {
-    [self addNavViewTitle:@"工具"];
+    [self addNavViewTitle:NSLocalizedString(@"filtersVcTitle", nil)];
     [self addBackButton];
     [self addNextButton];
     [self.nextBtn addTarget:self action:@selector(nextBtnClick) forControlEvents:(UIControlEventTouchUpInside)];
@@ -75,7 +75,7 @@
 - (FBFootView *)footView {
     if (!_footView) {
         _footView = [[FBFootView alloc] init];
-        NSArray * titleArr = [[NSArray alloc] initWithObjects:@"标记产品",@"添加链接",@"滤镜", nil];
+        NSArray * titleArr = [[NSArray alloc] initWithObjects:NSLocalizedString(@"marker", nil), NSLocalizedString(@"addUrl", nil), NSLocalizedString(@"filter", nil), nil];
         _footView.backgroundColor = [UIColor blackColor];
         _footView.titleArr = titleArr;
         _footView.titleFontSize = Font_GroupHeader;

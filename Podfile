@@ -10,4 +10,5 @@ pod 'SDCycleScrollView','~> 1.3'
 pod 'SVProgressHUD', '~> 1.1.3'
 pod 'MJExtension', '~> 3.0.7'
 pod 'TYAlertController', '~> 1.1.3'
-
+pod 'IQKeyboardManager'
+pod 'HMSegmentedControl'

@@ -23,7 +23,7 @@
 
 - (void)setNavViewUI {
     self.navView.backgroundColor = [UIColor whiteColor];
-    [self addNavViewTitle:@"标记产品"];
+    [self addNavViewTitle:NSLocalizedString(@"marker", nil)];
     self.navTitle.textColor = [UIColor blackColor];
     [self addCancelButton];
     [self.cancelBtn addTarget:self action:@selector(cancelBtnClick) forControlEvents:(UIControlEventTouchUpInside)];

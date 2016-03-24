@@ -14,6 +14,16 @@
 			<key>orderHint</key>
 			<integer>2</integer>
 		</dict>
+		<key>HMSegmentedControl.xcscheme</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>11</integer>
+		</dict>
+		<key>IQKeyboardManager.xcscheme</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>12</integer>
+		</dict>
 		<key>MJExtension.xcscheme</key>
 		<dict>
 			<key>orderHint</key>
@@ -57,6 +67,11 @@
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
+		<key>06F646CB4189063464491028356DB285</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
 		<key>1D6761006889AE1EB4B8794C406539C3</key>
 		<dict>
 			<key>primary</key>
@@ -68,6 +83,11 @@
 			<true/>
 		</dict>
 		<key>20DC2ED843F2A193F325DCDFE149BC74</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>2AB49797D14D57FA43A345254AFB9F18</key>
 		<dict>
 			<key>primary</key>
 			<true/>
@@ -92,12 +112,32 @@
 			<key>primary</key>
 			<true/>
 		</dict>
+		<key>55DBDD8B7D446F1D618F303A9FB53209</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>5EDD8970FF12E8F5C8ED454DF2579199</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
 		<key>666A07B53E043E0EE0039144618CE62D</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
 		<key>726B6CB188170A59D646286CC75C9BBC</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>87252DC1A5E140AF0710D032E30BED5E</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>8971393025E0BB4F0131080811E99A5C</key>
 		<dict>
 			<key>primary</key>
 			<true/>
@@ -118,6 +158,11 @@
 			<true/>
 		</dict>
 		<key>B23B3D15FFC0FC9893968F478086D58D</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>C2D093B7257FE5FAA57F03FB61F39FCB</key>
 		<dict>
 			<key>primary</key>
 			<true/>

@@ -24,7 +24,7 @@
 #pragma mark - 设置顶部导航栏
 - (void)setNavViewUI {
     self.navView.backgroundColor = [UIColor whiteColor];
-    [self addNavViewTitle:@"选择情境"];
+    [self addNavViewTitle:NSLocalizedString(@"chooseSceneVcTitle", nil)];
     self.navTitle.textColor = [UIColor blackColor];
     [self addBackButton];
     [self addLine];
@@ -37,7 +37,7 @@
         _sureBtn = [[UIButton alloc] initWithFrame:CGRectMake((SCREEN_WIDTH - 60), 0, 50, 50)];
         [_sureBtn setTitleColor:[UIColor blackColor] forState:(UIControlStateNormal)];
         _sureBtn.titleLabel.font = [UIFont systemFontOfSize:Font_ControllerTitle];
-        [self.sureBtn setTitle:@"确定" forState:(UIControlStateNormal)];
+        [self.sureBtn setTitle:NSLocalizedString(@"sure", nil) forState:(UIControlStateNormal)];
     }
     return _sureBtn;
 }

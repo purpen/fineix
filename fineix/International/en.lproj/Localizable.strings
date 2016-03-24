@@ -1,0 +1,34 @@
+/* 
+  Localizable.strings
+  fineix
+
+  Created by FLYang on 16/3/23.
+  Copyright © 2016年 taihuoniao. All rights reserved.
+*/
+
+//  创建场景
+"next" = "NEXT";
+"album" = "LIBRARY";
+"camera" = "PHOTO";
+"takePhotos" = "PHOTO";
+"marker" = "";
+"addUrl" = "";
+"filter" = "FILTERS";
+"addDescription" = "";
+"addTitle" = "";
+"addLocation" = "Add Location";
+"tag" = "";
+"onScene" = "";
+"release" = "";
+"cancel" = "";
+"searchLocation" = "";
+"sure" = "Done";
+
+//  控制器页面标题
+"createVcTitle" = "SCREENSHOTS";
+"cropVcTitle" = "";
+"filtersVcTitle" = "";
+"releaseVcTitle" = "";
+"locationVcTitle" = "";
+"addTagVcTitle" = "";
+"chooseSceneVcTitle" = "";

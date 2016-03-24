@@ -36,7 +36,7 @@
 
 #pragma mark - 设置顶部Nav
 - (void)setNavViewUI {
-    [self addNavViewTitle:@"照片胶卷"];
+    [self addNavViewTitle:NSLocalizedString(@"createVcTitle", nil)];
     [self addCancelButton];
     [self addOpenPhotoAlbumsButton];
     [self.openPhotoAlbums addTarget:self action:@selector(openPhotoAlbumsClick) forControlEvents:(UIControlEventTouchUpInside)];
@@ -46,6 +46,8 @@
 
 #pragma mark - 点击“继续”
 - (void)nextButtonClick:(UIImage *)image {
+     [[NSNotificationCenter defaultCenter] postNotificationName:@"photoLocation" object:self.pictureView.locationArr];
+    
     CropImageViewController * cropVC = [[CropImageViewController alloc] init];
     cropVC.clipImageVC.clipImage = self.pictureView.photoImgView.image;
     cropVC.view.frame = self.view.frame;
@@ -87,7 +89,7 @@
 #pragma mark - 底部选项工具栏
 - (FBFootView *)footView {
     if (!_footView) {
-        NSArray * arr = [NSArray arrayWithObjects:@"相册", @"拍照", nil];
+        NSArray * arr = [NSArray arrayWithObjects:NSLocalizedString(@"album", nil), NSLocalizedString(@"camera", nil), nil];
         _footView = [[FBFootView alloc] init];
         _footView.backgroundColor = [UIColor blackColor];
         _footView.titleArr = arr;
@@ -128,7 +130,6 @@
         _pictureView.navView = self.navView;
         _pictureView.photoAlbumsView.photoAlbumsBtn = self.openPhotoAlbums;
         _pictureView.photoAlbumsView.nextBtn = self.nextBtn;
-        
         //  from "PhotoAlbumsView.h"
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(changeViewTitle:) name:@"PhotoAlbumsName" object:nil];
     }

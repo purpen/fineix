@@ -19,8 +19,14 @@
         self.backgroundColor = [UIColor colorWithHexString:grayLineColor alpha:1];
         
         [self setUI];
+        
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(getPhotoLocation:) name:@"photoLocation" object:nil];
     }
     return self;
+}
+
+- (void)getPhotoLocation:(NSNotification *)photoLocation {
+    NSLog(@"＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊ 照片的位置： %@", [photoLocation object]);
 }
 
 #pragma mark - 设置UI
@@ -99,7 +105,7 @@
 - (UIButton *)addLoacationBtn {
     if (!_addLoacationBtn) {
         _addLoacationBtn = [[UIButton alloc] initWithFrame:CGRectMake(44, 0, SCREEN_WIDTH - 44, 44)];
-        [_addLoacationBtn setTitle:@"添加地点" forState:(UIControlStateNormal)];
+        [_addLoacationBtn setTitle:NSLocalizedString(@"addLocation", nil) forState:(UIControlStateNormal)];
         [_addLoacationBtn setTitleColor:[UIColor colorWithHexString:blackFont alpha:1] forState:(UIControlStateNormal)];
         _addLoacationBtn.titleLabel.font = [UIFont systemFontOfSize:Font_GroupHeader];
         _addLoacationBtn.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
@@ -142,10 +148,9 @@
 #pragma mark - 地点
 - (UILabel *)location {
     if (!_location) {
-        _location = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 220, 44)];
+        _location = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH - 88, 44)];
         _location.textColor = [UIColor colorWithHexString:@"#333333" alpha:1];
         _location.font = [UIFont systemFontOfSize:14];
-//        _location.text = @"北京 太火红鸟科技有限公司";
     }
     return _location;
     
@@ -181,7 +186,7 @@
 - (UIButton *)addTagBtn {
     if (!_addTagBtn) {
         _addTagBtn = [[UIButton alloc] initWithFrame:CGRectMake(15, 0, SCREEN_WIDTH - 15, 44)];
-        [_addTagBtn setTitle:@"标签" forState:(UIControlStateNormal)];
+        [_addTagBtn setTitle:NSLocalizedString(@"tag", nil) forState:(UIControlStateNormal)];
         [_addTagBtn setTitleColor:[UIColor colorWithHexString:blackFont alpha:1] forState:(UIControlStateNormal)];
         _addTagBtn.titleLabel.font = [UIFont systemFontOfSize:Font_GroupHeader];
         _addTagBtn.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
@@ -220,7 +225,7 @@
 - (UIButton *)addSceneBtn {
     if (!_addSceneBtn) {
         _addSceneBtn = [[UIButton alloc] initWithFrame:CGRectMake(15, 0, SCREEN_WIDTH - 15, 44)];
-        [_addSceneBtn setTitle:@"所属情景" forState:(UIControlStateNormal)];
+        [_addSceneBtn setTitle:NSLocalizedString(@"onScene", nil) forState:(UIControlStateNormal)];
         [_addSceneBtn setTitleColor:[UIColor colorWithHexString:blackFont alpha:1] forState:(UIControlStateNormal)];
         _addSceneBtn.titleLabel.font = [UIFont systemFontOfSize:Font_GroupHeader];
         _addSceneBtn.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;

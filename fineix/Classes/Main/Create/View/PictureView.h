@@ -22,5 +22,6 @@
 @pro_strong NSMutableArray      *   sortPhotosArr;      //  排序的相片
 @pro_strong NSMutableArray      *   photoAlbumArr;      //  全部的相薄
 @pro_strong NSString            *   locationStr;        //  地理位置
+@pro_strong NSArray             *   locationArr;        //  存储经纬度的数组
 
 @end

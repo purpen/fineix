@@ -94,6 +94,8 @@
 		800507471C7A9CDD005AF0BE /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 800507461C7A9CDD005AF0BE /* Assets.xcassets */; };
 		8005074A1C7A9CDD005AF0BE /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 800507481C7A9CDD005AF0BE /* LaunchScreen.storyboard */; };
 		D802D7791C821D41007AFA3D /* AssetsLibrary.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D802D7781C821D41007AFA3D /* AssetsLibrary.framework */; };
+		D806223C1CA249E900B2303B /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = D806223E1CA249E900B2303B /* InfoPlist.strings */; };
+		D80622421CA24A9100B2303B /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = D80622441CA24A9100B2303B /* Localizable.strings */; };
 		D82399B61C8D6EAD007428D1 /* FBFiltersCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D82399AF1C8D6EAD007428D1 /* FBFiltersCollectionViewCell.m */; };
 		D82399B71C8D6EAD007428D1 /* FiltersView.m in Sources */ = {isa = PBXBuildFile; fileRef = D82399B01C8D6EAD007428D1 /* FiltersView.m */; };
 		D82399B81C8D6EAD007428D1 /* CameraView.m in Sources */ = {isa = PBXBuildFile; fileRef = D82399B31C8D6EAD007428D1 /* CameraView.m */; };
@@ -289,6 +291,10 @@
 		BA7E5463E540D9166EC06720 /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
 		D802D7781C821D41007AFA3D /* AssetsLibrary.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AssetsLibrary.framework; path = System/Library/Frameworks/AssetsLibrary.framework; sourceTree = SDKROOT; };
 		D802D7891C844101007AFA3D /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
+		D806223D1CA249E900B2303B /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/InfoPlist.strings"; sourceTree = "<group>"; };
+		D806223F1CA249FA00B2303B /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		D80622431CA24A9100B2303B /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Localizable.strings"; sourceTree = "<group>"; };
+		D80622451CA24A9300B2303B /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		D82399AF1C8D6EAD007428D1 /* FBFiltersCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FBFiltersCollectionViewCell.m; sourceTree = "<group>"; };
 		D82399B01C8D6EAD007428D1 /* FiltersView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FiltersView.m; sourceTree = "<group>"; };
 		D82399B11C8D6EAD007428D1 /* FiltersView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FiltersView.h; sourceTree = "<group>"; };
@@ -715,6 +721,7 @@
 		800507361C7A9CDD005AF0BE /* fineix */ = {
 			isa = PBXGroup;
 			children = (
+				D80622391CA2496900B2303B /* International */,
 				D8EFC5611C801BE40002509D /* Classes */,
 				D8EFC56F1C801BE40002509D /* Expand */,
 				280044F11C8057E6005F5C2E /* Vendors */,
@@ -735,6 +742,15 @@
 				8005074B1C7A9CDD005AF0BE /* Info.plist */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		D80622391CA2496900B2303B /* International */ = {
+			isa = PBXGroup;
+			children = (
+				D806223E1CA249E900B2303B /* InfoPlist.strings */,
+				D80622441CA24A9100B2303B /* Localizable.strings */,
+			);
+			path = International;
 			sourceTree = "<group>";
 		};
 		D82FC3CC1C820EF300DCAA7C /* Other */ = {
@@ -1138,6 +1154,7 @@
 			files = (
 				1F0EE6971C9FA383000631F0 /* UMSnsAccountViewController.xib in Resources */,
 				1F0EE6941C9FA383000631F0 /* UMShareEditViewController.xib in Resources */,
+				D80622421CA24A9100B2303B /* Localizable.strings in Resources */,
 				1FDD12D71C9A58FB00FE9C57 /* My.storyboard in Resources */,
 				280045381C8060CE005F5C2E /* mapapi.bundle in Resources */,
 				1F0EE68F1C9FA383000631F0 /* UMSocialLocalizable.strings in Resources */,
@@ -1145,6 +1162,7 @@
 				1F0EE6951C9FA383000631F0 /* UMShareEditViewControlleriPad.xib in Resources */,
 				1F0EE69C1C9FA383000631F0 /* WeiboSDK.bundle in Resources */,
 				1F0EE6911C9FA383000631F0 /* UMSCommentDetailController.xib in Resources */,
+				D806223C1CA249E900B2303B /* InfoPlist.strings in Resources */,
 				1FB64EC51C995BB0003F4D02 /* FBLocationViewController.xib in Resources */,
 				1F0EE6961C9FA383000631F0 /* UMSLoginViewController.xib in Resources */,
 				1F0EE6921C9FA383000631F0 /* UMSCommentInputController.xib in Resources */,
@@ -1303,6 +1321,24 @@
 				800507491C7A9CDD005AF0BE /* Base */,
 			);
 			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+		D806223E1CA249E900B2303B /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				D806223D1CA249E900B2303B /* zh-Hans */,
+				D806223F1CA249FA00B2303B /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+		D80622441CA24A9100B2303B /* Localizable.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				D80622431CA24A9100B2303B /* zh-Hans */,
+				D80622451CA24A9300B2303B /* en */,
+			);
+			name = Localizable.strings;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */

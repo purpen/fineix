@@ -7,6 +7,7 @@
 //
 
 #import "ReleaseViewController.h"
+#import "CreateViewController.h"
 
 @interface ReleaseViewController ()
 
@@ -21,11 +22,12 @@
     [self setNavViewUI];
     
     [self setReleaseViewUI];
+
 }
 
 - (void)setNavViewUI {
     self.navView.backgroundColor = [UIColor whiteColor];
-    [self addNavViewTitle:@"创建场景"];
+    [self addNavViewTitle:NSLocalizedString(@"releaseVcTitle", nil)];
     self.navTitle.textColor = [UIColor blackColor];
     [self addCancelDoneButton];
     [self addDoneButton];

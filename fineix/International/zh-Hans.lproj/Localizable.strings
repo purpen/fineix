@@ -1,0 +1,41 @@
+/* 
+  Localizable.strings
+  fineix
+
+  Created by FLYang on 16/3/23.
+  Copyright © 2016年 taihuoniao. All rights reserved.
+*/
+
+//  创建场景
+"next" = "继续";
+"album" = "相册";
+"camera" = "相机";
+"takePhotos" = "拍照";
+"marker" = "标记产品";
+"addUrl" = "添加链接";
+"filter" = "滤镜";
+"addDescription" = "添加描述";
+"addTitle" = "添加标题";
+"addLocation" = "添加地点";
+"tag" = "标签";
+"onScene" = "所属情境";
+"release" = "发布";
+"cancel" = "取消";
+"searchLocation" = "搜索地点";
+"sure" = "确定";
+
+//  控制器页面标题
+"createVcTitle" = "照片胶卷";
+"cropVcTitle" = "裁剪图片";
+"filtersVcTitle" = "工具";
+"releaseVcTitle" = "创建场景";
+"locationVcTitle" = "位置";
+"addTagVcTitle" = "添加标签";
+"chooseSceneVcTitle" = "选择情境";
+
+//  提示信息
+"netError" = "网络连接错误";
+"searchLocationing" = "正在搜索附近的位置";
+"againLocationing" = "正在重新定位";
+"searchLocationError" = "搜索位置出错";
+"openGPS" = "请开启GPS定位服务";

@@ -101,7 +101,7 @@
 - (UIButton *)nextBtn {
     if (!_nextBtn) {
         _nextBtn = [[UIButton alloc] initWithFrame:CGRectMake((SCREEN_WIDTH - 60), 0, 50, 50)];
-        [_nextBtn setTitle:@"继续" forState:(UIControlStateNormal)];
+        [_nextBtn setTitle:NSLocalizedString(@"next", nil) forState:(UIControlStateNormal)];
         [_nextBtn setTitleColor:[UIColor whiteColor] forState:(UIControlStateNormal)];
         _nextBtn.titleLabel.font = [UIFont systemFontOfSize:Font_ControllerTitle];
 
@@ -141,7 +141,7 @@
 - (UIButton *)doneBtn {
     if (!_doneBtn) {
         _doneBtn = [[UIButton alloc] initWithFrame:CGRectMake((SCREEN_WIDTH - 60), 0, 50, 50)];
-        [_doneBtn setTitle:@"发布" forState:(UIControlStateNormal)];
+        [_doneBtn setTitle:NSLocalizedString(@"release", nil) forState:(UIControlStateNormal)];
         [_doneBtn setTitleColor:[UIColor colorWithHexString:color alpha:1] forState:(UIControlStateNormal)];
         _doneBtn.titleLabel.font = [UIFont systemFontOfSize:Font_ControllerTitle];
     }
