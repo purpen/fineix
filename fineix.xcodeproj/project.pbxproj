@@ -56,6 +56,7 @@
 		1F5AD4AF1CA0F9980020D15E /* NSString+UserModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F5AD4AE1CA0F9980020D15E /* NSString+UserModel.m */; };
 		1F5AD4B21CA0FA170020D15E /* NSNumber+UserModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F5AD4B11CA0FA170020D15E /* NSNumber+UserModel.m */; };
 		1F5AD4BB1CA143240020D15E /* ForgotPasswordViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F5AD4BA1CA143240020D15E /* ForgotPasswordViewController.m */; };
+		1F9E69AE1CA3BD43006137BB /* FBBindingMobilePhoneNumber.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F9E69AD1CA3BD43006137BB /* FBBindingMobilePhoneNumber.m */; };
 		1FB64EBA1C990AFB003F4D02 /* FBMapLocatinViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1FB64EB61C990AFB003F4D02 /* FBMapLocatinViewController.m */; };
 		1FB64EBB1C990AFB003F4D02 /* FBMapLocatinViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1FB64EB71C990AFB003F4D02 /* FBMapLocatinViewController.xib */; };
 		1FB64EC41C995BB0003F4D02 /* FBLocationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1FB64EC21C995BB0003F4D02 /* FBLocationViewController.m */; };
@@ -234,6 +235,8 @@
 		1F5AD4B11CA0FA170020D15E /* NSNumber+UserModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSNumber+UserModel.m"; sourceTree = "<group>"; };
 		1F5AD4B91CA143240020D15E /* ForgotPasswordViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ForgotPasswordViewController.h; sourceTree = "<group>"; };
 		1F5AD4BA1CA143240020D15E /* ForgotPasswordViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ForgotPasswordViewController.m; sourceTree = "<group>"; };
+		1F9E69AC1CA3BD43006137BB /* FBBindingMobilePhoneNumber.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FBBindingMobilePhoneNumber.h; sourceTree = "<group>"; };
+		1F9E69AD1CA3BD43006137BB /* FBBindingMobilePhoneNumber.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FBBindingMobilePhoneNumber.m; sourceTree = "<group>"; };
 		1FB64EB51C990AFB003F4D02 /* FBMapLocatinViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FBMapLocatinViewController.h; sourceTree = "<group>"; };
 		1FB64EB61C990AFB003F4D02 /* FBMapLocatinViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FBMapLocatinViewController.m; sourceTree = "<group>"; };
 		1FB64EB71C990AFB003F4D02 /* FBMapLocatinViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FBMapLocatinViewController.xib; sourceTree = "<group>"; };
@@ -563,6 +566,8 @@
 				1F5AD48F1CA0E2220020D15E /* FBLoginViewController.m */,
 				1F5AD4901CA0E2220020D15E /* FBSignupViewController.h */,
 				1F5AD4911CA0E2220020D15E /* FBSignupViewController.m */,
+				1F9E69AC1CA3BD43006137BB /* FBBindingMobilePhoneNumber.h */,
+				1F9E69AD1CA3BD43006137BB /* FBBindingMobilePhoneNumber.m */,
 				1F5AD4B91CA143240020D15E /* ForgotPasswordViewController.h */,
 				1F5AD4BA1CA143240020D15E /* ForgotPasswordViewController.m */,
 			);
@@ -1212,6 +1217,7 @@
 			files = (
 				1F5AD4BB1CA143240020D15E /* ForgotPasswordViewController.m in Sources */,
 				D8EFC59F1C802DF20002509D /* MallViewController.m in Sources */,
+				1F9E69AE1CA3BD43006137BB /* FBBindingMobilePhoneNumber.m in Sources */,
 				1F5AD4941CA0E2220020D15E /* FBSignupViewController.m in Sources */,
 				1F5AD4AF1CA0F9980020D15E /* NSString+UserModel.m in Sources */,
 				1F5AD4A91CA0F45E0020D15E /* UserInfo.m in Sources */,

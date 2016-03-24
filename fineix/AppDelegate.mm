@@ -25,14 +25,14 @@
 @end
 
 NSString *const UMSocialAppKey = @"56ef6ab167e58e85710005b3";
-NSString *const SinaAppKey = @"3408719659";
-NSString *const SinaAppSecret = @"911818181321ee0767a9e34c07a1f018";
+NSString *const SinaAppKey = @"1342896218";
+NSString *const SinaAppSecret = @"ed4fe8faa35c5b006ad7a87d76e60583";
 
 NSString *const WechatAppID = @"wxdf5f6f5907a238e8";
 NSString *const WechatAppSecret = @"227f6fe4c54ad3e51eed975815167b0b";
 
-NSString *const QQAppID = @"101092227";
-NSString *const QQAppKey = @"ba61849a6ab90421e849c116f4f4dea4";
+NSString *const QQAppID = @"1105228778";
+NSString *const QQAppKey = @"SFUAKQBkqY8AjWGh";
 
 @implementation AppDelegate
 
@@ -79,13 +79,10 @@ NSString *const QQAppKey = @"ba61849a6ab90421e849c116f4f4dea4";
     [UMSocialQQHandler setQQWithAppId:QQAppID appKey:QQAppKey url:@"http://www.taihuoniao.com"];
     
     //打开新浪微博的SSO开关，设置新浪微博回调地址，这里必须要和你在新浪微博后台设置的回调地址一致。若在新浪后台设置我们的回调地址，“http://sns.whalecloud.com/sina2/callback”，这里可以传nil
-    [UMSocialSinaSSOHandler openNewSinaSSOWithAppKey:SinaAppKey secret:SinaAppSecret RedirectURL:@"http://sns.whalecloud.com/sina2/callback"];
+    [UMSocialSinaSSOHandler openNewSinaSSOWithAppKey:SinaAppKey secret:SinaAppSecret RedirectURL:@"http://www.taihuoniao.com"];
     
-    //    由于苹果审核政策需求，建议大家对未安装客户端平台进行隐藏，在设置QQ、微信AppID之后调用下面的方法
+    // 由于苹果审核政策需求，建议大家对未安装客户端平台进行隐藏，在设置QQ、微信AppID之后调用下面的方法
     [UMSocialConfig hiddenNotInstallPlatforms:@[UMShareToQQ, UMShareToWechatSession, UMShareToWechatTimeline, UMShareToSina]];
-    
-    
-    
     
 
     return YES;
