@@ -21,7 +21,6 @@
 "onScene" = "所属情境";
 "release" = "发布";
 "cancel" = "取消";
-"searchLocation" = "搜索地点";
 "sure" = "确定";
 
 //  控制器页面标题
@@ -39,3 +38,7 @@
 "againLocationing" = "正在重新定位";
 "searchLocationError" = "搜索位置出错";
 "openGPS" = "请开启GPS定位服务";
+
+//  搜索框提示
+"searchLocation" = "搜索地点";
+"searchGoods" = "搜索产品";

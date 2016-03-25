@@ -7,6 +7,7 @@
 //
 
 #import "SearchLocationViewController.h"
+#import "SVProgressHUD.h"
 
 @interface SearchLocationViewController ()
 

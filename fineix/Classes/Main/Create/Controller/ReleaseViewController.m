@@ -44,7 +44,6 @@
 - (ScenceMessageView *)scenceView {
     if (!_scenceView) {
         _scenceView = [[ScenceMessageView alloc] initWithFrame:CGRectMake(0, 50, SCREEN_WIDTH, 236.5)];
-        
     }
     return _scenceView;
 }

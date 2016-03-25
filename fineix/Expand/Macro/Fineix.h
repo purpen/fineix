@@ -9,7 +9,6 @@
 #ifndef Fineix_h
 #define Fineix_h
 
-#import "SVProgressHUD.h"
 #import "UIColor+Extension.h"
 #import "Masonry.h"
 
@@ -27,10 +26,11 @@
 
 
 #undef 颜色
-#define color                   @"#FF3366"
+#define fineixColor             @"#FF3366"
 #define grayLineColor           @"#F7F7F7"
 #define pictureNavColor         @"#222222"
 #define blackFont               @"#333333"
+#define lineGrayColor           @"#F0F0F1"
 
 #undef  字体大小
 //  页面标题

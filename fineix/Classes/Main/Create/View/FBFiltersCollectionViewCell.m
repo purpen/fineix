@@ -31,7 +31,7 @@
 - (UIImageView *)filtersImageView {
     if (!_filtersImageView) {
         _filtersImageView = [[UIImageView alloc] initWithFrame:CGRectMake(7.5, 15, 70, 70)];
-        _filtersImageView.layer.borderColor = [UIColor colorWithHexString:color alpha:1].CGColor;
+        _filtersImageView.layer.borderColor = [UIColor colorWithHexString:fineixColor alpha:1].CGColor;
     }
     return _filtersImageView;
 }
@@ -40,7 +40,7 @@
 - (void)setSelected:(BOOL)selected {
     [super setSelected:selected];
     self.filtersImageView.layer.borderWidth = selected ? 2 : 0;
-    self.filtersTitle.textColor = [UIColor colorWithHexString:color alpha:1];
+    self.filtersTitle.textColor = [UIColor colorWithHexString:fineixColor alpha:1];
     
     if (selected == NO) {
         self.filtersTitle.textColor = [UIColor whiteColor];

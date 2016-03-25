@@ -14,6 +14,8 @@
     self = [super initWithFrame:frame];
     if (self) {
         
+        self.backgroundColor = [UIColor whiteColor];
+        
         [self addSubview:self.searchIcon];
         
         [self addSubview:self.searchInputBox];

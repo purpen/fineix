@@ -47,7 +47,7 @@ NSString *const QQAppKey = @"SFUAKQBkqY8AjWGh";
     
     //  设置SVP颜色
     [SVProgressHUD setBackgroundColor:[UIColor whiteColor]];
-    [SVProgressHUD setForegroundColor:[UIColor colorWithHexString:color alpha:1]];
+    [SVProgressHUD setForegroundColor:[UIColor colorWithHexString:fineixColor alpha:1]];
     
     _mapManager = [[BMKMapManager alloc] init];
     BOOL ret = [_mapManager start:@"dcmbwcn8m1O2sZsshU4xL4Gn" generalDelegate:nil];

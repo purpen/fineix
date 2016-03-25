@@ -107,6 +107,7 @@
 		D82399CF1C8D6EB5007428D1 /* PictureToolViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D82399C51C8D6EB5007428D1 /* PictureToolViewController.m */; };
 		D82399D01C8D6EB5007428D1 /* ClipImageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D82399C61C8D6EB5007428D1 /* ClipImageViewController.m */; };
 		D82DAF991C82026700E0650B /* FBPictureCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D82DAF981C82026700E0650B /* FBPictureCollectionViewCell.m */; };
+		D830955C1CA4FE9100E55D6D /* AddUrlView.m in Sources */ = {isa = PBXBuildFile; fileRef = D830955B1CA4FE9100E55D6D /* AddUrlView.m */; };
 		D8368FCD1C85A67700673306 /* CropImageView.m in Sources */ = {isa = PBXBuildFile; fileRef = D8368FCC1C85A67700673306 /* CropImageView.m */; };
 		D83A64321C8E7765003DB8BB /* Photos.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D83A64311C8E7765003DB8BB /* Photos.framework */; };
 		D83A64331C8E7E93003DB8BB /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D802D7891C844101007AFA3D /* AVFoundation.framework */; };
@@ -317,6 +318,8 @@
 		D82399C81C8D6EB5007428D1 /* PictureToolViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PictureToolViewController.h; sourceTree = "<group>"; };
 		D82DAF971C82026700E0650B /* FBPictureCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FBPictureCollectionViewCell.h; sourceTree = "<group>"; };
 		D82DAF981C82026700E0650B /* FBPictureCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FBPictureCollectionViewCell.m; sourceTree = "<group>"; };
+		D830955A1CA4FE9100E55D6D /* AddUrlView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AddUrlView.h; sourceTree = "<group>"; };
+		D830955B1CA4FE9100E55D6D /* AddUrlView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AddUrlView.m; sourceTree = "<group>"; };
 		D8368FCB1C85A67700673306 /* CropImageView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CropImageView.h; sourceTree = "<group>"; };
 		D8368FCC1C85A67700673306 /* CropImageView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CropImageView.m; sourceTree = "<group>"; };
 		D83A64311C8E7765003DB8BB /* Photos.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Photos.framework; path = System/Library/Frameworks/Photos.framework; sourceTree = SDKROOT; };
@@ -1033,6 +1036,8 @@
 				D859B7971C91803400685CF6 /* ScenceMessageView.m */,
 				D859B7A11C92A5C300685CF6 /* ScenceAddMoreView.h */,
 				D859B7A21C92A5C300685CF6 /* ScenceAddMoreView.m */,
+				D830955A1CA4FE9100E55D6D /* AddUrlView.h */,
+				D830955B1CA4FE9100E55D6D /* AddUrlView.m */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -1275,6 +1280,7 @@
 				D82399C91C8D6EB5007428D1 /* CropImageViewController.m in Sources */,
 				1FDD12E01C9A59DF00FE9C57 /* MyViewController.m in Sources */,
 				1FDD12EF1C9A90F300FE9C57 /* MyShippingAddressViewController.m in Sources */,
+				D830955C1CA4FE9100E55D6D /* AddUrlView.m in Sources */,
 				1F0EE6D11CA00D53000631F0 /* FBAPI.m in Sources */,
 				1F0EE6D21CA00D53000631F0 /* FBRequest.m in Sources */,
 				D8E3E3AE1C8FCCB6000CA536 /* FBViewController.m in Sources */,

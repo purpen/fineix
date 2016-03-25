@@ -7,6 +7,7 @@
 //
 
 #import "ForgotPasswordViewController.h"
+#import "SVProgressHUD.h"
 #import "NSString+Helper.h"
 #import "FBRequest.h"
 #import "FBAPI.h"
