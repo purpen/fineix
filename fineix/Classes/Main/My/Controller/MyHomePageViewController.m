@@ -14,6 +14,7 @@
 
 {
     UIScrollView *_homeScrollView;
+    UIImageView *_imgV;//背景图片
 }
 
 @end
@@ -27,9 +28,26 @@
     [self setChanel];
     //添加情景
     [self AddScene:4];
+    //让背景图片下拉变大
+    _homeScrollView.delegate = self;
+    //设置图片的contentMode属性
+    _imgV.contentMode = UIViewContentModeScaleAspectFill;
+    _imgV.autoresizesSubviews = YES;
 }
 
- 
+-(void)scrollViewDidScroll:(UIScrollView *)scrollView{
+    //当滑动结束时获取当前滚动坐标的y值
+    CGFloat y = scrollView.contentOffset.y;
+    if (y<0) {
+        //当坐标y大于0时就进行放大
+        //改变图片的y坐标和高度
+        CGRect frame = _imgV.frame;
+        
+        frame.origin.y = y;
+        frame.size.height = -y+240;
+        _imgV.frame = frame;
+    }
+}
 
 -(void)setScrollView{
     _homeScrollView = [[UIScrollView alloc] initWithFrame:self.view.frame];
@@ -39,49 +57,64 @@
 }
 
 -(void)setImage{
-    UIImageView *imgV = [[UIImageView alloc] initWithFrame:CGRectMake(0, -20, self.view.frame.size.width, 240)];
-    imgV.image = [UIImage imageNamed:@"image"];
-    imgV.userInteractionEnabled = YES;
+    _imgV = [[UIImageView alloc] initWithFrame:CGRectMake(0, -20, self.view.frame.size.width, 240)];
+    _imgV.image = [UIImage imageNamed:@"image"];
+    _imgV.userInteractionEnabled = YES;
     
-    UIButton *btn = [[UIButton alloc] initWithFrame:CGRectMake(16, 35, 10, 18)];
+    UIButton *btn = [[UIButton alloc] initWithFrame:CGRectMake(16, 35, 30, 18)];
     [btn setImage:[UIImage imageNamed:@"Fill 1"] forState:UIControlStateNormal];
     [btn addTarget:self action:@selector(clickBackBtn) forControlEvents:UIControlEventTouchUpInside];
-    [imgV addSubview:btn];
+    [_imgV addSubview:btn];
+    //设置自动的布局
+//    btn.clipsToBounds = YES;
+//    btn.autoresizingMask = UIViewAutoresizingFlexibleTopMargin;
     
-    UILabel *nameLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 35, 100, 20)];
-    nameLabel.center = CGPointMake(self.view.center.x, 45);
+    UILabel *nameLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 20, 100, 20)];
+    nameLabel.center = CGPointMake(self.view.center.x, 30);
     nameLabel.text = @"wqeqwe";
     nameLabel.textColor = [UIColor whiteColor];
     nameLabel.font = [UIFont systemFontOfSize:13];
     nameLabel.textAlignment = NSTextAlignmentCenter;
-    [imgV addSubview:nameLabel];
+    //设置自动的布局
+    nameLabel.clipsToBounds = YES;
+    nameLabel.autoresizingMask = UIViewAutoresizingFlexibleTopMargin;
+    [_imgV addSubview:nameLabel];
     
     
-    UIImageView *headPortrait = [[UIImageView alloc] initWithFrame:CGRectMake(0, 80, 80, 80)];
-    headPortrait.center = CGPointMake(self.view.center.x, 120);
+    UIImageView *headPortrait = [[UIImageView alloc] initWithFrame:CGRectMake(0, 65, 80, 80)];
+    headPortrait.center = CGPointMake(self.view.center.x, 105);
     headPortrait.image = [UIImage imageNamed:@"Dina Alexander"];
     headPortrait.layer.cornerRadius = 40;
-    [imgV addSubview:headPortrait];
+    //设置自动的布局
+    headPortrait.clipsToBounds = YES;
+    headPortrait.autoresizingMask = UIViewAutoresizingFlexibleTopMargin;
+    [_imgV addSubview:headPortrait];
     
-    UILabel *addressLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 171, 100, 20)];
-    addressLabel.center = CGPointMake(self.view.center.x, 181);
+    UILabel *addressLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 155, 100, 20)];
+    addressLabel.center = CGPointMake(self.view.center.x, 165);
     addressLabel.text = @"wqeqwe";
     addressLabel.textColor = [UIColor whiteColor];
     addressLabel.font = [UIFont systemFontOfSize:12];
     addressLabel.textAlignment = NSTextAlignmentCenter;
-    [imgV addSubview:addressLabel];
+    //设置自动的布局
+    addressLabel.clipsToBounds = YES;
+    addressLabel.autoresizingMask = UIViewAutoresizingFlexibleTopMargin;
+    [_imgV addSubview:addressLabel];
     
     
-    UIButton *personalDataButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 195, 111, 26)];
-    personalDataButton.center = CGPointMake(self.view.center.x, 195+13);
+    UIButton *personalDataButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 180, 111, 26)];
+    personalDataButton.center = CGPointMake(self.view.center.x, 180+13);
     personalDataButton.layer.cornerRadius = 2;
     personalDataButton.backgroundColor = [UIColor redColor];
     [personalDataButton setTitle:@"修改个人资料" forState:UIControlStateNormal];
     personalDataButton.titleLabel.font = [UIFont systemFontOfSize:13];
-    [imgV addSubview:personalDataButton];
+    //设置自动的布局
+    personalDataButton.clipsToBounds = YES;
+    personalDataButton.autoresizingMask = UIViewAutoresizingFlexibleTopMargin;
+    [_imgV addSubview:personalDataButton];
     
     
-    [_homeScrollView addSubview:imgV];
+    [_homeScrollView addSubview:_imgV];
     
 }
 
@@ -111,8 +144,9 @@
     self.navigationController.navigationBarHidden = YES;
 }
 
--(void)viewDidDisappear:(BOOL)animated{
+-(void)viewWillDisappear:(BOOL)animated{
     self.navigationController.navigationBarHidden = NO;
+    self.tabBarController.tabBar.hidden = NO;
 }
 
 - (void)didReceiveMemoryWarning {

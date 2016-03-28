@@ -77,12 +77,10 @@ static NSString *const FindPwdURL = @"/auth/find_pwd";
         if ([[result objectForKey:@"success"] isEqualToNumber:@1]) {
             //设置完新密码后更新用户信息
             UserInfo *userInfo = [UserInfo mj_objectWithKeyValues:[result objectForKey:@"data"]];
+            [userInfo saveOrUpdate];
             [userInfo updateUserInfoEntity];
             UserInfoEntity *entity = [UserInfoEntity defaultUserInfoEntity];
             entity.isLogin = YES;
-            dispatch_async(dispatch_get_global_queue(0, 0), ^{
-                [userInfo saveOrUpdate];
-            });
             [self dismissViewControllerAnimated:YES completion:nil];
             [SVProgressHUD showSuccessWithStatus:@"设置成功"];
         }else{

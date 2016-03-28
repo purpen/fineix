@@ -16,6 +16,9 @@
 #import "UMSocialQQHandler.h"
 #import "UMSocialSinaSSOHandler.h"
 #import "UserInfo.h"
+#import "UserInfoEntity.h"
+#import "FBRequest.h"
+#import "FBAPI.h"
 
 
 @interface AppDelegate ()
@@ -33,6 +36,7 @@ NSString *const WechatAppSecret = @"227f6fe4c54ad3e51eed975815167b0b";
 
 NSString *const QQAppID = @"1105228778";
 NSString *const QQAppKey = @"SFUAKQBkqY8AjWGh";
+NSString *const determineLogin = @"/auth/check_login";
 
 @implementation AppDelegate
 
@@ -44,6 +48,29 @@ NSString *const QQAppKey = @"SFUAKQBkqY8AjWGh";
     
     FBTabBarController * tabBarC = [[FBTabBarController alloc] init];
     self.window.rootViewController = tabBarC;
+    
+    //首先统一设置为未登录
+    UserInfoEntity *entity = [UserInfoEntity defaultUserInfoEntity];
+    entity.isLogin = NO;
+    //发送网络请求查看登录状态
+    FBRequest *request = [FBAPI postWithUrlString:determineLogin requestDictionary:nil delegate:self];
+    [request startRequestSuccess:^(FBRequest *request, id result) {
+        //发送成功查看登录信息
+        NSDictionary *dataDic = [result objectForKey:@"data"];
+        if ([[dataDic objectForKey:@"is_login"] boolValue]) {
+            //已经登录的获取用户信息，更改登录状态
+            
+            [[[UserInfo findAll] lastObject] updateUserInfoEntity];
+            entity.isLogin = YES;
+        }
+    } failure:^(FBRequest *request, NSError *error) {
+        //发送失败提示失败信息
+        [SVProgressHUD showErrorWithStatus:error.localizedDescription];
+    }];
+    
+    
+    
+    
     
     //  设置SVP颜色
     [SVProgressHUD setBackgroundColor:[UIColor whiteColor]];

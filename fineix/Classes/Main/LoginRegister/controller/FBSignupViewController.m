@@ -131,12 +131,10 @@ static NSString *const thirdRegisteredNotBinding = @"/auth/third_register_withou
     if ([request.flag isEqualToString:RegisterCodeURL]) {
         if ([[result objectForKey:@"success"] isEqualToNumber:@1]) {
             UserInfo * userInfo = [UserInfo mj_objectWithKeyValues:[result objectForKey:@"data"]];
+            [userInfo saveOrUpdate];
             [userInfo updateUserInfoEntity];
             UserInfoEntity * userEntity = [UserInfoEntity defaultUserInfoEntity];
             userEntity.isLogin = YES;
-            dispatch_async(dispatch_get_global_queue(0, 0), ^{
-                [userInfo saveOrUpdate];
-            });
             [self dismissViewControllerAnimated:YES completion:nil];
             [SVProgressHUD showSuccessWithStatus:@"注册成功"];
         } else {
@@ -232,11 +230,13 @@ static NSString *const thirdRegisteredNotBinding = @"/auth/third_register_withou
         if ([[dataDic objectForKey:@"has_user"] isEqualToNumber:@1]) {
             //用户存在，更新当前用户的信息
             UserInfo *userinfo = [UserInfo mj_objectWithKeyValues:[dataDic objectForKey:@"user"]];
+            [userinfo saveOrUpdate];
             [userinfo updateUserInfoEntity];
-            NSLog(@"******************************%@",userinfo);
+            
             UserInfoEntity *entity = [UserInfoEntity defaultUserInfoEntity];
             entity.isLogin = YES;
-            [userinfo saveOrUpdate];
+            
+            
             [SVProgressHUD showSuccessWithStatus:@"注册成功"];
         }else{
             //如果用户不存在,提示用户是否进行绑定
@@ -285,10 +285,11 @@ static NSString *const thirdRegisteredNotBinding = @"/auth/third_register_withou
                     //如果请求成功，并获取用户信息来更新当前用户信息
                     NSDictionary *dataDic = [result objectForKey:@"data"];
                     UserInfo *info = [UserInfo mj_objectWithKeyValues:dataDic];
+                    [info saveOrUpdate];
                     [info updateUserInfoEntity];
                     UserInfoEntity *entity = [UserInfoEntity defaultUserInfoEntity];
                     entity.isLogin = YES;
-                    [info saveOrUpdate];
+                    
                     [SVProgressHUD showSuccessWithStatus:@"注册成功"];
                 } failure:^(FBRequest *request, NSError *error) {
                     //如果请求失败提示失败信息

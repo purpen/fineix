@@ -17,6 +17,7 @@
 #import "FBAPI.h"
 #import "UserInfo.h"
 #include "UserInfoEntity.h"
+#import "MyViewController.h"
 
 
 @interface FBLoginViewController ()<UITextFieldDelegate,FBRequestDelegate>
@@ -172,15 +173,18 @@ NSString *const logOut = @"/auth/logout";//退出登录接口
     //如果第三方登录发送成功，更新用户信息
     [request startRequestSuccess:^(FBRequest *request, id result) {
         NSDictionary *dataDic = [result objectForKey:@"data"];
-        NSLog(@" dataDic  %@",dataDic);
+        
         if ([[dataDic objectForKey:@"has_user"] isEqualToNumber:@1]) {
             UserInfo *userinfo = [UserInfo mj_objectWithKeyValues:[dataDic objectForKey:@"user"]];
+            [userinfo saveOrUpdate];
             [userinfo updateUserInfoEntity];
-            NSLog(@"*******************************%@",userinfo);
             UserInfoEntity *entity = [UserInfoEntity defaultUserInfoEntity];
             entity.isLogin = YES;
-            [userinfo saveOrUpdate];
+            NSLog(@"entity******************************%@",entity.nickname);
             [SVProgressHUD showSuccessWithStatus:@"登录成功"];
+            UIStoryboard *myStoryBoard = [UIStoryboard storyboardWithName:@"My" bundle:[NSBundle mainBundle]];
+            MyViewController *myVC = [myStoryBoard instantiateViewControllerWithIdentifier:@"MyViewController"];
+            [self.navigationController pushViewController:myVC animated:YES];
         }else{
             //用户不存在需要绑定已有帐号操作
         }
@@ -227,11 +231,12 @@ NSString *const logOut = @"/auth/logout";//退出登录接口
         //如果成功，获取到用户的信息
         if ([[result objectForKey:@"success"] isEqualToNumber:@1]) {
             UserInfo *userInfo = [UserInfo mj_objectWithKeyValues:[result objectForKey:@"data"]];
+            [userInfo saveOrUpdate];
             [userInfo updateUserInfoEntity];
             NSLog(@"%@",userInfo);
             UserInfoEntity *entity = [UserInfoEntity defaultUserInfoEntity];
             entity.isLogin = YES;
-            [userInfo saveOrUpdate];
+            
             [self dismissViewControllerAnimated:YES completion:nil];
             [SVProgressHUD showSuccessWithStatus:@"登录成功"];
         }//如果失败，提示用户失败原因
@@ -256,18 +261,18 @@ NSString *const logOut = @"/auth/logout";//退出登录接口
 - (IBAction)clickLogOutBtn:(UIButton *)sender {
     //如果已经登录了开始发送网络请求
     UserInfoEntity *entity = [UserInfoEntity defaultUserInfoEntity];
-    if (entity.isLogin == YES) {
+    //if (entity.isLogin == YES) {
         NSDictionary *params = @{
                                  @"from_to":@1
                                  };
         FBRequest *request = [FBAPI postWithUrlString:logOut requestDictionary:params delegate:self];
         request.flag = logOut;
         [request startRequest];
-    }
+    //}
     //如果还没有登录提示用户登录
-    else{
-        [SVProgressHUD showInfoWithStatus:@"请先登录"];
-    }
+//    else{
+//        [SVProgressHUD showInfoWithStatus:@"请先登录"];
+//    }
 }
 
 /*

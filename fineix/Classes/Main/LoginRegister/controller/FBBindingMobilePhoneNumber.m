@@ -64,10 +64,11 @@ NSString *thirdRegistrationBindingMobilePhone = @"/auth/third_register_with_phon
                 //请求成功，进行用户信息关联
                 NSDictionary *dataDic = [result objectForKey:@"data"];
                 UserInfo *info = [UserInfo mj_objectWithKeyValues:dataDic];
+                [info saveOrUpdate];
                 [info updateUserInfoEntity];
                 UserInfoEntity *entity = [UserInfoEntity defaultUserInfoEntity];
                 entity.isLogin = YES;
-                [info saveOrUpdate];
+                
                 [SVProgressHUD showSuccessWithStatus:@"登录成功"];
             } failure:^(FBRequest *request, NSError *error) {
                 //请求失败，提示错误信息
