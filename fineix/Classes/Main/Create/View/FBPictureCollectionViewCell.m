@@ -22,7 +22,7 @@
 - (UIImageView *)imageView {
     if (!_imageView) {
         _imageView = [[UIImageView alloc] initWithFrame:self.bounds];
-        _imageView.layer.borderColor = [UIColor colorWithHexString:color alpha:1].CGColor;
+        _imageView.layer.borderColor = [UIColor colorWithHexString:fineixColor alpha:1].CGColor;
     }
     return _imageView;
 }

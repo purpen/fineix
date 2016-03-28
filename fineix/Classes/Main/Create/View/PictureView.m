@@ -176,7 +176,7 @@
     NSDictionary * gpsDict = [imageMetadata objectForKey:@"{GPS}"];
     _locationArr = [NSArray arrayWithObjects:[NSString stringWithFormat:@"%f",[[gpsDict valueForKey:@"Longitude"] floatValue]],
                              [NSString stringWithFormat:@"%f",[[gpsDict valueForKey:@"Latitude"] floatValue]], nil];
-    NSLog(@"＝＝＝＝＝＝＝＝＝＝＝ 经纬度%@", _locationArr);
+    NSLog(@"照片所带的经纬度%@", _locationArr);
 }
 
 

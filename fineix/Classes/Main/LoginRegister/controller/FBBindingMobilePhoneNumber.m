@@ -7,6 +7,7 @@
 //
 
 #import "FBBindingMobilePhoneNumber.h"
+#import "SVProgressHUD.h"
 #import "NSString+Helper.h"
 #import "Fineix.h"
 #import "FBRequest.h"

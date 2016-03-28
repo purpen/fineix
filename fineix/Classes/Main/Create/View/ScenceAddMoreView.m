@@ -11,7 +11,7 @@
 #import "AddTagViewController.h"
 #import "SelectSceneViewController.h"
 
-static NSInteger btnTag = 100;
+static const NSInteger btnTag = 100;
 
 @implementation ScenceAddMoreView
 

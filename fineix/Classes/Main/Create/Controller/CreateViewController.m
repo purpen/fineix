@@ -96,7 +96,7 @@
         _footView.titleFontSize = Font_ControllerTitle;
         _footView.btnBgColor = [UIColor blackColor];
         _footView.titleNormalColor = [UIColor whiteColor];
-        _footView.titleSeletedColor = [UIColor colorWithHexString:color alpha:1];
+        _footView.titleSeletedColor = [UIColor colorWithHexString:fineixColor alpha:1];
         [_footView addFootViewButton];
         [_footView showLineWithButton];
         _footView.delegate = self;

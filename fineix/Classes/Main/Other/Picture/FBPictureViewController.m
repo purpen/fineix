@@ -92,7 +92,7 @@
 - (UILabel *)line {
     if (!_line) {
         _line = [[UILabel alloc] initWithFrame:CGRectMake(0, 49, SCREEN_WIDTH, 1)];
-        _line.backgroundColor = [UIColor colorWithHexString:@"#F0F0F1" alpha:1];
+        _line.backgroundColor = [UIColor colorWithHexString:lineGrayColor alpha:1];
     }
     return _line;
 }
@@ -142,7 +142,7 @@
     if (!_doneBtn) {
         _doneBtn = [[UIButton alloc] initWithFrame:CGRectMake((SCREEN_WIDTH - 60), 0, 50, 50)];
         [_doneBtn setTitle:NSLocalizedString(@"release", nil) forState:(UIControlStateNormal)];
-        [_doneBtn setTitleColor:[UIColor colorWithHexString:color alpha:1] forState:(UIControlStateNormal)];
+        [_doneBtn setTitleColor:[UIColor colorWithHexString:fineixColor alpha:1] forState:(UIControlStateNormal)];
         _doneBtn.titleLabel.font = [UIFont systemFontOfSize:Font_ControllerTitle];
     }
     return _doneBtn;
