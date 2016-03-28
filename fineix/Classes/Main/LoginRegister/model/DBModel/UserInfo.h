@@ -7,7 +7,7 @@
 //
 
 #import "JKDBModel.h"
-#import <MJExtension.h>
+#import "MJExtension.h"
 
 @interface UserInfo : JKDBModel
 
