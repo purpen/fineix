@@ -7,6 +7,7 @@
 //
 
 #import "CameraView.h"
+#import <SVProgressHUD/SVProgressHUD.h>
 #import "FiltersViewController.h"
 
 @implementation CameraView
@@ -86,15 +87,20 @@
 - (void)flashBtnClick {
     AVCaptureDevice * device = [AVCaptureDevice defaultDeviceWithMediaType:AVMediaTypeVideo];
     [device lockForConfiguration:nil];
-    if (_flashBtn.selected == NO) {
-        device.flashMode = AVCaptureFlashModeOn;
-        _flashBtn.selected = YES;
-        [self showMessage:@"闪光灯已打开"];
+    if ([device hasFlash]) {
+        if (_flashBtn.selected == NO) {
+            device.flashMode = AVCaptureFlashModeOn;
+            _flashBtn.selected = YES;
+            [self showMessage:@"闪光灯已打开"];
     
-    } else if (_flashBtn.selected == YES) {
-        device.flashMode = AVCaptureFlashModeOff;
-        _flashBtn.selected = NO;
-        [self showMessage:@"闪光灯已关闭"];
+        } else if (_flashBtn.selected == YES) {
+            device.flashMode = AVCaptureFlashModeOff;
+            _flashBtn.selected = NO;
+            [self showMessage:@"闪光灯已关闭"];
+        }
+        
+    } else {
+        [SVProgressHUD showInfoWithStatus:@"该设备没有闪光灯"];
     }
     
     [device unlockForConfiguration];

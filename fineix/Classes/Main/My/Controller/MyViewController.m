@@ -7,6 +7,7 @@
 //
 
 #import "MyViewController.h"
+#import "Fineix.h"
 #import "FBLoginRegisterViewController.h"
 #import "UserInfoEntity.h"
 #import <SDWebImage/UIImageView+WebCache.h>
@@ -23,6 +24,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    self.view.backgroundColor = [UIColor colorWithHexString:lineGrayColor alpha:1];
     // Do any additional setup after loading the view.
     [self setImagesRoundedCorners:27.0 :_headPortraitImageV];
     [self setImagesRoundedCorners:10.0 :_levelImageV];

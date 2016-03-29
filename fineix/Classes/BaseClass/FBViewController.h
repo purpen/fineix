@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "Fineix.h"
 
 @interface FBViewController : UIViewController
 

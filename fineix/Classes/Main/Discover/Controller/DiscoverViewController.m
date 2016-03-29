@@ -11,7 +11,8 @@
 @implementation DiscoverViewController
 
 - (void)viewDidLoad {
-
+    [super viewDidLoad];
+    self.view.backgroundColor = [UIColor colorWithHexString:lineGrayColor alpha:1];
 }
 
 @end

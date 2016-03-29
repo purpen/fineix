@@ -26,11 +26,12 @@
 
 
 #undef 颜色
-#define fineixColor             @"#FF3366"
+#define fineixColor             @"#BE8914"
 #define grayLineColor           @"#F7F7F7"
 #define pictureNavColor         @"#222222"
 #define blackFont               @"#333333"
 #define lineGrayColor           @"#F0F0F1"
+#define tabBarTitle             @"#999999"
 
 #undef  字体大小
 //  页面标题

@@ -16,5 +16,6 @@
  *  创建情景按钮
  */
 @pro_strong UIButton    *   createBtn;
+@pro_strong UILabel     *   createTitle;
 
 @end

@@ -46,9 +46,14 @@
  *  @param image 默认图标
  *  @Param seletedImage 点击后的图标
  */
-- (void)setChildViewController:(UIViewController *)vc image:(NSString *)image seletedImage:(NSString *)seletedImage {
+- (void)setChildViewController:(UIViewController *)vc image:(NSString *)image seletedImage:(NSString *)seletedImage itemTitle:(NSString *)title {
     vc.tabBarItem.image = [UIImage imageNamed:image];
     vc.tabBarItem.selectedImage = [UIImage imageNamed:seletedImage];
+    vc.tabBarItem.title = title;
+    
+    //  tabBarItem点击的文字颜色
+    [vc.tabBarItem setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys:[UIColor colorWithHexString:tabBarTitle alpha:1], NSForegroundColorAttributeName, nil] forState:(UIControlStateNormal)];
+    [vc.tabBarItem setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys:[UIColor colorWithHexString:fineixColor alpha:1], NSForegroundColorAttributeName, nil] forState:(UIControlStateSelected)];
     
     //  设置tabBarItem点击颜色为原图标颜色
     UIImage * seletedimg = [UIImage imageNamed:seletedImage];
@@ -56,7 +61,7 @@
     vc.tabBarItem.selectedImage = seletedimg;
     
     //  设置tabBarItem图标居中
-    vc.tabBarItem.imageInsets = UIEdgeInsetsMake(5.0, 0, -5.0, 0);
+//    vc.tabBarItem.imageInsets = UIEdgeInsetsMake(5.0, 0, -5.0, 0);
     
     [self addChildViewController:vc];
     
@@ -76,10 +81,10 @@
     _mallNav = [[FBNavigationViewController alloc] initWithRootViewController:mallVC];
     _myNav = [[FBNavigationViewController alloc] initWithRootViewController:myVC];
     
-    [self setChildViewController:_homeNav image:@"homegray" seletedImage:@"homered"];
-    [self setChildViewController:_discoverNav image:@"findgray" seletedImage:@"findred"];
-    [self setChildViewController:_mallNav image:@"shopgray" seletedImage:@"shopred"];
-    [self setChildViewController:_myNav image:@"minegray" seletedImage:@"minered"];
+    [self setChildViewController:_homeNav image:@"homegray" seletedImage:@"homered" itemTitle:@"情"];
+    [self setChildViewController:_discoverNav image:@"findgray" seletedImage:@"findred" itemTitle:@"景"];
+    [self setChildViewController:_mallNav image:@"shopgray" seletedImage:@"shopred" itemTitle:@"品"];
+    [self setChildViewController:_myNav image:@"minegray" seletedImage:@"minered" itemTitle:@"我"];
     
     self.viewControllers = @[_homeNav, _discoverNav, _mallNav, _myNav];
 
@@ -88,7 +93,6 @@
 #pragma mark “创建情景”的按钮事件
 - (void)createBtnClick {
     PictureToolViewController * pictureToolVC = [[PictureToolViewController alloc] init];
-//    CreateViewController * createVC = [[CreateViewController alloc] init];
     [self presentViewController:pictureToolVC animated:YES completion:nil];
 }
 
