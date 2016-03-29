@@ -23,7 +23,11 @@
         CGContextFillRect(context, rect);
         UIImage * img = UIGraphicsGetImageFromCurrentImageContext();
         UIGraphicsEndImageContext();
-        self.backgroundImage = [UIImage imageNamed:@"tabBar"];
+        if (SCREEN_WIDTH <= 320) {
+            self.backgroundImage = [UIImage imageNamed:@"tabBar_5"];
+        } else {
+            self.backgroundImage = [UIImage imageNamed:@"tabBar"];
+        }
         self.shadowImage = img;
         self.translucent = YES;
 
