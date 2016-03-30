@@ -141,6 +141,23 @@ NSString *const determineLogin = @"/auth/check_login";
 
 - (void)applicationWillEnterForeground:(UIApplication *)application {
     // Called as part of the transition from the background to the inactive state; here you can undo many of the changes made on entering the background.
+    NSLog(@"%s %d", __FUNCTION__, __LINE__);
+    
+    //回到前台时刷新通知状态
+    if (_notiDelegate && [_notiDelegate respondsToSelector:@selector(resetNotificationState)]) {
+        [_notiDelegate resetNotificationState];
+    }
+    
+    //登录状态查询及本地用户信息获取
+    FBRequest * request = [FBAPI postWithUrlString:@"/auth/check_login" requestDictionary:nil delegate:self];
+    [request startRequestSuccess:^(FBRequest *request, id result) {
+        NSDictionary * dataDic = [result objectForKey:@"data"];
+        UserInfoEntity * userEntity = [UserInfoEntity defaultUserInfoEntity];
+        userEntity.isLogin = [[dataDic objectForKey:@"is_login"] boolValue];
+    } failure:^(FBRequest *request, NSError *error) {
+        [SVProgressHUD showInfoWithStatus:[error localizedDescription]];
+    }];
+
 }
 
 - (void)applicationWillTerminate:(UIApplication *)application {
