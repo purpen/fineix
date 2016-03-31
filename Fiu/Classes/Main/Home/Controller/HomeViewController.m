@@ -22,9 +22,6 @@
     
     [self setNavigationViewUI];
     
-//    self.navigationItem.leftBarButtonItem.customView.hidden = YES;
-//    self.navigationItem.rightBarButtonItem.customView.hidden = YES;
-    
     [self.view addSubview:self.homeTableView];
     
 }
@@ -35,6 +32,7 @@
         _homeTableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT)];
         _homeTableView.delegate = self;
         _homeTableView.dataSource = self;
+        _homeTableView.showsVerticalScrollIndicator = NO;
     }
     return _homeTableView;
 }
@@ -62,11 +60,51 @@
 
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView{
     if (scrollView == self.homeTableView) {
-        CGFloat rollY = scrollView.contentOffset.y;
-        NSLog(@"＝＝＝＝＝＝＝＝＝＝  %f", rollY);
-    }
-
+        CGFloat newY = scrollView.contentOffset.y;
+        CGFloat oldY = 0;
+        //  设置滚动的状态
+        if (newY != oldY) {
+            if (newY > oldY) {
+                self.rollDown = YES;
+            } else if (newY < oldY) {
+                self.rollDown = NO;
+            }
+            oldY = newY;
+        }
         
+        CGRect tabBarRect = self.tabBarController.tabBar.frame;
+        UIView * leftBarItem = self.navigationItem.leftBarButtonItem.customView;
+        UIView * rightBarItem = self.navigationItem.rightBarButtonItem.customView;
+        
+        //  判断是否下拉
+        if (self.rollDown == YES) {
+            tabBarRect = CGRectMake(0, SCREEN_HEIGHT + 10, SCREEN_WIDTH, 49);
+            [UIView animateWithDuration:.4 animations:^{
+                self.tabBarController.tabBar.frame = tabBarRect;
+                leftBarItem.alpha = 0;
+                rightBarItem.alpha = 0;
+                [[UIApplication sharedApplication] setStatusBarHidden:YES withAnimation:(UIStatusBarAnimationSlide)];
+            }];
+            
+            
+        } else if (self.rollDown == NO) {
+            tabBarRect = CGRectMake(0, SCREEN_HEIGHT - 49, SCREEN_WIDTH, 49);
+            [UIView animateWithDuration:.4 animations:^{
+                self.tabBarController.tabBar.frame = tabBarRect;
+                leftBarItem.alpha = 1;
+                rightBarItem.alpha = 1;
+                [[UIApplication sharedApplication] setStatusBarHidden:NO withAnimation:(UIStatusBarAnimationSlide)];
+            }];
+        }
+        
+        NSLog(@"＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝ %f ----  %f", oldY, newY);
+        
+    }
+        
+}
+
+- (BOOL)prefersStatusBarHidden {
+    return self.rollDown;
 }
 
 #pragma mark - 设置Nav
