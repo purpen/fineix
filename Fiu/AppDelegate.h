@@ -10,6 +10,13 @@
 #import <CoreData/CoreData.h>
 
 
+@protocol NotificationDelege <NSObject>
+
+@optional
+- (void)resetNotificationState;
+
+@end
+
 @interface AppDelegate : UIResponder <UIApplicationDelegate>
 
 @property (strong, nonatomic) UIWindow *window;
@@ -20,6 +27,7 @@
 - (void)saveContext;
 - (NSURL *)applicationDocumentsDirectory;
 
+@property (nonatomic, weak) id<NotificationDelege> notiDelegate;
 
 @end
 

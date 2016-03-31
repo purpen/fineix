@@ -61,26 +61,11 @@
 }
 
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView{
-    if ([scrollView isEqual:self.homeTableView]) {
-        static float newy = 0;
-        static float oldy = 0;
-        newy = scrollView.contentOffset.y;
-        
-        NSLog(@"＝＝＝＝＝＝＝＝＝＝＝ %.f", newy);
-//        if (_scrollUporDown == YES) {
-//
-//            [UIView animateWithDuration:0.5 animations:^{
-//                self.navigationController.navigationBar.frame = CGRectMake(0, -44, SCREEN_WIDTH, 44);
-//                self.tabBarController.tabBar.frame = CGRectMake(0 , SCREEN_HEIGHT + 49, SCREEN_WIDTH, 49);
-//            }];
-//            
-//        } else if (_scrollUporDown == NO) {
-//            [UIView animateWithDuration:0.5 animations:^{
-//                self.navigationController.navigationBar.frame = CGRectMake(0, 20, SCREEN_WIDTH, 44);
-//                self.tabBarController.tabBar.frame = CGRectMake(0 , SCREEN_HEIGHT , SCREEN_WIDTH, 49);
-//            }];
-//        }
+    if (scrollView == self.homeTableView) {
+        CGFloat rollY = scrollView.contentOffset.y;
+        NSLog(@"＝＝＝＝＝＝＝＝＝＝  %f", rollY);
     }
+
         
 }
 
