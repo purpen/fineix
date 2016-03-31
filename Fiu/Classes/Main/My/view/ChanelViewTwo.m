@@ -10,4 +10,8 @@
 
 @implementation ChanelViewTwo
 
++(instancetype)getChanelViewTwo{
+    return [[NSBundle mainBundle] loadNibNamed:@"MyView" owner:nil options:nil][3];
+}
+
 @end

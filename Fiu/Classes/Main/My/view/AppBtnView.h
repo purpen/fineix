@@ -1,5 +1,5 @@
 //
-//  ChanelViewTwo.h
+//  AppBtnView.h
 //  Fiu
 //
 //  Created by THN-Dong on 16/3/31.
@@ -8,8 +8,8 @@
 
 #import <UIKit/UIKit.h>
 
-@interface ChanelViewTwo : UIView
+@interface AppBtnView : UIView
 
-+(instancetype)getChanelViewTwo;
++(instancetype)getAppBtnView;
 
 @end

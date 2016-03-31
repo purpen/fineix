@@ -42,6 +42,8 @@
 		1FEFD5961CAD12B2005A1C5F /* AboutFirebirdViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1FEFD5931CAD12B2005A1C5F /* AboutFirebirdViewController.m */; };
 		1FEFD5971CAD12B2005A1C5F /* FeedbackViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1FEFD5951CAD12B2005A1C5F /* FeedbackViewController.m */; };
 		1FEFD5991CAD12E8005A1C5F /* My.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1FEFD5981CAD12E8005A1C5F /* My.storyboard */; };
+		1FEFD59C1CAD3384005A1C5F /* BottomView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1FEFD59B1CAD3384005A1C5F /* BottomView.m */; };
+		1FEFD59F1CAD37AC005A1C5F /* AppBtnView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1FEFD59E1CAD37AC005A1C5F /* AppBtnView.m */; };
 		280045111C805B78005F5C2E /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 280045101C805B78005F5C2E /* CoreLocation.framework */; };
 		280045131C805B82005F5C2E /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 280045121C805B82005F5C2E /* QuartzCore.framework */; };
 		280045151C805B8C005F5C2E /* OpenGLES.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 280045141C805B8C005F5C2E /* OpenGLES.framework */; };
@@ -214,6 +216,10 @@
 		1FEFD5941CAD12B2005A1C5F /* FeedbackViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FeedbackViewController.h; path = Fiu/Classes/Main/My/Controller/FeedbackViewController.h; sourceTree = SOURCE_ROOT; };
 		1FEFD5951CAD12B2005A1C5F /* FeedbackViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FeedbackViewController.m; path = Fiu/Classes/Main/My/Controller/FeedbackViewController.m; sourceTree = SOURCE_ROOT; };
 		1FEFD5981CAD12E8005A1C5F /* My.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = My.storyboard; path = Fiu/Classes/Main/My/My.storyboard; sourceTree = SOURCE_ROOT; };
+		1FEFD59A1CAD3384005A1C5F /* BottomView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BottomView.h; sourceTree = "<group>"; };
+		1FEFD59B1CAD3384005A1C5F /* BottomView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BottomView.m; sourceTree = "<group>"; };
+		1FEFD59D1CAD37AC005A1C5F /* AppBtnView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppBtnView.h; sourceTree = "<group>"; };
+		1FEFD59E1CAD37AC005A1C5F /* AppBtnView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AppBtnView.m; sourceTree = "<group>"; };
 		26743842F5D507CEE992D80C /* libPods-fineix.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-fineix.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		280045101C805B78005F5C2E /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
 		280045121C805B82005F5C2E /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
@@ -557,6 +563,10 @@
 				1FEFD5691CAD115C005A1C5F /* NaviView.m */,
 				1FEFD56A1CAD115C005A1C5F /* ShareView.h */,
 				1FEFD56B1CAD115C005A1C5F /* ShareView.m */,
+				1FEFD59A1CAD3384005A1C5F /* BottomView.h */,
+				1FEFD59B1CAD3384005A1C5F /* BottomView.m */,
+				1FEFD59D1CAD37AC005A1C5F /* AppBtnView.h */,
+				1FEFD59E1CAD37AC005A1C5F /* AppBtnView.m */,
 			);
 			name = view;
 			path = Fiu/Classes/Main/My/view;
@@ -1227,6 +1237,7 @@
 				D812812D1CAA8532007CF08B /* ScenceAddMoreView.m in Sources */,
 				D812811D1CAA8532007CF08B /* SearchLocationViewController.m in Sources */,
 				1FEFD5901CAD1219005A1C5F /* MySystemSettingsViewController.m in Sources */,
+				1FEFD59C1CAD3384005A1C5F /* BottomView.m in Sources */,
 				1F02B72F1CAA99240080CA45 /* ForgotPasswordViewController.m in Sources */,
 				D81281661CAA8532007CF08B /* JKDBHelper.m in Sources */,
 				D81281261CAA8532007CF08B /* FBFootView.m in Sources */,
@@ -1242,6 +1253,7 @@
 				D81281241CAA8532007CF08B /* CropImageView.m in Sources */,
 				1F02B72D1CAA99240080CA45 /* FBLoginViewController.m in Sources */,
 				1FEFD58C1CAD1219005A1C5F /* MyHomePageViewController.m in Sources */,
+				1FEFD59F1CAD37AC005A1C5F /* AppBtnView.m in Sources */,
 				1F02B72C1CAA99240080CA45 /* FBLoginRegisterViewController.m in Sources */,
 				1FEFD5721CAD115C005A1C5F /* NaviView.m in Sources */,
 				D812812C1CAA8532007CF08B /* PictureView.m in Sources */,

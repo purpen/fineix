@@ -14,6 +14,9 @@
 #import "NaviView.h"
 #import "BackImagView.h"
 #import "ChanelView.h"
+#import "ChanelViewTwo.h"
+#import "BottomView.h"
+#import "AppBtnView.h"
 
 
 @interface MyViewController ()<UIScrollViewDelegate>
@@ -40,7 +43,7 @@
     _homeScrollView.backgroundColor = [UIColor colorWithRed:247.0/255 green:247.0/255 blue:247.0/255 alpha:247.0/255];
     _homeScrollView.showsVerticalScrollIndicator = NO;
     [self.view addSubview:_homeScrollView];
-    _homeScrollView.contentSize = CGSizeMake(0, 100000);
+    
     //让背景图片下拉变大
     _homeScrollView.delegate = self;
     //背景图片
@@ -58,9 +61,19 @@
     chanelV.frame = CGRectMake(0, 200+5, SCREEN_WIDTH, 60);
     [_homeScrollView addSubview:chanelV];
     //订单等一些东西
+    ChanelViewTwo *chanelTwoV = [ChanelViewTwo getChanelViewTwo];
+    chanelTwoV.frame = CGRectMake(0, 200+5+60+5, SCREEN_WIDTH, 194);
+    [_homeScrollView addSubview:chanelTwoV];
     //关于我们等
+    BottomView *bottomV = [BottomView getBottomView];
+    bottomV.frame = CGRectMake(0, 200+5+60+5+194+2, SCREEN_WIDTH, 134);
+    [_homeScrollView addSubview:bottomV];
     //京东图标
-    
+    AppBtnView *appV = [AppBtnView getAppBtnView];
+    appV.frame = CGRectMake(0, 200+5+60+5+194+2+134, SCREEN_WIDTH, 91);
+    [_homeScrollView addSubview:appV];
+    //scrollView滑动范围
+    _homeScrollView.contentSize = CGSizeMake(0, CGRectGetMaxY(appV.frame)+91);
 }
 
 -(void)scrollViewDidScroll:(UIScrollView *)scrollView{

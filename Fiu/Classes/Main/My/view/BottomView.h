@@ -1,5 +1,5 @@
 //
-//  ChanelViewTwo.h
+//  BottomView.h
 //  Fiu
 //
 //  Created by THN-Dong on 16/3/31.
@@ -8,8 +8,8 @@
 
 #import <UIKit/UIKit.h>
 
-@interface ChanelViewTwo : UIView
+@interface BottomView : UIView
 
-+(instancetype)getChanelViewTwo;
++(instancetype)getBottomView;
 
 @end
