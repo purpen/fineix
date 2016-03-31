@@ -279,7 +279,7 @@
         <!--Phone To Log In View Controller-->
         <scene sceneID="zah-ot-Wxu">
             <objects>
-                <viewController id="ThB-Ja-deY" customClass="PhoneToLogInViewController" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="PhoneToLogInViewController" id="ThB-Ja-deY" customClass="PhoneToLogInViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="I4B-Qw-FiP"/>
                         <viewControllerLayoutGuide type="bottom" id="CKL-8e-1l2"/>
@@ -349,7 +349,7 @@
                                         </constraints>
                                         <color key="textColor" red="0.96862745100000003" green="0.96862745100000003" blue="0.96862745100000003" alpha="1" colorSpace="calibratedRGB"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                        <textInputTraits key="textInputTraits"/>
+                                        <textInputTraits key="textInputTraits" secureTextEntry="YES"/>
                                     </textField>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="密码" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GGF-mM-lui">
                                         <rect key="frame" x="20" y="182" width="145" height="21"/>
@@ -1415,6 +1415,6 @@
         <image name="return" width="11" height="19"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="UKI-AN-fmP"/>
+        <segue reference="aCH-Nw-ZVP"/>
     </inferredMetricsTieBreakers>
 </document>

@@ -74,9 +74,10 @@ static NSString *const FindPwdURL = @"/auth/find_pwd";//忘记密码接口
             entity.isLogin = YES;
             [self dismissViewControllerAnimated:YES completion:nil];
             [SVProgressHUD showSuccessWithStatus:@"设置成功"];
-            UIStoryboard *loginStoryBoard = [UIStoryboard storyboardWithName:@"LoginRegisterController" bundle:[NSBundle mainBundle]];
-            PhoneToLogInViewController *phonToLoginVC = [loginStoryBoard instantiateViewControllerWithIdentifier:@"PhoneToLogInViewController"];
-            [self.navigationController pushViewController:phonToLoginVC animated:YES];
+            //跳转到手机号登录界面
+            UIStoryboard *loginStory = [UIStoryboard storyboardWithName:@"LoginRegisterController" bundle:nil];
+            PhoneToLogInViewController *phoneTolLoginVC = [loginStory instantiateViewControllerWithIdentifier:@"PhoneToLogInViewController"];
+            [self.navigationController pushViewController:phoneTolLoginVC animated:YES];
         }else{
             NSString *message = result[@"message"];
             [SVProgressHUD showErrorWithStatus:message];

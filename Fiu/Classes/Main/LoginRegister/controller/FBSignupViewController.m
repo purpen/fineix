@@ -135,17 +135,16 @@ static NSString *const thirdRegisteredNotBinding = @"/auth/third_register_withou
             entity.isLogin = YES;
             
             
-            [SVProgressHUD showSuccessWithStatus:@"注册成功"];
+            [SVProgressHUD showSuccessWithStatus:NSLocalizedString(@"registeredSuccessfully", nil)];
             //跳回个人主页
-            UIStoryboard *myStoryBoard = [UIStoryboard storyboardWithName:@"My" bundle:[NSBundle mainBundle]];
-            MyViewController *myVC = [myStoryBoard instantiateViewControllerWithIdentifier:@"MyViewController"];
-            [self.navigationController pushViewController:myVC animated:YES];
+            [self dismissViewControllerAnimated:YES completion:nil];
+            [self.tabBarController setSelectedIndex:3];
 
         }else{
             //如果用户不存在,提示用户是否进行绑定
             TYAlertView *alertView = [TYAlertView alertViewWithTitle:@"TYAlertView" message:@"This is a message, the alert view containt text and textfiled. "];
             
-            [alertView addAction:[TYAlertAction actionWithTitle:@"取消" style:TYAlertActionStyleCancle handler:^(TYAlertAction *action) {
+            [alertView addAction:[TYAlertAction actionWithTitle:NSLocalizedString(@"cancel", nil) style:TYAlertActionStyleCancle handler:^(TYAlertAction *action) {
                 //发送请求来存储用户信息
                 NSDictionary *params;
                 if ([type isEqualToNumber:@1]) {
@@ -184,11 +183,11 @@ static NSString *const thirdRegisteredNotBinding = @"/auth/third_register_withou
                     UserInfoEntity *entity = [UserInfoEntity defaultUserInfoEntity];
                     entity.isLogin = YES;
                     
-                    [SVProgressHUD showSuccessWithStatus:@"注册成功"];
+                    [SVProgressHUD showSuccessWithStatus:NSLocalizedString(@"registeredSuccessfully", nil)];
                     //跳回个人主页
-                    UIStoryboard *myStoryBoard = [UIStoryboard storyboardWithName:@"My" bundle:[NSBundle mainBundle]];
-                    MyViewController *myVC = [myStoryBoard instantiateViewControllerWithIdentifier:@"MyViewController"];
-                    [self.navigationController pushViewController:myVC animated:YES];
+                    //跳回个人主页
+                    [self dismissViewControllerAnimated:YES completion:nil];
+                    [self.tabBarController setSelectedIndex:3];
                     
                     
                 } failure:^(FBRequest *request, NSError *error) {
@@ -198,7 +197,7 @@ static NSString *const thirdRegisteredNotBinding = @"/auth/third_register_withou
 
             }]];
             
-            [alertView addAction:[TYAlertAction actionWithTitle:@"确定" style:TYAlertActionStyleDestructive handler:^(TYAlertAction *action) {
+            [alertView addAction:[TYAlertAction actionWithTitle:NSLocalizedString(@"determine", nil) style:TYAlertActionStyleDestructive handler:^(TYAlertAction *action) {
                 //跳转到绑定手机号界面
                 UIStoryboard *story = [UIStoryboard storyboardWithName:@"LoginRegisterController" bundle:[NSBundle mainBundle]];
                 FBBindingMobilePhoneNumber *bing = [story instantiateViewControllerWithIdentifier:@"LoginRegisterController"];

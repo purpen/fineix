@@ -39,6 +39,9 @@
 		1FE54FA21CABE420000399C8 /* MyHomePageView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1FE54F9C1CABE420000399C8 /* MyHomePageView.m */; };
 		1FE54FA31CABE420000399C8 /* MyView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1FE54F9D1CABE420000399C8 /* MyView.xib */; };
 		1FE54FA41CABE420000399C8 /* ShareView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1FE54F9F1CABE420000399C8 /* ShareView.m */; };
+		1FEFD5561CACF42C005A1C5F /* NaviView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1FEFD5551CACF42C005A1C5F /* NaviView.m */; };
+		1FEFD5591CACFB2F005A1C5F /* BackImagView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1FEFD5581CACFB2F005A1C5F /* BackImagView.m */; };
+		1FEFD55C1CAD0C18005A1C5F /* ChanelViewTwo.m in Sources */ = {isa = PBXBuildFile; fileRef = 1FEFD55B1CAD0C18005A1C5F /* ChanelViewTwo.m */; };
 		280045111C805B78005F5C2E /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 280045101C805B78005F5C2E /* CoreLocation.framework */; };
 		280045131C805B82005F5C2E /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 280045121C805B82005F5C2E /* QuartzCore.framework */; };
 		280045151C805B8C005F5C2E /* OpenGLES.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 280045141C805B8C005F5C2E /* OpenGLES.framework */; };
@@ -205,6 +208,12 @@
 		1FE54F9D1CABE420000399C8 /* MyView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MyView.xib; sourceTree = "<group>"; };
 		1FE54F9E1CABE420000399C8 /* ShareView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShareView.h; sourceTree = "<group>"; };
 		1FE54F9F1CABE420000399C8 /* ShareView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ShareView.m; sourceTree = "<group>"; };
+		1FEFD5541CACF42C005A1C5F /* NaviView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NaviView.h; sourceTree = "<group>"; };
+		1FEFD5551CACF42C005A1C5F /* NaviView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NaviView.m; sourceTree = "<group>"; };
+		1FEFD5571CACFB2F005A1C5F /* BackImagView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BackImagView.h; sourceTree = "<group>"; };
+		1FEFD5581CACFB2F005A1C5F /* BackImagView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BackImagView.m; sourceTree = "<group>"; };
+		1FEFD55A1CAD0C18005A1C5F /* ChanelViewTwo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChanelViewTwo.h; sourceTree = "<group>"; };
+		1FEFD55B1CAD0C18005A1C5F /* ChanelViewTwo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChanelViewTwo.m; sourceTree = "<group>"; };
 		26743842F5D507CEE992D80C /* libPods-fineix.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-fineix.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		280045101C805B78005F5C2E /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
 		280045121C805B82005F5C2E /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
@@ -542,6 +551,12 @@
 				1FE54F9D1CABE420000399C8 /* MyView.xib */,
 				1FE54F9E1CABE420000399C8 /* ShareView.h */,
 				1FE54F9F1CABE420000399C8 /* ShareView.m */,
+				1FEFD5541CACF42C005A1C5F /* NaviView.h */,
+				1FEFD5551CACF42C005A1C5F /* NaviView.m */,
+				1FEFD5571CACFB2F005A1C5F /* BackImagView.h */,
+				1FEFD5581CACFB2F005A1C5F /* BackImagView.m */,
+				1FEFD55A1CAD0C18005A1C5F /* ChanelViewTwo.h */,
+				1FEFD55B1CAD0C18005A1C5F /* ChanelViewTwo.m */,
 			);
 			path = view;
 			sourceTree = "<group>";
@@ -1193,8 +1208,10 @@
 				1F02B6BE1CAA94220080CA45 /* MyFocusOnViewController.m in Sources */,
 				D81281581CAA8532007CF08B /* UIColor+Extension.m in Sources */,
 				1F02B7321CAA99240080CA45 /* SubmitViewController.m in Sources */,
+				1FEFD5591CACFB2F005A1C5F /* BackImagView.m in Sources */,
 				D81281311CAA8532007CF08B /* HomeViewController.m in Sources */,
 				D81281531CAA8532007CF08B /* FBAPI.m in Sources */,
+				1FEFD55C1CAD0C18005A1C5F /* ChanelViewTwo.m in Sources */,
 				1F02B7401CAA99540080CA45 /* UserInfoEntity.m in Sources */,
 				D81281131CAA8532007CF08B /* FBViewController.m in Sources */,
 				1F02B6C21CAA94220080CA45 /* MyShippingAddressViewController.m in Sources */,
@@ -1260,6 +1277,7 @@
 				D812814B1CAA8532007CF08B /* FBLocationViewController.m in Sources */,
 				D81281101CAA8532007CF08B /* AppDelegate.mm in Sources */,
 				D81281221CAA8532007CF08B /* AddUrlView.m in Sources */,
+				1FEFD5561CACF42C005A1C5F /* NaviView.m in Sources */,
 				D81281231CAA8532007CF08B /* CameraView.m in Sources */,
 				D812811F1CAA8532007CF08B /* FBFilters.m in Sources */,
 				D81281271CAA8532007CF08B /* FBPictureCollectionViewCell.m in Sources */,

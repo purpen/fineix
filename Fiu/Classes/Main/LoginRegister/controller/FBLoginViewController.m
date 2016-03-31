@@ -192,10 +192,13 @@ NSString *const logOut = @"/auth/logout";//退出登录接口
             UserInfoEntity *entity = [UserInfoEntity defaultUserInfoEntity];
             entity.isLogin = YES;
             NSLog(@"entity******************************%@",entity.nickname);
-            [SVProgressHUD showSuccessWithStatus:@"登录成功"];
+            [SVProgressHUD showSuccessWithStatus:NSLocalizedString(@"loginSuccessful", nil)];
             
+            
+            
+            //[self dismissViewControllerAnimated:YES completion:nil];
             [self dismissViewControllerAnimated:YES completion:nil];
-            
+            [self.tabBarController setSelectedIndex:3];
         }else{
             //用户不存在需要绑定已有帐号操作
             

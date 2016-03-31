@@ -39,6 +39,8 @@ NSString *const LoginURL = @"/auth/login";//登录接口
     //设置textfiled的tag值
     self.phoneTextField.tag = 10;
     self.pwdTextField.tag = 20;
+    //水印文字
+    
     
 }
 //返回按钮
@@ -91,11 +93,11 @@ NSString *const LoginURL = @"/auth/login";//登录接口
 - (IBAction)loginBtn:(UIButton *)sender {
     if (![self.phoneTextField.text checkTel]) {
         //手机号错误提示
-        [SVProgressHUD showErrorWithStatus:@"请输入正确的手机号"];
+        [SVProgressHUD showErrorWithStatus:NSLocalizedString(@"enterCorrectPhoneNumber", nil)];
         return;
     }//密码格式错误提示
     else if(self.pwdTextField.text.length < 6){
-        [SVProgressHUD showErrorWithStatus:@"密码不得少于6位"];
+        [SVProgressHUD showErrorWithStatus:NSLocalizedString(@"passwordDigits", nil)];
         return;
     }
     //将填写的信息提交服务器
@@ -125,7 +127,10 @@ NSString *const LoginURL = @"/auth/login";//登录接口
             UIStoryboard *myStoryBoard = [UIStoryboard storyboardWithName:@"My" bundle:[NSBundle mainBundle]];
             MyViewController *myVC = [myStoryBoard instantiateViewControllerWithIdentifier:@"MyViewController"];
             [self.navigationController pushViewController:myVC animated:YES];
-            [SVProgressHUD showSuccessWithStatus:@"登录成功"];
+            [SVProgressHUD showSuccessWithStatus:NSLocalizedString(@"loginSuccessful", nil)];
+            //跳回个人主页
+            [self dismissViewControllerAnimated:YES completion:nil];
+            [self.tabBarController setSelectedIndex:3];
         }//如果失败，提示用户失败原因
         else{
             NSString *message = result[@"message"];

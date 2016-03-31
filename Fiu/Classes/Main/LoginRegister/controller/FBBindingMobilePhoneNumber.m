@@ -93,7 +93,8 @@ NSString *thirdRegistrationBindingMobilePhone = @"/auth/third_register_with_phon
         //如果手机号格式正确判断密码格式
         if (self.pwdTF.text.length < 6) {
            //如果密码格式错误提示错误信息
-            [SVProgressHUD showErrorWithStatus:@"密码不能少于六位"];
+            [SVProgressHUD showErrorWithStatus:NSLocalizedString(@"passwordDigits", nil)];
+            //NSLocalizedString(@"cropVcTitle", nil)
         }//如果密码格式正确发送请求
         else{
             //创建传输参数
@@ -120,7 +121,10 @@ NSString *thirdRegistrationBindingMobilePhone = @"/auth/third_register_with_phon
                 UserInfoEntity *entity = [UserInfoEntity defaultUserInfoEntity];
                 entity.isLogin = YES;
                 
-                [SVProgressHUD showSuccessWithStatus:@"登录成功"];
+                [SVProgressHUD showSuccessWithStatus:NSLocalizedString(@"loginSuccessful", nil)];
+                //跳回个人主页
+                [self dismissViewControllerAnimated:YES completion:nil];
+                [self.tabBarController setSelectedIndex:3];
             } failure:^(FBRequest *request, NSError *error) {
                 //请求失败，提示错误信息
                 [SVProgressHUD showErrorWithStatus:error.localizedDescription];
@@ -129,7 +133,7 @@ NSString *thirdRegistrationBindingMobilePhone = @"/auth/third_register_with_phon
         }
     }//如果手机号格式错误提示错误信息
     else{
-        [SVProgressHUD showErrorWithStatus:@"手机号格式不正确"];
+        [SVProgressHUD showErrorWithStatus:NSLocalizedString(@"phoneNumberNotCorrect", nil)];
     }
 }
 
