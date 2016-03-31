@@ -9,14 +9,13 @@
 #import <UIKit/UIKit.h>
 #import <CoreData/CoreData.h>
 
+
 @protocol NotificationDelege <NSObject>
 
 @optional
 - (void)resetNotificationState;
 
 @end
-
-
 
 @interface AppDelegate : UIResponder <UIApplicationDelegate>
 
@@ -25,10 +24,10 @@
 @property (readonly, strong, nonatomic) NSManagedObjectContext *managedObjectContext;
 @property (readonly, strong, nonatomic) NSManagedObjectModel *managedObjectModel;
 @property (readonly, strong, nonatomic) NSPersistentStoreCoordinator *persistentStoreCoordinator;
-@property (nonatomic, weak) id<NotificationDelege> notiDelegate;
 - (void)saveContext;
 - (NSURL *)applicationDocumentsDirectory;
 
+@property (nonatomic, weak) id<NotificationDelege> notiDelegate;
 
 @end
 

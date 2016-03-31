@@ -19,19 +19,40 @@
     // Do any additional setup after loading the view.
 }
 
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
+#pragma mark - 添加Nav左边的按钮
+- (void)addBarItemLeftBarButton:(NSString *)title image:(NSString *)image {
+    self.navigationItem.leftBarButtonItem = [UIBarButtonItem itemWithTitle:title backgroundImage:[UIImage imageNamed:image] target:self action:@selector(leftAction)];
 }
 
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
+//  点击左边按钮事件
+- (void)leftAction {
+    if ([self.delegate respondsToSelector:@selector(leftBarItemSelected)]) {
+        [self.delegate leftBarItemSelected];
+    }
 }
-*/
+
+#pragma mark - 添加Nav左边的按钮
+- (void)addBarItemRightBarButton:(NSString *)title image:(NSString *)image {
+    self.navigationItem.rightBarButtonItem = [UIBarButtonItem itemWithTitle:title backgroundImage:[UIImage imageNamed:image] target:self action:@selector(rightAction)];
+}
+
+//  点击右边按钮事件
+- (void)rightAction {
+    if ([self.delegate respondsToSelector:@selector(rightBarButtonItem)]) {
+        [self.delegate rightBarItemSelected];
+    }
+}
+
+#pragma mark - 添加Nav中间的Logo
+- (void)addNavLogo:(NSString *)image {
+    self.navigationItem.titleView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:image]];
+}
+
+#pragma mark - 设置Nav透明
+- (void)navBarTransparent {
+    [self.navigationController.navigationBar setBackgroundImage:[UIImage new] forBarMetrics:(UIBarMetricsDefault)];
+    self.navigationController.navigationBar.shadowImage = [UIImage new];
+}
+
 
 @end

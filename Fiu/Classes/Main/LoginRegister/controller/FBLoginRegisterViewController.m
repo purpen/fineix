@@ -7,12 +7,9 @@
 //
 
 #import "FBLoginRegisterViewController.h"
-#import "HomeViewController.h"
-#import "FBTabBarController.h"
 
 @interface FBLoginRegisterViewController ()
 
-@property (weak, nonatomic) IBOutlet UIButton *signUpBtn;//注册按钮
 
 @end
 
@@ -23,9 +20,6 @@
     // Do any additional setup after loading the view.
     self.navigationController.navigationBarHidden = YES;
     self.tabBarController.tabBar.hidden = YES;
-    //注册按钮变得圆润
-    _signUpBtn.layer.masksToBounds = YES;
-    _signUpBtn.layer.cornerRadius = 3;
 }
 
 - (void)didReceiveMemoryWarning {
@@ -33,10 +27,7 @@
     // Dispose of any resources that can be recreated.
 }
 
-//取消按钮,返回首页
-- (IBAction)cancelBtn:(UIButton *)sender {
-    [self dismissViewControllerAnimated:YES completion:nil];
-}
+
 
 /*
 #pragma mark - Navigation

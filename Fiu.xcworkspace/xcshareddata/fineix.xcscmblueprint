@@ -1,0 +1,30 @@
+{
+  "DVTSourceControlWorkspaceBlueprintPrimaryRemoteRepositoryKey" : "524C33DF3B48254121DF6A7C8C32ED53E28A2D81",
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyRepositoryLocationsKey" : {
+
+  },
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyStatesKey" : {
+    "524C33DF3B48254121DF6A7C8C32ED53E28A2D81" : 0,
+    "2BAD597E83C58FD2540523808C30E82939966DA7" : 0
+  },
+  "DVTSourceControlWorkspaceBlueprintIdentifierKey" : "2DFD86A3-7647-47F8-9AD9-DD348ADE8BDF",
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyPathsKey" : {
+    "524C33DF3B48254121DF6A7C8C32ED53E28A2D81" : "fineix\/",
+    "2BAD597E83C58FD2540523808C30E82939966DA7" : "parrot\/"
+  },
+  "DVTSourceControlWorkspaceBlueprintNameKey" : "fineix",
+  "DVTSourceControlWorkspaceBlueprintVersion" : 204,
+  "DVTSourceControlWorkspaceBlueprintRelativePathToProjectKey" : "fineix.xcworkspace",
+  "DVTSourceControlWorkspaceBlueprintRemoteRepositoriesKey" : [
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/github.com\/purpen\/parrot.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "2BAD597E83C58FD2540523808C30E82939966DA7"
+    },
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/github.com\/purpen\/fineix",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "524C33DF3B48254121DF6A7C8C32ED53E28A2D81"
+    }
+  ]
+}

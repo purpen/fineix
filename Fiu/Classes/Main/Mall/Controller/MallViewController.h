@@ -9,6 +9,6 @@
 #import <UIKit/UIKit.h>
 #import "FBViewController.h"
 
-@interface MallViewController : FBViewController
+@interface MallViewController : FBViewController <FBNavigationBarItemsDelegate>
 
 @end

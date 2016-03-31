@@ -9,18 +9,14 @@
 #import "FBTabBarController.h"
 #import "FBNavigationViewController.h"
 #import "FBTabBar.h"
-#import "FBLoginRegisterViewController.h"
+
 #import "HomeViewController.h"
 #import "DiscoverViewController.h"
 #import "CreateViewController.h"
 #import "MallViewController.h"
 #import "MyViewController.h"
-#import "UserInfoEntity.h"
+
 #import "PictureToolViewController.h"
-
-@interface FBTabBarController ()<UITabBarControllerDelegate>
-
-@end
 
 @implementation FBTabBarController {
     FBNavigationViewController * _homeNav;
@@ -34,7 +30,6 @@
     
     [self setTabBarController];
     
-    
     /**
      *  创建自定义的TabBar
      *  修改系统 tabBar 的 readOnly 权限
@@ -42,41 +37,8 @@
     FBTabBar * tabBar = [[FBTabBar alloc] init];
     [self setValue:tabBar forKey:@"tabBar"];
     [tabBar.createBtn addTarget:self action:@selector(createBtnClick) forControlEvents:(UIControlEventTouchUpInside)];
-    
-    
-    self.delegate = self;
+
 }
-
-
-//UITabBarDelegate
--(BOOL)tabBarController:(UITabBarController *)tabBarController shouldSelectViewController:(UIViewController *)viewController{
-    //这里我判断的是当前点击的tabBarItem的标题
-    //在我的界面出现之前进行判断
-    if ([viewController.tabBarItem.title isEqualToString:@"我"]) {
-        //如果用户ID存在的话，说明已登陆
-        UserInfoEntity *entity = [UserInfoEntity defaultUserInfoEntity];
-        if (entity.isLogin) {
-            return YES;
-        }
-        else
-        {
-           
-            //跳到登录页面
-            UIStoryboard *loginReginStory = [UIStoryboard storyboardWithName:@"LoginRegisterController" bundle:nil];
-            FBLoginRegisterViewController * loginRegisterVC = [loginReginStory instantiateViewControllerWithIdentifier:@"FBLoginRegisterViewController"];
-            //设置导航
-            UINavigationController *navi = [[UINavigationController alloc] initWithRootViewController:loginRegisterVC];
-            [self presentViewController:navi animated:YES completion:nil];
-            //隐藏tabbar
-            
-            
-            return NO;
-        }
-    }
-    
-    return YES;
-}
-
 
 #pragma mark 添加子控制器的方法
 /**
@@ -125,8 +87,6 @@
     [self setChildViewController:_myNav image:@"minegray" seletedImage:@"minered" itemTitle:@"我"];
     
     self.viewControllers = @[_homeNav, _discoverNav, _mallNav, _myNav];
-    
-    
 
 }
 

@@ -19,10 +19,7 @@
 
 @property (weak, nonatomic) IBOutlet UITextField *phoneNumTF;
 @property (weak, nonatomic) IBOutlet UITextField *pwdTF;
-@property (weak, nonatomic) IBOutlet UILabel *pwdLabel;//密码水印
 
-@property (weak, nonatomic) IBOutlet UIButton *loginBtn;//登录按钮
-@property (weak, nonatomic) IBOutlet UILabel *phonNumLabel;//手机号水印
 @end
 NSString *thirdRegistrationBindingMobilePhone = @"/auth/third_register_with_phone";
 @implementation FBBindingMobilePhoneNumber
@@ -35,57 +32,10 @@ NSString *thirdRegistrationBindingMobilePhone = @"/auth/third_register_with_phon
     
     
     
-    //绑定按钮变圆润
-    self.loginBtn.layer.masksToBounds = YES;
-    self.loginBtn.layer.cornerRadius = 3;
     
     
     
-}
-
-//点击密码Textfeild
-- (IBAction)clickPwdTextFeild:(UIButton *)sender {
-    //水印消失
-    self.pwdLabel.hidden = YES;
-    //判断密码是否为空
-    if (self.phoneNumTF.text.length == 0) {
-        //如果是空的，水印显示
-        self.phonNumLabel.hidden = NO;
-    }
     
-    //如果不是空的，水印消失
-    else{
-        self.phonNumLabel.hidden = YES;
-    }
-    //成为第一响应者
-    [self.pwdTF becomeFirstResponder];
-}
-//点击手机号textfeild
-- (IBAction)clickPhoneNumtextFeild:(UIButton *)sender {
-    //水印消失
-    self.phonNumLabel.hidden = YES;
-    //判断密码是否为空
-    if (self.pwdTF.text.length == 0) {
-        //如果是空的，水印显示
-        self.pwdLabel.hidden = NO;
-    }
-    
-    //如果不是空的，水印消失
-    else{
-        self.pwdLabel.hidden = YES;
-    }
-    //成为第一响应者
-    [self.phoneNumTF becomeFirstResponder];
-}
-
-//取消按钮返回首页
-- (IBAction)cancelBtn:(UIButton *)sender {
-    [self dismissViewControllerAnimated:YES completion:nil];
-}
-
-//返回按钮
-- (IBAction)backBtn:(UIButton *)sender {
-    [self.navigationController popViewControllerAnimated:YES];
 }
 - (IBAction)clickBindingBtn:(UIButton *)sender {
     //判断手机号格式
