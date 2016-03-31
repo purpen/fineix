@@ -50,8 +50,8 @@
 
 #pragma mark - 设置Nav透明
 - (void)navBarTransparent {
-    [self.navigationController.navigationBar setBackgroundImage:[[UIImage alloc] init] forBarMetrics:(UIBarMetricsDefault)];
-    self.navigationController.navigationBar.shadowImage = [[UIImage alloc] init];
+    [self.navigationController.navigationBar setBackgroundImage:[UIImage new] forBarMetrics:(UIBarMetricsDefault)];
+    self.navigationController.navigationBar.shadowImage = [UIImage new];
 }
 
 

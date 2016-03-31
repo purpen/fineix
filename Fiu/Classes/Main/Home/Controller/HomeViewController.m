@@ -19,6 +19,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.view.backgroundColor = [UIColor whiteColor];
+    self.automaticallyAdjustsScrollViewInsets = NO;
     
     [self setNavigationViewUI];
     
@@ -33,14 +34,14 @@
         _homeTableView.delegate = self;
         _homeTableView.dataSource = self;
         _homeTableView.showsVerticalScrollIndicator = NO;
+        
     }
     return _homeTableView;
 }
 
 #pragma mark - tableView Delegate & dataSource
-
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return 10;
+    return 5;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -51,6 +52,7 @@
     }
     cell.backgroundColor = [UIColor orangeColor];
     cell.textLabel.text = [NSString stringWithFormat:@"第%zi个", indexPath.row];
+    cell.selectionStyle = UITableViewCellSelectionStyleNone;
     return cell;
 }
 
@@ -58,34 +60,37 @@
     return SCREEN_HEIGHT;
 }
 
+#pragma mark - 判断上／下滑状态，显示/隐藏Nav/tabBar
+- (void)scrollViewWillBeginDragging:(UIScrollView *)scrollView{
+    if (scrollView == self.homeTableView) {
+        _lastContentOffset = scrollView.contentOffset.y;
+    }
+}
+
+- (void)scrollViewWillBeginDecelerating:(UIScrollView *)scrollView{
+    if (scrollView == self.homeTableView) {
+        if (_lastContentOffset < scrollView.contentOffset.y) {
+            self.rollDown = YES;
+        }else{
+            self.rollDown = NO;
+        }
+    }
+}
+
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView{
     if (scrollView == self.homeTableView) {
-        CGFloat newY = scrollView.contentOffset.y;
-        CGFloat oldY = 0;
-        //  设置滚动的状态
-        if (newY != oldY) {
-            if (newY > oldY) {
-                self.rollDown = YES;
-            } else if (newY < oldY) {
-                self.rollDown = NO;
-            }
-            oldY = newY;
-        }
-        
         CGRect tabBarRect = self.tabBarController.tabBar.frame;
         UIView * leftBarItem = self.navigationItem.leftBarButtonItem.customView;
         UIView * rightBarItem = self.navigationItem.rightBarButtonItem.customView;
         
-        //  判断是否下拉
         if (self.rollDown == YES) {
-            tabBarRect = CGRectMake(0, SCREEN_HEIGHT + 10, SCREEN_WIDTH, 49);
+            tabBarRect = CGRectMake(0, SCREEN_HEIGHT + 20, SCREEN_WIDTH, 49);
             [UIView animateWithDuration:.4 animations:^{
                 self.tabBarController.tabBar.frame = tabBarRect;
                 leftBarItem.alpha = 0;
                 rightBarItem.alpha = 0;
                 [[UIApplication sharedApplication] setStatusBarHidden:YES withAnimation:(UIStatusBarAnimationSlide)];
             }];
-            
             
         } else if (self.rollDown == NO) {
             tabBarRect = CGRectMake(0, SCREEN_HEIGHT - 49, SCREEN_WIDTH, 49);
@@ -97,14 +102,8 @@
             }];
         }
         
-        NSLog(@"＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝ %f ----  %f", oldY, newY);
-        
     }
         
-}
-
-- (BOOL)prefersStatusBarHidden {
-    return self.rollDown;
 }
 
 #pragma mark - 设置Nav
