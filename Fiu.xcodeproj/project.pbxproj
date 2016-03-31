@@ -7,17 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		1F02B6BD1CAA94220080CA45 /* MyFansViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F02B6A81CAA94220080CA45 /* MyFansViewController.m */; };
-		1F02B6BE1CAA94220080CA45 /* MyFocusOnViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F02B6AA1CAA94220080CA45 /* MyFocusOnViewController.m */; };
-		1F02B6BF1CAA94220080CA45 /* MyHomePageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F02B6AC1CAA94220080CA45 /* MyHomePageViewController.m */; };
-		1F02B6C01CAA94220080CA45 /* MyMessageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F02B6AE1CAA94220080CA45 /* MyMessageViewController.m */; };
-		1F02B6C11CAA94220080CA45 /* MyOrdersViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F02B6B01CAA94220080CA45 /* MyOrdersViewController.m */; };
-		1F02B6C21CAA94220080CA45 /* MyShippingAddressViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F02B6B21CAA94220080CA45 /* MyShippingAddressViewController.m */; };
-		1F02B6C31CAA94220080CA45 /* MySystemSettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F02B6B41CAA94220080CA45 /* MySystemSettingsViewController.m */; };
-		1F02B6C41CAA94220080CA45 /* MyViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F02B6B61CAA94220080CA45 /* MyViewController.m */; };
-		1F02B6C51CAA94220080CA45 /* My.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1F02B6B71CAA94220080CA45 /* My.storyboard */; };
-		1F02B6D51CAA94F40080CA45 /* AboutFirebirdViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F02B6D21CAA94F40080CA45 /* AboutFirebirdViewController.m */; };
-		1F02B6D61CAA94F40080CA45 /* FeedbackViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F02B6D41CAA94F40080CA45 /* FeedbackViewController.m */; };
 		1F02B72B1CAA99240080CA45 /* FBBindingMobilePhoneNumber.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F02B71C1CAA99240080CA45 /* FBBindingMobilePhoneNumber.m */; };
 		1F02B72C1CAA99240080CA45 /* FBLoginRegisterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F02B71E1CAA99240080CA45 /* FBLoginRegisterViewController.m */; };
 		1F02B72D1CAA99240080CA45 /* FBLoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F02B7201CAA99240080CA45 /* FBLoginViewController.m */; };
@@ -34,14 +23,25 @@
 		1F0EE6A71C9FA4E7000631F0 /* libstdc++.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 1F0EE6A61C9FA4E7000631F0 /* libstdc++.tbd */; };
 		1F0EE6A91C9FA4F6000631F0 /* libz.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 1F0EE6A81C9FA4F6000631F0 /* libz.tbd */; };
 		1F59E5FC1C9ABBA500E96C60 /* Accelerate.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1F59E5FB1C9ABBA500E96C60 /* Accelerate.framework */; };
-		1FE54FA01CABE420000399C8 /* chanel.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1FE54F981CABE420000399C8 /* chanel.xib */; };
-		1FE54FA11CABE420000399C8 /* ChanelView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1FE54F9A1CABE420000399C8 /* ChanelView.m */; };
-		1FE54FA21CABE420000399C8 /* MyHomePageView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1FE54F9C1CABE420000399C8 /* MyHomePageView.m */; };
-		1FE54FA31CABE420000399C8 /* MyView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1FE54F9D1CABE420000399C8 /* MyView.xib */; };
-		1FE54FA41CABE420000399C8 /* ShareView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1FE54F9F1CABE420000399C8 /* ShareView.m */; };
-		1FEFD5561CACF42C005A1C5F /* NaviView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1FEFD5551CACF42C005A1C5F /* NaviView.m */; };
-		1FEFD5591CACFB2F005A1C5F /* BackImagView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1FEFD5581CACFB2F005A1C5F /* BackImagView.m */; };
-		1FEFD55C1CAD0C18005A1C5F /* ChanelViewTwo.m in Sources */ = {isa = PBXBuildFile; fileRef = 1FEFD55B1CAD0C18005A1C5F /* ChanelViewTwo.m */; };
+		1FEFD56C1CAD115C005A1C5F /* BackImagView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1FEFD55F1CAD115C005A1C5F /* BackImagView.m */; };
+		1FEFD56D1CAD115C005A1C5F /* chanel.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1FEFD5601CAD115C005A1C5F /* chanel.xib */; };
+		1FEFD56E1CAD115C005A1C5F /* ChanelView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1FEFD5621CAD115C005A1C5F /* ChanelView.m */; };
+		1FEFD56F1CAD115C005A1C5F /* ChanelViewTwo.m in Sources */ = {isa = PBXBuildFile; fileRef = 1FEFD5641CAD115C005A1C5F /* ChanelViewTwo.m */; };
+		1FEFD5701CAD115C005A1C5F /* MyHomePageView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1FEFD5661CAD115C005A1C5F /* MyHomePageView.m */; };
+		1FEFD5711CAD115C005A1C5F /* MyView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1FEFD5671CAD115C005A1C5F /* MyView.xib */; };
+		1FEFD5721CAD115C005A1C5F /* NaviView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1FEFD5691CAD115C005A1C5F /* NaviView.m */; };
+		1FEFD5731CAD115C005A1C5F /* ShareView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1FEFD56B1CAD115C005A1C5F /* ShareView.m */; };
+		1FEFD58A1CAD1219005A1C5F /* MyFansViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1FEFD57B1CAD1219005A1C5F /* MyFansViewController.m */; };
+		1FEFD58B1CAD1219005A1C5F /* MyFocusOnViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1FEFD57D1CAD1219005A1C5F /* MyFocusOnViewController.m */; };
+		1FEFD58C1CAD1219005A1C5F /* MyHomePageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1FEFD57F1CAD1219005A1C5F /* MyHomePageViewController.m */; };
+		1FEFD58D1CAD1219005A1C5F /* MyMessageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1FEFD5811CAD1219005A1C5F /* MyMessageViewController.m */; };
+		1FEFD58E1CAD1219005A1C5F /* MyOrdersViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1FEFD5831CAD1219005A1C5F /* MyOrdersViewController.m */; };
+		1FEFD58F1CAD1219005A1C5F /* MyShippingAddressViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1FEFD5851CAD1219005A1C5F /* MyShippingAddressViewController.m */; };
+		1FEFD5901CAD1219005A1C5F /* MySystemSettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1FEFD5871CAD1219005A1C5F /* MySystemSettingsViewController.m */; };
+		1FEFD5911CAD1219005A1C5F /* MyViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1FEFD5891CAD1219005A1C5F /* MyViewController.m */; };
+		1FEFD5961CAD12B2005A1C5F /* AboutFirebirdViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1FEFD5931CAD12B2005A1C5F /* AboutFirebirdViewController.m */; };
+		1FEFD5971CAD12B2005A1C5F /* FeedbackViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1FEFD5951CAD12B2005A1C5F /* FeedbackViewController.m */; };
+		1FEFD5991CAD12E8005A1C5F /* My.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1FEFD5981CAD12E8005A1C5F /* My.storyboard */; };
 		280045111C805B78005F5C2E /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 280045101C805B78005F5C2E /* CoreLocation.framework */; };
 		280045131C805B82005F5C2E /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 280045121C805B82005F5C2E /* QuartzCore.framework */; };
 		280045151C805B8C005F5C2E /* OpenGLES.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 280045141C805B8C005F5C2E /* OpenGLES.framework */; };
@@ -148,27 +148,6 @@
 
 /* Begin PBXFileReference section */
 		127E71F8B333CCEE9B273250 /* Pods-fineix.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-fineix.debug.xcconfig"; path = "Pods/Target Support Files/Pods-fineix/Pods-fineix.debug.xcconfig"; sourceTree = "<group>"; };
-		1F02B6A71CAA94220080CA45 /* MyFansViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyFansViewController.h; sourceTree = "<group>"; };
-		1F02B6A81CAA94220080CA45 /* MyFansViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyFansViewController.m; sourceTree = "<group>"; };
-		1F02B6A91CAA94220080CA45 /* MyFocusOnViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyFocusOnViewController.h; sourceTree = "<group>"; };
-		1F02B6AA1CAA94220080CA45 /* MyFocusOnViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyFocusOnViewController.m; sourceTree = "<group>"; };
-		1F02B6AB1CAA94220080CA45 /* MyHomePageViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyHomePageViewController.h; sourceTree = "<group>"; };
-		1F02B6AC1CAA94220080CA45 /* MyHomePageViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyHomePageViewController.m; sourceTree = "<group>"; };
-		1F02B6AD1CAA94220080CA45 /* MyMessageViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyMessageViewController.h; sourceTree = "<group>"; };
-		1F02B6AE1CAA94220080CA45 /* MyMessageViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyMessageViewController.m; sourceTree = "<group>"; };
-		1F02B6AF1CAA94220080CA45 /* MyOrdersViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyOrdersViewController.h; sourceTree = "<group>"; };
-		1F02B6B01CAA94220080CA45 /* MyOrdersViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyOrdersViewController.m; sourceTree = "<group>"; };
-		1F02B6B11CAA94220080CA45 /* MyShippingAddressViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyShippingAddressViewController.h; sourceTree = "<group>"; };
-		1F02B6B21CAA94220080CA45 /* MyShippingAddressViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyShippingAddressViewController.m; sourceTree = "<group>"; };
-		1F02B6B31CAA94220080CA45 /* MySystemSettingsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MySystemSettingsViewController.h; sourceTree = "<group>"; };
-		1F02B6B41CAA94220080CA45 /* MySystemSettingsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MySystemSettingsViewController.m; sourceTree = "<group>"; };
-		1F02B6B51CAA94220080CA45 /* MyViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyViewController.h; sourceTree = "<group>"; };
-		1F02B6B61CAA94220080CA45 /* MyViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyViewController.m; sourceTree = "<group>"; };
-		1F02B6B71CAA94220080CA45 /* My.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = My.storyboard; sourceTree = "<group>"; };
-		1F02B6D11CAA94F40080CA45 /* AboutFirebirdViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AboutFirebirdViewController.h; path = ../../../../../../My/Controller/AboutFirebirdViewController.h; sourceTree = "<group>"; };
-		1F02B6D21CAA94F40080CA45 /* AboutFirebirdViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AboutFirebirdViewController.m; path = ../../../../../../My/Controller/AboutFirebirdViewController.m; sourceTree = "<group>"; };
-		1F02B6D31CAA94F40080CA45 /* FeedbackViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FeedbackViewController.h; path = ../../../../../../My/Controller/FeedbackViewController.h; sourceTree = "<group>"; };
-		1F02B6D41CAA94F40080CA45 /* FeedbackViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FeedbackViewController.m; path = ../../../../../../My/Controller/FeedbackViewController.m; sourceTree = "<group>"; };
 		1F02B71B1CAA99240080CA45 /* FBBindingMobilePhoneNumber.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FBBindingMobilePhoneNumber.h; path = Fiu/Classes/Main/LoginRegister/controller/FBBindingMobilePhoneNumber.h; sourceTree = SOURCE_ROOT; };
 		1F02B71C1CAA99240080CA45 /* FBBindingMobilePhoneNumber.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FBBindingMobilePhoneNumber.m; path = Fiu/Classes/Main/LoginRegister/controller/FBBindingMobilePhoneNumber.m; sourceTree = SOURCE_ROOT; };
 		1F02B71D1CAA99240080CA45 /* FBLoginRegisterViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FBLoginRegisterViewController.h; path = Fiu/Classes/Main/LoginRegister/controller/FBLoginRegisterViewController.h; sourceTree = SOURCE_ROOT; };
@@ -200,20 +179,41 @@
 		1F0EE6A81C9FA4F6000631F0 /* libz.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libz.tbd; path = usr/lib/libz.tbd; sourceTree = SDKROOT; };
 		1F59E5FB1C9ABBA500E96C60 /* Accelerate.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Accelerate.framework; path = System/Library/Frameworks/Accelerate.framework; sourceTree = SDKROOT; };
 		1FAB860F67E625188BAE00A8 /* Pods-fineix.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-fineix.release.xcconfig"; path = "Pods/Target Support Files/Pods-fineix/Pods-fineix.release.xcconfig"; sourceTree = "<group>"; };
-		1FE54F981CABE420000399C8 /* chanel.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = chanel.xib; sourceTree = "<group>"; };
-		1FE54F991CABE420000399C8 /* ChanelView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChanelView.h; sourceTree = "<group>"; };
-		1FE54F9A1CABE420000399C8 /* ChanelView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChanelView.m; sourceTree = "<group>"; };
-		1FE54F9B1CABE420000399C8 /* MyHomePageView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyHomePageView.h; sourceTree = "<group>"; };
-		1FE54F9C1CABE420000399C8 /* MyHomePageView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyHomePageView.m; sourceTree = "<group>"; };
-		1FE54F9D1CABE420000399C8 /* MyView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MyView.xib; sourceTree = "<group>"; };
-		1FE54F9E1CABE420000399C8 /* ShareView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShareView.h; sourceTree = "<group>"; };
-		1FE54F9F1CABE420000399C8 /* ShareView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ShareView.m; sourceTree = "<group>"; };
-		1FEFD5541CACF42C005A1C5F /* NaviView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NaviView.h; sourceTree = "<group>"; };
-		1FEFD5551CACF42C005A1C5F /* NaviView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NaviView.m; sourceTree = "<group>"; };
-		1FEFD5571CACFB2F005A1C5F /* BackImagView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BackImagView.h; sourceTree = "<group>"; };
-		1FEFD5581CACFB2F005A1C5F /* BackImagView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BackImagView.m; sourceTree = "<group>"; };
-		1FEFD55A1CAD0C18005A1C5F /* ChanelViewTwo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChanelViewTwo.h; sourceTree = "<group>"; };
-		1FEFD55B1CAD0C18005A1C5F /* ChanelViewTwo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChanelViewTwo.m; sourceTree = "<group>"; };
+		1FEFD55E1CAD115C005A1C5F /* BackImagView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BackImagView.h; sourceTree = "<group>"; };
+		1FEFD55F1CAD115C005A1C5F /* BackImagView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BackImagView.m; sourceTree = "<group>"; };
+		1FEFD5601CAD115C005A1C5F /* chanel.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = chanel.xib; sourceTree = "<group>"; };
+		1FEFD5611CAD115C005A1C5F /* ChanelView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChanelView.h; sourceTree = "<group>"; };
+		1FEFD5621CAD115C005A1C5F /* ChanelView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChanelView.m; sourceTree = "<group>"; };
+		1FEFD5631CAD115C005A1C5F /* ChanelViewTwo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChanelViewTwo.h; sourceTree = "<group>"; };
+		1FEFD5641CAD115C005A1C5F /* ChanelViewTwo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChanelViewTwo.m; sourceTree = "<group>"; };
+		1FEFD5651CAD115C005A1C5F /* MyHomePageView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyHomePageView.h; sourceTree = "<group>"; };
+		1FEFD5661CAD115C005A1C5F /* MyHomePageView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyHomePageView.m; sourceTree = "<group>"; };
+		1FEFD5671CAD115C005A1C5F /* MyView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MyView.xib; sourceTree = "<group>"; };
+		1FEFD5681CAD115C005A1C5F /* NaviView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NaviView.h; sourceTree = "<group>"; };
+		1FEFD5691CAD115C005A1C5F /* NaviView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NaviView.m; sourceTree = "<group>"; };
+		1FEFD56A1CAD115C005A1C5F /* ShareView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShareView.h; sourceTree = "<group>"; };
+		1FEFD56B1CAD115C005A1C5F /* ShareView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ShareView.m; sourceTree = "<group>"; };
+		1FEFD57A1CAD1219005A1C5F /* MyFansViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MyFansViewController.h; path = Fiu/Classes/Main/My/Controller/MyFansViewController.h; sourceTree = SOURCE_ROOT; };
+		1FEFD57B1CAD1219005A1C5F /* MyFansViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MyFansViewController.m; path = Fiu/Classes/Main/My/Controller/MyFansViewController.m; sourceTree = SOURCE_ROOT; };
+		1FEFD57C1CAD1219005A1C5F /* MyFocusOnViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MyFocusOnViewController.h; path = Fiu/Classes/Main/My/Controller/MyFocusOnViewController.h; sourceTree = SOURCE_ROOT; };
+		1FEFD57D1CAD1219005A1C5F /* MyFocusOnViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MyFocusOnViewController.m; path = Fiu/Classes/Main/My/Controller/MyFocusOnViewController.m; sourceTree = SOURCE_ROOT; };
+		1FEFD57E1CAD1219005A1C5F /* MyHomePageViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MyHomePageViewController.h; path = Fiu/Classes/Main/My/Controller/MyHomePageViewController.h; sourceTree = SOURCE_ROOT; };
+		1FEFD57F1CAD1219005A1C5F /* MyHomePageViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MyHomePageViewController.m; path = Fiu/Classes/Main/My/Controller/MyHomePageViewController.m; sourceTree = SOURCE_ROOT; };
+		1FEFD5801CAD1219005A1C5F /* MyMessageViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MyMessageViewController.h; path = Fiu/Classes/Main/My/Controller/MyMessageViewController.h; sourceTree = SOURCE_ROOT; };
+		1FEFD5811CAD1219005A1C5F /* MyMessageViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MyMessageViewController.m; path = Fiu/Classes/Main/My/Controller/MyMessageViewController.m; sourceTree = SOURCE_ROOT; };
+		1FEFD5821CAD1219005A1C5F /* MyOrdersViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MyOrdersViewController.h; path = Fiu/Classes/Main/My/Controller/MyOrdersViewController.h; sourceTree = SOURCE_ROOT; };
+		1FEFD5831CAD1219005A1C5F /* MyOrdersViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MyOrdersViewController.m; path = Fiu/Classes/Main/My/Controller/MyOrdersViewController.m; sourceTree = SOURCE_ROOT; };
+		1FEFD5841CAD1219005A1C5F /* MyShippingAddressViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MyShippingAddressViewController.h; path = Fiu/Classes/Main/My/Controller/MyShippingAddressViewController.h; sourceTree = SOURCE_ROOT; };
+		1FEFD5851CAD1219005A1C5F /* MyShippingAddressViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MyShippingAddressViewController.m; path = Fiu/Classes/Main/My/Controller/MyShippingAddressViewController.m; sourceTree = SOURCE_ROOT; };
+		1FEFD5861CAD1219005A1C5F /* MySystemSettingsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MySystemSettingsViewController.h; path = Fiu/Classes/Main/My/Controller/MySystemSettingsViewController.h; sourceTree = SOURCE_ROOT; };
+		1FEFD5871CAD1219005A1C5F /* MySystemSettingsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MySystemSettingsViewController.m; path = Fiu/Classes/Main/My/Controller/MySystemSettingsViewController.m; sourceTree = SOURCE_ROOT; };
+		1FEFD5881CAD1219005A1C5F /* MyViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MyViewController.h; path = Fiu/Classes/Main/My/Controller/MyViewController.h; sourceTree = SOURCE_ROOT; };
+		1FEFD5891CAD1219005A1C5F /* MyViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MyViewController.m; path = Fiu/Classes/Main/My/Controller/MyViewController.m; sourceTree = SOURCE_ROOT; };
+		1FEFD5921CAD12B1005A1C5F /* AboutFirebirdViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AboutFirebirdViewController.h; path = Fiu/Classes/Main/My/Controller/AboutFirebirdViewController.h; sourceTree = SOURCE_ROOT; };
+		1FEFD5931CAD12B2005A1C5F /* AboutFirebirdViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AboutFirebirdViewController.m; path = Fiu/Classes/Main/My/Controller/AboutFirebirdViewController.m; sourceTree = SOURCE_ROOT; };
+		1FEFD5941CAD12B2005A1C5F /* FeedbackViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FeedbackViewController.h; path = Fiu/Classes/Main/My/Controller/FeedbackViewController.h; sourceTree = SOURCE_ROOT; };
+		1FEFD5951CAD12B2005A1C5F /* FeedbackViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FeedbackViewController.m; path = Fiu/Classes/Main/My/Controller/FeedbackViewController.m; sourceTree = SOURCE_ROOT; };
+		1FEFD5981CAD12E8005A1C5F /* My.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = My.storyboard; path = Fiu/Classes/Main/My/My.storyboard; sourceTree = SOURCE_ROOT; };
 		26743842F5D507CEE992D80C /* libPods-fineix.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-fineix.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		280045101C805B78005F5C2E /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
 		280045121C805B82005F5C2E /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
@@ -505,9 +505,9 @@
 		1F02B6A21CAA94220080CA45 /* My */ = {
 			isa = PBXGroup;
 			children = (
-				1FE54F971CABE420000399C8 /* view */,
+				1FEFD5981CAD12E8005A1C5F /* My.storyboard */,
+				1FEFD55D1CAD115C005A1C5F /* view */,
 				1F02B6A61CAA94220080CA45 /* Controller */,
-				1F02B6B71CAA94220080CA45 /* My.storyboard */,
 			);
 			name = My;
 			path = ../../../../fineix/Fiu/Classes/Main/My;
@@ -516,50 +516,51 @@
 		1F02B6A61CAA94220080CA45 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
-				1F02B6D11CAA94F40080CA45 /* AboutFirebirdViewController.h */,
-				1F02B6D21CAA94F40080CA45 /* AboutFirebirdViewController.m */,
-				1F02B6D31CAA94F40080CA45 /* FeedbackViewController.h */,
-				1F02B6D41CAA94F40080CA45 /* FeedbackViewController.m */,
-				1F02B6A71CAA94220080CA45 /* MyFansViewController.h */,
-				1F02B6A81CAA94220080CA45 /* MyFansViewController.m */,
-				1F02B6A91CAA94220080CA45 /* MyFocusOnViewController.h */,
-				1F02B6AA1CAA94220080CA45 /* MyFocusOnViewController.m */,
-				1F02B6AB1CAA94220080CA45 /* MyHomePageViewController.h */,
-				1F02B6AC1CAA94220080CA45 /* MyHomePageViewController.m */,
-				1F02B6AD1CAA94220080CA45 /* MyMessageViewController.h */,
-				1F02B6AE1CAA94220080CA45 /* MyMessageViewController.m */,
-				1F02B6AF1CAA94220080CA45 /* MyOrdersViewController.h */,
-				1F02B6B01CAA94220080CA45 /* MyOrdersViewController.m */,
-				1F02B6B11CAA94220080CA45 /* MyShippingAddressViewController.h */,
-				1F02B6B21CAA94220080CA45 /* MyShippingAddressViewController.m */,
-				1F02B6B31CAA94220080CA45 /* MySystemSettingsViewController.h */,
-				1F02B6B41CAA94220080CA45 /* MySystemSettingsViewController.m */,
-				1F02B6B51CAA94220080CA45 /* MyViewController.h */,
-				1F02B6B61CAA94220080CA45 /* MyViewController.m */,
+				1FEFD5921CAD12B1005A1C5F /* AboutFirebirdViewController.h */,
+				1FEFD5931CAD12B2005A1C5F /* AboutFirebirdViewController.m */,
+				1FEFD5941CAD12B2005A1C5F /* FeedbackViewController.h */,
+				1FEFD5951CAD12B2005A1C5F /* FeedbackViewController.m */,
+				1FEFD57A1CAD1219005A1C5F /* MyFansViewController.h */,
+				1FEFD57B1CAD1219005A1C5F /* MyFansViewController.m */,
+				1FEFD57C1CAD1219005A1C5F /* MyFocusOnViewController.h */,
+				1FEFD57D1CAD1219005A1C5F /* MyFocusOnViewController.m */,
+				1FEFD57E1CAD1219005A1C5F /* MyHomePageViewController.h */,
+				1FEFD57F1CAD1219005A1C5F /* MyHomePageViewController.m */,
+				1FEFD5801CAD1219005A1C5F /* MyMessageViewController.h */,
+				1FEFD5811CAD1219005A1C5F /* MyMessageViewController.m */,
+				1FEFD5821CAD1219005A1C5F /* MyOrdersViewController.h */,
+				1FEFD5831CAD1219005A1C5F /* MyOrdersViewController.m */,
+				1FEFD5841CAD1219005A1C5F /* MyShippingAddressViewController.h */,
+				1FEFD5851CAD1219005A1C5F /* MyShippingAddressViewController.m */,
+				1FEFD5861CAD1219005A1C5F /* MySystemSettingsViewController.h */,
+				1FEFD5871CAD1219005A1C5F /* MySystemSettingsViewController.m */,
+				1FEFD5881CAD1219005A1C5F /* MyViewController.h */,
+				1FEFD5891CAD1219005A1C5F /* MyViewController.m */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
 		};
-		1FE54F971CABE420000399C8 /* view */ = {
+		1FEFD55D1CAD115C005A1C5F /* view */ = {
 			isa = PBXGroup;
 			children = (
-				1FE54F981CABE420000399C8 /* chanel.xib */,
-				1FE54F991CABE420000399C8 /* ChanelView.h */,
-				1FE54F9A1CABE420000399C8 /* ChanelView.m */,
-				1FE54F9B1CABE420000399C8 /* MyHomePageView.h */,
-				1FE54F9C1CABE420000399C8 /* MyHomePageView.m */,
-				1FE54F9D1CABE420000399C8 /* MyView.xib */,
-				1FE54F9E1CABE420000399C8 /* ShareView.h */,
-				1FE54F9F1CABE420000399C8 /* ShareView.m */,
-				1FEFD5541CACF42C005A1C5F /* NaviView.h */,
-				1FEFD5551CACF42C005A1C5F /* NaviView.m */,
-				1FEFD5571CACFB2F005A1C5F /* BackImagView.h */,
-				1FEFD5581CACFB2F005A1C5F /* BackImagView.m */,
-				1FEFD55A1CAD0C18005A1C5F /* ChanelViewTwo.h */,
-				1FEFD55B1CAD0C18005A1C5F /* ChanelViewTwo.m */,
+				1FEFD55E1CAD115C005A1C5F /* BackImagView.h */,
+				1FEFD55F1CAD115C005A1C5F /* BackImagView.m */,
+				1FEFD5601CAD115C005A1C5F /* chanel.xib */,
+				1FEFD5611CAD115C005A1C5F /* ChanelView.h */,
+				1FEFD5621CAD115C005A1C5F /* ChanelView.m */,
+				1FEFD5631CAD115C005A1C5F /* ChanelViewTwo.h */,
+				1FEFD5641CAD115C005A1C5F /* ChanelViewTwo.m */,
+				1FEFD5651CAD115C005A1C5F /* MyHomePageView.h */,
+				1FEFD5661CAD115C005A1C5F /* MyHomePageView.m */,
+				1FEFD5671CAD115C005A1C5F /* MyView.xib */,
+				1FEFD5681CAD115C005A1C5F /* NaviView.h */,
+				1FEFD5691CAD115C005A1C5F /* NaviView.m */,
+				1FEFD56A1CAD115C005A1C5F /* ShareView.h */,
+				1FEFD56B1CAD115C005A1C5F /* ShareView.m */,
 			);
-			path = view;
-			sourceTree = "<group>";
+			name = view;
+			path = Fiu/Classes/Main/My/view;
+			sourceTree = SOURCE_ROOT;
 		};
 		40FF7B08F78941EBD75F7965 /* Pods */ = {
 			isa = PBXGroup;
@@ -1122,16 +1123,17 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				1FE54FA31CABE420000399C8 /* MyView.xib in Resources */,
+				1FEFD5711CAD115C005A1C5F /* MyView.xib in Resources */,
 				D812814C1CAA8532007CF08B /* FBLocationViewController.xib in Resources */,
 				D81281711CAA8532007CF08B /* UMSShareListController.xib in Resources */,
-				1FE54FA01CABE420000399C8 /* chanel.xib in Resources */,
+				1FEFD56D1CAD115C005A1C5F /* chanel.xib in Resources */,
 				D812816B1CAA8532007CF08B /* UMSCommentInputController.xib in Resources */,
 				D812816D1CAA8532007CF08B /* UMShareEditViewController.xib in Resources */,
 				D81281781CAA8532007CF08B /* TencentOpenApi_IOS_Bundle.bundle in Resources */,
 				1F02B74C1CAAA0B00080CA45 /* LoginRegisterController.storyboard in Resources */,
 				D81281701CAA8532007CF08B /* UMSnsAccountViewController.xib in Resources */,
 				D81281121CAA8532007CF08B /* LaunchScreen.storyboard in Resources */,
+				1FEFD5991CAD12E8005A1C5F /* My.storyboard in Resources */,
 				D81281721CAA8532007CF08B /* UMSocialSDKResourcesNew.bundle in Resources */,
 				D812815B1CAA8532007CF08B /* Info.plist in Resources */,
 				D812816C1CAA8532007CF08B /* UMSCommentInputControlleriPad.xib in Resources */,
@@ -1143,7 +1145,6 @@
 				D81281681CAA8532007CF08B /* UMSocialLocalizable.strings in Resources */,
 				D812816F1CAA8532007CF08B /* UMSLoginViewController.xib in Resources */,
 				D81281111CAA8532007CF08B /* Assets.xcassets in Resources */,
-				1F02B6C51CAA94220080CA45 /* My.storyboard in Resources */,
 				D812815C1CAA8532007CF08B /* InfoPlist.strings in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1203,28 +1204,29 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				1FE54FA41CABE420000399C8 /* ShareView.m in Sources */,
-				1F02B6BF1CAA94220080CA45 /* MyHomePageViewController.m in Sources */,
-				1F02B6BE1CAA94220080CA45 /* MyFocusOnViewController.m in Sources */,
 				D81281581CAA8532007CF08B /* UIColor+Extension.m in Sources */,
+				1FEFD5971CAD12B2005A1C5F /* FeedbackViewController.m in Sources */,
 				1F02B7321CAA99240080CA45 /* SubmitViewController.m in Sources */,
-				1FEFD5591CACFB2F005A1C5F /* BackImagView.m in Sources */,
 				D81281311CAA8532007CF08B /* HomeViewController.m in Sources */,
 				D81281531CAA8532007CF08B /* FBAPI.m in Sources */,
-				1FEFD55C1CAD0C18005A1C5F /* ChanelViewTwo.m in Sources */,
+				1FEFD5731CAD115C005A1C5F /* ShareView.m in Sources */,
 				1F02B7401CAA99540080CA45 /* UserInfoEntity.m in Sources */,
+				1FEFD5701CAD115C005A1C5F /* MyHomePageView.m in Sources */,
 				D81281131CAA8532007CF08B /* FBViewController.m in Sources */,
-				1F02B6C21CAA94220080CA45 /* MyShippingAddressViewController.m in Sources */,
 				D812811C1CAA8532007CF08B /* ReleaseViewController.m in Sources */,
-				1F02B6C41CAA94220080CA45 /* MyViewController.m in Sources */,
+				1FEFD5961CAD12B2005A1C5F /* AboutFirebirdViewController.m in Sources */,
 				D81281521CAA8532007CF08B /* FBTabBarController.m in Sources */,
 				D812814A1CAA8532007CF08B /* FBSearchView.m in Sources */,
-				1F02B6C31CAA94220080CA45 /* MySystemSettingsViewController.m in Sources */,
+				1FEFD58F1CAD1219005A1C5F /* MyShippingAddressViewController.m in Sources */,
+				1FEFD58D1CAD1219005A1C5F /* MyMessageViewController.m in Sources */,
 				D812815A1CAA8532007CF08B /* fineix.xcdatamodeld in Sources */,
 				D81281591CAA8532007CF08B /* UIImageView+SDWedImage.m in Sources */,
 				D81281541CAA8532007CF08B /* FBRequest.m in Sources */,
+				1FEFD56E1CAD115C005A1C5F /* ChanelView.m in Sources */,
+				1FEFD56C1CAD115C005A1C5F /* BackImagView.m in Sources */,
 				D812812D1CAA8532007CF08B /* ScenceAddMoreView.m in Sources */,
 				D812811D1CAA8532007CF08B /* SearchLocationViewController.m in Sources */,
+				1FEFD5901CAD1219005A1C5F /* MySystemSettingsViewController.m in Sources */,
 				1F02B72F1CAA99240080CA45 /* ForgotPasswordViewController.m in Sources */,
 				D81281661CAA8532007CF08B /* JKDBHelper.m in Sources */,
 				D81281261CAA8532007CF08B /* FBFootView.m in Sources */,
@@ -1234,16 +1236,18 @@
 				D81281171CAA8532007CF08B /* CreateViewController.m in Sources */,
 				D81281141CAA8532007CF08B /* AddTagViewController.m in Sources */,
 				1F02B73F1CAA99540080CA45 /* UserInfo.m in Sources */,
+				1FEFD56F1CAD115C005A1C5F /* ChanelViewTwo.m in Sources */,
+				1FEFD58A1CAD1219005A1C5F /* MyFansViewController.m in Sources */,
 				D812812A1CAA8532007CF08B /* PhotoAlbumsTableViewCell.m in Sources */,
 				D81281241CAA8532007CF08B /* CropImageView.m in Sources */,
-				1F02B6BD1CAA94220080CA45 /* MyFansViewController.m in Sources */,
 				1F02B72D1CAA99240080CA45 /* FBLoginViewController.m in Sources */,
+				1FEFD58C1CAD1219005A1C5F /* MyHomePageViewController.m in Sources */,
 				1F02B72C1CAA99240080CA45 /* FBLoginRegisterViewController.m in Sources */,
-				1F02B6D51CAA94F40080CA45 /* AboutFirebirdViewController.m in Sources */,
+				1FEFD5721CAD115C005A1C5F /* NaviView.m in Sources */,
 				D812812C1CAA8532007CF08B /* PictureView.m in Sources */,
 				D81281161CAA8532007CF08B /* ClipImageViewController.m in Sources */,
 				1F02B7311CAA99240080CA45 /* PhoneToSignUpViewController.m in Sources */,
-				1F02B6C01CAA94220080CA45 /* MyMessageViewController.m in Sources */,
+				1FEFD58E1CAD1219005A1C5F /* MyOrdersViewController.m in Sources */,
 				1F02B7301CAA99240080CA45 /* PhoneToLogInViewController.m in Sources */,
 				D81281671CAA8532007CF08B /* JKDBModel.m in Sources */,
 				D81281291CAA8532007CF08B /* FiltersView.m in Sources */,
@@ -1251,33 +1255,30 @@
 				D81281181CAA8532007CF08B /* CropImageViewController.m in Sources */,
 				D812812B1CAA8532007CF08B /* PhotoAlbumsView.m in Sources */,
 				D812811E1CAA8532007CF08B /* SelectSceneViewController.m in Sources */,
-				1F02B6C11CAA94220080CA45 /* MyOrdersViewController.m in Sources */,
 				D81281211CAA8532007CF08B /* FBLoadPhoto.m in Sources */,
-				1F02B6D61CAA94F40080CA45 /* FeedbackViewController.m in Sources */,
 				1F02B72E1CAA99240080CA45 /* FBSignupViewController.m in Sources */,
 				D81281501CAA8532007CF08B /* FBPictureViewController.m in Sources */,
 				1F02B72B1CAA99240080CA45 /* FBBindingMobilePhoneNumber.m in Sources */,
 				D812811B1CAA8532007CF08B /* PictureToolViewController.m in Sources */,
 				D812813C1CAA8532007CF08B /* MallViewController.m in Sources */,
+				1FEFD5911CAD1219005A1C5F /* MyViewController.m in Sources */,
 				1F02B73D1CAA99540080CA45 /* NSNumber+UserModel.m in Sources */,
 				D81281511CAA8532007CF08B /* FBTabBar.m in Sources */,
 				D81281191CAA8532007CF08B /* FiltersViewController.m in Sources */,
 				D812812F1CAA8532007CF08B /* SearchLocationView.m in Sources */,
 				D812814F1CAA8532007CF08B /* FBNavigationViewController.m in Sources */,
+				1FEFD58B1CAD1219005A1C5F /* MyFocusOnViewController.m in Sources */,
 				D81281201CAA8532007CF08B /* FBPhoto.m in Sources */,
 				D81281281CAA8532007CF08B /* FBPictureView.m in Sources */,
 				D81281301CAA8532007CF08B /* DiscoverViewController.m in Sources */,
 				D81281151CAA8532007CF08B /* AddUrlViewController.m in Sources */,
 				D81281551CAA8532007CF08B /* HttpTool.m in Sources */,
-				1FE54FA21CABE420000399C8 /* MyHomePageView.m in Sources */,
 				1F02B73E1CAA99540080CA45 /* NSString+UserModel.m in Sources */,
 				D812814D1CAA8532007CF08B /* FBMapLocatinViewController.m in Sources */,
-				1FE54FA11CABE420000399C8 /* ChanelView.m in Sources */,
 				D812811A1CAA8532007CF08B /* MarkGoodsViewController.m in Sources */,
 				D812814B1CAA8532007CF08B /* FBLocationViewController.m in Sources */,
 				D81281101CAA8532007CF08B /* AppDelegate.mm in Sources */,
 				D81281221CAA8532007CF08B /* AddUrlView.m in Sources */,
-				1FEFD5561CACF42C005A1C5F /* NaviView.m in Sources */,
 				D81281231CAA8532007CF08B /* CameraView.m in Sources */,
 				D812811F1CAA8532007CF08B /* FBFilters.m in Sources */,
 				D81281271CAA8532007CF08B /* FBPictureCollectionViewCell.m in Sources */,
