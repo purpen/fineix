@@ -62,19 +62,6 @@
 		D812813A1CAA8532007CF08B /* UserInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = D81280771CAA8532007CF08B /* UserInfo.m */; };
 		D812813B1CAA8532007CF08B /* UserInfoEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = D81280791CAA8532007CF08B /* UserInfoEntity.m */; };
 		D812813C1CAA8532007CF08B /* MallViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D812807D1CAA8532007CF08B /* MallViewController.m */; };
-		D812813D1CAA8532007CF08B /* chanel.xib in Resources */ = {isa = PBXBuildFile; fileRef = D812807F1CAA8532007CF08B /* chanel.xib */; };
-		D812813E1CAA8532007CF08B /* ChanelView.m in Sources */ = {isa = PBXBuildFile; fileRef = D81280811CAA8532007CF08B /* ChanelView.m */; };
-		D812813F1CAA8532007CF08B /* MyFansViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D81280841CAA8532007CF08B /* MyFansViewController.m */; };
-		D81281401CAA8532007CF08B /* MyFocusOnViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D81280861CAA8532007CF08B /* MyFocusOnViewController.m */; };
-		D81281411CAA8532007CF08B /* MyHomePageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D81280881CAA8532007CF08B /* MyHomePageViewController.m */; };
-		D81281421CAA8532007CF08B /* MyMessageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D812808A1CAA8532007CF08B /* MyMessageViewController.m */; };
-		D81281431CAA8532007CF08B /* MyOrdersViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D812808C1CAA8532007CF08B /* MyOrdersViewController.m */; };
-		D81281441CAA8532007CF08B /* MyShippingAddressViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D812808E1CAA8532007CF08B /* MyShippingAddressViewController.m */; };
-		D81281451CAA8532007CF08B /* MySystemSettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D81280901CAA8532007CF08B /* MySystemSettingsViewController.m */; };
-		D81281461CAA8532007CF08B /* MyViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D81280921CAA8532007CF08B /* MyViewController.m */; };
-		D81281471CAA8532007CF08B /* My.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D81280931CAA8532007CF08B /* My.storyboard */; };
-		D81281481CAA8532007CF08B /* MyHomePageView.m in Sources */ = {isa = PBXBuildFile; fileRef = D81280951CAA8532007CF08B /* MyHomePageView.m */; };
-		D81281491CAA8532007CF08B /* MyView.xib in Resources */ = {isa = PBXBuildFile; fileRef = D81280961CAA8532007CF08B /* MyView.xib */; };
 		D812814B1CAA8532007CF08B /* FBLocationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D812809C1CAA8532007CF08B /* FBLocationViewController.m */; };
 		D812814C1CAA8532007CF08B /* FBLocationViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D812809D1CAA8532007CF08B /* FBLocationViewController.xib */; };
 		D812814D1CAA8532007CF08B /* FBMapLocatinViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D812809F1CAA8532007CF08B /* FBMapLocatinViewController.m */; };
@@ -246,29 +233,6 @@
 		D81280791CAA8532007CF08B /* UserInfoEntity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserInfoEntity.m; sourceTree = "<group>"; };
 		D812807C1CAA8532007CF08B /* MallViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MallViewController.h; sourceTree = "<group>"; };
 		D812807D1CAA8532007CF08B /* MallViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MallViewController.m; sourceTree = "<group>"; };
-		D812807F1CAA8532007CF08B /* chanel.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = chanel.xib; sourceTree = "<group>"; };
-		D81280801CAA8532007CF08B /* ChanelView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChanelView.h; sourceTree = "<group>"; };
-		D81280811CAA8532007CF08B /* ChanelView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChanelView.m; sourceTree = "<group>"; };
-		D81280831CAA8532007CF08B /* MyFansViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyFansViewController.h; sourceTree = "<group>"; };
-		D81280841CAA8532007CF08B /* MyFansViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyFansViewController.m; sourceTree = "<group>"; };
-		D81280851CAA8532007CF08B /* MyFocusOnViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyFocusOnViewController.h; sourceTree = "<group>"; };
-		D81280861CAA8532007CF08B /* MyFocusOnViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyFocusOnViewController.m; sourceTree = "<group>"; };
-		D81280871CAA8532007CF08B /* MyHomePageViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyHomePageViewController.h; sourceTree = "<group>"; };
-		D81280881CAA8532007CF08B /* MyHomePageViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyHomePageViewController.m; sourceTree = "<group>"; };
-		D81280891CAA8532007CF08B /* MyMessageViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyMessageViewController.h; sourceTree = "<group>"; };
-		D812808A1CAA8532007CF08B /* MyMessageViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyMessageViewController.m; sourceTree = "<group>"; };
-		D812808B1CAA8532007CF08B /* MyOrdersViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyOrdersViewController.h; sourceTree = "<group>"; };
-		D812808C1CAA8532007CF08B /* MyOrdersViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyOrdersViewController.m; sourceTree = "<group>"; };
-		D812808D1CAA8532007CF08B /* MyShippingAddressViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyShippingAddressViewController.h; sourceTree = "<group>"; };
-		D812808E1CAA8532007CF08B /* MyShippingAddressViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyShippingAddressViewController.m; sourceTree = "<group>"; };
-		D812808F1CAA8532007CF08B /* MySystemSettingsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MySystemSettingsViewController.h; sourceTree = "<group>"; };
-		D81280901CAA8532007CF08B /* MySystemSettingsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MySystemSettingsViewController.m; sourceTree = "<group>"; };
-		D81280911CAA8532007CF08B /* MyViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyViewController.h; sourceTree = "<group>"; };
-		D81280921CAA8532007CF08B /* MyViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyViewController.m; sourceTree = "<group>"; };
-		D81280931CAA8532007CF08B /* My.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = My.storyboard; sourceTree = "<group>"; };
-		D81280941CAA8532007CF08B /* MyHomePageView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyHomePageView.h; sourceTree = "<group>"; };
-		D81280951CAA8532007CF08B /* MyHomePageView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyHomePageView.m; sourceTree = "<group>"; };
-		D81280961CAA8532007CF08B /* MyView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MyView.xib; sourceTree = "<group>"; };
 		D812809B1CAA8532007CF08B /* FBLocationViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FBLocationViewController.h; sourceTree = "<group>"; };
 		D812809C1CAA8532007CF08B /* FBLocationViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FBLocationViewController.m; sourceTree = "<group>"; };
 		D812809D1CAA8532007CF08B /* FBLocationViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FBLocationViewController.xib; sourceTree = "<group>"; };
@@ -522,7 +486,6 @@
 				D812805B1CAA8532007CF08B /* Discover */,
 				D812801E1CAA8532007CF08B /* Create */,
 				D812807A1CAA8532007CF08B /* Mall */,
-				D812807E1CAA8532007CF08B /* My */,
 				D81280631CAA8532007CF08B /* LoginRegister */,
 				D81280971CAA8532007CF08B /* Other */,
 			);
@@ -726,44 +689,6 @@
 			children = (
 				D812807C1CAA8532007CF08B /* MallViewController.h */,
 				D812807D1CAA8532007CF08B /* MallViewController.m */,
-			);
-			path = Controller;
-			sourceTree = "<group>";
-		};
-		D812807E1CAA8532007CF08B /* My */ = {
-			isa = PBXGroup;
-			children = (
-				D812807F1CAA8532007CF08B /* chanel.xib */,
-				D81280801CAA8532007CF08B /* ChanelView.h */,
-				D81280811CAA8532007CF08B /* ChanelView.m */,
-				D81280821CAA8532007CF08B /* Controller */,
-				D81280931CAA8532007CF08B /* My.storyboard */,
-				D81280941CAA8532007CF08B /* MyHomePageView.h */,
-				D81280951CAA8532007CF08B /* MyHomePageView.m */,
-				D81280961CAA8532007CF08B /* MyView.xib */,
-			);
-			path = My;
-			sourceTree = "<group>";
-		};
-		D81280821CAA8532007CF08B /* Controller */ = {
-			isa = PBXGroup;
-			children = (
-				D81280831CAA8532007CF08B /* MyFansViewController.h */,
-				D81280841CAA8532007CF08B /* MyFansViewController.m */,
-				D81280851CAA8532007CF08B /* MyFocusOnViewController.h */,
-				D81280861CAA8532007CF08B /* MyFocusOnViewController.m */,
-				D81280871CAA8532007CF08B /* MyHomePageViewController.h */,
-				D81280881CAA8532007CF08B /* MyHomePageViewController.m */,
-				D81280891CAA8532007CF08B /* MyMessageViewController.h */,
-				D812808A1CAA8532007CF08B /* MyMessageViewController.m */,
-				D812808B1CAA8532007CF08B /* MyOrdersViewController.h */,
-				D812808C1CAA8532007CF08B /* MyOrdersViewController.m */,
-				D812808D1CAA8532007CF08B /* MyShippingAddressViewController.h */,
-				D812808E1CAA8532007CF08B /* MyShippingAddressViewController.m */,
-				D812808F1CAA8532007CF08B /* MySystemSettingsViewController.h */,
-				D81280901CAA8532007CF08B /* MySystemSettingsViewController.m */,
-				D81280911CAA8532007CF08B /* MyViewController.h */,
-				D81280921CAA8532007CF08B /* MyViewController.m */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -1089,15 +1014,12 @@
 			buildActionMask = 2147483647;
 			files = (
 				D812814C1CAA8532007CF08B /* FBLocationViewController.xib in Resources */,
-				D81281471CAA8532007CF08B /* My.storyboard in Resources */,
 				D81281711CAA8532007CF08B /* UMSShareListController.xib in Resources */,
 				D812816B1CAA8532007CF08B /* UMSCommentInputController.xib in Resources */,
 				D812816D1CAA8532007CF08B /* UMShareEditViewController.xib in Resources */,
-				D812813D1CAA8532007CF08B /* chanel.xib in Resources */,
 				D81281781CAA8532007CF08B /* TencentOpenApi_IOS_Bundle.bundle in Resources */,
 				D81281701CAA8532007CF08B /* UMSnsAccountViewController.xib in Resources */,
 				D81281121CAA8532007CF08B /* LaunchScreen.storyboard in Resources */,
-				D81281491CAA8532007CF08B /* MyView.xib in Resources */,
 				D81281721CAA8532007CF08B /* UMSocialSDKResourcesNew.bundle in Resources */,
 				D812815B1CAA8532007CF08B /* Info.plist in Resources */,
 				D812816C1CAA8532007CF08B /* UMSCommentInputControlleriPad.xib in Resources */,
@@ -1174,10 +1096,8 @@
 				D81281531CAA8532007CF08B /* FBAPI.m in Sources */,
 				D81281131CAA8532007CF08B /* FBViewController.m in Sources */,
 				D812811C1CAA8532007CF08B /* ReleaseViewController.m in Sources */,
-				D812813F1CAA8532007CF08B /* MyFansViewController.m in Sources */,
 				D81281521CAA8532007CF08B /* FBTabBarController.m in Sources */,
 				D81281391CAA8532007CF08B /* NSString+UserModel.m in Sources */,
-				D81281481CAA8532007CF08B /* MyHomePageView.m in Sources */,
 				D81281381CAA8532007CF08B /* NSNumber+UserModel.m in Sources */,
 				D81281361CAA8532007CF08B /* ForgotPasswordViewController.m in Sources */,
 				D812815A1CAA8532007CF08B /* fineix.xcdatamodeld in Sources */,
@@ -1193,9 +1113,7 @@
 				D81281561CAA8532007CF08B /* NSString+FBMD5.m in Sources */,
 				D812815E1CAA8532007CF08B /* main.m in Sources */,
 				D812813B1CAA8532007CF08B /* UserInfoEntity.m in Sources */,
-				D81281421CAA8532007CF08B /* MyMessageViewController.m in Sources */,
 				D81281171CAA8532007CF08B /* CreateViewController.m in Sources */,
-				D81281411CAA8532007CF08B /* MyHomePageViewController.m in Sources */,
 				D8339DC21CABA6820070D863 /* FBNavigationViewController.m in Sources */,
 				D81281141CAA8532007CF08B /* AddTagViewController.m in Sources */,
 				D81281331CAA8532007CF08B /* FBLoginRegisterViewController.m in Sources */,
@@ -1210,8 +1128,6 @@
 				D812812B1CAA8532007CF08B /* PhotoAlbumsView.m in Sources */,
 				D812811E1CAA8532007CF08B /* SelectSceneViewController.m in Sources */,
 				D81281211CAA8532007CF08B /* FBLoadPhoto.m in Sources */,
-				D81281441CAA8532007CF08B /* MyShippingAddressViewController.m in Sources */,
-				D812813E1CAA8532007CF08B /* ChanelView.m in Sources */,
 				D8339DC61CABA6A80070D863 /* FBSearchView.m in Sources */,
 				D812811B1CAA8532007CF08B /* PictureToolViewController.m in Sources */,
 				D812813C1CAA8532007CF08B /* MallViewController.m in Sources */,
@@ -1223,16 +1139,12 @@
 				D81281281CAA8532007CF08B /* FBPictureView.m in Sources */,
 				D81281301CAA8532007CF08B /* DiscoverViewController.m in Sources */,
 				D81281151CAA8532007CF08B /* AddUrlViewController.m in Sources */,
-				D81281401CAA8532007CF08B /* MyFocusOnViewController.m in Sources */,
-				D81281461CAA8532007CF08B /* MyViewController.m in Sources */,
 				D81281351CAA8532007CF08B /* FBSignupViewController.m in Sources */,
 				D81281551CAA8532007CF08B /* HttpTool.m in Sources */,
 				D812814D1CAA8532007CF08B /* FBMapLocatinViewController.m in Sources */,
-				D81281451CAA8532007CF08B /* MySystemSettingsViewController.m in Sources */,
 				D812811A1CAA8532007CF08B /* MarkGoodsViewController.m in Sources */,
 				D812814B1CAA8532007CF08B /* FBLocationViewController.m in Sources */,
 				D81281101CAA8532007CF08B /* AppDelegate.mm in Sources */,
-				D81281431CAA8532007CF08B /* MyOrdersViewController.m in Sources */,
 				D81281221CAA8532007CF08B /* AddUrlView.m in Sources */,
 				D81281231CAA8532007CF08B /* CameraView.m in Sources */,
 				D812813A1CAA8532007CF08B /* UserInfo.m in Sources */,
