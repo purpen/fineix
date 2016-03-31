@@ -8,7 +8,10 @@
 
 #import <UIKit/UIKit.h>
 #import "FBViewController.h"
+#import "Fiu.h"
 
-@interface HomeViewController : FBViewController
+@interface HomeViewController : FBViewController <FBNavigationBarItemsDelegate, UITableViewDelegate, UITableViewDataSource>
+
+@pro_strong UITableView     *   homeTableView;      //  加载首页场景的表格
 
 @end

@@ -9,6 +9,6 @@
 #import <UIKit/UIKit.h>
 #import "FBViewController.h"
 
-@interface DiscoverViewController : FBViewController
+@interface DiscoverViewController : FBViewController <FBNavigationBarItemsDelegate>
 
 @end
