@@ -32,3 +32,13 @@
 "locationVcTitle" = "";
 "addTagVcTitle" = "";
 "chooseSceneVcTitle" = "";
+
+//登录注册
+"passwordDigits" = "The password may not be less than six";
+"loginSuccessful" = "Login successful";
+"phoneNumberNotCorrect" = "Phone number format is not correct";
+"registeredSuccessfully" = "Registered successfully";
+"cancel" = "cancel";
+"determine" = "determine";
+"enterCorrectPhoneNumber" = "Please enter a correct phone number";
+"enterVerificationCode" = "Please enter the verification code";

@@ -14,6 +14,7 @@
 #import "FBAPI.h"
 #import "UserInfo.h"
 #import "UserInfoEntity.h"
+#import "PhoneToLogInViewController.h"
 
 @interface PhoneToSignUpViewController ()<FBRequestDelegate>
 @property (weak, nonatomic) IBOutlet UITextField *phoneNumTF;//手机号
@@ -112,11 +113,11 @@ static NSString *const VerifyCodeURL = @"/auth/verify_code";//发送验证码借
 //注册按钮
 - (IBAction)signUpBtn:(UIButton *)sender {
     if (![self.phoneNumTF.text checkTel]) {
-        [SVProgressHUD showInfoWithStatus:@"请输入正确的手机号"];
+        [SVProgressHUD showInfoWithStatus:NSLocalizedString(@"enterCorrectPhoneNumber", nil)];
         return;
     }
     if (!self.phoneNumTF.text.length) {
-        [SVProgressHUD showInfoWithStatus:@"请输入验证码"];
+        [SVProgressHUD showInfoWithStatus:NSLocalizedString(@"enterVerificationCode", nil)];
         return;
     }
     if (self.pwdTF.text.length < 6) {
@@ -166,6 +167,10 @@ static NSString *const VerifyCodeURL = @"/auth/verify_code";//发送验证码借
             userEntity.isLogin = YES;
             [self dismissViewControllerAnimated:YES completion:nil];
             [SVProgressHUD showSuccessWithStatus:@"注册成功"];
+            //跳转到手机号登录界面
+            UIStoryboard *loginStory = [UIStoryboard storyboardWithName:@"LoginRegisterController" bundle:nil];
+            PhoneToLogInViewController *phoneTolLoginVC = [loginStory instantiateViewControllerWithIdentifier:@"PhoneToLogInViewController"];
+            [self.navigationController pushViewController:phoneTolLoginVC animated:YES];
         } else {
             NSString * message = result[@"message"];
             [SVProgressHUD showInfoWithStatus:message];
