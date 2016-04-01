@@ -61,9 +61,10 @@
         else
         {
             //跳到登录页面
-            UIStoryboard *loginStory = [UIStoryboard storyboardWithName:@"LoginRegisterController" bundle:nil];
+            UIStoryboard *loginStory = [UIStoryboard storyboardWithName:@"LoginRegisterController" bundle:[NSBundle mainBundle]];
             FBLoginRegisterViewController *loginSignupVC = [loginStory instantiateViewControllerWithIdentifier:@"FBLoginRegisterViewController"];
-            [self presentViewController:loginSignupVC animated:YES completion:nil];
+            UINavigationController *navi = [[UINavigationController alloc] initWithRootViewController:loginSignupVC];
+            [self presentViewController:navi animated:YES completion:nil];
             
             return NO;
         }
