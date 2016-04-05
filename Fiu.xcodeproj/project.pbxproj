@@ -142,6 +142,8 @@
 		D83A64371C8E7EBD003DB8BB /* CoreVideo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D83A64361C8E7EBD003DB8BB /* CoreVideo.framework */; };
 		D83A64391C8E7EC5003DB8BB /* CoreMedia.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D83A64381C8E7EC5003DB8BB /* CoreMedia.framework */; };
 		D83A643B1C8E7ED2003DB8BB /* CoreImage.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D83A643A1C8E7ED2003DB8BB /* CoreImage.framework */; };
+		D89B5A7C1CB3853200DB9710 /* GroupHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = D89B5A7B1CB3853200DB9710 /* GroupHeaderView.m */; };
+		D89B5A801CB38F2A00DB9710 /* FBRollImages.m in Sources */ = {isa = PBXBuildFile; fileRef = D89B5A7F1CB38F2A00DB9710 /* FBRollImages.m */; };
 		D8AEC7511CA8E3A000A868B6 /* libsqlite3.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 1F0EE6A41C9FA47B000631F0 /* libsqlite3.tbd */; };
 		D8AEC7521CA8E3AE00A868B6 /* libiconv.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 1F0EE6A21C9FA43C000631F0 /* libiconv.tbd */; };
 		D8AEC7531CA8E3BB00A868B6 /* libstdc++.6.0.9.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 280045201C805CD7005F5C2E /* libstdc++.6.0.9.tbd */; };
@@ -406,6 +408,10 @@
 		D83A64361C8E7EBD003DB8BB /* CoreVideo.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreVideo.framework; path = System/Library/Frameworks/CoreVideo.framework; sourceTree = SDKROOT; };
 		D83A64381C8E7EC5003DB8BB /* CoreMedia.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMedia.framework; path = System/Library/Frameworks/CoreMedia.framework; sourceTree = SDKROOT; };
 		D83A643A1C8E7ED2003DB8BB /* CoreImage.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreImage.framework; path = System/Library/Frameworks/CoreImage.framework; sourceTree = SDKROOT; };
+		D89B5A7A1CB3853200DB9710 /* GroupHeaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GroupHeaderView.h; sourceTree = "<group>"; };
+		D89B5A7B1CB3853200DB9710 /* GroupHeaderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GroupHeaderView.m; sourceTree = "<group>"; };
+		D89B5A7E1CB38F2A00DB9710 /* FBRollImages.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FBRollImages.h; sourceTree = "<group>"; };
+		D89B5A7F1CB38F2A00DB9710 /* FBRollImages.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FBRollImages.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -843,6 +849,8 @@
 		D81280971CAA8532007CF08B /* Other */ = {
 			isa = PBXGroup;
 			children = (
+				D89B5A7D1CB38F2A00DB9710 /* Public */,
+				D89B5A791CB3850500DB9710 /* TableView */,
 				D80D41521CAD1410005D72B1 /* Search */,
 				D812809A1CAA8532007CF08B /* Location */,
 				D81280A71CAA8532007CF08B /* TabBar */,
@@ -1068,6 +1076,24 @@
 			path = Wechat;
 			sourceTree = "<group>";
 		};
+		D89B5A791CB3850500DB9710 /* TableView */ = {
+			isa = PBXGroup;
+			children = (
+				D89B5A7A1CB3853200DB9710 /* GroupHeaderView.h */,
+				D89B5A7B1CB3853200DB9710 /* GroupHeaderView.m */,
+			);
+			path = TableView;
+			sourceTree = "<group>";
+		};
+		D89B5A7D1CB38F2A00DB9710 /* Public */ = {
+			isa = PBXGroup;
+			children = (
+				D89B5A7E1CB38F2A00DB9710 /* FBRollImages.h */,
+				D89B5A7F1CB38F2A00DB9710 /* FBRollImages.m */,
+			);
+			path = Public;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -1215,6 +1241,7 @@
 				1FEFD5971CAD12B2005A1C5F /* FeedbackViewController.m in Sources */,
 				1F02B7321CAA99240080CA45 /* SubmitViewController.m in Sources */,
 				D81281311CAA8532007CF08B /* HomeViewController.m in Sources */,
+				D89B5A801CB38F2A00DB9710 /* FBRollImages.m in Sources */,
 				D81281531CAA8532007CF08B /* FBAPI.m in Sources */,
 				1FEFD5731CAD115C005A1C5F /* ShareView.m in Sources */,
 				1F02B7401CAA99540080CA45 /* UserInfoEntity.m in Sources */,
@@ -1263,6 +1290,7 @@
 				1F02B7301CAA99240080CA45 /* PhoneToLogInViewController.m in Sources */,
 				D81281671CAA8532007CF08B /* JKDBModel.m in Sources */,
 				D81281291CAA8532007CF08B /* FiltersView.m in Sources */,
+				D89B5A7C1CB3853200DB9710 /* GroupHeaderView.m in Sources */,
 				D812812E1CAA8532007CF08B /* ScenceMessageView.m in Sources */,
 				D81281181CAA8532007CF08B /* CropImageViewController.m in Sources */,
 				D812812B1CAA8532007CF08B /* PhotoAlbumsView.m in Sources */,

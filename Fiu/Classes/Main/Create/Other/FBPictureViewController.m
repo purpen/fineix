@@ -18,12 +18,8 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self.view addSubview:self.navView];
-}
-
-#pragma mark - 隐藏系统状态栏
-//  iOS7.0以后
-- (BOOL)prefersStatusBarHidden {
-    return YES;
+    
+    [[UIApplication sharedApplication] setStatusBarHidden:YES];
 }
 
 #pragma mark - 添加控件

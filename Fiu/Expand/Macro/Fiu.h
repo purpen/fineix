@@ -22,6 +22,8 @@
 #define Bounds_width    self.view.bounds.size.width
 //  高度
 #define Bounds_height   self.view.bounds.size.height
+//  banner
+#define Banner_height   180
 
 
 
@@ -32,6 +34,7 @@
 #define blackFont               @"#333333"
 #define lineGrayColor           @"#F0F0F1"
 #define tabBarTitle             @"#999999"
+#define titleColor              @"#666666"
 
 #undef  字体大小
 //  页面标题
