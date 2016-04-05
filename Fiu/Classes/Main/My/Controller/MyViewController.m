@@ -17,6 +17,7 @@
 #import "ChanelViewTwo.h"
 #import "BottomView.h"
 #import "AppBtnView.h"
+#import "MyOrdersViewController.h"
 
 
 @interface MyViewController ()<UIScrollViewDelegate>
@@ -25,6 +26,7 @@
 {
     UIScrollView *_homeScrollView;
     BackImagView *_imgV;//背景图片
+    
 }
 
 
@@ -64,6 +66,27 @@
     ChanelViewTwo *chanelTwoV = [ChanelViewTwo getChanelViewTwo];
     chanelTwoV.frame = CGRectMake(0, 200+5+60+5, SCREEN_WIDTH, 194);
     [_homeScrollView addSubview:chanelTwoV];
+    //为订单等一些按钮添加方法
+    //订单按钮
+    [chanelTwoV.orderBtn addTarget:self action:@selector(orderBtn:) forControlEvents:UIControlEventTouchUpInside];
+    //消息按钮
+    [chanelTwoV.messageBtn addTarget:self action:@selector(messageBtn:) forControlEvents:UIControlEventTouchUpInside];
+    //订阅按钮
+    [chanelTwoV.subscribeBtn addTarget:self action:@selector(subscribeBtn:) forControlEvents:UIControlEventTouchUpInside];
+    //收藏按钮
+    [chanelTwoV.collectionBtn addTarget:self action:@selector(collectionBtn:) forControlEvents:UIControlEventTouchUpInside];
+    //赞过按钮
+    [chanelTwoV.praiseBtn addTarget:self action:@selector(praiseBtn:) forControlEvents:UIControlEventTouchUpInside];
+    //积分按钮
+    [chanelTwoV.integralBtn addTarget:self action:@selector(integralBtn:) forControlEvents:UIControlEventTouchUpInside];
+    //礼券按钮
+    [chanelTwoV.giftBtn addTarget:self action:@selector(giftBtn:) forControlEvents:UIControlEventTouchUpInside];
+    //收货地址按钮
+    [chanelTwoV.shippingAddressBtn addTarget:self action:@selector(shippingAddressBtn:) forControlEvents:UIControlEventTouchUpInside];
+    //服务条款按钮
+    [chanelTwoV.serviceBtn addTarget:self action:@selector(serviceBtn:) forControlEvents:UIControlEventTouchUpInside];
+    //账户管理按钮
+    [chanelTwoV.accountManagementBtn addTarget:self action:@selector(accountManagementBtn:) forControlEvents:UIControlEventTouchUpInside];
     //关于我们等
     BottomView *bottomV = [BottomView getBottomView];
     bottomV.frame = CGRectMake(0, 200+5+60+5+194+2, SCREEN_WIDTH, 134);
@@ -90,6 +113,59 @@
     }
 }
 
+//订单按钮
+-(void)orderBtn:(UIButton*)sender{
+    NSLog(@"#########");
+    //跳转到全部订单页
+    UIStoryboard *myStory = [UIStoryboard storyboardWithName:@"My" bundle:nil];
+    MyOrdersViewController *oderVC = [myStory instantiateViewControllerWithIdentifier:@"MyOrdersViewController"];
+    [self.navigationController pushViewController:oderVC animated:YES];
+}
+
+//消息按钮
+-(void)messageBtn:(UIButton*)sender{
+    NSLog(@"#########");
+}
+//订阅按钮
+-(void)subscribeBtn:(UIButton*)sender{
+    NSLog(@"#########");
+}
+
+//收藏按钮
+-(void)collectionBtn:(UIButton*)sender{
+    NSLog(@"#########");
+}
+
+//赞过按钮
+-(void)praiseBtn:(UIButton*)sender{
+    NSLog(@"#########");
+}
+
+//积分按钮
+-(void)integralBtn:(UIButton*)sender{
+    NSLog(@"#########");
+}
+
+//礼券按钮
+-(void)giftBtn:(UIButton*)sender{
+    NSLog(@"#########");
+}
+
+//收货地址按钮
+-(void)shippingAddressBtn:(UIButton*)sender{
+    NSLog(@"#########");
+}
+
+//服务条款按钮
+-(void)serviceBtn:(UIButton*)sender{
+    NSLog(@"#########");
+}
+
+//账户管理按钮
+-(void)accountManagementBtn:(UIButton*)sender{
+    NSLog(@"#########");
+}
+
 //点击导航右按钮
 -(void)clickRightBtn:(UIButton*)sender{
     NSLog(@"*****");
@@ -97,7 +173,7 @@
 
 //点击导航左按钮
 -(void)clickImageBtn:(UIButton*)sender{
-    NSLog(@"#########");
+    
 }
 
 
@@ -106,12 +182,15 @@
     UserInfoEntity *entity = [UserInfoEntity defaultUserInfoEntity];
     if (entity.isLogin == YES) {
         //如果已经登录了直接进入个人中心并展示个人的相关信息
+        //头像变圆滑
+        _imgV.headImageView.layer.masksToBounds = YES;
+        _imgV.headImageView.layer.cornerRadius  = 3;
         //更新用户名
-        //self.nickNameLabel.text = entity.nickname;
+        _imgV.nickNameLabel.text = entity.nickname;
         //更新头像
-        //[self.headPortraitImageV sd_setImageWithURL:[NSURL URLWithString:entity.mediumAvatarUrl] placeholderImage:nil completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
+        [_imgV.headImageView sd_setImageWithURL:[NSURL URLWithString:entity.mediumAvatarUrl] placeholderImage:nil completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
             
-        //}];
+        }];
     }//如果没有登录提示用户登录
     else{
         //跳到登录页面

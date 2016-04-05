@@ -23,6 +23,9 @@
 		1F0EE6A71C9FA4E7000631F0 /* libstdc++.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 1F0EE6A61C9FA4E7000631F0 /* libstdc++.tbd */; };
 		1F0EE6A91C9FA4F6000631F0 /* libz.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 1F0EE6A81C9FA4F6000631F0 /* libz.tbd */; };
 		1F59E5FC1C9ABBA500E96C60 /* Accelerate.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1F59E5FB1C9ABBA500E96C60 /* Accelerate.framework */; };
+		1FBD5F0E1CB381CB002A3048 /* MyOrderViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1FBD5F0D1CB381CB002A3048 /* MyOrderViewController.m */; };
+		1FBD5F121CB3A0CE002A3048 /* OrderListModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 1FBD5F111CB3A0CE002A3048 /* OrderListModel.m */; };
+		1FBD5F151CB3A761002A3048 /* ProductInfoModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 1FBD5F141CB3A761002A3048 /* ProductInfoModel.m */; };
 		1FEFD56C1CAD115C005A1C5F /* BackImagView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1FEFD55F1CAD115C005A1C5F /* BackImagView.m */; };
 		1FEFD56D1CAD115C005A1C5F /* chanel.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1FEFD5601CAD115C005A1C5F /* chanel.xib */; };
 		1FEFD56E1CAD115C005A1C5F /* ChanelView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1FEFD5621CAD115C005A1C5F /* ChanelView.m */; };
@@ -182,6 +185,12 @@
 		1F0EE6A81C9FA4F6000631F0 /* libz.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libz.tbd; path = usr/lib/libz.tbd; sourceTree = SDKROOT; };
 		1F59E5FB1C9ABBA500E96C60 /* Accelerate.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Accelerate.framework; path = System/Library/Frameworks/Accelerate.framework; sourceTree = SDKROOT; };
 		1FAB860F67E625188BAE00A8 /* Pods-fineix.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-fineix.release.xcconfig"; path = "Pods/Target Support Files/Pods-fineix/Pods-fineix.release.xcconfig"; sourceTree = "<group>"; };
+		1FBD5F0C1CB381CB002A3048 /* MyOrderViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyOrderViewController.h; sourceTree = "<group>"; };
+		1FBD5F0D1CB381CB002A3048 /* MyOrderViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyOrderViewController.m; sourceTree = "<group>"; };
+		1FBD5F101CB3A0CE002A3048 /* OrderListModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OrderListModel.h; sourceTree = "<group>"; };
+		1FBD5F111CB3A0CE002A3048 /* OrderListModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OrderListModel.m; sourceTree = "<group>"; };
+		1FBD5F131CB3A761002A3048 /* ProductInfoModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProductInfoModel.h; sourceTree = "<group>"; };
+		1FBD5F141CB3A761002A3048 /* ProductInfoModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ProductInfoModel.m; sourceTree = "<group>"; };
 		1FEFD55E1CAD115C005A1C5F /* BackImagView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BackImagView.h; sourceTree = "<group>"; };
 		1FEFD55F1CAD115C005A1C5F /* BackImagView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BackImagView.m; sourceTree = "<group>"; };
 		1FEFD5601CAD115C005A1C5F /* chanel.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = chanel.xib; sourceTree = "<group>"; };
@@ -514,6 +523,7 @@
 		1F02B6A21CAA94220080CA45 /* My */ = {
 			isa = PBXGroup;
 			children = (
+				1FBD5F0F1CB3A09D002A3048 /* model */,
 				1FEFD5981CAD12E8005A1C5F /* My.storyboard */,
 				1FEFD55D1CAD115C005A1C5F /* view */,
 				1F02B6A61CAA94220080CA45 /* Controller */,
@@ -545,9 +555,23 @@
 				1FEFD5871CAD1219005A1C5F /* MySystemSettingsViewController.m */,
 				1FEFD5881CAD1219005A1C5F /* MyViewController.h */,
 				1FEFD5891CAD1219005A1C5F /* MyViewController.m */,
+				1FBD5F0C1CB381CB002A3048 /* MyOrderViewController.h */,
+				1FBD5F0D1CB381CB002A3048 /* MyOrderViewController.m */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
+		};
+		1FBD5F0F1CB3A09D002A3048 /* model */ = {
+			isa = PBXGroup;
+			children = (
+				1FBD5F101CB3A0CE002A3048 /* OrderListModel.h */,
+				1FBD5F111CB3A0CE002A3048 /* OrderListModel.m */,
+				1FBD5F131CB3A761002A3048 /* ProductInfoModel.h */,
+				1FBD5F141CB3A761002A3048 /* ProductInfoModel.m */,
+			);
+			name = model;
+			path = Fiu/Classes/Main/My/model;
+			sourceTree = SOURCE_ROOT;
 		};
 		1FEFD55D1CAD115C005A1C5F /* view */ = {
 			isa = PBXGroup;
@@ -1211,6 +1235,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1FBD5F0E1CB381CB002A3048 /* MyOrderViewController.m in Sources */,
+				1FBD5F151CB3A761002A3048 /* ProductInfoModel.m in Sources */,
 				D81281581CAA8532007CF08B /* UIColor+Extension.m in Sources */,
 				1FEFD5971CAD12B2005A1C5F /* FeedbackViewController.m in Sources */,
 				1F02B7321CAA99240080CA45 /* SubmitViewController.m in Sources */,
@@ -1278,6 +1304,7 @@
 				D81281191CAA8532007CF08B /* FiltersViewController.m in Sources */,
 				D812812F1CAA8532007CF08B /* SearchLocationView.m in Sources */,
 				1FEFD58B1CAD1219005A1C5F /* MyFocusOnViewController.m in Sources */,
+				1FBD5F121CB3A0CE002A3048 /* OrderListModel.m in Sources */,
 				D81281201CAA8532007CF08B /* FBPhoto.m in Sources */,
 				D81281281CAA8532007CF08B /* FBPictureView.m in Sources */,
 				D81281301CAA8532007CF08B /* DiscoverViewController.m in Sources */,

@@ -24,6 +24,17 @@
     // Dispose of any resources that can be recreated.
 }
 
+//页面将要出现的时候导航条出现
+-(void)viewWillAppear:(BOOL)animated{
+    [super viewWillAppear:animated];
+    self.navigationController.navigationBarHidden = NO;
+}
+//点击我的订单按钮
+- (IBAction)myOrder:(UIButton *)sender {
+    //跳转到我的订单页面
+    //全部按钮被选
+}
+
 /*
 #pragma mark - Navigation
 

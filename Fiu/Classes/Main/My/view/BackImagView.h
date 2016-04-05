@@ -9,6 +9,9 @@
 #import <UIKit/UIKit.h>
 
 @interface BackImagView : UIView
+@property (weak, nonatomic) IBOutlet UIImageView *headImageView;//头像
+
+@property (weak, nonatomic) IBOutlet UILabel *nickNameLabel;//昵称
 
 +(instancetype)getBackImageView;
 

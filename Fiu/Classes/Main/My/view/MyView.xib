@@ -108,7 +108,7 @@
             </constraints>
             <nil key="simulatedStatusBarMetrics"/>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
-            <point key="canvasLocation" x="365.5" y="422"/>
+            <point key="canvasLocation" x="365.5" y="561"/>
         </view>
         <view contentMode="scaleToFill" id="lQC-fc-skU" customClass="NaviView">
             <rect key="frame" x="0.0" y="0.0" width="375" height="64"/>
@@ -178,13 +178,6 @@
                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="PersonalBackground" translatesAutoresizingMaskIntoConstraints="NO" id="8Qm-vV-a5D">
                     <rect key="frame" x="0.0" y="0.0" width="375" height="200"/>
                 </imageView>
-                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Dina Alexander" translatesAutoresizingMaskIntoConstraints="NO" id="RLZ-hj-JFv">
-                    <rect key="frame" x="155" y="15" width="65" height="65"/>
-                    <constraints>
-                        <constraint firstAttribute="height" constant="65" id="EFE-BW-2oT"/>
-                        <constraint firstAttribute="width" constant="65" id="ZJw-a3-1So"/>
-                    </constraints>
-                </imageView>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="章子怡" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="M05-IN-a70">
                     <rect key="frame" x="109" y="88" width="156" height="21"/>
                     <constraints>
@@ -241,6 +234,13 @@
                     </constraints>
                     <state key="normal" image="Button"/>
                 </button>
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Dina Alexander" translatesAutoresizingMaskIntoConstraints="NO" id="RLZ-hj-JFv">
+                    <rect key="frame" x="155" y="15" width="65" height="65"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="65" id="EFE-BW-2oT"/>
+                        <constraint firstAttribute="width" constant="65" id="ZJw-a3-1So"/>
+                    </constraints>
+                </imageView>
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
             <constraints>
@@ -283,6 +283,10 @@
                     <exclude reference="K7P-HW-c1M"/>
                 </mask>
             </variation>
+            <connections>
+                <outlet property="headImageView" destination="RLZ-hj-JFv" id="0Lc-4W-PNF"/>
+                <outlet property="nickNameLabel" destination="M05-IN-a70" id="eMw-yB-HRm"/>
+            </connections>
             <point key="canvasLocation" x="365.5" y="821"/>
         </view>
         <view contentMode="scaleToFill" id="wox-yp-GYo" customClass="ChanelViewTwo">
@@ -515,6 +519,18 @@
             </constraints>
             <nil key="simulatedStatusBarMetrics"/>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <connections>
+                <outlet property="accountManagementBtn" destination="b2A-xl-erH" id="3o8-Fs-MWr"/>
+                <outlet property="collectionBtn" destination="ehr-kZ-ifk" id="SQ8-ga-PMZ"/>
+                <outlet property="giftBtn" destination="H3v-e2-DjT" id="wDB-Wa-NqP"/>
+                <outlet property="integralBtn" destination="90h-1W-f4e" id="8Co-je-8I5"/>
+                <outlet property="messageBtn" destination="eNy-mk-Heh" id="2jy-Bc-rVk"/>
+                <outlet property="orderBtn" destination="RqW-eS-eQy" id="t66-Wb-YYp"/>
+                <outlet property="praiseBtn" destination="23A-NS-o3H" id="KVm-qQ-xHg"/>
+                <outlet property="serviceBtn" destination="BJ1-jg-hcO" id="dzs-i1-VmG"/>
+                <outlet property="shippingAddressBtn" destination="4tv-JP-mzi" id="8M4-n1-ehs"/>
+                <outlet property="subscribeBtn" destination="6P9-rg-nla" id="3dk-S8-cq9"/>
+            </connections>
             <point key="canvasLocation" x="365.5" y="1067"/>
         </view>
         <view contentMode="scaleToFill" id="SvM-GO-RC8">
