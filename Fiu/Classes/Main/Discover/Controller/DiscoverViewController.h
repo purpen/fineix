@@ -8,7 +8,13 @@
 
 #import <UIKit/UIKit.h>
 #import "FBViewController.h"
+#import "GroupHeaderView.h"
+#import "FBRollImages.h"
 
-@interface DiscoverViewController : FBViewController <FBNavigationBarItemsDelegate>
+@interface DiscoverViewController : FBViewController <FBNavigationBarItemsDelegate, UITableViewDelegate, UITableViewDataSource>
+
+@pro_strong UITableView             *   discoverTableView;
+@pro_strong GroupHeaderView         *   headerView;
+@pro_strong FBRollImages            *   rollView;
 
 @end

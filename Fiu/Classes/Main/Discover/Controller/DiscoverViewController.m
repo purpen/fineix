@@ -15,6 +15,77 @@
     self.view.backgroundColor = [UIColor whiteColor];
     
     [self setNavigationViewUI];
+    
+    [self setDiscoverViewUI];
+}
+
+- (void)setDiscoverViewUI {
+    [self.view addSubview:self.discoverTableView];
+}
+
+- (FBRollImages *)rollView {
+    if (!_rollView) {
+        _rollView = [[FBRollImages alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, Banner_height)];
+        _rollView.navVC = self.navigationController;
+    }
+    return _rollView;
+}
+
+- (UITableView *)discoverTableView {
+    if (!_discoverTableView) {
+        _discoverTableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT) style:(UITableViewStyleGrouped)];
+        _discoverTableView.delegate = self;
+        _discoverTableView.dataSource = self;
+        _discoverTableView.tableHeaderView = self.rollView;
+    }
+    return _discoverTableView;
+}
+
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
+    return 3;
+}
+
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+    return 1;
+}
+
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+    static NSString * CellId = @"discoverTableViewCell";
+    UITableViewCell * cell = [tableView dequeueReusableCellWithIdentifier:CellId];
+    if (!cell) {
+        cell = [[UITableViewCell alloc] initWithStyle:(UITableViewCellStyleDefault) reuseIdentifier:CellId];
+    }
+    cell.selectionStyle = UITableViewCellSelectionStyleNone;
+    return cell;
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
+    if (indexPath.section == 0) {
+        return 200;
+    } else if (indexPath.section == 1) {
+        return 200;
+    } else if (indexPath.section == 2) {
+        return 200;
+    }
+    return 0;
+}
+
+- (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
+    self.headerView = [[GroupHeaderView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 44)];
+    
+    if (section == 0) {
+        [self.headerView addGroupHeaderViewIcon:@"Group_friend" withTitle:@"最Fiu伙伴" withSubtitle:@"[越喜欢头像越大]"];
+    } else if (section ==1) {
+        [self.headerView addGroupHeaderViewIcon:@"Group_scene" withTitle:@"最Fiu情景" withSubtitle:@"[我的地盘我收益]"];
+    } else if (section == 2) {
+        [self.headerView addGroupHeaderViewIcon:@"Group_scene" withTitle:@"最Fiu场景" withSubtitle:@"[发现不一样]"];
+    }
+    
+    return self.headerView;
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
+    return 44;
 }
 
 #pragma mark - 设置Nav
