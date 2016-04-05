@@ -9,14 +9,18 @@
 #import "FBTabBarController.h"
 #import "FBNavigationViewController.h"
 #import "FBTabBar.h"
-
+#import "FBLoginRegisterViewController.h"
 #import "HomeViewController.h"
 #import "DiscoverViewController.h"
 #import "CreateViewController.h"
 #import "MallViewController.h"
 #import "MyViewController.h"
-
+#import "UserInfoEntity.h"
 #import "PictureToolViewController.h"
+
+@interface FBTabBarController ()<UITabBarControllerDelegate>
+
+@end
 
 @implementation FBTabBarController {
     FBNavigationViewController * _homeNav;
@@ -38,6 +42,35 @@
     [self setValue:tabBar forKey:@"tabBar"];
     [tabBar.createBtn addTarget:self action:@selector(createBtnClick) forControlEvents:(UIControlEventTouchUpInside)];
 
+    
+    //设置代理
+    self.delegate = self;
+}
+
+- (BOOL)tabBarController:(UITabBarController *)tabBarController shouldSelectViewController:(UIViewController *)viewController
+{
+    NSLog(@"--tabbaritem.title--%@",viewController.tabBarItem.title);
+    
+    //这里我判断的是当前点击的tabBarItem的标题
+    if ([viewController.tabBarItem.title isEqualToString:@"我"]) {
+        UserInfoEntity *entity = [UserInfoEntity defaultUserInfoEntity];
+        //如果用户ID存在的话，说明已登陆
+        if (entity.isLogin) {
+            return YES;
+        }
+        else
+        {
+            //跳到登录页面
+            UIStoryboard *loginStory = [UIStoryboard storyboardWithName:@"LoginRegisterController" bundle:[NSBundle mainBundle]];
+            FBLoginRegisterViewController *loginSignupVC = [loginStory instantiateViewControllerWithIdentifier:@"FBLoginRegisterViewController"];
+            UINavigationController *navi = [[UINavigationController alloc] initWithRootViewController:loginSignupVC];
+            [self presentViewController:navi animated:YES completion:nil];
+            
+            return NO;
+        }
+    }
+    else
+        return YES;
 }
 
 #pragma mark 添加子控制器的方法

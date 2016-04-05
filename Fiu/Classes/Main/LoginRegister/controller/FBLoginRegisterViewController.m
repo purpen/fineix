@@ -26,7 +26,10 @@
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
-
+//取消按钮
+- (IBAction)cancelBtn:(UIButton *)sender {
+    [self dismissViewControllerAnimated:YES completion:nil];
+}
 
 
 /*
