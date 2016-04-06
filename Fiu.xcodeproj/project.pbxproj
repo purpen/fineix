@@ -151,6 +151,8 @@
 		D83A643B1C8E7ED2003DB8BB /* CoreImage.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D83A643A1C8E7ED2003DB8BB /* CoreImage.framework */; };
 		D89B5A7C1CB3853200DB9710 /* GroupHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = D89B5A7B1CB3853200DB9710 /* GroupHeaderView.m */; };
 		D89B5A801CB38F2A00DB9710 /* FBRollImages.m in Sources */ = {isa = PBXBuildFile; fileRef = D89B5A7F1CB38F2A00DB9710 /* FBRollImages.m */; };
+		D89B5A851CB4C24700DB9710 /* SceneTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D89B5A841CB4C24700DB9710 /* SceneTableViewCell.m */; };
+		D89B5A8B1CB4E48800DB9710 /* SceneListTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D89B5A8A1CB4E48800DB9710 /* SceneListTableViewCell.m */; };
 		D8AEC7511CA8E3A000A868B6 /* libsqlite3.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 1F0EE6A41C9FA47B000631F0 /* libsqlite3.tbd */; };
 		D8AEC7521CA8E3AE00A868B6 /* libiconv.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 1F0EE6A21C9FA43C000631F0 /* libiconv.tbd */; };
 		D8AEC7531CA8E3BB00A868B6 /* libstdc++.6.0.9.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 280045201C805CD7005F5C2E /* libstdc++.6.0.9.tbd */; };
@@ -431,6 +433,10 @@
 		D89B5A7B1CB3853200DB9710 /* GroupHeaderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GroupHeaderView.m; sourceTree = "<group>"; };
 		D89B5A7E1CB38F2A00DB9710 /* FBRollImages.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FBRollImages.h; sourceTree = "<group>"; };
 		D89B5A7F1CB38F2A00DB9710 /* FBRollImages.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FBRollImages.m; sourceTree = "<group>"; };
+		D89B5A831CB4C24700DB9710 /* SceneTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SceneTableViewCell.h; sourceTree = "<group>"; };
+		D89B5A841CB4C24700DB9710 /* SceneTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SceneTableViewCell.m; sourceTree = "<group>"; };
+		D89B5A891CB4E48800DB9710 /* SceneListTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SceneListTableViewCell.h; sourceTree = "<group>"; };
+		D89B5A8A1CB4E48800DB9710 /* SceneListTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SceneListTableViewCell.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -838,6 +844,8 @@
 		D812805B1CAA8532007CF08B /* Discover */ = {
 			isa = PBXGroup;
 			children = (
+				D89B5A811CB4C1F300DB9710 /* Model */,
+				D89B5A821CB4C1F300DB9710 /* View */,
 				D812805C1CAA8532007CF08B /* Controller */,
 			);
 			path = Discover;
@@ -855,6 +863,9 @@
 		D812805F1CAA8532007CF08B /* Home */ = {
 			isa = PBXGroup;
 			children = (
+				D89B5A861CB4E45B00DB9710 /* Other */,
+				D89B5A871CB4E45B00DB9710 /* Model */,
+				D89B5A881CB4E45B00DB9710 /* View */,
 				D81280601CAA8532007CF08B /* Controller */,
 			);
 			path = Home;
@@ -1134,6 +1145,45 @@
 			path = Public;
 			sourceTree = "<group>";
 		};
+		D89B5A811CB4C1F300DB9710 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		D89B5A821CB4C1F300DB9710 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				D89B5A831CB4C24700DB9710 /* SceneTableViewCell.h */,
+				D89B5A841CB4C24700DB9710 /* SceneTableViewCell.m */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		D89B5A861CB4E45B00DB9710 /* Other */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Other;
+			sourceTree = "<group>";
+		};
+		D89B5A871CB4E45B00DB9710 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		D89B5A881CB4E45B00DB9710 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				D89B5A891CB4E48800DB9710 /* SceneListTableViewCell.h */,
+				D89B5A8A1CB4E48800DB9710 /* SceneListTableViewCell.m */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -1312,6 +1362,7 @@
 				D81281261CAA8532007CF08B /* FBFootView.m in Sources */,
 				D81281251CAA8532007CF08B /* FBFiltersCollectionViewCell.m in Sources */,
 				D81281561CAA8532007CF08B /* NSString+FBMD5.m in Sources */,
+				D89B5A8B1CB4E48800DB9710 /* SceneListTableViewCell.m in Sources */,
 				D812815E1CAA8532007CF08B /* main.m in Sources */,
 				D81281171CAA8532007CF08B /* CreateViewController.m in Sources */,
 				D81281141CAA8532007CF08B /* AddTagViewController.m in Sources */,
@@ -1361,6 +1412,7 @@
 				1F02B73E1CAA99540080CA45 /* NSString+UserModel.m in Sources */,
 				D812814D1CAA8532007CF08B /* FBMapLocatinViewController.m in Sources */,
 				D812811A1CAA8532007CF08B /* MarkGoodsViewController.m in Sources */,
+				D89B5A851CB4C24700DB9710 /* SceneTableViewCell.m in Sources */,
 				D812814B1CAA8532007CF08B /* FBLocationViewController.m in Sources */,
 				D81281101CAA8532007CF08B /* AppDelegate.mm in Sources */,
 				D81281221CAA8532007CF08B /* AddUrlView.m in Sources */,

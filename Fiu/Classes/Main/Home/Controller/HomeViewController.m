@@ -7,6 +7,7 @@
 //
 
 #import "HomeViewController.h"
+#import "SceneListTableViewCell.h"
 
 @interface HomeViewController ()
 
@@ -34,6 +35,7 @@
         _homeTableView.delegate = self;
         _homeTableView.dataSource = self;
         _homeTableView.showsVerticalScrollIndicator = NO;
+        _homeTableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     }
     return _homeTableView;
 }
@@ -45,11 +47,11 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     static NSString * CellId = @"homeTableViewCellID";
-    UITableViewCell * cell = [tableView dequeueReusableCellWithIdentifier:CellId];
+    SceneListTableViewCell * cell = [tableView dequeueReusableCellWithIdentifier:CellId];
     if (!cell) {
-        cell = [[UITableViewCell alloc] initWithStyle:(UITableViewCellStyleDefault) reuseIdentifier:CellId];
+        cell = [[SceneListTableViewCell alloc] initWithStyle:(UITableViewCellStyleDefault) reuseIdentifier:CellId];
     }
-    cell.textLabel.text = [NSString stringWithFormat:@"第%zi个", indexPath.row];
+    [cell setUI];
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
     return cell;
 }
