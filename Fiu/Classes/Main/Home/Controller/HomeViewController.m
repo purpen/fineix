@@ -34,7 +34,6 @@
         _homeTableView.delegate = self;
         _homeTableView.dataSource = self;
         _homeTableView.showsVerticalScrollIndicator = NO;
-        
     }
     return _homeTableView;
 }
@@ -50,7 +49,6 @@
     if (!cell) {
         cell = [[UITableViewCell alloc] initWithStyle:(UITableViewCellStyleDefault) reuseIdentifier:CellId];
     }
-    cell.backgroundColor = [UIColor orangeColor];
     cell.textLabel.text = [NSString stringWithFormat:@"第%zi个", indexPath.row];
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
     return cell;
