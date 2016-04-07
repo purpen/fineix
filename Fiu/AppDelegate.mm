@@ -19,7 +19,7 @@
 #import "UserInfoEntity.h"
 #import "FBRequest.h"
 #import "FBAPI.h"
-
+#import "GuidePageViewController.h"
 
 @interface AppDelegate ()
 {
@@ -46,8 +46,20 @@ NSString *const determineLogin = @"/auth/check_login";
     self.window.backgroundColor = [UIColor whiteColor];
     [self.window makeKeyAndVisible];
     
-    FBTabBarController * tabBarC = [[FBTabBarController alloc] init];
-    self.window.rootViewController = tabBarC;
+    //设置引导图片
+    NSArray *arr = [NSArray arrayWithObjects:@"launch1",@"launch1",@"launch1",@"launch1",@"launch1", nil];
+    //使用的时候用key+版本号替换UserHasGuideView
+    //这样容易控制每个版本都可以显示引导图
+    BOOL userIsFirstInstalled = [[NSUserDefaults standardUserDefaults] boolForKey:@"UserHasGuideView"];
+    if (userIsFirstInstalled) {
+        FBTabBarController * tabBarC = [[FBTabBarController alloc] init];
+        self.window.rootViewController = tabBarC;
+    }else{
+        self.window.rootViewController = [[GuidePageViewController alloc] initWithPicArr:arr andRootVC:[[FBTabBarController alloc] init]];
+        [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"UserHasGuideView"];
+    }
+    
+    
     
     //首先统一设置为未登录
     UserInfoEntity *entity = [UserInfoEntity defaultUserInfoEntity];

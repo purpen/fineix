@@ -23,6 +23,7 @@
 		1F0EE6A71C9FA4E7000631F0 /* libstdc++.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 1F0EE6A61C9FA4E7000631F0 /* libstdc++.tbd */; };
 		1F0EE6A91C9FA4F6000631F0 /* libz.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 1F0EE6A81C9FA4F6000631F0 /* libz.tbd */; };
 		1F59E5FC1C9ABBA500E96C60 /* Accelerate.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1F59E5FB1C9ABBA500E96C60 /* Accelerate.framework */; };
+		1F986A9E1CB610A40074ABFE /* GuidePageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F986A9C1CB610A40074ABFE /* GuidePageViewController.m */; };
 		1FBD5F121CB3A0CE002A3048 /* OrderListModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 1FBD5F111CB3A0CE002A3048 /* OrderListModel.m */; };
 		1FBD5F181CB3B244002A3048 /* MyOrderViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1FBD5F171CB3B244002A3048 /* MyOrderViewController.m */; };
 		1FBD5F1D1CB3B8F0002A3048 /* OrderInfoCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1FBD5F1C1CB3B8F0002A3048 /* OrderInfoCell.xib */; };
@@ -189,6 +190,8 @@
 		1F0EE6A61C9FA4E7000631F0 /* libstdc++.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = "libstdc++.tbd"; path = "usr/lib/libstdc++.tbd"; sourceTree = SDKROOT; };
 		1F0EE6A81C9FA4F6000631F0 /* libz.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libz.tbd; path = usr/lib/libz.tbd; sourceTree = SDKROOT; };
 		1F59E5FB1C9ABBA500E96C60 /* Accelerate.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Accelerate.framework; path = System/Library/Frameworks/Accelerate.framework; sourceTree = SDKROOT; };
+		1F986A9B1CB610A40074ABFE /* GuidePageViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GuidePageViewController.h; sourceTree = "<group>"; };
+		1F986A9C1CB610A40074ABFE /* GuidePageViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GuidePageViewController.m; sourceTree = "<group>"; };
 		1FAB860F67E625188BAE00A8 /* Pods-fineix.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-fineix.release.xcconfig"; path = "Pods/Target Support Files/Pods-fineix/Pods-fineix.release.xcconfig"; sourceTree = "<group>"; };
 		1FBD5F101CB3A0CE002A3048 /* OrderListModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OrderListModel.h; sourceTree = "<group>"; };
 		1FBD5F111CB3A0CE002A3048 /* OrderListModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OrderListModel.m; sourceTree = "<group>"; };
@@ -575,6 +578,40 @@
 			path = Controller;
 			sourceTree = "<group>";
 		};
+		1F986A971CB610310074ABFE /* Guide */ = {
+			isa = PBXGroup;
+			children = (
+				1F986A981CB6106A0074ABFE /* controlloer */,
+				1F986A991CB6106A0074ABFE /* model */,
+				1F986A9A1CB6106A0074ABFE /* view */,
+			);
+			name = Guide;
+			path = launch;
+			sourceTree = "<group>";
+		};
+		1F986A981CB6106A0074ABFE /* controlloer */ = {
+			isa = PBXGroup;
+			children = (
+				1F986A9B1CB610A40074ABFE /* GuidePageViewController.h */,
+				1F986A9C1CB610A40074ABFE /* GuidePageViewController.m */,
+			);
+			path = controlloer;
+			sourceTree = "<group>";
+		};
+		1F986A991CB6106A0074ABFE /* model */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = model;
+			sourceTree = "<group>";
+		};
+		1F986A9A1CB6106A0074ABFE /* view */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = view;
+			sourceTree = "<group>";
+		};
 		1FBD5F0F1CB3A09D002A3048 /* model */ = {
 			isa = PBXGroup;
 			children = (
@@ -720,6 +757,7 @@
 		D812801D1CAA8532007CF08B /* Main */ = {
 			isa = PBXGroup;
 			children = (
+				1F986A971CB610310074ABFE /* Guide */,
 				D812805F1CAA8532007CF08B /* Home */,
 				D812805B1CAA8532007CF08B /* Discover */,
 				D812801E1CAA8532007CF08B /* Create */,
@@ -1397,6 +1435,7 @@
 				D812814D1CAA8532007CF08B /* FBMapLocatinViewController.m in Sources */,
 				D812811A1CAA8532007CF08B /* MarkGoodsViewController.m in Sources */,
 				D89B5A851CB4C24700DB9710 /* SceneTableViewCell.m in Sources */,
+				1F986A9E1CB610A40074ABFE /* GuidePageViewController.m in Sources */,
 				D812814B1CAA8532007CF08B /* FBLocationViewController.m in Sources */,
 				D81281101CAA8532007CF08B /* AppDelegate.mm in Sources */,
 				D81281221CAA8532007CF08B /* AddUrlView.m in Sources */,
