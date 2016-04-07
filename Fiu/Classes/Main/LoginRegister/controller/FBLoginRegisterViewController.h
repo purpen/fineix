@@ -9,5 +9,6 @@
 #import <UIKit/UIKit.h>
 
 @interface FBLoginRegisterViewController : UIViewController
+@property (weak, nonatomic) IBOutlet UIButton *cancelBtn;//取消按钮
 
 @end

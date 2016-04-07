@@ -22,21 +22,50 @@
 #import "MyViewController.h"
 #import <TYAlertController.h>
 #import <TYAlertView.h>
+#import "PhoneNumLoginView.h"
 
 
-@interface FBSignupViewController ()<FBRequestDelegate>
-
+@interface FBSignupViewController ()<FBRequestDelegate,FBRequestDelegate>
+{
+    PhoneNumLoginView *_phoneNumLoginV;
+}
+@property (weak, nonatomic) IBOutlet UIView *topView;//微信等按钮的view
 
 @end
 static NSString *const RegisterCodeURL = @"/auth/register";//手机号注册
 static NSString *const VerifyCodeURL = @"/auth/verify_code";//发送验证码借口
 static NSString *const thirdRegister = @"/auth/third_sign";//第三方登录接口
 static NSString *const thirdRegisteredNotBinding = @"/auth/third_register_without_phone";//第三方快捷注册(不绑定手机号)接口
+NSString *const LoginURL = @"/auth/login";//登录接口
 @implementation FBSignupViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+    //隐藏的view
+    _phoneNumLoginV = [[PhoneNumLoginView alloc] init];
+    
+    CGRect frame = _phoneNumLoginV.frame;
+    frame.origin.y = 1000;
+    _phoneNumLoginV.frame = frame;
+    [self.view addSubview:_phoneNumLoginV];
+    //给登录连接方法
+    [_phoneNumLoginV.loginBtn addTarget:self action:@selector(clickLoginBtn:) forControlEvents:UIControlEventTouchUpInside];
+    //快速注册
+    [_phoneNumLoginV.soonBtn addTarget:self action:@selector(clickSoonBtn:) forControlEvents:UIControlEventTouchUpInside];
+    //忘记密码
+    [_phoneNumLoginV.forgetBtn addTarget:self action:@selector(clickforgetBtn:) forControlEvents:UIControlEventTouchUpInside];
+}
+
+//忘记密码
+-(void)clickforgetBtn:(UIButton*)sender{
+    //登录view消失，找回密码view出现
+    
+}
+
+//快速注册
+-(void)clickSoonBtn:(UIButton*)sender{
+    
 }
 
 - (void)didReceiveMemoryWarning {
@@ -44,11 +73,72 @@ static NSString *const thirdRegisteredNotBinding = @"/auth/third_register_withou
     // Dispose of any resources that can be recreated.
 }
 
+//点击登录按钮
+-(void)clickLoginBtn:(UIButton*)sender{
+    if (![_phoneNumLoginV.phoneTF.text checkTel]) {
+        //手机号错误提示
+        [SVProgressHUD showErrorWithStatus:NSLocalizedString(@"enterCorrectPhoneNumber", nil)];
+        return;
+    }//密码格式错误提示
+    else if(_phoneNumLoginV.pwdTF.text.length < 6){
+        [SVProgressHUD showErrorWithStatus:NSLocalizedString(@"passwordDigits", nil)];
+        return;
+    }
+    //将填写的信息提交服务器
+    NSDictionary *params = @{
+                             @"mobile":_phoneNumLoginV.phoneTF.text,
+                             @"password":_phoneNumLoginV.pwdTF.text,
+                             @"from_to":@1
+                             };
+    FBRequest *request = [FBAPI postWithUrlString:LoginURL requestDictionary:params delegate:self];
+    request.flag = LoginURL;
+    [request startRequest];
+    [SVProgressHUD showWithMaskType:SVProgressHUDMaskTypeClear];
+}
+
+#pragma mark -fbrequestDElegate
+-(void)requestSucess:(FBRequest *)request result:(id)result{
+    if ([request.flag isEqualToString:LoginURL]) {
+        //如果成功，获取到用户的信息
+        if ([[result objectForKey:@"success"] isEqualToNumber:@1]) {
+            UserInfo *userInfo = [UserInfo mj_objectWithKeyValues:[result objectForKey:@"data"]];
+            [userInfo saveOrUpdate];
+            [userInfo updateUserInfoEntity];
+            NSLog(@"%@",userInfo);
+            UserInfoEntity *entity = [UserInfoEntity defaultUserInfoEntity];
+            entity.isLogin = YES;
+            
+            UIStoryboard *myStoryBoard = [UIStoryboard storyboardWithName:@"My" bundle:[NSBundle mainBundle]];
+            MyViewController *myVC = [myStoryBoard instantiateViewControllerWithIdentifier:@"MyViewController"];
+            [self.navigationController pushViewController:myVC animated:YES];
+            [SVProgressHUD showSuccessWithStatus:NSLocalizedString(@"loginSuccessful", nil)];
+            //跳回个人主页
+            [self dismissViewControllerAnimated:YES completion:nil];
+            [self.tabBarController setSelectedIndex:3];
+        }//如果失败，提示用户失败原因
+        else{
+            NSString *message = result[@"message"];
+            [SVProgressHUD showErrorWithStatus:message];
+        }
+    }
+    
+    
+}
 
 
+//点击手机或邮箱TF
+- (IBAction)phoneNumBtn:(UIButton *)sender {
+    [UIView animateWithDuration:0.5 animations:^{
+        self.topView.hidden = YES;
+        CGRect frame = _phoneNumLoginV.frame;
+        frame.origin.y = 117.0/667.0*SCREEN_HEIGHT;
+        _phoneNumLoginV.frame = frame;
+    } completion:^(BOOL finished) {
+        //成为第一响应者
+        [_phoneNumLoginV.phoneTF becomeFirstResponder];
+    }];
+    
 
-//跳转到手机号注册界面
-- (IBAction)phoneToSignUpBtn:(UIButton *)sender {
 }
 
 
@@ -233,7 +323,23 @@ static NSString *const thirdRegisteredNotBinding = @"/auth/third_register_withou
 
 //返回按钮
 - (IBAction)backBtn:(UIButton *)sender {
-    [self.navigationController popViewControllerAnimated:YES];
+    
+    //如果topView消失，让他出现,另一个view消失
+    if (self.topView.hidden == YES) {
+        [UIView animateWithDuration:0.5 animations:^{
+            CGRect frame = _phoneNumLoginV.frame;
+            frame.origin.y = 1000;
+            _phoneNumLoginV.frame = frame;
+        } completion:^(BOOL finished) {
+            self.topView.hidden = NO;
+        }];
+        
+        
+    }//如果topview没有消失，返回
+    else{
+        [self.navigationController popViewControllerAnimated:YES];
+    }
+    
 }
 
 /*

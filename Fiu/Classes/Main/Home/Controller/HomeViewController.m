@@ -25,7 +25,6 @@
     [self setNavigationViewUI];
     
     [self.view addSubview:self.homeTableView];
-    
 }
 
 #pragma mark - 加载首页表格
