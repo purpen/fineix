@@ -1,25 +1,27 @@
 //
-//  SceneListTableViewCell.m
+//  UserInfoTableViewCell.m
 //  Fiu
 //
-//  Created by FLYang on 16/4/6.
+//  Created by FLYang on 16/4/7.
 //  Copyright © 2016年 taihuoniao. All rights reserved.
 //
 
-#import "SceneListTableViewCell.h"
+#import "UserInfoTableViewCell.h"
 
-@implementation SceneListTableViewCell
+@implementation UserInfoTableViewCell
 
 - (instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier {
     self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
     if (self) {
-        
+    
         [self addSubview:self.bgImage];
         [_bgImage mas_makeConstraints:^(MASConstraintMaker *make) {
             make.size.mas_equalTo(CGSizeMake(SCREEN_WIDTH, SCREEN_HEIGHT));
             make.top.equalTo(self.mas_top).with.offset(0);
             make.left.equalTo(self.mas_left).with.offset(0);
         }];
+        
+        self.selectionStyle = UITableViewCellSelectionStyleNone;
         
     }
     return self;
@@ -54,13 +56,13 @@
         make.size.mas_equalTo(CGSizeMake(likeNumLength, 15));
     }];
     self.likeNum.text = likeNum;
-
+    
     //  标题
     NSString * titleStr = @" 最好的时光遇到你最好的时光遇到你 ";
     [self titleTextStyle:titleStr];
     
     //  所属情景
-    NSString * whereText = @"最好的时光遇到你最好的时光遇到你";
+    NSString * whereText = @"最好的时光遇到你";
     CGFloat whereLength = [whereText boundingRectWithSize:CGSizeMake(320, 1000) options:(NSStringDrawingUsesLineFragmentOrigin) attributes:nil context:nil].size.width;
     [_whereScene mas_updateConstraints:^(MASConstraintMaker *make) {
         make.size.mas_equalTo(CGSizeMake(whereLength * 0.8, 15));
@@ -78,6 +80,15 @@
     //  时间
     self.time.text = @"｜ 2天前";
     
+    //  点赞的数量
+    CGFloat good = 32200;
+    if (good/1000 > 1) {
+        self.goodNum.text = [NSString stringWithFormat:@"%.1fk人赞过", good/1000];
+    } else {
+        self.goodNum.text = [NSString stringWithFormat:@"%.0f人赞过", good];
+    }
+    
+    [self changeUserViewFrame];
 }
 
 #pragma mark - 场景图
@@ -87,67 +98,44 @@
         _bgImage.contentMode = UIViewContentModeScaleAspectFit;
         
         [_bgImage addSubview:self.userView];
-        [_userView mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.size.mas_equalTo(CGSizeMake(SCREEN_WIDTH - 40, 130));
-            make.bottom.equalTo(_bgImage.mas_bottom).with.offset(-75);
-            make.left.equalTo(_bgImage.mas_left).with.offset(20);
-        }];
     }
     return _bgImage;
+}
+
+//  改变UserView的位置
+- (void)changeUserViewFrame {
+    CGRect userViewRect = _userView.frame;
+    userViewRect = CGRectMake(0, SCREEN_HEIGHT - 140, SCREEN_WIDTH, 130);
+    [UIView animateWithDuration:0.5 delay:1.0 options:(UIViewAnimationOptionTransitionNone) animations:^{
+        _userView.frame = userViewRect;
+    } completion:^(BOOL finished) {
+        [self hiddenNavItem:NO];
+    }];
+}
+
+//  隐藏显示navItem
+- (void)hiddenNavItem:(BOOL)hidden {
+    self.navItem.leftBarButtonItem.customView.hidden = hidden;
+    self.navItem.rightBarButtonItem.customView.hidden = hidden;
 }
 
 #pragma mark - 用户信息
 - (UIView *)userView {
     if (!_userView) {
-        _userView = [[UIView alloc] init];
-        
-        [_userView addSubview:self.userHeader];
-        [_userHeader mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.size.mas_equalTo(CGSizeMake(30, 30));
-            make.top.equalTo(_userView.mas_top).with.offset(0);
-            make.left.equalTo(_userView.mas_left).with.offset(0);
-        }];
-        
-        [_userView addSubview:self.userName];
-        [_userName mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.size.mas_equalTo(CGSizeMake(150, 15));
-            make.top.equalTo(_userView.mas_top).with.offset(0);
-            make.left.equalTo(_userHeader.mas_right).with.offset(10);
-        }];
-        
-        [_userView addSubview:self.userProfile];
-        [_userProfile mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.size.mas_equalTo(CGSizeMake(150, 15));
-            make.bottom.equalTo(_userHeader.mas_bottom).with.offset(0);
-            make.left.equalTo(_userHeader.mas_right).with.offset(10);
-        }];
-        
-        [_userView addSubview:self.lookNum];
-        [_lookNum mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.size.mas_equalTo(CGSizeMake(60, 15));
-            make.top.equalTo(_userHeader.mas_bottom).with.offset(5);
-            make.left.equalTo(_userView.mas_left).with.offset(20);
-        }];
-        
-        [_userView addSubview:self.likeNum];
-        [_likeNum mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.size.mas_equalTo(CGSizeMake(60, 15));
-            make.top.equalTo(_lookNum.mas_top).with.offset(0);
-            make.left.equalTo(_lookNum.mas_right).with.offset(40);
-        }];
+        _userView = [[UIView alloc] initWithFrame:CGRectMake(0, SCREEN_HEIGHT, SCREEN_WIDTH, 130)];
         
         [_userView addSubview:self.titleText];
         [_titleText mas_makeConstraints:^(MASConstraintMaker *make) {
             make.size.mas_equalTo(CGSizeMake(SCREEN_WIDTH - 40, 56));
-            make.top.equalTo(_lookNum.mas_bottom).with.offset(5);
-            make.left.equalTo(_userView.mas_left).with.offset(0);
+            make.top.equalTo(_userView.mas_top).with.offset(0);
+            make.left.equalTo(_userView.mas_left).with.offset(20);
         }];
         
         [_userView addSubview:self.whereScene];
         [_whereScene mas_makeConstraints:^(MASConstraintMaker *make) {
             make.size.mas_equalTo(CGSizeMake(130, 15));
-            make.bottom.equalTo(_userView.mas_bottom).with.offset(0);
-            make.left.equalTo(_userView.mas_left).with.offset(20);
+            make.bottom.equalTo(_titleText.mas_bottom).with.offset(20);
+            make.left.equalTo(_userView.mas_left).with.offset(40);
         }];
         
         [_userView addSubview:self.city];
@@ -163,8 +151,110 @@
             make.top.equalTo(_whereScene.mas_top).with.offset(0);
             make.left.equalTo(_city.mas_right).with.offset(0);
         }];
+        
+        [_userView addSubview:self.userLeftView];
+        [_userLeftView mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.size.mas_equalTo(CGSizeMake(SCREEN_WIDTH - 135.5 ,35));
+            make.top.equalTo(_whereScene.mas_bottom).with.offset(20);
+            make.left.equalTo(_userView.mas_left).with.offset(0);
+        }];
+        
+        [_userView addSubview:self.userRightView];
+        [_userRightView mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.size.mas_equalTo(CGSizeMake(46 ,35));
+            make.centerY.equalTo(_userLeftView);
+            make.right.equalTo(_userView.mas_right).with.offset(0);
+        }];
+        
+        [_userView addSubview:self.goodBtn];
+        [_goodBtn mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.size.mas_equalTo(CGSizeMake(89.5 ,46));
+            make.bottom.equalTo(_userLeftView.mas_bottom).with.offset(0);
+            make.left.equalTo(_userLeftView.mas_right).with.offset(0);
+        }];
+        
+        //        [_userView addSubview:self.lookNum];
+        //        [_lookNum mas_makeConstraints:^(MASConstraintMaker *make) {
+        //            make.size.mas_equalTo(CGSizeMake(60, 15));
+        //            make.top.equalTo(_userHeader.mas_bottom).with.offset(5);
+        //            make.left.equalTo(_userView.mas_left).with.offset(20);
+        //        }];
+        //
+        //        [_userView addSubview:self.likeNum];
+        //        [_likeNum mas_makeConstraints:^(MASConstraintMaker *make) {
+        //            make.size.mas_equalTo(CGSizeMake(60, 15));
+        //            make.top.equalTo(_lookNum.mas_top).with.offset(0);
+        //            make.left.equalTo(_lookNum.mas_right).with.offset(40);
+        //        }];
+        
     }
     return _userView;
+}
+
+#pragma mark - 用户信息左边背景
+- (UIView *)userLeftView {
+    if (!_userLeftView) {
+        _userLeftView = [[UIView alloc] init];
+        _userLeftView.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"User_bg_left"]];
+        
+        [_userLeftView addSubview:self.userHeader];
+        [_userHeader mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.size.mas_equalTo(CGSizeMake(30, 30));
+            make.centerY.equalTo(_userLeftView);
+            make.left.equalTo(_userLeftView.mas_left).with.offset(20);
+        }];
+        
+        [_userLeftView addSubview:self.userName];
+        [_userName mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.size.mas_equalTo(CGSizeMake(150, 15));
+            make.top.equalTo(_userHeader.mas_top).with.offset(0);
+            make.left.equalTo(_userHeader.mas_right).with.offset(10);
+        }];
+        
+        [_userLeftView addSubview:self.userProfile];
+        [_userProfile mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.size.mas_equalTo(CGSizeMake(150, 15));
+            make.bottom.equalTo(_userHeader.mas_bottom).with.offset(0);
+            make.left.equalTo(_userHeader.mas_right).with.offset(10);
+        }];
+    }
+    return _userLeftView;
+}
+
+#pragma mark - 点赞的按钮
+- (UIButton *)goodBtn {
+    if (!_goodBtn) {
+        _goodBtn = [[UIButton alloc] init];
+        [_goodBtn setImage:[UIImage imageNamed:@"User_like"] forState:(UIControlStateNormal)];
+        
+        [_goodBtn addSubview:self.goodNum];
+        [_goodNum mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.size.mas_equalTo(CGSizeMake(89 ,13));
+            make.bottom.equalTo(_goodBtn.mas_bottom).with.offset(-10);
+            make.centerX.equalTo(_goodBtn);
+        }];
+    }
+    return _goodBtn;
+}
+
+#pragma mark - 点赞的数量
+- (UILabel *)goodNum {
+    if (!_goodNum) {
+        _goodNum = [[UILabel alloc] init];
+        _goodNum.textColor = [UIColor whiteColor];
+        _goodNum.textAlignment = NSTextAlignmentCenter;
+        _goodNum.font = [UIFont systemFontOfSize:Font_Number];
+    }
+    return _goodNum;
+}
+
+#pragma mark - 用户信息左边背景
+- (UIView *)userRightView {
+    if (!_userRightView) {
+        _userRightView = [[UIView alloc] init];
+        _userRightView.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"User_bg_right"]];
+    }
+    return _userRightView;
 }
 
 #pragma mark - 用户头像
@@ -294,6 +384,7 @@
     icon.image = [UIImage imageNamed:iconImage];
     [lable addSubview:icon];
 }
+
 
 
 @end

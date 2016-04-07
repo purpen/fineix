@@ -13,7 +13,10 @@
 
 @protocol FBNavigationBarItemsDelegate <NSObject>
 
+@optional
 - (void)leftBarItemSelected;
+
+@optional
 - (void)rightBarItemSelected;
 
 @end
