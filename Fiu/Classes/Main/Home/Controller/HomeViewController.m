@@ -90,6 +90,7 @@
                 leftBarItem.alpha = 0;
                 rightBarItem.alpha = 0;
                 [[UIApplication sharedApplication] setStatusBarHidden:YES withAnimation:(UIStatusBarAnimationSlide)];
+                self.navigationController.navigationBar.frame = CGRectMake(0, 20, SCREEN_WIDTH, 44);
             }];
             
         } else if (self.rollDown == NO) {
