@@ -56,14 +56,8 @@
     self.likeNum.text = likeNum;
 
     //  标题
-    NSString * titleStr = @"最美的不是下雨天，最美的不是下雨天";
-    if ([titleStr length] < 14) {
-        _titleText.font = [UIFont boldSystemFontOfSize:40];
-    }
-    NSMutableAttributedString * titleText = [[NSMutableAttributedString alloc] initWithString:titleStr];
-    NSDictionary * dict1 = @{NSBackgroundColorAttributeName:[UIColor colorWithPatternImage:[UIImage imageNamed:@"titleBg"]]};
-    [titleText addAttributes:dict1 range:NSMakeRange(0, titleText.length)];
-    self.titleText.attributedText = titleText;
+    NSString * titleStr = @" 一二三四五一二三四五一二三四五 ";
+    [self titleTextStyle:titleStr];
     
     //  所属情景
     NSString * whereText = @"最好的时光遇到你最好的时光遇到你";
@@ -188,7 +182,7 @@
 - (UILabel *)userName {
     if (!_userName) {
         _userName = [[UILabel alloc] init];
-        _userName.textColor = [UIColor blackColor];
+        _userName.textColor = [UIColor colorWithHexString:@"#222222" alpha:1];
         _userName.font = [UIFont systemFontOfSize:Font_UserName];
     }
     return _userName;
@@ -198,7 +192,7 @@
 - (UILabel *)userProfile {
     if (!_userProfile) {
         _userProfile = [[UILabel alloc] init];
-        _userProfile.textColor = [UIColor blackColor];
+        _userProfile.textColor = [UIColor colorWithHexString:@"#666666" alpha:1];
         _userProfile.font = [UIFont systemFontOfSize:Font_UserProfile];
     }
     return _userProfile;
@@ -210,6 +204,7 @@
         _lookNum = [[UILabel alloc] init];
         [self addIcon:_lookNum withImage:@"look"];
         _lookNum.font = [UIFont systemFontOfSize:Font_UserProfile];
+        _lookNum.textColor = [UIColor colorWithHexString:@"#666666" alpha:1];
     }
     return _lookNum;
 }
@@ -220,6 +215,7 @@
         _likeNum = [[UILabel alloc] init];
         [self addIcon:_likeNum withImage:@"like"];
         _likeNum.font = [UIFont systemFontOfSize:Font_UserProfile];
+        _likeNum.textColor = [UIColor colorWithHexString:@"#666666" alpha:1];
     }
     return _likeNum;
 }
@@ -230,10 +226,33 @@
         _titleText = [[UILabel alloc] init];
         _titleText.numberOfLines = 2;
         _titleText.textColor = [UIColor whiteColor];
-        _titleText.font = [UIFont systemFontOfSize:21];
-        _titleText.textAlignment = NSTextAlignmentLeft;
     }
     return _titleText;
+}
+
+//  标题文字的样式
+- (void)titleTextStyle:(NSString *)title {
+    if ([title length] < 9) {
+        _titleText.font = [UIFont systemFontOfSize:48];
+    } else if ([title length] >= 9 && [title length] < 13) {
+        _titleText.font = [UIFont systemFontOfSize:32];
+    } else if ([title length] > 13) {
+        _titleText.font = [UIFont systemFontOfSize:21];
+        [_titleText mas_updateConstraints:^(MASConstraintMaker *make) {
+            make.size.mas_equalTo(CGSizeMake(240, 56));
+        }];
+    }
+    NSMutableAttributedString * titleText = [[NSMutableAttributedString alloc] initWithString:title];
+    NSMutableParagraphStyle * paragraphStyle = [[NSMutableParagraphStyle alloc] init];
+    paragraphStyle.alignment = NSTextAlignmentJustified;
+    paragraphStyle.headIndent = 10;
+    
+    NSDictionary * textDict = @{
+                                NSBackgroundColorAttributeName:[UIColor colorWithPatternImage:[UIImage imageNamed:@"titleBg"]] ,
+                                NSParagraphStyleAttributeName :paragraphStyle
+                                };
+    [titleText addAttributes:textDict range:NSMakeRange(0, titleText.length)];
+    self.titleText.attributedText = titleText;
 }
 
 #pragma mark - 所属情景
@@ -242,6 +261,7 @@
         _whereScene = [[UILabel alloc] init];
         [self addIcon:_whereScene withImage:@"icon_star"];
         _whereScene.font = [UIFont systemFontOfSize:Font_UserProfile];
+        _whereScene.textColor = [UIColor colorWithHexString:@"#666666" alpha:1];
     }
     return _whereScene;
 }
@@ -252,6 +272,7 @@
         _city = [[UILabel alloc] init];
         [self addIcon:_city withImage:@"icon_city"];
         _city.font = [UIFont systemFontOfSize:Font_UserProfile];
+        _city.textColor = [UIColor colorWithHexString:@"#666666" alpha:1];
     }
     return _city;
 }
@@ -262,6 +283,7 @@
         _time = [[UILabel alloc] init];
         _time.textColor = [UIColor blackColor];
         _time.font = [UIFont systemFontOfSize:Font_UserProfile];
+        _time.textColor = [UIColor colorWithHexString:@"#666666" alpha:1];
     }
     return _time;
 }
