@@ -8,6 +8,7 @@
 
 #import "OrderInfoCell.h"
 
+
 @implementation OrderInfoCell
 
 - (void)awakeFromNib {
@@ -22,8 +23,12 @@
 }
 
 +(instancetype)getOrderInfoCell{
-    return [[NSBundle mainBundle] loadNibNamed:@"OrderInfoCell" owner:nil options:nil][0];
+    OrderInfoCell *orderInfoCell = [[NSBundle mainBundle] loadNibNamed:@"OrderInfoCell" owner:nil options:nil][0];
+    
+    return orderInfoCell;
 }
+
+
 
 +(NSString *)getIdentifer{
     return @"OrderInfoCell";

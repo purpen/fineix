@@ -199,14 +199,20 @@
                     <nil key="highlightedColor"/>
                 </label>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="达人" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pAG-9o-ZRd">
-                    <rect key="frame" x="136" y="137" width="44" height="21"/>
+                    <rect key="frame" x="143" y="137" width="37" height="21"/>
                     <constraints>
+                        <constraint firstAttribute="width" constant="37" id="3Wq-vb-Ped"/>
                         <constraint firstAttribute="height" constant="21" id="AKZ-Hv-ii9"/>
-                        <constraint firstAttribute="width" constant="44" id="Fj4-bI-e6x"/>
+                        <constraint firstAttribute="width" constant="58" id="Fj4-bI-e6x"/>
                     </constraints>
-                    <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="11"/>
                     <color key="textColor" red="0.40000000000000002" green="0.40000000000000002" blue="0.40000000000000002" alpha="1" colorSpace="calibratedRGB"/>
                     <nil key="highlightedColor"/>
+                    <variation key="default">
+                        <mask key="constraints">
+                            <exclude reference="Fj4-bI-e6x"/>
+                        </mask>
+                    </variation>
                 </label>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="W4S-jP-mSl">
                     <rect key="frame" x="186" y="140" width="1" height="15"/>
@@ -253,6 +259,7 @@
                 <constraint firstAttribute="bottom" secondItem="W4S-jP-mSl" secondAttribute="bottom" constant="45" id="Ic2-Eo-4y6"/>
                 <constraint firstItem="M05-IN-a70" firstAttribute="centerX" secondItem="wt2-hL-LpB" secondAttribute="centerX" id="Jbc-bf-ofn"/>
                 <constraint firstItem="x08-I5-dSD" firstAttribute="top" secondItem="M05-IN-a70" secondAttribute="bottom" constant="28" id="K7P-HW-c1M"/>
+                <constraint firstItem="W4S-jP-mSl" firstAttribute="centerX" secondItem="M05-IN-a70" secondAttribute="centerX" id="LCF-Tj-Zf5"/>
                 <constraint firstItem="RLZ-hj-JFv" firstAttribute="top" secondItem="wt2-hL-LpB" secondAttribute="top" constant="15" id="VOI-gi-SFm"/>
                 <constraint firstAttribute="bottom" secondItem="8Qm-vV-a5D" secondAttribute="bottom" id="WVr-Tu-MhA"/>
                 <constraint firstItem="8Qm-vV-a5D" firstAttribute="leading" secondItem="wt2-hL-LpB" secondAttribute="leading" id="XxJ-H2-lyl"/>
@@ -281,6 +288,7 @@
                     <exclude reference="AfF-r7-MnB"/>
                     <exclude reference="dxc-ya-ozW"/>
                     <exclude reference="K7P-HW-c1M"/>
+                    <exclude reference="jbZ-u8-gyH"/>
                 </mask>
             </variation>
             <connections>

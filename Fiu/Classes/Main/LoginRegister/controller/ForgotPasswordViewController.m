@@ -14,14 +14,14 @@
 #import "Fiu.h"
 #import "UserInfo.h"
 #include "UserInfoEntity.h"
+#import "SubmitViewController.h"
 
 @interface ForgotPasswordViewController ()<FBRequestDelegate>
 
 @property (weak, nonatomic) IBOutlet UIButton *sendBtn;
 @property (weak, nonatomic) IBOutlet UITextField *phoneNumTF;
-@property (weak, nonatomic) IBOutlet UITextField *verificationCodeTF;
-@property (weak, nonatomic) IBOutlet UITextField *passwordTF;
-@property (weak, nonatomic) IBOutlet UIButton *resetBtn;
+
+@property (weak, nonatomic) IBOutlet UILabel *phoneNumLabel;//手机号水印
 
 @end
 
@@ -42,84 +42,44 @@ static NSString *const FindPwdURL = @"/auth/find_pwd";
     
 }
 
+//手机号
+- (IBAction)phoneNumBtn:(UIButton *)sender {
+    //点击水印消失
+    self.phoneNumLabel.text = @"";
+    //成为第一响应者
+    [self.phoneNumTF becomeFirstResponder];
+}
+
+//返回按钮
+- (IBAction)backBtn:(UIButton *)sender {
+    [self.navigationController popViewControllerAnimated:YES];
+}
+//取消按钮
+- (IBAction)cancelBtn:(UIButton *)sender {
+    [self dismissViewControllerAnimated:YES completion:nil];
+}
+
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
-- (IBAction)clickSendBtn:(UIButton *)sender {
+
+//发送按钮
+- (IBAction)sendBtn:(UIButton *)sender {
     //判断手机号
     if ([self.phoneNumTF.text checkTel]) {
-       //如果手机号正确，发送短信
-        NSDictionary *params = @{
-                                 @"mobile":self.phoneNumTF.text
-                                 };
-        FBRequest *request = [FBAPI postWithUrlString:VerifyCodeURL requestDictionary:params delegate:self];
-        request.flag = VerifyCodeURL;
-        [request startRequest];
-        [SVProgressHUD showWithMaskType:SVProgressHUDMaskTypeClear];
-        
-    }//如果手机号错误，提示错误信息
+        //如果手机号正确跳转，并传值
+        UIStoryboard *loginStory = [UIStoryboard storyboardWithName:@"LoginRegisterController" bundle:nil];
+        SubmitViewController *submitVC = [loginStory instantiateViewControllerWithIdentifier:@"SubmitViewController"];
+        submitVC.phoneNumStr = self.phoneNumTF.text;
+        [self.navigationController pushViewController:submitVC animated:YES];
+    }//如果手机号不正确，提示错误
     else{
-        [SVProgressHUD showErrorWithStatus:@"请输入正确的手机号"];
+        [SVProgressHUD showErrorWithStatus:@"手机号错误"];
     }
+    
+    
 }
 
-#pragma mark -FBRequestDelegate
--(void)requestSucess:(FBRequest *)request result:(id)result{
-    if ([request.flag isEqualToString:VerifyCodeURL]) {
-        if ([[result objectForKey:@"success"] isEqualToNumber:@1]) {
-            [SVProgressHUD showSuccessWithStatus:@"发送成功"];
-        }else{
-            NSString *message = result[@"message"];
-            [SVProgressHUD showInfoWithStatus:message];
-        }
-    }
-    if ([request.flag isEqualToString:FindPwdURL]) {
-        if ([[result objectForKey:@"success"] isEqualToNumber:@1]) {
-            //设置完新密码后更新用户信息
-            UserInfo *userInfo = [UserInfo mj_objectWithKeyValues:[result objectForKey:@"data"]];
-            [userInfo saveOrUpdate];
-            [userInfo updateUserInfoEntity];
-            UserInfoEntity *entity = [UserInfoEntity defaultUserInfoEntity];
-            entity.isLogin = YES;
-            [self dismissViewControllerAnimated:YES completion:nil];
-            [SVProgressHUD showSuccessWithStatus:@"设置成功"];
-        }else{
-            NSString *message = result[@"message"];
-            [SVProgressHUD showErrorWithStatus:message];
-        }
-    }
-}
-
-
-- (IBAction)clickResetBtn:(UIButton *)sender {
-    //判断验证码
-    if (!self.verificationCodeTF.text.length) {
-        //如果验证码不正确提示错误信息
-        [SVProgressHUD showErrorWithStatus:@"请输入验证码"];
-    }//如果验证码正确重设密码
-    else{
-        //输入新密码
-        //判断新密码
-        if (self.passwordTF.text.length < 6) {
-            //如果密码错误，提示错误信息
-            [SVProgressHUD showErrorWithStatus:@"密码不能少于6位"];
-        }//如果新密码正确，发送请求设置新的密码
-        else{
-            NSDictionary *params = @{
-                                     @"mobile" : self.phoneNumTF.text,
-                                     @"password" : self.passwordTF.text,
-                                     @"verify_code" : self.verificationCodeTF.text
-                                     };
-            FBRequest *request = [FBAPI postWithUrlString:FindPwdURL requestDictionary:params delegate:self];
-            request.flag = FindPwdURL;
-            [request startRequest];
-            [SVProgressHUD showWithMaskType:SVProgressHUDMaskTypeClear];
-        }
-        
-        
-        
-    }
-}
 
 @end

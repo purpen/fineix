@@ -7,7 +7,7 @@
 //
 
 #import "OrderListModel.h"
-#import "ProductInfoModel.h"
+
 
 @implementation OrderListModel
 
@@ -93,13 +93,39 @@
     }
     
     if(dictionary[@"items"] != nil && [dictionary[@"items"] isKindOfClass:[NSArray class]]){
-        NSArray * itemsDictionaries = dictionary[@"items"];
-        NSMutableArray * itemsItems = [NSMutableArray array];
-        for(NSDictionary * itemsDictionary in itemsDictionaries){
-            ProductInfoModel * productInfo = [[ProductInfoModel alloc] initWithDictionary:itemsDictionary];
-            [itemsItems addObject:productInfo];
+        NSDictionary * itemsDictionaries = dictionary[@"items"];
+        if(![itemsDictionaries[@"cover_url"] isKindOfClass:[NSNull class]]){
+            self.coverUrl = itemsDictionaries[@"cover_url"];
         }
-        self.productInfos = itemsItems;
+        
+        if(![itemsDictionaries[@"name"] isKindOfClass:[NSNull class]]){
+            self.name = itemsDictionaries[@"name"];
+        }
+        
+        if(![itemsDictionaries[@"sku_name"] isKindOfClass:[NSNull class]]){
+            self.skuName = itemsDictionaries[@"sku_name"];
+        }
+        
+        if(![itemsDictionaries[@"price"] isKindOfClass:[NSNull class]]){
+            self.price = [itemsDictionaries[@"price"] floatValue];
+        }
+        
+        if(![itemsDictionaries[@"product_id"] isKindOfClass:[NSNull class]]){
+            self.productId = [itemsDictionaries[@"product_id"] integerValue];
+        }
+        
+        if(![itemsDictionaries[@"quantity"] isKindOfClass:[NSNull class]]){
+            self.quantity = [itemsDictionaries[@"quantity"] integerValue];
+        }
+        
+        if(![itemsDictionaries[@"sale_price"] isKindOfClass:[NSNull class]]){
+            self.salePrice = [itemsDictionaries[@"sale_price"] floatValue];
+        }
+        
+        if(![itemsDictionaries[@"sku"] isKindOfClass:[NSNull class]]){
+            self.sku = [itemsDictionaries[@"sku"] integerValue];
+        }
+
     }
     if(![dictionary[@"items_count"] isKindOfClass:[NSNull class]]){
         self.itemsCount = [dictionary[@"items_count"] integerValue];
@@ -136,6 +162,7 @@
     if(![dictionary[@"user_id"] isKindOfClass:[NSNull class]]){
         self.userId = [dictionary[@"user_id"] integerValue];
     }
+    
     
     return self;
 

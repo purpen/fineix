@@ -526,7 +526,6 @@
         <!--全部订单-->
         <scene sceneID="mwz-eD-RVH">
             <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="qVd-Pr-rDP" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <viewController storyboardIdentifier="MyOrdersViewController" id="iHA-pZ-nYy" customClass="MyOrdersViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="Qeh-JY-Thw"/>
@@ -729,9 +728,9 @@
                                 </constraints>
                                 <variation key="default">
                                     <mask key="constraints">
-                                        <exclude reference="WmQ-wP-Ds5"/>
-                                        <exclude reference="Qtk-li-TQZ"/>
                                         <exclude reference="CEV-fc-21W"/>
+                                        <exclude reference="Qtk-li-TQZ"/>
+                                        <exclude reference="WmQ-wP-Ds5"/>
                                         <exclude reference="Ig6-sx-Lxn"/>
                                     </mask>
                                 </variation>
@@ -782,9 +781,9 @@
                                 </constraints>
                                 <variation key="default">
                                     <mask key="constraints">
-                                        <exclude reference="pbE-f8-Bc2"/>
-                                        <exclude reference="dd4-WK-h7B"/>
                                         <exclude reference="MLe-zy-r13"/>
+                                        <exclude reference="dd4-WK-h7B"/>
+                                        <exclude reference="pbE-f8-Bc2"/>
                                         <exclude reference="cnt-ay-m49"/>
                                     </mask>
                                 </variation>
@@ -835,9 +834,9 @@
                                 </constraints>
                                 <variation key="default">
                                     <mask key="constraints">
-                                        <exclude reference="o3v-aO-vDM"/>
                                         <exclude reference="2MU-e6-wpy"/>
                                         <exclude reference="8C1-RA-cE9"/>
+                                        <exclude reference="o3v-aO-vDM"/>
                                         <exclude reference="f0w-D1-xY9"/>
                                     </mask>
                                 </variation>
@@ -870,6 +869,7 @@
                     <navigationItem key="navigationItem" title="全部订单" id="lsJ-iQ-gLF"/>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
                 </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="qVd-Pr-rDP" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="830.5" y="1174.5"/>
         </scene>
@@ -888,11 +888,12 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="15r-Xo-VOe">
                                 <rect key="frame" x="-4" y="70" width="383" height="44"/>
                                 <subviews>
-                                    <button opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="249" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="YyZ-Iw-KsA">
+                                    <button opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="249" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="YyZ-Iw-KsA">
                                         <rect key="frame" x="84" y="8" width="46" height="30"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="46" id="Ay6-ds-k7k"/>
                                         </constraints>
+                                        <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                         <state key="normal" title="待付款">
                                             <color key="titleColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
@@ -901,30 +902,45 @@
                                                 <exclude reference="Ay6-ds-k7k"/>
                                             </mask>
                                         </variation>
+                                        <connections>
+                                            <action selector="paymentBtn:" destination="375-CJ-Axp" eventType="touchUpInside" id="S9R-Fk-Y10"/>
+                                        </connections>
                                     </button>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Hrz-0P-E58">
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Hrz-0P-E58">
                                         <rect key="frame" x="168" y="8" width="46" height="30"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="46" id="q4f-mv-xkA"/>
                                         </constraints>
+                                        <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                         <state key="normal" title="待发货">
                                             <color key="titleColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
+                                        <connections>
+                                            <action selector="sendGoods:" destination="375-CJ-Axp" eventType="touchUpInside" id="J3Z-4I-XDv"/>
+                                        </connections>
                                     </button>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zTI-LI-yVN">
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zTI-LI-yVN">
                                         <rect key="frame" x="243" y="8" width="46" height="30"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                         <state key="normal" title="待收货">
                                             <color key="titleColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
+                                        <connections>
+                                            <action selector="forGoods:" destination="375-CJ-Axp" eventType="touchUpInside" id="VRL-Jp-txU"/>
+                                        </connections>
                                     </button>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6Pk-WY-vFm">
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6Pk-WY-vFm">
                                         <rect key="frame" x="311" y="8" width="46" height="30"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="46" id="kOu-C3-gTx"/>
                                         </constraints>
+                                        <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                         <state key="normal" title="待评价">
                                             <color key="titleColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
+                                        <connections>
+                                            <action selector="toEvaluate:" destination="375-CJ-Axp" eventType="touchUpInside" id="Btl-fz-WrS"/>
+                                        </connections>
                                     </button>
                                     <button opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" adjustsImageWhenHighlighted="NO" adjustsImageWhenDisabled="NO" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="RTo-Jp-dvc">
                                         <rect key="frame" x="24" y="7" width="30" height="30"/>
@@ -932,6 +948,9 @@
                                         <state key="normal" title="全部">
                                             <color key="titleColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
+                                        <connections>
+                                            <action selector="allBtn:" destination="375-CJ-Axp" eventType="touchUpInside" id="Ed6-bn-CI3"/>
+                                        </connections>
                                     </button>
                                 </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -972,17 +991,17 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="RUj-k7-eT6">
                                 <rect key="frame" x="-4" y="122" width="383" height="545"/>
                                 <subviews>
-                                    <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="NmC-5f-g3O">
-                                        <rect key="frame" x="-20" y="1" width="423" height="544"/>
+                                    <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="NmC-5f-g3O">
+                                        <rect key="frame" x="0.0" y="1" width="383" height="544"/>
                                         <color key="backgroundColor" red="0.87058823529999996" green="0.87058823529999996" blue="0.87058823529999996" alpha="1" colorSpace="calibratedRGB"/>
-                                        <color key="sectionIndexBackgroundColor" red="0.87058823529999996" green="0.87058823529999996" blue="0.87058823529999996" alpha="1" colorSpace="calibratedRGB"/>
+                                        <color key="sectionIndexBackgroundColor" red="0.96862745098039216" green="0.96862745098039216" blue="0.87058823529411766" alpha="1" colorSpace="calibratedRGB"/>
                                     </tableView>
                                 </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstItem="NmC-5f-g3O" firstAttribute="top" secondItem="RUj-k7-eT6" secondAttribute="top" constant="1" id="2Eu-zG-Olu"/>
-                                    <constraint firstItem="NmC-5f-g3O" firstAttribute="leading" secondItem="RUj-k7-eT6" secondAttribute="leading" constant="-20" id="d1R-l4-jeH"/>
-                                    <constraint firstAttribute="trailing" secondItem="NmC-5f-g3O" secondAttribute="trailing" constant="-20" id="pKW-5E-ZsY"/>
+                                    <constraint firstItem="NmC-5f-g3O" firstAttribute="leading" secondItem="RUj-k7-eT6" secondAttribute="leading" id="d1R-l4-jeH"/>
+                                    <constraint firstAttribute="trailing" secondItem="NmC-5f-g3O" secondAttribute="trailing" id="pKW-5E-ZsY"/>
                                     <constraint firstAttribute="bottom" secondItem="NmC-5f-g3O" secondAttribute="bottom" id="xBi-qh-8ka"/>
                                 </constraints>
                             </view>
@@ -1002,6 +1021,7 @@
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
                     <connections>
                         <outlet property="allBtn" destination="RTo-Jp-dvc" id="NIf-Ip-mL1"/>
+                        <outlet property="chanelView" destination="15r-Xo-VOe" id="LzQ-Z6-dWT"/>
                         <outlet property="evaluateBtn" destination="6Pk-WY-vFm" id="3FT-6z-B38"/>
                         <outlet property="goodsBtn" destination="zTI-LI-yVN" id="cA1-L1-a5U"/>
                         <outlet property="ordertableV" destination="NmC-5f-g3O" id="fse-qc-FIG"/>
