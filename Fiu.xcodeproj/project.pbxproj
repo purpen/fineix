@@ -24,11 +24,8 @@
 		1F0EE6A91C9FA4F6000631F0 /* libz.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 1F0EE6A81C9FA4F6000631F0 /* libz.tbd */; };
 		1F59E5FC1C9ABBA500E96C60 /* Accelerate.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1F59E5FB1C9ABBA500E96C60 /* Accelerate.framework */; };
 		1FBD5F121CB3A0CE002A3048 /* OrderListModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 1FBD5F111CB3A0CE002A3048 /* OrderListModel.m */; };
-		1FBD5F151CB3A761002A3048 /* ProductInfoModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 1FBD5F141CB3A761002A3048 /* ProductInfoModel.m */; };
 		1FBD5F181CB3B244002A3048 /* MyOrderViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1FBD5F171CB3B244002A3048 /* MyOrderViewController.m */; };
 		1FBD5F1D1CB3B8F0002A3048 /* OrderInfoCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1FBD5F1C1CB3B8F0002A3048 /* OrderInfoCell.xib */; };
-		1FBD5F201CB3C4A2002A3048 /* ProductInfoView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1FBD5F1F1CB3C4A2002A3048 /* ProductInfoView.m */; };
-		1FBD5F221CB3C6B7002A3048 /* ProductInfoView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1FBD5F211CB3C6B7002A3048 /* ProductInfoView.xib */; };
 		1FBD5F251CB3D5A6002A3048 /* OrderInfoCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 1FBD5F241CB3D5A6002A3048 /* OrderInfoCell.m */; };
 		1FEFD56C1CAD115C005A1C5F /* BackImagView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1FEFD55F1CAD115C005A1C5F /* BackImagView.m */; };
 		1FEFD56D1CAD115C005A1C5F /* chanel.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1FEFD5601CAD115C005A1C5F /* chanel.xib */; };
@@ -193,14 +190,9 @@
 		1FAB860F67E625188BAE00A8 /* Pods-fineix.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-fineix.release.xcconfig"; path = "Pods/Target Support Files/Pods-fineix/Pods-fineix.release.xcconfig"; sourceTree = "<group>"; };
 		1FBD5F101CB3A0CE002A3048 /* OrderListModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OrderListModel.h; sourceTree = "<group>"; };
 		1FBD5F111CB3A0CE002A3048 /* OrderListModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OrderListModel.m; sourceTree = "<group>"; };
-		1FBD5F131CB3A761002A3048 /* ProductInfoModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProductInfoModel.h; sourceTree = "<group>"; };
-		1FBD5F141CB3A761002A3048 /* ProductInfoModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ProductInfoModel.m; sourceTree = "<group>"; };
 		1FBD5F161CB3B244002A3048 /* MyOrderViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MyOrderViewController.h; path = Fiu/Classes/Main/My/Controller/MyOrderViewController.h; sourceTree = SOURCE_ROOT; };
 		1FBD5F171CB3B244002A3048 /* MyOrderViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MyOrderViewController.m; path = Fiu/Classes/Main/My/Controller/MyOrderViewController.m; sourceTree = SOURCE_ROOT; };
 		1FBD5F1C1CB3B8F0002A3048 /* OrderInfoCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = OrderInfoCell.xib; sourceTree = "<group>"; };
-		1FBD5F1E1CB3C4A2002A3048 /* ProductInfoView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProductInfoView.h; sourceTree = "<group>"; };
-		1FBD5F1F1CB3C4A2002A3048 /* ProductInfoView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ProductInfoView.m; sourceTree = "<group>"; };
-		1FBD5F211CB3C6B7002A3048 /* ProductInfoView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ProductInfoView.xib; sourceTree = "<group>"; };
 		1FBD5F231CB3D5A6002A3048 /* OrderInfoCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OrderInfoCell.h; sourceTree = "<group>"; };
 		1FBD5F241CB3D5A6002A3048 /* OrderInfoCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OrderInfoCell.m; sourceTree = "<group>"; };
 		1FEFD55E1CAD115C005A1C5F /* BackImagView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BackImagView.h; sourceTree = "<group>"; };
@@ -582,8 +574,6 @@
 			children = (
 				1FBD5F101CB3A0CE002A3048 /* OrderListModel.h */,
 				1FBD5F111CB3A0CE002A3048 /* OrderListModel.m */,
-				1FBD5F131CB3A761002A3048 /* ProductInfoModel.h */,
-				1FBD5F141CB3A761002A3048 /* ProductInfoModel.m */,
 			);
 			name = model;
 			path = Fiu/Classes/Main/My/model;
@@ -613,9 +603,6 @@
 				1FBD5F231CB3D5A6002A3048 /* OrderInfoCell.h */,
 				1FBD5F241CB3D5A6002A3048 /* OrderInfoCell.m */,
 				1FBD5F1C1CB3B8F0002A3048 /* OrderInfoCell.xib */,
-				1FBD5F1E1CB3C4A2002A3048 /* ProductInfoView.h */,
-				1FBD5F1F1CB3C4A2002A3048 /* ProductInfoView.m */,
-				1FBD5F211CB3C6B7002A3048 /* ProductInfoView.xib */,
 			);
 			name = view;
 			path = Fiu/Classes/Main/My/view;
@@ -1213,7 +1200,6 @@
 				D812815D1CAA8532007CF08B /* Localizable.strings in Resources */,
 				D812816A1CAA8532007CF08B /* UMSCommentDetailController.xib in Resources */,
 				D812814E1CAA8532007CF08B /* FBMapLocatinViewController.xib in Resources */,
-				1FBD5F221CB3C6B7002A3048 /* ProductInfoView.xib in Resources */,
 				D81281751CAA8532007CF08B /* WeiboSDK.bundle in Resources */,
 				1FBD5F1D1CB3B8F0002A3048 /* OrderInfoCell.xib in Resources */,
 				D812816E1CAA8532007CF08B /* UMShareEditViewControlleriPad.xib in Resources */,
@@ -1279,7 +1265,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				1FBD5F151CB3A761002A3048 /* ProductInfoModel.m in Sources */,
 				D81281581CAA8532007CF08B /* UIColor+Extension.m in Sources */,
 				1FEFD5971CAD12B2005A1C5F /* FeedbackViewController.m in Sources */,
 				1F02B7321CAA99240080CA45 /* SubmitViewController.m in Sources */,
@@ -1351,7 +1336,6 @@
 				D812812F1CAA8532007CF08B /* SearchLocationView.m in Sources */,
 				1FEFD58B1CAD1219005A1C5F /* MyFocusOnViewController.m in Sources */,
 				1FBD5F121CB3A0CE002A3048 /* OrderListModel.m in Sources */,
-				1FBD5F201CB3C4A2002A3048 /* ProductInfoView.m in Sources */,
 				D81281201CAA8532007CF08B /* FBPhoto.m in Sources */,
 				D81281281CAA8532007CF08B /* FBPictureView.m in Sources */,
 				1FBD5F251CB3D5A6002A3048 /* OrderInfoCell.m in Sources */,

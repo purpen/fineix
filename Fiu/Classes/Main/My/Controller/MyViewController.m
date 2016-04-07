@@ -50,12 +50,14 @@
     _homeScrollView.delegate = self;
     //背景图片
     _imgV = [BackImagView getBackImageView];
-    _imgV.frame = CGRectMake(0, 64, SCREEN_WIDTH, 200);
+    _imgV.frame = CGRectMake(0, 64, SCREEN_WIDTH, 200/667*SCREEN_HEIGHT);
     _imgV.userInteractionEnabled = YES;
     [_homeScrollView addSubview:_imgV];
     //放一个view替换导航条，颜色为白色
     NaviView *naviV = [NaviView getNaviView];
+    naviV.frame = CGRectMake(0, 0, SCREEN_WIDTH, 64);
     [self.view addSubview:naviV];
+    
     [naviV.camerlBtn addTarget:self action:@selector(clickImageBtn:) forControlEvents:UIControlEventTouchUpInside];
     [naviV.calendarBtn addTarget:self action:@selector(clickRightBtn:) forControlEvents:UIControlEventTouchUpInside];
     //频道选项
@@ -97,6 +99,9 @@
     [_homeScrollView addSubview:appV];
     //scrollView滑动范围
     _homeScrollView.contentSize = CGSizeMake(0, CGRectGetMaxY(appV.frame)+91);
+    //向上滑动tabbar消失
+    
+    //向下滑动tabbar出现
 }
 
 -(void)scrollViewDidScroll:(UIScrollView *)scrollView{
