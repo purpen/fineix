@@ -18,7 +18,7 @@
 #import "UserInfoEntity.h"
 #import "PictureToolViewController.h"
 
-@interface FBTabBarController ()<UITabBarControllerDelegate>
+@interface FBTabBarController () <UITabBarControllerDelegate>
 
 @end
 
@@ -49,7 +49,7 @@
 
 - (BOOL)tabBarController:(UITabBarController *)tabBarController shouldSelectViewController:(UIViewController *)viewController
 {
-    NSLog(@"--tabbaritem.title--%@",viewController.tabBarItem.title);
+//    NSLog(@"--tabbaritem.title--%@",viewController.tabBarItem.title);
     
     //这里我判断的是当前点击的tabBarItem的标题
     if ([viewController.tabBarItem.title isEqualToString:@"我"]) {
@@ -92,9 +92,6 @@
     UIImage * seletedimg = [UIImage imageNamed:seletedImage];
     seletedimg = [seletedimg imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
     vc.tabBarItem.selectedImage = seletedimg;
-    
-    //  设置tabBarItem图标居中
-//    vc.tabBarItem.imageInsets = UIEdgeInsetsMake(5.0, 0, -5.0, 0);
     
     [self addChildViewController:vc];
     

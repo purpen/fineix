@@ -19,10 +19,12 @@
     [self setDiscoverViewUI];
 }
 
+#pragma mark - 设置视图的UI
 - (void)setDiscoverViewUI {
     [self.view addSubview:self.discoverTableView];
 }
 
+#pragma mark - 顶部轮播图
 - (FBRollImages *)rollView {
     if (!_rollView) {
         _rollView = [[FBRollImages alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, Banner_height)];
@@ -31,16 +33,19 @@
     return _rollView;
 }
 
+#pragma mark - tableView
 - (UITableView *)discoverTableView {
     if (!_discoverTableView) {
         _discoverTableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT) style:(UITableViewStyleGrouped)];
         _discoverTableView.delegate = self;
         _discoverTableView.dataSource = self;
         _discoverTableView.tableHeaderView = self.rollView;
+        _discoverTableView.showsVerticalScrollIndicator = NO;
     }
     return _discoverTableView;
 }
 
+#pragma mark - tableViewDelegate & dataSource
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
     return 3;
 }
@@ -63,7 +68,7 @@
     if (indexPath.section == 0) {
         return 200;
     } else if (indexPath.section == 1) {
-        return 200;
+        return 266.5;
     } else if (indexPath.section == 2) {
         return 200;
     }
@@ -86,6 +91,10 @@
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
     return 44;
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section {
+    return 0.01;
 }
 
 #pragma mark - 设置Nav

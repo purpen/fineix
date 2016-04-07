@@ -63,6 +63,10 @@
 #define Font_TabPrice           9
 //  滤镜名称
 #define Font_filtersTitle       12
+//  用户昵称
+#define Font_UserName           12
+//  用户简介
+#define Font_UserProfile        9
 
 
 #undef  创建属性
