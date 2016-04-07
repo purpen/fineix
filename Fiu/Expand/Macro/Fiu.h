@@ -30,6 +30,7 @@
 #undef 颜色
 #define fineixColor             @"#BE8914"
 #define grayLineColor           @"#F7F7F7"
+#define cellBgColor             @"#F1F1F1"
 #define pictureNavColor         @"#222222"
 #define blackFont               @"#333333"
 #define lineGrayColor           @"#F0F0F1"

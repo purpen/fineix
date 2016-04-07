@@ -153,6 +153,8 @@
 		D89B5A8B1CB4E48800DB9710 /* SceneListTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D89B5A8A1CB4E48800DB9710 /* SceneListTableViewCell.m */; };
 		D89B5A8E1CB6284A00DB9710 /* SceneInfoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D89B5A8D1CB6284A00DB9710 /* SceneInfoViewController.m */; };
 		D89B5A941CB6580600DB9710 /* UserInfoTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D89B5A931CB6580600DB9710 /* UserInfoTableViewCell.m */; };
+		D89B5A971CB66B3B00DB9710 /* DataNumTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D89B5A961CB66B3B00DB9710 /* DataNumTableViewCell.m */; };
+		D89B5A9A1CB676C700DB9710 /* LikePeopleTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D89B5A991CB676C700DB9710 /* LikePeopleTableViewCell.m */; };
 		D8AEC7511CA8E3A000A868B6 /* libsqlite3.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 1F0EE6A41C9FA47B000631F0 /* libsqlite3.tbd */; };
 		D8AEC7521CA8E3AE00A868B6 /* libiconv.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 1F0EE6A21C9FA43C000631F0 /* libiconv.tbd */; };
 		D8AEC7531CA8E3BB00A868B6 /* libstdc++.6.0.9.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 280045201C805CD7005F5C2E /* libstdc++.6.0.9.tbd */; };
@@ -438,6 +440,10 @@
 		D89B5A8D1CB6284A00DB9710 /* SceneInfoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SceneInfoViewController.m; sourceTree = "<group>"; };
 		D89B5A921CB6580600DB9710 /* UserInfoTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserInfoTableViewCell.h; sourceTree = "<group>"; };
 		D89B5A931CB6580600DB9710 /* UserInfoTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserInfoTableViewCell.m; sourceTree = "<group>"; };
+		D89B5A951CB66B3B00DB9710 /* DataNumTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DataNumTableViewCell.h; sourceTree = "<group>"; };
+		D89B5A961CB66B3B00DB9710 /* DataNumTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DataNumTableViewCell.m; sourceTree = "<group>"; };
+		D89B5A981CB676C700DB9710 /* LikePeopleTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LikePeopleTableViewCell.h; sourceTree = "<group>"; };
+		D89B5A991CB676C700DB9710 /* LikePeopleTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LikePeopleTableViewCell.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -1215,6 +1221,10 @@
 				D89B5A8A1CB4E48800DB9710 /* SceneListTableViewCell.m */,
 				D89B5A921CB6580600DB9710 /* UserInfoTableViewCell.h */,
 				D89B5A931CB6580600DB9710 /* UserInfoTableViewCell.m */,
+				D89B5A951CB66B3B00DB9710 /* DataNumTableViewCell.h */,
+				D89B5A961CB66B3B00DB9710 /* DataNumTableViewCell.m */,
+				D89B5A981CB676C700DB9710 /* LikePeopleTableViewCell.h */,
+				D89B5A991CB676C700DB9710 /* LikePeopleTableViewCell.m */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -1383,8 +1393,10 @@
 				D812815A1CAA8532007CF08B /* fineix.xcdatamodeld in Sources */,
 				D81281591CAA8532007CF08B /* UIImageView+SDWedImage.m in Sources */,
 				D81281541CAA8532007CF08B /* FBRequest.m in Sources */,
+				D89B5A971CB66B3B00DB9710 /* DataNumTableViewCell.m in Sources */,
 				1FEFD56E1CAD115C005A1C5F /* ChanelView.m in Sources */,
 				1FEFD56C1CAD115C005A1C5F /* BackImagView.m in Sources */,
+				D89B5A9A1CB676C700DB9710 /* LikePeopleTableViewCell.m in Sources */,
 				D812812D1CAA8532007CF08B /* ScenceAddMoreView.m in Sources */,
 				D812811D1CAA8532007CF08B /* SearchLocationViewController.m in Sources */,
 				1FEFD5901CAD1219005A1C5F /* MySystemSettingsViewController.m in Sources */,

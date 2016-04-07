@@ -58,7 +58,7 @@
     self.likeNum.text = likeNum;
     
     //  标题
-    NSString * titleStr = @" 最好的时光遇到你最好的时光遇到你 ";
+    NSString * titleStr = @" 最好的时光 ";
     [self titleTextStyle:titleStr];
     
     //  所属情景

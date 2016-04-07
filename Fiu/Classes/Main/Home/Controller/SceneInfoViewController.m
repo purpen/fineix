@@ -8,6 +8,7 @@
 
 #import "SceneInfoViewController.h"
 #import "UserInfoTableViewCell.h"
+#import "DataNumTableViewCell.h"
 
 @interface SceneInfoViewController ()
 
@@ -67,8 +68,14 @@
             cell.navItem = self.navigationItem;
             return cell;
         }
+        else if (indexPath.row == 2) {
+            DataNumTableViewCell * cell = [tableView dequeueReusableCellWithIdentifier:@"dataNumCellId"];
+            cell = [[DataNumTableViewCell alloc] initWithStyle:(UITableViewCellStyleDefault) reuseIdentifier:@"dataNumCellId"];
+            [cell setUI];
+            return cell;
+        }
     }
-     
+    
     static NSString * CellId = @"CellId";
     UITableViewCell * cell = [tableView dequeueReusableCellWithIdentifier:CellId];
     if (!cell) {
@@ -82,6 +89,8 @@
     if (indexPath.section == 0) {
         if (indexPath.row == 0) {
             return SCREEN_HEIGHT;
+        } else if (indexPath.row == 2) {
+            return 44;
         }
         return 100;
     }
@@ -97,6 +106,19 @@
 
 - (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section {
     return 0.01;
+}
+
+- (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
+    self.headerView = [[GroupHeaderView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 44)];
+    self.headerView.backgroundColor = [UIColor colorWithHexString:cellBgColor alpha:1];
+    
+    if (section == 1) {
+        [self.headerView addGroupHeaderViewIcon:@"Group_scene" withTitle:@"此场景下的商品" withSubtitle:@""];
+    } else if (section == 2) {
+        [self.headerView addGroupHeaderViewIcon:@"Group_scene" withTitle:@"相近的商品" withSubtitle:@""];
+    }
+    
+    return self.headerView;
 }
 
 #pragma mark - 设置Nav
