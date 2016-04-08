@@ -11,6 +11,11 @@
 
 @interface LikePeopleTableViewCell : UITableViewCell
 
+@pro_strong UIButton        *   morePeopel;     //  查看更多用户
+@pro_assign CGFloat     cellHeight;
 
+- (void)setUI;
+
+- (void)getCellHeight:(NSArray *)people;
 
 @end

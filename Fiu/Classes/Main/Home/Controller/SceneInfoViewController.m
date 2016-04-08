@@ -9,6 +9,8 @@
 #import "SceneInfoViewController.h"
 #import "UserInfoTableViewCell.h"
 #import "DataNumTableViewCell.h"
+#import "ContentAndTagTableViewCell.h"
+#import "LikePeopleTableViewCell.h"
 
 @interface SceneInfoViewController ()
 
@@ -39,7 +41,7 @@
         _sceneTableView.delegate = self;
         _sceneTableView.dataSource = self;
         _sceneTableView.showsVerticalScrollIndicator = NO;
-//        _sceneTableView.separatorStyle = UITableViewCellSeparatorStyleNone;
+        _sceneTableView.separatorStyle = UITableViewCellSeparatorStyleNone;
         _sceneTableView.backgroundColor = [UIColor whiteColor];
     }
     return _sceneTableView;
@@ -61,16 +63,29 @@
         if (indexPath.row == 0) {
             static NSString * userInfoCellId = @"userInfoCellId";
             UserInfoTableViewCell * cell = [tableView dequeueReusableCellWithIdentifier:userInfoCellId];
-            if (!cell) {
-                cell = [[UserInfoTableViewCell alloc] initWithStyle:(UITableViewCellStyleDefault) reuseIdentifier:userInfoCellId];
-            }
+            cell = [[UserInfoTableViewCell alloc] initWithStyle:(UITableViewCellStyleDefault) reuseIdentifier:userInfoCellId];
             [cell setUI];
             cell.navItem = self.navigationItem;
             return cell;
-        }
-        else if (indexPath.row == 2) {
-            DataNumTableViewCell * cell = [tableView dequeueReusableCellWithIdentifier:@"dataNumCellId"];
-            cell = [[DataNumTableViewCell alloc] initWithStyle:(UITableViewCellStyleDefault) reuseIdentifier:@"dataNumCellId"];
+            
+        } else if (indexPath.row == 1) {
+            static NSString * contentCellId = @"contentCellId";
+            ContentAndTagTableViewCell * cell = [tableView dequeueReusableCellWithIdentifier:contentCellId];
+            cell = [[ContentAndTagTableViewCell alloc] initWithStyle:(UITableViewCellStyleDefault) reuseIdentifier:contentCellId];
+            [cell setUI];
+            return cell;
+        
+        } else if (indexPath.row == 2) {
+            static NSString * dataNumCellId = @"dataNumCellId";
+            DataNumTableViewCell * cell = [tableView dequeueReusableCellWithIdentifier:dataNumCellId];
+            cell = [[DataNumTableViewCell alloc] initWithStyle:(UITableViewCellStyleDefault) reuseIdentifier:dataNumCellId];
+            [cell setUI];
+            return cell;
+            
+        } else if (indexPath.row == 3) {
+            static NSString * likePeopleCellId = @"likePeopleCellId";
+            LikePeopleTableViewCell * cell = [tableView dequeueReusableCellWithIdentifier:likePeopleCellId];
+            cell = [[LikePeopleTableViewCell alloc] initWithStyle:(UITableViewCellStyleDefault) reuseIdentifier:likePeopleCellId];
             [cell setUI];
             return cell;
         }
@@ -89,8 +104,22 @@
     if (indexPath.section == 0) {
         if (indexPath.row == 0) {
             return SCREEN_HEIGHT;
+            
+        } else if (indexPath.row == 1) {
+            NSString * str = @"家是我们人生的驿站，是我们生活的乐园，也是我们避风的港湾。它更是一条逼你拼命挣钱的鞭子，让你为它拉车犁地。家又是一个充满亲情的地方，就会有一种亲情感回荡心头。在风雨人生中，渐渐地形成了一种强烈的感觉：我爱家，更离不开家。";
+            ContentAndTagTableViewCell * cell = [[ContentAndTagTableViewCell alloc] init];
+            [cell setContent:str];
+            return cell.cellHeight;
+            
         } else if (indexPath.row == 2) {
             return 44;
+            
+        } else if (indexPath.row == 3) {
+            NSArray * arr = [NSArray arrayWithObjects:@"1",@"1",@"1",@"1",@"1",@"1",@"1", nil];
+            LikePeopleTableViewCell * cell = [[LikePeopleTableViewCell alloc] init];
+            [cell getCellHeight:arr];
+            return cell.cellHeight;
+            
         }
         return 100;
     }

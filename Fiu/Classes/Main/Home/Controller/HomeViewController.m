@@ -16,8 +16,6 @@
 
 @implementation HomeViewController
 
-
-
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.view.backgroundColor = [UIColor whiteColor];
@@ -26,7 +24,6 @@
     [self setNavigationViewUI];
     
     [self.view addSubview:self.homeTableView];
-    
 }
 
 #pragma mark - 加载首页表格
