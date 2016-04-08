@@ -21,6 +21,8 @@
 		1F02B74C1CAAA0B00080CA45 /* LoginRegisterController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1F02B74B1CAAA0B00080CA45 /* LoginRegisterController.storyboard */; };
 		1F0EE6A71C9FA4E7000631F0 /* libstdc++.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 1F0EE6A61C9FA4E7000631F0 /* libstdc++.tbd */; };
 		1F0EE6A91C9FA4F6000631F0 /* libz.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 1F0EE6A81C9FA4F6000631F0 /* libz.tbd */; };
+		1F5801101CB795E70021EA19 /* SignupView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F58010F1CB795E70021EA19 /* SignupView.m */; };
+		1F5801121CB796450021EA19 /* Signup.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1F5801111CB796450021EA19 /* Signup.xib */; };
 		1F59E5FC1C9ABBA500E96C60 /* Accelerate.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1F59E5FB1C9ABBA500E96C60 /* Accelerate.framework */; };
 		1F986A9E1CB610A40074ABFE /* GuidePageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F986A9C1CB610A40074ABFE /* GuidePageViewController.m */; };
 		1F986AA31CB656920074ABFE /* PhoneNumLoginView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F986AA21CB656920074ABFE /* PhoneNumLoginView.m */; };
@@ -194,6 +196,9 @@
 		1F0EE6A41C9FA47B000631F0 /* libsqlite3.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libsqlite3.tbd; path = usr/lib/libsqlite3.tbd; sourceTree = SDKROOT; };
 		1F0EE6A61C9FA4E7000631F0 /* libstdc++.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = "libstdc++.tbd"; path = "usr/lib/libstdc++.tbd"; sourceTree = SDKROOT; };
 		1F0EE6A81C9FA4F6000631F0 /* libz.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libz.tbd; path = usr/lib/libz.tbd; sourceTree = SDKROOT; };
+		1F58010E1CB795E70021EA19 /* SignupView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SignupView.h; sourceTree = "<group>"; };
+		1F58010F1CB795E70021EA19 /* SignupView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SignupView.m; sourceTree = "<group>"; };
+		1F5801111CB796450021EA19 /* Signup.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = Signup.xib; sourceTree = "<group>"; };
 		1F59E5FB1C9ABBA500E96C60 /* Accelerate.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Accelerate.framework; path = System/Library/Frameworks/Accelerate.framework; sourceTree = SDKROOT; };
 		1F986A9B1CB610A40074ABFE /* GuidePageViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GuidePageViewController.h; sourceTree = "<group>"; };
 		1F986A9C1CB610A40074ABFE /* GuidePageViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GuidePageViewController.m; sourceTree = "<group>"; };
@@ -641,6 +646,9 @@
 				1F986AA71CB676DE0074ABFE /* SubmitView.h */,
 				1F986AA81CB676DE0074ABFE /* SubmitView.m */,
 				1F986AAA1CB676FC0074ABFE /* Login.xib */,
+				1F58010E1CB795E70021EA19 /* SignupView.h */,
+				1F58010F1CB795E70021EA19 /* SignupView.m */,
+				1F5801111CB796450021EA19 /* Signup.xib */,
 			);
 			name = view;
 			path = Fiu/Classes/Main/LoginRegister/view;
@@ -1330,6 +1338,7 @@
 				D812815D1CAA8532007CF08B /* Localizable.strings in Resources */,
 				D812816A1CAA8532007CF08B /* UMSCommentDetailController.xib in Resources */,
 				D812814E1CAA8532007CF08B /* FBMapLocatinViewController.xib in Resources */,
+				1F5801121CB796450021EA19 /* Signup.xib in Resources */,
 				D81281751CAA8532007CF08B /* WeiboSDK.bundle in Resources */,
 				1FBD5F1D1CB3B8F0002A3048 /* OrderInfoCell.xib in Resources */,
 				D812816E1CAA8532007CF08B /* UMShareEditViewControlleriPad.xib in Resources */,
@@ -1473,6 +1482,7 @@
 				D81281191CAA8532007CF08B /* FiltersViewController.m in Sources */,
 				D812812F1CAA8532007CF08B /* SearchLocationView.m in Sources */,
 				1FEFD58B1CAD1219005A1C5F /* MyFocusOnViewController.m in Sources */,
+				1F5801101CB795E70021EA19 /* SignupView.m in Sources */,
 				1FBD5F121CB3A0CE002A3048 /* OrderListModel.m in Sources */,
 				D81281201CAA8532007CF08B /* FBPhoto.m in Sources */,
 				D81281281CAA8532007CF08B /* FBPictureView.m in Sources */,
