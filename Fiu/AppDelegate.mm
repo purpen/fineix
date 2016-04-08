@@ -51,12 +51,12 @@ NSString *const determineLogin = @"/auth/check_login";
     //使用的时候用key+版本号替换UserHasGuideView
     //这样容易控制每个版本都可以显示引导图
     BOOL userIsFirstInstalled = [[NSUserDefaults standardUserDefaults] boolForKey:@"UserHasGuideView"];
-    if (!userIsFirstInstalled) {
+    if (userIsFirstInstalled) {
         FBTabBarController * tabBarC = [[FBTabBarController alloc] init];
         self.window.rootViewController = tabBarC;
     }else{
         self.window.rootViewController = [[GuidePageViewController alloc] initWithPicArr:arr andRootVC:[[FBTabBarController alloc] init]];
-        [[NSUserDefaults standardUserDefaults] setBool:NO forKey:@"UserHasGuideView"];
+        [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"UserHasGuideView"];
     }
     
     
