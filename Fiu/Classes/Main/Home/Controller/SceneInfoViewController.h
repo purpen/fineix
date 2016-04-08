@@ -8,6 +8,7 @@
 
 #import "FBViewController.h"
 #import "GroupHeaderView.h"
+#import "UITableView+FDTemplateLayoutCell.h"
 
 @interface SceneInfoViewController : FBViewController <FBNavigationBarItemsDelegate, UITableViewDelegate, UITableViewDataSource>
 

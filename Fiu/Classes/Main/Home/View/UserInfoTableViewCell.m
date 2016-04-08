@@ -172,21 +172,6 @@
             make.bottom.equalTo(_userLeftView.mas_bottom).with.offset(0);
             make.left.equalTo(_userLeftView.mas_right).with.offset(0);
         }];
-        
-        //        [_userView addSubview:self.lookNum];
-        //        [_lookNum mas_makeConstraints:^(MASConstraintMaker *make) {
-        //            make.size.mas_equalTo(CGSizeMake(60, 15));
-        //            make.top.equalTo(_userHeader.mas_bottom).with.offset(5);
-        //            make.left.equalTo(_userView.mas_left).with.offset(20);
-        //        }];
-        //
-        //        [_userView addSubview:self.likeNum];
-        //        [_likeNum mas_makeConstraints:^(MASConstraintMaker *make) {
-        //            make.size.mas_equalTo(CGSizeMake(60, 15));
-        //            make.top.equalTo(_lookNum.mas_top).with.offset(0);
-        //            make.left.equalTo(_lookNum.mas_right).with.offset(40);
-        //        }];
-        
     }
     return _userView;
 }
@@ -201,7 +186,7 @@
         [_userHeader mas_makeConstraints:^(MASConstraintMaker *make) {
             make.size.mas_equalTo(CGSizeMake(30, 30));
             make.centerY.equalTo(_userLeftView);
-            make.left.equalTo(_userLeftView.mas_left).with.offset(20);
+            make.left.equalTo(_userLeftView.mas_left).with.offset(15);
         }];
         
         [_userLeftView addSubview:self.userName];

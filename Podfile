@@ -1,7 +1,7 @@
 platform :ios, '7.0'
 inhibit_all_warnings!
 
-target "fineix" do
+target "Fiu" do
  pod "AFNetworking", "~> 2.0"
  pod 'SDWebImage', '~> 3.7.1'
  pod 'FMDB', '~> 2.4'
@@ -14,4 +14,5 @@ target "fineix" do
  pod 'IQKeyboardManager'
  pod 'HMSegmentedControl'
  pod 'HTHorizontalSelectionList'
+ pod 'UITableView+FDTemplateLayoutCell', '~> 1.5.beta'
 end

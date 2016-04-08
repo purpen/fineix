@@ -15,6 +15,7 @@
 @pro_strong UIButton            *   likeBtn;        //  喜欢
 @pro_strong UIButton            *   commentBtn;     //  评论
 @pro_strong UIButton            *   moreBtn;        //  更多
+@pro_strong UILabel             *   line;           //  分割线
 
 - (void)setUI;
 

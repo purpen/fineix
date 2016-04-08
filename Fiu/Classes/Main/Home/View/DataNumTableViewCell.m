@@ -76,6 +76,8 @@
         make.centerY.equalTo(self);
         make.right.equalTo(self.mas_right).with.offset(-10);
     }];
+    
+    [self addSubview:self.line];
 }
 
 #pragma mark - 观看
@@ -122,6 +124,15 @@
         
     }
     return _moreBtn;
+}
+
+#pragma mark - 分割线
+- (UILabel *)line {
+    if (!_line) {
+        _line = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 1)];
+        _line.backgroundColor = [UIColor colorWithHexString:cellBgColor alpha:1];
+    }
+    return _line;
 }
 
 @end
