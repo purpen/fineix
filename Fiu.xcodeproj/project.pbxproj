@@ -12,7 +12,6 @@
 		1F02B72D1CAA99240080CA45 /* FBLoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F02B7201CAA99240080CA45 /* FBLoginViewController.m */; };
 		1F02B72E1CAA99240080CA45 /* FBSignupViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F02B7221CAA99240080CA45 /* FBSignupViewController.m */; };
 		1F02B72F1CAA99240080CA45 /* ForgotPasswordViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F02B7241CAA99240080CA45 /* ForgotPasswordViewController.m */; };
-		1F02B7301CAA99240080CA45 /* PhoneToLogInViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F02B7261CAA99240080CA45 /* PhoneToLogInViewController.m */; };
 		1F02B7311CAA99240080CA45 /* PhoneToSignUpViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F02B7281CAA99240080CA45 /* PhoneToSignUpViewController.m */; };
 		1F02B7321CAA99240080CA45 /* SubmitViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F02B72A1CAA99240080CA45 /* SubmitViewController.m */; };
 		1F02B73D1CAA99540080CA45 /* NSNumber+UserModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F02B7361CAA99540080CA45 /* NSNumber+UserModel.m */; };
@@ -22,8 +21,14 @@
 		1F02B74C1CAAA0B00080CA45 /* LoginRegisterController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1F02B74B1CAAA0B00080CA45 /* LoginRegisterController.storyboard */; };
 		1F0EE6A71C9FA4E7000631F0 /* libstdc++.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 1F0EE6A61C9FA4E7000631F0 /* libstdc++.tbd */; };
 		1F0EE6A91C9FA4F6000631F0 /* libz.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 1F0EE6A81C9FA4F6000631F0 /* libz.tbd */; };
+		1F5801101CB795E70021EA19 /* SignupView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F58010F1CB795E70021EA19 /* SignupView.m */; };
+		1F5801121CB796450021EA19 /* Signup.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1F5801111CB796450021EA19 /* Signup.xib */; };
 		1F59E5FC1C9ABBA500E96C60 /* Accelerate.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1F59E5FB1C9ABBA500E96C60 /* Accelerate.framework */; };
 		1F986A9E1CB610A40074ABFE /* GuidePageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F986A9C1CB610A40074ABFE /* GuidePageViewController.m */; };
+		1F986AA31CB656920074ABFE /* PhoneNumLoginView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F986AA21CB656920074ABFE /* PhoneNumLoginView.m */; };
+		1F986AA61CB674510074ABFE /* PhoneToLogInViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F986AA51CB674510074ABFE /* PhoneToLogInViewController.m */; };
+		1F986AA91CB676DE0074ABFE /* SubmitView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F986AA81CB676DE0074ABFE /* SubmitView.m */; };
+		1F986AAB1CB676FC0074ABFE /* Login.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1F986AAA1CB676FC0074ABFE /* Login.xib */; };
 		1FBD5F121CB3A0CE002A3048 /* OrderListModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 1FBD5F111CB3A0CE002A3048 /* OrderListModel.m */; };
 		1FBD5F181CB3B244002A3048 /* MyOrderViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1FBD5F171CB3B244002A3048 /* MyOrderViewController.m */; };
 		1FBD5F1D1CB3B8F0002A3048 /* OrderInfoCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1FBD5F1C1CB3B8F0002A3048 /* OrderInfoCell.xib */; };
@@ -179,8 +184,6 @@
 		1F02B7221CAA99240080CA45 /* FBSignupViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FBSignupViewController.m; path = Fiu/Classes/Main/LoginRegister/controller/FBSignupViewController.m; sourceTree = SOURCE_ROOT; };
 		1F02B7231CAA99240080CA45 /* ForgotPasswordViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ForgotPasswordViewController.h; path = Fiu/Classes/Main/LoginRegister/controller/ForgotPasswordViewController.h; sourceTree = SOURCE_ROOT; };
 		1F02B7241CAA99240080CA45 /* ForgotPasswordViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ForgotPasswordViewController.m; path = Fiu/Classes/Main/LoginRegister/controller/ForgotPasswordViewController.m; sourceTree = SOURCE_ROOT; };
-		1F02B7251CAA99240080CA45 /* PhoneToLogInViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PhoneToLogInViewController.h; path = Fiu/Classes/Main/LoginRegister/controller/PhoneToLogInViewController.h; sourceTree = SOURCE_ROOT; };
-		1F02B7261CAA99240080CA45 /* PhoneToLogInViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PhoneToLogInViewController.m; path = Fiu/Classes/Main/LoginRegister/controller/PhoneToLogInViewController.m; sourceTree = SOURCE_ROOT; };
 		1F02B7271CAA99240080CA45 /* PhoneToSignUpViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PhoneToSignUpViewController.h; path = Fiu/Classes/Main/LoginRegister/controller/PhoneToSignUpViewController.h; sourceTree = SOURCE_ROOT; };
 		1F02B7281CAA99240080CA45 /* PhoneToSignUpViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PhoneToSignUpViewController.m; path = Fiu/Classes/Main/LoginRegister/controller/PhoneToSignUpViewController.m; sourceTree = SOURCE_ROOT; };
 		1F02B7291CAA99240080CA45 /* SubmitViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SubmitViewController.h; path = Fiu/Classes/Main/LoginRegister/controller/SubmitViewController.h; sourceTree = SOURCE_ROOT; };
@@ -198,9 +201,19 @@
 		1F0EE6A41C9FA47B000631F0 /* libsqlite3.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libsqlite3.tbd; path = usr/lib/libsqlite3.tbd; sourceTree = SDKROOT; };
 		1F0EE6A61C9FA4E7000631F0 /* libstdc++.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = "libstdc++.tbd"; path = "usr/lib/libstdc++.tbd"; sourceTree = SDKROOT; };
 		1F0EE6A81C9FA4F6000631F0 /* libz.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libz.tbd; path = usr/lib/libz.tbd; sourceTree = SDKROOT; };
+		1F58010E1CB795E70021EA19 /* SignupView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SignupView.h; sourceTree = "<group>"; };
+		1F58010F1CB795E70021EA19 /* SignupView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SignupView.m; sourceTree = "<group>"; };
+		1F5801111CB796450021EA19 /* Signup.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = Signup.xib; sourceTree = "<group>"; };
 		1F59E5FB1C9ABBA500E96C60 /* Accelerate.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Accelerate.framework; path = System/Library/Frameworks/Accelerate.framework; sourceTree = SDKROOT; };
 		1F986A9B1CB610A40074ABFE /* GuidePageViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GuidePageViewController.h; sourceTree = "<group>"; };
 		1F986A9C1CB610A40074ABFE /* GuidePageViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GuidePageViewController.m; sourceTree = "<group>"; };
+		1F986AA11CB656920074ABFE /* PhoneNumLoginView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PhoneNumLoginView.h; sourceTree = "<group>"; };
+		1F986AA21CB656920074ABFE /* PhoneNumLoginView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PhoneNumLoginView.m; sourceTree = "<group>"; };
+		1F986AA41CB674510074ABFE /* PhoneToLogInViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PhoneToLogInViewController.h; path = Fiu/Classes/Main/LoginRegister/controller/PhoneToLogInViewController.h; sourceTree = SOURCE_ROOT; };
+		1F986AA51CB674510074ABFE /* PhoneToLogInViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PhoneToLogInViewController.m; path = Fiu/Classes/Main/LoginRegister/controller/PhoneToLogInViewController.m; sourceTree = SOURCE_ROOT; };
+		1F986AA71CB676DE0074ABFE /* SubmitView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SubmitView.h; sourceTree = "<group>"; };
+		1F986AA81CB676DE0074ABFE /* SubmitView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SubmitView.m; sourceTree = "<group>"; };
+		1F986AAA1CB676FC0074ABFE /* Login.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = Login.xib; sourceTree = "<group>"; };
 		1FAB860F67E625188BAE00A8 /* Pods-fineix.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-fineix.release.xcconfig"; path = "Pods/Target Support Files/Pods-fineix/Pods-fineix.release.xcconfig"; sourceTree = "<group>"; };
 		1FBD5F101CB3A0CE002A3048 /* OrderListModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OrderListModel.h; sourceTree = "<group>"; };
 		1FBD5F111CB3A0CE002A3048 /* OrderListModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OrderListModel.m; sourceTree = "<group>"; };
@@ -509,6 +522,7 @@
 		1F02B6811CAA93F30080CA45 /* LoginRegister */ = {
 			isa = PBXGroup;
 			children = (
+				1F986AA01CB656640074ABFE /* view */,
 				1F02B74B1CAAA0B00080CA45 /* LoginRegisterController.storyboard */,
 				1F02B6821CAA93F30080CA45 /* controller */,
 				1F02B68E1CAA93F30080CA45 /* model */,
@@ -520,6 +534,8 @@
 		1F02B6821CAA93F30080CA45 /* controller */ = {
 			isa = PBXGroup;
 			children = (
+				1F986AA41CB674510074ABFE /* PhoneToLogInViewController.h */,
+				1F986AA51CB674510074ABFE /* PhoneToLogInViewController.m */,
 				1F02B71B1CAA99240080CA45 /* FBBindingMobilePhoneNumber.h */,
 				1F02B71C1CAA99240080CA45 /* FBBindingMobilePhoneNumber.m */,
 				1F02B71D1CAA99240080CA45 /* FBLoginRegisterViewController.h */,
@@ -530,8 +546,6 @@
 				1F02B7221CAA99240080CA45 /* FBSignupViewController.m */,
 				1F02B7231CAA99240080CA45 /* ForgotPasswordViewController.h */,
 				1F02B7241CAA99240080CA45 /* ForgotPasswordViewController.m */,
-				1F02B7251CAA99240080CA45 /* PhoneToLogInViewController.h */,
-				1F02B7261CAA99240080CA45 /* PhoneToLogInViewController.m */,
 				1F02B7271CAA99240080CA45 /* PhoneToSignUpViewController.h */,
 				1F02B7281CAA99240080CA45 /* PhoneToSignUpViewController.m */,
 				1F02B7291CAA99240080CA45 /* SubmitViewController.h */,
@@ -637,6 +651,22 @@
 			);
 			path = view;
 			sourceTree = "<group>";
+		};
+		1F986AA01CB656640074ABFE /* view */ = {
+			isa = PBXGroup;
+			children = (
+				1F986AA11CB656920074ABFE /* PhoneNumLoginView.h */,
+				1F986AA21CB656920074ABFE /* PhoneNumLoginView.m */,
+				1F986AA71CB676DE0074ABFE /* SubmitView.h */,
+				1F986AA81CB676DE0074ABFE /* SubmitView.m */,
+				1F986AAA1CB676FC0074ABFE /* Login.xib */,
+				1F58010E1CB795E70021EA19 /* SignupView.h */,
+				1F58010F1CB795E70021EA19 /* SignupView.m */,
+				1F5801111CB796450021EA19 /* Signup.xib */,
+			);
+			name = view;
+			path = Fiu/Classes/Main/LoginRegister/view;
+			sourceTree = SOURCE_ROOT;
 		};
 		1FBD5F0F1CB3A09D002A3048 /* model */ = {
 			isa = PBXGroup;
@@ -1331,6 +1361,7 @@
 				D812815D1CAA8532007CF08B /* Localizable.strings in Resources */,
 				D812816A1CAA8532007CF08B /* UMSCommentDetailController.xib in Resources */,
 				D812814E1CAA8532007CF08B /* FBMapLocatinViewController.xib in Resources */,
+				1F5801121CB796450021EA19 /* Signup.xib in Resources */,
 				D81281751CAA8532007CF08B /* WeiboSDK.bundle in Resources */,
 				1FBD5F1D1CB3B8F0002A3048 /* OrderInfoCell.xib in Resources */,
 				D812816E1CAA8532007CF08B /* UMShareEditViewControlleriPad.xib in Resources */,
@@ -1338,6 +1369,7 @@
 				D812816F1CAA8532007CF08B /* UMSLoginViewController.xib in Resources */,
 				D81281111CAA8532007CF08B /* Assets.xcassets in Resources */,
 				D812815C1CAA8532007CF08B /* InfoPlist.strings in Resources */,
+				1F986AAB1CB676FC0074ABFE /* Login.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1437,10 +1469,12 @@
 				D81281141CAA8532007CF08B /* AddTagViewController.m in Sources */,
 				1F02B73F1CAA99540080CA45 /* UserInfo.m in Sources */,
 				1FEFD56F1CAD115C005A1C5F /* ChanelViewTwo.m in Sources */,
+				1F986AA31CB656920074ABFE /* PhoneNumLoginView.m in Sources */,
 				1FEFD58A1CAD1219005A1C5F /* MyFansViewController.m in Sources */,
 				D80D41551CAD1410005D72B1 /* FBSearchView.m in Sources */,
 				D89B5A8E1CB6284A00DB9710 /* SceneInfoViewController.m in Sources */,
 				D812812A1CAA8532007CF08B /* PhotoAlbumsTableViewCell.m in Sources */,
+				1F986AA91CB676DE0074ABFE /* SubmitView.m in Sources */,
 				D81281241CAA8532007CF08B /* CropImageView.m in Sources */,
 				1FBD5F181CB3B244002A3048 /* MyOrderViewController.m in Sources */,
 				1F02B72D1CAA99240080CA45 /* FBLoginViewController.m in Sources */,
@@ -1452,7 +1486,6 @@
 				D81281161CAA8532007CF08B /* ClipImageViewController.m in Sources */,
 				1F02B7311CAA99240080CA45 /* PhoneToSignUpViewController.m in Sources */,
 				1FEFD58E1CAD1219005A1C5F /* MyOrdersViewController.m in Sources */,
-				1F02B7301CAA99240080CA45 /* PhoneToLogInViewController.m in Sources */,
 				D81281671CAA8532007CF08B /* JKDBModel.m in Sources */,
 				D81281291CAA8532007CF08B /* FiltersView.m in Sources */,
 				D89B5A941CB6580600DB9710 /* UserInfoTableViewCell.m in Sources */,
@@ -1465,6 +1498,7 @@
 				1F02B72E1CAA99240080CA45 /* FBSignupViewController.m in Sources */,
 				1F02B72B1CAA99240080CA45 /* FBBindingMobilePhoneNumber.m in Sources */,
 				D812811B1CAA8532007CF08B /* PictureToolViewController.m in Sources */,
+				1F986AA61CB674510074ABFE /* PhoneToLogInViewController.m in Sources */,
 				D812813C1CAA8532007CF08B /* MallViewController.m in Sources */,
 				1FEFD5911CAD1219005A1C5F /* MyViewController.m in Sources */,
 				1F02B73D1CAA99540080CA45 /* NSNumber+UserModel.m in Sources */,
@@ -1472,6 +1506,7 @@
 				D81281191CAA8532007CF08B /* FiltersViewController.m in Sources */,
 				D812812F1CAA8532007CF08B /* SearchLocationView.m in Sources */,
 				1FEFD58B1CAD1219005A1C5F /* MyFocusOnViewController.m in Sources */,
+				1F5801101CB795E70021EA19 /* SignupView.m in Sources */,
 				1FBD5F121CB3A0CE002A3048 /* OrderListModel.m in Sources */,
 				D81281201CAA8532007CF08B /* FBPhoto.m in Sources */,
 				D81281281CAA8532007CF08B /* FBPictureView.m in Sources */,

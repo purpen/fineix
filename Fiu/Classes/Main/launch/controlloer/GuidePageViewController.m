@@ -8,8 +8,8 @@
 
 #import "GuidePageViewController.h"
 #import "Fiu.h"
-#import "HomeViewController.h"
-#import "FBTabBarController.h"
+#import "UserInfoEntity.h"
+#import "FBLoginRegisterViewController.h"
 
 @interface GuidePageViewController ()<UIScrollViewDelegate>
 {
@@ -98,7 +98,22 @@
 //    UIStoryboard *loginsStory = [UIStoryboard storyboardWithName:@"LoginRegisterController" bundle:nil];
 //    FBLoginRegisterViewController *loginregisterVC = [loginsStory instantiateViewControllerWithIdentifier:@"FBLoginRegisterViewController"];
 //    [self presentViewController:loginregisterVC animated:YES completion:nil];
-    //跳到首页页面，如果没有登录过弹出登录注册界面
+    //如果没有登录过弹出登录注册界面
+    UserInfoEntity *entity = [UserInfoEntity defaultUserInfoEntity];
+    if (entity.isLogin == NO) {
+        UIStoryboard *loginStory = [UIStoryboard storyboardWithName:@"LoginRegisterController" bundle:nil];
+        FBLoginRegisterViewController *loginVC = [loginStory instantiateViewControllerWithIdentifier:@"FBLoginRegisterViewController"];
+        [self presentViewController:loginVC animated:YES completion:nil];
+        [loginVC.cancelBtn addTarget:self action:@selector(cancelBtn:) forControlEvents:UIControlEventTouchUpInside];
+    }//跳到首页页面，如果没有登录过弹出登录注册界面
+    else{
+        [self presentViewController:_mainController animated:YES completion:nil];
+    }
+    
+}
+
+//点击取消按钮
+-(void)cancelBtn:(UIButton*)sender{
     [self presentViewController:_mainController animated:YES completion:nil];
 }
 

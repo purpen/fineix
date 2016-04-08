@@ -11,6 +11,7 @@
 @interface FBLoginRegisterViewController ()
 
 
+
 @end
 
 @implementation FBLoginRegisterViewController
@@ -20,6 +21,8 @@
     // Do any additional setup after loading the view.
     self.navigationController.navigationBarHidden = YES;
     self.tabBarController.tabBar.hidden = YES;
+    self.signupBtn.layer.masksToBounds = YES;
+    self.signupBtn.layer.cornerRadius = 3;
 }
 
 - (void)didReceiveMemoryWarning {
