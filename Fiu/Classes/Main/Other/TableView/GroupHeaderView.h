@@ -12,8 +12,8 @@
 @interface GroupHeaderView : UIView
 
 @pro_strong UIImageView             *   icon;             //    分组图标
-@pro_strong UILabel                 *   Headertitle;      //    头部标题
-@pro_strong UILabel                 *   Subtitle;         //    副标题
+@pro_strong UILabel                 *   headerTitle;      //    头部标题
+@pro_strong UILabel                 *   subTitle;         //    副标题
 
 - (void)addGroupHeaderViewIcon:(NSString *)image withTitle:(NSString *)title withSubtitle:(NSString *)subTitle;
 

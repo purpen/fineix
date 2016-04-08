@@ -25,8 +25,14 @@
 
 - (void)addGroupHeaderViewIcon:(NSString *)image withTitle:(NSString *)title withSubtitle:(NSString *)subTitle {
     self.icon.image = [UIImage imageNamed:image];
-    self.Headertitle.text = title;
-    self.Subtitle.text = subTitle;
+    
+    CGFloat titleLength = [title boundingRectWithSize:CGSizeMake(320, 1000) options:(NSStringDrawingUsesLineFragmentOrigin) attributes:nil context:nil].size.width;
+    [_headerTitle mas_updateConstraints:^(MASConstraintMaker *make) {
+        make.size.mas_equalTo(CGSizeMake(titleLength + 15, 15));
+    }];
+    self.headerTitle.text = title;
+    
+    self.subTitle.text = subTitle;
 }
 
 - (void)setUI {
@@ -37,17 +43,17 @@
         make.left.equalTo(self.mas_left).with.offset(15);
     }];
     
-    [self addSubview:self.Headertitle];
-    [_Headertitle mas_makeConstraints:^(MASConstraintMaker *make) {
+    [self addSubview:self.headerTitle];
+    [_headerTitle mas_makeConstraints:^(MASConstraintMaker *make) {
         make.size.mas_equalTo(CGSizeMake(65, 15));
         make.centerY.equalTo(self);
         make.left.equalTo(self.icon.mas_right).with.offset(10);
     }];
     
-    [self addSubview:self.Subtitle];
-    [_Subtitle mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.bottom.equalTo(self.Headertitle.mas_bottom).with.offset(0);
-        make.left.equalTo(self.Headertitle.mas_right).with.offset(0);
+    [self addSubview:self.subTitle];
+    [_subTitle mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.bottom.equalTo(self.headerTitle.mas_bottom).with.offset(0);
+        make.left.equalTo(self.headerTitle.mas_right).with.offset(0);
         make.right.equalTo(self.mas_right).with.offset(-15);
     }];
 }
@@ -60,22 +66,22 @@
     return _icon;
 }
 
-- (UILabel *)Headertitle {
-    if (!_Headertitle) {
-        _Headertitle = [[UILabel alloc] init];
-        _Headertitle.textColor = [UIColor colorWithHexString:titleColor alpha:1];
-        _Headertitle.font = [UIFont systemFontOfSize:14];
+- (UILabel *)headerTitle {
+    if (!_headerTitle) {
+        _headerTitle = [[UILabel alloc] init];
+        _headerTitle.textColor = [UIColor colorWithHexString:titleColor alpha:1];
+        _headerTitle.font = [UIFont systemFontOfSize:14];
     }
-    return _Headertitle;
+    return _headerTitle;
 }
 
-- (UILabel *)Subtitle {
-    if (!_Subtitle) {
-        _Subtitle = [[UILabel alloc] init];
-        _Subtitle.textColor = [UIColor colorWithHexString:tabBarTitle alpha:1];
-        _Subtitle.font = [UIFont systemFontOfSize:11];
+- (UILabel *)subTitle {
+    if (!_subTitle) {
+        _subTitle = [[UILabel alloc] init];
+        _subTitle.textColor = [UIColor colorWithHexString:tabBarTitle alpha:1];
+        _subTitle.font = [UIFont systemFontOfSize:11];
     }
-    return _Subtitle;
+    return _subTitle;
 }
 
 @end

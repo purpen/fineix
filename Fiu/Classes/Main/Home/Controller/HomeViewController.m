@@ -8,6 +8,7 @@
 
 #import "HomeViewController.h"
 #import "SceneListTableViewCell.h"
+#import "SceneInfoViewController.h"
 
 @interface HomeViewController ()
 
@@ -57,6 +58,12 @@
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
     return SCREEN_HEIGHT;
+}
+
+#pragma mark - 跳转到场景的详情
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    SceneInfoViewController * sceneInfoVC = [[SceneInfoViewController alloc] init];
+    [self.navigationController pushViewController:sceneInfoVC animated:YES];
 }
 
 #pragma mark - 判断上／下滑状态，显示/隐藏Nav/tabBar

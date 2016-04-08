@@ -38,7 +38,7 @@
 
 //  点击右边按钮事件
 - (void)rightAction {
-    if ([self.delegate respondsToSelector:@selector(rightBarButtonItem)]) {
+    if ([self.delegate respondsToSelector:@selector(rightBarItemSelected)]) {
         [self.delegate rightBarItemSelected];
     }
 }
