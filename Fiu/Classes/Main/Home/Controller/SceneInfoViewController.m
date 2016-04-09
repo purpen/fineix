@@ -115,7 +115,7 @@
             return 44;
             
         } else if (indexPath.row == 3) {
-            NSArray * arr = [NSArray arrayWithObjects:@"1",@"1",@"1",@"1",@"1",@"1",@"1", nil];
+            NSArray * arr = [NSArray arrayWithObjects:@"1",@"1",@"1",@"1",@"1",@"1",@"1",@"1",@"1",@"1",@"1",@"1",@"1",@"1",@"1",@"1",@"1",@"1",@"1",@"1",@"1", nil];
             LikePeopleTableViewCell * cell = [[LikePeopleTableViewCell alloc] init];
             [cell getCellHeight:arr];
             return cell.cellHeight;

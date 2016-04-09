@@ -122,7 +122,7 @@
 #pragma mark - 用户信息
 - (UIView *)userView {
     if (!_userView) {
-        _userView = [[UIView alloc] initWithFrame:CGRectMake(0, SCREEN_HEIGHT, SCREEN_WIDTH, 130)];
+        _userView = [[UIView alloc] initWithFrame:CGRectMake(0, SCREEN_HEIGHT + 10, SCREEN_WIDTH, 130)];
         
         [_userView addSubview:self.titleText];
         [_titleText mas_makeConstraints:^(MASConstraintMaker *make) {
