@@ -34,6 +34,7 @@
     if (!_rollView) {
         _rollView = [[FBRollImages alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, Banner_height)];
         _rollView.navVC = self.navigationController;
+        [_rollView setRollimageView];
     }
     return _rollView;
 }

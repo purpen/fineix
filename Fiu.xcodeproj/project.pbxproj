@@ -65,6 +65,7 @@
 		D8035F2C1CB77AAA001920F9 /* ContentAndTagTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D8035F2B1CB77AAA001920F9 /* ContentAndTagTableViewCell.m */; };
 		D8035F2F1CB77D0C001920F9 /* UIImage+Helper.m in Sources */ = {isa = PBXBuildFile; fileRef = D8035F2E1CB77D0C001920F9 /* UIImage+Helper.m */; };
 		D8035F3B1CB784B3001920F9 /* UILable+Frame.m in Sources */ = {isa = PBXBuildFile; fileRef = D8035F3A1CB784B3001920F9 /* UILable+Frame.m */; };
+		D8035F3E1CBB4939001920F9 /* CommentTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D8035F3D1CBB4939001920F9 /* CommentTableViewCell.m */; };
 		D80D41551CAD1410005D72B1 /* FBSearchView.m in Sources */ = {isa = PBXBuildFile; fileRef = D80D41541CAD1410005D72B1 /* FBSearchView.m */; };
 		D80D41581CAD142C005D72B1 /* FBPictureViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D80D41571CAD142C005D72B1 /* FBPictureViewController.m */; };
 		D80D415B1CAD1437005D72B1 /* FBNavigationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D80D41591CAD1437005D72B1 /* FBNavigationViewController.m */; };
@@ -173,7 +174,6 @@
 
 /* Begin PBXFileReference section */
 		105868C9EE6A797B288440BF /* Pods-Fiu.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Fiu.release.xcconfig"; path = "Pods/Target Support Files/Pods-Fiu/Pods-Fiu.release.xcconfig"; sourceTree = "<group>"; };
-		127E71F8B333CCEE9B273250 /* Pods-fineix.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-fineix.debug.xcconfig"; path = "Pods/Target Support Files/Pods-fineix/Pods-fineix.debug.xcconfig"; sourceTree = "<group>"; };
 		1F02B71B1CAA99240080CA45 /* FBBindingMobilePhoneNumber.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FBBindingMobilePhoneNumber.h; path = Fiu/Classes/Main/LoginRegister/controller/FBBindingMobilePhoneNumber.h; sourceTree = SOURCE_ROOT; };
 		1F02B71C1CAA99240080CA45 /* FBBindingMobilePhoneNumber.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FBBindingMobilePhoneNumber.m; path = Fiu/Classes/Main/LoginRegister/controller/FBBindingMobilePhoneNumber.m; sourceTree = SOURCE_ROOT; };
 		1F02B71D1CAA99240080CA45 /* FBLoginRegisterViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FBLoginRegisterViewController.h; path = Fiu/Classes/Main/LoginRegister/controller/FBLoginRegisterViewController.h; sourceTree = SOURCE_ROOT; };
@@ -214,7 +214,6 @@
 		1F986AA71CB676DE0074ABFE /* SubmitView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SubmitView.h; sourceTree = "<group>"; };
 		1F986AA81CB676DE0074ABFE /* SubmitView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SubmitView.m; sourceTree = "<group>"; };
 		1F986AAA1CB676FC0074ABFE /* Login.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = Login.xib; sourceTree = "<group>"; };
-		1FAB860F67E625188BAE00A8 /* Pods-fineix.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-fineix.release.xcconfig"; path = "Pods/Target Support Files/Pods-fineix/Pods-fineix.release.xcconfig"; sourceTree = "<group>"; };
 		1FBD5F101CB3A0CE002A3048 /* OrderListModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OrderListModel.h; sourceTree = "<group>"; };
 		1FBD5F111CB3A0CE002A3048 /* OrderListModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OrderListModel.m; sourceTree = "<group>"; };
 		1FBD5F161CB3B244002A3048 /* MyOrderViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MyOrderViewController.h; path = Fiu/Classes/Main/My/Controller/MyOrderViewController.h; sourceTree = SOURCE_ROOT; };
@@ -281,6 +280,8 @@
 		D8035F2E1CB77D0C001920F9 /* UIImage+Helper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+Helper.m"; sourceTree = "<group>"; };
 		D8035F391CB784B3001920F9 /* UILable+Frame.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UILable+Frame.h"; sourceTree = "<group>"; };
 		D8035F3A1CB784B3001920F9 /* UILable+Frame.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UILable+Frame.m"; sourceTree = "<group>"; };
+		D8035F3C1CBB4939001920F9 /* CommentTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CommentTableViewCell.h; sourceTree = "<group>"; };
+		D8035F3D1CBB4939001920F9 /* CommentTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CommentTableViewCell.m; sourceTree = "<group>"; };
 		D80D41531CAD1410005D72B1 /* FBSearchView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FBSearchView.h; sourceTree = "<group>"; };
 		D80D41541CAD1410005D72B1 /* FBSearchView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FBSearchView.m; sourceTree = "<group>"; };
 		D80D41561CAD142C005D72B1 /* FBPictureViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FBPictureViewController.h; sourceTree = "<group>"; };
@@ -710,8 +711,6 @@
 		40FF7B08F78941EBD75F7965 /* Pods */ = {
 			isa = PBXGroup;
 			children = (
-				127E71F8B333CCEE9B273250 /* Pods-fineix.debug.xcconfig */,
-				1FAB860F67E625188BAE00A8 /* Pods-fineix.release.xcconfig */,
 				E0438B4B24E3F747F761AF4C /* Pods-Fiu.debug.xcconfig */,
 				105868C9EE6A797B288440BF /* Pods-Fiu.release.xcconfig */,
 			);
@@ -1278,6 +1277,8 @@
 				D8035F2B1CB77AAA001920F9 /* ContentAndTagTableViewCell.m */,
 				D89B5A981CB676C700DB9710 /* LikePeopleTableViewCell.h */,
 				D89B5A991CB676C700DB9710 /* LikePeopleTableViewCell.m */,
+				D8035F3C1CBB4939001920F9 /* CommentTableViewCell.h */,
+				D8035F3D1CBB4939001920F9 /* CommentTableViewCell.m */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -1463,6 +1464,7 @@
 				D81281261CAA8532007CF08B /* FBFootView.m in Sources */,
 				D81281251CAA8532007CF08B /* FBFiltersCollectionViewCell.m in Sources */,
 				D81281561CAA8532007CF08B /* NSString+FBMD5.m in Sources */,
+				D8035F3E1CBB4939001920F9 /* CommentTableViewCell.m in Sources */,
 				D89B5A8B1CB4E48800DB9710 /* SceneListTableViewCell.m in Sources */,
 				D812815E1CAA8532007CF08B /* main.m in Sources */,
 				D81281171CAA8532007CF08B /* CreateViewController.m in Sources */,
