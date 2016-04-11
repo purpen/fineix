@@ -22,6 +22,9 @@
 #import "PhoneNumLoginView.h"
 #import "SubmitView.h"
 #import "FBSignupViewController.h"
+#import <TYAlertController.h>
+#import <TYAlertView.h>
+#import "FBBindingMobilePhoneNumber.h"
 
 
 @interface FBLoginViewController ()<UITextFieldDelegate,FBRequestDelegate>
@@ -29,10 +32,10 @@
     PhoneNumLoginView *_phoneNumLoginV;
     SubmitView *_submitView;
 }
+
 @property (weak, nonatomic) IBOutlet UIButton *wechatBtn;
 @property (weak, nonatomic) IBOutlet UIButton *weiboBtn;
 @property (weak, nonatomic) IBOutlet UIButton *qqBtn;
-
 @property (weak, nonatomic) IBOutlet UIView *topView;
 
 @end
@@ -42,6 +45,9 @@ NSString *const thirdLoginUrl = @"/auth/third_sign";//第三方登录接口
 NSString *const logOut = @"/auth/logout";//退出登录接口
 static NSString *const VerifyCodeURL = @"/auth/verify_code";//发送验证码接口
 static NSString *const FindPwdURL = @"/auth/find_pwd";//忘记密码接口
+static NSString *const thirdRegister = @"/auth/third_sign";//第三方登录接口
+static NSString *const thirdRegisteredNotBinding = @"/auth/third_register_without_phone";//第三方快捷注册(不绑定手机号)接口
+
 @implementation FBLoginViewController
 
 - (void)viewDidLoad {
@@ -361,8 +367,7 @@ static NSString *const FindPwdURL = @"/auth/find_pwd";//忘记密码接口
         if (response.responseCode == UMSResponseCodeSuccess) {
             //如果微信登录成功，取到用户信息
             UMSocialAccountEntity *snsAccount = [[UMSocialAccountManager socialAccountDictionary] valueForKey:UMShareToWechatSession];
-            
-            [self theThirdPartyAfterTheSuccessOfTheLoginInformationToTheUser:snsAccount type:@1];
+            [self afterTheSuccessOfTheThirdPartyToRegisterToGetUserInformation:snsAccount type:@1];
             
             //得到的数据在回调Block对象形参respone的data属性
 //                        [[UMSocialDataService defaultDataService] requestSnsInformation:UMShareToWechatSession completion:^(UMSocialResponseEntity *response){
@@ -386,7 +391,7 @@ static NSString *const FindPwdURL = @"/auth/find_pwd";//忘记密码接口
             //如果微博登录成功，取到用户信息
             UMSocialAccountEntity *snsAccount = [[UMSocialAccountManager socialAccountDictionary] valueForKey:UMShareToSina];
             
-            [self theThirdPartyAfterTheSuccessOfTheLoginInformationToTheUser:snsAccount type:@2];
+            [self afterTheSuccessOfTheThirdPartyToRegisterToGetUserInformation:snsAccount type:@2];
             
             //得到的数据在回调Block对象形参respone的data属性
             //                        [[UMSocialDataService defaultDataService] requestSnsInformation:UMShareToWechatSession completion:^(UMSocialResponseEntity *response){
@@ -411,7 +416,7 @@ static NSString *const FindPwdURL = @"/auth/find_pwd";//忘记密码接口
             //如果QQ登录成功，取到用户信息
             UMSocialAccountEntity *snsAccount = [[UMSocialAccountManager socialAccountDictionary] valueForKey:UMShareToQQ];
             
-            [self theThirdPartyAfterTheSuccessOfTheLoginInformationToTheUser:snsAccount type:@3];
+            [self afterTheSuccessOfTheThirdPartyToRegisterToGetUserInformation:snsAccount type:@3];
             
             //得到的数据在回调Block对象形参respone的data属性
             //                        [[UMSocialDataService defaultDataService] requestSnsInformation:UMShareToWechatSession completion:^(UMSocialResponseEntity *response){
@@ -424,52 +429,122 @@ static NSString *const FindPwdURL = @"/auth/find_pwd";//忘记密码接口
 }
 
 #pragma mark -第三方登录成功后取到用户信息
--(void)theThirdPartyAfterTheSuccessOfTheLoginInformationToTheUser:(UMSocialAccountEntity*)snsAccount type:(NSNumber*)type{
-    NSString *oid;
-    if ([type isEqualToNumber:@1]) {
-        oid = snsAccount.unionId;
-    }else{
-        oid = snsAccount.usid;
-    }
-    NSLog(@"snsAccount  %@",snsAccount);
-    //发送数据请求
+//如果成功，进行关联，并且更新当前用户信息
+-(void)afterTheSuccessOfTheThirdPartyToRegisterToGetUserInformation:(UMSocialAccountEntity *)snsAccount type:(NSNumber *)type{
+    
+    //发送注册请求
     NSDictionary *params = @{
-                             @"oid":oid,
+                             @"oid":snsAccount.usid,
                              @"access_token":snsAccount.accessToken,
                              @"type":type,
                              @"from_to":@1
                              };
-    FBRequest *request = [FBAPI postWithUrlString:thirdLoginUrl requestDictionary:params delegate:self];
-    
-    //如果第三方登录发送成功，更新用户信息
+    FBRequest *request = [FBAPI postWithUrlString:thirdRegister requestDictionary:params delegate:self];
+    NSLog(@"**************%@",request.urlString);
     [request startRequestSuccess:^(FBRequest *request, id result) {
+        //如果请求成功
         NSDictionary *dataDic = [result objectForKey:@"data"];
-        
+        NSLog(@"***************************%@",dataDic);
         if ([[dataDic objectForKey:@"has_user"] isEqualToNumber:@1]) {
+            //用户存在，更新当前用户的信息
             UserInfo *userinfo = [UserInfo mj_objectWithKeyValues:[dataDic objectForKey:@"user"]];
             [userinfo saveOrUpdate];
             [userinfo updateUserInfoEntity];
+            
             UserInfoEntity *entity = [UserInfoEntity defaultUserInfoEntity];
             entity.isLogin = YES;
-            NSLog(@"entity******************************%@",entity.nickname);
-            [SVProgressHUD showSuccessWithStatus:NSLocalizedString(@"loginSuccessful", nil)];
             
             
+            [SVProgressHUD showSuccessWithStatus:NSLocalizedString(@"registeredSuccessfully", nil)];
+            //            //跳回个人主页
+            //            [self dismissViewControllerAnimated:YES completion:nil];
+            //            [self.tabBarController setSelectedIndex:3];
+            //推荐感兴趣的情景
             
-            //[self dismissViewControllerAnimated:YES completion:nil];
-            [self dismissViewControllerAnimated:YES completion:nil];
-            [self.tabBarController setSelectedIndex:3];
+            
         }else{
-            //用户不存在需要绑定已有帐号操作
+            //如果用户不存在,提示用户是否进行绑定
+            TYAlertView *alertView = [TYAlertView alertViewWithTitle:@"TYAlertView" message:@"This is a message, the alert view containt text and textfiled. "];
+            
+            [alertView addAction:[TYAlertAction actionWithTitle:NSLocalizedString(@"cancel", nil) style:TYAlertActionStyleCancle handler:^(TYAlertAction *action) {
+                //发送请求来存储用户信息
+                NSDictionary *params;
+                if ([type isEqualToNumber:@1]) {
+                    //如果是微信需要snsAccount.unionId
+                    params = @{
+                               @"third_source":type,
+                               @"oid":snsAccount.usid,
+                               @"union_id":snsAccount.unionId,
+                               @"access_token":snsAccount.accessToken,
+                               @"nickname":snsAccount.userName,
+                               @"avatar_url":snsAccount.iconURL,
+                               @"from_to":@1
+                               };
+                    
+                }
+                //如果不是微信不需要snsAccount.unionId
+                else{
+                    params = @{
+                               @"third_source":type,
+                               @"oid":snsAccount.usid,
+                               //@"union_id":snsAccount.unionId,
+                               @"access_token":snsAccount.accessToken,
+                               @"nickname":snsAccount.userName,
+                               @"avatar_url":snsAccount.iconURL,
+                               @"from_to":@1
+                               };
+                    
+                }
+                FBRequest *request = [FBAPI postWithUrlString:thirdRegisteredNotBinding requestDictionary:params delegate:self];
+                [request startRequestSuccess:^(FBRequest *request, id result) {
+                    //如果请求成功，并获取用户信息来更新当前用户信息
+                    NSDictionary *dataDic = [result objectForKey:@"data"];
+                    UserInfo *info = [UserInfo mj_objectWithKeyValues:dataDic];
+                    [info saveOrUpdate];
+                    [info updateUserInfoEntity];
+                    UserInfoEntity *entity = [UserInfoEntity defaultUserInfoEntity];
+                    entity.isLogin = YES;
+                    
+                    [SVProgressHUD showSuccessWithStatus:NSLocalizedString(@"registeredSuccessfully", nil)];
+                    //跳回个人主页
+                    //跳回个人主页
+                    [self dismissViewControllerAnimated:YES completion:nil];
+                    [self.tabBarController setSelectedIndex:3];
+                    
+                    
+                } failure:^(FBRequest *request, NSError *error) {
+                    //如果请求失败提示失败信息
+                    [SVProgressHUD showErrorWithStatus:error.localizedDescription];
+                }];
+                
+            }]];
+            
+            [alertView addAction:[TYAlertAction actionWithTitle:NSLocalizedString(@"determine", nil) style:TYAlertActionStyleDestructive handler:^(TYAlertAction *action) {
+                //跳转到绑定手机号界面
+                UIStoryboard *story = [UIStoryboard storyboardWithName:@"LoginRegisterController" bundle:[NSBundle mainBundle]];
+                FBBindingMobilePhoneNumber *bing = [story instantiateViewControllerWithIdentifier:@"LoginRegisterController"];
+                bing.snsAccount = snsAccount;
+                bing.type = type;
+                [self.navigationController pushViewController:bing animated:YES];
+            }]];
+            
+            
+            
+            // first way to show
+            TYAlertController *alertController = [TYAlertController alertControllerWithAlertView:alertView preferredStyle:TYAlertControllerStyleAlert];
+            //alertController.alertViewOriginY = 60;
+            [self presentViewController:alertController animated:YES completion:nil];
             
         }
     } failure:^(FBRequest *request, NSError *error) {
-        //如果发送失败，提示错误信息
+        //如果请求失败，提示错误信息
+        NSLog(@"%@",error);
         [SVProgressHUD showErrorWithStatus:[error localizedDescription]];
     }];
     
     
 }
+
 
 //#pragma mark -点击登录按钮
 //- (IBAction)clickLoginBtn:(UIButton *)sender {
