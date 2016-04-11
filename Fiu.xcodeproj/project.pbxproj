@@ -24,6 +24,8 @@
 		1F5801101CB795E70021EA19 /* SignupView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F58010F1CB795E70021EA19 /* SignupView.m */; };
 		1F5801121CB796450021EA19 /* Signup.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1F5801111CB796450021EA19 /* Signup.xib */; };
 		1F59E5FC1C9ABBA500E96C60 /* Accelerate.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1F59E5FB1C9ABBA500E96C60 /* Accelerate.framework */; };
+		1F6A9A2C1CBB49A8003290E6 /* SubscribeInterestedViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F6A9A2A1CBB49A8003290E6 /* SubscribeInterestedViewController.m */; };
+		1F6A9A2D1CBB49A8003290E6 /* SubscribeInterestedViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1F6A9A2B1CBB49A8003290E6 /* SubscribeInterestedViewController.xib */; };
 		1F986A9E1CB610A40074ABFE /* GuidePageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F986A9C1CB610A40074ABFE /* GuidePageViewController.m */; };
 		1F986AA31CB656920074ABFE /* PhoneNumLoginView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F986AA21CB656920074ABFE /* PhoneNumLoginView.m */; };
 		1F986AA61CB674510074ABFE /* PhoneToLogInViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F986AA51CB674510074ABFE /* PhoneToLogInViewController.m */; };
@@ -54,6 +56,8 @@
 		1FEFD5991CAD12E8005A1C5F /* My.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1FEFD5981CAD12E8005A1C5F /* My.storyboard */; };
 		1FEFD59C1CAD3384005A1C5F /* BottomView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1FEFD59B1CAD3384005A1C5F /* BottomView.m */; };
 		1FEFD59F1CAD37AC005A1C5F /* AppBtnView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1FEFD59E1CAD37AC005A1C5F /* AppBtnView.m */; };
+		1FF10DB91CBB8B1600062E1B /* ImprovePersonalDataViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1FF10DB71CBB8B1600062E1B /* ImprovePersonalDataViewController.m */; };
+		1FF10DBA1CBB8B1600062E1B /* ImprovePersonalDataViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1FF10DB81CBB8B1600062E1B /* ImprovePersonalDataViewController.xib */; };
 		280045111C805B78005F5C2E /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 280045101C805B78005F5C2E /* CoreLocation.framework */; };
 		280045131C805B82005F5C2E /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 280045121C805B82005F5C2E /* QuartzCore.framework */; };
 		280045151C805B8C005F5C2E /* OpenGLES.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 280045141C805B8C005F5C2E /* OpenGLES.framework */; };
@@ -205,6 +209,9 @@
 		1F58010F1CB795E70021EA19 /* SignupView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SignupView.m; sourceTree = "<group>"; };
 		1F5801111CB796450021EA19 /* Signup.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = Signup.xib; sourceTree = "<group>"; };
 		1F59E5FB1C9ABBA500E96C60 /* Accelerate.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Accelerate.framework; path = System/Library/Frameworks/Accelerate.framework; sourceTree = SDKROOT; };
+		1F6A9A291CBB49A8003290E6 /* SubscribeInterestedViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SubscribeInterestedViewController.h; path = Fiu/Classes/Main/LoginRegister/controller/SubscribeInterestedViewController.h; sourceTree = SOURCE_ROOT; };
+		1F6A9A2A1CBB49A8003290E6 /* SubscribeInterestedViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SubscribeInterestedViewController.m; path = Fiu/Classes/Main/LoginRegister/controller/SubscribeInterestedViewController.m; sourceTree = SOURCE_ROOT; };
+		1F6A9A2B1CBB49A8003290E6 /* SubscribeInterestedViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = SubscribeInterestedViewController.xib; path = Fiu/Classes/Main/LoginRegister/controller/SubscribeInterestedViewController.xib; sourceTree = SOURCE_ROOT; };
 		1F986A9B1CB610A40074ABFE /* GuidePageViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GuidePageViewController.h; sourceTree = "<group>"; };
 		1F986A9C1CB610A40074ABFE /* GuidePageViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GuidePageViewController.m; sourceTree = "<group>"; };
 		1F986AA11CB656920074ABFE /* PhoneNumLoginView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PhoneNumLoginView.h; sourceTree = "<group>"; };
@@ -261,6 +268,9 @@
 		1FEFD59B1CAD3384005A1C5F /* BottomView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BottomView.m; sourceTree = "<group>"; };
 		1FEFD59D1CAD37AC005A1C5F /* AppBtnView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppBtnView.h; sourceTree = "<group>"; };
 		1FEFD59E1CAD37AC005A1C5F /* AppBtnView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AppBtnView.m; sourceTree = "<group>"; };
+		1FF10DB61CBB8B1600062E1B /* ImprovePersonalDataViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImprovePersonalDataViewController.h; sourceTree = "<group>"; };
+		1FF10DB71CBB8B1600062E1B /* ImprovePersonalDataViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ImprovePersonalDataViewController.m; sourceTree = "<group>"; };
+		1FF10DB81CBB8B1600062E1B /* ImprovePersonalDataViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ImprovePersonalDataViewController.xib; sourceTree = "<group>"; };
 		26743842F5D507CEE992D80C /* libPods-fineix.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-fineix.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		280045101C805B78005F5C2E /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
 		280045121C805B82005F5C2E /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
@@ -534,6 +544,9 @@
 		1F02B6821CAA93F30080CA45 /* controller */ = {
 			isa = PBXGroup;
 			children = (
+				1F6A9A291CBB49A8003290E6 /* SubscribeInterestedViewController.h */,
+				1F6A9A2A1CBB49A8003290E6 /* SubscribeInterestedViewController.m */,
+				1F6A9A2B1CBB49A8003290E6 /* SubscribeInterestedViewController.xib */,
 				1F986AA41CB674510074ABFE /* PhoneToLogInViewController.h */,
 				1F986AA51CB674510074ABFE /* PhoneToLogInViewController.m */,
 				1F02B71B1CAA99240080CA45 /* FBBindingMobilePhoneNumber.h */,
@@ -550,6 +563,9 @@
 				1F02B7281CAA99240080CA45 /* PhoneToSignUpViewController.m */,
 				1F02B7291CAA99240080CA45 /* SubmitViewController.h */,
 				1F02B72A1CAA99240080CA45 /* SubmitViewController.m */,
+				1FF10DB61CBB8B1600062E1B /* ImprovePersonalDataViewController.h */,
+				1FF10DB71CBB8B1600062E1B /* ImprovePersonalDataViewController.m */,
+				1FF10DB81CBB8B1600062E1B /* ImprovePersonalDataViewController.xib */,
 			);
 			path = controller;
 			sourceTree = "<group>";
@@ -1357,8 +1373,10 @@
 				1FEFD5991CAD12E8005A1C5F /* My.storyboard in Resources */,
 				D81281721CAA8532007CF08B /* UMSocialSDKResourcesNew.bundle in Resources */,
 				D812815B1CAA8532007CF08B /* Info.plist in Resources */,
+				1FF10DBA1CBB8B1600062E1B /* ImprovePersonalDataViewController.xib in Resources */,
 				D812816C1CAA8532007CF08B /* UMSCommentInputControlleriPad.xib in Resources */,
 				D812815D1CAA8532007CF08B /* Localizable.strings in Resources */,
+				1F6A9A2D1CBB49A8003290E6 /* SubscribeInterestedViewController.xib in Resources */,
 				D812816A1CAA8532007CF08B /* UMSCommentDetailController.xib in Resources */,
 				D812814E1CAA8532007CF08B /* FBMapLocatinViewController.xib in Resources */,
 				1F5801121CB796450021EA19 /* Signup.xib in Resources */,
@@ -1448,6 +1466,7 @@
 				1FEFD58D1CAD1219005A1C5F /* MyMessageViewController.m in Sources */,
 				D812815A1CAA8532007CF08B /* fineix.xcdatamodeld in Sources */,
 				D81281591CAA8532007CF08B /* UIImageView+SDWedImage.m in Sources */,
+				1F6A9A2C1CBB49A8003290E6 /* SubscribeInterestedViewController.m in Sources */,
 				D81281541CAA8532007CF08B /* FBRequest.m in Sources */,
 				D89B5A971CB66B3B00DB9710 /* DataNumTableViewCell.m in Sources */,
 				1FEFD56E1CAD115C005A1C5F /* ChanelView.m in Sources */,
@@ -1514,6 +1533,7 @@
 				D81281301CAA8532007CF08B /* DiscoverViewController.m in Sources */,
 				D81281151CAA8532007CF08B /* AddUrlViewController.m in Sources */,
 				D81281551CAA8532007CF08B /* HttpTool.m in Sources */,
+				1FF10DB91CBB8B1600062E1B /* ImprovePersonalDataViewController.m in Sources */,
 				1F02B73E1CAA99540080CA45 /* NSString+UserModel.m in Sources */,
 				D812814D1CAA8532007CF08B /* FBMapLocatinViewController.m in Sources */,
 				D812811A1CAA8532007CF08B /* MarkGoodsViewController.m in Sources */,
