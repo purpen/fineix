@@ -22,10 +22,19 @@ const static NSInteger  peopleBtnTag = 64;
 }
 
 - (void)setUI {
-    NSArray * arr = [NSArray arrayWithObjects:@"1",@"1",@"1",@"1",@"1",@"1",@"1", nil];
+    NSArray * arr = [NSArray arrayWithObjects:@"1",@"1",@"1",@"1",@"1",@"1",@"1",@"1",@"1",@"1",@"1",@"1",@"1",@"1",@"1",@"1",@"1",@"1",@"1",@"1",@"1", nil];
     [self addLikePeopleHeader:arr];
     
-    [_morePeopel setTitle:@"300" forState:(UIControlStateNormal)];
+    CGFloat num = arr.count;
+    if (num/100 > 1) {
+        [_morePeopel setTitle:[NSString stringWithFormat:@"%.0f00＋", num/100] forState:(UIControlStateNormal)];
+    }
+    if (num/10 > 1) {
+        [_morePeopel setTitle:[NSString stringWithFormat:@"%.0f0＋", num/10] forState:(UIControlStateNormal)];
+    }
+    if (num/1000 > 1) {
+        [_morePeopel setTitle:[NSString stringWithFormat:@"%.0fk＋", num/1000] forState:(UIControlStateNormal)];
+    }
 }
 
 #pragma mark - 加载用户的头像
