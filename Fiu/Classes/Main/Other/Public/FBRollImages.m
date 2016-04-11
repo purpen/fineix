@@ -25,6 +25,13 @@
     return self;
 }
 
+- (void)setRollimageView {
+    NSArray *images = @[
+                        [UIImage imageNamed:@"banner"],
+                        [UIImage imageNamed:@"banner2"]
+                        ];
+    self.rollImageView.localizationImagesGroup = images;
+}
 
 - (SDCycleScrollView *)rollImageView {
     if (!_rollImageView) {

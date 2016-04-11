@@ -80,7 +80,7 @@ const static NSInteger buttonTag = 421;
 }
 
 //  计算内容高度
-- (void)setContent:(NSString *)content {
+- (void)getContentCellHeight:(NSString *)content {
     _contentLab.text = content;
     CGSize size = [_contentLab boundingRectWithSize:CGSizeMake(SCREEN_WIDTH - 30, 0)];
     self.cellHeight = size.height + 70;

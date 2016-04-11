@@ -15,10 +15,10 @@
 
 @pro_strong UILabel             *   contentLab;     //  场景内容文字
 @pro_strong UIScrollView        *   tagView;        //  标签视图
-@pro_assign CGFloat      cellHeight;
+@pro_assign CGFloat                 cellHeight;
 
 - (void)setUI;
 
-- (void)setContent:(NSString *)content;
+- (void)getContentCellHeight:(NSString *)content;
 
 @end

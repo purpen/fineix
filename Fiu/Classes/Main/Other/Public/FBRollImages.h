@@ -20,4 +20,6 @@
 @property (strong, nonatomic) NSMutableArray                 *       targetIdMarr;
 @property (strong, nonatomic) NSMutableArray                 *       typeMarr;
 
+- (void)setRollimageView;
+
 @end
