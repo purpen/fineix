@@ -24,6 +24,7 @@
 #import <TYAlertView.h>
 #import "SignupView.h"
 #import "FBLoginViewController.h"
+#import "SubscribeInterestedCollectionViewController.h"
 
 
 @interface FBSignupViewController ()<FBRequestDelegate,UITextFieldDelegate>
@@ -295,10 +296,21 @@ NSString *const LoginURL = @"/auth/login";//登录接口
             
             
             [SVProgressHUD showSuccessWithStatus:NSLocalizedString(@"registeredSuccessfully", nil)];
-//            //跳回个人主页
-//            [self dismissViewControllerAnimated:YES completion:nil];
-//            [self.tabBarController setSelectedIndex:3];
             //推荐感兴趣的情景
+            NSDictionary *identifyDict = [dataDic objectForKey:@"identify"];
+            if ([[identifyDict objectForKey:@"is_scene_subscribe"] isEqualToNumber:@0]) {
+                //跳转到推荐界面
+                SubscribeInterestedCollectionViewController *subscribeVC = [[SubscribeInterestedCollectionViewController alloc] init];
+                [self.navigationController pushViewController:subscribeVC animated:YES];
+            }else{
+                //已经订阅过，直接个人中心
+                //跳回个人主页
+                //跳回个人主页
+                [self dismissViewControllerAnimated:YES completion:nil];
+                [self.tabBarController setSelectedIndex:3];
+                
+            }
+
             
 
         }else{
@@ -345,13 +357,21 @@ NSString *const LoginURL = @"/auth/login";//登录接口
                     entity.isLogin = YES;
                     
                     [SVProgressHUD showSuccessWithStatus:NSLocalizedString(@"registeredSuccessfully", nil)];
-//                    //跳回个人主页
-//                    //跳回个人主页
-//                    [self dismissViewControllerAnimated:YES completion:nil];
-//                    [self.tabBarController setSelectedIndex:3];
                     
                     //推荐感兴趣的情景
-                    
+                    NSDictionary *identifyDict = [dataDic objectForKey:@"identify"];
+                    if ([[identifyDict objectForKey:@"is_scene_subscribe"] isEqualToNumber:@0]) {
+                        //跳转到推荐界面
+                        SubscribeInterestedCollectionViewController *subscribeVC = [[SubscribeInterestedCollectionViewController alloc] init];
+                        [self.navigationController pushViewController:subscribeVC animated:YES];
+                    }else{
+                        //已经订阅过，直接个人中心
+                        //跳回个人主页
+                        //跳回个人主页
+                        [self dismissViewControllerAnimated:YES completion:nil];
+                        [self.tabBarController setSelectedIndex:3];
+                        
+                    }
                     
                 } failure:^(FBRequest *request, NSError *error) {
                     //如果请求失败提示失败信息

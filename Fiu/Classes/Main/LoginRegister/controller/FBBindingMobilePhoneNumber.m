@@ -91,10 +91,19 @@ NSString *thirdRegistrationBindingMobilePhone = @"/auth/third_register_with_phon
                 entity.isLogin = YES;
                 
                 [SVProgressHUD showSuccessWithStatus:NSLocalizedString(@"loginSuccessful", nil)];
-//                //跳回个人主页
-//                [self dismissViewControllerAnimated:YES completion:nil];
-//                [self.tabBarController setSelectedIndex:3];
                 //推荐感兴趣的情景
+                NSDictionary *identifyDict = [dataDic objectForKey:@"identify"];
+                if ([[identifyDict objectForKey:@"is_scene_subscribe"] isEqualToNumber:@0]) {
+                    //跳转到推荐界面
+                }else{
+                    //已经订阅过，直接个人中心
+                    //跳回个人主页
+                    //跳回个人主页
+                    [self dismissViewControllerAnimated:YES completion:nil];
+                    [self.tabBarController setSelectedIndex:3];
+                    
+                }
+                
                 
             } failure:^(FBRequest *request, NSError *error) {
                 //请求失败，提示错误信息
