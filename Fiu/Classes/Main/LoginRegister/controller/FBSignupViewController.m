@@ -345,10 +345,12 @@ NSString *const LoginURL = @"/auth/login";//登录接口
                     entity.isLogin = YES;
                     
                     [SVProgressHUD showSuccessWithStatus:NSLocalizedString(@"registeredSuccessfully", nil)];
-                    //跳回个人主页
-                    //跳回个人主页
-                    [self dismissViewControllerAnimated:YES completion:nil];
-                    [self.tabBarController setSelectedIndex:3];
+//                    //跳回个人主页
+//                    //跳回个人主页
+//                    [self dismissViewControllerAnimated:YES completion:nil];
+//                    [self.tabBarController setSelectedIndex:3];
+                    
+                    //推荐感兴趣的情景
                     
                     
                 } failure:^(FBRequest *request, NSError *error) {
@@ -384,8 +386,7 @@ NSString *const LoginURL = @"/auth/login";//登录接口
         NSLog(@"%@",error);
         [SVProgressHUD showErrorWithStatus:[error localizedDescription]];
     }];
-    
-    
+
 }
 //取消按钮,返回首页
 - (IBAction)cancelBtn:(UIButton *)sender {
