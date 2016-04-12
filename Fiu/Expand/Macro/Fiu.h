@@ -9,6 +9,9 @@
 #ifndef Fineix_h
 #define Fineix_h
 
+#import "FBConfig.h"
+#import "FBAPI.h"
+#import "FBRequest.h"
 #import "UIColor+Extension.h"
 #import "Masonry.h"
 

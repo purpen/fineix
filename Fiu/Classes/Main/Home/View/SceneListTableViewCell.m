@@ -14,6 +14,8 @@
     self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
     if (self) {
         
+        self.selectionStyle = UITableViewCellSelectionStyleNone;
+        
         [self addSubview:self.bgImage];
         [_bgImage mas_makeConstraints:^(MASConstraintMaker *make) {
             make.size.mas_equalTo(CGSizeMake(SCREEN_WIDTH, SCREEN_HEIGHT));
@@ -154,7 +156,7 @@
         [_city mas_makeConstraints:^(MASConstraintMaker *make) {
             make.size.mas_equalTo(CGSizeMake(75, 15));
             make.top.equalTo(_whereScene.mas_top).with.offset(0);
-            make.left.equalTo(_whereScene.mas_right).with.offset(30);
+            make.left.equalTo(_whereScene.mas_right).with.offset(20);
         }];
         
         [_userView addSubview:self.time];
@@ -289,7 +291,7 @@
 
 #pragma mark - 添加icon
 - (void)addIcon:(UILabel *)lable withImage:(NSString *)iconImage {
-    UIImageView * icon = [[UIImageView alloc] initWithFrame:CGRectMake(-20, 0, 15, 15)];
+    UIImageView * icon = [[UIImageView alloc] initWithFrame:CGRectMake(-15, 0, 15, 15)];
     icon.contentMode = UIViewContentModeCenter;
     icon.image = [UIImage imageNamed:iconImage];
     [lable addSubview:icon];

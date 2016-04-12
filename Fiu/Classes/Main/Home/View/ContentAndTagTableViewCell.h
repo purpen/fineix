@@ -13,9 +13,10 @@
 
 @interface ContentAndTagTableViewCell : UITableViewCell
 
-@pro_strong UILabel             *   contentLab;     //  场景内容文字
-@pro_strong UIScrollView        *   tagView;        //  标签视图
-@pro_assign CGFloat                 cellHeight;
+@pro_strong UINavigationController      *   nav;
+@pro_strong UILabel                     *   contentLab;     //  场景内容文字
+@pro_strong UIScrollView                *   tagView;        //  标签视图
+@pro_assign CGFloat                         cellHeight;
 
 - (void)setUI;
 

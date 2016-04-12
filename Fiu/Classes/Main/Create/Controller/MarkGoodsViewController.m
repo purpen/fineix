@@ -42,7 +42,7 @@
 
 #pragma mark - 设置视图UI
 - (void)setUI {
-    self.menuTitle = [NSMutableArray arrayWithObjects:@"全部", @"智能家居", @"3C数码", @"生活方式", @"家居日用", @"智能家居", @"3C数码", @"生活方式", @"家居日用", nil];
+    self.menuTitle = @[@"全部", @"智能家居", @"3C数码", @"生活方式", @"家居日用", @"智能家居", @"3C数码", @"生活方式", @"家居日用"];
     
     [self.view addSubview:self.searchGoods];
     

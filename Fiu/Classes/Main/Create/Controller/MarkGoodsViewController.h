@@ -14,6 +14,6 @@
 
 @pro_strong FBSearchView                    *   searchGoods;        //  搜索框
 @pro_strong HTHorizontalSelectionList       *   menuView;           //  分类导航栏
-@pro_strong NSMutableArray                  *   menuTitle;          //  分类信息标题
+@pro_strong NSArray                         *   menuTitle;          //  分类信息标题
 
 @end

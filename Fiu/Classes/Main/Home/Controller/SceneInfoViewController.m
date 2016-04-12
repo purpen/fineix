@@ -12,6 +12,7 @@
 #import "ContentAndTagTableViewCell.h"
 #import "LikePeopleTableViewCell.h"
 #import "CommentTableViewCell.h"
+#import "CommentViewController.h"
 
 @interface SceneInfoViewController ()
 
@@ -19,17 +20,20 @@
 
 @implementation SceneInfoViewController
 
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    
+    [self setNavigationViewUI];
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.view.backgroundColor = [UIColor whiteColor];
     self.automaticallyAdjustsScrollViewInsets = NO;
     
-    [self setNavigationViewUI];
-    
     self.textMar = [NSMutableArray arrayWithObjects:@"家是我们人生的驿站，是我们生活的乐园，也是我们避风的港湾。", @"家是我们人生的驿站", @"家是我们人生的驿站，是我们生活的乐园，也是我们避风的港湾。它更是一条逼你拼命挣钱的鞭子，让你为它拉车犁地。家又是一个充满亲情的地方，就会有一种亲情感回荡心头。在风雨人生中，渐渐地形成了一种强烈的感觉：我爱家，更离不开家。",nil];
     
     [self setSceneInfoViewUI];
-    
 }
 
 #pragma mark -
@@ -72,7 +76,6 @@
                 cell = [[UserInfoTableViewCell alloc] initWithStyle:(UITableViewCellStyleDefault) reuseIdentifier:userInfoCellId];
             }
             [cell setUI];
-            cell.navItem = self.navigationItem;
             return cell;
             
         } else if (indexPath.row == 1) {
@@ -81,6 +84,7 @@
             if (cell == nil) {
                 cell = [[ContentAndTagTableViewCell alloc] initWithStyle:(UITableViewCellStyleDefault) reuseIdentifier:contentCellId];
             }
+            cell.nav = self.navigationController;
             [cell setUI];
             return cell;
         
@@ -137,7 +141,7 @@
             return 44;
             
         } else if (indexPath.row == 3) {
-            NSArray * arr = [NSArray arrayWithObjects:@"1",@"1",@"1",@"1",@"1",@"1",@"1",@"1",@"1",@"1",@"1",@"1",@"1",@"1",@"1",@"1",@"1",@"1",@"1",@"1",@"1", nil];
+            NSArray * arr = [NSArray arrayWithObjects:@"1",@"1",@"1",@"1",@"1",@"1",@"1",@"1",@"1",@"1",nil];
             LikePeopleTableViewCell * cell = [[LikePeopleTableViewCell alloc] init];
             [cell getCellHeight:arr];
             return cell.cellHeight;
@@ -185,6 +189,13 @@
     return self.headerView;
 }
 
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    if (indexPath.section == 1) {
+        CommentViewController * commentVC = [[CommentViewController alloc] init];
+        [self.navigationController pushViewController:commentVC animated:YES];
+    }
+}
+
 #pragma mark - 设置Nav
 - (void)setNavigationViewUI {
     [[UIApplication sharedApplication] setStatusBarHidden:YES withAnimation:(UIStatusBarAnimationSlide)];
@@ -192,8 +203,9 @@
     self.delegate = self;
     [self addBarItemRightBarButton:@"" image:@"Share_Scene"];
     [self addNavLogo:@"Nav_Title"];
-    [self navBarTransparent];
-    [self hiddenNavItem:YES];
+    [self navBarTransparent:YES];
+    [self hiddenNavItem:NO];
+
 }
 
 //  隐藏Nav左右的按钮
