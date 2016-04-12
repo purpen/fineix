@@ -61,7 +61,7 @@
                                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                 </state>
                                                 <connections>
-                                                    <segue destination="Q9P-IZ-YNa" kind="push" id="OS6-iC-pw9"/>
+                                                    <segue destination="Q9P-IZ-YNa" kind="push" id="Ea6-YH-x2J"/>
                                                 </connections>
                                             </button>
                                         </subviews>
@@ -183,7 +183,7 @@
                                 </constraints>
                                 <state key="normal" image="return"/>
                                 <connections>
-                                    <action selector="backBtn:" destination="Q9P-IZ-YNa" eventType="touchUpInside" id="CKg-gX-9TA"/>
+                                    <action selector="backBtn:" destination="Q9P-IZ-YNa" eventType="touchUpInside" id="FXR-yD-x07"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fPM-eA-ZmF" userLabel="close">
@@ -194,7 +194,7 @@
                                 </constraints>
                                 <state key="normal" image="close"/>
                                 <connections>
-                                    <action selector="cancelBtn:" destination="Q9P-IZ-YNa" eventType="touchUpInside" id="VCv-Ib-uvG"/>
+                                    <action selector="cancelBtn:" destination="Q9P-IZ-YNa" eventType="touchUpInside" id="MXC-U8-WrI"/>
                                 </connections>
                             </button>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="6FC-Hw-EB5" userLabel="TopView">
@@ -217,7 +217,7 @@
                                             <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
                                         <connections>
-                                            <action selector="clickWeChatBtn:" destination="Q9P-IZ-YNa" eventType="touchUpInside" id="kgj-TY-GI0"/>
+                                            <action selector="clickWeChatBtn:" destination="Q9P-IZ-YNa" eventType="touchUpInside" id="kXC-5K-REl"/>
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="pAH-Ni-Ujz" userLabel="weibo">
@@ -231,7 +231,7 @@
                                             <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
                                         <connections>
-                                            <action selector="clickWeiBoBtn:" destination="Q9P-IZ-YNa" eventType="touchUpInside" id="X4p-lR-ntY"/>
+                                            <action selector="clickWeiBoBtn:" destination="Q9P-IZ-YNa" eventType="touchUpInside" id="rjd-Qe-UNi"/>
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="WMW-kl-AhJ" userLabel="qq">
@@ -245,7 +245,7 @@
                                             <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
                                         <connections>
-                                            <action selector="clickQQBtn:" destination="Q9P-IZ-YNa" eventType="touchUpInside" id="F0b-O1-ptg"/>
+                                            <action selector="clickQQBtn:" destination="Q9P-IZ-YNa" eventType="touchUpInside" id="Cyi-O6-HKM"/>
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="AQb-ue-hKo">
@@ -279,7 +279,7 @@
                                             <constraint firstAttribute="height" constant="44" id="jXN-v6-um0"/>
                                         </constraints>
                                         <connections>
-                                            <action selector="clickPhoneNumTF:" destination="Q9P-IZ-YNa" eventType="touchUpInside" id="GkC-ph-pUQ"/>
+                                            <action selector="clickPhoneNumTF:" destination="Q9P-IZ-YNa" eventType="touchUpInside" id="tyW-xm-uxe"/>
                                         </connections>
                                     </button>
                                 </subviews>
@@ -327,11 +327,11 @@
                     <navigationItem key="navigationItem" id="cWv-lW-XuY"/>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
                     <connections>
-                        <outlet property="phoneNumTFBtn" destination="7KL-df-xQt" id="GYQ-yg-NcA"/>
-                        <outlet property="qqBtn" destination="WMW-kl-AhJ" id="pUb-al-Ojz"/>
-                        <outlet property="topView" destination="6FC-Hw-EB5" id="yHp-po-V5Z"/>
-                        <outlet property="wechatBtn" destination="07F-a9-XJB" id="aCL-zq-TEb"/>
-                        <outlet property="weiboBtn" destination="pAH-Ni-Ujz" id="Ops-tu-nZQ"/>
+                        <outlet property="phoneNumTFBtn" destination="7KL-df-xQt" id="X0m-B2-IVk"/>
+                        <outlet property="qqBtn" destination="WMW-kl-AhJ" id="Zcc-5U-jo6"/>
+                        <outlet property="topView" destination="6FC-Hw-EB5" id="weo-qC-el5"/>
+                        <outlet property="wechatBtn" destination="07F-a9-XJB" id="npi-28-sas"/>
+                        <outlet property="weiboBtn" destination="pAH-Ni-Ujz" id="Hmq-vc-bhp"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="gnE-j3-cYA" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -1135,9 +1135,6 @@
                                 <constraint firstAttribute="height" constant="30" id="wTy-q5-7wM"/>
                             </constraints>
                             <state key="normal" image="return"/>
-                            <connections>
-                                <action selector="backBtn:" destination="Q9P-IZ-YNa" eventType="touchUpInside" id="4S9-wC-dnZ"/>
-                            </connections>
                         </button>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gn2-Fz-Kte" userLabel="close">
                             <rect key="frame" x="330" y="35" width="30" height="30"/>
@@ -1146,9 +1143,6 @@
                                 <constraint firstAttribute="height" constant="30" id="mO2-Kj-qFB"/>
                             </constraints>
                             <state key="normal" image="close"/>
-                            <connections>
-                                <action selector="cancelBtn:" destination="Q9P-IZ-YNa" eventType="touchUpInside" id="jd6-GY-dbn"/>
-                            </connections>
                         </button>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="uRI-o2-eGC" userLabel="TopView">
                             <rect key="frame" x="0.0" y="105" width="375" height="318"/>
@@ -1169,9 +1163,6 @@
                                     <state key="normal" title="微信">
                                         <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                     </state>
-                                    <connections>
-                                        <action selector="clickWeChatBtn:" destination="Q9P-IZ-YNa" eventType="touchUpInside" id="FfK-cG-1OA"/>
-                                    </connections>
                                 </button>
                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dFJ-kq-7gA" userLabel="weibo">
                                     <rect key="frame" x="15" y="82" width="345" height="44"/>
@@ -1183,9 +1174,6 @@
                                     <state key="normal" title="新浪微博">
                                         <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                     </state>
-                                    <connections>
-                                        <action selector="clickWeiBoBtn:" destination="Q9P-IZ-YNa" eventType="touchUpInside" id="EbT-Zk-q3j"/>
-                                    </connections>
                                 </button>
                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xyV-Vn-ieg" userLabel="qq">
                                     <rect key="frame" x="15" y="139" width="345" height="44"/>
@@ -1197,9 +1185,6 @@
                                     <state key="normal" title="腾讯QQ">
                                         <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                     </state>
-                                    <connections>
-                                        <action selector="clickQQBtn:" destination="Q9P-IZ-YNa" eventType="touchUpInside" id="XEW-qH-pzK"/>
-                                    </connections>
                                 </button>
                                 <button opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="y9u-0H-dI0">
                                     <rect key="frame" x="15" y="199" width="126" height="29"/>
@@ -1231,9 +1216,6 @@
                                     <constraints>
                                         <constraint firstAttribute="height" constant="44" id="fSx-nn-Yii"/>
                                     </constraints>
-                                    <connections>
-                                        <action selector="clickPhoneNumTF:" destination="Q9P-IZ-YNa" eventType="touchUpInside" id="Ig7-HE-aNV"/>
-                                    </connections>
                                 </button>
                             </subviews>
                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>

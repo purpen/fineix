@@ -25,6 +25,7 @@
 #import <TYAlertController.h>
 #import <TYAlertView.h>
 #import "FBBindingMobilePhoneNumber.h"
+#import "SubscribeInterestedCollectionViewController.h"
 
 
 @interface FBLoginViewController ()<UITextFieldDelegate,FBRequestDelegate>
@@ -283,9 +284,21 @@ static NSString *const thirdRegisteredNotBinding = @"/auth/third_register_withou
             MyViewController *myVC = [myStoryBoard instantiateViewControllerWithIdentifier:@"MyViewController"];
             [self.navigationController pushViewController:myVC animated:YES];
             [SVProgressHUD showSuccessWithStatus:NSLocalizedString(@"loginSuccessful", nil)];
-            //跳回个人主页
-            [self dismissViewControllerAnimated:YES completion:nil];
-            [self.tabBarController setSelectedIndex:3];
+            //推荐感兴趣的情景
+            NSDictionary *identifyDict = [[result objectForKey:@"data"] objectForKey:@"identify"];
+            if ([[identifyDict objectForKey:@"is_scene_subscribe"] isEqualToNumber:@0]) {
+                //跳转到推荐界面
+                SubscribeInterestedCollectionViewController *subscribeVC = [[SubscribeInterestedCollectionViewController alloc] init];
+                [self.navigationController pushViewController:subscribeVC animated:YES];
+            }else{
+                //已经订阅过，直接个人中心
+                //跳回个人主页
+                //跳回个人主页
+                [self dismissViewControllerAnimated:YES completion:nil];
+                [self.tabBarController setSelectedIndex:3];
+                
+            }
+
         }//如果失败，提示用户失败原因
         else{
             NSString *message = result[@"message"];
@@ -456,11 +469,21 @@ static NSString *const thirdRegisteredNotBinding = @"/auth/third_register_withou
             
             
             [SVProgressHUD showSuccessWithStatus:NSLocalizedString(@"registeredSuccessfully", nil)];
-            //            //跳回个人主页
-            //            [self dismissViewControllerAnimated:YES completion:nil];
-            //            [self.tabBarController setSelectedIndex:3];
             //推荐感兴趣的情景
-            
+            NSDictionary *identifyDict = [dataDic objectForKey:@"identify"];
+            if ([[identifyDict objectForKey:@"is_scene_subscribe"] isEqualToNumber:@0]) {
+                //跳转到推荐界面
+                SubscribeInterestedCollectionViewController *subscribeVC = [[SubscribeInterestedCollectionViewController alloc] init];
+                [self.navigationController pushViewController:subscribeVC animated:YES];
+            }else{
+                //已经订阅过，直接个人中心
+                //跳回个人主页
+                //跳回个人主页
+                [self dismissViewControllerAnimated:YES completion:nil];
+                [self.tabBarController setSelectedIndex:3];
+                
+            }
+
             
         }else{
             //如果用户不存在,提示用户是否进行绑定
@@ -506,11 +529,21 @@ static NSString *const thirdRegisteredNotBinding = @"/auth/third_register_withou
                     entity.isLogin = YES;
                     
                     [SVProgressHUD showSuccessWithStatus:NSLocalizedString(@"registeredSuccessfully", nil)];
-                    //跳回个人主页
-                    //跳回个人主页
-                    [self dismissViewControllerAnimated:YES completion:nil];
-                    [self.tabBarController setSelectedIndex:3];
                     
+                    //推荐感兴趣的情景
+                    NSDictionary *identifyDict = [dataDic objectForKey:@"identify"];
+                    if ([[identifyDict objectForKey:@"is_scene_subscribe"] isEqualToNumber:@0]) {
+                        //跳转到推荐界面
+                        SubscribeInterestedCollectionViewController *subscribeVC = [[SubscribeInterestedCollectionViewController alloc] init];
+                        [self.navigationController pushViewController:subscribeVC animated:YES];
+                    }else{
+                        //已经订阅过，直接个人中心
+                        //跳回个人主页
+                        //跳回个人主页
+                        [self dismissViewControllerAnimated:YES completion:nil];
+                        [self.tabBarController setSelectedIndex:3];
+                        
+                    }
                     
                 } failure:^(FBRequest *request, NSError *error) {
                     //如果请求失败提示失败信息
@@ -535,6 +568,10 @@ static NSString *const thirdRegisteredNotBinding = @"/auth/third_register_withou
             //alertController.alertViewOriginY = 60;
             [self presentViewController:alertController animated:YES completion:nil];
             
+            
+            
+            
+            
         }
     } failure:^(FBRequest *request, NSError *error) {
         //如果请求失败，提示错误信息
@@ -542,9 +579,7 @@ static NSString *const thirdRegisteredNotBinding = @"/auth/third_register_withou
         [SVProgressHUD showErrorWithStatus:[error localizedDescription]];
     }];
     
-    
 }
-
 
 //#pragma mark -点击登录按钮
 //- (IBAction)clickLoginBtn:(UIButton *)sender {

@@ -7,6 +7,7 @@
 //
 
 #import "FBLoginRegisterViewController.h"
+#import "AppDelegate.h"
 
 @interface FBLoginRegisterViewController ()
 
@@ -32,6 +33,9 @@
 //取消按钮
 - (IBAction)cancelBtn:(UIButton *)sender {
     [self dismissViewControllerAnimated:YES completion:nil];
+//    AppDelegate *del = [AppDelegate ]
+//    FBTabBarController * tabBarC = [[FBTabBarController alloc] init];
+//    self.window.rootViewController = tabBarC;
 }
 
 

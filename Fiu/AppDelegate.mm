@@ -21,10 +21,15 @@
 #import "FBAPI.h"
 #import "GuidePageViewController.h"
 
+
 @interface AppDelegate ()
 {
     BMKMapManager *_mapManager;
+    float _la;
+    float _lo;
 }
+
+
 @end
 
 NSString *const UMSocialAppKey = @"56ef6ab167e58e85710005b3";
@@ -45,12 +50,19 @@ NSString *const determineLogin = @"/auth/check_login";
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     self.window.backgroundColor = [UIColor whiteColor];
     [self.window makeKeyAndVisible];
-    
+//    //创建定为服务对象
+//    self.locationSevice = [[BMKLocationService alloc] init];
+//    //设置定位服务对象代理
+//    self.locationSevice.delegate = self;
+//    self.locationSevice.desiredAccuracy = kCLLocationAccuracyBestForNavigation;
+//    //1，开启定位服务
+//    [self.locationSevice startUserLocationService];
     //设置引导图片
     NSArray *arr = [NSArray arrayWithObjects:@"launch1",@"launch1",@"launch1",@"launch1",@"launch1", nil];
     //使用的时候用key+版本号替换UserHasGuideView
     //这样容易控制每个版本都可以显示引导图
     BOOL userIsFirstInstalled = [[NSUserDefaults standardUserDefaults] boolForKey:@"UserHasGuideView"];
+    
     if (userIsFirstInstalled) {
         FBTabBarController * tabBarC = [[FBTabBarController alloc] init];
         self.window.rootViewController = tabBarC;
@@ -126,6 +138,26 @@ NSString *const determineLogin = @"/auth/check_login";
 
     return YES;
 }
+
+//#pragma mark -BMKLocationServiceDelegate
+//-(void)willStartLocatingUser{
+//    NSLog(@"开始定位");
+//}
+//
+//-(void)didFailToLocateUserWithError:(NSError *)error{
+//    NSLog(@"定位失败%@",error);
+//    //[_hud hideAnimated:YES];
+//}
+//
+//////定位成功，再次定位
+////-(void)didUpdateBMKUserLocation:(BMKUserLocation *)userLocation{
+////    _la = userLocation.location.coordinate.latitude;
+////    _lo = userLocation.location.coordinate.longitude;
+////    
+////    NSLog(@"定位成功");
+////    [_locationSevice stopUserLocationService];
+////}
+
 
 -(BOOL)application:(UIApplication *)application openURL:(NSURL *)url sourceApplication:(NSString *)sourceApplication annotation:(id)annotation{
     NSLog(@"url %@    ****    %@",url,sourceApplication);
