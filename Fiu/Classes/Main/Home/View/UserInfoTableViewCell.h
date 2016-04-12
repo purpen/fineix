@@ -11,8 +11,6 @@
 
 @interface UserInfoTableViewCell : UITableViewCell
 
-@pro_strong UINavigationItem    *   navItem;
-
 @pro_strong UIImageView         *   bgImage;        //  场景图
 @pro_strong UIView              *   userView;       //  用户信息视图
 @pro_strong UIView              *   userLeftView;   //  背景右

@@ -22,7 +22,7 @@ const static NSInteger  peopleBtnTag = 64;
 }
 
 - (void)setUI {
-    NSArray * arr = [NSArray arrayWithObjects:@"1",@"1",@"1",@"1",@"1",@"1",@"1",@"1",@"1",@"1",@"1",@"1",@"1",@"1",@"1",@"1",@"1",@"1",@"1",@"1",@"1", nil];
+    NSArray * arr = [NSArray arrayWithObjects:@"1",@"1",@"1",@"1",@"1",@"1",@"1",@"1",@"1",@"1",nil];
     [self addLikePeopleHeader:arr];
     
     CGFloat num = arr.count;

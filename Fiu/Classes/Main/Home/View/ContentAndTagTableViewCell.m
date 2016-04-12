@@ -7,6 +7,7 @@
 //
 
 #import "ContentAndTagTableViewCell.h"
+#import "SearchViewController.h"
 
 const static NSInteger buttonTag = 421;
 
@@ -127,6 +128,8 @@ const static NSInteger buttonTag = 421;
 //  标签的点击方法
 - (void)tagBtnClick:(UIButton *)button {
     NSLog(@"＝＝＝＝＝＝＝＝＝＝＝ 点击了标签%zi", button.tag - buttonTag);
+    SearchViewController * searchVC = [[SearchViewController alloc] init];
+    [self.nav pushViewController:searchVC animated:YES];
 }
 
 

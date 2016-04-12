@@ -7,6 +7,8 @@
 //
 
 #import "DiscoverViewController.h"
+#import "FiuSceneTableViewCell.h"
+#import "SceneListTableViewCell.h"
 
 @implementation DiscoverViewController
 
@@ -45,8 +47,9 @@
         _discoverTableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT) style:(UITableViewStyleGrouped)];
         _discoverTableView.delegate = self;
         _discoverTableView.dataSource = self;
-        _discoverTableView.tableHeaderView = self.rollView;
         _discoverTableView.showsVerticalScrollIndicator = NO;
+        _discoverTableView.tableHeaderView = self.rollView;
+        
     }
     return _discoverTableView;
 }
@@ -57,26 +60,59 @@
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return 1;
+    if (section == 0) {
+        return 2;
+    } else if (section == 1) {
+        return 1;
+    } else if (section == 2) {
+        return 1;
+    }
+    return 0;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    static NSString * CellId = @"discoverTableViewCell";
-    UITableViewCell * cell = [tableView dequeueReusableCellWithIdentifier:CellId];
-    if (!cell) {
-        cell = [[UITableViewCell alloc] initWithStyle:(UITableViewCellStyleDefault) reuseIdentifier:CellId];
+    if (indexPath.section == 0) {
+        static NSString * fiuFriendCellId = @"fiuFriendCellId";
+        UITableViewCell * cell = [tableView dequeueReusableCellWithIdentifier:fiuFriendCellId];
+        if (!cell) {
+            cell = [[UITableViewCell alloc] initWithStyle:(UITableViewCellStyleDefault) reuseIdentifier:fiuFriendCellId];
+        }
+        return cell;
+    
+    } else if (indexPath.section == 1) {
+        static NSString * fiuSceneCellId = @"fiuSceneCellId";
+        FiuSceneTableViewCell * cell = [tableView dequeueReusableCellWithIdentifier:fiuSceneCellId];
+        if (!cell) {
+            cell = [[FiuSceneTableViewCell alloc] initWithStyle:(UITableViewCellStyleDefault) reuseIdentifier:fiuSceneCellId];
+        }
+        return cell;
+    } else if (indexPath.section == 2) {
+        static NSString * sceneListCellId = @"sceneListCellId";
+        SceneListTableViewCell * cell = [tableView dequeueReusableCellWithIdentifier:sceneListCellId];
+        if (!cell) {
+            cell = [[SceneListTableViewCell alloc] initWithStyle:(UITableViewCellStyleDefault) reuseIdentifier:sceneListCellId];
+        }
+        [cell setUI];
+        return cell;
     }
-    cell.selectionStyle = UITableViewCellSelectionStyleNone;
-    return cell;
+    
+    return nil;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
     if (indexPath.section == 0) {
-        return 200;
+        if (indexPath.row == 0) {
+            return 155;
+        } else if (indexPath.row == 1) {
+            return 80;
+        }
+        
     } else if (indexPath.section == 1) {
         return 266.5;
+        
     } else if (indexPath.section == 2) {
-        return 200;
+        return SCREEN_HEIGHT;
+        
     }
     return 0;
 }

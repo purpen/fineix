@@ -8,9 +8,10 @@
 
 #import "HttpTool.h"
 #import "AFNetworking.h"
+#import "FBConfig.h"
 
 // 服务器地址
-static NSString *const kBaseURLString = @"http://t.taihuoniao.com/app/api";
+static NSString *const kBaseURLString = kDomainBaseUrl;
 
 @implementation AFHttpClient
 

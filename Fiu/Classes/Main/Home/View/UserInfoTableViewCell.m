@@ -22,7 +22,6 @@
         }];
         
         self.selectionStyle = UITableViewCellSelectionStyleNone;
-        
     }
     return self;
 }
@@ -106,17 +105,12 @@
 - (void)changeUserViewFrame {
     CGRect userViewRect = _userView.frame;
     userViewRect = CGRectMake(0, SCREEN_HEIGHT - 140, SCREEN_WIDTH, 130);
-    [UIView animateWithDuration:0.5 delay:1.0 options:(UIViewAnimationOptionTransitionNone) animations:^{
+
+    [UIView animateWithDuration:0.5 delay:0.5 options:(UIViewAnimationOptionTransitionNone) animations:^{
         _userView.frame = userViewRect;
     } completion:^(BOOL finished) {
-        [self hiddenNavItem:NO];
+        
     }];
-}
-
-//  隐藏显示navItem
-- (void)hiddenNavItem:(BOOL)hidden {
-    self.navItem.leftBarButtonItem.customView.hidden = hidden;
-    self.navItem.rightBarButtonItem.customView.hidden = hidden;
 }
 
 #pragma mark - 用户信息
@@ -210,7 +204,8 @@
 - (UIButton *)goodBtn {
     if (!_goodBtn) {
         _goodBtn = [[UIButton alloc] init];
-        [_goodBtn setImage:[UIImage imageNamed:@"User_like"] forState:(UIControlStateNormal)];
+        [_goodBtn setBackgroundImage:[UIImage imageNamed:@"User_like"] forState:(UIControlStateNormal)];
+        [_goodBtn addTarget:self action:@selector(goodBtnClick) forControlEvents:(UIControlEventTouchUpInside)];
         
         [_goodBtn addSubview:self.goodNum];
         [_goodNum mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -220,6 +215,17 @@
         }];
     }
     return _goodBtn;
+}
+
+//  点赞
+- (void)goodBtnClick {
+    if (_goodBtn.selected == NO) {
+        _goodBtn.selected = YES;
+        NSLog(@"＝＝＝＝＝＝＝＝ 点赞 ＋1");
+    } else if (_goodBtn.selected == YES) {
+        _goodBtn.selected = NO;
+        NSLog(@"－－－－－－－－ 点赞 －1");
+    }
 }
 
 #pragma mark - 点赞的数量

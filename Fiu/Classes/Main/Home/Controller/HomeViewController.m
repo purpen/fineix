@@ -9,6 +9,7 @@
 #import "HomeViewController.h"
 #import "SceneListTableViewCell.h"
 #import "SceneInfoViewController.h"
+#import "SearchViewController.h"
 
 @interface HomeViewController ()
 
@@ -16,14 +17,77 @@
 
 @implementation HomeViewController
 
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    
+    [self setNavigationViewUI];
+    
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.view.backgroundColor = [UIColor whiteColor];
     self.automaticallyAdjustsScrollViewInsets = NO;
+    self.currentpageNum = 0;
     
-    [self setNavigationViewUI];
+    [self networkRequestData];
     
     [self.view addSubview:self.homeTableView];
+
+}
+
+#pragma mark - 点击分类导航按钮
+- (void)selectionList:(HTHorizontalSelectionList *)selectionList didSelectButtonWithIndex:(NSInteger)index {
+    NSLog(@"+++++++++++++++++++++++++++++++  %zi", index);
+}
+
+#pragma mark - 网络请求
+- (void)networkRequestData {
+    NSDictionary *  requestParams = @{
+                                      @"page":@(self.currentpageNum + 1),
+                                      @"size":@10,
+                                      @"stick":@1
+                                      };
+    self.sceneListRequest = [FBAPI getWithUrlString:HomeSceneList requestDictionary:requestParams delegate:self];
+    [self.sceneListRequest startRequestSuccess:^(FBRequest *request, id result) {
+//        NSLog(@"＝＝＝＝＝＝＝＝＝＝＝ %@", result);
+        
+        self.currentpageNum = [[[result valueForKey:@"data"] valueForKey:@"current_page"] integerValue];
+        self.totalPageNum = [[[result valueForKey:@"data"] valueForKey:@"total_page"] integerValue];
+//        NSLog(@"－－－－－－－%zi,  %zi", self.currentpageNum, self.totalPageNum);
+        [self requestIsLastData:self.homeTableView currentPage:self.currentpageNum withTotalPage:self.totalPageNum];
+        
+    } failure:^(FBRequest *request, NSError *error) {
+        [SVProgressHUD showErrorWithStatus:[error localizedDescription]];
+    }];
+}
+
+//  判断是否为最后一条数据
+- (void)requestIsLastData:(UITableView *)table currentPage:(NSInteger )current withTotalPage:(NSInteger)total {
+    BOOL isLastPage = (current == total);
+
+    if (!isLastPage) {
+        if (table.mj_footer.state == MJRefreshStateNoMoreData) {
+            [table.mj_footer resetNoMoreData];
+        }
+    }
+    if (current == total == 1) {
+        table.mj_footer.state = MJRefreshStateNoMoreData;
+        table.mj_footer.hidden = true;
+    }
+    
+    if ([table.mj_header isRefreshing]) {
+        [table.mj_header endRefreshing];
+    }
+    if ([table.mj_footer isRefreshing]) {
+        if (isLastPage) {
+            [table.mj_footer endRefreshingWithNoMoreData];
+        } else  {
+            [table.mj_footer endRefreshing];
+        }
+    }
+    
+    [SVProgressHUD dismiss];
 }
 
 #pragma mark - 加载首页表格
@@ -34,6 +98,19 @@
         _homeTableView.dataSource = self;
         _homeTableView.showsVerticalScrollIndicator = NO;
         _homeTableView.separatorStyle = UITableViewCellSeparatorStyleNone;
+        
+        _homeTableView.mj_header = [MJRefreshNormalHeader headerWithRefreshingBlock:^{
+            self.currentpageNum = 0;
+            [self networkRequestData];
+        }];
+        
+        _homeTableView.mj_footer = [MJRefreshAutoNormalFooter footerWithRefreshingBlock:^{
+            if (self.currentpageNum < self.totalPageNum) {
+                [self networkRequestData];
+            } else {
+                [_homeTableView.mj_footer endRefreshing];
+            }
+        }];
     }
     return _homeTableView;
 }
@@ -50,7 +127,6 @@
         cell = [[SceneListTableViewCell alloc] initWithStyle:(UITableViewCellStyleDefault) reuseIdentifier:CellId];
     }
     [cell setUI];
-    cell.selectionStyle = UITableViewCellSelectionStyleNone;
     return cell;
 }
 
@@ -117,13 +193,14 @@
     [self addBarItemLeftBarButton:@"" image:@"Nav_Search"];
     [self addBarItemRightBarButton:@"" image:@"Nav_Concern"];
     [self addNavLogo:@"Nav_Title"];
-    [self navBarTransparent];
+    [self navBarTransparent:YES];
     
 }
 
 //  点击左边barItem
 - (void)leftBarItemSelected {
-    NSLog(@"＊＊＊＊＊＊＊＊＊搜索");
+    SearchViewController * searchVC = [[SearchViewController alloc] init];
+    [self.navigationController pushViewController:searchVC animated:YES];
 }
 
 //  点击右边barItem

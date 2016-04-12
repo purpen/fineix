@@ -58,6 +58,9 @@
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+    if (section == 0) {
+        return 3;
+    }
     return 1;
 }
 
@@ -73,7 +76,14 @@
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
     if (indexPath.section == 0) {
-        return 200;
+        if (indexPath.row == 0) {
+            return 155;
+        } else if (indexPath.row == 1) {
+            return 80;
+        } else if (indexPath.row == 2) {
+            return 105;
+        }
+        
     } else if (indexPath.section == 1) {
         return 266.5;
     }

@@ -13,10 +13,7 @@
 
 @protocol FBNavigationBarItemsDelegate <NSObject>
 
-@optional
 - (void)leftBarItemSelected;
-
-@optional
 - (void)rightBarItemSelected;
 
 @end
@@ -44,6 +41,7 @@
 /*
  *  设置Nav透明
  */
-- (void)navBarTransparent;
+- (void)navBarTransparent:(BOOL)ture;
+
 
 @end

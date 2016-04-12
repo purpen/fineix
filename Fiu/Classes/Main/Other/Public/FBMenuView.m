@@ -1,0 +1,56 @@
+//
+//  FBMenuView.m
+//  Fiu
+//
+//  Created by FLYang on 16/4/12.
+//  Copyright © 2016年 taihuoniao. All rights reserved.
+//
+
+#import "FBMenuView.h"
+
+@implementation FBMenuView
+
+- (instancetype)initWithFrame:(CGRect)frame {
+    self = [super initWithFrame:frame];
+    if (self) {
+        [self addSubview:self.menuView];
+    }
+    return self;
+}
+
+- (NSMutableArray *)menuTitle {
+    if (!_menuTitle) {
+        _menuTitle = [NSMutableArray array];
+    }
+    return _menuTitle;
+}
+
+#pragma mark - 导航菜单视图
+- (HTHorizontalSelectionList *)menuView {
+    if (!_menuView) {
+        _menuView = [[HTHorizontalSelectionList alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 44)];
+        [_menuView setTitleFont:[UIFont systemFontOfSize:14] forState:(UIControlStateNormal)];
+        [_menuView setTitleColor:[UIColor blackColor] forState:(UIControlStateNormal)];
+        [_menuView setTitleColor:[UIColor colorWithHexString:fineixColor alpha:1] forState:(UIControlStateSelected)];
+        _menuView.bottomTrimColor = [UIColor colorWithHexString:lineGrayColor alpha:1];
+        _menuView.selectionIndicatorColor = [UIColor colorWithHexString:fineixColor alpha:1];
+        _menuView.delegate = self;
+        _menuView.dataSource = self;
+    }
+    return _menuView;
+}
+
+- (NSInteger)numberOfItemsInSelectionList:(HTHorizontalSelectionList *)selectionList {
+    return self.menuTitle.count;
+}
+
+- (NSString *)selectionList:(HTHorizontalSelectionList *)selectionList titleForItemWithIndex:(NSInteger)index {
+    return self.menuTitle[index];
+}
+
+#pragma mark - 点击分类导航按钮
+- (void)selectionList:(HTHorizontalSelectionList *)selectionList didSelectButtonWithIndex:(NSInteger)index {
+    NSLog(@"+++++++++++++++++++++++++++++++  %zi", index);
+}
+
+@end
