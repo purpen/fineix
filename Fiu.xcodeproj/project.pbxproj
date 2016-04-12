@@ -40,9 +40,9 @@
 		1FC60EF81CBCA0C400FB1EF4 /* TurnPageLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = 1FC60EF71CBCA0C400FB1EF4 /* TurnPageLayout.m */; };
 		1FC60F091CBCC57500FB1EF4 /* RecommendedScenarioView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1FC60F071CBCC57500FB1EF4 /* RecommendedScenarioView.m */; };
 		1FC60F0A1CBCC57500FB1EF4 /* RecommendedScenarioView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1FC60F081CBCC57500FB1EF4 /* RecommendedScenarioView.xib */; };
-		1FC60F111CBCD39B00FB1EF4 /* RecommendedScenarioModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 1FC60F101CBCD39B00FB1EF4 /* RecommendedScenarioModel.m */; };
 		1FC60F1A1CBD0D4500FB1EF4 /* SubscribeInterestedCollectionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1FC60F181CBD0D4500FB1EF4 /* SubscribeInterestedCollectionViewController.m */; };
 		1FC60F1B1CBD0D4500FB1EF4 /* SubscribeInterestedCollectionViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1FC60F191CBD0D4500FB1EF4 /* SubscribeInterestedCollectionViewController.xib */; };
+		1FC60F201CBD0E8A00FB1EF4 /* RecommendedScenarioModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 1FC60F1F1CBD0E8A00FB1EF4 /* RecommendedScenarioModel.m */; };
 		1FEFD56C1CAD115C005A1C5F /* BackImagView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1FEFD55F1CAD115C005A1C5F /* BackImagView.m */; };
 		1FEFD56D1CAD115C005A1C5F /* chanel.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1FEFD5601CAD115C005A1C5F /* chanel.xib */; };
 		1FEFD56E1CAD115C005A1C5F /* ChanelView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1FEFD5621CAD115C005A1C5F /* ChanelView.m */; };
@@ -242,11 +242,11 @@
 		1FC60F061CBCC57500FB1EF4 /* RecommendedScenarioView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RecommendedScenarioView.h; sourceTree = "<group>"; };
 		1FC60F071CBCC57500FB1EF4 /* RecommendedScenarioView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RecommendedScenarioView.m; sourceTree = "<group>"; };
 		1FC60F081CBCC57500FB1EF4 /* RecommendedScenarioView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RecommendedScenarioView.xib; sourceTree = "<group>"; };
-		1FC60F0F1CBCD39B00FB1EF4 /* RecommendedScenarioModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RecommendedScenarioModel.h; sourceTree = "<group>"; };
-		1FC60F101CBCD39B00FB1EF4 /* RecommendedScenarioModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RecommendedScenarioModel.m; sourceTree = "<group>"; };
 		1FC60F171CBD0D4500FB1EF4 /* SubscribeInterestedCollectionViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SubscribeInterestedCollectionViewController.h; path = Fiu/Classes/Main/LoginRegister/controller/SubscribeInterestedCollectionViewController.h; sourceTree = SOURCE_ROOT; };
 		1FC60F181CBD0D4500FB1EF4 /* SubscribeInterestedCollectionViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SubscribeInterestedCollectionViewController.m; path = Fiu/Classes/Main/LoginRegister/controller/SubscribeInterestedCollectionViewController.m; sourceTree = SOURCE_ROOT; };
 		1FC60F191CBD0D4500FB1EF4 /* SubscribeInterestedCollectionViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = SubscribeInterestedCollectionViewController.xib; path = Fiu/Classes/Main/LoginRegister/controller/SubscribeInterestedCollectionViewController.xib; sourceTree = SOURCE_ROOT; };
+		1FC60F1E1CBD0E8A00FB1EF4 /* RecommendedScenarioModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RecommendedScenarioModel.h; sourceTree = "<group>"; };
+		1FC60F1F1CBD0E8A00FB1EF4 /* RecommendedScenarioModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RecommendedScenarioModel.m; sourceTree = "<group>"; };
 		1FEFD55E1CAD115C005A1C5F /* BackImagView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BackImagView.h; sourceTree = "<group>"; };
 		1FEFD55F1CAD115C005A1C5F /* BackImagView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BackImagView.m; sourceTree = "<group>"; };
 		1FEFD5601CAD115C005A1C5F /* chanel.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = chanel.xib; sourceTree = "<group>"; };
@@ -594,7 +594,7 @@
 		1F02B68E1CAA93F30080CA45 /* model */ = {
 			isa = PBXGroup;
 			children = (
-				1FC60F0E1CBCD39B00FB1EF4 /* RecommendedScenarioModel */,
+				1FC60F1D1CBD0E8A00FB1EF4 /* RecommendedScenarioModel */,
 				1F02B68F1CAA93F30080CA45 /* DBModel */,
 			);
 			path = model;
@@ -729,14 +729,15 @@
 			path = Fiu/Classes/Main/LoginRegister/other;
 			sourceTree = SOURCE_ROOT;
 		};
-		1FC60F0E1CBCD39B00FB1EF4 /* RecommendedScenarioModel */ = {
+		1FC60F1D1CBD0E8A00FB1EF4 /* RecommendedScenarioModel */ = {
 			isa = PBXGroup;
 			children = (
-				1FC60F0F1CBCD39B00FB1EF4 /* RecommendedScenarioModel.h */,
-				1FC60F101CBCD39B00FB1EF4 /* RecommendedScenarioModel.m */,
+				1FC60F1E1CBD0E8A00FB1EF4 /* RecommendedScenarioModel.h */,
+				1FC60F1F1CBD0E8A00FB1EF4 /* RecommendedScenarioModel.m */,
 			);
-			path = RecommendedScenarioModel;
-			sourceTree = "<group>";
+			name = RecommendedScenarioModel;
+			path = Fiu/Classes/Main/LoginRegister/model/RecommendedScenarioModel;
+			sourceTree = SOURCE_ROOT;
 		};
 		1FEFD55D1CAD115C005A1C5F /* view */ = {
 			isa = PBXGroup;
@@ -1513,7 +1514,6 @@
 				D812815A1CAA8532007CF08B /* fineix.xcdatamodeld in Sources */,
 				D81281591CAA8532007CF08B /* UIImageView+SDWedImage.m in Sources */,
 				1F6A9A2C1CBB49A8003290E6 /* SubscribeInterestedViewController.m in Sources */,
-				1FC60F111CBCD39B00FB1EF4 /* RecommendedScenarioModel.m in Sources */,
 				D81281541CAA8532007CF08B /* FBRequest.m in Sources */,
 				D89B5A971CB66B3B00DB9710 /* DataNumTableViewCell.m in Sources */,
 				1FEFD56E1CAD115C005A1C5F /* ChanelView.m in Sources */,
@@ -1552,6 +1552,7 @@
 				D812812C1CAA8532007CF08B /* PictureView.m in Sources */,
 				D81281161CAA8532007CF08B /* ClipImageViewController.m in Sources */,
 				1F02B7311CAA99240080CA45 /* PhoneToSignUpViewController.m in Sources */,
+				1FC60F201CBD0E8A00FB1EF4 /* RecommendedScenarioModel.m in Sources */,
 				1FC60EF81CBCA0C400FB1EF4 /* TurnPageLayout.m in Sources */,
 				1FEFD58E1CAD1219005A1C5F /* MyOrdersViewController.m in Sources */,
 				D81281671CAA8532007CF08B /* JKDBModel.m in Sources */,
