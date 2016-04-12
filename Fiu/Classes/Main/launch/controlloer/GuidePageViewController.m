@@ -9,7 +9,7 @@
 #import "GuidePageViewController.h"
 #import "Fiu.h"
 #import "UserInfoEntity.h"
-#import "FBLoginRegisterViewController.h"
+#import "FBTabBarController.h"
 
 @interface GuidePageViewController ()<UIScrollViewDelegate>
 {
@@ -94,23 +94,24 @@
 
 //点击『立即使用』按钮
 -(void)clickSkips:(UIButton*)sender{
-//    //弹出登录注册界面
-//    UIStoryboard *loginsStory = [UIStoryboard storyboardWithName:@"LoginRegisterController" bundle:nil];
-//    FBLoginRegisterViewController *loginregisterVC = [loginsStory instantiateViewControllerWithIdentifier:@"FBLoginRegisterViewController"];
-//    UINavigationController *navi = [[UINavigationController alloc] initWithRootViewController:loginregisterVC];
-//    [self presentViewController:navi animated:YES completion:nil];
+    //弹出登录注册界面
+    FBTabBarController *tab = [[FBTabBarController alloc] init];
+    [tab setSelectedIndex:0];
+    [self presentViewController:tab animated:YES completion:nil];
+    
 
-    //如果没有登录过弹出登录注册界面
-    UserInfoEntity *entity = [UserInfoEntity defaultUserInfoEntity];
-    if (entity.isLogin == NO) {
-        UIStoryboard *loginStory = [UIStoryboard storyboardWithName:@"LoginRegisterController" bundle:nil];
-        FBLoginRegisterViewController *loginVC = [loginStory instantiateViewControllerWithIdentifier:@"FBLoginRegisterViewController"];
-        UINavigationController *navi = [[UINavigationController alloc] initWithRootViewController:loginVC];
-        [self presentViewController:navi animated:YES completion:nil];
-    }//跳到首页页面，如果没有登录过弹出登录注册界面
-    else{
-        [self presentViewController:_mainController animated:YES completion:nil];
-    }
+//    //如果没有登录过弹出登录注册界面
+//    UserInfoEntity *entity = [UserInfoEntity defaultUserInfoEntity];
+//    if (entity.isLogin == NO) {
+//        //转到我的界面
+//        UIStoryboard *loginStory = [UIStoryboard storyboardWithName:@"My" bundle:nil];
+//        MyViewController *loginVC = [loginStory instantiateViewControllerWithIdentifier:@"MyViewController"];
+//        UINavigationController *navi = [[UINavigationController alloc] initWithRootViewController:loginVC];
+//        [self presentViewController:navi animated:YES completion:nil];
+//    }//跳到首页页面，如果没有登录过弹出登录注册界面
+//    else{
+//        [self presentViewController:_mainController animated:YES completion:nil];
+//    }
     
 }
 

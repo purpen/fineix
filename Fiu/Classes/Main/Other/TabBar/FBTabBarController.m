@@ -69,7 +69,26 @@
             return NO;
         }
     }
-    else
+    //这里我判断的是当前点击的tabBarItem的标题
+    if ([viewController.tabBarItem.title isEqualToString:@"情"]) {
+        //使用的时候用key+版本号替换UserHasGuideView
+        //这样容易控制每个版本都可以显示引导图
+        BOOL userIsFirstInstalled = [[NSUserDefaults standardUserDefaults] boolForKey:@"UserHasGuideView1"];
+        
+        if (userIsFirstInstalled) {
+            return YES;
+        }else{
+            //跳到登录页面
+            UIStoryboard *loginStory = [UIStoryboard storyboardWithName:@"LoginRegisterController" bundle:[NSBundle mainBundle]];
+            FBLoginRegisterViewController *loginSignupVC = [loginStory instantiateViewControllerWithIdentifier:@"FBLoginRegisterViewController"];
+            UINavigationController *navi = [[UINavigationController alloc] initWithRootViewController:loginSignupVC];
+            [self presentViewController:navi animated:YES completion:nil];
+            [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"UserHasGuideView1"];
+            return NO;
+
+        }
+
+    }else
         return YES;
 }
 
