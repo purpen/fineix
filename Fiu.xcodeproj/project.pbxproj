@@ -37,12 +37,12 @@
 		1FBD5F251CB3D5A6002A3048 /* OrderInfoCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 1FBD5F241CB3D5A6002A3048 /* OrderInfoCell.m */; };
 		1FC60EEE1CBC920100FB1EF4 /* ImprovePersonalDataViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1FC60EEC1CBC920100FB1EF4 /* ImprovePersonalDataViewController.m */; };
 		1FC60EEF1CBC920100FB1EF4 /* ImprovePersonalDataViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1FC60EED1CBC920100FB1EF4 /* ImprovePersonalDataViewController.xib */; };
-		1FC60EF31CBC9FC900FB1EF4 /* SubscribeInterestedCollectionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1FC60EF11CBC9FC900FB1EF4 /* SubscribeInterestedCollectionViewController.m */; };
-		1FC60EF41CBC9FC900FB1EF4 /* SubscribeInterestedCollectionViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1FC60EF21CBC9FC900FB1EF4 /* SubscribeInterestedCollectionViewController.xib */; };
 		1FC60EF81CBCA0C400FB1EF4 /* TurnPageLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = 1FC60EF71CBCA0C400FB1EF4 /* TurnPageLayout.m */; };
 		1FC60F091CBCC57500FB1EF4 /* RecommendedScenarioView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1FC60F071CBCC57500FB1EF4 /* RecommendedScenarioView.m */; };
 		1FC60F0A1CBCC57500FB1EF4 /* RecommendedScenarioView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1FC60F081CBCC57500FB1EF4 /* RecommendedScenarioView.xib */; };
 		1FC60F111CBCD39B00FB1EF4 /* RecommendedScenarioModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 1FC60F101CBCD39B00FB1EF4 /* RecommendedScenarioModel.m */; };
+		1FC60F1A1CBD0D4500FB1EF4 /* SubscribeInterestedCollectionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1FC60F181CBD0D4500FB1EF4 /* SubscribeInterestedCollectionViewController.m */; };
+		1FC60F1B1CBD0D4500FB1EF4 /* SubscribeInterestedCollectionViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1FC60F191CBD0D4500FB1EF4 /* SubscribeInterestedCollectionViewController.xib */; };
 		1FEFD56C1CAD115C005A1C5F /* BackImagView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1FEFD55F1CAD115C005A1C5F /* BackImagView.m */; };
 		1FEFD56D1CAD115C005A1C5F /* chanel.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1FEFD5601CAD115C005A1C5F /* chanel.xib */; };
 		1FEFD56E1CAD115C005A1C5F /* ChanelView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1FEFD5621CAD115C005A1C5F /* ChanelView.m */; };
@@ -237,9 +237,6 @@
 		1FC60EEB1CBC920100FB1EF4 /* ImprovePersonalDataViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ImprovePersonalDataViewController.h; path = Fiu/Classes/Main/LoginRegister/controller/ImprovePersonalDataViewController.h; sourceTree = SOURCE_ROOT; };
 		1FC60EEC1CBC920100FB1EF4 /* ImprovePersonalDataViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ImprovePersonalDataViewController.m; path = Fiu/Classes/Main/LoginRegister/controller/ImprovePersonalDataViewController.m; sourceTree = SOURCE_ROOT; };
 		1FC60EED1CBC920100FB1EF4 /* ImprovePersonalDataViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = ImprovePersonalDataViewController.xib; path = Fiu/Classes/Main/LoginRegister/controller/ImprovePersonalDataViewController.xib; sourceTree = SOURCE_ROOT; };
-		1FC60EF01CBC9FC900FB1EF4 /* SubscribeInterestedCollectionViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SubscribeInterestedCollectionViewController.h; sourceTree = "<group>"; };
-		1FC60EF11CBC9FC900FB1EF4 /* SubscribeInterestedCollectionViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SubscribeInterestedCollectionViewController.m; sourceTree = "<group>"; };
-		1FC60EF21CBC9FC900FB1EF4 /* SubscribeInterestedCollectionViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SubscribeInterestedCollectionViewController.xib; sourceTree = "<group>"; };
 		1FC60EF61CBCA0C400FB1EF4 /* TurnPageLayout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TurnPageLayout.h; sourceTree = "<group>"; };
 		1FC60EF71CBCA0C400FB1EF4 /* TurnPageLayout.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TurnPageLayout.m; sourceTree = "<group>"; };
 		1FC60F061CBCC57500FB1EF4 /* RecommendedScenarioView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RecommendedScenarioView.h; sourceTree = "<group>"; };
@@ -247,6 +244,9 @@
 		1FC60F081CBCC57500FB1EF4 /* RecommendedScenarioView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RecommendedScenarioView.xib; sourceTree = "<group>"; };
 		1FC60F0F1CBCD39B00FB1EF4 /* RecommendedScenarioModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RecommendedScenarioModel.h; sourceTree = "<group>"; };
 		1FC60F101CBCD39B00FB1EF4 /* RecommendedScenarioModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RecommendedScenarioModel.m; sourceTree = "<group>"; };
+		1FC60F171CBD0D4500FB1EF4 /* SubscribeInterestedCollectionViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SubscribeInterestedCollectionViewController.h; path = Fiu/Classes/Main/LoginRegister/controller/SubscribeInterestedCollectionViewController.h; sourceTree = SOURCE_ROOT; };
+		1FC60F181CBD0D4500FB1EF4 /* SubscribeInterestedCollectionViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SubscribeInterestedCollectionViewController.m; path = Fiu/Classes/Main/LoginRegister/controller/SubscribeInterestedCollectionViewController.m; sourceTree = SOURCE_ROOT; };
+		1FC60F191CBD0D4500FB1EF4 /* SubscribeInterestedCollectionViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = SubscribeInterestedCollectionViewController.xib; path = Fiu/Classes/Main/LoginRegister/controller/SubscribeInterestedCollectionViewController.xib; sourceTree = SOURCE_ROOT; };
 		1FEFD55E1CAD115C005A1C5F /* BackImagView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BackImagView.h; sourceTree = "<group>"; };
 		1FEFD55F1CAD115C005A1C5F /* BackImagView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BackImagView.m; sourceTree = "<group>"; };
 		1FEFD5601CAD115C005A1C5F /* chanel.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = chanel.xib; sourceTree = "<group>"; };
@@ -562,6 +562,9 @@
 		1F02B6821CAA93F30080CA45 /* controller */ = {
 			isa = PBXGroup;
 			children = (
+				1FC60F171CBD0D4500FB1EF4 /* SubscribeInterestedCollectionViewController.h */,
+				1FC60F181CBD0D4500FB1EF4 /* SubscribeInterestedCollectionViewController.m */,
+				1FC60F191CBD0D4500FB1EF4 /* SubscribeInterestedCollectionViewController.xib */,
 				1FC60EEB1CBC920100FB1EF4 /* ImprovePersonalDataViewController.h */,
 				1FC60EEC1CBC920100FB1EF4 /* ImprovePersonalDataViewController.m */,
 				1FC60EED1CBC920100FB1EF4 /* ImprovePersonalDataViewController.xib */,
@@ -584,9 +587,6 @@
 				1F02B7281CAA99240080CA45 /* PhoneToSignUpViewController.m */,
 				1F02B7291CAA99240080CA45 /* SubmitViewController.h */,
 				1F02B72A1CAA99240080CA45 /* SubmitViewController.m */,
-				1FC60EF01CBC9FC900FB1EF4 /* SubscribeInterestedCollectionViewController.h */,
-				1FC60EF11CBC9FC900FB1EF4 /* SubscribeInterestedCollectionViewController.m */,
-				1FC60EF21CBC9FC900FB1EF4 /* SubscribeInterestedCollectionViewController.xib */,
 			);
 			path = controller;
 			sourceTree = "<group>";
@@ -1422,7 +1422,6 @@
 				D812816C1CAA8532007CF08B /* UMSCommentInputControlleriPad.xib in Resources */,
 				D812815D1CAA8532007CF08B /* Localizable.strings in Resources */,
 				1F6A9A2D1CBB49A8003290E6 /* SubscribeInterestedViewController.xib in Resources */,
-				1FC60EF41CBC9FC900FB1EF4 /* SubscribeInterestedCollectionViewController.xib in Resources */,
 				D812816A1CAA8532007CF08B /* UMSCommentDetailController.xib in Resources */,
 				D812814E1CAA8532007CF08B /* FBMapLocatinViewController.xib in Resources */,
 				1F5801121CB796450021EA19 /* Signup.xib in Resources */,
@@ -1433,6 +1432,7 @@
 				D812816F1CAA8532007CF08B /* UMSLoginViewController.xib in Resources */,
 				D81281111CAA8532007CF08B /* Assets.xcassets in Resources */,
 				D812815C1CAA8532007CF08B /* InfoPlist.strings in Resources */,
+				1FC60F1B1CBD0D4500FB1EF4 /* SubscribeInterestedCollectionViewController.xib in Resources */,
 				1F986AAB1CB676FC0074ABFE /* Login.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1554,11 +1554,11 @@
 				1F02B7311CAA99240080CA45 /* PhoneToSignUpViewController.m in Sources */,
 				1FC60EF81CBCA0C400FB1EF4 /* TurnPageLayout.m in Sources */,
 				1FEFD58E1CAD1219005A1C5F /* MyOrdersViewController.m in Sources */,
-				1FC60EF31CBC9FC900FB1EF4 /* SubscribeInterestedCollectionViewController.m in Sources */,
 				D81281671CAA8532007CF08B /* JKDBModel.m in Sources */,
 				D81281291CAA8532007CF08B /* FiltersView.m in Sources */,
 				D89B5A941CB6580600DB9710 /* UserInfoTableViewCell.m in Sources */,
 				D89B5A7C1CB3853200DB9710 /* GroupHeaderView.m in Sources */,
+				1FC60F1A1CBD0D4500FB1EF4 /* SubscribeInterestedCollectionViewController.m in Sources */,
 				D812812E1CAA8532007CF08B /* ScenceMessageView.m in Sources */,
 				D81281181CAA8532007CF08B /* CropImageViewController.m in Sources */,
 				D812812B1CAA8532007CF08B /* PhotoAlbumsView.m in Sources */,
