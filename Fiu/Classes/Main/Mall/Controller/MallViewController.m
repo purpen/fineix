@@ -7,6 +7,7 @@
 //
 
 #import "MallViewController.h"
+#import "MallMenuTableViewCell.h"
 
 @implementation MallViewController
 
@@ -28,6 +29,12 @@
 #pragma mark - 设置视图的UI
 - (void)setMallViewUI {
     [self.view addSubview:self.mallTableView];
+    if ([self.mallTableView respondsToSelector:@selector(setSeparatorInset:)]) {
+        [self.mallTableView setSeparatorInset:UIEdgeInsetsZero];
+    }
+    if ([self.mallTableView respondsToSelector:@selector(setLayoutMargins:)]) {
+        [self.mallTableView setLayoutMargins:UIEdgeInsetsZero];
+    }
 }
 
 #pragma mark - 顶部轮播图
@@ -65,6 +72,17 @@
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+    if (indexPath.section == 0) {
+        if (indexPath.row == 2) {
+            static NSString * mallMenuTableViewCellID = @"mallMenuTableViewCell";
+            MallMenuTableViewCell * cell = [tableView dequeueReusableCellWithIdentifier:mallMenuTableViewCellID];
+            if (!cell) {
+                cell = [[MallMenuTableViewCell alloc] initWithStyle:(UITableViewCellStyleDefault) reuseIdentifier:mallMenuTableViewCellID];
+            }
+            return cell;
+        }
+        
+    }
     static NSString * CellId = @"mallTableViewCell";
     UITableViewCell * cell = [tableView dequeueReusableCellWithIdentifier:CellId];
     if (!cell) {
@@ -107,6 +125,15 @@
 
 - (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section {
     return 0.01;
+}
+
+- (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath {
+    if ([cell respondsToSelector:@selector(setSeparatorInset:)]) {
+        [cell setSeparatorInset:UIEdgeInsetsZero];
+    }
+    if ([cell respondsToSelector:@selector(setLayoutMargins:)]) {
+        [cell setLayoutMargins:UIEdgeInsetsZero];
+    }
 }
 
 #pragma mark - 设置Nav

@@ -13,6 +13,7 @@
 
 @interface CreateViewController : FBPictureViewController
 
+@pro_strong NSString            *   createType;         //  创建类型（场景/情景）
 @pro_strong FBFootView          *   footView;           //  底部功能选择视图
 @pro_strong PictureView         *   pictureView;        //  相册页面
 @pro_strong CameraView          *   cameraView;         //  相机页面

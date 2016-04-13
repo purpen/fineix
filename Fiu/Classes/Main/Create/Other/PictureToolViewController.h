@@ -7,7 +7,15 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "Fiu.h"
 
 @interface PictureToolViewController : UINavigationController
+
+/*
+ *  创建的类型
+ *  @param  scene   场景
+ *  @param  fScene  情景
+ */
+@pro_strong NSString            *   createType;
 
 @end

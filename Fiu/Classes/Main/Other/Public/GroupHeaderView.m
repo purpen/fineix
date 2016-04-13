@@ -7,6 +7,7 @@
 //
 
 #import "GroupHeaderView.h"
+#import "AllSceneViewController.h"
 
 @implementation GroupHeaderView
 
@@ -14,8 +15,7 @@
     self = [super initWithFrame:frame];
     if (self) {
         
-//        self.frame = CGRectMake(0, 0, SCREEN_WIDTH, 44);
-        self.backgroundColor = [UIColor whiteColor];
+        self.backgroundColor = [UIColor colorWithHexString:@"#F7F7F7" alpha:1];
         
         [self setUI];
         
@@ -58,6 +58,15 @@
     }];
 }
 
+- (void)addLookMoreBtn {
+    [self addSubview:self.moreBtn];
+    [_moreBtn mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.size.mas_equalTo(CGSizeMake(50, 44));
+        make.centerY.equalTo(self);
+        make.right.equalTo(self.mas_right).with.offset(-10);
+    }];
+}
+
 - (UIImageView *)icon {
     if (!_icon) {
         _icon = [[UIImageView alloc] init];
@@ -82,6 +91,22 @@
         _subTitle.font = [UIFont systemFontOfSize:11];
     }
     return _subTitle;
+}
+
+- (UIButton *)moreBtn {
+    if (!_moreBtn) {
+        _moreBtn = [[UIButton alloc] init];
+        [_moreBtn setTitle:@"查看全部" forState:(UIControlStateNormal)];
+        [_moreBtn setTitleColor:[UIColor colorWithHexString:tabBarTitle alpha:1] forState:(UIControlStateNormal)];
+        _moreBtn.titleLabel.font = [UIFont systemFontOfSize:12];
+        [_moreBtn addTarget:self action:@selector(moreFiuScene) forControlEvents:(UIControlEventTouchUpInside)];
+    }
+    return _moreBtn;
+}
+
+- (void)moreFiuScene {
+    AllSceneViewController * allSceneVC = [[AllSceneViewController alloc] init];
+    [self.nav pushViewController:allSceneVC animated:YES];
 }
 
 @end

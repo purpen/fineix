@@ -23,38 +23,38 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    self.menuTitle = @[@"情景", @"场景", @"用户", @"产品"];
+    self.titleArr = [NSArray arrayWithObjects:@"情景", @"场景", @"用户", @"产品", nil];
     
-    [self.view addSubview:self.searchMenu];
+//    [self.view addSubview:self.searchMenu];
+    [self.view addSubview:self.menuView];
     
 }
 
 #pragma mark - 导航菜单视图
-- (HTHorizontalSelectionList *)searchMenu {
-    if (!_searchMenu) {
-        _searchMenu = [[HTHorizontalSelectionList alloc] initWithFrame:CGRectMake(0, 64, SCREEN_WIDTH, 44)];
-        [_searchMenu setTitleFont:[UIFont systemFontOfSize:14] forState:(UIControlStateNormal)];
-        [_searchMenu setTitleColor:[UIColor blackColor] forState:(UIControlStateNormal)];
-        [_searchMenu setTitleColor:[UIColor colorWithHexString:fineixColor alpha:1] forState:(UIControlStateSelected)];
-        _searchMenu.bottomTrimColor = [UIColor colorWithHexString:lineGrayColor alpha:1];
-        _searchMenu.selectionIndicatorColor = [UIColor colorWithHexString:fineixColor alpha:1];
-        _searchMenu.delegate = self;
-        _searchMenu.dataSource = self;
+- (HTHorizontalSelectionList *)menuView {
+    if (!_menuView) {
+        _menuView = [[HTHorizontalSelectionList alloc] initWithFrame:CGRectMake(0, 64, SCREEN_WIDTH, 44)];
+        [_menuView setTitleFont:[UIFont systemFontOfSize:14] forState:(UIControlStateNormal)];
+        [_menuView setTitleColor:[UIColor blackColor] forState:(UIControlStateNormal)];
+        [_menuView setTitleColor:[UIColor colorWithHexString:fineixColor alpha:1] forState:(UIControlStateSelected)];
+        _menuView.bottomTrimColor = [UIColor colorWithHexString:lineGrayColor alpha:1];
+        _menuView.selectionIndicatorColor = [UIColor colorWithHexString:fineixColor alpha:1];
+        _menuView.delegate = self;
+        _menuView.dataSource = self;
     }
-    return _searchMenu;
+    return _menuView;
 }
 
 - (NSInteger)numberOfItemsInSelectionList:(HTHorizontalSelectionList *)selectionList {
-    return self.menuTitle.count;
+    return self.titleArr.count;
 }
 
 - (NSString *)selectionList:(HTHorizontalSelectionList *)selectionList titleForItemWithIndex:(NSInteger)index {
-    return self.menuTitle[index];
+    return self.titleArr[index];
 }
 
-#pragma mark - 点击分类导航按钮
 - (void)selectionList:(HTHorizontalSelectionList *)selectionList didSelectButtonWithIndex:(NSInteger)index {
-    NSLog(@"+++++++++++++++++++++++++++++++  %zi", index);
+    NSLog(@"＝＝＝＝＝＝＝＝＝ %zi", index);
 }
 
 #pragma mark - 设置Nav
