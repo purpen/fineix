@@ -280,16 +280,18 @@ static NSString *const thirdRegisteredNotBinding = @"/auth/third_register_withou
             UserInfoEntity *entity = [UserInfoEntity defaultUserInfoEntity];
             entity.isLogin = YES;
             
-            UIStoryboard *myStoryBoard = [UIStoryboard storyboardWithName:@"My" bundle:[NSBundle mainBundle]];
-            MyViewController *myVC = [myStoryBoard instantiateViewControllerWithIdentifier:@"MyViewController"];
-            [self.navigationController pushViewController:myVC animated:YES];
+//            UIStoryboard *myStoryBoard = [UIStoryboard storyboardWithName:@"My" bundle:[NSBundle mainBundle]];
+//            MyViewController *myVC = [myStoryBoard instantiateViewControllerWithIdentifier:@"MyViewController"];
+//            [self.navigationController pushViewController:myVC animated:YES];
             [SVProgressHUD showSuccessWithStatus:NSLocalizedString(@"loginSuccessful", nil)];
             //推荐感兴趣的情景
             NSDictionary *identifyDict = [[result objectForKey:@"data"] objectForKey:@"identify"];
+            NSLog(@"是否订阅%@",[identifyDict objectForKey:@"is_scene_subscribe"]);
             if ([[identifyDict objectForKey:@"is_scene_subscribe"] isEqualToNumber:@0]) {
                 //跳转到推荐界面
                 SubscribeInterestedCollectionViewController *subscribeVC = [[SubscribeInterestedCollectionViewController alloc] init];
                 [self.navigationController pushViewController:subscribeVC animated:YES];
+                NSLog(@"跳转到推荐界面");
             }else{
                 //已经订阅过，直接个人中心
                 //跳回个人主页

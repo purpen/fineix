@@ -1,14 +1,18 @@
 {
-  "DVTSourceControlWorkspaceBlueprintPrimaryRemoteRepositoryKey" : "524C33DF3B48254121DF6A7C8C32ED53E28A2D81",
+  "DVTSourceControlWorkspaceBlueprintPrimaryRemoteRepositoryKey" : "524C33DF3B48254121DF6A7C8C32ED53E28A2D81+++3E28DC4",
   "DVTSourceControlWorkspaceBlueprintWorkingCopyRepositoryLocationsKey" : {
 
   },
   "DVTSourceControlWorkspaceBlueprintWorkingCopyStatesKey" : {
-    "524C33DF3B48254121DF6A7C8C32ED53E28A2D81" : 0
+    "524C33DF3B48254121DF6A7C8C32ED53E28A2D81+++3E28DC4" : 0,
+    "524C33DF3B48254121DF6A7C8C32ED53E28A2D81+++544BF16" : 0,
+    "524C33DF3B48254121DF6A7C8C32ED53E28A2D81+++886AA05" : 0
   },
   "DVTSourceControlWorkspaceBlueprintIdentifierKey" : "9C581EE6-F4E2-4EE4-B63F-429673A2839A",
   "DVTSourceControlWorkspaceBlueprintWorkingCopyPathsKey" : {
-    "524C33DF3B48254121DF6A7C8C32ED53E28A2D81" : "fineix\/"
+    "524C33DF3B48254121DF6A7C8C32ED53E28A2D81+++3E28DC4" : "Fiu\/",
+    "524C33DF3B48254121DF6A7C8C32ED53E28A2D81+++544BF16" : "fineix\/",
+    "524C33DF3B48254121DF6A7C8C32ED53E28A2D81+++886AA05" : "fineix\/"
   },
   "DVTSourceControlWorkspaceBlueprintNameKey" : "Fiu",
   "DVTSourceControlWorkspaceBlueprintVersion" : 204,
@@ -17,12 +21,17 @@
     {
       "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/github.com\/purpen\/fineix.git",
       "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
-      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "524C33DF3B48254121DF6A7C8C32ED53E28A2D81"
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "524C33DF3B48254121DF6A7C8C32ED53E28A2D81+++3E28DC4"
     },
     {
       "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/github.com\/purpen\/fineix",
       "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
-      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "524C33DF3B48254121DF6A7C8C32ED53E28A2D81"
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "524C33DF3B48254121DF6A7C8C32ED53E28A2D81+++544BF16"
+    },
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/github.com\/purpen\/fineix.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "524C33DF3B48254121DF6A7C8C32ED53E28A2D81+++886AA05"
     }
   ]
 }

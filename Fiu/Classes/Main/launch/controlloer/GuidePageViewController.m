@@ -96,7 +96,6 @@
 -(void)clickSkips:(UIButton*)sender{
     //弹出登录注册界面
     FBTabBarController *tab = [[FBTabBarController alloc] init];
-    [tab setSelectedIndex:0];
     [self presentViewController:tab animated:YES completion:nil];
     
 
@@ -107,7 +106,7 @@
 //        UIStoryboard *loginStory = [UIStoryboard storyboardWithName:@"My" bundle:nil];
 //        MyViewController *loginVC = [loginStory instantiateViewControllerWithIdentifier:@"MyViewController"];
 //        UINavigationController *navi = [[UINavigationController alloc] initWithRootViewController:loginVC];
-//        [self presentViewController:navi animated:YES completion:nil];
+//        [seilf presentViewController:navi animated:YES completion:nil];
 //    }//跳到首页页面，如果没有登录过弹出登录注册界面
 //    else{
 //        [self presentViewController:_mainController animated:YES completion:nil];

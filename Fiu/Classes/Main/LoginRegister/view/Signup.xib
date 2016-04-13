@@ -179,5 +179,40 @@
             </connections>
             <point key="canvasLocation" x="351.5" y="360"/>
         </view>
+        <view contentMode="scaleToFill" id="3Pe-jk-x9N" customClass="NumView">
+            <rect key="frame" x="0.0" y="0.0" width="63" height="34"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <subviews>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="15" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0Dz-OP-3Ex">
+                    <rect key="frame" x="0.0" y="0.0" width="29" height="34"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                    <color key="textColor" red="0.74509803919999995" green="0.53725490200000003" blue="0.078431372550000003" alpha="1" colorSpace="calibratedRGB"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="/15" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="OPh-lA-sFs">
+                    <rect key="frame" x="34" y="0.0" width="29" height="34"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                    <nil key="highlightedColor"/>
+                </label>
+            </subviews>
+            <constraints>
+                <constraint firstItem="0Dz-OP-3Ex" firstAttribute="top" secondItem="3Pe-jk-x9N" secondAttribute="top" id="GD3-Ga-Las"/>
+                <constraint firstItem="0Dz-OP-3Ex" firstAttribute="leading" secondItem="3Pe-jk-x9N" secondAttribute="leading" id="K7Y-L1-0ry"/>
+                <constraint firstAttribute="bottom" secondItem="OPh-lA-sFs" secondAttribute="bottom" id="TuN-5k-yPF"/>
+                <constraint firstAttribute="trailing" secondItem="OPh-lA-sFs" secondAttribute="trailing" id="cPT-tq-wYc"/>
+                <constraint firstItem="OPh-lA-sFs" firstAttribute="leading" secondItem="0Dz-OP-3Ex" secondAttribute="trailing" constant="5" id="fnc-cg-XfU"/>
+                <constraint firstAttribute="bottom" secondItem="0Dz-OP-3Ex" secondAttribute="bottom" id="lBf-hl-lmQ"/>
+                <constraint firstItem="OPh-lA-sFs" firstAttribute="top" secondItem="3Pe-jk-x9N" secondAttribute="top" id="vNT-jU-nRk"/>
+                <constraint firstItem="OPh-lA-sFs" firstAttribute="width" secondItem="0Dz-OP-3Ex" secondAttribute="width" id="ykC-k5-7JH"/>
+            </constraints>
+            <nil key="simulatedStatusBarMetrics"/>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <connections>
+                <outlet property="currentNumberLabel" destination="0Dz-OP-3Ex" id="e91-Fr-hId"/>
+                <outlet property="totalNumberLabel" destination="OPh-lA-sFs" id="yD2-Ta-Dw3"/>
+            </connections>
+            <point key="canvasLocation" x="242.5" y="785"/>
+        </view>
     </objects>
 </document>

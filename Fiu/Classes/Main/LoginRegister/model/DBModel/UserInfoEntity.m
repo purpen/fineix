@@ -36,7 +36,7 @@
     userInfo.level = self.level;
     userInfo.levelDesc = self.levelDesc;
     userInfo.birdCoin = self.birdCoin;
-    
+    userInfo.summary = self.summary;
     dispatch_async(dispatch_get_global_queue(0, 0), ^{
         [userInfo saveOrUpdate];
     });
@@ -54,6 +54,7 @@
     self.level = @0;
     self.levelDesc = @"";
     self.birdCoin = @0;
+    self.summary = @"";
 }
 
 @end

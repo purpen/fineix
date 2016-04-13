@@ -16,13 +16,15 @@
 #import "RecommendedScenarioModel.h"
 #import <SDWebImage/UIImageView+WebCache.h>
 #import "SVProgressHUD.h"
+#import "ImprovePersonalDataViewController.h"
+#import "NumView.h"
 
 #define kScreenHeight  ([UIScreen mainScreen].bounds.size.height)
 #define kScreenWidth   ([UIScreen mainScreen].bounds.size.width)
 
 @interface SubscribeInterestedCollectionViewController ()<BMKLocationServiceDelegate,FBRequestDelegate>
 {
-    UILabel *_numLabel;
+    NumView *_numV;
     float _la;
     float _lo;
     NSMutableArray *_modelAry;
@@ -61,7 +63,7 @@ static NSString * const reuseIdentifier = @"Cell";
     [nextBtn addTarget:self action:@selector(clickNextBtn:) forControlEvents:UIControlEventTouchUpInside];
     [nextBtn setTitle:@"下一步" forState:UIControlStateNormal];
     [self.view addSubview:nextBtn];
-    UILabel *headLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 64+15, 240, 15)];
+    UILabel *headLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 64+20, 240, 15)];
     CGPoint headLabelcenter = headLabel.center;
     headLabelcenter.x = self.view.center.x;
     headLabel.center = headLabelcenter;
@@ -69,10 +71,9 @@ static NSString * const reuseIdentifier = @"Cell";
     headLabel.text = @"现在你可以订阅感兴趣的情景来开始";
     headLabel.textColor = [UIColor grayColor];
     [self.view addSubview:headLabel];
-    _numLabel = [[UILabel alloc] initWithFrame:CGRectMake(274, 500, 20, 15)];
-    _numLabel.textColor = [UIColor colorWithHexString:fineixColor];
-    _numLabel.textColor = [UIColor blackColor];
-    [self.view addSubview:_numLabel];
+    _numV = [NumView getNumView];
+    _numV.frame = CGRectMake(kScreenWidth-50, kScreenHeight-44/667.0*kScreenHeight-15, 20, 15);
+    [self.view addSubview:_numV];
     // Uncomment the following line to preserve selection between presentations
     // self.clearsSelectionOnViewWillAppear = NO;
     
@@ -94,6 +95,7 @@ static NSString * const reuseIdentifier = @"Cell";
 -(void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
     [self.navigationItem setHidesBackButton:YES];
+    self.navigationController.navigationBarHidden = NO;
 }
 
 #pragma mark -BMKLocationServiceDelegate
@@ -148,8 +150,7 @@ static NSString * const reuseIdentifier = @"Cell";
     if ([request.flag isEqualToString:recommendedScenarioURL]) {
         NSDictionary *dataDic = result[@"data"];
         NSArray *dataAry = dataDic[@"rows"];
-        for (int i = 0; i<dataAry.count; i++) {
-            NSDictionary *modelDict = dataAry[i];
+        for (NSDictionary *modelDict in dataAry) {
             NSDictionary *modellDict = @{
                                          @"covers":modelDict[@"covers"][@"resp"],
                                          @"title" : modelDict[@"title"],
@@ -161,9 +162,10 @@ static NSString * const reuseIdentifier = @"Cell";
             //获取的数据转为模型存储起来
             [_modelAry addObject:model];
         }
+        //进行数据展示
+        [self.collectionView reloadData];
     }
-    //进行数据展示
-    [self.collectionView reloadData];
+    
     if ([request.flag isEqualToString:sceneSubscription]) {
         if (result[@"success"]) {
             [SVProgressHUD showSuccessWithStatus:@"订阅成功"];
@@ -177,7 +179,8 @@ static NSString * const reuseIdentifier = @"Cell";
 //下一步按钮
 -(void)clickNextBtn:(UIButton*)sender{
     //跳转到个人信息完善页面
-    
+    ImprovePersonalDataViewController *improveVC = [[ImprovePersonalDataViewController alloc] init];
+    [self.navigationController pushViewController:improveVC animated:YES];
 }
 
 #pragma mark - UIScrollViewDelegate
@@ -200,7 +203,7 @@ static NSString * const reuseIdentifier = @"Cell";
     //    }
     
     int page = (int)(_scrollView.contentOffset.x/(200+30/667.0*kScreenHeight)+0.5);
-    _numLabel.text = [NSString stringWithFormat:@"%d",page+1];
+    _numV.currentNumberLabel.text = [NSString stringWithFormat:@"%d",page+1];
     
 }
 
@@ -235,7 +238,7 @@ static NSString * const reuseIdentifier = @"Cell";
 
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
     
-    return 15;
+    return _modelAry.count;
 }
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
