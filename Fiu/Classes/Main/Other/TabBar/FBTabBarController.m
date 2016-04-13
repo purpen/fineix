@@ -17,6 +17,7 @@
 #import "MyViewController.h"
 #import "UserInfoEntity.h"
 #import "PictureToolViewController.h"
+#import "FBPictureViewController.h"
 
 @interface FBTabBarController () <UITabBarControllerDelegate>
 
@@ -142,6 +143,7 @@
 #pragma mark “创建情景”的按钮事件
 - (void)createBtnClick {
     PictureToolViewController * pictureToolVC = [[PictureToolViewController alloc] init];
+    pictureToolVC.createType = @"scene";
     [self presentViewController:pictureToolVC animated:YES completion:nil];
 }
 

@@ -29,6 +29,12 @@
 #pragma mark - 设置视图的UI
 - (void)setDiscoverViewUI {
     [self.view addSubview:self.discoverTableView];
+    if ([self.discoverTableView respondsToSelector:@selector(setSeparatorInset:)]) {
+        [self.discoverTableView setSeparatorInset:UIEdgeInsetsZero];
+    }
+    if ([self.discoverTableView respondsToSelector:@selector(setLayoutMargins:)]) {
+        [self.discoverTableView setLayoutMargins:UIEdgeInsetsZero];
+    }
 }
 
 #pragma mark - 顶部轮播图
@@ -119,10 +125,12 @@
 
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
     self.headerView = [[GroupHeaderView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 44)];
+    self.headerView.nav = self.navigationController;
     
     if (section == 0) {
         [self.headerView addGroupHeaderViewIcon:@"Group_friend" withTitle:@"最Fiu伙伴" withSubtitle:@"[越喜欢头像越大]"];
     } else if (section ==1) {
+        [self.headerView addLookMoreBtn];
         [self.headerView addGroupHeaderViewIcon:@"Group_scene" withTitle:@"最Fiu情景" withSubtitle:@"[我的地盘我收益]"];
     } else if (section == 2) {
         [self.headerView addGroupHeaderViewIcon:@"Group_scene" withTitle:@"最Fiu场景" withSubtitle:@"[发现不一样]"];
@@ -137,6 +145,15 @@
 
 - (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section {
     return 0.01;
+}
+
+- (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath {
+    if ([cell respondsToSelector:@selector(setSeparatorInset:)]) {
+        [cell setSeparatorInset:UIEdgeInsetsZero];
+    }
+    if ([cell respondsToSelector:@selector(setLayoutMargins:)]) {
+        [cell setLayoutMargins:UIEdgeInsetsZero];
+    }
 }
 
 #pragma mark - 设置Nav

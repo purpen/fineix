@@ -31,7 +31,8 @@
     [self setCreateControllerUI];
     
     [self setNavViewUI];
-
+    
+     NSLog(@"================  %@", self.createType);
 }
 
 #pragma mark - 设置顶部Nav

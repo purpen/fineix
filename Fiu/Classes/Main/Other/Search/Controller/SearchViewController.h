@@ -11,7 +11,7 @@
 
 @interface SearchViewController : FBViewController <HTHorizontalSelectionListDelegate, HTHorizontalSelectionListDataSource>
 
-@pro_strong HTHorizontalSelectionList       *   searchMenu;         //  分类导航栏
-@pro_strong NSArray                         *   menuTitle;          //  分类信息标题
+@pro_strong HTHorizontalSelectionList       *   menuView;       //  分类导航
+@pro_strong NSArray                         *   titleArr;       //  分类标题
 
 @end

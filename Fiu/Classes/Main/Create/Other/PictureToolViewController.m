@@ -14,9 +14,6 @@
 
 @interface PictureToolViewController () {
     CreateViewController        * _createVC;
-    CropImageViewController     * _cropVC;
-    FiltersViewController       * _filtersVC;
-    ReleaseViewController       * _releaseVC;
 }
 
 @end
@@ -28,7 +25,9 @@
     self.navigationBar.hidden = YES;
     
     _createVC = [[CreateViewController alloc] init];
+    _createVC.createType = self.createType;
     [self addChildViewController:_createVC];
+    
 }
 
 

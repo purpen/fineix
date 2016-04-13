@@ -36,11 +36,6 @@
 
 }
 
-#pragma mark - 点击分类导航按钮
-- (void)selectionList:(HTHorizontalSelectionList *)selectionList didSelectButtonWithIndex:(NSInteger)index {
-    NSLog(@"+++++++++++++++++++++++++++++++  %zi", index);
-}
-
 #pragma mark - 网络请求
 - (void)networkRequestData {
     NSDictionary *  requestParams = @{
@@ -194,6 +189,7 @@
     [self addBarItemRightBarButton:@"" image:@"Nav_Concern"];
     [self addNavLogo:@"Nav_Title"];
     [self navBarTransparent:YES];
+    [[UIApplication sharedApplication] setStatusBarHidden:NO withAnimation:(UIStatusBarAnimationSlide)];
     
 }
 

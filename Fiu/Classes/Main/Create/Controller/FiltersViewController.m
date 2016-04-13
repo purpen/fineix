@@ -26,7 +26,7 @@
     [self setFiltersControllerUI];
     
     [self setNotification];
-    
+
 }
 
 - (void)changeFilter:(NSNotification *)filterName {
@@ -104,7 +104,6 @@
         [self.filtersView removeFromSuperview];
         
     } else if (index == 2) {
-        [self.view addSubview:self.cancelFilter];
         
         [self.view addSubview:self.filtersView];
         [_filtersView mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -133,17 +132,8 @@
 }
 
 #pragma mark - 使滤镜视图消失
-- (UIButton *)cancelFilter {
-    if (!_cancelFilter) {
-        _cancelFilter = [[UIButton alloc] initWithFrame:CGRectMake(0, 50, SCREEN_WIDTH, SCREEN_HEIGHT - 100)];
-        [_cancelFilter addTarget:self action:@selector(cancelFilterView) forControlEvents:(UIControlEventTouchUpInside)];
-    }
-    return _cancelFilter;
-}
-
-- (void)cancelFilterView {
+- (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event {
     [self.filtersView removeFromSuperview];
-    [self.cancelFilter removeFromSuperview];
 }
 
 #pragma mark - 接收消息通知
@@ -154,6 +144,7 @@
 
 - (void)dealloc {
     [[NSNotificationCenter defaultCenter] removeObserver:self name:@"fitlerName" object:nil];
+    
 }
 
 @end

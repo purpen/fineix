@@ -20,6 +20,7 @@
     [self.view addSubview:self.navView];
     
     [[UIApplication sharedApplication] setStatusBarHidden:YES withAnimation:(UIStatusBarAnimationSlide)];
+    
 }
 
 #pragma mark - 添加控件
