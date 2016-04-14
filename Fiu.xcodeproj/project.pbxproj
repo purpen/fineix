@@ -101,6 +101,7 @@
 		D803605B1CBF376B001920F9 /* SignupView.m in Sources */ = {isa = PBXBuildFile; fileRef = D80360371CBF376B001920F9 /* SignupView.m */; };
 		D803605C1CBF376B001920F9 /* SubmitView.m in Sources */ = {isa = PBXBuildFile; fileRef = D80360391CBF376B001920F9 /* SubmitView.m */; };
 		D803605D1CBF376B001920F9 /* GuidePageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D803603D1CBF376B001920F9 /* GuidePageViewController.m */; };
+		D80360621CBF41A3001920F9 /* SearchMenuView.m in Sources */ = {isa = PBXBuildFile; fileRef = D80360611CBF41A3001920F9 /* SearchMenuView.m */; };
 		D80D41581CAD142C005D72B1 /* FBPictureViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D80D41571CAD142C005D72B1 /* FBPictureViewController.m */; };
 		D80D415B1CAD1437005D72B1 /* FBNavigationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D80D41591CAD1437005D72B1 /* FBNavigationViewController.m */; };
 		D80D415E1CAD144D005D72B1 /* UIBarButtonItem+Helper.m in Sources */ = {isa = PBXBuildFile; fileRef = D80D415C1CAD144D005D72B1 /* UIBarButtonItem+Helper.m */; };
@@ -134,7 +135,6 @@
 		D812812C1CAA8532007CF08B /* PictureView.m in Sources */ = {isa = PBXBuildFile; fileRef = D81280541CAA8532007CF08B /* PictureView.m */; };
 		D812812D1CAA8532007CF08B /* ScenceAddMoreView.m in Sources */ = {isa = PBXBuildFile; fileRef = D81280561CAA8532007CF08B /* ScenceAddMoreView.m */; };
 		D812812E1CAA8532007CF08B /* ScenceMessageView.m in Sources */ = {isa = PBXBuildFile; fileRef = D81280581CAA8532007CF08B /* ScenceMessageView.m */; };
-		D812812F1CAA8532007CF08B /* SearchLocationView.m in Sources */ = {isa = PBXBuildFile; fileRef = D812805A1CAA8532007CF08B /* SearchLocationView.m */; };
 		D81281301CAA8532007CF08B /* DiscoverViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D812805E1CAA8532007CF08B /* DiscoverViewController.m */; };
 		D81281311CAA8532007CF08B /* HomeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D81280621CAA8532007CF08B /* HomeViewController.m */; };
 		D812813C1CAA8532007CF08B /* MallViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D812807D1CAA8532007CF08B /* MallViewController.m */; };
@@ -184,6 +184,8 @@
 		D83A64371C8E7EBD003DB8BB /* CoreVideo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D83A64361C8E7EBD003DB8BB /* CoreVideo.framework */; };
 		D83A64391C8E7EC5003DB8BB /* CoreMedia.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D83A64381C8E7EC5003DB8BB /* CoreMedia.framework */; };
 		D83A643B1C8E7ED2003DB8BB /* CoreImage.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D83A643A1C8E7ED2003DB8BB /* CoreImage.framework */; };
+		D86AFDE91CBF7D6F006F1602 /* SearchResultsRollView.m in Sources */ = {isa = PBXBuildFile; fileRef = D86AFDE81CBF7D6F006F1602 /* SearchResultsRollView.m */; };
+		D86AFDEC1CBF84DB006F1602 /* SearchSceneTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D86AFDEB1CBF84DB006F1602 /* SearchSceneTableViewCell.m */; };
 		D89B5A8B1CB4E48800DB9710 /* SceneListTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D89B5A8A1CB4E48800DB9710 /* SceneListTableViewCell.m */; };
 		D89B5A8E1CB6284A00DB9710 /* SceneInfoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D89B5A8D1CB6284A00DB9710 /* SceneInfoViewController.m */; };
 		D89B5A941CB6580600DB9710 /* UserInfoTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D89B5A931CB6580600DB9710 /* UserInfoTableViewCell.m */; };
@@ -369,6 +371,8 @@
 		D80360391CBF376B001920F9 /* SubmitView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SubmitView.m; sourceTree = "<group>"; };
 		D803603C1CBF376B001920F9 /* GuidePageViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GuidePageViewController.h; sourceTree = "<group>"; };
 		D803603D1CBF376B001920F9 /* GuidePageViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GuidePageViewController.m; sourceTree = "<group>"; };
+		D80360601CBF41A3001920F9 /* SearchMenuView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SearchMenuView.h; sourceTree = "<group>"; };
+		D80360611CBF41A3001920F9 /* SearchMenuView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SearchMenuView.m; sourceTree = "<group>"; };
 		D80D41561CAD142C005D72B1 /* FBPictureViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FBPictureViewController.h; sourceTree = "<group>"; };
 		D80D41571CAD142C005D72B1 /* FBPictureViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FBPictureViewController.m; sourceTree = "<group>"; };
 		D80D41591CAD1437005D72B1 /* FBNavigationViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FBNavigationViewController.m; sourceTree = "<group>"; };
@@ -433,8 +437,6 @@
 		D81280561CAA8532007CF08B /* ScenceAddMoreView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ScenceAddMoreView.m; sourceTree = "<group>"; };
 		D81280571CAA8532007CF08B /* ScenceMessageView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ScenceMessageView.h; sourceTree = "<group>"; };
 		D81280581CAA8532007CF08B /* ScenceMessageView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ScenceMessageView.m; sourceTree = "<group>"; };
-		D81280591CAA8532007CF08B /* SearchLocationView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SearchLocationView.h; sourceTree = "<group>"; };
-		D812805A1CAA8532007CF08B /* SearchLocationView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SearchLocationView.m; sourceTree = "<group>"; };
 		D812805D1CAA8532007CF08B /* DiscoverViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DiscoverViewController.h; sourceTree = "<group>"; };
 		D812805E1CAA8532007CF08B /* DiscoverViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DiscoverViewController.m; sourceTree = "<group>"; };
 		D81280611CAA8532007CF08B /* HomeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HomeViewController.h; sourceTree = "<group>"; };
@@ -527,6 +529,10 @@
 		D83A64361C8E7EBD003DB8BB /* CoreVideo.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreVideo.framework; path = System/Library/Frameworks/CoreVideo.framework; sourceTree = SDKROOT; };
 		D83A64381C8E7EC5003DB8BB /* CoreMedia.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMedia.framework; path = System/Library/Frameworks/CoreMedia.framework; sourceTree = SDKROOT; };
 		D83A643A1C8E7ED2003DB8BB /* CoreImage.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreImage.framework; path = System/Library/Frameworks/CoreImage.framework; sourceTree = SDKROOT; };
+		D86AFDE71CBF7D6F006F1602 /* SearchResultsRollView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SearchResultsRollView.h; sourceTree = "<group>"; };
+		D86AFDE81CBF7D6F006F1602 /* SearchResultsRollView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SearchResultsRollView.m; sourceTree = "<group>"; };
+		D86AFDEA1CBF84DB006F1602 /* SearchSceneTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SearchSceneTableViewCell.h; sourceTree = "<group>"; };
+		D86AFDEB1CBF84DB006F1602 /* SearchSceneTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SearchSceneTableViewCell.m; sourceTree = "<group>"; };
 		D89B5A891CB4E48800DB9710 /* SceneListTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SceneListTableViewCell.h; sourceTree = "<group>"; };
 		D89B5A8A1CB4E48800DB9710 /* SceneListTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SceneListTableViewCell.m; sourceTree = "<group>"; };
 		D89B5A8C1CB6284A00DB9710 /* SceneInfoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SceneInfoViewController.h; sourceTree = "<group>"; };
@@ -829,6 +835,12 @@
 		D8035FBE1CBD1021001920F9 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				D80360601CBF41A3001920F9 /* SearchMenuView.h */,
+				D80360611CBF41A3001920F9 /* SearchMenuView.m */,
+				D86AFDE71CBF7D6F006F1602 /* SearchResultsRollView.h */,
+				D86AFDE81CBF7D6F006F1602 /* SearchResultsRollView.m */,
+				D86AFDEA1CBF84DB006F1602 /* SearchSceneTableViewCell.h */,
+				D86AFDEB1CBF84DB006F1602 /* SearchSceneTableViewCell.m */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -1181,8 +1193,6 @@
 				D81280561CAA8532007CF08B /* ScenceAddMoreView.m */,
 				D81280571CAA8532007CF08B /* ScenceMessageView.h */,
 				D81280581CAA8532007CF08B /* ScenceMessageView.m */,
-				D81280591CAA8532007CF08B /* SearchLocationView.h */,
-				D812805A1CAA8532007CF08B /* SearchLocationView.m */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -1655,6 +1665,7 @@
 			files = (
 				D81281581CAA8532007CF08B /* UIColor+Extension.m in Sources */,
 				1FEFD5971CAD12B2005A1C5F /* FeedbackViewController.m in Sources */,
+				D80360621CBF41A3001920F9 /* SearchMenuView.m in Sources */,
 				D81281311CAA8532007CF08B /* HomeViewController.m in Sources */,
 				D8035F2C1CB77AAA001920F9 /* ContentAndTagTableViewCell.m in Sources */,
 				D81281531CAA8532007CF08B /* FBAPI.m in Sources */,
@@ -1698,6 +1709,7 @@
 				D8035F3E1CBB4939001920F9 /* CommentTableViewCell.m in Sources */,
 				D89B5A8B1CB4E48800DB9710 /* SceneListTableViewCell.m in Sources */,
 				D803604E1CBF376B001920F9 /* NSString+UserModel.m in Sources */,
+				D86AFDEC1CBF84DB006F1602 /* SearchSceneTableViewCell.m in Sources */,
 				D812815E1CAA8532007CF08B /* main.m in Sources */,
 				D8035FC81CBD1021001920F9 /* FBMapLocatinViewController.m in Sources */,
 				D8035FEE1CBE1EA3001920F9 /* AllSceneView.m in Sources */,
@@ -1737,9 +1749,9 @@
 				D803604A1CBF376B001920F9 /* SubscribeInterestedViewController.m in Sources */,
 				D8035FCF1CBD1021001920F9 /* FBTabBar.m in Sources */,
 				D812813C1CAA8532007CF08B /* MallViewController.m in Sources */,
+				D86AFDE91CBF7D6F006F1602 /* SearchResultsRollView.m in Sources */,
 				1FEFD5911CAD1219005A1C5F /* MyViewController.m in Sources */,
 				D81281191CAA8532007CF08B /* FiltersViewController.m in Sources */,
-				D812812F1CAA8532007CF08B /* SearchLocationView.m in Sources */,
 				1FEFD58B1CAD1219005A1C5F /* MyFocusOnViewController.m in Sources */,
 				D803603F1CBF376B001920F9 /* FBLoginRegisterViewController.m in Sources */,
 				D8035FCE1CBD1021001920F9 /* SearchViewController.m in Sources */,

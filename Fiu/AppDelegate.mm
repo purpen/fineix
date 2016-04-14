@@ -29,7 +29,6 @@
     float _lo;
 }
 
-
 @end
 
 NSString *const UMSocialAppKey = @"56ef6ab167e58e85710005b3";
@@ -58,18 +57,18 @@ NSString *const determineLogin = @"/auth/check_login";
 //    //1，开启定位服务
 //    [self.locationSevice startUserLocationService];
     //设置引导图片
-    NSArray *arr = [NSArray arrayWithObjects:@"launch1",@"launch1",@"launch1",@"launch1",@"launch1", nil];
+//    NSArray *arr = [NSArray arrayWithObjects:@"launch1",@"launch1",@"launch1",@"launch1",@"launch1", nil];
     //使用的时候用key+版本号替换UserHasGuideView
     //这样容易控制每个版本都可以显示引导图
-    BOOL userIsFirstInstalled = [[NSUserDefaults standardUserDefaults] boolForKey:@"UserHasGuideView"];
+//    BOOL userIsFirstInstalled = [[NSUserDefaults standardUserDefaults] boolForKey:@"UserHasGuideView"];
     
-    if (userIsFirstInstalled) {
+//    if (userIsFirstInstalled) {
         FBTabBarController * tabBarC = [[FBTabBarController alloc] init];
         self.window.rootViewController = tabBarC;
-    }else{
-        self.window.rootViewController = [[GuidePageViewController alloc] initWithPicArr:arr andRootVC:[[FBTabBarController alloc] init]];
-        [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"UserHasGuideView"];
-    }
+//    }else{
+//        self.window.rootViewController = [[GuidePageViewController alloc] initWithPicArr:arr andRootVC:[[FBTabBarController alloc] init]];
+//        [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"UserHasGuideView"];
+//    }
     
     
     

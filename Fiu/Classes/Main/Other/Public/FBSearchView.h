@@ -17,6 +17,7 @@
 
 @interface FBSearchView : UIView <UITextFieldDelegate>
 
+@pro_strong UIView              *   bgView;              //  背景
 @pro_strong UIImageView         *   searchIcon;          //  搜索图标
 @pro_strong UITextField         *   searchInputBox;      //  搜索输入框
 @pro_strong UILabel             *   line;                //  视图分割线

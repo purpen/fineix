@@ -1,18 +1,18 @@
 //
-//  AllSceneView.m
+//  SearchSceneTableViewCell.m
 //  Fiu
 //
-//  Created by FLYang on 16/4/13.
+//  Created by FLYang on 16/4/14.
 //  Copyright © 2016年 taihuoniao. All rights reserved.
 //
 
-#import "AllSceneView.h"
+#import "SearchSceneTableViewCell.h"
 #import "AllSceneCollectionViewCell.h"
 
-@implementation AllSceneView
+@implementation SearchSceneTableViewCell
 
-- (instancetype)initWithFrame:(CGRect)frame {
-    self = [super initWithFrame:frame];
+- (instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier {
+    self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
     if (self) {
         [self addSubview:self.allSceneView];
     }
@@ -28,7 +28,7 @@
         flowLayout.minimumInteritemSpacing = 5.0;
         flowLayout.minimumLineSpacing = 5.0;
         
-        _allSceneView = [[UICollectionView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT) collectionViewLayout:flowLayout];
+        _allSceneView = [[UICollectionView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT - 108) collectionViewLayout:flowLayout];
         _allSceneView.delegate = self;
         _allSceneView.dataSource = self;
         _allSceneView.backgroundColor = [UIColor whiteColor];
