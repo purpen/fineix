@@ -23,6 +23,7 @@
 @property (nonatomic, strong) NSNumber * level;
 @property (nonatomic, copy) NSString * levelDesc;
 @property (nonatomic, strong) NSNumber * birdCoin;
+@property (nonatomic, copy) NSString * summary;
 
 + (instancetype)defaultUserInfoEntity;
 - (void)updateUserInfo;

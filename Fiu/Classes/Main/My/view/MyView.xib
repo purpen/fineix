@@ -239,7 +239,7 @@
                         <constraint firstAttribute="height" constant="25" id="B2t-7W-frx"/>
                         <constraint firstAttribute="width" constant="69" id="KjH-ne-uEV"/>
                     </constraints>
-                    <state key="normal" image="Button"/>
+                    <state key="normal" image="certification"/>
                 </button>
                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Dina Alexander" translatesAutoresizingMaskIntoConstraints="NO" id="RLZ-hj-JFv">
                     <rect key="frame" x="155" y="15" width="65" height="65"/>
@@ -293,8 +293,12 @@
                 </mask>
             </variation>
             <connections>
-                <outlet property="headImageView" destination="RLZ-hj-JFv" id="0Lc-4W-PNF"/>
+                <outlet property="headImageView" destination="RLZ-hj-JFv" id="ciW-7Y-3jm"/>
+                <outlet property="levelLabel" destination="x08-I5-dSD" id="FZo-YQ-bpr"/>
                 <outlet property="nickNameLabel" destination="M05-IN-a70" id="eMw-yB-HRm"/>
+                <outlet property="summaryLabel" destination="HrR-PG-pIF" id="1zr-Yp-HGd"/>
+                <outlet property="talentLabel" destination="pAG-9o-ZRd" id="63a-R1-vwY"/>
+                <outlet property="wantCertificationBtn" destination="Hbh-lY-ddG" id="MiE-Bm-x8l"/>
             </connections>
             <point key="canvasLocation" x="365.5" y="821"/>
         </view>
@@ -577,7 +581,7 @@
                             <constraints>
                                 <constraint firstAttribute="width" secondItem="GaH-4P-wll" secondAttribute="height" multiplier="1:1" id="seq-O0-xK7"/>
                             </constraints>
-                            <state key="normal" image="message"/>
+                            <state key="normal" image="subscribeMy"/>
                         </button>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="订阅" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="RXT-QN-YM0">
                             <rect key="frame" x="16" y="76" width="42" height="16"/>
@@ -669,6 +673,7 @@
                 <outlet property="praiseBtn" destination="23A-NS-o3H" id="KVm-qQ-xHg"/>
                 <outlet property="serviceBtn" destination="BJ1-jg-hcO" id="dzs-i1-VmG"/>
                 <outlet property="shippingAddressBtn" destination="4tv-JP-mzi" id="8M4-n1-ehs"/>
+                <outlet property="subscribeBtn" destination="GaH-4P-wll" id="AHi-Z3-EFM"/>
             </connections>
             <point key="canvasLocation" x="357.5" y="1066"/>
         </view>
@@ -819,12 +824,12 @@
         </view>
     </objects>
     <resources>
-        <image name="Button" width="69" height="25"/>
         <image name="Dina Alexander" width="84" height="84"/>
         <image name="Gift " width="50" height="50"/>
         <image name="Page 1" width="19" height="19"/>
         <image name="PersonalBackground" width="375" height="197"/>
         <image name="calendar" width="16" height="18"/>
+        <image name="certification" width="69" height="25"/>
         <image name="collection" width="50" height="50"/>
         <image name="entr" width="8" height="15"/>
         <image name="icon_delivery" width="50" height="50"/>
@@ -837,5 +842,6 @@
         <image name="praise" width="50" height="50"/>
         <image name="service" width="50" height="50"/>
         <image name="setting" width="50" height="50"/>
+        <image name="subscribeMy" width="50" height="50"/>
     </resources>
 </document>

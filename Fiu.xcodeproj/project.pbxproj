@@ -9,6 +9,15 @@
 /* Begin PBXBuildFile section */
 		1F0EE6A71C9FA4E7000631F0 /* libstdc++.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 1F0EE6A61C9FA4E7000631F0 /* libstdc++.tbd */; };
 		1F0EE6A91C9FA4F6000631F0 /* libz.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 1F0EE6A81C9FA4F6000631F0 /* libz.tbd */; };
+		1F3C0A771CBF461300B84FEB /* libPods-Fiu.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 1F3C0A761CBF461300B84FEB /* libPods-Fiu.a */; };
+		1F3C0A7B1CBF682500B84FEB /* ImprovePersonalDataViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F3C0A791CBF682500B84FEB /* ImprovePersonalDataViewController.m */; };
+		1F3C0A7C1CBF682500B84FEB /* ImprovePersonalDataViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1F3C0A7A1CBF682500B84FEB /* ImprovePersonalDataViewController.xib */; };
+		1F3C0A841CBF760C00B84FEB /* SubscribePeopleViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F3C0A821CBF760C00B84FEB /* SubscribePeopleViewController.m */; };
+		1F3C0A851CBF760C00B84FEB /* SubscribePeopleViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1F3C0A831CBF760C00B84FEB /* SubscribePeopleViewController.xib */; };
+		1F3C0A911CBF95AC00B84FEB /* SubscribePeopleTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F3C0A8F1CBF95AC00B84FEB /* SubscribePeopleTableViewCell.m */; };
+		1F3C0A921CBF95AC00B84FEB /* SubscribePeopleTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1F3C0A901CBF95AC00B84FEB /* SubscribePeopleTableViewCell.xib */; };
+		1F3C0A961CBFA28300B84FEB /* GreatPeopleViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F3C0A941CBFA28300B84FEB /* GreatPeopleViewController.m */; };
+		1F3C0A971CBFA28300B84FEB /* GreatPeopleViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1F3C0A951CBFA28300B84FEB /* GreatPeopleViewController.xib */; };
 		1F59E5FC1C9ABBA500E96C60 /* Accelerate.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1F59E5FB1C9ABBA500E96C60 /* Accelerate.framework */; };
 		1FBD5F121CB3A0CE002A3048 /* OrderListModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 1FBD5F111CB3A0CE002A3048 /* OrderListModel.m */; };
 		1FBD5F181CB3B244002A3048 /* MyOrderViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1FBD5F171CB3B244002A3048 /* MyOrderViewController.m */; };
@@ -41,7 +50,6 @@
 		280045171C805C92005F5C2E /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 280045161C805C92005F5C2E /* SystemConfiguration.framework */; };
 		2800451B1C805CAC005F5C2E /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2800451A1C805CAC005F5C2E /* Security.framework */; };
 		2800451F1C805CCA005F5C2E /* CoreTelephony.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2800451E1C805CCA005F5C2E /* CoreTelephony.framework */; };
-		CA085FCE2AC1FDFB4A0FAA6D /* libPods-Fiu.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 97035288ED9B18B859C1F24D /* libPods-Fiu.a */; };
 		D802D7791C821D41007AFA3D /* AssetsLibrary.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D802D7781C821D41007AFA3D /* AssetsLibrary.framework */; };
 		D8035F2C1CB77AAA001920F9 /* ContentAndTagTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D8035F2B1CB77AAA001920F9 /* ContentAndTagTableViewCell.m */; };
 		D8035F2F1CB77D0C001920F9 /* UIImage+Helper.m in Sources */ = {isa = PBXBuildFile; fileRef = D8035F2E1CB77D0C001920F9 /* UIImage+Helper.m */; };
@@ -74,8 +82,6 @@
 		D80360401CBF376B001920F9 /* FBLoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D80360041CBF376B001920F9 /* FBLoginViewController.m */; };
 		D80360411CBF376B001920F9 /* FBSignupViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D80360061CBF376B001920F9 /* FBSignupViewController.m */; };
 		D80360421CBF376B001920F9 /* ForgotPasswordViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D80360081CBF376B001920F9 /* ForgotPasswordViewController.m */; };
-		D80360431CBF376B001920F9 /* ImprovePersonalDataViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D803600A1CBF376B001920F9 /* ImprovePersonalDataViewController.m */; };
-		D80360441CBF376B001920F9 /* ImprovePersonalDataViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D803600B1CBF376B001920F9 /* ImprovePersonalDataViewController.xib */; };
 		D80360451CBF376B001920F9 /* PhoneToLogInViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D803600D1CBF376B001920F9 /* PhoneToLogInViewController.m */; };
 		D80360461CBF376B001920F9 /* PhoneToSignUpViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D803600F1CBF376B001920F9 /* PhoneToSignUpViewController.m */; };
 		D80360471CBF376B001920F9 /* SubmitViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D80360111CBF376B001920F9 /* SubmitViewController.m */; };
@@ -196,7 +202,6 @@
 		D8AEC7521CA8E3AE00A868B6 /* libiconv.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 1F0EE6A21C9FA43C000631F0 /* libiconv.tbd */; };
 		D8AEC7531CA8E3BB00A868B6 /* libstdc++.6.0.9.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 280045201C805CD7005F5C2E /* libstdc++.6.0.9.tbd */; };
 		D8AEC7541CA8E3C700A868B6 /* libsqlite3.0.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 2800451C1C805CBD005F5C2E /* libsqlite3.0.tbd */; };
-		F000C8FDC363FA09FB0F357A /* libPods-fineix.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 26743842F5D507CEE992D80C /* libPods-fineix.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -205,6 +210,19 @@
 		1F0EE6A41C9FA47B000631F0 /* libsqlite3.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libsqlite3.tbd; path = usr/lib/libsqlite3.tbd; sourceTree = SDKROOT; };
 		1F0EE6A61C9FA4E7000631F0 /* libstdc++.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = "libstdc++.tbd"; path = "usr/lib/libstdc++.tbd"; sourceTree = SDKROOT; };
 		1F0EE6A81C9FA4F6000631F0 /* libz.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libz.tbd; path = usr/lib/libz.tbd; sourceTree = SDKROOT; };
+		1F3C0A761CBF461300B84FEB /* libPods-Fiu.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = "libPods-Fiu.a"; path = "../Library/Developer/Xcode/DerivedData/Fiu-cjbswbuyriripaegqmobstwznrnk/Build/Products/Debug-iphonesimulator/libPods-Fiu.a"; sourceTree = "<group>"; };
+		1F3C0A781CBF682500B84FEB /* ImprovePersonalDataViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImprovePersonalDataViewController.h; sourceTree = "<group>"; };
+		1F3C0A791CBF682500B84FEB /* ImprovePersonalDataViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ImprovePersonalDataViewController.m; sourceTree = "<group>"; };
+		1F3C0A7A1CBF682500B84FEB /* ImprovePersonalDataViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ImprovePersonalDataViewController.xib; sourceTree = "<group>"; };
+		1F3C0A811CBF760C00B84FEB /* SubscribePeopleViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SubscribePeopleViewController.h; sourceTree = "<group>"; };
+		1F3C0A821CBF760C00B84FEB /* SubscribePeopleViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SubscribePeopleViewController.m; sourceTree = "<group>"; };
+		1F3C0A831CBF760C00B84FEB /* SubscribePeopleViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SubscribePeopleViewController.xib; sourceTree = "<group>"; };
+		1F3C0A8E1CBF95AC00B84FEB /* SubscribePeopleTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SubscribePeopleTableViewCell.h; sourceTree = "<group>"; };
+		1F3C0A8F1CBF95AC00B84FEB /* SubscribePeopleTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SubscribePeopleTableViewCell.m; sourceTree = "<group>"; };
+		1F3C0A901CBF95AC00B84FEB /* SubscribePeopleTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SubscribePeopleTableViewCell.xib; sourceTree = "<group>"; };
+		1F3C0A931CBFA28300B84FEB /* GreatPeopleViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GreatPeopleViewController.h; sourceTree = "<group>"; };
+		1F3C0A941CBFA28300B84FEB /* GreatPeopleViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GreatPeopleViewController.m; sourceTree = "<group>"; };
+		1F3C0A951CBFA28300B84FEB /* GreatPeopleViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = GreatPeopleViewController.xib; sourceTree = "<group>"; };
 		1F59E5FB1C9ABBA500E96C60 /* Accelerate.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Accelerate.framework; path = System/Library/Frameworks/Accelerate.framework; sourceTree = SDKROOT; };
 		1FBD5F101CB3A0CE002A3048 /* OrderListModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OrderListModel.h; sourceTree = "<group>"; };
 		1FBD5F111CB3A0CE002A3048 /* OrderListModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OrderListModel.m; sourceTree = "<group>"; };
@@ -252,7 +270,6 @@
 		1FEFD59B1CAD3384005A1C5F /* BottomView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BottomView.m; sourceTree = "<group>"; };
 		1FEFD59D1CAD37AC005A1C5F /* AppBtnView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppBtnView.h; sourceTree = "<group>"; };
 		1FEFD59E1CAD37AC005A1C5F /* AppBtnView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AppBtnView.m; sourceTree = "<group>"; };
-		26743842F5D507CEE992D80C /* libPods-fineix.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-fineix.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		280045101C805B78005F5C2E /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
 		280045121C805B82005F5C2E /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		280045141C805B8C005F5C2E /* OpenGLES.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGLES.framework; path = System/Library/Frameworks/OpenGLES.framework; sourceTree = SDKROOT; };
@@ -263,7 +280,6 @@
 		2800451E1C805CCA005F5C2E /* CoreTelephony.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreTelephony.framework; path = System/Library/Frameworks/CoreTelephony.framework; sourceTree = SDKROOT; };
 		280045201C805CD7005F5C2E /* libstdc++.6.0.9.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = "libstdc++.6.0.9.tbd"; path = "usr/lib/libstdc++.6.0.9.tbd"; sourceTree = SDKROOT; };
 		800507341C7A9CDD005AF0BE /* Fiu.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Fiu.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		97035288ED9B18B859C1F24D /* libPods-Fiu.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Fiu.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		D802D7781C821D41007AFA3D /* AssetsLibrary.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AssetsLibrary.framework; path = System/Library/Frameworks/AssetsLibrary.framework; sourceTree = SDKROOT; };
 		D802D7891C844101007AFA3D /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
 		D8035F2A1CB77AAA001920F9 /* ContentAndTagTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ContentAndTagTableViewCell.h; sourceTree = "<group>"; };
@@ -326,9 +342,6 @@
 		D80360061CBF376B001920F9 /* FBSignupViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FBSignupViewController.m; sourceTree = "<group>"; };
 		D80360071CBF376B001920F9 /* ForgotPasswordViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ForgotPasswordViewController.h; sourceTree = "<group>"; };
 		D80360081CBF376B001920F9 /* ForgotPasswordViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ForgotPasswordViewController.m; sourceTree = "<group>"; };
-		D80360091CBF376B001920F9 /* ImprovePersonalDataViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImprovePersonalDataViewController.h; sourceTree = "<group>"; };
-		D803600A1CBF376B001920F9 /* ImprovePersonalDataViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ImprovePersonalDataViewController.m; sourceTree = "<group>"; };
-		D803600B1CBF376B001920F9 /* ImprovePersonalDataViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ImprovePersonalDataViewController.xib; sourceTree = "<group>"; };
 		D803600C1CBF376B001920F9 /* PhoneToLogInViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PhoneToLogInViewController.h; sourceTree = "<group>"; };
 		D803600D1CBF376B001920F9 /* PhoneToLogInViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PhoneToLogInViewController.m; sourceTree = "<group>"; };
 		D803600E1CBF376B001920F9 /* PhoneToSignUpViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PhoneToSignUpViewController.h; sourceTree = "<group>"; };
@@ -554,6 +567,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1F3C0A771CBF461300B84FEB /* libPods-Fiu.a in Frameworks */,
 				D81281691CAA8532007CF08B /* libUMSocial_Sdk_5.0.1.a in Frameworks */,
 				D8AEC7541CA8E3C700A868B6 /* libsqlite3.0.tbd in Frameworks */,
 				D8AEC7531CA8E3BB00A868B6 /* libstdc++.6.0.9.tbd in Frameworks */,
@@ -585,11 +599,9 @@
 				D812815F1CAA8532007CF08B /* BaiduMapAPI_Base.framework in Frameworks */,
 				D81281741CAA8532007CF08B /* libWeiboSDK.a in Frameworks */,
 				D81281631CAA8532007CF08B /* BaiduMapAPI_Radar.framework in Frameworks */,
-				F000C8FDC363FA09FB0F357A /* libPods-fineix.a in Frameworks */,
 				D81281771CAA8532007CF08B /* TencentOpenAPI.framework in Frameworks */,
 				D81281791CAA8532007CF08B /* libSocialWechat.a in Frameworks */,
 				D81281641CAA8532007CF08B /* BaiduMapAPI_Search.framework in Frameworks */,
-				CA085FCE2AC1FDFB4A0FAA6D /* libPods-Fiu.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -635,6 +647,46 @@
 				1FEFD5891CAD1219005A1C5F /* MyViewController.m */,
 			);
 			path = Controller;
+			sourceTree = "<group>";
+		};
+		1F3C0A7D1CBF756000B84FEB /* ReceiveDetailedInformation */ = {
+			isa = PBXGroup;
+			children = (
+				1F3C0A7E1CBF75C200B84FEB /* Controller */,
+				1F3C0A7F1CBF75C200B84FEB /* Model */,
+				1F3C0A801CBF75C200B84FEB /* View */,
+			);
+			path = ReceiveDetailedInformation;
+			sourceTree = "<group>";
+		};
+		1F3C0A7E1CBF75C200B84FEB /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				1F3C0A811CBF760C00B84FEB /* SubscribePeopleViewController.h */,
+				1F3C0A821CBF760C00B84FEB /* SubscribePeopleViewController.m */,
+				1F3C0A831CBF760C00B84FEB /* SubscribePeopleViewController.xib */,
+				1F3C0A931CBFA28300B84FEB /* GreatPeopleViewController.h */,
+				1F3C0A941CBFA28300B84FEB /* GreatPeopleViewController.m */,
+				1F3C0A951CBFA28300B84FEB /* GreatPeopleViewController.xib */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		1F3C0A7F1CBF75C200B84FEB /* Model */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		1F3C0A801CBF75C200B84FEB /* View */ = {
+			isa = PBXGroup;
+			children = (
+				1F3C0A8E1CBF95AC00B84FEB /* SubscribePeopleTableViewCell.h */,
+				1F3C0A8F1CBF95AC00B84FEB /* SubscribePeopleTableViewCell.m */,
+				1F3C0A901CBF95AC00B84FEB /* SubscribePeopleTableViewCell.xib */,
+			);
+			path = View;
 			sourceTree = "<group>";
 		};
 		1FBD5F0F1CB3A09D002A3048 /* model */ = {
@@ -688,6 +740,7 @@
 		4121957EDE4D4049941B2B88 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				1F3C0A761CBF461300B84FEB /* libPods-Fiu.a */,
 				1F0EE6A81C9FA4F6000631F0 /* libz.tbd */,
 				1F0EE6A61C9FA4E7000631F0 /* libstdc++.tbd */,
 				1F0EE6A41C9FA47B000631F0 /* libsqlite3.tbd */,
@@ -709,8 +762,6 @@
 				280045141C805B8C005F5C2E /* OpenGLES.framework */,
 				280045121C805B82005F5C2E /* QuartzCore.framework */,
 				280045101C805B78005F5C2E /* CoreLocation.framework */,
-				26743842F5D507CEE992D80C /* libPods-fineix.a */,
-				97035288ED9B18B859C1F24D /* libPods-Fiu.a */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -736,6 +787,7 @@
 		D8035FA01CBD1021001920F9 /* Other */ = {
 			isa = PBXGroup;
 			children = (
+				1F3C0A7D1CBF756000B84FEB /* ReceiveDetailedInformation */,
 				D8035FFD1CBF376B001920F9 /* LoginRegister */,
 				D803603A1CBF376B001920F9 /* Launch */,
 				D8035FE51CBE1B4E001920F9 /* AllScene */,
@@ -931,6 +983,9 @@
 		D8035FFE1CBF376B001920F9 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
+				1F3C0A781CBF682500B84FEB /* ImprovePersonalDataViewController.h */,
+				1F3C0A791CBF682500B84FEB /* ImprovePersonalDataViewController.m */,
+				1F3C0A7A1CBF682500B84FEB /* ImprovePersonalDataViewController.xib */,
 				D8035FFF1CBF376B001920F9 /* FBBindingMobilePhoneNumber.h */,
 				D80360001CBF376B001920F9 /* FBBindingMobilePhoneNumber.m */,
 				D80360011CBF376B001920F9 /* FBLoginRegisterViewController.h */,
@@ -941,9 +996,6 @@
 				D80360061CBF376B001920F9 /* FBSignupViewController.m */,
 				D80360071CBF376B001920F9 /* ForgotPasswordViewController.h */,
 				D80360081CBF376B001920F9 /* ForgotPasswordViewController.m */,
-				D80360091CBF376B001920F9 /* ImprovePersonalDataViewController.h */,
-				D803600A1CBF376B001920F9 /* ImprovePersonalDataViewController.m */,
-				D803600B1CBF376B001920F9 /* ImprovePersonalDataViewController.xib */,
 				D803600C1CBF376B001920F9 /* PhoneToLogInViewController.h */,
 				D803600D1CBF376B001920F9 /* PhoneToLogInViewController.m */,
 				D803600E1CBF376B001920F9 /* PhoneToSignUpViewController.h */,
@@ -1582,10 +1634,13 @@
 				1FEFD5711CAD115C005A1C5F /* MyView.xib in Resources */,
 				D80360551CBF376B001920F9 /* Login.xib in Resources */,
 				D81281711CAA8532007CF08B /* UMSShareListController.xib in Resources */,
+				1F3C0A7C1CBF682500B84FEB /* ImprovePersonalDataViewController.xib in Resources */,
 				1FEFD56D1CAD115C005A1C5F /* chanel.xib in Resources */,
 				D812816B1CAA8532007CF08B /* UMSCommentInputController.xib in Resources */,
 				D812816D1CAA8532007CF08B /* UMShareEditViewController.xib in Resources */,
 				D803605A1CBF376B001920F9 /* Signup.xib in Resources */,
+				1F3C0A851CBF760C00B84FEB /* SubscribePeopleViewController.xib in Resources */,
+				1F3C0A921CBF95AC00B84FEB /* SubscribePeopleTableViewCell.xib in Resources */,
 				D81281781CAA8532007CF08B /* TencentOpenApi_IOS_Bundle.bundle in Resources */,
 				D803604B1CBF376B001920F9 /* SubscribeInterestedViewController.xib in Resources */,
 				D803604C1CBF376B001920F9 /* LoginRegisterController.storyboard in Resources */,
@@ -1606,10 +1661,10 @@
 				D81281681CAA8532007CF08B /* UMSocialLocalizable.strings in Resources */,
 				D812816F1CAA8532007CF08B /* UMSLoginViewController.xib in Resources */,
 				D8035FC71CBD1021001920F9 /* FBLocationViewController.xib in Resources */,
-				D80360441CBF376B001920F9 /* ImprovePersonalDataViewController.xib in Resources */,
 				D81281111CAA8532007CF08B /* Assets.xcassets in Resources */,
 				D812815C1CAA8532007CF08B /* InfoPlist.strings in Resources */,
 				D80360531CBF376B001920F9 /* ImproveInformation.xib in Resources */,
+				1F3C0A971CBFA28300B84FEB /* GreatPeopleViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1694,6 +1749,7 @@
 				D803605D1CBF376B001920F9 /* GuidePageViewController.m in Sources */,
 				D81281591CAA8532007CF08B /* UIImageView+SDWedImage.m in Sources */,
 				D81281541CAA8532007CF08B /* FBRequest.m in Sources */,
+				1F3C0A961CBFA28300B84FEB /* GreatPeopleViewController.m in Sources */,
 				D80360481CBF376B001920F9 /* SubscribeInterestedCollectionViewController.m in Sources */,
 				D89B5A971CB66B3B00DB9710 /* DataNumTableViewCell.m in Sources */,
 				1FEFD56E1CAD115C005A1C5F /* ChanelView.m in Sources */,
@@ -1728,9 +1784,11 @@
 				D8035FDE1CBDF10B001920F9 /* MallMenuTableViewCell.m in Sources */,
 				D81281241CAA8532007CF08B /* CropImageView.m in Sources */,
 				1FBD5F181CB3B244002A3048 /* MyOrderViewController.m in Sources */,
+				1F3C0A841CBF760C00B84FEB /* SubscribePeopleViewController.m in Sources */,
 				1FEFD58C1CAD1219005A1C5F /* MyHomePageViewController.m in Sources */,
 				1FEFD59F1CAD37AC005A1C5F /* AppBtnView.m in Sources */,
 				1FEFD5721CAD115C005A1C5F /* NaviView.m in Sources */,
+				1F3C0A911CBF95AC00B84FEB /* SubscribePeopleTableViewCell.m in Sources */,
 				D812812C1CAA8532007CF08B /* PictureView.m in Sources */,
 				D81281161CAA8532007CF08B /* ClipImageViewController.m in Sources */,
 				D8035FF41CBE44A9001920F9 /* PictureToolViewController.m in Sources */,
@@ -1775,7 +1833,6 @@
 				D81281551CAA8532007CF08B /* HttpTool.m in Sources */,
 				D8035FCB1CBD1021001920F9 /* FBRollImages.m in Sources */,
 				D80360521CBF376B001920F9 /* TurnPageLayout.m in Sources */,
-				D80360431CBF376B001920F9 /* ImprovePersonalDataViewController.m in Sources */,
 				D812811A1CAA8532007CF08B /* MarkGoodsViewController.m in Sources */,
 				D8035FC41CBD1021001920F9 /* CommentViewController.m in Sources */,
 				D80360411CBF376B001920F9 /* FBSignupViewController.m in Sources */,
@@ -1789,6 +1846,7 @@
 				D80360471CBF376B001920F9 /* SubmitViewController.m in Sources */,
 				D812811F1CAA8532007CF08B /* FBFilters.m in Sources */,
 				D81281271CAA8532007CF08B /* FBPictureCollectionViewCell.m in Sources */,
+				1F3C0A7B1CBF682500B84FEB /* ImprovePersonalDataViewController.m in Sources */,
 				D8035F3B1CB784B3001920F9 /* UILable+Frame.m in Sources */,
 				D81281571CAA8532007CF08B /* NSString+Helper.m in Sources */,
 			);

@@ -23,7 +23,7 @@
 
 //默认设置
 - (void)initDefault {
-    self.itemSize = CGSizeMake(200, 350);
+    self.itemSize = CGSizeMake(250/667.0*kScreenHeight, 450/667.0*kScreenHeight);
     self.scrollDirection = UICollectionViewScrollDirectionHorizontal;
     self.minimumLineSpacing = 30/667.0*kScreenHeight;
     self.sectionInset = UIEdgeInsetsMake(-20, 30, 0, 30);

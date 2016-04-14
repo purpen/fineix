@@ -297,7 +297,7 @@ NSString *const LoginURL = @"/auth/login";//登录接口
             
             [SVProgressHUD showSuccessWithStatus:NSLocalizedString(@"registeredSuccessfully", nil)];
             //推荐感兴趣的情景
-            NSDictionary *identifyDict = [dataDic objectForKey:@"identify"];
+            NSDictionary *identifyDict = [[dataDic objectForKey:@"user"] objectForKey:@"identify"];
             if ([[identifyDict objectForKey:@"is_scene_subscribe"] isEqualToNumber:@0]) {
                 //跳转到推荐界面
                 SubscribeInterestedCollectionViewController *subscribeVC = [[SubscribeInterestedCollectionViewController alloc] init];
@@ -315,7 +315,7 @@ NSString *const LoginURL = @"/auth/login";//登录接口
 
         }else{
             //如果用户不存在,提示用户是否进行绑定
-            TYAlertView *alertView = [TYAlertView alertViewWithTitle:@"TYAlertView" message:@"This is a message, the alert view containt text and textfiled. "];
+            TYAlertView *alertView = [TYAlertView alertViewWithTitle:@"是否进行用户绑定" message:nil];
             
             [alertView addAction:[TYAlertAction actionWithTitle:NSLocalizedString(@"cancel", nil) style:TYAlertActionStyleCancle handler:^(TYAlertAction *action) {
                 //发送请求来存储用户信息
