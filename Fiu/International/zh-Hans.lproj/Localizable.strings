@@ -27,6 +27,7 @@
 "createVcTitle" = "照片胶卷";
 "cropVcTitle" = "裁剪图片";
 "filtersVcTitle" = "工具";
+"filtersVcTitle_scene" = "滤镜";
 "releaseVcTitle" = "创建场景";
 "locationVcTitle" = "位置";
 "addTagVcTitle" = "添加标签";

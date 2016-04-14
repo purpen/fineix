@@ -32,6 +32,7 @@
 "locationVcTitle" = "";
 "addTagVcTitle" = "";
 "chooseSceneVcTitle" = "";
+"filtersVcTitle_scene" = "";
 
 //登录注册
 "passwordDigits" = "The password may not be less than six";
