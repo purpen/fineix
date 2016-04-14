@@ -63,7 +63,6 @@
 //  点击右边barItem
 - (void)rightBarItemSelected {
     PictureToolViewController * pictureToolVC = [[PictureToolViewController alloc] init];
-    pictureToolVC.createType = @"fScene";
     [self presentViewController:pictureToolVC animated:YES completion:nil];
 }
 

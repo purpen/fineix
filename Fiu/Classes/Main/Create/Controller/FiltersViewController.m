@@ -22,7 +22,6 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.view.backgroundColor = [UIColor blackColor];
-    [self setNavViewUI];
     
     [self setFiltersControllerUI];
     
@@ -30,8 +29,14 @@
 
 }
 
+- (void)changeFilter:(NSNotification *)filterName {
+    UIImage * showFilterImage = [[FBFilters alloc] initWithImage:self.filtersImg filterName:[filterName object]].filterImg;
+    self.filtersImageView.image = showFilterImage;
+}
+
 #pragma mark - 设置顶部导航栏
 - (void)setNavViewUI {
+    [self addNavViewTitle:NSLocalizedString(@"filtersVcTitle", nil)];
     [self addBackButton:@"icon_back_white"];
     [self addNextButton];
     [self.nextBtn addTarget:self action:@selector(nextBtnClick) forControlEvents:(UIControlEventTouchUpInside)];
@@ -49,6 +54,9 @@
 
 #pragma mark - 设置视图UI
 - (void)setFiltersControllerUI {
+    
+    [self setNavViewUI];
+    
     self.filtersImageView.image = self.filtersImg;
     [self.view addSubview:self.filtersImageView];
     [_filtersImageView mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -58,29 +66,12 @@
         make.centerX.equalTo(self.view);
     }];
     
-    [self getCreateTypeUI];
-}
-
-#pragma mark - 判断场景/情景
-- (void)getCreateTypeUI {
-    if ([self.createType isEqualToString:@"scene"]) {
-        [self addNavViewTitle:NSLocalizedString(@"filtersVcTitle", nil)];
-        [self.view addSubview:self.footView];
-        [self.footView mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.size.mas_equalTo(CGSizeMake(SCREEN_WIDTH, 50));
-            make.bottom.equalTo(self.view.mas_bottom).with.offset(0);
-            make.centerX.equalTo(self.view);
-        }];
-    
-    } else {
-        [self addNavViewTitle:NSLocalizedString(@"filtersVcTitle_scene", nil)];
-        [self.view addSubview:self.filtersView];
-        [_filtersView mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.size.mas_equalTo(CGSizeMake(SCREEN_WIDTH, 120));
-            make.bottom.equalTo(self.view.mas_bottom).with.offset(0);
-            make.centerX.equalTo(self.view);
-        }];
-    }
+    [self.view addSubview:self.footView];
+    [self.footView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.size.mas_equalTo(CGSizeMake(SCREEN_WIDTH, 50));
+        make.bottom.equalTo(self.view.mas_bottom).with.offset(0);
+        make.centerX.equalTo(self.view);
+    }];
 }
 
 #pragma mark - 底部的工具栏
@@ -113,6 +104,7 @@
         [self.filtersView removeFromSuperview];
         
     } else if (index == 2) {
+        
         [self.view addSubview:self.filtersView];
         [_filtersView mas_makeConstraints:^(MASConstraintMaker *make) {
             make.size.mas_equalTo(CGSizeMake(SCREEN_WIDTH, 120));
@@ -139,17 +131,9 @@
     return _filtersView;
 }
 
-#pragma mark - 获取滤镜的名称
-- (void)changeFilter:(NSNotification *)filterName {
-    UIImage * showFilterImage = [[FBFilters alloc] initWithImage:self.filtersImg filterName:[filterName object]].filterImg;
-    self.filtersImageView.image = showFilterImage;
-}
-
 #pragma mark - 使滤镜视图消失
 - (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event {
-    if ([self.createType isEqualToString:@"scene"]) {
-        [self.filtersView removeFromSuperview];
-    }
+    [self.filtersView removeFromSuperview];
 }
 
 #pragma mark - 接收消息通知

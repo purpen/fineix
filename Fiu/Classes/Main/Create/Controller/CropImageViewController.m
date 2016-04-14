@@ -40,7 +40,6 @@
     FiltersViewController * filtersVC = [[FiltersViewController alloc] init];
     filtersVC.locationArr = self.locationArr;
     filtersVC.filtersImg = [self.clipImageVC clippingImage];
-    filtersVC.createType = self.createType;
     [self.navigationController pushViewController:filtersVC animated:YES];
 }
 

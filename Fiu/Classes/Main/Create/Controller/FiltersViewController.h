@@ -12,7 +12,6 @@
 
 @interface FiltersViewController : FBPictureViewController
 
-@pro_strong NSString            *   createType;             //  创建类型（场景/情景）
 @pro_strong NSArray             *   locationArr;            //  照片位置
 @pro_strong FiltersView         *   filtersView;            //  滤镜视图
 @pro_strong FBFootView          *   footView;               //  底部工具栏
