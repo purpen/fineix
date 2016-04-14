@@ -7,11 +7,16 @@
 //
 
 #import "FBViewController.h"
-#import "HTHorizontalSelectionList.h"
+#import "SearchMenuView.h"
+#import "FBSearchView.h"
+#import "SearchResultsRollView.h"
+#import <SVProgressHUD/SVProgressHUD.h>
 
-@interface SearchViewController : FBViewController <HTHorizontalSelectionListDelegate, HTHorizontalSelectionListDataSource>
+@interface SearchViewController : FBViewController <SearchMenuBtnSelectedDelegate, FBSearchDelegate>
 
-@pro_strong HTHorizontalSelectionList       *   menuView;       //  分类导航
+@pro_strong SearchResultsRollView           *   resultsView;    //  搜索结果视图
+@pro_strong FBSearchView                    *   searchView;     //  搜索框
 @pro_strong NSArray                         *   titleArr;       //  分类标题
+@pro_strong SearchMenuView                  *   menuView;       //  分类导航
 
 @end
