@@ -3,6 +3,7 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
@@ -178,6 +179,42 @@
                 <outlet property="verificationTF" destination="RSr-6K-IHT" id="Bnw-oQ-8ST"/>
             </connections>
             <point key="canvasLocation" x="351.5" y="360"/>
+        </view>
+        <view contentMode="scaleToFill" id="VcR-A2-aBj" customClass="NumView">
+            <rect key="frame" x="0.0" y="0.0" width="83" height="35"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <subviews>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="15" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1wb-Zl-Ev8">
+                    <rect key="frame" x="0.0" y="8" width="42" height="21"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                    <color key="textColor" red="0.74509803919999995" green="0.53725490200000003" blue="0.078431372550000003" alpha="1" colorSpace="calibratedRGB"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="/15" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yLK-tc-wcE">
+                    <rect key="frame" x="42" y="8" width="41" height="21"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                    <nil key="highlightedColor"/>
+                </label>
+            </subviews>
+            <constraints>
+                <constraint firstItem="yLK-tc-wcE" firstAttribute="centerY" secondItem="1wb-Zl-Ev8" secondAttribute="centerY" id="5ZD-Mt-3i8"/>
+                <constraint firstItem="yLK-tc-wcE" firstAttribute="leading" secondItem="1wb-Zl-Ev8" secondAttribute="trailing" id="73X-jR-XH2"/>
+                <constraint firstAttribute="trailing" secondItem="yLK-tc-wcE" secondAttribute="trailing" id="AK5-3Y-kup"/>
+                <constraint firstItem="1wb-Zl-Ev8" firstAttribute="baseline" secondItem="yLK-tc-wcE" secondAttribute="baseline" id="ITJ-qJ-2oD"/>
+                <constraint firstItem="yLK-tc-wcE" firstAttribute="leading" secondItem="1wb-Zl-Ev8" secondAttribute="trailing" id="KxU-9n-JNh"/>
+                <constraint firstItem="1wb-Zl-Ev8" firstAttribute="leading" secondItem="VcR-A2-aBj" secondAttribute="leading" id="L4w-K5-TJ0"/>
+                <constraint firstAttribute="bottom" secondItem="1wb-Zl-Ev8" secondAttribute="bottom" constant="6" id="VVn-kK-p9g"/>
+                <constraint firstItem="yLK-tc-wcE" firstAttribute="width" secondItem="1wb-Zl-Ev8" secondAttribute="width" id="fCm-84-P0f"/>
+                <constraint firstItem="1wb-Zl-Ev8" firstAttribute="top" secondItem="VcR-A2-aBj" secondAttribute="topMargin" id="tgA-cV-cOu"/>
+            </constraints>
+            <nil key="simulatedStatusBarMetrics"/>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <connections>
+                <outlet property="currentNumberLabel" destination="1wb-Zl-Ev8" id="soD-MS-bby"/>
+                <outlet property="totalNumberLabel" destination="yLK-tc-wcE" id="vMq-Lh-PED"/>
+            </connections>
+            <point key="canvasLocation" x="351.5" y="573.5"/>
         </view>
     </objects>
 </document>

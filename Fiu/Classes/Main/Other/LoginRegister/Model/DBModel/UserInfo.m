@@ -27,6 +27,7 @@
     entity.level = userInfo.level;
     entity.levelDesc = userInfo.levelDesc;
     entity.birdCoin = userInfo.birdCoin;
+    entity.summary = userInfo.summary;
 }
 
 @end

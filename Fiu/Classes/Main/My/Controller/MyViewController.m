@@ -51,9 +51,15 @@
     //背景图片
     _imgV = [BackImagView getBackImageView];
     _imgV.headImageView.layer.masksToBounds = YES;
-    _imgV.headImageView.layer.cornerRadius = 20;
+    _imgV.headImageView.layer.cornerRadius = 30;
     _imgV.frame = CGRectMake(0, 64, SCREEN_WIDTH, 200/667.0*SCREEN_HEIGHT);
     _imgV.userInteractionEnabled = YES;
+    UITapGestureRecognizer *singleTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(signleTap:)];
+    singleTap.numberOfTapsRequired = 1;
+    singleTap.numberOfTouchesRequired = 1;
+    [_imgV addGestureRecognizer:singleTap];
+    //我要认证按钮
+    [_imgV.wantCertificationBtn addTarget:self action:@selector(clickCertificationBtn:) forControlEvents:UIControlEventTouchUpInside];
     [_homeScrollView addSubview:_imgV];
     
     //放一个view替换导航条，颜色为白色
@@ -106,6 +112,18 @@
     
     //向下滑动tabbar出现
 }
+
+//点击我要认证按钮
+-(void)clickCertificationBtn:(UIButton*)sender{
+    //跳转到达人认证界面
+    NSLog(@"跳转到达人认证界面");
+}
+
+-(void)signleTap:(UITapGestureRecognizer*)gesture{
+    //跳转到我的主页的情景的界面
+    NSLog(@"跳转到我的主页的情景的界面");
+}
+
 
 -(void)scrollViewDidScroll:(UIScrollView *)scrollView{
     //当滑动结束时获取当前滚动坐标的y值
@@ -190,11 +208,10 @@
     UserInfoEntity *entity = [UserInfoEntity defaultUserInfoEntity];
     if (entity.isLogin == YES) {
         //如果已经登录了直接进入个人中心并展示个人的相关信息
-        //头像变圆滑
-        _imgV.headImageView.layer.masksToBounds = YES;
-        _imgV.headImageView.layer.cornerRadius  = 3;
         //更新用户名
         _imgV.nickNameLabel.text = entity.nickname;
+        //个人简介
+        _imgV.summaryLabel.text = entity.summary;
         //更新头像
         [_imgV.headImageView sd_setImageWithURL:[NSURL URLWithString:entity.mediumAvatarUrl] placeholderImage:nil completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
             
