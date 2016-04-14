@@ -19,3 +19,4 @@
 + (UIImage *)fixOrientation:(UIImage *)aImage;
 
 @end
+
