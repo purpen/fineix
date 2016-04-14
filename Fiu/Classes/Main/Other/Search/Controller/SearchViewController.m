@@ -76,7 +76,7 @@
     }];
     
     
-    NSLog(@"＝＝＝＝＝＝＝＝＝＝＝  点击了 %zi", index);
+    NSLog(@"＝＝＝＝＝＝＝＝＝＝＝  点击了 %@", self.titleArr[index]);
 }
 
 #pragma mark - 设置Nav

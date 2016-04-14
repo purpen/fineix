@@ -9,6 +9,7 @@
 #import "SearchResultsRollView.h"
 #import "SceneListTableViewCell.h"
 #import "SearchSceneTableViewCell.h"
+#import "UserHeaderTableViewCell.h"
 
 static const NSInteger tableTag = 687;
 
@@ -87,11 +88,11 @@ static const NSInteger tableTag = 687;
         
     } else if (tableView == self.userTable) {
         static NSString * UserTablecellId = @"userTablecellId";
-        UITableViewCell * cell = [tableView dequeueReusableCellWithIdentifier:UserTablecellId];
+        UserHeaderTableViewCell * cell = [tableView dequeueReusableCellWithIdentifier:UserTablecellId];
         if (!cell) {
-            cell = [[UITableViewCell alloc] initWithStyle:(UITableViewCellStyleDefault) reuseIdentifier:UserTablecellId];
+            cell = [[UserHeaderTableViewCell alloc] initWithStyle:(UITableViewCellStyleDefault) reuseIdentifier:UserTablecellId];
         }
-        cell.textLabel.text = [NSString stringWithFormat:@"用户 %zi", indexPath.row];
+        [cell setUI];
         return cell;
         
     } else if (tableView == self.goodsTable) {
