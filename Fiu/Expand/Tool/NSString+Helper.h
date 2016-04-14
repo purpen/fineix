@@ -52,4 +52,7 @@
  */
 - (void)saveToNSDefaultsWithKey:(NSString *)key;
 
+//根据数字返回性别
++(NSString*)getSexByNum:(NSNumber*)num;
+
 @end

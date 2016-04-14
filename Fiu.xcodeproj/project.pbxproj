@@ -24,8 +24,6 @@
 		1F5801101CB795E70021EA19 /* SignupView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F58010F1CB795E70021EA19 /* SignupView.m */; };
 		1F5801121CB796450021EA19 /* Signup.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1F5801111CB796450021EA19 /* Signup.xib */; };
 		1F59E5FC1C9ABBA500E96C60 /* Accelerate.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1F59E5FB1C9ABBA500E96C60 /* Accelerate.framework */; };
-		1F6A9A2C1CBB49A8003290E6 /* SubscribeInterestedViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F6A9A2A1CBB49A8003290E6 /* SubscribeInterestedViewController.m */; };
-		1F6A9A2D1CBB49A8003290E6 /* SubscribeInterestedViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1F6A9A2B1CBB49A8003290E6 /* SubscribeInterestedViewController.xib */; };
 		1F986A9E1CB610A40074ABFE /* GuidePageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F986A9C1CB610A40074ABFE /* GuidePageViewController.m */; };
 		1F986AA31CB656920074ABFE /* PhoneNumLoginView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F986AA21CB656920074ABFE /* PhoneNumLoginView.m */; };
 		1F986AA61CB674510074ABFE /* PhoneToLogInViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F986AA51CB674510074ABFE /* PhoneToLogInViewController.m */; };
@@ -98,6 +96,9 @@
 		D8035FEE1CBE1EA3001920F9 /* AllSceneView.m in Sources */ = {isa = PBXBuildFile; fileRef = D8035FED1CBE1EA3001920F9 /* AllSceneView.m */; };
 		D8035FF11CBE1F1F001920F9 /* AllSceneCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D8035FF01CBE1F1F001920F9 /* AllSceneCollectionViewCell.m */; };
 		D8035FF41CBE44A9001920F9 /* PictureToolViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D8035FF31CBE44A9001920F9 /* PictureToolViewController.m */; };
+		D8035FFA1CBF34AE001920F9 /* ImproveInformation.xib in Resources */ = {isa = PBXBuildFile; fileRef = D8035FF51CBF34AE001920F9 /* ImproveInformation.xib */; };
+		D8035FFB1CBF34AE001920F9 /* ImprovePersonalInformationView.m in Sources */ = {isa = PBXBuildFile; fileRef = D8035FF71CBF34AE001920F9 /* ImprovePersonalInformationView.m */; };
+		D8035FFC1CBF34AE001920F9 /* NumView.m in Sources */ = {isa = PBXBuildFile; fileRef = D8035FF91CBF34AE001920F9 /* NumView.m */; };
 		D80D41581CAD142C005D72B1 /* FBPictureViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D80D41571CAD142C005D72B1 /* FBPictureViewController.m */; };
 		D80D415B1CAD1437005D72B1 /* FBNavigationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D80D41591CAD1437005D72B1 /* FBNavigationViewController.m */; };
 		D80D415E1CAD144D005D72B1 /* UIBarButtonItem+Helper.m in Sources */ = {isa = PBXBuildFile; fileRef = D80D415C1CAD144D005D72B1 /* UIBarButtonItem+Helper.m */; };
@@ -227,8 +228,6 @@
 		1F5801111CB796450021EA19 /* Signup.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = Signup.xib; sourceTree = "<group>"; };
 		1F59E5FB1C9ABBA500E96C60 /* Accelerate.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Accelerate.framework; path = System/Library/Frameworks/Accelerate.framework; sourceTree = SDKROOT; };
 		1F6A9A291CBB49A8003290E6 /* SubscribeInterestedViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SubscribeInterestedViewController.h; path = Fiu/Classes/Main/LoginRegister/controller/SubscribeInterestedViewController.h; sourceTree = SOURCE_ROOT; };
-		1F6A9A2A1CBB49A8003290E6 /* SubscribeInterestedViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SubscribeInterestedViewController.m; path = Fiu/Classes/Main/LoginRegister/controller/SubscribeInterestedViewController.m; sourceTree = SOURCE_ROOT; };
-		1F6A9A2B1CBB49A8003290E6 /* SubscribeInterestedViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = SubscribeInterestedViewController.xib; path = Fiu/Classes/Main/LoginRegister/controller/SubscribeInterestedViewController.xib; sourceTree = SOURCE_ROOT; };
 		1F986A9B1CB610A40074ABFE /* GuidePageViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GuidePageViewController.h; sourceTree = "<group>"; };
 		1F986A9C1CB610A40074ABFE /* GuidePageViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GuidePageViewController.m; sourceTree = "<group>"; };
 		1F986AA11CB656920074ABFE /* PhoneNumLoginView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PhoneNumLoginView.h; sourceTree = "<group>"; };
@@ -361,6 +360,11 @@
 		D8035FF01CBE1F1F001920F9 /* AllSceneCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AllSceneCollectionViewCell.m; sourceTree = "<group>"; };
 		D8035FF21CBE44A9001920F9 /* PictureToolViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PictureToolViewController.h; sourceTree = "<group>"; };
 		D8035FF31CBE44A9001920F9 /* PictureToolViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PictureToolViewController.m; sourceTree = "<group>"; };
+		D8035FF51CBF34AE001920F9 /* ImproveInformation.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ImproveInformation.xib; sourceTree = "<group>"; };
+		D8035FF61CBF34AE001920F9 /* ImprovePersonalInformationView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImprovePersonalInformationView.h; sourceTree = "<group>"; };
+		D8035FF71CBF34AE001920F9 /* ImprovePersonalInformationView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ImprovePersonalInformationView.m; sourceTree = "<group>"; };
+		D8035FF81CBF34AE001920F9 /* NumView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NumView.h; sourceTree = "<group>"; };
+		D8035FF91CBF34AE001920F9 /* NumView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NumView.m; sourceTree = "<group>"; };
 		D80D41561CAD142C005D72B1 /* FBPictureViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FBPictureViewController.h; sourceTree = "<group>"; };
 		D80D41571CAD142C005D72B1 /* FBPictureViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FBPictureViewController.m; sourceTree = "<group>"; };
 		D80D41591CAD1437005D72B1 /* FBNavigationViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FBNavigationViewController.m; sourceTree = "<group>"; };
@@ -602,8 +606,6 @@
 				1FC60EEC1CBC920100FB1EF4 /* ImprovePersonalDataViewController.m */,
 				1FC60EED1CBC920100FB1EF4 /* ImprovePersonalDataViewController.xib */,
 				1F6A9A291CBB49A8003290E6 /* SubscribeInterestedViewController.h */,
-				1F6A9A2A1CBB49A8003290E6 /* SubscribeInterestedViewController.m */,
-				1F6A9A2B1CBB49A8003290E6 /* SubscribeInterestedViewController.xib */,
 				1F986AA41CB674510074ABFE /* PhoneToLogInViewController.h */,
 				1F986AA51CB674510074ABFE /* PhoneToLogInViewController.m */,
 				1F02B71B1CAA99240080CA45 /* FBBindingMobilePhoneNumber.h */,
@@ -726,6 +728,11 @@
 		1F986AA01CB656640074ABFE /* view */ = {
 			isa = PBXGroup;
 			children = (
+				D8035FF51CBF34AE001920F9 /* ImproveInformation.xib */,
+				D8035FF61CBF34AE001920F9 /* ImprovePersonalInformationView.h */,
+				D8035FF71CBF34AE001920F9 /* ImprovePersonalInformationView.m */,
+				D8035FF81CBF34AE001920F9 /* NumView.h */,
+				D8035FF91CBF34AE001920F9 /* NumView.m */,
 				1FC60F061CBCC57500FB1EF4 /* RecommendedScenarioView.h */,
 				1FC60F071CBCC57500FB1EF4 /* RecommendedScenarioView.m */,
 				1FC60F081CBCC57500FB1EF4 /* RecommendedScenarioView.xib */,
@@ -1561,6 +1568,7 @@
 				1FEFD56D1CAD115C005A1C5F /* chanel.xib in Resources */,
 				D812816B1CAA8532007CF08B /* UMSCommentInputController.xib in Resources */,
 				D812816D1CAA8532007CF08B /* UMShareEditViewController.xib in Resources */,
+				D8035FFA1CBF34AE001920F9 /* ImproveInformation.xib in Resources */,
 				D81281781CAA8532007CF08B /* TencentOpenApi_IOS_Bundle.bundle in Resources */,
 				1F02B74C1CAAA0B00080CA45 /* LoginRegisterController.storyboard in Resources */,
 				D81281701CAA8532007CF08B /* UMSnsAccountViewController.xib in Resources */,
@@ -1573,7 +1581,6 @@
 				1FC60EEF1CBC920100FB1EF4 /* ImprovePersonalDataViewController.xib in Resources */,
 				D812816C1CAA8532007CF08B /* UMSCommentInputControlleriPad.xib in Resources */,
 				D812815D1CAA8532007CF08B /* Localizable.strings in Resources */,
-				1F6A9A2D1CBB49A8003290E6 /* SubscribeInterestedViewController.xib in Resources */,
 				D812816A1CAA8532007CF08B /* UMSCommentDetailController.xib in Resources */,
 				1F5801121CB796450021EA19 /* Signup.xib in Resources */,
 				D81281751CAA8532007CF08B /* WeiboSDK.bundle in Resources */,
@@ -1667,7 +1674,6 @@
 				1FEFD58D1CAD1219005A1C5F /* MyMessageViewController.m in Sources */,
 				D812815A1CAA8532007CF08B /* fineix.xcdatamodeld in Sources */,
 				D81281591CAA8532007CF08B /* UIImageView+SDWedImage.m in Sources */,
-				1F6A9A2C1CBB49A8003290E6 /* SubscribeInterestedViewController.m in Sources */,
 				D81281541CAA8532007CF08B /* FBRequest.m in Sources */,
 				D89B5A971CB66B3B00DB9710 /* DataNumTableViewCell.m in Sources */,
 				1FEFD56E1CAD115C005A1C5F /* ChanelView.m in Sources */,
@@ -1727,6 +1733,7 @@
 				1F02B72B1CAA99240080CA45 /* FBBindingMobilePhoneNumber.m in Sources */,
 				D8035FCF1CBD1021001920F9 /* FBTabBar.m in Sources */,
 				1FC60EEE1CBC920100FB1EF4 /* ImprovePersonalDataViewController.m in Sources */,
+				D8035FFB1CBF34AE001920F9 /* ImprovePersonalInformationView.m in Sources */,
 				1F986AA61CB674510074ABFE /* PhoneToLogInViewController.m in Sources */,
 				D812813C1CAA8532007CF08B /* MallViewController.m in Sources */,
 				1FEFD5911CAD1219005A1C5F /* MyViewController.m in Sources */,
@@ -1743,6 +1750,7 @@
 				D81281281CAA8532007CF08B /* FBPictureView.m in Sources */,
 				1FBD5F251CB3D5A6002A3048 /* OrderInfoCell.m in Sources */,
 				D81281301CAA8532007CF08B /* DiscoverViewController.m in Sources */,
+				D8035FFC1CBF34AE001920F9 /* NumView.m in Sources */,
 				D81281151CAA8532007CF08B /* AddUrlViewController.m in Sources */,
 				D81281551CAA8532007CF08B /* HttpTool.m in Sources */,
 				1F02B73E1CAA99540080CA45 /* NSString+UserModel.m in Sources */,

@@ -75,4 +75,25 @@
     [[NSUserDefaults standardUserDefaults] synchronize];
 }
 
+#pragma mark - 根据返回的数字得到性别
++(NSString *)getSexByNum:(NSNumber *)num{
+    NSString *sex;
+    int n = [num intValue];
+    switch (n) {
+        case 0:
+            sex = @"保密";
+            break;
+        case 1:
+            sex = @"男";
+            break;
+        case 2:
+            sex = @"女";
+            break;
+            
+        default:
+            break;
+    }
+    return sex;
+}
+
 @end

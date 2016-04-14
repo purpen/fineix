@@ -12,6 +12,7 @@
 
 +(instancetype)getBackImageView{
     BackImagView *backImageV = [[NSBundle mainBundle] loadNibNamed:@"MyView" owner:nil options:nil][2];
+    
     return backImageV;
 }
 

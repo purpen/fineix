@@ -50,9 +50,12 @@
     _homeScrollView.delegate = self;
     //背景图片
     _imgV = [BackImagView getBackImageView];
-    _imgV.frame = CGRectMake(0, 64, SCREEN_WIDTH, 200/667*SCREEN_HEIGHT);
+    _imgV.headImageView.layer.masksToBounds = YES;
+    _imgV.headImageView.layer.cornerRadius = 20;
+    _imgV.frame = CGRectMake(0, 64, SCREEN_WIDTH, 200/667.0*SCREEN_HEIGHT);
     _imgV.userInteractionEnabled = YES;
     [_homeScrollView addSubview:_imgV];
+    
     //放一个view替换导航条，颜色为白色
     NaviView *naviV = [NaviView getNaviView];
     naviV.frame = CGRectMake(0, 0, SCREEN_WIDTH, 64);
@@ -62,7 +65,7 @@
     [naviV.calendarBtn addTarget:self action:@selector(clickRightBtn:) forControlEvents:UIControlEventTouchUpInside];
     //频道选项
     ChanelView *chanelV = [ChanelView getChanelView];
-    chanelV.frame = CGRectMake(0, 200+5, SCREEN_WIDTH, 60);
+    chanelV.frame = CGRectMake(0, 200+5, SCREEN_WIDTH, 60/667.0*SCREEN_HEIGHT);
     [_homeScrollView addSubview:chanelV];
     //订单等一些东西
     ChanelViewTwo *chanelTwoV = [ChanelViewTwo getChanelViewTwo];
