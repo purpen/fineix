@@ -10,6 +10,7 @@
 #import "FiuSceneTableViewCell.h"
 #import "SceneListTableViewCell.h"
 #import "FiuTagTableViewCell.h"
+#import "SearchViewController.h"
 
 @implementation DiscoverViewController
 
@@ -56,7 +57,7 @@
         _discoverTableView.dataSource = self;
         _discoverTableView.showsVerticalScrollIndicator = NO;
         _discoverTableView.tableHeaderView = self.rollView;
-        
+        _discoverTableView.backgroundColor = [UIColor whiteColor];
     }
     return _discoverTableView;
 }
@@ -94,6 +95,7 @@
                 cell = [[FiuTagTableViewCell alloc] initWithStyle:(UITableViewCellStyleDefault) reuseIdentifier:fiuSceneTagCellId];
             }
             [cell setUI];
+            cell.nav = self.navigationController;
             return cell;
         }
     
@@ -103,7 +105,9 @@
         if (!cell) {
             cell = [[FiuSceneTableViewCell alloc] initWithStyle:(UITableViewCellStyleDefault) reuseIdentifier:fiuSceneCellId];
         }
+        cell.nav = self.navigationController;
         return cell;
+        
     } else if (indexPath.section == 2) {
         static NSString * sceneListCellId = @"sceneListCellId";
         SceneListTableViewCell * cell = [tableView dequeueReusableCellWithIdentifier:sceneListCellId];
@@ -178,7 +182,9 @@
 
 //  点击左边barItem
 - (void)leftBarItemSelected {
-    NSLog(@"＊＊＊＊＊＊＊＊＊搜索");
+    SearchViewController * searchVC = [[SearchViewController alloc] init];
+    searchVC.searchType = 1;
+    [self.navigationController pushViewController:searchVC animated:YES];
 }
 
 //  点击右边barItem

@@ -17,6 +17,7 @@
 @pro_strong UILabel                     *   contentLab;     //  场景内容文字
 @pro_strong UIScrollView                *   tagView;        //  标签视图
 @pro_assign CGFloat                         cellHeight;
+@pro_strong NSArray                     *   titleArr;
 
 - (void)setUI;
 

@@ -9,6 +9,7 @@
 #import "MallViewController.h"
 #import "MallMenuTableViewCell.h"
 #import "FiuTagTableViewCell.h"
+#import "SearchViewController.h"
 
 @implementation MallViewController
 
@@ -56,6 +57,7 @@
         _mallTableView.dataSource = self;
         _mallTableView.tableHeaderView = self.rollView;
         _mallTableView.showsVerticalScrollIndicator = NO;
+        _mallTableView.backgroundColor = [UIColor whiteColor];
     }
     return _mallTableView;
 }
@@ -89,6 +91,7 @@
                 cell = [[FiuTagTableViewCell alloc] initWithStyle:(UITableViewCellStyleDefault) reuseIdentifier:mallGoodsTagCellId];
             }
             [cell setMallUI];
+            cell.nav = self.navigationController;
             return cell;
             
         }  else if (indexPath.row == 2) {
@@ -164,7 +167,9 @@
 
 //  点击左边barItem
 - (void)leftBarItemSelected {
-    NSLog(@"＊＊＊＊＊＊＊＊＊搜索");
+    SearchViewController * searchVC = [[SearchViewController alloc] init];
+    searchVC.searchType = 3;
+    [self.navigationController pushViewController:searchVC animated:YES];
 }
 
 //  点击右边barItem

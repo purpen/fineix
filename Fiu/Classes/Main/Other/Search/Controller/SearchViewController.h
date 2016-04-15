@@ -18,5 +18,12 @@
 @pro_strong FBSearchView                    *   searchView;     //  搜索框
 @pro_strong NSArray                         *   titleArr;       //  分类标题
 @pro_strong SearchMenuView                  *   menuView;       //  分类导航
+@pro_strong NSString                        *   keyword;        //  搜索关键词
+
+/*
+ *  搜索的类型
+ *  0:场景 / 1:情景 / 2:用户 / 3:产品
+ */
+@pro_assign NSInteger                           searchType;
 
 @end

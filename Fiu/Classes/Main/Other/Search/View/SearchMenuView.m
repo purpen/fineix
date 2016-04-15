@@ -8,7 +8,7 @@
 
 #import "SearchMenuView.h"
 
-static const NSInteger menuBtnTag = 343;
+
 
 @implementation SearchMenuView
 
@@ -24,6 +24,8 @@ static const NSInteger menuBtnTag = 343;
 
 #pragma mark - 创建导航按钮
 - (void)setSearchMenuView:(NSArray *)title {
+    self.selectBtnTag = menuBtnTag;
+    
     for (NSUInteger idx = 0; idx < title.count; ++ idx) {
         UIButton * menuBtn = [[UIButton alloc] initWithFrame:CGRectMake((SCREEN_WIDTH / 4) * idx, 0, (SCREEN_WIDTH / 4), 44)];
         [menuBtn setTitleColor:[UIColor blackColor] forState:(UIControlStateNormal)];

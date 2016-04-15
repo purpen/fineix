@@ -29,4 +29,6 @@
 
 - (void)setUI;
 
+- (void)setFiuSceneUI;
+
 @end
