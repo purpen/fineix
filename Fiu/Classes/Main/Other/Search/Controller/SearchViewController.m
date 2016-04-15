@@ -44,7 +44,7 @@
 #pragma mark - 添加搜索框视图
 - (FBSearchView *)searchView {
     if (!_searchView) {
-        _searchView = [[FBSearchView alloc] initWithFrame:CGRectMake(35, 0, SCREEN_WIDTH - 44, 44)];
+        _searchView = [[FBSearchView alloc] initWithFrame:CGRectMake(35, 0, SCREEN_WIDTH - 35, 44)];
         _searchView.searchInputBox.placeholder = NSLocalizedString(@"search", nil);
         _searchView.delegate = self;
         _searchView.line.hidden = YES;
