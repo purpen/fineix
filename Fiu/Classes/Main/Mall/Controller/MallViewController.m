@@ -8,6 +8,7 @@
 
 #import "MallViewController.h"
 #import "MallMenuTableViewCell.h"
+#import "FiuTagTableViewCell.h"
 
 @implementation MallViewController
 
@@ -73,7 +74,24 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     if (indexPath.section == 0) {
-        if (indexPath.row == 2) {
+        if (indexPath.row == 0) {
+            static NSString * mallBrandCellId = @"mallBrandCellId";
+            UITableViewCell * cell = [tableView dequeueReusableCellWithIdentifier:mallBrandCellId];
+            if (!cell) {
+                cell = [[UITableViewCell alloc] initWithStyle:(UITableViewCellStyleDefault) reuseIdentifier:mallBrandCellId];
+            }
+            return cell;
+            
+        } else if (indexPath.row == 1) {
+            static NSString * mallGoodsTagCellId = @"mallGoodsTagCellId";
+            FiuTagTableViewCell * cell = [tableView dequeueReusableCellWithIdentifier:mallGoodsTagCellId];
+            if (!cell) {
+                cell = [[FiuTagTableViewCell alloc] initWithStyle:(UITableViewCellStyleDefault) reuseIdentifier:mallGoodsTagCellId];
+            }
+            [cell setMallUI];
+            return cell;
+            
+        }  else if (indexPath.row == 2) {
             static NSString * mallMenuTableViewCellID = @"mallMenuTableViewCell";
             MallMenuTableViewCell * cell = [tableView dequeueReusableCellWithIdentifier:mallMenuTableViewCellID];
             if (!cell) {

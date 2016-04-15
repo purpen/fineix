@@ -73,6 +73,7 @@
 #pragma mark - UITextFieldDelegate
 - (BOOL)textFieldShouldReturn:(UITextField *)textField {
     [_searchInputBox resignFirstResponder];
+    [self changeSearchBoxFrame:NO];
     if ([self.delegate respondsToSelector:@selector(beginSearch:)]) {
         [self.delegate beginSearch:textField.text];
     }
@@ -81,7 +82,6 @@
 
 - (void)textFieldDidBeginEditing:(UITextField *)textField {
     [self changeSearchBoxFrame:YES];
-    NSLog(@"开始输入 ");
 }
 
 #pragma mark - 视图分割线

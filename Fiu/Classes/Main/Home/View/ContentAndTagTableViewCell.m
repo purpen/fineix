@@ -122,7 +122,7 @@ const static NSInteger buttonTag = 421;
         [self.tagView addSubview:tagBtn];
     }
     
-    self.tagView.contentSize = CGSizeMake(btnW + 60, 0);
+    self.tagView.contentSize = CGSizeMake(btnW * 1.15, 0);
 }
 
 //  标签的点击方法

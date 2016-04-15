@@ -9,6 +9,7 @@
 #import "DiscoverViewController.h"
 #import "FiuSceneTableViewCell.h"
 #import "SceneListTableViewCell.h"
+#import "FiuTagTableViewCell.h"
 
 @implementation DiscoverViewController
 
@@ -78,12 +79,23 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     if (indexPath.section == 0) {
-        static NSString * fiuFriendCellId = @"fiuFriendCellId";
-        UITableViewCell * cell = [tableView dequeueReusableCellWithIdentifier:fiuFriendCellId];
-        if (!cell) {
-            cell = [[UITableViewCell alloc] initWithStyle:(UITableViewCellStyleDefault) reuseIdentifier:fiuFriendCellId];
+        if (indexPath.row == 0) {
+            static NSString * fiuFriendCellId = @"fiuFriendCellId";
+            UITableViewCell * cell = [tableView dequeueReusableCellWithIdentifier:fiuFriendCellId];
+            if (!cell) {
+                cell = [[UITableViewCell alloc] initWithStyle:(UITableViewCellStyleDefault) reuseIdentifier:fiuFriendCellId];
+            }
+            return cell;
+            
+        } else if (indexPath.row == 1) {
+            static NSString * fiuSceneTagCellId = @"fiuSceneTagCellId";
+            FiuTagTableViewCell * cell = [tableView dequeueReusableCellWithIdentifier:fiuSceneTagCellId];
+            if (!cell) {
+                cell = [[FiuTagTableViewCell alloc] initWithStyle:(UITableViewCellStyleDefault) reuseIdentifier:fiuSceneTagCellId];
+            }
+            [cell setUI];
+            return cell;
         }
-        return cell;
     
     } else if (indexPath.section == 1) {
         static NSString * fiuSceneCellId = @"fiuSceneCellId";
