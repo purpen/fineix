@@ -17,7 +17,7 @@
 @implementation NaviView
 
 +(instancetype)getNaviView{
-    return [[NSBundle mainBundle] loadNibNamed:@"MyView" owner:nil options:nil][1];
+    return [[NSBundle mainBundle] loadNibNamed:@"MyView" owner:nil options:nil][0];
 }
 
 @end

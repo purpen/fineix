@@ -19,7 +19,7 @@
 */
 
 +(instancetype)geMyHomeV{
-    return [[NSBundle mainBundle] loadNibNamed:@"MyView" owner:nil options:nil][7];
+    return [[NSBundle mainBundle] loadNibNamed:@"MyView" owner:nil options:nil][6];
 }
 
 @end

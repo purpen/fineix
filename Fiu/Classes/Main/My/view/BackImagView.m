@@ -11,8 +11,9 @@
 @implementation BackImagView
 
 +(instancetype)getBackImageView{
-    BackImagView *backImageV = [[NSBundle mainBundle] loadNibNamed:@"MyView" owner:nil options:nil][2];
-    
+    BackImagView *backImageV = [[NSBundle mainBundle] loadNibNamed:@"MyView" owner:nil options:nil][1];
+    //backImageV.headImageView.layer.masksToBounds = YES;
+    //backImageV.headImageView.layer.cornerRadius = 33;
     return backImageV;
 }
 

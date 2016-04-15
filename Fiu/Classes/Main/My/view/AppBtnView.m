@@ -11,7 +11,7 @@
 @implementation AppBtnView
 
 +(instancetype)getAppBtnView{
-    return [[NSBundle mainBundle] loadNibNamed:@"MyView" owner:nil options:nil][5];
+    return [[NSBundle mainBundle] loadNibNamed:@"MyView" owner:nil options:nil][4];
 }
 
 @end

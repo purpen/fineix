@@ -170,12 +170,12 @@
                 </mask>
             </variation>
             <connections>
-                <outlet property="headImageView" destination="RLZ-hj-JFv" id="ciW-7Y-3jm"/>
-                <outlet property="levelLabel" destination="x08-I5-dSD" id="FZo-YQ-bpr"/>
-                <outlet property="nickNameLabel" destination="M05-IN-a70" id="eMw-yB-HRm"/>
-                <outlet property="summaryLabel" destination="HrR-PG-pIF" id="1zr-Yp-HGd"/>
-                <outlet property="talentLabel" destination="pAG-9o-ZRd" id="63a-R1-vwY"/>
-                <outlet property="wantCertificationBtn" destination="Hbh-lY-ddG" id="MiE-Bm-x8l"/>
+                <outlet property="headImageView" destination="RLZ-hj-JFv" id="MIi-YD-IzP"/>
+                <outlet property="levelLabel" destination="x08-I5-dSD" id="qCI-X9-dz3"/>
+                <outlet property="nickNameLabel" destination="M05-IN-a70" id="POB-fp-hUL"/>
+                <outlet property="summaryLabel" destination="HrR-PG-pIF" id="9dE-df-00J"/>
+                <outlet property="talentLabel" destination="pAG-9o-ZRd" id="SAL-Vj-i4E"/>
+                <outlet property="wantCertificationBtn" destination="Hbh-lY-ddG" id="iQm-u7-Ka0"/>
             </connections>
             <point key="canvasLocation" x="365.5" y="821"/>
         </view>

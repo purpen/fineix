@@ -11,7 +11,7 @@
 @implementation BottomView
 
 +(instancetype)getBottomView{
-    return [[NSBundle mainBundle] loadNibNamed:@"MyView" owner:nil options:nil][4];
+    return [[NSBundle mainBundle] loadNibNamed:@"MyView" owner:nil options:nil][3];
 }
 
 @end

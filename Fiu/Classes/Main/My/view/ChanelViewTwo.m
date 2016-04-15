@@ -11,7 +11,7 @@
 @implementation ChanelViewTwo
 
 +(instancetype)getChanelViewTwo{
-    return [[NSBundle mainBundle] loadNibNamed:@"MyView" owner:nil options:nil][3];
+    return [[NSBundle mainBundle] loadNibNamed:@"MyView" owner:nil options:nil][2];
 }
 
 @end
