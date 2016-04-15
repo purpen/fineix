@@ -18,6 +18,8 @@
 #import "BottomView.h"
 #import "AppBtnView.h"
 #import "MyOrdersViewController.h"
+#import "MyHomePageViewController.h"
+
 
 
 @interface MyViewController ()<UIScrollViewDelegate>
@@ -51,7 +53,7 @@
     //背景图片
     _imgV = [BackImagView getBackImageView];
     _imgV.headImageView.layer.masksToBounds = YES;
-    _imgV.headImageView.layer.cornerRadius = 30;
+    _imgV.headImageView.layer.cornerRadius = 33;
     _imgV.frame = CGRectMake(0, 64, SCREEN_WIDTH, 200/667.0*SCREEN_HEIGHT);
     _imgV.userInteractionEnabled = YES;
     UITapGestureRecognizer *singleTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(signleTap:)];
@@ -66,12 +68,38 @@
     NaviView *naviV = [NaviView getNaviView];
     naviV.frame = CGRectMake(0, 0, SCREEN_WIDTH, 64);
     [self.view addSubview:naviV];
+    naviV.backgroundColor = [UIColor clearColor];
+    
     
     [naviV.camerlBtn addTarget:self action:@selector(clickImageBtn:) forControlEvents:UIControlEventTouchUpInside];
-    [naviV.calendarBtn addTarget:self action:@selector(clickRightBtn:) forControlEvents:UIControlEventTouchUpInside];
+
     //频道选项
     ChanelView *chanelV = [ChanelView getChanelView];
     chanelV.frame = CGRectMake(0, 200+5, SCREEN_WIDTH, 60/667.0*SCREEN_HEIGHT);
+    //情景
+    chanelV.scenarioView.userInteractionEnabled = YES;
+    UITapGestureRecognizer *scenarioTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(signleTap:)];
+    scenarioTap.numberOfTapsRequired = 1;
+    scenarioTap.numberOfTouchesRequired = 1;
+    [chanelV.scenarioView addGestureRecognizer:scenarioTap];
+    //场景
+    chanelV.fieldView.userInteractionEnabled = YES;
+    UITapGestureRecognizer *scenarioTap1 = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(signleTap1:)];
+    scenarioTap1.numberOfTapsRequired = 1;
+    scenarioTap1.numberOfTouchesRequired = 1;
+    [chanelV.fieldView addGestureRecognizer:scenarioTap1];
+    //关注
+    chanelV.focusView.userInteractionEnabled = YES;
+    UITapGestureRecognizer *scenarioTap2 = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(signleTap2:)];
+    scenarioTap2.numberOfTapsRequired = 1;
+    scenarioTap2.numberOfTouchesRequired = 1;
+    [chanelV.focusView addGestureRecognizer:scenarioTap2];
+    //粉丝
+    chanelV.fansView.userInteractionEnabled = YES;
+    UITapGestureRecognizer *scenarioTap3 = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(signleTap3:)];
+    scenarioTap3.numberOfTapsRequired = 1;
+    scenarioTap3.numberOfTouchesRequired = 1;
+    [chanelV.fansView addGestureRecognizer:scenarioTap3];
     [_homeScrollView addSubview:chanelV];
     //订单等一些东西
     ChanelViewTwo *chanelTwoV = [ChanelViewTwo getChanelViewTwo];
@@ -101,6 +129,9 @@
     //关于我们等
     BottomView *bottomV = [BottomView getBottomView];
     bottomV.frame = CGRectMake(0, 200+5+60+5+194+2, SCREEN_WIDTH, 134);
+    [bottomV.aboutUsBtn addTarget:self action:@selector(clickAboutBtn:) forControlEvents:UIControlEventTouchUpInside];
+    [bottomV.opinionBtn addTarget:self action:@selector(clickOpinionBtn:) forControlEvents:UIControlEventTouchUpInside];
+    [bottomV.partnerBtn addTarget:self action:@selector(clickPartnerBtn:) forControlEvents:UIControlEventTouchUpInside];
     [_homeScrollView addSubview:bottomV];
     //京东图标
     AppBtnView *appV = [AppBtnView getAppBtnView];
@@ -113,15 +144,50 @@
     //向下滑动tabbar出现
 }
 
+-(void)clickPartnerBtn:(UIButton*)sender{
+    NSLog(@"合作伙伴app");
+}
+
+-(void)clickOpinionBtn:(UIButton*)sender{
+    NSLog(@"意见与反馈");
+}
+
+-(void)clickAboutBtn:(UIButton*)sender{
+    NSLog(@"关于我们界面");
+}
+
 //点击我要认证按钮
 -(void)clickCertificationBtn:(UIButton*)sender{
     //跳转到达人认证界面
     NSLog(@"跳转到达人认证界面");
 }
 
+-(void)signleTap1:(UITapGestureRecognizer*)gesture{
+    //跳转到我的主页的情景的界面
+    NSLog(@"跳转到我的主页的场景的界面");
+    UIStoryboard *myStory = [UIStoryboard storyboardWithName:@"My" bundle:nil];
+    MyHomePageViewController *myHomeVC = [myStory instantiateViewControllerWithIdentifier:@"MyHomePageViewController"];
+    myHomeVC.type = @2;
+    [self.navigationController pushViewController:myHomeVC animated:YES];
+}
+
+-(void)signleTap2:(UITapGestureRecognizer*)gesture{
+    //跳转到我的主页的情景的界面
+    NSLog(@"跳转到我的主页的关注的界面");
+}
+
+-(void)signleTap3:(UITapGestureRecognizer*)gesture{
+    //跳转到我的主页的情景的界面
+    NSLog(@"跳转到我的主页的粉丝的界面");
+}
+
 -(void)signleTap:(UITapGestureRecognizer*)gesture{
     //跳转到我的主页的情景的界面
     NSLog(@"跳转到我的主页的情景的界面");
+    UIStoryboard *myStory = [UIStoryboard storyboardWithName:@"My" bundle:nil];
+    MyHomePageViewController *myHomeVC = [myStory instantiateViewControllerWithIdentifier:@"MyHomePageViewController"];
+    myHomeVC.type = @1;
+    [self.navigationController pushViewController:myHomeVC animated:YES];
 }
 
 
@@ -192,10 +258,7 @@
     NSLog(@"#########");
 }
 
-//点击导航右按钮
--(void)clickRightBtn:(UIButton*)sender{
-    NSLog(@"*****");
-}
+
 
 //点击导航左按钮
 -(void)clickImageBtn:(UIButton*)sender{
@@ -206,27 +269,42 @@
 -(void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
     UserInfoEntity *entity = [UserInfoEntity defaultUserInfoEntity];
-    if (entity.isLogin == YES) {
-        //如果已经登录了直接进入个人中心并展示个人的相关信息
-        //更新用户名
-        _imgV.nickNameLabel.text = entity.nickname;
-        //个人简介
-        _imgV.summaryLabel.text = entity.summary;
-        //更新头像
-        [_imgV.headImageView sd_setImageWithURL:[NSURL URLWithString:entity.mediumAvatarUrl] placeholderImage:nil completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
-            
-        }];
-    }//如果没有登录提示用户登录
-    else{
-        //跳到登录页面
-        UIStoryboard *loginReginStory = [UIStoryboard storyboardWithName:@"LoginRegisterController" bundle:nil];
-        FBLoginRegisterViewController * loginRegisterVC = [loginReginStory instantiateViewControllerWithIdentifier:@"FBLoginRegisterViewController"];
-        //设置导航
-        UINavigationController *navi = [[UINavigationController alloc] initWithRootViewController:loginRegisterVC];
-        [self presentViewController:navi animated:YES completion:nil];
+    //如果已经登录了直接进入个人中心并展示个人的相关信息
+    //更新用户名
+    _imgV.nickNameLabel.text = entity.nickname;
+    //个人简介
+    _imgV.summaryLabel.text = entity.summary;
+    //等级
+    _imgV.talentLabel.text = entity.levelDesc;
+    _imgV.levelLabel.text = [NSString stringWithFormat:@"V%d",[entity.level intValue]];
+    //更新头像
+    [_imgV.headImageView sd_setImageWithURL:[NSURL URLWithString:entity.mediumAvatarUrl] placeholderImage:nil completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
         
-
-    }
+    }];
+//    if (entity.isLogin == YES) {
+//        //如果已经登录了直接进入个人中心并展示个人的相关信息
+//        //更新用户名
+//        _imgV.nickNameLabel.text = entity.nickname;
+//        //个人简介
+//        _imgV.summaryLabel.text = entity.summary;
+//        //等级
+//        _imgV.talentLabel.text = entity.levelDesc;
+//        _imgV.levelLabel.text = [NSString stringWithFormat:@"V%d",[entity.level intValue]];
+//        //更新头像
+//        [_imgV.headImageView sd_setImageWithURL:[NSURL URLWithString:entity.mediumAvatarUrl] placeholderImage:nil completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
+//            
+//        }];
+//    }//如果没有登录提示用户登录
+//    else{
+//        //跳到登录页面
+//        UIStoryboard *loginReginStory = [UIStoryboard storyboardWithName:@"LoginRegisterController" bundle:nil];
+//        FBLoginRegisterViewController * loginRegisterVC = [loginReginStory instantiateViewControllerWithIdentifier:@"FBLoginRegisterViewController"];
+//        //设置导航
+//        UINavigationController *navi = [[UINavigationController alloc] initWithRootViewController:loginRegisterVC];
+//        [self presentViewController:navi animated:YES completion:nil];
+//        
+//
+//    }
     //将要进入界面时让导航条和tabbar都出现
     self.navigationController.navigationBarHidden = YES;
     self.tabBarController.tabBar.hidden = NO;

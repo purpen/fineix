@@ -58,6 +58,7 @@
                     </constraints>
                     <variation key="default">
                         <mask key="constraints">
+                            <exclude reference="Axp-gz-PbG"/>
                             <exclude reference="MO1-Br-cHT"/>
                         </mask>
                     </variation>

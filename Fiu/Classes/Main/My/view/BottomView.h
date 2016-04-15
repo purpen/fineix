@@ -9,6 +9,9 @@
 #import <UIKit/UIKit.h>
 
 @interface BottomView : UIView
+@property (weak, nonatomic) IBOutlet UIButton *aboutUsBtn;
+@property (weak, nonatomic) IBOutlet UIButton *opinionBtn;
+@property (weak, nonatomic) IBOutlet UIButton *partnerBtn;
 
 +(instancetype)getBottomView;
 

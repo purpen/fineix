@@ -9,5 +9,5 @@
 #import <UIKit/UIKit.h>
 
 @interface MyHomePageViewController : UIViewController
-
+@property (nonatomic,strong) NSNumber *type;
 @end
