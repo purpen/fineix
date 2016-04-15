@@ -8,6 +8,8 @@
 
 #import "MallViewController.h"
 #import "MallMenuTableViewCell.h"
+#import "FiuTagTableViewCell.h"
+#import "SearchViewController.h"
 
 @implementation MallViewController
 
@@ -55,6 +57,7 @@
         _mallTableView.dataSource = self;
         _mallTableView.tableHeaderView = self.rollView;
         _mallTableView.showsVerticalScrollIndicator = NO;
+        _mallTableView.backgroundColor = [UIColor whiteColor];
     }
     return _mallTableView;
 }
@@ -73,7 +76,25 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     if (indexPath.section == 0) {
-        if (indexPath.row == 2) {
+        if (indexPath.row == 0) {
+            static NSString * mallBrandCellId = @"mallBrandCellId";
+            UITableViewCell * cell = [tableView dequeueReusableCellWithIdentifier:mallBrandCellId];
+            if (!cell) {
+                cell = [[UITableViewCell alloc] initWithStyle:(UITableViewCellStyleDefault) reuseIdentifier:mallBrandCellId];
+            }
+            return cell;
+            
+        } else if (indexPath.row == 1) {
+            static NSString * mallGoodsTagCellId = @"mallGoodsTagCellId";
+            FiuTagTableViewCell * cell = [tableView dequeueReusableCellWithIdentifier:mallGoodsTagCellId];
+            if (!cell) {
+                cell = [[FiuTagTableViewCell alloc] initWithStyle:(UITableViewCellStyleDefault) reuseIdentifier:mallGoodsTagCellId];
+            }
+            [cell setMallUI];
+            cell.nav = self.navigationController;
+            return cell;
+            
+        }  else if (indexPath.row == 2) {
             static NSString * mallMenuTableViewCellID = @"mallMenuTableViewCell";
             MallMenuTableViewCell * cell = [tableView dequeueReusableCellWithIdentifier:mallMenuTableViewCellID];
             if (!cell) {
@@ -146,7 +167,9 @@
 
 //  点击左边barItem
 - (void)leftBarItemSelected {
-    NSLog(@"＊＊＊＊＊＊＊＊＊搜索");
+    SearchViewController * searchVC = [[SearchViewController alloc] init];
+    searchVC.searchType = 3;
+    [self.navigationController pushViewController:searchVC animated:YES];
 }
 
 //  点击右边barItem

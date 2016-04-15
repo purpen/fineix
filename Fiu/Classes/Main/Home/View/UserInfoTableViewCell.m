@@ -26,11 +26,74 @@
     return self;
 }
 
+- (void)setFiuSceneUI {
+    //  场景图
+    self.bgImage.image = [UIImage imageNamed:@"werwer"];
+    
+    //  用户头像
+    self.userHeader.image = [UIImage imageNamed:@"user"];
+    
+    //  用户昵称
+    self.userName.text = @"Haasda Fynn";
+    
+    //  用户简介
+    self.userProfile.text = @"达人｜写剧本的文盲";
+    
+    //  观看数量
+    NSString * lookNum = @"35433";
+    CGFloat lookNumLength = [lookNum boundingRectWithSize:CGSizeMake(320, 1000) options:(NSStringDrawingUsesLineFragmentOrigin) attributes:nil context:nil].size.width;
+    [_lookNum mas_updateConstraints:^(MASConstraintMaker *make) {
+        make.size.mas_equalTo(CGSizeMake(lookNumLength, 15));
+    }];
+    self.lookNum.text = lookNum;
+    
+    //  喜欢数量
+    NSString * likeNum = @"123225";
+    CGFloat likeNumLength = [likeNum boundingRectWithSize:CGSizeMake(320, 1000) options:(NSStringDrawingUsesLineFragmentOrigin) attributes:nil context:nil].size.width;
+    [_likeNum mas_updateConstraints:^(MASConstraintMaker *make) {
+        make.size.mas_equalTo(CGSizeMake(likeNumLength, 15));
+    }];
+    self.likeNum.text = likeNum;
+    
+    //  标题
+    NSString * titleStr = @"长城脚下的手工匠人";
+    [self titleTextStyle:titleStr];
+    
+    //  所属情景
+    NSString * whereText = @"最好的时光遇到你";
+    CGFloat whereLength = [whereText boundingRectWithSize:CGSizeMake(320, 1000) options:(NSStringDrawingUsesLineFragmentOrigin) attributes:nil context:nil].size.width;
+    [_whereScene mas_updateConstraints:^(MASConstraintMaker *make) {
+        make.size.mas_equalTo(CGSizeMake(whereLength * 0.8, 15));
+    }];
+    self.whereScene.text = whereText;
+    
+    //  城市
+    NSString * cityText = @"北京市 朝阳区";
+    CGFloat cityLength = [cityText boundingRectWithSize:CGSizeMake(320, 1000) options:(NSStringDrawingUsesLineFragmentOrigin) attributes:nil context:nil].size.width;
+    [_city mas_updateConstraints:^(MASConstraintMaker *make) {
+        make.size.mas_equalTo(CGSizeMake(cityLength * 0.8, 15));
+    }];
+    self.city.text = cityText;
+    
+    //  时间
+    self.time.text = @"｜ 2天前";
+    
+    //  点赞的数量
+    CGFloat good = 32200;
+    if (good/1000 > 1) {
+        self.goodNum.text = [NSString stringWithFormat:@"%.1fk人赞过", good/1000];
+    } else {
+        self.goodNum.text = [NSString stringWithFormat:@"%.0f人赞过", good];
+    }
+    
+    [self changeUserViewFrame];
+}
+
 #pragma mark -
 - (void)setUI {
     //  场景图
     self.bgImage.image = [UIImage imageNamed:@"Bi"];
-    
+
     //  用户头像
     self.userHeader.image = [UIImage imageNamed:@"user"];
     

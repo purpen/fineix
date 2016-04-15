@@ -8,7 +8,6 @@
 
 #import "SearchViewController.h"
 
-
 @interface SearchViewController ()
 
 @end
@@ -19,16 +18,29 @@
     [super viewWillAppear:animated];
     
     [self setNavigationViewUI];
+    
 }
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    self.titleArr = [NSArray arrayWithObjects:@"情景", @"场景", @"用户", @"产品", nil];
+    self.titleArr = [NSArray arrayWithObjects:@"场景", @"情景", @"用户", @"产品", nil];
 
     [self.view addSubview:self.menuView];
     
     [self.view addSubview:self.resultsView];
+    
+    if (self.keyword.length > 0) {
+        self.searchView.searchInputBox.text = self.keyword;
+    }
+    [self searchRequest:self.searchType withKeyword:self.keyword];
+
+}
+
+#pragma mark - 搜索情景
+- (void)searchRequest:(NSInteger)type withKeyword:(NSString *)keyword {
+    [self changeMenuBtnState:type];
+    [SVProgressHUD showInfoWithStatus:[NSString stringWithFormat:@"开始搜索：%@", keyword]];
     
 }
 
@@ -44,7 +56,7 @@
 #pragma mark - 添加搜索框视图
 - (FBSearchView *)searchView {
     if (!_searchView) {
-        _searchView = [[FBSearchView alloc] initWithFrame:CGRectMake(35, 0, SCREEN_WIDTH - 44, 44)];
+        _searchView = [[FBSearchView alloc] initWithFrame:CGRectMake(35, 0, SCREEN_WIDTH - 35, 44)];
         _searchView.searchInputBox.placeholder = NSLocalizedString(@"search", nil);
         _searchView.delegate = self;
         _searchView.line.hidden = YES;
@@ -67,16 +79,25 @@
     return _menuView;
 }
 
-#pragma mark - 点击菜单栏的方法
+#pragma mark - 改变菜单栏的状态
 - (void)SearchMenuSeleted:(NSInteger)index {
+    [self searchRequest:index withKeyword:self.searchView.searchInputBox.text];
+    
+}
+
+//  改变搜索视图位置
+- (void)changeMenuBtnState:(NSInteger)index {
     CGPoint rollPoint = _resultsView.contentOffset;
     rollPoint.x = SCREEN_WIDTH * index;
-    [UIView animateWithDuration:.3 animations:^{
-        _resultsView.contentOffset = rollPoint;
-    }];
+    _resultsView.contentOffset = rollPoint;
     
-    
-    NSLog(@"＝＝＝＝＝＝＝＝＝＝＝  点击了 %zi", index);
+    self.menuView.selectedBtn.selected = NO;
+    NSUInteger tag = index + menuBtnTag;
+    UIButton * newbtn = (UIButton *)[self.view viewWithTag:tag];
+    newbtn.selected = YES;
+    self.menuView.selectedBtn = newbtn;
+    self.menuView.selectBtnTag = tag;
+    [self.menuView changeMenuBottomLinePosition:self.menuView.selectedBtn withIndex:index];
 }
 
 #pragma mark - 设置Nav

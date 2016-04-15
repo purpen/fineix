@@ -9,6 +9,8 @@
 #import "DiscoverViewController.h"
 #import "FiuSceneTableViewCell.h"
 #import "SceneListTableViewCell.h"
+#import "FiuTagTableViewCell.h"
+#import "SearchViewController.h"
 
 @implementation DiscoverViewController
 
@@ -55,7 +57,7 @@
         _discoverTableView.dataSource = self;
         _discoverTableView.showsVerticalScrollIndicator = NO;
         _discoverTableView.tableHeaderView = self.rollView;
-        
+        _discoverTableView.backgroundColor = [UIColor whiteColor];
     }
     return _discoverTableView;
 }
@@ -78,12 +80,24 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     if (indexPath.section == 0) {
-        static NSString * fiuFriendCellId = @"fiuFriendCellId";
-        UITableViewCell * cell = [tableView dequeueReusableCellWithIdentifier:fiuFriendCellId];
-        if (!cell) {
-            cell = [[UITableViewCell alloc] initWithStyle:(UITableViewCellStyleDefault) reuseIdentifier:fiuFriendCellId];
+        if (indexPath.row == 0) {
+            static NSString * fiuFriendCellId = @"fiuFriendCellId";
+            UITableViewCell * cell = [tableView dequeueReusableCellWithIdentifier:fiuFriendCellId];
+            if (!cell) {
+                cell = [[UITableViewCell alloc] initWithStyle:(UITableViewCellStyleDefault) reuseIdentifier:fiuFriendCellId];
+            }
+            return cell;
+            
+        } else if (indexPath.row == 1) {
+            static NSString * fiuSceneTagCellId = @"fiuSceneTagCellId";
+            FiuTagTableViewCell * cell = [tableView dequeueReusableCellWithIdentifier:fiuSceneTagCellId];
+            if (!cell) {
+                cell = [[FiuTagTableViewCell alloc] initWithStyle:(UITableViewCellStyleDefault) reuseIdentifier:fiuSceneTagCellId];
+            }
+            [cell setUI];
+            cell.nav = self.navigationController;
+            return cell;
         }
-        return cell;
     
     } else if (indexPath.section == 1) {
         static NSString * fiuSceneCellId = @"fiuSceneCellId";
@@ -91,7 +105,9 @@
         if (!cell) {
             cell = [[FiuSceneTableViewCell alloc] initWithStyle:(UITableViewCellStyleDefault) reuseIdentifier:fiuSceneCellId];
         }
+        cell.nav = self.navigationController;
         return cell;
+        
     } else if (indexPath.section == 2) {
         static NSString * sceneListCellId = @"sceneListCellId";
         SceneListTableViewCell * cell = [tableView dequeueReusableCellWithIdentifier:sceneListCellId];
@@ -166,7 +182,9 @@
 
 //  点击左边barItem
 - (void)leftBarItemSelected {
-    NSLog(@"＊＊＊＊＊＊＊＊＊搜索");
+    SearchViewController * searchVC = [[SearchViewController alloc] init];
+    searchVC.searchType = 1;
+    [self.navigationController pushViewController:searchVC animated:YES];
 }
 
 //  点击右边barItem

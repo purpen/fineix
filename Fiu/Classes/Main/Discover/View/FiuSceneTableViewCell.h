@@ -11,6 +11,7 @@
 
 @interface FiuSceneTableViewCell : UITableViewCell <UICollectionViewDelegate, UICollectionViewDataSource>
 
+@pro_strong UINavigationController      *   nav;
 @pro_strong UICollectionView            *   sceneListView;  //  滑动情景列表
 
 @end

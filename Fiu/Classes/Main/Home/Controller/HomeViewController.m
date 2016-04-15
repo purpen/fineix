@@ -116,10 +116,10 @@
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    static NSString * CellId = @"homeTableViewCellID";
-    SceneListTableViewCell * cell = [tableView dequeueReusableCellWithIdentifier:CellId];
+    static NSString * homeTableViewCellID = @"homeTableViewCellID";
+    SceneListTableViewCell * cell = [tableView dequeueReusableCellWithIdentifier:homeTableViewCellID];
     if (!cell) {
-        cell = [[SceneListTableViewCell alloc] initWithStyle:(UITableViewCellStyleDefault) reuseIdentifier:CellId];
+        cell = [[SceneListTableViewCell alloc] initWithStyle:(UITableViewCellStyleDefault) reuseIdentifier:homeTableViewCellID];
     }
     [cell setUI];
     return cell;
@@ -196,6 +196,7 @@
 //  点击左边barItem
 - (void)leftBarItemSelected {
     SearchViewController * searchVC = [[SearchViewController alloc] init];
+    searchVC.searchType = 0;
     [self.navigationController pushViewController:searchVC animated:YES];
 }
 

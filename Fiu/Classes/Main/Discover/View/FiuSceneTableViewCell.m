@@ -8,6 +8,7 @@
 
 #import "FiuSceneTableViewCell.h"
 #import "FiuSceneCollectionViewCell.h"
+#import "FiuSceneViewController.h"
 
 @implementation FiuSceneTableViewCell
 
@@ -56,6 +57,9 @@
 #pragma mark UICollectionViewDelegate
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
     NSLog(@"打开最Fiu的情景 ＝＝＝＝＝＝＝＝ %zi", indexPath.row);
+    FiuSceneViewController * fiuSceneVC = [[FiuSceneViewController alloc] init];
+    
+    [self.nav pushViewController:fiuSceneVC animated:YES];
 }
 
 
