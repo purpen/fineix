@@ -10,4 +10,5 @@
 
 @interface MyHomePageViewController : UIViewController
 @property (nonatomic,strong) NSNumber *type;
+@property (nonatomic,strong) UITableView *myTableView;
 @end

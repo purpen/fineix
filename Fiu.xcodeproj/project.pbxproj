@@ -53,6 +53,8 @@
 		280045171C805C92005F5C2E /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 280045161C805C92005F5C2E /* SystemConfiguration.framework */; };
 		2800451B1C805CAC005F5C2E /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2800451A1C805CAC005F5C2E /* Security.framework */; };
 		2800451F1C805CCA005F5C2E /* CoreTelephony.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2800451E1C805CCA005F5C2E /* CoreTelephony.framework */; };
+		487A50E61CC24D0D0062AAD8 /* MyHomePageScenarioViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 487A50E51CC24D0D0062AAD8 /* MyHomePageScenarioViewController.m */; };
+		487A50E91CC37FD10062AAD8 /* BackgroundTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 487A50E81CC37FD10062AAD8 /* BackgroundTableViewCell.m */; };
 		D802D7791C821D41007AFA3D /* AssetsLibrary.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D802D7781C821D41007AFA3D /* AssetsLibrary.framework */; };
 		D8035F2C1CB77AAA001920F9 /* ContentAndTagTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D8035F2B1CB77AAA001920F9 /* ContentAndTagTableViewCell.m */; };
 		D8035F2F1CB77D0C001920F9 /* UIImage+Helper.m in Sources */ = {isa = PBXBuildFile; fileRef = D8035F2E1CB77D0C001920F9 /* UIImage+Helper.m */; };
@@ -290,6 +292,10 @@
 		2800451C1C805CBD005F5C2E /* libsqlite3.0.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libsqlite3.0.tbd; path = usr/lib/libsqlite3.0.tbd; sourceTree = SDKROOT; };
 		2800451E1C805CCA005F5C2E /* CoreTelephony.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreTelephony.framework; path = System/Library/Frameworks/CoreTelephony.framework; sourceTree = SDKROOT; };
 		280045201C805CD7005F5C2E /* libstdc++.6.0.9.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = "libstdc++.6.0.9.tbd"; path = "usr/lib/libstdc++.6.0.9.tbd"; sourceTree = SDKROOT; };
+		487A50E41CC24D0D0062AAD8 /* MyHomePageScenarioViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyHomePageScenarioViewController.h; sourceTree = "<group>"; };
+		487A50E51CC24D0D0062AAD8 /* MyHomePageScenarioViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyHomePageScenarioViewController.m; sourceTree = "<group>"; };
+		487A50E71CC37FD10062AAD8 /* BackgroundTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BackgroundTableViewCell.h; sourceTree = "<group>"; };
+		487A50E81CC37FD10062AAD8 /* BackgroundTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BackgroundTableViewCell.m; sourceTree = "<group>"; };
 		800507341C7A9CDD005AF0BE /* Fiu.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Fiu.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D802D7781C821D41007AFA3D /* AssetsLibrary.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AssetsLibrary.framework; path = System/Library/Frameworks/AssetsLibrary.framework; sourceTree = SDKROOT; };
 		D802D7891C844101007AFA3D /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
@@ -699,6 +705,8 @@
 				1FEF0AE61CC0FC15006EF0C6 /* MySystemSettingsViewController.m */,
 				1FEF0AE71CC0FC15006EF0C6 /* MyViewController.h */,
 				1FEF0AE81CC0FC15006EF0C6 /* MyViewController.m */,
+				487A50E41CC24D0D0062AAD8 /* MyHomePageScenarioViewController.h */,
+				487A50E51CC24D0D0062AAD8 /* MyHomePageScenarioViewController.m */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -742,6 +750,8 @@
 				1FEF0B061CC0FC15006EF0C6 /* TipNumberView.m */,
 				1FEF0B271CC10136006EF0C6 /* MyHomePageScenarioView.h */,
 				1FEF0B281CC10136006EF0C6 /* MyHomePageScenarioView.m */,
+				487A50E71CC37FD10062AAD8 /* BackgroundTableViewCell.h */,
+				487A50E81CC37FD10062AAD8 /* BackgroundTableViewCell.m */,
 			);
 			path = view;
 			sourceTree = "<group>";
@@ -1765,6 +1775,7 @@
 				D8035FF11CBE1F1F001920F9 /* AllSceneCollectionViewCell.m in Sources */,
 				D8035FC61CBD1021001920F9 /* FBLocationViewController.m in Sources */,
 				1FEF0B151CC0FC15006EF0C6 /* BackImagView.m in Sources */,
+				487A50E61CC24D0D0062AAD8 /* MyHomePageScenarioViewController.m in Sources */,
 				D812815A1CAA8532007CF08B /* fineix.xcdatamodeld in Sources */,
 				D803605D1CBF376B001920F9 /* GuidePageViewController.m in Sources */,
 				1FEF0B071CC0FC15006EF0C6 /* AboutFirebirdViewController.m in Sources */,
@@ -1864,6 +1875,7 @@
 				D8035FD51CBD1035001920F9 /* FiuSceneTableViewCell.m in Sources */,
 				1FEF0B1E1CC0FC15006EF0C6 /* OrderInfoCell.m in Sources */,
 				D81281101CAA8532007CF08B /* AppDelegate.mm in Sources */,
+				487A50E91CC37FD10062AAD8 /* BackgroundTableViewCell.m in Sources */,
 				D81281221CAA8532007CF08B /* AddUrlView.m in Sources */,
 				D8035FEB1CBE1B5D001920F9 /* AllSceneViewController.m in Sources */,
 				D8035FE41CBDFC16001920F9 /* FiuHeaderTableViewCell.m in Sources */,

@@ -14,6 +14,7 @@
 #import "MyHomeV.h"
 #import "TipNumberView.h"
 #import "Fiu.h"
+#import "MyHomePageScenarioView.h"
 
 @interface MyHomePageViewController ()<UIScrollViewDelegate>
 
@@ -37,7 +38,7 @@
         [self AddScene:5];
     }else if ([self.type isEqualToNumber:@2]){
         //场景
-        
+        [self.view addSubview:self.myTableView];
     }
     
     //让背景图片下拉变大
@@ -46,6 +47,9 @@
     _imgV.contentMode = UIViewContentModeScaleAspectFill;
     _imgV.autoresizesSubviews = YES;
 }
+
+
+
 
 -(void)scrollViewDidScroll:(UIScrollView *)scrollView{
     //当滑动结束时获取当前滚动坐标的y值

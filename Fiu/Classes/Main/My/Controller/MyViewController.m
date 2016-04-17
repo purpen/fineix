@@ -18,7 +18,7 @@
 #import "BottomView.h"
 #import "AppBtnView.h"
 #import "MyOrdersViewController.h"
-#import "MyHomePageViewController.h"
+#import "MyHomePageScenarioViewController.h"
 
 
 
@@ -165,8 +165,7 @@
 -(void)signleTap1:(UITapGestureRecognizer*)gesture{
     //跳转到我的主页的情景的界面
     NSLog(@"跳转到我的主页的场景的界面");
-    UIStoryboard *myStory = [UIStoryboard storyboardWithName:@"My" bundle:nil];
-    MyHomePageViewController *myHomeVC = [myStory instantiateViewControllerWithIdentifier:@"MyHomePageViewController"];
+    MyHomePageScenarioViewController *myHomeVC = [[MyHomePageScenarioViewController alloc] init];
     myHomeVC.type = @2;
     [self.navigationController pushViewController:myHomeVC animated:YES];
 }
@@ -184,8 +183,7 @@
 -(void)signleTap:(UITapGestureRecognizer*)gesture{
     //跳转到我的主页的情景的界面
     NSLog(@"跳转到我的主页的情景的界面");
-    UIStoryboard *myStory = [UIStoryboard storyboardWithName:@"My" bundle:nil];
-    MyHomePageViewController *myHomeVC = [myStory instantiateViewControllerWithIdentifier:@"MyHomePageViewController"];
+    MyHomePageScenarioViewController *myHomeVC = [[MyHomePageScenarioViewController alloc] init];
     myHomeVC.type = @1;
     [self.navigationController pushViewController:myHomeVC animated:YES];
 }
