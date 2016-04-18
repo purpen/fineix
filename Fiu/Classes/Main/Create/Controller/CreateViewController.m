@@ -23,6 +23,8 @@
             [self.cameraView.session startRunning];
         }
     }
+    
+     [self setNavViewUI];
 }
 
 - (void)viewDidLoad {
@@ -30,13 +32,12 @@
     
     [self setCreateControllerUI];
     
-    [self setNavViewUI];
-    
      NSLog(@"================  %@", self.createType);
 }
 
 #pragma mark - 设置顶部Nav
 - (void)setNavViewUI {
+    [[UIApplication sharedApplication] setStatusBarHidden:YES withAnimation:(UIStatusBarAnimationSlide)];
     [self addNavViewTitle:NSLocalizedString(@"createVcTitle", nil)];
     [self addCancelButton:@"icon_cancel"];
     [self addOpenPhotoAlbumsButton];

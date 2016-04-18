@@ -13,8 +13,10 @@
 @interface FiuSceneViewController : FBViewController <FBNavigationBarItemsDelegate, UITableViewDelegate, UITableViewDataSource>
 
 @pro_strong NSArray                 *   textMar;
-@pro_strong UITableView             *   fiuSceneTable;      //  情景视图
-@pro_strong GroupHeaderView         *   headerView;         //  分组头部视图
-@pro_strong SuFiuScenrView          *   suBtn;              //  订阅按钮
+@pro_strong UITableView             *   fiuSceneTable;          //  情景视图
+@pro_strong GroupHeaderView         *   headerView;             //  分组头部视图
+@pro_strong SuFiuScenrView          *   suBtn;                  //  订阅按钮
+@pro_assign BOOL                        rollDown;               //  是否下拉
+@pro_assign CGFloat                     lastContentOffset;      //  滚动的方向
 
 @end

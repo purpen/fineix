@@ -10,20 +10,21 @@
 #import "FiuSceneTableViewCell.h"
 #import "SceneListTableViewCell.h"
 #import "FiuTagTableViewCell.h"
+
 #import "SearchViewController.h"
+#import "SceneInfoViewController.h"
 
 @implementation DiscoverViewController
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
-    [[UIApplication sharedApplication] setStatusBarHidden:NO withAnimation:(UIStatusBarAnimationSlide)];
+    
+    [self setNavigationViewUI];
+    
 }
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.view.backgroundColor = [UIColor whiteColor];
-    
-    [self setNavigationViewUI];
     
     [self setDiscoverViewUI];
 }
@@ -172,8 +173,19 @@
     }
 }
 
+#pragma mark - 跳转场景页面
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    if (indexPath.section == 2) {
+        SceneInfoViewController * sceneVC = [[SceneInfoViewController alloc] init];
+        [self.navigationController pushViewController:sceneVC animated:YES];
+    }
+}
+
 #pragma mark - 设置Nav
 - (void)setNavigationViewUI {
+    [[UIApplication sharedApplication] setStatusBarHidden:NO withAnimation:(UIStatusBarAnimationSlide)];
+    [self navBarTransparent:NO];
+    self.view.backgroundColor = [UIColor whiteColor];
     self.delegate = self;
     [self addBarItemLeftBarButton:@"" image:@"Nav_Search"];
     [self addBarItemRightBarButton:@"" image:@"Nav_Location"];

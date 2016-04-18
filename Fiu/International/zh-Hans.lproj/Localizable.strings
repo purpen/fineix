@@ -49,6 +49,8 @@
 "searchGoods" = "搜索产品";
 "search" = "搜索";
 
+//  评论
+"comment" = "评论一下";
 
 //登录注册
 "passwordDigits" = "密码不能少于六位";
@@ -59,3 +61,4 @@
 "determine" = "确定";
 "enterCorrectPhoneNumber" = "请输入正确的手机号";
 "enterVerificationCode" = "请输入验证码";
+

@@ -16,7 +16,6 @@
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
-
     
     [self setNavigationViewUI];
 }
@@ -26,13 +25,34 @@
     
     self.automaticallyAdjustsScrollViewInsets = NO;
     
+    [self setCommentViewUI];
+
+}
+
+#pragma mark -
+- (void)setCommentViewUI {
     [self.view addSubview:self.commentTabel];
+    
+    [self.view addSubview:self.writeComment];
+    [_writeComment mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.size.mas_equalTo(CGSizeMake(SCREEN_WIDTH, 49));
+        make.bottom.equalTo(self.view.mas_bottom).with.offset(0);
+        make.left.equalTo(self.view.mas_left).with.offset(0);
+    }];
+}
+
+#pragma mark - 填写评论
+- (WriteCommentView *)writeComment {
+    if (!_writeComment) {
+        _writeComment = [[WriteCommentView alloc] init];
+    }
+    return _writeComment;
 }
 
 #pragma mark - 评论列表
 - (UITableView *)commentTabel {
     if (!_commentTabel) {
-        _commentTabel = [[UITableView alloc] initWithFrame:CGRectMake(0, 64, SCREEN_WIDTH, SCREEN_HEIGHT - 64) style:(UITableViewStylePlain)];
+        _commentTabel = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT - 113) style:(UITableViewStylePlain)];
         _commentTabel.delegate = self;
         _commentTabel.dataSource = self;
         _commentTabel.showsVerticalScrollIndicator = NO;
