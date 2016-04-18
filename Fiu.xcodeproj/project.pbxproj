@@ -19,10 +19,12 @@
 		1F3C0A961CBFA28300B84FEB /* GreatPeopleViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F3C0A941CBFA28300B84FEB /* GreatPeopleViewController.m */; };
 		1F3C0A971CBFA28300B84FEB /* GreatPeopleViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1F3C0A951CBFA28300B84FEB /* GreatPeopleViewController.xib */; };
 		1F59E5FC1C9ABBA500E96C60 /* Accelerate.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1F59E5FB1C9ABBA500E96C60 /* Accelerate.framework */; };
+		1FBE626A1CC4CB72009606F7 /* MyPageFocusOnViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1FBE62691CC4CB72009606F7 /* MyPageFocusOnViewController.m */; };
+		1FBE626D1CC4D095009606F7 /* FocusOnTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 1FBE626C1CC4D095009606F7 /* FocusOnTableViewCell.m */; };
+		1FBE62701CC4E3C3009606F7 /* MyFansViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1FBE626F1CC4E3C3009606F7 /* MyFansViewController.m */; };
+		1FBE62761CC4F4B2009606F7 /* MyFansActionSheetView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1FBE62751CC4F4B2009606F7 /* MyFansActionSheetView.m */; };
 		1FEF0B071CC0FC15006EF0C6 /* AboutFirebirdViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1FEF0AD41CC0FC15006EF0C6 /* AboutFirebirdViewController.m */; };
 		1FEF0B081CC0FC15006EF0C6 /* FeedbackViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1FEF0AD61CC0FC15006EF0C6 /* FeedbackViewController.m */; };
-		1FEF0B091CC0FC15006EF0C6 /* MyFansViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1FEF0AD81CC0FC15006EF0C6 /* MyFansViewController.m */; };
-		1FEF0B0A1CC0FC15006EF0C6 /* MyFocusOnViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1FEF0ADA1CC0FC15006EF0C6 /* MyFocusOnViewController.m */; };
 		1FEF0B0B1CC0FC15006EF0C6 /* MyHomePageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1FEF0ADC1CC0FC15006EF0C6 /* MyHomePageViewController.m */; };
 		1FEF0B0C1CC0FC15006EF0C6 /* MyMessageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1FEF0ADE1CC0FC15006EF0C6 /* MyMessageViewController.m */; };
 		1FEF0B0D1CC0FC15006EF0C6 /* MyOrdersViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1FEF0AE01CC0FC15006EF0C6 /* MyOrdersViewController.m */; };
@@ -46,7 +48,6 @@
 		1FEF0B1F1CC0FC15006EF0C6 /* OrderInfoCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1FEF0B021CC0FC15006EF0C6 /* OrderInfoCell.xib */; };
 		1FEF0B201CC0FC15006EF0C6 /* ShareView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1FEF0B041CC0FC15006EF0C6 /* ShareView.m */; };
 		1FEF0B211CC0FC15006EF0C6 /* TipNumberView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1FEF0B061CC0FC15006EF0C6 /* TipNumberView.m */; };
-		1FEF0B291CC10136006EF0C6 /* MyHomePageScenarioView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1FEF0B281CC10136006EF0C6 /* MyHomePageScenarioView.m */; };
 		280045111C805B78005F5C2E /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 280045101C805B78005F5C2E /* CoreLocation.framework */; };
 		280045131C805B82005F5C2E /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 280045121C805B82005F5C2E /* QuartzCore.framework */; };
 		280045151C805B8C005F5C2E /* OpenGLES.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 280045141C805B8C005F5C2E /* OpenGLES.framework */; };
@@ -231,14 +232,18 @@
 		1F3C0A941CBFA28300B84FEB /* GreatPeopleViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GreatPeopleViewController.m; sourceTree = "<group>"; };
 		1F3C0A951CBFA28300B84FEB /* GreatPeopleViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = GreatPeopleViewController.xib; sourceTree = "<group>"; };
 		1F59E5FB1C9ABBA500E96C60 /* Accelerate.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Accelerate.framework; path = System/Library/Frameworks/Accelerate.framework; sourceTree = SDKROOT; };
+		1FBE62681CC4CB72009606F7 /* MyPageFocusOnViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyPageFocusOnViewController.h; sourceTree = "<group>"; };
+		1FBE62691CC4CB72009606F7 /* MyPageFocusOnViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyPageFocusOnViewController.m; sourceTree = "<group>"; };
+		1FBE626B1CC4D095009606F7 /* FocusOnTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FocusOnTableViewCell.h; sourceTree = "<group>"; };
+		1FBE626C1CC4D095009606F7 /* FocusOnTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FocusOnTableViewCell.m; sourceTree = "<group>"; };
+		1FBE626E1CC4E3C3009606F7 /* MyFansViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyFansViewController.h; sourceTree = "<group>"; };
+		1FBE626F1CC4E3C3009606F7 /* MyFansViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyFansViewController.m; sourceTree = "<group>"; };
+		1FBE62741CC4F4B2009606F7 /* MyFansActionSheetView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyFansActionSheetView.h; sourceTree = "<group>"; };
+		1FBE62751CC4F4B2009606F7 /* MyFansActionSheetView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyFansActionSheetView.m; sourceTree = "<group>"; };
 		1FEF0AD31CC0FC15006EF0C6 /* AboutFirebirdViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AboutFirebirdViewController.h; sourceTree = "<group>"; };
 		1FEF0AD41CC0FC15006EF0C6 /* AboutFirebirdViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AboutFirebirdViewController.m; sourceTree = "<group>"; };
 		1FEF0AD51CC0FC15006EF0C6 /* FeedbackViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FeedbackViewController.h; sourceTree = "<group>"; };
 		1FEF0AD61CC0FC15006EF0C6 /* FeedbackViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FeedbackViewController.m; sourceTree = "<group>"; };
-		1FEF0AD71CC0FC15006EF0C6 /* MyFansViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyFansViewController.h; sourceTree = "<group>"; };
-		1FEF0AD81CC0FC15006EF0C6 /* MyFansViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyFansViewController.m; sourceTree = "<group>"; };
-		1FEF0AD91CC0FC15006EF0C6 /* MyFocusOnViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyFocusOnViewController.h; sourceTree = "<group>"; };
-		1FEF0ADA1CC0FC15006EF0C6 /* MyFocusOnViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyFocusOnViewController.m; sourceTree = "<group>"; };
 		1FEF0ADB1CC0FC15006EF0C6 /* MyHomePageViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyHomePageViewController.h; sourceTree = "<group>"; };
 		1FEF0ADC1CC0FC15006EF0C6 /* MyHomePageViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyHomePageViewController.m; sourceTree = "<group>"; };
 		1FEF0ADD1CC0FC15006EF0C6 /* MyMessageViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyMessageViewController.h; sourceTree = "<group>"; };
@@ -281,8 +286,6 @@
 		1FEF0B041CC0FC15006EF0C6 /* ShareView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ShareView.m; sourceTree = "<group>"; };
 		1FEF0B051CC0FC15006EF0C6 /* TipNumberView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TipNumberView.h; sourceTree = "<group>"; };
 		1FEF0B061CC0FC15006EF0C6 /* TipNumberView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TipNumberView.m; sourceTree = "<group>"; };
-		1FEF0B271CC10136006EF0C6 /* MyHomePageScenarioView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyHomePageScenarioView.h; sourceTree = "<group>"; };
-		1FEF0B281CC10136006EF0C6 /* MyHomePageScenarioView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyHomePageScenarioView.m; sourceTree = "<group>"; };
 		280045101C805B78005F5C2E /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
 		280045121C805B82005F5C2E /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		280045141C805B8C005F5C2E /* OpenGLES.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGLES.framework; path = System/Library/Frameworks/OpenGLES.framework; sourceTree = SDKROOT; };
@@ -687,10 +690,6 @@
 				1FEF0AD41CC0FC15006EF0C6 /* AboutFirebirdViewController.m */,
 				1FEF0AD51CC0FC15006EF0C6 /* FeedbackViewController.h */,
 				1FEF0AD61CC0FC15006EF0C6 /* FeedbackViewController.m */,
-				1FEF0AD71CC0FC15006EF0C6 /* MyFansViewController.h */,
-				1FEF0AD81CC0FC15006EF0C6 /* MyFansViewController.m */,
-				1FEF0AD91CC0FC15006EF0C6 /* MyFocusOnViewController.h */,
-				1FEF0ADA1CC0FC15006EF0C6 /* MyFocusOnViewController.m */,
 				1FEF0ADB1CC0FC15006EF0C6 /* MyHomePageViewController.h */,
 				1FEF0ADC1CC0FC15006EF0C6 /* MyHomePageViewController.m */,
 				1FEF0ADD1CC0FC15006EF0C6 /* MyMessageViewController.h */,
@@ -707,6 +706,10 @@
 				1FEF0AE81CC0FC15006EF0C6 /* MyViewController.m */,
 				487A50E41CC24D0D0062AAD8 /* MyHomePageScenarioViewController.h */,
 				487A50E51CC24D0D0062AAD8 /* MyHomePageScenarioViewController.m */,
+				1FBE62681CC4CB72009606F7 /* MyPageFocusOnViewController.h */,
+				1FBE62691CC4CB72009606F7 /* MyPageFocusOnViewController.m */,
+				1FBE626E1CC4E3C3009606F7 /* MyFansViewController.h */,
+				1FBE626F1CC4E3C3009606F7 /* MyFansViewController.m */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -748,10 +751,12 @@
 				1FEF0B041CC0FC15006EF0C6 /* ShareView.m */,
 				1FEF0B051CC0FC15006EF0C6 /* TipNumberView.h */,
 				1FEF0B061CC0FC15006EF0C6 /* TipNumberView.m */,
-				1FEF0B271CC10136006EF0C6 /* MyHomePageScenarioView.h */,
-				1FEF0B281CC10136006EF0C6 /* MyHomePageScenarioView.m */,
 				487A50E71CC37FD10062AAD8 /* BackgroundTableViewCell.h */,
 				487A50E81CC37FD10062AAD8 /* BackgroundTableViewCell.m */,
+				1FBE626B1CC4D095009606F7 /* FocusOnTableViewCell.h */,
+				1FBE626C1CC4D095009606F7 /* FocusOnTableViewCell.m */,
+				1FBE62741CC4F4B2009606F7 /* MyFansActionSheetView.h */,
+				1FBE62751CC4F4B2009606F7 /* MyFansActionSheetView.m */,
 			);
 			path = view;
 			sourceTree = "<group>";
@@ -1784,7 +1789,6 @@
 				1F3C0A961CBFA28300B84FEB /* GreatPeopleViewController.m in Sources */,
 				D80360481CBF376B001920F9 /* SubscribeInterestedCollectionViewController.m in Sources */,
 				D89B5A971CB66B3B00DB9710 /* DataNumTableViewCell.m in Sources */,
-				1FEF0B0A1CC0FC15006EF0C6 /* MyFocusOnViewController.m in Sources */,
 				1FEF0B0D1CC0FC15006EF0C6 /* MyOrdersViewController.m in Sources */,
 				D80360401CBF376B001920F9 /* FBLoginViewController.m in Sources */,
 				D8035FE11CBDFC07001920F9 /* FiuTagTableViewCell.m in Sources */,
@@ -1805,6 +1809,7 @@
 				D86AFDEC1CBF84DB006F1602 /* SearchSceneTableViewCell.m in Sources */,
 				D812815E1CAA8532007CF08B /* main.m in Sources */,
 				D8035FC81CBD1021001920F9 /* FBMapLocatinViewController.m in Sources */,
+				1FBE62701CC4E3C3009606F7 /* MyFansViewController.m in Sources */,
 				1FEF0B1A1CC0FC15006EF0C6 /* MyHomePageView.m in Sources */,
 				D8035FEE1CBE1EA3001920F9 /* AllSceneView.m in Sources */,
 				D81281171CAA8532007CF08B /* CreateViewController.m in Sources */,
@@ -1817,6 +1822,7 @@
 				D81281241CAA8532007CF08B /* CropImageView.m in Sources */,
 				1FEF0B181CC0FC15006EF0C6 /* ChanelView.m in Sources */,
 				1FEF0B101CC0FC15006EF0C6 /* MySystemSettingsViewController.m in Sources */,
+				1FBE626D1CC4D095009606F7 /* FocusOnTableViewCell.m in Sources */,
 				1F3C0A841CBF760C00B84FEB /* SubscribePeopleViewController.m in Sources */,
 				1FEF0B191CC0FC15006EF0C6 /* ChanelViewTwo.m in Sources */,
 				1FEF0B0C1CC0FC15006EF0C6 /* MyMessageViewController.m in Sources */,
@@ -1824,6 +1830,7 @@
 				D812812C1CAA8532007CF08B /* PictureView.m in Sources */,
 				1FEF0B141CC0FC15006EF0C6 /* AppBtnView.m in Sources */,
 				D81281161CAA8532007CF08B /* ClipImageViewController.m in Sources */,
+				1FBE626A1CC4CB72009606F7 /* MyPageFocusOnViewController.m in Sources */,
 				1FEF0B121CC0FC15006EF0C6 /* OrderListModel.m in Sources */,
 				D8035FF41CBE44A9001920F9 /* PictureToolViewController.m in Sources */,
 				1FEF0B111CC0FC15006EF0C6 /* MyViewController.m in Sources */,
@@ -1836,7 +1843,6 @@
 				D89B5A941CB6580600DB9710 /* UserInfoTableViewCell.m in Sources */,
 				D812812E1CAA8532007CF08B /* ScenceMessageView.m in Sources */,
 				D81281181CAA8532007CF08B /* CropImageViewController.m in Sources */,
-				1FEF0B291CC10136006EF0C6 /* MyHomePageScenarioView.m in Sources */,
 				D8035FCD1CBD1021001920F9 /* GroupHeaderView.m in Sources */,
 				D80360501CBF376B001920F9 /* UserInfoEntity.m in Sources */,
 				D812812B1CAA8532007CF08B /* PhotoAlbumsView.m in Sources */,
@@ -1856,6 +1862,7 @@
 				D8035FCE1CBD1021001920F9 /* SearchViewController.m in Sources */,
 				D8035FC51CBD1021001920F9 /* CommentDataTableViewCell.m in Sources */,
 				D80360451CBF376B001920F9 /* PhoneToLogInViewController.m in Sources */,
+				1FBE62761CC4F4B2009606F7 /* MyFansActionSheetView.m in Sources */,
 				1FEF0B1B1CC0FC15006EF0C6 /* MyHomeV.m in Sources */,
 				D81281201CAA8532007CF08B /* FBPhoto.m in Sources */,
 				D803605C1CBF376B001920F9 /* SubmitView.m in Sources */,
@@ -1886,7 +1893,6 @@
 				1F3C0A7B1CBF682500B84FEB /* ImprovePersonalDataViewController.m in Sources */,
 				D8035F3B1CB784B3001920F9 /* UILable+Frame.m in Sources */,
 				1FEF0B0E1CC0FC15006EF0C6 /* MyOrderViewController.m in Sources */,
-				1FEF0B091CC0FC15006EF0C6 /* MyFansViewController.m in Sources */,
 				D81281571CAA8532007CF08B /* NSString+Helper.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

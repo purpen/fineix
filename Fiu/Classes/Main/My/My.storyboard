@@ -81,26 +81,6 @@
             </objects>
             <point key="canvasLocation" x="-560.5" y="383.5"/>
         </scene>
-        <!--关注-->
-        <scene sceneID="9Xo-S4-aow">
-            <objects>
-                <viewController storyboardIdentifier="MyFocusOnViewController" id="znY-9o-TeH" customClass="MyFocusOnViewController" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="uhA-qD-GMy"/>
-                        <viewControllerLayoutGuide type="bottom" id="SLn-DR-lLD"/>
-                    </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="3IF-IQ-KWi">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                    </view>
-                    <navigationItem key="navigationItem" title="关注" id="WAa-Ym-6Lb"/>
-                    <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="CKN-6F-b6c" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="520.5" y="-360.5"/>
-        </scene>
         <!--消息-->
         <scene sceneID="gKf-7v-KxJ">
             <objects>
@@ -1033,26 +1013,6 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="3gF-vQ-CPz" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1286.5" y="1174.5"/>
-        </scene>
-        <!--粉丝-->
-        <scene sceneID="lD2-5Z-mwh">
-            <objects>
-                <viewController storyboardIdentifier="MyFansViewController" id="jTC-90-hzX" customClass="MyFansViewController" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="qQL-LU-fMj"/>
-                        <viewControllerLayoutGuide type="bottom" id="lqY-A9-aPJ"/>
-                    </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="tOj-gq-7F6">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                    </view>
-                    <navigationItem key="navigationItem" title="粉丝" id="5FE-6A-gb0"/>
-                    <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="5sS-oV-IwW" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="986.5" y="358.5"/>
         </scene>
     </scenes>
     <resources>

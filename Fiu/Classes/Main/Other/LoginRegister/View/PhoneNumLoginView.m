@@ -28,6 +28,7 @@
         _pwdTF.center = centerpwd;
         _pwdTF.borderStyle = UITextBorderStyleRoundedRect;
         _pwdTF.placeholder = @"密码";
+        _pwdTF.secureTextEntry = YES;
         _pwdTF.font = [UIFont systemFontOfSize:13];
         _pwdTF.backgroundColor = [UIColor whiteColor];
         //登录按钮

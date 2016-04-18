@@ -19,7 +19,8 @@
 #import "AppBtnView.h"
 #import "MyOrdersViewController.h"
 #import "MyHomePageScenarioViewController.h"
-
+#import "MyPageFocusOnViewController.h"
+#import "MyFansViewController.h"
 
 
 @interface MyViewController ()<UIScrollViewDelegate>
@@ -173,11 +174,15 @@
 -(void)signleTap2:(UITapGestureRecognizer*)gesture{
     //跳转到我的主页的情景的界面
     NSLog(@"跳转到我的主页的关注的界面");
+    MyPageFocusOnViewController *view = [[MyPageFocusOnViewController alloc] init];
+    [self.navigationController pushViewController:view animated:YES];
 }
 
 -(void)signleTap3:(UITapGestureRecognizer*)gesture{
     //跳转到我的主页的情景的界面
     NSLog(@"跳转到我的主页的粉丝的界面");
+    MyFansViewController *view = [[MyFansViewController alloc] init];
+    [self.navigationController pushViewController:view animated:YES];
 }
 
 -(void)signleTap:(UITapGestureRecognizer*)gesture{

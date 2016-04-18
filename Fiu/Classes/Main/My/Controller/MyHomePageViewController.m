@@ -14,7 +14,7 @@
 #import "MyHomeV.h"
 #import "TipNumberView.h"
 #import "Fiu.h"
-#import "MyHomePageScenarioView.h"
+
 
 @interface MyHomePageViewController ()<UIScrollViewDelegate>
 

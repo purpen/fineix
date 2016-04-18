@@ -82,6 +82,7 @@ static NSString *const thirdRegisteredNotBinding = @"/auth/third_register_withou
     _phoneNumLoginV.frame = frame;
     _phoneNumLoginV.phoneTF.delegate = self;
     _phoneNumLoginV.pwdTF.delegate = self;
+    
     [self.view addSubview:_phoneNumLoginV];
     //给登录连接方法
     [_phoneNumLoginV.loginBtn addTarget:self action:@selector(clickLoginBtn:) forControlEvents:UIControlEventTouchUpInside];
@@ -355,9 +356,12 @@ static NSString *const thirdRegisteredNotBinding = @"/auth/third_register_withou
             CGRect frame = _phoneNumLoginV.frame;
             frame.origin.y = 1000;
             _phoneNumLoginV.frame = frame;
+            [_phoneNumLoginV.pwdTF resignFirstResponder];
+            [_phoneNumLoginV.phoneTF resignFirstResponder];
         } completion:^(BOOL finished) {
             self.topView.hidden = NO;
         }];
+        
         return;
     }
     

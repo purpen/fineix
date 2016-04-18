@@ -1,5 +1,5 @@
 //
-//  MyFansViewController.h
+//  MyPageFocusOnViewController.h
 //  Fiu
 //
 //  Created by THN-Dong on 16/4/18.
@@ -8,6 +8,8 @@
 
 #import "FBViewController.h"
 
-@interface MyFansViewController : FBViewController
+@interface MyPageFocusOnViewController : FBViewController
+
 @property(nonatomic,strong) UITableView *mytableView;
+
 @end

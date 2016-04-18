@@ -1,26 +1,25 @@
 //
-//  MyFansViewController.m
+//  MyPageFocusOnViewController.m
 //  Fiu
 //
 //  Created by THN-Dong on 16/4/18.
 //  Copyright © 2016年 taihuoniao. All rights reserved.
 //
 
-#import "MyFansViewController.h"
+#import "MyPageFocusOnViewController.h"
 #import "FocusOnTableViewCell.h"
-#import "MyFansActionSheetView.h"
 
-@interface MyFansViewController ()<FBNavigationBarItemsDelegate,UITableViewDelegate,UITableViewDataSource>
+@interface MyPageFocusOnViewController ()<FBNavigationBarItemsDelegate,UITableViewDelegate,UITableViewDataSource>
 
 @end
 
-@implementation MyFansViewController
+@implementation MyPageFocusOnViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     //设置导航条
-    self.navigationItem.title = @"粉丝";
+    self.navigationItem.title = @"关注";
     [self addBarItemLeftBarButton:nil image:@"icon_back"];
     self.delegate = self;
     
@@ -58,12 +57,7 @@
 }
 
 -(void)clickFocusBtn:(UIButton*)sender{
-    if (!sender.selected) {
-        sender.selected = !sender.selected;
-    }else{
-        MyFansActionSheetView *sheet = [[MyFansActionSheetView alloc] init];
-        sheet.backgroundColor = [UIColor redColor];
-    }
+    sender.selected = !sender.selected;
 }
 
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
@@ -75,6 +69,14 @@
     // Dispose of any resources that can be recreated.
 }
 
+/*
+#pragma mark - Navigation
 
+// In a storyboard-based application, you will often want to do a little preparation before navigation
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+    // Get the new view controller using [segue destinationViewController].
+    // Pass the selected object to the new view controller.
+}
+*/
 
 @end
