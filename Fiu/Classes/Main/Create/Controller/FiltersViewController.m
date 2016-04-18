@@ -112,7 +112,6 @@
             make.centerX.equalTo(self.view);
         }];
     }
-    
 }
 
 #pragma mark - 处理图片的视图

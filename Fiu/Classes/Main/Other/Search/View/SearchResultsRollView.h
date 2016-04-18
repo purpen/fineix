@@ -11,6 +11,7 @@
 
 @interface SearchResultsRollView : UIScrollView <UITableViewDataSource, UITableViewDelegate>
 
+@pro_strong UINavigationController  *   nav;
 @pro_strong UITableView             *   fSceneTable;     //  情景列表
 @pro_strong UITableView             *   sceneTable;      //  场景列表
 @pro_strong UITableView             *   userTable;       //  用户列表

@@ -121,7 +121,6 @@
     if (!_moreBtn) {
         _moreBtn = [[UIButton alloc] init];
         [_moreBtn setImage:[UIImage imageNamed:@"more"] forState:(UIControlStateNormal)];
-        
     }
     return _moreBtn;
 }

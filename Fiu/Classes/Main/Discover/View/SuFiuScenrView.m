@@ -14,6 +14,8 @@
     self = [super initWithFrame:frame];
     if (self) {
         [self addSubview:self.suFiuBtn];
+        
+        [self addSubview:self.line];
     }
     return self;
 }
@@ -28,10 +30,18 @@
         _suFiuBtn.titleLabel.font = [UIFont systemFontOfSize:16];
         [_suFiuBtn setImage:[UIImage imageNamed:@"Su_FScene"] forState:(UIControlStateNormal)];
         [_suFiuBtn setImageEdgeInsets:(UIEdgeInsetsMake(0, -10, 0, 0))];
-        
         [_suFiuBtn addTarget:self action:@selector(suFiuBtnClick) forControlEvents:(UIControlEventTouchUpInside)];
     }
     return _suFiuBtn;
+}
+
+#pragma mark - 分割线
+- (UILabel *)line {
+    if (!_line) {
+        _line = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 1)];
+        _line.backgroundColor = [UIColor colorWithHexString:lineGrayColor];
+    }
+    return _line;
 }
 
 //  订阅情景

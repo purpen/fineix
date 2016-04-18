@@ -47,8 +47,9 @@
 #pragma mark - 搜索结果视图
 - (SearchResultsRollView *)resultsView {
     if (!_resultsView) {
-        _resultsView = [[SearchResultsRollView alloc] initWithFrame:CGRectMake(0, 108, SCREEN_WIDTH, SCREEN_HEIGHT - 108)];
+        _resultsView = [[SearchResultsRollView alloc] initWithFrame:CGRectMake(0, 44, SCREEN_WIDTH, SCREEN_HEIGHT - 44)];
         [_resultsView setSearchResultTable:self.titleArr];
+        _resultsView.nav = self.navigationController;
     }
     return _resultsView;
 }
@@ -72,7 +73,7 @@
 #pragma mark - 导航菜单视图
 - (SearchMenuView *)menuView {
     if (!_menuView) {
-        _menuView = [[SearchMenuView alloc] initWithFrame:CGRectMake(0, 64, SCREEN_WIDTH, 44)];
+        _menuView = [[SearchMenuView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 44)];
         _menuView.delegate = self;
         [_menuView setSearchMenuView:self.titleArr];
     }
@@ -102,11 +103,10 @@
 
 #pragma mark - 设置Nav
 - (void)setNavigationViewUI {
-    self.view.backgroundColor = [UIColor whiteColor];
     [self navBarTransparent:NO];
     [[UIApplication sharedApplication] setStatusBarHidden:NO withAnimation:(UIStatusBarAnimationSlide)];
-    
     [self.navigationController.navigationBar addSubview:self.searchView];
+    self.view.backgroundColor = [UIColor whiteColor];
 }
 
 - (void)viewWillDisappear:(BOOL)animated {

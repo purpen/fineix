@@ -7,9 +7,11 @@
 //
 
 #import "FBViewController.h"
+#import "WriteCommentView.h"
 
 @interface CommentViewController : FBViewController <UITableViewDelegate, UITableViewDataSource>
 
 @pro_strong UITableView             *   commentTabel;   //  评论视图
+@pro_strong WriteCommentView        *   writeComment;   //  填写评论
 
 @end

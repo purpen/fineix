@@ -8,6 +8,7 @@
 
 #import "SearchSceneTableViewCell.h"
 #import "AllSceneCollectionViewCell.h"
+#import "FiuSceneViewController.h"
 
 @implementation SearchSceneTableViewCell
 
@@ -54,6 +55,8 @@
 #pragma mark UICollectionViewDelegate
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
     NSLog(@"打开情景 ＝＝＝＝＝＝＝＝ %zi", indexPath.row);
+    FiuSceneViewController * fiuSceneVC = [[FiuSceneViewController alloc] init];
+    [self.nav pushViewController:fiuSceneVC animated:YES];
 }
 
 @end

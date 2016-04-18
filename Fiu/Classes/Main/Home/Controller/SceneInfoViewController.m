@@ -13,6 +13,8 @@
 #import "LikePeopleTableViewCell.h"
 #import "CommentTableViewCell.h"
 #import "CommentViewController.h"
+#import "FBAlertViewController.h"
+
 
 @interface SceneInfoViewController ()
 
@@ -39,6 +41,16 @@
 #pragma mark -
 - (void)setSceneInfoViewUI {
     [self.view addSubview:self.sceneTableView];
+    
+    [self.view addSubview:self.likeScene];
+}
+
+#pragma mark - 点赞按钮
+- (LikeSceneView *)likeScene {
+    if (!_likeScene) {
+        _likeScene = [[LikeSceneView alloc] initWithFrame:CGRectMake(0, SCREEN_HEIGHT, SCREEN_HEIGHT, 44)];
+    }
+    return _likeScene;
 }
 
 #pragma mark - 设置场景详情的视图
@@ -94,6 +106,7 @@
             if (cell == nil) {
                 cell = [[DataNumTableViewCell alloc] initWithStyle:(UITableViewCellStyleDefault) reuseIdentifier:dataNumCellId];
             }
+            [cell.moreBtn addTarget:self action:@selector(moreBtnClick) forControlEvents:(UIControlEventTouchUpInside)];
             [cell setUI];
             return cell;
             
@@ -194,6 +207,50 @@
         CommentViewController * commentVC = [[CommentViewController alloc] init];
         [self.navigationController pushViewController:commentVC animated:YES];
     }
+}
+
+#pragma mark - 判断上／下滑状态，显示/隐藏Nav/tabBar
+- (void)scrollViewWillBeginDragging:(UIScrollView *)scrollView{
+    if (scrollView == self.sceneTableView) {
+        _lastContentOffset = scrollView.contentOffset.y;
+    }
+}
+
+- (void)scrollViewWillBeginDecelerating:(UIScrollView *)scrollView{
+    if (scrollView == self.sceneTableView) {
+        if (_lastContentOffset < scrollView.contentOffset.y) {
+            self.rollDown = YES;
+        }else{
+            self.rollDown = NO;
+        }
+    }
+}
+
+- (void)scrollViewDidScroll:(UIScrollView *)scrollView{
+    if (scrollView == self.sceneTableView) {
+        CGRect likeSceneRect = self.likeScene.frame;
+        
+        if (self.rollDown == YES) {
+            likeSceneRect = CGRectMake(0, SCREEN_HEIGHT - 44, SCREEN_WIDTH, 44);
+            [UIView animateWithDuration:.3 animations:^{
+                self.likeScene.frame = likeSceneRect;
+            }];
+            
+        } else if (self.rollDown == NO) {
+            likeSceneRect = CGRectMake(0, SCREEN_HEIGHT, SCREEN_WIDTH, 44);
+            [UIView animateWithDuration:.3 animations:^{
+                self.likeScene.frame = likeSceneRect;
+            }];
+        }
+    }
+}
+
+#pragma mark - 弹出举报视图
+- (void)moreBtnClick {
+    FBAlertViewController * alertVC = [[FBAlertViewController alloc] init];
+    [alertVC initFBAlertVcStyle:NO];
+    alertVC.modalPresentationStyle = UIModalPresentationOverCurrentContext;
+    [self presentViewController:alertVC animated:YES completion:nil];
 }
 
 #pragma mark - 设置Nav

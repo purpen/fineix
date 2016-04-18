@@ -210,6 +210,9 @@
 		D8AEC7521CA8E3AE00A868B6 /* libiconv.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 1F0EE6A21C9FA43C000631F0 /* libiconv.tbd */; };
 		D8AEC7531CA8E3BB00A868B6 /* libstdc++.6.0.9.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 280045201C805CD7005F5C2E /* libstdc++.6.0.9.tbd */; };
 		D8AEC7541CA8E3C700A868B6 /* libsqlite3.0.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 2800451C1C805CBD005F5C2E /* libsqlite3.0.tbd */; };
+		D8FDBFA21CC48F2700155675 /* LikeSceneView.m in Sources */ = {isa = PBXBuildFile; fileRef = D8FDBFA11CC48F2700155675 /* LikeSceneView.m */; };
+		D8FDBFA51CC4C96D00155675 /* WriteCommentView.m in Sources */ = {isa = PBXBuildFile; fileRef = D8FDBFA41CC4C96D00155675 /* WriteCommentView.m */; };
+		D8FDBFAE1CC4E07C00155675 /* FBAlertViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D8FDBFAC1CC4E07C00155675 /* FBAlertViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -583,6 +586,12 @@
 		D89B5A961CB66B3B00DB9710 /* DataNumTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DataNumTableViewCell.m; sourceTree = "<group>"; };
 		D89B5A981CB676C700DB9710 /* LikePeopleTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LikePeopleTableViewCell.h; sourceTree = "<group>"; };
 		D89B5A991CB676C700DB9710 /* LikePeopleTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LikePeopleTableViewCell.m; sourceTree = "<group>"; };
+		D8FDBFA01CC48F2700155675 /* LikeSceneView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LikeSceneView.h; sourceTree = "<group>"; };
+		D8FDBFA11CC48F2700155675 /* LikeSceneView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LikeSceneView.m; sourceTree = "<group>"; };
+		D8FDBFA31CC4C96D00155675 /* WriteCommentView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WriteCommentView.h; sourceTree = "<group>"; };
+		D8FDBFA41CC4C96D00155675 /* WriteCommentView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WriteCommentView.m; sourceTree = "<group>"; };
+		D8FDBFAB1CC4E07C00155675 /* FBAlertViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FBAlertViewController.h; sourceTree = "<group>"; };
+		D8FDBFAC1CC4E07C00155675 /* FBAlertViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FBAlertViewController.m; sourceTree = "<group>"; };
 		E0438B4B24E3F747F761AF4C /* Pods-Fiu.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Fiu.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Fiu/Pods-Fiu.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -820,6 +829,7 @@
 		D8035FA01CBD1021001920F9 /* Other */ = {
 			isa = PBXGroup;
 			children = (
+				D8FDBFA91CC4E07C00155675 /* FBAlert */,
 				1F3C0A7D1CBF756000B84FEB /* ReceiveDetailedInformation */,
 				D8035FFD1CBF376B001920F9 /* LoginRegister */,
 				D803603A1CBF376B001920F9 /* Launch */,
@@ -864,6 +874,8 @@
 			children = (
 				D8035FA71CBD1021001920F9 /* CommentDataTableViewCell.h */,
 				D8035FA81CBD1021001920F9 /* CommentDataTableViewCell.m */,
+				D8FDBFA31CC4C96D00155675 /* WriteCommentView.h */,
+				D8FDBFA41CC4C96D00155675 /* WriteCommentView.m */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -1602,6 +1614,33 @@
 				D89B5A991CB676C700DB9710 /* LikePeopleTableViewCell.m */,
 				D8035F3C1CBB4939001920F9 /* CommentTableViewCell.h */,
 				D8035F3D1CBB4939001920F9 /* CommentTableViewCell.m */,
+				D8FDBFA01CC48F2700155675 /* LikeSceneView.h */,
+				D8FDBFA11CC48F2700155675 /* LikeSceneView.m */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		D8FDBFA91CC4E07C00155675 /* FBAlert */ = {
+			isa = PBXGroup;
+			children = (
+				D8FDBFAA1CC4E07C00155675 /* Controller */,
+				D8FDBFAD1CC4E07C00155675 /* View */,
+			);
+			path = FBAlert;
+			sourceTree = "<group>";
+		};
+		D8FDBFAA1CC4E07C00155675 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				D8FDBFAB1CC4E07C00155675 /* FBAlertViewController.h */,
+				D8FDBFAC1CC4E07C00155675 /* FBAlertViewController.m */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		D8FDBFAD1CC4E07C00155675 /* View */ = {
+			isa = PBXGroup;
+			children = (
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -1777,6 +1816,7 @@
 				D80D415E1CAD144D005D72B1 /* UIBarButtonItem+Helper.m in Sources */,
 				D80360571CBF376B001920F9 /* PhoneNumLoginView.m in Sources */,
 				1FEF0B0F1CC0FC15006EF0C6 /* MyShippingAddressViewController.m in Sources */,
+				D8FDBFAE1CC4E07C00155675 /* FBAlertViewController.m in Sources */,
 				D8035FF11CBE1F1F001920F9 /* AllSceneCollectionViewCell.m in Sources */,
 				D8035FC61CBD1021001920F9 /* FBLocationViewController.m in Sources */,
 				1FEF0B151CC0FC15006EF0C6 /* BackImagView.m in Sources */,
@@ -1803,6 +1843,7 @@
 				D81281251CAA8532007CF08B /* FBFiltersCollectionViewCell.m in Sources */,
 				D81281561CAA8532007CF08B /* NSString+FBMD5.m in Sources */,
 				D8035F3E1CBB4939001920F9 /* CommentTableViewCell.m in Sources */,
+				D8FDBFA21CC48F2700155675 /* LikeSceneView.m in Sources */,
 				D86AFDF81CC0F6E3006F1602 /* SuFiuScenrView.m in Sources */,
 				D89B5A8B1CB4E48800DB9710 /* SceneListTableViewCell.m in Sources */,
 				D803604E1CBF376B001920F9 /* NSString+UserModel.m in Sources */,
@@ -1891,6 +1932,7 @@
 				D812811F1CAA8532007CF08B /* FBFilters.m in Sources */,
 				D81281271CAA8532007CF08B /* FBPictureCollectionViewCell.m in Sources */,
 				1F3C0A7B1CBF682500B84FEB /* ImprovePersonalDataViewController.m in Sources */,
+				D8FDBFA51CC4C96D00155675 /* WriteCommentView.m in Sources */,
 				D8035F3B1CB784B3001920F9 /* UILable+Frame.m in Sources */,
 				1FEF0B0E1CC0FC15006EF0C6 /* MyOrderViewController.m in Sources */,
 				D81281571CAA8532007CF08B /* NSString+Helper.m in Sources */,

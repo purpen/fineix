@@ -12,6 +12,7 @@
 #import "LikePeopleTableViewCell.h"
 #import "SceneListTableViewCell.h"
 #import "SceneInfoViewController.h"
+#import "PictureToolViewController.h"
 
 @interface FiuSceneViewController ()
 
@@ -45,7 +46,7 @@
 #pragma mark - 订阅按钮
 - (SuFiuScenrView *)suBtn {
     if (!_suBtn) {
-        _suBtn = [[SuFiuScenrView alloc] initWithFrame:CGRectMake(0, SCREEN_HEIGHT - 44, SCREEN_HEIGHT, 44)];
+        _suBtn = [[SuFiuScenrView alloc] initWithFrame:CGRectMake(0, SCREEN_HEIGHT, SCREEN_HEIGHT, 44)];
     }
     return _suBtn;
 }
@@ -174,8 +175,46 @@
 
 #pragma mark - 跳转到场景的详情
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    SceneInfoViewController * sceneInfoVC = [[SceneInfoViewController alloc] init];
-    [self.navigationController pushViewController:sceneInfoVC animated:YES];
+    if (indexPath.section == 1) {
+        SceneInfoViewController * sceneInfoVC = [[SceneInfoViewController alloc] init];
+        [self.navigationController pushViewController:sceneInfoVC animated:YES];
+    }
+}
+
+#pragma mark - 判断上／下滑状态，显示/隐藏Nav/tabBar
+- (void)scrollViewWillBeginDragging:(UIScrollView *)scrollView{
+    if (scrollView == self.fiuSceneTable) {
+        _lastContentOffset = scrollView.contentOffset.y;
+    }
+}
+
+- (void)scrollViewWillBeginDecelerating:(UIScrollView *)scrollView{
+    if (scrollView == self.fiuSceneTable) {
+        if (_lastContentOffset < scrollView.contentOffset.y) {
+            self.rollDown = YES;
+        }else{
+            self.rollDown = NO;
+        }
+    }
+}
+
+- (void)scrollViewDidScroll:(UIScrollView *)scrollView{
+    if (scrollView == self.fiuSceneTable) {
+        CGRect suBtnRect = self.suBtn.frame;
+        
+        if (self.rollDown == YES) {
+            suBtnRect = CGRectMake(0, SCREEN_HEIGHT - 44, SCREEN_WIDTH, 44);
+            [UIView animateWithDuration:.3 animations:^{
+                self.suBtn.frame = suBtnRect;
+            }];
+            
+        } else if (self.rollDown == NO) {
+            suBtnRect = CGRectMake(0, SCREEN_HEIGHT, SCREEN_WIDTH, 44);
+            [UIView animateWithDuration:.3 animations:^{
+                self.suBtn.frame = suBtnRect;
+            }];
+        }
+    }
 }
 
 #pragma mark - 设置Nav
@@ -187,9 +226,8 @@
     [self addNavLogo:@"Nav_Title"];
     [self navBarTransparent:YES];
     [self hiddenNavItem:NO];
-    
-
 }
+
 //  隐藏Nav左右的按钮
 - (void)hiddenNavItem:(BOOL)hidden {
     self.navigationItem.leftBarButtonItem.customView.hidden = hidden;
@@ -198,7 +236,9 @@
 
 //  点击右边barItem
 - (void)rightBarItemSelected {
-    NSLog(@"＊＊＊＊＊＊＊＊＊创建");
+    PictureToolViewController * pictureToolVC = [[PictureToolViewController alloc] init];
+    pictureToolVC.createType = @"scene";
+    [self presentViewController:pictureToolVC animated:YES completion:nil];
 }
 
 @end

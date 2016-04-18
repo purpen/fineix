@@ -11,6 +11,8 @@
 #import "SearchSceneTableViewCell.h"
 #import "UserHeaderTableViewCell.h"
 
+#import "SceneInfoViewController.h"
+
 static const NSInteger tableTag = 687;
 
 @implementation SearchResultsRollView
@@ -75,6 +77,7 @@ static const NSInteger tableTag = 687;
         if (!cell) {
             cell = [[SearchSceneTableViewCell alloc] initWithStyle:(UITableViewCellStyleDefault) reuseIdentifier:FSceneTablecellId];
         }
+        cell.nav = self.nav;
         return cell;
         
     } else if (tableView == self.sceneTable) {
@@ -107,7 +110,6 @@ static const NSInteger tableTag = 687;
     }
     
     return nil;
-    
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -123,5 +125,14 @@ static const NSInteger tableTag = 687;
     return 0;
 }
 
+#pragma mark - 跳转搜索的结果
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    if (tableView == self.sceneTable) {
+        SceneInfoViewController * sceneVC = [[SceneInfoViewController alloc] init];
+        
+        [self.nav pushViewController:sceneVC animated:YES];
+    }
+    
+}
 
 @end

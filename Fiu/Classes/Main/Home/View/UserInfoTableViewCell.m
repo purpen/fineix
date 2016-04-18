@@ -39,25 +39,10 @@
     //  用户简介
     self.userProfile.text = @"达人｜写剧本的文盲";
     
-    //  观看数量
-    NSString * lookNum = @"35433";
-    CGFloat lookNumLength = [lookNum boundingRectWithSize:CGSizeMake(320, 1000) options:(NSStringDrawingUsesLineFragmentOrigin) attributes:nil context:nil].size.width;
-    [_lookNum mas_updateConstraints:^(MASConstraintMaker *make) {
-        make.size.mas_equalTo(CGSizeMake(lookNumLength, 15));
-    }];
-    self.lookNum.text = lookNum;
-    
-    //  喜欢数量
-    NSString * likeNum = @"123225";
-    CGFloat likeNumLength = [likeNum boundingRectWithSize:CGSizeMake(320, 1000) options:(NSStringDrawingUsesLineFragmentOrigin) attributes:nil context:nil].size.width;
-    [_likeNum mas_updateConstraints:^(MASConstraintMaker *make) {
-        make.size.mas_equalTo(CGSizeMake(likeNumLength, 15));
-    }];
-    self.likeNum.text = likeNum;
-    
     //  标题
-    NSString * titleStr = @"长城脚下的手工匠人";
-    [self titleTextStyle:titleStr];
+    NSString * titleStr = @" 长城脚下的手工匠人手工匠人手工匠人 ";
+    UIColor * fsceneColor = [UIColor blackColor];
+    [self titleTextStyle:titleStr withBgColor:fsceneColor];
     
     //  所属情景
     NSString * whereText = @"最好的时光遇到你";
@@ -78,12 +63,13 @@
     //  时间
     self.time.text = @"｜ 2天前";
     
-    //  点赞的数量
-    CGFloat good = 32200;
+    //  订阅的数量
+    [self.goodBtn setBackgroundImage:[UIImage imageNamed:@"User_Su"] forState:(UIControlStateNormal)];
+    CGFloat good = 1234;
     if (good/1000 > 1) {
-        self.goodNum.text = [NSString stringWithFormat:@"%.1fk人赞过", good/1000];
+        self.goodNum.text = [NSString stringWithFormat:@"%.1fk人订阅", good/1000];
     } else {
-        self.goodNum.text = [NSString stringWithFormat:@"%.0f人赞过", good];
+        self.goodNum.text = [NSString stringWithFormat:@"%.0f人订阅", good];
     }
     
     [self changeUserViewFrame];
@@ -103,25 +89,10 @@
     //  用户简介
     self.userProfile.text = @"达人｜写剧本的文盲";
     
-    //  观看数量
-    NSString * lookNum = @"35433";
-    CGFloat lookNumLength = [lookNum boundingRectWithSize:CGSizeMake(320, 1000) options:(NSStringDrawingUsesLineFragmentOrigin) attributes:nil context:nil].size.width;
-    [_lookNum mas_updateConstraints:^(MASConstraintMaker *make) {
-        make.size.mas_equalTo(CGSizeMake(lookNumLength, 15));
-    }];
-    self.lookNum.text = lookNum;
-    
-    //  喜欢数量
-    NSString * likeNum = @"123225";
-    CGFloat likeNumLength = [likeNum boundingRectWithSize:CGSizeMake(320, 1000) options:(NSStringDrawingUsesLineFragmentOrigin) attributes:nil context:nil].size.width;
-    [_likeNum mas_updateConstraints:^(MASConstraintMaker *make) {
-        make.size.mas_equalTo(CGSizeMake(likeNumLength, 15));
-    }];
-    self.likeNum.text = likeNum;
-    
     //  标题
     NSString * titleStr = @" 最好的时光 ";
-    [self titleTextStyle:titleStr];
+    UIColor * sceneColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"titleBg"]];
+    [self titleTextStyle:titleStr withBgColor:sceneColor];
     
     //  所属情景
     NSString * whereText = @"最好的时光遇到你";
@@ -143,6 +114,7 @@
     self.time.text = @"｜ 2天前";
     
     //  点赞的数量
+    [self.goodBtn setBackgroundImage:[UIImage imageNamed:@"User_like"] forState:(UIControlStateNormal)];
     CGFloat good = 32200;
     if (good/1000 > 1) {
         self.goodNum.text = [NSString stringWithFormat:@"%.1fk人赞过", good/1000];
@@ -267,9 +239,7 @@
 - (UIButton *)goodBtn {
     if (!_goodBtn) {
         _goodBtn = [[UIButton alloc] init];
-        [_goodBtn setBackgroundImage:[UIImage imageNamed:@"User_like"] forState:(UIControlStateNormal)];
-        [_goodBtn addTarget:self action:@selector(goodBtnClick) forControlEvents:(UIControlEventTouchUpInside)];
-        
+
         [_goodBtn addSubview:self.goodNum];
         [_goodNum mas_makeConstraints:^(MASConstraintMaker *make) {
             make.size.mas_equalTo(CGSizeMake(89 ,13));
@@ -278,17 +248,6 @@
         }];
     }
     return _goodBtn;
-}
-
-//  点赞
-- (void)goodBtnClick {
-    if (_goodBtn.selected == NO) {
-        _goodBtn.selected = YES;
-        NSLog(@"＝＝＝＝＝＝＝＝ 点赞 ＋1");
-    } else if (_goodBtn.selected == YES) {
-        _goodBtn.selected = NO;
-        NSLog(@"－－－－－－－－ 点赞 －1");
-    }
 }
 
 #pragma mark - 点赞的数量
@@ -374,7 +333,7 @@
 }
 
 //  标题文字的样式
-- (void)titleTextStyle:(NSString *)title {
+- (void)titleTextStyle:(NSString *)title withBgColor:(UIColor *)color {
     if ([title length] < 9) {
         _titleText.font = [UIFont systemFontOfSize:48];
     } else if ([title length] >= 9 && [title length] < 13) {
@@ -391,7 +350,7 @@
     paragraphStyle.headIndent = 10;
     
     NSDictionary * textDict = @{
-                                NSBackgroundColorAttributeName:[UIColor colorWithPatternImage:[UIImage imageNamed:@"titleBg"]] ,
+                                NSBackgroundColorAttributeName:color ,
                                 NSParagraphStyleAttributeName :paragraphStyle
                                 };
     [titleText addAttributes:textDict range:NSMakeRange(0, titleText.length)];
