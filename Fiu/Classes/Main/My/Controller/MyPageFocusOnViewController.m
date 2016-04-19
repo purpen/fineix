@@ -8,6 +8,7 @@
 
 #import "MyPageFocusOnViewController.h"
 #import "FocusOnTableViewCell.h"
+#import "MyHomePageScenarioViewController.h"
 
 @interface MyPageFocusOnViewController ()<FBNavigationBarItemsDelegate,UITableViewDelegate,UITableViewDataSource>
 
@@ -23,9 +24,14 @@
     [self addBarItemLeftBarButton:nil image:@"icon_back"];
     self.delegate = self;
     
-    self.navigationController.navigationBarHidden = NO;
+    
     
     [self.view addSubview:self.mytableView];
+}
+
+-(void)viewWillAppear:(BOOL)animated{
+    [super viewWillAppear:animated];
+    self.navigationController.navigationBarHidden = NO;
 }
 
 -(void)leftBarItemSelected{
@@ -54,6 +60,13 @@
     [cell.focusOnBtn addTarget:self action:@selector(clickFocusBtn:) forControlEvents:UIControlEventTouchUpInside];
     [cell setUI];
     return cell;
+}
+
+-(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+    MyHomePageScenarioViewController *v = [[MyHomePageScenarioViewController alloc] init];
+    v.isMySelf = NO;
+    v.type = @1;
+    [self.navigationController pushViewController:v animated:YES];
 }
 
 -(void)clickFocusBtn:(UIButton*)sender{

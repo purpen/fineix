@@ -18,14 +18,18 @@
 		1F3C0A921CBF95AC00B84FEB /* SubscribePeopleTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1F3C0A901CBF95AC00B84FEB /* SubscribePeopleTableViewCell.xib */; };
 		1F3C0A961CBFA28300B84FEB /* GreatPeopleViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F3C0A941CBFA28300B84FEB /* GreatPeopleViewController.m */; };
 		1F3C0A971CBFA28300B84FEB /* GreatPeopleViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1F3C0A951CBFA28300B84FEB /* GreatPeopleViewController.xib */; };
+		1F51E8A41CC5C9DE00017839 /* MyFansActionSheetViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F51E8A31CC5C9DE00017839 /* MyFansActionSheetViewController.m */; };
+		1F51E8A71CC5E4A200017839 /* OtherBackGrandTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F51E8A61CC5E4A200017839 /* OtherBackGrandTableViewCell.m */; };
+		1F51E8AA1CC60AB300017839 /* FBSheetViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F51E8A91CC60AB300017839 /* FBSheetViewController.m */; };
+		1F51E8B01CC61E6400017839 /* SubscribeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F51E8AF1CC61E6400017839 /* SubscribeViewController.m */; };
+		1F51E8B31CC6338D00017839 /* PraisedViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F51E8B21CC6338D00017839 /* PraisedViewController.m */; };
+		1F51E8B61CC6380D00017839 /* FBBindingMobilePhoneNumber.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F51E8B51CC6380D00017839 /* FBBindingMobilePhoneNumber.m */; };
 		1F59E5FC1C9ABBA500E96C60 /* Accelerate.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1F59E5FB1C9ABBA500E96C60 /* Accelerate.framework */; };
 		1FBE626A1CC4CB72009606F7 /* MyPageFocusOnViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1FBE62691CC4CB72009606F7 /* MyPageFocusOnViewController.m */; };
 		1FBE626D1CC4D095009606F7 /* FocusOnTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 1FBE626C1CC4D095009606F7 /* FocusOnTableViewCell.m */; };
 		1FBE62701CC4E3C3009606F7 /* MyFansViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1FBE626F1CC4E3C3009606F7 /* MyFansViewController.m */; };
-		1FBE62761CC4F4B2009606F7 /* MyFansActionSheetView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1FBE62751CC4F4B2009606F7 /* MyFansActionSheetView.m */; };
 		1FEF0B071CC0FC15006EF0C6 /* AboutFirebirdViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1FEF0AD41CC0FC15006EF0C6 /* AboutFirebirdViewController.m */; };
 		1FEF0B081CC0FC15006EF0C6 /* FeedbackViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1FEF0AD61CC0FC15006EF0C6 /* FeedbackViewController.m */; };
-		1FEF0B0B1CC0FC15006EF0C6 /* MyHomePageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1FEF0ADC1CC0FC15006EF0C6 /* MyHomePageViewController.m */; };
 		1FEF0B0C1CC0FC15006EF0C6 /* MyMessageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1FEF0ADE1CC0FC15006EF0C6 /* MyMessageViewController.m */; };
 		1FEF0B0D1CC0FC15006EF0C6 /* MyOrdersViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1FEF0AE01CC0FC15006EF0C6 /* MyOrdersViewController.m */; };
 		1FEF0B0E1CC0FC15006EF0C6 /* MyOrderViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1FEF0AE21CC0FC15006EF0C6 /* MyOrderViewController.m */; };
@@ -82,18 +86,11 @@
 		D8035FEE1CBE1EA3001920F9 /* AllSceneView.m in Sources */ = {isa = PBXBuildFile; fileRef = D8035FED1CBE1EA3001920F9 /* AllSceneView.m */; };
 		D8035FF11CBE1F1F001920F9 /* AllSceneCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D8035FF01CBE1F1F001920F9 /* AllSceneCollectionViewCell.m */; };
 		D8035FF41CBE44A9001920F9 /* PictureToolViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D8035FF31CBE44A9001920F9 /* PictureToolViewController.m */; };
-		D803603E1CBF376B001920F9 /* FBBindingMobilePhoneNumber.m in Sources */ = {isa = PBXBuildFile; fileRef = D80360001CBF376B001920F9 /* FBBindingMobilePhoneNumber.m */; };
 		D803603F1CBF376B001920F9 /* FBLoginRegisterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D80360021CBF376B001920F9 /* FBLoginRegisterViewController.m */; };
 		D80360401CBF376B001920F9 /* FBLoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D80360041CBF376B001920F9 /* FBLoginViewController.m */; };
 		D80360411CBF376B001920F9 /* FBSignupViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D80360061CBF376B001920F9 /* FBSignupViewController.m */; };
-		D80360421CBF376B001920F9 /* ForgotPasswordViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D80360081CBF376B001920F9 /* ForgotPasswordViewController.m */; };
-		D80360451CBF376B001920F9 /* PhoneToLogInViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D803600D1CBF376B001920F9 /* PhoneToLogInViewController.m */; };
-		D80360461CBF376B001920F9 /* PhoneToSignUpViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D803600F1CBF376B001920F9 /* PhoneToSignUpViewController.m */; };
-		D80360471CBF376B001920F9 /* SubmitViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D80360111CBF376B001920F9 /* SubmitViewController.m */; };
 		D80360481CBF376B001920F9 /* SubscribeInterestedCollectionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D80360131CBF376B001920F9 /* SubscribeInterestedCollectionViewController.m */; };
 		D80360491CBF376B001920F9 /* SubscribeInterestedCollectionViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D80360141CBF376B001920F9 /* SubscribeInterestedCollectionViewController.xib */; };
-		D803604A1CBF376B001920F9 /* SubscribeInterestedViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D80360161CBF376B001920F9 /* SubscribeInterestedViewController.m */; };
-		D803604B1CBF376B001920F9 /* SubscribeInterestedViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D80360171CBF376B001920F9 /* SubscribeInterestedViewController.xib */; };
 		D803604C1CBF376B001920F9 /* LoginRegisterController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D80360181CBF376B001920F9 /* LoginRegisterController.storyboard */; };
 		D803604D1CBF376B001920F9 /* NSNumber+UserModel.m in Sources */ = {isa = PBXBuildFile; fileRef = D803601C1CBF376B001920F9 /* NSNumber+UserModel.m */; };
 		D803604E1CBF376B001920F9 /* NSString+UserModel.m in Sources */ = {isa = PBXBuildFile; fileRef = D803601E1CBF376B001920F9 /* NSString+UserModel.m */; };
@@ -234,6 +231,18 @@
 		1F3C0A931CBFA28300B84FEB /* GreatPeopleViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GreatPeopleViewController.h; sourceTree = "<group>"; };
 		1F3C0A941CBFA28300B84FEB /* GreatPeopleViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GreatPeopleViewController.m; sourceTree = "<group>"; };
 		1F3C0A951CBFA28300B84FEB /* GreatPeopleViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = GreatPeopleViewController.xib; sourceTree = "<group>"; };
+		1F51E8A21CC5C9DE00017839 /* MyFansActionSheetViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyFansActionSheetViewController.h; sourceTree = "<group>"; };
+		1F51E8A31CC5C9DE00017839 /* MyFansActionSheetViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyFansActionSheetViewController.m; sourceTree = "<group>"; };
+		1F51E8A51CC5E4A200017839 /* OtherBackGrandTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OtherBackGrandTableViewCell.h; sourceTree = "<group>"; };
+		1F51E8A61CC5E4A200017839 /* OtherBackGrandTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OtherBackGrandTableViewCell.m; sourceTree = "<group>"; };
+		1F51E8A81CC60AB300017839 /* FBSheetViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FBSheetViewController.h; sourceTree = "<group>"; };
+		1F51E8A91CC60AB300017839 /* FBSheetViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FBSheetViewController.m; sourceTree = "<group>"; };
+		1F51E8AE1CC61E6400017839 /* SubscribeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SubscribeViewController.h; sourceTree = "<group>"; };
+		1F51E8AF1CC61E6400017839 /* SubscribeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SubscribeViewController.m; sourceTree = "<group>"; };
+		1F51E8B11CC6338D00017839 /* PraisedViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PraisedViewController.h; sourceTree = "<group>"; };
+		1F51E8B21CC6338D00017839 /* PraisedViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PraisedViewController.m; sourceTree = "<group>"; };
+		1F51E8B41CC6380D00017839 /* FBBindingMobilePhoneNumber.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FBBindingMobilePhoneNumber.h; sourceTree = "<group>"; };
+		1F51E8B51CC6380D00017839 /* FBBindingMobilePhoneNumber.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FBBindingMobilePhoneNumber.m; sourceTree = "<group>"; };
 		1F59E5FB1C9ABBA500E96C60 /* Accelerate.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Accelerate.framework; path = System/Library/Frameworks/Accelerate.framework; sourceTree = SDKROOT; };
 		1FBE62681CC4CB72009606F7 /* MyPageFocusOnViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyPageFocusOnViewController.h; sourceTree = "<group>"; };
 		1FBE62691CC4CB72009606F7 /* MyPageFocusOnViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyPageFocusOnViewController.m; sourceTree = "<group>"; };
@@ -241,14 +250,10 @@
 		1FBE626C1CC4D095009606F7 /* FocusOnTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FocusOnTableViewCell.m; sourceTree = "<group>"; };
 		1FBE626E1CC4E3C3009606F7 /* MyFansViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyFansViewController.h; sourceTree = "<group>"; };
 		1FBE626F1CC4E3C3009606F7 /* MyFansViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyFansViewController.m; sourceTree = "<group>"; };
-		1FBE62741CC4F4B2009606F7 /* MyFansActionSheetView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyFansActionSheetView.h; sourceTree = "<group>"; };
-		1FBE62751CC4F4B2009606F7 /* MyFansActionSheetView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyFansActionSheetView.m; sourceTree = "<group>"; };
 		1FEF0AD31CC0FC15006EF0C6 /* AboutFirebirdViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AboutFirebirdViewController.h; sourceTree = "<group>"; };
 		1FEF0AD41CC0FC15006EF0C6 /* AboutFirebirdViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AboutFirebirdViewController.m; sourceTree = "<group>"; };
 		1FEF0AD51CC0FC15006EF0C6 /* FeedbackViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FeedbackViewController.h; sourceTree = "<group>"; };
 		1FEF0AD61CC0FC15006EF0C6 /* FeedbackViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FeedbackViewController.m; sourceTree = "<group>"; };
-		1FEF0ADB1CC0FC15006EF0C6 /* MyHomePageViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyHomePageViewController.h; sourceTree = "<group>"; };
-		1FEF0ADC1CC0FC15006EF0C6 /* MyHomePageViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyHomePageViewController.m; sourceTree = "<group>"; };
 		1FEF0ADD1CC0FC15006EF0C6 /* MyMessageViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyMessageViewController.h; sourceTree = "<group>"; };
 		1FEF0ADE1CC0FC15006EF0C6 /* MyMessageViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyMessageViewController.m; sourceTree = "<group>"; };
 		1FEF0ADF1CC0FC15006EF0C6 /* MyOrdersViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyOrdersViewController.h; sourceTree = "<group>"; };
@@ -353,28 +358,15 @@
 		D8035FF01CBE1F1F001920F9 /* AllSceneCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AllSceneCollectionViewCell.m; sourceTree = "<group>"; };
 		D8035FF21CBE44A9001920F9 /* PictureToolViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PictureToolViewController.h; sourceTree = "<group>"; };
 		D8035FF31CBE44A9001920F9 /* PictureToolViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PictureToolViewController.m; sourceTree = "<group>"; };
-		D8035FFF1CBF376B001920F9 /* FBBindingMobilePhoneNumber.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FBBindingMobilePhoneNumber.h; sourceTree = "<group>"; };
-		D80360001CBF376B001920F9 /* FBBindingMobilePhoneNumber.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FBBindingMobilePhoneNumber.m; sourceTree = "<group>"; };
 		D80360011CBF376B001920F9 /* FBLoginRegisterViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FBLoginRegisterViewController.h; sourceTree = "<group>"; };
 		D80360021CBF376B001920F9 /* FBLoginRegisterViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FBLoginRegisterViewController.m; sourceTree = "<group>"; };
 		D80360031CBF376B001920F9 /* FBLoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FBLoginViewController.h; sourceTree = "<group>"; };
 		D80360041CBF376B001920F9 /* FBLoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FBLoginViewController.m; sourceTree = "<group>"; };
 		D80360051CBF376B001920F9 /* FBSignupViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FBSignupViewController.h; sourceTree = "<group>"; };
 		D80360061CBF376B001920F9 /* FBSignupViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FBSignupViewController.m; sourceTree = "<group>"; };
-		D80360071CBF376B001920F9 /* ForgotPasswordViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ForgotPasswordViewController.h; sourceTree = "<group>"; };
-		D80360081CBF376B001920F9 /* ForgotPasswordViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ForgotPasswordViewController.m; sourceTree = "<group>"; };
-		D803600C1CBF376B001920F9 /* PhoneToLogInViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PhoneToLogInViewController.h; sourceTree = "<group>"; };
-		D803600D1CBF376B001920F9 /* PhoneToLogInViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PhoneToLogInViewController.m; sourceTree = "<group>"; };
-		D803600E1CBF376B001920F9 /* PhoneToSignUpViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PhoneToSignUpViewController.h; sourceTree = "<group>"; };
-		D803600F1CBF376B001920F9 /* PhoneToSignUpViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PhoneToSignUpViewController.m; sourceTree = "<group>"; };
-		D80360101CBF376B001920F9 /* SubmitViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SubmitViewController.h; sourceTree = "<group>"; };
-		D80360111CBF376B001920F9 /* SubmitViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SubmitViewController.m; sourceTree = "<group>"; };
 		D80360121CBF376B001920F9 /* SubscribeInterestedCollectionViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SubscribeInterestedCollectionViewController.h; sourceTree = "<group>"; };
 		D80360131CBF376B001920F9 /* SubscribeInterestedCollectionViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SubscribeInterestedCollectionViewController.m; sourceTree = "<group>"; };
 		D80360141CBF376B001920F9 /* SubscribeInterestedCollectionViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SubscribeInterestedCollectionViewController.xib; sourceTree = "<group>"; };
-		D80360151CBF376B001920F9 /* SubscribeInterestedViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SubscribeInterestedViewController.h; sourceTree = "<group>"; };
-		D80360161CBF376B001920F9 /* SubscribeInterestedViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SubscribeInterestedViewController.m; sourceTree = "<group>"; };
-		D80360171CBF376B001920F9 /* SubscribeInterestedViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SubscribeInterestedViewController.xib; sourceTree = "<group>"; };
 		D80360181CBF376B001920F9 /* LoginRegisterController.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = LoginRegisterController.storyboard; sourceTree = "<group>"; };
 		D803601B1CBF376B001920F9 /* NSNumber+UserModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSNumber+UserModel.h"; sourceTree = "<group>"; };
 		D803601C1CBF376B001920F9 /* NSNumber+UserModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSNumber+UserModel.m"; sourceTree = "<group>"; };
@@ -699,8 +691,6 @@
 				1FEF0AD41CC0FC15006EF0C6 /* AboutFirebirdViewController.m */,
 				1FEF0AD51CC0FC15006EF0C6 /* FeedbackViewController.h */,
 				1FEF0AD61CC0FC15006EF0C6 /* FeedbackViewController.m */,
-				1FEF0ADB1CC0FC15006EF0C6 /* MyHomePageViewController.h */,
-				1FEF0ADC1CC0FC15006EF0C6 /* MyHomePageViewController.m */,
 				1FEF0ADD1CC0FC15006EF0C6 /* MyMessageViewController.h */,
 				1FEF0ADE1CC0FC15006EF0C6 /* MyMessageViewController.m */,
 				1FEF0ADF1CC0FC15006EF0C6 /* MyOrdersViewController.h */,
@@ -719,6 +709,12 @@
 				1FBE62691CC4CB72009606F7 /* MyPageFocusOnViewController.m */,
 				1FBE626E1CC4E3C3009606F7 /* MyFansViewController.h */,
 				1FBE626F1CC4E3C3009606F7 /* MyFansViewController.m */,
+				1F51E8A21CC5C9DE00017839 /* MyFansActionSheetViewController.h */,
+				1F51E8A31CC5C9DE00017839 /* MyFansActionSheetViewController.m */,
+				1F51E8AE1CC61E6400017839 /* SubscribeViewController.h */,
+				1F51E8AF1CC61E6400017839 /* SubscribeViewController.m */,
+				1F51E8B11CC6338D00017839 /* PraisedViewController.h */,
+				1F51E8B21CC6338D00017839 /* PraisedViewController.m */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -764,8 +760,8 @@
 				487A50E81CC37FD10062AAD8 /* BackgroundTableViewCell.m */,
 				1FBE626B1CC4D095009606F7 /* FocusOnTableViewCell.h */,
 				1FBE626C1CC4D095009606F7 /* FocusOnTableViewCell.m */,
-				1FBE62741CC4F4B2009606F7 /* MyFansActionSheetView.h */,
-				1FBE62751CC4F4B2009606F7 /* MyFansActionSheetView.m */,
+				1F51E8A51CC5E4A200017839 /* OtherBackGrandTableViewCell.h */,
+				1F51E8A61CC5E4A200017839 /* OtherBackGrandTableViewCell.m */,
 			);
 			path = view;
 			sourceTree = "<group>";
@@ -1028,31 +1024,20 @@
 		D8035FFE1CBF376B001920F9 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
+				1F51E8B41CC6380D00017839 /* FBBindingMobilePhoneNumber.h */,
+				1F51E8B51CC6380D00017839 /* FBBindingMobilePhoneNumber.m */,
 				1F3C0A781CBF682500B84FEB /* ImprovePersonalDataViewController.h */,
 				1F3C0A791CBF682500B84FEB /* ImprovePersonalDataViewController.m */,
 				1F3C0A7A1CBF682500B84FEB /* ImprovePersonalDataViewController.xib */,
-				D8035FFF1CBF376B001920F9 /* FBBindingMobilePhoneNumber.h */,
-				D80360001CBF376B001920F9 /* FBBindingMobilePhoneNumber.m */,
 				D80360011CBF376B001920F9 /* FBLoginRegisterViewController.h */,
 				D80360021CBF376B001920F9 /* FBLoginRegisterViewController.m */,
 				D80360031CBF376B001920F9 /* FBLoginViewController.h */,
 				D80360041CBF376B001920F9 /* FBLoginViewController.m */,
 				D80360051CBF376B001920F9 /* FBSignupViewController.h */,
 				D80360061CBF376B001920F9 /* FBSignupViewController.m */,
-				D80360071CBF376B001920F9 /* ForgotPasswordViewController.h */,
-				D80360081CBF376B001920F9 /* ForgotPasswordViewController.m */,
-				D803600C1CBF376B001920F9 /* PhoneToLogInViewController.h */,
-				D803600D1CBF376B001920F9 /* PhoneToLogInViewController.m */,
-				D803600E1CBF376B001920F9 /* PhoneToSignUpViewController.h */,
-				D803600F1CBF376B001920F9 /* PhoneToSignUpViewController.m */,
-				D80360101CBF376B001920F9 /* SubmitViewController.h */,
-				D80360111CBF376B001920F9 /* SubmitViewController.m */,
 				D80360121CBF376B001920F9 /* SubscribeInterestedCollectionViewController.h */,
 				D80360131CBF376B001920F9 /* SubscribeInterestedCollectionViewController.m */,
 				D80360141CBF376B001920F9 /* SubscribeInterestedCollectionViewController.xib */,
-				D80360151CBF376B001920F9 /* SubscribeInterestedViewController.h */,
-				D80360161CBF376B001920F9 /* SubscribeInterestedViewController.m */,
-				D80360171CBF376B001920F9 /* SubscribeInterestedViewController.xib */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -1634,6 +1619,8 @@
 			children = (
 				D8FDBFAB1CC4E07C00155675 /* FBAlertViewController.h */,
 				D8FDBFAC1CC4E07C00155675 /* FBAlertViewController.m */,
+				1F51E8A81CC60AB300017839 /* FBSheetViewController.h */,
+				1F51E8A91CC60AB300017839 /* FBSheetViewController.m */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -1716,7 +1703,6 @@
 				1F3C0A851CBF760C00B84FEB /* SubscribePeopleViewController.xib in Resources */,
 				1F3C0A921CBF95AC00B84FEB /* SubscribePeopleTableViewCell.xib in Resources */,
 				D81281781CAA8532007CF08B /* TencentOpenApi_IOS_Bundle.bundle in Resources */,
-				D803604B1CBF376B001920F9 /* SubscribeInterestedViewController.xib in Resources */,
 				1FEF0B1F1CC0FC15006EF0C6 /* OrderInfoCell.xib in Resources */,
 				D803604C1CBF376B001920F9 /* LoginRegisterController.storyboard in Resources */,
 				1FEF0B131CC0FC15006EF0C6 /* My.storyboard in Resources */,
@@ -1814,6 +1800,7 @@
 				D8035FD01CBD1021001920F9 /* FBTabBarController.m in Sources */,
 				D80D415B1CAD1437005D72B1 /* FBNavigationViewController.m in Sources */,
 				D80D415E1CAD144D005D72B1 /* UIBarButtonItem+Helper.m in Sources */,
+				1F51E8B61CC6380D00017839 /* FBBindingMobilePhoneNumber.m in Sources */,
 				D80360571CBF376B001920F9 /* PhoneNumLoginView.m in Sources */,
 				1FEF0B0F1CC0FC15006EF0C6 /* MyShippingAddressViewController.m in Sources */,
 				D8FDBFAE1CC4E07C00155675 /* FBAlertViewController.m in Sources */,
@@ -1832,6 +1819,7 @@
 				1FEF0B0D1CC0FC15006EF0C6 /* MyOrdersViewController.m in Sources */,
 				D80360401CBF376B001920F9 /* FBLoginViewController.m in Sources */,
 				D8035FE11CBDFC07001920F9 /* FiuTagTableViewCell.m in Sources */,
+				1F51E8AA1CC60AB300017839 /* FBSheetViewController.m in Sources */,
 				D89B5A9A1CB676C700DB9710 /* LikePeopleTableViewCell.m in Sources */,
 				D812812D1CAA8532007CF08B /* ScenceAddMoreView.m in Sources */,
 				D812811D1CAA8532007CF08B /* SearchLocationViewController.m in Sources */,
@@ -1854,8 +1842,8 @@
 				1FEF0B1A1CC0FC15006EF0C6 /* MyHomePageView.m in Sources */,
 				D8035FEE1CBE1EA3001920F9 /* AllSceneView.m in Sources */,
 				D81281171CAA8532007CF08B /* CreateViewController.m in Sources */,
-				1FEF0B0B1CC0FC15006EF0C6 /* MyHomePageViewController.m in Sources */,
 				D81281141CAA8532007CF08B /* AddTagViewController.m in Sources */,
+				1F51E8A41CC5C9DE00017839 /* MyFansActionSheetViewController.m in Sources */,
 				D89B5A8E1CB6284A00DB9710 /* SceneInfoViewController.m in Sources */,
 				D812812A1CAA8532007CF08B /* PhotoAlbumsTableViewCell.m in Sources */,
 				D8035FDE1CBDF10B001920F9 /* MallMenuTableViewCell.m in Sources */,
@@ -1871,6 +1859,7 @@
 				D812812C1CAA8532007CF08B /* PictureView.m in Sources */,
 				1FEF0B141CC0FC15006EF0C6 /* AppBtnView.m in Sources */,
 				D81281161CAA8532007CF08B /* ClipImageViewController.m in Sources */,
+				1F51E8B31CC6338D00017839 /* PraisedViewController.m in Sources */,
 				1FBE626A1CC4CB72009606F7 /* MyPageFocusOnViewController.m in Sources */,
 				1FEF0B121CC0FC15006EF0C6 /* OrderListModel.m in Sources */,
 				D8035FF41CBE44A9001920F9 /* PictureToolViewController.m in Sources */,
@@ -1878,22 +1867,20 @@
 				D80360511CBF376B001920F9 /* RecommendedScenarioModel.m in Sources */,
 				D80360581CBF376B001920F9 /* RecommendedScenarioView.m in Sources */,
 				1FEF0B081CC0FC15006EF0C6 /* FeedbackViewController.m in Sources */,
+				1F51E8B01CC61E6400017839 /* SubscribeViewController.m in Sources */,
 				D81281671CAA8532007CF08B /* JKDBModel.m in Sources */,
-				D80360421CBF376B001920F9 /* ForgotPasswordViewController.m in Sources */,
 				D81281291CAA8532007CF08B /* FiltersView.m in Sources */,
 				D89B5A941CB6580600DB9710 /* UserInfoTableViewCell.m in Sources */,
 				D812812E1CAA8532007CF08B /* ScenceMessageView.m in Sources */,
 				D81281181CAA8532007CF08B /* CropImageViewController.m in Sources */,
 				D8035FCD1CBD1021001920F9 /* GroupHeaderView.m in Sources */,
 				D80360501CBF376B001920F9 /* UserInfoEntity.m in Sources */,
+				1F51E8A71CC5E4A200017839 /* OtherBackGrandTableViewCell.m in Sources */,
 				D812812B1CAA8532007CF08B /* PhotoAlbumsView.m in Sources */,
-				D80360461CBF376B001920F9 /* PhoneToSignUpViewController.m in Sources */,
 				D803604D1CBF376B001920F9 /* NSNumber+UserModel.m in Sources */,
 				D812811E1CAA8532007CF08B /* SelectSceneViewController.m in Sources */,
 				D81281211CAA8532007CF08B /* FBLoadPhoto.m in Sources */,
-				D803603E1CBF376B001920F9 /* FBBindingMobilePhoneNumber.m in Sources */,
 				D80360541CBF376B001920F9 /* ImprovePersonalInformationView.m in Sources */,
-				D803604A1CBF376B001920F9 /* SubscribeInterestedViewController.m in Sources */,
 				D8035FCF1CBD1021001920F9 /* FBTabBar.m in Sources */,
 				D812813C1CAA8532007CF08B /* MallViewController.m in Sources */,
 				1FEF0B1D1CC0FC15006EF0C6 /* NaviView.m in Sources */,
@@ -1902,8 +1889,6 @@
 				D803603F1CBF376B001920F9 /* FBLoginRegisterViewController.m in Sources */,
 				D8035FCE1CBD1021001920F9 /* SearchViewController.m in Sources */,
 				D8035FC51CBD1021001920F9 /* CommentDataTableViewCell.m in Sources */,
-				D80360451CBF376B001920F9 /* PhoneToLogInViewController.m in Sources */,
-				1FBE62761CC4F4B2009606F7 /* MyFansActionSheetView.m in Sources */,
 				1FEF0B1B1CC0FC15006EF0C6 /* MyHomeV.m in Sources */,
 				D81281201CAA8532007CF08B /* FBPhoto.m in Sources */,
 				D803605C1CBF376B001920F9 /* SubmitView.m in Sources */,
@@ -1928,7 +1913,6 @@
 				D8035FEB1CBE1B5D001920F9 /* AllSceneViewController.m in Sources */,
 				D8035FE41CBDFC16001920F9 /* FiuHeaderTableViewCell.m in Sources */,
 				D81281231CAA8532007CF08B /* CameraView.m in Sources */,
-				D80360471CBF376B001920F9 /* SubmitViewController.m in Sources */,
 				D812811F1CAA8532007CF08B /* FBFilters.m in Sources */,
 				D81281271CAA8532007CF08B /* FBPictureCollectionViewCell.m in Sources */,
 				1F3C0A7B1CBF682500B84FEB /* ImprovePersonalDataViewController.m in Sources */,

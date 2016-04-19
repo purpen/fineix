@@ -8,7 +8,7 @@
 
 #import "MyFansViewController.h"
 #import "FocusOnTableViewCell.h"
-#import "MyFansActionSheetView.h"
+#import "MyFansActionSheetViewController.h"
 
 @interface MyFansViewController ()<FBNavigationBarItemsDelegate,UITableViewDelegate,UITableViewDataSource>
 
@@ -52,6 +52,7 @@
     if (cell == nil) {
         cell = [[FocusOnTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellId];
     }
+    cell.focusOnBtn.tag = indexPath.row;
     [cell.focusOnBtn addTarget:self action:@selector(clickFocusBtn:) forControlEvents:UIControlEventTouchUpInside];
     [cell setUI];
     return cell;
@@ -61,9 +62,24 @@
     if (!sender.selected) {
         sender.selected = !sender.selected;
     }else{
-        MyFansActionSheetView *sheet = [[MyFansActionSheetView alloc] init];
-        sheet.backgroundColor = [UIColor redColor];
+        MyFansActionSheetViewController *sheetVC = [[MyFansActionSheetViewController alloc] init];
+        [sheetVC setUI];
+        sheetVC.modalPresentationStyle = UIModalPresentationOverCurrentContext;
+        [self presentViewController:sheetVC animated:NO completion:nil];
+        sheetVC.stopBtn.tag = sender.tag;
+        [sheetVC.stopBtn addTarget:self action:@selector(clickStopBtn:) forControlEvents:UIControlEventTouchUpInside];
+        [sheetVC.cancelBtn addTarget:self action:@selector(clickCancelBtn:) forControlEvents:UIControlEventTouchUpInside];
     }
+}
+
+-(void)clickStopBtn:(UIButton*)sender{
+    [self dismissViewControllerAnimated:NO completion:nil];
+    FocusOnTableViewCell *cell = [_mytableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:sender.tag inSection:0]];
+    cell.focusOnBtn.selected = NO;
+}
+
+-(void)clickCancelBtn:(UIButton*)sender{
+    [self dismissViewControllerAnimated:NO completion:nil];
 }
 
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{

@@ -21,8 +21,6 @@
 @interface ImprovePersonalDataViewController ()<UIImagePickerControllerDelegate,UIActionSheetDelegate,UINavigationControllerDelegate,UITextFieldDelegate,FBRequestDelegate>
 {
     NSString *_sex;
-    ImprovePersonalInformationView *_improvePersonalV;
-    
 }
 
 @end
@@ -35,35 +33,48 @@ static NSString *const IconURL = @"/my/upload_token";
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
-    _improvePersonalV = [ImprovePersonalInformationView getImprovePersonalInformationView];
-    _improvePersonalV.frame = CGRectMake(0, 64+30, _improvePersonalV.frame.size.width/667.0*SCREEN_HEIGHT, _improvePersonalV.frame.size.height/667.0*SCREEN_HEIGHT);
-    CGPoint center = _improvePersonalV.center;
-    center.x = self.view.center.x;
-    _improvePersonalV.center = center;
+//    _improvePersonalV = [ImprovePersonalInformationView getImprovePersonalInformationView];
+//    _improvePersonalV.frame = CGRectMake(0, 64+30, _improvePersonalV.frame.size.width/667.0*SCREEN_HEIGHT, _improvePersonalV.frame.size.height/667.0*SCREEN_HEIGHT);
+//    CGPoint center = _improvePersonalV.center;
+//    center.x = self.view.center.x;
+//    _improvePersonalV.center = center;
     [self.view addSubview:_improvePersonalV];
     //
-    [_improvePersonalV.menBtn addTarget:self action:@selector(clickMenBtn:) forControlEvents:UIControlEventTouchUpInside];
-    [_improvePersonalV.womenBtn addTarget:self action:@selector(clickWomenBtn:) forControlEvents:UIControlEventTouchUpInside];
-    [_improvePersonalV.secretBtn addTarget:self action:@selector(clickSecretBtn:) forControlEvents:UIControlEventTouchUpInside];
-    //
-    _improvePersonalV.nickNameTF.delegate = self;
-    _improvePersonalV.IndividualitySignatureTF.delegate = self;
+    [_improvePersonalV mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.centerX.mas_equalTo(self.view.mas_centerX);
+        make.top.mas_equalTo(self.view.mas_top).with.offset(94);
+    }];
     //
     self.navigationItem.title = @"完善个人资料";
-    _improvePersonalV.womenView.hidden = YES;
-    _improvePersonalV.secretView.hidden = YES;
-    _sex = @"男";
-    //头像变成椭圆
-    _improvePersonalV.headImageView.layer.masksToBounds = YES;
-    _improvePersonalV.headImageView.layer.cornerRadius = 50;
-    //点击头像可以更换头像
-    _improvePersonalV.headImageView.userInteractionEnabled = YES;
-    _improvePersonalV.headImageView.userInteractionEnabled = YES;
+        _sex = @"男";
+    
     UITapGestureRecognizer* singleRecognizer;
     singleRecognizer = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(singleTap:)];
     singleRecognizer.numberOfTapsRequired = 1;
     singleRecognizer.numberOfTouchesRequired = 1;
     [_improvePersonalV.headImageView addGestureRecognizer:singleRecognizer];
+}
+
+-(ImprovePersonalInformationView *)improvePersonalV{
+    if (!_improvePersonalV) {
+        _improvePersonalV = [ImprovePersonalInformationView getImprovePersonalInformationView];
+        [_improvePersonalV.menBtn addTarget:self action:@selector(clickMenBtn:) forControlEvents:UIControlEventTouchUpInside];
+        [_improvePersonalV.womenBtn addTarget:self action:@selector(clickWomenBtn:) forControlEvents:UIControlEventTouchUpInside];
+        [_improvePersonalV.secretBtn addTarget:self action:@selector(clickSecretBtn:) forControlEvents:UIControlEventTouchUpInside];
+        //
+        _improvePersonalV.nickNameTF.delegate = self;
+        _improvePersonalV.IndividualitySignatureTF.delegate = self;
+        
+        _improvePersonalV.womenView.hidden = YES;
+        _improvePersonalV.secretView.hidden = YES;
+
+        //头像变成椭圆
+        _improvePersonalV.headImageView.layer.masksToBounds = YES;
+        _improvePersonalV.headImageView.layer.cornerRadius = 50;
+        //点击头像可以更换头像
+        _improvePersonalV.headImageView.userInteractionEnabled = YES;
+    }
+    return _improvePersonalV;
 }
 
 -(void)textFieldDidBeginEditing:(UITextField *)textField

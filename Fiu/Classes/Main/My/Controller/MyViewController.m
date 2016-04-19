@@ -21,6 +21,8 @@
 #import "MyHomePageScenarioViewController.h"
 #import "MyPageFocusOnViewController.h"
 #import "MyFansViewController.h"
+#import "SubscribeViewController.h"
+#import "PraisedViewController.h"
 
 
 @interface MyViewController ()<UIScrollViewDelegate>
@@ -168,6 +170,7 @@
     NSLog(@"跳转到我的主页的场景的界面");
     MyHomePageScenarioViewController *myHomeVC = [[MyHomePageScenarioViewController alloc] init];
     myHomeVC.type = @2;
+    myHomeVC.isMySelf = YES;
     [self.navigationController pushViewController:myHomeVC animated:YES];
 }
 
@@ -190,6 +193,7 @@
     NSLog(@"跳转到我的主页的情景的界面");
     MyHomePageScenarioViewController *myHomeVC = [[MyHomePageScenarioViewController alloc] init];
     myHomeVC.type = @1;
+    myHomeVC.isMySelf = YES;
     [self.navigationController pushViewController:myHomeVC animated:YES];
 }
 
@@ -224,6 +228,8 @@
 //订阅按钮
 -(void)subscribeBtn:(UIButton*)sender{
     NSLog(@"#########");
+    SubscribeViewController *vc = [[SubscribeViewController alloc] init];
+    [self.navigationController pushViewController:vc animated:YES];
 }
 
 //收藏按钮
@@ -234,6 +240,8 @@
 //赞过按钮
 -(void)praiseBtn:(UIButton*)sender{
     NSLog(@"#########");
+    PraisedViewController *vc = [[PraisedViewController alloc] init];
+    [self.navigationController pushViewController:vc animated:YES];
 }
 
 //积分按钮

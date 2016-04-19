@@ -14,6 +14,8 @@
 #import "MyHomePageView.h"
 #import "MyPageFocusOnViewController.h"
 #import "MyFansViewController.h"
+#import "OtherBackGrandTableViewCell.h"
+#import "FBSheetViewController.h"
 
 @interface MyHomePageScenarioViewController ()<UITableViewDelegate,UITableViewDataSource,FBNavigationBarItemsDelegate>
 {
@@ -133,14 +135,28 @@
 
 -(UITableViewCell*)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     if (indexPath.section == 0) {
-        static NSString *backImageCellId = @"backImageCellId";
-        BackgroundTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:backImageCellId];
-        if (cell == nil) {
-            cell = [[BackgroundTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:backImageCellId];
+        if (self.isMySelf) {
+            static NSString *backImageCellId = @"backImageCellId";
+            BackgroundTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:backImageCellId];
+            if (cell == nil) {
+                cell = [[BackgroundTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:backImageCellId];
+            }
+            [cell.backBtn addTarget:self action:@selector(clickBackBtn:) forControlEvents:UIControlEventTouchUpInside];
+            [cell setUI];
+            return cell;
+        }else{
+            static NSString *otherCellId = @"other";
+            OtherBackGrandTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:otherCellId];
+            if (cell == nil) {
+                cell = [[OtherBackGrandTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:otherCellId];
+            }
+            [cell.backBtn addTarget:self action:@selector(clickBackBtn:) forControlEvents:UIControlEventTouchUpInside];
+            [cell.moreBtn addTarget:self action:@selector(clickMoreBtn:) forControlEvents:UIControlEventTouchUpInside];
+//            [cell.focusOnBtn addTarget:self action:@selector(<#selector#>) forControlEvents:UIControlEventTouchUpInside];
+//            [cell.directMessages addTarget:self action:@selector(<#selector#>) forControlEvents:UIControlEventTouchUpInside];
+            [cell setUI];
+            return cell;
         }
-        [cell.backBtn addTarget:self action:@selector(clickBackBtn:) forControlEvents:UIControlEventTouchUpInside];
-        [cell setUI];
-        return cell;
     }else if (indexPath.section == 1){
         if (indexPath.row == 0) {
             static NSString *chanel = @"chanel";
@@ -200,6 +216,18 @@
     return nil;
 }
 
+-(void)clickMoreBtn:(UIButton*)sender{
+    FBSheetViewController *sheetVC = [[FBSheetViewController alloc] init];
+    sheetVC.modalPresentationStyle = UIModalPresentationOverCurrentContext;
+    [self presentViewController:sheetVC animated:NO completion:nil];
+    [sheetVC initFBSheetVCWithNameAry:[NSArray arrayWithObjects:@"拉黑用户",@"举报",@"取消", nil]];
+    [((UIButton*)sheetVC.sheetView.subviews[2]) addTarget:self action:@selector(cancelBtn:) forControlEvents:UIControlEventTouchUpInside];
+}
+
+-(void)cancelBtn:(UIButton*)sender{
+    [self dismissViewControllerAnimated:NO completion:nil];
+}
+
 -(void)clickBackBtn:(UIButton*)sender{
     NSLog(@"backBtn");
     [self.navigationController popViewControllerAnimated:YES];
@@ -242,12 +270,22 @@
     if (y<0) {
         //当坐标y大于0时就进行放大
         //改变图片的y坐标和高度
-        BackgroundTableViewCell *cell = [_myTableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0]];
-        CGRect frame = cell.bgImageView.frame;
+        if (_isMySelf) {
+            BackgroundTableViewCell *cell = [_myTableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0]];
+            CGRect frame = cell.bgImageView.frame;
+            
+            frame.origin.y = y;
+            frame.size.height = -y+240/667.0*SCREEN_HEIGHT;
+            cell.bgImageView.frame = frame;
+        }else{
+            OtherBackGrandTableViewCell *cell = [_myTableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0]];
+            CGRect frame = cell.bgImageView.frame;
+            
+            frame.origin.y = y;
+            frame.size.height = -y+240/667.0*SCREEN_HEIGHT;
+            cell.bgImageView.frame = frame;
+        }
         
-        frame.origin.y = y;
-        frame.size.height = -y+240/667.0*SCREEN_HEIGHT;
-        cell.bgImageView.frame = frame;
     }
 }
 

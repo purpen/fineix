@@ -41,26 +41,6 @@
             </objects>
             <point key="canvasLocation" x="-39.5" y="383.5"/>
         </scene>
-        <!--My Home Page View Controller-->
-        <scene sceneID="tih-Zd-dk4">
-            <objects>
-                <viewController storyboardIdentifier="MyHomePageViewController" id="JIl-bu-xjf" customClass="MyHomePageViewController" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="dcd-Ew-1sO"/>
-                        <viewControllerLayoutGuide type="bottom" id="aS2-jo-tqb"/>
-                    </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="rSu-nd-qbu">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                    </view>
-                    <navigationItem key="navigationItem" id="fKj-T7-rqd"/>
-                    <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="ibG-G2-pWH" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="-39.5" y="-360.5"/>
-        </scene>
         <!--Navigation Controller-->
         <scene sceneID="cSt-cX-m6r">
             <objects>

@@ -14,5 +14,6 @@
 @property (nonatomic,strong) NSNumber *type;
 @property (nonatomic, strong) UITableView *myTableView;
 @property (nonatomic,assign) NSInteger currentPage;
+@property (nonatomic,assign) BOOL isMySelf;
 
 @end

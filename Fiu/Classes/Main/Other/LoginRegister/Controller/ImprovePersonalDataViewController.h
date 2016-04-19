@@ -7,7 +7,10 @@
 //
 
 #import <UIKit/UIKit.h>
+@class ImprovePersonalInformationView;
 
 @interface ImprovePersonalDataViewController : UIViewController
+
+@property(nonatomic,strong) ImprovePersonalInformationView *improvePersonalV;
 
 @end
