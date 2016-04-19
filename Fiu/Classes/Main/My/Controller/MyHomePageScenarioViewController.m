@@ -152,8 +152,8 @@
             }
             [cell.backBtn addTarget:self action:@selector(clickBackBtn:) forControlEvents:UIControlEventTouchUpInside];
             [cell.moreBtn addTarget:self action:@selector(clickMoreBtn:) forControlEvents:UIControlEventTouchUpInside];
-//            [cell.focusOnBtn addTarget:self action:@selector(<#selector#>) forControlEvents:UIControlEventTouchUpInside];
-//            [cell.directMessages addTarget:self action:@selector(<#selector#>) forControlEvents:UIControlEventTouchUpInside];
+            [cell.focusOnBtn addTarget:self action:@selector(clickFocusBtn:) forControlEvents:UIControlEventTouchUpInside];
+            [cell.directMessages addTarget:self action:@selector(clickMessageBtn:) forControlEvents:UIControlEventTouchUpInside];
             [cell setUI];
             return cell;
         }
@@ -214,6 +214,14 @@
         
     }
     return nil;
+}
+
+-(void)clickMessageBtn:(UIButton*)sender{
+    
+}
+
+-(void)clickFocusBtn:(UIButton*)sender{
+    sender.selected = !sender.selected;
 }
 
 -(void)clickMoreBtn:(UIButton*)sender{
