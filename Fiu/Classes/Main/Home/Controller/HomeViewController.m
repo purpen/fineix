@@ -197,6 +197,7 @@
 - (void)leftBarItemSelected {
     SearchViewController * searchVC = [[SearchViewController alloc] init];
     searchVC.searchType = 0;
+//    [self presentViewController:searchVC animated:YES completion:nil];
     [self.navigationController pushViewController:searchVC animated:YES];
 }
 

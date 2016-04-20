@@ -52,12 +52,11 @@
 #pragma mark - 设置Nav透明
 - (void)navBarTransparent:(BOOL)ture {
     if (ture) {
-        self.navigationController.navigationBar.translucent = YES;
         [self.navigationController.navigationBar setBackgroundImage:[UIImage new] forBarMetrics:(UIBarMetricsDefault)];
         self.navigationController.navigationBar.shadowImage = [UIImage new];
     
     } else {
-        self.navigationController.navigationBar.translucent = NO;
+        
         CGRect rect = CGRectMake(0, 0, SCREEN_WIDTH, 1);
         UIGraphicsBeginImageContext(rect.size);
         CGContextRef context = UIGraphicsGetCurrentContext();
@@ -66,6 +65,15 @@
         UIImage * img = UIGraphicsGetImageFromCurrentImageContext();
         UIGraphicsEndImageContext();
         self.navigationController.navigationBar.shadowImage = img;
+        
+        CGRect bgrect = CGRectMake(0, 0, SCREEN_WIDTH, 64);
+        UIGraphicsBeginImageContext(bgrect.size);
+        CGContextRef bgcontext = UIGraphicsGetCurrentContext();
+        CGContextSetFillColorWithColor(bgcontext, [UIColor whiteColor].CGColor);
+        CGContextFillRect(bgcontext, bgrect);
+        UIImage * bgimg = UIGraphicsGetImageFromCurrentImageContext();
+        UIGraphicsEndImageContext();
+        [self.navigationController.navigationBar setBackgroundImage:bgimg forBarMetrics:(UIBarMetricsDefault)];
     }
     
 }
