@@ -19,11 +19,9 @@ static const NSInteger actionBtnTag = 686;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
     self.view.backgroundColor = [UIColor colorWithHexString:@"#000000" alpha:.3];
     
     [self.view addSubview:self.alertView];
-    
 }
 
 #pragma mark -
@@ -66,10 +64,10 @@ static const NSInteger actionBtnTag = 686;
 //  用户自己创建的场景，可编辑
 - (void)userActionBtnClick:(UIButton *)button {
     if (button.tag == actionBtnTag) {
-        NSLog(@"删除场景 ");
+        [SVProgressHUD showInfoWithStatus:@"删除场景"];
     
     } else if (button.tag == actionBtnTag + 1) {
-        NSLog(@"编辑场景");
+        [SVProgressHUD showInfoWithStatus:@"编辑场景"];
     
     } else if (button.tag == actionBtnTag + 2) {
         [self dismissViewControllerAnimated:YES completion:nil];
@@ -79,10 +77,10 @@ static const NSInteger actionBtnTag = 686;
 //  访客查看场景详情时
 - (void)visitorsActionBtnClick:(UIButton *)button {
     if (button.tag == actionBtnTag) {
-        NSLog(@"举报场景 ");
+        [SVProgressHUD showInfoWithStatus:@"举报场景"];
         
     } else if (button.tag == actionBtnTag + 1) {
-        NSLog(@"分享场景");
+        [SVProgressHUD showInfoWithStatus:@"分享场景"];
         
     } else if (button.tag == actionBtnTag + 2) {
         [self dismissViewControllerAnimated:YES completion:nil];

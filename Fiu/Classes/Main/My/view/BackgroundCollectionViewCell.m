@@ -1,23 +1,20 @@
 //
-//  OtherBackGrandTableViewCell.m
+//  BackgroundCollectionViewCell.m
 //  Fiu
 //
-//  Created by THN-Dong on 16/4/19.
+//  Created by THN-Dong on 16/4/20.
 //  Copyright © 2016年 taihuoniao. All rights reserved.
 //
 
-#import "OtherBackGrandTableViewCell.h"
+#import "BackgroundCollectionViewCell.h"
 #import "Fiu.h"
 
-@implementation OtherBackGrandTableViewCell
-
--(instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier{
-    if (self = [super initWithStyle:style reuseIdentifier:reuseIdentifier]) {
-        self.selectionStyle = UITableViewCellSelectionStyleNone;
-        self.userInteractionEnabled = YES;
-        [self.contentView addSubview:self.bgImageView];
+@implementation BackgroundCollectionViewCell
+-(instancetype)initWithFrame:(CGRect)frame{
+    if (self = [super initWithFrame:frame]) {
+        [self addSubview:self.bgImageView];
         [_bgImageView mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.size.mas_equalTo(CGSizeMake(SCREEN_WIDTH, 240/667.0*SCREEN_HEIGHT));
+            make.size.mas_equalTo(self.frame.size);
             make.top.equalTo(self.mas_top).with.offset(0);
             make.left.equalTo(self.mas_left).with.offset(0);
         }];
@@ -40,25 +37,11 @@
         _bgImageView.contentMode = UIViewContentModeScaleAspectFill;
         _bgImageView.userInteractionEnabled = YES;
         
-        [_bgImageView addSubview:self.focusOnBtn];
-        [_focusOnBtn mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.size.mas_equalTo(CGSizeMake(138*0.5/667.0*SCREEN_HEIGHT, 50*0.5/667.0*SCREEN_HEIGHT));
-            make.left.mas_equalTo(_bgImageView.mas_left).with.offset(103/667.0*SCREEN_HEIGHT);
-            make.bottom.mas_equalTo(_bgImageView.mas_bottom).with.offset(-10/667.0*SCREEN_HEIGHT);
-        }];
-        
-        [_bgImageView addSubview:self.directMessages];
-        [_directMessages mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.size.mas_equalTo(CGSizeMake(138*0.5/667.0*SCREEN_HEIGHT, 50*0.5/667.0*SCREEN_HEIGHT));
-            make.right.mas_equalTo(_bgImageView.mas_right).with.offset(-103/667.0*SCREEN_HEIGHT);
-            make.bottom.mas_equalTo(_bgImageView.mas_bottom).with.offset(-10/667.0*SCREEN_HEIGHT);
-        }];
-        
         [_bgImageView addSubview:self.userLevelLabel];
         [_userLevelLabel mas_makeConstraints:^(MASConstraintMaker *make) {
             make.size.mas_equalTo(CGSizeMake(200, 12));
             make.centerX.mas_equalTo(_bgImageView.mas_centerX);
-            make.bottom.mas_equalTo(_bgImageView.mas_bottom).with.offset(-44/667.0*SCREEN_HEIGHT);
+            make.bottom.mas_equalTo(_bgImageView.mas_bottom).with.offset(-14/667.0*SCREEN_HEIGHT);
         }];
         
         [_bgImageView addSubview:self.backBtn];
@@ -75,55 +58,21 @@
             make.bottom.mas_equalTo(_userLevelLabel.mas_top).with.offset(-5/667.0*SCREEN_HEIGHT);
         }];
         
+        [_bgImageView addSubview:self.nickName];
+        [_nickName mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.size.mas_equalTo(CGSizeMake(self.frame.size.width, 19));
+            make.centerX.mas_equalTo(_bgImageView.mas_centerX);
+            make.bottom.mas_equalTo(_userProfile.mas_top).with.offset(-9/667.0*SCREEN_HEIGHT);
+        }];
         
         [_bgImageView addSubview:self.userHeadImageView];
         [_userHeadImageView mas_makeConstraints:^(MASConstraintMaker *make) {
             make.size.mas_equalTo(CGSizeMake(80/667.0*SCREEN_HEIGHT, 80/667.0*SCREEN_HEIGHT));
             make.centerX.mas_equalTo(_bgImageView.mas_centerX);
-            make.bottom.mas_equalTo(_userProfile.mas_top).with.offset(-13/667.0*SCREEN_HEIGHT);
-        }];
-        
-        [_bgImageView addSubview:self.nickName];
-        [_nickName mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.centerX.mas_equalTo(_bgImageView.mas_centerX);
-            make.bottom.mas_equalTo(_userHeadImageView.mas_top).with.offset(-22/667.0*SCREEN_HEIGHT);
-            make.size.mas_equalTo(CGSizeMake(200, 19));
-            
-        }];
-        
-        [_bgImageView addSubview:self.moreBtn];
-        [_moreBtn mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.size.mas_equalTo(CGSizeMake(30, 20));
-            make.right.mas_equalTo(_bgImageView.mas_right).with.offset(-16);
-            make.top.mas_equalTo(_bgImageView.mas_top).with.offset(35);
+            make.bottom.mas_equalTo(_nickName.mas_top).with.offset(-10/667.0*SCREEN_HEIGHT);
         }];
     }
     return _bgImageView;
-}
-
--(UIButton *)moreBtn{
-    if (!_moreBtn) {
-        _moreBtn = [[UIButton alloc] init];
-        [_moreBtn setImage:[UIImage imageNamed:@"more_filled"] forState:UIControlStateNormal];
-    }
-    return _moreBtn;
-}
-
--(UIButton *)focusOnBtn{
-    if (!_focusOnBtn) {
-        _focusOnBtn = [[UIButton alloc] init];
-        [_focusOnBtn setImage:[UIImage imageNamed:@"hfocusBtn"] forState:UIControlStateNormal];
-        [_focusOnBtn setImage:[UIImage imageNamed:@"hasBeenFocusedOn"] forState:UIControlStateSelected];
-    }
-    return _focusOnBtn;
-}
-
--(UIButton *)directMessages{
-    if (!_directMessages) {
-        _directMessages = [[UIButton alloc] init];
-        [_directMessages setImage:[UIImage imageNamed:@"directMessages"] forState:UIControlStateNormal];
-    }
-    return _directMessages;
 }
 
 -(UIButton *)backBtn{
@@ -185,17 +134,5 @@
     }
     return _userHeadImageView;
 }
-
-- (void)awakeFromNib {
-    [super awakeFromNib];
-    // Initialization code
-}
-
-- (void)setSelected:(BOOL)selected animated:(BOOL)animated {
-    [super setSelected:selected animated:animated];
-    
-    // Configure the view for the selected state
-}
-
 
 @end

@@ -10,8 +10,7 @@
 
 @interface SubscribeViewController : FBViewController
 
-@property(nonatomic,strong) UICollectionView *myCollectionView;
 
-@property(nonatomic,strong) UITableView *myTableView;
+@property(nonatomic,strong) UICollectionView *myCollectionView;
 
 @end

@@ -8,7 +8,7 @@
 
 #import "MyPageFocusOnViewController.h"
 #import "FocusOnTableViewCell.h"
-#import "MyHomePageScenarioViewController.h"
+#import "HomePageViewController.h"
 
 @interface MyPageFocusOnViewController ()<FBNavigationBarItemsDelegate,UITableViewDelegate,UITableViewDataSource>
 
@@ -63,7 +63,7 @@
 }
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
-    MyHomePageScenarioViewController *v = [[MyHomePageScenarioViewController alloc] init];
+    HomePageViewController *v = [[HomePageViewController alloc] init];
     v.isMySelf = NO;
     v.type = @1;
     [self.navigationController pushViewController:v animated:YES];

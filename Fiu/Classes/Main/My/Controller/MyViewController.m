@@ -18,12 +18,12 @@
 #import "BottomView.h"
 #import "AppBtnView.h"
 #import "MyOrdersViewController.h"
-#import "MyHomePageScenarioViewController.h"
+#import "HomePageViewController.h"
 #import "MyPageFocusOnViewController.h"
 #import "MyFansViewController.h"
 #import "SubscribeViewController.h"
 #import "PraisedViewController.h"
-
+#import "FindeFriendViewController.h"
 
 @interface MyViewController ()<UIScrollViewDelegate>
 
@@ -57,7 +57,7 @@
     _imgV = [BackImagView getBackImageView];
     _imgV.headImageView.layer.masksToBounds = YES;
     _imgV.headImageView.layer.cornerRadius = 33;
-    _imgV.frame = CGRectMake(0, 64, SCREEN_WIDTH, 200/667.0*SCREEN_HEIGHT);
+    _imgV.frame = CGRectMake(0, 64, SCREEN_WIDTH, 180/667.0*SCREEN_HEIGHT);
     _imgV.userInteractionEnabled = YES;
     UITapGestureRecognizer *singleTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(signleTap:)];
     singleTap.numberOfTapsRequired = 1;
@@ -168,7 +168,7 @@
 -(void)signleTap1:(UITapGestureRecognizer*)gesture{
     //跳转到我的主页的情景的界面
     NSLog(@"跳转到我的主页的场景的界面");
-    MyHomePageScenarioViewController *myHomeVC = [[MyHomePageScenarioViewController alloc] init];
+    HomePageViewController *myHomeVC = [[HomePageViewController alloc] init];
     myHomeVC.type = @2;
     myHomeVC.isMySelf = YES;
     [self.navigationController pushViewController:myHomeVC animated:YES];
@@ -191,7 +191,7 @@
 -(void)signleTap:(UITapGestureRecognizer*)gesture{
     //跳转到我的主页的情景的界面
     NSLog(@"跳转到我的主页的情景的界面");
-    MyHomePageScenarioViewController *myHomeVC = [[MyHomePageScenarioViewController alloc] init];
+    HomePageViewController *myHomeVC = [[HomePageViewController alloc] init];
     myHomeVC.type = @1;
     myHomeVC.isMySelf = YES;
     [self.navigationController pushViewController:myHomeVC animated:YES];
@@ -273,7 +273,8 @@
 
 //点击导航左按钮
 -(void)clickImageBtn:(UIButton*)sender{
-    
+    FindeFriendViewController *v = [[FindeFriendViewController alloc] init];
+    [self.navigationController pushViewController:v animated:YES];
 }
 
 

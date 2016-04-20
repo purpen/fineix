@@ -7,9 +7,9 @@
 //
 
 #import "SubscribeViewController.h"
-#import "FiuSceneCollectionViewCell.h"
+#import "AllSceneCollectionViewCell.h"
 
-@interface SubscribeViewController ()<FBNavigationBarItemsDelegate,UICollectionViewDelegate,UICollectionViewDataSource,UICollectionViewDelegateFlowLayout,UITableViewDelegate,UITableViewDataSource>
+@interface SubscribeViewController ()<FBNavigationBarItemsDelegate,UICollectionViewDelegate,UICollectionViewDataSource,UICollectionViewDelegateFlowLayout>
 
 @end
 
@@ -24,26 +24,16 @@
     self.delegate = self;
     //
     [self.view addSubview:self.myCollectionView];
-    //
-    [self.view addSubview:self.myTableView];
-}
-
--(UITableView *)myTableView{
-    if (!_myTableView) {
-        _myTableView = [[UITableView alloc] initWithFrame:self.view.frame style:UITableViewStylePlain];
-        _myTableView.delegate = self;
-        _myTableView.dataSource = self;
-    }
-    return _myTableView;
+    
 }
 
 -(UICollectionView *)myCollectionView{
     if (!_myCollectionView) {
         UICollectionViewFlowLayout *flowLayout = [[UICollectionViewFlowLayout alloc] init];
-        flowLayout.itemSize = CGSizeMake(360*0.5/667.0*SCREEN_HEIGHT, 640*0.5/667.0*SCREEN_HEIGHT);
-        flowLayout.sectionInset = UIEdgeInsetsMake(5, 15, 0, -10);
-        flowLayout.minimumInteritemSpacing = 3.0;
-        flowLayout.minimumLineSpacing = 2.5;
+        flowLayout.itemSize = CGSizeMake((SCREEN_WIDTH-15)/2, (16/9.0)*(SCREEN_WIDTH-15)/2);
+        flowLayout.sectionInset = UIEdgeInsetsMake(5, 5, 0, 5);
+        flowLayout.minimumInteritemSpacing = 5;
+        flowLayout.minimumLineSpacing = 5;
         flowLayout.scrollDirection = UICollectionViewScrollDirectionVertical;
         
         _myCollectionView = [[UICollectionView alloc] initWithFrame:self.view.frame collectionViewLayout:flowLayout];
@@ -51,18 +41,22 @@
         _myCollectionView.dataSource = self;
         _myCollectionView.backgroundColor = [UIColor whiteColor];
         _myCollectionView.showsVerticalScrollIndicator = NO;
-        [_myCollectionView registerClass:[FiuSceneCollectionViewCell class] forCellWithReuseIdentifier:@"collectionViewCellId"];
+        [_myCollectionView registerClass:[AllSceneCollectionViewCell class] forCellWithReuseIdentifier:@"collectionViewCellId"];
     }
     return _myCollectionView;
 }
 
 -(NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section{
+    return 2;
+}
+
+-(NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView{
     return 5;
 }
 
 -(UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath{
     static NSString *id = @"collectionViewCellId";
-    FiuSceneCollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:id forIndexPath:indexPath];
+    AllSceneCollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:id forIndexPath:indexPath];
     [cell setUI];
     return cell;
 }

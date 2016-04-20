@@ -33,7 +33,6 @@
 #pragma mark - 
 - (void)setCollectionCellViewUI {
     [self addSubview:self.sceneImage];
-
 }
 
 #pragma mark - 情景图片
