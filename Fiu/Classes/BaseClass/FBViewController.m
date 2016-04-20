@@ -56,7 +56,7 @@
         self.navigationController.navigationBar.shadowImage = [UIImage new];
     
     } else {
-        
+
         CGRect rect = CGRectMake(0, 0, SCREEN_WIDTH, 1);
         UIGraphicsBeginImageContext(rect.size);
         CGContextRef context = UIGraphicsGetCurrentContext();

@@ -32,7 +32,6 @@
 #pragma mark - 
 - (void)setAllSceneViewUI {
     [self.view addSubview:self.allSceneList];
-    
 }
 
 #pragma mark - 情景列表

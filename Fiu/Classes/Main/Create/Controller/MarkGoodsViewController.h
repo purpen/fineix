@@ -7,13 +7,14 @@
 //
 
 #import "FBPictureViewController.h"
-#import "HTHorizontalSelectionList.h"
 #import "FBSearchView.h"
+#import "FBMenuView.h"
 
-@interface MarkGoodsViewController : FBPictureViewController <FBSearchDelegate, HTHorizontalSelectionListDelegate, HTHorizontalSelectionListDataSource>
+@interface MarkGoodsViewController : FBPictureViewController <FBSearchDelegate, FBMenuViewDelegate>
 
-@pro_strong FBSearchView                    *   searchGoods;        //  搜索框
-@pro_strong HTHorizontalSelectionList       *   menuView;           //  分类导航栏
-@pro_strong NSArray                         *   menuTitle;          //  分类信息标题
+@pro_strong FBMenuView                  *       categoryMenuView;       //  滑动导航栏
+@pro_strong NSArray                     *       categoryTitleArr;       //  导航栏标题
+@pro_strong FBSearchView                *       searchGoods;            //  搜索框
+
 
 @end

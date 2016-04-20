@@ -8,6 +8,7 @@
 
 #import "MallMenuTableViewCell.h"
 #import "MallMenuCollectionViewCell.h"
+#import "GoodsCategoryViewController.h"
 
 @implementation MallMenuTableViewCell
 
@@ -58,5 +59,9 @@
 #pragma mark UICollectionViewDelegate
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
     NSLog(@"打开商品分类 ＝＝＝＝＝＝＝＝ %zi", indexPath.row);
+    GoodsCategoryViewController * goodsCategoryVC = [[GoodsCategoryViewController alloc] init];
+    goodsCategoryVC.categoryTitleArr = @[@"3C数码", @"智能出行", @"健康周边", @"母婴产品", @"3C数码", @"智能出行", @"健康周边", @"母婴产品"];
+    [goodsCategoryVC.categoryMenuView updateMenuBtnState:indexPath.row];
+    [self.nav pushViewController:goodsCategoryVC animated:YES];
 }
 @end

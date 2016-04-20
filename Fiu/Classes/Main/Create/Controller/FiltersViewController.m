@@ -34,26 +34,9 @@
     self.filtersImageView.image = showFilterImage;
 }
 
-#pragma mark - 设置顶部导航栏
-- (void)setNavViewUI {
-    [self addNavViewTitle:NSLocalizedString(@"filtersVcTitle", nil)];
-    [self addBackButton:@"icon_back_white"];
-    [self addNextButton];
-    [self.nextBtn addTarget:self action:@selector(nextBtnClick) forControlEvents:(UIControlEventTouchUpInside)];
-
-}
-
-#pragma mark 继续按钮的点击事件
-- (void)nextBtnClick {
-    ReleaseViewController * releaseVC = [[ReleaseViewController alloc] init];
-    releaseVC.locationArr = self.locationArr;
-    releaseVC.scenceView.imageView.image = self.filtersImageView.image;
-    [self.navigationController pushViewController:releaseVC animated:YES];
-
-}
-
 #pragma mark - 设置视图UI
 - (void)setFiltersControllerUI {
+    NSLog(@"＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝ %@", self.createType);
     
     [self setNavViewUI];
     
@@ -72,6 +55,21 @@
         make.bottom.equalTo(self.view.mas_bottom).with.offset(0);
         make.centerX.equalTo(self.view);
     }];
+    
+    [self.view addSubview:self.filtersView];
+    
+    //  判断是情景/场景
+    if ([self.createType isEqualToString:@"scene"]) {
+        [self addNavViewTitle:NSLocalizedString(@"filtersVcTitle", nil)];
+    
+    } else if ([self.createType isEqualToString:@"fScene"]) {
+        [self addNavViewTitle:NSLocalizedString(@"filterVcTitle", nil)];
+        [self.footView removeFromSuperview];
+        CGRect filtersViewRect = _filtersView.frame;
+        filtersViewRect = CGRectMake(0, SCREEN_HEIGHT - 120, SCREEN_WIDTH, 120);
+        _filtersView.frame = filtersViewRect;
+    }
+
 }
 
 #pragma mark - 底部的工具栏
@@ -97,19 +95,15 @@
     
     if (index == 0) {
         [self presentViewController:markGoodsVC animated:YES completion:nil];
-        [self.filtersView removeFromSuperview];
         
     } else if (index == 1) {
         [self presentViewController:addUrlVC animated:YES completion:nil];
-        [self.filtersView removeFromSuperview];
         
     } else if (index == 2) {
-        
-        [self.view addSubview:self.filtersView];
-        [_filtersView mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.size.mas_equalTo(CGSizeMake(SCREEN_WIDTH, 120));
-            make.bottom.equalTo(self.view.mas_bottom).with.offset(-50);
-            make.centerX.equalTo(self.view);
+        CGRect filtersViewRect = _filtersView.frame;
+        filtersViewRect = CGRectMake(0, SCREEN_HEIGHT - 170, SCREEN_WIDTH, 120);
+        [UIView animateWithDuration:.2 animations:^{
+            _filtersView.frame = filtersViewRect;
         }];
     }
 }
@@ -125,14 +119,36 @@
 #pragma mark - 滤镜视图
 - (FiltersView *)filtersView {
     if (!_filtersView) {
-        _filtersView = [[FiltersView alloc] init];
+        _filtersView = [[FiltersView alloc] initWithFrame:CGRectMake(SCREEN_WIDTH, SCREEN_HEIGHT - 170, SCREEN_WIDTH, 120)];
     }
     return _filtersView;
 }
 
 #pragma mark - 使滤镜视图消失
 - (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event {
-    [self.filtersView removeFromSuperview];
+    CGRect filtersViewRect = _filtersView.frame;
+    filtersViewRect = CGRectMake(SCREEN_WIDTH, SCREEN_HEIGHT - 170, SCREEN_WIDTH, 120);
+    [UIView animateWithDuration:.2 animations:^{
+        _filtersView.frame = filtersViewRect;
+    }];
+}
+
+
+#pragma mark - 设置顶部导航栏
+- (void)setNavViewUI {
+    [self addBackButton:@"icon_back_white"];
+    [self addNextButton];
+    [self.nextBtn addTarget:self action:@selector(nextBtnClick) forControlEvents:(UIControlEventTouchUpInside)];
+    
+}
+
+#pragma mark 继续按钮的点击事件
+- (void)nextBtnClick {
+    ReleaseViewController * releaseVC = [[ReleaseViewController alloc] init];
+    releaseVC.locationArr = self.locationArr;
+    releaseVC.scenceView.imageView.image = self.filtersImageView.image;
+    [self.navigationController pushViewController:releaseVC animated:YES];
+    
 }
 
 #pragma mark - 接收消息通知
@@ -143,7 +159,6 @@
 
 - (void)dealloc {
     [[NSNotificationCenter defaultCenter] removeObserver:self name:@"fitlerName" object:nil];
-    
 }
 
 @end

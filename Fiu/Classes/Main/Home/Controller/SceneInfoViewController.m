@@ -255,14 +255,13 @@
 
 #pragma mark - 设置Nav
 - (void)setNavigationViewUI {
-    [[UIApplication sharedApplication] setStatusBarHidden:YES withAnimation:(UIStatusBarAnimationSlide)];
-    self.navigationController.navigationBar.frame = CGRectMake(0, 20, SCREEN_WIDTH, 44);
     self.delegate = self;
     [self addBarItemRightBarButton:@"" image:@"Share_Scene"];
     [self addNavLogo:@"Nav_Title"];
     [self navBarTransparent:YES];
     [self hiddenNavItem:NO];
-
+    [[UIApplication sharedApplication] setStatusBarHidden:YES withAnimation:(UIStatusBarAnimationSlide)];
+    self.navigationController.navigationBar.frame = CGRectMake(0, 20, SCREEN_WIDTH, 44);
 }
 
 //  隐藏Nav左右的按钮

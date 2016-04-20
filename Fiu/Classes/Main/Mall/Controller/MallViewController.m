@@ -100,6 +100,7 @@
             if (!cell) {
                 cell = [[MallMenuTableViewCell alloc] initWithStyle:(UITableViewCellStyleDefault) reuseIdentifier:mallMenuTableViewCellID];
             }
+            cell.nav = self.navigationController;
             return cell;
         }
         
