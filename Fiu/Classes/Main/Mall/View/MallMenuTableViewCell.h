@@ -11,6 +11,7 @@
 
 @interface MallMenuTableViewCell : UITableViewCell <UICollectionViewDelegate, UICollectionViewDataSource>
 
+@pro_strong UINavigationController      *   nav;
 @pro_strong UICollectionView            *   menuView;  //  菜单列表
 @pro_strong NSArray                     *   titleArr;
 

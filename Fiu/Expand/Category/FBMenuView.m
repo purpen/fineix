@@ -10,26 +10,19 @@
 
 static const NSInteger menuBtnTag = 324;
 
-@implementation FBMenuView
+
+@implementation FBMenuView 
 
 - (instancetype)initWithFrame:(CGRect)frame {
     self = [super initWithFrame:frame];
     if (self) {
         
         self.backgroundColor = [UIColor whiteColor];
-        [self setMenuViewUI];
+        self.btnMarr = [[NSMutableArray alloc] init];
+        [self addSubview:self.viewLine];
         
     }
     return self;
-}
-
-#pragma mark - 
-- (void)setMenuViewUI {
-    self.btnMarr = [[NSMutableArray alloc] init];
-    
-    [self addSubview:self.menuRollView];
-    
-    [self addSubview:self.viewLine];
 }
 
 #pragma mark - 滑动视图
@@ -73,6 +66,7 @@ static const NSInteger menuBtnTag = 324;
 #pragma mark - 获取菜单视图的宽度
 - (CGFloat)getMenuViewWidth:(NSArray *)widths {
     CGFloat menuBtnW = 0;
+    [self addSubview:self.menuRollView];
     
     for (NSUInteger idx = 0; idx < self.menuTitle.count; ++ idx) {
         UIButton * menuBtn = [[UIButton alloc] initWithFrame:CGRectMake(menuBtnW, 0, [widths[idx] floatValue], 44)];
@@ -124,7 +118,8 @@ static const NSInteger menuBtnTag = 324;
         CGFloat maxWidth = self.menuRollView.contentSize.width - self.menuRollView.bounds.size.width;
         if (pointX > maxWidth) {
             [self.menuRollView setContentOffset:CGPointMake(maxWidth, 0) animated:YES];
-        }else{
+       
+        } else {
             [self.menuRollView setContentOffset:CGPointMake(pointX, 0) animated:YES];
         }
         

@@ -103,8 +103,8 @@
 
 #pragma mark - 设置Nav
 - (void)setNavigationViewUI {
-    [self navBarTransparent:NO];
     [[UIApplication sharedApplication] setStatusBarHidden:NO withAnimation:(UIStatusBarAnimationSlide)];
+    [self navBarTransparent:NO];
     [self.navigationController.navigationBar addSubview:self.searchView];
     self.view.backgroundColor = [UIColor whiteColor];
 }

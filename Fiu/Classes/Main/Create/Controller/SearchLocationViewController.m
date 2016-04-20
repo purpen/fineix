@@ -39,14 +39,6 @@
     } else {
         [SVProgressHUD showInfoWithStatus:NSLocalizedString(@"openGPS", nil)];
     }
-    
-    
-//    if (([CLLocationManager locationServicesEnabled] && [CLLocationManager authorizationStatus] == kCLAuthorizationStatusAuthorizedWhenInUse) || [CLLocationManager authorizationStatus] == kCLAuthorizationStatusAuthorizedAlways) {
-//        
-//        
-//    } else {
-//        
-//    }
 }
 
 #pragma mark - 设置顶部导航栏

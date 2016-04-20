@@ -32,4 +32,6 @@
 
 - (void)updateMenuButtonData;
 
+- (void)updateMenuBtnState:(NSInteger)index;
+
 @end

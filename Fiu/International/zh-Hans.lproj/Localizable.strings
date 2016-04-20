@@ -31,6 +31,8 @@
 "locationVcTitle" = "位置";
 "addTagVcTitle" = "添加标签";
 "chooseSceneVcTitle" = "选择情境";
+"filterVcTitle" = "滤镜";
+"GoodsCategoryVcTitle" = "好货分类";
 
 //  提示信息
 "netError" = "网络连接错误";

@@ -42,11 +42,11 @@
 
 #pragma mark - 设置视图UI
 - (void)setUI {
-    self.menuTitle = @[@"全部", @"智能家居", @"3C数码", @"生活方式", @"家居日用", @"智能家居", @"3C数码", @"生活方式", @"家居日用"];
+    self.categoryTitleArr = @[@"全部", @"智能家居", @"3C数码", @"生活方式", @"家居日用", @"智能家居", @"3C数码", @"生活方式", @"家居日用"];
     
     [self.view addSubview:self.searchGoods];
     
-    [self.view addSubview:self.menuView];
+    [self.view addSubview:self.categoryMenuView];
 
 }
 
@@ -66,31 +66,20 @@
 }
 
 #pragma mark - 导航菜单视图
-- (HTHorizontalSelectionList *)menuView {
-    if (!_menuView) {
-        _menuView = [[HTHorizontalSelectionList alloc] initWithFrame:CGRectMake(0, 94, SCREEN_WIDTH, 44)];
-        [_menuView setTitleFont:[UIFont systemFontOfSize:14] forState:(UIControlStateNormal)];
-        [_menuView setTitleColor:[UIColor blackColor] forState:(UIControlStateNormal)];
-        [_menuView setTitleColor:[UIColor colorWithHexString:fineixColor alpha:1] forState:(UIControlStateSelected)];
-        _menuView.bottomTrimColor = [UIColor colorWithHexString:lineGrayColor alpha:1];
-        _menuView.selectionIndicatorColor = [UIColor colorWithHexString:fineixColor alpha:1];
-        _menuView.delegate = self;
-        _menuView.dataSource = self;
+- (FBMenuView *)categoryMenuView {
+    if (!_categoryMenuView) {
+        _categoryMenuView = [[FBMenuView alloc] initWithFrame:CGRectMake(0, 88, SCREEN_WIDTH, 44)];
+        _categoryMenuView.delegate = self;
+        _categoryMenuView.menuTitle = self.categoryTitleArr;
+        [_categoryMenuView updateMenuButtonData];
     }
-    return _menuView;
+    return _categoryMenuView;
 }
 
-- (NSInteger)numberOfItemsInSelectionList:(HTHorizontalSelectionList *)selectionList {
-    return self.menuTitle.count;
+#pragma mark - 点击导航
+- (void)menuItemSelectedWithIndex:(NSInteger)index {
+    NSLog(@"－－－－－－－－－－－－－－－－ 点击了 %zi", index);
 }
 
-- (NSString *)selectionList:(HTHorizontalSelectionList *)selectionList titleForItemWithIndex:(NSInteger)index {
-    return self.menuTitle[index];
-}
-
-#pragma mark - 点击分类导航按钮
-- (void)selectionList:(HTHorizontalSelectionList *)selectionList didSelectButtonWithIndex:(NSInteger)index {
-    NSLog(@"+++++++++++++++++++++++++++++++  %zi", index);
-}
 
 @end
