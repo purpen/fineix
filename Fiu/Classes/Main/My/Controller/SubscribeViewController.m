@@ -9,7 +9,7 @@
 #import "SubscribeViewController.h"
 #import "FiuSceneCollectionViewCell.h"
 
-@interface SubscribeViewController ()<FBNavigationBarItemsDelegate,UICollectionViewDelegate,UICollectionViewDataSource,UICollectionViewDelegateFlowLayout>
+@interface SubscribeViewController ()<FBNavigationBarItemsDelegate,UICollectionViewDelegate,UICollectionViewDataSource,UICollectionViewDelegateFlowLayout,UITableViewDelegate,UITableViewDataSource>
 
 @end
 
@@ -24,6 +24,17 @@
     self.delegate = self;
     //
     [self.view addSubview:self.myCollectionView];
+    //
+    [self.view addSubview:self.myTableView];
+}
+
+-(UITableView *)myTableView{
+    if (!_myTableView) {
+        _myTableView = [[UITableView alloc] initWithFrame:self.view.frame style:UITableViewStylePlain];
+        _myTableView.delegate = self;
+        _myTableView.dataSource = self;
+    }
+    return _myTableView;
 }
 
 -(UICollectionView *)myCollectionView{
