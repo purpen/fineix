@@ -8,6 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import "Fiu.h"
+#import <SVProgressHUD/SVProgressHUD.h>
 
 @interface FBAlertViewController : UIViewController
 
