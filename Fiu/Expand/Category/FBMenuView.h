@@ -26,7 +26,6 @@
 @pro_strong NSArray                 *   widthArr;       //  动态宽度
 @pro_strong UIButton                *   selectedBtn;
 @pro_strong UIButton                *   nowSelectedBtn;
-@pro_assign NSInteger                   nowIndex;
 
 @pro_weak id <FBMenuViewDelegate> delegate;
 

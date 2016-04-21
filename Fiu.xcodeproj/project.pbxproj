@@ -221,6 +221,8 @@
 		D8AEC7531CA8E3BB00A868B6 /* libstdc++.6.0.9.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 280045201C805CD7005F5C2E /* libstdc++.6.0.9.tbd */; };
 		D8AEC7541CA8E3C700A868B6 /* libsqlite3.0.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 2800451C1C805CBD005F5C2E /* libsqlite3.0.tbd */; };
 		D8B011071CC795F9008A63B7 /* GoodsCategoryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D8B011061CC795F9008A63B7 /* GoodsCategoryViewController.m */; };
+		D8B011161CC878A1008A63B7 /* GoodsCategoryView.m in Sources */ = {isa = PBXBuildFile; fileRef = D8B011151CC878A1008A63B7 /* GoodsCategoryView.m */; };
+		D8B011191CC8AD0A008A63B7 /* GoodsInfoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D8B011181CC8AD0A008A63B7 /* GoodsInfoViewController.m */; };
 		D8FDBFA21CC48F2700155675 /* LikeSceneView.m in Sources */ = {isa = PBXBuildFile; fileRef = D8FDBFA11CC48F2700155675 /* LikeSceneView.m */; };
 /* End PBXBuildFile section */
 
@@ -618,6 +620,10 @@
 		D89B5A991CB676C700DB9710 /* LikePeopleTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LikePeopleTableViewCell.m; sourceTree = "<group>"; };
 		D8B011051CC795F9008A63B7 /* GoodsCategoryViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GoodsCategoryViewController.h; sourceTree = "<group>"; };
 		D8B011061CC795F9008A63B7 /* GoodsCategoryViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GoodsCategoryViewController.m; sourceTree = "<group>"; };
+		D8B011141CC878A1008A63B7 /* GoodsCategoryView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GoodsCategoryView.h; sourceTree = "<group>"; };
+		D8B011151CC878A1008A63B7 /* GoodsCategoryView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GoodsCategoryView.m; sourceTree = "<group>"; };
+		D8B011171CC8AD0A008A63B7 /* GoodsInfoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GoodsInfoViewController.h; sourceTree = "<group>"; };
+		D8B011181CC8AD0A008A63B7 /* GoodsInfoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GoodsInfoViewController.m; sourceTree = "<group>"; };
 		D8FDBFA01CC48F2700155675 /* LikeSceneView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LikeSceneView.h; sourceTree = "<group>"; };
 		D8FDBFA11CC48F2700155675 /* LikeSceneView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LikeSceneView.m; sourceTree = "<group>"; };
 		E0438B4B24E3F747F761AF4C /* Pods-Fiu.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Fiu.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Fiu/Pods-Fiu.debug.xcconfig"; sourceTree = "<group>"; };
@@ -973,6 +979,8 @@
 				D8035FDA1CBDEB2F001920F9 /* MallMenuCollectionViewCell.m */,
 				D8035FDC1CBDF10B001920F9 /* MallMenuTableViewCell.h */,
 				D8035FDD1CBDF10B001920F9 /* MallMenuTableViewCell.m */,
+				D8B011141CC878A1008A63B7 /* GoodsCategoryView.h */,
+				D8B011151CC878A1008A63B7 /* GoodsCategoryView.m */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -1300,6 +1308,8 @@
 				D812807D1CAA8532007CF08B /* MallViewController.m */,
 				D8B011051CC795F9008A63B7 /* GoodsCategoryViewController.h */,
 				D8B011061CC795F9008A63B7 /* GoodsCategoryViewController.m */,
+				D8B011171CC8AD0A008A63B7 /* GoodsInfoViewController.h */,
+				D8B011181CC8AD0A008A63B7 /* GoodsInfoViewController.m */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -1858,6 +1868,7 @@
 				D86AFDEC1CBF84DB006F1602 /* SearchSceneTableViewCell.m in Sources */,
 				D812815E1CAA8532007CF08B /* main.m in Sources */,
 				D8035FC81CBD1021001920F9 /* FBMapLocatinViewController.m in Sources */,
+				D8B011191CC8AD0A008A63B7 /* GoodsInfoViewController.m in Sources */,
 				1FBE62701CC4E3C3009606F7 /* MyFansViewController.m in Sources */,
 				1FEF0B1A1CC0FC15006EF0C6 /* MyHomePageView.m in Sources */,
 				D81281171CAA8532007CF08B /* CreateViewController.m in Sources */,
@@ -1935,6 +1946,7 @@
 				D81281101CAA8532007CF08B /* AppDelegate.mm in Sources */,
 				D81281221CAA8532007CF08B /* AddUrlView.m in Sources */,
 				D8035FE41CBDFC16001920F9 /* FiuHeaderTableViewCell.m in Sources */,
+				D8B011161CC878A1008A63B7 /* GoodsCategoryView.m in Sources */,
 				D81281231CAA8532007CF08B /* CameraView.m in Sources */,
 				D812811F1CAA8532007CF08B /* FBFilters.m in Sources */,
 				1FEB71751CC88B5D00CF34F3 /* FindeFirendTwoModel.m in Sources */,

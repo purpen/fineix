@@ -33,6 +33,7 @@
 "chooseSceneVcTitle" = "选择情境";
 "filterVcTitle" = "滤镜";
 "GoodsCategoryVcTitle" = "好货分类";
+"GoodsInfoVcTitle" = "产品详情";
 
 //  提示信息
 "netError" = "网络连接错误";

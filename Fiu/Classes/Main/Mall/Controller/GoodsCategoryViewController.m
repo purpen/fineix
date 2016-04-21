@@ -22,9 +22,33 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.categoryTitleArr = @[@"3C数码", @"智能出行", @"健康周边", @"母婴产品", @"3C数码", @"智能出行", @"健康周边", @"母婴产品"];
+
+    [self setGoodsCategoryVcUI];
     
+}
+
+#pragma mark - 
+- (void)setGoodsCategoryVcUI {
     [self.view addSubview:self.categoryMenuView];
+    
+    [self.view addSubview:self.goodsCategoryView];
+}
+
+#pragma mark - 商品列表视图
+- (GoodsCategoryView *)goodsCategoryView {
+    if (!_goodsCategoryView) {
+        _goodsCategoryView = [[GoodsCategoryView alloc] initWithFrame:CGRectMake(0, 108, SCREEN_WIDTH, SCREEN_HEIGHT - 108)];
+        _goodsCategoryView.delegate = self;
+        _goodsCategoryView.nav = self.navigationController;
+        [_goodsCategoryView addGoodsCategoryTableView:self.categoryTitleArr];
+    }
+    return _goodsCategoryView;
+}
+
+#pragma mark - 滑动改变商品分类列表 
+- (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView {
+    NSInteger index = scrollView.contentOffset.x / SCREEN_WIDTH;
+    [_categoryMenuView updateMenuBtnState:index];
 }
 
 #pragma mark - 滑动导航栏
@@ -40,13 +64,19 @@
 
 #pragma mark - 点击导航
 - (void)menuItemSelectedWithIndex:(NSInteger)index {
-    NSLog(@"－－－－－－－－－－－－－－－－ 点击了 %zi", index);
+    [_goodsCategoryView changeContentOffSet:index];
 }
 
 #pragma mark - 设置Nav
 - (void)setNavigationViewUI {
     self.title = NSLocalizedString(@"GoodsCategoryVcTitle", nil);
     self.view.backgroundColor = [UIColor whiteColor];
+    [self addBarItemRightBarButton:@"" image:@"Nav_Car"];
+    self.delegate = self;
+}
+
+- (void)rightBarItemSelected {
+    NSLog(@"＊＊＊＊＊＊＊＊＊购物车");
 }
 
 @end
