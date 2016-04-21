@@ -92,7 +92,6 @@ static const NSInteger menuBtnTag = 324;
 #pragma mark - 点击导航按钮
 - (void)menuBtnClick:(UIButton *)button {
     self.nowSelectedBtn.selected = NO;
-    self.selectedBtn.selected = NO;
     button.selected = YES;
     self.selectedBtn = button;
     
@@ -106,11 +105,11 @@ static const NSInteger menuBtnTag = 324;
 
 #pragma mark - 更新导航栏的状态 
 - (void)updateMenuBtnState:(NSInteger)index {
-    self.nowIndex = index;
-    UIButton * btn = self.btnMarr[index];
-    self.nowSelectedBtn = btn;
     self.selectedBtn.selected = NO;
+    UIButton * btn = self.btnMarr[index];
     btn.selected = YES;
+    self.nowSelectedBtn = btn;
+    self.selectedBtn = self.nowSelectedBtn;
     
     //  改变导航视图的偏移量，判断使按钮保持居中显示
     if (btn.center.x > self.menuRollView.bounds.size.width/2) {

@@ -18,7 +18,7 @@
         self.selectionStyle = UITableViewCellSelectionStyleNone;
         self.backgroundColor = [UIColor whiteColor];
         
-        self.titleArr = @[@"3C数码", @"智能出行", @"健康周边", @"母婴产品", @"3C数码", @"智能出行", @"健康周边", @"母婴产品"];
+        self.titleArr = @[@"全部", @"智能出行", @"健康周边", @"母婴产品", @"3C数码", @"智能出行", @"健康周边", @"母婴产品"];
         [self addSubview:self.menuView];
     }
     return self;
@@ -30,7 +30,6 @@
         UICollectionViewFlowLayout * flowLayout = [[UICollectionViewFlowLayout alloc] init];
         flowLayout.itemSize = CGSizeMake(60, 105);
         flowLayout.sectionInset = UIEdgeInsetsMake(0, 10, 0, 10);
-//        flowLayout.minimumInteritemSpacing = 5.0;
         [flowLayout setScrollDirection:(UICollectionViewScrollDirectionHorizontal)];
         
         _menuView = [[UICollectionView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 105) collectionViewLayout:flowLayout];
@@ -60,8 +59,9 @@
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
     NSLog(@"打开商品分类 ＝＝＝＝＝＝＝＝ %zi", indexPath.row);
     GoodsCategoryViewController * goodsCategoryVC = [[GoodsCategoryViewController alloc] init];
-    goodsCategoryVC.categoryTitleArr = @[@"3C数码", @"智能出行", @"健康周边", @"母婴产品", @"3C数码", @"智能出行", @"健康周边", @"母婴产品"];
+    goodsCategoryVC.categoryTitleArr = self.titleArr;
     [goodsCategoryVC.categoryMenuView updateMenuBtnState:indexPath.row];
+    [goodsCategoryVC.goodsCategoryView changeContentOffSet:indexPath.row];
     [self.nav pushViewController:goodsCategoryVC animated:YES];
 }
 @end

@@ -22,9 +22,9 @@
 //  屏幕高
 #define SCREEN_WIDTH    [[UIScreen mainScreen] bounds].size.width
 //  宽度
-#define Bounds_width    self.view.bounds.size.width
+#define BOUNDS_WIDTH    self.bounds.size.width
 //  高度
-#define Bounds_height   self.view.bounds.size.height
+#define BOUNDS_HEIGHT   self.bounds.size.height
 //  banner
 #define Banner_height   180
 
