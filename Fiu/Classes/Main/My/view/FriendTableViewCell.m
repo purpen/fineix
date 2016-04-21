@@ -22,7 +22,7 @@
 }
 
 -(void)setUI{
-    self.headImageView.image = [UIImage imageNamed:@""];
+    self.headImageView.image = [UIImage imageNamed:@"user"];
     self.nameLbael.text = @"boc 747";
     self.deressLabel.text = @"北京 朝阳区";
 }
@@ -40,7 +40,7 @@
         [self.contentView addSubview:self.headImageView];
         [_headImageView mas_makeConstraints:^(MASConstraintMaker *make) {
             make.size.mas_equalTo(CGSizeMake(32/667.0*SCREEN_HEIGHT, 32/667.0*SCREEN_HEIGHT));
-            make.centerY.mas_equalTo(self.mas_centerY);
+            make.top.mas_equalTo(self.mas_top).with.offset(12);
             make.left.mas_equalTo(self.mas_left).with.offset(15/667.0*SCREEN_HEIGHT);
         }];
         
@@ -62,8 +62,8 @@
         [self.contentView addSubview:self.focusBtn];
         [_focusBtn mas_makeConstraints:^(MASConstraintMaker *make) {
             make.size.mas_equalTo(CGSizeMake(72/667.0*SCREEN_HEIGHT, 26/667.0*SCREEN_HEIGHT));
-            make.centerY.mas_equalTo(self.mas_centerY);
-            make.right.mas_equalTo(self.mas_right).with.offset(15/667.0*SCREEN_HEIGHT);
+            make.centerY.mas_equalTo(_headImageView.mas_centerY);
+            make.right.mas_equalTo(self.mas_right).with.offset(-15/667.0*SCREEN_HEIGHT);
         }];
         
         [self.contentView addSubview:self.imageCollectionView];
@@ -73,15 +73,37 @@
             make.top.mas_equalTo(_headImageView.mas_bottom).with.offset(11/667.0*SCREEN_HEIGHT);
             make.right.mas_equalTo(self.mas_right).with.offset(0);
         }];
+        
+        [self.contentView addSubview:self.deressLabel];
+        [_deressLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.centerY.mas_equalTo(_mapImageView.mas_centerY);
+            make.left.mas_equalTo(_mapImageView.mas_right).with.offset(2);
+            make.height.mas_equalTo(10);
+            make.width.mas_equalTo(200);
+        }];
     }
     return self;
+}
+
+-(UILabel *)deressLabel{
+    if (!_deressLabel) {
+        _deressLabel = [[UILabel alloc] init];
+        _deressLabel.font = [UIFont systemFontOfSize:9];
+        _deressLabel.textColor = [UIColor lightGrayColor];
+    }
+    return _deressLabel;
 }
 
 -(UICollectionView *)imageCollectionView{
     if (!_imageCollectionView) {
         UICollectionViewFlowLayout *layout = [[UICollectionViewFlowLayout alloc] init];
+        layout.itemSize = CGSizeMake((SCREEN_WIDTH-6)/3, 216/667.0*SCREEN_HEIGHT);
+        layout.sectionInset = UIEdgeInsetsMake(0, 0, 0, 0);
+        layout.minimumLineSpacing = 3;
         layout.scrollDirection = UICollectionViewScrollDirectionHorizontal;
         _imageCollectionView = [[UICollectionView alloc] initWithFrame:self.frame collectionViewLayout:layout];
+        _imageCollectionView.backgroundColor = [UIColor whiteColor];
+        _imageCollectionView.showsHorizontalScrollIndicator = NO;
         _imageCollectionView.delegate = self;
         _imageCollectionView.dataSource = self;
         [_imageCollectionView registerClass:[FriendCollectionViewCell class] forCellWithReuseIdentifier:@"FriendCollectionViewCell"];
@@ -91,6 +113,10 @@
 
 -(NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section{
     return 5;
+}
+
+-(NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView{
+    return 1;
 }
 
 -(UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath{

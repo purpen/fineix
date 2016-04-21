@@ -13,6 +13,7 @@
 
 -(instancetype)initWithFrame:(CGRect)frame{
     if (self = [super initWithFrame:frame]) {
+        self.backgroundColor = [UIColor redColor];
         [self addSubview:self.bgImageView];
     }
     return self;

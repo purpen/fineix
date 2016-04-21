@@ -38,6 +38,9 @@
     userInfo.birdCoin = self.birdCoin;
     userInfo.summary = self.summary;
     
+    userInfo.city = self.city;
+    userInfo.address = self.address;
+    
     dispatch_async(dispatch_get_global_queue(0, 0), ^{
         [userInfo saveOrUpdate];
     });
@@ -56,6 +59,8 @@
     self.levelDesc = @"";
     self.birdCoin = @0;
     self.summary = @"";
+    self.city = @"";
+    self.address = @"";
 }
 
 @end

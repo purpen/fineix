@@ -9,6 +9,8 @@
 #import "FindeFriendViewController.h"
 #import "FindeFriendTableViewCell.h"
 #import "FriendTableViewCell.h"
+#import "InvitationModel.h"
+#import "QRCodeScanViewController.h"
 
 @interface FindeFriendViewController ()<FBNavigationBarItemsDelegate,UITableViewDelegate,UITableViewDataSource>
 
@@ -32,6 +34,7 @@
         _myTbaleView = [[UITableView alloc] initWithFrame:self.view.frame style:UITableViewStyleGrouped];
         _myTbaleView.delegate = self;
         _myTbaleView.dataSource = self;
+        _myTbaleView.showsVerticalScrollIndicator = NO;
     }
     return _myTbaleView;
 }
@@ -48,6 +51,16 @@
     }
 }
 
+-(NSArray *)aryOne{
+    if (!_aryOne) {
+        InvitationModel *modelOne = [[InvitationModel alloc] initWithHeadStr:@"icon_wechat" :@"邀请微信好友" :@"分享给好友"];
+        InvitationModel *modelTwo = [[InvitationModel alloc] initWithHeadStr:@"icon_weibo" :@"连接微博" :@"分享给好友"];
+        InvitationModel *modelThree = [[InvitationModel alloc] initWithHeadStr:@"Circle + User" :@"连接通讯录" :@"关注你认识的好友"];
+        _aryOne = [NSArray arrayWithObjects:modelOne,modelTwo,modelThree, nil];
+    }
+    return _aryOne;
+}
+
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     if (indexPath.section == 0) {
         static NSString *id = @"cellOne";
@@ -55,7 +68,8 @@
         if (cell == nil) {
             cell = [[FindeFriendTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:id];
         }
-        [cell setUI];
+        InvitationModel *model = self.aryOne[indexPath.row];
+        [cell setUIWithModel:model];
         return cell;
     }else{
         static NSString *cellId = @"cellTwo";
@@ -63,6 +77,7 @@
         if (cell == nil) {
             cell = [[FriendTableViewCell alloc] init];
         }
+        
         [cell setUI];
         return cell;
     }
@@ -73,7 +88,7 @@
     if (indexPath.section == 0) {
         return 60/667.0*SCREEN_HEIGHT;
     }else{
-        return 542*0/5/667.0*SCREEN_HEIGHT;
+        return 542*0.5/667.0*SCREEN_HEIGHT;
     }
 }
 
@@ -81,7 +96,11 @@
     if (section == 0) {
         return 0.01;
     }
-    return 1;
+    return 0.5;
+}
+
+-(CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section{
+    return 5;
 }
 
 -(void)leftBarItemSelected{
@@ -90,6 +109,8 @@
 
 -(void)rightBarItemSelected{
     NSLog(@"扫一扫");
+    QRCodeScanViewController *vc = [[QRCodeScanViewController alloc] init];
+    [self.navigationController pushViewController:vc animated:YES];
 }
 
 - (void)didReceiveMemoryWarning {

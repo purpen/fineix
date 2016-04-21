@@ -11,5 +11,7 @@
 @interface FindeFriendViewController : FBViewController
 
 @property(nonatomic,strong) UITableView *myTbaleView;
+@property(nonatomic,strong) NSArray *aryOne;
+@property(nonatomic,strong) NSMutableArray *aryTwo;
 
 @end

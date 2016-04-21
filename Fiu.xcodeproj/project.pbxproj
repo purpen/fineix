@@ -34,6 +34,11 @@
 		1FBE626A1CC4CB72009606F7 /* MyPageFocusOnViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1FBE62691CC4CB72009606F7 /* MyPageFocusOnViewController.m */; };
 		1FBE626D1CC4D095009606F7 /* FocusOnTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 1FBE626C1CC4D095009606F7 /* FocusOnTableViewCell.m */; };
 		1FBE62701CC4E3C3009606F7 /* MyFansViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1FBE626F1CC4E3C3009606F7 /* MyFansViewController.m */; };
+		1FD7E6771CC8DFE400A69BDD /* MyQrCodeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1FD7E6761CC8DFE400A69BDD /* MyQrCodeViewController.m */; };
+		1FD7E67A1CC8E4F200A69BDD /* MyQrCodeView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1FD7E6791CC8E4F200A69BDD /* MyQrCodeView.m */; };
+		1FEB71721CC8802800CF34F3 /* InvitationModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 1FEB71711CC8802800CF34F3 /* InvitationModel.m */; };
+		1FEB71751CC88B5D00CF34F3 /* FindeFirendTwoModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 1FEB71741CC88B5D00CF34F3 /* FindeFirendTwoModel.m */; };
+		1FEB71781CC8A35A00CF34F3 /* QRCodeScanViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1FEB71771CC8A35A00CF34F3 /* QRCodeScanViewController.m */; };
 		1FEF0B071CC0FC15006EF0C6 /* AboutFirebirdViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1FEF0AD41CC0FC15006EF0C6 /* AboutFirebirdViewController.m */; };
 		1FEF0B081CC0FC15006EF0C6 /* FeedbackViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1FEF0AD61CC0FC15006EF0C6 /* FeedbackViewController.m */; };
 		1FEF0B0C1CC0FC15006EF0C6 /* MyMessageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1FEF0ADE1CC0FC15006EF0C6 /* MyMessageViewController.m */; };
@@ -269,6 +274,16 @@
 		1FBE626C1CC4D095009606F7 /* FocusOnTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FocusOnTableViewCell.m; sourceTree = "<group>"; };
 		1FBE626E1CC4E3C3009606F7 /* MyFansViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyFansViewController.h; sourceTree = "<group>"; };
 		1FBE626F1CC4E3C3009606F7 /* MyFansViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyFansViewController.m; sourceTree = "<group>"; };
+		1FD7E6751CC8DFE400A69BDD /* MyQrCodeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyQrCodeViewController.h; sourceTree = "<group>"; };
+		1FD7E6761CC8DFE400A69BDD /* MyQrCodeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyQrCodeViewController.m; sourceTree = "<group>"; };
+		1FD7E6781CC8E4F200A69BDD /* MyQrCodeView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyQrCodeView.h; sourceTree = "<group>"; };
+		1FD7E6791CC8E4F200A69BDD /* MyQrCodeView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyQrCodeView.m; sourceTree = "<group>"; };
+		1FEB71701CC8802800CF34F3 /* InvitationModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InvitationModel.h; sourceTree = "<group>"; };
+		1FEB71711CC8802800CF34F3 /* InvitationModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InvitationModel.m; sourceTree = "<group>"; };
+		1FEB71731CC88B5D00CF34F3 /* FindeFirendTwoModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FindeFirendTwoModel.h; sourceTree = "<group>"; };
+		1FEB71741CC88B5D00CF34F3 /* FindeFirendTwoModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FindeFirendTwoModel.m; sourceTree = "<group>"; };
+		1FEB71761CC8A35A00CF34F3 /* QRCodeScanViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QRCodeScanViewController.h; sourceTree = "<group>"; };
+		1FEB71771CC8A35A00CF34F3 /* QRCodeScanViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QRCodeScanViewController.m; sourceTree = "<group>"; };
 		1FEF0AD31CC0FC15006EF0C6 /* AboutFirebirdViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AboutFirebirdViewController.h; sourceTree = "<group>"; };
 		1FEF0AD41CC0FC15006EF0C6 /* AboutFirebirdViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AboutFirebirdViewController.m; sourceTree = "<group>"; };
 		1FEF0AD51CC0FC15006EF0C6 /* FeedbackViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FeedbackViewController.h; sourceTree = "<group>"; };
@@ -738,6 +753,10 @@
 				1F51E8B21CC6338D00017839 /* PraisedViewController.m */,
 				1F07A64E1CC78E7600CF225F /* FindeFriendViewController.h */,
 				1F07A64F1CC78E7600CF225F /* FindeFriendViewController.m */,
+				1FEB71761CC8A35A00CF34F3 /* QRCodeScanViewController.h */,
+				1FEB71771CC8A35A00CF34F3 /* QRCodeScanViewController.m */,
+				1FD7E6751CC8DFE400A69BDD /* MyQrCodeViewController.h */,
+				1FD7E6761CC8DFE400A69BDD /* MyQrCodeViewController.m */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -747,6 +766,10 @@
 			children = (
 				1FEF0AEA1CC0FC15006EF0C6 /* OrderListModel.h */,
 				1FEF0AEB1CC0FC15006EF0C6 /* OrderListModel.m */,
+				1FEB71701CC8802800CF34F3 /* InvitationModel.h */,
+				1FEB71711CC8802800CF34F3 /* InvitationModel.m */,
+				1FEB71731CC88B5D00CF34F3 /* FindeFirendTwoModel.h */,
+				1FEB71741CC88B5D00CF34F3 /* FindeFirendTwoModel.m */,
 			);
 			path = model;
 			sourceTree = "<group>";
@@ -793,6 +816,8 @@
 				1F07A6551CC79BE300CF225F /* FriendTableViewCell.m */,
 				1F07A6571CC7A45300CF225F /* FriendCollectionViewCell.h */,
 				1F07A6581CC7A45300CF225F /* FriendCollectionViewCell.m */,
+				1FD7E6781CC8E4F200A69BDD /* MyQrCodeView.h */,
+				1FD7E6791CC8E4F200A69BDD /* MyQrCodeView.m */,
 			);
 			path = view;
 			sourceTree = "<group>";
@@ -1780,6 +1805,7 @@
 				D8035F2C1CB77AAA001920F9 /* ContentAndTagTableViewCell.m in Sources */,
 				D81281531CAA8532007CF08B /* FBAPI.m in Sources */,
 				1F07A6471CC77BBF00CF225F /* OtherCollectionViewCell.m in Sources */,
+				1FD7E6771CC8DFE400A69BDD /* MyQrCodeViewController.m in Sources */,
 				1FEF0B201CC0FC15006EF0C6 /* ShareView.m in Sources */,
 				D8035FDB1CBDEB2F001920F9 /* MallMenuCollectionViewCell.m in Sources */,
 				D803604F1CBF376B001920F9 /* UserInfo.m in Sources */,
@@ -1808,6 +1834,7 @@
 				1FEF0B0D1CC0FC15006EF0C6 /* MyOrdersViewController.m in Sources */,
 				D80360401CBF376B001920F9 /* FBLoginViewController.m in Sources */,
 				D87B69D81CC726E800199EFE /* AllSceneViewController.m in Sources */,
+				1FD7E67A1CC8E4F200A69BDD /* MyQrCodeView.m in Sources */,
 				D8035FE11CBDFC07001920F9 /* FiuTagTableViewCell.m in Sources */,
 				D89B5A9A1CB676C700DB9710 /* LikePeopleTableViewCell.m in Sources */,
 				D812812D1CAA8532007CF08B /* ScenceAddMoreView.m in Sources */,
@@ -1888,6 +1915,7 @@
 				1FEF0B1B1CC0FC15006EF0C6 /* MyHomeV.m in Sources */,
 				D81281201CAA8532007CF08B /* FBPhoto.m in Sources */,
 				D803605C1CBF376B001920F9 /* SubmitView.m in Sources */,
+				1FEB71781CC8A35A00CF34F3 /* QRCodeScanViewController.m in Sources */,
 				D8035FD61CBD1035001920F9 /* FiuSceneCollectionViewCell.m in Sources */,
 				D803605B1CBF376B001920F9 /* SignupView.m in Sources */,
 				D87B69C01CC726BA00199EFE /* GroupHeaderView.m in Sources */,
@@ -1909,6 +1937,8 @@
 				D8035FE41CBDFC16001920F9 /* FiuHeaderTableViewCell.m in Sources */,
 				D81281231CAA8532007CF08B /* CameraView.m in Sources */,
 				D812811F1CAA8532007CF08B /* FBFilters.m in Sources */,
+				1FEB71751CC88B5D00CF34F3 /* FindeFirendTwoModel.m in Sources */,
+				1FEB71721CC8802800CF34F3 /* InvitationModel.m in Sources */,
 				D81281271CAA8532007CF08B /* FBPictureCollectionViewCell.m in Sources */,
 				1F3C0A7B1CBF682500B84FEB /* ImprovePersonalDataViewController.m in Sources */,
 				D8035F3B1CB784B3001920F9 /* UILable+Frame.m in Sources */,

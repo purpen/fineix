@@ -24,6 +24,8 @@
 @property (nonatomic, strong) NSNumber * birdCoin;
 @property (nonatomic, copy) NSString * summary;
 @property (nonatomic, assign) BOOL whetherFocusOn;
+@property(nonatomic,copy) NSString *city;
+@property(nonatomic,copy) NSString *address;
 
 - (void)updateUserInfoEntity;
 

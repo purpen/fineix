@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+@class InvitationModel;
 
 @interface FindeFriendTableViewCell : UITableViewCell
 
@@ -15,6 +16,6 @@
 @property(nonatomic,strong) UILabel *sumLabel;
 @property(nonatomic,strong) UIImageView *goImage;
 
--(void)setUI;
+-(void)setUIWithModel:(InvitationModel*)model;
 
 @end

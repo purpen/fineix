@@ -8,6 +8,7 @@
 
 #import "FindeFriendTableViewCell.h"
 #import "Fiu.h"
+#import "InvitationModel.h"
 
 @implementation FindeFriendTableViewCell
 
@@ -22,10 +23,10 @@
     // Configure the view for the selected state
 }
 
--(void)setUI{
-    self.headImage.image = [UIImage imageNamed:@""];
-    self.nameLabel.text = @"邀请微信好友";
-    self.sumLabel.text = @"分享给好友";
+-(void)setUIWithModel:(InvitationModel *)model{
+    self.headImage.image = [UIImage imageNamed:model.headImageStr];
+    self.nameLabel.text = model.titleStr;
+    self.sumLabel.text = model.sumStr;
 }
 
 -(instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier{

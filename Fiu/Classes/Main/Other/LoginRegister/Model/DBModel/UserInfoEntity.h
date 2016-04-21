@@ -24,6 +24,8 @@
 @property (nonatomic, copy) NSString * levelDesc;
 @property (nonatomic, strong) NSNumber * birdCoin;
 @property (nonatomic, copy) NSString * summary;
+@property(nonatomic,copy) NSString *city;
+@property(nonatomic,copy) NSString *address;
 
 + (instancetype)defaultUserInfoEntity;
 - (void)updateUserInfo;

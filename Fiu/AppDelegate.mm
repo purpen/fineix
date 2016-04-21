@@ -108,7 +108,7 @@ NSString *const determineLogin = @"/auth/check_login";
     //model属性名与字典key名映射
     [UserInfo mj_setupReplacedKeyFromPropertyName:^NSDictionary *{
         return @{
-                 @"userId" : @"id",
+                 @"userId" : @"_id",
                  @"firstLogin" : @"first_login",
                  @"mediumAvatarUrl" : @"medium_avatar_url",
                  @"trueNickname": @"true_nickname",
