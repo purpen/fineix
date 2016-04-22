@@ -17,6 +17,7 @@
 @property(nonatomic,strong) UILabel *userLevelLabel;//用户等级文字
 @property(nonatomic,strong) UILabel *userLevelBottomLabel;//用户等级下面的
 @property(nonatomic,strong) UIButton *backBtn;
+@property(nonatomic,strong) UIButton *editBtn;
 
 - (void)setUI;
 

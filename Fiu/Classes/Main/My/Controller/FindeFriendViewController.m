@@ -103,6 +103,18 @@
     return 5;
 }
 
+-(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+    if (indexPath.section == 0) {
+        if (indexPath.row == 0) {
+            //微信
+        }else if (indexPath.row == 1){
+            //weibo
+        }else if (indexPath.row == 2){
+            //通讯录
+        }
+    }
+}
+
 -(void)leftBarItemSelected{
     [self.navigationController popViewControllerAnimated:YES];
 }

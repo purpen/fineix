@@ -10,6 +10,9 @@
 #import <CoreImage/CoreImage.h>
 #import "Fiu.h"
 #import "MyQrCodeView.h"
+#import "FBSheetViewController.h"
+#import "SVProgressHUD.h"
+#import "QRCodeScanViewController.h"
 
 @interface MyQrCodeViewController ()<FBNavigationBarItemsDelegate>
 
@@ -90,6 +93,41 @@
 
 -(void)rightBarItemSelected{
     NSLog(@"更多");
+    FBSheetViewController *sheetVC = [[FBSheetViewController alloc] init];
+    sheetVC.modalPresentationStyle = UIModalPresentationOverCurrentContext;
+    [self presentViewController:sheetVC animated:NO completion:nil];
+    [sheetVC initFBSheetVCWithNameAry:[NSArray arrayWithObjects:@"保存图片",@"扫描二维码",@"取消", nil]];
+    [((UIButton*)sheetVC.sheetView.subviews[2]) addTarget:self action:@selector(cancelBtn:) forControlEvents:UIControlEventTouchUpInside];
+    [((UIButton*)sheetVC.sheetView.subviews[0]) addTarget:self action:@selector(savePicture:) forControlEvents:UIControlEventTouchUpInside];
+    [((UIButton*)sheetVC.sheetView.subviews[1]) addTarget:self action:@selector(scanQrCode:) forControlEvents:UIControlEventTouchUpInside];
+}
+
+-(void)cancelBtn:(UIButton*)sender{
+    [self dismissViewControllerAnimated:NO completion:nil];
+}
+
+#pragma mark -扫描二维码
+-(void)scanQrCode:(UIButton*)sender{
+//    QRCodeScanViewController *scanVC = [[QRCodeScanViewController alloc] init];
+//    [self .navigationController pushViewController:scanVC animated:YES];
+    [self dismissViewControllerAnimated:NO completion:nil];
+    [self.navigationController popViewControllerAnimated:YES];
+}
+
+#pragma mark - 保存图片
+-(void)savePicture:(UIButton*)sender{
+    NSLog(@"保存图片");
+    UIImageWriteToSavedPhotosAlbum(self.qrCodeView.qrCodeImageView.image, self, @selector(imageSavedToPhotosAlbum:didFinishSavingWithError:contextInfo:), nil);
+    [self dismissViewControllerAnimated:NO completion:nil];
+    
+}
+
+-(void)imageSavedToPhotosAlbum:(UIImage*)image didFinishSavingWithError:(NSError*)error contextInfo:(void*)contextInfo{
+    if (!error) {
+        [SVProgressHUD showSuccessWithStatus:@"保存至相册"];
+    }else{
+        [SVProgressHUD showErrorWithStatus:[error description]];
+    }
 }
 
 /*
