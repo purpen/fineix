@@ -160,6 +160,7 @@
 
 #pragma mark - 设置Nav
 - (void)setNavigationViewUI {
+    [self navBarTransparent:NO];
     self.delegate = self;
     [self addBarItemLeftBarButton:@"" image:@"Nav_Search"];
     [self addBarItemRightBarButton:@"" image:@"Nav_Car"];

@@ -31,15 +31,15 @@
 - (void)setGoodsCategoryVcUI {
     [self.view addSubview:self.categoryMenuView];
     
+    self.goodsCategoryView.nav = self.navigationController;
     [self.view addSubview:self.goodsCategoryView];
 }
 
 #pragma mark - 商品列表视图
 - (GoodsCategoryView *)goodsCategoryView {
     if (!_goodsCategoryView) {
-        _goodsCategoryView = [[GoodsCategoryView alloc] initWithFrame:CGRectMake(0, 108, SCREEN_WIDTH, SCREEN_HEIGHT - 108)];
+        _goodsCategoryView = [[GoodsCategoryView alloc] initWithFrame:CGRectMake(0, 44, SCREEN_WIDTH, SCREEN_HEIGHT - 108)];
         _goodsCategoryView.delegate = self;
-        _goodsCategoryView.nav = self.navigationController;
         [_goodsCategoryView addGoodsCategoryTableView:self.categoryTitleArr];
     }
     return _goodsCategoryView;
@@ -54,7 +54,7 @@
 #pragma mark - 滑动导航栏
 - (FBMenuView *)categoryMenuView {
     if (!_categoryMenuView) {
-        _categoryMenuView = [[FBMenuView alloc] initWithFrame:CGRectMake(0, 64, SCREEN_WIDTH, 44)];
+        _categoryMenuView = [[FBMenuView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 44)];
         _categoryMenuView.delegate = self;
         _categoryMenuView.menuTitle = self.categoryTitleArr;
         [_categoryMenuView updateMenuButtonData];

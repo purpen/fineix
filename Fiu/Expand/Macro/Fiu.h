@@ -26,7 +26,7 @@
 //  高度
 #define BOUNDS_HEIGHT   self.bounds.size.height
 //  banner
-#define Banner_height   180
+#define Banner_height   SCREEN_WIDTH * 0.48
 
 
 
@@ -39,6 +39,7 @@
 #define lineGrayColor           @"#F0F0F1"
 #define tabBarTitle             @"#999999"
 #define titleColor              @"#666666"
+#define fiuRedColor             @"#FF3366"
 
 #undef  字体大小
 //  页面标题
@@ -49,6 +50,8 @@
 #define Font_GoodsTitle         14
 //  商品价格
 #define Font_GoodsPrice         16
+//  商品详情标题
+#define Font_InfoTitle          16
 //  标签
 #define Font_Tag                12
 //  组标题

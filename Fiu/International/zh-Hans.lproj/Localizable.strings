@@ -65,3 +65,11 @@
 "enterCorrectPhoneNumber" = "请输入正确的手机号";
 "enterVerificationCode" = "请输入验证码";
 
+//  商品详情
+"userSceneTitle" = "应用的场景";
+"recommendGoodsTitle" = "相关推荐";
+"lookMore" = "查看更多";
+"addGoodsCar" = "加入购物车";
+"buyingGoods" = "立即购买";
+"goBuyGoods" = "去购买";
+

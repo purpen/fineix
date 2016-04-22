@@ -223,6 +223,13 @@
 		D8B011071CC795F9008A63B7 /* GoodsCategoryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D8B011061CC795F9008A63B7 /* GoodsCategoryViewController.m */; };
 		D8B011161CC878A1008A63B7 /* GoodsCategoryView.m in Sources */ = {isa = PBXBuildFile; fileRef = D8B011151CC878A1008A63B7 /* GoodsCategoryView.m */; };
 		D8B011191CC8AD0A008A63B7 /* GoodsInfoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D8B011181CC8AD0A008A63B7 /* GoodsInfoViewController.m */; };
+		D8B0111C1CC9CDAD008A63B7 /* GoodsTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D8B0111B1CC9CDAD008A63B7 /* GoodsTableViewCell.m */; };
+		D8B011221CCA21DF008A63B7 /* InfoTitleTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D8B011211CCA21DF008A63B7 /* InfoTitleTableViewCell.m */; };
+		D8B011251CCA2205008A63B7 /* InfoBrandTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D8B011241CCA2205008A63B7 /* InfoBrandTableViewCell.m */; };
+		D8B011281CCA225F008A63B7 /* InfoGoodsHighlightsTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D8B011271CCA225F008A63B7 /* InfoGoodsHighlightsTableViewCell.m */; };
+		D8B0112B1CCA228A008A63B7 /* InfoUseSceneTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D8B0112A1CCA2289008A63B7 /* InfoUseSceneTableViewCell.m */; };
+		D8B0112E1CCA22BF008A63B7 /* InfoRecommendTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D8B0112D1CCA22BF008A63B7 /* InfoRecommendTableViewCell.m */; };
+		D8B011341CCA3C95008A63B7 /* RecommendGoodsCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D8B011331CCA3C95008A63B7 /* RecommendGoodsCollectionViewCell.m */; };
 		D8FDBFA21CC48F2700155675 /* LikeSceneView.m in Sources */ = {isa = PBXBuildFile; fileRef = D8FDBFA11CC48F2700155675 /* LikeSceneView.m */; };
 /* End PBXBuildFile section */
 
@@ -624,6 +631,20 @@
 		D8B011151CC878A1008A63B7 /* GoodsCategoryView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GoodsCategoryView.m; sourceTree = "<group>"; };
 		D8B011171CC8AD0A008A63B7 /* GoodsInfoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GoodsInfoViewController.h; sourceTree = "<group>"; };
 		D8B011181CC8AD0A008A63B7 /* GoodsInfoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GoodsInfoViewController.m; sourceTree = "<group>"; };
+		D8B0111A1CC9CDAD008A63B7 /* GoodsTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GoodsTableViewCell.h; sourceTree = "<group>"; };
+		D8B0111B1CC9CDAD008A63B7 /* GoodsTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GoodsTableViewCell.m; sourceTree = "<group>"; };
+		D8B011201CCA21DF008A63B7 /* InfoTitleTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InfoTitleTableViewCell.h; sourceTree = "<group>"; };
+		D8B011211CCA21DF008A63B7 /* InfoTitleTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InfoTitleTableViewCell.m; sourceTree = "<group>"; };
+		D8B011231CCA2205008A63B7 /* InfoBrandTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InfoBrandTableViewCell.h; sourceTree = "<group>"; };
+		D8B011241CCA2205008A63B7 /* InfoBrandTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InfoBrandTableViewCell.m; sourceTree = "<group>"; };
+		D8B011261CCA225F008A63B7 /* InfoGoodsHighlightsTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InfoGoodsHighlightsTableViewCell.h; sourceTree = "<group>"; };
+		D8B011271CCA225F008A63B7 /* InfoGoodsHighlightsTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InfoGoodsHighlightsTableViewCell.m; sourceTree = "<group>"; };
+		D8B011291CCA2289008A63B7 /* InfoUseSceneTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InfoUseSceneTableViewCell.h; sourceTree = "<group>"; };
+		D8B0112A1CCA2289008A63B7 /* InfoUseSceneTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InfoUseSceneTableViewCell.m; sourceTree = "<group>"; };
+		D8B0112C1CCA22BF008A63B7 /* InfoRecommendTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InfoRecommendTableViewCell.h; sourceTree = "<group>"; };
+		D8B0112D1CCA22BF008A63B7 /* InfoRecommendTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InfoRecommendTableViewCell.m; sourceTree = "<group>"; };
+		D8B011321CCA3C95008A63B7 /* RecommendGoodsCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RecommendGoodsCollectionViewCell.h; sourceTree = "<group>"; };
+		D8B011331CCA3C95008A63B7 /* RecommendGoodsCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RecommendGoodsCollectionViewCell.m; sourceTree = "<group>"; };
 		D8FDBFA01CC48F2700155675 /* LikeSceneView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LikeSceneView.h; sourceTree = "<group>"; };
 		D8FDBFA11CC48F2700155675 /* LikeSceneView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LikeSceneView.m; sourceTree = "<group>"; };
 		E0438B4B24E3F747F761AF4C /* Pods-Fiu.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Fiu.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Fiu/Pods-Fiu.debug.xcconfig"; sourceTree = "<group>"; };
@@ -979,8 +1000,22 @@
 				D8035FDA1CBDEB2F001920F9 /* MallMenuCollectionViewCell.m */,
 				D8035FDC1CBDF10B001920F9 /* MallMenuTableViewCell.h */,
 				D8035FDD1CBDF10B001920F9 /* MallMenuTableViewCell.m */,
+				D8B0111A1CC9CDAD008A63B7 /* GoodsTableViewCell.h */,
+				D8B0111B1CC9CDAD008A63B7 /* GoodsTableViewCell.m */,
 				D8B011141CC878A1008A63B7 /* GoodsCategoryView.h */,
 				D8B011151CC878A1008A63B7 /* GoodsCategoryView.m */,
+				D8B011201CCA21DF008A63B7 /* InfoTitleTableViewCell.h */,
+				D8B011211CCA21DF008A63B7 /* InfoTitleTableViewCell.m */,
+				D8B011231CCA2205008A63B7 /* InfoBrandTableViewCell.h */,
+				D8B011241CCA2205008A63B7 /* InfoBrandTableViewCell.m */,
+				D8B011261CCA225F008A63B7 /* InfoGoodsHighlightsTableViewCell.h */,
+				D8B011271CCA225F008A63B7 /* InfoGoodsHighlightsTableViewCell.m */,
+				D8B011291CCA2289008A63B7 /* InfoUseSceneTableViewCell.h */,
+				D8B0112A1CCA2289008A63B7 /* InfoUseSceneTableViewCell.m */,
+				D8B0112C1CCA22BF008A63B7 /* InfoRecommendTableViewCell.h */,
+				D8B0112D1CCA22BF008A63B7 /* InfoRecommendTableViewCell.m */,
+				D8B011321CCA3C95008A63B7 /* RecommendGoodsCollectionViewCell.h */,
+				D8B011331CCA3C95008A63B7 /* RecommendGoodsCollectionViewCell.m */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -1808,11 +1843,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				D81281581CAA8532007CF08B /* UIColor+Extension.m in Sources */,
+				D8B011251CCA2205008A63B7 /* InfoBrandTableViewCell.m in Sources */,
 				1FEF0B161CC0FC15006EF0C6 /* BottomView.m in Sources */,
 				D80360621CBF41A3001920F9 /* SearchMenuView.m in Sources */,
 				D81281311CAA8532007CF08B /* HomeViewController.m in Sources */,
 				D87B69D31CC726D500199EFE /* CommentViewController.m in Sources */,
 				D8035F2C1CB77AAA001920F9 /* ContentAndTagTableViewCell.m in Sources */,
+				D8B0111C1CC9CDAD008A63B7 /* GoodsTableViewCell.m in Sources */,
 				D81281531CAA8532007CF08B /* FBAPI.m in Sources */,
 				1F07A6471CC77BBF00CF225F /* OtherCollectionViewCell.m in Sources */,
 				1FD7E6771CC8DFE400A69BDD /* MyQrCodeViewController.m in Sources */,
@@ -1868,6 +1905,7 @@
 				D86AFDEC1CBF84DB006F1602 /* SearchSceneTableViewCell.m in Sources */,
 				D812815E1CAA8532007CF08B /* main.m in Sources */,
 				D8035FC81CBD1021001920F9 /* FBMapLocatinViewController.m in Sources */,
+				D8B011221CCA21DF008A63B7 /* InfoTitleTableViewCell.m in Sources */,
 				D8B011191CC8AD0A008A63B7 /* GoodsInfoViewController.m in Sources */,
 				1FBE62701CC4E3C3009606F7 /* MyFansViewController.m in Sources */,
 				1FEF0B1A1CC0FC15006EF0C6 /* MyHomePageView.m in Sources */,
@@ -1876,6 +1914,7 @@
 				1F51E8A41CC5C9DE00017839 /* MyFansActionSheetViewController.m in Sources */,
 				D89B5A8E1CB6284A00DB9710 /* SceneInfoViewController.m in Sources */,
 				D812812A1CAA8532007CF08B /* PhotoAlbumsTableViewCell.m in Sources */,
+				D8B0112E1CCA22BF008A63B7 /* InfoRecommendTableViewCell.m in Sources */,
 				D8035FDE1CBDF10B001920F9 /* MallMenuTableViewCell.m in Sources */,
 				D86AFDF21CC0BBC3006F1602 /* FBSearchView.m in Sources */,
 				D81281241CAA8532007CF08B /* CropImageView.m in Sources */,
@@ -1905,6 +1944,7 @@
 				D81281671CAA8532007CF08B /* JKDBModel.m in Sources */,
 				D81281291CAA8532007CF08B /* FiltersView.m in Sources */,
 				D89B5A941CB6580600DB9710 /* UserInfoTableViewCell.m in Sources */,
+				D8B011341CCA3C95008A63B7 /* RecommendGoodsCollectionViewCell.m in Sources */,
 				D812812E1CAA8532007CF08B /* ScenceMessageView.m in Sources */,
 				D81281181CAA8532007CF08B /* CropImageViewController.m in Sources */,
 				D80360501CBF376B001920F9 /* UserInfoEntity.m in Sources */,
@@ -1940,9 +1980,11 @@
 				D812811A1CAA8532007CF08B /* MarkGoodsViewController.m in Sources */,
 				D80360411CBF376B001920F9 /* FBSignupViewController.m in Sources */,
 				D87B69D11CC726D500199EFE /* FBAlertViewController.m in Sources */,
+				D8B011281CCA225F008A63B7 /* InfoGoodsHighlightsTableViewCell.m in Sources */,
 				D8035F2F1CB77D0C001920F9 /* UIImage+Helper.m in Sources */,
 				D8035FD51CBD1035001920F9 /* FiuSceneTableViewCell.m in Sources */,
 				1FEF0B1E1CC0FC15006EF0C6 /* OrderInfoCell.m in Sources */,
+				D8B0112B1CCA228A008A63B7 /* InfoUseSceneTableViewCell.m in Sources */,
 				D81281101CAA8532007CF08B /* AppDelegate.mm in Sources */,
 				D81281221CAA8532007CF08B /* AddUrlView.m in Sources */,
 				D8035FE41CBDFC16001920F9 /* FiuHeaderTableViewCell.m in Sources */,

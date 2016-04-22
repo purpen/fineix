@@ -16,7 +16,7 @@
         
         [self addSubview:self.rollImageView];
         [_rollImageView mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.size.mas_equalTo(CGSizeMake(SCREEN_WIDTH, 180));
+            make.size.mas_equalTo(CGSizeMake(SCREEN_WIDTH, SCREEN_WIDTH * 0.48));
             make.top.equalTo(self.mas_top).with.offset(0);
             make.left.equalTo(self.mas_left).with.offset(0);
             make.centerY.equalTo(self);
@@ -36,7 +36,7 @@
 - (SDCycleScrollView *)rollImageView {
     if (!_rollImageView) {
         _rollImageView = [[SDCycleScrollView alloc] init];
-        _rollImageView.autoScrollTimeInterval = 2;
+        _rollImageView.autoScrollTimeInterval = 3;
         _rollImageView.pageControlAliment = SDCycleScrollViewPageContolAlimentCenter;
         _rollImageView.pageControlStyle = SDCycleScrollViewPageContolStyleClassic;
 //        _rollImageView.placeholderImage = [UIImage imageNamed:@"special"];
