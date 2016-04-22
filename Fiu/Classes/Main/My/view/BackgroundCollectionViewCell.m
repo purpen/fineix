@@ -51,6 +51,13 @@
             make.left.mas_equalTo(_bgImageView.mas_left).with.offset(16);
         }];
         
+        [_bgImageView addSubview:self.editBtn];
+        [_editBtn mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.size.mas_equalTo(CGSizeMake(30, 18));
+            make.top.mas_equalTo(_bgImageView.mas_top).with.offset(35);
+            make.right.mas_equalTo(_bgImageView.mas_right).with.offset(-16);
+        }];
+        
         [_bgImageView addSubview:self.userProfile];
         [_userProfile mas_makeConstraints:^(MASConstraintMaker *make) {
             make.size.mas_equalTo(CGSizeMake(SCREEN_WIDTH, 12));
@@ -73,6 +80,17 @@
         }];
     }
     return _bgImageView;
+}
+
+-(UIButton *)editBtn{
+    if (!_editBtn) {
+        _editBtn = [[UIButton alloc] init];
+        _editBtn.userInteractionEnabled = YES;
+        _editBtn.clipsToBounds = YES;
+        _editBtn.autoresizingMask = UIViewAutoresizingFlexibleBottomMargin;
+        [_editBtn setImage:[UIImage imageNamed:@"editData"] forState:UIControlStateNormal];
+    }
+    return _editBtn;
 }
 
 -(UIButton *)backBtn{

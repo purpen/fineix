@@ -47,7 +47,6 @@
     self.navigationItem.title = @"扫一扫";
     self.delegate = self;
     [self addBarItemLeftBarButton:nil image:@"icon_back"];
-    [self addBarItemRightBarButton:nil image:@"icon_ios_more_black"];
 }
 
 -(void)viewWillAppear:(BOOL)animated{
@@ -218,9 +217,6 @@
     [_session stopRunning];
 }
 
--(void)rightBarItemSelected{
-    NSLog(@"更多");
-}
 
 #pragma mark -AVCaptureMetadataOutputObjectsDelegate
 -(void)captureOutput:(AVCaptureOutput *)captureOutput didOutputMetadataObjects:(NSArray *)metadataObjects fromConnection:(AVCaptureConnection *)connection{

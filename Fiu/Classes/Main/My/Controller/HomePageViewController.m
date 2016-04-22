@@ -16,6 +16,7 @@
 #import "AllSceneCollectionViewCell.h"
 #import "FBSheetViewController.h"
 #import "Fiu.h"
+#import "AccountManagementViewController.h"
 
 @interface HomePageViewController ()<UICollectionViewDelegate,UICollectionViewDataSource,UICollectionViewDelegateFlowLayout>
 {
@@ -139,6 +140,7 @@
         if (self.isMySelf) {
             BackgroundCollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"BackgroundCollectionViewCell" forIndexPath:indexPath];
             [cell.backBtn addTarget:self action:@selector(clickBackBtn:) forControlEvents:UIControlEventTouchUpInside];
+            [cell.editBtn addTarget:self action:@selector(clickEditBtn:) forControlEvents:UIControlEventTouchUpInside];
             [cell setUI];
             return cell;
         }else{
@@ -171,6 +173,11 @@
     }
     return nil;
 
+}
+
+-(void)clickEditBtn:(UIButton*)sender{
+        AccountManagementViewController *vc = [[AccountManagementViewController alloc] init];
+        [self.navigationController pushViewController:vc animated:YES];
 }
 
 -(void)clickBackBtn:(UIButton*)sender{

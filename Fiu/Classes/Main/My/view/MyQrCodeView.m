@@ -51,6 +51,7 @@
         _bgView = [[UIView alloc] init];
         _bgView.backgroundColor = [UIColor whiteColor];
         
+        
         [_bgView addSubview:self.headImageView];
         [_headImageView mas_makeConstraints:^(MASConstraintMaker *make) {
             make.size.mas_equalTo(CGSizeMake(42/667.0*SCREEN_HEIGHT, 42/667.0*SCREEN_HEIGHT));

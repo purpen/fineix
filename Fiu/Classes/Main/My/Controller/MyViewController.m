@@ -25,6 +25,8 @@
 #import "PraisedViewController.h"
 #import "FindeFriendViewController.h"
 
+#import "MySystemSettingsViewController.h"
+
 @interface MyViewController ()<UIScrollViewDelegate>
 
 
@@ -267,6 +269,12 @@
 //账户管理按钮
 -(void)accountManagementBtn:(UIButton*)sender{
     NSLog(@"#########");
+    
+    UIStoryboard *storyBoard = [UIStoryboard storyboardWithName:@"My" bundle:nil];
+    MySystemSettingsViewController *systemVC = [storyBoard instantiateViewControllerWithIdentifier:@"MySystemSettingsViewController"];
+    [self.navigationController pushViewController:systemVC animated:YES];
+    
+
 }
 
 
