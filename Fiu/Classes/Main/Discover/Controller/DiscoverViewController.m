@@ -14,6 +14,8 @@
 #import "SearchViewController.h"
 #import "SceneInfoViewController.h"
 
+static NSString *const URLDiscoverSlide = @"/gateway/slide";
+
 @implementation DiscoverViewController
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -27,6 +29,12 @@
     [super viewDidLoad];
     
     [self setDiscoverViewUI];
+}
+
+#pragma mark - 网络请求
+//  轮播图
+- (void)networkRollImgData {
+    self.rollImgRequest = [FBAPI getWithUrlString:URLDiscoverSlide requestDictionary:@{} delegate:self];
 }
 
 #pragma mark - 设置视图的UI
@@ -115,7 +123,7 @@
         if (!cell) {
             cell = [[SceneListTableViewCell alloc] initWithStyle:(UITableViewCellStyleDefault) reuseIdentifier:sceneListCellId];
         }
-        [cell setUI];
+//        [cell setUI];
         return cell;
     }
     
@@ -184,7 +192,7 @@
 #pragma mark - 设置Nav
 - (void)setNavigationViewUI {
     [[UIApplication sharedApplication] setStatusBarHidden:NO withAnimation:(UIStatusBarAnimationSlide)];
-    [self navBarTransparent:NO];
+    [self navBarNoTransparent];
     self.view.backgroundColor = [UIColor whiteColor];
     self.delegate = self;
     [self addBarItemLeftBarButton:@"" image:@"Nav_Search"];

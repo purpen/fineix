@@ -14,6 +14,7 @@
 #import "FBRequest.h"
 #import "UIColor+Extension.h"
 #import "Masonry.h"
+#import "UIImageView+SDWedImage.h"
 
 
 #undef 宽高尺寸

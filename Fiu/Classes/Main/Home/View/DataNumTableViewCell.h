@@ -8,6 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import "Fiu.h"
+#import "SceneInfoData.h"
 
 @interface DataNumTableViewCell : UITableViewCell
 
@@ -17,6 +18,6 @@
 @pro_strong UIButton            *   moreBtn;        //  更多
 @pro_strong UILabel             *   line;           //  分割线
 
-- (void)setUI;
+- (void)setSceneDataNum:(SceneInfoData *)model;
 
 @end

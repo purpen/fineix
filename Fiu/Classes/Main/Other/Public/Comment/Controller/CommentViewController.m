@@ -83,7 +83,7 @@
 - (void)setNavigationViewUI {
     self.title = @"评论";
     self.view.backgroundColor = [UIColor whiteColor];
-    [self navBarTransparent:NO];
+    [self navBarNoTransparent];
     [[UIApplication sharedApplication] setStatusBarHidden:NO withAnimation:(UIStatusBarAnimationSlide)];
 }
 

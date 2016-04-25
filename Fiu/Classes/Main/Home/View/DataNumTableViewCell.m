@@ -23,27 +23,23 @@
 }
 
 #pragma mark - 
-- (void)setUI {
-    
-    CGFloat lookNum = 4231;
-    if (lookNum/1000 > 1) {
-        [_lookBtn setTitle:[NSString stringWithFormat:@"%.1fk", lookNum/1000] forState:(UIControlStateNormal)];
+- (void)setSceneDataNum:(SceneInfoData *)model {
+    if (model.viewCount/1000 > 1) {
+        [_lookBtn setTitle:[NSString stringWithFormat:@"%zik", model.viewCount/1000] forState:(UIControlStateNormal)];
     } else {
-        [_lookBtn setTitle:[NSString stringWithFormat:@"%.0f", lookNum] forState:(UIControlStateNormal)];
+        [_lookBtn setTitle:[NSString stringWithFormat:@"%zi", model.viewCount] forState:(UIControlStateNormal)];
     }
     
-    CGFloat likeNum = 321;
-    if (likeNum/1000 > 1) {
-        [_likeBtn setTitle:[NSString stringWithFormat:@"%.1fk", likeNum/1000] forState:(UIControlStateNormal)];
+    if (model.loveCount/1000 > 1) {
+        [_likeBtn setTitle:[NSString stringWithFormat:@"%zik", model.loveCount/1000] forState:(UIControlStateNormal)];
     } else {
-        [_likeBtn setTitle:[NSString stringWithFormat:@"%.0f", likeNum] forState:(UIControlStateNormal)];
+        [_likeBtn setTitle:[NSString stringWithFormat:@"%zi", model.loveCount] forState:(UIControlStateNormal)];
     }
     
-    CGFloat commentNum = 53131;
-    if (commentNum/1000 > 1) {
-        [_commentBtn setTitle:[NSString stringWithFormat:@"%.1fk", commentNum/1000] forState:(UIControlStateNormal)];
+    if (model.commentCount/1000 > 1) {
+        [_commentBtn setTitle:[NSString stringWithFormat:@"%zik", model.commentCount/1000] forState:(UIControlStateNormal)];
     } else {
-        [_commentBtn setTitle:[NSString stringWithFormat:@"%.0f", commentNum] forState:(UIControlStateNormal)];
+        [_commentBtn setTitle:[NSString stringWithFormat:@"%zi", model.commentCount] forState:(UIControlStateNormal)];
     }
 }
 

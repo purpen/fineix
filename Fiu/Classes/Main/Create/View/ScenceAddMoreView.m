@@ -75,11 +75,21 @@ static const NSInteger btnTag = 100;
 
 - (void)onGetReverseGeoCodeResult:(BMKGeoCodeSearch *)searcher result:(BMKReverseGeoCodeResult *)result errorCode:(BMKSearchErrorCode)error {
     if (error == BMK_SEARCH_NO_ERROR) {
-        for (NSUInteger idx = 0; idx < 5; ++ idx) {
-            BMKPoiInfo * poi = [result.poiList objectAtIndex:idx];
-            [_nameMarr addObject:poi.name];
-            [_cityMarr addObject:poi.city];
+        if (result.poiList.count > 5) {
+            for (NSUInteger idx = 0; idx < 5; ++ idx) {
+                BMKPoiInfo * poi = [result.poiList objectAtIndex:idx];
+                [_nameMarr addObject:poi.name];
+                [_cityMarr addObject:poi.city];
+            }
+            
+        } else if (result.poiList.count > 5) {
+            for (NSUInteger idx = 0; idx < result.poiList.count; ++ idx) {
+                BMKPoiInfo * poi = [result.poiList objectAtIndex:idx];
+                [_nameMarr addObject:poi.name];
+                [_cityMarr addObject:poi.city];
+            }
         }
+        
         //  最后一个为“搜索”按钮
         [_nameMarr addObject:@"  搜索  "];
         [self addLocationScrollView:_nameMarr];

@@ -13,13 +13,6 @@
 //#define kDomainBaseUrl @"http://api.taihuoniao.com"           //生产环境 （上线正式环境）
 #define kDomainBaseUrl @"http://t.taihuoniao.com/app/api"     //开发环境
 
-
-#undef 请求接口
-#define HomeSceneList         @"/scene_sight/"
-
-
-
-
 #define kAppDebug 1
 
 #define kChannel              @"appstore"

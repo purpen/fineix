@@ -26,13 +26,9 @@ const static NSInteger buttonTag = 421;
 }
 
 #pragma mark -
-- (void)setUI {
-    NSString * str = @"家是我们人生的驿站，是我们生活的乐园，也是我们避风的港湾。它更是一条逼你拼命挣钱的鞭子，让你为它拉车犁地。家又是一个充满亲情的地方，就会有一种亲情感回荡心头。在风雨人生中，渐渐地形成了一种强烈的感觉：我爱家，更离不开家。";
-    [self changeContentLabStyle:str];
-    
-    self.titleArr = [NSArray arrayWithObjects:@"温暖", @"咖啡馆", @"极客潮人", @"世界地球日", @"天气好", @"有柳絮", nil];
-    [self addTagButton:self.titleArr];
-    
+- (void)setSceneDescription:(SceneInfoData *)model {
+    [self changeContentLabStyle:model.des];
+    [self addTagButton:model.tagTitles];
     self.frame = CGRectMake(0, 0, SCREEN_WIDTH, self.contentLab.frame.size.height + self.tagView.frame.size.height);
 }
 

@@ -8,6 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import "Fiu.h"
+#import "SceneInfoData.h"
 
 @interface UserInfoTableViewCell : UITableViewCell
 
@@ -27,7 +28,7 @@
 @pro_strong UILabel             *   city;           //  城市
 @pro_strong UILabel             *   time;           //  时间
 
-- (void)setUI;
+- (void)setSceneInfoData:(SceneInfoData *)model;
 
 - (void)setFiuSceneUI;
 

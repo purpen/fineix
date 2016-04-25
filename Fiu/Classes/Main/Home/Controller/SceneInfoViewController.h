@@ -12,6 +12,12 @@
 
 @interface SceneInfoViewController : FBViewController <FBNavigationBarItemsDelegate, UITableViewDelegate, UITableViewDataSource>
 
+@pro_strong FBRequest               *   sceneInfoRequest;
+@pro_strong FBRequest               *   sceneCommentRequest;
+@pro_strong FBRequest               *   likePeopleRequest;
+@pro_strong FBRequest               *   sceneGoodsRequest;
+
+@pro_strong NSString                *   sceneId;                //  场景ID
 @pro_strong UITableView             *   sceneTableView;         //  场景视图
 @pro_strong GroupHeaderView         *   headerView;             //  分组头部视图
 @pro_strong LikeSceneView           *   likeScene;              //  点赞

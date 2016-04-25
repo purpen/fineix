@@ -14,15 +14,15 @@
 
 @implementation FBNavigationViewController
 
-+ (void)initialize {
-    
-    UINavigationBar * fiuNavBar = [UINavigationBar appearance];
-    [fiuNavBar setBarTintColor:[UIColor whiteColor]];
-    [fiuNavBar setTitleTextAttributes:@{
-                                        NSForegroundColorAttributeName:[UIColor blackColor],
-                                        NSFontAttributeName:[UIFont systemFontOfSize:17]
-                                        }];
-}
+//+ (void)initialize {
+//    
+//    UINavigationBar * fiuNavBar = [UINavigationBar appearance];
+//    [fiuNavBar setBarTintColor:[UIColor whiteColor]];
+//    [fiuNavBar setTitleTextAttributes:@{
+//                                        NSForegroundColorAttributeName:[UIColor blackColor],
+//                                        NSFontAttributeName:[UIFont systemFontOfSize:17]
+//                                        }];
+//}
 
 #pragma mark - 重写push方法
 - (void)pushViewController:(UIViewController *)viewController animated:(BOOL)animated {

@@ -76,50 +76,21 @@
 }
 
 #pragma mark -
-- (void)setUI {
-    //  场景图
-    self.bgImage.image = [UIImage imageNamed:@"Bi"];
+- (void)setSceneInfoData:(SceneInfoData *)model {
 
-    //  用户头像
-    self.userHeader.image = [UIImage imageNamed:@"user"];
+    [self.bgImage downloadImage:model.coverUrl place:[UIImage imageNamed:@""]];
+    [self titleTextStyle:[NSString stringWithFormat:@" %@ ", model.title] withBgColor:[UIColor colorWithPatternImage:[UIImage imageNamed:@"titleBg"]]];
+    self.whereScene.text = [self abouText:self.whereScene withText:model.sceneTitle];
+    self.city.text = [self abouText:self.city withText:model.address];
+    [self.userHeader downloadImage:model.userInfo.avatarUrl place:[UIImage imageNamed:@""]];
+    self.userName.text = model.userInfo.nickname;
+    self.userProfile.text = model.userInfo.summary;
+//    self.time.text = @"｜ 2天前";
     
-    //  用户昵称
-    self.userName.text = @"Haasda Fynn";
-    
-    //  用户简介
-    self.userProfile.text = @"达人｜写剧本的文盲";
-    
-    //  标题
-    NSString * titleStr = @" 最好的时光 ";
-    UIColor * sceneColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"titleBg"]];
-    [self titleTextStyle:titleStr withBgColor:sceneColor];
-    
-    //  所属情景
-    NSString * whereText = @"最好的时光遇到你";
-    CGFloat whereLength = [whereText boundingRectWithSize:CGSizeMake(320, 1000) options:(NSStringDrawingUsesLineFragmentOrigin) attributes:nil context:nil].size.width;
-    [_whereScene mas_updateConstraints:^(MASConstraintMaker *make) {
-        make.size.mas_equalTo(CGSizeMake(whereLength * 0.8, 15));
-    }];
-    self.whereScene.text = whereText;
-    
-    //  城市
-    NSString * cityText = @"北京市 朝阳区";
-    CGFloat cityLength = [cityText boundingRectWithSize:CGSizeMake(320, 1000) options:(NSStringDrawingUsesLineFragmentOrigin) attributes:nil context:nil].size.width;
-    [_city mas_updateConstraints:^(MASConstraintMaker *make) {
-        make.size.mas_equalTo(CGSizeMake(cityLength * 0.8, 15));
-    }];
-    self.city.text = cityText;
-    
-    //  时间
-    self.time.text = @"｜ 2天前";
-    
-    //  点赞的数量
-    [self.goodBtn setBackgroundImage:[UIImage imageNamed:@"User_like"] forState:(UIControlStateNormal)];
-    CGFloat good = 32200;
-    if (good/1000 > 1) {
-        self.goodNum.text = [NSString stringWithFormat:@"%.1fk人赞过", good/1000];
+    if (model.loveCount/1000 > 1) {
+        self.goodNum.text = [NSString stringWithFormat:@"%zik人赞过", model.loveCount/1000];
     } else {
-        self.goodNum.text = [NSString stringWithFormat:@"%.0f人赞过", good];
+        self.goodNum.text = [NSString stringWithFormat:@"%zi人赞过", model.loveCount];
     }
     
     [self changeUserViewFrame];
@@ -239,6 +210,7 @@
 - (UIButton *)goodBtn {
     if (!_goodBtn) {
         _goodBtn = [[UIButton alloc] init];
+        [_goodBtn setBackgroundImage:[UIImage imageNamed:@"User_like"] forState:(UIControlStateNormal)];
 
         [_goodBtn addSubview:self.goodNum];
         [_goodNum mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -355,6 +327,26 @@
                                 };
     [titleText addAttributes:textDict range:NSMakeRange(0, titleText.length)];
     self.titleText.attributedText = titleText;
+}
+
+//  数量样式
+- (NSString *)aboutCount:(UILabel *)lable withCount:(NSInteger)count {
+    NSString * num = [NSString stringWithFormat:@"%zi", count];
+    CGFloat numLength = [num boundingRectWithSize:CGSizeMake(320, 1000) options:(NSStringDrawingUsesLineFragmentOrigin) attributes:nil context:nil].size.width;
+    [lable mas_updateConstraints:^(MASConstraintMaker *make) {
+        make.size.mas_equalTo(CGSizeMake(numLength, 15));
+    }];
+    return num;
+}
+
+//  文字情景
+- (NSString *)abouText:(UILabel *)lable withText:(NSString *)fiuScene {
+    NSString * whereText = fiuScene;
+    CGFloat textLength = [fiuScene boundingRectWithSize:CGSizeMake(320, 1000) options:(NSStringDrawingUsesLineFragmentOrigin) attributes:nil context:nil].size.width;
+    [lable mas_updateConstraints:^(MASConstraintMaker *make) {
+        make.size.mas_equalTo(CGSizeMake(textLength * 0.8, 15));
+    }];
+    return whereText;
 }
 
 #pragma mark - 所属情景

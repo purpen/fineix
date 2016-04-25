@@ -10,6 +10,7 @@
 #import "MallMenuTableViewCell.h"
 #import "FiuTagTableViewCell.h"
 #import "SearchViewController.h"
+#import "GoodsInfoViewController.h"
 
 @implementation MallViewController
 
@@ -158,9 +159,16 @@
     }
 }
 
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    if (indexPath.section == 1) {
+        GoodsInfoViewController * goodsInfoVC = [[GoodsInfoViewController alloc] init];
+        [self.navigationController pushViewController:goodsInfoVC animated:YES];
+    }
+}
+
 #pragma mark - 设置Nav
 - (void)setNavigationViewUI {
-    [self navBarTransparent:NO];
+    [self navBarNoTransparent];
     self.delegate = self;
     [self addBarItemLeftBarButton:@"" image:@"Nav_Search"];
     [self addBarItemRightBarButton:@"" image:@"Nav_Car"];

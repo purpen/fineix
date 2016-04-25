@@ -12,7 +12,7 @@
 #import "MJRefresh.h"
 #import "Fiu.h"
 
-@interface HomeViewController : FBViewController <FBNavigationBarItemsDelegate, UITableViewDelegate, UITableViewDataSource>
+@interface HomeViewController : FBViewController <FBNavigationBarItemsDelegate, UITableViewDelegate, UITableViewDataSource, UINavigationControllerDelegate>
 
 @pro_strong FBRequest               *   sceneListRequest;
 @pro_assign NSInteger                   currentpageNum;

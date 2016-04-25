@@ -95,7 +95,7 @@
                 cell = [[ContentAndTagTableViewCell alloc] initWithStyle:(UITableViewCellStyleDefault) reuseIdentifier:contentCellId];
             }
             cell.nav = self.navigationController;
-            [cell setUI];
+//            [cell setUI];
             return cell;
             
         } else if (indexPath.row == 2) {
@@ -114,7 +114,7 @@
         if (!cell) {
             cell = [[SceneListTableViewCell alloc] initWithStyle:(UITableViewCellStyleDefault) reuseIdentifier:fiuSceneTableViewCellID];
         }
-        [cell setUI];
+//        [cell setUI];
         return cell;
     }
     
@@ -224,7 +224,7 @@
     self.delegate = self;
     [self addBarItemRightBarButton:@"" image:@"icon_newScene"];
     [self addNavLogo:@"Nav_Title"];
-    [self navBarTransparent:YES];
+    [self navBarTransparent];
     [self hiddenNavItem:NO];
 }
 

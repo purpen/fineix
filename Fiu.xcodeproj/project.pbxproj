@@ -188,6 +188,21 @@
 		D81281781CAA8532007CF08B /* TencentOpenApi_IOS_Bundle.bundle in Resources */ = {isa = PBXBuildFile; fileRef = D81281071CAA8532007CF08B /* TencentOpenApi_IOS_Bundle.bundle */; };
 		D81281791CAA8532007CF08B /* libSocialWechat.a in Frameworks */ = {isa = PBXBuildFile; fileRef = D812810A1CAA8532007CF08B /* libSocialWechat.a */; };
 		D812817A1CAA8532007CF08B /* libWeChatSDK.a in Frameworks */ = {isa = PBXBuildFile; fileRef = D812810B1CAA8532007CF08B /* libWeChatSDK.a */; };
+		D83639641CCDBF2900CC4AC0 /* HomeSceneList.m in Sources */ = {isa = PBXBuildFile; fileRef = D83639571CCDBF2900CC4AC0 /* HomeSceneList.m */; };
+		D83639651CCDBF2900CC4AC0 /* HomeSceneListCounter.m in Sources */ = {isa = PBXBuildFile; fileRef = D83639591CCDBF2900CC4AC0 /* HomeSceneListCounter.m */; };
+		D83639661CCDBF2900CC4AC0 /* HomeSceneListData.m in Sources */ = {isa = PBXBuildFile; fileRef = D836395B1CCDBF2900CC4AC0 /* HomeSceneListData.m */; };
+		D83639671CCDBF2900CC4AC0 /* HomeSceneListLocation.m in Sources */ = {isa = PBXBuildFile; fileRef = D836395D1CCDBF2900CC4AC0 /* HomeSceneListLocation.m */; };
+		D83639681CCDBF2900CC4AC0 /* HomeSceneListProduct.m in Sources */ = {isa = PBXBuildFile; fileRef = D836395F1CCDBF2900CC4AC0 /* HomeSceneListProduct.m */; };
+		D83639691CCDBF2900CC4AC0 /* HomeSceneListRow.m in Sources */ = {isa = PBXBuildFile; fileRef = D83639611CCDBF2900CC4AC0 /* HomeSceneListRow.m */; };
+		D836396A1CCDBF2900CC4AC0 /* HomeSceneListUser.m in Sources */ = {isa = PBXBuildFile; fileRef = D83639631CCDBF2900CC4AC0 /* HomeSceneListUser.m */; };
+		D83639771CCDE5A400CC4AC0 /* SceneInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = D836396C1CCDE5A400CC4AC0 /* SceneInfo.m */; };
+		D83639781CCDE5A400CC4AC0 /* SceneInfoCounter.m in Sources */ = {isa = PBXBuildFile; fileRef = D836396E1CCDE5A400CC4AC0 /* SceneInfoCounter.m */; };
+		D83639791CCDE5A400CC4AC0 /* SceneInfoData.m in Sources */ = {isa = PBXBuildFile; fileRef = D83639701CCDE5A400CC4AC0 /* SceneInfoData.m */; };
+		D836397A1CCDE5A400CC4AC0 /* SceneInfoLocation.m in Sources */ = {isa = PBXBuildFile; fileRef = D83639721CCDE5A400CC4AC0 /* SceneInfoLocation.m */; };
+		D836397B1CCDE5A400CC4AC0 /* SceneInfoProduct.m in Sources */ = {isa = PBXBuildFile; fileRef = D83639741CCDE5A400CC4AC0 /* SceneInfoProduct.m */; };
+		D836397C1CCDE5A400CC4AC0 /* SceneInfoUserInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = D83639761CCDE5A400CC4AC0 /* SceneInfoUserInfo.m */; };
+		D836397F1CCE1C2D00CC4AC0 /* GoodsBrandViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D836397E1CCE1C2D00CC4AC0 /* GoodsBrandViewController.m */; };
+		D83639821CCE1F5C00CC4AC0 /* GoodsBrandTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D83639811CCE1F5C00CC4AC0 /* GoodsBrandTableViewCell.m */; };
 		D83A64321C8E7765003DB8BB /* Photos.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D83A64311C8E7765003DB8BB /* Photos.framework */; };
 		D83A64331C8E7E93003DB8BB /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D802D7891C844101007AFA3D /* AVFoundation.framework */; };
 		D83A64351C8E7EAD003DB8BB /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D83A64341C8E7EAD003DB8BB /* Foundation.framework */; };
@@ -578,6 +593,36 @@
 		D812810D1CAA8532007CF08B /* WechatAuthSDK.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WechatAuthSDK.h; sourceTree = "<group>"; };
 		D812810E1CAA8532007CF08B /* WXApi.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WXApi.h; sourceTree = "<group>"; };
 		D812810F1CAA8532007CF08B /* WXApiObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WXApiObject.h; sourceTree = "<group>"; };
+		D83639561CCDBF2900CC4AC0 /* HomeSceneList.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HomeSceneList.h; sourceTree = "<group>"; };
+		D83639571CCDBF2900CC4AC0 /* HomeSceneList.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HomeSceneList.m; sourceTree = "<group>"; };
+		D83639581CCDBF2900CC4AC0 /* HomeSceneListCounter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HomeSceneListCounter.h; sourceTree = "<group>"; };
+		D83639591CCDBF2900CC4AC0 /* HomeSceneListCounter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HomeSceneListCounter.m; sourceTree = "<group>"; };
+		D836395A1CCDBF2900CC4AC0 /* HomeSceneListData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HomeSceneListData.h; sourceTree = "<group>"; };
+		D836395B1CCDBF2900CC4AC0 /* HomeSceneListData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HomeSceneListData.m; sourceTree = "<group>"; };
+		D836395C1CCDBF2900CC4AC0 /* HomeSceneListLocation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HomeSceneListLocation.h; sourceTree = "<group>"; };
+		D836395D1CCDBF2900CC4AC0 /* HomeSceneListLocation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HomeSceneListLocation.m; sourceTree = "<group>"; };
+		D836395E1CCDBF2900CC4AC0 /* HomeSceneListProduct.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HomeSceneListProduct.h; sourceTree = "<group>"; };
+		D836395F1CCDBF2900CC4AC0 /* HomeSceneListProduct.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HomeSceneListProduct.m; sourceTree = "<group>"; };
+		D83639601CCDBF2900CC4AC0 /* HomeSceneListRow.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HomeSceneListRow.h; sourceTree = "<group>"; };
+		D83639611CCDBF2900CC4AC0 /* HomeSceneListRow.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HomeSceneListRow.m; sourceTree = "<group>"; };
+		D83639621CCDBF2900CC4AC0 /* HomeSceneListUser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HomeSceneListUser.h; sourceTree = "<group>"; };
+		D83639631CCDBF2900CC4AC0 /* HomeSceneListUser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HomeSceneListUser.m; sourceTree = "<group>"; };
+		D836396B1CCDE5A400CC4AC0 /* SceneInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SceneInfo.h; sourceTree = "<group>"; };
+		D836396C1CCDE5A400CC4AC0 /* SceneInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SceneInfo.m; sourceTree = "<group>"; };
+		D836396D1CCDE5A400CC4AC0 /* SceneInfoCounter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SceneInfoCounter.h; sourceTree = "<group>"; };
+		D836396E1CCDE5A400CC4AC0 /* SceneInfoCounter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SceneInfoCounter.m; sourceTree = "<group>"; };
+		D836396F1CCDE5A400CC4AC0 /* SceneInfoData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SceneInfoData.h; sourceTree = "<group>"; };
+		D83639701CCDE5A400CC4AC0 /* SceneInfoData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SceneInfoData.m; sourceTree = "<group>"; };
+		D83639711CCDE5A400CC4AC0 /* SceneInfoLocation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SceneInfoLocation.h; sourceTree = "<group>"; };
+		D83639721CCDE5A400CC4AC0 /* SceneInfoLocation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SceneInfoLocation.m; sourceTree = "<group>"; };
+		D83639731CCDE5A400CC4AC0 /* SceneInfoProduct.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SceneInfoProduct.h; sourceTree = "<group>"; };
+		D83639741CCDE5A400CC4AC0 /* SceneInfoProduct.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SceneInfoProduct.m; sourceTree = "<group>"; };
+		D83639751CCDE5A400CC4AC0 /* SceneInfoUserInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SceneInfoUserInfo.h; sourceTree = "<group>"; };
+		D83639761CCDE5A400CC4AC0 /* SceneInfoUserInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SceneInfoUserInfo.m; sourceTree = "<group>"; };
+		D836397D1CCE1C2D00CC4AC0 /* GoodsBrandViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GoodsBrandViewController.h; sourceTree = "<group>"; };
+		D836397E1CCE1C2D00CC4AC0 /* GoodsBrandViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GoodsBrandViewController.m; sourceTree = "<group>"; };
+		D83639801CCE1F5C00CC4AC0 /* GoodsBrandTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GoodsBrandTableViewCell.h; sourceTree = "<group>"; };
+		D83639811CCE1F5C00CC4AC0 /* GoodsBrandTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GoodsBrandTableViewCell.m; sourceTree = "<group>"; };
 		D83A64311C8E7765003DB8BB /* Photos.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Photos.framework; path = System/Library/Frameworks/Photos.framework; sourceTree = SDKROOT; };
 		D83A64341C8E7EAD003DB8BB /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		D83A64361C8E7EBD003DB8BB /* CoreVideo.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreVideo.framework; path = System/Library/Frameworks/CoreVideo.framework; sourceTree = SDKROOT; };
@@ -1022,6 +1067,8 @@
 				D8B0112D1CCA22BF008A63B7 /* InfoRecommendTableViewCell.m */,
 				D8B011321CCA3C95008A63B7 /* RecommendGoodsCollectionViewCell.h */,
 				D8B011331CCA3C95008A63B7 /* RecommendGoodsCollectionViewCell.m */,
+				D83639801CCE1F5C00CC4AC0 /* GoodsBrandTableViewCell.h */,
+				D83639811CCE1F5C00CC4AC0 /* GoodsBrandTableViewCell.m */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -1208,16 +1255,16 @@
 				D81280211CAA8532007CF08B /* AddTagViewController.m */,
 				D81280221CAA8532007CF08B /* AddUrlViewController.h */,
 				D81280231CAA8532007CF08B /* AddUrlViewController.m */,
-				D81280241CAA8532007CF08B /* ClipImageViewController.h */,
-				D81280251CAA8532007CF08B /* ClipImageViewController.m */,
+				D812802C1CAA8532007CF08B /* MarkGoodsViewController.h */,
+				D812802D1CAA8532007CF08B /* MarkGoodsViewController.m */,
 				D81280261CAA8532007CF08B /* CreateViewController.h */,
 				D81280271CAA8532007CF08B /* CreateViewController.m */,
+				D81280241CAA8532007CF08B /* ClipImageViewController.h */,
+				D81280251CAA8532007CF08B /* ClipImageViewController.m */,
 				D81280281CAA8532007CF08B /* CropImageViewController.h */,
 				D81280291CAA8532007CF08B /* CropImageViewController.m */,
 				D812802A1CAA8532007CF08B /* FiltersViewController.h */,
 				D812802B1CAA8532007CF08B /* FiltersViewController.m */,
-				D812802C1CAA8532007CF08B /* MarkGoodsViewController.h */,
-				D812802D1CAA8532007CF08B /* MarkGoodsViewController.m */,
 				D81280301CAA8532007CF08B /* ReleaseViewController.h */,
 				D81280311CAA8532007CF08B /* ReleaseViewController.m */,
 				D81280321CAA8532007CF08B /* SearchLocationViewController.h */,
@@ -1298,10 +1345,10 @@
 		D812805C1CAA8532007CF08B /* Controller */ = {
 			isa = PBXGroup;
 			children = (
-				D87B69D61CC726E800199EFE /* AllSceneViewController.h */,
-				D87B69D71CC726E800199EFE /* AllSceneViewController.m */,
 				D812805D1CAA8532007CF08B /* DiscoverViewController.h */,
 				D812805E1CAA8532007CF08B /* DiscoverViewController.m */,
+				D87B69D61CC726E800199EFE /* AllSceneViewController.h */,
+				D87B69D71CC726E800199EFE /* AllSceneViewController.m */,
 				D86AFDF31CC0F0D5006F1602 /* FiuSceneViewController.h */,
 				D86AFDF41CC0F0D5006F1602 /* FiuSceneViewController.m */,
 			);
@@ -1311,8 +1358,7 @@
 		D812805F1CAA8532007CF08B /* Home */ = {
 			isa = PBXGroup;
 			children = (
-				D89B5A861CB4E45B00DB9710 /* Other */,
-				D89B5A871CB4E45B00DB9710 /* Model */,
+				D83639401CCDBD3B00CC4AC0 /* Model */,
 				D89B5A881CB4E45B00DB9710 /* View */,
 				D81280601CAA8532007CF08B /* Controller */,
 			);
@@ -1349,6 +1395,8 @@
 				D8B011061CC795F9008A63B7 /* GoodsCategoryViewController.m */,
 				D8B011171CC8AD0A008A63B7 /* GoodsInfoViewController.h */,
 				D8B011181CC8AD0A008A63B7 /* GoodsInfoViewController.m */,
+				D836397D1CCE1C2D00CC4AC0 /* GoodsBrandViewController.h */,
+				D836397E1CCE1C2D00CC4AC0 /* GoodsBrandViewController.m */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -1553,6 +1601,39 @@
 			path = Wechat;
 			sourceTree = "<group>";
 		};
+		D83639401CCDBD3B00CC4AC0 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				D836396B1CCDE5A400CC4AC0 /* SceneInfo.h */,
+				D836396C1CCDE5A400CC4AC0 /* SceneInfo.m */,
+				D836396D1CCDE5A400CC4AC0 /* SceneInfoCounter.h */,
+				D836396E1CCDE5A400CC4AC0 /* SceneInfoCounter.m */,
+				D836396F1CCDE5A400CC4AC0 /* SceneInfoData.h */,
+				D83639701CCDE5A400CC4AC0 /* SceneInfoData.m */,
+				D83639711CCDE5A400CC4AC0 /* SceneInfoLocation.h */,
+				D83639721CCDE5A400CC4AC0 /* SceneInfoLocation.m */,
+				D83639731CCDE5A400CC4AC0 /* SceneInfoProduct.h */,
+				D83639741CCDE5A400CC4AC0 /* SceneInfoProduct.m */,
+				D83639751CCDE5A400CC4AC0 /* SceneInfoUserInfo.h */,
+				D83639761CCDE5A400CC4AC0 /* SceneInfoUserInfo.m */,
+				D83639561CCDBF2900CC4AC0 /* HomeSceneList.h */,
+				D83639571CCDBF2900CC4AC0 /* HomeSceneList.m */,
+				D83639581CCDBF2900CC4AC0 /* HomeSceneListCounter.h */,
+				D83639591CCDBF2900CC4AC0 /* HomeSceneListCounter.m */,
+				D836395A1CCDBF2900CC4AC0 /* HomeSceneListData.h */,
+				D836395B1CCDBF2900CC4AC0 /* HomeSceneListData.m */,
+				D836395C1CCDBF2900CC4AC0 /* HomeSceneListLocation.h */,
+				D836395D1CCDBF2900CC4AC0 /* HomeSceneListLocation.m */,
+				D836395E1CCDBF2900CC4AC0 /* HomeSceneListProduct.h */,
+				D836395F1CCDBF2900CC4AC0 /* HomeSceneListProduct.m */,
+				D83639601CCDBF2900CC4AC0 /* HomeSceneListRow.h */,
+				D83639611CCDBF2900CC4AC0 /* HomeSceneListRow.m */,
+				D83639621CCDBF2900CC4AC0 /* HomeSceneListUser.h */,
+				D83639631CCDBF2900CC4AC0 /* HomeSceneListUser.m */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
 		D87B69B91CC726BA00199EFE /* Category */ = {
 			isa = PBXGroup;
 			children = (
@@ -1656,20 +1737,6 @@
 				D86AFDF71CC0F6E3006F1602 /* SuFiuScenrView.m */,
 			);
 			path = View;
-			sourceTree = "<group>";
-		};
-		D89B5A861CB4E45B00DB9710 /* Other */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Other;
-			sourceTree = "<group>";
-		};
-		D89B5A871CB4E45B00DB9710 /* Model */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Model;
 			sourceTree = "<group>";
 		};
 		D89B5A881CB4E45B00DB9710 /* View */ = {
@@ -1844,11 +1911,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D83639641CCDBF2900CC4AC0 /* HomeSceneList.m in Sources */,
 				D81281581CAA8532007CF08B /* UIColor+Extension.m in Sources */,
 				D8B011251CCA2205008A63B7 /* InfoBrandTableViewCell.m in Sources */,
 				1FEF0B161CC0FC15006EF0C6 /* BottomView.m in Sources */,
 				D80360621CBF41A3001920F9 /* SearchMenuView.m in Sources */,
 				D81281311CAA8532007CF08B /* HomeViewController.m in Sources */,
+				D83639661CCDBF2900CC4AC0 /* HomeSceneListData.m in Sources */,
 				D87B69D31CC726D500199EFE /* CommentViewController.m in Sources */,
 				D8035F2C1CB77AAA001920F9 /* ContentAndTagTableViewCell.m in Sources */,
 				D8B0111C1CC9CDAD008A63B7 /* GoodsTableViewCell.m in Sources */,
@@ -1878,7 +1947,10 @@
 				D81281591CAA8532007CF08B /* UIImageView+SDWedImage.m in Sources */,
 				D81281541CAA8532007CF08B /* FBRequest.m in Sources */,
 				1F3C0A961CBFA28300B84FEB /* GreatPeopleViewController.m in Sources */,
+				D83639671CCDBF2900CC4AC0 /* HomeSceneListLocation.m in Sources */,
 				D80360481CBF376B001920F9 /* SubscribeInterestedCollectionViewController.m in Sources */,
+				D83639791CCDE5A400CC4AC0 /* SceneInfoData.m in Sources */,
+				D83639651CCDBF2900CC4AC0 /* HomeSceneListCounter.m in Sources */,
 				D89B5A971CB66B3B00DB9710 /* DataNumTableViewCell.m in Sources */,
 				1FEF0B0D1CC0FC15006EF0C6 /* MyOrdersViewController.m in Sources */,
 				D80360401CBF376B001920F9 /* FBLoginViewController.m in Sources */,
@@ -1892,8 +1964,10 @@
 				D80D41581CAD142C005D72B1 /* FBPictureViewController.m in Sources */,
 				D80360561CBF376B001920F9 /* NumView.m in Sources */,
 				D81281661CAA8532007CF08B /* JKDBHelper.m in Sources */,
+				D83639781CCDE5A400CC4AC0 /* SceneInfoCounter.m in Sources */,
 				D86AFDEF1CBFAFC2006F1602 /* UserHeaderTableViewCell.m in Sources */,
 				D81281261CAA8532007CF08B /* FBFootView.m in Sources */,
+				D83639681CCDBF2900CC4AC0 /* HomeSceneListProduct.m in Sources */,
 				1F07A6411CC76C6000CF225F /* HomePageViewController.m in Sources */,
 				D81281251CAA8532007CF08B /* FBFiltersCollectionViewCell.m in Sources */,
 				D81281561CAA8532007CF08B /* NSString+FBMD5.m in Sources */,
@@ -1906,6 +1980,7 @@
 				D803604E1CBF376B001920F9 /* NSString+UserModel.m in Sources */,
 				D86AFDEC1CBF84DB006F1602 /* SearchSceneTableViewCell.m in Sources */,
 				D812815E1CAA8532007CF08B /* main.m in Sources */,
+				D83639821CCE1F5C00CC4AC0 /* GoodsBrandTableViewCell.m in Sources */,
 				D8035FC81CBD1021001920F9 /* FBMapLocatinViewController.m in Sources */,
 				D8B011221CCA21DF008A63B7 /* InfoTitleTableViewCell.m in Sources */,
 				D8B011191CC8AD0A008A63B7 /* GoodsInfoViewController.m in Sources */,
@@ -1915,6 +1990,8 @@
 				D81281141CAA8532007CF08B /* AddTagViewController.m in Sources */,
 				1F51E8A41CC5C9DE00017839 /* MyFansActionSheetViewController.m in Sources */,
 				D89B5A8E1CB6284A00DB9710 /* SceneInfoViewController.m in Sources */,
+				D836397B1CCDE5A400CC4AC0 /* SceneInfoProduct.m in Sources */,
+				D836397F1CCE1C2D00CC4AC0 /* GoodsBrandViewController.m in Sources */,
 				D812812A1CAA8532007CF08B /* PhotoAlbumsTableViewCell.m in Sources */,
 				D8B0112E1CCA22BF008A63B7 /* InfoRecommendTableViewCell.m in Sources */,
 				D8035FDE1CBDF10B001920F9 /* MallMenuTableViewCell.m in Sources */,
@@ -1939,8 +2016,10 @@
 				1FEF0B121CC0FC15006EF0C6 /* OrderListModel.m in Sources */,
 				1F07A6561CC79BE300CF225F /* FriendTableViewCell.m in Sources */,
 				D8035FF41CBE44A9001920F9 /* PictureToolViewController.m in Sources */,
+				D83639691CCDBF2900CC4AC0 /* HomeSceneListRow.m in Sources */,
 				1FEF0B111CC0FC15006EF0C6 /* MyViewController.m in Sources */,
 				D80360511CBF376B001920F9 /* RecommendedScenarioModel.m in Sources */,
+				D836397C1CCDE5A400CC4AC0 /* SceneInfoUserInfo.m in Sources */,
 				D80360581CBF376B001920F9 /* RecommendedScenarioView.m in Sources */,
 				1FEF0B081CC0FC15006EF0C6 /* FeedbackViewController.m in Sources */,
 				1F51E8B01CC61E6400017839 /* SubscribeViewController.m in Sources */,
@@ -1948,6 +2027,7 @@
 				D81281671CAA8532007CF08B /* JKDBModel.m in Sources */,
 				D81281291CAA8532007CF08B /* FiltersView.m in Sources */,
 				D89B5A941CB6580600DB9710 /* UserInfoTableViewCell.m in Sources */,
+				D83639771CCDE5A400CC4AC0 /* SceneInfo.m in Sources */,
 				D8B011341CCA3C95008A63B7 /* RecommendGoodsCollectionViewCell.m in Sources */,
 				D812812E1CAA8532007CF08B /* ScenceMessageView.m in Sources */,
 				D81281181CAA8532007CF08B /* CropImageViewController.m in Sources */,
@@ -1967,6 +2047,7 @@
 				D803603F1CBF376B001920F9 /* FBLoginRegisterViewController.m in Sources */,
 				D8035FCE1CBD1021001920F9 /* SearchViewController.m in Sources */,
 				1FEF0B1B1CC0FC15006EF0C6 /* MyHomeV.m in Sources */,
+				D836396A1CCDBF2900CC4AC0 /* HomeSceneListUser.m in Sources */,
 				D81281201CAA8532007CF08B /* FBPhoto.m in Sources */,
 				D803605C1CBF376B001920F9 /* SubmitView.m in Sources */,
 				1FEB71781CC8A35A00CF34F3 /* QRCodeScanViewController.m in Sources */,
@@ -1975,6 +2056,7 @@
 				D87B69C01CC726BA00199EFE /* GroupHeaderView.m in Sources */,
 				D81281281CAA8532007CF08B /* FBPictureView.m in Sources */,
 				1F4061A81CC9E92C00D6E9B0 /* ImproView.m in Sources */,
+				D836397A1CCDE5A400CC4AC0 /* SceneInfoLocation.m in Sources */,
 				D81281301CAA8532007CF08B /* DiscoverViewController.m in Sources */,
 				D81281151CAA8532007CF08B /* AddUrlViewController.m in Sources */,
 				D81281551CAA8532007CF08B /* HttpTool.m in Sources */,

@@ -15,8 +15,16 @@
 #import "CommentViewController.h"
 #import "FBAlertViewController.h"
 
+#import "SceneInfoData.h"
+
+static NSString *const URLSceneInfo = @"/scene_sight/view";
+static NSString *const URLCommentList = @"/comment/getlist";
+static NSString *const URLLikeScenePeople = @"/favorite";
 
 @interface SceneInfoViewController ()
+
+@pro_strong SceneInfoData       *   sceneInfoModel;
+@pro_strong NSMutableArray      *   sceneCommentMarr;
 
 @end
 
@@ -33,9 +41,19 @@
     self.view.backgroundColor = [UIColor whiteColor];
     self.automaticallyAdjustsScrollViewInsets = NO;
     
+    [self networkRequestData];
+    
     self.textMar = [NSMutableArray arrayWithObjects:@"家是我们人生的驿站，是我们生活的乐园，也是我们避风的港湾。", @"家是我们人生的驿站", @"家是我们人生的驿站，是我们生活的乐园，也是我们避风的港湾。它更是一条逼你拼命挣钱的鞭子，让你为它拉车犁地。家又是一个充满亲情的地方，就会有一种亲情感回荡心头。在风雨人生中，渐渐地形成了一种强烈的感觉：我爱家，更离不开家。",nil];
     
     [self setSceneInfoViewUI];
+}
+
+
+- (NSMutableArray *)sceneCommentMarr {
+    if (!_sceneCommentMarr) {
+        _sceneCommentMarr = [NSMutableArray array];
+    }
+    return _sceneCommentMarr;
 }
 
 #pragma mark -
@@ -43,6 +61,50 @@
     [self.view addSubview:self.sceneTableView];
     
     [self.view addSubview:self.likeScene];
+}
+
+#pragma mark - 网络请求
+//  场景详情
+- (void)networkRequestData {
+    [SVProgressHUD show];
+    self.sceneInfoRequest = [FBAPI getWithUrlString:URLSceneInfo requestDictionary:@{@"id":self.sceneId} delegate:self];
+    [self.sceneInfoRequest startRequestSuccess:^(FBRequest *request, id result) {
+        self.sceneInfoModel = [[SceneInfoData alloc] initWithDictionary:[result valueForKey:@"data"]];
+        [self networkCommentData];
+        [self networkLikePeopleData];
+        [self.sceneTableView reloadData];
+        [SVProgressHUD dismiss];
+        
+    } failure:^(FBRequest *request, NSError *error) {
+        [SVProgressHUD showErrorWithStatus:[error localizedDescription]];
+    }];
+}
+
+//  评论列表
+- (void)networkCommentData {
+    self.sceneCommentRequest = [FBAPI getWithUrlString:URLCommentList requestDictionary:@{@"type":@"12", @"target_id":self.sceneId} delegate:self];
+    [self.sceneCommentRequest startRequestSuccess:^(FBRequest *request, id result) {
+        NSLog(@"＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝ 评论：%@", result);
+        
+    } failure:^(FBRequest *request, NSError *error) {
+        
+    }];
+}
+
+//  给此场景点赞的用户
+- (void)networkLikePeopleData {
+    self.likePeopleRequest = [FBAPI getWithUrlString:URLLikeScenePeople requestDictionary:@{@"type":@"scene", @"event":@"love", @"page":@"1" , @"size":@"10000", @"id":self.sceneId} delegate:self];
+    [self.likePeopleRequest startRequestSuccess:^(FBRequest *request, id result) {
+        NSLog(@"＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝ 点赞的人：%@", result);
+        
+    } failure:^(FBRequest *request, NSError *error) {
+        
+    }];
+}
+
+//  此场景中的商品
+- (void)networkSceneGoodsData {
+    
 }
 
 #pragma mark - 点赞按钮
@@ -87,7 +149,7 @@
             if (cell == nil) {
                 cell = [[UserInfoTableViewCell alloc] initWithStyle:(UITableViewCellStyleDefault) reuseIdentifier:userInfoCellId];
             }
-            [cell setUI];
+            [cell setSceneInfoData:self.sceneInfoModel];
             return cell;
             
         } else if (indexPath.row == 1) {
@@ -97,7 +159,7 @@
                 cell = [[ContentAndTagTableViewCell alloc] initWithStyle:(UITableViewCellStyleDefault) reuseIdentifier:contentCellId];
             }
             cell.nav = self.navigationController;
-            [cell setUI];
+            [cell setSceneDescription:self.sceneInfoModel];
             return cell;
         
         } else if (indexPath.row == 2) {
@@ -107,7 +169,7 @@
                 cell = [[DataNumTableViewCell alloc] initWithStyle:(UITableViewCellStyleDefault) reuseIdentifier:dataNumCellId];
             }
             [cell.moreBtn addTarget:self action:@selector(moreBtnClick) forControlEvents:(UIControlEventTouchUpInside)];
-            [cell setUI];
+            [cell setSceneDataNum:self.sceneInfoModel];
             return cell;
             
         } else if (indexPath.row == 3) {
@@ -145,9 +207,8 @@
             return SCREEN_HEIGHT;
             
         } else if (indexPath.row == 1) {
-            NSString * str = @"家是我们人生的驿站，是我们生活的乐园，也是我们避风的港湾。它更是一条逼你拼命挣钱的鞭子，让你为它拉车犁地。家又是一个充满亲情的地方，就会有一种亲情感回荡心头。在风雨人生中，渐渐地形成了一种强烈的感觉：我爱家，更离不开家。";
             ContentAndTagTableViewCell * cell = [[ContentAndTagTableViewCell alloc] init];
-            [cell getContentCellHeight:str];
+            [cell getContentCellHeight:self.sceneInfoModel.des];
             return cell.cellHeight;
             
         } else if (indexPath.row == 2) {
@@ -258,7 +319,7 @@
     self.delegate = self;
     [self addBarItemRightBarButton:@"" image:@"Share_Scene"];
     [self addNavLogo:@"Nav_Title"];
-    [self navBarTransparent:YES];
+    [self navBarTransparent];
     [self hiddenNavItem:NO];
     [[UIApplication sharedApplication] setStatusBarHidden:YES withAnimation:(UIStatusBarAnimationSlide)];
     self.navigationController.navigationBar.frame = CGRectMake(0, 20, SCREEN_WIDTH, 44);

@@ -11,7 +11,14 @@
 #import "SceneInfoViewController.h"
 #import "SearchViewController.h"
 
+#import "HomeSceneListRow.h"
+
+static NSString *const URLSceneList = @"/scene_sight/";
+
 @interface HomeViewController ()
+
+@pro_strong NSMutableArray      *   sceneListMarr;
+@pro_strong NSMutableArray      *   sceneIdMarr;
 
 @end
 
@@ -36,20 +43,35 @@
 
 }
 
+- (NSMutableArray *)sceneListMarr {
+    if (!_sceneListMarr) {
+        _sceneListMarr = [NSMutableArray array];
+    }
+    return _sceneListMarr;
+}
+
+- (NSMutableArray *)sceneIdMarr {
+    if (!_sceneIdMarr) {
+        _sceneIdMarr = [NSMutableArray array];
+    }
+    return _sceneIdMarr;
+}
+
 #pragma mark - 网络请求
 - (void)networkRequestData {
-    NSDictionary *  requestParams = @{
-                                      @"page":@(self.currentpageNum + 1),
-                                      @"size":@10,
-                                      @"stick":@1
-                                      };
-    self.sceneListRequest = [FBAPI getWithUrlString:HomeSceneList requestDictionary:requestParams delegate:self];
+    [SVProgressHUD show];
+    NSDictionary *  requestParams = @{@"page":@(self.currentpageNum + 1), @"size":@10, @"stick":@1};
+    self.sceneListRequest = [FBAPI getWithUrlString:URLSceneList requestDictionary:requestParams delegate:self];
     [self.sceneListRequest startRequestSuccess:^(FBRequest *request, id result) {
-//        NSLog(@"＝＝＝＝＝＝＝＝＝＝＝ %@", result);
-        
+        NSArray * sceneArr = [[result valueForKey:@"data"] valueForKey:@"rows"];
+        for (NSDictionary * sceneDic in sceneArr) {
+            HomeSceneListRow * homeSceneModel = [[HomeSceneListRow alloc] initWithDictionary:sceneDic];
+            [self.sceneListMarr addObject:homeSceneModel];
+            [self.sceneIdMarr addObject:[NSString stringWithFormat:@"%zi", homeSceneModel.idField]];
+        }
+        [self.homeTableView reloadData];
         self.currentpageNum = [[[result valueForKey:@"data"] valueForKey:@"current_page"] integerValue];
         self.totalPageNum = [[[result valueForKey:@"data"] valueForKey:@"total_page"] integerValue];
-//        NSLog(@"－－－－－－－%zi,  %zi", self.currentpageNum, self.totalPageNum);
         [self requestIsLastData:self.homeTableView currentPage:self.currentpageNum withTotalPage:self.totalPageNum];
         
     } failure:^(FBRequest *request, NSError *error) {
@@ -70,7 +92,6 @@
         table.mj_footer.state = MJRefreshStateNoMoreData;
         table.mj_footer.hidden = true;
     }
-    
     if ([table.mj_header isRefreshing]) {
         [table.mj_header endRefreshing];
     }
@@ -81,8 +102,23 @@
             [table.mj_footer endRefreshing];
         }
     }
-    
     [SVProgressHUD dismiss];
+}
+
+#pragma mark - 上拉加载 & 下拉刷新
+- (void)addMJRefresh:(UITableView *)table {
+    table.mj_header = [MJRefreshNormalHeader headerWithRefreshingBlock:^{
+        self.currentpageNum = 0;
+        [self networkRequestData];
+    }];
+    
+    table.mj_footer = [MJRefreshAutoNormalFooter footerWithRefreshingBlock:^{
+        if (self.currentpageNum < self.totalPageNum) {
+            [self networkRequestData];
+        } else {
+            [table.mj_footer endRefreshing];
+        }
+    }];
 }
 
 #pragma mark - 加载首页表格
@@ -94,25 +130,15 @@
         _homeTableView.showsVerticalScrollIndicator = NO;
         _homeTableView.separatorStyle = UITableViewCellSeparatorStyleNone;
         
-        _homeTableView.mj_header = [MJRefreshNormalHeader headerWithRefreshingBlock:^{
-            self.currentpageNum = 0;
-            [self networkRequestData];
-        }];
+        [self addMJRefresh:_homeTableView];
         
-        _homeTableView.mj_footer = [MJRefreshAutoNormalFooter footerWithRefreshingBlock:^{
-            if (self.currentpageNum < self.totalPageNum) {
-                [self networkRequestData];
-            } else {
-                [_homeTableView.mj_footer endRefreshing];
-            }
-        }];
     }
     return _homeTableView;
 }
 
 #pragma mark - tableView Delegate & dataSource
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return 5;
+    return self.sceneListMarr.count;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -121,7 +147,9 @@
     if (!cell) {
         cell = [[SceneListTableViewCell alloc] initWithStyle:(UITableViewCellStyleDefault) reuseIdentifier:homeTableViewCellID];
     }
-    [cell setUI];
+    if (self.sceneListMarr.count) {
+        [cell setHomeSceneListData:self.sceneListMarr[indexPath.row]];
+    }
     return cell;
 }
 
@@ -132,6 +160,7 @@
 #pragma mark - 跳转到场景的详情
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     SceneInfoViewController * sceneInfoVC = [[SceneInfoViewController alloc] init];
+    sceneInfoVC.sceneId = self.sceneIdMarr[indexPath.row];
     [self.navigationController pushViewController:sceneInfoVC animated:YES];
 }
 
@@ -177,9 +206,7 @@
                 [[UIApplication sharedApplication] setStatusBarHidden:NO withAnimation:(UIStatusBarAnimationSlide)];
             }];
         }
-        
     }
-        
 }
 
 #pragma mark - 设置Nav
@@ -188,7 +215,7 @@
     [self addBarItemLeftBarButton:@"" image:@"Nav_Search"];
     [self addBarItemRightBarButton:@"" image:@"Nav_Concern"];
     [self addNavLogo:@"Nav_Title"];
-    [self navBarTransparent:YES];
+    [self navBarTransparent];
     [[UIApplication sharedApplication] setStatusBarHidden:NO withAnimation:(UIStatusBarAnimationSlide)];
     
 }

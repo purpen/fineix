@@ -12,6 +12,7 @@
 #import "UserHeaderTableViewCell.h"
 
 #import "SceneInfoViewController.h"
+#import "GoodsInfoViewController.h"
 
 static const NSInteger tableTag = 687;
 
@@ -86,7 +87,7 @@ static const NSInteger tableTag = 687;
         if (!cell) {
             cell = [[SceneListTableViewCell alloc] initWithStyle:(UITableViewCellStyleDefault) reuseIdentifier:SceneTablecellId];
         }
-        [cell setUI];
+//        [cell setUI];
         return cell;
         
     } else if (tableView == self.userTable) {
@@ -131,6 +132,11 @@ static const NSInteger tableTag = 687;
         SceneInfoViewController * sceneVC = [[SceneInfoViewController alloc] init];
         
         [self.nav pushViewController:sceneVC animated:YES];
+    
+    } else if (tableView == self.goodsTable) {
+        GoodsInfoViewController * goodsInfoVC = [[GoodsInfoViewController alloc] init];
+        
+        [self.nav pushViewController:goodsInfoVC animated:YES];
     }
     
 }

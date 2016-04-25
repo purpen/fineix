@@ -42,7 +42,12 @@
 /*
  *  设置Nav透明
  */
-- (void)navBarTransparent:(BOOL)ture;
+- (void)navBarTransparent;
+
+/*
+ *  设置Nav不透明
+ */
+- (void)navBarNoTransparent;
 
 
 @end

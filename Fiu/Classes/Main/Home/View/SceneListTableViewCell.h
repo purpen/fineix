@@ -8,6 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import "Fiu.h"
+#import "HomeSceneListRow.h"
 
 @interface SceneListTableViewCell : UITableViewCell
 
@@ -23,6 +24,6 @@
 @pro_strong UILabel             *   city;           //  城市
 @pro_strong UILabel             *   time;           //  时间
 
-- (void)setUI;
+- (void)setHomeSceneListData:(HomeSceneListRow *)model;
 
 @end

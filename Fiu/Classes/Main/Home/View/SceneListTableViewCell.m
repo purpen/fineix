@@ -8,7 +8,6 @@
 
 #import "SceneListTableViewCell.h"
 
-
 @implementation SceneListTableViewCell
 
 - (instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier {
@@ -29,57 +28,17 @@
 }
 
 #pragma mark -
-- (void)setUI {
-    //  场景图
-    self.bgImage.image = [UIImage imageNamed:@"Bi"];
-    
-    //  用户头像
-    self.userHeader.image = [UIImage imageNamed:@"user"];
-    
-    //  用户昵称
-    self.userName.text = @"Haasda Fynn";
-    
-    //  用户简介
-    self.userProfile.text = @"达人｜写剧本的文盲";
-    
-    //  观看数量
-    NSString * lookNum = @"35433";
-    CGFloat lookNumLength = [lookNum boundingRectWithSize:CGSizeMake(320, 1000) options:(NSStringDrawingUsesLineFragmentOrigin) attributes:nil context:nil].size.width;
-    [_lookNum mas_updateConstraints:^(MASConstraintMaker *make) {
-        make.size.mas_equalTo(CGSizeMake(lookNumLength, 15));
-    }];
-    self.lookNum.text = lookNum;
-    
-    //  喜欢数量
-    NSString * likeNum = @"123225";
-    CGFloat likeNumLength = [likeNum boundingRectWithSize:CGSizeMake(320, 1000) options:(NSStringDrawingUsesLineFragmentOrigin) attributes:nil context:nil].size.width;
-    [_likeNum mas_updateConstraints:^(MASConstraintMaker *make) {
-        make.size.mas_equalTo(CGSizeMake(likeNumLength, 15));
-    }];
-    self.likeNum.text = likeNum;
-
-    //  标题
-    NSString * titleStr = @" 最好的时光遇到你最好的时光遇到你 ";
-    [self titleTextStyle:titleStr];
-    
-    //  所属情景
-    NSString * whereText = @"最好的时光遇到你最好的时光遇到你";
-    CGFloat whereLength = [whereText boundingRectWithSize:CGSizeMake(320, 1000) options:(NSStringDrawingUsesLineFragmentOrigin) attributes:nil context:nil].size.width;
-    [_whereScene mas_updateConstraints:^(MASConstraintMaker *make) {
-        make.size.mas_equalTo(CGSizeMake(whereLength * 0.8, 15));
-    }];
-    self.whereScene.text = whereText;
-    
-    //  城市
-    NSString * cityText = @"北京市 朝阳区";
-    CGFloat cityLength = [cityText boundingRectWithSize:CGSizeMake(320, 1000) options:(NSStringDrawingUsesLineFragmentOrigin) attributes:nil context:nil].size.width;
-    [_city mas_updateConstraints:^(MASConstraintMaker *make) {
-        make.size.mas_equalTo(CGSizeMake(cityLength * 0.8, 15));
-    }];
-    self.city.text = cityText;
-    
-    //  时间
-    self.time.text = @"｜ 2天前";
+- (void)setHomeSceneListData:(HomeSceneListRow *)model {
+    [self titleTextStyle:model.title];
+    [self.bgImage downloadImage:model.coverUrl place:[UIImage imageNamed:@""]];
+    [self.userHeader downloadImage:model.user.avatarUrl place:[UIImage imageNamed:@""]];
+    self.userName.text = model.user.nickname;
+    self.userProfile.text = model.user.summary;
+    self.lookNum.text = [self aboutCount:self.lookNum withCount:model.viewCount];
+    self.likeNum.text = [self aboutCount:self.likeNum withCount:model.loveCount];
+    self.whereScene.text = [self abouText:self.whereScene withText:model.sceneTitle];
+    self.city.text = [self abouText:self.city withText:model.address];
+//    self.time.text = @"｜ 2天前";
     
 }
 
@@ -255,6 +214,26 @@
                                 };
     [titleText addAttributes:textDict range:NSMakeRange(0, titleText.length)];
     self.titleText.attributedText = titleText;
+}
+
+//  数量样式
+- (NSString *)aboutCount:(UILabel *)lable withCount:(NSInteger)count {
+    NSString * num = [NSString stringWithFormat:@"%zi", count];
+    CGFloat numLength = [num boundingRectWithSize:CGSizeMake(320, 1000) options:(NSStringDrawingUsesLineFragmentOrigin) attributes:nil context:nil].size.width;
+    [lable mas_updateConstraints:^(MASConstraintMaker *make) {
+        make.size.mas_equalTo(CGSizeMake(numLength, 15));
+    }];
+    return num;
+}
+
+//  文字情景
+- (NSString *)abouText:(UILabel *)lable withText:(NSString *)fiuScene {
+    NSString * whereText = fiuScene;
+    CGFloat textLength = [fiuScene boundingRectWithSize:CGSizeMake(320, 1000) options:(NSStringDrawingUsesLineFragmentOrigin) attributes:nil context:nil].size.width;
+    [lable mas_updateConstraints:^(MASConstraintMaker *make) {
+        make.size.mas_equalTo(CGSizeMake(textLength * 0.8, 15));
+    }];
+    return whereText;
 }
 
 #pragma mark - 所属情景

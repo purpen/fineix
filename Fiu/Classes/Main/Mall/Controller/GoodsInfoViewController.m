@@ -12,6 +12,7 @@
 #import "InfoGoodsHighlightsTableViewCell.h"
 #import "InfoUseSceneTableViewCell.h"
 #import "InfoRecommendTableViewCell.h"
+#import "GoodsBrandViewController.h"
 
 static const NSInteger BuyBtnTag = 754;
 
@@ -140,6 +141,15 @@ static const NSInteger BuyBtnTag = 754;
         [cell setUI];
         return cell;
         
+    } else if (indexPath.section == 2) {
+        static NSString * InfoGoodsHighlightsCellId = @"InfoGoodsHighlightsCellId";
+        InfoGoodsHighlightsTableViewCell * cell = [tableView dequeueReusableCellWithIdentifier:InfoGoodsHighlightsCellId];
+        if (!cell) {
+            cell = [[InfoGoodsHighlightsTableViewCell alloc] initWithStyle:(UITableViewCellStyleDefault) reuseIdentifier:InfoGoodsHighlightsCellId];
+        }
+        [cell setUI];
+        return cell;
+        
     } else if (indexPath.section == 3) {
         static NSString * InfoUseSceneCellId = @"InfoUseSceneCellId";
         InfoUseSceneTableViewCell * cell = [tableView dequeueReusableCellWithIdentifier:InfoUseSceneCellId];
@@ -183,6 +193,10 @@ static const NSInteger BuyBtnTag = 754;
         return 60;
     } else if (indexPath.section == 1) {
         return 75;
+    } else if (indexPath.section == 2) {
+        InfoGoodsHighlightsTableViewCell * cell = [[InfoGoodsHighlightsTableViewCell alloc] init];
+        [cell getContentCellHeight:@"太火鸟致力于帮助设计师和创意者实现商业价值，是中国顶尖的创新产品孵化器兼原创产品社会化电商平台。"];
+        return cell.cellHeight;
     } else if (indexPath.section == 3) {
         return 90;
     } else if (indexPath.section == 4) {
@@ -191,12 +205,22 @@ static const NSInteger BuyBtnTag = 754;
     return 100;
 }
 
+#pragma mark - 点击跳转
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    if (indexPath.section == 1) {
+        GoodsBrandViewController * goodsBrandVC = [[GoodsBrandViewController alloc] init];
+        goodsBrandVC.title = @"AMD";
+        [self.navigationController pushViewController:goodsBrandVC animated:YES];
+    }
+}
+
 #pragma mark - 设置Nav
 - (void)setNavigationViewUI {
     self.title = NSLocalizedString(@"GoodsInfoVcTitle", nil);
     self.view.backgroundColor = [UIColor whiteColor];
     [self addBarItemRightBarButton:@"" image:@"Nav_Car"];
     self.delegate = self;
+    [self navBarNoTransparent];
 }
 
 - (void)rightBarItemSelected {

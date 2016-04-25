@@ -10,6 +10,7 @@
 #import "Fiu.h"
 #import "UILable+Frame.h"
 #import "UIImage+Helper.h"
+#import "SceneInfoData.h"
 
 @interface ContentAndTagTableViewCell : UITableViewCell
 
@@ -19,7 +20,7 @@
 @pro_assign CGFloat                         cellHeight;
 @pro_strong NSArray                     *   titleArr;
 
-- (void)setUI;
+- (void)setSceneDescription:(SceneInfoData *)model;
 
 - (void)getContentCellHeight:(NSString *)content;
 

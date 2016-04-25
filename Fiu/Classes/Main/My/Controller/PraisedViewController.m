@@ -47,7 +47,7 @@
     if (cell == nil) {
         cell = [[SceneListTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:id];
     }
-    [cell setUI];
+//    [cell setUI];
     return cell;
 }
 

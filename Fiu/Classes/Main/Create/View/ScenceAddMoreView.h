@@ -26,10 +26,8 @@
 @pro_strong UILabel         *   location;           //  地理位置
 @pro_strong UIButton        *   removeLocation;     //  删除所选的位置
 @pro_strong UIScrollView    *   locationScrollView; //  推荐的地理位置附近
-
 @pro_strong UIView          *   addTag;             //  添加标签
 @pro_strong UIButton        *   addTagBtn;
-
 @pro_strong UIView          *   addScene;           //  所属情景
 @pro_strong UIButton        *   addSceneBtn;
 
