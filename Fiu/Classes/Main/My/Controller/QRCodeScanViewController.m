@@ -99,7 +99,7 @@
         make.centerX.mas_equalTo(self.view.mas_centerX);
     }];
     
-    //闪光灯开关
+    //我的二维码
     UIButton * lightBtn =[UIButton buttonWithType:UIButtonTypeCustom];
     lightBtn.frame =CGRectMake(0, _imageView.frame.size.height+_imageView.frame.origin.y + 30, SCREEN_WIDTH, 40);
     [lightBtn setTitle:@"我的二维码" forState:UIControlStateNormal];
@@ -249,7 +249,7 @@
     id resultObj = [NSJSONSerialization JSONObjectWithData:jsonData options:NSJSONReadingMutableContainers error:&err];
     NSLog(@"resultObj  %@",resultObj);
     //判断是不是自己的二维码
-    if ([resultObj isKindOfClass:[NSDictionary class]]) {
+    if ([resultStr rangeOfString:@"qq41e073ea://"].location != NSNotFound) {
         //取到用户信息，然后跳转到用户主页
         
         HomePageViewController *homeOpage = [[HomePageViewController alloc] init];

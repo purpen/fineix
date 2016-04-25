@@ -17,6 +17,16 @@
 		1F07A6591CC7A45300CF225F /* FriendCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F07A6581CC7A45300CF225F /* FriendCollectionViewCell.m */; };
 		1F0EE6A71C9FA4E7000631F0 /* libstdc++.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 1F0EE6A61C9FA4E7000631F0 /* libstdc++.tbd */; };
 		1F0EE6A91C9FA4F6000631F0 /* libz.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 1F0EE6A81C9FA4F6000631F0 /* libz.tbd */; };
+		1F1837661CCDCF3B00933CA7 /* EditNickNameViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F1837641CCDCF3B00933CA7 /* EditNickNameViewController.m */; };
+		1F1837671CCDCF3B00933CA7 /* EditNickNameViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1F1837651CCDCF3B00933CA7 /* EditNickNameViewController.xib */; };
+		1F18376B1CCDE95A00933CA7 /* ModifyGenderViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F1837691CCDE95A00933CA7 /* ModifyGenderViewController.m */; };
+		1F18376C1CCDE95A00933CA7 /* ModifyGenderViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1F18376A1CCDE95A00933CA7 /* ModifyGenderViewController.xib */; };
+		1F1837701CCDF87500933CA7 /* ChangePasswordViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F18376E1CCDF87500933CA7 /* ChangePasswordViewController.m */; };
+		1F1837711CCDF87500933CA7 /* ChangePasswordViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1F18376F1CCDF87500933CA7 /* ChangePasswordViewController.xib */; };
+		1F1837751CCDFCB200933CA7 /* ChangeSumaryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F1837731CCDFCB200933CA7 /* ChangeSumaryViewController.m */; };
+		1F1837761CCDFCB200933CA7 /* ChangeSumaryViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1F1837741CCDFCB200933CA7 /* ChangeSumaryViewController.xib */; };
+		1F18377A1CCE0F2200933CA7 /* TalentCertificationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F1837781CCE0F2200933CA7 /* TalentCertificationViewController.m */; };
+		1F18377B1CCE0F2200933CA7 /* TalentCertificationViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1F1837791CCE0F2200933CA7 /* TalentCertificationViewController.xib */; };
 		1F3C0A771CBF461300B84FEB /* libPods-Fiu.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 1F3C0A761CBF461300B84FEB /* libPods-Fiu.a */; };
 		1F3C0A841CBF760C00B84FEB /* SubscribePeopleViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F3C0A821CBF760C00B84FEB /* SubscribePeopleViewController.m */; };
 		1F3C0A851CBF760C00B84FEB /* SubscribePeopleViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1F3C0A831CBF760C00B84FEB /* SubscribePeopleViewController.xib */; };
@@ -33,6 +43,14 @@
 		1F51E8B31CC6338D00017839 /* PraisedViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F51E8B21CC6338D00017839 /* PraisedViewController.m */; };
 		1F51E8B61CC6380D00017839 /* FBBindingMobilePhoneNumber.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F51E8B51CC6380D00017839 /* FBBindingMobilePhoneNumber.m */; };
 		1F59E5FC1C9ABBA500E96C60 /* Accelerate.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1F59E5FB1C9ABBA500E96C60 /* Accelerate.framework */; };
+		1FBC3E8A1CCE2DEB007CFA14 /* SystemSettingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1FBC3E881CCE2DEB007CFA14 /* SystemSettingViewController.m */; };
+		1FBC3E8B1CCE2DEB007CFA14 /* SystemSettingViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1FBC3E891CCE2DEB007CFA14 /* SystemSettingViewController.xib */; };
+		1FBC3E8F1CCE2E1B007CFA14 /* OptionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1FBC3E8D1CCE2E1B007CFA14 /* OptionViewController.m */; };
+		1FBC3E901CCE2E1B007CFA14 /* OptionViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1FBC3E8E1CCE2E1B007CFA14 /* OptionViewController.xib */; };
+		1FBC3E941CCE33A4007CFA14 /* AboutViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1FBC3E921CCE33A4007CFA14 /* AboutViewController.m */; };
+		1FBC3E951CCE33A4007CFA14 /* AboutViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1FBC3E931CCE33A4007CFA14 /* AboutViewController.xib */; };
+		1FBC3E9A1CCE3766007CFA14 /* ShareViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1FBC3E981CCE3766007CFA14 /* ShareViewController.m */; };
+		1FBC3E9B1CCE3766007CFA14 /* ShareViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1FBC3E991CCE3766007CFA14 /* ShareViewController.xib */; };
 		1FBE626A1CC4CB72009606F7 /* MyPageFocusOnViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1FBE62691CC4CB72009606F7 /* MyPageFocusOnViewController.m */; };
 		1FBE626D1CC4D095009606F7 /* FocusOnTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 1FBE626C1CC4D095009606F7 /* FocusOnTableViewCell.m */; };
 		1FBE62701CC4E3C3009606F7 /* MyFansViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1FBE626F1CC4E3C3009606F7 /* MyFansViewController.m */; };
@@ -255,6 +273,21 @@
 		1F0EE6A41C9FA47B000631F0 /* libsqlite3.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libsqlite3.tbd; path = usr/lib/libsqlite3.tbd; sourceTree = SDKROOT; };
 		1F0EE6A61C9FA4E7000631F0 /* libstdc++.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = "libstdc++.tbd"; path = "usr/lib/libstdc++.tbd"; sourceTree = SDKROOT; };
 		1F0EE6A81C9FA4F6000631F0 /* libz.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libz.tbd; path = usr/lib/libz.tbd; sourceTree = SDKROOT; };
+		1F1837631CCDCF3B00933CA7 /* EditNickNameViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EditNickNameViewController.h; sourceTree = "<group>"; };
+		1F1837641CCDCF3B00933CA7 /* EditNickNameViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EditNickNameViewController.m; sourceTree = "<group>"; };
+		1F1837651CCDCF3B00933CA7 /* EditNickNameViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = EditNickNameViewController.xib; sourceTree = "<group>"; };
+		1F1837681CCDE95A00933CA7 /* ModifyGenderViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ModifyGenderViewController.h; sourceTree = "<group>"; };
+		1F1837691CCDE95A00933CA7 /* ModifyGenderViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ModifyGenderViewController.m; sourceTree = "<group>"; };
+		1F18376A1CCDE95A00933CA7 /* ModifyGenderViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ModifyGenderViewController.xib; sourceTree = "<group>"; };
+		1F18376D1CCDF87500933CA7 /* ChangePasswordViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChangePasswordViewController.h; sourceTree = "<group>"; };
+		1F18376E1CCDF87500933CA7 /* ChangePasswordViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChangePasswordViewController.m; sourceTree = "<group>"; };
+		1F18376F1CCDF87500933CA7 /* ChangePasswordViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ChangePasswordViewController.xib; sourceTree = "<group>"; };
+		1F1837721CCDFCB200933CA7 /* ChangeSumaryViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChangeSumaryViewController.h; sourceTree = "<group>"; };
+		1F1837731CCDFCB200933CA7 /* ChangeSumaryViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChangeSumaryViewController.m; sourceTree = "<group>"; };
+		1F1837741CCDFCB200933CA7 /* ChangeSumaryViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ChangeSumaryViewController.xib; sourceTree = "<group>"; };
+		1F1837771CCE0F2200933CA7 /* TalentCertificationViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TalentCertificationViewController.h; sourceTree = "<group>"; };
+		1F1837781CCE0F2200933CA7 /* TalentCertificationViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TalentCertificationViewController.m; sourceTree = "<group>"; };
+		1F1837791CCE0F2200933CA7 /* TalentCertificationViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TalentCertificationViewController.xib; sourceTree = "<group>"; };
 		1F3C0A761CBF461300B84FEB /* libPods-Fiu.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = "libPods-Fiu.a"; path = "../Library/Developer/Xcode/DerivedData/Fiu-cjbswbuyriripaegqmobstwznrnk/Build/Products/Debug-iphonesimulator/libPods-Fiu.a"; sourceTree = "<group>"; };
 		1F3C0A811CBF760C00B84FEB /* SubscribePeopleViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SubscribePeopleViewController.h; sourceTree = "<group>"; };
 		1F3C0A821CBF760C00B84FEB /* SubscribePeopleViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SubscribePeopleViewController.m; sourceTree = "<group>"; };
@@ -282,6 +315,18 @@
 		1F51E8B41CC6380D00017839 /* FBBindingMobilePhoneNumber.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FBBindingMobilePhoneNumber.h; sourceTree = "<group>"; };
 		1F51E8B51CC6380D00017839 /* FBBindingMobilePhoneNumber.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FBBindingMobilePhoneNumber.m; sourceTree = "<group>"; };
 		1F59E5FB1C9ABBA500E96C60 /* Accelerate.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Accelerate.framework; path = System/Library/Frameworks/Accelerate.framework; sourceTree = SDKROOT; };
+		1FBC3E871CCE2DEB007CFA14 /* SystemSettingViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SystemSettingViewController.h; sourceTree = "<group>"; };
+		1FBC3E881CCE2DEB007CFA14 /* SystemSettingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SystemSettingViewController.m; sourceTree = "<group>"; };
+		1FBC3E891CCE2DEB007CFA14 /* SystemSettingViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SystemSettingViewController.xib; sourceTree = "<group>"; };
+		1FBC3E8C1CCE2E1B007CFA14 /* OptionViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OptionViewController.h; sourceTree = "<group>"; };
+		1FBC3E8D1CCE2E1B007CFA14 /* OptionViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OptionViewController.m; sourceTree = "<group>"; };
+		1FBC3E8E1CCE2E1B007CFA14 /* OptionViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = OptionViewController.xib; sourceTree = "<group>"; };
+		1FBC3E911CCE33A4007CFA14 /* AboutViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AboutViewController.h; sourceTree = "<group>"; };
+		1FBC3E921CCE33A4007CFA14 /* AboutViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AboutViewController.m; sourceTree = "<group>"; };
+		1FBC3E931CCE33A4007CFA14 /* AboutViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AboutViewController.xib; sourceTree = "<group>"; };
+		1FBC3E971CCE3766007CFA14 /* ShareViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShareViewController.h; sourceTree = "<group>"; };
+		1FBC3E981CCE3766007CFA14 /* ShareViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ShareViewController.m; sourceTree = "<group>"; };
+		1FBC3E991CCE3766007CFA14 /* ShareViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ShareViewController.xib; sourceTree = "<group>"; };
 		1FBE62681CC4CB72009606F7 /* MyPageFocusOnViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyPageFocusOnViewController.h; sourceTree = "<group>"; };
 		1FBE62691CC4CB72009606F7 /* MyPageFocusOnViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyPageFocusOnViewController.m; sourceTree = "<group>"; };
 		1FBE626B1CC4D095009606F7 /* FocusOnTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FocusOnTableViewCell.h; sourceTree = "<group>"; };
@@ -738,6 +783,32 @@
 			path = View;
 			sourceTree = "<group>";
 		};
+		1FBC3E861CCE2DEB007CFA14 /* Setting */ = {
+			isa = PBXGroup;
+			children = (
+				1FBC3E871CCE2DEB007CFA14 /* SystemSettingViewController.h */,
+				1FBC3E881CCE2DEB007CFA14 /* SystemSettingViewController.m */,
+				1FBC3E891CCE2DEB007CFA14 /* SystemSettingViewController.xib */,
+				1FBC3E8C1CCE2E1B007CFA14 /* OptionViewController.h */,
+				1FBC3E8D1CCE2E1B007CFA14 /* OptionViewController.m */,
+				1FBC3E8E1CCE2E1B007CFA14 /* OptionViewController.xib */,
+				1FBC3E911CCE33A4007CFA14 /* AboutViewController.h */,
+				1FBC3E921CCE33A4007CFA14 /* AboutViewController.m */,
+				1FBC3E931CCE33A4007CFA14 /* AboutViewController.xib */,
+			);
+			path = Setting;
+			sourceTree = "<group>";
+		};
+		1FBC3E961CCE371B007CFA14 /* ShareView */ = {
+			isa = PBXGroup;
+			children = (
+				1FBC3E971CCE3766007CFA14 /* ShareViewController.h */,
+				1FBC3E981CCE3766007CFA14 /* ShareViewController.m */,
+				1FBC3E991CCE3766007CFA14 /* ShareViewController.xib */,
+			);
+			path = ShareView;
+			sourceTree = "<group>";
+		};
 		1FEF0AD11CC0FC15006EF0C6 /* My */ = {
 			isa = PBXGroup;
 			children = (
@@ -788,6 +859,21 @@
 				1FD7E6761CC8DFE400A69BDD /* MyQrCodeViewController.m */,
 				1F4061B21CCA231E00D6E9B0 /* AccountManagementViewController.h */,
 				1F4061B31CCA231E00D6E9B0 /* AccountManagementViewController.m */,
+				1F1837631CCDCF3B00933CA7 /* EditNickNameViewController.h */,
+				1F1837641CCDCF3B00933CA7 /* EditNickNameViewController.m */,
+				1F1837651CCDCF3B00933CA7 /* EditNickNameViewController.xib */,
+				1F1837681CCDE95A00933CA7 /* ModifyGenderViewController.h */,
+				1F1837691CCDE95A00933CA7 /* ModifyGenderViewController.m */,
+				1F18376A1CCDE95A00933CA7 /* ModifyGenderViewController.xib */,
+				1F18376D1CCDF87500933CA7 /* ChangePasswordViewController.h */,
+				1F18376E1CCDF87500933CA7 /* ChangePasswordViewController.m */,
+				1F18376F1CCDF87500933CA7 /* ChangePasswordViewController.xib */,
+				1F1837721CCDFCB200933CA7 /* ChangeSumaryViewController.h */,
+				1F1837731CCDFCB200933CA7 /* ChangeSumaryViewController.m */,
+				1F1837741CCDFCB200933CA7 /* ChangeSumaryViewController.xib */,
+				1F1837771CCE0F2200933CA7 /* TalentCertificationViewController.h */,
+				1F1837781CCE0F2200933CA7 /* TalentCertificationViewController.m */,
+				1F1837791CCE0F2200933CA7 /* TalentCertificationViewController.xib */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -914,6 +1000,7 @@
 		D8035FA01CBD1021001920F9 /* Other */ = {
 			isa = PBXGroup;
 			children = (
+				1FBC3E861CCE2DEB007CFA14 /* Setting */,
 				D87B69C11CC726D500199EFE /* Public */,
 				1F3C0A7D1CBF756000B84FEB /* ReceiveDetailedInformation */,
 				D8035FFD1CBF376B001920F9 /* LoginRegister */,
@@ -1576,6 +1663,7 @@
 		D87B69C11CC726D500199EFE /* Public */ = {
 			isa = PBXGroup;
 			children = (
+				1FBC3E961CCE371B007CFA14 /* ShareView */,
 				D87B69C21CC726D500199EFE /* Alert */,
 				D87B69C81CC726D500199EFE /* Comment */,
 			);
@@ -1755,14 +1843,17 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1FBC3E8B1CCE2DEB007CFA14 /* SystemSettingViewController.xib in Resources */,
 				D80360551CBF376B001920F9 /* Login.xib in Resources */,
 				D81281711CAA8532007CF08B /* UMSShareListController.xib in Resources */,
 				D812816B1CAA8532007CF08B /* UMSCommentInputController.xib in Resources */,
 				D812816D1CAA8532007CF08B /* UMShareEditViewController.xib in Resources */,
+				1F18376C1CCDE95A00933CA7 /* ModifyGenderViewController.xib in Resources */,
 				D803605A1CBF376B001920F9 /* Signup.xib in Resources */,
 				1F3C0A851CBF760C00B84FEB /* SubscribePeopleViewController.xib in Resources */,
 				1F3C0A921CBF95AC00B84FEB /* SubscribePeopleTableViewCell.xib in Resources */,
 				D81281781CAA8532007CF08B /* TencentOpenApi_IOS_Bundle.bundle in Resources */,
+				1FBC3E9B1CCE3766007CFA14 /* ShareViewController.xib in Resources */,
 				1FEF0B1F1CC0FC15006EF0C6 /* OrderInfoCell.xib in Resources */,
 				D803604C1CBF376B001920F9 /* LoginRegisterController.storyboard in Resources */,
 				1FEF0B131CC0FC15006EF0C6 /* My.storyboard in Resources */,
@@ -1772,17 +1863,23 @@
 				D80360591CBF376B001920F9 /* RecommendedScenarioView.xib in Resources */,
 				D81281721CAA8532007CF08B /* UMSocialSDKResourcesNew.bundle in Resources */,
 				D8035FC91CBD1021001920F9 /* FBMapLocatinViewController.xib in Resources */,
+				1FBC3E951CCE33A4007CFA14 /* AboutViewController.xib in Resources */,
+				1F1837711CCDF87500933CA7 /* ChangePasswordViewController.xib in Resources */,
 				D812815B1CAA8532007CF08B /* Info.plist in Resources */,
 				D812816C1CAA8532007CF08B /* UMSCommentInputControlleriPad.xib in Resources */,
 				D80360491CBF376B001920F9 /* SubscribeInterestedCollectionViewController.xib in Resources */,
 				D812815D1CAA8532007CF08B /* Localizable.strings in Resources */,
 				D812816A1CAA8532007CF08B /* UMSCommentDetailController.xib in Resources */,
 				D81281751CAA8532007CF08B /* WeiboSDK.bundle in Resources */,
+				1F18377B1CCE0F2200933CA7 /* TalentCertificationViewController.xib in Resources */,
+				1FBC3E901CCE2E1B007CFA14 /* OptionViewController.xib in Resources */,
 				1FEF0B171CC0FC15006EF0C6 /* chanel.xib in Resources */,
 				D812816E1CAA8532007CF08B /* UMShareEditViewControlleriPad.xib in Resources */,
 				D81281681CAA8532007CF08B /* UMSocialLocalizable.strings in Resources */,
+				1F1837671CCDCF3B00933CA7 /* EditNickNameViewController.xib in Resources */,
 				D812816F1CAA8532007CF08B /* UMSLoginViewController.xib in Resources */,
 				D8035FC71CBD1021001920F9 /* FBLocationViewController.xib in Resources */,
+				1F1837761CCDFCB200933CA7 /* ChangeSumaryViewController.xib in Resources */,
 				D81281111CAA8532007CF08B /* Assets.xcassets in Resources */,
 				D812815C1CAA8532007CF08B /* InfoPlist.strings in Resources */,
 				1F3C0A971CBFA28300B84FEB /* GreatPeopleViewController.xib in Resources */,
@@ -1853,6 +1950,7 @@
 				D8035F2C1CB77AAA001920F9 /* ContentAndTagTableViewCell.m in Sources */,
 				D8B0111C1CC9CDAD008A63B7 /* GoodsTableViewCell.m in Sources */,
 				D81281531CAA8532007CF08B /* FBAPI.m in Sources */,
+				1FBC3E8F1CCE2E1B007CFA14 /* OptionViewController.m in Sources */,
 				1F07A6471CC77BBF00CF225F /* OtherCollectionViewCell.m in Sources */,
 				1FD7E6771CC8DFE400A69BDD /* MyQrCodeViewController.m in Sources */,
 				1FEF0B201CC0FC15006EF0C6 /* ShareView.m in Sources */,
@@ -1877,6 +1975,8 @@
 				1FEF0B071CC0FC15006EF0C6 /* AboutFirebirdViewController.m in Sources */,
 				D81281591CAA8532007CF08B /* UIImageView+SDWedImage.m in Sources */,
 				D81281541CAA8532007CF08B /* FBRequest.m in Sources */,
+				1F18377A1CCE0F2200933CA7 /* TalentCertificationViewController.m in Sources */,
+				1FBC3E9A1CCE3766007CFA14 /* ShareViewController.m in Sources */,
 				1F3C0A961CBFA28300B84FEB /* GreatPeopleViewController.m in Sources */,
 				D80360481CBF376B001920F9 /* SubscribeInterestedCollectionViewController.m in Sources */,
 				D89B5A971CB66B3B00DB9710 /* DataNumTableViewCell.m in Sources */,
@@ -1922,11 +2022,13 @@
 				D81281241CAA8532007CF08B /* CropImageView.m in Sources */,
 				1FEF0B181CC0FC15006EF0C6 /* ChanelView.m in Sources */,
 				1FEF0B101CC0FC15006EF0C6 /* MySystemSettingsViewController.m in Sources */,
+				1FBC3E8A1CCE2DEB007CFA14 /* SystemSettingViewController.m in Sources */,
 				1FBE626D1CC4D095009606F7 /* FocusOnTableViewCell.m in Sources */,
 				1F3C0A841CBF760C00B84FEB /* SubscribePeopleViewController.m in Sources */,
 				1FEF0B191CC0FC15006EF0C6 /* ChanelViewTwo.m in Sources */,
 				D87B69E11CC7274900199EFE /* FBMenuView.m in Sources */,
 				1FEF0B0C1CC0FC15006EF0C6 /* MyMessageViewController.m in Sources */,
+				1F18376B1CCDE95A00933CA7 /* ModifyGenderViewController.m in Sources */,
 				1F3C0A911CBF95AC00B84FEB /* SubscribePeopleTableViewCell.m in Sources */,
 				D812812C1CAA8532007CF08B /* PictureView.m in Sources */,
 				D87B69BF1CC726BA00199EFE /* FBRollImages.m in Sources */,
@@ -1953,6 +2055,8 @@
 				D81281181CAA8532007CF08B /* CropImageViewController.m in Sources */,
 				D80360501CBF376B001920F9 /* UserInfoEntity.m in Sources */,
 				1F07A64A1CC77F3B00CF225F /* ScenceListCollectionViewCell.m in Sources */,
+				1F1837701CCDF87500933CA7 /* ChangePasswordViewController.m in Sources */,
+				1F1837661CCDCF3B00933CA7 /* EditNickNameViewController.m in Sources */,
 				D812812B1CAA8532007CF08B /* PhotoAlbumsView.m in Sources */,
 				D803604D1CBF376B001920F9 /* NSNumber+UserModel.m in Sources */,
 				D812811E1CAA8532007CF08B /* SelectSceneViewController.m in Sources */,
@@ -1960,10 +2064,12 @@
 				D81281211CAA8532007CF08B /* FBLoadPhoto.m in Sources */,
 				D8B011071CC795F9008A63B7 /* GoodsCategoryViewController.m in Sources */,
 				D8035FCF1CBD1021001920F9 /* FBTabBar.m in Sources */,
+				1FBC3E941CCE33A4007CFA14 /* AboutViewController.m in Sources */,
 				D812813C1CAA8532007CF08B /* MallViewController.m in Sources */,
 				1FEF0B1D1CC0FC15006EF0C6 /* NaviView.m in Sources */,
 				D86AFDE91CBF7D6F006F1602 /* SearchResultsRollView.m in Sources */,
 				D81281191CAA8532007CF08B /* FiltersViewController.m in Sources */,
+				1F1837751CCDFCB200933CA7 /* ChangeSumaryViewController.m in Sources */,
 				D803603F1CBF376B001920F9 /* FBLoginRegisterViewController.m in Sources */,
 				D8035FCE1CBD1021001920F9 /* SearchViewController.m in Sources */,
 				1FEF0B1B1CC0FC15006EF0C6 /* MyHomeV.m in Sources */,

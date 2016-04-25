@@ -76,9 +76,9 @@ static NSString *const thirdRegisteredNotBinding = @"/auth/third_register_withou
     self.qqBtn.layer.masksToBounds = YES;
     //隐藏的view
     _phoneNumLoginV = [[PhoneNumLoginView alloc] init];
-    
+    _phoneNumLoginV.hidden = YES;
     CGRect frame = _phoneNumLoginV.frame;
-    frame.origin.y = 1000;
+    frame.origin.y = 117.0/667.0*SCREEN_HEIGHT;
     _phoneNumLoginV.frame = frame;
     _phoneNumLoginV.phoneTF.delegate = self;
     _phoneNumLoginV.pwdTF.delegate = self;
@@ -313,10 +313,12 @@ static NSString *const thirdRegisteredNotBinding = @"/auth/third_register_withou
 
 -(void)clickPhoneNumTF:(UIButton *)sender{
     [UIView animateWithDuration:0.5 animations:^{
-        self.topView.hidden = YES;
+        
         CGRect frame = _phoneNumLoginV.frame;
+        _phoneNumLoginV.hidden = NO;
         frame.origin.y = 117.0/667.0*SCREEN_HEIGHT;
         _phoneNumLoginV.frame = frame;
+        self.topView.hidden = YES;
     } completion:^(BOOL finished) {
         //成为第一响应者
         [_phoneNumLoginV.phoneTF becomeFirstResponder];
@@ -341,7 +343,9 @@ static NSString *const thirdRegisteredNotBinding = @"/auth/third_register_withou
             _submitView.hidden = YES;
             _phoneNumLoginV.hidden = NO;
         } completion:^(BOOL finished) {
-            
+            [_submitView.phoneNumTF resignFirstResponder];
+            [_submitView.setANewPasswordTF resignFirstResponder];
+            [_submitView.verificationCodeTF resignFirstResponder];
         }];
         return;
     }
@@ -354,7 +358,8 @@ static NSString *const thirdRegisteredNotBinding = @"/auth/third_register_withou
     if (_phoneNumLoginV.hidden == NO) {
         [UIView animateWithDuration:0.5 animations:^{
             CGRect frame = _phoneNumLoginV.frame;
-            frame.origin.y = 1000;
+            frame.origin.y = 117.0/667.0*SCREEN_HEIGHT;
+            _phoneNumLoginV.hidden = YES;
             _phoneNumLoginV.frame = frame;
             [_phoneNumLoginV.pwdTF resignFirstResponder];
             [_phoneNumLoginV.phoneTF resignFirstResponder];

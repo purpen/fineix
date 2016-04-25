@@ -13,6 +13,7 @@
 #import "FBSheetViewController.h"
 #import "SVProgressHUD.h"
 #import "QRCodeScanViewController.h"
+#import "UserInfoEntity.h"
 
 @interface MyQrCodeViewController ()<FBNavigationBarItemsDelegate>
 
@@ -37,7 +38,8 @@
     [self addBarItemRightBarButton:nil image:@"icon_ios_more_black"];
     
     [self.filter setDefaults];
-    NSString *str = @"董永胜";
+    UserInfoEntity *entity = [UserInfoEntity defaultUserInfoEntity];
+    NSString *str = [NSString stringWithFormat:@"qq41e073ea://id=%@",entity.userId];
     NSData *data = [str dataUsingEncoding:NSUTF8StringEncoding];
     [_filter setValue:data forKey:@"inputMessage"];
     self.view = self.qrCodeView;
