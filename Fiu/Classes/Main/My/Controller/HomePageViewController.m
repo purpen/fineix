@@ -17,6 +17,7 @@
 #import "FBSheetViewController.h"
 #import "Fiu.h"
 #import "AccountManagementViewController.h"
+#import "UserInfoEntity.h"
 
 @interface HomePageViewController ()<UICollectionViewDelegate,UICollectionViewDataSource,UICollectionViewDelegateFlowLayout>
 {
@@ -66,8 +67,11 @@
 
 -(void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
+    [self.myCollectionView reloadData];
     self.navigationController.navigationBarHidden = YES;
+    self.tabBarController.tabBar.hidden = YES;
 }
+
 
 -(void)signleTap:(UITapGestureRecognizer*)sender{
     NSLog(@"情景");

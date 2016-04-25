@@ -1218,7 +1218,7 @@
                 <outlet property="qrcodeBtn" destination="6LQ-JJ-pdv" id="XCp-1T-Pqz"/>
                 <outlet property="sex" destination="lW1-jr-MwX" id="i4t-c6-kwA"/>
                 <outlet property="sexBtn" destination="LXT-qR-NSm" id="0j1-FZ-q9L"/>
-                <outlet property="sumBtn" destination="bks-ip-Hwy" id="ZQb-5N-HkM"/>
+                <outlet property="sumBtn" destination="J9V-6G-f1s" id="LKj-Mg-65A"/>
             </connections>
             <point key="canvasLocation" x="297.5" y="1931.5"/>
         </view>

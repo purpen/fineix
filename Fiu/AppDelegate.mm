@@ -20,6 +20,7 @@
 #import "FBRequest.h"
 #import "FBAPI.h"
 #import "GuidePageViewController.h"
+#import "HomePageViewController.h"
 
 
 @interface AppDelegate ()
@@ -134,6 +135,10 @@ NSString *const determineLogin = @"/auth/check_login";
     // 由于苹果审核政策需求，建议大家对未安装客户端平台进行隐藏，在设置QQ、微信AppID之后调用下面的方法
     [UMSocialConfig hiddenNotInstallPlatforms:@[UMShareToQQ, UMShareToWechatSession, UMShareToWechatTimeline, UMShareToSina]];
     
+    
+    
+    
+    
 
     return YES;
 }
@@ -163,7 +168,13 @@ NSString *const determineLogin = @"/auth/check_login";
     if ([UMSocialSnsService handleOpenURL:url]) {
         return YES;
     }
-    
+//    NSString *urlStr = [url absoluteString];
+//    if ([urlStr containsString:@"qq41e073ea"]) {
+//        NSArray *ary = [urlStr componentsSeparatedByString:@"="];
+//        NSLog(@"%@",[ary lastObject]);
+//        HomePageViewController *homePageVC = [[HomePageViewController alloc] init];
+//        return YES;
+//    }
     return YES;
 }
 

@@ -17,7 +17,7 @@
 @property (weak, nonatomic) IBOutlet UILabel *birthday;
 @property (weak, nonatomic) IBOutlet UIButton *headBtn;
 @property (weak, nonatomic) IBOutlet UIButton *nickBtn;
-@property (weak, nonatomic) IBOutlet UIView *sumBtn;
+@property (weak, nonatomic) IBOutlet UIButton *sumBtn;
 @property (weak, nonatomic) IBOutlet UIButton *adreesBtn;
 @property (weak, nonatomic) IBOutlet UIButton *sexBtn;
 @property (weak, nonatomic) IBOutlet UIButton *birthdayBtn;

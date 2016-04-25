@@ -24,8 +24,8 @@
 #import "SubscribeViewController.h"
 #import "PraisedViewController.h"
 #import "FindeFriendViewController.h"
-
-#import "MySystemSettingsViewController.h"
+#import "TalentCertificationViewController.h"
+#import "SystemSettingViewController.h"
 
 @interface MyViewController ()<UIScrollViewDelegate>
 
@@ -165,6 +165,8 @@
 -(void)clickCertificationBtn:(UIButton*)sender{
     //跳转到达人认证界面
     NSLog(@"跳转到达人认证界面");
+    TalentCertificationViewController *vc = [[TalentCertificationViewController alloc] init];
+    [self.navigationController pushViewController:vc animated:YES];
 }
 
 -(void)signleTap1:(UITapGestureRecognizer*)gesture{
@@ -270,8 +272,7 @@
 -(void)accountManagementBtn:(UIButton*)sender{
     NSLog(@"#########");
     
-    UIStoryboard *storyBoard = [UIStoryboard storyboardWithName:@"My" bundle:nil];
-    MySystemSettingsViewController *systemVC = [storyBoard instantiateViewControllerWithIdentifier:@"MySystemSettingsViewController"];
+    SystemSettingViewController *systemVC = [[SystemSettingViewController alloc] init];
     [self.navigationController pushViewController:systemVC animated:YES];
     
 

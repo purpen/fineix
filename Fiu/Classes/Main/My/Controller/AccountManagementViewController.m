@@ -12,6 +12,9 @@
 #import "UserInfoEntity.h"
 #import <SDWebImage/UIImageView+WebCache.h>
 #import "SVProgressHUD.h"
+#import "EditNickNameViewController.h"
+#import "ModifyGenderViewController.h"
+#import "ChangeSumaryViewController.h"
 
 @interface AccountManagementViewController ()<FBNavigationBarItemsDelegate,UIImagePickerControllerDelegate,UIActionSheetDelegate,UINavigationControllerDelegate>
 
@@ -40,8 +43,53 @@ static NSString *const IconURL = @"/my/upload_token";
     if (!_accountView) {
         _accountView = [AccountView getAccountView];
         [_accountView.headBtn addTarget:self action:@selector(clickHeadImageBtn:) forControlEvents:UIControlEventTouchUpInside];
+        [_accountView.nickBtn addTarget:self action:@selector(clickNickBtn:) forControlEvents:UIControlEventTouchUpInside];
+        [_accountView.sexBtn addTarget:self action:@selector(clickSexBtn:) forControlEvents:UIControlEventTouchUpInside];
+        [_accountView.sumBtn addTarget:self action:@selector(clickSumBtn:) forControlEvents:UIControlEventTouchUpInside];
     }
     return _accountView;
+}
+
+-(void)viewWillAppear:(BOOL)animated{
+    [super viewWillAppear:animated];
+    UserInfoEntity *entity = [UserInfoEntity defaultUserInfoEntity];
+    //更新头像
+    [_accountView.iconUrl sd_setImageWithURL:[NSURL URLWithString:entity.mediumAvatarUrl] placeholderImage:[UIImage imageNamed:@"Circle + User"] completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
+        
+    }];
+    _accountView.nickName.text = entity.nickname;
+    _accountView.adress.text = entity.address;
+    switch ([entity.sex intValue]) {
+        case 0:
+            _accountView.sex.text = @"保密";
+            break;
+        case 1:
+            _accountView.sex.text = @"男";
+            break;
+        case 3:
+            _accountView.sex.text = @"女";
+            break;
+            
+        default:
+            break;
+    }
+    _accountView.birthday.text = entity.birthday;
+
+}
+
+-(void)clickSumBtn:(UIButton*)sender{
+    ChangeSumaryViewController *vc = [[ChangeSumaryViewController alloc] init];
+    [self.navigationController pushViewController:vc animated:YES];
+}
+
+-(void)clickSexBtn:(UIButton*)sender{
+    ModifyGenderViewController *vc = [[ModifyGenderViewController alloc] init];
+    [self.navigationController pushViewController:vc animated:YES];
+}
+
+-(void)clickNickBtn:(UIButton*)sender{
+    EditNickNameViewController *editVC = [[EditNickNameViewController alloc] init];
+    [self.navigationController pushViewController:editVC animated:YES];
 }
 
 -(void)clickHeadImageBtn:(UIButton*)sender{
