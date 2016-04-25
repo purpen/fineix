@@ -18,11 +18,89 @@
     [super viewDidLoad];
 
     [self setSlideBackVC];
+    
+    [self.view addSubview:self.navView];
+    
+    [self addNavBackBtn];
+}
+
+#pragma mark - 自定义Nav视图
+- (UIView *)navView {
+    if (!_navView) {
+        _navView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 64)];
+        _navView.backgroundColor = [UIColor whiteColor];
+        
+        [_navView addSubview:self.navViewTitle];
+
+        [_navView addSubview:self.navLine];
+        
+    }
+    return _navView;
+}
+
+#pragma mark - 控制器的标题
+- (UILabel *)navViewTitle {
+    if (!_navViewTitle) {
+        _navViewTitle = [[UILabel alloc] initWithFrame:CGRectMake(44, 20, SCREEN_WIDTH - 88, 44)];
+        _navViewTitle.textColor = [UIColor blackColor];
+        _navViewTitle.font = [UIFont systemFontOfSize:17.0f];
+        _navViewTitle.textAlignment = NSTextAlignmentCenter;
+    }
+    return _navViewTitle;
+}
+
+#pragma mark - pop返回按钮
+- (UIButton *)navBackBtn {
+    if (!_navBackBtn) {
+        _navBackBtn = [[UIButton alloc] initWithFrame:CGRectMake(0, 20, 44, 44)];
+        [_navBackBtn setImage:[UIImage imageNamed:@"icon_back"] forState:(UIControlStateNormal)];
+        [_navBackBtn addTarget:self action:@selector(popViewController) forControlEvents:(UIControlEventTouchUpInside)];
+    }
+    return _navBackBtn;
+}
+
+#pragma mark - 视图分割线
+- (UILabel *)navLine {
+    if (!_navLine) {
+        _navLine = [[UILabel alloc] initWithFrame:CGRectMake(0, 63, SCREEN_WIDTH, 1)];
+        _navLine.backgroundColor = [UIColor colorWithHexString:@"#F0F0F1"];
+    }
+    return _navLine;
+}
+
+#pragma mark - 添加Nav中间的Logo
+- (void)addNavLogoImg {
+    UIImageView * logoImg = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"Nav_Title"]];
+    [self.navView addSubview:logoImg];
+    [logoImg mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.size.mas_equalTo(CGSizeMake(44, 24));
+        make.bottom.equalTo(_navView.mas_bottom).with.offset(-10);
+        make.centerX.equalTo(_navView);
+    }];
+}
+
+#pragma mark - 添加pop返回按钮
+- (void)addNavBackBtn {
+    if ([self.navigationController viewControllers].count > 1) {
+        [self.navView addSubview:self.navBackBtn];
+    }
+}
+
+//  返回上层视图
+- (void)popViewController {
+    if (self.navigationController.viewControllers.count > 1) {
+        [self.navigationController popViewControllerAnimated:YES];
+    } else {
+        [self dismissViewControllerAnimated:YES completion:nil];
+    }
 }
 
 #pragma mark - 添加Nav左边的按钮
 - (void)addBarItemLeftBarButton:(NSString *)title image:(NSString *)image {
-    self.navigationItem.leftBarButtonItem = [UIBarButtonItem itemWithTitle:title backgroundImage:[UIImage imageNamed:image] target:self action:@selector(leftAction)];
+    UIButton * leftBtn = [[UIButton alloc] initWithFrame:CGRectMake(0, 20, 44, 44)];
+    [leftBtn setImage:[UIImage imageNamed:image] forState:(UIControlStateNormal)];
+    [leftBtn addTarget:self action:@selector(leftAction) forControlEvents:(UIControlEventTouchUpInside)];
+    [self.navView addSubview:leftBtn];
 }
 
 //  点击左边按钮事件
@@ -34,7 +112,10 @@
 
 #pragma mark - 添加Nav左边的按钮
 - (void)addBarItemRightBarButton:(NSString *)title image:(NSString *)image {
-    self.navigationItem.rightBarButtonItem = [UIBarButtonItem itemWithTitle:title backgroundImage:[UIImage imageNamed:image] target:self action:@selector(rightAction)];
+    UIButton * rightBtn = [[UIButton alloc] initWithFrame:CGRectMake(SCREEN_WIDTH - 44, 20, 44, 44)];
+    [rightBtn setImage:[UIImage imageNamed:image] forState:(UIControlStateNormal)];
+    [rightBtn addTarget:self action:@selector(rightAction) forControlEvents:(UIControlEventTouchUpInside)];
+    [self.navView addSubview:rightBtn];
 }
 
 //  点击右边按钮事件
@@ -44,37 +125,10 @@
     }
 }
 
-#pragma mark - 添加Nav中间的Logo
-- (void)addNavLogo:(NSString *)image {
-    self.navigationItem.titleView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:image]];
-}
-
-#pragma mark - 设置Nav透明
-- (void)navBarTransparent {
-    [self.navigationController.navigationBar setBackgroundImage:[UIImage new] forBarMetrics:(UIBarMetricsDefault)];
-    self.navigationController.navigationBar.shadowImage = [UIImage new];
-}
-
-#pragma mark - 设置Nav不透明
-- (void)navBarNoTransparent {
-    CGRect rect = CGRectMake(0, 0, SCREEN_WIDTH, 1);
-    UIGraphicsBeginImageContext(rect.size);
-    CGContextRef context = UIGraphicsGetCurrentContext();
-    CGContextSetFillColorWithColor(context, [UIColor colorWithHexString:@"#E9E9E9" alpha:1].CGColor);
-    CGContextFillRect(context, rect);
-    UIImage * img = UIGraphicsGetImageFromCurrentImageContext();
-    UIGraphicsEndImageContext();
-    self.navigationController.navigationBar.shadowImage = img;
-    
-    CGRect bgrect = CGRectMake(0, 0, SCREEN_WIDTH, 64);
-    UIGraphicsBeginImageContext(bgrect.size);
-    CGContextRef bgcontext = UIGraphicsGetCurrentContext();
-    CGContextSetFillColorWithColor(bgcontext, [UIColor whiteColor].CGColor);
-    CGContextFillRect(bgcontext, bgrect);
-    UIImage * bgimg = UIGraphicsGetImageFromCurrentImageContext();
-    UIGraphicsEndImageContext();
-    [self.navigationController.navigationBar setBackgroundImage:bgimg forBarMetrics:(UIBarMetricsDefault)];
-
+#pragma mark - 设置Nav视图透明
+- (void)setNavTransparent {
+    self.navLine.hidden = YES;
+    self.navView.backgroundColor = [[UIColor whiteColor] colorWithAlphaComponent:0.0f];
 }
 
 #pragma mark - 开启侧滑返回

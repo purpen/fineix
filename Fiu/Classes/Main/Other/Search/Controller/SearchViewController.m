@@ -47,7 +47,7 @@
 #pragma mark - 搜索结果视图
 - (SearchResultsRollView *)resultsView {
     if (!_resultsView) {
-        _resultsView = [[SearchResultsRollView alloc] initWithFrame:CGRectMake(0, 44, SCREEN_WIDTH, SCREEN_HEIGHT - 44)];
+        _resultsView = [[SearchResultsRollView alloc] initWithFrame:CGRectMake(0, 108, SCREEN_WIDTH, SCREEN_HEIGHT - 108)];
         [_resultsView setSearchResultTable:self.titleArr];
         _resultsView.nav = self.navigationController;
     }
@@ -57,7 +57,7 @@
 #pragma mark - 添加搜索框视图
 - (FBSearchView *)searchView {
     if (!_searchView) {
-        _searchView = [[FBSearchView alloc] initWithFrame:CGRectMake(35, 0, SCREEN_WIDTH - 35, 44)];
+        _searchView = [[FBSearchView alloc] initWithFrame:CGRectMake(35, 20, SCREEN_WIDTH - 35, 44)];
         _searchView.searchInputBox.placeholder = NSLocalizedString(@"search", nil);
         _searchView.delegate = self;
         _searchView.line.hidden = YES;
@@ -73,7 +73,7 @@
 #pragma mark - 导航菜单视图
 - (SearchMenuView *)menuView {
     if (!_menuView) {
-        _menuView = [[SearchMenuView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 44)];
+        _menuView = [[SearchMenuView alloc] initWithFrame:CGRectMake(0, 64, SCREEN_WIDTH, 44)];
         _menuView.delegate = self;
         [_menuView setSearchMenuView:self.titleArr];
     }
@@ -103,17 +103,10 @@
 
 #pragma mark - 设置Nav
 - (void)setNavigationViewUI {
-    [self navBarNoTransparent];
-    [[UIApplication sharedApplication] setStatusBarHidden:NO withAnimation:(UIStatusBarAnimationSlide)];
-    [self.navigationController.navigationBar addSubview:self.searchView];
+//    [[UIApplication sharedApplication] setStatusBarHidden:NO withAnimation:(UIStatusBarAnimationSlide)];
     self.view.backgroundColor = [UIColor whiteColor];
-}
-
-- (void)viewWillDisappear:(BOOL)animated {
-    [super viewWillDisappear:animated];
-    if (self.searchView) {
-        [self.searchView removeFromSuperview];
-    }
+    [self.navView addSubview:self.searchView];
+    self.navLine.hidden = YES;
 }
 
 @end

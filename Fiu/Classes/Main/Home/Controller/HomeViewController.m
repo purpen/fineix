@@ -33,7 +33,6 @@ static NSString *const URLSceneList = @"/scene_sight/";
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.view.backgroundColor = [UIColor whiteColor];
     self.automaticallyAdjustsScrollViewInsets = NO;
     self.currentpageNum = 0;
     
@@ -211,11 +210,11 @@ static NSString *const URLSceneList = @"/scene_sight/";
 
 #pragma mark - 设置Nav
 - (void)setNavigationViewUI {
+    self.view.backgroundColor = [UIColor whiteColor];
     self.delegate = self;
+    [self addNavLogoImg];
     [self addBarItemLeftBarButton:@"" image:@"Nav_Search"];
     [self addBarItemRightBarButton:@"" image:@"Nav_Concern"];
-    [self addNavLogo:@"Nav_Title"];
-    [self navBarTransparent];
     [[UIApplication sharedApplication] setStatusBarHidden:NO withAnimation:(UIStatusBarAnimationSlide)];
     
 }

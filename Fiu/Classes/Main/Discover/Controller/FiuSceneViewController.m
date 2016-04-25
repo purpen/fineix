@@ -223,8 +223,7 @@
     self.navigationController.navigationBar.frame = CGRectMake(0, 20, SCREEN_WIDTH, 44);
     self.delegate = self;
     [self addBarItemRightBarButton:@"" image:@"icon_newScene"];
-    [self addNavLogo:@"Nav_Title"];
-    [self navBarTransparent];
+    [self addNavLogoImg];
     [self hiddenNavItem:NO];
 }
 

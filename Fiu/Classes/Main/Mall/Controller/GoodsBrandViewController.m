@@ -99,7 +99,6 @@
 #pragma mark - 设置Nav
 - (void)setNavigationViewUI {
     self.view.backgroundColor = [UIColor whiteColor];
-    [self navBarTransparent];
 }
 
 @end

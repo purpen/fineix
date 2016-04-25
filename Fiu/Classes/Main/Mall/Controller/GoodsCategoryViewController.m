@@ -38,7 +38,7 @@
 #pragma mark - 商品列表视图
 - (GoodsCategoryView *)goodsCategoryView {
     if (!_goodsCategoryView) {
-        _goodsCategoryView = [[GoodsCategoryView alloc] initWithFrame:CGRectMake(0, 44, SCREEN_WIDTH, SCREEN_HEIGHT - 108)];
+        _goodsCategoryView = [[GoodsCategoryView alloc] initWithFrame:CGRectMake(0, 108, SCREEN_WIDTH, SCREEN_HEIGHT - 108)];
         _goodsCategoryView.delegate = self;
         [_goodsCategoryView addGoodsCategoryTableView:self.categoryTitleArr];
     }
@@ -54,7 +54,7 @@
 #pragma mark - 滑动导航栏
 - (FBMenuView *)categoryMenuView {
     if (!_categoryMenuView) {
-        _categoryMenuView = [[FBMenuView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 44)];
+        _categoryMenuView = [[FBMenuView alloc] initWithFrame:CGRectMake(0, 64, SCREEN_WIDTH, 44)];
         _categoryMenuView.delegate = self;
         _categoryMenuView.menuTitle = self.categoryTitleArr;
         [_categoryMenuView updateMenuButtonData];
@@ -69,10 +69,10 @@
 
 #pragma mark - 设置Nav
 - (void)setNavigationViewUI {
-    self.title = NSLocalizedString(@"GoodsCategoryVcTitle", nil);
     self.view.backgroundColor = [UIColor whiteColor];
-    [self addBarItemRightBarButton:@"" image:@"Nav_Car"];
     self.delegate = self;
+    self.navViewTitle.text = NSLocalizedString(@"GoodsCategoryVcTitle", nil);
+    [self addBarItemRightBarButton:@"" image:@"Nav_Car"];
 }
 
 - (void)rightBarItemSelected {

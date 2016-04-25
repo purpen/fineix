@@ -16,14 +16,13 @@
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
-    [[UIApplication sharedApplication] setStatusBarHidden:NO withAnimation:(UIStatusBarAnimationSlide)];
+    
+    [self setNavigationViewUI];
+    
 }
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.view.backgroundColor = [UIColor whiteColor];
-    
-    [self setNavigationViewUI];
     
     [self setMallViewUI];
 }
@@ -53,7 +52,7 @@
 #pragma mark - tableView
 - (UITableView *)mallTableView {
     if (!_mallTableView) {
-        _mallTableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT) style:(UITableViewStyleGrouped)];
+        _mallTableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 64, SCREEN_WIDTH, SCREEN_HEIGHT - 64) style:(UITableViewStyleGrouped)];
         _mallTableView.delegate = self;
         _mallTableView.dataSource = self;
         _mallTableView.tableHeaderView = self.rollView;
@@ -168,11 +167,12 @@
 
 #pragma mark - 设置Nav
 - (void)setNavigationViewUI {
-    [self navBarNoTransparent];
+//    [[UIApplication sharedApplication] setStatusBarHidden:NO withAnimation:(UIStatusBarAnimationSlide)];
+    self.view.backgroundColor = [UIColor whiteColor];
     self.delegate = self;
+    [self addNavLogoImg];
     [self addBarItemLeftBarButton:@"" image:@"Nav_Search"];
     [self addBarItemRightBarButton:@"" image:@"Nav_Car"];
-    [self addNavLogo:@"Nav_Title"];
 }
 
 //  点击左边barItem

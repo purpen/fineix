@@ -37,7 +37,7 @@
 #pragma mark - 情景列表
 - (AllSceneView *)allSceneList {
     if (!_allSceneList) {
-        _allSceneList = [[AllSceneView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT)];
+        _allSceneList = [[AllSceneView alloc] initWithFrame:CGRectMake(0, 64, SCREEN_WIDTH, SCREEN_HEIGHT - 64)];
         
         _allSceneList.allSceneView.mj_header = [MJRefreshNormalHeader headerWithRefreshingBlock:^{
             
@@ -52,8 +52,8 @@
 
 #pragma mark - 设置Nav
 - (void)setNavigationViewUI {
-    self.title = @"全部情景";
     self.view.backgroundColor = [UIColor whiteColor];
+    self.navViewTitle.text = NSLocalizedString(@"AllSceneVcTitle", nil);
     self.delegate = self;
     [self addBarItemRightBarButton:@"" image:@"icon_newScene"];
     [[UIApplication sharedApplication] setStatusBarHidden:NO withAnimation:(UIStatusBarAnimationSlide)];

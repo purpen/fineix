@@ -7,6 +7,7 @@
 //
 
 #import "FBNavigationViewController.h"
+#import "FBViewController.h"
 
 @interface FBNavigationViewController ()
 
@@ -14,28 +15,30 @@
 
 @implementation FBNavigationViewController
 
-//+ (void)initialize {
-//    
-//    UINavigationBar * fiuNavBar = [UINavigationBar appearance];
-//    [fiuNavBar setBarTintColor:[UIColor whiteColor]];
-//    [fiuNavBar setTitleTextAttributes:@{
-//                                        NSForegroundColorAttributeName:[UIColor blackColor],
-//                                        NSFontAttributeName:[UIFont systemFontOfSize:17]
-//                                        }];
-//}
-
-#pragma mark - 重写push方法
-- (void)pushViewController:(UIViewController *)viewController animated:(BOOL)animated {
-    //  判断是否为根视图
-    if (self.viewControllers.count) {
-        viewController.hidesBottomBarWhenPushed = YES;
-        viewController.navigationItem.leftBarButtonItem = [UIBarButtonItem itemWithNormalIcon:@"icon_back" highlightedIcon:@"icon_back" target:self action:@selector(backAction)];
+#pragma mark - 重写Nav的方法
+- (instancetype)initWithRootViewController:(UIViewController *)rootViewController {
+    self = [super initWithRootViewController:rootViewController];
+    if (self) {
+        self.navigationBarHidden = true;
     }
-    [super pushViewController:viewController animated:YES];
+    return self;
 }
 
-- (void)backAction {
-    [self popViewControllerAnimated:YES];
+- (void)pushViewController:(UIViewController *)viewController animated:(BOOL)animated {
+    if (self.viewControllers.count) {
+        viewController.hidesBottomBarWhenPushed = YES;
+    }
+    [super pushViewController:viewController animated:animated];
+}
+
+- (UIViewController * _Nullable)popViewControllerAnimated:(BOOL)animated {
+    if (self.viewControllers.count > 1) {
+        return [super popViewControllerAnimated:animated];
+    }
+    [self dismissViewControllerAnimated:YES completion:^{
+        
+    }];
+    return nil;
 }
 
 @end

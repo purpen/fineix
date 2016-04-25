@@ -316,20 +316,13 @@ static NSString *const URLLikeScenePeople = @"/favorite";
 
 #pragma mark - 设置Nav
 - (void)setNavigationViewUI {
-    self.delegate = self;
-    [self addBarItemRightBarButton:@"" image:@"Share_Scene"];
-    [self addNavLogo:@"Nav_Title"];
-    [self navBarTransparent];
-    [self hiddenNavItem:NO];
     [[UIApplication sharedApplication] setStatusBarHidden:YES withAnimation:(UIStatusBarAnimationSlide)];
-    self.navigationController.navigationBar.frame = CGRectMake(0, 20, SCREEN_WIDTH, 44);
+    self.view.backgroundColor = [UIColor whiteColor];
+    self.delegate = self;
+    [self addNavLogoImg];
+    [self addBarItemRightBarButton:@"" image:@"Share_Scene"];
 }
 
-//  隐藏Nav左右的按钮
-- (void)hiddenNavItem:(BOOL)hidden {
-    self.navigationItem.leftBarButtonItem.customView.hidden = hidden;
-    self.navigationItem.rightBarButtonItem.customView.hidden = hidden;
-}
 
 //  点击右边barItem
 - (void)rightBarItemSelected {

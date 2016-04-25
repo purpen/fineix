@@ -61,7 +61,7 @@ static NSString *const URLDiscoverSlide = @"/gateway/slide";
 #pragma mark - tableView
 - (UITableView *)discoverTableView {
     if (!_discoverTableView) {
-        _discoverTableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT) style:(UITableViewStyleGrouped)];
+        _discoverTableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 64, SCREEN_WIDTH, SCREEN_HEIGHT - 64) style:(UITableViewStyleGrouped)];
         _discoverTableView.delegate = self;
         _discoverTableView.dataSource = self;
         _discoverTableView.showsVerticalScrollIndicator = NO;
@@ -191,13 +191,12 @@ static NSString *const URLDiscoverSlide = @"/gateway/slide";
 
 #pragma mark - 设置Nav
 - (void)setNavigationViewUI {
-    [[UIApplication sharedApplication] setStatusBarHidden:NO withAnimation:(UIStatusBarAnimationSlide)];
-    [self navBarNoTransparent];
+//    [[UIApplication sharedApplication] setStatusBarHidden:NO withAnimation:(UIStatusBarAnimationSlide)];
     self.view.backgroundColor = [UIColor whiteColor];
     self.delegate = self;
+    [self addNavLogoImg];
     [self addBarItemLeftBarButton:@"" image:@"Nav_Search"];
     [self addBarItemRightBarButton:@"" image:@"Nav_Location"];
-    [self addNavLogo:@"Nav_Title"];
 }
 
 //  点击左边barItem

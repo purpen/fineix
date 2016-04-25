@@ -102,7 +102,7 @@ static const NSInteger BuyBtnTag = 754;
 #pragma mark - 商品信息
 - (UITableView *)goodsInfoTable {
     if (!_goodsInfoTable) {
-        _goodsInfoTable = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT - 108)];
+        _goodsInfoTable = [[UITableView alloc] initWithFrame:CGRectMake(0, 64, SCREEN_WIDTH, SCREEN_HEIGHT - 108)];
         _goodsInfoTable.delegate = self;
         _goodsInfoTable.dataSource = self;
         _goodsInfoTable.showsHorizontalScrollIndicator = NO;
@@ -209,18 +209,17 @@ static const NSInteger BuyBtnTag = 754;
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     if (indexPath.section == 1) {
         GoodsBrandViewController * goodsBrandVC = [[GoodsBrandViewController alloc] init];
-        goodsBrandVC.title = @"AMD";
+        goodsBrandVC.navViewTitle.text = @"AMD";
         [self.navigationController pushViewController:goodsBrandVC animated:YES];
     }
 }
 
 #pragma mark - 设置Nav
 - (void)setNavigationViewUI {
-    self.title = NSLocalizedString(@"GoodsInfoVcTitle", nil);
+    self.navViewTitle.text = NSLocalizedString(@"GoodsInfoVcTitle", nil);
     self.view.backgroundColor = [UIColor whiteColor];
     [self addBarItemRightBarButton:@"" image:@"Nav_Car"];
     self.delegate = self;
-    [self navBarNoTransparent];
 }
 
 - (void)rightBarItemSelected {

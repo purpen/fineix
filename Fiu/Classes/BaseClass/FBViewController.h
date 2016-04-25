@@ -22,7 +22,39 @@
 
 @interface FBViewController : UIViewController
 
+/*
+ *  自定义Nav视图
+ */
+@pro_strong UIView      *   navView;
+
+/*
+ *  控制器的标题
+ */
+@pro_strong UILabel     *   navViewTitle;
+
+/*
+ *  返回pop按钮
+ */
+@pro_strong UIButton    *   navBackBtn;
+
+/*
+ *  视图分割线
+ */
+@pro_strong UILabel     *   navLine;
+
+
+
 @pro_weak id <FBNavigationBarItemsDelegate> delegate;
+
+/*
+ *  在Nav上添加中间的Logo
+ */
+- (void)addNavLogoImg;
+
+/*
+ *  在Nav上添加pop返回按钮
+ */
+- (void)addNavBackBtn;
 
 /*
  *  在Nav上添加左边的按钮
@@ -35,19 +67,8 @@
 - (void)addBarItemRightBarButton:(NSString *)title image:(NSString *)image;
 
 /*
- *  在Nav上添加Logo
+ *  设置Nav视图透明
  */
-- (void)addNavLogo:(NSString *)image;
-
-/*
- *  设置Nav透明
- */
-- (void)navBarTransparent;
-
-/*
- *  设置Nav不透明
- */
-- (void)navBarNoTransparent;
-
+- (void)setNavTransparent;
 
 @end
