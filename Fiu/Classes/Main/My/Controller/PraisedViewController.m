@@ -21,7 +21,7 @@
     //设置导航
     self.navigationItem.title = @"赞过的";
     self.navigationController.navigationBarHidden = NO;
-    [self addBarItemLeftBarButton:nil image:@"icon_back"];
+//    [self addBarItemLeftBarButton:nil image:@"icon_back"];
     self.delegate = self;
     //
     [self.view addSubview:self.myTableView];

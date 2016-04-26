@@ -38,6 +38,21 @@
 @pro_strong UIButton    *   navBackBtn;
 
 /*
+ *  返回pop按钮
+ */
+@pro_strong UIButton    *   leftBtn;
+
+/*
+ *  返回pop按钮
+ */
+@pro_strong UIButton    *   rightBtn;
+
+/*
+ *  Nav中间的Logo
+ */
+@pro_strong UIImageView *   logoImg;
+
+/*
  *  视图分割线
  */
 @pro_strong UILabel     *   navLine;
@@ -49,7 +64,7 @@
 /*
  *  在Nav上添加中间的Logo
  */
-- (void)addNavLogoImg;
+- (void)addNavLogoImgisTransparent:(BOOL)transparent;
 
 /*
  *  在Nav上添加pop返回按钮
@@ -59,16 +74,12 @@
 /*
  *  在Nav上添加左边的按钮
  */
-- (void)addBarItemLeftBarButton:(NSString *)title image:(NSString *)image;
+- (void)addBarItemLeftBarButton:(NSString *)title image:(NSString *)image isTransparent:(BOOL)transparent;
 
 /*
  *  在Nav上添加右边的按钮
  */
-- (void)addBarItemRightBarButton:(NSString *)title image:(NSString *)image;
+- (void)addBarItemRightBarButton:(NSString *)title image:(NSString *)image isTransparent:(BOOL)transparent;
 
-/*
- *  设置Nav视图透明
- */
-- (void)setNavTransparent;
 
 @end

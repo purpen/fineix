@@ -22,7 +22,7 @@
     self.delegate = self;
     self.navigationController.navigationBarHidden = NO;
     self.navigationItem.title = @"关于太火鸟";
-    [self addBarItemLeftBarButton:nil image:@"icon_back"];
+//    [self addBarItemLeftBarButton:nil image:@"icon_back"];
     
     //地址
     NSURL *url = [NSURL URLWithString:@"http://m.taihuoniao.com/guide/app_about"];

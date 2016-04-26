@@ -319,10 +319,18 @@ static NSString *const URLLikeScenePeople = @"/favorite";
     [[UIApplication sharedApplication] setStatusBarHidden:YES withAnimation:(UIStatusBarAnimationSlide)];
     self.view.backgroundColor = [UIColor whiteColor];
     self.delegate = self;
-    [self addNavLogoImg];
-    [self addBarItemRightBarButton:@"" image:@"Share_Scene"];
+    [self addNavLogoImgisTransparent:YES];
+    [self addBarItemRightBarButton:@"" image:@"Share_Scene" isTransparent:YES];
+    [self addBarItemLeftBarButton:@"" image:@"icon_back" isTransparent:YES];
 }
 
+- (void)leftBarItemSelected {
+    if (self.navigationController.viewControllers.count > 1) {
+        [self.navigationController popViewControllerAnimated:YES];
+    } else {
+        [self dismissViewControllerAnimated:YES completion:nil];
+    }
+}
 
 //  点击右边barItem
 - (void)rightBarItemSelected {

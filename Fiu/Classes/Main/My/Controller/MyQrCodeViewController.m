@@ -34,8 +34,8 @@
     //设置导航条
     self.navigationItem.title = @"二维码";
     self.delegate = self;
-    [self addBarItemLeftBarButton:nil image:@"icon_back"];
-    [self addBarItemRightBarButton:nil image:@"icon_ios_more_black"];
+//    [self addBarItemLeftBarButton:nil image:@"icon_back"];
+//    [self addBarItemRightBarButton:nil image:@"icon_ios_more_black"];
     
     [self.filter setDefaults];
     UserInfoEntity *entity = [UserInfoEntity defaultUserInfoEntity];

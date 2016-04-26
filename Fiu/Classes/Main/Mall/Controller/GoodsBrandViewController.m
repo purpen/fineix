@@ -99,6 +99,16 @@
 #pragma mark - 设置Nav
 - (void)setNavigationViewUI {
     self.view.backgroundColor = [UIColor whiteColor];
+    self.delegate = self;
+    [self addBarItemLeftBarButton:@"" image:@"icon_back" isTransparent:YES];
+}
+
+- (void)leftBarItemSelected {
+    if (self.navigationController.viewControllers.count > 1) {
+        [self.navigationController popViewControllerAnimated:YES];
+    } else {
+        [self dismissViewControllerAnimated:YES completion:nil];
+    }
 }
 
 @end

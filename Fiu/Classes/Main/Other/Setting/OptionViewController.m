@@ -29,7 +29,7 @@ NSString *const feedbackUrl = @"/gateway/feedback";//意见反馈接口
     self.delegate = self;
     self.navigationController.navigationBarHidden = NO;
     self.navigationItem.title = @"意见反馈";
-    [self addBarItemLeftBarButton:nil image:@"icon_back"];
+//    [self addBarItemLeftBarButton:nil image:@"icon_back"];
     self.phoneTF.delegate = self;
     self.optionTFV.delegate = self;
     self.submitBtn.layer.masksToBounds = YES;

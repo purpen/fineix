@@ -30,9 +30,9 @@ static NSString *const IconURL = @"/my/upload_token";
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     self.delegate = self;
-    [self addBarItemLeftBarButton:nil image:@"icon_back"];
+//    [self addBarItemLeftBarButton:nil image:@"icon_back"];
     self.view.backgroundColor = [UIColor lightGrayColor];
-    [self addBarItemRightBarButton:@"保存" image:nil];
+//    [self addBarItemRightBarButton:@"保存" image:nil];
     self.navigationController.navigationBarHidden = NO;
     self.navigationItem.title = @"保存信息";
     

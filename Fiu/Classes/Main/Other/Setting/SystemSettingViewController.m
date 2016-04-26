@@ -34,7 +34,7 @@ static NSString *const logOut = @"/auth/logout";
     self.delegate = self;
     self.navigationController.navigationBarHidden = NO;
     self.navigationItem.title = @"系统设置";
-    [self addBarItemLeftBarButton:nil image:@"icon_back"];
+//    [self addBarItemLeftBarButton:nil image:@"icon_back"];
     self.backBtn.layer.masksToBounds = YES;
     self.backBtn.layer.cornerRadius = 3;
     

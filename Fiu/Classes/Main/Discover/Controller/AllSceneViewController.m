@@ -55,7 +55,7 @@
     self.view.backgroundColor = [UIColor whiteColor];
     self.navViewTitle.text = NSLocalizedString(@"AllSceneVcTitle", nil);
     self.delegate = self;
-    [self addBarItemRightBarButton:@"" image:@"icon_newScene"];
+    [self addBarItemRightBarButton:@"" image:@"icon_newScene" isTransparent:NO];
     [[UIApplication sharedApplication] setStatusBarHidden:NO withAnimation:(UIStatusBarAnimationSlide)];
 }
 

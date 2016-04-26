@@ -72,7 +72,7 @@
     self.view.backgroundColor = [UIColor whiteColor];
     self.delegate = self;
     self.navViewTitle.text = NSLocalizedString(@"GoodsCategoryVcTitle", nil);
-    [self addBarItemRightBarButton:@"" image:@"Nav_Car"];
+    [self addBarItemRightBarButton:@"" image:@"Nav_Car" isTransparent:NO];
 }
 
 - (void)rightBarItemSelected {

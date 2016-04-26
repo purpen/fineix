@@ -170,9 +170,9 @@
 //    [[UIApplication sharedApplication] setStatusBarHidden:NO withAnimation:(UIStatusBarAnimationSlide)];
     self.view.backgroundColor = [UIColor whiteColor];
     self.delegate = self;
-    [self addNavLogoImg];
-    [self addBarItemLeftBarButton:@"" image:@"Nav_Search"];
-    [self addBarItemRightBarButton:@"" image:@"Nav_Car"];
+    [self addNavLogoImgisTransparent:NO];
+    [self addBarItemLeftBarButton:@"" image:@"Nav_Search" isTransparent:NO];
+    [self addBarItemRightBarButton:@"" image:@"Nav_Car" isTransparent:NO];
 }
 
 //  点击左边barItem

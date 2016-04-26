@@ -8,7 +8,7 @@
 
 #import "FBViewController.h"
 
-@interface GoodsBrandViewController : FBViewController <UITableViewDelegate, UITableViewDataSource>
+@interface GoodsBrandViewController : FBViewController <FBNavigationBarItemsDelegate, UITableViewDelegate, UITableViewDataSource>
 
 @pro_strong UITableView             *   goodsBrandTable;
 

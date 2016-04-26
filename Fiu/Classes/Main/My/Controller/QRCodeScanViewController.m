@@ -46,7 +46,7 @@
     //设置导航条
     self.navigationItem.title = @"扫一扫";
     self.delegate = self;
-    [self addBarItemLeftBarButton:nil image:@"icon_back"];
+//    [self addBarItemLeftBarButton:nil image:@"icon_back"];
 }
 
 -(void)viewWillAppear:(BOOL)animated{

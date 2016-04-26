@@ -21,7 +21,7 @@
     // Do any additional setup after loading the view.
     //设置导航条
     self.navigationItem.title = @"粉丝";
-    [self addBarItemLeftBarButton:nil image:@"icon_back"];
+//    [self addBarItemLeftBarButton:nil image:@"icon_back"];
     self.delegate = self;
     
     self.navigationController.navigationBarHidden = NO;

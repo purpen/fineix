@@ -20,7 +20,7 @@
     self.delegate = self;
     self.navigationController.navigationBarHidden = NO;
     self.navigationItem.title = @"达人认证";
-    [self addBarItemLeftBarButton:nil image:@"icon_back"];
+//    [self addBarItemLeftBarButton:nil image:@"icon_back"];
     self.submitBtn.layer.masksToBounds = YES;
     self.submitBtn.layer.cornerRadius = 3;
     self.certificationTFV.delegate = self;

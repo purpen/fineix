@@ -26,8 +26,8 @@ static NSString *const UpdateInfoURL = @"/my/update_profile";
     self.delegate = self;
     self.navigationController.navigationBarHidden = NO;
     self.navigationItem.title = @"修改昵称";
-    [self addBarItemLeftBarButton:nil image:@"icon_back"];
-    [self addBarItemRightBarButton:@"保存" image:nil];
+//    [self addBarItemLeftBarButton:nil image:@"icon_back"];
+//    [self addBarItemRightBarButton:@"保存" image:nil];
     
     UserInfoEntity *entity = [UserInfoEntity defaultUserInfoEntity];
     self.nickNameTF.text = entity.nickname;

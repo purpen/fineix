@@ -183,25 +183,22 @@ static NSString *const URLSceneList = @"/scene_sight/";
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView{
     if (scrollView == self.homeTableView) {
         CGRect tabBarRect = self.tabBarController.tabBar.frame;
-        UIView * leftBarItem = self.navigationItem.leftBarButtonItem.customView;
-        UIView * rightBarItem = self.navigationItem.rightBarButtonItem.customView;
         
         if (self.rollDown == YES) {
             tabBarRect = CGRectMake(0, SCREEN_HEIGHT + 20, SCREEN_WIDTH, 49);
             [UIView animateWithDuration:.4 animations:^{
                 self.tabBarController.tabBar.frame = tabBarRect;
-                leftBarItem.alpha = 0;
-                rightBarItem.alpha = 0;
+                self.leftBtn.alpha = 0;
+                self.rightBtn.alpha = 0;
                 [[UIApplication sharedApplication] setStatusBarHidden:YES withAnimation:(UIStatusBarAnimationSlide)];
-                self.navigationController.navigationBar.frame = CGRectMake(0, 20, SCREEN_WIDTH, 44);
             }];
             
         } else if (self.rollDown == NO) {
             tabBarRect = CGRectMake(0, SCREEN_HEIGHT - 49, SCREEN_WIDTH, 49);
             [UIView animateWithDuration:.4 animations:^{
                 self.tabBarController.tabBar.frame = tabBarRect;
-                leftBarItem.alpha = 1;
-                rightBarItem.alpha = 1;
+                self.leftBtn.alpha = 1;
+                self.rightBtn.alpha = 1;
                 [[UIApplication sharedApplication] setStatusBarHidden:NO withAnimation:(UIStatusBarAnimationSlide)];
             }];
         }
@@ -212,11 +209,10 @@ static NSString *const URLSceneList = @"/scene_sight/";
 - (void)setNavigationViewUI {
     self.view.backgroundColor = [UIColor whiteColor];
     self.delegate = self;
-    [self addNavLogoImg];
-    [self addBarItemLeftBarButton:@"" image:@"Nav_Search"];
-    [self addBarItemRightBarButton:@"" image:@"Nav_Concern"];
+    [self addNavLogoImgisTransparent:YES];
+    [self addBarItemLeftBarButton:@"" image:@"Nav_Search" isTransparent:YES];
+    [self addBarItemRightBarButton:@"" image:@"Nav_Concern" isTransparent:YES];
     [[UIApplication sharedApplication] setStatusBarHidden:NO withAnimation:(UIStatusBarAnimationSlide)];
-    
 }
 
 //  点击左边barItem

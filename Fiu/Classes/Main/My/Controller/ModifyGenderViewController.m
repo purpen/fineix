@@ -49,7 +49,7 @@ static NSString *const UpdateInfoURL = @"/my/update_profile";
     self.delegate = self;
     self.navigationController.navigationBarHidden = NO;
     self.navigationItem.title = @"修改性别";
-    [self addBarItemLeftBarButton:nil image:@"icon_back"];
+//    [self addBarItemLeftBarButton:nil image:@"icon_back"];
     [self.manBtn addTarget:self action:@selector(clickManBtn:) forControlEvents:UIControlEventTouchUpInside];
     [self.womenBtn addTarget:self action:@selector(clickwoMneBtn:) forControlEvents:UIControlEventTouchUpInside];
 }

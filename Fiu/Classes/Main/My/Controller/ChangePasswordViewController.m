@@ -23,8 +23,8 @@
     self.delegate = self;
     self.navigationController.navigationBarHidden = NO;
     self.navigationItem.title = @"修改密码";
-    [self addBarItemLeftBarButton:nil image:@""];
-    [self addBarItemRightBarButton:@"完成" image:nil];
+//    [self addBarItemLeftBarButton:nil image:@""];
+//    [self addBarItemRightBarButton:@"完成" image:nil];
 }
 
 -(void)leftBarItemSelected{

@@ -194,9 +194,9 @@ static NSString *const URLDiscoverSlide = @"/gateway/slide";
 //    [[UIApplication sharedApplication] setStatusBarHidden:NO withAnimation:(UIStatusBarAnimationSlide)];
     self.view.backgroundColor = [UIColor whiteColor];
     self.delegate = self;
-    [self addNavLogoImg];
-    [self addBarItemLeftBarButton:@"" image:@"Nav_Search"];
-    [self addBarItemRightBarButton:@"" image:@"Nav_Location"];
+    [self addNavLogoImgisTransparent:NO];
+    [self addBarItemLeftBarButton:@"" image:@"Nav_Search" isTransparent:NO];
+    [self addBarItemRightBarButton:@"" image:@"Nav_Location" isTransparent:NO];
 }
 
 //  点击左边barItem

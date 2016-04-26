@@ -24,8 +24,8 @@
     // Do any additional setup after loading the view.
     self.delegate = self;
     self.navigationItem.title = @"发现好友";
-    [self addBarItemLeftBarButton:nil image:@"icon_back"];
-    [self addBarItemRightBarButton:nil image:@"scanning"];
+//    [self addBarItemLeftBarButton:nil image:@"icon_back"];
+//    [self addBarItemRightBarButton:nil image:@"scanning"];
     [self.view addSubview:self.myTbaleView];
 }
 

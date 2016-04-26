@@ -209,7 +209,6 @@ static const NSInteger BuyBtnTag = 754;
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     if (indexPath.section == 1) {
         GoodsBrandViewController * goodsBrandVC = [[GoodsBrandViewController alloc] init];
-        goodsBrandVC.navViewTitle.text = @"AMD";
         [self.navigationController pushViewController:goodsBrandVC animated:YES];
     }
 }
@@ -218,7 +217,7 @@ static const NSInteger BuyBtnTag = 754;
 - (void)setNavigationViewUI {
     self.navViewTitle.text = NSLocalizedString(@"GoodsInfoVcTitle", nil);
     self.view.backgroundColor = [UIColor whiteColor];
-    [self addBarItemRightBarButton:@"" image:@"Nav_Car"];
+    [self addBarItemRightBarButton:@"" image:@"Nav_Car" isTransparent:NO];
     self.delegate = self;
 }
 

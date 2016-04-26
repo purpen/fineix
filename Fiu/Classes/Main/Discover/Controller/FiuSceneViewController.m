@@ -222,18 +222,19 @@
     [[UIApplication sharedApplication] setStatusBarHidden:YES withAnimation:(UIStatusBarAnimationSlide)];
     self.navigationController.navigationBar.frame = CGRectMake(0, 20, SCREEN_WIDTH, 44);
     self.delegate = self;
-    [self addBarItemRightBarButton:@"" image:@"icon_newScene"];
-    [self addNavLogoImg];
-    [self hiddenNavItem:NO];
+    [self addNavLogoImgisTransparent:YES];
+    [self addBarItemRightBarButton:@"" image:@"icon_newScene" isTransparent:YES];
+    [self addBarItemLeftBarButton:@"" image:@"icon_back" isTransparent:YES];
 }
 
-//  隐藏Nav左右的按钮
-- (void)hiddenNavItem:(BOOL)hidden {
-    self.navigationItem.leftBarButtonItem.customView.hidden = hidden;
-    self.navigationItem.rightBarButtonItem.customView.hidden = hidden;
+- (void)leftBarItemSelected {
+    if (self.navigationController.viewControllers.count > 1) {
+        [self.navigationController popViewControllerAnimated:YES];
+    } else {
+        [self dismissViewControllerAnimated:YES completion:nil];
+    }
 }
 
-//  点击右边barItem
 - (void)rightBarItemSelected {
     PictureToolViewController * pictureToolVC = [[PictureToolViewController alloc] init];
     pictureToolVC.createType = @"scene";
