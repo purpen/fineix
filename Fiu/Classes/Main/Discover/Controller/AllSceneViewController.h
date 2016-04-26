@@ -7,16 +7,14 @@
 //
 
 #import "FBViewController.h"
-#import "AllSceneView.h"
 #import <MJRefresh/MJRefresh.h>
 #import <SVProgressHUD/SVProgressHUD.h>
 
-@interface AllSceneViewController : FBViewController <FBNavigationBarItemsDelegate>
+@interface AllSceneViewController : FBViewController <FBNavigationBarItemsDelegate, UICollectionViewDelegate, UICollectionViewDataSource>
 
 @pro_strong FBRequest               *   allSceneListRequest;
 @pro_assign NSInteger                   currentpageNum;
 @pro_assign NSInteger                   totalPageNum;
-
-@pro_strong AllSceneView            *   allSceneList;   //  情景列表
+@pro_strong UICollectionView        *   allSceneView;       //  全部的情景
 
 @end

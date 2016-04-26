@@ -19,20 +19,15 @@
     return self;
 }
 
-- (void)setUI {
-    
-    _sceneImage.image = [UIImage imageNamed:@"baa"];
-    
-    NSString * str = @"长城脚下的手工匠人";
-    [self titleTextStyle:str];
-    
-    _locationLab.text = @"北京市 朝阳区";
+- (void)setAllFiuSceneListData:(FiuSceneInfoData *)model {
+    [self.sceneImage downloadImage:model.coverUrl place:[UIImage imageNamed:@""]];
+    [self titleTextStyle:model.title];
+    self.locationLab.text = model.address;
 }
 
 #pragma mark -
 - (void)setCollectionCellViewUI {
     [self addSubview:self.sceneImage];
-    
 }
 
 #pragma mark - 情景图片
@@ -56,8 +51,8 @@
         
         [_sceneImage addSubview:self.titleLab];
         [_titleLab mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.size.mas_equalTo(CGSizeMake(105, 42));
-            make.bottom.equalTo(_locationIcon.mas_top).with.offset(-5);
+            make.size.mas_equalTo(CGSizeMake(105, 15));
+            make.bottom.equalTo(_locationIcon.mas_top).with.offset(-10);
             make.left.equalTo(_locationIcon.mas_left).with.offset(0);
         }];
     }
@@ -77,10 +72,10 @@
 
 //  标题文字的样式
 - (void)titleTextStyle:(NSString *)title {
-    if ([title length] < 7) {
-        _titleLab.font = [UIFont systemFontOfSize:28];
-    } else if ([title length] > 7 ) {
-        _titleLab.font = [UIFont systemFontOfSize:Font_SceneTitle];
+    if (title.length > 7) {
+        [self.titleLab mas_updateConstraints:^(MASConstraintMaker *make) {
+            make.height.mas_equalTo(@40);
+        }];
     }
     NSMutableAttributedString * titleText = [[NSMutableAttributedString alloc] initWithString:title];
     NSMutableParagraphStyle * paragraphStyle = [[NSMutableParagraphStyle alloc] init];
@@ -90,7 +85,6 @@
                                 NSBackgroundColorAttributeName:[UIColor blackColor] ,
                                 NSParagraphStyleAttributeName :paragraphStyle
                                 };
-    
     [titleText addAttributes:textDict range:NSMakeRange(0, titleText.length)];
     self.titleLab.attributedText = titleText;
 }

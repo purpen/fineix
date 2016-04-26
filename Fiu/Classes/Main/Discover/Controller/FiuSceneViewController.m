@@ -13,8 +13,17 @@
 #import "SceneListTableViewCell.h"
 #import "SceneInfoViewController.h"
 #import "PictureToolViewController.h"
+#import "FiuSceneInfoData.h"
+
+static NSString *const URLFiuSceneInfo = @"/scene_scene/view";
+static NSString *const URLFiuSceneList = @"/scene_sight/";
 
 @interface FiuSceneViewController ()
+
+@pro_strong FiuSceneInfoData            *   fiuSceneData;
+@pro_strong NSMutableArray              *   sceneListMarr;
+@pro_strong NSMutableArray              *   sceneIdMarr;
+
 
 @end
 
@@ -30,10 +39,101 @@
     [super viewDidLoad];
     self.view.backgroundColor = [UIColor whiteColor];
     self.automaticallyAdjustsScrollViewInsets = NO;
-    
-    self.textMar = [NSArray arrayWithObjects:@"家是我们人生的驿站，是我们生活的乐园，也是我们避风的港湾。", @"家是我们人生的驿站", @"家是我们人生的驿站，是我们生活的乐园，也是我们避风的港湾。它更是一条逼你拼命挣钱的鞭子，让你为它拉车犁地。家又是一个充满亲情的地方，就会有一种亲情感回荡心头。在风雨人生中，渐渐地形成了一种强烈的感觉：我爱家，更离不开家。",nil];
-    
+    self.currentpageNum = 0;
+    [self networkRequestData];
+    [self networkFiuSceneListData];
     [self setSceneInfoViewUI];
+}
+
+- (NSMutableArray *)sceneListMarr {
+    if (!_sceneListMarr) {
+        _sceneListMarr = [NSMutableArray array];
+    }
+    return _sceneListMarr;
+}
+
+- (NSMutableArray *)sceneIdMarr {
+    if (!_sceneIdMarr) {
+        _sceneIdMarr = [NSMutableArray array];
+    }
+    return _sceneIdMarr;
+}
+
+#pragma mark - 网络请求
+//  情景详情
+- (void)networkRequestData {
+    [SVProgressHUD show];
+    self.fiuSceneRequest = [FBAPI getWithUrlString:URLFiuSceneInfo requestDictionary:@{@"id":self.fiuSceneId} delegate:self];
+    [self.fiuSceneRequest startRequestSuccess:^(FBRequest *request, id result) {
+        self.fiuSceneData = [[FiuSceneInfoData alloc] initWithDictionary:[result valueForKey:@"data"]];
+        [self.fiuSceneTable reloadData];
+        [SVProgressHUD dismiss];
+        
+    } failure:^(FBRequest *request, NSError *error) {
+        
+    }];
+}
+
+//  情景中的场景列表
+- (void)networkFiuSceneListData {
+    self.fiuSceneListRequest = [FBAPI getWithUrlString:URLFiuSceneList requestDictionary:@{@"scene_id":self.fiuSceneId, @"stick":@"0", @"size":@"10",@"page":@(self.currentpageNum + 1)} delegate:self];
+    [self.fiuSceneListRequest startRequestSuccess:^(FBRequest *request, id result) {
+        NSArray * sceneArr = [[result valueForKey:@"data"] valueForKey:@"rows"];
+        for (NSDictionary * sceneDic in sceneArr) {
+            HomeSceneListRow * homeSceneModel = [[HomeSceneListRow alloc] initWithDictionary:sceneDic];
+            [self.sceneListMarr addObject:homeSceneModel];
+            [self.sceneIdMarr addObject:[NSString stringWithFormat:@"%zi", homeSceneModel.idField]];
+        }
+        [self.fiuSceneTable reloadData];
+        self.currentpageNum = [[[result valueForKey:@"data"] valueForKey:@"current_page"] integerValue];
+        self.totalPageNum = [[[result valueForKey:@"data"] valueForKey:@"total_page"] integerValue];
+        [self requestIsLastData:self.fiuSceneTable currentPage:self.currentpageNum withTotalPage:self.totalPageNum];
+
+    } failure:^(FBRequest *request, NSError *error) {
+        
+    }];
+}
+
+//  判断是否为最后一条数据
+- (void)requestIsLastData:(UITableView *)table currentPage:(NSInteger )current withTotalPage:(NSInteger)total {
+    BOOL isLastPage = (current == total);
+    
+    if (!isLastPage) {
+        if (table.mj_footer.state == MJRefreshStateNoMoreData) {
+            [table.mj_footer resetNoMoreData];
+        }
+    }
+    if (current == total == 1) {
+        table.mj_footer.state = MJRefreshStateNoMoreData;
+        table.mj_footer.hidden = true;
+    }
+    if ([table.mj_header isRefreshing]) {
+        [table.mj_header endRefreshing];
+    }
+    if ([table.mj_footer isRefreshing]) {
+        if (isLastPage) {
+            [table.mj_footer endRefreshingWithNoMoreData];
+        } else  {
+            [table.mj_footer endRefreshing];
+        }
+    }
+    [SVProgressHUD dismiss];
+}
+
+#pragma mark - 上拉加载 & 下拉刷新
+- (void)addMJRefresh:(UITableView *)table {
+//    table.mj_header = [MJRefreshNormalHeader headerWithRefreshingBlock:^{
+//        self.currentpageNum = 0;
+//        [self networkRequestData];
+//    }];
+    
+    table.mj_footer = [MJRefreshAutoNormalFooter footerWithRefreshingBlock:^{
+        if (self.currentpageNum < self.totalPageNum) {
+            [self networkFiuSceneListData];
+        } else {
+            [table.mj_footer endRefreshing];
+        }
+    }];
 }
 
 #pragma mark -
@@ -60,6 +160,7 @@
         _fiuSceneTable.showsVerticalScrollIndicator = NO;
         _fiuSceneTable.separatorStyle = UITableViewCellSeparatorStyleNone;
         _fiuSceneTable.backgroundColor = [UIColor whiteColor];
+        [self addMJRefresh:_fiuSceneTable];
     }
     return _fiuSceneTable;
 }
@@ -72,7 +173,7 @@
     if (section == 0) {
         return 3;
     } else if (section == 1) {
-        return 2;
+        return self.sceneListMarr.count;
     }
     return 1;
 }
@@ -85,7 +186,7 @@
             if (cell == nil) {
                 cell = [[UserInfoTableViewCell alloc] initWithStyle:(UITableViewCellStyleDefault) reuseIdentifier:userInfoCellId];
             }
-            [cell setFiuSceneUI];
+            [cell setFiuSceneInfoData:self.fiuSceneData];
             return cell;
             
         } else if (indexPath.row == 1) {
@@ -95,7 +196,7 @@
                 cell = [[ContentAndTagTableViewCell alloc] initWithStyle:(UITableViewCellStyleDefault) reuseIdentifier:contentCellId];
             }
             cell.nav = self.navigationController;
-//            [cell setUI];
+            [cell setFiuSceneDescription:self.fiuSceneData];
             return cell;
             
         } else if (indexPath.row == 2) {
@@ -114,7 +215,7 @@
         if (!cell) {
             cell = [[SceneListTableViewCell alloc] initWithStyle:(UITableViewCellStyleDefault) reuseIdentifier:fiuSceneTableViewCellID];
         }
-//        [cell setUI];
+        [cell setHomeSceneListData:self.sceneListMarr[indexPath.row]];
         return cell;
     }
     
@@ -127,11 +228,9 @@
             return SCREEN_HEIGHT;
             
         } else if (indexPath.row == 1) {
-            NSString * str = @"家是我们人生的驿站，是我们生活的乐园，也是我们避风的港湾。它更是一条逼你拼命挣钱的鞭子，让你为它拉车犁地。家又是一个充满亲情的地方，就会有一种亲情感回荡心头。在风雨人生中，渐渐地形成了一种强烈的感觉：我爱家，更离不开家。";
             ContentAndTagTableViewCell * cell = [[ContentAndTagTableViewCell alloc] init];
-            [cell getContentCellHeight:str];
+            [cell getContentCellHeight:self.fiuSceneData.des];
             return cell.cellHeight;
-            
         }  else if (indexPath.row == 2) {
             NSArray * arr = [NSArray arrayWithObjects:@"1",@"1",@"1",@"1",@"1",@"1",@"1",@"1",@"1",@"1",nil];
             LikePeopleTableViewCell * cell = [[LikePeopleTableViewCell alloc] init];
@@ -167,7 +266,7 @@
     self.headerView.backgroundColor = [UIColor colorWithHexString:cellBgColor alpha:1];
     
     if (section == 1) {
-        [self.headerView addGroupHeaderViewIcon:@"Group_scene" withTitle:@"此场景下的商品" withSubtitle:@""];
+        [self.headerView addGroupHeaderViewIcon:@"Group_scene" withTitle:@"此情景下的场景" withSubtitle:@""];
     }
     
     return self.headerView;
@@ -177,6 +276,7 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     if (indexPath.section == 1) {
         SceneInfoViewController * sceneInfoVC = [[SceneInfoViewController alloc] init];
+        sceneInfoVC.sceneId = self.sceneIdMarr[indexPath.row];
         [self.navigationController pushViewController:sceneInfoVC animated:YES];
     }
 }

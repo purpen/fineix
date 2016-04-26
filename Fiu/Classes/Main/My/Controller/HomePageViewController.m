@@ -170,7 +170,7 @@
             return cell;
         }else if([self.type isEqualToNumber:@1]){
             AllSceneCollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"AllSceneCollectionViewCell" forIndexPath:indexPath];
-            [cell setUI];
+//            [cell setUI];
             return cell;
         }
         

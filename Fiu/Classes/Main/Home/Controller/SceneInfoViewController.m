@@ -16,6 +16,7 @@
 #import "FBAlertViewController.h"
 #import "GoodsInfoViewController.h"
 #import "SceneInfoData.h"
+#import "GoodsTableViewCell.h"
 
 static NSString *const URLSceneInfo = @"/scene_sight/view";
 static NSString *const URLCommentList = @"/comment/getlist";
@@ -191,14 +192,23 @@ static NSString *const URLLikeScenePeople = @"/favorite";
         }
         [cell setUI:self.textMar[indexPath.row]];
         return cell;
+    
+    } else if (indexPath.section == 2) {
+        static NSString * mallGoodsCellId = @"MallGoodsCellId";
+        GoodsTableViewCell * cell = [tableView dequeueReusableCellWithIdentifier:mallGoodsCellId];
+        cell = [[GoodsTableViewCell alloc] initWithStyle:(UITableViewCellStyleDefault) reuseIdentifier:mallGoodsCellId];
+        [cell setUI];
+        return cell;
+    
+    } else if (indexPath.section == 3) {
+        static NSString * mallGoodsCellId = @"MallGoodsCellId";
+        GoodsTableViewCell * cell = [tableView dequeueReusableCellWithIdentifier:mallGoodsCellId];
+        cell = [[GoodsTableViewCell alloc] initWithStyle:(UITableViewCellStyleDefault) reuseIdentifier:mallGoodsCellId];
+        [cell setUI];
+        return cell;
     }
     
-    static NSString * CellId = @"CellId";
-    UITableViewCell * cell = [tableView dequeueReusableCellWithIdentifier:CellId];
-    if (!cell) {
-        cell = [[UITableViewCell alloc] initWithStyle:(UITableViewCellStyleDefault) reuseIdentifier:CellId];
-    }
-    return cell;
+    return nil;
     
 }
 
@@ -206,21 +216,17 @@ static NSString *const URLLikeScenePeople = @"/favorite";
     if (indexPath.section == 0) {
         if (indexPath.row == 0) {
             return SCREEN_HEIGHT;
-            
         } else if (indexPath.row == 1) {
             ContentAndTagTableViewCell * cell = [[ContentAndTagTableViewCell alloc] init];
             [cell getContentCellHeight:self.sceneInfoModel.des];
             return cell.cellHeight;
-            
         } else if (indexPath.row == 2) {
             return 44;
-            
         } else if (indexPath.row == 3) {
             NSArray * arr = [NSArray arrayWithObjects:@"1",@"1",@"1",@"1",@"1",@"1",@"1",@"1",@"1",@"1",nil];
             LikePeopleTableViewCell * cell = [[LikePeopleTableViewCell alloc] init];
             [cell getCellHeight:arr];
             return cell.cellHeight;
-
         }
         return 100;
         
@@ -230,7 +236,7 @@ static NSString *const URLLikeScenePeople = @"/favorite";
         return cell.cellHeight;
     }
     
-    return 100;
+    return 210;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {

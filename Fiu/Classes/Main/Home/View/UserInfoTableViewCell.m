@@ -26,11 +26,9 @@
     return self;
 }
 
-- (void)setFiuSceneUI {
-    //  场景图
-    self.bgImage.image = [UIImage imageNamed:@"werwer"];
+- (void)setFiuSceneInfoData:(FiuSceneInfoData *)model {
+    [self.bgImage downloadImage:model.coverUrl place:[UIImage imageNamed:@""]];
     
-    //  用户头像
     self.userHeader.image = [UIImage imageNamed:@"user"];
     
     //  用户昵称
@@ -40,38 +38,31 @@
     self.userProfile.text = @"达人｜写剧本的文盲";
     
     //  标题
-    NSString * titleStr = @" 长城脚下的手工匠人手工匠人手工匠人 ";
+    NSString * titleStr = [NSString stringWithFormat:@" %@ ",model.title];
     UIColor * fsceneColor = [UIColor blackColor];
     [self titleTextStyle:titleStr withBgColor:fsceneColor];
     
-    //  所属情景
-    NSString * whereText = @"最好的时光遇到你";
-    CGFloat whereLength = [whereText boundingRectWithSize:CGSizeMake(320, 1000) options:(NSStringDrawingUsesLineFragmentOrigin) attributes:nil context:nil].size.width;
-    [_whereScene mas_updateConstraints:^(MASConstraintMaker *make) {
-        make.size.mas_equalTo(CGSizeMake(whereLength * 0.8, 15));
-    }];
-    self.whereScene.text = whereText;
-    
-    //  城市
-    NSString * cityText = @"北京市 朝阳区";
-    CGFloat cityLength = [cityText boundingRectWithSize:CGSizeMake(320, 1000) options:(NSStringDrawingUsesLineFragmentOrigin) attributes:nil context:nil].size.width;
+    CGFloat cityLength = [model.address boundingRectWithSize:CGSizeMake(320, 1000) options:(NSStringDrawingUsesLineFragmentOrigin) attributes:nil context:nil].size.width;
     [_city mas_updateConstraints:^(MASConstraintMaker *make) {
         make.size.mas_equalTo(CGSizeMake(cityLength * 0.8, 15));
     }];
-    self.city.text = cityText;
+    self.city.text = model.address;
+    
+    [self.whereScene removeFromSuperview];
+    [self.city mas_updateConstraints:^(MASConstraintMaker *make) {
+        make.left.equalTo(self.mas_left).with.offset(40);
+    }];
     
     //  时间
     self.time.text = @"｜ 2天前";
     
     //  订阅的数量
     [self.goodBtn setBackgroundImage:[UIImage imageNamed:@"User_Su"] forState:(UIControlStateNormal)];
-    CGFloat good = 1234;
-    if (good/1000 > 1) {
-        self.goodNum.text = [NSString stringWithFormat:@"%.1fk人订阅", good/1000];
+    if (model.subscriptionCount/1000 > 1) {
+        self.goodNum.text = [NSString stringWithFormat:@"%zik人订阅", model.subscriptionCount/1000];
     } else {
-        self.goodNum.text = [NSString stringWithFormat:@"%.0f人订阅", good];
+        self.goodNum.text = [NSString stringWithFormat:@"%zi人订阅", model.subscriptionCount];
     }
-    
     [self changeUserViewFrame];
 }
 
@@ -134,28 +125,28 @@
         [_userView addSubview:self.whereScene];
         [_whereScene mas_makeConstraints:^(MASConstraintMaker *make) {
             make.size.mas_equalTo(CGSizeMake(130, 15));
-            make.bottom.equalTo(_titleText.mas_bottom).with.offset(20);
+            make.top.equalTo(_titleText.mas_bottom).with.offset(10);
             make.left.equalTo(_userView.mas_left).with.offset(40);
         }];
         
         [_userView addSubview:self.city];
         [_city mas_makeConstraints:^(MASConstraintMaker *make) {
             make.size.mas_equalTo(CGSizeMake(75, 15));
-            make.top.equalTo(_whereScene.mas_top).with.offset(0);
+            make.top.equalTo(_titleText.mas_bottom).with.offset(10);
             make.left.equalTo(_whereScene.mas_right).with.offset(30);
         }];
         
         [_userView addSubview:self.time];
         [_time mas_makeConstraints:^(MASConstraintMaker *make) {
             make.size.mas_equalTo(CGSizeMake(50, 15));
-            make.top.equalTo(_whereScene.mas_top).with.offset(0);
+            make.top.equalTo(_titleText.mas_bottom).with.offset(10);
             make.left.equalTo(_city.mas_right).with.offset(0);
         }];
         
         [_userView addSubview:self.userLeftView];
         [_userLeftView mas_makeConstraints:^(MASConstraintMaker *make) {
             make.size.mas_equalTo(CGSizeMake(SCREEN_WIDTH - 135.5 ,35));
-            make.top.equalTo(_whereScene.mas_bottom).with.offset(20);
+            make.top.equalTo(_city.mas_bottom).with.offset(20);
             make.left.equalTo(_userView.mas_left).with.offset(0);
         }];
         

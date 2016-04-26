@@ -9,6 +9,7 @@
 #import <UIKit/UIKit.h>
 #import "Fiu.h"
 #import "SceneInfoData.h"
+#import "FiuSceneInfoData.h"
 
 @interface UserInfoTableViewCell : UITableViewCell
 
@@ -30,6 +31,6 @@
 
 - (void)setSceneInfoData:(SceneInfoData *)model;
 
-- (void)setFiuSceneUI;
+- (void)setFiuSceneInfoData:(FiuSceneInfoData *)model;
 
 @end

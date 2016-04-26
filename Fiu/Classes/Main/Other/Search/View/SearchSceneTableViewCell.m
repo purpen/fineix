@@ -48,7 +48,7 @@
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
     static NSString * collectionViewCellId = @"allSceneCollectionViewCellID";
     AllSceneCollectionViewCell * cell = [collectionView dequeueReusableCellWithReuseIdentifier:collectionViewCellId forIndexPath:indexPath];
-    [cell setUI];
+//    [cell setUI];
     return cell;
 }
 

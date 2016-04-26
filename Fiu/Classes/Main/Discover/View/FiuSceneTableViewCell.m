@@ -10,16 +10,33 @@
 #import "FiuSceneCollectionViewCell.h"
 #import "FiuSceneViewController.h"
 
+@interface FiuSceneTableViewCell () {
+    
+    NSMutableArray      *   _fiuSceneListData;     //  情景Model
+    NSMutableArray      *   _fiuSceneIdData;       //  情景Id
+}
+
+@end
+
 @implementation FiuSceneTableViewCell
 
 - (instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier {
     self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
     if (self) {
+        _fiuSceneListData = [NSMutableArray array];
+        _fiuSceneIdData = [NSMutableArray array];
         self.selectionStyle = UITableViewCellSelectionStyleNone;
         self.backgroundColor = [UIColor whiteColor];
         [self addSubview:self.sceneListView];
+        
     }
     return self;
+}
+
+- (void)setFiuSceneList:(NSMutableArray *)dataMarr idMarr:(NSMutableArray *)idMarr {
+    _fiuSceneListData = dataMarr;
+    _fiuSceneIdData = idMarr;
+    [self.sceneListView reloadData];
 }
 
 #pragma mark - 情景滑动列表
@@ -44,20 +61,20 @@
 
 #pragma mark  UICollectionViewDataSource
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
-    return 10;
+    return _fiuSceneListData.count;
 }
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
     static NSString * collectionViewCellId = @"collectionViewCellId";
     FiuSceneCollectionViewCell * cell = [collectionView dequeueReusableCellWithReuseIdentifier:collectionViewCellId forIndexPath:indexPath];
-    [cell setUI];
+    [cell setFiuSceneList:_fiuSceneListData[indexPath.row]];
     return cell;
 }
 
 #pragma mark UICollectionViewDelegate
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
-    NSLog(@"打开最Fiu的情景 ＝＝＝＝＝＝＝＝ %zi", indexPath.row);
     FiuSceneViewController * fiuSceneVC = [[FiuSceneViewController alloc] init];
+    fiuSceneVC.fiuSceneId = _fiuSceneIdData[indexPath.row];
     [self.nav pushViewController:fiuSceneVC animated:YES];
 }
 

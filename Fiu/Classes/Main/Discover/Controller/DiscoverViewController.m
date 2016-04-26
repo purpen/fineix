@@ -13,8 +13,17 @@
 #import "FBMapLocatinViewController.h"
 #import "SearchViewController.h"
 #import "SceneInfoViewController.h"
+#import "FiuSceneRow.h"
 
 static NSString *const URLDiscoverSlide = @"/gateway/slide";
+static NSString *const URLFiuScene = @"/scene_scene/";
+
+@interface DiscoverViewController()
+
+@pro_strong NSMutableArray              *   fiuSceneList;
+@pro_strong NSMutableArray              *   fiuSceneIdList;
+
+@end
 
 @implementation DiscoverViewController
 
@@ -28,14 +37,57 @@ static NSString *const URLDiscoverSlide = @"/gateway/slide";
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    [self networkRollImgData];
+    [self networkFiuSceneData];
+    
     [self setDiscoverViewUI];
+}
+
+- (NSMutableArray *)fiuSceneList {
+    if (!_fiuSceneList) {
+        _fiuSceneList = [NSMutableArray array];
+    }
+    return _fiuSceneList;
+}
+
+- (NSMutableArray *)fiuSceneIdList {
+    if (!_fiuSceneIdList) {
+        _fiuSceneIdList = [NSMutableArray array];
+    }
+    return _fiuSceneIdList;
 }
 
 #pragma mark - 网络请求
 //  轮播图
 - (void)networkRollImgData {
-    self.rollImgRequest = [FBAPI getWithUrlString:URLDiscoverSlide requestDictionary:@{} delegate:self];
+    self.rollImgRequest = [FBAPI getWithUrlString:URLDiscoverSlide requestDictionary:@{@"name":@"app_fiu_sight_index_slide"} delegate:self];
+    [self.rollImgRequest startRequestSuccess:^(FBRequest *request, id result) {
+        NSLog(@"“发现”页的轮播图 ======  %@", result);
+        
+    } failure:^(FBRequest *request, NSError *error) {
+        NSLog(@"%@", error);
+    }];
 }
+
+//  情景列表
+- (void)networkFiuSceneData {
+    [SVProgressHUD show];
+    self.fiuSceneRequest = [FBAPI getWithUrlString:URLFiuScene requestDictionary:@{@"stick":@"1"} delegate:self];
+    [self.fiuSceneRequest startRequestSuccess:^(FBRequest *request, id result) {
+        NSArray * fiuSceneArr = [[result valueForKey:@"data"] valueForKey:@"rows"];
+        for (NSDictionary * fiuSceneDic in fiuSceneArr) {
+            FiuSceneRow * fiuSceneModel = [[FiuSceneRow alloc] initWithDictionary:fiuSceneDic];
+            [self.fiuSceneList addObject:fiuSceneModel];
+            [self.fiuSceneIdList addObject:[NSString stringWithFormat:@"%zi", fiuSceneModel.idField]];
+        }
+        [self.discoverTableView reloadData];
+        [SVProgressHUD dismiss];
+        
+    } failure:^(FBRequest *request, NSError *error) {
+        NSLog(@"%@", error);
+    }];
+}
+
 
 #pragma mark - 设置视图的UI
 - (void)setDiscoverViewUI {
@@ -114,6 +166,7 @@ static NSString *const URLDiscoverSlide = @"/gateway/slide";
         if (!cell) {
             cell = [[FiuSceneTableViewCell alloc] initWithStyle:(UITableViewCellStyleDefault) reuseIdentifier:fiuSceneCellId];
         }
+        [cell setFiuSceneList:self.fiuSceneList idMarr:self.fiuSceneIdList];
         cell.nav = self.navigationController;
         return cell;
         
@@ -123,7 +176,6 @@ static NSString *const URLDiscoverSlide = @"/gateway/slide";
         if (!cell) {
             cell = [[SceneListTableViewCell alloc] initWithStyle:(UITableViewCellStyleDefault) reuseIdentifier:sceneListCellId];
         }
-//        [cell setUI];
         return cell;
     }
     

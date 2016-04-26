@@ -14,6 +14,8 @@
 @interface DiscoverViewController : FBViewController <FBNavigationBarItemsDelegate, UITableViewDelegate, UITableViewDataSource>
 
 @pro_strong FBRequest               *   rollImgRequest;
+@pro_strong FBRequest               *   fiuSceneRequest;
+
 @pro_strong UITableView             *   discoverTableView;
 @pro_strong GroupHeaderView         *   headerView;
 @pro_strong FBRollImages            *   rollView;

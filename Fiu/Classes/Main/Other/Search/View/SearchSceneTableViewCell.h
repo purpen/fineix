@@ -7,7 +7,6 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "AllSceneView.h"
 #import "Fiu.h"
 
 @interface SearchSceneTableViewCell : UITableViewCell <UICollectionViewDelegate, UICollectionViewDataSource>

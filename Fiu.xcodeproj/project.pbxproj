@@ -223,6 +223,13 @@
 		D83639821CCE1F5C00CC4AC0 /* GoodsBrandTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D83639811CCE1F5C00CC4AC0 /* GoodsBrandTableViewCell.m */; };
 		D83639851CCF221700CC4AC0 /* GoodsCarViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D83639841CCF221700CC4AC0 /* GoodsCarViewController.m */; };
 		D83639881CCF247700CC4AC0 /* SceneSubscribeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D83639871CCF247700CC4AC0 /* SceneSubscribeViewController.m */; };
+		D83639921CCF69D300CC4AC0 /* FiuScene.m in Sources */ = {isa = PBXBuildFile; fileRef = D836398B1CCF69D300CC4AC0 /* FiuScene.m */; };
+		D83639931CCF69D300CC4AC0 /* FiuSceneData.m in Sources */ = {isa = PBXBuildFile; fileRef = D836398D1CCF69D300CC4AC0 /* FiuSceneData.m */; };
+		D83639941CCF69D300CC4AC0 /* FiuSceneLocation.m in Sources */ = {isa = PBXBuildFile; fileRef = D836398F1CCF69D300CC4AC0 /* FiuSceneLocation.m */; };
+		D83639951CCF69D300CC4AC0 /* FiuSceneRow.m in Sources */ = {isa = PBXBuildFile; fileRef = D83639911CCF69D300CC4AC0 /* FiuSceneRow.m */; };
+		D836399C1CCF731500CC4AC0 /* FiuSceneInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = D83639971CCF731500CC4AC0 /* FiuSceneInfo.m */; };
+		D836399D1CCF731500CC4AC0 /* FiuSceneInfoData.m in Sources */ = {isa = PBXBuildFile; fileRef = D83639991CCF731500CC4AC0 /* FiuSceneInfoData.m */; };
+		D836399E1CCF731500CC4AC0 /* FiuSceneInfoLocation.m in Sources */ = {isa = PBXBuildFile; fileRef = D836399B1CCF731500CC4AC0 /* FiuSceneInfoLocation.m */; };
 		D83A64321C8E7765003DB8BB /* Photos.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D83A64311C8E7765003DB8BB /* Photos.framework */; };
 		D83A64331C8E7E93003DB8BB /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D802D7891C844101007AFA3D /* AVFoundation.framework */; };
 		D83A64351C8E7EAD003DB8BB /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D83A64341C8E7EAD003DB8BB /* Foundation.framework */; };
@@ -244,7 +251,6 @@
 		D87B69D51CC726D500199EFE /* WriteCommentView.m in Sources */ = {isa = PBXBuildFile; fileRef = D87B69D01CC726D500199EFE /* WriteCommentView.m */; };
 		D87B69D81CC726E800199EFE /* AllSceneViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D87B69D71CC726E800199EFE /* AllSceneViewController.m */; };
 		D87B69DD1CC726F000199EFE /* AllSceneCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D87B69DA1CC726F000199EFE /* AllSceneCollectionViewCell.m */; };
-		D87B69DE1CC726F000199EFE /* AllSceneView.m in Sources */ = {isa = PBXBuildFile; fileRef = D87B69DC1CC726F000199EFE /* AllSceneView.m */; };
 		D87B69E11CC7274900199EFE /* FBMenuView.m in Sources */ = {isa = PBXBuildFile; fileRef = D87B69DF1CC7274900199EFE /* FBMenuView.m */; };
 		D89B5A8B1CB4E48800DB9710 /* SceneListTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D89B5A8A1CB4E48800DB9710 /* SceneListTableViewCell.m */; };
 		D89B5A8E1CB6284A00DB9710 /* SceneInfoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D89B5A8D1CB6284A00DB9710 /* SceneInfoViewController.m */; };
@@ -674,6 +680,20 @@
 		D83639841CCF221700CC4AC0 /* GoodsCarViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GoodsCarViewController.m; sourceTree = "<group>"; };
 		D83639861CCF247700CC4AC0 /* SceneSubscribeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SceneSubscribeViewController.h; sourceTree = "<group>"; };
 		D83639871CCF247700CC4AC0 /* SceneSubscribeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SceneSubscribeViewController.m; sourceTree = "<group>"; };
+		D836398A1CCF69D300CC4AC0 /* FiuScene.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FiuScene.h; sourceTree = "<group>"; };
+		D836398B1CCF69D300CC4AC0 /* FiuScene.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FiuScene.m; sourceTree = "<group>"; };
+		D836398C1CCF69D300CC4AC0 /* FiuSceneData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FiuSceneData.h; sourceTree = "<group>"; };
+		D836398D1CCF69D300CC4AC0 /* FiuSceneData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FiuSceneData.m; sourceTree = "<group>"; };
+		D836398E1CCF69D300CC4AC0 /* FiuSceneLocation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FiuSceneLocation.h; sourceTree = "<group>"; };
+		D836398F1CCF69D300CC4AC0 /* FiuSceneLocation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FiuSceneLocation.m; sourceTree = "<group>"; };
+		D83639901CCF69D300CC4AC0 /* FiuSceneRow.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FiuSceneRow.h; sourceTree = "<group>"; };
+		D83639911CCF69D300CC4AC0 /* FiuSceneRow.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FiuSceneRow.m; sourceTree = "<group>"; };
+		D83639961CCF731500CC4AC0 /* FiuSceneInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FiuSceneInfo.h; sourceTree = "<group>"; };
+		D83639971CCF731500CC4AC0 /* FiuSceneInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FiuSceneInfo.m; sourceTree = "<group>"; };
+		D83639981CCF731500CC4AC0 /* FiuSceneInfoData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FiuSceneInfoData.h; sourceTree = "<group>"; };
+		D83639991CCF731500CC4AC0 /* FiuSceneInfoData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FiuSceneInfoData.m; sourceTree = "<group>"; };
+		D836399A1CCF731500CC4AC0 /* FiuSceneInfoLocation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FiuSceneInfoLocation.h; sourceTree = "<group>"; };
+		D836399B1CCF731500CC4AC0 /* FiuSceneInfoLocation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FiuSceneInfoLocation.m; sourceTree = "<group>"; };
 		D83A64311C8E7765003DB8BB /* Photos.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Photos.framework; path = System/Library/Frameworks/Photos.framework; sourceTree = SDKROOT; };
 		D83A64341C8E7EAD003DB8BB /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		D83A64361C8E7EBD003DB8BB /* CoreVideo.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreVideo.framework; path = System/Library/Frameworks/CoreVideo.framework; sourceTree = SDKROOT; };
@@ -709,8 +729,6 @@
 		D87B69D71CC726E800199EFE /* AllSceneViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AllSceneViewController.m; sourceTree = "<group>"; };
 		D87B69D91CC726F000199EFE /* AllSceneCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AllSceneCollectionViewCell.h; sourceTree = "<group>"; };
 		D87B69DA1CC726F000199EFE /* AllSceneCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AllSceneCollectionViewCell.m; sourceTree = "<group>"; };
-		D87B69DB1CC726F000199EFE /* AllSceneView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AllSceneView.h; sourceTree = "<group>"; };
-		D87B69DC1CC726F000199EFE /* AllSceneView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AllSceneView.m; sourceTree = "<group>"; };
 		D87B69DF1CC7274900199EFE /* FBMenuView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FBMenuView.m; sourceTree = "<group>"; };
 		D87B69E01CC7274900199EFE /* FBMenuView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FBMenuView.h; sourceTree = "<group>"; };
 		D89B5A891CB4E48800DB9710 /* SceneListTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SceneListTableViewCell.h; sourceTree = "<group>"; };
@@ -1428,7 +1446,7 @@
 		D812805B1CAA8532007CF08B /* Discover */ = {
 			isa = PBXGroup;
 			children = (
-				D89B5A811CB4C1F300DB9710 /* Model */,
+				D83639891CCF69D300CC4AC0 /* Model */,
 				D89B5A821CB4C1F300DB9710 /* View */,
 				D812805C1CAA8532007CF08B /* Controller */,
 			);
@@ -1731,6 +1749,27 @@
 			path = Model;
 			sourceTree = "<group>";
 		};
+		D83639891CCF69D300CC4AC0 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				D83639961CCF731500CC4AC0 /* FiuSceneInfo.h */,
+				D83639971CCF731500CC4AC0 /* FiuSceneInfo.m */,
+				D83639981CCF731500CC4AC0 /* FiuSceneInfoData.h */,
+				D83639991CCF731500CC4AC0 /* FiuSceneInfoData.m */,
+				D836399A1CCF731500CC4AC0 /* FiuSceneInfoLocation.h */,
+				D836399B1CCF731500CC4AC0 /* FiuSceneInfoLocation.m */,
+				D836398A1CCF69D300CC4AC0 /* FiuScene.h */,
+				D836398B1CCF69D300CC4AC0 /* FiuScene.m */,
+				D836398C1CCF69D300CC4AC0 /* FiuSceneData.h */,
+				D836398D1CCF69D300CC4AC0 /* FiuSceneData.m */,
+				D83639901CCF69D300CC4AC0 /* FiuSceneRow.h */,
+				D83639911CCF69D300CC4AC0 /* FiuSceneRow.m */,
+				D836398E1CCF69D300CC4AC0 /* FiuSceneLocation.h */,
+				D836398F1CCF69D300CC4AC0 /* FiuSceneLocation.m */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
 		D87B69B91CC726BA00199EFE /* Category */ = {
 			isa = PBXGroup;
 			children = (
@@ -1809,20 +1848,11 @@
 			path = View;
 			sourceTree = "<group>";
 		};
-		D89B5A811CB4C1F300DB9710 /* Model */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Model;
-			sourceTree = "<group>";
-		};
 		D89B5A821CB4C1F300DB9710 /* View */ = {
 			isa = PBXGroup;
 			children = (
 				D87B69D91CC726F000199EFE /* AllSceneCollectionViewCell.h */,
 				D87B69DA1CC726F000199EFE /* AllSceneCollectionViewCell.m */,
-				D87B69DB1CC726F000199EFE /* AllSceneView.h */,
-				D87B69DC1CC726F000199EFE /* AllSceneView.m */,
 				D8035FD41CBD1035001920F9 /* FiuSceneTableViewCell.h */,
 				D8035FD11CBD1035001920F9 /* FiuSceneTableViewCell.m */,
 				D8035FD31CBD1035001920F9 /* FiuSceneCollectionViewCell.h */,
@@ -2024,6 +2054,7 @@
 				1FEF0B161CC0FC15006EF0C6 /* BottomView.m in Sources */,
 				D80360621CBF41A3001920F9 /* SearchMenuView.m in Sources */,
 				D81281311CAA8532007CF08B /* HomeViewController.m in Sources */,
+				D836399E1CCF731500CC4AC0 /* FiuSceneInfoLocation.m in Sources */,
 				D83639661CCDBF2900CC4AC0 /* HomeSceneListData.m in Sources */,
 				D87B69D31CC726D500199EFE /* CommentViewController.m in Sources */,
 				D8035F2C1CB77AAA001920F9 /* ContentAndTagTableViewCell.m in Sources */,
@@ -2038,6 +2069,7 @@
 				1FEF0B211CC0FC15006EF0C6 /* TipNumberView.m in Sources */,
 				D81281131CAA8532007CF08B /* FBViewController.m in Sources */,
 				D812811C1CAA8532007CF08B /* ReleaseViewController.m in Sources */,
+				D83639921CCF69D300CC4AC0 /* FiuScene.m in Sources */,
 				D8035FD01CBD1021001920F9 /* FBTabBarController.m in Sources */,
 				D80D415B1CAD1437005D72B1 /* FBNavigationViewController.m in Sources */,
 				D80D415E1CAD144D005D72B1 /* UIBarButtonItem+Helper.m in Sources */,
@@ -2067,6 +2099,7 @@
 				D87B69D81CC726E800199EFE /* AllSceneViewController.m in Sources */,
 				1FD7E67A1CC8E4F200A69BDD /* MyQrCodeView.m in Sources */,
 				D8035FE11CBDFC07001920F9 /* FiuTagTableViewCell.m in Sources */,
+				D83639951CCF69D300CC4AC0 /* FiuSceneRow.m in Sources */,
 				D89B5A9A1CB676C700DB9710 /* LikePeopleTableViewCell.m in Sources */,
 				D812812D1CAA8532007CF08B /* ScenceAddMoreView.m in Sources */,
 				D812811D1CAA8532007CF08B /* SearchLocationViewController.m in Sources */,
@@ -2076,6 +2109,7 @@
 				D81281661CAA8532007CF08B /* JKDBHelper.m in Sources */,
 				D83639851CCF221700CC4AC0 /* GoodsCarViewController.m in Sources */,
 				D83639781CCDE5A400CC4AC0 /* SceneInfoCounter.m in Sources */,
+				D83639931CCF69D300CC4AC0 /* FiuSceneData.m in Sources */,
 				D86AFDEF1CBFAFC2006F1602 /* UserHeaderTableViewCell.m in Sources */,
 				D81281261CAA8532007CF08B /* FBFootView.m in Sources */,
 				D83639681CCDBF2900CC4AC0 /* HomeSceneListProduct.m in Sources */,
@@ -2104,6 +2138,7 @@
 				D836397B1CCDE5A400CC4AC0 /* SceneInfoProduct.m in Sources */,
 				D836397F1CCE1C2D00CC4AC0 /* GoodsBrandViewController.m in Sources */,
 				D812812A1CAA8532007CF08B /* PhotoAlbumsTableViewCell.m in Sources */,
+				D836399D1CCF731500CC4AC0 /* FiuSceneInfoData.m in Sources */,
 				D8B0112E1CCA22BF008A63B7 /* InfoRecommendTableViewCell.m in Sources */,
 				D8035FDE1CBDF10B001920F9 /* MallMenuTableViewCell.m in Sources */,
 				D86AFDF21CC0BBC3006F1602 /* FBSearchView.m in Sources */,
@@ -2134,9 +2169,11 @@
 				D80360511CBF376B001920F9 /* RecommendedScenarioModel.m in Sources */,
 				D836397C1CCDE5A400CC4AC0 /* SceneInfoUserInfo.m in Sources */,
 				D80360581CBF376B001920F9 /* RecommendedScenarioView.m in Sources */,
+				D836399C1CCF731500CC4AC0 /* FiuSceneInfo.m in Sources */,
 				1FEF0B081CC0FC15006EF0C6 /* FeedbackViewController.m in Sources */,
 				1F51E8B01CC61E6400017839 /* SubscribeViewController.m in Sources */,
 				1F07A6531CC7925900CF225F /* FindeFriendTableViewCell.m in Sources */,
+				D83639941CCF69D300CC4AC0 /* FiuSceneLocation.m in Sources */,
 				D81281671CAA8532007CF08B /* JKDBModel.m in Sources */,
 				D81281291CAA8532007CF08B /* FiltersView.m in Sources */,
 				D89B5A941CB6580600DB9710 /* UserInfoTableViewCell.m in Sources */,
@@ -2178,7 +2215,6 @@
 				D81281301CAA8532007CF08B /* DiscoverViewController.m in Sources */,
 				D81281151CAA8532007CF08B /* AddUrlViewController.m in Sources */,
 				D81281551CAA8532007CF08B /* HttpTool.m in Sources */,
-				D87B69DE1CC726F000199EFE /* AllSceneView.m in Sources */,
 				D86AFDF51CC0F0D5006F1602 /* FiuSceneViewController.m in Sources */,
 				D80360521CBF376B001920F9 /* TurnPageLayout.m in Sources */,
 				D812811A1CAA8532007CF08B /* MarkGoodsViewController.m in Sources */,

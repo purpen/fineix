@@ -11,6 +11,7 @@
 #import "UILable+Frame.h"
 #import "UIImage+Helper.h"
 #import "SceneInfoData.h"
+#import "FiuSceneInfoData.h"
 
 @interface ContentAndTagTableViewCell : UITableViewCell
 
@@ -19,6 +20,8 @@
 @pro_strong UIScrollView                *   tagView;        //  标签视图
 @pro_assign CGFloat                         cellHeight;
 @pro_strong NSArray                     *   titleArr;
+
+- (void)setFiuSceneDescription:(FiuSceneInfoData *)model;
 
 - (void)setSceneDescription:(SceneInfoData *)model;
 

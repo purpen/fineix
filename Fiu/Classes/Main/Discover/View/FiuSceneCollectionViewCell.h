@@ -8,6 +8,8 @@
 
 #import <UIKit/UIKit.h>
 #import "Fiu.h"
+#import "FiuSceneRow.h"
+#import "UIImageView+SDWedImage.h"
 
 @interface FiuSceneCollectionViewCell : UICollectionViewCell
 
@@ -16,6 +18,6 @@
 @pro_strong UIImageView                 *   locationIcon;   //  地理位置图标
 @pro_strong UILabel                     *   locationLab;    //  地理位置
 
-- (void)setUI;
+- (void)setFiuSceneList:(FiuSceneRow *)model;
 
 @end

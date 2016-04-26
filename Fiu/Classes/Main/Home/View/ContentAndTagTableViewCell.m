@@ -26,6 +26,12 @@ const static NSInteger buttonTag = 421;
 }
 
 #pragma mark -
+- (void)setFiuSceneDescription:(FiuSceneInfoData *)model {
+    [self changeContentLabStyle:model.des];
+//    self addTagButton:model
+    self.frame = CGRectMake(0, 0, SCREEN_WIDTH, self.contentLab.frame.size.height + self.tagView.frame.size.height);
+}
+
 - (void)setSceneDescription:(SceneInfoData *)model {
     [self changeContentLabStyle:model.des];
     [self addTagButton:model.tagTitles];
