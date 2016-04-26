@@ -7,6 +7,7 @@
 //
 
 #import "LikePeopleTableViewCell.h"
+#import "HomePageViewController.h"
 
 const static NSInteger  peopleBtnTag = 64;
 
@@ -77,6 +78,10 @@ const static NSInteger  peopleBtnTag = 64;
 //  查看用户的资料
 - (void)peopleBtnClick:(UIButton *)button {
     NSLog(@"＝＝＝＝＝＝＝＝＝＝查看第 %zi 个用户", button.tag - peopleBtnTag);
+    HomePageViewController * peopleHomeVC = [[HomePageViewController alloc] init];
+    peopleHomeVC.isMySelf = NO;
+    peopleHomeVC.type = @1;
+    [self.nav pushViewController:peopleHomeVC animated:YES];
 }
 
 #pragma mark - 查看更多用户

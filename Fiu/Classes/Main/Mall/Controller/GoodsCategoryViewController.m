@@ -7,6 +7,7 @@
 //
 
 #import "GoodsCategoryViewController.h"
+#import "GoodsCarViewController.h"
 
 @interface GoodsCategoryViewController ()
 
@@ -76,7 +77,8 @@
 }
 
 - (void)rightBarItemSelected {
-    NSLog(@"＊＊＊＊＊＊＊＊＊购物车");
+    GoodsCarViewController * goodsCarVC = [[GoodsCarViewController alloc] init];
+    [self.navigationController pushViewController:goodsCarVC animated:YES];
 }
 
 @end

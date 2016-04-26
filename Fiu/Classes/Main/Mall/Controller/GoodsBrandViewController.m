@@ -98,6 +98,7 @@
 
 #pragma mark - 设置Nav
 - (void)setNavigationViewUI {
+    [[UIApplication sharedApplication] setStatusBarHidden:NO withAnimation:(UIStatusBarAnimationSlide)];
     self.view.backgroundColor = [UIColor whiteColor];
     self.delegate = self;
     [self addBarItemLeftBarButton:@"" image:@"icon_back" isTransparent:YES];

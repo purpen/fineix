@@ -28,6 +28,7 @@
 "cropVcTitle" = "裁剪图片";
 "filtersVcTitle" = "工具";
 "releaseVcTitle" = "创建场景";
+"freleaseVcTitle" = "创建情景";
 "locationVcTitle" = "位置";
 "addTagVcTitle" = "添加标签";
 "chooseSceneVcTitle" = "选择情境";
@@ -36,6 +37,8 @@
 "GoodsInfoVcTitle" = "产品详情";
 "CommentVcTitle" = "评论";
 "AllSceneVcTitle" = "全部情景";
+"GoodsCarVcTitle" = "购物车";
+"SubscribeVcTitle" = "订阅";
 
 //  提示信息
 "netError" = "网络连接错误";

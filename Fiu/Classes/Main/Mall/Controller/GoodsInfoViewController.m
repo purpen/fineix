@@ -13,6 +13,7 @@
 #import "InfoUseSceneTableViewCell.h"
 #import "InfoRecommendTableViewCell.h"
 #import "GoodsBrandViewController.h"
+#import "GoodsCarViewController.h"
 
 static const NSInteger BuyBtnTag = 754;
 
@@ -215,6 +216,7 @@ static const NSInteger BuyBtnTag = 754;
 
 #pragma mark - 设置Nav
 - (void)setNavigationViewUI {
+    [[UIApplication sharedApplication] setStatusBarHidden:NO withAnimation:(UIStatusBarAnimationSlide)];
     self.navViewTitle.text = NSLocalizedString(@"GoodsInfoVcTitle", nil);
     self.view.backgroundColor = [UIColor whiteColor];
     [self addBarItemRightBarButton:@"" image:@"Nav_Car" isTransparent:NO];
@@ -222,7 +224,8 @@ static const NSInteger BuyBtnTag = 754;
 }
 
 - (void)rightBarItemSelected {
-    NSLog(@"＊＊＊＊＊＊＊＊＊购物车");
+    GoodsCarViewController * goodsCarVC = [[GoodsCarViewController alloc] init];
+    [self.navigationController pushViewController:goodsCarVC animated:YES];
 }
 
 @end

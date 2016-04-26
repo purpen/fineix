@@ -14,7 +14,7 @@
 #import "CommentTableViewCell.h"
 #import "CommentViewController.h"
 #import "FBAlertViewController.h"
-
+#import "GoodsInfoViewController.h"
 #import "SceneInfoData.h"
 
 static NSString *const URLSceneInfo = @"/scene_sight/view";
@@ -178,6 +178,7 @@ static NSString *const URLLikeScenePeople = @"/favorite";
             if (cell == nil) {
                 cell = [[LikePeopleTableViewCell alloc] initWithStyle:(UITableViewCellStyleDefault) reuseIdentifier:likePeopleCellId];
             }
+            cell.nav = self.navigationController;
             [cell setUI];
             return cell;
         }
@@ -267,6 +268,12 @@ static NSString *const URLLikeScenePeople = @"/favorite";
     if (indexPath.section == 1) {
         CommentViewController * commentVC = [[CommentViewController alloc] init];
         [self.navigationController pushViewController:commentVC animated:YES];
+    } else if (indexPath.section == 2) {
+        GoodsInfoViewController * goodsInfoVC = [[GoodsInfoViewController alloc] init];
+        [self.navigationController pushViewController:goodsInfoVC animated:YES];
+    } else if (indexPath.section == 3) {
+        GoodsInfoViewController * goodsInfoVC = [[GoodsInfoViewController alloc] init];
+        [self.navigationController pushViewController:goodsInfoVC animated:YES];
     }
 }
 
@@ -290,17 +297,22 @@ static NSString *const URLLikeScenePeople = @"/favorite";
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView{
     if (scrollView == self.sceneTableView) {
         CGRect likeSceneRect = self.likeScene.frame;
+        CGRect tableRect = self.sceneTableView.frame;
         
         if (self.rollDown == YES) {
+            tableRect = CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT - 44);
             likeSceneRect = CGRectMake(0, SCREEN_HEIGHT - 44, SCREEN_WIDTH, 44);
             [UIView animateWithDuration:.3 animations:^{
                 self.likeScene.frame = likeSceneRect;
+                self.sceneTableView.frame = tableRect;
             }];
             
         } else if (self.rollDown == NO) {
+            tableRect = CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT);
             likeSceneRect = CGRectMake(0, SCREEN_HEIGHT, SCREEN_WIDTH, 44);
             [UIView animateWithDuration:.3 animations:^{
                 self.likeScene.frame = likeSceneRect;
+                self.sceneTableView.frame = tableRect;
             }];
         }
     }
@@ -311,6 +323,7 @@ static NSString *const URLLikeScenePeople = @"/favorite";
     FBAlertViewController * alertVC = [[FBAlertViewController alloc] init];
     [alertVC initFBAlertVcStyle:NO];
     alertVC.modalPresentationStyle = UIModalPresentationOverCurrentContext;
+    alertVC.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;
     [self presentViewController:alertVC animated:YES completion:nil];
 }
 

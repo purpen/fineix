@@ -94,7 +94,13 @@ static NSString *const URLReleaseScenen = @"/scene_sight/save";
 #pragma mark -  设置导航栏
 - (void)setNavViewUI {
     self.navView.backgroundColor = [UIColor whiteColor];
-    [self addNavViewTitle:NSLocalizedString(@"releaseVcTitle", nil)];
+    
+    if ([self.createType isEqualToString:@"scene"]) {
+        [self addNavViewTitle:NSLocalizedString(@"releaseVcTitle", nil)];
+    } else if ([self.createType isEqualToString:@"fScene"]) {
+        [self addNavViewTitle:NSLocalizedString(@"freleaseVcTitle", nil)];
+    }
+
     self.navTitle.textColor = [UIColor blackColor];
     [self addCancelDoneButton];
     [self addDoneButton];

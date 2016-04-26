@@ -10,7 +10,7 @@
 #import "FiuSceneTableViewCell.h"
 #import "SceneListTableViewCell.h"
 #import "FiuTagTableViewCell.h"
-
+#import "FBMapLocatinViewController.h"
 #import "SearchViewController.h"
 #import "SceneInfoViewController.h"
 
@@ -191,7 +191,7 @@ static NSString *const URLDiscoverSlide = @"/gateway/slide";
 
 #pragma mark - 设置Nav
 - (void)setNavigationViewUI {
-//    [[UIApplication sharedApplication] setStatusBarHidden:NO withAnimation:(UIStatusBarAnimationSlide)];
+    [[UIApplication sharedApplication] setStatusBarHidden:NO withAnimation:(UIStatusBarAnimationSlide)];
     self.view.backgroundColor = [UIColor whiteColor];
     self.delegate = self;
     [self addNavLogoImgisTransparent:NO];
@@ -208,7 +208,8 @@ static NSString *const URLDiscoverSlide = @"/gateway/slide";
 
 //  点击右边barItem
 - (void)rightBarItemSelected {
-    NSLog(@"＊＊＊＊＊＊＊＊＊位置");
+//    FBMapLocatinViewController * mapFSceneVC = [[FBMapLocatinViewController alloc] init];
+//    [self.navigationController pushViewController:mapFSceneVC animated:YES];
 }
 
 @end

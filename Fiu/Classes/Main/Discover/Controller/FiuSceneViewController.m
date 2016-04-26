@@ -201,17 +201,22 @@
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView{
     if (scrollView == self.fiuSceneTable) {
         CGRect suBtnRect = self.suBtn.frame;
+        CGRect tableRect = self.fiuSceneTable.frame;
         
         if (self.rollDown == YES) {
+            tableRect = CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT - 44);
             suBtnRect = CGRectMake(0, SCREEN_HEIGHT - 44, SCREEN_WIDTH, 44);
             [UIView animateWithDuration:.3 animations:^{
                 self.suBtn.frame = suBtnRect;
+                self.fiuSceneTable.frame = tableRect;
             }];
             
         } else if (self.rollDown == NO) {
+            tableRect = CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT);
             suBtnRect = CGRectMake(0, SCREEN_HEIGHT, SCREEN_WIDTH, 44);
             [UIView animateWithDuration:.3 animations:^{
                 self.suBtn.frame = suBtnRect;
+                self.fiuSceneTable.frame = tableRect;
             }];
         }
     }
@@ -237,7 +242,7 @@
 
 - (void)rightBarItemSelected {
     PictureToolViewController * pictureToolVC = [[PictureToolViewController alloc] init];
-    pictureToolVC.createType = @"scene";
+    pictureToolVC.createType = @"fScene";
     [self presentViewController:pictureToolVC animated:YES completion:nil];
 }
 

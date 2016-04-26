@@ -83,7 +83,7 @@
 - (void)setNavigationViewUI {
     self.view.backgroundColor = [UIColor whiteColor];
     self.navViewTitle.text = NSLocalizedString(@"CommentVcTitle", nil);
-//    [[UIApplication sharedApplication] setStatusBarHidden:NO withAnimation:(UIStatusBarAnimationSlide)];
+    [[UIApplication sharedApplication] setStatusBarHidden:NO withAnimation:(UIStatusBarAnimationSlide)];
 }
 
 

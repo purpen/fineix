@@ -11,6 +11,8 @@
 #import "FiuTagTableViewCell.h"
 #import "SearchViewController.h"
 #import "GoodsInfoViewController.h"
+#import "GoodsCarViewController.h"
+#import "GoodsTableViewCell.h"
 
 @implementation MallViewController
 
@@ -52,7 +54,7 @@
 #pragma mark - tableView
 - (UITableView *)mallTableView {
     if (!_mallTableView) {
-        _mallTableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 64, SCREEN_WIDTH, SCREEN_HEIGHT - 64) style:(UITableViewStyleGrouped)];
+        _mallTableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 64, SCREEN_WIDTH, SCREEN_HEIGHT - 113) style:(UITableViewStyleGrouped)];
         _mallTableView.delegate = self;
         _mallTableView.dataSource = self;
         _mallTableView.tableHeaderView = self.rollView;
@@ -65,13 +67,15 @@
 #pragma mark - tableViewDelegate & dataSource
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
     return 2;
-}
 
+}
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     if (section == 0) {
         return 3;
+    } else if (section == 1) {
+        return 3;
     }
-    return 1;
+    return 0;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -104,14 +108,15 @@
             return cell;
         }
         
+    } else if (indexPath.section == 1) {
+        static NSString * mallGoodsCellId = @"MallGoodsCellId";
+        GoodsTableViewCell * cell = [tableView dequeueReusableCellWithIdentifier:mallGoodsCellId];
+        cell = [[GoodsTableViewCell alloc] initWithStyle:(UITableViewCellStyleDefault) reuseIdentifier:mallGoodsCellId];
+        [cell setUI];
+        return cell;
     }
-    static NSString * CellId = @"mallTableViewCell";
-    UITableViewCell * cell = [tableView dequeueReusableCellWithIdentifier:CellId];
-    if (!cell) {
-        cell = [[UITableViewCell alloc] initWithStyle:(UITableViewCellStyleDefault) reuseIdentifier:CellId];
-    }
-    cell.selectionStyle = UITableViewCellSelectionStyleNone;
-    return cell;
+    
+    return nil;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -125,7 +130,7 @@
         }
         
     } else if (indexPath.section == 1) {
-        return 266.5;
+        return 210;
     }
     return 0;
 }
@@ -167,7 +172,7 @@
 
 #pragma mark - 设置Nav
 - (void)setNavigationViewUI {
-//    [[UIApplication sharedApplication] setStatusBarHidden:NO withAnimation:(UIStatusBarAnimationSlide)];
+    [[UIApplication sharedApplication] setStatusBarHidden:NO withAnimation:(UIStatusBarAnimationSlide)];
     self.view.backgroundColor = [UIColor whiteColor];
     self.delegate = self;
     [self addNavLogoImgisTransparent:NO];
@@ -184,6 +189,7 @@
 
 //  点击右边barItem
 - (void)rightBarItemSelected {
-    NSLog(@"＊＊＊＊＊＊＊＊＊购物车");
+    GoodsCarViewController * goodsCarVC = [[GoodsCarViewController alloc] init];
+    [self.navigationController pushViewController:goodsCarVC animated:YES];
 }
 @end

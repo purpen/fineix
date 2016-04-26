@@ -10,7 +10,7 @@
 #import "SceneListTableViewCell.h"
 #import "SceneInfoViewController.h"
 #import "SearchViewController.h"
-
+#import "SceneSubscribeViewController.h"
 #import "HomeSceneListRow.h"
 
 static NSString *const URLSceneList = @"/scene_sight/";
@@ -224,7 +224,8 @@ static NSString *const URLSceneList = @"/scene_sight/";
 
 //  点击右边barItem
 - (void)rightBarItemSelected {
-    NSLog(@"＊＊＊＊＊＊＊＊＊关注");
+    SceneSubscribeViewController * sceneSubVC = [[SceneSubscribeViewController alloc] init];
+    [self.navigationController pushViewController:sceneSubVC animated:YES];
 }
 
 #pragma mark - 应用第一次打开，加载操作指示图

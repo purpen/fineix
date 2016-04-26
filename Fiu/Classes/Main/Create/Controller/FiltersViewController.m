@@ -147,6 +147,7 @@
     ReleaseViewController * releaseVC = [[ReleaseViewController alloc] init];
     releaseVC.locationArr = self.locationArr;
     releaseVC.scenceView.imageView.image = self.filtersImageView.image;
+    releaseVC.createType = self.createType;
     [self.navigationController pushViewController:releaseVC animated:YES];
     
 }
