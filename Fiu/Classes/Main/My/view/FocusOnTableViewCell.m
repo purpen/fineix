@@ -8,6 +8,8 @@
 
 #import "FocusOnTableViewCell.h"
 #import "Fiu.h"
+#import "UserInfo.h"
+#import <SDWebImage/UIImageView+WebCache.h>
 
 @implementation FocusOnTableViewCell
 
@@ -59,10 +61,11 @@
     return self;
 }
 
--(void)setUI{
-    self.headImageView.image = [UIImage imageNamed:@"user"];
-    self.nickNameLabel.text = @"boc747";
-    self.summaryLabel.text = @"清风吹";
+-(void)setUIWithModel:(UserInfo *)model{
+    
+    [self.headImageView sd_setImageWithURL:[NSURL URLWithString:model.mediumAvatarUrl] placeholderImage:[UIImage imageNamed:@"user"]];
+    self.nickNameLabel.text = model.nickname;
+    self.summaryLabel.text = model.summary;
     
 }
 

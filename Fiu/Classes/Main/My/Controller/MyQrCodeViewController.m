@@ -32,18 +32,24 @@
     self.view.backgroundColor = [UIColor colorWithHexString:@"#F7F7F7"];
     // Do any additional setup after loading the view.
     //设置导航条
-    self.navigationItem.title = @"二维码";
+    self.navViewTitle.text = @"二维码";
     self.delegate = self;
-//    [self addBarItemLeftBarButton:nil image:@"icon_back"];
-//    [self addBarItemRightBarButton:nil image:@"icon_ios_more_black"];
+    [self addBarItemLeftBarButton:nil image:@"icon_back" isTransparent:NO];
+    [self addBarItemRightBarButton:nil image:@"icon_ios_more_black" isTransparent:NO];
     
     [self.filter setDefaults];
     UserInfoEntity *entity = [UserInfoEntity defaultUserInfoEntity];
     NSString *str = [NSString stringWithFormat:@"qq41e073ea://id=%@",entity.userId];
     NSData *data = [str dataUsingEncoding:NSUTF8StringEncoding];
     [_filter setValue:data forKey:@"inputMessage"];
-    self.view = self.qrCodeView;
-    
+    //self.view = self.qrCodeView;
+    [self.view addSubview:self.qrCodeView];
+    [_qrCodeView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.mas_equalTo(self.view.mas_left).with.offset(0);
+        make.bottom.mas_equalTo(self.view.mas_bottom).with.offset(0);
+        make.right.mas_equalTo(self.view.mas_right).with.offset(0);
+        make.top.mas_equalTo(self.view.mas_top).with.offset(64);
+    }];
 }
 
 - (UIImage *)createNonInterpolatedUIImageFormCIImage:(CIImage *)image withSize:(CGFloat) size

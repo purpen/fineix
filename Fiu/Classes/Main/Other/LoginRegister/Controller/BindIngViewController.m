@@ -1,12 +1,12 @@
 //
-//  FBBindingMobilePhoneNumber.m
-//  fineix
+//  BindIngViewController.m
+//  Fiu
 //
-//  Created by THN-Dong on 16/3/24.
+//  Created by THN-Dong on 16/4/26.
 //  Copyright © 2016年 taihuoniao. All rights reserved.
 //
 
-#import "FBBindingMobilePhoneNumber.h"
+#import "BindIngViewController.h"
 #import "SVProgressHUD.h"
 #import "NSString+Helper.h"
 #import "Fiu.h"
@@ -14,53 +14,42 @@
 #import "FBAPI.h"
 #import "UserInfo.h"
 #import "UserInfoEntity.h"
-#import "PhoneNumLoginView.h"
+#import "UMSocial.h"
+#import "WXApi.h"
+#import "WeiboSDK.h"
+#import <TencentOpenAPI/QQApiInterface.h>
 
-@interface FBBindingMobilePhoneNumber ()<UITextFieldDelegate>
-{
-    PhoneNumLoginView *_phoneNumLoginV;
-}
+@interface BindIngViewController ()<UITextFieldDelegate>
+
+@property (weak, nonatomic) IBOutlet UITextField *phoneNumTF;
+@property (weak, nonatomic) IBOutlet UITextField *pwdTF;
+@property (weak, nonatomic) IBOutlet UIButton *bingBtn;
 
 @end
 NSString *thirdRegistrationBindingMobilePhone = @"/auth/third_register_with_phone";
-@implementation FBBindingMobilePhoneNumber
+@implementation BindIngViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view.
-    //输入手机号
+    // Do any additional setup after loading the view from its nib.
+    self.bingBtn.layer.masksToBounds = YES;
+    self.bingBtn.layer.cornerRadius = 3;
     
-    
-    
-    
-    _phoneNumLoginV = [[PhoneNumLoginView alloc] init];
-    CGRect frame = _phoneNumLoginV.frame;
-    frame.origin.y = 117.0/667.0*SCREEN_HEIGHT;
-    _phoneNumLoginV.frame = frame;
-    _phoneNumLoginV.soonBtn.hidden = YES;
-    _phoneNumLoginV.forgetBtn.hidden = YES;
-    [_phoneNumLoginV.loginBtn setTitle:@"绑定" forState:UIControlStateNormal];
-    [_phoneNumLoginV.loginBtn addTarget:self action:@selector(clickBindingBTn:) forControlEvents:UIControlEventTouchUpInside];
-    _phoneNumLoginV.phoneTF.delegate = self;
-    _phoneNumLoginV.pwdTF.delegate = self;
-    
-}
-//取消按钮
-- (IBAction)cancelBtn:(UIButton *)sender {
-    [self dismissViewControllerAnimated:YES completion:nil];
+    self.phoneNumTF.delegate = self;
+    self.pwdTF.delegate = self;
 }
 
-//返回按钮
-- (IBAction)backBtn:(UIButton *)sender {
-    [self.navigationController popViewControllerAnimated:YES];
+- (void)didReceiveMemoryWarning {
+    [super didReceiveMemoryWarning];
+    // Dispose of any resources that can be recreated.
 }
 
 
--(void)clickBindingBTn:(UIButton*)sender{
+- (IBAction)clickBingBtn:(UIButton *)sender {
     //判断手机号格式
-    if ([_phoneNumLoginV.phoneTF.text checkTel]) {
+    if ([self.phoneNumTF.text checkTel]) {
         //如果手机号格式正确判断密码格式
-        if (_phoneNumLoginV.pwdTF.text.length < 6) {
+        if (self.pwdTF.text.length < 6) {
             //如果密码格式错误提示错误信息
             [SVProgressHUD showErrorWithStatus:NSLocalizedString(@"passwordDigits", nil)];
             //NSLocalizedString(@"cropVcTitle", nil)
@@ -76,8 +65,8 @@ NSString *thirdRegistrationBindingMobilePhone = @"/auth/third_register_with_phon
                                      @"oid":self.snsAccount.usid,
                                      @"union_id":self.snsAccount.unionId,
                                      @"access_token":self.snsAccount.accessToken,
-                                     @"account":_phoneNumLoginV.phoneTF.text,
-                                     @"password":_phoneNumLoginV.pwdTF.text,
+                                     @"account":self.phoneNumTF.text,
+                                     @"password":self.pwdTF.text,
                                      @"from_to":@1
                                      };
             FBRequest *request = [FBAPI postWithUrlString:thirdRegistrationBindingMobilePhone requestDictionary:params delegate:self];
@@ -119,9 +108,23 @@ NSString *thirdRegistrationBindingMobilePhone = @"/auth/third_register_with_phon
 }
 
 
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
+- (IBAction)backBtn:(UIButton *)sender {
+    [self.navigationController popViewControllerAnimated:YES];
 }
-@end
 
+
+- (IBAction)cancelBtn:(UIButton *)sender {
+     [self dismissViewControllerAnimated:YES completion:nil];
+}
+
+/*
+#pragma mark - Navigation
+
+// In a storyboard-based application, you will often want to do a little preparation before navigation
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+    // Get the new view controller using [segue destinationViewController].
+    // Pass the selected object to the new view controller.
+}
+*/
+
+@end

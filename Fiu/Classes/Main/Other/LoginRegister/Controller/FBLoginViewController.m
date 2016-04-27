@@ -18,13 +18,13 @@
 #import "FBAPI.h"
 #import "UserInfo.h"
 #import "UserInfoEntity.h"
-#import "MyViewController.h"
+#import "MyselfViewController.h"
 #import "PhoneNumLoginView.h"
 #import "SubmitView.h"
 #import "FBSignupViewController.h"
 #import <TYAlertController.h>
 #import <TYAlertView.h>
-#import "FBBindingMobilePhoneNumber.h"
+#import "BindIngViewController.h"
 #import "SubscribeInterestedCollectionViewController.h"
 
 
@@ -161,7 +161,7 @@ static NSString *const thirdRegisteredNotBinding = @"/auth/third_register_withou
         FBRequest *request = [FBAPI postWithUrlString:VerifyCodeURL requestDictionary:params delegate:self];
         request.flag = VerifyCodeURL;
         [request startRequest];
-        [SVProgressHUD showWithMaskType:SVProgressHUDMaskTypeClear];
+        //[SVProgressHUD showWithMaskType:SVProgressHUDMaskTypeClear];
         _submitView.toResendV.hidden = NO;
         [self startTime];
     }else{
@@ -257,7 +257,7 @@ static NSString *const thirdRegisteredNotBinding = @"/auth/third_register_withou
     FBRequest *request = [FBAPI postWithUrlString:LoginURL requestDictionary:params delegate:self];
     request.flag = LoginURL;
     [request startRequest];
-    [SVProgressHUD showWithMaskType:SVProgressHUDMaskTypeClear];
+    //[SVProgressHUD showWithMaskType:SVProgressHUDMaskTypeClear];
 }
 
 #pragma mark -fbrequestDElegate
@@ -281,8 +281,7 @@ static NSString *const thirdRegisteredNotBinding = @"/auth/third_register_withou
             UserInfoEntity *entity = [UserInfoEntity defaultUserInfoEntity];
             entity.isLogin = YES;
             
-            UIStoryboard *myStoryBoard = [UIStoryboard storyboardWithName:@"My" bundle:[NSBundle mainBundle]];
-            MyViewController *myVC = [myStoryBoard instantiateViewControllerWithIdentifier:@"MyViewController"];
+            MyselfViewController *myVC = [[MyselfViewController alloc] init];
             [self.navigationController pushViewController:myVC animated:YES];
             [SVProgressHUD showSuccessWithStatus:NSLocalizedString(@"loginSuccessful", nil)];
             //推荐感兴趣的情景
@@ -384,7 +383,7 @@ static NSString *const thirdRegisteredNotBinding = @"/auth/third_register_withou
     //如果微信登录失败，提示错误信息
     UMSocialSnsPlatform *snsPlatform = [UMSocialSnsPlatformManager getSocialPlatformWithName:UMShareToWechatSession];
     snsPlatform.loginClickHandler(self,[UMSocialControllerService defaultControllerService],YES,^(UMSocialResponseEntity *response){
-        [SVProgressHUD showWithMaskType:SVProgressHUDMaskTypeClear];
+        //[SVProgressHUD showWithMaskType:SVProgressHUDMaskTypeClear];
         
         if (response.responseCode == UMSResponseCodeSuccess) {
             //如果微信登录成功，取到用户信息
@@ -407,7 +406,7 @@ static NSString *const thirdRegisteredNotBinding = @"/auth/third_register_withou
     
     UMSocialSnsPlatform *snsPlatform = [UMSocialSnsPlatformManager getSocialPlatformWithName:UMShareToSina];
     snsPlatform.loginClickHandler(self,[UMSocialControllerService defaultControllerService],YES,^(UMSocialResponseEntity *response){
-        [SVProgressHUD showWithMaskType:SVProgressHUDMaskTypeClear];
+        //[SVProgressHUD showWithMaskType:SVProgressHUDMaskTypeClear];
         
         if (response.responseCode == UMSResponseCodeSuccess) {
             //如果微博登录成功，取到用户信息
@@ -557,14 +556,18 @@ static NSString *const thirdRegisteredNotBinding = @"/auth/third_register_withou
                 } failure:^(FBRequest *request, NSError *error) {
                     //如果请求失败提示失败信息
                     [SVProgressHUD showErrorWithStatus:error.localizedDescription];
+                    //已经订阅过，直接个人中心
+                    //跳回个人主页
+                    //跳回个人主页
+                    [self dismissViewControllerAnimated:YES completion:nil];
+                    [self.tabBarController setSelectedIndex:3];
                 }];
                 
             }]];
             
             [alertView addAction:[TYAlertAction actionWithTitle:NSLocalizedString(@"determine", nil) style:TYAlertActionStyleDestructive handler:^(TYAlertAction *action) {
                 //跳转到绑定手机号界面
-                UIStoryboard *story = [UIStoryboard storyboardWithName:@"LoginRegisterController" bundle:[NSBundle mainBundle]];
-                FBBindingMobilePhoneNumber *bing = [story instantiateViewControllerWithIdentifier:@"LoginRegisterController"];
+                BindIngViewController *bing = [[BindIngViewController alloc] init];
                 bing.snsAccount = snsAccount;
                 bing.type = type;
                 [self.navigationController pushViewController:bing animated:YES];
@@ -588,6 +591,11 @@ static NSString *const thirdRegisteredNotBinding = @"/auth/third_register_withou
         [SVProgressHUD showErrorWithStatus:[error localizedDescription]];
     }];
     
+}
+
+-(void)viewDidDisappear:(BOOL)animated{
+    [super viewDidDisappear:animated];
+    [SVProgressHUD dismiss];
 }
 
 //#pragma mark -点击登录按钮

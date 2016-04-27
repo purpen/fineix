@@ -14,7 +14,7 @@
 #import "DiscoverViewController.h"
 #import "CreateViewController.h"
 #import "MallViewController.h"
-#import "MyViewController.h"
+#import "MyselfViewController.h"
 #import "UserInfoEntity.h"
 #import "PictureToolViewController.h"
 #import "FBPictureViewController.h"
@@ -123,8 +123,7 @@
     HomeViewController * homeVC = [[HomeViewController alloc] init];
     DiscoverViewController * discoverVC = [[DiscoverViewController alloc] init];
     MallViewController * mallVC = [[MallViewController alloc] init];
-    UIStoryboard *myStory = [UIStoryboard storyboardWithName:@"My" bundle:[NSBundle mainBundle]];
-    MyViewController * myVC = [myStory instantiateViewControllerWithIdentifier:@"MyViewController"];
+    MyselfViewController *myVC = [[MyselfViewController alloc] init];
     
     _homeNav = [[FBNavigationViewController alloc] initWithRootViewController:homeVC];
     _discoverNav = [[FBNavigationViewController alloc] initWithRootViewController:discoverVC];

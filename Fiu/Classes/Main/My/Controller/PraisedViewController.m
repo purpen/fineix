@@ -19,9 +19,8 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     //设置导航
-    self.navigationItem.title = @"赞过的";
-    self.navigationController.navigationBarHidden = NO;
-//    [self addBarItemLeftBarButton:nil image:@"icon_back"];
+    self.navViewTitle.text = @"赞过的";
+    [self addBarItemLeftBarButton:nil image:@"icon_back" isTransparent:NO];
     self.delegate = self;
     //
     [self.view addSubview:self.myTableView];
@@ -29,7 +28,7 @@
 
 -(UITableView *)myTableView{
     if (!_myTableView) {
-        _myTableView = [[UITableView alloc] initWithFrame:self.view.frame style:UITableViewStylePlain];
+        _myTableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 64, SCREEN_WIDTH, SCREEN_HEIGHT-64) style:UITableViewStylePlain];
         _myTableView.rowHeight = SCREEN_HEIGHT;
         _myTableView.delegate = self;
         _myTableView.dataSource = self;

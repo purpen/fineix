@@ -9,7 +9,7 @@
 #import "SystemSettingViewController.h"
 #import "AppDelegate.h"
 #import "SVProgressHUD.h"
-#import "ShareView.h"
+#import "ShareViewController.h"
 #import "Fiu.h"
 #import "UserInfoEntity.h"
 #import "FBRequest.h"
@@ -17,6 +17,7 @@
 #import "UserInfo.h"
 #import "OptionViewController.h"
 #import "AboutViewController.h"
+#import "UMSocial.h"
 
 @interface SystemSettingViewController ()<FBNavigationBarItemsDelegate,NotificationDelege,FBRequestDelegate>
 
@@ -30,10 +31,13 @@ static NSString *const logOut = @"/auth/logout";
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view from its nib.
+    // Do any additional setup after loading the view from its nib
+    //设置导航
+    self.navViewTitle.text = @"系统设置";
+    //self.navigationItem.title = @"订阅的情景";
+    //self.navigationController.navigationBarHidden = NO;
+    //    [self addBarItemLeftBarButton:nil image:@"icon_back"];
     self.delegate = self;
-    self.navigationController.navigationBarHidden = NO;
-    self.navigationItem.title = @"系统设置";
 //    [self addBarItemLeftBarButton:nil image:@"icon_back"];
     self.backBtn.layer.masksToBounds = YES;
     self.backBtn.layer.cornerRadius = 3;
@@ -144,13 +148,92 @@ static NSString *const logOut = @"/auth/logout";
 
 
 - (IBAction)shareBtn:(UIButton *)sender {
+    self.shareVC.modalPresentationStyle = UIModalPresentationOverCurrentContext;
+    [self presentViewController:_shareVC animated:NO completion:nil];
+    //给每一个分享按钮添加点击事件
+    [_shareVC.wechatBtn addTarget:self action:@selector(wechatShareBtnAction:) forControlEvents:UIControlEventTouchUpInside];
+    [_shareVC.friendBtn addTarget:self action:@selector(timelineShareBtnAction:) forControlEvents:UIControlEventTouchUpInside];
+    [_shareVC.qqBtn addTarget:self action:@selector(qqShareBtnAction:) forControlEvents:UIControlEventTouchUpInside];
+    [_shareVC.weiBoBtn addTarget:self action:@selector(sinaShareBtnAction:) forControlEvents:UIControlEventTouchUpInside];
+    [_shareVC.cancelBtn addTarget:self action:@selector(cancleBtnAction:) forControlEvents:UIControlEventTouchUpInside];
 }
 
+-(void)wechatShareBtnAction:(UIButton*)sender{
+    [UMSocialData defaultData].extConfig.wechatSessionData.url = ShareURL;
+    [[UMSocialDataService defaultDataService]  postSNSWithTypes:@[UMShareToWechatSession] content:@"太火鸟情景App" image:[UIImage imageNamed:@""] location:nil urlResource:nil presentedController:self completion:^(UMSocialResponseEntity *response){
+        if (response.responseCode == UMSResponseCodeSuccess) {
+            [SVProgressHUD showSuccessWithStatus:@"分享成功！"];
+        }
+    }];
+}
+
+-(void)timelineShareBtnAction:(UIButton*)sender{
+    [UMSocialData defaultData].extConfig.wechatTimelineData.url = ShareURL;
+    [[UMSocialDataService defaultDataService]  postSNSWithTypes:@[UMShareToWechatTimeline] content:@"太火鸟情景App" image:[UIImage imageNamed:@"icon_80"] location:nil urlResource:nil presentedController:self completion:^(UMSocialResponseEntity *response){
+        if (response.responseCode == UMSResponseCodeSuccess) {
+            [SVProgressHUD showSuccessWithStatus:@"分享成功！"];
+        }
+    }];
+}
+
+-(void)qqShareBtnAction:(UIButton*)sender{
+    [UMSocialData defaultData].extConfig.qqData.url = ShareURL;
+    [[UMSocialDataService defaultDataService]  postSNSWithTypes:@[UMShareToQQ] content:@"太火鸟情景App" image:[UIImage imageNamed:@"icon_80"] location:nil urlResource:nil presentedController:self completion:^(UMSocialResponseEntity *response){
+        if (response.responseCode == UMSResponseCodeSuccess) {
+            [SVProgressHUD showSuccessWithStatus:@"分享成功！"];
+        }
+    }];
+}
+
+-(void)sinaShareBtnAction:(UIButton*)sender{
+    [[UMSocialDataService defaultDataService]  postSNSWithTypes:@[UMShareToSina] content:[NSString stringWithFormat:@"最火爆的智能硬件电商平台——太火鸟情景App%@", ShareURL] image:[UIImage imageNamed:@"icon_120"] location:nil urlResource:nil presentedController:self completion:^(UMSocialResponseEntity *response){
+        if (response.responseCode == UMSResponseCodeSuccess) {
+            [SVProgressHUD showSuccessWithStatus:@"分享成功！"];
+        }
+    }];
+}
+
+-(void)cancleBtnAction:(UIButton*)sender{
+    [self dismissViewControllerAnimated:NO completion:nil];
+}
+
+-(ShareViewController *)shareVC{
+    if (!_shareVC) {
+        _shareVC = [[ShareViewController alloc] init];
+    }
+    return _shareVC;
+}
 
 -(void)leftBarItemSelected{
     [self.navigationController popViewControllerAnimated:YES];
 }
+
+//退出登录
 - (IBAction)quitBtn:(UIButton *)sender {
+    //如果已经登录了开始发送网络请求
+    NSDictionary *params = @{
+                             @"from_to":@1
+                             };
+    FBRequest *request = [FBAPI postWithUrlString:logOut requestDictionary:params delegate:self];
+    request.flag = logOut;
+    [request startRequest];
+}
+
+#pragma mark -fbrequestDElegate
+-(void)requestSucess:(FBRequest *)request result:(id)result{
+    //退出登录操作
+    if ([request.flag isEqualToString:logOut]) {
+        //更新用户信息，并且登录状态改变
+        UserInfoEntity *entity = [UserInfoEntity defaultUserInfoEntity];
+        entity.isLogin = NO;
+        [entity clear];
+        [UserInfo clearTable];
+        [SVProgressHUD showSuccessWithStatus:@"登出成功"];
+        //回到首页
+        
+        [self.tabBarController setSelectedIndex:0];
+    }
+    
 }
 
 - (void)didReceiveMemoryWarning {

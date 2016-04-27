@@ -33,8 +33,8 @@ static NSString *const IconURL = @"/my/upload_token";
 //    [self addBarItemLeftBarButton:nil image:@"icon_back"];
     self.view.backgroundColor = [UIColor lightGrayColor];
 //    [self addBarItemRightBarButton:@"保存" image:nil];
-    self.navigationController.navigationBarHidden = NO;
-    self.navigationItem.title = @"保存信息";
+    //self.navigationController.navigationBarHidden = NO;
+    self.navViewTitle.text = @"保存信息";
     
     self.view = self.accountView;
 }
