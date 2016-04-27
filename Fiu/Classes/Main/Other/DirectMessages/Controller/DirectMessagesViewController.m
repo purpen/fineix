@@ -50,9 +50,6 @@
     
 }
 
--(void)textViewDidBeginEditing:(UITextView *)textView{
-   
-}
 
 -(void)requestSucess:(FBRequest *)request result:(id)result{
     if ([result objectForKey:@"success"]) {

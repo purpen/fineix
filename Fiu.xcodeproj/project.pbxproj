@@ -34,7 +34,6 @@
 		1F3C0A921CBF95AC00B84FEB /* SubscribePeopleTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1F3C0A901CBF95AC00B84FEB /* SubscribePeopleTableViewCell.xib */; };
 		1F3C0A961CBFA28300B84FEB /* GreatPeopleViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F3C0A941CBFA28300B84FEB /* GreatPeopleViewController.m */; };
 		1F3C0A971CBFA28300B84FEB /* GreatPeopleViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1F3C0A951CBFA28300B84FEB /* GreatPeopleViewController.xib */; };
-		1F4061A51CC9DA5800D6E9B0 /* ImproveViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F4061A41CC9DA5800D6E9B0 /* ImproveViewController.m */; };
 		1F4061A81CC9E92C00D6E9B0 /* ImproView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F4061A71CC9E92C00D6E9B0 /* ImproView.m */; };
 		1F4061B41CCA231E00D6E9B0 /* AccountManagementViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F4061B31CCA231E00D6E9B0 /* AccountManagementViewController.m */; };
 		1F4061B71CCA246600D6E9B0 /* AccountView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F4061B61CCA246600D6E9B0 /* AccountView.m */; };
@@ -86,6 +85,8 @@
 		1FFFFF401CD05796008E1CDC /* BindIngViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1FFFFF3E1CD05796008E1CDC /* BindIngViewController.xib */; };
 		1FFFFF491CD08661008E1CDC /* ChatTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 1FFFFF471CD08661008E1CDC /* ChatTableViewCell.m */; };
 		1FFFFF4A1CD08661008E1CDC /* ChatTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1FFFFF481CD08661008E1CDC /* ChatTableViewCell.xib */; };
+		1FFFFF4E1CD0A0CF008E1CDC /* ImprovViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1FFFFF4C1CD0A0CF008E1CDC /* ImprovViewController.m */; };
+		1FFFFF4F1CD0A0CF008E1CDC /* ImprovViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1FFFFF4D1CD0A0CF008E1CDC /* ImprovViewController.xib */; };
 		280045111C805B78005F5C2E /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 280045101C805B78005F5C2E /* CoreLocation.framework */; };
 		280045131C805B82005F5C2E /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 280045121C805B82005F5C2E /* QuartzCore.framework */; };
 		280045151C805B8C005F5C2E /* OpenGLES.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 280045141C805B8C005F5C2E /* OpenGLES.framework */; };
@@ -324,8 +325,6 @@
 		1F3C0A931CBFA28300B84FEB /* GreatPeopleViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GreatPeopleViewController.h; sourceTree = "<group>"; };
 		1F3C0A941CBFA28300B84FEB /* GreatPeopleViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GreatPeopleViewController.m; sourceTree = "<group>"; };
 		1F3C0A951CBFA28300B84FEB /* GreatPeopleViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = GreatPeopleViewController.xib; sourceTree = "<group>"; };
-		1F4061A31CC9DA5800D6E9B0 /* ImproveViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImproveViewController.h; sourceTree = "<group>"; };
-		1F4061A41CC9DA5800D6E9B0 /* ImproveViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ImproveViewController.m; sourceTree = "<group>"; };
 		1F4061A61CC9E92C00D6E9B0 /* ImproView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImproView.h; sourceTree = "<group>"; };
 		1F4061A71CC9E92C00D6E9B0 /* ImproView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ImproView.m; sourceTree = "<group>"; };
 		1F4061B21CCA231E00D6E9B0 /* AccountManagementViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AccountManagementViewController.h; sourceTree = "<group>"; };
@@ -416,6 +415,9 @@
 		1FFFFF461CD08661008E1CDC /* ChatTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChatTableViewCell.h; sourceTree = "<group>"; };
 		1FFFFF471CD08661008E1CDC /* ChatTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChatTableViewCell.m; sourceTree = "<group>"; };
 		1FFFFF481CD08661008E1CDC /* ChatTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ChatTableViewCell.xib; sourceTree = "<group>"; };
+		1FFFFF4B1CD0A0CF008E1CDC /* ImprovViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImprovViewController.h; sourceTree = "<group>"; };
+		1FFFFF4C1CD0A0CF008E1CDC /* ImprovViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ImprovViewController.m; sourceTree = "<group>"; };
+		1FFFFF4D1CD0A0CF008E1CDC /* ImprovViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ImprovViewController.xib; sourceTree = "<group>"; };
 		280045101C805B78005F5C2E /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
 		280045121C805B82005F5C2E /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		280045141C805B8C005F5C2E /* OpenGLES.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGLES.framework; path = System/Library/Frameworks/OpenGLES.framework; sourceTree = SDKROOT; };
@@ -1251,8 +1253,9 @@
 				D80360121CBF376B001920F9 /* SubscribeInterestedCollectionViewController.h */,
 				D80360131CBF376B001920F9 /* SubscribeInterestedCollectionViewController.m */,
 				D80360141CBF376B001920F9 /* SubscribeInterestedCollectionViewController.xib */,
-				1F4061A31CC9DA5800D6E9B0 /* ImproveViewController.h */,
-				1F4061A41CC9DA5800D6E9B0 /* ImproveViewController.m */,
+				1FFFFF4B1CD0A0CF008E1CDC /* ImprovViewController.h */,
+				1FFFFF4C1CD0A0CF008E1CDC /* ImprovViewController.m */,
+				1FFFFF4D1CD0A0CF008E1CDC /* ImprovViewController.xib */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -2008,6 +2011,7 @@
 				1FEF0B131CC0FC15006EF0C6 /* My.storyboard in Resources */,
 				1FEF0B1C1CC0FC15006EF0C6 /* MyView.xib in Resources */,
 				1FFFFF4A1CD08661008E1CDC /* ChatTableViewCell.xib in Resources */,
+				1FFFFF4F1CD0A0CF008E1CDC /* ImprovViewController.xib in Resources */,
 				D81281701CAA8532007CF08B /* UMSnsAccountViewController.xib in Resources */,
 				D81281121CAA8532007CF08B /* LaunchScreen.storyboard in Resources */,
 				D80360591CBF376B001920F9 /* RecommendedScenarioView.xib in Resources */,
@@ -2159,6 +2163,7 @@
 				D83639681CCDBF2900CC4AC0 /* HomeSceneListProduct.m in Sources */,
 				1F07A6411CC76C6000CF225F /* HomePageViewController.m in Sources */,
 				D81281251CAA8532007CF08B /* FBFiltersCollectionViewCell.m in Sources */,
+				1FFFFF4E1CD0A0CF008E1CDC /* ImprovViewController.m in Sources */,
 				D81281561CAA8532007CF08B /* NSString+FBMD5.m in Sources */,
 				D8035F3E1CBB4939001920F9 /* CommentTableViewCell.m in Sources */,
 				D8FDBFA21CC48F2700155675 /* LikeSceneView.m in Sources */,
@@ -2200,7 +2205,6 @@
 				D87B69BF1CC726BA00199EFE /* FBRollImages.m in Sources */,
 				1FEF0B141CC0FC15006EF0C6 /* AppBtnView.m in Sources */,
 				1F4061B41CCA231E00D6E9B0 /* AccountManagementViewController.m in Sources */,
-				1F4061A51CC9DA5800D6E9B0 /* ImproveViewController.m in Sources */,
 				D81281161CAA8532007CF08B /* ClipImageViewController.m in Sources */,
 				1F51E8B31CC6338D00017839 /* PraisedViewController.m in Sources */,
 				1FBE626A1CC4CB72009606F7 /* MyPageFocusOnViewController.m in Sources */,

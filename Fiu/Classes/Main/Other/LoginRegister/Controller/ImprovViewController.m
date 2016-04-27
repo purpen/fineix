@@ -1,12 +1,12 @@
 //
-//  ImproveViewController.m
+//  ImprovViewController.m
 //  Fiu
 //
-//  Created by THN-Dong on 16/4/22.
+//  Created by THN-Dong on 16/4/27.
 //  Copyright © 2016年 taihuoniao. All rights reserved.
 //
 
-#import "ImproveViewController.h"
+#import "ImprovViewController.h"
 #import "Fiu.h"
 #import "ImproView.h"
 #import "UIImage+Helper.h"
@@ -18,39 +18,58 @@
 #import "NSString+Helper.h"
 #import "FBTabBarController.h"
 
-@interface ImproveViewController ()<UIImagePickerControllerDelegate,UIActionSheetDelegate,UINavigationControllerDelegate,UITextFieldDelegate,FBRequestDelegate>
+@interface ImprovViewController ()<UIImagePickerControllerDelegate,UIActionSheetDelegate,UINavigationControllerDelegate,UITextFieldDelegate,FBRequestDelegate>
+
 {
     NSString *_sex;
 }
+@property (weak, nonatomic) IBOutlet UIView *myView;
+
+@property (weak, nonatomic) IBOutlet UIImageView *headImageView;
+@property (weak, nonatomic) IBOutlet UIButton *manBtn;
+
+@property (weak, nonatomic) IBOutlet UIButton *womenBtn;
+@property (weak, nonatomic) IBOutlet UIButton *secretBtn;
+@property (weak, nonatomic) IBOutlet UITextField *nickNameTF;
+@property (weak, nonatomic) IBOutlet UITextField *sumaryTF;
+@property (weak, nonatomic) IBOutlet UIView *manView;
+@property (weak, nonatomic) IBOutlet UIView *womenView;
+@property (weak, nonatomic) IBOutlet UIView *secretView;
 @end
 
 static NSString *const modifyUserInformation = @"/my/update_profile";
 static NSString *const IconURL = @"/my/upload_token";
 
-@implementation ImproveViewController
+@implementation ImprovViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view.
+    // Do any additional setup after loading the view from its nib.
+    [self.navigationItem setHidesBackButton:YES];
     self.navigationItem.title = @"完善个人资料";
+    self.headImageView.layer.masksToBounds = YES;
+    self.headImageView.layer.cornerRadius = 105*0.5/667.0*SCREEN_HEIGHT;
     _sex = @"男";
-    self.view.backgroundColor = [UIColor whiteColor];
     
-    [self.view addSubview:self.nextBtn];
-    [_nextBtn mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.mas_equalTo(self.view.mas_left).with.offset(0);
-        make.bottom.mas_equalTo(self.view.mas_bottom).with.offset(0);
-        make.right.mas_equalTo(self.view.mas_right).with.offset(0);
-        make.height.mas_equalTo(44/667.0*SCREEN_HEIGHT);
-    }];
+    UITapGestureRecognizer* singleRecognizer;
+    singleRecognizer = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(singleTap:)];
+    singleRecognizer.numberOfTapsRequired = 1;
+    singleRecognizer.numberOfTouchesRequired = 1;
+    [self.headImageView addGestureRecognizer:singleRecognizer];
+    [self.manBtn addTarget:self action:@selector(clickMenBtn:) forControlEvents:UIControlEventTouchUpInside];
+    [self.womenBtn addTarget:self action:@selector(clickWomenBtn:) forControlEvents:UIControlEventTouchUpInside];
+    [self.secretBtn addTarget:self action:@selector(clickSecretBtn:) forControlEvents:UIControlEventTouchUpInside];
     
-    [self.view addSubview:self.improView];
-    [_improView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.centerX.mas_equalTo(self.view.mas_centerX);
-        make.top.mas_equalTo(self.view.mas_top).with.offset(271*0.5*SCREEN_HEIGHT);
-        make.size.mas_equalTo(CGSizeMake(564*0.5/667.0*SCREEN_HEIGHT, 621*0.5/667.0*SCREEN_HEIGHT));
-    }];
+    //
+    self.nickNameTF.delegate = self;
+    self.sumaryTF.delegate = self;
     
+    self.manView.hidden = NO;
+    self.womenView.hidden = YES;
+    self.secretView.hidden = YES;
+    
+    //点击头像可以更换头像
+    self.headImageView.userInteractionEnabled = YES;
     
 }
 
@@ -78,46 +97,12 @@ static NSString *const IconURL = @"/my/upload_token";
         [self presentViewController:picker animated:YES completion:nil];
     }];
     UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
-        [self dismissViewControllerAnimated:YES completion:nil];
+        [alertC dismissViewControllerAnimated:YES completion:nil];
     }];
     [alertC addAction:phontoAction];
     [alertC addAction:cancelAction];
     [self presentViewController:alertC animated:YES completion:nil];
     
-}
-
--(ImproView *)improView{
-    if (!_improView) {
-        _improView = [[ImproView alloc] init];
-        UITapGestureRecognizer* singleRecognizer;
-        singleRecognizer = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(singleTap:)];
-        singleRecognizer.numberOfTapsRequired = 1;
-        singleRecognizer.numberOfTouchesRequired = 1;
-        [_improView.headImageView addGestureRecognizer:singleRecognizer];
-        [_improView.manBtn addTarget:self action:@selector(clickMenBtn:) forControlEvents:UIControlEventTouchUpInside];
-        [_improView.womanBtn addTarget:self action:@selector(clickWomenBtn:) forControlEvents:UIControlEventTouchUpInside];
-        [_improView.secretBtn addTarget:self action:@selector(clickSecretBtn:) forControlEvents:UIControlEventTouchUpInside];
-        //
-        _improView.nickNameTF.delegate = self;
-        _improView.sumTF.delegate = self;
-        
-        _improView.manBtn.selected = YES;
-        
-        //点击头像可以更换头像
-        _improView.headImageView.userInteractionEnabled = YES;
-    }
-    return _improView;
-}
-
--(UIButton *)nextBtn{
-    if (!_nextBtn) {
-        _nextBtn = [[UIButton alloc] init];
-        [_nextBtn setBackgroundColor:[UIColor colorWithHexString:fineixColor]];
-        [_nextBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-        _nextBtn.titleLabel.text = @"选好了，开始Fineix之旅";
-        [_nextBtn addTarget:self action:@selector(clickNextBtn:) forControlEvents:UIControlEventTouchUpInside];
-    }
-    return _nextBtn;
 }
 
 -(void)textFieldDidBeginEditing:(UITextField *)textField
@@ -139,53 +124,59 @@ static NSString *const IconURL = @"/my/upload_token";
     //将视图的Y坐标向上移动offset个单位，以使下面腾出地方用于软键盘的显示
     
     if(offset > 0){
-        
-        [_improView mas_remakeConstraints:^(MASConstraintMaker *make) {
-            make.centerX.mas_equalTo(self.view.mas_centerX);
-            make.top.mas_equalTo(self.view.mas_top).with.offset(271*0.5*SCREEN_HEIGHT-offset);
-            make.size.mas_equalTo(CGSizeMake(564*0.5/667.0*SCREEN_HEIGHT, 621*0.5/667.0*SCREEN_HEIGHT));
-        }];
-        
+        CGRect frame = self.view.frame;
+        frame.origin.y -= offset;
+        self.view.frame = frame;
         [UIView commitAnimations];
     }
 }
 
 //输入框编辑完成以后，将视图恢复到原始状态
-
--(void)textFieldDidEndEditing:(UITextField *)textField
-
-{
-    
-    [_improView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.centerX.mas_equalTo(self.view.mas_centerX);
-        make.top.mas_equalTo(self.view.mas_top).with.offset(271*0.5*SCREEN_HEIGHT);
-        make.size.mas_equalTo(CGSizeMake(564*0.5/667.0*SCREEN_HEIGHT, 621*0.5/667.0*SCREEN_HEIGHT));
-    }];
-}
+//
+//-(void)textFieldDidEndEditing:(UITextField *)textField
+//
+//{
+//    
+//    CGRect frame = textField.frame;
+//    
+//    int offset = frame.origin.y + 70 - (self.view.frame.size.height - 216.0);//iPhone键盘高度216，iPad的为352
+//    
+//    
+//    
+//    [UIView beginAnimations:@"ResizeForKeyboard" context:nil];
+//    
+//    [UIView setAnimationDuration:0.5f];
+//    
+//    CGRect frame1 = self.view.frame;
+//    frame1.origin.y -= offset;
+//    self.view.frame = frame1;
+//    [UIView commitAnimations];
+//
+//}
 
 -(void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event{
-    [_improView.nickNameTF resignFirstResponder];
-    [_improView.sumTF resignFirstResponder];
+    [self.nickNameTF resignFirstResponder];
+    [self.sumaryTF resignFirstResponder];
 }
 
 -(void)clickMenBtn:(UIButton*)sender{
-    _improView.manBtn.selected = YES;
-    _improView.womanBtn.selected = NO;
-    _improView.secretBtn.selected = NO;
+    self.manView.hidden = NO;
+    self.womenView.hidden = YES;
+    self.secretView.hidden = YES;
     _sex = @"男";
 }
 
 -(void)clickWomenBtn:(UIButton*)sender{
-    _improView.manBtn.selected = NO;
-    _improView.womanBtn.selected = YES;
-    _improView.secretBtn.selected = NO;
+    self.manView.hidden = YES;
+    self.womenView.hidden = NO;
+    self.secretView.hidden = YES;
     _sex = @"女";
 }
 
 -(void)clickSecretBtn:(UIButton*)sender{
-    _improView.manBtn.selected = NO;
-    _improView.womanBtn.selected = NO;
-    _improView.secretBtn.selected = YES;
+    self.manView.hidden = YES;
+    self.womenView.hidden = YES;
+    self.secretView.hidden = NO;
     _sex = @"保密";
 }
 
@@ -221,7 +212,7 @@ static NSString *const IconURL = @"/my/upload_token";
             NSString * fileUrl = [[result objectForKey:@"data"] objectForKey:@"file_url"];
             UserInfoEntity * userEntity = [UserInfoEntity defaultUserInfoEntity];
             userEntity.mediumAvatarUrl = fileUrl;
-            [_improView.headImageView sd_setImageWithURL:[NSURL URLWithString:fileUrl] placeholderImage:nil];
+            [self.headImageView sd_setImageWithURL:[NSURL URLWithString:fileUrl] placeholderImage:nil];
             
             [SVProgressHUD showSuccessWithStatus:message];
         } else {
@@ -247,18 +238,20 @@ static NSString *const IconURL = @"/my/upload_token";
         
     }
 }
-
--(void)clickNextBtn:(UIButton*)sender{
+- (IBAction)clickNextBtn:(UIButton *)sender {
     //开始传送数据
     NSDictionary *params = @{
-                             @"nickname":_improView.nickNameTF.text,
+                             @"nickname":self.nickNameTF.text,
                              @"sex":_sex,
-                             @"summary":_improView.sumTF.text
+                             @"summary":self.sumaryTF.text
                              };
     FBRequest *request = [FBAPI postWithUrlString:modifyUserInformation requestDictionary:params delegate:self];
     request.flag = modifyUserInformation;
     [request startRequest];
 }
+
+
+
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
