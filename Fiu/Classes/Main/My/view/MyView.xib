@@ -1236,7 +1236,7 @@
         <image name="integral" width="50" height="50"/>
         <image name="jinDong" width="60" height="60"/>
         <image name="logoSmall" width="44" height="24"/>
-        <image name="message" width="54" height="54"/>
+        <image name="message" width="50" height="50"/>
         <image name="order" width="50" height="50"/>
         <image name="praise" width="50" height="50"/>
         <image name="qrCode" width="24" height="24"/>

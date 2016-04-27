@@ -12,15 +12,15 @@
 #import "FBPictureViewController.h"
 #import "FBSearchView.h"
 
-typedef void(^SelectedLocationBlock)(NSString * location, NSString * city);
+typedef void(^SelectedLocationBlock)(NSString * location, NSString * city, NSString * latitude, NSString * longitude);
 
 @interface SearchLocationViewController : FBPictureViewController <FBSearchDelegate, UITableViewDataSource, UITableViewDelegate, BMKPoiSearchDelegate, BMKLocationServiceDelegate, BMKGeoCodeSearchDelegate>
 {
     BMKPoiSearch        *   _poiSearch;
     BMKLocationService  *   _locationSearch;
     BMKGeoCodeSearch    *   _geoCodeSearch;
-    CGFloat                 latitude;       //  经度
-    CGFloat                 longitude;      //  纬度
+    CGFloat                 latitude;       //  纬度
+    CGFloat                 longitude;      //  经度
 }
 
 @pro_strong UIButton            *   positioningBtn;         //  定位按钮
@@ -30,6 +30,9 @@ typedef void(^SelectedLocationBlock)(NSString * location, NSString * city);
 @pro_strong NSMutableArray      *   locationNameMarr;       //  搜索结果
 @pro_strong NSMutableArray      *   locationCityMarr;       //  搜索城市
 @pro_strong NSMutableArray      *   locationAddressMarr;    //  搜索地址
+@pro_strong NSMutableArray      *   latitudeMarr;           //  纬度
+@pro_strong NSMutableArray      *   longitudeMarr;          //  纬度
+
 
 @pro_strong SelectedLocationBlock selectedLocationBlock;
 

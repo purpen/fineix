@@ -21,6 +21,7 @@
 static NSString *const URLSceneInfo = @"/scene_sight/view";
 static NSString *const URLCommentList = @"/comment/getlist";
 static NSString *const URLLikeScenePeople = @"/favorite";
+static NSString *const URLLikeScene = @"/favorite/ajax_sight_love";
 
 @interface SceneInfoViewController ()
 
@@ -65,7 +66,7 @@ static NSString *const URLLikeScenePeople = @"/favorite";
 }
 
 #pragma mark - 网络请求
-//  场景详情
+#pragma mark 场景详情
 - (void)networkRequestData {
     [SVProgressHUD show];
     self.sceneInfoRequest = [FBAPI getWithUrlString:URLSceneInfo requestDictionary:@{@"id":self.sceneId} delegate:self];
@@ -81,7 +82,7 @@ static NSString *const URLLikeScenePeople = @"/favorite";
     }];
 }
 
-//  评论列表
+#pragma mark 评论列表
 - (void)networkCommentData {
     self.sceneCommentRequest = [FBAPI getWithUrlString:URLCommentList requestDictionary:@{@"type":@"12", @"target_id":self.sceneId} delegate:self];
     [self.sceneCommentRequest startRequestSuccess:^(FBRequest *request, id result) {
@@ -92,7 +93,7 @@ static NSString *const URLLikeScenePeople = @"/favorite";
     }];
 }
 
-//  给此场景点赞的用户
+#pragma mark 给此场景点赞的用户
 - (void)networkLikePeopleData {
     self.likePeopleRequest = [FBAPI getWithUrlString:URLLikeScenePeople requestDictionary:@{@"type":@"scene", @"event":@"love", @"page":@"1" , @"size":@"10000", @"id":self.sceneId} delegate:self];
     [self.likePeopleRequest startRequestSuccess:^(FBRequest *request, id result) {
@@ -103,15 +104,28 @@ static NSString *const URLLikeScenePeople = @"/favorite";
     }];
 }
 
-//  此场景中的商品
+#pragma mark 此场景中的商品
 - (void)networkSceneGoodsData {
     
+}
+
+#pragma mark 给此场景点赞
+- (void)networkLikeSceneData {
+    self.likeSceneRequest = [FBAPI postWithUrlString:URLLikeScene requestDictionary:@{@"id":self.sceneId} delegate:self];
+    [self.likeSceneRequest startRequestSuccess:^(FBRequest *request, id result) {
+        [SVProgressHUD showSuccessWithStatus:@"点赞成功"];
+        NSLog(@"＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝  点赞：  %@", result);
+        
+    } failure:^(FBRequest *request, NSError *error) {
+        [SVProgressHUD showErrorWithStatus:[error localizedDescription]];
+    }];
 }
 
 #pragma mark - 点赞按钮
 - (LikeSceneView *)likeScene {
     if (!_likeScene) {
         _likeScene = [[LikeSceneView alloc] initWithFrame:CGRectMake(0, SCREEN_HEIGHT, SCREEN_HEIGHT, 44)];
+        [_likeScene.likeBtn addTarget:self action:@selector(networkLikeSceneData) forControlEvents:(UIControlEventTouchUpInside)];
     }
     return _likeScene;
 }
@@ -273,6 +287,7 @@ static NSString *const URLLikeScenePeople = @"/favorite";
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     if (indexPath.section == 1) {
         CommentViewController * commentVC = [[CommentViewController alloc] init];
+        commentVC.targetId = self.sceneId;
         [self.navigationController pushViewController:commentVC animated:YES];
     } else if (indexPath.section == 2) {
         GoodsInfoViewController * goodsInfoVC = [[GoodsInfoViewController alloc] init];
@@ -354,6 +369,11 @@ static NSString *const URLLikeScenePeople = @"/favorite";
 //  点击右边barItem
 - (void)rightBarItemSelected {
     NSLog(@"＊＊＊＊＊＊＊＊＊分享");
+}
+
+- (void)viewWillDisappear:(BOOL)animated {
+    [super viewWillDisappear:animated];
+    [SVProgressHUD dismiss];
 }
 
 @end

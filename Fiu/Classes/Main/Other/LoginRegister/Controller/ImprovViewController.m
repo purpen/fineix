@@ -50,7 +50,8 @@ static NSString *const IconURL = @"/my/upload_token";
     self.headImageView.layer.masksToBounds = YES;
     self.headImageView.layer.cornerRadius = 105*0.5/667.0*SCREEN_HEIGHT;
     _sex = @"男";
-    
+    UserInfoEntity *entity = [UserInfoEntity defaultUserInfoEntity];
+    [self.headImageView sd_setImageWithURL:[NSURL URLWithString:entity.mediumAvatarUrl]];
     UITapGestureRecognizer* singleRecognizer;
     singleRecognizer = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(singleTap:)];
     singleRecognizer.numberOfTapsRequired = 1;
@@ -229,9 +230,11 @@ static NSString *const IconURL = @"/my/upload_token";
             entiey.summary = [result objectForKey:@"data"][@"summary"];
             [SVProgressHUD showSuccessWithStatus:message];
             //成功后跳转到home页
-            FBTabBarController *tab = [[FBTabBarController alloc] init];
-            [tab setSelectedIndex:0];
-            [self presentViewController:tab animated:YES completion:nil];
+//            FBTabBarController *tab = [[FBTabBarController alloc] init];
+//            [tab setSelectedIndex:3];
+//            [self presentViewController:tab animated:YES completion:nil];
+            [self dismissViewControllerAnimated:YES completion:nil];
+            [self.tabBarController setSelectedIndex:3];
         } else {
             [SVProgressHUD showInfoWithStatus:message];
         }

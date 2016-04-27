@@ -114,12 +114,16 @@
         [self.locationNameMarr removeAllObjects];
         [self.locationCityMarr removeAllObjects];
         [self.locationAddressMarr removeAllObjects];
+        [self.latitudeMarr removeAllObjects];
+        [self.longitudeMarr removeAllObjects];
         
         for (NSUInteger idx = 0; idx < result.poiList.count; ++ idx) {
             BMKPoiInfo * poi = [result.poiList objectAtIndex:idx];
             [self.locationNameMarr addObject:poi.name];
             [self.locationCityMarr addObject:poi.city];
             [self.locationAddressMarr addObject:poi.address];
+            [self.latitudeMarr addObject:[NSString stringWithFormat:@"%f", poi.pt.latitude]];
+            [self.longitudeMarr addObject:[NSString stringWithFormat:@"%f", poi.pt.longitude]];
         }
         [self.locationTableView reloadData];
         [SVProgressHUD dismiss];
@@ -138,6 +142,8 @@
     self.locationNameMarr = [NSMutableArray array];
     self.locationCityMarr = [NSMutableArray array];
     self.locationAddressMarr = [NSMutableArray array];
+    self.latitudeMarr = [NSMutableArray array];
+    self.longitudeMarr = [NSMutableArray array];
 }
 
 #pragma mark - 搜素框
@@ -158,6 +164,8 @@
         [self.locationNameMarr removeAllObjects];
         [self.locationCityMarr removeAllObjects];
         [self.locationAddressMarr removeAllObjects];
+        [self.latitudeMarr removeAllObjects];
+        [self.longitudeMarr removeAllObjects];
         
         [self beginSearchLocation:searchKeyword];
     }
@@ -189,6 +197,8 @@
             [self.locationNameMarr addObject:poi.name];
             [self.locationCityMarr addObject:poi.city];
             [self.locationAddressMarr addObject:poi.address];
+            [self.latitudeMarr addObject:[NSString stringWithFormat:@"%f", poi.pt.latitude]];
+            [self.longitudeMarr addObject:[NSString stringWithFormat:@"%f", poi.pt.longitude]];
         }
         [self.locationTableView reloadData];
         [SVProgressHUD dismiss];
@@ -241,8 +251,8 @@
 
 #pragma mark - 选中位置
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    [self.navigationController popViewControllerAnimated:YES];
-    self.selectedLocationBlock(self.locationNameMarr[indexPath.row], self.locationCityMarr[indexPath.row]);
+    self.selectedLocationBlock(self.locationNameMarr[indexPath.row], self.locationCityMarr[indexPath.row], self.latitudeMarr[indexPath.row], self.longitudeMarr[indexPath.row]);
+     [self.navigationController popViewControllerAnimated:YES];
 }
 
 - (void)viewWillDisappear:(BOOL)animated {

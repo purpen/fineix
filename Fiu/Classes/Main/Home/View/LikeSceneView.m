@@ -20,7 +20,7 @@
     return self;
 }
 
-#pragma mark - 订阅情景按钮
+#pragma mark - 场景点赞按钮
 - (UIButton *)likeBtn {
     if (!_likeBtn) {
         _likeBtn = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 44)];
@@ -30,8 +30,6 @@
         _likeBtn.titleLabel.font = [UIFont systemFontOfSize:16];
         [_likeBtn setImage:[UIImage imageNamed:@"Like_Scene"] forState:(UIControlStateNormal)];
         [_likeBtn setImageEdgeInsets:(UIEdgeInsetsMake(0, -10, 0, 0))];
-        
-        [_likeBtn addTarget:self action:@selector(likeBtnClick) forControlEvents:(UIControlEventTouchUpInside)];
     }
     return _likeBtn;
 }
@@ -43,11 +41,6 @@
         _line.backgroundColor = [UIColor colorWithHexString:lineGrayColor];
     }
     return _line;
-}
-
-//  订阅情景
-- (void)likeBtnClick {
-    NSLog(@"－－－－－＝＝＝＝＝＝－－－－点赞此场景");
 }
 
 @end

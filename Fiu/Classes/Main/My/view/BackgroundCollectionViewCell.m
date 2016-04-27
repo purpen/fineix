@@ -73,7 +73,7 @@
         [self.userHeadImageView sd_setImageWithURL:[NSURL URLWithString:entity.mediumAvatarUrl] placeholderImage:nil completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
             
         }];
-    self.userHeadImageView.image = [UIImage imageNamed:@"Dina Alexander"];
+    self.bgImageView.image = [UIImage imageNamed:@"image"];
     self.nickName.text = entity.nickname;
     self.userProfile.text = entity.summary;
     self.userLevelLabel.text = [NSString stringWithFormat:@"%@|V%d",entity.levelDesc,[entity.level intValue]];

@@ -38,15 +38,14 @@
     self.likeNum.text = [self aboutCount:self.likeNum withCount:model.loveCount];
     self.whereScene.text = [self abouText:self.whereScene withText:model.sceneTitle];
     self.city.text = [self abouText:self.city withText:model.address];
-//    self.time.text = @"｜ 2天前";
-    
+    self.time.text = [NSString stringWithFormat:@"| %@", model.createdAt];
 }
 
 #pragma mark - 场景图
 - (UIImageView *)bgImage {
     if (!_bgImage) {
         _bgImage = [[UIImageView alloc] init];
-        _bgImage.contentMode = UIViewContentModeScaleAspectFit;
+        _bgImage.contentMode = UIViewContentModeScaleAspectFill;
         
         [_bgImage addSubview:self.userView];
         [_userView mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -112,19 +111,21 @@
             make.left.equalTo(_userView.mas_left).with.offset(20);
         }];
         
+        [_userView addSubview:self.time];
+        [_time mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.size.mas_equalTo(CGSizeMake(100, 15));
+            make.top.equalTo(_whereScene.mas_top).with.offset(0);
+            make.left.equalTo(_whereScene.mas_right).with.offset(0);
+        }];
+        
         [_userView addSubview:self.city];
         [_city mas_makeConstraints:^(MASConstraintMaker *make) {
             make.size.mas_equalTo(CGSizeMake(75, 15));
-            make.top.equalTo(_whereScene.mas_top).with.offset(0);
-            make.left.equalTo(_whereScene.mas_right).with.offset(20);
+            make.top.equalTo(_time.mas_bottom).with.offset(5);
+            make.left.equalTo(_whereScene.mas_left).with.offset(0);
         }];
         
-        [_userView addSubview:self.time];
-        [_time mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.size.mas_equalTo(CGSizeMake(50, 15));
-            make.top.equalTo(_whereScene.mas_top).with.offset(0);
-            make.left.equalTo(_city.mas_right).with.offset(0);
-        }];
+
     }
     return _userView;
 }
@@ -164,7 +165,7 @@
     if (!_lookNum) {
         _lookNum = [[UILabel alloc] init];
         [self addIcon:_lookNum withImage:@"look"];
-        _lookNum.font = [UIFont systemFontOfSize:Font_UserProfile];
+        _lookNum.font = [UIFont systemFontOfSize:Font_Number];
         _lookNum.textColor = [UIColor colorWithHexString:@"#666666" alpha:1];
     }
     return _lookNum;
@@ -175,7 +176,7 @@
     if (!_likeNum) {
         _likeNum = [[UILabel alloc] init];
         [self addIcon:_likeNum withImage:@"like"];
-        _likeNum.font = [UIFont systemFontOfSize:Font_UserProfile];
+        _likeNum.font = [UIFont systemFontOfSize:Font_Number];
         _likeNum.textColor = [UIColor colorWithHexString:@"#666666" alpha:1];
     }
     return _likeNum;
@@ -206,7 +207,6 @@
     NSMutableAttributedString * titleText = [[NSMutableAttributedString alloc] initWithString:title];
     NSMutableParagraphStyle * paragraphStyle = [[NSMutableParagraphStyle alloc] init];
     paragraphStyle.alignment = NSTextAlignmentJustified;
-    paragraphStyle.headIndent = 10;
     
     NSDictionary * textDict = @{
                                 NSBackgroundColorAttributeName:[UIColor colorWithPatternImage:[UIImage imageNamed:@"titleBg"]] ,
@@ -221,7 +221,7 @@
     NSString * num = [NSString stringWithFormat:@"%zi", count];
     CGFloat numLength = [num boundingRectWithSize:CGSizeMake(320, 1000) options:(NSStringDrawingUsesLineFragmentOrigin) attributes:nil context:nil].size.width;
     [lable mas_updateConstraints:^(MASConstraintMaker *make) {
-        make.size.mas_equalTo(CGSizeMake(numLength, 15));
+        make.size.mas_equalTo(CGSizeMake(numLength * 1.1, 15));
     }];
     return num;
 }
@@ -231,7 +231,7 @@
     NSString * whereText = fiuScene;
     CGFloat textLength = [fiuScene boundingRectWithSize:CGSizeMake(320, 1000) options:(NSStringDrawingUsesLineFragmentOrigin) attributes:nil context:nil].size.width;
     [lable mas_updateConstraints:^(MASConstraintMaker *make) {
-        make.size.mas_equalTo(CGSizeMake(textLength * 0.8, 15));
+        make.size.mas_equalTo(CGSizeMake(textLength * 1.1, 15));
     }];
     return whereText;
 }
@@ -241,8 +241,8 @@
     if (!_whereScene) {
         _whereScene = [[UILabel alloc] init];
         [self addIcon:_whereScene withImage:@"icon_star"];
-        _whereScene.font = [UIFont systemFontOfSize:Font_UserProfile];
-        _whereScene.textColor = [UIColor colorWithHexString:@"#666666" alpha:1];
+        _whereScene.font = [UIFont systemFontOfSize:Font_Number];
+        _whereScene.textColor = [UIColor whiteColor];
     }
     return _whereScene;
 }
@@ -252,8 +252,8 @@
     if (!_city) {
         _city = [[UILabel alloc] init];
         [self addIcon:_city withImage:@"icon_city"];
-        _city.font = [UIFont systemFontOfSize:Font_UserProfile];
-        _city.textColor = [UIColor colorWithHexString:@"#666666" alpha:1];
+        _city.font = [UIFont systemFontOfSize:Font_Number];
+        _city.textColor = [UIColor whiteColor];
     }
     return _city;
 }
@@ -263,8 +263,8 @@
     if (!_time) {
         _time = [[UILabel alloc] init];
         _time.textColor = [UIColor blackColor];
-        _time.font = [UIFont systemFontOfSize:Font_UserProfile];
-        _time.textColor = [UIColor colorWithHexString:@"#666666" alpha:1];
+        _time.font = [UIFont systemFontOfSize:Font_Number];
+        _time.textColor = [UIColor whiteColor];
     }
     return _time;
 }

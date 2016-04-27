@@ -28,38 +28,34 @@
 
 - (void)setFiuSceneInfoData:(FiuSceneInfoData *)model {
     [self.bgImage downloadImage:model.coverUrl place:[UIImage imageNamed:@""]];
+    [self.userHeader downloadImage:model.userInfo.avatarUrl place:[UIImage imageNamed:@""]];
+    self.userName.text = model.userInfo.nickname;
+    self.userProfile.text = model.userInfo.summary;
     
-    self.userHeader.image = [UIImage imageNamed:@"user"];
-    
-    //  用户昵称
-    self.userName.text = @"Haasda Fynn";
-    
-    //  用户简介
-    self.userProfile.text = @"达人｜写剧本的文盲";
-    
-    //  标题
-    NSString * titleStr = [NSString stringWithFormat:@" %@ ",model.title];
     UIColor * fsceneColor = [UIColor blackColor];
-    [self titleTextStyle:titleStr withBgColor:fsceneColor];
+    [self titleTextStyle:[NSString stringWithFormat:@"%@", model.title] withBgColor:fsceneColor];
     
     CGFloat cityLength = [model.address boundingRectWithSize:CGSizeMake(320, 1000) options:(NSStringDrawingUsesLineFragmentOrigin) attributes:nil context:nil].size.width;
     [_city mas_updateConstraints:^(MASConstraintMaker *make) {
-        make.size.mas_equalTo(CGSizeMake(cityLength * 0.8, 15));
+        make.size.mas_equalTo(CGSizeMake(cityLength * 1.1, 15));
     }];
-    self.city.text = model.address;
     
+    self.city.text = model.address;
     [self.whereScene removeFromSuperview];
     [self.city mas_updateConstraints:^(MASConstraintMaker *make) {
         make.left.equalTo(self.mas_left).with.offset(40);
     }];
     
-    //  时间
-    self.time.text = @"｜ 2天前";
+    self.time.text = [NSString stringWithFormat:@"| %@", model.createdAt];
+    [self.time mas_updateConstraints:^(MASConstraintMaker *make) {
+        make.left.equalTo(self.city.mas_right).with.offset(10);
+        make.bottom.equalTo(self.city.mas_bottom).with.offset(0);
+    }];
     
     //  订阅的数量
     [self.goodBtn setBackgroundImage:[UIImage imageNamed:@"User_Su"] forState:(UIControlStateNormal)];
     if (model.subscriptionCount/1000 > 1) {
-        self.goodNum.text = [NSString stringWithFormat:@"%zik人订阅", model.subscriptionCount/1000];
+        self.goodNum.text = [NSString stringWithFormat:@"%zik人订阅", model.subscriptionCount/1000 ];
     } else {
         self.goodNum.text = [NSString stringWithFormat:@"%zi人订阅", model.subscriptionCount];
     }
@@ -70,13 +66,13 @@
 - (void)setSceneInfoData:(SceneInfoData *)model {
 
     [self.bgImage downloadImage:model.coverUrl place:[UIImage imageNamed:@""]];
-    [self titleTextStyle:[NSString stringWithFormat:@" %@ ", model.title] withBgColor:[UIColor colorWithPatternImage:[UIImage imageNamed:@"titleBg"]]];
+    [self titleTextStyle:[NSString stringWithFormat:@"%@", model.title] withBgColor:[UIColor colorWithPatternImage:[UIImage imageNamed:@"titleBg"]]];
     self.whereScene.text = [self abouText:self.whereScene withText:model.sceneTitle];
     self.city.text = [self abouText:self.city withText:model.address];
     [self.userHeader downloadImage:model.userInfo.avatarUrl place:[UIImage imageNamed:@""]];
     self.userName.text = model.userInfo.nickname;
     self.userProfile.text = model.userInfo.summary;
-//    self.time.text = @"｜ 2天前";
+    self.time.text = [NSString stringWithFormat:@"| %@", model.createdAt];
     
     if (model.loveCount/1000 > 1) {
         self.goodNum.text = [NSString stringWithFormat:@"%zik人赞过", model.loveCount/1000];
@@ -91,7 +87,7 @@
 - (UIImageView *)bgImage {
     if (!_bgImage) {
         _bgImage = [[UIImageView alloc] init];
-        _bgImage.contentMode = UIViewContentModeScaleAspectFit;
+        _bgImage.contentMode = UIViewContentModeScaleAspectFill;
         
         [_bgImage addSubview:self.userView];
     }
@@ -100,11 +96,11 @@
 
 //  改变UserView的位置
 - (void)changeUserViewFrame {
-    CGRect userViewRect = _userView.frame;
-    userViewRect = CGRectMake(0, SCREEN_HEIGHT - 140, SCREEN_WIDTH, 130);
+    CGRect userViewRect = self.userView.frame;
+    userViewRect = CGRectMake(0, SCREEN_HEIGHT - 160, SCREEN_WIDTH, 130);
 
     [UIView animateWithDuration:0.5 delay:0.5 options:(UIViewAnimationOptionTransitionNone) animations:^{
-        _userView.frame = userViewRect;
+        self.userView.frame = userViewRect;
     } completion:^(BOOL finished) {
         
     }];
@@ -129,18 +125,18 @@
             make.left.equalTo(_userView.mas_left).with.offset(40);
         }];
         
+        [_userView addSubview:self.time];
+        [_time mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.size.mas_equalTo(CGSizeMake(100, 15));
+            make.top.equalTo(_titleText.mas_bottom).with.offset(10);
+            make.left.equalTo(_whereScene.mas_right).with.offset(0);
+        }];
+        
         [_userView addSubview:self.city];
         [_city mas_makeConstraints:^(MASConstraintMaker *make) {
             make.size.mas_equalTo(CGSizeMake(75, 15));
-            make.top.equalTo(_titleText.mas_bottom).with.offset(10);
-            make.left.equalTo(_whereScene.mas_right).with.offset(30);
-        }];
-        
-        [_userView addSubview:self.time];
-        [_time mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.size.mas_equalTo(CGSizeMake(50, 15));
-            make.top.equalTo(_titleText.mas_bottom).with.offset(10);
-            make.left.equalTo(_city.mas_right).with.offset(0);
+            make.top.equalTo(_time.mas_bottom).with.offset(5);
+            make.left.equalTo(_whereScene.mas_left).with.offset(0);
         }];
         
         [_userView addSubview:self.userLeftView];
@@ -310,7 +306,6 @@
     NSMutableAttributedString * titleText = [[NSMutableAttributedString alloc] initWithString:title];
     NSMutableParagraphStyle * paragraphStyle = [[NSMutableParagraphStyle alloc] init];
     paragraphStyle.alignment = NSTextAlignmentJustified;
-    paragraphStyle.headIndent = 10;
     
     NSDictionary * textDict = @{
                                 NSBackgroundColorAttributeName:color ,
@@ -335,7 +330,7 @@
     NSString * whereText = fiuScene;
     CGFloat textLength = [fiuScene boundingRectWithSize:CGSizeMake(320, 1000) options:(NSStringDrawingUsesLineFragmentOrigin) attributes:nil context:nil].size.width;
     [lable mas_updateConstraints:^(MASConstraintMaker *make) {
-        make.size.mas_equalTo(CGSizeMake(textLength * 0.8, 15));
+        make.size.mas_equalTo(CGSizeMake(textLength * 1.1, 15));
     }];
     return whereText;
 }
@@ -345,8 +340,8 @@
     if (!_whereScene) {
         _whereScene = [[UILabel alloc] init];
         [self addIcon:_whereScene withImage:@"icon_star"];
-        _whereScene.font = [UIFont systemFontOfSize:Font_UserProfile];
-        _whereScene.textColor = [UIColor colorWithHexString:@"#666666" alpha:1];
+        _whereScene.font = [UIFont systemFontOfSize:Font_Number];
+        _whereScene.textColor = [UIColor whiteColor];
     }
     return _whereScene;
 }
@@ -356,8 +351,8 @@
     if (!_city) {
         _city = [[UILabel alloc] init];
         [self addIcon:_city withImage:@"icon_city"];
-        _city.font = [UIFont systemFontOfSize:Font_UserProfile];
-        _city.textColor = [UIColor colorWithHexString:@"#666666" alpha:1];
+        _city.font = [UIFont systemFontOfSize:Font_Number];
+        _city.textColor = [UIColor whiteColor];
     }
     return _city;
 }
@@ -367,8 +362,8 @@
     if (!_time) {
         _time = [[UILabel alloc] init];
         _time.textColor = [UIColor blackColor];
-        _time.font = [UIFont systemFontOfSize:Font_UserProfile];
-        _time.textColor = [UIColor colorWithHexString:@"#666666" alpha:1];
+        _time.font = [UIFont systemFontOfSize:Font_Number];
+        _time.textColor = [UIColor whiteColor];
     }
     return _time;
 }

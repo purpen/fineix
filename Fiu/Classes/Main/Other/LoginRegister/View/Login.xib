@@ -39,7 +39,7 @@
                     <textInputTraits key="textInputTraits"/>
                 </textField>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tWi-KH-tHO">
-                    <rect key="frame" x="190" y="85" width="170" height="44"/>
+                    <rect key="frame" x="228" y="85" width="132" height="44"/>
                     <color key="backgroundColor" red="0.92549019610000005" green="0.90588235289999997" blue="0.91372549020000005" alpha="1" colorSpace="calibratedRGB"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="44" id="bJ1-aE-5il"/>
@@ -50,10 +50,10 @@
                     </state>
                 </button>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="qHt-qe-1Tv">
-                    <rect key="frame" x="190" y="85" width="170" height="44"/>
+                    <rect key="frame" x="228" y="85" width="132" height="44"/>
                     <subviews>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="251" text="" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wYP-vE-X5M">
-                            <rect key="frame" x="8" y="12" width="81" height="21"/>
+                            <rect key="frame" x="8" y="12" width="43" height="21"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="21" id="CdL-YN-5jJ"/>
                                 <constraint firstAttribute="height" constant="21" id="DQb-S1-z3T"/>
@@ -70,7 +70,7 @@
                             </variation>
                         </label>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="s重新发送" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="XxT-T7-mXl">
-                            <rect key="frame" x="91" y="12" width="59" height="21"/>
+                            <rect key="frame" x="53" y="12" width="59" height="21"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="21" id="lzG-pY-Awl"/>
                                 <constraint firstAttribute="height" constant="21" id="t2o-Cj-P4h"/>
@@ -132,6 +132,7 @@
                     <constraints>
                         <constraint firstAttribute="height" constant="44" id="Hnw-5Z-ydB"/>
                     </constraints>
+                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
                     <state key="normal" title="提交">
                         <color key="titleColor" red="0.74509803919999995" green="0.53725490200000003" blue="0.078431372550000003" alpha="1" colorSpace="calibratedRGB"/>
                     </state>
@@ -150,7 +151,7 @@
                 <constraint firstItem="yAK-Fj-G0t" firstAttribute="leading" secondItem="oqv-0K-cPY" secondAttribute="leading" constant="15" id="Aek-gO-PKF"/>
                 <constraint firstItem="yAK-Fj-G0t" firstAttribute="top" secondItem="gyx-Ws-HRW" secondAttribute="bottom" constant="10" id="BYH-p2-qOS"/>
                 <constraint firstItem="tWi-KH-tHO" firstAttribute="centerY" secondItem="fDm-hn-1Kt" secondAttribute="centerY" id="J3f-ET-4q7"/>
-                <constraint firstItem="qHt-qe-1Tv" firstAttribute="leading" secondItem="oqv-0K-cPY" secondAttribute="leading" constant="190" id="JjD-rd-sOV"/>
+                <constraint firstItem="qHt-qe-1Tv" firstAttribute="leading" secondItem="oqv-0K-cPY" secondAttribute="leading" constant="228" id="JjD-rd-sOV"/>
                 <constraint firstItem="fDm-hn-1Kt" firstAttribute="top" secondItem="yaa-mg-VQ4" secondAttribute="bottom" constant="10" id="K5J-pi-a3b"/>
                 <constraint firstAttribute="trailing" secondItem="qHt-qe-1Tv" secondAttribute="trailing" constant="15" id="PUL-RN-VgN"/>
                 <constraint firstAttribute="trailing" secondItem="fDm-hn-1Kt" secondAttribute="trailing" constant="15" id="TPF-ta-IAp"/>
@@ -160,7 +161,7 @@
                 <constraint firstItem="yaa-mg-VQ4" firstAttribute="leading" secondItem="oqv-0K-cPY" secondAttribute="leading" constant="15" id="faV-Xg-EUJ"/>
                 <constraint firstAttribute="trailing" secondItem="yAK-Fj-G0t" secondAttribute="trailing" constant="15" id="gPi-2M-4DJ"/>
                 <constraint firstItem="yaa-mg-VQ4" firstAttribute="top" secondItem="NHA-Hw-IXu" secondAttribute="bottom" constant="10" id="sKh-kW-hJI"/>
-                <constraint firstItem="tWi-KH-tHO" firstAttribute="leading" secondItem="oqv-0K-cPY" secondAttribute="leading" constant="190" id="zV1-RK-5NJ"/>
+                <constraint firstItem="tWi-KH-tHO" firstAttribute="leading" secondItem="oqv-0K-cPY" secondAttribute="leading" constant="228" id="zV1-RK-5NJ"/>
             </constraints>
             <nil key="simulatedStatusBarMetrics"/>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>

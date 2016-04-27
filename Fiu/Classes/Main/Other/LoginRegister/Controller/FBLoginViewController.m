@@ -26,6 +26,7 @@
 #import <TYAlertView.h>
 #import "BindIngViewController.h"
 #import "SubscribeInterestedCollectionViewController.h"
+#import "ImprovViewController.h"
 
 
 @interface FBLoginViewController ()<UITextFieldDelegate,FBRequestDelegate>
@@ -281,9 +282,9 @@ static NSString *const thirdRegisteredNotBinding = @"/auth/third_register_withou
             UserInfoEntity *entity = [UserInfoEntity defaultUserInfoEntity];
             entity.isLogin = YES;
             
-            MyselfViewController *myVC = [[MyselfViewController alloc] init];
-            [self.navigationController pushViewController:myVC animated:YES];
-            [SVProgressHUD showSuccessWithStatus:NSLocalizedString(@"loginSuccessful", nil)];
+//            MyselfViewController *myVC = [[MyselfViewController alloc] init];
+//            [self.navigationController pushViewController:myVC animated:YES];
+//            [SVProgressHUD showSuccessWithStatus:NSLocalizedString(@"loginSuccessful", nil)];
             //推荐感兴趣的情景
             NSDictionary *identifyDict = [[result objectForKey:@"data"] objectForKey:@"identify"];
             if ([[identifyDict objectForKey:@"is_scene_subscribe"] isEqualToNumber:@0]) {
@@ -291,11 +292,9 @@ static NSString *const thirdRegisteredNotBinding = @"/auth/third_register_withou
                 SubscribeInterestedCollectionViewController *subscribeVC = [[SubscribeInterestedCollectionViewController alloc] init];
                 [self.navigationController pushViewController:subscribeVC animated:YES];
             }else{
-                //已经订阅过，直接个人中心
-                //跳回个人主页
-                //跳回个人主页
-                [self dismissViewControllerAnimated:YES completion:nil];
-                [self.tabBarController setSelectedIndex:3];
+                //跳转到个人信息完善页面
+                ImprovViewController *improveVC = [[ImprovViewController alloc] init];
+                [self.navigationController pushViewController:improveVC animated:YES];
                 
             }
 
@@ -484,11 +483,9 @@ static NSString *const thirdRegisteredNotBinding = @"/auth/third_register_withou
                 SubscribeInterestedCollectionViewController *subscribeVC = [[SubscribeInterestedCollectionViewController alloc] init];
                 [self.navigationController pushViewController:subscribeVC animated:YES];
             }else{
-                //已经订阅过，直接个人中心
-                //跳回个人主页
-                //跳回个人主页
-                [self dismissViewControllerAnimated:YES completion:nil];
-                [self.tabBarController setSelectedIndex:3];
+                //跳转到个人信息完善页面
+                ImprovViewController *improveVC = [[ImprovViewController alloc] init];
+                [self.navigationController pushViewController:improveVC animated:YES];
                 
             }
 
@@ -545,11 +542,9 @@ static NSString *const thirdRegisteredNotBinding = @"/auth/third_register_withou
                         SubscribeInterestedCollectionViewController *subscribeVC = [[SubscribeInterestedCollectionViewController alloc] init];
                         [self.navigationController pushViewController:subscribeVC animated:YES];
                     }else{
-                        //已经订阅过，直接个人中心
-                        //跳回个人主页
-                        //跳回个人主页
-                        [self dismissViewControllerAnimated:YES completion:nil];
-                        [self.tabBarController setSelectedIndex:3];
+                        //跳转到个人信息完善页面
+                        ImprovViewController *improveVC = [[ImprovViewController alloc] init];
+                        [self.navigationController pushViewController:improveVC animated:YES];
                         
                     }
                     

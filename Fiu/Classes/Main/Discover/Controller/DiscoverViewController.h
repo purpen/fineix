@@ -10,11 +10,17 @@
 #import "FBViewController.h"
 #import "GroupHeaderView.h"
 #import "FBRollImages.h"
+#import <MJRefresh/MJRefresh.h>
+#import <SVProgressHUD/SVProgressHUD.h>
 
 @interface DiscoverViewController : FBViewController <FBNavigationBarItemsDelegate, UITableViewDelegate, UITableViewDataSource>
 
 @pro_strong FBRequest               *   rollImgRequest;
 @pro_strong FBRequest               *   fiuSceneRequest;
+@pro_strong FBRequest               *   sceneListRequest;
+@pro_assign NSInteger                   currentpageNum;
+@pro_assign NSInteger                   totalPageNum;
+
 
 @pro_strong UITableView             *   discoverTableView;
 @pro_strong GroupHeaderView         *   headerView;

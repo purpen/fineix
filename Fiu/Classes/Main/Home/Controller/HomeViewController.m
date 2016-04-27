@@ -42,20 +42,6 @@ static NSString *const URLSceneList = @"/scene_sight/";
 
 }
 
-- (NSMutableArray *)sceneListMarr {
-    if (!_sceneListMarr) {
-        _sceneListMarr = [NSMutableArray array];
-    }
-    return _sceneListMarr;
-}
-
-- (NSMutableArray *)sceneIdMarr {
-    if (!_sceneIdMarr) {
-        _sceneIdMarr = [NSMutableArray array];
-    }
-    return _sceneIdMarr;
-}
-
 #pragma mark - 网络请求
 - (void)networkRequestData {
     [SVProgressHUD show];
@@ -71,8 +57,11 @@ static NSString *const URLSceneList = @"/scene_sight/";
         [self.homeTableView reloadData];
         self.currentpageNum = [[[result valueForKey:@"data"] valueForKey:@"current_page"] integerValue];
         self.totalPageNum = [[[result valueForKey:@"data"] valueForKey:@"total_page"] integerValue];
-        [self requestIsLastData:self.homeTableView currentPage:self.currentpageNum withTotalPage:self.totalPageNum];
-        
+        if (self.totalPageNum > 1) {
+            [self addMJRefresh:self.homeTableView];
+            [self requestIsLastData:self.homeTableView currentPage:self.currentpageNum withTotalPage:self.totalPageNum];
+        }
+        [SVProgressHUD dismiss];
     } failure:^(FBRequest *request, NSError *error) {
         [SVProgressHUD showErrorWithStatus:[error localizedDescription]];
     }];
@@ -128,9 +117,6 @@ static NSString *const URLSceneList = @"/scene_sight/";
         _homeTableView.dataSource = self;
         _homeTableView.showsVerticalScrollIndicator = NO;
         _homeTableView.separatorStyle = UITableViewCellSeparatorStyleNone;
-        
-        [self addMJRefresh:_homeTableView];
-        
     }
     return _homeTableView;
 }
@@ -153,7 +139,7 @@ static NSString *const URLSceneList = @"/scene_sight/";
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-    return SCREEN_HEIGHT;
+    return SCREEN_HEIGHT + 5;
 }
 
 #pragma mark - 跳转到场景的详情
@@ -236,6 +222,26 @@ static NSString *const URLSceneList = @"/scene_sight/";
     }else{
         NSLog(@"已经不是第一次启动了");
     }
+}
+
+
+- (NSMutableArray *)sceneListMarr {
+    if (!_sceneListMarr) {
+        _sceneListMarr = [NSMutableArray array];
+    }
+    return _sceneListMarr;
+}
+
+- (NSMutableArray *)sceneIdMarr {
+    if (!_sceneIdMarr) {
+        _sceneIdMarr = [NSMutableArray array];
+    }
+    return _sceneIdMarr;
+}
+
+- (void)viewWillDisappear:(BOOL)animated {
+    [super viewWillDisappear:animated];
+    [SVProgressHUD dismiss];
 }
 
 @end
