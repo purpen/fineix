@@ -20,18 +20,23 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.navigationController.navigationBarHidden = NO;
+    //self.navigationController.navigationBarHidden = NO;
     // Do any additional setup after loading the view.
+
+    
+    
+    //设置导航
+    self.navViewTitle.text = @"发现好友";
+    self.view.backgroundColor = [UIColor whiteColor];
+    [self addBarItemLeftBarButton:nil image:@"icon_back" isTransparent:NO];
     self.delegate = self;
-    self.navigationItem.title = @"发现好友";
-//    [self addBarItemLeftBarButton:nil image:@"icon_back"];
-//    [self addBarItemRightBarButton:nil image:@"scanning"];
+    [self addBarItemRightBarButton:nil image:@"scanning" isTransparent:NO];
     [self.view addSubview:self.myTbaleView];
 }
 
 -(UITableView *)myTbaleView{
     if (!_myTbaleView) {
-        _myTbaleView = [[UITableView alloc] initWithFrame:self.view.frame style:UITableViewStyleGrouped];
+        _myTbaleView = [[UITableView alloc] initWithFrame:CGRectMake(0, 64, SCREEN_WIDTH, SCREEN_HEIGHT-64) style:UITableViewStyleGrouped];
         _myTbaleView.delegate = self;
         _myTbaleView.dataSource = self;
         _myTbaleView.showsVerticalScrollIndicator = NO;

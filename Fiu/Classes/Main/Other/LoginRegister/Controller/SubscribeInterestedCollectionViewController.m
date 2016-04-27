@@ -150,10 +150,11 @@ static NSString * const reuseIdentifier = @"Cell";
     if ([request.flag isEqualToString:recommendedScenarioURL]) {
         NSDictionary *dataDic = result[@"data"];
         NSArray *dataAry = dataDic[@"rows"];
+        NSLog(@"dataAry %@",dataAry);
         for (int i = 0; i<dataAry.count; i++) {
             NSDictionary *modelDict = dataAry[i];
             NSDictionary *modellDict = @{
-                                         @"covers":modelDict[@"covers"][@"resp"],
+                                         @"covers":modelDict[@"cover_url"],
                                          @"title" : modelDict[@"title"],
                                          @"address" : modelDict[@"address"],
                                          @"subscription_count" : modelDict[@"subscription_count"],

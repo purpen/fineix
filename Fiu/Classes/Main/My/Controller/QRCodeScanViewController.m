@@ -44,9 +44,9 @@
     // Do any additional setup after loading the view.
     self.view.backgroundColor = [UIColor whiteColor];
     //设置导航条
-    self.navigationItem.title = @"扫一扫";
+    self.navViewTitle.text = @"扫一扫";
     self.delegate = self;
-//    [self addBarItemLeftBarButton:nil image:@"icon_back"];
+    [self addBarItemLeftBarButton:nil image:@"icon_back" isTransparent:NO];
 }
 
 -(void)viewWillAppear:(BOOL)animated{

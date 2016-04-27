@@ -20,8 +20,9 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
     self.delegate = self;
-    self.navigationController.navigationBarHidden = NO;
-    self.navigationItem.title = @"关于太火鸟";
+    self.view.backgroundColor = [UIColor whiteColor];
+    //self.navigationController.navigationBarHidden = NO;
+    self.navViewTitle.text = @"关于太火鸟";
 //    [self addBarItemLeftBarButton:nil image:@"icon_back"];
     
     //地址

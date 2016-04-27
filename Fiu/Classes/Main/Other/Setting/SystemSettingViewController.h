@@ -7,7 +7,9 @@
 //
 
 #import "FBViewController.h"
-
+@class ShareViewController;
 @interface SystemSettingViewController : FBViewController
+
+@property(nonatomic,strong) ShareViewController *shareVC;
 
 @end

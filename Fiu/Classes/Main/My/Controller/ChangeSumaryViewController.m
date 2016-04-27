@@ -24,8 +24,8 @@ static NSString *const UpdateInfoURL = @"/my/update_profile";
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
     self.delegate = self;
-    self.navigationController.navigationBarHidden = NO;
-    self.navigationItem.title = @"个性签名";
+    //self.navigationController.navigationBarHidden = NO;
+    self.navViewTitle.text = @"个性签名";
 //    [self addBarItemLeftBarButton:nil image:@"icon_back"];
 //    [self addBarItemRightBarButton:@"完成" image:@""];
     UserInfoEntity *entity = [UserInfoEntity defaultUserInfoEntity];

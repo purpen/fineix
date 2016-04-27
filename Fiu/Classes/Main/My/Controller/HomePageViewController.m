@@ -18,6 +18,7 @@
 #import "Fiu.h"
 #import "AccountManagementViewController.h"
 #import "UserInfoEntity.h"
+#import "DirectMessagesViewController.h"
 
 @interface HomePageViewController ()<UICollectionViewDelegate,UICollectionViewDataSource,UICollectionViewDelegateFlowLayout>
 {
@@ -194,7 +195,9 @@
 }
 
 -(void)clickMessageBtn:(UIButton*)sender{
-    
+    DirectMessagesViewController *vc = [[DirectMessagesViewController alloc] init];
+    vc.nickName = @"boc747";
+    [self.navigationController pushViewController:vc animated:YES];
 }
 
 -(void)clickMoreBtn:(UIButton*)sender{

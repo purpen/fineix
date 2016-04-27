@@ -48,8 +48,9 @@ static NSString *const UpdateInfoURL = @"/my/update_profile";
     // Do any additional setup after loading the view from its nib.
     self.delegate = self;
     self.navigationController.navigationBarHidden = NO;
+    self.navViewTitle.text = @"";
     self.navigationItem.title = @"修改性别";
-//    [self addBarItemLeftBarButton:nil image:@"icon_back"];
+    [self addBarItemLeftBarButton:nil image:@"icon_back" isTransparent:NO];
     [self.manBtn addTarget:self action:@selector(clickManBtn:) forControlEvents:UIControlEventTouchUpInside];
     [self.womenBtn addTarget:self action:@selector(clickwoMneBtn:) forControlEvents:UIControlEventTouchUpInside];
 }

@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+@class UserInfo;
 
 @interface FocusOnTableViewCell : UITableViewCell
 
@@ -15,6 +16,6 @@
 @property(nonatomic,strong) UILabel *summaryLabel;
 @property(nonatomic,strong) UIButton *focusOnBtn;
 
--(void)setUI;
+-(void)setUIWithModel:(UserInfo*)model;
 
 @end

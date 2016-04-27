@@ -18,8 +18,8 @@
 #import "WXApi.h"
 #import "WeiboSDK.h"
 #import <TencentOpenAPI/QQApiInterface.h>
-#import "FBBindingMobilePhoneNumber.h"
-#import "MyViewController.h"
+#import "BindIngViewController.h"
+#import "MyselfViewController.h"
 #import <TYAlertController.h>
 #import <TYAlertView.h>
 #import "SignupView.h"
@@ -376,14 +376,18 @@ NSString *const LoginURL = @"/auth/login";//登录接口
                 } failure:^(FBRequest *request, NSError *error) {
                     //如果请求失败提示失败信息
                     [SVProgressHUD showErrorWithStatus:error.localizedDescription];
+                    //已经订阅过，直接个人中心
+                    //跳回个人主页
+                    //跳回个人主页
+                    [self dismissViewControllerAnimated:YES completion:nil];
+                    [self.tabBarController setSelectedIndex:3];
                 }];
 
             }]];
             
             [alertView addAction:[TYAlertAction actionWithTitle:NSLocalizedString(@"determine", nil) style:TYAlertActionStyleDestructive handler:^(TYAlertAction *action) {
                 //跳转到绑定手机号界面
-                UIStoryboard *story = [UIStoryboard storyboardWithName:@"LoginRegisterController" bundle:[NSBundle mainBundle]];
-                FBBindingMobilePhoneNumber *bing = [story instantiateViewControllerWithIdentifier:@"LoginRegisterController"];
+                BindIngViewController *bing = [[BindIngViewController alloc] init];
                 bing.snsAccount = snsAccount;
                 bing.type = type;
                 [self.navigationController pushViewController:bing animated:YES];

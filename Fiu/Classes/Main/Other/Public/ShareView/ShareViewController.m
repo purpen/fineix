@@ -8,6 +8,11 @@
 
 #import "ShareViewController.h"
 #import "Fiu.h"
+#import "WXApi.h"
+#import "UMSocial.h"
+#import "WXApi.h"
+#import <TencentOpenAPI/QQApiInterface.h>
+#import "WeiboSDK.h"
 
 @interface ShareViewController ()
 
@@ -19,6 +24,34 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
     self.view.backgroundColor = [UIColor colorWithHexString:@"#000000" alpha:0.3];
+    
+    /**
+     *  判断用户有没有安装第三方应用
+     *  设置分享面板
+     */
+    
+    if ([WXApi isWXAppInstalled]) {
+        self.wechatView.hidden = NO;
+        
+        self.friendView.hidden = NO;
+    } else {
+        self.wechatView.hidden = YES;
+        
+        self.friendView.hidden = YES;
+    }
+    
+    if ([QQApiInterface isQQInstalled]) {
+        self.qqView.hidden = NO;
+    } else {
+        self.qqView.hidden = YES;
+    }
+    
+    if ([WeiboSDK isWeiboAppInstalled]) {
+        self.weiBoView.hidden = NO;
+    } else {
+        self.weiBoView.hidden = YES;
+    }
+
 }
 
 - (void)didReceiveMemoryWarning {

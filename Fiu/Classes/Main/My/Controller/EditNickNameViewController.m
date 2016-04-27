@@ -24,10 +24,10 @@ static NSString *const UpdateInfoURL = @"/my/update_profile";
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
     self.delegate = self;
-    self.navigationController.navigationBarHidden = NO;
-    self.navigationItem.title = @"修改昵称";
+    //self.navigationController.navigationBarHidden = NO;
+    self.navViewTitle.text = @"修改昵称";
 //    [self addBarItemLeftBarButton:nil image:@"icon_back"];
-//    [self addBarItemRightBarButton:@"保存" image:nil];
+    [self addBarItemRightBarButton:@"保存" image:nil isTransparent:NO];
     
     UserInfoEntity *entity = [UserInfoEntity defaultUserInfoEntity];
     self.nickNameTF.text = entity.nickname;

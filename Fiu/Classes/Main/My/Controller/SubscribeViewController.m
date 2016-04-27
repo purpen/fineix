@@ -18,8 +18,9 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     //设置导航
-    self.navigationItem.title = @"订阅的情景";
-    self.navigationController.navigationBarHidden = NO;
+    self.navViewTitle.text = @"订阅的情景";
+    //self.navigationItem.title = @"订阅的情景";
+    //self.navigationController.navigationBarHidden = NO;
 //    [self addBarItemLeftBarButton:nil image:@"icon_back"];
     self.delegate = self;
     //
@@ -36,7 +37,7 @@
         flowLayout.minimumLineSpacing = 5;
         flowLayout.scrollDirection = UICollectionViewScrollDirectionVertical;
         
-        _myCollectionView = [[UICollectionView alloc] initWithFrame:self.view.frame collectionViewLayout:flowLayout];
+        _myCollectionView = [[UICollectionView alloc] initWithFrame:CGRectMake(0, 64, SCREEN_WIDTH, SCREEN_HEIGHT-64) collectionViewLayout:flowLayout];
         _myCollectionView.delegate = self;
         _myCollectionView.dataSource = self;
         _myCollectionView.backgroundColor = [UIColor whiteColor];

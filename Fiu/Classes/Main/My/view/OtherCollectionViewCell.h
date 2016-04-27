@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+@class UserInfo;
 
 @interface OtherCollectionViewCell : UICollectionViewCell
 @property(nonatomic,strong) UIImageView *bgImageView;//背景图片

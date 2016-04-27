@@ -20,7 +20,7 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     //设置导航条
-    self.navigationItem.title = @"粉丝";
+    self.navViewTitle.text = @"粉丝";
 //    [self addBarItemLeftBarButton:nil image:@"icon_back"];
     self.delegate = self;
     
@@ -35,7 +35,7 @@
 
 -(UITableView *)mytableView{
     if (!_mytableView) {
-        _mytableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT) style:UITableViewStylePlain];
+        _mytableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 64, SCREEN_WIDTH, SCREEN_HEIGHT-64) style:UITableViewStylePlain];
         self.mytableView.delegate = self;
         self.mytableView.dataSource = self;
     }
@@ -54,7 +54,7 @@
     }
     cell.focusOnBtn.tag = indexPath.row;
     [cell.focusOnBtn addTarget:self action:@selector(clickFocusBtn:) forControlEvents:UIControlEventTouchUpInside];
-    [cell setUI];
+    //[cell setUI];
     return cell;
 }
 

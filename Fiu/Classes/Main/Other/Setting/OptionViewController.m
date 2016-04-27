@@ -27,8 +27,9 @@ NSString *const feedbackUrl = @"/gateway/feedback";//意见反馈接口
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
     self.delegate = self;
-    self.navigationController.navigationBarHidden = NO;
-    self.navigationItem.title = @"意见反馈";
+    //self.navigationController.navigationBarHidden = NO;
+    self.navViewTitle.text = @"意见反馈";
+    [self addNavBackBtn];
 //    [self addBarItemLeftBarButton:nil image:@"icon_back"];
     self.phoneTF.delegate = self;
     self.optionTFV.delegate = self;
