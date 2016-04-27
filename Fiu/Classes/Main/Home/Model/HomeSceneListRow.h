@@ -17,6 +17,7 @@
 @property (nonatomic, strong) NSString * address;
 @property (nonatomic, assign) NSInteger commentCount;
 @property (nonatomic, strong) NSString * coverUrl;
+@property (nonatomic, strong) NSString * createdAt;
 @property (nonatomic, assign) NSInteger createdOn;
 @property (nonatomic, strong) NSString * des;
 @property (nonatomic, assign) NSInteger fine;

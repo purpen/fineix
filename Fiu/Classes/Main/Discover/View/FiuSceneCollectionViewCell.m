@@ -77,6 +77,11 @@
         [self.titleLab mas_updateConstraints:^(MASConstraintMaker *make) {
             make.height.mas_equalTo(@40);
         }];
+        
+    } else {
+        [self.titleLab mas_updateConstraints:^(MASConstraintMaker *make) {
+            make.height.mas_equalTo(@15);
+        }];
     }
     NSMutableAttributedString * titleText = [[NSMutableAttributedString alloc] initWithString:title];
     NSMutableParagraphStyle * paragraphStyle = [[NSMutableParagraphStyle alloc] init];

@@ -10,18 +10,21 @@
 #import "FiuSceneTableViewCell.h"
 #import "SceneListTableViewCell.h"
 #import "FiuTagTableViewCell.h"
-#import "FBMapLocatinViewController.h"
+#import "FBCityViewController.h"
 #import "SearchViewController.h"
 #import "SceneInfoViewController.h"
 #import "FiuSceneRow.h"
 
 static NSString *const URLDiscoverSlide = @"/gateway/slide";
 static NSString *const URLFiuScene = @"/scene_scene/";
+static NSString *const URLSceneList = @"/scene_sight/";
 
 @interface DiscoverViewController()
 
 @pro_strong NSMutableArray              *   fiuSceneList;
 @pro_strong NSMutableArray              *   fiuSceneIdList;
+@pro_strong NSMutableArray              *   sceneList;
+@pro_strong NSMutableArray              *   sceneIdList;
 
 @end
 
@@ -32,29 +35,20 @@ static NSString *const URLFiuScene = @"/scene_scene/";
     
     [self setNavigationViewUI];
     
+    self.currentpageNum = 0;
+    [self networkSceneListData];
+    
 }
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    self.currentpageNum = 0;
     [self networkRollImgData];
     [self networkFiuSceneData];
+//    [self networkSceneListData];
     
     [self setDiscoverViewUI];
-}
-
-- (NSMutableArray *)fiuSceneList {
-    if (!_fiuSceneList) {
-        _fiuSceneList = [NSMutableArray array];
-    }
-    return _fiuSceneList;
-}
-
-- (NSMutableArray *)fiuSceneIdList {
-    if (!_fiuSceneIdList) {
-        _fiuSceneIdList = [NSMutableArray array];
-    }
-    return _fiuSceneIdList;
 }
 
 #pragma mark - 网络请求
@@ -88,16 +82,72 @@ static NSString *const URLFiuScene = @"/scene_scene/";
     }];
 }
 
+//  场景列表
+- (void)networkSceneListData {
+    self.sceneListRequest = [FBAPI getWithUrlString:URLSceneList requestDictionary:@{@"sort":@"0", @"size":@"10", @"page":@(self.currentpageNum + 1)} delegate:self];
+    [self.sceneListRequest startRequestSuccess:^(FBRequest *request, id result) {
+        NSArray * sceneArr = [[result valueForKey:@"data"] valueForKey:@"rows"];
+        for (NSDictionary * sceneDic in sceneArr) {
+            HomeSceneListRow * homeSceneModel = [[HomeSceneListRow alloc] initWithDictionary:sceneDic];
+            [self.sceneList addObject:homeSceneModel];
+            [self.sceneIdList addObject:[NSString stringWithFormat:@"%zi", homeSceneModel.idField]];
+        }
+        [self.discoverTableView reloadData];
+        self.currentpageNum = [[[result valueForKey:@"data"] valueForKey:@"current_page"] integerValue];
+        self.totalPageNum = [[[result valueForKey:@"data"] valueForKey:@"total_page"] integerValue];
+        if (self.totalPageNum > 1) {
+            [self addMJRefresh:self.discoverTableView];
+            [self requestIsLastData:self.discoverTableView currentPage:self.currentpageNum withTotalPage:self.totalPageNum];
+        }
+    } failure:^(FBRequest *request, NSError *error) {
+        
+    }];
+}
+
+//  判断是否为最后一条数据
+- (void)requestIsLastData:(UITableView *)table currentPage:(NSInteger )current withTotalPage:(NSInteger)total {
+    BOOL isLastPage = (current == total);
+    if (!isLastPage) {
+        if (table.mj_footer.state == MJRefreshStateNoMoreData) {
+            [table.mj_footer resetNoMoreData];
+        }
+    }
+    if (current == total == 1) {
+        table.mj_footer.state = MJRefreshStateNoMoreData;
+        table.mj_footer.hidden = true;
+    }
+    if ([table.mj_header isRefreshing]) {
+        [table.mj_header endRefreshing];
+    }
+    if ([table.mj_footer isRefreshing]) {
+        if (isLastPage) {
+            [table.mj_footer endRefreshingWithNoMoreData];
+        } else  {
+            [table.mj_footer endRefreshing];
+        }
+    }
+    [SVProgressHUD dismiss];
+}
+
+#pragma mark - 上拉加载 & 下拉刷新
+- (void)addMJRefresh:(UITableView *)table {
+//    table.mj_header = [MJRefreshNormalHeader headerWithRefreshingBlock:^{
+//        self.currentpageNum = 0;
+//        [self networkSceneListData];
+//    }];
+    
+    table.mj_footer = [MJRefreshAutoNormalFooter footerWithRefreshingBlock:^{
+        if (self.currentpageNum < self.totalPageNum) {
+            [self networkSceneListData];
+        } else {
+            [table.mj_footer endRefreshing];
+        }
+    }];
+}
 
 #pragma mark - 设置视图的UI
 - (void)setDiscoverViewUI {
     [self.view addSubview:self.discoverTableView];
-    if ([self.discoverTableView respondsToSelector:@selector(setSeparatorInset:)]) {
-        [self.discoverTableView setSeparatorInset:UIEdgeInsetsZero];
-    }
-    if ([self.discoverTableView respondsToSelector:@selector(setLayoutMargins:)]) {
-        [self.discoverTableView setLayoutMargins:UIEdgeInsetsZero];
-    }
 }
 
 #pragma mark - 顶部轮播图
@@ -113,12 +163,13 @@ static NSString *const URLFiuScene = @"/scene_scene/";
 #pragma mark - tableView
 - (UITableView *)discoverTableView {
     if (!_discoverTableView) {
-        _discoverTableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 64, SCREEN_WIDTH, SCREEN_HEIGHT - 64) style:(UITableViewStyleGrouped)];
+        _discoverTableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 64, SCREEN_WIDTH, SCREEN_HEIGHT - 113) style:(UITableViewStyleGrouped)];
         _discoverTableView.delegate = self;
         _discoverTableView.dataSource = self;
         _discoverTableView.showsVerticalScrollIndicator = NO;
         _discoverTableView.tableHeaderView = self.rollView;
         _discoverTableView.backgroundColor = [UIColor whiteColor];
+        _discoverTableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     }
     return _discoverTableView;
 }
@@ -134,7 +185,7 @@ static NSString *const URLFiuScene = @"/scene_scene/";
     } else if (section == 1) {
         return 1;
     } else if (section == 2) {
-        return 1;
+        return self.sceneList.count;
     }
     return 0;
 }
@@ -176,6 +227,7 @@ static NSString *const URLFiuScene = @"/scene_scene/";
         if (!cell) {
             cell = [[SceneListTableViewCell alloc] initWithStyle:(UITableViewCellStyleDefault) reuseIdentifier:sceneListCellId];
         }
+        [cell setHomeSceneListData:self.sceneList[indexPath.row]];
         return cell;
     }
     
@@ -194,7 +246,7 @@ static NSString *const URLFiuScene = @"/scene_scene/";
         return 266.5;
         
     } else if (indexPath.section == 2) {
-        return SCREEN_HEIGHT;
+        return SCREEN_HEIGHT + 5;
         
     }
     return 0;
@@ -224,19 +276,11 @@ static NSString *const URLFiuScene = @"/scene_scene/";
     return 0.01;
 }
 
-- (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath {
-    if ([cell respondsToSelector:@selector(setSeparatorInset:)]) {
-        [cell setSeparatorInset:UIEdgeInsetsZero];
-    }
-    if ([cell respondsToSelector:@selector(setLayoutMargins:)]) {
-        [cell setLayoutMargins:UIEdgeInsetsZero];
-    }
-}
-
 #pragma mark - 跳转场景页面
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     if (indexPath.section == 2) {
         SceneInfoViewController * sceneVC = [[SceneInfoViewController alloc] init];
+        sceneVC.sceneId = self.sceneIdList[indexPath.row];
         [self.navigationController pushViewController:sceneVC animated:YES];
     }
 }
@@ -260,8 +304,41 @@ static NSString *const URLFiuScene = @"/scene_scene/";
 
 //  点击右边barItem
 - (void)rightBarItemSelected {
-//    FBMapLocatinViewController * mapFSceneVC = [[FBMapLocatinViewController alloc] init];
-//    [self.navigationController pushViewController:mapFSceneVC animated:YES];
+    FBCityViewController * cityVC = [[FBCityViewController alloc] init];
+    [self.navigationController pushViewController:cityVC animated:YES];
+}
+
+- (NSMutableArray *)fiuSceneList {
+    if (!_fiuSceneList) {
+        _fiuSceneList = [NSMutableArray array];
+    }
+    return _fiuSceneList;
+}
+
+- (NSMutableArray *)fiuSceneIdList {
+    if (!_fiuSceneIdList) {
+        _fiuSceneIdList = [NSMutableArray array];
+    }
+    return _fiuSceneIdList;
+}
+
+- (NSMutableArray *)sceneList {
+    if (!_sceneList) {
+        _sceneList = [NSMutableArray array];
+    }
+    return _sceneList;
+}
+
+- (NSMutableArray *)sceneIdList {
+    if (!_sceneIdList) {
+        _sceneIdList = [NSMutableArray array];
+    }
+    return _sceneIdList;
+}
+
+- (void)viewWillDisappear:(BOOL)animated {
+    [super viewWillDisappear:animated];
+    [SVProgressHUD dismiss];
 }
 
 @end

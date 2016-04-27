@@ -19,6 +19,7 @@
 @property (nonatomic, strong) NSString * coverUrl;
 @property (nonatomic, assign) NSInteger createdOn;
 @property (nonatomic, assign) NSInteger currentUserId;
+@property (nonatomic, strong) NSString * createdAt;
 @property (nonatomic, strong) NSString * des;
 @property (nonatomic, assign) NSInteger fine;
 @property (nonatomic, assign) NSInteger isCheck;

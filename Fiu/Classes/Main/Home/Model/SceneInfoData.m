@@ -32,6 +32,9 @@
 	if(![dictionary[@"comment_count"] isKindOfClass:[NSNull class]]){
 		self.commentCount = [dictionary[@"comment_count"] integerValue];
 	}
+    if(![dictionary[@"created_at"] isKindOfClass:[NSNull class]]){
+        self.createdAt = dictionary[@"created_at"];
+    }
 
 	if(![dictionary[@"cover_url"] isKindOfClass:[NSNull class]]){
 		self.coverUrl = dictionary[@"cover_url"];

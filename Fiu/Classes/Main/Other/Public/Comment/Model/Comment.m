@@ -1,16 +1,16 @@
 //
-//	FiuSceneInfo.m
+//	Comment.m
 // on 27/4/2016
 //	Copyright © 2016. All rights reserved.
 //	Model file Generated using JSONExport: https://github.com/Ahmed-Ali/JSONExport
 
 
 
-#import "FiuSceneInfo.h"
+#import "Comment.h"
 
-@interface FiuSceneInfo ()
+@interface Comment ()
 @end
-@implementation FiuSceneInfo
+@implementation Comment
 
 
 
@@ -27,7 +27,7 @@
 	}
 
 	if(![dictionary[@"data"] isKindOfClass:[NSNull class]]){
-		self.data = [[FiuSceneInfoData alloc] initWithDictionary:dictionary[@"data"]];
+		self.data = [[CommentData alloc] initWithDictionary:dictionary[@"data"]];
 	}
 
 	if(![dictionary[@"is_error"] isKindOfClass:[NSNull class]]){

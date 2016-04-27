@@ -1,6 +1,6 @@
 //
 //	FiuSceneInfoData.m
-// on 26/4/2016
+// on 27/4/2016
 //	Copyright © 2016. All rights reserved.
 //	Model file Generated using JSONExport: https://github.com/Ahmed-Ali/JSONExport
 
@@ -54,6 +54,10 @@
 		self.isCheck = [dictionary[@"is_check"] integerValue];
 	}
 
+	if(![dictionary[@"is_subscript"] isKindOfClass:[NSNull class]]){
+		self.isSubscript = [dictionary[@"is_subscript"] integerValue];
+	}
+
 	if(![dictionary[@"location"] isKindOfClass:[NSNull class]]){
 		self.location = [[FiuSceneInfoLocation alloc] initWithDictionary:dictionary[@"location"]];
 	}
@@ -74,6 +78,9 @@
 		self.subscriptionCount = [dictionary[@"subscription_count"] integerValue];
 	}
 
+	if(![dictionary[@"tag_titles"] isKindOfClass:[NSNull class]]){
+		self.tagTitles = dictionary[@"tag_titles"];
+	}	
 	if(![dictionary[@"tags"] isKindOfClass:[NSNull class]]){
 		self.tags = dictionary[@"tags"];
 	}	
@@ -90,6 +97,10 @@
 
 	if(![dictionary[@"user_id"] isKindOfClass:[NSNull class]]){
 		self.userId = [dictionary[@"user_id"] integerValue];
+	}
+
+	if(![dictionary[@"user_info"] isKindOfClass:[NSNull class]]){
+		self.userInfo = [[FiuSceneInfoUserInfo alloc] initWithDictionary:dictionary[@"user_info"]];
 	}
 
 	if(![dictionary[@"view_count"] isKindOfClass:[NSNull class]]){

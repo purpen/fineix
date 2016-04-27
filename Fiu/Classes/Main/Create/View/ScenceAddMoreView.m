@@ -234,11 +234,16 @@ static const NSInteger btnTag = 100;
 //  选择地理位置
 - (void)changeLocation {
     SearchLocationViewController * searchLocation = [[SearchLocationViewController alloc] init];
-    searchLocation.selectedLocationBlock = ^(NSString * location, NSString * city){
+    searchLocation.selectedLocationBlock = ^(NSString * location, NSString * city, NSString * latitude, NSString * longitude){
         _location.text = [NSString stringWithFormat:@"%@ %@", city, location];
+        _latitude = latitude;
+        _longitude = longitude;
         _addLoacationBtn.hidden = YES;
         _locationView.hidden = NO;
         [self offLocationFrame];
+        NSArray * locaArr = [NSArray arrayWithObjects:_latitude, _longitude, nil];
+        //  from #import "ReleaseViewController.h"
+        [[NSNotificationCenter defaultCenter] postNotificationName:@"locationArr" object:locaArr];
     };
     [self.nav pushViewController:searchLocation animated:YES];
 }

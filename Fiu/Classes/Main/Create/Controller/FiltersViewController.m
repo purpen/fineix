@@ -148,6 +148,13 @@
     releaseVC.locationArr = self.locationArr;
     releaseVC.scenceView.imageView.image = self.filtersImageView.image;
     releaseVC.createType = self.createType;
+    releaseVC.goodsTitle = @"测试商品";
+    releaseVC.goodsPrice = @"321";
+    releaseVC.goodsId = @"12352134";
+    releaseVC.goodsX = @"43";
+    releaseVC.goodsY = @"20";
+    releaseVC.fSceneId = @"4";
+    releaseVC.tagS = @"测试,标签测试,天气真的很好啊,世界地球日,测试,标签测试,天气真的很好啊,世界地球日";
     [self.navigationController pushViewController:releaseVC animated:YES];
     
 }

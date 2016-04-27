@@ -88,18 +88,22 @@
 	if(![dictionary[@"updated_on"] isKindOfClass:[NSNull class]]){
 		self.updatedOn = [dictionary[@"updated_on"] integerValue];
 	}
+    if(![dictionary[@"created_at"] isKindOfClass:[NSNull class]]){
+        self.createdAt = dictionary[@"created_at"];
+    }
 
 	if(![dictionary[@"used_count"] isKindOfClass:[NSNull class]]){
 		self.usedCount = [dictionary[@"used_count"] integerValue];
 	}
 
-	if(![dictionary[@"user"] isKindOfClass:[NSNull class]]){
-		self.user = [[HomeSceneListUser alloc] initWithDictionary:dictionary[@"user"]];
+	if(![dictionary[@"user_info"] isKindOfClass:[NSNull class]]){
+		self.user = [[HomeSceneListUser alloc] initWithDictionary:dictionary[@"user_info"]];
 	}
 
 	if(![dictionary[@"user_id"] isKindOfClass:[NSNull class]]){
 		self.userId = [dictionary[@"user_id"] integerValue];
 	}
+    
 
 	if(![dictionary[@"view_count"] isKindOfClass:[NSNull class]]){
 		self.viewCount = [dictionary[@"view_count"] integerValue];

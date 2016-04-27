@@ -28,13 +28,14 @@ static NSString *const URLAllFiuSceneList = @"/scene_scene/";
     
     [self setNavigationViewUI];
     
+    self.currentpageNum = 0;
+    [self networkAllFiuSceneList];
+    
 }
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.currentpageNum = 0;
     
-    [self networkAllFiuSceneList];
     [self setAllSceneViewUI];
     
 }
@@ -155,6 +156,11 @@ static NSString *const URLAllFiuSceneList = @"/scene_scene/";
     PictureToolViewController * pictureToolVC = [[PictureToolViewController alloc] init];
     pictureToolVC.createType = @"fScene";
     [self presentViewController:pictureToolVC animated:YES completion:nil];
+}
+
+- (void)viewWillDisappear:(BOOL)animated {
+    [super viewWillDisappear:animated];
+    [SVProgressHUD dismiss];
 }
 
 @end

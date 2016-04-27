@@ -30,6 +30,8 @@
 @pro_strong UIButton        *   addTagBtn;
 @pro_strong UIView          *   addScene;           //  所属情景
 @pro_strong UIButton        *   addSceneBtn;
+@pro_strong NSString        *   latitude;           //  纬度
+@pro_strong NSString        *   longitude;          //  经度
 
 
 - (void)changeLocationFrame:(NSArray *)locationArr;

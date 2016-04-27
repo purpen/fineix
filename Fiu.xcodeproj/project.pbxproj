@@ -94,10 +94,6 @@
 		D8035F2F1CB77D0C001920F9 /* UIImage+Helper.m in Sources */ = {isa = PBXBuildFile; fileRef = D8035F2E1CB77D0C001920F9 /* UIImage+Helper.m */; };
 		D8035F3B1CB784B3001920F9 /* UILable+Frame.m in Sources */ = {isa = PBXBuildFile; fileRef = D8035F3A1CB784B3001920F9 /* UILable+Frame.m */; };
 		D8035F3E1CBB4939001920F9 /* CommentTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D8035F3D1CBB4939001920F9 /* CommentTableViewCell.m */; };
-		D8035FC61CBD1021001920F9 /* FBLocationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D8035FAB1CBD1021001920F9 /* FBLocationViewController.m */; };
-		D8035FC71CBD1021001920F9 /* FBLocationViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D8035FAC1CBD1021001920F9 /* FBLocationViewController.xib */; };
-		D8035FC81CBD1021001920F9 /* FBMapLocatinViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D8035FAE1CBD1021001920F9 /* FBMapLocatinViewController.m */; };
-		D8035FC91CBD1021001920F9 /* FBMapLocatinViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D8035FAF1CBD1021001920F9 /* FBMapLocatinViewController.xib */; };
 		D8035FCE1CBD1021001920F9 /* SearchViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D8035FBC1CBD1021001920F9 /* SearchViewController.m */; };
 		D8035FCF1CBD1021001920F9 /* FBTabBar.m in Sources */ = {isa = PBXBuildFile; fileRef = D8035FC11CBD1021001920F9 /* FBTabBar.m */; };
 		D8035FD01CBD1021001920F9 /* FBTabBarController.m in Sources */ = {isa = PBXBuildFile; fileRef = D8035FC31CBD1021001920F9 /* FBTabBarController.m */; };
@@ -230,6 +226,17 @@
 		D836399C1CCF731500CC4AC0 /* FiuSceneInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = D83639971CCF731500CC4AC0 /* FiuSceneInfo.m */; };
 		D836399D1CCF731500CC4AC0 /* FiuSceneInfoData.m in Sources */ = {isa = PBXBuildFile; fileRef = D83639991CCF731500CC4AC0 /* FiuSceneInfoData.m */; };
 		D836399E1CCF731500CC4AC0 /* FiuSceneInfoLocation.m in Sources */ = {isa = PBXBuildFile; fileRef = D836399B1CCF731500CC4AC0 /* FiuSceneInfoLocation.m */; };
+		D83639A31CD05A5E00CC4AC0 /* FiuSceneInfoCounter.m in Sources */ = {isa = PBXBuildFile; fileRef = D83639A01CD05A5E00CC4AC0 /* FiuSceneInfoCounter.m */; };
+		D83639A41CD05A5E00CC4AC0 /* FiuSceneInfoUserInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = D83639A21CD05A5E00CC4AC0 /* FiuSceneInfoUserInfo.m */; };
+		D83639AD1CD0660E00CC4AC0 /* FBLocationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D83639A71CD0660E00CC4AC0 /* FBLocationViewController.m */; };
+		D83639AE1CD0660E00CC4AC0 /* FBLocationViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D83639A81CD0660E00CC4AC0 /* FBLocationViewController.xib */; };
+		D83639AF1CD0660E00CC4AC0 /* FBMapLocatinViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D83639AA1CD0660E00CC4AC0 /* FBMapLocatinViewController.m */; };
+		D83639B01CD0660E00CC4AC0 /* FBMapLocatinViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D83639AB1CD0660E00CC4AC0 /* FBMapLocatinViewController.xib */; };
+		D83639B31CD0661E00CC4AC0 /* FBCityViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D83639B21CD0661E00CC4AC0 /* FBCityViewController.m */; };
+		D83639BD1CD0932000CC4AC0 /* Comment.m in Sources */ = {isa = PBXBuildFile; fileRef = D83639B61CD0932000CC4AC0 /* Comment.m */; };
+		D83639BE1CD0932000CC4AC0 /* CommentData.m in Sources */ = {isa = PBXBuildFile; fileRef = D83639B81CD0932000CC4AC0 /* CommentData.m */; };
+		D83639BF1CD0932000CC4AC0 /* CommentRow.m in Sources */ = {isa = PBXBuildFile; fileRef = D83639BA1CD0932000CC4AC0 /* CommentRow.m */; };
+		D83639C01CD0932000CC4AC0 /* CommentUser.m in Sources */ = {isa = PBXBuildFile; fileRef = D83639BC1CD0932000CC4AC0 /* CommentUser.m */; };
 		D83A64321C8E7765003DB8BB /* Photos.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D83A64311C8E7765003DB8BB /* Photos.framework */; };
 		D83A64331C8E7E93003DB8BB /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D802D7891C844101007AFA3D /* AVFoundation.framework */; };
 		D83A64351C8E7EAD003DB8BB /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D83A64341C8E7EAD003DB8BB /* Foundation.framework */; };
@@ -430,12 +437,6 @@
 		D8035F3A1CB784B3001920F9 /* UILable+Frame.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UILable+Frame.m"; sourceTree = "<group>"; };
 		D8035F3C1CBB4939001920F9 /* CommentTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CommentTableViewCell.h; sourceTree = "<group>"; };
 		D8035F3D1CBB4939001920F9 /* CommentTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CommentTableViewCell.m; sourceTree = "<group>"; };
-		D8035FAA1CBD1021001920F9 /* FBLocationViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FBLocationViewController.h; sourceTree = "<group>"; };
-		D8035FAB1CBD1021001920F9 /* FBLocationViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FBLocationViewController.m; sourceTree = "<group>"; };
-		D8035FAC1CBD1021001920F9 /* FBLocationViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FBLocationViewController.xib; sourceTree = "<group>"; };
-		D8035FAD1CBD1021001920F9 /* FBMapLocatinViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FBMapLocatinViewController.h; sourceTree = "<group>"; };
-		D8035FAE1CBD1021001920F9 /* FBMapLocatinViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FBMapLocatinViewController.m; sourceTree = "<group>"; };
-		D8035FAF1CBD1021001920F9 /* FBMapLocatinViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FBMapLocatinViewController.xib; sourceTree = "<group>"; };
 		D8035FBB1CBD1021001920F9 /* SearchViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SearchViewController.h; sourceTree = "<group>"; };
 		D8035FBC1CBD1021001920F9 /* SearchViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SearchViewController.m; sourceTree = "<group>"; };
 		D8035FC01CBD1021001920F9 /* FBTabBar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FBTabBar.h; sourceTree = "<group>"; };
@@ -694,6 +695,26 @@
 		D83639991CCF731500CC4AC0 /* FiuSceneInfoData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FiuSceneInfoData.m; sourceTree = "<group>"; };
 		D836399A1CCF731500CC4AC0 /* FiuSceneInfoLocation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FiuSceneInfoLocation.h; sourceTree = "<group>"; };
 		D836399B1CCF731500CC4AC0 /* FiuSceneInfoLocation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FiuSceneInfoLocation.m; sourceTree = "<group>"; };
+		D836399F1CD05A5E00CC4AC0 /* FiuSceneInfoCounter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FiuSceneInfoCounter.h; sourceTree = "<group>"; };
+		D83639A01CD05A5E00CC4AC0 /* FiuSceneInfoCounter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FiuSceneInfoCounter.m; sourceTree = "<group>"; };
+		D83639A11CD05A5E00CC4AC0 /* FiuSceneInfoUserInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FiuSceneInfoUserInfo.h; sourceTree = "<group>"; };
+		D83639A21CD05A5E00CC4AC0 /* FiuSceneInfoUserInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FiuSceneInfoUserInfo.m; sourceTree = "<group>"; };
+		D83639A61CD0660E00CC4AC0 /* FBLocationViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FBLocationViewController.h; sourceTree = "<group>"; };
+		D83639A71CD0660E00CC4AC0 /* FBLocationViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FBLocationViewController.m; sourceTree = "<group>"; };
+		D83639A81CD0660E00CC4AC0 /* FBLocationViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FBLocationViewController.xib; sourceTree = "<group>"; };
+		D83639A91CD0660E00CC4AC0 /* FBMapLocatinViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FBMapLocatinViewController.h; sourceTree = "<group>"; };
+		D83639AA1CD0660E00CC4AC0 /* FBMapLocatinViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FBMapLocatinViewController.m; sourceTree = "<group>"; };
+		D83639AB1CD0660E00CC4AC0 /* FBMapLocatinViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FBMapLocatinViewController.xib; sourceTree = "<group>"; };
+		D83639B11CD0661E00CC4AC0 /* FBCityViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FBCityViewController.h; sourceTree = "<group>"; };
+		D83639B21CD0661E00CC4AC0 /* FBCityViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FBCityViewController.m; sourceTree = "<group>"; };
+		D83639B51CD0932000CC4AC0 /* Comment.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Comment.h; sourceTree = "<group>"; };
+		D83639B61CD0932000CC4AC0 /* Comment.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Comment.m; sourceTree = "<group>"; };
+		D83639B71CD0932000CC4AC0 /* CommentData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CommentData.h; sourceTree = "<group>"; };
+		D83639B81CD0932000CC4AC0 /* CommentData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CommentData.m; sourceTree = "<group>"; };
+		D83639B91CD0932000CC4AC0 /* CommentRow.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CommentRow.h; sourceTree = "<group>"; };
+		D83639BA1CD0932000CC4AC0 /* CommentRow.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CommentRow.m; sourceTree = "<group>"; };
+		D83639BB1CD0932000CC4AC0 /* CommentUser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CommentUser.h; sourceTree = "<group>"; };
+		D83639BC1CD0932000CC4AC0 /* CommentUser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CommentUser.m; sourceTree = "<group>"; };
 		D83A64311C8E7765003DB8BB /* Photos.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Photos.framework; path = System/Library/Frameworks/Photos.framework; sourceTree = SDKROOT; };
 		D83A64341C8E7EAD003DB8BB /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		D83A64361C8E7EBD003DB8BB /* CoreVideo.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreVideo.framework; path = System/Library/Frameworks/CoreVideo.framework; sourceTree = SDKROOT; };
@@ -1084,12 +1105,8 @@
 		D8035FA91CBD1021001920F9 /* Location */ = {
 			isa = PBXGroup;
 			children = (
-				D8035FAA1CBD1021001920F9 /* FBLocationViewController.h */,
-				D8035FAB1CBD1021001920F9 /* FBLocationViewController.m */,
-				D8035FAC1CBD1021001920F9 /* FBLocationViewController.xib */,
-				D8035FAD1CBD1021001920F9 /* FBMapLocatinViewController.h */,
-				D8035FAE1CBD1021001920F9 /* FBMapLocatinViewController.m */,
-				D8035FAF1CBD1021001920F9 /* FBMapLocatinViewController.xib */,
+				D83639A51CD0660E00CC4AC0 /* Controller */,
+				D83639AC1CD0660E00CC4AC0 /* View */,
 			);
 			path = Location;
 			sourceTree = "<group>";
@@ -1758,6 +1775,10 @@
 				D83639991CCF731500CC4AC0 /* FiuSceneInfoData.m */,
 				D836399A1CCF731500CC4AC0 /* FiuSceneInfoLocation.h */,
 				D836399B1CCF731500CC4AC0 /* FiuSceneInfoLocation.m */,
+				D836399F1CD05A5E00CC4AC0 /* FiuSceneInfoCounter.h */,
+				D83639A01CD05A5E00CC4AC0 /* FiuSceneInfoCounter.m */,
+				D83639A11CD05A5E00CC4AC0 /* FiuSceneInfoUserInfo.h */,
+				D83639A21CD05A5E00CC4AC0 /* FiuSceneInfoUserInfo.m */,
 				D836398A1CCF69D300CC4AC0 /* FiuScene.h */,
 				D836398B1CCF69D300CC4AC0 /* FiuScene.m */,
 				D836398C1CCF69D300CC4AC0 /* FiuSceneData.h */,
@@ -1766,6 +1787,43 @@
 				D83639911CCF69D300CC4AC0 /* FiuSceneRow.m */,
 				D836398E1CCF69D300CC4AC0 /* FiuSceneLocation.h */,
 				D836398F1CCF69D300CC4AC0 /* FiuSceneLocation.m */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		D83639A51CD0660E00CC4AC0 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				D83639A61CD0660E00CC4AC0 /* FBLocationViewController.h */,
+				D83639A71CD0660E00CC4AC0 /* FBLocationViewController.m */,
+				D83639A81CD0660E00CC4AC0 /* FBLocationViewController.xib */,
+				D83639A91CD0660E00CC4AC0 /* FBMapLocatinViewController.h */,
+				D83639AA1CD0660E00CC4AC0 /* FBMapLocatinViewController.m */,
+				D83639AB1CD0660E00CC4AC0 /* FBMapLocatinViewController.xib */,
+				D83639B11CD0661E00CC4AC0 /* FBCityViewController.h */,
+				D83639B21CD0661E00CC4AC0 /* FBCityViewController.m */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		D83639AC1CD0660E00CC4AC0 /* View */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		D83639B41CD0932000CC4AC0 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				D83639B51CD0932000CC4AC0 /* Comment.h */,
+				D83639B61CD0932000CC4AC0 /* Comment.m */,
+				D83639B71CD0932000CC4AC0 /* CommentData.h */,
+				D83639B81CD0932000CC4AC0 /* CommentData.m */,
+				D83639B91CD0932000CC4AC0 /* CommentRow.h */,
+				D83639BA1CD0932000CC4AC0 /* CommentRow.m */,
+				D83639BB1CD0932000CC4AC0 /* CommentUser.h */,
+				D83639BC1CD0932000CC4AC0 /* CommentUser.m */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -1822,6 +1880,7 @@
 		D87B69C81CC726D500199EFE /* Comment */ = {
 			isa = PBXGroup;
 			children = (
+				D83639B41CD0932000CC4AC0 /* Model */,
 				D87B69C91CC726D500199EFE /* Controller */,
 				D87B69CC1CC726D500199EFE /* View */,
 			);
@@ -1969,9 +2028,10 @@
 				D81281121CAA8532007CF08B /* LaunchScreen.storyboard in Resources */,
 				D80360591CBF376B001920F9 /* RecommendedScenarioView.xib in Resources */,
 				D81281721CAA8532007CF08B /* UMSocialSDKResourcesNew.bundle in Resources */,
-				D8035FC91CBD1021001920F9 /* FBMapLocatinViewController.xib in Resources */,
+				D83639AE1CD0660E00CC4AC0 /* FBLocationViewController.xib in Resources */,
 				1FBC3E951CCE33A4007CFA14 /* AboutViewController.xib in Resources */,
 				1F1837711CCDF87500933CA7 /* ChangePasswordViewController.xib in Resources */,
+				D83639B01CD0660E00CC4AC0 /* FBMapLocatinViewController.xib in Resources */,
 				D812815B1CAA8532007CF08B /* Info.plist in Resources */,
 				D812816C1CAA8532007CF08B /* UMSCommentInputControlleriPad.xib in Resources */,
 				D80360491CBF376B001920F9 /* SubscribeInterestedCollectionViewController.xib in Resources */,
@@ -1985,7 +2045,6 @@
 				D81281681CAA8532007CF08B /* UMSocialLocalizable.strings in Resources */,
 				1F1837671CCDCF3B00933CA7 /* EditNickNameViewController.xib in Resources */,
 				D812816F1CAA8532007CF08B /* UMSLoginViewController.xib in Resources */,
-				D8035FC71CBD1021001920F9 /* FBLocationViewController.xib in Resources */,
 				1F1837761CCDFCB200933CA7 /* ChangeSumaryViewController.xib in Resources */,
 				D81281111CAA8532007CF08B /* Assets.xcassets in Resources */,
 				D812815C1CAA8532007CF08B /* InfoPlist.strings in Resources */,
@@ -2076,7 +2135,6 @@
 				1F51E8B61CC6380D00017839 /* FBBindingMobilePhoneNumber.m in Sources */,
 				D80360571CBF376B001920F9 /* PhoneNumLoginView.m in Sources */,
 				1FEF0B0F1CC0FC15006EF0C6 /* MyShippingAddressViewController.m in Sources */,
-				D8035FC61CBD1021001920F9 /* FBLocationViewController.m in Sources */,
 				1F07A6591CC7A45300CF225F /* FriendCollectionViewCell.m in Sources */,
 				1FEF0B151CC0FC15006EF0C6 /* BackImagView.m in Sources */,
 				D87B69D51CC726D500199EFE /* WriteCommentView.m in Sources */,
@@ -2126,8 +2184,8 @@
 				D86AFDEC1CBF84DB006F1602 /* SearchSceneTableViewCell.m in Sources */,
 				D812815E1CAA8532007CF08B /* main.m in Sources */,
 				D83639821CCE1F5C00CC4AC0 /* GoodsBrandTableViewCell.m in Sources */,
-				D8035FC81CBD1021001920F9 /* FBMapLocatinViewController.m in Sources */,
 				D8B011221CCA21DF008A63B7 /* InfoTitleTableViewCell.m in Sources */,
+				D83639BF1CD0932000CC4AC0 /* CommentRow.m in Sources */,
 				D8B011191CC8AD0A008A63B7 /* GoodsInfoViewController.m in Sources */,
 				1FBE62701CC4E3C3009606F7 /* MyFansViewController.m in Sources */,
 				1FEF0B1A1CC0FC15006EF0C6 /* MyHomePageView.m in Sources */,
@@ -2152,6 +2210,7 @@
 				D87B69E11CC7274900199EFE /* FBMenuView.m in Sources */,
 				1FEF0B0C1CC0FC15006EF0C6 /* MyMessageViewController.m in Sources */,
 				1F18376B1CCDE95A00933CA7 /* ModifyGenderViewController.m in Sources */,
+				D83639AF1CD0660E00CC4AC0 /* FBMapLocatinViewController.m in Sources */,
 				1F3C0A911CBF95AC00B84FEB /* SubscribePeopleTableViewCell.m in Sources */,
 				D812812C1CAA8532007CF08B /* PictureView.m in Sources */,
 				D87B69BF1CC726BA00199EFE /* FBRollImages.m in Sources */,
@@ -2163,6 +2222,7 @@
 				1FBE626A1CC4CB72009606F7 /* MyPageFocusOnViewController.m in Sources */,
 				1FEF0B121CC0FC15006EF0C6 /* OrderListModel.m in Sources */,
 				1F07A6561CC79BE300CF225F /* FriendTableViewCell.m in Sources */,
+				D83639AD1CD0660E00CC4AC0 /* FBLocationViewController.m in Sources */,
 				D8035FF41CBE44A9001920F9 /* PictureToolViewController.m in Sources */,
 				D83639691CCDBF2900CC4AC0 /* HomeSceneListRow.m in Sources */,
 				1FEF0B111CC0FC15006EF0C6 /* MyViewController.m in Sources */,
@@ -2183,6 +2243,7 @@
 				D81281181CAA8532007CF08B /* CropImageViewController.m in Sources */,
 				D80360501CBF376B001920F9 /* UserInfoEntity.m in Sources */,
 				1F07A64A1CC77F3B00CF225F /* ScenceListCollectionViewCell.m in Sources */,
+				D83639A31CD05A5E00CC4AC0 /* FiuSceneInfoCounter.m in Sources */,
 				1F1837701CCDF87500933CA7 /* ChangePasswordViewController.m in Sources */,
 				1F1837661CCDCF3B00933CA7 /* EditNickNameViewController.m in Sources */,
 				D812812B1CAA8532007CF08B /* PhotoAlbumsView.m in Sources */,
@@ -2196,6 +2257,7 @@
 				1FBC3E941CCE33A4007CFA14 /* AboutViewController.m in Sources */,
 				D812813C1CAA8532007CF08B /* MallViewController.m in Sources */,
 				1FEF0B1D1CC0FC15006EF0C6 /* NaviView.m in Sources */,
+				D83639BD1CD0932000CC4AC0 /* Comment.m in Sources */,
 				D86AFDE91CBF7D6F006F1602 /* SearchResultsRollView.m in Sources */,
 				D81281191CAA8532007CF08B /* FiltersViewController.m in Sources */,
 				1F1837751CCDFCB200933CA7 /* ChangeSumaryViewController.m in Sources */,
@@ -2212,6 +2274,7 @@
 				D81281281CAA8532007CF08B /* FBPictureView.m in Sources */,
 				1F4061A81CC9E92C00D6E9B0 /* ImproView.m in Sources */,
 				D836397A1CCDE5A400CC4AC0 /* SceneInfoLocation.m in Sources */,
+				D83639BE1CD0932000CC4AC0 /* CommentData.m in Sources */,
 				D81281301CAA8532007CF08B /* DiscoverViewController.m in Sources */,
 				D81281151CAA8532007CF08B /* AddUrlViewController.m in Sources */,
 				D81281551CAA8532007CF08B /* HttpTool.m in Sources */,
@@ -2228,11 +2291,14 @@
 				D8B0112B1CCA228A008A63B7 /* InfoUseSceneTableViewCell.m in Sources */,
 				D81281101CAA8532007CF08B /* AppDelegate.mm in Sources */,
 				D81281221CAA8532007CF08B /* AddUrlView.m in Sources */,
+				D83639B31CD0661E00CC4AC0 /* FBCityViewController.m in Sources */,
 				D8035FE41CBDFC16001920F9 /* FiuHeaderTableViewCell.m in Sources */,
 				D8B011161CC878A1008A63B7 /* GoodsCategoryView.m in Sources */,
 				D81281231CAA8532007CF08B /* CameraView.m in Sources */,
+				D83639C01CD0932000CC4AC0 /* CommentUser.m in Sources */,
 				D812811F1CAA8532007CF08B /* FBFilters.m in Sources */,
 				1FEB71751CC88B5D00CF34F3 /* FindeFirendTwoModel.m in Sources */,
+				D83639A41CD05A5E00CC4AC0 /* FiuSceneInfoUserInfo.m in Sources */,
 				1FEB71721CC8802800CF34F3 /* InvitationModel.m in Sources */,
 				D81281271CAA8532007CF08B /* FBPictureCollectionViewCell.m in Sources */,
 				D8035F3B1CB784B3001920F9 /* UILable+Frame.m in Sources */,

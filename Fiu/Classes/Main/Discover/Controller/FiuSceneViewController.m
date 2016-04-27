@@ -68,7 +68,7 @@ static NSString *const URLFiuSceneList = @"/scene_sight/";
         self.fiuSceneData = [[FiuSceneInfoData alloc] initWithDictionary:[result valueForKey:@"data"]];
         [self.fiuSceneTable reloadData];
         [SVProgressHUD dismiss];
-        
+
     } failure:^(FBRequest *request, NSError *error) {
         
     }];
@@ -78,6 +78,7 @@ static NSString *const URLFiuSceneList = @"/scene_sight/";
 - (void)networkFiuSceneListData {
     self.fiuSceneListRequest = [FBAPI getWithUrlString:URLFiuSceneList requestDictionary:@{@"scene_id":self.fiuSceneId, @"stick":@"0", @"size":@"10",@"page":@(self.currentpageNum + 1)} delegate:self];
     [self.fiuSceneListRequest startRequestSuccess:^(FBRequest *request, id result) {
+        NSLog(@"%@", result);
         NSArray * sceneArr = [[result valueForKey:@"data"] valueForKey:@"rows"];
         for (NSDictionary * sceneDic in sceneArr) {
             HomeSceneListRow * homeSceneModel = [[HomeSceneListRow alloc] initWithDictionary:sceneDic];
@@ -87,8 +88,11 @@ static NSString *const URLFiuSceneList = @"/scene_sight/";
         [self.fiuSceneTable reloadData];
         self.currentpageNum = [[[result valueForKey:@"data"] valueForKey:@"current_page"] integerValue];
         self.totalPageNum = [[[result valueForKey:@"data"] valueForKey:@"total_page"] integerValue];
-        [self requestIsLastData:self.fiuSceneTable currentPage:self.currentpageNum withTotalPage:self.totalPageNum];
-
+        if (self.totalPageNum > 1) {
+            [self addMJRefresh:self.fiuSceneTable];
+            [self requestIsLastData:self.fiuSceneTable currentPage:self.currentpageNum withTotalPage:self.totalPageNum];
+        }
+        
     } failure:^(FBRequest *request, NSError *error) {
         
     }];
@@ -96,6 +100,7 @@ static NSString *const URLFiuSceneList = @"/scene_sight/";
 
 //  判断是否为最后一条数据
 - (void)requestIsLastData:(UITableView *)table currentPage:(NSInteger )current withTotalPage:(NSInteger)total {
+    NSLog(@"＝＝＝ %zi | %zi", current, total);
     BOOL isLastPage = (current == total);
     
     if (!isLastPage) {
@@ -160,7 +165,6 @@ static NSString *const URLFiuSceneList = @"/scene_sight/";
         _fiuSceneTable.showsVerticalScrollIndicator = NO;
         _fiuSceneTable.separatorStyle = UITableViewCellSeparatorStyleNone;
         _fiuSceneTable.backgroundColor = [UIColor whiteColor];
-        [self addMJRefresh:_fiuSceneTable];
     }
     return _fiuSceneTable;
 }
@@ -344,6 +348,11 @@ static NSString *const URLFiuSceneList = @"/scene_sight/";
     PictureToolViewController * pictureToolVC = [[PictureToolViewController alloc] init];
     pictureToolVC.createType = @"fScene";
     [self presentViewController:pictureToolVC animated:YES completion:nil];
+}
+
+- (void)viewWillDisappear:(BOOL)animated {
+    [super viewWillDisappear:animated];
+    [SVProgressHUD dismiss];
 }
 
 @end
