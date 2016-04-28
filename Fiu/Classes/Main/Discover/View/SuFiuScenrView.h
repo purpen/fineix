@@ -11,7 +11,7 @@
 
 @interface SuFiuScenrView : UIView
 
-@pro_strong UIButton            *   suFiuBtn;   // 订阅情景按钮
+@pro_strong UIButton            *   suFiuBtn;   //  订阅情景按钮
 @pro_strong UILabel             *   line;       //  分割线
 
 @end

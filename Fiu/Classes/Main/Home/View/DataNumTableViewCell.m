@@ -24,23 +24,11 @@
 
 #pragma mark - 
 - (void)setSceneDataNum:(SceneInfoData *)model {
-    if (model.viewCount/1000 > 1) {
-        [_lookBtn setTitle:[NSString stringWithFormat:@"%zik", model.viewCount/1000] forState:(UIControlStateNormal)];
-    } else {
-        [_lookBtn setTitle:[NSString stringWithFormat:@"%zi", model.viewCount] forState:(UIControlStateNormal)];
-    }
+
+    [_lookBtn setTitle:[self abouText:_lookBtn withText:model.viewCount] forState:(UIControlStateNormal)];
+    [_likeBtn setTitle:[self abouText:_likeBtn withText:model.loveCount]  forState:(UIControlStateNormal)];
+    [_commentBtn setTitle:[self abouText:_commentBtn withText:model.commentCount] forState:(UIControlStateNormal)];
     
-    if (model.loveCount/1000 > 1) {
-        [_likeBtn setTitle:[NSString stringWithFormat:@"%zik", model.loveCount/1000] forState:(UIControlStateNormal)];
-    } else {
-        [_likeBtn setTitle:[NSString stringWithFormat:@"%zi", model.loveCount] forState:(UIControlStateNormal)];
-    }
-    
-    if (model.commentCount/1000 > 1) {
-        [_commentBtn setTitle:[NSString stringWithFormat:@"%zik", model.commentCount/1000] forState:(UIControlStateNormal)];
-    } else {
-        [_commentBtn setTitle:[NSString stringWithFormat:@"%zi", model.commentCount] forState:(UIControlStateNormal)];
-    }
 }
 
 #pragma mark - 设置cell的UI
@@ -56,14 +44,14 @@
     [_likeBtn mas_makeConstraints:^(MASConstraintMaker *make) {
         make.size.mas_equalTo(CGSizeMake(70, 44));
         make.centerY.equalTo(self);
-        make.left.equalTo(_lookBtn.mas_right).with.offset(0);
+        make.left.equalTo(_lookBtn.mas_right).with.offset(10);
     }];
     
     [self addSubview:self.commentBtn];
     [_commentBtn mas_makeConstraints:^(MASConstraintMaker *make) {
         make.size.mas_equalTo(CGSizeMake(70, 44));
         make.centerY.equalTo(self);
-        make.left.equalTo(_likeBtn.mas_right).with.offset(0);
+        make.left.equalTo(_likeBtn.mas_right).with.offset(10);
     }];
     
     [self addSubview:self.moreBtn];
@@ -83,6 +71,7 @@
         [_lookBtn setImage:[UIImage imageNamed:@"lookNum"] forState:(UIControlStateNormal)];
         [_lookBtn setImageEdgeInsets:(UIEdgeInsetsMake(0, -10, 0, 0))];
         _lookBtn.titleLabel.font = [UIFont systemFontOfSize:Font_Number];
+        [_lookBtn setTitleEdgeInsets:(UIEdgeInsetsMake(-15, 0, 0, 0))];
         [_lookBtn setTitleColor:[UIColor colorWithHexString:tabBarTitle alpha:1] forState:(UIControlStateNormal)];
     }
     return _lookBtn;
@@ -95,6 +84,7 @@
         [_likeBtn setImage:[UIImage imageNamed:@"likeNum"] forState:(UIControlStateNormal)];
         [_likeBtn setImageEdgeInsets:(UIEdgeInsetsMake(0, -10, 0, 0))];
         _likeBtn.titleLabel.font = [UIFont systemFontOfSize:Font_Number];
+        [_likeBtn setTitleEdgeInsets:(UIEdgeInsetsMake(-15, 0, 0, 0))];
         [_likeBtn setTitleColor:[UIColor colorWithHexString:tabBarTitle alpha:1] forState:(UIControlStateNormal)];
     }
     return _likeBtn;
@@ -107,9 +97,30 @@
         [_commentBtn setImage:[UIImage imageNamed:@"commentNum"] forState:(UIControlStateNormal)];
         [_commentBtn setImageEdgeInsets:(UIEdgeInsetsMake(0, -10, 0, 0))];
         _commentBtn.titleLabel.font = [UIFont systemFontOfSize:Font_Number];
+        [_commentBtn setTitleEdgeInsets:(UIEdgeInsetsMake(-15, 0, 0, 0))];
         [_commentBtn setTitleColor:[UIColor colorWithHexString:tabBarTitle alpha:1] forState:(UIControlStateNormal)];
     }
     return _commentBtn;
+}
+
+//  数字宽度
+- (NSString *)abouText:(UIButton *)button withText:(NSInteger)num {
+    if (num/1000 > 1) {
+        NSString * numText = [NSString stringWithFormat:@"%zik", num/1000];
+        CGFloat textLength = [numText boundingRectWithSize:CGSizeMake(320, 1000) options:(NSStringDrawingUsesLineFragmentOrigin) attributes:nil context:nil].size.width;
+        [button mas_updateConstraints:^(MASConstraintMaker *make) {
+            make.width.mas_equalTo(textLength + 35);
+        }];
+        return numText;
+        
+    } else {
+        NSString * numText = [NSString stringWithFormat:@"%zi", num];
+        CGFloat textLength = [numText boundingRectWithSize:CGSizeMake(320, 1000) options:(NSStringDrawingUsesLineFragmentOrigin) attributes:nil context:nil].size.width;
+        [button mas_updateConstraints:^(MASConstraintMaker *make) {
+            make.width.mas_equalTo(textLength + 30);
+        }];
+        return numText;
+    }
 }
 
 #pragma mark - 更多
