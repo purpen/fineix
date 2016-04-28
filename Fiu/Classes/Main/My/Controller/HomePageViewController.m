@@ -197,6 +197,7 @@
 -(void)clickMessageBtn:(UIButton*)sender{
     DirectMessagesViewController *vc = [[DirectMessagesViewController alloc] init];
     vc.nickName = @"boc747";
+
     [self.navigationController pushViewController:vc animated:YES];
 }
 

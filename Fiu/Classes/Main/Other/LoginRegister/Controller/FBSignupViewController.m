@@ -25,6 +25,7 @@
 #import "SignupView.h"
 #import "FBLoginViewController.h"
 #import "SubscribeInterestedCollectionViewController.h"
+#import "ImprovViewController.h"
 
 
 @interface FBSignupViewController ()<FBRequestDelegate,UITextFieldDelegate>
@@ -52,7 +53,8 @@ NSString *const LoginURL = @"/auth/login";//登录接口
     _signupView = [SignupView getSignupView];
     _signupView.frame = CGRectMake(0, 0, SCREEN_WIDTH, 244/667.0*SCREEN_HEIGHT);
     CGRect frame = _signupView.frame;
-    frame.origin.y = 1000;
+    _signupView.hidden = YES;
+    frame.origin.y = 117.0/667.0*SCREEN_HEIGHT;
     _signupView.frame = frame;
     [self.view addSubview:_signupView];
     _signupView.phoneNumTF.delegate = self;
@@ -128,7 +130,7 @@ NSString *const LoginURL = @"/auth/login";//登录接口
         CGRect frame = _signupView.frame;
         frame.origin.y = 117.0/667.0*SCREEN_HEIGHT;
         _signupView.frame = frame;
-        
+        _signupView.hidden = NO;
     } completion:^(BOOL finished) {
         //成为第一响应者
         [_signupView.phoneNumTF becomeFirstResponder];
@@ -295,7 +297,7 @@ NSString *const LoginURL = @"/auth/login";//登录接口
             entity.isLogin = YES;
             
             
-            [SVProgressHUD showSuccessWithStatus:NSLocalizedString(@"registeredSuccessfully", nil)];
+            [SVProgressHUD showSuccessWithStatus:@"登录成功"];
             //推荐感兴趣的情景
             NSDictionary *identifyDict = [[dataDic objectForKey:@"user"] objectForKey:@"identify"];
             if ([[identifyDict objectForKey:@"is_scene_subscribe"] isEqualToNumber:@0]) {
@@ -303,16 +305,13 @@ NSString *const LoginURL = @"/auth/login";//登录接口
                 SubscribeInterestedCollectionViewController *subscribeVC = [[SubscribeInterestedCollectionViewController alloc] init];
                 [self.navigationController pushViewController:subscribeVC animated:YES];
             }else{
-                //已经订阅过，直接个人中心
-                //跳回个人主页
-                //跳回个人主页
-                [self dismissViewControllerAnimated:YES completion:nil];
-                [self.tabBarController setSelectedIndex:3];
+                //跳转到个人信息完善页面
+                ImprovViewController *improveVC = [[ImprovViewController alloc] init];
+                [self.navigationController pushViewController:improveVC animated:YES];
                 
             }
-
             
-
+            
         }else{
             //如果用户不存在,提示用户是否进行绑定
             TYAlertView *alertView = [TYAlertView alertViewWithTitle:@"是否进行用户绑定" message:nil];
@@ -365,11 +364,9 @@ NSString *const LoginURL = @"/auth/login";//登录接口
                         SubscribeInterestedCollectionViewController *subscribeVC = [[SubscribeInterestedCollectionViewController alloc] init];
                         [self.navigationController pushViewController:subscribeVC animated:YES];
                     }else{
-                        //已经订阅过，直接个人中心
-                        //跳回个人主页
-                        //跳回个人主页
-                        [self dismissViewControllerAnimated:YES completion:nil];
-                        [self.tabBarController setSelectedIndex:3];
+                        //跳转到个人信息完善页面
+                        ImprovViewController *improveVC = [[ImprovViewController alloc] init];
+                        [self.navigationController pushViewController:improveVC animated:YES];
                         
                     }
                     
@@ -382,7 +379,7 @@ NSString *const LoginURL = @"/auth/login";//登录接口
                     [self dismissViewControllerAnimated:YES completion:nil];
                     [self.tabBarController setSelectedIndex:3];
                 }];
-
+                
             }]];
             
             [alertView addAction:[TYAlertAction actionWithTitle:NSLocalizedString(@"determine", nil) style:TYAlertActionStyleDestructive handler:^(TYAlertAction *action) {
@@ -403,7 +400,7 @@ NSString *const LoginURL = @"/auth/login";//登录接口
             
             
             
-           
+            
         }
     } failure:^(FBRequest *request, NSError *error) {
         //如果请求失败，提示错误信息
@@ -424,8 +421,9 @@ NSString *const LoginURL = @"/auth/login";//登录接口
     if (self.topView.hidden == YES) {
         [UIView animateWithDuration:0.5 animations:^{
             CGRect frame = _signupView.frame;
-            frame.origin.y = 1000;
+            frame.origin.y = 117.0/667.0*SCREEN_HEIGHT;
             _signupView.frame = frame;
+            _signupView.hidden = YES;
         } completion:^(BOOL finished) {
             self.topView.hidden = NO;
         }];

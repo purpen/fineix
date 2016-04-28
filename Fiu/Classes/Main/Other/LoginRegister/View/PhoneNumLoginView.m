@@ -39,16 +39,17 @@
         _loginBtn.layer.masksToBounds = YES;
         _loginBtn.layer.cornerRadius = 3;
         [_loginBtn setTitle:@"登录" forState:UIControlStateNormal];
+        _loginBtn.titleLabel.font = [UIFont systemFontOfSize:17];
         [_loginBtn setTitleColor:[UIColor colorWithHexString:fineixColor] forState:UIControlStateNormal];
         _loginBtn.titleLabel.font = [UIFont systemFontOfSize:13];
         _loginBtn.backgroundColor = [UIColor whiteColor];
-        //快速注册按钮
-        _soonBtn = [[UIButton alloc] initWithFrame:CGRectMake(0, 346/2/667.0*SCREEN_HEIGHT, 120/2/667.0*SCREEN_HEIGHT, 25/667.0*SCREEN_HEIGHT)];
-        CGRect soonBtnframe = _soonBtn.frame;
-        soonBtnframe.origin.x = _phoneTF.frame.origin.x;
-        _soonBtn.frame = soonBtnframe;
-        [_soonBtn setTitle:@"快速注册" forState:UIControlStateNormal];
-        _soonBtn.titleLabel.font = [UIFont systemFontOfSize:12];
+//        //快速注册按钮
+//        _soonBtn = [[UIButton alloc] initWithFrame:CGRectMake(0, 346/2/667.0*SCREEN_HEIGHT, 120/2/667.0*SCREEN_HEIGHT, 25/667.0*SCREEN_HEIGHT)];
+//        CGRect soonBtnframe = _soonBtn.frame;
+//        soonBtnframe.origin.x = _phoneTF.frame.origin.x;
+//        _soonBtn.frame = soonBtnframe;
+//        [_soonBtn setTitle:@"快速注册" forState:UIControlStateNormal];
+//        _soonBtn.titleLabel.font = [UIFont systemFontOfSize:12];
         //忘记密码按钮
         _forgetBtn = [[UIButton alloc] initWithFrame:CGRectMake(0, 346/2/667.0*SCREEN_HEIGHT, 150/2/667.0*SCREEN_HEIGHT, 20/667.0*SCREEN_HEIGHT)];
         CGRect forgetBtnframe = _forgetBtn.frame;
@@ -61,7 +62,7 @@
         [self addSubview:_phoneTF];
         [self addSubview:_pwdTF];
         [self addSubview:_loginBtn];
-        [self addSubview:_soonBtn];
+        //[self addSubview:_soonBtn];
         [self addSubview:_forgetBtn];
     }
     return self;

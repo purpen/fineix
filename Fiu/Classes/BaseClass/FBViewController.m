@@ -149,6 +149,13 @@
 #pragma mark - 添加Nav左边的按钮
 - (void)addBarItemRightBarButton:(NSString *)title image:(NSString *)image isTransparent:(BOOL)transparent {
     [self.rightBtn setImage:[UIImage imageNamed:image] forState:(UIControlStateNormal)];
+    [self.rightBtn setTitle:title forState:UIControlStateNormal];
+    if ([title isEqualToString:@"全部城市"]) {
+        [self.rightBtn setTitleColor:[UIColor colorWithHexString:fineixColor] forState:UIControlStateNormal];
+        self.rightBtn.imageEdgeInsets = UIEdgeInsetsMake(0, -30, 0, 0);
+        self.rightBtn.titleEdgeInsets = UIEdgeInsetsMake(0, -25, 0, 0);
+        self.rightBtn.titleLabel.font = [UIFont systemFontOfSize:12];
+    }
     if (transparent == NO) {
         self.navView.hidden = NO;
         [self.navView addSubview:self.rightBtn];

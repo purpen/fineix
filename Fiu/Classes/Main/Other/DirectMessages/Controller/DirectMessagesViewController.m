@@ -45,31 +45,36 @@
     //获取数据
     UserInfoEntity *entity = [UserInfoEntity defaultUserInfoEntity];
     FBRequest *request = [FBAPI postWithUrlString:@"/message" requestDictionary:@{@"page":@1,@"size":@10,@"from_user_id":entity.userId,@"type":@0} delegate:self];
+    request.flag = @"/message";
     [request startRequest];
     
     
 }
 
--(void)textViewDidBeginEditing:(UITextView *)textView{
-   
-}
 
 -(void)requestSucess:(FBRequest *)request result:(id)result{
-    if ([result objectForKey:@"success"]) {
-        NSDictionary *dataDict = [result objectForKey:@"data"];
-        NSArray *mailboxAry = [dataDict objectForKey:@"mailbox"];
-        for (NSDictionary *mailboxDict in mailboxAry) {
-            AXModel *model = [[AXModel alloc] init];
-            model.type = AXModelTypeMe;
-            model.content = mailboxDict[@"content"];
-            model.created_at = mailboxDict[@"created_at"];
-            [_modelAry addObject:model];
+    if ([request.flag isEqualToString:@"/message"]) {
+        if ([result objectForKey:@"success"]) {
+            [_modelAry removeAllObjects];
+            NSDictionary *dataDict = [result objectForKey:@"data"];
+            NSArray *mailboxAry = [dataDict objectForKey:@"mailbox"];
+            for (NSDictionary *mailboxDict in mailboxAry) {
+                AXModel *model = [[AXModel alloc] init];
+                model.type = AXModelTypeMe;
+                model.content = mailboxDict[@"content"];
+                model.created_at = mailboxDict[@"created_at"];
+                [_modelAry addObject:model];
+            }
+            [self.myTableView reloadData];
         }
+    }
+    if ([request.flag isEqualToString:@"/message/ajax_message"]) {
+        NSLog(@"result %@",result);
     }
 }
 
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
-    return _modelAry.count;
+    return 3;
 }
 
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
@@ -105,6 +110,18 @@
 - (IBAction)clickExpressionBtn:(UIButton *)sender {
 }
 - (IBAction)clickSendBtn:(UIButton *)sender {
+    self.userId = 924811;
+    FBRequest *request = [FBAPI postWithUrlString:@"/message/ajax_message" requestDictionary:@{@"to_user_id":@(self.userId),@"content":self.chatTFV.text} delegate:self];
+    request.flag = @"/message/ajax_message";
+    [request startRequest];
+    
+    UserInfoEntity *entity = [UserInfoEntity defaultUserInfoEntity];
+    FBRequest *request1 = [FBAPI postWithUrlString:@"/message" requestDictionary:@{@"page":@1,@"size":@10,@"from_user_id":entity.userId,@"type":@0} delegate:self];
+    request1.flag = @"/message";
+    [request1 startRequest];
+    
+    [self.chatTFV resignFirstResponder];
+    self.chatTFV.text = @"";
 }
 
 - (void)didReceiveMemoryWarning {

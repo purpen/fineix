@@ -17,7 +17,7 @@
 #import <SDWebImage/UIImageView+WebCache.h>
 #import "SVProgressHUD.h"
 #import "NumView.h"
-#import "ImproveViewController.h"
+#import "ImprovViewController.h"
 
 #define kScreenHeight  ([UIScreen mainScreen].bounds.size.height)
 #define kScreenWidth   ([UIScreen mainScreen].bounds.size.width)
@@ -182,7 +182,7 @@ static NSString * const reuseIdentifier = @"Cell";
 //下一步按钮
 -(void)clickNextBtn:(UIButton*)sender{
     //跳转到个人信息完善页面
-    ImproveViewController *improveVC = [[ImproveViewController alloc] init];
+    ImprovViewController *improveVC = [[ImprovViewController alloc] init];
     [self.navigationController pushViewController:improveVC animated:YES];
 }
 

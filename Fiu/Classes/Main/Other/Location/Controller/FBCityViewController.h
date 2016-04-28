@@ -10,4 +10,6 @@
 
 @interface FBCityViewController : FBViewController
 
+@property(nonatomic,strong) UITableView *myTableView;
+
 @end

@@ -158,7 +158,7 @@ static NSString *const follows = @"/follow";
     [_homeScrollView addSubview:bottomV];
     //京东图标
     AppBtnView *appV = [AppBtnView getAppBtnView];
-    appV.frame = CGRectMake(0, 200+5+60+5+194+2+134, SCREEN_WIDTH, 91);
+    appV.frame = CGRectMake(0, (200+5+60+5+194+2+134+64)/667.0*SCREEN_HEIGHT, SCREEN_WIDTH, 91/667.0*SCREEN_HEIGHT);
     [_homeScrollView addSubview:appV];
     //scrollView滑动范围
     _homeScrollView.contentSize = CGSizeMake(0, CGRectGetMaxY(appV.frame)+91);
@@ -172,7 +172,7 @@ static NSString *const follows = @"/follow";
     if ([result objectForKey:@"success"]) {
         NSDictionary *dataDict = [result objectForKey:@"data"];
         NSArray *rowsAry = [dataDict objectForKey:@"rows"];
-        _chanelV.focusNumLabel.text = [NSString stringWithFormat:@"%d",rowsAry.count];
+        _chanelV.focusNumLabel.text = [NSString stringWithFormat:@"%lu",(unsigned long)rowsAry.count];
     }
 }
 
