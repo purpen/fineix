@@ -14,6 +14,14 @@
 #import "GoodsCarViewController.h"
 #import "GoodsTableViewCell.h"
 
+static NSString *const URLTagS = @"/scene_tags/getlist";
+
+@interface MallViewController()
+
+@pro_strong NSMutableArray              *   tagsList;
+
+@end
+
 @implementation MallViewController
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -26,7 +34,26 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    [self networkTagsListData];
     [self setMallViewUI];
+    
+}
+
+#pragma mark - 网络请求
+#pragma mark 标签列表
+- (void)networkTagsListData {
+    self.tagsRequest = [FBAPI getWithUrlString:URLTagS requestDictionary:@{@"is_hot":@"1", @"sort":@"5", @"page":@"1", @"size":@"50"} delegate:self];
+    [self.tagsRequest startRequestSuccess:^(FBRequest *request, id result) {
+        NSArray * tagsArr = [[result valueForKey:@"data"] valueForKey:@"rows"];
+        for (NSDictionary * tagsDic in tagsArr) {
+            HotTagsRow * tagsModel = [[HotTagsRow alloc] initWithDictionary:tagsDic];
+            [self.tagsList addObject:tagsModel];
+        }
+        [self.mallTableView reloadData];
+        
+    } failure:^(FBRequest *request, NSError *error) {
+        [SVProgressHUD showErrorWithStatus:[error localizedDescription]];
+    }];
 }
 
 
@@ -91,10 +118,8 @@
         } else if (indexPath.row == 1) {
             static NSString * mallGoodsTagCellId = @"mallGoodsTagCellId";
             FiuTagTableViewCell * cell = [tableView dequeueReusableCellWithIdentifier:mallGoodsTagCellId];
-            if (!cell) {
-                cell = [[FiuTagTableViewCell alloc] initWithStyle:(UITableViewCellStyleDefault) reuseIdentifier:mallGoodsTagCellId];
-            }
-            [cell setMallUI];
+            cell = [[FiuTagTableViewCell alloc] initWithStyle:(UITableViewCellStyleDefault) reuseIdentifier:mallGoodsTagCellId];
+            [cell setHotTagsData:self.tagsList];
             cell.nav = self.navigationController;
             return cell;
             
@@ -192,4 +217,17 @@
     GoodsCarViewController * goodsCarVC = [[GoodsCarViewController alloc] init];
     [self.navigationController pushViewController:goodsCarVC animated:YES];
 }
+
+- (NSMutableArray *)tagsList {
+    if (!_tagsList) {
+        _tagsList = [NSMutableArray array];
+    }
+    return _tagsList;
+}
+
+- (void)viewWillDisappear:(BOOL)animated {
+    [super viewWillDisappear:animated];
+    [SVProgressHUD dismiss];
+}
+
 @end

@@ -22,6 +22,7 @@ static NSString *const URLSceneInfo = @"/scene_sight/view";
 static NSString *const URLCommentList = @"/comment/getlist";
 static NSString *const URLLikeScenePeople = @"/favorite";
 static NSString *const URLLikeScene = @"/favorite/ajax_sight_love";
+static NSString *const URLCancelLike = @"/favorite/ajax_cancel_sight_love";
 
 @interface SceneInfoViewController ()
 
@@ -44,6 +45,8 @@ static NSString *const URLLikeScene = @"/favorite/ajax_sight_love";
     self.automaticallyAdjustsScrollViewInsets = NO;
     
     [self networkRequestData];
+    [self networkCommentData];
+    [self networkLikePeopleData];
     
     self.textMar = [NSMutableArray arrayWithObjects:@"家是我们人生的驿站，是我们生活的乐园，也是我们避风的港湾。", @"家是我们人生的驿站", @"家是我们人生的驿站，是我们生活的乐园，也是我们避风的港湾。它更是一条逼你拼命挣钱的鞭子，让你为它拉车犁地。家又是一个充满亲情的地方，就会有一种亲情感回荡心头。在风雨人生中，渐渐地形成了一种强烈的感觉：我爱家，更离不开家。",nil];
     
@@ -72,9 +75,12 @@ static NSString *const URLLikeScene = @"/favorite/ajax_sight_love";
     self.sceneInfoRequest = [FBAPI getWithUrlString:URLSceneInfo requestDictionary:@{@"id":self.sceneId} delegate:self];
     [self.sceneInfoRequest startRequestSuccess:^(FBRequest *request, id result) {
         self.sceneInfoModel = [[SceneInfoData alloc] initWithDictionary:[result valueForKey:@"data"]];
-        [self networkCommentData];
-        [self networkLikePeopleData];
         [self.sceneTableView reloadData];
+        if ([[[result valueForKey:@"data"] valueForKey:@"is_love"] integerValue] == 0) {
+            self.likeScene.likeBtn.selected = NO;
+        } else if ([[[result valueForKey:@"data"] valueForKey:@"is_love"] integerValue] == 1) {
+            self.likeScene.likeBtn.selected = YES;
+        }
         [SVProgressHUD dismiss];
         
     } failure:^(FBRequest *request, NSError *error) {
@@ -111,14 +117,27 @@ static NSString *const URLLikeScene = @"/favorite/ajax_sight_love";
 
 #pragma mark 给此场景点赞
 - (void)networkLikeSceneData {
-    self.likeSceneRequest = [FBAPI postWithUrlString:URLLikeScene requestDictionary:@{@"id":self.sceneId} delegate:self];
-    [self.likeSceneRequest startRequestSuccess:^(FBRequest *request, id result) {
-        [SVProgressHUD showSuccessWithStatus:@"点赞成功"];
-        NSLog(@"＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝  点赞：  %@", result);
-        
-    } failure:^(FBRequest *request, NSError *error) {
-        [SVProgressHUD showErrorWithStatus:[error localizedDescription]];
-    }];
+    if (self.likeScene.likeBtn.selected == NO) {
+        self.likeScene.likeBtn.selected = YES;
+        self.likeSceneRequest = [FBAPI postWithUrlString:URLLikeScene requestDictionary:@{@"id":self.sceneId} delegate:self];
+        [self.likeSceneRequest startRequestSuccess:^(FBRequest *request, id result) {
+            [SVProgressHUD showSuccessWithStatus:[result valueForKey:@"message"]];
+            
+        } failure:^(FBRequest *request, NSError *error) {
+            [SVProgressHUD showErrorWithStatus:[error localizedDescription]];
+        }];
+    
+    } else if (self.likeScene.likeBtn.selected == YES) {
+        self.likeScene.likeBtn.selected = NO;
+        self.cancelLikeRequest = [FBAPI postWithUrlString:URLCancelLike requestDictionary:@{@"id":self.sceneId} delegate:self];
+        [self.cancelLikeRequest startRequestSuccess:^(FBRequest *request, id result) {
+            [SVProgressHUD showSuccessWithStatus:[result valueForKey:@"message"]];
+            
+        } failure:^(FBRequest *request, NSError *error) {
+            [SVProgressHUD showErrorWithStatus:[error localizedDescription]];
+        }];
+    }
+    
 }
 
 #pragma mark - 点赞按钮

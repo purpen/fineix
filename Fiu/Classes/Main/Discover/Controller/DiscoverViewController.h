@@ -18,6 +18,7 @@
 @pro_strong FBRequest               *   rollImgRequest;
 @pro_strong FBRequest               *   fiuSceneRequest;
 @pro_strong FBRequest               *   sceneListRequest;
+@pro_strong FBRequest               *   tagsRequest;
 @pro_assign NSInteger                   currentpageNum;
 @pro_assign NSInteger                   totalPageNum;
 

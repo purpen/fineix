@@ -10,14 +10,17 @@
 #import "FiuSceneTableViewCell.h"
 #import "SceneListTableViewCell.h"
 #import "FiuTagTableViewCell.h"
+#import "FiuPeopleTableViewCell.h"
 #import "FBCityViewController.h"
 #import "SearchViewController.h"
 #import "SceneInfoViewController.h"
 #import "FiuSceneRow.h"
+#import "HotTagsData.h"
 
 static NSString *const URLDiscoverSlide = @"/gateway/slide";
 static NSString *const URLFiuScene = @"/scene_scene/";
 static NSString *const URLSceneList = @"/scene_sight/";
+static NSString *const URLTagS = @"/scene_tags/getlist";
 
 @interface DiscoverViewController()
 
@@ -25,6 +28,7 @@ static NSString *const URLSceneList = @"/scene_sight/";
 @pro_strong NSMutableArray              *   fiuSceneIdList;
 @pro_strong NSMutableArray              *   sceneList;
 @pro_strong NSMutableArray              *   sceneIdList;
+@pro_strong NSMutableArray              *   tagsList;
 
 @end
 
@@ -43,16 +47,15 @@ static NSString *const URLSceneList = @"/scene_sight/";
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    self.currentpageNum = 0;
     [self networkRollImgData];
+    [self networkTagsListData];
     [self networkFiuSceneData];
-//    [self networkSceneListData];
     
     [self setDiscoverViewUI];
 }
 
 #pragma mark - 网络请求
-//  轮播图
+#pragma mark 轮播图
 - (void)networkRollImgData {
     self.rollImgRequest = [FBAPI getWithUrlString:URLDiscoverSlide requestDictionary:@{@"name":@"app_fiu_sight_index_slide"} delegate:self];
     [self.rollImgRequest startRequestSuccess:^(FBRequest *request, id result) {
@@ -63,7 +66,23 @@ static NSString *const URLSceneList = @"/scene_sight/";
     }];
 }
 
-//  情景列表
+#pragma mark 标签列表
+- (void)networkTagsListData {
+    self.tagsRequest = [FBAPI getWithUrlString:URLTagS requestDictionary:@{@"is_hot":@"1", @"sort":@"2", @"page":@"1", @"size":@"50"} delegate:self];
+    [self.tagsRequest startRequestSuccess:^(FBRequest *request, id result) {
+        NSArray * tagsArr = [[result valueForKey:@"data"] valueForKey:@"rows"];
+        for (NSDictionary * tagsDic in tagsArr) {
+            HotTagsRow * tagsModel = [[HotTagsRow alloc] initWithDictionary:tagsDic];
+            [self.tagsList addObject:tagsModel];
+        }
+        [self.discoverTableView reloadData];
+        
+    } failure:^(FBRequest *request, NSError *error) {
+        [SVProgressHUD showErrorWithStatus:[error localizedDescription]];
+    }];
+}
+
+#pragma mark 情景列表
 - (void)networkFiuSceneData {
     [SVProgressHUD show];
     self.fiuSceneRequest = [FBAPI getWithUrlString:URLFiuScene requestDictionary:@{@"stick":@"1"} delegate:self];
@@ -82,7 +101,7 @@ static NSString *const URLSceneList = @"/scene_sight/";
     }];
 }
 
-//  场景列表
+#pragma mark 场景列表
 - (void)networkSceneListData {
     self.sceneListRequest = [FBAPI getWithUrlString:URLSceneList requestDictionary:@{@"sort":@"0", @"size":@"10", @"page":@(self.currentpageNum + 1)} delegate:self];
     [self.sceneListRequest startRequestSuccess:^(FBRequest *request, id result) {
@@ -104,7 +123,7 @@ static NSString *const URLSceneList = @"/scene_sight/";
     }];
 }
 
-//  判断是否为最后一条数据
+#pragma mark 判断是否为最后一条数据
 - (void)requestIsLastData:(UITableView *)table currentPage:(NSInteger )current withTotalPage:(NSInteger)total {
     BOOL isLastPage = (current == total);
     if (!isLastPage) {
@@ -129,7 +148,7 @@ static NSString *const URLSceneList = @"/scene_sight/";
     [SVProgressHUD dismiss];
 }
 
-#pragma mark - 上拉加载 & 下拉刷新
+#pragma mark 上拉加载 & 下拉刷新
 - (void)addMJRefresh:(UITableView *)table {
 //    table.mj_header = [MJRefreshNormalHeader headerWithRefreshingBlock:^{
 //        self.currentpageNum = 0;
@@ -193,20 +212,18 @@ static NSString *const URLSceneList = @"/scene_sight/";
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     if (indexPath.section == 0) {
         if (indexPath.row == 0) {
-            static NSString * fiuFriendCellId = @"fiuFriendCellId";
-            UITableViewCell * cell = [tableView dequeueReusableCellWithIdentifier:fiuFriendCellId];
+            static NSString * fiuPeopleCellId = @"FiuPeopleCellId";
+            FiuPeopleTableViewCell * cell = [tableView dequeueReusableCellWithIdentifier:fiuPeopleCellId];
             if (!cell) {
-                cell = [[UITableViewCell alloc] initWithStyle:(UITableViewCellStyleDefault) reuseIdentifier:fiuFriendCellId];
+                cell = [[FiuPeopleTableViewCell alloc] initWithStyle:(UITableViewCellStyleDefault) reuseIdentifier:fiuPeopleCellId];
             }
             return cell;
             
         } else if (indexPath.row == 1) {
             static NSString * fiuSceneTagCellId = @"fiuSceneTagCellId";
             FiuTagTableViewCell * cell = [tableView dequeueReusableCellWithIdentifier:fiuSceneTagCellId];
-            if (!cell) {
-                cell = [[FiuTagTableViewCell alloc] initWithStyle:(UITableViewCellStyleDefault) reuseIdentifier:fiuSceneTagCellId];
-            }
-            [cell setUI];
+            cell = [[FiuTagTableViewCell alloc] initWithStyle:(UITableViewCellStyleDefault) reuseIdentifier:fiuSceneTagCellId];
+            [cell setHotTagsData:self.tagsList];
             cell.nav = self.navigationController;
             return cell;
         }
@@ -334,6 +351,13 @@ static NSString *const URLSceneList = @"/scene_sight/";
         _sceneIdList = [NSMutableArray array];
     }
     return _sceneIdList;
+}
+
+- (NSMutableArray *)tagsList {
+    if (!_tagsList) {
+        _tagsList = [NSMutableArray array];
+    }
+    return _tagsList;
 }
 
 - (void)viewWillDisappear:(BOOL)animated {

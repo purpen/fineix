@@ -15,11 +15,6 @@
     if (self) {
     
         [self addSubview:self.bgImage];
-        [_bgImage mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.size.mas_equalTo(CGSizeMake(SCREEN_WIDTH, SCREEN_HEIGHT));
-            make.top.equalTo(self.mas_top).with.offset(0);
-            make.left.equalTo(self.mas_left).with.offset(0);
-        }];
         
         self.selectionStyle = UITableViewCellSelectionStyleNone;
     }
@@ -36,13 +31,10 @@
     [self titleTextStyle:[NSString stringWithFormat:@"%@", model.title] withBgColor:fsceneColor];
     
     CGFloat cityLength = [model.address boundingRectWithSize:CGSizeMake(320, 1000) options:(NSStringDrawingUsesLineFragmentOrigin) attributes:nil context:nil].size.width;
-    [_city mas_updateConstraints:^(MASConstraintMaker *make) {
-        make.size.mas_equalTo(CGSizeMake(cityLength * 1.1, 15));
-    }];
-    
     self.city.text = model.address;
     [self.whereScene removeFromSuperview];
     [self.city mas_updateConstraints:^(MASConstraintMaker *make) {
+        make.size.mas_equalTo(CGSizeMake(cityLength * 1.1, 15));
         make.left.equalTo(self.mas_left).with.offset(40);
     }];
     
@@ -50,6 +42,7 @@
     [self.time mas_updateConstraints:^(MASConstraintMaker *make) {
         make.left.equalTo(self.city.mas_right).with.offset(10);
         make.bottom.equalTo(self.city.mas_bottom).with.offset(0);
+        make.top.equalTo(self.city.mas_top).with.offset(0);
     }];
     
     //  订阅的数量
@@ -59,7 +52,7 @@
     } else {
         self.goodNum.text = [NSString stringWithFormat:@"%zi人订阅", model.subscriptionCount];
     }
-    [self changeUserViewFrame];
+
 }
 
 #pragma mark -
@@ -80,69 +73,38 @@
         self.goodNum.text = [NSString stringWithFormat:@"%zi人赞过", model.loveCount];
     }
     
-    [self changeUserViewFrame];
 }
 
 #pragma mark - 场景图
 - (UIImageView *)bgImage {
     if (!_bgImage) {
-        _bgImage = [[UIImageView alloc] init];
+        _bgImage = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT)];
         _bgImage.contentMode = UIViewContentModeScaleAspectFill;
+        
+        //  添加渐变层
+        CAGradientLayer * shadow = [CAGradientLayer layer];
+        shadow.startPoint = CGPointMake(0, 0);
+        shadow.endPoint = CGPointMake(0, 1);
+        shadow.colors = @[(__bridge id)[UIColor clearColor].CGColor,
+                          (__bridge id)[UIColor blackColor].CGColor];
+        shadow.locations = @[@(0.5f), @(1.5f)];
+        shadow.frame = _bgImage.bounds;
+        [_bgImage.layer addSublayer:shadow];
         
         [_bgImage addSubview:self.userView];
     }
     return _bgImage;
 }
 
-//  改变UserView的位置
-- (void)changeUserViewFrame {
-    CGRect userViewRect = self.userView.frame;
-    userViewRect = CGRectMake(0, SCREEN_HEIGHT - 160, SCREEN_WIDTH, 130);
-
-    [UIView animateWithDuration:0.5 delay:0.5 options:(UIViewAnimationOptionTransitionNone) animations:^{
-        self.userView.frame = userViewRect;
-    } completion:^(BOOL finished) {
-        
-    }];
-}
-
 #pragma mark - 用户信息
 - (UIView *)userView {
     if (!_userView) {
-        _userView = [[UIView alloc] initWithFrame:CGRectMake(0, SCREEN_HEIGHT + 10, SCREEN_WIDTH, 130)];
-        
-        [_userView addSubview:self.titleText];
-        [_titleText mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.size.mas_equalTo(CGSizeMake(SCREEN_WIDTH - 40, 56));
-            make.top.equalTo(_userView.mas_top).with.offset(0);
-            make.left.equalTo(_userView.mas_left).with.offset(20);
-        }];
-        
-        [_userView addSubview:self.whereScene];
-        [_whereScene mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.size.mas_equalTo(CGSizeMake(130, 15));
-            make.top.equalTo(_titleText.mas_bottom).with.offset(10);
-            make.left.equalTo(_userView.mas_left).with.offset(40);
-        }];
-        
-        [_userView addSubview:self.time];
-        [_time mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.size.mas_equalTo(CGSizeMake(100, 15));
-            make.top.equalTo(_titleText.mas_bottom).with.offset(10);
-            make.left.equalTo(_whereScene.mas_right).with.offset(0);
-        }];
-        
-        [_userView addSubview:self.city];
-        [_city mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.size.mas_equalTo(CGSizeMake(75, 15));
-            make.top.equalTo(_time.mas_bottom).with.offset(5);
-            make.left.equalTo(_whereScene.mas_left).with.offset(0);
-        }];
+        _userView = [[UIView alloc] initWithFrame:CGRectMake(0, SCREEN_HEIGHT - 170, SCREEN_WIDTH, 170)];
         
         [_userView addSubview:self.userLeftView];
         [_userLeftView mas_makeConstraints:^(MASConstraintMaker *make) {
             make.size.mas_equalTo(CGSizeMake(SCREEN_WIDTH - 135.5 ,35));
-            make.top.equalTo(_city.mas_bottom).with.offset(20);
+            make.bottom.equalTo(_userView.mas_bottom).with.offset(-10);
             make.left.equalTo(_userView.mas_left).with.offset(0);
         }];
         
@@ -159,6 +121,35 @@
             make.bottom.equalTo(_userLeftView.mas_bottom).with.offset(0);
             make.left.equalTo(_userLeftView.mas_right).with.offset(0);
         }];
+        
+        [_userView addSubview:self.city];
+        [_city mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.size.mas_equalTo(CGSizeMake(75, 15));
+            make.bottom.equalTo(_userLeftView.mas_top).with.offset(-10);
+            make.left.equalTo(_userView.mas_left).with.offset(40);
+        }];
+        
+        [_userView addSubview:self.whereScene];
+        [_whereScene mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.size.mas_equalTo(CGSizeMake(130, 15));
+            make.bottom.equalTo(_city.mas_top).with.offset(-10);
+            make.left.equalTo(_userView.mas_left).with.offset(40);
+        }];
+        
+        [_userView addSubview:self.time];
+        [_time mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.size.mas_equalTo(CGSizeMake(150, 15));
+            make.bottom.equalTo(_city.mas_top).with.offset(-10);
+            make.left.equalTo(_whereScene.mas_right).with.offset(0);
+        }];
+        
+        [_userView addSubview:self.titleText];
+        [_titleText mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.size.mas_equalTo(CGSizeMake(SCREEN_WIDTH - 40, 56));
+            make.bottom.equalTo(_time.mas_top).with.offset(-10);
+            make.left.equalTo(_userView.mas_left).with.offset(20);
+        }];
+        
     }
     return _userView;
 }

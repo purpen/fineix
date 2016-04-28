@@ -17,6 +17,7 @@
 @pro_strong FBRequest               *   likePeopleRequest;
 @pro_strong FBRequest               *   sceneGoodsRequest;
 @pro_strong FBRequest               *   likeSceneRequest;
+@pro_strong FBRequest               *   cancelLikeRequest;
 
 @pro_strong NSString                *   sceneId;                //  场景ID
 @pro_strong UITableView             *   sceneTableView;         //  场景视图

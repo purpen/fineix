@@ -16,13 +16,15 @@ static const NSInteger  rollTagBtnTag = 97;
 - (instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier {
     self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
     if (self) {
+        
+        self.tagTitleArr = [NSMutableArray array];
+        
         [self addSubview:self.tagRollView];
         [_tagRollView mas_makeConstraints:^(MASConstraintMaker *make) {
             make.size.mas_equalTo(CGSizeMake(SCREEN_WIDTH, 90));
             make.top.equalTo(self.mas_top).with.offset(0);
             make.left.equalTo(self.mas_left).with.offset(0);
         }];
-        
         self.selectionStyle = UITableViewCellSelectionStyleNone;
         self.backgroundColor = [UIColor whiteColor];
     }
@@ -30,17 +32,22 @@ static const NSInteger  rollTagBtnTag = 97;
 }
 
 #pragma mark -
-- (void)setMallUI {
+- (void)setMallHotTagsData:(NSMutableArray *)model {
     self.searchType = 3;
-    self.titleArr = [NSArray arrayWithObjects:@"魅族", @"iPhone6s", @"小米Note", @"一加", @"云马智行车", @"造梦者空气净化器", @"极客潮人", @"世界地球日", @"天气好", @"有柳絮",@"温暖", @"咖啡馆",@"防丢器", @"魅族", @"iPhone6s", @"小米Note", @"一加", @"云马智行车", @"造梦者空气净化器",@"防丢器",  nil];
-    [self addTagButton:self.titleArr];
+    for (HotTagsRow * tag in model) {
+        [self.tagTitleArr addObject:tag.titleCn];
+    }
+    [self addTagButton:self.tagTitleArr];
 }
 
 #pragma mark -
-- (void)setUI {
+- (void)setHotTagsData:(NSMutableArray *)model {
     self.searchType = 1;
-    self.titleArr = [NSArray arrayWithObjects:@"温暖", @"咖啡馆", @"极客潮人", @"世界地球日", @"天气好", @"有柳絮",@"温暖", @"咖啡馆", @"极客潮人", @"世界地球日", @"天气好", @"有柳絮",@"温暖", @"咖啡馆", @"极客潮人",  nil];
-    [self addTagButton:self.titleArr];
+    for (HotTagsRow * tag in model) {
+        [self.tagTitleArr addObject:tag.titleCn];
+    }
+
+    [self addTagButton:self.tagTitleArr];
 }
 
 #pragma mark - 标签视图
@@ -99,7 +106,7 @@ static const NSInteger  rollTagBtnTag = 97;
 //  标签的点击方法
 - (void)tagBtnClick:(UIButton *)button {
     SearchViewController * searchVC = [[SearchViewController alloc] init];
-    searchVC.keyword = self.titleArr[button.tag - rollTagBtnTag];
+    searchVC.keyword = self.tagTitleArr[button.tag - rollTagBtnTag];
     searchVC.searchType = self.searchType;
     [self.nav pushViewController:searchVC animated:YES];
 }

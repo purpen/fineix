@@ -31,60 +31,72 @@ static NSString *const URLReleaseFiuScenen = @"/scene_scene/save";
 #pragma mark - 网络请求
 #pragma mark 发布场景
 - (void)networkNewSceneData {
-    [SVProgressHUD show];
-    NSData * imageData = UIImageJPEGRepresentation(self.scenceView.imageView.image, 0.5);
-    NSString * icon64Str = [imageData base64EncodedStringWithOptions:NSDataBase64Encoding64CharacterLineLength];
-    NSDictionary * paramDict = @{
-                            @"tmp":icon64Str,
-                            @"title":self.scenceView.title.text,
-                            @"des":self.scenceView.content.text,
-                            @"lng":self.lng,
-                            @"lat":self.lat,
-                            @"address":self.addView.location.text,
-                            @"product_id":self.goodsId,
-                            @"product_title":self.goodsTitle,
-                            @"product_price":self.goodsPrice,
-                            @"product_x":self.goodsX,
-                            @"product_y":self.goodsY,
-                            @"tags":self.tagS,
-                            @"scene_id":self.fSceneId,
-                            };
-    self.releaseSceneRequest = [FBAPI postWithUrlString:URLReleaseScenen requestDictionary:paramDict delegate:self];
     
-    [self.releaseSceneRequest startRequestSuccess:^(FBRequest *request, id result) {
-        NSLog(@"＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝  发布成功：%@", result);
-        [SVProgressHUD showSuccessWithStatus:@"发布成功"];
-        [self dismissViewControllerAnimated:YES completion:nil];
-    } failure:^(FBRequest *request, NSError *error) {
-        [SVProgressHUD showErrorWithStatus:[error localizedDescription]];
-        NSLog(@"＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝  发布失败：%@", error);
-    }];
+    if ([self.lng length] <= 0 || [self.scenceView.title.text isEqualToString:@""] || [self.scenceView.content.text isEqualToString:@""] || [self.addView.location.text isEqualToString:@""]) {
+        [SVProgressHUD showInfoWithStatus:@"填写未完成"];
+        
+    } else {
+        [SVProgressHUD show];
+        NSData * imageData = UIImageJPEGRepresentation(self.scenceView.imageView.image, 0.5);
+        NSString * icon64Str = [imageData base64EncodedStringWithOptions:NSDataBase64Encoding64CharacterLineLength];
+        NSDictionary * paramDict = @{
+                                     @"tmp":icon64Str,
+                                     @"title":self.scenceView.title.text,
+                                     @"des":self.scenceView.content.text,
+                                     @"lng":self.lng,
+                                     @"lat":self.lat,
+                                     @"address":self.addView.location.text,
+                                     @"product_id":self.goodsId,
+                                     @"product_title":self.goodsTitle,
+                                     @"product_price":self.goodsPrice,
+                                     @"product_x":self.goodsX,
+                                     @"product_y":self.goodsY,
+                                     @"tags":self.tagS,
+                                     @"scene_id":self.fSceneId,
+                                     };
+        self.releaseSceneRequest = [FBAPI postWithUrlString:URLReleaseScenen requestDictionary:paramDict delegate:self];
+        
+        [self.releaseSceneRequest startRequestSuccess:^(FBRequest *request, id result) {
+            NSLog(@"＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝  发布成功：%@", result);
+            [SVProgressHUD showSuccessWithStatus:@"发布成功"];
+            [self dismissViewControllerAnimated:YES completion:nil];
+        } failure:^(FBRequest *request, NSError *error) {
+            [SVProgressHUD showErrorWithStatus:[error localizedDescription]];
+            NSLog(@"＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝  发布失败：%@", error);
+        }];
+
+    }
 }
 
 #pragma mark 发布情景
 - (void)networkNewFiuSceneData {
-    [SVProgressHUD show];
-    NSData * imageData = UIImageJPEGRepresentation(self.scenceView.imageView.image, 0.5);
-    NSString * icon64Str = [imageData base64EncodedStringWithOptions:NSDataBase64Encoding64CharacterLineLength];
-    NSDictionary * paramDict = @{
-                                 @"tmp":icon64Str,
-                                 @"title":self.scenceView.title.text,
-                                 @"des":self.scenceView.content.text,
-                                 @"lng":self.lng,
-                                 @"lat":self.lat,
-                                 @"address":self.addView.location.text,
-                                 @"tags":self.tagS,
-                                 };
-    self.releaseSceneRequest = [FBAPI postWithUrlString:URLReleaseFiuScenen requestDictionary:paramDict delegate:self];
-    
-    [self.releaseSceneRequest startRequestSuccess:^(FBRequest *request, id result) {
-        NSLog(@"＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝  发布成功：%@", result);
-        [self dismissViewControllerAnimated:YES completion:nil];
-        [SVProgressHUD showSuccessWithStatus:@"发布成功"];
-    } failure:^(FBRequest *request, NSError *error) {
-        [SVProgressHUD showErrorWithStatus:[error localizedDescription]];
-        NSLog(@"＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝  发布失败：%@", error);
-    }];
+    if ([self.lng length] <= 0 || [self.scenceView.title.text isEqualToString:@""] || [self.scenceView.content.text isEqualToString:@""] || [self.addView.location.text isEqualToString:@""]) {
+        [SVProgressHUD showInfoWithStatus:@"填写未完成"];
+        
+    } else {
+        [SVProgressHUD show];
+        NSData * imageData = UIImageJPEGRepresentation(self.scenceView.imageView.image, 0.5);
+        NSString * icon64Str = [imageData base64EncodedStringWithOptions:NSDataBase64Encoding64CharacterLineLength];
+        NSDictionary * paramDict = @{
+                                     @"tmp":icon64Str,
+                                     @"title":self.scenceView.title.text,
+                                     @"des":self.scenceView.content.text,
+                                     @"lng":self.lng,
+                                     @"lat":self.lat,
+                                     @"address":self.addView.location.text,
+                                     @"tags":self.tagS,
+                                     };
+        self.releaseSceneRequest = [FBAPI postWithUrlString:URLReleaseFiuScenen requestDictionary:paramDict delegate:self];
+        
+        [self.releaseSceneRequest startRequestSuccess:^(FBRequest *request, id result) {
+            NSLog(@"＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝  发布成功：%@", result);
+            [self dismissViewControllerAnimated:YES completion:nil];
+            [SVProgressHUD showSuccessWithStatus:@"发布成功"];
+        } failure:^(FBRequest *request, NSError *error) {
+            [SVProgressHUD showErrorWithStatus:[error localizedDescription]];
+            NSLog(@"＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝  发布失败：%@", error);
+        }];
+    }
     
 }
 
