@@ -798,11 +798,11 @@
             <point key="canvasLocation" x="771.5" y="1255"/>
         </view>
         <view contentMode="scaleToFill" id="w17-i4-D6K" customClass="AccountView">
-            <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+            <rect key="frame" x="0.0" y="0.0" width="375" height="603"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <subviews>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="tUb-wY-BYS">
-                    <rect key="frame" x="0.0" y="66" width="375" height="44"/>
+                    <rect key="frame" x="0.0" y="2" width="375" height="44"/>
                     <subviews>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="头像" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Rvi-Ih-jsZ">
                             <rect key="frame" x="13" y="11" width="93" height="21"/>
@@ -854,7 +854,7 @@
                     </variation>
                 </view>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="G5R-A7-jZQ">
-                    <rect key="frame" x="0.0" y="111" width="375" height="44"/>
+                    <rect key="frame" x="0.0" y="47" width="375" height="44"/>
                     <subviews>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="用户名(昵称)" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="UU9-e0-U0L">
                             <rect key="frame" x="13" y="11" width="93" height="21"/>
@@ -903,7 +903,7 @@
                     </constraints>
                 </view>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="bks-ip-Hwy">
-                    <rect key="frame" x="0.0" y="156" width="375" height="44"/>
+                    <rect key="frame" x="0.0" y="92" width="375" height="44"/>
                     <subviews>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="个性签名" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hzP-ba-H6X">
                             <rect key="frame" x="13" y="11" width="93" height="21"/>
@@ -931,7 +931,7 @@
                     </constraints>
                 </view>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="c1t-JX-Md4">
-                    <rect key="frame" x="0.0" y="201" width="375" height="44"/>
+                    <rect key="frame" x="0.0" y="137" width="375" height="44"/>
                     <subviews>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="地区" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dqc-oP-1Yg">
                             <rect key="frame" x="13" y="11" width="93" height="21"/>
@@ -982,7 +982,7 @@
                     </constraints>
                 </view>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="9tk-8Y-TiT">
-                    <rect key="frame" x="0.0" y="246" width="375" height="44"/>
+                    <rect key="frame" x="0.0" y="182" width="375" height="44"/>
                     <subviews>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="性别" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Oyh-vw-9tt">
                             <rect key="frame" x="13" y="11" width="93" height="21"/>
@@ -1035,7 +1035,7 @@
                     </constraints>
                 </view>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Npp-Vn-Gno">
-                    <rect key="frame" x="0.0" y="291" width="375" height="44"/>
+                    <rect key="frame" x="0.0" y="227" width="375" height="44"/>
                     <subviews>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="生日" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gMg-Iz-zLi">
                             <rect key="frame" x="13" y="11" width="93" height="21"/>
@@ -1088,7 +1088,7 @@
                     </constraints>
                 </view>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="n6A-Vm-ChT">
-                    <rect key="frame" x="0.0" y="336" width="375" height="44"/>
+                    <rect key="frame" x="0.0" y="272" width="375" height="44"/>
                     <subviews>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="我的二维码" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="IM3-E3-PW3">
                             <rect key="frame" x="13" y="11" width="93" height="21"/>
@@ -1140,7 +1140,7 @@
                     </variation>
                 </view>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="nql-Lm-8s9">
-                    <rect key="frame" x="0.0" y="381" width="375" height="44"/>
+                    <rect key="frame" x="0.0" y="317" width="375" height="44"/>
                     <subviews>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="申请认证" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="725-jd-BXg">
                             <rect key="frame" x="13" y="11" width="93" height="21"/>
@@ -1202,9 +1202,9 @@
                 <constraint firstItem="nql-Lm-8s9" firstAttribute="top" secondItem="n6A-Vm-ChT" secondAttribute="bottom" constant="1" id="ozf-ii-7aW"/>
                 <constraint firstItem="tUb-wY-BYS" firstAttribute="leading" secondItem="w17-i4-D6K" secondAttribute="leading" id="pKh-2j-F5k"/>
                 <constraint firstAttribute="trailing" secondItem="tUb-wY-BYS" secondAttribute="trailing" id="sMI-yg-qNJ"/>
-                <constraint firstItem="tUb-wY-BYS" firstAttribute="top" secondItem="w17-i4-D6K" secondAttribute="top" constant="66" id="zJD-Kc-JMU"/>
+                <constraint firstItem="tUb-wY-BYS" firstAttribute="top" secondItem="w17-i4-D6K" secondAttribute="top" constant="2" id="zJD-Kc-JMU"/>
             </constraints>
-            <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <connections>
                 <outlet property="adreesBtn" destination="v3w-Wv-YUt" id="Eip-OT-SeN"/>
                 <outlet property="adress" destination="DQT-rn-zKo" id="Hys-Qc-yQv"/>

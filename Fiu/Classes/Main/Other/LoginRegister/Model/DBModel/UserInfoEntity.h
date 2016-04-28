@@ -26,6 +26,7 @@
 @property (nonatomic, copy) NSString * summary;
 @property(nonatomic,copy) NSString *city;
 @property(nonatomic,copy) NSString *address;
+@property(nonatomic,copy) NSString *follow_count;
 
 + (instancetype)defaultUserInfoEntity;
 - (void)updateUserInfo;

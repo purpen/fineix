@@ -27,6 +27,20 @@
 		1F1837761CCDFCB200933CA7 /* ChangeSumaryViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1F1837741CCDFCB200933CA7 /* ChangeSumaryViewController.xib */; };
 		1F18377A1CCE0F2200933CA7 /* TalentCertificationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F1837781CCE0F2200933CA7 /* TalentCertificationViewController.m */; };
 		1F18377B1CCE0F2200933CA7 /* TalentCertificationViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1F1837791CCE0F2200933CA7 /* TalentCertificationViewController.xib */; };
+		1F35F0371CD1AD870000DB95 /* CityTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F35F0341CD1AD870000DB95 /* CityTableViewCell.m */; };
+		1F35F0381CD1AD870000DB95 /* CityTwoTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F35F0361CD1AD870000DB95 /* CityTwoTableViewCell.m */; };
+		1F35F03B1CD1ADAB0000DB95 /* CityModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F35F03A1CD1ADAB0000DB95 /* CityModel.m */; };
+		1F35F03D1CD1D7170000DB95 /* AddressBook.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1F35F03C1CD1D7170000DB95 /* AddressBook.framework */; };
+		1F35F03F1CD1DC580000DB95 /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1F35F03E1CD1DC580000DB95 /* MessageUI.framework */; };
+		1F35F0411CD1DC640000DB95 /* AddressBookUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1F35F0401CD1DC640000DB95 /* AddressBookUI.framework */; };
+		1F35F0441CD1DCF20000DB95 /* LBAddressBookViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F35F0431CD1DCF20000DB95 /* LBAddressBookViewController.m */; };
+		1F35F0481CD1FF630000DB95 /* DatePickerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F35F0461CD1FF630000DB95 /* DatePickerViewController.m */; };
+		1F35F0491CD1FF630000DB95 /* DatePickerViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1F35F0471CD1FF630000DB95 /* DatePickerViewController.xib */; };
+		1F35F04D1CD22D7A0000DB95 /* AddreesPickerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F35F04B1CD22D7A0000DB95 /* AddreesPickerViewController.m */; };
+		1F35F04E1CD22D7A0000DB95 /* AddreesPickerViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1F35F04C1CD22D7A0000DB95 /* AddreesPickerViewController.xib */; };
+		1F35F0511CD2336E0000DB95 /* areas.plist in Resources */ = {isa = PBXBuildFile; fileRef = 1F35F0501CD2336E0000DB95 /* areas.plist */; };
+		1F35F0541CD237450000DB95 /* AddreesModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F35F0531CD237450000DB95 /* AddreesModel.m */; };
+		1F35F0571CD23C700000DB95 /* AreaModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F35F0561CD23C700000DB95 /* AreaModel.m */; };
 		1F3C0A771CBF461300B84FEB /* libPods-Fiu.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 1F3C0A761CBF461300B84FEB /* libPods-Fiu.a */; };
 		1F3C0A841CBF760C00B84FEB /* SubscribePeopleViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F3C0A821CBF760C00B84FEB /* SubscribePeopleViewController.m */; };
 		1F3C0A851CBF760C00B84FEB /* SubscribePeopleViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1F3C0A831CBF760C00B84FEB /* SubscribePeopleViewController.xib */; };
@@ -71,8 +85,6 @@
 		1FEF0B1F1CC0FC15006EF0C6 /* OrderInfoCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1FEF0B021CC0FC15006EF0C6 /* OrderInfoCell.xib */; };
 		1FEF0B201CC0FC15006EF0C6 /* ShareView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1FEF0B041CC0FC15006EF0C6 /* ShareView.m */; };
 		1FEF0B211CC0FC15006EF0C6 /* TipNumberView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1FEF0B061CC0FC15006EF0C6 /* TipNumberView.m */; };
-		1FFF01071CD0DBA7008E1CDC /* CityTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 1FFF01051CD0DBA7008E1CDC /* CityTableViewCell.m */; };
-		1FFF01081CD0DBA7008E1CDC /* CityTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1FFF01061CD0DBA7008E1CDC /* CityTableViewCell.xib */; };
 		1FFFFF1F1CD055BB008E1CDC /* AboutViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1FFFFF171CD055BB008E1CDC /* AboutViewController.m */; };
 		1FFFFF201CD055BB008E1CDC /* AboutViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1FFFFF181CD055BB008E1CDC /* AboutViewController.xib */; };
 		1FFFFF211CD055BB008E1CDC /* OptionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1FFFFF1A1CD055BB008E1CDC /* OptionViewController.m */; };
@@ -324,6 +336,28 @@
 		1F1837771CCE0F2200933CA7 /* TalentCertificationViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TalentCertificationViewController.h; sourceTree = "<group>"; };
 		1F1837781CCE0F2200933CA7 /* TalentCertificationViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TalentCertificationViewController.m; sourceTree = "<group>"; };
 		1F1837791CCE0F2200933CA7 /* TalentCertificationViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TalentCertificationViewController.xib; sourceTree = "<group>"; };
+		1F35F0331CD1AD870000DB95 /* CityTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CityTableViewCell.h; sourceTree = "<group>"; };
+		1F35F0341CD1AD870000DB95 /* CityTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CityTableViewCell.m; sourceTree = "<group>"; };
+		1F35F0351CD1AD870000DB95 /* CityTwoTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CityTwoTableViewCell.h; sourceTree = "<group>"; };
+		1F35F0361CD1AD870000DB95 /* CityTwoTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CityTwoTableViewCell.m; sourceTree = "<group>"; };
+		1F35F0391CD1ADAB0000DB95 /* CityModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CityModel.h; sourceTree = "<group>"; };
+		1F35F03A1CD1ADAB0000DB95 /* CityModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CityModel.m; sourceTree = "<group>"; };
+		1F35F03C1CD1D7170000DB95 /* AddressBook.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AddressBook.framework; path = System/Library/Frameworks/AddressBook.framework; sourceTree = SDKROOT; };
+		1F35F03E1CD1DC580000DB95 /* MessageUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MessageUI.framework; path = System/Library/Frameworks/MessageUI.framework; sourceTree = SDKROOT; };
+		1F35F0401CD1DC640000DB95 /* AddressBookUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AddressBookUI.framework; path = System/Library/Frameworks/AddressBookUI.framework; sourceTree = SDKROOT; };
+		1F35F0421CD1DCF20000DB95 /* LBAddressBookViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LBAddressBookViewController.h; sourceTree = "<group>"; };
+		1F35F0431CD1DCF20000DB95 /* LBAddressBookViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LBAddressBookViewController.m; sourceTree = "<group>"; };
+		1F35F0451CD1FF630000DB95 /* DatePickerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DatePickerViewController.h; sourceTree = "<group>"; };
+		1F35F0461CD1FF630000DB95 /* DatePickerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DatePickerViewController.m; sourceTree = "<group>"; };
+		1F35F0471CD1FF630000DB95 /* DatePickerViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DatePickerViewController.xib; sourceTree = "<group>"; };
+		1F35F04A1CD22D7A0000DB95 /* AddreesPickerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AddreesPickerViewController.h; sourceTree = "<group>"; };
+		1F35F04B1CD22D7A0000DB95 /* AddreesPickerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AddreesPickerViewController.m; sourceTree = "<group>"; };
+		1F35F04C1CD22D7A0000DB95 /* AddreesPickerViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AddreesPickerViewController.xib; sourceTree = "<group>"; };
+		1F35F0501CD2336E0000DB95 /* areas.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = areas.plist; sourceTree = "<group>"; };
+		1F35F0521CD237450000DB95 /* AddreesModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AddreesModel.h; sourceTree = "<group>"; };
+		1F35F0531CD237450000DB95 /* AddreesModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AddreesModel.m; sourceTree = "<group>"; };
+		1F35F0551CD23C700000DB95 /* AreaModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AreaModel.h; sourceTree = "<group>"; };
+		1F35F0561CD23C700000DB95 /* AreaModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AreaModel.m; sourceTree = "<group>"; };
 		1F3C0A761CBF461300B84FEB /* libPods-Fiu.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = "libPods-Fiu.a"; path = "../Library/Developer/Xcode/DerivedData/Fiu-cjbswbuyriripaegqmobstwznrnk/Build/Products/Debug-iphonesimulator/libPods-Fiu.a"; sourceTree = "<group>"; };
 		1F3C0A811CBF760C00B84FEB /* SubscribePeopleViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SubscribePeopleViewController.h; sourceTree = "<group>"; };
 		1F3C0A821CBF760C00B84FEB /* SubscribePeopleViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SubscribePeopleViewController.m; sourceTree = "<group>"; };
@@ -402,9 +436,6 @@
 		1FEF0B041CC0FC15006EF0C6 /* ShareView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ShareView.m; sourceTree = "<group>"; };
 		1FEF0B051CC0FC15006EF0C6 /* TipNumberView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TipNumberView.h; sourceTree = "<group>"; };
 		1FEF0B061CC0FC15006EF0C6 /* TipNumberView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TipNumberView.m; sourceTree = "<group>"; };
-		1FFF01041CD0DBA7008E1CDC /* CityTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CityTableViewCell.h; path = Fiu/Classes/Main/Other/DirectMessages/Controller/CityTableViewCell.h; sourceTree = SOURCE_ROOT; };
-		1FFF01051CD0DBA7008E1CDC /* CityTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CityTableViewCell.m; path = Fiu/Classes/Main/Other/DirectMessages/Controller/CityTableViewCell.m; sourceTree = SOURCE_ROOT; };
-		1FFF01061CD0DBA7008E1CDC /* CityTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = CityTableViewCell.xib; path = Fiu/Classes/Main/Other/DirectMessages/Controller/CityTableViewCell.xib; sourceTree = SOURCE_ROOT; };
 		1FFFFF161CD055BB008E1CDC /* AboutViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AboutViewController.h; sourceTree = "<group>"; };
 		1FFFFF171CD055BB008E1CDC /* AboutViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AboutViewController.m; sourceTree = "<group>"; };
 		1FFFFF181CD055BB008E1CDC /* AboutViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AboutViewController.xib; sourceTree = "<group>"; };
@@ -805,6 +836,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1F35F0411CD1DC640000DB95 /* AddressBookUI.framework in Frameworks */,
+				1F35F03F1CD1DC580000DB95 /* MessageUI.framework in Frameworks */,
+				1F35F03D1CD1D7170000DB95 /* AddressBook.framework in Frameworks */,
 				1F3C0A771CBF461300B84FEB /* libPods-Fiu.a in Frameworks */,
 				D81281691CAA8532007CF08B /* libUMSocial_Sdk_5.0.1.a in Frameworks */,
 				D8AEC7541CA8E3C700A868B6 /* libsqlite3.0.tbd in Frameworks */,
@@ -846,6 +880,35 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		1F35F0311CD1AD870000DB95 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				1F35F0391CD1ADAB0000DB95 /* CityModel.h */,
+				1F35F03A1CD1ADAB0000DB95 /* CityModel.m */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		1F35F0321CD1AD870000DB95 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				1F35F0331CD1AD870000DB95 /* CityTableViewCell.h */,
+				1F35F0341CD1AD870000DB95 /* CityTableViewCell.m */,
+				1F35F0351CD1AD870000DB95 /* CityTwoTableViewCell.h */,
+				1F35F0361CD1AD870000DB95 /* CityTwoTableViewCell.m */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		1F35F04F1CD2336E0000DB95 /* Resource */ = {
+			isa = PBXGroup;
+			children = (
+				1F35F0501CD2336E0000DB95 /* areas.plist */,
+			);
+			name = Resource;
+			path = Fiu/Resource;
+			sourceTree = SOURCE_ROOT;
+		};
 		1F3C0A7D1CBF756000B84FEB /* ReceiveDetailedInformation */ = {
 			isa = PBXGroup;
 			children = (
@@ -934,12 +997,20 @@
 				1F51E8B21CC6338D00017839 /* PraisedViewController.m */,
 				1F07A64E1CC78E7600CF225F /* FindeFriendViewController.h */,
 				1F07A64F1CC78E7600CF225F /* FindeFriendViewController.m */,
+				1F35F0421CD1DCF20000DB95 /* LBAddressBookViewController.h */,
+				1F35F0431CD1DCF20000DB95 /* LBAddressBookViewController.m */,
 				1FEB71761CC8A35A00CF34F3 /* QRCodeScanViewController.h */,
 				1FEB71771CC8A35A00CF34F3 /* QRCodeScanViewController.m */,
 				1FD7E6751CC8DFE400A69BDD /* MyQrCodeViewController.h */,
 				1FD7E6761CC8DFE400A69BDD /* MyQrCodeViewController.m */,
 				1F4061B21CCA231E00D6E9B0 /* AccountManagementViewController.h */,
 				1F4061B31CCA231E00D6E9B0 /* AccountManagementViewController.m */,
+				1F35F04A1CD22D7A0000DB95 /* AddreesPickerViewController.h */,
+				1F35F04B1CD22D7A0000DB95 /* AddreesPickerViewController.m */,
+				1F35F04C1CD22D7A0000DB95 /* AddreesPickerViewController.xib */,
+				1F35F0451CD1FF630000DB95 /* DatePickerViewController.h */,
+				1F35F0461CD1FF630000DB95 /* DatePickerViewController.m */,
+				1F35F0471CD1FF630000DB95 /* DatePickerViewController.xib */,
 				1F1837631CCDCF3B00933CA7 /* EditNickNameViewController.h */,
 				1F1837641CCDCF3B00933CA7 /* EditNickNameViewController.m */,
 				1F1837651CCDCF3B00933CA7 /* EditNickNameViewController.xib */,
@@ -968,6 +1039,10 @@
 				1FEB71711CC8802800CF34F3 /* InvitationModel.m */,
 				1FEB71731CC88B5D00CF34F3 /* FindeFirendTwoModel.h */,
 				1FEB71741CC88B5D00CF34F3 /* FindeFirendTwoModel.m */,
+				1F35F0521CD237450000DB95 /* AddreesModel.h */,
+				1F35F0531CD237450000DB95 /* AddreesModel.m */,
+				1F35F0551CD23C700000DB95 /* AreaModel.h */,
+				1F35F0561CD23C700000DB95 /* AreaModel.m */,
 			);
 			path = model;
 			sourceTree = "<group>";
@@ -1089,6 +1164,9 @@
 		4121957EDE4D4049941B2B88 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				1F35F0401CD1DC640000DB95 /* AddressBookUI.framework */,
+				1F35F03E1CD1DC580000DB95 /* MessageUI.framework */,
+				1F35F03C1CD1D7170000DB95 /* AddressBook.framework */,
 				1F3C0A761CBF461300B84FEB /* libPods-Fiu.a */,
 				1F0EE6A81C9FA4F6000631F0 /* libz.tbd */,
 				1F0EE6A61C9FA4E7000631F0 /* libstdc++.tbd */,
@@ -1152,8 +1230,9 @@
 		D8035FA91CBD1021001920F9 /* Location */ = {
 			isa = PBXGroup;
 			children = (
+				1F35F0311CD1AD870000DB95 /* Model */,
+				1F35F0321CD1AD870000DB95 /* View */,
 				D83639A51CD0660E00CC4AC0 /* Controller */,
-				D83639AC1CD0660E00CC4AC0 /* View */,
 			);
 			path = Location;
 			sourceTree = "<group>";
@@ -1369,6 +1448,7 @@
 				D81280191CAA8532007CF08B /* Classes */,
 				D81280AC1CAA8532007CF08B /* Expand */,
 				D81280CB1CAA8532007CF08B /* Vendors */,
+				1F35F04F1CD2336E0000DB95 /* Resource */,
 				D81280C31CAA8532007CF08B /* International */,
 				D81280141CAA8532007CF08B /* AppDelegate.h */,
 				D81280151CAA8532007CF08B /* AppDelegate.mm */,
@@ -1855,16 +1935,6 @@
 			path = Controller;
 			sourceTree = "<group>";
 		};
-		D83639AC1CD0660E00CC4AC0 /* View */ = {
-			isa = PBXGroup;
-			children = (
-				1FFF01041CD0DBA7008E1CDC /* CityTableViewCell.h */,
-				1FFF01051CD0DBA7008E1CDC /* CityTableViewCell.m */,
-				1FFF01061CD0DBA7008E1CDC /* CityTableViewCell.xib */,
-			);
-			path = View;
-			sourceTree = "<group>";
-		};
 		D83639B41CD0932000CC4AC0 /* Model */ = {
 			isa = PBXGroup;
 			children = (
@@ -2067,10 +2137,12 @@
 				D812816B1CAA8532007CF08B /* UMSCommentInputController.xib in Resources */,
 				D812816D1CAA8532007CF08B /* UMShareEditViewController.xib in Resources */,
 				1F18376C1CCDE95A00933CA7 /* ModifyGenderViewController.xib in Resources */,
+				1F35F0491CD1FF630000DB95 /* DatePickerViewController.xib in Resources */,
 				D803605A1CBF376B001920F9 /* Signup.xib in Resources */,
 				1F3C0A851CBF760C00B84FEB /* SubscribePeopleViewController.xib in Resources */,
 				1F3C0A921CBF95AC00B84FEB /* SubscribePeopleTableViewCell.xib in Resources */,
 				D81281781CAA8532007CF08B /* TencentOpenApi_IOS_Bundle.bundle in Resources */,
+				1F35F04E1CD22D7A0000DB95 /* AddreesPickerViewController.xib in Resources */,
 				1FBC3E9B1CCE3766007CFA14 /* ShareViewController.xib in Resources */,
 				1FEF0B1F1CC0FC15006EF0C6 /* OrderInfoCell.xib in Resources */,
 				D803604C1CBF376B001920F9 /* LoginRegisterController.storyboard in Resources */,
@@ -2081,12 +2153,12 @@
 				1FFFFF4F1CD0A0CF008E1CDC /* ImprovViewController.xib in Resources */,
 				D81281701CAA8532007CF08B /* UMSnsAccountViewController.xib in Resources */,
 				D81281121CAA8532007CF08B /* LaunchScreen.storyboard in Resources */,
+				1F35F0511CD2336E0000DB95 /* areas.plist in Resources */,
 				D80360591CBF376B001920F9 /* RecommendedScenarioView.xib in Resources */,
 				D81281721CAA8532007CF08B /* UMSocialSDKResourcesNew.bundle in Resources */,
 				D83639AE1CD0660E00CC4AC0 /* FBLocationViewController.xib in Resources */,
 				1F1837711CCDF87500933CA7 /* ChangePasswordViewController.xib in Resources */,
 				D83639B01CD0660E00CC4AC0 /* FBMapLocatinViewController.xib in Resources */,
-				1FFF01081CD0DBA7008E1CDC /* CityTableViewCell.xib in Resources */,
 				D812815B1CAA8532007CF08B /* Info.plist in Resources */,
 				D812816C1CAA8532007CF08B /* UMSCommentInputControlleriPad.xib in Resources */,
 				D80360491CBF376B001920F9 /* SubscribeInterestedCollectionViewController.xib in Resources */,
@@ -2170,6 +2242,7 @@
 				1FEF0B161CC0FC15006EF0C6 /* BottomView.m in Sources */,
 				D80360621CBF41A3001920F9 /* SearchMenuView.m in Sources */,
 				D81281311CAA8532007CF08B /* HomeViewController.m in Sources */,
+				1F35F0541CD237450000DB95 /* AddreesModel.m in Sources */,
 				D836399E1CCF731500CC4AC0 /* FiuSceneInfoLocation.m in Sources */,
 				D83639661CCDBF2900CC4AC0 /* HomeSceneListData.m in Sources */,
 				D87B69D31CC726D500199EFE /* CommentViewController.m in Sources */,
@@ -2187,6 +2260,7 @@
 				D83639921CCF69D300CC4AC0 /* FiuScene.m in Sources */,
 				D8035FD01CBD1021001920F9 /* FBTabBarController.m in Sources */,
 				D80D415B1CAD1437005D72B1 /* FBNavigationViewController.m in Sources */,
+				1F35F0441CD1DCF20000DB95 /* LBAddressBookViewController.m in Sources */,
 				D80D415E1CAD144D005D72B1 /* UIBarButtonItem+Helper.m in Sources */,
 				1FFFFF3F1CD05796008E1CDC /* BindIngViewController.m in Sources */,
 				D80360571CBF376B001920F9 /* PhoneNumLoginView.m in Sources */,
@@ -2207,6 +2281,7 @@
 				D83639791CCDE5A400CC4AC0 /* SceneInfoData.m in Sources */,
 				1FFFFF331CD055F2008E1CDC /* AXModel.m in Sources */,
 				D83639651CCDBF2900CC4AC0 /* HomeSceneListCounter.m in Sources */,
+				1F35F04D1CD22D7A0000DB95 /* AddreesPickerViewController.m in Sources */,
 				D89B5A971CB66B3B00DB9710 /* DataNumTableViewCell.m in Sources */,
 				1FEF0B0D1CC0FC15006EF0C6 /* MyOrdersViewController.m in Sources */,
 				D80360401CBF376B001920F9 /* FBLoginViewController.m in Sources */,
@@ -2225,6 +2300,7 @@
 				D83639851CCF221700CC4AC0 /* GoodsCarViewController.m in Sources */,
 				D83639781CCDE5A400CC4AC0 /* SceneInfoCounter.m in Sources */,
 				D83639931CCF69D300CC4AC0 /* FiuSceneData.m in Sources */,
+				1F35F0481CD1FF630000DB95 /* DatePickerViewController.m in Sources */,
 				D86AFDEF1CBFAFC2006F1602 /* UserHeaderTableViewCell.m in Sources */,
 				D81281261CAA8532007CF08B /* FBFootView.m in Sources */,
 				D83639681CCDBF2900CC4AC0 /* HomeSceneListProduct.m in Sources */,
@@ -2240,6 +2316,8 @@
 				D89B5A8B1CB4E48800DB9710 /* SceneListTableViewCell.m in Sources */,
 				D803604E1CBF376B001920F9 /* NSString+UserModel.m in Sources */,
 				D86AFDEC1CBF84DB006F1602 /* SearchSceneTableViewCell.m in Sources */,
+				1F35F0571CD23C700000DB95 /* AreaModel.m in Sources */,
+				1F35F0381CD1AD870000DB95 /* CityTwoTableViewCell.m in Sources */,
 				D812815E1CAA8532007CF08B /* main.m in Sources */,
 				D83639821CCE1F5C00CC4AC0 /* GoodsBrandTableViewCell.m in Sources */,
 				D8B011221CCA21DF008A63B7 /* InfoTitleTableViewCell.m in Sources */,
@@ -2307,10 +2385,11 @@
 				D83639881CCF247700CC4AC0 /* SceneSubscribeViewController.m in Sources */,
 				1F07A6441CC77AB800CF225F /* BackgroundCollectionViewCell.m in Sources */,
 				D81281211CAA8532007CF08B /* FBLoadPhoto.m in Sources */,
+				1F35F03B1CD1ADAB0000DB95 /* CityModel.m in Sources */,
 				D8B011071CC795F9008A63B7 /* GoodsCategoryViewController.m in Sources */,
 				D8035FCF1CBD1021001920F9 /* FBTabBar.m in Sources */,
 				D812813C1CAA8532007CF08B /* MallViewController.m in Sources */,
-				1FFF01071CD0DBA7008E1CDC /* CityTableViewCell.m in Sources */,
+				1F35F0371CD1AD870000DB95 /* CityTableViewCell.m in Sources */,
 				1FEF0B1D1CC0FC15006EF0C6 /* NaviView.m in Sources */,
 				D83639BD1CD0932000CC4AC0 /* Comment.m in Sources */,
 				D86AFDE91CBF7D6F006F1602 /* SearchResultsRollView.m in Sources */,

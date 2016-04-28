@@ -47,9 +47,7 @@ static NSString *const UpdateInfoURL = @"/my/update_profile";
     }
     // Do any additional setup after loading the view from its nib.
     self.delegate = self;
-    self.navigationController.navigationBarHidden = NO;
-    self.navViewTitle.text = @"";
-    self.navigationItem.title = @"修改性别";
+    self.navViewTitle.text = @"修改性别";
     [self addBarItemLeftBarButton:nil image:@"icon_back" isTransparent:NO];
     [self.manBtn addTarget:self action:@selector(clickManBtn:) forControlEvents:UIControlEventTouchUpInside];
     [self.womenBtn addTarget:self action:@selector(clickwoMneBtn:) forControlEvents:UIControlEventTouchUpInside];
@@ -75,8 +73,9 @@ static NSString *const UpdateInfoURL = @"/my/update_profile";
     _sex = @0;
 }
 
+
+
 -(void)leftBarItemSelected{
-    [self.navigationController popViewControllerAnimated:YES];
     UserInfoEntity *entity = [UserInfoEntity defaultUserInfoEntity];
     if ([_sex intValue] != [entity.sex intValue]) {
         //进行更新
@@ -93,12 +92,16 @@ static NSString *const UpdateInfoURL = @"/my/update_profile";
     if ([[result objectForKey:@"success"] isEqualToNumber:@1]) {
         UserInfoEntity *entity = [UserInfoEntity defaultUserInfoEntity];
         entity.sex = _sex;
+        [entity updateUserInfo];
         [SVProgressHUD showSuccessWithStatus:message];
+        request = nil;
+        [self.navigationController popViewControllerAnimated:YES];
     }else{
         [SVProgressHUD showInfoWithStatus:message];
+        request = nil;
+        [self.navigationController popViewControllerAnimated:YES];
     }
-    request = nil;
-    [self.navigationController popViewControllerAnimated:YES];
+    
 }
 
 - (void)didReceiveMemoryWarning {

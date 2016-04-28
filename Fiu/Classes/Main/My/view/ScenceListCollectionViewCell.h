@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+@class HomeSceneListRow;
 
 @interface ScenceListCollectionViewCell : UICollectionViewCell
 @property(nonatomic,strong) UIImageView         *   bgImage;        //  场景图
@@ -21,5 +22,5 @@
 @property(nonatomic,strong) UILabel             *   city;           //  城市
 @property(nonatomic,strong) UILabel             *   time;           //  时间
 
-- (void)setUI;
+- (void)setUIWithModel:(HomeSceneListRow*)model;
 @end

@@ -40,6 +40,7 @@
     
     userInfo.city = self.city;
     userInfo.address = self.address;
+    userInfo.follow_count = self.follow_count;
     
     dispatch_async(dispatch_get_global_queue(0, 0), ^{
         [userInfo saveOrUpdate];
@@ -61,6 +62,7 @@
     self.summary = @"";
     self.city = @"";
     self.address = @"";
+    self.follow_count = @"";
 }
 
 @end

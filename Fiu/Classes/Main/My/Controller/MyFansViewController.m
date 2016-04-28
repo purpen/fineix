@@ -10,8 +10,10 @@
 #import "FocusOnTableViewCell.h"
 #import "MyFansActionSheetViewController.h"
 
-@interface MyFansViewController ()<FBNavigationBarItemsDelegate,UITableViewDelegate,UITableViewDataSource>
-
+@interface MyFansViewController ()<FBNavigationBarItemsDelegate,UITableViewDelegate,UITableViewDataSource,FBRequestDelegate>
+{
+    NSMutableArray *_modelAry;
+}
 @end
 
 @implementation MyFansViewController
@@ -19,12 +21,17 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+    _modelAry = [NSMutableArray array];
     //设置导航条
     self.navViewTitle.text = @"粉丝";
 //    [self addBarItemLeftBarButton:nil image:@"icon_back"];
     self.delegate = self;
     
-    self.navigationController.navigationBarHidden = NO;
+    //self.navigationController.navigationBarHidden = NO;
+    
+    //请求数据
+    FBRequest *request = [FBAPI postWithUrlString:@"/follow" requestDictionary:@{@"page":@1,@"size":@15,@"user_id":self.userId,@"find_type":@1} delegate:self];
+    [request startRequest];
     
     [self.view addSubview:self.mytableView];
 }

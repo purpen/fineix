@@ -11,10 +11,15 @@
 #import "FriendTableViewCell.h"
 #import "InvitationModel.h"
 #import "QRCodeScanViewController.h"
+#import "UMSocial.h"
+#import "SVProgressHUD.h"
+#import "LBAddressBookViewController.h"
 
 @interface FindeFriendViewController ()<FBNavigationBarItemsDelegate,UITableViewDelegate,UITableViewDataSource>
 
 @end
+
+static NSString *const ShareURL = @"http://m.taihuoniao.com/guide/app_about";
 
 @implementation FindeFriendViewController
 
@@ -89,6 +94,8 @@
     return nil;
 }
 
+
+
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
     if (indexPath.section == 0) {
         return 60/667.0*SCREEN_HEIGHT;
@@ -112,13 +119,28 @@
     if (indexPath.section == 0) {
         if (indexPath.row == 0) {
             //微信
+            [UMSocialData defaultData].extConfig.wechatSessionData.url = ShareURL;
+            [[UMSocialDataService defaultDataService]  postSNSWithTypes:@[UMShareToWechatSession] content:@"太火鸟情景App" image:[UIImage imageNamed:@""] location:nil urlResource:nil presentedController:self completion:^(UMSocialResponseEntity *response){
+                if (response.responseCode == UMSResponseCodeSuccess) {
+                    [SVProgressHUD showSuccessWithStatus:@"分享成功！"];
+                }
+            }];
         }else if (indexPath.row == 1){
             //weibo
+            [[UMSocialDataService defaultDataService]  postSNSWithTypes:@[UMShareToSina] content:[NSString stringWithFormat:@"最火爆的智能硬件电商平台——太火鸟情景App%@", ShareURL] image:[UIImage imageNamed:@"icon_120"] location:nil urlResource:nil presentedController:self completion:^(UMSocialResponseEntity *response){
+                if (response.responseCode == UMSResponseCodeSuccess) {
+                    [SVProgressHUD showSuccessWithStatus:@"分享成功！"];
+                }
+            }];
         }else if (indexPath.row == 2){
             //通讯录
+            LBAddressBookViewController *vc = [[LBAddressBookViewController alloc] init];
+            [self.navigationController pushViewController:vc animated:YES];
         }
     }
 }
+
+
 
 -(void)leftBarItemSelected{
     [self.navigationController popViewControllerAnimated:YES];

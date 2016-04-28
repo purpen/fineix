@@ -20,7 +20,7 @@
         [_bgView mas_makeConstraints:^(MASConstraintMaker *make) {
             make.centerX.mas_equalTo(self.mas_centerX);
             make.size.mas_equalTo(CGSizeMake(662*0.5/667.0*SCREEN_HEIGHT, 819*0.5/667.0*SCREEN_HEIGHT));
-            make.top.mas_equalTo(self.mas_top).with.offset(310*0.5/667.0*SCREEN_HEIGHT);
+            make.top.mas_equalTo(self.mas_top).with.offset(310*0.5/667.0*SCREEN_HEIGHT-64);
         }];
     }
     return self;

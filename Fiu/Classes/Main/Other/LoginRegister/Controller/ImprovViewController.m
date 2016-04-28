@@ -106,31 +106,31 @@ static NSString *const IconURL = @"/my/upload_token";
     
 }
 
--(void)textFieldDidBeginEditing:(UITextField *)textField
-
-{
-    
-    CGRect frame = textField.frame;
-    
-    int offset = frame.origin.y + 70 - (self.view.frame.size.height - 216.0);//iPhone键盘高度216，iPad的为352
-    
-    
-    
-    [UIView beginAnimations:@"ResizeForKeyboard" context:nil];
-    
-    [UIView setAnimationDuration:0.5f];
-    
-    
-    
-    //将视图的Y坐标向上移动offset个单位，以使下面腾出地方用于软键盘的显示
-    
-    if(offset > 0){
-        CGRect frame = self.view.frame;
-        frame.origin.y -= offset;
-        self.view.frame = frame;
-        [UIView commitAnimations];
-    }
-}
+//-(void)textFieldDidBeginEditing:(UITextField *)textField
+//
+//{
+//    
+//    CGRect frame = textField.frame;
+//    
+//    int offset = frame.origin.y + 70 - (self.view.frame.size.height - 216.0);//iPhone键盘高度216，iPad的为352
+//    
+//    
+//    
+//    [UIView beginAnimations:@"ResizeForKeyboard" context:nil];
+//    
+//    [UIView setAnimationDuration:0.5f];
+//    
+//    
+//    
+//    //将视图的Y坐标向上移动offset个单位，以使下面腾出地方用于软键盘的显示
+//    
+//    if(offset > 0){
+//        CGRect frame = self.view.frame;
+//        frame.origin.y -= offset;
+//        self.view.frame = frame;
+//        [UIView commitAnimations];
+//    }
+//}
 
 //输入框编辑完成以后，将视图恢复到原始状态
 //

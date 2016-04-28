@@ -10,4 +10,5 @@
 
 @interface MyFansViewController : FBViewController
 @property(nonatomic,strong) UITableView *mytableView;
+@property(nonatomic,copy) NSString *userId;
 @end

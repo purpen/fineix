@@ -10,4 +10,8 @@
 
 @interface CityTableViewCell : UITableViewCell
 
+@property(nonatomic,strong) UIImageView *bgImageView;
+@property(nonatomic,strong) UIImageView *locationImageView;
+@property(nonatomic,strong) UILabel *locationLabel;
+
 @end

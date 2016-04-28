@@ -12,6 +12,7 @@
 #import "FBAPI.h"
 #import "FBRequest.h"
 #import "UserInfo.h"
+#import <SVProgressHUD.h>
 
 @interface MyPageFocusOnViewController ()<FBNavigationBarItemsDelegate,UITableViewDelegate,UITableViewDataSource,FBRequestDelegate>
 {
@@ -32,24 +33,40 @@
     
     //请求数据
     FBRequest *request = [FBAPI postWithUrlString:@"/follow" requestDictionary:@{@"page":@1,@"size":@15,@"user_id":self.userId,@"find_type":@1} delegate:self];
+    request.flag = @"follow";
     [request startRequest];
     
     [self.view addSubview:self.mytableView];
 }
 
 -(void)requestSucess:(FBRequest *)request result:(id)result{
-    NSLog(@"result  %@",result);
-    if ([result objectForKey:@"success"]) {
-        NSDictionary *dataDict = [result objectForKey:@"data"];
-        NSArray *rowsAry = [dataDict objectForKey:@"rows"];
-        for (NSDictionary *rowsDict in rowsAry) {
-            NSDictionary *followsDict = [rowsDict objectForKey:@"follows"];
-            UserInfo *model = [[UserInfo alloc] init];
-            model.userId = followsDict[@"user_id"];
-            model.summary = followsDict[@"summary"];
-            model.nickname = followsDict[@"nickname"];
-            model.mediumAvatarUrl = followsDict[@"avatar_url"];
-            [_modelAry addObject:model];
+    if ([request.flag isEqualToString:@"follow"]) {
+        NSLog(@"result  %@",result);
+        if ([result objectForKey:@"success"]) {
+            NSDictionary *dataDict = [result objectForKey:@"data"];
+            NSArray *rowsAry = [dataDict objectForKey:@"rows"];
+            for (NSDictionary *rowsDict in rowsAry) {
+                NSDictionary *followsDict = [rowsDict objectForKey:@"follows"];
+                UserInfo *model = [[UserInfo alloc] init];
+                model.userId = followsDict[@"user_id"];
+                model.summary = followsDict[@"summary"];
+                model.nickname = followsDict[@"nickname"];
+                model.mediumAvatarUrl = followsDict[@"avatar_url"];
+                [_modelAry addObject:model];
+            }
+        }
+
+    }else if ([request.flag isEqualToString:@"/follow/ajax_follow"]){
+        if ([result objectForKey:@"success"]) {
+            [SVProgressHUD showSuccessWithStatus:@"关注成功"];
+        }else{
+            [SVProgressHUD showErrorWithStatus:@"关注失败"];
+        }
+    }else if ([request.flag isEqualToString:@"/follow/ajax_cancel_follow"]){
+        if ([result objectForKey:@"success"]) {
+            [SVProgressHUD showSuccessWithStatus:@"关注成功"];
+        }else{
+            [SVProgressHUD showErrorWithStatus:@"关注失败"];
         }
     }
 }
@@ -73,7 +90,7 @@
 }
 
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
-    return 10;
+    return _modelAry.count;
 }
 
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
@@ -83,13 +100,16 @@
         cell = [[FocusOnTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellId];
     }
     [cell.focusOnBtn addTarget:self action:@selector(clickFocusBtn:) forControlEvents:UIControlEventTouchUpInside];
-    //UserInfo *model =
-    //[cell setUIWithModel:[_modelAry objectAtIndex:indexPath.row]];
+    UserInfo *model = _modelAry[indexPath.row];
+    cell.focusOnBtn.tag = [model.userId intValue];
+    [cell setUIWithModel:[_modelAry objectAtIndex:indexPath.row]];
     return cell;
 }
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     HomePageViewController *v = [[HomePageViewController alloc] init];
+    UserInfo *model = _modelAry[indexPath.row];
+    v.userId = model.userId;
     v.isMySelf = NO;
     v.type = @1;
     [self.navigationController pushViewController:v animated:YES];
@@ -97,6 +117,16 @@
 
 -(void)clickFocusBtn:(UIButton*)sender{
     sender.selected = !sender.selected;
+    if (sender.selected) {
+        //请求数据
+        FBRequest *request = [FBAPI postWithUrlString:@"/follow/ajax_follow" requestDictionary:@{@"follow_id":@(sender.tag)} delegate:self];
+        request.flag = @"/follow/ajax_follow";
+        [request startRequest];
+    }else{
+        FBRequest *request = [FBAPI postWithUrlString:@"/follow/ajax_cancel_follow" requestDictionary:@{@"follow_id":@(sender.tag)} delegate:self];
+        request.flag = @"/follow/ajax_cancel_follow";
+        [request startRequest];
+    }
 }
 
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{

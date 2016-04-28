@@ -31,6 +31,7 @@
     
     entity.city = userInfo.city;
     entity.address = userInfo.address;
+    entity.follow_count = userInfo.follow_count;
 }
 
 @end

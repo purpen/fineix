@@ -26,8 +26,11 @@
 #import "FindeFriendViewController.h"
 #import "TalentCertificationViewController.h"
 #import "SystemSettingViewController.h"
+#import "FBAPI.h"
+#import "FBRequest.h"
+#import "UserInfo.h"
 
-@interface MyselfViewController ()<UIScrollViewDelegate,FBNavigationBarItemsDelegate>
+@interface MyselfViewController ()<UIScrollViewDelegate,FBNavigationBarItemsDelegate,FBRequestDelegate>
 
 
 {
@@ -85,13 +88,8 @@ static NSString *const follows = @"/follow";
     
     //频道选项
     _chanelV = [ChanelView getChanelView];
-    _chanelV.frame = CGRectMake(0, (200+5+64)/667.0*SCREEN_HEIGHT, SCREEN_WIDTH, 60/667.0*SCREEN_HEIGHT);
-    //请求数据
-    UserInfoEntity *entity = [UserInfoEntity defaultUserInfoEntity];
-    FBRequest *request = [FBAPI postWithUrlString:follows requestDictionary:@{@"user_id":entity.userId,@"find_type":@1} delegate:self];
-    request.flag = follows;
-    [request startRequest];
-
+    _chanelV.frame = CGRectMake(0, (200+5)/667.0*SCREEN_HEIGHT+64, SCREEN_WIDTH, 60/667.0*SCREEN_HEIGHT);
+    
 //    NSArray *urlAry = [NSArray arrayWithObjects:, nil]
 //    for (int i = 0; i<4; i++) {
 //        FBRequest *request = [FBAPI postWithUrlString:follows requestDictionary:@{@"user_id":entity.userId,@"find_type":@1} delegate:self];
@@ -126,7 +124,7 @@ static NSString *const follows = @"/follow";
     [_homeScrollView addSubview:_chanelV];
     //订单等一些东西
     ChanelViewTwo *chanelTwoV = [ChanelViewTwo getChanelViewTwo];
-    chanelTwoV.frame = CGRectMake(0, (200+5+60+5+64)/667.0*SCREEN_HEIGHT, SCREEN_WIDTH, 194/667.0*SCREEN_HEIGHT);
+    chanelTwoV.frame = CGRectMake(0, (200+5+60+5)/667.0*SCREEN_HEIGHT+64, SCREEN_WIDTH, 194/667.0*SCREEN_HEIGHT);
     [_homeScrollView addSubview:chanelTwoV];
     //为订单等一些按钮添加方法
     //订单按钮
@@ -151,14 +149,14 @@ static NSString *const follows = @"/follow";
     [chanelTwoV.accountManagementBtn addTarget:self action:@selector(accountManagementBtn:) forControlEvents:UIControlEventTouchUpInside];
     //关于我们等
     BottomView *bottomV = [BottomView getBottomView];
-    bottomV.frame = CGRectMake(0, (200+5+60+5+194+2+64)/667.0*SCREEN_HEIGHT, SCREEN_WIDTH, 134/667.0*SCREEN_HEIGHT);
+    bottomV.frame = CGRectMake(0, (200+5+60+5+194+2)/667.0*SCREEN_HEIGHT+64, SCREEN_WIDTH, 134/667.0*SCREEN_HEIGHT);
     [bottomV.aboutUsBtn addTarget:self action:@selector(clickAboutBtn:) forControlEvents:UIControlEventTouchUpInside];
     [bottomV.opinionBtn addTarget:self action:@selector(clickOpinionBtn:) forControlEvents:UIControlEventTouchUpInside];
     [bottomV.partnerBtn addTarget:self action:@selector(clickPartnerBtn:) forControlEvents:UIControlEventTouchUpInside];
     [_homeScrollView addSubview:bottomV];
     //京东图标
     AppBtnView *appV = [AppBtnView getAppBtnView];
-    appV.frame = CGRectMake(0, (200+5+60+5+194+2+134+64)/667.0*SCREEN_HEIGHT, SCREEN_WIDTH, 91/667.0*SCREEN_HEIGHT);
+    appV.frame = CGRectMake(0, (200+5+60+5+194+2+134)/667.0*SCREEN_HEIGHT+64, SCREEN_WIDTH, 91/667.0*SCREEN_HEIGHT);
     [_homeScrollView addSubview:appV];
     //scrollView滑动范围
     _homeScrollView.contentSize = CGSizeMake(0, CGRectGetMaxY(appV.frame)+91);
@@ -167,14 +165,6 @@ static NSString *const follows = @"/follow";
     //向下滑动tabbar出现
 }
 
--(void)requestSucess:(FBRequest *)request result:(id)result{
-    NSLog(@"result  %@",result);
-    if ([result objectForKey:@"success"]) {
-        NSDictionary *dataDict = [result objectForKey:@"data"];
-        NSArray *rowsAry = [dataDict objectForKey:@"rows"];
-        _chanelV.focusNumLabel.text = [NSString stringWithFormat:@"%lu",(unsigned long)rowsAry.count];
-    }
-}
 
 -(void)clickPartnerBtn:(UIButton*)sender{
     NSLog(@"合作伙伴app");
@@ -199,7 +189,9 @@ static NSString *const follows = @"/follow";
 -(void)signleTap1:(UITapGestureRecognizer*)gesture{
     //跳转到我的主页的情景的界面
     NSLog(@"跳转到我的主页的场景的界面");
+    UserInfoEntity *entity = [UserInfoEntity defaultUserInfoEntity];
     HomePageViewController *myHomeVC = [[HomePageViewController alloc] init];
+    myHomeVC.userId = entity.userId;
     myHomeVC.type = @2;
     myHomeVC.isMySelf = YES;
     [self.navigationController pushViewController:myHomeVC animated:YES];
@@ -224,7 +216,9 @@ static NSString *const follows = @"/follow";
 -(void)signleTap:(UITapGestureRecognizer*)gesture{
     //跳转到我的主页的情景的界面
     NSLog(@"跳转到我的主页的情景的界面");
+    UserInfoEntity *entity = [UserInfoEntity defaultUserInfoEntity];
     HomePageViewController *myHomeVC = [[HomePageViewController alloc] init];
+    myHomeVC.userId = entity.userId;
     myHomeVC.type = @1;
     myHomeVC.isMySelf = YES;
     [self.navigationController pushViewController:myHomeVC animated:YES];
@@ -323,8 +317,24 @@ static NSString *const follows = @"/follow";
     [self addNavLogoImgisTransparent:YES];
     [self addBarItemLeftBarButton:@"" image:@"Page 1" isTransparent:YES];
     
+    FBRequest *request = [FBAPI postWithUrlString:@"/auth/user" requestDictionary:nil delegate:self];
+    [request startRequest];
+    
+    
+    self.tabBarController.tabBar.hidden = NO;
+}
+
+
+-(void)requestSucess:(FBRequest *)request result:(id)result{
+    UserInfo *userInfo = [UserInfo mj_objectWithKeyValues:[result objectForKey:@"data"]];
+    [userInfo saveOrUpdate];
+    [userInfo updateUserInfoEntity];
+    NSLog(@"%@",userInfo);
     UserInfoEntity *entity = [UserInfoEntity defaultUserInfoEntity];
-    //如果已经登录了直接进入个人中心并展示个人的相关信息
+    entity.isLogin = YES;
+    
+    NSLog(@"result %@",result);
+    
     //更新用户名
     _imgV.nickNameLabel.text = entity.nickname;
     //个人简介
@@ -336,37 +346,11 @@ static NSString *const follows = @"/follow";
     [_imgV.headImageView sd_setImageWithURL:[NSURL URLWithString:entity.mediumAvatarUrl] placeholderImage:nil completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
         
     }];
-    //    if (entity.isLogin == YES) {
-    //        //如果已经登录了直接进入个人中心并展示个人的相关信息
-    //        //更新用户名
-    //        _imgV.nickNameLabel.text = entity.nickname;
-    //        //个人简介
-    //        _imgV.summaryLabel.text = entity.summary;
-    //        //等级
-    //        _imgV.talentLabel.text = entity.levelDesc;
-    //        _imgV.levelLabel.text = [NSString stringWithFormat:@"V%d",[entity.level intValue]];
-    //        //更新头像
-    //        [_imgV.headImageView sd_setImageWithURL:[NSURL URLWithString:entity.mediumAvatarUrl] placeholderImage:nil completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
-    //
-    //        }];
-    //    }//如果没有登录提示用户登录
-    //    else{
-    //        //跳到登录页面
-    //        UIStoryboard *loginReginStory = [UIStoryboard storyboardWithName:@"LoginRegisterController" bundle:nil];
-    //        FBLoginRegisterViewController * loginRegisterVC = [loginReginStory instantiateViewControllerWithIdentifier:@"FBLoginRegisterViewController"];
-    //        //设置导航
-    //        UINavigationController *navi = [[UINavigationController alloc] initWithRootViewController:loginRegisterVC];
-    //        [self presentViewController:navi animated:YES completion:nil];
-    //
-    //
-    //    }
-    //将要进入界面时让导航条和tabbar都出现
-    //self.navigationController.navigationBarHidden = YES;
-    self.tabBarController.tabBar.hidden = NO;
+    
+    NSLog(@"follow_count %@",entity.follow_count);
+    //_chanelV.fansNumLabel.text = entity.follow_count;
+
 }
-
-
-
 
 -(void)setImagesRoundedCorners:(float)radius :(UIImageView*)v{
     v.layer.masksToBounds = YES;

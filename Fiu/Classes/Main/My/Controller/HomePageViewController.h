@@ -15,5 +15,6 @@
 @property (nonatomic,strong) UICollectionView *myCollectionView;
 @property (nonatomic,assign) NSInteger currentPage;
 @property (nonatomic,assign) BOOL isMySelf;
+@property (nonatomic,copy) NSString *userId;
 
 @end

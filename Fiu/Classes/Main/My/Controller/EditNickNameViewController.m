@@ -27,7 +27,7 @@ static NSString *const UpdateInfoURL = @"/my/update_profile";
     //self.navigationController.navigationBarHidden = NO;
     self.navViewTitle.text = @"修改昵称";
 //    [self addBarItemLeftBarButton:nil image:@"icon_back"];
-    [self addBarItemRightBarButton:@"保存" image:nil isTransparent:NO];
+    [self addBarItemRightBarButton:@"保存" image:@"" isTransparent:NO];
     
     UserInfoEntity *entity = [UserInfoEntity defaultUserInfoEntity];
     self.nickNameTF.text = entity.nickname;
@@ -60,11 +60,12 @@ static NSString *const UpdateInfoURL = @"/my/update_profile";
         entity.nickname = [[result objectForKey:@"data"] objectForKey:@"nickname"];
         entity.trueNickname = [[result objectForKey:@"data"] objectForKey:@"true_nickname"];
         [SVProgressHUD showSuccessWithStatus:message];
+        [entity updateUserInfo];
+        [self.navigationController popViewControllerAnimated:YES];
     }else{
         [SVProgressHUD showInfoWithStatus:message];
     }
-    request = nil;
-    [self.navigationController popViewControllerAnimated:YES];
+    
 }
 
 - (void)didReceiveMemoryWarning {

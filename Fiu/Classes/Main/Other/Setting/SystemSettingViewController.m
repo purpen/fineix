@@ -18,6 +18,7 @@
 #import "OptionViewController.h"
 #import "AboutViewController.h"
 #import "UMSocial.h"
+#import "Fiu.h"
 
 @interface SystemSettingViewController ()<FBNavigationBarItemsDelegate,NotificationDelege,FBRequestDelegate>
 
@@ -31,14 +32,11 @@ static NSString *const logOut = @"/auth/logout";
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    self.view.backgroundColor = [UIColor colorWithHexString:grayLineColor];
     // Do any additional setup after loading the view from its nib
     //设置导航
     self.navViewTitle.text = @"系统设置";
-    //self.navigationItem.title = @"订阅的情景";
-    //self.navigationController.navigationBarHidden = NO;
-    //    [self addBarItemLeftBarButton:nil image:@"icon_back"];
     self.delegate = self;
-//    [self addBarItemLeftBarButton:nil image:@"icon_back"];
     self.backBtn.layer.masksToBounds = YES;
     self.backBtn.layer.cornerRadius = 3;
     
