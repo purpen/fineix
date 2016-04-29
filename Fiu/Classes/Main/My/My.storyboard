@@ -972,8 +972,8 @@
                             <constraint firstItem="15r-Xo-VOe" firstAttribute="top" secondItem="QaQ-kd-mgB" secondAttribute="topMargin" constant="70" id="6Hk-BA-4Oe"/>
                             <constraint firstAttribute="trailingMargin" secondItem="15r-Xo-VOe" secondAttribute="trailing" constant="-20" id="Bcu-Ef-KRc"/>
                             <constraint firstItem="RUj-k7-eT6" firstAttribute="top" secondItem="15r-Xo-VOe" secondAttribute="bottom" constant="8" id="Kyh-M6-vKO"/>
-                            <constraint firstItem="Gk7-4y-7e8" firstAttribute="top" secondItem="RUj-k7-eT6" secondAttribute="bottom" id="Li4-Qm-ds9"/>
                             <constraint firstItem="15r-Xo-VOe" firstAttribute="leading" secondItem="QaQ-kd-mgB" secondAttribute="leadingMargin" constant="-20" id="QI8-ui-BeZ"/>
+                            <constraint firstItem="Gk7-4y-7e8" firstAttribute="top" secondItem="RUj-k7-eT6" secondAttribute="bottom" id="dx7-WV-q0b"/>
                             <constraint firstItem="RUj-k7-eT6" firstAttribute="leading" secondItem="QaQ-kd-mgB" secondAttribute="leadingMargin" constant="-20" id="g0K-4v-1We"/>
                             <constraint firstAttribute="trailingMargin" secondItem="RUj-k7-eT6" secondAttribute="trailing" constant="-20" id="zlA-Cf-0fG"/>
                         </constraints>
@@ -992,7 +992,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="3gF-vQ-CPz" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1286.5" y="1174.5"/>
+            <point key="canvasLocation" x="1341.5" y="1179.5"/>
         </scene>
     </scenes>
     <resources>

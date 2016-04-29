@@ -128,6 +128,7 @@
             NSNumber *total_rows = [[result valueForKey:@"data"] valueForKey:@"total_rows"];
             if (_fiuSceneList.count == [total_rows intValue]) {
                 [self.myCollectionView.mj_footer endRefreshingWithNoMoreData];
+                self.myCollectionView.mj_footer.hidden = YES;
             }
             [self.myCollectionView reloadData];
             [SVProgressHUD dismiss];
@@ -146,6 +147,7 @@
             NSNumber *total_rows = [[result valueForKey:@"data"] valueForKey:@"total_rows"];
             if (_fiuSceneList.count == [total_rows intValue]) {
                 [self.myCollectionView.mj_footer endRefreshingWithNoMoreData];
+                self.myCollectionView.mj_footer.hidden = YES;
             }
             [self.myCollectionView reloadData];
             [SVProgressHUD dismiss];
@@ -197,13 +199,17 @@
 
 -(void)signleTap2:(UITapGestureRecognizer*)sender{
     NSLog(@"跳转到我的主页的关注的界面");
+    UserInfoEntity *entity = [UserInfoEntity defaultUserInfoEntity];
     MyPageFocusOnViewController *view = [[MyPageFocusOnViewController alloc] init];
+    view.userId = entity.userId;
     [self.navigationController pushViewController:view animated:YES];
 }
 
 -(void)signleTap3:(UITapGestureRecognizer*)sender{
     NSLog(@"跳转到我的主页的粉丝的界面");
     MyFansViewController *view = [[MyFansViewController alloc] init];
+    UserInfoEntity *entity = [UserInfoEntity defaultUserInfoEntity];
+    view.userId = entity.userId;
     [self.navigationController pushViewController:view animated:YES];
 }
 

@@ -164,6 +164,10 @@
         [self.rightBtn setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
         self.rightBtn.titleLabel.font = [UIFont systemFontOfSize:15];
     }
+    if ([title isEqualToString:@"清空"]) {
+        [self.rightBtn setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+        self.rightBtn.titleLabel.font = [UIFont systemFontOfSize:15];
+    }
     if (transparent == NO) {
         self.navView.hidden = NO;
         [self.navView addSubview:self.rightBtn];

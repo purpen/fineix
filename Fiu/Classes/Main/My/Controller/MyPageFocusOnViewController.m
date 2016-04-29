@@ -13,10 +13,12 @@
 #import "FBRequest.h"
 #import "UserInfo.h"
 #import <SVProgressHUD.h>
+#import "MJRefresh.h"
 
 @interface MyPageFocusOnViewController ()<FBNavigationBarItemsDelegate,UITableViewDelegate,UITableViewDataSource,FBRequestDelegate>
 {
     NSMutableArray *_modelAry;
+    int _page;
 }
 @end
 
@@ -24,6 +26,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    _page = 1;
     _modelAry = [NSMutableArray array];
     // Do any additional setup after loading the view.
     //设置导航条
@@ -32,9 +35,26 @@
     self.delegate = self;
     
     //请求数据
-    FBRequest *request = [FBAPI postWithUrlString:@"/follow" requestDictionary:@{@"page":@1,@"size":@15,@"user_id":self.userId,@"find_type":@1} delegate:self];
+    FBRequest *request = [FBAPI postWithUrlString:@"/follow" requestDictionary:@{@"page":@(_page),@"size":@15,@"user_id":self.userId,@"find_type":@1} delegate:self];
     request.flag = @"follow";
     [request startRequest];
+    
+    self.mytableView.mj_header = [MJRefreshNormalHeader headerWithRefreshingBlock:^{
+        // 进入刷新状态后会自动调用这个block
+        FBRequest *request = [FBAPI postWithUrlString:@"/follow" requestDictionary:@{@"page":@(1),@"size":@15,@"user_id":self.userId,@"find_type":@1} delegate:self];
+        request.flag = @"follow";
+        [request startRequest];
+        [self.mytableView.mj_header endRefreshing];
+    }];
+    
+    self.mytableView.mj_footer = [MJRefreshAutoNormalFooter footerWithRefreshingBlock:^{
+        // 进入刷新状态后会自动调用这个block
+        _page++;
+        FBRequest *request = [FBAPI postWithUrlString:@"/follow" requestDictionary:@{@"page":@(_page),@"size":@15,@"user_id":self.userId,@"find_type":@1} delegate:self];
+        request.flag = @"follow";
+        [request startRequest];
+        [self.mytableView.mj_header endRefreshing];
+    }];
     
     [self.view addSubview:self.mytableView];
 }
@@ -53,6 +73,17 @@
                 model.nickname = followsDict[@"nickname"];
                 model.mediumAvatarUrl = followsDict[@"avatar_url"];
                 [_modelAry addObject:model];
+            }
+            if (_modelAry.count == [dataDict[@"total_rows"] integerValue]) {
+                [self.mytableView.mj_footer endRefreshingWithNoMoreData];
+                self.mytableView.mj_footer.hidden = YES;
+            }else{
+                
+            }
+            if (_modelAry.count == 0) {
+                self.mytableView.separatorStyle = UITableViewCellSeparatorStyleNone;
+            }else{
+                self.mytableView.separatorStyle = UITableViewCellSeparatorStyleSingleLine;
             }
         }
 
@@ -85,6 +116,7 @@
         _mytableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 64, SCREEN_WIDTH, SCREEN_HEIGHT-64) style:UITableViewStylePlain];
         self.mytableView.delegate = self;
         self.mytableView.dataSource = self;
+        self.mytableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     }
     return _mytableView;
 }

@@ -17,7 +17,7 @@
 #import "ChanelViewTwo.h"
 #import "BottomView.h"
 #import "AppBtnView.h"
-#import "MyOrdersViewController.h"
+#import "AllOderViewController.h"
 #import "HomePageViewController.h"
 #import "MyPageFocusOnViewController.h"
 #import "MyFansViewController.h"
@@ -29,6 +29,9 @@
 #import "FBAPI.h"
 #import "FBRequest.h"
 #import "UserInfo.h"
+#import "MessageViewController.h"
+#import "AboutViewController.h"
+#import "OptionViewController.h"
 
 @interface MyselfViewController ()<UIScrollViewDelegate,FBNavigationBarItemsDelegate,FBRequestDelegate>
 
@@ -172,10 +175,14 @@ static NSString *const follows = @"/follow";
 
 -(void)clickOpinionBtn:(UIButton*)sender{
     NSLog(@"意见与反馈");
+    OptionViewController *vc = [[OptionViewController alloc] init];
+    [self.navigationController pushViewController:vc animated:YES];
 }
 
 -(void)clickAboutBtn:(UIButton*)sender{
     NSLog(@"关于我们界面");
+    AboutViewController *vc = [[AboutViewController alloc] init];
+    [self.navigationController pushViewController:vc animated:YES];
 }
 
 //点击我要认证按钮
@@ -210,6 +217,8 @@ static NSString *const follows = @"/follow";
     //跳转到我的主页的情景的界面
     NSLog(@"跳转到我的主页的粉丝的界面");
     MyFansViewController *view = [[MyFansViewController alloc] init];
+    UserInfoEntity *entity = [UserInfoEntity defaultUserInfoEntity];
+    view.userId = entity.userId;
     [self.navigationController pushViewController:view animated:YES];
 }
 
@@ -243,14 +252,15 @@ static NSString *const follows = @"/follow";
 -(void)orderBtn:(UIButton*)sender{
     NSLog(@"#########");
     //跳转到全部订单页
-    UIStoryboard *myStory = [UIStoryboard storyboardWithName:@"My" bundle:nil];
-    MyOrdersViewController *oderVC = [myStory instantiateViewControllerWithIdentifier:@"MyOrdersViewController"];
-    [self.navigationController pushViewController:oderVC animated:YES];
+    AllOderViewController *vc = [[AllOderViewController alloc] init];
+    [self.navigationController pushViewController:vc animated:YES];
 }
 
 //消息按钮
 -(void)messageBtn:(UIButton*)sender{
     NSLog(@"#########");
+    MessageViewController *vc = [[MessageViewController alloc] init];
+    [self.navigationController pushViewController:vc animated:YES];
 }
 //订阅按钮
 -(void)subscribeBtn:(UIButton*)sender{
