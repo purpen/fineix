@@ -39,9 +39,6 @@ static NSString *const URLTagS = @"/scene_tags/getlist";
     
     [self setNavigationViewUI];
     
-    self.currentpageNum = 0;
-    [self networkSceneListData];
-    
 }
 
 - (void)viewDidLoad {
@@ -50,6 +47,8 @@ static NSString *const URLTagS = @"/scene_tags/getlist";
     [self networkRollImgData];
     [self networkTagsListData];
     [self networkFiuSceneData];
+    self.currentpageNum = 0;
+    [self networkSceneListData];
     
     [self setDiscoverViewUI];
 }

@@ -8,10 +8,12 @@
 
 #import <UIKit/UIKit.h>
 #import "Fiu.h"
+#import "CategoryTagRollView.h"
 
 @interface GoodsCategoryView : UIScrollView <UITableViewDelegate, UITableViewDataSource>
 
 @pro_strong UINavigationController              *   nav;
+@pro_strong UITableView                         *   categoryTable;
 
 /**
  *  创建商品列表

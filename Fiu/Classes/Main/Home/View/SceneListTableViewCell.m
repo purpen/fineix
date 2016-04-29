@@ -228,7 +228,7 @@
     NSString * num = [NSString stringWithFormat:@"%zi", count];
     CGFloat numLength = [num boundingRectWithSize:CGSizeMake(320, 1000) options:(NSStringDrawingUsesLineFragmentOrigin) attributes:nil context:nil].size.width;
     [lable mas_updateConstraints:^(MASConstraintMaker *make) {
-        make.size.mas_equalTo(CGSizeMake(numLength * 1.1, 15));
+        make.size.mas_equalTo(CGSizeMake(numLength * 1.2, 15));
     }];
     return num;
 }

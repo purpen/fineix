@@ -13,12 +13,19 @@
 #import "GoodsInfoViewController.h"
 #import "GoodsCarViewController.h"
 #import "GoodsTableViewCell.h"
+#import "CategoryRow.h"
+#import "GoodsRow.h"
 
 static NSString *const URLTagS = @"/scene_tags/getlist";
+static NSString *const URLCategoryList = @"/category/getlist";
+static NSString *const URLFiuGoods = @"/scene_product/getlist";
 
 @interface MallViewController()
 
 @pro_strong NSMutableArray              *   tagsList;
+@pro_strong NSMutableArray              *   categoryList;
+@pro_strong NSMutableArray              *   goodsList;
+@pro_strong NSMutableArray              *   goodsIdList;
 
 @end
 
@@ -35,6 +42,8 @@ static NSString *const URLTagS = @"/scene_tags/getlist";
     [super viewDidLoad];
     
     [self networkTagsListData];
+    [self networkCategoryListData];
+    [self networkFiuGoodsData];
     [self setMallViewUI];
     
 }
@@ -56,16 +65,94 @@ static NSString *const URLTagS = @"/scene_tags/getlist";
     }];
 }
 
+#pragma mark 分类列表
+- (void)networkCategoryListData {
+    self.categoryRequest = [FBAPI getWithUrlString:URLCategoryList requestDictionary:@{@"domain":@"10"} delegate:self];
+    [self.categoryRequest startRequestSuccess:^(FBRequest *request, id result) {
+        NSArray * categoryArr = [[result valueForKey:@"data"] valueForKey:@"rows"];
+        for (NSDictionary * categoryDic in categoryArr) {
+            CategoryRow * categoryModel = [[CategoryRow alloc] initWithDictionary:categoryDic];
+            [self.categoryList addObject:categoryModel];
+        }
+        [self.mallTableView reloadData];
+        
+    } failure:^(FBRequest *request, NSError *error) {
+        [SVProgressHUD showErrorWithStatus:[error localizedDescription]];
+    }];
+}
+
+#pragma mark 最Fiu商品
+- (void)networkFiuGoodsData {
+    [SVProgressHUD show];
+    self.fiuGoodsRequest = [FBAPI getWithUrlString:URLFiuGoods requestDictionary:@{@"size":@"8", @"page":@(self.currentpageNum + 1), @"fine":@"1"} delegate:self];
+    [self.fiuGoodsRequest startRequestSuccess:^(FBRequest *request, id result) {
+        NSArray * goodsArr = [[result valueForKey:@"data"] valueForKey:@"rows"];
+        for (NSDictionary * goodsDic in goodsArr) {
+            GoodsRow * goodsModel = [[GoodsRow alloc] initWithDictionary:goodsDic];
+            [self.goodsList addObject:goodsModel];
+            [self.goodsIdList addObject:[NSString stringWithFormat:@"%zi", goodsModel.idField]];
+        }
+        [self.mallTableView reloadData];
+        self.currentpageNum = [[[result valueForKey:@"data"] valueForKey:@"current_page"] integerValue];
+        self.totalPageNum = [[[result valueForKey:@"data"] valueForKey:@"total_page"] integerValue];
+//        if (self.totalPageNum > 1) {
+//            [self addMJRefresh:self.mallTableView];
+//            [self requestIsLastData:self.mallTableView currentPage:self.currentpageNum withTotalPage:self.totalPageNum];
+//        }
+        [self.mallTableView reloadData];
+        NSLog(@"%@", self.goodsList);
+        [SVProgressHUD dismiss];
+        
+    } failure:^(FBRequest *request, NSError *error) {
+        [SVProgressHUD showErrorWithStatus:[error localizedDescription]];
+    }];
+}
+
+#pragma mark 判断是否为最后一条数据
+- (void)requestIsLastData:(UITableView *)table currentPage:(NSInteger )current withTotalPage:(NSInteger)total {
+    BOOL isLastPage = (current == total);
+    
+    if (!isLastPage) {
+        if (table.mj_footer.state == MJRefreshStateNoMoreData) {
+            [table.mj_footer resetNoMoreData];
+        }
+    }
+    if (current == total == 1) {
+        table.mj_footer.state = MJRefreshStateNoMoreData;
+        table.mj_footer.hidden = true;
+    }
+    if ([table.mj_header isRefreshing]) {
+        [table.mj_header endRefreshing];
+    }
+    if ([table.mj_footer isRefreshing]) {
+        if (isLastPage) {
+            [table.mj_footer endRefreshingWithNoMoreData];
+        } else  {
+            [table.mj_footer endRefreshing];
+        }
+    }
+    [SVProgressHUD dismiss];
+}
+
+#pragma mark 上拉加载 & 下拉刷新
+- (void)addMJRefresh:(UITableView *)table {
+    table.mj_header = [MJRefreshNormalHeader headerWithRefreshingBlock:^{
+        self.currentpageNum = 0;
+        
+    }];
+    
+    table.mj_footer = [MJRefreshAutoNormalFooter footerWithRefreshingBlock:^{
+        if (self.currentpageNum < self.totalPageNum) {
+            
+        } else {
+            [table.mj_footer endRefreshing];
+        }
+    }];
+}
 
 #pragma mark - 设置视图的UI
 - (void)setMallViewUI {
     [self.view addSubview:self.mallTableView];
-    if ([self.mallTableView respondsToSelector:@selector(setSeparatorInset:)]) {
-        [self.mallTableView setSeparatorInset:UIEdgeInsetsZero];
-    }
-    if ([self.mallTableView respondsToSelector:@selector(setLayoutMargins:)]) {
-        [self.mallTableView setLayoutMargins:UIEdgeInsetsZero];
-    }
 }
 
 #pragma mark - 顶部轮播图
@@ -87,6 +174,7 @@ static NSString *const URLTagS = @"/scene_tags/getlist";
         _mallTableView.tableHeaderView = self.rollView;
         _mallTableView.showsVerticalScrollIndicator = NO;
         _mallTableView.backgroundColor = [UIColor whiteColor];
+        _mallTableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     }
     return _mallTableView;
 }
@@ -100,7 +188,7 @@ static NSString *const URLTagS = @"/scene_tags/getlist";
     if (section == 0) {
         return 3;
     } else if (section == 1) {
-        return 3;
+        return self.goodsList.count;
     }
     return 0;
 }
@@ -126,9 +214,8 @@ static NSString *const URLTagS = @"/scene_tags/getlist";
         }  else if (indexPath.row == 2) {
             static NSString * mallMenuTableViewCellID = @"mallMenuTableViewCell";
             MallMenuTableViewCell * cell = [tableView dequeueReusableCellWithIdentifier:mallMenuTableViewCellID];
-            if (!cell) {
-                cell = [[MallMenuTableViewCell alloc] initWithStyle:(UITableViewCellStyleDefault) reuseIdentifier:mallMenuTableViewCellID];
-            }
+            cell = [[MallMenuTableViewCell alloc] initWithStyle:(UITableViewCellStyleDefault) reuseIdentifier:mallMenuTableViewCellID];
+            [cell setCategoryData:self.categoryList];
             cell.nav = self.navigationController;
             return cell;
         }
@@ -136,8 +223,10 @@ static NSString *const URLTagS = @"/scene_tags/getlist";
     } else if (indexPath.section == 1) {
         static NSString * mallGoodsCellId = @"MallGoodsCellId";
         GoodsTableViewCell * cell = [tableView dequeueReusableCellWithIdentifier:mallGoodsCellId];
-        cell = [[GoodsTableViewCell alloc] initWithStyle:(UITableViewCellStyleDefault) reuseIdentifier:mallGoodsCellId];
-        [cell setUI];
+        if (!cell) {
+            cell = [[GoodsTableViewCell alloc] initWithStyle:(UITableViewCellStyleDefault) reuseIdentifier:mallGoodsCellId];
+        }
+        [cell setGoodsData:self.goodsList[indexPath.row]];
         return cell;
     }
     
@@ -179,15 +268,6 @@ static NSString *const URLTagS = @"/scene_tags/getlist";
     return 0.01;
 }
 
-- (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath {
-    if ([cell respondsToSelector:@selector(setSeparatorInset:)]) {
-        [cell setSeparatorInset:UIEdgeInsetsZero];
-    }
-    if ([cell respondsToSelector:@selector(setLayoutMargins:)]) {
-        [cell setLayoutMargins:UIEdgeInsetsZero];
-    }
-}
-
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     if (indexPath.section == 1) {
         GoodsInfoViewController * goodsInfoVC = [[GoodsInfoViewController alloc] init];
@@ -208,7 +288,7 @@ static NSString *const URLTagS = @"/scene_tags/getlist";
 //  点击左边barItem
 - (void)leftBarItemSelected {
     SearchViewController * searchVC = [[SearchViewController alloc] init];
-    searchVC.searchType = 3;
+    searchVC.searchType = 2;
     [self.navigationController pushViewController:searchVC animated:YES];
 }
 
@@ -218,6 +298,12 @@ static NSString *const URLTagS = @"/scene_tags/getlist";
     [self.navigationController pushViewController:goodsCarVC animated:YES];
 }
 
+- (void)viewWillDisappear:(BOOL)animated {
+    [super viewWillDisappear:animated];
+    [SVProgressHUD dismiss];
+}
+
+#pragma mark -
 - (NSMutableArray *)tagsList {
     if (!_tagsList) {
         _tagsList = [NSMutableArray array];
@@ -225,9 +311,27 @@ static NSString *const URLTagS = @"/scene_tags/getlist";
     return _tagsList;
 }
 
-- (void)viewWillDisappear:(BOOL)animated {
-    [super viewWillDisappear:animated];
-    [SVProgressHUD dismiss];
+- (NSMutableArray *)categoryList {
+    if (!_categoryList) {
+        _categoryList = [NSMutableArray array];
+    }
+    return _categoryList;
 }
+
+- (NSMutableArray *)goodsList {
+    if (!_goodsList) {
+        _goodsList = [NSMutableArray array];
+    }
+    return _goodsList;
+}
+
+- (NSMutableArray *)goodsIdList {
+    if (!_goodsIdList) {
+        _goodsIdList = [NSMutableArray array];
+    }
+    return _goodsIdList;
+}
+
+
 
 @end

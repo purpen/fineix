@@ -7,15 +7,14 @@
 //
 
 #import "DataNumTableViewCell.h"
+#import "CommentViewController.h"
 
 @implementation DataNumTableViewCell
 
 - (instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier {
     self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
     if (self) {
-        
-        [self setCellViewUI];
-        
+    
         self.selectionStyle = UITableViewCellSelectionStyleNone;
         
     }
@@ -24,11 +23,12 @@
 
 #pragma mark - 
 - (void)setSceneDataNum:(SceneInfoData *)model {
-
     [_lookBtn setTitle:[self abouText:_lookBtn withText:model.viewCount] forState:(UIControlStateNormal)];
     [_likeBtn setTitle:[self abouText:_likeBtn withText:model.loveCount]  forState:(UIControlStateNormal)];
     [_commentBtn setTitle:[self abouText:_commentBtn withText:model.commentCount] forState:(UIControlStateNormal)];
+    self.tagetId = [NSString stringWithFormat:@"%zi", model.idField];
     
+    [self setCellViewUI];
 }
 
 #pragma mark - 设置cell的UI
@@ -99,8 +99,15 @@
         _commentBtn.titleLabel.font = [UIFont systemFontOfSize:Font_Number];
         [_commentBtn setTitleEdgeInsets:(UIEdgeInsetsMake(-15, 0, 0, 0))];
         [_commentBtn setTitleColor:[UIColor colorWithHexString:tabBarTitle alpha:1] forState:(UIControlStateNormal)];
+        [_commentBtn addTarget:self action:@selector(commentBtnClick) forControlEvents:(UIControlEventTouchUpInside)];
     }
     return _commentBtn;
+}
+
+- (void)commentBtnClick {
+    CommentViewController * commentVC = [[CommentViewController alloc] init];
+    commentVC.targetId = self.tagetId;
+    [self.nav pushViewController:commentVC animated:YES];
 }
 
 //  数字宽度

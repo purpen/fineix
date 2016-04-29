@@ -17,24 +17,33 @@
         
         self.selectionStyle = UITableViewCellSelectionStyleNone;
         self.backgroundColor = [UIColor colorWithHexString:grayLineColor];
-        [self setCellViewUI];
-        
+        self.goodsImgMarr = [NSMutableArray array];
     }
     return self;
 }
 
-- (void)setUI {
-    _title.text = @"大江无人机X350";
-    _typeImg.image = [UIImage imageNamed:@"Goods_thn"];
-    _price.text = @"¥288";
-    
-    NSMutableArray * imgMarr = [NSMutableArray array];
-    for (NSInteger idx = 0; idx < 4; ++ idx) {
-        UIImageView * image = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 265, 150)];
-        image.image = [UIImage imageNamed:@"banner"];
-        [imgMarr addObject:image];
+- (void)setGoodsData:(GoodsRow *)model {
+    self.title.text = model.title;
+
+    // 产品来源: 1.官网；2.淘宝；3.天猫；4.京东
+    if (model.attrbute == 1) {
+        self.typeImg.image = [UIImage imageNamed:@"Goods_thn"];
+    } else if (model.attrbute == 2) {
+        self.typeImg.image = [UIImage imageNamed:@"Goods_taobao"];
+    } else if (model.attrbute == 3) {
+        self.typeImg.image = [UIImage imageNamed:@"Goods_tmall"];
+    } else if (model.attrbute == 4) {
+        self.typeImg.image = [UIImage imageNamed:@"Goods_JD"];
     }
-    [self setRollImgViewUI:imgMarr];
+    
+    self.price.text = [NSString stringWithFormat:@"¥%.2f", model.salePrice];
+
+    for (NSInteger idx = 0; idx < model.bannerAsset.count; ++ idx) {
+        UIImageView * image = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 265, 150)];
+        [image downloadImage:model.bannerAsset[idx] place:[UIImage imageNamed:@""]];
+        [self.goodsImgMarr addObject:image];
+    }
+    [self setCellViewUI];
 }
 
 #pragma mark -
@@ -74,6 +83,7 @@
         _goodsImgRoll = [[UIScrollView alloc] init];
         _goodsImgRoll.showsHorizontalScrollIndicator = NO;
         _goodsImgRoll.delegate = self;
+        [self setRollImgViewUI:self.goodsImgMarr];
     }
     return _goodsImgRoll;
 }

@@ -40,20 +40,6 @@ static NSString *const URLAllFiuSceneList = @"/scene_scene/";
     
 }
 
-- (NSMutableArray *)allFiuSceneMarr {
-    if (!_allFiuSceneMarr) {
-        _allFiuSceneMarr = [NSMutableArray array];
-    }
-    return _allFiuSceneMarr;
-}
-
-- (NSMutableArray *)allFiuSceneIdMarr {
-    if (!_allFiuSceneIdMarr) {
-        _allFiuSceneIdMarr = [NSMutableArray array];
-    }
-    return _allFiuSceneIdMarr;
-}
-
 #pragma mark - 网络请求
 - (void)networkAllFiuSceneList {
     [SVProgressHUD show];
@@ -104,7 +90,6 @@ static NSString *const URLAllFiuSceneList = @"/scene_scene/";
 }
 
 #pragma mark - 情景列表
-#pragma mark - 情景滑动列表
 - (UICollectionView *)allSceneView {
     if (!_allSceneView) {
         UICollectionViewFlowLayout * flowLayout = [[UICollectionViewFlowLayout alloc] init];
@@ -161,6 +146,21 @@ static NSString *const URLAllFiuSceneList = @"/scene_scene/";
 - (void)viewWillDisappear:(BOOL)animated {
     [super viewWillDisappear:animated];
     [SVProgressHUD dismiss];
+}
+
+#pragma mark -
+- (NSMutableArray *)allFiuSceneMarr {
+    if (!_allFiuSceneMarr) {
+        _allFiuSceneMarr = [NSMutableArray array];
+    }
+    return _allFiuSceneMarr;
+}
+
+- (NSMutableArray *)allFiuSceneIdMarr {
+    if (!_allFiuSceneIdMarr) {
+        _allFiuSceneIdMarr = [NSMutableArray array];
+    }
+    return _allFiuSceneIdMarr;
 }
 
 @end

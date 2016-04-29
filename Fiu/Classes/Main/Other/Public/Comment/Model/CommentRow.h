@@ -32,6 +32,7 @@
 @property (nonatomic, assign) NSInteger updatedOn;
 @property (nonatomic, strong) CommentUser * user;
 @property (nonatomic, assign) NSInteger userId;
+@property (nonatomic, strong) NSString * replyUserName;
 
 -(instancetype)initWithDictionary:(NSDictionary *)dictionary;
 @end

@@ -14,6 +14,11 @@
 @interface MallViewController : FBViewController <FBNavigationBarItemsDelegate, UITableViewDelegate, UITableViewDataSource>
 
 @pro_strong FBRequest               *   tagsRequest;
+@pro_strong FBRequest               *   categoryRequest;
+@pro_strong FBRequest               *   fiuGoodsRequest;
+@pro_assign NSInteger                   currentpageNum;
+@pro_assign NSInteger                   totalPageNum;
+
 @pro_strong UITableView             *   mallTableView;
 @pro_strong GroupHeaderView         *   headerView;
 @pro_strong FBRollImages            *   rollView;

@@ -7,6 +7,7 @@
 //
 
 #import "CommentViewController.h"
+#import "CommentDataTableViewCell.h"
 #import "CommentRow.h"
 
 static NSString *const URLSceneComment = @"/comment/getlist";
@@ -14,7 +15,9 @@ static NSString *const URLSendSceneComment = @"/comment/ajax_comment";
 
 @interface CommentViewController ()
 
-@pro_strong NSMutableArray      *   commentListMarr;
+@pro_strong NSMutableArray      *   commentListMarr;    //  评论列表
+@pro_strong NSMutableArray      *   targetUserId;       //  被回复人id
+@pro_strong NSMutableArray      *   replyId;            //  被回复评论id
 
 @end
 
@@ -39,39 +42,63 @@ static NSString *const URLSendSceneComment = @"/comment/ajax_comment";
 #pragma mark - 网络请求 
 #pragma mark 请求评论
 - (void)networkSceneCommenstData {
-    self.sceneCommentRequest = [FBAPI getWithUrlString:URLSceneComment requestDictionary:@{@"target_id":self.targetId, @"page":@(self.currentpageNum + 1), @"type":@"12", @"size":@"8"} delegate:self];
+    [SVProgressHUD show];
+    self.sceneCommentRequest = [FBAPI getWithUrlString:URLSceneComment requestDictionary:@{@"target_id":self.targetId, @"page":@(self.currentpageNum + 1), @"type":@"12", @"size":@"12"} delegate:self];
     [self.sceneCommentRequest startRequestSuccess:^(FBRequest *request, id result) {
         NSArray * sceneArr = [[result valueForKey:@"data"] valueForKey:@"rows"];
         for (NSDictionary * sceneDic in sceneArr) {
             CommentRow * commentModel = [[CommentRow alloc] initWithDictionary:sceneDic];
             [self.commentListMarr addObject:commentModel];
         }
+        [self.targetUserId addObjectsFromArray:[[[result valueForKey:@"data"] valueForKey:@"rows"] valueForKey:@"user_id"]];
+        [self.replyId addObjectsFromArray:[[[result valueForKey:@"data"] valueForKey:@"rows"] valueForKey:@"_id"]];
         [self.commentTabel reloadData];
         self.currentpageNum = [[[result valueForKey:@"data"] valueForKey:@"current_page"] integerValue];
         self.totalPageNum = [[[result valueForKey:@"data"] valueForKey:@"total_page"] integerValue];
-        if (self.totalPageNum > 1) {
-            [self addMJRefresh:self.commentTabel];
-            [self requestIsLastData:self.commentTabel currentPage:self.currentpageNum withTotalPage:self.totalPageNum];
-        }
+        [self requestIsLastData:self.commentTabel currentPage:self.currentpageNum withTotalPage:self.totalPageNum];
+        [SVProgressHUD dismiss];
         
     } failure:^(FBRequest *request, NSError *error) {
-        NSLog(@"%@", error);
+        [SVProgressHUD showErrorWithStatus:[error localizedDescription]];
     }];
 }
 
 #pragma mark 发布评论
-- (void)networkSendCommentData {
+- (void)networkSendCommentDataWithTargetUserId:(NSString *)targetUserId withReplyId:(NSString *)replyId withIsReply:(NSString *)isReply {
+    /**
+     *  isReply
+     *  0:默认评论场景 ／ 1:回复评论
+     */
     if ([self.writeComment.writeText.text isEqualToString:@""]) {
         [SVProgressHUD showInfoWithStatus:@"请填写评论"];
     
     } else {
-        self.sendCommentRequest = [FBAPI postWithUrlString:URLSendSceneComment requestDictionary:@{@"from_site":@"ios", @"type":@"12", @"target_id":self.targetId, @"content":self.writeComment.writeText.text} delegate:self];
-        [self.sendCommentRequest startRequestSuccess:^(FBRequest *request, id result) {
-            NSLog(@"＝＝＝＝＝＝＝＝＝＝ ＊＊＊＊＊＊＊＊＊＊  －－－－－－ 提交评论%@", result);
+        if ([isReply isEqualToString:@"1"]) {
+            self.replyCommentRequest = [FBAPI postWithUrlString:URLSendSceneComment requestDictionary:@{@"from_site":@"3", @"type":@"12", @"target_id":self.targetId, @"content":self.writeComment.writeText.text ,@"is_reply":isReply,@"reply_user_id":targetUserId, @"reply_id":replyId} delegate:self];
+            [self.replyCommentRequest startRequestSuccess:^(FBRequest *request, id result) {
+                [self.writeComment.writeText resignFirstResponder];
+                self.writeComment.writeText.text = @"";
+                self.isReply = 0;
+                self.writeComment.writeText.placeholder = NSLocalizedString(@"comment", nil);
+                [self.commentTabel.mj_header beginRefreshing];
+                [SVProgressHUD showSuccessWithStatus:@"回复成功"];
+                
+            } failure:^(FBRequest *request, NSError *error) {
+                [SVProgressHUD showErrorWithStatus:[error localizedDescription]];
+            }];
             
-        } failure:^(FBRequest *request, NSError *error) {
-            
-        }];
+        } else if ([isReply isEqualToString:@"0"]) {
+            self.sendCommentRequest = [FBAPI postWithUrlString:URLSendSceneComment requestDictionary:@{@"from_site":@"3", @"type":@"12", @"target_id":self.targetId, @"content":self.writeComment.writeText.text ,@"is_reply":isReply} delegate:self];
+            [self.sendCommentRequest startRequestSuccess:^(FBRequest *request, id result) {
+                [self.writeComment.writeText resignFirstResponder];
+                self.writeComment.writeText.text = @"";
+                [self.commentTabel.mj_header beginRefreshing];
+                [SVProgressHUD showSuccessWithStatus:@"评论成功"];
+                
+            } failure:^(FBRequest *request, NSError *error) {
+                [SVProgressHUD showErrorWithStatus:[error localizedDescription]];
+            }];
+        }
     }
     
 }
@@ -104,11 +131,12 @@ static NSString *const URLSendSceneComment = @"/comment/ajax_comment";
 
 #pragma mark 上拉加载 & 下拉刷新
 - (void)addMJRefresh:(UITableView *)table {
-//    table.mj_header = [MJRefreshNormalHeader headerWithRefreshingBlock:^{
-//        self.currentpageNum = 0;
-//        [self networkSceneCommenstData];
-//    }];
-//    
+    table.mj_header = [MJRefreshNormalHeader headerWithRefreshingBlock:^{
+        self.currentpageNum = 0;
+        [self.commentListMarr removeAllObjects];
+        [self networkSceneCommenstData];
+    }];
+    
     table.mj_footer = [MJRefreshAutoNormalFooter footerWithRefreshingBlock:^{
         if (self.currentpageNum < self.totalPageNum) {
             [self networkSceneCommenstData];
@@ -134,9 +162,19 @@ static NSString *const URLSendSceneComment = @"/comment/ajax_comment";
 - (WriteCommentView *)writeComment {
     if (!_writeComment) {
         _writeComment = [[WriteCommentView alloc] init];
-        [_writeComment.sendBtn addTarget:self action:@selector(networkSendCommentData) forControlEvents:(UIControlEventTouchUpInside)];
+        self.isReply = 0;
+        [_writeComment.sendBtn addTarget:self action:@selector(sendCommentData) forControlEvents:(UIControlEventTouchUpInside)];
     }
     return _writeComment;
+}
+
+#pragma mark 发表评论
+- (void)sendCommentData {
+    if (self.isReply == 0) {
+        [self networkSendCommentDataWithTargetUserId:nil withReplyId:nil withIsReply:@"0"];
+    } else if (self.isReply == 1) {
+        [self networkSendCommentDataWithTargetUserId:self.tagetUserId withReplyId:self.replyCommentId withIsReply:@"1"];
+    }
 }
 
 #pragma mark 评论列表
@@ -146,6 +184,9 @@ static NSString *const URLSendSceneComment = @"/comment/ajax_comment";
         _commentTabel.delegate = self;
         _commentTabel.dataSource = self;
         _commentTabel.showsVerticalScrollIndicator = NO;
+        _commentTabel.tableFooterView = [UIView new];
+        _commentTabel.estimatedRowHeight = 100;
+        [self addMJRefresh:_commentTabel];
     }
     return _commentTabel;
 }
@@ -156,17 +197,21 @@ static NSString *const URLSendSceneComment = @"/comment/ajax_comment";
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    static NSString * CellId = @"commentDataCellId";
-    UITableViewCell * cell = [tableView dequeueReusableCellWithIdentifier:CellId];
+    static NSString * CommentDataCellId = @"commentDataCellId";
+    CommentDataTableViewCell * cell = [tableView dequeueReusableCellWithIdentifier:CommentDataCellId];
     if (!cell) {
-        cell = [[UITableViewCell alloc] initWithStyle:(UITableViewCellStyleDefault) reuseIdentifier:CellId];
+        cell = [[CommentDataTableViewCell alloc] initWithStyle:(UITableViewCellStyleDefault) reuseIdentifier:CommentDataCellId];
     }
-    cell.textLabel.text = [NSString stringWithFormat:@"第 %zi 个评论", indexPath.row];
+    [cell setCommentData:self.commentListMarr[indexPath.row]];
     return cell;
 }
 
-- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-    return 100;
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    self.isReply = 1;
+    self.writeComment.writeText.placeholder = NSLocalizedString(@"reply", nil);
+    [self.writeComment.writeText becomeFirstResponder];
+    self.tagetUserId = self.targetUserId[indexPath.row];
+    self.replyCommentId = self.replyId[indexPath.row];
 }
 
 #pragma mark - 设置Nav
@@ -176,11 +221,26 @@ static NSString *const URLSendSceneComment = @"/comment/ajax_comment";
     [[UIApplication sharedApplication] setStatusBarHidden:NO withAnimation:(UIStatusBarAnimationSlide)];
 }
 
+#pragma mark -
 - (NSMutableArray *)commentListMarr {
     if (!_commentListMarr) {
         _commentListMarr = [NSMutableArray array];
     }
     return _commentListMarr;
+}
+
+- (NSMutableArray *)targetUserId {
+    if (!_targetUserId) {
+        _targetUserId = [NSMutableArray array];
+    }
+    return _targetUserId;
+}
+
+- (NSMutableArray *)replyId {
+    if (!_replyId) {
+        _replyId = [NSMutableArray array];
+    }
+    return _replyId;
 }
 
 @end

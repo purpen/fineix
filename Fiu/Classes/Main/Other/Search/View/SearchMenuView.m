@@ -8,15 +8,13 @@
 
 #import "SearchMenuView.h"
 
-
-
 @implementation SearchMenuView
 
 - (instancetype)initWithFrame:(CGRect)frame {
     self = [super initWithFrame:frame];
     if (self) {
         self.backgroundColor = [UIColor whiteColor];
-        
+
         [self addSubview:self.line];
     }
     return self;
@@ -27,7 +25,7 @@
     self.selectBtnTag = menuBtnTag;
     
     for (NSUInteger idx = 0; idx < title.count; ++ idx) {
-        UIButton * menuBtn = [[UIButton alloc] initWithFrame:CGRectMake((SCREEN_WIDTH / 4) * idx, 0, (SCREEN_WIDTH / 4), 44)];
+        UIButton * menuBtn = [[UIButton alloc] initWithFrame:CGRectMake((SCREEN_WIDTH / title.count) * idx, 0, (SCREEN_WIDTH / title.count), 44)];
         [menuBtn setTitleColor:[UIColor blackColor] forState:(UIControlStateNormal)];
         [menuBtn setTitleColor:[UIColor colorWithHexString:fineixColor alpha:1] forState:(UIControlStateSelected)];
         menuBtn.titleLabel.font = [UIFont systemFontOfSize:Font_SceneTitle];
@@ -41,7 +39,6 @@
         
         [self addSubview:menuBtn];
     }
-    
     [self addSubview:self.menuBottomline];
 }
 
@@ -56,7 +53,7 @@
 #pragma mark - 导航底部条
 - (UILabel *)menuBottomline {
     if (!_menuBottomline) {
-        _menuBottomline = [[UILabel alloc] initWithFrame:CGRectMake((SCREEN_WIDTH / 4 / 2) - 20, 41, 40, 3)];
+        _menuBottomline = [[UILabel alloc] initWithFrame:CGRectMake((SCREEN_WIDTH / 3 / 2) - 20, 41, 50, 3)];
         _menuBottomline.backgroundColor = [UIColor colorWithHexString:fineixColor alpha:1];
     }
     return _menuBottomline;
@@ -69,7 +66,7 @@
     self.selectedBtn = menuBtn;
     
     CGRect bottomLineRect = _menuBottomline.frame;
-    bottomLineRect.origin.x = ((SCREEN_WIDTH / 4) / 3.5) + ((SCREEN_WIDTH / 4) * index);
+    bottomLineRect.origin.x = ((SCREEN_WIDTH / 3) / 3.5) + ((SCREEN_WIDTH / 3) * index);
     [UIView animateWithDuration:.2 animations:^{
         _menuBottomline.frame = bottomLineRect;
     }];

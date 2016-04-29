@@ -8,6 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import "Fiu.h"
+#import "CommentRow.h"
 
 @interface CommentDataTableViewCell : UITableViewCell
 
@@ -15,5 +16,7 @@
 @pro_strong UILabel                 *   userName;       //  用户昵称
 @pro_strong UILabel                 *   time;           //  评论时间
 @pro_strong UILabel                 *   content;        //  评论内容
+
+- (void)setCommentData:(CommentRow *)model;
 
 @end

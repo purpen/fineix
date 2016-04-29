@@ -17,16 +17,20 @@
 #import "GoodsInfoViewController.h"
 #import "SceneInfoData.h"
 #import "GoodsTableViewCell.h"
+#import "CommentRow.h"
+#import "HomePageViewController.h"
 
 static NSString *const URLSceneInfo = @"/scene_sight/view";
 static NSString *const URLCommentList = @"/comment/getlist";
 static NSString *const URLLikeScenePeople = @"/favorite";
 static NSString *const URLLikeScene = @"/favorite/ajax_sight_love";
 static NSString *const URLCancelLike = @"/favorite/ajax_cancel_sight_love";
+static NSString *const URLSceneGoods = @"/sight_and_product";
 
 @interface SceneInfoViewController ()
 
 @pro_strong SceneInfoData       *   sceneInfoModel;
+@pro_strong NSArray             *   commentArr;
 @pro_strong NSMutableArray      *   sceneCommentMarr;
 
 @end
@@ -47,18 +51,9 @@ static NSString *const URLCancelLike = @"/favorite/ajax_cancel_sight_love";
     [self networkRequestData];
     [self networkCommentData];
     [self networkLikePeopleData];
-    
-    self.textMar = [NSMutableArray arrayWithObjects:@"家是我们人生的驿站，是我们生活的乐园，也是我们避风的港湾。", @"家是我们人生的驿站", @"家是我们人生的驿站，是我们生活的乐园，也是我们避风的港湾。它更是一条逼你拼命挣钱的鞭子，让你为它拉车犁地。家又是一个充满亲情的地方，就会有一种亲情感回荡心头。在风雨人生中，渐渐地形成了一种强烈的感觉：我爱家，更离不开家。",nil];
+    [self networkSceneGoodsData];
     
     [self setSceneInfoViewUI];
-}
-
-
-- (NSMutableArray *)sceneCommentMarr {
-    if (!_sceneCommentMarr) {
-        _sceneCommentMarr = [NSMutableArray array];
-    }
-    return _sceneCommentMarr;
 }
 
 #pragma mark -
@@ -92,10 +87,27 @@ static NSString *const URLCancelLike = @"/favorite/ajax_cancel_sight_love";
 - (void)networkCommentData {
     self.sceneCommentRequest = [FBAPI getWithUrlString:URLCommentList requestDictionary:@{@"type":@"12", @"target_id":self.sceneId} delegate:self];
     [self.sceneCommentRequest startRequestSuccess:^(FBRequest *request, id result) {
-        NSLog(@"＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝ 评论：%@", result);
+        self.commentArr = [[result valueForKey:@"data"] valueForKey:@"rows"];
+        NSMutableArray * commentMarr = [NSMutableArray array];
+        for (NSDictionary * commentDic in self.commentArr) {
+            CommentRow * commentModel = [[CommentRow alloc] initWithDictionary:commentDic];
+            [commentMarr addObject:commentModel];
+        }
+        
+        if (commentMarr.count >= 3) {
+            for (NSInteger idx = 0; idx < 3; ++ idx) {
+                [self.sceneCommentMarr addObject:commentMarr[idx]];
+            }
+        } else if (commentMarr.count < 3) {
+            for (NSInteger idx = 0; idx < commentMarr.count; ++ idx) {
+                [self.sceneCommentMarr addObject:commentMarr[idx]];
+            }
+        }
+
+        [self.sceneTableView reloadData];
         
     } failure:^(FBRequest *request, NSError *error) {
-        
+        [SVProgressHUD showErrorWithStatus:[error localizedDescription]];
     }];
 }
 
@@ -106,13 +118,19 @@ static NSString *const URLCancelLike = @"/favorite/ajax_cancel_sight_love";
         NSLog(@"＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝ 点赞的人：%@", result);
         
     } failure:^(FBRequest *request, NSError *error) {
-        
+        [SVProgressHUD showErrorWithStatus:[error localizedDescription]];
     }];
 }
 
 #pragma mark 此场景中的商品
 - (void)networkSceneGoodsData {
-    
+    self.sceneGoodsRequest = [FBAPI getWithUrlString:URLSceneGoods requestDictionary:@{@"page":@"1", @"size":@"3",@"sight_id":self.sceneId} delegate:self];
+    [self.sceneGoodsRequest startRequestSuccess:^(FBRequest *request, id result) {
+        NSLog(@"＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊ 商品：%@", result);
+        
+    } failure:^(FBRequest *request, NSError *error) {
+        [SVProgressHUD showErrorWithStatus:[error localizedDescription]];
+    }];
 }
 
 #pragma mark 给此场景点赞
@@ -170,7 +188,7 @@ static NSString *const URLCancelLike = @"/favorite/ajax_cancel_sight_love";
     if (section == 0) {
         return 4;
     } else if (section == 1) {
-        return 3;
+        return self.sceneCommentMarr.count;
     }
     return 1;
 }
@@ -183,6 +201,7 @@ static NSString *const URLCancelLike = @"/favorite/ajax_cancel_sight_love";
             if (cell == nil) {
                 cell = [[UserInfoTableViewCell alloc] initWithStyle:(UITableViewCellStyleDefault) reuseIdentifier:userInfoCellId];
             }
+            cell.nav = self.navigationController;
             [cell setSceneInfoData:self.sceneInfoModel];
             return cell;
             
@@ -203,6 +222,7 @@ static NSString *const URLCancelLike = @"/favorite/ajax_cancel_sight_love";
                 cell = [[DataNumTableViewCell alloc] initWithStyle:(UITableViewCellStyleDefault) reuseIdentifier:dataNumCellId];
             }
             [cell.moreBtn addTarget:self action:@selector(moreBtnClick) forControlEvents:(UIControlEventTouchUpInside)];
+            cell.nav = self.navigationController;
             [cell setSceneDataNum:self.sceneInfoModel];
             return cell;
             
@@ -223,21 +243,25 @@ static NSString *const URLCancelLike = @"/favorite/ajax_cancel_sight_love";
         if (cell == nil) {
             cell = [[CommentTableViewCell alloc] initWithStyle:(UITableViewCellStyleDefault) reuseIdentifier:commentCellId];
         }
-        [cell setUI:self.textMar[indexPath.row]];
+        [cell setCommentData:self.sceneCommentMarr[indexPath.row]];
         return cell;
     
     } else if (indexPath.section == 2) {
         static NSString * mallGoodsCellId = @"MallGoodsCellId";
         GoodsTableViewCell * cell = [tableView dequeueReusableCellWithIdentifier:mallGoodsCellId];
-        cell = [[GoodsTableViewCell alloc] initWithStyle:(UITableViewCellStyleDefault) reuseIdentifier:mallGoodsCellId];
-        [cell setUI];
+        if (cell == nil) {
+            cell = [[GoodsTableViewCell alloc] initWithStyle:(UITableViewCellStyleDefault) reuseIdentifier:mallGoodsCellId];
+        }
+//        [cell setUI];
         return cell;
     
     } else if (indexPath.section == 3) {
         static NSString * mallGoodsCellId = @"MallGoodsCellId";
         GoodsTableViewCell * cell = [tableView dequeueReusableCellWithIdentifier:mallGoodsCellId];
-        cell = [[GoodsTableViewCell alloc] initWithStyle:(UITableViewCellStyleDefault) reuseIdentifier:mallGoodsCellId];
-        [cell setUI];
+        if (cell == nil) {
+            cell = [[GoodsTableViewCell alloc] initWithStyle:(UITableViewCellStyleDefault) reuseIdentifier:mallGoodsCellId];
+        }
+//        [cell setUI];
         return cell;
     }
     
@@ -265,7 +289,7 @@ static NSString *const URLCancelLike = @"/favorite/ajax_cancel_sight_love";
         
     } else if (indexPath.section == 1) {
         CommentTableViewCell * cell = [[CommentTableViewCell alloc] init];
-        [cell getCellHeight:self.textMar[indexPath.row]];
+        [cell getCellHeight:[self.sceneCommentMarr valueForKey:@"content"][indexPath.row]];
         return cell.cellHeight;
     }
     
@@ -358,6 +382,16 @@ static NSString *const URLCancelLike = @"/favorite/ajax_cancel_sight_love";
     }
 }
 
+#pragma mark - 查看全部评论
+- (UIButton *)allComment {
+    if (!_allComment) {
+        _allComment = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 44)];
+        [_allComment setTitleColor:[UIColor colorWithHexString:titleColor] forState:(UIControlStateNormal)];
+        _allComment.titleLabel.font = [UIFont systemFontOfSize:12];
+    }
+    return _allComment;
+}
+
 #pragma mark - 弹出举报视图
 - (void)moreBtnClick {
     FBAlertViewController * alertVC = [[FBAlertViewController alloc] init];
@@ -393,6 +427,21 @@ static NSString *const URLCancelLike = @"/favorite/ajax_cancel_sight_love";
 - (void)viewWillDisappear:(BOOL)animated {
     [super viewWillDisappear:animated];
     [SVProgressHUD dismiss];
+}
+
+#pragma mark - 
+- (NSMutableArray *)sceneCommentMarr {
+    if (!_sceneCommentMarr) {
+        _sceneCommentMarr = [NSMutableArray array];
+    }
+    return _sceneCommentMarr;
+}
+
+- (NSArray *)commentArr {
+    if (!_commentArr) {
+        _commentArr = [NSArray array];
+    }
+    return _commentArr;
 }
 
 @end

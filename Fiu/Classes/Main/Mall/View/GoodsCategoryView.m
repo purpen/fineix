@@ -10,6 +10,8 @@
 #import "GoodsInfoViewController.h"
 #import "GoodsTableViewCell.h"
 
+static const NSInteger categoryTableTag = 583;
+
 @implementation GoodsCategoryView
 
 - (instancetype)initWithFrame:(CGRect)frame {
@@ -19,7 +21,7 @@
         self.pagingEnabled = YES;
         self.showsVerticalScrollIndicator = NO;
         self.showsHorizontalScrollIndicator = NO;
-        
+        self.backgroundColor = [UIColor colorWithHexString:grayLineColor];
     }
     return self;
 }
@@ -34,11 +36,17 @@
 #pragma mark - 创建商品列表
 - (void)addGoodsCategoryTableView:(NSArray *)number {
     for (NSInteger idx = 0; idx < number.count; ++ idx) {
-        UITableView * goodsTable = [[UITableView alloc] initWithFrame:CGRectMake(SCREEN_WIDTH * idx, 0, SCREEN_WIDTH, BOUNDS_HEIGHT) style:(UITableViewStylePlain)];
+        UITableView * goodsTable = [[UITableView alloc] initWithFrame:CGRectMake(SCREEN_WIDTH * idx, 0, BOUNDS_WIDTH, BOUNDS_HEIGHT) style:(UITableViewStylePlain)];
         goodsTable.delegate = self;
         goodsTable.dataSource = self;
         goodsTable.showsVerticalScrollIndicator = NO;
         goodsTable.showsHorizontalScrollIndicator = NO;
+        goodsTable.separatorStyle = UITableViewCellSeparatorStyleNone;
+        goodsTable.tag = idx + categoryTableTag;
+        if (goodsTable.tag == categoryTableTag) {
+            self.categoryTable = goodsTable;
+        }
+        
         [self addSubview:goodsTable];
     }
     
@@ -56,12 +64,12 @@
     if (!cell) {
         cell = [[GoodsTableViewCell alloc] initWithStyle:(UITableViewCellStyleDefault) reuseIdentifier:GoodsCategoryCellId];
     }
-    cell.textLabel.text = [NSString stringWithFormat:@"商品 %zi", indexPath.row];
+//    [cell setUI];
     return cell;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-    return 266.5;
+    return 210;
 }
 
 #pragma mark - 产看商品的详情

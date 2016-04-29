@@ -9,17 +9,17 @@
 #import <UIKit/UIKit.h>
 #import "Fiu.h"
 #import "UILable+Frame.h"
+#import "CommentRow.h"
 
 @interface CommentTableViewCell : UITableViewCell
 
 @pro_strong UIImageView         *   bubble;         //  气泡背景
 @pro_strong UILabel             *   comment;        //  文字内容
 @pro_strong UIImageView         *   userHeader;     //  用户头像
-@pro_strong UIButton            *   allComment;     //  查看全部评论
 @pro_assign CGFloat                 cellHeight;
 
 - (void)getCellHeight:(NSString *)str;
 
-- (void)setUI:(NSString *)str;
+- (void)setCommentData:(CommentRow *)model;
 
 @end

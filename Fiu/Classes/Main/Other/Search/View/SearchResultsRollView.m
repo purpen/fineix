@@ -10,7 +10,7 @@
 #import "SceneListTableViewCell.h"
 #import "SearchSceneTableViewCell.h"
 #import "UserHeaderTableViewCell.h"
-
+#import "GoodsTableViewCell.h"
 #import "SceneInfoViewController.h"
 #import "GoodsInfoViewController.h"
 
@@ -46,10 +46,12 @@ static const NSInteger tableTag = 687;
             self.sceneTable = searchTable;
         } else if (searchTable.tag == tableTag + 1) {
             self.fSceneTable = searchTable;
-        } else if (searchTable.tag == tableTag + 2) {
-            self.userTable = searchTable;
-            self.userTable.tableFooterView = [UIView new];
-        } else if (searchTable.tag == tableTag + 3) {
+        }
+//        else if (searchTable.tag == tableTag + 2) {
+//            self.userTable = searchTable;
+//            self.userTable.tableFooterView = [UIView new];
+//        }
+        else if (searchTable.tag == tableTag + 2) {
             self.goodsTable = searchTable;
         }
         
@@ -63,9 +65,11 @@ static const NSInteger tableTag = 687;
         return 1;
     } else if (tableView == self.sceneTable) {
         return 5;
-    } else if (tableView == self.userTable) {
-        return 5;
-    } else if (tableView == self.goodsTable) {
+    }
+//    else if (tableView == self.userTable) {
+//        return 5;
+//    }
+    else if (tableView == self.goodsTable) {
         return 5;
     }
     return 0;
@@ -90,24 +94,24 @@ static const NSInteger tableTag = 687;
 //        [cell setUI];
         return cell;
         
-    } else if (tableView == self.userTable) {
-        static NSString * UserTablecellId = @"userTablecellId";
-        UserHeaderTableViewCell * cell = [tableView dequeueReusableCellWithIdentifier:UserTablecellId];
-        if (!cell) {
-            cell = [[UserHeaderTableViewCell alloc] initWithStyle:(UITableViewCellStyleDefault) reuseIdentifier:UserTablecellId];
-        }
-        [cell setUI];
-        return cell;
-        
-    } else if (tableView == self.goodsTable) {
+    }
+//        else if (tableView == self.userTable) {
+//        static NSString * UserTablecellId = @"userTablecellId";
+//        UserHeaderTableViewCell * cell = [tableView dequeueReusableCellWithIdentifier:UserTablecellId];
+//        if (!cell) {
+//            cell = [[UserHeaderTableViewCell alloc] initWithStyle:(UITableViewCellStyleDefault) reuseIdentifier:UserTablecellId];
+//        }
+//        [cell setUI];
+//        return cell;
+//    }
+        else if (tableView == self.goodsTable) {
         static NSString * GoodsTablecellId = @"goodsTablecellId";
-        UITableViewCell * cell = [tableView dequeueReusableCellWithIdentifier:GoodsTablecellId];
+        GoodsTableViewCell * cell = [tableView dequeueReusableCellWithIdentifier:GoodsTablecellId];
         if (!cell) {
-            cell = [[UITableViewCell alloc] initWithStyle:(UITableViewCellStyleDefault) reuseIdentifier:GoodsTablecellId];
+            cell = [[GoodsTableViewCell alloc] initWithStyle:(UITableViewCellStyleDefault) reuseIdentifier:GoodsTablecellId];
         }
-        cell.textLabel.text = [NSString stringWithFormat:@"商品 %zi", indexPath.row];
+//        [cell setUI];
         return cell;
-        
     }
     
     return nil;
@@ -118,10 +122,12 @@ static const NSInteger tableTag = 687;
         return SCREEN_HEIGHT;
     } else if (tableView == self.sceneTable) {
         return SCREEN_HEIGHT;
-    } else if (tableView == self.userTable) {
-        return 55;
-    } else if (tableView == self.goodsTable) {
-        return 290;
+    }
+//    else if (tableView == self.userTable) {
+//        return 55;
+//    }
+    else if (tableView == self.goodsTable) {
+        return 210;
     }
     return 0;
 }

@@ -111,20 +111,26 @@ static const NSInteger menuBtnTag = 324;
     self.nowSelectedBtn = btn;
     self.selectedBtn = self.nowSelectedBtn;
     
-    //  改变导航视图的偏移量，判断使按钮保持居中显示
-    if (btn.center.x > self.menuRollView.bounds.size.width/2) {
-        CGFloat pointX = btn.center.x - self.menuRollView.bounds.size.width/2.0;
-        CGFloat maxWidth = self.menuRollView.contentSize.width - self.menuRollView.bounds.size.width;
-        if (pointX > maxWidth) {
-            [self.menuRollView setContentOffset:CGPointMake(maxWidth, 0) animated:YES];
-       
+    if (self.btnMarr.count > 4) {
+        //  改变导航视图的偏移量，判断使按钮保持居中显示
+        if (btn.center.x > self.menuRollView.bounds.size.width/2) {
+            CGFloat pointX = btn.center.x - self.menuRollView.bounds.size.width/2.0;
+            CGFloat maxWidth = self.menuRollView.contentSize.width - self.menuRollView.bounds.size.width;
+            if (pointX > maxWidth) {
+                [self.menuRollView setContentOffset:CGPointMake(maxWidth, 0) animated:YES];
+                
+            } else {
+                [self.menuRollView setContentOffset:CGPointMake(pointX, 0) animated:YES];
+            }
+            
         } else {
-            [self.menuRollView setContentOffset:CGPointMake(pointX, 0) animated:YES];
+            [self.menuRollView setContentOffset:CGPointZero animated:YES];
         }
         
     } else {
-        [self.menuRollView setContentOffset:CGPointZero animated:YES];
+         [self.menuRollView setContentOffset:CGPointZero animated:YES];
     }
+
     
     //  移动底部导航条
     [UIView animateWithDuration:0.2f animations:^{

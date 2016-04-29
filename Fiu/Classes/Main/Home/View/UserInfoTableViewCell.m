@@ -7,6 +7,7 @@
 //
 
 #import "UserInfoTableViewCell.h"
+#import "HomePageViewController.h"
 
 @implementation UserInfoTableViewCell
 
@@ -132,24 +133,24 @@
         [_userView addSubview:self.whereScene];
         [_whereScene mas_makeConstraints:^(MASConstraintMaker *make) {
             make.size.mas_equalTo(CGSizeMake(130, 15));
-            make.bottom.equalTo(_city.mas_top).with.offset(-10);
+            make.bottom.equalTo(_city.mas_top).with.offset(-5);
             make.left.equalTo(_userView.mas_left).with.offset(40);
         }];
         
         [_userView addSubview:self.time];
         [_time mas_makeConstraints:^(MASConstraintMaker *make) {
             make.size.mas_equalTo(CGSizeMake(150, 15));
-            make.bottom.equalTo(_city.mas_top).with.offset(-10);
+            make.bottom.equalTo(_city.mas_top).with.offset(-5);
             make.left.equalTo(_whereScene.mas_right).with.offset(0);
         }];
         
         [_userView addSubview:self.titleText];
         [_titleText mas_makeConstraints:^(MASConstraintMaker *make) {
             make.size.mas_equalTo(CGSizeMake(SCREEN_WIDTH - 40, 56));
-            make.bottom.equalTo(_time.mas_top).with.offset(-10);
+            make.bottom.equalTo(_time.mas_top).with.offset(-5);
             make.left.equalTo(_userView.mas_left).with.offset(20);
         }];
-        
+    
     }
     return _userView;
 }
@@ -180,6 +181,7 @@
             make.bottom.equalTo(_userHeader.mas_bottom).with.offset(0);
             make.left.equalTo(_userHeader.mas_right).with.offset(10);
         }];
+
     }
     return _userLeftView;
 }

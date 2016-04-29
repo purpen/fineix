@@ -11,8 +11,13 @@
 #import "FBSearchView.h"
 #import "SearchResultsRollView.h"
 #import <SVProgressHUD/SVProgressHUD.h>
+#import "MJRefresh.h"
 
 @interface SearchViewController : FBViewController <SearchMenuBtnSelectedDelegate, FBSearchDelegate>
+
+@pro_strong FBRequest               *   searchListRequest;
+@pro_assign NSInteger                   currentpageNum;
+@pro_assign NSInteger                   totalPageNum;
 
 @pro_strong SearchResultsRollView           *   resultsView;    //  搜索结果视图
 @pro_strong FBSearchView                    *   searchView;     //  搜索框
@@ -22,7 +27,7 @@
 
 /*
  *  搜索的类型
- *  0:场景 / 1:情景 / 2:用户 / 3:产品
+ *  0:场景 / 1:情景 / 2:产品
  */
 @pro_assign NSInteger                           searchType;
 

@@ -24,14 +24,14 @@
 }
 
 #pragma mark 
-- (void)setUI:(NSString *)str {
-    _userHeader.image = [UIImage imageNamed:@"asd"];
+- (void)setCommentData:(CommentRow *)model {
+    [self.userHeader downloadImage:model.user.miniAvatarUrl place:[UIImage imageNamed:@""]];
     
-    _comment.text = str;
-    CGSize size = [_comment boundingRectWithSize:CGSizeMake(220, 0)];
+    self.comment.text = model.content;
+    CGSize size = [self.comment boundingRectWithSize:CGSizeMake(220, 0)];
 
     if (size.width > 200) {
-        [self changeCommentStyle:str];
+        [self changeCommentStyle:model.content];
         
         CGFloat labelHeight = [_comment sizeThatFits:CGSizeMake(200, MAXFLOAT)].height;
         NSNumber * count = @((labelHeight) / _comment.font.lineHeight);
@@ -54,7 +54,7 @@
         }];
     }
     
-    _bubble.image = [[UIImage imageNamed:@"bubble"] stretchableImageWithLeftCapWidth:20 topCapHeight:20];
+    self.bubble.image = [[UIImage imageNamed:@"bubble"] stretchableImageWithLeftCapWidth:20 topCapHeight:20];
     
 }
 
@@ -91,6 +91,7 @@
         make.left.equalTo(_bubble.mas_left).with.offset(15);
         make.centerY.equalTo(_bubble);
     }];
+    
 }
 
 #pragma mark - 用户头像
@@ -132,14 +133,6 @@
     _comment.attributedText = commentText;
 }
 
-#pragma mark - 查看全部评论
-- (UIButton *)allComment {
-    if (!_allComment) {
-        _allComment = [[UIButton alloc] init];
-        
-    }
-    return _allComment;
-}
 
 
 @end

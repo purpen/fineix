@@ -61,6 +61,9 @@
 	if(![dictionary[@"reply_user_id"] isKindOfClass:[NSNull class]]){
 		self.replyUserId = [dictionary[@"reply_user_id"] integerValue];
 	}
+    if(![dictionary[@"reply_user_nickname"] isKindOfClass:[NSNull class]]){
+        self.replyUserName = dictionary[@"reply_user_nickname"];
+    }
 
 	if(![dictionary[@"sku_id"] isKindOfClass:[NSNull class]]){
 		self.skuId = [dictionary[@"sku_id"] integerValue];

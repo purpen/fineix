@@ -148,13 +148,13 @@
     releaseVC.locationArr = self.locationArr;
     releaseVC.scenceView.imageView.image = self.filtersImageView.image;
     releaseVC.createType = self.createType;
-    releaseVC.goodsTitle = @"测试商品";
-    releaseVC.goodsPrice = @"321";
-    releaseVC.goodsId = @"12352134";
-    releaseVC.goodsX = @"43";
-    releaseVC.goodsY = @"20";
+    releaseVC.goodsTitle = @"测试商品1,测试商品2,测试商品3";
+    releaseVC.goodsPrice = @"321,1829,2901";
+    releaseVC.goodsId = @"528202723738,952686366,1955665820";
+    releaseVC.goodsX = @"43,32,65";
+    releaseVC.goodsY = @"20,22,42";
     releaseVC.fSceneId = @"4";
-    releaseVC.tagS = @"测试,标签测试,天气真的很好啊,世界地球日,测试,标签测试,天气真的很好啊,世界地球日";
+    releaseVC.tagS = @"42,44,43,22,45";
     [self.navigationController pushViewController:releaseVC animated:YES];
     
 }

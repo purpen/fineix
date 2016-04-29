@@ -60,6 +60,7 @@
 
 //  评论
 "comment" = "评论一下";
+"reply" = "回复:";
 
 //登录注册
 "passwordDigits" = "密码不能少于六位";

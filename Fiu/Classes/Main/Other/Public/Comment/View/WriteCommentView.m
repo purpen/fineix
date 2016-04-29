@@ -60,6 +60,7 @@
 #pragma mark - UITextFieldDelegate
 - (BOOL)textFieldShouldReturn:(UITextField *)textField {
     [_writeText resignFirstResponder];
+    _writeText.placeholder = NSLocalizedString(@"comment", nil);
     return YES;
 }
 

@@ -20,10 +20,9 @@
     return self;
 }
 
-- (void)setUI:(NSString *)title {
-    _menuImg.image = [UIImage imageNamed:@"asdfsd"];
-    
-    _menuTitle.text = title;
+- (void)setCategoryData:(CategoryRow *)model {
+    [self.menuImg downloadImage:model.appCoverUrl place:[UIImage imageNamed:@""]];
+    self.menuTitle.text = model.title;
 }
 
 #pragma mark -

@@ -12,6 +12,7 @@
 #import "SearchViewController.h"
 #import "SceneSubscribeViewController.h"
 #import "HomeSceneListRow.h"
+#import "CommentRow.h"
 
 static NSString *const URLSceneList = @"/scene_sight/";
 

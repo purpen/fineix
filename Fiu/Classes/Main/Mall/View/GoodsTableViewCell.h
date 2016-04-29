@@ -8,6 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import "Fiu.h"
+#import "GoodsRow.h"
 
 @interface GoodsTableViewCell : UITableViewCell <UIScrollViewDelegate>
 
@@ -19,9 +20,10 @@
 @pro_strong UILabel             *       title;          //  标题
 @pro_strong UIImageView         *       titleBg;        //  标题背景
 @pro_strong UIImageView         *       typeImg;        //  品牌
+@pro_strong NSMutableArray      *       goodsImgMarr;
 
 - (void)setRollImgViewUI:(NSArray *)imgArr;
 
-- (void)setUI;
+- (void)setGoodsData:(GoodsRow *)model;
 
 @end
