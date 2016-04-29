@@ -26,8 +26,7 @@ static NSString *const UpdateInfoURL = @"/my/update_profile";
     self.delegate = self;
     //self.navigationController.navigationBarHidden = NO;
     self.navViewTitle.text = @"个性签名";
-//    [self addBarItemLeftBarButton:nil image:@"icon_back"];
-//    [self addBarItemRightBarButton:@"完成" image:@""];
+    [self addBarItemRightBarButton:@"完成" image:nil isTransparent:NO];
     UserInfoEntity *entity = [UserInfoEntity defaultUserInfoEntity];
     self.sumaryTFV.text = entity.summary;
     self.sumaryTFV.layoutManager.allowsNonContiguousLayout = NO;
@@ -55,13 +54,12 @@ static NSString *const UpdateInfoURL = @"/my/update_profile";
     if ([[result objectForKey:@"success"] isEqualToNumber:@1]) {
         UserInfoEntity *entity = [UserInfoEntity defaultUserInfoEntity];
         entity.summary = self.sumaryTFV.text;
+        [entity updateUserInfo];
         [SVProgressHUD showSuccessWithStatus:message];
         [self.navigationController popViewControllerAnimated:YES];
     }else{
         [SVProgressHUD showInfoWithStatus:message];
     }
-    request = nil;
-    [self.navigationController popViewControllerAnimated:YES];
 }
 
 - (void)didReceiveMemoryWarning {

@@ -1,38 +1,29 @@
 //
-//  MyOrdersViewController.m
-//  fineix
+//  DatePickerViewController.m
+//  Fiu
 //
-//  Created by THN-Dong on 16/3/17.
+//  Created by THN-Dong on 16/4/28.
 //  Copyright © 2016年 taihuoniao. All rights reserved.
 //
 
-#import "MyOrdersViewController.h"
+#import "DatePickerViewController.h"
+#import "Fiu.h"
 
-@interface MyOrdersViewController ()
+@interface DatePickerViewController ()
 
 @end
 
-@implementation MyOrdersViewController
+@implementation DatePickerViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view.
+    // Do any additional setup after loading the view from its nib.
+    self.view.backgroundColor = [UIColor colorWithHexString:@"#000000" alpha:0.3];
 }
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
-}
-
-//页面将要出现的时候导航条出现
--(void)viewWillAppear:(BOOL)animated{
-    [super viewWillAppear:animated];
-    self.navigationController.navigationBarHidden = NO;
-}
-//点击我的订单按钮
-- (IBAction)myOrder:(UIButton *)sender {
-    //跳转到我的订单页面
-    //全部按钮被选
 }
 
 /*

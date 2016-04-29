@@ -15,28 +15,49 @@
 #import "EditNickNameViewController.h"
 #import "ModifyGenderViewController.h"
 #import "ChangeSumaryViewController.h"
+#import "Fiu.h"
+#import "MyQrCodeViewController.h"
+#import "UserInfo.h"
+#import "DatePickerViewController.h"
+#import "AddreesPickerViewController.h"
+#import "AddreesModel.h"
 
 @interface AccountManagementViewController ()<FBNavigationBarItemsDelegate,UIImagePickerControllerDelegate,UIActionSheetDelegate,UINavigationControllerDelegate>
-
+{
+    NSMutableArray *_provinceAry;
+    NSMutableArray *_cityAry;
+}
 @property(nonatomic,strong) AccountView *accountView;
+@property(nonatomic,strong) DatePickerViewController *pickerVC;
+@property(nonatomic,strong) AddreesPickerViewController *addreesPickerVC;
 
 @end
 
 static NSString *const IconURL = @"/my/upload_token";
+static NSString *const UpdateInfoURL = @"/my/update_profile";
+static NSString *const CityListUrl = @"/shopping/fetch_areas";
 
 @implementation AccountManagementViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    _provinceAry = [NSMutableArray array];
+    _cityAry = [NSMutableArray array];
     // Do any additional setup after loading the view.
     self.delegate = self;
 //    [self addBarItemLeftBarButton:nil image:@"icon_back"];
     self.view.backgroundColor = [UIColor lightGrayColor];
-//    [self addBarItemRightBarButton:@"保存" image:nil];
+    [self addBarItemRightBarButton:@"保存" image:nil isTransparent:NO];
     //self.navigationController.navigationBarHidden = NO;
-    self.navViewTitle.text = @"保存信息";
+    self.navViewTitle.text = @"个人信息";
+    [self addBarItemRightBarButton:nil image:@"" isTransparent:NO];
     
-    self.view = self.accountView;
+    [self.view addSubview:self.accountView];
+    [_accountView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.size.mas_equalTo(CGSizeMake(SCREEN_WIDTH, SCREEN_HEIGHT-64));
+        make.left.mas_equalTo(self.view.mas_left).with.offset(0);
+        make.bottom.mas_equalTo(self.view.mas_bottom).with.offset(0);
+    }];
 }
 
 -(AccountView *)accountView{
@@ -46,8 +67,65 @@ static NSString *const IconURL = @"/my/upload_token";
         [_accountView.nickBtn addTarget:self action:@selector(clickNickBtn:) forControlEvents:UIControlEventTouchUpInside];
         [_accountView.sexBtn addTarget:self action:@selector(clickSexBtn:) forControlEvents:UIControlEventTouchUpInside];
         [_accountView.sumBtn addTarget:self action:@selector(clickSumBtn:) forControlEvents:UIControlEventTouchUpInside];
+        [_accountView.qrcodeBtn addTarget:self action:@selector(clickQrBtn:) forControlEvents:UIControlEventTouchUpInside];
+        [_accountView.adreesBtn addTarget:self action:@selector(clickAdreesBtn:) forControlEvents:UIControlEventTouchUpInside];
+        [_accountView.birthdayBtn addTarget:self action:@selector(clickBirthBtn:) forControlEvents:UIControlEventTouchUpInside];
     }
     return _accountView;
+}
+
+-(void)clickBirthBtn:(UIButton*)sender{
+    self.pickerVC.modalPresentationStyle = UIModalPresentationOverCurrentContext;
+    [self presentViewController:_pickerVC animated:NO completion:nil];
+    [_pickerVC.pickerBtn addTarget:self action:@selector(clickPickerBtn:) forControlEvents:UIControlEventTouchUpInside];
+}
+
+-(DatePickerViewController *)pickerVC{
+    if (!_pickerVC) {
+        _pickerVC = [[DatePickerViewController alloc] init];
+    }
+    return _pickerVC;
+}
+
+-(void)clickPickerBtn:(UIButton*)sender{
+    NSDateFormatter * dateFormatter = [[NSDateFormatter alloc]init];
+    [dateFormatter setDateFormat:@"yyyy-MM-dd"];
+    NSString * birthdayStr = [dateFormatter stringFromDate:self.pickerVC.datePicker.date];
+    self.accountView.birthday.text = birthdayStr;
+    [self.pickerVC dismissViewControllerAnimated:NO completion:nil];
+    
+    FBRequest * request = [FBAPI postWithUrlString:UpdateInfoURL requestDictionary:@{@"birthday": birthdayStr} delegate:self];
+    request.flag = UpdateInfoURL;
+    [request startRequest];
+    [SVProgressHUD showWithMaskType:SVProgressHUDMaskTypeClear];
+
+}
+
+-(AddreesPickerViewController *)addreesPickerVC{
+    if (!_addreesPickerVC) {
+        _addreesPickerVC = [[AddreesPickerViewController alloc] init];
+    }
+    return _addreesPickerVC;
+}
+
+-(void)clickAdreesBtn:(UIButton*)sender{
+    self.addreesPickerVC.modalPresentationStyle = UIModalPresentationOverCurrentContext;
+    [self presentViewController:_addreesPickerVC animated:NO completion:nil];
+    [_addreesPickerVC.pickerBtn addTarget:self action:@selector(clickAddreesPickerBtn:) forControlEvents:UIControlEventTouchUpInside];
+}
+
+-(void)clickAddreesPickerBtn:(UIButton*)sender{
+    //拿到ID名称 更新列表，更新服务器上的 然后消失
+    self.accountView.adress.text = [NSString stringWithFormat:@"%@ %@",self.addreesPickerVC.provinceStr,self.addreesPickerVC.cityStr];
+    FBRequest *request = [FBAPI postWithUrlString:@"/my/update_profile" requestDictionary:@{@"province_id":@(self.addreesPickerVC.provinceId),@"district_id":@(self.addreesPickerVC.cityId)} delegate:self];
+    request.flag = UpdateInfoURL;
+    [request startRequest];
+    [self.addreesPickerVC dismissViewControllerAnimated:NO completion:nil];
+}
+
+-(void)clickQrBtn:(UIButton*)sender{
+    MyQrCodeViewController *vc = [[MyQrCodeViewController alloc] init];
+    [self.navigationController pushViewController:vc animated:YES];
 }
 
 -(void)viewWillAppear:(BOOL)animated{
@@ -66,7 +144,7 @@ static NSString *const IconURL = @"/my/upload_token";
         case 1:
             _accountView.sex.text = @"男";
             break;
-        case 3:
+        case 2:
             _accountView.sex.text = @"女";
             break;
             
@@ -150,6 +228,7 @@ static NSString *const IconURL = @"/my/upload_token";
             NSString * fileUrl = [[result objectForKey:@"data"] objectForKey:@"file_url"];
             UserInfoEntity * userEntity = [UserInfoEntity defaultUserInfoEntity];
             userEntity.mediumAvatarUrl = fileUrl;
+            [userEntity updateUserInfo];
             [_accountView.iconUrl sd_setImageWithURL:[NSURL URLWithString:fileUrl] placeholderImage:nil];
             
             [SVProgressHUD showSuccessWithStatus:message];
@@ -157,6 +236,29 @@ static NSString *const IconURL = @"/my/upload_token";
             [SVProgressHUD showInfoWithStatus:message];
         }
     }
+    
+    if ([request.flag isEqualToString:UpdateInfoURL]) {
+        NSString * message = [result objectForKey:@"message"];
+        if ([[result objectForKey:@"success"] isEqualToNumber:@1]) {
+            //            UserInfo * userInfo = [[UserInfo findAll] lastObject];
+            //            userInfo.birthday = self.birthdayLbl.text;
+            //            [userInfo update];
+            
+            UserInfoEntity * userEntity = [UserInfoEntity defaultUserInfoEntity];
+            userEntity.birthday = self.accountView.birthday.text;
+            [userEntity updateUserInfo];
+            [SVProgressHUD showSuccessWithStatus:message];
+        } else {
+            [SVProgressHUD showInfoWithStatus:message];
+        }
+    }
+    
+    if ([request.flag isEqualToString:CityListUrl]) {
+        if ([result objectForKey:@"success"]) {
+            
+        }
+    }
+
 }
 
 -(void)leftBarItemSelected{
@@ -165,6 +267,7 @@ static NSString *const IconURL = @"/my/upload_token";
 
 -(void)rightBarItemSelected{
     NSLog(@"保存");
+    
 }
 
 - (void)didReceiveMemoryWarning {

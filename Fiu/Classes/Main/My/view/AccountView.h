@@ -23,6 +23,8 @@
 @property (weak, nonatomic) IBOutlet UIButton *birthdayBtn;
 @property (weak, nonatomic) IBOutlet UIButton *qrcodeBtn;
 @property (weak, nonatomic) IBOutlet UIButton *certificationBtn;
+@property (weak, nonatomic) IBOutlet UIDatePicker *datePickerView;
+@property (weak, nonatomic) IBOutlet UIView *pickerView;
 
 +(instancetype)getAccountView;
 @end

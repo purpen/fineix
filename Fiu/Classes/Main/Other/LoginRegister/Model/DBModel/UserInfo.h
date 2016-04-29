@@ -26,6 +26,7 @@
 @property (nonatomic, assign) BOOL whetherFocusOn;
 @property(nonatomic,copy) NSString *city;
 @property(nonatomic,copy) NSString *address;
+@property(nonatomic,copy) NSString *follow_count;
 
 - (void)updateUserInfoEntity;
 

@@ -8,15 +8,24 @@
 
 #import "SubscribeViewController.h"
 #import "AllSceneCollectionViewCell.h"
+#import "UserInfoEntity.h"
+#import <SVProgressHUD.h>
+#import "FiuSceneViewController.h"
+#import "FiuSceneRow.h"
 
-@interface SubscribeViewController ()<FBNavigationBarItemsDelegate,UICollectionViewDelegate,UICollectionViewDataSource,UICollectionViewDelegateFlowLayout>
-
+@interface SubscribeViewController ()<FBNavigationBarItemsDelegate,UICollectionViewDelegate,UICollectionViewDataSource,UICollectionViewDelegateFlowLayout,FBRequestDelegate>
+{
+    NSMutableArray      *   _fiuSceneListData;     //  情景Model
+    NSMutableArray      *   _fiuSceneIdData;       //  情景Id
+}
 @end
 
 @implementation SubscribeViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    _fiuSceneListData = [NSMutableArray array];
+    _fiuSceneIdData = [NSMutableArray array];
     //设置导航
     self.navViewTitle.text = @"订阅的情景";
     //self.navigationItem.title = @"订阅的情景";
@@ -26,6 +35,21 @@
     //
     [self.view addSubview:self.myCollectionView];
     
+    UserInfoEntity *entity = [UserInfoEntity defaultUserInfoEntity];
+    FBRequest *request = [FBAPI postWithUrlString:@"/favorite" requestDictionary:@{@"page":@1,@"size":@8,@"user_id":entity.userId,@"type":@"scene",@"event":@"subscription"} delegate:self];
+    [request startRequest];
+}
+
+-(void)requestSucess:(FBRequest *)request result:(id)result{
+    [SVProgressHUD show];
+    if ([result objectForKey:@"success"]) {
+        
+        [SVProgressHUD dismiss];
+    }else{
+        
+        [SVProgressHUD dismiss];
+        [SVProgressHUD showErrorWithStatus:@"加载失败"];
+    }
 }
 
 -(UICollectionView *)myCollectionView{
@@ -48,18 +72,24 @@
 }
 
 -(NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section{
-    return 2;
+    return _fiuSceneListData.count;;
 }
 
 -(NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView{
-    return 5;
+    return 1;
 }
 
 -(UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath{
     static NSString *id = @"collectionViewCellId";
     AllSceneCollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:id forIndexPath:indexPath];
-//    [cell setUI];
     return cell;
+}
+
+#pragma mark UICollectionViewDelegate
+- (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
+    FiuSceneViewController * fiuSceneVC = [[FiuSceneViewController alloc] init];
+    fiuSceneVC.fiuSceneId = _fiuSceneIdData[indexPath.row];
+    [self.navigationController pushViewController:fiuSceneVC animated:YES];
 }
 
 -(void)leftBarItemSelected{

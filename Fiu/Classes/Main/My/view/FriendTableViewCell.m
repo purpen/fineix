@@ -8,7 +8,8 @@
 
 #import "FriendTableViewCell.h"
 #import "Fiu.h"
-#import "FriendCollectionViewCell.h"
+#import "FiuSceneCollectionViewCell.h" 
+#import "FiuSceneRow.h"
 
 @interface FriendTableViewCell ()<UICollectionViewDelegate,UICollectionViewDataSource,UICollectionViewDelegateFlowLayout>
 
@@ -106,7 +107,7 @@
         _imageCollectionView.showsHorizontalScrollIndicator = NO;
         _imageCollectionView.delegate = self;
         _imageCollectionView.dataSource = self;
-        [_imageCollectionView registerClass:[FriendCollectionViewCell class] forCellWithReuseIdentifier:@"FriendCollectionViewCell"];
+        [_imageCollectionView registerClass:[FiuSceneCollectionViewCell class] forCellWithReuseIdentifier:@"FiuSceneCollectionViewCell"];
     }
     return _imageCollectionView;
 }
@@ -120,9 +121,9 @@
 }
 
 -(UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath{
-    static NSString *cellId = @"FriendCollectionViewCell";
-    FriendCollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:cellId forIndexPath:indexPath];
-    [cell setUI];
+    static NSString *cellId = @"FiuSceneCollectionViewCell";
+    FiuSceneCollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:cellId forIndexPath:indexPath];
+    //[cell setUI];
     return cell;
 }
 
