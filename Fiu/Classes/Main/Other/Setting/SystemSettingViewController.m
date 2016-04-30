@@ -146,8 +146,9 @@ static NSString *const logOut = @"/auth/logout";
 
 
 - (IBAction)shareBtn:(UIButton *)sender {
+    self.shareVC.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;
     self.shareVC.modalPresentationStyle = UIModalPresentationOverCurrentContext;
-    [self presentViewController:_shareVC animated:NO completion:nil];
+    [self presentViewController:_shareVC animated:YES completion:nil];
     //给每一个分享按钮添加点击事件
     [_shareVC.wechatBtn addTarget:self action:@selector(wechatShareBtnAction:) forControlEvents:UIControlEventTouchUpInside];
     [_shareVC.friendBtn addTarget:self action:@selector(timelineShareBtnAction:) forControlEvents:UIControlEventTouchUpInside];

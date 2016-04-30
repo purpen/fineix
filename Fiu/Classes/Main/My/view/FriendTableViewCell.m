@@ -10,6 +10,8 @@
 #import "Fiu.h"
 #import "FiuSceneCollectionViewCell.h" 
 #import "FiuSceneRow.h"
+#import "FindSceneModel.h"
+#import <SDWebImage/UIImageView+WebCache.h>
 
 @interface FriendTableViewCell ()<UICollectionViewDelegate,UICollectionViewDataSource,UICollectionViewDelegateFlowLayout>
 
@@ -95,10 +97,12 @@
     return _deressLabel;
 }
 
+
+
 -(UICollectionView *)imageCollectionView{
     if (!_imageCollectionView) {
         UICollectionViewFlowLayout *layout = [[UICollectionViewFlowLayout alloc] init];
-        layout.itemSize = CGSizeMake((SCREEN_WIDTH-6)/3, 216/667.0*SCREEN_HEIGHT);
+        layout.itemSize = CGSizeMake((SCREEN_WIDTH-6)/3.0, 216/667.0*SCREEN_HEIGHT);
         layout.sectionInset = UIEdgeInsetsMake(0, 0, 0, 0);
         layout.minimumLineSpacing = 3;
         layout.scrollDirection = UICollectionViewScrollDirectionHorizontal;
@@ -113,7 +117,7 @@
 }
 
 -(NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section{
-    return 5;
+    return self.sceneAry.count;
 }
 
 -(NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView{
@@ -124,6 +128,16 @@
     static NSString *cellId = @"FiuSceneCollectionViewCell";
     FiuSceneCollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:cellId forIndexPath:indexPath];
     //[cell setUI];
+    FindSceneModel *model = self.sceneAry[indexPath.row];
+//    //cell.titleLab.text = model.title;
+//    cell.locationLab.text = model.address;
+//    [cell.sceneImage sd_setImageWithURL:[NSURL URLWithString:model.cober]];
+    FiuSceneRow *model1 = [[FiuSceneRow alloc] init];
+    model1.title = model.title;
+    model1.coverUrl = model.cober;
+    model1.address = model.address;
+    [cell setFiuSceneList:model1];
+    
     return cell;
 }
 

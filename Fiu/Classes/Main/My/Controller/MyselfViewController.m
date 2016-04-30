@@ -32,6 +32,7 @@
 #import "MessageViewController.h"
 #import "AboutViewController.h"
 #import "OptionViewController.h"
+#import <SVProgressHUD.h>
 
 @interface MyselfViewController ()<UIScrollViewDelegate,FBNavigationBarItemsDelegate,FBRequestDelegate>
 
@@ -51,6 +52,8 @@ static NSString *const follows = @"/follow";
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+//    UserInfoEntity *entity = [UserInfoEntity defaultUserInfoEntity];
+//    NSLog(@"userid  %@",entity.userId);
     self.view.backgroundColor = [UIColor colorWithHexString:lineGrayColor];
     // Do any additional setup after loading the view.
     //[self setImagesRoundedCorners:27.0 :_headPortraitImageV];
@@ -166,8 +169,24 @@ static NSString *const follows = @"/follow";
     //向上滑动tabbar消失
     
     //向下滑动tabbar出现
+    //网络请求
+    [self netGetData];
 }
 
+-(void)netGetData{
+    [SVProgressHUD show];
+    FBRequest *request = [FBAPI postWithUrlString:@"/auth/user" requestDictionary:nil delegate:self];
+    [request startRequestSuccess:^(FBRequest *request, id result) {
+        NSLog(@"result %@",result);
+        NSDictionary *dataDict = result[@"data"];
+        _chanelV.scenarioNumLabel.text = dataDict[@"scene_count"];
+        _chanelV.fieldNumLabel.text = dataDict[@"sight_count"];
+        _chanelV.focusNumLabel.text = dataDict[@"follow_count"];
+        _chanelV.fansNumLabel.text = dataDict[@"fans_count"];
+    } failure:^(FBRequest *request, NSError *error) {
+        
+    }];
+}
 
 -(void)clickPartnerBtn:(UIButton*)sender{
     NSLog(@"合作伙伴app");

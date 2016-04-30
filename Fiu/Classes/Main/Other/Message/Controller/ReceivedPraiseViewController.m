@@ -20,7 +20,7 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
     self.delegate = self;
-    self.navViewTitle.text = @"私信";
+    self.navViewTitle.text = @"收到的赞";
     
     self.myTbaleView.delegate = self;
     self.myTbaleView.dataSource = self;

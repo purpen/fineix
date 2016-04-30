@@ -15,6 +15,7 @@
 @property(nonatomic,strong) UILabel *nickNameLabel;
 @property(nonatomic,strong) UILabel *summaryLabel;
 @property(nonatomic,strong) UIButton *focusOnBtn;
+@property(nonatomic,strong) UIView *lineView;
 
 -(void)setUIWithModel:(UserInfo*)model;
 

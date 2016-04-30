@@ -84,6 +84,8 @@
 		1FE60E701CD3413100045117 /* ReceivedPraiseViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1FE60E6E1CD3413100045117 /* ReceivedPraiseViewController.xib */; };
 		1FE60E741CD341A400045117 /* PayAttentionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1FE60E721CD341A400045117 /* PayAttentionViewController.m */; };
 		1FE60E751CD341A400045117 /* PayAttentionViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1FE60E731CD341A400045117 /* PayAttentionViewController.xib */; };
+		1FE60E781CD3E31D00045117 /* FindFriendModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 1FE60E771CD3E31D00045117 /* FindFriendModel.m */; };
+		1FE60E7B1CD3E6DC00045117 /* FindSceneModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 1FE60E7A1CD3E6DC00045117 /* FindSceneModel.m */; };
 		1FEB71721CC8802800CF34F3 /* InvitationModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 1FEB71711CC8802800CF34F3 /* InvitationModel.m */; };
 		1FEB71751CC88B5D00CF34F3 /* FindeFirendTwoModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 1FEB71741CC88B5D00CF34F3 /* FindeFirendTwoModel.m */; };
 		1FEB71781CC8A35A00CF34F3 /* QRCodeScanViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1FEB71771CC8A35A00CF34F3 /* QRCodeScanViewController.m */; };
@@ -461,6 +463,10 @@
 		1FE60E711CD341A400045117 /* PayAttentionViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PayAttentionViewController.h; sourceTree = "<group>"; };
 		1FE60E721CD341A400045117 /* PayAttentionViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PayAttentionViewController.m; sourceTree = "<group>"; };
 		1FE60E731CD341A400045117 /* PayAttentionViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PayAttentionViewController.xib; sourceTree = "<group>"; };
+		1FE60E761CD3E31D00045117 /* FindFriendModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FindFriendModel.h; sourceTree = "<group>"; };
+		1FE60E771CD3E31D00045117 /* FindFriendModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FindFriendModel.m; sourceTree = "<group>"; };
+		1FE60E791CD3E6DC00045117 /* FindSceneModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FindSceneModel.h; sourceTree = "<group>"; };
+		1FE60E7A1CD3E6DC00045117 /* FindSceneModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FindSceneModel.m; sourceTree = "<group>"; };
 		1FEB71701CC8802800CF34F3 /* InvitationModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InvitationModel.h; sourceTree = "<group>"; };
 		1FEB71711CC8802800CF34F3 /* InvitationModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InvitationModel.m; sourceTree = "<group>"; };
 		1FEB71731CC88B5D00CF34F3 /* FindeFirendTwoModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FindeFirendTwoModel.h; sourceTree = "<group>"; };
@@ -1225,6 +1231,10 @@
 				1F35F0531CD237450000DB95 /* AddreesModel.m */,
 				1F35F0551CD23C700000DB95 /* AreaModel.h */,
 				1F35F0561CD23C700000DB95 /* AreaModel.m */,
+				1FE60E761CD3E31D00045117 /* FindFriendModel.h */,
+				1FE60E771CD3E31D00045117 /* FindFriendModel.m */,
+				1FE60E791CD3E6DC00045117 /* FindSceneModel.h */,
+				1FE60E7A1CD3E6DC00045117 /* FindSceneModel.m */,
 			);
 			path = model;
 			sourceTree = "<group>";
@@ -2510,7 +2520,6 @@
 				1F35F04D1CD22D7A0000DB95 /* AddreesPickerViewController.m in Sources */,
 				D89B5A971CB66B3B00DB9710 /* DataNumTableViewCell.m in Sources */,
 				D83639EB1CD2281F00CC4AC0 /* GoodsRow.m in Sources */,
-				1FEF0B0D1CC0FC15006EF0C6 /* MyOrdersViewController.m in Sources */,
 				D80360401CBF376B001920F9 /* FBLoginViewController.m in Sources */,
 				D87B69D81CC726E800199EFE /* AllSceneViewController.m in Sources */,
 				1FD7E67A1CC8E4F200A69BDD /* MyQrCodeView.m in Sources */,
@@ -2527,11 +2536,13 @@
 				D81281661CAA8532007CF08B /* JKDBHelper.m in Sources */,
 				D83639851CCF221700CC4AC0 /* GoodsCarViewController.m in Sources */,
 				D83639781CCDE5A400CC4AC0 /* SceneInfoCounter.m in Sources */,
+				1FE60E7B1CD3E6DC00045117 /* FindSceneModel.m in Sources */,
 				D83639931CCF69D300CC4AC0 /* FiuSceneData.m in Sources */,
 				1F35F0481CD1FF630000DB95 /* DatePickerViewController.m in Sources */,
 				D86AFDEF1CBFAFC2006F1602 /* UserHeaderTableViewCell.m in Sources */,
 				D81281261CAA8532007CF08B /* FBFootView.m in Sources */,
 				D83639681CCDBF2900CC4AC0 /* HomeSceneListProduct.m in Sources */,
+				1FE60E781CD3E31D00045117 /* FindFriendModel.m in Sources */,
 				1F07A6411CC76C6000CF225F /* HomePageViewController.m in Sources */,
 				D81281251CAA8532007CF08B /* FBFiltersCollectionViewCell.m in Sources */,
 				1FFFFF4E1CD0A0CF008E1CDC /* ImprovViewController.m in Sources */,

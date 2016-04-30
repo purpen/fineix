@@ -35,6 +35,8 @@
     NSMutableArray *_sceneIdMarr;
     int _n;
     int _m;
+    int _totalN;
+    int _totalM;
 }
 @end
 
@@ -79,84 +81,176 @@
     scenarioTap3.numberOfTouchesRequired = 1;
     [_chanelV.fansView addGestureRecognizer:scenarioTap3];
 
-    //
+//    //
     [self.view addSubview:self.myCollectionView];
+//
+//    if ([self.type isEqualToNumber:@1]) {
+//        FBRequest *request = [FBAPI postWithUrlString:@"/scene_scene/" requestDictionary:@{@"page":@(_n),@"size":@10,@"sort":@0,@"user_id":self.userId} delegate:self];
+//        request.flag = @"scene_scene";
+//        [request startRequest];
+//    }else if ([self.type isEqualToNumber:@2]){
+//        FBRequest *request = [FBAPI postWithUrlString:@"/scene_sight/" requestDictionary:@{@"page":@(_m),@"size":@10,@"sort":@0,@"user_id":self.userId} delegate:self];
+//        request.flag = @"scene_sight";
+//        [request startRequest];
+//    }
+//
+//    
+//    //上拉加载更多
+//    self.myCollectionView.mj_footer = [MJRefreshAutoNormalFooter footerWithRefreshingBlock:^{
+//        
+//        if ([self.type isEqualToNumber:@1]) {
+//            _n ++;
+//            FBRequest *request = [FBAPI postWithUrlString:@"/scene_scene/" requestDictionary:@{@"page":@(_n),@"size":@10,@"sort":@0,@"user_id":self.userId} delegate:self];
+//            request.flag = @"scene_scene";
+//            [request startRequest];
+//        }else if ([self.type isEqualToNumber:@2]){
+//            _m ++;
+//            FBRequest *request = [FBAPI postWithUrlString:@"/scene_sight/" requestDictionary:@{@"page":@(_m),@"size":@10,@"sort":@0,@"user_id":self.userId} delegate:self];
+//            request.flag = @"scene_sight";
+//            [request startRequest];
+//        }
+//        [self.myCollectionView.mj_footer endRefreshing];
+//    }];
     
-    if ([self.type isEqualToNumber:@1]) {
-        FBRequest *request = [FBAPI postWithUrlString:@"/scene_scene/" requestDictionary:@{@"page":@(_n),@"size":@10,@"sort":@0,@"user_id":self.userId} delegate:self];
-        request.flag = @"scene_scene";
-        [request startRequest];
-    }else if ([self.type isEqualToNumber:@2]){
-        FBRequest *request = [FBAPI postWithUrlString:@"/scene_sight/" requestDictionary:@{@"page":@(_m),@"size":@10,@"sort":@0,@"user_id":self.userId} delegate:self];
-        request.flag = @"scene_sight";
-        [request startRequest];
-    }
-
-    
-    //上拉加载更多
-    self.myCollectionView.mj_footer = [MJRefreshAutoNormalFooter footerWithRefreshingBlock:^{
-        
-        if ([self.type isEqualToNumber:@1]) {
-            _n ++;
-            FBRequest *request = [FBAPI postWithUrlString:@"/scene_scene/" requestDictionary:@{@"page":@(_n),@"size":@10,@"sort":@0,@"user_id":self.userId} delegate:self];
-            request.flag = @"scene_scene";
-            [request startRequest];
-        }else if ([self.type isEqualToNumber:@2]){
-            _m ++;
-            FBRequest *request = [FBAPI postWithUrlString:@"/scene_sight/" requestDictionary:@{@"page":@(_m),@"size":@10,@"sort":@0,@"user_id":self.userId} delegate:self];
-            request.flag = @"scene_sight";
-            [request startRequest];
-        }
-        [self.myCollectionView.mj_footer endRefreshing];
-    }];
-    
-    
-    
+    [self networkRequestData];
 }
 
-
--(void)requestSucess:(FBRequest *)request result:(id)result{
-    [SVProgressHUD show];
-    if ([request.flag isEqualToString:@"scene_scene"]) {
-        if ([result objectForKey:@"success"]) {
+#pragma mark - 网络请求
+- (void)networkRequestData {
+    if ([self.type isEqualToNumber:@1]) {
+        //进行情景的网络请求
+        [SVProgressHUD show];
+        FBRequest *request = [FBAPI postWithUrlString:@"/scene_scene/" requestDictionary:@{@"page":@(_n),@"size":@10,@"sort":@0,@"user_id":self.userId} delegate:self];
+        [request startRequestSuccess:^(FBRequest *request, id result) {
+            NSLog(@"result %@",result);
             NSArray * fiuSceneArr = [[result valueForKey:@"data"] valueForKey:@"rows"];
             for (NSDictionary * fiuSceneDic in fiuSceneArr) {
                 FiuSceneRow * fiuSceneModel = [[FiuSceneRow alloc] initWithDictionary:fiuSceneDic];
                 [_fiuSceneList addObject:fiuSceneModel];
                 [_fiuSceneIdList addObject:[NSString stringWithFormat:@"%zi", fiuSceneModel.idField]];
             }
-            NSNumber *total_rows = [[result valueForKey:@"data"] valueForKey:@"total_rows"];
-            if (_fiuSceneList.count == [total_rows intValue]) {
-                [self.myCollectionView.mj_footer endRefreshingWithNoMoreData];
-                self.myCollectionView.mj_footer.hidden = YES;
-            }
             [self.myCollectionView reloadData];
+            _n = [[[result objectForKey:@"data"] objectForKey:@"current_page"] intValue];
+            _totalN = [[[result objectForKey:@"data"] objectForKey:@"total_page"] intValue];
+            if (_totalN>1) {
+                //
+                [self addMJRefresh:self.myCollectionView];
+                [self requestIsLastData:self.myCollectionView currentPage:_n withTotalPage:_totalN];
+            }
             [SVProgressHUD dismiss];
-        }else{
-            [SVProgressHUD showErrorWithStatus:@"加载失败"];
-            [SVProgressHUD dismiss];
-        }
-    }else if ([request.flag isEqualToString:@"scene_sight"]){
-        if ([result objectForKey:@"success"]) {
+        } failure:^(FBRequest *request, NSError *error) {
+            [SVProgressHUD showErrorWithStatus:[error localizedDescription]];
+        }];
+    }else if ([self.type isEqualToNumber:@2]){
+        //进行场景的网络请求
+        [SVProgressHUD show];
+        FBRequest *request = [FBAPI postWithUrlString:@"/scene_sight/" requestDictionary:@{@"page":@(_m),@"size":@10,@"sort":@0,@"user_id":self.userId} delegate:self];
+        [request startRequestSuccess:^(FBRequest *request, id result) {
+            NSLog(@"result %@",result);
             NSArray * sceneArr = [[result valueForKey:@"data"] valueForKey:@"rows"];
+            
             for (NSDictionary * sceneDic in sceneArr) {
                 HomeSceneListRow * homeSceneModel = [[HomeSceneListRow alloc] initWithDictionary:sceneDic];
                 [_sceneListMarr addObject:homeSceneModel];
                 [_sceneIdMarr addObject:[NSString stringWithFormat:@"%zi", homeSceneModel.idField]];
-            }
-            NSNumber *total_rows = [[result valueForKey:@"data"] valueForKey:@"total_rows"];
-            if (_fiuSceneList.count == [total_rows intValue]) {
-                [self.myCollectionView.mj_footer endRefreshingWithNoMoreData];
-                self.myCollectionView.mj_footer.hidden = YES;
-            }
+                }
             [self.myCollectionView reloadData];
+            _m = [[[result objectForKey:@"data"] objectForKey:@"current_page"] intValue];
+            _totalM = [[[result objectForKey:@"data"] objectForKey:@"total_page"] intValue];
+            if (_totalM>1) {
+                //
+                [self addMJRefresh:self.myCollectionView];
+                [self requestIsLastData:self.myCollectionView currentPage:_m withTotalPage:_totalM];
+            }
             [SVProgressHUD dismiss];
-        }else{
-            [SVProgressHUD showErrorWithStatus:@"加载失败"];
-            [SVProgressHUD dismiss];
-        }
+        } failure:^(FBRequest *request, NSError *error) {
+            [SVProgressHUD showErrorWithStatus:[error localizedDescription]];
+        }];
+
     }
 }
+
+
+//  判断是否为最后一条数据
+- (void)requestIsLastData:(UICollectionView *)table currentPage:(NSInteger )current withTotalPage:(NSInteger)total {
+    BOOL isLastPage = (current == total);
+    
+    if (!isLastPage) {
+        if (table.mj_footer.state == MJRefreshStateNoMoreData) {
+            [table.mj_footer resetNoMoreData];
+        }
+    }
+    if (current == total == 1) {
+        table.mj_footer.state = MJRefreshStateNoMoreData;
+        table.mj_footer.hidden = true;
+    }
+    if ([table.mj_header isRefreshing]) {
+        [table.mj_header endRefreshing];
+    }
+    if ([table.mj_footer isRefreshing]) {
+        if (isLastPage) {
+            [table.mj_footer endRefreshingWithNoMoreData];
+        } else  {
+            [table.mj_footer endRefreshing];
+        }
+    }
+    [SVProgressHUD dismiss];
+}
+
+
+-(void)addMJRefresh:(UICollectionView*)collectionView{
+    
+    collectionView.mj_footer = [MJRefreshAutoNormalFooter footerWithRefreshingBlock:^{
+        if (_n < _totalN) {
+            [self networkRequestData];
+        } else {
+            [collectionView.mj_footer endRefreshing];
+        }
+    }];
+}
+//
+//-(void)requestSucess:(FBRequest *)request result:(id)result{
+//    [SVProgressHUD show];
+//    if ([request.flag isEqualToString:@"scene_scene"]) {
+//        if ([result objectForKey:@"success"]) {
+//            NSArray * fiuSceneArr = [[result valueForKey:@"data"] valueForKey:@"rows"];
+//            for (NSDictionary * fiuSceneDic in fiuSceneArr) {
+//                FiuSceneRow * fiuSceneModel = [[FiuSceneRow alloc] initWithDictionary:fiuSceneDic];
+//                [_fiuSceneList addObject:fiuSceneModel];
+//                [_fiuSceneIdList addObject:[NSString stringWithFormat:@"%zi", fiuSceneModel.idField]];
+//            }
+//            NSNumber *total_rows = [[result valueForKey:@"data"] valueForKey:@"total_rows"];
+//            if (_fiuSceneList.count == [total_rows intValue]) {
+//                [self.myCollectionView.mj_footer endRefreshingWithNoMoreData];
+//                self.myCollectionView.mj_footer.hidden = YES;
+//            }
+//            [self.myCollectionView reloadData];
+//            [SVProgressHUD dismiss];
+//        }else{
+//            [SVProgressHUD showErrorWithStatus:@"加载失败"];
+//            [SVProgressHUD dismiss];
+//        }
+//    }else if ([request.flag isEqualToString:@"scene_sight"]){
+//        if ([result objectForKey:@"success"]) {
+//            NSArray * sceneArr = [[result valueForKey:@"data"] valueForKey:@"rows"];
+//            for (NSDictionary * sceneDic in sceneArr) {
+//                HomeSceneListRow * homeSceneModel = [[HomeSceneListRow alloc] initWithDictionary:sceneDic];
+//                [_sceneListMarr addObject:homeSceneModel];
+//                [_sceneIdMarr addObject:[NSString stringWithFormat:@"%zi", homeSceneModel.idField]];
+//            }
+//            NSNumber *total_rows = [[result valueForKey:@"data"] valueForKey:@"total_rows"];
+//            if (_fiuSceneList.count == [total_rows intValue]) {
+//                [self.myCollectionView.mj_footer endRefreshingWithNoMoreData];
+//                self.myCollectionView.mj_footer.hidden = YES;
+//            }
+//            [self.myCollectionView reloadData];
+//            [SVProgressHUD dismiss];
+//        }else{
+//            [SVProgressHUD showErrorWithStatus:@"加载失败"];
+//            [SVProgressHUD dismiss];
+//        }
+//    }
+//}
 
 
 -(void)viewWillAppear:(BOOL)animated{
@@ -170,38 +264,19 @@
 -(void)signleTap:(UITapGestureRecognizer*)sender{
     NSLog(@"情景");
     self.type = @1;
-    if ([self.type isEqualToNumber:@1]) {
-        FBRequest *request = [FBAPI postWithUrlString:@"/scene_scene/" requestDictionary:@{@"page":@(_n),@"size":@10,@"sort":@0,@"user_id":self.userId} delegate:self];
-        request.flag = @"scene_scene";
-        [request startRequest];
-    }else if ([self.type isEqualToNumber:@2]){
-        FBRequest *request = [FBAPI postWithUrlString:@"/scene_sight/" requestDictionary:@{@"page":@(_m),@"size":@10,@"sort":@0,@"user_id":self.userId} delegate:self];
-        request.flag = @"scene_sight";
-        [request startRequest];
-    }
-    [self.myCollectionView reloadSections:[[NSIndexSet alloc] initWithIndex:2]];
+    [self networkRequestData];
 }
 
 -(void)signleTap1:(UITapGestureRecognizer*)sender{
     NSLog(@"场景");
     self.type = @2;
-    if ([self.type isEqualToNumber:@1]) {
-        FBRequest *request = [FBAPI postWithUrlString:@"/scene_scene/" requestDictionary:@{@"page":@(_n),@"size":@10,@"sort":@0,@"user_id":self.userId} delegate:self];
-        request.flag = @"scene_scene";
-        [request startRequest];
-    }else if ([self.type isEqualToNumber:@2]){
-        FBRequest *request = [FBAPI postWithUrlString:@"/scene_sight/" requestDictionary:@{@"page":@(_m),@"size":@10,@"sort":@0,@"user_id":self.userId} delegate:self];
-        request.flag = @"scene_sight";
-        [request startRequest];
-    }
-    [self.myCollectionView reloadSections:[[NSIndexSet alloc] initWithIndex:2]];
+    [self networkRequestData];
 }
 
 -(void)signleTap2:(UITapGestureRecognizer*)sender{
     NSLog(@"跳转到我的主页的关注的界面");
-    UserInfoEntity *entity = [UserInfoEntity defaultUserInfoEntity];
     MyPageFocusOnViewController *view = [[MyPageFocusOnViewController alloc] init];
-    view.userId = entity.userId;
+    view.userId = self.userId;
     [self.navigationController pushViewController:view animated:YES];
 }
 

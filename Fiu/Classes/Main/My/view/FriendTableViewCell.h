@@ -16,6 +16,7 @@
 @property(nonatomic,strong) UILabel *deressLabel;
 @property(nonatomic,strong) UIButton *focusBtn;
 @property(nonatomic,strong) UICollectionView *imageCollectionView;
+@property(nonatomic,strong) NSArray *sceneAry;
 
 -(void)setUI;
 

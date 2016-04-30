@@ -29,7 +29,7 @@
 -(UIView *)alertView{
     if (!_alertView) {
         _alertView = [[UIView alloc] initWithFrame:CGRectMake(0, 978*0.5/667.0*SCREEN_HEIGHT, SCREEN_WIDTH, 356*0.5/667.0*SCREEN_HEIGHT)];
-        _alertView.backgroundColor = [UIColor colorWithHexString:lineGrayColor];
+        _alertView.backgroundColor = [UIColor whiteColor];
         _alertView.userInteractionEnabled = YES;
         
         
@@ -42,9 +42,10 @@
         
                 UIView *linview = [[UIView alloc] init];
                 linview.backgroundColor = [UIColor lightGrayColor];
+        linview.alpha = 0.5;
                 [_firstView addSubview:linview];
                 [linview mas_makeConstraints:^(MASConstraintMaker *make) {
-                    make.size.mas_equalTo(CGSizeMake(SCREEN_WIDTH, 1));
+                    make.size.mas_equalTo(CGSizeMake(SCREEN_WIDTH, 0.5));
                     make.left.mas_equalTo(_firstView.mas_left).with.offset(0);
                     make.bottom.mas_equalTo(_firstView.mas_bottom).with.offset(0);
                 }];
@@ -58,9 +59,10 @@
         
                 UIView *linview2 = [[UIView alloc] init];
                 linview2.backgroundColor = [UIColor lightGrayColor];
+        linview2.alpha = 0.5;
                 [_firstView addSubview:linview2];
                 [linview2 mas_makeConstraints:^(MASConstraintMaker *make) {
-                    make.size.mas_equalTo(CGSizeMake(SCREEN_WIDTH, 1));
+                    make.size.mas_equalTo(CGSizeMake(SCREEN_WIDTH, 0.5));
                     make.left.mas_equalTo(_stopBtn.mas_left).with.offset(0);
                     make.bottom.mas_equalTo(_stopBtn.mas_bottom).with.offset(0);
                 }];

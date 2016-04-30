@@ -14,9 +14,18 @@
 #import "UMSocial.h"
 #import "SVProgressHUD.h"
 #import "LBAddressBookViewController.h"
+#import "FBAPI.h"
+#import "FBRequest.h"
+#import "FindFriendModel.h"
+#import "FindSceneModel.h"
+#import <SDWebImage/UIImageView+WebCache.h>
+#import "MyFansActionSheetViewController.h"
 
-@interface FindeFriendViewController ()<FBNavigationBarItemsDelegate,UITableViewDelegate,UITableViewDataSource>
-
+@interface FindeFriendViewController ()<FBNavigationBarItemsDelegate,UITableViewDelegate,UITableViewDataSource,FBRequestDelegate>
+{
+    NSMutableArray *_userAry;
+    NSMutableArray *_scenceAry;
+}
 @end
 
 static NSString *const ShareURL = @"http://m.taihuoniao.com/guide/app_about";
@@ -25,6 +34,8 @@ static NSString *const ShareURL = @"http://m.taihuoniao.com/guide/app_about";
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    _userAry = [NSMutableArray array];
+    _scenceAry = [NSMutableArray array];
     //self.navigationController.navigationBarHidden = NO;
     // Do any additional setup after loading the view.
 
@@ -37,6 +48,44 @@ static NSString *const ShareURL = @"http://m.taihuoniao.com/guide/app_about";
     self.delegate = self;
     [self addBarItemRightBarButton:nil image:@"scanning" isTransparent:NO];
     [self.view addSubview:self.myTbaleView];
+    //网络请求
+    [self netGetData];
+}
+
+-(void)netGetData{
+    [SVProgressHUD show];
+    FBRequest *request = [FBAPI postWithUrlString:@"/user/" requestDictionary:@{@"page":@1,@"size":@5,@"sort":@1,@"has_scene":@1} delegate:self];
+    [request startRequestSuccess:^(FBRequest *request, id result) {
+        NSLog(@"******** result %@",result);
+        NSDictionary *dataDict = [result objectForKey:@"data"];
+        NSArray *rowsAry = [dataDict objectForKey:@"rows"];
+        for (NSDictionary *rowsDict in rowsAry) {
+            FindFriendModel *model = [[FindFriendModel alloc] init];
+            model.userid = [rowsDict objectForKey:@"_id"];
+            model.avatarUrl = rowsDict[@"medium_avatar_url"];
+            model.nickName = rowsDict[@"nickname"];
+            model.address = rowsDict[@"address"];
+            NSArray *sceneAry = rowsDict[@"scene"];
+            
+            for (NSDictionary *sceneDict in sceneAry) {
+                FindSceneModel *model1 = [[FindSceneModel alloc] init];
+                model1.id = sceneDict[@"_id"];
+                model1.title = sceneDict[@"title"];
+                model1.address = sceneDict[@"address"];
+                model1.cober = sceneDict[@"cover_url"];
+                model.scene = [NSMutableArray array];
+                [model.scene addObject:model1];
+            }
+            [_userAry addObject:model];
+        }
+        NSLog(@"_userAry  %@",_userAry);
+        NSLog(@"_scenceAry  %@",_scenceAry);
+        [self.myTbaleView reloadData];
+        [SVProgressHUD dismiss];
+    } failure:^(FBRequest *request, NSError *error) {
+        [SVProgressHUD dismiss];
+        [SVProgressHUD showErrorWithStatus:@"请求失败"];
+    }];
 }
 
 -(UITableView *)myTbaleView{
@@ -57,7 +106,7 @@ static NSString *const ShareURL = @"http://m.taihuoniao.com/guide/app_about";
     if (section == 0) {
         return 3;
     }else{
-        return 3;
+        return _userAry.count;
     }
 }
 
@@ -87,13 +136,70 @@ static NSString *const ShareURL = @"http://m.taihuoniao.com/guide/app_about";
         if (cell == nil) {
             cell = [[FriendTableViewCell alloc] init];
         }
-        
-        [cell setUI];
+        FindFriendModel *model = _userAry[indexPath.row];
+        cell.focusBtn.tag = indexPath.row;
+        [cell.headImageView sd_setImageWithURL:[NSURL URLWithString:model.avatarUrl]];
+        cell.nameLbael.text = model.nickName;
+        cell.deressLabel.text = model.address;
+        cell.sceneAry = model.scene;
+        [cell.focusBtn addTarget:self action:@selector(clickFocusBtn:) forControlEvents:UIControlEventTouchUpInside];
         return cell;
     }
     return nil;
 }
 
+-(void)clickFocusBtn:(UIButton*)sender{
+    if (sender.selected) {
+        MyFansActionSheetViewController *sheetVC = [[MyFansActionSheetViewController alloc] init];
+        //[sheetVC setUI];
+        FindFriendModel *model = _userAry[sender.tag];
+        [sheetVC.headImageView sd_setImageWithURL:[NSURL URLWithString:model.avatarUrl]];
+        sheetVC.sheetLabel.text = [NSString stringWithFormat:@"停止关注 %@",model.nickName];
+        sheetVC.modalPresentationStyle = UIModalPresentationOverCurrentContext;
+        sheetVC.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;
+        [self presentViewController:sheetVC animated:YES completion:nil];
+        sheetVC.stopBtn.tag = sender.tag;
+        [sheetVC.stopBtn addTarget:self action:@selector(clickStopBtn:) forControlEvents:UIControlEventTouchUpInside];
+        [sheetVC.cancelBtn addTarget:self action:@selector(clickCancelBtn:) forControlEvents:UIControlEventTouchUpInside];
+    }else{
+        sender.selected = !sender.selected;
+        //请求数据
+        FindFriendModel *model = _userAry[sender.tag];
+        FBRequest *request = [FBAPI postWithUrlString:@"/follow/ajax_follow" requestDictionary:@{@"follow_id":model.userid} delegate:self];
+        request.flag = @"/follow/ajax_follow";
+        [request startRequest];
+    }
+}
+
+-(void)requestSucess:(FBRequest *)request result:(id)result{
+    if ([request.flag isEqualToString:@"/follow/ajax_follow"]){
+        if ([result objectForKey:@"success"]) {
+            [SVProgressHUD showSuccessWithStatus:@"关注成功"];
+        }else{
+            [SVProgressHUD showErrorWithStatus:@"关注失败"];
+        }
+    }else if ([request.flag isEqualToString:@"/follow/ajax_cancel_follow"]){
+        if ([result objectForKey:@"success"]) {
+            [SVProgressHUD showSuccessWithStatus:@"取消关注"];
+        }else{
+            [SVProgressHUD showErrorWithStatus:@"失败"];
+        }
+    }
+}
+
+-(void)clickStopBtn:(UIButton*)sender{
+    [self dismissViewControllerAnimated:YES completion:nil];
+    FriendTableViewCell *cell1 = [self.myTbaleView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:sender.tag inSection:1]];
+    cell1.focusBtn.selected = NO;
+    FindFriendModel *model = _userAry[sender.tag];
+    FBRequest *request = [FBAPI postWithUrlString:@"/follow/ajax_cancel_follow" requestDictionary:@{@"follow_id":model.userid} delegate:self];
+    request.flag = @"/follow/ajax_cancel_follow";
+    [request startRequest];
+}
+
+-(void)clickCancelBtn:(UIButton*)sender{
+    [self dismissViewControllerAnimated:NO completion:nil];
+}
 
 
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{

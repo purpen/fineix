@@ -57,8 +57,24 @@
             make.right.mas_equalTo(_focusOnBtn.mas_left).with.offset(-5);
             make.height.mas_equalTo(10);
         }];
+        
+        [self.contentView addSubview:self.lineView];
+        [_lineView mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.size.mas_equalTo(CGSizeMake(SCREEN_WIDTH, 0.5));
+            make.bottom.mas_equalTo(self.mas_bottom).with.offset(0);
+            make.left.mas_equalTo(self.mas_left).with.offset(0);
+        }];
     }
     return self;
+}
+
+-(UIView *)lineView{
+    if (!_lineView) {
+        _lineView = [[UIView alloc] init];
+        _lineView.backgroundColor = [UIColor lightGrayColor];
+        _lineView.alpha = 0.5;
+    }
+    return _lineView;
 }
 
 -(void)setUIWithModel:(UserInfo *)model{
