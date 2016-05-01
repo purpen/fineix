@@ -19,6 +19,7 @@
 #import "WeiboSDK.h"
 #import <TencentOpenAPI/QQApiInterface.h>
 #import "ImprovViewController.h"
+#import "SubscribeInterestedCollectionViewController.h"
 
 @interface BindIngViewController ()<UITextFieldDelegate>
 
@@ -85,12 +86,14 @@ NSString *thirdRegistrationBindingMobilePhone = @"/auth/third_register_with_phon
                 NSDictionary *identifyDict = [dataDic objectForKey:@"identify"];
                 if ([[identifyDict objectForKey:@"is_scene_subscribe"] isEqualToNumber:@0]) {
                     //跳转到推荐界面
+                    SubscribeInterestedCollectionViewController *subscribeVC = [[SubscribeInterestedCollectionViewController alloc] init];
+                    [self.navigationController pushViewController:subscribeVC animated:YES];
                 }else{
-                    //跳转到个人信息完善页面
-                    ImprovViewController *improveVC = [[ImprovViewController alloc] init];
-                    [self.navigationController pushViewController:improveVC animated:YES];
-
-                    
+                    //已经订阅过，直接个人中心
+                    //跳回个人主页
+                    //跳回个人主页
+                    [self dismissViewControllerAnimated:YES completion:nil];
+                    [self.tabBarController setSelectedIndex:3];
                 }
                 
                 

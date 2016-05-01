@@ -25,6 +25,9 @@
 #import "FiuSceneViewController.h"
 #import "HomeSceneListRow.h"
 #import "SceneInfoViewController.h"
+#import "MyFansActionSheetViewController.h"
+#import "UserInfo.h"
+
 
 @interface HomePageViewController ()<UICollectionViewDelegate,UICollectionViewDataSource,UICollectionViewDelegateFlowLayout,FBRequestDelegate>
 {
@@ -37,6 +40,7 @@
     int _m;
     int _totalN;
     int _totalM;
+    UserInfo *_model;
 }
 @end
 
@@ -83,36 +87,8 @@
 
 //    //
     [self.view addSubview:self.myCollectionView];
-//
-//    if ([self.type isEqualToNumber:@1]) {
-//        FBRequest *request = [FBAPI postWithUrlString:@"/scene_scene/" requestDictionary:@{@"page":@(_n),@"size":@10,@"sort":@0,@"user_id":self.userId} delegate:self];
-//        request.flag = @"scene_scene";
-//        [request startRequest];
-//    }else if ([self.type isEqualToNumber:@2]){
-//        FBRequest *request = [FBAPI postWithUrlString:@"/scene_sight/" requestDictionary:@{@"page":@(_m),@"size":@10,@"sort":@0,@"user_id":self.userId} delegate:self];
-//        request.flag = @"scene_sight";
-//        [request startRequest];
-//    }
-//
-//    
-//    //上拉加载更多
-//    self.myCollectionView.mj_footer = [MJRefreshAutoNormalFooter footerWithRefreshingBlock:^{
-//        
-//        if ([self.type isEqualToNumber:@1]) {
-//            _n ++;
-//            FBRequest *request = [FBAPI postWithUrlString:@"/scene_scene/" requestDictionary:@{@"page":@(_n),@"size":@10,@"sort":@0,@"user_id":self.userId} delegate:self];
-//            request.flag = @"scene_scene";
-//            [request startRequest];
-//        }else if ([self.type isEqualToNumber:@2]){
-//            _m ++;
-//            FBRequest *request = [FBAPI postWithUrlString:@"/scene_sight/" requestDictionary:@{@"page":@(_m),@"size":@10,@"sort":@0,@"user_id":self.userId} delegate:self];
-//            request.flag = @"scene_sight";
-//            [request startRequest];
-//        }
-//        [self.myCollectionView.mj_footer endRefreshing];
-//    }];
     
-    [self networkRequestData];
+   
 }
 
 #pragma mark - 网络请求
@@ -208,49 +184,6 @@
         }
     }];
 }
-//
-//-(void)requestSucess:(FBRequest *)request result:(id)result{
-//    [SVProgressHUD show];
-//    if ([request.flag isEqualToString:@"scene_scene"]) {
-//        if ([result objectForKey:@"success"]) {
-//            NSArray * fiuSceneArr = [[result valueForKey:@"data"] valueForKey:@"rows"];
-//            for (NSDictionary * fiuSceneDic in fiuSceneArr) {
-//                FiuSceneRow * fiuSceneModel = [[FiuSceneRow alloc] initWithDictionary:fiuSceneDic];
-//                [_fiuSceneList addObject:fiuSceneModel];
-//                [_fiuSceneIdList addObject:[NSString stringWithFormat:@"%zi", fiuSceneModel.idField]];
-//            }
-//            NSNumber *total_rows = [[result valueForKey:@"data"] valueForKey:@"total_rows"];
-//            if (_fiuSceneList.count == [total_rows intValue]) {
-//                [self.myCollectionView.mj_footer endRefreshingWithNoMoreData];
-//                self.myCollectionView.mj_footer.hidden = YES;
-//            }
-//            [self.myCollectionView reloadData];
-//            [SVProgressHUD dismiss];
-//        }else{
-//            [SVProgressHUD showErrorWithStatus:@"加载失败"];
-//            [SVProgressHUD dismiss];
-//        }
-//    }else if ([request.flag isEqualToString:@"scene_sight"]){
-//        if ([result objectForKey:@"success"]) {
-//            NSArray * sceneArr = [[result valueForKey:@"data"] valueForKey:@"rows"];
-//            for (NSDictionary * sceneDic in sceneArr) {
-//                HomeSceneListRow * homeSceneModel = [[HomeSceneListRow alloc] initWithDictionary:sceneDic];
-//                [_sceneListMarr addObject:homeSceneModel];
-//                [_sceneIdMarr addObject:[NSString stringWithFormat:@"%zi", homeSceneModel.idField]];
-//            }
-//            NSNumber *total_rows = [[result valueForKey:@"data"] valueForKey:@"total_rows"];
-//            if (_fiuSceneList.count == [total_rows intValue]) {
-//                [self.myCollectionView.mj_footer endRefreshingWithNoMoreData];
-//                self.myCollectionView.mj_footer.hidden = YES;
-//            }
-//            [self.myCollectionView reloadData];
-//            [SVProgressHUD dismiss];
-//        }else{
-//            [SVProgressHUD showErrorWithStatus:@"加载失败"];
-//            [SVProgressHUD dismiss];
-//        }
-//    }
-//}
 
 
 -(void)viewWillAppear:(BOOL)animated{
@@ -258,8 +191,28 @@
     [self.myCollectionView reloadData];
     self.navigationController.navigationBarHidden = YES;
     self.tabBarController.tabBar.hidden = YES;
+    
+    //进行网络请求
+    [self netGetData];
+    [self networkRequestData];
 }
 
+-(void)netGetData{
+    [SVProgressHUD show];
+    FBRequest *request = [FBAPI postWithUrlString:@"/user/user_info" requestDictionary:@{@"user_id":self.userId} delegate:self];
+    [request startRequestSuccess:^(FBRequest *request, id result) {
+        NSLog(@"&&&&&&&&result %@",result);
+        NSDictionary *dataDict = result[@"data"];
+        _chanelV.scenarioNumLabel.text = [NSString stringWithFormat:@"%@",dataDict[@"scene_count"]];
+        _chanelV.fieldNumLabel.text = [NSString stringWithFormat:@"%@",dataDict[@"sight_count"]];
+        _chanelV.focusNumLabel.text = [NSString stringWithFormat:@"%@",dataDict[@"follow_count"]];
+        _chanelV.fansNumLabel.text = [NSString stringWithFormat:@"%@",dataDict[@"fans_count"]];
+        [SVProgressHUD dismiss];
+        _model = [UserInfo mj_objectWithKeyValues:dataDict];
+    } failure:^(FBRequest *request, NSError *error) {
+        [SVProgressHUD showErrorWithStatus:@"加载失败"];
+    }];
+}
 
 -(void)signleTap:(UITapGestureRecognizer*)sender{
     NSLog(@"情景");
@@ -344,7 +297,7 @@
             [cell.moreBtn addTarget:self action:@selector(clickMoreBtn:) forControlEvents:UIControlEventTouchUpInside];
             [cell.focusOnBtn addTarget:self action:@selector(clickFocusBtn:) forControlEvents:UIControlEventTouchUpInside];
             [cell.directMessages addTarget:self action:@selector(clickMessageBtn:) forControlEvents:UIControlEventTouchUpInside];
-            [cell setUI];
+            [cell setUIWithModel:_model];
             return cell;
         }
     }else if (indexPath.section == 1){
@@ -395,8 +348,56 @@
 }
 
 -(void)clickFocusBtn:(UIButton*)sender{
-    sender.selected = !sender.selected;
+    if (sender.selected) {
+        MyFansActionSheetViewController *sheetVC = [[MyFansActionSheetViewController alloc] init];
+        [sheetVC setUI];
+        sheetVC.modalPresentationStyle = UIModalPresentationOverCurrentContext;
+        sheetVC.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;
+        [self presentViewController:sheetVC animated:YES completion:nil];
+        sheetVC.stopBtn.tag = sender.tag;
+        [sheetVC.stopBtn addTarget:self action:@selector(clickStopBtn:) forControlEvents:UIControlEventTouchUpInside];
+        [sheetVC.cancelBtn addTarget:self action:@selector(clickCancelBtn:) forControlEvents:UIControlEventTouchUpInside];
+    }else{
+        sender.selected = !sender.selected;
+        //请求数据
+        FBRequest *request = [FBAPI postWithUrlString:@"/follow/ajax_follow" requestDictionary:@{@"follow_id":self.userId} delegate:self];
+        request.flag = @"/follow/ajax_follow";
+        [request startRequest];
+    }
+
 }
+
+
+-(void)requestSucess:(FBRequest *)request result:(id)result{
+    if ([request.flag isEqualToString:@"/follow/ajax_follow"]){
+        if ([result objectForKey:@"success"]) {
+            [SVProgressHUD showSuccessWithStatus:@"关注成功"];
+        }else{
+            [SVProgressHUD showErrorWithStatus:@"关注失败"];
+        }
+    }else if ([request.flag isEqualToString:@"/follow/ajax_cancel_follow"]){
+        if ([result objectForKey:@"success"]) {
+            [SVProgressHUD showSuccessWithStatus:@"取消关注"];
+        }else{
+            [SVProgressHUD showErrorWithStatus:@"连接失败"];
+        }
+    }
+}
+
+
+-(void)clickStopBtn:(UIButton*)sender{
+    [self dismissViewControllerAnimated:YES completion:nil];
+    OtherCollectionViewCell *cell = (OtherCollectionViewCell*)[_myCollectionView cellForItemAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0]];
+    cell.focusOnBtn.selected = NO;
+    FBRequest *request = [FBAPI postWithUrlString:@"/follow/ajax_cancel_follow" requestDictionary:@{@"follow_id":self.userId} delegate:self];
+    request.flag = @"/follow/ajax_cancel_follow";
+    [request startRequest];
+}
+
+-(void)clickCancelBtn:(UIButton*)sender{
+    [self dismissViewControllerAnimated:NO completion:nil];
+}
+
 
 -(void)clickMessageBtn:(UIButton*)sender{
     DirectMessagesViewController *vc = [[DirectMessagesViewController alloc] init];
@@ -408,13 +409,14 @@
 -(void)clickMoreBtn:(UIButton*)sender{
     FBSheetViewController *sheetVC = [[FBSheetViewController alloc] init];
     sheetVC.modalPresentationStyle = UIModalPresentationOverCurrentContext;
-    [self presentViewController:sheetVC animated:NO completion:nil];
+    sheetVC.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;
+    [self presentViewController:sheetVC animated:YES completion:nil];
     [sheetVC initFBSheetVCWithNameAry:[NSArray arrayWithObjects:@"拉黑用户",@"举报",@"取消", nil]];
     [((UIButton*)sheetVC.sheetView.subviews[2]) addTarget:self action:@selector(cancelBtn:) forControlEvents:UIControlEventTouchUpInside];
 }
 
 -(void)cancelBtn:(UIButton*)sender{
-    [self dismissViewControllerAnimated:NO completion:nil];
+    [self dismissViewControllerAnimated:YES completion:nil];
 }
 
 -(CGFloat)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout minimumLineSpacingForSectionAtIndex:(NSInteger)section{

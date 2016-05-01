@@ -41,7 +41,6 @@
         [_loginBtn setTitle:@"登录" forState:UIControlStateNormal];
         _loginBtn.titleLabel.font = [UIFont systemFontOfSize:17];
         [_loginBtn setTitleColor:[UIColor colorWithHexString:fineixColor] forState:UIControlStateNormal];
-        _loginBtn.titleLabel.font = [UIFont systemFontOfSize:13];
         _loginBtn.backgroundColor = [UIColor whiteColor];
 //        //快速注册按钮
 //        _soonBtn = [[UIButton alloc] initWithFrame:CGRectMake(0, 346/2/667.0*SCREEN_HEIGHT, 120/2/667.0*SCREEN_HEIGHT, 25/667.0*SCREEN_HEIGHT)];

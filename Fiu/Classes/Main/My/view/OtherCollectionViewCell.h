@@ -20,5 +20,5 @@
 @property(nonatomic,strong) UIButton *focusOnBtn;//关注按钮
 @property(nonatomic,strong) UIButton *directMessages;//私信按钮
 
--(void)setUI;
+-(void)setUIWithModel:(UserInfo*)model;
 @end

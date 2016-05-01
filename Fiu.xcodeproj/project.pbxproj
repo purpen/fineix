@@ -55,6 +55,8 @@
 		1F51E8B01CC61E6400017839 /* SubscribeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F51E8AF1CC61E6400017839 /* SubscribeViewController.m */; };
 		1F51E8B31CC6338D00017839 /* PraisedViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F51E8B21CC6338D00017839 /* PraisedViewController.m */; };
 		1F59E5FC1C9ABBA500E96C60 /* Accelerate.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1F59E5FB1C9ABBA500E96C60 /* Accelerate.framework */; };
+		1F7B29361CD5F50500482D84 /* MyOderModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F7B29351CD5F50500482D84 /* MyOderModel.m */; };
+		1F7B293B1CD6056900482D84 /* MyViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1F7B29391CD6056900482D84 /* MyViewController.xib */; };
 		1FBC3E9A1CCE3766007CFA14 /* ShareViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1FBC3E981CCE3766007CFA14 /* ShareViewController.m */; };
 		1FBC3E9B1CCE3766007CFA14 /* ShareViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1FBC3E991CCE3766007CFA14 /* ShareViewController.xib */; };
 		1FBE626A1CC4CB72009606F7 /* MyPageFocusOnViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1FBE62691CC4CB72009606F7 /* MyPageFocusOnViewController.m */; };
@@ -89,7 +91,6 @@
 		1FEB71721CC8802800CF34F3 /* InvitationModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 1FEB71711CC8802800CF34F3 /* InvitationModel.m */; };
 		1FEB71751CC88B5D00CF34F3 /* FindeFirendTwoModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 1FEB71741CC88B5D00CF34F3 /* FindeFirendTwoModel.m */; };
 		1FEB71781CC8A35A00CF34F3 /* QRCodeScanViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1FEB71771CC8A35A00CF34F3 /* QRCodeScanViewController.m */; };
-		1FEF0B0E1CC0FC15006EF0C6 /* MyOrderViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1FEF0AE21CC0FC15006EF0C6 /* MyOrderViewController.m */; };
 		1FEF0B0F1CC0FC15006EF0C6 /* MyShippingAddressViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1FEF0AE41CC0FC15006EF0C6 /* MyShippingAddressViewController.m */; };
 		1FEF0B121CC0FC15006EF0C6 /* OrderListModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 1FEF0AEB1CC0FC15006EF0C6 /* OrderListModel.m */; };
 		1FEF0B131CC0FC15006EF0C6 /* My.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1FEF0AEC1CC0FC15006EF0C6 /* My.storyboard */; };
@@ -418,6 +419,9 @@
 		1F51E8B11CC6338D00017839 /* PraisedViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PraisedViewController.h; sourceTree = "<group>"; };
 		1F51E8B21CC6338D00017839 /* PraisedViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PraisedViewController.m; sourceTree = "<group>"; };
 		1F59E5FB1C9ABBA500E96C60 /* Accelerate.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Accelerate.framework; path = System/Library/Frameworks/Accelerate.framework; sourceTree = SDKROOT; };
+		1F7B29341CD5F50500482D84 /* MyOderModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyOderModel.h; sourceTree = "<group>"; };
+		1F7B29351CD5F50500482D84 /* MyOderModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyOderModel.m; sourceTree = "<group>"; };
+		1F7B29391CD6056900482D84 /* MyViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MyViewController.xib; sourceTree = "<group>"; };
 		1FBC3E971CCE3766007CFA14 /* ShareViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShareViewController.h; sourceTree = "<group>"; };
 		1FBC3E981CCE3766007CFA14 /* ShareViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ShareViewController.m; sourceTree = "<group>"; };
 		1FBC3E991CCE3766007CFA14 /* ShareViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ShareViewController.xib; sourceTree = "<group>"; };
@@ -474,8 +478,6 @@
 		1FEB71741CC88B5D00CF34F3 /* FindeFirendTwoModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FindeFirendTwoModel.m; sourceTree = "<group>"; };
 		1FEB71761CC8A35A00CF34F3 /* QRCodeScanViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QRCodeScanViewController.h; sourceTree = "<group>"; };
 		1FEB71771CC8A35A00CF34F3 /* QRCodeScanViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QRCodeScanViewController.m; sourceTree = "<group>"; };
-		1FEF0AE11CC0FC15006EF0C6 /* MyOrderViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyOrderViewController.h; sourceTree = "<group>"; };
-		1FEF0AE21CC0FC15006EF0C6 /* MyOrderViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyOrderViewController.m; sourceTree = "<group>"; };
 		1FEF0AE31CC0FC15006EF0C6 /* MyShippingAddressViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyShippingAddressViewController.h; sourceTree = "<group>"; };
 		1FEF0AE41CC0FC15006EF0C6 /* MyShippingAddressViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyShippingAddressViewController.m; sourceTree = "<group>"; };
 		1FEF0AEA1CC0FC15006EF0C6 /* OrderListModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OrderListModel.h; sourceTree = "<group>"; };
@@ -1085,6 +1087,8 @@
 		1FE60E2A1CD3019200045117 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				1F7B29341CD5F50500482D84 /* MyOderModel.h */,
+				1F7B29351CD5F50500482D84 /* MyOderModel.m */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -1170,8 +1174,7 @@
 			children = (
 				1FFFFF381CD056B9008E1CDC /* MyselfViewController.h */,
 				1FFFFF391CD056B9008E1CDC /* MyselfViewController.m */,
-				1FEF0AE11CC0FC15006EF0C6 /* MyOrderViewController.h */,
-				1FEF0AE21CC0FC15006EF0C6 /* MyOrderViewController.m */,
+				1F7B29391CD6056900482D84 /* MyViewController.xib */,
 				1FEF0AE31CC0FC15006EF0C6 /* MyShippingAddressViewController.h */,
 				1FEF0AE41CC0FC15006EF0C6 /* MyShippingAddressViewController.m */,
 				1F07A63F1CC76C6000CF225F /* HomePageViewController.h */,
@@ -2416,6 +2419,7 @@
 				D812815C1CAA8532007CF08B /* InfoPlist.strings in Resources */,
 				1F3C0A971CBFA28300B84FEB /* GreatPeopleViewController.xib in Resources */,
 				1FE60E481CD327BE00045117 /* SystemInformsViewController.xib in Resources */,
+				1F7B293B1CD6056900482D84 /* MyViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2626,6 +2630,7 @@
 				1FE60E421CD3226400045117 /* MessageViewController.m in Sources */,
 				D812812E1CAA8532007CF08B /* ScenceMessageView.m in Sources */,
 				D81281181CAA8532007CF08B /* CropImageViewController.m in Sources */,
+				1F7B29361CD5F50500482D84 /* MyOderModel.m in Sources */,
 				D80360501CBF376B001920F9 /* UserInfoEntity.m in Sources */,
 				1F07A64A1CC77F3B00CF225F /* ScenceListCollectionViewCell.m in Sources */,
 				D83639A31CD05A5E00CC4AC0 /* FiuSceneInfoCounter.m in Sources */,
@@ -2703,7 +2708,6 @@
 				D8035F3B1CB784B3001920F9 /* UILable+Frame.m in Sources */,
 				D83639EE1CD2287C00CC4AC0 /* CategoryGoods.m in Sources */,
 				D83639DF1CD1D59700CC4AC0 /* CategorySceneTag.m in Sources */,
-				1FEF0B0E1CC0FC15006EF0C6 /* MyOrderViewController.m in Sources */,
 				D81281571CAA8532007CF08B /* NSString+Helper.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
