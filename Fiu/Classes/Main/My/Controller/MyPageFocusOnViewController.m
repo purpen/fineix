@@ -162,9 +162,9 @@
         }
     }else if ([request.flag isEqualToString:@"/follow/ajax_cancel_follow"]){
         if ([result objectForKey:@"success"]) {
-            [SVProgressHUD showSuccessWithStatus:@"关注成功"];
+            [SVProgressHUD showSuccessWithStatus:@"取消关注"];
         }else{
-            [SVProgressHUD showErrorWithStatus:@"关注失败"];
+            [SVProgressHUD showErrorWithStatus:@"连接失败"];
         }
     }
 }

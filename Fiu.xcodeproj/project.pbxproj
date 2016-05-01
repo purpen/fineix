@@ -129,6 +129,7 @@
 		280045171C805C92005F5C2E /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 280045161C805C92005F5C2E /* SystemConfiguration.framework */; };
 		2800451B1C805CAC005F5C2E /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2800451A1C805CAC005F5C2E /* Security.framework */; };
 		2800451F1C805CCA005F5C2E /* CoreTelephony.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2800451E1C805CCA005F5C2E /* CoreTelephony.framework */; };
+		488521861CD470E500D8CE19 /* CounterModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 488521851CD470E500D8CE19 /* CounterModel.m */; };
 		D802D7791C821D41007AFA3D /* AssetsLibrary.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D802D7781C821D41007AFA3D /* AssetsLibrary.framework */; };
 		D8035F2C1CB77AAA001920F9 /* ContentAndTagTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D8035F2B1CB77AAA001920F9 /* ContentAndTagTableViewCell.m */; };
 		D8035F2F1CB77D0C001920F9 /* UIImage+Helper.m in Sources */ = {isa = PBXBuildFile; fileRef = D8035F2E1CB77D0C001920F9 /* UIImage+Helper.m */; };
@@ -539,6 +540,8 @@
 		2800451C1C805CBD005F5C2E /* libsqlite3.0.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libsqlite3.0.tbd; path = usr/lib/libsqlite3.0.tbd; sourceTree = SDKROOT; };
 		2800451E1C805CCA005F5C2E /* CoreTelephony.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreTelephony.framework; path = System/Library/Frameworks/CoreTelephony.framework; sourceTree = SDKROOT; };
 		280045201C805CD7005F5C2E /* libstdc++.6.0.9.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = "libstdc++.6.0.9.tbd"; path = "usr/lib/libstdc++.6.0.9.tbd"; sourceTree = SDKROOT; };
+		488521841CD470E500D8CE19 /* CounterModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CounterModel.h; sourceTree = "<group>"; };
+		488521851CD470E500D8CE19 /* CounterModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CounterModel.m; sourceTree = "<group>"; };
 		800507341C7A9CDD005AF0BE /* Fiu.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Fiu.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D802D7781C821D41007AFA3D /* AssetsLibrary.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AssetsLibrary.framework; path = System/Library/Frameworks/AssetsLibrary.framework; sourceTree = SDKROOT; };
 		D802D7891C844101007AFA3D /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
@@ -1235,6 +1238,8 @@
 				1FE60E771CD3E31D00045117 /* FindFriendModel.m */,
 				1FE60E791CD3E6DC00045117 /* FindSceneModel.h */,
 				1FE60E7A1CD3E6DC00045117 /* FindSceneModel.m */,
+				488521841CD470E500D8CE19 /* CounterModel.h */,
+				488521851CD470E500D8CE19 /* CounterModel.m */,
 			);
 			path = model;
 			sourceTree = "<group>";
@@ -2531,6 +2536,7 @@
 				D812811D1CAA8532007CF08B /* SearchLocationViewController.m in Sources */,
 				D87B69D21CC726D500199EFE /* FBSheetViewController.m in Sources */,
 				1FFFFF311CD055F2008E1CDC /* DirectMessagesViewController.m in Sources */,
+				488521861CD470E500D8CE19 /* CounterModel.m in Sources */,
 				D80D41581CAD142C005D72B1 /* FBPictureViewController.m in Sources */,
 				D80360561CBF376B001920F9 /* NumView.m in Sources */,
 				D81281661CAA8532007CF08B /* JKDBHelper.m in Sources */,

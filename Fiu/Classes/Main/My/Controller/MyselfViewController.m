@@ -33,6 +33,7 @@
 #import "AboutViewController.h"
 #import "OptionViewController.h"
 #import <SVProgressHUD.h>
+#import "CounterModel.h"
 
 @interface MyselfViewController ()<UIScrollViewDelegate,FBNavigationBarItemsDelegate,FBRequestDelegate>
 
@@ -169,22 +170,51 @@ static NSString *const follows = @"/follow";
     //向上滑动tabbar消失
     
     //向下滑动tabbar出现
-    //网络请求
-    [self netGetData];
+    
 }
+
+
 
 -(void)netGetData{
     [SVProgressHUD show];
-    FBRequest *request = [FBAPI postWithUrlString:@"/auth/user" requestDictionary:nil delegate:self];
+    UserInfoEntity *entity = [UserInfoEntity defaultUserInfoEntity];
+    FBRequest *request = [FBAPI postWithUrlString:@"/auth/user" requestDictionary:@{@"user_id":entity.userId} delegate:self];
     [request startRequestSuccess:^(FBRequest *request, id result) {
-        NSLog(@"result %@",result);
+        NSLog(@"&&&&&&&&result %@",result);
         NSDictionary *dataDict = result[@"data"];
-        _chanelV.scenarioNumLabel.text = dataDict[@"scene_count"];
-        _chanelV.fieldNumLabel.text = dataDict[@"sight_count"];
-        _chanelV.focusNumLabel.text = dataDict[@"follow_count"];
-        _chanelV.fansNumLabel.text = dataDict[@"fans_count"];
-    } failure:^(FBRequest *request, NSError *error) {
+        _chanelV.scenarioNumLabel.text = [NSString stringWithFormat:@"%@",dataDict[@"scene_count"]];
+        _chanelV.fieldNumLabel.text = [NSString stringWithFormat:@"%@",dataDict[@"sight_count"]];
+        _chanelV.focusNumLabel.text = [NSString stringWithFormat:@"%@",dataDict[@"follow_count"]];
+        _chanelV.fansNumLabel.text = [NSString stringWithFormat:@"%@",dataDict[@"fans_count"]];
         
+        UserInfo *userInfo = [UserInfo mj_objectWithKeyValues:[result objectForKey:@"data"]];
+        [userInfo saveOrUpdate];
+        [userInfo updateUserInfoEntity];
+        NSLog(@"%@",userInfo);
+        UserInfoEntity *entity = [UserInfoEntity defaultUserInfoEntity];
+        entity.isLogin = YES;
+        
+        NSLog(@"result %@",result);
+        
+        //更新用户名
+        _imgV.nickNameLabel.text = entity.nickname;
+        //个人简介
+        _imgV.summaryLabel.text = entity.summary;
+        //等级
+        _imgV.talentLabel.text = entity.levelDesc;
+        _imgV.levelLabel.text = [NSString stringWithFormat:@"V%d",[entity.level intValue]];
+        //更新头像
+        [_imgV.headImageView sd_setImageWithURL:[NSURL URLWithString:entity.mediumAvatarUrl] placeholderImage:nil completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
+            
+        }];
+
+        
+        NSDictionary *counterDict = [dataDict objectForKey:@"counter"];
+        
+        [SVProgressHUD dismiss];
+        
+    } failure:^(FBRequest *request, NSError *error) {
+        [SVProgressHUD showErrorWithStatus:@"加载失败"];
     }];
 }
 
@@ -344,42 +374,17 @@ static NSString *const follows = @"/follow";
     self.delegate = self;
 //    [self addBarItemLeftBarButton:nil image:@"Page 1" isTransparent:YES];
     [self addNavLogoImgisTransparent:YES];
-    [self addBarItemLeftBarButton:@"" image:@"Page 1" isTransparent:YES];
     
-    FBRequest *request = [FBAPI postWithUrlString:@"/auth/user" requestDictionary:nil delegate:self];
-    [request startRequest];
+    //网络请求
+    [self netGetData];
+    
+    [self addBarItemLeftBarButton:@"" image:@"Page 1" isTransparent:YES];
     
     
     self.tabBarController.tabBar.hidden = NO;
 }
 
 
--(void)requestSucess:(FBRequest *)request result:(id)result{
-    UserInfo *userInfo = [UserInfo mj_objectWithKeyValues:[result objectForKey:@"data"]];
-    [userInfo saveOrUpdate];
-    [userInfo updateUserInfoEntity];
-    NSLog(@"%@",userInfo);
-    UserInfoEntity *entity = [UserInfoEntity defaultUserInfoEntity];
-    entity.isLogin = YES;
-    
-    NSLog(@"result %@",result);
-    
-    //更新用户名
-    _imgV.nickNameLabel.text = entity.nickname;
-    //个人简介
-    _imgV.summaryLabel.text = entity.summary;
-    //等级
-    _imgV.talentLabel.text = entity.levelDesc;
-    _imgV.levelLabel.text = [NSString stringWithFormat:@"V%d",[entity.level intValue]];
-    //更新头像
-    [_imgV.headImageView sd_setImageWithURL:[NSURL URLWithString:entity.mediumAvatarUrl] placeholderImage:nil completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
-        
-    }];
-    
-    NSLog(@"follow_count %@",entity.follow_count);
-    //_chanelV.fansNumLabel.text = entity.follow_count;
-
-}
 
 -(void)setImagesRoundedCorners:(float)radius :(UIImageView*)v{
     v.layer.masksToBounds = YES;
