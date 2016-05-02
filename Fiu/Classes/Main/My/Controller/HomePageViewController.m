@@ -188,13 +188,13 @@
 
 -(void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
-    [self.myCollectionView reloadData];
     self.navigationController.navigationBarHidden = YES;
     self.tabBarController.tabBar.hidden = YES;
     
     //进行网络请求
     [self netGetData];
     [self networkRequestData];
+    
 }
 
 -(void)netGetData{
@@ -209,6 +209,7 @@
         _chanelV.fansNumLabel.text = [NSString stringWithFormat:@"%@",dataDict[@"fans_count"]];
         [SVProgressHUD dismiss];
         _model = [UserInfo mj_objectWithKeyValues:dataDict];
+        [self.myCollectionView reloadData];
     } failure:^(FBRequest *request, NSError *error) {
         [SVProgressHUD showErrorWithStatus:@"加载失败"];
     }];
@@ -400,9 +401,10 @@
 
 
 -(void)clickMessageBtn:(UIButton*)sender{
-    DirectMessagesViewController *vc = [[DirectMessagesViewController alloc] init];
-    vc.nickName = @"boc747";
-
+    UIStoryboard *story = [UIStoryboard storyboardWithName:@"My" bundle:nil];
+    DirectMessagesViewController *vc = [story instantiateViewControllerWithIdentifier:@"DirectMessagesViewController"];
+    vc.nickName = _model.nickname;
+    vc.userId = _model.userId;
     [self.navigationController pushViewController:vc animated:YES];
 }
 

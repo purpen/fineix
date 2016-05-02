@@ -27,6 +27,7 @@
 		1F1837761CCDFCB200933CA7 /* ChangeSumaryViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1F1837741CCDFCB200933CA7 /* ChangeSumaryViewController.xib */; };
 		1F18377A1CCE0F2200933CA7 /* TalentCertificationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F1837781CCE0F2200933CA7 /* TalentCertificationViewController.m */; };
 		1F18377B1CCE0F2200933CA7 /* TalentCertificationViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1F1837791CCE0F2200933CA7 /* TalentCertificationViewController.xib */; };
+		1F223B1D1CD714F3007687F7 /* messages.plist in Resources */ = {isa = PBXBuildFile; fileRef = 1F223B1C1CD714F3007687F7 /* messages.plist */; };
 		1F35F0371CD1AD870000DB95 /* CityTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F35F0341CD1AD870000DB95 /* CityTableViewCell.m */; };
 		1F35F0381CD1AD870000DB95 /* CityTwoTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F35F0361CD1AD870000DB95 /* CityTwoTableViewCell.m */; };
 		1F35F03B1CD1ADAB0000DB95 /* CityModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F35F03A1CD1ADAB0000DB95 /* CityModel.m */; };
@@ -115,13 +116,11 @@
 		1FFFFF231CD055BB008E1CDC /* SystemSettingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1FFFFF1D1CD055BB008E1CDC /* SystemSettingViewController.m */; };
 		1FFFFF241CD055BB008E1CDC /* SystemSettingViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1FFFFF1E1CD055BB008E1CDC /* SystemSettingViewController.xib */; };
 		1FFFFF311CD055F2008E1CDC /* DirectMessagesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1FFFFF281CD055F2008E1CDC /* DirectMessagesViewController.m */; };
-		1FFFFF321CD055F2008E1CDC /* DirectMessagesViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1FFFFF291CD055F2008E1CDC /* DirectMessagesViewController.xib */; };
 		1FFFFF331CD055F2008E1CDC /* AXModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 1FFFFF2C1CD055F2008E1CDC /* AXModel.m */; };
 		1FFFFF3B1CD056B9008E1CDC /* MyselfViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1FFFFF391CD056B9008E1CDC /* MyselfViewController.m */; };
 		1FFFFF3F1CD05796008E1CDC /* BindIngViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1FFFFF3D1CD05796008E1CDC /* BindIngViewController.m */; };
 		1FFFFF401CD05796008E1CDC /* BindIngViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1FFFFF3E1CD05796008E1CDC /* BindIngViewController.xib */; };
 		1FFFFF491CD08661008E1CDC /* ChatTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 1FFFFF471CD08661008E1CDC /* ChatTableViewCell.m */; };
-		1FFFFF4A1CD08661008E1CDC /* ChatTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1FFFFF481CD08661008E1CDC /* ChatTableViewCell.xib */; };
 		1FFFFF4E1CD0A0CF008E1CDC /* ImprovViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1FFFFF4C1CD0A0CF008E1CDC /* ImprovViewController.m */; };
 		1FFFFF4F1CD0A0CF008E1CDC /* ImprovViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1FFFFF4D1CD0A0CF008E1CDC /* ImprovViewController.xib */; };
 		280045111C805B78005F5C2E /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 280045101C805B78005F5C2E /* CoreLocation.framework */; };
@@ -374,6 +373,7 @@
 		1F1837771CCE0F2200933CA7 /* TalentCertificationViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TalentCertificationViewController.h; sourceTree = "<group>"; };
 		1F1837781CCE0F2200933CA7 /* TalentCertificationViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TalentCertificationViewController.m; sourceTree = "<group>"; };
 		1F1837791CCE0F2200933CA7 /* TalentCertificationViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TalentCertificationViewController.xib; sourceTree = "<group>"; };
+		1F223B1C1CD714F3007687F7 /* messages.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = messages.plist; sourceTree = "<group>"; };
 		1F35F0331CD1AD870000DB95 /* CityTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CityTableViewCell.h; sourceTree = "<group>"; };
 		1F35F0341CD1AD870000DB95 /* CityTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CityTableViewCell.m; sourceTree = "<group>"; };
 		1F35F0351CD1AD870000DB95 /* CityTwoTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CityTwoTableViewCell.h; sourceTree = "<group>"; };
@@ -519,7 +519,6 @@
 		1FFFFF1E1CD055BB008E1CDC /* SystemSettingViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SystemSettingViewController.xib; sourceTree = "<group>"; };
 		1FFFFF271CD055F2008E1CDC /* DirectMessagesViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DirectMessagesViewController.h; sourceTree = "<group>"; };
 		1FFFFF281CD055F2008E1CDC /* DirectMessagesViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DirectMessagesViewController.m; sourceTree = "<group>"; };
-		1FFFFF291CD055F2008E1CDC /* DirectMessagesViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DirectMessagesViewController.xib; sourceTree = "<group>"; };
 		1FFFFF2B1CD055F2008E1CDC /* AXModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AXModel.h; sourceTree = "<group>"; };
 		1FFFFF2C1CD055F2008E1CDC /* AXModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AXModel.m; sourceTree = "<group>"; };
 		1FFFFF381CD056B9008E1CDC /* MyselfViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyselfViewController.h; sourceTree = "<group>"; };
@@ -529,7 +528,6 @@
 		1FFFFF3E1CD05796008E1CDC /* BindIngViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = BindIngViewController.xib; sourceTree = "<group>"; };
 		1FFFFF461CD08661008E1CDC /* ChatTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChatTableViewCell.h; sourceTree = "<group>"; };
 		1FFFFF471CD08661008E1CDC /* ChatTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChatTableViewCell.m; sourceTree = "<group>"; };
-		1FFFFF481CD08661008E1CDC /* ChatTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ChatTableViewCell.xib; sourceTree = "<group>"; };
 		1FFFFF4B1CD0A0CF008E1CDC /* ImprovViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImprovViewController.h; sourceTree = "<group>"; };
 		1FFFFF4C1CD0A0CF008E1CDC /* ImprovViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ImprovViewController.m; sourceTree = "<group>"; };
 		1FFFFF4D1CD0A0CF008E1CDC /* ImprovViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ImprovViewController.xib; sourceTree = "<group>"; };
@@ -1005,6 +1003,7 @@
 		1F35F04F1CD2336E0000DB95 /* Resource */ = {
 			isa = PBXGroup;
 			children = (
+				1F223B1C1CD714F3007687F7 /* messages.plist */,
 				1F35F0501CD2336E0000DB95 /* areas.plist */,
 			);
 			name = Resource;
@@ -1328,7 +1327,6 @@
 			children = (
 				1FFFFF271CD055F2008E1CDC /* DirectMessagesViewController.h */,
 				1FFFFF281CD055F2008E1CDC /* DirectMessagesViewController.m */,
-				1FFFFF291CD055F2008E1CDC /* DirectMessagesViewController.xib */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -1347,7 +1345,6 @@
 			children = (
 				1FFFFF461CD08661008E1CDC /* ChatTableViewCell.h */,
 				1FFFFF471CD08661008E1CDC /* ChatTableViewCell.m */,
-				1FFFFF481CD08661008E1CDC /* ChatTableViewCell.xib */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -2367,6 +2364,7 @@
 				D812816B1CAA8532007CF08B /* UMSCommentInputController.xib in Resources */,
 				D812816D1CAA8532007CF08B /* UMShareEditViewController.xib in Resources */,
 				1F18376C1CCDE95A00933CA7 /* ModifyGenderViewController.xib in Resources */,
+				1F223B1D1CD714F3007687F7 /* messages.plist in Resources */,
 				1FE60E751CD341A400045117 /* PayAttentionViewController.xib in Resources */,
 				1F35F0491CD1FF630000DB95 /* DatePickerViewController.xib in Resources */,
 				D803605A1CBF376B001920F9 /* Signup.xib in Resources */,
@@ -2379,11 +2377,9 @@
 				1FBC3E9B1CCE3766007CFA14 /* ShareViewController.xib in Resources */,
 				1FEF0B1F1CC0FC15006EF0C6 /* OrderInfoCell.xib in Resources */,
 				D803604C1CBF376B001920F9 /* LoginRegisterController.storyboard in Resources */,
-				1FFFFF321CD055F2008E1CDC /* DirectMessagesViewController.xib in Resources */,
 				1FEF0B131CC0FC15006EF0C6 /* My.storyboard in Resources */,
 				1FEF0B1C1CC0FC15006EF0C6 /* MyView.xib in Resources */,
 				1FE60E701CD3413100045117 /* ReceivedPraiseViewController.xib in Resources */,
-				1FFFFF4A1CD08661008E1CDC /* ChatTableViewCell.xib in Resources */,
 				1FFFFF4F1CD0A0CF008E1CDC /* ImprovViewController.xib in Resources */,
 				D81281701CAA8532007CF08B /* UMSnsAccountViewController.xib in Resources */,
 				1FE60E571CD32E8D00045117 /* CommentsViewController.xib in Resources */,

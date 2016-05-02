@@ -10,12 +10,12 @@
 @class AXModel;
 
 @interface ChatTableViewCell : UITableViewCell
-@property (weak, nonatomic) IBOutlet UILabel *timeLabel;
-@property (weak, nonatomic) IBOutlet UIImageView *otherHeadImg;
-@property (weak, nonatomic) IBOutlet UIButton *oterhMsgBtn;
-@property (weak, nonatomic) IBOutlet UIButton *meMsgBtn;
-@property (weak, nonatomic) IBOutlet UIImageView *meHeadImg;
 
--(void)setUIWithModel:(AXModel*)model;
+@property (nonatomic, strong) AXModel *message;
+@property (weak, nonatomic) IBOutlet UILabel *timeLabel;
+@property (weak, nonatomic) IBOutlet UIImageView *myIconImageView;
+@property (weak, nonatomic) IBOutlet UIButton *myTextBtn;
+@property (weak, nonatomic) IBOutlet UIImageView *otherIconImageView;
+@property (weak, nonatomic) IBOutlet UIButton *otherTextBtn;
 
 @end

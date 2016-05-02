@@ -6,20 +6,23 @@
 //  Copyright © 2016年 taihuoniao. All rights reserved.
 //
 
-#import <Foundation/Foundation.h>
+#import <UIKit/UIKit.h>
 
+typedef enum {
+    XMGMessageTypeMe = 0,
+    XMGMessageTypeOther = 1
+} XMGMessageType;
 
 @interface AXModel : NSObject
+@property (nonatomic, strong) NSString *content;
+@property (nonatomic, strong) NSString *created_at;
+@property (nonatomic, assign) XMGMessageType user_type;
 
-typedef enum{
-    AXModelTypeMe,
-    AXModelTypeOther
-}AXModelType;
+/** cell的高度 */
+@property (nonatomic, assign) CGFloat cellHeight;
+/** 是否隐藏时间 */
+@property (nonatomic, assign, getter=isHideTime) BOOL hideTime;
 
-@property(nonatomic,copy) NSString *content;
-@property(nonatomic,copy) NSString *created_at;
-@property(nonatomic,assign) AXModelType type;
-
-@property(nonatomic,copy) NSString *lastTime;
-
++ (instancetype)messageWithDict:(NSDictionary *)dict;
 @end
+
