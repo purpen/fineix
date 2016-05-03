@@ -271,6 +271,7 @@ NSString *const LoginURL = @"/auth/login";//登录接口
     });
 }
 
+#pragma mark -第三方登录成功后取到用户信息
 //如果成功，进行关联，并且更新当前用户信息
 -(void)afterTheSuccessOfTheThirdPartyToRegisterToGetUserInformation:(UMSocialAccountEntity *)snsAccount type:(NSNumber *)type{
     
@@ -297,26 +298,27 @@ NSString *const LoginURL = @"/auth/login";//登录接口
             entity.isLogin = YES;
             
             
-            [SVProgressHUD showSuccessWithStatus:@"登录成功"];
-            //推荐感兴趣的情景
-            NSDictionary *identifyDict = [[dataDic objectForKey:@"user"] objectForKey:@"identify"];
-            if ([[identifyDict objectForKey:@"is_scene_subscribe"] isEqualToNumber:@0]) {
+            [SVProgressHUD showSuccessWithStatus:@"认证成功"];
+            
+            if ([[result objectForKey:@"first_login"] isEqualToNumber:@0]) {
                 //跳转到推荐界面
                 SubscribeInterestedCollectionViewController *subscribeVC = [[SubscribeInterestedCollectionViewController alloc] init];
                 [self.navigationController pushViewController:subscribeVC animated:YES];
             }else{
-                //跳转到个人信息完善页面
-                ImprovViewController *improveVC = [[ImprovViewController alloc] init];
-                [self.navigationController pushViewController:improveVC animated:YES];
-                
+                //已经订阅过，直接个人中心
+                //跳回个人主页
+                //跳回个人主页
+                [self dismissViewControllerAnimated:YES completion:nil];
+                [self.tabBarController setSelectedIndex:3];
             }
             
             
         }else{
             //如果用户不存在,提示用户是否进行绑定
-            TYAlertView *alertView = [TYAlertView alertViewWithTitle:@"是否进行用户绑定" message:nil];
             
-            [alertView addAction:[TYAlertAction actionWithTitle:NSLocalizedString(@"cancel", nil) style:TYAlertActionStyleCancle handler:^(TYAlertAction *action) {
+            UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"是否进行用户绑定" message:nil preferredStyle:UIAlertControllerStyleAlert];
+            UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:^(UIAlertAction *action) {
+                NSLog(@"The \"Okay/Cancel\" alert's cancel action occured.");
                 //发送请求来存储用户信息
                 NSDictionary *params;
                 if ([type isEqualToNumber:@1]) {
@@ -349,66 +351,43 @@ NSString *const LoginURL = @"/auth/login";//登录接口
                 [request startRequestSuccess:^(FBRequest *request, id result) {
                     //如果请求成功，并获取用户信息来更新当前用户信息
                     NSDictionary *dataDic = [result objectForKey:@"data"];
+                    NSLog(@"dataDict  %@",dataDic);
                     UserInfo *info = [UserInfo mj_objectWithKeyValues:dataDic];
                     [info saveOrUpdate];
                     [info updateUserInfoEntity];
                     UserInfoEntity *entity = [UserInfoEntity defaultUserInfoEntity];
                     entity.isLogin = YES;
-                    
                     [SVProgressHUD showSuccessWithStatus:NSLocalizedString(@"registeredSuccessfully", nil)];
-                    
-                    //推荐感兴趣的情景
-                    NSDictionary *identifyDict = [dataDic objectForKey:@"identify"];
-                    if ([[identifyDict objectForKey:@"is_scene_subscribe"] isEqualToNumber:@0]) {
-                        //跳转到推荐界面
-                        SubscribeInterestedCollectionViewController *subscribeVC = [[SubscribeInterestedCollectionViewController alloc] init];
-                        [self.navigationController pushViewController:subscribeVC animated:YES];
-                    }else{
-                        //跳转到个人信息完善页面
-                        ImprovViewController *improveVC = [[ImprovViewController alloc] init];
-                        [self.navigationController pushViewController:improveVC animated:YES];
-                        
-                    }
-                    
+                    //跳转到推荐界面
+                    SubscribeInterestedCollectionViewController *subscribeVC = [[SubscribeInterestedCollectionViewController alloc] init];
+                    [self.navigationController pushViewController:subscribeVC animated:YES];
                 } failure:^(FBRequest *request, NSError *error) {
                     //如果请求失败提示失败信息
                     [SVProgressHUD showErrorWithStatus:error.localizedDescription];
-                    //已经订阅过，直接个人中心
-                    //跳回个人主页
-                    //跳回个人主页
-                    [self dismissViewControllerAnimated:YES completion:nil];
-                    [self.tabBarController setSelectedIndex:3];
                 }];
                 
-            }]];
-            
-            [alertView addAction:[TYAlertAction actionWithTitle:NSLocalizedString(@"determine", nil) style:TYAlertActionStyleDestructive handler:^(TYAlertAction *action) {
+            }];
+            UIAlertAction *otherAction = [UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
+                NSLog(@"The \"Okay/Cancel\" alert's other action occured.");
                 //跳转到绑定手机号界面
                 BindIngViewController *bing = [[BindIngViewController alloc] init];
                 bing.snsAccount = snsAccount;
                 bing.type = type;
                 [self.navigationController pushViewController:bing animated:YES];
-            }]];
+            }];
+            [alertController addAction:cancelAction];
+            [alertController addAction:otherAction];
             
-            
-            
-            // first way to show
-            TYAlertController *alertController = [TYAlertController alertControllerWithAlertView:alertView preferredStyle:TYAlertControllerStyleAlert];
-            //alertController.alertViewOriginY = 60;
             [self presentViewController:alertController animated:YES completion:nil];
-            
-            
-            
-            
-            
         }
     } failure:^(FBRequest *request, NSError *error) {
         //如果请求失败，提示错误信息
         NSLog(@"%@",error);
         [SVProgressHUD showErrorWithStatus:[error localizedDescription]];
     }];
-
+    
 }
+
 //取消按钮,返回首页
 - (IBAction)cancelBtn:(UIButton *)sender {
     [self dismissViewControllerAnimated:YES completion:nil];

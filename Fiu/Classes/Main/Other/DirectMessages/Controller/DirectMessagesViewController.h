@@ -11,6 +11,6 @@
 @interface DirectMessagesViewController : FBViewController
 
 @property(nonatomic,strong) NSString *nickName;
-@property(nonatomic,assign) NSInteger userId;
+@property(nonatomic,copy) NSString *userId;
 
 @end

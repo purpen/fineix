@@ -12,15 +12,15 @@
 #import "FBAPI.h"
 #import "UserInfoEntity.h"
 #import "Fiu.h"
+#import "SVProgressHUD.h"
 
-@interface DirectMessagesViewController ()<FBNavigationBarItemsDelegate,UITableViewDelegate,UITableViewDataSource,UITextViewDelegate,FBRequestDelegate>
+@interface DirectMessagesViewController ()<FBNavigationBarItemsDelegate,UITableViewDelegate,FBRequestDelegate,UITableViewDataSource>
 
-@property (weak, nonatomic) IBOutlet UITableView *myTableView;
-@property (weak, nonatomic) IBOutlet UITextView *chatTFV;
-@property (weak, nonatomic) IBOutlet UIButton *expressionBtn;
+@property (nonatomic, strong) NSArray *messages;
+@property (weak, nonatomic) IBOutlet UITableView *myTableVuew;
+@property (weak, nonatomic) IBOutlet UITextField *msgTF;
 @property (weak, nonatomic) IBOutlet UIButton *sendBtn;
-@property(nonatomic,strong) NSMutableArray *modelAry;
-@property(nonatomic,strong) ChatTableViewCell *cell;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *bottomSpaceing;
 
 @end
 
@@ -31,97 +31,126 @@
     // Do any additional setup after loading the view from its nib.
     self.delegate = self;
     self.navViewTitle.text = self.nickName;
-    
+    self.myTableVuew.delegate = self;
+    self.myTableVuew.dataSource = self;
     self.sendBtn.layer.masksToBounds = YES;
-    self.sendBtn.layer.cornerRadius = 2;
-    self.chatTFV.layer.masksToBounds = YES;
-    self.chatTFV.layer.cornerRadius = 2;
+    self.sendBtn.layer.cornerRadius = 3;
     
-    self.myTableView.delegate = self;
-    self.myTableView.dataSource = self;
-    self.myTableView.separatorStyle = UITableViewCellSeparatorStyleNone;
-    self.myTableView.showsVerticalScrollIndicator = NO;
-    self.chatTFV.delegate = self;
-    //获取数据
-    UserInfoEntity *entity = [UserInfoEntity defaultUserInfoEntity];
-    FBRequest *request = [FBAPI postWithUrlString:@"/message" requestDictionary:@{@"page":@1,@"size":@10,@"from_user_id":entity.userId,@"type":@0} delegate:self];
-    request.flag = @"/message";
-    [request startRequest];
+    //设置文本框
+    UIView *view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 10, 5)];
+    self.msgTF.leftView = view;
+    self.msgTF.leftViewMode = UITextFieldViewModeAlways;
+    //通知
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyBoardWillChangeFrame:) name:UIKeyboardWillChangeFrameNotification object:nil];
+}
+
+-(void)dealloc{
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
+}
+
+-(void)keyBoardWillChangeFrame:(NSNotification*)note{
     
+    CGRect rect = [note.userInfo[UIKeyboardFrameEndUserInfoKey] CGRectValue];
+    double time = [note.userInfo[UIKeyboardAnimationDurationUserInfoKey] doubleValue];
+    self.bottomSpaceing.constant = [UIScreen mainScreen].bounds.size.height - rect.origin.y;
+    [UIView animateWithDuration:time animations:^{
+        [self.view layoutIfNeeded];
+    }];
     
 }
 
+-(void)viewWillAppear:(BOOL)animated{
+    [super viewWillAppear:animated];
+    [self networkRequestData];
+}
 
--(void)requestSucess:(FBRequest *)request result:(id)result{
-    if ([request.flag isEqualToString:@"/message"]) {
-        if ([result objectForKey:@"success"]) {
-            [_modelAry removeAllObjects];
-            NSDictionary *dataDict = [result objectForKey:@"data"];
-            NSArray *mailboxAry = [dataDict objectForKey:@"mailbox"];
-            for (NSDictionary *mailboxDict in mailboxAry) {
-                AXModel *model = [[AXModel alloc] init];
-                model.type = AXModelTypeMe;
-                model.content = mailboxDict[@"content"];
-                model.created_at = mailboxDict[@"created_at"];
-                [_modelAry addObject:model];
-            }
-            [self.myTableView reloadData];
-        }
-    }
-    if ([request.flag isEqualToString:@"/message/ajax_message"]) {
+#pragma mark - 网络请求
+- (void)networkRequestData {
+    //进行情景的网络请求
+    [SVProgressHUD show];
+    FBRequest *request = [FBAPI postWithUrlString:@"/message/view" requestDictionary:@{@"to_user_id":self.userId} delegate:self];
+    [request startRequestSuccess:^(FBRequest *request, id result) {
         NSLog(@"result %@",result);
-    }
+        NSArray * fiuSceneArr = [[result valueForKey:@"data"] valueForKey:@"mailbox"];
+        // 字典数组 -> 模型数组
+        NSMutableArray *messageArray = [NSMutableArray array];
+        // 用来记录上一条消息模型
+        AXModel *lastMessage = nil;
+        for (NSDictionary * fiuSceneDic in fiuSceneArr) {
+            AXModel *message = [AXModel messageWithDict:fiuSceneDic];
+            //加载数据时，判断哪个时间值相等。
+            message.hideTime = [message.created_at isEqualToString:lastMessage.created_at];
+            [messageArray addObject:message];
+            
+            lastMessage = message;
+        }
+        self.messages = messageArray;
+        [self.myTableVuew reloadData];
+//        _n = [[[result objectForKey:@"data"] objectForKey:@"current_page"] intValue];
+//        _totalN = [[[result objectForKey:@"data"] objectForKey:@"total_page"] intValue];
+//        if (_totalN>1) {
+//            //
+//            [self addMJRefresh:self.myCollectionView];
+//            [self requestIsLastData:self.myCollectionView currentPage:_n withTotalPage:_totalN];
+//        }
+        [SVProgressHUD dismiss];
+    } failure:^(FBRequest *request, NSError *error) {
+        [SVProgressHUD showErrorWithStatus:[error localizedDescription]];
+    }];
 }
 
--(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
-    return 3;
+
+#pragma mark - <UITableViewDataSource>
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
+{
+    return self.messages.count;
 }
 
--(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
-    static NSString *cellId = @"myCell";
-    ChatTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellId];
-    if (cell == nil) {
-        cell = [[ChatTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellId];
+- (NSArray *)messages
+{
+    if (_messages == nil) {
+        _messages = [NSArray array];
     }
-    [cell setUIWithModel:[_modelAry objectAtIndex:indexPath.row]];
-    self.cell = cell;
+    return _messages;
+}
+
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    ChatTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"message"];
+    
+    cell.message = self.messages[indexPath.row];
+    
     return cell;
 }
 
--(CGFloat)tableView:(UITableView *)tableView estimatedHeightForRowAtIndexPath:(NSIndexPath *)indexPath{
+#pragma mark - <UITableViewDelegate>
+- (CGFloat)tableView:(UITableView *)tableView estimatedHeightForRowAtIndexPath:(NSIndexPath *)indexPath
+{
     return 200;
 }
 
--(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
-    return self.cell.frame.size.height;
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    AXModel *message = self.messages[indexPath.row];
+    return message.cellHeight;
 }
 
 -(void)scrollViewWillBeginDragging:(UIScrollView *)scrollView{
     [self.view endEditing:YES];
 }
 
--(NSMutableArray *)modelAry{
-    if (!_modelAry) {
-        _modelAry = [NSMutableArray array];
-    }
-    return _modelAry;
-}
-
-- (IBAction)clickExpressionBtn:(UIButton *)sender {
-}
-- (IBAction)clickSendBtn:(UIButton *)sender {
-    self.userId = 924811;
-    FBRequest *request = [FBAPI postWithUrlString:@"/message/ajax_message" requestDictionary:@{@"to_user_id":@(self.userId),@"content":self.chatTFV.text} delegate:self];
-    request.flag = @"/message/ajax_message";
-    [request startRequest];
-    
-    UserInfoEntity *entity = [UserInfoEntity defaultUserInfoEntity];
-    FBRequest *request1 = [FBAPI postWithUrlString:@"/message" requestDictionary:@{@"page":@1,@"size":@10,@"from_user_id":entity.userId,@"type":@0} delegate:self];
-    request1.flag = @"/message";
-    [request1 startRequest];
-    
-    [self.chatTFV resignFirstResponder];
-    self.chatTFV.text = @"";
+- (IBAction)sendBtn:(UIButton *)sender {
+    FBRequest *request = [FBAPI postWithUrlString:@"/message/ajax_message" requestDictionary:@{
+                                                                                               @"to_user_id":self.userId,
+                                                                                               @"content":self.msgTF.text
+                                                                                               } delegate:self];
+    [request startRequestSuccess:^(FBRequest *request, id result) {
+        NSLog(@"发送  %@",result);
+        [self networkRequestData];
+    } failure:^(FBRequest *request, NSError *error) {
+        [SVProgressHUD showErrorWithStatus:error.localizedDescription];
+    }];
+    self.msgTF.text = @"";
 }
 
 - (void)didReceiveMemoryWarning {

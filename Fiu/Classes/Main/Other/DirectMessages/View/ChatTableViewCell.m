@@ -13,65 +13,71 @@
 @implementation ChatTableViewCell
 
 - (void)awakeFromNib {
-    [super awakeFromNib];
-    // Initialization code
+    self.myTextBtn.titleLabel.numberOfLines = 0;
+    self.otherTextBtn.titleLabel.numberOfLines = 0;
 }
+
+- (void)setMessage:(AXModel *)message
+{
+    _message = message;
+    
+    if (message.hideTime) { // 隐藏时间
+        self.timeLabel.hidden = YES;
+        [self.timeLabel mas_updateConstraints:^(MASConstraintMaker *make) {
+            make.height.mas_equalTo(0);
+        }];
+    } else { // 显示时间
+        self.timeLabel.text = message.created_at;
+        self.timeLabel.hidden = NO;
+        [self.timeLabel mas_updateConstraints:^(MASConstraintMaker *make) {
+            make.height.mas_equalTo(21);
+        }];
+    }
+    
+    if (message.user_type == XMGMessageTypeMe) { // 右边
+        [self settingShowTextButton:self.myTextBtn showIconView:self.myIconImageView hideTextButton:self.otherTextBtn hideIconView:self.otherIconImageView];
+    } else { // 左边
+        [self settingShowTextButton:self.otherTextBtn showIconView:self.otherIconImageView hideTextButton:self.myTextBtn hideIconView:self.myIconImageView];
+    }
+}
+
+/**
+ * 处理左右按钮、头像
+ */
+- (void)settingShowTextButton:(UIButton *)showTextButton showIconView:(UIImageView *)showIconView hideTextButton:(UIButton *)hideTextButton hideIconView:(UIImageView *)hideIconView
+{
+    hideTextButton.hidden = YES;
+    hideIconView.hidden = YES;
+    
+    showTextButton.hidden = NO;
+    showIconView.hidden = NO;
+    
+    // 设置按钮的文字
+    [showTextButton setTitle:self.message.content forState:UIControlStateNormal];
+    
+    // 强制更新
+    [showTextButton layoutIfNeeded];
+    
+    // 设置按钮的高度就是titleLabel的高度
+    [showTextButton mas_updateConstraints:^(MASConstraintMaker *make) {
+        CGFloat btnH = showTextButton.titleLabel.frame.size.height+30;
+        make.height.mas_equalTo(btnH);
+    }];
+    
+    // 强制更新
+    [showTextButton layoutIfNeeded];
+    
+    // 计算当前cell的高度
+    CGFloat buttonMaxY = CGRectGetMaxY(showTextButton.frame);
+    CGFloat iconMaxY = CGRectGetMaxY(showIconView.frame);
+    self.message.cellHeight = MAX(buttonMaxY, iconMaxY) + 10;
+}
+
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
     [super setSelected:selected animated:animated];
 
     // Configure the view for the selected state
-}
-
--(instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier{
-    if (self = [super initWithStyle:style reuseIdentifier:reuseIdentifier]) {
-        self.selectionStyle = UITableViewCellSelectionStyleNone;
-    }
-    return self;
-}
-
--(void)setUIWithModel:(AXModel *)model{
-    self.timeLabel.text = model.created_at;
-    if ([model.lastTime isEqualToString:model.created_at]) {
-        [self.timeLabel mas_updateConstraints:^(MASConstraintMaker *make) {
-            make.height.mas_equalTo(0);
-        }];
-    }else{
-        self.timeLabel.hidden = NO;
-        [self.timeLabel mas_updateConstraints:^(MASConstraintMaker *make) {
-            make.height.mas_equalTo(20.5);
-        }];
-    }
-    
-    if (model.type == AXModelTypeMe) {
-        self.meHeadImg.hidden = NO;
-        self.otherHeadImg.hidden = YES;
-        self.oterhMsgBtn.hidden = YES;
-        self.meMsgBtn.hidden = NO;
-        [self.meMsgBtn setTitle:model.content forState:UIControlStateNormal];
-        [self setFunctionSupplyWithButton:self.meMsgBtn andImgView:self.meHeadImg];
-    }else{
-        self.meHeadImg.hidden = YES;
-        self.otherHeadImg.hidden = NO;
-        self.oterhMsgBtn.hidden = NO;
-        self.meMsgBtn.hidden = YES;
-        [self.oterhMsgBtn setTitle:model.content forState:UIControlStateNormal];
-        [self setFunctionSupplyWithButton:self.oterhMsgBtn andImgView:self.otherHeadImg];
-    }
-}
-
--(void)setFunctionSupplyWithButton:(UIButton*)btn andImgView:(UIImageView*)img{
-    btn.titleLabel.numberOfLines = 0;
-    btn.contentEdgeInsets = UIEdgeInsetsMake(15, 15, 15, 15);
-    [self layoutIfNeeded];
-    [btn mas_updateConstraints:^(MASConstraintMaker *make) {
-        make.height.mas_equalTo(btn.titleLabel.frame.size.height+20);
-    }];
-    [self layoutIfNeeded];
-    [self mas_updateConstraints:^(MASConstraintMaker *make) {
-        make.height.mas_equalTo(CGRectGetMaxY(btn.frame) > CGRectGetMaxY(img.frame) ? CGRectGetMaxY(btn.frame) : CGRectGetMaxY(img.frame)
-);
-    }];
 }
 
 @end

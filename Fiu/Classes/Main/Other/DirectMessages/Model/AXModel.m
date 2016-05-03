@@ -10,5 +10,11 @@
 
 @implementation AXModel
 
++ (instancetype)messageWithDict:(NSDictionary *)dict
+{
+    AXModel *message = [[self alloc] init];
+    [message setValuesForKeysWithDictionary:dict];
+    return message;
+}
 
 @end

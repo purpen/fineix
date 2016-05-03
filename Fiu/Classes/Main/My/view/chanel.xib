@@ -173,7 +173,7 @@
                 <outlet property="fieldView" destination="YLy-lk-LgI" id="CoZ-Xv-9C2"/>
                 <outlet property="focusNumLabel" destination="jqM-xS-AQI" id="oyw-Bg-DZx"/>
                 <outlet property="focusView" destination="brx-eo-zDH" id="8b7-lg-NWo"/>
-                <outlet property="scenarioNumLabel" destination="DLy-1i-g2K" id="XA0-CZ-OLz"/>
+                <outlet property="scenarioNumLabel" destination="B9S-h1-cvJ" id="lDw-e5-Uxe"/>
                 <outlet property="scenarioView" destination="PdP-yb-nfb" id="doi-vu-7Tj"/>
             </connections>
             <point key="canvasLocation" x="350.5" y="757"/>

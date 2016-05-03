@@ -10,6 +10,7 @@
 #import "Fiu.h"
 #import "UserInfoEntity.h"
 #import <SDWebImage/UIImageView+WebCache.h>
+#import "UserInfo.h"
 
 @implementation OtherCollectionViewCell
 //-(instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier{
@@ -97,17 +98,16 @@
     return self;
 }
 
--(void)setUI{
+-(void)setUIWithModel:(UserInfo *)model{
     //这里要改成别人的信息
     
-    UserInfoEntity *entity = [UserInfoEntity defaultUserInfoEntity];
     //更新头像
-    [self.userHeadImageView sd_setImageWithURL:[NSURL URLWithString:entity.mediumAvatarUrl] placeholderImage:nil completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
+    [self.userHeadImageView sd_setImageWithURL:[NSURL URLWithString:model.mediumAvatarUrl] placeholderImage:nil completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
         
     }];
-    self.nickName.text = entity.nickname;
-    self.userProfile.text = entity.summary;
-    self.userLevelLabel.text = [NSString stringWithFormat:@"%@|V%d",entity.levelDesc,[entity.level intValue]];
+    self.nickName.text = model.nickname;
+    self.userProfile.text = model.summary;
+    self.userLevelLabel.text = [NSString stringWithFormat:@"%@|V%d",model.levelDesc,[model.level intValue]];
     
     self.bgImageView.image = [UIImage imageNamed:@"image"];
 }

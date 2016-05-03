@@ -21,7 +21,7 @@
 +(instancetype)getTipNumView{
     TipNumberView *numV = [[NSBundle mainBundle] loadNibNamed:@"MyView" owner:nil options:nil][5];
     numV.layer.masksToBounds = YES;
-    numV.layer.cornerRadius = 10;
+    numV.layer.cornerRadius = 15*0.5;
     return numV;
 }
 

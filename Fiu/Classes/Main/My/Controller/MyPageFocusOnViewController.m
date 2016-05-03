@@ -36,27 +36,6 @@
 //    [self addBarItemLeftBarButton:nil image:@"icon_back"];
     self.delegate = self;
     
-//    //请求数据
-//    FBRequest *request = [FBAPI postWithUrlString:@"/follow" requestDictionary:@{@"page":@(_page),@"size":@15,@"user_id":self.userId,@"find_type":@1} delegate:self];
-//    request.flag = @"follow";
-//    [request startRequest];
-//    
-//    self.mytableView.mj_header = [MJRefreshNormalHeader headerWithRefreshingBlock:^{
-//        // 进入刷新状态后会自动调用这个block
-//        FBRequest *request = [FBAPI postWithUrlString:@"/follow" requestDictionary:@{@"page":@(1),@"size":@15,@"user_id":self.userId,@"find_type":@1} delegate:self];
-//        request.flag = @"follow";
-//        [request startRequest];
-//        [self.mytableView.mj_header endRefreshing];
-//    }];
-//    
-//    self.mytableView.mj_footer = [MJRefreshAutoNormalFooter footerWithRefreshingBlock:^{
-//        // 进入刷新状态后会自动调用这个block
-//        _page++;
-//        FBRequest *request = [FBAPI postWithUrlString:@"/follow" requestDictionary:@{@"page":@(_page),@"size":@15,@"user_id":self.userId,@"find_type":@1} delegate:self];
-//        request.flag = @"follow";
-//        [request startRequest];
-//        [self.mytableView.mj_header endRefreshing];
-//    }];
     //进行网络请求
     [self networkRequestData];
     
@@ -74,7 +53,9 @@
         for (NSDictionary *rowsDict in rowsAry) {
             NSDictionary *followsDict = [rowsDict objectForKey:@"follows"];
             UserInfo *model = [[UserInfo alloc] init];
+            
             model.userId = followsDict[@"user_id"];
+            NSLog(@"userid             %@",model.userId);
             model.summary = followsDict[@"summary"];
             model.nickname = followsDict[@"nickname"];
             model.mediumAvatarUrl = followsDict[@"avatar_url"];
@@ -91,24 +72,7 @@
     } failure:^(FBRequest *request, NSError *error) {
         [SVProgressHUD showErrorWithStatus:[error localizedDescription]];
     }];
-//    [self.sceneListRequest startRequestSuccess:^(FBRequest *request, id result) {
-//        NSArray * sceneArr = [[result valueForKey:@"data"] valueForKey:@"rows"];
-//        for (NSDictionary * sceneDic in sceneArr) {
-//            HomeSceneListRow * homeSceneModel = [[HomeSceneListRow alloc] initWithDictionary:sceneDic];
-//            [self.sceneListMarr addObject:homeSceneModel];
-//            [self.sceneIdMarr addObject:[NSString stringWithFormat:@"%zi", homeSceneModel.idField]];
-//        }
-//        [self.homeTableView reloadData];
-//        self.currentpageNum = [[[result valueForKey:@"data"] valueForKey:@"current_page"] integerValue];
-//        self.totalPageNum = [[[result valueForKey:@"data"] valueForKey:@"total_page"] integerValue];
-//        if (self.totalPageNum > 1) {
-//            [self addMJRefresh:self.homeTableView];
-//            [self requestIsLastData:self.homeTableView currentPage:self.currentpageNum withTotalPage:self.totalPageNum];
-//        }
-//        [SVProgressHUD dismiss];
-//    } failure:^(FBRequest *request, NSError *error) {
-//        [SVProgressHUD showErrorWithStatus:[error localizedDescription]];
-//    }];
+
 }
 
 //  判断是否为最后一条数据
@@ -162,9 +126,9 @@
         }
     }else if ([request.flag isEqualToString:@"/follow/ajax_cancel_follow"]){
         if ([result objectForKey:@"success"]) {
-            [SVProgressHUD showSuccessWithStatus:@"关注成功"];
+            [SVProgressHUD showSuccessWithStatus:@"取消关注"];
         }else{
-            [SVProgressHUD showErrorWithStatus:@"关注失败"];
+            [SVProgressHUD showErrorWithStatus:@"连接失败"];
         }
     }
 }
@@ -209,6 +173,7 @@
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     HomePageViewController *v = [[HomePageViewController alloc] init];
     UserInfo *model = _modelAry[indexPath.row];
+    NSLog(@"userId  %@",model.userId);
     v.userId = model.userId;
     v.isMySelf = NO;
     v.type = @1;

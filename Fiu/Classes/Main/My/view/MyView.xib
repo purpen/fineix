@@ -219,25 +219,25 @@
                             <constraints>
                                 <constraint firstAttribute="width" secondItem="ehr-kZ-ifk" secondAttribute="height" multiplier="1:1" id="gP7-eZ-8CE"/>
                             </constraints>
-                            <state key="normal" image="collection"/>
+                            <state key="normal" image="setting"/>
                         </button>
-                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="收藏" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gpG-xr-NF0">
-                            <rect key="frame" x="16" y="76" width="42" height="16"/>
-                            <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="账户管理" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gpG-xr-NF0">
+                            <rect key="frame" x="0.0" y="76" width="75" height="16"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="12"/>
                             <color key="textColor" red="0.40000000000000002" green="0.40000000000000002" blue="0.40000000000000002" alpha="1" colorSpace="calibratedRGB"/>
                             <nil key="highlightedColor"/>
                         </label>
                     </subviews>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     <constraints>
-                        <constraint firstItem="gpG-xr-NF0" firstAttribute="leading" secondItem="Pgs-gg-S6R" secondAttribute="leading" constant="16" id="6MC-Eu-vTl"/>
+                        <constraint firstItem="gpG-xr-NF0" firstAttribute="leading" secondItem="Pgs-gg-S6R" secondAttribute="leading" id="6MC-Eu-vTl"/>
                         <constraint firstAttribute="trailing" secondItem="ehr-kZ-ifk" secondAttribute="trailing" constant="13" id="BX6-wZ-n63"/>
                         <constraint firstAttribute="bottom" secondItem="gpG-xr-NF0" secondAttribute="bottom" constant="5" id="Gm6-qm-WxK"/>
                         <constraint firstItem="gpG-xr-NF0" firstAttribute="top" secondItem="ehr-kZ-ifk" secondAttribute="bottom" constant="9" id="SIX-ue-Ry1"/>
                         <constraint firstItem="ehr-kZ-ifk" firstAttribute="leading" secondItem="Pgs-gg-S6R" secondAttribute="leading" constant="12" id="cIc-yY-UGx"/>
                         <constraint firstItem="gpG-xr-NF0" firstAttribute="top" secondItem="ehr-kZ-ifk" secondAttribute="bottom" constant="9" id="jPK-DQ-3de"/>
                         <constraint firstItem="ehr-kZ-ifk" firstAttribute="top" secondItem="Pgs-gg-S6R" secondAttribute="top" constant="17" id="lee-kv-dBD"/>
-                        <constraint firstAttribute="trailing" secondItem="gpG-xr-NF0" secondAttribute="trailing" constant="17" id="vyM-wo-s0h"/>
+                        <constraint firstAttribute="trailing" secondItem="gpG-xr-NF0" secondAttribute="trailing" id="vyM-wo-s0h"/>
                     </constraints>
                 </view>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="xzV-zZ-LY0">
@@ -312,7 +312,7 @@
                             <constraints>
                                 <constraint firstAttribute="width" secondItem="H3v-e2-DjT" secondAttribute="height" multiplier="1:1" id="5bg-qz-oHD"/>
                             </constraints>
-                            <state key="normal" image="Gift "/>
+                            <state key="normal" image="Gift"/>
                         </button>
                     </subviews>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -395,32 +395,7 @@
                 </view>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="A9m-6k-LG5">
                     <rect key="frame" x="300" y="97" width="75" height="97"/>
-                    <subviews>
-                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="b2A-xl-erH">
-                            <rect key="frame" x="12" y="17" width="50" height="51"/>
-                            <constraints>
-                                <constraint firstAttribute="width" secondItem="b2A-xl-erH" secondAttribute="height" multiplier="50:51" id="NII-fV-uOW"/>
-                            </constraints>
-                            <state key="normal" image="setting"/>
-                        </button>
-                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="账户管理" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9oj-aR-dkU">
-                            <rect key="frame" x="0.0" y="77" width="75" height="15"/>
-                            <fontDescription key="fontDescription" type="system" pointSize="12"/>
-                            <color key="textColor" red="0.40000000000000002" green="0.40000000000000002" blue="0.40000000000000002" alpha="1" colorSpace="calibratedRGB"/>
-                            <nil key="highlightedColor"/>
-                        </label>
-                    </subviews>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                    <constraints>
-                        <constraint firstItem="9oj-aR-dkU" firstAttribute="leading" secondItem="A9m-6k-LG5" secondAttribute="leading" id="25e-e6-Ys2"/>
-                        <constraint firstItem="9oj-aR-dkU" firstAttribute="top" secondItem="b2A-xl-erH" secondAttribute="bottom" constant="9" id="4f5-sU-wdb"/>
-                        <constraint firstAttribute="bottom" secondItem="9oj-aR-dkU" secondAttribute="bottom" constant="5" id="6zd-zI-p0D"/>
-                        <constraint firstAttribute="trailing" secondItem="b2A-xl-erH" secondAttribute="trailing" constant="13" id="Dsp-VX-Wkz"/>
-                        <constraint firstItem="9oj-aR-dkU" firstAttribute="top" secondItem="b2A-xl-erH" secondAttribute="bottom" constant="9" id="QAd-0x-ot7"/>
-                        <constraint firstItem="b2A-xl-erH" firstAttribute="top" secondItem="A9m-6k-LG5" secondAttribute="top" constant="17" id="RPU-8m-eH7"/>
-                        <constraint firstAttribute="trailing" secondItem="9oj-aR-dkU" secondAttribute="trailing" id="jcf-Wa-Yat"/>
-                        <constraint firstItem="b2A-xl-erH" firstAttribute="leading" secondItem="A9m-6k-LG5" secondAttribute="leading" constant="12" id="pGU-lx-OX9"/>
-                    </constraints>
                 </view>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="yJa-yt-cWi">
                     <rect key="frame" x="75" y="0.0" width="75" height="97"/>
@@ -541,7 +516,6 @@
             <nil key="simulatedStatusBarMetrics"/>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <connections>
-                <outlet property="accountManagementBtn" destination="b2A-xl-erH" id="3o8-Fs-MWr"/>
                 <outlet property="collectionBtn" destination="ehr-kZ-ifk" id="SQ8-ga-PMZ"/>
                 <outlet property="giftBtn" destination="H3v-e2-DjT" id="wDB-Wa-NqP"/>
                 <outlet property="integralBtn" destination="90h-1W-f4e" id="8Co-je-8I5"/>
@@ -555,7 +529,7 @@
             <point key="canvasLocation" x="357.5" y="1066"/>
         </view>
         <view contentMode="scaleToFill" id="SvM-GO-RC8" customClass="BottomView">
-            <rect key="frame" x="0.0" y="0.0" width="375" height="134"/>
+            <rect key="frame" x="0.0" y="0.0" width="375" height="89"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <subviews>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="THd-hN-eB1">
@@ -580,17 +554,6 @@
                         <color key="titleColor" red="0.40000000000000002" green="0.40000000000000002" blue="0.40000000000000002" alpha="1" colorSpace="calibratedRGB"/>
                     </state>
                 </button>
-                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xBB-nL-q7c">
-                    <rect key="frame" x="0.0" y="90" width="375" height="44"/>
-                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                    <constraints>
-                        <constraint firstAttribute="height" constant="44" id="bs0-xk-DYR"/>
-                    </constraints>
-                    <inset key="contentEdgeInsets" minX="20" minY="0.0" maxX="0.0" maxY="0.0"/>
-                    <state key="normal" title="战略伙伴app">
-                        <color key="titleColor" red="0.40000000000000002" green="0.40000000000000002" blue="0.40000000000000002" alpha="1" colorSpace="calibratedRGB"/>
-                    </state>
-                </button>
                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="entr" translatesAutoresizingMaskIntoConstraints="NO" id="aZ5-1w-NGn">
                     <rect key="frame" x="348" y="13" width="8" height="18"/>
                     <constraints>
@@ -605,30 +568,18 @@
                         <constraint firstAttribute="width" constant="8" id="hMn-TN-UEs"/>
                     </constraints>
                 </imageView>
-                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="entr" translatesAutoresizingMaskIntoConstraints="NO" id="PlN-e5-t8I">
-                    <rect key="frame" x="348" y="103" width="8" height="18"/>
-                    <constraints>
-                        <constraint firstAttribute="width" constant="8" id="MMb-FX-T46"/>
-                        <constraint firstAttribute="height" constant="18" id="Rxh-sx-vEq"/>
-                    </constraints>
-                </imageView>
             </subviews>
             <color key="backgroundColor" red="0.87058823529999996" green="0.87058823529999996" blue="0.87058823529999996" alpha="1" colorSpace="calibratedRGB"/>
             <constraints>
                 <constraint firstItem="aZ5-1w-NGn" firstAttribute="top" secondItem="SvM-GO-RC8" secondAttribute="top" constant="13" id="2bK-ff-5bE"/>
-                <constraint firstItem="xBB-nL-q7c" firstAttribute="leading" secondItem="SvM-GO-RC8" secondAttribute="leading" id="6Ng-Ju-NDJ"/>
                 <constraint firstItem="NPK-PA-FrA" firstAttribute="top" secondItem="THd-hN-eB1" secondAttribute="bottom" constant="14" id="89n-Dg-Gp9"/>
                 <constraint firstItem="gMb-fM-xLY" firstAttribute="leading" secondItem="SvM-GO-RC8" secondAttribute="leading" id="AcD-dT-td7"/>
                 <constraint firstAttribute="trailing" secondItem="gMb-fM-xLY" secondAttribute="trailing" id="M5z-0u-nlm"/>
                 <constraint firstAttribute="trailing" secondItem="aZ5-1w-NGn" secondAttribute="trailing" constant="19" id="P5a-SJ-y4P"/>
                 <constraint firstAttribute="trailing" secondItem="THd-hN-eB1" secondAttribute="trailing" id="TFr-eU-b0k"/>
-                <constraint firstAttribute="trailing" secondItem="xBB-nL-q7c" secondAttribute="trailing" id="d9Z-Xo-QiN"/>
-                <constraint firstItem="xBB-nL-q7c" firstAttribute="top" secondItem="gMb-fM-xLY" secondAttribute="bottom" constant="1" id="dTC-gt-lzW"/>
-                <constraint firstItem="PlN-e5-t8I" firstAttribute="top" secondItem="gMb-fM-xLY" secondAttribute="bottom" constant="14" id="e5Q-Vi-duc"/>
                 <constraint firstAttribute="trailing" secondItem="NPK-PA-FrA" secondAttribute="trailing" constant="19" id="gcK-QL-UXz"/>
                 <constraint firstItem="gMb-fM-xLY" firstAttribute="top" secondItem="THd-hN-eB1" secondAttribute="bottom" constant="1" id="giA-EG-hSv"/>
                 <constraint firstItem="THd-hN-eB1" firstAttribute="top" secondItem="SvM-GO-RC8" secondAttribute="top" id="lfq-8W-LhT"/>
-                <constraint firstAttribute="trailing" secondItem="PlN-e5-t8I" secondAttribute="trailing" constant="19" id="voE-oU-j0r"/>
                 <constraint firstItem="THd-hN-eB1" firstAttribute="leading" secondItem="SvM-GO-RC8" secondAttribute="leading" id="zhb-DU-Q3u"/>
             </constraints>
             <nil key="simulatedStatusBarMetrics"/>
@@ -636,9 +587,8 @@
             <connections>
                 <outlet property="aboutUsBtn" destination="THd-hN-eB1" id="dHR-MU-5aP"/>
                 <outlet property="opinionBtn" destination="gMb-fM-xLY" id="Q2N-2L-xfA"/>
-                <outlet property="partnerBtn" destination="xBB-nL-q7c" id="9Q0-7d-wFQ"/>
             </connections>
-            <point key="canvasLocation" x="365.5" y="1300"/>
+            <point key="canvasLocation" x="365.5" y="1277.5"/>
         </view>
         <view contentMode="scaleToFill" id="CuD-YD-uDF" customClass="AppBtnView">
             <rect key="frame" x="0.0" y="0.0" width="375" height="91"/>
@@ -1225,11 +1175,10 @@
     </objects>
     <resources>
         <image name="Dina Alexander" width="84" height="84"/>
-        <image name="Gift " width="50" height="50"/>
+        <image name="Gift" width="50" height="50"/>
         <image name="Page 1" width="19" height="19"/>
         <image name="PersonalBackground" width="375" height="197"/>
         <image name="certification" width="69" height="25"/>
-        <image name="collection" width="50" height="50"/>
         <image name="entr" width="8" height="15"/>
         <image name="go" width="8" height="15"/>
         <image name="icon_delivery" width="50" height="50"/>

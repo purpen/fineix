@@ -41,9 +41,10 @@
         
         UIView *linview = [[UIView alloc] init];
         linview.backgroundColor = [UIColor lightGrayColor];
+        linview.alpha = 0.5;
         [btn addSubview:linview];
         [linview mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.size.mas_equalTo(CGSizeMake(SCREEN_WIDTH, 1));
+            make.size.mas_equalTo(CGSizeMake(SCREEN_WIDTH, 0.5));
             make.left.mas_equalTo(btn.mas_left).with.offset(0);
             make.bottom.mas_equalTo(btn.mas_bottom).with.offset(0);
         }];

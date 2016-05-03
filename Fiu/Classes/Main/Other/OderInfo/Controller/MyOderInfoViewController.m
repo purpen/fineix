@@ -10,11 +10,16 @@
 #import "FBAPI.h"
 #import "FBRequest.h"
 #import "OrderInfoCell.h"
+#import "SVProgressHUD.h"
+#import "MyOderModel.h"
 
 @interface MyOderInfoViewController ()<FBNavigationBarItemsDelegate,UITableViewDelegate,UITableViewDataSource,FBRequestDelegate>
 {
     //创建金色小条
     UIView *_linView;
+    NSMutableArray *_modelAry;
+    int _page;
+    int _totalePage;
 }
 @property (weak, nonatomic) IBOutlet UIButton *allBtn;
 @property (weak, nonatomic) IBOutlet UIButton *paymentBtn;
@@ -31,6 +36,7 @@ static NSString *const OrderListURL = @"/shopping/orders";
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    _page = 1;
     self.delegate = self;
     self.navViewTitle.text = @"我的订单";
     self.myTableView.delegate = self;
@@ -53,6 +59,34 @@ static NSString *const OrderListURL = @"/shopping/orders";
     }else if ([self.type isEqualToNumber:@4]){
         [self evaluateBtn:self.evaluateBtn];
     }
+}
+
+-(void)netGetDataWithType:(NSNumber*)type{
+    [SVProgressHUD show];
+    FBRequest *request = [FBAPI postWithUrlString:@"/shopping/orders" requestDictionary:@{@"page":@(_page),@"size":@15,@"status":type} delegate:self];
+    [request startRequestSuccess:^(FBRequest *request, id result) {
+        NSDictionary * dataDic = [result objectForKey:@"data"];
+        NSArray * rowsAry = [dataDic objectForKey:@"rows"];
+        NSLog(@"orderInfoDic %@",dataDic);
+//        for (NSDictionary * orderInfoDic in rowsAry) {
+//            MyOderModel * model = [[MyOderModel alloc] init];
+//            model.created_at = [orderInfoDic objectForKey:@"created_at"];
+//            
+//            [self.orderListAry addObject:orderInfo];
+//        }
+//        [self.orderTableView reloadData];
+//        [self.mytableView reloadData];
+//        _page = [[[result valueForKey:@"data"] valueForKey:@"current_page"] intValue];
+//        _totalePage = [[[result valueForKey:@"data"] valueForKey:@"total_page"] intValue];
+//        if (_totalePage > 1) {
+//            [self addMJRefresh:self.mytableView];
+//            [self requestIsLastData:self.mytableView currentPage:_page withTotalPage:_totalePage];
+//        }
+        [SVProgressHUD dismiss];
+    } failure:^(FBRequest *request, NSError *error) {
+        [SVProgressHUD showErrorWithStatus:[error localizedDescription]];
+    }];
+
 }
 
 - (IBAction)allBtn:(UIButton *)sender {
@@ -89,6 +123,8 @@ static NSString *const OrderListURL = @"/shopping/orders";
 //        //提示错误信息
 //        
 //    }];
+    
+    [self netGetDataWithType:@0];
 
 }
 - (IBAction)payMentBtn:(UIButton *)sender {

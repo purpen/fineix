@@ -33,6 +33,8 @@
 #import "AboutViewController.h"
 #import "OptionViewController.h"
 #import <SVProgressHUD.h>
+#import "CounterModel.h"
+#import "TipNumberView.h"
 
 @interface MyselfViewController ()<UIScrollViewDelegate,FBNavigationBarItemsDelegate,FBRequestDelegate>
 
@@ -41,7 +43,10 @@
     UIScrollView *_homeScrollView;
     BackImagView *_imgV;//背景图片
     ChanelView *_chanelV;
+    CounterModel *_counterModel;
+    ChanelViewTwo *_chanelTwoV;
 }
+
 
 
 @end
@@ -79,16 +84,6 @@ static NSString *const follows = @"/follow";
     //我要认证按钮
     [_imgV.wantCertificationBtn addTarget:self action:@selector(clickCertificationBtn:) forControlEvents:UIControlEventTouchUpInside];
     [_homeScrollView addSubview:_imgV];
-    
-//    //放一个view替换导航条，颜色为白色
-//    NaviView *naviV = [NaviView getNaviView];
-//    naviV.frame = CGRectMake(0, 0, SCREEN_WIDTH, 64);
-//    [self.view addSubview:naviV];
-//    naviV.backgroundColor = [UIColor clearColor];
-//    
-//    
-//    [naviV.camerlBtn addTarget:self action:@selector(clickImageBtn:) forControlEvents:UIControlEventTouchUpInside];
-    
 
     
     
@@ -96,12 +91,6 @@ static NSString *const follows = @"/follow";
     _chanelV = [ChanelView getChanelView];
     _chanelV.frame = CGRectMake(0, (200+5)/667.0*SCREEN_HEIGHT+64, SCREEN_WIDTH, 60/667.0*SCREEN_HEIGHT);
     
-//    NSArray *urlAry = [NSArray arrayWithObjects:, nil]
-//    for (int i = 0; i<4; i++) {
-//        FBRequest *request = [FBAPI postWithUrlString:follows requestDictionary:@{@"user_id":entity.userId,@"find_type":@1} delegate:self];
-//        request.flag = follows;
-//        [request startRequest];
-//    }
 
     //情景
     _chanelV.scenarioView.userInteractionEnabled = YES;
@@ -129,64 +118,119 @@ static NSString *const follows = @"/follow";
     [_chanelV.fansView addGestureRecognizer:scenarioTap3];
     [_homeScrollView addSubview:_chanelV];
     //订单等一些东西
-    ChanelViewTwo *chanelTwoV = [ChanelViewTwo getChanelViewTwo];
-    chanelTwoV.frame = CGRectMake(0, (200+5+60+5)/667.0*SCREEN_HEIGHT+64, SCREEN_WIDTH, 194/667.0*SCREEN_HEIGHT);
-    [_homeScrollView addSubview:chanelTwoV];
+    _chanelTwoV = [ChanelViewTwo getChanelViewTwo];
+    _chanelTwoV.frame = CGRectMake(0, (200+5+60+5)/667.0*SCREEN_HEIGHT+64, SCREEN_WIDTH, 194/667.0*SCREEN_HEIGHT);
+    [_homeScrollView addSubview:_chanelTwoV];
     //为订单等一些按钮添加方法
     //订单按钮
-    [chanelTwoV.orderBtn addTarget:self action:@selector(orderBtn:) forControlEvents:UIControlEventTouchUpInside];
+    [_chanelTwoV.orderBtn addTarget:self action:@selector(orderBtn:) forControlEvents:UIControlEventTouchUpInside];
     //消息按钮
-    [chanelTwoV.messageBtn addTarget:self action:@selector(messageBtn:) forControlEvents:UIControlEventTouchUpInside];
+    [_chanelTwoV.messageBtn addTarget:self action:@selector(messageBtn:) forControlEvents:UIControlEventTouchUpInside];
     //订阅按钮
-    [chanelTwoV.subscribeBtn addTarget:self action:@selector(subscribeBtn:) forControlEvents:UIControlEventTouchUpInside];
+    [_chanelTwoV.subscribeBtn addTarget:self action:@selector(subscribeBtn:) forControlEvents:UIControlEventTouchUpInside];
     //收藏按钮
-    [chanelTwoV.collectionBtn addTarget:self action:@selector(collectionBtn:) forControlEvents:UIControlEventTouchUpInside];
+    [_chanelTwoV.collectionBtn addTarget:self action:@selector(collectionBtn:) forControlEvents:UIControlEventTouchUpInside];
     //赞过按钮
-    [chanelTwoV.praiseBtn addTarget:self action:@selector(praiseBtn:) forControlEvents:UIControlEventTouchUpInside];
+    [_chanelTwoV.praiseBtn addTarget:self action:@selector(praiseBtn:) forControlEvents:UIControlEventTouchUpInside];
     //积分按钮
-    [chanelTwoV.integralBtn addTarget:self action:@selector(integralBtn:) forControlEvents:UIControlEventTouchUpInside];
+    [_chanelTwoV.integralBtn addTarget:self action:@selector(integralBtn:) forControlEvents:UIControlEventTouchUpInside];
     //礼券按钮
-    [chanelTwoV.giftBtn addTarget:self action:@selector(giftBtn:) forControlEvents:UIControlEventTouchUpInside];
+    [_chanelTwoV.giftBtn addTarget:self action:@selector(giftBtn:) forControlEvents:UIControlEventTouchUpInside];
     //收货地址按钮
-    [chanelTwoV.shippingAddressBtn addTarget:self action:@selector(shippingAddressBtn:) forControlEvents:UIControlEventTouchUpInside];
+    [_chanelTwoV.shippingAddressBtn addTarget:self action:@selector(shippingAddressBtn:) forControlEvents:UIControlEventTouchUpInside];
     //服务条款按钮
-    [chanelTwoV.serviceBtn addTarget:self action:@selector(serviceBtn:) forControlEvents:UIControlEventTouchUpInside];
+    [_chanelTwoV.serviceBtn addTarget:self action:@selector(serviceBtn:) forControlEvents:UIControlEventTouchUpInside];
     //账户管理按钮
-    [chanelTwoV.accountManagementBtn addTarget:self action:@selector(accountManagementBtn:) forControlEvents:UIControlEventTouchUpInside];
+    [_chanelTwoV.accountManagementBtn addTarget:self action:@selector(accountManagementBtn:) forControlEvents:UIControlEventTouchUpInside];
     //关于我们等
     BottomView *bottomV = [BottomView getBottomView];
-    bottomV.frame = CGRectMake(0, (200+5+60+5+194+2)/667.0*SCREEN_HEIGHT+64, SCREEN_WIDTH, 134/667.0*SCREEN_HEIGHT);
+    bottomV.frame = CGRectMake(0, (200+5+60+5+194+2)/667.0*SCREEN_HEIGHT+64, SCREEN_WIDTH, 90/667.0*SCREEN_HEIGHT);
     [bottomV.aboutUsBtn addTarget:self action:@selector(clickAboutBtn:) forControlEvents:UIControlEventTouchUpInside];
     [bottomV.opinionBtn addTarget:self action:@selector(clickOpinionBtn:) forControlEvents:UIControlEventTouchUpInside];
-    [bottomV.partnerBtn addTarget:self action:@selector(clickPartnerBtn:) forControlEvents:UIControlEventTouchUpInside];
+    //[bottomV.partnerBtn addTarget:self action:@selector(clickPartnerBtn:) forControlEvents:UIControlEventTouchUpInside];
     [_homeScrollView addSubview:bottomV];
-    //京东图标
-    AppBtnView *appV = [AppBtnView getAppBtnView];
-    appV.frame = CGRectMake(0, (200+5+60+5+194+2+134)/667.0*SCREEN_HEIGHT+64, SCREEN_WIDTH, 91/667.0*SCREEN_HEIGHT);
-    [_homeScrollView addSubview:appV];
     //scrollView滑动范围
-    _homeScrollView.contentSize = CGSizeMake(0, CGRectGetMaxY(appV.frame)+91);
-    //向上滑动tabbar消失
+    _homeScrollView.contentSize = CGSizeMake(0, CGRectGetMaxY(bottomV.frame)+91);
+
     
-    //向下滑动tabbar出现
-    //网络请求
-    [self netGetData];
 }
+
+
 
 -(void)netGetData{
     [SVProgressHUD show];
-    FBRequest *request = [FBAPI postWithUrlString:@"/auth/user" requestDictionary:nil delegate:self];
+    UserInfoEntity *entity = [UserInfoEntity defaultUserInfoEntity];
+    FBRequest *request = [FBAPI postWithUrlString:@"/user/user_info" requestDictionary:@{@"user_id":entity.userId} delegate:self];
     [request startRequestSuccess:^(FBRequest *request, id result) {
-        NSLog(@"result %@",result);
+        NSLog(@"&&&&&&&&result %@",result);
         NSDictionary *dataDict = result[@"data"];
-        _chanelV.scenarioNumLabel.text = dataDict[@"scene_count"];
-        _chanelV.fieldNumLabel.text = dataDict[@"sight_count"];
-        _chanelV.focusNumLabel.text = dataDict[@"follow_count"];
-        _chanelV.fansNumLabel.text = dataDict[@"fans_count"];
-    } failure:^(FBRequest *request, NSError *error) {
+        _chanelV.scenarioNumLabel.text = [NSString stringWithFormat:@"%@",dataDict[@"scene_count"]];
+        _chanelV.fieldNumLabel.text = [NSString stringWithFormat:@"%@",dataDict[@"sight_count"]];
+        _chanelV.focusNumLabel.text = [NSString stringWithFormat:@"%@",dataDict[@"follow_count"]];
+        _chanelV.fansNumLabel.text = [NSString stringWithFormat:@"%@",dataDict[@"fans_count"]];
         
+        UserInfo *userInfo = [UserInfo mj_objectWithKeyValues:[result objectForKey:@"data"]];
+        [userInfo saveOrUpdate];
+        [userInfo updateUserInfoEntity];
+        NSLog(@"%@",userInfo);
+        UserInfoEntity *entity = [UserInfoEntity defaultUserInfoEntity];
+        entity.isLogin = YES;
+        
+        NSLog(@"result %@",result);
+        
+        //更新用户名
+        _imgV.nickNameLabel.text = entity.nickname;
+        //个人简介
+        _imgV.summaryLabel.text = entity.summary;
+        //等级
+        _imgV.talentLabel.text = entity.levelDesc;
+        _imgV.levelLabel.text = [NSString stringWithFormat:@"V%d",[entity.level intValue]];
+        //更新头像
+        [_imgV.headImageView sd_setImageWithURL:[NSURL URLWithString:entity.mediumAvatarUrl] placeholderImage:nil completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
+            
+        }];
+
+        
+        NSDictionary *counterDict = [dataDict objectForKey:@"counter"];
+        _counterModel = [CounterModel mj_objectWithKeyValues:counterDict];
+        NSLog(@"_counterModel   %@",_counterModel.message_count);
+        if ([_counterModel.order_total_count intValue] == 0) {
+            //不显示
+            
+        }else{
+            //显示
+            TipNumberView *tipNumView = [TipNumberView getTipNumView];
+            tipNumView.tipNumLabel.text = [NSString stringWithFormat:@"%@",_counterModel.order_total_count];
+            [_chanelTwoV.orderBtn addSubview:tipNumView];
+            [tipNumView mas_makeConstraints:^(MASConstraintMaker *make) {
+                make.size.mas_equalTo(CGSizeMake(15, 15));
+                make.right.mas_equalTo(_chanelTwoV.orderBtn.mas_right).with.offset(0);
+                make.top.mas_equalTo(_chanelTwoV.orderBtn.mas_top).with.offset(-3);
+            }];
+        }
+        
+        if ([_counterModel.message_total_count intValue] == 0) {
+            //不显示
+            
+        }else{
+            //显示
+            TipNumberView *tipNumView = [TipNumberView getTipNumView];
+            tipNumView.tipNumLabel.text = [NSString stringWithFormat:@"%@",_counterModel.message_total_count];
+            [_chanelTwoV.messageBtn addSubview:tipNumView];
+            [tipNumView mas_makeConstraints:^(MASConstraintMaker *make) {
+                make.size.mas_equalTo(CGSizeMake(15, 15));
+                make.right.mas_equalTo(_chanelTwoV.messageBtn.mas_right).with.offset(0);
+                make.top.mas_equalTo(_chanelTwoV.messageBtn.mas_top).with.offset(-3);
+            }];
+        }
+        
+        [SVProgressHUD dismiss];
+        
+    } failure:^(FBRequest *request, NSError *error) {
+        [SVProgressHUD showErrorWithStatus:@"加载失败"];
     }];
 }
+
 
 -(void)clickPartnerBtn:(UIButton*)sender{
     NSLog(@"合作伙伴app");
@@ -291,6 +335,8 @@ static NSString *const follows = @"/follow";
 //收藏按钮
 -(void)collectionBtn:(UIButton*)sender{
     NSLog(@"#########");
+    SystemSettingViewController *systemVC = [[SystemSettingViewController alloc] init];
+    [self.navigationController pushViewController:systemVC animated:YES];
 }
 
 //赞过按钮
@@ -324,8 +370,7 @@ static NSString *const follows = @"/follow";
 -(void)accountManagementBtn:(UIButton*)sender{
     NSLog(@"#########");
     
-    SystemSettingViewController *systemVC = [[SystemSettingViewController alloc] init];
-    [self.navigationController pushViewController:systemVC animated:YES];
+    
     
     
 }
@@ -344,42 +389,17 @@ static NSString *const follows = @"/follow";
     self.delegate = self;
 //    [self addBarItemLeftBarButton:nil image:@"Page 1" isTransparent:YES];
     [self addNavLogoImgisTransparent:YES];
-    [self addBarItemLeftBarButton:@"" image:@"Page 1" isTransparent:YES];
     
-    FBRequest *request = [FBAPI postWithUrlString:@"/auth/user" requestDictionary:nil delegate:self];
-    [request startRequest];
+    //网络请求
+    [self netGetData];
+    
+    [self addBarItemLeftBarButton:@"" image:@"Page 1" isTransparent:YES];
     
     
     self.tabBarController.tabBar.hidden = NO;
 }
 
 
--(void)requestSucess:(FBRequest *)request result:(id)result{
-    UserInfo *userInfo = [UserInfo mj_objectWithKeyValues:[result objectForKey:@"data"]];
-    [userInfo saveOrUpdate];
-    [userInfo updateUserInfoEntity];
-    NSLog(@"%@",userInfo);
-    UserInfoEntity *entity = [UserInfoEntity defaultUserInfoEntity];
-    entity.isLogin = YES;
-    
-    NSLog(@"result %@",result);
-    
-    //更新用户名
-    _imgV.nickNameLabel.text = entity.nickname;
-    //个人简介
-    _imgV.summaryLabel.text = entity.summary;
-    //等级
-    _imgV.talentLabel.text = entity.levelDesc;
-    _imgV.levelLabel.text = [NSString stringWithFormat:@"V%d",[entity.level intValue]];
-    //更新头像
-    [_imgV.headImageView sd_setImageWithURL:[NSURL URLWithString:entity.mediumAvatarUrl] placeholderImage:nil completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
-        
-    }];
-    
-    NSLog(@"follow_count %@",entity.follow_count);
-    //_chanelV.fansNumLabel.text = entity.follow_count;
-
-}
 
 -(void)setImagesRoundedCorners:(float)radius :(UIImageView*)v{
     v.layer.masksToBounds = YES;

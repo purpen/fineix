@@ -12,11 +12,14 @@
 #import "MJRefresh.h"
 #import "UserInfo.h"
 #import "SVProgressHUD.h"
+#import "MJRefresh.h"
+#import "HomePageViewController.h"
 
 @interface MyFansViewController ()<FBNavigationBarItemsDelegate,UITableViewDelegate,UITableViewDataSource,FBRequestDelegate>
 {
     NSMutableArray *_modelAry;
     int _page;
+    int _totalePage;
 }
 @end
 
@@ -34,60 +37,88 @@
     
     //self.navigationController.navigationBarHidden = NO;
     
-    //请求数据
-    FBRequest *request = [FBAPI postWithUrlString:@"/follow" requestDictionary:@{@"page":@(_page),@"size":@15,@"user_id":self.userId,@"find_type":@2} delegate:self];
-    request.flag = @"follow";
-    [request startRequest];
-    
-    self.mytableView.mj_header = [MJRefreshNormalHeader headerWithRefreshingBlock:^{
-        // 进入刷新状态后会自动调用这个block
-        FBRequest *request = [FBAPI postWithUrlString:@"/follow" requestDictionary:@{@"page":@(1),@"size":@15,@"user_id":self.userId,@"find_type":@2} delegate:self];
-        request.flag = @"follow";
-        [request startRequest];
-        [self.mytableView.mj_header endRefreshing];
-    }];
-    
-    self.mytableView.mj_footer = [MJRefreshAutoNormalFooter footerWithRefreshingBlock:^{
-        // 进入刷新状态后会自动调用这个block
-        _page++;
-        FBRequest *request = [FBAPI postWithUrlString:@"/follow" requestDictionary:@{@"page":@(_page),@"size":@15,@"user_id":self.userId,@"find_type":@2} delegate:self];
-        request.flag = @"follow";
-        [request startRequest];
-        [self.mytableView.mj_header endRefreshing];
-    }];
-    
+    //进行网络请求
+    [self networkRequestData];
     [self.view addSubview:self.mytableView];
 }
 
--(void)requestSucess:(FBRequest *)request result:(id)result{
-    if ([request.flag isEqualToString:@"follow"]) {
+#pragma mark - 网络请求
+- (void)networkRequestData {
+    [SVProgressHUD show];
+    FBRequest *request = [FBAPI postWithUrlString:@"/follow" requestDictionary:@{@"page":@(_page),@"size":@15,@"user_id":self.userId,@"find_type":@2} delegate:self];
+    [request startRequestSuccess:^(FBRequest *request, id result) {
         NSLog(@"result  %@",result);
-        if ([result objectForKey:@"success"]) {
-            NSDictionary *dataDict = [result objectForKey:@"data"];
-            NSArray *rowsAry = [dataDict objectForKey:@"rows"];
-            for (NSDictionary *rowsDict in rowsAry) {
-                NSDictionary *followsDict = [rowsDict objectForKey:@"follows"];
-                UserInfo *model = [[UserInfo alloc] init];
-                model.userId = followsDict[@"user_id"];
-                model.summary = followsDict[@"summary"];
-                model.nickname = followsDict[@"nickname"];
-                model.mediumAvatarUrl = followsDict[@"avatar_url"];
-                [_modelAry addObject:model];
-            }
-            if (_modelAry.count == [dataDict[@"total_rows"] integerValue]) {
-                [self.mytableView.mj_footer endRefreshingWithNoMoreData];
-                self.mytableView.mj_footer.hidden = YES;
-            }else{
-                
-            }
-            if (_modelAry.count == 0) {
-                self.mytableView.separatorStyle = UITableViewCellSeparatorStyleNone;
-            }else{
-                self.mytableView.separatorStyle = UITableViewCellSeparatorStyleSingleLine;
-            }
+        NSDictionary *dataDict = [result objectForKey:@"data"];
+        NSArray *rowsAry = [dataDict objectForKey:@"rows"];
+        for (NSDictionary *rowsDict in rowsAry) {
+            NSDictionary *followsDict = [rowsDict objectForKey:@"follows"];
+            UserInfo *model = [[UserInfo alloc] init];
+            
+            model.userId = followsDict[@"user_id"];
+            NSLog(@"userid             %@",model.userId);
+            model.summary = followsDict[@"summary"];
+            model.nickname = followsDict[@"nickname"];
+            model.mediumAvatarUrl = followsDict[@"avatar_url"];
+            [_modelAry addObject:model];
         }
-        
-    }else if ([request.flag isEqualToString:@"/follow/ajax_follow"]){
+        [self.mytableView reloadData];
+        _page = [[[result valueForKey:@"data"] valueForKey:@"current_page"] intValue];
+        _totalePage = [[[result valueForKey:@"data"] valueForKey:@"total_page"] intValue];
+        if (_totalePage > 1) {
+            [self addMJRefresh:self.mytableView];
+            [self requestIsLastData:self.mytableView currentPage:_page withTotalPage:_totalePage];
+        }
+        [SVProgressHUD dismiss];
+    } failure:^(FBRequest *request, NSError *error) {
+        [SVProgressHUD showErrorWithStatus:[error localizedDescription]];
+    }];
+    
+}
+
+//  判断是否为最后一条数据
+- (void)requestIsLastData:(UITableView *)table currentPage:(NSInteger )current withTotalPage:(NSInteger)total {
+    BOOL isLastPage = (current == total);
+    
+    if (!isLastPage) {
+        if (table.mj_footer.state == MJRefreshStateNoMoreData) {
+            [table.mj_footer resetNoMoreData];
+        }
+    }
+    if (current == total == 1) {
+        table.mj_footer.state = MJRefreshStateNoMoreData;
+        table.mj_footer.hidden = true;
+    }
+    if ([table.mj_header isRefreshing]) {
+        [table.mj_header endRefreshing];
+    }
+    if ([table.mj_footer isRefreshing]) {
+        if (isLastPage) {
+            [table.mj_footer endRefreshingWithNoMoreData];
+        } else  {
+            [table.mj_footer endRefreshing];
+        }
+    }
+    [SVProgressHUD dismiss];
+}
+
+#pragma mark - 上拉加载 & 下拉刷新
+- (void)addMJRefresh:(UITableView *)table {
+    table.mj_header = [MJRefreshNormalHeader headerWithRefreshingBlock:^{
+        _page = 1;
+        [self networkRequestData];
+    }];
+    
+    table.mj_footer = [MJRefreshAutoNormalFooter footerWithRefreshingBlock:^{
+        if (_page < _totalePage) {
+            [self networkRequestData];
+        } else {
+            [table.mj_footer endRefreshing];
+        }
+    }];
+}
+
+-(void)requestSucess:(FBRequest *)request result:(id)result{
+    if ([request.flag isEqualToString:@"/follow/ajax_follow"]){
         if ([result objectForKey:@"success"]) {
             [SVProgressHUD showSuccessWithStatus:@"关注成功"];
         }else{
@@ -95,13 +126,17 @@
         }
     }else if ([request.flag isEqualToString:@"/follow/ajax_cancel_follow"]){
         if ([result objectForKey:@"success"]) {
-            [SVProgressHUD showSuccessWithStatus:@"关注成功"];
+            [SVProgressHUD showSuccessWithStatus:@"取消关注"];
         }else{
-            [SVProgressHUD showErrorWithStatus:@"关注失败"];
+            [SVProgressHUD showErrorWithStatus:@"连接失败"];
         }
     }
 }
 
+-(void)viewWillAppear:(BOOL)animated{
+    [super viewWillAppear:animated];
+    //self.navigationController.navigationBarHidden = NO;
+}
 
 -(void)leftBarItemSelected{
     [self.navigationController popViewControllerAnimated:YES];
@@ -127,53 +162,50 @@
     if (cell == nil) {
         cell = [[FocusOnTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellId];
     }
-    cell.focusOnBtn.tag = indexPath.row;
     [cell.focusOnBtn addTarget:self action:@selector(clickFocusBtn:) forControlEvents:UIControlEventTouchUpInside];
+    //UserInfo *model = _modelAry[indexPath.row];
+    cell.focusOnBtn.tag = indexPath.row;
     [cell setUIWithModel:[_modelAry objectAtIndex:indexPath.row]];
     return cell;
 }
 
+-(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+    HomePageViewController *v = [[HomePageViewController alloc] init];
+    UserInfo *model = _modelAry[indexPath.row];
+    NSLog(@"userId  %@",model.userId);
+    v.userId = model.userId;
+    v.isMySelf = NO;
+    v.type = @1;
+    [self.navigationController pushViewController:v animated:YES];
+}
+
 -(void)clickFocusBtn:(UIButton*)sender{
-//    sender.selected = !sender.selected;
-//    if (!sender.selected) {
-//        
-//        //请求数据
-//        FBRequest *request = [FBAPI postWithUrlString:@"/follow/ajax_follow" requestDictionary:@{@"follow_id":@(sender.tag)} delegate:self];
-//        request.flag = @"/follow/ajax_follow";
-//        [request startRequest];
-//    }else{
-//        MyFansActionSheetViewController *sheetVC = [[MyFansActionSheetViewController alloc] init];
-//        [sheetVC setUI];
-//        sheetVC.modalPresentationStyle = UIModalPresentationOverCurrentContext;
-//        [self presentViewController:sheetVC animated:NO completion:nil];
-//        sheetVC.stopBtn.tag = sender.tag;
-//        [sheetVC.stopBtn addTarget:self action:@selector(clickStopBtn:) forControlEvents:UIControlEventTouchUpInside];
-//        [sheetVC.cancelBtn addTarget:self action:@selector(clickCancelBtn:) forControlEvents:UIControlEventTouchUpInside];
-//    }
     
     if (sender.selected) {
         MyFansActionSheetViewController *sheetVC = [[MyFansActionSheetViewController alloc] init];
         [sheetVC setUI];
         sheetVC.modalPresentationStyle = UIModalPresentationOverCurrentContext;
-        [self presentViewController:sheetVC animated:NO completion:nil];
+        sheetVC.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;
+        [self presentViewController:sheetVC animated:YES completion:nil];
         sheetVC.stopBtn.tag = sender.tag;
         [sheetVC.stopBtn addTarget:self action:@selector(clickStopBtn:) forControlEvents:UIControlEventTouchUpInside];
         [sheetVC.cancelBtn addTarget:self action:@selector(clickCancelBtn:) forControlEvents:UIControlEventTouchUpInside];
     }else{
         sender.selected = !sender.selected;
-                //请求数据
+        //请求数据
         UserInfo *model = _modelAry[sender.tag];
-                FBRequest *request = [FBAPI postWithUrlString:@"/follow/ajax_follow" requestDictionary:@{@"follow_id":model.userId} delegate:self];
-                request.flag = @"/follow/ajax_follow";
-                [request startRequest];
+        FBRequest *request = [FBAPI postWithUrlString:@"/follow/ajax_follow" requestDictionary:@{@"follow_id":model.userId} delegate:self];
+        request.flag = @"/follow/ajax_follow";
+        [request startRequest];
     }
 }
 
 -(void)clickStopBtn:(UIButton*)sender{
-    [self dismissViewControllerAnimated:NO completion:nil];
+    [self dismissViewControllerAnimated:YES completion:nil];
     FocusOnTableViewCell *cell = [_mytableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:sender.tag inSection:0]];
     cell.focusOnBtn.selected = NO;
-    FBRequest *request = [FBAPI postWithUrlString:@"/follow/ajax_cancel_follow" requestDictionary:@{@"follow_id":@(sender.tag)} delegate:self];
+    UserInfo *model = _modelAry[sender.tag];
+    FBRequest *request = [FBAPI postWithUrlString:@"/follow/ajax_cancel_follow" requestDictionary:@{@"follow_id":model.userId} delegate:self];
     request.flag = @"/follow/ajax_cancel_follow";
     [request startRequest];
 }
@@ -186,11 +218,10 @@
     return 55/667.0*SCREEN_HEIGHT;
 }
 
+
+
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
-
-
-
 @end
