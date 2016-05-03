@@ -170,6 +170,7 @@
                 </mask>
             </variation>
             <connections>
+                <outlet property="bgImageView" destination="8Qm-vV-a5D" id="fdO-Vr-Ixa"/>
                 <outlet property="headImageView" destination="RLZ-hj-JFv" id="MIi-YD-IzP"/>
                 <outlet property="levelLabel" destination="x08-I5-dSD" id="qCI-X9-dz3"/>
                 <outlet property="nickNameLabel" destination="M05-IN-a70" id="POB-fp-hUL"/>
@@ -868,11 +869,20 @@
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="J9V-6G-f1s">
                             <rect key="frame" x="13" y="4" width="327" height="30"/>
                         </button>
+                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="go" translatesAutoresizingMaskIntoConstraints="NO" id="X08-E8-QLy">
+                            <rect key="frame" x="351" y="15" width="8" height="15"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="15" id="G32-PX-08S"/>
+                                <constraint firstAttribute="width" constant="8" id="MSs-5G-UaZ"/>
+                            </constraints>
+                        </imageView>
                     </subviews>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     <constraints>
+                        <constraint firstAttribute="trailing" secondItem="X08-E8-QLy" secondAttribute="trailing" constant="16" id="1fg-lW-ujL"/>
                         <constraint firstItem="J9V-6G-f1s" firstAttribute="leading" secondItem="bks-ip-Hwy" secondAttribute="leading" constant="13" id="3ZR-PE-wNQ"/>
                         <constraint firstAttribute="trailing" secondItem="J9V-6G-f1s" secondAttribute="trailing" constant="35" id="Gmu-dq-nSz"/>
+                        <constraint firstItem="X08-E8-QLy" firstAttribute="centerY" secondItem="bks-ip-Hwy" secondAttribute="centerY" id="I18-KH-UJ5"/>
                         <constraint firstAttribute="bottom" secondItem="J9V-6G-f1s" secondAttribute="bottom" constant="10" id="QxK-Fs-7ay"/>
                         <constraint firstAttribute="height" constant="44" id="b3J-Mo-9IB"/>
                         <constraint firstItem="hzP-ba-H6X" firstAttribute="leading" secondItem="bks-ip-Hwy" secondAttribute="leading" constant="13" id="jvS-be-pzw"/>

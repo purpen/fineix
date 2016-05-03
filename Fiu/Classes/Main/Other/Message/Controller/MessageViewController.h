@@ -7,7 +7,10 @@
 //
 
 #import "FBViewController.h"
+@class CounterModel;
 
 @interface MessageViewController : FBViewController
+
+@property(nonatomic,strong) CounterModel *countModel;
 
 @end

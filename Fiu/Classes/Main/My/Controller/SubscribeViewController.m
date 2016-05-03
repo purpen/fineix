@@ -26,7 +26,7 @@ static NSString *const URLAllFiuSceneList = @"/scene_scene/";
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
-    
+    [[UIApplication sharedApplication] setStatusBarHidden:NO withAnimation:(UIStatusBarAnimationSlide)];
     [self setNavigationViewUI];
     
     self.currentpageNum = 0;
@@ -45,7 +45,7 @@ static NSString *const URLAllFiuSceneList = @"/scene_scene/";
 - (void)networkAllFiuSceneList {
     [SVProgressHUD show];
     UserInfoEntity *entity = [UserInfoEntity defaultUserInfoEntity];
-    self.allSceneListRequest = [FBAPI getWithUrlString:URLAllFiuSceneList requestDictionary:@{@"stick":@"0", @"size":@"10", @"page":@(self.currentpageNum + 1),@"user_id":entity.userId} delegate:self];
+    self.allSceneListRequest = [FBAPI getWithUrlString:@"/favorite" requestDictionary:@{@"size":@"10", @"page":@(self.currentpageNum + 1),@"user_id":entity.userId,@"type":@"scene",@"event":@"subscription"} delegate:self];
     [self.allSceneListRequest startRequestSuccess:^(FBRequest *request, id result) {
         NSArray * sceneArr = [[result valueForKey:@"data"] valueForKey:@"rows"];
         for (NSDictionary * sceneDic in sceneArr) {
@@ -53,7 +53,6 @@ static NSString *const URLAllFiuSceneList = @"/scene_scene/";
             [self.allFiuSceneMarr addObject:allFiuScene];
             [self.allFiuSceneIdMarr addObject:[NSString stringWithFormat:@"%zi", allFiuScene.idField]];
         }
-        
         [self.allSceneView reloadData];
         self.currentpageNum = [[[result valueForKey:@"data"] valueForKey:@"current_page"] integerValue];
         self.totalPageNum = [[[result valueForKey:@"data"] valueForKey:@"total_page"] integerValue];

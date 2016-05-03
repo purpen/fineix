@@ -10,7 +10,8 @@
 
 @interface DirectMessagesViewController : FBViewController
 
-@property(nonatomic,strong) NSString *nickName;
+@property(nonatomic,copy) NSString *nickName;
 @property(nonatomic,copy) NSString *userId;
+@property(nonatomic,copy) NSString *otherIconImageUrl;
 
 @end

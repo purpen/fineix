@@ -41,6 +41,8 @@
     userInfo.city = self.city;
     userInfo.address = self.address;
     userInfo.follow_count = self.follow_count;
+    userInfo.head_pic_url = self.head_pic_url;
+    userInfo.is_love = self.is_love;
     
     dispatch_async(dispatch_get_global_queue(0, 0), ^{
         [userInfo saveOrUpdate];
@@ -63,6 +65,8 @@
     self.city = @"";
     self.address = @"";
     self.follow_count = @"";
+    self.head_pic_url = @"";
+    self.is_love = @0;
 }
 
 @end

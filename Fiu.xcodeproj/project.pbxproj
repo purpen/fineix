@@ -17,6 +17,7 @@
 		1F07A6591CC7A45300CF225F /* FriendCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F07A6581CC7A45300CF225F /* FriendCollectionViewCell.m */; };
 		1F0EE6A71C9FA4E7000631F0 /* libstdc++.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 1F0EE6A61C9FA4E7000631F0 /* libstdc++.tbd */; };
 		1F0EE6A91C9FA4F6000631F0 /* libz.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 1F0EE6A81C9FA4F6000631F0 /* libz.tbd */; };
+		1F12E6F11CD86F570000519A /* DirectMessageModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F12E6F01CD86F570000519A /* DirectMessageModel.m */; };
 		1F1837661CCDCF3B00933CA7 /* EditNickNameViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F1837641CCDCF3B00933CA7 /* EditNickNameViewController.m */; };
 		1F1837671CCDCF3B00933CA7 /* EditNickNameViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1F1837651CCDCF3B00933CA7 /* EditNickNameViewController.xib */; };
 		1F18376B1CCDE95A00933CA7 /* ModifyGenderViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F1837691CCDE95A00933CA7 /* ModifyGenderViewController.m */; };
@@ -358,6 +359,8 @@
 		1F0EE6A41C9FA47B000631F0 /* libsqlite3.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libsqlite3.tbd; path = usr/lib/libsqlite3.tbd; sourceTree = SDKROOT; };
 		1F0EE6A61C9FA4E7000631F0 /* libstdc++.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = "libstdc++.tbd"; path = "usr/lib/libstdc++.tbd"; sourceTree = SDKROOT; };
 		1F0EE6A81C9FA4F6000631F0 /* libz.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libz.tbd; path = usr/lib/libz.tbd; sourceTree = SDKROOT; };
+		1F12E6EF1CD86F570000519A /* DirectMessageModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DirectMessageModel.h; sourceTree = "<group>"; };
+		1F12E6F01CD86F570000519A /* DirectMessageModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DirectMessageModel.m; sourceTree = "<group>"; };
 		1F1837631CCDCF3B00933CA7 /* EditNickNameViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EditNickNameViewController.h; sourceTree = "<group>"; };
 		1F1837641CCDCF3B00933CA7 /* EditNickNameViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EditNickNameViewController.m; sourceTree = "<group>"; };
 		1F1837651CCDCF3B00933CA7 /* EditNickNameViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = EditNickNameViewController.xib; sourceTree = "<group>"; };
@@ -1140,6 +1143,8 @@
 		1FE60E3D1CD3224200045117 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				1F12E6EF1CD86F570000519A /* DirectMessageModel.h */,
+				1F12E6F01CD86F570000519A /* DirectMessageModel.m */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -2498,6 +2503,7 @@
 				D812811C1CAA8532007CF08B /* ReleaseViewController.m in Sources */,
 				D83639921CCF69D300CC4AC0 /* FiuScene.m in Sources */,
 				D8035FD01CBD1021001920F9 /* FBTabBarController.m in Sources */,
+				1F12E6F11CD86F570000519A /* DirectMessageModel.m in Sources */,
 				D80D415B1CAD1437005D72B1 /* FBNavigationViewController.m in Sources */,
 				1F35F0441CD1DCF20000DB95 /* LBAddressBookViewController.m in Sources */,
 				D80D415E1CAD144D005D72B1 /* UIBarButtonItem+Helper.m in Sources */,

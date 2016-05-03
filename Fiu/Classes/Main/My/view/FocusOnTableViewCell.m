@@ -78,7 +78,11 @@
 }
 
 -(void)setUIWithModel:(UserInfo *)model{
-    
+    if ([model.is_love isEqualToNumber:@1]) {
+        self.focusOnBtn.selected = NO;
+    }else if ([model.is_love isEqualToNumber:@2]){
+        self.focusOnBtn.selected = YES;
+    }
     [self.headImageView sd_setImageWithURL:[NSURL URLWithString:model.mediumAvatarUrl] placeholderImage:[UIImage imageNamed:@"user"]];
     self.nickNameLabel.text = model.nickname;
     self.summaryLabel.text = model.summary;

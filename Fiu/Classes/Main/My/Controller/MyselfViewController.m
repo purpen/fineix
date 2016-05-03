@@ -170,6 +170,7 @@ static NSString *const follows = @"/follow";
         _chanelV.fansNumLabel.text = [NSString stringWithFormat:@"%@",dataDict[@"fans_count"]];
         
         UserInfo *userInfo = [UserInfo mj_objectWithKeyValues:[result objectForKey:@"data"]];
+        userInfo.head_pic_url = [result objectForKey:@"data"][@"head_pic_url"];
         [userInfo saveOrUpdate];
         [userInfo updateUserInfoEntity];
         NSLog(@"%@",userInfo);
@@ -189,7 +190,10 @@ static NSString *const follows = @"/follow";
         [_imgV.headImageView sd_setImageWithURL:[NSURL URLWithString:entity.mediumAvatarUrl] placeholderImage:nil completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
             
         }];
-
+        //背景图
+        NSLog(@"背景图 %@",entity.head_pic_url);
+        [_imgV.bgImageView sd_setImageWithURL:[NSURL URLWithString:entity.head_pic_url] placeholderImage:[UIImage imageNamed:@"image"]];
+        
         
         NSDictionary *counterDict = [dataDict objectForKey:@"counter"];
         _counterModel = [CounterModel mj_objectWithKeyValues:counterDict];
@@ -323,6 +327,7 @@ static NSString *const follows = @"/follow";
 -(void)messageBtn:(UIButton*)sender{
     NSLog(@"#########");
     MessageViewController *vc = [[MessageViewController alloc] init];
+    vc.countModel = _counterModel;
     [self.navigationController pushViewController:vc animated:YES];
 }
 //订阅按钮

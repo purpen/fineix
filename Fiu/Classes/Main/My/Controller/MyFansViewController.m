@@ -21,6 +21,9 @@
     int _page;
     int _totalePage;
 }
+
+@property(nonatomic,strong) UILabel *tipLabel;
+
 @end
 
 @implementation MyFansViewController
@@ -42,12 +45,21 @@
     [self.view addSubview:self.mytableView];
 }
 
+-(UILabel *)tipLabel{
+    if (!_tipLabel) {
+        _tipLabel = [[UILabel alloc] init];
+        _tipLabel.textAlignment = NSTextAlignmentCenter;
+        _tipLabel.font = [UIFont systemFontOfSize:13];
+    }
+    return _tipLabel;
+}
+
 #pragma mark - 网络请求
 - (void)networkRequestData {
     [SVProgressHUD show];
     FBRequest *request = [FBAPI postWithUrlString:@"/follow" requestDictionary:@{@"page":@(_page),@"size":@15,@"user_id":self.userId,@"find_type":@2} delegate:self];
     [request startRequestSuccess:^(FBRequest *request, id result) {
-        NSLog(@"result  %@",result);
+        NSLog(@"result dadadad %@",result);
         NSDictionary *dataDict = [result objectForKey:@"data"];
         NSArray *rowsAry = [dataDict objectForKey:@"rows"];
         for (NSDictionary *rowsDict in rowsAry) {
@@ -55,11 +67,25 @@
             UserInfo *model = [[UserInfo alloc] init];
             
             model.userId = followsDict[@"user_id"];
-            NSLog(@"userid             %@",model.userId);
             model.summary = followsDict[@"summary"];
             model.nickname = followsDict[@"nickname"];
             model.mediumAvatarUrl = followsDict[@"avatar_url"];
+            model.is_love = rowsDict[@"type"];
+            //8888888888888888888888
+            NSLog(@"类型啊   %@",model.is_love);
             [_modelAry addObject:model];
+        }
+        if (_modelAry.count == 0) {
+            NSLog(@"没有情景");
+            [self.view addSubview:self.tipLabel];
+            _tipLabel.text = @"你还没有粉丝哦";
+            [_tipLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+                make.size.mas_equalTo(CGSizeMake(200, 30));
+                make.centerX.mas_equalTo(self.view.mas_centerX);
+                make.top.mas_equalTo(self.view.mas_top).with.offset(200);
+            }];
+        }else{
+            [self.tipLabel removeFromSuperview];
         }
         [self.mytableView reloadData];
         _page = [[[result valueForKey:@"data"] valueForKey:@"current_page"] intValue];

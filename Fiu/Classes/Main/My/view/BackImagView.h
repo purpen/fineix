@@ -12,6 +12,7 @@
 @property (weak, nonatomic) IBOutlet UIImageView *headImageView;//头像
 @property (weak, nonatomic) IBOutlet UILabel *talentLabel;
 @property (weak, nonatomic) IBOutlet UILabel *levelLabel;
+@property (weak, nonatomic) IBOutlet UIImageView *bgImageView;
 
 @property (weak, nonatomic) IBOutlet UILabel *summaryLabel;
 @property (weak, nonatomic) IBOutlet UIButton *wantCertificationBtn;

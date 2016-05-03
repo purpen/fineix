@@ -27,9 +27,11 @@
 #import "SceneInfoViewController.h"
 #import "MyFansActionSheetViewController.h"
 #import "UserInfo.h"
+#import <SDWebImage/UIImageView+WebCache.h>
+#import "UIImage+Helper.h"
 
 
-@interface HomePageViewController ()<UICollectionViewDelegate,UICollectionViewDataSource,UICollectionViewDelegateFlowLayout,FBRequestDelegate>
+@interface HomePageViewController ()<UICollectionViewDelegate,UICollectionViewDataSource,UICollectionViewDelegateFlowLayout,FBRequestDelegate,UINavigationControllerDelegate,UIImagePickerControllerDelegate>
 {
     ChanelView *_chanelV;
     NSMutableArray *_fiuSceneList;
@@ -42,7 +44,13 @@
     int _totalM;
     UserInfo *_model;
 }
+
+@property(nonatomic,strong) UILabel *tipLabel;
+@property(nonatomic,strong) UITapGestureRecognizer *myTap;
+
 @end
+
+static NSString *const IconURL = @"/my/add_head_pic";
 
 @implementation HomePageViewController
 
@@ -100,10 +108,27 @@
         [request startRequestSuccess:^(FBRequest *request, id result) {
             NSLog(@"result %@",result);
             NSArray * fiuSceneArr = [[result valueForKey:@"data"] valueForKey:@"rows"];
+            int m = _n;
+            if (_n == m) {
+                [_fiuSceneList removeAllObjects];
+                [_fiuSceneIdList removeAllObjects];
+            }
             for (NSDictionary * fiuSceneDic in fiuSceneArr) {
                 FiuSceneRow * fiuSceneModel = [[FiuSceneRow alloc] initWithDictionary:fiuSceneDic];
                 [_fiuSceneList addObject:fiuSceneModel];
                 [_fiuSceneIdList addObject:[NSString stringWithFormat:@"%zi", fiuSceneModel.idField]];
+            }
+            if (_fiuSceneList.count == 0) {
+                NSLog(@"没有情景");
+                [self.view addSubview:self.tipLabel];
+                _tipLabel.text = @"您还没有创建情景";
+                [_tipLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+                    make.size.mas_equalTo(CGSizeMake(200, 30));
+                    make.centerX.mas_equalTo(self.view.mas_centerX);
+                    make.top.mas_equalTo(self.view.mas_top).with.offset(350);
+                }];
+            }else{
+                [self.tipLabel removeFromSuperview];
             }
             [self.myCollectionView reloadData];
             _n = [[[result objectForKey:@"data"] objectForKey:@"current_page"] intValue];
@@ -124,12 +149,28 @@
         [request startRequestSuccess:^(FBRequest *request, id result) {
             NSLog(@"result %@",result);
             NSArray * sceneArr = [[result valueForKey:@"data"] valueForKey:@"rows"];
-            
+            int m = _m;
+            if (_m == m) {
+                [_sceneListMarr removeAllObjects];
+                [_sceneIdMarr removeAllObjects];
+            }
             for (NSDictionary * sceneDic in sceneArr) {
                 HomeSceneListRow * homeSceneModel = [[HomeSceneListRow alloc] initWithDictionary:sceneDic];
                 [_sceneListMarr addObject:homeSceneModel];
                 [_sceneIdMarr addObject:[NSString stringWithFormat:@"%zi", homeSceneModel.idField]];
                 }
+            if (_sceneListMarr.count == 0) {
+                NSLog(@"没有情景");
+                [self.view addSubview:self.tipLabel];
+                _tipLabel.text = @"您还没有创建场景";
+                [_tipLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+                    make.size.mas_equalTo(CGSizeMake(200, 30));
+                    make.centerX.mas_equalTo(self.view.mas_centerX);
+                    make.top.mas_equalTo(self.view.mas_top).with.offset(350);
+                }];
+            }else{
+                [self.tipLabel removeFromSuperview];
+            }
             [self.myCollectionView reloadData];
             _m = [[[result objectForKey:@"data"] objectForKey:@"current_page"] intValue];
             _totalM = [[[result objectForKey:@"data"] objectForKey:@"total_page"] intValue];
@@ -146,6 +187,16 @@
     }
 }
 
+
+
+-(UILabel *)tipLabel{
+    if (!_tipLabel) {
+        _tipLabel = [[UILabel alloc] init];
+        _tipLabel.textAlignment = NSTextAlignmentCenter;
+        _tipLabel.font = [UIFont systemFontOfSize:13];
+    }
+    return _tipLabel;
+}
 
 //  判断是否为最后一条数据
 - (void)requestIsLastData:(UICollectionView *)table currentPage:(NSInteger )current withTotalPage:(NSInteger)total {
@@ -188,6 +239,7 @@
 
 -(void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
+    [[UIApplication sharedApplication] setStatusBarHidden:NO withAnimation:(UIStatusBarAnimationSlide)];
     self.navigationController.navigationBarHidden = YES;
     self.tabBarController.tabBar.hidden = YES;
     
@@ -208,7 +260,25 @@
         _chanelV.focusNumLabel.text = [NSString stringWithFormat:@"%@",dataDict[@"follow_count"]];
         _chanelV.fansNumLabel.text = [NSString stringWithFormat:@"%@",dataDict[@"fans_count"]];
         [SVProgressHUD dismiss];
-        _model = [UserInfo mj_objectWithKeyValues:dataDict];
+        if (self.isMySelf) {
+            UserInfo *userInfo = [UserInfo mj_objectWithKeyValues:[result objectForKey:@"data"]];
+            userInfo.head_pic_url = [result objectForKey:@"data"][@"head_pic_url"];
+            NSLog(@"头图 %@",[result objectForKey:@"data"][@"head_pic_url"]);
+            [userInfo saveOrUpdate];
+            [userInfo updateUserInfoEntity];
+            NSLog(@"%@",userInfo);
+            UserInfoEntity *entity = [UserInfoEntity defaultUserInfoEntity];
+            entity.isLogin = YES;
+            //背景图
+        }else{
+            _model = [UserInfo mj_objectWithKeyValues:dataDict];
+            if (![[result objectForKey:@"data"][@"head_pic_url"] isKindOfClass:[NSNull class]]) {
+                _model.head_pic_url = [result objectForKey:@"data"][@"head_pic_url"];
+            }
+            if (![[result objectForKey:@"data"][@"is_love"] isKindOfClass:[NSNull class]]) {
+                _model.is_love = [result objectForKey:@"data"][@"is_love"];
+            }
+        }
         [self.myCollectionView reloadData];
     } failure:^(FBRequest *request, NSError *error) {
         [SVProgressHUD showErrorWithStatus:@"加载失败"];
@@ -237,8 +307,7 @@
 -(void)signleTap3:(UITapGestureRecognizer*)sender{
     NSLog(@"跳转到我的主页的粉丝的界面");
     MyFansViewController *view = [[MyFansViewController alloc] init];
-    UserInfoEntity *entity = [UserInfoEntity defaultUserInfoEntity];
-    view.userId = entity.userId;
+    view.userId = self.userId;
     [self.navigationController pushViewController:view animated:YES];
 }
 
@@ -272,11 +341,22 @@
 }
 
 -(UIEdgeInsets)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout insetForSectionAtIndex:(NSInteger)section{
-    if (section == 0) {
-        return UIEdgeInsetsMake(0, 0, 0, 0);;
-    }else{
-        return UIEdgeInsetsMake(3, 5, 0, 5);
+    if ([self.type isEqualToNumber:@1]) {
+        if (section == 0) {
+            return UIEdgeInsetsMake(0, 0, 0, 0);
+        }else{
+            return UIEdgeInsetsMake(3, 5, 0, 5);
+        }
+    }else if ([self.type isEqualToNumber:@2]){
+        if (section == 0) {
+            return UIEdgeInsetsMake(0, 0, 0, 0);
+        }else if(section == 1){
+            return UIEdgeInsetsMake(3, 5, 0, 5);
+        }else if (section == 2){
+            return UIEdgeInsetsMake(3, 0, 5, 0);
+        }
     }
+    return UIEdgeInsetsMake(0, 0, 0, 0);
 }
 
 -(NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView{
@@ -288,9 +368,11 @@
     if (indexPath.section == 0) {
         if (self.isMySelf) {
             BackgroundCollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"BackgroundCollectionViewCell" forIndexPath:indexPath];
+            [cell.bgImageView addGestureRecognizer:self.myTap];
             [cell.backBtn addTarget:self action:@selector(clickBackBtn:) forControlEvents:UIControlEventTouchUpInside];
             [cell.editBtn addTarget:self action:@selector(clickEditBtn:) forControlEvents:UIControlEventTouchUpInside];
             [cell setUI];
+            cell.backgroundColor = [UIColor redColor];
             return cell;
         }else{
             OtherCollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"OtherCollectionViewCell" forIndexPath:indexPath];
@@ -298,6 +380,7 @@
             [cell.moreBtn addTarget:self action:@selector(clickMoreBtn:) forControlEvents:UIControlEventTouchUpInside];
             [cell.focusOnBtn addTarget:self action:@selector(clickFocusBtn:) forControlEvents:UIControlEventTouchUpInside];
             [cell.directMessages addTarget:self action:@selector(clickMessageBtn:) forControlEvents:UIControlEventTouchUpInside];
+            
             [cell setUIWithModel:_model];
             return cell;
         }
@@ -312,10 +395,12 @@
         if ([self.type isEqualToNumber:@2]) {
             ScenceListCollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"ScenceListCollectionViewCell" forIndexPath:indexPath];
             [cell setUIWithModel:_sceneListMarr[indexPath.row]];
+            cell.backgroundColor = [UIColor redColor];
             return cell;
         }else if([self.type isEqualToNumber:@1]){
             AllSceneCollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"AllSceneCollectionViewCell" forIndexPath:indexPath];
-            [cell setAllFiuSceneListData:_fiuSceneList[indexPath.row]];
+           [cell setAllFiuSceneListData:_fiuSceneList[indexPath.row]];
+
             return cell;
         }
         
@@ -323,6 +408,8 @@
     return nil;
 
 }
+
+
 
 -(void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath{
     if (indexPath.section == 2) {
@@ -369,6 +456,72 @@
 }
 
 
+
+-(UITapGestureRecognizer *)myTap{
+    if (!_myTap) {
+        _myTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(clickMyTap:)];
+        _myTap.numberOfTapsRequired = 1;
+        _myTap.numberOfTouchesRequired = 1;
+    }
+    return _myTap;
+}
+
+
+-(void)clickMyTap:(UITapGestureRecognizer*)gesture{
+    UIAlertController *alertC = [UIAlertController alertControllerWithTitle:@"更换背景图" message:nil preferredStyle:UIAlertControllerStyleActionSheet];
+    //判断是否支持相机。模拟器没有相机
+    if ([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera]) {
+        UIAlertAction *cameraAction = [UIAlertAction actionWithTitle:@"拍照" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+            //调取相机
+            UIImagePickerController *picker = [[UIImagePickerController alloc] init];
+            picker.delegate = self;
+            picker.allowsEditing = YES;
+            picker.sourceType = UIImagePickerControllerSourceTypeCamera;
+            [self presentViewController:picker animated:YES completion:nil];
+        }];
+        [alertC addAction:cameraAction];
+    }
+    UIAlertAction *phontoAction = [UIAlertAction actionWithTitle:@"从相册选择" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+        //调取相册
+        UIImagePickerController *picker = [[UIImagePickerController alloc] init];
+        picker.delegate = self;
+        picker.allowsEditing = YES;
+        picker.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
+        [self presentViewController:picker animated:YES completion:nil];
+    }];
+    UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
+        [alertC dismissViewControllerAnimated:YES completion:nil];
+    }];
+    [alertC addAction:phontoAction];
+    [alertC addAction:cancelAction];
+    [self presentViewController:alertC animated:YES completion:nil];
+}
+
+-(void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary<NSString *,id> *)info{
+    UIImage * editedImg = [info objectForKey:UIImagePickerControllerEditedImage];
+    NSData * iconData = UIImageJPEGRepresentation([UIImage fixOrientation:editedImg] , 0.5);
+    //        NSData * iconData = UIImageJPEGRepresentation(editedImg , 0.5);
+    [self uploadIconWithData:iconData];
+    [picker dismissViewControllerAnimated:YES completion:nil];
+    
+}
+
+- (void)imagePickerControllerDidCancel:(UIImagePickerController *)picker {
+    [picker dismissViewControllerAnimated:YES completion:nil];
+}
+
+//上传背景图
+- (void)uploadIconWithData:(NSData *)iconData
+{
+    NSString * icon64Str = [iconData base64EncodedStringWithOptions:NSDataBase64Encoding64CharacterLineLength];
+    NSDictionary * params = @{@"type": @3, @"tmp": icon64Str};
+    FBRequest * request = [FBAPI postWithUrlString:IconURL requestDictionary:params delegate:self];
+    request.flag = IconURL;
+    [request startRequest];
+    [SVProgressHUD showWithMaskType:SVProgressHUDMaskTypeClear];
+}
+
+
 -(void)requestSucess:(FBRequest *)request result:(id)result{
     if ([request.flag isEqualToString:@"/follow/ajax_follow"]){
         if ([result objectForKey:@"success"]) {
@@ -383,6 +536,23 @@
             [SVProgressHUD showErrorWithStatus:@"连接失败"];
         }
     }
+    
+    if ([request.flag isEqualToString:IconURL]) {
+        NSString * message = [result objectForKey:@"message"];
+        if ([result objectForKey:@"success"]) {
+            NSLog(@"背景图 %@",result);
+            NSString * fileUrl = [[result objectForKey:@"data"] objectForKey:@"head_pic_url"];
+            UserInfoEntity * userEntity = [UserInfoEntity defaultUserInfoEntity];
+            userEntity.head_pic_url = fileUrl;
+            [userEntity updateUserInfo];
+            [self.myCollectionView reloadSections:[NSIndexSet indexSetWithIndex:0]];
+            
+            [SVProgressHUD showSuccessWithStatus:message];
+        } else {
+            [SVProgressHUD showInfoWithStatus:message];
+        }
+    }
+
 }
 
 
@@ -405,6 +575,7 @@
     DirectMessagesViewController *vc = [story instantiateViewControllerWithIdentifier:@"DirectMessagesViewController"];
     vc.nickName = _model.nickname;
     vc.userId = _model.userId;
+    vc.otherIconImageUrl = _model.mediumAvatarUrl;
     [self.navigationController pushViewController:vc animated:YES];
 }
 

@@ -29,6 +29,7 @@
 
 @end
 NSString *thirdRegistrationBindingMobilePhone = @"/auth/third_register_with_phone";
+static NSString *const thirdRegisteredNotBinding = @"/auth/third_register_without_phone";//第三方快捷注册(不绑定手机号)接口
 @implementation BindIngViewController
 
 - (void)viewDidLoad {
@@ -118,6 +119,56 @@ NSString *thirdRegistrationBindingMobilePhone = @"/auth/third_register_with_phon
 
 - (IBAction)cancelBtn:(UIButton *)sender {
      [self dismissViewControllerAnimated:YES completion:nil];
+}
+
+- (IBAction)loginBtn:(UIButton *)sender {
+    //发送请求来存储用户信息
+    NSDictionary *params;
+    if ([self.type isEqualToNumber:@1]) {
+        //如果是微信需要snsAccount.unionId
+        params = @{
+                   @"third_source":self.type,
+                   @"oid":self.snsAccount.usid,
+                   @"union_id":self.snsAccount.unionId,
+                   @"access_token":self.snsAccount.accessToken,
+                   @"nickname":self.snsAccount.userName,
+                   @"avatar_url":self.snsAccount.iconURL,
+                   @"from_to":@1
+                   };
+        
+    }
+    //如果不是微信不需要snsAccount.unionId
+    else{
+        params = @{
+                   @"third_source":self.type,
+                   @"oid":self.snsAccount.usid,
+                   //@"union_id":snsAccount.unionId,
+                   @"access_token":self.snsAccount.accessToken,
+                   @"nickname":self.snsAccount.userName,
+                   @"avatar_url":self.snsAccount.iconURL,
+                   @"from_to":@1
+                   };
+        
+    }
+    FBRequest *request = [FBAPI postWithUrlString:thirdRegisteredNotBinding requestDictionary:params delegate:self];
+    [request startRequestSuccess:^(FBRequest *request, id result) {
+        //如果请求成功，并获取用户信息来更新当前用户信息
+        NSDictionary *dataDic = [result objectForKey:@"data"];
+        NSLog(@"dataDict  %@",dataDic);
+        UserInfo *info = [UserInfo mj_objectWithKeyValues:dataDic];
+        [info saveOrUpdate];
+        [info updateUserInfoEntity];
+        UserInfoEntity *entity = [UserInfoEntity defaultUserInfoEntity];
+        entity.isLogin = YES;
+        [SVProgressHUD showSuccessWithStatus:NSLocalizedString(@"registeredSuccessfully", nil)];
+        //跳转到推荐界面
+        SubscribeInterestedCollectionViewController *subscribeVC = [[SubscribeInterestedCollectionViewController alloc] init];
+        [self.navigationController pushViewController:subscribeVC animated:YES];
+    } failure:^(FBRequest *request, NSError *error) {
+        //如果请求失败提示失败信息
+        [SVProgressHUD showErrorWithStatus:error.localizedDescription];
+    }];
+
 }
 
 /*
