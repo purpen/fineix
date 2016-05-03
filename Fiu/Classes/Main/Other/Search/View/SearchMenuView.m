@@ -53,7 +53,7 @@
 #pragma mark - 导航底部条
 - (UILabel *)menuBottomline {
     if (!_menuBottomline) {
-        _menuBottomline = [[UILabel alloc] initWithFrame:CGRectMake((SCREEN_WIDTH / 3 / 2) - 20, 41, 50, 3)];
+        _menuBottomline = [[UILabel alloc] initWithFrame:CGRectMake((SCREEN_WIDTH / 3 / 2) - 20, 41, 53, 3)];
         _menuBottomline.backgroundColor = [UIColor colorWithHexString:fineixColor alpha:1];
     }
     return _menuBottomline;

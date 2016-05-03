@@ -149,11 +149,6 @@ static NSString *const URLTagS = @"/scene_tags/getlist";
 
 #pragma mark 上拉加载 & 下拉刷新
 - (void)addMJRefresh:(UITableView *)table {
-//    table.mj_header = [MJRefreshNormalHeader headerWithRefreshingBlock:^{
-//        self.currentpageNum = 0;
-//        [self networkSceneListData];
-//    }];
-    
     table.mj_footer = [MJRefreshAutoNormalFooter footerWithRefreshingBlock:^{
         if (self.currentpageNum < self.totalPageNum) {
             [self networkSceneListData];
@@ -188,6 +183,15 @@ static NSString *const URLTagS = @"/scene_tags/getlist";
         _discoverTableView.tableHeaderView = self.rollView;
         _discoverTableView.backgroundColor = [UIColor whiteColor];
         _discoverTableView.separatorStyle = UITableViewCellSeparatorStyleNone;
+        
+        _discoverTableView.mj_header = [MJRefreshNormalHeader headerWithRefreshingBlock:^{
+            [self clearMarrData];
+            [self networkRollImgData];
+            [self networkTagsListData];
+            [self networkFiuSceneData];
+            self.currentpageNum = 0;
+            [self networkSceneListData];
+        }];
     }
     return _discoverTableView;
 }
@@ -357,6 +361,15 @@ static NSString *const URLTagS = @"/scene_tags/getlist";
         _tagsList = [NSMutableArray array];
     }
     return _tagsList;
+}
+
+//
+- (void)clearMarrData {
+    [self.fiuSceneList removeAllObjects];
+    [self.fiuSceneIdList removeAllObjects];
+    [self.sceneList removeAllObjects];
+    [self.sceneIdList removeAllObjects];
+    [self.tagsList removeAllObjects];
 }
 
 - (void)viewWillDisappear:(BOOL)animated {

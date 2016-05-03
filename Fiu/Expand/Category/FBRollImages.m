@@ -33,6 +33,10 @@
     self.rollImageView.localizationImagesGroup = images;
 }
 
+- (void)setGoodsRollimageView:(GoodsInfoData *)model {
+    self.rollImageView.imageURLStringsGroup = model.bannerAsset;
+}
+
 - (SDCycleScrollView *)rollImageView {
     if (!_rollImageView) {
         _rollImageView = [[SDCycleScrollView alloc] init];
