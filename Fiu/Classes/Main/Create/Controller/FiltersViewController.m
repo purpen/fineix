@@ -150,7 +150,7 @@
     releaseVC.createType = self.createType;
     releaseVC.goodsTitle = @"测试商品1,测试商品2,测试商品3";
     releaseVC.goodsPrice = @"321,1829,2901";
-    releaseVC.goodsId = @"528202723738,952686366,1955665820";
+    releaseVC.goodsId = @"304,301,299";
     releaseVC.goodsX = @"43,32,65";
     releaseVC.goodsY = @"20,22,42";
     releaseVC.fSceneId = @"4";

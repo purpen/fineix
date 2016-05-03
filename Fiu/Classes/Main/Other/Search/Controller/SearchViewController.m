@@ -11,6 +11,13 @@
 #import "HomeSceneListRow.h"
 #import "FiuSceneInfoData.h"
 
+#import "AllSceneCollectionViewCell.h"
+#import "SceneListTableViewCell.h"
+#import "GoodsTableViewCell.h"
+
+#import "FiuSceneViewController.h"
+#import "GoodsInfoViewController.h"
+
 static NSString *const URLSearchList = @"/search/getlist";
 
 @interface SearchViewController ()
@@ -18,6 +25,7 @@ static NSString *const URLSearchList = @"/search/getlist";
 @pro_strong NSMutableArray      *   sceneList;      //  场景
 @pro_strong NSMutableArray      *   fiuSceneList;   //  情景
 @pro_strong NSMutableArray      *   goodsList;      //  商品
+@pro_strong NSMutableArray      *   goodsIdList;    //  商品id
 
 @end
 
@@ -45,24 +53,76 @@ static NSString *const URLSearchList = @"/search/getlist";
 #pragma mark - 网络请求
 #pragma mark 搜索场景
 - (void)networkSearchData:(NSString *)keyword withType:(NSString *)type {
+    [self clearMarrData];
+    
     [SVProgressHUD show];
+    
     self.searchListRequest = [FBAPI getWithUrlString:URLSearchList requestDictionary:@{@"evt":@"tag", @"size":@"8", @"page":@(self.currentpageNum + 1), @"t":type , @"q":keyword} delegate:self];
+    
     [self.searchListRequest startRequestSuccess:^(FBRequest *request, id result) {
-        NSLog(@"搜索%@", result);
-        if ([type isEqualToString:@"7"]) {
+        NSLog(@" 关键字：%@",@{@"evt":@"tag", @"size":@"8", @"page":@(self.currentpageNum + 1), @"t":type , @"q":keyword});
+        NSLog(@"搜索 -- %@", result);
+        if ([type isEqualToString:@"10"]) {
             NSArray * goodsArr = [[result valueForKey:@"data"] valueForKey:@"rows"];
             for (NSDictionary * goodsDic in goodsArr) {
                 GoodsRow * goodsModel = [[GoodsRow alloc] initWithDictionary:goodsDic];
                 [self.goodsList addObject:goodsModel];
+                [self.goodsIdList addObject:[NSString stringWithFormat:@"%zi", goodsModel.idField]];
             }
             NSLog(@"＝＝＝＝＝＝＝ 商品：%@", self.goodsList);
-            [self.resultsView.goodsTable reloadData];
+            [self.goodsTable reloadData];
             self.currentpageNum = [[[result valueForKey:@"data"] valueForKey:@"current_page"] integerValue];
             self.totalPageNum = [[[result valueForKey:@"data"] valueForKey:@"total_page"] integerValue];
             if (self.totalPageNum > 1) {
-                [self requestIsLastData:self.resultsView.goodsTable currentPage:self.currentpageNum withTotalPage:self.totalPageNum];
+                [self requestIsLastData:self.goodsTable currentPage:self.currentpageNum withTotalPage:self.totalPageNum];
             }
-
+        
+        } else if ([type isEqualToString:@"9"]) {
+            NSArray * sceneArr = [[result valueForKey:@"data"] valueForKey:@"rows"];
+            for (NSDictionary * sceneDic in sceneArr) {
+                HomeSceneListRow * sceneModel = [[HomeSceneListRow alloc] initWithDictionary:sceneDic];
+                [self.sceneList addObject:sceneModel];
+            }
+            NSLog(@"＝＝＝＝＝＝＝ 场景：%@", self.sceneList);
+            [self.sceneTable reloadData];
+            self.currentpageNum = [[[result valueForKey:@"data"] valueForKey:@"current_page"] integerValue];
+            self.totalPageNum = [[[result valueForKey:@"data"] valueForKey:@"total_page"] integerValue];
+            if (self.totalPageNum > 1) {
+                [self requestIsLastData:self.sceneTable currentPage:self.currentpageNum withTotalPage:self.totalPageNum];
+            }
+        
+        } else if ([type isEqualToString:@"8"]) {
+            NSArray * fSceneArr = [[result valueForKey:@"data"] valueForKey:@"rows"];
+            for (NSDictionary * fSceneDic in fSceneArr) {
+                FiuSceneInfoData * fSceneModel = [[FiuSceneInfoData alloc] initWithDictionary:fSceneDic];
+                [self.fiuSceneList addObject:fSceneModel];
+            }
+            NSLog(@"＝＝＝＝＝＝＝ 情景：%@", self.fiuSceneList);
+            [self.fSceneCollection reloadData];
+            self.currentpageNum = [[[result valueForKey:@"data"] valueForKey:@"current_page"] integerValue];
+            self.totalPageNum = [[[result valueForKey:@"data"] valueForKey:@"total_page"] integerValue];
+            //  判断是否为最后一条数据
+            BOOL isLastPage = (self.currentpageNum == self.totalPageNum);
+            if (!isLastPage) {
+                if (self.fSceneCollection.mj_footer.state == MJRefreshStateNoMoreData) {
+                    [self.fSceneCollection.mj_footer resetNoMoreData];
+                }
+            }
+            if (self.currentpageNum == self.totalPageNum == 1) {
+                self.fSceneCollection.mj_footer.state = MJRefreshStateNoMoreData;
+                self.fSceneCollection.mj_footer.hidden = true;
+            }
+            if ([self.fSceneCollection.mj_header isRefreshing]) {
+                [self.fSceneCollection.mj_header endRefreshing];
+            }
+            if ([self.fSceneCollection.mj_footer isRefreshing]) {
+                if (isLastPage) {
+                    [self.fSceneCollection.mj_footer endRefreshingWithNoMoreData];
+                } else  {
+                    [self.fSceneCollection.mj_footer endRefreshing];
+                }
+            }
+            
         }
         
         [SVProgressHUD dismiss];
@@ -98,20 +158,22 @@ static NSString *const URLSearchList = @"/search/getlist";
     [SVProgressHUD dismiss];
 }
 
-#pragma mark 上拉加载 & 下拉刷新
+#pragma mark 上拉加载
 - (void)addMJRefresh:(UITableView *)table {
-//    table.mj_header = [MJRefreshNormalHeader headerWithRefreshingBlock:^{
-//        self.currentpageNum = 0;
-//        [self networkRequestData];
-//    }];
-//    
-//    table.mj_footer = [MJRefreshAutoNormalFooter footerWithRefreshingBlock:^{
-//        if (self.currentpageNum < self.totalPageNum) {
-//            [self networkRequestData];
-//        } else {
-//            [table.mj_footer endRefreshing];
-//        }
-//    }];
+    table.mj_footer = [MJRefreshAutoNormalFooter footerWithRefreshingBlock:^{
+        if (self.currentpageNum < self.totalPageNum) {
+            if (self.searchType == 0) {
+                [self networkSearchData:self.searchView.searchInputBox.text withType:@"9"];
+            } else if (self.searchType == 1) {
+                [self networkSearchData:self.searchView.searchInputBox.text withType:@"8"];
+            } else if (self.searchType == 2) {
+                [self networkSearchData:self.searchView.searchInputBox.text withType:@"10"];
+            }
+            
+        } else {
+            [table.mj_footer endRefreshing];
+        }
+    }];
 }
 
 #pragma mark - 设置视图UI 
@@ -127,17 +189,141 @@ static NSString *const URLSearchList = @"/search/getlist";
 - (void)searchRequest:(NSInteger)type withKeyword:(NSString *)keyword {
     [self changeMenuBtnState:type];
     [SVProgressHUD showInfoWithStatus:[NSString stringWithFormat:@"开始搜索：%@", keyword]];
-    
 }
 
 #pragma mark - 搜索结果视图
-- (SearchResultsRollView *)resultsView {
+- (UIScrollView *)resultsView {
     if (!_resultsView) {
-        _resultsView = [[SearchResultsRollView alloc] initWithFrame:CGRectMake(0, 108, SCREEN_WIDTH, SCREEN_HEIGHT - 108)];
-        [_resultsView setSearchResultTable:self.titleArr];
-        _resultsView.nav = self.navigationController;
+        _resultsView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 108, SCREEN_WIDTH, SCREEN_HEIGHT - 108)];
+        _resultsView.pagingEnabled = YES;
+        _resultsView.showsHorizontalScrollIndicator = NO;
+        _resultsView.showsVerticalScrollIndicator = NO;
+        _resultsView.backgroundColor = [UIColor whiteColor];
+        _resultsView.scrollEnabled = NO;
+        _resultsView.contentSize = CGSizeMake(SCREEN_WIDTH * 3, 0);
+        
+        [_resultsView addSubview:self.sceneTable];
+        [_resultsView addSubview:self.fSceneCollection];
+        [_resultsView addSubview:self.goodsTable];
     }
     return _resultsView;
+}
+
+#pragma mark - 场景
+- (UITableView *)sceneTable {
+    if (!_sceneTable) {
+        _sceneTable = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT - 108) style:(UITableViewStylePlain)];
+        _sceneTable.delegate = self;
+        _sceneTable.dataSource = self;
+        _sceneTable.showsVerticalScrollIndicator = NO;
+        _sceneTable.separatorStyle = UITableViewCellSeparatorStyleNone;
+        _sceneTable.backgroundColor = [UIColor whiteColor];
+        _sceneTable.tableFooterView = [UIView new];
+    }
+    return _sceneTable;
+}
+
+#pragma mark - 商品
+- (UITableView *)goodsTable {
+    if (!_goodsTable) {
+        _goodsTable = [[UITableView alloc] initWithFrame:CGRectMake(SCREEN_WIDTH * 2, 0, SCREEN_WIDTH, SCREEN_HEIGHT - 108) style:(UITableViewStylePlain)];
+        _goodsTable.delegate = self;
+        _goodsTable.dataSource = self;
+        _goodsTable.showsVerticalScrollIndicator = NO;
+        _goodsTable.backgroundColor = [UIColor whiteColor];
+        _goodsTable.separatorStyle = UITableViewCellSeparatorStyleNone;
+        _goodsTable.tableFooterView = [UIView new];
+    }
+    return _goodsTable;
+}
+
+#pragma mark - tableView
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+    if (tableView == self.sceneTable) {
+        return self.sceneList.count;
+    } else if (tableView == self.goodsTable) {
+        return self.goodsList.count;
+    }
+    return 0;
+}
+
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+    if (tableView == self.sceneTable) {
+        static NSString * SceneTablecellId = @"sceneTablecellId";
+        SceneListTableViewCell * cell = [tableView dequeueReusableCellWithIdentifier:SceneTablecellId];
+        if (!cell) {
+            cell = [[SceneListTableViewCell alloc] initWithStyle:(UITableViewCellStyleDefault) reuseIdentifier:SceneTablecellId];
+        }
+        [cell setHomeSceneListData:self.sceneList[indexPath.row]];
+        return cell;
+        
+    } else if (tableView == self.goodsTable) {
+        static NSString * GoodsTablecellId = @"goodsTablecellId";
+        GoodsTableViewCell * cell = [tableView dequeueReusableCellWithIdentifier:GoodsTablecellId];
+        if (!cell) {
+            cell = [[GoodsTableViewCell alloc] initWithStyle:(UITableViewCellStyleDefault) reuseIdentifier:GoodsTablecellId];
+        }
+        [cell setGoodsData:self.goodsList[indexPath.row]];
+        return cell;
+    }
+    
+    return nil;
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
+    if (tableView == self.sceneTable) {
+        return SCREEN_HEIGHT;
+    } else if (tableView == self.goodsTable) {
+        return 210;
+    }
+    return 0;
+}
+
+#pragma mark - 打开详情
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    if (tableView == self.goodsTable) {
+        GoodsInfoViewController * goodsInfoVC = [[GoodsInfoViewController alloc] init];
+        goodsInfoVC.goodsID = self.goodsIdList[indexPath.row];
+        [self.navigationController pushViewController:goodsInfoVC animated:YES];
+    }
+}
+
+#pragma mark - 情景
+- (UICollectionView *)fSceneCollection {
+    if (!_fSceneCollection) {
+        UICollectionViewFlowLayout * flowLayout = [[UICollectionViewFlowLayout alloc] init];
+        flowLayout.itemSize = CGSizeMake((SCREEN_WIDTH - 15)/2, (SCREEN_WIDTH - 15)/2 * 1.77);
+        flowLayout.sectionInset = UIEdgeInsetsMake(5, 5, 5, 5);
+        flowLayout.minimumInteritemSpacing = 5.0;
+        flowLayout.minimumLineSpacing = 5.0;
+        
+        _fSceneCollection = [[UICollectionView alloc] initWithFrame:CGRectMake(SCREEN_WIDTH * 1, 0, SCREEN_WIDTH, SCREEN_HEIGHT - 108) collectionViewLayout:flowLayout];
+        _fSceneCollection.delegate = self;
+        _fSceneCollection.dataSource = self;
+        _fSceneCollection.backgroundColor = [UIColor whiteColor];
+        _fSceneCollection.showsVerticalScrollIndicator = NO;
+        _fSceneCollection.showsHorizontalScrollIndicator = NO;
+        [_fSceneCollection registerClass:[AllSceneCollectionViewCell class] forCellWithReuseIdentifier:@"fSceneCollectionViewCellID"];
+    }
+    return _fSceneCollection;
+}
+
+#pragma mark  UICollectionViewDataSource
+- (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
+    return self.fiuSceneList.count;
+}
+
+- (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
+    static NSString * collectionViewCellId = @"fSceneCollectionViewCellID";
+    AllSceneCollectionViewCell * cell = [collectionView dequeueReusableCellWithReuseIdentifier:collectionViewCellId forIndexPath:indexPath];
+    [cell setAllFiuSceneListData:self.fiuSceneList[indexPath.row]];
+    return cell;
+}
+
+- (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
+    FiuSceneViewController * fiuSceneVC = [[FiuSceneViewController alloc] init];
+//    fiuSceneVC.fiuSceneId = self.allFiuSceneIdMarr[indexPath.row];
+    [self.navigationController pushViewController:fiuSceneVC animated:YES];
 }
 
 #pragma mark - 添加搜索框视图
@@ -158,10 +344,8 @@ static NSString *const URLSearchList = @"/search/getlist";
     } else if (self.searchType == 1) {
         [self networkSearchData:searchKeyword withType:@"8"];
     } else if (self.searchType == 2) {
-        [self networkSearchData:searchKeyword withType:@"7"];
+        [self networkSearchData:searchKeyword withType:@"10"];
     }
-
-    NSLog(@"搜索的关键字：%@  类型：%zi", searchKeyword, self.searchType);
 }
 
 #pragma mark - 导航菜单视图
@@ -177,7 +361,8 @@ static NSString *const URLSearchList = @"/search/getlist";
 #pragma mark - 改变菜单栏的状态
 - (void)SearchMenuSeleted:(NSInteger)index {
     [self searchRequest:index withKeyword:self.searchView.searchInputBox.text];
-    
+    self.searchType = index;
+    [self changeMenuBtnState:index];
 }
 
 //  改变搜索视图位置
@@ -223,6 +408,21 @@ static NSString *const URLSearchList = @"/search/getlist";
         _goodsList = [NSMutableArray array];
     }
     return _goodsList;
+}
+
+- (NSMutableArray *)goodsIdList {
+    if (!_goodsIdList) {
+        _goodsIdList = [NSMutableArray array];
+    }
+    return _goodsIdList;
+}
+
+//  清空数组
+- (void)clearMarrData {
+    [self.sceneList removeAllObjects];
+    [self.fiuSceneList removeAllObjects];
+    [self.goodsList removeAllObjects];
+    [self.goodsIdList removeAllObjects];
 }
 
 @end

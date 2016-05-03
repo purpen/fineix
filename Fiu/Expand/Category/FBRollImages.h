@@ -9,6 +9,7 @@
 #import <UIKit/UIKit.h>
 #import "SDCycleScrollView.h"
 #import "Fiu.h"
+#import "GoodsInfoData.h"
 
 @interface FBRollImages : UIView <SDCycleScrollViewDelegate>
 
@@ -21,5 +22,7 @@
 @property (strong, nonatomic) NSMutableArray                 *       typeMarr;
 
 - (void)setRollimageView;
+
+- (void)setGoodsRollimageView:(GoodsInfoData *)model;
 
 @end
