@@ -15,10 +15,12 @@
 #import "GoodsTableViewCell.h"
 #import "CategoryRow.h"
 #import "GoodsRow.h"
+#import "RollImageRow.h"
 
 static NSString *const URLTagS = @"/scene_tags/getlist";
 static NSString *const URLCategoryList = @"/category/getlist";
 static NSString *const URLFiuGoods = @"/scene_product/getlist";
+static NSString *const URLMallSlide = @"/gateway/slide";
 
 @interface MallViewController()
 
@@ -26,6 +28,7 @@ static NSString *const URLFiuGoods = @"/scene_product/getlist";
 @pro_strong NSMutableArray              *   categoryList;
 @pro_strong NSMutableArray              *   goodsList;
 @pro_strong NSMutableArray              *   goodsIdList;
+@pro_strong NSMutableArray              *   rollList;
 
 @end
 
@@ -41,14 +44,31 @@ static NSString *const URLFiuGoods = @"/scene_product/getlist";
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    [self networkRollImgData];
     [self networkTagsListData];
     [self networkCategoryListData];
     [self networkFiuGoodsData];
-    [self setMallViewUI];
     
 }
 
 #pragma mark - 网络请求
+#pragma mark 轮播图
+- (void)networkRollImgData {
+    self.rollImgRequest = [FBAPI getWithUrlString:URLMallSlide requestDictionary:@{@"name":@"app_fiu_product_index_slide"} delegate:self];
+    [self.rollImgRequest startRequestSuccess:^(FBRequest *request, id result) {
+        NSArray * rollArr = [[result valueForKey:@"data"] valueForKey:@"rows"];
+        for (NSDictionary * rollDic in rollArr) {
+            RollImageRow * rollModel = [[RollImageRow alloc] initWithDictionary:rollDic];
+            [self.rollList addObject:rollModel];
+        }
+        
+        [self.rollView setRollimageView:self.rollList];
+        
+    } failure:^(FBRequest *request, NSError *error) {
+        NSLog(@"%@", [error localizedDescription]);
+    }];
+}
+
 #pragma mark 标签列表
 - (void)networkTagsListData {
     self.tagsRequest = [FBAPI getWithUrlString:URLTagS requestDictionary:@{@"is_hot":@"1", @"sort":@"5", @"page":@"1", @"size":@"50"} delegate:self];
@@ -86,6 +106,8 @@ static NSString *const URLFiuGoods = @"/scene_product/getlist";
     [SVProgressHUD show];
     self.fiuGoodsRequest = [FBAPI getWithUrlString:URLFiuGoods requestDictionary:@{@"size":@"8", @"page":@(self.currentpageNum + 1), @"fine":@"1"} delegate:self];
     [self.fiuGoodsRequest startRequestSuccess:^(FBRequest *request, id result) {
+        [self setMallViewUI];
+        
         NSArray * goodsArr = [[result valueForKey:@"data"] valueForKey:@"rows"];
         for (NSDictionary * goodsDic in goodsArr) {
             GoodsRow * goodsModel = [[GoodsRow alloc] initWithDictionary:goodsDic];
@@ -101,7 +123,6 @@ static NSString *const URLFiuGoods = @"/scene_product/getlist";
             [self requestIsLastData:self.mallTableView currentPage:self.currentpageNum withTotalPage:self.totalPageNum];
         }
         [self.mallTableView reloadData];
-        NSLog(@"%@", self.goodsList);
         [SVProgressHUD dismiss];
         
     } failure:^(FBRequest *request, NSError *error) {
@@ -138,7 +159,7 @@ static NSString *const URLFiuGoods = @"/scene_product/getlist";
     [SVProgressHUD dismiss];
 }
 
-#pragma mark 上拉加载 & 下拉刷新
+#pragma mark 上拉加载
 - (void)addMJRefresh:(UITableView *)table {
     table.mj_footer = [MJRefreshAutoNormalFooter footerWithRefreshingBlock:^{
         if (self.currentpageNum < self.totalPageNum) {
@@ -160,7 +181,6 @@ static NSString *const URLFiuGoods = @"/scene_product/getlist";
     if (!_rollView) {
         _rollView = [[FBRollImages alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, Banner_height)];
         _rollView.navVC = self.navigationController;
-        [_rollView setRollimageView];
     }
     return _rollView;
 }
@@ -330,6 +350,13 @@ static NSString *const URLFiuGoods = @"/scene_product/getlist";
         _goodsIdList = [NSMutableArray array];
     }
     return _goodsIdList;
+}
+
+- (NSMutableArray *)rollList {
+    if (!_rollList) {
+        _rollList = [NSMutableArray array];
+    }
+    return _rollList;
 }
 
 

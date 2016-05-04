@@ -18,6 +18,7 @@
 
 static const NSInteger BuyBtnTag = 754;
 static NSString *const URLGoodsInfo = @"/scene_product/view";
+static NSString *const URLRecommendGoods = @"/scene_product/getlist";
 
 @interface GoodsInfoViewController ()
 
@@ -42,20 +43,32 @@ static NSString *const URLGoodsInfo = @"/scene_product/view";
 }
 
 #pragma mark - 网络请求
+#pragma mark 商品详情
 - (void)networkGoodsInfoData {
     [SVProgressHUD show];
     
     self.goodsInfoRequest = [FBAPI getWithUrlString:URLGoodsInfo requestDictionary:@{@"id":self.goodsID} delegate:self];
     [self.goodsInfoRequest startRequestSuccess:^(FBRequest *request, id result) {
-        NSLog(@"商品详情：%@", result);
         self.goodsInfo = [[GoodsInfoData alloc] initWithDictionary:[result valueForKey:@"data"]];
         [self setGoodsInfoVcUI];
         [self.rollImgView setGoodsRollimageView:self.goodsInfo];
         [self.goodsInfoTable reloadData];
+        NSLog(@"商品详情:%@", result);
         [SVProgressHUD dismiss];
         
     } failure:^(FBRequest *request, NSError *error) {
         NSLog(@"%@", [error localizedDescription]);
+    }];
+}
+
+#pragma mark 相关推荐
+- (void)networkRecommendGoodsData:(NSString *)ids {
+    self.reGoodsRequest = [FBAPI getWithUrlString:URLRecommendGoods requestDictionary:@{@"category_tag_ids":ids} delegate:self];
+    [self.reGoodsRequest startRequestSuccess:^(FBRequest *request, id result) {
+        NSLog(@"商品详情中的相关推荐：%@", result);
+        
+    } failure:^(FBRequest *request, NSError *error) {
+        [SVProgressHUD showErrorWithStatus:[error localizedDescription]];
     }];
 }
 
@@ -231,6 +244,8 @@ static NSString *const URLGoodsInfo = @"/scene_product/view";
     if (indexPath.section == 1) {
         GoodsBrandViewController * goodsBrandVC = [[GoodsBrandViewController alloc] init];
         goodsBrandVC.brandId = self.goodsInfo.brandId;
+        goodsBrandVC.brandBgImg = self.goodsInfo.coverUrl;
+        goodsBrandVC.titleLab.text = self.goodsInfo.brand.title;
         [self.navigationController pushViewController:goodsBrandVC animated:YES];
     }
 }

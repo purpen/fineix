@@ -23,7 +23,6 @@
 }
 
 - (void)setBrandInfoData:(BrandInfoData *)model {
-//    [self.brandBgImg downloadImage:model.coverUrl place:[UIImage imageNamed:@""]];
     [self.brandImg downloadImage:model.coverUrl place:[UIImage imageNamed:@""]];
     [self changeContentLabStyle:self.brandIntroduce withText:[NSString stringWithFormat:@"%@", model.des]];
 }
@@ -81,6 +80,12 @@
 - (UIImageView *)brandBgImg {
     if (!_brandBgImg) {
         _brandBgImg = [[UIImageView alloc] init];
+        _brandBgImg.contentMode = UIViewContentModeScaleAspectFill;
+        
+        UIView * view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 210)];
+        view.backgroundColor = [UIColor colorWithHexString:@"#000000" alpha:.3];
+        
+        [_brandBgImg addSubview:view];
     }
     return _brandBgImg;
 }
@@ -89,6 +94,8 @@
 - (UIImageView *)brandImg {
     if (!_brandImg) {
         _brandImg = [[UIImageView alloc] init];
+        _brandImg.layer.cornerRadius = 75/2;
+        _brandImg.layer.masksToBounds = YES;
     }
     return _brandImg;
 }

@@ -16,7 +16,6 @@
 @pro_strong UINavigationController      *   nav;
 @pro_strong UIScrollView                *   tagRollView;    //  标签滑动列表
 @pro_strong NSMutableArray              *   tagTitleArr;
-@pro_assign NSInteger                       searchType;     //  搜索类型
 
 - (void)setMallHotTagsData:(NSMutableArray *)model;
 

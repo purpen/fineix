@@ -36,7 +36,7 @@
         self.typeImg.image = [UIImage imageNamed:@"Goods_JD"];
     }
     
-    self.price.text = [NSString stringWithFormat:@"¥%.2f", model.salePrice];
+    self.price.text = [NSString stringWithFormat:@"¥%.2f", model.marketPrice];
     
     if (model.banner.count > 0) {
         for (NSInteger idx = 0; idx < model.banner.count; ++ idx) {

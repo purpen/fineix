@@ -58,7 +58,6 @@
 
 #pragma mark -
 - (void)setSceneInfoData:(SceneInfoData *)model {
-
     [self.bgImage downloadImage:model.coverUrl place:[UIImage imageNamed:@""]];
     [self titleTextStyle:[NSString stringWithFormat:@"%@", model.title] withBgColor:[UIColor colorWithPatternImage:[UIImage imageNamed:@"titleBg"]]];
     self.whereScene.text = [self abouText:self.whereScene withText:model.sceneTitle];
@@ -287,7 +286,7 @@
 //  标题文字的样式
 - (void)titleTextStyle:(NSString *)title withBgColor:(UIColor *)color {
     if ([title length] < 8) {
-        _titleText.font = [UIFont systemFontOfSize:48];
+        _titleText.font = [UIFont systemFontOfSize:46];
     } else if ([title length] >= 8 && [title length] < 13) {
         _titleText.font = [UIFont systemFontOfSize:30];
     } else if ([title length] > 13) {

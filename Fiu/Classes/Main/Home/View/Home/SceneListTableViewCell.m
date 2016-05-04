@@ -24,7 +24,6 @@
 
 #pragma mark -
 - (void)setHomeSceneListData:(HomeSceneListRow *)model {
-    NSLog(@"＝＝＝＝＝＝＝ 场景的标题：%@ -- 标题文字长度：%zi", model.title, [model.title length]);
     [self titleTextStyle:model.title];
     [self.bgImage downloadImage:model.coverUrl place:[UIImage imageNamed:@""]];
     [self.userHeader downloadImage:model.user.avatarUrl place:[UIImage imageNamed:@""]];
@@ -203,7 +202,7 @@
 //  标题文字的样式
 - (void)titleTextStyle:(NSString *)title {
     if ([title length] < 8) {
-        _titleText.font = [UIFont systemFontOfSize:48];
+        _titleText.font = [UIFont systemFontOfSize:46];
     } else if ([title length] >= 8 && [title length] < 13) {
         _titleText.font = [UIFont systemFontOfSize:30];
     } else if ([title length] >= 13) {

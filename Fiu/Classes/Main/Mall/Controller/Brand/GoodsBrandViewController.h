@@ -13,5 +13,7 @@
 @pro_strong UITableView             *   goodsBrandTable;
 @pro_strong FBRequest               *   brandRequest;
 @pro_strong NSString                *   brandId;
+@pro_strong UILabel                 *   titleLab;
+@pro_strong NSString                *   brandBgImg;
 
 @end

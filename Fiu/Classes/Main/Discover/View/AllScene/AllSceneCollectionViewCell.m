@@ -34,6 +34,15 @@
 - (UIImageView *)sceneImage {
     if (!_sceneImage) {
         _sceneImage = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, (SCREEN_WIDTH - 15)/2, (SCREEN_WIDTH - 15)/2 * 1.77)];
+        //  添加渐变层
+        CAGradientLayer * shadow = [CAGradientLayer layer];
+        shadow.startPoint = CGPointMake(0, 0);
+        shadow.endPoint = CGPointMake(0, 1);
+        shadow.colors = @[(__bridge id)[UIColor clearColor].CGColor,
+                          (__bridge id)[UIColor blackColor].CGColor];
+        shadow.locations = @[@(0.5f), @(1.5f)];
+        shadow.frame = _sceneImage.bounds;
+        [_sceneImage.layer addSublayer:shadow];
         
         [_sceneImage addSubview:self.locationIcon];
         [_locationIcon mas_makeConstraints:^(MASConstraintMaker *make) {

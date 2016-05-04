@@ -60,7 +60,6 @@ static NSString *const URLSearchList = @"/search/getlist";
     self.searchListRequest = [FBAPI getWithUrlString:URLSearchList requestDictionary:@{@"evt":@"tag", @"size":@"8", @"page":@(self.currentpageNum + 1), @"t":type , @"q":keyword} delegate:self];
     
     [self.searchListRequest startRequestSuccess:^(FBRequest *request, id result) {
-        NSLog(@" 关键字：%@",@{@"evt":@"tag", @"size":@"8", @"page":@(self.currentpageNum + 1), @"t":type , @"q":keyword});
         NSLog(@"搜索 -- %@", result);
         if ([type isEqualToString:@"10"]) {
             NSArray * goodsArr = [[result valueForKey:@"data"] valueForKey:@"rows"];

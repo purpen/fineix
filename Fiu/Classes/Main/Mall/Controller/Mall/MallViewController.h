@@ -13,6 +13,7 @@
 
 @interface MallViewController : FBViewController <FBNavigationBarItemsDelegate, UITableViewDelegate, UITableViewDataSource>
 
+@pro_strong FBRequest               *   rollImgRequest;
 @pro_strong FBRequest               *   tagsRequest;
 @pro_strong FBRequest               *   categoryRequest;
 @pro_strong FBRequest               *   fiuGoodsRequest;

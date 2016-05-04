@@ -25,12 +25,13 @@
     if (!_suFiuBtn) {
         _suFiuBtn = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 44)];
         _suFiuBtn.backgroundColor = [UIColor whiteColor];
-        [_suFiuBtn setTitle:@"＋订阅此情景 " forState:(UIControlStateNormal)];
+        [_suFiuBtn setTitle:@"＋订阅情景 " forState:(UIControlStateNormal)];
+        [_suFiuBtn setTitle:@" 已订阅" forState:(UIControlStateSelected)];
         [_suFiuBtn setTitleColor:[UIColor colorWithHexString:fineixColor] forState:(UIControlStateNormal)];
         _suFiuBtn.titleLabel.font = [UIFont systemFontOfSize:16];
         [_suFiuBtn setImage:[UIImage imageNamed:@"Su_FScene"] forState:(UIControlStateNormal)];
+        [_suFiuBtn setImage:[UIImage imageNamed:@"Su_FScene_Selected"] forState:(UIControlStateSelected)];
         [_suFiuBtn setImageEdgeInsets:(UIEdgeInsetsMake(0, -10, 0, 0))];
-        [_suFiuBtn addTarget:self action:@selector(suFiuBtnClick) forControlEvents:(UIControlEventTouchUpInside)];
     }
     return _suFiuBtn;
 }
@@ -44,9 +45,5 @@
     return _line;
 }
 
-//  订阅情景
-- (void)suFiuBtnClick {
-    NSLog(@"－－－－－＝＝＝＝＝＝－－－－订阅此情景");
-}
 
 @end
