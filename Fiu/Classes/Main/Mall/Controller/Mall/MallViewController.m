@@ -227,7 +227,7 @@ static NSString *const URLMallSlide = @"/gateway/slide";
             static NSString * mallGoodsTagCellId = @"mallGoodsTagCellId";
             FiuTagTableViewCell * cell = [tableView dequeueReusableCellWithIdentifier:mallGoodsTagCellId];
             cell = [[FiuTagTableViewCell alloc] initWithStyle:(UITableViewCellStyleDefault) reuseIdentifier:mallGoodsTagCellId];
-            [cell setHotTagsData:self.tagsList];
+            [cell setMallHotTagsData:self.tagsList];
             cell.nav = self.navigationController;
             return cell;
             

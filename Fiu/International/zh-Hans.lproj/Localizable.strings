@@ -40,6 +40,7 @@
 "GoodsCarVcTitle" = "购物车";
 "SubscribeVcTitle" = "订阅";
 "CityVcTitle" = "选择城市";
+"ReportVcTitle" = "举报";
 
 //  提示信息
 "netError" = "网络连接错误";

@@ -55,7 +55,7 @@
 - (UILabel *)promptLab {
     if (!_promptLab) {
         _promptLab = [[UILabel alloc] init];
-        _promptLab.text = @"你的购物车里面还没有产品";
+        _promptLab.text = @"购物车又空啦，回“品”入点新货吧";
         _promptLab.textColor = [UIColor colorWithHexString:titleColor];
         _promptLab.font = [UIFont systemFontOfSize:12];
         _promptLab.textAlignment = NSTextAlignmentCenter;

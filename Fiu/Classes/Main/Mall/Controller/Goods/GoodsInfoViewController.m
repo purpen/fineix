@@ -16,7 +16,6 @@
 #import "GoodsCarViewController.h"
 #import "GoodsInfoData.h"
 
-static const NSInteger BuyBtnTag = 754;
 static NSString *const URLGoodsInfo = @"/scene_product/view";
 static NSString *const URLRecommendGoods = @"/scene_product/getlist";
 
@@ -86,42 +85,29 @@ static NSString *const URLRecommendGoods = @"/scene_product/getlist";
     
 }
 
-#pragma mark - 去购买&加入购物车
+#pragma mark - 去购买
 - (UIView *)buyView {
     if (!_buyView) {
         _buyView = [[UIView alloc] init];
-        if (self.goodsInfo.kind == 1) {
-        NSArray * btnTitleArr = @[NSLocalizedString(@"addGoodsCar", nil), NSLocalizedString(@"buyingGoods", nil)];
-        NSArray * btnBgColor = @[@"DB9E18", @"BE8914"];
-        for (NSInteger idx = 0; idx < 2; ++ idx) {
-            UIButton * buyBtn = [[UIButton alloc] initWithFrame:CGRectMake((SCREEN_WIDTH / 2) * idx, 0, SCREEN_WIDTH / 2, 44)];
-            [buyBtn setTitle:btnTitleArr[idx] forState:(UIControlStateNormal)];
-            [buyBtn setTitleColor:[UIColor whiteColor] forState:(UIControlStateNormal)];
-            [buyBtn setBackgroundColor:[UIColor colorWithHexString:btnBgColor[idx]]];
-            buyBtn.titleLabel.font = [UIFont systemFontOfSize:Font_InfoTitle];
-            buyBtn.tag = BuyBtnTag + idx;
-            [buyBtn addTarget:self action:@selector(buyCarBtnClick:) forControlEvents:(UIControlEventTouchUpInside)];
-             [_buyView addSubview:buyBtn];
-            }
-        
-        } else if (self.goodsInfo.kind == 2) {
-            UIButton * gobuyBtn = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 44)];
-            [gobuyBtn setTitle:NSLocalizedString(@"goBuyGoods", nil) forState:(UIControlStateNormal)];
-            [gobuyBtn setTitleColor:[UIColor whiteColor] forState:(UIControlStateNormal)];
-            gobuyBtn.titleLabel.font = [UIFont systemFontOfSize:Font_InfoTitle];
-            [_buyView addSubview:gobuyBtn];
-        }
+        UIButton * gobuyBtn = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 44)];
+        [gobuyBtn setTitle:NSLocalizedString(@"goBuyGoods", nil) forState:(UIControlStateNormal)];
+        gobuyBtn.backgroundColor = [UIColor colorWithHexString:fineixColor];
+        [gobuyBtn setTitleColor:[UIColor whiteColor] forState:(UIControlStateNormal)];
+        gobuyBtn.titleLabel.font = [UIFont systemFontOfSize:Font_InfoTitle];
+        [gobuyBtn addTarget:self action:@selector(buyCarBtnClick) forControlEvents:(UIControlEventTouchUpInside)];
+        [_buyView addSubview:gobuyBtn];
     }
     return _buyView;
 }
 
-- (void)buyCarBtnClick:(UIButton *)button {
-    if (button.tag == BuyBtnTag) {
-        NSLog(@"————————————————————————————加入购物车");
-        
-    } else if (button.tag == BuyBtnTag + 1) {
-        NSLog(@"————————————————————————————立即购买");
+- (void)buyCarBtnClick {
+    if (self.goodsInfo.kind == 1) {
+        NSLog(@"————————————————————————————去购买 太火鸟");
+    
+    } else if (self.goodsInfo.kind == 2) {
+        NSLog(@"————————————————————————————去购买 第三方 %@", self.goodsInfo.link);
     }
+    
 }
 
 #pragma mark - 轮播图
@@ -149,7 +135,7 @@ static NSString *const URLRecommendGoods = @"/scene_product/getlist";
 
 #pragma mark - tableViewDelegate & DataSource
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-    return 5;
+    return 4;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
@@ -176,15 +162,6 @@ static NSString *const URLRecommendGoods = @"/scene_product/getlist";
         return cell;
         
     } else if (indexPath.section == 2) {
-        static NSString * InfoGoodsHighlightsCellId = @"InfoGoodsHighlightsCellId";
-        InfoGoodsHighlightsTableViewCell * cell = [tableView dequeueReusableCellWithIdentifier:InfoGoodsHighlightsCellId];
-        if (!cell) {
-            cell = [[InfoGoodsHighlightsTableViewCell alloc] initWithStyle:(UITableViewCellStyleDefault) reuseIdentifier:InfoGoodsHighlightsCellId];
-        }
-        [cell setGoodsInfoData:self.goodsInfo];
-        return cell;
-        
-    } else if (indexPath.section == 3) {
         static NSString * InfoUseSceneCellId = @"InfoUseSceneCellId";
         InfoUseSceneTableViewCell * cell = [tableView dequeueReusableCellWithIdentifier:InfoUseSceneCellId];
         if (!cell) {
@@ -193,7 +170,7 @@ static NSString *const URLRecommendGoods = @"/scene_product/getlist";
         [cell setUI:@[@"午后的星巴克时光", @"长城脚下的巨人", @"极地的阳光", @"最美的不是下雨天，是与你躲雨的屋檐"]];
         return cell;
         
-    } else if (indexPath.section == 4) {
+    } else if (indexPath.section == 3) {
         static NSString * InfoRecommendCellId = @"InfoUseSceneCellId";
         InfoRecommendTableViewCell * cell = [tableView dequeueReusableCellWithIdentifier:InfoRecommendCellId];
         if (!cell) {
@@ -228,12 +205,8 @@ static NSString *const URLRecommendGoods = @"/scene_product/getlist";
     } else if (indexPath.section == 1) {
         return 75;
     } else if (indexPath.section == 2) {
-        InfoGoodsHighlightsTableViewCell * cell = [[InfoGoodsHighlightsTableViewCell alloc] init];
-        [cell getContentCellHeight:self.goodsInfo.descriptionField];
-        return cell.cellHeight;
-    } else if (indexPath.section == 3) {
         return 90;
-    } else if (indexPath.section == 4) {
+    } else if (indexPath.section == 3) {
         return 280;
     }
     return 100;

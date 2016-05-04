@@ -12,6 +12,7 @@
 
 @interface FBAlertViewController : UIViewController
 
+@pro_strong NSString        *   targetId;
 @pro_strong UIView          *   alertView;
 
 - (void)initFBAlertVcStyle:(BOOL)isUserSelf;

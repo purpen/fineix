@@ -73,6 +73,8 @@
     if (!_rightBtn) {
         _rightBtn = [[UIButton alloc] initWithFrame:CGRectMake(SCREEN_WIDTH - 44, 20, 44, 44)];
         [_rightBtn addTarget:self action:@selector(rightAction) forControlEvents:(UIControlEventTouchUpInside)];
+        [_rightBtn setTitleColor:[UIColor blackColor] forState:(UIControlStateNormal)];
+        _rightBtn.titleLabel.font = [UIFont systemFontOfSize:16];
     }
     return _rightBtn;
 }
@@ -155,18 +157,6 @@
         self.rightBtn.imageEdgeInsets = UIEdgeInsetsMake(0, -30, 0, 0);
         self.rightBtn.titleEdgeInsets = UIEdgeInsetsMake(0, -25, 0, 0);
         self.rightBtn.titleLabel.font = [UIFont systemFontOfSize:12];
-    }
-    if ([title isEqualToString:@"保存"]) {
-        [self.rightBtn setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
-        self.rightBtn.titleLabel.font = [UIFont systemFontOfSize:15];
-    }
-    if ([title isEqualToString:@"完成"]) {
-        [self.rightBtn setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
-        self.rightBtn.titleLabel.font = [UIFont systemFontOfSize:15];
-    }
-    if ([title isEqualToString:@"清空"]) {
-        [self.rightBtn setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
-        self.rightBtn.titleLabel.font = [UIFont systemFontOfSize:15];
     }
     if (transparent == NO) {
         self.navView.hidden = NO;

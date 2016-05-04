@@ -31,20 +31,21 @@ static const NSInteger  rollTagBtnTag = 97;
     return self;
 }
 
-#pragma mark -
+#pragma mark - “品”
 - (void)setMallHotTagsData:(NSMutableArray *)model {
+    self.type = 2;
     for (HotTagsRow * tag in model) {
         [self.tagTitleArr addObject:tag.titleCn];
     }
     [self addTagButton:self.tagTitleArr];
 }
 
-#pragma mark -
+#pragma mark - “景”
 - (void)setHotTagsData:(NSMutableArray *)model {
+    self.type = 1;
     for (HotTagsRow * tag in model) {
         [self.tagTitleArr addObject:tag.titleCn];
     }
-
     [self addTagButton:self.tagTitleArr];
 }
 
@@ -106,7 +107,7 @@ static const NSInteger  rollTagBtnTag = 97;
 - (void)tagBtnClick:(UIButton *)button {
     SearchViewController * searchVC = [[SearchViewController alloc] init];
     searchVC.keyword = self.tagTitleArr[button.tag - rollTagBtnTag];
-    searchVC.searchType = 1;
+    searchVC.searchType = self.type;
     [self.nav pushViewController:searchVC animated:YES];
 }
 

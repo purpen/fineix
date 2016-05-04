@@ -46,8 +46,8 @@ static NSString *const URLSearchList = @"/search/getlist";
     if (self.keyword.length > 0) {
         self.searchView.searchInputBox.text = self.keyword;
     }
+    
     [self searchRequest:self.searchType withKeyword:self.keyword];
-
 }
 
 #pragma mark - 网络请求
@@ -188,6 +188,15 @@ static NSString *const URLSearchList = @"/search/getlist";
 - (void)searchRequest:(NSInteger)type withKeyword:(NSString *)keyword {
     [self changeMenuBtnState:type];
     [SVProgressHUD showInfoWithStatus:[NSString stringWithFormat:@"开始搜索：%@", keyword]];
+    if (keyword.length > 0) {
+        if (type == 1) {
+            [self networkSearchData:keyword withType:@"8"];
+        } else if (type == 2) {
+            [self networkSearchData:keyword withType:@"10"];
+        } else if (type == 0) {
+            [self networkSearchData:keyword withType:@"9"];
+        }
+    }
 }
 
 #pragma mark - 搜索结果视图
@@ -359,8 +368,8 @@ static NSString *const URLSearchList = @"/search/getlist";
 
 #pragma mark - 改变菜单栏的状态
 - (void)SearchMenuSeleted:(NSInteger)index {
-    [self searchRequest:index withKeyword:self.searchView.searchInputBox.text];
     self.searchType = index;
+    [self searchRequest:index withKeyword:self.searchView.searchInputBox.text];
     [self changeMenuBtnState:index];
 }
 

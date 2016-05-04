@@ -7,6 +7,7 @@
 //
 
 #import "FBAlertViewController.h"
+#import "ReportViewController.h"
 
 static const NSInteger actionBtnTag = 686;
 
@@ -78,6 +79,9 @@ static const NSInteger actionBtnTag = 686;
 - (void)visitorsActionBtnClick:(UIButton *)button {
     if (button.tag == actionBtnTag) {
         [SVProgressHUD showInfoWithStatus:@"举报场景"];
+        ReportViewController * reportVC = [[ReportViewController alloc] init];
+        reportVC.targetId = self.targetId;
+        [self presentViewController:reportVC animated:YES completion:nil];
         
     } else if (button.tag == actionBtnTag + 1) {
         [SVProgressHUD showInfoWithStatus:@"分享场景"];

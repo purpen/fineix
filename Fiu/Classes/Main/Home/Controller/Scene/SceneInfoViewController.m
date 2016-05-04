@@ -132,6 +132,8 @@ static NSString *const URLSceneGoods = @"/scene_product/getlist";
 
 #pragma mark 给此场景点赞的用户
 - (void)networkLikePeopleData {
+    [self.likePeopleMarr removeAllObjects];
+    
     self.likePeopleRequest = [FBAPI postWithUrlString:URLLikeScenePeople requestDictionary:@{@"type":@"sight", @"event":@"love", @"page":@"1" , @"size":@"10000", @"id":self.sceneId} delegate:self];
     [self.likePeopleRequest startRequestSuccess:^(FBRequest *request, id result) {
         NSArray * likePeopleArr = [[result valueForKey:@"data"] valueForKey:@"rows"];
@@ -465,6 +467,7 @@ static NSString *const URLSceneGoods = @"/scene_product/getlist";
     [alertVC initFBAlertVcStyle:NO];
     alertVC.modalPresentationStyle = UIModalPresentationOverCurrentContext;
     alertVC.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;
+    alertVC.targetId = self.sceneId;
     [self presentViewController:alertVC animated:YES completion:nil];
 }
 
