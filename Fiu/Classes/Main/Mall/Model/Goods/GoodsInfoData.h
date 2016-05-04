@@ -34,7 +34,7 @@
 @property (nonatomic, assign) NSInteger kind;
 @property (nonatomic, strong) NSString * link;
 @property (nonatomic, assign) NSInteger loveCount;
-@property (nonatomic, assign) NSInteger marketPrice;
+@property (nonatomic, assign) CGFloat marketPrice;
 @property (nonatomic, strong) NSString * oid;
 @property (nonatomic, strong) NSArray * pngAsset;
 @property (nonatomic, assign) NSInteger published;

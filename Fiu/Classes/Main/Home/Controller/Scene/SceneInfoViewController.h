@@ -16,6 +16,7 @@
 @pro_strong FBRequest               *   sceneCommentRequest;
 @pro_strong FBRequest               *   likePeopleRequest;
 @pro_strong FBRequest               *   sceneGoodsRequest;
+@pro_strong FBRequest               *   recommendRequest;
 @pro_strong FBRequest               *   likeSceneRequest;
 @pro_strong FBRequest               *   cancelLikeRequest;
 

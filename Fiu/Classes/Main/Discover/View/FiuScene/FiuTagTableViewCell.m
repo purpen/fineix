@@ -33,7 +33,6 @@ static const NSInteger  rollTagBtnTag = 97;
 
 #pragma mark -
 - (void)setMallHotTagsData:(NSMutableArray *)model {
-    self.searchType = 3;
     for (HotTagsRow * tag in model) {
         [self.tagTitleArr addObject:tag.titleCn];
     }
@@ -42,7 +41,6 @@ static const NSInteger  rollTagBtnTag = 97;
 
 #pragma mark -
 - (void)setHotTagsData:(NSMutableArray *)model {
-    self.searchType = 1;
     for (HotTagsRow * tag in model) {
         [self.tagTitleArr addObject:tag.titleCn];
     }
@@ -98,6 +96,7 @@ static const NSInteger  rollTagBtnTag = 97;
         btnW = tagBtn.frame.size.width + tagBtn.frame.origin.x;
         
         [tagBtn addTarget:self action:@selector(tagBtnClick:) forControlEvents:(UIControlEventTouchUpInside)];
+        
         [self.tagRollView addSubview:tagBtn];
     }
 
@@ -107,9 +106,10 @@ static const NSInteger  rollTagBtnTag = 97;
 - (void)tagBtnClick:(UIButton *)button {
     SearchViewController * searchVC = [[SearchViewController alloc] init];
     searchVC.keyword = self.tagTitleArr[button.tag - rollTagBtnTag];
-    searchVC.searchType = self.searchType;
+    searchVC.searchType = 1;
     [self.nav pushViewController:searchVC animated:YES];
 }
+
 
 
 @end

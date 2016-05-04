@@ -108,7 +108,7 @@
 	}
 
 	if(![dictionary[@"market_price"] isKindOfClass:[NSNull class]]){
-		self.marketPrice = [dictionary[@"market_price"] integerValue];
+		self.marketPrice = [dictionary[@"market_price"] floatValue];
 	}
 
 	if(![dictionary[@"oid"] isKindOfClass:[NSNull class]]){

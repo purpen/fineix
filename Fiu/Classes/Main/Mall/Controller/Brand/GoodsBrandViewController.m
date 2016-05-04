@@ -31,6 +31,7 @@ static NSString *const URLBrandInfo = @"/scene_brands/view";
     [super viewDidLoad];
     [self networkBrandInfoData];
     [self.view addSubview:self.goodsBrandTable];
+    [self.goodsBrandTable addSubview:self.titleLab];
 }
 
 #pragma mark - 网络请求
@@ -80,6 +81,7 @@ static NSString *const URLBrandInfo = @"/scene_brands/view";
         if (!cell) {
             cell = [[GoodsBrandTableViewCell alloc] initWithStyle:(UITableViewCellStyleDefault) reuseIdentifier:goodsBrandCellId];
         }
+        [cell.brandBgImg downloadImage:self.brandBgImg place:[UIImage imageNamed:@""]];
         [cell setBrandInfoData:self.brandInfo];
         return cell;
     
@@ -117,9 +119,10 @@ static NSString *const URLBrandInfo = @"/scene_brands/view";
 #pragma mark - 设置Nav
 - (void)setNavigationViewUI {
     [[UIApplication sharedApplication] setStatusBarHidden:NO withAnimation:(UIStatusBarAnimationSlide)];
+    [[UIApplication sharedApplication] setStatusBarStyle:(UIStatusBarStyleLightContent)];
     self.view.backgroundColor = [UIColor whiteColor];
     self.delegate = self;
-    [self addBarItemLeftBarButton:@"" image:@"icon_back" isTransparent:YES];
+    [self addBarItemLeftBarButton:@"" image:@"icon_back_white" isTransparent:YES];
 }
 
 - (void)leftBarItemSelected {
@@ -129,5 +132,22 @@ static NSString *const URLBrandInfo = @"/scene_brands/view";
         [self dismissViewControllerAnimated:YES completion:nil];
     }
 }
+
+- (void)viewWillDisappear:(BOOL)animated {
+    [super viewWillDisappear:animated];
+    [[UIApplication sharedApplication] setStatusBarStyle:(UIStatusBarStyleDefault)];
+}
+
+#pragma mark - 控制器标题
+- (UILabel *)titleLab {
+    if (!_titleLab) {
+        _titleLab = [[UILabel alloc] initWithFrame:CGRectMake(SCREEN_WIDTH/2 - 100, 20, 200, 44)];
+        _titleLab.font = [UIFont systemFontOfSize:17];
+        _titleLab.textColor = [UIColor whiteColor];
+        _titleLab.textAlignment = NSTextAlignmentCenter;
+    }
+    return _titleLab;
+}
+
 
 @end

@@ -29,6 +29,7 @@ static NSString *const URLTagS = @"/scene_tags/getlist";
 @pro_strong NSMutableArray              *   sceneList;
 @pro_strong NSMutableArray              *   sceneIdList;
 @pro_strong NSMutableArray              *   tagsList;
+@pro_strong NSMutableArray              *   rollList;
 
 @end
 
@@ -50,7 +51,6 @@ static NSString *const URLTagS = @"/scene_tags/getlist";
     self.currentpageNum = 0;
     [self networkSceneListData];
     
-    [self setDiscoverViewUI];
 }
 
 #pragma mark - 网络请求
@@ -58,10 +58,15 @@ static NSString *const URLTagS = @"/scene_tags/getlist";
 - (void)networkRollImgData {
     self.rollImgRequest = [FBAPI getWithUrlString:URLDiscoverSlide requestDictionary:@{@"name":@"app_fiu_sight_index_slide"} delegate:self];
     [self.rollImgRequest startRequestSuccess:^(FBRequest *request, id result) {
-        NSLog(@"“发现”页的轮播图 ======  %@", result);
+        NSArray * rollArr = [[result valueForKey:@"data"] valueForKey:@"rows"];
+        for (NSDictionary * rollDic in rollArr) {
+            RollImageRow * rollModel = [[RollImageRow alloc] initWithDictionary:rollDic];
+            [self.rollList addObject:rollModel];
+        }
+        [self.rollView setRollimageView:self.rollList];
         
     } failure:^(FBRequest *request, NSError *error) {
-        NSLog(@"%@", error);
+        NSLog(@"%@", [error localizedDescription]);
     }];
 }
 
@@ -104,6 +109,7 @@ static NSString *const URLTagS = @"/scene_tags/getlist";
 - (void)networkSceneListData {
     self.sceneListRequest = [FBAPI getWithUrlString:URLSceneList requestDictionary:@{@"sort":@"0", @"size":@"10", @"page":@(self.currentpageNum + 1)} delegate:self];
     [self.sceneListRequest startRequestSuccess:^(FBRequest *request, id result) {
+        [self setDiscoverViewUI];
         NSArray * sceneArr = [[result valueForKey:@"data"] valueForKey:@"rows"];
         for (NSDictionary * sceneDic in sceneArr) {
             HomeSceneListRow * homeSceneModel = [[HomeSceneListRow alloc] initWithDictionary:sceneDic];
@@ -168,7 +174,6 @@ static NSString *const URLTagS = @"/scene_tags/getlist";
     if (!_rollView) {
         _rollView = [[FBRollImages alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, Banner_height)];
         _rollView.navVC = self.navigationController;
-        [_rollView setRollimageView];
     }
     return _rollView;
 }
@@ -363,6 +368,13 @@ static NSString *const URLTagS = @"/scene_tags/getlist";
     return _tagsList;
 }
 
+- (NSMutableArray *)rollList {
+    if (!_rollList) {
+        _rollList = [NSMutableArray array];
+    }
+    return _rollList;
+}
+
 //
 - (void)clearMarrData {
     [self.fiuSceneList removeAllObjects];
@@ -370,6 +382,7 @@ static NSString *const URLTagS = @"/scene_tags/getlist";
     [self.sceneList removeAllObjects];
     [self.sceneIdList removeAllObjects];
     [self.tagsList removeAllObjects];
+    [self.rollList removeAllObjects];
 }
 
 - (void)viewWillDisappear:(BOOL)animated {

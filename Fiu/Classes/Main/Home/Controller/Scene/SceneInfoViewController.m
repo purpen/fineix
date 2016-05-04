@@ -18,6 +18,8 @@
 #import "SceneInfoData.h"
 #import "GoodsTableViewCell.h"
 #import "CommentRow.h"
+#import "GoodsRow.h"
+#import "LikeOrSuPeopleRow.h"
 #import "HomePageViewController.h"
 
 static NSString *const URLSceneInfo = @"/scene_sight/view";
@@ -31,9 +33,13 @@ static NSString *const URLSceneGoods = @"/scene_product/getlist";
 
 @pro_strong SceneInfoData       *   sceneInfoModel;
 @pro_strong NSArray             *   commentArr;
-@pro_strong NSMutableArray      *   sceneCommentMarr;
-@pro_strong NSMutableArray      *   likePeopleMarr;
-@pro_strong NSArray             *   goodsId;
+@pro_strong NSMutableArray      *   sceneCommentMarr;   //  场景评论
+@pro_strong NSMutableArray      *   likePeopleMarr;     //  点赞的人
+@pro_strong NSArray             *   goodsId;            //  场景中商品id
+@pro_strong NSMutableArray      *   goodsList;          //  商品列表
+@pro_strong NSMutableArray      *   goodsIdList;        //  商品id
+@pro_strong NSMutableArray      *   reGoodsList;        //  推荐商品列表
+@pro_strong NSMutableArray      *   reGoodsIdList;      //  推荐商品id
 
 @end
 
@@ -47,20 +53,16 @@ static NSString *const URLSceneGoods = @"/scene_product/getlist";
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.view.backgroundColor = [UIColor whiteColor];
-    self.automaticallyAdjustsScrollViewInsets = NO;
-    
+
     [self networkRequestData];
     [self networkCommentData];
     [self networkLikePeopleData];
-//    [self networkSceneGoodsData];
-    
-    [self setSceneInfoViewUI];
 }
 
 #pragma mark -
 - (void)setSceneInfoViewUI {
     [self.view addSubview:self.sceneTableView];
+    [self.view sendSubviewToBack:self.sceneTableView];
     
     [self.view addSubview:self.likeScene];
 }
@@ -71,7 +73,8 @@ static NSString *const URLSceneGoods = @"/scene_product/getlist";
     [SVProgressHUD show];
     self.sceneInfoRequest = [FBAPI getWithUrlString:URLSceneInfo requestDictionary:@{@"id":self.sceneId} delegate:self];
     [self.sceneInfoRequest startRequestSuccess:^(FBRequest *request, id result) {
-        NSLog(@"场景详情：%@", result);
+        [self setSceneInfoViewUI];
+        
         self.sceneInfoModel = [[SceneInfoData alloc] initWithDictionary:[result valueForKey:@"data"]];
         if ([[[result valueForKey:@"data"] valueForKey:@"is_love"] integerValue] == 0) {
             self.likeScene.likeBtn.selected = NO;
@@ -82,16 +85,11 @@ static NSString *const URLSceneGoods = @"/scene_product/getlist";
         self.goodsId = [self.sceneInfoModel.product valueForKey:@"idField"];
         NSString * goodsIds;
         if (self.goodsId.count > 1) {
-            for (NSInteger idx = 0; idx < self.goodsId.count; ++ idx) {
-                NSString * goodsId = [NSString stringWithFormat:@"%@", self.goodsId[idx]];
-                goodsIds = [NSString stringWithFormat:@"%@,", goodsId];
-            }
-            
+            goodsIds = [self.goodsId componentsJoinedByString:@","];
         } else {
             goodsIds = self.goodsId[0];
         }
         
-        NSLog(@"－－＝－＝ %@", goodsIds);
         [self networkSceneGoodsData:goodsIds];
         
         [self.sceneTableView reloadData];
@@ -134,16 +132,16 @@ static NSString *const URLSceneGoods = @"/scene_product/getlist";
 
 #pragma mark 给此场景点赞的用户
 - (void)networkLikePeopleData {
-    self.likePeopleRequest = [FBAPI getWithUrlString:URLLikeScenePeople requestDictionary:@{@"type":@"scene", @"event":@"love", @"page":@"1" , @"size":@"10000", @"id":self.sceneId} delegate:self];
+    self.likePeopleRequest = [FBAPI postWithUrlString:URLLikeScenePeople requestDictionary:@{@"type":@"sight", @"event":@"love", @"page":@"1" , @"size":@"10000", @"id":self.sceneId} delegate:self];
     [self.likePeopleRequest startRequestSuccess:^(FBRequest *request, id result) {
-        NSLog(@"＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝ 点赞的人：%@", result);
-//        NSArray * likePeopleArr = [[result valueForKey:@"data"] valueForKey:@"rows"];
-//        for (NSDictionary * sceneDic in likePeopleArr) {
-//            HomeSceneListRow * homeSceneModel = [[HomeSceneListRow alloc] initWithDictionary:sceneDic];
-//            [self.sceneListMarr addObject:homeSceneModel];
-//            [self.sceneIdMarr addObject:[NSString stringWithFormat:@"%zi", homeSceneModel.idField]];
-//        }
+        NSArray * likePeopleArr = [[result valueForKey:@"data"] valueForKey:@"rows"];
+        for (NSDictionary * likePeopleDic in likePeopleArr) {
+            LikeOrSuPeopleRow * likePeopleModel = [[LikeOrSuPeopleRow alloc] initWithDictionary:likePeopleDic];
+            [self.likePeopleMarr addObject:likePeopleModel];
+        }
         
+        [self.sceneTableView reloadData];
+
     } failure:^(FBRequest *request, NSError *error) {
         [SVProgressHUD showErrorWithStatus:[error localizedDescription]];
     }];
@@ -153,7 +151,39 @@ static NSString *const URLSceneGoods = @"/scene_product/getlist";
 - (void)networkSceneGoodsData:(NSString *)goodsIds {
     self.sceneGoodsRequest = [FBAPI getWithUrlString:URLSceneGoods requestDictionary:@{@"ids":goodsIds} delegate:self];
     [self.sceneGoodsRequest startRequestSuccess:^(FBRequest *request, id result) {
-        NSLog(@"＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊ 商品：%@", result);
+        NSArray * goodsArr = [[result valueForKey:@"data"] valueForKey:@"rows"];
+        NSMutableArray * categoryTagIds = [NSMutableArray array];
+        for (NSDictionary * goodsDic in goodsArr) {
+            GoodsRow * goodsModel = [[GoodsRow alloc] initWithDictionary:goodsDic];
+            [self.goodsList addObject:goodsModel];
+            [self.goodsIdList addObject:[NSString stringWithFormat:@"%zi", goodsModel.idField]];
+            for (NSString * tagIds in goodsModel.categoryTags) {
+                [categoryTagIds addObject:tagIds];
+            }
+        }
+        
+        NSString * categoryTag = [categoryTagIds componentsJoinedByString:@","];
+        [self networkRecommendGoods:categoryTag withSize:[NSString stringWithFormat:@"%zi", categoryTagIds.count]];
+        
+        [self.sceneTableView reloadData];
+        
+    } failure:^(FBRequest *request, NSError *error) {
+        [SVProgressHUD showErrorWithStatus:[error localizedDescription]];
+    }];
+}
+
+#pragma mark 此场景中的推荐商品
+- (void)networkRecommendGoods:(NSString *)tagIds withSize:(NSString *)size {
+    self.recommendRequest = [FBAPI getWithUrlString:URLSceneGoods requestDictionary:@{@"category_tag_ids":tagIds, @"size":size} delegate:self];
+    [self.recommendRequest startRequestSuccess:^(FBRequest *request, id result) {
+        NSArray * goodsArr = [[result valueForKey:@"data"] valueForKey:@"rows"];
+        for (NSDictionary * goodsDic in goodsArr) {
+            GoodsRow * goodsModel = [[GoodsRow alloc] initWithDictionary:goodsDic];
+            [self.reGoodsList addObject:goodsModel];
+            [self.reGoodsIdList addObject:[NSString stringWithFormat:@"%zi", goodsModel.idField]];
+        }
+        
+        [self.sceneTableView reloadData];
         
     } failure:^(FBRequest *request, NSError *error) {
         [SVProgressHUD showErrorWithStatus:[error localizedDescription]];
@@ -163,20 +193,24 @@ static NSString *const URLSceneGoods = @"/scene_product/getlist";
 #pragma mark 给此场景点赞
 - (void)networkLikeSceneData {
     if (self.likeScene.likeBtn.selected == NO) {
-        self.likeScene.likeBtn.selected = YES;
         self.likeSceneRequest = [FBAPI postWithUrlString:URLLikeScene requestDictionary:@{@"id":self.sceneId} delegate:self];
         [self.likeSceneRequest startRequestSuccess:^(FBRequest *request, id result) {
             [SVProgressHUD showSuccessWithStatus:[result valueForKey:@"message"]];
+            [self networkRequestData];
+            [self networkLikePeopleData];
+            self.likeScene.likeBtn.selected = YES;
             
         } failure:^(FBRequest *request, NSError *error) {
             [SVProgressHUD showErrorWithStatus:[error localizedDescription]];
         }];
     
     } else if (self.likeScene.likeBtn.selected == YES) {
-        self.likeScene.likeBtn.selected = NO;
         self.cancelLikeRequest = [FBAPI postWithUrlString:URLCancelLike requestDictionary:@{@"id":self.sceneId} delegate:self];
         [self.cancelLikeRequest startRequestSuccess:^(FBRequest *request, id result) {
             [SVProgressHUD showSuccessWithStatus:[result valueForKey:@"message"]];
+            [self networkRequestData];
+            [self networkLikePeopleData];
+             self.likeScene.likeBtn.selected = NO;
             
         } failure:^(FBRequest *request, NSError *error) {
             [SVProgressHUD showErrorWithStatus:[error localizedDescription]];
@@ -216,6 +250,10 @@ static NSString *const URLSceneGoods = @"/scene_product/getlist";
         return 4;
     } else if (section == 1) {
         return self.sceneCommentMarr.count;
+    } else if (section == 2) {
+        return self.goodsList.count;
+    } else if (section == 3) {
+        return self.reGoodsList.count;
     }
     return 1;
 }
@@ -260,7 +298,7 @@ static NSString *const URLSceneGoods = @"/scene_product/getlist";
                 cell = [[LikePeopleTableViewCell alloc] initWithStyle:(UITableViewCellStyleDefault) reuseIdentifier:likePeopleCellId];
             }
             cell.nav = self.navigationController;
-            [cell setUI];
+            [cell setLikeOrSuPeopleData:self.likePeopleMarr];
             return cell;
         }
         
@@ -279,7 +317,7 @@ static NSString *const URLSceneGoods = @"/scene_product/getlist";
         if (cell == nil) {
             cell = [[GoodsTableViewCell alloc] initWithStyle:(UITableViewCellStyleDefault) reuseIdentifier:mallGoodsCellId];
         }
-//        [cell setUI];
+        [cell setGoodsData:self.goodsList[indexPath.row]];
         return cell;
     
     } else if (indexPath.section == 3) {
@@ -288,7 +326,7 @@ static NSString *const URLSceneGoods = @"/scene_product/getlist";
         if (cell == nil) {
             cell = [[GoodsTableViewCell alloc] initWithStyle:(UITableViewCellStyleDefault) reuseIdentifier:mallGoodsCellId];
         }
-//        [cell setUI];
+        [cell setGoodsData:self.reGoodsList[indexPath.row]];
         return cell;
     }
     
@@ -307,9 +345,8 @@ static NSString *const URLSceneGoods = @"/scene_product/getlist";
         } else if (indexPath.row == 2) {
             return 44;
         } else if (indexPath.row == 3) {
-            NSArray * arr = [NSArray arrayWithObjects:@"1",@"1",@"1",@"1",@"1",@"1",@"1",@"1",@"1",@"1",nil];
             LikePeopleTableViewCell * cell = [[LikePeopleTableViewCell alloc] init];
-            [cell getCellHeight:arr];
+            [cell getCellHeight:self.likePeopleMarr];
             return cell.cellHeight;
         }
         return 100;
@@ -354,6 +391,7 @@ static NSString *const URLSceneGoods = @"/scene_product/getlist";
     return self.headerView;
 }
 
+#pragma mark - 跳转
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     if (indexPath.section == 1) {
         CommentViewController * commentVC = [[CommentViewController alloc] init];
@@ -361,9 +399,11 @@ static NSString *const URLSceneGoods = @"/scene_product/getlist";
         [self.navigationController pushViewController:commentVC animated:YES];
     } else if (indexPath.section == 2) {
         GoodsInfoViewController * goodsInfoVC = [[GoodsInfoViewController alloc] init];
+        goodsInfoVC.goodsID = self.goodsIdList[indexPath.row];
         [self.navigationController pushViewController:goodsInfoVC animated:YES];
     } else if (indexPath.section == 3) {
         GoodsInfoViewController * goodsInfoVC = [[GoodsInfoViewController alloc] init];
+        goodsInfoVC.goodsID = self.reGoodsIdList[indexPath.row];
         [self.navigationController pushViewController:goodsInfoVC animated:YES];
     }
 }
@@ -483,6 +523,34 @@ static NSString *const URLSceneGoods = @"/scene_product/getlist";
         _goodsId = [NSArray array];
     }
     return _goodsId;
+}
+
+- (NSMutableArray *)goodsList {
+    if (!_goodsList) {
+        _goodsList = [NSMutableArray array];
+    }
+    return _goodsList;
+}
+
+- (NSMutableArray *)goodsIdList {
+    if (!_goodsIdList) {
+        _goodsIdList = [NSMutableArray array];
+    }
+    return _goodsIdList;
+}
+
+- (NSMutableArray *)reGoodsList {
+    if (!_reGoodsList) {
+        _reGoodsList = [NSMutableArray array];
+    }
+    return _reGoodsList;
+}
+
+- (NSMutableArray *)reGoodsIdList {
+    if (!_reGoodsIdList) {
+        _reGoodsIdList = [NSMutableArray array];
+    }
+    return _reGoodsIdList;
 }
 
 @end

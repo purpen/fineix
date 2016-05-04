@@ -22,5 +22,6 @@
 @pro_strong NSString                *   goodsID;            //  商品id
 
 @pro_strong FBRequest               *   goodsInfoRequest;
+@pro_strong FBRequest               *   reGoodsRequest;
 
 @end

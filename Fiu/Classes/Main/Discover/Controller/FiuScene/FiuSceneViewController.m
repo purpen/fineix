@@ -17,6 +17,8 @@
 
 static NSString *const URLFiuSceneInfo = @"/scene_scene/view";
 static NSString *const URLFiuSceneList = @"/scene_sight/";
+static NSString *const URLSuFiuScene = @"/favorite/ajax_subscription";
+static NSString *const URLCancelSu = @"/favorite/ajax_cancel_subscription";
 
 @interface FiuSceneViewController ()
 
@@ -37,48 +39,39 @@ static NSString *const URLFiuSceneList = @"/scene_sight/";
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.view.backgroundColor = [UIColor whiteColor];
-    self.automaticallyAdjustsScrollViewInsets = NO;
-    self.currentpageNum = 0;
+    
     [self networkRequestData];
+    self.currentpageNum = 0;
     [self networkFiuSceneListData];
-    [self setSceneInfoViewUI];
-}
-
-- (NSMutableArray *)sceneListMarr {
-    if (!_sceneListMarr) {
-        _sceneListMarr = [NSMutableArray array];
-    }
-    return _sceneListMarr;
-}
-
-- (NSMutableArray *)sceneIdMarr {
-    if (!_sceneIdMarr) {
-        _sceneIdMarr = [NSMutableArray array];
-    }
-    return _sceneIdMarr;
 }
 
 #pragma mark - 网络请求
-//  情景详情
+#pragma mark 情景详情
 - (void)networkRequestData {
     [SVProgressHUD show];
     self.fiuSceneRequest = [FBAPI getWithUrlString:URLFiuSceneInfo requestDictionary:@{@"id":self.fiuSceneId} delegate:self];
     [self.fiuSceneRequest startRequestSuccess:^(FBRequest *request, id result) {
+        [self setSceneInfoViewUI];
+        
+        if ([[[result valueForKey:@"data"] valueForKey:@"is_subscript"] integerValue] == 0) {
+            self.suBtn.suFiuBtn.selected = NO;
+        } else if ([[[result valueForKey:@"data"] valueForKey:@"is_subscript"] integerValue] == 1) {
+            self.suBtn.suFiuBtn.selected = YES;
+        }
         self.fiuSceneData = [[FiuSceneInfoData alloc] initWithDictionary:[result valueForKey:@"data"]];
         [self.fiuSceneTable reloadData];
         [SVProgressHUD dismiss];
 
     } failure:^(FBRequest *request, NSError *error) {
-        
+        [SVProgressHUD showErrorWithStatus:[error localizedDescription]];
     }];
 }
 
-//  情景中的场景列表
+#pragma mark 情景中的场景列表
 - (void)networkFiuSceneListData {
+    [SVProgressHUD show];
     self.fiuSceneListRequest = [FBAPI getWithUrlString:URLFiuSceneList requestDictionary:@{@"scene_id":self.fiuSceneId, @"stick":@"0", @"size":@"10",@"page":@(self.currentpageNum + 1)} delegate:self];
     [self.fiuSceneListRequest startRequestSuccess:^(FBRequest *request, id result) {
-        NSLog(@"%@", result);
         NSArray * sceneArr = [[result valueForKey:@"data"] valueForKey:@"rows"];
         for (NSDictionary * sceneDic in sceneArr) {
             HomeSceneListRow * homeSceneModel = [[HomeSceneListRow alloc] initWithDictionary:sceneDic];
@@ -92,15 +85,42 @@ static NSString *const URLFiuSceneList = @"/scene_sight/";
             [self addMJRefresh:self.fiuSceneTable];
             [self requestIsLastData:self.fiuSceneTable currentPage:self.currentpageNum withTotalPage:self.totalPageNum];
         }
+        [SVProgressHUD dismiss];
         
     } failure:^(FBRequest *request, NSError *error) {
-        
+        [SVProgressHUD showErrorWithStatus:[error localizedDescription]];
     }];
 }
 
-//  判断是否为最后一条数据
+#pragma mark 订阅情景
+- (void)networkSuFiuSceneData {
+    if (self.suBtn.suFiuBtn.selected == NO) {
+        self.suFiuSceneRequest = [FBAPI postWithUrlString:URLSuFiuScene requestDictionary:@{@"id":self.fiuSceneId} delegate:self];
+        [self.suFiuSceneRequest startRequestSuccess:^(FBRequest *request, id result) {
+            [SVProgressHUD showSuccessWithStatus:[result valueForKey:@"message"]];
+            self.suBtn.suFiuBtn.selected = YES;
+            [self networkRequestData];
+            
+        } failure:^(FBRequest *request, NSError *error) {
+            [SVProgressHUD showErrorWithStatus:[error localizedDescription]];
+        }];
+        
+    } else if (self.suBtn.suFiuBtn.selected == YES) {
+        self.cancelSuRequest = [FBAPI postWithUrlString:URLCancelSu requestDictionary:@{@"id":self.fiuSceneId} delegate:self];
+        [self.cancelSuRequest startRequestSuccess:^(FBRequest *request, id result) {
+            [SVProgressHUD showSuccessWithStatus:[result valueForKey:@"message"]];
+            self.suBtn.suFiuBtn.selected = NO;
+            [self networkRequestData];
+            
+        } failure:^(FBRequest *request, NSError *error) {
+            [SVProgressHUD showErrorWithStatus:[error localizedDescription]];
+        }];
+    }
+    
+}
+
+#pragma mark 判断是否为最后一条数据
 - (void)requestIsLastData:(UITableView *)table currentPage:(NSInteger )current withTotalPage:(NSInteger)total {
-    NSLog(@"＝＝＝ %zi | %zi", current, total);
     BOOL isLastPage = (current == total);
     
     if (!isLastPage) {
@@ -144,6 +164,7 @@ static NSString *const URLFiuSceneList = @"/scene_sight/";
 #pragma mark -
 - (void)setSceneInfoViewUI {
     [self.view addSubview:self.fiuSceneTable];
+    [self.view sendSubviewToBack:self.fiuSceneTable];
     
     [self.view addSubview:self.suBtn];
 }
@@ -152,6 +173,7 @@ static NSString *const URLFiuSceneList = @"/scene_sight/";
 - (SuFiuScenrView *)suBtn {
     if (!_suBtn) {
         _suBtn = [[SuFiuScenrView alloc] initWithFrame:CGRectMake(0, SCREEN_HEIGHT, SCREEN_HEIGHT, 44)];
+        [_suBtn.suFiuBtn addTarget:self action:@selector(networkSuFiuSceneData) forControlEvents:(UIControlEventTouchUpInside)];
     }
     return _suBtn;
 }
@@ -209,7 +231,7 @@ static NSString *const URLFiuSceneList = @"/scene_sight/";
             if (cell == nil) {
                 cell = [[LikePeopleTableViewCell alloc] initWithStyle:(UITableViewCellStyleDefault) reuseIdentifier:likePeopleCellId];
             }
-            [cell setUI];
+//            [cell setUI];
             return cell;
         }
         
@@ -330,6 +352,7 @@ static NSString *const URLFiuSceneList = @"/scene_sight/";
 - (void)setNavigationViewUI {
     [[UIApplication sharedApplication] setStatusBarHidden:YES withAnimation:(UIStatusBarAnimationSlide)];
     self.navigationController.navigationBar.frame = CGRectMake(0, 20, SCREEN_WIDTH, 44);
+    self.view.backgroundColor = [UIColor whiteColor];
     self.delegate = self;
     [self addNavLogoImgisTransparent:YES];
     [self addBarItemRightBarButton:@"" image:@"icon_newScene" isTransparent:YES];
@@ -353,6 +376,21 @@ static NSString *const URLFiuSceneList = @"/scene_sight/";
 - (void)viewWillDisappear:(BOOL)animated {
     [super viewWillDisappear:animated];
     [SVProgressHUD dismiss];
+}
+
+#pragma mark -
+- (NSMutableArray *)sceneListMarr {
+    if (!_sceneListMarr) {
+        _sceneListMarr = [NSMutableArray array];
+    }
+    return _sceneListMarr;
+}
+
+- (NSMutableArray *)sceneIdMarr {
+    if (!_sceneIdMarr) {
+        _sceneIdMarr = [NSMutableArray array];
+    }
+    return _sceneIdMarr;
 }
 
 @end

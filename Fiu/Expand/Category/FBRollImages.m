@@ -13,6 +13,7 @@
 - (instancetype)initWithFrame:(CGRect)frame {
     self = [super initWithFrame:frame];
     if (self) {
+        self.imgMarr = [NSMutableArray array];
         
         [self addSubview:self.rollImageView];
         [_rollImageView mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -25,12 +26,11 @@
     return self;
 }
 
-- (void)setRollimageView {
-    NSArray *images = @[
-                        [UIImage imageNamed:@"banner"],
-                        [UIImage imageNamed:@"banner2"]
-                        ];
-    self.rollImageView.localizationImagesGroup = images;
+- (void)setRollimageView:(NSMutableArray *)model {
+    for (RollImageRow * row in model) {
+        [self.imgMarr addObject:row.coverUrl];
+    }
+    self.rollImageView.imageURLStringsGroup = self.imgMarr;
 }
 
 - (void)setGoodsRollimageView:(GoodsInfoData *)model {

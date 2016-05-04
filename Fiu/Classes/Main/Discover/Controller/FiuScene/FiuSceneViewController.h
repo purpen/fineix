@@ -16,6 +16,8 @@
 
 @pro_strong FBRequest               *   fiuSceneRequest;
 @pro_strong FBRequest               *   fiuSceneListRequest;
+@pro_strong FBRequest               *   suFiuSceneRequest;
+@pro_strong FBRequest               *   cancelSuRequest;
 @pro_assign NSInteger                   currentpageNum;
 @pro_assign NSInteger                   totalPageNum;
 
@@ -25,6 +27,6 @@
 @pro_strong SuFiuScenrView          *   suBtn;                  //  订阅按钮
 @pro_assign BOOL                        rollDown;               //  是否下拉
 @pro_assign CGFloat                     lastContentOffset;      //  滚动的方向
-@pro_strong NSString                *   fiuSceneId;                //  情景Id
+@pro_strong NSString                *   fiuSceneId;             //  情景Id
 
 @end

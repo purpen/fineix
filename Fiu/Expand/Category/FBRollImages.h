@@ -10,18 +10,19 @@
 #import "SDCycleScrollView.h"
 #import "Fiu.h"
 #import "GoodsInfoData.h"
+#import "RollImageRow.h"
 
 @interface FBRollImages : UIView <SDCycleScrollViewDelegate>
 
-@property (strong, nonatomic) UINavigationController         *       navVC;
-@property (strong, nonatomic) NSArray                        *       imgArr;
-@property (strong, nonatomic) SDCycleScrollView              *       rollImageView;
-@property (strong, nonatomic) NSMutableArray                 *       rollImgDataList;
-@property (strong, nonatomic) NSMutableArray                 *       imgMarr;
-@property (strong, nonatomic) NSMutableArray                 *       targetIdMarr;
-@property (strong, nonatomic) NSMutableArray                 *       typeMarr;
+@pro_strong UINavigationController         *       navVC;
+@pro_strong NSArray                        *       imgArr;
+@pro_strong SDCycleScrollView              *       rollImageView;
+@pro_strong NSMutableArray                 *       rollImgDataList;
+@pro_strong NSMutableArray                 *       imgMarr;
+@pro_strong NSMutableArray                 *       targetIdMarr;
+@pro_strong NSMutableArray                 *       typeMarr;
 
-- (void)setRollimageView;
+- (void)setRollimageView:(NSMutableArray *)model;
 
 - (void)setGoodsRollimageView:(GoodsInfoData *)model;
 
