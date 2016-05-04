@@ -20,7 +20,7 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
     self.delegate = self;
-    self.navViewTitle.text = @"提到我的";
+    self.navViewTitle.text = @"提醒";
     
     self.myTbaleView.delegate = self;
     self.myTbaleView.dataSource = self;
@@ -38,7 +38,7 @@
     if (cell == nil) {
         cell = [[CommentsTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellId];
     }
-    [cell setUI];
+    //[cell setUI];
     cell.iconImageView.hidden = YES;
     cell.focusBtn.hidden = YES;
     return cell;

@@ -10,4 +10,11 @@
 
 @implementation FindFriendModel
 
+-(NSMutableArray*)scene{
+    if (!_scene) {
+        _scene = [NSMutableArray array];
+    }
+    return _scene;
+}
+
 @end

@@ -46,8 +46,13 @@ static NSString *const URLAllFiuSceneList = @"/scene_scene/";
     [SVProgressHUD show];
     UserInfoEntity *entity = [UserInfoEntity defaultUserInfoEntity];
     self.allSceneListRequest = [FBAPI getWithUrlString:@"/favorite" requestDictionary:@{@"size":@"10", @"page":@(self.currentpageNum + 1),@"user_id":entity.userId,@"type":@"scene",@"event":@"subscription"} delegate:self];
+    
     [self.allSceneListRequest startRequestSuccess:^(FBRequest *request, id result) {
         NSArray * sceneArr = [[result valueForKey:@"data"] valueForKey:@"rows"];
+        if ([[[result valueForKey:@"data"] valueForKey:@"total_page"] integerValue] == 1) {
+            [self.allFiuSceneMarr removeAllObjects];
+            [self.allFiuSceneIdMarr removeAllObjects];
+        }
         for (NSDictionary * sceneDic in sceneArr) {
             FiuSceneInfoData * allFiuScene = [[FiuSceneInfoData alloc] initWithDictionary:sceneDic];
             [self.allFiuSceneMarr addObject:allFiuScene];

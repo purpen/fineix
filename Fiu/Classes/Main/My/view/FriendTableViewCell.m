@@ -103,7 +103,7 @@
     if (!_imageCollectionView) {
         UICollectionViewFlowLayout *layout = [[UICollectionViewFlowLayout alloc] init];
         layout.itemSize = CGSizeMake((SCREEN_WIDTH-6)/3.0, 216/667.0*SCREEN_HEIGHT);
-        layout.sectionInset = UIEdgeInsetsMake(0, 0, 0, 0);
+        layout.sectionInset = UIEdgeInsetsMake(0, 0, 0, 5);
         layout.minimumLineSpacing = 3;
         layout.scrollDirection = UICollectionViewScrollDirectionHorizontal;
         _imageCollectionView = [[UICollectionView alloc] initWithFrame:self.frame collectionViewLayout:layout];
@@ -117,23 +117,26 @@
 }
 
 -(NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section{
-    return self.sceneAry.count;
+    return 1;
 }
 
 -(NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView{
-    return 1;
+    return self.sceneAry.count;
 }
 
 -(UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath{
     static NSString *cellId = @"FiuSceneCollectionViewCell";
     FiuSceneCollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:cellId forIndexPath:indexPath];
     //[cell setUI];
-    FindSceneModel *model = self.sceneAry[indexPath.row];
+    cell.backgroundColor = [UIColor redColor];
+    FindSceneModel *model = self.sceneAry[indexPath.section];
 //    //cell.titleLab.text = model.title;
 //    cell.locationLab.text = model.address;
 //    [cell.sceneImage sd_setImageWithURL:[NSURL URLWithString:model.cober]];
     FiuSceneRow *model1 = [[FiuSceneRow alloc] init];
+    
     model1.title = model.title;
+    NSLog(@"zheshi 这是   %@",model1.title);
     model1.coverUrl = model.cober;
     model1.address = model.address;
     [cell setFiuSceneList:model1];

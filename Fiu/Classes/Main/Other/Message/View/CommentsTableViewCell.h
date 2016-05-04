@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+@class UserInfo;
 
 @interface CommentsTableViewCell : UITableViewCell
 
@@ -18,6 +19,6 @@
 @property(nonatomic,strong) UIImageView *headImageView;
 @property(nonatomic,strong) UIButton *focusBtn;
 
--(void)setUI;
+-(void)setUIWithModel:(UserInfo*)model;
 
 @end

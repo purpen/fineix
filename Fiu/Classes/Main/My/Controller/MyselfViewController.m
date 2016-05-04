@@ -75,7 +75,7 @@ static NSString *const follows = @"/follow";
     _imgV = [BackImagView getBackImageView];
     _imgV.headImageView.layer.masksToBounds = YES;
     _imgV.headImageView.layer.cornerRadius = 33;
-    _imgV.frame = CGRectMake(0, 0, SCREEN_WIDTH, 200/667.0*SCREEN_HEIGHT+64);
+    _imgV.frame = CGRectMake(0, 0, SCREEN_WIDTH, 300/667.0*SCREEN_HEIGHT);
     _imgV.userInteractionEnabled = YES;
     UITapGestureRecognizer *singleTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(signleTap:)];
     singleTap.numberOfTapsRequired = 1;
@@ -89,7 +89,7 @@ static NSString *const follows = @"/follow";
     
     //频道选项
     _chanelV = [ChanelView getChanelView];
-    _chanelV.frame = CGRectMake(0, (200+5)/667.0*SCREEN_HEIGHT+64, SCREEN_WIDTH, 60/667.0*SCREEN_HEIGHT);
+    _chanelV.frame = CGRectMake(0, (300+5)/667.0*SCREEN_HEIGHT, SCREEN_WIDTH, 60/667.0*SCREEN_HEIGHT);
     
 
     //情景
@@ -119,7 +119,7 @@ static NSString *const follows = @"/follow";
     [_homeScrollView addSubview:_chanelV];
     //订单等一些东西
     _chanelTwoV = [ChanelViewTwo getChanelViewTwo];
-    _chanelTwoV.frame = CGRectMake(0, (200+5+60+5)/667.0*SCREEN_HEIGHT+64, SCREEN_WIDTH, 194/667.0*SCREEN_HEIGHT);
+    _chanelTwoV.frame = CGRectMake(0, (300+5+60+5)/667.0*SCREEN_HEIGHT, SCREEN_WIDTH, 194/667.0*SCREEN_HEIGHT);
     [_homeScrollView addSubview:_chanelTwoV];
     //为订单等一些按钮添加方法
     //订单按钮
@@ -144,7 +144,7 @@ static NSString *const follows = @"/follow";
     [_chanelTwoV.accountManagementBtn addTarget:self action:@selector(accountManagementBtn:) forControlEvents:UIControlEventTouchUpInside];
     //关于我们等
     BottomView *bottomV = [BottomView getBottomView];
-    bottomV.frame = CGRectMake(0, (200+5+60+5+194+2)/667.0*SCREEN_HEIGHT+64, SCREEN_WIDTH, 90/667.0*SCREEN_HEIGHT);
+    bottomV.frame = CGRectMake(0, (300+5+60+5+194+2)/667.0*SCREEN_HEIGHT, SCREEN_WIDTH, 90/667.0*SCREEN_HEIGHT);
     [bottomV.aboutUsBtn addTarget:self action:@selector(clickAboutBtn:) forControlEvents:UIControlEventTouchUpInside];
     [bottomV.opinionBtn addTarget:self action:@selector(clickOpinionBtn:) forControlEvents:UIControlEventTouchUpInside];
     //[bottomV.partnerBtn addTarget:self action:@selector(clickPartnerBtn:) forControlEvents:UIControlEventTouchUpInside];
@@ -197,6 +197,8 @@ static NSString *const follows = @"/follow";
         
         NSDictionary *counterDict = [dataDict objectForKey:@"counter"];
         _counterModel = [CounterModel mj_objectWithKeyValues:counterDict];
+        _counterModel.subscription_count = [result objectForKey:@"data"][@"subscription_count"];
+        _counterModel.sight_love_count = [result objectForKey:@"data"][@"sight_love_count"];
         NSLog(@"_counterModel   %@",_counterModel.message_count);
         if ([_counterModel.order_total_count intValue] == 0) {
             //不显示
@@ -225,6 +227,34 @@ static NSString *const follows = @"/follow";
                 make.size.mas_equalTo(CGSizeMake(15, 15));
                 make.right.mas_equalTo(_chanelTwoV.messageBtn.mas_right).with.offset(0);
                 make.top.mas_equalTo(_chanelTwoV.messageBtn.mas_top).with.offset(-3);
+            }];
+        }
+        if ([_counterModel.subscription_count intValue] == 0) {
+            //不显示
+            
+        }else{
+            //显示
+            TipNumberView *tipNumView = [TipNumberView getTipNumView];
+            tipNumView.tipNumLabel.text = [NSString stringWithFormat:@"%@",_counterModel.subscription_count];
+            [_chanelTwoV.subscribeBtn addSubview:tipNumView];
+            [tipNumView mas_makeConstraints:^(MASConstraintMaker *make) {
+                make.size.mas_equalTo(CGSizeMake(15, 15));
+                make.right.mas_equalTo(_chanelTwoV.subscribeBtn.mas_right).with.offset(0);
+                make.top.mas_equalTo(_chanelTwoV.subscribeBtn.mas_top).with.offset(-3);
+            }];
+        }
+        if ([_counterModel.sight_love_count intValue] == 0) {
+            //不显示
+            
+        }else{
+            //显示
+            TipNumberView *tipNumView = [TipNumberView getTipNumView];
+            tipNumView.tipNumLabel.text = [NSString stringWithFormat:@"%@",_counterModel.sight_love_count];
+            [_chanelTwoV.praiseBtn addSubview:tipNumView];
+            [tipNumView mas_makeConstraints:^(MASConstraintMaker *make) {
+                make.size.mas_equalTo(CGSizeMake(15, 15));
+                make.right.mas_equalTo(_chanelTwoV.praiseBtn.mas_right).with.offset(0);
+                make.top.mas_equalTo(_chanelTwoV.praiseBtn.mas_top).with.offset(-3);
             }];
         }
         
@@ -310,7 +340,7 @@ static NSString *const follows = @"/follow";
         CGRect frame = _imgV.frame;
         
         frame.origin.y = y;
-        frame.size.height = -y+200/667.0*SCREEN_HEIGHT+64;
+        frame.size.height = -y+300/667.0*SCREEN_HEIGHT;
         _imgV.frame = frame;
     }
 }

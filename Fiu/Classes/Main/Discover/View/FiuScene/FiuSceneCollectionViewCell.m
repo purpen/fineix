@@ -34,7 +34,7 @@
 #pragma mark - 情景图片
 - (UIImageView *)sceneImage {
     if (!_sceneImage) {
-        _sceneImage = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 150, 266.5)];
+        _sceneImage = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, self.frame.size.width, self.frame.size.height)];
         //  添加渐变层
         CAGradientLayer * shadow = [CAGradientLayer layer];
         shadow.startPoint = CGPointMake(0, 0);

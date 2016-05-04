@@ -21,5 +21,6 @@
 @property(nonatomic,strong) NSNumber *order_evaluate;
 @property(nonatomic,strong) NSNumber *order_total_count;
 @property(nonatomic,strong) NSNumber *fans_count;
+@property(nonatomic,strong) NSNumber *subscription_count;
 
 @end

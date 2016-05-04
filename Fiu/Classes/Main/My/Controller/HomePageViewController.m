@@ -14,7 +14,7 @@
 #import "OtherCollectionViewCell.h"
 #import "ScenceListCollectionViewCell.h"
 #import "AllSceneCollectionViewCell.h"
-#import "FBSheetViewController.h"
+#import "ShieldingViewController.h"
 #import "Fiu.h"
 #import "AccountManagementViewController.h"
 #import "UserInfoEntity.h"
@@ -56,8 +56,6 @@ static NSString *const IconURL = @"/my/add_head_pic";
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    _n = 1;
-    _m = 1;
     _fiuSceneList = [NSMutableArray array];
     _fiuSceneIdList = [NSMutableArray array];
     _sceneListMarr = [NSMutableArray array];
@@ -104,12 +102,11 @@ static NSString *const IconURL = @"/my/add_head_pic";
     if ([self.type isEqualToNumber:@1]) {
         //进行情景的网络请求
         [SVProgressHUD show];
-        FBRequest *request = [FBAPI postWithUrlString:@"/scene_scene/" requestDictionary:@{@"page":@(_n),@"size":@10,@"sort":@0,@"user_id":self.userId} delegate:self];
+        FBRequest *request = [FBAPI postWithUrlString:@"/scene_scene/" requestDictionary:@{@"page":@(_n+1),@"size":@5,@"sort":@0,@"user_id":self.userId} delegate:self];
         [request startRequestSuccess:^(FBRequest *request, id result) {
             NSLog(@"result %@",result);
             NSArray * fiuSceneArr = [[result valueForKey:@"data"] valueForKey:@"rows"];
-            int m = _n;
-            if (_n == m) {
+            if ([[[result objectForKey:@"data"] objectForKey:@"total_page"] intValue] == 1) {
                 [_fiuSceneList removeAllObjects];
                 [_fiuSceneIdList removeAllObjects];
             }
@@ -125,7 +122,7 @@ static NSString *const IconURL = @"/my/add_head_pic";
                 [_tipLabel mas_makeConstraints:^(MASConstraintMaker *make) {
                     make.size.mas_equalTo(CGSizeMake(200, 30));
                     make.centerX.mas_equalTo(self.view.mas_centerX);
-                    make.top.mas_equalTo(self.view.mas_top).with.offset(350);
+                    make.top.mas_equalTo(self.view.mas_top).with.offset(410);
                 }];
             }else{
                 [self.tipLabel removeFromSuperview];
@@ -145,12 +142,11 @@ static NSString *const IconURL = @"/my/add_head_pic";
     }else if ([self.type isEqualToNumber:@2]){
         //进行场景的网络请求
         [SVProgressHUD show];
-        FBRequest *request = [FBAPI postWithUrlString:@"/scene_sight/" requestDictionary:@{@"page":@(_m),@"size":@10,@"sort":@0,@"user_id":self.userId} delegate:self];
+        FBRequest *request = [FBAPI postWithUrlString:@"/scene_sight/" requestDictionary:@{@"page":@(_m+1),@"size":@10,@"sort":@0,@"user_id":self.userId} delegate:self];
         [request startRequestSuccess:^(FBRequest *request, id result) {
             NSLog(@"result %@",result);
             NSArray * sceneArr = [[result valueForKey:@"data"] valueForKey:@"rows"];
-            int m = _m;
-            if (_m == m) {
+            if ([[[result objectForKey:@"data"] objectForKey:@"total_page"] intValue] == 1) {
                 [_sceneListMarr removeAllObjects];
                 [_sceneIdMarr removeAllObjects];
             }
@@ -166,7 +162,7 @@ static NSString *const IconURL = @"/my/add_head_pic";
                 [_tipLabel mas_makeConstraints:^(MASConstraintMaker *make) {
                     make.size.mas_equalTo(CGSizeMake(200, 30));
                     make.centerX.mas_equalTo(self.view.mas_centerX);
-                    make.top.mas_equalTo(self.view.mas_top).with.offset(350);
+                    make.top.mas_equalTo(self.view.mas_top).with.offset(410);
                 }];
             }else{
                 [self.tipLabel removeFromSuperview];
@@ -253,7 +249,7 @@ static NSString *const IconURL = @"/my/add_head_pic";
     [SVProgressHUD show];
     FBRequest *request = [FBAPI postWithUrlString:@"/user/user_info" requestDictionary:@{@"user_id":self.userId} delegate:self];
     [request startRequestSuccess:^(FBRequest *request, id result) {
-        NSLog(@"&&&&&&&&result %@",result);
+        NSLog(@"AD撒娇大时代撒旦&&&&&&&&result %@",result);
         NSDictionary *dataDict = result[@"data"];
         _chanelV.scenarioNumLabel.text = [NSString stringWithFormat:@"%@",dataDict[@"scene_count"]];
         _chanelV.fieldNumLabel.text = [NSString stringWithFormat:@"%@",dataDict[@"sight_count"]];
@@ -288,13 +284,22 @@ static NSString *const IconURL = @"/my/add_head_pic";
 -(void)signleTap:(UITapGestureRecognizer*)sender{
     NSLog(@"情景");
     self.type = @1;
-    [self networkRequestData];
+    if (_fiuSceneList.count == 0) {
+        [self networkRequestData];
+    }else{
+        [self.myCollectionView reloadData];
+    }
+    
 }
 
 -(void)signleTap1:(UITapGestureRecognizer*)sender{
     NSLog(@"场景");
     self.type = @2;
-    [self networkRequestData];
+    if (_sceneListMarr.count == 0) {
+        [self networkRequestData];
+    }else{
+        [self.myCollectionView reloadData];
+    }
 }
 
 -(void)signleTap2:(UITapGestureRecognizer*)sender{
@@ -314,6 +319,7 @@ static NSString *const IconURL = @"/my/add_head_pic";
 -(UICollectionView *)myCollectionView{
     if (!_myCollectionView) {
         UICollectionViewFlowLayout *layout = [[UICollectionViewFlowLayout alloc] init];
+        
         layout.minimumInteritemSpacing = 1;
         _myCollectionView = [[UICollectionView alloc] initWithFrame:self.view.frame collectionViewLayout:layout];
         _myCollectionView.backgroundColor = [UIColor whiteColor];
@@ -328,6 +334,8 @@ static NSString *const IconURL = @"/my/add_head_pic";
     }
     return _myCollectionView;
 }
+
+
 
 -(NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section{
     if (section == 2){
@@ -395,7 +403,6 @@ static NSString *const IconURL = @"/my/add_head_pic";
         if ([self.type isEqualToNumber:@2]) {
             ScenceListCollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"ScenceListCollectionViewCell" forIndexPath:indexPath];
             [cell setUIWithModel:_sceneListMarr[indexPath.row]];
-            cell.backgroundColor = [UIColor redColor];
             return cell;
         }else if([self.type isEqualToNumber:@1]){
             AllSceneCollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"AllSceneCollectionViewCell" forIndexPath:indexPath];
@@ -580,12 +587,17 @@ static NSString *const IconURL = @"/my/add_head_pic";
 }
 
 -(void)clickMoreBtn:(UIButton*)sender{
-    FBSheetViewController *sheetVC = [[FBSheetViewController alloc] init];
+    ShieldingViewController *sheetVC = [[ShieldingViewController alloc] init];
     sheetVC.modalPresentationStyle = UIModalPresentationOverCurrentContext;
     sheetVC.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;
     [self presentViewController:sheetVC animated:YES completion:nil];
-    [sheetVC initFBSheetVCWithNameAry:[NSArray arrayWithObjects:@"拉黑用户",@"举报",@"取消", nil]];
-    [((UIButton*)sheetVC.sheetView.subviews[2]) addTarget:self action:@selector(cancelBtn:) forControlEvents:UIControlEventTouchUpInside];
+    [sheetVC initFBSheetVCWithNameAry:[NSArray arrayWithObjects:@"拉黑用户",@"取消", nil]];
+    [((UIButton*)sheetVC.sheetView.subviews[1]) addTarget:self action:@selector(cancelBtn:) forControlEvents:UIControlEventTouchUpInside];
+    [((UIButton*)sheetVC.sheetView.subviews[0]) addTarget:self action:@selector(shieldingBtn:) forControlEvents:UIControlEventTouchUpInside];
+}
+
+-(void)shieldingBtn:(UIButton*)sender{
+    NSLog(@"拉黑");
 }
 
 -(void)cancelBtn:(UIButton*)sender{
@@ -599,7 +611,7 @@ static NSString *const IconURL = @"/my/add_head_pic";
 -(CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath{
     if (indexPath.section == 0) {
         if (indexPath.row == 0) {
-            return CGSizeMake(SCREEN_WIDTH, 240/667.0*SCREEN_HEIGHT);
+            return CGSizeMake(SCREEN_WIDTH, 300/667.0*SCREEN_HEIGHT);
         }
     }
     if (indexPath.section == 1) {
@@ -627,14 +639,14 @@ static NSString *const IconURL = @"/my/add_head_pic";
             CGRect frame = cell.bgImageView.frame;
             
             frame.origin.y = y;
-            frame.size.height = -y+240/667.0*SCREEN_HEIGHT;
+            frame.size.height = -y+300/667.0*SCREEN_HEIGHT;
             cell.bgImageView.frame = frame;
         }else{
             OtherCollectionViewCell *cell = (OtherCollectionViewCell*)[_myCollectionView cellForItemAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0]];
             CGRect frame = cell.bgImageView.frame;
             
             frame.origin.y = y;
-            frame.size.height = -y+240/667.0*SCREEN_HEIGHT;
+            frame.size.height = -y+300/667.0*SCREEN_HEIGHT;
             cell.bgImageView.frame = frame;
         }
         

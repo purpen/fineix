@@ -38,7 +38,7 @@
     if (cell == nil) {
         cell = [[CommentsTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellId];
     }
-    [cell setUI];
+    //[cell setUI];
     cell.focusBtn.hidden = YES;
     return cell;
 }

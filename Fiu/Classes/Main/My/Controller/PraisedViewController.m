@@ -11,6 +11,7 @@
 #import "SVProgressHUD.h"
 #import "MJRefresh.h"
 #import "SceneInfoViewController.h"
+#import "UserInfoEntity.h"
 
 @interface PraisedViewController ()<FBNavigationBarItemsDelegate,UITableViewDelegate,UITableViewDataSource>
 @pro_strong NSMutableArray      *   sceneListMarr;
@@ -25,15 +26,12 @@ static NSString *const URLSceneList = @"/scene_sight/";
     [super viewWillAppear:animated];
     [[UIApplication sharedApplication] setStatusBarHidden:NO withAnimation:(UIStatusBarAnimationSlide)];
     [self setNavigationViewUI];
-    
+    [self networkRequestData];
 }
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.currentpageNum = 0;
-    
-    [self networkRequestData];
-    
     [self.view addSubview:self.homeTableView];
     
 }
@@ -41,10 +39,15 @@ static NSString *const URLSceneList = @"/scene_sight/";
 #pragma mark - 网络请求
 - (void)networkRequestData {
     [SVProgressHUD show];
-    NSDictionary *  requestParams = @{@"page":@(self.currentpageNum + 1), @"size":@10, @"stick":@1};
-    self.sceneListRequest = [FBAPI getWithUrlString:URLSceneList requestDictionary:requestParams delegate:self];
+    UserInfoEntity *entity = [UserInfoEntity defaultUserInfoEntity];
+    NSDictionary *  requestParams = @{@"size":@"10", @"page":@(self.currentpageNum + 1),@"user_id":entity.userId,@"type":@"sight",@"event":@"love"};
+    self.sceneListRequest = [FBAPI getWithUrlString:@"/favorite" requestDictionary:requestParams delegate:self];
     [self.sceneListRequest startRequestSuccess:^(FBRequest *request, id result) {
         NSArray * sceneArr = [[result valueForKey:@"data"] valueForKey:@"rows"];
+        if ([[[result valueForKey:@"data"] valueForKey:@"total_page"] integerValue] == 1) {
+            [self.sceneListMarr removeAllObjects];
+            [self.sceneIdMarr removeAllObjects];
+        }
         for (NSDictionary * sceneDic in sceneArr) {
             HomeSceneListRow * homeSceneModel = [[HomeSceneListRow alloc] initWithDictionary:sceneDic];
             [self.sceneListMarr addObject:homeSceneModel];
@@ -123,7 +126,7 @@ static NSString *const URLSceneList = @"/scene_sight/";
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    static NSString * homeTableViewCellID = @"homeTableViewCellID";
+    static NSString * homeTableViewCellID = @"hqzomeTableViewCellID";
     SceneListTableViewCell * cell = [tableView dequeueReusableCellWithIdentifier:homeTableViewCellID];
     if (!cell) {
         cell = [[SceneListTableViewCell alloc] initWithStyle:(UITableViewCellStyleDefault) reuseIdentifier:homeTableViewCellID];
