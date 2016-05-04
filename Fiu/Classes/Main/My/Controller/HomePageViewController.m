@@ -289,7 +289,7 @@ static NSString *const IconURL = @"/my/add_head_pic";
     }else{
         [self.myCollectionView reloadData];
     }
-    
+    [self requestIsLastData:self.myCollectionView currentPage:_n withTotalPage:_totalN];
 }
 
 -(void)signleTap1:(UITapGestureRecognizer*)sender{
@@ -300,6 +300,7 @@ static NSString *const IconURL = @"/my/add_head_pic";
     }else{
         [self.myCollectionView reloadData];
     }
+    [self requestIsLastData:self.myCollectionView currentPage:_m withTotalPage:_totalM];
 }
 
 -(void)signleTap2:(UITapGestureRecognizer*)sender{
