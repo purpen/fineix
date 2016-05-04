@@ -20,6 +20,8 @@
 #import "UMSocial.h"
 #import "Fiu.h"
 #import "ChanePwdViewController.h"
+#import "MyQrCodeViewController.h"
+#import "MyQrCodeView.h"
 
 @interface SystemSettingViewController ()<FBNavigationBarItemsDelegate,NotificationDelege,FBRequestDelegate>
 
@@ -55,21 +57,25 @@ static NSString *const logOut = @"/auth/logout";
     }
     //-----
     //清空缓存
-    NSString *cachesPath = [NSSearchPathForDirectoriesInDomains(NSCachesDirectory, NSUserDomainMask, YES) firstObject];
-    NSLog(@"内存  %f",[self folderSizeAtPath:cachesPath]);
-    self.memoryLabel.text = [NSString stringWithFormat:@"%.1fM",[self folderSizeAtPath:cachesPath]];
+//    NSString *cachesPath = [NSSearchPathForDirectoriesInDomains(NSCachesDirectory, NSUserDomainMask, YES) firstObject];
+//    NSLog(@"内存  %f",[self folderSizeAtPath:cachesPath]);
+//    self.memoryLabel.text = [NSString stringWithFormat:@"%.1fM",[self folderSizeAtPath:cachesPath]];
+    NSString * cachesPath = [NSSearchPathForDirectoriesInDomains(NSCachesDirectory, NSUserDomainMask, YES) firstObject];
+    self.memoryLabel.text = [NSString stringWithFormat:@"%.1fM", [self folderSizeAtPath:cachesPath]];
 }
 - (IBAction)pushSetBtn:(UIButton *)sender {
     //推送设置
     [[UIApplication sharedApplication] openURL:[NSURL URLWithString:UIApplicationOpenSettingsURLString ]];
 }
 - (IBAction)clearBtn:(UIButton *)sender {
+    self.memoryLabel.text = @"0.0M";
     //清空缓存
     NSString *cachesPath = [NSSearchPathForDirectoriesInDomains(NSCachesDirectory, NSUserDomainMask, YES) firstObject];
     NSFileManager *manager = [NSFileManager defaultManager];
     NSArray *files = [manager subpathsAtPath:cachesPath];
     if (files.count == 0) {
         [SVProgressHUD showInfoWithStatus:@"缓存已清空"];
+        
         return;
     }
     //如果数组里有内容需要遍历清空
@@ -91,36 +97,34 @@ static NSString *const logOut = @"/auth/logout";
 }
 
 
-//获取文件里存储的文件大小
-//遍历文件夹获得文件夹大小，返回多少兆
--(float)folderSizeAtPath:(NSString*) folderPath{
-    NSFileManager *manager = [NSFileManager defaultManager];
-    //本来就是空的返回0
+#pragma mark - 计算缓存大小
+//遍历文件夹获得文件夹大小，返回多少M
+- (float)folderSizeAtPath:(NSString*) folderPath
+{
+    NSFileManager* manager = [NSFileManager defaultManager];
     if (![manager fileExistsAtPath:folderPath]) {
         return 0;
     }
-    //如果不是空的
     NSEnumerator *childFilesEnumerator = [[manager subpathsAtPath:folderPath] objectEnumerator];
-    NSString *fileNmae;
+    NSString* fileName;
     long long folderSize = 0;
-    //遍历文件夹里的文件
-    while ((fileNmae = [childFilesEnumerator nextObject]) != nil) {
-        NSString *fileAbsolutePath = [folderPath stringByAppendingPathComponent:fileNmae];
-        //得到一个文件夹的大小并相加
+    while ((fileName = [childFilesEnumerator nextObject]) != nil){
+        NSString* fileAbsolutePath = [folderPath stringByAppendingPathComponent:fileName];
         folderSize += [self fileSizeAtPath:fileAbsolutePath];
     }
-    //返回文件夹大小
-    return folderSize/(1024/.0 * 1024.0);
+    return folderSize/(1024.0 * 1024.0);
 }
 
-//得到一个文件夹的大小
--(long long)fileSizeAtPath:(NSString*)filePath{
-    NSFileManager *manager = [NSFileManager defaultManager];
+//单个文件的大小
+- (long long)fileSizeAtPath:(NSString*) filePath
+{
+    NSFileManager* manager = [NSFileManager defaultManager];
     if ([manager fileExistsAtPath:filePath]) {
         return [[manager attributesOfItemAtPath:filePath error:nil] fileSize];
     }
     return 0;
 }
+
 
     
 - (IBAction)evaluationBtn:(UIButton *)sender {
@@ -162,8 +166,9 @@ static NSString *const logOut = @"/auth/logout";
 }
 
 -(void)wechatShareBtnAction:(UIButton*)sender{
+    MyQrCodeViewController *vc = [[MyQrCodeViewController alloc] init];
     [UMSocialData defaultData].extConfig.wechatSessionData.url = ShareURL;
-    [[UMSocialDataService defaultDataService]  postSNSWithTypes:@[UMShareToWechatSession] content:@"太火鸟情景App" image:[UIImage imageNamed:@""] location:nil urlResource:nil presentedController:self completion:^(UMSocialResponseEntity *response){
+    [[UMSocialDataService defaultDataService]  postSNSWithTypes:@[UMShareToWechatSession] content:@"" image:vc.qrCodeView.qrCodeImageView.image location:nil urlResource:nil presentedController:self completion:^(UMSocialResponseEntity *response){
         if (response.responseCode == UMSResponseCodeSuccess) {
             [SVProgressHUD showSuccessWithStatus:@"分享成功！"];
         }
@@ -171,8 +176,9 @@ static NSString *const logOut = @"/auth/logout";
 }
 
 -(void)timelineShareBtnAction:(UIButton*)sender{
+    MyQrCodeViewController *vc = [[MyQrCodeViewController alloc] init];
     [UMSocialData defaultData].extConfig.wechatTimelineData.url = ShareURL;
-    [[UMSocialDataService defaultDataService]  postSNSWithTypes:@[UMShareToWechatTimeline] content:@"太火鸟情景App" image:[UIImage imageNamed:@"icon_80"] location:nil urlResource:nil presentedController:self completion:^(UMSocialResponseEntity *response){
+    [[UMSocialDataService defaultDataService]  postSNSWithTypes:@[UMShareToWechatTimeline] content:@"" image:vc.qrCodeView.qrCodeImageView.image location:nil urlResource:nil presentedController:self completion:^(UMSocialResponseEntity *response){
         if (response.responseCode == UMSResponseCodeSuccess) {
             [SVProgressHUD showSuccessWithStatus:@"分享成功！"];
         }
@@ -180,8 +186,9 @@ static NSString *const logOut = @"/auth/logout";
 }
 
 -(void)qqShareBtnAction:(UIButton*)sender{
+    MyQrCodeViewController *vc = [[MyQrCodeViewController alloc] init];
     [UMSocialData defaultData].extConfig.qqData.url = ShareURL;
-    [[UMSocialDataService defaultDataService]  postSNSWithTypes:@[UMShareToQQ] content:@"太火鸟情景App" image:[UIImage imageNamed:@"icon_80"] location:nil urlResource:nil presentedController:self completion:^(UMSocialResponseEntity *response){
+    [[UMSocialDataService defaultDataService]  postSNSWithTypes:@[UMShareToQQ] content:@"" image:vc.qrCodeView.qrCodeImageView.image location:nil urlResource:nil presentedController:self completion:^(UMSocialResponseEntity *response){
         if (response.responseCode == UMSResponseCodeSuccess) {
             [SVProgressHUD showSuccessWithStatus:@"分享成功！"];
         }
@@ -189,7 +196,8 @@ static NSString *const logOut = @"/auth/logout";
 }
 
 -(void)sinaShareBtnAction:(UIButton*)sender{
-    [[UMSocialDataService defaultDataService]  postSNSWithTypes:@[UMShareToSina] content:[NSString stringWithFormat:@"最火爆的智能硬件电商平台——太火鸟情景App%@", ShareURL] image:[UIImage imageNamed:@"icon_120"] location:nil urlResource:nil presentedController:self completion:^(UMSocialResponseEntity *response){
+    MyQrCodeViewController *vc = [[MyQrCodeViewController alloc] init];
+    [[UMSocialDataService defaultDataService]  postSNSWithTypes:@[UMShareToSina] content:[NSString stringWithFormat:@"有Fiu的生活，才够意思，快点扫码加我吧！查看个人主页>>%@", @"http://www.taihuoniao.com"] image:vc.qrCodeView.qrCodeImageView.image location:nil urlResource:nil presentedController:self completion:^(UMSocialResponseEntity *response){
         if (response.responseCode == UMSResponseCodeSuccess) {
             [SVProgressHUD showSuccessWithStatus:@"分享成功！"];
         }

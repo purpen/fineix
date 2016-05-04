@@ -16,7 +16,7 @@
     if (self = [super initWithFrame:frame]) {
         [self.contentView addSubview:self.bgImageView];
         [_bgImageView mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.size.mas_equalTo(CGSizeMake(SCREEN_WIDTH, 300/667.0*SCREEN_HEIGHT));
+            make.size.mas_equalTo(CGSizeMake(SCREEN_WIDTH, 344/667.0*SCREEN_HEIGHT));
             make.top.mas_equalTo(self.mas_top).with.offset(0);
             make.left.mas_equalTo(self.mas_left).with.offset(0);
         }];
@@ -83,7 +83,7 @@
 -(UIImageView *)bgImageView{
     if (!_bgImageView) {
         _bgImageView = [[UIImageView alloc] init];
-        _bgImageView.contentMode = UIViewContentModeScaleToFill;
+        //_bgImageView.contentMode = UIViewContentModeScaleToFill;
         _bgImageView.userInteractionEnabled = YES;
         
 //        [_bgImageView addSubview:self.userLevelLabel];

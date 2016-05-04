@@ -78,9 +78,9 @@
         if (_modelAry.count == 0) {
             NSLog(@"没有情景");
             [self.view addSubview:self.tipLabel];
-            _tipLabel.text = @"你还没有粉丝哦";
+            _tipLabel.text = @"不要懈怠更新，粉丝们在看着你呢/多多分享原创内容，会有更多人关注你的";
             [_tipLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-                make.size.mas_equalTo(CGSizeMake(200, 30));
+                make.size.mas_equalTo(CGSizeMake(300, 30));
                 make.centerX.mas_equalTo(self.view.mas_centerX);
                 make.top.mas_equalTo(self.view.mas_top).with.offset(200);
             }];

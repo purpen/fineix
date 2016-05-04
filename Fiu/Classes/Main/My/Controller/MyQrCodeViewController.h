@@ -7,7 +7,10 @@
 //
 
 #import "FBViewController.h"
+@class MyQrCodeView;
 
 @interface MyQrCodeViewController : FBViewController
+
+@property(nonatomic,strong) MyQrCodeView *qrCodeView;//我的二维码图片
 
 @end

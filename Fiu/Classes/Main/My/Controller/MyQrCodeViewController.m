@@ -18,7 +18,7 @@
 @interface MyQrCodeViewController ()<FBNavigationBarItemsDelegate>
 
 @property(nonatomic,strong) CIFilter *filter;//生成二维码  过滤器
-@property(nonatomic,strong) MyQrCodeView *qrCodeView;//我的二维码图片
+
 
 
 @end
