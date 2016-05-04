@@ -64,6 +64,11 @@
 		1FBE626A1CC4CB72009606F7 /* MyPageFocusOnViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1FBE62691CC4CB72009606F7 /* MyPageFocusOnViewController.m */; };
 		1FBE626D1CC4D095009606F7 /* FocusOnTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 1FBE626C1CC4D095009606F7 /* FocusOnTableViewCell.m */; };
 		1FBE62701CC4E3C3009606F7 /* MyFansViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1FBE626F1CC4E3C3009606F7 /* MyFansViewController.m */; };
+		1FCE90551CD9BBA40029E4BA /* ChanePwdViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1FCE90531CD9BBA40029E4BA /* ChanePwdViewController.m */; };
+		1FCE90561CD9BBA40029E4BA /* ChanePwdViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1FCE90541CD9BBA40029E4BA /* ChanePwdViewController.xib */; };
+		1FCE90591CD9E0780029E4BA /* ShieldingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1FCE90581CD9E0780029E4BA /* ShieldingViewController.m */; };
+		1FCE90631CDA06630029E4BA /* MentionedViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1FCE905B1CDA06630029E4BA /* MentionedViewController.m */; };
+		1FCE90641CDA06630029E4BA /* MentionedViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1FCE905C1CDA06630029E4BA /* MentionedViewController.xib */; };
 		1FD7E6771CC8DFE400A69BDD /* MyQrCodeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1FD7E6761CC8DFE400A69BDD /* MyQrCodeViewController.m */; };
 		1FD7E67A1CC8E4F200A69BDD /* MyQrCodeView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1FD7E6791CC8E4F200A69BDD /* MyQrCodeView.m */; };
 		1FE60E2F1CD301BC00045117 /* AllOderViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1FE60E2D1CD301BC00045117 /* AllOderViewController.m */; };
@@ -82,12 +87,6 @@
 		1FE60E5C1CD32FD200045117 /* CommentsTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1FE60E5A1CD32FD200045117 /* CommentsTableViewCell.xib */; };
 		1FE60E651CD33E4700045117 /* MessagesssViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1FE60E631CD33E4700045117 /* MessagesssViewController.m */; };
 		1FE60E661CD33E4700045117 /* MessagesssViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1FE60E641CD33E4700045117 /* MessagesssViewController.xib */; };
-		1FE60E6A1CD340CF00045117 /* MentionedViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1FE60E681CD340CF00045117 /* MentionedViewController.m */; };
-		1FE60E6B1CD340CF00045117 /* MentionedViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1FE60E691CD340CF00045117 /* MentionedViewController.xib */; };
-		1FE60E6F1CD3413100045117 /* ReceivedPraiseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1FE60E6D1CD3413100045117 /* ReceivedPraiseViewController.m */; };
-		1FE60E701CD3413100045117 /* ReceivedPraiseViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1FE60E6E1CD3413100045117 /* ReceivedPraiseViewController.xib */; };
-		1FE60E741CD341A400045117 /* PayAttentionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1FE60E721CD341A400045117 /* PayAttentionViewController.m */; };
-		1FE60E751CD341A400045117 /* PayAttentionViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1FE60E731CD341A400045117 /* PayAttentionViewController.xib */; };
 		1FE60E781CD3E31D00045117 /* FindFriendModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 1FE60E771CD3E31D00045117 /* FindFriendModel.m */; };
 		1FE60E7B1CD3E6DC00045117 /* FindSceneModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 1FE60E7A1CD3E6DC00045117 /* FindSceneModel.m */; };
 		1FEB71721CC8802800CF34F3 /* InvitationModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 1FEB71711CC8802800CF34F3 /* InvitationModel.m */; };
@@ -446,6 +445,14 @@
 		1FBE626C1CC4D095009606F7 /* FocusOnTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FocusOnTableViewCell.m; sourceTree = "<group>"; };
 		1FBE626E1CC4E3C3009606F7 /* MyFansViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyFansViewController.h; sourceTree = "<group>"; };
 		1FBE626F1CC4E3C3009606F7 /* MyFansViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyFansViewController.m; sourceTree = "<group>"; };
+		1FCE90521CD9BBA40029E4BA /* ChanePwdViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChanePwdViewController.h; sourceTree = "<group>"; };
+		1FCE90531CD9BBA40029E4BA /* ChanePwdViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChanePwdViewController.m; sourceTree = "<group>"; };
+		1FCE90541CD9BBA40029E4BA /* ChanePwdViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ChanePwdViewController.xib; sourceTree = "<group>"; };
+		1FCE90571CD9E0780029E4BA /* ShieldingViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShieldingViewController.h; sourceTree = "<group>"; };
+		1FCE90581CD9E0780029E4BA /* ShieldingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ShieldingViewController.m; sourceTree = "<group>"; };
+		1FCE905A1CDA06630029E4BA /* MentionedViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MentionedViewController.h; sourceTree = "<group>"; };
+		1FCE905B1CDA06630029E4BA /* MentionedViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MentionedViewController.m; sourceTree = "<group>"; };
+		1FCE905C1CDA06630029E4BA /* MentionedViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MentionedViewController.xib; sourceTree = "<group>"; };
 		1FD7E6751CC8DFE400A69BDD /* MyQrCodeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyQrCodeViewController.h; sourceTree = "<group>"; };
 		1FD7E6761CC8DFE400A69BDD /* MyQrCodeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyQrCodeViewController.m; sourceTree = "<group>"; };
 		1FD7E6781CC8E4F200A69BDD /* MyQrCodeView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyQrCodeView.h; sourceTree = "<group>"; };
@@ -474,15 +481,6 @@
 		1FE60E621CD33E4700045117 /* MessagesssViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MessagesssViewController.h; sourceTree = "<group>"; };
 		1FE60E631CD33E4700045117 /* MessagesssViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MessagesssViewController.m; sourceTree = "<group>"; };
 		1FE60E641CD33E4700045117 /* MessagesssViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MessagesssViewController.xib; sourceTree = "<group>"; };
-		1FE60E671CD340CF00045117 /* MentionedViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MentionedViewController.h; sourceTree = "<group>"; };
-		1FE60E681CD340CF00045117 /* MentionedViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MentionedViewController.m; sourceTree = "<group>"; };
-		1FE60E691CD340CF00045117 /* MentionedViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MentionedViewController.xib; sourceTree = "<group>"; };
-		1FE60E6C1CD3413100045117 /* ReceivedPraiseViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ReceivedPraiseViewController.h; sourceTree = "<group>"; };
-		1FE60E6D1CD3413100045117 /* ReceivedPraiseViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ReceivedPraiseViewController.m; sourceTree = "<group>"; };
-		1FE60E6E1CD3413100045117 /* ReceivedPraiseViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ReceivedPraiseViewController.xib; sourceTree = "<group>"; };
-		1FE60E711CD341A400045117 /* PayAttentionViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PayAttentionViewController.h; sourceTree = "<group>"; };
-		1FE60E721CD341A400045117 /* PayAttentionViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PayAttentionViewController.m; sourceTree = "<group>"; };
-		1FE60E731CD341A400045117 /* PayAttentionViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PayAttentionViewController.xib; sourceTree = "<group>"; };
 		1FE60E761CD3E31D00045117 /* FindFriendModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FindFriendModel.h; sourceTree = "<group>"; };
 		1FE60E771CD3E31D00045117 /* FindFriendModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FindFriendModel.m; sourceTree = "<group>"; };
 		1FE60E791CD3E6DC00045117 /* FindSceneModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FindSceneModel.h; sourceTree = "<group>"; };
@@ -1151,6 +1149,9 @@
 		1FE60E3C1CD3224200045117 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
+				1FCE905A1CDA06630029E4BA /* MentionedViewController.h */,
+				1FCE905B1CDA06630029E4BA /* MentionedViewController.m */,
+				1FCE905C1CDA06630029E4BA /* MentionedViewController.xib */,
 				1FE60E3F1CD3226400045117 /* MessageViewController.h */,
 				1FE60E401CD3226400045117 /* MessageViewController.m */,
 				1FE60E411CD3226400045117 /* MessageViewController.xib */,
@@ -1163,15 +1164,6 @@
 				1FE60E621CD33E4700045117 /* MessagesssViewController.h */,
 				1FE60E631CD33E4700045117 /* MessagesssViewController.m */,
 				1FE60E641CD33E4700045117 /* MessagesssViewController.xib */,
-				1FE60E671CD340CF00045117 /* MentionedViewController.h */,
-				1FE60E681CD340CF00045117 /* MentionedViewController.m */,
-				1FE60E691CD340CF00045117 /* MentionedViewController.xib */,
-				1FE60E6C1CD3413100045117 /* ReceivedPraiseViewController.h */,
-				1FE60E6D1CD3413100045117 /* ReceivedPraiseViewController.m */,
-				1FE60E6E1CD3413100045117 /* ReceivedPraiseViewController.xib */,
-				1FE60E711CD341A400045117 /* PayAttentionViewController.h */,
-				1FE60E721CD341A400045117 /* PayAttentionViewController.m */,
-				1FE60E731CD341A400045117 /* PayAttentionViewController.xib */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -1219,6 +1211,8 @@
 				1FEF0AE41CC0FC15006EF0C6 /* MyShippingAddressViewController.m */,
 				1F07A63F1CC76C6000CF225F /* HomePageViewController.h */,
 				1F07A6401CC76C6000CF225F /* HomePageViewController.m */,
+				1FCE90571CD9E0780029E4BA /* ShieldingViewController.h */,
+				1FCE90581CD9E0780029E4BA /* ShieldingViewController.m */,
 				1FBE62681CC4CB72009606F7 /* MyPageFocusOnViewController.h */,
 				1FBE62691CC4CB72009606F7 /* MyPageFocusOnViewController.m */,
 				1FBE626E1CC4E3C3009606F7 /* MyFansViewController.h */,
@@ -1349,6 +1343,9 @@
 				1FFFFF1C1CD055BB008E1CDC /* SystemSettingViewController.h */,
 				1FFFFF1D1CD055BB008E1CDC /* SystemSettingViewController.m */,
 				1FFFFF1E1CD055BB008E1CDC /* SystemSettingViewController.xib */,
+				1FCE90521CD9BBA40029E4BA /* ChanePwdViewController.h */,
+				1FCE90531CD9BBA40029E4BA /* ChanePwdViewController.m */,
+				1FCE90541CD9BBA40029E4BA /* ChanePwdViewController.xib */,
 			);
 			path = Setting;
 			sourceTree = "<group>";
@@ -2678,7 +2675,6 @@
 				D812816D1CAA8532007CF08B /* UMShareEditViewController.xib in Resources */,
 				1F18376C1CCDE95A00933CA7 /* ModifyGenderViewController.xib in Resources */,
 				1F223B1D1CD714F3007687F7 /* messages.plist in Resources */,
-				1FE60E751CD341A400045117 /* PayAttentionViewController.xib in Resources */,
 				1F35F0491CD1FF630000DB95 /* DatePickerViewController.xib in Resources */,
 				D803605A1CBF376B001920F9 /* Signup.xib in Resources */,
 				1F3C0A851CBF760C00B84FEB /* SubscribePeopleViewController.xib in Resources */,
@@ -2692,7 +2688,7 @@
 				D803604C1CBF376B001920F9 /* LoginRegisterController.storyboard in Resources */,
 				1FEF0B131CC0FC15006EF0C6 /* My.storyboard in Resources */,
 				1FEF0B1C1CC0FC15006EF0C6 /* MyView.xib in Resources */,
-				1FE60E701CD3413100045117 /* ReceivedPraiseViewController.xib in Resources */,
+				1FCE90641CDA06630029E4BA /* MentionedViewController.xib in Resources */,
 				1FFFFF4F1CD0A0CF008E1CDC /* ImprovViewController.xib in Resources */,
 				D81281701CAA8532007CF08B /* UMSnsAccountViewController.xib in Resources */,
 				1FE60E571CD32E8D00045117 /* CommentsViewController.xib in Resources */,
@@ -2710,7 +2706,6 @@
 				D812815D1CAA8532007CF08B /* Localizable.strings in Resources */,
 				1FFFFF401CD05796008E1CDC /* BindIngViewController.xib in Resources */,
 				D812816A1CAA8532007CF08B /* UMSCommentDetailController.xib in Resources */,
-				1FE60E6B1CD340CF00045117 /* MentionedViewController.xib in Resources */,
 				1FE60E431CD3226400045117 /* MessageViewController.xib in Resources */,
 				D81281751CAA8532007CF08B /* WeiboSDK.bundle in Resources */,
 				1F18377B1CCE0F2200933CA7 /* TalentCertificationViewController.xib in Resources */,
@@ -2728,6 +2723,7 @@
 				D812815C1CAA8532007CF08B /* InfoPlist.strings in Resources */,
 				1F3C0A971CBFA28300B84FEB /* GreatPeopleViewController.xib in Resources */,
 				1FE60E481CD327BE00045117 /* SystemInformsViewController.xib in Resources */,
+				1FCE90561CD9BBA40029E4BA /* ChanePwdViewController.xib in Resources */,
 				1F7B293B1CD6056900482D84 /* MyViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -2795,7 +2791,6 @@
 				D8363A581CD8814600CC4AC0 /* InfoBrandTableViewCell.m in Sources */,
 				D87B69D31CC726D500199EFE /* CommentViewController.m in Sources */,
 				D81281531CAA8532007CF08B /* FBAPI.m in Sources */,
-				1FE60E6F1CD3413100045117 /* ReceivedPraiseViewController.m in Sources */,
 				1F07A6471CC77BBF00CF225F /* OtherCollectionViewCell.m in Sources */,
 				1FD7E6771CC8DFE400A69BDD /* MyQrCodeViewController.m in Sources */,
 				1FEF0B201CC0FC15006EF0C6 /* ShareView.m in Sources */,
@@ -2811,6 +2806,7 @@
 				1F12E6F11CD86F570000519A /* DirectMessageModel.m in Sources */,
 				D80D415B1CAD1437005D72B1 /* FBNavigationViewController.m in Sources */,
 				D8363A301CD8809400CC4AC0 /* CategoryData.m in Sources */,
+				1FCE90551CD9BBA40029E4BA /* ChanePwdViewController.m in Sources */,
 				D8363AC21CD8835D00CC4AC0 /* HomeSceneListUser.m in Sources */,
 				1F35F0441CD1DCF20000DB95 /* LBAddressBookViewController.m in Sources */,
 				D80D415E1CAD144D005D72B1 /* UIBarButtonItem+Helper.m in Sources */,
@@ -2902,10 +2898,10 @@
 				1FEF0B191CC0FC15006EF0C6 /* ChanelViewTwo.m in Sources */,
 				D87B69E11CC7274900199EFE /* FBMenuView.m in Sources */,
 				1F18376B1CCDE95A00933CA7 /* ModifyGenderViewController.m in Sources */,
+				1FCE90591CD9E0780029E4BA /* ShieldingViewController.m in Sources */,
 				D83639AF1CD0660E00CC4AC0 /* FBMapLocatinViewController.m in Sources */,
 				D8A9ACD21CD8A46900A9FCFB /* FiuSceneCollectionViewCell.m in Sources */,
 				1F3C0A911CBF95AC00B84FEB /* SubscribePeopleTableViewCell.m in Sources */,
-				1FE60E6A1CD340CF00045117 /* MentionedViewController.m in Sources */,
 				D8363A6D1CD8818E00CC4AC0 /* GoodsCategoryViewController.m in Sources */,
 				D812812C1CAA8532007CF08B /* PictureView.m in Sources */,
 				D8363A281CD8809400CC4AC0 /* BrandInfoData.m in Sources */,
@@ -2985,6 +2981,7 @@
 				1FEB71781CC8A35A00CF34F3 /* QRCodeScanViewController.m in Sources */,
 				D8A9ACE11CD8A49100A9FCFB /* DiscoverViewController.m in Sources */,
 				D803605B1CBF376B001920F9 /* SignupView.m in Sources */,
+				1FCE90631CDA06630029E4BA /* MentionedViewController.m in Sources */,
 				D8363A951CD8832100CC4AC0 /* DataNumTableViewCell.m in Sources */,
 				D8363ABD1CD8835D00CC4AC0 /* HomeSceneListCounter.m in Sources */,
 				D87B69C01CC726BA00199EFE /* GroupHeaderView.m in Sources */,
@@ -3023,7 +3020,6 @@
 				D8363A981CD8832100CC4AC0 /* UserInfoTableViewCell.m in Sources */,
 				1FEB71721CC8802800CF34F3 /* InvitationModel.m in Sources */,
 				D81281271CAA8532007CF08B /* FBPictureCollectionViewCell.m in Sources */,
-				1FE60E741CD341A400045117 /* PayAttentionViewController.m in Sources */,
 				1FFFFF231CD055BB008E1CDC /* SystemSettingViewController.m in Sources */,
 				D8A9ACB81CD89E0000A9FCFB /* FiuSceneInfoUserInfo.m in Sources */,
 				D8035F3B1CB784B3001920F9 /* UILable+Frame.m in Sources */,

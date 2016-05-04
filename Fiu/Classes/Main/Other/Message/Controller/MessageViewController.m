@@ -10,12 +10,10 @@
 #import "SystemInformsViewController.h"
 #import "CommentsViewController.h"
 #import "MessagesssViewController.h"
-#import "MentionedViewController.h"
-#import "ReceivedPraiseViewController.h"
-#import "PayAttentionViewController.h"
 #import "TipNumberView.h"
 #import "CounterModel.h"
 #import "SVProgressHUD.h"
+#import "MentionedViewController.h"
 
 @interface MessageViewController ()<FBNavigationBarItemsDelegate>
 {
@@ -23,13 +21,13 @@
     int _page;
     int _totalePage;
 }
-@property(nonatomic,strong) TipNumberView *tipView;
+
 @property (weak, nonatomic) IBOutlet UIView *noticeView;
 @property (weak, nonatomic) IBOutlet UIView *commentView;
 @property (weak, nonatomic) IBOutlet UIView *messageView;
-@property (weak, nonatomic) IBOutlet UIView *mentionedView;
-@property (weak, nonatomic) IBOutlet UIView *oraiseView;
-@property (weak, nonatomic) IBOutlet UIView *attentionView;
+@property (weak, nonatomic) IBOutlet UIView *remindView;
+
+
 @end
 
 @implementation MessageViewController
@@ -43,66 +41,43 @@
     if ([self.countModel.fiu_notice_count intValue] == 0) {
         
     }else{
-        [self.noticeView addSubview:self.tipView];
-        self.tipView.tipNumLabel.text = [NSString stringWithFormat:@"%@",self.countModel.fiu_notice_count];
-        [_tipView mas_makeConstraints:^(MASConstraintMaker *make) {
+        TipNumberView *tipviewNum = [TipNumberView getTipNumView];
+        [self.noticeView addSubview:tipviewNum];
+        tipviewNum.tipNumLabel.text = [NSString stringWithFormat:@"%@",self.countModel.fiu_notice_count];
+        [tipviewNum mas_makeConstraints:^(MASConstraintMaker *make) {
             make.size.mas_equalTo(CGSizeMake(15, 15));
-            make.right.mas_equalTo(self.noticeView.mas_right).with.offset(20);
+            make.right.mas_equalTo(self.noticeView.mas_right).with.offset(-30);
             make.centerY.mas_equalTo(self.noticeView.mas_centerY);
         }];
     }
     if ([self.countModel.fiu_comment_count intValue] == 0) {
         
     }else{
-        [self.commentView addSubview:self.tipView];
-        self.tipView.tipNumLabel.text = [NSString stringWithFormat:@"%@",self.countModel.fiu_comment_count];
-        [_tipView mas_makeConstraints:^(MASConstraintMaker *make) {
+        TipNumberView *tipviewNum = [TipNumberView getTipNumView];
+        [self.commentView addSubview:tipviewNum];
+        tipviewNum.tipNumLabel.text = [NSString stringWithFormat:@"%@",self.countModel.fiu_comment_count];
+        [tipviewNum mas_makeConstraints:^(MASConstraintMaker *make) {
             make.size.mas_equalTo(CGSizeMake(15, 15));
-            make.right.mas_equalTo(self.commentView.mas_right).with.offset(20);
+            make.right.mas_equalTo(self.commentView.mas_right).with.offset(-30);
             make.centerY.mas_equalTo(self.commentView.mas_centerY);
         }];
     }
+    
+    NSLog(@"私信数量  %@",self.countModel.message_count);
     if ([self.countModel.message_count intValue] == 0) {
         
     }else{
-        [self.messageView addSubview:self.tipView];
-        self.tipView.tipNumLabel.text = [NSString stringWithFormat:@"%@",self.countModel.message_count];
-        [_tipView mas_makeConstraints:^(MASConstraintMaker *make) {
+        TipNumberView *tipviewNum = [TipNumberView getTipNumView];
+        [self.messageView addSubview:tipviewNum];
+        tipviewNum.tipNumLabel.text = [NSString stringWithFormat:@"%@",self.countModel.message_count];
+        [tipviewNum mas_makeConstraints:^(MASConstraintMaker *make) {
             make.size.mas_equalTo(CGSizeMake(15, 15));
-            make.right.mas_equalTo(self.messageView.mas_right).with.offset(20);
+            make.right.mas_equalTo(self.messageView.mas_right).with.offset(-30);
             make.centerY.mas_equalTo(self.messageView.mas_centerY);
-        }];
-    }
-    if ([self.countModel.sight_love_count intValue] == 0) {
-        
-    }else{
-        [self.oraiseView addSubview:self.tipView];
-        self.tipView.tipNumLabel.text = [NSString stringWithFormat:@"%@",self.countModel.sight_love_count];
-        [_tipView mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.size.mas_equalTo(CGSizeMake(15, 15));
-            make.right.mas_equalTo(self.oraiseView.mas_right).with.offset(20);
-            make.centerY.mas_equalTo(self.oraiseView.mas_centerY);
-        }];
-    }
-    if ([self.countModel.fans_count intValue] == 0) {
-        
-    }else{
-        [self.attentionView addSubview:self.tipView];
-        self.tipView.tipNumLabel.text = [NSString stringWithFormat:@"%@",self.countModel.fans_count];
-        [_tipView mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.size.mas_equalTo(CGSizeMake(15, 15));
-            make.right.mas_equalTo(self.attentionView.mas_right).with.offset(20);
-            make.centerY.mas_equalTo(self.attentionView.mas_centerY);
         }];
     }
 }
 
--(TipNumberView *)tipView{
-    if (!_tipView) {
-        _tipView = [TipNumberView getTipNumView];
-    }
-    return _tipView;
-}
 
 -(void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
@@ -168,18 +143,12 @@
     MessagesssViewController *vc = [[MessagesssViewController alloc] init];
     [self.navigationController pushViewController:vc animated:YES];
 }
-- (IBAction)mentionedBtn:(UIButton *)sender {
+
+- (IBAction)remindBtn:(UIButton *)sender {
     MentionedViewController *vc = [[MentionedViewController alloc] init];
     [self.navigationController pushViewController:vc animated:YES];
 }
-- (IBAction)receivedBtn:(UIButton *)sender {
-    ReceivedPraiseViewController *vc = [[ReceivedPraiseViewController alloc] init];
-    [self.navigationController pushViewController:vc animated:YES];
-}
-- (IBAction)focusOnMeBtn:(UIButton *)sender {
-    PayAttentionViewController *vc = [[PayAttentionViewController alloc] init];
-    [self.navigationController pushViewController:vc animated:YES];
-}
+
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];

@@ -31,7 +31,7 @@
     if (self = [super initWithFrame:frame]) {
                 [self.contentView addSubview:self.bgImageView];
                 [_bgImageView mas_makeConstraints:^(MASConstraintMaker *make) {
-                    make.size.mas_equalTo(CGSizeMake(SCREEN_WIDTH, 240/667.0*SCREEN_HEIGHT));
+                    make.size.mas_equalTo(CGSizeMake(SCREEN_WIDTH, 300/667.0*SCREEN_HEIGHT));
                     make.top.equalTo(self.mas_top).with.offset(0);
                     make.left.equalTo(self.mas_left).with.offset(0);
                 }];

@@ -1,19 +1,19 @@
 //
-//  FBSheetViewController.m
+//  ShieldingViewController.m
 //  Fiu
 //
-//  Created by THN-Dong on 16/4/19.
+//  Created by THN-Dong on 16/5/4.
 //  Copyright © 2016年 taihuoniao. All rights reserved.
 //
 
-#import "FBSheetViewController.h"
+#import "ShieldingViewController.h"
 #import "Fiu.h"
 
-@interface FBSheetViewController ()
+@interface ShieldingViewController ()
 
 @end
 
-@implementation FBSheetViewController
+@implementation ShieldingViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -23,7 +23,7 @@
 
 -(UIView *)sheetView{
     if (!_sheetView) {
-        _sheetView = [[UIView alloc] initWithFrame:CGRectMake(0, 1070*0.5/667.0*SCREEN_HEIGHT, SCREEN_WIDTH, 132/667.0*SCREEN_HEIGHT)];
+        _sheetView = [[UIView alloc] initWithFrame:CGRectMake(0, SCREEN_HEIGHT-(132 - 44)/667.0*SCREEN_HEIGHT, SCREEN_WIDTH, (132 - 44)/667.0*SCREEN_HEIGHT)];
         _sheetView.backgroundColor = [UIColor colorWithHexString:lineGrayColor];
         
     }
@@ -50,12 +50,11 @@
     }
 }
 
+
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
-
-
 
 /*
 #pragma mark - Navigation

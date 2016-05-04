@@ -18,7 +18,7 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
     self.delegate = self;
-    self.navViewTitle.text = 
+    self.navViewTitle.text =
 }
 
 - (void)didReceiveMemoryWarning {

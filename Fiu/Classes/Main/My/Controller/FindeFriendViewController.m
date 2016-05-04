@@ -20,6 +20,7 @@
 #import "FindSceneModel.h"
 #import <SDWebImage/UIImageView+WebCache.h>
 #import "MyFansActionSheetViewController.h"
+#import "HomePageViewController.h"
 
 @interface FindeFriendViewController ()<FBNavigationBarItemsDelegate,UITableViewDelegate,UITableViewDataSource,FBRequestDelegate>
 {
@@ -65,17 +66,22 @@ static NSString *const ShareURL = @"http://m.taihuoniao.com/guide/app_about";
             model.avatarUrl = rowsDict[@"medium_avatar_url"];
             model.nickName = rowsDict[@"nickname"];
             model.address = rowsDict[@"address"];
+            model.isLove = rowsDict[@"is_love"];
             NSArray *sceneAry = rowsDict[@"scene"];
-            
+            NSLog( @"数组数量  %@",sceneAry);
+            //model.scene = [NSMutableArray array];
             for (NSDictionary *sceneDict in sceneAry) {
+                
                 FindSceneModel *model1 = [[FindSceneModel alloc] init];
                 model1.id = sceneDict[@"_id"];
                 model1.title = sceneDict[@"title"];
+                NSLog(@"标题   %@",model1.title);
                 model1.address = sceneDict[@"address"];
                 model1.cober = sceneDict[@"cover_url"];
-                model.scene = [NSMutableArray array];
                 [model.scene addObject:model1];
             }
+            FindSceneModel *model1 = model.scene[1];
+            NSLog(@"嘿嘿  %@",model1.title);
             [_userAry addObject:model];
         }
         NSLog(@"_userAry  %@",_userAry);
@@ -138,6 +144,11 @@ static NSString *const ShareURL = @"http://m.taihuoniao.com/guide/app_about";
         }
         FindFriendModel *model = _userAry[indexPath.row];
         cell.focusBtn.tag = indexPath.row;
+        if ([model.isLove isEqualToNumber:@0]) {
+            cell.focusBtn.selected = NO;
+        }else if ([model.isLove isEqualToNumber:@1]){
+            cell.focusBtn.selected = YES;
+        }
         [cell.headImageView sd_setImageWithURL:[NSURL URLWithString:model.avatarUrl]];
         cell.nameLbael.text = model.nickName;
         cell.deressLabel.text = model.address;
@@ -243,6 +254,14 @@ static NSString *const ShareURL = @"http://m.taihuoniao.com/guide/app_about";
             LBAddressBookViewController *vc = [[LBAddressBookViewController alloc] init];
             [self.navigationController pushViewController:vc animated:YES];
         }
+    }
+    if (indexPath.section == 1) {
+        FindFriendModel *model = _userAry[indexPath.row];
+        HomePageViewController *vc = [[HomePageViewController alloc] init];
+        vc.type = @1;
+        vc.isMySelf = NO;
+        vc.userId = [NSString stringWithFormat:@"%@",model.userid];
+        [self.navigationController pushViewController:vc animated:YES];
     }
 }
 

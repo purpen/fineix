@@ -19,6 +19,7 @@
 #import "AboutViewController.h"
 #import "UMSocial.h"
 #import "Fiu.h"
+#import "ChanePwdViewController.h"
 
 @interface SystemSettingViewController ()<FBNavigationBarItemsDelegate,NotificationDelege,FBRequestDelegate>
 
@@ -213,6 +214,8 @@ static NSString *const logOut = @"/auth/logout";
 #pragma mark - 修改密码
 - (IBAction)changePwd:(UIButton *)sender {
     NSLog(@"修改密码");
+    ChanePwdViewController *vc = [[ChanePwdViewController alloc] init];
+    [self.navigationController pushViewController:vc animated:YES];
 }
 
 //退出登录
