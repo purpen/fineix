@@ -11,6 +11,7 @@
 #import "SVProgressHUD.h"
 #import "MJRefresh.h"
 #import "SceneInfoViewController.h"
+#import "UserInfoEntity.h"
 
 @interface PraisedViewController ()<FBNavigationBarItemsDelegate,UITableViewDelegate,UITableViewDataSource>
 @pro_strong NSMutableArray      *   sceneListMarr;
@@ -41,8 +42,9 @@ static NSString *const URLSceneList = @"/scene_sight/";
 #pragma mark - 网络请求
 - (void)networkRequestData {
     [SVProgressHUD show];
-    NSDictionary *  requestParams = @{@"page":@(self.currentpageNum + 1), @"size":@10, @"stick":@1};
-    self.sceneListRequest = [FBAPI getWithUrlString:URLSceneList requestDictionary:requestParams delegate:self];
+    UserInfoEntity *entity = [UserInfoEntity defaultUserInfoEntity];
+    NSDictionary *  requestParams = @{@"size":@"10", @"page":@(self.currentpageNum + 1),@"user_id":entity.userId,@"type":@"scene",@"event":@"love"};
+    self.sceneListRequest = [FBAPI getWithUrlString:@"/favorite" requestDictionary:requestParams delegate:self];
     [self.sceneListRequest startRequestSuccess:^(FBRequest *request, id result) {
         NSArray * sceneArr = [[result valueForKey:@"data"] valueForKey:@"rows"];
         for (NSDictionary * sceneDic in sceneArr) {

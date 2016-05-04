@@ -253,7 +253,7 @@ static NSString *const IconURL = @"/my/add_head_pic";
     [SVProgressHUD show];
     FBRequest *request = [FBAPI postWithUrlString:@"/user/user_info" requestDictionary:@{@"user_id":self.userId} delegate:self];
     [request startRequestSuccess:^(FBRequest *request, id result) {
-        NSLog(@"&&&&&&&&result %@",result);
+        NSLog(@"AD撒娇大时代撒旦&&&&&&&&result %@",result);
         NSDictionary *dataDict = result[@"data"];
         _chanelV.scenarioNumLabel.text = [NSString stringWithFormat:@"%@",dataDict[@"scene_count"]];
         _chanelV.fieldNumLabel.text = [NSString stringWithFormat:@"%@",dataDict[@"sight_count"]];
@@ -314,6 +314,7 @@ static NSString *const IconURL = @"/my/add_head_pic";
 -(UICollectionView *)myCollectionView{
     if (!_myCollectionView) {
         UICollectionViewFlowLayout *layout = [[UICollectionViewFlowLayout alloc] init];
+        
         layout.minimumInteritemSpacing = 1;
         _myCollectionView = [[UICollectionView alloc] initWithFrame:self.view.frame collectionViewLayout:layout];
         _myCollectionView.backgroundColor = [UIColor whiteColor];
@@ -328,6 +329,8 @@ static NSString *const IconURL = @"/my/add_head_pic";
     }
     return _myCollectionView;
 }
+
+
 
 -(NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section{
     if (section == 2){
@@ -395,7 +398,6 @@ static NSString *const IconURL = @"/my/add_head_pic";
         if ([self.type isEqualToNumber:@2]) {
             ScenceListCollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"ScenceListCollectionViewCell" forIndexPath:indexPath];
             [cell setUIWithModel:_sceneListMarr[indexPath.row]];
-            cell.backgroundColor = [UIColor redColor];
             return cell;
         }else if([self.type isEqualToNumber:@1]){
             AllSceneCollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"AllSceneCollectionViewCell" forIndexPath:indexPath];
@@ -624,17 +626,17 @@ static NSString *const IconURL = @"/my/add_head_pic";
         //改变图片的y坐标和高度
         if (_isMySelf) {
             BackgroundCollectionViewCell *cell = (BackgroundCollectionViewCell*)[_myCollectionView cellForItemAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0]];
-            CGRect frame = cell.bgImageView.frame;
+            CGRect frame = cell.frame;
             
             frame.origin.y = y;
-            frame.size.height = -y+240/667.0*SCREEN_HEIGHT;
-            cell.bgImageView.frame = frame;
+            frame.size.height = -y+239/667.0*SCREEN_HEIGHT;
+            cell.frame = frame;
         }else{
             OtherCollectionViewCell *cell = (OtherCollectionViewCell*)[_myCollectionView cellForItemAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0]];
             CGRect frame = cell.bgImageView.frame;
             
             frame.origin.y = y;
-            frame.size.height = -y+240/667.0*SCREEN_HEIGHT;
+            frame.size.height = -y+239/667.0*SCREEN_HEIGHT;
             cell.bgImageView.frame = frame;
         }
         

@@ -210,6 +210,11 @@ static NSString *const logOut = @"/auth/logout";
     [self.navigationController popViewControllerAnimated:YES];
 }
 
+#pragma mark - 修改密码
+- (IBAction)changePwd:(UIButton *)sender {
+    NSLog(@"修改密码");
+}
+
 //退出登录
 - (IBAction)quitBtn:(UIButton *)sender {
     //如果已经登录了开始发送网络请求

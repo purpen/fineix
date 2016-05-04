@@ -64,6 +64,8 @@
 		1FBE626A1CC4CB72009606F7 /* MyPageFocusOnViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1FBE62691CC4CB72009606F7 /* MyPageFocusOnViewController.m */; };
 		1FBE626D1CC4D095009606F7 /* FocusOnTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 1FBE626C1CC4D095009606F7 /* FocusOnTableViewCell.m */; };
 		1FBE62701CC4E3C3009606F7 /* MyFansViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1FBE626F1CC4E3C3009606F7 /* MyFansViewController.m */; };
+		1FCE90501CD9A2C40029E4BA /* ChangePwdViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1FCE904E1CD9A2C40029E4BA /* ChangePwdViewController.m */; };
+		1FCE90511CD9A2C40029E4BA /* ChangePwdViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1FCE904F1CD9A2C40029E4BA /* ChangePwdViewController.xib */; };
 		1FD7E6771CC8DFE400A69BDD /* MyQrCodeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1FD7E6761CC8DFE400A69BDD /* MyQrCodeViewController.m */; };
 		1FD7E67A1CC8E4F200A69BDD /* MyQrCodeView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1FD7E6791CC8E4F200A69BDD /* MyQrCodeView.m */; };
 		1FE60E2F1CD301BC00045117 /* AllOderViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1FE60E2D1CD301BC00045117 /* AllOderViewController.m */; };
@@ -439,6 +441,9 @@
 		1FBE626C1CC4D095009606F7 /* FocusOnTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FocusOnTableViewCell.m; sourceTree = "<group>"; };
 		1FBE626E1CC4E3C3009606F7 /* MyFansViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyFansViewController.h; sourceTree = "<group>"; };
 		1FBE626F1CC4E3C3009606F7 /* MyFansViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyFansViewController.m; sourceTree = "<group>"; };
+		1FCE904D1CD9A2C40029E4BA /* ChangePwdViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChangePwdViewController.h; sourceTree = "<group>"; };
+		1FCE904E1CD9A2C40029E4BA /* ChangePwdViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChangePwdViewController.m; sourceTree = "<group>"; };
+		1FCE904F1CD9A2C40029E4BA /* ChangePwdViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ChangePwdViewController.xib; sourceTree = "<group>"; };
 		1FD7E6751CC8DFE400A69BDD /* MyQrCodeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyQrCodeViewController.h; sourceTree = "<group>"; };
 		1FD7E6761CC8DFE400A69BDD /* MyQrCodeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyQrCodeViewController.m; sourceTree = "<group>"; };
 		1FD7E6781CC8E4F200A69BDD /* MyQrCodeView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyQrCodeView.h; sourceTree = "<group>"; };
@@ -1328,6 +1333,9 @@
 				1FFFFF1C1CD055BB008E1CDC /* SystemSettingViewController.h */,
 				1FFFFF1D1CD055BB008E1CDC /* SystemSettingViewController.m */,
 				1FFFFF1E1CD055BB008E1CDC /* SystemSettingViewController.xib */,
+				1FCE904D1CD9A2C40029E4BA /* ChangePwdViewController.h */,
+				1FCE904E1CD9A2C40029E4BA /* ChangePwdViewController.m */,
+				1FCE904F1CD9A2C40029E4BA /* ChangePwdViewController.xib */,
 			);
 			path = Setting;
 			sourceTree = "<group>";
@@ -2590,6 +2598,7 @@
 				1FE60E6B1CD340CF00045117 /* MentionedViewController.xib in Resources */,
 				1FE60E431CD3226400045117 /* MessageViewController.xib in Resources */,
 				D81281751CAA8532007CF08B /* WeiboSDK.bundle in Resources */,
+				1FCE90511CD9A2C40029E4BA /* ChangePwdViewController.xib in Resources */,
 				1F18377B1CCE0F2200933CA7 /* TalentCertificationViewController.xib in Resources */,
 				1FEF0B171CC0FC15006EF0C6 /* chanel.xib in Resources */,
 				D812816E1CAA8532007CF08B /* UMShareEditViewControlleriPad.xib in Resources */,
@@ -2852,6 +2861,7 @@
 				1FEF0B1B1CC0FC15006EF0C6 /* MyHomeV.m in Sources */,
 				D8363A291CD8809400CC4AC0 /* Goods.m in Sources */,
 				D83639C81CD0D62900CC4AC0 /* HotTagsData.m in Sources */,
+				1FCE90501CD9A2C40029E4BA /* ChangePwdViewController.m in Sources */,
 				D81281201CAA8532007CF08B /* FBPhoto.m in Sources */,
 				D803605C1CBF376B001920F9 /* SubmitView.m in Sources */,
 				1FEB71781CC8A35A00CF34F3 /* QRCodeScanViewController.m in Sources */,
@@ -2899,10 +2909,7 @@
 				1FFFFF231CD055BB008E1CDC /* SystemSettingViewController.m in Sources */,
 				D8035F3B1CB784B3001920F9 /* UILable+Frame.m in Sources */,
 				D8363A5A1CD8814600CC4AC0 /* InfoRecommendTableViewCell.m in Sources */,
-				1FEF0B0E1CC0FC15006EF0C6 /* MyOrderViewController.m in Sources */,
 				D8363A321CD8809400CC4AC0 /* CategoryRow.m in Sources */,
-				D83639EE1CD2287C00CC4AC0 /* CategoryGoods.m in Sources */,
-				D83639DF1CD1D59700CC4AC0 /* CategorySceneTag.m in Sources */,
 				D81281571CAA8532007CF08B /* NSString+Helper.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
