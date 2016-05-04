@@ -20,5 +20,6 @@
 @property(nonatomic,strong) NSNumber *order_sended_goods;
 @property(nonatomic,strong) NSNumber *order_evaluate;
 @property(nonatomic,strong) NSNumber *order_total_count;
+@property(nonatomic,strong) NSNumber *fans_count;
 
 @end

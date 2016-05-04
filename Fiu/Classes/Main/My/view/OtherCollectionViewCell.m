@@ -99,6 +99,12 @@
 }
 
 -(void)setUIWithModel:(UserInfo *)model{
+    
+    if ([model.is_love isEqualToNumber:@0]) {
+        self.focusOnBtn.selected = NO;
+    }else if([model.is_love isEqualToNumber:@1]){
+        self.focusOnBtn.selected = YES;
+    }
     //这里要改成别人的信息
     
     //更新头像
@@ -109,7 +115,7 @@
     self.userProfile.text = model.summary;
     self.userLevelLabel.text = [NSString stringWithFormat:@"%@|V%d",model.levelDesc,[model.level intValue]];
     
-    self.bgImageView.image = [UIImage imageNamed:@"image"];
+    [self.bgImageView sd_setImageWithURL:[NSURL URLWithString:model.head_pic_url] placeholderImage:[UIImage imageNamed:@"image"]];
 }
 
 #pragma mark - 个人信息背景图

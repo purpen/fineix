@@ -9,6 +9,7 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="SystemSettingViewController">
             <connections>
                 <outlet property="backBtn" destination="yxg-PK-hVr" id="12W-Yv-PoH"/>
+                <outlet property="memoryLabel" destination="rHa-Ix-wbU" id="klw-nD-8Fh"/>
                 <outlet property="pushStateLabel" destination="E66-TT-Ni8" id="jWb-nH-XQs"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
@@ -93,10 +94,21 @@
                                 <action selector="clearBtn:" destination="-1" eventType="touchUpInside" id="US9-Dm-J0W"/>
                             </connections>
                         </button>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0.00M" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rHa-Ix-wbU">
+                            <rect key="frame" x="286" y="12" width="55" height="21"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="21" id="BBY-gW-8zl"/>
+                                <constraint firstAttribute="width" constant="55" id="rxR-JJ-HAt"/>
+                            </constraints>
+                            <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                            <color key="textColor" red="0.74509803919999995" green="0.53725490200000003" blue="0.078431372550000003" alpha="1" colorSpace="calibratedRGB"/>
+                            <nil key="highlightedColor"/>
+                        </label>
                     </subviews>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     <constraints>
                         <constraint firstItem="uj2-5Z-h7c" firstAttribute="centerY" secondItem="HKf-Af-dJb" secondAttribute="centerY" id="1wV-Fv-b6g"/>
+                        <constraint firstItem="Sy9-KO-3QV" firstAttribute="leading" secondItem="rHa-Ix-wbU" secondAttribute="trailing" constant="10" id="6kL-bn-Uuv"/>
                         <constraint firstItem="uj2-5Z-h7c" firstAttribute="leading" secondItem="HKf-Af-dJb" secondAttribute="leading" constant="15" id="J4a-Bs-DE4"/>
                         <constraint firstAttribute="bottom" secondItem="kDE-Wb-xZr" secondAttribute="bottom" constant="5" id="JDk-c2-HcE"/>
                         <constraint firstItem="kDE-Wb-xZr" firstAttribute="top" secondItem="HKf-Af-dJb" secondAttribute="top" constant="9" id="MZs-QX-N1I"/>
@@ -106,6 +118,7 @@
                         <constraint firstAttribute="height" constant="44" id="dx3-tN-ViM"/>
                         <constraint firstItem="Sy9-KO-3QV" firstAttribute="centerY" secondItem="HKf-Af-dJb" secondAttribute="centerY" id="e2s-Ga-N0K"/>
                         <constraint firstItem="kDE-Wb-xZr" firstAttribute="leading" secondItem="HKf-Af-dJb" secondAttribute="leading" constant="8" id="fRv-tY-zb0"/>
+                        <constraint firstItem="rHa-Ix-wbU" firstAttribute="centerY" secondItem="HKf-Af-dJb" secondAttribute="centerY" id="iHE-gc-ngT"/>
                     </constraints>
                     <variation key="default">
                         <mask key="constraints">

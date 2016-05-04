@@ -8,6 +8,12 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="MessageViewController">
             <connections>
+                <outlet property="attentionView" destination="Pv2-ck-QbX" id="2Jk-wU-BkU"/>
+                <outlet property="commentView" destination="wjc-0e-vb2" id="Ea3-uv-scd"/>
+                <outlet property="mentionedView" destination="fUP-O6-Mdo" id="cEe-YH-nM4"/>
+                <outlet property="messageView" destination="NzV-At-ahF" id="Oj2-Gu-g5g"/>
+                <outlet property="noticeView" destination="vHl-fU-CjN" id="R6Q-RA-U0u"/>
+                <outlet property="oraiseView" destination="bTF-th-TNa" id="opy-Y9-pHU"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>

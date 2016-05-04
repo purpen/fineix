@@ -16,9 +16,11 @@
     if (self = [super initWithFrame:frame]) {
         [self.contentView addSubview:self.bgImageView];
         [_bgImageView mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.size.mas_equalTo(self.frame.size);
-            make.top.equalTo(self.mas_top).with.offset(0);
-            make.left.equalTo(self.mas_left).with.offset(0);
+            //make.size.mas_equalTo(self.frame.size);
+            make.top.mas_equalTo(self.mas_top).with.offset(0);
+            make.left.mas_equalTo(self.mas_left).with.offset(0);
+            make.right.mas_equalTo(self.mas_right).with.offset(0);
+            make.bottom.mas_equalTo(self.mas_bottom).with.offset(0);
         }];
         
         [self.contentView addSubview:self.userLevelLabel];
@@ -73,7 +75,7 @@
         [self.userHeadImageView sd_setImageWithURL:[NSURL URLWithString:entity.mediumAvatarUrl] placeholderImage:nil completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
             
         }];
-    self.bgImageView.image = [UIImage imageNamed:@"image"];
+    [self.bgImageView sd_setImageWithURL:[NSURL URLWithString:entity.head_pic_url] placeholderImage:[UIImage imageNamed:@"image"]];
     self.nickName.text = entity.nickname;
     self.userProfile.text = entity.summary;
     self.userLevelLabel.text = [NSString stringWithFormat:@"%@|V%d",entity.levelDesc,[entity.level intValue]];

@@ -9,6 +9,8 @@
 #import "ChatTableViewCell.h"
 #import "AXModel.h"
 #import "Fiu.h"
+#import <SDWebImage/UIImageView+WebCache.h>
+#import "UserInfoEntity.h"
 
 @implementation ChatTableViewCell
 
@@ -20,6 +22,10 @@
 - (void)setMessage:(AXModel *)message
 {
     _message = message;
+    
+    UserInfoEntity *entity = [UserInfoEntity defaultUserInfoEntity];
+    [self.myIconImageView sd_setImageWithURL:[NSURL URLWithString:entity.mediumAvatarUrl] placeholderImage:[UIImage imageNamed:@"user"]];
+    
     
     if (message.hideTime) { // 隐藏时间
         self.timeLabel.hidden = YES;
@@ -34,7 +40,7 @@
         }];
     }
     
-    if (message.user_type == XMGMessageTypeMe) { // 右边
+    if ([message.user_type isEqualToNumber:@1]) { // 右边
         [self settingShowTextButton:self.myTextBtn showIconView:self.myIconImageView hideTextButton:self.otherTextBtn hideIconView:self.otherIconImageView];
     } else { // 左边
         [self settingShowTextButton:self.otherTextBtn showIconView:self.otherIconImageView hideTextButton:self.myTextBtn hideIconView:self.myIconImageView];

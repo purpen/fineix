@@ -8,15 +8,11 @@
 
 #import <UIKit/UIKit.h>
 
-typedef enum {
-    XMGMessageTypeMe = 0,
-    XMGMessageTypeOther = 1
-} XMGMessageType;
 
 @interface AXModel : NSObject
-@property (nonatomic, strong) NSString *content;
-@property (nonatomic, strong) NSString *created_at;
-@property (nonatomic, assign) XMGMessageType user_type;
+@property (nonatomic, copy) NSString *content;
+@property (nonatomic, copy) NSString *created_at;
+@property (nonatomic, strong) NSNumber *user_type;
 
 /** cell的高度 */
 @property (nonatomic, assign) CGFloat cellHeight;

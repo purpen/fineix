@@ -24,6 +24,7 @@
 
 @property (weak, nonatomic) IBOutlet UILabel *pushStateLabel;
 @property (weak, nonatomic) IBOutlet UIButton *backBtn;
+@property (weak, nonatomic) IBOutlet UILabel *memoryLabel;
 
 @end
 static NSString *const ShareURL = @"http://m.taihuoniao.com/guide/app_about";
@@ -52,6 +53,10 @@ static NSString *const logOut = @"/auth/logout";
         self.pushStateLabel.text = @"已开启";
     }
     //-----
+    //清空缓存
+    NSString *cachesPath = [NSSearchPathForDirectoriesInDomains(NSCachesDirectory, NSUserDomainMask, YES) firstObject];
+    NSLog(@"内存  %f",[self folderSizeAtPath:cachesPath]);
+    self.memoryLabel.text = [NSString stringWithFormat:@"%.1fM",[self folderSizeAtPath:cachesPath]];
 }
 - (IBAction)pushSetBtn:(UIButton *)sender {
     //推送设置
@@ -76,10 +81,8 @@ static NSString *const logOut = @"/auth/logout";
                 //本来就是空的
                 [SVProgressHUD showInfoWithStatus:@"缓存已清空"];
             }else{
-                //获取文件里存储的文件大小
-                NSString *cacheStr = [NSString stringWithFormat:@"%.1fM",[self folderSizeAtPath:cachesPath]];
                 //提示清空，改变显示的内存大小
-                [SVProgressHUD showSuccessWithStatus:[NSString stringWithFormat:@"清理缓存成功 %@",cacheStr]];
+                [SVProgressHUD showSuccessWithStatus:[NSString stringWithFormat:@"清理缓存成功"]];
                 
             }
         }

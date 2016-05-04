@@ -23,7 +23,7 @@ static NSString *const URLSceneList = @"/scene_sight/";
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
-    
+    [[UIApplication sharedApplication] setStatusBarHidden:NO withAnimation:(UIStatusBarAnimationSlide)];
     [self setNavigationViewUI];
     
 }

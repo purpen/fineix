@@ -22,6 +22,9 @@
     int _page;
     int _totalePage;
 }
+
+@property(nonatomic,strong) UILabel *tipLabel;
+
 @end
 
 @implementation MyPageFocusOnViewController
@@ -61,6 +64,18 @@
             model.mediumAvatarUrl = followsDict[@"avatar_url"];
             [_modelAry addObject:model];
         }
+        if (_modelAry.count == 0) {
+            [self.view addSubview:self.tipLabel];
+            _tipLabel.text = @"快去关注别人吧";
+            [_tipLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+                make.size.mas_equalTo(CGSizeMake(200, 30));
+                make.centerX.mas_equalTo(self.view.mas_centerX);
+                make.top.mas_equalTo(self.view.mas_top).with.offset(200);
+            }];
+        }else{
+            [self.tipLabel removeFromSuperview];
+        }
+
         [self.mytableView reloadData];
         _page = [[[result valueForKey:@"data"] valueForKey:@"current_page"] intValue];
         _totalePage = [[[result valueForKey:@"data"] valueForKey:@"total_page"] intValue];
@@ -73,6 +88,15 @@
         [SVProgressHUD showErrorWithStatus:[error localizedDescription]];
     }];
 
+}
+
+-(UILabel *)tipLabel{
+    if (!_tipLabel) {
+        _tipLabel = [[UILabel alloc] init];
+        _tipLabel.textAlignment = NSTextAlignmentCenter;
+        _tipLabel.font = [UIFont systemFontOfSize:13];
+    }
+    return _tipLabel;
 }
 
 //  判断是否为最后一条数据

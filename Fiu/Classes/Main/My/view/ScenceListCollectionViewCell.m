@@ -80,7 +80,7 @@
 - (UIImageView *)bgImage {
     if (!_bgImage) {
         _bgImage = [[UIImageView alloc] init];
-        _bgImage.contentMode = UIViewContentModeScaleAspectFit;
+        //_bgImage.contentMode = UIViewContentModeScaleAspectFit;
         
         [_bgImage addSubview:self.userView];
         [_userView mas_makeConstraints:^(MASConstraintMaker *make) {

@@ -13,6 +13,7 @@
 #import "UserInfoEntity.h"
 #import "Fiu.h"
 #import "SVProgressHUD.h"
+#import <SDWebImage/UIImageView+WebCache.h>
 
 @interface DirectMessagesViewController ()<FBNavigationBarItemsDelegate,UITableViewDelegate,FBRequestDelegate,UITableViewDataSource>
 
@@ -77,7 +78,11 @@
         // 用来记录上一条消息模型
         AXModel *lastMessage = nil;
         for (NSDictionary * fiuSceneDic in fiuSceneArr) {
-            AXModel *message = [AXModel messageWithDict:fiuSceneDic];
+            //AXModel *message = [AXModel messageWithDict:fiuSceneDic];
+            AXModel *message = [[AXModel alloc] init];
+            message.content = [fiuSceneDic objectForKey:@"content"];
+            message.created_at = [fiuSceneDic objectForKey:@"created_at"];
+            message.user_type = [fiuSceneDic objectForKey:@"user_type"];
             //加载数据时，判断哪个时间值相等。
             message.hideTime = [message.created_at isEqualToString:lastMessage.created_at];
             [messageArray addObject:message];
@@ -119,7 +124,7 @@
     ChatTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"message"];
     
     cell.message = self.messages[indexPath.row];
-    
+    [cell.otherIconImageView sd_setImageWithURL:[NSURL URLWithString:self.otherIconImageUrl] placeholderImage:[UIImage imageNamed:@"user"]];
     return cell;
 }
 
