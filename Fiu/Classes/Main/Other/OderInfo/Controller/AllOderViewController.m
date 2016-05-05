@@ -19,8 +19,8 @@
 @property (weak, nonatomic) IBOutlet UIButton *JDBtn;
 @property (weak, nonatomic) IBOutlet UIButton *taoBaoBtn;
 @property (weak, nonatomic) IBOutlet UIButton *tMBtn;
-@property (weak, nonatomic) IBOutlet UIButton *yZBtn;
 @property (weak, nonatomic) IBOutlet UIButton *returnGoodsBtn;
+@property (weak, nonatomic) IBOutlet UIView *chanelView;
 @end
 
 @implementation AllOderViewController
@@ -30,6 +30,7 @@
     // Do any additional setup after loading the view from its nib.
     self.delegate = self;
     self.navViewTitle.text = @"全部订单";
+    
 }
 - (IBAction)allOderBtn:(UIButton *)sender {
     MyOderInfoViewController *vc = [[MyOderInfoViewController alloc] init];

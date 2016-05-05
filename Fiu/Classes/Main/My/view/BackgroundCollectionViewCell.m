@@ -96,7 +96,7 @@
         [_bgImageView addSubview:self.backBtn];
         [_backBtn mas_makeConstraints:^(MASConstraintMaker *make) {
             make.size.mas_equalTo(CGSizeMake(30, 18));
-            make.top.mas_equalTo(_bgImageView.mas_top).with.offset(35);
+            make.top.mas_equalTo(_bgImageView.mas_top).with.offset(79);
             make.left.mas_equalTo(_bgImageView.mas_left).with.offset(16);
         }];
         
@@ -138,7 +138,7 @@
         _editBtn.userInteractionEnabled = YES;
         _editBtn.clipsToBounds = YES;
         _editBtn.autoresizingMask = UIViewAutoresizingFlexibleBottomMargin;
-        [_editBtn setImage:[UIImage imageNamed:@"editData"] forState:UIControlStateNormal];
+        [_editBtn setImage:[UIImage imageNamed:@"SET"] forState:UIControlStateNormal];
     }
     return _editBtn;
 }

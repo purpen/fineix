@@ -76,6 +76,18 @@
             make.centerY.mas_equalTo(self.messageView.mas_centerY);
         }];
     }
+    if ([self.countModel.alert_count intValue] == 0) {
+        
+    }else{
+        TipNumberView *tipviewNum = [TipNumberView getTipNumView];
+        [self.remindView addSubview:tipviewNum];
+        tipviewNum.tipNumLabel.text = [NSString stringWithFormat:@"%@",self.countModel.alert_count];
+        [tipviewNum mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.size.mas_equalTo(CGSizeMake(15, 15));
+            make.right.mas_equalTo(self.remindView.mas_right).with.offset(-30);
+            make.centerY.mas_equalTo(self.remindView.mas_centerY);
+        }];
+    }
 }
 
 

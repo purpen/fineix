@@ -149,7 +149,7 @@
         [_bgImageView addSubview:self.backBtn];
         [_backBtn mas_makeConstraints:^(MASConstraintMaker *make) {
             make.size.mas_equalTo(CGSizeMake(30, 18));
-            make.top.mas_equalTo(_bgImageView.mas_top).with.offset(35);
+            make.top.mas_equalTo(_bgImageView.mas_top).with.offset(79);
             make.left.mas_equalTo(_bgImageView.mas_left).with.offset(16);
         }];
 //
@@ -180,7 +180,7 @@
         [_moreBtn mas_makeConstraints:^(MASConstraintMaker *make) {
             make.size.mas_equalTo(CGSizeMake(30, 20));
             make.right.mas_equalTo(_bgImageView.mas_right).with.offset(-16);
-            make.top.mas_equalTo(_bgImageView.mas_top).with.offset(35);
+            make.top.mas_equalTo(_bgImageView.mas_top).with.offset(79);
         }];
     }
     return _bgImageView;

@@ -37,7 +37,7 @@
         
         [self.contentView addSubview:self.titleLbael];
         [_titleLbael mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.size.mas_equalTo(CGSizeMake(90, 21));
+            make.size.mas_equalTo(CGSizeMake(200, 21));
             make.left.mas_equalTo(_headImageView.mas_right).with.offset(10/667.0*SCREEN_HEIGHT);
             make.top.mas_equalTo(self.mas_top).with.offset(13/667.0*SCREEN_HEIGHT);
         }];
@@ -111,8 +111,8 @@
 -(void)setUIWithModel:(UserInfo *)model{
     [self.headImageView sd_setImageWithURL:[NSURL URLWithString:model.mediumAvatarUrl] placeholderImage:[UIImage imageNamed:@"user"]];
     self.timeLabel.text = model.birthday;
-    //self.iconImageView.image = [UIImage imageNamed:@"Bitmap-3"];
-    self.msgLabel.text = @"春天太短，能每一天是一天";
+    [self.iconImageView sd_setImageWithURL:[NSURL URLWithString:model.head_pic_url] placeholderImage:[UIImage imageNamed:@"werwer"]];
+    self.msgLabel.text = model.summary;
     self.titleLbael.text = model.nickname;
 }
 

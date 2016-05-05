@@ -35,6 +35,8 @@
 #import <SVProgressHUD.h>
 #import "CounterModel.h"
 #import "TipNumberView.h"
+#import "BonusViewController.h"
+#import "DeliveryAddressViewController.h"
 
 @interface MyselfViewController ()<UIScrollViewDelegate,FBNavigationBarItemsDelegate,FBRequestDelegate>
 
@@ -199,7 +201,7 @@ static NSString *const follows = @"/follow";
         _counterModel = [CounterModel mj_objectWithKeyValues:counterDict];
         _counterModel.subscription_count = [result objectForKey:@"data"][@"subscription_count"];
         _counterModel.sight_love_count = [result objectForKey:@"data"][@"sight_love_count"];
-        NSLog(@"_counterModel   %@",_counterModel.message_count);
+        NSLog(@"_counterModel   %@",_counterModel.alert_count);
         if ([_counterModel.order_total_count intValue] == 0) {
             //不显示
             
@@ -361,11 +363,15 @@ static NSString *const follows = @"/follow";
 //礼券按钮
 -(void)giftBtn:(UIButton*)sender{
     NSLog(@"#########");
+    BonusViewController *vc = [[BonusViewController alloc] init];
+    [self.navigationController pushViewController:vc animated:YES];
 }
 
 //收货地址按钮
 -(void)shippingAddressBtn:(UIButton*)sender{
     NSLog(@"#########");
+    DeliveryAddressViewController *vc = [[DeliveryAddressViewController alloc] init];
+    [self.navigationController pushViewController:vc animated:YES];
 }
 
 //服务条款按钮

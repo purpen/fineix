@@ -63,6 +63,7 @@ static NSString *const CityListUrl = @"/shopping/fetch_areas";
 -(AccountView *)accountView{
     if (!_accountView) {
         _accountView = [AccountView getAccountView];
+        _accountView.backgroundColor = [UIColor colorWithHexString:grayLineColor];
         [_accountView.headBtn addTarget:self action:@selector(clickHeadImageBtn:) forControlEvents:UIControlEventTouchUpInside];
         [_accountView.nickBtn addTarget:self action:@selector(clickNickBtn:) forControlEvents:UIControlEventTouchUpInside];
         [_accountView.sexBtn addTarget:self action:@selector(clickSexBtn:) forControlEvents:UIControlEventTouchUpInside];

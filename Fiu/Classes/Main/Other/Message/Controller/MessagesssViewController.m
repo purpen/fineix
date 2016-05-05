@@ -56,7 +56,7 @@
             NSDictionary *toUserDict = [usersDict objectForKey:@"to_user"];
             UserInfo *model = [[UserInfo alloc] init];
             model.userId = toUserDict[@"id"];
-            //model.summary = followsDict[@"summary"];
+            model.summary = rowsDict[@"last_content"][@"content"];
             model.nickname = toUserDict[@"nickname"];
             model.mediumAvatarUrl = toUserDict[@"big_avatar_url"];
             model.birthday = rowsDict[@"created_at"];
@@ -87,6 +87,11 @@
         [SVProgressHUD showErrorWithStatus:[error localizedDescription]];
     }];
     
+}
+
+-(void)viewDidDisappear:(BOOL)animated{
+    [super viewDidDisappear:animated];
+    [SVProgressHUD dismiss];
 }
 
 //  判断是否为最后一条数据
