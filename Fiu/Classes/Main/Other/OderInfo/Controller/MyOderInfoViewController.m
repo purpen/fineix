@@ -62,30 +62,30 @@
 }
 
 -(void)netGetDataWithType:(NSNumber*)type{
-    [SVProgressHUD show];
-    FBRequest *request = [FBAPI postWithUrlString:@"/shopping/orders" requestDictionary:@{@"page":@(_page),@"size":@15,@"status":type} delegate:self];
-    [request startRequestSuccess:^(FBRequest *request, id result) {
-        NSDictionary * dataDic = [result objectForKey:@"data"];
-        NSArray * rowsAry = [dataDic objectForKey:@"rows"];
-        NSLog(@"orderInfoDic      %@",dataDic);
-        for (NSDictionary * orderInfoDic in rowsAry) {
-            MyOderModel * model = [[MyOderModel alloc] init];
-            model.created_at = [orderInfoDic objectForKey:@"created_at"];
-            
-            [_modelAry addObject:orderInfo];
-        }
-        [self.orderTableView reloadData];
-        [self.mytableView reloadData];
-        _page = [[[result valueForKey:@"data"] valueForKey:@"current_page"] intValue];
-        _totalePage = [[[result valueForKey:@"data"] valueForKey:@"total_page"] intValue];
-        if (_totalePage > 1) {
-            [self addMJRefresh:self.mytableView];
-            [self requestIsLastData:self.mytableView currentPage:_page withTotalPage:_totalePage];
-        }
-        [SVProgressHUD dismiss];
-    } failure:^(FBRequest *request, NSError *error) {
-        [SVProgressHUD showErrorWithStatus:[error localizedDescription]];
-    }];
+//    [SVProgressHUD show];
+//    FBRequest *request = [FBAPI postWithUrlString:@"/shopping/orders" requestDictionary:@{@"page":@(_page),@"size":@15,@"status":type} delegate:self];
+//    [request startRequestSuccess:^(FBRequest *request, id result) {
+//        NSDictionary * dataDic = [result objectForKey:@"data"];
+//        NSArray * rowsAry = [dataDic objectForKey:@"rows"];
+//        NSLog(@"orderInfoDic      %@",dataDic);
+//        for (NSDictionary * orderInfoDic in rowsAry) {
+//            MyOderModel * model = [[MyOderModel alloc] init];
+//            model.created_at = [orderInfoDic objectForKey:@"created_at"];
+//            
+//            [_modelAry addObject:orderInfo];
+//        }
+//        [self.orderTableView reloadData];
+//        [self.mytableView reloadData];
+//        _page = [[[result valueForKey:@"data"] valueForKey:@"current_page"] intValue];
+//        _totalePage = [[[result valueForKey:@"data"] valueForKey:@"total_page"] intValue];
+//        if (_totalePage > 1) {
+//            [self addMJRefresh:self.mytableView];
+//            [self requestIsLastData:self.mytableView currentPage:_page withTotalPage:_totalePage];
+//        }
+//        [SVProgressHUD dismiss];
+//    } failure:^(FBRequest *request, NSError *error) {
+//        [SVProgressHUD showErrorWithStatus:[error localizedDescription]];
+//    }];
 
 }
 
