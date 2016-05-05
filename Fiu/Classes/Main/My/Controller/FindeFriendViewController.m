@@ -21,6 +21,8 @@
 #import <SDWebImage/UIImageView+WebCache.h>
 #import "MyFansActionSheetViewController.h"
 #import "HomePageViewController.h"
+#import "MyQrCodeViewController.h"
+#import "MyQrCodeView.h"
 
 @interface FindeFriendViewController ()<FBNavigationBarItemsDelegate,UITableViewDelegate,UITableViewDataSource,FBRequestDelegate>
 {
@@ -235,16 +237,18 @@ static NSString *const ShareURL = @"http://m.taihuoniao.com/guide/app_about";
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     if (indexPath.section == 0) {
         if (indexPath.row == 0) {
+            MyQrCodeViewController *vc = [[MyQrCodeViewController alloc] init];
             //微信
             [UMSocialData defaultData].extConfig.wechatSessionData.url = ShareURL;
-            [[UMSocialDataService defaultDataService]  postSNSWithTypes:@[UMShareToWechatSession] content:@"太火鸟情景App" image:[UIImage imageNamed:@""] location:nil urlResource:nil presentedController:self completion:^(UMSocialResponseEntity *response){
+            [[UMSocialDataService defaultDataService]  postSNSWithTypes:@[UMShareToWechatSession] content:@"" image:vc.qrCodeView.qrCodeImageView.image location:nil urlResource:nil presentedController:self completion:^(UMSocialResponseEntity *response){
                 if (response.responseCode == UMSResponseCodeSuccess) {
                     [SVProgressHUD showSuccessWithStatus:@"分享成功！"];
                 }
             }];
         }else if (indexPath.row == 1){
             //weibo
-            [[UMSocialDataService defaultDataService]  postSNSWithTypes:@[UMShareToSina] content:[NSString stringWithFormat:@"最火爆的智能硬件电商平台——太火鸟情景App%@", ShareURL] image:[UIImage imageNamed:@"icon_120"] location:nil urlResource:nil presentedController:self completion:^(UMSocialResponseEntity *response){
+            MyQrCodeViewController *vc = [[MyQrCodeViewController alloc] init];
+            [[UMSocialDataService defaultDataService]  postSNSWithTypes:@[UMShareToSina] content:[NSString stringWithFormat:@"有Fiu的生活，才够意思，快点扫码加我吧！查看个人主页>>%@", ShareURL] image:vc.qrCodeView.qrCodeImageView.image location:nil urlResource:nil presentedController:self completion:^(UMSocialResponseEntity *response){
                 if (response.responseCode == UMSResponseCodeSuccess) {
                     [SVProgressHUD showSuccessWithStatus:@"分享成功！"];
                 }

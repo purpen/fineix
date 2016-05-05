@@ -35,6 +35,8 @@
 #import <SVProgressHUD.h>
 #import "CounterModel.h"
 #import "TipNumberView.h"
+#import "BonusViewController.h"
+#import "DeliveryAddressViewController.h"
 
 @interface MyselfViewController ()<UIScrollViewDelegate,FBNavigationBarItemsDelegate,FBRequestDelegate>
 
@@ -64,7 +66,7 @@ static NSString *const follows = @"/follow";
     //[self setImagesRoundedCorners:27.0 :_headPortraitImageV];
     
     //在下面放置一个scrollview
-    _homeScrollView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT)];
+    _homeScrollView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, -44, SCREEN_WIDTH, SCREEN_HEIGHT+44)];
     _homeScrollView.backgroundColor = [UIColor colorWithRed:247.0/255 green:247.0/255 blue:247.0/255 alpha:247.0/255];
     _homeScrollView.showsVerticalScrollIndicator = NO;
     [self.view addSubview:_homeScrollView];
@@ -75,7 +77,7 @@ static NSString *const follows = @"/follow";
     _imgV = [BackImagView getBackImageView];
     _imgV.headImageView.layer.masksToBounds = YES;
     _imgV.headImageView.layer.cornerRadius = 33;
-    _imgV.frame = CGRectMake(0, 0, SCREEN_WIDTH, 300/667.0*SCREEN_HEIGHT);
+    _imgV.frame = CGRectMake(0, -44, SCREEN_WIDTH, 344/667.0*SCREEN_HEIGHT);
     _imgV.userInteractionEnabled = YES;
     UITapGestureRecognizer *singleTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(signleTap:)];
     singleTap.numberOfTapsRequired = 1;
@@ -199,7 +201,7 @@ static NSString *const follows = @"/follow";
         _counterModel = [CounterModel mj_objectWithKeyValues:counterDict];
         _counterModel.subscription_count = [result objectForKey:@"data"][@"subscription_count"];
         _counterModel.sight_love_count = [result objectForKey:@"data"][@"sight_love_count"];
-        NSLog(@"_counterModel   %@",_counterModel.message_count);
+        NSLog(@"_counterModel   %@",_counterModel.alert_count);
         if ([_counterModel.order_total_count intValue] == 0) {
             //不显示
             
@@ -227,34 +229,6 @@ static NSString *const follows = @"/follow";
                 make.size.mas_equalTo(CGSizeMake(15, 15));
                 make.right.mas_equalTo(_chanelTwoV.messageBtn.mas_right).with.offset(0);
                 make.top.mas_equalTo(_chanelTwoV.messageBtn.mas_top).with.offset(-3);
-            }];
-        }
-        if ([_counterModel.subscription_count intValue] == 0) {
-            //不显示
-            
-        }else{
-            //显示
-            TipNumberView *tipNumView = [TipNumberView getTipNumView];
-            tipNumView.tipNumLabel.text = [NSString stringWithFormat:@"%@",_counterModel.subscription_count];
-            [_chanelTwoV.subscribeBtn addSubview:tipNumView];
-            [tipNumView mas_makeConstraints:^(MASConstraintMaker *make) {
-                make.size.mas_equalTo(CGSizeMake(15, 15));
-                make.right.mas_equalTo(_chanelTwoV.subscribeBtn.mas_right).with.offset(0);
-                make.top.mas_equalTo(_chanelTwoV.subscribeBtn.mas_top).with.offset(-3);
-            }];
-        }
-        if ([_counterModel.sight_love_count intValue] == 0) {
-            //不显示
-            
-        }else{
-            //显示
-            TipNumberView *tipNumView = [TipNumberView getTipNumView];
-            tipNumView.tipNumLabel.text = [NSString stringWithFormat:@"%@",_counterModel.sight_love_count];
-            [_chanelTwoV.praiseBtn addSubview:tipNumView];
-            [tipNumView mas_makeConstraints:^(MASConstraintMaker *make) {
-                make.size.mas_equalTo(CGSizeMake(15, 15));
-                make.right.mas_equalTo(_chanelTwoV.praiseBtn.mas_right).with.offset(0);
-                make.top.mas_equalTo(_chanelTwoV.praiseBtn.mas_top).with.offset(-3);
             }];
         }
         
@@ -331,19 +305,19 @@ static NSString *const follows = @"/follow";
 }
 
 
--(void)scrollViewDidScroll:(UIScrollView *)scrollView{
-    //当滑动结束时获取当前滚动坐标的y值
-    CGFloat y = scrollView.contentOffset.y;
-    if (y<0) {
-        //当坐标y大于0时就进行放大
-        //改变图片的y坐标和高度
-        CGRect frame = _imgV.frame;
-        
-        frame.origin.y = y;
-        frame.size.height = -y+300/667.0*SCREEN_HEIGHT;
-        _imgV.frame = frame;
-    }
-}
+//-(void)scrollViewDidScroll:(UIScrollView *)scrollView{
+//    //当滑动结束时获取当前滚动坐标的y值
+//    CGFloat y = scrollView.contentOffset.y;
+//    if (y<0) {
+//        //当坐标y大于0时就进行放大
+//        //改变图片的y坐标和高度
+//        CGRect frame = _imgV.frame;
+//        
+//        frame.origin.y = y;
+//        frame.size.height = -y+300/667.0*SCREEN_HEIGHT;
+//        _imgV.frame = frame;
+//    }
+//}
 
 //订单按钮
 -(void)orderBtn:(UIButton*)sender{
@@ -389,11 +363,15 @@ static NSString *const follows = @"/follow";
 //礼券按钮
 -(void)giftBtn:(UIButton*)sender{
     NSLog(@"#########");
+    BonusViewController *vc = [[BonusViewController alloc] init];
+    [self.navigationController pushViewController:vc animated:YES];
 }
 
 //收货地址按钮
 -(void)shippingAddressBtn:(UIButton*)sender{
     NSLog(@"#########");
+    DeliveryAddressViewController *vc = [[DeliveryAddressViewController alloc] init];
+    [self.navigationController pushViewController:vc animated:YES];
 }
 
 //服务条款按钮

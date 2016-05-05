@@ -12,7 +12,7 @@
 
 +(instancetype)getBackImageView{
     BackImagView *backImageV = [[NSBundle mainBundle] loadNibNamed:@"MyView" owner:nil options:nil][1];
-    backImageV.bgImageView.contentMode = UIViewContentModeScaleToFill;
+    //backImageV.bgImageView.contentMode = UIViewContentModeScaleAspectFill;
     //backImageV.headImageView.layer.masksToBounds = YES;
     //backImageV.headImageView.layer.cornerRadius = 33;
     return backImageV;

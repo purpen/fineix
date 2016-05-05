@@ -118,9 +118,9 @@ static NSString *const IconURL = @"/my/add_head_pic";
             if (_fiuSceneList.count == 0) {
                 NSLog(@"没有情景");
                 [self.view addSubview:self.tipLabel];
-                _tipLabel.text = @"您还没有创建情景";
+                _tipLabel.text = @"每个情境都有故事，来都来了，讲讲你的故事吧";
                 [_tipLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-                    make.size.mas_equalTo(CGSizeMake(200, 30));
+                    make.size.mas_equalTo(CGSizeMake(300, 30));
                     make.centerX.mas_equalTo(self.view.mas_centerX);
                     make.top.mas_equalTo(self.view.mas_top).with.offset(410);
                 }];
@@ -158,9 +158,9 @@ static NSString *const IconURL = @"/my/add_head_pic";
             if (_sceneListMarr.count == 0) {
                 NSLog(@"没有情景");
                 [self.view addSubview:self.tipLabel];
-                _tipLabel.text = @"您还没有创建场景";
+                _tipLabel.text = @"你还没有发表过新场景哦，快来Fiu一下嘛";
                 [_tipLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-                    make.size.mas_equalTo(CGSizeMake(200, 30));
+                    make.size.mas_equalTo(CGSizeMake(300, 30));
                     make.centerX.mas_equalTo(self.view.mas_centerX);
                     make.top.mas_equalTo(self.view.mas_top).with.offset(410);
                 }];
@@ -289,7 +289,7 @@ static NSString *const IconURL = @"/my/add_head_pic";
     }else{
         [self.myCollectionView reloadData];
     }
-    
+    [self requestIsLastData:self.myCollectionView currentPage:_n withTotalPage:_totalN];
 }
 
 -(void)signleTap1:(UITapGestureRecognizer*)sender{
@@ -300,6 +300,7 @@ static NSString *const IconURL = @"/my/add_head_pic";
     }else{
         [self.myCollectionView reloadData];
     }
+    [self requestIsLastData:self.myCollectionView currentPage:_m withTotalPage:_totalM];
 }
 
 -(void)signleTap2:(UITapGestureRecognizer*)sender{
@@ -321,7 +322,7 @@ static NSString *const IconURL = @"/my/add_head_pic";
         UICollectionViewFlowLayout *layout = [[UICollectionViewFlowLayout alloc] init];
         
         layout.minimumInteritemSpacing = 1;
-        _myCollectionView = [[UICollectionView alloc] initWithFrame:self.view.frame collectionViewLayout:layout];
+        _myCollectionView = [[UICollectionView alloc] initWithFrame:CGRectMake(0, -44, SCREEN_WIDTH, SCREEN_HEIGHT+44) collectionViewLayout:layout];
         _myCollectionView.backgroundColor = [UIColor whiteColor];
         _myCollectionView.showsVerticalScrollIndicator = NO;
         _myCollectionView.delegate = self;
@@ -611,7 +612,7 @@ static NSString *const IconURL = @"/my/add_head_pic";
 -(CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath{
     if (indexPath.section == 0) {
         if (indexPath.row == 0) {
-            return CGSizeMake(SCREEN_WIDTH, 300/667.0*SCREEN_HEIGHT);
+            return CGSizeMake(SCREEN_WIDTH, 344/667.0*SCREEN_HEIGHT);
         }
     }
     if (indexPath.section == 1) {
@@ -628,30 +629,30 @@ static NSString *const IconURL = @"/my/add_head_pic";
     return CGSizeMake(0, 0);
 }
 
--(void)scrollViewDidScroll:(UIScrollView *)scrollView{
-    //当滑动结束时获取当前滚动坐标的y值
-    CGFloat y = scrollView.contentOffset.y;
-    if (y<0) {
-        //当坐标y大于0时就进行放大
-        //改变图片的y坐标和高度
-        if (_isMySelf) {
-            BackgroundCollectionViewCell *cell = (BackgroundCollectionViewCell*)[_myCollectionView cellForItemAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0]];
-            CGRect frame = cell.bgImageView.frame;
-            
-            frame.origin.y = y;
-            frame.size.height = -y+300/667.0*SCREEN_HEIGHT;
-            cell.bgImageView.frame = frame;
-        }else{
-            OtherCollectionViewCell *cell = (OtherCollectionViewCell*)[_myCollectionView cellForItemAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0]];
-            CGRect frame = cell.bgImageView.frame;
-            
-            frame.origin.y = y;
-            frame.size.height = -y+300/667.0*SCREEN_HEIGHT;
-            cell.bgImageView.frame = frame;
-        }
-        
-    }
-}
+//-(void)scrollViewDidScroll:(UIScrollView *)scrollView{
+//    //当滑动结束时获取当前滚动坐标的y值
+//    CGFloat y = scrollView.contentOffset.y;
+//    if (y<0) {
+//        //当坐标y大于0时就进行放大
+//        //改变图片的y坐标和高度
+//        if (_isMySelf) {
+//            BackgroundCollectionViewCell *cell = (BackgroundCollectionViewCell*)[_myCollectionView cellForItemAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0]];
+//            CGRect frame = cell.bgImageView.frame;
+//            
+//            frame.origin.y = y;
+//            frame.size.height = -y+300/667.0*SCREEN_HEIGHT;
+//            cell.bgImageView.frame = frame;
+//        }else{
+//            OtherCollectionViewCell *cell = (OtherCollectionViewCell*)[_myCollectionView cellForItemAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0]];
+//            CGRect frame = cell.bgImageView.frame;
+//            
+//            frame.origin.y = y;
+//            frame.size.height = -y+300/667.0*SCREEN_HEIGHT;
+//            cell.bgImageView.frame = frame;
+//        }
+//        
+//    }
+//}
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];

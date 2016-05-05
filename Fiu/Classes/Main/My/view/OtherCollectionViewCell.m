@@ -31,7 +31,7 @@
     if (self = [super initWithFrame:frame]) {
                 [self.contentView addSubview:self.bgImageView];
                 [_bgImageView mas_makeConstraints:^(MASConstraintMaker *make) {
-                    make.size.mas_equalTo(CGSizeMake(SCREEN_WIDTH, 300/667.0*SCREEN_HEIGHT));
+                    make.size.mas_equalTo(CGSizeMake(SCREEN_WIDTH, 344/667.0*SCREEN_HEIGHT));
                     make.top.equalTo(self.mas_top).with.offset(0);
                     make.left.equalTo(self.mas_left).with.offset(0);
                 }];
@@ -122,7 +122,7 @@
 -(UIImageView *)bgImageView{
     if (!_bgImageView) {
         _bgImageView = [[UIImageView alloc] init];
-        _bgImageView.contentMode = UIViewContentModeScaleAspectFill;
+        //_bgImageView.contentMode = UIViewContentModeScaleAspectFill;
         _bgImageView.userInteractionEnabled = YES;
         
 //        [_bgImageView addSubview:self.focusOnBtn];
@@ -149,7 +149,7 @@
         [_bgImageView addSubview:self.backBtn];
         [_backBtn mas_makeConstraints:^(MASConstraintMaker *make) {
             make.size.mas_equalTo(CGSizeMake(30, 18));
-            make.top.mas_equalTo(_bgImageView.mas_top).with.offset(35);
+            make.top.mas_equalTo(_bgImageView.mas_top).with.offset(79);
             make.left.mas_equalTo(_bgImageView.mas_left).with.offset(16);
         }];
 //
@@ -180,7 +180,7 @@
         [_moreBtn mas_makeConstraints:^(MASConstraintMaker *make) {
             make.size.mas_equalTo(CGSizeMake(30, 20));
             make.right.mas_equalTo(_bgImageView.mas_right).with.offset(-16);
-            make.top.mas_equalTo(_bgImageView.mas_top).with.offset(35);
+            make.top.mas_equalTo(_bgImageView.mas_top).with.offset(79);
         }];
     }
     return _bgImageView;

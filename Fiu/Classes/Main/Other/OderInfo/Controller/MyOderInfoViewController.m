@@ -30,12 +30,12 @@
 @property (weak, nonatomic) IBOutlet UIView *chanelView;
 @end
 
-static NSString *const OrderListURL = @"/shopping/orders";
 
 @implementation MyOderInfoViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    _modelAry = [NSMutableArray array];
     _page = 1;
     self.delegate = self;
     self.navViewTitle.text = @"我的订单";
@@ -62,17 +62,17 @@ static NSString *const OrderListURL = @"/shopping/orders";
 }
 
 -(void)netGetDataWithType:(NSNumber*)type{
-    [SVProgressHUD show];
-    FBRequest *request = [FBAPI postWithUrlString:@"/shopping/orders" requestDictionary:@{@"page":@(_page),@"size":@15,@"status":type} delegate:self];
-    [request startRequestSuccess:^(FBRequest *request, id result) {
-        NSDictionary * dataDic = [result objectForKey:@"data"];
-        NSArray * rowsAry = [dataDic objectForKey:@"rows"];
-        NSLog(@"orderInfoDic %@",dataDic);
+//    [SVProgressHUD show];
+//    FBRequest *request = [FBAPI postWithUrlString:@"/shopping/orders" requestDictionary:@{@"page":@(_page),@"size":@15,@"status":type} delegate:self];
+//    [request startRequestSuccess:^(FBRequest *request, id result) {
+//        NSDictionary * dataDic = [result objectForKey:@"data"];
+//        NSArray * rowsAry = [dataDic objectForKey:@"rows"];
+//        NSLog(@"orderInfoDic      %@",dataDic);
 //        for (NSDictionary * orderInfoDic in rowsAry) {
 //            MyOderModel * model = [[MyOderModel alloc] init];
 //            model.created_at = [orderInfoDic objectForKey:@"created_at"];
 //            
-//            [self.orderListAry addObject:orderInfo];
+//            [_modelAry addObject:orderInfo];
 //        }
 //        [self.orderTableView reloadData];
 //        [self.mytableView reloadData];
@@ -82,10 +82,10 @@ static NSString *const OrderListURL = @"/shopping/orders";
 //            [self addMJRefresh:self.mytableView];
 //            [self requestIsLastData:self.mytableView currentPage:_page withTotalPage:_totalePage];
 //        }
-        [SVProgressHUD dismiss];
-    } failure:^(FBRequest *request, NSError *error) {
-        [SVProgressHUD showErrorWithStatus:[error localizedDescription]];
-    }];
+//        [SVProgressHUD dismiss];
+//    } failure:^(FBRequest *request, NSError *error) {
+//        [SVProgressHUD showErrorWithStatus:[error localizedDescription]];
+//    }];
 
 }
 
@@ -97,32 +97,10 @@ static NSString *const OrderListURL = @"/shopping/orders";
     self.evaluateBtn.selected = NO;
     CGRect frame = _linView.frame;
     frame.origin.y = sender.frame.origin.y + sender.frame.size.height + 1;
-    frame.origin.x = sender.frame.origin.x;
-    frame.size.width = sender.frame.size.width;
+    frame.origin.x = sender.frame.origin.x+9;
+    frame.size.width = sender.frame.size.width-18;
     _linView.frame = frame;
     [self.chanelView addSubview:_linView];
-//    //进行全部的网络请求然后进行数据展示
-//    int currentPageNum = 1;
-//    NSDictionary *parameter = @{
-//                                @"page":[NSNumber numberWithInteger:currentPageNum],
-//                                @"size":@10,
-//                                @"status":[NSNumber numberWithUnsignedInteger:0]
-//                                };
-//    FBRequest *request = [FBAPI postWithUrlString:OrderListURL requestDictionary:parameter delegate:self];
-//    [request startRequestSuccess:^(FBRequest *request, id result) {
-//        NSDictionary *dataDic = [result objectForKey:@"data"];
-//        NSArray *rowsAry = [dataDic objectForKey:@"rows"];
-//        [_dataAry removeAllObjects];
-//        for (NSDictionary *orderInfoDic in rowsAry) {
-//            OrderListModel *orderInfo = [[OrderListModel alloc] initWithDictionary:orderInfoDic];
-//            [_dataAry addObject:orderInfo];
-//        }
-//        //tableView数据刷新
-//        [self.ordertableV reloadData];
-//    } failure:^(FBRequest *request, NSError *error) {
-//        //提示错误信息
-//        
-//    }];
     
     [self netGetDataWithType:@0];
 
@@ -135,8 +113,8 @@ static NSString *const OrderListURL = @"/shopping/orders";
     self.evaluateBtn.selected = NO;
     CGRect frame = _linView.frame;
     frame.origin.y = sender.frame.origin.y + sender.frame.size.height + 1;
-    frame.origin.x = sender.frame.origin.x;
-    frame.size.width = sender.frame.size.width;
+    frame.origin.x = sender.frame.origin.x+9;
+    frame.size.width = sender.frame.size.width-18;
     _linView.frame = frame;
     [self.chanelView addSubview:_linView];
 //    //进行全部的网络请求然后进行数据展示
@@ -174,8 +152,8 @@ static NSString *const OrderListURL = @"/shopping/orders";
     self.evaluateBtn.selected = NO;
     CGRect frame = _linView.frame;
     frame.origin.y = sender.frame.origin.y + sender.frame.size.height + 1;
-    frame.origin.x = sender.frame.origin.x;
-    frame.size.width = sender.frame.size.width;
+    frame.origin.x = sender.frame.origin.x+9;
+    frame.size.width = sender.frame.size.width-18;
     _linView.frame = frame;
     [self.chanelView addSubview:_linView];
 //    //进行全部的网络请求然后进行数据展示
@@ -212,8 +190,8 @@ static NSString *const OrderListURL = @"/shopping/orders";
     self.evaluateBtn.selected = NO;
     CGRect frame = _linView.frame;
     frame.origin.y = sender.frame.origin.y + sender.frame.size.height + 1;
-    frame.origin.x = sender.frame.origin.x;
-    frame.size.width = sender.frame.size.width;
+    frame.origin.x = sender.frame.origin.x+9;
+    frame.size.width = sender.frame.size.width-18;
     _linView.frame = frame;
     [self.chanelView addSubview:_linView];
 //    //进行全部的网络请求然后进行数据展示
@@ -250,8 +228,8 @@ static NSString *const OrderListURL = @"/shopping/orders";
     self.evaluateBtn.selected = YES;
     CGRect frame = _linView.frame;
     frame.origin.y = sender.frame.origin.y + sender.frame.size.height + 1;
-    frame.origin.x = sender.frame.origin.x;
-    frame.size.width = sender.frame.size.width;
+    frame.origin.x = sender.frame.origin.x+9;
+    frame.size.width = sender.frame.size.width-18;
     _linView.frame = frame;
     [self.chanelView addSubview:_linView];
 //    //进行全部的网络请求然后进行数据展示

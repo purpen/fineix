@@ -243,6 +243,6 @@
         <image name="icon_comment" width="20" height="19"/>
         <image name="icon_personal message" width="20" height="16"/>
         <image name="icon_system informs" width="21" height="19"/>
-        <image name="remind" width="17" height="21"/>
+        <image name="remind" width="16" height="19"/>
     </resources>
 </document>

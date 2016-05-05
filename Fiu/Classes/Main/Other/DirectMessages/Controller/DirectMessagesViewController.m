@@ -71,7 +71,7 @@
     [SVProgressHUD show];
     FBRequest *request = [FBAPI postWithUrlString:@"/message/view" requestDictionary:@{@"to_user_id":self.userId} delegate:self];
     [request startRequestSuccess:^(FBRequest *request, id result) {
-        NSLog(@"result %@",result);
+        NSLog(@"result000000000000000000000000000000000000 %@",result);
         NSArray * fiuSceneArr = [[result valueForKey:@"data"] valueForKey:@"mailbox"];
         // 字典数组 -> 模型数组
         NSMutableArray *messageArray = [NSMutableArray array];

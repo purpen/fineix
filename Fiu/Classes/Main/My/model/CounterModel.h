@@ -22,5 +22,6 @@
 @property(nonatomic,strong) NSNumber *order_total_count;
 @property(nonatomic,strong) NSNumber *fans_count;
 @property(nonatomic,strong) NSNumber *subscription_count;
+@property(nonatomic,strong) NSNumber *alert_count;
 
 @end
