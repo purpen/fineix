@@ -14,10 +14,10 @@
 
 @pro_strong UINavigationController      *   nav;
 @pro_strong UICollectionView            *   menuView;           //  菜单列表
-@pro_strong NSMutableArray              *   titleMarr;
-@pro_strong NSMutableArray              *   idMarr;
-@pro_strong NSMutableArray              *   tagTitleMarr;
-@pro_strong NSMutableArray              *   tagIdMarr;
+@pro_strong NSMutableArray              *   titleMarr;          //  标题
+@pro_strong NSMutableArray              *   categoryIdMarr;     //  获取子分类ID
+@pro_strong NSMutableArray              *   rowMarr;            //  分类model
+@pro_strong NSMutableArray              *   idMarr;             //  分类id
 
 - (void)setCategoryData:(NSMutableArray *)category;
 

@@ -9,6 +9,8 @@
 #import <UIKit/UIKit.h>
 #import "Fiu.h"
 
+const NSInteger menuBtnTag = 324;
+
 @protocol FBMenuViewDelegate <NSObject>
 
 @optional

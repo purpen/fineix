@@ -15,13 +15,13 @@
 
 @end
 
-
-@interface CategoryTagRollView : UIView
-
-@pro_strong UIScrollView                        *   tagRollView;   //  应用的场景
+@interface CategoryTagRollView : UIView <UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout>
+@pro_strong UICollectionView                    *   tagCollectionView;
+@pro_strong NSMutableArray                      *   titleMarr;
+@pro_strong UIScrollView                        *   tagRollView;        //  应用的场景
 @pro_strong UIButton                            *   selectedBtn;
 @pro_weak id <CategotyTagBtnSelectedDelegate>       delegate;
 
-- (void)setTagRollMarr:(NSArray *)title;
+- (void)setTagRollMarr:(NSMutableArray *)model;
 
 @end

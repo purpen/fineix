@@ -18,13 +18,23 @@
         self.selectionStyle = UITableViewCellSelectionStyleNone;
         self.backgroundColor = [UIColor colorWithHexString:grayLineColor];
         self.goodsImgMarr = [NSMutableArray array];
+        self.goodsId = [NSMutableArray array];
+        [self setCellViewUI];
     }
     return self;
 }
 
 - (void)setGoodsData:(GoodsRow *)model {
+    if (self.goodsImgMarr.count > 0) {
+        [self.goodsImgMarr removeAllObjects];
+    }
+    if (self.goodsId.count > 0) {
+        [self.goodsId removeAllObjects];
+    }
+    
     self.title.text = model.title;
-
+    [self.goodsId addObject:[NSString stringWithFormat:@"%zi", model.idField]];
+    
     // 产品来源: 1.官网；2.淘宝；3.天猫；4.京东
     if (model.attrbute == 1) {
         self.typeImg.image = [UIImage imageNamed:@"Goods_thn"];
@@ -40,20 +50,26 @@
     
     if (model.banner.count > 0) {
         for (NSInteger idx = 0; idx < model.banner.count; ++ idx) {
-            UIImageView * image = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 265, 150)];
-            [image downloadImage:model.banner[idx] place:[UIImage imageNamed:@""]];
-            [self.goodsImgMarr addObject:image];
+            UIButton * imgBtn = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 265, 150)];
+            [imgBtn sd_setBackgroundImageWithURL:[NSURL URLWithString:model.banner[idx]] forState:(UIControlStateNormal)];
+            [self.goodsImgMarr addObject:imgBtn];
         }
         
     } else {
         for (NSInteger idx = 0; idx < model.bannerAsset.count; ++ idx) {
-            UIImageView * image = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 265, 150)];
-            [image downloadImage:model.bannerAsset[idx] place:[UIImage imageNamed:@""]];
-            [self.goodsImgMarr addObject:image];
+            UIButton * imgBtn = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 265, 150)];
+            [imgBtn sd_setBackgroundImageWithURL:[NSURL URLWithString:model.bannerAsset[idx]] forState:(UIControlStateNormal)];
+            [self.goodsImgMarr addObject:imgBtn];
         }
     }
     
-    [self setCellViewUI];
+    //  判断是否是第一次加载
+    if (self.goodsImgRoll.contentSize.width > SCREEN_WIDTH) {
+        [self.goodsImgRoll.subviews makeObjectsPerformSelector:@selector(removeFromSuperview)];
+        [self setRollImgViewUI:self.goodsImgMarr];
+    } else {
+        [self setRollImgViewUI:self.goodsImgMarr];
+    }
 }
 
 #pragma mark -
@@ -93,7 +109,6 @@
         _goodsImgRoll = [[UIScrollView alloc] init];
         _goodsImgRoll.showsHorizontalScrollIndicator = NO;
         _goodsImgRoll.delegate = self;
-        [self setRollImgViewUI:self.goodsImgMarr];
     }
     return _goodsImgRoll;
 }
@@ -102,27 +117,29 @@
     CGFloat space = 0;
     CGFloat width = 0;
     CGFloat viewWidth = 0;
-    
-    for (UIView * view in imgArr) {
-        NSInteger index = [imgArr indexOfObject:view];
+
+    for (UIButton * imgBtn in imgArr) {
+        NSInteger index = [imgArr indexOfObject:imgBtn];
         if (index == 0) {
-            viewWidth = view.frame.size.width;
+            viewWidth = imgBtn.frame.size.width;
         }
         if (index % 2 != 0) {
             UIImageView * line = [[UIImageView alloc] initWithFrame:CGRectMake(-11, 0, 4, 150)];
             line.image = [UIImage imageNamed:@"Goods_image_bg"];
-            [view addSubview:line];
+            [imgBtn addSubview:line];
         }
         space = SCREEN_WIDTH * 0.186;
         width = viewWidth + space/4;
-        view.frame = CGRectMake(space / 2 + (view.frame.size.width + space / 4) * index, 0, viewWidth, view.frame.size.height);
+        imgBtn.frame = CGRectMake(space / 2 + (imgBtn.frame.size.width + space / 4) * index, 0, viewWidth, imgBtn.frame.size.height);
         CGFloat y = index * width;
         CGFloat value = (0 - y) / width;
         CGFloat scale = fabs(cos(fabs(value) * M_PI/5));
-        view.transform = CGAffineTransformMakeScale(1.0, scale);
-
-        [self.goodsImgRoll addSubview:view];
+        imgBtn.transform = CGAffineTransformMakeScale(1.0, scale);
+        imgBtn.userInteractionEnabled = NO;
+        
+        [self.goodsImgRoll addSubview:imgBtn];
     }
+    
     self.goodsImgRoll.contentSize = CGSizeMake((space / 2 + width * imgArr.count) + space/4, 0);
 }
 
@@ -133,7 +150,7 @@
     }
     CGFloat space = 0;
     CGFloat viewWidth = 0;
-    for (UIView * view in self.goodsImgRoll.subviews) {
+    for (UIButton * view in self.goodsImgRoll.subviews) {
         NSInteger index = [self.goodsImgRoll.subviews indexOfObject:view];
         if (index == 0) {
             viewWidth = view.frame.size.width;

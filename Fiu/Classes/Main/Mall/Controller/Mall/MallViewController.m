@@ -114,15 +114,16 @@ static NSString *const URLMallSlide = @"/gateway/slide";
             [self.goodsList addObject:goodsModel];
             [self.goodsIdList addObject:[NSString stringWithFormat:@"%zi", goodsModel.idField]];
         }
-       
+        
         [self.mallTableView reloadData];
+        
         self.currentpageNum = [[[result valueForKey:@"data"] valueForKey:@"current_page"] integerValue];
         self.totalPageNum = [[[result valueForKey:@"data"] valueForKey:@"total_page"] integerValue];
         if (self.totalPageNum > 1) {
             [self addMJRefresh:self.mallTableView];
             [self requestIsLastData:self.mallTableView currentPage:self.currentpageNum withTotalPage:self.totalPageNum];
         }
-        [self.mallTableView reloadData];
+        
         [SVProgressHUD dismiss];
         
     } failure:^(FBRequest *request, NSError *error) {

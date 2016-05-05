@@ -17,12 +17,6 @@
     if (self) {
         self.selectionStyle = UITableViewCellSelectionStyleNone;
         self.backgroundColor = [UIColor whiteColor];
-        
-        self.titleMarr = [NSMutableArray array];
-        self.idMarr = [NSMutableArray array];
-        self.tagTitleMarr = [NSMutableArray array];
-        self.tagIdMarr = [NSMutableArray array];
-        
         [self addSubview:self.menuView];
     }
     return self;
@@ -30,14 +24,11 @@
 
 #pragma mark -
 - (void)setCategoryData:(NSMutableArray *)category {
-    for (CategoryRow * row in category) {
-        [self.titleMarr addObject:row];
-        [self.idMarr addObject:[NSString stringWithFormat:@"%zi", row.idField]];
-        
-        self.tagTitleMarr = [[self.titleMarr valueForKey:@"sceneTags"] valueForKey:@"titleCn"];
-        self.tagIdMarr = [[self.titleMarr valueForKey:@"sceneTags"] valueForKey:@"idField"];
-        
-    }
+    self.rowMarr = category;
+    self.titleMarr = [NSMutableArray arrayWithArray:[category valueForKey:@"title"]];
+    [self.titleMarr insertObject:NSLocalizedString(@"AllGoods", nil) atIndex:0];
+    self.categoryIdMarr = [NSMutableArray arrayWithArray:[category valueForKey:@"tagId"]];
+    self.idMarr = [NSMutableArray arrayWithArray:[category valueForKey:@"idField"]];
     [self.menuView reloadData];
 }
 
@@ -62,32 +53,24 @@
 
 #pragma mark  UICollectionViewDataSource
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
-    return self.titleMarr.count;
+    return self.rowMarr.count;
 }
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
     static NSString * collectionViewCellId = @"collectionViewCellId";
     MallMenuCollectionViewCell * cell = [collectionView dequeueReusableCellWithReuseIdentifier:collectionViewCellId forIndexPath:indexPath];
-    [cell setCategoryData:self.titleMarr[indexPath.row]];
+    [cell setCategoryData:self.rowMarr[indexPath.row]];
     return cell;
 }
 
 #pragma mark UICollectionViewDelegate
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
-    NSMutableArray * titleMarr = [NSMutableArray arrayWithArray:[self.titleMarr valueForKey:@"title"]];
-    [titleMarr insertObject:@"全部" atIndex:0];
-    
     GoodsCategoryViewController * goodsCategoryVC = [[GoodsCategoryViewController alloc] init];
-    //  分类标题&id
-    goodsCategoryVC.categoryTitleArr = titleMarr;
-    goodsCategoryVC.categoryId = self.idMarr[indexPath.row];
-    //  分类标签标题&id
-    goodsCategoryVC.tagTitleArr = self.tagTitleMarr[indexPath.row];
-    goodsCategoryVC.categoryTagId = self.tagIdMarr[indexPath.row];
-    //  更新菜单按钮位置
+    goodsCategoryVC.categoryTitleArr = self.titleMarr;
+    goodsCategoryVC.categoryId = self.categoryIdMarr[indexPath.row];
+    goodsCategoryVC.categoryIdMarr = self.categoryIdMarr;
     [goodsCategoryVC.categoryMenuView updateMenuBtnState:indexPath.row + 1];
-    [goodsCategoryVC.goodsCategoryView changeContentOffSet:indexPath.row + 1];
-    
+    goodsCategoryVC.idMarr = self.idMarr;
     [self.nav pushViewController:goodsCategoryVC animated:YES];
 }
 

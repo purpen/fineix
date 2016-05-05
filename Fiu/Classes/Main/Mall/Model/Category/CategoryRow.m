@@ -1,6 +1,6 @@
 //
 //	CategoryRow.m
-// on 28/4/2016
+// on 5/5/2016
 //	Copyright © 2016. All rights reserved.
 //	Model file Generated using JSONExport: https://github.com/Ahmed-Ali/JSONExport
 
@@ -55,15 +55,6 @@
 		self.replyCount = [dictionary[@"reply_count"] integerValue];
 	}
 
-	if(dictionary[@"scene_tags"] != nil && [dictionary[@"scene_tags"] isKindOfClass:[NSArray class]]){
-		NSArray * sceneTagsDictionaries = dictionary[@"scene_tags"];
-		NSMutableArray * sceneTagsItems = [NSMutableArray array];
-		for(NSDictionary * sceneTagsDictionary in sceneTagsDictionaries){
-			CategorySceneTag * sceneTagsItem = [[CategorySceneTag alloc] initWithDictionary:sceneTagsDictionary];
-			[sceneTagsItems addObject:sceneTagsItem];
-		}
-		self.sceneTags = sceneTagsItems;
-	}
 	if(![dictionary[@"sub_count"] isKindOfClass:[NSNull class]]){
 		self.subCount = [dictionary[@"sub_count"] integerValue];
 	}

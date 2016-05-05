@@ -7,81 +7,61 @@
 //
 
 #import "CategoryTagRollView.h"
-
-static const NSInteger tagRollBtnTag = 595;
+#import "ChildTagsCollectionViewCell.h"
 
 @implementation CategoryTagRollView
 
 - (instancetype)initWithFrame:(CGRect)frame {
     self = [super initWithFrame:frame];
     if (self) {
-        
+        [self addSubview:self.tagCollectionView];
     }
     return self;
 }
 
 #pragma mark -
-- (void)setTagRollMarr:(NSArray *)title {
-    [self addtagScrollView:title];
-    [self addSubview:self.tagRollView];
+- (void)setTagRollMarr:(NSMutableArray *)model {
+    self.titleMarr = [NSMutableArray arrayWithArray:[model valueForKey:@"titleCn"]];
+    [self.tagCollectionView reloadData];
 }
 
 #pragma mark - 商品分类标签
-- (UIScrollView *)tagRollView {
-    if (!_tagRollView) {
-        _tagRollView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 40)];
-        _tagRollView.showsVerticalScrollIndicator = NO;
-        _tagRollView.showsHorizontalScrollIndicator = NO;
-        _tagRollView.backgroundColor = [UIColor colorWithHexString:grayLineColor];
-    }
-    return _tagRollView;
-}
-
-//  商品分类标签按钮
-- (void)addtagScrollView:(NSArray *)tagMarr {
-    
-    CGFloat width = 0;
-    CGFloat height = 8;
-    
-    for (NSUInteger idx = 0; idx < tagMarr.count; ++ idx) {
-        UIButton * tagBtn = [[UIButton alloc] init];
-        CGFloat btnLength = [[tagMarr objectAtIndex:idx] boundingRectWithSize:CGSizeMake(320, 1000) options:(NSStringDrawingUsesLineFragmentOrigin) attributes:nil context:nil].size.width;
-        [tagBtn setTitle:tagMarr[idx] forState:(UIControlStateNormal)];
-        [tagBtn setTitleColor:[UIColor colorWithHexString:titleColor] forState:(UIControlStateNormal)];
-        [tagBtn setTitleColor:[UIColor colorWithHexString:fineixColor] forState:(UIControlStateSelected)];
-        tagBtn.titleLabel.font = [UIFont systemFontOfSize:Font_Tag];
-        tagBtn.layer.cornerRadius = 5;
-        tagBtn.layer.borderWidth = 0.5f;
-        tagBtn.layer.borderColor = [UIColor colorWithHexString:@"#CCCCCC"].CGColor;
-        tagBtn.frame = CGRectMake(15 + width + (10 * idx), height, btnLength + 30, 29);
-        width = tagBtn.frame.size.width + width;
-        tagBtn.tag = tagRollBtnTag + idx;
-        if (tagBtn.tag == tagRollBtnTag) {
-            tagBtn.selected = YES;
-            tagBtn.layer.borderColor = [UIColor colorWithHexString:fineixColor].CGColor;
-            self.selectedBtn = tagBtn;
-        }
-
-        [tagBtn addTarget:self action:@selector(tagBtnAction:) forControlEvents:(UIControlEventTouchUpInside)];
+- (UICollectionView *)tagCollectionView {
+    if (!_tagCollectionView) {
+        UICollectionViewFlowLayout * flowLayout = [[UICollectionViewFlowLayout alloc] init];
+        [flowLayout setScrollDirection:(UICollectionViewScrollDirectionHorizontal)];
+        flowLayout.sectionInset = UIEdgeInsetsMake(0, 10, 0, 10);
         
-        [self.tagRollView addSubview:tagBtn];
+        _tagCollectionView = [[UICollectionView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 40) collectionViewLayout:flowLayout];
+        _tagCollectionView.delegate = self;
+        _tagCollectionView.dataSource = self;
+        _tagCollectionView.showsHorizontalScrollIndicator = NO;
+        _tagCollectionView.backgroundColor = [UIColor colorWithHexString:grayLineColor];
+        [_tagCollectionView registerClass:[ChildTagsCollectionViewCell class] forCellWithReuseIdentifier:@"TagCollectionViewCell"];
     }
-    
-    self.tagRollView.contentSize = CGSizeMake(width * 1.17, 0);
+    return _tagCollectionView;
 }
 
-#pragma mark - 
-- (void)tagBtnAction:(UIButton *)button {
-    self.selectedBtn.selected = NO;
-    self.selectedBtn.layer.borderColor = [UIColor colorWithHexString:@"#CCCCCC"].CGColor;
-    button.selected = YES;
-    button.layer.borderColor = [UIColor colorWithHexString:fineixColor].CGColor;
-    self.selectedBtn = button;
-    
+- (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
+    return self.titleMarr.count;
+}
+
+- (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
+    ChildTagsCollectionViewCell * cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"TagCollectionViewCell" forIndexPath:indexPath];
+    cell.titleLab.text = self.titleMarr[indexPath.row];
+    return cell;
+}
+
+- (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath {
+     CGFloat titleW = [[self.titleMarr objectAtIndex:indexPath.row] boundingRectWithSize:CGSizeMake(320, 1000) options:(NSStringDrawingUsesLineFragmentOrigin) attributes:nil context:nil].size.width;
+    return CGSizeMake(titleW + 20, 29);
+}
+
+- (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
     if ([self.delegate respondsToSelector:@selector(tagBtnSelected:)]) {
-        [self.delegate tagBtnSelected:(button.tag - tagRollBtnTag)];
+        [self.delegate tagBtnSelected:(indexPath.row)];
     }
-}
 
+}
 
 @end

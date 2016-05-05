@@ -8,9 +8,6 @@
 
 #import "FBMenuView.h"
 
-static const NSInteger menuBtnTag = 324;
-
-
 @implementation FBMenuView 
 
 - (instancetype)initWithFrame:(CGRect)frame {

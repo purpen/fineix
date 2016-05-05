@@ -225,13 +225,10 @@
 		D8363A2E1CD8809400CC4AC0 /* GoodsRow.m in Sources */ = {isa = PBXBuildFile; fileRef = D8363A1B1CD8809400CC4AC0 /* GoodsRow.m */; };
 		D8363A2F1CD8809400CC4AC0 /* Category.m in Sources */ = {isa = PBXBuildFile; fileRef = D8363A1E1CD8809400CC4AC0 /* Category.m */; };
 		D8363A301CD8809400CC4AC0 /* CategoryData.m in Sources */ = {isa = PBXBuildFile; fileRef = D8363A201CD8809400CC4AC0 /* CategoryData.m */; };
-		D8363A311CD8809400CC4AC0 /* CategoryGoods.m in Sources */ = {isa = PBXBuildFile; fileRef = D8363A221CD8809400CC4AC0 /* CategoryGoods.m */; };
 		D8363A321CD8809400CC4AC0 /* CategoryRow.m in Sources */ = {isa = PBXBuildFile; fileRef = D8363A241CD8809400CC4AC0 /* CategoryRow.m */; };
-		D8363A331CD8809400CC4AC0 /* CategorySceneTag.m in Sources */ = {isa = PBXBuildFile; fileRef = D8363A261CD8809400CC4AC0 /* CategorySceneTag.m */; };
 		D8363A521CD8814600CC4AC0 /* MallMenuCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D8363A361CD8814600CC4AC0 /* MallMenuCollectionViewCell.m */; };
 		D8363A531CD8814600CC4AC0 /* RecommendGoodsCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D8363A381CD8814600CC4AC0 /* RecommendGoodsCollectionViewCell.m */; };
 		D8363A541CD8814600CC4AC0 /* CategoryTagRollView.m in Sources */ = {isa = PBXBuildFile; fileRef = D8363A3B1CD8814600CC4AC0 /* CategoryTagRollView.m */; };
-		D8363A551CD8814600CC4AC0 /* GoodsCategoryView.m in Sources */ = {isa = PBXBuildFile; fileRef = D8363A3D1CD8814600CC4AC0 /* GoodsCategoryView.m */; };
 		D8363A571CD8814600CC4AC0 /* GoodsTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D8363A421CD8814600CC4AC0 /* GoodsTableViewCell.m */; };
 		D8363A581CD8814600CC4AC0 /* InfoBrandTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D8363A441CD8814600CC4AC0 /* InfoBrandTableViewCell.m */; };
 		D8363A591CD8814600CC4AC0 /* InfoGoodsHighlightsTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D8363A461CD8814600CC4AC0 /* InfoGoodsHighlightsTableViewCell.m */; };
@@ -351,6 +348,10 @@
 		D8A9ADE51CD9F92B00A9FCFB /* FBFilters.m in Sources */ = {isa = PBXBuildFile; fileRef = D8A9ADDD1CD9F92B00A9FCFB /* FBFilters.m */; };
 		D8A9ADE61CD9F92B00A9FCFB /* FBPhoto.m in Sources */ = {isa = PBXBuildFile; fileRef = D8A9ADDF1CD9F92B00A9FCFB /* FBPhoto.m */; };
 		D8A9ADE91CD9FFCE00A9FCFB /* SearchGoodsView.m in Sources */ = {isa = PBXBuildFile; fileRef = D8A9ADE81CD9FFCE00A9FCFB /* SearchGoodsView.m */; };
+		D8A9ADF11CDAF41200A9FCFB /* ChildTags.m in Sources */ = {isa = PBXBuildFile; fileRef = D8A9ADEC1CDAF41200A9FCFB /* ChildTags.m */; };
+		D8A9ADF21CDAF41200A9FCFB /* ChildTagsData.m in Sources */ = {isa = PBXBuildFile; fileRef = D8A9ADEE1CDAF41200A9FCFB /* ChildTagsData.m */; };
+		D8A9ADF31CDAF41200A9FCFB /* ChildTagsTag.m in Sources */ = {isa = PBXBuildFile; fileRef = D8A9ADF01CDAF41200A9FCFB /* ChildTagsTag.m */; };
+		D8A9ADF61CDB128000A9FCFB /* ChildTagsCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D8A9ADF51CDB127F00A9FCFB /* ChildTagsCollectionViewCell.m */; };
 		D8AEC7511CA8E3A000A868B6 /* libsqlite3.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 1F0EE6A41C9FA47B000631F0 /* libsqlite3.tbd */; };
 		D8AEC7521CA8E3AE00A868B6 /* libiconv.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 1F0EE6A21C9FA43C000631F0 /* libiconv.tbd */; };
 		D8AEC7531CA8E3BB00A868B6 /* libstdc++.6.0.9.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 280045201C805CD7005F5C2E /* libstdc++.6.0.9.tbd */; };
@@ -748,20 +749,14 @@
 		D8363A1E1CD8809400CC4AC0 /* Category.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Category.m; sourceTree = "<group>"; };
 		D8363A1F1CD8809400CC4AC0 /* CategoryData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CategoryData.h; sourceTree = "<group>"; };
 		D8363A201CD8809400CC4AC0 /* CategoryData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CategoryData.m; sourceTree = "<group>"; };
-		D8363A211CD8809400CC4AC0 /* CategoryGoods.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CategoryGoods.h; sourceTree = "<group>"; };
-		D8363A221CD8809400CC4AC0 /* CategoryGoods.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CategoryGoods.m; sourceTree = "<group>"; };
 		D8363A231CD8809400CC4AC0 /* CategoryRow.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CategoryRow.h; sourceTree = "<group>"; };
 		D8363A241CD8809400CC4AC0 /* CategoryRow.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CategoryRow.m; sourceTree = "<group>"; };
-		D8363A251CD8809400CC4AC0 /* CategorySceneTag.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CategorySceneTag.h; sourceTree = "<group>"; };
-		D8363A261CD8809400CC4AC0 /* CategorySceneTag.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CategorySceneTag.m; sourceTree = "<group>"; };
 		D8363A351CD8814600CC4AC0 /* MallMenuCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MallMenuCollectionViewCell.h; sourceTree = "<group>"; };
 		D8363A361CD8814600CC4AC0 /* MallMenuCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MallMenuCollectionViewCell.m; sourceTree = "<group>"; };
 		D8363A371CD8814600CC4AC0 /* RecommendGoodsCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RecommendGoodsCollectionViewCell.h; sourceTree = "<group>"; };
 		D8363A381CD8814600CC4AC0 /* RecommendGoodsCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RecommendGoodsCollectionViewCell.m; sourceTree = "<group>"; };
 		D8363A3A1CD8814600CC4AC0 /* CategoryTagRollView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CategoryTagRollView.h; sourceTree = "<group>"; };
 		D8363A3B1CD8814600CC4AC0 /* CategoryTagRollView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CategoryTagRollView.m; sourceTree = "<group>"; };
-		D8363A3C1CD8814600CC4AC0 /* GoodsCategoryView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GoodsCategoryView.h; sourceTree = "<group>"; };
-		D8363A3D1CD8814600CC4AC0 /* GoodsCategoryView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GoodsCategoryView.m; sourceTree = "<group>"; };
 		D8363A411CD8814600CC4AC0 /* GoodsTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GoodsTableViewCell.h; sourceTree = "<group>"; };
 		D8363A421CD8814600CC4AC0 /* GoodsTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GoodsTableViewCell.m; sourceTree = "<group>"; };
 		D8363A431CD8814600CC4AC0 /* InfoBrandTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InfoBrandTableViewCell.h; sourceTree = "<group>"; };
@@ -992,6 +987,14 @@
 		D8A9ADDF1CD9F92B00A9FCFB /* FBPhoto.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FBPhoto.m; sourceTree = "<group>"; };
 		D8A9ADE71CD9FFCE00A9FCFB /* SearchGoodsView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SearchGoodsView.h; sourceTree = "<group>"; };
 		D8A9ADE81CD9FFCE00A9FCFB /* SearchGoodsView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SearchGoodsView.m; sourceTree = "<group>"; };
+		D8A9ADEB1CDAF41200A9FCFB /* ChildTags.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChildTags.h; sourceTree = "<group>"; };
+		D8A9ADEC1CDAF41200A9FCFB /* ChildTags.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChildTags.m; sourceTree = "<group>"; };
+		D8A9ADED1CDAF41200A9FCFB /* ChildTagsData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChildTagsData.h; sourceTree = "<group>"; };
+		D8A9ADEE1CDAF41200A9FCFB /* ChildTagsData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChildTagsData.m; sourceTree = "<group>"; };
+		D8A9ADEF1CDAF41200A9FCFB /* ChildTagsTag.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChildTagsTag.h; sourceTree = "<group>"; };
+		D8A9ADF01CDAF41200A9FCFB /* ChildTagsTag.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChildTagsTag.m; sourceTree = "<group>"; };
+		D8A9ADF41CDB127F00A9FCFB /* ChildTagsCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChildTagsCollectionViewCell.h; sourceTree = "<group>"; };
+		D8A9ADF51CDB127F00A9FCFB /* ChildTagsCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChildTagsCollectionViewCell.m; sourceTree = "<group>"; };
 		E0438B4B24E3F747F761AF4C /* Pods-Fiu.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Fiu.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Fiu/Pods-Fiu.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -2103,6 +2106,7 @@
 		D83639D31CD1B81900CC4AC0 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				D8A9ADEA1CDAF41200A9FCFB /* ChildTags */,
 				D8363A0A1CD8809400CC4AC0 /* Brand */,
 				D8363A0F1CD8809400CC4AC0 /* Goods */,
 				D8363A1C1CD8809400CC4AC0 /* Category */,
@@ -2147,12 +2151,8 @@
 				D8363A1E1CD8809400CC4AC0 /* Category.m */,
 				D8363A1F1CD8809400CC4AC0 /* CategoryData.h */,
 				D8363A201CD8809400CC4AC0 /* CategoryData.m */,
-				D8363A211CD8809400CC4AC0 /* CategoryGoods.h */,
-				D8363A221CD8809400CC4AC0 /* CategoryGoods.m */,
 				D8363A231CD8809400CC4AC0 /* CategoryRow.h */,
 				D8363A241CD8809400CC4AC0 /* CategoryRow.m */,
-				D8363A251CD8809400CC4AC0 /* CategorySceneTag.h */,
-				D8363A261CD8809400CC4AC0 /* CategorySceneTag.m */,
 			);
 			path = Category;
 			sourceTree = "<group>";
@@ -2173,8 +2173,8 @@
 			children = (
 				D8363A3A1CD8814600CC4AC0 /* CategoryTagRollView.h */,
 				D8363A3B1CD8814600CC4AC0 /* CategoryTagRollView.m */,
-				D8363A3C1CD8814600CC4AC0 /* GoodsCategoryView.h */,
-				D8363A3D1CD8814600CC4AC0 /* GoodsCategoryView.m */,
+				D8A9ADF41CDB127F00A9FCFB /* ChildTagsCollectionViewCell.h */,
+				D8A9ADF51CDB127F00A9FCFB /* ChildTagsCollectionViewCell.m */,
 			);
 			path = Category;
 			sourceTree = "<group>";
@@ -2771,6 +2771,19 @@
 			path = Photo;
 			sourceTree = "<group>";
 		};
+		D8A9ADEA1CDAF41200A9FCFB /* ChildTags */ = {
+			isa = PBXGroup;
+			children = (
+				D8A9ADEB1CDAF41200A9FCFB /* ChildTags.h */,
+				D8A9ADEC1CDAF41200A9FCFB /* ChildTags.m */,
+				D8A9ADED1CDAF41200A9FCFB /* ChildTagsData.h */,
+				D8A9ADEE1CDAF41200A9FCFB /* ChildTagsData.m */,
+				D8A9ADEF1CDAF41200A9FCFB /* ChildTagsTag.h */,
+				D8A9ADF01CDAF41200A9FCFB /* ChildTagsTag.m */,
+			);
+			path = ChildTags;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -2805,7 +2818,7 @@
 				TargetAttributes = {
 					800507331C7A9CDD005AF0BE = {
 						CreatedOnToolsVersion = 7.2.1;
-						DevelopmentTeam = 7ET6PJMCHV;
+						DevelopmentTeam = QNKEA2Q4R9;
 					};
 				};
 			};
@@ -3047,6 +3060,7 @@
 				1F07A6501CC78E7600CF225F /* FindeFriendViewController.m in Sources */,
 				D8363A2D1CD8809400CC4AC0 /* GoodsInfoData.m in Sources */,
 				D803604E1CBF376B001920F9 /* NSString+UserModel.m in Sources */,
+				D8A9ADF61CDB128000A9FCFB /* ChildTagsCollectionViewCell.m in Sources */,
 				D8A9ACB11CD89E0000A9FCFB /* RollImageRow.m in Sources */,
 				D86AFDEC1CBF84DB006F1602 /* SearchSceneTableViewCell.m in Sources */,
 				D8A9AD8E1CD9DFBC00A9FCFB /* PictureView.m in Sources */,
@@ -3087,7 +3101,6 @@
 				D8A9ACBB1CD89E0000A9FCFB /* HotTags.m in Sources */,
 				D87B69BF1CC726BA00199EFE /* FBRollImages.m in Sources */,
 				D8363A761CD8821400CC4AC0 /* GoodsBrandTableViewCell.m in Sources */,
-				D8363A551CD8814600CC4AC0 /* GoodsCategoryView.m in Sources */,
 				1FEF0B141CC0FC15006EF0C6 /* AppBtnView.m in Sources */,
 				1F4061B41CCA231E00D6E9B0 /* AccountManagementViewController.m in Sources */,
 				D8A9ADC61CD9E2E700A9FCFB /* AddTagViewController.m in Sources */,
@@ -3108,11 +3121,11 @@
 				D8035FF41CBE44A9001920F9 /* PictureToolViewController.m in Sources */,
 				1FE60E511CD32AEC00045117 /* SystemInfoTableViewCell.m in Sources */,
 				D80360511CBF376B001920F9 /* RecommendedScenarioModel.m in Sources */,
+				D8A9ADF21CDAF41200A9FCFB /* ChildTagsData.m in Sources */,
 				1FFFFF1F1CD055BB008E1CDC /* AboutViewController.m in Sources */,
 				D8363A941CD8832100CC4AC0 /* ContentAndTagTableViewCell.m in Sources */,
 				D80360581CBF376B001920F9 /* RecommendedScenarioView.m in Sources */,
 				1F51E8B01CC61E6400017839 /* SubscribeViewController.m in Sources */,
-				D8363A311CD8809400CC4AC0 /* CategoryGoods.m in Sources */,
 				1F07A6531CC7925900CF225F /* FindeFriendTableViewCell.m in Sources */,
 				D8363AB91CD8835D00CC4AC0 /* SceneInfoLocation.m in Sources */,
 				D8A9ACB21CD89E0000A9FCFB /* FiuScene.m in Sources */,
@@ -3134,11 +3147,11 @@
 				D81281211CAA8532007CF08B /* FBLoadPhoto.m in Sources */,
 				1F35F03B1CD1ADAB0000DB95 /* CityModel.m in Sources */,
 				D8A9ACD51CD8A46900A9FCFB /* AllSceneCollectionViewCell.m in Sources */,
+				D8A9ADF11CDAF41200A9FCFB /* ChildTags.m in Sources */,
 				D8035FCF1CBD1021001920F9 /* FBTabBar.m in Sources */,
 				D8363ABB1CD8835D00CC4AC0 /* SceneInfoUserInfo.m in Sources */,
 				D8363AC11CD8835D00CC4AC0 /* HomeSceneListRow.m in Sources */,
 				1F35F0371CD1AD870000DB95 /* CityTableViewCell.m in Sources */,
-				D8363A331CD8809400CC4AC0 /* CategorySceneTag.m in Sources */,
 				1FEF0B1D1CC0FC15006EF0C6 /* NaviView.m in Sources */,
 				D83639BD1CD0932000CC4AC0 /* Comment.m in Sources */,
 				D8363A5E1CD8814600CC4AC0 /* BuyCarDefault.m in Sources */,
@@ -3146,6 +3159,7 @@
 				D8A9ADCF1CD9E63900A9FCFB /* FindGoodsView.m in Sources */,
 				D8A9AD891CD9DFBC00A9FCFB /* FBPictureCollectionViewCell.m in Sources */,
 				D8A9ACFC1CD99EBF00A9FCFB /* ReportViewController.m in Sources */,
+				D8A9ADF31CDAF41200A9FCFB /* ChildTagsTag.m in Sources */,
 				D8363AB71CD8835D00CC4AC0 /* SceneInfoCounter.m in Sources */,
 				1FE60E561CD32E8D00045117 /* CommentsViewController.m in Sources */,
 				1F1837751CCDFCB200933CA7 /* ChangeSumaryViewController.m in Sources */,
@@ -3194,8 +3208,6 @@
 				1FEB71751CC88B5D00CF34F3 /* FindeFirendTwoModel.m in Sources */,
 				D8363A981CD8832100CC4AC0 /* UserInfoTableViewCell.m in Sources */,
 				1FEB71721CC8802800CF34F3 /* InvitationModel.m in Sources */,
-				1FE60E741CD341A400045117 /* PayAttentionViewController.m in Sources */,
-				D81281271CAA8532007CF08B /* FBPictureCollectionViewCell.m in Sources */,
 				1FFFFF231CD055BB008E1CDC /* SystemSettingViewController.m in Sources */,
 				D8A9ACB81CD89E0000A9FCFB /* FiuSceneInfoUserInfo.m in Sources */,
 				D8035F3B1CB784B3001920F9 /* UILable+Frame.m in Sources */,
@@ -3287,6 +3299,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 9.2;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
+				PROVISIONING_PROFILE = "";
 				SDKROOT = iphoneos;
 			};
 			name = Debug;
@@ -3324,6 +3337,7 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.2;
 				MTL_ENABLE_DEBUG_INFO = NO;
+				PROVISIONING_PROFILE = "";
 				SDKROOT = iphoneos;
 				VALIDATE_PRODUCT = YES;
 			};
@@ -3334,8 +3348,8 @@
 			baseConfigurationReference = E0438B4B24E3F747F761AF4C /* Pods-Fiu.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Developer: Xiaoyi Tian (65JXH7V6N9)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Xiaoyi Tian (65JXH7V6N9)";
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -3372,8 +3386,8 @@
 			baseConfigurationReference = 105868C9EE6A797B288440BF /* Pods-Fiu.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Developer: Xiaoyi Tian (65JXH7V6N9)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Xiaoyi Tian (65JXH7V6N9)";
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",

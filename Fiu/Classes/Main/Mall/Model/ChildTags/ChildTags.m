@@ -1,16 +1,16 @@
 //
-//	CategoryGoods.m
-// on 28/4/2016
+//	ChildTags.m
+// on 5/5/2016
 //	Copyright © 2016. All rights reserved.
 //	Model file Generated using JSONExport: https://github.com/Ahmed-Ali/JSONExport
 
 
 
-#import "CategoryGoods.h"
+#import "ChildTags.h"
 
-@interface CategoryGoods ()
+@interface ChildTags ()
 @end
-@implementation CategoryGoods
+@implementation ChildTags
 
 
 
@@ -27,7 +27,7 @@
 	}
 
 	if(![dictionary[@"data"] isKindOfClass:[NSNull class]]){
-		self.data = [[CategoryData alloc] initWithDictionary:dictionary[@"data"]];
+		self.data = [[ChildTagsData alloc] initWithDictionary:dictionary[@"data"]];
 	}
 
 	if(![dictionary[@"is_error"] isKindOfClass:[NSNull class]]){
