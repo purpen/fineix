@@ -1,22 +1,16 @@
 //
-//  NaviView.m
+//  BotView.m
 //  Fiu
 //
-//  Created by THN-Dong on 16/3/31.
+//  Created by THN-Dong on 16/5/6.
 //  Copyright © 2016年 taihuoniao. All rights reserved.
 //
 
-#import "NaviView.h"
+#import "BotView.h"
 
-@interface NaviView ()
+@implementation BotView
 
-
-
-@end
-
-@implementation NaviView
-
-+(instancetype)getNaviView{
++(instancetype)getBotView{
     return [[NSBundle mainBundle] loadNibNamed:@"MyView" owner:nil options:nil][0];
 }
 

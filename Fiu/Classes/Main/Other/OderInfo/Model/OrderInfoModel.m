@@ -1,17 +1,19 @@
 //
-//  OrderListModel.m
-//  Fiu
+//  OrderInfoModel.m
+//  parrot
 //
-//  Created by THN-Dong on 16/4/5.
-//  Copyright © 2016年 taihuoniao. All rights reserved.
+//  Created by THN-Huangfei on 15/12/24.
+//  Copyright © 2015年 taihuoniao. All rights reserved.
 //
 
-#import "OrderListModel.h"
+#import "OrderInfoModel.h"
 
+#import "ExpressInfoModel.h"
 
-@implementation OrderListModel
+@implementation OrderInfoModel
 
--(instancetype)initWithDictionary:(NSDictionary *)dictionary{
+-(instancetype)initWithDictionary:(NSDictionary *)dictionary
+{
     self = [super init];
     if(![dictionary[@"_id"] isKindOfClass:[NSNull class]]){
         self.idField = dictionary[@"_id"];
@@ -24,18 +26,18 @@
     }
     
     if(![dictionary[@"bird_coin_money"] isKindOfClass:[NSNull class]]){
-        self.birdCoinMoney = [dictionary[@"bird_coin_money"] floatValue];
+        self.birdCoinMoney = dictionary[@"bird_coin_money"];
     }
     
     if(![dictionary[@"card_code"] isKindOfClass:[NSNull class]]){
         self.cardCode = dictionary[@"card_code"];
     }
     if(![dictionary[@"card_money"] isKindOfClass:[NSNull class]]){
-        self.cardMoney = [dictionary[@"card_money"] floatValue];
+        self.cardMoney = dictionary[@"card_money"];
     }
     
     if(![dictionary[@"coin_money"] isKindOfClass:[NSNull class]]){
-        self.coinMoney = [dictionary[@"coin_money"] floatValue];
+        self.coinMoney = dictionary[@"coin_money"];
     }
     
     if(![dictionary[@"created_at"] isKindOfClass:[NSNull class]]){
@@ -43,7 +45,7 @@
     }
     
     if(![dictionary[@"discount"] isKindOfClass:[NSNull class]]){
-        self.discount = [dictionary[@"discount"] floatValue];
+        self.discount = dictionary[@"discount"];
     }
     
     if(![dictionary[@"expired_time"] isKindOfClass:[NSNull class]]){
@@ -53,15 +55,15 @@
     if(![dictionary[@"express_caty"] isKindOfClass:[NSNull class]]){
         self.expressCaty = dictionary[@"express_caty"];
     }
-//    if(![dictionary[@"express_info"] isKindOfClass:[NSNull class]]){
-//        self.expressInfo = [[ExpressInfoModel alloc] initWithDictionary:dictionary[@"express_info"]];
-//    }
+    if(![dictionary[@"express_info"] isKindOfClass:[NSNull class]]){
+        self.expressInfo = [[ExpressInfoModel alloc] initWithDictionary:dictionary[@"express_info"]];
+    }
     
     if(![dictionary[@"express_no"] isKindOfClass:[NSNull class]]){
         self.expressNo = dictionary[@"express_no"];
     }
     if(![dictionary[@"freight"] isKindOfClass:[NSNull class]]){
-        self.freight = [dictionary[@"freight"] floatValue];
+        self.freight = dictionary[@"freight"];
     }
     
     if(![dictionary[@"from_site"] isKindOfClass:[NSNull class]]){
@@ -72,7 +74,7 @@
         self.giftCode = dictionary[@"gift_code"];
     }
     if(![dictionary[@"gift_money"] isKindOfClass:[NSNull class]]){
-        self.giftMoney = [dictionary[@"gift_money"] floatValue];
+        self.giftMoney = dictionary[@"gift_money"];
     }
     
     if(![dictionary[@"invoice_caty"] isKindOfClass:[NSNull class]]){
@@ -93,46 +95,20 @@
     }
     
     if(dictionary[@"items"] != nil && [dictionary[@"items"] isKindOfClass:[NSArray class]]){
-        NSDictionary * itemsDictionaries = dictionary[@"items"];
-        if(![itemsDictionaries[@"cover_url"] isKindOfClass:[NSNull class]]){
-            self.coverUrl = itemsDictionaries[@"cover_url"];
+        NSArray * itemsDictionaries = dictionary[@"items"];
+        NSMutableArray * itemsItems = [NSMutableArray array];
+        for(NSDictionary * itemsDictionary in itemsDictionaries){
+            ProductInfoModel * productInfo = [[ProductInfoModel alloc] initWithDictionary:itemsDictionary];
+            [itemsItems addObject:productInfo];
         }
-        
-        if(![itemsDictionaries[@"name"] isKindOfClass:[NSNull class]]){
-            self.name = itemsDictionaries[@"name"];
-        }
-        
-        if(![itemsDictionaries[@"sku_name"] isKindOfClass:[NSNull class]]){
-            self.skuName = itemsDictionaries[@"sku_name"];
-        }
-        
-        if(![itemsDictionaries[@"price"] isKindOfClass:[NSNull class]]){
-            self.price = [itemsDictionaries[@"price"] floatValue];
-        }
-        
-        if(![itemsDictionaries[@"product_id"] isKindOfClass:[NSNull class]]){
-            self.productId = [itemsDictionaries[@"product_id"] integerValue];
-        }
-        
-        if(![itemsDictionaries[@"quantity"] isKindOfClass:[NSNull class]]){
-            self.quantity = [itemsDictionaries[@"quantity"] integerValue];
-        }
-        
-        if(![itemsDictionaries[@"sale_price"] isKindOfClass:[NSNull class]]){
-            self.salePrice = [itemsDictionaries[@"sale_price"] floatValue];
-        }
-        
-        if(![itemsDictionaries[@"sku"] isKindOfClass:[NSNull class]]){
-            self.sku = [itemsDictionaries[@"sku"] integerValue];
-        }
-
+        self.productInfos = itemsItems;
     }
     if(![dictionary[@"items_count"] isKindOfClass:[NSNull class]]){
         self.itemsCount = [dictionary[@"items_count"] integerValue];
     }
     
     if(![dictionary[@"pay_money"] isKindOfClass:[NSNull class]]){
-        self.payMoney = [dictionary[@"pay_money"] floatValue];
+        self.payMoney = dictionary[@"pay_money"];
     }
     
     if(![dictionary[@"payment_method"] isKindOfClass:[NSNull class]]){
@@ -148,7 +124,7 @@
     }
     
     if(![dictionary[@"status"] isKindOfClass:[NSNull class]]){
-        self.orderStatus = [dictionary[@"status"] integerValue];
+        self.status = OrderInfoState([dictionary[@"status"] integerValue]);
     }
     
     if(![dictionary[@"status_label"] isKindOfClass:[NSNull class]]){
@@ -156,16 +132,15 @@
     }
     
     if(![dictionary[@"total_money"] isKindOfClass:[NSNull class]]){
-        self.totalMoney = [dictionary[@"total_money"] floatValue];
+        self.totalMoney = dictionary[@"total_money"];
     }
     
     if(![dictionary[@"user_id"] isKindOfClass:[NSNull class]]){
         self.userId = [dictionary[@"user_id"] integerValue];
     }
     
-    
     return self;
-
 }
+
 
 @end

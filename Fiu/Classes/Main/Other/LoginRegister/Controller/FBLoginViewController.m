@@ -18,7 +18,7 @@
 #import "FBAPI.h"
 #import "UserInfo.h"
 #import "UserInfoEntity.h"
-#import "MyselfViewController.h"
+#import "MyPageViewController.h"
 #import "PhoneNumLoginView.h"
 #import "SubmitView.h"
 #import "FBSignupViewController.h"
@@ -157,7 +157,9 @@ static NSString *const thirdRegister = @"/auth/third_sign";//第三方登录接�
     if ([_submitView.phoneNumTF.text checkTel]) {
         
         FBRequest *request1 = [FBAPI postWithUrlString:@"/auth/check_account" requestDictionary:@{@"account":_submitView.phoneNumTF.text} delegate:self];
+        
         [request1 startRequestSuccess:^(FBRequest *request, id result) {
+            NSLog( @"手机号的验证 %@",_submitView.phoneNumTF.text);
             if ([result objectForKey:@"success"]) {
                 //如果手机号正确，发送短信
                 NSDictionary *params = @{

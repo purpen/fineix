@@ -11,9 +11,12 @@
 #import "FBRequest.h"
 #import "OrderInfoCell.h"
 #import "SVProgressHUD.h"
-#import "MyOderModel.h"
+#import "OrderInfoModel.h"
+#import "MJRefresh.h"
+#import "TYAlertView.h"
+#import "UIView+TYAlertView.h"
 
-@interface MyOderInfoViewController ()<FBNavigationBarItemsDelegate,UITableViewDelegate,UITableViewDataSource,FBRequestDelegate>
+@interface MyOderInfoViewController ()<FBNavigationBarItemsDelegate,UITableViewDelegate,UITableViewDataSource,FBRequestDelegate,OrderInfoCellDelegate>
 {
     //创建金色小条
     UIView *_linView;
@@ -28,8 +31,14 @@
 @property (weak, nonatomic) IBOutlet UIButton *evaluateBtn;
 @property (weak, nonatomic) IBOutlet UITableView *myTableView;
 @property (weak, nonatomic) IBOutlet UIView *chanelView;
+
+@property (nonatomic, assign) NSInteger currentPageNumber;
+@property (nonatomic, assign) NSInteger totalPageNumber;
+@property (nonatomic,strong) NSMutableArray *orderListAry;
 @end
 
+static NSString *const OrderListURL = @"/shopping/orders";
+static NSString *const OrderInfoCellIdentifier = @"orderInfoCell";
 
 @implementation MyOderInfoViewController
 
@@ -59,35 +68,101 @@
     }else if ([self.type isEqualToNumber:@4]){
         [self evaluateBtn:self.evaluateBtn];
     }
-}
-
--(void)netGetDataWithType:(NSNumber*)type{
-//    [SVProgressHUD show];
-//    FBRequest *request = [FBAPI postWithUrlString:@"/shopping/orders" requestDictionary:@{@"page":@(_page),@"size":@15,@"status":type} delegate:self];
-//    [request startRequestSuccess:^(FBRequest *request, id result) {
-//        NSDictionary * dataDic = [result objectForKey:@"data"];
-//        NSArray * rowsAry = [dataDic objectForKey:@"rows"];
-//        NSLog(@"orderInfoDic      %@",dataDic);
-//        for (NSDictionary * orderInfoDic in rowsAry) {
-//            MyOderModel * model = [[MyOderModel alloc] init];
-//            model.created_at = [orderInfoDic objectForKey:@"created_at"];
-//            
-//            [_modelAry addObject:orderInfo];
-//        }
-//        [self.orderTableView reloadData];
-//        [self.mytableView reloadData];
-//        _page = [[[result valueForKey:@"data"] valueForKey:@"current_page"] intValue];
-//        _totalePage = [[[result valueForKey:@"data"] valueForKey:@"total_page"] intValue];
-//        if (_totalePage > 1) {
-//            [self addMJRefresh:self.mytableView];
-//            [self requestIsLastData:self.mytableView currentPage:_page withTotalPage:_totalePage];
-//        }
-//        [SVProgressHUD dismiss];
-//    } failure:^(FBRequest *request, NSError *error) {
-//        [SVProgressHUD showErrorWithStatus:[error localizedDescription]];
-//    }];
+    
+    
+    
+    [self.myTableView registerNib:[UINib nibWithNibName:@"OrderInfoCell" bundle:nil] forCellReuseIdentifier:OrderInfoCellIdentifier];
+    _myTableView.estimatedRowHeight = 212.f;
+    _myTableView.rowHeight = UITableViewAutomaticDimension;
+    
+    [self requestDataForOderList];
+    
+    // 下拉刷新
+    _myTableView.mj_header = [MJRefreshNormalHeader headerWithRefreshingBlock:^{
+        _currentPageNumber = 0;
+        [self.orderListAry removeAllObjects];
+        [self requestDataForOderListOperationWith:self.type];
+    }];
+    
+    //上拉加载更多
+    _myTableView.mj_footer = [MJRefreshAutoNormalFooter footerWithRefreshingBlock:^{
+        if (_currentPageNumber < _totalPageNumber) {
+            [self requestDataForOderListOperationWith:self.type];
+        } else {
+            [self.myTableView.mj_footer endRefreshing];
+        }
+    }];
 
 }
+
+//上拉下拉分页请求订单列表
+- (void)requestDataForOderListOperationWith:(NSNumber *)type
+{
+    NSDictionary * params = @{@"page": [NSNumber numberWithInteger:(_currentPageNumber + 1)], @"size": @10, @"status": type};
+    
+    FBRequest * request = [FBAPI postWithUrlString:OrderListURL requestDictionary:params delegate:self];
+    [request startRequestSuccess:^(FBRequest *request, id result) {
+        
+        NSDictionary * dataDic = [result objectForKey:@"data"];
+        NSArray * rowsAry = [dataDic objectForKey:@"rows"];
+        
+        NSLog(@"订单  %@",result);
+        for (NSDictionary * orderInfoDic in rowsAry) {
+            OrderInfoModel * orderInfo = [[OrderInfoModel alloc] initWithDictionary:orderInfoDic];
+            [self.orderListAry addObject:orderInfo];
+        }
+        [self.myTableView reloadData];
+        
+        _currentPageNumber = [dataDic[@"current_page"] integerValue];
+        _totalPageNumber = [dataDic[@"total_page"] integerValue];
+        
+        BOOL isLastPage = (_currentPageNumber == _totalPageNumber);
+        
+        if (!isLastPage) {
+            if (_myTableView.mj_footer.state == MJRefreshStateNoMoreData) {
+                [_myTableView.mj_footer resetNoMoreData];
+            }
+        }
+        if (_currentPageNumber == _totalPageNumber == 1) {
+            _myTableView.mj_footer.state = MJRefreshStateNoMoreData;
+            _myTableView.mj_footer.hidden = true;
+        }
+        
+        if ([_myTableView.mj_header isRefreshing]) {
+            [_myTableView.mj_header endRefreshing];
+        }
+        if ([_myTableView.mj_footer isRefreshing]) {
+            if (isLastPage) {
+                [_myTableView.mj_footer endRefreshingWithNoMoreData];
+            } else  {
+                [_myTableView.mj_footer endRefreshing];
+            }
+        }
+        
+        [SVProgressHUD dismiss];
+    } failure:^(FBRequest *request, NSError *error) {
+        [SVProgressHUD showInfoWithStatus:[error localizedDescription]];
+    }];
+}
+
+-(NSMutableArray *)orderListAry{
+    if (!_orderListAry) {
+        _orderListAry = [NSMutableArray array];
+    }
+    return _orderListAry;
+}
+
+#pragma mark - Network
+//请求不同状态订单列表
+- (void)requestDataForOderList
+{
+    _currentPageNumber = 0;
+    [self.orderListAry removeAllObjects];
+    [SVProgressHUD showWithMaskType:SVProgressHUDMaskTypeClear];
+    
+    [self requestDataForOderListOperationWith:self.type];
+}
+
 
 - (IBAction)allBtn:(UIButton *)sender {
     self.allBtn.selected = YES;
@@ -101,8 +176,8 @@
     frame.size.width = sender.frame.size.width-18;
     _linView.frame = frame;
     [self.chanelView addSubview:_linView];
-    
-    [self netGetDataWithType:@0];
+    self.type = @0;
+    [self requestDataForOderList];
 
 }
 - (IBAction)payMentBtn:(UIButton *)sender {
@@ -117,31 +192,8 @@
     frame.size.width = sender.frame.size.width-18;
     _linView.frame = frame;
     [self.chanelView addSubview:_linView];
-//    //进行全部的网络请求然后进行数据展示
-//    int currentPageNum = 1;
-//    NSDictionary *parameter = @{
-//                                @"page":[NSNumber numberWithInteger:currentPageNum],
-//                                @"size":@10,
-//                                @"status":[NSNumber numberWithUnsignedInteger:1]
-//                                };
-//    FBRequest *request = [FBAPI postWithUrlString:OrderListURL requestDictionary:parameter delegate:self];
-//    [request startRequestSuccess:^(FBRequest *request, id result) {
-//        NSDictionary *dataDic = [result objectForKey:@"data"];
-//        NSArray *rowsAry = [dataDic objectForKey:@"rows"];
-//        [_dataAry removeAllObjects];
-//        for (NSDictionary *orderInfoDic in rowsAry) {
-//            OrderListModel *orderInfo = [[OrderListModel alloc] initWithDictionary:orderInfoDic];
-//            if (orderInfo.orderStatus == 1) {
-//                [_dataAry addObject:orderInfo];
-//            }
-//            
-//        }
-//        //tableView数据刷新
-//        [self.ordertableV reloadData];
-//    } failure:^(FBRequest *request, NSError *error) {
-//        //提示错误信息
-//        
-//    }];
+    self.type = @1;
+    [self requestDataForOderList];
 
 }
 - (IBAction)sendGoodsBtn:(UIButton *)sender {
@@ -156,30 +208,8 @@
     frame.size.width = sender.frame.size.width-18;
     _linView.frame = frame;
     [self.chanelView addSubview:_linView];
-//    //进行全部的网络请求然后进行数据展示
-//    int currentPageNum = 1;
-//    NSDictionary *parameter = @{
-//                                @"page":[NSNumber numberWithInteger:currentPageNum],
-//                                @"size":@10,
-//                                @"status":[NSNumber numberWithUnsignedInteger:1]
-//                                };
-//    FBRequest *request = [FBAPI postWithUrlString:OrderListURL requestDictionary:parameter delegate:self];
-//    [request startRequestSuccess:^(FBRequest *request, id result) {
-//        NSDictionary *dataDic = [result objectForKey:@"data"];
-//        NSArray *rowsAry = [dataDic objectForKey:@"rows"];
-//        [_dataAry removeAllObjects];
-//        for (NSDictionary *orderInfoDic in rowsAry) {
-//            OrderListModel *orderInfo = [[OrderListModel alloc] initWithDictionary:orderInfoDic];
-//            if (orderInfo.orderStatus == 10) {
-//                [_dataAry addObject:orderInfo];
-//            }
-//        }
-//        //tableView数据刷新
-//        [self.ordertableV reloadData];
-//    } failure:^(FBRequest *request, NSError *error) {
-//        //提示错误信息
-//        
-//    }];
+    self.type = @2;
+    [self requestDataForOderList];
 
 }
 - (IBAction)goodsBtn:(UIButton *)sender {
@@ -194,30 +224,8 @@
     frame.size.width = sender.frame.size.width-18;
     _linView.frame = frame;
     [self.chanelView addSubview:_linView];
-//    //进行全部的网络请求然后进行数据展示
-//    int currentPageNum = 1;
-//    NSDictionary *parameter = @{
-//                                @"page":[NSNumber numberWithInteger:currentPageNum],
-//                                @"size":@10,
-//                                @"status":[NSNumber numberWithUnsignedInteger:1]
-//                                };
-//    FBRequest *request = [FBAPI postWithUrlString:OrderListURL requestDictionary:parameter delegate:self];
-//    [request startRequestSuccess:^(FBRequest *request, id result) {
-//        NSDictionary *dataDic = [result objectForKey:@"data"];
-//        NSArray *rowsAry = [dataDic objectForKey:@"rows"];
-//        [_dataAry removeAllObjects];
-//        for (NSDictionary *orderInfoDic in rowsAry) {
-//            OrderListModel *orderInfo = [[OrderListModel alloc] initWithDictionary:orderInfoDic];
-//            if (orderInfo.orderStatus == 15) {
-//                [_dataAry addObject:orderInfo];
-//            }
-//        }
-//        //tableView数据刷新
-//        [self.ordertableV reloadData];
-//    } failure:^(FBRequest *request, NSError *error) {
-//        //提示错误信息
-//        
-//    }];
+    self.type = @3;
+    [self requestDataForOderList];
 
 }
 - (IBAction)evaluateBtn:(UIButton *)sender {
@@ -232,41 +240,21 @@
     frame.size.width = sender.frame.size.width-18;
     _linView.frame = frame;
     [self.chanelView addSubview:_linView];
-//    //进行全部的网络请求然后进行数据展示
-//    int currentPageNum = 1;
-//    NSDictionary *parameter = @{
-//                                @"page":[NSNumber numberWithInteger:currentPageNum],
-//                                @"size":@10,
-//                                @"status":[NSNumber numberWithUnsignedInteger:1]
-//                                };
-//    FBRequest *request = [FBAPI postWithUrlString:OrderListURL requestDictionary:parameter delegate:self];
-//    [request startRequestSuccess:^(FBRequest *request, id result) {
-//        NSDictionary *dataDic = [result objectForKey:@"data"];
-//        NSArray *rowsAry = [dataDic objectForKey:@"rows"];
-//        [_dataAry removeAllObjects];
-//        for (NSDictionary *orderInfoDic in rowsAry) {
-//            OrderListModel *orderInfo = [[OrderListModel alloc] initWithDictionary:orderInfoDic];
-//            if (orderInfo.orderStatus == 16) {
-//                [_dataAry addObject:orderInfo];
-//            }
-//        }
-//        //tableView数据刷新
-//        [self.ordertableV reloadData];
-//    } failure:^(FBRequest *request, NSError *error) {
-//        //提示错误信息
-//        
-//    }];
-//
+    self.type = @4;
+    [self requestDataForOderList];
 }
 
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
-    return 2;
+    return self.orderListAry.count;
 }
 
 -(UITableViewCell*)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
-    OrderInfoCell *orderInfoCell = [tableView dequeueReusableCellWithIdentifier:[OrderInfoCell getIdentifer]];
-    if (orderInfoCell == nil) {
-        orderInfoCell = [OrderInfoCell getOrderInfoCell];
+    OrderInfoCell * orderInfoCell = [tableView dequeueReusableCellWithIdentifier:OrderInfoCellIdentifier forIndexPath:indexPath];
+    if (![orderInfoCell.delegate isEqual:self]) {
+        orderInfoCell.delegate = self;
+    }
+    if (self.orderListAry.count) {
+        orderInfoCell.orderInfo = self.orderListAry[indexPath.row];
     }
     return orderInfoCell;
 }
@@ -275,6 +263,152 @@
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
+
+
+#pragma mark - OrderInfoCellDelegate
+- (void)tapProductViewWithOrderInfoCell:(OrderInfoCell *)orderInfoCell
+{
+//    OrderInfoDetailViewController * orderInfoDetailVC = [[OrderInfoDetailViewController alloc] initWithNibName:@"OrderInfoDetailViewController" bundle:nil];
+//    orderInfoDetailVC.orderInfoCell = orderInfoCell;
+//    orderInfoDetailVC.delegate = self;
+//    [self.navigationController pushViewController:orderInfoDetailVC animated:YES];
+    //订单详情
+    NSLog(@"订单详情");
+}
+
+- (void)operation1stBtnAction:(UIButton *)button withOrderInfoCell:(OrderInfoCell *)orderInfoCell
+{
+    switch (orderInfoCell.orderInfo.status) {
+        case OrderInfoStateExpired:
+        case OrderInfoStateCancled:
+        case OrderInfoStateRefunded:
+        case OrderInfoStateCompleted:
+        {
+            [self deleteOrderWithCell:orderInfoCell];
+        }
+            break;
+        case OrderInfoStateWaitPayment://立即支付
+        {
+//            FBPayTheWayViewController * payWayVC = [[FBPayTheWayViewController alloc] init];
+//            payWayVC.orderInfo = orderInfoCell.orderInfo;
+//            [self.navigationController pushViewController:payWayVC animated:YES];
+            NSLog(@"立即支付");
+        }
+            break;
+        case OrderInfoStateWaitDelivery://申请退款
+        {
+//            RefundmentViewController * refundmentVC = [[RefundmentViewController alloc] initWithNibName:@"RefundmentViewController" bundle:nil];
+//            refundmentVC.orderInfoCell = orderInfoCell;
+//            refundmentVC.delegate = self;
+//            [self.navigationController pushViewController:refundmentVC animated:YES];
+            NSLog(@"申请退款");
+        }
+            break;
+        case OrderInfoStateWaitReceive://确认收货
+        {
+            [self confirmReceiptWithCell:orderInfoCell];
+        }
+            break;
+        case OrderInfoStateWaitComment://去评价
+        {
+//            CommentViewController * commentVC = [[CommentViewController alloc] initWithNibName:@"CommentViewController" bundle:nil];
+//            commentVC.orderInfoCell = orderInfoCell;
+//            commentVC.delegate = self;
+//            [self.navigationController pushViewController:commentVC animated:YES];
+            NSLog(@"去评价");
+        }
+            break;
+        default:
+            break;
+    }
+}
+
+- (void)operation2ndBtnAction:(UIButton *)button withOrderInfoCell:(OrderInfoCell *)orderInfoCell
+{
+    switch (orderInfoCell.orderInfo.status) {
+        case OrderInfoStateWaitPayment:
+        {
+            [self cancleOrderWithCell:orderInfoCell];
+        }
+            break;
+        case OrderInfoStateWaitComment:
+        {
+            [self deleteOrderWithCell:orderInfoCell];
+        }
+            break;
+        default:
+            break;
+    }
+}
+
+#pragma mark - 订单操作
+//请求删除订单
+- (void)deleteOrderWithCell:(OrderInfoCell *)cell
+{
+    TYAlertView * alertView = [TYAlertView alertViewWithTitle:@"确认删除订单？" message:nil];
+    TYAlertAction * cancel = [TYAlertAction actionWithTitle:@"取消" style:TYAlertActionStyleCancle handler:nil];
+    TYAlertAction * confirm = [TYAlertAction actionWithTitle:@"确定" style:TYAlertActionStyleDefault handler:^(TYAlertAction * action) {
+        FBRequest * request = [FBAPI postWithUrlString:@"/my/delete_order" requestDictionary:@{@"rid": cell.orderInfo.rid} delegate:self];
+        [SVProgressHUD showWithMaskType:SVProgressHUDMaskTypeClear];
+        [request startRequestSuccess:^(FBRequest *request, id result) {
+            [self operationActionWithCell:cell];
+            [SVProgressHUD showSuccessWithStatus:@"删除成功"];
+        } failure:^(FBRequest *request, NSError *error) {
+            [SVProgressHUD showInfoWithStatus:[error localizedDescription]];
+        }];
+    }];
+    [alertView addAction:cancel];
+    [alertView addAction:confirm];
+    [alertView showInWindowWithBackgoundTapDismissEnable:YES];
+}
+
+- (void)cancleOrderWithCell:(OrderInfoCell *)cell
+{
+    TYAlertView * alertView = [TYAlertView alertViewWithTitle:@"确认取消订单？" message:nil];
+    TYAlertAction * cancel = [TYAlertAction actionWithTitle:@"取消" style:TYAlertActionStyleCancle handler:nil];
+    TYAlertAction * confirm = [TYAlertAction actionWithTitle:@"确定" style:TYAlertActionStyleDefault handler:^(TYAlertAction * action) {
+        FBRequest * request = [FBAPI postWithUrlString:@"/my/cancel_order" requestDictionary:@{@"rid": cell.orderInfo.rid} delegate:self];
+        [SVProgressHUD showWithMaskType:SVProgressHUDMaskTypeClear];
+        [request startRequestSuccess:^(FBRequest *request, id result) {
+            [self operationActionWithCell:cell];
+            [SVProgressHUD showSuccessWithStatus:@"取消成功"];
+        } failure:^(FBRequest *request, NSError *error) {
+            [SVProgressHUD showInfoWithStatus:[error localizedDescription]];
+        }];
+    }];
+    [alertView addAction:cancel];
+    [alertView addAction:confirm];
+    [alertView showInWindowWithBackgoundTapDismissEnable:YES];
+}
+
+//请求确认收货
+- (void)confirmReceiptWithCell:(OrderInfoCell *)cell
+{
+    TYAlertView * alertView = [TYAlertView alertViewWithTitle:@"确认收货？" message:nil];
+    TYAlertAction * cancel = [TYAlertAction actionWithTitle:@"取消" style:TYAlertActionStyleCancle handler:nil];
+    TYAlertAction * confirm = [TYAlertAction actionWithTitle:@"确定" style:TYAlertActionStyleDefault handler:^(TYAlertAction * action) {
+        FBRequest * request = [FBAPI postWithUrlString:@"/shopping/take_delivery" requestDictionary:@{@"rid": cell.orderInfo.rid} delegate:self];
+        [SVProgressHUD showWithMaskType:SVProgressHUDMaskTypeClear];
+        [request startRequestSuccess:^(FBRequest *request, id result) {
+            [self operationActionWithCell:cell];
+            [SVProgressHUD showSuccessWithStatus:@"确认收货成功"];
+        } failure:^(FBRequest *request, NSError *error) {
+            [SVProgressHUD showInfoWithStatus:[error localizedDescription]];
+        }];
+    }];
+    [alertView addAction:cancel];
+    [alertView addAction:confirm];
+    [alertView showInWindowWithBackgoundTapDismissEnable:YES];
+}
+
+#pragma mark - OrderInfoDetailVCDelegate
+- (void)operationActionWithCell:(OrderInfoCell *)cell
+{
+    NSIndexPath * indexPath = [self.myTableView indexPathForCell:cell];
+    [self.orderListAry removeObjectAtIndex:indexPath.row];
+    [self.myTableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
+}
+
 
 /*
 #pragma mark - Navigation

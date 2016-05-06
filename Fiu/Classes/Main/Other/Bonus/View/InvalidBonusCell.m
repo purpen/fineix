@@ -30,9 +30,9 @@
     if (_bonus != bonus) {
         _bonus = bonus;
     }
-    self.amountLbl.text = [NSString stringWithFormat:@"%.2f", bonus.amount];
+    self.amountLbl.text = [NSString stringWithFormat:@"%.2f", [bonus.amount floatValue]];
     self.codeLbl.text = [NSString stringWithFormat:@"红包码:%@", bonus.code];;
-    self.minimumLbl.text = [NSString stringWithFormat:@"最低使用限额:%.2f", bonus.minAmount];
+    self.minimumLbl.text = [NSString stringWithFormat:@"最低使用限额:%.2f", [bonus.minAmount floatValue]];
     self.overdueLbl.text = bonus.expiredLabel;
 }
 

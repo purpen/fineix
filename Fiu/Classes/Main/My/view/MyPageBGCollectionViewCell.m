@@ -1,17 +1,19 @@
 //
-//  BackgroundCollectionViewCell.m
+//  MyPageBGCollectionViewCell.m
 //  Fiu
 //
-//  Created by THN-Dong on 16/4/20.
+//  Created by THN-Dong on 16/5/6.
 //  Copyright © 2016年 taihuoniao. All rights reserved.
 //
 
-#import "BackgroundCollectionViewCell.h"
+#import "MyPageBGCollectionViewCell.h"
 #import "Fiu.h"
 #import "UserInfoEntity.h"
 #import <SDWebImage/UIImageView+WebCache.h>
 
-@implementation BackgroundCollectionViewCell
+@implementation MyPageBGCollectionViewCell
+
+
 -(instancetype)initWithFrame:(CGRect)frame{
     if (self = [super initWithFrame:frame]) {
         [self.contentView addSubview:self.bgImageView];
@@ -21,27 +23,20 @@
             make.left.mas_equalTo(self.mas_left).with.offset(0);
         }];
         
+        [self.contentView addSubview:self.certificationBtn];
+        [_certificationBtn mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.size.mas_equalTo(CGSizeMake(138*0.5/667.0*SCREEN_HEIGHT, 25/667.0*SCREEN_HEIGHT));
+            make.bottom.mas_equalTo(self.mas_bottom).with.offset(-15/667.0*SCREEN_HEIGHT);
+            make.centerX.mas_equalTo(self.mas_centerX);
+        }];
+        
         [self.contentView addSubview:self.userLevelLabel];
         [_userLevelLabel mas_makeConstraints:^(MASConstraintMaker *make) {
             make.size.mas_equalTo(CGSizeMake(200, 12));
             make.centerX.mas_equalTo(self.mas_centerX);
-            make.bottom.mas_equalTo(self.mas_bottom).with.offset(-14/667.0*SCREEN_HEIGHT);
+            make.bottom.mas_equalTo(self.certificationBtn.mas_top).with.offset(-9/667.0*SCREEN_HEIGHT);
         }];
         
-//        [self.contentView addSubview:self.backBtn];
-//        [_backBtn mas_makeConstraints:^(MASConstraintMaker *make) {
-//            make.size.mas_equalTo(CGSizeMake(30, 18));
-//            make.top.mas_equalTo(self.mas_top).with.offset(35);
-//            make.left.mas_equalTo(self.mas_left).with.offset(16);
-//        }];
-//        
-//        [self.contentView addSubview:self.editBtn];
-//        [_editBtn mas_makeConstraints:^(MASConstraintMaker *make) {
-//            make.size.mas_equalTo(CGSizeMake(30, 30));
-//            //make.top.mas_equalTo(_bgImageView.mas_top).with.offset(35);
-//            make.right.mas_equalTo(self.mas_right).with.offset(-16);
-//            make.centerY.mas_equalTo(_backBtn.mas_centerY);
-//        }];
         
         [self.contentView addSubview:self.userProfile];
         [_userProfile mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -63,29 +58,37 @@
             make.centerX.mas_equalTo(self.mas_centerX);
             make.bottom.mas_equalTo(_nickName.mas_top).with.offset(-10/667.0*SCREEN_HEIGHT);
         }];
+        
+        
     }
     return self;
 }
 
+-(UIButton *)certificationBtn{
+    if (!_certificationBtn) {
+        _certificationBtn = [[UIButton alloc] init];
+        [_certificationBtn setImage:[UIImage imageNamed:@"certification"] forState:UIControlStateNormal];
+    }
+    return _certificationBtn;
+}
+
 -(void)setUI{
-        UserInfoEntity *entity = [UserInfoEntity defaultUserInfoEntity];
-        //更新头像
-        [self.userHeadImageView sd_setImageWithURL:[NSURL URLWithString:entity.mediumAvatarUrl] placeholderImage:nil completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
-            
-        }];
+    UserInfoEntity *entity = [UserInfoEntity defaultUserInfoEntity];
+    //更新头像
+    [self.userHeadImageView sd_setImageWithURL:[NSURL URLWithString:entity.mediumAvatarUrl] placeholderImage:nil completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
+        
+    }];
     [self.bgImageView sd_setImageWithURL:[NSURL URLWithString:entity.head_pic_url] placeholderImage:[UIImage imageNamed:@"image"]];
     self.nickName.text = entity.nickname;
     self.userProfile.text = entity.summary;
     self.userLevelLabel.text = [NSString stringWithFormat:@"%@|V%d",entity.levelDesc,[entity.level intValue]];
+    
+    [self.bgImageView sd_setImageWithURL:[NSURL URLWithString:entity.head_pic_url] placeholderImage:[UIImage imageNamed:@"image"]];
 }
 
 #pragma mark - 个人信息背景图
 -(UIImageView *)bgImageView{
     if (!_bgImageView) {
-        _bgImageView = [[UIImageView alloc] init];
-        //_bgImageView.contentMode = UIViewContentModeScaleToFill;
-        _bgImageView.userInteractionEnabled = YES;
-        
         _bgImageView = [[UIImageView alloc] init];
         _bgImageView.userInteractionEnabled = YES;
         //  添加渐变层
@@ -96,45 +99,9 @@
                           (__bridge id)[UIColor blackColor].CGColor];
         shadow.locations = @[@(0.5f), @(1.5f)];
         shadow.frame = _bgImageView.bounds;
-        
-        [_bgImageView addSubview:self.backBtn];
-        [_backBtn mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.size.mas_equalTo(CGSizeMake(30, 18));
-            make.top.mas_equalTo(_bgImageView.mas_top).with.offset(79);
-            make.left.mas_equalTo(_bgImageView.mas_left).with.offset(16);
-        }];
-        
-        [_bgImageView addSubview:self.editBtn];
-        [_editBtn mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.size.mas_equalTo(CGSizeMake(30, 30));
-            //make.top.mas_equalTo(_bgImageView.mas_top).with.offset(35);
-            make.right.mas_equalTo(_bgImageView.mas_right).with.offset(-16);
-            make.centerY.mas_equalTo(_backBtn.mas_centerY);
-        }];
+        [_bgImageView.layer addSublayer:shadow];
     }
     return _bgImageView;
-}
-
--(UIButton *)editBtn{
-    if (!_editBtn) {
-        _editBtn = [[UIButton alloc] init];
-        _editBtn.userInteractionEnabled = YES;
-        _editBtn.clipsToBounds = YES;
-        _editBtn.autoresizingMask = UIViewAutoresizingFlexibleBottomMargin;
-        [_editBtn setImage:[UIImage imageNamed:@"SET"] forState:UIControlStateNormal];
-    }
-    return _editBtn;
-}
-
--(UIButton *)backBtn{
-    if (!_backBtn) {
-        _backBtn = [[UIButton alloc] init];
-        _backBtn.userInteractionEnabled = YES;
-        _backBtn.clipsToBounds = YES;
-        _backBtn.autoresizingMask = UIViewAutoresizingFlexibleBottomMargin;
-        [_backBtn setImage:[UIImage imageNamed:@"Fill 1"] forState:UIControlStateNormal];
-    }
-    return _backBtn;
 }
 
 
@@ -185,5 +152,6 @@
     }
     return _userHeadImageView;
 }
+
 
 @end

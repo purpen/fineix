@@ -14,7 +14,7 @@
 #import "DiscoverViewController.h"
 #import "CreateViewController.h"
 #import "MallViewController.h"
-#import "MyselfViewController.h"
+#import "MyPageViewController.h"
 #import "UserInfoEntity.h"
 #import "PictureToolViewController.h"
 #import "FBPictureViewController.h"
@@ -123,7 +123,7 @@
     HomeViewController * homeVC = [[HomeViewController alloc] init];
     DiscoverViewController * discoverVC = [[DiscoverViewController alloc] init];
     MallViewController * mallVC = [[MallViewController alloc] init];
-    MyselfViewController *myVC = [[MyselfViewController alloc] init];
+    MyPageViewController *myVC = [[MyPageViewController alloc] init];
     
     _homeNav = [[FBNavigationViewController alloc] initWithRootViewController:homeVC];
     _discoverNav = [[FBNavigationViewController alloc] initWithRootViewController:discoverVC];

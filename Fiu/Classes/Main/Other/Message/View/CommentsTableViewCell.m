@@ -35,9 +35,16 @@
             make.centerY.mas_equalTo(self.mas_centerY);
         }];
         
+        [self.contentView addSubview:self.headBtn];
+        [_headBtn mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.size.mas_equalTo(CGSizeMake(44/667.0*SCREEN_HEIGHT, 44/667.0*SCREEN_HEIGHT));
+            make.left.mas_equalTo(self.mas_left).with.offset(15/667.0*SCREEN_HEIGHT);
+            make.centerY.mas_equalTo(self.mas_centerY);
+        }];
+        
         [self.contentView addSubview:self.titleLbael];
         [_titleLbael mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.size.mas_equalTo(CGSizeMake(200, 21));
+            make.size.mas_equalTo(CGSizeMake(150, 21));
             make.left.mas_equalTo(_headImageView.mas_right).with.offset(10/667.0*SCREEN_HEIGHT);
             make.top.mas_equalTo(self.mas_top).with.offset(13/667.0*SCREEN_HEIGHT);
         }];
@@ -46,6 +53,13 @@
         [_timeLabel mas_makeConstraints:^(MASConstraintMaker *make) {
             make.size.mas_equalTo(CGSizeMake(80, 21));
             make.left.mas_equalTo(_titleLbael.mas_right).with.offset(5);
+            make.top.mas_equalTo(self.mas_top).with.offset(13/667.0*SCREEN_HEIGHT);
+        }];
+        
+        [self.contentView addSubview:self.timeLabelTwo];
+        [_timeLabelTwo mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.size.mas_equalTo(CGSizeMake(80, 21));
+            make.left.mas_equalTo(_titleLbael.mas_right).with.offset(55);
             make.top.mas_equalTo(self.mas_top).with.offset(13/667.0*SCREEN_HEIGHT);
         }];
         
@@ -81,6 +95,13 @@
     return self;
 }
 
+-(UIButton *)headBtn{
+    if (!_headBtn) {
+        _headBtn = [[UIButton alloc] init];
+    }
+    return _headBtn;
+}
+
 -(UIButton *)focusBtn{
     if (!_focusBtn) {
         _focusBtn = [[UIButton alloc] init];
@@ -111,6 +132,7 @@
 -(void)setUIWithModel:(UserInfo *)model{
     [self.headImageView sd_setImageWithURL:[NSURL URLWithString:model.mediumAvatarUrl] placeholderImage:[UIImage imageNamed:@"user"]];
     self.timeLabel.text = model.birthday;
+    self.timeLabelTwo.text = model.birthday;
     [self.iconImageView sd_setImageWithURL:[NSURL URLWithString:model.head_pic_url] placeholderImage:[UIImage imageNamed:@"werwer"]];
     self.msgLabel.text = model.summary;
     self.titleLbael.text = model.nickname;
@@ -142,11 +164,22 @@
     return _titleLbael;
 }
 
+-(UILabel *)timeLabelTwo{
+    if (!_timeLabelTwo) {
+        _timeLabelTwo = [[UILabel alloc] init];
+        _timeLabelTwo.font = [UIFont systemFontOfSize:13];
+        _timeLabelTwo.textAlignment = NSTextAlignmentRight;
+        _timeLabelTwo.textColor = [UIColor lightGrayColor];
+    }
+    return _timeLabelTwo;
+}
+
 -(UILabel *)timeLabel{
     if (!_timeLabel) {
         _timeLabel = [[UILabel alloc] init];
         _timeLabel.font = [UIFont systemFontOfSize:13];
         _timeLabel.textColor = [UIColor lightGrayColor];
+        _timeLabel.textAlignment = NSTextAlignmentRight;
     }
     return _timeLabel;
 }

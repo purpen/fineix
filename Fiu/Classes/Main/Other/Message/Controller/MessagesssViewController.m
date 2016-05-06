@@ -17,11 +17,11 @@
 @interface MessagesssViewController ()<FBNavigationBarItemsDelegate,UITableViewDataSource,UITableViewDelegate>
 {
     NSMutableArray *_modelAry;
-    int _page;
-    int _totalePage;
 }
 @property (weak, nonatomic) IBOutlet UITableView *myTbaleView;
 @property (nonatomic, strong) UILabel *tipLabel;
+@property (nonatomic, assign) NSInteger currentPageNumber;
+@property (nonatomic, assign) NSInteger totalPageNumber;
 @end
 
 @implementation MessagesssViewController
@@ -38,15 +38,46 @@
     
     self.myTbaleView.rowHeight = 65;
     
-    //进行网络请求
-    [self networkRequestData];
+    
+    
+    // 下拉刷新
+    self.myTbaleView.mj_header = [MJRefreshNormalHeader headerWithRefreshingBlock:^{
+        _currentPageNumber = 0;
+        [_modelAry removeAllObjects];
+        [self requestDataForOderList];
+    }];
+    
+    //上拉加载更多
+    self.myTbaleView.mj_footer = [MJRefreshAutoNormalFooter footerWithRefreshingBlock:^{
+        if (_currentPageNumber < _totalPageNumber) {
+            [self requestDataForOderListOperation];
+        } else {
+            [self.myTbaleView.mj_footer endRefreshing];
+        }
+    }];
+
 }
 
-#pragma mark - 网络请求
-- (void)networkRequestData {
-    [SVProgressHUD show];
+-(void)viewWillAppear:(BOOL)animated{
+    [super viewWillAppear:animated];
+    //进行网络请求
+    [self requestDataForOderList];
+}
+
+#pragma mark - Network
+- (void)requestDataForOderList
+{
+    _currentPageNumber = 0;
+    [_modelAry removeAllObjects];
+    [SVProgressHUD showWithMaskType:SVProgressHUDMaskTypeClear];
+    
+    [self requestDataForOderListOperation];
+}
+
+- (void)requestDataForOderListOperation
+{
     UserInfoEntity *entity = [UserInfoEntity defaultUserInfoEntity];
-    FBRequest *request = [FBAPI postWithUrlString:@"/message" requestDictionary:@{@"page":@(_page+1),@"size":@15,@"from_user_id":entity.userId,@"type":@0} delegate:self];
+    FBRequest *request = [FBAPI postWithUrlString:@"/message" requestDictionary:@{@"page":@(_currentPageNumber+1),@"size":@15,@"from_user_id":entity.userId,@"type":@0} delegate:self];
     [request startRequestSuccess:^(FBRequest *request, id result) {
         NSLog(@"私信丫丫丫result  %@",result);
         NSDictionary *dataDict = [result objectForKey:@"data"];
@@ -59,8 +90,8 @@
             model.summary = rowsDict[@"last_content"][@"content"];
             model.nickname = toUserDict[@"nickname"];
             model.mediumAvatarUrl = toUserDict[@"big_avatar_url"];
-            model.birthday = rowsDict[@"created_at"];
-            NSLog(@"时间啊啊   %@",rowsDict[@"created_at"]);
+            model.birthday = rowsDict[@"last_time_at"];
+            NSLog(@"时间啊啊   %@",rowsDict[@"last_time_at"]);
             [_modelAry addObject:model];
         }
         if (_modelAry.count == 0) {
@@ -76,66 +107,46 @@
         }
         
         [self.myTbaleView reloadData];
-        _page = [[[result valueForKey:@"data"] valueForKey:@"current_page"] intValue];
-        _totalePage = [[[result valueForKey:@"data"] valueForKey:@"total_page"] intValue];
-        if (_totalePage > 1) {
-            [self addMJRefresh:self.myTbaleView];
-            [self requestIsLastData:self.myTbaleView currentPage:_page withTotalPage:_totalePage];
+        
+        
+        _currentPageNumber = [[[result valueForKey:@"data"] valueForKey:@"current_page"] intValue];
+        _totalPageNumber = [[[result valueForKey:@"data"] valueForKey:@"total_page"] intValue];
+        
+        BOOL isLastPage = (_currentPageNumber == _totalPageNumber);
+        
+        if (!isLastPage) {
+            if (self.myTbaleView.mj_footer.state == MJRefreshStateNoMoreData) {
+                [self.myTbaleView.mj_footer resetNoMoreData];
+            }
         }
+        if (_currentPageNumber == _totalPageNumber == 1) {
+            self.myTbaleView.mj_footer.state = MJRefreshStateNoMoreData;
+            self.myTbaleView.mj_footer.hidden = true;
+        }
+        
+        if ([self.myTbaleView.mj_header isRefreshing]) {
+            [self.myTbaleView.mj_header endRefreshing];
+        }
+        if ([self.myTbaleView.mj_footer isRefreshing]) {
+            if (isLastPage) {
+                [self.myTbaleView.mj_footer endRefreshingWithNoMoreData];
+            } else  {
+                [self.myTbaleView.mj_footer endRefreshing];
+            }
+        }
+        
         [SVProgressHUD dismiss];
     } failure:^(FBRequest *request, NSError *error) {
-        [SVProgressHUD showErrorWithStatus:[error localizedDescription]];
+        [SVProgressHUD showInfoWithStatus:[error localizedDescription]];
     }];
-    
 }
+
 
 -(void)viewDidDisappear:(BOOL)animated{
     [super viewDidDisappear:animated];
     [SVProgressHUD dismiss];
 }
 
-//  判断是否为最后一条数据
-- (void)requestIsLastData:(UITableView *)table currentPage:(NSInteger )current withTotalPage:(NSInteger)total {
-    BOOL isLastPage = (current == total);
-    
-    if (!isLastPage) {
-        if (table.mj_footer.state == MJRefreshStateNoMoreData) {
-            [table.mj_footer resetNoMoreData];
-        }
-    }
-    if (current == total == 1) {
-        table.mj_footer.state = MJRefreshStateNoMoreData;
-        table.mj_footer.hidden = true;
-    }
-    if ([table.mj_header isRefreshing]) {
-        [table.mj_header endRefreshing];
-    }
-    if ([table.mj_footer isRefreshing]) {
-        if (isLastPage) {
-            [table.mj_footer endRefreshingWithNoMoreData];
-        } else  {
-            [table.mj_footer endRefreshing];
-        }
-    }
-    [SVProgressHUD dismiss];
-}
-
-
-#pragma mark - 上拉加载 & 下拉刷新
-- (void)addMJRefresh:(UITableView *)table {
-    table.mj_header = [MJRefreshNormalHeader headerWithRefreshingBlock:^{
-        _page = 1;
-        [self networkRequestData];
-    }];
-    
-    table.mj_footer = [MJRefreshAutoNormalFooter footerWithRefreshingBlock:^{
-        if (_page < _totalePage) {
-            [self networkRequestData];
-        } else {
-            [table.mj_footer endRefreshing];
-        }
-    }];
-}
 
 -(UILabel *)tipLabel{
     if (!_tipLabel) {
@@ -160,6 +171,7 @@
     [cell setUIWithModel:model];
     cell.iconImageView.hidden = YES;
     cell.focusBtn.hidden = YES;
+    cell.timeLabel.hidden = YES;
     return cell;
 }
 

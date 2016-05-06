@@ -12,7 +12,7 @@
 #import <MessageUI/MessageUI.h>
 
 #define     jekPrompt                       @"提示"
-#define     jekAddressBookMessage            @"太火鸟App"           //发短信 中的内容
+#define     jekAddressBookMessage            @"有Fiu的生活，才够意思,查看个人主页>>http://www.taihuoniao.com"           //发短信 中的内容
 
 @interface LBAddressBookViewController ()<UITableViewDelegate,UITableViewDataSource>
 {
