@@ -15,6 +15,7 @@
 #import "MJRefresh.h"
 #import "TYAlertView.h"
 #import "UIView+TYAlertView.h"
+#import "TipNumberView.h"
 
 @interface MyOderInfoViewController ()<FBNavigationBarItemsDelegate,UITableViewDelegate,UITableViewDataSource,FBRequestDelegate,OrderInfoCellDelegate>
 {

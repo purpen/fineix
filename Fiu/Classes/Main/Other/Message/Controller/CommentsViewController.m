@@ -75,7 +75,7 @@
 - (void)requestDataForOderListOperation
 {
     UserInfoEntity *entity = [UserInfoEntity defaultUserInfoEntity];
-    FBRequest *request = [FBAPI postWithUrlString:@"/comment/getlist" requestDictionary:@{@"page":@(_currentPageNumber+1),@"size":@15,@"user_id":entity.userId,@"type":@12} delegate:self];
+    FBRequest *request = [FBAPI postWithUrlString:@"/comment/getlist" requestDictionary:@{@"page":@(_currentPageNumber+1),@"size":@15,@"target_user_id":entity.userId,@"type":@12} delegate:self];
     [request startRequestSuccess:^(FBRequest *request, id result) {
         NSLog(@"评论丫丫丫result  %@",result);
         NSDictionary *dataDict = [result objectForKey:@"data"];
@@ -83,16 +83,31 @@
         for (NSDictionary *rowsDict in rowsAry) {
             NSDictionary *usersDict = [rowsDict objectForKey:@"user"];
             UserInfo *model = [[UserInfo alloc] init];
-            model.userId = usersDict[@"_id"];
-            model.summary = rowsDict[@"content"];
-            model.nickname = usersDict[@"nickname"];
-            model.mediumAvatarUrl = usersDict[@"medium_avatar_url"];
-            model.birthday = rowsDict[@"created_at"];
-            model.head_pic_url = rowsDict[@"target_small_cover_url"];
+            if (![usersDict[@"_id"] isKindOfClass:[NSNull class]]) {
+                model.userId = usersDict[@"_id"];
+            }
+            if (![rowsDict[@"content"] isKindOfClass:[NSNull class]]) {
+                model.summary = rowsDict[@"content"];
+            }
+            if (![usersDict[@"nickname"] isKindOfClass:[NSNull class]]) {
+                model.nickname = usersDict[@"nickname"];
+            }
+            if (![usersDict[@"medium_avatar_url"] isKindOfClass:[NSNull class]]) {
+                model.mediumAvatarUrl = usersDict[@"medium_avatar_url"];
+            }
+            if (![rowsDict[@"created_at"] isKindOfClass:[NSNull class]]) {
+                model.birthday = rowsDict[@"created_at"];
+            }
+            if (![rowsDict[@"target_small_cover_url"] isKindOfClass:[NSNull class]]) {
+                model.head_pic_url = rowsDict[@"target_small_cover_url"];
+            }
+            if (![rowsDict[@"target_id"] isKindOfClass:[NSNull class]]) {
+                NSString *target_id = rowsDict[@"target_id"];
+                [_sceneIdMarr addObject:target_id];
+            }
             NSLog(@"时间啊啊   %@",rowsDict[@"created_at"]);
             [_modelAry addObject:model];
-            NSString *target_id = rowsDict[@"target_id"];
-            [_sceneIdMarr addObject:target_id];
+            
         }
         if (_modelAry.count == 0) {
             [self.view addSubview:self.tipLabel];

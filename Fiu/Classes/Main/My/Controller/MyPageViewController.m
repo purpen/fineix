@@ -29,6 +29,7 @@
 #import "AboutViewController.h"
 #import "OptionViewController.h"
 #import "FindeFriendViewController.h"
+#import "TipNumberView.h"
 
 @interface MyPageViewController ()<FBNavigationBarItemsDelegate,UICollectionViewDelegate,UICollectionViewDataSource>
 {
@@ -145,7 +146,7 @@
         userInfo.head_pic_url = [result objectForKey:@"data"][@"head_pic_url"];
         [userInfo saveOrUpdate];
         [userInfo updateUserInfoEntity];
-        NSLog(@"%@",userInfo);
+        NSLog(@"      &&&&&&&&&  %@",userInfo.userId);
         UserInfoEntity *entity = [UserInfoEntity defaultUserInfoEntity];
         entity.isLogin = YES;
         
@@ -302,6 +303,7 @@
     NSLog(@"#########");
     //跳转到全部订单页
     AllOderViewController *vc = [[AllOderViewController alloc] init];
+    vc.counterModel = _counterModel;
     [self.navigationController pushViewController:vc animated:YES];
 }
 
@@ -360,8 +362,6 @@
 //账户管理按钮
 -(void)accountManagementBtn:(UIButton*)sender{
     NSLog(@"#########");
-    
-    
     
     
 }
