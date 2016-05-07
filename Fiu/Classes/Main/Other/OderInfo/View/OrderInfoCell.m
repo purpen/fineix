@@ -37,7 +37,7 @@
     // Initialization code
     
     CGColorSpaceRef colorSpaceRef = CGColorSpaceCreateDeviceRGB();
-    CGColorRef color = CGColorCreate(colorSpaceRef, (CGFloat[]){255 / 255, 51 / 255, 102 / 255, 1});
+    CGColorRef color = CGColorCreate(colorSpaceRef, (CGFloat[]){190 / 255, 137 / 255, 20 / 255, 1});
     self.operation1stBtn.layer.cornerRadius = 2;
     self.operation1stBtn.layer.masksToBounds = YES;
     self.operation1stBtn.layer.borderWidth = 0.5;

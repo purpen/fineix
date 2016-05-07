@@ -9,6 +9,13 @@
 #import <UIKit/UIKit.h>
 #import <CoreData/CoreData.h>
 
+#import "WXApi.h"
+
+@protocol AlipayDelegate <NSObject>
+
+- (void)standbyCallbackWithResultDic:(NSDictionary *)resultDic;
+
+@end
 
 @protocol NotificationDelege <NSObject>
 
@@ -24,10 +31,16 @@
 @property (readonly, strong, nonatomic) NSManagedObjectContext *managedObjectContext;
 @property (readonly, strong, nonatomic) NSManagedObjectModel *managedObjectModel;
 @property (readonly, strong, nonatomic) NSPersistentStoreCoordinator *persistentStoreCoordinator;
+
+
+@property (nonatomic, weak) id<NotificationDelege> notiDelegate;
+@property (nonatomic, weak) id<WXApiDelegate> wxDelegate;
+@property (nonatomic, weak) id<AlipayDelegate> aliDelegate;
+
 - (void)saveContext;
 - (NSURL *)applicationDocumentsDirectory;
 
-@property (nonatomic, weak) id<NotificationDelege> notiDelegate;
+
 
 @end
 

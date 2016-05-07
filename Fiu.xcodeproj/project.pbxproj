@@ -74,6 +74,14 @@
 		1F51E8B31CC6338D00017839 /* PraisedViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F51E8B21CC6338D00017839 /* PraisedViewController.m */; };
 		1F59E5FC1C9ABBA500E96C60 /* Accelerate.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1F59E5FB1C9ABBA500E96C60 /* Accelerate.framework */; };
 		1F7B29361CD5F50500482D84 /* MyOderModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F7B29351CD5F50500482D84 /* MyOderModel.m */; };
+		1F8EACD51CDD8A5B00C51235 /* OrderInfoDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F8EACD31CDD8A5B00C51235 /* OrderInfoDetailViewController.m */; };
+		1F8EACD61CDD8A5B00C51235 /* OrderInfoDetailViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1F8EACD41CDD8A5B00C51235 /* OrderInfoDetailViewController.xib */; };
+		1F8EACDA1CDDA09200C51235 /* RefundmentViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F8EACD81CDDA09200C51235 /* RefundmentViewController.m */; };
+		1F8EACDB1CDDA09200C51235 /* RefundmentViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1F8EACD91CDDA09200C51235 /* RefundmentViewController.xib */; };
+		1F8EACDF1CDDB0ED00C51235 /* CommenttwoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F8EACDD1CDDB0ED00C51235 /* CommenttwoViewController.m */; };
+		1F8EACE01CDDB0ED00C51235 /* CommenttwoViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1F8EACDE1CDDB0ED00C51235 /* CommenttwoViewController.xib */; };
+		1F8EACE81CDDD1AE00C51235 /* FBPayTheWayViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F8EACE61CDDD1AE00C51235 /* FBPayTheWayViewController.m */; };
+		1F8EACE91CDDD1AE00C51235 /* FBPayTheWayViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1F8EACE71CDDD1AE00C51235 /* FBPayTheWayViewController.xib */; };
 		1FBC3E9A1CCE3766007CFA14 /* ShareViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1FBC3E981CCE3766007CFA14 /* ShareViewController.m */; };
 		1FBC3E9B1CCE3766007CFA14 /* ShareViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1FBC3E991CCE3766007CFA14 /* ShareViewController.xib */; };
 		1FBE626A1CC4CB72009606F7 /* MyPageFocusOnViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1FBE62691CC4CB72009606F7 /* MyPageFocusOnViewController.m */; };
@@ -491,6 +499,18 @@
 		1F59E5FB1C9ABBA500E96C60 /* Accelerate.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Accelerate.framework; path = System/Library/Frameworks/Accelerate.framework; sourceTree = SDKROOT; };
 		1F7B29341CD5F50500482D84 /* MyOderModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyOderModel.h; sourceTree = "<group>"; };
 		1F7B29351CD5F50500482D84 /* MyOderModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyOderModel.m; sourceTree = "<group>"; };
+		1F8EACD21CDD8A5B00C51235 /* OrderInfoDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OrderInfoDetailViewController.h; sourceTree = "<group>"; };
+		1F8EACD31CDD8A5B00C51235 /* OrderInfoDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OrderInfoDetailViewController.m; sourceTree = "<group>"; };
+		1F8EACD41CDD8A5B00C51235 /* OrderInfoDetailViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = OrderInfoDetailViewController.xib; sourceTree = "<group>"; };
+		1F8EACD71CDDA09200C51235 /* RefundmentViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RefundmentViewController.h; sourceTree = "<group>"; };
+		1F8EACD81CDDA09200C51235 /* RefundmentViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RefundmentViewController.m; sourceTree = "<group>"; };
+		1F8EACD91CDDA09200C51235 /* RefundmentViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RefundmentViewController.xib; sourceTree = "<group>"; };
+		1F8EACDC1CDDB0ED00C51235 /* CommenttwoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CommenttwoViewController.h; sourceTree = "<group>"; };
+		1F8EACDD1CDDB0ED00C51235 /* CommenttwoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CommenttwoViewController.m; sourceTree = "<group>"; };
+		1F8EACDE1CDDB0ED00C51235 /* CommenttwoViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CommenttwoViewController.xib; sourceTree = "<group>"; };
+		1F8EACE51CDDD1AE00C51235 /* FBPayTheWayViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FBPayTheWayViewController.h; sourceTree = "<group>"; };
+		1F8EACE61CDDD1AE00C51235 /* FBPayTheWayViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FBPayTheWayViewController.m; sourceTree = "<group>"; };
+		1F8EACE71CDDD1AE00C51235 /* FBPayTheWayViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FBPayTheWayViewController.xib; sourceTree = "<group>"; };
 		1FBC3E971CCE3766007CFA14 /* ShareViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShareViewController.h; sourceTree = "<group>"; };
 		1FBC3E981CCE3766007CFA14 /* ShareViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ShareViewController.m; sourceTree = "<group>"; };
 		1FBC3E991CCE3766007CFA14 /* ShareViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ShareViewController.xib; sourceTree = "<group>"; };
@@ -1164,6 +1184,40 @@
 			path = View;
 			sourceTree = "<group>";
 		};
+		1F8EACE11CDDD19E00C51235 /* Pay */ = {
+			isa = PBXGroup;
+			children = (
+				1F8EACE21CDDD19E00C51235 /* Controller */,
+				1F8EACE31CDDD19E00C51235 /* Model */,
+				1F8EACE41CDDD19E00C51235 /* View */,
+			);
+			path = Pay;
+			sourceTree = "<group>";
+		};
+		1F8EACE21CDDD19E00C51235 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				1F8EACE51CDDD1AE00C51235 /* FBPayTheWayViewController.h */,
+				1F8EACE61CDDD1AE00C51235 /* FBPayTheWayViewController.m */,
+				1F8EACE71CDDD1AE00C51235 /* FBPayTheWayViewController.xib */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		1F8EACE31CDDD19E00C51235 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		1F8EACE41CDDD19E00C51235 /* View */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
 		1FBC3E961CCE371B007CFA14 /* ShareView */ = {
 			isa = PBXGroup;
 			children = (
@@ -1283,6 +1337,15 @@
 				1F5038CC1CDCF438004F76AD /* ReturnViewController.h */,
 				1F5038CD1CDCF438004F76AD /* ReturnViewController.m */,
 				1F5038CE1CDCF438004F76AD /* ReturnViewController.xib */,
+				1F8EACD21CDD8A5B00C51235 /* OrderInfoDetailViewController.h */,
+				1F8EACD31CDD8A5B00C51235 /* OrderInfoDetailViewController.m */,
+				1F8EACD41CDD8A5B00C51235 /* OrderInfoDetailViewController.xib */,
+				1F8EACD71CDDA09200C51235 /* RefundmentViewController.h */,
+				1F8EACD81CDDA09200C51235 /* RefundmentViewController.m */,
+				1F8EACD91CDDA09200C51235 /* RefundmentViewController.xib */,
+				1F8EACDC1CDDB0ED00C51235 /* CommenttwoViewController.h */,
+				1F8EACDD1CDDB0ED00C51235 /* CommenttwoViewController.m */,
+				1F8EACDE1CDDB0ED00C51235 /* CommenttwoViewController.xib */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -1614,6 +1677,7 @@
 		D8035FA01CBD1021001920F9 /* Other */ = {
 			isa = PBXGroup;
 			children = (
+				1F8EACE11CDDD19E00C51235 /* Pay */,
 				1FC678161CDAF9B200535162 /* DeliveryAddress */,
 				1FC677F61CDAE75C00535162 /* Bonus */,
 				1FE60E3B1CD3224200045117 /* Message */,
@@ -2985,6 +3049,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1F8EACD61CDD8A5B00C51235 /* OrderInfoDetailViewController.xib in Resources */,
 				D80360551CBF376B001920F9 /* Login.xib in Resources */,
 				D81281711CAA8532007CF08B /* UMSShareListController.xib in Resources */,
 				1FFFFF241CD055BB008E1CDC /* SystemSettingViewController.xib in Resources */,
@@ -3040,11 +3105,14 @@
 				D81281681CAA8532007CF08B /* UMSocialLocalizable.strings in Resources */,
 				1FFFFF201CD055BB008E1CDC /* AboutViewController.xib in Resources */,
 				1F5038A21CDC3F79004F76AD /* OrderInfoCell.xib in Resources */,
+				1F8EACE91CDDD1AE00C51235 /* FBPayTheWayViewController.xib in Resources */,
 				1F1837671CCDCF3B00933CA7 /* EditNickNameViewController.xib in Resources */,
 				1FE60E521CD32AEC00045117 /* SystemInfoTableViewCell.xib in Resources */,
 				D812816F1CAA8532007CF08B /* UMSLoginViewController.xib in Resources */,
 				1FE60E5C1CD32FD200045117 /* CommentsTableViewCell.xib in Resources */,
 				1FFFFF221CD055BB008E1CDC /* OptionViewController.xib in Resources */,
+				1F8EACDB1CDDA09200C51235 /* RefundmentViewController.xib in Resources */,
+				1F8EACE01CDDB0ED00C51235 /* CommenttwoViewController.xib in Resources */,
 				1FC678101CDAECE500535162 /* BonusCell.xib in Resources */,
 				1F1837761CCDFCB200933CA7 /* ChangeSumaryViewController.xib in Resources */,
 				D812815C1CAA8532007CF08B /* InfoPlist.strings in Resources */,
@@ -3221,9 +3289,11 @@
 				D8363A5B1CD8814600CC4AC0 /* InfoTitleTableViewCell.m in Sources */,
 				1F35F0381CD1AD870000DB95 /* CityTwoTableViewCell.m in Sources */,
 				D8A9ADE61CD9F92B00A9FCFB /* FBPhoto.m in Sources */,
+				1F8EACE81CDDD1AE00C51235 /* FBPayTheWayViewController.m in Sources */,
 				D8363A2F1CD8809400CC4AC0 /* Category.m in Sources */,
 				D8A9AD8B1CD9DFBC00A9FCFB /* FiltersView.m in Sources */,
 				D812815E1CAA8532007CF08B /* main.m in Sources */,
+				1F8EACDF1CDDB0ED00C51235 /* CommenttwoViewController.m in Sources */,
 				1FE60E5B1CD32FD200045117 /* CommentsTableViewCell.m in Sources */,
 				D83639BF1CD0932000CC4AC0 /* CommentRow.m in Sources */,
 				D8A9ADBB1CD9E2E700A9FCFB /* SearchLocationViewController.m in Sources */,
@@ -3258,6 +3328,7 @@
 				D8363A761CD8821400CC4AC0 /* GoodsBrandTableViewCell.m in Sources */,
 				1F4061B41CCA231E00D6E9B0 /* AccountManagementViewController.m in Sources */,
 				D8A9ADC61CD9E2E700A9FCFB /* AddTagViewController.m in Sources */,
+				1F8EACD51CDD8A5B00C51235 /* OrderInfoDetailViewController.m in Sources */,
 				D8363A2E1CD8809400CC4AC0 /* GoodsRow.m in Sources */,
 				D8A9ACCF1CD8A46900A9FCFB /* SuFiuScenrView.m in Sources */,
 				D8A9ACDF1CD8A49100A9FCFB /* AllSceneViewController.m in Sources */,
@@ -3319,6 +3390,7 @@
 				D8A9ADF31CDAF41200A9FCFB /* ChildTagsTag.m in Sources */,
 				D8363AB71CD8835D00CC4AC0 /* SceneInfoCounter.m in Sources */,
 				1FE60E561CD32E8D00045117 /* CommentsViewController.m in Sources */,
+				1F8EACDA1CDDA09200C51235 /* RefundmentViewController.m in Sources */,
 				1F1837751CCDFCB200933CA7 /* ChangeSumaryViewController.m in Sources */,
 				D803603F1CBF376B001920F9 /* FBLoginRegisterViewController.m in Sources */,
 				D8035FCE1CBD1021001920F9 /* SearchViewController.m in Sources */,

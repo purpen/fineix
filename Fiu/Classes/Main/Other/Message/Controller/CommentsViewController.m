@@ -75,7 +75,7 @@
 - (void)requestDataForOderListOperation
 {
     UserInfoEntity *entity = [UserInfoEntity defaultUserInfoEntity];
-    FBRequest *request = [FBAPI postWithUrlString:@"/comment/getlist" requestDictionary:@{@"page":@(_currentPageNumber+1),@"size":@15,@"target_user_id":entity.userId,@"type":@12} delegate:self];
+    FBRequest *request = [FBAPI postWithUrlString:@"/my/comment_list" requestDictionary:@{@"page":@(_currentPageNumber+1),@"size":@15,@"target_user_id":entity.userId,@"type":@12} delegate:self];
     [request startRequestSuccess:^(FBRequest *request, id result) {
         NSLog(@"评论丫丫丫result  %@",result);
         NSDictionary *dataDict = [result objectForKey:@"data"];

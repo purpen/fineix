@@ -13,6 +13,7 @@
 #import "OrderInfoCell.h"
 #import "TYAlertView.h"
 #import "UIView+TYAlertView.h"
+#import "OrderInfoDetailViewController.h"
 
 @interface ReturnViewController ()<FBNavigationBarItemsDelegate,UITableViewDelegate,UITableViewDataSource,OrderInfoCellDelegate>
 @property (weak, nonatomic) IBOutlet UITableView *myTableview;
@@ -121,10 +122,10 @@ static NSString *const OrderListURL = @"/shopping/orders";
 #pragma mark - OrderInfoCellDelegate
 - (void)tapProductViewWithOrderInfoCell:(OrderInfoCell *)orderInfoCell
 {
-//    OrderInfoDetailViewController * orderInfoDetailVC = [[OrderInfoDetailViewController alloc] initWithNibName:@"OrderInfoDetailViewController" bundle:nil];
-//    orderInfoDetailVC.orderInfoCell = orderInfoCell;
-//    orderInfoDetailVC.delegate = self;
-//    [self.navigationController pushViewController:orderInfoDetailVC animated:YES];
+    OrderInfoDetailViewController * orderInfoDetailVC = [[OrderInfoDetailViewController alloc] initWithNibName:@"OrderInfoDetailViewController" bundle:nil];
+    orderInfoDetailVC.orderInfoCell = orderInfoCell;
+    orderInfoDetailVC.delegate = self;
+    [self.navigationController pushViewController:orderInfoDetailVC animated:YES];
 }
 
 - (void)operation1stBtnAction:(UIButton *)button withOrderInfoCell:(OrderInfoCell *)orderInfoCell
@@ -132,10 +133,10 @@ static NSString *const OrderListURL = @"/shopping/orders";
     switch (orderInfoCell.orderInfo.status) {
         case OrderInfoStateRefunding:
         {
-//            OrderInfoDetailViewController * orderInfoDetailVC = [[OrderInfoDetailViewController alloc] initWithNibName:@"OrderInfoDetailViewController" bundle:nil];
-//            orderInfoDetailVC.orderInfoCell = orderInfoCell;
-//            orderInfoDetailVC.delegate = self;
-//            [self.navigationController pushViewController:orderInfoDetailVC animated:YES];
+            OrderInfoDetailViewController * orderInfoDetailVC = [[OrderInfoDetailViewController alloc] initWithNibName:@"OrderInfoDetailViewController" bundle:nil];
+            orderInfoDetailVC.orderInfoCell = orderInfoCell;
+            orderInfoDetailVC.delegate = self;
+            [self.navigationController pushViewController:orderInfoDetailVC animated:YES];
         }
             break;
         case OrderInfoStateRefunded:

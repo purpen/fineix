@@ -16,6 +16,9 @@
 #import "TYAlertView.h"
 #import "UIView+TYAlertView.h"
 #import "TipNumberView.h"
+#import "OrderInfoDetailViewController.h"
+#import "RefundmentViewController.h"
+#import "CommenttwoViewController.h"
 
 @interface MyOderInfoViewController ()<FBNavigationBarItemsDelegate,UITableViewDelegate,UITableViewDataSource,FBRequestDelegate,OrderInfoCellDelegate>
 {
@@ -172,7 +175,7 @@ static NSString *const OrderInfoCellIdentifier = @"orderInfoCell";
     self.goodsBtn.selected = NO;
     self.evaluateBtn.selected = NO;
     CGRect frame = _linView.frame;
-    frame.origin.y = sender.frame.origin.y + sender.frame.size.height + 1;
+    frame.origin.y = sender.frame.origin.y + sender.frame.size.height-3;
     frame.origin.x = sender.frame.origin.x+9;
     frame.size.width = sender.frame.size.width-18;
     _linView.frame = frame;
@@ -188,7 +191,7 @@ static NSString *const OrderInfoCellIdentifier = @"orderInfoCell";
     self.goodsBtn.selected = NO;
     self.evaluateBtn.selected = NO;
     CGRect frame = _linView.frame;
-    frame.origin.y = sender.frame.origin.y + sender.frame.size.height + 1;
+    frame.origin.y = sender.frame.origin.y + sender.frame.size.height -3;
     frame.origin.x = sender.frame.origin.x+9;
     frame.size.width = sender.frame.size.width-18;
     _linView.frame = frame;
@@ -204,7 +207,7 @@ static NSString *const OrderInfoCellIdentifier = @"orderInfoCell";
     self.goodsBtn.selected = NO;
     self.evaluateBtn.selected = NO;
     CGRect frame = _linView.frame;
-    frame.origin.y = sender.frame.origin.y + sender.frame.size.height + 1;
+    frame.origin.y = sender.frame.origin.y + sender.frame.size.height-3;
     frame.origin.x = sender.frame.origin.x+9;
     frame.size.width = sender.frame.size.width-18;
     _linView.frame = frame;
@@ -220,7 +223,7 @@ static NSString *const OrderInfoCellIdentifier = @"orderInfoCell";
     self.goodsBtn.selected = YES;
     self.evaluateBtn.selected = NO;
     CGRect frame = _linView.frame;
-    frame.origin.y = sender.frame.origin.y + sender.frame.size.height + 1;
+    frame.origin.y = sender.frame.origin.y + sender.frame.size.height-3;
     frame.origin.x = sender.frame.origin.x+9;
     frame.size.width = sender.frame.size.width-18;
     _linView.frame = frame;
@@ -236,7 +239,7 @@ static NSString *const OrderInfoCellIdentifier = @"orderInfoCell";
     self.goodsBtn.selected = NO;
     self.evaluateBtn.selected = YES;
     CGRect frame = _linView.frame;
-    frame.origin.y = sender.frame.origin.y + sender.frame.size.height + 1;
+    frame.origin.y = sender.frame.origin.y + sender.frame.size.height-3;
     frame.origin.x = sender.frame.origin.x+9;
     frame.size.width = sender.frame.size.width-18;
     _linView.frame = frame;
@@ -269,10 +272,10 @@ static NSString *const OrderInfoCellIdentifier = @"orderInfoCell";
 #pragma mark - OrderInfoCellDelegate
 - (void)tapProductViewWithOrderInfoCell:(OrderInfoCell *)orderInfoCell
 {
-//    OrderInfoDetailViewController * orderInfoDetailVC = [[OrderInfoDetailViewController alloc] initWithNibName:@"OrderInfoDetailViewController" bundle:nil];
-//    orderInfoDetailVC.orderInfoCell = orderInfoCell;
-//    orderInfoDetailVC.delegate = self;
-//    [self.navigationController pushViewController:orderInfoDetailVC animated:YES];
+    OrderInfoDetailViewController * orderInfoDetailVC = [[OrderInfoDetailViewController alloc] initWithNibName:@"OrderInfoDetailViewController" bundle:nil];
+    orderInfoDetailVC.orderInfoCell = orderInfoCell;
+    orderInfoDetailVC.delegate = self;
+    [self.navigationController pushViewController:orderInfoDetailVC animated:YES];
     //订单详情
     NSLog(@"订单详情");
 }
@@ -298,10 +301,10 @@ static NSString *const OrderInfoCellIdentifier = @"orderInfoCell";
             break;
         case OrderInfoStateWaitDelivery://申请退款
         {
-//            RefundmentViewController * refundmentVC = [[RefundmentViewController alloc] initWithNibName:@"RefundmentViewController" bundle:nil];
-//            refundmentVC.orderInfoCell = orderInfoCell;
-//            refundmentVC.delegate = self;
-//            [self.navigationController pushViewController:refundmentVC animated:YES];
+            RefundmentViewController * refundmentVC = [[RefundmentViewController alloc] initWithNibName:@"RefundmentViewController" bundle:nil];
+            refundmentVC.orderInfoCell = orderInfoCell;
+            refundmentVC.delegate = self;
+            [self.navigationController pushViewController:refundmentVC animated:YES];
             NSLog(@"申请退款");
         }
             break;
@@ -312,10 +315,10 @@ static NSString *const OrderInfoCellIdentifier = @"orderInfoCell";
             break;
         case OrderInfoStateWaitComment://去评价
         {
-//            CommentViewController * commentVC = [[CommentViewController alloc] initWithNibName:@"CommentViewController" bundle:nil];
-//            commentVC.orderInfoCell = orderInfoCell;
-//            commentVC.delegate = self;
-//            [self.navigationController pushViewController:commentVC animated:YES];
+            CommenttwoViewController * commentVC = [[CommenttwoViewController alloc] initWithNibName:@"CommenttwoViewController" bundle:nil];
+            commentVC.orderInfoCell = orderInfoCell;
+            commentVC.delegate = self;
+            [self.navigationController pushViewController:commentVC animated:YES];
             NSLog(@"去评价");
         }
             break;
