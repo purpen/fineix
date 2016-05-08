@@ -22,6 +22,8 @@ static NSString *const URLSendSceneComment = @"/comment/ajax_comment";
 @end
 
 @implementation CommentViewController
+- (IBAction)commitBtnAction:(UIButton *)sender {
+}
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
@@ -62,6 +64,7 @@ static NSString *const URLSendSceneComment = @"/comment/ajax_comment";
         [SVProgressHUD showErrorWithStatus:[error localizedDescription]];
     }];
 }
+
 
 #pragma mark 发布评论
 - (void)networkSendCommentDataWithTargetUserId:(NSString *)targetUserId withReplyId:(NSString *)replyId withIsReply:(NSString *)isReply {

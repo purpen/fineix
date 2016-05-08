@@ -29,6 +29,7 @@
 #import "UserInfo.h"
 #import <SDWebImage/UIImageView+WebCache.h>
 #import "UIImage+Helper.h"
+#import "HomePageViewController.h"
 
 
 @interface HomePageViewController ()<UICollectionViewDelegate,UICollectionViewDataSource,UICollectionViewDelegateFlowLayout,FBRequestDelegate,UINavigationControllerDelegate,UIImagePickerControllerDelegate>

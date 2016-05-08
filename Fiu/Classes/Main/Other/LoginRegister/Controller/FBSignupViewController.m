@@ -19,7 +19,7 @@
 #import "WeiboSDK.h"
 #import <TencentOpenAPI/QQApiInterface.h>
 #import "BindIngViewController.h"
-#import "MyselfViewController.h"
+#import "MyPageViewController.h"
 #import <TYAlertController.h>
 #import <TYAlertView.h>
 #import "SignupView.h"
@@ -72,19 +72,32 @@ NSString *const LoginURL = @"/auth/login";//登录接口
     self.qqBtn.layer.cornerRadius = 3;
 }
 
+
 //点击发送验证码，判断手机号如果手机号正确发送验证码，并且重新发送view出现，并且开始跳字
 -(void)clikSendVerBtn:(UIButton*)sender{
     if ([_signupView.phoneNumTF.text checkTel]) {
-        //如果手机号正确，发送短信
-        NSDictionary *params = @{
-                                 @"mobile":_signupView.phoneNumTF.text
-                                 };
-        FBRequest *request = [FBAPI postWithUrlString:VerifyCodeURL requestDictionary:params delegate:self];
-        request.flag = VerifyCodeURL;
-        [request startRequest];
-        [SVProgressHUD showWithMaskType:SVProgressHUDMaskTypeClear];
-        _signupView.toResendV.hidden = NO;
-        [self startTime];
+        
+        FBRequest *request1 = [FBAPI postWithUrlString:@"/auth/check_account" requestDictionary:@{@"account":_signupView.phoneNumTF.text} delegate:self];
+        
+        [request1 startRequestSuccess:^(FBRequest *request, id result) {
+            NSLog( @"手机号的验证 %@",_signupView.phoneNumTF.text);
+            if ([result objectForKey:@"success"]) {
+                //如果手机号正确，发送短信
+                NSDictionary *params = @{
+                                         @"mobile":_signupView.phoneNumTF.text
+                                         };
+                FBRequest *request = [FBAPI postWithUrlString:VerifyCodeURL requestDictionary:params delegate:self];
+                request.flag = VerifyCodeURL;
+                [request startRequest];
+                //[SVProgressHUD showWithMaskType:SVProgressHUDMaskTypeClear];
+                _signupView.toResendV.hidden = NO;
+                [self startTime];
+            }else{
+                [SVProgressHUD showWithStatus:[result objectForKey:@"message"]];
+            }
+        } failure:^(FBRequest *request, NSError *error) {
+            [SVProgressHUD showErrorWithStatus:error.localizedDescription];
+        }];
     }else{
         [SVProgressHUD showErrorWithStatus:@"手机号不正确"];
     }
@@ -108,7 +121,7 @@ NSString *const LoginURL = @"/auth/login";//登录接口
         }//按钮显示剩余时间
         else{
             int seconds = timeout % 60;
-            NSString *strTime = [NSString stringWithFormat:@"%.2d",seconds];
+            NSString *strTime = [NSString stringWithFormat:@"%.2dS",seconds];
             dispatch_async(dispatch_get_main_queue(), ^{
                 [UIView beginAnimations:nil context:nil];
                 [UIView setAnimationDuration:1];

@@ -7,7 +7,10 @@
 //
 
 #import "FBViewController.h"
+@class CounterModel;
 
 @interface AllOderViewController : FBViewController
+
+@property(nonatomic,strong) CounterModel *counterModel;
 
 @end

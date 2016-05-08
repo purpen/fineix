@@ -86,12 +86,16 @@
         //_bgImageView.contentMode = UIViewContentModeScaleToFill;
         _bgImageView.userInteractionEnabled = YES;
         
-//        [_bgImageView addSubview:self.userLevelLabel];
-//        [_userLevelLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-//            make.size.mas_equalTo(CGSizeMake(200, 12));
-//            make.centerX.mas_equalTo(_bgImageView.mas_centerX);
-//            make.bottom.mas_equalTo(_bgImageView.mas_bottom).with.offset(-14/667.0*SCREEN_HEIGHT);
-//        }];
+        _bgImageView = [[UIImageView alloc] init];
+        _bgImageView.userInteractionEnabled = YES;
+        //  添加渐变层
+        CAGradientLayer * shadow = [CAGradientLayer layer];
+        shadow.startPoint = CGPointMake(0, 0);
+        shadow.endPoint = CGPointMake(0, 1);
+        shadow.colors = @[(__bridge id)[UIColor clearColor].CGColor,
+                          (__bridge id)[UIColor blackColor].CGColor];
+        shadow.locations = @[@(0.5f), @(1.5f)];
+        shadow.frame = _bgImageView.bounds;
         
         [_bgImageView addSubview:self.backBtn];
         [_backBtn mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -107,27 +111,6 @@
             make.right.mas_equalTo(_bgImageView.mas_right).with.offset(-16);
             make.centerY.mas_equalTo(_backBtn.mas_centerY);
         }];
-//
-//        [_bgImageView addSubview:self.userProfile];
-//        [_userProfile mas_makeConstraints:^(MASConstraintMaker *make) {
-//            make.size.mas_equalTo(CGSizeMake(SCREEN_WIDTH, 12));
-//            make.centerX.mas_equalTo(_bgImageView.mas_centerX);
-//            make.bottom.mas_equalTo(_userLevelLabel.mas_top).with.offset(-5/667.0*SCREEN_HEIGHT);
-//        }];
-//        
-//        [_bgImageView addSubview:self.nickName];
-//        [_nickName mas_makeConstraints:^(MASConstraintMaker *make) {
-//            make.size.mas_equalTo(CGSizeMake(self.frame.size.width, 19));
-//            make.centerX.mas_equalTo(_bgImageView.mas_centerX);
-//            make.bottom.mas_equalTo(_userProfile.mas_top).with.offset(-9/667.0*SCREEN_HEIGHT);
-//        }];
-//        
-//        [_bgImageView addSubview:self.userHeadImageView];
-//        [_userHeadImageView mas_makeConstraints:^(MASConstraintMaker *make) {
-//            make.size.mas_equalTo(CGSizeMake(80/667.0*SCREEN_HEIGHT, 80/667.0*SCREEN_HEIGHT));
-//            make.centerX.mas_equalTo(_bgImageView.mas_centerX);
-//            make.bottom.mas_equalTo(_nickName.mas_top).with.offset(-10/667.0*SCREEN_HEIGHT);
-//        }];
     }
     return _bgImageView;
 }

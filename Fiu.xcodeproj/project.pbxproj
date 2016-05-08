@@ -53,12 +53,35 @@
 		1F4061A81CC9E92C00D6E9B0 /* ImproView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F4061A71CC9E92C00D6E9B0 /* ImproView.m */; };
 		1F4061B41CCA231E00D6E9B0 /* AccountManagementViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F4061B31CCA231E00D6E9B0 /* AccountManagementViewController.m */; };
 		1F4061B71CCA246600D6E9B0 /* AccountView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F4061B61CCA246600D6E9B0 /* AccountView.m */; };
+		1F5038A11CDC3F79004F76AD /* OrderInfoCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F50389F1CDC3F79004F76AD /* OrderInfoCell.m */; };
+		1F5038A21CDC3F79004F76AD /* OrderInfoCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1F5038A01CDC3F79004F76AD /* OrderInfoCell.xib */; };
+		1F5038A91CDC406C004F76AD /* CommentView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F5038A41CDC406C004F76AD /* CommentView.m */; };
+		1F5038AA1CDC406C004F76AD /* CommentView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1F5038A51CDC406C004F76AD /* CommentView.xib */; };
+		1F5038AB1CDC406C004F76AD /* ProductInfoView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F5038A71CDC406C004F76AD /* ProductInfoView.m */; };
+		1F5038AC1CDC406C004F76AD /* ProductInfoView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1F5038A81CDC406C004F76AD /* ProductInfoView.xib */; };
+		1F5038B31CDC40EE004F76AD /* ExpressInfoModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F5038AE1CDC40EE004F76AD /* ExpressInfoModel.m */; };
+		1F5038B41CDC40EE004F76AD /* OrderInfoModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F5038B01CDC40EE004F76AD /* OrderInfoModel.m */; };
+		1F5038B51CDC40EE004F76AD /* ProductInfoModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F5038B21CDC40EE004F76AD /* ProductInfoModel.m */; };
+		1F5038B91CDC605F004F76AD /* MyPageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F5038B71CDC605F004F76AD /* MyPageViewController.m */; };
+		1F5038C01CDC675A004F76AD /* MyPageBGCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F5038BF1CDC675A004F76AD /* MyPageBGCollectionViewCell.m */; };
+		1F5038C41CDC6A22004F76AD /* MyPageBtnCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F5038C21CDC6A22004F76AD /* MyPageBtnCollectionViewCell.m */; };
+		1F5038C51CDC6A22004F76AD /* MyPageBtnCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1F5038C31CDC6A22004F76AD /* MyPageBtnCollectionViewCell.xib */; };
+		1F5038CB1CDC8109004F76AD /* BotView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F5038CA1CDC8109004F76AD /* BotView.m */; };
+		1F5038CF1CDCF438004F76AD /* ReturnViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F5038CD1CDCF438004F76AD /* ReturnViewController.m */; };
+		1F5038D01CDCF438004F76AD /* ReturnViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1F5038CE1CDCF438004F76AD /* ReturnViewController.xib */; };
 		1F51E8A41CC5C9DE00017839 /* MyFansActionSheetViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F51E8A31CC5C9DE00017839 /* MyFansActionSheetViewController.m */; };
 		1F51E8B01CC61E6400017839 /* SubscribeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F51E8AF1CC61E6400017839 /* SubscribeViewController.m */; };
 		1F51E8B31CC6338D00017839 /* PraisedViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F51E8B21CC6338D00017839 /* PraisedViewController.m */; };
 		1F59E5FC1C9ABBA500E96C60 /* Accelerate.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1F59E5FB1C9ABBA500E96C60 /* Accelerate.framework */; };
 		1F7B29361CD5F50500482D84 /* MyOderModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F7B29351CD5F50500482D84 /* MyOderModel.m */; };
-		1F7B293B1CD6056900482D84 /* MyViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1F7B29391CD6056900482D84 /* MyViewController.xib */; };
+		1F8EACD51CDD8A5B00C51235 /* OrderInfoDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F8EACD31CDD8A5B00C51235 /* OrderInfoDetailViewController.m */; };
+		1F8EACD61CDD8A5B00C51235 /* OrderInfoDetailViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1F8EACD41CDD8A5B00C51235 /* OrderInfoDetailViewController.xib */; };
+		1F8EACDA1CDDA09200C51235 /* RefundmentViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F8EACD81CDDA09200C51235 /* RefundmentViewController.m */; };
+		1F8EACDB1CDDA09200C51235 /* RefundmentViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1F8EACD91CDDA09200C51235 /* RefundmentViewController.xib */; };
+		1F8EACDF1CDDB0ED00C51235 /* CommenttwoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F8EACDD1CDDB0ED00C51235 /* CommenttwoViewController.m */; };
+		1F8EACE01CDDB0ED00C51235 /* CommenttwoViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1F8EACDE1CDDB0ED00C51235 /* CommenttwoViewController.xib */; };
+		1F8EACE81CDDD1AE00C51235 /* FBPayTheWayViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F8EACE61CDDD1AE00C51235 /* FBPayTheWayViewController.m */; };
+		1F8EACE91CDDD1AE00C51235 /* FBPayTheWayViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1F8EACE71CDDD1AE00C51235 /* FBPayTheWayViewController.xib */; };
 		1FBC3E9A1CCE3766007CFA14 /* ShareViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1FBC3E981CCE3766007CFA14 /* ShareViewController.m */; };
 		1FBC3E9B1CCE3766007CFA14 /* ShareViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1FBC3E991CCE3766007CFA14 /* ShareViewController.xib */; };
 		1FBE626A1CC4CB72009606F7 /* MyPageFocusOnViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1FBE62691CC4CB72009606F7 /* MyPageFocusOnViewController.m */; };
@@ -109,22 +132,10 @@
 		1FEB71721CC8802800CF34F3 /* InvitationModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 1FEB71711CC8802800CF34F3 /* InvitationModel.m */; };
 		1FEB71751CC88B5D00CF34F3 /* FindeFirendTwoModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 1FEB71741CC88B5D00CF34F3 /* FindeFirendTwoModel.m */; };
 		1FEB71781CC8A35A00CF34F3 /* QRCodeScanViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1FEB71771CC8A35A00CF34F3 /* QRCodeScanViewController.m */; };
-		1FEF0B0F1CC0FC15006EF0C6 /* MyShippingAddressViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1FEF0AE41CC0FC15006EF0C6 /* MyShippingAddressViewController.m */; };
-		1FEF0B121CC0FC15006EF0C6 /* OrderListModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 1FEF0AEB1CC0FC15006EF0C6 /* OrderListModel.m */; };
 		1FEF0B131CC0FC15006EF0C6 /* My.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1FEF0AEC1CC0FC15006EF0C6 /* My.storyboard */; };
-		1FEF0B141CC0FC15006EF0C6 /* AppBtnView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1FEF0AEF1CC0FC15006EF0C6 /* AppBtnView.m */; };
-		1FEF0B151CC0FC15006EF0C6 /* BackImagView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1FEF0AF11CC0FC15006EF0C6 /* BackImagView.m */; };
-		1FEF0B161CC0FC15006EF0C6 /* BottomView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1FEF0AF31CC0FC15006EF0C6 /* BottomView.m */; };
 		1FEF0B171CC0FC15006EF0C6 /* chanel.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1FEF0AF41CC0FC15006EF0C6 /* chanel.xib */; };
 		1FEF0B181CC0FC15006EF0C6 /* ChanelView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1FEF0AF61CC0FC15006EF0C6 /* ChanelView.m */; };
-		1FEF0B191CC0FC15006EF0C6 /* ChanelViewTwo.m in Sources */ = {isa = PBXBuildFile; fileRef = 1FEF0AF81CC0FC15006EF0C6 /* ChanelViewTwo.m */; };
-		1FEF0B1A1CC0FC15006EF0C6 /* MyHomePageView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1FEF0AFA1CC0FC15006EF0C6 /* MyHomePageView.m */; };
-		1FEF0B1B1CC0FC15006EF0C6 /* MyHomeV.m in Sources */ = {isa = PBXBuildFile; fileRef = 1FEF0AFC1CC0FC15006EF0C6 /* MyHomeV.m */; };
 		1FEF0B1C1CC0FC15006EF0C6 /* MyView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1FEF0AFD1CC0FC15006EF0C6 /* MyView.xib */; };
-		1FEF0B1D1CC0FC15006EF0C6 /* NaviView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1FEF0AFF1CC0FC15006EF0C6 /* NaviView.m */; };
-		1FEF0B1E1CC0FC15006EF0C6 /* OrderInfoCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 1FEF0B011CC0FC15006EF0C6 /* OrderInfoCell.m */; };
-		1FEF0B1F1CC0FC15006EF0C6 /* OrderInfoCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1FEF0B021CC0FC15006EF0C6 /* OrderInfoCell.xib */; };
-		1FEF0B201CC0FC15006EF0C6 /* ShareView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1FEF0B041CC0FC15006EF0C6 /* ShareView.m */; };
 		1FEF0B211CC0FC15006EF0C6 /* TipNumberView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1FEF0B061CC0FC15006EF0C6 /* TipNumberView.m */; };
 		1FFFFF1F1CD055BB008E1CDC /* AboutViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1FFFFF171CD055BB008E1CDC /* AboutViewController.m */; };
 		1FFFFF201CD055BB008E1CDC /* AboutViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1FFFFF181CD055BB008E1CDC /* AboutViewController.xib */; };
@@ -134,7 +145,6 @@
 		1FFFFF241CD055BB008E1CDC /* SystemSettingViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1FFFFF1E1CD055BB008E1CDC /* SystemSettingViewController.xib */; };
 		1FFFFF311CD055F2008E1CDC /* DirectMessagesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1FFFFF281CD055F2008E1CDC /* DirectMessagesViewController.m */; };
 		1FFFFF331CD055F2008E1CDC /* AXModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 1FFFFF2C1CD055F2008E1CDC /* AXModel.m */; };
-		1FFFFF3B1CD056B9008E1CDC /* MyselfViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1FFFFF391CD056B9008E1CDC /* MyselfViewController.m */; };
 		1FFFFF3F1CD05796008E1CDC /* BindIngViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1FFFFF3D1CD05796008E1CDC /* BindIngViewController.m */; };
 		1FFFFF401CD05796008E1CDC /* BindIngViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1FFFFF3E1CD05796008E1CDC /* BindIngViewController.xib */; };
 		1FFFFF491CD08661008E1CDC /* ChatTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 1FFFFF471CD08661008E1CDC /* ChatTableViewCell.m */; };
@@ -457,6 +467,33 @@
 		1F4061B31CCA231E00D6E9B0 /* AccountManagementViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AccountManagementViewController.m; sourceTree = "<group>"; };
 		1F4061B51CCA246600D6E9B0 /* AccountView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AccountView.h; sourceTree = "<group>"; };
 		1F4061B61CCA246600D6E9B0 /* AccountView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AccountView.m; sourceTree = "<group>"; };
+		1F50389E1CDC3F79004F76AD /* OrderInfoCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OrderInfoCell.h; sourceTree = "<group>"; };
+		1F50389F1CDC3F79004F76AD /* OrderInfoCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OrderInfoCell.m; sourceTree = "<group>"; };
+		1F5038A01CDC3F79004F76AD /* OrderInfoCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = OrderInfoCell.xib; sourceTree = "<group>"; };
+		1F5038A31CDC406C004F76AD /* CommentView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CommentView.h; sourceTree = "<group>"; };
+		1F5038A41CDC406C004F76AD /* CommentView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CommentView.m; sourceTree = "<group>"; };
+		1F5038A51CDC406C004F76AD /* CommentView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CommentView.xib; sourceTree = "<group>"; };
+		1F5038A61CDC406C004F76AD /* ProductInfoView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProductInfoView.h; sourceTree = "<group>"; };
+		1F5038A71CDC406C004F76AD /* ProductInfoView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ProductInfoView.m; sourceTree = "<group>"; };
+		1F5038A81CDC406C004F76AD /* ProductInfoView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ProductInfoView.xib; sourceTree = "<group>"; };
+		1F5038AD1CDC40EE004F76AD /* ExpressInfoModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ExpressInfoModel.h; sourceTree = "<group>"; };
+		1F5038AE1CDC40EE004F76AD /* ExpressInfoModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ExpressInfoModel.m; sourceTree = "<group>"; };
+		1F5038AF1CDC40EE004F76AD /* OrderInfoModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OrderInfoModel.h; sourceTree = "<group>"; };
+		1F5038B01CDC40EE004F76AD /* OrderInfoModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OrderInfoModel.m; sourceTree = "<group>"; };
+		1F5038B11CDC40EE004F76AD /* ProductInfoModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProductInfoModel.h; sourceTree = "<group>"; };
+		1F5038B21CDC40EE004F76AD /* ProductInfoModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ProductInfoModel.m; sourceTree = "<group>"; };
+		1F5038B61CDC605F004F76AD /* MyPageViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyPageViewController.h; sourceTree = "<group>"; };
+		1F5038B71CDC605F004F76AD /* MyPageViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyPageViewController.m; sourceTree = "<group>"; };
+		1F5038BE1CDC675A004F76AD /* MyPageBGCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyPageBGCollectionViewCell.h; sourceTree = "<group>"; };
+		1F5038BF1CDC675A004F76AD /* MyPageBGCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyPageBGCollectionViewCell.m; sourceTree = "<group>"; };
+		1F5038C11CDC6A22004F76AD /* MyPageBtnCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyPageBtnCollectionViewCell.h; sourceTree = "<group>"; };
+		1F5038C21CDC6A22004F76AD /* MyPageBtnCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyPageBtnCollectionViewCell.m; sourceTree = "<group>"; };
+		1F5038C31CDC6A22004F76AD /* MyPageBtnCollectionViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MyPageBtnCollectionViewCell.xib; sourceTree = "<group>"; };
+		1F5038C91CDC8109004F76AD /* BotView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BotView.h; sourceTree = "<group>"; };
+		1F5038CA1CDC8109004F76AD /* BotView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BotView.m; sourceTree = "<group>"; };
+		1F5038CC1CDCF438004F76AD /* ReturnViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ReturnViewController.h; sourceTree = "<group>"; };
+		1F5038CD1CDCF438004F76AD /* ReturnViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ReturnViewController.m; sourceTree = "<group>"; };
+		1F5038CE1CDCF438004F76AD /* ReturnViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ReturnViewController.xib; sourceTree = "<group>"; };
 		1F51E8A21CC5C9DE00017839 /* MyFansActionSheetViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyFansActionSheetViewController.h; sourceTree = "<group>"; };
 		1F51E8A31CC5C9DE00017839 /* MyFansActionSheetViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyFansActionSheetViewController.m; sourceTree = "<group>"; };
 		1F51E8AE1CC61E6400017839 /* SubscribeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SubscribeViewController.h; sourceTree = "<group>"; };
@@ -466,7 +503,18 @@
 		1F59E5FB1C9ABBA500E96C60 /* Accelerate.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Accelerate.framework; path = System/Library/Frameworks/Accelerate.framework; sourceTree = SDKROOT; };
 		1F7B29341CD5F50500482D84 /* MyOderModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyOderModel.h; sourceTree = "<group>"; };
 		1F7B29351CD5F50500482D84 /* MyOderModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyOderModel.m; sourceTree = "<group>"; };
-		1F7B29391CD6056900482D84 /* MyViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MyViewController.xib; sourceTree = "<group>"; };
+		1F8EACD21CDD8A5B00C51235 /* OrderInfoDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OrderInfoDetailViewController.h; sourceTree = "<group>"; };
+		1F8EACD31CDD8A5B00C51235 /* OrderInfoDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OrderInfoDetailViewController.m; sourceTree = "<group>"; };
+		1F8EACD41CDD8A5B00C51235 /* OrderInfoDetailViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = OrderInfoDetailViewController.xib; sourceTree = "<group>"; };
+		1F8EACD71CDDA09200C51235 /* RefundmentViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RefundmentViewController.h; sourceTree = "<group>"; };
+		1F8EACD81CDDA09200C51235 /* RefundmentViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RefundmentViewController.m; sourceTree = "<group>"; };
+		1F8EACD91CDDA09200C51235 /* RefundmentViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RefundmentViewController.xib; sourceTree = "<group>"; };
+		1F8EACDC1CDDB0ED00C51235 /* CommenttwoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CommenttwoViewController.h; sourceTree = "<group>"; };
+		1F8EACDD1CDDB0ED00C51235 /* CommenttwoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CommenttwoViewController.m; sourceTree = "<group>"; };
+		1F8EACDE1CDDB0ED00C51235 /* CommenttwoViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CommenttwoViewController.xib; sourceTree = "<group>"; };
+		1F8EACE51CDDD1AE00C51235 /* FBPayTheWayViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FBPayTheWayViewController.h; sourceTree = "<group>"; };
+		1F8EACE61CDDD1AE00C51235 /* FBPayTheWayViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FBPayTheWayViewController.m; sourceTree = "<group>"; };
+		1F8EACE71CDDD1AE00C51235 /* FBPayTheWayViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FBPayTheWayViewController.xib; sourceTree = "<group>"; };
 		1FBC3E971CCE3766007CFA14 /* ShareViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShareViewController.h; sourceTree = "<group>"; };
 		1FBC3E981CCE3766007CFA14 /* ShareViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ShareViewController.m; sourceTree = "<group>"; };
 		1FBC3E991CCE3766007CFA14 /* ShareViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ShareViewController.xib; sourceTree = "<group>"; };
@@ -549,34 +597,11 @@
 		1FEB71741CC88B5D00CF34F3 /* FindeFirendTwoModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FindeFirendTwoModel.m; sourceTree = "<group>"; };
 		1FEB71761CC8A35A00CF34F3 /* QRCodeScanViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QRCodeScanViewController.h; sourceTree = "<group>"; };
 		1FEB71771CC8A35A00CF34F3 /* QRCodeScanViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QRCodeScanViewController.m; sourceTree = "<group>"; };
-		1FEF0AE31CC0FC15006EF0C6 /* MyShippingAddressViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyShippingAddressViewController.h; sourceTree = "<group>"; };
-		1FEF0AE41CC0FC15006EF0C6 /* MyShippingAddressViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyShippingAddressViewController.m; sourceTree = "<group>"; };
-		1FEF0AEA1CC0FC15006EF0C6 /* OrderListModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OrderListModel.h; sourceTree = "<group>"; };
-		1FEF0AEB1CC0FC15006EF0C6 /* OrderListModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OrderListModel.m; sourceTree = "<group>"; };
 		1FEF0AEC1CC0FC15006EF0C6 /* My.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = My.storyboard; sourceTree = "<group>"; };
-		1FEF0AEE1CC0FC15006EF0C6 /* AppBtnView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppBtnView.h; sourceTree = "<group>"; };
-		1FEF0AEF1CC0FC15006EF0C6 /* AppBtnView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AppBtnView.m; sourceTree = "<group>"; };
-		1FEF0AF01CC0FC15006EF0C6 /* BackImagView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BackImagView.h; sourceTree = "<group>"; };
-		1FEF0AF11CC0FC15006EF0C6 /* BackImagView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BackImagView.m; sourceTree = "<group>"; };
-		1FEF0AF21CC0FC15006EF0C6 /* BottomView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BottomView.h; sourceTree = "<group>"; };
-		1FEF0AF31CC0FC15006EF0C6 /* BottomView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BottomView.m; sourceTree = "<group>"; };
 		1FEF0AF41CC0FC15006EF0C6 /* chanel.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = chanel.xib; sourceTree = "<group>"; };
 		1FEF0AF51CC0FC15006EF0C6 /* ChanelView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChanelView.h; sourceTree = "<group>"; };
 		1FEF0AF61CC0FC15006EF0C6 /* ChanelView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChanelView.m; sourceTree = "<group>"; };
-		1FEF0AF71CC0FC15006EF0C6 /* ChanelViewTwo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChanelViewTwo.h; sourceTree = "<group>"; };
-		1FEF0AF81CC0FC15006EF0C6 /* ChanelViewTwo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChanelViewTwo.m; sourceTree = "<group>"; };
-		1FEF0AF91CC0FC15006EF0C6 /* MyHomePageView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyHomePageView.h; sourceTree = "<group>"; };
-		1FEF0AFA1CC0FC15006EF0C6 /* MyHomePageView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyHomePageView.m; sourceTree = "<group>"; };
-		1FEF0AFB1CC0FC15006EF0C6 /* MyHomeV.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyHomeV.h; sourceTree = "<group>"; };
-		1FEF0AFC1CC0FC15006EF0C6 /* MyHomeV.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyHomeV.m; sourceTree = "<group>"; };
 		1FEF0AFD1CC0FC15006EF0C6 /* MyView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MyView.xib; sourceTree = "<group>"; };
-		1FEF0AFE1CC0FC15006EF0C6 /* NaviView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NaviView.h; sourceTree = "<group>"; };
-		1FEF0AFF1CC0FC15006EF0C6 /* NaviView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NaviView.m; sourceTree = "<group>"; };
-		1FEF0B001CC0FC15006EF0C6 /* OrderInfoCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OrderInfoCell.h; sourceTree = "<group>"; };
-		1FEF0B011CC0FC15006EF0C6 /* OrderInfoCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OrderInfoCell.m; sourceTree = "<group>"; };
-		1FEF0B021CC0FC15006EF0C6 /* OrderInfoCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = OrderInfoCell.xib; sourceTree = "<group>"; };
-		1FEF0B031CC0FC15006EF0C6 /* ShareView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShareView.h; sourceTree = "<group>"; };
-		1FEF0B041CC0FC15006EF0C6 /* ShareView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ShareView.m; sourceTree = "<group>"; };
 		1FEF0B051CC0FC15006EF0C6 /* TipNumberView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TipNumberView.h; sourceTree = "<group>"; };
 		1FEF0B061CC0FC15006EF0C6 /* TipNumberView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TipNumberView.m; sourceTree = "<group>"; };
 		1FFFFF161CD055BB008E1CDC /* AboutViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AboutViewController.h; sourceTree = "<group>"; };
@@ -592,8 +617,6 @@
 		1FFFFF281CD055F2008E1CDC /* DirectMessagesViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DirectMessagesViewController.m; sourceTree = "<group>"; };
 		1FFFFF2B1CD055F2008E1CDC /* AXModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AXModel.h; sourceTree = "<group>"; };
 		1FFFFF2C1CD055F2008E1CDC /* AXModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AXModel.m; sourceTree = "<group>"; };
-		1FFFFF381CD056B9008E1CDC /* MyselfViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyselfViewController.h; sourceTree = "<group>"; };
-		1FFFFF391CD056B9008E1CDC /* MyselfViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyselfViewController.m; sourceTree = "<group>"; };
 		1FFFFF3C1CD05796008E1CDC /* BindIngViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BindIngViewController.h; sourceTree = "<group>"; };
 		1FFFFF3D1CD05796008E1CDC /* BindIngViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BindIngViewController.m; sourceTree = "<group>"; };
 		1FFFFF3E1CD05796008E1CDC /* BindIngViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = BindIngViewController.xib; sourceTree = "<group>"; };
@@ -1173,6 +1196,40 @@
 			path = View;
 			sourceTree = "<group>";
 		};
+		1F8EACE11CDDD19E00C51235 /* Pay */ = {
+			isa = PBXGroup;
+			children = (
+				1F8EACE21CDDD19E00C51235 /* Controller */,
+				1F8EACE31CDDD19E00C51235 /* Model */,
+				1F8EACE41CDDD19E00C51235 /* View */,
+			);
+			path = Pay;
+			sourceTree = "<group>";
+		};
+		1F8EACE21CDDD19E00C51235 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				1F8EACE51CDDD1AE00C51235 /* FBPayTheWayViewController.h */,
+				1F8EACE61CDDD1AE00C51235 /* FBPayTheWayViewController.m */,
+				1F8EACE71CDDD1AE00C51235 /* FBPayTheWayViewController.xib */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		1F8EACE31CDDD19E00C51235 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		1F8EACE41CDDD19E00C51235 /* View */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
 		1FBC3E961CCE371B007CFA14 /* ShareView */ = {
 			isa = PBXGroup;
 			children = (
@@ -1289,6 +1346,18 @@
 				1FE60E361CD30A2100045117 /* MyOderInfoViewController.h */,
 				1FE60E371CD30A2100045117 /* MyOderInfoViewController.m */,
 				1FE60E381CD30A2100045117 /* MyOderInfoViewController.xib */,
+				1F5038CC1CDCF438004F76AD /* ReturnViewController.h */,
+				1F5038CD1CDCF438004F76AD /* ReturnViewController.m */,
+				1F5038CE1CDCF438004F76AD /* ReturnViewController.xib */,
+				1F8EACD21CDD8A5B00C51235 /* OrderInfoDetailViewController.h */,
+				1F8EACD31CDD8A5B00C51235 /* OrderInfoDetailViewController.m */,
+				1F8EACD41CDD8A5B00C51235 /* OrderInfoDetailViewController.xib */,
+				1F8EACD71CDDA09200C51235 /* RefundmentViewController.h */,
+				1F8EACD81CDDA09200C51235 /* RefundmentViewController.m */,
+				1F8EACD91CDDA09200C51235 /* RefundmentViewController.xib */,
+				1F8EACDC1CDDB0ED00C51235 /* CommenttwoViewController.h */,
+				1F8EACDD1CDDB0ED00C51235 /* CommenttwoViewController.m */,
+				1F8EACDE1CDDB0ED00C51235 /* CommenttwoViewController.xib */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -1296,6 +1365,12 @@
 		1FE60E2A1CD3019200045117 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				1F5038AD1CDC40EE004F76AD /* ExpressInfoModel.h */,
+				1F5038AE1CDC40EE004F76AD /* ExpressInfoModel.m */,
+				1F5038AF1CDC40EE004F76AD /* OrderInfoModel.h */,
+				1F5038B01CDC40EE004F76AD /* OrderInfoModel.m */,
+				1F5038B11CDC40EE004F76AD /* ProductInfoModel.h */,
+				1F5038B21CDC40EE004F76AD /* ProductInfoModel.m */,
 				1F7B29341CD5F50500482D84 /* MyOderModel.h */,
 				1F7B29351CD5F50500482D84 /* MyOderModel.m */,
 			);
@@ -1305,6 +1380,15 @@
 		1FE60E2B1CD3019200045117 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				1F5038A31CDC406C004F76AD /* CommentView.h */,
+				1F5038A41CDC406C004F76AD /* CommentView.m */,
+				1F5038A51CDC406C004F76AD /* CommentView.xib */,
+				1F5038A61CDC406C004F76AD /* ProductInfoView.h */,
+				1F5038A71CDC406C004F76AD /* ProductInfoView.m */,
+				1F5038A81CDC406C004F76AD /* ProductInfoView.xib */,
+				1F50389E1CDC3F79004F76AD /* OrderInfoCell.h */,
+				1F50389F1CDC3F79004F76AD /* OrderInfoCell.m */,
+				1F5038A01CDC3F79004F76AD /* OrderInfoCell.xib */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -1377,11 +1461,8 @@
 		1FEF0AD21CC0FC15006EF0C6 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
-				1FFFFF381CD056B9008E1CDC /* MyselfViewController.h */,
-				1FFFFF391CD056B9008E1CDC /* MyselfViewController.m */,
-				1F7B29391CD6056900482D84 /* MyViewController.xib */,
-				1FEF0AE31CC0FC15006EF0C6 /* MyShippingAddressViewController.h */,
-				1FEF0AE41CC0FC15006EF0C6 /* MyShippingAddressViewController.m */,
+				1F5038B61CDC605F004F76AD /* MyPageViewController.h */,
+				1F5038B71CDC605F004F76AD /* MyPageViewController.m */,
 				1F07A63F1CC76C6000CF225F /* HomePageViewController.h */,
 				1F07A6401CC76C6000CF225F /* HomePageViewController.m */,
 				1FCE90571CD9E0780029E4BA /* ShieldingViewController.h */,
@@ -1434,8 +1515,6 @@
 		1FEF0AE91CC0FC15006EF0C6 /* model */ = {
 			isa = PBXGroup;
 			children = (
-				1FEF0AEA1CC0FC15006EF0C6 /* OrderListModel.h */,
-				1FEF0AEB1CC0FC15006EF0C6 /* OrderListModel.m */,
 				1FEB71701CC8802800CF34F3 /* InvitationModel.h */,
 				1FEB71711CC8802800CF34F3 /* InvitationModel.m */,
 				1FEB71731CC88B5D00CF34F3 /* FindeFirendTwoModel.h */,
@@ -1457,33 +1536,21 @@
 		1FEF0AED1CC0FC15006EF0C6 /* view */ = {
 			isa = PBXGroup;
 			children = (
-				1FEF0AEE1CC0FC15006EF0C6 /* AppBtnView.h */,
-				1FEF0AEF1CC0FC15006EF0C6 /* AppBtnView.m */,
-				1FEF0AF01CC0FC15006EF0C6 /* BackImagView.h */,
-				1FEF0AF11CC0FC15006EF0C6 /* BackImagView.m */,
-				1FEF0AF21CC0FC15006EF0C6 /* BottomView.h */,
-				1FEF0AF31CC0FC15006EF0C6 /* BottomView.m */,
 				1FEF0AF41CC0FC15006EF0C6 /* chanel.xib */,
 				1FEF0AF51CC0FC15006EF0C6 /* ChanelView.h */,
 				1FEF0AF61CC0FC15006EF0C6 /* ChanelView.m */,
-				1FEF0AF71CC0FC15006EF0C6 /* ChanelViewTwo.h */,
-				1FEF0AF81CC0FC15006EF0C6 /* ChanelViewTwo.m */,
-				1FEF0AF91CC0FC15006EF0C6 /* MyHomePageView.h */,
-				1FEF0AFA1CC0FC15006EF0C6 /* MyHomePageView.m */,
-				1FEF0AFB1CC0FC15006EF0C6 /* MyHomeV.h */,
-				1FEF0AFC1CC0FC15006EF0C6 /* MyHomeV.m */,
 				1FEF0AFD1CC0FC15006EF0C6 /* MyView.xib */,
-				1FEF0AFE1CC0FC15006EF0C6 /* NaviView.h */,
-				1FEF0AFF1CC0FC15006EF0C6 /* NaviView.m */,
-				1FEF0B001CC0FC15006EF0C6 /* OrderInfoCell.h */,
-				1FEF0B011CC0FC15006EF0C6 /* OrderInfoCell.m */,
-				1FEF0B021CC0FC15006EF0C6 /* OrderInfoCell.xib */,
-				1FEF0B031CC0FC15006EF0C6 /* ShareView.h */,
-				1FEF0B041CC0FC15006EF0C6 /* ShareView.m */,
+				1F5038C91CDC8109004F76AD /* BotView.h */,
+				1F5038CA1CDC8109004F76AD /* BotView.m */,
 				1FEF0B051CC0FC15006EF0C6 /* TipNumberView.h */,
 				1FEF0B061CC0FC15006EF0C6 /* TipNumberView.m */,
 				1F07A6421CC77AB800CF225F /* BackgroundCollectionViewCell.h */,
 				1F07A6431CC77AB800CF225F /* BackgroundCollectionViewCell.m */,
+				1F5038BE1CDC675A004F76AD /* MyPageBGCollectionViewCell.h */,
+				1F5038BF1CDC675A004F76AD /* MyPageBGCollectionViewCell.m */,
+				1F5038C11CDC6A22004F76AD /* MyPageBtnCollectionViewCell.h */,
+				1F5038C21CDC6A22004F76AD /* MyPageBtnCollectionViewCell.m */,
+				1F5038C31CDC6A22004F76AD /* MyPageBtnCollectionViewCell.xib */,
 				1FBE626B1CC4D095009606F7 /* FocusOnTableViewCell.h */,
 				1FBE626C1CC4D095009606F7 /* FocusOnTableViewCell.m */,
 				1F07A6451CC77BBE00CF225F /* OtherCollectionViewCell.h */,
@@ -1622,6 +1689,7 @@
 		D8035FA01CBD1021001920F9 /* Other */ = {
 			isa = PBXGroup;
 			children = (
+				1F8EACE11CDDD19E00C51235 /* Pay */,
 				1FC678161CDAF9B200535162 /* DeliveryAddress */,
 				1FC677F61CDAE75C00535162 /* Bonus */,
 				1FE60E3B1CD3224200045117 /* Message */,
@@ -3009,9 +3077,11 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1F8EACD61CDD8A5B00C51235 /* OrderInfoDetailViewController.xib in Resources */,
 				D80360551CBF376B001920F9 /* Login.xib in Resources */,
 				D81281711CAA8532007CF08B /* UMSShareListController.xib in Resources */,
 				1FFFFF241CD055BB008E1CDC /* SystemSettingViewController.xib in Resources */,
+				1F5038AC1CDC406C004F76AD /* ProductInfoView.xib in Resources */,
 				D812816B1CAA8532007CF08B /* UMSCommentInputController.xib in Resources */,
 				D812816D1CAA8532007CF08B /* UMShareEditViewController.xib in Resources */,
 				1FC678031CDAE97B00535162 /* HistoryBonusViewController.xib in Resources */,
@@ -3028,7 +3098,6 @@
 				1FC677FE1CDAE78400535162 /* BonusViewController.xib in Resources */,
 				1FE60E301CD301BC00045117 /* AllOderViewController.xib in Resources */,
 				1FBC3E9B1CCE3766007CFA14 /* ShareViewController.xib in Resources */,
-				1FEF0B1F1CC0FC15006EF0C6 /* OrderInfoCell.xib in Resources */,
 				D803604C1CBF376B001920F9 /* LoginRegisterController.storyboard in Resources */,
 				1FEF0B131CC0FC15006EF0C6 /* My.storyboard in Resources */,
 				1FEF0B1C1CC0FC15006EF0C6 /* MyView.xib in Resources */,
@@ -3042,7 +3111,9 @@
 				1FE60E661CD33E4700045117 /* MessagesssViewController.xib in Resources */,
 				1F35F0511CD2336E0000DB95 /* areas.plist in Resources */,
 				D80360591CBF376B001920F9 /* RecommendedScenarioView.xib in Resources */,
+				1F5038C51CDC6A22004F76AD /* MyPageBtnCollectionViewCell.xib in Resources */,
 				1FC678151CDAF52000535162 /* InvalidBonusCell.xib in Resources */,
+				1F5038AA1CDC406C004F76AD /* CommentView.xib in Resources */,
 				D81281721CAA8532007CF08B /* UMSocialSDKResourcesNew.bundle in Resources */,
 				D83639AE1CD0660E00CC4AC0 /* FBLocationViewController.xib in Resources */,
 				1F1837711CCDF87500933CA7 /* ChangePasswordViewController.xib in Resources */,
@@ -3056,15 +3127,20 @@
 				1FE60E431CD3226400045117 /* MessageViewController.xib in Resources */,
 				D81281751CAA8532007CF08B /* WeiboSDK.bundle in Resources */,
 				1F18377B1CCE0F2200933CA7 /* TalentCertificationViewController.xib in Resources */,
+				1F5038D01CDCF438004F76AD /* ReturnViewController.xib in Resources */,
 				1FEF0B171CC0FC15006EF0C6 /* chanel.xib in Resources */,
 				D812816E1CAA8532007CF08B /* UMShareEditViewControlleriPad.xib in Resources */,
 				D81281681CAA8532007CF08B /* UMSocialLocalizable.strings in Resources */,
 				1FFFFF201CD055BB008E1CDC /* AboutViewController.xib in Resources */,
+				1F5038A21CDC3F79004F76AD /* OrderInfoCell.xib in Resources */,
+				1F8EACE91CDDD1AE00C51235 /* FBPayTheWayViewController.xib in Resources */,
 				1F1837671CCDCF3B00933CA7 /* EditNickNameViewController.xib in Resources */,
 				1FE60E521CD32AEC00045117 /* SystemInfoTableViewCell.xib in Resources */,
 				D812816F1CAA8532007CF08B /* UMSLoginViewController.xib in Resources */,
 				1FE60E5C1CD32FD200045117 /* CommentsTableViewCell.xib in Resources */,
 				1FFFFF221CD055BB008E1CDC /* OptionViewController.xib in Resources */,
+				1F8EACDB1CDDA09200C51235 /* RefundmentViewController.xib in Resources */,
+				1F8EACE01CDDB0ED00C51235 /* CommenttwoViewController.xib in Resources */,
 				1FC678101CDAECE500535162 /* BonusCell.xib in Resources */,
 				1F1837761CCDFCB200933CA7 /* ChangeSumaryViewController.xib in Resources */,
 				D812815C1CAA8532007CF08B /* InfoPlist.strings in Resources */,
@@ -3072,7 +3148,6 @@
 				1F3C0A971CBFA28300B84FEB /* GreatPeopleViewController.xib in Resources */,
 				1FE60E481CD327BE00045117 /* SystemInformsViewController.xib in Resources */,
 				1FCE90561CD9BBA40029E4BA /* ChanePwdViewController.xib in Resources */,
-				1F7B293B1CD6056900482D84 /* MyViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -3133,17 +3208,17 @@
 			files = (
 				D8363A931CD8832100CC4AC0 /* CommentTableViewCell.m in Sources */,
 				D81281581CAA8532007CF08B /* UIColor+Extension.m in Sources */,
-				1FEF0B161CC0FC15006EF0C6 /* BottomView.m in Sources */,
 				D80360621CBF41A3001920F9 /* SearchMenuView.m in Sources */,
 				1F35F0541CD237450000DB95 /* AddreesModel.m in Sources */,
 				D8363A581CD8814600CC4AC0 /* InfoBrandTableViewCell.m in Sources */,
 				D87B69D31CC726D500199EFE /* CommentViewController.m in Sources */,
+				1F5038B41CDC40EE004F76AD /* OrderInfoModel.m in Sources */,
 				D81281531CAA8532007CF08B /* FBAPI.m in Sources */,
 				1F07A6471CC77BBF00CF225F /* OtherCollectionViewCell.m in Sources */,
 				1FD7E6771CC8DFE400A69BDD /* MyQrCodeViewController.m in Sources */,
-				1FEF0B201CC0FC15006EF0C6 /* ShareView.m in Sources */,
 				D803604F1CBF376B001920F9 /* UserInfo.m in Sources */,
 				D8363A991CD8832100CC4AC0 /* SceneListTableViewCell.m in Sources */,
+				1F5038CB1CDC8109004F76AD /* BotView.m in Sources */,
 				1FEF0B211CC0FC15006EF0C6 /* TipNumberView.m in Sources */,
 				D81281131CAA8532007CF08B /* FBViewController.m in Sources */,
 				D8363AB61CD8835D00CC4AC0 /* SceneInfo.m in Sources */,
@@ -3165,7 +3240,6 @@
 				D8A9AE051CDC3D5800A9FCFB /* SearchFSceneViewController.m in Sources */,
 				1FC6780F1CDAECE500535162 /* BonusCell.m in Sources */,
 				1F07A6591CC7A45300CF225F /* FriendCollectionViewCell.m in Sources */,
-				1FEF0B151CC0FC15006EF0C6 /* BackImagView.m in Sources */,
 				D8363A5C1CD8814600CC4AC0 /* InfoUseSceneTableViewCell.m in Sources */,
 				D8A9ACFF1CD9AF1D00A9FCFB /* OtherGoodsViewController.m in Sources */,
 				D87B69D51CC726D500199EFE /* WriteCommentView.m in Sources */,
@@ -3204,12 +3278,14 @@
 				D8A9ADE01CD9F92B00A9FCFB /* TaoBaoGoods.m in Sources */,
 				D8363A521CD8814600CC4AC0 /* MallMenuCollectionViewCell.m in Sources */,
 				488521861CD470E500D8CE19 /* CounterModel.m in Sources */,
+				1F5038AB1CDC406C004F76AD /* ProductInfoView.m in Sources */,
 				D8A9AD8F1CD9DFBC00A9FCFB /* AddUrlView.m in Sources */,
 				D80D41581CAD142C005D72B1 /* FBPictureViewController.m in Sources */,
 				1FC678141CDAF52000535162 /* InvalidBonusCell.m in Sources */,
 				D8363ABC1CD8835D00CC4AC0 /* HomeSceneList.m in Sources */,
 				D80360561CBF376B001920F9 /* NumView.m in Sources */,
 				D8A9ACF31CD8B74D00A9FCFB /* LikeOrSuPeopleData.m in Sources */,
+				1F5038A91CDC406C004F76AD /* CommentView.m in Sources */,
 				D81281661CAA8532007CF08B /* JKDBHelper.m in Sources */,
 				D8363A721CD881B200CC4AC0 /* MallViewController.m in Sources */,
 				D8363A531CD8814600CC4AC0 /* RecommendGoodsCollectionViewCell.m in Sources */,
@@ -3243,14 +3319,16 @@
 				D8363A5B1CD8814600CC4AC0 /* InfoTitleTableViewCell.m in Sources */,
 				1F35F0381CD1AD870000DB95 /* CityTwoTableViewCell.m in Sources */,
 				D8A9ADE61CD9F92B00A9FCFB /* FBPhoto.m in Sources */,
+				1F8EACE81CDDD1AE00C51235 /* FBPayTheWayViewController.m in Sources */,
 				D8363A2F1CD8809400CC4AC0 /* Category.m in Sources */,
 				D8A9AD8B1CD9DFBC00A9FCFB /* FiltersView.m in Sources */,
 				D812815E1CAA8532007CF08B /* main.m in Sources */,
+				1F8EACDF1CDDB0ED00C51235 /* CommenttwoViewController.m in Sources */,
 				1FE60E5B1CD32FD200045117 /* CommentsTableViewCell.m in Sources */,
 				D83639BF1CD0932000CC4AC0 /* CommentRow.m in Sources */,
 				D8A9ADBB1CD9E2E700A9FCFB /* SearchLocationViewController.m in Sources */,
 				1FBE62701CC4E3C3009606F7 /* MyFansViewController.m in Sources */,
-				1FEF0B1A1CC0FC15006EF0C6 /* MyHomePageView.m in Sources */,
+				1F5038B51CDC40EE004F76AD /* ProductInfoModel.m in Sources */,
 				D8363A801CD882D900CC4AC0 /* HomeViewController.m in Sources */,
 				1F51E8A41CC5C9DE00017839 /* MyFansActionSheetViewController.m in Sources */,
 				1FFFFF491CD08661008E1CDC /* ChatTableViewCell.m in Sources */,
@@ -3258,10 +3336,11 @@
 				D86AFDF21CC0BBC3006F1602 /* FBSearchView.m in Sources */,
 				1FEF0B181CC0FC15006EF0C6 /* ChanelView.m in Sources */,
 				D8A9ADC51CD9E2E700A9FCFB /* ReleaseViewController.m in Sources */,
+				1F5038B31CDC40EE004F76AD /* ExpressInfoModel.m in Sources */,
 				D8A9ACB01CD89E0000A9FCFB /* RollImageData.m in Sources */,
+				1F5038CF1CDCF438004F76AD /* ReturnViewController.m in Sources */,
 				1FBE626D1CC4D095009606F7 /* FocusOnTableViewCell.m in Sources */,
 				1F3C0A841CBF760C00B84FEB /* SubscribePeopleViewController.m in Sources */,
-				1FEF0B191CC0FC15006EF0C6 /* ChanelViewTwo.m in Sources */,
 				D87B69E11CC7274900199EFE /* FBMenuView.m in Sources */,
 				1F18376B1CCDE95A00933CA7 /* ModifyGenderViewController.m in Sources */,
 				1FCE90591CD9E0780029E4BA /* ShieldingViewController.m in Sources */,
@@ -3278,16 +3357,15 @@
 				D8A9ACBB1CD89E0000A9FCFB /* HotTags.m in Sources */,
 				D87B69BF1CC726BA00199EFE /* FBRollImages.m in Sources */,
 				D8363A761CD8821400CC4AC0 /* GoodsBrandTableViewCell.m in Sources */,
-				1FEF0B141CC0FC15006EF0C6 /* AppBtnView.m in Sources */,
 				1F4061B41CCA231E00D6E9B0 /* AccountManagementViewController.m in Sources */,
 				D8A9ADC61CD9E2E700A9FCFB /* AddTagViewController.m in Sources */,
+				1F8EACD51CDD8A5B00C51235 /* OrderInfoDetailViewController.m in Sources */,
 				D8363A2E1CD8809400CC4AC0 /* GoodsRow.m in Sources */,
 				D8A9ACCF1CD8A46900A9FCFB /* SuFiuScenrView.m in Sources */,
 				D8A9ACDF1CD8A49100A9FCFB /* AllSceneViewController.m in Sources */,
 				D8A9ACB31CD89E0000A9FCFB /* FiuSceneData.m in Sources */,
 				1F51E8B31CC6338D00017839 /* PraisedViewController.m in Sources */,
 				1FBE626A1CC4CB72009606F7 /* MyPageFocusOnViewController.m in Sources */,
-				1FEF0B121CC0FC15006EF0C6 /* OrderListModel.m in Sources */,
 				D8A9ACBC1CD89E0000A9FCFB /* HotTagsData.m in Sources */,
 				D8A9ACB71CD89E0000A9FCFB /* FiuSceneInfoLocation.m in Sources */,
 				D8A9ACB91CD89E0000A9FCFB /* FiuSceneLocation.m in Sources */,
@@ -3307,6 +3385,7 @@
 				1F07A6531CC7925900CF225F /* FindeFriendTableViewCell.m in Sources */,
 				D8363AB91CD8835D00CC4AC0 /* SceneInfoLocation.m in Sources */,
 				1FC6782E1CDB33ED00535162 /* UIView+TYAlertView.m in Sources */,
+				1F5038C01CDC675A004F76AD /* MyPageBGCollectionViewCell.m in Sources */,
 				D8A9ACB21CD89E0000A9FCFB /* FiuScene.m in Sources */,
 				D8363A6E1CD8818E00CC4AC0 /* GoodsBrandViewController.m in Sources */,
 				D8363A6B1CD8818E00CC4AC0 /* GoodsInfoViewController.m in Sources */,
@@ -3331,7 +3410,6 @@
 				D8363ABB1CD8835D00CC4AC0 /* SceneInfoUserInfo.m in Sources */,
 				D8363AC11CD8835D00CC4AC0 /* HomeSceneListRow.m in Sources */,
 				1F35F0371CD1AD870000DB95 /* CityTableViewCell.m in Sources */,
-				1FEF0B1D1CC0FC15006EF0C6 /* NaviView.m in Sources */,
 				D83639BD1CD0932000CC4AC0 /* Comment.m in Sources */,
 				D8363A5E1CD8814600CC4AC0 /* BuyCarDefault.m in Sources */,
 				D8A9ACF21CD8B74D00A9FCFB /* LikeOrSuPeopleCounter.m in Sources */,
@@ -3339,14 +3417,15 @@
 				D8A9AD891CD9DFBC00A9FCFB /* FBPictureCollectionViewCell.m in Sources */,
 				1FC6782A1CDB0EC700535162 /* EditAddressViewController.m in Sources */,
 				D8A9ACFC1CD99EBF00A9FCFB /* ReportViewController.m in Sources */,
+				1F5038B91CDC605F004F76AD /* MyPageViewController.m in Sources */,
 				D8A9ADF31CDAF41200A9FCFB /* ChildTagsTag.m in Sources */,
 				D8363AB71CD8835D00CC4AC0 /* SceneInfoCounter.m in Sources */,
 				1FE60E561CD32E8D00045117 /* CommentsViewController.m in Sources */,
+				1F8EACDA1CDDA09200C51235 /* RefundmentViewController.m in Sources */,
 				1F1837751CCDFCB200933CA7 /* ChangeSumaryViewController.m in Sources */,
 				D803603F1CBF376B001920F9 /* FBLoginRegisterViewController.m in Sources */,
 				D8035FCE1CBD1021001920F9 /* SearchViewController.m in Sources */,
 				D8A9ADE31CD9F92B00A9FCFB /* TaoBaoGoodsResult.m in Sources */,
-				1FEF0B1B1CC0FC15006EF0C6 /* MyHomeV.m in Sources */,
 				D8363A291CD8809400CC4AC0 /* Goods.m in Sources */,
 				D803605C1CBF376B001920F9 /* SubmitView.m in Sources */,
 				1FEB71781CC8A35A00CF34F3 /* QRCodeScanViewController.m in Sources */,
@@ -3359,9 +3438,11 @@
 				D8A9ACE01CD8A49100A9FCFB /* FiuSceneViewController.m in Sources */,
 				1F4061A81CC9E92C00D6E9B0 /* ImproView.m in Sources */,
 				D83639BE1CD0932000CC4AC0 /* CommentData.m in Sources */,
+				1F5038A11CDC3F79004F76AD /* OrderInfoCell.m in Sources */,
 				D8363A821CD882D900CC4AC0 /* SceneSubscribeViewController.m in Sources */,
 				D8A9ACD31CD8A46900A9FCFB /* FiuSceneTableViewCell.m in Sources */,
 				D81281551CAA8532007CF08B /* HttpTool.m in Sources */,
+				1F5038C41CDC6A22004F76AD /* MyPageBtnCollectionViewCell.m in Sources */,
 				D8363AB81CD8835D00CC4AC0 /* SceneInfoData.m in Sources */,
 				D8A9ADE11CD9F92B00A9FCFB /* TaoBaoGoodsData.m in Sources */,
 				D80360521CBF376B001920F9 /* TurnPageLayout.m in Sources */,
@@ -3376,7 +3457,6 @@
 				D8035F2F1CB77D0C001920F9 /* UIImage+Helper.m in Sources */,
 				D8363A591CD8814600CC4AC0 /* InfoGoodsHighlightsTableViewCell.m in Sources */,
 				1FE60E391CD30A2100045117 /* MyOderInfoViewController.m in Sources */,
-				1FEF0B1E1CC0FC15006EF0C6 /* OrderInfoCell.m in Sources */,
 				1FE60E2F1CD301BC00045117 /* AllOderViewController.m in Sources */,
 				D8A9ACF41CD8B74D00A9FCFB /* LikeOrSuPeopleRow.m in Sources */,
 				D8A9ACB51CD89E0000A9FCFB /* FiuSceneInfoCounter.m in Sources */,
@@ -3388,7 +3468,6 @@
 				D83639B31CD0661E00CC4AC0 /* FBCityViewController.m in Sources */,
 				D8A9ACBD1CD89E0000A9FCFB /* HotTagsRow.m in Sources */,
 				D83639C01CD0932000CC4AC0 /* CommentUser.m in Sources */,
-				1FFFFF3B1CD056B9008E1CDC /* MyselfViewController.m in Sources */,
 				1FEB71751CC88B5D00CF34F3 /* FindeFirendTwoModel.m in Sources */,
 				D8363A981CD8832100CC4AC0 /* UserInfoTableViewCell.m in Sources */,
 				1FEB71721CC8802800CF34F3 /* InvitationModel.m in Sources */,

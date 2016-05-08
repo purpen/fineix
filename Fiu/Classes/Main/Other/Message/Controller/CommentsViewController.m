@@ -13,6 +13,7 @@
 #import "UserInfoEntity.h"
 #import "MJRefresh.h"
 #import "SceneInfoViewController.h"
+#import "HomePageViewController.h"
 
 @interface CommentsViewController ()<FBNavigationBarItemsDelegate,UITableViewDataSource,UITableViewDelegate>
 {
@@ -23,6 +24,8 @@
 }
 @property (weak, nonatomic) IBOutlet UITableView *myTbaleView;
 @property (nonatomic, strong) UILabel *tipLabel;
+@property (nonatomic, assign) NSInteger currentPageNumber;
+@property (nonatomic, assign) NSInteger totalPageNumber;
 @end
 
 @implementation CommentsViewController
@@ -40,19 +43,39 @@
     
     self.myTbaleView.rowHeight = 65;
     //进行网络请求
-    [self networkRequestData];
+    [self requestDataForOderList];
+    
+    // 下拉刷新
+    self.myTbaleView.mj_header = [MJRefreshNormalHeader headerWithRefreshingBlock:^{
+        _currentPageNumber = 0;
+        [_modelAry removeAllObjects];
+        [self requestDataForOderList];
+    }];
+    
+    //上拉加载更多
+    self.myTbaleView.mj_footer = [MJRefreshAutoNormalFooter footerWithRefreshingBlock:^{
+        if (_currentPageNumber < _totalPageNumber) {
+            [self requestDataForOderListOperation];
+        } else {
+            [self.myTbaleView.mj_footer endRefreshing];
+        }
+    }];
 }
 
--(void)viewWillAppear:(BOOL)animated{
-    [super viewWillAppear:animated];
-    [[UIApplication sharedApplication] setStatusBarHidden:NO withAnimation:UIStatusBarAnimationSlide];
+#pragma mark - Network
+- (void)requestDataForOderList
+{
+    _currentPageNumber = 0;
+    [_modelAry removeAllObjects];
+    [SVProgressHUD showWithMaskType:SVProgressHUDMaskTypeClear];
+    
+    [self requestDataForOderListOperation];
 }
 
-#pragma mark - 网络请求
-- (void)networkRequestData {
-    [SVProgressHUD show];
+- (void)requestDataForOderListOperation
+{
     UserInfoEntity *entity = [UserInfoEntity defaultUserInfoEntity];
-    FBRequest *request = [FBAPI postWithUrlString:@"/comment/getlist" requestDictionary:@{@"page":@(_page+1),@"size":@15,@"user_id":entity.userId,@"type":@12} delegate:self];
+    FBRequest *request = [FBAPI postWithUrlString:@"/my/comment_list" requestDictionary:@{@"page":@(_currentPageNumber+1),@"size":@15,@"target_user_id":entity.userId,@"type":@12} delegate:self];
     [request startRequestSuccess:^(FBRequest *request, id result) {
         NSLog(@"评论丫丫丫result  %@",result);
         NSDictionary *dataDict = [result objectForKey:@"data"];
@@ -60,16 +83,31 @@
         for (NSDictionary *rowsDict in rowsAry) {
             NSDictionary *usersDict = [rowsDict objectForKey:@"user"];
             UserInfo *model = [[UserInfo alloc] init];
-            model.userId = usersDict[@"_id"];
-            model.summary = rowsDict[@"content"];
-            model.nickname = usersDict[@"nickname"];
-            model.mediumAvatarUrl = usersDict[@"medium_avatar_url"];
-            model.birthday = rowsDict[@"created_at"];
-            model.head_pic_url = rowsDict[@"target_small_cover_url"];
+            if (![usersDict[@"_id"] isKindOfClass:[NSNull class]]) {
+                model.userId = usersDict[@"_id"];
+            }
+            if (![rowsDict[@"content"] isKindOfClass:[NSNull class]]) {
+                model.summary = rowsDict[@"content"];
+            }
+            if (![usersDict[@"nickname"] isKindOfClass:[NSNull class]]) {
+                model.nickname = usersDict[@"nickname"];
+            }
+            if (![usersDict[@"medium_avatar_url"] isKindOfClass:[NSNull class]]) {
+                model.mediumAvatarUrl = usersDict[@"medium_avatar_url"];
+            }
+            if (![rowsDict[@"created_at"] isKindOfClass:[NSNull class]]) {
+                model.birthday = rowsDict[@"created_at"];
+            }
+            if (![rowsDict[@"target_small_cover_url"] isKindOfClass:[NSNull class]]) {
+                model.head_pic_url = rowsDict[@"target_small_cover_url"];
+            }
+            if (![rowsDict[@"target_id"] isKindOfClass:[NSNull class]]) {
+                NSString *target_id = rowsDict[@"target_id"];
+                [_sceneIdMarr addObject:target_id];
+            }
             NSLog(@"时间啊啊   %@",rowsDict[@"created_at"]);
             [_modelAry addObject:model];
-            NSString *target_id = rowsDict[@"target_id"];
-            [_sceneIdMarr addObject:target_id];
+            
         }
         if (_modelAry.count == 0) {
             [self.view addSubview:self.tipLabel];
@@ -84,18 +122,47 @@
         }
         
         [self.myTbaleView reloadData];
-        _page = [[[result valueForKey:@"data"] valueForKey:@"current_page"] intValue];
-        _totalePage = [[[result valueForKey:@"data"] valueForKey:@"total_page"] intValue];
-        if (_totalePage > 1) {
-            [self addMJRefresh:self.myTbaleView];
-            [self requestIsLastData:self.myTbaleView currentPage:_page withTotalPage:_totalePage];
+
+        
+        
+        _currentPageNumber = [[[result valueForKey:@"data"] valueForKey:@"current_page"] intValue];
+        _totalPageNumber = [[[result valueForKey:@"data"] valueForKey:@"total_page"] intValue];
+        
+        BOOL isLastPage = (_currentPageNumber == _totalPageNumber);
+        
+        if (!isLastPage) {
+            if (self.myTbaleView.mj_footer.state == MJRefreshStateNoMoreData) {
+                [self.myTbaleView.mj_footer resetNoMoreData];
+            }
         }
+        if (_currentPageNumber == _totalPageNumber == 1) {
+            self.myTbaleView.mj_footer.state = MJRefreshStateNoMoreData;
+            self.myTbaleView.mj_footer.hidden = true;
+        }
+        
+        if ([self.myTbaleView.mj_header isRefreshing]) {
+            [self.myTbaleView.mj_header endRefreshing];
+        }
+        if ([self.myTbaleView.mj_footer isRefreshing]) {
+            if (isLastPage) {
+                [self.myTbaleView.mj_footer endRefreshingWithNoMoreData];
+            } else  {
+                [self.myTbaleView.mj_footer endRefreshing];
+            }
+        }
+        
         [SVProgressHUD dismiss];
     } failure:^(FBRequest *request, NSError *error) {
-        [SVProgressHUD showErrorWithStatus:[error localizedDescription]];
+        [SVProgressHUD showInfoWithStatus:[error localizedDescription]];
     }];
-    
 }
+
+
+-(void)viewWillAppear:(BOOL)animated{
+    [super viewWillAppear:animated];
+    [[UIApplication sharedApplication] setStatusBarHidden:NO withAnimation:UIStatusBarAnimationSlide];
+}
+
 
 
 -(UILabel *)tipLabel{
@@ -107,48 +174,6 @@
     return _tipLabel;
 }
 
-//  判断是否为最后一条数据
-- (void)requestIsLastData:(UITableView *)table currentPage:(NSInteger )current withTotalPage:(NSInteger)total {
-    BOOL isLastPage = (current == total);
-    
-    if (!isLastPage) {
-        if (table.mj_footer.state == MJRefreshStateNoMoreData) {
-            [table.mj_footer resetNoMoreData];
-        }
-    }
-    if (current == total == 1) {
-        table.mj_footer.state = MJRefreshStateNoMoreData;
-        table.mj_footer.hidden = true;
-    }
-    if ([table.mj_header isRefreshing]) {
-        [table.mj_header endRefreshing];
-    }
-    if ([table.mj_footer isRefreshing]) {
-        if (isLastPage) {
-            [table.mj_footer endRefreshingWithNoMoreData];
-        } else  {
-            [table.mj_footer endRefreshing];
-        }
-    }
-    [SVProgressHUD dismiss];
-}
-
-
-#pragma mark - 上拉加载 & 下拉刷新
-- (void)addMJRefresh:(UITableView *)table {
-    table.mj_header = [MJRefreshNormalHeader headerWithRefreshingBlock:^{
-        _page = 1;
-        [self networkRequestData];
-    }];
-    
-    table.mj_footer = [MJRefreshAutoNormalFooter footerWithRefreshingBlock:^{
-        if (_page < _totalePage) {
-            [self networkRequestData];
-        } else {
-            [table.mj_footer endRefreshing];
-        }
-    }];
-}
 
 
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
@@ -164,9 +189,20 @@
     UserInfo *model = _modelAry[indexPath.row];
     [cell setUIWithModel:model];
     cell.focusBtn.hidden = YES;
+    cell.timeLabelTwo.hidden = YES;
+    cell.headBtn.tag = indexPath.row;
+    [cell.headBtn addTarget:self action:@selector(headBtn:) forControlEvents:UIControlEventTouchUpInside];
     return cell;
 }
 
+-(void)headBtn:(UIButton*)sender{
+    NSLog(@"头像啊");
+    HomePageViewController *vc = [[HomePageViewController alloc] init];
+    vc.type = @1;
+    vc.isMySelf = NO;
+    vc.userId = ((UserInfo*)_modelAry[sender.tag]).userId;
+    [self.navigationController pushViewController:vc animated:YES];
+}
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     SceneInfoViewController * sceneInfoVC = [[SceneInfoViewController alloc] init];

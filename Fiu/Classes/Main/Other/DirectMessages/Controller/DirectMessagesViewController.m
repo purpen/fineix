@@ -43,6 +43,7 @@
     self.msgTF.leftViewMode = UITextFieldViewModeAlways;
     //通知
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyBoardWillChangeFrame:) name:UIKeyboardWillChangeFrameNotification object:nil];
+    
 }
 
 -(void)dealloc{
@@ -63,6 +64,7 @@
 -(void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
     [self networkRequestData];
+    
 }
 
 #pragma mark - 网络请求
@@ -91,13 +93,7 @@
         }
         self.messages = messageArray;
         [self.myTableVuew reloadData];
-//        _n = [[[result objectForKey:@"data"] objectForKey:@"current_page"] intValue];
-//        _totalN = [[[result objectForKey:@"data"] objectForKey:@"total_page"] intValue];
-//        if (_totalN>1) {
-//            //
-//            [self addMJRefresh:self.myCollectionView];
-//            [self requestIsLastData:self.myCollectionView currentPage:_n withTotalPage:_totalN];
-//        }
+//        [self.myTableVuew scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:[self.myTableVuew numberOfRowsInSection:0]-1 inSection:0] atScrollPosition:UITableViewScrollPositionMiddle animated:NO];
         [SVProgressHUD dismiss];
     } failure:^(FBRequest *request, NSError *error) {
         [SVProgressHUD showErrorWithStatus:[error localizedDescription]];
@@ -156,6 +152,7 @@
         [SVProgressHUD showErrorWithStatus:error.localizedDescription];
     }];
     self.msgTF.text = @"";
+    
 }
 
 - (void)didReceiveMemoryWarning {

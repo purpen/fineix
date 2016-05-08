@@ -8,6 +8,10 @@
 
 #import "AllOderViewController.h"
 #import "MyOderInfoViewController.h"
+#import "TipNumberView.h"
+#import "Fiu.h"
+#import "CounterModel.h"
+#import "ReturnViewController.h"
 
 @interface AllOderViewController ()<FBNavigationBarItemsDelegate>
 
@@ -30,6 +34,68 @@
     // Do any additional setup after loading the view from its nib.
     self.delegate = self;
     self.navViewTitle.text = @"全部订单";
+    
+    if ([self.counterModel.order_wait_payment intValue] == 0) {
+        //不显示
+        
+    }else{
+        //显示
+        TipNumberView *tipNumView = [TipNumberView getTipNumView];
+        tipNumView.tipNumLabel.text = [NSString stringWithFormat:@"%@",_counterModel.order_wait_payment];
+        [self.paymentBtn addSubview:tipNumView];
+        [tipNumView mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.size.mas_equalTo(CGSizeMake(15/667.0*SCREEN_HEIGHT, 15/667.0*SCREEN_HEIGHT));
+            make.right.mas_equalTo(self.paymentBtn.mas_right).with.offset(-7/667.0*SCREEN_HEIGHT);
+            make.top.mas_equalTo(self.paymentBtn.mas_top).with.offset(13/667.0*SCREEN_HEIGHT);
+        }];
+    }
+
+    if ([self.counterModel.order_ready_goods intValue] == 0) {
+        //不显示
+        
+    }else{
+        //显示
+        TipNumberView *tipNumView = [TipNumberView getTipNumView];
+        tipNumView.tipNumLabel.text = [NSString stringWithFormat:@"%@",_counterModel.order_ready_goods];
+        [self.deliveryBtn addSubview:tipNumView];
+        [tipNumView mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.size.mas_equalTo(CGSizeMake(15/667.0*SCREEN_HEIGHT, 15/667.0*SCREEN_HEIGHT));
+            make.right.mas_equalTo(self.deliveryBtn.mas_right).with.offset(-7/667.0*SCREEN_HEIGHT);
+            make.top.mas_equalTo(self.deliveryBtn.mas_top).with.offset(13/667.0*SCREEN_HEIGHT);
+        }];
+    }
+    
+    if ([self.counterModel.order_sended_goods intValue] == 0) {
+        //不显示
+        
+    }else{
+        //显示
+        TipNumberView *tipNumView = [TipNumberView getTipNumView];
+        tipNumView.tipNumLabel.text = [NSString stringWithFormat:@"%@",_counterModel.order_sended_goods];
+        [self.goodsBtn addSubview:tipNumView];
+        [tipNumView mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.size.mas_equalTo(CGSizeMake(15/667.0*SCREEN_HEIGHT, 15/667.0*SCREEN_HEIGHT));
+            make.right.mas_equalTo(self.goodsBtn.mas_right).with.offset(-7/667.0*SCREEN_HEIGHT);
+            make.top.mas_equalTo(self.goodsBtn.mas_top).with.offset(13/667.0*SCREEN_HEIGHT);
+        }];
+    }
+    
+    
+    
+    if ([self.counterModel.order_evaluate intValue] == 0) {
+        //不显示
+        
+    }else{
+        //显示
+        TipNumberView *tipNumView = [TipNumberView getTipNumView];
+        tipNumView.tipNumLabel.text = [NSString stringWithFormat:@"%@",_counterModel.order_evaluate];
+        [self.evaluationBtn addSubview:tipNumView];
+        [tipNumView mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.size.mas_equalTo(CGSizeMake(15/667.0*SCREEN_HEIGHT, 15/667.0*SCREEN_HEIGHT));
+            make.right.mas_equalTo(self.evaluationBtn.mas_right).with.offset(-7/667.0*SCREEN_HEIGHT);
+            make.top.mas_equalTo(self.evaluationBtn.mas_top).with.offset(13/667.0*SCREEN_HEIGHT);
+        }];
+    }
     
 }
 - (IBAction)allOderBtn:(UIButton *)sender {
@@ -58,8 +124,7 @@
     [self.navigationController pushViewController:vc animated:YES];
 }
 - (IBAction)returnGoodsBtn:(UIButton *)sender {
-    MyOderInfoViewController *vc = [[MyOderInfoViewController alloc] init];
-    vc.type = @5;
+    ReturnViewController *vc = [[ReturnViewController alloc] init];
     [self.navigationController pushViewController:vc animated:YES];
 }
 

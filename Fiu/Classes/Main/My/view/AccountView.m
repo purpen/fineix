@@ -13,7 +13,7 @@
 @implementation AccountView
 
 +(instancetype)getAccountView{
-    AccountView *view = [[NSBundle mainBundle] loadNibNamed:@"MyView" owner:nil options:nil][7];
+    AccountView *view = [[NSBundle mainBundle] loadNibNamed:@"MyView" owner:nil options:nil][2];
     view.iconUrl.layer.masksToBounds = YES;
     view.iconUrl.layer.cornerRadius = 15;
     UserInfoEntity *entity = [UserInfoEntity defaultUserInfoEntity];
