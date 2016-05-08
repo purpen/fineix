@@ -35,7 +35,7 @@
         
         [_topView addSubview:self.imageView];
         [_imageView mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.size.mas_equalTo(CGSizeMake(115.5, 154));
+            make.size.mas_equalTo(CGSizeMake(86.62, 154));
             make.top.equalTo(_topView.mas_top).with.offset(15);
             make.left.equalTo(_topView.mas_left).with.offset(15);
         }];

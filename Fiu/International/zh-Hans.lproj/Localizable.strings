@@ -85,3 +85,19 @@
 //  分类
 "AllGoods" = "全部";
 
+//  滤镜
+"FiltersName" = "原图";
+"FiltersNameA" = "摩卡";
+"FiltersNameB" = "暮光";
+"FiltersNameC" = "候鸟";
+"FiltersNameD" = "戏剧";
+"FiltersNameE" = "夏日";
+"FiltersNameF" = "都市";
+"FiltersNameG" = "佳人";
+"FiltersNameH" = "摩登";
+"FiltersNameI" = "流年";
+"FiltersNameJ" = "日光";
+"FiltersNameK" = "午茶";
+
+
+

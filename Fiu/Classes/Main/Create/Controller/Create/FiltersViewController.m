@@ -36,16 +36,15 @@
 
 #pragma mark - 设置视图UI
 - (void)setFiltersControllerUI {
-    NSLog(@"＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝ %@", self.createType);
+    NSLog(@"＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝ 创建的类型：%@", self.createType);
     
     [self setNavViewUI];
     
     self.filtersImageView.image = self.filtersImg;
     [self.view addSubview:self.filtersImageView];
     [_filtersImageView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.size.mas_equalTo(CGSizeMake(SCREEN_WIDTH, SCREEN_WIDTH * 1.33));
+        make.size.mas_equalTo(CGSizeMake(SCREEN_WIDTH * 0.67, SCREEN_HEIGHT - 220));
         make.top.equalTo(self.view.mas_top).with.offset(50);
-        make.left.equalTo(self.view.mas_left).with.offset(0);
         make.centerX.equalTo(self.view);
     }];
     

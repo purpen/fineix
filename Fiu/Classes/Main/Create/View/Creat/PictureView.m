@@ -85,7 +85,7 @@
             [[NSNotificationCenter defaultCenter] postNotificationName:@"photoAlbums" object:self.photoAlbumArr];
             
         } else {
-            NSLog(@"＝＝＝＝＝＝＝ 加载图片错误%@ ＝＝＝＝＝＝＝", error);
+            [SVProgressHUD showErrorWithStatus:[error localizedDescription]];
         }
     }];
 }

@@ -383,6 +383,8 @@
 		D8A9AE081CDC673D00A9FCFB /* SelectAllFSceneViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D8A9AE071CDC673D00A9FCFB /* SelectAllFSceneViewController.m */; };
 		D8A9AE0C1CDC696F00A9FCFB /* SelectAllFSceneCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D8A9AE0B1CDC696F00A9FCFB /* SelectAllFSceneCollectionViewCell.m */; };
 		D8A9AE0F1CDC7F1E00A9FCFB /* SelectHotFSceneTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D8A9AE0E1CDC7F1E00A9FCFB /* SelectHotFSceneTableViewCell.m */; };
+		D8A9AE121CDF552200A9FCFB /* GoodsImgFlowLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = D8A9AE111CDF552200A9FCFB /* GoodsImgFlowLayout.m */; };
+		D8A9AE151CDF5A2F00A9FCFB /* GoodsImgCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D8A9AE141CDF5A2F00A9FCFB /* GoodsImgCollectionViewCell.m */; };
 		D8AEC7511CA8E3A000A868B6 /* libsqlite3.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 1F0EE6A41C9FA47B000631F0 /* libsqlite3.tbd */; };
 		D8AEC7521CA8E3AE00A868B6 /* libiconv.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 1F0EE6A21C9FA43C000631F0 /* libiconv.tbd */; };
 		D8AEC7531CA8E3BB00A868B6 /* libstdc++.6.0.9.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 280045201C805CD7005F5C2E /* libstdc++.6.0.9.tbd */; };
@@ -1074,6 +1076,10 @@
 		D8A9AE0B1CDC696F00A9FCFB /* SelectAllFSceneCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SelectAllFSceneCollectionViewCell.m; sourceTree = "<group>"; };
 		D8A9AE0D1CDC7F1E00A9FCFB /* SelectHotFSceneTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SelectHotFSceneTableViewCell.h; sourceTree = "<group>"; };
 		D8A9AE0E1CDC7F1E00A9FCFB /* SelectHotFSceneTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SelectHotFSceneTableViewCell.m; sourceTree = "<group>"; };
+		D8A9AE101CDF552200A9FCFB /* GoodsImgFlowLayout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GoodsImgFlowLayout.h; sourceTree = "<group>"; };
+		D8A9AE111CDF552200A9FCFB /* GoodsImgFlowLayout.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GoodsImgFlowLayout.m; sourceTree = "<group>"; };
+		D8A9AE131CDF5A2F00A9FCFB /* GoodsImgCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GoodsImgCollectionViewCell.h; sourceTree = "<group>"; };
+		D8A9AE141CDF5A2F00A9FCFB /* GoodsImgCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GoodsImgCollectionViewCell.m; sourceTree = "<group>"; };
 		E0438B4B24E3F747F761AF4C /* Pods-Fiu.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Fiu.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Fiu/Pods-Fiu.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -2398,6 +2404,10 @@
 		D8363A3E1CD8814600CC4AC0 /* TableViewCell */ = {
 			isa = PBXGroup;
 			children = (
+				D8A9AE101CDF552200A9FCFB /* GoodsImgFlowLayout.h */,
+				D8A9AE111CDF552200A9FCFB /* GoodsImgFlowLayout.m */,
+				D8A9AE131CDF5A2F00A9FCFB /* GoodsImgCollectionViewCell.h */,
+				D8A9AE141CDF5A2F00A9FCFB /* GoodsImgCollectionViewCell.m */,
 				D8363A411CD8814600CC4AC0 /* GoodsTableViewCell.h */,
 				D8363A421CD8814600CC4AC0 /* GoodsTableViewCell.m */,
 				D8363A431CD8814600CC4AC0 /* InfoBrandTableViewCell.h */,
@@ -3236,7 +3246,7 @@
 				D8363A5D1CD8814600CC4AC0 /* MallMenuTableViewCell.m in Sources */,
 				1FFFFF3F1CD05796008E1CDC /* BindIngViewController.m in Sources */,
 				D80360571CBF376B001920F9 /* PhoneNumLoginView.m in Sources */,
-				1FEF0B0F1CC0FC15006EF0C6 /* MyShippingAddressViewController.m in Sources */,
+				D8A9AE121CDF552200A9FCFB /* GoodsImgFlowLayout.m in Sources */,
 				D8A9AE051CDC3D5800A9FCFB /* SearchFSceneViewController.m in Sources */,
 				1FC6780F1CDAECE500535162 /* BonusCell.m in Sources */,
 				1F07A6591CC7A45300CF225F /* FriendCollectionViewCell.m in Sources */,
@@ -3256,6 +3266,7 @@
 				1FBC3E9A1CCE3766007CFA14 /* ShareViewController.m in Sources */,
 				1F3C0A961CBFA28300B84FEB /* GreatPeopleViewController.m in Sources */,
 				1FC677FD1CDAE78400535162 /* BonusViewController.m in Sources */,
+				D8A9AE151CDF5A2F00A9FCFB /* GoodsImgCollectionViewCell.m in Sources */,
 				D80360481CBF376B001920F9 /* SubscribeInterestedCollectionViewController.m in Sources */,
 				1FFFFF331CD055F2008E1CDC /* AXModel.m in Sources */,
 				D8363ABE1CD8835D00CC4AC0 /* HomeSceneListData.m in Sources */,

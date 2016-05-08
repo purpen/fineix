@@ -8,6 +8,8 @@
 //
 
 #import "GoodsTableViewCell.h"
+#import "GoodsImgFlowLayout.h"
+#import "GoodsImgCollectionViewCell.h"
 
 @implementation GoodsTableViewCell
 
@@ -49,42 +51,24 @@
     self.price.text = [NSString stringWithFormat:@"¥%.2f", model.marketPrice];
     
     if (model.banner.count > 0) {
-        for (NSInteger idx = 0; idx < model.banner.count; ++ idx) {
-            UIButton * imgBtn = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 265, 150)];
-            [imgBtn sd_setBackgroundImageWithURL:[NSURL URLWithString:model.banner[idx]] forState:(UIControlStateNormal)];
-            [self.goodsImgMarr addObject:imgBtn];
-        }
+        self.goodsImgMarr = [NSMutableArray arrayWithArray:model.banner];
         
-    } else {
-        for (NSInteger idx = 0; idx < model.bannerAsset.count; ++ idx) {
-            UIButton * imgBtn = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 265, 150)];
-            [imgBtn sd_setBackgroundImageWithURL:[NSURL URLWithString:model.bannerAsset[idx]] forState:(UIControlStateNormal)];
-            [self.goodsImgMarr addObject:imgBtn];
-        }
+    } else if (model.bannerAsset.count > 0) {
+        self.goodsImgMarr = [NSMutableArray arrayWithArray:model.bannerAsset];
     }
     
-    //  判断是否是第一次加载
-    if (self.goodsImgRoll.contentSize.width > SCREEN_WIDTH) {
-        [self.goodsImgRoll.subviews makeObjectsPerformSelector:@selector(removeFromSuperview)];
-        [self setRollImgViewUI:self.goodsImgMarr];
-    } else {
-        [self setRollImgViewUI:self.goodsImgMarr];
-    }
+    [self.goodsImgView reloadData];
+    
 }
 
 #pragma mark -
 - (void)setCellViewUI {
-    [self addSubview:self.goodsImgRoll];
-    [_goodsImgRoll mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.size.mas_equalTo(CGSizeMake(SCREEN_WIDTH, 150));
-        make.top.equalTo(self.mas_top).with.offset(10);
-        make.centerX.equalTo(self);
-    }];
+    [self addSubview:self.goodsImgView];
     
     [self addSubview:self.titleBg];
     [_titleBg mas_makeConstraints:^(MASConstraintMaker *make) {
         make.size.mas_equalTo(CGSizeMake(SCREEN_WIDTH * 0.654, 25));
-        make.top.equalTo(self.goodsImgRoll.mas_bottom).with.offset(10);
+        make.top.equalTo(self.goodsImgView.mas_bottom).with.offset(10);
         make.left.equalTo(self.mas_left).with.offset(5);
     }];
     
@@ -104,70 +88,35 @@
 }
 
 #pragma mark - 滚动
-- (UIScrollView *)goodsImgRoll {
-    if (!_goodsImgRoll) {
-        _goodsImgRoll = [[UIScrollView alloc] init];
-        _goodsImgRoll.showsHorizontalScrollIndicator = NO;
-        _goodsImgRoll.delegate = self;
-    }
-    return _goodsImgRoll;
-}
-
-- (void)setRollImgViewUI:(NSArray *)imgArr {
-    CGFloat space = 0;
-    CGFloat width = 0;
-    CGFloat viewWidth = 0;
-
-    for (UIButton * imgBtn in imgArr) {
-        NSInteger index = [imgArr indexOfObject:imgBtn];
-        if (index == 0) {
-            viewWidth = imgBtn.frame.size.width;
-        }
-        if (index % 2 != 0) {
-            UIImageView * line = [[UIImageView alloc] initWithFrame:CGRectMake(-11, 0, 4, 150)];
-            line.image = [UIImage imageNamed:@"Goods_image_bg"];
-            [imgBtn addSubview:line];
-        }
-        space = SCREEN_WIDTH * 0.186;
-        width = viewWidth + space/4;
-        imgBtn.frame = CGRectMake(space / 2 + (imgBtn.frame.size.width + space / 4) * index, 0, viewWidth, imgBtn.frame.size.height);
-        CGFloat y = index * width;
-        CGFloat value = (0 - y) / width;
-        CGFloat scale = fabs(cos(fabs(value) * M_PI/5));
-        imgBtn.transform = CGAffineTransformMakeScale(1.0, scale);
-        imgBtn.userInteractionEnabled = NO;
+- (UICollectionView *)goodsImgView {
+    if (!_goodsImgView) {
+        GoodsImgFlowLayout * flowLayout = [[GoodsImgFlowLayout alloc] init];
         
-        [self.goodsImgRoll addSubview:imgBtn];
+        _goodsImgView = [[UICollectionView alloc] initWithFrame:CGRectMake(0, 10, SCREEN_WIDTH, 150) collectionViewLayout:flowLayout];
+        _goodsImgView.delegate = self;
+        _goodsImgView.dataSource = self;
+        _goodsImgView.backgroundColor = [UIColor colorWithHexString:grayLineColor];
+        _goodsImgView.showsHorizontalScrollIndicator = NO;
+        [_goodsImgView registerClass:[GoodsImgCollectionViewCell class] forCellWithReuseIdentifier:@"GoodsImgCollectionViewCell"];
+        
     }
-    
-    self.goodsImgRoll.contentSize = CGSizeMake((space / 2 + width * imgArr.count) + space/4, 0);
+    return _goodsImgView;
 }
 
-- (void)scrollViewDidScroll:(UIScrollView *)scrollView {
-    CGFloat offset = scrollView.contentOffset.x;
-    if (offset < 0) {
-        return;
+#pragma mark UICollectionViewDelegate & dataSource
+- (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
+    return self.goodsImgMarr.count;
+}
+
+- (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
+    GoodsImgCollectionViewCell * cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"GoodsImgCollectionViewCell" forIndexPath:indexPath];
+    [cell.img downloadImage:self.goodsImgMarr[indexPath.row] place:[UIImage imageNamed:@""]];
+    if (indexPath.row % 2 != 0) {
+        UIImageView * line = [[UIImageView alloc] initWithFrame:CGRectMake(-11, 0, 4, 150)];
+        line.image = [UIImage imageNamed:@"Goods_image_bg"];
+        [cell addSubview:line];
     }
-    CGFloat space = 0;
-    CGFloat viewWidth = 0;
-    for (UIButton * view in self.goodsImgRoll.subviews) {
-        NSInteger index = [self.goodsImgRoll.subviews indexOfObject:view];
-        if (index == 0) {
-            viewWidth = view.frame.size.width;
-        }
-        space = SCREEN_WIDTH * 0.186;
-        CGFloat width = viewWidth + space/4;
-        CGFloat y = index * width;
-        CGFloat value = (offset - y)/width;
-        CGFloat scale = fabs(cos(fabs(value) * M_PI/5));
-        view.transform = CGAffineTransformMakeScale(1.0, scale);
-    }
-    CGFloat a = offset / (viewWidth + space/4);
-    if (a - (int)a > 0.5) {
-        _currentIndex = (int)a + 1;
-    } else {
-        _currentIndex = (int)a;
-    }
+    return cell;
 }
 
 #pragma mark - 标题

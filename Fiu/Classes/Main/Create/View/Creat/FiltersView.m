@@ -15,7 +15,20 @@
 - (instancetype)initWithFrame:(CGRect)frame {
     self = [super initWithFrame:frame];
     if (self) {
-        self.filtersTitle = [NSArray arrayWithObjects:@"赤",@"橙",@"黄",@"绿",@"青",@"赤",@"橙",@"黄",@"绿",@"青", nil];
+        self.filtersTitle = [NSArray arrayWithObjects:
+                             NSLocalizedString(@"FiltersName", nil),
+                             NSLocalizedString(@"FiltersNameA", nil),
+                             NSLocalizedString(@"FiltersNameB", nil),
+                             NSLocalizedString(@"FiltersNameC", nil),
+                             NSLocalizedString(@"FiltersNameD", nil),
+                             NSLocalizedString(@"FiltersNameE", nil),
+                             NSLocalizedString(@"FiltersNameF", nil),
+                             NSLocalizedString(@"FiltersNameG", nil),
+                             NSLocalizedString(@"FiltersNameH", nil),
+                             NSLocalizedString(@"FiltersNameI", nil),
+                             NSLocalizedString(@"FiltersNameJ", nil),
+                             NSLocalizedString(@"FiltersNameK", nil),
+                             nil];
         
         self.filters = [NSArray arrayWithObjects:
                         @"CIColorCrossPolynomial",
@@ -30,6 +43,8 @@
                         @"CIPhotoEffectProcess",
                         @"CIPhotoEffectTransfer",
                         @"CISepiaTone", nil];
+        
+        
         
         [self addSubview:self.filtersCollectionView];
     }
@@ -65,7 +80,7 @@
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
     static NSString * filtersCellID = @"FBFiltersCollectionViewCell";
     FBFiltersCollectionViewCell * cell = [collectionView dequeueReusableCellWithReuseIdentifier:filtersCellID forIndexPath:indexPath];
-    cell.filtersTitle.text = self.filters[indexPath.row];
+    cell.filtersTitle.text = self.filtersTitle[indexPath.row];
     
     UIImage * img = [[FBFilters alloc] initWithImage:[UIImage imageNamed:@"asd"] filterName:self.filters[indexPath.row]].filterImg;
     cell.filtersImageView.image = img;
