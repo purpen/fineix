@@ -26,22 +26,28 @@ const static NSInteger  peopleBtnTag = 64;
 }
 
 - (void)setLikeOrSuPeopleData:(NSMutableArray *)model {
-    for (LikeOrSuPeopleRow * row in model) {
-        [self.imgMarr addObject:row.user.avatarUrl];
-        [self.userIdMarr addObject:[NSString stringWithFormat:@"%zi", row.user.userId]];
+    if (model.count > 0) {
+        for (LikeOrSuPeopleRow * row in model) {
+            [self.imgMarr addObject:row.user.avatarUrl];
+            [self.userIdMarr addObject:[NSString stringWithFormat:@"%zi", row.user.userId]];
+        }
+        
+        [self.subviews makeObjectsPerformSelector:@selector(removeFromSuperview)];
+        
+        [self addLikePeopleHeader:model image:self.imgMarr];
+        
+        CGFloat num = model.count;
+        if (num/100 > 1) {
+            [_morePeopel setTitle:[NSString stringWithFormat:@"%.0f00＋", num/100] forState:(UIControlStateNormal)];
+        }
+        if (num/10 > 1) {
+            [_morePeopel setTitle:[NSString stringWithFormat:@"%.0f0＋", num/10] forState:(UIControlStateNormal)];
+        }
+        if (num/1000 > 1) {
+            [_morePeopel setTitle:[NSString stringWithFormat:@"%.0fk＋", num/1000] forState:(UIControlStateNormal)];
+        }
     }
-    [self addLikePeopleHeader:model image:self.imgMarr];
 
-    CGFloat num = model.count;
-    if (num/100 > 1) {
-        [_morePeopel setTitle:[NSString stringWithFormat:@"%.0f00＋", num/100] forState:(UIControlStateNormal)];
-    }
-    if (num/10 > 1) {
-        [_morePeopel setTitle:[NSString stringWithFormat:@"%.0f0＋", num/10] forState:(UIControlStateNormal)];
-    }
-    if (num/1000 > 1) {
-        [_morePeopel setTitle:[NSString stringWithFormat:@"%.0fk＋", num/1000] forState:(UIControlStateNormal)];
-    }
 }
 
 #pragma mark - 加载用户的头像

@@ -33,7 +33,7 @@ static NSString *const URLReport = @"/report_tip/save";
 
 #pragma mark - 网络请求
 - (void)networkReportData:(NSString *)type {
-    self.reportRequest = [FBAPI postWithUrlString:URLReport requestDictionary:@{@"target_id":self.targetId,@"type":@"4",@"evt":type} delegate:self];
+    self.reportRequest = [FBAPI postWithUrlString:URLReport requestDictionary:@{@"target_id":self.targetId, @"type":@"4", @"evt":type, @"application":@"3", @"from_to":@"3"} delegate:self];
     [self.reportRequest startRequestSuccess:^(FBRequest *request, id result) {
         [SVProgressHUD showSuccessWithStatus:[result valueForKey:@"message"]];
         [self setReportDoneUI];

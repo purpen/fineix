@@ -31,7 +31,7 @@
 "freleaseVcTitle" = "创建情景";
 "locationVcTitle" = "位置";
 "addTagVcTitle" = "添加标签";
-"chooseSceneVcTitle" = "选择情境";
+"chooseSceneVcTitle" = "选择情景";
 "filterVcTitle" = "滤镜";
 "GoodsCategoryVcTitle" = "好货分类";
 "GoodsInfoVcTitle" = "产品详情";
@@ -53,6 +53,7 @@
 "flashError" = "闪光灯不可用";
 "cameraOpen" = "请开启相机权限";
 "cameraError" = "相机不可用";
+"searchFScene" = "搜索情境";
 
 //  搜索框提示
 "searchLocation" = "搜索地点";

@@ -133,7 +133,7 @@ static NSString *const URLSceneGoods = @"/scene_product/getlist";
 #pragma mark 给此场景点赞的用户
 - (void)networkLikePeopleData {
     [self.likePeopleMarr removeAllObjects];
-    
+    [SVProgressHUD show];
     self.likePeopleRequest = [FBAPI postWithUrlString:URLLikeScenePeople requestDictionary:@{@"type":@"sight", @"event":@"love", @"page":@"1" , @"size":@"10000", @"id":self.sceneId} delegate:self];
     [self.likePeopleRequest startRequestSuccess:^(FBRequest *request, id result) {
         NSArray * likePeopleArr = [[result valueForKey:@"data"] valueForKey:@"rows"];
@@ -141,9 +141,9 @@ static NSString *const URLSceneGoods = @"/scene_product/getlist";
             LikeOrSuPeopleRow * likePeopleModel = [[LikeOrSuPeopleRow alloc] initWithDictionary:likePeopleDic];
             [self.likePeopleMarr addObject:likePeopleModel];
         }
-        
         [self.sceneTableView reloadData];
-
+        [SVProgressHUD dismiss];
+        
     } failure:^(FBRequest *request, NSError *error) {
         [SVProgressHUD showErrorWithStatus:[error localizedDescription]];
     }];
@@ -195,24 +195,28 @@ static NSString *const URLSceneGoods = @"/scene_product/getlist";
 #pragma mark 给此场景点赞
 - (void)networkLikeSceneData {
     if (self.likeScene.likeBtn.selected == NO) {
+        self.likeScene.likeBtn.selected = YES;
         self.likeSceneRequest = [FBAPI postWithUrlString:URLLikeScene requestDictionary:@{@"id":self.sceneId} delegate:self];
+        [SVProgressHUD show];
         [self.likeSceneRequest startRequestSuccess:^(FBRequest *request, id result) {
             [SVProgressHUD showSuccessWithStatus:[result valueForKey:@"message"]];
             [self networkRequestData];
             [self networkLikePeopleData];
-            self.likeScene.likeBtn.selected = YES;
+            [SVProgressHUD dismiss];
             
         } failure:^(FBRequest *request, NSError *error) {
             [SVProgressHUD showErrorWithStatus:[error localizedDescription]];
         }];
     
     } else if (self.likeScene.likeBtn.selected == YES) {
+        self.likeScene.likeBtn.selected = NO;
         self.cancelLikeRequest = [FBAPI postWithUrlString:URLCancelLike requestDictionary:@{@"id":self.sceneId} delegate:self];
+        [SVProgressHUD show];
         [self.cancelLikeRequest startRequestSuccess:^(FBRequest *request, id result) {
             [SVProgressHUD showSuccessWithStatus:[result valueForKey:@"message"]];
             [self networkRequestData];
             [self networkLikePeopleData];
-             self.likeScene.likeBtn.selected = NO;
+            [SVProgressHUD dismiss];
             
         } failure:^(FBRequest *request, NSError *error) {
             [SVProgressHUD showErrorWithStatus:[error localizedDescription]];

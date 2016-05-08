@@ -7,8 +7,11 @@
 //
 
 #import "FBPictureViewController.h"
+#import <SVProgressHUD/SVProgressHUD.h>
 
 @interface AddTagViewController : FBPictureViewController
+
+@pro_strong FBRequest           *   tagRequest;         //  标签
 
 @pro_strong UIButton            *   sureBtn;            //  确定按钮
 

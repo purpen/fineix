@@ -53,6 +53,9 @@
 	if(![dictionary[@"user_id"] isKindOfClass:[NSNull class]]){
 		self.userId = [dictionary[@"user_id"] integerValue];
 	}
+    if(![dictionary[@"is_expert"] isKindOfClass:[NSNull class]]){
+        self.isExpert = [dictionary[@"is_expert"] integerValue];
+    }
 
 	if(![dictionary[@"user_rank"] isKindOfClass:[NSNull class]]){
 		self.userRank = dictionary[@"user_rank"];

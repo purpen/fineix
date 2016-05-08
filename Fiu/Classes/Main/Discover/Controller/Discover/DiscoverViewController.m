@@ -89,7 +89,7 @@ static NSString *const URLTagS = @"/scene_tags/getlist";
 #pragma mark 情景列表
 - (void)networkFiuSceneData {
     [SVProgressHUD show];
-    self.fiuSceneRequest = [FBAPI getWithUrlString:URLFiuScene requestDictionary:@{@"stick":@"1"} delegate:self];
+    self.fiuSceneRequest = [FBAPI getWithUrlString:URLFiuScene requestDictionary:@{@"sort":@"2",@"page":@"1",@"size":@"10"} delegate:self];
     [self.fiuSceneRequest startRequestSuccess:^(FBRequest *request, id result) {
         NSArray * fiuSceneArr = [[result valueForKey:@"data"] valueForKey:@"rows"];
         for (NSDictionary * fiuSceneDic in fiuSceneArr) {

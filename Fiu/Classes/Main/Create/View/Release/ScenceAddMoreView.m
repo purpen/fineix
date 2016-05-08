@@ -336,8 +336,11 @@ static const NSInteger btnTag = 100;
     if (!_addScene) {
         _addScene = [[UIView alloc] init];
         _addScene.backgroundColor = [UIColor whiteColor];
-
         [_addScene addSubview:self.addSceneBtn];
+        UILabel * line = [[UILabel alloc] initWithFrame:CGRectMake(0, 44, SCREEN_WIDTH, 1)];
+        line.backgroundColor = [UIColor colorWithHexString:lineGrayColor];
+        [_addScene addSubview:line];
+        [_addScene addSubview:self.selectFSceneBtn];
     }
     return _addScene;
 }
@@ -352,20 +355,52 @@ static const NSInteger btnTag = 100;
         _addSceneBtn.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
         _addSceneBtn.backgroundColor = [UIColor whiteColor];
         [_addSceneBtn addTarget:self action:@selector(chooseScene) forControlEvents:(UIControlEventTouchUpInside)];
+        
+        UIButton * goIcon = [[UIButton alloc] initWithFrame:CGRectMake(SCREEN_WIDTH - 59, 0, 44, 44)];
+        [goIcon setImage:[UIImage imageNamed:@"entr"] forState:(UIControlStateNormal)];
+        [_addSceneBtn addSubview:goIcon];
+        
     }
     return _addSceneBtn;
 }
 
 //  改变高度
-- (void)changeSceneFrame {
+- (void)changeSceneFrame:(NSString *)title {
     [_addScene mas_updateConstraints:^(MASConstraintMaker *make) {
         make.height.equalTo(@88);
     }];
+    
+    [self addSelectFSceneBtn:title];
+
+}
+
+- (UIButton *)selectFSceneBtn {
+    if (!_selectFSceneBtn) {
+        self.selectFSceneBtn = [[UIButton alloc] init];
+        [self.selectFSceneBtn setTitleColor:[UIColor colorWithHexString:fineixColor] forState:(UIControlStateNormal)];
+        self.selectFSceneBtn.titleLabel.font = [UIFont systemFontOfSize:12];
+        self.selectFSceneBtn.layer.borderColor = [UIColor colorWithHexString:fineixColor].CGColor;
+        self.selectFSceneBtn.layer.borderWidth = 0.5f;
+        self.selectFSceneBtn.layer.cornerRadius = 3;
+        self.selectFSceneBtn.layer.masksToBounds = YES;
+    }
+    return _selectFSceneBtn;
+}
+
+- (void)addSelectFSceneBtn:(NSString *)title {
+    CGFloat btnW = [title boundingRectWithSize:CGSizeMake(320, 1000) options:(NSStringDrawingUsesLineFragmentOrigin) attributes:nil context:nil].size.width;
+    self.selectFSceneBtn.frame = CGRectMake(15, 52, btnW + 20, 29);
+    [self.selectFSceneBtn layoutIfNeeded];
+    [self.selectFSceneBtn setTitle:title forState:(UIControlStateNormal)];
 }
 
 //  去选择所属的情境
 - (void)chooseScene {
     SelectSceneViewController * selectSceneVC = [[SelectSceneViewController alloc] init];
+    selectSceneVC.getIdxAndTitltBlock = ^(NSString * idx, NSString * title) {
+        [self changeSceneFrame:title];
+        self.fiuId = idx;
+    };
     [self.nav pushViewController:selectSceneVC animated:YES];
 }
 

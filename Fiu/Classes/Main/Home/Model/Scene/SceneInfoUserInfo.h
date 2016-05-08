@@ -21,6 +21,7 @@
 @property (nonatomic, strong) NSString * summary;
 @property (nonatomic, assign) NSInteger userId;
 @property (nonatomic, strong) NSString * userRank;
+@property (nonatomic, assign) NSInteger isExpert;
 
 -(instancetype)initWithDictionary:(NSDictionary *)dictionary;
 @end

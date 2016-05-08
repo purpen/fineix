@@ -1,14 +1,14 @@
 //
-//  FiuSceneCollectionViewCell.m
+//  SelectAllFSceneCollectionViewCell.m
 //  Fiu
 //
-//  Created by FLYang on 16/4/12.
+//  Created by FLYang on 16/5/6.
 //  Copyright © 2016年 taihuoniao. All rights reserved.
 //
 
-#import "FiuSceneCollectionViewCell.h"
+#import "SelectAllFSceneCollectionViewCell.h"
 
-@implementation FiuSceneCollectionViewCell
+@implementation SelectAllFSceneCollectionViewCell
 
 - (instancetype)initWithFrame:(CGRect)frame {
     self = [super initWithFrame:frame];
@@ -20,21 +20,46 @@
     return self;
 }
 
-- (void)setFiuSceneList:(FiuSceneRow *)model {
+- (void)setSelected:(BOOL)selected {
+    if (selected) {
+        [UIView animateWithDuration:.3 animations:^{
+            self.bgImg.alpha = 1;
+        }];
+        
+    } else {
+        [UIView animateWithDuration:.3 animations:^{
+            self.bgImg.alpha = 0;
+        }];
+    }
+}
+
+- (void)setAllFiuSceneListData:(FiuSceneInfoData *)model {
     [self.sceneImage downloadImage:model.coverUrl place:[UIImage imageNamed:@""]];
     [self titleTextStyle:model.title];
     self.locationLab.text = model.address;
 }
 
-#pragma mark - 
+#pragma mark -
 - (void)setCollectionCellViewUI {
     [self addSubview:self.sceneImage];
+    
+    [self addSubview:self.bgImg];
+}
+
+#pragma mark - 遮罩
+- (UIImageView *)bgImg {
+    if (!_bgImg) {
+        _bgImg = [[UIImageView alloc] initWithFrame:self.bounds];
+        _bgImg.image = [UIImage imageNamed:@"shade"];
+        _bgImg.alpha = 0;
+    }
+    return _bgImg;
 }
 
 #pragma mark - 情景图片
 - (UIImageView *)sceneImage {
     if (!_sceneImage) {
-        _sceneImage = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, self.frame.size.width, self.frame.size.height)];
+        _sceneImage = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, (SCREEN_WIDTH - 15)/2, (SCREEN_WIDTH - 15)/2 * 1.77)];
         _sceneImage.contentMode = UIViewContentModeScaleAspectFill;
         _sceneImage.clipsToBounds  = YES;
         //  添加渐变层
@@ -88,11 +113,6 @@
         [self.titleLab mas_updateConstraints:^(MASConstraintMaker *make) {
             make.height.mas_equalTo(@40);
         }];
-        
-    } else {
-        [self.titleLab mas_updateConstraints:^(MASConstraintMaker *make) {
-            make.height.mas_equalTo(@15);
-        }];
     }
     NSMutableAttributedString * titleText = [[NSMutableAttributedString alloc] initWithString:title];
     NSMutableParagraphStyle * paragraphStyle = [[NSMutableParagraphStyle alloc] init];
@@ -124,5 +144,6 @@
     }
     return _locationLab;
 }
+
 
 @end

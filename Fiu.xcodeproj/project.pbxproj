@@ -369,6 +369,10 @@
 		D8A9ADF21CDAF41200A9FCFB /* ChildTagsData.m in Sources */ = {isa = PBXBuildFile; fileRef = D8A9ADEE1CDAF41200A9FCFB /* ChildTagsData.m */; };
 		D8A9ADF31CDAF41200A9FCFB /* ChildTagsTag.m in Sources */ = {isa = PBXBuildFile; fileRef = D8A9ADF01CDAF41200A9FCFB /* ChildTagsTag.m */; };
 		D8A9ADF61CDB128000A9FCFB /* ChildTagsCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D8A9ADF51CDB127F00A9FCFB /* ChildTagsCollectionViewCell.m */; };
+		D8A9AE051CDC3D5800A9FCFB /* SearchFSceneViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D8A9AE041CDC3D5800A9FCFB /* SearchFSceneViewController.m */; };
+		D8A9AE081CDC673D00A9FCFB /* SelectAllFSceneViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D8A9AE071CDC673D00A9FCFB /* SelectAllFSceneViewController.m */; };
+		D8A9AE0C1CDC696F00A9FCFB /* SelectAllFSceneCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D8A9AE0B1CDC696F00A9FCFB /* SelectAllFSceneCollectionViewCell.m */; };
+		D8A9AE0F1CDC7F1E00A9FCFB /* SelectHotFSceneTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D8A9AE0E1CDC7F1E00A9FCFB /* SelectHotFSceneTableViewCell.m */; };
 		D8AEC7511CA8E3A000A868B6 /* libsqlite3.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 1F0EE6A41C9FA47B000631F0 /* libsqlite3.tbd */; };
 		D8AEC7521CA8E3AE00A868B6 /* libiconv.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 1F0EE6A21C9FA43C000631F0 /* libiconv.tbd */; };
 		D8AEC7531CA8E3BB00A868B6 /* libstdc++.6.0.9.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 280045201C805CD7005F5C2E /* libstdc++.6.0.9.tbd */; };
@@ -1039,6 +1043,14 @@
 		D8A9ADF01CDAF41200A9FCFB /* ChildTagsTag.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChildTagsTag.m; sourceTree = "<group>"; };
 		D8A9ADF41CDB127F00A9FCFB /* ChildTagsCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChildTagsCollectionViewCell.h; sourceTree = "<group>"; };
 		D8A9ADF51CDB127F00A9FCFB /* ChildTagsCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChildTagsCollectionViewCell.m; sourceTree = "<group>"; };
+		D8A9AE031CDC3D5800A9FCFB /* SearchFSceneViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SearchFSceneViewController.h; sourceTree = "<group>"; };
+		D8A9AE041CDC3D5800A9FCFB /* SearchFSceneViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SearchFSceneViewController.m; sourceTree = "<group>"; };
+		D8A9AE061CDC673D00A9FCFB /* SelectAllFSceneViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SelectAllFSceneViewController.h; sourceTree = "<group>"; };
+		D8A9AE071CDC673D00A9FCFB /* SelectAllFSceneViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SelectAllFSceneViewController.m; sourceTree = "<group>"; };
+		D8A9AE0A1CDC696F00A9FCFB /* SelectAllFSceneCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SelectAllFSceneCollectionViewCell.h; sourceTree = "<group>"; };
+		D8A9AE0B1CDC696F00A9FCFB /* SelectAllFSceneCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SelectAllFSceneCollectionViewCell.m; sourceTree = "<group>"; };
+		D8A9AE0D1CDC7F1E00A9FCFB /* SelectHotFSceneTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SelectHotFSceneTableViewCell.h; sourceTree = "<group>"; };
+		D8A9AE0E1CDC7F1E00A9FCFB /* SelectHotFSceneTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SelectHotFSceneTableViewCell.m; sourceTree = "<group>"; };
 		E0438B4B24E3F747F761AF4C /* Pods-Fiu.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Fiu.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Fiu/Pods-Fiu.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -1917,6 +1929,7 @@
 		D812803E1CAA8532007CF08B /* View */ = {
 			isa = PBXGroup;
 			children = (
+				D8A9AE091CDC695500A9FCFB /* SelectScene */,
 				D8A9AD691CD9DFBC00A9FCFB /* Release */,
 				D8A9AD6E1CD9DFBC00A9FCFB /* Creat */,
 				D8A9AD811CD9DFBC00A9FCFB /* Url */,
@@ -2839,6 +2852,10 @@
 			children = (
 				D8A9ADA11CD9E2E700A9FCFB /* SelectSceneViewController.h */,
 				D8A9ADA21CD9E2E700A9FCFB /* SelectSceneViewController.m */,
+				D8A9AE031CDC3D5800A9FCFB /* SearchFSceneViewController.h */,
+				D8A9AE041CDC3D5800A9FCFB /* SearchFSceneViewController.m */,
+				D8A9AE061CDC673D00A9FCFB /* SelectAllFSceneViewController.h */,
+				D8A9AE071CDC673D00A9FCFB /* SelectAllFSceneViewController.m */,
 			);
 			path = SelectScene;
 			sourceTree = "<group>";
@@ -2917,6 +2934,17 @@
 				D8A9ADF01CDAF41200A9FCFB /* ChildTagsTag.m */,
 			);
 			path = ChildTags;
+			sourceTree = "<group>";
+		};
+		D8A9AE091CDC695500A9FCFB /* SelectScene */ = {
+			isa = PBXGroup;
+			children = (
+				D8A9AE0A1CDC696F00A9FCFB /* SelectAllFSceneCollectionViewCell.h */,
+				D8A9AE0B1CDC696F00A9FCFB /* SelectAllFSceneCollectionViewCell.m */,
+				D8A9AE0D1CDC7F1E00A9FCFB /* SelectHotFSceneTableViewCell.h */,
+				D8A9AE0E1CDC7F1E00A9FCFB /* SelectHotFSceneTableViewCell.m */,
+			);
+			path = SelectScene;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -3134,6 +3162,7 @@
 				1FFFFF3F1CD05796008E1CDC /* BindIngViewController.m in Sources */,
 				D80360571CBF376B001920F9 /* PhoneNumLoginView.m in Sources */,
 				1FEF0B0F1CC0FC15006EF0C6 /* MyShippingAddressViewController.m in Sources */,
+				D8A9AE051CDC3D5800A9FCFB /* SearchFSceneViewController.m in Sources */,
 				1FC6780F1CDAECE500535162 /* BonusCell.m in Sources */,
 				1F07A6591CC7A45300CF225F /* FriendCollectionViewCell.m in Sources */,
 				1FEF0B151CC0FC15006EF0C6 /* BackImagView.m in Sources */,
@@ -3242,6 +3271,7 @@
 				1F3C0A911CBF95AC00B84FEB /* SubscribePeopleTableViewCell.m in Sources */,
 				1FC678021CDAE97B00535162 /* HistoryBonusViewController.m in Sources */,
 				D8363A6D1CD8818E00CC4AC0 /* GoodsCategoryViewController.m in Sources */,
+				D8A9AE081CDC673D00A9FCFB /* SelectAllFSceneViewController.m in Sources */,
 				D8363A281CD8809400CC4AC0 /* BrandInfoData.m in Sources */,
 				D8A9ADBD1CD9E2E700A9FCFB /* AddUrlViewController.m in Sources */,
 				D8363A2A1CD8809400CC4AC0 /* GoodsData.m in Sources */,
@@ -3342,6 +3372,7 @@
 				D8A9AD861CD9DFBC00A9FCFB /* CameraView.m in Sources */,
 				1FC678251CDB000200535162 /* DeliveryAddressCell.m in Sources */,
 				1F4061B71CCA246600D6E9B0 /* AccountView.m in Sources */,
+				D8A9AE0C1CDC696F00A9FCFB /* SelectAllFSceneCollectionViewCell.m in Sources */,
 				D8035F2F1CB77D0C001920F9 /* UIImage+Helper.m in Sources */,
 				D8363A591CD8814600CC4AC0 /* InfoGoodsHighlightsTableViewCell.m in Sources */,
 				1FE60E391CD30A2100045117 /* MyOderInfoViewController.m in Sources */,
@@ -3351,6 +3382,7 @@
 				D8A9ACB51CD89E0000A9FCFB /* FiuSceneInfoCounter.m in Sources */,
 				D81281101CAA8532007CF08B /* AppDelegate.mm in Sources */,
 				D8363A571CD8814600CC4AC0 /* GoodsTableViewCell.m in Sources */,
+				D8A9AE0F1CDC7F1E00A9FCFB /* SelectHotFSceneTableViewCell.m in Sources */,
 				D8A9AD8A1CD9DFBC00A9FCFB /* FBPictureView.m in Sources */,
 				1FC6781D1CDAF9E100535162 /* DeliveryAddressViewController.m in Sources */,
 				D83639B31CD0661E00CC4AC0 /* FBCityViewController.m in Sources */,

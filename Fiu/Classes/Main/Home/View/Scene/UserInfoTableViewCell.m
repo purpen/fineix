@@ -64,7 +64,13 @@
     self.city.text = [self abouText:self.city withText:model.address];
     [self.userHeader downloadImage:model.userInfo.avatarUrl place:[UIImage imageNamed:@""]];
     self.userName.text = model.userInfo.nickname;
-    self.userProfile.text = model.userInfo.summary;
+    //  是否是达人
+    if (model.userInfo.isExpert == 1) {
+        self.userProfile.text = [NSString stringWithFormat:@"达人｜%@",model.userInfo.summary];
+    } else if (model.userInfo.isExpert == 0) {
+        self.userProfile.text = model.userInfo.summary;
+    }
+
     self.time.text = [NSString stringWithFormat:@"| %@", model.createdAt];
     
     if (model.loveCount/1000 > 1) {

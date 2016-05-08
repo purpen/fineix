@@ -34,6 +34,8 @@
 - (UIImageView *)sceneImage {
     if (!_sceneImage) {
         _sceneImage = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, (SCREEN_WIDTH - 15)/2, (SCREEN_WIDTH - 15)/2 * 1.77)];
+        _sceneImage.contentMode = UIViewContentModeScaleAspectFill;
+        _sceneImage.clipsToBounds  = YES;
         //  添加渐变层
         CAGradientLayer * shadow = [CAGradientLayer layer];
         shadow.startPoint = CGPointMake(0, 0);

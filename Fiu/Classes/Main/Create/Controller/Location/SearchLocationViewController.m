@@ -240,6 +240,7 @@
     }
     cell.textLabel.text = self.locationNameMarr[indexPath.row];
     cell.detailTextLabel.text = self.locationAddressMarr[indexPath.row];
+    cell.detailTextLabel.textColor = [UIColor colorWithHexString:titleColor];
     cell.backgroundColor = [UIColor colorWithHexString:grayLineColor alpha:1];
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
     return cell;
