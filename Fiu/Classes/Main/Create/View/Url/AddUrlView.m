@@ -18,11 +18,15 @@ static const NSInteger webBtnTag = 200;
         
         self.backgroundColor = [UIColor colorWithHexString:lineGrayColor alpha:1];
         
-        self.webTitle = [NSMutableArray arrayWithObjects:@"京东", @"淘宝", @"天猫", nil];
+        self.webTitle = [NSMutableArray arrayWithObjects:
+                         NSLocalizedString(@"JD", nil),
+                         NSLocalizedString(@"TaoBao", nil),
+                         NSLocalizedString(@"Tmall", nil),
+                         nil];
         
         [self addSubview:self.webBtnView];
         [_webBtnView mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.size.mas_equalTo(CGSizeMake(300, 100));
+            make.size.mas_equalTo(CGSizeMake(SCREEN_WIDTH, 100));
             make.top.equalTo(self.mas_top).with.offset(0);
             make.centerX.equalTo(self);
         }];
@@ -45,16 +49,21 @@ static const NSInteger webBtnTag = 200;
 //  创建购物网站按钮
 - (void)initWebButton:(NSMutableArray *)btnTitle {
     for (NSUInteger idx = 0; idx < btnTitle.count; ++ idx) {
-        UIButton * webBtn = [[UIButton alloc] initWithFrame:CGRectMake(((SCREEN_WIDTH - 180)/3 + 60) * idx, 0, 60, 60)];
-        [webBtn setTitle:btnTitle[idx] forState:(UIControlStateNormal)];
-        [webBtn setTitleColor:[UIColor blackColor] forState:(UIControlStateNormal)];
+        UIButton * webBtn = [[UIButton alloc] initWithFrame:CGRectMake(((((SCREEN_WIDTH - 180)/4)*idx) + (60*idx)) + ((SCREEN_WIDTH-180)/4), 0, 60, 60)];
         webBtn.titleLabel.font = [UIFont systemFontOfSize:14];
-        [webBtn setTitleEdgeInsets:(UIEdgeInsetsMake(100, 0, 0, 0))];
         webBtn.layer.cornerRadius = 8;
+        webBtn.layer.masksToBounds = YES;
+        [webBtn setImage:[UIImage imageNamed:[NSString stringWithFormat:@"web_%zi", idx]] forState:(UIControlStateNormal)];
         webBtn.tag = webBtnTag + idx;
         [webBtn addTarget:self action:@selector(webBtnClick:) forControlEvents:(UIControlEventTouchUpInside)];
-        [webBtn setBackgroundImage:[UIImage imageNamed:[NSString stringWithFormat:@"web_%zi", idx]] forState:(UIControlStateNormal)];
         [_webBtnView addSubview:webBtn];
+        
+        UILabel * webLab = [[UILabel alloc] initWithFrame:CGRectMake(((((SCREEN_WIDTH - 180)/4)*idx) + (60*idx)) + ((SCREEN_WIDTH-180)/4), 75, 60, 15)];
+        webLab.text = btnTitle[idx];
+        webLab.textColor = [UIColor blackColor];
+        webLab.textAlignment = NSTextAlignmentCenter;
+        webLab.font = [UIFont systemFontOfSize:14];
+        [_webBtnView addSubview:webLab];
     }
 }
 

@@ -385,6 +385,9 @@
 		D8A9AE0F1CDC7F1E00A9FCFB /* SelectHotFSceneTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D8A9AE0E1CDC7F1E00A9FCFB /* SelectHotFSceneTableViewCell.m */; };
 		D8A9AE121CDF552200A9FCFB /* GoodsImgFlowLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = D8A9AE111CDF552200A9FCFB /* GoodsImgFlowLayout.m */; };
 		D8A9AE151CDF5A2F00A9FCFB /* GoodsImgCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D8A9AE141CDF5A2F00A9FCFB /* GoodsImgCollectionViewCell.m */; };
+		D8A9AE191CE05D3F00A9FCFB /* ChooseTagsCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D8A9AE181CE05D3F00A9FCFB /* ChooseTagsCollectionViewCell.m */; };
+		D8A9AE1C1CE0772700A9FCFB /* UsedTagCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D8A9AE1B1CE0772700A9FCFB /* UsedTagCollectionViewCell.m */; };
+		D8A9AE1F1CE07F7900A9FCFB /* TagFlowLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = D8A9AE1E1CE07F7900A9FCFB /* TagFlowLayout.m */; };
 		D8AEC7511CA8E3A000A868B6 /* libsqlite3.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 1F0EE6A41C9FA47B000631F0 /* libsqlite3.tbd */; };
 		D8AEC7521CA8E3AE00A868B6 /* libiconv.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 1F0EE6A21C9FA43C000631F0 /* libiconv.tbd */; };
 		D8AEC7531CA8E3BB00A868B6 /* libstdc++.6.0.9.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 280045201C805CD7005F5C2E /* libstdc++.6.0.9.tbd */; };
@@ -1080,6 +1083,12 @@
 		D8A9AE111CDF552200A9FCFB /* GoodsImgFlowLayout.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GoodsImgFlowLayout.m; sourceTree = "<group>"; };
 		D8A9AE131CDF5A2F00A9FCFB /* GoodsImgCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GoodsImgCollectionViewCell.h; sourceTree = "<group>"; };
 		D8A9AE141CDF5A2F00A9FCFB /* GoodsImgCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GoodsImgCollectionViewCell.m; sourceTree = "<group>"; };
+		D8A9AE171CE05D3F00A9FCFB /* ChooseTagsCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChooseTagsCollectionViewCell.h; sourceTree = "<group>"; };
+		D8A9AE181CE05D3F00A9FCFB /* ChooseTagsCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChooseTagsCollectionViewCell.m; sourceTree = "<group>"; };
+		D8A9AE1A1CE0772700A9FCFB /* UsedTagCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UsedTagCollectionViewCell.h; sourceTree = "<group>"; };
+		D8A9AE1B1CE0772700A9FCFB /* UsedTagCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UsedTagCollectionViewCell.m; sourceTree = "<group>"; };
+		D8A9AE1D1CE07F7900A9FCFB /* TagFlowLayout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TagFlowLayout.h; sourceTree = "<group>"; };
+		D8A9AE1E1CE07F7900A9FCFB /* TagFlowLayout.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TagFlowLayout.m; sourceTree = "<group>"; };
 		E0438B4B24E3F747F761AF4C /* Pods-Fiu.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Fiu.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Fiu/Pods-Fiu.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -2003,6 +2012,7 @@
 		D812803E1CAA8532007CF08B /* View */ = {
 			isa = PBXGroup;
 			children = (
+				D8A9AE161CE05D3500A9FCFB /* Tag */,
 				D8A9AE091CDC695500A9FCFB /* SelectScene */,
 				D8A9AD691CD9DFBC00A9FCFB /* Release */,
 				D8A9AD6E1CD9DFBC00A9FCFB /* Creat */,
@@ -3025,6 +3035,19 @@
 			path = SelectScene;
 			sourceTree = "<group>";
 		};
+		D8A9AE161CE05D3500A9FCFB /* Tag */ = {
+			isa = PBXGroup;
+			children = (
+				D8A9AE171CE05D3F00A9FCFB /* ChooseTagsCollectionViewCell.h */,
+				D8A9AE181CE05D3F00A9FCFB /* ChooseTagsCollectionViewCell.m */,
+				D8A9AE1A1CE0772700A9FCFB /* UsedTagCollectionViewCell.h */,
+				D8A9AE1B1CE0772700A9FCFB /* UsedTagCollectionViewCell.m */,
+				D8A9AE1D1CE07F7900A9FCFB /* TagFlowLayout.h */,
+				D8A9AE1E1CE07F7900A9FCFB /* TagFlowLayout.m */,
+			);
+			path = Tag;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -3288,6 +3311,7 @@
 				D8A9ADE51CD9F92B00A9FCFB /* FBFilters.m in Sources */,
 				D8A9ADE01CD9F92B00A9FCFB /* TaoBaoGoods.m in Sources */,
 				D8363A521CD8814600CC4AC0 /* MallMenuCollectionViewCell.m in Sources */,
+				D8A9AE1F1CE07F7900A9FCFB /* TagFlowLayout.m in Sources */,
 				488521861CD470E500D8CE19 /* CounterModel.m in Sources */,
 				1F5038AB1CDC406C004F76AD /* ProductInfoView.m in Sources */,
 				D8A9AD8F1CD9DFBC00A9FCFB /* AddUrlView.m in Sources */,
@@ -3333,6 +3357,7 @@
 				1F8EACE81CDDD1AE00C51235 /* FBPayTheWayViewController.m in Sources */,
 				D8363A2F1CD8809400CC4AC0 /* Category.m in Sources */,
 				D8A9AD8B1CD9DFBC00A9FCFB /* FiltersView.m in Sources */,
+				D8A9AE1C1CE0772700A9FCFB /* UsedTagCollectionViewCell.m in Sources */,
 				D812815E1CAA8532007CF08B /* main.m in Sources */,
 				1F8EACDF1CDDB0ED00C51235 /* CommenttwoViewController.m in Sources */,
 				1FE60E5B1CD32FD200045117 /* CommentsTableViewCell.m in Sources */,
@@ -3448,6 +3473,7 @@
 				D87B69C01CC726BA00199EFE /* GroupHeaderView.m in Sources */,
 				D8A9ACE01CD8A49100A9FCFB /* FiuSceneViewController.m in Sources */,
 				1F4061A81CC9E92C00D6E9B0 /* ImproView.m in Sources */,
+				D8A9AE191CE05D3F00A9FCFB /* ChooseTagsCollectionViewCell.m in Sources */,
 				D83639BE1CD0932000CC4AC0 /* CommentData.m in Sources */,
 				1F5038A11CDC3F79004F76AD /* OrderInfoCell.m in Sources */,
 				D8363A821CD882D900CC4AC0 /* SceneSubscribeViewController.m in Sources */,
@@ -3573,7 +3599,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 9.2;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
-				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE = "bedd3589-3e72-4b5f-9457-915cc83ecf78";
 				SDKROOT = iphoneos;
 			};
 			name = Debug;
@@ -3611,7 +3637,7 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.2;
 				MTL_ENABLE_DEBUG_INFO = NO;
-				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE = "bedd3589-3e72-4b5f-9457-915cc83ecf78";
 				SDKROOT = iphoneos;
 				VALIDATE_PRODUCT = YES;
 			};
@@ -3650,7 +3676,7 @@
 				OTHER_LIBTOOLFLAGS = "";
 				PRODUCT_BUNDLE_IDENTIFIER = com.THN.fineix;
 				PRODUCT_NAME = Fiu;
-				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE = "bedd3589-3e72-4b5f-9457-915cc83ecf78";
 				USER_HEADER_SEARCH_PATHS = "$(SRCROOT)";
 			};
 			name = Debug;
@@ -3688,7 +3714,7 @@
 				OTHER_LIBTOOLFLAGS = "";
 				PRODUCT_BUNDLE_IDENTIFIER = com.THN.fineix;
 				PRODUCT_NAME = Fiu;
-				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE = "bedd3589-3e72-4b5f-9457-915cc83ecf78";
 				USER_HEADER_SEARCH_PATHS = "$(SRCROOT)";
 			};
 			name = Release;

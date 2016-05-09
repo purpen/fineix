@@ -60,6 +60,11 @@
 "searchGoods" = "搜索产品";
 "search" = "搜索";
 
+//  按钮
+"JD" = "京东";
+"TaoBao" = "淘宝";
+"Tmall" = "天猫";
+
 //  评论
 "comment" = "评论一下";
 "reply" = "回复:";
