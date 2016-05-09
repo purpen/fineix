@@ -72,7 +72,7 @@ const static NSInteger btnTag = 100;
 
 //  设置导航条
 - (void)showLineWithButton {
-    self.line = [[UILabel alloc] initWithFrame:CGRectMake(0, 47, SCREEN_WIDTH/self.titleArr.count, 2)];
+    self.line = [[UILabel alloc] initWithFrame:CGRectMake(0, 47, SCREEN_WIDTH/self.titleArr.count, 3)];
     self.line.backgroundColor = [UIColor colorWithHexString:fineixColor alpha:1];
     [self.buttonView addSubview:self.line];
 }
