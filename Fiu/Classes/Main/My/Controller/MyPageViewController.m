@@ -38,6 +38,9 @@
 }
 @property (nonatomic,strong) UICollectionView *myCollectionView;
 @property(nonatomic,strong) UITapGestureRecognizer *myTap;
+@property(nonatomic,strong) TipNumberView *tipNumView1;
+@property(nonatomic,strong) TipNumberView *tipNumView2;
+@property(nonatomic,strong) BotView *botView;
 @end
 
 @implementation MyPageViewController
@@ -131,7 +134,6 @@
 }
 
 -(void)netGetData{
-    [SVProgressHUD show];
     UserInfoEntity *entity = [UserInfoEntity defaultUserInfoEntity];
     FBRequest *request = [FBAPI postWithUrlString:@"/user/user_info" requestDictionary:@{@"user_id":entity.userId} delegate:self];
     [request startRequestSuccess:^(FBRequest *request, id result) {
@@ -217,10 +219,10 @@
             
         }else{
             //显示
-            TipNumberView *tipNumView = [TipNumberView getTipNumView];
-            tipNumView.tipNumLabel.text = [NSString stringWithFormat:@"%@",_counterModel.order_total_count];
-            [cell.btn1 addSubview:tipNumView];
-            [tipNumView mas_makeConstraints:^(MASConstraintMaker *make) {
+
+            self.tipNumView1.tipNumLabel.text = [NSString stringWithFormat:@"%@",_counterModel.order_total_count];
+            [cell.btn1 addSubview:self.tipNumView1];
+            [self.tipNumView1 mas_makeConstraints:^(MASConstraintMaker *make) {
                 make.size.mas_equalTo(CGSizeMake(15, 15));
                 make.right.mas_equalTo(cell.btn1.mas_right).with.offset(0);
                 make.top.mas_equalTo(cell.btn1.mas_top).with.offset(-3);
@@ -232,10 +234,9 @@
             
         }else{
             //显示
-            TipNumberView *tipNumView = [TipNumberView getTipNumView];
-            tipNumView.tipNumLabel.text = [NSString stringWithFormat:@"%@",_counterModel.message_total_count];
-            [cell.btn2 addSubview:tipNumView];
-            [tipNumView mas_makeConstraints:^(MASConstraintMaker *make) {
+            self.tipNumView2.tipNumLabel.text = [NSString stringWithFormat:@"%@",_counterModel.message_total_count];
+            [cell.btn2 addSubview:self.tipNumView2];
+            [self.tipNumView2 mas_makeConstraints:^(MASConstraintMaker *make) {
                 make.size.mas_equalTo(CGSizeMake(15, 15));
                 make.right.mas_equalTo(cell.btn2.mas_right).with.offset(0);
                 make.top.mas_equalTo(cell.btn2.mas_top).with.offset(-3);
@@ -244,26 +245,47 @@
         [cell.btn1 addTarget:self action:@selector(orderBtn:) forControlEvents:UIControlEventTouchUpInside];
         [cell.btn2 addTarget:self action:@selector(messageBtn:) forControlEvents:UIControlEventTouchUpInside];
         [cell.btn3 addTarget:self action:@selector(subscribeBtn:) forControlEvents:UIControlEventTouchUpInside];
-        [cell.btn4 addTarget:self action:@selector(collectionBtn:) forControlEvents:UIControlEventTouchUpInside];
-        [cell.btn5 addTarget:self action:@selector(praiseBtn:) forControlEvents:UIControlEventTouchUpInside];
-        [cell.btn6 addTarget:self action:@selector(integralBtn:) forControlEvents:UIControlEventTouchUpInside];
-        [cell.btn7 addTarget:self action:@selector(giftBtn:) forControlEvents:UIControlEventTouchUpInside];
-        [cell.btn8 addTarget:self action:@selector(shippingAddressBtn:) forControlEvents:UIControlEventTouchUpInside];
-        [cell.btn9 addTarget:self action:@selector(serviceBtn:) forControlEvents:UIControlEventTouchUpInside];
+        [cell.btn4 addTarget:self action:@selector(praiseBtn:) forControlEvents:UIControlEventTouchUpInside];
+        [cell.btn5 addTarget:self action:@selector(integralBtn:) forControlEvents:UIControlEventTouchUpInside];
+        [cell.btn6 addTarget:self action:@selector(giftBtn:) forControlEvents:UIControlEventTouchUpInside];
+        [cell.btn7 addTarget:self action:@selector(shippingAddressBtn:) forControlEvents:UIControlEventTouchUpInside];
+        [cell.btn8 addTarget:self action:@selector(serviceBtn:) forControlEvents:UIControlEventTouchUpInside];
+        [cell.btn9 addTarget:self action:@selector(collectionBtn:) forControlEvents:UIControlEventTouchUpInside];
         return cell;
     }
     else if(indexPath.section == 3){
         UICollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"UICollectionViewCell1" forIndexPath:indexPath];
-        BotView *view = [BotView getBotView];
-        view.frame = CGRectMake(146/667.0*SCREEN_HEIGHT, 0, SCREEN_WIDTH, 100);
-        [view.aboutBtn addTarget:self action:@selector(aboutBtn:) forControlEvents:UIControlEventTouchUpInside];
-        [view.optionBtn addTarget:self action:@selector(optionBtn:) forControlEvents:UIControlEventTouchUpInside];
-        [cell.contentView addSubview:view];
+        self.botView.frame = CGRectMake(146/667.0*SCREEN_HEIGHT, 0, SCREEN_WIDTH, 100);
+        [self.botView.aboutBtn addTarget:self action:@selector(aboutBtn:) forControlEvents:UIControlEventTouchUpInside];
+        [self.botView.optionBtn addTarget:self action:@selector(optionBtn:) forControlEvents:UIControlEventTouchUpInside];
+        [cell.contentView addSubview:self.botView];
         return cell;
     }
     return nil;
     
 }
+
+-(BotView *)botView{
+    if (!_botView) {
+        _botView = [BotView getBotView];
+    }
+    return _botView;
+}
+
+-(TipNumberView *)tipNumView1{
+    if (!_tipNumView1) {
+        _tipNumView1 = [TipNumberView getTipNumView];
+    }
+    return _tipNumView1;
+}
+
+-(TipNumberView *)tipNumView2{
+    if (!_tipNumView2) {
+        _tipNumView2 = [TipNumberView getTipNumView];
+    }
+    return _tipNumView2;
+}
+
 
 -(void)aboutBtn:(UIButton*)sender{
     AboutViewController *vc = [[AboutViewController alloc] init];

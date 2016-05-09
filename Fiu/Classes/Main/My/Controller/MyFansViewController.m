@@ -15,6 +15,7 @@
 #import "MJRefresh.h"
 #import "HomePageViewController.h"
 
+
 @interface MyFansViewController ()<FBNavigationBarItemsDelegate,UITableViewDelegate,UITableViewDataSource,FBRequestDelegate>
 {
     NSMutableArray *_modelAry;
@@ -23,7 +24,8 @@
 }
 
 @property(nonatomic,strong) UILabel *tipLabel;
-
+@property (nonatomic, assign) NSInteger currentPageNumber;
+@property (nonatomic, assign) NSInteger totalPageNumber;
 @end
 
 @implementation MyFansViewController
@@ -38,24 +40,42 @@
 //    [self addBarItemLeftBarButton:nil image:@"icon_back"];
     self.delegate = self;
     
-    //self.navigationController.navigationBarHidden = NO;
-    
     //进行网络请求
-    [self networkRequestData];
+    [self requestDataForOderList];
+    
+    // 下拉刷新
+    self.mytableView.mj_header = [MJRefreshNormalHeader headerWithRefreshingBlock:^{
+        _currentPageNumber = 0;
+        [_modelAry removeAllObjects];
+        [self requestDataForOderList];
+    }];
+    
+    //上拉加载更多
+    self.mytableView.mj_footer = [MJRefreshAutoNormalFooter footerWithRefreshingBlock:^{
+        if (_currentPageNumber < _totalPageNumber) {
+            [self requestDataForOderListOperation];
+        } else {
+            [self.mytableView.mj_footer endRefreshing];
+        }
+    }];
+
     [self.view addSubview:self.mytableView];
 }
 
--(UILabel *)tipLabel{
-    if (!_tipLabel) {
-        _tipLabel = [[UILabel alloc] init];
-        _tipLabel.textAlignment = NSTextAlignmentCenter;
-        _tipLabel.font = [UIFont systemFontOfSize:13];
-    }
-    return _tipLabel;
+#pragma mark - Network
+- (void)requestDataForOderList
+{
+    _currentPageNumber = 0;
+    [_modelAry removeAllObjects];
+    [SVProgressHUD showWithMaskType:SVProgressHUDMaskTypeClear];
+    
+    [self requestDataForOderListOperation];
 }
 
-#pragma mark - 网络请求
-- (void)networkRequestData {
+
+- (void)requestDataForOderListOperation
+{
+    
     [SVProgressHUD show];
     FBRequest *request = [FBAPI postWithUrlString:@"/follow" requestDictionary:@{@"page":@(_page),@"size":@15,@"user_id":self.userId,@"find_type":@2} delegate:self];
     [request startRequestSuccess:^(FBRequest *request, id result) {
@@ -71,6 +91,7 @@
             model.nickname = followsDict[@"nickname"];
             model.mediumAvatarUrl = followsDict[@"avatar_url"];
             model.is_love = rowsDict[@"type"];
+            model.level = followsDict[@"is_love"];
             //8888888888888888888888
             NSLog(@"类型啊   %@",model.is_love);
             [_modelAry addObject:model];
@@ -88,60 +109,50 @@
             [self.tipLabel removeFromSuperview];
         }
         [self.mytableView reloadData];
-        _page = [[[result valueForKey:@"data"] valueForKey:@"current_page"] intValue];
-        _totalePage = [[[result valueForKey:@"data"] valueForKey:@"total_page"] intValue];
-        if (_totalePage > 1) {
-            [self addMJRefresh:self.mytableView];
-            [self requestIsLastData:self.mytableView currentPage:_page withTotalPage:_totalePage];
+        
+        _currentPageNumber = [[[result valueForKey:@"data"] valueForKey:@"current_page"] intValue];
+        _totalPageNumber = [[[result valueForKey:@"data"] valueForKey:@"total_page"] intValue];
+        
+        BOOL isLastPage = (_currentPageNumber == _totalPageNumber);
+        
+        if (!isLastPage) {
+            if (self.mytableView.mj_footer.state == MJRefreshStateNoMoreData) {
+                [self.mytableView.mj_footer resetNoMoreData];
+            }
         }
+        if (_currentPageNumber == _totalPageNumber == 1) {
+            self.mytableView.mj_footer.state = MJRefreshStateNoMoreData;
+            self.mytableView.mj_footer.hidden = true;
+        }
+        
+        if ([self.mytableView.mj_header isRefreshing]) {
+            [self.mytableView.mj_header endRefreshing];
+        }
+        if ([self.mytableView.mj_footer isRefreshing]) {
+            if (isLastPage) {
+                [self.mytableView.mj_footer endRefreshingWithNoMoreData];
+            } else  {
+                [self.mytableView.mj_footer endRefreshing];
+            }
+        }
+        
         [SVProgressHUD dismiss];
     } failure:^(FBRequest *request, NSError *error) {
-        [SVProgressHUD showErrorWithStatus:[error localizedDescription]];
+        [SVProgressHUD showInfoWithStatus:[error localizedDescription]];
     }];
-    
 }
 
-//  判断是否为最后一条数据
-- (void)requestIsLastData:(UITableView *)table currentPage:(NSInteger )current withTotalPage:(NSInteger)total {
-    BOOL isLastPage = (current == total);
-    
-    if (!isLastPage) {
-        if (table.mj_footer.state == MJRefreshStateNoMoreData) {
-            [table.mj_footer resetNoMoreData];
-        }
+
+
+-(UILabel *)tipLabel{
+    if (!_tipLabel) {
+        _tipLabel = [[UILabel alloc] init];
+        _tipLabel.textAlignment = NSTextAlignmentCenter;
+        _tipLabel.font = [UIFont systemFontOfSize:13];
     }
-    if (current == total == 1) {
-        table.mj_footer.state = MJRefreshStateNoMoreData;
-        table.mj_footer.hidden = true;
-    }
-    if ([table.mj_header isRefreshing]) {
-        [table.mj_header endRefreshing];
-    }
-    if ([table.mj_footer isRefreshing]) {
-        if (isLastPage) {
-            [table.mj_footer endRefreshingWithNoMoreData];
-        } else  {
-            [table.mj_footer endRefreshing];
-        }
-    }
-    [SVProgressHUD dismiss];
+    return _tipLabel;
 }
 
-#pragma mark - 上拉加载 & 下拉刷新
-- (void)addMJRefresh:(UITableView *)table {
-    table.mj_header = [MJRefreshNormalHeader headerWithRefreshingBlock:^{
-        _page = 1;
-        [self networkRequestData];
-    }];
-    
-    table.mj_footer = [MJRefreshAutoNormalFooter footerWithRefreshingBlock:^{
-        if (_page < _totalePage) {
-            [self networkRequestData];
-        } else {
-            [table.mj_footer endRefreshing];
-        }
-    }];
-}
 
 -(void)requestSucess:(FBRequest *)request result:(id)result{
     if ([request.flag isEqualToString:@"/follow/ajax_follow"]){
@@ -191,7 +202,7 @@
     [cell.focusOnBtn addTarget:self action:@selector(clickFocusBtn:) forControlEvents:UIControlEventTouchUpInside];
     //UserInfo *model = _modelAry[indexPath.row];
     cell.focusOnBtn.tag = indexPath.row;
-    [cell setUIWithModel:[_modelAry objectAtIndex:indexPath.row]];
+    [cell setUIWithModel:[_modelAry objectAtIndex:indexPath.row] andType:@1];
     return cell;
 }
 

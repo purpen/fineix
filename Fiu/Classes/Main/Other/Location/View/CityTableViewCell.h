@@ -13,5 +13,6 @@
 @property(nonatomic,strong) UIImageView *bgImageView;
 @property(nonatomic,strong) UIImageView *locationImageView;
 @property(nonatomic,strong) UILabel *locationLabel;
+@property(nonatomic,strong) UIView *lineView;
 
 @end

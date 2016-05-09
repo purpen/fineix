@@ -186,12 +186,16 @@
     if (cell == nil) {
         cell = [[CommentsTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellId];
     }
-    UserInfo *model = _modelAry[indexPath.row];
-    [cell setUIWithModel:model];
-    cell.focusBtn.hidden = YES;
-    cell.timeLabelTwo.hidden = YES;
-    cell.headBtn.tag = indexPath.row;
-    [cell.headBtn addTarget:self action:@selector(headBtn:) forControlEvents:UIControlEventTouchUpInside];
+    if (_modelAry.count == 0) {
+    }else{
+        UserInfo *model = _modelAry[indexPath.row];
+        [cell setUIWithModel:model];
+        cell.focusBtn.hidden = YES;
+        cell.timeLabelTwo.hidden = YES;
+        cell.headBtn.tag = indexPath.row;
+        [cell.headBtn addTarget:self action:@selector(headBtn:) forControlEvents:UIControlEventTouchUpInside];
+    }
+    
     return cell;
 }
 

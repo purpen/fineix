@@ -33,7 +33,7 @@
         [self.contentView addSubview:self.userLevelLabel];
         [_userLevelLabel mas_makeConstraints:^(MASConstraintMaker *make) {
             make.size.mas_equalTo(CGSizeMake(200, 12));
-            make.centerX.mas_equalTo(self.mas_centerX);
+            make.left.mas_equalTo(self.mas_left).with.offset(SCREEN_WIDTH*0.5-105/667.0*SCREEN_HEIGHT);
             make.bottom.mas_equalTo(self.certificationBtn.mas_top).with.offset(-9/667.0*SCREEN_HEIGHT);
         }];
         
@@ -67,7 +67,12 @@
 -(UIButton *)certificationBtn{
     if (!_certificationBtn) {
         _certificationBtn = [[UIButton alloc] init];
-        [_certificationBtn setImage:[UIImage imageNamed:@"certification"] forState:UIControlStateNormal];
+        CGColorSpaceRef colorSpaceRef = CGColorSpaceCreateDeviceRGB();
+        CGColorRef color = CGColorCreate(colorSpaceRef, (CGFloat[]){255 / 255, 255 / 255, 255 / 255, 1});
+        _certificationBtn.layer.borderWidth = 0.5;
+        _certificationBtn.layer.borderColor = color;
+        [_certificationBtn setTitle:@"我要认证" forState:UIControlStateNormal];
+        _certificationBtn.titleLabel.font = [UIFont systemFontOfSize:10];
     }
     return _certificationBtn;
 }
@@ -81,7 +86,7 @@
     [self.bgImageView sd_setImageWithURL:[NSURL URLWithString:entity.head_pic_url] placeholderImage:[UIImage imageNamed:@"image"]];
     self.nickName.text = entity.nickname;
     self.userProfile.text = entity.summary;
-    self.userLevelLabel.text = [NSString stringWithFormat:@"%@|V%d",entity.levelDesc,[entity.level intValue]];
+    self.userLevelLabel.text = [NSString stringWithFormat:@"%@ | V%d",entity.levelDesc,[entity.level intValue]];
     
     [self.bgImageView sd_setImageWithURL:[NSURL URLWithString:entity.head_pic_url] placeholderImage:[UIImage imageNamed:@"image"]];
 }

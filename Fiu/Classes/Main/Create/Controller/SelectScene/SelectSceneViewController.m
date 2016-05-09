@@ -11,6 +11,7 @@
 #import "SelectAllFSceneViewController.h"
 #import "SelectHotFSceneTableViewCell.h"
 #import "FiuSceneInfoData.h"
+#import "MapTableViewCell.h"
 
 static NSString *const URLFSceneList = @"/scene_scene/";
 
@@ -38,6 +39,7 @@ static NSString *const URLFSceneList = @"/scene_scene/";
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(getSelectId:) name:@"getSelectId" object:nil];
 }
 
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     
@@ -59,6 +61,7 @@ static NSString *const URLFSceneList = @"/scene_scene/";
     self.fSceneRequest = [FBAPI getWithUrlString:URLFSceneList requestDictionary:@{@"lng":@(longitude), @"lat":@(latitude), @"dis":@(5000), @"page":@"1", @"size":@"3"} delegate:self];
     [self.fSceneRequest startRequestSuccess:^(FBRequest *request, id result) {
         [self setSelectFSceneVcUI];
+        NSLog(@"附近的情景  %@",result);
         NSArray * dataArr = [[result valueForKey:@"data"] valueForKey:@"rows"];
         for (NSDictionary * dataDic in dataArr) {
             [self.idMarr addObject:[dataDic valueForKey:@"_id"]];
@@ -66,7 +69,7 @@ static NSString *const URLFSceneList = @"/scene_scene/";
             [self.addressMarr addObject:[dataDic valueForKey:@"address"]];
             [self.locationMarr addObject:[dataDic valueForKey:@"location"]];
         }
-    
+        
         [self.selectTable reloadData];
         [SVProgressHUD dismiss];
         
@@ -133,6 +136,16 @@ static NSString *const URLFSceneList = @"/scene_scene/";
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+    if (indexPath.section == 0) {
+        static NSString *mapCellId = @"mapCellId";
+        MapTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:mapCellId];
+        if (cell == nil) {
+            cell = [[MapTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:mapCellId];
+        }
+        cell.ary = self.locationMarr;
+        [cell setUIWithAry:self.locationMarr];
+        return cell;
+    }
     if (indexPath.section == 1) {
         static NSString * nearbyFSceneCellId = @"NearbyFSceneCellId";
         UITableViewCell * cell = [tableView dequeueReusableCellWithIdentifier:nearbyFSceneCellId];

@@ -18,6 +18,8 @@
 @interface SubscribeViewController ()<FBNavigationBarItemsDelegate,UICollectionViewDelegate,UICollectionViewDataSource,UICollectionViewDelegateFlowLayout,FBRequestDelegate>
 @pro_strong NSMutableArray          *   allFiuSceneMarr;        //   情景列表
 @pro_strong NSMutableArray          *   allFiuSceneIdMarr;      //   情景Id列表
+@property (nonatomic, assign) NSInteger currentPageNumber;
+@property (nonatomic, assign) NSInteger totalPageNumber;
 @end
 
 static NSString *const URLAllFiuSceneList = @"/scene_scene/";
@@ -30,49 +32,59 @@ static NSString *const URLAllFiuSceneList = @"/scene_scene/";
     [self setNavigationViewUI];
     
     self.currentpageNum = 0;
-    [self networkAllFiuSceneList];
+    //[self networkAllFiuSceneList];
+    [self requestDataForOderList];
     
+    // 下拉刷新
+    self.allSceneView.mj_header = [MJRefreshNormalHeader headerWithRefreshingBlock:^{
+        _currentPageNumber = 0;
+        [self.allFiuSceneMarr removeAllObjects];
+        [self.allFiuSceneIdMarr removeAllObjects];
+        [self requestDataForOderListOperation];
+    }];
+    
+    //上拉加载更多
+    self.allSceneView.mj_footer = [MJRefreshAutoNormalFooter footerWithRefreshingBlock:^{
+        if (_currentPageNumber < _totalPageNumber) {
+            [self requestDataForOderListOperation];
+        } else {
+            [self.allSceneView.mj_footer endRefreshing];
+        }
+    }];
 }
 
-- (void)viewDidLoad {
-    [super viewDidLoad];
-    
-    [self setAllSceneViewUI];
-    
-}
-
-#pragma mark - 网络请求
-- (void)networkAllFiuSceneList {
+//上拉下拉分页请求订单列表
+- (void)requestDataForOderListOperation
+{
     [SVProgressHUD show];
     UserInfoEntity *entity = [UserInfoEntity defaultUserInfoEntity];
     self.allSceneListRequest = [FBAPI getWithUrlString:@"/favorite" requestDictionary:@{@"size":@"10", @"page":@(self.currentpageNum + 1),@"user_id":entity.userId,@"type":@"scene",@"event":@"subscription"} delegate:self];
     
     [self.allSceneListRequest startRequestSuccess:^(FBRequest *request, id result) {
+        NSLog(@"订阅的情景    %@",result);
         NSArray * sceneArr = [[result valueForKey:@"data"] valueForKey:@"rows"];
-        if ([[[result valueForKey:@"data"] valueForKey:@"total_page"] integerValue] == 1) {
-            [self.allFiuSceneMarr removeAllObjects];
-            [self.allFiuSceneIdMarr removeAllObjects];
-        }
         for (NSDictionary * sceneDic in sceneArr) {
             FiuSceneInfoData * allFiuScene = [[FiuSceneInfoData alloc] initWithDictionary:sceneDic];
             [self.allFiuSceneMarr addObject:allFiuScene];
             [self.allFiuSceneIdMarr addObject:[NSString stringWithFormat:@"%zi", allFiuScene.idField]];
         }
         [self.allSceneView reloadData];
-        self.currentpageNum = [[[result valueForKey:@"data"] valueForKey:@"current_page"] integerValue];
-        self.totalPageNum = [[[result valueForKey:@"data"] valueForKey:@"total_page"] integerValue];
         
-        //  判断是否为最后一条数据
-        BOOL isLastPage = (self.currentpageNum == self.totalPageNum);
+        _currentPageNumber = [[[result valueForKey:@"data"] valueForKey:@"current_page"] integerValue];
+        _totalPageNumber = [[[result valueForKey:@"data"] valueForKey:@"total_page"] integerValue];
+        
+        BOOL isLastPage = (_currentPageNumber == _totalPageNumber);
+        
         if (!isLastPage) {
             if (self.allSceneView.mj_footer.state == MJRefreshStateNoMoreData) {
                 [self.allSceneView.mj_footer resetNoMoreData];
             }
         }
-        if (self.currentpageNum == self.totalPageNum == 1) {
+        if (_currentPageNumber == _totalPageNumber == 1) {
             self.allSceneView.mj_footer.state = MJRefreshStateNoMoreData;
             self.allSceneView.mj_footer.hidden = true;
         }
+        
         if ([self.allSceneView.mj_header isRefreshing]) {
             [self.allSceneView.mj_header endRefreshing];
         }
@@ -83,12 +95,34 @@ static NSString *const URLAllFiuSceneList = @"/scene_scene/";
                 [self.allSceneView.mj_footer endRefreshing];
             }
         }
+        
         [SVProgressHUD dismiss];
-        
     } failure:^(FBRequest *request, NSError *error) {
-        
+        [SVProgressHUD showInfoWithStatus:[error localizedDescription]];
     }];
 }
+
+
+#pragma mark - Network
+- (void)requestDataForOderList
+{
+    _currentPageNumber = 0;
+    [self.allFiuSceneMarr removeAllObjects];
+    [self.allFiuSceneIdMarr removeAllObjects];
+    [SVProgressHUD showWithMaskType:SVProgressHUDMaskTypeClear];
+    
+    [self requestDataForOderListOperation];
+}
+
+
+- (void)viewDidLoad {
+    [super viewDidLoad];
+    
+    [self setAllSceneViewUI];
+    
+}
+
+
 
 #pragma mark -
 - (void)setAllSceneViewUI {
@@ -138,7 +172,6 @@ static NSString *const URLAllFiuSceneList = @"/scene_scene/";
     self.view.backgroundColor = [UIColor whiteColor];
     self.navViewTitle.text = @"订阅的情景";
     self.delegate = self;
-    [[UIApplication sharedApplication] setStatusBarHidden:NO withAnimation:(UIStatusBarAnimationSlide)];
 }
 
 

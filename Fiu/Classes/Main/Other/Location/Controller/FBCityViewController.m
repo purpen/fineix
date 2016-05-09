@@ -17,7 +17,7 @@
 #import <BaiduMapAPI_Search/BMKSearchComponent.h>
 #import <SDWebImage/UIImageView+WebCache.h>
 
-@interface FBCityViewController ()<UITableViewDelegate,UITableViewDataSource,FBRequestDelegate,BMKLocationServiceDelegate,BMKGeoCodeSearchDelegate>
+@interface FBCityViewController ()<UITableViewDelegate,UITableViewDataSource,FBRequestDelegate,BMKLocationServiceDelegate,BMKGeoCodeSearchDelegate,FBNavigationBarItemsDelegate>
 {
     BMKReverseGeoCodeOption *_reverseGeoCodeSearchOption;//反向地理编码对象
     NSMutableArray *_modelAry;
@@ -44,11 +44,16 @@ static NSString *cityListStr = @"/estore/get_city_list";
     [request startRequest];
 }
 
+-(void)rightBarItemSelected{
+    [self.navigationController popViewControllerAnimated:YES];
+}
+
 -(UITableView *)myTableView{
     if (!_myTableView) {
         _myTableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 64, SCREEN_WIDTH, SCREEN_HEIGHT-64) style:UITableViewStylePlain];
         _myTableView.delegate = self;
         _myTableView.dataSource = self;
+        _myTableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     }
     return _myTableView;
 }
@@ -199,6 +204,7 @@ errorCode:(BMKSearchErrorCode)error{
     self.navViewTitle.text = NSLocalizedString(@"CityVcTitle", nil);
     self.view.backgroundColor = [UIColor whiteColor];
     [self addBarItemRightBarButton:@"全部城市" image:@"icon_map" isTransparent:NO];
+    self.delegate = self;
 }
 
 @end

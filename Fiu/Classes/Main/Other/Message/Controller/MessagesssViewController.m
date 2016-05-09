@@ -167,11 +167,16 @@
     if (cell == nil) {
         cell = [[CommentsTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellId];
     }
-    UserInfo *model = _modelAry[indexPath.row];
-    [cell setUIWithModel:model];
-    cell.iconImageView.hidden = YES;
-    cell.focusBtn.hidden = YES;
-    cell.timeLabel.hidden = YES;
+    if (_modelAry.count == 0) {
+        
+    }else{
+        UserInfo *model = _modelAry[indexPath.row];
+        [cell setUIWithModel:model];
+        cell.iconImageView.hidden = YES;
+        cell.focusBtn.hidden = YES;
+        cell.timeLabel.hidden = YES;
+    }
+    
     return cell;
 }
 

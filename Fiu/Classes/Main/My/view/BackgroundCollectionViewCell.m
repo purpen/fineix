@@ -24,24 +24,10 @@
         [self.contentView addSubview:self.userLevelLabel];
         [_userLevelLabel mas_makeConstraints:^(MASConstraintMaker *make) {
             make.size.mas_equalTo(CGSizeMake(200, 12));
-            make.centerX.mas_equalTo(self.mas_centerX);
-            make.bottom.mas_equalTo(self.mas_bottom).with.offset(-14/667.0*SCREEN_HEIGHT);
+            make.left.mas_equalTo(self.mas_left).with.offset(SCREEN_WIDTH*0.5-105/667.0*SCREEN_HEIGHT);
+            make.bottom.mas_equalTo(self.mas_bottom).with.offset(-45/667.0*SCREEN_HEIGHT);
         }];
         
-//        [self.contentView addSubview:self.backBtn];
-//        [_backBtn mas_makeConstraints:^(MASConstraintMaker *make) {
-//            make.size.mas_equalTo(CGSizeMake(30, 18));
-//            make.top.mas_equalTo(self.mas_top).with.offset(35);
-//            make.left.mas_equalTo(self.mas_left).with.offset(16);
-//        }];
-//        
-//        [self.contentView addSubview:self.editBtn];
-//        [_editBtn mas_makeConstraints:^(MASConstraintMaker *make) {
-//            make.size.mas_equalTo(CGSizeMake(30, 30));
-//            //make.top.mas_equalTo(_bgImageView.mas_top).with.offset(35);
-//            make.right.mas_equalTo(self.mas_right).with.offset(-16);
-//            make.centerY.mas_equalTo(_backBtn.mas_centerY);
-//        }];
         
         [self.contentView addSubview:self.userProfile];
         [_userProfile mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -76,7 +62,7 @@
     [self.bgImageView sd_setImageWithURL:[NSURL URLWithString:entity.head_pic_url] placeholderImage:[UIImage imageNamed:@"image"]];
     self.nickName.text = entity.nickname;
     self.userProfile.text = entity.summary;
-    self.userLevelLabel.text = [NSString stringWithFormat:@"%@|V%d",entity.levelDesc,[entity.level intValue]];
+    self.userLevelLabel.text = [NSString stringWithFormat:@"%@ | V%d",entity.levelDesc,[entity.level intValue]];
 }
 
 #pragma mark - 个人信息背景图

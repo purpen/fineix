@@ -16,6 +16,8 @@
 @interface PraisedViewController ()<FBNavigationBarItemsDelegate,UITableViewDelegate,UITableViewDataSource>
 @pro_strong NSMutableArray      *   sceneListMarr;
 @pro_strong NSMutableArray      *   sceneIdMarr;
+@property (nonatomic, assign) NSInteger currentPageNumber;
+@property (nonatomic, assign) NSInteger totalPageNumber;
 @end
 
 static NSString *const URLSceneList = @"/scene_sight/";
@@ -26,86 +28,95 @@ static NSString *const URLSceneList = @"/scene_sight/";
     [super viewWillAppear:animated];
     [[UIApplication sharedApplication] setStatusBarHidden:NO withAnimation:(UIStatusBarAnimationSlide)];
     [self setNavigationViewUI];
-    [self networkRequestData];
-}
-
-- (void)viewDidLoad {
-    [super viewDidLoad];
-    self.currentpageNum = 0;
-    [self.view addSubview:self.homeTableView];
+    [self requestDataForOderList];
     
+    // 下拉刷新
+    self.homeTableView.mj_header = [MJRefreshNormalHeader headerWithRefreshingBlock:^{
+        _currentPageNumber = 0;
+        [self.sceneListMarr removeAllObjects];
+        [self.sceneIdMarr removeAllObjects];
+        [self requestDataForOderListOperation];
+    }];
+    
+    //上拉加载更多
+    self.homeTableView.mj_footer = [MJRefreshAutoNormalFooter footerWithRefreshingBlock:^{
+        if (_currentPageNumber < _totalPageNumber) {
+//            [self.sceneListMarr removeAllObjects];
+//            [self.sceneIdMarr removeAllObjects];
+            [self requestDataForOderListOperation];
+        } else {
+            [self.homeTableView.mj_footer endRefreshing];
+        }
+    }];
 }
 
-#pragma mark - 网络请求
-- (void)networkRequestData {
+#pragma mark - Network
+- (void)requestDataForOderList
+{
+    _currentPageNumber = 0;
+    [self.sceneListMarr removeAllObjects];
+    [self.sceneIdMarr removeAllObjects];
+    [SVProgressHUD showWithMaskType:SVProgressHUDMaskTypeClear];
+    
+    [self requestDataForOderListOperation];
+}
+
+
+//上拉下拉分页请求订单列表
+- (void)requestDataForOderListOperation
+{
     [SVProgressHUD show];
     UserInfoEntity *entity = [UserInfoEntity defaultUserInfoEntity];
     NSDictionary *  requestParams = @{@"size":@"10", @"page":@(self.currentpageNum + 1),@"user_id":entity.userId,@"type":@"sight",@"event":@"love"};
     self.sceneListRequest = [FBAPI getWithUrlString:@"/favorite" requestDictionary:requestParams delegate:self];
     [self.sceneListRequest startRequestSuccess:^(FBRequest *request, id result) {
+        
+        NSLog(@"场景  %@",result);
         NSArray * sceneArr = [[result valueForKey:@"data"] valueForKey:@"rows"];
-        if ([[[result valueForKey:@"data"] valueForKey:@"total_page"] integerValue] == 1) {
-            [self.sceneListMarr removeAllObjects];
-            [self.sceneIdMarr removeAllObjects];
-        }
+    
         for (NSDictionary * sceneDic in sceneArr) {
             HomeSceneListRow * homeSceneModel = [[HomeSceneListRow alloc] initWithDictionary:sceneDic];
             [self.sceneListMarr addObject:homeSceneModel];
             [self.sceneIdMarr addObject:[NSString stringWithFormat:@"%zi", homeSceneModel.idField]];
         }
         [self.homeTableView reloadData];
-        self.currentpageNum = [[[result valueForKey:@"data"] valueForKey:@"current_page"] integerValue];
-        self.totalPageNum = [[[result valueForKey:@"data"] valueForKey:@"total_page"] integerValue];
-        if (self.totalPageNum > 1) {
-            [self addMJRefresh:self.homeTableView];
-            [self requestIsLastData:self.homeTableView currentPage:self.currentpageNum withTotalPage:self.totalPageNum];
+        _currentPageNumber = [[[result valueForKey:@"data"] valueForKey:@"current_page"] integerValue];
+        _totalPageNumber = [[[result valueForKey:@"data"] valueForKey:@"total_page"] integerValue];
+        
+        BOOL isLastPage = (_currentPageNumber == _totalPageNumber);
+        
+        if (!isLastPage) {
+            if (self.homeTableView.mj_footer.state == MJRefreshStateNoMoreData) {
+                [self.homeTableView.mj_footer resetNoMoreData];
+            }
         }
+        if (_currentPageNumber == _totalPageNumber == 1) {
+            self.homeTableView.mj_footer.state = MJRefreshStateNoMoreData;
+            self.homeTableView.mj_footer.hidden = true;
+        }
+        
+        if ([self.homeTableView.mj_header isRefreshing]) {
+            [self.homeTableView.mj_header endRefreshing];
+        }
+        if ([self.homeTableView.mj_footer isRefreshing]) {
+            if (isLastPage) {
+                [self.homeTableView.mj_footer endRefreshingWithNoMoreData];
+            } else  {
+                [self.homeTableView.mj_footer endRefreshing];
+            }
+        }
+        
         [SVProgressHUD dismiss];
     } failure:^(FBRequest *request, NSError *error) {
-        [SVProgressHUD showErrorWithStatus:[error localizedDescription]];
+        [SVProgressHUD showInfoWithStatus:[error localizedDescription]];
     }];
 }
 
-//  判断是否为最后一条数据
-- (void)requestIsLastData:(UITableView *)table currentPage:(NSInteger )current withTotalPage:(NSInteger)total {
-    BOOL isLastPage = (current == total);
-    
-    if (!isLastPage) {
-        if (table.mj_footer.state == MJRefreshStateNoMoreData) {
-            [table.mj_footer resetNoMoreData];
-        }
-    }
-    if (current == total == 1) {
-        table.mj_footer.state = MJRefreshStateNoMoreData;
-        table.mj_footer.hidden = true;
-    }
-    if ([table.mj_header isRefreshing]) {
-        [table.mj_header endRefreshing];
-    }
-    if ([table.mj_footer isRefreshing]) {
-        if (isLastPage) {
-            [table.mj_footer endRefreshingWithNoMoreData];
-        } else  {
-            [table.mj_footer endRefreshing];
-        }
-    }
-    [SVProgressHUD dismiss];
-}
 
-#pragma mark - 上拉加载 & 下拉刷新
-- (void)addMJRefresh:(UITableView *)table {
-    table.mj_header = [MJRefreshNormalHeader headerWithRefreshingBlock:^{
-        self.currentpageNum = 0;
-        [self networkRequestData];
-    }];
+- (void)viewDidLoad {
+    [super viewDidLoad];
+    [self.view addSubview:self.homeTableView];
     
-    table.mj_footer = [MJRefreshAutoNormalFooter footerWithRefreshingBlock:^{
-        if (self.currentpageNum < self.totalPageNum) {
-            [self networkRequestData];
-        } else {
-            [table.mj_footer endRefreshing];
-        }
-    }];
 }
 
 #pragma mark - 加载首页表格

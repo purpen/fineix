@@ -15,6 +15,7 @@
 #import <SVProgressHUD.h>
 #import "MJRefresh.h"
 #import "MyFansActionSheetViewController.h"
+#import "UserInfoEntity.h"
 
 @interface MyPageFocusOnViewController ()<FBNavigationBarItemsDelegate,UITableViewDelegate,UITableViewDataSource,FBRequestDelegate>
 {
@@ -74,6 +75,7 @@
 
 - (void)requestDataForOderListOperation
 {
+    
     FBRequest *request = [FBAPI postWithUrlString:@"/follow" requestDictionary:@{@"page":@(_currentPageNumber+1),@"size":@15,@"user_id":self.userId,@"find_type":@1} delegate:self];
     [request startRequestSuccess:^(FBRequest *request, id result) {
         NSLog(@"result  %@",result);
@@ -83,6 +85,7 @@
             NSDictionary *followsDict = [rowsDict objectForKey:@"follows"];
             UserInfo *model = [[UserInfo alloc] init];
             
+            model.is_love = followsDict[@"is_love"];
             model.userId = followsDict[@"user_id"];
             NSLog(@"userid             %@",model.userId);
             model.summary = followsDict[@"summary"];
@@ -199,7 +202,7 @@
     //UserInfo *model = _modelAry[indexPath.row];
     cell.focusOnBtn.tag = indexPath.row;
     cell.focusOnBtn.selected = YES;
-    [cell setUIWithModel:[_modelAry objectAtIndex:indexPath.row]];
+    [cell setUIWithModel:[_modelAry objectAtIndex:indexPath.row] andType:@0];
     return cell;
 }
 
