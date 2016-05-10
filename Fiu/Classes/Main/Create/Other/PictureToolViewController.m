@@ -26,6 +26,8 @@
     
     _createVC = [[CreateViewController alloc] init];
     _createVC.createType = self.createType;
+    _createVC.fSceneId = self.fSceneId;
+    _createVC.fSceneTitle = self.fSceneTitle;
     [self addChildViewController:_createVC];
     
 }

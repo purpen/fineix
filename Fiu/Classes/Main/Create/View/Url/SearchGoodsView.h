@@ -17,6 +17,8 @@
 @pro_strong UIButton          *   findDoneBtn;      //  找到商品
 @pro_strong UIWebView         *   goodsWeb;         //  搜索商品网页
 @pro_strong NSString          *   goodsUrl;         //  搜索链接
+
 @pro_strong NSString          *   findGoodsId;      //  找到的商品id
+@pro_strong NSString          *   findGoodsUrl;     //  商品的链接
 
 @end

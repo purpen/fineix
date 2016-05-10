@@ -17,5 +17,7 @@
 @pro_strong FBFootView          *   footView;           //  底部功能选择视图
 @pro_strong PictureView         *   pictureView;        //  相册页面
 @pro_strong CameraView          *   cameraView;         //  相机页面
+@pro_strong NSString            *   fSceneId;
+@pro_strong NSString            *   fSceneTitle;
 
 @end

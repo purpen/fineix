@@ -23,9 +23,13 @@
 - (void)setFindGoodsViewData:(TaoBaoGoodsResult *)model {
     [self.goodsImg downloadImage:[model.nTbkItem valueForKey:@"pictUrl"][0] place:[UIImage imageNamed:@""]];
     self.goodsTitle.text = [model.nTbkItem valueForKey:@"title"][0];
-    self.goodsPrice.text = [NSString stringWithFormat:@"￥%@",[model.nTbkItem valueForKey:@"reservePrice"][0]];
-    
-    
+    self.goodsPrice.text = [NSString stringWithFormat:@"￥%@",[model.nTbkItem valueForKey:@"zkFinalPrice"][0]];
+}
+
+- (void)setJDGoodsViewData:(JDGoodsListproductbaseResult *)model {
+    [self.goodsImg downloadImage:[NSString stringWithFormat:@"%@", model.imagePath] place:[UIImage imageNamed:@""]];
+    self.goodsTitle.text = model.cbrand;
+    self.goodsPrice.text = [NSString stringWithFormat:@"￥%@",model.salePrice];
 }
 
 #pragma mark -

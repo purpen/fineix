@@ -52,14 +52,33 @@
     NSString * urlStr = webView.request.URL.absoluteString;
     NSLog(@"当前页面的链接：%@", urlStr);
     
-    if ([urlStr containsString:@"id"]) {
+    if ([urlStr containsString:@"id="] || [urlStr containsString:@"product"]) {
+        self.findGoodsUrl = urlStr;
         [self addSubview:self.findDoneBtn];
-        NSRange range = [urlStr rangeOfString:@"id="];
-        NSRange rrange = [urlStr rangeOfString:@"&"];
-        NSInteger idLength = rrange.location - (range.location + 3);
-        NSRange idRange = NSMakeRange(range.location + 3, idLength);
-        self.findGoodsId = [urlStr substringWithRange:idRange];
-        NSLog(@"搜素到的商品id === %@ ", self.findGoodsId);
+        
+        if ([urlStr containsString:@"item.m.jd.com"]) {
+            NSScanner * scanner = [NSScanner scannerWithString:urlStr];
+            [scanner scanUpToCharactersFromSet:[NSCharacterSet decimalDigitCharacterSet] intoString:nil];
+            int number;
+            [scanner scanInt:&number];
+            self.findGoodsId = [NSString stringWithFormat:@"%d", number];
+            
+        } else {
+            if ([urlStr containsString:@"m.taobao.com"]) {
+                NSRange range = [urlStr rangeOfString:@"id="];
+                NSRange rrange = [urlStr rangeOfString:@"&"];
+                NSInteger idLength = rrange.location - (range.location + 3);
+                NSRange idRange = NSMakeRange(range.location + 3, idLength);
+                self.findGoodsId = [urlStr substringWithRange:idRange];
+            
+            } else if ([urlStr containsString:@"detail.m.tmall.com"]) {
+                NSRange range = [urlStr rangeOfString:@"id="];
+                NSRange rrange = [urlStr rangeOfString:@"&s"];
+                NSInteger idLength = rrange.location - (range.location + 3);
+                NSRange idRange = NSMakeRange(range.location + 3, idLength);
+                self.findGoodsId = [urlStr substringWithRange:idRange];
+            }
+        }
     }
 }
 

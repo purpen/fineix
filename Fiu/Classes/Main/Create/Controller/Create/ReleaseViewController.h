@@ -17,7 +17,6 @@
 @pro_strong FBRequest           *   releaseSceneRequest;
 @pro_strong FBRequest           *   releaseFiuSceneRequest;
 @pro_strong NSString            *   createType;             //  创建类型（场景/情景）
-
 @pro_strong NSString            *   goodsTitle;             //  商品标题
 @pro_strong NSString            *   goodsId;                //  商品id
 @pro_strong NSString            *   goodsPrice;             //  商品价格
@@ -25,6 +24,7 @@
 @pro_strong NSString            *   goodsY;                 //  商品坐标
 @pro_strong NSString            *   tagS;                   //  标签
 @pro_strong NSString            *   fSceneId;               //  情景id
+@pro_strong NSString            *   fSceneTitle;
 @pro_strong NSString            *   lat;                    //  经度
 @pro_strong NSString            *   lng;                    //  纬度
 @pro_strong NSArray             *   locationArr;            //  照片位置

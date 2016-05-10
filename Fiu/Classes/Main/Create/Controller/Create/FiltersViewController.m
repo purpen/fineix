@@ -97,6 +97,10 @@
         
     } else if (index == 1) {
         [self presentViewController:addUrlVC animated:YES completion:nil];
+        addUrlVC.findGodosBlock = ^(NSString * title, NSString * price) {
+            NSLog(@"＝＝＝＝＝＝＝ 找到的商品标题：%@ －－－－－ 价格：%@ ------", title, price);
+            
+        };
         
     } else if (index == 2) {
         CGRect filtersViewRect = _filtersView.frame;
@@ -147,6 +151,8 @@
     releaseVC.locationArr = self.locationArr;
     releaseVC.scenceView.imageView.image = self.filtersImageView.image;
     releaseVC.createType = self.createType;
+    releaseVC.fSceneId = self.fSceneId;
+    releaseVC.fSceneTitle = self.fSceneTitle;
     releaseVC.goodsTitle = @"测试商品1,测试商品2,测试商品3";
     releaseVC.goodsPrice = @"321,1829,2901";
     releaseVC.goodsId = @"304,301,299";

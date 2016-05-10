@@ -51,6 +51,8 @@
     cropVC.clipImageVC.clipImage = self.pictureView.photoImgView.image;
     cropVC.view.frame = self.view.frame;
     cropVC.createType = self.createType;
+    cropVC.fSceneId = self.fSceneId;
+    cropVC.fSceneTitle = self.fSceneTitle;
     [self.navigationController pushViewController:cropVC animated:YES];
 }
 

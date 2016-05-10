@@ -8,12 +8,22 @@
 
 #import "AddUrlViewController.h"
 #import "TaoBaoGoodsResult.h"
+#import "JDGoodsListproductbaseResult.h"
 
 static NSString *const URLTaobaoGoods = @"/scene_product/tb_view";
+static NSString *const URLJDGoods = @"/scene_product/jd_view";
+static NSString *const URLUserAddGoods = @"/scene_product/add";
 
-@interface AddUrlViewController ()
+static NSString *const TaoBao = @"http://s.m.taobao.com/h5?q=";
+static NSString *const JD = @"http://m.jd.com/ware/search.action?keyword=";
+static NSString *const Tmall = @"https://s.m.tmall.com/m/search.htm?q=";
 
-@pro_strong TaoBaoGoodsResult     *   taobaoGoodsData;
+@interface AddUrlViewController () {
+    NSInteger   _type;
+}
+
+@pro_strong TaoBaoGoodsResult               *   taobaoGoodsData;
+@pro_strong JDGoodsListproductbaseResult    *   JDGoodsData;
 
 @end
 
@@ -32,19 +42,57 @@ static NSString *const URLTaobaoGoods = @"/scene_product/tb_view";
 }
 
 #pragma mark - 网络请求
-- (void)networkSearchGoodsData {
+#pragma mark 获取商品信息
+- (void)networkSearchGoodsData:(NSInteger)type {
     [SVProgressHUD show];
-    self.findGoodsRequest = [FBAPI getWithUrlString:URLTaobaoGoods requestDictionary:@{@"ids":self.goodsId} delegate:self];
-    [self.findGoodsRequest startRequestSuccess:^(FBRequest *request, id result) {
-        self.taobaoGoodsData = [[TaoBaoGoodsResult alloc] initWithDictionary:[[result valueForKey:@"data"] valueForKey:@"results"]];
-        [self.findGoodsView setFindGoodsViewData:self.taobaoGoodsData];
+    if (type == 1 || type == 2) {
+        self.findGoodsRequest = [FBAPI getWithUrlString:URLTaobaoGoods requestDictionary:@{@"ids":self.goodsId} delegate:self];
+        [self.findGoodsRequest startRequestSuccess:^(FBRequest *request, id result) {
+            self.taobaoGoodsData = [[TaoBaoGoodsResult alloc] initWithDictionary:[[result valueForKey:@"data"] valueForKey:@"results"]];
+            [self.findGoodsView setFindGoodsViewData:self.taobaoGoodsData];
+            [SVProgressHUD dismiss];
+            
+        } failure:^(FBRequest *request, NSError *error) {
+            [SVProgressHUD showErrorWithStatus:[error localizedDescription]];
+        }];
+
+    } else if (type == 0) {
+        self.findGoodsRequest = [FBAPI getWithUrlString:URLJDGoods requestDictionary:@{@"ids":self.goodsId} delegate:self];
+        [self.findGoodsRequest startRequestSuccess:^(FBRequest *request, id result) {
+            self.JDGoodsData = [[JDGoodsListproductbaseResult alloc] initWithDictionary:[[result valueForKey:@"data"] valueForKey:@"listproductbase_result"][0]];
+            [self.findGoodsView setJDGoodsViewData:self.JDGoodsData];
+            [SVProgressHUD dismiss];
+            
+        } failure:^(FBRequest *request, NSError *error) {
+            [SVProgressHUD showErrorWithStatus:[error localizedDescription]];
+        }];
+
+    }
+    
+}
+
+#pragma mark 用户确认添加产品的保存信息
+- (void)networkUserAddGoodsData:(NSString *)type {
+    // type: 2.淘宝；3.天猫；4.京东
+    if (_type == 0) {
+        type = @"4";
+    } else if (_type == 1) {
+        type = @"2";
+    } else if (_type == 2) {
+        type = @"3";
+    }
+    
+    [SVProgressHUD show];
+    self.userAddGoodsRequest = [FBAPI postWithUrlString:URLUserAddGoods requestDictionary:@{@"attrbute":type, @"oid":self.goodsId} delegate:self];
+    [self.userAddGoodsRequest startRequestSuccess:^(FBRequest *request, id result) {
+        NSLog(@"＝＝＝＝＝＝＝＝ %@", result);
         [SVProgressHUD dismiss];
         
     } failure:^(FBRequest *request, NSError *error) {
         [SVProgressHUD showErrorWithStatus:[error localizedDescription]];
     }];
-    
 }
+
 
 #pragma mark - 设置视图UI
 - (void)setAddUrlVcUI {
@@ -65,13 +113,19 @@ static NSString *const URLTaobaoGoods = @"/scene_product/tb_view";
 
 #pragma mark - 搜索产品
 - (void)beginSearch:(NSString *)searchKeyword {
-    [self.view addSubview:self.searchGoodsView];
+    [self searchWebGoods:searchKeyword withSite:TaoBao];
+    _type = 1;
+}
 
+#pragma mark 搜索
+- (void)searchWebGoods:(NSString *)searchKeyword withSite:(NSString *)site {
+    [self.view addSubview:self.searchGoodsView];
     //  搜索的汉字转换URL编码
     NSString * urlStr = [searchKeyword stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet URLQueryAllowedCharacterSet]];
-    self.goodsUrl = [NSString stringWithFormat:@"http://s.m.taobao.com/h5?q=%@", urlStr];
+    self.goodsUrl = [NSString stringWithFormat:@"%@%@", site,urlStr];
     //  加载搜索商品web
     [self.searchGoodsView.goodsWeb loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:self.goodsUrl]]];
+    [self.searchGoods.searchInputBox resignFirstResponder];
 }
 
 #pragma mark - 购物网站按钮所在的视图
@@ -85,7 +139,17 @@ static NSString *const URLTaobaoGoods = @"/scene_product/tb_view";
 
 #pragma mark - 点击购物网站
 - (void)webBtnSelectedSearchGoods:(NSInteger)index {
-    NSLog(@"点击了第＝＝＝＝ %zi ＝＝＝＝＝", index);
+    NSString * key = self.searchGoods.searchInputBox.text;
+    if (index == 0) {
+        [self searchWebGoods:key withSite:JD];
+        _type = 0;
+    } else if (index == 1) {
+        [self searchWebGoods:key withSite:TaoBao];
+        _type = 1;
+    } else if (index == 2) {
+        [self searchWebGoods:key withSite:Tmall];
+        _type = 2;
+    }
 }
 
 #pragma mark - 搜索商品视图
@@ -102,7 +166,9 @@ static NSString *const URLTaobaoGoods = @"/scene_product/tb_view";
 - (void)findDoneBtnClick {
     if (self.searchGoodsView.findGoodsId.length > 0) {
         self.goodsId = self.searchGoodsView.findGoodsId;
-        [self networkSearchGoodsData];
+        NSLog(@"找到的商品ID：%@, 链接：%@", self.goodsId, self.searchGoodsView.findGoodsUrl);
+        
+        [self networkSearchGoodsData:_type];
         [self.view addSubview:self.findGoodsView];
     }
 }
@@ -119,8 +185,7 @@ static NSString *const URLTaobaoGoods = @"/scene_product/tb_view";
 #pragma mark - 确认添加
 - (void)sureBtnClick {
     [self dismissViewControllerAnimated:YES completion:nil];
-    NSLog(@"商品标题：%@ --- 价格：%@", self.findGoodsView.goodsTitle.text, self.findGoodsView.goodsPrice.text);
-    [SVProgressHUD showInfoWithStatus:[NSString stringWithFormat:@"%@--%@",self.findGoodsView.goodsTitle.text, self.findGoodsView.goodsPrice.text]];
+    self.findGodosBlock(self.findGoodsView.goodsTitle.text, self.findGoodsView.goodsPrice.text);
 }
 
 #pragma mark - 设置导航视图

@@ -9,6 +9,7 @@
 #import <UIKit/UIKit.h>
 #import "Fiu.h"
 #import "TaoBaoGoodsResult.h"
+#import "JDGoodsListproductbaseResult.h"
 
 @interface FindGoodsView : UIView
 
@@ -19,5 +20,7 @@
 @pro_strong UITextField     *   goodsPrice;     //  商品价格
 
 - (void)setFindGoodsViewData:(TaoBaoGoodsResult *)model;
+
+- (void)setJDGoodsViewData:(JDGoodsListproductbaseResult *)model;
 
 @end

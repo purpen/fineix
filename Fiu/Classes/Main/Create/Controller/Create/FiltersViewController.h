@@ -19,5 +19,13 @@
 @pro_strong UIImageView         *   filtersImageView;       //  需要处理的图片视图
 @pro_strong UIImage             *   filtersImg;             //  需要处理的图片
 @pro_strong NSString            *   filterName;             //  选择的滤镜名字
+@pro_strong NSString            *   fSceneId;
+@pro_strong NSString            *   fSceneTitle;
+
+/**
+ *  添加标签
+ *  标题／价格／坐标
+ */
+@pro_strong NSMutableArray      *   popData;
 
 @end

@@ -23,7 +23,7 @@ static NSString *const URLCancelSu = @"/favorite/ajax_cancel_subscription";
 static NSString *const URLLikeScenePeople = @"/favorite";
 
 @interface FiuSceneViewController () {
-    BOOL    isHave;     //  是否有场景
+    BOOL    _isHave;     //  是否有场景
 }
 
 @pro_strong FiuSceneInfoData            *   fiuSceneData;
@@ -40,14 +40,14 @@ static NSString *const URLLikeScenePeople = @"/favorite";
     [super viewWillAppear:animated];
     
     [self setNavigationViewUI];
+    self.currentpageNum = 0;
+    [self networkFiuSceneListData];
 }
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     
     [self networkRequestData];
-    self.currentpageNum = 0;
-    [self networkFiuSceneListData];
     [self networkLikePeopleData];
 }
 
@@ -57,7 +57,6 @@ static NSString *const URLLikeScenePeople = @"/favorite";
     [SVProgressHUD show];
     self.fiuSceneRequest = [FBAPI getWithUrlString:URLFiuSceneInfo requestDictionary:@{@"id":self.fiuSceneId} delegate:self];
     [self.fiuSceneRequest startRequestSuccess:^(FBRequest *request, id result) {
-        [self setSceneInfoViewUI];
         
         if ([[[result valueForKey:@"data"] valueForKey:@"is_subscript"] integerValue] == 0) {
             self.suBtn.suFiuBtn.selected = NO;
@@ -78,6 +77,8 @@ static NSString *const URLLikeScenePeople = @"/favorite";
     [SVProgressHUD show];
     self.fiuSceneListRequest = [FBAPI getWithUrlString:URLFiuSceneList requestDictionary:@{@"scene_id":self.fiuSceneId, @"stick":@"0", @"size":@"10",@"page":@(self.currentpageNum + 1)} delegate:self];
     [self.fiuSceneListRequest startRequestSuccess:^(FBRequest *request, id result) {
+        [self setSceneInfoViewUI];
+        
         NSArray * sceneArr = [[result valueForKey:@"data"] valueForKey:@"rows"];
         for (NSDictionary * sceneDic in sceneArr) {
             HomeSceneListRow * homeSceneModel = [[HomeSceneListRow alloc] initWithDictionary:sceneDic];
@@ -85,8 +86,8 @@ static NSString *const URLLikeScenePeople = @"/favorite";
             [self.sceneIdMarr addObject:[NSString stringWithFormat:@"%zi", homeSceneModel.idField]];
         }
         
-        if (self.sceneListMarr.count == 0) {
-            isHave = NO;
+        if (self.sceneListMarr.count > 0) {
+            _isHave = YES;
         }
         
         [self.fiuSceneTable reloadData];
@@ -234,7 +235,7 @@ static NSString *const URLLikeScenePeople = @"/favorite";
     if (section == 0) {
         return 3;
     } else if (section == 1) {
-        if (isHave == NO) {
+        if (_isHave == NO) {
             return 1;
         } else {
             return self.sceneListMarr.count;
@@ -276,7 +277,7 @@ static NSString *const URLLikeScenePeople = @"/favorite";
         }
         
     } else if (indexPath.section == 1) {
-        if (isHave == YES) {
+        if (_isHave == YES) {
             static NSString * fiuSceneTableViewCellID = @"fiuSceneTableViewCellID";
             SceneListTableViewCell * cell = [tableView dequeueReusableCellWithIdentifier:fiuSceneTableViewCellID];
             if (!cell) {
@@ -315,7 +316,7 @@ static NSString *const URLLikeScenePeople = @"/favorite";
         }
         
     } else if (indexPath.section == 1) {
-        if (isHave == YES) {
+        if (_isHave == YES) {
             return SCREEN_HEIGHT + 5;
         } else {
             return 250;
@@ -355,14 +356,18 @@ static NSString *const URLLikeScenePeople = @"/favorite";
 #pragma mark - 跳转到场景的详情
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     if (indexPath.section == 1) {
-        if (isHave == YES) {
+        if (_isHave == YES) {
             SceneInfoViewController * sceneInfoVC = [[SceneInfoViewController alloc] init];
             sceneInfoVC.sceneId = self.sceneIdMarr[indexPath.row];
             [self.navigationController pushViewController:sceneInfoVC animated:YES];
        
         } else {
             PictureToolViewController * pictureToolVC = [[PictureToolViewController alloc] init];
-            pictureToolVC.createType = @"fScene";
+            pictureToolVC.createType = @"scene";
+            if (self.fiuSceneId.length > 0) {
+                pictureToolVC.fSceneId = self.fiuSceneId;
+                pictureToolVC.fSceneTitle = [self.fiuSceneData valueForKey:@"title"];
+            }
             [self presentViewController:pictureToolVC animated:YES completion:nil];
         }
     }

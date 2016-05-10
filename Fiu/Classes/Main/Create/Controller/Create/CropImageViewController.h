@@ -16,5 +16,7 @@
 @pro_strong NSArray                     *   locationArr;
 @pro_strong ClipImageViewController     *   clipImageVC;
 @pro_strong UIImage                     *   clipImage;
+@pro_strong NSString                    *   fSceneId;
+@pro_strong NSString                    *   fSceneTitle;
 
 @end

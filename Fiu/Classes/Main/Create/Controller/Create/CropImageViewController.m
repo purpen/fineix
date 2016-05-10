@@ -41,6 +41,8 @@
     filtersVC.locationArr = self.locationArr;
     filtersVC.filtersImg = [self.clipImageVC clippingImage];
     filtersVC.createType = self.createType;
+    filtersVC.fSceneId = self.fSceneId;
+    filtersVC.fSceneTitle = self.fSceneTitle;
     [self.navigationController pushViewController:filtersVC animated:YES];
 }
 

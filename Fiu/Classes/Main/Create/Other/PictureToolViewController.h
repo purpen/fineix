@@ -17,5 +17,7 @@
  *  @param  fScene  情景
  */
 @pro_strong NSString            *   createType;
+@pro_strong NSString            *   fSceneId;
+@pro_strong NSString            *   fSceneTitle;
 
 @end
