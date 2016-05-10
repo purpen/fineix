@@ -10,4 +10,5 @@
 
 @interface AllNearbyScenarioViewController : FBViewController
 
+
 @end

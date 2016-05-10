@@ -11,7 +11,7 @@
 #import <SVProgressHUD/SVProgressHUD.h>
 #import <MJRefresh/MJRefresh.h>
 
-@interface CommentViewController : FBViewController <UITableViewDelegate, UITableViewDataSource>
+@interface CommentNViewController : FBViewController <UITableViewDelegate, UITableViewDataSource>
 
 @pro_strong FBRequest               *   sceneCommentRequest;
 @pro_strong FBRequest               *   sendCommentRequest;

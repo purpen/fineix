@@ -36,7 +36,7 @@
                             </constraints>
                             <state key="normal" title="Button" image="star"/>
                             <connections>
-                                <action selector="starBtnAction:" destination="iN0-l3-epB" eventType="touchDown" id="SuS-rU-b5v"/>
+                                <action selector="starBtnAction:" destination="iN0-l3-epB" eventType="touchUpInside" id="Ier-Bk-hyW"/>
                             </connections>
                         </button>
                         <button opaque="NO" tag="102" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qZ8-1j-prB" userLabel="Star2">
@@ -47,7 +47,7 @@
                             </constraints>
                             <state key="normal" title="Button" image="star"/>
                             <connections>
-                                <action selector="starBtnAction:" destination="iN0-l3-epB" eventType="touchDown" id="WnX-Fk-dzW"/>
+                                <action selector="starBtnAction:" destination="iN0-l3-epB" eventType="touchUpInside" id="hem-K5-EAN"/>
                             </connections>
                         </button>
                         <button opaque="NO" tag="103" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rX9-ps-r7z" userLabel="Star3">
@@ -58,7 +58,7 @@
                             </constraints>
                             <state key="normal" title="Button" image="star"/>
                             <connections>
-                                <action selector="starBtnAction:" destination="iN0-l3-epB" eventType="touchDown" id="DZg-4n-042"/>
+                                <action selector="starBtnAction:" destination="iN0-l3-epB" eventType="touchUpInside" id="bJq-LP-qRm"/>
                             </connections>
                         </button>
                         <button opaque="NO" tag="104" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="beo-U9-VED" userLabel="Star4">
@@ -69,7 +69,7 @@
                             </constraints>
                             <state key="normal" title="Button" image="star"/>
                             <connections>
-                                <action selector="starBtnAction:" destination="iN0-l3-epB" eventType="touchDown" id="wQb-4j-o0O"/>
+                                <action selector="starBtnAction:" destination="iN0-l3-epB" eventType="touchUpInside" id="Vpz-mJ-acB"/>
                             </connections>
                         </button>
                         <button opaque="NO" tag="105" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ju8-Ka-Dvw" userLabel="Star5">
@@ -80,7 +80,7 @@
                             </constraints>
                             <state key="normal" title="Button" image="star"/>
                             <connections>
-                                <action selector="starBtnAction:" destination="iN0-l3-epB" eventType="touchDown" id="5Jr-ZZ-Hg9"/>
+                                <action selector="starBtnAction:" destination="iN0-l3-epB" eventType="touchUpInside" id="cUh-B4-0ZS"/>
                             </connections>
                         </button>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Obe-1a-pQf" userLabel="Line">
@@ -125,9 +125,6 @@
                             <color key="textColor" red="0.1333333333" green="0.1333333333" blue="0.1333333333" alpha="1" colorSpace="calibratedRGB"/>
                             <fontDescription key="fontDescription" type="system" pointSize="12"/>
                             <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
-                            <connections>
-                                <outlet property="delegate" destination="iN0-l3-epB" id="Euv-c7-VhM"/>
-                            </connections>
                         </textView>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="写下你对商品的感受，对他人帮助很大。" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hsM-SP-WCX" userLabel="Placeholder">
                             <rect key="frame" x="17" y="17" width="216" height="15"/>
@@ -161,9 +158,9 @@
             </constraints>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <connections>
-                <outlet property="contentTextView" destination="mQO-LW-LnT" id="gFk-2y-WGF"/>
-                <outlet property="coverImgView" destination="sfv-qF-KGr" id="9z6-Ef-RuK"/>
-                <outlet property="placeholderLbl" destination="hsM-SP-WCX" id="baM-1b-0wZ"/>
+                <outlet property="contentTextView" destination="mQO-LW-LnT" id="chl-Hc-VrI"/>
+                <outlet property="coverImgView" destination="sfv-qF-KGr" id="vLk-iR-ixb"/>
+                <outlet property="placeholderLbl" destination="hsM-SP-WCX" id="tcM-0k-zez"/>
             </connections>
             <point key="canvasLocation" x="325.5" y="32"/>
         </view>

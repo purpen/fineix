@@ -89,8 +89,6 @@
 		1F8EACD61CDD8A5B00C51235 /* OrderInfoDetailViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1F8EACD41CDD8A5B00C51235 /* OrderInfoDetailViewController.xib */; };
 		1F8EACDA1CDDA09200C51235 /* RefundmentViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F8EACD81CDDA09200C51235 /* RefundmentViewController.m */; };
 		1F8EACDB1CDDA09200C51235 /* RefundmentViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1F8EACD91CDDA09200C51235 /* RefundmentViewController.xib */; };
-		1F8EACDF1CDDB0ED00C51235 /* CommenttwoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F8EACDD1CDDB0ED00C51235 /* CommenttwoViewController.m */; };
-		1F8EACE01CDDB0ED00C51235 /* CommenttwoViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1F8EACDE1CDDB0ED00C51235 /* CommenttwoViewController.xib */; };
 		1F8EACE81CDDD1AE00C51235 /* FBPayTheWayViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F8EACE61CDDD1AE00C51235 /* FBPayTheWayViewController.m */; };
 		1F8EACE91CDDD1AE00C51235 /* FBPayTheWayViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1F8EACE71CDDD1AE00C51235 /* FBPayTheWayViewController.xib */; };
 		1FBC3E9A1CCE3766007CFA14 /* ShareViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1FBC3E981CCE3766007CFA14 /* ShareViewController.m */; };
@@ -145,6 +143,10 @@
 		1FEB71781CC8A35A00CF34F3 /* QRCodeScanViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1FEB71771CC8A35A00CF34F3 /* QRCodeScanViewController.m */; };
 		1FEE50ED1CE1893B00B8A292 /* AllNearbyScenarioViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1FEE50EB1CE1893B00B8A292 /* AllNearbyScenarioViewController.m */; };
 		1FEE50EE1CE1893B00B8A292 /* AllNearbyScenarioViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1FEE50EC1CE1893B00B8A292 /* AllNearbyScenarioViewController.xib */; };
+		1FEE50F21CE2144500B8A292 /* CommenttwoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1FEE50F01CE2144500B8A292 /* CommenttwoViewController.m */; };
+		1FEE50F31CE2144500B8A292 /* CommenttwoViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1FEE50F11CE2144500B8A292 /* CommenttwoViewController.xib */; };
+		1FEE50F71CE235FD00B8A292 /* PaySuccessViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1FEE50F51CE235FD00B8A292 /* PaySuccessViewController.m */; };
+		1FEE50F81CE235FD00B8A292 /* PaySuccessViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1FEE50F61CE235FD00B8A292 /* PaySuccessViewController.xib */; };
 		1FEF0B131CC0FC15006EF0C6 /* My.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1FEF0AEC1CC0FC15006EF0C6 /* My.storyboard */; };
 		1FEF0B171CC0FC15006EF0C6 /* chanel.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1FEF0AF41CC0FC15006EF0C6 /* chanel.xib */; };
 		1FEF0B181CC0FC15006EF0C6 /* ChanelView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1FEF0AF61CC0FC15006EF0C6 /* ChanelView.m */; };
@@ -318,7 +320,7 @@
 		D87B69C01CC726BA00199EFE /* GroupHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = D87B69BD1CC726BA00199EFE /* GroupHeaderView.m */; };
 		D87B69D11CC726D500199EFE /* FBAlertViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D87B69C51CC726D500199EFE /* FBAlertViewController.m */; };
 		D87B69D21CC726D500199EFE /* FBSheetViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D87B69C71CC726D500199EFE /* FBSheetViewController.m */; };
-		D87B69D31CC726D500199EFE /* CommentViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D87B69CB1CC726D500199EFE /* CommentViewController.m */; };
+		D87B69D31CC726D500199EFE /* CommentNViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D87B69CB1CC726D500199EFE /* CommentNViewController.m */; };
 		D87B69D41CC726D500199EFE /* CommentDataTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D87B69CE1CC726D500199EFE /* CommentDataTableViewCell.m */; };
 		D87B69D51CC726D500199EFE /* WriteCommentView.m in Sources */ = {isa = PBXBuildFile; fileRef = D87B69D01CC726D500199EFE /* WriteCommentView.m */; };
 		D87B69E11CC7274900199EFE /* FBMenuView.m in Sources */ = {isa = PBXBuildFile; fileRef = D87B69DF1CC7274900199EFE /* FBMenuView.m */; };
@@ -539,9 +541,6 @@
 		1F8EACD71CDDA09200C51235 /* RefundmentViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RefundmentViewController.h; sourceTree = "<group>"; };
 		1F8EACD81CDDA09200C51235 /* RefundmentViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RefundmentViewController.m; sourceTree = "<group>"; };
 		1F8EACD91CDDA09200C51235 /* RefundmentViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RefundmentViewController.xib; sourceTree = "<group>"; };
-		1F8EACDC1CDDB0ED00C51235 /* CommenttwoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CommenttwoViewController.h; sourceTree = "<group>"; };
-		1F8EACDD1CDDB0ED00C51235 /* CommenttwoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CommenttwoViewController.m; sourceTree = "<group>"; };
-		1F8EACDE1CDDB0ED00C51235 /* CommenttwoViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CommenttwoViewController.xib; sourceTree = "<group>"; };
 		1F8EACE51CDDD1AE00C51235 /* FBPayTheWayViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FBPayTheWayViewController.h; sourceTree = "<group>"; };
 		1F8EACE61CDDD1AE00C51235 /* FBPayTheWayViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FBPayTheWayViewController.m; sourceTree = "<group>"; };
 		1F8EACE71CDDD1AE00C51235 /* FBPayTheWayViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FBPayTheWayViewController.xib; sourceTree = "<group>"; };
@@ -630,6 +629,12 @@
 		1FEE50EA1CE1893B00B8A292 /* AllNearbyScenarioViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AllNearbyScenarioViewController.h; sourceTree = "<group>"; };
 		1FEE50EB1CE1893B00B8A292 /* AllNearbyScenarioViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AllNearbyScenarioViewController.m; sourceTree = "<group>"; };
 		1FEE50EC1CE1893B00B8A292 /* AllNearbyScenarioViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AllNearbyScenarioViewController.xib; sourceTree = "<group>"; };
+		1FEE50EF1CE2144500B8A292 /* CommenttwoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CommenttwoViewController.h; sourceTree = "<group>"; };
+		1FEE50F01CE2144500B8A292 /* CommenttwoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CommenttwoViewController.m; sourceTree = "<group>"; };
+		1FEE50F11CE2144500B8A292 /* CommenttwoViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CommenttwoViewController.xib; sourceTree = "<group>"; };
+		1FEE50F41CE235FD00B8A292 /* PaySuccessViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PaySuccessViewController.h; sourceTree = "<group>"; };
+		1FEE50F51CE235FD00B8A292 /* PaySuccessViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PaySuccessViewController.m; sourceTree = "<group>"; };
+		1FEE50F61CE235FD00B8A292 /* PaySuccessViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PaySuccessViewController.xib; sourceTree = "<group>"; };
 		1FEF0AEC1CC0FC15006EF0C6 /* My.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = My.storyboard; sourceTree = "<group>"; };
 		1FEF0AF41CC0FC15006EF0C6 /* chanel.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = chanel.xib; sourceTree = "<group>"; };
 		1FEF0AF51CC0FC15006EF0C6 /* ChanelView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChanelView.h; sourceTree = "<group>"; };
@@ -952,8 +957,8 @@
 		D87B69C51CC726D500199EFE /* FBAlertViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FBAlertViewController.m; sourceTree = "<group>"; };
 		D87B69C61CC726D500199EFE /* FBSheetViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FBSheetViewController.h; sourceTree = "<group>"; };
 		D87B69C71CC726D500199EFE /* FBSheetViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FBSheetViewController.m; sourceTree = "<group>"; };
-		D87B69CA1CC726D500199EFE /* CommentViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CommentViewController.h; sourceTree = "<group>"; };
-		D87B69CB1CC726D500199EFE /* CommentViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CommentViewController.m; sourceTree = "<group>"; };
+		D87B69CA1CC726D500199EFE /* CommentNViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CommentNViewController.h; sourceTree = "<group>"; };
+		D87B69CB1CC726D500199EFE /* CommentNViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CommentNViewController.m; sourceTree = "<group>"; };
 		D87B69CD1CC726D500199EFE /* CommentDataTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CommentDataTableViewCell.h; sourceTree = "<group>"; };
 		D87B69CE1CC726D500199EFE /* CommentDataTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CommentDataTableViewCell.m; sourceTree = "<group>"; };
 		D87B69CF1CC726D500199EFE /* WriteCommentView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WriteCommentView.h; sourceTree = "<group>"; };
@@ -1268,6 +1273,9 @@
 		1F8EACE21CDDD19E00C51235 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
+				1FEE50F41CE235FD00B8A292 /* PaySuccessViewController.h */,
+				1FEE50F51CE235FD00B8A292 /* PaySuccessViewController.m */,
+				1FEE50F61CE235FD00B8A292 /* PaySuccessViewController.xib */,
 				1F8EACE51CDDD1AE00C51235 /* FBPayTheWayViewController.h */,
 				1F8EACE61CDDD1AE00C51235 /* FBPayTheWayViewController.m */,
 				1F8EACE71CDDD1AE00C51235 /* FBPayTheWayViewController.xib */,
@@ -1416,9 +1424,9 @@
 				1F8EACD71CDDA09200C51235 /* RefundmentViewController.h */,
 				1F8EACD81CDDA09200C51235 /* RefundmentViewController.m */,
 				1F8EACD91CDDA09200C51235 /* RefundmentViewController.xib */,
-				1F8EACDC1CDDB0ED00C51235 /* CommenttwoViewController.h */,
-				1F8EACDD1CDDB0ED00C51235 /* CommenttwoViewController.m */,
-				1F8EACDE1CDDB0ED00C51235 /* CommenttwoViewController.xib */,
+				1FEE50EF1CE2144500B8A292 /* CommenttwoViewController.h */,
+				1FEE50F01CE2144500B8A292 /* CommenttwoViewController.m */,
+				1FEE50F11CE2144500B8A292 /* CommenttwoViewController.xib */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -2712,8 +2720,8 @@
 		D87B69C91CC726D500199EFE /* Controller */ = {
 			isa = PBXGroup;
 			children = (
-				D87B69CA1CC726D500199EFE /* CommentViewController.h */,
-				D87B69CB1CC726D500199EFE /* CommentViewController.m */,
+				D87B69CA1CC726D500199EFE /* CommentNViewController.h */,
+				D87B69CB1CC726D500199EFE /* CommentNViewController.m */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -3207,6 +3215,7 @@
 				1FC678151CDAF52000535162 /* InvalidBonusCell.xib in Resources */,
 				1F5038AA1CDC406C004F76AD /* CommentView.xib in Resources */,
 				D81281721CAA8532007CF08B /* UMSocialSDKResourcesNew.bundle in Resources */,
+				1FEE50F81CE235FD00B8A292 /* PaySuccessViewController.xib in Resources */,
 				D83639AE1CD0660E00CC4AC0 /* FBLocationViewController.xib in Resources */,
 				1F1837711CCDF87500933CA7 /* ChangePasswordViewController.xib in Resources */,
 				D83639B01CD0660E00CC4AC0 /* FBMapLocatinViewController.xib in Resources */,
@@ -3221,6 +3230,7 @@
 				1F18377B1CCE0F2200933CA7 /* TalentCertificationViewController.xib in Resources */,
 				1FEE50EE1CE1893B00B8A292 /* AllNearbyScenarioViewController.xib in Resources */,
 				1F5038D01CDCF438004F76AD /* ReturnViewController.xib in Resources */,
+				1FEE50F31CE2144500B8A292 /* CommenttwoViewController.xib in Resources */,
 				1FEF0B171CC0FC15006EF0C6 /* chanel.xib in Resources */,
 				D812816E1CAA8532007CF08B /* UMShareEditViewControlleriPad.xib in Resources */,
 				D81281681CAA8532007CF08B /* UMSocialLocalizable.strings in Resources */,
@@ -3234,7 +3244,6 @@
 				1F27AE9C1CE0EACE005A434B /* mapapi.bundle in Resources */,
 				1FFFFF221CD055BB008E1CDC /* OptionViewController.xib in Resources */,
 				1F8EACDB1CDDA09200C51235 /* RefundmentViewController.xib in Resources */,
-				1F8EACE01CDDB0ED00C51235 /* CommenttwoViewController.xib in Resources */,
 				1FC678101CDAECE500535162 /* BonusCell.xib in Resources */,
 				1F1837761CCDFCB200933CA7 /* ChangeSumaryViewController.xib in Resources */,
 				D812815C1CAA8532007CF08B /* InfoPlist.strings in Resources */,
@@ -3305,7 +3314,7 @@
 				D80360621CBF41A3001920F9 /* SearchMenuView.m in Sources */,
 				1F35F0541CD237450000DB95 /* AddreesModel.m in Sources */,
 				D8363A581CD8814600CC4AC0 /* InfoBrandTableViewCell.m in Sources */,
-				D87B69D31CC726D500199EFE /* CommentViewController.m in Sources */,
+				D87B69D31CC726D500199EFE /* CommentNViewController.m in Sources */,
 				1F5038B41CDC40EE004F76AD /* OrderInfoModel.m in Sources */,
 				D81281531CAA8532007CF08B /* FBAPI.m in Sources */,
 				1F07A6471CC77BBF00CF225F /* OtherCollectionViewCell.m in Sources */,
@@ -3419,9 +3428,9 @@
 				1F8EACE81CDDD1AE00C51235 /* FBPayTheWayViewController.m in Sources */,
 				D8363A2F1CD8809400CC4AC0 /* Category.m in Sources */,
 				D8A9AD8B1CD9DFBC00A9FCFB /* FiltersView.m in Sources */,
+				1FEE50F71CE235FD00B8A292 /* PaySuccessViewController.m in Sources */,
 				D8A9AE1C1CE0772700A9FCFB /* UsedTagCollectionViewCell.m in Sources */,
 				D812815E1CAA8532007CF08B /* main.m in Sources */,
-				1F8EACDF1CDDB0ED00C51235 /* CommenttwoViewController.m in Sources */,
 				1FE60E5B1CD32FD200045117 /* CommentsTableViewCell.m in Sources */,
 				D83639BF1CD0932000CC4AC0 /* CommentRow.m in Sources */,
 				D8A9ADBB1CD9E2E700A9FCFB /* SearchLocationViewController.m in Sources */,
@@ -3447,6 +3456,7 @@
 				D8A9ACD21CD8A46900A9FCFB /* FiuSceneCollectionViewCell.m in Sources */,
 				D8A9AD881CD9DFBC00A9FCFB /* FBFiltersCollectionViewCell.m in Sources */,
 				1F3C0A911CBF95AC00B84FEB /* SubscribePeopleTableViewCell.m in Sources */,
+				1FEE50F21CE2144500B8A292 /* CommenttwoViewController.m in Sources */,
 				1FC678021CDAE97B00535162 /* HistoryBonusViewController.m in Sources */,
 				D8363A6D1CD8818E00CC4AC0 /* GoodsCategoryViewController.m in Sources */,
 				D8A9AE081CDC673D00A9FCFB /* SelectAllFSceneViewController.m in Sources */,

@@ -14,6 +14,7 @@
 #import "MJRefresh.h"
 #import "SceneInfoViewController.h"
 #import "HomePageViewController.h"
+#import "TipNumberView.h"
 
 @interface CommentsViewController ()<FBNavigationBarItemsDelegate,UITableViewDataSource,UITableViewDelegate>
 {
@@ -26,6 +27,7 @@
 @property (nonatomic, strong) UILabel *tipLabel;
 @property (nonatomic, assign) NSInteger currentPageNumber;
 @property (nonatomic, assign) NSInteger totalPageNumber;
+
 @end
 
 @implementation CommentsViewController
@@ -190,6 +192,7 @@
     }else{
         UserInfo *model = _modelAry[indexPath.row];
         [cell setUIWithModel:model];
+        cell.alertTipviewNum.hidden = YES;
         cell.focusBtn.hidden = YES;
         cell.timeLabelTwo.hidden = YES;
         cell.headBtn.tag = indexPath.row;

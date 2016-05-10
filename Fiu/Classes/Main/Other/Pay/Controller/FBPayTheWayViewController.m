@@ -16,6 +16,7 @@
 #import "SVProgressHUD.h"
 #import "WXSignParams.h"
 #import <AlipaySDK/AlipaySDK.h>
+#import "PaySuccessViewController.h"
 
 #define wayBtnTag 55
 #define chooseBtnTag 66
@@ -176,6 +177,7 @@
                 [SVProgressHUD showWithMaskType:SVProgressHUDMaskTypeClear];
                 
                 [request startRequestSuccess:^(FBRequest *request, id result) {
+                    
                     NSDictionary * dataDic = [result objectForKey:@"data"];
                     
                     [[AlipaySDK defaultService] payOrder:[dataDic objectForKey:@"str"] fromScheme:@"ali2088411237666512" callback:^(NSDictionary *resultDic) {
@@ -209,8 +211,9 @@
                     payReq.nonceStr= [dataDic objectForKey:@"nonce_str"];
                     payReq.timeStamp= [[dataDic objectForKey:@"time_stamp"] intValue];
                     
-                    WXSignParams * signParam = [[WXSignParams alloc] initWithDictionary:dataDic];
-                    payReq.sign= [signParam sign];
+//                    WXSignParams * signParam = [[WXSignParams alloc] initWithDictionary:dataDic];
+//                    payReq.sign= [signParam sign];
+                    payReq.sign = dataDic[@"new_sign"];
                     [WXApi sendReq:payReq];
                     
                     [SVProgressHUD dismiss];
@@ -257,6 +260,8 @@
     }
 }
 
+
+#pragma mark - alipayDelegate
 //请求订单状态以核实支付是否完成
 - (void)checkOrderInfoForPayStatusWithPaymentWay:(NSString *)paymentWay
 {
@@ -271,10 +276,10 @@
         [request startRequestSuccess:^(FBRequest *request, id result) {
             NSDictionary * dataDic = [result objectForKey:@"data"];
             if ([[dataDic objectForKey:@"status"] isEqualToNumber:@10]) {
-//                PaySuccessViewController * paySuccessVC = [[PaySuccessViewController alloc] initWithNibName:@"PaySuccessViewController" bundle:nil];
-//                paySuccessVC.orderInfo = weakSelf.orderInfo;
-//                paySuccessVC.paymentWay = paymentWay;
-//                [weakSelf.navigationController pushViewController:paySuccessVC animated:YES];
+                PaySuccessViewController * paySuccessVC = [[PaySuccessViewController alloc] initWithNibName:@"PaySuccessViewController" bundle:nil];
+                paySuccessVC.orderInfo = weakSelf.orderInfo;
+                paySuccessVC.paymentWay = paymentWay;
+                [weakSelf.navigationController pushViewController:paySuccessVC animated:YES];
                 
                 [SVProgressHUD showSuccessWithStatus:@"支付成功!"];
             } else {

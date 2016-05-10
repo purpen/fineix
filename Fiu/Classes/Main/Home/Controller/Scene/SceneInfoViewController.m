@@ -12,7 +12,7 @@
 #import "ContentAndTagTableViewCell.h"
 #import "LikePeopleTableViewCell.h"
 #import "CommentTableViewCell.h"
-#import "CommentViewController.h"
+#import "CommentNViewController.h"
 #import "FBAlertViewController.h"
 #import "GoodsInfoViewController.h"
 #import "SceneInfoData.h"
@@ -400,7 +400,7 @@ static NSString *const URLSceneGoods = @"/scene_product/getlist";
 #pragma mark - 跳转
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     if (indexPath.section == 1) {
-        CommentViewController * commentVC = [[CommentViewController alloc] init];
+        CommentNViewController * commentVC = [[CommentNViewController alloc] init];
         commentVC.targetId = self.sceneId;
         [self.navigationController pushViewController:commentVC animated:YES];
     } else if (indexPath.section == 2) {

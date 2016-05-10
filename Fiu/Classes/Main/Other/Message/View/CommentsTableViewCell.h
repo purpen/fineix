@@ -8,6 +8,7 @@
 
 #import <UIKit/UIKit.h>
 @class UserInfo;
+@class TipNumberView;
 
 @interface CommentsTableViewCell : UITableViewCell
 
@@ -20,6 +21,7 @@
 @property(nonatomic,strong) UIImageView *headImageView;
 @property(nonatomic,strong) UIButton *focusBtn;
 @property(nonatomic,strong) UIButton *headBtn;
+@property (nonatomic,strong) TipNumberView *alertTipviewNum;
 
 -(void)setUIWithModel:(UserInfo*)model;
 
