@@ -75,8 +75,16 @@ NSString *const LoginURL = @"/auth/login";//登录接口
 
 //点击发送验证码，判断手机号如果手机号正确发送验证码，并且重新发送view出现，并且开始跳字
 -(void)clikSendVerBtn:(UIButton*)sender{
+    //如果手机号正确，发送短信
+    NSDictionary *params = @{
+                             @"mobile":_signupView.phoneNumTF.text
+                             };
+    FBRequest *request = [FBAPI postWithUrlString:VerifyCodeURL requestDictionary:params delegate:self];
+    request.flag = VerifyCodeURL;
+    [request startRequest];
+
     if ([_signupView.phoneNumTF.text checkTel]) {
-        
+
         FBRequest *request1 = [FBAPI postWithUrlString:@"/auth/check_account" requestDictionary:@{@"account":_signupView.phoneNumTF.text} delegate:self];
         
         [request1 startRequestSuccess:^(FBRequest *request, id result) {
@@ -198,7 +206,6 @@ NSString *const LoginURL = @"/auth/login";//登录接口
             [userInfo updateUserInfoEntity];
             UserInfoEntity * userEntity = [UserInfoEntity defaultUserInfoEntity];
             userEntity.isLogin = YES;
-            [self dismissViewControllerAnimated:YES completion:nil];
             [SVProgressHUD showSuccessWithStatus:@"注册成功"];
             //跳转到手机号登录界面
             UIStoryboard *loginStory = [UIStoryboard storyboardWithName:@"LoginRegisterController" bundle:nil];
@@ -322,7 +329,6 @@ NSString *const LoginURL = @"/auth/login";//登录接口
                 //跳回个人主页
                 //跳回个人主页
                 [self dismissViewControllerAnimated:YES completion:nil];
-                [self.tabBarController setSelectedIndex:3];
             }
             
             

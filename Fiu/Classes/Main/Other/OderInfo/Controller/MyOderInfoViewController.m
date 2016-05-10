@@ -19,6 +19,7 @@
 #import "OrderInfoDetailViewController.h"
 #import "RefundmentViewController.h"
 #import "CommenttwoViewController.h"
+#import "FBPayTheWayViewController.h"
 
 @interface MyOderInfoViewController ()<FBNavigationBarItemsDelegate,UITableViewDelegate,UITableViewDataSource,FBRequestDelegate,OrderInfoCellDelegate>
 {
@@ -293,9 +294,9 @@ static NSString *const OrderInfoCellIdentifier = @"orderInfoCell";
             break;
         case OrderInfoStateWaitPayment://立即支付
         {
-//            FBPayTheWayViewController * payWayVC = [[FBPayTheWayViewController alloc] init];
-//            payWayVC.orderInfo = orderInfoCell.orderInfo;
-//            [self.navigationController pushViewController:payWayVC animated:YES];
+            FBPayTheWayViewController * payWayVC = [[FBPayTheWayViewController alloc] init];
+            payWayVC.orderInfo = orderInfoCell.orderInfo;
+            [self.navigationController pushViewController:payWayVC animated:YES];
             NSLog(@"立即支付");
         }
             break;

@@ -303,7 +303,6 @@ static NSString *const thirdRegister = @"/auth/third_sign";//第三方登录接�
                 [SVProgressHUD showSuccessWithStatus:@"登录成功"];
                 //跳回个人主页
                 [self dismissViewControllerAnimated:YES completion:nil];
-                [self.tabBarController setSelectedIndex:3];
             }
 //            //推荐感兴趣的情景
 //            NSDictionary *identifyDict = [[result objectForKey:@"data"] objectForKey:@"identify"];
@@ -513,10 +512,7 @@ static NSString *const thirdRegister = @"/auth/third_sign";//第三方登录接�
                 //跳回个人主页
                 //跳回个人主页
                 [self dismissViewControllerAnimated:YES completion:nil];
-                [self.tabBarController setSelectedIndex:3];
             }
-
-            
         }else{
             //跳转到绑定手机号界面
             BindIngViewController *bing = [[BindIngViewController alloc] init];

@@ -17,6 +17,6 @@
 @property(nonatomic,strong) UIButton *focusOnBtn;
 @property(nonatomic,strong) UIView *lineView;
 
--(void)setUIWithModel:(UserInfo*)model;
+-(void)setUIWithModel:(UserInfo*)model andType:(NSNumber*)type;
 
 @end

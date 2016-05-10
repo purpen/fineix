@@ -21,9 +21,11 @@
 #import "FBAPI.h"
 #import "GuidePageViewController.h"
 #import "HomePageViewController.h"
+#import "WXApi.h"
+#import <AlipaySDK/AlipaySDK.h>
 
 
-@interface AppDelegate ()
+@interface AppDelegate ()<WXApiDelegate>
 {
     BMKMapManager *_mapManager;
     float _la;
@@ -100,11 +102,8 @@ NSString *const determineLogin = @"/auth/check_login";
     [SVProgressHUD setBackgroundColor:[UIColor whiteColor]];
     [SVProgressHUD setForegroundColor:[UIColor colorWithHexString:fineixColor alpha:1]];
     
-    _mapManager = [[BMKMapManager alloc] init];
-    BOOL ret = [_mapManager start:@"dcmbwcn8m1O2sZsshU4xL4Gn" generalDelegate:nil];
-    if (!ret) {
-        NSLog(@"manager start failed!");
-    }
+    //设置百度地图代理
+    [self bmkMap];
     
     //model属性名与字典key名映射
     [UserInfo mj_setupReplacedKeyFromPropertyName:^NSDictionary *{
@@ -137,10 +136,19 @@ NSString *const determineLogin = @"/auth/check_login";
     
     
     
-    
+    //微信支付注册appId
+    [WXApi registerApp:WechatAppID];
     
 
     return YES;
+}
+
+-(void)bmkMap{
+    _mapManager = [[BMKMapManager alloc] init];
+    BOOL ret = [_mapManager start:@"7MLakRE70YBXUoMSSNXA9GYXutwS3Wi0" generalDelegate:nil];
+    if (!ret) {
+        NSLog(@"manager start failed!");
+    }
 }
 
 //#pragma mark -BMKLocationServiceDelegate
@@ -168,16 +176,37 @@ NSString *const determineLogin = @"/auth/check_login";
     if ([UMSocialSnsService handleOpenURL:url]) {
         return YES;
     }
-//    NSString *urlStr = [url absoluteString];
-//    if ([urlStr containsString:@"qq41e073ea"]) {
-//        NSArray *ary = [urlStr componentsSeparatedByString:@"="];
-//        NSLog(@"%@",[ary lastObject]);
-//        HomePageViewController *homePageVC = [[HomePageViewController alloc] init];
-//        return YES;
-//    }
+    if ([WXApi handleOpenURL:url delegate:self]) {
+        return YES;
+    }
+    
+    //如果极简开发包不可用，会跳转支付宝钱包进行支付，需要将支付宝钱包的支付结果回传给开发包
+    if ([url.host isEqualToString:@"safepay"]) {
+        [[AlipaySDK defaultService] processOrderWithPaymentResult:url standbyCallback:^(NSDictionary *resultDic) {
+            //【由于在跳转支付宝客户端支付的过程中，商户app在后台很可能被系统kill了，所以pay接口的callback就会失效，请商户对standbyCallback返回的回调结果进行处理,就是在这个方法里面处理跟callback一样的逻辑】
+            if (_aliDelegate && [_aliDelegate respondsToSelector:@selector(standbyCallbackWithResultDic:)]) {
+                [_aliDelegate standbyCallbackWithResultDic:resultDic];
+            }
+        }];
+    }
+    
     return YES;
 }
 
+
+-(void)onReq:(BaseReq*)req
+{
+    if (self.wxDelegate && [self.wxDelegate respondsToSelector:@selector(onReq:)]) {
+        [self.wxDelegate onReq:req];
+    }
+}
+
+-(void)onResp:(BaseResp*)resp
+{
+    if (self.wxDelegate && [self.wxDelegate respondsToSelector:@selector(onResp:)]) {
+        [self.wxDelegate onResp:resp];
+    }
+}
 
 
 - (void)applicationWillResignActive:(UIApplication *)application {

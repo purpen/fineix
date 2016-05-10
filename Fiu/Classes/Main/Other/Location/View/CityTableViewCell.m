@@ -53,8 +53,24 @@
             make.bottom.mas_equalTo(-12/667.0*SCREEN_HEIGHT);
             make.left.mas_equalTo(_locationImageView.mas_right).with.offset(2/667.0*SCREEN_HEIGHT);
         }];
+        
+        [_bgImageView addSubview:self.lineView];
+        [_lineView mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.size.mas_equalTo(CGSizeMake(SCREEN_WIDTH, 0.5));
+            make.left.mas_equalTo(_bgImageView.mas_left).with.offset(0);
+            make.bottom.mas_equalTo(_bgImageView.mas_bottom).with.offset(0);
+        }];
     }
     return _bgImageView;
+}
+
+-(UIView *)lineView{
+    if (!_lineView) {
+        _lineView = [[UIView alloc] init];
+        _lineView.alpha = 0.5;
+        _lineView.backgroundColor = [UIColor grayColor];
+    }
+    return _lineView;
 }
 
 -(UILabel *)locationLabel{

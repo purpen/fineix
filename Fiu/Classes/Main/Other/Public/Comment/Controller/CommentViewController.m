@@ -22,8 +22,7 @@ static NSString *const URLSendSceneComment = @"/comment/ajax_comment";
 @end
 
 @implementation CommentViewController
-- (IBAction)commitBtnAction:(UIButton *)sender {
-}
+
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];

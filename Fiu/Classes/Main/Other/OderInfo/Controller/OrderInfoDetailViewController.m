@@ -14,6 +14,9 @@
 #import "ProductInfoView.h"
 #import "TYAlertView.h"
 #import "UIView+TYAlertView.h"
+#import "CommenttwoViewController.h"
+#import "RefundmentViewController.h"
+#import "FBPayTheWayViewController.h"
 
 @interface OrderInfoDetailViewController ()<ProductInfoViewDelegate,FBNavigationBarItemsDelegate>
 
@@ -207,18 +210,18 @@ static NSString *const OrderDetailURL = @"/shopping/detail";
             break;
         case OrderInfoStateWaitPayment://立即支付
         {
-//            FBPayTheWayViewController * payWayVC = [[FBPayTheWayViewController alloc] init];
-//            payWayVC.orderInfo = self.orderInfo;
-//            [self.navigationController pushViewController:payWayVC animated:YES];
+            FBPayTheWayViewController * payWayVC = [[FBPayTheWayViewController alloc] init];
+            payWayVC.orderInfo = self.orderInfo;
+            [self.navigationController pushViewController:payWayVC animated:YES];
         }
             break;
         case OrderInfoStateWaitDelivery://申请退款
         {
-//            RefundmentViewController * refundmentVC = [[RefundmentViewController alloc] initWithNibName:@"RefundmentViewController" bundle:nil];
-//            refundmentVC.orderInfoCell = self.orderInfoCell;
-//            refundmentVC.orderInfo = self.orderInfo;
-//            refundmentVC.isFromOrderDetail = true;
-//            [self.navigationController pushViewController:refundmentVC animated:YES];
+            RefundmentViewController * refundmentVC = [[RefundmentViewController alloc] initWithNibName:@"RefundmentViewController" bundle:nil];
+            refundmentVC.orderInfoCell = self.orderInfoCell;
+            refundmentVC.orderInfo = self.orderInfo;
+            refundmentVC.isFromOrderDetail = true;
+            [self.navigationController pushViewController:refundmentVC animated:YES];
         }
             break;
         case OrderInfoStateWaitReceive://确认收货
@@ -228,10 +231,10 @@ static NSString *const OrderDetailURL = @"/shopping/detail";
             break;
         case OrderInfoStateWaitComment://去评价
         {
-//            CommentViewController * commentVC = [[CommentViewController alloc] initWithNibName:@"CommentViewController" bundle:nil];
-//            commentVC.orderInfoCell = self.orderInfoCell;
-//            commentVC.delegate = self;
-//            [self.navigationController pushViewController:commentVC animated:YES];
+            CommenttwoViewController * commentVC = [[CommenttwoViewController alloc] initWithNibName:@"CommenttwoViewController" bundle:nil];
+            commentVC.orderInfoCell = self.orderInfoCell;
+            commentVC.delegate = self;
+            [self.navigationController pushViewController:commentVC animated:YES];
         }
             break;
         default:

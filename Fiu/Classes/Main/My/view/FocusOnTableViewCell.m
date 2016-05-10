@@ -10,6 +10,7 @@
 #import "Fiu.h"
 #import "UserInfo.h"
 #import <SDWebImage/UIImageView+WebCache.h>
+#import "UserInfoEntity.h"
 
 @implementation FocusOnTableViewCell
 
@@ -77,12 +78,37 @@
     return _lineView;
 }
 
--(void)setUIWithModel:(UserInfo *)model{
-    if ([model.is_love isEqualToNumber:@1]) {
-        self.focusOnBtn.selected = NO;
-    }else if ([model.is_love isEqualToNumber:@2]){
-        self.focusOnBtn.selected = YES;
+-(void)setUIWithModel:(UserInfo *)model andType:(NSNumber *)type{
+    if ([type isEqualToNumber:@1]) {
+        UserInfoEntity *entity = [UserInfoEntity defaultUserInfoEntity];
+        if ([entity.userId isEqual:model.userId]) {
+            if ([model.is_love isEqualToNumber:@1]) {
+                self.focusOnBtn.selected = NO;
+            }else if ([model.is_love isEqualToNumber:@2]){
+                self.focusOnBtn.selected = YES;
+            }
+        }else{
+            if ([model.level isEqualToNumber:@1]) {
+                self.focusOnBtn.selected = YES;
+            }else if ([model.level isEqualToNumber:@0]){
+                self.focusOnBtn.selected = NO;
+            }
+        }
+
+    }else if ([type isEqualToNumber:@0]){
+        UserInfoEntity *entity = [UserInfoEntity defaultUserInfoEntity];
+        if ([entity.userId isEqual:model.userId]) {
+            self.focusOnBtn.selected = YES;
+        }else{
+            if ([model.is_love isEqualToNumber:@1]) {
+                self.focusOnBtn.selected = YES;
+            }else if ([model.is_love isEqualToNumber:@0]){
+                self.focusOnBtn.selected = NO;
+            }
+        }
+
     }
+    
     [self.headImageView sd_setImageWithURL:[NSURL URLWithString:model.mediumAvatarUrl] placeholderImage:[UIImage imageNamed:@"user"]];
     self.nickNameLabel.text = model.nickname;
     self.summaryLabel.text = model.summary;
