@@ -12,6 +12,7 @@
 #import "SelectHotFSceneTableViewCell.h"
 #import "FiuSceneInfoData.h"
 #import "MapTableViewCell.h"
+#import "AllNearbyScenarioViewController.h"
 
 static NSString *const URLFSceneList = @"/scene_scene/";
 
@@ -244,6 +245,8 @@ static NSString *const URLFSceneList = @"/scene_scene/";
 #pragma mark - 查看全部附近的情景
 - (void)lookNearbyFScene {
     [SVProgressHUD showInfoWithStatus:@"跳转到情景地图的大头针视图"];
+    AllNearbyScenarioViewController *vc = [[AllNearbyScenarioViewController alloc] init];
+    [self.navigationController pushViewController:vc animated:YES];
 }
 
 #pragma mark - 选中附近的情景

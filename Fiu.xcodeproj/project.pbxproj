@@ -143,6 +143,8 @@
 		1FEB71721CC8802800CF34F3 /* InvitationModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 1FEB71711CC8802800CF34F3 /* InvitationModel.m */; };
 		1FEB71751CC88B5D00CF34F3 /* FindeFirendTwoModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 1FEB71741CC88B5D00CF34F3 /* FindeFirendTwoModel.m */; };
 		1FEB71781CC8A35A00CF34F3 /* QRCodeScanViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1FEB71771CC8A35A00CF34F3 /* QRCodeScanViewController.m */; };
+		1FEE50ED1CE1893B00B8A292 /* AllNearbyScenarioViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1FEE50EB1CE1893B00B8A292 /* AllNearbyScenarioViewController.m */; };
+		1FEE50EE1CE1893B00B8A292 /* AllNearbyScenarioViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1FEE50EC1CE1893B00B8A292 /* AllNearbyScenarioViewController.xib */; };
 		1FEF0B131CC0FC15006EF0C6 /* My.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1FEF0AEC1CC0FC15006EF0C6 /* My.storyboard */; };
 		1FEF0B171CC0FC15006EF0C6 /* chanel.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1FEF0AF41CC0FC15006EF0C6 /* chanel.xib */; };
 		1FEF0B181CC0FC15006EF0C6 /* ChanelView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1FEF0AF61CC0FC15006EF0C6 /* ChanelView.m */; };
@@ -625,6 +627,9 @@
 		1FEB71741CC88B5D00CF34F3 /* FindeFirendTwoModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FindeFirendTwoModel.m; sourceTree = "<group>"; };
 		1FEB71761CC8A35A00CF34F3 /* QRCodeScanViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QRCodeScanViewController.h; sourceTree = "<group>"; };
 		1FEB71771CC8A35A00CF34F3 /* QRCodeScanViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QRCodeScanViewController.m; sourceTree = "<group>"; };
+		1FEE50EA1CE1893B00B8A292 /* AllNearbyScenarioViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AllNearbyScenarioViewController.h; sourceTree = "<group>"; };
+		1FEE50EB1CE1893B00B8A292 /* AllNearbyScenarioViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AllNearbyScenarioViewController.m; sourceTree = "<group>"; };
+		1FEE50EC1CE1893B00B8A292 /* AllNearbyScenarioViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AllNearbyScenarioViewController.xib; sourceTree = "<group>"; };
 		1FEF0AEC1CC0FC15006EF0C6 /* My.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = My.storyboard; sourceTree = "<group>"; };
 		1FEF0AF41CC0FC15006EF0C6 /* chanel.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = chanel.xib; sourceTree = "<group>"; };
 		1FEF0AF51CC0FC15006EF0C6 /* ChanelView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChanelView.h; sourceTree = "<group>"; };
@@ -2992,6 +2997,9 @@
 				D8A9AE041CDC3D5800A9FCFB /* SearchFSceneViewController.m */,
 				D8A9AE061CDC673D00A9FCFB /* SelectAllFSceneViewController.h */,
 				D8A9AE071CDC673D00A9FCFB /* SelectAllFSceneViewController.m */,
+				1FEE50EA1CE1893B00B8A292 /* AllNearbyScenarioViewController.h */,
+				1FEE50EB1CE1893B00B8A292 /* AllNearbyScenarioViewController.m */,
+				1FEE50EC1CE1893B00B8A292 /* AllNearbyScenarioViewController.xib */,
 			);
 			path = SelectScene;
 			sourceTree = "<group>";
@@ -3211,6 +3219,7 @@
 				1FE60E431CD3226400045117 /* MessageViewController.xib in Resources */,
 				D81281751CAA8532007CF08B /* WeiboSDK.bundle in Resources */,
 				1F18377B1CCE0F2200933CA7 /* TalentCertificationViewController.xib in Resources */,
+				1FEE50EE1CE1893B00B8A292 /* AllNearbyScenarioViewController.xib in Resources */,
 				1F5038D01CDCF438004F76AD /* ReturnViewController.xib in Resources */,
 				1FEF0B171CC0FC15006EF0C6 /* chanel.xib in Resources */,
 				D812816E1CAA8532007CF08B /* UMShareEditViewControlleriPad.xib in Resources */,
@@ -3428,6 +3437,7 @@
 				1F5038B31CDC40EE004F76AD /* ExpressInfoModel.m in Sources */,
 				D8A9ACB01CD89E0000A9FCFB /* RollImageData.m in Sources */,
 				1F5038CF1CDCF438004F76AD /* ReturnViewController.m in Sources */,
+				1FEE50ED1CE1893B00B8A292 /* AllNearbyScenarioViewController.m in Sources */,
 				1FBE626D1CC4D095009606F7 /* FocusOnTableViewCell.m in Sources */,
 				1F3C0A841CBF760C00B84FEB /* SubscribePeopleViewController.m in Sources */,
 				D87B69E11CC7274900199EFE /* FBMenuView.m in Sources */,

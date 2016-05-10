@@ -1029,7 +1029,7 @@
                                         <textInputTraits key="textInputTraits"/>
                                     </textField>
                                 </subviews>
-                                <color key="backgroundColor" red="1" green="0.59362031869999998" blue="0.74681548269999998" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="backgroundColor" red="0.96862745098039216" green="0.96862745098039216" blue="0.96862745098039216" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstItem="Pw0-DK-AMO" firstAttribute="top" secondItem="60y-mG-VIe" secondAttribute="top" constant="7" id="5us-ng-P8i"/>
                                     <constraint firstAttribute="height" constant="44" id="Jfs-GF-fp0"/>

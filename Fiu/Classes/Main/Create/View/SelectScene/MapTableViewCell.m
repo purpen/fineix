@@ -28,7 +28,7 @@
 }
 
 -(void)setUIWithAry:(NSArray *)ary{
-    
+    NSLog(@"位置数组  %@",ary);
     for (NSDictionary *logDict in ary) {
         NSArray *logAry = logDict[@"coordinates"];
         double la = [logAry[1] doubleValue];
@@ -66,8 +66,6 @@
             make.bottom.mas_equalTo(self.mas_bottom).with.offset(0);
         }];
         
-        
-        
     }
     return self;
 }
@@ -78,16 +76,15 @@
     NSArray *logAry = logDict[@"coordinates"];
     double la = [logAry[1] doubleValue];
     double lo = [logAry[0] doubleValue];
-    //_mapView.limitMapRegion = ;
+    _mapView.centerCoordinate = {la,lo};
 }
 
 -(BMKMapView *)mapView{
     if (!_mapView) {
         _mapView = [[BMKMapView alloc] init];
         _mapView.delegate = self;
-        _mapView.backgroundColor = [UIColor redColor];
         _mapView.gesturesEnabled = NO;
-        _mapView.zoomLevel = 17;
+        _mapView.zoomLevel = 16;
     }
     return _mapView;
 }

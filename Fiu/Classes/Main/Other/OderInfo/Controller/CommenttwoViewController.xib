@@ -5,7 +5,7 @@
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
     </dependencies>
     <objects>
-        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="CommentViewController">
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="CommenttwoViewController">
             <connections>
                 <outlet property="commiteBtn" destination="lcl-Sb-C10" id="RaJ-WL-h5o"/>
                 <outlet property="mainScrollView" destination="hL4-ZY-XLy" id="oVo-kS-1VM"/>
