@@ -13,13 +13,13 @@
 #import "SceneInfoData.h"
 #import "FiuSceneInfoData.h"
 
-@interface ContentAndTagTableViewCell : UITableViewCell
+@interface ContentAndTagTableViewCell : UITableViewCell <UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout>
 
 @pro_strong UINavigationController      *   nav;
 @pro_strong UILabel                     *   contentLab;     //  场景内容文字
-@pro_strong UIScrollView                *   tagView;        //  标签视图
 @pro_assign CGFloat                         cellHeight;
-@pro_strong NSArray                     *   titleArr;
+@pro_strong UICollectionView            *   chooseTagView;  //  选择的标签列表
+@pro_strong NSMutableArray              *   chooseTagMarr;
 
 - (void)setFiuSceneDescription:(FiuSceneInfoData *)model;
 

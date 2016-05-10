@@ -14,17 +14,22 @@
 #import "SceneInfoViewController.h"
 #import "PictureToolViewController.h"
 #import "FiuSceneInfoData.h"
+#import "NoHaveSceneTableViewCell.h"
 
 static NSString *const URLFiuSceneInfo = @"/scene_scene/view";
 static NSString *const URLFiuSceneList = @"/scene_sight/";
 static NSString *const URLSuFiuScene = @"/favorite/ajax_subscription";
 static NSString *const URLCancelSu = @"/favorite/ajax_cancel_subscription";
+static NSString *const URLLikeScenePeople = @"/favorite";
 
-@interface FiuSceneViewController ()
+@interface FiuSceneViewController () {
+    BOOL    isHave;     //  是否有场景
+}
 
 @pro_strong FiuSceneInfoData            *   fiuSceneData;
 @pro_strong NSMutableArray              *   sceneListMarr;
 @pro_strong NSMutableArray              *   sceneIdMarr;
+@pro_strong NSMutableArray              *   suPeopleMarr;     //  点赞的人
 
 
 @end
@@ -43,6 +48,7 @@ static NSString *const URLCancelSu = @"/favorite/ajax_cancel_subscription";
     [self networkRequestData];
     self.currentpageNum = 0;
     [self networkFiuSceneListData];
+    [self networkLikePeopleData];
 }
 
 #pragma mark - 网络请求
@@ -78,19 +84,43 @@ static NSString *const URLCancelSu = @"/favorite/ajax_cancel_subscription";
             [self.sceneListMarr addObject:homeSceneModel];
             [self.sceneIdMarr addObject:[NSString stringWithFormat:@"%zi", homeSceneModel.idField]];
         }
+        
+        if (self.sceneListMarr.count == 0) {
+            isHave = NO;
+        }
+        
         [self.fiuSceneTable reloadData];
         self.currentpageNum = [[[result valueForKey:@"data"] valueForKey:@"current_page"] integerValue];
         self.totalPageNum = [[[result valueForKey:@"data"] valueForKey:@"total_page"] integerValue];
-        if (self.totalPageNum > 1) {
-            [self addMJRefresh:self.fiuSceneTable];
-            [self requestIsLastData:self.fiuSceneTable currentPage:self.currentpageNum withTotalPage:self.totalPageNum];
-        }
+        
+        [self requestIsLastData:self.fiuSceneTable currentPage:self.currentpageNum withTotalPage:self.totalPageNum];
+        
         [SVProgressHUD dismiss];
         
     } failure:^(FBRequest *request, NSError *error) {
         [SVProgressHUD showErrorWithStatus:[error localizedDescription]];
     }];
 }
+
+#pragma mark 订阅此情景的用户
+- (void)networkLikePeopleData {
+    [self.suPeopleMarr removeAllObjects];
+    [SVProgressHUD show];
+    self.suPeopleRequest = [FBAPI postWithUrlString:URLLikeScenePeople requestDictionary:@{@"type":@"scene", @"event":@"subscription", @"page":@"1" , @"size":@"10000", @"id":self.fiuSceneId} delegate:self];
+    [self.suPeopleRequest startRequestSuccess:^(FBRequest *request, id result) {
+        NSArray * likePeopleArr = [[result valueForKey:@"data"] valueForKey:@"rows"];
+        for (NSDictionary * likePeopleDic in likePeopleArr) {
+            LikeOrSuPeopleRow * likePeopleModel = [[LikeOrSuPeopleRow alloc] initWithDictionary:likePeopleDic];
+            [self.suPeopleMarr addObject:likePeopleModel];
+        }
+        [self.fiuSceneTable reloadData];
+        [SVProgressHUD dismiss];
+        
+    } failure:^(FBRequest *request, NSError *error) {
+        [SVProgressHUD showErrorWithStatus:[error localizedDescription]];
+    }];
+}
+
 
 #pragma mark 订阅情景
 - (void)networkSuFiuSceneData {
@@ -178,7 +208,7 @@ static NSString *const URLCancelSu = @"/favorite/ajax_cancel_subscription";
     return _suBtn;
 }
 
-#pragma mark - 设置场景详情的视图
+#pragma mark - 设置情景详情的视图
 - (UITableView *)fiuSceneTable {
     if (!_fiuSceneTable) {
         _fiuSceneTable = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT) style:(UITableViewStyleGrouped)];
@@ -187,6 +217,11 @@ static NSString *const URLCancelSu = @"/favorite/ajax_cancel_subscription";
         _fiuSceneTable.showsVerticalScrollIndicator = NO;
         _fiuSceneTable.separatorStyle = UITableViewCellSeparatorStyleNone;
         _fiuSceneTable.backgroundColor = [UIColor whiteColor];
+        
+        if (self.totalPageNum > 1) {
+            [self addMJRefresh:_fiuSceneTable];
+        }
+        
     }
     return _fiuSceneTable;
 }
@@ -199,7 +234,11 @@ static NSString *const URLCancelSu = @"/favorite/ajax_cancel_subscription";
     if (section == 0) {
         return 3;
     } else if (section == 1) {
-        return self.sceneListMarr.count;
+        if (isHave == NO) {
+            return 1;
+        } else {
+            return self.sceneListMarr.count;
+        }
     }
     return 1;
 }
@@ -231,18 +270,30 @@ static NSString *const URLCancelSu = @"/favorite/ajax_cancel_subscription";
             if (cell == nil) {
                 cell = [[LikePeopleTableViewCell alloc] initWithStyle:(UITableViewCellStyleDefault) reuseIdentifier:likePeopleCellId];
             }
-//            [cell setUI];
+            cell.nav = self.navigationController;
+            [cell setLikeOrSuPeopleData:self.suPeopleMarr];
             return cell;
         }
         
     } else if (indexPath.section == 1) {
-        static NSString * fiuSceneTableViewCellID = @"fiuSceneTableViewCellID";
-        SceneListTableViewCell * cell = [tableView dequeueReusableCellWithIdentifier:fiuSceneTableViewCellID];
-        if (!cell) {
-            cell = [[SceneListTableViewCell alloc] initWithStyle:(UITableViewCellStyleDefault) reuseIdentifier:fiuSceneTableViewCellID];
+        if (isHave == YES) {
+            static NSString * fiuSceneTableViewCellID = @"fiuSceneTableViewCellID";
+            SceneListTableViewCell * cell = [tableView dequeueReusableCellWithIdentifier:fiuSceneTableViewCellID];
+            if (!cell) {
+                cell = [[SceneListTableViewCell alloc] initWithStyle:(UITableViewCellStyleDefault) reuseIdentifier:fiuSceneTableViewCellID];
+            }
+            [cell setHomeSceneListData:self.sceneListMarr[indexPath.row]];
+            return cell;
+        
+        } else {
+            static NSString * noHaveSceneTableViewCell = @"NoHaveSceneTableViewCell";
+            NoHaveSceneTableViewCell * cell = [tableView dequeueReusableCellWithIdentifier:noHaveSceneTableViewCell];
+            if (!cell) {
+                cell = [[NoHaveSceneTableViewCell alloc] initWithStyle:(UITableViewCellStyleDefault) reuseIdentifier:noHaveSceneTableViewCell];
+            }
+            return cell;
         }
-        [cell setHomeSceneListData:self.sceneListMarr[indexPath.row]];
-        return cell;
+        return nil;
     }
     
     return nil;
@@ -258,14 +309,17 @@ static NSString *const URLCancelSu = @"/favorite/ajax_cancel_subscription";
             [cell getContentCellHeight:self.fiuSceneData.des];
             return cell.cellHeight;
         }  else if (indexPath.row == 2) {
-            NSArray * arr = [NSArray arrayWithObjects:@"1",@"1",@"1",@"1",@"1",@"1",@"1",@"1",@"1",@"1",nil];
             LikePeopleTableViewCell * cell = [[LikePeopleTableViewCell alloc] init];
-            [cell getCellHeight:arr];
+            [cell getCellHeight:self.suPeopleMarr];
             return cell.cellHeight;
         }
         
     } else if (indexPath.section == 1) {
-        return SCREEN_HEIGHT + 5;
+        if (isHave == YES) {
+            return SCREEN_HEIGHT + 5;
+        } else {
+            return 250;
+        }
     }
     
     return 0;
@@ -301,9 +355,16 @@ static NSString *const URLCancelSu = @"/favorite/ajax_cancel_subscription";
 #pragma mark - 跳转到场景的详情
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     if (indexPath.section == 1) {
-        SceneInfoViewController * sceneInfoVC = [[SceneInfoViewController alloc] init];
-        sceneInfoVC.sceneId = self.sceneIdMarr[indexPath.row];
-        [self.navigationController pushViewController:sceneInfoVC animated:YES];
+        if (isHave == YES) {
+            SceneInfoViewController * sceneInfoVC = [[SceneInfoViewController alloc] init];
+            sceneInfoVC.sceneId = self.sceneIdMarr[indexPath.row];
+            [self.navigationController pushViewController:sceneInfoVC animated:YES];
+       
+        } else {
+            PictureToolViewController * pictureToolVC = [[PictureToolViewController alloc] init];
+            pictureToolVC.createType = @"fScene";
+            [self presentViewController:pictureToolVC animated:YES completion:nil];
+        }
     }
 }
 
@@ -392,5 +453,14 @@ static NSString *const URLCancelSu = @"/favorite/ajax_cancel_subscription";
     }
     return _sceneIdMarr;
 }
+
+- (NSMutableArray *)suPeopleMarr {
+    if (!_suPeopleMarr) {
+        _suPeopleMarr = [NSMutableArray array];
+    }
+    return _suPeopleMarr;
+}
+
+
 
 @end

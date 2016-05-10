@@ -10,6 +10,8 @@
 #import "SearchLocationViewController.h"
 #import "AddTagViewController.h"
 #import "SelectSceneViewController.h"
+#import "AddTagViewController.h"
+#import "ChooseTagsCollectionViewCell.h"
 
 static const NSInteger btnTag = 100;
 
@@ -299,6 +301,11 @@ static const NSInteger btnTag = 100;
         _addTag.backgroundColor = [UIColor whiteColor];
         
         [_addTag addSubview:self.addTagBtn];
+        [_addTag addSubview:self.chooseTagView];
+        
+        UIButton * goIcon = [[UIButton alloc] initWithFrame:CGRectMake(SCREEN_WIDTH - 44, 0, 44, 44)];
+        [goIcon setImage:[UIImage imageNamed:@"entr"] forState:(UIControlStateNormal)];
+        [_addTag addSubview:goIcon];
     }
     return _addTag;
 }
@@ -327,9 +334,60 @@ static const NSInteger btnTag = 100;
 //  去选择标签
 - (void)chooesTag {
     AddTagViewController * addTagVC = [[AddTagViewController alloc] init];
+    
+    addTagVC.chooseTagsBlock = ^(NSMutableArray * title, NSMutableArray * ids) {
+        self.chooseTagMarr = title;
+        self.chooseTagIdMarr = ids;
+        if (self.chooseTagMarr.count > 0) {
+            [self changeTagFrame];
+            [self.chooseTagView reloadData];
+        }
+//        NSLog(@"＝＝＝＝＝＝＝＝＝ %@ ＝＝＝＝＝＝＝", self.chooseTagMarr);
+//        NSLog(@"－－－－－－－－－ %@ －－－－－－－", ids);
+    };
+    
     [self.nav pushViewController:addTagVC animated:YES];
 
 }
+
+#pragma mark - 选中的标签列表
+- (UICollectionView *)chooseTagView {
+    if (!_chooseTagView) {
+        UICollectionViewFlowLayout * flowLayout = [[UICollectionViewFlowLayout alloc] init];
+        flowLayout.minimumLineSpacing = 1.0f;
+        flowLayout.minimumInteritemSpacing = 1.0f;
+        flowLayout.sectionInset = UIEdgeInsetsMake(0, 15, 0, 15);
+        flowLayout.scrollDirection = UICollectionViewScrollDirectionHorizontal;
+        
+        _chooseTagView = [[UICollectionView alloc] initWithFrame:CGRectMake(0, 44, SCREEN_WIDTH,44) collectionViewLayout:flowLayout];
+        _chooseTagView.backgroundColor = [UIColor whiteColor];
+        _chooseTagView.delegate = self;
+        _chooseTagView.dataSource = self;
+        _chooseTagView.showsHorizontalScrollIndicator = NO;
+        [_chooseTagView registerClass:[ChooseTagsCollectionViewCell class] forCellWithReuseIdentifier:@"ChooseTagsCollectionViewCell"];
+        
+        UILabel * lab = [[UILabel alloc] initWithFrame:CGRectMake(0, 43, SCREEN_WIDTH, 1)];
+        lab.backgroundColor = [UIColor colorWithHexString:lineGrayColor];
+        [self.addTag addSubview:lab];
+    }
+    return _chooseTagView;
+}
+
+- (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
+    return self.chooseTagMarr.count;
+}
+
+- (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
+    ChooseTagsCollectionViewCell * cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"ChooseTagsCollectionViewCell" forIndexPath:indexPath];
+    [cell.tagBtn setTitle:self.chooseTagMarr[indexPath.row] forState:(UIControlStateNormal)];
+    return cell;
+}
+
+- (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath {
+    CGFloat tagW = [self.chooseTagMarr[indexPath.row] boundingRectWithSize:CGSizeMake(SCREEN_WIDTH, 1000) options:(NSStringDrawingUsesLineFragmentOrigin) attributes:nil context:nil].size.width;
+    return CGSizeMake(tagW + 30, 35);
+}
+
 
 #pragma mark - 添加所属情景
 - (UIView *)addScene {

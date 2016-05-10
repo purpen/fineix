@@ -8,6 +8,7 @@
 
 #import "ContentAndTagTableViewCell.h"
 #import "SearchViewController.h"
+#import "ChooseTagsCollectionViewCell.h"
 
 const static NSInteger buttonTag = 421;
 
@@ -28,14 +29,14 @@ const static NSInteger buttonTag = 421;
 #pragma mark -
 - (void)setFiuSceneDescription:(FiuSceneInfoData *)model {
     [self changeContentLabStyle:model.des];
-    [self addTagButton:model.tagTitles];
-    self.frame = CGRectMake(0, 0, SCREEN_WIDTH, self.contentLab.frame.size.height + self.tagView.frame.size.height);
+    self.chooseTagMarr = [NSMutableArray arrayWithArray:model.tagTitles];
+    [self.chooseTagView reloadData];
 }
 
 - (void)setSceneDescription:(SceneInfoData *)model {
     [self changeContentLabStyle:model.des];
-    [self addTagButton:model.tagTitles];
-    self.frame = CGRectMake(0, 0, SCREEN_WIDTH, self.contentLab.frame.size.height + self.tagView.frame.size.height);
+    self.chooseTagMarr = [NSMutableArray arrayWithArray:model.tagTitles];
+    [self.chooseTagView reloadData];
 }
 
 #pragma mark - 创建视图UI
@@ -47,11 +48,11 @@ const static NSInteger buttonTag = 421;
         make.left.equalTo(self.mas_left).with.offset(15);
     }];
     
-    [self.contentView addSubview:self.tagView];
-    [_tagView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.size.mas_equalTo(CGSizeMake(SCREEN_WIDTH - 30, 40));
+    [self.contentView addSubview:self.chooseTagView];
+    [_chooseTagView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.size.mas_equalTo(CGSizeMake(SCREEN_WIDTH, 40));
         make.top.equalTo(_contentLab.mas_bottom).with.offset(0);
-        make.left.equalTo(self.mas_left).with.offset(15);
+        make.left.equalTo(self.mas_left).with.offset(0);
     }];
 }
 
@@ -89,48 +90,43 @@ const static NSInteger buttonTag = 421;
     self.cellHeight = size.height + 70;
 }
 
-#pragma mark - 标签视图
-- (UIScrollView *)tagView {
-    if (!_tagView) {
-        _tagView = [[UIScrollView alloc] init];
-        _tagView.backgroundColor = [UIColor whiteColor];
-        _tagView.showsVerticalScrollIndicator = NO;
-        _tagView.showsHorizontalScrollIndicator = NO;
+#pragma mark - 选中的标签列表
+- (UICollectionView *)chooseTagView {
+    if (!_chooseTagView) {
+        UICollectionViewFlowLayout * flowLayout = [[UICollectionViewFlowLayout alloc] init];
+        flowLayout.minimumLineSpacing = 1.0f;
+        flowLayout.minimumInteritemSpacing = 1.0f;
+        flowLayout.sectionInset = UIEdgeInsetsMake(0, 15, 0, 15);
+        flowLayout.scrollDirection = UICollectionViewScrollDirectionHorizontal;
+        
+        _chooseTagView = [[UICollectionView alloc] initWithFrame:CGRectMake(0, 10, SCREEN_WIDTH, 20) collectionViewLayout:flowLayout];
+        _chooseTagView.backgroundColor = [UIColor whiteColor];
+        _chooseTagView.delegate = self;
+        _chooseTagView.dataSource = self;
+        _chooseTagView.showsHorizontalScrollIndicator = NO;
+        [_chooseTagView registerClass:[ChooseTagsCollectionViewCell class] forCellWithReuseIdentifier:@"ChooseTagsCollectionViewCell"];
     }
-    return _tagView;
+    return _chooseTagView;
 }
 
-#pragma mark - 添加标签 
-- (void)addTagButton:(NSArray *)titleArr {
-    CGFloat btnW = 0;
-    CGFloat btnH = 10;
-    
-    for (NSUInteger idx = 0; idx < titleArr.count; ++idx) {
-        CGFloat tagBtnWidth = [[titleArr objectAtIndex:idx] boundingRectWithSize:CGSizeMake(320, 1000) options:(NSStringDrawingUsesLineFragmentOrigin) attributes:nil context:nil].size.width;
-        
-        UIButton * tagBtn = [[UIButton alloc] init];
-        [tagBtn setBackgroundImage:[UIImage resizedImage:@"tagBg_gray"] forState:(UIControlStateNormal)];
-        [tagBtn setBackgroundImage:[UIImage resizedImage:@"tagBg_yellow"] forState:(UIControlStateHighlighted)];
-        [tagBtn setTitle:titleArr[idx] forState:(UIControlStateNormal)];
-        [tagBtn setTitleEdgeInsets:(UIEdgeInsetsMake(0, -5, 0, 0))];
-        [tagBtn setTitleColor:[UIColor colorWithHexString:titleColor alpha:1] forState:(UIControlStateNormal)];
-        [tagBtn setTitleColor:[UIColor whiteColor] forState:(UIControlStateHighlighted)];
-        tagBtn.titleLabel.font = [UIFont systemFontOfSize:Font_Tag];
-        tagBtn.frame = CGRectMake(btnW + (10 * idx), btnH, tagBtnWidth + 25, 20);
-        btnW = tagBtn.frame.size.width + btnW;
-        tagBtn.tag = buttonTag + idx;
-        
-        [tagBtn addTarget:self action:@selector(tagBtnClick:) forControlEvents:(UIControlEventTouchUpInside)];
-        [self.tagView addSubview:tagBtn];
-    }
-    
-    self.tagView.contentSize = CGSizeMake(btnW * 1.15, 0);
+- (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
+    return self.chooseTagMarr.count;
 }
 
-//  标签的点击方法
-- (void)tagBtnClick:(UIButton *)button {
+- (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
+    ChooseTagsCollectionViewCell * cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"ChooseTagsCollectionViewCell" forIndexPath:indexPath];
+    [cell.tagBtn setTitle:self.chooseTagMarr[indexPath.row] forState:(UIControlStateNormal)];
+    return cell;
+}
+
+- (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath {
+    CGFloat tagW = [self.chooseTagMarr[indexPath.row] boundingRectWithSize:CGSizeMake(SCREEN_WIDTH, 1000) options:(NSStringDrawingUsesLineFragmentOrigin) attributes:nil context:nil].size.width;
+    return CGSizeMake(tagW + 30, 35);
+}
+
+- (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
     SearchViewController * searchVC = [[SearchViewController alloc] init];
-    searchVC.keyword = self.titleArr[button.tag - buttonTag];
+    searchVC.keyword = self.chooseTagMarr[indexPath.row];
     searchVC.searchType = 0;
     [self.nav pushViewController:searchVC animated:YES];
 }

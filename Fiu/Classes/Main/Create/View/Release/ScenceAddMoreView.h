@@ -10,7 +10,7 @@
 #import <UIKit/UIKit.h>
 #import "Fiu.h"
 
-@interface ScenceAddMoreView : UIView <BMKGeoCodeSearchDelegate> {
+@interface ScenceAddMoreView : UIView <BMKGeoCodeSearchDelegate, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout> {
     
     BMKGeoCodeSearch    *   _geoCodeSearch;
     NSMutableArray      *   _cityMarr;
@@ -34,6 +34,10 @@
 @pro_strong NSString        *   latitude;           //  纬度
 @pro_strong NSString        *   longitude;          //  经度
 @pro_strong NSString        *   fiuId;
+
+@pro_strong UICollectionView    *   chooseTagView;      //  选择的标签列表
+@pro_strong NSMutableArray      *   chooseTagMarr;
+@pro_strong NSMutableArray      *   chooseTagIdMarr;
 
 - (void)changeLocationFrame:(NSArray *)locationArr;
 

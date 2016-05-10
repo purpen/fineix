@@ -152,8 +152,6 @@
     releaseVC.goodsId = @"304,301,299";
     releaseVC.goodsX = @"43,32,65";
     releaseVC.goodsY = @"20,22,42";
-    releaseVC.fSceneId = @"4";
-    releaseVC.tagS = @"42,44,43,22,45";
     [self.navigationController pushViewController:releaseVC animated:YES];
     
 }

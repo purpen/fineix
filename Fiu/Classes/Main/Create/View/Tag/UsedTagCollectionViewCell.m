@@ -14,8 +14,14 @@
     self = [super initWithFrame:frame];
     if (self) {
         
+        self.layer.cornerRadius = 4;
+        self.layer.borderWidth = 1.0f;
+        self.layer.borderColor = [UIColor colorWithHexString:@"#979797" alpha:.5].CGColor;
         [self addSubview:self.tagLab];
-        
+        [_tagLab mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.centerX.equalTo(self);
+            make.centerY.equalTo(self);
+        }];
     }
     return self;
 }
@@ -23,12 +29,9 @@
 #pragma mark - 标签
 - (UILabel *)tagLab {
     if (!_tagLab) {
-        _tagLab = [[UILabel alloc] initWithFrame:self.bounds];
+        _tagLab = [[UILabel alloc] init];
         _tagLab.textAlignment = NSTextAlignmentCenter;
         _tagLab.textColor = [UIColor colorWithHexString:titleColor];
-        _tagLab.layer.cornerRadius = 4;
-        _tagLab.layer.borderWidth = 1.0f;
-        _tagLab.layer.borderColor = [UIColor colorWithHexString:@"#979797" alpha:.5].CGColor;
         _tagLab.font = [UIFont systemFontOfSize:12];
     }
     return _tagLab;
@@ -37,10 +40,10 @@
 - (void)setSelected:(BOOL)selected {
     if (selected == YES) {
         self.tagLab.textColor = [UIColor colorWithHexString:fineixColor];
-        self.tagLab.layer.borderColor = [UIColor colorWithHexString:fineixColor].CGColor;
+        self.layer.borderColor = [UIColor colorWithHexString:fineixColor].CGColor;
     } else if (selected == NO) {
         self.tagLab.textColor = [UIColor colorWithHexString:titleColor];
-        self.tagLab.layer.borderColor = [UIColor colorWithHexString:@"#979797" alpha:.5].CGColor;
+        self.layer.borderColor = [UIColor colorWithHexString:@"#979797" alpha:.5].CGColor;
     }
 }
 

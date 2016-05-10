@@ -58,11 +58,9 @@ static NSString *const URLSceneList = @"/scene_sight/";
         [self.homeTableView reloadData];
         self.currentpageNum = [[[result valueForKey:@"data"] valueForKey:@"current_page"] integerValue];
         self.totalPageNum = [[[result valueForKey:@"data"] valueForKey:@"total_page"] integerValue];
-        if (self.totalPageNum > 1) {
-            [self addMJRefresh:self.homeTableView];
-            [self requestIsLastData:self.homeTableView currentPage:self.currentpageNum withTotalPage:self.totalPageNum];
-        }
+        [self requestIsLastData:self.homeTableView currentPage:self.currentpageNum withTotalPage:self.totalPageNum];
         [SVProgressHUD dismiss];
+            
     } failure:^(FBRequest *request, NSError *error) {
         [SVProgressHUD showErrorWithStatus:[error localizedDescription]];
     }];
@@ -118,6 +116,7 @@ static NSString *const URLSceneList = @"/scene_sight/";
         _homeTableView.dataSource = self;
         _homeTableView.showsVerticalScrollIndicator = NO;
         _homeTableView.separatorStyle = UITableViewCellSeparatorStyleNone;
+        [self addMJRefresh:_homeTableView];
     }
     return _homeTableView;
 }

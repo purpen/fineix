@@ -388,6 +388,11 @@
 		D8A9AE191CE05D3F00A9FCFB /* ChooseTagsCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D8A9AE181CE05D3F00A9FCFB /* ChooseTagsCollectionViewCell.m */; };
 		D8A9AE1C1CE0772700A9FCFB /* UsedTagCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D8A9AE1B1CE0772700A9FCFB /* UsedTagCollectionViewCell.m */; };
 		D8A9AE1F1CE07F7900A9FCFB /* TagFlowLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = D8A9AE1E1CE07F7900A9FCFB /* TagFlowLayout.m */; };
+		D8A9AE221CE0E53100A9FCFB /* AllTagListTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D8A9AE211CE0E53100A9FCFB /* AllTagListTableViewCell.m */; };
+		D8A9AE251CE1AFFB00A9FCFB /* LookAllTagBtnTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D8A9AE241CE1AFFB00A9FCFB /* LookAllTagBtnTableViewCell.m */; };
+		D8A9AE281CE1BA2800A9FCFB /* OpenAllTagListTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D8A9AE271CE1BA2800A9FCFB /* OpenAllTagListTableViewCell.m */; };
+		D8A9AE2B1CE1C79400A9FCFB /* UpLookAllTagBtnTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D8A9AE2A1CE1C79400A9FCFB /* UpLookAllTagBtnTableViewCell.m */; };
+		D8A9AE2E1CE1F8B100A9FCFB /* NoHaveSceneTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D8A9AE2D1CE1F8B100A9FCFB /* NoHaveSceneTableViewCell.m */; };
 		D8AEC7511CA8E3A000A868B6 /* libsqlite3.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 1F0EE6A41C9FA47B000631F0 /* libsqlite3.tbd */; };
 		D8AEC7521CA8E3AE00A868B6 /* libiconv.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 1F0EE6A21C9FA43C000631F0 /* libiconv.tbd */; };
 		D8AEC7531CA8E3BB00A868B6 /* libstdc++.6.0.9.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 280045201C805CD7005F5C2E /* libstdc++.6.0.9.tbd */; };
@@ -1089,6 +1094,16 @@
 		D8A9AE1B1CE0772700A9FCFB /* UsedTagCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UsedTagCollectionViewCell.m; sourceTree = "<group>"; };
 		D8A9AE1D1CE07F7900A9FCFB /* TagFlowLayout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TagFlowLayout.h; sourceTree = "<group>"; };
 		D8A9AE1E1CE07F7900A9FCFB /* TagFlowLayout.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TagFlowLayout.m; sourceTree = "<group>"; };
+		D8A9AE201CE0E53100A9FCFB /* AllTagListTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AllTagListTableViewCell.h; sourceTree = "<group>"; };
+		D8A9AE211CE0E53100A9FCFB /* AllTagListTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AllTagListTableViewCell.m; sourceTree = "<group>"; };
+		D8A9AE231CE1AFFB00A9FCFB /* LookAllTagBtnTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LookAllTagBtnTableViewCell.h; sourceTree = "<group>"; };
+		D8A9AE241CE1AFFB00A9FCFB /* LookAllTagBtnTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LookAllTagBtnTableViewCell.m; sourceTree = "<group>"; };
+		D8A9AE261CE1BA2800A9FCFB /* OpenAllTagListTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OpenAllTagListTableViewCell.h; sourceTree = "<group>"; };
+		D8A9AE271CE1BA2800A9FCFB /* OpenAllTagListTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OpenAllTagListTableViewCell.m; sourceTree = "<group>"; };
+		D8A9AE291CE1C79400A9FCFB /* UpLookAllTagBtnTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UpLookAllTagBtnTableViewCell.h; sourceTree = "<group>"; };
+		D8A9AE2A1CE1C79400A9FCFB /* UpLookAllTagBtnTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UpLookAllTagBtnTableViewCell.m; sourceTree = "<group>"; };
+		D8A9AE2C1CE1F8B100A9FCFB /* NoHaveSceneTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NoHaveSceneTableViewCell.h; sourceTree = "<group>"; };
+		D8A9AE2D1CE1F8B100A9FCFB /* NoHaveSceneTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NoHaveSceneTableViewCell.m; sourceTree = "<group>"; };
 		E0438B4B24E3F747F761AF4C /* Pods-Fiu.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Fiu.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Fiu/Pods-Fiu.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -2769,6 +2784,8 @@
 				D8A9ACC91CD8A46900A9FCFB /* FiuSceneTableViewCell.m */,
 				D8A9ACCA1CD8A46900A9FCFB /* FiuTagTableViewCell.h */,
 				D8A9ACCB1CD8A46900A9FCFB /* FiuTagTableViewCell.m */,
+				D8A9AE2C1CE1F8B100A9FCFB /* NoHaveSceneTableViewCell.h */,
+				D8A9AE2D1CE1F8B100A9FCFB /* NoHaveSceneTableViewCell.m */,
 			);
 			path = FiuScene;
 			sourceTree = "<group>";
@@ -3044,6 +3061,14 @@
 				D8A9AE1B1CE0772700A9FCFB /* UsedTagCollectionViewCell.m */,
 				D8A9AE1D1CE07F7900A9FCFB /* TagFlowLayout.h */,
 				D8A9AE1E1CE07F7900A9FCFB /* TagFlowLayout.m */,
+				D8A9AE201CE0E53100A9FCFB /* AllTagListTableViewCell.h */,
+				D8A9AE211CE0E53100A9FCFB /* AllTagListTableViewCell.m */,
+				D8A9AE261CE1BA2800A9FCFB /* OpenAllTagListTableViewCell.h */,
+				D8A9AE271CE1BA2800A9FCFB /* OpenAllTagListTableViewCell.m */,
+				D8A9AE231CE1AFFB00A9FCFB /* LookAllTagBtnTableViewCell.h */,
+				D8A9AE241CE1AFFB00A9FCFB /* LookAllTagBtnTableViewCell.m */,
+				D8A9AE291CE1C79400A9FCFB /* UpLookAllTagBtnTableViewCell.h */,
+				D8A9AE2A1CE1C79400A9FCFB /* UpLookAllTagBtnTableViewCell.m */,
 			);
 			path = Tag;
 			sourceTree = "<group>";
@@ -3270,6 +3295,7 @@
 				1FFFFF3F1CD05796008E1CDC /* BindIngViewController.m in Sources */,
 				D80360571CBF376B001920F9 /* PhoneNumLoginView.m in Sources */,
 				D8A9AE121CDF552200A9FCFB /* GoodsImgFlowLayout.m in Sources */,
+				D8A9AE281CE1BA2800A9FCFB /* OpenAllTagListTableViewCell.m in Sources */,
 				D8A9AE051CDC3D5800A9FCFB /* SearchFSceneViewController.m in Sources */,
 				1FC6780F1CDAECE500535162 /* BonusCell.m in Sources */,
 				1F07A6591CC7A45300CF225F /* FriendCollectionViewCell.m in Sources */,
@@ -3281,6 +3307,7 @@
 				1FE60E471CD327BE00045117 /* SystemInformsViewController.m in Sources */,
 				D87B69D41CC726D500199EFE /* CommentDataTableViewCell.m in Sources */,
 				D8363A2B1CD8809400CC4AC0 /* GoodsInfo.m in Sources */,
+				D8A9AE221CE0E53100A9FCFB /* AllTagListTableViewCell.m in Sources */,
 				D81281591CAA8532007CF08B /* UIImageView+SDWedImage.m in Sources */,
 				D81281541CAA8532007CF08B /* FBRequest.m in Sources */,
 				D8A9ADE41CD9F92B00A9FCFB /* TaoBaoGoodsSmallImage.m in Sources */,
@@ -3289,6 +3316,7 @@
 				1FBC3E9A1CCE3766007CFA14 /* ShareViewController.m in Sources */,
 				1F3C0A961CBFA28300B84FEB /* GreatPeopleViewController.m in Sources */,
 				1FC677FD1CDAE78400535162 /* BonusViewController.m in Sources */,
+				D8A9AE2E1CE1F8B100A9FCFB /* NoHaveSceneTableViewCell.m in Sources */,
 				D8A9AE151CDF5A2F00A9FCFB /* GoodsImgCollectionViewCell.m in Sources */,
 				D80360481CBF376B001920F9 /* SubscribeInterestedCollectionViewController.m in Sources */,
 				1FFFFF331CD055F2008E1CDC /* AXModel.m in Sources */,
@@ -3300,6 +3328,7 @@
 				D8363A2C1CD8809400CC4AC0 /* GoodsInfoBrand.m in Sources */,
 				1FD7E67A1CC8E4F200A69BDD /* MyQrCodeView.m in Sources */,
 				D8A9ADC01CD9E2E700A9FCFB /* CreateViewController.m in Sources */,
+				D8A9AE2B1CE1C79400A9FCFB /* UpLookAllTagBtnTableViewCell.m in Sources */,
 				1FC678211CDAFEF400535162 /* DeliveryAddressModel.m in Sources */,
 				D8A9ADC91CD9E34600A9FCFB /* FBFootView.m in Sources */,
 				D8A9ACAF1CD89E0000A9FCFB /* RollImage.m in Sources */,
@@ -3376,6 +3405,7 @@
 				D8A9ACB01CD89E0000A9FCFB /* RollImageData.m in Sources */,
 				1F5038CF1CDCF438004F76AD /* ReturnViewController.m in Sources */,
 				1FBE626D1CC4D095009606F7 /* FocusOnTableViewCell.m in Sources */,
+				D8A9AE251CE1AFFB00A9FCFB /* LookAllTagBtnTableViewCell.m in Sources */,
 				1F3C0A841CBF760C00B84FEB /* SubscribePeopleViewController.m in Sources */,
 				D87B69E11CC7274900199EFE /* FBMenuView.m in Sources */,
 				1F18376B1CCDE95A00933CA7 /* ModifyGenderViewController.m in Sources */,

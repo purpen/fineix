@@ -18,6 +18,7 @@
 @pro_strong FBRequest               *   fiuSceneListRequest;
 @pro_strong FBRequest               *   suFiuSceneRequest;
 @pro_strong FBRequest               *   cancelSuRequest;
+@pro_strong FBRequest               *   suPeopleRequest;
 @pro_assign NSInteger                   currentpageNum;
 @pro_assign NSInteger                   totalPageNum;
 

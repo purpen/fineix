@@ -13,7 +13,7 @@
 - (instancetype)init {
     self = [super init];
     if (self) {
-        self.max = 5.0f;
+        self.max = 10.0f;
     }
     return self;
 }

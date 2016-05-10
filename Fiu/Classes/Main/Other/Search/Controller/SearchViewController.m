@@ -60,7 +60,6 @@ static NSString *const URLSearchList = @"/search/getlist";
     self.searchListRequest = [FBAPI getWithUrlString:URLSearchList requestDictionary:@{@"evt":@"tag", @"size":@"8", @"page":@(self.currentpageNum + 1), @"t":type , @"q":keyword} delegate:self];
     
     [self.searchListRequest startRequestSuccess:^(FBRequest *request, id result) {
-        NSLog(@"搜索 -- %@", result);
         if ([type isEqualToString:@"10"]) {
             NSArray * goodsArr = [[result valueForKey:@"data"] valueForKey:@"rows"];
             for (NSDictionary * goodsDic in goodsArr) {
@@ -68,7 +67,7 @@ static NSString *const URLSearchList = @"/search/getlist";
                 [self.goodsList addObject:goodsModel];
                 [self.goodsIdList addObject:[NSString stringWithFormat:@"%zi", goodsModel.idField]];
             }
-            NSLog(@"＝＝＝＝＝＝＝ 商品：%@", self.goodsList);
+
             [self.goodsTable reloadData];
             self.currentpageNum = [[[result valueForKey:@"data"] valueForKey:@"current_page"] integerValue];
             self.totalPageNum = [[[result valueForKey:@"data"] valueForKey:@"total_page"] integerValue];
@@ -82,7 +81,7 @@ static NSString *const URLSearchList = @"/search/getlist";
                 HomeSceneListRow * sceneModel = [[HomeSceneListRow alloc] initWithDictionary:sceneDic];
                 [self.sceneList addObject:sceneModel];
             }
-            NSLog(@"＝＝＝＝＝＝＝ 场景：%@", self.sceneList);
+
             [self.sceneTable reloadData];
             self.currentpageNum = [[[result valueForKey:@"data"] valueForKey:@"current_page"] integerValue];
             self.totalPageNum = [[[result valueForKey:@"data"] valueForKey:@"total_page"] integerValue];
@@ -96,7 +95,7 @@ static NSString *const URLSearchList = @"/search/getlist";
                 FiuSceneInfoData * fSceneModel = [[FiuSceneInfoData alloc] initWithDictionary:fSceneDic];
                 [self.fiuSceneList addObject:fSceneModel];
             }
-            NSLog(@"＝＝＝＝＝＝＝ 情景：%@", self.fiuSceneList);
+        
             [self.fSceneCollection reloadData];
             self.currentpageNum = [[[result valueForKey:@"data"] valueForKey:@"current_page"] integerValue];
             self.totalPageNum = [[[result valueForKey:@"data"] valueForKey:@"total_page"] integerValue];
