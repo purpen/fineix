@@ -19,6 +19,7 @@
     UIImageView *_guideImageView;
     UIPageControl *_guidePageController;
 }
+@property (nonatomic,strong) UIButton *enterBtn;
 @end
 
 @implementation GuidePageViewController
@@ -75,22 +76,28 @@
         _guideImageView.frame = CGRectMake(i*SCREEN_WIDTH, 0, SCREEN_WIDTH, SCREEN_HEIGHT);
         [_guideScrollView addSubview:_guideImageView];
         if (i == _pictureArr.count - 1) {
-            UIButton *myBtn = [UIButton buttonWithType:UIButtonTypeSystem];
-            myBtn.frame = CGRectMake(SCREEN_WIDTH-120, SCREEN_HEIGHT-50, 100, 40);
-            CGPoint center = myBtn.center;
-            center.x = self.view.center.x;
-            myBtn.center = center;
-            myBtn.backgroundColor = [UIColor whiteColor];
-            [myBtn setTitle:@"立即使用" forState:UIControlStateNormal];
-            [myBtn setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
-            myBtn.layer.cornerRadius = 10;
-            myBtn.layer.masksToBounds = YES;
-            [myBtn addTarget:self action:@selector(clickSkips:) forControlEvents:UIControlEventTouchUpInside];
-            [_guideImageView addSubview:myBtn];
+            [_guideImageView addSubview:self.enterBtn];
+            [_enterBtn mas_makeConstraints:^(MASConstraintMaker *make) {
+                make.size.mas_equalTo(CGSizeMake(100/667.0*SCREEN_HEIGHT, 40/667.0*SCREEN_HEIGHT));
+                make.centerX.mas_equalTo(_guideImageView.mas_centerX);
+                make.bottom.mas_equalTo(_guideImageView.mas_bottom).with.offset(-50/667.0*SCREEN_HEIGHT);
+            }];
         }
     }
 }
 
+-(UIButton *)enterBtn{
+    if (!_enterBtn) {
+        _enterBtn = [UIButton buttonWithType:UIButtonTypeSystem];
+        _enterBtn.backgroundColor = [UIColor whiteColor];
+        [_enterBtn setTitle:@"立即使用" forState:UIControlStateNormal];
+        [_enterBtn setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+        _enterBtn.layer.cornerRadius = 10;
+        _enterBtn.layer.masksToBounds = YES;
+        [_enterBtn addTarget:self action:@selector(clickSkips:) forControlEvents:UIControlEventTouchUpInside];
+    }
+    return _enterBtn;
+}
 
 //点击『立即使用』按钮
 -(void)clickSkips:(UIButton*)sender{

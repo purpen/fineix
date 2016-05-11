@@ -147,6 +147,7 @@
 		1FEE50F31CE2144500B8A292 /* CommenttwoViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1FEE50F11CE2144500B8A292 /* CommenttwoViewController.xib */; };
 		1FEE50F71CE235FD00B8A292 /* PaySuccessViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1FEE50F51CE235FD00B8A292 /* PaySuccessViewController.m */; };
 		1FEE50F81CE235FD00B8A292 /* PaySuccessViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1FEE50F61CE235FD00B8A292 /* PaySuccessViewController.xib */; };
+		1FEE91E31CE3428700F42962 /* SystemInfoMessageTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 1FEE91E11CE3428700F42962 /* SystemInfoMessageTableViewCell.m */; };
 		1FEF0B131CC0FC15006EF0C6 /* My.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1FEF0AEC1CC0FC15006EF0C6 /* My.storyboard */; };
 		1FEF0B171CC0FC15006EF0C6 /* chanel.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1FEF0AF41CC0FC15006EF0C6 /* chanel.xib */; };
 		1FEF0B181CC0FC15006EF0C6 /* ChanelView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1FEF0AF61CC0FC15006EF0C6 /* ChanelView.m */; };
@@ -643,6 +644,8 @@
 		1FEE50F41CE235FD00B8A292 /* PaySuccessViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PaySuccessViewController.h; sourceTree = "<group>"; };
 		1FEE50F51CE235FD00B8A292 /* PaySuccessViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PaySuccessViewController.m; sourceTree = "<group>"; };
 		1FEE50F61CE235FD00B8A292 /* PaySuccessViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PaySuccessViewController.xib; sourceTree = "<group>"; };
+		1FEE91E01CE3428700F42962 /* SystemInfoMessageTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SystemInfoMessageTableViewCell.h; sourceTree = "<group>"; };
+		1FEE91E11CE3428700F42962 /* SystemInfoMessageTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SystemInfoMessageTableViewCell.m; sourceTree = "<group>"; };
 		1FEF0AEC1CC0FC15006EF0C6 /* My.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = My.storyboard; sourceTree = "<group>"; };
 		1FEF0AF41CC0FC15006EF0C6 /* chanel.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = chanel.xib; sourceTree = "<group>"; };
 		1FEF0AF51CC0FC15006EF0C6 /* ChanelView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChanelView.h; sourceTree = "<group>"; };
@@ -1536,6 +1539,8 @@
 				1FE60E581CD32FD200045117 /* CommentsTableViewCell.h */,
 				1FE60E591CD32FD200045117 /* CommentsTableViewCell.m */,
 				1FE60E5A1CD32FD200045117 /* CommentsTableViewCell.xib */,
+				1FEE91E01CE3428700F42962 /* SystemInfoMessageTableViewCell.h */,
+				1FEE91E11CE3428700F42962 /* SystemInfoMessageTableViewCell.m */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -3461,6 +3466,7 @@
 				D8A9AD841CD9DFBC00A9FCFB /* ScenceAddMoreView.m in Sources */,
 				D8A9ACB41CD89E0000A9FCFB /* FiuSceneInfo.m in Sources */,
 				1F07A6501CC78E7600CF225F /* FindeFriendViewController.m in Sources */,
+				1FEE91E31CE3428700F42962 /* SystemInfoMessageTableViewCell.m in Sources */,
 				D8363A2D1CD8809400CC4AC0 /* GoodsInfoData.m in Sources */,
 				D803604E1CBF376B001920F9 /* NSString+UserModel.m in Sources */,
 				D8A9ADF61CDB128000A9FCFB /* ChildTagsCollectionViewCell.m in Sources */,
@@ -3770,6 +3776,7 @@
 			baseConfigurationReference = E0438B4B24E3F747F761AF4C /* Pods-Fiu.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_IDENTITY = "iPhone Developer: Xiaoyi Tian (65JXH7V6N9)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Xiaoyi Tian (65JXH7V6N9)";
 				ENABLE_BITCODE = NO;
@@ -3809,6 +3816,7 @@
 			baseConfigurationReference = 105868C9EE6A797B288440BF /* Pods-Fiu.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_IDENTITY = "iPhone Developer: Xiaoyi Tian (65JXH7V6N9)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Xiaoyi Tian (65JXH7V6N9)";
 				ENABLE_BITCODE = NO;

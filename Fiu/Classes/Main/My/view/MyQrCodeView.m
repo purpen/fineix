@@ -43,7 +43,7 @@
         default:
             break;
     }
-    self.adressLabel.text = [NSString stringWithFormat:@"%@ %@",entity.city,entity.address];
+    self.adressLabel.text = [NSString stringWithFormat:@"%@ %@",entity.areas.firstObject,entity.areas.lastObject];
 }
 
 -(UIView *)bgView{

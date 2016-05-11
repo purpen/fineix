@@ -69,7 +69,7 @@
         [self.contentView addSubview:self.timeLabelTwo];
         [_timeLabelTwo mas_makeConstraints:^(MASConstraintMaker *make) {
             make.size.mas_equalTo(CGSizeMake(80, 21));
-            make.left.mas_equalTo(_titleLbael.mas_right).with.offset(55);
+            make.right.mas_equalTo(self.mas_right).with.offset(-15);
             make.top.mas_equalTo(self.mas_top).with.offset(13/667.0*SCREEN_HEIGHT);
         }];
         
@@ -98,8 +98,8 @@
         [self.contentView addSubview:self.alertTipviewNum];
         self.alertTipviewNum.tipNumLabel.text = @"";
         [self.alertTipviewNum mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.size.mas_equalTo(CGSizeMake(10, 10));
-            make.left.mas_equalTo(self.titleLbael.mas_bottom).with.offset(5);
+            make.size.mas_equalTo(CGSizeMake(15, 15));
+            make.left.mas_equalTo(self.titleLbael.mas_right).with.offset(5);
             make.centerY.mas_equalTo(self.titleLbael.mas_centerY);
         }];
     }

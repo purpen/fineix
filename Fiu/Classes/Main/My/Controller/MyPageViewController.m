@@ -146,9 +146,11 @@
         
         UserInfo *userInfo = [UserInfo mj_objectWithKeyValues:[result objectForKey:@"data"]];
         userInfo.head_pic_url = [result objectForKey:@"data"][@"head_pic_url"];
+        NSArray *areasAry = dataDict[@"areas"];
         [userInfo saveOrUpdate];
         [userInfo updateUserInfoEntity];
-        NSLog(@"      &&&&&&&&&  %@",userInfo.userId);
+        userInfo.areas = areasAry;
+        NSLog(@"   地理位置   &&&&&&&&&  %@",dataDict[@"areas"]);
         UserInfoEntity *entity = [UserInfoEntity defaultUserInfoEntity];
         entity.isLogin = YES;
         

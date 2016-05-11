@@ -39,7 +39,7 @@
     userInfo.summary = self.summary;
     
     userInfo.city = self.city;
-    userInfo.address = self.address;
+    userInfo.areas = self.areas;
     userInfo.follow_count = self.follow_count;
     userInfo.head_pic_url = self.head_pic_url;
     userInfo.is_love = self.is_love;
@@ -63,7 +63,7 @@
     self.birdCoin = @0;
     self.summary = @"";
     self.city = @"";
-    self.address = @"";
+    self.areas = nil;
     self.follow_count = @"";
     self.head_pic_url = @"";
     self.is_love = @0;

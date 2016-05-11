@@ -22,6 +22,7 @@
 #import <SVProgressHUD.h>
 #import "FiuSceneRow.h"
 #import "MJRefresh.h"
+
 #import "FiuSceneViewController.h"
 #import "HomeSceneListRow.h"
 #import "SceneInfoViewController.h"
@@ -62,7 +63,6 @@ static NSString *const IconURL = @"/my/add_head_pic";
     _sceneListMarr = [NSMutableArray array];
     _sceneIdMarr = [NSMutableArray array];
     // Do any additional setup after loading the view.
-    self.currentPage = 0;
     self.automaticallyAdjustsScrollViewInsets = NO;
 
     //
@@ -98,92 +98,6 @@ static NSString *const IconURL = @"/my/add_head_pic";
    
 }
 
-#pragma mark - 网络请求
-- (void)networkRequestData {
-    if ([self.type isEqualToNumber:@1]) {
-        //进行情景的网络请求
-        [SVProgressHUD show];
-        FBRequest *request = [FBAPI postWithUrlString:@"/scene_scene/" requestDictionary:@{@"page":@(_n+1),@"size":@5,@"sort":@0,@"user_id":self.userId} delegate:self];
-        [request startRequestSuccess:^(FBRequest *request, id result) {
-            NSLog(@"result %@",result);
-            NSArray * fiuSceneArr = [[result valueForKey:@"data"] valueForKey:@"rows"];
-            if ([[[result objectForKey:@"data"] objectForKey:@"total_page"] intValue] == 1) {
-                [_fiuSceneList removeAllObjects];
-                [_fiuSceneIdList removeAllObjects];
-            }
-            for (NSDictionary * fiuSceneDic in fiuSceneArr) {
-                FiuSceneRow * fiuSceneModel = [[FiuSceneRow alloc] initWithDictionary:fiuSceneDic];
-                [_fiuSceneList addObject:fiuSceneModel];
-                [_fiuSceneIdList addObject:[NSString stringWithFormat:@"%zi", fiuSceneModel.idField]];
-            }
-            if (_fiuSceneList.count == 0) {
-                NSLog(@"没有情景");
-                [self.view addSubview:self.tipLabel];
-                _tipLabel.text = @"每个情境都有故事，来都来了，讲讲你的故事吧";
-                [_tipLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-                    make.size.mas_equalTo(CGSizeMake(300, 30));
-                    make.centerX.mas_equalTo(self.view.mas_centerX);
-                    make.top.mas_equalTo(self.view.mas_top).with.offset(410);
-                }];
-            }else{
-                [self.tipLabel removeFromSuperview];
-            }
-            [self.myCollectionView reloadData];
-            _n = [[[result objectForKey:@"data"] objectForKey:@"current_page"] intValue];
-            _totalN = [[[result objectForKey:@"data"] objectForKey:@"total_page"] intValue];
-            if (_totalN>1) {
-                //
-                [self addMJRefresh:self.myCollectionView];
-                [self requestIsLastData:self.myCollectionView currentPage:_n withTotalPage:_totalN];
-            }
-            [SVProgressHUD dismiss];
-        } failure:^(FBRequest *request, NSError *error) {
-            [SVProgressHUD showErrorWithStatus:[error localizedDescription]];
-        }];
-    }else if ([self.type isEqualToNumber:@2]){
-        //进行场景的网络请求
-        [SVProgressHUD show];
-        FBRequest *request = [FBAPI postWithUrlString:@"/scene_sight/" requestDictionary:@{@"page":@(_m+1),@"size":@10,@"sort":@0,@"user_id":self.userId} delegate:self];
-        [request startRequestSuccess:^(FBRequest *request, id result) {
-            NSLog(@"result %@",result);
-            NSArray * sceneArr = [[result valueForKey:@"data"] valueForKey:@"rows"];
-            if ([[[result objectForKey:@"data"] objectForKey:@"total_page"] intValue] == 1) {
-                [_sceneListMarr removeAllObjects];
-                [_sceneIdMarr removeAllObjects];
-            }
-            for (NSDictionary * sceneDic in sceneArr) {
-                HomeSceneListRow * homeSceneModel = [[HomeSceneListRow alloc] initWithDictionary:sceneDic];
-                [_sceneListMarr addObject:homeSceneModel];
-                [_sceneIdMarr addObject:[NSString stringWithFormat:@"%zi", homeSceneModel.idField]];
-                }
-            if (_sceneListMarr.count == 0) {
-                NSLog(@"没有情景");
-                [self.view addSubview:self.tipLabel];
-                _tipLabel.text = @"你还没有发表过新场景哦，快来Fiu一下嘛";
-                [_tipLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-                    make.size.mas_equalTo(CGSizeMake(300, 30));
-                    make.centerX.mas_equalTo(self.view.mas_centerX);
-                    make.top.mas_equalTo(self.view.mas_top).with.offset(410);
-                }];
-            }else{
-                [self.tipLabel removeFromSuperview];
-            }
-            [self.myCollectionView reloadData];
-            _m = [[[result objectForKey:@"data"] objectForKey:@"current_page"] intValue];
-            _totalM = [[[result objectForKey:@"data"] objectForKey:@"total_page"] intValue];
-            if (_totalM>1) {
-                //
-                [self addMJRefresh:self.myCollectionView];
-                [self requestIsLastData:self.myCollectionView currentPage:_m withTotalPage:_totalM];
-            }
-            [SVProgressHUD dismiss];
-        } failure:^(FBRequest *request, NSError *error) {
-            [SVProgressHUD showErrorWithStatus:[error localizedDescription]];
-        }];
-
-    }
-}
-
 
 
 -(UILabel *)tipLabel{
@@ -195,43 +109,7 @@ static NSString *const IconURL = @"/my/add_head_pic";
     return _tipLabel;
 }
 
-//  判断是否为最后一条数据
-- (void)requestIsLastData:(UICollectionView *)table currentPage:(NSInteger )current withTotalPage:(NSInteger)total {
-    BOOL isLastPage = (current == total);
-    
-    if (!isLastPage) {
-        if (table.mj_footer.state == MJRefreshStateNoMoreData) {
-            [table.mj_footer resetNoMoreData];
-        }
-    }
-    if (current == total == 1) {
-        table.mj_footer.state = MJRefreshStateNoMoreData;
-        table.mj_footer.hidden = true;
-    }
-    if ([table.mj_header isRefreshing]) {
-        [table.mj_header endRefreshing];
-    }
-    if ([table.mj_footer isRefreshing]) {
-        if (isLastPage) {
-            [table.mj_footer endRefreshingWithNoMoreData];
-        } else  {
-            [table.mj_footer endRefreshing];
-        }
-    }
-    [SVProgressHUD dismiss];
-}
 
-
--(void)addMJRefresh:(UICollectionView*)collectionView{
-    
-    collectionView.mj_footer = [MJRefreshAutoNormalFooter footerWithRefreshingBlock:^{
-        if (_n < _totalN) {
-            [self networkRequestData];
-        } else {
-            [collectionView.mj_footer endRefreshing];
-        }
-    }];
-}
 
 
 -(void)viewWillAppear:(BOOL)animated{
@@ -242,9 +120,169 @@ static NSString *const IconURL = @"/my/add_head_pic";
     
     //进行网络请求
     [self netGetData];
-    [self networkRequestData];
+    [self requestDataForOderList];
+}
+
+-(void)loadMoreDataM{
+    if (_m < _totalM) {
+        [self requestDataForOderListOperation];
+    } else {
+        [self.myCollectionView.mj_footer endRefreshing];
+    }
+}
+
+-(void)loadMoreData{
+    if (_n < _totalN) {
+        [self requestDataForOderListOperation];
+    } else {
+        [self.myCollectionView.mj_footer endRefreshing];
+    }
+}
+
+- (void)requestDataForOderList
+{
+    if ([self.type isEqualToNumber:@1]) {
+        MJRefreshAutoGifFooter *footer = [MJRefreshAutoGifFooter footerWithRefreshingTarget:self refreshingAction:@selector(loadMoreData)];
+        
+        // 设置文字
+        [footer setTitle:@"每个情境都有故事，来都来了，讲讲你的故事吧" forState:MJRefreshStateNoMoreData];
+        
+        // 设置字体
+        footer.stateLabel.font = [UIFont systemFontOfSize:13];
+        
+        // 设置颜色
+        footer.stateLabel.textColor = [UIColor blackColor];
+        
+        // 设置尾部
+        self.myCollectionView.mj_footer = footer;
+        _n = 0;
+        [_fiuSceneList removeAllObjects];
+        [_fiuSceneIdList removeAllObjects];
+        [SVProgressHUD showWithMaskType:SVProgressHUDMaskTypeClear];
+        
+        [self requestDataForOderListOperation];
+    }else if([self.type isEqualToNumber:@2]){
+        MJRefreshAutoGifFooter *footer = [MJRefreshAutoGifFooter footerWithRefreshingTarget:self refreshingAction:@selector(loadMoreDataM)];
+        
+        // 设置文字
+        [footer setTitle:@"你还没有发表过新场景哦，快来Fiu一下嘛" forState:MJRefreshStateNoMoreData];
+        
+        // 设置字体
+        footer.stateLabel.font = [UIFont systemFontOfSize:13];
+        
+        // 设置颜色
+        footer.stateLabel.textColor = [UIColor blackColor];
+        
+        // 设置尾部
+        self.myCollectionView.mj_footer = footer;
+        _m = 0;
+        [_sceneListMarr removeAllObjects];
+        [_sceneIdMarr removeAllObjects];
+        [SVProgressHUD showWithMaskType:SVProgressHUDMaskTypeClear];
+        
+        [self requestDataForOderListOperation];
+    }
     
 }
+
+//上拉下拉分页请求订单列表
+- (void)requestDataForOderListOperation
+{
+    if ([self.type isEqualToNumber:@1]) {
+        //进行情景的网络请求
+        [SVProgressHUD show];
+        FBRequest *request = [FBAPI postWithUrlString:@"/scene_scene/" requestDictionary:@{@"page":@(_n+1),@"size":@5,@"sort":@0,@"user_id":self.userId} delegate:self];
+        [request startRequestSuccess:^(FBRequest *request, id result) {
+            NSLog(@"result %@",result);
+            NSArray * fiuSceneArr = [[result valueForKey:@"data"] valueForKey:@"rows"];
+            for (NSDictionary * fiuSceneDic in fiuSceneArr) {
+                FiuSceneRow * fiuSceneModel = [[FiuSceneRow alloc] initWithDictionary:fiuSceneDic];
+                [_fiuSceneList addObject:fiuSceneModel];
+                [_fiuSceneIdList addObject:[NSString stringWithFormat:@"%zi", fiuSceneModel.idField]];
+            }
+            
+            [self.myCollectionView reloadData];
+            _n = [[[result objectForKey:@"data"] objectForKey:@"current_page"] intValue];
+            _totalN = [[[result objectForKey:@"data"] objectForKey:@"total_page"] intValue];
+            
+            if (_totalN == 0) {
+                self.myCollectionView.mj_footer.state = MJRefreshStateNoMoreData;
+            }
+            
+            BOOL isLastPage = (_n == _totalN);
+            
+            if (!isLastPage && _totalN != 0) {
+                if (self.myCollectionView.mj_footer.state == MJRefreshStateNoMoreData) {
+                    [self.myCollectionView.mj_footer resetNoMoreData];
+                }
+            }
+            if (_n == _totalN == 1) {
+                self.myCollectionView.mj_footer.state = MJRefreshStateNoMoreData;
+            }
+            
+            if ([self.myCollectionView.mj_header isRefreshing]) {
+                [self.myCollectionView.mj_header endRefreshing];
+            }
+            if ([self.myCollectionView.mj_footer isRefreshing]) {
+                if (isLastPage) {
+                    [self.myCollectionView.mj_footer endRefreshingWithNoMoreData];
+                } else  {
+                    [self.myCollectionView.mj_footer endRefreshing];
+                }
+            }
+            
+            [SVProgressHUD dismiss];
+        } failure:^(FBRequest *request, NSError *error) {
+            [SVProgressHUD showInfoWithStatus:[error localizedDescription]];
+        }];
+    }else if ([self.type isEqualToNumber:@2]){
+        //进行场景的网络请求
+        [SVProgressHUD show];
+        FBRequest *request = [FBAPI postWithUrlString:@"/scene_sight/" requestDictionary:@{@"page":@(_m+1),@"size":@10,@"sort":@0,@"user_id":self.userId} delegate:self];
+        [request startRequestSuccess:^(FBRequest *request, id result) {
+            NSLog(@"result %@",result);
+            NSArray * sceneArr = [[result valueForKey:@"data"] valueForKey:@"rows"];
+            for (NSDictionary * sceneDic in sceneArr) {
+                HomeSceneListRow * homeSceneModel = [[HomeSceneListRow alloc] initWithDictionary:sceneDic];
+                [_sceneListMarr addObject:homeSceneModel];
+                [_sceneIdMarr addObject:[NSString stringWithFormat:@"%zi", homeSceneModel.idField]];
+            }
+            [self.myCollectionView reloadData];
+            _m = [[[result objectForKey:@"data"] objectForKey:@"current_page"] intValue];
+            _totalM = [[[result objectForKey:@"data"] objectForKey:@"total_page"] intValue];
+            BOOL isLastPage = (_m == _totalM);
+            if (_totalM == 0) {
+                self.myCollectionView.mj_footer.state = MJRefreshStateNoMoreData;
+            }
+            if (!isLastPage && _totalM != 0) {
+                if (self.myCollectionView.mj_footer.state == MJRefreshStateNoMoreData) {
+                    [self.myCollectionView.mj_footer resetNoMoreData];
+                }
+            }
+            if (_m == _totalM == 1) {
+                self.myCollectionView.mj_footer.state = MJRefreshStateNoMoreData;
+            }
+            
+            if ([self.myCollectionView.mj_header isRefreshing]) {
+                [self.myCollectionView.mj_header endRefreshing];
+            }
+            if ([self.myCollectionView.mj_footer isRefreshing]) {
+                if (isLastPage) {
+                    [self.myCollectionView.mj_footer endRefreshingWithNoMoreData];
+                } else  {
+                    [self.myCollectionView.mj_footer endRefreshing];
+                }
+            }
+            
+            [SVProgressHUD dismiss];
+        } failure:^(FBRequest *request, NSError *error) {
+            [SVProgressHUD showInfoWithStatus:[error localizedDescription]];
+        }];
+
+    }
+}
+
+
 
 -(void)netGetData{
     [SVProgressHUD show];
@@ -285,23 +323,13 @@ static NSString *const IconURL = @"/my/add_head_pic";
 -(void)signleTap:(UITapGestureRecognizer*)sender{
     NSLog(@"情景");
     self.type = @1;
-    if (_fiuSceneList.count == 0) {
-        [self networkRequestData];
-    }else{
-        [self.myCollectionView reloadData];
-    }
-    [self requestIsLastData:self.myCollectionView currentPage:_n withTotalPage:_totalN];
+    [self requestDataForOderList];
 }
 
 -(void)signleTap1:(UITapGestureRecognizer*)sender{
     NSLog(@"场景");
     self.type = @2;
-    if (_sceneListMarr.count == 0) {
-        [self networkRequestData];
-    }else{
-        [self.myCollectionView reloadData];
-    }
-    [self requestIsLastData:self.myCollectionView currentPage:_m withTotalPage:_totalM];
+    [self requestDataForOderList];
 }
 
 -(void)signleTap2:(UITapGestureRecognizer*)sender{

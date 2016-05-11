@@ -29,7 +29,7 @@ static NSString *const URLSceneList = @"/scene_sight/";
     [super viewWillAppear:animated];
     
     [self setNavigationViewUI];
-    
+    self.tabBarController.tabBar.hidden = NO;
 }
 
 - (void)viewDidLoad {

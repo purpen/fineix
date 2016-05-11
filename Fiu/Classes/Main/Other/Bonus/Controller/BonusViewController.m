@@ -61,7 +61,7 @@ static NSString *const BonusCellIdentifier = @"bonusCell";
     UIButton * historyBtn = [UIButton buttonWithType:UIButtonTypeCustom];
     historyBtn.frame = CGRectMake(SCREEN_WIDTH / 2, 0, 110, HeaderFooterHeight);
     [historyBtn setTitle:@"查看过期红包>>" forState:UIControlStateNormal];
-    [historyBtn setTitleColor:[UIColor colorWithHexString:@"#ff3366"] forState:UIControlStateNormal];
+    [historyBtn setTitleColor:[UIColor colorWithHexString:fineixColor] forState:UIControlStateNormal];
     historyBtn.titleLabel.font = [UIFont systemFontOfSize: 13];
     [historyBtn addTarget:self action:@selector(historyBtnAction:) forControlEvents:UIControlEventTouchUpInside];
     [footerView addSubview:historyBtn];

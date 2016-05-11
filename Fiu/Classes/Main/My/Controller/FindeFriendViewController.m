@@ -57,20 +57,19 @@ static NSString *const ShareURL = @"http://m.taihuoniao.com/guide/app_about";
 
 -(void)netGetData{
     [SVProgressHUD show];
-    FBRequest *request = [FBAPI postWithUrlString:@"/user/" requestDictionary:@{@"page":@1,@"size":@5,@"sort":@1,@"has_scene":@1} delegate:self];
+    FBRequest *request = [FBAPI postWithUrlString:@"/user/find_user" requestDictionary:@{@"page":@1,@"size":@5,@"type":@1,@"sight_count":@5,@"sort":@0} delegate:self];
     [request startRequestSuccess:^(FBRequest *request, id result) {
-        NSLog(@"******** result %@",result);
+        NSLog(@"发现好友******** result %@",result);
         NSDictionary *dataDict = [result objectForKey:@"data"];
-        NSArray *rowsAry = [dataDict objectForKey:@"rows"];
+        NSArray *rowsAry = [dataDict objectForKey:@"users"];
         for (NSDictionary *rowsDict in rowsAry) {
             FindFriendModel *model = [[FindFriendModel alloc] init];
             model.userid = [rowsDict objectForKey:@"_id"];
             model.avatarUrl = rowsDict[@"medium_avatar_url"];
             model.nickName = rowsDict[@"nickname"];
-            model.address = rowsDict[@"address"];
+            model.address = rowsDict[@"areas"];
             model.isLove = rowsDict[@"is_love"];
-            NSArray *sceneAry = rowsDict[@"scene"];
-            NSLog( @"数组数量  %@",sceneAry);
+            NSArray *sceneAry = rowsDict[@"scene_sight"];
             //model.scene = [NSMutableArray array];
             for (NSDictionary *sceneDict in sceneAry) {
                 
@@ -153,7 +152,9 @@ static NSString *const ShareURL = @"http://m.taihuoniao.com/guide/app_about";
         }
         [cell.headImageView sd_setImageWithURL:[NSURL URLWithString:model.avatarUrl]];
         cell.nameLbael.text = model.nickName;
-        cell.deressLabel.text = model.address;
+        if (model.address.firstObject && model.address.lastObject) {
+            cell.deressLabel.text = [NSString stringWithFormat:@"%@ %@",model.address.firstObject,model.address.lastObject];
+        }
         cell.sceneAry = model.scene;
         [cell.focusBtn addTarget:self action:@selector(clickFocusBtn:) forControlEvents:UIControlEventTouchUpInside];
         return cell;

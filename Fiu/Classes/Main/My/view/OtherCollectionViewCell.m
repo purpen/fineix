@@ -72,20 +72,21 @@
         }];
         
         
-        [self.contentView addSubview:self.userHeadImageView];
-        [_userHeadImageView mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.size.mas_equalTo(CGSizeMake(80/667.0*SCREEN_HEIGHT, 80/667.0*SCREEN_HEIGHT));
-            make.centerX.mas_equalTo(self.mas_centerX);
-            make.bottom.mas_equalTo(_userProfile.mas_top).with.offset(-13/667.0*SCREEN_HEIGHT);
-        }];
-        
         [self.contentView addSubview:self.nickName];
         [_nickName mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.size.mas_equalTo(CGSizeMake(self.frame.size.width, 19));
             make.centerX.mas_equalTo(self.mas_centerX);
-            make.bottom.mas_equalTo(_userHeadImageView.mas_top).with.offset(-22/667.0*SCREEN_HEIGHT);
-            make.size.mas_equalTo(CGSizeMake(200, 19));
-            
+            make.bottom.mas_equalTo(_userProfile.mas_top).with.offset(-9/667.0*SCREEN_HEIGHT);
         }];
+        
+        
+        [self.contentView addSubview:self.headView];
+        [_headView mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.size.mas_equalTo(CGSizeMake(84/667.0*SCREEN_HEIGHT, 84/667.0*SCREEN_HEIGHT));
+            make.centerX.mas_equalTo(self.mas_centerX);
+            make.bottom.mas_equalTo(_nickName.mas_top).with.offset(-8/667.0*SCREEN_HEIGHT);
+        }];
+
         
 //        [self.contentView addSubview:self.moreBtn];
 //        [_moreBtn mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -97,6 +98,24 @@
     }
     return self;
 }
+
+-(UIView *)headView{
+    if (!_headView) {
+        _headView = [[UIView alloc] init];
+        _headView.backgroundColor = [UIColor whiteColor];
+        _headView.layer.masksToBounds = YES;
+        _headView.layer.cornerRadius = 42/667.0*SCREEN_HEIGHT;
+        
+        [_headView addSubview:self.userHeadImageView];
+        [_userHeadImageView mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.size.mas_equalTo(CGSizeMake(80/667.0*SCREEN_HEIGHT, 80/667.0*SCREEN_HEIGHT));
+            make.centerX.mas_equalTo(_headView.mas_centerX);
+            make.centerY.mas_equalTo(_headView.mas_centerY);
+        }];
+    }
+    return _headView;
+}
+
 
 -(void)setUIWithModel:(UserInfo *)model{
     

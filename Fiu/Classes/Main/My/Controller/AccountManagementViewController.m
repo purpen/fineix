@@ -45,10 +45,8 @@ static NSString *const CityListUrl = @"/shopping/fetch_areas";
     _cityAry = [NSMutableArray array];
     // Do any additional setup after loading the view.
     self.delegate = self;
-//    [self addBarItemLeftBarButton:nil image:@"icon_back"];
     self.view.backgroundColor = [UIColor lightGrayColor];
-    [self addBarItemRightBarButton:@"保存" image:nil isTransparent:NO];
-    //self.navigationController.navigationBarHidden = NO;
+    //[self addBarItemRightBarButton:@"保存" image:nil isTransparent:NO];
     self.navViewTitle.text = @"个人信息";
     [self addBarItemRightBarButton:nil image:@"" isTransparent:NO];
     
@@ -137,7 +135,9 @@ static NSString *const CityListUrl = @"/shopping/fetch_areas";
         
     }];
     _accountView.nickName.text = entity.nickname;
-    _accountView.adress.text = entity.address;
+//    if (entity.areas.count != 0) {
+//        _accountView.adress.text = [NSString stringWithFormat:@"%@%@",entity.areas.firstObject,entity.areas.lastObject];
+//    }
     switch ([entity.sex intValue]) {
         case 0:
             _accountView.sex.text = @"保密";

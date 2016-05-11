@@ -43,15 +43,33 @@
             make.bottom.mas_equalTo(_userProfile.mas_top).with.offset(-9/667.0*SCREEN_HEIGHT);
         }];
         
-        [self.contentView addSubview:self.userHeadImageView];
-        [_userHeadImageView mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.size.mas_equalTo(CGSizeMake(80/667.0*SCREEN_HEIGHT, 80/667.0*SCREEN_HEIGHT));
+        [self.contentView addSubview:self.headView];
+        [_headView mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.size.mas_equalTo(CGSizeMake(84/667.0*SCREEN_HEIGHT, 84/667.0*SCREEN_HEIGHT));
             make.centerX.mas_equalTo(self.mas_centerX);
-            make.bottom.mas_equalTo(_nickName.mas_top).with.offset(-10/667.0*SCREEN_HEIGHT);
+            make.bottom.mas_equalTo(_nickName.mas_top).with.offset(-8/667.0*SCREEN_HEIGHT);
         }];
     }
     return self;
 }
+
+-(UIView *)headView{
+    if (!_headView) {
+        _headView = [[UIView alloc] init];
+        _headView.backgroundColor = [UIColor whiteColor];
+        _headView.layer.masksToBounds = YES;
+        _headView.layer.cornerRadius = 42/667.0*SCREEN_HEIGHT;
+        
+        [_headView addSubview:self.userHeadImageView];
+        [_userHeadImageView mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.size.mas_equalTo(CGSizeMake(80/667.0*SCREEN_HEIGHT, 80/667.0*SCREEN_HEIGHT));
+            make.centerX.mas_equalTo(_headView.mas_centerX);
+            make.centerY.mas_equalTo(_headView.mas_centerY);
+        }];
+    }
+    return _headView;
+}
+
 
 -(void)setUI{
         UserInfoEntity *entity = [UserInfoEntity defaultUserInfoEntity];

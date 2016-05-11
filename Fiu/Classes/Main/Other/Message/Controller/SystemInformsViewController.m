@@ -7,7 +7,7 @@
 //
 
 #import "SystemInformsViewController.h"
-#import "SystemInfoTableViewCell.h"
+#import "SystemMsgTableViewCell.h"
 
 @interface SystemInformsViewController ()<FBNavigationBarItemsDelegate,UITableViewDelegate,UITableViewDataSource>
 @property (weak, nonatomic) IBOutlet UITableView *myTbaleView;
@@ -21,7 +21,6 @@
     // Do any additional setup after loading the view from its nib.
     self.delegate = self;
     self.navViewTitle.text = @"系统通知";
-    [self addBarItemRightBarButton:@"清空" image:nil isTransparent:NO];
     
     self.myTbaleView.delegate = self;
     self.myTbaleView.dataSource = self;
@@ -35,11 +34,11 @@
 
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     static NSString *cellId = @"cellOne";
-    SystemInfoTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellId];
+    SystemMsgTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellId];
     if (cell == nil) {
-        cell = [[SystemInfoTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellId];
+        cell = [[SystemMsgTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellId];
     }
-    [cell setUI];
+    //[cell setUI];
     return cell;
 }
 

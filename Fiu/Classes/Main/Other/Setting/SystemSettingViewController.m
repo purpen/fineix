@@ -22,6 +22,7 @@
 #import "ChanePwdViewController.h"
 #import "MyQrCodeViewController.h"
 #import "MyQrCodeView.h"
+#import "GuidePageViewController.h"
 
 @interface SystemSettingViewController ()<FBNavigationBarItemsDelegate,NotificationDelege,FBRequestDelegate>
 
@@ -138,6 +139,8 @@ static NSString *const logOut = @"/auth/logout";
 
 
 - (IBAction)welcomePageBtn:(UIButton *)sender {
+    GuidePageViewController *vc = [[GuidePageViewController alloc] init];
+    [self presentViewController:vc animated:YES completion:nil];
 }
 
 

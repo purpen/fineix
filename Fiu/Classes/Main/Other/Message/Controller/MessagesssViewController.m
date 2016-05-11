@@ -14,6 +14,7 @@
 #import "MJRefresh.h"
 #import "DirectMessagesViewController.h"
 
+
 @interface MessagesssViewController ()<FBNavigationBarItemsDelegate,UITableViewDataSource,UITableViewDelegate>
 {
     NSMutableArray *_modelAry;
@@ -91,7 +92,7 @@
             model.nickname = toUserDict[@"nickname"];
             model.mediumAvatarUrl = toUserDict[@"big_avatar_url"];
             model.birthday = rowsDict[@"last_time_at"];
-            model.firstLogin = rowsDict[@"readed"];
+            model.firstLogin = rowsDict[@"is_read"];
             NSLog(@"时间啊啊   %@",rowsDict[@"last_time_at"]);
             [_modelAry addObject:model];
         }
@@ -175,7 +176,7 @@
         [cell setUIWithModel:model];
         cell.iconImageView.hidden = YES;
         cell.focusBtn.hidden = YES;
-        cell.timeLabelTwo.hidden = YES;
+        cell.timeLabel.hidden = YES;
     }
     
     return cell;

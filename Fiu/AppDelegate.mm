@@ -58,21 +58,11 @@ NSString *const determineLogin = @"/auth/check_login";
 //    self.locationSevice.delegate = self;
 //    self.locationSevice.desiredAccuracy = kCLLocationAccuracyBestForNavigation;
 //    //1，开启定位服务
-//    [self.locationSevice startUserLocationService];
+//    [self.locationSevice startUserLocationService];]
+    
+    
     //设置引导图片
-//    NSArray *arr = [NSArray arrayWithObjects:@"launch1",@"launch1",@"launch1",@"launch1",@"launch1", nil];
-    //使用的时候用key+版本号替换UserHasGuideView
-    //这样容易控制每个版本都可以显示引导图
-//    BOOL userIsFirstInstalled = [[NSUserDefaults standardUserDefaults] boolForKey:@"UserHasGuideView"];
-    
-//    if (userIsFirstInstalled) {
-        FBTabBarController * tabBarC = [[FBTabBarController alloc] init];
-        self.window.rootViewController = tabBarC;
-//    }else{
-//        self.window.rootViewController = [[GuidePageViewController alloc] initWithPicArr:arr andRootVC:[[FBTabBarController alloc] init]];
-//        [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"UserHasGuideView"];
-//    }
-    
+    [self guide];
     
     
     //首先统一设置为未登录
@@ -143,6 +133,23 @@ NSString *const determineLogin = @"/auth/check_login";
     return YES;
 }
 
+#pragma mark -  引导图的设置
+-(void)guide{
+    NSArray *arr = [NSArray arrayWithObjects:@"guide",@"guide",@"guide",@"guide",@"guide", nil];
+    //    使用的时候用key+版本号替换UserHasGuideView
+    //    这样容易控制每个版本都可以显示引导图
+    BOOL userIsFirstInstalled = [[NSUserDefaults standardUserDefaults] boolForKey:@"UserHasGuideView"];
+    
+    if (userIsFirstInstalled) {
+        FBTabBarController * tabBarC = [[FBTabBarController alloc] init];
+        self.window.rootViewController = tabBarC;
+    }else{
+        self.window.rootViewController = [[GuidePageViewController alloc] initWithPicArr:arr andRootVC:[[FBTabBarController alloc] init]];
+        [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"UserHasGuideView"];
+    }
+}
+
+#pragma mark -注册百度地图代理
 -(void)bmkMap{
     _mapManager = [[BMKMapManager alloc] init];
     BOOL ret = [_mapManager start:@"7MLakRE70YBXUoMSSNXA9GYXutwS3Wi0" generalDelegate:nil];
@@ -193,19 +200,19 @@ NSString *const determineLogin = @"/auth/check_login";
     return YES;
 }
 
-// NOTE: 9.0以后使用新API接口
-- (BOOL)application:(UIApplication *)app openURL:(NSURL *)url options:(NSDictionary<NSString*, id> *)options
-{
-    if ([url.host isEqualToString:@"safepay"]) {
-        //跳转支付宝钱包进行支付，处理支付结果
-        [[AlipaySDK defaultService] processOrderWithPaymentResult:url standbyCallback:^(NSDictionary *resultDic) {
-            if (_aliDelegate && [_aliDelegate respondsToSelector:@selector(standbyCallbackWithResultDic:)]) {
-                [_aliDelegate standbyCallbackWithResultDic:resultDic];
-            }
-        }];
-    }
-    return YES;
-}
+//// NOTE: 9.0以后使用新API接口
+//- (BOOL)application:(UIApplication *)app openURL:(NSURL *)url options:(NSDictionary<NSString*, id> *)options
+//{
+//    if ([url.host isEqualToString:@"safepay"]) {
+//        //跳转支付宝钱包进行支付，处理支付结果
+//        [[AlipaySDK defaultService] processOrderWithPaymentResult:url standbyCallback:^(NSDictionary *resultDic) {
+//            if (_aliDelegate && [_aliDelegate respondsToSelector:@selector(standbyCallbackWithResultDic:)]) {
+//                [_aliDelegate standbyCallbackWithResultDic:resultDic];
+//            }
+//        }];
+//    }
+//    return YES;
+//}
 
 -(void)onReq:(BaseReq*)req
 {

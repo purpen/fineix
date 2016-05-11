@@ -12,7 +12,7 @@
 
 @property(nonatomic,copy) NSString *avatarUrl;
 @property(nonatomic,copy) NSString *nickName;
-@property(nonatomic,copy) NSString *address;
+@property(nonatomic,strong) NSArray *address;
 @property(nonatomic,strong) NSNumber *userid;
 @property(nonatomic,strong) NSNumber *isLove;
 @property(nonatomic,strong) NSMutableArray *scene;

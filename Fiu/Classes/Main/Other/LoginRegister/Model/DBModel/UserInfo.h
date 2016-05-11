@@ -25,7 +25,7 @@
 @property (nonatomic, copy) NSString * summary;
 @property (nonatomic, assign) BOOL whetherFocusOn;
 @property(nonatomic,copy) NSString *city;
-@property(nonatomic,copy) NSString *address;
+@property(nonatomic,strong) NSArray *areas;
 @property(nonatomic,copy) NSString *follow_count;
 @property(nonatomic,copy) NSString *head_pic_url;
 @property(nonatomic,strong) NSNumber *is_love;

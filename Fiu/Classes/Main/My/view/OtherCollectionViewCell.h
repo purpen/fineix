@@ -19,6 +19,7 @@
 @property(nonatomic,strong) UIButton *moreBtn;//更多按钮
 @property(nonatomic,strong) UIButton *focusOnBtn;//关注按钮
 @property(nonatomic,strong) UIButton *directMessages;//私信按钮
+@property(nonatomic,strong) UIView *headView;
 
 -(void)setUIWithModel:(UserInfo*)model;
 @end

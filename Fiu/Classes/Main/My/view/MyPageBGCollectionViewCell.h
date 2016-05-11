@@ -18,6 +18,7 @@
 @property(nonatomic,strong) UILabel *userLevelLabel;//用户等级文字
 @property(nonatomic,strong) UILabel *userLevelBottomLabel;//用户等级下面的
 @property(nonatomic,strong) UIButton *certificationBtn;//认证按钮
+@property(nonatomic,strong) UIView *headView;
 
 - (void)setUI;
 

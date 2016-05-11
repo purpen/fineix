@@ -22,7 +22,11 @@
         
     }];
     view.nickName.text = entity.nickname;
-    view.adress.text = entity.address;
+    
+    
+//    if (entity.areas) {
+//        view.adress.text = [NSString stringWithFormat:@"%@%@",entity.areas.firstObject,entity.areas.lastObject];
+//    }
     switch ([entity.sex intValue]) {
         case 0:
             view.sex.text = @"保密";
