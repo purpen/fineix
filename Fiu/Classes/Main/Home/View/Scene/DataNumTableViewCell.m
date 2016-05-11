@@ -7,7 +7,7 @@
 //
 
 #import "DataNumTableViewCell.h"
-#import "CommentViewController.h"
+#import "CommentNViewController.h"
 
 @implementation DataNumTableViewCell
 
@@ -105,7 +105,7 @@
 }
 
 - (void)commentBtnClick {
-    CommentViewController * commentVC = [[CommentViewController alloc] init];
+    CommentNViewController * commentVC = [[CommentNViewController alloc] init];
     commentVC.targetId = self.tagetId;
     [self.nav pushViewController:commentVC animated:YES];
 }

@@ -10,6 +10,7 @@
 #import "Fiu.h"
 #import <SDWebImage/UIImageView+WebCache.h>
 #import "UserInfo.h"
+#import "TipNumberView.h"
 
 @implementation CommentsTableViewCell
 
@@ -42,17 +43,26 @@
             make.centerY.mas_equalTo(self.mas_centerY);
         }];
         
+        
+        [self.contentView addSubview:self.iconImageView];
+        [_iconImageView mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.size.mas_equalTo(CGSizeMake(45, 45));
+            make.right.mas_equalTo(self.mas_right).with.offset(-15/667.0*SCREEN_HEIGHT);
+            make.centerY.mas_equalTo(self.mas_centerY);
+        }];
+        
+        
         [self.contentView addSubview:self.titleLbael];
         [_titleLbael mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.size.mas_equalTo(CGSizeMake(150, 21));
+            //make.size.mas_equalTo(CGSizeMake(150, 21));
             make.left.mas_equalTo(_headImageView.mas_right).with.offset(10/667.0*SCREEN_HEIGHT);
             make.top.mas_equalTo(self.mas_top).with.offset(13/667.0*SCREEN_HEIGHT);
         }];
         
         [self.contentView addSubview:self.timeLabel];
         [_timeLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.size.mas_equalTo(CGSizeMake(80, 21));
-            make.left.mas_equalTo(_titleLbael.mas_right).with.offset(5);
+            make.size.mas_equalTo(CGSizeMake(110, 21));
+            make.right.mas_equalTo(_iconImageView.mas_left).with.offset(-15);
             make.top.mas_equalTo(self.mas_top).with.offset(13/667.0*SCREEN_HEIGHT);
         }];
         
@@ -63,12 +73,6 @@
             make.top.mas_equalTo(self.mas_top).with.offset(13/667.0*SCREEN_HEIGHT);
         }];
         
-        [self.contentView addSubview:self.iconImageView];
-        [_iconImageView mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.size.mas_equalTo(CGSizeMake(45, 45));
-            make.right.mas_equalTo(self.mas_right).with.offset(-15/667.0*SCREEN_HEIGHT);
-            make.centerY.mas_equalTo(self.mas_centerY);
-        }];
         
         [self.contentView addSubview:self.msgLabel];
         [_msgLabel mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -89,6 +93,14 @@
             make.size.mas_equalTo(CGSizeMake(72/667.0*SCREEN_HEIGHT, 26/667.0*SCREEN_HEIGHT));
             make.centerY.mas_equalTo(self.mas_centerY);
             make.right.mas_equalTo(self.mas_right).with.offset(-15/667.0*SCREEN_HEIGHT);
+        }];
+        
+        [self.contentView addSubview:self.alertTipviewNum];
+        self.alertTipviewNum.tipNumLabel.text = @"";
+        [self.alertTipviewNum mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.size.mas_equalTo(CGSizeMake(10, 10));
+            make.left.mas_equalTo(self.titleLbael.mas_bottom).with.offset(5);
+            make.centerY.mas_equalTo(self.titleLbael.mas_centerY);
         }];
     }
     
@@ -136,8 +148,25 @@
     [self.iconImageView sd_setImageWithURL:[NSURL URLWithString:model.head_pic_url] placeholderImage:[UIImage imageNamed:@"werwer"]];
     self.msgLabel.text = model.summary;
     self.titleLbael.text = model.nickname;
+    if ([model.firstLogin isEqualToNumber:@1]) {
+        //不显示
+        self.alertTipviewNum.hidden = YES;
+    }else if ([model.firstLogin isEqualToNumber:@0]){
+        //显示
+        self.alertTipviewNum.hidden = NO;
+    }
 }
 
+
+    
+-(TipNumberView *)alertTipviewNum{
+    if (!_alertTipviewNum) {
+        _alertTipviewNum = [TipNumberView getTipNumView];
+    }
+    return _alertTipviewNum;
+}
+    
+    
 
 -(UILabel *)msgLabel{
     if (!_msgLabel) {

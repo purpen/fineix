@@ -91,6 +91,7 @@
             model.nickname = toUserDict[@"nickname"];
             model.mediumAvatarUrl = toUserDict[@"big_avatar_url"];
             model.birthday = rowsDict[@"last_time_at"];
+            model.firstLogin = rowsDict[@"readed"];
             NSLog(@"时间啊啊   %@",rowsDict[@"last_time_at"]);
             [_modelAry addObject:model];
         }
@@ -174,7 +175,7 @@
         [cell setUIWithModel:model];
         cell.iconImageView.hidden = YES;
         cell.focusBtn.hidden = YES;
-        cell.timeLabel.hidden = YES;
+        cell.timeLabelTwo.hidden = YES;
     }
     
     return cell;

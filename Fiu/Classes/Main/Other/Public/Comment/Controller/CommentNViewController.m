@@ -6,14 +6,14 @@
 //  Copyright © 2016年 taihuoniao. All rights reserved.
 //
 
-#import "CommentViewController.h"
+#import "CommentNViewController.h"
 #import "CommentDataTableViewCell.h"
 #import "CommentRow.h"
 
 static NSString *const URLSceneComment = @"/comment/getlist";
 static NSString *const URLSendSceneComment = @"/comment/ajax_comment";
 
-@interface CommentViewController ()
+@interface CommentNViewController ()
 
 @pro_strong NSMutableArray      *   commentListMarr;    //  评论列表
 @pro_strong NSMutableArray      *   targetUserId;       //  被回复人id
@@ -21,7 +21,7 @@ static NSString *const URLSendSceneComment = @"/comment/ajax_comment";
 
 @end
 
-@implementation CommentViewController
+@implementation CommentNViewController
 
 
 - (void)viewWillAppear:(BOOL)animated {

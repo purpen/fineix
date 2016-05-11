@@ -26,7 +26,7 @@
 @property (weak, nonatomic) IBOutlet UIView *commentView;
 @property (weak, nonatomic) IBOutlet UIView *messageView;
 @property (weak, nonatomic) IBOutlet UIView *remindView;
-
+@property (nonatomic,strong) TipNumberView *alertTipviewNum;
 
 @end
 
@@ -38,6 +38,18 @@
     // Do any additional setup after loading the view from its nib.
     self.delegate = self;
     self.navViewTitle.text = @"消息";
+    if ([self.countModel.fiu_alert_count intValue] == 0) {
+        
+    }else{
+        [self.remindView addSubview:self.alertTipviewNum];
+        self.alertTipviewNum.tipNumLabel.text = [NSString stringWithFormat:@"%@",self.countModel.fiu_alert_count];
+        [self.alertTipviewNum mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.size.mas_equalTo(CGSizeMake(15, 15));
+            make.right.mas_equalTo(self.remindView.mas_right).with.offset(-30);
+            make.centerY.mas_equalTo(self.remindView.mas_centerY);
+        }];
+    }
+
     if ([self.countModel.fiu_notice_count intValue] == 0) {
         
     }else{
@@ -90,6 +102,12 @@
     }
 }
 
+-(TipNumberView *)alertTipviewNum{
+    if (!_alertTipviewNum) {
+        _alertTipviewNum = [TipNumberView getTipNumView];
+    }
+    return _alertTipviewNum;
+}
 
 -(void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];

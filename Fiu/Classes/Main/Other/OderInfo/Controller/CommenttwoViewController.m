@@ -1,8 +1,8 @@
 //
-//  CommentViewController.m
+//  CommenttwoViewController.m
 //  Fiu
 //
-//  Created by THN-Dong on 16/5/7.
+//  Created by THN-Dong on 16/5/10.
 //  Copyright © 2016年 taihuoniao. All rights reserved.
 //
 
@@ -118,13 +118,13 @@
 }
 
 /*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
+ #pragma mark - Navigation
+ 
+ // In a storyboard-based application, you will often want to do a little preparation before navigation
+ - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+ // Get the new view controller using [segue destinationViewController].
+ // Pass the selected object to the new view controller.
+ }
+ */
 
 @end

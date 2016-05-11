@@ -1,8 +1,8 @@
 //
-//  CommentViewController.h
+//  CommenttwoViewController.h
 //  Fiu
 //
-//  Created by THN-Dong on 16/5/7.
+//  Created by THN-Dong on 16/5/10.
 //  Copyright © 2016年 taihuoniao. All rights reserved.
 //
 
@@ -16,3 +16,4 @@
 
 @property (nonatomic, weak) id<OrderInfoDetailVCDelegate> delegate1;
 @end
+
