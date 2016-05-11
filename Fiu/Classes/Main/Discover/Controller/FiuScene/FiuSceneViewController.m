@@ -131,6 +131,7 @@ static NSString *const URLLikeScenePeople = @"/favorite";
             [SVProgressHUD showSuccessWithStatus:[result valueForKey:@"message"]];
             self.suBtn.suFiuBtn.selected = YES;
             [self networkRequestData];
+            [self networkLikePeopleData];
             
         } failure:^(FBRequest *request, NSError *error) {
             [SVProgressHUD showErrorWithStatus:[error localizedDescription]];
@@ -142,6 +143,7 @@ static NSString *const URLLikeScenePeople = @"/favorite";
             [SVProgressHUD showSuccessWithStatus:[result valueForKey:@"message"]];
             self.suBtn.suFiuBtn.selected = NO;
             [self networkRequestData];
+            [self networkLikePeopleData];
             
         } failure:^(FBRequest *request, NSError *error) {
             [SVProgressHUD showErrorWithStatus:[error localizedDescription]];

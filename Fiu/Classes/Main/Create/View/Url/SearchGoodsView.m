@@ -73,7 +73,7 @@
             
             } else if ([urlStr containsString:@"detail.m.tmall.com"]) {
                 NSRange range = [urlStr rangeOfString:@"id="];
-                NSRange rrange = [urlStr rangeOfString:@"&s"];
+                NSRange rrange = [urlStr rangeOfString:@"&"];
                 NSInteger idLength = rrange.location - (range.location + 3);
                 NSRange idRange = NSMakeRange(range.location + 3, idLength);
                 self.findGoodsId = [urlStr substringWithRange:idRange];

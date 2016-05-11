@@ -64,6 +64,9 @@
 "JD" = "京东";
 "TaoBao" = "淘宝";
 "Tmall" = "天猫";
+"changeUrl" = "修改产品链接";
+"deleteUserGoods" = "删除产品";
+"editUserGoods" = "编辑产品";
 
 //  评论
 "comment" = "评论一下";

@@ -35,12 +35,11 @@ static NSString *const URLSceneList = @"/scene_sight/";
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.automaticallyAdjustsScrollViewInsets = NO;
-    self.currentpageNum = 0;
     
+    self.currentpageNum = 0;
     [self networkRequestData];
     
     [self.view addSubview:self.homeTableView];
-
 }
 
 #pragma mark - 网络请求
@@ -96,6 +95,8 @@ static NSString *const URLSceneList = @"/scene_sight/";
 - (void)addMJRefresh:(UITableView *)table {
     table.mj_header = [MJRefreshNormalHeader headerWithRefreshingBlock:^{
         self.currentpageNum = 0;
+        [self.sceneListMarr removeAllObjects];
+        [self.sceneIdMarr removeAllObjects];
         [self networkRequestData];
     }];
     

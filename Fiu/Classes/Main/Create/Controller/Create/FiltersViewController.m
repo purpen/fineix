@@ -10,10 +10,12 @@
 #import "ReleaseViewController.h"
 #import "MarkGoodsViewController.h"
 #import "AddUrlViewController.h"
-
 #import "FBFilters.h"
+#import "UserGoodsTag.h"
 
-@interface FiltersViewController () <FBFootViewDelegate>
+@interface FiltersViewController () <FBFootViewDelegate> {
+    UserGoodsTag * goodsTag;
+}
 
 @end
 
@@ -43,7 +45,7 @@
     self.filtersImageView.image = self.filtersImg;
     [self.view addSubview:self.filtersImageView];
     [_filtersImageView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.size.mas_equalTo(CGSizeMake(SCREEN_WIDTH * 0.67, SCREEN_HEIGHT - 220));
+        make.size.mas_equalTo(CGSizeMake(SCREEN_WIDTH * 0.85, SCREEN_HEIGHT - 100));
         make.top.equalTo(self.view.mas_top).with.offset(50);
         make.centerX.equalTo(self.view);
     }];
@@ -99,7 +101,7 @@
         [self presentViewController:addUrlVC animated:YES completion:nil];
         addUrlVC.findGodosBlock = ^(NSString * title, NSString * price) {
             NSLog(@"＝＝＝＝＝＝＝ 找到的商品标题：%@ －－－－－ 价格：%@ ------", title, price);
-            
+            [self addUserGoodsTagWithTitle:title withPrice:price];
         };
         
     } else if (index == 2) {
@@ -109,6 +111,37 @@
             _filtersView.frame = filtersViewRect;
         }];
     }
+}
+
+#pragma mark - 创建一个标签
+- (void)addUserGoodsTagWithTitle:(NSString *)title withPrice:(NSString *)price {
+    int tagX = (arc4random() % 4);
+    int tagY = (arc4random() % 2) + 10;
+
+    CGRect tagRect = CGRectMake(tagX * 50, tagY * 40, 175, 32);
+    UserGoodsTag * tag = [[UserGoodsTag alloc] initWithFrame:tagRect];
+    tag.title.text = title;
+    tag.price.text = price;
+    UITapGestureRecognizer * tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(changeGoodsData)];
+    [tag addGestureRecognizer:tap];
+    [tag addTarget:self action:@selector(dragMoving:withEvent:) forControlEvents:(UIControlEventTouchDragInside)];
+    [self.view addSubview:tag];
+}
+
+- (void)dragMoving:(UIControl *)control withEvent:event {
+    control.center = [[[event allTouches] anyObject] locationInView:self.view];
+}
+
+- (void)changeGoodsData {
+    [self.view addSubview:self.changeGoodsView];
+}
+
+#pragma mark - 编辑产品信息
+- (ChangeAddUrlView *)changeGoodsView {
+    if (!_changeGoodsView) {
+        _changeGoodsView = [[ChangeAddUrlView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT)];
+    }
+    return _changeGoodsView;
 }
 
 #pragma mark - 处理图片的视图
@@ -147,19 +180,26 @@
 
 #pragma mark 继续按钮的点击事件
 - (void)nextBtnClick {
-    ReleaseViewController * releaseVC = [[ReleaseViewController alloc] init];
-    releaseVC.locationArr = self.locationArr;
-    releaseVC.scenceView.imageView.image = self.filtersImageView.image;
-    releaseVC.createType = self.createType;
-    releaseVC.fSceneId = self.fSceneId;
-    releaseVC.fSceneTitle = self.fSceneTitle;
-    releaseVC.goodsTitle = @"测试商品1,测试商品2,测试商品3";
-    releaseVC.goodsPrice = @"321,1829,2901";
-    releaseVC.goodsId = @"304,301,299";
-    releaseVC.goodsX = @"43,32,65";
-    releaseVC.goodsY = @"20,22,42";
-    [self.navigationController pushViewController:releaseVC animated:YES];
-    
+    if (self.view.subviews.count > 7) {
+        [SVProgressHUD showInfoWithStatus:@"最多添加三个商品"];
+        
+    } else if (self.view.subviews.count == 4) {
+        [SVProgressHUD showInfoWithStatus:@"至少添加一个商品"];
+        
+    } else if (self.view.subviews.count > 4 && self.view.subviews.count < 8) {
+        ReleaseViewController * releaseVC = [[ReleaseViewController alloc] init];
+        releaseVC.locationArr = self.locationArr;
+        releaseVC.scenceView.imageView.image = self.filtersImageView.image;
+        releaseVC.createType = self.createType;
+        releaseVC.fSceneId = self.fSceneId;
+        releaseVC.fSceneTitle = self.fSceneTitle;
+        releaseVC.goodsTitle = @"测试商品1,测试商品2,测试商品3";
+        releaseVC.goodsPrice = @"321,1829,2901";
+        releaseVC.goodsId = @"304,301,299";
+        releaseVC.goodsX = @"43,32,65";
+        releaseVC.goodsY = @"20,22,42";
+        [self.navigationController pushViewController:releaseVC animated:YES];
+    }
 }
 
 #pragma mark - 接收消息通知

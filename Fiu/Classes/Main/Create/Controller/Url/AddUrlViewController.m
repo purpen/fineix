@@ -50,6 +50,7 @@ static NSString *const Tmall = @"https://s.m.tmall.com/m/search.htm?q=";
         [self.findGoodsRequest startRequestSuccess:^(FBRequest *request, id result) {
             self.taobaoGoodsData = [[TaoBaoGoodsResult alloc] initWithDictionary:[[result valueForKey:@"data"] valueForKey:@"results"]];
             [self.findGoodsView setFindGoodsViewData:self.taobaoGoodsData];
+
             [SVProgressHUD dismiss];
             
         } failure:^(FBRequest *request, NSError *error) {
