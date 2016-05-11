@@ -7,7 +7,7 @@
 //
 
 #import "SystemInformsViewController.h"
-#import "SystemMsgTableViewCell.h"
+
 
 @interface SystemInformsViewController ()<FBNavigationBarItemsDelegate,UITableViewDelegate,UITableViewDataSource>
 @property (weak, nonatomic) IBOutlet UITableView *myTbaleView;
@@ -28,23 +28,23 @@
     self.myTbaleView.rowHeight = 65;
 }
 
--(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
-    return 3;
-}
-
--(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
-    static NSString *cellId = @"cellOne";
-    SystemMsgTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellId];
-    if (cell == nil) {
-        cell = [[SystemMsgTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellId];
-    }
-    //[cell setUI];
-    return cell;
-}
-
--(CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{
-    return 0.01;
-}
+//-(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
+//    return 3;
+//}
+//
+////-(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
+////    static NSString *cellId = @"cellOne";
+////    SystemMsgTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellId];
+////    if (cell == nil) {
+////        cell = [[SystemMsgTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellId];
+////    }
+////    //[cell setUI];
+////    return cell;
+////}
+//
+//-(CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{
+//    return 0.01;
+//}
 
 -(void)rightBarItemSelected{
     NSLog(@"清空");

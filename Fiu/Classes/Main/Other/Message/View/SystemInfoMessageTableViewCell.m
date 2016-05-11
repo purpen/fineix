@@ -58,7 +58,8 @@
         
 //        [_bgView addSubview:self.iconImageView];
 //        [_iconImageView mas_makeConstraints:^(MASConstraintMaker *make) {
-//            make.size.mas_equalTo(CGSizeMake(<#CGFloat width#>, <#CGFloat height#>))
+//            make.size.mas_equalTo(CGSizeMake(50/667.0*SCREEN_HEIGHT, 50/667.0*SCREEN_HEIGHT));
+//            make
 //        }];
     }
     return _bgView;

@@ -503,7 +503,7 @@ static NSString *const thirdRegister = @"/auth/third_sign";//第三方登录接�
             
             [SVProgressHUD showSuccessWithStatus:@"认证成功"];
             
-            if ([[result objectForKey:@"first_login"] isEqualToNumber:@0]) {
+            if ([[result objectForKey:@"first_login"] isEqualToNumber:@1]) {
                 //跳转到推荐界面
                 SubscribeInterestedCollectionViewController *subscribeVC = [[SubscribeInterestedCollectionViewController alloc] init];
                 [self.navigationController pushViewController:subscribeVC animated:YES];
