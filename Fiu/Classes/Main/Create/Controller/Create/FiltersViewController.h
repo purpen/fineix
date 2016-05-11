@@ -9,6 +9,7 @@
 #import "FBPictureViewController.h"
 #import "FBFootView.h"
 #import "FiltersView.h"
+#import "ChangeAddUrlView.h"
 
 @interface FiltersViewController : FBPictureViewController
 
@@ -21,7 +22,7 @@
 @pro_strong NSString            *   filterName;             //  选择的滤镜名字
 @pro_strong NSString            *   fSceneId;
 @pro_strong NSString            *   fSceneTitle;
-
+@pro_strong ChangeAddUrlView    *   changeGoodsView;        //  编辑产品
 /**
  *  添加标签
  *  标题／价格／坐标
