@@ -124,7 +124,7 @@
 
 -(void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
-    
+    [[UIApplication sharedApplication] setStatusBarHidden:NO withAnimation:(UIStatusBarAnimationSlide)];
     self.delegate = self;
     [self addNavLogoImgisTransparent:YES];
     [self addBarItemLeftBarButton:@"" image:@"Page 1" isTransparent:YES];
@@ -146,14 +146,18 @@
         
         UserInfo *userInfo = [UserInfo mj_objectWithKeyValues:[result objectForKey:@"data"]];
         userInfo.head_pic_url = [result objectForKey:@"data"][@"head_pic_url"];
-        NSArray *areasAry = dataDict[@"areas"];
+        NSArray *areasAry = [NSArray arrayWithArray:dataDict[@"areas"]];
+        if (areasAry.count) {
+            userInfo.prin = areasAry[0];
+            userInfo.city = areasAry[1];
+        }
         [userInfo saveOrUpdate];
         [userInfo updateUserInfoEntity];
-        userInfo.areas = areasAry;
-        NSLog(@"   地理位置   &&&&&&&&&  %@",dataDict[@"areas"]);
+        
+        
         UserInfoEntity *entity = [UserInfoEntity defaultUserInfoEntity];
         entity.isLogin = YES;
-        
+        NSLog(@"   地区   &&&&&&&&&  %@",entity.prin);
         NSDictionary *counterDict = [dataDict objectForKey:@"counter"];
         _counterModel = [CounterModel mj_objectWithKeyValues:counterDict];
         _counterModel.subscription_count = [result objectForKey:@"data"][@"subscription_count"];
@@ -407,7 +411,7 @@
     UserInfoEntity *entity = [UserInfoEntity defaultUserInfoEntity];
     HomePageViewController *myHomeVC = [[HomePageViewController alloc] init];
     myHomeVC.userId = entity.userId;
-    myHomeVC.type = @1;
+    myHomeVC.type = @2;
     myHomeVC.isMySelf = YES;
     [self.navigationController pushViewController:myHomeVC animated:YES];
 }

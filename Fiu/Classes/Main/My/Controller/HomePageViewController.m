@@ -114,6 +114,7 @@ static NSString *const IconURL = @"/my/add_head_pic";
 
 -(void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
+    
     [[UIApplication sharedApplication] setStatusBarHidden:NO withAnimation:(UIStatusBarAnimationSlide)];
     self.navigationController.navigationBarHidden = YES;
     self.tabBarController.tabBar.hidden = YES;
@@ -299,6 +300,11 @@ static NSString *const IconURL = @"/my/add_head_pic";
             UserInfo *userInfo = [UserInfo mj_objectWithKeyValues:[result objectForKey:@"data"]];
             userInfo.head_pic_url = [result objectForKey:@"data"][@"head_pic_url"];
             NSLog(@"头图 %@",[result objectForKey:@"data"][@"head_pic_url"]);
+            NSArray *areasAry = [NSArray arrayWithArray:dataDict[@"areas"]];
+            if (areasAry.count) {
+                userInfo.prin = areasAry[0];
+                userInfo.city = areasAry[1];
+            }
             [userInfo saveOrUpdate];
             [userInfo updateUserInfoEntity];
             NSLog(@"%@",userInfo);
@@ -404,6 +410,7 @@ static NSString *const IconURL = @"/my/add_head_pic";
 
 -(UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath{
     if (indexPath.section == 0) {
+        
         if (self.isMySelf) {
             BackgroundCollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"BackgroundCollectionViewCell" forIndexPath:indexPath];
             [cell.bgImageView addGestureRecognizer:self.myTap];

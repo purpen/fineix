@@ -16,32 +16,29 @@
     AccountView *view = [[NSBundle mainBundle] loadNibNamed:@"MyView" owner:nil options:nil][2];
     view.iconUrl.layer.masksToBounds = YES;
     view.iconUrl.layer.cornerRadius = 15;
-    UserInfoEntity *entity = [UserInfoEntity defaultUserInfoEntity];
-    //更新头像
-    [view.iconUrl sd_setImageWithURL:[NSURL URLWithString:entity.mediumAvatarUrl] placeholderImage:[UIImage imageNamed:@"Circle + User"] completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
-        
-    }];
-    view.nickName.text = entity.nickname;
-    
-    
-//    if (entity.areas) {
-//        view.adress.text = [NSString stringWithFormat:@"%@%@",entity.areas.firstObject,entity.areas.lastObject];
+//    UserInfoEntity *entity = [UserInfoEntity defaultUserInfoEntity];
+//    //更新头像
+//    [view.iconUrl sd_setImageWithURL:[NSURL URLWithString:entity.mediumAvatarUrl] placeholderImage:[UIImage imageNamed:@"Circle + User"] completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
+//        
+//    }];
+//    view.nickName.text = entity.nickname;
+//    
+//    
+//    switch ([entity.sex intValue]) {
+//        case 0:
+//            view.sex.text = @"保密";
+//            break;
+//        case 1:
+//            view.sex.text = @"男";
+//            break;
+//        case 3:
+//            view.sex.text = @"女";
+//            break;
+//            
+//        default:
+//            break;
 //    }
-    switch ([entity.sex intValue]) {
-        case 0:
-            view.sex.text = @"保密";
-            break;
-        case 1:
-            view.sex.text = @"男";
-            break;
-        case 3:
-            view.sex.text = @"女";
-            break;
-            
-        default:
-            break;
-    }
-    view.birthday.text = entity.birthday;
+//    view.birthday.text = entity.birthday;
     return view;
 }
 @end

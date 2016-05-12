@@ -30,7 +30,7 @@
     entity.summary = userInfo.summary;
     
     entity.city = userInfo.city;
-    entity.areas = userInfo.areas;
+    entity.prin = userInfo.prin;
     entity.follow_count = userInfo.follow_count;
     entity.head_pic_url = userInfo.head_pic_url;
     entity.is_love = userInfo.is_love;

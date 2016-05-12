@@ -29,7 +29,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.view.backgroundColor = [UIColor colorWithHexString:@"#F7F7F7"];
+    self.view.backgroundColor = [UIColor colorWithRed:247/255.0 green:247/255.0 blue:247/255.0 alpha:1];
     // Do any additional setup after loading the view.
     //设置导航条
     self.navViewTitle.text = @"二维码";
@@ -39,7 +39,7 @@
     
     [self.filter setDefaults];
     UserInfoEntity *entity = [UserInfoEntity defaultUserInfoEntity];
-    NSString *str = [NSString stringWithFormat:@"qq41e073ea://id=%@",entity.userId];
+    NSString *str = [NSString stringWithFormat:@"http://m.taihuoniao.com/guide/appload?infoType=13&infoId=%@",entity.userId];
     NSData *data = [str dataUsingEncoding:NSUTF8StringEncoding];
     [_filter setValue:data forKey:@"inputMessage"];
     //self.view = self.qrCodeView;
@@ -125,9 +125,24 @@
 #pragma mark - 保存图片
 -(void)savePicture:(UIButton*)sender{
     NSLog(@"保存图片");
-    UIImageWriteToSavedPhotosAlbum(self.qrCodeView.qrCodeImageView.image, self, @selector(imageSavedToPhotosAlbum:didFinishSavingWithError:contextInfo:), nil);
+    
+    UIGraphicsBeginImageContext(self.view.frame.size); //currentView 当前的view
+    [self.view.layer renderInContext:UIGraphicsGetCurrentContext()];
+    UIImage *viewImage = UIGraphicsGetImageFromCurrentImageContext();
+    UIGraphicsEndImageContext();
+    //viewImage就是获取的截图，如果要将图片存入相册，只需在后面调用
+    UIImageWriteToSavedPhotosAlbum(viewImage, self, @selector(imageSavedToPhotosAlbum:didFinishSavingWithError:contextInfo:), nil);
+    
     [self dismissViewControllerAnimated:NO completion:nil];
     
+    
+    
+//    NSData *imageViewData = UIImagePNGRepresentation(sendImage);
+//    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+//    NSString *documentsDirectory = [paths objectAtIndex:0];
+//    NSString *pictureName= [NSString stringWithFormat:@"screenShow_%d.png",ScreenshotIndex];
+//    NSString *savedImagePath = [documentsDirectory stringByAppendingPathComponent:pictureName];
+//    NSLog(@"截屏路径打印: %@", savedImagePath);
 }
 
 -(void)imageSavedToPhotosAlbum:(UIImage*)image didFinishSavingWithError:(NSError*)error contextInfo:(void*)contextInfo{

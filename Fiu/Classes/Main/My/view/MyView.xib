@@ -291,7 +291,7 @@
                             </constraints>
                         </imageView>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="DQT-rn-zKo">
-                            <rect key="frame" x="244" y="12" width="90" height="21"/>
+                            <rect key="frame" x="296" y="13" width="38" height="18"/>
                             <constraints>
                                 <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="21" id="3gs-JM-vYX"/>
                                 <constraint firstAttribute="width" constant="90" id="Dwc-M5-lVG"/>
@@ -301,6 +301,14 @@
                             <fontDescription key="fontDescription" type="system" pointSize="15"/>
                             <color key="textColor" red="0.40000000000000002" green="0.40000000000000002" blue="0.40000000000000002" alpha="1" colorSpace="calibratedRGB"/>
                             <nil key="highlightedColor"/>
+                            <variation key="default">
+                                <mask key="constraints">
+                                    <exclude reference="3gs-JM-vYX"/>
+                                    <exclude reference="Dwc-M5-lVG"/>
+                                    <exclude reference="Hlv-OF-sHg"/>
+                                    <exclude reference="Scf-Ji-epj"/>
+                                </mask>
+                            </variation>
                         </label>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="v3w-Wv-YUt">
                             <rect key="frame" x="8" y="8" width="341" height="30"/>

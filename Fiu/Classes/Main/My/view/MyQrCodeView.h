@@ -13,10 +13,10 @@
 @property(nonatomic,strong) UIView *bgView;
 @property(nonatomic,strong) UIImageView *headImageView;
 @property(nonatomic,strong) UILabel *nameLabel;
-@property(nonatomic,strong) UILabel *sexLabel;
-@property(nonatomic,strong) UIImageView *mapImageView;
+@property(nonatomic,strong) UIImageView *sexImageView;
 @property(nonatomic,strong) UILabel *adressLabel;
 @property(nonatomic,strong) UIImageView *qrCodeImageView;
+@property(nonatomic,strong) UILabel *tipLabel;
 
 -(void)setUI;
 

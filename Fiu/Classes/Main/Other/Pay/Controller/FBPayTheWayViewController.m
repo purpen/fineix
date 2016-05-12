@@ -180,7 +180,7 @@
                     
                     NSDictionary * dataDic = [result objectForKey:@"data"];
                     
-                    [[AlipaySDK defaultService] payOrder:[dataDic objectForKey:@"str"] fromScheme:@"ali2088411237666512" callback:^(NSDictionary *resultDic) {
+                    [[AlipaySDK defaultService] payOrder:[dataDic objectForKey:@"str"] fromScheme:@"ali2016051201393610" callback:^(NSDictionary *resultDic) {
                         if ([[resultDic objectForKey:@"resultStatus"] isEqualToString:@"9000"]) {
                             [self checkOrderInfoForPayStatusWithPaymentWay:@"支付宝"];
                         } else {
@@ -261,7 +261,7 @@
 }
 
 
-#pragma mark - alipayDelegate
+
 //请求订单状态以核实支付是否完成
 - (void)checkOrderInfoForPayStatusWithPaymentWay:(NSString *)paymentWay
 {

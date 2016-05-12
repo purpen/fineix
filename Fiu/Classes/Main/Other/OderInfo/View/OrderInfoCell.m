@@ -53,7 +53,7 @@
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
     [super setSelected:selected animated:animated];
-    // Configure the view for the selected state
+    
 }
 
 - (void)setOrderInfo:(OrderInfoModel *)orderInfo
@@ -105,8 +105,9 @@
             break;
         case OrderInfoStateWaitDelivery:
         {
-            [self.operation1stBtn setTitle:@"申请退款" forState:UIControlStateNormal];
-            self.operation2ndBtn.hidden = true;
+            //[self.operation1stBtn setTitle:@"申请退款" forState:UIControlStateNormal];
+            self.operation1stBtn.hidden = YES;
+            self.operation2ndBtn.hidden = YES;
         }
             break;
         case OrderInfoStateRefunding:
