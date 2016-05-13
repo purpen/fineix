@@ -15,6 +15,10 @@
 #import "SVProgressHUD.h"
 #import "HomePageViewController.h"
 #import "MyQrCodeViewController.h"
+#import "FiuSceneViewController.h"
+#import "SceneInfoViewController.h"
+#import "GoodsInfoViewController.h"
+#import "UserInfoEntity.h"
 
 @interface QRCodeScanViewController ()<FBNavigationBarItemsDelegate,UIAlertViewDelegate,AVCaptureMetadataOutputObjectsDelegate>
 
@@ -249,14 +253,9 @@
     id resultObj = [NSJSONSerialization JSONObjectWithData:jsonData options:NSJSONReadingMutableContainers error:&err];
     NSLog(@"resultObj  %@",resultObj);
     //判断是不是自己的二维码
-    if ([resultStr rangeOfString:@"qq41e073ea://"].location != NSNotFound) {
-        //取到用户信息，然后跳转到用户主页
+    if ([resultStr rangeOfString:@"taihuoniao.com"].location == NSNotFound || [resultStr rangeOfString:@"infoType"].location == NSNotFound) {
         
-        HomePageViewController *homeOpage = [[HomePageViewController alloc] init];
-        homeOpage.type = @1;
-        homeOpage.isMySelf = NO;
-        [self.navigationController pushViewController:homeOpage animated:YES];
-    }else{
+        
         NSRange range = [resultStr rangeOfString:@"^http://([\\w-]+\\.)+[\\w-]+(/[\\w-./?%&=]*)?$" options:NSRegularExpressionSearch];
         if (range.location != NSNotFound) {
             UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"是否打开以下网址" message:resultStr delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"确定", nil];
@@ -266,6 +265,44 @@
             return;
         }else{
             [SVProgressHUD showErrorWithStatus:resultObj];
+        }
+    }else if([resultStr rangeOfString:@"infoType"].location == NSNotFound){
+        [SVProgressHUD showErrorWithStatus:@"参数不足"];
+    }else if ([resultStr rangeOfString:@"taihuoniao.com"].location != NSNotFound && [resultStr rangeOfString:@"infoType"].location != NSNotFound){
+        NSArray *oneAry = [resultStr componentsSeparatedByString:@"?"];
+        NSString *infoStr = oneAry[1];
+        NSLog(@"分割   %@",infoStr);
+        NSArray *twoAry = [infoStr componentsSeparatedByString:@"&"];
+        NSString *infoType = [twoAry[0] substringWithRange:NSMakeRange(9, 2)];
+        NSString *infoId = [twoAry[1] substringWithRange:NSMakeRange(7, 5)];
+        if ([infoType isEqualToString:@"10"]) {
+            //情景
+            FiuSceneViewController * fiuSceneVC = [[FiuSceneViewController alloc] init];
+            fiuSceneVC.fiuSceneId = infoId;
+            [self.navigationController pushViewController:fiuSceneVC animated:YES];
+        }else if ([infoType isEqualToString:@"11"]) {
+            //场景
+            SceneInfoViewController * sceneInfoVC = [[SceneInfoViewController alloc] init];
+            sceneInfoVC.sceneId = infoId;
+            [self.navigationController pushViewController:sceneInfoVC animated:YES];
+        }else if ([infoType isEqualToString:@"12"]) {
+            //产品
+            GoodsInfoViewController * goodsInfoVC = [[GoodsInfoViewController alloc] init];
+            goodsInfoVC.goodsID = infoId;
+            [self.navigationController pushViewController:goodsInfoVC animated:YES];
+        }else if ([infoType isEqualToString:@"13"]) {
+            //用户
+            HomePageViewController *homeOpage = [[HomePageViewController alloc] init];
+            homeOpage.type = @2;
+            homeOpage.userId = infoId;
+            NSLog(@"个人主页  0  %@",infoId);
+            UserInfoEntity *entity = [UserInfoEntity defaultUserInfoEntity];
+            if ([entity.userId isEqualToString:infoId]) {
+                homeOpage.isMySelf = YES;
+            }else{
+                homeOpage.isMySelf = NO;
+            }
+            [self.navigationController pushViewController:homeOpage animated:YES];
         }
     }
     [_session startRunning];

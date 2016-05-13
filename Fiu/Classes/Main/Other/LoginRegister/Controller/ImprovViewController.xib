@@ -33,7 +33,7 @@
                         <constraint firstAttribute="width" secondItem="Gvx-4d-Iab" secondAttribute="height" multiplier="375:44" id="2vF-ZF-Gqr"/>
                         <constraint firstAttribute="height" constant="44" id="Cnl-HS-FC0"/>
                     </constraints>
-                    <state key="normal" title="选好了，开始fineix之旅">
+                    <state key="normal" title="选好了，开始Fiu之旅">
                         <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </state>
                     <variation key="default">
@@ -64,8 +64,10 @@
                             </subviews>
                             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             <constraints>
+                                <constraint firstAttribute="height" constant="105" id="BPx-dV-auB"/>
                                 <constraint firstItem="gb6-gs-zvW" firstAttribute="leading" secondItem="9o6-yh-fQI" secondAttribute="leading" id="GYa-AH-h2i"/>
                                 <constraint firstAttribute="trailing" secondItem="gb6-gs-zvW" secondAttribute="trailing" id="Q8G-NP-ymB"/>
+                                <constraint firstAttribute="width" constant="105" id="RIT-aU-vhf"/>
                                 <constraint firstItem="gb6-gs-zvW" firstAttribute="top" secondItem="9o6-yh-fQI" secondAttribute="top" id="Rui-5S-hxl"/>
                                 <constraint firstAttribute="bottom" secondItem="S03-JC-qJx" secondAttribute="bottom" id="S3v-L0-sDB"/>
                                 <constraint firstAttribute="bottom" secondItem="gb6-gs-zvW" secondAttribute="bottom" id="V5f-KL-MHq"/>
@@ -78,6 +80,7 @@
                                 <mask key="constraints">
                                     <exclude reference="c4V-aq-FUL"/>
                                     <exclude reference="qE8-A1-4Ga"/>
+                                    <exclude reference="zJK-Bf-SRj"/>
                                 </mask>
                             </variation>
                         </view>
@@ -262,11 +265,15 @@
                         <constraint firstItem="FgK-iZ-oAQ" firstAttribute="width" secondItem="FgK-iZ-oAQ" secondAttribute="height" multiplier="273:44" id="guP-Os-jyr"/>
                         <constraint firstItem="9o6-yh-fQI" firstAttribute="leading" secondItem="Gy2-7o-u8A" secondAttribute="leading" constant="135" id="lHD-kh-dRD"/>
                         <constraint firstItem="v6t-19-Q4p" firstAttribute="top" secondItem="9o6-yh-fQI" secondAttribute="bottom" constant="33" id="qAP-14-6bI"/>
+                        <constraint firstItem="9o6-yh-fQI" firstAttribute="top" secondItem="Gy2-7o-u8A" secondAttribute="top" id="qnp-LN-GCw"/>
                         <constraint firstItem="FgK-iZ-oAQ" firstAttribute="top" secondItem="eiK-Fe-fPm" secondAttribute="bottom" constant="14" id="s3a-uX-f7E"/>
                         <constraint firstItem="eiK-Fe-fPm" firstAttribute="top" secondItem="v6t-19-Q4p" secondAttribute="bottom" constant="15" id="xma-xH-5tH"/>
                     </constraints>
                     <variation key="default">
                         <mask key="constraints">
+                            <exclude reference="6Ue-b7-fWo"/>
+                            <exclude reference="S7B-s0-2ls"/>
+                            <exclude reference="lHD-kh-dRD"/>
                             <exclude reference="guP-Os-jyr"/>
                         </mask>
                     </variation>

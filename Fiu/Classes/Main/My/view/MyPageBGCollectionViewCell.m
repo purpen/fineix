@@ -33,7 +33,7 @@
         [self.contentView addSubview:self.userLevelLabel];
         [_userLevelLabel mas_makeConstraints:^(MASConstraintMaker *make) {
             make.size.mas_equalTo(CGSizeMake(200, 12));
-            make.left.mas_equalTo(self.mas_left).with.offset(SCREEN_WIDTH*0.5-105/667.0*SCREEN_HEIGHT);
+            make.centerX.mas_equalTo(self.mas_centerX);
             make.bottom.mas_equalTo(self.certificationBtn.mas_top).with.offset(-9/667.0*SCREEN_HEIGHT);
         }];
         

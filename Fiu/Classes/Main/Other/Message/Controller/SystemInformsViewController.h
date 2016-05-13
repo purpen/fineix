@@ -8,7 +8,10 @@
 
 #import "FBViewController.h"
 
+
 @interface SystemInformsViewController : FBViewController
+
+@property(nonatomic,assign) NSInteger num;
 
 
 @end

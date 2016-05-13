@@ -48,7 +48,7 @@ static NSString *const IconURL = @"/my/upload_token";
     [self.navigationItem setHidesBackButton:YES];
     self.navigationItem.title = @"完善个人资料";
     self.headImageView.layer.masksToBounds = YES;
-    self.headImageView.layer.cornerRadius = 105*0.5/667.0*SCREEN_HEIGHT;
+    self.headImageView.layer.cornerRadius = 105*0.5;
     _sex = @"男";
     UserInfoEntity *entity = [UserInfoEntity defaultUserInfoEntity];
     [self.headImageView sd_setImageWithURL:[NSURL URLWithString:entity.mediumAvatarUrl]];

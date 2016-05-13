@@ -201,7 +201,6 @@
     [cell.focusOnBtn addTarget:self action:@selector(clickFocusBtn:) forControlEvents:UIControlEventTouchUpInside];
     //UserInfo *model = _modelAry[indexPath.row];
     cell.focusOnBtn.tag = indexPath.row;
-    cell.focusOnBtn.selected = YES;
     [cell setUIWithModel:[_modelAry objectAtIndex:indexPath.row] andType:@0];
     return cell;
 }
@@ -228,9 +227,10 @@
         [sheetVC.stopBtn addTarget:self action:@selector(clickStopBtn:) forControlEvents:UIControlEventTouchUpInside];
         [sheetVC.cancelBtn addTarget:self action:@selector(clickCancelBtn:) forControlEvents:UIControlEventTouchUpInside];
     }else{
-        sender.selected = !sender.selected;
-        //请求数据
         UserInfo *model = _modelAry[sender.tag];
+        model.is_love = @1;
+        [self.mytableView reloadRowsAtIndexPaths:[NSArray arrayWithObjects:[NSIndexPath indexPathForRow:sender.tag inSection:0], nil] withRowAnimation:UITableViewRowAnimationNone];
+        //请求数据
         FBRequest *request = [FBAPI postWithUrlString:@"/follow/ajax_follow" requestDictionary:@{@"follow_id":model.userId} delegate:self];
         request.flag = @"/follow/ajax_follow";
         [request startRequest];
@@ -239,9 +239,9 @@
 
 -(void)clickStopBtn:(UIButton*)sender{
     [self dismissViewControllerAnimated:YES completion:nil];
-    FocusOnTableViewCell *cell = [_mytableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:sender.tag inSection:0]];
-    cell.focusOnBtn.selected = NO;
     UserInfo *model = _modelAry[sender.tag];
+    model.is_love = @0;
+    [self.mytableView reloadRowsAtIndexPaths:[NSArray arrayWithObjects:[NSIndexPath indexPathForRow:sender.tag inSection:0], nil] withRowAnimation:UITableViewRowAnimationNone];
     FBRequest *request = [FBAPI postWithUrlString:@"/follow/ajax_cancel_follow" requestDictionary:@{@"follow_id":model.userId} delegate:self];
     request.flag = @"/follow/ajax_cancel_follow";
     [request startRequest];

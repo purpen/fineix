@@ -93,7 +93,8 @@
         }
         self.messages = messageArray;
         [self.myTableVuew reloadData];
-//        [self.myTableVuew scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:[self.myTableVuew numberOfRowsInSection:0]-1 inSection:0] atScrollPosition:UITableViewScrollPositionMiddle animated:NO];
+        NSLog(@" 聊天数量    %zi",self.messages.count);
+//        [self.myTableVuew scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:(self.messages.count-1)*2 inSection:0] atScrollPosition:UITableViewScrollPositionMiddle animated:NO];
         [SVProgressHUD dismiss];
     } failure:^(FBRequest *request, NSError *error) {
         [SVProgressHUD showErrorWithStatus:[error localizedDescription]];

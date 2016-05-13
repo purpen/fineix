@@ -180,7 +180,7 @@
                     
                     NSDictionary * dataDic = [result objectForKey:@"data"];
                     
-                    [[AlipaySDK defaultService] payOrder:[dataDic objectForKey:@"str"] fromScheme:@"ali2088411237666512" callback:^(NSDictionary *resultDic) {
+                    [[AlipaySDK defaultService] payOrder:[dataDic objectForKey:@"str"] fromScheme:@"ali2016051201393610" callback:^(NSDictionary *resultDic) {
                         if ([[resultDic objectForKey:@"resultStatus"] isEqualToString:@"9000"]) {
                             [self checkOrderInfoForPayStatusWithPaymentWay:@"支付宝"];
                         } else {
@@ -202,8 +202,9 @@
                 FBRequest * request = [FBAPI postWithUrlString:@"/shopping/payed" requestDictionary:@{@"rid": self.orderInfo.rid, @"payaway": @"weichat"} delegate:self];
                 [SVProgressHUD showWithMaskType:SVProgressHUDMaskTypeClear];
                 [request startRequestSuccess:^(FBRequest *request, id result) {
-                    NSLog(@"微信支付返回结果  %@",result);
+                    
                     NSDictionary * dataDic = [result objectForKey:@"data"];
+                    NSLog(@"微信支付返回结果  %@",dataDic[@"nonce_str"]);
                     PayReq * payReq = [[PayReq alloc] init];
                     payReq.partnerId = [dataDic objectForKey:@"partner_id"];
                     payReq.prepayId= [dataDic objectForKey:@"prepay_id"];
@@ -261,7 +262,7 @@
 }
 
 
-#pragma mark - alipayDelegate
+
 //请求订单状态以核实支付是否完成
 - (void)checkOrderInfoForPayStatusWithPaymentWay:(NSString *)paymentWay
 {

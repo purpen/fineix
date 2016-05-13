@@ -31,6 +31,7 @@
 #import "FindeFriendViewController.h"
 #import "TipNumberView.h"
 
+
 @interface MyPageViewController ()<FBNavigationBarItemsDelegate,UICollectionViewDelegate,UICollectionViewDataSource>
 {
     ChanelView *_chanelV;
@@ -124,7 +125,7 @@
 
 -(void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
-    
+    [[UIApplication sharedApplication] setStatusBarHidden:NO withAnimation:(UIStatusBarAnimationSlide)];
     self.delegate = self;
     [self addNavLogoImgisTransparent:YES];
     [self addBarItemLeftBarButton:@"" image:@"Page 1" isTransparent:YES];
@@ -146,14 +147,18 @@
         
         UserInfo *userInfo = [UserInfo mj_objectWithKeyValues:[result objectForKey:@"data"]];
         userInfo.head_pic_url = [result objectForKey:@"data"][@"head_pic_url"];
-        NSArray *areasAry = dataDict[@"areas"];
+        NSArray *areasAry = [NSArray arrayWithArray:dataDict[@"areas"]];
+        if (areasAry.count) {
+            userInfo.prin = areasAry[0];
+            userInfo.city = areasAry[1];
+        }
         [userInfo saveOrUpdate];
         [userInfo updateUserInfoEntity];
-        userInfo.areas = areasAry;
-        NSLog(@"   地理位置   &&&&&&&&&  %@",dataDict[@"areas"]);
+        
+        
         UserInfoEntity *entity = [UserInfoEntity defaultUserInfoEntity];
         entity.isLogin = YES;
-        
+        NSLog(@"   地区   &&&&&&&&&  %@",entity.prin);
         NSDictionary *counterDict = [dataDict objectForKey:@"counter"];
         _counterModel = [CounterModel mj_objectWithKeyValues:counterDict];
         _counterModel.subscription_count = [result objectForKey:@"data"][@"subscription_count"];
@@ -223,11 +228,12 @@
             //显示
 
             self.tipNumView1.tipNumLabel.text = [NSString stringWithFormat:@"%@",_counterModel.order_total_count];
+            CGSize size = [self.tipNumView1.tipNumLabel.text sizeWithAttributes:@{NSFontAttributeName: [UIFont systemFontOfSize:12.0f]}];
             [cell.btn1 addSubview:self.tipNumView1];
             [self.tipNumView1 mas_makeConstraints:^(MASConstraintMaker *make) {
-                make.size.mas_equalTo(CGSizeMake(15, 15));
+                make.size.mas_equalTo(CGSizeMake(size.width+9, 15));
                 make.right.mas_equalTo(cell.btn1.mas_right).with.offset(0);
-                make.top.mas_equalTo(cell.btn1.mas_top).with.offset(-3);
+                make.top.mas_equalTo(cell.btn1.mas_top).with.offset(-3/667.0*SCREEN_HEIGHT);
             }];
         }
         
@@ -237,11 +243,12 @@
         }else{
             //显示
             self.tipNumView2.tipNumLabel.text = [NSString stringWithFormat:@"%@",_counterModel.message_total_count];
+            CGSize size = [self.tipNumView2.tipNumLabel.text sizeWithAttributes:@{NSFontAttributeName: [UIFont systemFontOfSize:12.0f]}];
             [cell.btn2 addSubview:self.tipNumView2];
             [self.tipNumView2 mas_makeConstraints:^(MASConstraintMaker *make) {
-                make.size.mas_equalTo(CGSizeMake(15, 15));
+                make.size.mas_equalTo(CGSizeMake(size.width+9, 15));
                 make.right.mas_equalTo(cell.btn2.mas_right).with.offset(0);
-                make.top.mas_equalTo(cell.btn2.mas_top).with.offset(-3);
+                make.top.mas_equalTo(cell.btn2.mas_top).with.offset(-3/667.0*SCREEN_HEIGHT);
             }];
         }
         [cell.btn1 addTarget:self action:@selector(orderBtn:) forControlEvents:UIControlEventTouchUpInside];
@@ -407,7 +414,7 @@
     UserInfoEntity *entity = [UserInfoEntity defaultUserInfoEntity];
     HomePageViewController *myHomeVC = [[HomePageViewController alloc] init];
     myHomeVC.userId = entity.userId;
-    myHomeVC.type = @1;
+    myHomeVC.type = @2;
     myHomeVC.isMySelf = YES;
     [self.navigationController pushViewController:myHomeVC animated:YES];
 }

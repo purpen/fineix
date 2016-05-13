@@ -8,6 +8,9 @@
 
 #import <UIKit/UIKit.h>
 
+@class SystemNoticeModel;
+@class TipNumberView;
+
 @interface SystemInfoMessageTableViewCell : UITableViewCell
 
 @property(nonatomic,strong) UILabel *timeLabel;
@@ -17,9 +20,11 @@
 @property(nonatomic,strong) UILabel *tittleLabel;
 @property(nonatomic,strong) UILabel *titleLabelTwo;
 @property(nonatomic,strong) UIView *lineView;
+@property(nonatomic,strong) UILabel *detailsLabel;
 @property(nonatomic,strong) UIButton *detailsBtn;
 @property(nonatomic,strong) UIImageView *enterImageView;
+@property(nonatomic,strong) TipNumberView *alertTipView;
 
-
+-(void)setUIWithModel:(SystemNoticeModel*)model;
 
 @end

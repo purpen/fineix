@@ -35,7 +35,6 @@
 
 static NSString *const IconURL = @"/my/upload_token";
 static NSString *const UpdateInfoURL = @"/my/update_profile";
-static NSString *const CityListUrl = @"/shopping/fetch_areas";
 
 @implementation AccountManagementViewController
 
@@ -117,7 +116,7 @@ static NSString *const CityListUrl = @"/shopping/fetch_areas";
     //拿到ID名称 更新列表，更新服务器上的 然后消失
     self.accountView.adress.text = [NSString stringWithFormat:@"%@ %@",self.addreesPickerVC.provinceStr,self.addreesPickerVC.cityStr];
     FBRequest *request = [FBAPI postWithUrlString:@"/my/update_profile" requestDictionary:@{@"province_id":@(self.addreesPickerVC.provinceId),@"district_id":@(self.addreesPickerVC.cityId)} delegate:self];
-    request.flag = UpdateInfoURL;
+    request.flag = @"UpdateInfoURL";
     [request startRequest];
     [self.addreesPickerVC dismissViewControllerAnimated:NO completion:nil];
 }
@@ -130,14 +129,17 @@ static NSString *const CityListUrl = @"/shopping/fetch_areas";
 -(void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
     UserInfoEntity *entity = [UserInfoEntity defaultUserInfoEntity];
+    entity.isLogin = YES;
+    NSLog(@"   修改地区   &&&&&&&&&  %@",entity.prin);
     //更新头像
     [_accountView.iconUrl sd_setImageWithURL:[NSURL URLWithString:entity.mediumAvatarUrl] placeholderImage:[UIImage imageNamed:@"Circle + User"] completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
         
     }];
     _accountView.nickName.text = entity.nickname;
-//    if (entity.areas.count != 0) {
-//        _accountView.adress.text = [NSString stringWithFormat:@"%@%@",entity.areas.firstObject,entity.areas.lastObject];
-//    }
+    NSLog( @"LLLLLL   %@",entity.prin);
+    if (entity.prin) {
+        _accountView.adress.text = [NSString stringWithFormat:@"%@%@",entity.prin,entity.city];
+    }
     switch ([entity.sex intValue]) {
         case 0:
             _accountView.sex.text = @"保密";
@@ -236,6 +238,7 @@ static NSString *const CityListUrl = @"/shopping/fetch_areas";
         } else {
             [SVProgressHUD showInfoWithStatus:message];
         }
+        request = nil;
     }
     
     if ([request.flag isEqualToString:UpdateInfoURL]) {
@@ -252,12 +255,20 @@ static NSString *const CityListUrl = @"/shopping/fetch_areas";
         } else {
             [SVProgressHUD showInfoWithStatus:message];
         }
+        request = nil;
     }
     
-    if ([request.flag isEqualToString:CityListUrl]) {
-        if ([result objectForKey:@"success"]) {
-            
+    if ([request.flag isEqualToString:@"UpdateInfoURL"]) {
+        NSLog(@"修改地区  %@",result);
+        NSDictionary *dataDict = result[@"data"];
+        UserInfoEntity * userEntity = [UserInfoEntity defaultUserInfoEntity];
+        NSArray *areasAry = [NSArray arrayWithArray:dataDict[@"areas"]];
+        if (areasAry.count) {
+            userEntity.prin = areasAry[0];
+            userEntity.city = areasAry[1];
         }
+        [userEntity updateUserInfo];
+        request = nil;
     }
 
 }

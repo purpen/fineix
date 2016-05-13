@@ -10,26 +10,29 @@
 #import <CoreImage/CoreImage.h>
 #import "Fiu.h"
 #import "MyQrCodeView.h"
-#import "FBSheetViewController.h"
+#import "QrShareSheetViewController.h"
 #import "SVProgressHUD.h"
 #import "QRCodeScanViewController.h"
 #import "UserInfoEntity.h"
+#import "UMSocial.h"
 
 @interface MyQrCodeViewController ()<FBNavigationBarItemsDelegate>
-
+{
+    UIImage *_viewImage;
+}
 @property(nonatomic,strong) CIFilter *filter;//生成二维码  过滤器
 
 
 
 @end
 
-
+static NSString *const ShareURL = @"http://m.taihuoniao.com/guide/app_about";
 
 @implementation MyQrCodeViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.view.backgroundColor = [UIColor colorWithHexString:@"#F7F7F7"];
+    self.view.backgroundColor = [UIColor colorWithRed:247/255.0 green:247/255.0 blue:247/255.0 alpha:1];
     // Do any additional setup after loading the view.
     //设置导航条
     self.navViewTitle.text = @"二维码";
@@ -39,7 +42,7 @@
     
     [self.filter setDefaults];
     UserInfoEntity *entity = [UserInfoEntity defaultUserInfoEntity];
-    NSString *str = [NSString stringWithFormat:@"qq41e073ea://id=%@",entity.userId];
+    NSString *str = [NSString stringWithFormat:@"http://m.taihuoniao.com/guide/appload?infoType=13&infoId=%@",entity.userId];
     NSData *data = [str dataUsingEncoding:NSUTF8StringEncoding];
     [_filter setValue:data forKey:@"inputMessage"];
     //self.view = self.qrCodeView;
@@ -50,6 +53,11 @@
         make.right.mas_equalTo(self.view.mas_right).with.offset(0);
         make.top.mas_equalTo(self.view.mas_top).with.offset(64);
     }];
+    
+    UIGraphicsBeginImageContext(self.view.frame.size); //currentView 当前的view
+    [self.view.layer renderInContext:UIGraphicsGetCurrentContext()];
+    _viewImage = UIGraphicsGetImageFromCurrentImageContext();
+    UIGraphicsEndImageContext();
 }
 
 - (UIImage *)createNonInterpolatedUIImageFormCIImage:(CIImage *)image withSize:(CGFloat) size
@@ -101,14 +109,54 @@
 
 -(void)rightBarItemSelected{
     NSLog(@"更多");
-    FBSheetViewController *sheetVC = [[FBSheetViewController alloc] init];
+    QrShareSheetViewController *sheetVC = [[QrShareSheetViewController alloc] init];
     sheetVC.modalPresentationStyle = UIModalPresentationOverCurrentContext;
+    sheetVC.modalTransitionStyle = UIModalTransitionStyleFlipHorizontal;
     [self presentViewController:sheetVC animated:NO completion:nil];
-    [sheetVC initFBSheetVCWithNameAry:[NSArray arrayWithObjects:@"保存图片",@"扫描二维码",@"取消", nil]];
-    [((UIButton*)sheetVC.sheetView.subviews[2]) addTarget:self action:@selector(cancelBtn:) forControlEvents:UIControlEventTouchUpInside];
-    [((UIButton*)sheetVC.sheetView.subviews[0]) addTarget:self action:@selector(savePicture:) forControlEvents:UIControlEventTouchUpInside];
-    [((UIButton*)sheetVC.sheetView.subviews[1]) addTarget:self action:@selector(scanQrCode:) forControlEvents:UIControlEventTouchUpInside];
+    [sheetVC.cancelBtn addTarget:self action:@selector(cancelBtn:) forControlEvents:UIControlEventTouchUpInside];
+    [sheetVC.saveBtn addTarget:self action:@selector(savePicture:) forControlEvents:UIControlEventTouchUpInside];
+    [sheetVC.saoMiaoBtn addTarget:self action:@selector(scanQrCode:) forControlEvents:UIControlEventTouchUpInside];
+    [sheetVC.weChatBtn addTarget:self action:@selector(wechatShareBtnAction:) forControlEvents:UIControlEventTouchUpInside];
+    [sheetVC.firendBtn addTarget:self action:@selector(timelineShareBtnAction:) forControlEvents:UIControlEventTouchUpInside];
+    [sheetVC.weiboBtn addTarget:self action:@selector(sinaShareBtnAction:) forControlEvents:UIControlEventTouchUpInside];
+    [sheetVC.qqBtn addTarget:self action:@selector(qqShareBtnAction:) forControlEvents:UIControlEventTouchUpInside];
 }
+
+-(void)wechatShareBtnAction:(UIButton*)sender{
+    [UMSocialData defaultData].extConfig.wechatSessionData.shareImage = _viewImage;
+    [[UMSocialDataService defaultDataService]  postSNSWithTypes:@[UMShareToWechatSession] content:@"有Fiu的生活，才够意思，快点扫码加我吧" image:_viewImage location:nil urlResource:nil presentedController:self completion:^(UMSocialResponseEntity *response){
+        if (response.responseCode == UMSResponseCodeSuccess) {
+            [SVProgressHUD showSuccessWithStatus:@"分享成功！"];
+        }
+    }];
+}
+
+-(void)timelineShareBtnAction:(UIButton*)sender{
+    [UMSocialData defaultData].extConfig.wechatTimelineData.url = ShareURL;
+    [[UMSocialDataService defaultDataService]  postSNSWithTypes:@[UMShareToWechatTimeline] content:@"有Fiu的生活，才够意思，快点扫码加我吧" image:_viewImage location:nil urlResource:nil presentedController:self completion:^(UMSocialResponseEntity *response){
+        if (response.responseCode == UMSResponseCodeSuccess) {
+            [SVProgressHUD showSuccessWithStatus:@"分享成功！"];
+        }
+    }];
+}
+
+-(void)qqShareBtnAction:(UIButton*)sender{
+    [UMSocialData defaultData].extConfig.qqData.url = ShareURL;
+    [[UMSocialDataService defaultDataService]  postSNSWithTypes:@[UMShareToQQ] content:@"有Fiu的生活，才够意思，快点扫码加我吧" image:_viewImage location:nil urlResource:nil presentedController:self completion:^(UMSocialResponseEntity *response){
+        if (response.responseCode == UMSResponseCodeSuccess) {
+            [SVProgressHUD showSuccessWithStatus:@"分享成功！"];
+        }
+    }];
+}
+
+-(void)sinaShareBtnAction:(UIButton*)sender{
+    [[UMSocialDataService defaultDataService]  postSNSWithTypes:@[UMShareToSina] content:@"有Fiu的生活，才够意思，快点扫码加我吧" image:_viewImage location:nil urlResource:nil presentedController:self completion:^(UMSocialResponseEntity *response){
+        if (response.responseCode == UMSResponseCodeSuccess) {
+            [SVProgressHUD showSuccessWithStatus:@"分享成功！"];
+        }
+    }];
+}
+
 
 -(void)cancelBtn:(UIButton*)sender{
     [self dismissViewControllerAnimated:NO completion:nil];
@@ -125,9 +173,20 @@
 #pragma mark - 保存图片
 -(void)savePicture:(UIButton*)sender{
     NSLog(@"保存图片");
-    UIImageWriteToSavedPhotosAlbum(self.qrCodeView.qrCodeImageView.image, self, @selector(imageSavedToPhotosAlbum:didFinishSavingWithError:contextInfo:), nil);
+    
+    //viewImage就是获取的截图，如果要将图片存入相册，只需在后面调用
+    UIImageWriteToSavedPhotosAlbum(_viewImage, self, @selector(imageSavedToPhotosAlbum:didFinishSavingWithError:contextInfo:), nil);
+    
     [self dismissViewControllerAnimated:NO completion:nil];
     
+    
+    
+//    NSData *imageViewData = UIImagePNGRepresentation(sendImage);
+//    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+//    NSString *documentsDirectory = [paths objectAtIndex:0];
+//    NSString *pictureName= [NSString stringWithFormat:@"screenShow_%d.png",ScreenshotIndex];
+//    NSString *savedImagePath = [documentsDirectory stringByAppendingPathComponent:pictureName];
+//    NSLog(@"截屏路径打印: %@", savedImagePath);
 }
 
 -(void)imageSavedToPhotosAlbum:(UIImage*)image didFinishSavingWithError:(NSError*)error contextInfo:(void*)contextInfo{

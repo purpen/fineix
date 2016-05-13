@@ -114,6 +114,7 @@ static NSString *const IconURL = @"/my/add_head_pic";
 
 -(void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
+    
     [[UIApplication sharedApplication] setStatusBarHidden:NO withAnimation:(UIStatusBarAnimationSlide)];
     self.navigationController.navigationBarHidden = YES;
     self.tabBarController.tabBar.hidden = YES;
@@ -299,6 +300,11 @@ static NSString *const IconURL = @"/my/add_head_pic";
             UserInfo *userInfo = [UserInfo mj_objectWithKeyValues:[result objectForKey:@"data"]];
             userInfo.head_pic_url = [result objectForKey:@"data"][@"head_pic_url"];
             NSLog(@"头图 %@",[result objectForKey:@"data"][@"head_pic_url"]);
+            NSArray *areasAry = [NSArray arrayWithArray:dataDict[@"areas"]];
+            if (areasAry.count) {
+                userInfo.prin = areasAry[0];
+                userInfo.city = areasAry[1];
+            }
             [userInfo saveOrUpdate];
             [userInfo updateUserInfoEntity];
             NSLog(@"%@",userInfo);
@@ -404,6 +410,7 @@ static NSString *const IconURL = @"/my/add_head_pic";
 
 -(UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath{
     if (indexPath.section == 0) {
+        
         if (self.isMySelf) {
             BackgroundCollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"BackgroundCollectionViewCell" forIndexPath:indexPath];
             [cell.bgImageView addGestureRecognizer:self.myTap];
@@ -418,7 +425,7 @@ static NSString *const IconURL = @"/my/add_head_pic";
             [cell.moreBtn addTarget:self action:@selector(clickMoreBtn:) forControlEvents:UIControlEventTouchUpInside];
             [cell.focusOnBtn addTarget:self action:@selector(clickFocusBtn:) forControlEvents:UIControlEventTouchUpInside];
             [cell.directMessages addTarget:self action:@selector(clickMessageBtn:) forControlEvents:UIControlEventTouchUpInside];
-            
+            cell.focusOnBtn.tag = indexPath.row;
             [cell setUIWithModel:_model];
             return cell;
         }
@@ -483,7 +490,8 @@ static NSString *const IconURL = @"/my/add_head_pic";
         [sheetVC.stopBtn addTarget:self action:@selector(clickStopBtn:) forControlEvents:UIControlEventTouchUpInside];
         [sheetVC.cancelBtn addTarget:self action:@selector(clickCancelBtn:) forControlEvents:UIControlEventTouchUpInside];
     }else{
-        sender.selected = !sender.selected;
+        _model.is_love = @1;
+        [self.myCollectionView reloadItemsAtIndexPaths:[NSArray arrayWithObjects:[NSIndexPath indexPathForRow:0 inSection:0], nil]];
         //请求数据
         FBRequest *request = [FBAPI postWithUrlString:@"/follow/ajax_follow" requestDictionary:@{@"follow_id":self.userId} delegate:self];
         request.flag = @"/follow/ajax_follow";
@@ -595,8 +603,8 @@ static NSString *const IconURL = @"/my/add_head_pic";
 
 -(void)clickStopBtn:(UIButton*)sender{
     [self dismissViewControllerAnimated:YES completion:nil];
-    OtherCollectionViewCell *cell = (OtherCollectionViewCell*)[_myCollectionView cellForItemAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0]];
-    cell.focusOnBtn.selected = NO;
+    _model.is_love = @0;
+    [self.myCollectionView reloadItemsAtIndexPaths:[NSArray arrayWithObjects:[NSIndexPath indexPathForRow:0 inSection:0], nil]];
     FBRequest *request = [FBAPI postWithUrlString:@"/follow/ajax_cancel_follow" requestDictionary:@{@"follow_id":self.userId} delegate:self];
     request.flag = @"/follow/ajax_cancel_follow";
     [request startRequest];

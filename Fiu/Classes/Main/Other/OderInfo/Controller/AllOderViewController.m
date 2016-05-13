@@ -12,6 +12,9 @@
 #import "Fiu.h"
 #import "CounterModel.h"
 #import "ReturnViewController.h"
+#import "UserInfoEntity.h"
+#import "NSObject+MJKeyValue.h"
+#import "SVProgressHUD.h"
 
 @interface AllOderViewController ()<FBNavigationBarItemsDelegate>
 
@@ -25,9 +28,42 @@
 @property (weak, nonatomic) IBOutlet UIButton *tMBtn;
 @property (weak, nonatomic) IBOutlet UIButton *returnGoodsBtn;
 @property (weak, nonatomic) IBOutlet UIView *chanelView;
+@property(nonatomic,strong) TipNumberView *order_wait_paymentTipView;
+@property(nonatomic,strong) TipNumberView *order_ready_goodsTipView;
+@property(nonatomic,strong) TipNumberView *order_sended_goodsTipView;
+@property(nonatomic,strong) TipNumberView *order_evaluateTipView;
+
 @end
 
 @implementation AllOderViewController
+
+-(void)viewWillAppear:(BOOL)animated{
+    [super viewWillAppear:animated];
+    [self netGetData];
+}
+
+-(void)netGetData{
+    UserInfoEntity *entity = [UserInfoEntity defaultUserInfoEntity];
+    FBRequest *request = [FBAPI postWithUrlString:@"/user/user_info" requestDictionary:@{@"user_id":entity.userId} delegate:self];
+    [request startRequestSuccess:^(FBRequest *request, id result) {
+        NSLog(@"&&&&&&&&result %@",result);
+        NSDictionary *dataDict = result[@"data"];
+        NSDictionary *counterDict = [dataDict objectForKey:@"counter"];
+        self.counterModel = [CounterModel mj_objectWithKeyValues:counterDict];
+        //-----------------------------------------------------
+        [self addTipViewWithNum:[self.counterModel.order_wait_payment intValue] andTipView:self.order_wait_paymentTipView andBtn:self.paymentBtn];
+        [self addTipViewWithNum:[self.counterModel.order_ready_goods intValue] andTipView:self.order_ready_goodsTipView andBtn:self.deliveryBtn];
+        [self addTipViewWithNum:[self.counterModel.order_sended_goods intValue] andTipView:self.order_sended_goodsTipView andBtn:self.goodsBtn];
+        
+        [self addTipViewWithNum:[self.counterModel.order_evaluate intValue] andTipView:self.order_evaluateTipView andBtn:self.evaluationBtn];
+        //------------------------------------------------------
+        [SVProgressHUD dismiss];
+        
+    } failure:^(FBRequest *request, NSError *error) {
+        [SVProgressHUD showErrorWithStatus:@"加载失败"];
+    }];
+}
+
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -35,69 +71,53 @@
     self.delegate = self;
     self.navViewTitle.text = @"全部订单";
     
-    if ([self.counterModel.order_wait_payment intValue] == 0) {
-        //不显示
-        
-    }else{
-        //显示
-        TipNumberView *tipNumView = [TipNumberView getTipNumView];
-        tipNumView.tipNumLabel.text = [NSString stringWithFormat:@"%@",_counterModel.order_wait_payment];
-        [self.paymentBtn addSubview:tipNumView];
-        [tipNumView mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.size.mas_equalTo(CGSizeMake(15/667.0*SCREEN_HEIGHT, 15/667.0*SCREEN_HEIGHT));
-            make.right.mas_equalTo(self.paymentBtn.mas_right).with.offset(-7/667.0*SCREEN_HEIGHT);
-            make.top.mas_equalTo(self.paymentBtn.mas_top).with.offset(13/667.0*SCREEN_HEIGHT);
-        }];
-    }
-
-    if ([self.counterModel.order_ready_goods intValue] == 0) {
-        //不显示
-        
-    }else{
-        //显示
-        TipNumberView *tipNumView = [TipNumberView getTipNumView];
-        tipNumView.tipNumLabel.text = [NSString stringWithFormat:@"%@",_counterModel.order_ready_goods];
-        [self.deliveryBtn addSubview:tipNumView];
-        [tipNumView mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.size.mas_equalTo(CGSizeMake(15/667.0*SCREEN_HEIGHT, 15/667.0*SCREEN_HEIGHT));
-            make.right.mas_equalTo(self.deliveryBtn.mas_right).with.offset(-7/667.0*SCREEN_HEIGHT);
-            make.top.mas_equalTo(self.deliveryBtn.mas_top).with.offset(13/667.0*SCREEN_HEIGHT);
-        }];
-    }
-    
-    if ([self.counterModel.order_sended_goods intValue] == 0) {
-        //不显示
-        
-    }else{
-        //显示
-        TipNumberView *tipNumView = [TipNumberView getTipNumView];
-        tipNumView.tipNumLabel.text = [NSString stringWithFormat:@"%@",_counterModel.order_sended_goods];
-        [self.goodsBtn addSubview:tipNumView];
-        [tipNumView mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.size.mas_equalTo(CGSizeMake(15/667.0*SCREEN_HEIGHT, 15/667.0*SCREEN_HEIGHT));
-            make.right.mas_equalTo(self.goodsBtn.mas_right).with.offset(-7/667.0*SCREEN_HEIGHT);
-            make.top.mas_equalTo(self.goodsBtn.mas_top).with.offset(13/667.0*SCREEN_HEIGHT);
-        }];
-    }
-    
-    
-    
-    if ([self.counterModel.order_evaluate intValue] == 0) {
-        //不显示
-        
-    }else{
-        //显示
-        TipNumberView *tipNumView = [TipNumberView getTipNumView];
-        tipNumView.tipNumLabel.text = [NSString stringWithFormat:@"%@",_counterModel.order_evaluate];
-        [self.evaluationBtn addSubview:tipNumView];
-        [tipNumView mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.size.mas_equalTo(CGSizeMake(15/667.0*SCREEN_HEIGHT, 15/667.0*SCREEN_HEIGHT));
-            make.right.mas_equalTo(self.evaluationBtn.mas_right).with.offset(-7/667.0*SCREEN_HEIGHT);
-            make.top.mas_equalTo(self.evaluationBtn.mas_top).with.offset(13/667.0*SCREEN_HEIGHT);
-        }];
-    }
-    
 }
+
+-(void)addTipViewWithNum:(NSInteger)num andTipView:(TipNumberView*)tipView andBtn:(UIButton*)btn{
+    if (num == 0) {
+        //不显示
+        
+    }else{
+        //显示
+        tipView.tipNumLabel.text = [NSString stringWithFormat:@"%zi",num];
+        CGSize size = [tipView.tipNumLabel.text sizeWithAttributes:@{NSFontAttributeName: [UIFont systemFontOfSize:12.0f]}];
+        [self.evaluationBtn addSubview:tipView];
+        [tipView mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.size.mas_equalTo(CGSizeMake(size.width+9, 15));
+            make.right.mas_equalTo(btn.mas_right).with.offset(-7/667.0*SCREEN_HEIGHT);
+            make.top.mas_equalTo(btn.mas_top).with.offset(13/667.0*SCREEN_HEIGHT);
+        }];
+    }
+}
+
+-(TipNumberView *)order_evaluateTipView{
+    if (_order_evaluateTipView) {
+        _order_evaluateTipView = [TipNumberView getTipNumView];
+    }
+    return _order_evaluateTipView;
+}
+
+-(TipNumberView *)order_ready_goodsTipView{
+    if (!_order_ready_goodsTipView) {
+        _order_ready_goodsTipView = [TipNumberView getTipNumView];
+    }
+    return _order_ready_goodsTipView;
+}
+
+-(TipNumberView *)order_sended_goodsTipView{
+    if (!_order_sended_goodsTipView) {
+        _order_sended_goodsTipView = [TipNumberView getTipNumView];
+    }
+    return _order_sended_goodsTipView;
+}
+
+-(TipNumberView *)order_wait_paymentTipView{
+    if (!_order_wait_paymentTipView) {
+        _order_wait_paymentTipView = [TipNumberView getTipNumView];
+    }
+    return _order_wait_paymentTipView;
+}
+
 - (IBAction)allOderBtn:(UIButton *)sender {
     MyOderInfoViewController *vc = [[MyOderInfoViewController alloc] init];
     vc.type = @0;

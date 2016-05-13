@@ -39,8 +39,12 @@
     }
     [self.coverImgView sd_setImageWithURL:[NSURL URLWithString:productInfo.coverUrl] placeholderImage:[UIImage imageNamed:@"placeholder"]];
     self.nameLbl.text = productInfo.name;
-    self.typeLbl.text = [NSString stringWithFormat:@"颜色：%@，数量*%ld",productInfo.skuName,productInfo.quantity];
-    //self.typeLbl.text = productInfo.skuName;
+    if (productInfo.skuName) {
+        self.typeLbl.text = [NSString stringWithFormat:@"颜色：%@，数量*%ld",productInfo.skuName,productInfo.quantity];
+    }else{
+        self.typeLbl.text = [NSString stringWithFormat:@"数量*%ld",productInfo.quantity];
+    }
+    
     self.priceLbl.text = [NSString stringWithFormat:@"￥%.0f", [productInfo.salePrice floatValue]];
     //self.amountLbl.text = [NSString stringWithFormat:@"x %ld", productInfo.quantity];
 }

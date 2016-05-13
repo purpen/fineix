@@ -36,18 +36,20 @@
     
     self.optionInt = 1;
     self.amountLbl.text = [NSString stringWithFormat:@"￥%.2f", [self.orderInfo.totalMoney floatValue]];
+    
+    self.explainView.hidden = YES;
 }
 - (IBAction)reasonBtnAction:(UIButton *)sender {
     TYAlertView *alertView = [TYAlertView alertViewWithTitle:@"选择退款原因" message:nil];
     [alertView addAction:[TYAlertAction actionWithTitle:@"我不想要了" style:TYAlertActionStyleDefault handler:^(TYAlertAction *action) {
         self.optionInt = 1;
         self.reasonLbl.text = action.title;
-        self.explainView.hidden = true;
+        self.explainView.hidden = YES;
     }]];
     [alertView addAction:[TYAlertAction actionWithTitle:@"其他" style:TYAlertActionStyleDefault handler:^(TYAlertAction *action) {
         self.optionInt = 0;
         self.reasonLbl.text = action.title;
-        self.explainView.hidden = false;
+        self.explainView.hidden = NO;
     }]];
     [alertView addAction:[TYAlertAction actionWithTitle:@"取消" style:TYAlertActionStyleCancle handler:^(TYAlertAction *action) {
     }]];
