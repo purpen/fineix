@@ -13,19 +13,7 @@
 #import "UserInfo.h"
 
 @implementation OtherCollectionViewCell
-//-(instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier{
-//    if (self = [super initWithStyle:style reuseIdentifier:reuseIdentifier]) {
-//        self.selectionStyle = UITableViewCellSelectionStyleNone;
-//        self.userInteractionEnabled = YES;
-//        [self.contentView addSubview:self.bgImageView];
-//        [_bgImageView mas_makeConstraints:^(MASConstraintMaker *make) {
-//            make.size.mas_equalTo(CGSizeMake(SCREEN_WIDTH, 240/667.0*SCREEN_HEIGHT));
-//            make.top.equalTo(self.mas_top).with.offset(0);
-//            make.left.equalTo(self.mas_left).with.offset(0);
-//        }];
-//    }
-//    return self;
-//}
+
 
 -(instancetype)initWithFrame:(CGRect)frame{
     if (self = [super initWithFrame:frame]) {
@@ -57,12 +45,6 @@
             make.bottom.mas_equalTo(self.mas_bottom).with.offset(-44/667.0*SCREEN_HEIGHT);
         }];
         
-//        [self.contentView addSubview:self.backBtn];
-//        [_backBtn mas_makeConstraints:^(MASConstraintMaker *make) {
-//            make.size.mas_equalTo(CGSizeMake(30, 18));
-//            make.top.mas_equalTo(self.mas_top).with.offset(35);
-//            make.left.mas_equalTo(self.mas_left).with.offset(16);
-//        }];
         
         [self.contentView addSubview:self.userProfile];
         [_userProfile mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -86,14 +68,6 @@
             make.centerX.mas_equalTo(self.mas_centerX);
             make.bottom.mas_equalTo(_nickName.mas_top).with.offset(-8/667.0*SCREEN_HEIGHT);
         }];
-
-        
-//        [self.contentView addSubview:self.moreBtn];
-//        [_moreBtn mas_makeConstraints:^(MASConstraintMaker *make) {
-//            make.size.mas_equalTo(CGSizeMake(30, 20));
-//            make.right.mas_equalTo(self.mas_right).with.offset(-16);
-//            make.top.mas_equalTo(self.mas_top).with.offset(35);
-//        }];
 
     }
     return self;
@@ -157,7 +131,7 @@
 //        
         [_bgImageView addSubview:self.backBtn];
         [_backBtn mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.size.mas_equalTo(CGSizeMake(30, 18));
+            make.size.mas_equalTo(CGSizeMake(30/667.0*SCREEN_HEIGHT, 20/667.0*SCREEN_HEIGHT));
             make.top.mas_equalTo(_bgImageView.mas_top).with.offset(79);
             make.left.mas_equalTo(_bgImageView.mas_left).with.offset(16);
         }];

@@ -25,7 +25,6 @@
     if (!_sheetView) {
         _sheetView = [[UIView alloc] initWithFrame:CGRectMake(0, 1070*0.5/667.0*SCREEN_HEIGHT, SCREEN_WIDTH, 132/667.0*SCREEN_HEIGHT)];
         _sheetView.backgroundColor = [UIColor colorWithHexString:lineGrayColor];
-        
     }
     return _sheetView;
 }

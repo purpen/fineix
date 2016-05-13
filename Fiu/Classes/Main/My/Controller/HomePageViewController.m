@@ -425,7 +425,7 @@ static NSString *const IconURL = @"/my/add_head_pic";
             [cell.moreBtn addTarget:self action:@selector(clickMoreBtn:) forControlEvents:UIControlEventTouchUpInside];
             [cell.focusOnBtn addTarget:self action:@selector(clickFocusBtn:) forControlEvents:UIControlEventTouchUpInside];
             [cell.directMessages addTarget:self action:@selector(clickMessageBtn:) forControlEvents:UIControlEventTouchUpInside];
-            
+            cell.focusOnBtn.tag = indexPath.row;
             [cell setUIWithModel:_model];
             return cell;
         }
@@ -490,7 +490,8 @@ static NSString *const IconURL = @"/my/add_head_pic";
         [sheetVC.stopBtn addTarget:self action:@selector(clickStopBtn:) forControlEvents:UIControlEventTouchUpInside];
         [sheetVC.cancelBtn addTarget:self action:@selector(clickCancelBtn:) forControlEvents:UIControlEventTouchUpInside];
     }else{
-        sender.selected = !sender.selected;
+        _model.is_love = @1;
+        [self.myCollectionView reloadItemsAtIndexPaths:[NSArray arrayWithObjects:[NSIndexPath indexPathForRow:0 inSection:0], nil]];
         //请求数据
         FBRequest *request = [FBAPI postWithUrlString:@"/follow/ajax_follow" requestDictionary:@{@"follow_id":self.userId} delegate:self];
         request.flag = @"/follow/ajax_follow";
@@ -602,8 +603,8 @@ static NSString *const IconURL = @"/my/add_head_pic";
 
 -(void)clickStopBtn:(UIButton*)sender{
     [self dismissViewControllerAnimated:YES completion:nil];
-    OtherCollectionViewCell *cell = (OtherCollectionViewCell*)[_myCollectionView cellForItemAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0]];
-    cell.focusOnBtn.selected = NO;
+    _model.is_love = @0;
+    [self.myCollectionView reloadItemsAtIndexPaths:[NSArray arrayWithObjects:[NSIndexPath indexPathForRow:0 inSection:0], nil]];
     FBRequest *request = [FBAPI postWithUrlString:@"/follow/ajax_cancel_follow" requestDictionary:@{@"follow_id":self.userId} delegate:self];
     request.flag = @"/follow/ajax_cancel_follow";
     [request startRequest];

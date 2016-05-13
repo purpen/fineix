@@ -103,7 +103,7 @@
         
         [_bgImageView addSubview:self.backBtn];
         [_backBtn mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.size.mas_equalTo(CGSizeMake(30, 18));
+            make.size.mas_equalTo(CGSizeMake(30, 30));
             make.top.mas_equalTo(_bgImageView.mas_top).with.offset(79);
             make.left.mas_equalTo(_bgImageView.mas_left).with.offset(16);
         }];

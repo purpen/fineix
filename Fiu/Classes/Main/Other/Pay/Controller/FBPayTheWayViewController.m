@@ -202,8 +202,9 @@
                 FBRequest * request = [FBAPI postWithUrlString:@"/shopping/payed" requestDictionary:@{@"rid": self.orderInfo.rid, @"payaway": @"weichat"} delegate:self];
                 [SVProgressHUD showWithMaskType:SVProgressHUDMaskTypeClear];
                 [request startRequestSuccess:^(FBRequest *request, id result) {
-                    NSLog(@"微信支付返回结果  %@",result);
+                    
                     NSDictionary * dataDic = [result objectForKey:@"data"];
+                    NSLog(@"微信支付返回结果  %@",dataDic[@"nonce_str"]);
                     PayReq * payReq = [[PayReq alloc] init];
                     payReq.partnerId = [dataDic objectForKey:@"partner_id"];
                     payReq.prepayId= [dataDic objectForKey:@"prepay_id"];

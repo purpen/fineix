@@ -169,9 +169,8 @@ static NSString *const logOut = @"/auth/logout";
 }
 
 -(void)wechatShareBtnAction:(UIButton*)sender{
-    MyQrCodeViewController *vc = [[MyQrCodeViewController alloc] init];
     [UMSocialData defaultData].extConfig.wechatSessionData.url = ShareURL;
-    [[UMSocialDataService defaultDataService]  postSNSWithTypes:@[UMShareToWechatSession] content:@"" image:vc.qrCodeView.qrCodeImageView.image location:nil urlResource:nil presentedController:self completion:^(UMSocialResponseEntity *response){
+    [[UMSocialDataService defaultDataService]  postSNSWithTypes:@[UMShareToWechatSession] content:@"太火鸟商城" image:nil location:nil urlResource:nil presentedController:self completion:^(UMSocialResponseEntity *response){
         if (response.responseCode == UMSResponseCodeSuccess) {
             [SVProgressHUD showSuccessWithStatus:@"分享成功！"];
         }
@@ -179,9 +178,8 @@ static NSString *const logOut = @"/auth/logout";
 }
 
 -(void)timelineShareBtnAction:(UIButton*)sender{
-    MyQrCodeViewController *vc = [[MyQrCodeViewController alloc] init];
     [UMSocialData defaultData].extConfig.wechatTimelineData.url = ShareURL;
-    [[UMSocialDataService defaultDataService]  postSNSWithTypes:@[UMShareToWechatTimeline] content:@"" image:vc.qrCodeView.qrCodeImageView.image location:nil urlResource:nil presentedController:self completion:^(UMSocialResponseEntity *response){
+    [[UMSocialDataService defaultDataService]  postSNSWithTypes:@[UMShareToWechatTimeline] content:@"太火鸟商城" image:nil location:nil urlResource:nil presentedController:self completion:^(UMSocialResponseEntity *response){
         if (response.responseCode == UMSResponseCodeSuccess) {
             [SVProgressHUD showSuccessWithStatus:@"分享成功！"];
         }
@@ -189,9 +187,8 @@ static NSString *const logOut = @"/auth/logout";
 }
 
 -(void)qqShareBtnAction:(UIButton*)sender{
-    MyQrCodeViewController *vc = [[MyQrCodeViewController alloc] init];
     [UMSocialData defaultData].extConfig.qqData.url = ShareURL;
-    [[UMSocialDataService defaultDataService]  postSNSWithTypes:@[UMShareToQQ] content:@"" image:vc.qrCodeView.qrCodeImageView.image location:nil urlResource:nil presentedController:self completion:^(UMSocialResponseEntity *response){
+    [[UMSocialDataService defaultDataService]  postSNSWithTypes:@[UMShareToQQ] content:@"太火鸟商城" image:nil location:nil urlResource:nil presentedController:self completion:^(UMSocialResponseEntity *response){
         if (response.responseCode == UMSResponseCodeSuccess) {
             [SVProgressHUD showSuccessWithStatus:@"分享成功！"];
         }
@@ -199,8 +196,7 @@ static NSString *const logOut = @"/auth/logout";
 }
 
 -(void)sinaShareBtnAction:(UIButton*)sender{
-    MyQrCodeViewController *vc = [[MyQrCodeViewController alloc] init];
-    [[UMSocialDataService defaultDataService]  postSNSWithTypes:@[UMShareToSina] content:[NSString stringWithFormat:@"有Fiu的生活，才够意思，快点扫码加我吧！查看个人主页>>%@", @"http://www.taihuoniao.com"] image:vc.qrCodeView.qrCodeImageView.image location:nil urlResource:nil presentedController:self completion:^(UMSocialResponseEntity *response){
+    [[UMSocialDataService defaultDataService]  postSNSWithTypes:@[UMShareToSina] content:@"太火鸟商城" image:nil location:nil urlResource:nil presentedController:self completion:^(UMSocialResponseEntity *response){
         if (response.responseCode == UMSResponseCodeSuccess) {
             [SVProgressHUD showSuccessWithStatus:@"分享成功！"];
         }

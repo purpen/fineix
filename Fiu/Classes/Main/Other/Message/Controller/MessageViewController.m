@@ -94,8 +94,9 @@
         }else{
             [self.remindView addSubview:self.alertTipviewNum];
             self.alertTipviewNum.tipNumLabel.text = [NSString stringWithFormat:@"%@",self.countModel.fiu_alert_count];
+            CGSize size = [self.alertTipviewNum.tipNumLabel.text sizeWithAttributes:@{NSFontAttributeName: [UIFont systemFontOfSize:12.0f]}];
             [self.alertTipviewNum mas_makeConstraints:^(MASConstraintMaker *make) {
-                make.size.mas_equalTo(CGSizeMake(15, 15));
+                make.size.mas_equalTo(CGSizeMake(size.width+9, 15));
                 make.right.mas_equalTo(self.remindView.mas_right).with.offset(-30);
                 make.centerY.mas_equalTo(self.remindView.mas_centerY);
             }];
@@ -106,8 +107,9 @@
         }else{
             [self.noticeView addSubview:self.fiu_notice_countTipviewNum];
             self.fiu_notice_countTipviewNum.tipNumLabel.text = [NSString stringWithFormat:@"%@",self.countModel.fiu_notice_count];
+            CGSize size = [self.fiu_notice_countTipviewNum.tipNumLabel.text sizeWithAttributes:@{NSFontAttributeName: [UIFont systemFontOfSize:12.0f]}];
             [self.fiu_notice_countTipviewNum mas_makeConstraints:^(MASConstraintMaker *make) {
-                make.size.mas_equalTo(CGSizeMake(15, 15));
+                make.size.mas_equalTo(CGSizeMake(size.width+9, 15));
                 make.right.mas_equalTo(self.noticeView.mas_right).with.offset(-30);
                 make.centerY.mas_equalTo(self.noticeView.mas_centerY);
             }];
@@ -117,8 +119,9 @@
         }else{
             [self.commentView addSubview:self.fiu_comment_countTipviewNum];
             self.fiu_comment_countTipviewNum.tipNumLabel.text = [NSString stringWithFormat:@"%@",self.countModel.fiu_comment_count];
+            CGSize size = [self.fiu_comment_countTipviewNum.tipNumLabel.text sizeWithAttributes:@{NSFontAttributeName: [UIFont systemFontOfSize:12.0f]}];
             [self.fiu_comment_countTipviewNum mas_makeConstraints:^(MASConstraintMaker *make) {
-                make.size.mas_equalTo(CGSizeMake(15, 15));
+                make.size.mas_equalTo(CGSizeMake(size.width+9, 15));
                 make.right.mas_equalTo(self.commentView.mas_right).with.offset(-30);
                 make.centerY.mas_equalTo(self.commentView.mas_centerY);
             }];
@@ -130,8 +133,9 @@
         }else{
             [self.messageView addSubview:self.message_countTipviewNum];
             self.message_countTipviewNum.tipNumLabel.text = [NSString stringWithFormat:@"%@",self.countModel.message_count];
+            CGSize size = [self.message_countTipviewNum.tipNumLabel.text sizeWithAttributes:@{NSFontAttributeName: [UIFont systemFontOfSize:12.0f]}];
             [self.message_countTipviewNum mas_makeConstraints:^(MASConstraintMaker *make) {
-                make.size.mas_equalTo(CGSizeMake(15, 15));
+                make.size.mas_equalTo(CGSizeMake(size.width+9, 15));
                 make.right.mas_equalTo(self.messageView.mas_right).with.offset(-30);
                 make.centerY.mas_equalTo(self.messageView.mas_centerY);
             }];
@@ -141,8 +145,9 @@
         }else{
             [self.remindView addSubview:self.alert_countTipviewNum];
             self.alert_countTipviewNum.tipNumLabel.text = [NSString stringWithFormat:@"%@",self.countModel.alert_count];
+            CGSize size = [self.alert_countTipviewNum.tipNumLabel.text sizeWithAttributes:@{NSFontAttributeName: [UIFont systemFontOfSize:12.0f]}];
             [self.alert_countTipviewNum mas_makeConstraints:^(MASConstraintMaker *make) {
-                make.size.mas_equalTo(CGSizeMake(15, 15));
+                make.size.mas_equalTo(CGSizeMake(size.width+9, 15));
                 make.right.mas_equalTo(self.remindView.mas_right).with.offset(-30);
                 make.centerY.mas_equalTo(self.remindView.mas_centerY);
             }];

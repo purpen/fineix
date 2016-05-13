@@ -12,6 +12,8 @@
 #import <BaiduMapAPI_Location/BMKLocationComponent.h>
 #import "MJRefresh.h"
 #import <SDWebImage/UIImageView+WebCache.h>
+#import "UserInfo.h"
+#import "ReleaseViewController.h"
 
 @interface AllNearbyScenarioViewController ()<FBNavigationBarItemsDelegate,BMKMapViewDelegate,UITableViewDelegate,UITableViewDataSource,BMKLocationServiceDelegate,BMKMapViewDelegate>
 {
@@ -30,6 +32,7 @@
 @pro_strong NSMutableArray      *   locationMarr;   //  位置
 @pro_strong NSMutableArray      *   coverUrlMary;   //  图片
 @pro_strong NSMutableArray      *   listMary;   //
+@pro_strong NSMutableArray      *   flagMary;       //   标识数组
 @pro_strong UILabel             *   cellLine;
 @property (nonatomic, assign) NSInteger currentPageNumber;
 @property (nonatomic, assign) NSInteger totalPageNumber;
@@ -79,7 +82,9 @@
             if (![[dataDic objectForKey:@"cover_url"] isKindOfClass:[NSNull class]]) {
                 [self.coverUrlMary addObject:[dataDic objectForKey:@"cover_url"]];
             }
-            
+            UserInfo *flag = [[UserInfo alloc] init];
+            flag.is_love = @0;
+            [self.flagMary addObject:flag];
         }
         for (NSDictionary *logDict in self.locationMarr) {
             NSArray *logAry = logDict[@"coordinates"];
@@ -214,6 +219,12 @@
     }
 }
 
+-(void)viewDidDisappear:(BOOL)animated{
+    [super viewDidDisappear:animated];
+    _locService.delegate = nil;
+    _mapView.delegate = nil;
+}
+
 #pragma mark - 初始化百度地图服务
 -(void)startFixedPosition{
     //初始化BMKLocationService
@@ -259,6 +270,7 @@
     [self.addressMarr removeAllObjects];
     [self.locationMarr removeAllObjects];
     [self.coverUrlMary removeAllObjects];
+    [self.flagMary removeAllObjects];
     [SVProgressHUD showWithMaskType:SVProgressHUDMaskTypeClear];
     
     [self requestDataForOderListOperation];
@@ -297,6 +309,12 @@
     self.cellLine = [[UILabel alloc] initWithFrame:CGRectMake(15, 59, SCREEN_WIDTH - 15, 1)];
     self.cellLine.backgroundColor = [UIColor colorWithHexString:lineGrayColor];
     [cell.contentView addSubview:self.cellLine];
+    UserInfo *flag = self.flagMary[indexPath.row];
+    if ([flag.is_love isEqualToNumber:@0]) {
+        [cell setAccessoryType:UITableViewCellAccessoryNone];
+    }else if ([flag.is_love isEqualToNumber:@1]){
+        [cell setAccessoryType:UITableViewCellAccessoryCheckmark];
+    }
     
     return cell;
 }
@@ -307,19 +325,48 @@
 
 #pragma mark - 选中附近的情景
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    NSArray * array = [tableView visibleCells];
-    for (UITableViewCell * cell in array) {
-        [cell setAccessoryType:UITableViewCellAccessoryNone];
+    for (int i = 0; i<self.flagMary.count; i++) {
+        if (i == indexPath.row) {
+            
+        }else{
+            UserInfo *flag = self.flagMary[i];
+            flag.is_love = @0;
+            [tableView reloadRowsAtIndexPaths:[NSArray arrayWithObjects:[NSIndexPath indexPathForRow:i inSection:0], nil] withRowAnimation:UITableViewRowAnimationNone];
+        }
     }
-    UITableViewCell * cell = [tableView cellForRowAtIndexPath:indexPath];
-    [cell setAccessoryType:UITableViewCellAccessoryCheckmark];
-    BMKPinAnnotationView *newAnnotationView = self.listMary[indexPath.row];
-    [newAnnotationView setSelected:YES animated:YES];
+    UserInfo *flag = self.flagMary[indexPath.row];
+    if ([flag.is_love isEqualToNumber:@0]) {
+        flag.is_love = @1;
+        [tableView reloadRowsAtIndexPaths:[NSArray arrayWithObjects:indexPath, nil] withRowAnimation:UITableViewRowAnimationNone];
+    }else if ([flag.is_love isEqualToNumber:@1]){
+        flag.is_love = @0;
+        [tableView reloadRowsAtIndexPaths:[NSArray arrayWithObjects:indexPath, nil] withRowAnimation:UITableViewRowAnimationNone];
+    }
     NSLog(@" 选中附近的情景： id－－－%@  标题 ＝＝＝ %@", self.idMarr[indexPath.row], self.titleMarr[indexPath.row]);
 }
 
 -(void)rightBarItemSelected{
-    
+    BOOL flag = NO;
+    int i = 0;
+    for (; i<self.flagMary.count; i++) {
+        UserInfo *model = self.flagMary[i];
+        if ([model.is_love isEqualToNumber:@1]) {
+            flag = YES;
+            break;
+        }
+    }
+    if (flag) {
+        for (UIViewController * vc in self.navigationController.viewControllers) {
+            if ([vc isKindOfClass:[ReleaseViewController class]]) {
+                [[NSNotificationCenter defaultCenter] postNotificationName:@"selectFiuSceneId" object:self.idMarr[i]];
+                [[NSNotificationCenter defaultCenter] postNotificationName:@"selectFiuSceneTitle" object:self.titleMarr[i]];
+                [self.navigationController popToViewController:vc animated:YES];
+            }
+        }
+        
+    } else {
+        [SVProgressHUD showInfoWithStatus:@"请选择一个情景"];
+    }
 }
 
 - (void)didReceiveMemoryWarning {
@@ -359,6 +406,13 @@
         _locationMarr = [NSMutableArray array];
     }
     return _locationMarr;
+}
+
+-(NSMutableArray *)flagMary{
+    if (!_flagMary) {
+        _flagMary = [NSMutableArray array];
+    }
+    return _flagMary;
 }
 
 -(NSMutableArray *)coverUrlMary{

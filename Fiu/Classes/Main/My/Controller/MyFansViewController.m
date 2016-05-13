@@ -14,6 +14,7 @@
 #import "SVProgressHUD.h"
 #import "MJRefresh.h"
 #import "HomePageViewController.h"
+#import "UserInfoEntity.h"
 
 
 @interface MyFansViewController ()<FBNavigationBarItemsDelegate,UITableViewDelegate,UITableViewDataSource,FBRequestDelegate>
@@ -228,9 +229,15 @@
         [sheetVC.stopBtn addTarget:self action:@selector(clickStopBtn:) forControlEvents:UIControlEventTouchUpInside];
         [sheetVC.cancelBtn addTarget:self action:@selector(clickCancelBtn:) forControlEvents:UIControlEventTouchUpInside];
     }else{
-        sender.selected = !sender.selected;
-        //请求数据
         UserInfo *model = _modelAry[sender.tag];
+        UserInfoEntity *entity = [UserInfoEntity defaultUserInfoEntity];
+        if ([entity.userId isEqual:model.userId]) {
+            model.is_love = @2;
+        }else{
+            model.level = @1;
+        }
+        [self.mytableView reloadRowsAtIndexPaths:[NSArray arrayWithObjects:[NSIndexPath indexPathForRow:sender.tag inSection:0], nil] withRowAnimation:UITableViewRowAnimationNone];
+        //请求数据
         FBRequest *request = [FBAPI postWithUrlString:@"/follow/ajax_follow" requestDictionary:@{@"follow_id":model.userId} delegate:self];
         request.flag = @"/follow/ajax_follow";
         [request startRequest];
@@ -239,9 +246,14 @@
 
 -(void)clickStopBtn:(UIButton*)sender{
     [self dismissViewControllerAnimated:YES completion:nil];
-    FocusOnTableViewCell *cell = [_mytableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:sender.tag inSection:0]];
-    cell.focusOnBtn.selected = NO;
     UserInfo *model = _modelAry[sender.tag];
+    UserInfoEntity *entity = [UserInfoEntity defaultUserInfoEntity];
+    if ([entity.userId isEqual:model.userId]) {
+        model.is_love = @1;
+    }else{
+        model.level = @0;
+    }
+    [self.mytableView reloadRowsAtIndexPaths:[NSArray arrayWithObjects:[NSIndexPath indexPathForRow:sender.tag inSection:0], nil] withRowAnimation:UITableViewRowAnimationNone];
     FBRequest *request = [FBAPI postWithUrlString:@"/follow/ajax_cancel_follow" requestDictionary:@{@"follow_id":model.userId} delegate:self];
     request.flag = @"/follow/ajax_cancel_follow";
     [request startRequest];

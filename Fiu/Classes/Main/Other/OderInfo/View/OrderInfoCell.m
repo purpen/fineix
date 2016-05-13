@@ -93,6 +93,7 @@
         case OrderInfoStateCompleted:
         {
             [self.operation1stBtn setTitle:@"删除订单" forState:UIControlStateNormal];
+            self.operation1stBtn.hidden = NO;
             self.operation2ndBtn.hidden = true;
         }
             break;
@@ -100,6 +101,7 @@
         {
             [self.operation1stBtn setTitle:@"立即支付" forState:UIControlStateNormal];
             [self.operation2ndBtn setTitle:@"取消订单" forState:UIControlStateNormal];
+            self.operation1stBtn.hidden = NO;
             self.operation2ndBtn.hidden = false;
         }
             break;
@@ -113,12 +115,14 @@
         case OrderInfoStateRefunding:
         {
             [self.operation1stBtn setTitle:@"查看详情" forState:UIControlStateNormal];
+            self.operation1stBtn.hidden = NO;
             self.operation2ndBtn.hidden = true;
         }
             break;
         case OrderInfoStateWaitReceive:
         {
             [self.operation1stBtn setTitle:@"确认收货" forState:UIControlStateNormal];
+            self.operation1stBtn.hidden = NO;
             self.operation2ndBtn.hidden = true;
         }
             break;
@@ -126,6 +130,7 @@
         {
             [self.operation1stBtn setTitle:@"发表评价" forState:UIControlStateNormal];
             [self.operation2ndBtn setTitle:@"删除订单" forState:UIControlStateNormal];
+            self.operation1stBtn.hidden = NO;
             self.operation2ndBtn.hidden = false;
         }
             break;

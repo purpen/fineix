@@ -77,6 +77,11 @@
     CGFloat buttonMaxY = CGRectGetMaxY(showTextButton.frame);
     CGFloat iconMaxY = CGRectGetMaxY(showIconView.frame);
     self.message.cellHeight = MAX(buttonMaxY, iconMaxY) + 10;
+    
+    self.myIconImageView.layer.masksToBounds = YES;
+    self.myIconImageView.layer.cornerRadius = 25;
+    self.otherIconImageView.layer.masksToBounds = YES;
+    self.otherIconImageView.layer.cornerRadius = 25;
 }
 
 

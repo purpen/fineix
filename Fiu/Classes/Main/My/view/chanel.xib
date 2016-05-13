@@ -153,13 +153,19 @@
                 <constraint firstItem="brx-eo-zDH" firstAttribute="top" secondItem="KOF-LZ-Daw" secondAttribute="top" id="2dl-Cz-VNe"/>
                 <constraint firstItem="yXw-t8-ddm" firstAttribute="top" secondItem="KOF-LZ-Daw" secondAttribute="top" id="9kv-Ny-yt9"/>
                 <constraint firstItem="YLy-lk-LgI" firstAttribute="leading" secondItem="KOF-LZ-Daw" secondAttribute="leading" id="ATU-p2-UIS"/>
+                <constraint firstItem="PdP-yb-nfb" firstAttribute="width" secondItem="YLy-lk-LgI" secondAttribute="width" id="JB4-7T-Tee"/>
                 <constraint firstItem="PdP-yb-nfb" firstAttribute="top" secondItem="brx-eo-zDH" secondAttribute="top" id="MPk-nA-ZPc"/>
                 <constraint firstItem="YLy-lk-LgI" firstAttribute="top" secondItem="KOF-LZ-Daw" secondAttribute="top" id="Q1w-0n-QUm"/>
                 <constraint firstAttribute="bottom" secondItem="YLy-lk-LgI" secondAttribute="bottom" id="Q8u-DV-1T2"/>
                 <constraint firstItem="PdP-yb-nfb" firstAttribute="leading" secondItem="YLy-lk-LgI" secondAttribute="trailing" constant="5" id="Wde-rK-p1N"/>
                 <constraint firstItem="brx-eo-zDH" firstAttribute="leading" secondItem="PdP-yb-nfb" secondAttribute="trailing" constant="5" id="aKC-Cv-z6G"/>
+                <constraint firstItem="PdP-yb-nfb" firstAttribute="width" secondItem="YLy-lk-LgI" secondAttribute="width" id="fty-Lz-otA"/>
+                <constraint firstItem="yXw-t8-ddm" firstAttribute="width" secondItem="YLy-lk-LgI" secondAttribute="width" id="gvQ-Z0-Fvb"/>
+                <constraint firstItem="brx-eo-zDH" firstAttribute="width" secondItem="YLy-lk-LgI" secondAttribute="width" id="hec-gF-f8D"/>
+                <constraint firstItem="yXw-t8-ddm" firstAttribute="width" secondItem="brx-eo-zDH" secondAttribute="width" id="kBU-5B-Lo3"/>
                 <constraint firstItem="PdP-yb-nfb" firstAttribute="leading" secondItem="YLy-lk-LgI" secondAttribute="trailing" constant="5" id="lde-so-yOT"/>
                 <constraint firstAttribute="trailing" secondItem="yXw-t8-ddm" secondAttribute="trailing" id="lva-OI-Zce"/>
+                <constraint firstAttribute="bottom" secondItem="PdP-yb-nfb" secondAttribute="bottom" id="nee-Aa-rMo"/>
                 <constraint firstAttribute="bottom" secondItem="brx-eo-zDH" secondAttribute="bottom" id="omj-pY-uwT"/>
             </constraints>
             <nil key="simulatedStatusBarMetrics"/>

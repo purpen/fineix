@@ -31,6 +31,7 @@
 #import "FindeFriendViewController.h"
 #import "TipNumberView.h"
 
+
 @interface MyPageViewController ()<FBNavigationBarItemsDelegate,UICollectionViewDelegate,UICollectionViewDataSource>
 {
     ChanelView *_chanelV;
@@ -227,11 +228,12 @@
             //显示
 
             self.tipNumView1.tipNumLabel.text = [NSString stringWithFormat:@"%@",_counterModel.order_total_count];
+            CGSize size = [self.tipNumView1.tipNumLabel.text sizeWithAttributes:@{NSFontAttributeName: [UIFont systemFontOfSize:12.0f]}];
             [cell.btn1 addSubview:self.tipNumView1];
             [self.tipNumView1 mas_makeConstraints:^(MASConstraintMaker *make) {
-                make.size.mas_equalTo(CGSizeMake(15, 15));
+                make.size.mas_equalTo(CGSizeMake(size.width+9, 15));
                 make.right.mas_equalTo(cell.btn1.mas_right).with.offset(0);
-                make.top.mas_equalTo(cell.btn1.mas_top).with.offset(-3);
+                make.top.mas_equalTo(cell.btn1.mas_top).with.offset(-3/667.0*SCREEN_HEIGHT);
             }];
         }
         
@@ -241,11 +243,12 @@
         }else{
             //显示
             self.tipNumView2.tipNumLabel.text = [NSString stringWithFormat:@"%@",_counterModel.message_total_count];
+            CGSize size = [self.tipNumView2.tipNumLabel.text sizeWithAttributes:@{NSFontAttributeName: [UIFont systemFontOfSize:12.0f]}];
             [cell.btn2 addSubview:self.tipNumView2];
             [self.tipNumView2 mas_makeConstraints:^(MASConstraintMaker *make) {
-                make.size.mas_equalTo(CGSizeMake(15, 15));
+                make.size.mas_equalTo(CGSizeMake(size.width+9, 15));
                 make.right.mas_equalTo(cell.btn2.mas_right).with.offset(0);
-                make.top.mas_equalTo(cell.btn2.mas_top).with.offset(-3);
+                make.top.mas_equalTo(cell.btn2.mas_top).with.offset(-3/667.0*SCREEN_HEIGHT);
             }];
         }
         [cell.btn1 addTarget:self action:@selector(orderBtn:) forControlEvents:UIControlEventTouchUpInside];

@@ -85,6 +85,8 @@
 		1F51E8B31CC6338D00017839 /* PraisedViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F51E8B21CC6338D00017839 /* PraisedViewController.m */; };
 		1F59E5FC1C9ABBA500E96C60 /* Accelerate.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1F59E5FB1C9ABBA500E96C60 /* Accelerate.framework */; };
 		1F7B29361CD5F50500482D84 /* MyOderModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F7B29351CD5F50500482D84 /* MyOderModel.m */; };
+		1F8921E51CE5609E00267F44 /* QrShareSheetViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F8921E31CE5609E00267F44 /* QrShareSheetViewController.m */; };
+		1F8921E61CE5609E00267F44 /* QrShareSheetViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1F8921E41CE5609E00267F44 /* QrShareSheetViewController.xib */; };
 		1F8EACD51CDD8A5B00C51235 /* OrderInfoDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F8EACD31CDD8A5B00C51235 /* OrderInfoDetailViewController.m */; };
 		1F8EACD61CDD8A5B00C51235 /* OrderInfoDetailViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1F8EACD41CDD8A5B00C51235 /* OrderInfoDetailViewController.xib */; };
 		1F8EACDA1CDDA09200C51235 /* RefundmentViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F8EACD81CDDA09200C51235 /* RefundmentViewController.m */; };
@@ -120,6 +122,7 @@
 		1FCE90641CDA06630029E4BA /* MentionedViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1FCE905C1CDA06630029E4BA /* MentionedViewController.xib */; };
 		1FD7E6771CC8DFE400A69BDD /* MyQrCodeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1FD7E6761CC8DFE400A69BDD /* MyQrCodeViewController.m */; };
 		1FD7E67A1CC8E4F200A69BDD /* MyQrCodeView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1FD7E6791CC8E4F200A69BDD /* MyQrCodeView.m */; };
+		1FE56B161CE5D41000CD7780 /* JSBadgeView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1FE56B151CE5D41000CD7780 /* JSBadgeView.m */; };
 		1FE60E2F1CD301BC00045117 /* AllOderViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1FE60E2D1CD301BC00045117 /* AllOderViewController.m */; };
 		1FE60E301CD301BC00045117 /* AllOderViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1FE60E2E1CD301BC00045117 /* AllOderViewController.xib */; };
 		1FE60E391CD30A2100045117 /* MyOderInfoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1FE60E371CD30A2100045117 /* MyOderInfoViewController.m */; };
@@ -548,6 +551,9 @@
 		1F59E5FB1C9ABBA500E96C60 /* Accelerate.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Accelerate.framework; path = System/Library/Frameworks/Accelerate.framework; sourceTree = SDKROOT; };
 		1F7B29341CD5F50500482D84 /* MyOderModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyOderModel.h; sourceTree = "<group>"; };
 		1F7B29351CD5F50500482D84 /* MyOderModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyOderModel.m; sourceTree = "<group>"; };
+		1F8921E21CE5609E00267F44 /* QrShareSheetViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QrShareSheetViewController.h; sourceTree = "<group>"; };
+		1F8921E31CE5609E00267F44 /* QrShareSheetViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QrShareSheetViewController.m; sourceTree = "<group>"; };
+		1F8921E41CE5609E00267F44 /* QrShareSheetViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = QrShareSheetViewController.xib; sourceTree = "<group>"; };
 		1F8EACD21CDD8A5B00C51235 /* OrderInfoDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OrderInfoDetailViewController.h; sourceTree = "<group>"; };
 		1F8EACD31CDD8A5B00C51235 /* OrderInfoDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OrderInfoDetailViewController.m; sourceTree = "<group>"; };
 		1F8EACD41CDD8A5B00C51235 /* OrderInfoDetailViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = OrderInfoDetailViewController.xib; sourceTree = "<group>"; };
@@ -605,6 +611,8 @@
 		1FD7E6761CC8DFE400A69BDD /* MyQrCodeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyQrCodeViewController.m; sourceTree = "<group>"; };
 		1FD7E6781CC8E4F200A69BDD /* MyQrCodeView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyQrCodeView.h; sourceTree = "<group>"; };
 		1FD7E6791CC8E4F200A69BDD /* MyQrCodeView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyQrCodeView.m; sourceTree = "<group>"; };
+		1FE56B141CE5D41000CD7780 /* JSBadgeView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JSBadgeView.h; sourceTree = "<group>"; };
+		1FE56B151CE5D41000CD7780 /* JSBadgeView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JSBadgeView.m; sourceTree = "<group>"; };
 		1FE60E2C1CD301BC00045117 /* AllOderViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AllOderViewController.h; sourceTree = "<group>"; };
 		1FE60E2D1CD301BC00045117 /* AllOderViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AllOderViewController.m; sourceTree = "<group>"; };
 		1FE60E2E1CD301BC00045117 /* AllOderViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AllOderViewController.xib; sourceTree = "<group>"; };
@@ -1435,6 +1443,15 @@
 			path = View;
 			sourceTree = "<group>";
 		};
+		1FE56B131CE5D41000CD7780 /* JSBadgeView */ = {
+			isa = PBXGroup;
+			children = (
+				1FE56B141CE5D41000CD7780 /* JSBadgeView.h */,
+				1FE56B151CE5D41000CD7780 /* JSBadgeView.m */,
+			);
+			path = JSBadgeView;
+			sourceTree = "<group>";
+		};
 		1FE60E281CD3016800045117 /* OderInfo */ = {
 			isa = PBXGroup;
 			children = (
@@ -2258,6 +2275,7 @@
 		D81280CB1CAA8532007CF08B /* Vendors */ = {
 			isa = PBXGroup;
 			children = (
+				1FE56B131CE5D41000CD7780 /* JSBadgeView */,
 				1F27AE851CE06BB1005A434B /* AliPay */,
 				D81280CC1CAA8532007CF08B /* BaiduMapSDK */,
 				D81280D41CAA8532007CF08B /* DBModel */,
@@ -2749,6 +2767,9 @@
 				D87B69C51CC726D500199EFE /* FBAlertViewController.m */,
 				D87B69C61CC726D500199EFE /* FBSheetViewController.h */,
 				D87B69C71CC726D500199EFE /* FBSheetViewController.m */,
+				1F8921E21CE5609E00267F44 /* QrShareSheetViewController.h */,
+				1F8921E31CE5609E00267F44 /* QrShareSheetViewController.m */,
+				1F8921E41CE5609E00267F44 /* QrShareSheetViewController.xib */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -3314,6 +3335,7 @@
 				1FE60E521CD32AEC00045117 /* SystemInfoTableViewCell.xib in Resources */,
 				D812816F1CAA8532007CF08B /* UMSLoginViewController.xib in Resources */,
 				1FE60E5C1CD32FD200045117 /* CommentsTableViewCell.xib in Resources */,
+				1F8921E61CE5609E00267F44 /* QrShareSheetViewController.xib in Resources */,
 				1F27AE9C1CE0EACE005A434B /* mapapi.bundle in Resources */,
 				1FFFFF221CD055BB008E1CDC /* OptionViewController.xib in Resources */,
 				1F8EACDB1CDDA09200C51235 /* RefundmentViewController.xib in Resources */,
@@ -3527,6 +3549,7 @@
 				1FEF0B181CC0FC15006EF0C6 /* ChanelView.m in Sources */,
 				D8A9ADC51CD9E2E700A9FCFB /* ReleaseViewController.m in Sources */,
 				1F5038B31CDC40EE004F76AD /* ExpressInfoModel.m in Sources */,
+				1F8921E51CE5609E00267F44 /* QrShareSheetViewController.m in Sources */,
 				D8A9ACB01CD89E0000A9FCFB /* RollImageData.m in Sources */,
 				1F5038CF1CDCF438004F76AD /* ReturnViewController.m in Sources */,
 				1FEE50ED1CE1893B00B8A292 /* AllNearbyScenarioViewController.m in Sources */,
@@ -3554,6 +3577,7 @@
 				D8A9ADC61CD9E2E700A9FCFB /* AddTagViewController.m in Sources */,
 				1F8EACD51CDD8A5B00C51235 /* OrderInfoDetailViewController.m in Sources */,
 				D8363A2E1CD8809400CC4AC0 /* GoodsRow.m in Sources */,
+				1FE56B161CE5D41000CD7780 /* JSBadgeView.m in Sources */,
 				D8A9ACCF1CD8A46900A9FCFB /* SuFiuScenrView.m in Sources */,
 				D8A9ACDF1CD8A49100A9FCFB /* AllSceneViewController.m in Sources */,
 				D8A9ACB31CD89E0000A9FCFB /* FiuSceneData.m in Sources */,
