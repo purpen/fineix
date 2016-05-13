@@ -9,12 +9,22 @@
 #import "FBPictureViewController.h"
 #import "FBSearchView.h"
 #import "FBMenuView.h"
+#import <SVProgressHUD/SVProgressHUD.h>
+#import <MJRefresh/MJRefresh.h>
 
-@interface MarkGoodsViewController : FBPictureViewController <FBSearchDelegate, FBMenuViewDelegate>
+typedef void(^GetImgBlock)(NSString * imgUrl);
 
-@pro_strong FBMenuView                  *       categoryMenuView;       //  滑动导航栏
-@pro_strong NSArray                     *       categoryTitleArr;       //  导航栏标题
-@pro_strong FBSearchView                *       searchGoods;            //  搜索框
+@interface MarkGoodsViewController : FBPictureViewController <FBSearchDelegate, FBMenuViewDelegate, UICollectionViewDelegate, UICollectionViewDataSource>
 
+@pro_strong FBRequest               *   markGoodsRequest;
+@pro_strong FBRequest               *   goodsDataRequest;
+@pro_assign NSInteger                   currentpageNum;
+@pro_assign NSInteger                   totalPageNum;
+
+@pro_strong UICollectionView        *   goodsListView;          //  商品列表
+@pro_strong FBMenuView              *   categoryMenuView;       //  滑动导航栏
+@pro_strong FBSearchView            *   searchGoods;            //  搜索框
+
+@pro_strong GetImgBlock getImgBlock;
 
 @end

@@ -1,16 +1,16 @@
 //
-//	JDGoods.m
-// on 10/5/2016
+//	FindGoodsModel.m
+// on 13/5/2016
 //	Copyright © 2016. All rights reserved.
 //	Model file Generated using JSONExport: https://github.com/Ahmed-Ali/JSONExport
 
 
 
-#import "JDGoods.h"
+#import "FindGoodsModel.h"
 
-@interface JDGoods ()
+@interface FindGoodsModel ()
 @end
-@implementation JDGoods
+@implementation FindGoodsModel
 
 
 
@@ -27,7 +27,7 @@
 	}
 
 	if(![dictionary[@"data"] isKindOfClass:[NSNull class]]){
-		self.data = [[JDGoodsData alloc] initWithDictionary:dictionary[@"data"]];
+		self.data = [[FindGoodsModelData alloc] initWithDictionary:dictionary[@"data"]];
 	}
 
 	if(![dictionary[@"is_error"] isKindOfClass:[NSNull class]]){

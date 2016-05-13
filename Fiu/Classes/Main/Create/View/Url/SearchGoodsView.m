@@ -115,5 +115,4 @@
     return _closeBtn;
 }
 
-
 @end

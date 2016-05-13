@@ -20,15 +20,15 @@
 }
 
 #pragma mark -
-- (void)setFindGoodsViewData:(TaoBaoGoodsResult *)model {
-    [self.goodsImg downloadImage:[model.nTbkItem valueForKey:@"pictUrl"][0] place:[UIImage imageNamed:@""]];
-    self.goodsTitle.text = [model.nTbkItem valueForKey:@"title"][0];
-    self.goodsPrice.text = [NSString stringWithFormat:@"￥%@",[model.nTbkItem valueForKey:@"zkFinalPrice"][0]];
+- (void)setFindGoodsViewData:(FindGoodsModelRow *)model {
+    [self.goodsImg downloadImage:model.coverUrl place:[UIImage imageNamed:@""]];
+    self.goodsTitle.text = model.title;
+    self.goodsPrice.text = [NSString stringWithFormat:@"￥%@",model.salePrice];
 }
 
-- (void)setJDGoodsViewData:(JDGoodsListproductbaseResult *)model {
-    [self.goodsImg downloadImage:[NSString stringWithFormat:@"%@", model.imagePath] place:[UIImage imageNamed:@""]];
-    self.goodsTitle.text = model.cbrand;
+- (void)setJDGoodsViewData:(FindGoodsModelRow *)model {
+    [self.goodsImg downloadImage:model.coverUrl place:[UIImage imageNamed:@""]];
+    self.goodsTitle.text = model.title;
     self.goodsPrice.text = [NSString stringWithFormat:@"￥%@",model.salePrice];
 }
 

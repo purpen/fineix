@@ -202,7 +202,7 @@
 //  标题文字的样式
 - (void)titleTextStyle:(NSString *)title {
     if ([title length] < 8) {
-        _titleText.font = [UIFont systemFontOfSize:46];
+        _titleText.font = [UIFont systemFontOfSize:40];
     } else if ([title length] >= 8 && [title length] < 13) {
         _titleText.font = [UIFont systemFontOfSize:30];
     } else if ([title length] >= 13) {

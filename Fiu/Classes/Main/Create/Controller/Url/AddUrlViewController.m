@@ -7,8 +7,7 @@
 //
 
 #import "AddUrlViewController.h"
-#import "TaoBaoGoodsResult.h"
-#import "JDGoodsListproductbaseResult.h"
+#import "FindGoodsModelRow.h"
 
 static NSString *const URLTaobaoGoods = @"/scene_product/tb_view";
 static NSString *const URLJDGoods = @"/scene_product/jd_view";
@@ -19,11 +18,12 @@ static NSString *const JD = @"http://m.jd.com/ware/search.action?keyword=";
 static NSString *const Tmall = @"https://s.m.tmall.com/m/search.htm?q=";
 
 @interface AddUrlViewController () {
-    NSInteger   _type;
+    NSInteger       _type;
+    NSString    *   _ids;
 }
 
-@pro_strong TaoBaoGoodsResult               *   taobaoGoodsData;
-@pro_strong JDGoodsListproductbaseResult    *   JDGoodsData;
+@pro_strong FindGoodsModelRow               *   findGoodsData;
+@pro_strong NSMutableDictionary             *   userGoodsData;
 
 @end
 
@@ -47,53 +47,49 @@ static NSString *const Tmall = @"https://s.m.tmall.com/m/search.htm?q=";
     [SVProgressHUD show];
     if (type == 1 || type == 2) {
         self.findGoodsRequest = [FBAPI getWithUrlString:URLTaobaoGoods requestDictionary:@{@"ids":self.goodsId} delegate:self];
-        [self.findGoodsRequest startRequestSuccess:^(FBRequest *request, id result) {
-            self.taobaoGoodsData = [[TaoBaoGoodsResult alloc] initWithDictionary:[[result valueForKey:@"data"] valueForKey:@"results"]];
-            [self.findGoodsView setFindGoodsViewData:self.taobaoGoodsData];
-
-            [SVProgressHUD dismiss];
-            
-        } failure:^(FBRequest *request, NSError *error) {
-            [SVProgressHUD showErrorWithStatus:[error localizedDescription]];
-        }];
-
     } else if (type == 0) {
         self.findGoodsRequest = [FBAPI getWithUrlString:URLJDGoods requestDictionary:@{@"ids":self.goodsId} delegate:self];
-        [self.findGoodsRequest startRequestSuccess:^(FBRequest *request, id result) {
-            self.JDGoodsData = [[JDGoodsListproductbaseResult alloc] initWithDictionary:[[result valueForKey:@"data"] valueForKey:@"listproductbase_result"][0]];
-            [self.findGoodsView setJDGoodsViewData:self.JDGoodsData];
-            [SVProgressHUD dismiss];
-            
-        } failure:^(FBRequest *request, NSError *error) {
-            [SVProgressHUD showErrorWithStatus:[error localizedDescription]];
-        }];
-
     }
-    
+    [self.findGoodsRequest startRequestSuccess:^(FBRequest *request, id result) {
+        NSArray * findGoodsArr = [[result valueForKey:@"data"] valueForKey:@"rows"];
+        if (findGoodsArr.count == 0) {
+            [SVProgressHUD showInfoWithStatus:@"该商品暂时无法添加"];
+        } else {
+            for (NSDictionary * findGoodsDict in findGoodsArr) {
+                self.findGoodsData = [[FindGoodsModelRow alloc] initWithDictionary:findGoodsDict];
+            }
+            [self.findGoodsView setFindGoodsViewData:self.findGoodsData];
+            [SVProgressHUD dismiss];
+            [self.view addSubview:self.findGoodsView];
+            self.userGoodsData = [NSMutableDictionary dictionaryWithDictionary:[[result valueForKey:@"data"] valueForKey:@"rows"][0]];
+        }
+        
+    } failure:^(FBRequest *request, NSError *error) {
+        [SVProgressHUD showErrorWithStatus:[error localizedDescription]];
+    }];
+
 }
 
-#pragma mark 用户确认添加产品的保存信息
-- (void)networkUserAddGoodsData:(NSString *)type {
-    // type: 2.淘宝；3.天猫；4.京东
-    if (_type == 0) {
-        type = @"4";
-    } else if (_type == 1) {
-        type = @"2";
-    } else if (_type == 2) {
-        type = @"3";
-    }
-    
+#pragma mark 添加产品
+- (void)networkAddGoods:(NSDictionary *)dict {
     [SVProgressHUD show];
-    self.userAddGoodsRequest = [FBAPI postWithUrlString:URLUserAddGoods requestDictionary:@{@"attrbute":type, @"oid":self.goodsId} delegate:self];
-    [self.userAddGoodsRequest startRequestSuccess:^(FBRequest *request, id result) {
-        NSLog(@"＝＝＝＝＝＝＝＝ %@", result);
+    self.addGoodsRequest = [FBAPI getWithUrlString:URLUserAddGoods requestDictionary:dict delegate:self];
+    [self.addGoodsRequest startRequestSuccess:^(FBRequest *request, id result) {
+        _ids = [[result valueForKey:@"data"] valueForKey:@"id"];
+        if ([[result valueForKey:@"success"] isEqualToNumber:@1]) {
+            [self dismissViewControllerAnimated:YES completion:nil];
+            self.findGodosBlock(self.findGoodsView.goodsTitle.text, self.findGoodsView.goodsPrice.text, _ids);
+            self.userAddGoodsBlock(self.userGoodsData);
+       
+        } else {
+            [SVProgressHUD showErrorWithStatus:[result valueForKey:@"message"]];
+        }
         [SVProgressHUD dismiss];
         
     } failure:^(FBRequest *request, NSError *error) {
         [SVProgressHUD showErrorWithStatus:[error localizedDescription]];
     }];
 }
-
 
 #pragma mark - 设置视图UI
 - (void)setAddUrlVcUI {
@@ -170,7 +166,6 @@ static NSString *const Tmall = @"https://s.m.tmall.com/m/search.htm?q=";
         NSLog(@"找到的商品ID：%@, 链接：%@", self.goodsId, self.searchGoodsView.findGoodsUrl);
         
         [self networkSearchGoodsData:_type];
-        [self.view addSubview:self.findGoodsView];
     }
 }
 
@@ -185,8 +180,19 @@ static NSString *const Tmall = @"https://s.m.tmall.com/m/search.htm?q=";
 
 #pragma mark - 确认添加
 - (void)sureBtnClick {
-    [self dismissViewControllerAnimated:YES completion:nil];
-    self.findGodosBlock(self.findGoodsView.goodsTitle.text, self.findGoodsView.goodsPrice.text);
+    NSString * attrbute;
+    
+    if (_type == 0) {
+        attrbute = @"4";
+    } else if (_type == 1) {
+        attrbute = @"2";
+    } else if (_type == 2) {
+        attrbute = @"3";
+    }
+    
+    [self.userGoodsData setObject:attrbute forKey:@"attrbute"];
+    [self networkAddGoods:self.userGoodsData];
+
 }
 
 #pragma mark - 设置导航视图
@@ -204,12 +210,20 @@ static NSString *const Tmall = @"https://s.m.tmall.com/m/search.htm?q=";
 //  关闭
 - (void)cancelBtnClick {
     [self dismissViewControllerAnimated:YES completion:nil];
+    [SVProgressHUD dismiss];
 }
 
 //  返回
 - (void)backBtnClick {
     [self.searchGoodsView removeFromSuperview];
     [SVProgressHUD dismiss];
+}
+
+- (void)viewDidDisappear:(BOOL)animated {
+    [super viewDidDisappear:animated];
+    [SVProgressHUD dismiss];
+    [self.findGoodsView removeFromSuperview];
+    [self.searchGoodsView.findDoneBtn removeFromSuperview];
 }
 
 @end

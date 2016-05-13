@@ -1,18 +1,18 @@
 //
-//	TaoBaoGoods.h
-// on 4/5/2016
+//	MarkGoods.h
+// on 12/5/2016
 //	Copyright © 2016. All rights reserved.
 //
 
 //	Model file Generated using JSONExport: https://github.com/Ahmed-Ali/JSONExport
 
 #import <UIKit/UIKit.h>
-#import "TaoBaoGoodsData.h"
+#import "MarkGoodsData.h"
 
-@interface TaoBaoGoods : NSObject
+@interface MarkGoods : NSObject
 
 @property (nonatomic, assign) NSInteger currentUserId;
-@property (nonatomic, strong) TaoBaoGoodsData * data;
+@property (nonatomic, strong) MarkGoodsData * data;
 @property (nonatomic, assign) BOOL isError;
 @property (nonatomic, strong) NSString * message;
 @property (nonatomic, strong) NSString * status;

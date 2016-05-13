@@ -13,6 +13,8 @@
     NSTimer *   timerAnimation;
     UIView  *   viewSpread;
     UIView  *   viewTapDot;
+    CGPoint     startPoint;
+    CGPoint     _translateCenter;
 }
 
 @end
@@ -22,6 +24,7 @@
 - (instancetype)initWithFrame:(CGRect)frame {
     self = [super initWithFrame:frame];
     if (self) {
+        self.userInteractionEnabled = YES;
         [self setImage:[UIImage imageNamed:@"user_goodsTag_left"] forState:(UIControlStateHighlighted)];
         [self setImage:[UIImage imageNamed:@"user_goodsTag_left"] forState:(UIControlStateNormal)];
         
@@ -31,9 +34,38 @@
                                                        userInfo:nil
                                                         repeats:YES];
         [self setUI];
-        
     }
     return self;
+}
+
+- (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
+    //  保存触摸起始点位置
+    CGPoint point = [[touches anyObject] locationInView:self.superview];
+    startPoint = point;
+}
+
+- (void)touchesMoved:(NSSet *)touches withEvent:(UIEvent *)event {
+    //  计算位移=当前位置-起始位置
+    CGPoint point = [[touches anyObject] locationInView:self.superview];
+    float dx = point.x - startPoint.x;
+    float dy = point.y - startPoint.y;
+    
+    //  计算移动后的view中心点
+    _translateCenter = CGPointMake(self.center.x + dx, self.center.y + dy);
+    
+    //  限制用户不可将视图托出屏幕
+    float halfx = CGRectGetMidX(self.bounds);
+    _translateCenter.x = MAX(halfx, _translateCenter.x);
+    _translateCenter.x = MIN(self.superview.bounds.size.width - halfx, _translateCenter.x);
+    
+    float halfy = CGRectGetMidY(self.bounds);
+    _translateCenter.y = MAX(halfy + 50, _translateCenter.y);
+    _translateCenter.y = MIN(self.superview.bounds.size.height - halfy - 50, _translateCenter.y);
+    
+    //移动view
+    self.center = _translateCenter;
+    [self setNeedsDisplay];
+    startPoint = point;
 }
 
 #pragma mark - 设置视图
@@ -52,12 +84,19 @@
         make.left.equalTo(self.title.mas_right).with.offset(0);
     }];
     
+    [self addSubview:self.dele];
+    [_dele mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.size.mas_equalTo(CGSizeMake(22, 22));
+        make.top.equalTo(self.mas_top).with.offset(-10);
+        make.right.equalTo(self.mas_right).with.offset(0);
+    }];
+    
     viewTapDot = [self getViewTapDot];
     [self addSubview:viewTapDot];
     [viewTapDot mas_makeConstraints:^(MASConstraintMaker *make) {
         make.size.mas_equalTo(CGSizeMake(5, 5));
         make.centerY.equalTo(self);
-        make.left.equalTo(self.mas_left).with.offset(104);
+        make.left.equalTo(self.mas_left).with.offset(102);
     }];
     
     viewSpread = [self getViewSpread];
@@ -112,11 +151,28 @@
     return view;
 }
 
+#pragma mark - 删除
+- (UIButton *)dele {
+    if (!_dele) {
+        _dele = [[UIButton alloc] init];
+        [_dele setBackgroundImage:[UIImage imageNamed:@"stickers_delete"] forState:UIControlStateNormal];
+        [_dele addTarget:self action:@selector(deleteTagAction:) forControlEvents:UIControlEventTouchUpInside];
+        _dele.userInteractionEnabled = YES;
+    }
+    return _dele;
+}
+
+- (void)deleteTagAction:(UIButton *)button {
+    if (self.delegate && [self.delegate respondsToSelector:@selector(delegateThisTagBtn:)]) {
+        [self.delegate delegateThisTagBtn:self.index];
+    }
+    [self removeFromSuperview];
+}
 
 #pragma mark - 动画
 -(void)animationTimerDidFired{
     [UIView animateWithDuration:1 animations:^{
-        viewTapDot.transform = CGAffineTransformMakeScale(1.5,1.5);
+        viewTapDot.transform = CGAffineTransformMakeScale(1.2,1.2);
     } completion:^(BOOL finished) {
         [UIView animateWithDuration:1 animations:^{
             viewTapDot.transform = CGAffineTransformIdentity;
@@ -132,6 +188,5 @@
         
     }];
 }
-
 
 @end

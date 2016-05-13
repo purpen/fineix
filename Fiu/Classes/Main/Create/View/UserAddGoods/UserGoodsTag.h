@@ -9,8 +9,17 @@
 #import <UIKit/UIKit.h>
 #import "Fiu.h"
 
+@protocol FBUserGoodsTagDelegaet <NSObject>
+@optional
+- (void)delegateThisTagBtn:(NSInteger)index;
+
+@end
+
 @interface UserGoodsTag : UIButton
 
+@pro_weak id <FBUserGoodsTagDelegaet> delegate;
+@pro_assign NSInteger       index;
+@pro_strong UIButton    *   dele;
 @pro_strong UILabel     *   title;
 @pro_strong UILabel     *   price;
 

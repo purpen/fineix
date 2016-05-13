@@ -13,7 +13,8 @@
 #import <SVProgressHUD/SVProgressHUD.h>
 #import "FindGoodsView.h"
 
-typedef void(^FindGoodsDataBlock)(NSString * title, NSString * price);
+typedef void(^FindGoodsDataBlock)(NSString * title, NSString * price, NSString * ids);
+typedef void(^UserAddGoodsData)(NSDictionary * data);
 
 @interface AddUrlViewController : FBPictureViewController <FBSearchDelegate, WebBtnSelectedDelegate, UIWebViewDelegate>
 
@@ -22,7 +23,7 @@ typedef void(^FindGoodsDataBlock)(NSString * title, NSString * price);
 @pro_strong SearchGoodsView                 *   searchGoodsView;    //  搜索商品视图
 @pro_strong FindGoodsView                   *   findGoodsView;      //  找到商品
 @pro_strong FBRequest                       *   findGoodsRequest;
-@pro_strong FBRequest                       *   userAddGoodsRequest;
+@pro_strong FBRequest                       *   addGoodsRequest;
 
 @pro_strong NSString            *   goodsTitle;
 @pro_strong NSString            *   goodsSalePrice;
@@ -32,5 +33,6 @@ typedef void(^FindGoodsDataBlock)(NSString * title, NSString * price);
 @pro_strong NSString            *   goodsImg;
 
 @pro_copy FindGoodsDataBlock    findGodosBlock;
+@pro_copy UserAddGoodsData      userAddGoodsBlock;
 
 @end

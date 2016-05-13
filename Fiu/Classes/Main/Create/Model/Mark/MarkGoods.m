@@ -1,16 +1,16 @@
 //
-//	TaoBaoGoods.m
-// on 4/5/2016
+//	MarkGoods.m
+// on 12/5/2016
 //	Copyright © 2016. All rights reserved.
 //	Model file Generated using JSONExport: https://github.com/Ahmed-Ali/JSONExport
 
 
 
-#import "TaoBaoGoods.h"
+#import "MarkGoods.h"
 
-@interface TaoBaoGoods ()
+@interface MarkGoods ()
 @end
-@implementation TaoBaoGoods
+@implementation MarkGoods
 
 
 
@@ -27,7 +27,7 @@
 	}
 
 	if(![dictionary[@"data"] isKindOfClass:[NSNull class]]){
-		self.data = [[TaoBaoGoodsData alloc] initWithDictionary:dictionary[@"data"]];
+		self.data = [[MarkGoodsData alloc] initWithDictionary:dictionary[@"data"]];
 	}
 
 	if(![dictionary[@"is_error"] isKindOfClass:[NSNull class]]){

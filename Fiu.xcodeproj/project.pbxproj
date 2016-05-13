@@ -383,11 +383,6 @@
 		D8A9ADC61CD9E2E700A9FCFB /* AddTagViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D8A9ADB91CD9E2E700A9FCFB /* AddTagViewController.m */; };
 		D8A9ADC91CD9E34600A9FCFB /* FBFootView.m in Sources */ = {isa = PBXBuildFile; fileRef = D8A9ADC81CD9E34600A9FCFB /* FBFootView.m */; };
 		D8A9ADCF1CD9E63900A9FCFB /* FindGoodsView.m in Sources */ = {isa = PBXBuildFile; fileRef = D8A9ADCE1CD9E63900A9FCFB /* FindGoodsView.m */; };
-		D8A9ADE01CD9F92B00A9FCFB /* TaoBaoGoods.m in Sources */ = {isa = PBXBuildFile; fileRef = D8A9ADD21CD9F92B00A9FCFB /* TaoBaoGoods.m */; };
-		D8A9ADE11CD9F92B00A9FCFB /* TaoBaoGoodsData.m in Sources */ = {isa = PBXBuildFile; fileRef = D8A9ADD41CD9F92B00A9FCFB /* TaoBaoGoodsData.m */; };
-		D8A9ADE21CD9F92B00A9FCFB /* TaoBaoGoodsNTbkItem.m in Sources */ = {isa = PBXBuildFile; fileRef = D8A9ADD61CD9F92B00A9FCFB /* TaoBaoGoodsNTbkItem.m */; };
-		D8A9ADE31CD9F92B00A9FCFB /* TaoBaoGoodsResult.m in Sources */ = {isa = PBXBuildFile; fileRef = D8A9ADD81CD9F92B00A9FCFB /* TaoBaoGoodsResult.m */; };
-		D8A9ADE41CD9F92B00A9FCFB /* TaoBaoGoodsSmallImage.m in Sources */ = {isa = PBXBuildFile; fileRef = D8A9ADDA1CD9F92B00A9FCFB /* TaoBaoGoodsSmallImage.m */; };
 		D8A9ADE51CD9F92B00A9FCFB /* FBFilters.m in Sources */ = {isa = PBXBuildFile; fileRef = D8A9ADDD1CD9F92B00A9FCFB /* FBFilters.m */; };
 		D8A9ADE61CD9F92B00A9FCFB /* FBPhoto.m in Sources */ = {isa = PBXBuildFile; fileRef = D8A9ADDF1CD9F92B00A9FCFB /* FBPhoto.m */; };
 		D8A9ADE91CD9FFCE00A9FCFB /* SearchGoodsView.m in Sources */ = {isa = PBXBuildFile; fileRef = D8A9ADE81CD9FFCE00A9FCFB /* SearchGoodsView.m */; };
@@ -409,12 +404,18 @@
 		D8A9AE281CE1BA2800A9FCFB /* OpenAllTagListTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D8A9AE271CE1BA2800A9FCFB /* OpenAllTagListTableViewCell.m */; };
 		D8A9AE2B1CE1C79400A9FCFB /* UpLookAllTagBtnTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D8A9AE2A1CE1C79400A9FCFB /* UpLookAllTagBtnTableViewCell.m */; };
 		D8A9AE2E1CE1F8B100A9FCFB /* NoHaveSceneTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D8A9AE2D1CE1F8B100A9FCFB /* NoHaveSceneTableViewCell.m */; };
-		D8A9AE351CE22E9B00A9FCFB /* JDGoods.m in Sources */ = {isa = PBXBuildFile; fileRef = D8A9AE301CE22E9B00A9FCFB /* JDGoods.m */; };
-		D8A9AE361CE22E9B00A9FCFB /* JDGoodsData.m in Sources */ = {isa = PBXBuildFile; fileRef = D8A9AE321CE22E9B00A9FCFB /* JDGoodsData.m */; };
-		D8A9AE371CE22E9B00A9FCFB /* JDGoodsListproductbaseResult.m in Sources */ = {isa = PBXBuildFile; fileRef = D8A9AE341CE22E9B00A9FCFB /* JDGoodsListproductbaseResult.m */; };
 		D8A9AE401CE304FF00A9FCFB /* NSTimer+Addition.m in Sources */ = {isa = PBXBuildFile; fileRef = D8A9AE3F1CE304FF00A9FCFB /* NSTimer+Addition.m */; };
 		D8A9AE4A1CE315FC00A9FCFB /* UserGoodsTag.m in Sources */ = {isa = PBXBuildFile; fileRef = D8A9AE491CE315FC00A9FCFB /* UserGoodsTag.m */; };
 		D8A9AE4D1CE3373E00A9FCFB /* ChangeAddUrlView.m in Sources */ = {isa = PBXBuildFile; fileRef = D8A9AE4C1CE3373E00A9FCFB /* ChangeAddUrlView.m */; };
+		D8A9AE511CE45F2400A9FCFB /* MarkGoodsCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D8A9AE501CE45F2400A9FCFB /* MarkGoodsCollectionViewCell.m */; };
+		D8A9AE591CE4603300A9FCFB /* MarkGoods.m in Sources */ = {isa = PBXBuildFile; fileRef = D8A9AE541CE4603300A9FCFB /* MarkGoods.m */; };
+		D8A9AE5A1CE4603300A9FCFB /* MarkGoodsData.m in Sources */ = {isa = PBXBuildFile; fileRef = D8A9AE561CE4603300A9FCFB /* MarkGoodsData.m */; };
+		D8A9AE5B1CE4603300A9FCFB /* MarkGoodsRow.m in Sources */ = {isa = PBXBuildFile; fileRef = D8A9AE581CE4603300A9FCFB /* MarkGoodsRow.m */; };
+		D8A9AE5E1CE4809300A9FCFB /* FBStickersContainer.m in Sources */ = {isa = PBXBuildFile; fileRef = D8A9AE5D1CE4809300A9FCFB /* FBStickersContainer.m */; };
+		D8A9AE611CE4813700A9FCFB /* FBSticker.m in Sources */ = {isa = PBXBuildFile; fileRef = D8A9AE601CE4813700A9FCFB /* FBSticker.m */; };
+		D8A9AE681CE5D10000A9FCFB /* FindGoodsModel.m in Sources */ = {isa = PBXBuildFile; fileRef = D8A9AE631CE5D10000A9FCFB /* FindGoodsModel.m */; };
+		D8A9AE691CE5D10000A9FCFB /* FindGoodsModelData.m in Sources */ = {isa = PBXBuildFile; fileRef = D8A9AE651CE5D10000A9FCFB /* FindGoodsModelData.m */; };
+		D8A9AE6A1CE5D10000A9FCFB /* FindGoodsModelRow.m in Sources */ = {isa = PBXBuildFile; fileRef = D8A9AE671CE5D10000A9FCFB /* FindGoodsModelRow.m */; };
 		D8AEC7511CA8E3A000A868B6 /* libsqlite3.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 1F0EE6A41C9FA47B000631F0 /* libsqlite3.tbd */; };
 		D8AEC7521CA8E3AE00A868B6 /* libiconv.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 1F0EE6A21C9FA43C000631F0 /* libiconv.tbd */; };
 		D8AEC7531CA8E3BB00A868B6 /* libstdc++.6.0.9.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 280045201C805CD7005F5C2E /* libstdc++.6.0.9.tbd */; };
@@ -1094,16 +1095,6 @@
 		D8A9ADC81CD9E34600A9FCFB /* FBFootView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FBFootView.m; sourceTree = "<group>"; };
 		D8A9ADCD1CD9E63900A9FCFB /* FindGoodsView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FindGoodsView.h; sourceTree = "<group>"; };
 		D8A9ADCE1CD9E63900A9FCFB /* FindGoodsView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FindGoodsView.m; sourceTree = "<group>"; };
-		D8A9ADD11CD9F92B00A9FCFB /* TaoBaoGoods.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TaoBaoGoods.h; sourceTree = "<group>"; };
-		D8A9ADD21CD9F92B00A9FCFB /* TaoBaoGoods.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TaoBaoGoods.m; sourceTree = "<group>"; };
-		D8A9ADD31CD9F92B00A9FCFB /* TaoBaoGoodsData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TaoBaoGoodsData.h; sourceTree = "<group>"; };
-		D8A9ADD41CD9F92B00A9FCFB /* TaoBaoGoodsData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TaoBaoGoodsData.m; sourceTree = "<group>"; };
-		D8A9ADD51CD9F92B00A9FCFB /* TaoBaoGoodsNTbkItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TaoBaoGoodsNTbkItem.h; sourceTree = "<group>"; };
-		D8A9ADD61CD9F92B00A9FCFB /* TaoBaoGoodsNTbkItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TaoBaoGoodsNTbkItem.m; sourceTree = "<group>"; };
-		D8A9ADD71CD9F92B00A9FCFB /* TaoBaoGoodsResult.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TaoBaoGoodsResult.h; sourceTree = "<group>"; };
-		D8A9ADD81CD9F92B00A9FCFB /* TaoBaoGoodsResult.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TaoBaoGoodsResult.m; sourceTree = "<group>"; };
-		D8A9ADD91CD9F92B00A9FCFB /* TaoBaoGoodsSmallImage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TaoBaoGoodsSmallImage.h; sourceTree = "<group>"; };
-		D8A9ADDA1CD9F92B00A9FCFB /* TaoBaoGoodsSmallImage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TaoBaoGoodsSmallImage.m; sourceTree = "<group>"; };
 		D8A9ADDC1CD9F92B00A9FCFB /* FBFilters.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FBFilters.h; sourceTree = "<group>"; };
 		D8A9ADDD1CD9F92B00A9FCFB /* FBFilters.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FBFilters.m; sourceTree = "<group>"; };
 		D8A9ADDE1CD9F92B00A9FCFB /* FBPhoto.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FBPhoto.h; sourceTree = "<group>"; };
@@ -1146,18 +1137,30 @@
 		D8A9AE2A1CE1C79400A9FCFB /* UpLookAllTagBtnTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UpLookAllTagBtnTableViewCell.m; sourceTree = "<group>"; };
 		D8A9AE2C1CE1F8B100A9FCFB /* NoHaveSceneTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NoHaveSceneTableViewCell.h; sourceTree = "<group>"; };
 		D8A9AE2D1CE1F8B100A9FCFB /* NoHaveSceneTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NoHaveSceneTableViewCell.m; sourceTree = "<group>"; };
-		D8A9AE2F1CE22E9B00A9FCFB /* JDGoods.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JDGoods.h; sourceTree = "<group>"; };
-		D8A9AE301CE22E9B00A9FCFB /* JDGoods.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JDGoods.m; sourceTree = "<group>"; };
-		D8A9AE311CE22E9B00A9FCFB /* JDGoodsData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JDGoodsData.h; sourceTree = "<group>"; };
-		D8A9AE321CE22E9B00A9FCFB /* JDGoodsData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JDGoodsData.m; sourceTree = "<group>"; };
-		D8A9AE331CE22E9B00A9FCFB /* JDGoodsListproductbaseResult.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JDGoodsListproductbaseResult.h; sourceTree = "<group>"; };
-		D8A9AE341CE22E9B00A9FCFB /* JDGoodsListproductbaseResult.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JDGoodsListproductbaseResult.m; sourceTree = "<group>"; };
 		D8A9AE3E1CE304FF00A9FCFB /* NSTimer+Addition.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSTimer+Addition.h"; sourceTree = "<group>"; };
 		D8A9AE3F1CE304FF00A9FCFB /* NSTimer+Addition.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSTimer+Addition.m"; sourceTree = "<group>"; };
 		D8A9AE481CE315FC00A9FCFB /* UserGoodsTag.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserGoodsTag.h; sourceTree = "<group>"; };
 		D8A9AE491CE315FC00A9FCFB /* UserGoodsTag.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserGoodsTag.m; sourceTree = "<group>"; };
 		D8A9AE4B1CE3373E00A9FCFB /* ChangeAddUrlView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChangeAddUrlView.h; sourceTree = "<group>"; };
 		D8A9AE4C1CE3373E00A9FCFB /* ChangeAddUrlView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChangeAddUrlView.m; sourceTree = "<group>"; };
+		D8A9AE4F1CE45F2400A9FCFB /* MarkGoodsCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MarkGoodsCollectionViewCell.h; sourceTree = "<group>"; };
+		D8A9AE501CE45F2400A9FCFB /* MarkGoodsCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MarkGoodsCollectionViewCell.m; sourceTree = "<group>"; };
+		D8A9AE531CE4603300A9FCFB /* MarkGoods.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MarkGoods.h; sourceTree = "<group>"; };
+		D8A9AE541CE4603300A9FCFB /* MarkGoods.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MarkGoods.m; sourceTree = "<group>"; };
+		D8A9AE551CE4603300A9FCFB /* MarkGoodsData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MarkGoodsData.h; sourceTree = "<group>"; };
+		D8A9AE561CE4603300A9FCFB /* MarkGoodsData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MarkGoodsData.m; sourceTree = "<group>"; };
+		D8A9AE571CE4603300A9FCFB /* MarkGoodsRow.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MarkGoodsRow.h; sourceTree = "<group>"; };
+		D8A9AE581CE4603300A9FCFB /* MarkGoodsRow.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MarkGoodsRow.m; sourceTree = "<group>"; };
+		D8A9AE5C1CE4809300A9FCFB /* FBStickersContainer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FBStickersContainer.h; sourceTree = "<group>"; };
+		D8A9AE5D1CE4809300A9FCFB /* FBStickersContainer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FBStickersContainer.m; sourceTree = "<group>"; };
+		D8A9AE5F1CE4813700A9FCFB /* FBSticker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FBSticker.h; sourceTree = "<group>"; };
+		D8A9AE601CE4813700A9FCFB /* FBSticker.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FBSticker.m; sourceTree = "<group>"; };
+		D8A9AE621CE5D10000A9FCFB /* FindGoodsModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FindGoodsModel.h; sourceTree = "<group>"; };
+		D8A9AE631CE5D10000A9FCFB /* FindGoodsModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FindGoodsModel.m; sourceTree = "<group>"; };
+		D8A9AE641CE5D10000A9FCFB /* FindGoodsModelData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FindGoodsModelData.h; sourceTree = "<group>"; };
+		D8A9AE651CE5D10000A9FCFB /* FindGoodsModelData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FindGoodsModelData.m; sourceTree = "<group>"; };
+		D8A9AE661CE5D10000A9FCFB /* FindGoodsModelRow.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FindGoodsModelRow.h; sourceTree = "<group>"; };
+		D8A9AE671CE5D10000A9FCFB /* FindGoodsModelRow.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FindGoodsModelRow.m; sourceTree = "<group>"; };
 		E0438B4B24E3F747F761AF4C /* Pods-Fiu.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Fiu.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Fiu/Pods-Fiu.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -2088,6 +2091,7 @@
 		D81280361CAA8532007CF08B /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				D8A9AE521CE4603300A9FCFB /* Mark */,
 				D8A9ADD01CD9F92B00A9FCFB /* FindGoods */,
 				D8A9ADDB1CD9F92B00A9FCFB /* Photo */,
 			);
@@ -2110,6 +2114,7 @@
 		D812803E1CAA8532007CF08B /* View */ = {
 			isa = PBXGroup;
 			children = (
+				D8A9AE4E1CE45F1500A9FCFB /* Mark */,
 				D8A9AE441CE314AC00A9FCFB /* UserAddGoods */,
 				D8A9AE161CE05D3500A9FCFB /* Tag */,
 				D8A9AE091CDC695500A9FCFB /* SelectScene */,
@@ -3095,22 +3100,12 @@
 		D8A9ADD01CD9F92B00A9FCFB /* FindGoods */ = {
 			isa = PBXGroup;
 			children = (
-				D8A9AE2F1CE22E9B00A9FCFB /* JDGoods.h */,
-				D8A9AE301CE22E9B00A9FCFB /* JDGoods.m */,
-				D8A9AE311CE22E9B00A9FCFB /* JDGoodsData.h */,
-				D8A9AE321CE22E9B00A9FCFB /* JDGoodsData.m */,
-				D8A9AE331CE22E9B00A9FCFB /* JDGoodsListproductbaseResult.h */,
-				D8A9AE341CE22E9B00A9FCFB /* JDGoodsListproductbaseResult.m */,
-				D8A9ADD11CD9F92B00A9FCFB /* TaoBaoGoods.h */,
-				D8A9ADD21CD9F92B00A9FCFB /* TaoBaoGoods.m */,
-				D8A9ADD31CD9F92B00A9FCFB /* TaoBaoGoodsData.h */,
-				D8A9ADD41CD9F92B00A9FCFB /* TaoBaoGoodsData.m */,
-				D8A9ADD51CD9F92B00A9FCFB /* TaoBaoGoodsNTbkItem.h */,
-				D8A9ADD61CD9F92B00A9FCFB /* TaoBaoGoodsNTbkItem.m */,
-				D8A9ADD71CD9F92B00A9FCFB /* TaoBaoGoodsResult.h */,
-				D8A9ADD81CD9F92B00A9FCFB /* TaoBaoGoodsResult.m */,
-				D8A9ADD91CD9F92B00A9FCFB /* TaoBaoGoodsSmallImage.h */,
-				D8A9ADDA1CD9F92B00A9FCFB /* TaoBaoGoodsSmallImage.m */,
+				D8A9AE621CE5D10000A9FCFB /* FindGoodsModel.h */,
+				D8A9AE631CE5D10000A9FCFB /* FindGoodsModel.m */,
+				D8A9AE641CE5D10000A9FCFB /* FindGoodsModelData.h */,
+				D8A9AE651CE5D10000A9FCFB /* FindGoodsModelData.m */,
+				D8A9AE661CE5D10000A9FCFB /* FindGoodsModelRow.h */,
+				D8A9AE671CE5D10000A9FCFB /* FindGoodsModelRow.m */,
 			);
 			path = FindGoods;
 			sourceTree = "<group>";
@@ -3180,6 +3175,32 @@
 				D8A9AE491CE315FC00A9FCFB /* UserGoodsTag.m */,
 			);
 			path = UserAddGoods;
+			sourceTree = "<group>";
+		};
+		D8A9AE4E1CE45F1500A9FCFB /* Mark */ = {
+			isa = PBXGroup;
+			children = (
+				D8A9AE4F1CE45F2400A9FCFB /* MarkGoodsCollectionViewCell.h */,
+				D8A9AE501CE45F2400A9FCFB /* MarkGoodsCollectionViewCell.m */,
+				D8A9AE5C1CE4809300A9FCFB /* FBStickersContainer.h */,
+				D8A9AE5D1CE4809300A9FCFB /* FBStickersContainer.m */,
+				D8A9AE5F1CE4813700A9FCFB /* FBSticker.h */,
+				D8A9AE601CE4813700A9FCFB /* FBSticker.m */,
+			);
+			path = Mark;
+			sourceTree = "<group>";
+		};
+		D8A9AE521CE4603300A9FCFB /* Mark */ = {
+			isa = PBXGroup;
+			children = (
+				D8A9AE531CE4603300A9FCFB /* MarkGoods.h */,
+				D8A9AE541CE4603300A9FCFB /* MarkGoods.m */,
+				D8A9AE551CE4603300A9FCFB /* MarkGoodsData.h */,
+				D8A9AE561CE4603300A9FCFB /* MarkGoodsData.m */,
+				D8A9AE571CE4603300A9FCFB /* MarkGoodsRow.h */,
+				D8A9AE581CE4603300A9FCFB /* MarkGoodsRow.m */,
+			);
+			path = Mark;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -3413,10 +3434,10 @@
 				D8A9AE051CDC3D5800A9FCFB /* SearchFSceneViewController.m in Sources */,
 				1FC6780F1CDAECE500535162 /* BonusCell.m in Sources */,
 				1F07A6591CC7A45300CF225F /* FriendCollectionViewCell.m in Sources */,
-				D8A9AE351CE22E9B00A9FCFB /* JDGoods.m in Sources */,
 				D8A9AE401CE304FF00A9FCFB /* NSTimer+Addition.m in Sources */,
 				D8363A5C1CD8814600CC4AC0 /* InfoUseSceneTableViewCell.m in Sources */,
 				D8A9ACFF1CD9AF1D00A9FCFB /* OtherGoodsViewController.m in Sources */,
+				D8A9AE5B1CE4603300A9FCFB /* MarkGoodsRow.m in Sources */,
 				D87B69D51CC726D500199EFE /* WriteCommentView.m in Sources */,
 				D812815A1CAA8532007CF08B /* fineix.xcdatamodeld in Sources */,
 				D803605D1CBF376B001920F9 /* GuidePageViewController.m in Sources */,
@@ -3425,14 +3446,13 @@
 				D8363A2B1CD8809400CC4AC0 /* GoodsInfo.m in Sources */,
 				D8A9AE221CE0E53100A9FCFB /* AllTagListTableViewCell.m in Sources */,
 				D81281591CAA8532007CF08B /* UIImageView+SDWedImage.m in Sources */,
-				D8A9AE371CE22E9B00A9FCFB /* JDGoodsListproductbaseResult.m in Sources */,
 				D81281541CAA8532007CF08B /* FBRequest.m in Sources */,
-				D8A9ADE41CD9F92B00A9FCFB /* TaoBaoGoodsSmallImage.m in Sources */,
 				1F27AE971CE0D493005A434B /* MapTableViewCell.m in Sources */,
 				1F18377A1CCE0F2200933CA7 /* TalentCertificationViewController.m in Sources */,
 				D8363A961CD8832100CC4AC0 /* LikePeopleTableViewCell.m in Sources */,
 				1FBC3E9A1CCE3766007CFA14 /* ShareViewController.m in Sources */,
 				1F3C0A961CBFA28300B84FEB /* GreatPeopleViewController.m in Sources */,
+				D8A9AE5E1CE4809300A9FCFB /* FBStickersContainer.m in Sources */,
 				D8A9AE4D1CE3373E00A9FCFB /* ChangeAddUrlView.m in Sources */,
 				1FC677FD1CDAE78400535162 /* BonusViewController.m in Sources */,
 				D8A9AE2E1CE1F8B100A9FCFB /* NoHaveSceneTableViewCell.m in Sources */,
@@ -3449,6 +3469,7 @@
 				D8A9ADC01CD9E2E700A9FCFB /* CreateViewController.m in Sources */,
 				D8A9AE2B1CE1C79400A9FCFB /* UpLookAllTagBtnTableViewCell.m in Sources */,
 				1FC678211CDAFEF400535162 /* DeliveryAddressModel.m in Sources */,
+				D8A9AE5A1CE4603300A9FCFB /* MarkGoodsData.m in Sources */,
 				D8A9ADC91CD9E34600A9FCFB /* FBFootView.m in Sources */,
 				D8A9ACAF1CD89E0000A9FCFB /* RollImage.m in Sources */,
 				D8A9ADBA1CD9E2E700A9FCFB /* MarkGoodsViewController.m in Sources */,
@@ -3457,16 +3478,17 @@
 				1FFFFF311CD055F2008E1CDC /* DirectMessagesViewController.m in Sources */,
 				D8A9ADC21CD9E2E700A9FCFB /* FiltersViewController.m in Sources */,
 				D8A9ADE51CD9F92B00A9FCFB /* FBFilters.m in Sources */,
-				D8A9ADE01CD9F92B00A9FCFB /* TaoBaoGoods.m in Sources */,
 				D8363A521CD8814600CC4AC0 /* MallMenuCollectionViewCell.m in Sources */,
 				D8A9AE1F1CE07F7900A9FCFB /* TagFlowLayout.m in Sources */,
 				488521861CD470E500D8CE19 /* CounterModel.m in Sources */,
+				D8A9AE691CE5D10000A9FCFB /* FindGoodsModelData.m in Sources */,
 				1F5038AB1CDC406C004F76AD /* ProductInfoView.m in Sources */,
 				D8A9AD8F1CD9DFBC00A9FCFB /* AddUrlView.m in Sources */,
 				D80D41581CAD142C005D72B1 /* FBPictureViewController.m in Sources */,
 				1FC678141CDAF52000535162 /* InvalidBonusCell.m in Sources */,
 				D8363ABC1CD8835D00CC4AC0 /* HomeSceneList.m in Sources */,
 				D80360561CBF376B001920F9 /* NumView.m in Sources */,
+				D8A9AE611CE4813700A9FCFB /* FBSticker.m in Sources */,
 				D8A9ACF31CD8B74D00A9FCFB /* LikeOrSuPeopleData.m in Sources */,
 				1F5038A91CDC406C004F76AD /* CommentView.m in Sources */,
 				D81281661CAA8532007CF08B /* JKDBHelper.m in Sources */,
@@ -3479,7 +3501,6 @@
 				D8363A811CD882D900CC4AC0 /* SceneInfoViewController.m in Sources */,
 				1F35F0481CD1FF630000DB95 /* DatePickerViewController.m in Sources */,
 				D86AFDEF1CBFAFC2006F1602 /* UserHeaderTableViewCell.m in Sources */,
-				D8A9ADE21CD9F92B00A9FCFB /* TaoBaoGoodsNTbkItem.m in Sources */,
 				D8A9ACBA1CD89E0000A9FCFB /* FiuSceneRow.m in Sources */,
 				D8363A541CD8814600CC4AC0 /* CategoryTagRollView.m in Sources */,
 				D8A9ADE91CD9FFCE00A9FCFB /* SearchGoodsView.m in Sources */,
@@ -3538,6 +3559,7 @@
 				1FEE50F21CE2144500B8A292 /* CommenttwoViewController.m in Sources */,
 				1FC678021CDAE97B00535162 /* HistoryBonusViewController.m in Sources */,
 				D8363A6D1CD8818E00CC4AC0 /* GoodsCategoryViewController.m in Sources */,
+				D8A9AE591CE4603300A9FCFB /* MarkGoods.m in Sources */,
 				D8A9AE081CDC673D00A9FCFB /* SelectAllFSceneViewController.m in Sources */,
 				D8363A281CD8809400CC4AC0 /* BrandInfoData.m in Sources */,
 				D8A9ADBD1CD9E2E700A9FCFB /* AddUrlViewController.m in Sources */,
@@ -3597,6 +3619,7 @@
 				D8A9ADF11CDAF41200A9FCFB /* ChildTags.m in Sources */,
 				D8035FCF1CBD1021001920F9 /* FBTabBar.m in Sources */,
 				D8363ABB1CD8835D00CC4AC0 /* SceneInfoUserInfo.m in Sources */,
+				D8A9AE681CE5D10000A9FCFB /* FindGoodsModel.m in Sources */,
 				D8363AC11CD8835D00CC4AC0 /* HomeSceneListRow.m in Sources */,
 				1F35F0371CD1AD870000DB95 /* CityTableViewCell.m in Sources */,
 				D83639BD1CD0932000CC4AC0 /* Comment.m in Sources */,
@@ -3605,17 +3628,16 @@
 				D8A9ADCF1CD9E63900A9FCFB /* FindGoodsView.m in Sources */,
 				D8A9AD891CD9DFBC00A9FCFB /* FBPictureCollectionViewCell.m in Sources */,
 				1FC6782A1CDB0EC700535162 /* EditAddressViewController.m in Sources */,
-				D8A9AE361CE22E9B00A9FCFB /* JDGoodsData.m in Sources */,
 				D8A9ACFC1CD99EBF00A9FCFB /* ReportViewController.m in Sources */,
 				1F5038B91CDC605F004F76AD /* MyPageViewController.m in Sources */,
 				D8A9ADF31CDAF41200A9FCFB /* ChildTagsTag.m in Sources */,
 				D8363AB71CD8835D00CC4AC0 /* SceneInfoCounter.m in Sources */,
+				D8A9AE6A1CE5D10000A9FCFB /* FindGoodsModelRow.m in Sources */,
 				1FE60E561CD32E8D00045117 /* CommentsViewController.m in Sources */,
 				1F8EACDA1CDDA09200C51235 /* RefundmentViewController.m in Sources */,
 				1F1837751CCDFCB200933CA7 /* ChangeSumaryViewController.m in Sources */,
 				D803603F1CBF376B001920F9 /* FBLoginRegisterViewController.m in Sources */,
 				D8035FCE1CBD1021001920F9 /* SearchViewController.m in Sources */,
-				D8A9ADE31CD9F92B00A9FCFB /* TaoBaoGoodsResult.m in Sources */,
 				D8363A291CD8809400CC4AC0 /* Goods.m in Sources */,
 				D803605C1CBF376B001920F9 /* SubmitView.m in Sources */,
 				1FEB71781CC8A35A00CF34F3 /* QRCodeScanViewController.m in Sources */,
@@ -3635,7 +3657,6 @@
 				D81281551CAA8532007CF08B /* HttpTool.m in Sources */,
 				1F5038C41CDC6A22004F76AD /* MyPageBtnCollectionViewCell.m in Sources */,
 				D8363AB81CD8835D00CC4AC0 /* SceneInfoData.m in Sources */,
-				D8A9ADE11CD9F92B00A9FCFB /* TaoBaoGoodsData.m in Sources */,
 				D80360521CBF376B001920F9 /* TurnPageLayout.m in Sources */,
 				1FFFFF211CD055BB008E1CDC /* OptionViewController.m in Sources */,
 				D8A9ADBF1CD9E2E700A9FCFB /* ClipImageViewController.m in Sources */,
@@ -3664,6 +3685,7 @@
 				1FEB71721CC8802800CF34F3 /* InvitationModel.m in Sources */,
 				1FFFFF231CD055BB008E1CDC /* SystemSettingViewController.m in Sources */,
 				D8A9ACB81CD89E0000A9FCFB /* FiuSceneInfoUserInfo.m in Sources */,
+				D8A9AE511CE45F2400A9FCFB /* MarkGoodsCollectionViewCell.m in Sources */,
 				D8035F3B1CB784B3001920F9 /* UILable+Frame.m in Sources */,
 				D8363A5A1CD8814600CC4AC0 /* InfoRecommendTableViewCell.m in Sources */,
 				D8A9ACB61CD89E0000A9FCFB /* FiuSceneInfoData.m in Sources */,
