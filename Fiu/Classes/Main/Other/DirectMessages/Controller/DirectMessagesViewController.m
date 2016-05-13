@@ -16,7 +16,9 @@
 #import <SDWebImage/UIImageView+WebCache.h>
 
 @interface DirectMessagesViewController ()<FBNavigationBarItemsDelegate,UITableViewDelegate,FBRequestDelegate,UITableViewDataSource>
-
+{
+    int _n;
+}
 @property (nonatomic, strong) NSArray *messages;
 @property (weak, nonatomic) IBOutlet UITableView *myTableVuew;
 @property (weak, nonatomic) IBOutlet UITextField *msgTF;
@@ -90,11 +92,13 @@
             [messageArray addObject:message];
             
             lastMessage = message;
+            _n = (int)fiuSceneArr.count;
         }
         self.messages = messageArray;
+
         [self.myTableVuew reloadData];
         NSLog(@" 聊天数量    %zi",self.messages.count);
-//        [self.myTableVuew scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:(self.messages.count-1)*2 inSection:0] atScrollPosition:UITableViewScrollPositionMiddle animated:NO];
+        [self.myTableVuew scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:_n-1 inSection:0] atScrollPosition:UITableViewScrollPositionMiddle animated:NO];
         [SVProgressHUD dismiss];
     } failure:^(FBRequest *request, NSError *error) {
         [SVProgressHUD showErrorWithStatus:[error localizedDescription]];
