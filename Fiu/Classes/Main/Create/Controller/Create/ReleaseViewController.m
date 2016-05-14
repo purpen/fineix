@@ -49,20 +49,20 @@ static NSString *const URLReleaseFiuScenen = @"/scene_scene/save";
 #pragma mark - 网络请求
 #pragma mark 发布场景
 - (void)networkNewSceneData {
-    NSLog(@"%@",@{
-                  @"title":self.scenceView.title.text,
-                  @"des":self.scenceView.content.text,
-                  @"lng":self.lng,
-                  @"lat":self.lat,
-                  @"address":self.addView.location.text,
+//    NSLog(@"%@",@{
+//                  @"title":self.scenceView.title.text,
+//                  @"des":self.scenceView.content.text,
+//                  @"lng":self.lng,
+//                  @"lat":self.lat,
+//                  @"address":self.addView.location.text,
 //                  @"product_id":self.goodsId,
 //                  @"product_title":self.goodsTitle,
 //                  @"product_price":self.goodsPrice,
 //                  @"product_x":self.goodsX,
 //                  @"product_y":self.goodsY,
-                  @"tags":self.tagS,
-                  @"scene_id":self.fSceneId,
-                  });
+//                  @"tags":self.tagS,
+//                  @"scene_id":self.fSceneId,
+//                  });
 
     if ([self.lng length] <= 0 || [self.scenceView.title.text isEqualToString:@""] || [self.scenceView.content.text isEqualToString:@""] || [self.addView.location.text isEqualToString:@""]) {
         [SVProgressHUD showInfoWithStatus:@"填写未完成"];
@@ -97,7 +97,6 @@ static NSString *const URLReleaseFiuScenen = @"/scene_scene/save";
             [SVProgressHUD showErrorWithStatus:[error localizedDescription]];
             NSLog(@"＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝  发布失败：%@", error);
         }];
-
     }
 }
 

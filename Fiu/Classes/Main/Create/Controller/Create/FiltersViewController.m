@@ -154,9 +154,6 @@ static NSString *const URLUserAddGoods = @"/scene_product/add";
             [tagDataDict setObject:_price forKey:@"price"];
             [tagDataDict setObject:_imgUrl forKey:@"img"];
             [self.userAddGoodsMarr addObject:tagDataDict];
-        
-            NSLog(@"＝＝＝＝＝＝ 用户添加的商品标签信息：%@", self.userAddGoodsMarr);
-            
         };
         
     } else if (index == 2) {
@@ -180,7 +177,6 @@ static NSString *const URLUserAddGoods = @"/scene_product/add";
     tag.tag = _idx;
     tag.index = _idx - 392;
     tag.delegate = self;
-    self.userGoodsTag = tag;
     
     UITapGestureRecognizer * tapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(showChangeGoodsData:)];
     [tag addGestureRecognizer:tapGesture];
@@ -197,6 +193,7 @@ static NSString *const URLUserAddGoods = @"/scene_product/add";
 #pragma mark 点击编辑产品信息
 - (void)showChangeGoodsData:(UIGestureRecognizer *)tap {
     self.seleIndex = tap.view.tag - 392;
+    self.userGoodsTag = self.tagBtnMarr[self.seleIndex];
     self.changeGoodsView.goodsTitle.text = [self.userAddGoodsMarr valueForKey:@"title"][self.seleIndex];
     self.changeGoodsView.goodsPrice.text = [NSString stringWithFormat:@"￥%@",[self.userAddGoodsMarr valueForKey:@"price"][self.seleIndex]];
     [self.changeGoodsView.goodsImg downloadImage:[self.userAddGoodsMarr valueForKey:@"img"][self.seleIndex] place:[UIImage imageNamed:@""]];
@@ -223,6 +220,9 @@ static NSString *const URLUserAddGoods = @"/scene_product/add";
 
 //  修改标签
 - (void)sureChange {
+    [self.goodsTitleData removeObjectAtIndex:self.seleIndex];
+    [self.goodsPriceData removeObjectAtIndex:self.seleIndex];
+    
     self.userGoodsTag.title.text = self.changeGoodsView.goodsTitle.text;
     if ([self.changeGoodsView.goodsPrice.text containsString:@"￥"]) {
         self.userGoodsTag.price.text = [NSString stringWithFormat:@"%@", self.changeGoodsView.goodsPrice.text];
@@ -298,24 +298,44 @@ static NSString *const URLUserAddGoods = @"/scene_product/add";
 - (void)nextBtnClick {
     if (self.goodsIdData.count > 3) {
         [SVProgressHUD showInfoWithStatus:@"只能标记三个商品"];
+    
     } else if (self.goodsIdData.count == 0) {
         [SVProgressHUD showInfoWithStatus:@"至少标记一个商品"];
+    
     } else if (self.goodsIdData.count > 0 && self.goodsIdData.count <= 3) {
-         NSLog(@"发布的商品ID：－－－－ %@", self.goodsIdData);
-        NSLog(@"发布的商品Title：－－－－ %@", self.goodsTitleData);
-        NSLog(@"发布的商品Price：－－－－ %@", self.goodsPriceData);
-        //        ReleaseViewController * releaseVC = [[ReleaseViewController alloc] init];
-        //        releaseVC.locationArr = self.locationArr;
-        //        releaseVC.scenceView.imageView.image = self.filtersImageView.image;
-        //        releaseVC.createType = self.createType;
-        //        releaseVC.fSceneId = self.fSceneId;
-        //        releaseVC.fSceneTitle = self.fSceneTitle;
-        //        releaseVC.goodsTitle = @"测试商品1,测试商品2,测试商品3";
-        //        releaseVC.goodsPrice = @"321,1829,2901";
-        //        releaseVC.goodsId = @"304,301,299";
-        //        releaseVC.goodsX = @"43,32,65";
-        //        releaseVC.goodsY = @"20,22,42";
-        //        [self.navigationController pushViewController:releaseVC animated:YES];
+        NSMutableArray * originX = [NSMutableArray array];
+        NSMutableArray * originY = [NSMutableArray array];
+        for (UserGoodsTag * btn in self.tagBtnMarr) {
+            [originX addObject:[NSString stringWithFormat:@"%f", btn.frame.origin.x]];
+            [originY addObject:[NSString stringWithFormat:@"%f", btn.frame.origin.y]];
+        }
+        
+        NSMutableArray * priceMarr = [NSMutableArray array];
+        NSCharacterSet * set = [NSCharacterSet characterSetWithCharactersInString:@"￥"];
+        for (NSString * str in self.goodsPriceData) {
+            NSString * price = [str stringByTrimmingCharactersInSet:set];
+            [priceMarr addObject:price];
+        }
+
+        NSString * goodsPrice = [priceMarr componentsJoinedByString:@","];
+        NSString * goodsId = [self.goodsIdData componentsJoinedByString:@","];
+        NSString * goodsTitle = [self.goodsTitleData componentsJoinedByString:@","];
+        NSString * btnOriginX = [originX componentsJoinedByString:@","];
+        NSString * btnOriginY = [originY componentsJoinedByString:@","];
+        
+        ReleaseViewController * releaseVC = [[ReleaseViewController alloc] init];
+        releaseVC.locationArr = self.locationArr;
+        releaseVC.scenceView.imageView.image = self.filtersImageView.image;
+        releaseVC.createType = self.createType;
+        releaseVC.fSceneId = self.fSceneId;
+        releaseVC.fSceneTitle = self.fSceneTitle;
+        releaseVC.goodsTitle = goodsTitle;
+        releaseVC.goodsPrice = goodsPrice;
+        releaseVC.goodsId = goodsId;
+        releaseVC.goodsX = btnOriginX;
+        releaseVC.goodsY = btnOriginY;
+        [self.navigationController pushViewController:releaseVC animated:YES];
+
     }
 }
 
