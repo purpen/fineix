@@ -16,6 +16,7 @@
     if (self) {
     
         self.selectionStyle = UITableViewCellSelectionStyleNone;
+        [self setCellViewUI];
         
     }
     return self;
@@ -27,8 +28,6 @@
     [_likeBtn setTitle:[self abouText:_likeBtn withText:model.loveCount]  forState:(UIControlStateNormal)];
     [_commentBtn setTitle:[self abouText:_commentBtn withText:model.commentCount] forState:(UIControlStateNormal)];
     self.tagetId = [NSString stringWithFormat:@"%zi", model.idField];
-    
-    [self setCellViewUI];
 }
 
 #pragma mark - 设置cell的UI
@@ -62,6 +61,8 @@
     }];
     
     [self addSubview:self.line];
+    [self addSubview:self.bottomline];
+
 }
 
 #pragma mark - 观看
@@ -146,6 +147,14 @@
         _line.backgroundColor = [UIColor colorWithHexString:cellBgColor alpha:1];
     }
     return _line;
+}
+
+- (UILabel *)bottomline {
+    if (!_bottomline) {
+        _bottomline = [[UILabel alloc] initWithFrame:CGRectMake(0, 43, SCREEN_WIDTH, 1)];
+        _bottomline.backgroundColor = [UIColor colorWithHexString:cellBgColor alpha:1];
+    }
+    return _bottomline;
 }
 
 @end

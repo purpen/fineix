@@ -90,46 +90,40 @@ static NSString *const URLReleaseFiuScenen = @"/scene_scene/save";
         self.releaseSceneRequest = [FBAPI postWithUrlString:URLReleaseScenen requestDictionary:paramDict delegate:self];
         
         [self.releaseSceneRequest startRequestSuccess:^(FBRequest *request, id result) {
-            NSLog(@"＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝  发布成功：%@", result);
-            [SVProgressHUD showSuccessWithStatus:@"发布成功"];
+            [SVProgressHUD showSuccessWithStatus:@"您的场景发布成功，品味又升级啦"];
             [self dismissViewControllerAnimated:YES completion:nil];
         } failure:^(FBRequest *request, NSError *error) {
-            [SVProgressHUD showErrorWithStatus:[error localizedDescription]];
-            NSLog(@"＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝  发布失败：%@", error);
+            [SVProgressHUD showErrorWithStatus:@"您的场景发布失败，刷新试一下吧"];
         }];
     }
 }
 
 #pragma mark 发布情景
 - (void)networkNewFiuSceneData {
-//    if ([self.lng length] <= 0 || [self.scenceView.title.text isEqualToString:@""] || [self.scenceView.content.text isEqualToString:@""] || [self.addView.location.text isEqualToString:@""]) {
-//        [SVProgressHUD showInfoWithStatus:@"填写未完成"];
-//        
-//    } else {
-//        [SVProgressHUD show];
-//        NSData * imageData = UIImageJPEGRepresentation(self.scenceView.imageView.image, 0.5);
-//        NSString * icon64Str = [imageData base64EncodedStringWithOptions:NSDataBase64Encoding64CharacterLineLength];
-//        NSDictionary * paramDict = @{
-//                                     @"tmp":icon64Str,
-//                                     @"title":self.scenceView.title.text,
-//                                     @"des":self.scenceView.content.text,
-//                                     @"lng":self.lng,
-//                                     @"lat":self.lat,
-//                                     @"address":self.addView.location.text,
-//                                     @"tags":self.tagS,
-//                                     };
-//        self.releaseSceneRequest = [FBAPI postWithUrlString:URLReleaseFiuScenen requestDictionary:paramDict delegate:self];
-//        
-//        [self.releaseSceneRequest startRequestSuccess:^(FBRequest *request, id result) {
-//            NSLog(@"＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝  发布成功：%@", result);
-//            [self dismissViewControllerAnimated:YES completion:nil];
-//            [SVProgressHUD showSuccessWithStatus:@"发布成功"];
-//        } failure:^(FBRequest *request, NSError *error) {
-//            [SVProgressHUD showErrorWithStatus:[error localizedDescription]];
-//            NSLog(@"＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝  发布失败：%@", error);
-//        }];
-//    }
-    
+    if ([self.lng length] <= 0 || [self.scenceView.title.text isEqualToString:@""] || [self.scenceView.content.text isEqualToString:@""] || [self.addView.location.text isEqualToString:@""]) {
+        [SVProgressHUD showInfoWithStatus:@"填写未完成"];
+    } else {
+        [SVProgressHUD show];
+        NSData * imageData = UIImageJPEGRepresentation(self.scenceView.imageView.image, 0.5);
+        NSString * icon64Str = [imageData base64EncodedStringWithOptions:NSDataBase64Encoding64CharacterLineLength];
+        NSDictionary * paramDict = @{
+                                     @"tmp":icon64Str,
+                                     @"title":self.scenceView.title.text,
+                                     @"des":self.scenceView.content.text,
+                                     @"lng":self.lng,
+                                     @"lat":self.lat,
+                                     @"address":self.addView.location.text,
+                                     @"tags":self.tagS,
+                                     };
+        self.releaseSceneRequest = [FBAPI postWithUrlString:URLReleaseFiuScenen requestDictionary:paramDict delegate:self];
+        
+        [self.releaseSceneRequest startRequestSuccess:^(FBRequest *request, id result) {
+            [self dismissViewControllerAnimated:YES completion:nil];
+            [SVProgressHUD showSuccessWithStatus:@"您的情景发布成功，品味又升级啦"];
+        } failure:^(FBRequest *request, NSError *error) {
+            [SVProgressHUD showErrorWithStatus:@"您的情景景发布失败，刷新试一下吧"];
+        }];
+    }
 }
 
 //  所选情景的iD

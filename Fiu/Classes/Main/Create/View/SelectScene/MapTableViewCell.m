@@ -28,7 +28,6 @@
 }
 
 -(void)setUIWithAry:(NSArray *)ary{
-    NSLog(@"位置数组  %@",ary);
     for (NSDictionary *logDict in ary) {
         NSArray *logAry = logDict[@"coordinates"];
         double la = [logAry[1] doubleValue];

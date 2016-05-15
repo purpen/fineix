@@ -24,6 +24,7 @@
 @pro_strong WriteCommentView        *   writeComment;   //  填写评论
 @pro_strong NSString                *   tagetUserId;    //  被回复的人id
 @pro_strong NSString                *   replyCommentId; //  被回复的评论id
+@pro_strong UILabel                 *   promptLab;
 
 /**
  *  0:默认评论场景 ／ 1:回复评论

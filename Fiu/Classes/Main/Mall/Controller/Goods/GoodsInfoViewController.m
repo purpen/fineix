@@ -45,7 +45,6 @@ static NSString *const URLRecommendGoods = @"/scene_product/getlist";
 #pragma mark 商品详情
 - (void)networkGoodsInfoData {
     [SVProgressHUD show];
-    
     self.goodsInfoRequest = [FBAPI getWithUrlString:URLGoodsInfo requestDictionary:@{@"id":self.goodsID} delegate:self];
     [self.goodsInfoRequest startRequestSuccess:^(FBRequest *request, id result) {
         self.goodsInfo = [[GoodsInfoData alloc] initWithDictionary:[result valueForKey:@"data"]];

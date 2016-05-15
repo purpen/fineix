@@ -17,7 +17,7 @@
 static NSString *const URLDeleUserGoods = @"/scene_product/deleted";
 static NSString *const URLUserAddGoods = @"/scene_product/add";
 
-@interface FiltersViewController () <FBFootViewDelegate, FBUserGoodsTagDelegaet> {
+@interface FiltersViewController () <FBFootViewDelegate, FBUserGoodsTagDelegaet, FBStickerContainerDelegate> {
     UserGoodsTag    * goodsTag;
     NSString        * _title;
     NSString        * _price;
@@ -32,6 +32,7 @@ static NSString *const URLUserAddGoods = @"/scene_product/add";
 @pro_strong NSMutableArray         *   goodsIdData;
 @pro_strong NSMutableArray         *   goodsTitleData;
 @pro_strong NSMutableArray         *   goodsPriceData;
+@pro_strong NSMutableArray         *   stickersContainer;
 
 @end
 
@@ -79,7 +80,7 @@ static NSString *const URLUserAddGoods = @"/scene_product/add";
     self.filtersImageView.image = self.filtersImg;
     [self.view addSubview:self.filtersImageView];
     [_filtersImageView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.size.mas_equalTo(CGSizeMake(SCREEN_WIDTH * 0.85, SCREEN_HEIGHT - 100));
+        make.size.mas_equalTo(CGSizeMake(SCREEN_WIDTH, SCREEN_HEIGHT));
         make.top.equalTo(self.view.mas_top).with.offset(50);
         make.centerX.equalTo(self.view);
     }];
@@ -112,10 +113,9 @@ static NSString *const URLUserAddGoods = @"/scene_product/add";
     if (!_footView) {
         _footView = [[FBFootView alloc] init];
         NSArray * titleArr = [[NSArray alloc] initWithObjects:NSLocalizedString(@"marker", nil), NSLocalizedString(@"addUrl", nil), NSLocalizedString(@"filter", nil), nil];
-        _footView.backgroundColor = [UIColor blackColor];
+        _footView.backgroundColor = [UIColor colorWithHexString:@"#000000" alpha:0.7];
         _footView.titleArr = titleArr;
         _footView.titleFontSize = Font_GroupHeader;
-        _footView.btnBgColor = [UIColor blackColor];
         _footView.titleNormalColor = [UIColor whiteColor];
         _footView.titleSeletedColor = [UIColor whiteColor];
         [_footView addFootViewButton];
@@ -202,9 +202,19 @@ static NSString *const URLUserAddGoods = @"/scene_product/add";
 
 #pragma mark - 标记一个产品图片
 - (void)addMarkGoodsImg:(NSString *)imgUrl {
-    FBStickersContainer * sticker = [[FBStickersContainer alloc] initWithFrame:CGRectMake(100, 100, 150, 150)];
+    FBStickersContainer * sticker = [[FBStickersContainer alloc] initWithFrame:CGRectMake(100, 100, 200, 200)];
     [sticker setupSticker:imgUrl];
+    [self.stickersContainer addObject:sticker];
     [self.view addSubview:sticker];
+    
+    for (UserGoodsTag * userTag in self.tagBtnMarr) {
+        [self.view bringSubviewToFront:userTag];
+    }
+}
+
+#pragma mark 删除标记的产品
+- (void)didRemoveStickerContainer:(FBStickersContainer *)container {
+    [self.stickersContainer removeObject:container];
 }
 
 #pragma mark - 编辑产品信息视图
@@ -291,7 +301,6 @@ static NSString *const URLUserAddGoods = @"/scene_product/add";
     [self addBackButton:@"icon_back_white"];
     [self addNextButton];
     [self.nextBtn addTarget:self action:@selector(nextBtnClick) forControlEvents:(UIControlEventTouchUpInside)];
-    
 }
 
 #pragma mark 继续按钮的点击事件
@@ -323,9 +332,11 @@ static NSString *const URLUserAddGoods = @"/scene_product/add";
         NSString * btnOriginX = [originX componentsJoinedByString:@","];
         NSString * btnOriginY = [originY componentsJoinedByString:@","];
         
+        UIImage * goodsImg = [self generateImage:self.filtersImageView];
+        
         ReleaseViewController * releaseVC = [[ReleaseViewController alloc] init];
         releaseVC.locationArr = self.locationArr;
-        releaseVC.scenceView.imageView.image = self.filtersImageView.image;
+        releaseVC.scenceView.imageView.image = goodsImg;
         releaseVC.createType = self.createType;
         releaseVC.fSceneId = self.fSceneId;
         releaseVC.fSceneTitle = self.fSceneTitle;
@@ -338,6 +349,38 @@ static NSString *const URLUserAddGoods = @"/scene_product/add";
 
     }
 }
+
+#pragma mark - 合成图片
+- (UIImage *)generateImage:(UIImageView *)imageView {
+    //  获得一个位图图形上下文
+    CGSize size = imageView.frame.size;
+    UIGraphicsBeginImageContext(size);
+    CGContextRef context = UIGraphicsGetCurrentContext();
+    CGContextSaveGState(context);
+    CGAffineTransform flip = CGAffineTransformMakeScale(1.0, -1.0);
+    CGAffineTransform flipThenShift = CGAffineTransformTranslate(flip,0,-size.height);
+    CGContextConcatCTM(context, flipThenShift);
+    
+    CGContextDrawImage(context, imageView.bounds, imageView.image.CGImage);
+    CGContextRestoreGState(context);
+    for (FBStickersContainer * container in self.stickersContainer) {
+        CGContextSaveGState(context);
+        FBSticker * sticker = [container generateSticker];
+        CGAffineTransform translateToCenter = CGAffineTransformMakeTranslation( sticker.translateCenter.x, sticker.translateCenter.y);
+        CGAffineTransform rotateAfterTranslate = CGAffineTransformRotate(translateToCenter, sticker.rotateAngle);
+        CGContextConcatCTM(context, rotateAfterTranslate);
+        CGContextScaleCTM(context, 1.0, -1.0);
+        CGContextDrawImage(context, CGRectMake(- sticker.size.width/2,- sticker.size.height / 2,sticker.size.width,sticker.size.height), sticker.image.CGImage);
+        CGContextRestoreGState(context);
+    }
+    
+    //  返回绘制的新图形
+    UIImage * newImage = UIGraphicsGetImageFromCurrentImageContext();
+    UIGraphicsEndImageContext();
+    
+    return newImage;
+}
+
 
 #pragma mark - 接收消息通知
 - (void)setNotification {
@@ -390,6 +433,13 @@ static NSString *const URLUserAddGoods = @"/scene_product/add";
         _goodsPriceData = [NSMutableArray array];
     }
     return _goodsPriceData;
+}
+
+- (NSMutableArray *)stickersContainer {
+    if (!_stickersContainer) {
+        _stickersContainer = [NSMutableArray array];
+    }
+    return _stickersContainer;
 }
 
 @end

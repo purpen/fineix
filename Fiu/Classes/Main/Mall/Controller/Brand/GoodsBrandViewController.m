@@ -9,12 +9,18 @@
 #import "GoodsBrandViewController.h"
 #import "GoodsBrandTableViewCell.h"
 #import "BrandInfoData.h"
+#import "GoodsRow.h"
+#import "GoodsTableViewCell.h"
+#import "GoodsInfoViewController.h"
 
 static NSString *const URLBrandInfo = @"/scene_brands/view";
+static NSString *const URLGoodslist = @"/scene_product/getlist";
 
 @interface GoodsBrandViewController ()
 
-@pro_strong BrandInfoData          *    brandInfo;
+@pro_strong BrandInfoData               *   brandInfo;
+@pro_strong NSMutableArray              *   goodsList;
+@pro_strong NSMutableArray              *   goodsIdList;
 
 @end
 
@@ -30,20 +36,92 @@ static NSString *const URLBrandInfo = @"/scene_brands/view";
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self networkBrandInfoData];
+    [self networkBrandGoodsList];
     [self.view addSubview:self.goodsBrandTable];
     [self.goodsBrandTable addSubview:self.titleLab];
 }
 
 #pragma mark - 网络请求
+#pragma mark 品牌详情
 - (void)networkBrandInfoData {
     self.brandRequest = [FBAPI getWithUrlString:URLBrandInfo requestDictionary:@{@"id":self.brandId} delegate:self];
     [self.brandRequest startRequestSuccess:^(FBRequest *request, id result) {
-        NSLog(@"品牌详情%@", result);
         self.brandInfo = [[BrandInfoData alloc] initWithDictionary:[result valueForKey:@"data"]];
         [self.goodsBrandTable reloadData];
         
     } failure:^(FBRequest *request, NSError *error) {
-        NSLog(@"%@", [error localizedDescription]);
+        [SVProgressHUD showErrorWithStatus:[error localizedDescription]];
+    }];
+}
+
+#pragma mark 品牌商品
+- (void)networkBrandGoodsList  {
+    [SVProgressHUD show];
+    self.brandGoodsRequest = [FBAPI getWithUrlString:URLGoodslist requestDictionary:@{@"size":@"8", @"page":@(self.currentpageNum + 1), @"brand_id":self.brandId} delegate:self];
+    [self.brandGoodsRequest startRequestSuccess:^(FBRequest *request, id result) {
+        NSLog(@"＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝ %@", result);
+        NSArray * goodsArr = [[result valueForKey:@"data"] valueForKey:@"rows"];
+        for (NSDictionary * goodsDic in goodsArr) {
+            GoodsRow * goodsModel = [[GoodsRow alloc] initWithDictionary:goodsDic];
+            [self.goodsList addObject:goodsModel];
+            [self.goodsIdList addObject:[NSString stringWithFormat:@"%zi", goodsModel.idField]];
+        }
+        
+        [self.goodsBrandTable reloadData];
+        
+        self.currentpageNum = [[[result valueForKey:@"data"] valueForKey:@"current_page"] integerValue];
+        self.totalPageNum = [[[result valueForKey:@"data"] valueForKey:@"total_page"] integerValue];
+        if (self.totalPageNum > 1) {
+            [self addMJRefresh:self.goodsBrandTable];
+            [self requestIsLastData:self.goodsBrandTable currentPage:self.currentpageNum withTotalPage:self.totalPageNum];
+        }
+        
+        [SVProgressHUD dismiss];
+        
+    } failure:^(FBRequest *request, NSError *error) {
+        [SVProgressHUD showErrorWithStatus:[error localizedDescription]];
+    }];
+
+}
+
+#pragma mark 判断是否为最后一条数据
+- (void)requestIsLastData:(UITableView *)table currentPage:(NSInteger )current withTotalPage:(NSInteger)total {
+    BOOL isLastPage = (current == total);
+    
+    if (!isLastPage) {
+        if (table.mj_footer.state == MJRefreshStateNoMoreData) {
+            [table.mj_footer resetNoMoreData];
+        }
+    } else {
+        table.mj_footer.state = MJRefreshStateNoMoreData;
+        table.mj_footer.hidden = true;
+    }
+    if (current == total == 1) {
+        table.mj_footer.state = MJRefreshStateNoMoreData;
+        table.mj_footer.hidden = true;
+    }
+    if ([table.mj_header isRefreshing]) {
+        [table.mj_header endRefreshing];
+    }
+    if ([table.mj_footer isRefreshing]) {
+        if (isLastPage) {
+            [table.mj_footer endRefreshingWithNoMoreData];
+        } else  {
+            [table.mj_footer endRefreshing];
+        }
+    }
+    [SVProgressHUD dismiss];
+}
+
+#pragma mark 上拉加载
+- (void)addMJRefresh:(UITableView *)table {
+    table.mj_footer = [MJRefreshAutoNormalFooter footerWithRefreshingBlock:^{
+        if (self.currentpageNum < self.totalPageNum) {
+            [self networkBrandGoodsList];
+            
+        } else {
+            [table.mj_footer endRefreshing];
+        }
     }];
 }
 
@@ -68,8 +146,8 @@ static NSString *const URLBrandInfo = @"/scene_brands/view";
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     if (section == 0) {
         return 1;
-    } else {
-        return 5;
+    } else  {
+        return self.goodsList.count;
     }
     return 0;
 }
@@ -86,12 +164,12 @@ static NSString *const URLBrandInfo = @"/scene_brands/view";
         return cell;
     
     } else {
-        static NSString * brandGoodsListCellId = @"BrandGoodsListCellId";
-        UITableViewCell * cell = [tableView dequeueReusableCellWithIdentifier:brandGoodsListCellId];
+        static NSString * brandGoodsCellId = @"BrandGoodsCellId";
+        GoodsTableViewCell * cell = [tableView dequeueReusableCellWithIdentifier:brandGoodsCellId];
         if (!cell) {
-            cell = [[UITableViewCell alloc] initWithStyle:(UITableViewCellStyleDefault) reuseIdentifier:brandGoodsListCellId];
+            cell = [[GoodsTableViewCell alloc] initWithStyle:(UITableViewCellStyleDefault) reuseIdentifier:brandGoodsCellId];
         }
-        cell.textLabel.text = [NSString stringWithFormat:@"商品 %zi", indexPath.row];
+        [cell setGoodsData:self.goodsList[indexPath.row]];
         return cell;
     }
     return nil;
@@ -103,19 +181,18 @@ static NSString *const URLBrandInfo = @"/scene_brands/view";
         [cell getContentCellHeight:self.brandInfo.des];
         return  cell.cellHeight;
     } else {
-        return 266.5;
+        return 210;
     }
     return 0;
 }
 
-- (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section {
-    return 0.01;
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    if (indexPath.section == 1) {
+        GoodsInfoViewController * goodsInfoVC = [[GoodsInfoViewController alloc] init];
+        goodsInfoVC.goodsID = self.goodsIdList[indexPath.row];
+        [self.navigationController pushViewController:goodsInfoVC animated:YES];
+    }
 }
-
-- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
-    return 0.01;
-}
-
 #pragma mark - 设置Nav
 - (void)setNavigationViewUI {
     [[UIApplication sharedApplication] setStatusBarHidden:NO withAnimation:(UIStatusBarAnimationSlide)];
@@ -147,6 +224,21 @@ static NSString *const URLBrandInfo = @"/scene_brands/view";
         _titleLab.textAlignment = NSTextAlignmentCenter;
     }
     return _titleLab;
+}
+
+#pragma mark - 
+- (NSMutableArray *)goodsList {
+    if (!_goodsList) {
+        _goodsList = [NSMutableArray array];
+    }
+    return _goodsList;
+}
+
+- (NSMutableArray *)goodsIdList {
+    if (!_goodsIdList) {
+        _goodsIdList = [NSMutableArray array];
+    }
+    return _goodsIdList;
 }
 
 

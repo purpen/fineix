@@ -32,8 +32,6 @@ const static NSInteger  peopleBtnTag = 64;
             [self.userIdMarr addObject:[NSString stringWithFormat:@"%zi", row.user.userId]];
         }
         
-        [self.subviews makeObjectsPerformSelector:@selector(removeFromSuperview)];
-        
         [self addLikePeopleHeader:model image:self.imgMarr];
         
         CGFloat num = model.count;
@@ -52,6 +50,10 @@ const static NSInteger  peopleBtnTag = 64;
 
 #pragma mark - 加载用户的头像
 - (void)addLikePeopleHeader:(NSArray *)people image:(NSMutableArray *)imgUrl {
+    if (people.count > 0) {
+        [self.subviews makeObjectsPerformSelector:@selector(removeFromSuperview)];
+    }
+    
     CGFloat btnW = 0;
     CGFloat btnH = 15;
     
@@ -92,7 +94,7 @@ const static NSInteger  peopleBtnTag = 64;
 - (void)peopleBtnClick:(UIButton *)button {
     HomePageViewController * peopleHomeVC = [[HomePageViewController alloc] init];
     peopleHomeVC.isMySelf = NO;
-    peopleHomeVC.type = @1;
+    peopleHomeVC.type = @2;
     peopleHomeVC.userId = self.userIdMarr[button.tag - peopleBtnTag];
     [self.nav pushViewController:peopleHomeVC animated:YES];
 }
@@ -109,7 +111,10 @@ const static NSInteger  peopleBtnTag = 64;
 
 #pragma mark - 获取高度
 - (void)getCellHeight:(NSArray *)people {
-    if (people.count * 45 < SCREEN_WIDTH) {
+    if (people.count == 0) {
+        self.cellHeight = 0.01f;
+        
+    } else if (people.count * 45 < SCREEN_WIDTH) {
         self.cellHeight = 60;
     } else if (people.count * 45 > SCREEN_WIDTH) {
         self.cellHeight = 100;

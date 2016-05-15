@@ -8,6 +8,7 @@
 
 #import "MallViewController.h"
 #import "MallMenuTableViewCell.h"
+#import "FiuPeopleTableViewCell.h"
 #import "FiuTagTableViewCell.h"
 #import "SearchViewController.h"
 #import "GoodsInfoViewController.h"
@@ -21,14 +22,16 @@ static NSString *const URLTagS = @"/scene_tags/getlist";
 static NSString *const URLCategoryList = @"/category/getlist";
 static NSString *const URLFiuGoods = @"/scene_product/getlist";
 static NSString *const URLMallSlide = @"/gateway/slide";
+static NSString *const URLFiuBrand = @"/scene_brands/getlist";
 
-@interface MallViewController()
+@interface MallViewController ()
 
 @pro_strong NSMutableArray              *   tagsList;
 @pro_strong NSMutableArray              *   categoryList;
 @pro_strong NSMutableArray              *   goodsList;
 @pro_strong NSMutableArray              *   goodsIdList;
 @pro_strong NSMutableArray              *   rollList;
+@pro_strong NSMutableArray              *   brandList;
 
 @end
 
@@ -45,6 +48,7 @@ static NSString *const URLMallSlide = @"/gateway/slide";
     [super viewDidLoad];
     
     [self networkRollImgData];
+    [self networkFiuPeopleData];
     [self networkTagsListData];
     [self networkCategoryListData];
     [self networkFiuGoodsData];
@@ -66,6 +70,18 @@ static NSString *const URLMallSlide = @"/gateway/slide";
         
     } failure:^(FBRequest *request, NSError *error) {
         NSLog(@"%@", [error localizedDescription]);
+    }];
+}
+
+#pragma mark 最Fiu品牌
+- (void)networkFiuPeopleData {
+    self.fiuBrandRequest = [FBAPI getWithUrlString:URLFiuBrand requestDictionary:@{@"page":@"1", @"size":@"50", @"sort":@"1"} delegate:self];
+    [self.fiuBrandRequest startRequestSuccess:^(FBRequest *request, id result) {
+        self.brandList = [NSMutableArray arrayWithArray:[[result valueForKey:@"data"] valueForKey:@"rows"]];
+        [self.mallTableView reloadData];
+        
+    } failure:^(FBRequest *request, NSError *error) {
+        [SVProgressHUD showErrorWithStatus:[error localizedDescription]];
     }];
 }
 
@@ -107,7 +123,6 @@ static NSString *const URLMallSlide = @"/gateway/slide";
     self.fiuGoodsRequest = [FBAPI getWithUrlString:URLFiuGoods requestDictionary:@{@"size":@"8", @"page":@(self.currentpageNum + 1), @"fine":@"1"} delegate:self];
     [self.fiuGoodsRequest startRequestSuccess:^(FBRequest *request, id result) {
         [self setMallViewUI];
-        
         NSArray * goodsArr = [[result valueForKey:@"data"] valueForKey:@"rows"];
         for (NSDictionary * goodsDic in goodsArr) {
             GoodsRow * goodsModel = [[GoodsRow alloc] initWithDictionary:goodsDic];
@@ -218,10 +233,12 @@ static NSString *const URLMallSlide = @"/gateway/slide";
     if (indexPath.section == 0) {
         if (indexPath.row == 0) {
             static NSString * mallBrandCellId = @"mallBrandCellId";
-            UITableViewCell * cell = [tableView dequeueReusableCellWithIdentifier:mallBrandCellId];
+            FiuPeopleTableViewCell * cell = [tableView dequeueReusableCellWithIdentifier:mallBrandCellId];
             if (!cell) {
-                cell = [[UITableViewCell alloc] initWithStyle:(UITableViewCellStyleDefault) reuseIdentifier:mallBrandCellId];
+                cell = [[FiuPeopleTableViewCell alloc] initWithStyle:(UITableViewCellStyleDefault) reuseIdentifier:mallBrandCellId];
             }
+            cell.nav = self.navigationController;
+            [cell setFiuBrandData:self.brandList withType:1];
             return cell;
             
         } else if (indexPath.row == 1) {

@@ -81,11 +81,17 @@
     if (!_brandBgImg) {
         _brandBgImg = [[UIImageView alloc] init];
         _brandBgImg.contentMode = UIViewContentModeScaleAspectFill;
-        
-        UIView * view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 210)];
-        view.backgroundColor = [UIColor colorWithHexString:@"#000000" alpha:.3];
-        
+
+        UIView * view = [[UIView alloc] initWithFrame:CGRectMake(0, -50, SCREEN_WIDTH, 260)];
+        view.backgroundColor = [UIColor colorWithHexString:@"#FFFFFF" alpha:.1];
         [_brandBgImg addSubview:view];
+        
+        //  毛玻璃效果
+        UIBlurEffect * blurEffect = [UIBlurEffect effectWithStyle:UIBlurEffectStyleLight];
+        UIVisualEffectView * effectView = [[UIVisualEffectView alloc] initWithEffect:blurEffect];
+        effectView.frame = view.bounds;
+        effectView.alpha = .5f;
+        [view addSubview:effectView];
     }
     return _brandBgImg;
 }
@@ -94,6 +100,7 @@
 - (UIImageView *)brandImg {
     if (!_brandImg) {
         _brandImg = [[UIImageView alloc] init];
+        _brandImg.contentMode = UIViewContentModeScaleAspectFill;
         _brandImg.layer.cornerRadius = 75/2;
         _brandImg.layer.masksToBounds = YES;
     }

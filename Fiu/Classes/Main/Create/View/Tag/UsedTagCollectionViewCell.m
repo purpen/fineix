@@ -17,6 +17,7 @@
         self.layer.cornerRadius = 4;
         self.layer.borderWidth = 1.0f;
         self.layer.borderColor = [UIColor colorWithHexString:@"#979797" alpha:.5].CGColor;
+        self.backgroundColor = [UIColor whiteColor];
         [self addSubview:self.tagLab];
         [_tagLab mas_makeConstraints:^(MASConstraintMaker *make) {
             make.centerX.equalTo(self);

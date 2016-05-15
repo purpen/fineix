@@ -62,10 +62,9 @@ static NSString *const URLFSceneList = @"/scene_scene/";
     self.fSceneRequest = [FBAPI getWithUrlString:URLFSceneList requestDictionary:@{@"lng":@(longitude), @"lat":@(latitude), @"dis":@(5000), @"page":@"1", @"size":@"3"} delegate:self];
     [self.fSceneRequest startRequestSuccess:^(FBRequest *request, id result) {
         [self setSelectFSceneVcUI];
-        NSLog(@"附近的情景  %@",result);
         NSArray * dataArr = [[result valueForKey:@"data"] valueForKey:@"rows"];
         for (NSDictionary * dataDic in dataArr) {
-            [self.idMarr addObject:[dataDic valueForKey:@"_id"]];
+            [self.idMarr addObject:[NSString stringWithFormat:@"%@", [dataDic valueForKey:@"_id"]]];
             [self.titleMarr addObject:[dataDic valueForKey:@"title"]];
             [self.addressMarr addObject:[dataDic valueForKey:@"address"]];
             [self.locationMarr addObject:[dataDic valueForKey:@"location"]];
@@ -244,21 +243,22 @@ static NSString *const URLFSceneList = @"/scene_scene/";
 
 #pragma mark - 查看全部附近的情景
 - (void)lookNearbyFScene {
-    [SVProgressHUD showInfoWithStatus:@"跳转到情景地图的大头针视图"];
     AllNearbyScenarioViewController *vc = [[AllNearbyScenarioViewController alloc] init];
     [self.navigationController pushViewController:vc animated:YES];
 }
 
 #pragma mark - 选中附近的情景
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    NSArray * array = [tableView visibleCells];
-    for (UITableViewCell * cell in array) {
-        [cell setAccessoryType:UITableViewCellAccessoryNone];
+//    NSArray * array = [tableView visibleCells];
+//    for (UITableViewCell * cell in array) {
+//        [cell setAccessoryType:UITableViewCellAccessoryNone];
+//    }
+//    UITableViewCell * cell = [self.selectTable cellForRowAtIndexPath:indexPath];
+//    [cell setAccessoryType:UITableViewCellAccessoryCheckmark];
+    if (indexPath.section == 1) {
+        [self.navigationController popViewControllerAnimated:YES];
+        self.getIdxAndTitltBlock(self.idMarr[indexPath.row], self.titleMarr[indexPath.row]);
     }
-    UITableViewCell * cell = [self.selectTable cellForRowAtIndexPath:indexPath];
-    [cell setAccessoryType:UITableViewCellAccessoryCheckmark];
-    
-    NSLog(@" 选中附近的情景： id－－－%@  标题 ＝＝＝ %@", self.idMarr[indexPath.row], self.titleMarr[indexPath.row]);
 }
 
 #pragma mark - 获取当前位置坐标

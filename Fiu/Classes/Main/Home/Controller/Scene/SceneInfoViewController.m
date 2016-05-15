@@ -27,7 +27,7 @@ static NSString *const URLCommentList = @"/comment/getlist";
 static NSString *const URLLikeScenePeople = @"/favorite";
 static NSString *const URLLikeScene = @"/favorite/ajax_sight_love";
 static NSString *const URLCancelLike = @"/favorite/ajax_cancel_sight_love";
-static NSString *const URLSceneGoods = @"/scene_product/getlist";
+static NSString *const URLSceneGoods = @"/sight_and_product/getlist";
 
 @interface SceneInfoViewController ()
 
@@ -73,8 +73,6 @@ static NSString *const URLSceneGoods = @"/scene_product/getlist";
     [SVProgressHUD show];
     self.sceneInfoRequest = [FBAPI getWithUrlString:URLSceneInfo requestDictionary:@{@"id":self.sceneId} delegate:self];
     [self.sceneInfoRequest startRequestSuccess:^(FBRequest *request, id result) {
-        [self setSceneInfoViewUI];
-        
         self.sceneInfoModel = [[SceneInfoData alloc] initWithDictionary:[result valueForKey:@"data"]];
         if ([[[result valueForKey:@"data"] valueForKey:@"is_love"] integerValue] == 0) {
             self.likeScene.likeBtn.selected = NO;
@@ -90,9 +88,9 @@ static NSString *const URLSceneGoods = @"/scene_product/getlist";
             goodsIds = self.goodsId[0];
         }
         
-        [self networkSceneGoodsData:goodsIds];
+        [self networkSceneGoodsData:self.sceneId];
+        [self setSceneInfoViewUI];
         
-        [self.sceneTableView reloadData];
         [SVProgressHUD dismiss];
         
     } failure:^(FBRequest *request, NSError *error) {
@@ -151,8 +149,9 @@ static NSString *const URLSceneGoods = @"/scene_product/getlist";
 
 #pragma mark 此场景中的商品
 - (void)networkSceneGoodsData:(NSString *)goodsIds {
-    self.sceneGoodsRequest = [FBAPI getWithUrlString:URLSceneGoods requestDictionary:@{@"ids":goodsIds} delegate:self];
+    self.sceneGoodsRequest = [FBAPI getWithUrlString:URLSceneGoods requestDictionary:@{@"sight_id":goodsIds} delegate:self];
     [self.sceneGoodsRequest startRequestSuccess:^(FBRequest *request, id result) {
+//        NSLog(@"＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝ 场景中的商品 %@", result);
         NSArray * goodsArr = [[result valueForKey:@"data"] valueForKey:@"rows"];
         NSMutableArray * categoryTagIds = [NSMutableArray array];
         for (NSDictionary * goodsDic in goodsArr) {

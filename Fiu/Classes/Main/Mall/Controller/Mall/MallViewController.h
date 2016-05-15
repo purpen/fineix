@@ -17,6 +17,7 @@
 @pro_strong FBRequest               *   tagsRequest;
 @pro_strong FBRequest               *   categoryRequest;
 @pro_strong FBRequest               *   fiuGoodsRequest;
+@pro_strong FBRequest               *   fiuBrandRequest;
 @pro_assign NSInteger                   currentpageNum;
 @pro_assign NSInteger                   totalPageNum;
 
