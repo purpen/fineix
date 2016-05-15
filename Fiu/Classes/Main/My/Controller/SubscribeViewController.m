@@ -31,7 +31,6 @@ static NSString *const URLAllFiuSceneList = @"/scene_scene/";
     [[UIApplication sharedApplication] setStatusBarHidden:NO withAnimation:(UIStatusBarAnimationSlide)];
     [self setNavigationViewUI];
     
-    self.currentpageNum = 0;
     //[self networkAllFiuSceneList];
     [self requestDataForOderList];
     
@@ -58,7 +57,7 @@ static NSString *const URLAllFiuSceneList = @"/scene_scene/";
 {
     [SVProgressHUD show];
     UserInfoEntity *entity = [UserInfoEntity defaultUserInfoEntity];
-    self.allSceneListRequest = [FBAPI getWithUrlString:@"/favorite" requestDictionary:@{@"size":@"10", @"page":@(self.currentpageNum + 1),@"user_id":entity.userId,@"type":@"scene",@"event":@"subscription"} delegate:self];
+    self.allSceneListRequest = [FBAPI getWithUrlString:@"/favorite" requestDictionary:@{@"size":@"10", @"page":@(_currentPageNumber + 1),@"user_id":entity.userId,@"type":@"scene",@"event":@"subscription"} delegate:self];
     
     [self.allSceneListRequest startRequestSuccess:^(FBRequest *request, id result) {
         NSLog(@"订阅的情景    %@",result);
