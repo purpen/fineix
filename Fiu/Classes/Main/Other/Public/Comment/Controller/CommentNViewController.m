@@ -46,10 +46,14 @@ static NSString *const URLSendSceneComment = @"/comment/ajax_comment";
     [SVProgressHUD show];
     self.sceneCommentRequest = [FBAPI getWithUrlString:URLSceneComment requestDictionary:@{@"target_id":self.targetId, @"page":@(self.currentpageNum + 1), @"type":@"12", @"size":@"12"} delegate:self];
     [self.sceneCommentRequest startRequestSuccess:^(FBRequest *request, id result) {
+//        NSLog(@"＝＝＝＝＝＝＝＝＝＝ 评论列表%@", result);
         NSArray * sceneArr = [[result valueForKey:@"data"] valueForKey:@"rows"];
         for (NSDictionary * sceneDic in sceneArr) {
             CommentRow * commentModel = [[CommentRow alloc] initWithDictionary:sceneDic];
             [self.commentListMarr addObject:commentModel];
+        }
+        if (self.commentListMarr.count == 0) {
+            self.commentTabel.tableHeaderView = self.promptLab;
         }
         [self.targetUserId addObjectsFromArray:[[[result valueForKey:@"data"] valueForKey:@"rows"] valueForKey:@"user_id"]];
         [self.replyId addObjectsFromArray:[[[result valueForKey:@"data"] valueForKey:@"rows"] valueForKey:@"_id"]];
@@ -64,7 +68,6 @@ static NSString *const URLSendSceneComment = @"/comment/ajax_comment";
     }];
 }
 
-
 #pragma mark 发布评论
 - (void)networkSendCommentDataWithTargetUserId:(NSString *)targetUserId withReplyId:(NSString *)replyId withIsReply:(NSString *)isReply {
     /**
@@ -78,6 +81,7 @@ static NSString *const URLSendSceneComment = @"/comment/ajax_comment";
         if ([isReply isEqualToString:@"1"]) {
             self.replyCommentRequest = [FBAPI postWithUrlString:URLSendSceneComment requestDictionary:@{@"from_site":@"3", @"type":@"12", @"target_id":self.targetId, @"content":self.writeComment.writeText.text ,@"is_reply":isReply,@"reply_user_id":targetUserId, @"reply_id":replyId} delegate:self];
             [self.replyCommentRequest startRequestSuccess:^(FBRequest *request, id result) {
+//                NSLog(@"－－－－－－－－－－－－－ 回复的评论%@", result);
                 [self.writeComment.writeText resignFirstResponder];
                 self.writeComment.writeText.text = @"";
                 self.isReply = 0;
@@ -92,9 +96,14 @@ static NSString *const URLSendSceneComment = @"/comment/ajax_comment";
         } else if ([isReply isEqualToString:@"0"]) {
             self.sendCommentRequest = [FBAPI postWithUrlString:URLSendSceneComment requestDictionary:@{@"from_site":@"3", @"type":@"12", @"target_id":self.targetId, @"content":self.writeComment.writeText.text ,@"is_reply":isReply} delegate:self];
             [self.sendCommentRequest startRequestSuccess:^(FBRequest *request, id result) {
+                NSLog(@"＝＝＝＝＝＝＝＝发送的评论%@", result);
+                CommentRow * commentModel = [[CommentRow alloc] initWithDictionary:[result valueForKey:@"data"]];
+                [self.commentListMarr addObject:commentModel];
+                [self.commentTabel reloadData];
+//                [self.commentTabel.mj_header beginRefreshing];
+                [self.commentTabel scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:self.commentListMarr.count - 1 inSection:0] atScrollPosition:UITableViewScrollPositionBottom animated:YES];
                 [self.writeComment.writeText resignFirstResponder];
                 self.writeComment.writeText.text = @"";
-                [self.commentTabel.mj_header beginRefreshing];
                 [SVProgressHUD showSuccessWithStatus:@"评论成功"];
                 
             } failure:^(FBRequest *request, NSError *error) {
@@ -160,6 +169,18 @@ static NSString *const URLSendSceneComment = @"/comment/ajax_comment";
     }];
 }
 
+#pragma mark - 没有评论的提示
+- (UILabel *)promptLab {
+    if (!_promptLab) {
+        _promptLab = [[UILabel alloc] initWithFrame:CGRectMake(0, 100, SCREEN_WIDTH, 100)];
+        _promptLab.text = @"你可是第一个看到它的人，快来评论一下吧";
+        _promptLab.textColor = [UIColor colorWithHexString:titleColor];
+        _promptLab.font = [UIFont systemFontOfSize:13];
+        _promptLab.textAlignment = NSTextAlignmentCenter;
+    }
+    return _promptLab;
+}
+
 #pragma mark 填写评论
 - (WriteCommentView *)writeComment {
     if (!_writeComment) {
@@ -221,6 +242,12 @@ static NSString *const URLSendSceneComment = @"/comment/ajax_comment";
     self.view.backgroundColor = [UIColor whiteColor];
     self.navViewTitle.text = NSLocalizedString(@"CommentVcTitle", nil);
     [[UIApplication sharedApplication] setStatusBarHidden:NO withAnimation:(UIStatusBarAnimationSlide)];
+}
+
+- (void)viewWillDisappear:(BOOL)animated {
+    [super viewWillDisappear:animated];
+    
+    [SVProgressHUD dismiss];
 }
 
 #pragma mark -

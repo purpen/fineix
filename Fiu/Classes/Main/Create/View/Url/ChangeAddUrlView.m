@@ -173,6 +173,7 @@
         _goodsPrice.borderStyle = UITextBorderStyleRoundedRect;
         _goodsPrice.font = [UIFont systemFontOfSize:14];
         _goodsPrice.textColor = [UIColor colorWithHexString:titleColor];
+        _goodsPrice.keyboardType = UIKeyboardTypeNumberPad;
     }
     return _goodsPrice;
 }

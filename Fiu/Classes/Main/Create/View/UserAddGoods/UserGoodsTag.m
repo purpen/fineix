@@ -172,14 +172,14 @@
 #pragma mark - 动画
 -(void)animationTimerDidFired{
     [UIView animateWithDuration:1 animations:^{
-        viewTapDot.transform = CGAffineTransformMakeScale(1.2,1.2);
+        viewTapDot.transform = CGAffineTransformMakeScale(1.5,1.5);
     } completion:^(BOOL finished) {
         [UIView animateWithDuration:1 animations:^{
             viewTapDot.transform = CGAffineTransformIdentity;
         }completion:^(BOOL finished) {
-            viewSpread.alpha=1;
+            viewSpread.alpha = 1;
             [UIView animateWithDuration:1 animations:^{
-                viewSpread.alpha=0;
+                viewSpread.alpha = 0;
                 viewSpread.transform = CGAffineTransformMakeScale(8,8);
             }completion:^(BOOL finished) {
                 viewSpread.transform = CGAffineTransformIdentity;

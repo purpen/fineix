@@ -8,23 +8,27 @@
 
 #import "UserInfoTableViewCell.h"
 #import "HomePageViewController.h"
+#import "UIButton+WebCache.h"
 
 @implementation UserInfoTableViewCell
 
 - (instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier {
     self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
     if (self) {
-    
-        [self addSubview:self.bgImage];
         
         self.selectionStyle = UITableViewCellSelectionStyleNone;
+        self.backgroundColor = [UIColor whiteColor];
+
+        [self setCellUI];
+        
     }
     return self;
 }
 
 - (void)setFiuSceneInfoData:(FiuSceneInfoData *)model {
-    [self.bgImage downloadImage:model.coverUrl place:[UIImage imageNamed:@""]];
-    [self.userHeader downloadImage:model.userInfo.avatarUrl place:[UIImage imageNamed:@""]];
+    self.userId = [NSString stringWithFormat:@"%zi", model.userInfo.userId];
+    [self.bgImage sd_setImageWithURL:[NSURL URLWithString:model.coverUrl] forState:(UIControlStateNormal)];
+    [self.userHeader sd_setImageWithURL:[NSURL URLWithString:model.userInfo.avatarUrl] forState:(UIControlStateNormal)];
     self.userName.text = model.userInfo.nickname;
     self.userProfile.text = model.userInfo.summary;
     
@@ -53,16 +57,16 @@
     } else {
         self.goodNum.text = [NSString stringWithFormat:@"%zi人订阅", model.subscriptionCount];
     }
-
 }
 
 #pragma mark -
 - (void)setSceneInfoData:(SceneInfoData *)model {
-    [self.bgImage downloadImage:model.coverUrl place:[UIImage imageNamed:@""]];
+    self.userId = [NSString stringWithFormat:@"%zi", model.userInfo.userId];
+    [self.bgImage sd_setImageWithURL:[NSURL URLWithString:model.coverUrl] forState:(UIControlStateNormal)];
     [self titleTextStyle:[NSString stringWithFormat:@"%@", model.title] withBgColor:[UIColor colorWithPatternImage:[UIImage imageNamed:@"titleBg"]]];
     self.whereScene.text = [self abouText:self.whereScene withText:model.sceneTitle];
     self.city.text = [self abouText:self.city withText:model.address];
-    [self.userHeader downloadImage:model.userInfo.avatarUrl place:[UIImage imageNamed:@""]];
+    [self.userHeader sd_setImageWithURL:[NSURL URLWithString:model.userInfo.avatarUrl] forState:(UIControlStateNormal)];
     self.userName.text = model.userInfo.nickname;
     //  是否是达人
     if (model.userInfo.isExpert == 1) {
@@ -79,14 +83,115 @@
         self.goodNum.text = [NSString stringWithFormat:@"%zi人赞过", model.loveCount];
     }
     
+    self.tagDataMarr = [NSMutableArray arrayWithArray:model.product];
+    
+    [self setUserTagBtn];
+}
+
+#pragma mark - 
+- (void)setCellUI {
+    [self addSubview:self.bgImage];
+    
+    [self addSubview:self.userView];
+    
+    [self addSubview:self.userLeftView];
+    [_userLeftView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.size.mas_equalTo(CGSizeMake(SCREEN_WIDTH - 135.5 ,35));
+        make.bottom.equalTo(_userView.mas_bottom).with.offset(-10);
+        make.left.equalTo(_userView.mas_left).with.offset(0);
+    }];
+    
+    [self addSubview:self.userRightView];
+    [_userRightView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.size.mas_equalTo(CGSizeMake(46 ,35));
+        make.centerY.equalTo(_userLeftView);
+        make.right.equalTo(_userView.mas_right).with.offset(0);
+    }];
+    
+    [self addSubview:self.userHeader];
+    [_userHeader mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.size.mas_equalTo(CGSizeMake(30, 30));
+        make.centerY.equalTo(_userLeftView);
+        make.left.equalTo(_userLeftView.mas_left).with.offset(15);
+    }];
+    
+    [self addSubview:self.userName];
+    [_userName mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.size.mas_equalTo(CGSizeMake(150, 15));
+        make.top.equalTo(_userHeader.mas_top).with.offset(0);
+        make.left.equalTo(_userHeader.mas_right).with.offset(10);
+    }];
+    
+    [self addSubview:self.userProfile];
+    [_userProfile mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.size.mas_equalTo(CGSizeMake(150, 15));
+        make.bottom.equalTo(_userHeader.mas_bottom).with.offset(0);
+        make.left.equalTo(_userHeader.mas_right).with.offset(10);
+    }];
+    
+    [self addSubview:self.goodBtn];
+    [_goodBtn mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.size.mas_equalTo(CGSizeMake(89.5 ,46));
+        make.bottom.equalTo(_userLeftView.mas_bottom).with.offset(0);
+        make.left.equalTo(_userLeftView.mas_right).with.offset(0);
+    }];
+    
+    [self addSubview:self.city];
+    [_city mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.size.mas_equalTo(CGSizeMake(75, 15));
+        make.bottom.equalTo(_userLeftView.mas_top).with.offset(-10);
+        make.left.equalTo(_userView.mas_left).with.offset(40);
+    }];
+    
+    [self addSubview:self.whereScene];
+    [_whereScene mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.size.mas_equalTo(CGSizeMake(130, 15));
+        make.bottom.equalTo(_city.mas_top).with.offset(-5);
+        make.left.equalTo(_userView.mas_left).with.offset(40);
+    }];
+    
+    [self addSubview:self.time];
+    [_time mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.size.mas_equalTo(CGSizeMake(150, 15));
+        make.bottom.equalTo(_city.mas_top).with.offset(-5);
+        make.left.equalTo(_whereScene.mas_right).with.offset(0);
+    }];
+    
+    [self addSubview:self.titleText];
+    [_titleText mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.size.mas_equalTo(CGSizeMake(SCREEN_WIDTH - 40, 56));
+        make.bottom.equalTo(_time.mas_top).with.offset(-5);
+        make.left.equalTo(_userView.mas_left).with.offset(20);
+    }];
+}
+
+#pragma mark - 创建用户添加商品按钮
+- (void)setUserTagBtn {
+    self.userTagMarr = [NSMutableArray array];
+    
+    for (NSInteger idx = 0; idx < self.tagDataMarr.count; ++ idx) {
+        CGFloat btnX = [[self.tagDataMarr[idx] valueForKey:@"x"] floatValue];
+        CGFloat btnY = [[self.tagDataMarr[idx] valueForKey:@"y"] floatValue];
+        NSString * title = [self.tagDataMarr[idx] valueForKey:@"title"];
+        NSString * price = [NSString stringWithFormat:@"￥%@", [self.tagDataMarr[idx] valueForKey:@"price"]];
+        UserGoodsTag * userTag = [[UserGoodsTag alloc] initWithFrame:CGRectMake(btnX, btnY, 175, 32)];
+        userTag.dele.hidden = YES;
+        userTag.title.text = title;
+        userTag.price.text = price;
+        userTag.title.hidden = YES;
+        userTag.price.hidden = YES;
+        [userTag setImage:[UIImage imageNamed:@""] forState:(UIControlStateNormal)];
+        [self.userTagMarr addObject:userTag];
+        [self addSubview:userTag];
+    }
 }
 
 #pragma mark - 场景图
-- (UIImageView *)bgImage {
+- (UIButton *)bgImage {
     if (!_bgImage) {
-        _bgImage = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT)];
+        _bgImage = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT)];
         _bgImage.contentMode = UIViewContentModeScaleAspectFill;
-        
+        [_bgImage addTarget:self action:@selector(showUserTag:) forControlEvents:(UIControlEventTouchUpInside)];
         //  添加渐变层
         CAGradientLayer * shadow = [CAGradientLayer layer];
         shadow.startPoint = CGPointMake(0, 0);
@@ -96,66 +201,35 @@
         shadow.locations = @[@(0.5f), @(1.5f)];
         shadow.frame = _bgImage.bounds;
         [_bgImage.layer addSublayer:shadow];
-        
-        [_bgImage addSubview:self.userView];
+        _bgImage.selected = NO;
     }
     return _bgImage;
+}
+
+#pragma mark 显示／隐藏标签
+- (void)showUserTag:(UIButton *)button {
+    if (button.selected == YES) {
+        button.selected = NO;
+        for (UserGoodsTag * goodsTag in self.userTagMarr) {
+            goodsTag.title.hidden = NO;
+            goodsTag.price.hidden = NO;
+            [goodsTag setImage:[UIImage imageNamed:@"user_goodsTag_left"] forState:(UIControlStateNormal)];
+        }
+        
+    } else if (button.selected == NO) {
+        button.selected = YES;
+        for (UserGoodsTag * goodsTag in self.userTagMarr) {
+            goodsTag.title.hidden = YES;
+            goodsTag.price.hidden = YES;
+            [goodsTag setImage:[UIImage imageNamed:@""] forState:(UIControlStateNormal)];
+        }
+    }
 }
 
 #pragma mark - 用户信息
 - (UIView *)userView {
     if (!_userView) {
         _userView = [[UIView alloc] initWithFrame:CGRectMake(0, SCREEN_HEIGHT - 170, SCREEN_WIDTH, 170)];
-        
-        [_userView addSubview:self.userLeftView];
-        [_userLeftView mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.size.mas_equalTo(CGSizeMake(SCREEN_WIDTH - 135.5 ,35));
-            make.bottom.equalTo(_userView.mas_bottom).with.offset(-10);
-            make.left.equalTo(_userView.mas_left).with.offset(0);
-        }];
-        
-        [_userView addSubview:self.userRightView];
-        [_userRightView mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.size.mas_equalTo(CGSizeMake(46 ,35));
-            make.centerY.equalTo(_userLeftView);
-            make.right.equalTo(_userView.mas_right).with.offset(0);
-        }];
-        
-        [_userView addSubview:self.goodBtn];
-        [_goodBtn mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.size.mas_equalTo(CGSizeMake(89.5 ,46));
-            make.bottom.equalTo(_userLeftView.mas_bottom).with.offset(0);
-            make.left.equalTo(_userLeftView.mas_right).with.offset(0);
-        }];
-        
-        [_userView addSubview:self.city];
-        [_city mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.size.mas_equalTo(CGSizeMake(75, 15));
-            make.bottom.equalTo(_userLeftView.mas_top).with.offset(-10);
-            make.left.equalTo(_userView.mas_left).with.offset(40);
-        }];
-        
-        [_userView addSubview:self.whereScene];
-        [_whereScene mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.size.mas_equalTo(CGSizeMake(130, 15));
-            make.bottom.equalTo(_city.mas_top).with.offset(-5);
-            make.left.equalTo(_userView.mas_left).with.offset(40);
-        }];
-        
-        [_userView addSubview:self.time];
-        [_time mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.size.mas_equalTo(CGSizeMake(150, 15));
-            make.bottom.equalTo(_city.mas_top).with.offset(-5);
-            make.left.equalTo(_whereScene.mas_right).with.offset(0);
-        }];
-        
-        [_userView addSubview:self.titleText];
-        [_titleText mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.size.mas_equalTo(CGSizeMake(SCREEN_WIDTH - 40, 56));
-            make.bottom.equalTo(_time.mas_top).with.offset(-5);
-            make.left.equalTo(_userView.mas_left).with.offset(20);
-        }];
-    
     }
     return _userView;
 }
@@ -165,27 +239,6 @@
     if (!_userLeftView) {
         _userLeftView = [[UIView alloc] init];
         _userLeftView.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"User_bg_left"]];
-        
-        [_userLeftView addSubview:self.userHeader];
-        [_userHeader mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.size.mas_equalTo(CGSizeMake(30, 30));
-            make.centerY.equalTo(_userLeftView);
-            make.left.equalTo(_userLeftView.mas_left).with.offset(15);
-        }];
-        
-        [_userLeftView addSubview:self.userName];
-        [_userName mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.size.mas_equalTo(CGSizeMake(150, 15));
-            make.top.equalTo(_userHeader.mas_top).with.offset(0);
-            make.left.equalTo(_userHeader.mas_right).with.offset(10);
-        }];
-        
-        [_userLeftView addSubview:self.userProfile];
-        [_userProfile mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.size.mas_equalTo(CGSizeMake(150, 15));
-            make.bottom.equalTo(_userHeader.mas_bottom).with.offset(0);
-            make.left.equalTo(_userHeader.mas_right).with.offset(10);
-        }];
 
     }
     return _userLeftView;
@@ -228,13 +281,22 @@
 }
 
 #pragma mark - 用户头像
-- (UIImageView *)userHeader {
+- (UIButton *)userHeader {
     if (!_userHeader) {
-        _userHeader = [[UIImageView alloc] init];
+        _userHeader = [[UIButton alloc] init];
         _userHeader.layer.masksToBounds = YES;
         _userHeader.layer.cornerRadius = 15;
+        [_userHeader addTarget:self action:@selector(lookUserHome) forControlEvents:(UIControlEventTouchUpInside)];
     }
     return _userHeader;
+}
+
+- (void)lookUserHome {
+    HomePageViewController * peopleHomeVC = [[HomePageViewController alloc] init];
+    peopleHomeVC.isMySelf = NO;
+    peopleHomeVC.type = @2;
+    peopleHomeVC.userId = self.userId;
+    [self.nav pushViewController:peopleHomeVC animated:YES];
 }
 
 #pragma mark - 用户昵称
@@ -328,7 +390,7 @@
     NSString * whereText = fiuScene;
     CGFloat textLength = [fiuScene boundingRectWithSize:CGSizeMake(320, 1000) options:(NSStringDrawingUsesLineFragmentOrigin) attributes:nil context:nil].size.width;
     [lable mas_updateConstraints:^(MASConstraintMaker *make) {
-        make.size.mas_equalTo(CGSizeMake(textLength * 1.1, 15));
+        make.size.mas_equalTo(CGSizeMake(textLength + 5, 15));
     }];
     return whereText;
 }
@@ -354,8 +416,6 @@
     }
     return _city;
 }
-
-
 
 #pragma mark - 时间
 - (UILabel *)time {

@@ -54,6 +54,7 @@
 - (UIImageView *)brandImg {
     if (!_brandImg) {
         _brandImg = [[UIImageView alloc] init];
+        _brandImg.contentMode = UIViewContentModeScaleAspectFill;
         _brandImg.layer.cornerRadius = 25;
         _brandImg.layer.masksToBounds = YES;
     }

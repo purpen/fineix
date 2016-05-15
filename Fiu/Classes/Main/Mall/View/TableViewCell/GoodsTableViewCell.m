@@ -10,6 +10,7 @@
 #import "GoodsTableViewCell.h"
 #import "GoodsImgFlowLayout.h"
 #import "GoodsImgCollectionViewCell.h"
+#import "GoodsInfoViewController.h"
 
 @implementation GoodsTableViewCell
 
@@ -20,7 +21,7 @@
         self.selectionStyle = UITableViewCellSelectionStyleNone;
         self.backgroundColor = [UIColor colorWithHexString:grayLineColor];
         self.goodsImgMarr = [NSMutableArray array];
-        self.goodsId = [NSMutableArray array];
+    
         [self setCellViewUI];
     }
     return self;
@@ -30,12 +31,8 @@
     if (self.goodsImgMarr.count > 0) {
         [self.goodsImgMarr removeAllObjects];
     }
-    if (self.goodsId.count > 0) {
-        [self.goodsId removeAllObjects];
-    }
     
     self.title.text = model.title;
-    [self.goodsId addObject:[NSString stringWithFormat:@"%zi", model.idField]];
     
     // 产品来源: 1.官网；2.淘宝；3.天猫；4.京东
     if (model.attrbute == 1) {
@@ -63,23 +60,23 @@
 
 #pragma mark -
 - (void)setCellViewUI {
-    [self addSubview:self.goodsImgView];
+    [self.contentView addSubview:self.goodsImgView];
     
-    [self addSubview:self.titleBg];
+    [self.contentView addSubview:self.titleBg];
     [_titleBg mas_makeConstraints:^(MASConstraintMaker *make) {
         make.size.mas_equalTo(CGSizeMake(SCREEN_WIDTH * 0.654, 25));
         make.top.equalTo(self.goodsImgView.mas_bottom).with.offset(10);
         make.left.equalTo(self.mas_left).with.offset(5);
     }];
     
-    [self addSubview:self.typeImg];
+    [self.contentView addSubview:self.typeImg];
     [_typeImg mas_makeConstraints:^(MASConstraintMaker *make) {
         make.size.mas_equalTo(CGSizeMake(36, 14));
         make.centerY.equalTo(self.titleBg);
         make.left.equalTo(self.titleBg.mas_right).with.offset(0);
     }];
     
-    [self addSubview:self.priceBg];
+    [self.contentView addSubview:self.priceBg];
     [_priceBg mas_makeConstraints:^(MASConstraintMaker *make) {
         make.size.mas_equalTo(CGSizeMake(SCREEN_WIDTH - (SCREEN_WIDTH * 0.654) - 46, 25));
         make.bottom.equalTo(self.titleBg.mas_bottom).with.offset(0);
@@ -93,7 +90,7 @@
         GoodsImgFlowLayout * flowLayout = [[GoodsImgFlowLayout alloc] init];
         
         _goodsImgView = [[UICollectionView alloc] initWithFrame:CGRectMake(0, 10, SCREEN_WIDTH, 150) collectionViewLayout:flowLayout];
-        _goodsImgView.delegate = self;
+//        _goodsImgView.delegate = self;
         _goodsImgView.dataSource = self;
         _goodsImgView.backgroundColor = [UIColor colorWithHexString:grayLineColor];
         _goodsImgView.showsHorizontalScrollIndicator = NO;

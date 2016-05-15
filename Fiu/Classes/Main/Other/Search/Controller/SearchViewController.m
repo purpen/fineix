@@ -279,7 +279,7 @@ static NSString *const URLSearchList = @"/search/getlist";
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
     if (tableView == self.sceneTable) {
-        return SCREEN_HEIGHT;
+        return SCREEN_HEIGHT + 5;
     } else if (tableView == self.goodsTable) {
         return 210;
     }

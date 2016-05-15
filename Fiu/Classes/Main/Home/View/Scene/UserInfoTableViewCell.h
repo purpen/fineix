@@ -10,15 +10,16 @@
 #import "Fiu.h"
 #import "SceneInfoData.h"
 #import "FiuSceneInfoData.h"
+#import "UserGoodsTag.h"
 
 @interface UserInfoTableViewCell : UITableViewCell
 
 @pro_strong UINavigationController  *   nav;
 
-@pro_strong UIImageView         *   bgImage;        //  场景图
+@pro_strong UIButton            *   bgImage;        //  场景图
 @pro_strong UIView              *   userView;       //  用户信息视图
 @pro_strong UIView              *   userLeftView;   //  背景右
-@pro_strong UIImageView         *   userHeader;     //  用户头像
+@pro_strong UIButton            *   userHeader;     //  用户头像
 @pro_strong UILabel             *   userName;       //  用户昵称
 @pro_strong UILabel             *   userProfile;    //  用户简介
 @pro_strong UIView              *   userRightView;  //  背景左
@@ -30,6 +31,12 @@
 @pro_strong UILabel             *   whereScene;     //  所属情景
 @pro_strong UILabel             *   city;           //  城市
 @pro_strong UILabel             *   time;           //  时间
+@pro_strong NSMutableArray      *   tagDataMarr;
+@pro_strong NSString            *   userId;
+@pro_strong UserGoodsTag        *   userTag;
+@pro_strong NSMutableArray      *   userTagMarr;
+
+- (void)showUserTag;
 
 - (void)setSceneInfoData:(SceneInfoData *)model;
 

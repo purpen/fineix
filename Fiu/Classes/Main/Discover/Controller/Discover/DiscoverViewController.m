@@ -16,11 +16,13 @@
 #import "SceneInfoViewController.h"
 #import "FiuSceneRow.h"
 #import "HotTagsData.h"
+#import "FiuPeopleUser.h"
 
 static NSString *const URLDiscoverSlide = @"/gateway/slide";
 static NSString *const URLFiuScene = @"/scene_scene/";
 static NSString *const URLSceneList = @"/scene_sight/";
 static NSString *const URLTagS = @"/scene_tags/getlist";
+static NSString *const URLFiuPeople = @"/user/find_user";
 
 @interface DiscoverViewController()
 
@@ -30,6 +32,7 @@ static NSString *const URLTagS = @"/scene_tags/getlist";
 @pro_strong NSMutableArray              *   sceneIdList;
 @pro_strong NSMutableArray              *   tagsList;
 @pro_strong NSMutableArray              *   rollList;
+@pro_strong NSMutableArray              *   fiuPeopleList;
 
 @end
 
@@ -46,6 +49,7 @@ static NSString *const URLTagS = @"/scene_tags/getlist";
     [super viewDidLoad];
     
     [self networkRollImgData];
+    [self networkFiuPeopleData];
     [self networkTagsListData];
     [self networkFiuSceneData];
     self.currentpageNum = 0;
@@ -66,7 +70,19 @@ static NSString *const URLTagS = @"/scene_tags/getlist";
         [self.rollView setRollimageView:self.rollList];
         
     } failure:^(FBRequest *request, NSError *error) {
-        NSLog(@"%@", [error localizedDescription]);
+        [SVProgressHUD showErrorWithStatus:[error localizedDescription]];
+    }];
+}
+
+#pragma mark 最Fiu伙伴
+- (void)networkFiuPeopleData {
+    self.fiuPeopleRequest = [FBAPI getWithUrlString:URLFiuPeople requestDictionary:@{@"page":@"1", @"size":@"50", @"sort":@"1"} delegate:self];
+    [self.fiuPeopleRequest startRequestSuccess:^(FBRequest *request, id result) {
+        self.fiuPeopleList = [NSMutableArray arrayWithArray:[[result valueForKey:@"data"] valueForKey:@"users"]];
+        [self.discoverTableView reloadData];
+        
+    } failure:^(FBRequest *request, NSError *error) {
+        [SVProgressHUD showErrorWithStatus:[error localizedDescription]];
     }];
 }
 
@@ -225,6 +241,8 @@ static NSString *const URLTagS = @"/scene_tags/getlist";
             if (!cell) {
                 cell = [[FiuPeopleTableViewCell alloc] initWithStyle:(UITableViewCellStyleDefault) reuseIdentifier:fiuPeopleCellId];
             }
+            [cell setFiuPeopleData:self.fiuPeopleList withType:0];
+            cell.nav = self.navigationController;
             return cell;
             
         } else if (indexPath.row == 1) {
@@ -340,6 +358,13 @@ static NSString *const URLTagS = @"/scene_tags/getlist";
     return _fiuSceneList;
 }
 
+- (NSMutableArray *)fiuPeopleList {
+    if (!_fiuPeopleList) {
+        _fiuPeopleList = [NSMutableArray array];
+    }
+    return _fiuPeopleList;
+}
+
 - (NSMutableArray *)fiuSceneIdList {
     if (!_fiuSceneIdList) {
         _fiuSceneIdList = [NSMutableArray array];
@@ -377,6 +402,7 @@ static NSString *const URLTagS = @"/scene_tags/getlist";
 
 //
 - (void)clearMarrData {
+    [self.fiuPeopleList removeAllObjects];
     [self.fiuSceneList removeAllObjects];
     [self.fiuSceneIdList removeAllObjects];
     [self.sceneList removeAllObjects];

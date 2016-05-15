@@ -105,8 +105,6 @@ static NSInteger const CATEGORYTAG = 283;
         
         [self setAddTagVcUI];
         
-        [self.usedTagView reloadData];
-        
     } failure:^(FBRequest *request, NSError *error) {
         [SVProgressHUD showErrorWithStatus:[error localizedDescription]];
     }];
@@ -121,8 +119,6 @@ static NSInteger const CATEGORYTAG = 283;
         if (self.usedTagMarr.count == 0) {
             self.noneView.hidden = NO;
         }
-        
-        [self.usedTagView reloadData];
         
     } failure:^(FBRequest *request, NSError *error) {
         [SVProgressHUD showErrorWithStatus:[error localizedDescription]];
@@ -395,8 +391,8 @@ static NSInteger const CATEGORYTAG = 283;
     if (collectionView == self.usedTagView) {
         if (![self.chooseTagMarr containsObject:self.hotTagMarr[indexPath.row]]) {
             [self.chooseTagMarr addObject:self.hotTagMarr[indexPath.row]];
+            [self.chooseTagIdList addObject:self.hotTagIdList[indexPath.row]];
             [self changContent:self.chooseTagMarr.count];
-            NSLog(@"热门标签的ID：＝＝＝＝  %@", self.hotTagIdList[indexPath.row]);
         } else {
             [SVProgressHUD showInfoWithStatus:@"不可选择重复的标签哦～"];
         }
@@ -404,6 +400,7 @@ static NSInteger const CATEGORYTAG = 283;
     
     } else if (collectionView == self.chooseTagView) {
         [self.chooseTagMarr removeObject:self.chooseTagMarr[indexPath.row]];
+        [self.chooseTagIdList removeObject:self.chooseTagIdList[indexPath.row]];
         [self.chooseTagView reloadData];
     }
 
@@ -637,8 +634,6 @@ static NSInteger const CATEGORYTAG = 283;
 - (void)sureBtnClick {
     self.chooseTagsBlock(self.chooseTagMarr, self.chooseTagIdList);
     [self.navigationController popViewControllerAnimated:YES];
-//    NSLog(@"＝＝＝＝＝＝＝＝＝ %@ ＝＝＝＝＝＝＝", self.chooseTagMarr);
-//    NSLog(@"－－－－－－－－－ %@ －－－－－－－", self.chooseTagIdList);
 }
 
 #pragma mark - 

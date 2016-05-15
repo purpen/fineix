@@ -20,6 +20,7 @@
 @pro_strong UIButton            *   commentBtn;     //  评论
 @pro_strong UIButton            *   moreBtn;        //  更多
 @pro_strong UILabel             *   line;           //  分割线
+@pro_strong UILabel             *   bottomline;     //  分割线
 
 - (void)setSceneDataNum:(SceneInfoData *)model;
 

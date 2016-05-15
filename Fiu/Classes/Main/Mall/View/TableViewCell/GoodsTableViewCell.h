@@ -11,7 +11,7 @@
 #import "GoodsRow.h"
 #import <SDWebImage/UIButton+WebCache.h>
 
-@interface GoodsTableViewCell : UITableViewCell <UIScrollViewDelegate, UICollectionViewDelegate, UICollectionViewDataSource>
+@interface GoodsTableViewCell : UITableViewCell <UIScrollViewDelegate, UICollectionViewDataSource>
 
 @pro_strong UICollectionView    *       goodsImgView;   //  图片滚动视图
 @pro_strong NSMutableArray      *       goodsImgMarr;   //  图片
@@ -20,7 +20,6 @@
 @pro_strong UILabel             *       title;          //  标题
 @pro_strong UIImageView         *       titleBg;        //  标题背景
 @pro_strong UIImageView         *       typeImg;        //  品牌
-@pro_strong NSMutableArray      *       goodsId;        //  商品id
 
 - (void)setGoodsData:(GoodsRow *)model;
 

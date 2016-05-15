@@ -84,6 +84,7 @@
     [super layoutSubviews];
     
     _imageView.frame = self.bounds;
+    _imageView.contentMode = UIViewContentModeScaleAspectFill;
     
     CGFloat titleLabelW = self.sd_width;
     CGFloat titleLabelH = _titleLabelHeight;

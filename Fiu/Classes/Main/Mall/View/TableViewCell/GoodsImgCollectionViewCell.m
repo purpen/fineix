@@ -14,8 +14,7 @@
     self = [super initWithFrame:frame];
     if (self) {
         
-        [self addSubview:self.img];
-        
+        [self.contentView addSubview:self.img];
     }
     return self;
 }

@@ -420,6 +420,15 @@
 		D8A9AE681CE5D10000A9FCFB /* FindGoodsModel.m in Sources */ = {isa = PBXBuildFile; fileRef = D8A9AE631CE5D10000A9FCFB /* FindGoodsModel.m */; };
 		D8A9AE691CE5D10000A9FCFB /* FindGoodsModelData.m in Sources */ = {isa = PBXBuildFile; fileRef = D8A9AE651CE5D10000A9FCFB /* FindGoodsModelData.m */; };
 		D8A9AE6A1CE5D10000A9FCFB /* FindGoodsModelRow.m in Sources */ = {isa = PBXBuildFile; fileRef = D8A9AE671CE5D10000A9FCFB /* FindGoodsModelRow.m */; };
+		D8A9AE791CE74A7D00A9FCFB /* FiuPeople.m in Sources */ = {isa = PBXBuildFile; fileRef = D8A9AE701CE74A7D00A9FCFB /* FiuPeople.m */; };
+		D8A9AE7A1CE74A7D00A9FCFB /* FiuPeopleCounter.m in Sources */ = {isa = PBXBuildFile; fileRef = D8A9AE721CE74A7D00A9FCFB /* FiuPeopleCounter.m */; };
+		D8A9AE7B1CE74A7D00A9FCFB /* FiuPeopleData.m in Sources */ = {isa = PBXBuildFile; fileRef = D8A9AE741CE74A7D00A9FCFB /* FiuPeopleData.m */; };
+		D8A9AE7C1CE74A7D00A9FCFB /* FiuPeopleIdentify.m in Sources */ = {isa = PBXBuildFile; fileRef = D8A9AE761CE74A7D00A9FCFB /* FiuPeopleIdentify.m */; };
+		D8A9AE7D1CE74A7D00A9FCFB /* FiuPeopleUser.m in Sources */ = {isa = PBXBuildFile; fileRef = D8A9AE781CE74A7D00A9FCFB /* FiuPeopleUser.m */; };
+		D8A9AE861CE75DC600A9FCFB /* FiuBrand.m in Sources */ = {isa = PBXBuildFile; fileRef = D8A9AE7F1CE75DC600A9FCFB /* FiuBrand.m */; };
+		D8A9AE871CE75DC600A9FCFB /* FiuBrandData.m in Sources */ = {isa = PBXBuildFile; fileRef = D8A9AE811CE75DC600A9FCFB /* FiuBrandData.m */; };
+		D8A9AE881CE75DC600A9FCFB /* FiuBrandId.m in Sources */ = {isa = PBXBuildFile; fileRef = D8A9AE831CE75DC600A9FCFB /* FiuBrandId.m */; };
+		D8A9AE891CE75DC600A9FCFB /* FiuBrandRow.m in Sources */ = {isa = PBXBuildFile; fileRef = D8A9AE851CE75DC600A9FCFB /* FiuBrandRow.m */; };
 		D8AEC7511CA8E3A000A868B6 /* libsqlite3.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 1F0EE6A41C9FA47B000631F0 /* libsqlite3.tbd */; };
 		D8AEC7521CA8E3AE00A868B6 /* libiconv.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 1F0EE6A21C9FA43C000631F0 /* libiconv.tbd */; };
 		D8AEC7531CA8E3BB00A868B6 /* libstdc++.6.0.9.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 280045201C805CD7005F5C2E /* libstdc++.6.0.9.tbd */; };
@@ -1172,6 +1181,24 @@
 		D8A9AE651CE5D10000A9FCFB /* FindGoodsModelData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FindGoodsModelData.m; sourceTree = "<group>"; };
 		D8A9AE661CE5D10000A9FCFB /* FindGoodsModelRow.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FindGoodsModelRow.h; sourceTree = "<group>"; };
 		D8A9AE671CE5D10000A9FCFB /* FindGoodsModelRow.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FindGoodsModelRow.m; sourceTree = "<group>"; };
+		D8A9AE6F1CE74A7D00A9FCFB /* FiuPeople.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FiuPeople.h; sourceTree = "<group>"; };
+		D8A9AE701CE74A7D00A9FCFB /* FiuPeople.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FiuPeople.m; sourceTree = "<group>"; };
+		D8A9AE711CE74A7D00A9FCFB /* FiuPeopleCounter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FiuPeopleCounter.h; sourceTree = "<group>"; };
+		D8A9AE721CE74A7D00A9FCFB /* FiuPeopleCounter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FiuPeopleCounter.m; sourceTree = "<group>"; };
+		D8A9AE731CE74A7D00A9FCFB /* FiuPeopleData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FiuPeopleData.h; sourceTree = "<group>"; };
+		D8A9AE741CE74A7D00A9FCFB /* FiuPeopleData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FiuPeopleData.m; sourceTree = "<group>"; };
+		D8A9AE751CE74A7D00A9FCFB /* FiuPeopleIdentify.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FiuPeopleIdentify.h; sourceTree = "<group>"; };
+		D8A9AE761CE74A7D00A9FCFB /* FiuPeopleIdentify.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FiuPeopleIdentify.m; sourceTree = "<group>"; };
+		D8A9AE771CE74A7D00A9FCFB /* FiuPeopleUser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FiuPeopleUser.h; sourceTree = "<group>"; };
+		D8A9AE781CE74A7D00A9FCFB /* FiuPeopleUser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FiuPeopleUser.m; sourceTree = "<group>"; };
+		D8A9AE7E1CE75DC600A9FCFB /* FiuBrand.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FiuBrand.h; sourceTree = "<group>"; };
+		D8A9AE7F1CE75DC600A9FCFB /* FiuBrand.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FiuBrand.m; sourceTree = "<group>"; };
+		D8A9AE801CE75DC600A9FCFB /* FiuBrandData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FiuBrandData.h; sourceTree = "<group>"; };
+		D8A9AE811CE75DC600A9FCFB /* FiuBrandData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FiuBrandData.m; sourceTree = "<group>"; };
+		D8A9AE821CE75DC600A9FCFB /* FiuBrandId.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FiuBrandId.h; sourceTree = "<group>"; };
+		D8A9AE831CE75DC600A9FCFB /* FiuBrandId.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FiuBrandId.m; sourceTree = "<group>"; };
+		D8A9AE841CE75DC600A9FCFB /* FiuBrandRow.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FiuBrandRow.h; sourceTree = "<group>"; };
+		D8A9AE851CE75DC600A9FCFB /* FiuBrandRow.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FiuBrandRow.m; sourceTree = "<group>"; };
 		E0438B4B24E3F747F761AF4C /* Pods-Fiu.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Fiu.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Fiu/Pods-Fiu.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -2428,6 +2455,7 @@
 		D83639891CCF69D300CC4AC0 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				D8A9AE6E1CE74A7D00A9FCFB /* FiuPeople */,
 				D8A9AC8E1CD89E0000A9FCFB /* RollImage */,
 				D8A9AC951CD89E0000A9FCFB /* FiuScene */,
 				D8A9ACA81CD89E0000A9FCFB /* Tag */,
@@ -2479,6 +2507,14 @@
 		D8363A0A1CD8809400CC4AC0 /* Brand */ = {
 			isa = PBXGroup;
 			children = (
+				D8A9AE7E1CE75DC600A9FCFB /* FiuBrand.h */,
+				D8A9AE7F1CE75DC600A9FCFB /* FiuBrand.m */,
+				D8A9AE801CE75DC600A9FCFB /* FiuBrandData.h */,
+				D8A9AE811CE75DC600A9FCFB /* FiuBrandData.m */,
+				D8A9AE821CE75DC600A9FCFB /* FiuBrandId.h */,
+				D8A9AE831CE75DC600A9FCFB /* FiuBrandId.m */,
+				D8A9AE841CE75DC600A9FCFB /* FiuBrandRow.h */,
+				D8A9AE851CE75DC600A9FCFB /* FiuBrandRow.m */,
 				D8363A0B1CD8809400CC4AC0 /* BrandInfo.h */,
 				D8363A0C1CD8809400CC4AC0 /* BrandInfo.m */,
 				D8363A0D1CD8809400CC4AC0 /* BrandInfoData.h */,
@@ -3229,6 +3265,23 @@
 			path = Mark;
 			sourceTree = "<group>";
 		};
+		D8A9AE6E1CE74A7D00A9FCFB /* FiuPeople */ = {
+			isa = PBXGroup;
+			children = (
+				D8A9AE6F1CE74A7D00A9FCFB /* FiuPeople.h */,
+				D8A9AE701CE74A7D00A9FCFB /* FiuPeople.m */,
+				D8A9AE711CE74A7D00A9FCFB /* FiuPeopleCounter.h */,
+				D8A9AE721CE74A7D00A9FCFB /* FiuPeopleCounter.m */,
+				D8A9AE731CE74A7D00A9FCFB /* FiuPeopleData.h */,
+				D8A9AE741CE74A7D00A9FCFB /* FiuPeopleData.m */,
+				D8A9AE751CE74A7D00A9FCFB /* FiuPeopleIdentify.h */,
+				D8A9AE761CE74A7D00A9FCFB /* FiuPeopleIdentify.m */,
+				D8A9AE771CE74A7D00A9FCFB /* FiuPeopleUser.h */,
+				D8A9AE781CE74A7D00A9FCFB /* FiuPeopleUser.m */,
+			);
+			path = FiuPeople;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -3435,6 +3488,7 @@
 				D81281531CAA8532007CF08B /* FBAPI.m in Sources */,
 				1F07A6471CC77BBF00CF225F /* OtherCollectionViewCell.m in Sources */,
 				1FD7E6771CC8DFE400A69BDD /* MyQrCodeViewController.m in Sources */,
+				D8A9AE7D1CE74A7D00A9FCFB /* FiuPeopleUser.m in Sources */,
 				D803604F1CBF376B001920F9 /* UserInfo.m in Sources */,
 				D8363A991CD8832100CC4AC0 /* SceneListTableViewCell.m in Sources */,
 				1F5038CB1CDC8109004F76AD /* BotView.m in Sources */,
@@ -3446,6 +3500,7 @@
 				D8A9AE4A1CE315FC00A9FCFB /* UserGoodsTag.m in Sources */,
 				D8A9AD871CD9DFBC00A9FCFB /* CropImageView.m in Sources */,
 				D8035FD01CBD1021001920F9 /* FBTabBarController.m in Sources */,
+				D8A9AE7B1CE74A7D00A9FCFB /* FiuPeopleData.m in Sources */,
 				1F12E6F11CD86F570000519A /* DirectMessageModel.m in Sources */,
 				D80D415B1CAD1437005D72B1 /* FBNavigationViewController.m in Sources */,
 				D8363A301CD8809400CC4AC0 /* CategoryData.m in Sources */,
@@ -3472,6 +3527,7 @@
 				D87B69D41CC726D500199EFE /* CommentDataTableViewCell.m in Sources */,
 				D8363A2B1CD8809400CC4AC0 /* GoodsInfo.m in Sources */,
 				D8A9AE221CE0E53100A9FCFB /* AllTagListTableViewCell.m in Sources */,
+				D8A9AE791CE74A7D00A9FCFB /* FiuPeople.m in Sources */,
 				D81281591CAA8532007CF08B /* UIImageView+SDWedImage.m in Sources */,
 				D81281541CAA8532007CF08B /* FBRequest.m in Sources */,
 				1F27AE971CE0D493005A434B /* MapTableViewCell.m in Sources */,
@@ -3516,6 +3572,7 @@
 				D8363ABC1CD8835D00CC4AC0 /* HomeSceneList.m in Sources */,
 				D80360561CBF376B001920F9 /* NumView.m in Sources */,
 				D8A9AE611CE4813700A9FCFB /* FBSticker.m in Sources */,
+				D8A9AE7A1CE74A7D00A9FCFB /* FiuPeopleCounter.m in Sources */,
 				D8A9ACF31CD8B74D00A9FCFB /* LikeOrSuPeopleData.m in Sources */,
 				1F5038A91CDC406C004F76AD /* CommentView.m in Sources */,
 				D81281661CAA8532007CF08B /* JKDBHelper.m in Sources */,
@@ -3564,6 +3621,7 @@
 				1F5038B51CDC40EE004F76AD /* ProductInfoModel.m in Sources */,
 				D8363A801CD882D900CC4AC0 /* HomeViewController.m in Sources */,
 				1F51E8A41CC5C9DE00017839 /* MyFansActionSheetViewController.m in Sources */,
+				D8A9AE881CE75DC600A9FCFB /* FiuBrandId.m in Sources */,
 				1FFFFF491CD08661008E1CDC /* ChatTableViewCell.m in Sources */,
 				D8363A6C1CD8818E00CC4AC0 /* GoodsCarViewController.m in Sources */,
 				D86AFDF21CC0BBC3006F1602 /* FBSearchView.m in Sources */,
@@ -3620,6 +3678,7 @@
 				D8A9ADF21CDAF41200A9FCFB /* ChildTagsData.m in Sources */,
 				1FFFFF1F1CD055BB008E1CDC /* AboutViewController.m in Sources */,
 				D8363A941CD8832100CC4AC0 /* ContentAndTagTableViewCell.m in Sources */,
+				D8A9AE7C1CE74A7D00A9FCFB /* FiuPeopleIdentify.m in Sources */,
 				D80360581CBF376B001920F9 /* RecommendedScenarioView.m in Sources */,
 				1F51E8B01CC61E6400017839 /* SubscribeViewController.m in Sources */,
 				1F07A6531CC7925900CF225F /* FindeFriendTableViewCell.m in Sources */,
@@ -3648,6 +3707,7 @@
 				D8A9ADF11CDAF41200A9FCFB /* ChildTags.m in Sources */,
 				D8035FCF1CBD1021001920F9 /* FBTabBar.m in Sources */,
 				D8363ABB1CD8835D00CC4AC0 /* SceneInfoUserInfo.m in Sources */,
+				D8A9AE861CE75DC600A9FCFB /* FiuBrand.m in Sources */,
 				D8A9AE681CE5D10000A9FCFB /* FindGoodsModel.m in Sources */,
 				D8363AC11CD8835D00CC4AC0 /* HomeSceneListRow.m in Sources */,
 				1F35F0371CD1AD870000DB95 /* CityTableViewCell.m in Sources */,
@@ -3676,6 +3736,7 @@
 				D8363A951CD8832100CC4AC0 /* DataNumTableViewCell.m in Sources */,
 				D8363ABD1CD8835D00CC4AC0 /* HomeSceneListCounter.m in Sources */,
 				D87B69C01CC726BA00199EFE /* GroupHeaderView.m in Sources */,
+				D8A9AE871CE75DC600A9FCFB /* FiuBrandData.m in Sources */,
 				D8A9ACE01CD8A49100A9FCFB /* FiuSceneViewController.m in Sources */,
 				1F4061A81CC9E92C00D6E9B0 /* ImproView.m in Sources */,
 				D8A9AE191CE05D3F00A9FCFB /* ChooseTagsCollectionViewCell.m in Sources */,
@@ -3694,6 +3755,7 @@
 				D87B69D11CC726D500199EFE /* FBAlertViewController.m in Sources */,
 				D8A9AD861CD9DFBC00A9FCFB /* CameraView.m in Sources */,
 				1FC678251CDB000200535162 /* DeliveryAddressCell.m in Sources */,
+				D8A9AE891CE75DC600A9FCFB /* FiuBrandRow.m in Sources */,
 				1F4061B71CCA246600D6E9B0 /* AccountView.m in Sources */,
 				D8A9AE0C1CDC696F00A9FCFB /* SelectAllFSceneCollectionViewCell.m in Sources */,
 				D8035F2F1CB77D0C001920F9 /* UIImage+Helper.m in Sources */,

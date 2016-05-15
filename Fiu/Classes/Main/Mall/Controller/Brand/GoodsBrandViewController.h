@@ -7,11 +7,17 @@
 //
 
 #import "FBViewController.h"
+#import <SVProgressHUD/SVProgressHUD.h>
+#import <MJRefresh/MJRefresh.h>
 
 @interface GoodsBrandViewController : FBViewController <FBNavigationBarItemsDelegate, UITableViewDelegate, UITableViewDataSource>
 
 @pro_strong UITableView             *   goodsBrandTable;
 @pro_strong FBRequest               *   brandRequest;
+@pro_strong FBRequest               *   brandGoodsRequest;
+@pro_assign NSInteger                   currentpageNum;
+@pro_assign NSInteger                   totalPageNum;
+
 @pro_strong NSString                *   brandId;
 @pro_strong UILabel                 *   titleLab;
 @pro_strong NSString                *   brandBgImg;

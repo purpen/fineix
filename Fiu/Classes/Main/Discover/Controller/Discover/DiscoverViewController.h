@@ -19,9 +19,9 @@
 @pro_strong FBRequest               *   fiuSceneRequest;
 @pro_strong FBRequest               *   sceneListRequest;
 @pro_strong FBRequest               *   tagsRequest;
+@pro_strong FBRequest               *   fiuPeopleRequest;
 @pro_assign NSInteger                   currentpageNum;
 @pro_assign NSInteger                   totalPageNum;
-
 
 @pro_strong UITableView             *   discoverTableView;
 @pro_strong GroupHeaderView         *   headerView;
