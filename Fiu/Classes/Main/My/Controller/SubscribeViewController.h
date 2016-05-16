@@ -12,8 +12,6 @@
 
 
 @pro_strong FBRequest               *   allSceneListRequest;
-@pro_assign NSInteger                   currentpageNum;
-@pro_assign NSInteger                   totalPageNum;
 @pro_strong UICollectionView        *   allSceneView;       //  全部的情景
 
 @end
