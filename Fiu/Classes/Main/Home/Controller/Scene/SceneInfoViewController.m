@@ -163,7 +163,7 @@ static NSString *const URLSceneGoods = @"/scene_product/getlist";
         }
         
         NSString * categoryTag = [categoryTagIds componentsJoinedByString:@","];
-        [self networkRecommendGoods:categoryTag withSize:[NSString stringWithFormat:@"%zi", categoryTagIds.count]];
+        [self networkRecommendGoods:categoryTag withSize:[NSString stringWithFormat:@"%zi", self.goodsList.count]];
         
         [self.sceneTableView reloadData];
         
@@ -321,6 +321,7 @@ static NSString *const URLSceneGoods = @"/scene_product/getlist";
         if (cell == nil) {
             cell = [[GoodsTableViewCell alloc] initWithStyle:(UITableViewCellStyleDefault) reuseIdentifier:mallGoodsCellId];
         }
+        cell.nav = self.navigationController;
         [cell setGoodsData:self.goodsList[indexPath.row]];
         return cell;
     
@@ -330,6 +331,7 @@ static NSString *const URLSceneGoods = @"/scene_product/getlist";
         if (cell == nil) {
             cell = [[GoodsTableViewCell alloc] initWithStyle:(UITableViewCellStyleDefault) reuseIdentifier:mallGoodsCellId];
         }
+        cell.nav = self.navigationController;
         [cell setGoodsData:self.reGoodsList[indexPath.row]];
         return cell;
     }

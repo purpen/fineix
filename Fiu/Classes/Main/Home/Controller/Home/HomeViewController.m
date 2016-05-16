@@ -230,7 +230,7 @@ static NSString *const URLSceneList = @"/scene_sight/";
     if(![[NSUserDefaults standardUserDefaults] boolForKey:@"firstLaunch"]){
         [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"firstLaunch"];
         NSLog(@"第一次启动");
-        [self setGuideImgForVC:@"Guide_Home"];
+        [self setGuideImgForVC:@"Guide_index"];
     }else{
         NSLog(@"已经不是第一次启动了");
     }

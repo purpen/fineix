@@ -10,15 +10,44 @@
 
 @implementation FBGoodsColorTableViewCell
 
-- (void)awakeFromNib {
-    [super awakeFromNib];
-    // Initialization code
+- (instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier {
+    self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
+    if (self) {
+        
+        self.selectionStyle = UITableViewCellSelectionStyleNone;
+        [self addSubview:self.goodsColorLab];
+        [_goodsColorLab mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.size.mas_equalTo(CGSizeMake(100, 15));
+            make.centerY.equalTo(self);
+            make.left.equalTo(self.mas_left).with.offset(15);
+        }];
+        
+        [self addSubview:self.nextIcon];
+        [_nextIcon mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.centerY.equalTo(_goodsColorLab);
+            make.right.equalTo(self.mas_right).with.offset(-16);
+        }];
+        
+    }
+    return self;
 }
 
-- (void)setSelected:(BOOL)selected animated:(BOOL)animated {
-    [super setSelected:selected animated:animated];
+- (UILabel *)goodsColorLab {
+    if (!_goodsColorLab) {
+        _goodsColorLab = [[UILabel alloc] init];
+        _goodsColorLab.font = [UIFont systemFontOfSize:Font_GoodsTitle];
+        _goodsColorLab.textAlignment = NSTextAlignmentLeft;
+        _goodsColorLab.textColor = [UIColor blackColor];
+    }
+    return _goodsColorLab;
+}
 
-    // Configure the view for the selected state
+- (UIImageView *)nextIcon {
+    if (!_nextIcon) {
+        _nextIcon = [[UIImageView alloc] init];
+        _nextIcon.image = [UIImage imageNamed:@"entr"];
+    }
+    return _nextIcon;
 }
 
 @end

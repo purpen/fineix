@@ -361,7 +361,6 @@
 		D8A9ACF41CD8B74D00A9FCFB /* LikeOrSuPeopleRow.m in Sources */ = {isa = PBXBuildFile; fileRef = D8A9ACEE1CD8B74D00A9FCFB /* LikeOrSuPeopleRow.m */; };
 		D8A9ACF51CD8B74D00A9FCFB /* LikeOrSuPeopleUser.m in Sources */ = {isa = PBXBuildFile; fileRef = D8A9ACF01CD8B74D00A9FCFB /* LikeOrSuPeopleUser.m */; };
 		D8A9ACFC1CD99EBF00A9FCFB /* ReportViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D8A9ACFB1CD99EBF00A9FCFB /* ReportViewController.m */; };
-		D8A9ACFF1CD9AF1D00A9FCFB /* OtherGoodsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D8A9ACFE1CD9AF1D00A9FCFB /* OtherGoodsViewController.m */; };
 		D8A9AD091CD9CCA900A9FCFB /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D8A9AD081CD9CCA900A9FCFB /* Assets.xcassets */; };
 		D8A9AD841CD9DFBC00A9FCFB /* ScenceAddMoreView.m in Sources */ = {isa = PBXBuildFile; fileRef = D8A9AD6B1CD9DFBC00A9FCFB /* ScenceAddMoreView.m */; };
 		D8A9AD851CD9DFBC00A9FCFB /* ScenceMessageView.m in Sources */ = {isa = PBXBuildFile; fileRef = D8A9AD6D1CD9DFBC00A9FCFB /* ScenceMessageView.m */; };
@@ -430,6 +429,17 @@
 		D8A9AE881CE75DC600A9FCFB /* FiuBrandId.m in Sources */ = {isa = PBXBuildFile; fileRef = D8A9AE831CE75DC600A9FCFB /* FiuBrandId.m */; };
 		D8A9AE891CE75DC600A9FCFB /* FiuBrandRow.m in Sources */ = {isa = PBXBuildFile; fileRef = D8A9AE851CE75DC600A9FCFB /* FiuBrandRow.m */; };
 		D8A9AE8C1CE8D99E00A9FCFB /* GoodsSceneCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D8A9AE8B1CE8D99E00A9FCFB /* GoodsSceneCollectionViewCell.m */; };
+		D8A9AE8F1CE9A80D00A9FCFB /* FBGoodsInfoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D8A9AE8E1CE9A80D00A9FCFB /* FBGoodsInfoViewController.m */; };
+		D8A9AE921CE9B44100A9FCFB /* FBGoodsColorTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D8A9AE911CE9B44100A9FCFB /* FBGoodsColorTableViewCell.m */; };
+		D8A9AE951CE9B6FF00A9FCFB /* FBGoodsCommentTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D8A9AE941CE9B6FF00A9FCFB /* FBGoodsCommentTableViewCell.m */; };
+		D8A9AEA01CE9B76000A9FCFB /* CommentModel.m in Sources */ = {isa = PBXBuildFile; fileRef = D8A9AE981CE9B76000A9FCFB /* CommentModel.m */; };
+		D8A9AEA11CE9B76000A9FCFB /* CommentModelData.m in Sources */ = {isa = PBXBuildFile; fileRef = D8A9AE9A1CE9B76000A9FCFB /* CommentModelData.m */; };
+		D8A9AEA21CE9B76000A9FCFB /* CommentModelId.m in Sources */ = {isa = PBXBuildFile; fileRef = D8A9AE9C1CE9B76000A9FCFB /* CommentModelId.m */; };
+		D8A9AEA31CE9B76000A9FCFB /* CommentModelRow.m in Sources */ = {isa = PBXBuildFile; fileRef = D8A9AE9D1CE9B76000A9FCFB /* CommentModelRow.m */; };
+		D8A9AEA41CE9B76000A9FCFB /* CommentModelUser.m in Sources */ = {isa = PBXBuildFile; fileRef = D8A9AE9F1CE9B76000A9FCFB /* CommentModelUser.m */; };
+		D8A9AEA71CE9CA9F00A9FCFB /* GoodsRelationProducts.m in Sources */ = {isa = PBXBuildFile; fileRef = D8A9AEA61CE9CA9F00A9FCFB /* GoodsRelationProducts.m */; };
+		D8A9AEAD1CE9D0A200A9FCFB /* FBGoodsCommentViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D8A9AEAC1CE9D0A200A9FCFB /* FBGoodsCommentViewController.m */; };
+		D8A9AEB01CE9D46200A9FCFB /* FBBuyGoodsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D8A9AEAF1CE9D46200A9FCFB /* FBBuyGoodsViewController.m */; };
 		D8AEC7511CA8E3A000A868B6 /* libsqlite3.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 1F0EE6A41C9FA47B000631F0 /* libsqlite3.tbd */; };
 		D8AEC7521CA8E3AE00A868B6 /* libiconv.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 1F0EE6A21C9FA43C000631F0 /* libiconv.tbd */; };
 		D8AEC7531CA8E3BB00A868B6 /* libstdc++.6.0.9.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 280045201C805CD7005F5C2E /* libstdc++.6.0.9.tbd */; };
@@ -1065,8 +1075,6 @@
 		D8A9ACF01CD8B74D00A9FCFB /* LikeOrSuPeopleUser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LikeOrSuPeopleUser.m; sourceTree = "<group>"; };
 		D8A9ACFA1CD99EBF00A9FCFB /* ReportViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ReportViewController.h; sourceTree = "<group>"; };
 		D8A9ACFB1CD99EBF00A9FCFB /* ReportViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ReportViewController.m; sourceTree = "<group>"; };
-		D8A9ACFD1CD9AF1D00A9FCFB /* OtherGoodsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OtherGoodsViewController.h; sourceTree = "<group>"; };
-		D8A9ACFE1CD9AF1D00A9FCFB /* OtherGoodsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OtherGoodsViewController.m; sourceTree = "<group>"; };
 		D8A9AD081CD9CCA900A9FCFB /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		D8A9AD6A1CD9DFBC00A9FCFB /* ScenceAddMoreView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ScenceAddMoreView.h; sourceTree = "<group>"; };
 		D8A9AD6B1CD9DFBC00A9FCFB /* ScenceAddMoreView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ScenceAddMoreView.m; sourceTree = "<group>"; };
@@ -1202,6 +1210,28 @@
 		D8A9AE851CE75DC600A9FCFB /* FiuBrandRow.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FiuBrandRow.m; sourceTree = "<group>"; };
 		D8A9AE8A1CE8D99E00A9FCFB /* GoodsSceneCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GoodsSceneCollectionViewCell.h; sourceTree = "<group>"; };
 		D8A9AE8B1CE8D99E00A9FCFB /* GoodsSceneCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GoodsSceneCollectionViewCell.m; sourceTree = "<group>"; };
+		D8A9AE8D1CE9A80D00A9FCFB /* FBGoodsInfoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FBGoodsInfoViewController.h; sourceTree = "<group>"; };
+		D8A9AE8E1CE9A80D00A9FCFB /* FBGoodsInfoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FBGoodsInfoViewController.m; sourceTree = "<group>"; };
+		D8A9AE901CE9B44100A9FCFB /* FBGoodsColorTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FBGoodsColorTableViewCell.h; sourceTree = "<group>"; };
+		D8A9AE911CE9B44100A9FCFB /* FBGoodsColorTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FBGoodsColorTableViewCell.m; sourceTree = "<group>"; };
+		D8A9AE931CE9B6FF00A9FCFB /* FBGoodsCommentTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FBGoodsCommentTableViewCell.h; sourceTree = "<group>"; };
+		D8A9AE941CE9B6FF00A9FCFB /* FBGoodsCommentTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FBGoodsCommentTableViewCell.m; sourceTree = "<group>"; };
+		D8A9AE961CE9B76000A9FCFB /* CommentModelRow.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CommentModelRow.h; sourceTree = "<group>"; };
+		D8A9AE971CE9B76000A9FCFB /* CommentModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CommentModel.h; sourceTree = "<group>"; };
+		D8A9AE981CE9B76000A9FCFB /* CommentModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CommentModel.m; sourceTree = "<group>"; };
+		D8A9AE991CE9B76000A9FCFB /* CommentModelData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CommentModelData.h; sourceTree = "<group>"; };
+		D8A9AE9A1CE9B76000A9FCFB /* CommentModelData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CommentModelData.m; sourceTree = "<group>"; };
+		D8A9AE9B1CE9B76000A9FCFB /* CommentModelId.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CommentModelId.h; sourceTree = "<group>"; };
+		D8A9AE9C1CE9B76000A9FCFB /* CommentModelId.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CommentModelId.m; sourceTree = "<group>"; };
+		D8A9AE9D1CE9B76000A9FCFB /* CommentModelRow.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CommentModelRow.m; sourceTree = "<group>"; };
+		D8A9AE9E1CE9B76000A9FCFB /* CommentModelUser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CommentModelUser.h; sourceTree = "<group>"; };
+		D8A9AE9F1CE9B76000A9FCFB /* CommentModelUser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CommentModelUser.m; sourceTree = "<group>"; };
+		D8A9AEA51CE9CA9F00A9FCFB /* GoodsRelationProducts.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GoodsRelationProducts.h; sourceTree = "<group>"; };
+		D8A9AEA61CE9CA9F00A9FCFB /* GoodsRelationProducts.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GoodsRelationProducts.m; sourceTree = "<group>"; };
+		D8A9AEAB1CE9D0A200A9FCFB /* FBGoodsCommentViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FBGoodsCommentViewController.h; sourceTree = "<group>"; };
+		D8A9AEAC1CE9D0A200A9FCFB /* FBGoodsCommentViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FBGoodsCommentViewController.m; sourceTree = "<group>"; };
+		D8A9AEAE1CE9D46200A9FCFB /* FBBuyGoodsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FBBuyGoodsViewController.h; sourceTree = "<group>"; };
+		D8A9AEAF1CE9D46200A9FCFB /* FBBuyGoodsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FBBuyGoodsViewController.m; sourceTree = "<group>"; };
 		E0438B4B24E3F747F761AF4C /* Pods-Fiu.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Fiu.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Fiu/Pods-Fiu.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -2529,6 +2559,16 @@
 		D8363A0F1CD8809400CC4AC0 /* Goods */ = {
 			isa = PBXGroup;
 			children = (
+				D8A9AE971CE9B76000A9FCFB /* CommentModel.h */,
+				D8A9AE981CE9B76000A9FCFB /* CommentModel.m */,
+				D8A9AE991CE9B76000A9FCFB /* CommentModelData.h */,
+				D8A9AE9A1CE9B76000A9FCFB /* CommentModelData.m */,
+				D8A9AE9B1CE9B76000A9FCFB /* CommentModelId.h */,
+				D8A9AE9C1CE9B76000A9FCFB /* CommentModelId.m */,
+				D8A9AE961CE9B76000A9FCFB /* CommentModelRow.h */,
+				D8A9AE9D1CE9B76000A9FCFB /* CommentModelRow.m */,
+				D8A9AE9E1CE9B76000A9FCFB /* CommentModelUser.h */,
+				D8A9AE9F1CE9B76000A9FCFB /* CommentModelUser.m */,
 				D8363A101CD8809400CC4AC0 /* Goods.h */,
 				D8363A111CD8809400CC4AC0 /* Goods.m */,
 				D8363A121CD8809400CC4AC0 /* GoodsData.h */,
@@ -2537,6 +2577,8 @@
 				D8363A151CD8809400CC4AC0 /* GoodsInfo.m */,
 				D8363A161CD8809400CC4AC0 /* GoodsInfoBrand.h */,
 				D8363A171CD8809400CC4AC0 /* GoodsInfoBrand.m */,
+				D8A9AEA51CE9CA9F00A9FCFB /* GoodsRelationProducts.h */,
+				D8A9AEA61CE9CA9F00A9FCFB /* GoodsRelationProducts.m */,
 				D8363A181CD8809400CC4AC0 /* GoodsInfoData.h */,
 				D8363A191CD8809400CC4AC0 /* GoodsInfoData.m */,
 				D8363A1A1CD8809400CC4AC0 /* GoodsRow.h */,
@@ -2603,6 +2645,10 @@
 				D8363A4E1CD8814600CC4AC0 /* MallMenuTableViewCell.m */,
 				D8A9AE8A1CE8D99E00A9FCFB /* GoodsSceneCollectionViewCell.h */,
 				D8A9AE8B1CE8D99E00A9FCFB /* GoodsSceneCollectionViewCell.m */,
+				D8A9AE901CE9B44100A9FCFB /* FBGoodsColorTableViewCell.h */,
+				D8A9AE911CE9B44100A9FCFB /* FBGoodsColorTableViewCell.m */,
+				D8A9AE931CE9B6FF00A9FCFB /* FBGoodsCommentTableViewCell.h */,
+				D8A9AE941CE9B6FF00A9FCFB /* FBGoodsCommentTableViewCell.m */,
 			);
 			path = TableViewCell;
 			sourceTree = "<group>";
@@ -2621,8 +2667,12 @@
 			children = (
 				D8363A601CD8818E00CC4AC0 /* GoodsInfoViewController.h */,
 				D8363A611CD8818E00CC4AC0 /* GoodsInfoViewController.m */,
-				D8A9ACFD1CD9AF1D00A9FCFB /* OtherGoodsViewController.h */,
-				D8A9ACFE1CD9AF1D00A9FCFB /* OtherGoodsViewController.m */,
+				D8A9AE8D1CE9A80D00A9FCFB /* FBGoodsInfoViewController.h */,
+				D8A9AE8E1CE9A80D00A9FCFB /* FBGoodsInfoViewController.m */,
+				D8A9AEAB1CE9D0A200A9FCFB /* FBGoodsCommentViewController.h */,
+				D8A9AEAC1CE9D0A200A9FCFB /* FBGoodsCommentViewController.m */,
+				D8A9AEAE1CE9D46200A9FCFB /* FBBuyGoodsViewController.h */,
+				D8A9AEAF1CE9D46200A9FCFB /* FBBuyGoodsViewController.m */,
 			);
 			path = Goods;
 			sourceTree = "<group>";
@@ -3490,6 +3540,7 @@
 				D8363A581CD8814600CC4AC0 /* InfoBrandTableViewCell.m in Sources */,
 				D87B69D31CC726D500199EFE /* CommentNViewController.m in Sources */,
 				1F5038B41CDC40EE004F76AD /* OrderInfoModel.m in Sources */,
+				D8A9AE921CE9B44100A9FCFB /* FBGoodsColorTableViewCell.m in Sources */,
 				D81281531CAA8532007CF08B /* FBAPI.m in Sources */,
 				1F07A6471CC77BBF00CF225F /* OtherCollectionViewCell.m in Sources */,
 				1FD7E6771CC8DFE400A69BDD /* MyQrCodeViewController.m in Sources */,
@@ -3520,10 +3571,10 @@
 				D8A9AE281CE1BA2800A9FCFB /* OpenAllTagListTableViewCell.m in Sources */,
 				D8A9AE051CDC3D5800A9FCFB /* SearchFSceneViewController.m in Sources */,
 				1FC6780F1CDAECE500535162 /* BonusCell.m in Sources */,
+				D8A9AE951CE9B6FF00A9FCFB /* FBGoodsCommentTableViewCell.m in Sources */,
 				1F07A6591CC7A45300CF225F /* FriendCollectionViewCell.m in Sources */,
 				D8A9AE401CE304FF00A9FCFB /* NSTimer+Addition.m in Sources */,
 				D8363A5C1CD8814600CC4AC0 /* InfoUseSceneTableViewCell.m in Sources */,
-				D8A9ACFF1CD9AF1D00A9FCFB /* OtherGoodsViewController.m in Sources */,
 				D8A9AE5B1CE4603300A9FCFB /* MarkGoodsRow.m in Sources */,
 				D87B69D51CC726D500199EFE /* WriteCommentView.m in Sources */,
 				D812815A1CAA8532007CF08B /* fineix.xcdatamodeld in Sources */,
@@ -3564,6 +3615,8 @@
 				D8A9ACD01CD8A46900A9FCFB /* FiuHeaderTableViewCell.m in Sources */,
 				D87B69D21CC726D500199EFE /* FBSheetViewController.m in Sources */,
 				1FFFFF311CD055F2008E1CDC /* DirectMessagesViewController.m in Sources */,
+				D8A9AEAD1CE9D0A200A9FCFB /* FBGoodsCommentViewController.m in Sources */,
+				D8A9AEA71CE9CA9F00A9FCFB /* GoodsRelationProducts.m in Sources */,
 				D8A9ADC21CD9E2E700A9FCFB /* FiltersViewController.m in Sources */,
 				D8A9ADE51CD9F92B00A9FCFB /* FBFilters.m in Sources */,
 				D8363A521CD8814600CC4AC0 /* MallMenuCollectionViewCell.m in Sources */,
@@ -3617,8 +3670,10 @@
 				D8363A2F1CD8809400CC4AC0 /* Category.m in Sources */,
 				D8A9AD8B1CD9DFBC00A9FCFB /* FiltersView.m in Sources */,
 				1FEE50F71CE235FD00B8A292 /* PaySuccessViewController.m in Sources */,
+				D8A9AE8F1CE9A80D00A9FCFB /* FBGoodsInfoViewController.m in Sources */,
 				D8A9AE1C1CE0772700A9FCFB /* UsedTagCollectionViewCell.m in Sources */,
 				D812815E1CAA8532007CF08B /* main.m in Sources */,
+				D8A9AEB01CE9D46200A9FCFB /* FBBuyGoodsViewController.m in Sources */,
 				1FE60E5B1CD32FD200045117 /* CommentsTableViewCell.m in Sources */,
 				D83639BF1CD0932000CC4AC0 /* CommentRow.m in Sources */,
 				D8A9ADBB1CD9E2E700A9FCFB /* SearchLocationViewController.m in Sources */,
@@ -3648,6 +3703,7 @@
 				D8A9AD881CD9DFBC00A9FCFB /* FBFiltersCollectionViewCell.m in Sources */,
 				1F3C0A911CBF95AC00B84FEB /* SubscribePeopleTableViewCell.m in Sources */,
 				1FEE50F21CE2144500B8A292 /* CommenttwoViewController.m in Sources */,
+				D8A9AEA11CE9B76000A9FCFB /* CommentModelData.m in Sources */,
 				1FC678021CDAE97B00535162 /* HistoryBonusViewController.m in Sources */,
 				D8363A6D1CD8818E00CC4AC0 /* GoodsCategoryViewController.m in Sources */,
 				D8A9AE591CE4603300A9FCFB /* MarkGoods.m in Sources */,
@@ -3667,10 +3723,12 @@
 				D8A9ACCF1CD8A46900A9FCFB /* SuFiuScenrView.m in Sources */,
 				D8A9ACDF1CD8A49100A9FCFB /* AllSceneViewController.m in Sources */,
 				D8A9ACB31CD89E0000A9FCFB /* FiuSceneData.m in Sources */,
+				D8A9AEA01CE9B76000A9FCFB /* CommentModel.m in Sources */,
 				1F51E8B31CC6338D00017839 /* PraisedViewController.m in Sources */,
 				1FBE626A1CC4CB72009606F7 /* MyPageFocusOnViewController.m in Sources */,
 				D8A9ACBC1CD89E0000A9FCFB /* HotTagsData.m in Sources */,
 				D8A9ACB71CD89E0000A9FCFB /* FiuSceneInfoLocation.m in Sources */,
+				D8A9AEA31CE9B76000A9FCFB /* CommentModelRow.m in Sources */,
 				D8A9ACB91CD89E0000A9FCFB /* FiuSceneLocation.m in Sources */,
 				1F07A6561CC79BE300CF225F /* FriendTableViewCell.m in Sources */,
 				1F27AE841CE05C18005A434B /* WXSignParams.m in Sources */,
@@ -3691,11 +3749,13 @@
 				D8363AB91CD8835D00CC4AC0 /* SceneInfoLocation.m in Sources */,
 				1FC6782E1CDB33ED00535162 /* UIView+TYAlertView.m in Sources */,
 				1F5038C01CDC675A004F76AD /* MyPageBGCollectionViewCell.m in Sources */,
+				D8A9AEA21CE9B76000A9FCFB /* CommentModelId.m in Sources */,
 				D8A9ACB21CD89E0000A9FCFB /* FiuScene.m in Sources */,
 				D8363A6E1CD8818E00CC4AC0 /* GoodsBrandViewController.m in Sources */,
 				D8363A6B1CD8818E00CC4AC0 /* GoodsInfoViewController.m in Sources */,
 				D81281671CAA8532007CF08B /* JKDBModel.m in Sources */,
 				1FE60E421CD3226400045117 /* MessageViewController.m in Sources */,
+				D8A9AEA41CE9B76000A9FCFB /* CommentModelUser.m in Sources */,
 				1F7B29361CD5F50500482D84 /* MyOderModel.m in Sources */,
 				D80360501CBF376B001920F9 /* UserInfoEntity.m in Sources */,
 				1F07A64A1CC77F3B00CF225F /* ScenceListCollectionViewCell.m in Sources */,

@@ -264,6 +264,7 @@ static NSString *const URLFiuBrand = @"/scene_brands/getlist";
         if (!cell) {
             cell = [[GoodsTableViewCell alloc] initWithStyle:(UITableViewCellStyleDefault) reuseIdentifier:mallGoodsCellId];
         }
+        cell.nav = self.navigationController;
         [cell setGoodsData:self.goodsList[indexPath.row]];
         return cell;
     }

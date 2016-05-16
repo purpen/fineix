@@ -23,6 +23,7 @@
 #import "HomePageViewController.h"
 #import "WXApi.h"
 #import <AlipaySDK/AlipaySDK.h>
+#import "FBLoginRegisterViewController.h"
 
 
 @interface AppDelegate ()<WXApiDelegate>

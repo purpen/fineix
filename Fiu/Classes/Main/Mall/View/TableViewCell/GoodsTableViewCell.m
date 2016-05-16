@@ -33,6 +33,7 @@
     }
     
     self.title.text = model.title;
+    self.goodsId = [NSString stringWithFormat:@"%zi", model.idField];
     
     // 产品来源: 1.官网；2.淘宝；3.天猫；4.京东
     if (model.attrbute == 1) {
@@ -46,7 +47,7 @@
     }
     
     self.price.text = [NSString stringWithFormat:@"¥%.2f", model.marketPrice];
-    
+   
     if (model.banner.count > 0) {
         self.goodsImgMarr = [NSMutableArray arrayWithArray:model.banner];
         
@@ -91,6 +92,7 @@
         
         _goodsImgView = [[UICollectionView alloc] initWithFrame:CGRectMake(0, 10, SCREEN_WIDTH, 150) collectionViewLayout:flowLayout];
         _goodsImgView.dataSource = self;
+        _goodsImgView.delegate = self;
         _goodsImgView.backgroundColor = [UIColor colorWithHexString:grayLineColor];
         _goodsImgView.showsHorizontalScrollIndicator = NO;
         [_goodsImgView registerClass:[GoodsImgCollectionViewCell class] forCellWithReuseIdentifier:@"GoodsImgCollectionViewCell"];
@@ -113,6 +115,12 @@
         [cell addSubview:line];
     }
     return cell;
+}
+
+- (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
+    GoodsInfoViewController * goodsInfoVC = [[GoodsInfoViewController alloc] init];
+    goodsInfoVC.goodsID = self.goodsId;
+    [self.nav pushViewController:goodsInfoVC animated:YES];
 }
 
 #pragma mark - 标题

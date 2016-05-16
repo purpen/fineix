@@ -34,6 +34,8 @@
 
 #pragma mark -
 - (void)setViewUI {
+    [self addSubview:self.cancelBtn];
+    
     [self addSubview:self.findView];
     [_findView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.size.mas_equalTo(CGSizeMake(SCREEN_WIDTH, SCREEN_WIDTH * 0.9));
@@ -77,6 +79,19 @@
         _findView.backgroundColor = [UIColor colorWithHexString:@"#FAFBFD"];
     }
     return _findView;
+}
+
+#pragma mark - 取消
+- (UIButton *)cancelBtn {
+    if (!_cancelBtn) {
+        _cancelBtn = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT - (SCREEN_WIDTH * 0.9))];
+        [_cancelBtn addTarget:self action:@selector(cancelBtnClick) forControlEvents:(UIControlEventTouchUpInside)];
+    }
+    return _cancelBtn;
+}
+
+- (void)cancelBtnClick {
+    [self removeFromSuperview];
 }
 
 #pragma mark - 确认找到

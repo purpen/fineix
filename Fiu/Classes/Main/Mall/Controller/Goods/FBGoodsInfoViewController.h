@@ -7,7 +7,19 @@
 //
 
 #import "FBViewController.h"
+#import "FBRollImages.h"
+#import <SVProgressHUD/SVProgressHUD.h>
 
-@interface FBGoodsInfoViewController : FBViewController
+@interface FBGoodsInfoViewController : FBViewController <FBNavigationBarItemsDelegate, UITableViewDelegate, UITableViewDataSource>
+
+@pro_strong FBRollImages    *   rollImgView;        //  轮播图
+@pro_strong UITableView     *   goodsTable;
+@pro_strong UIView          *   buyView;
+@pro_strong UIButton        *   buyingBtn;
+@pro_strong UIButton        *   addCarBtn;
+
+@pro_strong NSString        *   goodsID;            //  商品id
+@pro_strong FBRequest       *   goodsInfoRequest;
+@pro_strong FBRequest       *   commentRequest;
 
 @end

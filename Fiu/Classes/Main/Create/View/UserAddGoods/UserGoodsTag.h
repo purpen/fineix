@@ -22,5 +22,6 @@
 @pro_strong UIButton    *   dele;
 @pro_strong UILabel     *   title;
 @pro_strong UILabel     *   price;
+@pro_assign BOOL            isMove;
 
 @end

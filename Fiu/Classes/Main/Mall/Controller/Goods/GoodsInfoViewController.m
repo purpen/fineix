@@ -16,6 +16,7 @@
 #import "GoodsCarViewController.h"
 #import "GoodsInfoData.h"
 #import "SceneInfoData.h"
+#import "FBGoodsInfoViewController.h"
 
 static NSString *const URLGoodsInfo = @"/scene_product/view";
 static NSString *const URLRecommendGoods = @"/scene_product/getlist";
@@ -49,17 +50,15 @@ static NSString *const URLGoodsScene = @"/sight_and_product/getlist";
 #pragma mark - 网络请求
 #pragma mark 商品详情
 - (void)networkGoodsInfoData {
-    [SVProgressHUD show];
     self.goodsInfoRequest = [FBAPI getWithUrlString:URLGoodsInfo requestDictionary:@{@"id":self.goodsID} delegate:self];
     [self.goodsInfoRequest startRequestSuccess:^(FBRequest *request, id result) {
-        NSLog(@"＝＝＝＝＝＝＝＝＝＝＝ %@", result);
+        self.thnGoodsId = [[result valueForKey:@"data"] valueForKey:@"oid"];
         self.goodsInfo = [[GoodsInfoData alloc] initWithDictionary:[result valueForKey:@"data"]];
         [self setGoodsInfoVcUI];
         [self.rollImgView setGoodsRollimageView:self.goodsInfo];
         [self.goodsInfoTable reloadData];
 
         [self networkRecommendGoodsDataWithCategory:[self.goodsInfo valueForKey:@"categoryId"]];
-        [SVProgressHUD dismiss];
         
     } failure:^(FBRequest *request, NSError *error) {
         [SVProgressHUD showErrorWithStatus:[error localizedDescription]];
@@ -130,13 +129,18 @@ static NSString *const URLGoodsScene = @"/sight_and_product/getlist";
 }
 
 - (void)buyCarBtnClick {
-    if (self.goodsInfo.kind == 1) {
-        NSLog(@"————————————————————————————去购买 太火鸟");
+    if (self.goodsInfo.attrbute == 1) {
+        FBGoodsInfoViewController * thnGoodsVC = [[FBGoodsInfoViewController alloc] init];
+//        thnGoodsVC.goodsID = self.thnGoodsId;
+        thnGoodsVC.goodsID = @"1011497002";
+        [self.navigationController pushViewController:thnGoodsVC animated:YES];
     
-    } else if (self.goodsInfo.kind == 2) {
-        NSLog(@"————————————————————————————去购买 第三方 %@", self.goodsInfo.link);
+    } else {
+        BOOL isExsit = [[UIApplication sharedApplication] canOpenURL:[NSURL URLWithString:self.goodsInfo.link]];
+        if (isExsit) {
+            [[UIApplication sharedApplication] openURL:[NSURL URLWithString:self.goodsInfo.link]];
+        }
     }
-    
 }
 
 #pragma mark - 轮播图
@@ -207,7 +211,7 @@ static NSString *const URLGoodsScene = @"/sight_and_product/getlist";
             cell = [[InfoRecommendTableViewCell alloc] initWithStyle:(UITableViewCellStyleDefault) reuseIdentifier:InfoRecommendCellId];
         }
         cell.nav = self.navigationController;
-        [cell setRecommendGoodsData:self.recommendGoods];
+        [cell setRecommendGoodsData:self.recommendGoods withType:0];
         return cell;
     }
     
@@ -270,6 +274,11 @@ static NSString *const URLGoodsScene = @"/sight_and_product/getlist";
 - (void)rightBarItemSelected {
     GoodsCarViewController * goodsCarVC = [[GoodsCarViewController alloc] init];
     [self.navigationController pushViewController:goodsCarVC animated:YES];
+}
+
+- (void)viewDidDisappear:(BOOL)animated {
+    [super viewDidDisappear:animated];
+    [SVProgressHUD dismiss];
 }
 
 #pragma mark - 

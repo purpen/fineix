@@ -61,7 +61,6 @@
     if ([self.delegate respondsToSelector:@selector(tagBtnSelected:)]) {
         [self.delegate tagBtnSelected:(indexPath.row)];
     }
-
 }
 
 @end

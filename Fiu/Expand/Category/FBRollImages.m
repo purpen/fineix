@@ -37,6 +37,10 @@
     self.rollImageView.imageURLStringsGroup = model.bannerAsset;
 }
 
+- (void)setThnGoodsRollImgData:(GoodsInfoData *)model {
+    self.rollImageView.imageURLStringsGroup = model.thnAsset;
+}
+
 - (SDCycleScrollView *)rollImageView {
     if (!_rollImageView) {
         _rollImageView = [[SDCycleScrollView alloc] init];

@@ -20,6 +20,7 @@
 @pro_strong UITableView             *   goodsInfoTable;     //  商品详情
 @pro_strong FBRollImages            *   rollImgView;        //  轮播图
 @pro_strong NSString                *   goodsID;            //  商品id
+@pro_strong NSString                *   thnGoodsId;
 
 @pro_strong FBRequest               *   goodsInfoRequest;
 @pro_strong FBRequest               *   reGoodsRequest;

@@ -84,9 +84,6 @@
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
     GoodsSceneCollectionViewCell * cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"UseSceneRollViewCell" forIndexPath:indexPath];
-    cell.layer.cornerRadius = 5;
-    cell.layer.borderColor = [UIColor colorWithHexString:fineixColor].CGColor;
-    cell.layer.borderWidth = 0.5f;
     cell.title.text = self.sceneList[indexPath.row];
     return cell;
 }

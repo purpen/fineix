@@ -7,7 +7,11 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "Fiu.h"
 
 @interface FBGoodsColorTableViewCell : UITableViewCell
+
+@pro_strong UILabel               *       goodsColorLab;
+@pro_strong UIImageView           *       nextIcon;
 
 @end

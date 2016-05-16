@@ -32,11 +32,17 @@
 
 	if(![dictionary[@"banner_asset"] isKindOfClass:[NSNull class]]){
 		self.bannerAsset = dictionary[@"banner_asset"];
-	}	
+	}
+    if(![dictionary[@"asset"] isKindOfClass:[NSNull class]]){
+        self.thnAsset = dictionary[@"asset"];
+    }
+    if(![dictionary[@"skus"] isKindOfClass:[NSNull class]]){
+        self.skus = dictionary[@"skus"];
+    }
 	if(![dictionary[@"brand"] isKindOfClass:[NSNull class]]){
 		self.brand = [[GoodsInfoBrand alloc] initWithDictionary:dictionary[@"brand"]];
 	}
-
+    
 	if(![dictionary[@"brand_id"] isKindOfClass:[NSNull class]]){
 		self.brandId = dictionary[@"brand_id"];
 	}	
