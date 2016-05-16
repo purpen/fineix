@@ -7,8 +7,9 @@
 //
 
 #import "InfoUseSceneTableViewCell.h"
-
-static const NSInteger userSceneBtnTag = 435;
+#import "SceneInfoData.h"
+#import "SceneInfoViewController.h"
+#import "GoodsSceneCollectionViewCell.h"
 
 @implementation InfoUseSceneTableViewCell
 
@@ -23,11 +24,10 @@ static const NSInteger userSceneBtnTag = 435;
     return self;
 }
 
-- (void)setUI:(NSArray *)sceneArr {
-    NSMutableArray * scene = [NSMutableArray arrayWithArray:sceneArr];
-    [scene addObject:NSLocalizedString(@"lookMore", nil)];
-    [self addUseSceneScrollView:scene];
-    
+- (void)setGoodsScene:(NSMutableArray *)scene {
+    self.sceneList = [NSMutableArray arrayWithArray:[scene valueForKey:@"title"]];
+    self.sceneIds = [NSMutableArray arrayWithArray:[scene valueForKey:@"idField"]];
+    [self.useSceneRollView reloadData];
 }
 
 #pragma mark -
@@ -60,38 +60,47 @@ static const NSInteger userSceneBtnTag = 435;
 }
 
 #pragma mark - 推荐场景
-- (UIScrollView *)useSceneRollView {
+- (UICollectionView *)useSceneRollView {
     if (!_useSceneRollView) {
-        _useSceneRollView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 45, SCREEN_WIDTH, 45)];
+        UICollectionViewFlowLayout * flowLayout = [[UICollectionViewFlowLayout alloc] init];
+        flowLayout.scrollDirection = UICollectionViewScrollDirectionHorizontal;
+        flowLayout.sectionInset = UIEdgeInsetsMake(3.5, 15, 3.5, 15);
+        
+        _useSceneRollView = [[UICollectionView alloc] initWithFrame:CGRectMake(0, 45, SCREEN_WIDTH, 45) collectionViewLayout:flowLayout];
+        _useSceneRollView.dataSource = self;
+        _useSceneRollView.delegate = self;
         _useSceneRollView.showsVerticalScrollIndicator = NO;
         _useSceneRollView.showsHorizontalScrollIndicator = NO;
+        _useSceneRollView.backgroundColor = [UIColor whiteColor];
+        [_useSceneRollView registerClass:[GoodsSceneCollectionViewCell class] forCellWithReuseIdentifier:@"UseSceneRollViewCell"];
     }
     return _useSceneRollView;
 }
 
-//  创建推荐的应用场景按钮
-- (void)addUseSceneScrollView:(NSArray *)sceneMarr {
-    
-    CGFloat width = 0;
-    CGFloat height = 8;
-    
-    for (NSUInteger idx = 0; idx < sceneMarr.count; ++ idx) {
-        UIButton * sceneBtn = [[UIButton alloc] init];
-        CGFloat btnLength = [[sceneMarr objectAtIndex:idx] boundingRectWithSize:CGSizeMake(320, 1000) options:(NSStringDrawingUsesLineFragmentOrigin) attributes:nil context:nil].size.width;
-        [sceneBtn setTitle:sceneMarr[idx] forState:(UIControlStateNormal)];
-        [sceneBtn setTitleColor:[UIColor colorWithHexString:fineixColor] forState:(UIControlStateNormal)];
-        sceneBtn.titleLabel.font = [UIFont systemFontOfSize:Font_Tag];
-        sceneBtn.layer.cornerRadius = 5;
-        sceneBtn.layer.borderColor = [UIColor colorWithHexString:fineixColor].CGColor;
-        sceneBtn.layer.borderWidth = 0.5f;
-        sceneBtn.frame = CGRectMake(15 + width + (10 * idx), height, btnLength + 40, 29);
-        width = sceneBtn.frame.size.width + width;
-        sceneBtn.tag = userSceneBtnTag + idx;
-        
-        [self.useSceneRollView addSubview:sceneBtn];
-    }
-    
-    self.useSceneRollView.contentSize = CGSizeMake(width + 70, 0);
+
+- (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
+    return self.sceneList.count;
 }
+
+- (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
+    GoodsSceneCollectionViewCell * cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"UseSceneRollViewCell" forIndexPath:indexPath];
+    cell.layer.cornerRadius = 5;
+    cell.layer.borderColor = [UIColor colorWithHexString:fineixColor].CGColor;
+    cell.layer.borderWidth = 0.5f;
+    cell.title.text = self.sceneList[indexPath.row];
+    return cell;
+}
+
+- (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
+    SceneInfoViewController * sceneInfoVC = [[SceneInfoViewController alloc] init];
+    sceneInfoVC.sceneId = self.sceneIds[indexPath.row];
+    [self.nav pushViewController:sceneInfoVC animated:YES];
+}
+
+- (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath {
+    CGFloat btnLength = [[self.sceneList objectAtIndex:indexPath.row] boundingRectWithSize:CGSizeMake(320, 1000) options:(NSStringDrawingUsesLineFragmentOrigin) attributes:nil context:nil].size.width;
+    return CGSizeMake(btnLength + 40, 29);
+}
+
 
 @end

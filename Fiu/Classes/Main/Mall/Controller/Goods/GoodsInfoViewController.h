@@ -23,5 +23,6 @@
 
 @pro_strong FBRequest               *   goodsInfoRequest;
 @pro_strong FBRequest               *   reGoodsRequest;
+@pro_strong FBRequest               *   goodsSceneRequest;
 
 @end

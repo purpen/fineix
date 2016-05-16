@@ -12,6 +12,7 @@
 
 @property (nonatomic, strong) NSString * idField;
 @property (nonatomic, strong) NSString * coverUrl;
+@property (nonatomic, strong) NSString * bannerUrl;
 @property (nonatomic, strong) NSString * createdAt;
 @property (nonatomic, assign) NSInteger currentUserId;
 @property (nonatomic, strong) NSString * des;

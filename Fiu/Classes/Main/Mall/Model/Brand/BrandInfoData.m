@@ -27,7 +27,10 @@
 	}	
 	if(![dictionary[@"cover_url"] isKindOfClass:[NSNull class]]){
 		self.coverUrl = dictionary[@"cover_url"];
-	}	
+	}
+    if(![dictionary[@"banner_url"] isKindOfClass:[NSNull class]]){
+        self.bannerUrl = dictionary[@"banner_url"];
+    }
 	if(![dictionary[@"created_at"] isKindOfClass:[NSNull class]]){
 		self.createdAt = dictionary[@"created_at"];
 	}	

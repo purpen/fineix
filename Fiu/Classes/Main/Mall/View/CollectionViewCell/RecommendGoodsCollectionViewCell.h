@@ -8,6 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import "Fiu.h"
+#import "GoodsInfoData.h"
 
 @interface RecommendGoodsCollectionViewCell : UICollectionViewCell
 
@@ -16,6 +17,6 @@
 @pro_strong UILabel                 *   line;           //  分割线
 @pro_strong UILabel                 *   price;          //  价格
 
-- (void)setUI;
+- (void)setRecommendGoodsData:(GoodsInfoData *)model;
 
 @end

@@ -27,7 +27,7 @@ static NSString *const URLCommentList = @"/comment/getlist";
 static NSString *const URLLikeScenePeople = @"/favorite";
 static NSString *const URLLikeScene = @"/favorite/ajax_sight_love";
 static NSString *const URLCancelLike = @"/favorite/ajax_cancel_sight_love";
-static NSString *const URLSceneGoods = @"/sight_and_product/getlist";
+static NSString *const URLSceneGoods = @"/scene_product/getlist";
 
 @interface SceneInfoViewController ()
 
@@ -88,7 +88,7 @@ static NSString *const URLSceneGoods = @"/sight_and_product/getlist";
             goodsIds = self.goodsId[0];
         }
         
-        [self networkSceneGoodsData:self.sceneId];
+        [self networkSceneGoodsData:goodsIds];
         [self setSceneInfoViewUI];
         
         [SVProgressHUD dismiss];
@@ -149,9 +149,8 @@ static NSString *const URLSceneGoods = @"/sight_and_product/getlist";
 
 #pragma mark 此场景中的商品
 - (void)networkSceneGoodsData:(NSString *)goodsIds {
-    self.sceneGoodsRequest = [FBAPI getWithUrlString:URLSceneGoods requestDictionary:@{@"sight_id":goodsIds} delegate:self];
+    self.sceneGoodsRequest = [FBAPI getWithUrlString:URLSceneGoods requestDictionary:@{@"ids":goodsIds} delegate:self];
     [self.sceneGoodsRequest startRequestSuccess:^(FBRequest *request, id result) {
-//        NSLog(@"＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝ 场景中的商品 %@", result);
         NSArray * goodsArr = [[result valueForKey:@"data"] valueForKey:@"rows"];
         NSMutableArray * categoryTagIds = [NSMutableArray array];
         for (NSDictionary * goodsDic in goodsArr) {

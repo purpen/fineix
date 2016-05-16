@@ -31,13 +31,20 @@ static NSString *const URLAllFiuSceneList = @"/scene_scene/";
     self.currentpageNum = 0;
     [self networkAllFiuSceneList];
     
+    //  frome #import "ReleaseViewController.h"
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(refreshList) name:@"refreshAllFSceneList" object:nil];
+    
 }
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     
     [self setAllSceneViewUI];
-    
+}
+
+#pragma mark - 刷新列表
+- (void)refreshList {
+    [self.allSceneView.mj_header beginRefreshing];
 }
 
 #pragma mark - 网络请求

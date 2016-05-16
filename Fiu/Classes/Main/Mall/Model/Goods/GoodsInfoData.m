@@ -116,13 +116,16 @@
 	}	
 	if(![dictionary[@"png_asset"] isKindOfClass:[NSNull class]]){
 		self.pngAsset = dictionary[@"png_asset"];
-	}	
+	}
+    if(![dictionary[@"category_tags"] isKindOfClass:[NSNull class]]){
+        self.categoryTags = dictionary[@"category_tags"];
+    }
 	if(![dictionary[@"published"] isKindOfClass:[NSNull class]]){
 		self.published = [dictionary[@"published"] integerValue];
 	}
 
 	if(![dictionary[@"sale_price"] isKindOfClass:[NSNull class]]){
-		self.salePrice = [dictionary[@"sale_price"] integerValue];
+		self.salePrice = [dictionary[@"sale_price"] floatValue];
 	}
 
 	if(![dictionary[@"short_title"] isKindOfClass:[NSNull class]]){

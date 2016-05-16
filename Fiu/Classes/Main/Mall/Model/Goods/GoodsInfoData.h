@@ -18,6 +18,7 @@
 @property (nonatomic, strong) NSString * brandId;
 @property (nonatomic, assign) NSInteger buyCount;
 @property (nonatomic, assign) NSInteger categoryId;
+@property (nonatomic, strong) NSArray * categoryTags;
 @property (nonatomic, assign) NSInteger commentCount;
 @property (nonatomic, strong) NSString * coverId;
 @property (nonatomic, strong) NSString * coverUrl;
@@ -38,7 +39,7 @@
 @property (nonatomic, strong) NSString * oid;
 @property (nonatomic, strong) NSArray * pngAsset;
 @property (nonatomic, assign) NSInteger published;
-@property (nonatomic, assign) NSInteger salePrice;
+@property (nonatomic, assign) CGFloat salePrice;
 @property (nonatomic, strong) NSString * shortTitle;
 @property (nonatomic, assign) NSInteger state;
 @property (nonatomic, assign) NSInteger stick;

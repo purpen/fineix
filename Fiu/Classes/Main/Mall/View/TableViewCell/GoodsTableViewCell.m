@@ -60,23 +60,23 @@
 
 #pragma mark -
 - (void)setCellViewUI {
-    [self.contentView addSubview:self.goodsImgView];
+    [self addSubview:self.goodsImgView];
     
-    [self.contentView addSubview:self.titleBg];
+    [self addSubview:self.titleBg];
     [_titleBg mas_makeConstraints:^(MASConstraintMaker *make) {
         make.size.mas_equalTo(CGSizeMake(SCREEN_WIDTH * 0.654, 25));
         make.top.equalTo(self.goodsImgView.mas_bottom).with.offset(10);
         make.left.equalTo(self.mas_left).with.offset(5);
     }];
     
-    [self.contentView addSubview:self.typeImg];
+    [self addSubview:self.typeImg];
     [_typeImg mas_makeConstraints:^(MASConstraintMaker *make) {
         make.size.mas_equalTo(CGSizeMake(36, 14));
         make.centerY.equalTo(self.titleBg);
         make.left.equalTo(self.titleBg.mas_right).with.offset(0);
     }];
     
-    [self.contentView addSubview:self.priceBg];
+    [self addSubview:self.priceBg];
     [_priceBg mas_makeConstraints:^(MASConstraintMaker *make) {
         make.size.mas_equalTo(CGSizeMake(SCREEN_WIDTH - (SCREEN_WIDTH * 0.654) - 46, 25));
         make.bottom.equalTo(self.titleBg.mas_bottom).with.offset(0);
@@ -90,7 +90,6 @@
         GoodsImgFlowLayout * flowLayout = [[GoodsImgFlowLayout alloc] init];
         
         _goodsImgView = [[UICollectionView alloc] initWithFrame:CGRectMake(0, 10, SCREEN_WIDTH, 150) collectionViewLayout:flowLayout];
-//        _goodsImgView.delegate = self;
         _goodsImgView.dataSource = self;
         _goodsImgView.backgroundColor = [UIColor colorWithHexString:grayLineColor];
         _goodsImgView.showsHorizontalScrollIndicator = NO;

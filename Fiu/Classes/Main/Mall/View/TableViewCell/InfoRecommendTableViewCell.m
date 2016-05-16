@@ -17,10 +17,18 @@
     if (self) {
         
         self.selectionStyle = UITableViewCellSelectionStyleNone;
+        self.goodsData = [NSMutableArray array];
         [self setCellUI];
         
     }
     return self;
+}
+
+#pragma mark -
+- (void)setRecommendGoodsData:(NSMutableArray *)model {
+    self.goodsData = model;
+    self.goodsIds = [model valueForKey:@"idField"];
+    [self.recommendListView reloadData];
 }
 
 #pragma mark -
@@ -63,20 +71,20 @@
 
 #pragma mark  UICollectionViewDataSource
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
-    return 5;
+    return self.goodsData.count;
 }
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
     static NSString * collectionViewCellId = @"collectionViewCellId";
     RecommendGoodsCollectionViewCell * cell = [collectionView dequeueReusableCellWithReuseIdentifier:collectionViewCellId forIndexPath:indexPath];
-    [cell setUI];
+    [cell setRecommendGoodsData:self.goodsData[indexPath.row]];
     return cell;
 }
 
 #pragma mark UICollectionViewDelegate
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
-    NSLog(@"打开商品 ＝＝＝＝＝＝＝＝ %zi", indexPath.row);
     GoodsInfoViewController * goodsInfoVC = [[GoodsInfoViewController alloc] init];
+    goodsInfoVC.goodsID = [NSString stringWithFormat:@"%@", self.goodsIds[indexPath.row]];
     [self.nav pushViewController:goodsInfoVC animated:YES];
 }
 @end
