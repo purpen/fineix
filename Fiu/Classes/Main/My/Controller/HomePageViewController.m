@@ -270,6 +270,7 @@ static NSString *const IconURL = @"/my/add_head_pic";
             if ([self.myCollectionView.mj_footer isRefreshing]) {
                 if (isLastPage) {
                     [self.myCollectionView.mj_footer endRefreshingWithNoMoreData];
+                    self.myCollectionView.mj_footer.hidden = YES;
                 } else  {
                     [self.myCollectionView.mj_footer endRefreshing];
                 }

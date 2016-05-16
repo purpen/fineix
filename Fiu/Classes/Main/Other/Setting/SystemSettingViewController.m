@@ -23,6 +23,8 @@
 #import "MyQrCodeViewController.h"
 #import "MyQrCodeView.h"
 #import "GuidePageViewController.h"
+#import "WeiboSDK.h"
+#import <TencentOpenAPI/QQApiInterface.h>
 
 @interface SystemSettingViewController ()<FBNavigationBarItemsDelegate,NotificationDelege,FBRequestDelegate>
 
@@ -139,7 +141,8 @@ static NSString *const logOut = @"/auth/logout";
 
 
 - (IBAction)welcomePageBtn:(UIButton *)sender {
-    GuidePageViewController *vc = [[GuidePageViewController alloc] init];
+    NSArray *arr = [NSArray arrayWithObjects:@"guide",@"guide",@"guide",@"guide",@"guide", nil];
+    GuidePageViewController *vc = [[GuidePageViewController alloc] initWithPicArr:arr andRootVC:self];
     [self presentViewController:vc animated:YES completion:nil];
 }
 
@@ -167,6 +170,8 @@ static NSString *const logOut = @"/auth/logout";
     [_shareVC.weiBoBtn addTarget:self action:@selector(sinaShareBtnAction:) forControlEvents:UIControlEventTouchUpInside];
     [_shareVC.cancelBtn addTarget:self action:@selector(cancleBtnAction:) forControlEvents:UIControlEventTouchUpInside];
 }
+
+
 
 -(void)wechatShareBtnAction:(UIButton*)sender{
     [UMSocialData defaultData].extConfig.wechatSessionData.url = ShareURL;
@@ -210,8 +215,30 @@ static NSString *const logOut = @"/auth/logout";
 -(ShareViewController *)shareVC{
     if (!_shareVC) {
         _shareVC = [[ShareViewController alloc] init];
+        [self judgeWith:_shareVC];
     }
     return _shareVC;
+}
+
+#pragma mark -判断手机是否安装了相应的客户端
+-(void)judgeWith:(ShareViewController*)vc{
+    if ([WXApi isWXAppInstalled] == NO) {
+        vc.wechatBtn.hidden = YES;
+    }else{
+        vc.wechatBtn.hidden = NO;
+    }
+    
+    if ([WeiboSDK isWeiboAppInstalled] == NO) {
+        vc.weiBoBtn.hidden = YES;
+    }else{
+        vc.weiBoBtn.hidden = NO;
+    }
+    
+    if ([QQApiInterface isQQInstalled] == NO) {
+        vc.qqBtn.hidden = YES;
+    }else{
+        vc.qqBtn.hidden = NO;
+    }
 }
 
 -(void)leftBarItemSelected{

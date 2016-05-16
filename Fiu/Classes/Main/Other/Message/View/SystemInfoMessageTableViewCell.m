@@ -79,7 +79,7 @@
         
         [_bgView addSubview:self.alertTipView];
         [_alertTipView mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.size.mas_equalTo(CGSizeMake(15/667.0*SCREEN_HEIGHT, 15/667.0*SCREEN_HEIGHT));
+            make.size.mas_equalTo(CGSizeMake(10/667.0*SCREEN_HEIGHT, 10/667.0*SCREEN_HEIGHT));
             make.left.mas_equalTo(_tipLabel.mas_right).with.offset(10);
             make.centerY.mas_equalTo(_tipLabel.mas_centerY);
         }];
@@ -143,6 +143,7 @@
     if (!_alertTipView) {
         _alertTipView = [TipNumberView getTipNumView];
         _alertTipView.tipNumLabel.text = @"";
+        _alertTipView.layer.cornerRadius = 5/667.0*SCREEN_HEIGHT;
     }
     return _alertTipView;
 }

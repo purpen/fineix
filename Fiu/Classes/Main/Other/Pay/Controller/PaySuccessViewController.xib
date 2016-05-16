@@ -19,44 +19,11 @@
             <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="YFl-AL-3my" userLabel="NavBarView">
-                    <rect key="frame" x="0.0" y="0.0" width="375" height="64"/>
-                    <subviews>
-                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="订单支付详情" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="WTF-J6-cYC">
-                            <rect key="frame" x="137" y="32" width="102" height="21"/>
-                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                            <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                            <nil key="highlightedColor"/>
-                        </label>
-                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="da2-iD-vSL" userLabel="Back">
-                            <rect key="frame" x="315" y="20" width="60" height="44"/>
-                            <constraints>
-                                <constraint firstAttribute="width" constant="60" id="B6w-A7-lbE"/>
-                            </constraints>
-                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                            <state key="normal" title="完成">
-                                <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                            </state>
-                            <connections>
-                                <action selector="backBtnAction:" destination="-1" eventType="touchUpInside" id="dA7-tm-FNS"/>
-                            </connections>
-                        </button>
-                    </subviews>
-                    <color key="backgroundColor" red="1" green="0.20000000000000001" blue="0.40000000000000002" alpha="1" colorSpace="calibratedRGB"/>
-                    <constraints>
-                        <constraint firstAttribute="bottom" secondItem="da2-iD-vSL" secondAttribute="bottom" id="4O0-DV-Wqa"/>
-                        <constraint firstItem="WTF-J6-cYC" firstAttribute="centerX" secondItem="YFl-AL-3my" secondAttribute="centerX" id="CPK-EU-A4O"/>
-                        <constraint firstItem="WTF-J6-cYC" firstAttribute="centerY" secondItem="YFl-AL-3my" secondAttribute="centerY" constant="10" id="DUj-ys-PSy"/>
-                        <constraint firstAttribute="trailing" secondItem="da2-iD-vSL" secondAttribute="trailing" id="FYe-jv-cMQ"/>
-                        <constraint firstAttribute="height" constant="64" id="RzA-Hw-BXt"/>
-                        <constraint firstItem="da2-iD-vSL" firstAttribute="top" secondItem="YFl-AL-3my" secondAttribute="top" constant="20" id="Wkp-uo-fx3"/>
-                    </constraints>
-                </view>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="F5a-lN-wb9">
                     <rect key="frame" x="0.0" y="69" width="375" height="80"/>
                     <subviews>
-                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" image="selected_green" translatesAutoresizingMaskIntoConstraints="NO" id="DWd-Jt-zdL">
-                            <rect key="frame" x="63" y="28" width="25" height="25"/>
+                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="selected_green" translatesAutoresizingMaskIntoConstraints="NO" id="DWd-Jt-zdL">
+                            <rect key="frame" x="62" y="28" width="25" height="25"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="25" id="Ngi-Ep-akb"/>
                                 <constraint firstAttribute="width" secondItem="DWd-Jt-zdL" secondAttribute="height" multiplier="1:1" id="uhU-cB-nhh"/>
@@ -182,7 +149,7 @@
                     </constraints>
                     <fontDescription key="fontDescription" type="system" weight="light" pointSize="17"/>
                     <state key="normal" title="查看订单详情">
-                        <color key="titleColor" red="1" green="0.20000000000000001" blue="0.40000000000000002" alpha="1" colorSpace="calibratedRGB"/>
+                        <color key="titleColor" red="0.74509803919999995" green="0.53725490200000003" blue="0.078431372550000003" alpha="1" colorSpace="calibratedRGB"/>
                     </state>
                     <connections>
                         <action selector="orderDetailBtnAction:" destination="-1" eventType="touchUpInside" id="z4e-BF-ezi"/>
@@ -191,6 +158,7 @@
             </subviews>
             <color key="backgroundColor" red="0.94509803920000002" green="0.94509803920000002" blue="0.94509803920000002" alpha="1" colorSpace="calibratedRGB"/>
             <constraints>
+                <constraint firstItem="F5a-lN-wb9" firstAttribute="top" secondItem="Tak-rE-YdQ" secondAttribute="top" constant="69" id="4gI-eP-eJR"/>
                 <constraint firstItem="lMd-lQ-SPn" firstAttribute="leading" secondItem="Tak-rE-YdQ" secondAttribute="leading" id="4iK-dn-Ckq"/>
                 <constraint firstAttribute="trailing" secondItem="2EE-jv-eea" secondAttribute="trailing" id="8nw-qx-npQ"/>
                 <constraint firstItem="F5a-lN-wb9" firstAttribute="leading" secondItem="Tak-rE-YdQ" secondAttribute="leading" id="CvM-f2-6p8"/>
@@ -198,16 +166,12 @@
                 <constraint firstItem="lMd-lQ-SPn" firstAttribute="top" secondItem="oeW-oA-e7l" secondAttribute="bottom" constant="5" id="HUq-NH-H0k"/>
                 <constraint firstItem="2EE-jv-eea" firstAttribute="leading" secondItem="Tak-rE-YdQ" secondAttribute="leading" id="KO8-c2-G8A"/>
                 <constraint firstAttribute="trailing" secondItem="lMd-lQ-SPn" secondAttribute="trailing" id="QnO-OO-lJ7"/>
-                <constraint firstItem="YFl-AL-3my" firstAttribute="leading" secondItem="Tak-rE-YdQ" secondAttribute="leading" id="UOe-Bg-uNH"/>
                 <constraint firstItem="2EE-jv-eea" firstAttribute="top" secondItem="vse-PD-QmZ" secondAttribute="bottom" constant="5" id="WXj-Eo-G19"/>
                 <constraint firstAttribute="trailing" secondItem="F5a-lN-wb9" secondAttribute="trailing" id="any-HC-ARV"/>
                 <constraint firstItem="oeW-oA-e7l" firstAttribute="leading" secondItem="Tak-rE-YdQ" secondAttribute="leading" id="eG6-DE-5Ns"/>
-                <constraint firstItem="F5a-lN-wb9" firstAttribute="top" secondItem="YFl-AL-3my" secondAttribute="bottom" constant="5" id="f61-Hh-22D"/>
                 <constraint firstItem="vse-PD-QmZ" firstAttribute="top" secondItem="lMd-lQ-SPn" secondAttribute="bottom" constant="5" id="gPg-Bz-dbb"/>
-                <constraint firstItem="YFl-AL-3my" firstAttribute="top" secondItem="Tak-rE-YdQ" secondAttribute="top" id="gf5-ac-dqZ"/>
                 <constraint firstItem="vse-PD-QmZ" firstAttribute="leading" secondItem="Tak-rE-YdQ" secondAttribute="leading" id="q3K-Kt-m6U"/>
                 <constraint firstAttribute="trailing" secondItem="oeW-oA-e7l" secondAttribute="trailing" id="r1A-pR-gZD"/>
-                <constraint firstAttribute="trailing" secondItem="YFl-AL-3my" secondAttribute="trailing" id="tXz-KP-Cto"/>
                 <constraint firstItem="oeW-oA-e7l" firstAttribute="top" secondItem="F5a-lN-wb9" secondAttribute="bottom" constant="5" id="xxk-4u-y00"/>
             </constraints>
             <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>

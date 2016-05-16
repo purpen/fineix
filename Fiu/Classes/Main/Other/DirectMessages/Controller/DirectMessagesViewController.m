@@ -95,10 +95,10 @@
             _n = (int)fiuSceneArr.count;
         }
         self.messages = messageArray;
-
+        [self.myTableVuew setContentOffset:CGPointMake(0, 200*(self.messages.count-1)) animated:NO];
         [self.myTableVuew reloadData];
         NSLog(@" 聊天数量    %zi",self.messages.count);
-        [self.myTableVuew scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:_n-1 inSection:0] atScrollPosition:UITableViewScrollPositionMiddle animated:NO];
+        
         [SVProgressHUD dismiss];
     } failure:^(FBRequest *request, NSError *error) {
         [SVProgressHUD showErrorWithStatus:[error localizedDescription]];
@@ -153,6 +153,7 @@
     [request startRequestSuccess:^(FBRequest *request, id result) {
         NSLog(@"发送  %@",result);
         [self networkRequestData];
+        [self.myTableVuew setContentOffset:CGPointMake(0, 200*(self.messages.count)) animated:NO];
     } failure:^(FBRequest *request, NSError *error) {
         [SVProgressHUD showErrorWithStatus:error.localizedDescription];
     }];

@@ -15,6 +15,9 @@
 #import "UserInfoEntity.h"
 #import "NSObject+MJKeyValue.h"
 #import "SVProgressHUD.h"
+#import "TaoBaoOrderViewController.h"
+#import "JDOrderViewController.h"
+#import "TianMaoOrderViewController.h"
 
 @interface AllOderViewController ()<FBNavigationBarItemsDelegate>
 
@@ -76,7 +79,7 @@
 -(void)addTipViewWithNum:(NSInteger)num andTipView:(TipNumberView*)tipView andBtn:(UIButton*)btn{
     if (num == 0) {
         //不显示
-        
+        [tipView removeFromSuperview];
     }else{
         //显示
         tipView.tipNumLabel.text = [NSString stringWithFormat:@"%zi",num];
@@ -145,6 +148,24 @@
 }
 - (IBAction)returnGoodsBtn:(UIButton *)sender {
     ReturnViewController *vc = [[ReturnViewController alloc] init];
+    [self.navigationController pushViewController:vc animated:YES];
+}
+
+
+- (IBAction)jDOrderBtn:(UIButton *)sender {
+    JDOrderViewController *vc = [[JDOrderViewController alloc] init];
+    [self.navigationController pushViewController:vc animated:YES];
+}
+
+
+- (IBAction)taoBaoOrderBtn:(UIButton *)sender {
+    TaoBaoOrderViewController *vc = [[TaoBaoOrderViewController alloc] init];
+    [self.navigationController pushViewController:vc animated:YES];
+}
+
+
+- (IBAction)tianMaoOrderBtn:(UIButton *)sender {
+    TianMaoOrderViewController *vc = [[TianMaoOrderViewController alloc] init];
     [self.navigationController pushViewController:vc animated:YES];
 }
 

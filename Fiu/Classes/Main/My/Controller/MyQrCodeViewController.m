@@ -15,6 +15,9 @@
 #import "QRCodeScanViewController.h"
 #import "UserInfoEntity.h"
 #import "UMSocial.h"
+#import "WXApi.h"
+#import "WeiboSDK.h"
+#import <TencentOpenAPI/QQApiInterface.h>
 
 @interface MyQrCodeViewController ()<FBNavigationBarItemsDelegate>
 {
@@ -54,10 +57,15 @@ static NSString *const ShareURL = @"http://m.taihuoniao.com/guide/app_about";
         make.top.mas_equalTo(self.view.mas_top).with.offset(64);
     }];
     
-    UIGraphicsBeginImageContext(self.view.frame.size); //currentView 当前的view
-    [self.view.layer renderInContext:UIGraphicsGetCurrentContext()];
-    _viewImage = UIGraphicsGetImageFromCurrentImageContext();
+    //截屏
+    UIGraphicsBeginImageContextWithOptions(CGSizeMake(SCREEN_WIDTH, SCREEN_HEIGHT-64), YES, 1);     //设置截屏大小
+    [[self.view layer] renderInContext:UIGraphicsGetCurrentContext()];
+    UIImage *viewImage = UIGraphicsGetImageFromCurrentImageContext();
     UIGraphicsEndImageContext();
+    CGImageRef imageRef = viewImage.CGImage;
+    CGRect rect = CGRectMake(0, 64, SCREEN_WIDTH, SCREEN_HEIGHT-64);//这里可以设置想要截图的区域
+    CGImageRef imageRefRect = CGImageCreateWithImageInRect(imageRef, rect);
+    _viewImage = [[UIImage alloc] initWithCGImage:imageRefRect];
 }
 
 - (UIImage *)createNonInterpolatedUIImageFormCIImage:(CIImage *)image withSize:(CGFloat) size
@@ -110,6 +118,7 @@ static NSString *const ShareURL = @"http://m.taihuoniao.com/guide/app_about";
 -(void)rightBarItemSelected{
     NSLog(@"更多");
     QrShareSheetViewController *sheetVC = [[QrShareSheetViewController alloc] init];
+    [self judgeWith:sheetVC];
     sheetVC.modalPresentationStyle = UIModalPresentationOverCurrentContext;
     sheetVC.modalTransitionStyle = UIModalTransitionStyleFlipHorizontal;
     [self presentViewController:sheetVC animated:NO completion:nil];
@@ -122,9 +131,31 @@ static NSString *const ShareURL = @"http://m.taihuoniao.com/guide/app_about";
     [sheetVC.qqBtn addTarget:self action:@selector(qqShareBtnAction:) forControlEvents:UIControlEventTouchUpInside];
 }
 
+#pragma mark -判断手机是否安装了相应的客户端
+-(void)judgeWith:(QrShareSheetViewController*)vc{
+    if ([WXApi isWXAppInstalled] == NO) {
+        vc.weChatBtn.hidden = YES;
+    }else{
+        vc.weChatBtn.hidden = NO;
+    }
+    
+    if ([WeiboSDK isWeiboAppInstalled] == NO) {
+        vc.weiboBtn.hidden = YES;
+    }else{
+        vc.weiboBtn.hidden = NO;
+    }
+    
+    if ([QQApiInterface isQQInstalled] == NO) {
+        vc.qqBtn.hidden = YES;
+    }else{
+        vc.qqBtn.hidden = NO;
+    }
+}
+
 -(void)wechatShareBtnAction:(UIButton*)sender{
-    [UMSocialData defaultData].extConfig.wechatSessionData.shareImage = _viewImage;
-    [[UMSocialDataService defaultDataService]  postSNSWithTypes:@[UMShareToWechatSession] content:@"有Fiu的生活，才够意思，快点扫码加我吧" image:_viewImage location:nil urlResource:nil presentedController:self completion:^(UMSocialResponseEntity *response){
+    
+    [UMSocialData defaultData].extConfig.wxMessageType = UMSocialWXMessageTypeImage;
+    [[UMSocialDataService defaultDataService]  postSNSWithTypes:@[UMShareToWechatSession] content:@"" image:_viewImage location:nil urlResource:nil presentedController:self completion:^(UMSocialResponseEntity *response){
         if (response.responseCode == UMSResponseCodeSuccess) {
             [SVProgressHUD showSuccessWithStatus:@"分享成功！"];
         }
@@ -132,8 +163,9 @@ static NSString *const ShareURL = @"http://m.taihuoniao.com/guide/app_about";
 }
 
 -(void)timelineShareBtnAction:(UIButton*)sender{
-    [UMSocialData defaultData].extConfig.wechatTimelineData.url = ShareURL;
-    [[UMSocialDataService defaultDataService]  postSNSWithTypes:@[UMShareToWechatTimeline] content:@"有Fiu的生活，才够意思，快点扫码加我吧" image:_viewImage location:nil urlResource:nil presentedController:self completion:^(UMSocialResponseEntity *response){
+    
+    [UMSocialData defaultData].extConfig.wxMessageType = UMSocialWXMessageTypeImage;
+    [[UMSocialDataService defaultDataService]  postSNSWithTypes:@[UMShareToWechatTimeline] content:@"" image:_viewImage location:nil urlResource:nil presentedController:self completion:^(UMSocialResponseEntity *response){
         if (response.responseCode == UMSResponseCodeSuccess) {
             [SVProgressHUD showSuccessWithStatus:@"分享成功！"];
         }
@@ -141,8 +173,8 @@ static NSString *const ShareURL = @"http://m.taihuoniao.com/guide/app_about";
 }
 
 -(void)qqShareBtnAction:(UIButton*)sender{
-    [UMSocialData defaultData].extConfig.qqData.url = ShareURL;
-    [[UMSocialDataService defaultDataService]  postSNSWithTypes:@[UMShareToQQ] content:@"有Fiu的生活，才够意思，快点扫码加我吧" image:_viewImage location:nil urlResource:nil presentedController:self completion:^(UMSocialResponseEntity *response){
+    [UMSocialData defaultData].extConfig.qqData.qqMessageType = UMSocialQQMessageTypeImage;
+    [[UMSocialDataService defaultDataService]  postSNSWithTypes:@[UMShareToQzone] content:@"" image:_viewImage location:nil urlResource:nil presentedController:self completion:^(UMSocialResponseEntity *response){
         if (response.responseCode == UMSResponseCodeSuccess) {
             [SVProgressHUD showSuccessWithStatus:@"分享成功！"];
         }
@@ -150,9 +182,9 @@ static NSString *const ShareURL = @"http://m.taihuoniao.com/guide/app_about";
 }
 
 -(void)sinaShareBtnAction:(UIButton*)sender{
-    [[UMSocialDataService defaultDataService]  postSNSWithTypes:@[UMShareToSina] content:@"有Fiu的生活，才够意思，快点扫码加我吧" image:_viewImage location:nil urlResource:nil presentedController:self completion:^(UMSocialResponseEntity *response){
-        if (response.responseCode == UMSResponseCodeSuccess) {
-            [SVProgressHUD showSuccessWithStatus:@"分享成功！"];
+    [[UMSocialDataService defaultDataService]  postSNSWithTypes:@[UMShareToSina] content:@"有Fiu的生活，才够意思，快点扫码加我吧！查看个人主页>>http://www.taihuoniao.com" image:_viewImage location:nil urlResource:nil presentedController:self completion:^(UMSocialResponseEntity *shareResponse){
+        if (shareResponse.responseCode == UMSResponseCodeSuccess) {
+            NSLog(@"分享成功！");
         }
     }];
 }

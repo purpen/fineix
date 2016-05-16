@@ -53,13 +53,6 @@ NSString *const determineLogin = @"/auth/check_login";
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     self.window.backgroundColor = [UIColor whiteColor];
     [self.window makeKeyAndVisible];
-//    //创建定为服务对象
-//    self.locationSevice = [[BMKLocationService alloc] init];
-//    //设置定位服务对象代理
-//    self.locationSevice.delegate = self;
-//    self.locationSevice.desiredAccuracy = kCLLocationAccuracyBestForNavigation;
-//    //1，开启定位服务
-//    [self.locationSevice startUserLocationService];]
     
     
     //设置引导图片
@@ -89,14 +82,18 @@ NSString *const determineLogin = @"/auth/check_login";
     
     
     
-    //  设置SVP颜色
+    //  设置SVP颜色---------------------------------------
     [SVProgressHUD setBackgroundColor:[UIColor whiteColor]];
     [SVProgressHUD setForegroundColor:[UIColor colorWithHexString:fineixColor alpha:1]];
+    //---------------------------------------------------
     
-    //设置百度地图代理
+    
+    
+    //设置百度地图代理---------------------------------
     [self bmkMap];
+    //------------------------------------------
     
-    //model属性名与字典key名映射
+    //model属性名与字典key名映射----------------------------
     [UserInfo mj_setupReplacedKeyFromPropertyName:^NSDictionary *{
         return @{
                  @"userId" : @"_id",
@@ -109,9 +106,10 @@ NSString *const determineLogin = @"/auth/check_login";
                  //                 @"": @"",
                  };
     }];
+    //---------------------------------------------------
    
 
-    //设置友盟社会化组件appkey
+    //设置友盟社会化组件appkey--------------------------------------------------
     [UMSocialData setAppKey:UMSocialAppKey];
     //设置微信AppId、appSecret，分享url
     [UMSocialWechatHandler setWXAppId:WechatAppID appSecret:WechatAppSecret url:@"http://www.taihuoniao.com"];
@@ -124,15 +122,35 @@ NSString *const determineLogin = @"/auth/check_login";
     
     // 由于苹果审核政策需求，建议大家对未安装客户端平台进行隐藏，在设置QQ、微信AppID之后调用下面的方法
     [UMSocialConfig hiddenNotInstallPlatforms:@[UMShareToQQ, UMShareToWechatSession, UMShareToWechatTimeline, UMShareToSina]];
+    //---------------------------------------------------------------------
     
     
     
-    //微信支付注册appId
+    //微信支付注册appId-------------------------
     [WXApi registerApp:WechatAppID];
+    //----------------------------------------
     
+    //设置推送---------------------------------------------------
+//    if ([application respondsToSelector:@selector(isRegisteredForRemoteNotifications)])
+//    {
+//        //IOS8
+//        //创建UIUserNotificationSettings，并设置消息的显示类类型
+//        UIUserNotificationSettings *notiSettings = [UIUserNotificationSettings settingsForTypes:(UIUserNotificationTypeBadge | UIUserNotificationTypeAlert | UIRemoteNotificationTypeSound) categories:nil];
+//        
+//        [application registerUserNotificationSettings:notiSettings];
+//        
+//    } else{ // ios7
+//        [application registerForRemoteNotificationTypes:(UIRemoteNotificationTypeBadge                                       |UIRemoteNotificationTypeSound                                      |UIRemoteNotificationTypeAlert)];
+//    }
+    //------------------------------------------------------
 
     return YES;
 }
+
+-(void)application:(UIApplication *)application didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken{
+    
+}
+
 
 #pragma mark -  引导图的设置
 -(void)guide{
@@ -159,25 +177,6 @@ NSString *const determineLogin = @"/auth/check_login";
     }
 }
 
-//#pragma mark -BMKLocationServiceDelegate
-//-(void)willStartLocatingUser{
-//    NSLog(@"开始定位");
-//}
-//
-//-(void)didFailToLocateUserWithError:(NSError *)error{
-//    NSLog(@"定位失败%@",error);
-//    //[_hud hideAnimated:YES];
-//}
-//
-//////定位成功，再次定位
-////-(void)didUpdateBMKUserLocation:(BMKUserLocation *)userLocation{
-////    _la = userLocation.location.coordinate.latitude;
-////    _lo = userLocation.location.coordinate.longitude;
-////    
-////    NSLog(@"定位成功");
-////    [_locationSevice stopUserLocationService];
-////}
-
 
 -(BOOL)application:(UIApplication *)application openURL:(NSURL *)url sourceApplication:(NSString *)sourceApplication annotation:(id)annotation{
     NSLog(@"url %@    ****    %@",url,sourceApplication);
@@ -201,19 +200,7 @@ NSString *const determineLogin = @"/auth/check_login";
     return YES;
 }
 
-//// NOTE: 9.0以后使用新API接口
-//- (BOOL)application:(UIApplication *)app openURL:(NSURL *)url options:(NSDictionary<NSString*, id> *)options
-//{
-//    if ([url.host isEqualToString:@"safepay"]) {
-//        //跳转支付宝钱包进行支付，处理支付结果
-//        [[AlipaySDK defaultService] processOrderWithPaymentResult:url standbyCallback:^(NSDictionary *resultDic) {
-//            if (_aliDelegate && [_aliDelegate respondsToSelector:@selector(standbyCallbackWithResultDic:)]) {
-//                [_aliDelegate standbyCallbackWithResultDic:resultDic];
-//            }
-//        }];
-//    }
-//    return YES;
-//}
+
 
 -(void)onReq:(BaseReq*)req
 {
@@ -239,8 +226,7 @@ NSString *const determineLogin = @"/auth/check_login";
 }
 
 - (void)applicationDidEnterBackground:(UIApplication *)application {
-    // Use this method to release shared resources, save user data, invalidate timers, and store enough application state information to restore your application to its current state in case it is terminated later.
-    // If your application supports background execution, this method is called instead of applicationWillTerminate: when the user quits.
+    
 }
 
 - (void)applicationWillEnterForeground:(UIApplication *)application {
@@ -265,8 +251,7 @@ NSString *const determineLogin = @"/auth/check_login";
 }
 
 - (void)applicationWillTerminate:(UIApplication *)application {
-    // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
-    // Saves changes in the application's managed object context before the application terminates.
+    
     [self saveContext];
 }
 

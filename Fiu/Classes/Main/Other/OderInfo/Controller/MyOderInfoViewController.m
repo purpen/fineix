@@ -20,22 +20,12 @@
 #import "RefundmentViewController.h"
 #import "CommenttwoViewController.h"
 #import "FBPayTheWayViewController.h"
+#import "HMSegmentedControl.h"
 
 @interface MyOderInfoViewController ()<FBNavigationBarItemsDelegate,UITableViewDelegate,UITableViewDataSource,FBRequestDelegate,OrderInfoCellDelegate>
-{
-    //创建金色小条
-    UIView *_linView;
-    NSMutableArray *_modelAry;
-    int _page;
-    int _totalePage;
-}
-@property (weak, nonatomic) IBOutlet UIButton *allBtn;
-@property (weak, nonatomic) IBOutlet UIButton *paymentBtn;
-@property (weak, nonatomic) IBOutlet UIButton *sendGoodsBtn;
-@property (weak, nonatomic) IBOutlet UIButton *goodsBtn;
-@property (weak, nonatomic) IBOutlet UIButton *evaluateBtn;
+
 @property (weak, nonatomic) IBOutlet UITableView *myTableView;
-@property (weak, nonatomic) IBOutlet UIView *chanelView;
+
 
 @property (nonatomic, assign) NSInteger currentPageNumber;
 @property (nonatomic, assign) NSInteger totalPageNumber;
@@ -49,29 +39,42 @@ static NSString *const OrderInfoCellIdentifier = @"orderInfoCell";
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    _modelAry = [NSMutableArray array];
-    _page = 1;
     self.delegate = self;
     self.navViewTitle.text = @"我的订单";
     self.myTableView.delegate = self;
     self.myTableView.dataSource = self;
     //tableView每个row的高度
     self.myTableView.rowHeight = 222;
-    //创建金色小条
-    _linView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 46, 3)];
-    _linView.backgroundColor = [UIColor colorWithHexString:fineixColor];
-    // Do any additional setup after loading the view from its nib.
-    
+
+    HMSegmentedControl *segmentedControl = [[HMSegmentedControl alloc] initWithSectionTitles:@[@"全部", @"待付款", @"待发货", @"待收货", @"待评价"]];
+
+    segmentedControl.frame = CGRectMake(0, 64, SCREEN_WIDTH, 44);//
+    segmentedControl.segmentEdgeInset = UIEdgeInsetsMake(0, 10, 0, 10);
+    segmentedControl.selectionStyle = HMSegmentedControlSelectionStyleFullWidthStripe;
+    segmentedControl.selectionIndicatorLocation = HMSegmentedControlSelectionIndicatorLocationDown;
+    segmentedControl.selectionIndicatorHeight = 2.0f;
+    segmentedControl.selectionIndicatorColor = [UIColor colorWithHexString:fineixColor];
+    [segmentedControl setTitleFormatter:^NSAttributedString *(HMSegmentedControl *segmentedControl, NSString *title, NSUInteger index, BOOL selected) {
+        if (selected) {
+            NSAttributedString *seletedTitle = [[NSAttributedString alloc] initWithString:title attributes:@{NSForegroundColorAttributeName: [UIColor colorWithHexString:fineixColor], NSFontAttributeName: [UIFont systemFontOfSize:14]}];
+            return seletedTitle;
+        }
+        NSAttributedString *attString = [[NSAttributedString alloc] initWithString:title attributes:@{NSForegroundColorAttributeName: [UIColor colorWithHexString:@"#222222"], NSFontAttributeName: [UIFont systemFontOfSize:14]}];
+        return attString;
+    }];
+    [segmentedControl addTarget:self action:@selector(segmentedControlChangedValue:) forControlEvents:UIControlEventValueChanged];
+    [self.view addSubview:segmentedControl];
+
     if ([self.type isEqualToNumber:@0]) {
-       [self allBtn:self.allBtn];
+       [segmentedControl setSelectedSegmentIndex:0];
     }else if ([self.type isEqualToNumber:@1]){
-        [self payMentBtn:self.paymentBtn];
+        [segmentedControl setSelectedSegmentIndex:1];
     }else if ([self.type isEqualToNumber:@2]){
-        [self sendGoodsBtn:self.sendGoodsBtn];
+        [segmentedControl setSelectedSegmentIndex:2];
     }else if ([self.type isEqualToNumber:@3]){
-        [self goodsBtn:self.goodsBtn];
+        [segmentedControl setSelectedSegmentIndex:3];
     }else if ([self.type isEqualToNumber:@4]){
-        [self evaluateBtn:self.evaluateBtn];
+        [segmentedControl setSelectedSegmentIndex:4];
     }
     
     
@@ -98,6 +101,13 @@ static NSString *const OrderInfoCellIdentifier = @"orderInfoCell";
         }
     }];
 
+}
+
+//请求不同状态订单列表
+- (void)segmentedControlChangedValue:(HMSegmentedControl *)segmentedControl {
+    self.type = [NSNumber numberWithInteger:segmentedControl.selectedSegmentIndex ];
+    [self.orderListAry removeAllObjects];
+    [self requestDataForOderList];
 }
 
 //上拉下拉分页请求订单列表
@@ -169,85 +179,6 @@ static NSString *const OrderInfoCellIdentifier = @"orderInfoCell";
 }
 
 
-- (IBAction)allBtn:(UIButton *)sender {
-    self.allBtn.selected = YES;
-    self.paymentBtn.selected = NO;
-    self.sendGoodsBtn.selected = NO;
-    self.goodsBtn.selected = NO;
-    self.evaluateBtn.selected = NO;
-    CGRect frame = _linView.frame;
-    frame.origin.y = sender.frame.origin.y + sender.frame.size.height-3;
-    frame.origin.x = sender.frame.origin.x+9;
-    frame.size.width = sender.frame.size.width-18;
-    _linView.frame = frame;
-    [self.chanelView addSubview:_linView];
-    self.type = @0;
-    [self requestDataForOderList];
-
-}
-- (IBAction)payMentBtn:(UIButton *)sender {
-    self.allBtn.selected = NO;
-    self.paymentBtn.selected = YES;
-    self.sendGoodsBtn.selected = NO;
-    self.goodsBtn.selected = NO;
-    self.evaluateBtn.selected = NO;
-    CGRect frame = _linView.frame;
-    frame.origin.y = sender.frame.origin.y + sender.frame.size.height -3;
-    frame.origin.x = sender.frame.origin.x+9;
-    frame.size.width = sender.frame.size.width-18;
-    _linView.frame = frame;
-    [self.chanelView addSubview:_linView];
-    self.type = @1;
-    [self requestDataForOderList];
-
-}
-- (IBAction)sendGoodsBtn:(UIButton *)sender {
-    self.allBtn.selected = NO;
-    self.paymentBtn.selected = NO;
-    self.sendGoodsBtn.selected = YES;
-    self.goodsBtn.selected = NO;
-    self.evaluateBtn.selected = NO;
-    CGRect frame = _linView.frame;
-    frame.origin.y = sender.frame.origin.y + sender.frame.size.height-3;
-    frame.origin.x = sender.frame.origin.x+9;
-    frame.size.width = sender.frame.size.width-18;
-    _linView.frame = frame;
-    [self.chanelView addSubview:_linView];
-    self.type = @2;
-    [self requestDataForOderList];
-
-}
-- (IBAction)goodsBtn:(UIButton *)sender {
-    self.allBtn.selected = NO;
-    self.paymentBtn.selected = NO;
-    self.sendGoodsBtn.selected = NO;
-    self.goodsBtn.selected = YES;
-    self.evaluateBtn.selected = NO;
-    CGRect frame = _linView.frame;
-    frame.origin.y = sender.frame.origin.y + sender.frame.size.height-3;
-    frame.origin.x = sender.frame.origin.x+9;
-    frame.size.width = sender.frame.size.width-18;
-    _linView.frame = frame;
-    [self.chanelView addSubview:_linView];
-    self.type = @3;
-    [self requestDataForOderList];
-
-}
-- (IBAction)evaluateBtn:(UIButton *)sender {
-    self.allBtn.selected = NO;
-    self.paymentBtn.selected = NO;
-    self.sendGoodsBtn.selected = NO;
-    self.goodsBtn.selected = NO;
-    self.evaluateBtn.selected = YES;
-    CGRect frame = _linView.frame;
-    frame.origin.y = sender.frame.origin.y + sender.frame.size.height-3;
-    frame.origin.x = sender.frame.origin.x+9;
-    frame.size.width = sender.frame.size.width-18;
-    _linView.frame = frame;
-    [self.chanelView addSubview:_linView];
-    self.type = @4;
-    [self requestDataForOderList];
-}
 
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
     return self.orderListAry.count;

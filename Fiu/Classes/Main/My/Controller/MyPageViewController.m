@@ -223,7 +223,7 @@
         MyPageBtnCollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"MyPageBtnCollectionViewCell" forIndexPath:indexPath];
         if ([_counterModel.order_total_count intValue] == 0) {
             //不显示
-            
+            [self.tipNumView1 removeFromSuperview];
         }else{
             //显示
 
@@ -239,7 +239,7 @@
         
         if ([_counterModel.message_total_count intValue] == 0) {
             //不显示
-            
+            [self.tipNumView2 removeFromSuperview];
         }else{
             //显示
             self.tipNumView2.tipNumLabel.text = [NSString stringWithFormat:@"%@",_counterModel.message_total_count];

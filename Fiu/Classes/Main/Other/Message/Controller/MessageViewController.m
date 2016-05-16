@@ -90,7 +90,7 @@
         self.countModel = [CounterModel mj_objectWithKeyValues:counterDict];
         //-----------------------------------------------------
         if ([self.countModel.fiu_alert_count intValue] == 0) {
-            
+            [self.alertTipviewNum removeFromSuperview];
         }else{
             [self.remindView addSubview:self.alertTipviewNum];
             self.alertTipviewNum.tipNumLabel.text = [NSString stringWithFormat:@"%@",self.countModel.fiu_alert_count];
@@ -103,7 +103,7 @@
         }
         
         if ([self.countModel.fiu_notice_count intValue] == 0) {
-            
+            [self.fiu_notice_countTipviewNum removeFromSuperview];
         }else{
             [self.noticeView addSubview:self.fiu_notice_countTipviewNum];
             self.fiu_notice_countTipviewNum.tipNumLabel.text = [NSString stringWithFormat:@"%@",self.countModel.fiu_notice_count];
@@ -115,7 +115,7 @@
             }];
         }
         if ([self.countModel.fiu_comment_count intValue] == 0) {
-            
+            [self.fiu_comment_countTipviewNum removeFromSuperview];
         }else{
             [self.commentView addSubview:self.fiu_comment_countTipviewNum];
             self.fiu_comment_countTipviewNum.tipNumLabel.text = [NSString stringWithFormat:@"%@",self.countModel.fiu_comment_count];
@@ -129,7 +129,7 @@
         
         NSLog(@"私信数量  %@",self.countModel.message_count);
         if ([self.countModel.message_count intValue] == 0) {
-            
+            [self.message_countTipviewNum removeFromSuperview];
         }else{
             [self.messageView addSubview:self.message_countTipviewNum];
             self.message_countTipviewNum.tipNumLabel.text = [NSString stringWithFormat:@"%@",self.countModel.message_count];
@@ -141,7 +141,7 @@
             }];
         }
         if ([self.countModel.alert_count intValue] == 0) {
-            
+            [self.alert_countTipviewNum removeFromSuperview];
         }else{
             [self.remindView addSubview:self.alert_countTipviewNum];
             self.alert_countTipviewNum.tipNumLabel.text = [NSString stringWithFormat:@"%@",self.countModel.alert_count];

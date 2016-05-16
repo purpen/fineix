@@ -111,6 +111,31 @@ static NSString *const thirdRegister = @"/auth/third_sign";//第三方登录接�
     //点击提交按钮
     _submitView.submitBtn.userInteractionEnabled = YES;
     [_submitView.submitBtn addTarget:self action:@selector(clickSubmitBtn:) forControlEvents:UIControlEventTouchUpInside];
+    
+    
+    //判断手机是否安装了相应的客户端
+    [self judge];
+}
+
+#pragma mark -判断手机是否安装了相应的客户端
+-(void)judge{
+    if ([WXApi isWXAppInstalled] == NO) {
+        self.wechatBtn.hidden = YES;
+    }else{
+        self.wechatBtn.hidden = NO;
+    }
+    
+    if ([WeiboSDK isWeiboAppInstalled] == NO) {
+        self.weiboBtn.hidden = YES;
+    }else{
+        self.weiboBtn.hidden = NO;
+    }
+    
+    if ([QQApiInterface isQQInstalled] == NO) {
+        self.qqBtn.hidden = YES;
+    }else{
+        self.qqBtn.hidden = NO;
+    }
 }
 
 //点击提交按钮

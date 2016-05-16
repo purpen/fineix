@@ -64,19 +64,19 @@
                                 <rect key="frame" x="0.0" y="131" width="375" height="36"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="共0件商品" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="esL-ZG-3h4">
-                                        <rect key="frame" x="148" y="11" width="51" height="14"/>
+                                        <rect key="frame" x="118" y="11" width="51" height="14"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="11"/>
                                         <color key="textColor" red="0.40000000000000002" green="0.40000000000000002" blue="0.40000000000000002" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="合计：" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="oIm-q2-Db7">
-                                        <rect key="frame" x="214" y="11" width="33" height="14"/>
+                                        <rect key="frame" x="184" y="11" width="33" height="14"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="11"/>
                                         <color key="textColor" red="0.40000000000000002" green="0.40000000000000002" blue="0.40000000000000002" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="￥0.00" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ww7-9T-7Wq" userLabel="TotalPrice">
-                                        <rect key="frame" x="247" y="11" width="35" height="14"/>
+                                        <rect key="frame" x="217" y="11" width="35" height="14"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="11"/>
                                         <color key="textColor" red="0.40000000000000002" green="0.40000000000000002" blue="0.40000000000000002" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
@@ -88,8 +88,14 @@
                                             <constraint firstAttribute="height" constant="1" id="fFQ-6c-HU7"/>
                                         </constraints>
                                     </view>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="（含运费￥0.00）" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5GX-A5-I8W">
-                                        <rect key="frame" x="285" y="11" width="90" height="14"/>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="优惠：￥12.0" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5GX-A5-I8W">
+                                        <rect key="frame" x="260" y="11" width="66" height="14"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="11"/>
+                                        <color key="textColor" red="0.40000000000000002" green="0.40000000000000002" blue="0.40000000000000002" alpha="1" colorSpace="calibratedRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="实付：" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lYc-qC-Re5">
+                                        <rect key="frame" x="334" y="11" width="33" height="14"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="11"/>
                                         <color key="textColor" red="0.40000000000000002" green="0.40000000000000002" blue="0.40000000000000002" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
@@ -99,22 +105,26 @@
                                 <constraints>
                                     <constraint firstItem="ww7-9T-7Wq" firstAttribute="leading" secondItem="oIm-q2-Db7" secondAttribute="trailing" id="58b-8C-4Rx"/>
                                     <constraint firstAttribute="bottom" secondItem="krf-F1-GDO" secondAttribute="bottom" id="6pI-ZP-hVD"/>
-                                    <constraint firstItem="5GX-A5-I8W" firstAttribute="leading" secondItem="ww7-9T-7Wq" secondAttribute="trailing" constant="3" id="9uk-Ai-pNN"/>
+                                    <constraint firstItem="5GX-A5-I8W" firstAttribute="leading" secondItem="ww7-9T-7Wq" secondAttribute="trailing" constant="8" id="9uk-Ai-pNN"/>
                                     <constraint firstAttribute="height" constant="36" id="A7i-Mg-BXW"/>
                                     <constraint firstItem="esL-ZG-3h4" firstAttribute="centerY" secondItem="5At-P7-pIf" secondAttribute="centerY" id="AzK-35-t7r"/>
+                                    <constraint firstItem="lYc-qC-Re5" firstAttribute="leading" secondItem="5GX-A5-I8W" secondAttribute="trailing" constant="8" id="CYo-BO-vEq"/>
                                     <constraint firstItem="oIm-q2-Db7" firstAttribute="centerY" secondItem="5At-P7-pIf" secondAttribute="centerY" id="HJw-cL-r1s"/>
                                     <constraint firstItem="5GX-A5-I8W" firstAttribute="centerY" secondItem="5At-P7-pIf" secondAttribute="centerY" id="M5M-0p-90W"/>
                                     <constraint firstItem="oIm-q2-Db7" firstAttribute="leading" secondItem="esL-ZG-3h4" secondAttribute="trailing" constant="15" id="N7Z-ML-aHz"/>
+                                    <constraint firstAttribute="trailing" secondItem="lYc-qC-Re5" secondAttribute="trailing" constant="8" id="O7b-Hy-eGV"/>
+                                    <constraint firstItem="lYc-qC-Re5" firstAttribute="centerY" secondItem="ww7-9T-7Wq" secondAttribute="centerY" id="U3O-Ri-Lsx"/>
                                     <constraint firstItem="ww7-9T-7Wq" firstAttribute="centerY" secondItem="5At-P7-pIf" secondAttribute="centerY" id="UAe-0G-k2a"/>
                                     <constraint firstAttribute="trailing" secondItem="krf-F1-GDO" secondAttribute="trailing" id="fuu-Ie-v68"/>
                                     <constraint firstAttribute="trailing" secondItem="ww7-9T-7Wq" secondAttribute="trailing" constant="100" id="gsM-xn-yQU"/>
-                                    <constraint firstAttribute="trailing" secondItem="5GX-A5-I8W" secondAttribute="trailing" id="ltY-Tr-2DB"/>
+                                    <constraint firstAttribute="trailing" secondItem="5GX-A5-I8W" secondAttribute="trailing" constant="100" id="ltY-Tr-2DB"/>
                                     <constraint firstItem="krf-F1-GDO" firstAttribute="leading" secondItem="5At-P7-pIf" secondAttribute="leading" id="pqm-LO-eVG"/>
-                                    <constraint firstItem="5GX-A5-I8W" firstAttribute="leading" secondItem="ww7-9T-7Wq" secondAttribute="trailing" constant="3" id="vd1-O3-ZqX"/>
+                                    <constraint firstItem="5GX-A5-I8W" firstAttribute="leading" secondItem="ww7-9T-7Wq" secondAttribute="trailing" constant="8" id="vd1-O3-ZqX"/>
                                 </constraints>
                                 <variation key="default">
                                     <mask key="constraints">
                                         <exclude reference="gsM-xn-yQU"/>
+                                        <exclude reference="ltY-Tr-2DB"/>
                                     </mask>
                                 </variation>
                             </view>
@@ -194,6 +204,7 @@
                 <outlet property="operation2ndBtn" destination="A3Y-gO-V3n" id="Tcx-ce-Xsf"/>
                 <outlet property="productView" destination="xxJ-bc-BZN" id="wUd-Jo-Up4"/>
                 <outlet property="productViewHeight" destination="r4m-HY-bNd" id="e7h-sc-3Fw"/>
+                <outlet property="realPay" destination="lYc-qC-Re5" id="uD1-HP-Ym6"/>
                 <outlet property="stateLbl" destination="Bde-NS-JKr" id="8RL-h5-6GQ"/>
                 <outlet property="totalAmountLbl" destination="esL-ZG-3h4" id="6Y6-n5-5cK"/>
                 <outlet property="totalPriceLbl" destination="ww7-9T-7Wq" id="VGy-gU-rlI"/>

@@ -1086,7 +1086,7 @@
                                                     </constraints>
                                                 </imageView>
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vGh-5n-g5A">
-                                                    <rect key="frame" x="70" y="31" width="84" height="40"/>
+                                                    <rect key="frame" x="70" y="31" width="84" height="27"/>
                                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" relation="lessThanOrEqual" constant="250" id="Oeg-jx-oOn"/>
@@ -1098,7 +1098,7 @@
                                                     </state>
                                                 </button>
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="D0g-mP-sMB">
-                                                    <rect key="frame" x="446" y="31" width="84" height="60"/>
+                                                    <rect key="frame" x="446" y="31" width="84" height="27"/>
                                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="60" id="L5O-a7-4yC"/>
@@ -1179,7 +1179,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="DUP-IV-1WI" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="84" y="2685"/>
+            <point key="canvasLocation" x="-28.5" y="2716.5"/>
         </scene>
     </scenes>
     <resources>
@@ -1190,8 +1190,8 @@
         <image name="entr" width="8" height="15"/>
         <image name="icon_back" width="10" height="18"/>
         <image name="icon_find friend" width="27" height="19"/>
-        <image name="paoPao" width="16" height="40"/>
-        <image name="paoPao2" width="16" height="60"/>
+        <image name="paoPao" width="11" height="27"/>
+        <image name="paoPao2" width="11" height="27"/>
         <image name="tamallSmall" width="20" height="20"/>
         <image name="taobaoSmall" width="20" height="20"/>
         <image name="user" width="31" height="31"/>

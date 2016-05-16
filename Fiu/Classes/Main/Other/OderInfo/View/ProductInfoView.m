@@ -40,7 +40,7 @@
     [self.coverImgView sd_setImageWithURL:[NSURL URLWithString:productInfo.coverUrl] placeholderImage:[UIImage imageNamed:@"placeholder"]];
     self.nameLbl.text = productInfo.name;
     if (productInfo.skuName) {
-        self.typeLbl.text = [NSString stringWithFormat:@"颜色：%@，数量*%ld",productInfo.skuName,productInfo.quantity];
+        self.typeLbl.text = [NSString stringWithFormat:@"颜色%@类型：%@，数量*%ld",@"/",productInfo.skuName,productInfo.quantity];
     }else{
         self.typeLbl.text = [NSString stringWithFormat:@"数量*%ld",productInfo.quantity];
     }
