@@ -305,48 +305,56 @@ static NSString *const URLUserAddGoods = @"/scene_product/add";
 
 #pragma mark 继续按钮的点击事件
 - (void)nextBtnClick {
-    if (self.goodsIdData.count > 3) {
-        [SVProgressHUD showInfoWithStatus:@"只能标记三个商品"];
+    ReleaseViewController * releaseVC = [[ReleaseViewController alloc] init];
     
-    } else if (self.goodsIdData.count == 0) {
-        [SVProgressHUD showInfoWithStatus:@"至少标记一个商品"];
+    if ([self.createType isEqualToString:@"scene"]) {
+        if (self.goodsIdData.count > 3) {
+            [SVProgressHUD showInfoWithStatus:@"只能标记三个商品"];
+            
+        } else if (self.goodsIdData.count == 0) {
+            [SVProgressHUD showInfoWithStatus:@"至少标记一个商品"];
+            
+        } else if (self.goodsIdData.count > 0 && self.goodsIdData.count <= 3) {
+            NSMutableArray * originX = [NSMutableArray array];
+            NSMutableArray * originY = [NSMutableArray array];
+            for (UserGoodsTag * btn in self.tagBtnMarr) {
+                [originX addObject:[NSString stringWithFormat:@"%f", btn.frame.origin.x / SCREEN_WIDTH]];
+                [originY addObject:[NSString stringWithFormat:@"%f", btn.frame.origin.y / SCREEN_HEIGHT]];
+            }
+            
+            NSMutableArray * priceMarr = [NSMutableArray array];
+            NSCharacterSet * set = [NSCharacterSet characterSetWithCharactersInString:@"￥"];
+            for (NSString * str in self.goodsPriceData) {
+                NSString * price = [str stringByTrimmingCharactersInSet:set];
+                [priceMarr addObject:price];
+            }
+            
+            NSString * goodsPrice = [priceMarr componentsJoinedByString:@","];
+            NSString * goodsId = [self.goodsIdData componentsJoinedByString:@","];
+            NSString * goodsTitle = [self.goodsTitleData componentsJoinedByString:@","];
+            NSString * btnOriginX = [originX componentsJoinedByString:@","];
+            NSString * btnOriginY = [originY componentsJoinedByString:@","];
+            
+            UIImage * goodsImg = [self generateImage:self.filtersImageView];
+            
+            releaseVC.locationArr = self.locationArr;
+            releaseVC.scenceView.imageView.image = goodsImg;
+            releaseVC.createType = self.createType;
+            releaseVC.fSceneId = self.fSceneId;
+            releaseVC.fSceneTitle = self.fSceneTitle;
+            releaseVC.goodsTitle = goodsTitle;
+            releaseVC.goodsPrice = goodsPrice;
+            releaseVC.goodsId = goodsId;
+            releaseVC.goodsX = btnOriginX;
+            releaseVC.goodsY = btnOriginY;
+            [self.navigationController pushViewController:releaseVC animated:YES];
+        }
     
-    } else if (self.goodsIdData.count > 0 && self.goodsIdData.count <= 3) {
-        NSMutableArray * originX = [NSMutableArray array];
-        NSMutableArray * originY = [NSMutableArray array];
-        for (UserGoodsTag * btn in self.tagBtnMarr) {
-            [originX addObject:[NSString stringWithFormat:@"%f", btn.frame.origin.x]];
-            [originY addObject:[NSString stringWithFormat:@"%f", btn.frame.origin.y]];
-        }
-        
-        NSMutableArray * priceMarr = [NSMutableArray array];
-        NSCharacterSet * set = [NSCharacterSet characterSetWithCharactersInString:@"￥"];
-        for (NSString * str in self.goodsPriceData) {
-            NSString * price = [str stringByTrimmingCharactersInSet:set];
-            [priceMarr addObject:price];
-        }
-
-        NSString * goodsPrice = [priceMarr componentsJoinedByString:@","];
-        NSString * goodsId = [self.goodsIdData componentsJoinedByString:@","];
-        NSString * goodsTitle = [self.goodsTitleData componentsJoinedByString:@","];
-        NSString * btnOriginX = [originX componentsJoinedByString:@","];
-        NSString * btnOriginY = [originY componentsJoinedByString:@","];
-        
-        UIImage * goodsImg = [self generateImage:self.filtersImageView];
-        
-        ReleaseViewController * releaseVC = [[ReleaseViewController alloc] init];
+    } else if ([self.createType isEqualToString:@"fScene"]) {
         releaseVC.locationArr = self.locationArr;
-        releaseVC.scenceView.imageView.image = goodsImg;
+        releaseVC.scenceView.imageView.image = self.filtersImageView.image;
         releaseVC.createType = self.createType;
-        releaseVC.fSceneId = self.fSceneId;
-        releaseVC.fSceneTitle = self.fSceneTitle;
-        releaseVC.goodsTitle = goodsTitle;
-        releaseVC.goodsPrice = goodsPrice;
-        releaseVC.goodsId = goodsId;
-        releaseVC.goodsX = btnOriginX;
-        releaseVC.goodsY = btnOriginY;
         [self.navigationController pushViewController:releaseVC animated:YES];
-
     }
 }
 

@@ -81,5 +81,9 @@
  */
 - (void)addBarItemRightBarButton:(NSString *)title image:(NSString *)image isTransparent:(BOOL)transparent;
 
+/**
+ *  添加操作指示图
+ */
+- (void)setGuideImgForVC:(NSString *)image;
 
 @end

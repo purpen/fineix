@@ -8,6 +8,7 @@
 
 #import "ReleaseViewController.h"
 #import "CreateViewController.h"
+#import "HomeViewController.h"
 
 static NSString *const URLReleaseScenen = @"/scene_sight/save";
 static NSString *const URLReleaseFiuScenen = @"/scene_scene/save";
@@ -49,27 +50,12 @@ static NSString *const URLReleaseFiuScenen = @"/scene_scene/save";
 #pragma mark - 网络请求
 #pragma mark 发布场景
 - (void)networkNewSceneData {
-//    NSLog(@"%@",@{
-//                  @"title":self.scenceView.title.text,
-//                  @"des":self.scenceView.content.text,
-//                  @"lng":self.lng,
-//                  @"lat":self.lat,
-//                  @"address":self.addView.location.text,
-//                  @"product_id":self.goodsId,
-//                  @"product_title":self.goodsTitle,
-//                  @"product_price":self.goodsPrice,
-//                  @"product_x":self.goodsX,
-//                  @"product_y":self.goodsY,
-//                  @"tags":self.tagS,
-//                  @"scene_id":self.fSceneId,
-//                  });
-
-    if ([self.lng length] <= 0 || [self.scenceView.title.text isEqualToString:@""] || [self.scenceView.content.text isEqualToString:@""] || [self.addView.location.text isEqualToString:@""]) {
+    if ([self.lng length] <= 0 || [self.scenceView.title.text isEqualToString:@""] || [self.scenceView.content.text isEqualToString:@""] || [self.addView.location.text isEqualToString:@""] || self.tagS.length <=0 || self.fSceneId.length <= 0) {
         [SVProgressHUD showInfoWithStatus:@"填写未完成"];
 
     } else {
         [SVProgressHUD show];
-        NSData * imageData = UIImageJPEGRepresentation(self.scenceView.imageView.image, 0.5);
+        NSData * imageData = UIImageJPEGRepresentation(self.scenceView.imageView.image, 0.3);
         NSString * icon64Str = [imageData base64EncodedStringWithOptions:NSDataBase64Encoding64CharacterLineLength];
         NSDictionary * paramDict = @{
                                      @"tmp":icon64Str,
@@ -91,7 +77,10 @@ static NSString *const URLReleaseFiuScenen = @"/scene_scene/save";
         
         [self.releaseSceneRequest startRequestSuccess:^(FBRequest *request, id result) {
             [SVProgressHUD showSuccessWithStatus:@"您的场景发布成功，品味又升级啦"];
+            //  to #import "HomeViewController.h"
+            [[NSNotificationCenter defaultCenter] postNotificationName:@"refreshHomeList" object:nil];
             [self dismissViewControllerAnimated:YES completion:nil];
+            
         } failure:^(FBRequest *request, NSError *error) {
             [SVProgressHUD showErrorWithStatus:@"您的场景发布失败，刷新试一下吧"];
         }];
@@ -100,7 +89,7 @@ static NSString *const URLReleaseFiuScenen = @"/scene_scene/save";
 
 #pragma mark 发布情景
 - (void)networkNewFiuSceneData {
-    if ([self.lng length] <= 0 || [self.scenceView.title.text isEqualToString:@""] || [self.scenceView.content.text isEqualToString:@""] || [self.addView.location.text isEqualToString:@""]) {
+    if ([self.lng length] <= 0 || [self.scenceView.title.text isEqualToString:@""] || [self.scenceView.content.text isEqualToString:@""] || [self.addView.location.text isEqualToString:@""] || self.tagS.length <=0) {
         [SVProgressHUD showInfoWithStatus:@"填写未完成"];
     } else {
         [SVProgressHUD show];
@@ -118,8 +107,11 @@ static NSString *const URLReleaseFiuScenen = @"/scene_scene/save";
         self.releaseSceneRequest = [FBAPI postWithUrlString:URLReleaseFiuScenen requestDictionary:paramDict delegate:self];
         
         [self.releaseSceneRequest startRequestSuccess:^(FBRequest *request, id result) {
+            //  to #import "AllSceneViewController.h"
+            [[NSNotificationCenter defaultCenter] postNotificationName:@"refreshAllFSceneList" object:nil];
             [self dismissViewControllerAnimated:YES completion:nil];
             [SVProgressHUD showSuccessWithStatus:@"您的情景发布成功，品味又升级啦"];
+            
         } failure:^(FBRequest *request, NSError *error) {
             [SVProgressHUD showErrorWithStatus:@"您的情景景发布失败，刷新试一下吧"];
         }];

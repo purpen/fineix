@@ -15,13 +15,17 @@
 #import "GoodsBrandViewController.h"
 #import "GoodsCarViewController.h"
 #import "GoodsInfoData.h"
+#import "SceneInfoData.h"
 
 static NSString *const URLGoodsInfo = @"/scene_product/view";
 static NSString *const URLRecommendGoods = @"/scene_product/getlist";
+static NSString *const URLGoodsScene = @"/sight_and_product/getlist";
 
 @interface GoodsInfoViewController ()
 
 @pro_strong GoodsInfoData       *   goodsInfo;
+@pro_strong NSMutableArray      *   recommendGoods;
+@pro_strong NSMutableArray      *   sceneList;
 
 @end
 
@@ -38,6 +42,7 @@ static NSString *const URLRecommendGoods = @"/scene_product/getlist";
     [super viewDidLoad];
     
     [self networkGoodsInfoData];
+    [self networkGoodsSceneList];
 
 }
 
@@ -47,23 +52,48 @@ static NSString *const URLRecommendGoods = @"/scene_product/getlist";
     [SVProgressHUD show];
     self.goodsInfoRequest = [FBAPI getWithUrlString:URLGoodsInfo requestDictionary:@{@"id":self.goodsID} delegate:self];
     [self.goodsInfoRequest startRequestSuccess:^(FBRequest *request, id result) {
+        NSLog(@"＝＝＝＝＝＝＝＝＝＝＝ %@", result);
         self.goodsInfo = [[GoodsInfoData alloc] initWithDictionary:[result valueForKey:@"data"]];
         [self setGoodsInfoVcUI];
         [self.rollImgView setGoodsRollimageView:self.goodsInfo];
         [self.goodsInfoTable reloadData];
-        NSLog(@"商品详情:%@", result);
+
+        [self networkRecommendGoodsDataWithCategory:[self.goodsInfo valueForKey:@"categoryId"]];
         [SVProgressHUD dismiss];
         
     } failure:^(FBRequest *request, NSError *error) {
-        NSLog(@"%@", [error localizedDescription]);
+        [SVProgressHUD showErrorWithStatus:[error localizedDescription]];
     }];
 }
 
 #pragma mark 相关推荐
-- (void)networkRecommendGoodsData:(NSString *)ids {
-    self.reGoodsRequest = [FBAPI getWithUrlString:URLRecommendGoods requestDictionary:@{@"category_tag_ids":ids} delegate:self];
+- (void)networkRecommendGoodsDataWithCategory:(NSString *)categoryId {
+    [SVProgressHUD show];
+    self.reGoodsRequest = [FBAPI getWithUrlString:URLRecommendGoods requestDictionary:@{@"category_id":categoryId, @"sort":@"1", @"page":@"1", @"size":@"8"} delegate:self];
     [self.reGoodsRequest startRequestSuccess:^(FBRequest *request, id result) {
-        NSLog(@"商品详情中的相关推荐：%@", result);
+        NSArray * goodsArr = [[result valueForKey:@"data"] valueForKey:@"rows"];
+        for (NSDictionary * goodsDict in goodsArr) {
+            GoodsInfoData * goodsInfo = [[GoodsInfoData alloc] initWithDictionary:goodsDict];
+            [self.recommendGoods addObject:goodsInfo];
+        }
+        [self.goodsInfoTable reloadData];
+        [SVProgressHUD dismiss];
+        
+    } failure:^(FBRequest *request, NSError *error) {
+        [SVProgressHUD showErrorWithStatus:[error localizedDescription]];
+    }];
+}
+
+#pragma mark 商品应用场景
+- (void)networkGoodsSceneList {
+    self.goodsSceneRequest = [FBAPI getWithUrlString:URLGoodsScene requestDictionary:@{@"product_id":self.goodsID, @"page":@"1", @"size":@"5"} delegate:self];
+    [self.goodsSceneRequest startRequestSuccess:^(FBRequest *request, id result) {
+        NSArray * sceneArr = [[[result valueForKey:@"data"] valueForKey:@"rows"] valueForKey:@"sight"];
+        for (NSDictionary * sceneDict in sceneArr) {
+            SceneInfoData * sceneModel = [[SceneInfoData alloc] initWithDictionary:sceneDict];
+            [self.sceneList addObject:sceneModel];
+        }
+        [self.goodsInfoTable reloadData];
         
     } failure:^(FBRequest *request, NSError *error) {
         [SVProgressHUD showErrorWithStatus:[error localizedDescription]];
@@ -166,7 +196,8 @@ static NSString *const URLRecommendGoods = @"/scene_product/getlist";
         if (!cell) {
             cell = [[InfoUseSceneTableViewCell alloc] initWithStyle:(UITableViewCellStyleDefault) reuseIdentifier:InfoUseSceneCellId];
         }
-        [cell setUI:@[@"午后的星巴克时光", @"长城脚下的巨人", @"极地的阳光", @"最美的不是下雨天，是与你躲雨的屋檐"]];
+        cell.nav = self.navigationController;
+        [cell setGoodsScene:self.sceneList];
         return cell;
         
     } else if (indexPath.section == 3) {
@@ -176,6 +207,7 @@ static NSString *const URLRecommendGoods = @"/scene_product/getlist";
             cell = [[InfoRecommendTableViewCell alloc] initWithStyle:(UITableViewCellStyleDefault) reuseIdentifier:InfoRecommendCellId];
         }
         cell.nav = self.navigationController;
+        [cell setRecommendGoodsData:self.recommendGoods];
         return cell;
     }
     
@@ -202,7 +234,11 @@ static NSString *const URLRecommendGoods = @"/scene_product/getlist";
     if (indexPath.section == 0) {
         return 60;
     } else if (indexPath.section == 1) {
-        return 75;
+        if (self.goodsInfo.brandId.length <= 0) {
+            return 0.01;
+        } else {
+            return 75;
+        }
     } else if (indexPath.section == 2) {
         return 90;
     } else if (indexPath.section == 3) {
@@ -236,4 +272,18 @@ static NSString *const URLRecommendGoods = @"/scene_product/getlist";
     [self.navigationController pushViewController:goodsCarVC animated:YES];
 }
 
+#pragma mark - 
+- (NSMutableArray *)recommendGoods {
+    if (!_recommendGoods) {
+        _recommendGoods = [NSMutableArray array];
+    }
+    return _recommendGoods;
+}
+
+- (NSMutableArray *)sceneList {
+    if (!_sceneList) {
+        _sceneList = [NSMutableArray array];
+    }
+    return _sceneList;
+}
 @end

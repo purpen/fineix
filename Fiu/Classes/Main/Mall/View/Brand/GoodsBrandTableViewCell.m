@@ -23,6 +23,12 @@
 }
 
 - (void)setBrandInfoData:(BrandInfoData *)model {
+    [self.brandBgImg downloadImage:model.bannerUrl place:[UIImage imageNamed:@""]];
+    UIBlurEffect * beffect = [UIBlurEffect effectWithStyle:UIBlurEffectStyleLight];
+    UIVisualEffectView * view = [[UIVisualEffectView alloc] initWithEffect:beffect];
+    view.frame = CGRectMake(0, -50, SCREEN_WIDTH, 260);
+    
+    [self.brandBgImg addSubview:view];
     [self.brandImg downloadImage:model.coverUrl place:[UIImage imageNamed:@""]];
     [self changeContentLabStyle:self.brandIntroduce withText:[NSString stringWithFormat:@"%@", model.des]];
 }
@@ -81,17 +87,6 @@
     if (!_brandBgImg) {
         _brandBgImg = [[UIImageView alloc] init];
         _brandBgImg.contentMode = UIViewContentModeScaleAspectFill;
-
-        UIView * view = [[UIView alloc] initWithFrame:CGRectMake(0, -50, SCREEN_WIDTH, 260)];
-        view.backgroundColor = [UIColor colorWithHexString:@"#FFFFFF" alpha:.1];
-        [_brandBgImg addSubview:view];
-        
-        //  毛玻璃效果
-        UIBlurEffect * blurEffect = [UIBlurEffect effectWithStyle:UIBlurEffectStyleLight];
-        UIVisualEffectView * effectView = [[UIVisualEffectView alloc] initWithEffect:blurEffect];
-        effectView.frame = view.bounds;
-        effectView.alpha = .5f;
-        [view addSubview:effectView];
     }
     return _brandBgImg;
 }

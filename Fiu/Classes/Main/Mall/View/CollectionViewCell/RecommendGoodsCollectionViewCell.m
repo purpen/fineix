@@ -20,10 +20,10 @@
     return self;
 }
 
-- (void)setUI {
-    self.goodsImg.image = [UIImage imageNamed:@"baa"];
-    self.title.text = @"Nut 智能寻物防丢贴片 一键寻物双向防丢 家居常备 出门无忧";
-    self.price.text = @"￥69.00";
+- (void)setRecommendGoodsData:(GoodsInfoData *)model {
+    [self.goodsImg downloadImage:model.coverUrl place:[UIImage imageNamed:@""]];
+    self.title.text = model.title;
+    self.price.text = [NSString stringWithFormat:@"￥%.2f", model.salePrice];
 }
 
 #pragma mark -

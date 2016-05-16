@@ -22,4 +22,6 @@
 @pro_assign BOOL                        rollDown;               //  是否下拉
 @pro_assign CGFloat                     lastContentOffset;      //  滚动的方向
 
+- (void)refreshHomeTable;
+
 @end

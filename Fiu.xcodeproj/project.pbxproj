@@ -429,6 +429,7 @@
 		D8A9AE871CE75DC600A9FCFB /* FiuBrandData.m in Sources */ = {isa = PBXBuildFile; fileRef = D8A9AE811CE75DC600A9FCFB /* FiuBrandData.m */; };
 		D8A9AE881CE75DC600A9FCFB /* FiuBrandId.m in Sources */ = {isa = PBXBuildFile; fileRef = D8A9AE831CE75DC600A9FCFB /* FiuBrandId.m */; };
 		D8A9AE891CE75DC600A9FCFB /* FiuBrandRow.m in Sources */ = {isa = PBXBuildFile; fileRef = D8A9AE851CE75DC600A9FCFB /* FiuBrandRow.m */; };
+		D8A9AE8C1CE8D99E00A9FCFB /* GoodsSceneCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D8A9AE8B1CE8D99E00A9FCFB /* GoodsSceneCollectionViewCell.m */; };
 		D8AEC7511CA8E3A000A868B6 /* libsqlite3.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 1F0EE6A41C9FA47B000631F0 /* libsqlite3.tbd */; };
 		D8AEC7521CA8E3AE00A868B6 /* libiconv.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 1F0EE6A21C9FA43C000631F0 /* libiconv.tbd */; };
 		D8AEC7531CA8E3BB00A868B6 /* libstdc++.6.0.9.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 280045201C805CD7005F5C2E /* libstdc++.6.0.9.tbd */; };
@@ -1199,6 +1200,8 @@
 		D8A9AE831CE75DC600A9FCFB /* FiuBrandId.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FiuBrandId.m; sourceTree = "<group>"; };
 		D8A9AE841CE75DC600A9FCFB /* FiuBrandRow.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FiuBrandRow.h; sourceTree = "<group>"; };
 		D8A9AE851CE75DC600A9FCFB /* FiuBrandRow.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FiuBrandRow.m; sourceTree = "<group>"; };
+		D8A9AE8A1CE8D99E00A9FCFB /* GoodsSceneCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GoodsSceneCollectionViewCell.h; sourceTree = "<group>"; };
+		D8A9AE8B1CE8D99E00A9FCFB /* GoodsSceneCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GoodsSceneCollectionViewCell.m; sourceTree = "<group>"; };
 		E0438B4B24E3F747F761AF4C /* Pods-Fiu.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Fiu.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Fiu/Pods-Fiu.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -2598,6 +2601,8 @@
 				D8363A4C1CD8814600CC4AC0 /* InfoUseSceneTableViewCell.m */,
 				D8363A4D1CD8814600CC4AC0 /* MallMenuTableViewCell.h */,
 				D8363A4E1CD8814600CC4AC0 /* MallMenuTableViewCell.m */,
+				D8A9AE8A1CE8D99E00A9FCFB /* GoodsSceneCollectionViewCell.h */,
+				D8A9AE8B1CE8D99E00A9FCFB /* GoodsSceneCollectionViewCell.m */,
 			);
 			path = TableViewCell;
 			sourceTree = "<group>";
@@ -3658,6 +3663,7 @@
 				1F8EACD51CDD8A5B00C51235 /* OrderInfoDetailViewController.m in Sources */,
 				D8363A2E1CD8809400CC4AC0 /* GoodsRow.m in Sources */,
 				1FE56B161CE5D41000CD7780 /* JSBadgeView.m in Sources */,
+				D8A9AE8C1CE8D99E00A9FCFB /* GoodsSceneCollectionViewCell.m in Sources */,
 				D8A9ACCF1CD8A46900A9FCFB /* SuFiuScenrView.m in Sources */,
 				D8A9ACDF1CD8A49100A9FCFB /* AllSceneViewController.m in Sources */,
 				D8A9ACB31CD89E0000A9FCFB /* FiuSceneData.m in Sources */,

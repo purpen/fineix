@@ -28,8 +28,13 @@ static NSString *const URLSceneList = @"/scene_sight/";
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     
+    [self setFirstAppStart];
     [self setNavigationViewUI];
     self.tabBarController.tabBar.hidden = NO;
+    
+    //  frome #import "ReleaseViewController.h"
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(refreshHomeTable) name:@"refreshHomeList" object:nil];
+    
 }
 
 - (void)viewDidLoad {
@@ -42,10 +47,15 @@ static NSString *const URLSceneList = @"/scene_sight/";
     [self.view addSubview:self.homeTableView];
 }
 
+#pragma mark - 刷新列表
+- (void)refreshHomeTable {
+    [self.homeTableView.mj_header beginRefreshing];
+}
+
 #pragma mark - 网络请求
 - (void)networkRequestData {
     [SVProgressHUD show];
-    NSDictionary *  requestParams = @{@"page":@(self.currentpageNum + 1), @"size":@10, @"sort":@"2"};
+    NSDictionary *  requestParams = @{@"page":@(self.currentpageNum + 1), @"size":@10, @"sort":@"1"};
     self.sceneListRequest = [FBAPI getWithUrlString:URLSceneList requestDictionary:requestParams delegate:self];
     [self.sceneListRequest startRequestSuccess:^(FBRequest *request, id result) {
         NSArray * sceneArr = [[result valueForKey:@"data"] valueForKey:@"rows"];
@@ -220,6 +230,7 @@ static NSString *const URLSceneList = @"/scene_sight/";
     if(![[NSUserDefaults standardUserDefaults] boolForKey:@"firstLaunch"]){
         [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"firstLaunch"];
         NSLog(@"第一次启动");
+        [self setGuideImgForVC:@"Guide_Home"];
     }else{
         NSLog(@"已经不是第一次启动了");
     }

@@ -46,6 +46,7 @@ static NSString *const URLGoodslist = @"/scene_product/getlist";
 - (void)networkBrandInfoData {
     self.brandRequest = [FBAPI getWithUrlString:URLBrandInfo requestDictionary:@{@"id":self.brandId} delegate:self];
     [self.brandRequest startRequestSuccess:^(FBRequest *request, id result) {
+        NSLog(@"＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝ %@", result);
         self.brandInfo = [[BrandInfoData alloc] initWithDictionary:[result valueForKey:@"data"]];
         [self.goodsBrandTable reloadData];
         
@@ -59,7 +60,6 @@ static NSString *const URLGoodslist = @"/scene_product/getlist";
     [SVProgressHUD show];
     self.brandGoodsRequest = [FBAPI getWithUrlString:URLGoodslist requestDictionary:@{@"size":@"8", @"page":@(self.currentpageNum + 1), @"brand_id":self.brandId} delegate:self];
     [self.brandGoodsRequest startRequestSuccess:^(FBRequest *request, id result) {
-        NSLog(@"＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝ %@", result);
         NSArray * goodsArr = [[result valueForKey:@"data"] valueForKey:@"rows"];
         for (NSDictionary * goodsDic in goodsArr) {
             GoodsRow * goodsModel = [[GoodsRow alloc] initWithDictionary:goodsDic];
@@ -159,7 +159,6 @@ static NSString *const URLGoodslist = @"/scene_product/getlist";
         if (!cell) {
             cell = [[GoodsBrandTableViewCell alloc] initWithStyle:(UITableViewCellStyleDefault) reuseIdentifier:goodsBrandCellId];
         }
-        [cell.brandBgImg downloadImage:self.brandBgImg place:[UIImage imageNamed:@""]];
         [cell setBrandInfoData:self.brandInfo];
         return cell;
     

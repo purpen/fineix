@@ -14,5 +14,9 @@
 @pro_strong UINavigationController      *   nav;
 @pro_strong UILabel                     *   headerTitle;              //  标题
 @pro_strong UICollectionView            *   recommendListView;        //  推荐商品的列表
+@pro_strong NSMutableArray              *   goodsData;
+@pro_strong NSMutableArray              *   goodsIds;
+
+- (void)setRecommendGoodsData:(NSMutableArray *)model;
 
 @end

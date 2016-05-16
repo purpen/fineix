@@ -9,6 +9,7 @@
 #import "UserInfoTableViewCell.h"
 #import "HomePageViewController.h"
 #import "UIButton+WebCache.h"
+#import "GoodsInfoViewController.h"
 
 @implementation UserInfoTableViewCell
 
@@ -39,7 +40,7 @@
     self.city.text = model.address;
     [self.whereScene removeFromSuperview];
     [self.city mas_updateConstraints:^(MASConstraintMaker *make) {
-        make.size.mas_equalTo(CGSizeMake(cityLength * 1.1, 15));
+        make.size.mas_equalTo(CGSizeMake(cityLength + 5, 15));
         make.left.equalTo(self.mas_left).with.offset(40);
     }];
     
@@ -61,6 +62,7 @@
 
 #pragma mark -
 - (void)setSceneInfoData:(SceneInfoData *)model {
+    self.goodsIds = [NSMutableArray arrayWithArray:[model.product valueForKey:@"idField"]];
     self.userId = [NSString stringWithFormat:@"%zi", model.userInfo.userId];
     [self.bgImage sd_setImageWithURL:[NSURL URLWithString:model.coverUrl] forState:(UIControlStateNormal)];
     [self titleTextStyle:[NSString stringWithFormat:@"%@", model.title] withBgColor:[UIColor colorWithPatternImage:[UIImage imageNamed:@"titleBg"]]];
@@ -94,75 +96,7 @@
     
     [self addSubview:self.userView];
     
-    [self addSubview:self.userLeftView];
-    [_userLeftView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.size.mas_equalTo(CGSizeMake(SCREEN_WIDTH - 135.5 ,35));
-        make.bottom.equalTo(_userView.mas_bottom).with.offset(-10);
-        make.left.equalTo(_userView.mas_left).with.offset(0);
-    }];
-    
-    [self addSubview:self.userRightView];
-    [_userRightView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.size.mas_equalTo(CGSizeMake(46 ,35));
-        make.centerY.equalTo(_userLeftView);
-        make.right.equalTo(_userView.mas_right).with.offset(0);
-    }];
-    
-    [self addSubview:self.userHeader];
-    [_userHeader mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.size.mas_equalTo(CGSizeMake(30, 30));
-        make.centerY.equalTo(_userLeftView);
-        make.left.equalTo(_userLeftView.mas_left).with.offset(15);
-    }];
-    
-    [self addSubview:self.userName];
-    [_userName mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.size.mas_equalTo(CGSizeMake(150, 15));
-        make.top.equalTo(_userHeader.mas_top).with.offset(0);
-        make.left.equalTo(_userHeader.mas_right).with.offset(10);
-    }];
-    
-    [self addSubview:self.userProfile];
-    [_userProfile mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.size.mas_equalTo(CGSizeMake(150, 15));
-        make.bottom.equalTo(_userHeader.mas_bottom).with.offset(0);
-        make.left.equalTo(_userHeader.mas_right).with.offset(10);
-    }];
-    
-    [self addSubview:self.goodBtn];
-    [_goodBtn mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.size.mas_equalTo(CGSizeMake(89.5 ,46));
-        make.bottom.equalTo(_userLeftView.mas_bottom).with.offset(0);
-        make.left.equalTo(_userLeftView.mas_right).with.offset(0);
-    }];
-    
-    [self addSubview:self.city];
-    [_city mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.size.mas_equalTo(CGSizeMake(75, 15));
-        make.bottom.equalTo(_userLeftView.mas_top).with.offset(-10);
-        make.left.equalTo(_userView.mas_left).with.offset(40);
-    }];
-    
-    [self addSubview:self.whereScene];
-    [_whereScene mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.size.mas_equalTo(CGSizeMake(130, 15));
-        make.bottom.equalTo(_city.mas_top).with.offset(-5);
-        make.left.equalTo(_userView.mas_left).with.offset(40);
-    }];
-    
-    [self addSubview:self.time];
-    [_time mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.size.mas_equalTo(CGSizeMake(150, 15));
-        make.bottom.equalTo(_city.mas_top).with.offset(-5);
-        make.left.equalTo(_whereScene.mas_right).with.offset(0);
-    }];
-    
-    [self addSubview:self.titleText];
-    [_titleText mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.size.mas_equalTo(CGSizeMake(SCREEN_WIDTH - 40, 56));
-        make.bottom.equalTo(_time.mas_top).with.offset(-5);
-        make.left.equalTo(_userView.mas_left).with.offset(20);
-    }];
+
 }
 
 #pragma mark - 创建用户添加商品按钮
@@ -174,16 +108,28 @@
         CGFloat btnY = [[self.tagDataMarr[idx] valueForKey:@"y"] floatValue];
         NSString * title = [self.tagDataMarr[idx] valueForKey:@"title"];
         NSString * price = [NSString stringWithFormat:@"￥%@", [self.tagDataMarr[idx] valueForKey:@"price"]];
-        UserGoodsTag * userTag = [[UserGoodsTag alloc] initWithFrame:CGRectMake(btnX, btnY, 175, 32)];
+        UserGoodsTag * userTag = [[UserGoodsTag alloc] initWithFrame:CGRectMake(btnX * SCREEN_WIDTH, btnY * SCREEN_HEIGHT, 175, 32)];
         userTag.dele.hidden = YES;
         userTag.title.text = title;
         userTag.price.text = price;
         userTag.title.hidden = YES;
         userTag.price.hidden = YES;
         [userTag setImage:[UIImage imageNamed:@""] forState:(UIControlStateNormal)];
+        
+        UITapGestureRecognizer * tapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(openGoodsInfo:)];
+        [userTag addGestureRecognizer:tapGesture];
+        
         [self.userTagMarr addObject:userTag];
         [self addSubview:userTag];
     }
+}
+
+- (void)openGoodsInfo:(UIGestureRecognizer *)button {
+    NSInteger index = [self.userTagMarr indexOfObject:button.view];
+    GoodsInfoViewController * goodsInfoVC = [[GoodsInfoViewController alloc] init];
+    goodsInfoVC.goodsID = self.goodsIds[index];
+    [self.nav pushViewController:goodsInfoVC animated:YES];
+    
 }
 
 #pragma mark - 场景图
@@ -208,8 +154,18 @@
 
 #pragma mark 显示／隐藏标签
 - (void)showUserTag:(UIButton *)button {
+    CGRect userViewRect = self.userView.frame;
+    
     if (button.selected == YES) {
         button.selected = NO;
+        
+        userViewRect = CGRectMake(0, SCREEN_HEIGHT + 20, SCREEN_WIDTH, 170);
+        [UIView animateWithDuration:.3 animations:^{
+            self.userView.frame = userViewRect;
+        } completion:^(BOOL finished) {
+            self.userView.hidden = YES;
+        }];
+        
         for (UserGoodsTag * goodsTag in self.userTagMarr) {
             goodsTag.title.hidden = NO;
             goodsTag.price.hidden = NO;
@@ -218,6 +174,13 @@
         
     } else if (button.selected == NO) {
         button.selected = YES;
+        
+        userViewRect = CGRectMake(0, SCREEN_HEIGHT - 170, SCREEN_WIDTH, 170);
+        [UIView animateWithDuration:.3 animations:^{
+            self.userView.hidden = NO;
+            self.userView.frame = userViewRect;
+        }];
+        
         for (UserGoodsTag * goodsTag in self.userTagMarr) {
             goodsTag.title.hidden = YES;
             goodsTag.price.hidden = YES;
@@ -230,6 +193,76 @@
 - (UIView *)userView {
     if (!_userView) {
         _userView = [[UIView alloc] initWithFrame:CGRectMake(0, SCREEN_HEIGHT - 170, SCREEN_WIDTH, 170)];
+        
+        [_userView addSubview:self.userLeftView];
+        [_userLeftView mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.size.mas_equalTo(CGSizeMake(SCREEN_WIDTH - 135.5 ,35));
+            make.bottom.equalTo(_userView.mas_bottom).with.offset(-10);
+            make.left.equalTo(_userView.mas_left).with.offset(0);
+        }];
+        
+        [_userView addSubview:self.userRightView];
+        [_userRightView mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.size.mas_equalTo(CGSizeMake(46 ,35));
+            make.centerY.equalTo(_userLeftView);
+            make.right.equalTo(_userView.mas_right).with.offset(0);
+        }];
+        
+        [_userView addSubview:self.userHeader];
+        [_userHeader mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.size.mas_equalTo(CGSizeMake(30, 30));
+            make.centerY.equalTo(_userLeftView);
+            make.left.equalTo(_userLeftView.mas_left).with.offset(20);
+        }];
+        
+        [_userView addSubview:self.userName];
+        [_userName mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.size.mas_equalTo(CGSizeMake(150, 15));
+            make.top.equalTo(_userHeader.mas_top).with.offset(0);
+            make.left.equalTo(_userHeader.mas_right).with.offset(10);
+        }];
+        
+        [_userView addSubview:self.userProfile];
+        [_userProfile mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.size.mas_equalTo(CGSizeMake(150, 15));
+            make.bottom.equalTo(_userHeader.mas_bottom).with.offset(0);
+            make.left.equalTo(_userHeader.mas_right).with.offset(10);
+        }];
+        
+        [_userView addSubview:self.goodBtn];
+        [_goodBtn mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.size.mas_equalTo(CGSizeMake(89.5 ,46));
+            make.bottom.equalTo(_userLeftView.mas_bottom).with.offset(0);
+            make.left.equalTo(_userLeftView.mas_right).with.offset(0);
+        }];
+        
+        [_userView addSubview:self.city];
+        [_city mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.size.mas_equalTo(CGSizeMake(75, 15));
+            make.bottom.equalTo(_userLeftView.mas_top).with.offset(-10);
+            make.left.equalTo(_userView.mas_left).with.offset(40);
+        }];
+        
+        [_userView addSubview:self.whereScene];
+        [_whereScene mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.size.mas_equalTo(CGSizeMake(130, 15));
+            make.bottom.equalTo(_city.mas_top).with.offset(-5);
+            make.left.equalTo(_userView.mas_left).with.offset(40);
+        }];
+        
+        [_userView addSubview:self.time];
+        [_time mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.size.mas_equalTo(CGSizeMake(150, 15));
+            make.bottom.equalTo(_city.mas_top).with.offset(-5);
+            make.left.equalTo(_whereScene.mas_right).with.offset(0);
+        }];
+        
+        [_userView addSubview:self.titleText];
+        [_titleText mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.size.mas_equalTo(CGSizeMake(SCREEN_WIDTH - 40, 56));
+            make.bottom.equalTo(_time.mas_top).with.offset(-5);
+            make.left.equalTo(_userView.mas_left).with.offset(20);
+        }];
     }
     return _userView;
 }

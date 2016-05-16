@@ -23,7 +23,7 @@
 }
 
 - (void)setCommentData:(CommentRow *)model {
-    [self.userHeader downloadImage:model.user.smallAvatarUrl place:[UIImage imageNamed:@""]];
+    [self.userHeader downloadImage:model.user.mediumAvatarUrl place:[UIImage imageNamed:@""]];
     self.userName.text = model.user.nickname;
     self.time.text = model.createdAt;
     if (model.isReply == 1) {

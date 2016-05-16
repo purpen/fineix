@@ -33,10 +33,8 @@
 @pro_strong UILabel             *   time;           //  时间
 @pro_strong NSMutableArray      *   tagDataMarr;
 @pro_strong NSString            *   userId;
-@pro_strong UserGoodsTag        *   userTag;
 @pro_strong NSMutableArray      *   userTagMarr;
-
-- (void)showUserTag;
+@pro_strong NSMutableArray      *   goodsIds;
 
 - (void)setSceneInfoData:(SceneInfoData *)model;
 
