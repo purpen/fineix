@@ -162,6 +162,7 @@ static NSString * const reuseIdentifier = @"Cell";
                                          @"id" : modelDict[@"_id"]
                                          };
             RecommendedScenarioModel *model = [[RecommendedScenarioModel alloc] initWithDict:modellDict];
+            model.flag = @0;
             //获取的数据转为模型存储起来
             [_modelAry addObject:model];
         }
@@ -170,13 +171,6 @@ static NSString * const reuseIdentifier = @"Cell";
         _numV.totalNumberLabel.text = [NSString stringWithFormat:@"/%d",(int)_modelAry.count];
     }
     
-    if ([request.flag isEqualToString:sceneSubscription]) {
-        if (result[@"success"]) {
-            [SVProgressHUD showSuccessWithStatus:@"订阅成功"];
-        }else{
-            [SVProgressHUD showErrorWithStatus:@"订阅失败"];
-        }
-    }
 }
 
 
@@ -269,9 +263,14 @@ static NSString * const reuseIdentifier = @"Cell";
     view.tittleLabel.text = model.title;
     view.addressLabel.text = model.address;
     view.subscribeNumberLabel.text = [NSString stringWithFormat:@"订阅人%d",model.subscription_count];
+    if ([model.flag isEqualToNumber:@0]) {
+        view.subscribeBtn.selected = NO;
+    }else if ([model.flag isEqualToNumber:@1]){
+        view.subscribeBtn.selected = YES;
+    }
     view.backgroundColor = [UIColor clearColor];
     [view.subscribeBtn addTarget:self action:@selector(clickSubscribeBtn:) forControlEvents:UIControlEventTouchUpInside];
-    view.subscribeBtn.tag = model.id;
+    view.subscribeBtn.tag = indexPath.row;
     [cell.contentView addSubview:view];
     //    UIImageView *imageview = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, cell.frame.size.width, cell.frame.size.height-20)];
     //    imageview.image = [UIImage imageNamed:@"scenario"];
@@ -282,15 +281,37 @@ static NSString * const reuseIdentifier = @"Cell";
 
 //点击订阅按钮
 -(void)clickSubscribeBtn:(UIButton*)sender{
-    NSLog(@"订阅");
-    //订阅
-    NSDictionary *params = @{
-                             @"id":@(sender.tag)
-                             };
-    FBRequest *request = [FBAPI postWithUrlString:sceneSubscription requestDictionary:params delegate:self];
-    request.flag = sceneSubscription;
-    [request startRequest];
-    
+    RecommendedScenarioModel *model = _modelAry[sender.tag];
+    if (sender.selected == NO) {
+        //订阅
+        NSDictionary *params = @{
+                                 @"id":@(model.id)
+                                 };
+        FBRequest *request = [FBAPI postWithUrlString:sceneSubscription requestDictionary:params delegate:self];
+        [request startRequestSuccess:^(FBRequest *request, id result) {
+            if (result[@"success"]) {
+                [SVProgressHUD showSuccessWithStatus:@"订阅成功"];
+                model.flag = @1;
+                [self.collectionView reloadItemsAtIndexPaths:[NSArray arrayWithObjects:[NSIndexPath indexPathForRow:sender.tag inSection:0], nil]];
+            }else{
+                [SVProgressHUD showErrorWithStatus:@"订阅失败"];
+            }
+        } failure:^(FBRequest *request, NSError *error) {
+            
+        }];
+    }else if(sender.selected == YES){
+        //取消订阅
+        FBRequest *request = [FBAPI postWithUrlString:@"/favorite/ajax_cancel_subscription" requestDictionary:@{@"id":@(sender.tag)} delegate:self];
+        [request startRequestSuccess:^(FBRequest *request, id result) {
+            if ([result objectForKey:@"success"]) {
+                [SVProgressHUD showSuccessWithStatus:@"取消订阅成功"];
+                model.flag = @0;
+                [self.collectionView reloadItemsAtIndexPaths:[NSArray arrayWithObjects:[NSIndexPath indexPathForRow:sender.tag inSection:0], nil]];
+            }
+        } failure:^(FBRequest *request, NSError *error) {
+            [SVProgressHUD showInfoWithStatus:@"操作失败"];
+        }];
+    }
 }
 
 #pragma mark <UICollectionViewDelegate>

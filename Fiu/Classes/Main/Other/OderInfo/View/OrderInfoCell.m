@@ -24,6 +24,7 @@
 @property (weak, nonatomic) IBOutlet UIButton *operation1stBtn;
 @property (weak, nonatomic) IBOutlet UIButton *operation2ndBtn;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *productViewHeight;
+@property (weak, nonatomic) IBOutlet UILabel *realPay;
 
 - (IBAction)operation1stBtnAction:(UIButton *)sender;
 - (IBAction)operation2ndBtnAction:(UIButton *)sender;
@@ -65,7 +66,9 @@
     self.stateLbl.text = orderInfo.statusLabel;
     self.totalAmountLbl.text = [NSString stringWithFormat:@"共 %ld 件商品", orderInfo.itemsCount];
     self.totalPriceLbl.text = [NSString stringWithFormat:@"￥%.2f", [orderInfo.totalMoney floatValue]];
-    self.freightLabel.text = [NSString stringWithFormat:@"(含运费￥%.2f)",[orderInfo.freight floatValue]];
+    self.freightLabel.text = [NSString stringWithFormat:@"优惠:￥%.2f", [orderInfo.totalMoney floatValue]-[orderInfo.payMoney floatValue]];
+    //支付价格
+    self.realPay.text = [NSString stringWithFormat:@"实付:￥%.2f", [orderInfo.payMoney floatValue]];
     [self.productView.subviews makeObjectsPerformSelector:@selector(removeFromSuperview)];
     if (orderInfo.productInfos.count > 0) {
         self.productViewHeight.constant = 95 * orderInfo.productInfos.count;

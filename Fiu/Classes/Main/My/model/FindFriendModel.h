@@ -16,5 +16,6 @@
 @property(nonatomic,strong) NSNumber *userid;
 @property(nonatomic,strong) NSNumber *isLove;
 @property(nonatomic,strong) NSMutableArray *scene;
+@property(nonatomic,strong) NSNumber *flag;
 
 @end

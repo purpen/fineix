@@ -213,7 +213,7 @@
     NSLog(@"userId  %@",model.userId);
     v.userId = model.userId;
     v.isMySelf = NO;
-    v.type = @1;
+    v.type = @2;
     [self.navigationController pushViewController:v animated:YES];
 }
 

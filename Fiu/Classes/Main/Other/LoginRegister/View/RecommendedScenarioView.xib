@@ -15,7 +15,7 @@
                     <rect key="frame" x="0.0" y="0.0" width="250" height="430"/>
                 </imageView>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="特别策划:简书 X CODING: 程序猿给自己的三行情书" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1i1-zS-ITF">
-                    <rect key="frame" x="5" y="300" width="245" height="57"/>
+                    <rect key="frame" x="5" y="334" width="245" height="32"/>
                     <constraints>
                         <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="48" id="NCe-MX-5cP"/>
                         <constraint firstAttribute="height" constant="57" id="tMt-Gp-ybs"/>
@@ -26,11 +26,12 @@
                     <variation key="default">
                         <mask key="constraints">
                             <exclude reference="NCe-MX-5cP"/>
+                            <exclude reference="tMt-Gp-ybs"/>
                         </mask>
                     </variation>
                 </label>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="北京 朝阳区" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="MWq-1M-F1t">
-                    <rect key="frame" x="21" y="364" width="62" height="21"/>
+                    <rect key="frame" x="10" y="373" width="53" height="12"/>
                     <constraints>
                         <constraint firstAttribute="width" constant="62" id="s0B-ea-qoW"/>
                         <constraint firstAttribute="height" constant="21" id="sfX-tg-Px8"/>
@@ -38,14 +39,13 @@
                     <fontDescription key="fontDescription" type="system" pointSize="10"/>
                     <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     <nil key="highlightedColor"/>
+                    <variation key="default">
+                        <mask key="constraints">
+                            <exclude reference="s0B-ea-qoW"/>
+                            <exclude reference="sfX-tg-Px8"/>
+                        </mask>
+                    </variation>
                 </label>
-                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="icon_map" translatesAutoresizingMaskIntoConstraints="NO" id="9ej-qs-hQV">
-                    <rect key="frame" x="8" y="370" width="8" height="11"/>
-                    <constraints>
-                        <constraint firstAttribute="height" constant="11" id="Eb0-uB-8hM"/>
-                        <constraint firstAttribute="width" constant="8" id="xDO-3U-KhY"/>
-                    </constraints>
-                </imageView>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6am-Tz-904">
                     <rect key="frame" x="75" y="410" width="100" height="40"/>
                     <constraints>
@@ -53,7 +53,7 @@
                         <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="40" id="lpC-Nf-gtm"/>
                     </constraints>
                     <state key="normal" image="subscribe"/>
-                    <state key="selected" image="Page 1"/>
+                    <state key="selected" image="selectedSence"/>
                     <variation key="default">
                         <mask key="constraints">
                             <exclude reference="lpC-Nf-gtm"/>
@@ -65,11 +65,9 @@
             <constraints>
                 <constraint firstItem="1i1-zS-ITF" firstAttribute="leading" secondItem="g2K-yN-bDt" secondAttribute="leading" constant="5" id="0xD-7l-xwe"/>
                 <constraint firstItem="MWq-1M-F1t" firstAttribute="top" secondItem="1i1-zS-ITF" secondAttribute="bottom" constant="7" id="13h-O3-JSc"/>
-                <constraint firstItem="MWq-1M-F1t" firstAttribute="leading" secondItem="9ej-qs-hQV" secondAttribute="trailing" constant="5" id="3Er-YB-1HL"/>
                 <constraint firstAttribute="trailing" secondItem="aP2-uZ-Vim" secondAttribute="trailing" id="8fg-LB-R4C"/>
                 <constraint firstAttribute="bottom" secondItem="6am-Tz-904" secondAttribute="bottom" id="CSE-9y-oDW"/>
-                <constraint firstItem="9ej-qs-hQV" firstAttribute="leading" secondItem="g2K-yN-bDt" secondAttribute="leading" constant="8" id="GE2-va-Fr3"/>
-                <constraint firstItem="9ej-qs-hQV" firstAttribute="top" secondItem="1i1-zS-ITF" secondAttribute="bottom" constant="13" id="KUz-Cr-voS"/>
+                <constraint firstItem="MWq-1M-F1t" firstAttribute="leading" secondItem="g2K-yN-bDt" secondAttribute="leading" constant="10" id="INc-Ik-nIM"/>
                 <constraint firstAttribute="trailing" secondItem="1i1-zS-ITF" secondAttribute="trailing" id="O35-NL-sbA"/>
                 <constraint firstItem="aP2-uZ-Vim" firstAttribute="leading" secondItem="g2K-yN-bDt" secondAttribute="leading" id="Piw-By-tSY"/>
                 <constraint firstAttribute="bottom" secondItem="aP2-uZ-Vim" secondAttribute="bottom" constant="20" id="TWA-L9-8gN"/>
@@ -89,9 +87,8 @@
         </view>
     </objects>
     <resources>
-        <image name="Page 1" width="100" height="39"/>
-        <image name="icon_map" width="9" height="14"/>
         <image name="scenario" width="252" height="448"/>
+        <image name="selectedSence" width="100" height="39"/>
         <image name="subscribe" width="100" height="39"/>
     </resources>
 </document>

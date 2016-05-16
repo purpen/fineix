@@ -15,6 +15,7 @@
 @property (nonatomic, strong) NSString *address;
 @property (nonatomic, assign) int subscription_count;
 @property (nonatomic, assign) int id;
+@property(nonatomic ,strong) NSNumber *flag;
 
 -(instancetype)initWithDict:(NSDictionary*)dict;
 
