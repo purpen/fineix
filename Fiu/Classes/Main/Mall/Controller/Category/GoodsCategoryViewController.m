@@ -187,6 +187,7 @@ static NSString *const URLGoodsList = @"/scene_product/getlist";
     if (self.goodsList.count > 0) {
         [cell setGoodsData:self.goodsList[indexPath.row]];
     }
+    cell.nav = self.navigationController;
     return cell;
 }
 
@@ -280,6 +281,12 @@ static NSString *const URLGoodsList = @"/scene_product/getlist";
 - (void)rightBarItemSelected {
     GoodsCarViewController * goodsCarVC = [[GoodsCarViewController alloc] init];
     [self.navigationController pushViewController:goodsCarVC animated:YES];
+}
+
+- (void)viewDidDisappear:(BOOL)animated {
+    [super viewDidDisappear:animated];
+    
+    [SVProgressHUD dismiss];
 }
 
 #pragma mark -

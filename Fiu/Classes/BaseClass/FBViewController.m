@@ -27,7 +27,7 @@
 #pragma mark - 添加操作指示图
 - (void)setGuideImgForVC:(NSString *)image {
     UIButton * guideBtn = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT)];
-    [guideBtn setImage:[UIImage imageNamed:image] forState:(UIControlStateNormal)];
+    [guideBtn setBackgroundImage:[UIImage imageNamed:image] forState:(UIControlStateNormal)];
     [guideBtn addTarget:self action:@selector(removeGuide:) forControlEvents:(UIControlEventTouchUpInside)];
     UIWindow * window = [UIApplication sharedApplication].keyWindow;
     [window addSubview:guideBtn];

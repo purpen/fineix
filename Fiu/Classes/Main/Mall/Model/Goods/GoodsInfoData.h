@@ -14,7 +14,9 @@
 @property (nonatomic, assign) NSInteger idField;
 @property (nonatomic, assign) NSInteger attrbute;
 @property (nonatomic, strong) NSArray * bannerAsset;
+@property (nonatomic, strong) NSArray * thnAsset;
 @property (nonatomic, strong) GoodsInfoBrand * brand;
+@property (nonatomic, strong) NSArray * skus;
 @property (nonatomic, strong) NSString * brandId;
 @property (nonatomic, assign) NSInteger buyCount;
 @property (nonatomic, assign) NSInteger categoryId;

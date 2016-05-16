@@ -67,6 +67,10 @@
 "changeUrl" = "修改产品链接";
 "deleteUserGoods" = "删除产品";
 "editUserGoods" = "编辑产品";
+"buyingBtn" = "立即购买";
+"addCarBtn" = "加入购物车";
+"GoodsColors" = "颜色分类";
+"GoodsComment" = "商品评价";
 
 //  评论
 "comment" = "评论一下";

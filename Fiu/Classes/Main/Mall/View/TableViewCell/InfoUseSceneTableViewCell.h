@@ -15,7 +15,6 @@
 @pro_strong UINavigationController  *   nav;
 @pro_strong UILabel             *   headerTitle;        //  标题
 @pro_strong UILabel             *   line;               //  分割线
-//@pro_strong UIScrollView        *   useSceneRollView;   //  应用的场景
 @pro_strong UICollectionView    *   useSceneRollView;
 @pro_strong NSMutableArray      *   sceneIds;
 @pro_strong NSMutableArray      *   sceneList;

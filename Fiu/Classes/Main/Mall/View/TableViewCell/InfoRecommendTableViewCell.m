@@ -9,6 +9,7 @@
 #import "InfoRecommendTableViewCell.h"
 #import "RecommendGoodsCollectionViewCell.h"
 #import "GoodsInfoViewController.h"
+#import "FBGoodsInfoViewController.h"
 
 @implementation InfoRecommendTableViewCell
 
@@ -25,7 +26,8 @@
 }
 
 #pragma mark -
-- (void)setRecommendGoodsData:(NSMutableArray *)model {
+- (void)setRecommendGoodsData:(NSMutableArray *)model withType:(NSInteger)type {
+    self.type = type;
     self.goodsData = model;
     self.goodsIds = [model valueForKey:@"idField"];
     [self.recommendListView reloadData];
@@ -83,8 +85,15 @@
 
 #pragma mark UICollectionViewDelegate
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
-    GoodsInfoViewController * goodsInfoVC = [[GoodsInfoViewController alloc] init];
-    goodsInfoVC.goodsID = [NSString stringWithFormat:@"%@", self.goodsIds[indexPath.row]];
-    [self.nav pushViewController:goodsInfoVC animated:YES];
+    if (self.type == 0) {
+        GoodsInfoViewController * goodsInfoVC = [[GoodsInfoViewController alloc] init];
+        goodsInfoVC.goodsID = [NSString stringWithFormat:@"%@", self.goodsIds[indexPath.row]];
+        [self.nav pushViewController:goodsInfoVC animated:YES];
+    
+    } else if (self.type == 1) {
+        FBGoodsInfoViewController * goodsInfoVC = [[FBGoodsInfoViewController alloc] init];
+        goodsInfoVC.goodsID = [NSString stringWithFormat:@"%@", self.goodsIds[indexPath.row]];
+        [self.nav pushViewController:goodsInfoVC animated:YES];
+    }
 }
 @end

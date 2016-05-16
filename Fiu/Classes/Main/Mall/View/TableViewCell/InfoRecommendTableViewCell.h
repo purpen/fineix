@@ -8,6 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import "Fiu.h"
+#import "GoodsRelationProducts.h"
 
 @interface InfoRecommendTableViewCell : UITableViewCell <UICollectionViewDelegate, UICollectionViewDataSource>
 
@@ -16,7 +17,13 @@
 @pro_strong UICollectionView            *   recommendListView;        //  推荐商品的列表
 @pro_strong NSMutableArray              *   goodsData;
 @pro_strong NSMutableArray              *   goodsIds;
+@pro_assign NSInteger                       type;
 
-- (void)setRecommendGoodsData:(NSMutableArray *)model;
+/**
+ *  type
+ *  0:goods
+ *  1:thnGoods
+ */
+- (void)setRecommendGoodsData:(NSMutableArray *)model withType:(NSInteger)type;
 
 @end

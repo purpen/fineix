@@ -174,6 +174,7 @@ static NSString *const URLUserAddGoods = @"/scene_product/add";
     UserGoodsTag * tag = [[UserGoodsTag alloc] initWithFrame:CGRectMake(tagX * 50, tagY * 40, 175, 32)];
     tag.title.text = title;
     tag.price.text = price;
+    tag.isMove = YES;
     tag.tag = _idx;
     tag.index = _idx - 392;
     tag.delegate = self;

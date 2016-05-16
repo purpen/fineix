@@ -55,7 +55,7 @@ static NSString *const URLReleaseFiuScenen = @"/scene_scene/save";
 
     } else {
         [SVProgressHUD show];
-        NSData * imageData = UIImageJPEGRepresentation(self.scenceView.imageView.image, 0.3);
+        NSData * imageData = UIImageJPEGRepresentation(self.scenceView.imageView.image, 1);
         NSString * icon64Str = [imageData base64EncodedStringWithOptions:NSDataBase64Encoding64CharacterLineLength];
         NSDictionary * paramDict = @{
                                      @"tmp":icon64Str,

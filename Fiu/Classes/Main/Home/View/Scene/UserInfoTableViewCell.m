@@ -29,6 +29,7 @@
 - (void)setFiuSceneInfoData:(FiuSceneInfoData *)model {
     self.userId = [NSString stringWithFormat:@"%zi", model.userInfo.userId];
     [self.bgImage sd_setImageWithURL:[NSURL URLWithString:model.coverUrl] forState:(UIControlStateNormal)];
+    [self.bgImage sd_setImageWithURL:[NSURL URLWithString:model.coverUrl] forState:(UIControlStateHighlighted)];
     [self.userHeader sd_setImageWithURL:[NSURL URLWithString:model.userInfo.avatarUrl] forState:(UIControlStateNormal)];
     self.userName.text = model.userInfo.nickname;
     self.userProfile.text = model.userInfo.summary;
@@ -65,6 +66,7 @@
     self.goodsIds = [NSMutableArray arrayWithArray:[model.product valueForKey:@"idField"]];
     self.userId = [NSString stringWithFormat:@"%zi", model.userInfo.userId];
     [self.bgImage sd_setImageWithURL:[NSURL URLWithString:model.coverUrl] forState:(UIControlStateNormal)];
+    [self.bgImage sd_setImageWithURL:[NSURL URLWithString:model.coverUrl] forState:(UIControlStateHighlighted)];
     [self titleTextStyle:[NSString stringWithFormat:@"%@", model.title] withBgColor:[UIColor colorWithPatternImage:[UIImage imageNamed:@"titleBg"]]];
     self.whereScene.text = [self abouText:self.whereScene withText:model.sceneTitle];
     self.city.text = [self abouText:self.city withText:model.address];
@@ -95,32 +97,37 @@
     [self addSubview:self.bgImage];
     
     [self addSubview:self.userView];
-    
-
 }
 
 #pragma mark - 创建用户添加商品按钮
 - (void)setUserTagBtn {
     self.userTagMarr = [NSMutableArray array];
     
+    for (UIView * view in self.subviews) {
+        if ([view isKindOfClass:[UserGoodsTag class]]) {
+            [view removeFromSuperview];
+        }
+    }
+    
     for (NSInteger idx = 0; idx < self.tagDataMarr.count; ++ idx) {
         CGFloat btnX = [[self.tagDataMarr[idx] valueForKey:@"x"] floatValue];
         CGFloat btnY = [[self.tagDataMarr[idx] valueForKey:@"y"] floatValue];
         NSString * title = [self.tagDataMarr[idx] valueForKey:@"title"];
         NSString * price = [NSString stringWithFormat:@"￥%@", [self.tagDataMarr[idx] valueForKey:@"price"]];
+        
         UserGoodsTag * userTag = [[UserGoodsTag alloc] initWithFrame:CGRectMake(btnX * SCREEN_WIDTH, btnY * SCREEN_HEIGHT, 175, 32)];
         userTag.dele.hidden = YES;
         userTag.title.text = title;
         userTag.price.text = price;
         userTag.title.hidden = YES;
         userTag.price.hidden = YES;
+        userTag.isMove = NO;
         [userTag setImage:[UIImage imageNamed:@""] forState:(UIControlStateNormal)];
         
         UITapGestureRecognizer * tapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(openGoodsInfo:)];
         [userTag addGestureRecognizer:tapGesture];
-        
-        [self.userTagMarr addObject:userTag];
         [self addSubview:userTag];
+        [self.userTagMarr addObject:userTag];
     }
 }
 
@@ -171,6 +178,7 @@
             goodsTag.price.hidden = NO;
             [goodsTag setImage:[UIImage imageNamed:@"user_goodsTag_left"] forState:(UIControlStateNormal)];
         }
+        [self layoutIfNeeded];
         
     } else if (button.selected == NO) {
         button.selected = YES;
@@ -186,6 +194,7 @@
             goodsTag.price.hidden = YES;
             [goodsTag setImage:[UIImage imageNamed:@""] forState:(UIControlStateNormal)];
         }
+        [self layoutIfNeeded];
     }
 }
 

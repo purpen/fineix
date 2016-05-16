@@ -270,6 +270,7 @@ static NSString *const URLSearchList = @"/search/getlist";
         if (!cell) {
             cell = [[GoodsTableViewCell alloc] initWithStyle:(UITableViewCellStyleDefault) reuseIdentifier:GoodsTablecellId];
         }
+        cell.nav = self.navigationController;
         [cell setGoodsData:self.goodsList[indexPath.row]];
         return cell;
     }

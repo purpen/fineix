@@ -26,4 +26,6 @@
 
 - (void)setGoodsRollimageView:(GoodsInfoData *)model;
 
+- (void)setThnGoodsRollImgData:(GoodsInfoData *)model;
+
 @end

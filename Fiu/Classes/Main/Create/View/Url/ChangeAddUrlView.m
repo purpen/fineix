@@ -54,12 +54,12 @@
             make.left.equalTo(_cancel.mas_right).with.offset(0);
         }];
         
-        [_bgView addSubview:self.url];
-        [_url mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.size.mas_equalTo(CGSizeMake((SCREEN_WIDTH - 90) / 2, 44));
-            make.bottom.equalTo(_cancel.mas_top).with.offset(-20);
-            make.left.equalTo(_bgView.mas_left).with.offset(40);
-        }];
+//        [_bgView addSubview:self.url];
+//        [_url mas_makeConstraints:^(MASConstraintMaker *make) {
+//            make.size.mas_equalTo(CGSizeMake((SCREEN_WIDTH - 90) / 2, 44));
+//            make.bottom.equalTo(_cancel.mas_top).with.offset(-20);
+//            make.left.equalTo(_bgView.mas_left).with.offset(40);
+//        }];
         
         [_bgView addSubview:self.dele];
         [_dele mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -71,7 +71,7 @@
         [_bgView addSubview:self.goodsPrice];
         [_goodsPrice mas_makeConstraints:^(MASConstraintMaker *make) {
             make.size.mas_equalTo(CGSizeMake(SCREEN_WIDTH - 80, 48));
-            make.bottom.equalTo(_url.mas_top).with.offset(-10);
+            make.bottom.equalTo(_dele.mas_top).with.offset(-10);
             make.left.equalTo(_bgView.mas_left).with.offset(40);
         }];
 

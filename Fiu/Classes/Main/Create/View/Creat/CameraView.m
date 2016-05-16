@@ -171,7 +171,7 @@
                                                        
                                                        } else {
                                                            UIImage * image = [UIImage imageWithData:photoData];
-                                                           UIImage * photo = [self cropImage:image withCropSize:CGSizeMake(SCREEN_WIDTH, SCREEN_WIDTH * 1.33)];
+                                                           UIImage * photo = [self cropImage:image withCropSize:CGSizeMake(SCREEN_WIDTH, SCREEN_HEIGHT)];
                                                            //   跳转到“工具”视图
                                                            FiltersViewController * filtersVC = [[FiltersViewController alloc] init];
                                                            filtersVC.filtersImg = photo;

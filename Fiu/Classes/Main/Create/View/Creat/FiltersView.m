@@ -81,9 +81,7 @@
     static NSString * filtersCellID = @"FBFiltersCollectionViewCell";
     FBFiltersCollectionViewCell * cell = [collectionView dequeueReusableCellWithReuseIdentifier:filtersCellID forIndexPath:indexPath];
     cell.filtersTitle.text = self.filtersTitle[indexPath.row];
-    
-    UIImage * img = [[FBFilters alloc] initWithImage:[UIImage imageNamed:@"asd"] filterName:self.filters[indexPath.row]].filterImg;
-    cell.filtersImageView.image = img;
+    cell.filtersImageView.image = [UIImage imageNamed:[NSString stringWithFormat:@"filters_%zi", indexPath.row]];
     
     return cell;
 }

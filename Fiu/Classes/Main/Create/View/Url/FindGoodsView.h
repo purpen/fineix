@@ -12,6 +12,7 @@
 
 @interface FindGoodsView : UIView
 
+@pro_strong UIButton        *   cancelBtn;
 @pro_strong UIView          *   findView;       
 @pro_strong UIButton        *   sureBtn;        //  确认找到
 @pro_strong UIImageView     *   goodsImg;       //  商品图片

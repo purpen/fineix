@@ -28,7 +28,7 @@
         [self setImage:[UIImage imageNamed:@"user_goodsTag_left"] forState:(UIControlStateHighlighted)];
         [self setImage:[UIImage imageNamed:@"user_goodsTag_left"] forState:(UIControlStateNormal)];
         
-        timerAnimation =[NSTimer scheduledTimerWithTimeInterval:2
+        timerAnimation =[NSTimer scheduledTimerWithTimeInterval:3
                                                          target:self
                                                        selector:@selector(animationTimerDidFired)
                                                        userInfo:nil
@@ -39,33 +39,37 @@
 }
 
 - (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
-    //  保存触摸起始点位置
-    CGPoint point = [[touches anyObject] locationInView:self.superview];
-    startPoint = point;
+    if (self.isMove == YES) {
+        //  保存触摸起始点位置
+        CGPoint point = [[touches anyObject] locationInView:self.superview];
+        startPoint = point;
+    }
 }
 
 - (void)touchesMoved:(NSSet *)touches withEvent:(UIEvent *)event {
-    //  计算位移=当前位置-起始位置
-    CGPoint point = [[touches anyObject] locationInView:self.superview];
-    float dx = point.x - startPoint.x;
-    float dy = point.y - startPoint.y;
-    
-    //  计算移动后的view中心点
-    _translateCenter = CGPointMake(self.center.x + dx, self.center.y + dy);
-    
-    //  限制用户不可将视图托出屏幕
-    float halfx = CGRectGetMidX(self.bounds);
-    _translateCenter.x = MAX(halfx, _translateCenter.x);
-    _translateCenter.x = MIN(self.superview.bounds.size.width - halfx, _translateCenter.x);
-    
-    float halfy = CGRectGetMidY(self.bounds);
-    _translateCenter.y = MAX(halfy + 50, _translateCenter.y);
-    _translateCenter.y = MIN(self.superview.bounds.size.height - halfy - 50, _translateCenter.y);
-    
-    //移动view
-    self.center = _translateCenter;
-    [self setNeedsDisplay];
-    startPoint = point;
+    if (self.isMove == YES) {
+        //  计算位移=当前位置-起始位置
+        CGPoint point = [[touches anyObject] locationInView:self.superview];
+        float dx = point.x - startPoint.x;
+        float dy = point.y - startPoint.y;
+        
+        //  计算移动后的view中心点
+        _translateCenter = CGPointMake(self.center.x + dx, self.center.y + dy);
+        
+        //  限制用户不可将视图托出屏幕
+        float halfx = CGRectGetMidX(self.bounds);
+        _translateCenter.x = MAX(halfx, _translateCenter.x);
+        _translateCenter.x = MIN(self.superview.bounds.size.width - halfx, _translateCenter.x);
+        
+        float halfy = CGRectGetMidY(self.bounds);
+        _translateCenter.y = MAX(halfy + 50, _translateCenter.y);
+        _translateCenter.y = MIN(self.superview.bounds.size.height - halfy - 50, _translateCenter.y);
+        
+        //移动view
+        self.center = _translateCenter;
+        [self setNeedsDisplay];
+        startPoint = point;
+    }
 }
 
 #pragma mark - 设置视图
@@ -171,14 +175,14 @@
 
 #pragma mark - 动画
 -(void)animationTimerDidFired{
-    [UIView animateWithDuration:1 animations:^{
+    [UIView animateWithDuration:1.5 animations:^{
         viewTapDot.transform = CGAffineTransformMakeScale(1.5,1.5);
     } completion:^(BOOL finished) {
-        [UIView animateWithDuration:1 animations:^{
+        [UIView animateWithDuration:1.5 animations:^{
             viewTapDot.transform = CGAffineTransformIdentity;
         }completion:^(BOOL finished) {
             viewSpread.alpha = 1;
-            [UIView animateWithDuration:1 animations:^{
+            [UIView animateWithDuration:1.5 animations:^{
                 viewSpread.alpha = 0;
                 viewSpread.transform = CGAffineTransformMakeScale(8,8);
             }completion:^(BOOL finished) {

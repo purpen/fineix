@@ -46,7 +46,6 @@ static NSString *const URLGoodslist = @"/scene_product/getlist";
 - (void)networkBrandInfoData {
     self.brandRequest = [FBAPI getWithUrlString:URLBrandInfo requestDictionary:@{@"id":self.brandId} delegate:self];
     [self.brandRequest startRequestSuccess:^(FBRequest *request, id result) {
-        NSLog(@"＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝ %@", result);
         self.brandInfo = [[BrandInfoData alloc] initWithDictionary:[result valueForKey:@"data"]];
         [self.goodsBrandTable reloadData];
         
@@ -66,16 +65,14 @@ static NSString *const URLGoodslist = @"/scene_product/getlist";
             [self.goodsList addObject:goodsModel];
             [self.goodsIdList addObject:[NSString stringWithFormat:@"%zi", goodsModel.idField]];
         }
-        
-        [self.goodsBrandTable reloadData];
-        
+    
         self.currentpageNum = [[[result valueForKey:@"data"] valueForKey:@"current_page"] integerValue];
         self.totalPageNum = [[[result valueForKey:@"data"] valueForKey:@"total_page"] integerValue];
         if (self.totalPageNum > 1) {
             [self addMJRefresh:self.goodsBrandTable];
             [self requestIsLastData:self.goodsBrandTable currentPage:self.currentpageNum withTotalPage:self.totalPageNum];
         }
-        
+        [self.goodsBrandTable reloadData];
         [SVProgressHUD dismiss];
         
     } failure:^(FBRequest *request, NSError *error) {
@@ -168,6 +165,7 @@ static NSString *const URLGoodslist = @"/scene_product/getlist";
         if (!cell) {
             cell = [[GoodsTableViewCell alloc] initWithStyle:(UITableViewCellStyleDefault) reuseIdentifier:brandGoodsCellId];
         }
+        cell.nav = self.navigationController;
         [cell setGoodsData:self.goodsList[indexPath.row]];
         return cell;
     }
