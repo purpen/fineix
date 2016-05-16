@@ -50,7 +50,7 @@
                             <nil key="highlightedColor"/>
                         </label>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="O0c-NY-sYP">
-                            <rect key="frame" x="0.0" y="0.0" width="318" height="44"/>
+                            <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                             <connections>
                                 <action selector="allOderBtn:" destination="-1" eventType="touchUpInside" id="kXw-Tg-5Ic"/>
                             </connections>
@@ -67,11 +67,13 @@
                         <constraint firstAttribute="bottom" secondItem="O0c-NY-sYP" secondAttribute="bottom" id="fPv-XK-nha"/>
                         <constraint firstAttribute="trailing" secondItem="qAW-WX-se0" secondAttribute="trailing" constant="15" id="l0b-BL-lx2"/>
                         <constraint firstItem="Hue-X0-b3K" firstAttribute="centerY" secondItem="TFT-wk-yzO" secondAttribute="centerY" id="loY-MM-OKT"/>
+                        <constraint firstAttribute="trailing" secondItem="O0c-NY-sYP" secondAttribute="trailing" id="qf1-E6-KxV"/>
                         <constraint firstItem="Hue-X0-b3K" firstAttribute="leading" secondItem="TFT-wk-yzO" secondAttribute="leading" constant="15" id="tjq-s5-ZAA"/>
                     </constraints>
                     <variation key="default">
                         <mask key="constraints">
                             <exclude reference="1G9-n0-mwz"/>
+                            <exclude reference="92c-Id-A0o"/>
                         </mask>
                     </variation>
                 </view>
@@ -235,7 +237,7 @@
                             </constraints>
                         </imageView>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gpb-4T-dKL">
-                            <rect key="frame" x="45" y="7" width="221" height="30"/>
+                            <rect key="frame" x="45" y="7" width="330" height="30"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="30" id="Kp3-pH-NdH"/>
                                 <constraint firstAttribute="width" constant="221" id="Q4I-Vn-llp"/>
@@ -244,6 +246,14 @@
                             <state key="normal" title="京东订单">
                                 <color key="titleColor" red="0.40000000000000002" green="0.40000000000000002" blue="0.40000000000000002" alpha="1" colorSpace="calibratedRGB"/>
                             </state>
+                            <variation key="default">
+                                <mask key="constraints">
+                                    <exclude reference="Q4I-Vn-llp"/>
+                                </mask>
+                            </variation>
+                            <connections>
+                                <action selector="jDOrderBtn:" destination="-1" eventType="touchUpInside" id="e2s-9y-LJW"/>
+                            </connections>
                         </button>
                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="entr" translatesAutoresizingMaskIntoConstraints="NO" id="ru7-fh-TJr">
                             <rect key="frame" x="351" y="14" width="9" height="15"/>
@@ -255,6 +265,7 @@
                     </subviews>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     <constraints>
+                        <constraint firstAttribute="trailing" secondItem="gpb-4T-dKL" secondAttribute="trailing" id="Fca-BX-rPQ"/>
                         <constraint firstItem="psT-gT-W2C" firstAttribute="leading" secondItem="8Pg-zA-3Xr" secondAttribute="leading" constant="15" id="Fvn-uM-02g"/>
                         <constraint firstItem="psT-gT-W2C" firstAttribute="centerY" secondItem="8Pg-zA-3Xr" secondAttribute="centerY" id="NBp-Bo-3iw"/>
                         <constraint firstAttribute="trailing" secondItem="ru7-fh-TJr" secondAttribute="trailing" constant="15" id="YVY-ll-wZc"/>
@@ -281,7 +292,7 @@
                             </constraints>
                         </imageView>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Fzk-mC-zaN">
-                            <rect key="frame" x="45" y="7" width="221" height="30"/>
+                            <rect key="frame" x="45" y="7" width="330" height="30"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="30" id="38e-IJ-QiU"/>
                                 <constraint firstAttribute="width" constant="221" id="rJH-i3-W7c"/>
@@ -290,6 +301,14 @@
                             <state key="normal" title="天猫订单">
                                 <color key="titleColor" red="0.40000000000000002" green="0.40000000000000002" blue="0.40000000000000002" alpha="1" colorSpace="calibratedRGB"/>
                             </state>
+                            <variation key="default">
+                                <mask key="constraints">
+                                    <exclude reference="rJH-i3-W7c"/>
+                                </mask>
+                            </variation>
+                            <connections>
+                                <action selector="tianMaoOrderBtn:" destination="-1" eventType="touchUpInside" id="7p1-iI-sIl"/>
+                            </connections>
                         </button>
                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="entr" translatesAutoresizingMaskIntoConstraints="NO" id="pwb-3U-qyk">
                             <rect key="frame" x="351" y="14" width="9" height="15"/>
@@ -302,6 +321,7 @@
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     <constraints>
                         <constraint firstAttribute="trailing" secondItem="pwb-3U-qyk" secondAttribute="trailing" constant="15" id="1du-AR-n4x"/>
+                        <constraint firstAttribute="trailing" secondItem="Fzk-mC-zaN" secondAttribute="trailing" id="2UJ-Nu-kav"/>
                         <constraint firstItem="Fzk-mC-zaN" firstAttribute="leading" secondItem="ak3-Dh-E8g" secondAttribute="trailing" constant="10" id="7r3-4V-NCr"/>
                         <constraint firstItem="ak3-Dh-E8g" firstAttribute="leading" secondItem="5PJ-0O-h87" secondAttribute="leading" constant="15" id="FST-M5-UBn"/>
                         <constraint firstItem="pwb-3U-qyk" firstAttribute="centerY" secondItem="5PJ-0O-h87" secondAttribute="centerY" id="Qir-ro-u1A"/>
@@ -326,8 +346,15 @@
                                 <constraint firstAttribute="width" constant="20" id="mPU-T8-SE3"/>
                             </constraints>
                         </imageView>
+                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="entr" translatesAutoresizingMaskIntoConstraints="NO" id="lle-V8-GLV">
+                            <rect key="frame" x="351" y="14" width="9" height="15"/>
+                            <constraints>
+                                <constraint firstAttribute="width" constant="9" id="4dz-iU-Xoc"/>
+                                <constraint firstAttribute="height" constant="15" id="jFD-9l-A0W"/>
+                            </constraints>
+                        </imageView>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="KCP-i4-yxN">
-                            <rect key="frame" x="45" y="7" width="221" height="30"/>
+                            <rect key="frame" x="45" y="7" width="330" height="30"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="30" id="9qU-1i-JH4"/>
                                 <constraint firstAttribute="width" constant="221" id="foT-AM-kdU"/>
@@ -336,29 +363,33 @@
                             <state key="normal" title="淘宝订单">
                                 <color key="titleColor" red="0.40000000000000002" green="0.40000000000000002" blue="0.40000000000000002" alpha="1" colorSpace="calibratedRGB"/>
                             </state>
+                            <variation key="default">
+                                <mask key="constraints">
+                                    <exclude reference="foT-AM-kdU"/>
+                                </mask>
+                            </variation>
+                            <connections>
+                                <action selector="taoBaoOrderBtn:" destination="-1" eventType="touchUpInside" id="lp9-ns-TvZ"/>
+                            </connections>
                         </button>
-                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="entr" translatesAutoresizingMaskIntoConstraints="NO" id="lle-V8-GLV">
-                            <rect key="frame" x="351" y="14" width="9" height="15"/>
-                            <constraints>
-                                <constraint firstAttribute="width" constant="9" id="4dz-iU-Xoc"/>
-                                <constraint firstAttribute="height" constant="15" id="jFD-9l-A0W"/>
-                            </constraints>
-                        </imageView>
                     </subviews>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="44" id="2pn-7H-bjc"/>
+                        <constraint firstItem="lle-V8-GLV" firstAttribute="leading" secondItem="KCP-i4-yxN" secondAttribute="trailing" id="7qM-Nh-Yle"/>
                         <constraint firstItem="KCP-i4-yxN" firstAttribute="leading" secondItem="Xsn-bR-1U6" secondAttribute="trailing" constant="10" id="HZL-tQ-j5m"/>
                         <constraint firstItem="lle-V8-GLV" firstAttribute="centerY" secondItem="7aO-Eo-htl" secondAttribute="centerY" id="LFW-TX-F3a"/>
                         <constraint firstItem="Xsn-bR-1U6" firstAttribute="leading" secondItem="7aO-Eo-htl" secondAttribute="leading" constant="15" id="Ll3-Rp-e2h"/>
                         <constraint firstAttribute="width" secondItem="7aO-Eo-htl" secondAttribute="height" multiplier="375:44" id="UFb-UZ-3IG"/>
                         <constraint firstItem="Xsn-bR-1U6" firstAttribute="centerY" secondItem="7aO-Eo-htl" secondAttribute="centerY" id="j9A-dr-SJa"/>
                         <constraint firstItem="KCP-i4-yxN" firstAttribute="centerY" secondItem="7aO-Eo-htl" secondAttribute="centerY" id="jCp-mV-Kgi"/>
+                        <constraint firstAttribute="trailing" secondItem="KCP-i4-yxN" secondAttribute="trailing" id="nhJ-On-tYd"/>
                         <constraint firstAttribute="trailing" secondItem="lle-V8-GLV" secondAttribute="trailing" constant="15" id="uam-uT-Mq1"/>
                     </constraints>
                     <variation key="default">
                         <mask key="constraints">
                             <exclude reference="2pn-7H-bjc"/>
+                            <exclude reference="7qM-Nh-Yle"/>
                         </mask>
                     </variation>
                 </view>

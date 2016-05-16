@@ -1,40 +1,30 @@
 //
-//  AboutViewController.m
+//  JDOrderViewController.m
 //  Fiu
 //
-//  Created by THN-Dong on 16/4/25.
+//  Created by THN-Dong on 16/5/16.
 //  Copyright © 2016年 taihuoniao. All rights reserved.
 //
 
-#import "AboutViewController.h"
-#import  <SVProgressHUD.h>
+#import "JDOrderViewController.h"
+#import "SVProgressHUD.h"
 
-@interface AboutViewController ()<FBNavigationBarItemsDelegate,UIWebViewDelegate>
-@property (weak, nonatomic) IBOutlet UIWebView *aboutWebView;
+@interface JDOrderViewController ()<FBNavigationBarItemsDelegate,UIWebViewDelegate>
 
+@property (weak, nonatomic) IBOutlet UIWebView *jDWebView;
 @end
 
-@implementation AboutViewController
+@implementation JDOrderViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
     self.delegate = self;
-    self.view.backgroundColor = [UIColor whiteColor];
-    //self.navigationController.navigationBarHidden = NO;
-    self.navViewTitle.text = @"关于太火鸟";
-//    [self addBarItemLeftBarButton:nil image:@"icon_back"];
-    
-    //地址
-    NSURL *url = [NSURL URLWithString:@"http://m.taihuoniao.com/guide/app_about"];
-    //在网页上加载
+    self.navViewTitle.text = @"京东订单";
+    self.jDWebView.delegate = self;
+    NSURL *url = [NSURL URLWithString:@"http://m.jd.com/?cu=true&utm_source=sm-search&utm_medium=cpc&utm_campaign=t_262767352_smsearch&utm_term=1494476157_0_6b28dfde214748248b9c0a39be71d2dc"];
     NSURLRequest *request = [NSURLRequest requestWithURL:url];
-    [self.aboutWebView loadRequest:request];
-    self.aboutWebView.delegate = self;
-}
-
--(void)leftBarItemSelected{
-    [self.navigationController popViewControllerAnimated:YES];
+    [self.jDWebView loadRequest:request];
 }
 
 //UIWebViewDelegate

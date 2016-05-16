@@ -201,7 +201,11 @@
     [cell.focusOnBtn addTarget:self action:@selector(clickFocusBtn:) forControlEvents:UIControlEventTouchUpInside];
     //UserInfo *model = _modelAry[indexPath.row];
     cell.focusOnBtn.tag = indexPath.row;
-    [cell setUIWithModel:[_modelAry objectAtIndex:indexPath.row] andType:@0];
+    if (_modelAry.count == 0) {
+        
+    }else{
+        [cell setUIWithModel:[_modelAry objectAtIndex:indexPath.row] andType:@0];
+    }
     return cell;
 }
 

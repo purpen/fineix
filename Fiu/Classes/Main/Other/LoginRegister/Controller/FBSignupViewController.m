@@ -70,8 +70,30 @@ NSString *const LoginURL = @"/auth/login";//登录接口
     self.weiBoBtn.layer.cornerRadius = 3;
     self.qqBtn.layer.masksToBounds = YES;
     self.qqBtn.layer.cornerRadius = 3;
+    
+    [self judge];
 }
 
+#pragma mark -判断手机是否安装了相应的客户端
+-(void)judge{
+    if ([WXApi isWXAppInstalled] == NO) {
+        self.weChatBtn.hidden = YES;
+    }else{
+        self.weChatBtn.hidden = NO;
+    }
+    
+    if ([WeiboSDK isWeiboAppInstalled] == NO) {
+        self.weiBoBtn.hidden = YES;
+    }else{
+        self.weiBoBtn.hidden = NO;
+    }
+    
+    if ([QQApiInterface isQQInstalled] == NO) {
+        self.qqBtn.hidden = YES;
+    }else{
+        self.qqBtn.hidden = NO;
+    }
+}
 
 //点击发送验证码，判断手机号如果手机号正确发送验证码，并且重新发送view出现，并且开始跳字
 -(void)clikSendVerBtn:(UIButton*)sender{

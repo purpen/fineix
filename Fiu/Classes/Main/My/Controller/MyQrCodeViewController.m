@@ -15,6 +15,9 @@
 #import "QRCodeScanViewController.h"
 #import "UserInfoEntity.h"
 #import "UMSocial.h"
+#import "WXApi.h"
+#import "WeiboSDK.h"
+#import <TencentOpenAPI/QQApiInterface.h>
 
 @interface MyQrCodeViewController ()<FBNavigationBarItemsDelegate>
 {
@@ -54,11 +57,7 @@ static NSString *const ShareURL = @"http://m.taihuoniao.com/guide/app_about";
         make.top.mas_equalTo(self.view.mas_top).with.offset(64);
     }];
     
-//    UIGraphicsBeginImageContext(CGSizeMake(SCREEN_WIDTH, SCREEN_HEIGHT-64)); //currentView 当前的view
-//    [self.view.layer renderInContext:UIGraphicsGetCurrentContext()];
-//    _viewImage = UIGraphicsGetImageFromCurrentImageContext();
-//    UIGraphicsEndImageContext();
-    
+    //截屏
     UIGraphicsBeginImageContextWithOptions(CGSizeMake(SCREEN_WIDTH, SCREEN_HEIGHT-64), YES, 1);     //设置截屏大小
     [[self.view layer] renderInContext:UIGraphicsGetCurrentContext()];
     UIImage *viewImage = UIGraphicsGetImageFromCurrentImageContext();
@@ -119,6 +118,7 @@ static NSString *const ShareURL = @"http://m.taihuoniao.com/guide/app_about";
 -(void)rightBarItemSelected{
     NSLog(@"更多");
     QrShareSheetViewController *sheetVC = [[QrShareSheetViewController alloc] init];
+    [self judgeWith:sheetVC];
     sheetVC.modalPresentationStyle = UIModalPresentationOverCurrentContext;
     sheetVC.modalTransitionStyle = UIModalTransitionStyleFlipHorizontal;
     [self presentViewController:sheetVC animated:NO completion:nil];
@@ -129,6 +129,27 @@ static NSString *const ShareURL = @"http://m.taihuoniao.com/guide/app_about";
     [sheetVC.firendBtn addTarget:self action:@selector(timelineShareBtnAction:) forControlEvents:UIControlEventTouchUpInside];
     [sheetVC.weiboBtn addTarget:self action:@selector(sinaShareBtnAction:) forControlEvents:UIControlEventTouchUpInside];
     [sheetVC.qqBtn addTarget:self action:@selector(qqShareBtnAction:) forControlEvents:UIControlEventTouchUpInside];
+}
+
+#pragma mark -判断手机是否安装了相应的客户端
+-(void)judgeWith:(QrShareSheetViewController*)vc{
+    if ([WXApi isWXAppInstalled] == NO) {
+        vc.weChatBtn.hidden = YES;
+    }else{
+        vc.weChatBtn.hidden = NO;
+    }
+    
+    if ([WeiboSDK isWeiboAppInstalled] == NO) {
+        vc.weiboBtn.hidden = YES;
+    }else{
+        vc.weiboBtn.hidden = NO;
+    }
+    
+    if ([QQApiInterface isQQInstalled] == NO) {
+        vc.qqBtn.hidden = YES;
+    }else{
+        vc.qqBtn.hidden = NO;
+    }
 }
 
 -(void)wechatShareBtnAction:(UIButton*)sender{

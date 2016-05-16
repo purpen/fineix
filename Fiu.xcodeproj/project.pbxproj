@@ -84,6 +84,12 @@
 		1F51E8B01CC61E6400017839 /* SubscribeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F51E8AF1CC61E6400017839 /* SubscribeViewController.m */; };
 		1F51E8B31CC6338D00017839 /* PraisedViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F51E8B21CC6338D00017839 /* PraisedViewController.m */; };
 		1F59E5FC1C9ABBA500E96C60 /* Accelerate.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1F59E5FB1C9ABBA500E96C60 /* Accelerate.framework */; };
+		1F6582F91CE9BB9300C72F9F /* TaoBaoOrderViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F6582F71CE9BB9300C72F9F /* TaoBaoOrderViewController.m */; };
+		1F6582FA1CE9BB9300C72F9F /* TaoBaoOrderViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1F6582F81CE9BB9300C72F9F /* TaoBaoOrderViewController.xib */; };
+		1F6582FE1CE9BF5A00C72F9F /* JDOrderViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F6582FC1CE9BF5A00C72F9F /* JDOrderViewController.m */; };
+		1F6582FF1CE9BF5A00C72F9F /* JDOrderViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1F6582FD1CE9BF5A00C72F9F /* JDOrderViewController.xib */; };
+		1F6583031CE9C29700C72F9F /* TianMaoOrderViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F6583011CE9C29700C72F9F /* TianMaoOrderViewController.m */; };
+		1F6583041CE9C29700C72F9F /* TianMaoOrderViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1F6583021CE9C29700C72F9F /* TianMaoOrderViewController.xib */; };
 		1F7B29361CD5F50500482D84 /* MyOderModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F7B29351CD5F50500482D84 /* MyOderModel.m */; };
 		1F8921E51CE5609E00267F44 /* QrShareSheetViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F8921E31CE5609E00267F44 /* QrShareSheetViewController.m */; };
 		1F8921E61CE5609E00267F44 /* QrShareSheetViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1F8921E41CE5609E00267F44 /* QrShareSheetViewController.xib */; };
@@ -122,7 +128,6 @@
 		1FCE90641CDA06630029E4BA /* MentionedViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1FCE905C1CDA06630029E4BA /* MentionedViewController.xib */; };
 		1FD7E6771CC8DFE400A69BDD /* MyQrCodeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1FD7E6761CC8DFE400A69BDD /* MyQrCodeViewController.m */; };
 		1FD7E67A1CC8E4F200A69BDD /* MyQrCodeView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1FD7E6791CC8E4F200A69BDD /* MyQrCodeView.m */; };
-		1FE56B161CE5D41000CD7780 /* JSBadgeView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1FE56B151CE5D41000CD7780 /* JSBadgeView.m */; };
 		1FE60E2F1CD301BC00045117 /* AllOderViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1FE60E2D1CD301BC00045117 /* AllOderViewController.m */; };
 		1FE60E301CD301BC00045117 /* AllOderViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1FE60E2E1CD301BC00045117 /* AllOderViewController.xib */; };
 		1FE60E391CD30A2100045117 /* MyOderInfoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1FE60E371CD30A2100045117 /* MyOderInfoViewController.m */; };
@@ -560,6 +565,15 @@
 		1F51E8B11CC6338D00017839 /* PraisedViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PraisedViewController.h; sourceTree = "<group>"; };
 		1F51E8B21CC6338D00017839 /* PraisedViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PraisedViewController.m; sourceTree = "<group>"; };
 		1F59E5FB1C9ABBA500E96C60 /* Accelerate.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Accelerate.framework; path = System/Library/Frameworks/Accelerate.framework; sourceTree = SDKROOT; };
+		1F6582F61CE9BB9300C72F9F /* TaoBaoOrderViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TaoBaoOrderViewController.h; sourceTree = "<group>"; };
+		1F6582F71CE9BB9300C72F9F /* TaoBaoOrderViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TaoBaoOrderViewController.m; sourceTree = "<group>"; };
+		1F6582F81CE9BB9300C72F9F /* TaoBaoOrderViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TaoBaoOrderViewController.xib; sourceTree = "<group>"; };
+		1F6582FB1CE9BF5A00C72F9F /* JDOrderViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JDOrderViewController.h; sourceTree = "<group>"; };
+		1F6582FC1CE9BF5A00C72F9F /* JDOrderViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JDOrderViewController.m; sourceTree = "<group>"; };
+		1F6582FD1CE9BF5A00C72F9F /* JDOrderViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = JDOrderViewController.xib; sourceTree = "<group>"; };
+		1F6583001CE9C29700C72F9F /* TianMaoOrderViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TianMaoOrderViewController.h; sourceTree = "<group>"; };
+		1F6583011CE9C29700C72F9F /* TianMaoOrderViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TianMaoOrderViewController.m; sourceTree = "<group>"; };
+		1F6583021CE9C29700C72F9F /* TianMaoOrderViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TianMaoOrderViewController.xib; sourceTree = "<group>"; };
 		1F7B29341CD5F50500482D84 /* MyOderModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyOderModel.h; sourceTree = "<group>"; };
 		1F7B29351CD5F50500482D84 /* MyOderModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyOderModel.m; sourceTree = "<group>"; };
 		1F8921E21CE5609E00267F44 /* QrShareSheetViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QrShareSheetViewController.h; sourceTree = "<group>"; };
@@ -622,8 +636,6 @@
 		1FD7E6761CC8DFE400A69BDD /* MyQrCodeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyQrCodeViewController.m; sourceTree = "<group>"; };
 		1FD7E6781CC8E4F200A69BDD /* MyQrCodeView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyQrCodeView.h; sourceTree = "<group>"; };
 		1FD7E6791CC8E4F200A69BDD /* MyQrCodeView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyQrCodeView.m; sourceTree = "<group>"; };
-		1FE56B141CE5D41000CD7780 /* JSBadgeView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JSBadgeView.h; sourceTree = "<group>"; };
-		1FE56B151CE5D41000CD7780 /* JSBadgeView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JSBadgeView.m; sourceTree = "<group>"; };
 		1FE60E2C1CD301BC00045117 /* AllOderViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AllOderViewController.h; sourceTree = "<group>"; };
 		1FE60E2D1CD301BC00045117 /* AllOderViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AllOderViewController.m; sourceTree = "<group>"; };
 		1FE60E2E1CD301BC00045117 /* AllOderViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AllOderViewController.xib; sourceTree = "<group>"; };
@@ -1476,15 +1488,6 @@
 			path = View;
 			sourceTree = "<group>";
 		};
-		1FE56B131CE5D41000CD7780 /* JSBadgeView */ = {
-			isa = PBXGroup;
-			children = (
-				1FE56B141CE5D41000CD7780 /* JSBadgeView.h */,
-				1FE56B151CE5D41000CD7780 /* JSBadgeView.m */,
-			);
-			path = JSBadgeView;
-			sourceTree = "<group>";
-		};
 		1FE60E281CD3016800045117 /* OderInfo */ = {
 			isa = PBXGroup;
 			children = (
@@ -1516,6 +1519,15 @@
 				1FEE50EF1CE2144500B8A292 /* CommenttwoViewController.h */,
 				1FEE50F01CE2144500B8A292 /* CommenttwoViewController.m */,
 				1FEE50F11CE2144500B8A292 /* CommenttwoViewController.xib */,
+				1F6582F61CE9BB9300C72F9F /* TaoBaoOrderViewController.h */,
+				1F6582F71CE9BB9300C72F9F /* TaoBaoOrderViewController.m */,
+				1F6582F81CE9BB9300C72F9F /* TaoBaoOrderViewController.xib */,
+				1F6582FB1CE9BF5A00C72F9F /* JDOrderViewController.h */,
+				1F6582FC1CE9BF5A00C72F9F /* JDOrderViewController.m */,
+				1F6582FD1CE9BF5A00C72F9F /* JDOrderViewController.xib */,
+				1F6583001CE9C29700C72F9F /* TianMaoOrderViewController.h */,
+				1F6583011CE9C29700C72F9F /* TianMaoOrderViewController.m */,
+				1F6583021CE9C29700C72F9F /* TianMaoOrderViewController.xib */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -2310,7 +2322,6 @@
 		D81280CB1CAA8532007CF08B /* Vendors */ = {
 			isa = PBXGroup;
 			children = (
-				1FE56B131CE5D41000CD7780 /* JSBadgeView */,
 				1F27AE851CE06BB1005A434B /* AliPay */,
 				D81280CC1CAA8532007CF08B /* BaiduMapSDK */,
 				D81280D41CAA8532007CF08B /* DBModel */,
@@ -3366,6 +3377,7 @@
 				1F3C0A921CBF95AC00B84FEB /* SubscribePeopleTableViewCell.xib in Resources */,
 				D81281781CAA8532007CF08B /* TencentOpenApi_IOS_Bundle.bundle in Resources */,
 				1F35F04E1CD22D7A0000DB95 /* AddreesPickerViewController.xib in Resources */,
+				1F6582FF1CE9BF5A00C72F9F /* JDOrderViewController.xib in Resources */,
 				1FE60E3A1CD30A2100045117 /* MyOderInfoViewController.xib in Resources */,
 				1F27AE881CE06BB1005A434B /* AlipaySDK.bundle in Resources */,
 				1FC677FE1CDAE78400535162 /* BonusViewController.xib in Resources */,
@@ -3389,6 +3401,7 @@
 				1F5038AA1CDC406C004F76AD /* CommentView.xib in Resources */,
 				D81281721CAA8532007CF08B /* UMSocialSDKResourcesNew.bundle in Resources */,
 				1FEE50F81CE235FD00B8A292 /* PaySuccessViewController.xib in Resources */,
+				1F6582FA1CE9BB9300C72F9F /* TaoBaoOrderViewController.xib in Resources */,
 				D83639AE1CD0660E00CC4AC0 /* FBLocationViewController.xib in Resources */,
 				1F1837711CCDF87500933CA7 /* ChangePasswordViewController.xib in Resources */,
 				D83639B01CD0660E00CC4AC0 /* FBMapLocatinViewController.xib in Resources */,
@@ -3408,6 +3421,7 @@
 				D812816E1CAA8532007CF08B /* UMShareEditViewControlleriPad.xib in Resources */,
 				D81281681CAA8532007CF08B /* UMSocialLocalizable.strings in Resources */,
 				1FFFFF201CD055BB008E1CDC /* AboutViewController.xib in Resources */,
+				1F6583041CE9C29700C72F9F /* TianMaoOrderViewController.xib in Resources */,
 				1F5038A21CDC3F79004F76AD /* OrderInfoCell.xib in Resources */,
 				1F8EACE91CDDD1AE00C51235 /* FBPayTheWayViewController.xib in Resources */,
 				1F1837671CCDCF3B00933CA7 /* EditNickNameViewController.xib in Resources */,
@@ -3498,6 +3512,7 @@
 				D8363A991CD8832100CC4AC0 /* SceneListTableViewCell.m in Sources */,
 				1F5038CB1CDC8109004F76AD /* BotView.m in Sources */,
 				1FEF0B211CC0FC15006EF0C6 /* TipNumberView.m in Sources */,
+				1F6583031CE9C29700C72F9F /* TianMaoOrderViewController.m in Sources */,
 				D81281131CAA8532007CF08B /* FBViewController.m in Sources */,
 				D8363AB61CD8835D00CC4AC0 /* SceneInfo.m in Sources */,
 				D8363ABA1CD8835D00CC4AC0 /* SceneInfoProduct.m in Sources */,
@@ -3556,6 +3571,7 @@
 				1FD7E67A1CC8E4F200A69BDD /* MyQrCodeView.m in Sources */,
 				D8A9ADC01CD9E2E700A9FCFB /* CreateViewController.m in Sources */,
 				D8A9AE2B1CE1C79400A9FCFB /* UpLookAllTagBtnTableViewCell.m in Sources */,
+				1F6582F91CE9BB9300C72F9F /* TaoBaoOrderViewController.m in Sources */,
 				1FC678211CDAFEF400535162 /* DeliveryAddressModel.m in Sources */,
 				D8A9AE5A1CE4603300A9FCFB /* MarkGoodsData.m in Sources */,
 				D8A9ADC91CD9E34600A9FCFB /* FBFootView.m in Sources */,
@@ -3662,7 +3678,6 @@
 				D8A9ADC61CD9E2E700A9FCFB /* AddTagViewController.m in Sources */,
 				1F8EACD51CDD8A5B00C51235 /* OrderInfoDetailViewController.m in Sources */,
 				D8363A2E1CD8809400CC4AC0 /* GoodsRow.m in Sources */,
-				1FE56B161CE5D41000CD7780 /* JSBadgeView.m in Sources */,
 				D8A9AE8C1CE8D99E00A9FCFB /* GoodsSceneCollectionViewCell.m in Sources */,
 				D8A9ACCF1CD8A46900A9FCFB /* SuFiuScenrView.m in Sources */,
 				D8A9ACDF1CD8A49100A9FCFB /* AllSceneViewController.m in Sources */,
@@ -3780,6 +3795,7 @@
 				D83639C01CD0932000CC4AC0 /* CommentUser.m in Sources */,
 				1FEB71751CC88B5D00CF34F3 /* FindeFirendTwoModel.m in Sources */,
 				D8363A981CD8832100CC4AC0 /* UserInfoTableViewCell.m in Sources */,
+				1F6582FE1CE9BF5A00C72F9F /* JDOrderViewController.m in Sources */,
 				1FEB71721CC8802800CF34F3 /* InvitationModel.m in Sources */,
 				1FFFFF231CD055BB008E1CDC /* SystemSettingViewController.m in Sources */,
 				D8A9ACB81CD89E0000A9FCFB /* FiuSceneInfoUserInfo.m in Sources */,
