@@ -53,7 +53,7 @@
                     <rect key="frame" x="228" y="85" width="132" height="44"/>
                     <subviews>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="251" text="" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wYP-vE-X5M">
-                            <rect key="frame" x="8" y="12" width="43" height="21"/>
+                            <rect key="frame" x="8" y="12" width="53" height="21"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="21" id="CdL-YN-5jJ"/>
                                 <constraint firstAttribute="height" constant="21" id="DQb-S1-z3T"/>
@@ -69,8 +69,8 @@
                                 </mask>
                             </variation>
                         </label>
-                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="s重新发送" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="XxT-T7-mXl">
-                            <rect key="frame" x="53" y="12" width="59" height="21"/>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="s" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="XxT-T7-mXl">
+                            <rect key="frame" x="63" y="12" width="7" height="21"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="21" id="lzG-pY-Awl"/>
                                 <constraint firstAttribute="height" constant="21" id="t2o-Cj-P4h"/>
@@ -90,6 +90,7 @@
                         <constraint firstItem="wYP-vE-X5M" firstAttribute="leading" secondItem="qHt-qe-1Tv" secondAttribute="leading" constant="8" id="1sd-ez-Bmm"/>
                         <constraint firstItem="XxT-T7-mXl" firstAttribute="leading" secondItem="wYP-vE-X5M" secondAttribute="trailing" constant="3" id="3Yr-Gd-nsu"/>
                         <constraint firstItem="XxT-T7-mXl" firstAttribute="leading" secondItem="wYP-vE-X5M" secondAttribute="trailing" constant="2" id="5cz-nB-Yd6"/>
+                        <constraint firstItem="XxT-T7-mXl" firstAttribute="centerX" secondItem="qHt-qe-1Tv" secondAttribute="centerX" id="8GZ-g0-46z"/>
                         <constraint firstAttribute="trailing" secondItem="XxT-T7-mXl" secondAttribute="trailing" constant="20" id="95F-2g-TOS"/>
                         <constraint firstItem="wYP-vE-X5M" firstAttribute="centerY" secondItem="qHt-qe-1Tv" secondAttribute="centerY" id="9ab-to-WSd"/>
                         <constraint firstItem="XxT-T7-mXl" firstAttribute="centerY" secondItem="qHt-qe-1Tv" secondAttribute="centerY" id="Ei4-Q9-ojb"/>
@@ -111,6 +112,7 @@
                             <exclude reference="h88-1t-mnh"/>
                             <exclude reference="vaX-bT-lMf"/>
                             <exclude reference="3Yr-Gd-nsu"/>
+                            <exclude reference="95F-2g-TOS"/>
                             <exclude reference="Ei4-Q9-ojb"/>
                             <exclude reference="bZt-Me-a7b"/>
                             <exclude reference="ghG-gI-0hQ"/>

@@ -27,14 +27,14 @@
         [self.contentView addSubview:self.focusOnBtn];
         [_focusOnBtn mas_makeConstraints:^(MASConstraintMaker *make) {
             make.size.mas_equalTo(CGSizeMake(138*0.5/667.0*SCREEN_HEIGHT, 50*0.5/667.0*SCREEN_HEIGHT));
-            make.left.mas_equalTo(self.mas_left).with.offset(103/667.0*SCREEN_HEIGHT);
+            make.left.mas_equalTo(self.mas_left).with.offset(113/667.0*SCREEN_HEIGHT);
             make.bottom.mas_equalTo(self.mas_bottom).with.offset(-10/667.0*SCREEN_HEIGHT);
         }];
         
         [self.contentView addSubview:self.directMessages];
         [_directMessages mas_makeConstraints:^(MASConstraintMaker *make) {
             make.size.mas_equalTo(CGSizeMake(138*0.5/667.0*SCREEN_HEIGHT, 50*0.5/667.0*SCREEN_HEIGHT));
-            make.right.mas_equalTo(self.mas_right).with.offset(-103/667.0*SCREEN_HEIGHT);
+            make.right.mas_equalTo(self.mas_right).with.offset(-113/667.0*SCREEN_HEIGHT);
             make.bottom.mas_equalTo(self.mas_bottom).with.offset(-10/667.0*SCREEN_HEIGHT);
         }];
         

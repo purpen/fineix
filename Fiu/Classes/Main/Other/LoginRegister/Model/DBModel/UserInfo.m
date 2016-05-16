@@ -34,6 +34,7 @@
     entity.follow_count = userInfo.follow_count;
     entity.head_pic_url = userInfo.head_pic_url;
     entity.is_love = userInfo.is_love;
+    entity.isLogin = userInfo.isLogin;
 }
 
 @end

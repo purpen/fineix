@@ -55,19 +55,6 @@ static NSString *const thirdRegister = @"/auth/third_sign";//第三方登录接�
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-    //隐藏未安装的第三方登录平台
-//    if (![WXApi isWXAppInstalled] && ![WeiboSDK isWeiboAppInstalled] && ![QQApiInterface isQQInstalled]) {
-//        self.thirdPartyTitleLbl.hidden = true;
-//    }
-//    if ([WXApi isWXAppInstalled] == FALSE) {
-//        self.wechatBtn.hidden = true;
-//    }
-//    if ([WeiboSDK isWeiboAppInstalled] == FALSE) {
-//        self.weiboBtn.hidden = true;
-//    }
-//    if ([QQApiInterface isQQInstalled] == FALSE) {
-//        self.qqBtn.hidden = true;
-//    }
     //设置按钮显示椭圆
     self.wechatBtn.layer.cornerRadius  = 3;
     self.wechatBtn.layer.masksToBounds = YES;
@@ -181,27 +168,16 @@ static NSString *const thirdRegister = @"/auth/third_sign";//第三方登录接�
 -(void)clikSendVerBtn:(UIButton*)sender{
     if ([_submitView.phoneNumTF.text checkTel]) {
         
-        FBRequest *request1 = [FBAPI postWithUrlString:@"/auth/check_account" requestDictionary:@{@"account":_submitView.phoneNumTF.text} delegate:self];
-        
-        [request1 startRequestSuccess:^(FBRequest *request, id result) {
-            NSLog( @"手机号的验证 %@",_submitView.phoneNumTF.text);
-            if ([result objectForKey:@"success"]) {
-                //如果手机号正确，发送短信
-                NSDictionary *params = @{
-                                         @"mobile":_submitView.phoneNumTF.text
-                                         };
-                FBRequest *request = [FBAPI postWithUrlString:VerifyCodeURL requestDictionary:params delegate:self];
-                request.flag = VerifyCodeURL;
-                [request startRequest];
-                //[SVProgressHUD showWithMaskType:SVProgressHUDMaskTypeClear];
-                _submitView.toResendV.hidden = NO;
-                [self startTime];
-            }else{
-                [SVProgressHUD showWithStatus:[result objectForKey:@"message"]];
-            }
-        } failure:^(FBRequest *request, NSError *error) {
-            [SVProgressHUD showErrorWithStatus:error.localizedDescription];
-        }];
+        //如果手机号正确，发送短信
+        NSDictionary *params = @{
+                                 @"mobile":_submitView.phoneNumTF.text
+                                 };
+        FBRequest *request = [FBAPI postWithUrlString:VerifyCodeURL requestDictionary:params delegate:self];
+        request.flag = VerifyCodeURL;
+        [request startRequest];
+        //[SVProgressHUD showWithMaskType:SVProgressHUDMaskTypeClear];
+        _submitView.toResendV.hidden = NO;
+        [self startTime];
     }else{
         [SVProgressHUD showErrorWithStatus:@"手机号不正确"];
     }
@@ -329,19 +305,6 @@ static NSString *const thirdRegister = @"/auth/third_sign";//第三方登录接�
                 //跳回个人主页
                 [self dismissViewControllerAnimated:YES completion:nil];
             }
-//            //推荐感兴趣的情景
-//            NSDictionary *identifyDict = [[result objectForKey:@"data"] objectForKey:@"identify"];
-//            if ([[identifyDict objectForKey:@"d3in_tag"] isEqualToNumber:@0]) {
-//                //跳转到推荐界面
-//                SubscribeInterestedCollectionViewController *subscribeVC = [[SubscribeInterestedCollectionViewController alloc] init];
-//                [self.navigationController pushViewController:subscribeVC animated:YES];
-//            }else{
-//                
-//                //跳转到个人信息完善页面
-//                ImprovViewController *improveVC = [[ImprovViewController alloc] init];
-//                [self.navigationController pushViewController:improveVC animated:YES];
-//                
-//            }
 
         }//如果失败，提示用户失败原因
         else{

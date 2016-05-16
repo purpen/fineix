@@ -17,6 +17,7 @@
 #import "CommenttwoViewController.h"
 #import "RefundmentViewController.h"
 #import "FBPayTheWayViewController.h"
+#import "GoodsInfoViewController.h"
 
 @interface OrderInfoDetailViewController ()<ProductInfoViewDelegate,FBNavigationBarItemsDelegate>
 
@@ -340,6 +341,14 @@ static NSString *const OrderDetailURL = @"/shopping/detail";
     [alertView addAction:cancel];
     [alertView addAction:confirm];
     [alertView showInWindowWithBackgoundTapDismissEnable:YES];
+}
+
+#pragma mark - ProductInfoViewDelegate
+- (void)tapProductInfoView:(ProductInfoView *)productInfoView withProductInfo:(ProductInfoModel *)productInfo
+{
+    GoodsInfoViewController * goodsInfoVC = [[GoodsInfoViewController alloc] init];
+    goodsInfoVC.goodsID = self.orderInfo.idField;
+    [self.navigationController pushViewController:goodsInfoVC animated:YES];
 }
 
 - (void)didReceiveMemoryWarning {

@@ -95,7 +95,11 @@
             _n = (int)fiuSceneArr.count;
         }
         self.messages = messageArray;
-        [self.myTableVuew setContentOffset:CGPointMake(0, 200*(self.messages.count-1)) animated:NO];
+        if (self.messages.count == 0) {
+           
+        }else{
+            [self.myTableVuew setContentOffset:CGPointMake(0, 200*(self.messages.count-1)) animated:NO];
+        }
         [self.myTableVuew reloadData];
         NSLog(@" 聊天数量    %zi",self.messages.count);
         
