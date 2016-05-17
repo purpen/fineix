@@ -59,7 +59,7 @@ NSString *const determineLogin = @"/auth/check_login";
     [self guide];
     
     
-    //首先统一设置为未登录
+//    //首先统一设置为未登录
     UserInfoEntity *entity = [UserInfoEntity defaultUserInfoEntity];
 //    entity.isLogin = NO;
     //发送网络请求查看登录状态
@@ -77,7 +77,7 @@ NSString *const determineLogin = @"/auth/check_login";
         //发送失败提示失败信息
         [SVProgressHUD showErrorWithStatus:error.localizedDescription];
     }];
-    
+//
     
     
     
@@ -131,17 +131,10 @@ NSString *const determineLogin = @"/auth/check_login";
     //----------------------------------------
     
     //设置推送---------------------------------------------------
-    if ([application respondsToSelector:@selector(isRegisteredForRemoteNotifications)])
-    {
-        //IOS8
-        //创建UIUserNotificationSettings，并设置消息的显示类类型
-        UIUserNotificationSettings *notiSettings = [UIUserNotificationSettings settingsForTypes:(UIUserNotificationTypeBadge | UIUserNotificationTypeAlert | UIRemoteNotificationTypeSound) categories:nil];
-        
-        [application registerUserNotificationSettings:notiSettings];
-        
-    } else{ // ios7
-        [application registerForRemoteNotificationTypes:(UIRemoteNotificationTypeBadge                                       |UIRemoteNotificationTypeSound                                      |UIRemoteNotificationTypeAlert)];
-    }
+    //创建UIUserNotificationSettings，并设置消息的显示类类型
+    UIUserNotificationSettings *notiSettings = [UIUserNotificationSettings settingsForTypes:(UIUserNotificationTypeBadge | UIUserNotificationTypeAlert | UIUserNotificationTypeSound) categories:nil];
+    
+    [application registerUserNotificationSettings:notiSettings];
     //------------------------------------------------------
 
     return YES;
@@ -238,7 +231,7 @@ NSString *const determineLogin = @"/auth/check_login";
         [_notiDelegate resetNotificationState];
     }
     
-    //登录状态查询及本地用户信息获取
+//    //登录状态查询及本地用户信息获取
     FBRequest * request = [FBAPI postWithUrlString:@"/auth/check_login" requestDictionary:nil delegate:self];
     [request startRequestSuccess:^(FBRequest *request, id result) {
         NSDictionary * dataDic = [result objectForKey:@"data"];
