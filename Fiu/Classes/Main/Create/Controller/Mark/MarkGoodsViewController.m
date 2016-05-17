@@ -14,6 +14,7 @@
 
 static NSString *const URLMarkGoods = @"/category/getlist";
 static NSString *const URLGoodsList = @"/scene_product/getlist";
+static NSString *const URLSearchGoods = @"/search/getlist";
 
 @interface MarkGoodsViewController ()
 
@@ -47,6 +48,28 @@ static NSString *const URLGoodsList = @"/scene_product/getlist";
         self.ids = @"";
         [self networkMarkGoodsData];
         [self setUI];
+        
+    } failure:^(FBRequest *request, NSError *error) {
+        [SVProgressHUD showErrorWithStatus:[error localizedDescription]];
+    }];
+}
+
+#pragma mark 搜索商品
+- (void)networkSearchGoods:(NSString *)keyword {
+    [self.goodsList removeAllObjects];
+    [SVProgressHUD show];
+    self.searchRequest = [FBAPI getWithUrlString:URLSearchGoods requestDictionary:@{@"t":@"10", @"q":keyword} delegate:self];
+    [self.searchRequest startRequestSuccess:^(FBRequest *request, id result) {
+        NSArray * goodsArr = [[result valueForKey:@"data"] valueForKey:@"rows"];
+        for (NSDictionary * goodsDict in goodsArr) {
+            MarkGoodsRow * goodsModel = [[MarkGoodsRow alloc] initWithDictionary:goodsDict];
+            [self.goodsList addObject:goodsModel];
+        }
+        self.currentpageNum = [[[result valueForKey:@"data"] valueForKey:@"current_page"] integerValue];
+        self.totalPageNum = [[[result valueForKey:@"data"] valueForKey:@"total_page"] integerValue];
+        [self requestIsLastData:self.goodsListView currentPage:self.currentpageNum withTotalPage:self.totalPageNum];
+        [self.goodsListView reloadData];
+        [SVProgressHUD dismiss];
         
     } failure:^(FBRequest *request, NSError *error) {
         [SVProgressHUD showErrorWithStatus:[error localizedDescription]];
@@ -152,7 +175,7 @@ static NSString *const URLGoodsList = @"/scene_product/getlist";
 }
 
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
-    self.getImgBlock([self.goodsList valueForKey:@"coverUrl"][indexPath.row]);
+    self.getImgBlock([self.goodsList valueForKey:@"coverUrl"][indexPath.row], [self.goodsList valueForKey:@"title"][indexPath.row], [NSString stringWithFormat:@"%@",[self.goodsList valueForKey:@"salePrice"][indexPath.row]], [NSString stringWithFormat:@"%@",[self.goodsList valueForKey:@"idField"][indexPath.row]]);
     [self dismissViewControllerAnimated:YES completion:nil];
 }
 
@@ -168,7 +191,7 @@ static NSString *const URLGoodsList = @"/scene_product/getlist";
 
 #pragma mark - 搜索产品
 - (void)beginSearch:(NSString *)searchKeyword {
-    [SVProgressHUD showInfoWithStatus:[NSString stringWithFormat:@"搜索的产品关键字：%@", searchKeyword]];
+    [self networkSearchGoods:searchKeyword];
 }
 
 #pragma mark - 导航菜单视图

@@ -148,6 +148,7 @@
         _cameraView = [[CameraView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT - 49)];
         _cameraView.VC = self;
         _cameraView.Nav = self.navigationController;
+        _cameraView.createType = self.createType;
     }
     return _cameraView;
 }

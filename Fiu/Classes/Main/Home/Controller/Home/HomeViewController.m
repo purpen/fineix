@@ -31,10 +31,6 @@ static NSString *const URLSceneList = @"/scene_sight/";
     [self setFirstAppStart];
     [self setNavigationViewUI];
     self.tabBarController.tabBar.hidden = NO;
-    
-    //  frome #import "ReleaseViewController.h"
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(refreshHomeTable) name:@"refreshHomeList" object:nil];
-    
 }
 
 - (void)viewDidLoad {
@@ -45,11 +41,6 @@ static NSString *const URLSceneList = @"/scene_sight/";
     [self networkRequestData];
     
     [self.view addSubview:self.homeTableView];
-}
-
-#pragma mark - 刷新列表
-- (void)refreshHomeTable {
-    [self.homeTableView.mj_header beginRefreshing];
 }
 
 #pragma mark - 网络请求

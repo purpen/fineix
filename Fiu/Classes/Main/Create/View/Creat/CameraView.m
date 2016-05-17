@@ -175,6 +175,7 @@
                                                            //   跳转到“工具”视图
                                                            FiltersViewController * filtersVC = [[FiltersViewController alloc] init];
                                                            filtersVC.filtersImg = photo;
+                                                           filtersVC.createType = self.createType;
                                                            [self.Nav pushViewController:filtersVC animated:YES];
                                                        }
                                                     

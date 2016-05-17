@@ -129,12 +129,28 @@ static NSString *const URLUserAddGoods = @"/scene_product/add";
     AddUrlViewController * addUrlVC = [[AddUrlViewController alloc] init];
     
     if (index == 0) {
+        [self changeFiltersFrame];
+        
         [self presentViewController:markGoodsVC animated:YES completion:nil];
-        markGoodsVC.getImgBlock = ^(NSString * imgUrl) {
+        markGoodsVC.getImgBlock = ^(NSString * imgUrl, NSString * title, NSString * price, NSString * ids) {
             [self addMarkGoodsImg:imgUrl];
+            [self.goodsIdData addObject:ids];
+            NSString * pri = [NSString stringWithFormat:@"￥%@",price];
+            [self addUserGoodsTagWithTitle:title withPrice:pri];
+            
+            [self.goodsTitleData addObject:title];
+            [self.goodsPriceData addObject:price];
+            
+            NSMutableDictionary * tagDataDict = [NSMutableDictionary dictionary];
+            [tagDataDict setObject:title forKey:@"title"];
+            [tagDataDict setObject:price forKey:@"price"];
+            [tagDataDict setObject:imgUrl forKey:@"img"];
+            [self.userAddGoodsMarr addObject:tagDataDict];
         };
         
     } else if (index == 1) {
+        [self changeFiltersFrame];
+        
         [self presentViewController:addUrlVC animated:YES completion:nil];
         addUrlVC.findGodosBlock = ^(NSString * title, NSString * price, NSString * ids) {
             [self.goodsIdData addObject:ids];
@@ -205,8 +221,9 @@ static NSString *const URLUserAddGoods = @"/scene_product/add";
 - (void)addMarkGoodsImg:(NSString *)imgUrl {
     FBStickersContainer * sticker = [[FBStickersContainer alloc] initWithFrame:CGRectMake(100, 100, 200, 200)];
     [sticker setupSticker:imgUrl];
-    [self.stickersContainer addObject:sticker];
+    sticker.delegate = self;
     [self.view addSubview:sticker];
+    [self.stickersContainer addObject:sticker];
     
     for (UserGoodsTag * userTag in self.tagBtnMarr) {
         [self.view bringSubviewToFront:userTag];
@@ -289,6 +306,10 @@ static NSString *const URLUserAddGoods = @"/scene_product/add";
 
 #pragma mark - 使滤镜视图消失
 - (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event {
+    [self changeFiltersFrame];
+}
+
+- (void)changeFiltersFrame {
     CGRect filtersViewRect = _filtersView.frame;
     filtersViewRect = CGRectMake(SCREEN_WIDTH, SCREEN_HEIGHT - 170, SCREEN_WIDTH, 120);
     [UIView animateWithDuration:.2 animations:^{
@@ -375,11 +396,11 @@ static NSString *const URLUserAddGoods = @"/scene_product/add";
     for (FBStickersContainer * container in self.stickersContainer) {
         CGContextSaveGState(context);
         FBSticker * sticker = [container generateSticker];
-        CGAffineTransform translateToCenter = CGAffineTransformMakeTranslation( sticker.translateCenter.x, sticker.translateCenter.y);
+        CGAffineTransform translateToCenter = CGAffineTransformMakeTranslation(sticker.translateCenter.x, sticker.translateCenter.y - (sticker.translateCenter.y/8));
         CGAffineTransform rotateAfterTranslate = CGAffineTransformRotate(translateToCenter, sticker.rotateAngle);
         CGContextConcatCTM(context, rotateAfterTranslate);
         CGContextScaleCTM(context, 1.0, -1.0);
-        CGContextDrawImage(context, CGRectMake(- sticker.size.width/2,- sticker.size.height / 2,sticker.size.width,sticker.size.height), sticker.image.CGImage);
+        CGContextDrawImage(context, CGRectMake(-sticker.size.width/2, -sticker.size.height/2, sticker.size.width, sticker.size.height), sticker.image.CGImage);
         CGContextRestoreGState(context);
     }
     

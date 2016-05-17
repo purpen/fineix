@@ -50,7 +50,10 @@ static NSString *const URLReleaseFiuScenen = @"/scene_scene/save";
 #pragma mark - 网络请求
 #pragma mark 发布场景
 - (void)networkNewSceneData {
-    if ([self.lng length] <= 0 || [self.scenceView.title.text isEqualToString:@""] || [self.scenceView.content.text isEqualToString:@""] || [self.addView.location.text isEqualToString:@""] || self.tagS.length <=0 || self.fSceneId.length <= 0) {
+    NSString * title = [self.scenceView.title.text stringByReplacingOccurrencesOfString:@" " withString:@""];
+    NSString * des = [self.scenceView.content.text stringByReplacingOccurrencesOfString:@" " withString:@""];
+
+    if ([self.lng length] <= 0 || [title isEqualToString:@""] || [des isEqualToString:@""] || [self.addView.location.text isEqualToString:@""] || self.tagS.length <=0 || self.fSceneId.length <= 0) {
         [SVProgressHUD showInfoWithStatus:@"填写未完成"];
 
     } else {
@@ -59,8 +62,8 @@ static NSString *const URLReleaseFiuScenen = @"/scene_scene/save";
         NSString * icon64Str = [imageData base64EncodedStringWithOptions:NSDataBase64Encoding64CharacterLineLength];
         NSDictionary * paramDict = @{
                                      @"tmp":icon64Str,
-                                     @"title":self.scenceView.title.text,
-                                     @"des":self.scenceView.content.text,
+                                     @"title":title,
+                                     @"des":des,
                                      @"lng":self.lng,
                                      @"lat":self.lat,
                                      @"address":self.addView.location.text,
@@ -89,7 +92,10 @@ static NSString *const URLReleaseFiuScenen = @"/scene_scene/save";
 
 #pragma mark 发布情景
 - (void)networkNewFiuSceneData {
-    if ([self.lng length] <= 0 || [self.scenceView.title.text isEqualToString:@""] || [self.scenceView.content.text isEqualToString:@""] || [self.addView.location.text isEqualToString:@""] || self.tagS.length <=0) {
+    NSString * title = [self.scenceView.title.text stringByReplacingOccurrencesOfString:@" " withString:@""];
+    NSString * des = [self.scenceView.content.text stringByReplacingOccurrencesOfString:@" " withString:@""];
+    
+    if ([self.lng length] <= 0 || [title isEqualToString:@""] || [des isEqualToString:@""] || [self.addView.location.text isEqualToString:@""] || self.tagS.length <=0) {
         [SVProgressHUD showInfoWithStatus:@"填写未完成"];
     } else {
         [SVProgressHUD show];

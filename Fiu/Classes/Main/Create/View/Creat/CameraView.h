@@ -18,7 +18,7 @@
 @pro_strong UIView                      *   cameraNavView;      //  顶部导航
 @pro_strong UIButton                    *   cameraCancelBtn;    //  取消按钮
 @pro_strong UILabel                     *   cameraTitlt;        //  页面标题
-
+@pro_strong NSString                    *   createType;
 @pro_strong UIButton                    *   takePhotosBtn;      //  拍照按钮
 @pro_strong UIButton                    *   flashBtn;           //  闪光灯按钮
 @pro_strong AVCaptureSession            *   session;            //  输入&输出之间的数据传递
