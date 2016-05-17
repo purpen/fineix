@@ -48,7 +48,6 @@
             make.left.mas_equalTo(_headImageView.mas_right).with.offset(9/667.0*SCREEN_HEIGHT);
             make.top.mas_equalTo(self.mas_top).with.offset(13/667.0*SCREEN_HEIGHT);
             make.right.mas_equalTo(_focusOnBtn.mas_left).with.offset(-10);
-            make.height.mas_equalTo(12);
         }];
         
         [self.contentView addSubview:self.summaryLabel];

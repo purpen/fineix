@@ -154,6 +154,9 @@ static NSString *const BonusCellIdentifier = @"bonusCell";
     return false;
 }
 
+-(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+    
+}
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];

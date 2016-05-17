@@ -10,4 +10,6 @@
 
 @interface IdentityTagModel : NSObject
 
+@property(nonatomic,copy) NSString *tags;
+
 @end

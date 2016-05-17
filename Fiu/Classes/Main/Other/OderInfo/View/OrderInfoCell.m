@@ -42,11 +42,11 @@
     self.operation1stBtn.layer.cornerRadius = 2;
     self.operation1stBtn.layer.masksToBounds = YES;
     self.operation1stBtn.layer.borderWidth = 0.5;
-    self.operation1stBtn.layer.borderColor = color;
+    self.operation1stBtn.layer.borderColor = [UIColor colorWithHexString:fineixColor].CGColor;
     self.operation2ndBtn.layer.cornerRadius = 2;
     self.operation2ndBtn.layer.masksToBounds = YES;
     self.operation2ndBtn.layer.borderWidth = 0.5;
-    self.operation2ndBtn.layer.borderColor = color;
+    self.operation2ndBtn.layer.borderColor = [UIColor colorWithHexString:fineixColor].CGColor;
     
     UITapGestureRecognizer * tapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapProductViewGestureAction:)];
     [self.productView addGestureRecognizer:tapGesture];

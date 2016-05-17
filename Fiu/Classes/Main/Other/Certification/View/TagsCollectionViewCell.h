@@ -10,4 +10,6 @@
 
 @interface TagsCollectionViewCell : UICollectionViewCell
 
+@property(nonatomic,strong) UIButton *tagBtn;
+
 @end

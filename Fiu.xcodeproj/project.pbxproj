@@ -146,6 +146,12 @@
 		1FE60E661CD33E4700045117 /* MessagesssViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1FE60E641CD33E4700045117 /* MessagesssViewController.xib */; };
 		1FE60E781CD3E31D00045117 /* FindFriendModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 1FE60E771CD3E31D00045117 /* FindFriendModel.m */; };
 		1FE60E7B1CD3E6DC00045117 /* FindSceneModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 1FE60E7A1CD3E6DC00045117 /* FindSceneModel.m */; };
+		1FE701EF1CEB2C29000BA84A /* IdentityTagsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1FE701ED1CEB2C29000BA84A /* IdentityTagsViewController.m */; };
+		1FE701F01CEB2C29000BA84A /* IdentityTagsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1FE701EE1CEB2C29000BA84A /* IdentityTagsViewController.xib */; };
+		1FE701F31CEB4BDF000BA84A /* IdentityTagModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 1FE701F21CEB4BDF000BA84A /* IdentityTagModel.m */; };
+		1FE701F61CEB50FD000BA84A /* TagsCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 1FE701F51CEB50FD000BA84A /* TagsCollectionViewCell.m */; };
+		1FE701FA1CEB7638000BA84A /* TheOfficialCertificationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1FE701F81CEB7638000BA84A /* TheOfficialCertificationViewController.m */; };
+		1FE701FB1CEB7638000BA84A /* TheOfficialCertificationViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1FE701F91CEB7638000BA84A /* TheOfficialCertificationViewController.xib */; };
 		1FEB71721CC8802800CF34F3 /* InvitationModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 1FEB71711CC8802800CF34F3 /* InvitationModel.m */; };
 		1FEB71751CC88B5D00CF34F3 /* FindeFirendTwoModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 1FEB71741CC88B5D00CF34F3 /* FindeFirendTwoModel.m */; };
 		1FEB71781CC8A35A00CF34F3 /* QRCodeScanViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1FEB71771CC8A35A00CF34F3 /* QRCodeScanViewController.m */; };
@@ -674,6 +680,16 @@
 		1FE60E771CD3E31D00045117 /* FindFriendModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FindFriendModel.m; sourceTree = "<group>"; };
 		1FE60E791CD3E6DC00045117 /* FindSceneModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FindSceneModel.h; sourceTree = "<group>"; };
 		1FE60E7A1CD3E6DC00045117 /* FindSceneModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FindSceneModel.m; sourceTree = "<group>"; };
+		1FE701EC1CEB2C29000BA84A /* IdentityTagsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IdentityTagsViewController.h; sourceTree = "<group>"; };
+		1FE701ED1CEB2C29000BA84A /* IdentityTagsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IdentityTagsViewController.m; sourceTree = "<group>"; };
+		1FE701EE1CEB2C29000BA84A /* IdentityTagsViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = IdentityTagsViewController.xib; sourceTree = "<group>"; };
+		1FE701F11CEB4BDF000BA84A /* IdentityTagModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IdentityTagModel.h; sourceTree = "<group>"; };
+		1FE701F21CEB4BDF000BA84A /* IdentityTagModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IdentityTagModel.m; sourceTree = "<group>"; };
+		1FE701F41CEB50FD000BA84A /* TagsCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TagsCollectionViewCell.h; sourceTree = "<group>"; };
+		1FE701F51CEB50FD000BA84A /* TagsCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TagsCollectionViewCell.m; sourceTree = "<group>"; };
+		1FE701F71CEB7638000BA84A /* TheOfficialCertificationViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TheOfficialCertificationViewController.h; sourceTree = "<group>"; };
+		1FE701F81CEB7638000BA84A /* TheOfficialCertificationViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TheOfficialCertificationViewController.m; sourceTree = "<group>"; };
+		1FE701F91CEB7638000BA84A /* TheOfficialCertificationViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TheOfficialCertificationViewController.xib; sourceTree = "<group>"; };
 		1FEB71701CC8802800CF34F3 /* InvitationModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InvitationModel.h; sourceTree = "<group>"; };
 		1FEB71711CC8802800CF34F3 /* InvitationModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InvitationModel.m; sourceTree = "<group>"; };
 		1FEB71731CC88B5D00CF34F3 /* FindeFirendTwoModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FindeFirendTwoModel.h; sourceTree = "<group>"; };
@@ -1651,6 +1667,47 @@
 			path = View;
 			sourceTree = "<group>";
 		};
+		1FE701E81CEB2C04000BA84A /* Certification */ = {
+			isa = PBXGroup;
+			children = (
+				1FE701E91CEB2C04000BA84A /* Controller */,
+				1FE701EA1CEB2C04000BA84A /* Model */,
+				1FE701EB1CEB2C04000BA84A /* View */,
+			);
+			path = Certification;
+			sourceTree = "<group>";
+		};
+		1FE701E91CEB2C04000BA84A /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				1FE701EC1CEB2C29000BA84A /* IdentityTagsViewController.h */,
+				1FE701ED1CEB2C29000BA84A /* IdentityTagsViewController.m */,
+				1FE701EE1CEB2C29000BA84A /* IdentityTagsViewController.xib */,
+				1FE701F71CEB7638000BA84A /* TheOfficialCertificationViewController.h */,
+				1FE701F81CEB7638000BA84A /* TheOfficialCertificationViewController.m */,
+				1FE701F91CEB7638000BA84A /* TheOfficialCertificationViewController.xib */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		1FE701EA1CEB2C04000BA84A /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				1FE701F11CEB4BDF000BA84A /* IdentityTagModel.h */,
+				1FE701F21CEB4BDF000BA84A /* IdentityTagModel.m */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		1FE701EB1CEB2C04000BA84A /* View */ = {
+			isa = PBXGroup;
+			children = (
+				1FE701F41CEB50FD000BA84A /* TagsCollectionViewCell.h */,
+				1FE701F51CEB50FD000BA84A /* TagsCollectionViewCell.m */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
 		1FEF0AD11CC0FC15006EF0C6 /* My */ = {
 			isa = PBXGroup;
 			children = (
@@ -1899,6 +1956,7 @@
 		D8035FA01CBD1021001920F9 /* Other */ = {
 			isa = PBXGroup;
 			children = (
+				1FE701E81CEB2C04000BA84A /* Certification */,
 				1F8EACE11CDDD19E00C51235 /* Pay */,
 				1FC678161CDAF9B200535162 /* DeliveryAddress */,
 				1FC677F61CDAE75C00535162 /* Bonus */,
@@ -3421,6 +3479,7 @@
 				1F18376C1CCDE95A00933CA7 /* ModifyGenderViewController.xib in Resources */,
 				1FC678261CDB000200535162 /* DeliveryAddressCell.xib in Resources */,
 				1F223B1D1CD714F3007687F7 /* messages.plist in Resources */,
+				1FE701FB1CEB7638000BA84A /* TheOfficialCertificationViewController.xib in Resources */,
 				1F35F0491CD1FF630000DB95 /* DatePickerViewController.xib in Resources */,
 				D803605A1CBF376B001920F9 /* Signup.xib in Resources */,
 				1F3C0A851CBF760C00B84FEB /* SubscribePeopleViewController.xib in Resources */,
@@ -3481,6 +3540,7 @@
 				1F8921E61CE5609E00267F44 /* QrShareSheetViewController.xib in Resources */,
 				1F27AE9C1CE0EACE005A434B /* mapapi.bundle in Resources */,
 				1FFFFF221CD055BB008E1CDC /* OptionViewController.xib in Resources */,
+				1FE701F01CEB2C29000BA84A /* IdentityTagsViewController.xib in Resources */,
 				1F8EACDB1CDDA09200C51235 /* RefundmentViewController.xib in Resources */,
 				1FC678101CDAECE500535162 /* BonusCell.xib in Resources */,
 				1F1837761CCDFCB200933CA7 /* ChangeSumaryViewController.xib in Resources */,
@@ -3615,6 +3675,7 @@
 				1FFFFF331CD055F2008E1CDC /* AXModel.m in Sources */,
 				D8363ABE1CD8835D00CC4AC0 /* HomeSceneListData.m in Sources */,
 				D8A9ACD41CD8A46900A9FCFB /* FiuTagTableViewCell.m in Sources */,
+				1FE701F31CEB4BDF000BA84A /* IdentityTagModel.m in Sources */,
 				1F35F04D1CD22D7A0000DB95 /* AddreesPickerViewController.m in Sources */,
 				D80360401CBF376B001920F9 /* FBLoginViewController.m in Sources */,
 				D8363A271CD8809400CC4AC0 /* BrandInfo.m in Sources */,
@@ -3706,6 +3767,7 @@
 				1F5038B31CDC40EE004F76AD /* ExpressInfoModel.m in Sources */,
 				1F8921E51CE5609E00267F44 /* QrShareSheetViewController.m in Sources */,
 				D8A9ACB01CD89E0000A9FCFB /* RollImageData.m in Sources */,
+				1FE701EF1CEB2C29000BA84A /* IdentityTagsViewController.m in Sources */,
 				1F5038CF1CDCF438004F76AD /* ReturnViewController.m in Sources */,
 				1FEE50ED1CE1893B00B8A292 /* AllNearbyScenarioViewController.m in Sources */,
 				1FBE626D1CC4D095009606F7 /* FocusOnTableViewCell.m in Sources */,
@@ -3767,6 +3829,7 @@
 				D8A9AEA21CE9B76000A9FCFB /* CommentModelId.m in Sources */,
 				D8A9ACB21CD89E0000A9FCFB /* FiuScene.m in Sources */,
 				D8363A6E1CD8818E00CC4AC0 /* GoodsBrandViewController.m in Sources */,
+				1FE701FA1CEB7638000BA84A /* TheOfficialCertificationViewController.m in Sources */,
 				D8363A6B1CD8818E00CC4AC0 /* GoodsInfoViewController.m in Sources */,
 				D81281671CAA8532007CF08B /* JKDBModel.m in Sources */,
 				1FE60E421CD3226400045117 /* MessageViewController.m in Sources */,
@@ -3813,6 +3876,7 @@
 				1FEB71781CC8A35A00CF34F3 /* QRCodeScanViewController.m in Sources */,
 				D8A9ACE11CD8A49100A9FCFB /* DiscoverViewController.m in Sources */,
 				D803605B1CBF376B001920F9 /* SignupView.m in Sources */,
+				1FE701F61CEB50FD000BA84A /* TagsCollectionViewCell.m in Sources */,
 				1FCE90631CDA06630029E4BA /* MentionedViewController.m in Sources */,
 				D8363A951CD8832100CC4AC0 /* DataNumTableViewCell.m in Sources */,
 				D8363ABD1CD8835D00CC4AC0 /* HomeSceneListCounter.m in Sources */,
@@ -3971,7 +4035,7 @@
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				CODE_SIGN_IDENTITY = "iPhone Developer: Xiaoyi Tian (65JXH7V6N9)";
+				CODE_SIGN_IDENTITY = "";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Xiaoyi Tian (65JXH7V6N9)";
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";

@@ -40,6 +40,8 @@ static NSString *const URLSceneGoods = @"/scene_product/getlist";
 @pro_strong NSMutableArray      *   goodsIdList;        //  商品id
 @pro_strong NSMutableArray      *   reGoodsList;        //  推荐商品列表
 @pro_strong NSMutableArray      *   reGoodsIdList;      //  推荐商品id
+/**城市图标加手势 */
+@property(nonatomic,strong) UITapGestureRecognizer *cityTap;
 
 @end
 
@@ -272,6 +274,7 @@ static NSString *const URLSceneGoods = @"/scene_product/getlist";
             }
             cell.nav = self.navigationController;
             [cell setSceneInfoData:self.sceneInfoModel];
+            //cell.city addGestureRecognizer:<#(nonnull UIGestureRecognizer *)#>
             return cell;
             
         } else if (indexPath.row == 1) {

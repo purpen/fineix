@@ -8,7 +8,7 @@
 
 #import "TheOfficialCertificationViewController.h"
 
-@interface TheOfficialCertificationViewController ()
+@interface TheOfficialCertificationViewController ()<FBNavigationBarItemsDelegate>
 
 @end
 
@@ -17,6 +17,9 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
+    self.delegate = self;
+    self.navViewTitle.text = @"官方认证";
+    
 }
 
 - (void)didReceiveMemoryWarning {

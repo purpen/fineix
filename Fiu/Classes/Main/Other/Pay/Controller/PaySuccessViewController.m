@@ -19,7 +19,7 @@
 #define shareReqFlag  @"shareflge"
 #define bounsReqFlag  @"bounsflge"
 ;
-@interface PaySuccessViewController ()<UMSocialUIDelegate>
+@interface PaySuccessViewController ()<UMSocialUIDelegate,FBNavigationBarItemsDelegate>
 
 @property (weak, nonatomic) IBOutlet UILabel *orderIdLbl;
 @property (weak, nonatomic) IBOutlet UILabel *paymentWayLbl;
@@ -43,7 +43,6 @@
 
 - (IBAction)orderDetailBtnAction:(id)sender;
 
-- (IBAction)backBtnAction:(id)sender;
 
 @end
 
@@ -52,10 +51,14 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
+    self.delegate = self;
+    self.navViewTitle.text = @"支付完成";
+    
     
     self.orderIdLbl.text = self.orderInfo.rid;
     self.paymentWayLbl.text = self.paymentWay;
     self.createTimeLbl.text = self.orderInfo.createdAt;
+    
     //[self NoticeWithShare];
 }
 //- (void)NoticeWithShare{
@@ -102,9 +105,11 @@
     [self.navigationController pushViewController:orderDetailVC animated:YES];
 }
 
-- (IBAction)backBtnAction:(id)sender {
+
+-(void)leftBarItemSelected{
     [self.navigationController popToRootViewControllerAnimated:YES];
 }
+
 
 
 ////-------------

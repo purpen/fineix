@@ -59,7 +59,7 @@ NSString *const determineLogin = @"/auth/check_login";
     [self guide];
     
     
-//    //首先统一设置为未登录
+//    //首先统一设置为未登录-----------------------------------------------
     UserInfoEntity *entity = [UserInfoEntity defaultUserInfoEntity];
 //    entity.isLogin = NO;
     //发送网络请求查看登录状态
@@ -77,7 +77,7 @@ NSString *const determineLogin = @"/auth/check_login";
         //发送失败提示失败信息
         [SVProgressHUD showErrorWithStatus:error.localizedDescription];
     }];
-//
+//--------------------------------------------------------
     
     
     
