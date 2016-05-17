@@ -57,7 +57,7 @@ static NSString *const URLReleaseFiuScenen = @"/scene_scene/save";
         [SVProgressHUD showInfoWithStatus:@"填写未完成"];
 
     } else {
-        [SVProgressHUD show];
+        [SVProgressHUD showWithMaskType:SVProgressHUDMaskTypeBlack];
         NSData * imageData = UIImageJPEGRepresentation(self.scenceView.imageView.image, 1);
         NSString * icon64Str = [imageData base64EncodedStringWithOptions:NSDataBase64Encoding64CharacterLineLength];
         NSDictionary * paramDict = @{
@@ -98,7 +98,7 @@ static NSString *const URLReleaseFiuScenen = @"/scene_scene/save";
     if ([self.lng length] <= 0 || [title isEqualToString:@""] || [des isEqualToString:@""] || [self.addView.location.text isEqualToString:@""] || self.tagS.length <=0) {
         [SVProgressHUD showInfoWithStatus:@"填写未完成"];
     } else {
-        [SVProgressHUD show];
+        [SVProgressHUD showWithMaskType:SVProgressHUDMaskTypeBlack];
         NSData * imageData = UIImageJPEGRepresentation(self.scenceView.imageView.image, 0.5);
         NSString * icon64Str = [imageData base64EncodedStringWithOptions:NSDataBase64Encoding64CharacterLineLength];
         NSDictionary * paramDict = @{

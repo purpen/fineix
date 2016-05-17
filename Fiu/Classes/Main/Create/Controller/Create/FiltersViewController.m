@@ -62,7 +62,7 @@ static NSString *const URLUserAddGoods = @"/scene_product/add";
         [self.goodsIdData removeObject:ids];
         
     } failure:^(FBRequest *request, NSError *error) {
-        [SVProgressHUD showErrorWithStatus:[error localizedDescription]];
+        NSLog(@"%@", error);
     }];
 }
 
