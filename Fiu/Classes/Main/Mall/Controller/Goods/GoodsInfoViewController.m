@@ -131,8 +131,7 @@ static NSString *const URLGoodsScene = @"/sight_and_product/getlist";
 - (void)buyCarBtnClick {
     if (self.goodsInfo.attrbute == 1) {
         FBGoodsInfoViewController * thnGoodsVC = [[FBGoodsInfoViewController alloc] init];
-//        thnGoodsVC.goodsID = self.thnGoodsId;
-        thnGoodsVC.goodsID = @"1011497002";
+        thnGoodsVC.goodsID = self.thnGoodsId;
         [self.navigationController pushViewController:thnGoodsVC animated:YES];
     
     } else {

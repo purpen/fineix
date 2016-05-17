@@ -8,6 +8,8 @@
 
 #import "GoodsCarViewController.h"
 
+static NSString *const URLGoodsCar = @"/shopping/fetch_cart";
+
 @interface GoodsCarViewController ()
 
 @end
@@ -26,6 +28,20 @@
     
     [self setGoodsCarVcUI];
     
+    [self networkGoodsCarList];
+    
+}
+
+#pragma mark - 网络请求
+#pragma mark 购物车列表
+- (void)networkGoodsCarList {
+    self.goodsCarRequest = [FBAPI getWithUrlString:URLGoodsCar requestDictionary:nil delegate:self];
+    [self.goodsCarRequest startRequestSuccess:^(FBRequest *request, id result) {
+        NSLog(@"＝＝＝＝＝＝＝＝＝＝＝＝ 购物车列表：%@", result);
+        
+    } failure:^(FBRequest *request, NSError *error) {
+        [SVProgressHUD showErrorWithStatus:[error localizedDescription]];
+    }];
 }
 
 #pragma mark - 

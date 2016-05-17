@@ -28,6 +28,7 @@ static NSString *const URLLikeScenePeople = @"/favorite";
 static NSString *const URLLikeScene = @"/favorite/ajax_sight_love";
 static NSString *const URLCancelLike = @"/favorite/ajax_cancel_sight_love";
 static NSString *const URLSceneGoods = @"/scene_product/getlist";
+static NSString *const URLWantBuy = @"/scene_product/sight_click_stat";
 
 @interface SceneInfoViewController ()
 
@@ -189,6 +190,16 @@ static NSString *const URLSceneGoods = @"/scene_product/getlist";
         
     } failure:^(FBRequest *request, NSError *error) {
         [SVProgressHUD showErrorWithStatus:[error localizedDescription]];
+    }];
+}
+
+#pragma mark 想购买产品统计
+- (void)networkWantBuyData:(NSString *)goodsId {
+    self.wantBuyRequest = [FBAPI postWithUrlString:URLWantBuy requestDictionary:@{@"id":goodsId} delegate:self];
+    [self.wantBuyRequest startRequestSuccess:^(FBRequest *request, id result) {
+        NSLog(@"%@",result);
+    } failure:^(FBRequest *request, NSError *error) {
+        NSLog(@"%@",error);
     }];
 }
 
@@ -394,7 +405,11 @@ static NSString *const URLSceneGoods = @"/scene_product/getlist";
     } else if (section == 2) {
         [self.headerView addGroupHeaderViewIcon:@"Group_scene" withTitle:@"此场景下的商品" withSubtitle:@""];
     } else if (section == 3) {
-        [self.headerView addGroupHeaderViewIcon:@"Group_scene" withTitle:@"相近的商品" withSubtitle:@""];
+        if (self.reGoodsList.count == 0) {
+            [self.headerView addGroupHeaderViewIcon:@"" withTitle:@"" withSubtitle:@""];
+        } else {
+            [self.headerView addGroupHeaderViewIcon:@"Group_scene" withTitle:@"相近的商品" withSubtitle:@""];
+        }
     }
     
     return self.headerView;
@@ -410,6 +425,7 @@ static NSString *const URLSceneGoods = @"/scene_product/getlist";
         GoodsInfoViewController * goodsInfoVC = [[GoodsInfoViewController alloc] init];
         goodsInfoVC.goodsID = self.goodsIdList[indexPath.row];
         [self.navigationController pushViewController:goodsInfoVC animated:YES];
+        [self networkWantBuyData:self.goodsIdList[indexPath.row]];
     } else if (indexPath.section == 3) {
         GoodsInfoViewController * goodsInfoVC = [[GoodsInfoViewController alloc] init];
         goodsInfoVC.goodsID = self.reGoodsIdList[indexPath.row];

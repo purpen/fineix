@@ -12,12 +12,13 @@
 #import <SVProgressHUD/SVProgressHUD.h>
 #import <MJRefresh/MJRefresh.h>
 
-typedef void(^GetImgBlock)(NSString * imgUrl);
+typedef void(^GetImgBlock)(NSString * imgUrl, NSString * title, NSString * price, NSString * ids);
 
 @interface MarkGoodsViewController : FBPictureViewController <FBSearchDelegate, FBMenuViewDelegate, UICollectionViewDelegate, UICollectionViewDataSource>
 
 @pro_strong FBRequest               *   markGoodsRequest;
 @pro_strong FBRequest               *   goodsDataRequest;
+@pro_strong FBRequest               *   searchRequest;
 @pro_assign NSInteger                   currentpageNum;
 @pro_assign NSInteger                   totalPageNum;
 

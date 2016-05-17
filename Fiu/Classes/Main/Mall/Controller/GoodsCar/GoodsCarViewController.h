@@ -8,9 +8,11 @@
 
 #import "FBViewController.h"
 #import "BuyCarDefault.h"
+#import <SVProgressHUD/SVProgressHUD.h>
 
 @interface GoodsCarViewController : FBViewController
 
+@pro_strong FBRequest               *   goodsCarRequest;
 @pro_strong BuyCarDefault           *   defaultCarView;     //  没有商品的购物车背景
 
 @end

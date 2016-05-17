@@ -146,12 +146,6 @@
 		1FE60E661CD33E4700045117 /* MessagesssViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1FE60E641CD33E4700045117 /* MessagesssViewController.xib */; };
 		1FE60E781CD3E31D00045117 /* FindFriendModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 1FE60E771CD3E31D00045117 /* FindFriendModel.m */; };
 		1FE60E7B1CD3E6DC00045117 /* FindSceneModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 1FE60E7A1CD3E6DC00045117 /* FindSceneModel.m */; };
-		1FE701EF1CEB2C29000BA84A /* IdentityTagsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1FE701ED1CEB2C29000BA84A /* IdentityTagsViewController.m */; };
-		1FE701F01CEB2C29000BA84A /* IdentityTagsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1FE701EE1CEB2C29000BA84A /* IdentityTagsViewController.xib */; };
-		1FE701F31CEB4BDF000BA84A /* IdentityTagModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 1FE701F21CEB4BDF000BA84A /* IdentityTagModel.m */; };
-		1FE701F61CEB50FD000BA84A /* TagsCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 1FE701F51CEB50FD000BA84A /* TagsCollectionViewCell.m */; };
-		1FE701FA1CEB7638000BA84A /* TheOfficialCertificationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1FE701F81CEB7638000BA84A /* TheOfficialCertificationViewController.m */; };
-		1FE701FB1CEB7638000BA84A /* TheOfficialCertificationViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1FE701F91CEB7638000BA84A /* TheOfficialCertificationViewController.xib */; };
 		1FEB71721CC8802800CF34F3 /* InvitationModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 1FEB71711CC8802800CF34F3 /* InvitationModel.m */; };
 		1FEB71751CC88B5D00CF34F3 /* FindeFirendTwoModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 1FEB71741CC88B5D00CF34F3 /* FindeFirendTwoModel.m */; };
 		1FEB71781CC8A35A00CF34F3 /* QRCodeScanViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1FEB71771CC8A35A00CF34F3 /* QRCodeScanViewController.m */; };
@@ -332,6 +326,13 @@
 		D86AFDEC1CBF84DB006F1602 /* SearchSceneTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D86AFDEB1CBF84DB006F1602 /* SearchSceneTableViewCell.m */; };
 		D86AFDEF1CBFAFC2006F1602 /* UserHeaderTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D86AFDEE1CBFAFC2006F1602 /* UserHeaderTableViewCell.m */; };
 		D86AFDF21CC0BBC3006F1602 /* FBSearchView.m in Sources */ = {isa = PBXBuildFile; fileRef = D86AFDF01CC0BBC3006F1602 /* FBSearchView.m */; };
+		D86B7B6C1CEB0FA30019AB79 /* FBSureOrderViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D86B7B6B1CEB0FA30019AB79 /* FBSureOrderViewController.m */; };
+		D86B7B701CEB1F940019AB79 /* OrderItems.m in Sources */ = {isa = PBXBuildFile; fileRef = D86B7B6F1CEB1F940019AB79 /* OrderItems.m */; };
+		D86B7B741CEB21560019AB79 /* FBUserAddressTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D86B7B731CEB21560019AB79 /* FBUserAddressTableViewCell.m */; };
+		D86B7B771CEB26750019AB79 /* FbGoodsItemsTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D86B7B761CEB26750019AB79 /* FbGoodsItemsTableViewCell.m */; };
+		D86B7B7A1CEB27C30019AB79 /* FBOrderOtherTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D86B7B791CEB27C30019AB79 /* FBOrderOtherTableViewCell.m */; };
+		D86B7B801CEB2F610019AB79 /* FBOrderTimeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D86B7B7F1CEB2F610019AB79 /* FBOrderTimeViewController.m */; };
+		D86B7B831CEB2F770019AB79 /* FBOrderSendWayViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D86B7B821CEB2F770019AB79 /* FBOrderSendWayViewController.m */; };
 		D87B69BF1CC726BA00199EFE /* FBRollImages.m in Sources */ = {isa = PBXBuildFile; fileRef = D87B69BB1CC726BA00199EFE /* FBRollImages.m */; };
 		D87B69C01CC726BA00199EFE /* GroupHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = D87B69BD1CC726BA00199EFE /* GroupHeaderView.m */; };
 		D87B69D11CC726D500199EFE /* FBAlertViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D87B69C51CC726D500199EFE /* FBAlertViewController.m */; };
@@ -680,16 +681,6 @@
 		1FE60E771CD3E31D00045117 /* FindFriendModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FindFriendModel.m; sourceTree = "<group>"; };
 		1FE60E791CD3E6DC00045117 /* FindSceneModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FindSceneModel.h; sourceTree = "<group>"; };
 		1FE60E7A1CD3E6DC00045117 /* FindSceneModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FindSceneModel.m; sourceTree = "<group>"; };
-		1FE701EC1CEB2C29000BA84A /* IdentityTagsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IdentityTagsViewController.h; sourceTree = "<group>"; };
-		1FE701ED1CEB2C29000BA84A /* IdentityTagsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IdentityTagsViewController.m; sourceTree = "<group>"; };
-		1FE701EE1CEB2C29000BA84A /* IdentityTagsViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = IdentityTagsViewController.xib; sourceTree = "<group>"; };
-		1FE701F11CEB4BDF000BA84A /* IdentityTagModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IdentityTagModel.h; sourceTree = "<group>"; };
-		1FE701F21CEB4BDF000BA84A /* IdentityTagModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IdentityTagModel.m; sourceTree = "<group>"; };
-		1FE701F41CEB50FD000BA84A /* TagsCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TagsCollectionViewCell.h; sourceTree = "<group>"; };
-		1FE701F51CEB50FD000BA84A /* TagsCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TagsCollectionViewCell.m; sourceTree = "<group>"; };
-		1FE701F71CEB7638000BA84A /* TheOfficialCertificationViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TheOfficialCertificationViewController.h; sourceTree = "<group>"; };
-		1FE701F81CEB7638000BA84A /* TheOfficialCertificationViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TheOfficialCertificationViewController.m; sourceTree = "<group>"; };
-		1FE701F91CEB7638000BA84A /* TheOfficialCertificationViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TheOfficialCertificationViewController.xib; sourceTree = "<group>"; };
 		1FEB71701CC8802800CF34F3 /* InvitationModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InvitationModel.h; sourceTree = "<group>"; };
 		1FEB71711CC8802800CF34F3 /* InvitationModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InvitationModel.m; sourceTree = "<group>"; };
 		1FEB71731CC88B5D00CF34F3 /* FindeFirendTwoModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FindeFirendTwoModel.h; sourceTree = "<group>"; };
@@ -1023,6 +1014,20 @@
 		D86AFDEE1CBFAFC2006F1602 /* UserHeaderTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserHeaderTableViewCell.m; sourceTree = "<group>"; };
 		D86AFDF01CC0BBC3006F1602 /* FBSearchView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FBSearchView.m; sourceTree = "<group>"; };
 		D86AFDF11CC0BBC3006F1602 /* FBSearchView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FBSearchView.h; sourceTree = "<group>"; };
+		D86B7B6A1CEB0FA30019AB79 /* FBSureOrderViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FBSureOrderViewController.h; sourceTree = "<group>"; };
+		D86B7B6B1CEB0FA30019AB79 /* FBSureOrderViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FBSureOrderViewController.m; sourceTree = "<group>"; };
+		D86B7B6E1CEB1F940019AB79 /* OrderItems.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OrderItems.h; sourceTree = "<group>"; };
+		D86B7B6F1CEB1F940019AB79 /* OrderItems.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OrderItems.m; sourceTree = "<group>"; };
+		D86B7B721CEB21560019AB79 /* FBUserAddressTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FBUserAddressTableViewCell.h; sourceTree = "<group>"; };
+		D86B7B731CEB21560019AB79 /* FBUserAddressTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FBUserAddressTableViewCell.m; sourceTree = "<group>"; };
+		D86B7B751CEB26750019AB79 /* FBGoodsItemsTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FBGoodsItemsTableViewCell.h; sourceTree = "<group>"; };
+		D86B7B761CEB26750019AB79 /* FbGoodsItemsTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FbGoodsItemsTableViewCell.m; sourceTree = "<group>"; };
+		D86B7B781CEB27C30019AB79 /* FBOrderOtherTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FBOrderOtherTableViewCell.h; sourceTree = "<group>"; };
+		D86B7B791CEB27C30019AB79 /* FBOrderOtherTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FBOrderOtherTableViewCell.m; sourceTree = "<group>"; };
+		D86B7B7E1CEB2F610019AB79 /* FBOrderTimeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FBOrderTimeViewController.h; sourceTree = "<group>"; };
+		D86B7B7F1CEB2F610019AB79 /* FBOrderTimeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FBOrderTimeViewController.m; sourceTree = "<group>"; };
+		D86B7B811CEB2F770019AB79 /* FBOrderSendWayViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FBOrderSendWayViewController.h; sourceTree = "<group>"; };
+		D86B7B821CEB2F770019AB79 /* FBOrderSendWayViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FBOrderSendWayViewController.m; sourceTree = "<group>"; };
 		D87B69BA1CC726BA00199EFE /* FBRollImages.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FBRollImages.h; sourceTree = "<group>"; };
 		D87B69BB1CC726BA00199EFE /* FBRollImages.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FBRollImages.m; sourceTree = "<group>"; };
 		D87B69BC1CC726BA00199EFE /* GroupHeaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GroupHeaderView.h; sourceTree = "<group>"; };
@@ -1667,47 +1672,6 @@
 			path = View;
 			sourceTree = "<group>";
 		};
-		1FE701E81CEB2C04000BA84A /* Certification */ = {
-			isa = PBXGroup;
-			children = (
-				1FE701E91CEB2C04000BA84A /* Controller */,
-				1FE701EA1CEB2C04000BA84A /* Model */,
-				1FE701EB1CEB2C04000BA84A /* View */,
-			);
-			path = Certification;
-			sourceTree = "<group>";
-		};
-		1FE701E91CEB2C04000BA84A /* Controller */ = {
-			isa = PBXGroup;
-			children = (
-				1FE701EC1CEB2C29000BA84A /* IdentityTagsViewController.h */,
-				1FE701ED1CEB2C29000BA84A /* IdentityTagsViewController.m */,
-				1FE701EE1CEB2C29000BA84A /* IdentityTagsViewController.xib */,
-				1FE701F71CEB7638000BA84A /* TheOfficialCertificationViewController.h */,
-				1FE701F81CEB7638000BA84A /* TheOfficialCertificationViewController.m */,
-				1FE701F91CEB7638000BA84A /* TheOfficialCertificationViewController.xib */,
-			);
-			path = Controller;
-			sourceTree = "<group>";
-		};
-		1FE701EA1CEB2C04000BA84A /* Model */ = {
-			isa = PBXGroup;
-			children = (
-				1FE701F11CEB4BDF000BA84A /* IdentityTagModel.h */,
-				1FE701F21CEB4BDF000BA84A /* IdentityTagModel.m */,
-			);
-			path = Model;
-			sourceTree = "<group>";
-		};
-		1FE701EB1CEB2C04000BA84A /* View */ = {
-			isa = PBXGroup;
-			children = (
-				1FE701F41CEB50FD000BA84A /* TagsCollectionViewCell.h */,
-				1FE701F51CEB50FD000BA84A /* TagsCollectionViewCell.m */,
-			);
-			path = View;
-			sourceTree = "<group>";
-		};
 		1FEF0AD11CC0FC15006EF0C6 /* My */ = {
 			isa = PBXGroup;
 			children = (
@@ -1956,7 +1920,6 @@
 		D8035FA01CBD1021001920F9 /* Other */ = {
 			isa = PBXGroup;
 			children = (
-				1FE701E81CEB2C04000BA84A /* Certification */,
 				1F8EACE11CDDD19E00C51235 /* Pay */,
 				1FC678161CDAF9B200535162 /* DeliveryAddress */,
 				1FC677F61CDAE75C00535162 /* Bonus */,
@@ -2040,6 +2003,7 @@
 		D8035FD81CBDEB17001920F9 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				D86B7B711CEB21400019AB79 /* Order */,
 				D8363A731CD8821400CC4AC0 /* Brand */,
 				D8363A341CD8814600CC4AC0 /* CollectionViewCell */,
 				D8363A391CD8814600CC4AC0 /* Category */,
@@ -2598,6 +2562,7 @@
 		D83639D31CD1B81900CC4AC0 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				D86B7B6D1CEB1F890019AB79 /* Order */,
 				D8A9ADEA1CDAF41200A9FCFB /* ChildTags */,
 				D8363A0A1CD8809400CC4AC0 /* Brand */,
 				D8363A0F1CD8809400CC4AC0 /* Goods */,
@@ -2734,14 +2699,20 @@
 		D8363A5F1CD8818E00CC4AC0 /* Goods */ = {
 			isa = PBXGroup;
 			children = (
+				D8A9AEAB1CE9D0A200A9FCFB /* FBGoodsCommentViewController.h */,
+				D8A9AEAC1CE9D0A200A9FCFB /* FBGoodsCommentViewController.m */,
 				D8363A601CD8818E00CC4AC0 /* GoodsInfoViewController.h */,
 				D8363A611CD8818E00CC4AC0 /* GoodsInfoViewController.m */,
 				D8A9AE8D1CE9A80D00A9FCFB /* FBGoodsInfoViewController.h */,
 				D8A9AE8E1CE9A80D00A9FCFB /* FBGoodsInfoViewController.m */,
-				D8A9AEAB1CE9D0A200A9FCFB /* FBGoodsCommentViewController.h */,
-				D8A9AEAC1CE9D0A200A9FCFB /* FBGoodsCommentViewController.m */,
 				D8A9AEAE1CE9D46200A9FCFB /* FBBuyGoodsViewController.h */,
 				D8A9AEAF1CE9D46200A9FCFB /* FBBuyGoodsViewController.m */,
+				D86B7B6A1CEB0FA30019AB79 /* FBSureOrderViewController.h */,
+				D86B7B6B1CEB0FA30019AB79 /* FBSureOrderViewController.m */,
+				D86B7B811CEB2F770019AB79 /* FBOrderSendWayViewController.h */,
+				D86B7B821CEB2F770019AB79 /* FBOrderSendWayViewController.m */,
+				D86B7B7E1CEB2F610019AB79 /* FBOrderTimeViewController.h */,
+				D86B7B7F1CEB2F610019AB79 /* FBOrderTimeViewController.m */,
 			);
 			path = Goods;
 			sourceTree = "<group>";
@@ -2882,6 +2853,28 @@
 				D8363AB51CD8835D00CC4AC0 /* HomeSceneListUser.m */,
 			);
 			path = Home;
+			sourceTree = "<group>";
+		};
+		D86B7B6D1CEB1F890019AB79 /* Order */ = {
+			isa = PBXGroup;
+			children = (
+				D86B7B6E1CEB1F940019AB79 /* OrderItems.h */,
+				D86B7B6F1CEB1F940019AB79 /* OrderItems.m */,
+			);
+			path = Order;
+			sourceTree = "<group>";
+		};
+		D86B7B711CEB21400019AB79 /* Order */ = {
+			isa = PBXGroup;
+			children = (
+				D86B7B721CEB21560019AB79 /* FBUserAddressTableViewCell.h */,
+				D86B7B731CEB21560019AB79 /* FBUserAddressTableViewCell.m */,
+				D86B7B751CEB26750019AB79 /* FBGoodsItemsTableViewCell.h */,
+				D86B7B761CEB26750019AB79 /* FbGoodsItemsTableViewCell.m */,
+				D86B7B781CEB27C30019AB79 /* FBOrderOtherTableViewCell.h */,
+				D86B7B791CEB27C30019AB79 /* FBOrderOtherTableViewCell.m */,
+			);
+			path = Order;
 			sourceTree = "<group>";
 		};
 		D87B69B91CC726BA00199EFE /* Category */ = {
@@ -3479,7 +3472,6 @@
 				1F18376C1CCDE95A00933CA7 /* ModifyGenderViewController.xib in Resources */,
 				1FC678261CDB000200535162 /* DeliveryAddressCell.xib in Resources */,
 				1F223B1D1CD714F3007687F7 /* messages.plist in Resources */,
-				1FE701FB1CEB7638000BA84A /* TheOfficialCertificationViewController.xib in Resources */,
 				1F35F0491CD1FF630000DB95 /* DatePickerViewController.xib in Resources */,
 				D803605A1CBF376B001920F9 /* Signup.xib in Resources */,
 				1F3C0A851CBF760C00B84FEB /* SubscribePeopleViewController.xib in Resources */,
@@ -3540,7 +3532,6 @@
 				1F8921E61CE5609E00267F44 /* QrShareSheetViewController.xib in Resources */,
 				1F27AE9C1CE0EACE005A434B /* mapapi.bundle in Resources */,
 				1FFFFF221CD055BB008E1CDC /* OptionViewController.xib in Resources */,
-				1FE701F01CEB2C29000BA84A /* IdentityTagsViewController.xib in Resources */,
 				1F8EACDB1CDDA09200C51235 /* RefundmentViewController.xib in Resources */,
 				1FC678101CDAECE500535162 /* BonusCell.xib in Resources */,
 				1F1837761CCDFCB200933CA7 /* ChangeSumaryViewController.xib in Resources */,
@@ -3675,7 +3666,6 @@
 				1FFFFF331CD055F2008E1CDC /* AXModel.m in Sources */,
 				D8363ABE1CD8835D00CC4AC0 /* HomeSceneListData.m in Sources */,
 				D8A9ACD41CD8A46900A9FCFB /* FiuTagTableViewCell.m in Sources */,
-				1FE701F31CEB4BDF000BA84A /* IdentityTagModel.m in Sources */,
 				1F35F04D1CD22D7A0000DB95 /* AddreesPickerViewController.m in Sources */,
 				D80360401CBF376B001920F9 /* FBLoginViewController.m in Sources */,
 				D8363A271CD8809400CC4AC0 /* BrandInfo.m in Sources */,
@@ -3693,6 +3683,7 @@
 				D87B69D21CC726D500199EFE /* FBSheetViewController.m in Sources */,
 				1FFFFF311CD055F2008E1CDC /* DirectMessagesViewController.m in Sources */,
 				D8A9AEAD1CE9D0A200A9FCFB /* FBGoodsCommentViewController.m in Sources */,
+				D86B7B771CEB26750019AB79 /* FbGoodsItemsTableViewCell.m in Sources */,
 				D8A9AEA71CE9CA9F00A9FCFB /* GoodsRelationProducts.m in Sources */,
 				D8A9ADC21CD9E2E700A9FCFB /* FiltersViewController.m in Sources */,
 				D8A9ADE51CD9F92B00A9FCFB /* FBFilters.m in Sources */,
@@ -3709,6 +3700,7 @@
 				D8A9AE611CE4813700A9FCFB /* FBSticker.m in Sources */,
 				D8A9AE7A1CE74A7D00A9FCFB /* FiuPeopleCounter.m in Sources */,
 				D8A9ACF31CD8B74D00A9FCFB /* LikeOrSuPeopleData.m in Sources */,
+				D86B7B701CEB1F940019AB79 /* OrderItems.m in Sources */,
 				1F5038A91CDC406C004F76AD /* CommentView.m in Sources */,
 				D81281661CAA8532007CF08B /* JKDBHelper.m in Sources */,
 				D8363A721CD881B200CC4AC0 /* MallViewController.m in Sources */,
@@ -3749,6 +3741,7 @@
 				1FEE50F71CE235FD00B8A292 /* PaySuccessViewController.m in Sources */,
 				D8A9AE8F1CE9A80D00A9FCFB /* FBGoodsInfoViewController.m in Sources */,
 				D8A9AE1C1CE0772700A9FCFB /* UsedTagCollectionViewCell.m in Sources */,
+				D86B7B741CEB21560019AB79 /* FBUserAddressTableViewCell.m in Sources */,
 				D812815E1CAA8532007CF08B /* main.m in Sources */,
 				D8A9AEB01CE9D46200A9FCFB /* FBBuyGoodsViewController.m in Sources */,
 				1FE60E5B1CD32FD200045117 /* CommentsTableViewCell.m in Sources */,
@@ -3767,7 +3760,6 @@
 				1F5038B31CDC40EE004F76AD /* ExpressInfoModel.m in Sources */,
 				1F8921E51CE5609E00267F44 /* QrShareSheetViewController.m in Sources */,
 				D8A9ACB01CD89E0000A9FCFB /* RollImageData.m in Sources */,
-				1FE701EF1CEB2C29000BA84A /* IdentityTagsViewController.m in Sources */,
 				1F5038CF1CDCF438004F76AD /* ReturnViewController.m in Sources */,
 				1FEE50ED1CE1893B00B8A292 /* AllNearbyScenarioViewController.m in Sources */,
 				1FBE626D1CC4D095009606F7 /* FocusOnTableViewCell.m in Sources */,
@@ -3776,6 +3768,7 @@
 				D87B69E11CC7274900199EFE /* FBMenuView.m in Sources */,
 				1F18376B1CCDE95A00933CA7 /* ModifyGenderViewController.m in Sources */,
 				1FCE90591CD9E0780029E4BA /* ShieldingViewController.m in Sources */,
+				D86B7B801CEB2F610019AB79 /* FBOrderTimeViewController.m in Sources */,
 				D83639AF1CD0660E00CC4AC0 /* FBMapLocatinViewController.m in Sources */,
 				D8A9ACD21CD8A46900A9FCFB /* FiuSceneCollectionViewCell.m in Sources */,
 				D8A9AD881CD9DFBC00A9FCFB /* FBFiltersCollectionViewCell.m in Sources */,
@@ -3829,12 +3822,13 @@
 				D8A9AEA21CE9B76000A9FCFB /* CommentModelId.m in Sources */,
 				D8A9ACB21CD89E0000A9FCFB /* FiuScene.m in Sources */,
 				D8363A6E1CD8818E00CC4AC0 /* GoodsBrandViewController.m in Sources */,
-				1FE701FA1CEB7638000BA84A /* TheOfficialCertificationViewController.m in Sources */,
+				D86B7B7A1CEB27C30019AB79 /* FBOrderOtherTableViewCell.m in Sources */,
 				D8363A6B1CD8818E00CC4AC0 /* GoodsInfoViewController.m in Sources */,
 				D81281671CAA8532007CF08B /* JKDBModel.m in Sources */,
 				1FE60E421CD3226400045117 /* MessageViewController.m in Sources */,
 				D8A9AEA41CE9B76000A9FCFB /* CommentModelUser.m in Sources */,
 				1F7B29361CD5F50500482D84 /* MyOderModel.m in Sources */,
+				D86B7B831CEB2F770019AB79 /* FBOrderSendWayViewController.m in Sources */,
 				D80360501CBF376B001920F9 /* UserInfoEntity.m in Sources */,
 				1F07A64A1CC77F3B00CF225F /* ScenceListCollectionViewCell.m in Sources */,
 				D8A9ADC11CD9E2E700A9FCFB /* CropImageViewController.m in Sources */,
@@ -3876,7 +3870,6 @@
 				1FEB71781CC8A35A00CF34F3 /* QRCodeScanViewController.m in Sources */,
 				D8A9ACE11CD8A49100A9FCFB /* DiscoverViewController.m in Sources */,
 				D803605B1CBF376B001920F9 /* SignupView.m in Sources */,
-				1FE701F61CEB50FD000BA84A /* TagsCollectionViewCell.m in Sources */,
 				1FCE90631CDA06630029E4BA /* MentionedViewController.m in Sources */,
 				D8363A951CD8832100CC4AC0 /* DataNumTableViewCell.m in Sources */,
 				D8363ABD1CD8835D00CC4AC0 /* HomeSceneListCounter.m in Sources */,
@@ -3907,6 +3900,7 @@
 				D8363A591CD8814600CC4AC0 /* InfoGoodsHighlightsTableViewCell.m in Sources */,
 				1FE60E391CD30A2100045117 /* MyOderInfoViewController.m in Sources */,
 				1FE60E2F1CD301BC00045117 /* AllOderViewController.m in Sources */,
+				D86B7B6C1CEB0FA30019AB79 /* FBSureOrderViewController.m in Sources */,
 				D8A9ACF41CD8B74D00A9FCFB /* LikeOrSuPeopleRow.m in Sources */,
 				D8A9ACB51CD89E0000A9FCFB /* FiuSceneInfoCounter.m in Sources */,
 				D81281101CAA8532007CF08B /* AppDelegate.mm in Sources */,
@@ -4013,7 +4007,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 9.2;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
-				PROVISIONING_PROFILE = "bedd3589-3e72-4b5f-9457-915cc83ecf78";
+				PROVISIONING_PROFILE = "5b29b37c-aff0-4f5d-9cfe-ce8fc658ba8d";
 				SDKROOT = iphoneos;
 			};
 			name = Debug;
@@ -4035,7 +4029,7 @@
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				CODE_SIGN_IDENTITY = "";
+				CODE_SIGN_IDENTITY = "iPhone Developer: Xiaoyi Tian (65JXH7V6N9)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Xiaoyi Tian (65JXH7V6N9)";
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
@@ -4051,7 +4045,7 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.2;
 				MTL_ENABLE_DEBUG_INFO = NO;
-				PROVISIONING_PROFILE = "bedd3589-3e72-4b5f-9457-915cc83ecf78";
+				PROVISIONING_PROFILE = "5b29b37c-aff0-4f5d-9cfe-ce8fc658ba8d";
 				SDKROOT = iphoneos;
 				VALIDATE_PRODUCT = YES;
 			};
@@ -4092,7 +4086,7 @@
 				OTHER_LIBTOOLFLAGS = "";
 				PRODUCT_BUNDLE_IDENTIFIER = com.THN.fineix;
 				PRODUCT_NAME = Fiu;
-				PROVISIONING_PROFILE = "bedd3589-3e72-4b5f-9457-915cc83ecf78";
+				PROVISIONING_PROFILE = "5b29b37c-aff0-4f5d-9cfe-ce8fc658ba8d";
 				USER_HEADER_SEARCH_PATHS = "$(SRCROOT)";
 			};
 			name = Debug;
@@ -4132,7 +4126,7 @@
 				OTHER_LIBTOOLFLAGS = "";
 				PRODUCT_BUNDLE_IDENTIFIER = com.THN.fineix;
 				PRODUCT_NAME = Fiu;
-				PROVISIONING_PROFILE = "bedd3589-3e72-4b5f-9457-915cc83ecf78";
+				PROVISIONING_PROFILE = "5b29b37c-aff0-4f5d-9cfe-ce8fc658ba8d";
 				USER_HEADER_SEARCH_PATHS = "$(SRCROOT)";
 			};
 			name = Release;

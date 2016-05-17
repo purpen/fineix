@@ -43,6 +43,13 @@ static NSString *const URLFiuPeople = @"/user/find_user";
     
     [self setNavigationViewUI];
     
+    //  frome #import "ReleaseViewController.h"
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(refreshHomeTable) name:@"refreshHomeList" object:nil];
+}
+
+#pragma mark - 刷新列表
+- (void)refreshHomeTable {
+    [self.discoverTableView.mj_header beginRefreshing];
 }
 
 - (void)viewDidLoad {
@@ -212,6 +219,7 @@ static NSString *const URLFiuPeople = @"/user/find_user";
             [self networkFiuSceneData];
             self.currentpageNum = 0;
             [self networkSceneListData];
+            [self networkFiuPeopleData];
         }];
     }
     return _discoverTableView;
@@ -414,6 +422,10 @@ static NSString *const URLFiuPeople = @"/user/find_user";
 - (void)viewWillDisappear:(BOOL)animated {
     [super viewWillDisappear:animated];
     [SVProgressHUD dismiss];
+}
+
+- (void)dealloc {
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:@"refreshHomeTable" object:nil];
 }
 
 @end

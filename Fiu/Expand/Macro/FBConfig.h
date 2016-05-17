@@ -15,6 +15,7 @@
 
 #define kAppDebug 1
 
+#define KAppType              @"2"
 #define kChannel              @"appstore"
 // 客户端版本
 #define kClientVersion        @"2.1.0"
