@@ -23,7 +23,7 @@ static NSString *const URLBuying = @"/shopping/now_buy";
 static NSString *const URLUserAddress = @"/shopping/default_address";
 static NSString *const URLSureOrder = @"/shopping/confirm";
 
-@interface FBSureOrderViewController () {
+@interface FBSureOrderViewController ()<BounsDelegate> {
     NSString * _rrid;
     NSString * _addbookId;
     NSString * _isNowbuy;
@@ -289,6 +289,7 @@ static NSString *const URLSureOrder = @"/shopping/confirm";
     
     } else if (indexPath.section == 4) {
         BonusViewController * bonusVC = [[BonusViewController alloc] init];
+        bonusVC.rid = _rrid;
         [self.navigationController pushViewController:bonusVC animated:YES];
     }
     

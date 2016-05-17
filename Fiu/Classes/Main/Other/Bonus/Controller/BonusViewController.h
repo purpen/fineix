@@ -8,6 +8,15 @@
 
 #import "FBViewController.h"
 
+@protocol BounsDelegate <NSObject>
+
+-(void)getBounsCode:(NSString *)code andBounsNum:(NSNumber*)amount;
+
+@end
+
 @interface BonusViewController : FBViewController
+
+@property(nonatomic,strong) NSString *rid;
+@property(nonatomic,weak) id<BounsDelegate>bounsDelegate;
 
 @end
