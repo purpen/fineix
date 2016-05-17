@@ -97,13 +97,13 @@ NSString *const LoginURL = @"/auth/login";//登录接口
 
 //点击发送验证码，判断手机号如果手机号正确发送验证码，并且重新发送view出现，并且开始跳字
 -(void)clikSendVerBtn:(UIButton*)sender{
-    //如果手机号正确，发送短信
-    NSDictionary *params = @{
-                             @"mobile":_signupView.phoneNumTF.text
-                             };
-    FBRequest *request = [FBAPI postWithUrlString:VerifyCodeURL requestDictionary:params delegate:self];
-    request.flag = VerifyCodeURL;
-    [request startRequest];
+//    //如果手机号正确，发送短信
+//    NSDictionary *params = @{
+//                             @"mobile":_signupView.phoneNumTF.text
+//                             };
+//    FBRequest *request = [FBAPI postWithUrlString:VerifyCodeURL requestDictionary:params delegate:self];
+//    request.flag = VerifyCodeURL;
+//    [request startRequest];
 
     if ([_signupView.phoneNumTF.text checkTel]) {
 
@@ -446,6 +446,7 @@ NSString *const LoginURL = @"/auth/login";//登录接口
             _signupView.hidden = YES;
         } completion:^(BOOL finished) {
             self.topView.hidden = NO;
+            [self.view endEditing:YES];
         }];
         
         

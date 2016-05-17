@@ -86,7 +86,11 @@
         CGSize size = [tipView.tipNumLabel.text sizeWithAttributes:@{NSFontAttributeName: [UIFont systemFontOfSize:12.0f]}];
         [self.evaluationBtn addSubview:tipView];
         [tipView mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.size.mas_equalTo(CGSizeMake(size.width+9, 15));
+            if ((size.width+9) > 15) {
+                make.size.mas_equalTo(CGSizeMake(size.width+9, 15));
+            }else{
+                make.size.mas_equalTo(CGSizeMake(15, 15));
+            }
             make.right.mas_equalTo(btn.mas_right).with.offset(-7/667.0*SCREEN_HEIGHT);
             make.top.mas_equalTo(btn.mas_top).with.offset(13/667.0*SCREEN_HEIGHT);
         }];

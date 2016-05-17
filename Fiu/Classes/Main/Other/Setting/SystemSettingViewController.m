@@ -46,7 +46,6 @@ static NSString *const logOut = @"/auth/logout";
     self.delegate = self;
     self.backBtn.layer.masksToBounds = YES;
     self.backBtn.layer.cornerRadius = 3;
-    
     //-----
     //更改通知状态的代理
     AppDelegate *appDelegate = (AppDelegate*)[UIApplication sharedApplication].delegate;
@@ -59,13 +58,17 @@ static NSString *const logOut = @"/auth/logout";
         self.pushStateLabel.text = @"已开启";
     }
     //-----
+    
     //清空缓存
-//    NSString *cachesPath = [NSSearchPathForDirectoriesInDomains(NSCachesDirectory, NSUserDomainMask, YES) firstObject];
-//    NSLog(@"内存  %f",[self folderSizeAtPath:cachesPath]);
-//    self.memoryLabel.text = [NSString stringWithFormat:@"%.1fM",[self folderSizeAtPath:cachesPath]];
     NSString * cachesPath = [NSSearchPathForDirectoriesInDomains(NSCachesDirectory, NSUserDomainMask, YES) firstObject];
     self.memoryLabel.text = [NSString stringWithFormat:@"%.1fM", [self folderSizeAtPath:cachesPath]];
 }
+
+-(void)viewWillAppear:(BOOL)animated{
+    [super viewWillAppear:animated];
+}
+
+
 - (IBAction)pushSetBtn:(UIButton *)sender {
     //推送设置
     [[UIApplication sharedApplication] openURL:[NSURL URLWithString:UIApplicationOpenSettingsURLString ]];
@@ -278,6 +281,15 @@ static NSString *const logOut = @"/auth/logout";
         [self.tabBarController setSelectedIndex:0];
     }
     
+}
+
+-(void)resetNotificationState{
+    UIUserNotificationSettings *setting = [[UIApplication sharedApplication] currentUserNotificationSettings];
+    if (setting.types == UIUserNotificationTypeNone) {
+        self.pushStateLabel.text = @"已关闭";
+    } else {
+        self.pushStateLabel.text = @"已开启";
+    }
 }
 
 - (void)didReceiveMemoryWarning {

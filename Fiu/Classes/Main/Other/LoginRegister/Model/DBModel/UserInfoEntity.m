@@ -43,6 +43,7 @@
     userInfo.follow_count = self.follow_count;
     userInfo.head_pic_url = self.head_pic_url;
     userInfo.is_love = self.is_love;
+    userInfo.isLogin = self.isLogin;
     
     dispatch_async(dispatch_get_global_queue(0, 0), ^{
         [userInfo saveOrUpdate];
@@ -67,6 +68,7 @@
     self.follow_count = @"";
     self.head_pic_url = @"";
     self.is_love = @0;
+    self.isLogin = NO;
 }
 
 @end

@@ -206,7 +206,6 @@ static NSString *const UpdateInfoURL = @"/my/update_profile";
 -(void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary<NSString *,id> *)info{
     UIImage * editedImg = [info objectForKey:UIImagePickerControllerEditedImage];
     NSData * iconData = UIImageJPEGRepresentation([UIImage fixOrientation:editedImg] , 0.5);
-    //        NSData * iconData = UIImageJPEGRepresentation(editedImg , 0.5);
     [self uploadIconWithData:iconData];
     [picker dismissViewControllerAnimated:YES completion:nil];
     

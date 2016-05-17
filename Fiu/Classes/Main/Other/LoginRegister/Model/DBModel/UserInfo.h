@@ -29,6 +29,7 @@
 @property(nonatomic,copy) NSString *follow_count;
 @property(nonatomic,copy) NSString *head_pic_url;
 @property(nonatomic,strong) NSNumber *is_love;
+@property(nonatomic,assign) BOOL isLogin;
 
 - (void)updateUserInfoEntity;
 
