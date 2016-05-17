@@ -11,6 +11,8 @@
 #import "GoodsInfoData.h"
 
 typedef void(^GetGoodsInfoModelBlock)(GoodsInfoData * model);
+typedef void(^BuyingGoodsBlock)(NSDictionary * orderData);
+typedef void(^AddGoodsCarBlock)(NSDictionary * addCarGoodsData);
 
 @interface FBBuyGoodsViewController : FBViewController <UICollectionViewDelegate, UICollectionViewDataSource>
 
@@ -27,7 +29,14 @@ typedef void(^GetGoodsInfoModelBlock)(GoodsInfoData * model);
 @pro_strong UIButton            *   addCarBtn;
 @pro_strong UICollectionView    *   goodsColorView;
 @pro_strong NSMutableArray      *   goodsSkus;
+@pro_assign NSInteger               num;
+@pro_assign NSInteger               quantity;
+@pro_strong UIButton            *   addBtn;
+@pro_strong UIButton            *   subBtn;
+@pro_strong NSString            *   skuId;
 
-@pro_strong GetGoodsInfoModelBlock getGoodsModel;
+@pro_strong GetGoodsInfoModelBlock  getGoodsModel;
+@pro_strong BuyingGoodsBlock        buyingGoodsBlock;
+@pro_strong AddGoodsCarBlock        addGoodsCarBlock;
 
 @end

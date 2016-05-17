@@ -112,6 +112,10 @@
 	if(![dictionary[@"love_count"] isKindOfClass:[NSNull class]]){
 		self.loveCount = [dictionary[@"love_count"] integerValue];
 	}
+    
+    if(![dictionary[@"inventory"] isKindOfClass:[NSNull class]]){
+        self.inventory = [dictionary[@"inventory"] integerValue];
+    }
 
 	if(![dictionary[@"market_price"] isKindOfClass:[NSNull class]]){
 		self.marketPrice = [dictionary[@"market_price"] floatValue];

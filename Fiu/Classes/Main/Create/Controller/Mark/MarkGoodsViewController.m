@@ -175,7 +175,8 @@ static NSString *const URLSearchGoods = @"/search/getlist";
 }
 
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
-    self.getImgBlock([self.goodsList valueForKey:@"coverUrl"][indexPath.row], [self.goodsList valueForKey:@"title"][indexPath.row], [NSString stringWithFormat:@"%@",[self.goodsList valueForKey:@"salePrice"][indexPath.row]], [NSString stringWithFormat:@"%@",[self.goodsList valueForKey:@"idField"][indexPath.row]]);
+    CGFloat salePrice = [[self.goodsList valueForKey:@"salePrice"][indexPath.row] floatValue];
+    self.getImgBlock([self.goodsList valueForKey:@"coverUrl"][indexPath.row], [self.goodsList valueForKey:@"title"][indexPath.row], [NSString stringWithFormat:@"%.2f",salePrice], [NSString stringWithFormat:@"%@",[self.goodsList valueForKey:@"idField"][indexPath.row]]);
     [self dismissViewControllerAnimated:YES completion:nil];
 }
 

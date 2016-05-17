@@ -52,7 +52,6 @@ static NSString *const URLAllFiuSceneList = @"/scene_scene/";
     [SVProgressHUD show];
     self.allSceneListRequest = [FBAPI getWithUrlString:URLAllFiuSceneList requestDictionary:@{@"stick":@"0", @"size":@"10", @"page":@(self.currentpageNum + 1)} delegate:self];
     [self.allSceneListRequest startRequestSuccess:^(FBRequest *request, id result) {
-        NSLog(@"全部情景：%@", result);
         NSArray * sceneArr = [[result valueForKey:@"data"] valueForKey:@"rows"];
         for (NSDictionary * sceneDic in sceneArr) {
             FiuSceneInfoData * allFiuScene = [[FiuSceneInfoData alloc] initWithDictionary:sceneDic];

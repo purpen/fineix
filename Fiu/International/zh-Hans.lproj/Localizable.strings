@@ -41,6 +41,7 @@
 "SubscribeVcTitle" = "订阅";
 "CityVcTitle" = "选择城市";
 "ReportVcTitle" = "举报";
+"SureOrderVc" = "确认订单";
 
 //  提示信息
 "netError" = "网络连接错误";
@@ -71,6 +72,20 @@
 "addCarBtn" = "加入购物车";
 "GoodsColors" = "颜色分类";
 "GoodsComment" = "商品评价";
+"OrderPayWay" = "支付方式";
+"OrderDistributionWay" = "配送方式";
+"SendGoodsTime" = "送货时间";
+"anySendTime" = "任意时间";
+"workSendTime" = "周一到周五工作日";
+"weekSendTime" = "周六、周日";
+"OrderBonus" = "使用红包";
+"aliPay" = "支付宝支付";
+"wechatPay" = "微信支付";
+"freeSend" = "免费配送";
+"summaryText" = "备注：";
+"writeSummary" = "请输入备注";
+"sumOrderPrice" = "合计：";
+"Default" = "默认";
 
 //  评论
 "comment" = "评论一下";

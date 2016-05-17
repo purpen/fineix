@@ -171,9 +171,11 @@ static NSString *const URLReleaseFiuScenen = @"/scene_scene/save";
         if ([self.locationArr[0] isEqualToString:@"0.000000"]) {
             NSLog(@"照片上没有位置信息");
         } else {
-            [_addView changeLocationFrame:self.locationArr];
-            self.lng = self.locationArr[0];
-            self.lat = self.locationArr[1];
+            if (self.locationArr.count > 0) {
+                [_addView changeLocationFrame:self.locationArr];
+                self.lng = self.locationArr[0];
+                self.lat = self.locationArr[1];
+            }
         }
         if (self.fSceneId.length > 0) {
             _addView.addSceneBtn.userInteractionEnabled = NO;

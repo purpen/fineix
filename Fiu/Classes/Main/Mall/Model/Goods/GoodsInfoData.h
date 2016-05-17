@@ -18,6 +18,7 @@
 @property (nonatomic, strong) GoodsInfoBrand * brand;
 @property (nonatomic, strong) NSArray * skus;
 @property (nonatomic, strong) NSString * brandId;
+@property (nonatomic, assign) NSInteger inventory;
 @property (nonatomic, assign) NSInteger buyCount;
 @property (nonatomic, assign) NSInteger categoryId;
 @property (nonatomic, strong) NSArray * categoryTags;

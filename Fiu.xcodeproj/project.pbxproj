@@ -326,6 +326,13 @@
 		D86AFDEC1CBF84DB006F1602 /* SearchSceneTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D86AFDEB1CBF84DB006F1602 /* SearchSceneTableViewCell.m */; };
 		D86AFDEF1CBFAFC2006F1602 /* UserHeaderTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D86AFDEE1CBFAFC2006F1602 /* UserHeaderTableViewCell.m */; };
 		D86AFDF21CC0BBC3006F1602 /* FBSearchView.m in Sources */ = {isa = PBXBuildFile; fileRef = D86AFDF01CC0BBC3006F1602 /* FBSearchView.m */; };
+		D86B7B6C1CEB0FA30019AB79 /* FBSureOrderViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D86B7B6B1CEB0FA30019AB79 /* FBSureOrderViewController.m */; };
+		D86B7B701CEB1F940019AB79 /* OrderItems.m in Sources */ = {isa = PBXBuildFile; fileRef = D86B7B6F1CEB1F940019AB79 /* OrderItems.m */; };
+		D86B7B741CEB21560019AB79 /* FBUserAddressTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D86B7B731CEB21560019AB79 /* FBUserAddressTableViewCell.m */; };
+		D86B7B771CEB26750019AB79 /* FbGoodsItemsTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D86B7B761CEB26750019AB79 /* FbGoodsItemsTableViewCell.m */; };
+		D86B7B7A1CEB27C30019AB79 /* FBOrderOtherTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D86B7B791CEB27C30019AB79 /* FBOrderOtherTableViewCell.m */; };
+		D86B7B801CEB2F610019AB79 /* FBOrderTimeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D86B7B7F1CEB2F610019AB79 /* FBOrderTimeViewController.m */; };
+		D86B7B831CEB2F770019AB79 /* FBOrderSendWayViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D86B7B821CEB2F770019AB79 /* FBOrderSendWayViewController.m */; };
 		D87B69BF1CC726BA00199EFE /* FBRollImages.m in Sources */ = {isa = PBXBuildFile; fileRef = D87B69BB1CC726BA00199EFE /* FBRollImages.m */; };
 		D87B69C01CC726BA00199EFE /* GroupHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = D87B69BD1CC726BA00199EFE /* GroupHeaderView.m */; };
 		D87B69D11CC726D500199EFE /* FBAlertViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D87B69C51CC726D500199EFE /* FBAlertViewController.m */; };
@@ -1007,6 +1014,20 @@
 		D86AFDEE1CBFAFC2006F1602 /* UserHeaderTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserHeaderTableViewCell.m; sourceTree = "<group>"; };
 		D86AFDF01CC0BBC3006F1602 /* FBSearchView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FBSearchView.m; sourceTree = "<group>"; };
 		D86AFDF11CC0BBC3006F1602 /* FBSearchView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FBSearchView.h; sourceTree = "<group>"; };
+		D86B7B6A1CEB0FA30019AB79 /* FBSureOrderViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FBSureOrderViewController.h; sourceTree = "<group>"; };
+		D86B7B6B1CEB0FA30019AB79 /* FBSureOrderViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FBSureOrderViewController.m; sourceTree = "<group>"; };
+		D86B7B6E1CEB1F940019AB79 /* OrderItems.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OrderItems.h; sourceTree = "<group>"; };
+		D86B7B6F1CEB1F940019AB79 /* OrderItems.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OrderItems.m; sourceTree = "<group>"; };
+		D86B7B721CEB21560019AB79 /* FBUserAddressTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FBUserAddressTableViewCell.h; sourceTree = "<group>"; };
+		D86B7B731CEB21560019AB79 /* FBUserAddressTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FBUserAddressTableViewCell.m; sourceTree = "<group>"; };
+		D86B7B751CEB26750019AB79 /* FBGoodsItemsTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FBGoodsItemsTableViewCell.h; sourceTree = "<group>"; };
+		D86B7B761CEB26750019AB79 /* FbGoodsItemsTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FbGoodsItemsTableViewCell.m; sourceTree = "<group>"; };
+		D86B7B781CEB27C30019AB79 /* FBOrderOtherTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FBOrderOtherTableViewCell.h; sourceTree = "<group>"; };
+		D86B7B791CEB27C30019AB79 /* FBOrderOtherTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FBOrderOtherTableViewCell.m; sourceTree = "<group>"; };
+		D86B7B7E1CEB2F610019AB79 /* FBOrderTimeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FBOrderTimeViewController.h; sourceTree = "<group>"; };
+		D86B7B7F1CEB2F610019AB79 /* FBOrderTimeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FBOrderTimeViewController.m; sourceTree = "<group>"; };
+		D86B7B811CEB2F770019AB79 /* FBOrderSendWayViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FBOrderSendWayViewController.h; sourceTree = "<group>"; };
+		D86B7B821CEB2F770019AB79 /* FBOrderSendWayViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FBOrderSendWayViewController.m; sourceTree = "<group>"; };
 		D87B69BA1CC726BA00199EFE /* FBRollImages.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FBRollImages.h; sourceTree = "<group>"; };
 		D87B69BB1CC726BA00199EFE /* FBRollImages.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FBRollImages.m; sourceTree = "<group>"; };
 		D87B69BC1CC726BA00199EFE /* GroupHeaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GroupHeaderView.h; sourceTree = "<group>"; };
@@ -1982,6 +2003,7 @@
 		D8035FD81CBDEB17001920F9 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				D86B7B711CEB21400019AB79 /* Order */,
 				D8363A731CD8821400CC4AC0 /* Brand */,
 				D8363A341CD8814600CC4AC0 /* CollectionViewCell */,
 				D8363A391CD8814600CC4AC0 /* Category */,
@@ -2540,6 +2562,7 @@
 		D83639D31CD1B81900CC4AC0 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				D86B7B6D1CEB1F890019AB79 /* Order */,
 				D8A9ADEA1CDAF41200A9FCFB /* ChildTags */,
 				D8363A0A1CD8809400CC4AC0 /* Brand */,
 				D8363A0F1CD8809400CC4AC0 /* Goods */,
@@ -2676,14 +2699,20 @@
 		D8363A5F1CD8818E00CC4AC0 /* Goods */ = {
 			isa = PBXGroup;
 			children = (
+				D8A9AEAB1CE9D0A200A9FCFB /* FBGoodsCommentViewController.h */,
+				D8A9AEAC1CE9D0A200A9FCFB /* FBGoodsCommentViewController.m */,
 				D8363A601CD8818E00CC4AC0 /* GoodsInfoViewController.h */,
 				D8363A611CD8818E00CC4AC0 /* GoodsInfoViewController.m */,
 				D8A9AE8D1CE9A80D00A9FCFB /* FBGoodsInfoViewController.h */,
 				D8A9AE8E1CE9A80D00A9FCFB /* FBGoodsInfoViewController.m */,
-				D8A9AEAB1CE9D0A200A9FCFB /* FBGoodsCommentViewController.h */,
-				D8A9AEAC1CE9D0A200A9FCFB /* FBGoodsCommentViewController.m */,
 				D8A9AEAE1CE9D46200A9FCFB /* FBBuyGoodsViewController.h */,
 				D8A9AEAF1CE9D46200A9FCFB /* FBBuyGoodsViewController.m */,
+				D86B7B6A1CEB0FA30019AB79 /* FBSureOrderViewController.h */,
+				D86B7B6B1CEB0FA30019AB79 /* FBSureOrderViewController.m */,
+				D86B7B811CEB2F770019AB79 /* FBOrderSendWayViewController.h */,
+				D86B7B821CEB2F770019AB79 /* FBOrderSendWayViewController.m */,
+				D86B7B7E1CEB2F610019AB79 /* FBOrderTimeViewController.h */,
+				D86B7B7F1CEB2F610019AB79 /* FBOrderTimeViewController.m */,
 			);
 			path = Goods;
 			sourceTree = "<group>";
@@ -2824,6 +2853,28 @@
 				D8363AB51CD8835D00CC4AC0 /* HomeSceneListUser.m */,
 			);
 			path = Home;
+			sourceTree = "<group>";
+		};
+		D86B7B6D1CEB1F890019AB79 /* Order */ = {
+			isa = PBXGroup;
+			children = (
+				D86B7B6E1CEB1F940019AB79 /* OrderItems.h */,
+				D86B7B6F1CEB1F940019AB79 /* OrderItems.m */,
+			);
+			path = Order;
+			sourceTree = "<group>";
+		};
+		D86B7B711CEB21400019AB79 /* Order */ = {
+			isa = PBXGroup;
+			children = (
+				D86B7B721CEB21560019AB79 /* FBUserAddressTableViewCell.h */,
+				D86B7B731CEB21560019AB79 /* FBUserAddressTableViewCell.m */,
+				D86B7B751CEB26750019AB79 /* FBGoodsItemsTableViewCell.h */,
+				D86B7B761CEB26750019AB79 /* FbGoodsItemsTableViewCell.m */,
+				D86B7B781CEB27C30019AB79 /* FBOrderOtherTableViewCell.h */,
+				D86B7B791CEB27C30019AB79 /* FBOrderOtherTableViewCell.m */,
+			);
+			path = Order;
 			sourceTree = "<group>";
 		};
 		D87B69B91CC726BA00199EFE /* Category */ = {
@@ -3632,6 +3683,7 @@
 				D87B69D21CC726D500199EFE /* FBSheetViewController.m in Sources */,
 				1FFFFF311CD055F2008E1CDC /* DirectMessagesViewController.m in Sources */,
 				D8A9AEAD1CE9D0A200A9FCFB /* FBGoodsCommentViewController.m in Sources */,
+				D86B7B771CEB26750019AB79 /* FbGoodsItemsTableViewCell.m in Sources */,
 				D8A9AEA71CE9CA9F00A9FCFB /* GoodsRelationProducts.m in Sources */,
 				D8A9ADC21CD9E2E700A9FCFB /* FiltersViewController.m in Sources */,
 				D8A9ADE51CD9F92B00A9FCFB /* FBFilters.m in Sources */,
@@ -3648,6 +3700,7 @@
 				D8A9AE611CE4813700A9FCFB /* FBSticker.m in Sources */,
 				D8A9AE7A1CE74A7D00A9FCFB /* FiuPeopleCounter.m in Sources */,
 				D8A9ACF31CD8B74D00A9FCFB /* LikeOrSuPeopleData.m in Sources */,
+				D86B7B701CEB1F940019AB79 /* OrderItems.m in Sources */,
 				1F5038A91CDC406C004F76AD /* CommentView.m in Sources */,
 				D81281661CAA8532007CF08B /* JKDBHelper.m in Sources */,
 				D8363A721CD881B200CC4AC0 /* MallViewController.m in Sources */,
@@ -3688,6 +3741,7 @@
 				1FEE50F71CE235FD00B8A292 /* PaySuccessViewController.m in Sources */,
 				D8A9AE8F1CE9A80D00A9FCFB /* FBGoodsInfoViewController.m in Sources */,
 				D8A9AE1C1CE0772700A9FCFB /* UsedTagCollectionViewCell.m in Sources */,
+				D86B7B741CEB21560019AB79 /* FBUserAddressTableViewCell.m in Sources */,
 				D812815E1CAA8532007CF08B /* main.m in Sources */,
 				D8A9AEB01CE9D46200A9FCFB /* FBBuyGoodsViewController.m in Sources */,
 				1FE60E5B1CD32FD200045117 /* CommentsTableViewCell.m in Sources */,
@@ -3714,6 +3768,7 @@
 				D87B69E11CC7274900199EFE /* FBMenuView.m in Sources */,
 				1F18376B1CCDE95A00933CA7 /* ModifyGenderViewController.m in Sources */,
 				1FCE90591CD9E0780029E4BA /* ShieldingViewController.m in Sources */,
+				D86B7B801CEB2F610019AB79 /* FBOrderTimeViewController.m in Sources */,
 				D83639AF1CD0660E00CC4AC0 /* FBMapLocatinViewController.m in Sources */,
 				D8A9ACD21CD8A46900A9FCFB /* FiuSceneCollectionViewCell.m in Sources */,
 				D8A9AD881CD9DFBC00A9FCFB /* FBFiltersCollectionViewCell.m in Sources */,
@@ -3767,11 +3822,13 @@
 				D8A9AEA21CE9B76000A9FCFB /* CommentModelId.m in Sources */,
 				D8A9ACB21CD89E0000A9FCFB /* FiuScene.m in Sources */,
 				D8363A6E1CD8818E00CC4AC0 /* GoodsBrandViewController.m in Sources */,
+				D86B7B7A1CEB27C30019AB79 /* FBOrderOtherTableViewCell.m in Sources */,
 				D8363A6B1CD8818E00CC4AC0 /* GoodsInfoViewController.m in Sources */,
 				D81281671CAA8532007CF08B /* JKDBModel.m in Sources */,
 				1FE60E421CD3226400045117 /* MessageViewController.m in Sources */,
 				D8A9AEA41CE9B76000A9FCFB /* CommentModelUser.m in Sources */,
 				1F7B29361CD5F50500482D84 /* MyOderModel.m in Sources */,
+				D86B7B831CEB2F770019AB79 /* FBOrderSendWayViewController.m in Sources */,
 				D80360501CBF376B001920F9 /* UserInfoEntity.m in Sources */,
 				1F07A64A1CC77F3B00CF225F /* ScenceListCollectionViewCell.m in Sources */,
 				D8A9ADC11CD9E2E700A9FCFB /* CropImageViewController.m in Sources */,
@@ -3843,6 +3900,7 @@
 				D8363A591CD8814600CC4AC0 /* InfoGoodsHighlightsTableViewCell.m in Sources */,
 				1FE60E391CD30A2100045117 /* MyOderInfoViewController.m in Sources */,
 				1FE60E2F1CD301BC00045117 /* AllOderViewController.m in Sources */,
+				D86B7B6C1CEB0FA30019AB79 /* FBSureOrderViewController.m in Sources */,
 				D8A9ACF41CD8B74D00A9FCFB /* LikeOrSuPeopleRow.m in Sources */,
 				D8A9ACB51CD89E0000A9FCFB /* FiuSceneInfoCounter.m in Sources */,
 				D81281101CAA8532007CF08B /* AppDelegate.mm in Sources */,
@@ -3949,7 +4007,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 9.2;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
-				PROVISIONING_PROFILE = "bedd3589-3e72-4b5f-9457-915cc83ecf78";
+				PROVISIONING_PROFILE = "5b29b37c-aff0-4f5d-9cfe-ce8fc658ba8d";
 				SDKROOT = iphoneos;
 			};
 			name = Debug;
@@ -3987,7 +4045,7 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.2;
 				MTL_ENABLE_DEBUG_INFO = NO;
-				PROVISIONING_PROFILE = "bedd3589-3e72-4b5f-9457-915cc83ecf78";
+				PROVISIONING_PROFILE = "5b29b37c-aff0-4f5d-9cfe-ce8fc658ba8d";
 				SDKROOT = iphoneos;
 				VALIDATE_PRODUCT = YES;
 			};
@@ -4028,7 +4086,7 @@
 				OTHER_LIBTOOLFLAGS = "";
 				PRODUCT_BUNDLE_IDENTIFIER = com.THN.fineix;
 				PRODUCT_NAME = Fiu;
-				PROVISIONING_PROFILE = "bedd3589-3e72-4b5f-9457-915cc83ecf78";
+				PROVISIONING_PROFILE = "5b29b37c-aff0-4f5d-9cfe-ce8fc658ba8d";
 				USER_HEADER_SEARCH_PATHS = "$(SRCROOT)";
 			};
 			name = Debug;
@@ -4068,7 +4126,7 @@
 				OTHER_LIBTOOLFLAGS = "";
 				PRODUCT_BUNDLE_IDENTIFIER = com.THN.fineix;
 				PRODUCT_NAME = Fiu;
-				PROVISIONING_PROFILE = "bedd3589-3e72-4b5f-9457-915cc83ecf78";
+				PROVISIONING_PROFILE = "5b29b37c-aff0-4f5d-9cfe-ce8fc658ba8d";
 				USER_HEADER_SEARCH_PATHS = "$(SRCROOT)";
 			};
 			name = Release;

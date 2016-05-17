@@ -7,6 +7,9 @@
 //
 
 #import "FBViewController.h"
+#import "FBLoginRegisterViewController.h"
+
+NSString *const URLGoodsCarNum = @"/shopping/fetch_cart_count";
 
 @interface FBViewController ()
 
@@ -22,6 +25,33 @@
     [self.view addSubview:self.navView];
     
     [self addNavBackBtn];
+    
+    [self getGoodsCarNumData];
+}
+
+#pragma mark - 获取购物车数量
+- (void)getGoodsCarNumData {
+    self.goodsCarRequest = [FBAPI getWithUrlString:URLGoodsCarNum requestDictionary:nil delegate:self];
+    [self.goodsCarRequest startRequestSuccess:^(FBRequest *request, id result) {
+        NSLog(@"＋＋＋＋＋＋＋ %@", result);
+        
+    } failure:^(FBRequest *request, NSError *error) {
+        NSLog(@"%@", error);
+    }];
+}
+
+#pragma mark - 获取用户登录信息
+- (BOOL)isUserLogin {
+    UserInfoEntity * entity = [UserInfoEntity defaultUserInfoEntity];
+    return entity.isLogin;
+}
+
+#pragma mark - 弹出登录
+- (void)openUserLoginVC {
+    UIStoryboard *loginStory = [UIStoryboard storyboardWithName:@"LoginRegisterController" bundle:[NSBundle mainBundle]];
+    FBLoginRegisterViewController * loginSignupVC = [loginStory instantiateViewControllerWithIdentifier:@"FBLoginRegisterViewController"];
+    UINavigationController * navi = [[UINavigationController alloc] initWithRootViewController:loginSignupVC];
+    [self presentViewController:navi animated:YES completion:nil];
 }
 
 #pragma mark - 添加操作指示图
@@ -193,6 +223,36 @@
     if ([self.navigationController respondsToSelector:@selector(interactivePopGestureRecognizer)]) {
         self.navigationController.interactivePopGestureRecognizer.enabled = YES;
     }
+}
+
+#pragma mark - 提示语
+- (void)showMessage:(NSString *)message {
+    UIWindow * window = [UIApplication sharedApplication].keyWindow;
+    UIView *showview =  [[UIView alloc]init];
+    showview.backgroundColor = [UIColor blackColor];
+    showview.alpha = 1.0f;
+    showview.layer.cornerRadius = 5.0f;
+    showview.layer.masksToBounds = YES;
+    [window addSubview:showview];
+    [showview mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.size.mas_equalTo(CGSizeMake(200,44));
+        make.bottom.equalTo(window.mas_bottom).with.offset(-100);
+        make.centerX.equalTo(window);
+    }];
+    
+    UILabel *label = [[UILabel alloc]initWithFrame:CGRectMake(0, 0 , 200, 44)];
+    label.text = message;
+    label.textColor = [UIColor whiteColor];
+    label.textAlignment = NSTextAlignmentCenter;
+    label.backgroundColor = [UIColor clearColor];
+    label.font = [UIFont boldSystemFontOfSize:14];
+    [showview addSubview:label];
+    
+    [UIView animateWithDuration:2.0 animations:^{
+        showview.alpha = 0;
+    } completion:^(BOOL finished) {
+        [showview removeFromSuperview];
+    }];
 }
 
 

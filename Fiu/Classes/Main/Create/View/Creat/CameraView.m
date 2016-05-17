@@ -176,6 +176,7 @@
                                                            FiltersViewController * filtersVC = [[FiltersViewController alloc] init];
                                                            filtersVC.filtersImg = photo;
                                                            filtersVC.createType = self.createType;
+//                                                           filtersVC.locationArr = @[];
                                                            [self.Nav pushViewController:filtersVC animated:YES];
                                                        }
                                                     

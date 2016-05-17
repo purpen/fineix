@@ -8,6 +8,7 @@
 
 #import "FBBuyGoodsViewController.h"
 #import "GoodsSceneCollectionViewCell.h"
+#import "FBLoginRegisterViewController.h"
 
 @interface FBBuyGoodsViewController ()
 
@@ -27,6 +28,8 @@
     [self.view addSubview:self.cancelBtn];
     [self.view addSubview:self.buyView];
     
+    self.num = 1;
+    
     __weak __typeof(self) weakSelf = self;
     self.getGoodsModel = ^(GoodsInfoData * model) {
         CGRect buyViewRect = weakSelf.buyView.frame;
@@ -34,9 +37,16 @@
         [UIView animateWithDuration:.3 animations:^{
             weakSelf.buyView.frame = buyViewRect;
         }];
-        
-        [weakSelf setBuyGoodsData:model];
+
         weakSelf.goodsSkus = [NSMutableArray arrayWithArray:model.skus];
+        if (weakSelf.goodsSkus.count == 0) {
+            NSDictionary * skuDict = @{@"mode":NSLocalizedString(@"Default", nil),
+                                       @"price":[NSString stringWithFormat:@"%.2f",[[model valueForKey:@"salePrice"] floatValue]],
+                                       @"quantity":[model valueForKey:@"inventory"],
+                                       @"targetId":[NSString stringWithFormat:@"%@", [model valueForKey:@"idField"]]};
+            [weakSelf.goodsSkus addObject:skuDict];
+        }
+        [weakSelf setBuyGoodsData:model];
     };
 }
 
@@ -45,7 +55,9 @@
     [self.goodsImg downloadImage:model.coverUrl place:[UIImage imageNamed:@""]];
     self.goodsTitle.text = model.title;
     self.goodsPrice.text = [NSString stringWithFormat:@"￥%.2f", model.salePrice];
+    self.chooseNum.text = [NSString stringWithFormat:@"%zi", self.num];
     [self.goodsColorView reloadData];
+   
 }
 
 #pragma mark - 取消购买
@@ -101,8 +113,32 @@
         [_buyingBtn setTitleColor:[UIColor whiteColor] forState:(UIControlStateNormal)];
         _buyingBtn.titleLabel.font = [UIFont systemFontOfSize:14];
         _buyingBtn.backgroundColor = [UIColor colorWithHexString:@"#BE8914"];
+        [_buyingBtn addTarget:self action:@selector(buyingBtnClick) forControlEvents:(UIControlEventTouchUpInside)];
     }
     return _buyingBtn;
+}
+
+- (void)buyingBtnClick {
+    if ([self isUserLogin]) {
+        if (self.skuId.length > 0) {
+            NSString * num = [NSString stringWithFormat:@"%zi", self.num];
+            NSString * type;
+            NSString * targetId;
+            if ([[self.goodsSkus valueForKey:@"mode"][0] isEqualToString:NSLocalizedString(@"Default", nil)]) {
+                type = @"1";
+            } else {
+                type = @"2";
+            }
+            targetId = self.skuId;
+            NSDictionary * orderDict = @{@"target_id":targetId, @"type":type, @"n":num};
+            [self dismissViewControllerAnimated:YES completion:^{
+                self.buyingGoodsBlock(orderDict); 
+            }];
+        }
+       
+    } else {
+        [self openUserLoginVC];
+    }
 }
 
 #pragma mark 加入购物车
@@ -113,8 +149,32 @@
         [_addCarBtn setTitleColor:[UIColor whiteColor] forState:(UIControlStateNormal)];
         _addCarBtn.titleLabel.font = [UIFont systemFontOfSize:14];
         _addCarBtn.backgroundColor = [UIColor colorWithHexString:@"DB9E18"];
+        [_addCarBtn addTarget:self action:@selector(addCarBtnClick) forControlEvents:(UIControlEventTouchUpInside)];
     }
     return _addCarBtn;
+}
+
+- (void)addCarBtnClick {
+    if ([self isUserLogin]) {
+        if (self.skuId.length > 0) {
+            NSString * num = [NSString stringWithFormat:@"%zi", self.num];
+            NSString * type;
+            NSString * targetId;
+            if ([[self.goodsSkus valueForKey:@"mode"][0] isEqualToString:NSLocalizedString(@"Default", nil)]) {
+                type = @"1";
+            } else {
+                type = @"2";
+            }
+            targetId = self.skuId;
+            NSDictionary * orderDict = @{@"target_id":targetId, @"type":type, @"n":num};
+            [self dismissViewControllerAnimated:YES completion:^{
+                self.addGoodsCarBlock(orderDict);
+            }];
+        }
+        
+    } else {
+        [self openUserLoginVC];
+    }
 }
 
 #pragma mark  商品图片
@@ -128,7 +188,7 @@
 #pragma mark  商品标题
 - (UILabel *)goodsTitle {
     if (!_goodsTitle) {
-        _goodsTitle = [[UILabel alloc] initWithFrame:CGRectMake(105, 15, SCREEN_WIDTH - 120, 40)];
+        _goodsTitle = [[UILabel alloc] initWithFrame:CGRectMake(105, 15, SCREEN_WIDTH - 120, 35)];
         _goodsTitle.textColor = [UIColor colorWithHexString:titleColor];
         _goodsTitle.font = [UIFont systemFontOfSize:14];
         _goodsTitle.numberOfLines = 2;
@@ -139,7 +199,7 @@
 #pragma mark  商品价格
 - (UILabel *)goodsPrice {
     if (!_goodsPrice) {
-        _goodsPrice = [[UILabel alloc] initWithFrame:CGRectMake(105, 55, SCREEN_WIDTH - 120, 25)];
+        _goodsPrice = [[UILabel alloc] initWithFrame:CGRectMake(105, 55, SCREEN_WIDTH - 115, 25)];
         _goodsPrice.textColor = [UIColor colorWithHexString:fineixColor];
         _goodsPrice.font = [UIFont systemFontOfSize:14];
         _goodsPrice.numberOfLines = 2;
@@ -189,11 +249,18 @@
     return cell;
 }
 
-//- (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
-//    SceneInfoViewController * sceneInfoVC = [[SceneInfoViewController alloc] init];
-//    sceneInfoVC.sceneId = self.sceneIds[indexPath.row];
-//    [self.nav pushViewController:sceneInfoVC animated:YES];
-//}
+- (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
+    self.goodsChoose.text = [NSString stringWithFormat:@"已选：%@", [self.goodsSkus valueForKey:@"mode"][indexPath.row]];
+    self.goodsPrice.text = [NSString stringWithFormat:@"￥%@", [self.goodsSkus valueForKey:@"price"][indexPath.row]];
+    self.quantity = [[self.goodsSkus valueForKey:@"quantity"][indexPath.row] integerValue];
+    self.chooseNum.text = @"1";
+    self.num = 1;
+    if ([[self.goodsSkus valueForKey:@"mode"][indexPath.row] isEqualToString:NSLocalizedString(@"Default", nil)]) {
+        self.skuId = [NSString stringWithFormat:@"%@", [self.goodsSkus valueForKey:@"targetId"][indexPath.row]];
+    } else {
+        self.skuId = [NSString stringWithFormat:@"%@", [self.goodsSkus valueForKey:@"_id"][indexPath.row]];
+    }
+}
 
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath {
     CGFloat btnLength = [[[self.goodsSkus valueForKey:@"mode"] objectAtIndex:indexPath.row] boundingRectWithSize:CGSizeMake(320, 1000) options:(NSStringDrawingUsesLineFragmentOrigin) attributes:nil context:nil].size.width;
@@ -216,7 +283,8 @@
         [addBtn setTitleColor:[UIColor colorWithHexString:titleColor] forState:(UIControlStateNormal)];
         [addBtn setTitle:@"＋" forState:(UIControlStateNormal)];
         addBtn.titleLabel.font = [UIFont systemFontOfSize:14];
-        [addBtn addTarget:self action:@selector(addChooseNum) forControlEvents:(UIControlEventTouchUpInside)];
+        [addBtn addTarget:self action:@selector(addChooseNum:) forControlEvents:(UIControlEventTouchUpInside)];
+        self.addBtn = addBtn;
         
         UIButton * subBtn = [[UIButton alloc] initWithFrame:CGRectMake(110, 40, 30, 30)];
         subBtn.layer.borderColor = [UIColor colorWithHexString:titleColor alpha:.5].CGColor;
@@ -224,7 +292,8 @@
         [subBtn setTitleColor:[UIColor colorWithHexString:titleColor] forState:(UIControlStateNormal)];
         [subBtn setTitle:@"－" forState:(UIControlStateNormal)];
         subBtn.titleLabel.font = [UIFont systemFontOfSize:14];
-        [subBtn addTarget:self action:@selector(subChooseNum) forControlEvents:(UIControlEventTouchUpInside)];
+        [subBtn addTarget:self action:@selector(subChooseNum:) forControlEvents:(UIControlEventTouchUpInside)];
+        self.subBtn = subBtn;
         
         UILabel * lineLab = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH - 30, 1)];
         lineLab.backgroundColor = [UIColor colorWithHexString:lineGrayColor];
@@ -239,12 +308,37 @@
     return _chooseNumView;
 }
 
-- (void)addChooseNum {
+- (void)addChooseNum:(UIButton *)button {
+    self.num += 1;
+    if (self.num >= self.quantity) {
+        button.userInteractionEnabled = NO;
+        button.backgroundColor = [UIColor colorWithHexString:lineGrayColor];
+        [self showMessage:@"库存不足了～"];
+        
+    } else if (self.num <= self.quantity) {
+        self.subBtn.userInteractionEnabled = YES;
+        self.subBtn.backgroundColor = [UIColor whiteColor];
+    }
     
+    self.chooseNum.text = [NSString stringWithFormat:@"%zi", self.num];
 }
 
-- (void)subChooseNum {
+- (void)subChooseNum:(UIButton *)button {
+    if (self.num > 1) {
+        self.num -= 1;
+    }
     
+    if (self.num <= 1) {
+        button.userInteractionEnabled = NO;
+        button.backgroundColor = [UIColor colorWithHexString:lineGrayColor];
+        [self showMessage:@"不能再少了～"];
+        
+    } else if (self.num <= self.quantity) {
+        self.addBtn.userInteractionEnabled = YES;
+        self.addBtn.backgroundColor = [UIColor whiteColor];
+    }
+    
+    self.chooseNum.text = [NSString stringWithFormat:@"%zi", self.num];
 }
 
 #pragma mark 数量

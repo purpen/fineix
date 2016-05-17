@@ -9,7 +9,8 @@
 #import <UIKit/UIKit.h>
 #import "UIBarButtonItem+Helper.h"
 #import "Fiu.h"
-
+#import "UserInfo.h"
+#import "UserInfoEntity.h"
 
 @protocol FBNavigationBarItemsDelegate <NSObject>
 
@@ -21,6 +22,23 @@
 
 
 @interface FBViewController : UIViewController
+
+/**
+ *  请求购物车数量
+ */
+@pro_strong FBRequest   *   goodsCarRequest;
+
+- (void)getGoodsCarNumData;
+
+/**
+ *  是否登录
+ */
+- (BOOL)isUserLogin;
+
+/**
+ *  未登录弹出登录框
+ */
+- (void)openUserLoginVC;
 
 /*
  *  自定义Nav视图
@@ -85,5 +103,10 @@
  *  添加操作指示图
  */
 - (void)setGuideImgForVC:(NSString *)image;
+
+/**
+ *  提示语
+ */
+- (void)showMessage:(NSString *)message;
 
 @end

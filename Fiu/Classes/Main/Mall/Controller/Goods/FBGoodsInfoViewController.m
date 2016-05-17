@@ -17,9 +17,11 @@
 #import "GoodsRelationProducts.h"
 #import "FBGoodsCommentViewController.h"
 #import "FBBuyGoodsViewController.h"
+#import "FBSureOrderViewController.h"
 
 static NSString *const URLGoodsInfo = @"/product/view";
 static NSString *const URLGoodsCommet = @"/comment/getlist";
+static NSString *const URLAddCar = @"/shopping/add_cart";
 
 @interface FBGoodsInfoViewController ()
 
@@ -51,7 +53,6 @@ static NSString *const URLGoodsCommet = @"/comment/getlist";
     [SVProgressHUD show];
     self.goodsInfoRequest = [FBAPI getWithUrlString:URLGoodsInfo requestDictionary:@{@"id":self.goodsID} delegate:self];
     [self.goodsInfoRequest startRequestSuccess:^(FBRequest *request, id result) {
-//        NSLog(@"＝＝＝＝＝＝＝ %@", result);
         [self setThnGoodsInfoVcUI];
         self.goodsInfo = [[GoodsInfoData alloc] initWithDictionary:[result valueForKey:@"data"]];
         NSArray * goodsArr  = [[result valueForKey:@"data"] valueForKey:@"relation_products"];
@@ -87,6 +88,18 @@ static NSString *const URLGoodsCommet = @"/comment/getlist";
     }];
 }
 
+#pragma mark 加入购物车
+- (void)networkAddCarGoodsData:(NSDictionary *)goodsData {
+    self.addCarRequest = [FBAPI postWithUrlString:URLAddCar requestDictionary:goodsData delegate:self];
+    [self.addCarRequest startRequestSuccess:^(FBRequest *request, id result) {
+        if ([[result valueForKey:@"success"] isEqualToNumber:@1]) {
+            [self showMessage:@"加入购物车成功～"];
+        }
+        
+    } failure:^(FBRequest *request, NSError *error) {
+        [SVProgressHUD showErrorWithStatus:[error localizedDescription]];
+    }];
+}
 
 #pragma mark - 设置视图
 - (void)setThnGoodsInfoVcUI {
@@ -222,18 +235,35 @@ static NSString *const URLGoodsCommet = @"/comment/getlist";
 #pragma mark 跳转
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     if (indexPath.section == 1) {
-        FBBuyGoodsViewController * buyVC = [[FBBuyGoodsViewController alloc] init];
-        buyVC.modalPresentationStyle = UIModalPresentationOverCurrentContext;
-        buyVC.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;
-        [self presentViewController:buyVC animated:YES completion:^{
-            buyVC.getGoodsModel(self.goodsInfo);
-        }];
+        [self OpenGoodsBuyView];
     
     } else if (indexPath.section == 3) {
         FBGoodsCommentViewController * thnCommentVC = [[FBGoodsCommentViewController alloc] init];
         thnCommentVC.targetId = self.goodsID;
         [self.navigationController pushViewController:thnCommentVC animated:YES];
     }
+}
+
+#pragma mark - 打开商品购买视图
+- (void)OpenGoodsBuyView {
+    FBBuyGoodsViewController * buyVC = [[FBBuyGoodsViewController alloc] init];
+    buyVC.modalPresentationStyle = UIModalPresentationOverCurrentContext;
+    buyVC.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;
+    //  立即购买
+    buyVC.buyingGoodsBlock = ^(NSDictionary * dict) {
+        FBSureOrderViewController * sureOrderVC = [[FBSureOrderViewController alloc] init];
+        sureOrderVC.orderDict = dict;
+        [self.navigationController pushViewController:sureOrderVC animated:YES];
+    };
+    
+    //  加入购物车
+    buyVC.addGoodsCarBlock = ^(NSDictionary * dict) {
+        [self networkAddCarGoodsData:dict];
+    };
+    
+    [self presentViewController:buyVC animated:YES completion:^{
+        buyVC.getGoodsModel(self.goodsInfo);
+    }];
 }
 
 #pragma mark - 立即购买／加入购物车视图
@@ -254,6 +284,7 @@ static NSString *const URLGoodsCommet = @"/comment/getlist";
         [_buyingBtn setTitleColor:[UIColor whiteColor] forState:(UIControlStateNormal)];
         _buyingBtn.titleLabel.font = [UIFont systemFontOfSize:14];
         _buyingBtn.backgroundColor = [UIColor colorWithHexString:@"#BE8914"];
+        [_buyingBtn addTarget:self action:@selector(OpenGoodsBuyView) forControlEvents:(UIControlEventTouchUpInside)];
     }
     return _buyingBtn;
 }
@@ -266,6 +297,7 @@ static NSString *const URLGoodsCommet = @"/comment/getlist";
         [_addCarBtn setTitleColor:[UIColor whiteColor] forState:(UIControlStateNormal)];
         _addCarBtn.titleLabel.font = [UIFont systemFontOfSize:14];
         _addCarBtn.backgroundColor = [UIColor colorWithHexString:@"DB9E18"];
+        [_addCarBtn addTarget:self action:@selector(OpenGoodsBuyView) forControlEvents:(UIControlEventTouchUpInside)];
     }
     return _addCarBtn;
 }

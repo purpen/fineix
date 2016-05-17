@@ -62,6 +62,10 @@
     return nsDateString;
 }
 
+- (NSString *)apptype {
+    return KAppType;
+}
+
 - (NSString *)channel {
     return kChannel;
 }
@@ -143,6 +147,7 @@
     [fullDictionary setValue:[self clientId] forKey:@"client_id"];
     [fullDictionary setValue:[self uuid] forKey:@"uuid"];
     [fullDictionary setValue:[self time] forKey:@"time"];
+    [fullDictionary setValue:[self apptype] forKey:@"app_type"];
     
     // 添加签名参数
     NSString *sign = [self getSign:fullDictionary];

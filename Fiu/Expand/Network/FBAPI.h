@@ -12,6 +12,7 @@
 
 - (NSString *)uuid;
 - (NSString *)time;
+- (NSString *)apptype;
 
 + (instancetype)getWithUrlString:(NSString *)urlString
                requestDictionary:(NSDictionary *)requestDictionary
