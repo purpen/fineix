@@ -16,6 +16,7 @@
 @property (weak, nonatomic) IBOutlet UILabel *minimumLbl;
 @property (weak, nonatomic) IBOutlet UILabel *overdueLbl;
 
+
 @end
 
 @implementation BonusCell

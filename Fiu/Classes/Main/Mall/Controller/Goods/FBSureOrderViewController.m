@@ -290,9 +290,14 @@ static NSString *const URLSureOrder = @"/shopping/confirm";
     } else if (indexPath.section == 4) {
         BonusViewController * bonusVC = [[BonusViewController alloc] init];
         bonusVC.rid = _rrid;
+        bonusVC.bounsDelegate = self;
         [self.navigationController pushViewController:bonusVC animated:YES];
     }
     
+}
+
+-(void)getBounsCode:(NSString *)code andBounsNum:(NSNumber *)amount{
+    NSLog(@"红包   %@,%@",code,amount);
 }
 
 #pragma mark - 确认订单按钮视图

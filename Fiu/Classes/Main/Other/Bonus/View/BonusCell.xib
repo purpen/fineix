@@ -56,20 +56,27 @@
                                 <color key="textColor" red="0.13333333333333333" green="0.13333333333333333" blue="0.13333333333333333" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="RHd-9N-gWA">
+                                <rect key="frame" x="0.0" y="0.0" width="335" height="111"/>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                         <constraints>
+                            <constraint firstAttribute="trailing" secondItem="RHd-9N-gWA" secondAttribute="trailing" id="6P3-LB-pe8"/>
                             <constraint firstItem="3bz-6w-GfP" firstAttribute="leading" secondItem="01F-td-RDR" secondAttribute="leading" constant="15" id="6yC-yl-vsq"/>
                             <constraint firstItem="sbY-Ia-S56" firstAttribute="leading" secondItem="3bz-6w-GfP" secondAttribute="leading" id="B89-fn-tZQ"/>
                             <constraint firstAttribute="trailing" secondItem="HUO-rd-Var" secondAttribute="trailing" constant="15" id="Bv6-GM-KJn"/>
                             <constraint firstAttribute="trailing" secondItem="VfL-UU-7x5" secondAttribute="trailing" id="DhW-Aj-cuZ"/>
                             <constraint firstItem="j0o-FN-7wW" firstAttribute="baseline" secondItem="HUO-rd-Var" secondAttribute="baseline" id="GHG-vv-8eq"/>
                             <constraint firstItem="KbM-ko-2vD" firstAttribute="top" secondItem="01F-td-RDR" secondAttribute="top" constant="10" id="HBK-xR-0oh"/>
+                            <constraint firstAttribute="bottom" secondItem="RHd-9N-gWA" secondAttribute="bottom" id="KRD-gj-Nh2"/>
                             <constraint firstItem="VfL-UU-7x5" firstAttribute="top" secondItem="01F-td-RDR" secondAttribute="top" id="OZA-Ov-452"/>
                             <constraint firstAttribute="bottom" secondItem="3bz-6w-GfP" secondAttribute="bottom" constant="20" id="OlA-3i-MAP"/>
                             <constraint firstItem="Czg-Aw-0gu" firstAttribute="leading" secondItem="KbM-ko-2vD" secondAttribute="leading" id="SLE-gy-mvr"/>
                             <constraint firstItem="VfL-UU-7x5" firstAttribute="leading" secondItem="01F-td-RDR" secondAttribute="leading" id="Z7c-4Q-UQE"/>
                             <constraint firstItem="Czg-Aw-0gu" firstAttribute="top" secondItem="KbM-ko-2vD" secondAttribute="bottom" constant="5" id="bZ9-iJ-3wv"/>
+                            <constraint firstItem="RHd-9N-gWA" firstAttribute="top" secondItem="01F-td-RDR" secondAttribute="top" id="blc-rO-VXy"/>
+                            <constraint firstItem="RHd-9N-gWA" firstAttribute="leading" secondItem="01F-td-RDR" secondAttribute="leading" id="cIh-Fh-QU2"/>
                             <constraint firstItem="3bz-6w-GfP" firstAttribute="top" secondItem="sbY-Ia-S56" secondAttribute="bottom" constant="5" id="eln-10-CuX"/>
                             <constraint firstItem="HUO-rd-Var" firstAttribute="top" secondItem="01F-td-RDR" secondAttribute="top" constant="10" id="jTB-gZ-8SH"/>
                             <constraint firstAttribute="bottom" secondItem="VfL-UU-7x5" secondAttribute="bottom" id="q5J-nF-6Y3"/>
@@ -89,6 +96,7 @@
             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
             <connections>
                 <outlet property="amountLbl" destination="HUO-rd-Var" id="btJ-lp-lhI"/>
+                <outlet property="clickBtn" destination="RHd-9N-gWA" id="4PM-UV-uAj"/>
                 <outlet property="codeLbl" destination="Czg-Aw-0gu" id="yqS-38-1nu"/>
                 <outlet property="minimumLbl" destination="sbY-Ia-S56" id="Xea-V5-URS"/>
                 <outlet property="overdueLbl" destination="3bz-6w-GfP" id="rzM-Ab-N8W"/>

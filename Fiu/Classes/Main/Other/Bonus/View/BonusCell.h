@@ -10,6 +10,7 @@
 
 @class BonusModel;
 @interface BonusCell : UITableViewCell
+@property (weak, nonatomic) IBOutlet UIButton *clickBtn;
 
 //@property (weak, nonatomic) IBOutlet UIImageView *backgroundImgView;
 @property (nonatomic, strong) BonusModel * bonus;
