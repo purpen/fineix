@@ -146,12 +146,6 @@
 		1FE60E661CD33E4700045117 /* MessagesssViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1FE60E641CD33E4700045117 /* MessagesssViewController.xib */; };
 		1FE60E781CD3E31D00045117 /* FindFriendModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 1FE60E771CD3E31D00045117 /* FindFriendModel.m */; };
 		1FE60E7B1CD3E6DC00045117 /* FindSceneModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 1FE60E7A1CD3E6DC00045117 /* FindSceneModel.m */; };
-		1FE701EF1CEB2C29000BA84A /* IdentityTagsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1FE701ED1CEB2C29000BA84A /* IdentityTagsViewController.m */; };
-		1FE701F01CEB2C29000BA84A /* IdentityTagsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1FE701EE1CEB2C29000BA84A /* IdentityTagsViewController.xib */; };
-		1FE701F31CEB4BDF000BA84A /* IdentityTagModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 1FE701F21CEB4BDF000BA84A /* IdentityTagModel.m */; };
-		1FE701F61CEB50FD000BA84A /* TagsCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 1FE701F51CEB50FD000BA84A /* TagsCollectionViewCell.m */; };
-		1FE701FA1CEB7638000BA84A /* TheOfficialCertificationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1FE701F81CEB7638000BA84A /* TheOfficialCertificationViewController.m */; };
-		1FE701FB1CEB7638000BA84A /* TheOfficialCertificationViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1FE701F91CEB7638000BA84A /* TheOfficialCertificationViewController.xib */; };
 		1FEB71721CC8802800CF34F3 /* InvitationModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 1FEB71711CC8802800CF34F3 /* InvitationModel.m */; };
 		1FEB71751CC88B5D00CF34F3 /* FindeFirendTwoModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 1FEB71741CC88B5D00CF34F3 /* FindeFirendTwoModel.m */; };
 		1FEB71781CC8A35A00CF34F3 /* QRCodeScanViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1FEB71771CC8A35A00CF34F3 /* QRCodeScanViewController.m */; };
