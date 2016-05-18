@@ -45,7 +45,7 @@
         self.typeLbl.text = [NSString stringWithFormat:@"数量*%ld",productInfo.quantity];
     }
     
-    self.priceLbl.text = [NSString stringWithFormat:@"￥%.0f", [productInfo.salePrice floatValue]];
+    self.priceLbl.text = [NSString stringWithFormat:@"￥%.2f", [productInfo.salePrice floatValue]];
     //self.amountLbl.text = [NSString stringWithFormat:@"x %ld", productInfo.quantity];
 }
 

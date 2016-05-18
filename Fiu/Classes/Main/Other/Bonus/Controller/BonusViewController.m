@@ -158,16 +158,23 @@ static NSString *const BonusCellIdentifier = @"bonusCell";
 -(void)clikTipBtn:(UIButton*)sender{
     if (self.rid) {
         BonusModel *model = self.bonusAry[sender.tag];
+        
         FBRequest *request = [FBAPI postWithUrlString:@"/shopping/use_bonus" requestDictionary:@{@"rid":self.rid,@"code":model.code} delegate:self];
         [request startRequestSuccess:^(FBRequest *request, id result) {
-            if ([self.bounsDelegate respondsToSelector:@selector(getBounsCode:andBounsNum:)]) {
-                [self.bounsDelegate getBounsCode:model.code andBounsNum:model.amount];
+            if ([result objectForKey:@"success"]) {
+                if ([self.bounsDelegate respondsToSelector:@selector(getBounsCode:andBounsNum:)]) {
+                    [self.bounsDelegate getBounsCode:model.code andBounsNum:model.amount];
+                }
+                
+                [self.navigationController popViewControllerAnimated:YES];
+            }else{
+                [SVProgressHUD showErrorWithStatus:@"此红包不适用"];
+                if ([self.bounsDelegate respondsToSelector:@selector(getBounsCode:andBounsNum:)]) {
+                    [self.bounsDelegate getBounsCode:model.code andBounsNum:model.amount];
+                }
             }
             
-            [self.navigationController popViewControllerAnimated:YES];
         } failure:^(FBRequest *request, NSError *error) {
-            [SVProgressHUD showErrorWithStatus:@"此红包不适用"];
-            
         }];
     }
 

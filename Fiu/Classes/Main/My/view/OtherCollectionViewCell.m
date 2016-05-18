@@ -106,7 +106,7 @@
     }];
     self.nickName.text = model.nickname;
     self.userProfile.text = model.summary;
-    self.userLevelLabel.text = [NSString stringWithFormat:@"%@|V%d",model.levelDesc,[model.level intValue]];
+    //self.userLevelLabel.text = [NSString stringWithFormat:@"%@|V%d",model.levelDesc,[model.level intValue]];
     
     [self.bgImageView sd_setImageWithURL:[NSURL URLWithString:model.head_pic_url] placeholderImage:[UIImage imageNamed:@"image"]];
 }

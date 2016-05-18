@@ -192,7 +192,7 @@ static NSString *const IconURL = @"/my/add_head_pic";
     if ([self.type isEqualToNumber:@1]) {
         //进行情景的网络请求
         [SVProgressHUD show];
-        FBRequest *request = [FBAPI postWithUrlString:@"/scene_scene/" requestDictionary:@{@"page":@(_n+1),@"size":@5,@"sort":@0,@"user_id":self.userId} delegate:self];
+        FBRequest *request = [FBAPI postWithUrlString:@"/scene_scene/" requestDictionary:@{@"page":@(_n+1),@"size":@6,@"sort":@0,@"user_id":self.userId} delegate:self];
         [request startRequestSuccess:^(FBRequest *request, id result) {
             NSLog(@"result %@",result);
             NSArray * fiuSceneArr = [[result valueForKey:@"data"] valueForKey:@"rows"];

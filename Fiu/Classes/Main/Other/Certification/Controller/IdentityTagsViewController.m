@@ -19,8 +19,8 @@
 @property (weak, nonatomic) IBOutlet UIButton *applyBtn;
 @property (weak, nonatomic) IBOutlet UILabel *tipLabel;
 @property (weak, nonatomic) IBOutlet UITextField *titleTextField;
-@property (weak, nonatomic) IBOutlet UIView *selectedTagsView;
 @property (weak, nonatomic) IBOutlet UIButton *deletAllBtn;
+@property (weak, nonatomic) IBOutlet UIView *selectedView;
 @property(nonatomic,strong) UICollectionView *selectedCollectionView;
 @property (nonatomic,strong) UICollectionView *itemsCollectionView;
 @property (nonatomic,strong) NSMutableArray *modelAry;
@@ -35,7 +35,7 @@
     // Do any additional setup after loading the view from its nib.
     self.delegate = self;
     self.navViewTitle.text = @"身份标签";
-    
+    [self addBarItemLeftBarButton:nil image:@"icon_back" isTransparent:NO];
     self.applyBtn.layer.masksToBounds = YES;
     self.applyBtn.layer.cornerRadius = 3;
     
@@ -50,6 +50,7 @@
     
     [self.view addSubview:self.itemsCollectionView];
     [self.view addSubview:self.selectedCollectionView];
+    self.selectedCollectionView.hidden = YES;
     
     self.deletAllBtn.hidden = YES;
     [self.deletAllBtn addTarget:self action:@selector(clickDeletAllBtn:) forControlEvents:UIControlEventTouchUpInside];
@@ -65,8 +66,13 @@
     if (self.selectedModelAry.count) {
         [self.selectedModelAry removeAllObjects];
         [self.selectedCollectionView reloadData];
+        sender.hidden = YES;
+        self.selectedCollectionView.hidden = YES;
     }
-    sender.hidden = YES;
+    if (self.titleTextField.text.length) {
+        self.titleTextField.text = @"";
+    }
+    
 }
 
 -(NSMutableArray *)modelAry{
@@ -85,7 +91,7 @@
         layOut.minimumInteritemSpacing = 2;
         layOut.sectionInset = UIEdgeInsetsMake(0, 3, 0, 3);
         [layOut setScrollDirection:UICollectionViewScrollDirectionVertical];
-        _itemsCollectionView = [[UICollectionView alloc] initWithFrame:CGRectMake(0, self.selectedTagsView.frame.origin.y+self.selectedTagsView.frame.size.height+3, SCREEN_WIDTH, 300/667.0*SCREEN_HEIGHT) collectionViewLayout:layOut];
+        _itemsCollectionView = [[UICollectionView alloc] initWithFrame:CGRectMake(0, self.selectedView.frame.origin.y+self.selectedView.frame.size.height+3, SCREEN_WIDTH, 300/667.0*SCREEN_HEIGHT) collectionViewLayout:layOut];
         _itemsCollectionView.showsVerticalScrollIndicator = NO;
         _itemsCollectionView.backgroundColor = [UIColor whiteColor];
         _itemsCollectionView.tag = ITEMS_COLLECTIONVIEW_TAG;
@@ -103,7 +109,7 @@
         layOut.minimumInteritemSpacing = 2;
         layOut.sectionInset = UIEdgeInsetsMake(0, 3, 0, 3);
         [layOut setScrollDirection:UICollectionViewScrollDirectionHorizontal];
-        _selectedCollectionView = [[UICollectionView alloc] initWithFrame:CGRectMake(0, self.selectedTagsView.frame.origin.y, SCREEN_WIDTH-40, self.selectedTagsView.frame.size.height) collectionViewLayout:layOut];
+        _selectedCollectionView = [[UICollectionView alloc] initWithFrame:CGRectMake(0, self.selectedView.frame.origin.y, SCREEN_WIDTH-40, self.selectedView.frame.size.height) collectionViewLayout:layOut];
         _selectedCollectionView.showsHorizontalScrollIndicator = NO;
         _selectedCollectionView.backgroundColor = [UIColor whiteColor];
         _selectedCollectionView.tag = SELECTED_COLLECTIONVIEW_TAG;
@@ -130,7 +136,6 @@
         [cell.tagBtn setTitle:model.tags forState:UIControlStateNormal];
         cell.tagBtn.tag = indexPath.row;
         [cell.tagBtn addTarget:self action:@selector(clickItemsTagsBtn:) forControlEvents:UIControlEventTouchUpInside];
-        
         return cell;
     }else{
         TagsCollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"TagsCollectionViewCell" forIndexPath:indexPath];
@@ -143,10 +148,12 @@
 }
 
 -(void)clickItemsTagsBtn:(UIButton*)sender{
+    [self.selectedModelAry removeAllObjects];
     IdentityTagModel *model = self.modelAry[sender.tag];
     [self.selectedModelAry addObject:model];
     [self.selectedCollectionView reloadData];
     self.deletAllBtn.hidden = NO;
+    self.selectedCollectionView.hidden = NO;
 }
 
 -(void)clickSelectedTagBtn:(UIButton*)sender{
@@ -180,14 +187,44 @@
 
 -(void)textFieldDidBeginEditing:(UITextField *)textField{
     self.tipLabel.hidden = YES;
+    self.deletAllBtn.hidden = NO;
+    self.itemsCollectionView.userInteractionEnabled = NO;
 }
 
 -(void)textFieldDidEndEditing:(UITextField *)textField{
     if (textField.text.length == 0) {
         self.tipLabel.hidden = NO;
+        self.deletAllBtn.hidden = YES;
+        self.itemsCollectionView.userInteractionEnabled = YES;
     }else{
         self.tipLabel.hidden = YES;
+        self.deletAllBtn.hidden = NO;
+        self.itemsCollectionView.userInteractionEnabled = NO;
     }
+}
+
+-(void)leftBarItemSelected{
+    if (self.selectedModelAry.count !=0 || self.titleTextField.text.length !=0) {
+        NSString *idStr;
+        if (self.titleTextField.text.length == 0) {
+            idStr = ((IdentityTagModel*)self.selectedModelAry[0]).tags;
+        }else{
+            idStr = self.titleTextField.text;
+        }
+        //上传
+        FBRequest *request = [FBAPI postWithUrlString:@"/my/update_profile" requestDictionary:@{
+                                                                                                @"label":idStr
+                                                                                                } delegate:self];
+        [request startRequestSuccess:^(FBRequest *request, id result) {
+            UserInfoEntity *entity = [UserInfoEntity defaultUserInfoEntity];
+            entity.label = [result objectForKey:@"data"][@"label"];
+            [entity updateUserInfo];
+        } failure:^(FBRequest *request, NSError *error) {
+            
+        }];
+
+    }
+    [self.navigationController popViewControllerAnimated:YES];
 }
 
 - (void)didReceiveMemoryWarning {
