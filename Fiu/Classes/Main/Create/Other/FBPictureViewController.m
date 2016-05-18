@@ -154,7 +154,6 @@
 }
 
 - (void)cancelDoneBtnClick {
-    NSLog(@"取消发布");
     TYAlertView * cancelAlertView = [TYAlertView alertViewWithTitle:@"取消创建" message:@"是否放弃创建情景？"];
     [cancelAlertView addAction:[TYAlertAction actionWithTitle:@"返回上一步" style:(TYAlertActionStyleCancle) handler:^(TYAlertAction *action) {
         [self.navigationController popViewControllerAnimated:YES];

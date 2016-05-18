@@ -27,8 +27,10 @@
  *  请求购物车数量
  */
 @pro_strong FBRequest   *   goodsCarRequest;
-
+@pro_strong NSString    *   goodsCount;
+@pro_strong UILabel     *   countLab;
 - (void)getGoodsCarNumData;
+- (void)setNavGoodsCarNumLab;
 
 /**
  *  是否登录

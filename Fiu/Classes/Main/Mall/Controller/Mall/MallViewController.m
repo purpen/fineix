@@ -40,6 +40,7 @@ static NSString *const URLFiuBrand = @"/scene_brands/getlist";
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     
+    [self getGoodsCarNumData];
     [self setNavigationViewUI];
     
 }
@@ -322,6 +323,7 @@ static NSString *const URLFiuBrand = @"/scene_brands/getlist";
     [self addNavLogoImgisTransparent:NO];
     [self addBarItemLeftBarButton:@"" image:@"Nav_Search" isTransparent:NO];
     [self addBarItemRightBarButton:@"" image:@"Nav_Car" isTransparent:NO];
+    [self setNavGoodsCarNumLab];
 }
 
 //  点击左边barItem

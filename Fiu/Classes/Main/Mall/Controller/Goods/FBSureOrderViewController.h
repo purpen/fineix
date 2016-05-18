@@ -11,10 +11,18 @@
 
 @interface FBSureOrderViewController : FBViewController <UITableViewDelegate, UITableViewDataSource>
 
+/**
+ *  type：下单类型
+ *  0:购物车 ／ 1:立即购买
+ */
+@pro_assign NSInteger           type;
+
 @pro_strong NSDictionary    *   orderDict;
+@pro_strong NSMutableArray  *   carGoodsMarr;
 @pro_strong FBRequest       *   buyingRequest;
 @pro_strong FBRequest       *   addressRequest;
 @pro_strong FBRequest       *   orderRrquest;
+@pro_strong FBRequest       *   carPayRequest;
 
 @pro_strong UITableView     *   orderTable;
 @pro_strong UIView          *   sureView;

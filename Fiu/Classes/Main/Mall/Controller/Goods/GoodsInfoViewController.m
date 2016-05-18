@@ -35,6 +35,7 @@ static NSString *const URLGoodsScene = @"/sight_and_product/getlist";
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     
+    [self getGoodsCarNumData];
     [self setNavigationViewUI];
     
 }
@@ -268,6 +269,7 @@ static NSString *const URLGoodsScene = @"/sight_and_product/getlist";
     self.view.backgroundColor = [UIColor whiteColor];
     [self addBarItemRightBarButton:@"" image:@"Nav_Car" isTransparent:NO];
     self.delegate = self;
+    [self setNavGoodsCarNumLab];
 }
 
 - (void)rightBarItemSelected {
