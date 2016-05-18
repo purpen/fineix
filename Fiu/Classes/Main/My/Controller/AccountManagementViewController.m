@@ -21,6 +21,7 @@
 #import "DatePickerViewController.h"
 #import "AddreesPickerViewController.h"
 #import "AddreesModel.h"
+//#import "IdentityTagsViewController.h"
 
 @interface AccountManagementViewController ()<FBNavigationBarItemsDelegate,UIImagePickerControllerDelegate,UIActionSheetDelegate,UINavigationControllerDelegate>
 {
@@ -68,8 +69,14 @@ static NSString *const UpdateInfoURL = @"/my/update_profile";
         [_accountView.qrcodeBtn addTarget:self action:@selector(clickQrBtn:) forControlEvents:UIControlEventTouchUpInside];
         [_accountView.adreesBtn addTarget:self action:@selector(clickAdreesBtn:) forControlEvents:UIControlEventTouchUpInside];
         [_accountView.birthdayBtn addTarget:self action:@selector(clickBirthBtn:) forControlEvents:UIControlEventTouchUpInside];
+        [_accountView.certificationBtn addTarget:self action:@selector(clickCertificationBtn:) forControlEvents:UIControlEventTouchUpInside];
     }
     return _accountView;
+}
+
+-(void)clickCertificationBtn:(UIButton*)sender{
+    //IdentityTagsViewController *vc = [[IdentityTagsViewController alloc] init];
+    //[self.navigationController pushViewController:vc animated:YES];
 }
 
 -(void)clickBirthBtn:(UIButton*)sender{

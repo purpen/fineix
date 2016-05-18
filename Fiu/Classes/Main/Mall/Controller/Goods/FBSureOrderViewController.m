@@ -24,7 +24,7 @@ static NSString *const URLUserAddress = @"/shopping/default_address";
 static NSString *const URLSureOrder = @"/shopping/confirm";
 static NSString *const URLCarGoPay = @"/shopping/checkout";
 
-@interface FBSureOrderViewController () {
+@interface FBSureOrderViewController ()<BounsDelegate> {
     NSString * _rrid;
     NSString * _addbookId;
     NSString * _isNowbuy;
@@ -326,9 +326,15 @@ static NSString *const URLCarGoPay = @"/shopping/checkout";
     
     } else if (indexPath.section == 4) {
         BonusViewController * bonusVC = [[BonusViewController alloc] init];
+        bonusVC.rid = _rrid;
+        bonusVC.bounsDelegate = self;
         [self.navigationController pushViewController:bonusVC animated:YES];
     }
     
+}
+
+-(void)getBounsCode:(NSString *)code andBounsNum:(NSNumber *)amount{
+    NSLog(@"红包   %@,%@",code,amount);
 }
 
 #pragma mark - 确认订单按钮视图

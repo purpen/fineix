@@ -34,6 +34,7 @@
         [_timeLabel mas_makeConstraints:^(MASConstraintMaker *make) {
             make.top.mas_equalTo(self.mas_top).with.offset(21/667.0*SCREEN_HEIGHT);
             make.centerX.mas_equalTo(self.mas_centerX);
+            make.size.mas_equalTo(CGSizeMake(80, 20));
         }];
         
         [self.contentView addSubview:self.bgView];
@@ -223,10 +224,11 @@
     if (!_timeLabel) {
         _timeLabel = [[UILabel alloc] init];
         _timeLabel.font = [UIFont systemFontOfSize:12];
+        _timeLabel.textAlignment = NSTextAlignmentCenter;
         _timeLabel.textColor = [UIColor whiteColor];
         _timeLabel.backgroundColor = [UIColor lightGrayColor];
         _timeLabel.layer.masksToBounds = YES;
-        _timeLabel.layer.cornerRadius = 1;
+        _timeLabel.layer.cornerRadius = 2;
     }
     return _timeLabel;
 }

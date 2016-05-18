@@ -83,7 +83,7 @@ static NSString *const OrderInfoCellIdentifier = @"orderInfoCell";
     _myTableView.estimatedRowHeight = 212.f;
     _myTableView.rowHeight = UITableViewAutomaticDimension;
     
-    [self requestDataForOderList];
+    
     
     // 下拉刷新
     _myTableView.mj_header = [MJRefreshNormalHeader headerWithRefreshingBlock:^{
@@ -101,6 +101,11 @@ static NSString *const OrderInfoCellIdentifier = @"orderInfoCell";
         }
     }];
 
+}
+
+-(void)viewWillAppear:(BOOL)animated{
+    [super viewWillAppear:animated];
+    [self requestDataForOderList];
 }
 
 //请求不同状态订单列表

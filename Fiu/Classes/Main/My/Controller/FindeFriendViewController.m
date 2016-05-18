@@ -239,8 +239,7 @@ static NSString *const ShareURL = @"http://m.taihuoniao.com/guide/app_about";
     if (indexPath.section == 0) {
         if (indexPath.row == 0) {
             //微信
-            [UMSocialData defaultData].extConfig.wechatSessionData.url = ShareURL;
-            [[UMSocialDataService defaultDataService]  postSNSWithTypes:@[UMShareToWechatSession] content:@"有Fiu的生活，才够意思，快点扫码加我吧!查看个人主页>>http://www.taihuoniao.com" image:nil location:nil urlResource:nil presentedController:self completion:^(UMSocialResponseEntity *response){
+            [[UMSocialDataService defaultDataService]  postSNSWithTypes:@[UMShareToWechatSession] content:@"我喜欢用图片梳理情绪，个性滤镜搭配细腻文字、还能一站购齐好设计！Fiu有一百种方式让你创新生活体验，快来让分享变成生产力。" image:nil location:nil urlResource:nil presentedController:self completion:^(UMSocialResponseEntity *response){
                 if (response.responseCode == UMSResponseCodeSuccess) {
                     [SVProgressHUD showSuccessWithStatus:@"分享成功！"];
                 }
@@ -249,7 +248,7 @@ static NSString *const ShareURL = @"http://m.taihuoniao.com/guide/app_about";
         }else if (indexPath.row == 1){
             //weibo
             MyQrCodeViewController *vc = [[MyQrCodeViewController alloc] init];
-            [[UMSocialDataService defaultDataService]  postSNSWithTypes:@[UMShareToSina] content:[NSString stringWithFormat:@"有Fiu的生活，才够意思，快点扫码加我吧！查看个人主页>>http://www.taihuoniao.com"] image:vc.qrCodeView.qrCodeImageView.image location:nil urlResource:nil presentedController:self completion:^(UMSocialResponseEntity *response){
+            [[UMSocialDataService defaultDataService]  postSNSWithTypes:@[UMShareToSina] content:[NSString stringWithFormat:@"我喜欢用图片梳理情绪，个性滤镜搭配细腻文字、还能一站购齐好设计！Fiu有一百种方式让你创新生活体验，快来让分享变成生产力。"] image:vc.qrCodeView.qrCodeImageView.image location:nil urlResource:nil presentedController:self completion:^(UMSocialResponseEntity *response){
                 if (response.responseCode == UMSResponseCodeSuccess) {
                     [SVProgressHUD showSuccessWithStatus:@"分享成功！"];
                 }

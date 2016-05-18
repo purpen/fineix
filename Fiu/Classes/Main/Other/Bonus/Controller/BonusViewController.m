@@ -89,7 +89,6 @@ static NSString *const BonusCellIdentifier = @"bonusCell";
 #pragma mark - FBRequest Delegate
 - (void)requestSucess:(FBRequest *)request result:(id)result
 {
-    NSLog(@"红包的啊    %@", result);
     NSString * message = result[@"message"];
     if ([request.flag isEqualToString:BonusURL]) {
         if ([[result objectForKey:@"success"] isEqualToNumber:@1]) {
@@ -146,6 +145,8 @@ static NSString *const BonusCellIdentifier = @"bonusCell";
     if (self.bonusAry.count) {
         bonusCell.bonus = self.bonusAry[indexPath.row];
     }
+    bonusCell.clickBtn.tag = indexPath.row;
+    [bonusCell.clickBtn addTarget:self action:@selector(clikTipBtn:) forControlEvents:UIControlEventTouchUpInside];
     return bonusCell;
 }
 
@@ -154,6 +155,41 @@ static NSString *const BonusCellIdentifier = @"bonusCell";
     return false;
 }
 
+-(void)clikTipBtn:(UIButton*)sender{
+    if (self.rid) {
+        BonusModel *model = self.bonusAry[sender.tag];
+        FBRequest *request = [FBAPI postWithUrlString:@"/shopping/use_bonus" requestDictionary:@{@"rid":self.rid,@"code":model.code} delegate:self];
+        [request startRequestSuccess:^(FBRequest *request, id result) {
+            if ([self.bounsDelegate respondsToSelector:@selector(getBounsCode:andBounsNum:)]) {
+                [self.bounsDelegate getBounsCode:model.code andBounsNum:model.amount];
+            }
+            
+            [self.navigationController popViewControllerAnimated:YES];
+        } failure:^(FBRequest *request, NSError *error) {
+            [SVProgressHUD showErrorWithStatus:@"此红包不适用"];
+            
+        }];
+    }
+
+}
+
+//-(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+//    
+//    if (self.rid) {
+//        BonusModel *model = self.bonusAry[indexPath.row];
+//        FBRequest *request = [FBAPI postWithUrlString:@"/shopping/use_bonus" requestDictionary:@{@"rid":self.rid,@"code":model.code} delegate:self];
+//        [request startRequestSuccess:^(FBRequest *request, id result) {
+//            if ([self.bounsDelegate respondsToSelector:@selector(getBounsCode:andBounsNum:)]) {
+//                [self.bounsDelegate getBounsCode:model.code andBounsNum:model.amount];
+//            }
+//            
+//            [self.navigationController popViewControllerAnimated:YES];
+//        } failure:^(FBRequest *request, NSError *error) {
+//            [SVProgressHUD showErrorWithStatus:@"此红包不适用"];
+//            
+//        }];
+//    }
+//}
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];

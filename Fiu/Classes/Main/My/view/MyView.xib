@@ -234,7 +234,7 @@
                     </constraints>
                 </view>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="bks-ip-Hwy">
-                    <rect key="frame" x="0.0" y="92" width="375" height="44"/>
+                    <rect key="frame" x="0.0" y="317" width="375" height="44"/>
                     <subviews>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="个性签名" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hzP-ba-H6X">
                             <rect key="frame" x="13" y="11" width="93" height="21"/>
@@ -488,9 +488,9 @@
                     </variation>
                 </view>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="nql-Lm-8s9">
-                    <rect key="frame" x="0.0" y="317" width="375" height="44"/>
+                    <rect key="frame" x="0.0" y="92" width="375" height="44"/>
                     <subviews>
-                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="申请认证" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="725-jd-BXg">
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="身份标签" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="725-jd-BXg">
                             <rect key="frame" x="13" y="11" width="93" height="21"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="21" id="IDb-FY-p5U"/>
@@ -529,6 +529,7 @@
             <constraints>
                 <constraint firstItem="nql-Lm-8s9" firstAttribute="leading" secondItem="w17-i4-D6K" secondAttribute="leading" id="0cw-aE-918"/>
                 <constraint firstItem="n6A-Vm-ChT" firstAttribute="leading" secondItem="w17-i4-D6K" secondAttribute="leading" id="0wa-vE-TbY"/>
+                <constraint firstItem="bks-ip-Hwy" firstAttribute="top" secondItem="n6A-Vm-ChT" secondAttribute="bottom" constant="1" id="28t-C0-GJC"/>
                 <constraint firstItem="c1t-JX-Md4" firstAttribute="leading" secondItem="w17-i4-D6K" secondAttribute="leading" id="3xR-Fg-R2m"/>
                 <constraint firstAttribute="trailing" secondItem="G5R-A7-jZQ" secondAttribute="trailing" id="680-Io-25H"/>
                 <constraint firstItem="bks-ip-Hwy" firstAttribute="leading" secondItem="w17-i4-D6K" secondAttribute="leading" id="6Va-cU-AME"/>
@@ -539,6 +540,7 @@
                 <constraint firstItem="9tk-8Y-TiT" firstAttribute="top" secondItem="c1t-JX-Md4" secondAttribute="bottom" constant="1" id="Gzc-q6-tfG"/>
                 <constraint firstAttribute="trailing" secondItem="Npp-Vn-Gno" secondAttribute="trailing" id="Q3U-lW-nt2"/>
                 <constraint firstItem="G5R-A7-jZQ" firstAttribute="top" secondItem="tUb-wY-BYS" secondAttribute="bottom" constant="1" id="QXR-gU-XXz"/>
+                <constraint firstItem="c1t-JX-Md4" firstAttribute="top" secondItem="nql-Lm-8s9" secondAttribute="bottom" constant="1" id="UdP-ex-rph"/>
                 <constraint firstAttribute="trailing" secondItem="nql-Lm-8s9" secondAttribute="trailing" id="dJp-F4-P0n"/>
                 <constraint firstItem="n6A-Vm-ChT" firstAttribute="top" secondItem="Npp-Vn-Gno" secondAttribute="bottom" constant="1" id="dqI-ho-D0I"/>
                 <constraint firstAttribute="trailing" secondItem="c1t-JX-Md4" secondAttribute="trailing" id="eJk-Sa-zu8"/>
@@ -549,10 +551,18 @@
                 <constraint firstAttribute="trailing" secondItem="n6A-Vm-ChT" secondAttribute="trailing" id="mJX-3L-gnT"/>
                 <constraint firstItem="nql-Lm-8s9" firstAttribute="top" secondItem="n6A-Vm-ChT" secondAttribute="bottom" constant="1" id="ozf-ii-7aW"/>
                 <constraint firstItem="tUb-wY-BYS" firstAttribute="leading" secondItem="w17-i4-D6K" secondAttribute="leading" id="pKh-2j-F5k"/>
+                <constraint firstItem="nql-Lm-8s9" firstAttribute="top" secondItem="G5R-A7-jZQ" secondAttribute="bottom" constant="1" id="qhR-kU-QqG"/>
                 <constraint firstAttribute="trailing" secondItem="tUb-wY-BYS" secondAttribute="trailing" id="sMI-yg-qNJ"/>
                 <constraint firstItem="tUb-wY-BYS" firstAttribute="top" secondItem="w17-i4-D6K" secondAttribute="top" constant="2" id="zJD-Kc-JMU"/>
             </constraints>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <variation key="default">
+                <mask key="constraints">
+                    <exclude reference="ozf-ii-7aW"/>
+                    <exclude reference="iDi-O1-oRk"/>
+                    <exclude reference="Gxm-Y6-SqK"/>
+                </mask>
+            </variation>
             <connections>
                 <outlet property="adreesBtn" destination="v3w-Wv-YUt" id="Eip-OT-SeN"/>
                 <outlet property="adress" destination="DQT-rn-zKo" id="Hys-Qc-yQv"/>
