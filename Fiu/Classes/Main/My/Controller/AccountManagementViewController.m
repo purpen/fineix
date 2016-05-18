@@ -79,6 +79,8 @@ static NSString *const UpdateInfoURL = @"/my/update_profile";
     [self.navigationController pushViewController:vc animated:YES];
 }
 
+
+
 -(void)clickBirthBtn:(UIButton*)sender{
     self.pickerVC.modalPresentationStyle = UIModalPresentationOverCurrentContext;
     [self presentViewController:_pickerVC animated:NO completion:nil];
@@ -137,13 +139,11 @@ static NSString *const UpdateInfoURL = @"/my/update_profile";
     [super viewWillAppear:animated];
     UserInfoEntity *entity = [UserInfoEntity defaultUserInfoEntity];
     entity.isLogin = YES;
-    NSLog(@"   修改地区   &&&&&&&&&  %@",entity.prin);
     //更新头像
     [_accountView.iconUrl sd_setImageWithURL:[NSURL URLWithString:entity.mediumAvatarUrl] placeholderImage:[UIImage imageNamed:@"Circle + User"] completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
         
     }];
     _accountView.nickName.text = entity.nickname;
-    NSLog( @"LLLLLL   %@",entity.prin);
     if (entity.prin) {
         _accountView.adress.text = [NSString stringWithFormat:@"%@%@",entity.prin,entity.city];
     }
@@ -162,6 +162,7 @@ static NSString *const UpdateInfoURL = @"/my/update_profile";
             break;
     }
     _accountView.birthday.text = entity.birthday;
+    _accountView.IdentityTagsLabel.text = entity.label;
 
 }
 

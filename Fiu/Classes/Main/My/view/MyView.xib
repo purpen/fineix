@@ -507,6 +507,12 @@
                                 <constraint firstAttribute="height" constant="15" id="geT-8J-6Rf"/>
                             </constraints>
                         </imageView>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="BLg-TY-lb6">
+                            <rect key="frame" x="296" y="13" width="38" height="18"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                            <color key="textColor" red="0.40000000000000002" green="0.40000000000000002" blue="0.40000000000000002" alpha="1" colorSpace="calibratedRGB"/>
+                            <nil key="highlightedColor"/>
+                        </label>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="UXM-lR-30D">
                             <rect key="frame" x="8" y="6" width="351" height="30"/>
                         </button>
@@ -516,6 +522,8 @@
                         <constraint firstAttribute="height" constant="44" id="BD8-ek-Pfx"/>
                         <constraint firstItem="EVa-8z-62Z" firstAttribute="centerY" secondItem="nql-Lm-8s9" secondAttribute="centerY" id="GfF-KX-6Ev"/>
                         <constraint firstAttribute="bottom" secondItem="UXM-lR-30D" secondAttribute="bottom" constant="8" id="Kmq-Zt-7oP"/>
+                        <constraint firstItem="BLg-TY-lb6" firstAttribute="centerY" secondItem="nql-Lm-8s9" secondAttribute="centerY" id="RHc-nQ-66J"/>
+                        <constraint firstAttribute="trailing" secondItem="BLg-TY-lb6" secondAttribute="trailing" constant="41" id="RgH-kK-qpf"/>
                         <constraint firstAttribute="trailing" secondItem="UXM-lR-30D" secondAttribute="trailing" constant="16" id="b2M-dY-BeW"/>
                         <constraint firstItem="UXM-lR-30D" firstAttribute="top" secondItem="nql-Lm-8s9" secondAttribute="top" constant="6" id="fcg-1G-vz2"/>
                         <constraint firstItem="725-jd-BXg" firstAttribute="centerY" secondItem="nql-Lm-8s9" secondAttribute="centerY" id="gQf-cS-s47"/>
@@ -564,6 +572,7 @@
                 </mask>
             </variation>
             <connections>
+                <outlet property="IdentityTagsLabel" destination="BLg-TY-lb6" id="vHs-h5-1ML"/>
                 <outlet property="adreesBtn" destination="v3w-Wv-YUt" id="Eip-OT-SeN"/>
                 <outlet property="adress" destination="DQT-rn-zKo" id="Hys-Qc-yQv"/>
                 <outlet property="birthday" destination="UEA-Fo-uvb" id="oBn-P8-0J6"/>

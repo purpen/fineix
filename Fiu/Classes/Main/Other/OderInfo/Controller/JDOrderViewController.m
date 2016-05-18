@@ -22,7 +22,7 @@
     self.delegate = self;
     self.navViewTitle.text = @"京东订单";
     self.jDWebView.delegate = self;
-    NSURL *url = [NSURL URLWithString:@"http://m.jd.com/?cu=true&utm_source=sm-search&utm_medium=cpc&utm_campaign=t_262767352_smsearch&utm_term=1494476157_0_6b28dfde214748248b9c0a39be71d2dc"];
+    NSURL *url = [NSURL URLWithString:@"https://plogin.m.jd.com/user/login.action?appid=100&returnurl=http%3A%2F%2Fhome.m.jd.com%2FmyJd%2Fhome.action%3Fsid%3D2f52c20a5629dbfe46688e73cf2192d6"];
     NSURLRequest *request = [NSURLRequest requestWithURL:url];
     [self.jDWebView loadRequest:request];
 }

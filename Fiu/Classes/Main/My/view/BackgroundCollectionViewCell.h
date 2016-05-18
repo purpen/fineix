@@ -19,6 +19,7 @@
 @property(nonatomic,strong) UIButton *backBtn;
 @property(nonatomic,strong) UIButton *editBtn;
 @property(nonatomic,strong) UIView *headView;
+@property(nonatomic,strong) UIImageView *idImageView;
 
 - (void)setUI;
 

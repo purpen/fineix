@@ -68,6 +68,13 @@
             make.centerX.mas_equalTo(self.mas_centerX);
             make.bottom.mas_equalTo(_nickName.mas_top).with.offset(-8/667.0*SCREEN_HEIGHT);
         }];
+        
+        [self.contentView addSubview:self.idImageView];
+        [_idImageView mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.size.mas_equalTo(CGSizeMake(28, 12));
+            make.centerY.mas_equalTo(_userLevelLabel.mas_centerY);
+            make.left.mas_equalTo(_userLevelLabel.mas_right).with.offset(3);
+        }];
 
     }
     return self;
@@ -106,9 +113,24 @@
     }];
     self.nickName.text = model.nickname;
     self.userProfile.text = model.summary;
+    if ([model.is_expert isEqualToString:@"0"]) {
+        self.userLevelLabel.text = [NSString stringWithFormat:@"%@ | V%d",model.label,[model.level intValue]];
+        self.idImageView.hidden = YES;
+    }else if([model.is_expert isEqualToString:@"1"]){
+        self.userLevelLabel.text = [NSString stringWithFormat:@" | V%d",[model.level intValue]];
+        self.idImageView.hidden = NO;
+        self.idImageView.image = [UIImage imageNamed:model.label];
+    }
     //self.userLevelLabel.text = [NSString stringWithFormat:@"%@|V%d",model.levelDesc,[model.level intValue]];
     
     [self.bgImageView sd_setImageWithURL:[NSURL URLWithString:model.head_pic_url] placeholderImage:[UIImage imageNamed:@"image"]];
+}
+
+-(UIImageView *)idImageView{
+    if (!_idImageView) {
+        _idImageView = [[UIImageView alloc] init];
+    }
+    return _idImageView;
 }
 
 #pragma mark - 个人信息背景图
