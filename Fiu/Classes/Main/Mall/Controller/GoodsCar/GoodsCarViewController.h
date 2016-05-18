@@ -15,6 +15,7 @@
 @pro_strong FBRequest               *   goodsListRequest;
 @pro_strong FBRequest               *   stockRequest;
 @pro_strong FBRequest               *   deleteRequest;
+@pro_strong FBRequest               *   editCarItemRequest;
 @pro_strong BuyCarDefault           *   defaultCarView;     //  没有商品的购物车背景
 
 @pro_strong UITableView             *   carItemTabel;

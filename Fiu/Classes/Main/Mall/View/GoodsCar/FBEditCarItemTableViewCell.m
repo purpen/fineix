@@ -17,8 +17,6 @@
 - (instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier {
     self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
     if (self) {
-        
-        self.newNum = 1;
         self.selectionStyle = UITableViewCellSelectionStyleNone;
         self.backgroundColor = [UIColor whiteColor];
         [self setCellUI];
@@ -49,6 +47,7 @@
     self.numLab.text = [NSString stringWithFormat:@"%zi", model.n];
     
     self.nowNum = model.n;
+    self.newNum = self.nowNum;
     self.stockNum = stock;
 }
 
@@ -181,8 +180,8 @@
 
 #pragma mark - 增加数量
 - (void)addGoodsStock:(UIButton *)button {
-    self.nowNum += 1;
-    if (self.nowNum == self.stockNum) {
+    self.newNum += 1;
+    if (self.newNum == self.stockNum) {
         [SVProgressHUD showInfoWithStatus:NSLocalizedString(@"StockNone", nil)];
         button.userInteractionEnabled = NO;
         
@@ -191,8 +190,7 @@
         self.subNumBtn.backgroundColor = [UIColor colorWithHexString:fineixColor];
     }
     
-    self.newNum = self.nowNum;
-    self.numLab.text = [NSString stringWithFormat:@"%zi", self.nowNum];
+    self.numLab.text = [NSString stringWithFormat:@"%zi", self.newNum];
 }
 
 - (UIButton *)subNumBtn {
@@ -209,17 +207,16 @@
 
 #pragma mark - 减少数量
 - (void)subGoodsStock:(UIButton *)button {
-    self.nowNum -= 1;
-    if (self.nowNum == 1) {
+    self.newNum -= 1;
+    if (self.newNum == 1) {
         button.userInteractionEnabled = NO;
         button.backgroundColor = [UIColor colorWithHexString:titleColor];
         
     } else {
         self.addNumBtn.userInteractionEnabled = YES;
     }
-    
-    self.nowNum = self.nowNum;
-    self.numLab.text = [NSString stringWithFormat:@"%zi", self.nowNum];
+
+    self.numLab.text = [NSString stringWithFormat:@"%zi", self.newNum];
 }
 
 - (void)dealloc {

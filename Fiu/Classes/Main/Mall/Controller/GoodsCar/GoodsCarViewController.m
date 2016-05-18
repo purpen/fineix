@@ -17,7 +17,7 @@
 static NSString *const URLGoodsCar = @"/shopping/fetch_cart";
 static NSString *const URLCarGoodsStock = @"/shopping/fetch_cart_product_count";
 static NSString *const URLDeleteCarItem = @"/shopping/remove_cart";
-
+static NSString *const URLEditItemsNum = @"/shopping/edit_cart";
 
 @interface GoodsCarViewController () {
     BOOL    _isEdit;
@@ -69,8 +69,11 @@ static NSString *const URLDeleteCarItem = @"/shopping/remove_cart";
                 [self.carItemList addObject:carModel];
                 [self.goodsIdList addObject:[NSString stringWithFormat:@"%zi", carModel.productId]];
             }
+            
+            for (NSInteger idx = 0; idx < self.carItemList.count; ++ idx) {
+                 [self.carGoodsCount addObject:[NSString stringWithFormat:@"%zi", [[self.carItemList valueForKey:@"n"][idx] integerValue]]];
+            }
             self.priceMarr = [NSMutableArray arrayWithArray:[self.carItemList valueForKey:@"price"]];
-            self.carGoodsCount = [NSMutableArray arrayWithArray:[self.carItemList valueForKey:@"n"]];
         }
         [self.carItemTabel reloadData];
         [SVProgressHUD dismiss];
@@ -103,6 +106,22 @@ static NSString *const URLDeleteCarItem = @"/shopping/remove_cart";
     [self.deleteRequest startRequestSuccess:^(FBRequest *request, id result) {
         [self networkGoodsCarList];
         [SVProgressHUD showSuccessWithStatus:NSLocalizedString(@"deleteSuccess", nil)];
+        
+    } failure:^(FBRequest *request, NSError *error) {
+        [SVProgressHUD showErrorWithStatus:[error localizedDescription]];
+    }];
+}
+
+#pragma mark 修改购物车商品数量
+- (void)networkEditCarItemsData:(NSMutableArray *)editItemData {
+    NSData * jsonData = [NSJSONSerialization dataWithJSONObject:editItemData options:0 error:nil];
+    NSString * json = [[NSString alloc] initWithData:jsonData encoding:NSUTF8StringEncoding];
+    
+    self.editCarItemRequest = [FBAPI postWithUrlString:URLEditItemsNum requestDictionary:@{@"array":json} delegate:self];
+    [self.editCarItemRequest startRequestSuccess:^(FBRequest *request, id result) {
+        if ([[result valueForKey:@"success"] isEqualToNumber:@1]) {
+            [self networkGoodsCarList];
+        }
         
     } failure:^(FBRequest *request, NSError *error) {
         [SVProgressHUD showErrorWithStatus:[error localizedDescription]];
@@ -184,7 +203,8 @@ static NSString *const URLDeleteCarItem = @"/shopping/remove_cart";
     
     NSString * type = [NSString stringWithFormat:@"%@", [self.carItemList valueForKey:@"type"][indexPath.section]];
     NSString * targetId = [self.carItemList valueForKey:@"targetId"][indexPath.section];
-    NSDictionary * chooseDict = @{@"type":type, @"target_id":targetId};
+    NSString * n = [NSString stringWithFormat:@"%@", [self.carItemList valueForKey:@"n"][indexPath.section]];
+    NSDictionary * chooseDict = @{@"type":type, @"target_id":targetId, @"n":n};
 
     if (button.selected == YES) {
         [self.chooseItems addObject:chooseDict];
@@ -201,15 +221,16 @@ static NSString *const URLDeleteCarItem = @"/shopping/remove_cart";
     
     NSString * type = [NSString stringWithFormat:@"%@", [self.carItemList valueForKey:@"type"][indexPath.section]];
     NSString * targetId = [self.carItemList valueForKey:@"targetId"][indexPath.section];
-    NSDictionary * chooseDict = @{@"type":type, @"target_id":targetId};
+    NSString * n = [NSString stringWithFormat:@"%@", [self.carItemList valueForKey:@"n"][indexPath.section]];
+    NSDictionary * chooseDict = @{@"type":type, @"target_id":targetId, @"n":n};
     CGFloat payMoney = [self.priceMarr[indexPath.section] floatValue];
     
     if (button.selected == YES) {
         [self.chooseItems addObject:chooseDict];
-        self.payPrice += payMoney;
+        self.payPrice += (payMoney * [n integerValue]);
     } else {
         [self.chooseItems removeObject:chooseDict];
-        self.payPrice -= payMoney;
+        self.payPrice -= (payMoney * [n integerValue]);
     }
     self.sumPrice.text = [NSString stringWithFormat:@"￥%.2f", self.payPrice];
     
@@ -271,6 +292,10 @@ static NSString *const URLDeleteCarItem = @"/shopping/remove_cart";
             make.right.equalTo(sumPrice.mas_left).with.offset(0);
         }];
         
+        UILabel * lineLab = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 1)];
+        lineLab.backgroundColor = [UIColor colorWithHexString:grayLineColor];
+        
+        [_bottomView addSubview:lineLab];
         [_bottomView addSubview:sumPrice];
         [_bottomView addSubview:sumLab];
     }
@@ -299,18 +324,20 @@ static NSString *const URLDeleteCarItem = @"/shopping/remove_cart";
         [[NSNotificationCenter defaultCenter] postNotificationName:@"chooseAll" object:nil];
         //  全选商品
         [self.chooseItems removeAllObjects];
+        
+        CGFloat sumPrice = 0.0f;
         for (NSInteger idx = 0; idx < self.carItemList.count; ++ idx) {
             NSString * type = [NSString stringWithFormat:@"%@", [self.carItemList valueForKey:@"type"][idx]];
             NSString * targetId = [self.carItemList valueForKey:@"targetId"][idx];
-            NSDictionary * chooseDict = @{@"type":type, @"target_id":targetId};
+            NSString * n = [NSString stringWithFormat:@"%@", [self.carItemList valueForKey:@"n"][idx]];
+            NSDictionary * chooseDict = @{@"type":type, @"target_id":targetId, @"n":n};
             [self.chooseItems addObject:chooseDict];
+            
+            //  合计价格
+            CGFloat payMoney = [self.priceMarr[idx] floatValue];
+            sumPrice += (payMoney * [n integerValue]);
+            self.payPrice = sumPrice;
         }
-        //  合计价格
-        CGFloat sumPrice = 0.0f;
-        for (NSString * price in self.priceMarr) {
-            sumPrice += [price floatValue];
-        }
-        self.payPrice = sumPrice;
         self.sumPrice.text = [NSString stringWithFormat:@"￥%.2f", self.payPrice];
     
     } else if (button.selected == YES) {
@@ -321,7 +348,6 @@ static NSString *const URLDeleteCarItem = @"/shopping/remove_cart";
         //  合计价格
         self.payPrice = 0.0f;
         self.sumPrice.text = [NSString stringWithFormat:@"￥%.2f", self.payPrice];
-        
     }
 }
 
@@ -391,6 +417,29 @@ static NSString *const URLDeleteCarItem = @"/shopping/remove_cart";
         [self.carItemTabel reloadData];
         
     } else if (button.selected == YES) {
+        //  编辑购物车后的数量
+        NSMutableArray * editCarGoodsCount = [NSMutableArray array];
+        NSArray * cellArr = [self.carItemTabel indexPathsForVisibleRows];
+        for (NSInteger idx = 0; idx < cellArr.count; ++ idx) {
+            if (_isEdit) {
+                FBEditCarItemTableViewCell * cell = [self.carItemTabel cellForRowAtIndexPath:cellArr[idx]];
+                if (cell.newNum != cell.nowNum) {
+                    NSInteger index = [self.carGoodsCount indexOfObject:[NSString stringWithFormat:@"%zi", cell.nowNum]];
+                    [self.carGoodsCount replaceObjectAtIndex:index withObject:[NSString stringWithFormat:@"%zi", cell.newNum]];
+                }
+            }
+            NSString * type = [NSString stringWithFormat:@"%@", [self.carItemList valueForKey:@"type"][idx]];
+            NSString * targetId = [self.carItemList valueForKey:@"targetId"][idx];
+            NSString * n = self.carGoodsCount[idx];
+            NSDictionary * params = @{
+                                      @"target_id":targetId,
+                                      @"type":type,
+                                      @"n":n
+                                      };
+            [editCarGoodsCount addObject:params];
+        }
+        [self networkEditCarItemsData:editCarGoodsCount];
+        
         //  默认状态
         button.selected = NO;
         _isEdit = NO;
@@ -398,19 +447,6 @@ static NSString *const URLDeleteCarItem = @"/shopping/remove_cart";
         self.sumLab.hidden = NO;
         self.sumPrice.hidden = NO;
         [self.carItemTabel reloadData];
-        
-        //  编辑购物车后的数量
-        
-            NSArray * cellArr = [self.carItemTabel indexPathsForVisibleRows];
-            for (NSInteger idx = 0; idx < cellArr.count; ++ idx) {
-                FBEditCarItemTableViewCell * cell = [self.carItemTabel cellForRowAtIndexPath:cellArr[idx]];
-                //            if (cell.newNum != cell.nowNum) {
-                //                NSInteger index = [self.carGoodsCount indexOfObject:[NSString stringWithFormat:@"%zi", cell.nowNum]];
-                //                [self.carGoodsCount replaceObjectAtIndex:index withObject:[NSString stringWithFormat:@"%zi", cell.newNum]];
-                //            }
-                NSLog(@"＝＝＝＝＝＝＝＝＝＝＝ 修改购物车后的数量：   %zi", cell.newNum);
-            }
-            //        NSLog(@"＝＝＝＝＝＝＝＝＝＝＝ 修改购物车后的数量：   %@", self.carGoodsCount);
     }
 }
 
@@ -442,6 +478,13 @@ static NSString *const URLDeleteCarItem = @"/shopping/remove_cart";
         _chooseItems = [NSMutableArray array];
     }
     return _chooseItems;
+}
+
+- (NSMutableArray *)carGoodsCount {
+    if (!_carGoodsCount) {
+        _carGoodsCount = [NSMutableArray array];
+    }
+    return _carGoodsCount;
 }
 
 #pragma mark - clear

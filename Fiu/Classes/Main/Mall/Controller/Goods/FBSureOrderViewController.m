@@ -99,6 +99,7 @@ static NSString *const URLCarGoPay = @"/shopping/checkout";
     
     self.carPayRequest = [FBAPI postWithUrlString:URLCarGoPay requestDictionary:@{@"array":json} delegate:self];
     [self.carPayRequest startRequestSuccess:^(FBRequest *request, id result) {
+        NSLog(@"购物车下单：%@", result);
         //  合计价格
         self.payPrice = [[result valueForKey:@"data"] valueForKey:@"pay_money"];
         self.sumPrice.text = [NSString stringWithFormat:@"￥%@", self.payPrice];
@@ -374,6 +375,10 @@ static NSString *const URLCarGoPay = @"/shopping/checkout";
             make.bottom.equalTo(_sureView.mas_bottom).with.offset(0);
             make.right.equalTo(sumPrice.mas_left).with.offset(0);
         }];
+        
+        UILabel * lineLab = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 1)];
+        lineLab.backgroundColor = [UIColor colorWithHexString:grayLineColor];
+        [_sureView addSubview:lineLab];
     }
     return _sureView;
 }
