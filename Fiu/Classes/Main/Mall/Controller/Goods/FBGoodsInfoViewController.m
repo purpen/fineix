@@ -36,6 +36,7 @@ static NSString *const URLAddCar = @"/shopping/add_cart";
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     
+    [self getGoodsCarNumData];
     [self setNavigationViewUI];
     
 }
@@ -93,15 +94,16 @@ static NSString *const URLAddCar = @"/shopping/add_cart";
     self.addCarRequest = [FBAPI postWithUrlString:URLAddCar requestDictionary:goodsData delegate:self];
     [self.addCarRequest startRequestSuccess:^(FBRequest *request, id result) {
         if ([[result valueForKey:@"success"] isEqualToNumber:@1]) {
+            [self getGoodsCarNumData];
             [self showMessage:@"加入购物车成功～"];
         }
         
     } failure:^(FBRequest *request, NSError *error) {
-        [SVProgressHUD showErrorWithStatus:[error localizedDescription]];
+        [self showMessage:[error localizedDescription]];
     }];
 }
 
-#pragma mark - 设置视图
+#pragma mark - 设置视图x
 - (void)setThnGoodsInfoVcUI {
     [self.view addSubview:self.goodsTable];
     [self.view addSubview:self.buyView];
@@ -253,6 +255,7 @@ static NSString *const URLAddCar = @"/shopping/add_cart";
     buyVC.buyingGoodsBlock = ^(NSDictionary * dict) {
         FBSureOrderViewController * sureOrderVC = [[FBSureOrderViewController alloc] init];
         sureOrderVC.orderDict = dict;
+        sureOrderVC.type = 1;
         [self.navigationController pushViewController:sureOrderVC animated:YES];
     };
     
@@ -309,6 +312,7 @@ static NSString *const URLAddCar = @"/shopping/add_cart";
     self.view.backgroundColor = [UIColor whiteColor];
     [self addBarItemRightBarButton:@"" image:@"Nav_Car" isTransparent:NO];
     self.delegate = self;
+    [self setNavGoodsCarNumLab];
 }
 
 - (void)rightBarItemSelected {

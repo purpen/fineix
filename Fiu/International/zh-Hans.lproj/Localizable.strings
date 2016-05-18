@@ -55,6 +55,9 @@
 "cameraOpen" = "请开启相机权限";
 "cameraError" = "相机不可用";
 "searchFScene" = "搜索情境";
+"StockNone" = "库存只有这么多了";
+"deleteSuccess" = "删除成功";
+"deleteError" = "删除失败";
 
 //  搜索框提示
 "searchLocation" = "搜索地点";
@@ -86,6 +89,11 @@
 "writeSummary" = "请输入备注";
 "sumOrderPrice" = "合计：";
 "Default" = "默认";
+"Edit" = "编辑";
+"Done" = "完成";
+"CheckAll" = "全选";
+"GoPay" = "去结算";
+"Delete" = "删除";
 
 //  评论
 "comment" = "评论一下";

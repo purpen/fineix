@@ -30,6 +30,7 @@ static NSString *const URLGoodsList = @"/scene_product/getlist";
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     
+    [self getGoodsCarNumData];
     [self setNavigationViewUI];
 }
 
@@ -275,6 +276,7 @@ static NSString *const URLGoodsList = @"/scene_product/getlist";
     self.delegate = self;
     self.navViewTitle.text = NSLocalizedString(@"GoodsCategoryVcTitle", nil);
     [self addBarItemRightBarButton:@"" image:@"Nav_Car" isTransparent:NO];
+    [self setNavGoodsCarNumLab];
 }
 
 //  打开购物车

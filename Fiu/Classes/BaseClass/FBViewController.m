@@ -33,11 +33,35 @@ NSString *const URLGoodsCarNum = @"/shopping/fetch_cart_count";
 - (void)getGoodsCarNumData {
     self.goodsCarRequest = [FBAPI getWithUrlString:URLGoodsCarNum requestDictionary:nil delegate:self];
     [self.goodsCarRequest startRequestSuccess:^(FBRequest *request, id result) {
-        NSLog(@"＋＋＋＋＋＋＋ %@", result);
-        
+        self.goodsCount = [NSString stringWithFormat:@"%@", [[result valueForKey:@"data"] valueForKey:@"count"]];
+        if ([[[result valueForKey:@"data"] valueForKey:@"count"] integerValue] > 0) {
+            self.countLab.hidden = NO;
+            self.countLab.text = self.goodsCount;
+        } else {
+            self.countLab.hidden = YES;
+        }
+
     } failure:^(FBRequest *request, NSError *error) {
         NSLog(@"%@", error);
     }];
+}
+
+- (UILabel *)countLab {
+    if (!_countLab) {
+        _countLab = [[UILabel alloc] initWithFrame:CGRectMake(SCREEN_WIDTH - 20, 25, 15, 15)];
+        _countLab.layer.cornerRadius = 15 / 2;
+        _countLab.layer.masksToBounds = YES;
+        _countLab.backgroundColor = [UIColor blackColor];
+        _countLab.textColor = [UIColor whiteColor];
+        _countLab.textAlignment = NSTextAlignmentCenter;
+        _countLab.font = [UIFont systemFontOfSize:9];
+    }
+    return _countLab;
+}
+
+#pragma mark - 显示购物车数量按钮
+- (void)setNavGoodsCarNumLab {
+    [self.navView addSubview:self.countLab];
 }
 
 #pragma mark - 获取用户登录信息

@@ -22,6 +22,7 @@
 static NSString *const URLBuying = @"/shopping/now_buy";
 static NSString *const URLUserAddress = @"/shopping/default_address";
 static NSString *const URLSureOrder = @"/shopping/confirm";
+static NSString *const URLCarGoPay = @"/shopping/checkout";
 
 @interface FBSureOrderViewController ()<BounsDelegate> {
     NSString * _rrid;
@@ -51,18 +52,23 @@ static NSString *const URLSureOrder = @"/shopping/confirm";
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
     [self networkUserAddress];
-    [self networkBuyingOrderData];
+    
+    if (self.type == 1) {
+        [self networkBuyingOrderData];
+    } else if (self.type == 0) {
+        [self networkCarGoPayData:self.carGoodsMarr];
+    }
+    
     [self setOrderVcUI];
 }
 
 #pragma mark - 网络请求
 #pragma mark 立即购买
 - (void)networkBuyingOrderData {
+    [SVProgressHUD show];
     self.buyingRequest = [FBAPI postWithUrlString:URLBuying requestDictionary:self.orderDict delegate:self];
     [self.buyingRequest startRequestSuccess:^(FBRequest *request, id result) {
-        //        NSLog(@"＝＝＝＝＝＝ %@", result);
         //  合计价格
         self.payPrice = [[result valueForKey:@"data"] valueForKey:@"pay_money"];
         self.sumPrice.text = [NSString stringWithFormat:@"￥%@", self.payPrice];
@@ -78,6 +84,37 @@ static NSString *const URLSureOrder = @"/shopping/confirm";
             [self.goodsItems addObject:itemModel];
         }
         [self.orderTable reloadData];
+        [SVProgressHUD dismiss];
+        
+    } failure:^(FBRequest *request, NSError *error) {
+        [SVProgressHUD showErrorWithStatus:[error localizedDescription]];
+    }];
+}
+
+#pragma mark 购物车下单
+- (void)networkCarGoPayData:(NSMutableArray *)itemData {
+    [SVProgressHUD show];
+    NSData * jsonData = [NSJSONSerialization dataWithJSONObject:itemData options:0 error:nil];
+    NSString * json = [[NSString alloc] initWithData:jsonData encoding:NSUTF8StringEncoding];
+    
+    self.carPayRequest = [FBAPI postWithUrlString:URLCarGoPay requestDictionary:@{@"array":json} delegate:self];
+    [self.carPayRequest startRequestSuccess:^(FBRequest *request, id result) {
+        //  合计价格
+        self.payPrice = [[result valueForKey:@"data"] valueForKey:@"pay_money"];
+        self.sumPrice.text = [NSString stringWithFormat:@"￥%@", self.payPrice];
+        
+        _rrid = [[[result valueForKey:@"data"] valueForKey:@"order_info"] valueForKey:@"_id"];
+        _isNowbuy = [[result valueForKey:@"data"] valueForKey:@"is_nowbuy"];
+        _transferTime = @"a";
+        _bonusCode = @"";
+        
+        NSArray * items = [[[[result valueForKey:@"data"] valueForKey:@"order_info"] valueForKey:@"dict"] valueForKey:@"items"];
+        for (NSDictionary * itemDict in items) {
+            OrderItems * itemModel = [[OrderItems alloc] initWithDictionary:itemDict];
+            [self.goodsItems addObject:itemModel];
+        }
+        [self.orderTable reloadData];
+        [SVProgressHUD dismiss];
         
     } failure:^(FBRequest *request, NSError *error) {
         [SVProgressHUD showErrorWithStatus:[error localizedDescription]];
@@ -357,7 +394,6 @@ static NSString *const URLSureOrder = @"/shopping/confirm";
                                  @"bonus_code":[NSString stringWithFormat:@"%@",_bonusCode]
                                  };
     
-    NSLog(@"＝＝＝＝  确认订单信息：%@", orderDict);
     [self networkSureOrder:orderDict];
 }
 
