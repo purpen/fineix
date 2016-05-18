@@ -146,12 +146,15 @@
 		1FE60E661CD33E4700045117 /* MessagesssViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1FE60E641CD33E4700045117 /* MessagesssViewController.xib */; };
 		1FE60E781CD3E31D00045117 /* FindFriendModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 1FE60E771CD3E31D00045117 /* FindFriendModel.m */; };
 		1FE60E7B1CD3E6DC00045117 /* FindSceneModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 1FE60E7A1CD3E6DC00045117 /* FindSceneModel.m */; };
-		1FE701EF1CEB2C29000BA84A /* IdentityTagsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1FE701ED1CEB2C29000BA84A /* IdentityTagsViewController.m */; };
-		1FE701F01CEB2C29000BA84A /* IdentityTagsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1FE701EE1CEB2C29000BA84A /* IdentityTagsViewController.xib */; };
-		1FE701F31CEB4BDF000BA84A /* IdentityTagModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 1FE701F21CEB4BDF000BA84A /* IdentityTagModel.m */; };
-		1FE701F61CEB50FD000BA84A /* TagsCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 1FE701F51CEB50FD000BA84A /* TagsCollectionViewCell.m */; };
-		1FE701FA1CEB7638000BA84A /* TheOfficialCertificationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1FE701F81CEB7638000BA84A /* TheOfficialCertificationViewController.m */; };
-		1FE701FB1CEB7638000BA84A /* TheOfficialCertificationViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1FE701F91CEB7638000BA84A /* TheOfficialCertificationViewController.xib */; };
+		1FE7020A1CEC14E0000BA84A /* IdentityTagsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1FE701FF1CEC14E0000BA84A /* IdentityTagsViewController.m */; };
+		1FE7020B1CEC14E0000BA84A /* IdentityTagsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1FE702001CEC14E0000BA84A /* IdentityTagsViewController.xib */; };
+		1FE7020C1CEC14E0000BA84A /* TheOfficialCertificationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1FE702021CEC14E0000BA84A /* TheOfficialCertificationViewController.m */; };
+		1FE7020D1CEC14E0000BA84A /* TheOfficialCertificationViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1FE702031CEC14E0000BA84A /* TheOfficialCertificationViewController.xib */; };
+		1FE7020E1CEC14E0000BA84A /* IdentityTagModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 1FE702061CEC14E0000BA84A /* IdentityTagModel.m */; };
+		1FE7020F1CEC14E0000BA84A /* TagsCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 1FE702091CEC14E0000BA84A /* TagsCollectionViewCell.m */; };
+		1FE702151CEC56CD000BA84A /* CertIdView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1FE702141CEC56CD000BA84A /* CertIdView.m */; };
+		1FE702171CEC56EA000BA84A /* Empty.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1FE702161CEC56EA000BA84A /* Empty.xib */; };
+		1FE7021C1CEC73BB000BA84A /* UIImagePickerController+Flag.m in Sources */ = {isa = PBXBuildFile; fileRef = 1FE7021B1CEC73BB000BA84A /* UIImagePickerController+Flag.m */; };
 		1FEB71721CC8802800CF34F3 /* InvitationModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 1FEB71711CC8802800CF34F3 /* InvitationModel.m */; };
 		1FEB71751CC88B5D00CF34F3 /* FindeFirendTwoModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 1FEB71741CC88B5D00CF34F3 /* FindeFirendTwoModel.m */; };
 		1FEB71781CC8A35A00CF34F3 /* QRCodeScanViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1FEB71771CC8A35A00CF34F3 /* QRCodeScanViewController.m */; };
@@ -687,6 +690,21 @@
 		1FE60E771CD3E31D00045117 /* FindFriendModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FindFriendModel.m; sourceTree = "<group>"; };
 		1FE60E791CD3E6DC00045117 /* FindSceneModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FindSceneModel.h; sourceTree = "<group>"; };
 		1FE60E7A1CD3E6DC00045117 /* FindSceneModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FindSceneModel.m; sourceTree = "<group>"; };
+		1FE701FE1CEC14E0000BA84A /* IdentityTagsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IdentityTagsViewController.h; sourceTree = "<group>"; };
+		1FE701FF1CEC14E0000BA84A /* IdentityTagsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IdentityTagsViewController.m; sourceTree = "<group>"; };
+		1FE702001CEC14E0000BA84A /* IdentityTagsViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = IdentityTagsViewController.xib; sourceTree = "<group>"; };
+		1FE702011CEC14E0000BA84A /* TheOfficialCertificationViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TheOfficialCertificationViewController.h; sourceTree = "<group>"; };
+		1FE702021CEC14E0000BA84A /* TheOfficialCertificationViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TheOfficialCertificationViewController.m; sourceTree = "<group>"; };
+		1FE702031CEC14E0000BA84A /* TheOfficialCertificationViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TheOfficialCertificationViewController.xib; sourceTree = "<group>"; };
+		1FE702051CEC14E0000BA84A /* IdentityTagModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IdentityTagModel.h; sourceTree = "<group>"; };
+		1FE702061CEC14E0000BA84A /* IdentityTagModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IdentityTagModel.m; sourceTree = "<group>"; };
+		1FE702081CEC14E0000BA84A /* TagsCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TagsCollectionViewCell.h; sourceTree = "<group>"; };
+		1FE702091CEC14E0000BA84A /* TagsCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TagsCollectionViewCell.m; sourceTree = "<group>"; };
+		1FE702131CEC56CD000BA84A /* CertIdView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CertIdView.h; sourceTree = "<group>"; };
+		1FE702141CEC56CD000BA84A /* CertIdView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CertIdView.m; sourceTree = "<group>"; };
+		1FE702161CEC56EA000BA84A /* Empty.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = Empty.xib; sourceTree = "<group>"; };
+		1FE7021A1CEC73BB000BA84A /* UIImagePickerController+Flag.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImagePickerController+Flag.h"; sourceTree = "<group>"; };
+		1FE7021B1CEC73BB000BA84A /* UIImagePickerController+Flag.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImagePickerController+Flag.m"; sourceTree = "<group>"; };
 		1FEB71701CC8802800CF34F3 /* InvitationModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InvitationModel.h; sourceTree = "<group>"; };
 		1FEB71711CC8802800CF34F3 /* InvitationModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InvitationModel.m; sourceTree = "<group>"; };
 		1FEB71731CC88B5D00CF34F3 /* FindeFirendTwoModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FindeFirendTwoModel.h; sourceTree = "<group>"; };
@@ -1678,6 +1696,60 @@
 			path = View;
 			sourceTree = "<group>";
 		};
+		1FE701FC1CEC14E0000BA84A /* Certification */ = {
+			isa = PBXGroup;
+			children = (
+				1FE702181CEC7225000BA84A /* Other */,
+				1FE701FD1CEC14E0000BA84A /* Controller */,
+				1FE702041CEC14E0000BA84A /* Model */,
+				1FE702071CEC14E0000BA84A /* View */,
+			);
+			path = Certification;
+			sourceTree = "<group>";
+		};
+		1FE701FD1CEC14E0000BA84A /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				1FE701FE1CEC14E0000BA84A /* IdentityTagsViewController.h */,
+				1FE701FF1CEC14E0000BA84A /* IdentityTagsViewController.m */,
+				1FE702001CEC14E0000BA84A /* IdentityTagsViewController.xib */,
+				1FE702011CEC14E0000BA84A /* TheOfficialCertificationViewController.h */,
+				1FE702021CEC14E0000BA84A /* TheOfficialCertificationViewController.m */,
+				1FE702031CEC14E0000BA84A /* TheOfficialCertificationViewController.xib */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		1FE702041CEC14E0000BA84A /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				1FE702051CEC14E0000BA84A /* IdentityTagModel.h */,
+				1FE702061CEC14E0000BA84A /* IdentityTagModel.m */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		1FE702071CEC14E0000BA84A /* View */ = {
+			isa = PBXGroup;
+			children = (
+				1FE702081CEC14E0000BA84A /* TagsCollectionViewCell.h */,
+				1FE702091CEC14E0000BA84A /* TagsCollectionViewCell.m */,
+				1FE702131CEC56CD000BA84A /* CertIdView.h */,
+				1FE702141CEC56CD000BA84A /* CertIdView.m */,
+				1FE702161CEC56EA000BA84A /* Empty.xib */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		1FE702181CEC7225000BA84A /* Other */ = {
+			isa = PBXGroup;
+			children = (
+				1FE7021A1CEC73BB000BA84A /* UIImagePickerController+Flag.h */,
+				1FE7021B1CEC73BB000BA84A /* UIImagePickerController+Flag.m */,
+			);
+			path = Other;
+			sourceTree = "<group>";
+		};
 		1FEF0AD11CC0FC15006EF0C6 /* My */ = {
 			isa = PBXGroup;
 			children = (
@@ -1926,6 +1998,7 @@
 		D8035FA01CBD1021001920F9 /* Other */ = {
 			isa = PBXGroup;
 			children = (
+				1FE701FC1CEC14E0000BA84A /* Certification */,
 				1F8EACE11CDDD19E00C51235 /* Pay */,
 				1FC678161CDAF9B200535162 /* DeliveryAddress */,
 				1FC677F61CDAE75C00535162 /* Bonus */,
@@ -3478,6 +3551,7 @@
 				1F18376C1CCDE95A00933CA7 /* ModifyGenderViewController.xib in Resources */,
 				1FC678261CDB000200535162 /* DeliveryAddressCell.xib in Resources */,
 				1F223B1D1CD714F3007687F7 /* messages.plist in Resources */,
+				1FE7020D1CEC14E0000BA84A /* TheOfficialCertificationViewController.xib in Resources */,
 				1F35F0491CD1FF630000DB95 /* DatePickerViewController.xib in Resources */,
 				D803605A1CBF376B001920F9 /* Signup.xib in Resources */,
 				1F3C0A851CBF760C00B84FEB /* SubscribePeopleViewController.xib in Resources */,
@@ -3519,6 +3593,7 @@
 				1FFFFF401CD05796008E1CDC /* BindIngViewController.xib in Resources */,
 				D812816A1CAA8532007CF08B /* UMSCommentDetailController.xib in Resources */,
 				1FE60E431CD3226400045117 /* MessageViewController.xib in Resources */,
+				1FE702171CEC56EA000BA84A /* Empty.xib in Resources */,
 				D81281751CAA8532007CF08B /* WeiboSDK.bundle in Resources */,
 				1F18377B1CCE0F2200933CA7 /* TalentCertificationViewController.xib in Resources */,
 				1FEE50EE1CE1893B00B8A292 /* AllNearbyScenarioViewController.xib in Resources */,
@@ -3538,6 +3613,7 @@
 				1F8921E61CE5609E00267F44 /* QrShareSheetViewController.xib in Resources */,
 				1F27AE9C1CE0EACE005A434B /* mapapi.bundle in Resources */,
 				1FFFFF221CD055BB008E1CDC /* OptionViewController.xib in Resources */,
+				1FE7020B1CEC14E0000BA84A /* IdentityTagsViewController.xib in Resources */,
 				1F8EACDB1CDDA09200C51235 /* RefundmentViewController.xib in Resources */,
 				1FC678101CDAECE500535162 /* BonusCell.xib in Resources */,
 				1F1837761CCDFCB200933CA7 /* ChangeSumaryViewController.xib in Resources */,
@@ -3633,6 +3709,7 @@
 				D80D415B1CAD1437005D72B1 /* FBNavigationViewController.m in Sources */,
 				D8363A301CD8809400CC4AC0 /* CategoryData.m in Sources */,
 				1FCE90551CD9BBA40029E4BA /* ChanePwdViewController.m in Sources */,
+				1FE7020C1CEC14E0000BA84A /* TheOfficialCertificationViewController.m in Sources */,
 				D8363AC21CD8835D00CC4AC0 /* HomeSceneListUser.m in Sources */,
 				1F35F0441CD1DCF20000DB95 /* LBAddressBookViewController.m in Sources */,
 				D80D415E1CAD144D005D72B1 /* UIBarButtonItem+Helper.m in Sources */,
@@ -3659,7 +3736,9 @@
 				D81281591CAA8532007CF08B /* UIImageView+SDWedImage.m in Sources */,
 				D81281541CAA8532007CF08B /* FBRequest.m in Sources */,
 				1F27AE971CE0D493005A434B /* MapTableViewCell.m in Sources */,
+				1FE7020A1CEC14E0000BA84A /* IdentityTagsViewController.m in Sources */,
 				1F18377A1CCE0F2200933CA7 /* TalentCertificationViewController.m in Sources */,
+				1FE7021C1CEC73BB000BA84A /* UIImagePickerController+Flag.m in Sources */,
 				D8363A961CD8832100CC4AC0 /* LikePeopleTableViewCell.m in Sources */,
 				1FBC3E9A1CCE3766007CFA14 /* ShareViewController.m in Sources */,
 				1F3C0A961CBFA28300B84FEB /* GreatPeopleViewController.m in Sources */,
@@ -3715,6 +3794,7 @@
 				D8363ABF1CD8835D00CC4AC0 /* HomeSceneListLocation.m in Sources */,
 				1FE60E7B1CD3E6DC00045117 /* FindSceneModel.m in Sources */,
 				D8A9AD851CD9DFBC00A9FCFB /* ScenceMessageView.m in Sources */,
+				1FE7020F1CEC14E0000BA84A /* TagsCollectionViewCell.m in Sources */,
 				D8363A811CD882D900CC4AC0 /* SceneInfoViewController.m in Sources */,
 				1F35F0481CD1FF630000DB95 /* DatePickerViewController.m in Sources */,
 				D86AFDEF1CBFAFC2006F1602 /* UserHeaderTableViewCell.m in Sources */,
@@ -3844,6 +3924,7 @@
 				D8363AC01CD8835D00CC4AC0 /* HomeSceneListProduct.m in Sources */,
 				D8A9AD8D1CD9DFBC00A9FCFB /* PhotoAlbumsView.m in Sources */,
 				D803604D1CBF376B001920F9 /* NSNumber+UserModel.m in Sources */,
+				1FE702151CEC56CD000BA84A /* CertIdView.m in Sources */,
 				1F07A6441CC77AB800CF225F /* BackgroundCollectionViewCell.m in Sources */,
 				D81281211CAA8532007CF08B /* FBLoadPhoto.m in Sources */,
 				1F35F03B1CD1ADAB0000DB95 /* CityModel.m in Sources */,
@@ -3926,6 +4007,7 @@
 				D8A9AE511CE45F2400A9FCFB /* MarkGoodsCollectionViewCell.m in Sources */,
 				D8035F3B1CB784B3001920F9 /* UILable+Frame.m in Sources */,
 				D8363A5A1CD8814600CC4AC0 /* InfoRecommendTableViewCell.m in Sources */,
+				1FE7020E1CEC14E0000BA84A /* IdentityTagModel.m in Sources */,
 				D8A9ACB61CD89E0000A9FCFB /* FiuSceneInfoData.m in Sources */,
 				D8363A321CD8809400CC4AC0 /* CategoryRow.m in Sources */,
 				D81281571CAA8532007CF08B /* NSString+Helper.m in Sources */,

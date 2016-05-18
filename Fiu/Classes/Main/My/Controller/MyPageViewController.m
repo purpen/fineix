@@ -152,6 +152,7 @@
             userInfo.prin = areasAry[0];
             userInfo.city = areasAry[1];
         }
+        userInfo.is_expert = [result objectForKey:@"data"][@"identify"][@"is_expert"];
         [userInfo saveOrUpdate];
         [userInfo updateUserInfoEntity];
         

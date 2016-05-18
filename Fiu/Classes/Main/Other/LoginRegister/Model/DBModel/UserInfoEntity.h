@@ -21,7 +21,7 @@
 @property (nonatomic, copy) NSString * mediumAvatarUrl;
 @property (nonatomic, copy) NSString * birthday;
 @property (nonatomic, strong) NSNumber * level;
-@property (nonatomic, copy) NSString * levelDesc;
+@property (nonatomic, copy) NSString * label;
 @property (nonatomic, strong) NSNumber * birdCoin;
 @property (nonatomic, copy) NSString * summary;
 @property(nonatomic,copy) NSString *city;
@@ -29,6 +29,8 @@
 @property(nonatomic,copy) NSString *follow_count;
 @property(nonatomic,copy) NSString *head_pic_url;
 @property(nonatomic,strong) NSNumber *is_love;
+@property(nonatomic,copy) NSString *is_expert;
+
 
 + (instancetype)defaultUserInfoEntity;
 - (void)updateUserInfo;

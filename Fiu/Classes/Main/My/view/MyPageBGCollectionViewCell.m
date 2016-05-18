@@ -32,7 +32,6 @@
         
         [self.contentView addSubview:self.userLevelLabel];
         [_userLevelLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.size.mas_equalTo(CGSizeMake(200, 12));
             make.centerX.mas_equalTo(self.mas_centerX);
             make.bottom.mas_equalTo(self.mas_bottom).with.offset(-49/667.0*SCREEN_HEIGHT);
         }];
@@ -45,23 +44,38 @@
             make.bottom.mas_equalTo(_userLevelLabel.mas_top).with.offset(-5/667.0*SCREEN_HEIGHT);
         }];
         
-        [self.contentView addSubview:self.nickName];
-        [_nickName mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.size.mas_equalTo(CGSizeMake(self.frame.size.width, 19));
-            make.centerX.mas_equalTo(self.mas_centerX);
-            make.bottom.mas_equalTo(_userProfile.mas_top).with.offset(-9/667.0*SCREEN_HEIGHT);
-        }];
-        
-        
         [self.contentView addSubview:self.headView];
         [_headView mas_makeConstraints:^(MASConstraintMaker *make) {
             make.size.mas_equalTo(CGSizeMake(84/667.0*SCREEN_HEIGHT, 84/667.0*SCREEN_HEIGHT));
             make.centerX.mas_equalTo(self.mas_centerX);
-            make.bottom.mas_equalTo(_nickName.mas_top).with.offset(-8/667.0*SCREEN_HEIGHT);
+            make.bottom.mas_equalTo(_userProfile.mas_top).with.offset(-8/667.0*SCREEN_HEIGHT);
+        }];
+        
+        [self.contentView addSubview:self.nickName];
+        [_nickName mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.size.mas_equalTo(CGSizeMake(self.frame.size.width, 19));
+            make.centerX.mas_equalTo(self.mas_centerX);
+            make.bottom.mas_equalTo(_headView.mas_top).with.offset(-15/667.0*SCREEN_HEIGHT);
+        }];
+        
+        
+        [self.contentView addSubview:self.idImageView];
+        [_idImageView mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.size.mas_equalTo(CGSizeMake(28, 12));
+            make.right.mas_equalTo(_userLevelLabel.mas_left).with.offset(3);
+            make.centerY.mas_equalTo(_userLevelLabel.mas_centerY);
         }];
         
     }
     return self;
+}
+
+-(UIImageView *)idImageView{
+    if (!_idImageView) {
+        _idImageView = [[UIImageView alloc] init];
+        
+    }
+    return _idImageView;
 }
 
 -(UIView *)headView{
@@ -103,7 +117,15 @@
     [self.bgImageView sd_setImageWithURL:[NSURL URLWithString:entity.head_pic_url] placeholderImage:[UIImage imageNamed:@"image"]];
     self.nickName.text = entity.nickname;
     self.userProfile.text = entity.summary;
-    self.userLevelLabel.text = [NSString stringWithFormat:@"%@ | V%d",entity.levelDesc,[entity.level intValue]];
+    if ([entity.is_expert isEqualToString:@"0"]) {
+        self.userLevelLabel.text = [NSString stringWithFormat:@"%@ | V%d",entity.label,[entity.level intValue]];
+        self.idImageView.hidden = YES;
+    }else if([entity.is_expert isEqualToString:@"1"]){
+        self.userLevelLabel.text = [NSString stringWithFormat:@" | V%d",[entity.level intValue]];
+        self.idImageView.hidden = NO;
+        self.idImageView.image = [UIImage imageNamed:entity.label];
+    }
+    
     
     [self.bgImageView sd_setImageWithURL:[NSURL URLWithString:entity.head_pic_url] placeholderImage:[UIImage imageNamed:@"image"]];
 }
@@ -132,7 +154,7 @@
     if (!_userProfile) {
         _userProfile = [[UILabel alloc] init];
         _userProfile.textColor = [UIColor whiteColor];
-        _userProfile.font = [UIFont systemFontOfSize:10];
+        _userProfile.font = [UIFont systemFontOfSize:11];
         _userProfile.textAlignment = NSTextAlignmentCenter;
         _userProfile.clipsToBounds = YES;
         _userProfile.autoresizingMask = UIViewAutoresizingFlexibleTopMargin;
@@ -144,7 +166,7 @@
     if (!_userLevelLabel) {
         _userLevelLabel = [[UILabel alloc] init];
         _userLevelLabel.textColor = [UIColor whiteColor];
-        _userLevelLabel.font = [UIFont systemFontOfSize:10];
+        _userLevelLabel.font = [UIFont systemFontOfSize:11];
         _userLevelLabel.textAlignment = NSTextAlignmentCenter;
         _userLevelLabel.clipsToBounds = YES;
         _userLevelLabel.autoresizingMask = UIViewAutoresizingFlexibleTopMargin;
@@ -156,7 +178,7 @@
     if (!_nickName) {
         _nickName = [[UILabel alloc] init];
         _nickName.textColor = [UIColor whiteColor];
-        _nickName.font = [UIFont systemFontOfSize:14];
+        _nickName.font = [UIFont systemFontOfSize:15];
         _nickName.textAlignment = NSTextAlignmentCenter;
         _nickName.clipsToBounds = YES;
         _nickName.autoresizingMask = UIViewAutoresizingFlexibleTopMargin;

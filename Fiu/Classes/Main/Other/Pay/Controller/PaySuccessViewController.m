@@ -58,6 +58,8 @@
     self.orderIdLbl.text = self.orderInfo.rid;
     self.paymentWayLbl.text = self.paymentWay;
     self.createTimeLbl.text = self.orderInfo.createdAt;
+    [self addBarItemLeftBarButton:nil image:nil isTransparent:NO];
+    [self addBarItemRightBarButton:@"完成" image:nil isTransparent:NO];
     
     //[self NoticeWithShare];
 }
@@ -106,7 +108,7 @@
 }
 
 
--(void)leftBarItemSelected{
+-(void)rightBarItemSelected{
     [self.navigationController popToRootViewControllerAnimated:YES];
 }
 

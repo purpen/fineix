@@ -34,7 +34,7 @@
     userInfo.mediumAvatarUrl = self.mediumAvatarUrl;
     userInfo.birthday = self.birthday;
     userInfo.level = self.level;
-    userInfo.levelDesc = self.levelDesc;
+    userInfo.label = self.label;
     userInfo.birdCoin = self.birdCoin;
     userInfo.summary = self.summary;
     
@@ -44,6 +44,7 @@
     userInfo.head_pic_url = self.head_pic_url;
     userInfo.is_love = self.is_love;
     userInfo.isLogin = self.isLogin;
+    userInfo.is_expert = self.is_expert;
     
     dispatch_async(dispatch_get_global_queue(0, 0), ^{
         [userInfo saveOrUpdate];
@@ -60,7 +61,7 @@
     self.mediumAvatarUrl = @"";
     self.birthday = @"";
     self.level = @0;
-    self.levelDesc = @"";
+    self.label = @"";
     self.birdCoin = @0;
     self.summary = @"";
     self.city = @"";
@@ -69,6 +70,7 @@
     self.head_pic_url = @"";
     self.is_love = @0;
     self.isLogin = NO;
+    self.is_expert = @"0";
 }
 
 @end

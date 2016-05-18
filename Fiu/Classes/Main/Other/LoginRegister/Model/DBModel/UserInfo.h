@@ -20,7 +20,7 @@
 @property (nonatomic, copy) NSString * mediumAvatarUrl;
 @property (nonatomic, copy) NSString * birthday;
 @property (nonatomic, strong) NSNumber * level;
-@property (nonatomic, copy) NSString * levelDesc;
+@property (nonatomic, copy) NSString * label;
 @property (nonatomic, strong) NSNumber * birdCoin;
 @property (nonatomic, copy) NSString * summary;
 @property (nonatomic, assign) BOOL whetherFocusOn;
@@ -30,6 +30,7 @@
 @property(nonatomic,copy) NSString *head_pic_url;
 @property(nonatomic,strong) NSNumber *is_love;
 @property(nonatomic,assign) BOOL isLogin;
+@property(nonatomic,copy) NSString *is_expert;
 
 - (void)updateUserInfoEntity;
 

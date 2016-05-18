@@ -83,9 +83,9 @@
             if (![rowsDict[@"info"] isKindOfClass:[NSNull class]]) {
                 model.summary = rowsDict[@"info"];
             }
-            if (![rowsDict[@"kind_str"] isKindOfClass:[NSNull class]]) {
-                model.levelDesc = rowsDict[@"kind_str"];
-            }
+//            if (![rowsDict[@"kind_str"] isKindOfClass:[NSNull class]]) {
+//                model.levelDesc = rowsDict[@"kind_str"];
+//            }
             if (![usersDict[@"nickname"] isKindOfClass:[NSNull class]]) {
                 model.nickname = usersDict[@"nickname"];
             }
@@ -186,7 +186,7 @@
     }else{
         UserInfo *model = _modelAry[indexPath.row];
         [cell setUIWithModel:model];
-        cell.msgLabel.text = [NSString stringWithFormat:@"%@%@",model.summary,model.levelDesc];
+        //cell.msgLabel.text = [NSString stringWithFormat:@"%@%@",model.summary,model.levelDesc];
         cell.focusBtn.hidden = YES;
         cell.timeLabelTwo.hidden = YES;
         cell.headBtn.tag = indexPath.row;
