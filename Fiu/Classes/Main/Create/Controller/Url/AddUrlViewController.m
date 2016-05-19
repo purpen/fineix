@@ -138,7 +138,11 @@ static NSString *const Tmall = @"https://s.m.tmall.com/m/search.htm?q=";
 - (void)webBtnSelectedSearchGoods:(NSInteger)index {
     NSString * key = self.searchGoods.searchInputBox.text;
     if (index == 0) {
-        [self searchWebGoods:key withSite:JD];
+        if ([key isEqualToString:@""]) {
+            [self searchWebGoods:@"" withSite:@"http://m.jd.com"];
+        } else {
+            [self searchWebGoods:key withSite:JD];
+        }
         _type = 0;
     } else if (index == 1) {
         [self searchWebGoods:key withSite:TaoBao];

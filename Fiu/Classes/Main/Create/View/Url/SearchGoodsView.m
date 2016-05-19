@@ -50,8 +50,7 @@
     [SVProgressHUD dismiss];
     
     NSString * urlStr = webView.request.URL.absoluteString;
-    NSLog(@"当前页面的链接：%@", urlStr);
-    
+
     if ([urlStr containsString:@"id="] || [urlStr containsString:@"product"]) {
         self.findGoodsUrl = urlStr;
         [self addSubview:self.findDoneBtn];
@@ -72,11 +71,10 @@
                 self.findGoodsId = [urlStr substringWithRange:idRange];
             
             } else if ([urlStr containsString:@"detail.m.tmall.com"]) {
-                NSRange range = [urlStr rangeOfString:@"id="];
-                NSRange rrange = [urlStr rangeOfString:@"&"];
-                NSInteger idLength = rrange.location - (range.location + 3);
-                NSRange idRange = NSMakeRange(range.location + 3, idLength);
-                self.findGoodsId = [urlStr substringWithRange:idRange];
+                NSRange range = [urlStr rangeOfString:@"&id="];
+                NSString * tmallUrl = [urlStr substringFromIndex:range.location + 4];
+                NSRange rrange = [tmallUrl rangeOfString:@"&"];
+                self.findGoodsId = [tmallUrl substringToIndex:rrange.location];
             }
         }
     }

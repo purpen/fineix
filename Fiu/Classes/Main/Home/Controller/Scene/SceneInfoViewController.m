@@ -285,7 +285,6 @@ static NSString *const URLWantBuy = @"/scene_product/sight_click_stat";
             }
             cell.nav = self.navigationController;
             [cell setSceneInfoData:self.sceneInfoModel];
-            //cell.city addGestureRecognizer:<#(nonnull UIGestureRecognizer *)#>
             return cell;
             
         } else if (indexPath.row == 1) {

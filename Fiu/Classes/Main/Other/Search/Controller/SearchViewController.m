@@ -186,7 +186,6 @@ static NSString *const URLSearchList = @"/search/getlist";
 #pragma mark - 搜索情景
 - (void)searchRequest:(NSInteger)type withKeyword:(NSString *)keyword {
     [self changeMenuBtnState:type];
-    [SVProgressHUD showInfoWithStatus:[NSString stringWithFormat:@"开始搜索：%@", keyword]];
     if (keyword.length > 0) {
         if (type == 1) {
             [self networkSearchData:keyword withType:@"8"];

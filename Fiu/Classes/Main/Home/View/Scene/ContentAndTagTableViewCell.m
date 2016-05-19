@@ -45,7 +45,7 @@ const static NSInteger buttonTag = 421;
     [_contentLab mas_makeConstraints:^(MASConstraintMaker *make) {
         make.size.mas_equalTo(CGSizeMake(SCREEN_WIDTH - 30, 15));
         make.top.equalTo(self.mas_top).with.offset(10);
-        make.left.equalTo(self.mas_left).with.offset(15);
+        make.left.equalTo(self.mas_left).with.offset(20);
     }];
     
     [self.contentView addSubview:self.chooseTagView];
