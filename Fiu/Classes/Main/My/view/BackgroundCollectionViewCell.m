@@ -132,38 +132,38 @@
             make.left.mas_equalTo(_bgImageView.mas_left).with.offset(16);
         }];
         
-        [_bgImageView addSubview:self.editBtn];
-        [_editBtn mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.size.mas_equalTo(CGSizeMake(30, 30));
-            //make.top.mas_equalTo(_bgImageView.mas_top).with.offset(35);
-            make.right.mas_equalTo(_bgImageView.mas_right).with.offset(-16);
-            make.centerY.mas_equalTo(_backBtn.mas_centerY);
-        }];
+//        [_bgImageView addSubview:self.editBtn];
+//        [_editBtn mas_makeConstraints:^(MASConstraintMaker *make) {
+//            make.size.mas_equalTo(CGSizeMake(30, 30));
+//            //make.top.mas_equalTo(_bgImageView.mas_top).with.offset(35);
+//            make.right.mas_equalTo(_bgImageView.mas_right).with.offset(-16);
+//            make.centerY.mas_equalTo(_backBtn.mas_centerY);
+//        }];
     }
     return _bgImageView;
 }
 
--(UIButton *)editBtn{
-    if (!_editBtn) {
-        _editBtn = [[UIButton alloc] init];
-        _editBtn.userInteractionEnabled = YES;
-        _editBtn.clipsToBounds = YES;
-        _editBtn.autoresizingMask = UIViewAutoresizingFlexibleBottomMargin;
-        [_editBtn setImage:[UIImage imageNamed:@"SET"] forState:UIControlStateNormal];
-    }
-    return _editBtn;
-}
+//-(UIButton *)editBtn{
+//    if (!_editBtn) {
+//        _editBtn = [[UIButton alloc] init];
+//        _editBtn.userInteractionEnabled = YES;
+//        _editBtn.clipsToBounds = YES;
+//        _editBtn.autoresizingMask = UIViewAutoresizingFlexibleBottomMargin;
+//        [_editBtn setImage:[UIImage imageNamed:@"SET"] forState:UIControlStateNormal];
+//    }
+//    return _editBtn;
+//}
 
--(UIButton *)backBtn{
-    if (!_backBtn) {
-        _backBtn = [[UIButton alloc] init];
-        _backBtn.userInteractionEnabled = YES;
-        _backBtn.clipsToBounds = YES;
-        _backBtn.autoresizingMask = UIViewAutoresizingFlexibleBottomMargin;
-        [_backBtn setImage:[UIImage imageNamed:@"Fill 1"] forState:UIControlStateNormal];
-    }
-    return _backBtn;
-}
+//-(UIButton *)backBtn{
+//    if (!_backBtn) {
+//        _backBtn = [[UIButton alloc] init];
+//        _backBtn.userInteractionEnabled = YES;
+//        _backBtn.clipsToBounds = YES;
+//        _backBtn.autoresizingMask = UIViewAutoresizingFlexibleBottomMargin;
+//        [_backBtn setImage:[UIImage imageNamed:@"Fill 1"] forState:UIControlStateNormal];
+//    }
+//    return _backBtn;
+//}
 
 
 

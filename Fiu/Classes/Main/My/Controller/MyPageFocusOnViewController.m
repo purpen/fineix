@@ -238,8 +238,11 @@
         [self.mytableView reloadRowsAtIndexPaths:[NSArray arrayWithObjects:[NSIndexPath indexPathForRow:sender.tag inSection:0], nil] withRowAnimation:UITableViewRowAnimationNone];
         //请求数据
         FBRequest *request = [FBAPI postWithUrlString:@"/follow/ajax_follow" requestDictionary:@{@"follow_id":model.userId} delegate:self];
-        request.flag = @"/follow/ajax_follow";
-        [request startRequest];
+        [request startRequestSuccess:^(FBRequest *request, id result) {
+            [SVProgressHUD showSuccessWithStatus:@"关注成功"];
+        } failure:^(FBRequest *request, NSError *error) {
+            [SVProgressHUD showErrorWithStatus:error.localizedDescription];
+        }];
     }
 }
 

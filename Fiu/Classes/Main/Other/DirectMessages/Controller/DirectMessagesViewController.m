@@ -24,6 +24,7 @@
 @property (weak, nonatomic) IBOutlet UITextField *msgTF;
 @property (weak, nonatomic) IBOutlet UIButton *sendBtn;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *bottomSpaceing;
+@property (weak, nonatomic) IBOutlet UIView *bottomToolView;
 
 @end
 
@@ -38,6 +39,10 @@
     self.myTableVuew.dataSource = self;
     self.sendBtn.layer.masksToBounds = YES;
     self.sendBtn.layer.cornerRadius = 3;
+    
+    
+    
+    self.bottomToolView.backgroundColor = [UIColor colorWithHexString:@"＃D8D8D8"];
     
     //设置文本框
     UIView *view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 10, 5)];

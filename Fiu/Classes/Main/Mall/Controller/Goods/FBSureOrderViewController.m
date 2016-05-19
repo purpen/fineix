@@ -18,6 +18,7 @@
 #import "BonusViewController.h"
 #import "OrderInfoModel.h"
 #import "FBPayTheWayViewController.h"
+#import "PaySuccessViewController.h"
 
 static NSString *const URLBuying = @"/shopping/now_buy";
 static NSString *const URLUserAddress = @"/shopping/default_address";
@@ -151,9 +152,15 @@ static NSString *const URLCarGoPay = @"/shopping/checkout";
         NSDictionary * dataDic = [result objectForKey:@"data"];
         self.orderInfo = [[OrderInfoModel alloc] initWithDictionary:dataDic];
         if ([[result objectForKey:@"success"] isEqualToNumber:@1]) {
-            FBPayTheWayViewController * payWayVC = [[FBPayTheWayViewController alloc] init];
-            payWayVC.orderInfo = self.orderInfo;
-            [self.navigationController pushViewController:payWayVC animated:YES];
+            if ([self.orderInfo.payMoney isEqualToNumber:@0]) {
+                PaySuccessViewController *vc = [[PaySuccessViewController alloc] init];
+                vc.orderInfo = self.orderInfo;
+                [self.navigationController pushViewController:vc animated:YES];
+            }else{
+                FBPayTheWayViewController * payWayVC = [[FBPayTheWayViewController alloc] init];
+                payWayVC.orderInfo = self.orderInfo;
+                [self.navigationController pushViewController:payWayVC animated:YES];
+            }
         }
         [SVProgressHUD dismiss];
         

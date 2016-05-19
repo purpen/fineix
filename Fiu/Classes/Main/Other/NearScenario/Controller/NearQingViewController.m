@@ -10,11 +10,13 @@
 #import "SceneInfoData.h"
 #import <BaiduMapAPI_Map/BMKMapComponent.h>//引入地图功能所有的头文件
 #import "SVProgressHUD.h"
+#import <SDWebImage/UIImageView+WebCache.h>
 
 @interface NearQingViewController ()<BMKMapViewDelegate>
 {
     float _latitude;
     float _longitude;
+    int _n;
 }
 @property(nonatomic,strong) BMKMapView *mapView;
 @pro_strong NSMutableArray      *   idMarr;         //  附近情景的ID
@@ -29,12 +31,18 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    _n = 0;
     _longitude = [self.baseInfo.location.coordinates[0] floatValue];
     _latitude = [self.baseInfo.location.coordinates[1] floatValue];
     [self requestDataForOderList];
     // Do any additional setup after loading the view from its nib.
     self.navViewTitle.text = self.baseInfo.address;
-    
+    [self.view addSubview:self.mapView];
+}
+
+-(void)viewWillAppear:(BOOL)animated{
+    [super viewWillAppear:animated];
+    [[UIApplication sharedApplication] setStatusBarHidden:NO withAnimation:(UIStatusBarAnimationSlide)];
 }
 
 - (void)requestDataForOderList
@@ -46,6 +54,7 @@
     [self.coverUrlMary removeAllObjects];
     
     [self requestDataForOderListOperation];
+    
 }
 
 - (void)requestDataForOderListOperation
@@ -63,10 +72,90 @@
         NSArray *rowsAry = dataDict[@"rows"];
         for (NSDictionary *rowsDict in rowsAry) {
             [_idMarr addObject:rowsDict[@"_id"]];
+            [_titleMarr addObject:rowsDict[@"title"]];
+            [_coverUrlMary addObject:rowsDict[@"cover_url"]];
+            [_addressMarr addObject:rowsDict[@"address"]];
+            [_locationMarr addObject:rowsDict[@"location"][@"coordinates"]];
+        }
+        
+        for (NSArray *locaAry in _locationMarr) {
+            double la = [locaAry[1] doubleValue];
+            double lo = [locaAry[0] doubleValue];
+            // 添加一个PointAnnotation
+            BMKPointAnnotation* annotation = [[BMKPointAnnotation alloc]init];
+            CLLocationCoordinate2D coor;
+            coor.latitude = la;
+            coor.longitude = lo;
+            annotation.coordinate = coor;
+            [self.mapView addAnnotation:annotation];
         }
     } failure:^(FBRequest *request, NSError *error) {
         
     }];
+}
+
+// BMKMapViewDelegate
+- (BMKAnnotationView *)mapView:(BMKMapView *)mapView viewForAnnotation:(id <BMKAnnotation>)annotation
+{
+    if ([annotation isKindOfClass:[BMKPointAnnotation class]]) {
+        BMKPinAnnotationView *newAnnotationView = [[BMKPinAnnotationView alloc] initWithAnnotation:annotation reuseIdentifier:@"myAnnotation"];
+        newAnnotationView.pinColor = BMKPinAnnotationColorPurple;
+        //newAnnotationView.animatesDrop = YES;// 设置该标注点动画显示
+        if (_n == 0) {
+            [newAnnotationView setSelected:YES animated:YES];
+        }
+        [self setPaopaoview:newAnnotationView];
+        return newAnnotationView;
+    }
+    return nil;
+}
+
+-(void)setPaopaoview:(BMKPinAnnotationView*)newAnnotationView{
+    UIView *popView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, 154, 45)];
+    popView.backgroundColor = [UIColor clearColor];
+    [self setpopView:popView];
+    BMKActionPaopaoView *pView = [[BMKActionPaopaoView alloc]initWithCustomView:popView];
+    pView.backgroundColor = [UIColor clearColor];
+    pView.frame = popView.frame;
+    newAnnotationView.paopaoView = nil;
+    newAnnotationView.paopaoView = pView;
+    newAnnotationView.calloutOffset = CGPointMake(9, -5);
+}
+
+-(void)setpopView:(UIView*)popView{
+    UIView *view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 154, 45)];
+    view.backgroundColor = [UIColor clearColor];
+    [self setViewView:view];
+    [popView addSubview:view];
+}
+
+-(void)setViewView:(UIView*)view{
+    
+    UIImageView *imgV = [[UIImageView alloc] initWithFrame:view.frame];
+    imgV.image = [UIImage imageNamed:@"Group"];
+    [view addSubview:imgV];
+    UIImageView *image = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 37, 37)];
+    NSLog(@"数组个数  %zi",self.coverUrlMary.count);
+    if (_n < self.coverUrlMary.count) {
+        [image sd_setImageWithURL:[NSURL URLWithString:self.coverUrlMary[_n]]];
+        [self setLabel:CGRectMake(50, 6, 100, 10) andText:self.titleMarr[_n] andFont:13 andView:imgV andtextColor:[UIColor blackColor]];
+        [self setLabel:CGRectMake(50, 22, 100, 10) andText:self.addressMarr[_n] andFont:10 andView:imgV andtextColor:[UIColor grayColor]];
+    }
+    
+    [imgV addSubview:image];
+    
+    _n++;
+}
+
+-(void)setLabel:(CGRect)frame andText:(NSString*)title andFont:(int)font andView:(UIView *)view andtextColor:(UIColor*)color{
+    UILabel *titlelabel = [[UILabel alloc] initWithFrame:frame];
+    titlelabel.text = title;
+    titlelabel.font = [UIFont systemFontOfSize:font];
+    titlelabel.textColor = color;
+    [view addSubview:titlelabel];
+    view.userInteractionEnabled = YES;
+    //[view addGestureRecognizer:[self singleRecognizer]];
+    
 }
 
 
@@ -109,14 +198,19 @@
 
 
 
-//-(BMKMapView *)mapView{
-//    if (!_mapView) {
-//        _mapView = [[BMKMapView alloc] initWithFrame:self.sceneMapView.frame];
-//        _mapView.delegate = self;
-//        _mapView.zoomLevel = 15;
-//    }
-//    return _mapView;
-//}
+-(BMKMapView *)mapView{
+    if (!_mapView) {
+        _mapView = [[BMKMapView alloc] initWithFrame:CGRectMake(0, 64, SCREEN_WIDTH, SCREEN_HEIGHT-64)];
+        _mapView.delegate = self;
+        _mapView.zoomLevel = 15;
+    }
+    return _mapView;
+}
+
+-(void)viewDidDisappear:(BOOL)animated{
+    [super viewDidDisappear:animated];
+    _mapView.delegate = nil;
+}
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];

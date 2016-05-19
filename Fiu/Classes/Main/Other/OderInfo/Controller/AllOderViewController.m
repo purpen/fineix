@@ -57,7 +57,6 @@
         [self addTipViewWithNum:[self.counterModel.order_wait_payment intValue] andTipView:self.order_wait_paymentTipView andBtn:self.paymentBtn];
         [self addTipViewWithNum:[self.counterModel.order_ready_goods intValue] andTipView:self.order_ready_goodsTipView andBtn:self.deliveryBtn];
         [self addTipViewWithNum:[self.counterModel.order_sended_goods intValue] andTipView:self.order_sended_goodsTipView andBtn:self.goodsBtn];
-        
         [self addTipViewWithNum:[self.counterModel.order_evaluate intValue] andTipView:self.order_evaluateTipView andBtn:self.evaluationBtn];
         //------------------------------------------------------
         [SVProgressHUD dismiss];
@@ -84,7 +83,7 @@
         //显示
         tipView.tipNumLabel.text = [NSString stringWithFormat:@"%zi",num];
         CGSize size = [tipView.tipNumLabel.text sizeWithAttributes:@{NSFontAttributeName: [UIFont systemFontOfSize:12.0f]}];
-        [self.evaluationBtn addSubview:tipView];
+        [btn addSubview:tipView];
         [tipView mas_makeConstraints:^(MASConstraintMaker *make) {
             if ((size.width+9) > 15) {
                 make.size.mas_equalTo(CGSizeMake(size.width+9, 15));
@@ -98,7 +97,7 @@
 }
 
 -(TipNumberView *)order_evaluateTipView{
-    if (_order_evaluateTipView) {
+    if (!_order_evaluateTipView) {
         _order_evaluateTipView = [TipNumberView getTipNumView];
     }
     return _order_evaluateTipView;
