@@ -126,7 +126,7 @@ static NSString *const URLGoodslist = @"/scene_product/getlist";
 #pragma mark - 品牌视图
 - (UITableView *)goodsBrandTable {
     if (!_goodsBrandTable) {
-        _goodsBrandTable = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT) style:(UITableViewStyleGrouped)];
+        _goodsBrandTable = [[UITableView alloc] initWithFrame:CGRectMake(0, -40, SCREEN_WIDTH, SCREEN_HEIGHT + 40) style:(UITableViewStyleGrouped)];
         _goodsBrandTable.showsVerticalScrollIndicator = NO;
         _goodsBrandTable.showsHorizontalScrollIndicator = NO;
         _goodsBrandTable.delegate = self;

@@ -7,7 +7,7 @@
 //
 
 #import "FiuSceneViewController.h"
-#import "UserInfoTableViewCell.h"
+#import "FiuUserInfoTableViewCell.h"
 #import "ContentAndTagTableViewCell.h"
 #import "LikePeopleTableViewCell.h"
 #import "SceneListTableViewCell.h"
@@ -250,9 +250,9 @@ static NSString *const URLLikeScenePeople = @"/favorite";
     if (indexPath.section == 0) {
         if (indexPath.row == 0) {
             static NSString * userInfoCellId = @"userInfoCellId";
-            UserInfoTableViewCell * cell = [tableView dequeueReusableCellWithIdentifier:userInfoCellId];
+            FiuUserInfoTableViewCell * cell = [tableView dequeueReusableCellWithIdentifier:userInfoCellId];
             if (cell == nil) {
-                cell = [[UserInfoTableViewCell alloc] initWithStyle:(UITableViewCellStyleDefault) reuseIdentifier:userInfoCellId];
+                cell = [[FiuUserInfoTableViewCell alloc] initWithStyle:(UITableViewCellStyleDefault) reuseIdentifier:userInfoCellId];
             }
             [cell setFiuSceneInfoData:self.fiuSceneData];
             return cell;

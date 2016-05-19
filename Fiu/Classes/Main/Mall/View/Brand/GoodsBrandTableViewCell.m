@@ -24,11 +24,10 @@
 
 - (void)setBrandInfoData:(BrandInfoData *)model {
     [self.brandBgImg downloadImage:model.bannerUrl place:[UIImage imageNamed:@""]];
-    UIBlurEffect * beffect = [UIBlurEffect effectWithStyle:UIBlurEffectStyleLight];
-    UIVisualEffectView * view = [[UIVisualEffectView alloc] initWithEffect:beffect];
-    view.frame = CGRectMake(0, -50, SCREEN_WIDTH, 260);
+    UIView * bgView = [[UIView alloc] initWithFrame:_brandBgImg.bounds];
+    bgView.backgroundColor = [UIColor colorWithHexString:@"#555555" alpha:.2];
+    [_brandBgImg addSubview:bgView];
     
-    [self.brandBgImg addSubview:view];
     [self.brandImg downloadImage:model.coverUrl place:[UIImage imageNamed:@""]];
     [self changeContentLabStyle:self.brandIntroduce withText:[NSString stringWithFormat:@"%@", model.des]];
 }
@@ -85,7 +84,7 @@
 #pragma mark - 品牌背景
 - (UIImageView *)brandBgImg {
     if (!_brandBgImg) {
-        _brandBgImg = [[UIImageView alloc] init];
+        _brandBgImg = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 210)];
         _brandBgImg.contentMode = UIViewContentModeScaleAspectFill;
     }
     return _brandBgImg;

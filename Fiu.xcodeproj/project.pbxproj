@@ -346,6 +346,7 @@
 		D86B7BE21CEC3C5A0019AB79 /* CarGoodsModelItem.m in Sources */ = {isa = PBXBuildFile; fileRef = D86B7BE11CEC3C5A0019AB79 /* CarGoodsModelItem.m */; };
 		D86B7BE51CEC3F880019AB79 /* FBCarItemsTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D86B7BE41CEC3F880019AB79 /* FBCarItemsTableViewCell.m */; };
 		D86B7BE81CEC452A0019AB79 /* FBEditCarItemTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D86B7BE71CEC452A0019AB79 /* FBEditCarItemTableViewCell.m */; };
+		D86B7BEC1CEE0C5D0019AB79 /* FiuUserInfoTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D86B7BEB1CEE0C5D0019AB79 /* FiuUserInfoTableViewCell.m */; };
 		D87B69BF1CC726BA00199EFE /* FBRollImages.m in Sources */ = {isa = PBXBuildFile; fileRef = D87B69BB1CC726BA00199EFE /* FBRollImages.m */; };
 		D87B69C01CC726BA00199EFE /* GroupHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = D87B69BD1CC726BA00199EFE /* GroupHeaderView.m */; };
 		D87B69D11CC726D500199EFE /* FBAlertViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D87B69C51CC726D500199EFE /* FBAlertViewController.m */; };
@@ -1064,6 +1065,8 @@
 		D86B7BE41CEC3F880019AB79 /* FBCarItemsTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FBCarItemsTableViewCell.m; sourceTree = "<group>"; };
 		D86B7BE61CEC452A0019AB79 /* FBEditCarItemTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FBEditCarItemTableViewCell.h; sourceTree = "<group>"; };
 		D86B7BE71CEC452A0019AB79 /* FBEditCarItemTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FBEditCarItemTableViewCell.m; sourceTree = "<group>"; };
+		D86B7BEA1CEE0C5D0019AB79 /* FiuUserInfoTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FiuUserInfoTableViewCell.h; sourceTree = "<group>"; };
+		D86B7BEB1CEE0C5D0019AB79 /* FiuUserInfoTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FiuUserInfoTableViewCell.m; sourceTree = "<group>"; };
 		D87B69BA1CC726BA00199EFE /* FBRollImages.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FBRollImages.h; sourceTree = "<group>"; };
 		D87B69BB1CC726BA00199EFE /* FBRollImages.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FBRollImages.m; sourceTree = "<group>"; };
 		D87B69BC1CC726BA00199EFE /* GroupHeaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GroupHeaderView.h; sourceTree = "<group>"; };
@@ -2365,6 +2368,7 @@
 		D81280601CAA8532007CF08B /* Controller */ = {
 			isa = PBXGroup;
 			children = (
+				D86B7BE91CEDCDEC0019AB79 /* Share */,
 				D8363A771CD882D900CC4AC0 /* Home */,
 				D8363A7A1CD882D900CC4AC0 /* Scene */,
 				D8363A7D1CD882D900CC4AC0 /* Subscribe */,
@@ -2984,6 +2988,13 @@
 			path = GoodsCar;
 			sourceTree = "<group>";
 		};
+		D86B7BE91CEDCDEC0019AB79 /* Share */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Share;
+			sourceTree = "<group>";
+		};
 		D87B69B91CC726BA00199EFE /* Category */ = {
 			isa = PBXGroup;
 			children = (
@@ -3164,6 +3175,8 @@
 				D8A9ACCB1CD8A46900A9FCFB /* FiuTagTableViewCell.m */,
 				D8A9AE2C1CE1F8B100A9FCFB /* NoHaveSceneTableViewCell.h */,
 				D8A9AE2D1CE1F8B100A9FCFB /* NoHaveSceneTableViewCell.m */,
+				D86B7BEA1CEE0C5D0019AB79 /* FiuUserInfoTableViewCell.h */,
+				D86B7BEB1CEE0C5D0019AB79 /* FiuUserInfoTableViewCell.m */,
 			);
 			path = FiuScene;
 			sourceTree = "<group>";
@@ -3917,6 +3930,7 @@
 				D8A9ACB71CD89E0000A9FCFB /* FiuSceneInfoLocation.m in Sources */,
 				D8A9AEA31CE9B76000A9FCFB /* CommentModelRow.m in Sources */,
 				D8A9ACB91CD89E0000A9FCFB /* FiuSceneLocation.m in Sources */,
+				D86B7BEC1CEE0C5D0019AB79 /* FiuUserInfoTableViewCell.m in Sources */,
 				1F07A6561CC79BE300CF225F /* FriendTableViewCell.m in Sources */,
 				1F27AE841CE05C18005A434B /* WXSignParams.m in Sources */,
 				1FE60E651CD33E4700045117 /* MessagesssViewController.m in Sources */,

@@ -76,7 +76,7 @@
 - (void)setUI {
     [self addSubview:self.title];
     [_title mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.size.mas_equalTo(CGSizeMake(109, 23));
+        make.size.mas_equalTo(CGSizeMake(105, 23));
         make.centerY.equalTo(self);
         make.left.equalTo(self.mas_left).with.offset(4);
     }];

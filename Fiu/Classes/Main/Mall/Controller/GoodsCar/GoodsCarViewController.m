@@ -56,14 +56,19 @@ static NSString *const URLEditItemsNum = @"/shopping/edit_cart";
     [self clearMarr];
     self.goodsCarRequest = [FBAPI getWithUrlString:URLGoodsCar requestDictionary:nil delegate:self];
     [self.goodsCarRequest startRequestSuccess:^(FBRequest *request, id result) {
-        //  合计价格
+        //  合计价格s
         self.payPrice = 0.0f;
         self.sumPrice.text = [NSString stringWithFormat:@"￥%.2f", self.payPrice];
         
         NSArray * carItems = [[result valueForKey:@"data"] valueForKey:@"items"];
         if (carItems.count == 0) {
             self.carItemTable.tableHeaderView = self.defaultCarView;
+            self.bottomView.hidden = YES;
+            self.editBtn.hidden = YES;
+            
         } else {
+            self.bottomView.hidden = NO;
+            self.editBtn.hidden = NO;
             for (NSDictionary * carItemDict in carItems) {
                 CarGoodsModelItem * carModel = [[CarGoodsModelItem alloc] initWithDictionary:carItemDict];
                 [self.carItemList addObject:carModel];
@@ -414,6 +419,9 @@ static NSString *const URLEditItemsNum = @"/shopping/edit_cart";
         self.goPayBtn.selected = YES;
         self.sumLab.hidden = YES;
         self.sumPrice.hidden = YES;
+        self.chooseAllBtn.selected = NO;
+        [[NSNotificationCenter defaultCenter] postNotificationName:@"cacelAll" object:nil];
+        [self.chooseItems removeAllObjects];
         [self.carItemTabel reloadData];
         
     } else if (button.selected == YES) {
@@ -441,6 +449,9 @@ static NSString *const URLEditItemsNum = @"/shopping/edit_cart";
         [self networkEditCarItemsData:editCarGoodsCount];
         
         //  默认状态
+        self.chooseAllBtn.selected = NO;
+        [[NSNotificationCenter defaultCenter] postNotificationName:@"cacelAll" object:nil];
+        [self.chooseItems removeAllObjects];
         button.selected = NO;
         _isEdit = NO;
         self.goPayBtn.selected = NO;

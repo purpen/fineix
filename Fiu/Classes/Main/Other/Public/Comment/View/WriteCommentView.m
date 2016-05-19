@@ -13,7 +13,7 @@
 - (instancetype)initWithFrame:(CGRect)frame {
     self = [super initWithFrame:frame];
     if (self) {
-        self.backgroundColor = [UIColor colorWithHexString:@"#EDEEEE"];
+        self.backgroundColor = [UIColor colorWithHexString:@"#D8D8D8"];
         [self setViewUI];
     }
     return self;
@@ -23,7 +23,7 @@
 - (void)setViewUI {
     [self addSubview:self.sendBtn];
     [_sendBtn mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.size.mas_equalTo(CGSizeMake(44, 30));
+        make.size.mas_equalTo(CGSizeMake(50, 30));
         make.centerY.equalTo(self);
         make.right.equalTo(self.mas_right).with.offset(-10);
     }];

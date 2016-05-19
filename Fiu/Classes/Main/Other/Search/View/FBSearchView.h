@@ -12,6 +12,7 @@
 @protocol FBSearchDelegate <NSObject>
 
 - (void)beginSearch:(NSString *)searchKeyword;
+@optional
 - (void)cancelSearch;
 
 @end

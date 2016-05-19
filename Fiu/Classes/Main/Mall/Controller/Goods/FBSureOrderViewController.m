@@ -352,6 +352,14 @@ static NSString *const URLCarGoPay = @"/shopping/checkout";
     
     self.bounsLab.textColor = [UIColor colorWithHexString:titleColor];
     self.bounsPriceLab.text = [NSString stringWithFormat:@"￥%zi", _bounsPrice];
+    
+    NSInteger userBounsPrice = [self.payPrice integerValue] - _bounsPrice;
+    if (userBounsPrice <= 0) {
+        self.sumPrice.text = [NSString stringWithFormat:@"￥0"];
+    } else if (userBounsPrice > 0) {
+        self.sumPrice.text = [NSString stringWithFormat:@"￥%zi", userBounsPrice];
+    }
+    
 }
 
 #pragma mark - 确认订单按钮视图

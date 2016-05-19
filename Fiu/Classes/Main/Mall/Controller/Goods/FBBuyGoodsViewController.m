@@ -278,7 +278,7 @@
         chooseNumTitle.text = @"数量";
         chooseNumTitle.font = [UIFont systemFontOfSize:16];
         
-        UIButton * addBtn = [[UIButton alloc] initWithFrame:CGRectMake(0, 40, 30, 30)];
+        UIButton * addBtn = [[UIButton alloc] initWithFrame:CGRectMake(110, 40, 30, 30)];
         addBtn.layer.borderColor = [UIColor colorWithHexString:titleColor alpha:.5].CGColor;
         addBtn.layer.borderWidth = 1.0f;
         [addBtn setTitleColor:[UIColor colorWithHexString:titleColor] forState:(UIControlStateNormal)];
@@ -287,7 +287,7 @@
         [addBtn addTarget:self action:@selector(addChooseNum:) forControlEvents:(UIControlEventTouchUpInside)];
         self.addBtn = addBtn;
         
-        UIButton * subBtn = [[UIButton alloc] initWithFrame:CGRectMake(110, 40, 30, 30)];
+        UIButton * subBtn = [[UIButton alloc] initWithFrame:CGRectMake(0, 40, 30, 30)];
         subBtn.layer.borderColor = [UIColor colorWithHexString:titleColor alpha:.5].CGColor;
         subBtn.layer.borderWidth = 1.0f;
         [subBtn setTitleColor:[UIColor colorWithHexString:titleColor] forState:(UIControlStateNormal)];

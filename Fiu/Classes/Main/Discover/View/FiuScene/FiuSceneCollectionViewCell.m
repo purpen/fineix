@@ -14,7 +14,7 @@
     self = [super initWithFrame:frame];
     if (self) {
         
-        [self setCollectionCellViewUI];
+        self.backgroundColor = [UIColor whiteColor];
         
     }
     return self;
@@ -24,6 +24,7 @@
     [self.sceneImage downloadImage:model.coverUrl place:[UIImage imageNamed:@""]];
     [self titleTextStyle:model.title];
     self.locationLab.text = model.address;
+    [self setCollectionCellViewUI];
 }
 
 #pragma mark - 
@@ -57,15 +58,16 @@
         [_sceneImage addSubview:self.locationLab];
         [_locationLab mas_makeConstraints:^(MASConstraintMaker *make) {
             make.centerY.equalTo(_locationIcon);
-            make.left.equalTo(_locationIcon.mas_right).with.offset(10);
+            make.left.equalTo(_locationIcon.mas_right).with.offset(5);
             make.right.equalTo(_sceneImage.mas_right).with.offset(-10);
         }];
         
         [_sceneImage addSubview:self.titleLab];
         [_titleLab mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.size.mas_equalTo(CGSizeMake(105, 15));
+            make.height.mas_equalTo(@15);
             make.bottom.equalTo(_locationIcon.mas_top).with.offset(-10);
-            make.left.equalTo(_locationIcon.mas_left).with.offset(0);
+            make.left.equalTo(_sceneImage.mas_left).with.offset(10);
+            make.right.equalTo(_sceneImage.mas_right).with.offset(-10);
         }];
     }
     return _sceneImage;
@@ -84,12 +86,11 @@
 
 //  标题文字的样式
 - (void)titleTextStyle:(NSString *)title {
-    if (title.length > 7) {
+    if (title.length > 11) {
         [self.titleLab mas_updateConstraints:^(MASConstraintMaker *make) {
             make.height.mas_equalTo(@40);
         }];
-        
-    } else {
+    } else if (title.length <= 11) {
         [self.titleLab mas_updateConstraints:^(MASConstraintMaker *make) {
             make.height.mas_equalTo(@15);
         }];

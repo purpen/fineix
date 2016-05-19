@@ -36,6 +36,8 @@ static NSString *const URLSearchList = @"/search/getlist";
     
     [self setNavigationViewUI];
     
+    [self.searchView.searchInputBox becomeFirstResponder];
+    
 }
 
 - (void)viewDidLoad {

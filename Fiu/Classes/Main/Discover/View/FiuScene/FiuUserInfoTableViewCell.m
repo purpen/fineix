@@ -1,17 +1,16 @@
 //
-//  UserInfoTableViewCell.m
+//  FIiuUserInfoTableViewCell.m
 //  Fiu
 //
-//  Created by FLYang on 16/4/7.
+//  Created by FLYang on 16/5/19.
 //  Copyright © 2016年 taihuoniao. All rights reserved.
 //
 
-#import "UserInfoTableViewCell.h"
+#import "FiuUserInfoTableViewCell.h"
 #import "HomePageViewController.h"
 #import "UIButton+WebCache.h"
-#import "GoodsInfoViewController.h"
 
-@implementation UserInfoTableViewCell
+@implementation FiuUserInfoTableViewCell
 
 - (instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier {
     self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
@@ -19,96 +18,58 @@
         
         self.selectionStyle = UITableViewCellSelectionStyleNone;
         self.backgroundColor = [UIColor whiteColor];
-
+        
         [self setCellUI];
         
     }
     return self;
 }
 
-#pragma mark -
-- (void)setSceneInfoData:(SceneInfoData *)model {
-    self.goodsIds = [NSMutableArray arrayWithArray:[model.product valueForKey:@"idField"]];
+- (void)setFiuSceneInfoData:(FiuSceneInfoData *)model {
     self.userId = [NSString stringWithFormat:@"%zi", model.userInfo.userId];
-    [self.bgImage sd_setBackgroundImageWithURL:[NSURL URLWithString:model.coverUrl] forState:(UIControlStateNormal)];
-    [self.bgImage sd_setBackgroundImageWithURL:[NSURL URLWithString:model.coverUrl] forState:(UIControlStateHighlighted)];
-    [self titleTextStyle:[NSString stringWithFormat:@"%@", model.title] withBgColor:[UIColor colorWithPatternImage:[UIImage imageNamed:@"titleBg"]]];
-    self.whereScene.text = [self abouText:self.whereScene withText:model.sceneTitle];
-    self.city.text = [self abouText:self.city withText:model.address];
+    [self.bgImage downloadImage:model.coverUrl place:[UIImage imageNamed:@""]];
     [self.userHeader sd_setImageWithURL:[NSURL URLWithString:model.userInfo.avatarUrl] forState:(UIControlStateNormal)];
     self.userName.text = model.userInfo.nickname;
-    //  是否是达人
-    if (model.userInfo.isExpert == 1) {
-        self.userProfile.text = [NSString stringWithFormat:@"达人｜%@",model.userInfo.summary];
-    } else if (model.userInfo.isExpert == 0) {
-        self.userProfile.text = model.userInfo.summary;
-    }
-
+    self.userProfile.text = model.userInfo.summary;
+    
+    UIColor * fsceneColor = [UIColor blackColor];
+    [self titleTextStyle:[NSString stringWithFormat:@"%@", model.title] withBgColor:fsceneColor];
+    
+    CGFloat cityLength = [model.address boundingRectWithSize:CGSizeMake(320, 1000) options:(NSStringDrawingUsesLineFragmentOrigin) attributes:nil context:nil].size.width;
+    self.city.text = model.address;
+    
+    [self.city mas_updateConstraints:^(MASConstraintMaker *make) {
+        make.size.mas_equalTo(CGSizeMake(cityLength + 5, 15));
+        make.left.equalTo(self.mas_left).with.offset(40);
+    }];
+    
     self.time.text = [NSString stringWithFormat:@"| %@", model.createdAt];
+    [self.time mas_updateConstraints:^(MASConstraintMaker *make) {
+        make.left.equalTo(self.city.mas_right).with.offset(10);
+        make.bottom.equalTo(self.city.mas_bottom).with.offset(0);
+        make.top.equalTo(self.city.mas_top).with.offset(0);
+    }];
     
-    if (model.loveCount/1000 > 1) {
-        self.goodNum.text = [NSString stringWithFormat:@"%zik人赞过", model.loveCount/1000];
+    //  订阅的数量
+    if (model.subscriptionCount/1000 > 1) {
+        self.goodNum.text = [NSString stringWithFormat:@"%zik人订阅", model.subscriptionCount/1000 ];
     } else {
-        self.goodNum.text = [NSString stringWithFormat:@"%zi人赞过", model.loveCount];
+        self.goodNum.text = [NSString stringWithFormat:@"%zi人订阅", model.subscriptionCount];
     }
-    
-    self.tagDataMarr = [NSMutableArray arrayWithArray:model.product];
-    
-    [self setUserTagBtn];
 }
 
-#pragma mark - 
+#pragma mark -
 - (void)setCellUI {
     [self addSubview:self.bgImage];
     
     [self addSubview:self.userView];
 }
 
-#pragma mark - 创建用户添加商品按钮
-- (void)setUserTagBtn {
-    self.userTagMarr = [NSMutableArray array];
-    
-    for (UIView * view in self.subviews) {
-        if ([view isKindOfClass:[UserGoodsTag class]]) {
-            [view removeFromSuperview];
-        }
-    }
-    
-    for (NSInteger idx = 0; idx < self.tagDataMarr.count; ++ idx) {
-        CGFloat btnX = [[self.tagDataMarr[idx] valueForKey:@"x"] floatValue];
-        CGFloat btnY = [[self.tagDataMarr[idx] valueForKey:@"y"] floatValue];
-        NSString * title = [self.tagDataMarr[idx] valueForKey:@"title"];
-        NSString * price = [NSString stringWithFormat:@"￥%@", [self.tagDataMarr[idx] valueForKey:@"price"]];
-        
-        UserGoodsTag * userTag = [[UserGoodsTag alloc] initWithFrame:CGRectMake(btnX * SCREEN_WIDTH, btnY * SCREEN_HEIGHT, 175, 32)];
-        userTag.dele.hidden = YES;
-        userTag.title.text = title;
-        userTag.price.text = price;
-        userTag.title.hidden = YES;
-        userTag.price.hidden = YES;
-        userTag.isMove = NO;
-        [userTag setImage:[UIImage imageNamed:@""] forState:(UIControlStateNormal)];
-        
-        UITapGestureRecognizer * tapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(openGoodsInfo:)];
-        [userTag addGestureRecognizer:tapGesture];
-        [self addSubview:userTag];
-        [self.userTagMarr addObject:userTag];
-    }
-}
-
-- (void)openGoodsInfo:(UIGestureRecognizer *)button {
-    NSInteger index = [self.userTagMarr indexOfObject:button.view];
-    GoodsInfoViewController * goodsInfoVC = [[GoodsInfoViewController alloc] init];
-    goodsInfoVC.goodsID = self.goodsIds[index];
-    [self.nav pushViewController:goodsInfoVC animated:YES];
-    
-}
-
 #pragma mark - 场景图
-- (UIButton *)bgImage {
+- (UIImageView *)bgImage {
     if (!_bgImage) {
-        _bgImage = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT)];
-        [_bgImage addTarget:self action:@selector(showUserTag:) forControlEvents:(UIControlEventTouchUpInside)];
+        _bgImage = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT)];
+        _bgImage.contentMode = UIViewContentModeScaleAspectFill;
         //  添加渐变层
         CAGradientLayer * shadow = [CAGradientLayer layer];
         shadow.startPoint = CGPointMake(0, 0);
@@ -118,49 +79,10 @@
         shadow.locations = @[@(0.5f), @(1.5f)];
         shadow.frame = _bgImage.bounds;
         [_bgImage.layer addSublayer:shadow];
-        _bgImage.selected = NO;
     }
     return _bgImage;
 }
 
-#pragma mark 显示／隐藏标签
-- (void)showUserTag:(UIButton *)button {
-    CGRect userViewRect = self.userView.frame;
-    
-    if (button.selected == YES) {
-        button.selected = NO;
-        
-        userViewRect = CGRectMake(0, SCREEN_HEIGHT * 2, SCREEN_WIDTH, 170);
-        [UIView animateWithDuration:.5 animations:^{
-            self.userView.frame = userViewRect;
-        } completion:^(BOOL finished) {
-            self.userView.hidden = YES;
-        }];
-        
-        for (UserGoodsTag * goodsTag in self.userTagMarr) {
-            goodsTag.title.hidden = NO;
-            goodsTag.price.hidden = NO;
-            [goodsTag setImage:[UIImage imageNamed:@"user_goodsTag_left"] forState:(UIControlStateNormal)];
-        }
-        [self layoutIfNeeded];
-        
-    } else if (button.selected == NO) {
-        button.selected = YES;
-        
-        userViewRect = CGRectMake(0, SCREEN_HEIGHT - 170, SCREEN_WIDTH, 170);
-        [UIView animateWithDuration:.3 animations:^{
-            self.userView.hidden = NO;
-            self.userView.frame = userViewRect;
-        }];
-        
-        for (UserGoodsTag * goodsTag in self.userTagMarr) {
-            goodsTag.title.hidden = YES;
-            goodsTag.price.hidden = YES;
-            [goodsTag setImage:[UIImage imageNamed:@""] forState:(UIControlStateNormal)];
-        }
-        [self layoutIfNeeded];
-    }
-}
 
 #pragma mark - 用户信息
 - (UIView *)userView {
@@ -216,23 +138,16 @@
             make.left.equalTo(_userView.mas_left).with.offset(40);
         }];
         
-        [_userView addSubview:self.whereScene];
-        [_whereScene mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.size.mas_equalTo(CGSizeMake(130, 15));
-            make.bottom.equalTo(_city.mas_top).with.offset(-5);
-            make.left.equalTo(_userView.mas_left).with.offset(40);
-        }];
-        
         [_userView addSubview:self.time];
         [_time mas_makeConstraints:^(MASConstraintMaker *make) {
             make.size.mas_equalTo(CGSizeMake(150, 15));
             make.bottom.equalTo(_city.mas_top).with.offset(-5);
-            make.left.equalTo(_whereScene.mas_right).with.offset(0);
+            make.left.equalTo(_city.mas_right).with.offset(0);
         }];
         
         [_userView addSubview:self.titleText];
         [_titleText mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.size.mas_equalTo(CGSizeMake(SCREEN_WIDTH - 40, 56));
+            make.size.mas_equalTo(CGSizeMake(SCREEN_WIDTH - 40, 40));
             make.bottom.equalTo(_time.mas_top).with.offset(-5);
             make.left.equalTo(_userView.mas_left).with.offset(20);
         }];
@@ -245,17 +160,17 @@
     if (!_userLeftView) {
         _userLeftView = [[UIView alloc] init];
         _userLeftView.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"User_bg_left"]];
-
+        
     }
     return _userLeftView;
 }
 
-#pragma mark - 点赞的按钮
+#pragma mark - 订阅的按钮
 - (UIButton *)goodBtn {
     if (!_goodBtn) {
         _goodBtn = [[UIButton alloc] init];
-        [_goodBtn setBackgroundImage:[UIImage imageNamed:@"User_like"] forState:(UIControlStateNormal)];
-
+        [_goodBtn setBackgroundImage:[UIImage imageNamed:@"User_Su"] forState:(UIControlStateNormal)];
+        
         [_goodBtn addSubview:self.goodNum];
         [_goodNum mas_makeConstraints:^(MASConstraintMaker *make) {
             make.size.mas_equalTo(CGSizeMake(89 ,13));
@@ -266,7 +181,7 @@
     return _goodBtn;
 }
 
-#pragma mark - 点赞的数量
+#pragma mark - 订阅的数量
 - (UILabel *)goodNum {
     if (!_goodNum) {
         _goodNum = [[UILabel alloc] init];
@@ -325,28 +240,6 @@
     return _userProfile;
 }
 
-#pragma mark - 观看数量
-- (UILabel *)lookNum {
-    if (!_lookNum) {
-        _lookNum = [[UILabel alloc] init];
-        [self addIcon:_lookNum withImage:@"look"];
-        _lookNum.font = [UIFont systemFontOfSize:Font_UserProfile];
-        _lookNum.textColor = [UIColor colorWithHexString:@"#666666" alpha:1];
-    }
-    return _lookNum;
-}
-
-#pragma mark - 喜欢数量
-- (UILabel *)likeNum {
-    if (!_likeNum) {
-        _likeNum = [[UILabel alloc] init];
-        [self addIcon:_likeNum withImage:@"like"];
-        _likeNum.font = [UIFont systemFontOfSize:Font_UserProfile];
-        _likeNum.textColor = [UIColor colorWithHexString:@"#666666" alpha:1];
-    }
-    return _likeNum;
-}
-
 #pragma mark - 标题文字
 - (UILabel *)titleText {
     if (!_titleText) {
@@ -359,14 +252,12 @@
 
 //  标题文字的样式
 - (void)titleTextStyle:(NSString *)title withBgColor:(UIColor *)color {
-    if ([title length] < 8) {
+    if ([title length] <= 11) {
         _titleText.font = [UIFont systemFontOfSize:40];
-    } else if ([title length] >= 8 && [title length] < 13) {
-        _titleText.font = [UIFont systemFontOfSize:30];
-    } else if ([title length] > 13) {
-        _titleText.font = [UIFont systemFontOfSize:20];
+    } else if ([title length] > 11 ) {
+        _titleText.font = [UIFont systemFontOfSize:28];
         [_titleText mas_updateConstraints:^(MASConstraintMaker *make) {
-            make.size.mas_equalTo(CGSizeMake(240, 56));
+            make.height.mas_equalTo(@70);
         }];
     }
     NSMutableAttributedString * titleText = [[NSMutableAttributedString alloc] initWithString:title];
@@ -379,37 +270,6 @@
                                 };
     [titleText addAttributes:textDict range:NSMakeRange(0, titleText.length)];
     self.titleText.attributedText = titleText;
-}
-
-//  数量样式
-- (NSString *)aboutCount:(UILabel *)lable withCount:(NSInteger)count {
-    NSString * num = [NSString stringWithFormat:@"%zi", count];
-    CGFloat numLength = [num boundingRectWithSize:CGSizeMake(320, 1000) options:(NSStringDrawingUsesLineFragmentOrigin) attributes:nil context:nil].size.width;
-    [lable mas_updateConstraints:^(MASConstraintMaker *make) {
-        make.size.mas_equalTo(CGSizeMake(numLength, 15));
-    }];
-    return num;
-}
-
-//  文字情景
-- (NSString *)abouText:(UILabel *)lable withText:(NSString *)fiuScene {
-    NSString * whereText = fiuScene;
-    CGFloat textLength = [fiuScene boundingRectWithSize:CGSizeMake(320, 1000) options:(NSStringDrawingUsesLineFragmentOrigin) attributes:nil context:nil].size.width;
-    [lable mas_updateConstraints:^(MASConstraintMaker *make) {
-        make.size.mas_equalTo(CGSizeMake(textLength + 5, 15));
-    }];
-    return whereText;
-}
-
-#pragma mark - 所属情景
-- (UILabel *)whereScene {
-    if (!_whereScene) {
-        _whereScene = [[UILabel alloc] init];
-        [self addIcon:_whereScene withImage:@"icon_star"];
-        _whereScene.font = [UIFont systemFontOfSize:Font_Number];
-        _whereScene.textColor = [UIColor whiteColor];
-    }
-    return _whereScene;
 }
 
 #pragma mark - 城市
@@ -441,7 +301,6 @@
     icon.image = [UIImage imageNamed:iconImage];
     [lable addSubview:icon];
 }
-
 
 
 @end
