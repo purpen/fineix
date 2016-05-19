@@ -22,7 +22,7 @@
     self.delegate = self;
     self.navViewTitle.text = @"天猫订单";
     self.tianMaoWebView.delegate = self;
-    NSURL *url = [NSURL URLWithString:@"https://www.tmall.com"];
+    NSURL *url = [NSURL URLWithString:@"https://h5.m.taobao.com/mlapp/mytaobao.html#mlapp-mytaobao"];
     NSURLRequest *request = [NSURLRequest requestWithURL:url];
     [self.tianMaoWebView loadRequest:request];
 }

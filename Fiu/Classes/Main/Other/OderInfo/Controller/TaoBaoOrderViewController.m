@@ -21,7 +21,7 @@
     // Do any additional setup after loading the view from its nib.
     self.delegate = self;
     self.navViewTitle.text = @"淘宝订单";
-    NSURL *url = [NSURL URLWithString:@"https://m.taobao.com/#index"];
+    NSURL *url = [NSURL URLWithString:@"https://h5.m.taobao.com/mlapp/mytaobao.html#mlapp-mytaobao"];
     NSURLRequest *request = [NSURLRequest requestWithURL:url];
     [self.taoBaoWebView loadRequest:request];
     self.taoBaoWebView.delegate = self;

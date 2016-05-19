@@ -20,6 +20,7 @@
 @property(nonatomic,strong) UIButton *focusOnBtn;//关注按钮
 @property(nonatomic,strong) UIButton *directMessages;//私信按钮
 @property(nonatomic,strong) UIView *headView;
+@property(nonatomic,strong) UIImageView *idImageView;
 
 -(void)setUIWithModel:(UserInfo*)model;
 @end

@@ -13,17 +13,24 @@
 #import "TagsCollectionViewCell.h"
 #import "UIImage+Helper.h"
 #import "UIImagePickerController+Flag.h"
+#import "SVProgressHUD.h"
 
 #define ITEMS_COLLECTIONVIEW_TAG 9
 #define SELECTED_COLLECTIONVIEW_TAG 10
 
-@interface TheOfficialCertificationViewController ()<FBNavigationBarItemsDelegate,UITextFieldDelegate,UICollectionViewDelegate,UICollectionViewDataSource,UICollectionViewDelegateFlowLayout,UINavigationControllerDelegate,UIImagePickerControllerDelegate>
+@interface TheOfficialCertificationViewController ()<FBNavigationBarItemsDelegate,UITextFieldDelegate,UICollectionViewDelegate,UICollectionViewDataSource,UICollectionViewDelegateFlowLayout,UINavigationControllerDelegate,UIImagePickerControllerDelegate,FBRequestDelegate>
+{
+    NSString *_idIcon64Str;
+    NSString *_cardIcon64Str;
+}
+
 @property(nonatomic,strong) UIScrollView *myScrollView;
 @property(nonatomic,strong) UICollectionView *itemsCollectionView;
 @property(nonatomic,strong) CertIdView *certView;
 @property(nonatomic,strong) NSMutableArray *modelAry;
 @property(nonatomic,strong) UICollectionView *selectedCollectionView;
 @property(nonatomic ,strong) NSMutableArray *selectedModelAry;
+
 @end
 
 @implementation TheOfficialCertificationViewController
@@ -53,21 +60,36 @@
 }
 
 -(void)clickApplyBtn:(UIButton*)sender{
-   //提交
-    
+    if (self.certView.informationTF.text.length == 0 || self.selectedModelAry.count == 0 || self.certView.phoneTF.text.length==0 || _idIcon64Str.length==0 || _cardIcon64Str.length==0) {
+        [SVProgressHUD showErrorWithStatus:@"请完善信息"];
+    }else{
+        //提交
+        NSString *idStr;
+        idStr = ((IdentityTagModel*)self.selectedModelAry[0]).tags;
+        [SVProgressHUD showWithMaskType:SVProgressHUDMaskTypeClear];
+        FBRequest *requset = [FBAPI postWithUrlString:@"/my/talent_save" requestDictionary:@{
+                                                                                             @"info":self.certView.informationTF.text,
+                                                                                             @"label":idStr,
+                                                                                             @"contact":self.certView.phoneTF.text,
+                                                                                             @"id_card_a_tmp":_idIcon64Str,
+                                                                                             @"business_card_tmp":_cardIcon64Str
+                                                                                             } delegate:self];
+        [requset startRequestSuccess:^(FBRequest *request, id result) {
+            if ([result objectForKey:@"success"]) {
+                [SVProgressHUD showSuccessWithStatus:@"提交成功"];
+            }else{
+                [SVProgressHUD showErrorWithStatus:@"提交失败"];
+            }
+        } failure:^(FBRequest *request, NSError *error) {
+        }]; 
+    }
 }
 
 -(void)clickDeletAllBtn:(UIButton*)sender{
-    if (self.selectedModelAry.count) {
-        [self.selectedModelAry removeAllObjects];
-        [self.selectedCollectionView reloadData];
-        sender.hidden = YES;
-        self.selectedCollectionView.hidden = YES;
-    }
-    if (self.certView.titleTextFied.text.length) {
-        self.certView.titleTextFied.text = @"";
-    }
-    
+    [self.selectedModelAry removeAllObjects];
+    [self.selectedCollectionView reloadData];
+    sender.hidden = YES;
+    self.selectedCollectionView.hidden = YES;
 }
 
 -(UICollectionView *)itemsCollectionView{
@@ -192,7 +214,7 @@
 -(CertIdView *)certView{
     if (!_certView) {
         _certView = [CertIdView getCertView];
-        _certView.frame = CGRectMake(0, 0, SCREEN_WIDTH, 700);
+        _certView.frame = CGRectMake(0, 0, SCREEN_WIDTH, 800);
         [_certView.idBtn addTarget:self action:@selector(clickIdBtn:) forControlEvents:UIControlEventTouchUpInside];
         [_certView.cardBtn addTarget:self action:@selector(clickCardBtn:) forControlEvents:UIControlEventTouchUpInside];
     }
@@ -236,13 +258,15 @@
     if ([picker.flag isEqualToNumber:@1]) {
         [self.certView.cardBtn setBackgroundImage:[UIImage fixOrientation:editedImg] forState:UIControlStateNormal];
         [self.certView.cardBtn setTitle:nil forState:UIControlStateNormal];
+        NSData * iconData = UIImageJPEGRepresentation([UIImage fixOrientation:editedImg] , 0.5);
+        _cardIcon64Str = [iconData base64EncodedStringWithOptions:NSDataBase64Encoding64CharacterLineLength];
     }else if ([picker.flag isEqualToNumber:@0]){
         [self.certView.idBtn setBackgroundImage:[UIImage fixOrientation:editedImg] forState:UIControlStateNormal];
         [self.certView.idBtn setTitle:nil forState:UIControlStateNormal];
+        NSData * iconData = UIImageJPEGRepresentation([UIImage fixOrientation:editedImg] , 0.5);
+        _idIcon64Str = [iconData base64EncodedStringWithOptions:NSDataBase64Encoding64CharacterLineLength];
     }
     
-//    NSData * iconData = UIImageJPEGRepresentation([UIImage fixOrientation:editedImg] , 0.5);
-//    //        NSData * iconData = UIImageJPEGRepresentation(editedImg , 0.5);
 //    [self uploadIconWithData:iconData];
     [picker dismissViewControllerAnimated:YES completion:nil];
     

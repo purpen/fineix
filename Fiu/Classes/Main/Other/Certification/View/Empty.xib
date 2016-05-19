@@ -8,11 +8,11 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
         <view contentMode="scaleToFill" id="QXY-AD-L7f" customClass="CertIdView">
-            <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+            <rect key="frame" x="0.0" y="0.0" width="375" height="793"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <subviews>
                 <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="5N2-zX-QQf">
-                    <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                    <rect key="frame" x="0.0" y="0.0" width="375" height="793"/>
                     <subviews>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="认证身份" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Pwb-oc-EeH">
                             <rect key="frame" x="15" y="10" width="56" height="17"/>
@@ -38,11 +38,6 @@
                                             <color key="textColor" red="0.40000000000000002" green="0.40000000000000002" blue="0.40000000000000002" alpha="1" colorSpace="calibratedRGB"/>
                                             <nil key="highlightedColor"/>
                                         </label>
-                                        <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Zok-Ur-G1E">
-                                            <rect key="frame" x="15" y="0.0" width="320" height="44"/>
-                                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                            <textInputTraits key="textInputTraits"/>
-                                        </textField>
                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3Zh-xe-8vj">
                                             <rect key="frame" x="345" y="11" width="15" height="22"/>
                                             <constraints>
@@ -56,20 +51,10 @@
                                     <constraints>
                                         <constraint firstItem="3Zh-xe-8vj" firstAttribute="centerY" secondItem="GYn-Ak-YJk" secondAttribute="centerY" id="6y6-jP-aie"/>
                                         <constraint firstAttribute="trailing" secondItem="3Zh-xe-8vj" secondAttribute="trailing" constant="15" id="Avq-tF-YtR"/>
-                                        <constraint firstItem="3Zh-xe-8vj" firstAttribute="leading" secondItem="Zok-Ur-G1E" secondAttribute="trailing" constant="10" id="P2L-a5-WJL"/>
-                                        <constraint firstAttribute="trailing" secondItem="Zok-Ur-G1E" secondAttribute="trailing" constant="40" id="Q05-nt-HS2"/>
                                         <constraint firstAttribute="height" constant="44" id="Zxm-n3-aKS"/>
-                                        <constraint firstAttribute="bottom" secondItem="Zok-Ur-G1E" secondAttribute="bottom" id="aiH-tH-fkJ"/>
                                         <constraint firstItem="5GL-2K-2bQ" firstAttribute="leading" secondItem="GYn-Ak-YJk" secondAttribute="leading" constant="18" id="d0j-yN-npd"/>
-                                        <constraint firstItem="Zok-Ur-G1E" firstAttribute="top" secondItem="GYn-Ak-YJk" secondAttribute="top" id="eNp-9J-9od"/>
                                         <constraint firstItem="5GL-2K-2bQ" firstAttribute="centerY" secondItem="GYn-Ak-YJk" secondAttribute="centerY" id="ozf-rd-cR7"/>
-                                        <constraint firstItem="Zok-Ur-G1E" firstAttribute="leading" secondItem="GYn-Ak-YJk" secondAttribute="leading" constant="15" id="wg9-eh-KLq"/>
                                     </constraints>
-                                    <variation key="default">
-                                        <mask key="constraints">
-                                            <exclude reference="Q05-nt-HS2"/>
-                                        </mask>
-                                    </variation>
                                 </view>
                             </subviews>
                             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -117,10 +102,10 @@
                             <nil key="highlightedColor"/>
                         </label>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="WRZ-wg-fXq">
-                            <rect key="frame" x="15" y="372" width="345" height="97"/>
+                            <rect key="frame" x="15" y="372" width="345" height="150"/>
                             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             <constraints>
-                                <constraint firstAttribute="height" constant="97" id="XRk-u3-n8H"/>
+                                <constraint firstAttribute="height" constant="150" id="XRk-u3-n8H"/>
                             </constraints>
                             <fontDescription key="fontDescription" type="system" pointSize="13"/>
                             <state key="normal" title="+上传身份证">
@@ -128,25 +113,30 @@
                             </state>
                         </button>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="名片" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LFx-O5-M2c">
-                            <rect key="frame" x="15" y="479" width="28" height="17"/>
+                            <rect key="frame" x="15" y="532" width="28" height="17"/>
                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
                             <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                             <nil key="highlightedColor"/>
                         </label>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4IB-tc-Xf6">
-                            <rect key="frame" x="15" y="506" width="345" height="97"/>
+                            <rect key="frame" x="15" y="559" width="345" height="150"/>
                             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             <constraints>
                                 <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="97" id="fYq-b1-mCZ"/>
-                                <constraint firstAttribute="height" constant="97" id="stX-Hp-Uj3"/>
+                                <constraint firstAttribute="height" constant="150" id="stX-Hp-Uj3"/>
                             </constraints>
                             <fontDescription key="fontDescription" type="system" pointSize="13"/>
                             <state key="normal" title="+上传名片">
                                 <color key="titleColor" red="0.40000000000000002" green="0.40000000000000002" blue="0.40000000000000002" alpha="1" colorSpace="calibratedRGB"/>
                             </state>
+                            <variation key="default">
+                                <mask key="constraints">
+                                    <exclude reference="fYq-b1-mCZ"/>
+                                </mask>
+                            </variation>
                         </button>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0iu-Mf-U9N">
-                            <rect key="frame" x="15" y="618" width="345" height="44"/>
+                            <rect key="frame" x="15" y="724" width="345" height="44"/>
                             <color key="backgroundColor" red="0.74509803919999995" green="0.53725490200000003" blue="0.078431372550000003" alpha="1" colorSpace="calibratedRGB"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="44" id="k4j-Bk-CxW"/>
@@ -202,7 +192,7 @@
             </constraints>
             <nil key="simulatedStatusBarMetrics"/>
             <nil key="simulatedTopBarMetrics"/>
-            <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <connections>
                 <outlet property="cardBtn" destination="4IB-tc-Xf6" id="b1o-Rh-aeG"/>
                 <outlet property="deleAllBtn" destination="3Zh-xe-8vj" id="9tx-G5-gb9"/>
@@ -213,9 +203,8 @@
                 <outlet property="selectedView" destination="8vw-Io-bHy" id="YWW-KX-fx0"/>
                 <outlet property="subBtn" destination="0iu-Mf-U9N" id="XaM-wM-o4f"/>
                 <outlet property="tipLabel" destination="5GL-2K-2bQ" id="Fcr-pj-gGI"/>
-                <outlet property="titleTextFied" destination="Zok-Ur-G1E" id="nxt-HK-65m"/>
             </connections>
-            <point key="canvasLocation" x="454.5" y="398.5"/>
+            <point key="canvasLocation" x="407.5" y="471.5"/>
         </view>
     </objects>
     <resources>

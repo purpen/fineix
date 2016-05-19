@@ -72,6 +72,13 @@
     if (self.titleTextField.text.length) {
         self.titleTextField.text = @"";
     }
+    if (self.titleTextField.isEditing) {
+        
+    }else{
+        sender.hidden = YES;
+        self.tipLabel.hidden = NO;
+        self.itemsCollectionView.userInteractionEnabled = YES;
+    }
     
 }
 
@@ -215,9 +222,12 @@
         FBRequest *request = [FBAPI postWithUrlString:@"/my/update_profile" requestDictionary:@{
                                                                                                 @"label":idStr
                                                                                                 } delegate:self];
+        UserInfoEntity *entity = [UserInfoEntity defaultUserInfoEntity];
+        entity.label = idStr;
+        [entity updateUserInfo];
         [request startRequestSuccess:^(FBRequest *request, id result) {
             UserInfoEntity *entity = [UserInfoEntity defaultUserInfoEntity];
-            entity.label = [result objectForKey:@"data"][@"label"];
+            entity.label = idStr;
             [entity updateUserInfo];
         } failure:^(FBRequest *request, NSError *error) {
             
