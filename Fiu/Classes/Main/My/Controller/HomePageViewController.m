@@ -45,6 +45,7 @@
     int _totalN;
     int _totalM;
     UserInfo *_model;
+    NSInteger _fansN;
 }
 
 @property(nonatomic,strong) UILabel *tipLabel;
@@ -295,7 +296,8 @@ static NSString *const IconURL = @"/my/add_head_pic";
         _chanelV.scenarioNumLabel.text = [NSString stringWithFormat:@"%@",dataDict[@"scene_count"]];
         _chanelV.fieldNumLabel.text = [NSString stringWithFormat:@"%@",dataDict[@"sight_count"]];
         _chanelV.focusNumLabel.text = [NSString stringWithFormat:@"%@",dataDict[@"follow_count"]];
-        _chanelV.fansNumLabel.text = [NSString stringWithFormat:@"%@",dataDict[@"fans_count"]];
+        _fansN = [dataDict[@"fans_count"] integerValue];
+        
         [SVProgressHUD dismiss];
         if (self.isMySelf) {
             UserInfo *userInfo = [UserInfo mj_objectWithKeyValues:[result objectForKey:@"data"]];
@@ -435,6 +437,7 @@ static NSString *const IconURL = @"/my/add_head_pic";
         if (indexPath.row == 0) {
             UICollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"UICollectionViewCell" forIndexPath:indexPath];
             _chanelV.frame = CGRectMake(0, 0, SCREEN_WIDTH, 60/667.0*SCREEN_HEIGHT);
+            _chanelV.fansNumLabel.text = [NSString stringWithFormat:@"%zi",_fansN];
             [cell.contentView addSubview:_chanelV];
             return cell;
         }
@@ -484,7 +487,7 @@ static NSString *const IconURL = @"/my/add_head_pic";
 -(void)clickFocusBtn:(UIButton*)sender{
     if (sender.selected) {
         MyFansActionSheetViewController *sheetVC = [[MyFansActionSheetViewController alloc] init];
-        [sheetVC setUI];
+        [sheetVC setUIWithModel:_model];
         sheetVC.modalPresentationStyle = UIModalPresentationOverCurrentContext;
         sheetVC.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;
         [self presentViewController:sheetVC animated:YES completion:nil];
@@ -493,7 +496,8 @@ static NSString *const IconURL = @"/my/add_head_pic";
         [sheetVC.cancelBtn addTarget:self action:@selector(clickCancelBtn:) forControlEvents:UIControlEventTouchUpInside];
     }else{
         _model.is_love = @1;
-        [self.myCollectionView reloadItemsAtIndexPaths:[NSArray arrayWithObjects:[NSIndexPath indexPathForRow:0 inSection:0], nil]];
+        _fansN ++;
+        [self.myCollectionView reloadItemsAtIndexPaths:[NSArray arrayWithObjects:[NSIndexPath indexPathForRow:0 inSection:0],[NSIndexPath indexPathForRow:0 inSection:1], nil]];
         //请求数据
         FBRequest *request = [FBAPI postWithUrlString:@"/follow/ajax_follow" requestDictionary:@{@"follow_id":self.userId} delegate:self];
         request.flag = @"/follow/ajax_follow";
@@ -606,7 +610,8 @@ static NSString *const IconURL = @"/my/add_head_pic";
 -(void)clickStopBtn:(UIButton*)sender{
     [self dismissViewControllerAnimated:YES completion:nil];
     _model.is_love = @0;
-    [self.myCollectionView reloadItemsAtIndexPaths:[NSArray arrayWithObjects:[NSIndexPath indexPathForRow:0 inSection:0], nil]];
+    _fansN --;
+    [self.myCollectionView reloadItemsAtIndexPaths:[NSArray arrayWithObjects:[NSIndexPath indexPathForRow:0 inSection:0],[NSIndexPath indexPathForRow:0 inSection:1], nil]];
     FBRequest *request = [FBAPI postWithUrlString:@"/follow/ajax_cancel_follow" requestDictionary:@{@"follow_id":self.userId} delegate:self];
     request.flag = @"/follow/ajax_cancel_follow";
     [request startRequest];

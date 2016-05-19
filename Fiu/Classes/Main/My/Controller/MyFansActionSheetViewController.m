@@ -8,6 +8,8 @@
 
 #import "MyFansActionSheetViewController.h"
 #import "Fiu.h"
+#import "UserInfo.h"
+#import <SDWebImage/UIImageView+WebCache.h>
 
 @interface MyFansActionSheetViewController ()
 
@@ -21,9 +23,9 @@
     [self.view addSubview:self.alertView];
 }
 
--(void)setUI{
-    self.headImageView.image = [UIImage imageNamed:@"user"];
-    self.sheetLabel.text = @"停止关注 swimmme?";
+-(void)setUIWithModel:(UserInfo *)model{
+    [self.headImageView sd_setImageWithURL:[NSURL URLWithString:model.mediumAvatarUrl]];
+    self.sheetLabel.text = [NSString stringWithFormat:@"停止关注 %@",model.nickname];
 }
 
 -(UIView *)alertView{

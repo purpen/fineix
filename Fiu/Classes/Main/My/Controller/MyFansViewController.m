@@ -221,7 +221,8 @@
     
     if (sender.selected) {
         MyFansActionSheetViewController *sheetVC = [[MyFansActionSheetViewController alloc] init];
-        [sheetVC setUI];
+        UserInfo *model = _modelAry[sender.tag];
+        [sheetVC setUIWithModel:model];
         sheetVC.modalPresentationStyle = UIModalPresentationOverCurrentContext;
         sheetVC.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;
         [self presentViewController:sheetVC animated:YES completion:nil];

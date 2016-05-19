@@ -15,7 +15,7 @@
 #import "UserInfo.h"
 #import "ReleaseViewController.h"
 
-@interface AllNearbyScenarioViewController ()<FBNavigationBarItemsDelegate,BMKMapViewDelegate,UITableViewDelegate,UITableViewDataSource,BMKLocationServiceDelegate,BMKMapViewDelegate>
+@interface AllNearbyScenarioViewController ()<FBNavigationBarItemsDelegate,UITableViewDelegate,UITableViewDataSource,BMKLocationServiceDelegate,BMKMapViewDelegate>
 {
     BMKLocationService *_locService;
     float _latitude;

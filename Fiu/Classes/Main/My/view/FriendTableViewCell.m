@@ -27,7 +27,6 @@
 -(void)setUI{
     self.headImageView.image = [UIImage imageNamed:@"user"];
     self.nameLbael.text = @"boc 747";
-    self.deressLabel.text = @"北京 朝阳区";
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
@@ -55,9 +54,9 @@
             make.right.mas_equalTo(self.mas_right).with.offset(-30);
         }];
         
-        [self.contentView addSubview:self.mapImageView];
-        [_mapImageView mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.size.mas_equalTo(CGSizeMake(7/667.0*SCREEN_HEIGHT, 11/667.0*SCREEN_HEIGHT));
+        [self.contentView addSubview:self.idTagsImageView];
+        [_idTagsImageView mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.size.mas_equalTo(CGSizeMake(28, 12));
             make.left.mas_equalTo(_headImageView.mas_right).with.offset(9/667.0*SCREEN_HEIGHT);
             make.top.mas_equalTo(_nameLbael.mas_bottom).with.offset(4/667.0*SCREEN_HEIGHT);
         }];
@@ -77,26 +76,40 @@
             make.right.mas_equalTo(self.mas_right).with.offset(0);
         }];
         
-        [self.contentView addSubview:self.deressLabel];
-        [_deressLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.centerY.mas_equalTo(_mapImageView.mas_centerY);
-            make.left.mas_equalTo(_mapImageView.mas_right).with.offset(2);
+        [self.contentView addSubview:self.levelLabel];
+        [_levelLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.centerY.mas_equalTo(_idTagsImageView.mas_centerY);
+            make.left.mas_equalTo(_headImageView.mas_right).with.offset(9/667.0*SCREEN_HEIGHT);
             make.height.mas_equalTo(10);
-            make.width.mas_equalTo(200);
+        }];
+        
+        [self.contentView addSubview:self.userLevelLabel];
+        [_userLevelLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.centerY.mas_equalTo(_idTagsImageView.mas_centerY);
+            make.left.mas_equalTo(_idTagsImageView.mas_right).with.offset(2/667.0*SCREEN_HEIGHT);
+            make.height.mas_equalTo(10);
         }];
     }
     return self;
 }
 
--(UILabel *)deressLabel{
-    if (!_deressLabel) {
-        _deressLabel = [[UILabel alloc] init];
-        _deressLabel.font = [UIFont systemFontOfSize:9];
-        _deressLabel.textColor = [UIColor lightGrayColor];
+-(UILabel *)levelLabel{
+    if (!_levelLabel) {
+        _levelLabel = [[UILabel alloc] init];
+        _levelLabel.font = [UIFont systemFontOfSize:9];
+        _levelLabel.textColor = [UIColor lightGrayColor];
     }
-    return _deressLabel;
+    return _levelLabel;
 }
 
+-(UILabel *)userLevelLabel{
+    if (!_userLevelLabel) {
+        _userLevelLabel = [[UILabel alloc] init];
+        _userLevelLabel.font = [UIFont systemFontOfSize:9];
+        _userLevelLabel.textColor = [UIColor lightGrayColor];
+    }
+    return _userLevelLabel;
+}
 
 
 -(UICollectionView *)imageCollectionView{
@@ -128,11 +141,7 @@
     static NSString *cellId = @"FiuSceneCollectionViewCell";
     FiuSceneCollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:cellId forIndexPath:indexPath];
     //[cell setUI];
-    cell.backgroundColor = [UIColor redColor];
     FindSceneModel *model = self.sceneAry[indexPath.section];
-//    //cell.titleLab.text = model.title;
-//    cell.locationLab.text = model.address;
-//    [cell.sceneImage sd_setImageWithURL:[NSURL URLWithString:model.cober]];
     FiuSceneRow *model1 = [[FiuSceneRow alloc] init];
     
     model1.title = model.title;
@@ -153,11 +162,11 @@
     return _focusBtn;
 }
 
--(UIImageView *)mapImageView{
-    if (!_mapImageView) {
-        _mapImageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"icon_city"]];
+-(UIImageView *)idTagsImageView{
+    if (!_idTagsImageView) {
+        _idTagsImageView = [[UIImageView alloc] init];
     }
-    return _mapImageView;
+    return _idTagsImageView;
 }
 
 -(UILabel *)nameLbael{

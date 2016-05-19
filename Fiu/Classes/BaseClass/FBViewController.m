@@ -225,6 +225,13 @@ NSString *const URLGoodsCarNum = @"/shopping/fetch_cart_count";
         self.rightBtn.titleEdgeInsets = UIEdgeInsetsMake(0, -25, 0, 0);
         self.rightBtn.titleLabel.font = [UIFont systemFontOfSize:12];
     }
+    if ([title isEqualToString:@"积分规则"]) {
+        CGRect frame = self.rightBtn.frame;
+        frame.origin.x = SCREEN_WIDTH-70-15;
+        frame.size.width = 70;
+        self.rightBtn.frame = frame;
+        self.rightBtn.titleLabel.font = [UIFont systemFontOfSize:17];
+    }
     if (transparent == NO) {
         self.navView.hidden = NO;
         [self.navView addSubview:self.rightBtn];

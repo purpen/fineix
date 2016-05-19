@@ -87,13 +87,15 @@
     [self.bgImageView sd_setImageWithURL:[NSURL URLWithString:entity.head_pic_url] placeholderImage:[UIImage imageNamed:@"image"]];
     self.nickName.text = entity.nickname;
     self.userProfile.text = entity.summary;
+    NSArray *tagsAry = [NSArray arrayWithObjects:@"大拿",@"行家",@"行摄家",@"艺术范",@"手艺人",@"人来疯",@"赎回自由身",@"职业buyer", nil];
     if ([entity.is_expert isEqualToString:@"0"]) {
         self.userLevelLabel.text = [NSString stringWithFormat:@"%@ | V%d",entity.label,[entity.level intValue]];
         self.idImageView.hidden = YES;
     }else if([entity.is_expert isEqualToString:@"1"]){
         self.userLevelLabel.text = [NSString stringWithFormat:@" | V%d",[entity.level intValue]];
         self.idImageView.hidden = NO;
-        self.idImageView.image = [UIImage imageNamed:entity.label];
+        int n = (int)[tagsAry indexOfObject:entity.label];
+        self.idImageView.image = [UIImage imageNamed:[NSString stringWithFormat:@"tags%d",n]];
     }
     //self.userLevelLabel.text = [NSString stringWithFormat:@"%@ | V%d",entity.levelDesc,[entity.level intValue]];
 }

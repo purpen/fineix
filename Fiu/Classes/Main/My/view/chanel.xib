@@ -78,7 +78,7 @@
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="YLy-lk-LgI">
                     <rect key="frame" x="0.0" y="0.0" width="90" height="60"/>
                     <subviews>
-                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Bitmap-1" translatesAutoresizingMaskIntoConstraints="NO" id="gnh-PU-VPg">
+                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="bg_one" translatesAutoresizingMaskIntoConstraints="NO" id="gnh-PU-VPg">
                             <rect key="frame" x="0.0" y="0.0" width="90" height="60"/>
                         </imageView>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="场景" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wLO-3R-OqK">
@@ -110,7 +110,7 @@
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="PdP-yb-nfb">
                     <rect key="frame" x="95" y="0.0" width="90" height="60"/>
                     <subviews>
-                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Bitmap" translatesAutoresizingMaskIntoConstraints="NO" id="1yp-ca-P4W">
+                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="bg_two" translatesAutoresizingMaskIntoConstraints="NO" id="1yp-ca-P4W">
                             <rect key="frame" x="0.0" y="0.0" width="90" height="60"/>
                         </imageView>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="3" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="B9S-h1-cvJ">
@@ -190,7 +190,8 @@
     </objects>
     <resources>
         <image name="Bitmap" width="90" height="60"/>
-        <image name="Bitmap-1" width="90" height="60"/>
         <image name="Bitmap-2" width="90" height="60"/>
+        <image name="bg_one" width="90" height="60"/>
+        <image name="bg_two" width="90" height="60"/>
     </resources>
 </document>

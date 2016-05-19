@@ -39,8 +39,7 @@
 //    [self addBarItemLeftBarButton:nil image:@"icon_back"];
     self.delegate = self;
     
-    //进行网络请求
-    [self requestDataForOderList];
+    
     
     // 下拉刷新
     self.mytableView.mj_header = [MJRefreshNormalHeader headerWithRefreshingBlock:^{
@@ -172,6 +171,8 @@
 -(void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
     //self.navigationController.navigationBarHidden = NO;
+    //进行网络请求
+    [self requestDataForOderList];
 }
 
 -(void)leftBarItemSelected{
@@ -223,7 +224,8 @@
     
     if (sender.selected) {
         MyFansActionSheetViewController *sheetVC = [[MyFansActionSheetViewController alloc] init];
-        [sheetVC setUI];
+        UserInfo *model = _modelAry[sender.tag];
+        [sheetVC setUIWithModel:model];
         sheetVC.modalPresentationStyle = UIModalPresentationOverCurrentContext;
         sheetVC.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;
         [self presentViewController:sheetVC animated:YES completion:nil];

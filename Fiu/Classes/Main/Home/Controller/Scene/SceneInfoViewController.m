@@ -21,6 +21,7 @@
 #import "GoodsRow.h"
 #import "LikeOrSuPeopleRow.h"
 #import "HomePageViewController.h"
+#import "NearQingViewController.h"
 
 static NSString *const URLSceneInfo = @"/scene_sight/view";
 static NSString *const URLCommentList = @"/comment/getlist";
@@ -285,7 +286,8 @@ static NSString *const URLWantBuy = @"/scene_product/sight_click_stat";
             }
             cell.nav = self.navigationController;
             [cell setSceneInfoData:self.sceneInfoModel];
-            //cell.city addGestureRecognizer:<#(nonnull UIGestureRecognizer *)#>
+            cell.city.userInteractionEnabled = YES;
+            [cell.city addGestureRecognizer:self.cityTap];
             return cell;
             
         } else if (indexPath.row == 1) {
@@ -352,6 +354,21 @@ static NSString *const URLWantBuy = @"/scene_product/sight_click_stat";
     
     return nil;
     
+}
+
+-(UITapGestureRecognizer *)cityTap{
+    if (!_cityTap) {
+        _cityTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(clickCityTap:)];
+        _cityTap.numberOfTapsRequired = 1;
+        _cityTap.numberOfTouchesRequired = 1;
+    }
+    return _cityTap;
+}
+
+-(void)clickCityTap:(UITapGestureRecognizer*)gesture{
+    NearQingViewController *vc = [[NearQingViewController alloc] init];
+    vc.baseInfo = self.sceneInfoModel;
+    [self.navigationController pushViewController:vc animated:YES];
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {

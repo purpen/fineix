@@ -8,6 +8,8 @@
 
 #import <UIKit/UIKit.h>
 
+@class UserInfo;
+
 @interface MyFansActionSheetViewController : UIViewController
 
 @property(nonatomic,strong) UIView *alertView;
@@ -17,6 +19,6 @@
 @property(nonatomic,strong) UIButton *stopBtn;
 @property(nonatomic,strong) UIButton *cancelBtn;
 
--(void)setUI;
+-(void)setUIWithModel:(UserInfo*)model;
 
 @end

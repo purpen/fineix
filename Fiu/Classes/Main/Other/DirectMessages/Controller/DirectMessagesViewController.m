@@ -72,7 +72,6 @@
 #pragma mark - 网络请求
 - (void)networkRequestData {
     //进行情景的网络请求
-    [SVProgressHUD show];
     FBRequest *request = [FBAPI postWithUrlString:@"/message/view" requestDictionary:@{@"to_user_id":self.userId} delegate:self];
     [request startRequestSuccess:^(FBRequest *request, id result) {
         NSLog(@"result000000000000000000000000000000000000 %@",result);
@@ -103,7 +102,6 @@
         [self.myTableVuew reloadData];
         NSLog(@" 聊天数量    %zi",self.messages.count);
         
-        [SVProgressHUD dismiss];
     } failure:^(FBRequest *request, NSError *error) {
         [SVProgressHUD showErrorWithStatus:[error localizedDescription]];
     }];

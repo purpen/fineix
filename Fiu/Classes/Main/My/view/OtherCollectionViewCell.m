@@ -113,13 +113,15 @@
     }];
     self.nickName.text = model.nickname;
     self.userProfile.text = model.summary;
+    NSArray *tagsAry = [NSArray arrayWithObjects:@"大拿",@"行家",@"行摄家",@"艺术范",@"手艺人",@"人来疯",@"赎回自由身",@"职业buyer", nil];
     if ([model.is_expert isEqualToString:@"0"]) {
         self.userLevelLabel.text = [NSString stringWithFormat:@"%@ | V%d",model.label,[model.level intValue]];
         self.idImageView.hidden = YES;
     }else if([model.is_expert isEqualToString:@"1"]){
         self.userLevelLabel.text = [NSString stringWithFormat:@" | V%d",[model.level intValue]];
         self.idImageView.hidden = NO;
-        self.idImageView.image = [UIImage imageNamed:model.label];
+        int n = (int)[tagsAry indexOfObject:model.label];
+        self.idImageView.image = [UIImage imageNamed:[NSString stringWithFormat:@"tags%d",n]];
     }
     //self.userLevelLabel.text = [NSString stringWithFormat:@"%@|V%d",model.levelDesc,[model.level intValue]];
     
