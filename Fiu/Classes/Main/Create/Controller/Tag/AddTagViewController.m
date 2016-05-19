@@ -54,7 +54,6 @@ static NSInteger const CATEGORYTAG = 283;
     [super viewDidLoad];
 
     [self networkTagListData];
-    [self networkUsedTagsData];
     [self networkHotTagData];
     
 }
@@ -78,6 +77,7 @@ static NSInteger const CATEGORYTAG = 283;
         self.tagIdList = [self.childCategory valueForKey:@"_id"][0];
         
         [self addAllTagListView];
+        [self networkUsedTagsData];
         [SVProgressHUD dismiss];
         
     } failure:^(FBRequest *request, NSError *error) {
