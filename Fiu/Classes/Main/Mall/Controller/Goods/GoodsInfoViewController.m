@@ -256,8 +256,6 @@ static NSString *const URLGoodsScene = @"/sight_and_product/getlist";
     if (indexPath.section == 1) {
         GoodsBrandViewController * goodsBrandVC = [[GoodsBrandViewController alloc] init];
         goodsBrandVC.brandId = self.goodsInfo.brandId;
-        goodsBrandVC.brandBgImg = self.goodsInfo.coverUrl;
-        goodsBrandVC.titleLab.text = self.goodsInfo.brand.title;
         [self.navigationController pushViewController:goodsBrandVC animated:YES];
     }
 }

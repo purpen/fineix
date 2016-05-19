@@ -18,6 +18,7 @@
 @pro_assign NSInteger                   currentpageNum;
 @pro_assign NSInteger                   totalPageNum;
 
+@pro_strong NSString                *   title;
 @pro_strong NSString                *   brandId;
 @pro_strong UILabel                 *   titleLab;
 @pro_strong NSString                *   brandBgImg;

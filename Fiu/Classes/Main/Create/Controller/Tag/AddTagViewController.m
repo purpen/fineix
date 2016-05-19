@@ -54,7 +54,6 @@ static NSInteger const CATEGORYTAG = 283;
     [super viewDidLoad];
 
     [self networkTagListData];
-    [self networkUsedTagsData];
     [self networkHotTagData];
     
 }
@@ -78,6 +77,7 @@ static NSInteger const CATEGORYTAG = 283;
         self.tagIdList = [self.childCategory valueForKey:@"_id"][0];
         
         [self addAllTagListView];
+        [self networkUsedTagsData];
         [SVProgressHUD dismiss];
         
     } failure:^(FBRequest *request, NSError *error) {
@@ -118,6 +118,10 @@ static NSInteger const CATEGORYTAG = 283;
         self.usedTagMarr = [[[result valueForKey:@"data"] valueForKey:@"tags"] valueForKey:@"title_cn"];
         if (self.usedTagMarr.count == 0) {
             self.noneView.hidden = NO;
+        } else {
+            self.noneView.hidden = YES;
+            self.hotTagMarr = self.usedTagMarr;
+            [self.usedTagView reloadData];
         }
         
     } failure:^(FBRequest *request, NSError *error) {
@@ -334,7 +338,6 @@ static NSInteger const CATEGORYTAG = 283;
         _usedTagView.dataSource = self;
         _usedTagView.backgroundColor = [UIColor whiteColor];
         _usedTagView.showsVerticalScrollIndicator = NO;
-        _usedTagView.scrollEnabled = NO;
         [_usedTagView registerClass:[UsedTagCollectionViewCell class] forCellWithReuseIdentifier:@"UsedTagCollectionViewCell"];
     }
     return _usedTagView;

@@ -36,7 +36,7 @@
     [_lookBtn mas_makeConstraints:^(MASConstraintMaker *make) {
         make.size.mas_equalTo(CGSizeMake(70, 44));
         make.centerY.equalTo(self);
-        make.left.equalTo(self.mas_left).with.offset(10);
+        make.left.equalTo(self.mas_left).with.offset(20);
     }];
     
     [self addSubview:self.likeBtn];

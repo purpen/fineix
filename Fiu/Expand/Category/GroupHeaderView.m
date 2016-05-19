@@ -40,7 +40,7 @@
     [_icon mas_makeConstraints:^(MASConstraintMaker *make) {
         make.size.mas_equalTo(CGSizeMake(17.5, 18));
         make.centerY.equalTo(self);
-        make.left.equalTo(self.mas_left).with.offset(15);
+        make.left.equalTo(self.mas_left).with.offset(20);
     }];
     
     [self addSubview:self.headerTitle];

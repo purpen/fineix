@@ -136,7 +136,7 @@
     _buttonCornerRadius = 4.0;
     _buttonFont = [UIFont fontWithName:@"HelveticaNeue" size:18];;
     _buttonDefaultBgColor = [UIColor colorWithRed:190/255.0 green:137/255.0 blue:20/255.0 alpha:1];
-    _buttonCancleBgColor = [UIColor colorWithRed:127/255.0 green:140/255.0 blue:141/255.0 alpha:1];
+    _buttonCancleBgColor = [UIColor whiteColor];
     _buttonDestructiveBgColor = [UIColor colorWithRed:231/255.0 green:76/255.0 blue:60/255.0 alpha:1];
     
     _textFeildHeight = kTextFeildHeight;
@@ -159,6 +159,36 @@
             return _buttonDefaultBgColor;
         case TYAlertActionStyleCancle:
             return _buttonCancleBgColor;
+        case TYAlertActionStyleDestructive:
+            return _buttonDestructiveBgColor;
+            
+        default:
+            return nil;
+    }
+}
+
+- (UIColor *)buttonTextColorWithStyle:(TYAlertActionStyle)style
+{
+    switch (style) {
+        case TYAlertActionStyleDefault:
+            return [UIColor whiteColor];
+        case TYAlertActionStyleCancle:
+            return [UIColor colorWithRed:102/255.0 green:102/255.0 blue:102/255.0 alpha:1];
+        case TYAlertActionStyleDestructive:
+            return _buttonDestructiveBgColor;
+            
+        default:
+            return nil;
+    }
+}
+
+- (UIColor *)buttonBorderColorWithStyle:(TYAlertActionStyle)style
+{
+    switch (style) {
+        case TYAlertActionStyleDefault:
+            return _buttonDefaultBgColor;
+        case TYAlertActionStyleCancle:
+            return [UIColor colorWithRed:102/255.0 green:102/255.0 blue:102/255.0 alpha:.8];
         case TYAlertActionStyleDestructive:
             return _buttonDestructiveBgColor;
             
@@ -216,9 +246,12 @@
     UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
     button.clipsToBounds = YES;
     button.layer.cornerRadius = _buttonCornerRadius;
+    button.layer.borderWidth = 1.0f;
+    button.layer.borderColor = [self buttonBorderColorWithStyle:action.style].CGColor;
     [button setTitle:action.title forState:UIControlStateNormal];
     button.titleLabel.font = _buttonFont;
     button.backgroundColor = [self buttonBgColorWithStyle:action.style];
+    [button setTitleColor:[self buttonTextColorWithStyle:action.style] forState:(UIControlStateNormal)];
     button.enabled = action.enabled;
     button.tag = kButtonTagOffset + _buttons.count;
     button.translatesAutoresizingMaskIntoConstraints = NO;

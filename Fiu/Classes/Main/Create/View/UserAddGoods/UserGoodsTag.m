@@ -76,9 +76,9 @@
 - (void)setUI {
     [self addSubview:self.title];
     [_title mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.size.mas_equalTo(CGSizeMake(112.5, 23));
+        make.size.mas_equalTo(CGSizeMake(109, 23));
         make.centerY.equalTo(self);
-        make.left.equalTo(self.mas_left).with.offset(0);
+        make.left.equalTo(self.mas_left).with.offset(4);
     }];
     
     [self addSubview:self.price];
@@ -100,7 +100,7 @@
     [viewTapDot mas_makeConstraints:^(MASConstraintMaker *make) {
         make.size.mas_equalTo(CGSizeMake(5, 5));
         make.centerY.equalTo(self);
-        make.left.equalTo(self.mas_left).with.offset(102);
+        make.left.equalTo(self.mas_left).with.offset(100);
     }];
     
     viewSpread = [self getViewSpread];
@@ -176,7 +176,7 @@
 #pragma mark - 动画
 -(void)animationTimerDidFired{
     [UIView animateWithDuration:1.5 animations:^{
-        viewTapDot.transform = CGAffineTransformMakeScale(1.5,1.5);
+        viewTapDot.transform = CGAffineTransformMakeScale(1.3,1.3);
     } completion:^(BOOL finished) {
         [UIView animateWithDuration:1.5 animations:^{
             viewTapDot.transform = CGAffineTransformIdentity;

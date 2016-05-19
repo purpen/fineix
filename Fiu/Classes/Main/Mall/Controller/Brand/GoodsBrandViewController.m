@@ -30,7 +30,6 @@ static NSString *const URLGoodslist = @"/scene_product/getlist";
     [super viewWillAppear:animated];
     
     [self setNavigationViewUI];
-    
 }
 
 - (void)viewDidLoad {
@@ -38,7 +37,6 @@ static NSString *const URLGoodslist = @"/scene_product/getlist";
     [self networkBrandInfoData];
     [self networkBrandGoodsList];
     [self.view addSubview:self.goodsBrandTable];
-    [self.goodsBrandTable addSubview:self.titleLab];
 }
 
 #pragma mark - 网络请求
@@ -47,6 +45,9 @@ static NSString *const URLGoodslist = @"/scene_product/getlist";
     self.brandRequest = [FBAPI getWithUrlString:URLBrandInfo requestDictionary:@{@"id":self.brandId} delegate:self];
     [self.brandRequest startRequestSuccess:^(FBRequest *request, id result) {
         self.brandInfo = [[BrandInfoData alloc] initWithDictionary:[result valueForKey:@"data"]];
+        self.title = [[result valueForKey:@"data"] valueForKey:@"title"];
+        self.titleLab.text = self.title;
+        [self.view addSubview:self.titleLab];
         [self.goodsBrandTable reloadData];
         
     } failure:^(FBRequest *request, NSError *error) {
@@ -193,10 +194,10 @@ static NSString *const URLGoodslist = @"/scene_product/getlist";
 #pragma mark - 设置Nav
 - (void)setNavigationViewUI {
     [[UIApplication sharedApplication] setStatusBarHidden:NO withAnimation:(UIStatusBarAnimationSlide)];
-    [[UIApplication sharedApplication] setStatusBarStyle:(UIStatusBarStyleLightContent)];
+    [[UIApplication sharedApplication] setStatusBarStyle:(UIStatusBarStyleDefault)];
     self.view.backgroundColor = [UIColor whiteColor];
     self.delegate = self;
-    [self addBarItemLeftBarButton:@"" image:@"icon_back_white" isTransparent:YES];
+    [self addBarItemLeftBarButton:@"" image:@"icon_back" isTransparent:YES];
 }
 
 - (void)leftBarItemSelected {
@@ -217,7 +218,7 @@ static NSString *const URLGoodslist = @"/scene_product/getlist";
     if (!_titleLab) {
         _titleLab = [[UILabel alloc] initWithFrame:CGRectMake(SCREEN_WIDTH/2 - 100, 20, 200, 44)];
         _titleLab.font = [UIFont systemFontOfSize:17];
-        _titleLab.textColor = [UIColor whiteColor];
+        _titleLab.textColor = [UIColor blackColor];
         _titleLab.textAlignment = NSTextAlignmentCenter;
     }
     return _titleLab;

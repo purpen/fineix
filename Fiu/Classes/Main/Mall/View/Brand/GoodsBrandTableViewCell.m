@@ -98,7 +98,7 @@
         _brandImg.contentMode = UIViewContentModeScaleAspectFill;
         _brandImg.layer.cornerRadius = 75/2;
         _brandImg.layer.masksToBounds = YES;
-        _brandImg.layer.borderColor = [UIColor colorWithHexString:@"#FFFFFF" alpha:.5].CGColor;
+        _brandImg.layer.borderColor = [UIColor colorWithHexString:titleColor alpha:.5].CGColor;
         _brandImg.layer.borderWidth = 1.0f;
     }
     return _brandImg;

@@ -28,8 +28,8 @@
 
 - (void)setFiuSceneInfoData:(FiuSceneInfoData *)model {
     self.userId = [NSString stringWithFormat:@"%zi", model.userInfo.userId];
-    [self.bgImage sd_setImageWithURL:[NSURL URLWithString:model.coverUrl] forState:(UIControlStateNormal)];
-    [self.bgImage sd_setImageWithURL:[NSURL URLWithString:model.coverUrl] forState:(UIControlStateHighlighted)];
+    [self.bgImage sd_setBackgroundImageWithURL:[NSURL URLWithString:model.coverUrl] forState:(UIControlStateNormal)];
+    [self.bgImage sd_setBackgroundImageWithURL:[NSURL URLWithString:model.coverUrl] forState:(UIControlStateHighlighted)];
     [self.userHeader sd_setImageWithURL:[NSURL URLWithString:model.userInfo.avatarUrl] forState:(UIControlStateNormal)];
     self.userName.text = model.userInfo.nickname;
     self.userProfile.text = model.userInfo.summary;
@@ -65,8 +65,8 @@
 - (void)setSceneInfoData:(SceneInfoData *)model {
     self.goodsIds = [NSMutableArray arrayWithArray:[model.product valueForKey:@"idField"]];
     self.userId = [NSString stringWithFormat:@"%zi", model.userInfo.userId];
-    [self.bgImage sd_setImageWithURL:[NSURL URLWithString:model.coverUrl] forState:(UIControlStateNormal)];
-    [self.bgImage sd_setImageWithURL:[NSURL URLWithString:model.coverUrl] forState:(UIControlStateHighlighted)];
+    [self.bgImage sd_setBackgroundImageWithURL:[NSURL URLWithString:model.coverUrl] forState:(UIControlStateNormal)];
+    [self.bgImage sd_setBackgroundImageWithURL:[NSURL URLWithString:model.coverUrl] forState:(UIControlStateHighlighted)];
     [self titleTextStyle:[NSString stringWithFormat:@"%@", model.title] withBgColor:[UIColor colorWithPatternImage:[UIImage imageNamed:@"titleBg"]]];
     self.whereScene.text = [self abouText:self.whereScene withText:model.sceneTitle];
     self.city.text = [self abouText:self.city withText:model.address];
@@ -143,7 +143,6 @@
 - (UIButton *)bgImage {
     if (!_bgImage) {
         _bgImage = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT)];
-        _bgImage.contentMode = UIViewContentModeScaleAspectFill;
         [_bgImage addTarget:self action:@selector(showUserTag:) forControlEvents:(UIControlEventTouchUpInside)];
         //  添加渐变层
         CAGradientLayer * shadow = [CAGradientLayer layer];

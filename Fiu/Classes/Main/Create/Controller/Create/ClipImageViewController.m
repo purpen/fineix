@@ -26,8 +26,8 @@
     
     // 将图片缩放至裁剪框的边缘
     CGRect squareFrame = self.clipImageView.cropGrid.clipRect;
-    CGFloat length = MIN(squareFrame.size.height , squareFrame.size.width);
-    CGFloat imageLength = MIN(self.clipImage.size.width, self.clipImage.size.height);
+    CGFloat length = MAX(squareFrame.size.height , squareFrame.size.width);
+    CGFloat imageLength = MAX(self.clipImage.size.width, self.clipImage.size.height);
     self.clipImageView.cropImage.transform = CGAffineTransformScale(self.clipImageView.cropImage.transform, length/imageLength, length/imageLength);
     
     // 图片小于裁剪框

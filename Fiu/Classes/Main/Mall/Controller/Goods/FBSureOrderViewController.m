@@ -25,6 +25,7 @@ static NSString *const URLSureOrder = @"/shopping/confirm";
 static NSString *const URLCarGoPay = @"/shopping/checkout";
 
 @interface FBSureOrderViewController ()<BounsDelegate> {
+    NSString * _rid;
     NSString * _rrid;
     NSString * _addbookId;
     NSString * _isNowbuy;
@@ -33,6 +34,8 @@ static NSString *const URLCarGoPay = @"/shopping/checkout";
     NSString * _transferTime;
     NSString * _bonusCode;
     NSString * _fromSite;
+    NSInteger  _bounsPrice;
+    BOOL       _isUserBouns;
 }
 
 @pro_strong NSMutableArray          *   goodsItems;
@@ -73,6 +76,7 @@ static NSString *const URLCarGoPay = @"/shopping/checkout";
         self.payPrice = [[result valueForKey:@"data"] valueForKey:@"pay_money"];
         self.sumPrice.text = [NSString stringWithFormat:@"￥%@", self.payPrice];
         
+        _rid = [[[result valueForKey:@"data"] valueForKey:@"order_info"] valueForKey:@"rid"];
         _rrid = [[[result valueForKey:@"data"] valueForKey:@"order_info"] valueForKey:@"_id"];
         _isNowbuy = [[result valueForKey:@"data"] valueForKey:@"is_nowbuy"];
         _transferTime = @"a";
@@ -96,14 +100,16 @@ static NSString *const URLCarGoPay = @"/shopping/checkout";
     [SVProgressHUD show];
     NSData * jsonData = [NSJSONSerialization dataWithJSONObject:itemData options:0 error:nil];
     NSString * json = [[NSString alloc] initWithData:jsonData encoding:NSUTF8StringEncoding];
-    
+
     self.carPayRequest = [FBAPI postWithUrlString:URLCarGoPay requestDictionary:@{@"array":json} delegate:self];
     [self.carPayRequest startRequestSuccess:^(FBRequest *request, id result) {
+
         NSLog(@"购物车下单：%@", result);
         //  合计价格
         self.payPrice = [[result valueForKey:@"data"] valueForKey:@"pay_money"];
         self.sumPrice.text = [NSString stringWithFormat:@"￥%@", self.payPrice];
         
+        _rid = [[[result valueForKey:@"data"] valueForKey:@"order_info"] valueForKey:@"rid"];
         _rrid = [[[result valueForKey:@"data"] valueForKey:@"order_info"] valueForKey:@"_id"];
         _isNowbuy = [[result valueForKey:@"data"] valueForKey:@"is_nowbuy"];
         _transferTime = @"a";
@@ -159,7 +165,7 @@ static NSString *const URLCarGoPay = @"/shopping/checkout";
 #pragma mark - 设置视图
 - (void)setOrderVcUI {
     self.sendTime = NSLocalizedString(@"anySendTime", nil);
-    
+    _isUserBouns = NO;
     [self.view addSubview:self.orderTable];
     [self.view addSubview:self.sureView];
 }
@@ -278,6 +284,9 @@ static NSString *const URLCarGoPay = @"/shopping/checkout";
             cell = [[FBOrderOtherTableViewCell alloc] initWithStyle:(UITableViewCellStyleDefault) reuseIdentifier:orderBonusTableViewCellID];
         }
         cell.titleLab.text = NSLocalizedString(@"OrderBonus", nil);
+        if (_isUserBouns == YES) {
+            cell.textLab.text = [NSString stringWithFormat:@"%@%zi", NSLocalizedString(@"userBouns", nil), _bounsPrice];
+        }
         return cell;
     }
     
@@ -327,15 +336,22 @@ static NSString *const URLCarGoPay = @"/shopping/checkout";
     
     } else if (indexPath.section == 4) {
         BonusViewController * bonusVC = [[BonusViewController alloc] init];
-        bonusVC.rid = _rrid;
+        bonusVC.rid = _rid;
         bonusVC.bounsDelegate = self;
         [self.navigationController pushViewController:bonusVC animated:YES];
     }
     
 }
 
--(void)getBounsCode:(NSString *)code andBounsNum:(NSNumber *)amount{
-    NSLog(@"红包   %@,%@",code,amount);
+#pragma mark - 获取红包
+-(void)getBounsCode:(NSString *)code andBounsNum:(NSNumber *)amount {
+    _bonusCode = code;
+    _bounsPrice = [amount integerValue];
+    _isUserBouns = YES;
+    [self.orderTable reloadData];
+    
+    self.bounsLab.textColor = [UIColor colorWithHexString:titleColor];
+    self.bounsPriceLab.text = [NSString stringWithFormat:@"￥%zi", _bounsPrice];
 }
 
 #pragma mark - 确认订单按钮视图
@@ -352,12 +368,11 @@ static NSString *const URLCarGoPay = @"/shopping/checkout";
         [sureBtn addTarget:self action:@selector(sureOrederData) forControlEvents:(UIControlEventTouchUpInside)];
         [_sureView addSubview:sureBtn];
         
-        UILabel * sumPrice = [[UILabel alloc] init];
-        sumPrice.textColor = [UIColor colorWithHexString:fineixColor];
-        sumPrice.font = [UIFont systemFontOfSize:14];
-        self.sumPrice = sumPrice;
-        [_sureView addSubview:sumPrice];
-        [sumPrice mas_makeConstraints:^(MASConstraintMaker *make) {
+        self.sumPrice = [[UILabel alloc] init];
+        self.sumPrice.textColor = [UIColor colorWithHexString:fineixColor];
+        self.sumPrice.font = [UIFont systemFontOfSize:14];
+        [_sureView addSubview:self.sumPrice];
+        [self.sumPrice mas_makeConstraints:^(MASConstraintMaker *make) {
             make.height.mas_equalTo(@44);
             make.top.equalTo(_sureView.mas_top).with.offset(0);
             make.bottom.equalTo(_sureView.mas_bottom).with.offset(0);
@@ -373,12 +388,36 @@ static NSString *const URLCarGoPay = @"/shopping/checkout";
             make.size.mas_equalTo(CGSizeMake(44, 44));
             make.top.equalTo(_sureView.mas_top).with.offset(0);
             make.bottom.equalTo(_sureView.mas_bottom).with.offset(0);
-            make.right.equalTo(sumPrice.mas_left).with.offset(0);
+            make.right.equalTo(self.sumPrice.mas_left).with.offset(5);
         }];
         
         UILabel * lineLab = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 1)];
         lineLab.backgroundColor = [UIColor colorWithHexString:grayLineColor];
         [_sureView addSubview:lineLab];
+        
+        self.bounsPriceLab = [[UILabel alloc] init];
+        self.bounsPriceLab.textColor = [UIColor colorWithHexString:fineixColor];
+        self.bounsPriceLab.font = [UIFont systemFontOfSize:14];
+        [_sureView addSubview:self.bounsPriceLab];
+        [self.bounsPriceLab mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.size.mas_equalTo(CGSizeMake(44, 44));
+            make.top.equalTo(_sureView.mas_top).with.offset(0);
+            make.bottom.equalTo(_sureView.mas_bottom).with.offset(0);
+            make.right.equalTo(sumLab.mas_left).with.offset(0);
+        }];
+        
+        self.bounsLab = [[UILabel alloc] init];
+        self.bounsLab.textColor = [UIColor whiteColor];
+        self.bounsLab.font = [UIFont systemFontOfSize:14];
+        self.bounsLab.text = NSLocalizedString(@"userBounsPrice", nil);
+        [_sureView addSubview:self.bounsLab];
+        [self.bounsLab mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.size.mas_equalTo(CGSizeMake(44, 44));
+            make.top.equalTo(_sureView.mas_top).with.offset(0);
+            make.bottom.equalTo(_sureView.mas_bottom).with.offset(0);
+            make.right.equalTo(self.bounsPriceLab.mas_left).with.offset(5);
+        }];
+        
     }
     return _sureView;
 }

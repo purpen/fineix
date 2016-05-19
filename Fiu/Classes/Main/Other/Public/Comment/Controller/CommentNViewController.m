@@ -44,6 +44,9 @@ static NSString *const URLSendSceneComment = @"/comment/ajax_comment";
 #pragma mark 请求评论
 - (void)networkSceneCommenstData {
     [SVProgressHUD show];
+    [self.targetUserId removeAllObjects];
+    [self.replyId removeAllObjects];
+    
     self.sceneCommentRequest = [FBAPI getWithUrlString:URLSceneComment requestDictionary:@{@"target_id":self.targetId, @"page":@(self.currentpageNum + 1), @"type":@"12", @"size":@"20", @"sort":@"1"} delegate:self];
     [self.sceneCommentRequest startRequestSuccess:^(FBRequest *request, id result) {
         NSArray * sceneArr = [[result valueForKey:@"data"] valueForKey:@"rows"];
@@ -58,6 +61,7 @@ static NSString *const URLSendSceneComment = @"/comment/ajax_comment";
         [self.replyId addObjectsFromArray:[[[result valueForKey:@"data"] valueForKey:@"rows"] valueForKey:@"_id"]];
         self.currentpageNum = [[[result valueForKey:@"data"] valueForKey:@"current_page"] integerValue];
         self.totalPageNum = [[[result valueForKey:@"data"] valueForKey:@"total_page"] integerValue];
+    
         [self requestIsLastData:self.commentTabel currentPage:self.currentpageNum withTotalPage:self.totalPageNum];
         
         [self.commentTabel reloadData];
@@ -101,6 +105,8 @@ static NSString *const URLSendSceneComment = @"/comment/ajax_comment";
                     self.commentTabel.tableHeaderView = [UIView new];
                 }
                 [self requestIsLastData:self.commentTabel currentPage:self.currentpageNum withTotalPage:self.totalPageNum];
+                [self.targetUserId addObject:[[result valueForKey:@"data"] valueForKey:@"user_id"]];
+                [self.replyId addObject:[[result valueForKey:@"data"] valueForKey:@"_id"]];
                 [self.commentTabel reloadData];
                 
                 [self.writeComment.writeText resignFirstResponder];
@@ -236,6 +242,7 @@ static NSString *const URLSendSceneComment = @"/comment/ajax_comment";
     self.isReply = 1;
     self.writeComment.writeText.placeholder = NSLocalizedString(@"reply", nil);
     [self.writeComment.writeText becomeFirstResponder];
+    NSLog(@"================  %@ --  %@", self.targetUserId, self.replyId);
     self.tagetUserId = self.targetUserId[indexPath.row];
     self.replyCommentId = self.replyId[indexPath.row];
 }

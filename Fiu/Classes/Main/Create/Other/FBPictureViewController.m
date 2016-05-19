@@ -154,12 +154,12 @@
 }
 
 - (void)cancelDoneBtnClick {
-    TYAlertView * cancelAlertView = [TYAlertView alertViewWithTitle:@"取消创建" message:@"是否放弃创建情景？"];
-    [cancelAlertView addAction:[TYAlertAction actionWithTitle:@"返回上一步" style:(TYAlertActionStyleCancle) handler:^(TYAlertAction *action) {
-        [self.navigationController popViewControllerAnimated:YES];
+    TYAlertView * cancelAlertView = [TYAlertView alertViewWithTitle:@"是否返回上一步？" message:@""];
+    [cancelAlertView addAction:[TYAlertAction actionWithTitle:@"取消创建" style:(TYAlertActionStyleCancle) handler:^(TYAlertAction *action) {
+        [self dismissViewControllerAnimated:YES completion:nil];
     }]];
     [cancelAlertView addAction:[TYAlertAction actionWithTitle:@"确定" style:(TYAlertActionStyleDefault) handler:^(TYAlertAction *action) {
-         [self dismissViewControllerAnimated:YES completion:nil];
+        [self.navigationController popViewControllerAnimated:YES];
     }]];
     [cancelAlertView showInWindowWithBackgoundTapDismissEnable:YES];
 }
