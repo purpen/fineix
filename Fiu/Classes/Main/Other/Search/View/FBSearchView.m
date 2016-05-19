@@ -66,6 +66,9 @@
 
 //  收起键盘
 - (void)canceleSearch {
+    if ([self.delegate respondsToSelector:@selector(cancelSearch)]) {
+        [self.delegate cancelSearch];
+    }
     [_searchInputBox resignFirstResponder];
     [self changeSearchBoxFrame:NO];
 }

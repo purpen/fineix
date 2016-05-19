@@ -69,6 +69,12 @@ static NSString *const URLSearchList = @"/search/getlist";
             }
 
             [self.goodsTable reloadData];
+            if (self.goodsList.count == 0) {
+                self.noneLab.hidden = NO;
+            } else {
+                self.noneLab.hidden = YES;
+            }
+            
             self.currentpageNum = [[[result valueForKey:@"data"] valueForKey:@"current_page"] integerValue];
             self.totalPageNum = [[[result valueForKey:@"data"] valueForKey:@"total_page"] integerValue];
             if (self.totalPageNum > 1) {
@@ -83,6 +89,11 @@ static NSString *const URLSearchList = @"/search/getlist";
             }
 
             [self.sceneTable reloadData];
+            if (self.sceneList.count == 0) {
+                self.noneLab.hidden = NO;
+            } else {
+                self.noneLab.hidden = YES;
+            }
             self.currentpageNum = [[[result valueForKey:@"data"] valueForKey:@"current_page"] integerValue];
             self.totalPageNum = [[[result valueForKey:@"data"] valueForKey:@"total_page"] integerValue];
             if (self.totalPageNum > 1) {
@@ -97,6 +108,12 @@ static NSString *const URLSearchList = @"/search/getlist";
             }
         
             [self.fSceneCollection reloadData];
+            if (self.fiuSceneList.count == 0) {
+                self.noneLab.hidden = NO;
+            } else {
+                self.noneLab.hidden = YES;
+            }
+            
             self.currentpageNum = [[[result valueForKey:@"data"] valueForKey:@"current_page"] integerValue];
             self.totalPageNum = [[[result valueForKey:@"data"] valueForKey:@"total_page"] integerValue];
             //  判断是否为最后一条数据
@@ -181,6 +198,8 @@ static NSString *const URLSearchList = @"/search/getlist";
     [self.view addSubview:self.menuView];
     
     [self.view addSubview:self.resultsView];
+    
+    [self.view addSubview:self.noneLab];
 }
 
 #pragma mark - 搜索情景
@@ -336,12 +355,28 @@ static NSString *const URLSearchList = @"/search/getlist";
 #pragma mark - 添加搜索框视图
 - (FBSearchView *)searchView {
     if (!_searchView) {
-        _searchView = [[FBSearchView alloc] initWithFrame:CGRectMake(35, 20, SCREEN_WIDTH - 35, 44)];
+        _searchView = [[FBSearchView alloc] initWithFrame:CGRectMake(0, 20, SCREEN_WIDTH, 44)];
         _searchView.searchInputBox.placeholder = NSLocalizedString(@"search", nil);
         _searchView.delegate = self;
         _searchView.line.hidden = YES;
     }
     return _searchView;
+}
+
+- (void)cancelSearch {
+    [self.navigationController popViewControllerAnimated:YES];
+}
+
+#pragma mark - 没有搜索结果
+- (UILabel *)noneLab {
+    if (!_noneLab) {
+        _noneLab = [[UILabel alloc] initWithFrame:CGRectMake(0, 100, SCREEN_WIDTH, 200)];
+        _noneLab.textAlignment = NSTextAlignmentCenter;
+        _noneLab.textColor = [UIColor colorWithHexString:titleColor];
+        _noneLab.font = [UIFont systemFontOfSize:12];
+        _noneLab.text = NSLocalizedString(@"noneSearch", nil);
+    }
+    return _noneLab;
 }
 
 #pragma mark - 搜索
@@ -393,6 +428,12 @@ static NSString *const URLSearchList = @"/search/getlist";
     self.view.backgroundColor = [UIColor whiteColor];
     [self.navView addSubview:self.searchView];
     self.navLine.hidden = YES;
+}
+
+- (void)viewWillDisappear:(BOOL)animated {
+    [super viewWillDisappear:animated];
+    
+    [SVProgressHUD dismiss];
 }
 
 #pragma mark -

@@ -59,6 +59,7 @@
 "deleteSuccess" = "删除成功";
 "deleteError" = "删除失败";
 "userBouns" = "使用红包优惠￥";
+"noneSearch" = "没找到？或许Fiu首页有你要查的东西";
 
 //  搜索框提示
 "searchLocation" = "搜索地点";

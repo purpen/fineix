@@ -26,6 +26,7 @@
 @pro_strong UITableView                     *   sceneTable;             //  场景
 @pro_strong UICollectionView                *   fSceneCollection;       //  情景
 @pro_strong UITableView                     *   goodsTable;             //  商品
+@pro_strong UILabel                         *   noneLab;
 
 /*
  *  搜索的类型
