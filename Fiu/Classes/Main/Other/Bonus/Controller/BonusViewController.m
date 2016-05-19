@@ -169,9 +169,6 @@ static NSString *const BonusCellIdentifier = @"bonusCell";
                 [self.navigationController popViewControllerAnimated:YES];
             }else{
                 [SVProgressHUD showErrorWithStatus:@"此红包不适用"];
-                if ([self.bounsDelegate respondsToSelector:@selector(getBounsCode:andBounsNum:)]) {
-                    [self.bounsDelegate getBounsCode:model.code andBounsNum:model.amount];
-                }
             }
             
         } failure:^(FBRequest *request, NSError *error) {

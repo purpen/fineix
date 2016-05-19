@@ -152,9 +152,23 @@ static NSString *const ShareURL = @"http://m.taihuoniao.com/guide/app_about";
         }
         [cell.headImageView sd_setImageWithURL:[NSURL URLWithString:model.avatarUrl]];
         cell.nameLbael.text = model.nickName;
-        if (model.address.firstObject && model.address.lastObject) {
-            cell.deressLabel.text = [NSString stringWithFormat:@"%@ %@",model.address.firstObject,model.address.lastObject];
+        
+        UserInfoEntity *entity = [UserInfoEntity defaultUserInfoEntity];
+        NSArray *tagsAry = [NSArray arrayWithObjects:@"大拿",@"行家",@"行摄家",@"艺术范",@"手艺人",@"人来疯",@"赎回自由身",@"职业buyer", nil];
+        if ([entity.is_expert isEqualToString:@"0"]) {
+            cell.levelLabel.text = [NSString stringWithFormat:@"%@ | V%d",entity.label,[entity.level intValue]];
+            cell.imageView.hidden = YES;
+            cell.userLevelLabel.hidden = YES;
+        }else if([entity.is_expert isEqualToString:@"1"]){
+            cell.userLevelLabel.text = [NSString stringWithFormat:@" | V%d",[entity.level intValue]];
+            cell.idTagsImageView.hidden = NO;
+            cell.userLevelLabel.hidden = NO;
+            int n = (int)[tagsAry indexOfObject:entity.label];
+            cell.idTagsImageView.image = [UIImage imageNamed:[NSString stringWithFormat:@"tags%d",n]];
         }
+//        if (model.address.firstObject && model.address.lastObject) {
+//            cell.deressLabel.text = [NSString stringWithFormat:@"%@ %@",model.address.firstObject,model.address.lastObject];
+//        }
         cell.sceneAry = model.scene;
         [cell.focusBtn addTarget:self action:@selector(clickFocusBtn:) forControlEvents:UIControlEventTouchUpInside];
         return cell;
@@ -202,6 +216,7 @@ static NSString *const ShareURL = @"http://m.taihuoniao.com/guide/app_about";
         if ([result objectForKey:@"success"]) {
             [SVProgressHUD showSuccessWithStatus:@"取消关注成功"];
             model.isLove = @0;
+            
             [self.myTbaleView reloadRowsAtIndexPaths:[NSArray arrayWithObjects:[NSIndexPath indexPathForRow:sender.tag inSection:1], nil] withRowAnimation:UITableViewRowAnimationNone];
         }else{
             [SVProgressHUD showErrorWithStatus:@"操作失败"];

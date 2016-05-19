@@ -129,6 +129,12 @@ static NSString *const ShareURL = @"http://m.taihuoniao.com/guide/app_about";
     [sheetVC.firendBtn addTarget:self action:@selector(timelineShareBtnAction:) forControlEvents:UIControlEventTouchUpInside];
     [sheetVC.weiboBtn addTarget:self action:@selector(sinaShareBtnAction:) forControlEvents:UIControlEventTouchUpInside];
     [sheetVC.qqBtn addTarget:self action:@selector(qqShareBtnAction:) forControlEvents:UIControlEventTouchUpInside];
+    [sheetVC.otherBtn addTarget:self action:@selector(clickOtherBtn:) forControlEvents:UIControlEventTouchUpInside];
+}
+
+#pragma mark - 点击屏幕空余部分消失
+-(void)clickOtherBtn:(UIButton*)sender{
+   [self dismissViewControllerAnimated:NO completion:nil];
 }
 
 #pragma mark -判断手机是否安装了相应的客户端
@@ -174,7 +180,7 @@ static NSString *const ShareURL = @"http://m.taihuoniao.com/guide/app_about";
 
 -(void)qqShareBtnAction:(UIButton*)sender{
     [UMSocialData defaultData].extConfig.qqData.qqMessageType = UMSocialQQMessageTypeImage;
-    [[UMSocialDataService defaultDataService]  postSNSWithTypes:@[UMShareToQzone] content:@"" image:_viewImage location:nil urlResource:nil presentedController:self completion:^(UMSocialResponseEntity *response){
+    [[UMSocialDataService defaultDataService]  postSNSWithTypes:@[UMShareToQQ] content:@"" image:_viewImage location:nil urlResource:nil presentedController:self completion:^(UMSocialResponseEntity *response){
         if (response.responseCode == UMSResponseCodeSuccess) {
             [SVProgressHUD showSuccessWithStatus:@"分享成功！"];
         }

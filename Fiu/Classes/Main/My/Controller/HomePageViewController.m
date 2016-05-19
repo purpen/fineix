@@ -33,7 +33,7 @@
 #import "HomePageViewController.h"
 
 
-@interface HomePageViewController ()<UICollectionViewDelegate,UICollectionViewDataSource,UICollectionViewDelegateFlowLayout,FBRequestDelegate,UINavigationControllerDelegate,UIImagePickerControllerDelegate>
+@interface HomePageViewController ()<UICollectionViewDelegate,UICollectionViewDataSource,UICollectionViewDelegateFlowLayout,FBRequestDelegate,UINavigationControllerDelegate,UIImagePickerControllerDelegate,FBNavigationBarItemsDelegate>
 {
     ChanelView *_chanelV;
     NSMutableArray *_fiuSceneList;
@@ -45,6 +45,7 @@
     int _totalN;
     int _totalM;
     UserInfo *_model;
+    NSInteger _fansN;
 }
 
 @property(nonatomic,strong) UILabel *tipLabel;
@@ -58,6 +59,8 @@ static NSString *const IconURL = @"/my/add_head_pic";
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    
     _fiuSceneList = [NSMutableArray array];
     _fiuSceneIdList = [NSMutableArray array];
     _sceneListMarr = [NSMutableArray array];
@@ -99,7 +102,6 @@ static NSString *const IconURL = @"/my/add_head_pic";
 }
 
 
-
 -(UILabel *)tipLabel{
     if (!_tipLabel) {
         _tipLabel = [[UILabel alloc] init];
@@ -109,12 +111,35 @@ static NSString *const IconURL = @"/my/add_head_pic";
     return _tipLabel;
 }
 
+-(void)leftBarItemSelected{
+    [self.navigationController popViewControllerAnimated:YES];
+}
 
+-(void)rightBarItemSelected{
+    if (self.isMySelf) {
+        AccountManagementViewController *vc = [[AccountManagementViewController alloc] init];
+        [self.navigationController pushViewController:vc animated:YES];
+    }else{
+        ShieldingViewController *sheetVC = [[ShieldingViewController alloc] init];
+        sheetVC.modalPresentationStyle = UIModalPresentationOverCurrentContext;
+        sheetVC.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;
+        [self presentViewController:sheetVC animated:YES completion:nil];
+        [sheetVC initFBSheetVCWithNameAry:[NSArray arrayWithObjects:@"拉黑用户",@"取消", nil]];
+        [((UIButton*)sheetVC.sheetView.subviews[1]) addTarget:self action:@selector(cancelBtn:) forControlEvents:UIControlEventTouchUpInside];
+        [((UIButton*)sheetVC.sheetView.subviews[0]) addTarget:self action:@selector(shieldingBtn:) forControlEvents:UIControlEventTouchUpInside];
+    }
+}
 
 
 -(void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
-    
+    self.delegate = self;
+    [self addBarItemLeftBarButton:nil image:@"Fill 1" isTransparent:YES];
+    if (self.isMySelf) {
+        [self addBarItemRightBarButton:nil image:@"SET" isTransparent:YES];
+    }else{
+        [self addBarItemRightBarButton:nil image:@"more_filled" isTransparent:YES];
+    }
     [[UIApplication sharedApplication] setStatusBarHidden:NO withAnimation:(UIStatusBarAnimationSlide)];
     self.navigationController.navigationBarHidden = YES;
     self.tabBarController.tabBar.hidden = YES;
@@ -208,6 +233,7 @@ static NSString *const IconURL = @"/my/add_head_pic";
             
             if (_totalN == 0) {
                 self.myCollectionView.mj_footer.state = MJRefreshStateNoMoreData;
+                self.myCollectionView.mj_footer.hidden = NO;
             }
             
             BOOL isLastPage = (_n == _totalN);
@@ -219,6 +245,7 @@ static NSString *const IconURL = @"/my/add_head_pic";
             }
             if (_n == _totalN == 1) {
                 self.myCollectionView.mj_footer.state = MJRefreshStateNoMoreData;
+                self.myCollectionView.mj_footer.hidden = YES;
             }
             
             if ([self.myCollectionView.mj_header isRefreshing]) {
@@ -254,6 +281,7 @@ static NSString *const IconURL = @"/my/add_head_pic";
             BOOL isLastPage = (_m == _totalM);
             if (_totalM == 0) {
                 self.myCollectionView.mj_footer.state = MJRefreshStateNoMoreData;
+                self.myCollectionView.mj_footer.hidden = NO;
             }
             if (!isLastPage && _totalM != 0) {
                 if (self.myCollectionView.mj_footer.state == MJRefreshStateNoMoreData) {
@@ -262,6 +290,7 @@ static NSString *const IconURL = @"/my/add_head_pic";
             }
             if (_m == _totalM == 1) {
                 self.myCollectionView.mj_footer.state = MJRefreshStateNoMoreData;
+                self.myCollectionView.mj_footer.hidden = YES;
             }
             
             if ([self.myCollectionView.mj_header isRefreshing]) {
@@ -295,7 +324,8 @@ static NSString *const IconURL = @"/my/add_head_pic";
         _chanelV.scenarioNumLabel.text = [NSString stringWithFormat:@"%@",dataDict[@"scene_count"]];
         _chanelV.fieldNumLabel.text = [NSString stringWithFormat:@"%@",dataDict[@"sight_count"]];
         _chanelV.focusNumLabel.text = [NSString stringWithFormat:@"%@",dataDict[@"follow_count"]];
-        _chanelV.fansNumLabel.text = [NSString stringWithFormat:@"%@",dataDict[@"fans_count"]];
+        _fansN = [dataDict[@"fans_count"] integerValue];
+        
         [SVProgressHUD dismiss];
         if (self.isMySelf) {
             UserInfo *userInfo = [UserInfo mj_objectWithKeyValues:[result objectForKey:@"data"]];
@@ -416,15 +446,11 @@ static NSString *const IconURL = @"/my/add_head_pic";
         if (self.isMySelf) {
             BackgroundCollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"BackgroundCollectionViewCell" forIndexPath:indexPath];
             [cell.bgImageView addGestureRecognizer:self.myTap];
-            [cell.backBtn addTarget:self action:@selector(clickBackBtn:) forControlEvents:UIControlEventTouchUpInside];
-            [cell.editBtn addTarget:self action:@selector(clickEditBtn:) forControlEvents:UIControlEventTouchUpInside];
             [cell setUI];
             cell.backgroundColor = [UIColor redColor];
             return cell;
         }else{
             OtherCollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"OtherCollectionViewCell" forIndexPath:indexPath];
-            [cell.backBtn addTarget:self action:@selector(clickBackBtn:) forControlEvents:UIControlEventTouchUpInside];
-            [cell.moreBtn addTarget:self action:@selector(clickMoreBtn:) forControlEvents:UIControlEventTouchUpInside];
             [cell.focusOnBtn addTarget:self action:@selector(clickFocusBtn:) forControlEvents:UIControlEventTouchUpInside];
             [cell.directMessages addTarget:self action:@selector(clickMessageBtn:) forControlEvents:UIControlEventTouchUpInside];
             cell.focusOnBtn.tag = indexPath.row;
@@ -435,6 +461,7 @@ static NSString *const IconURL = @"/my/add_head_pic";
         if (indexPath.row == 0) {
             UICollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"UICollectionViewCell" forIndexPath:indexPath];
             _chanelV.frame = CGRectMake(0, 0, SCREEN_WIDTH, 60/667.0*SCREEN_HEIGHT);
+            _chanelV.fansNumLabel.text = [NSString stringWithFormat:@"%zi",_fansN];
             [cell.contentView addSubview:_chanelV];
             return cell;
         }
@@ -471,10 +498,7 @@ static NSString *const IconURL = @"/my/add_head_pic";
     }
 }
 
--(void)clickEditBtn:(UIButton*)sender{
-        AccountManagementViewController *vc = [[AccountManagementViewController alloc] init];
-        [self.navigationController pushViewController:vc animated:YES];
-}
+
 
 -(void)clickBackBtn:(UIButton*)sender{
     NSLog(@"backBtn");
@@ -484,7 +508,7 @@ static NSString *const IconURL = @"/my/add_head_pic";
 -(void)clickFocusBtn:(UIButton*)sender{
     if (sender.selected) {
         MyFansActionSheetViewController *sheetVC = [[MyFansActionSheetViewController alloc] init];
-        [sheetVC setUI];
+        [sheetVC setUIWithModel:_model];
         sheetVC.modalPresentationStyle = UIModalPresentationOverCurrentContext;
         sheetVC.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;
         [self presentViewController:sheetVC animated:YES completion:nil];
@@ -493,7 +517,8 @@ static NSString *const IconURL = @"/my/add_head_pic";
         [sheetVC.cancelBtn addTarget:self action:@selector(clickCancelBtn:) forControlEvents:UIControlEventTouchUpInside];
     }else{
         _model.is_love = @1;
-        [self.myCollectionView reloadItemsAtIndexPaths:[NSArray arrayWithObjects:[NSIndexPath indexPathForRow:0 inSection:0], nil]];
+        _fansN ++;
+        [self.myCollectionView reloadItemsAtIndexPaths:[NSArray arrayWithObjects:[NSIndexPath indexPathForRow:0 inSection:0],[NSIndexPath indexPathForRow:0 inSection:1], nil]];
         //请求数据
         FBRequest *request = [FBAPI postWithUrlString:@"/follow/ajax_follow" requestDictionary:@{@"follow_id":self.userId} delegate:self];
         request.flag = @"/follow/ajax_follow";
@@ -606,7 +631,8 @@ static NSString *const IconURL = @"/my/add_head_pic";
 -(void)clickStopBtn:(UIButton*)sender{
     [self dismissViewControllerAnimated:YES completion:nil];
     _model.is_love = @0;
-    [self.myCollectionView reloadItemsAtIndexPaths:[NSArray arrayWithObjects:[NSIndexPath indexPathForRow:0 inSection:0], nil]];
+    _fansN --;
+    [self.myCollectionView reloadItemsAtIndexPaths:[NSArray arrayWithObjects:[NSIndexPath indexPathForRow:0 inSection:0],[NSIndexPath indexPathForRow:0 inSection:1], nil]];
     FBRequest *request = [FBAPI postWithUrlString:@"/follow/ajax_cancel_follow" requestDictionary:@{@"follow_id":self.userId} delegate:self];
     request.flag = @"/follow/ajax_cancel_follow";
     [request startRequest];
@@ -626,15 +652,6 @@ static NSString *const IconURL = @"/my/add_head_pic";
     [self.navigationController pushViewController:vc animated:YES];
 }
 
--(void)clickMoreBtn:(UIButton*)sender{
-    ShieldingViewController *sheetVC = [[ShieldingViewController alloc] init];
-    sheetVC.modalPresentationStyle = UIModalPresentationOverCurrentContext;
-    sheetVC.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;
-    [self presentViewController:sheetVC animated:YES completion:nil];
-    [sheetVC initFBSheetVCWithNameAry:[NSArray arrayWithObjects:@"拉黑用户",@"取消", nil]];
-    [((UIButton*)sheetVC.sheetView.subviews[1]) addTarget:self action:@selector(cancelBtn:) forControlEvents:UIControlEventTouchUpInside];
-    [((UIButton*)sheetVC.sheetView.subviews[0]) addTarget:self action:@selector(shieldingBtn:) forControlEvents:UIControlEventTouchUpInside];
-}
 
 -(void)shieldingBtn:(UIButton*)sender{
     NSLog(@"拉黑");

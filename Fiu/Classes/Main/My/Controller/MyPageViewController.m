@@ -30,6 +30,7 @@
 #import "OptionViewController.h"
 #import "FindeFriendViewController.h"
 #import "TipNumberView.h"
+#import "IntegralVC.h"
 
 
 @interface MyPageViewController ()<FBNavigationBarItemsDelegate,UICollectionViewDelegate,UICollectionViewDataSource>
@@ -377,7 +378,8 @@
 
 //积分按钮
 -(void)integralBtn:(UIButton*)sender{
-    NSLog(@"#########");
+    IntegralVC *vc = [[IntegralVC alloc] init];
+    [self.navigationController pushViewController:vc animated:YES];
 }
 
 //礼券按钮

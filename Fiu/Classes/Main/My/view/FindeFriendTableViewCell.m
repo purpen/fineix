@@ -62,6 +62,7 @@
             make.centerY.mas_equalTo(self.mas_centerY);
             make.right.mas_equalTo(self.mas_right).with.offset(-16/667.0*SCREEN_HEIGHT);
         }];
+        
     }
     return self;
 }

@@ -113,13 +113,15 @@
     }];
     self.nickName.text = model.nickname;
     self.userProfile.text = model.summary;
+    NSArray *tagsAry = [NSArray arrayWithObjects:@"大拿",@"行家",@"行摄家",@"艺术范",@"手艺人",@"人来疯",@"赎回自由身",@"职业buyer", nil];
     if ([model.is_expert isEqualToString:@"0"]) {
         self.userLevelLabel.text = [NSString stringWithFormat:@"%@ | V%d",model.label,[model.level intValue]];
         self.idImageView.hidden = YES;
     }else if([model.is_expert isEqualToString:@"1"]){
         self.userLevelLabel.text = [NSString stringWithFormat:@" | V%d",[model.level intValue]];
         self.idImageView.hidden = NO;
-        self.idImageView.image = [UIImage imageNamed:model.label];
+        int n = (int)[tagsAry indexOfObject:model.label];
+        self.idImageView.image = [UIImage imageNamed:[NSString stringWithFormat:@"tags%d",n]];
     }
     //self.userLevelLabel.text = [NSString stringWithFormat:@"%@|V%d",model.levelDesc,[model.level intValue]];
     
@@ -151,31 +153,31 @@
         shadow.locations = @[@(0.5f), @(1.5f)];
         shadow.frame = _bgImageView.bounds;
 //        
-        [_bgImageView addSubview:self.backBtn];
-        [_backBtn mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.size.mas_equalTo(CGSizeMake(30/667.0*SCREEN_HEIGHT, 20/667.0*SCREEN_HEIGHT));
-            make.top.mas_equalTo(_bgImageView.mas_top).with.offset(79);
-            make.left.mas_equalTo(_bgImageView.mas_left).with.offset(16);
-        }];
-
-//        
-        [_bgImageView addSubview:self.moreBtn];
-        [_moreBtn mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.size.mas_equalTo(CGSizeMake(30, 20));
-            make.right.mas_equalTo(_bgImageView.mas_right).with.offset(-16);
-            make.top.mas_equalTo(_bgImageView.mas_top).with.offset(79);
-        }];
+//        [_bgImageView addSubview:self.backBtn];
+//        [_backBtn mas_makeConstraints:^(MASConstraintMaker *make) {
+//            make.size.mas_equalTo(CGSizeMake(30/667.0*SCREEN_HEIGHT, 20/667.0*SCREEN_HEIGHT));
+//            make.top.mas_equalTo(_bgImageView.mas_top).with.offset(79);
+//            make.left.mas_equalTo(_bgImageView.mas_left).with.offset(16);
+//        }];
+//
+////        
+//        [_bgImageView addSubview:self.moreBtn];
+//        [_moreBtn mas_makeConstraints:^(MASConstraintMaker *make) {
+//            make.size.mas_equalTo(CGSizeMake(30, 20));
+//            make.right.mas_equalTo(_bgImageView.mas_right).with.offset(-16);
+//            make.top.mas_equalTo(_bgImageView.mas_top).with.offset(79);
+//        }];
     }
     return _bgImageView;
 }
 
--(UIButton *)moreBtn{
-    if (!_moreBtn) {
-        _moreBtn = [[UIButton alloc] init];
-        [_moreBtn setImage:[UIImage imageNamed:@"more_filled"] forState:UIControlStateNormal];
-    }
-    return _moreBtn;
-}
+//-(UIButton *)moreBtn{
+//    if (!_moreBtn) {
+//        _moreBtn = [[UIButton alloc] init];
+//        [_moreBtn setImage:[UIImage imageNamed:@"more_filled"] forState:UIControlStateNormal];
+//    }
+//    return _moreBtn;
+//}
 
 -(UIButton *)focusOnBtn{
     if (!_focusOnBtn) {
@@ -194,16 +196,16 @@
     return _directMessages;
 }
 
--(UIButton *)backBtn{
-    if (!_backBtn) {
-        _backBtn = [[UIButton alloc] init];
-        _backBtn.userInteractionEnabled = YES;
-        _backBtn.clipsToBounds = YES;
-        _backBtn.autoresizingMask = UIViewAutoresizingFlexibleBottomMargin;
-        [_backBtn setImage:[UIImage imageNamed:@"Fill 1"] forState:UIControlStateNormal];
-    }
-    return _backBtn;
-}
+//-(UIButton *)backBtn{
+//    if (!_backBtn) {
+//        _backBtn = [[UIButton alloc] init];
+//        _backBtn.userInteractionEnabled = YES;
+//        _backBtn.clipsToBounds = YES;
+//        _backBtn.autoresizingMask = UIViewAutoresizingFlexibleBottomMargin;
+//        [_backBtn setImage:[UIImage imageNamed:@"Fill 1"] forState:UIControlStateNormal];
+//    }
+//    return _backBtn;
+//}
 
 
 

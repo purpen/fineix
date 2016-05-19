@@ -54,6 +54,12 @@
 		1F35F0511CD2336E0000DB95 /* areas.plist in Resources */ = {isa = PBXBuildFile; fileRef = 1F35F0501CD2336E0000DB95 /* areas.plist */; };
 		1F35F0541CD237450000DB95 /* AddreesModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F35F0531CD237450000DB95 /* AddreesModel.m */; };
 		1F35F0571CD23C700000DB95 /* AreaModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F35F0561CD23C700000DB95 /* AreaModel.m */; };
+		1F39058B1CEDAF4E00F95382 /* IntegralVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F39058A1CEDAF4E00F95382 /* IntegralVC.m */; };
+		1F39058E1CEDB0DE00F95382 /* IntegralRules.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F39058D1CEDB0DE00F95382 /* IntegralRules.m */; };
+		1F3905911CEDB36D00F95382 /* IntegralRulesView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F3905901CEDB36D00F95382 /* IntegralRulesView.m */; };
+		1F3905931CEDB39400F95382 /* Integral.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1F3905921CEDB39400F95382 /* Integral.xib */; };
+		1F39059B1CEDC33700F95382 /* NearQingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F3905991CEDC33700F95382 /* NearQingViewController.m */; };
+		1F39059C1CEDC33700F95382 /* NearQingViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1F39059A1CEDC33700F95382 /* NearQingViewController.xib */; };
 		1F3C0A771CBF461300B84FEB /* libPods-Fiu.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 1F3C0A761CBF461300B84FEB /* libPods-Fiu.a */; };
 		1F3C0A841CBF760C00B84FEB /* SubscribePeopleViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F3C0A821CBF760C00B84FEB /* SubscribePeopleViewController.m */; };
 		1F3C0A851CBF760C00B84FEB /* SubscribePeopleViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1F3C0A831CBF760C00B84FEB /* SubscribePeopleViewController.xib */; };
@@ -546,6 +552,16 @@
 		1F35F0531CD237450000DB95 /* AddreesModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AddreesModel.m; sourceTree = "<group>"; };
 		1F35F0551CD23C700000DB95 /* AreaModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AreaModel.h; sourceTree = "<group>"; };
 		1F35F0561CD23C700000DB95 /* AreaModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AreaModel.m; sourceTree = "<group>"; };
+		1F3905891CEDAF4E00F95382 /* IntegralVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IntegralVC.h; sourceTree = "<group>"; };
+		1F39058A1CEDAF4E00F95382 /* IntegralVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IntegralVC.m; sourceTree = "<group>"; };
+		1F39058C1CEDB0DE00F95382 /* IntegralRules.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IntegralRules.h; sourceTree = "<group>"; };
+		1F39058D1CEDB0DE00F95382 /* IntegralRules.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IntegralRules.m; sourceTree = "<group>"; };
+		1F39058F1CEDB36D00F95382 /* IntegralRulesView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IntegralRulesView.h; sourceTree = "<group>"; };
+		1F3905901CEDB36D00F95382 /* IntegralRulesView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IntegralRulesView.m; sourceTree = "<group>"; };
+		1F3905921CEDB39400F95382 /* Integral.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = Integral.xib; sourceTree = "<group>"; };
+		1F3905981CEDC33700F95382 /* NearQingViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NearQingViewController.h; sourceTree = "<group>"; };
+		1F3905991CEDC33700F95382 /* NearQingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NearQingViewController.m; sourceTree = "<group>"; };
+		1F39059A1CEDC33700F95382 /* NearQingViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = NearQingViewController.xib; sourceTree = "<group>"; };
 		1F3C0A761CBF461300B84FEB /* libPods-Fiu.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = "libPods-Fiu.a"; path = "../Library/Developer/Xcode/DerivedData/Fiu-cjbswbuyriripaegqmobstwznrnk/Build/Products/Debug-iphonesimulator/libPods-Fiu.a"; sourceTree = "<group>"; };
 		1F3C0A811CBF760C00B84FEB /* SubscribePeopleViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SubscribePeopleViewController.h; sourceTree = "<group>"; };
 		1F3C0A821CBF760C00B84FEB /* SubscribePeopleViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SubscribePeopleViewController.m; sourceTree = "<group>"; };
@@ -1363,6 +1379,44 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		1F02C6F51CEDA54F00EB8D7B /* Integral */ = {
+			isa = PBXGroup;
+			children = (
+				1F02C6F61CEDA54F00EB8D7B /* Controller */,
+				1F02C6F71CEDA54F00EB8D7B /* Model */,
+				1F02C6F81CEDA54F00EB8D7B /* View */,
+			);
+			path = Integral;
+			sourceTree = "<group>";
+		};
+		1F02C6F61CEDA54F00EB8D7B /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				1F3905891CEDAF4E00F95382 /* IntegralVC.h */,
+				1F39058A1CEDAF4E00F95382 /* IntegralVC.m */,
+				1F39058C1CEDB0DE00F95382 /* IntegralRules.h */,
+				1F39058D1CEDB0DE00F95382 /* IntegralRules.m */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		1F02C6F71CEDA54F00EB8D7B /* Model */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		1F02C6F81CEDA54F00EB8D7B /* View */ = {
+			isa = PBXGroup;
+			children = (
+				1F39058F1CEDB36D00F95382 /* IntegralRulesView.h */,
+				1F3905901CEDB36D00F95382 /* IntegralRulesView.m */,
+				1F3905921CEDB39400F95382 /* Integral.xib */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
 		1F27AE851CE06BB1005A434B /* AliPay */ = {
 			isa = PBXGroup;
 			children = (
@@ -1401,6 +1455,40 @@
 			name = Resource;
 			path = Fiu/Resource;
 			sourceTree = SOURCE_ROOT;
+		};
+		1F3905941CEDC2DD00F95382 /* NearScenario */ = {
+			isa = PBXGroup;
+			children = (
+				1F3905951CEDC30A00F95382 /* Controller */,
+				1F3905961CEDC30A00F95382 /* Model */,
+				1F3905971CEDC30A00F95382 /* View */,
+			);
+			path = NearScenario;
+			sourceTree = "<group>";
+		};
+		1F3905951CEDC30A00F95382 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				1F3905981CEDC33700F95382 /* NearQingViewController.h */,
+				1F3905991CEDC33700F95382 /* NearQingViewController.m */,
+				1F39059A1CEDC33700F95382 /* NearQingViewController.xib */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		1F3905961CEDC30A00F95382 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		1F3905971CEDC30A00F95382 /* View */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = View;
+			sourceTree = "<group>";
 		};
 		1F3C0A7D1CBF756000B84FEB /* ReceiveDetailedInformation */ = {
 			isa = PBXGroup;
@@ -2013,6 +2101,8 @@
 		D8035FA01CBD1021001920F9 /* Other */ = {
 			isa = PBXGroup;
 			children = (
+				1F3905941CEDC2DD00F95382 /* NearScenario */,
+				1F02C6F51CEDA54F00EB8D7B /* Integral */,
 				1FE701FC1CEC14E0000BA84A /* Certification */,
 				1F8EACE11CDDD19E00C51235 /* Pay */,
 				1FC678161CDAF9B200535162 /* DeliveryAddress */,
@@ -3614,11 +3704,13 @@
 				D81281701CAA8532007CF08B /* UMSnsAccountViewController.xib in Resources */,
 				1FE60E571CD32E8D00045117 /* CommentsViewController.xib in Resources */,
 				D81281121CAA8532007CF08B /* LaunchScreen.storyboard in Resources */,
+				1F3905931CEDB39400F95382 /* Integral.xib in Resources */,
 				D8A9AD091CD9CCA900A9FCFB /* Assets.xcassets in Resources */,
 				1FE60E661CD33E4700045117 /* MessagesssViewController.xib in Resources */,
 				1F35F0511CD2336E0000DB95 /* areas.plist in Resources */,
 				D80360591CBF376B001920F9 /* RecommendedScenarioView.xib in Resources */,
 				1F5038C51CDC6A22004F76AD /* MyPageBtnCollectionViewCell.xib in Resources */,
+				1F39059C1CEDC33700F95382 /* NearQingViewController.xib in Resources */,
 				1FC678151CDAF52000535162 /* InvalidBonusCell.xib in Resources */,
 				1F5038AA1CDC406C004F76AD /* CommentView.xib in Resources */,
 				D81281721CAA8532007CF08B /* UMSocialSDKResourcesNew.bundle in Resources */,
@@ -3805,6 +3897,7 @@
 				D8A9AE5A1CE4603300A9FCFB /* MarkGoodsData.m in Sources */,
 				D8A9ADC91CD9E34600A9FCFB /* FBFootView.m in Sources */,
 				D8A9ACAF1CD89E0000A9FCFB /* RollImage.m in Sources */,
+				1F3905911CEDB36D00F95382 /* IntegralRulesView.m in Sources */,
 				D8A9ADBA1CD9E2E700A9FCFB /* MarkGoodsViewController.m in Sources */,
 				D8A9ACD01CD8A46900A9FCFB /* FiuHeaderTableViewCell.m in Sources */,
 				D87B69D21CC726D500199EFE /* FBSheetViewController.m in Sources */,
@@ -3952,6 +4045,7 @@
 				1F5038C01CDC675A004F76AD /* MyPageBGCollectionViewCell.m in Sources */,
 				D8A9AEA21CE9B76000A9FCFB /* CommentModelId.m in Sources */,
 				D8A9ACB21CD89E0000A9FCFB /* FiuScene.m in Sources */,
+				1F39058B1CEDAF4E00F95382 /* IntegralVC.m in Sources */,
 				D8363A6E1CD8818E00CC4AC0 /* GoodsBrandViewController.m in Sources */,
 				D86B7B7A1CEB27C30019AB79 /* FBOrderOtherTableViewCell.m in Sources */,
 				D8363A6B1CD8818E00CC4AC0 /* GoodsInfoViewController.m in Sources */,
@@ -3992,6 +4086,7 @@
 				1F5038B91CDC605F004F76AD /* MyPageViewController.m in Sources */,
 				D8A9ADF31CDAF41200A9FCFB /* ChildTagsTag.m in Sources */,
 				D8363AB71CD8835D00CC4AC0 /* SceneInfoCounter.m in Sources */,
+				1F39059B1CEDC33700F95382 /* NearQingViewController.m in Sources */,
 				D8A9AE6A1CE5D10000A9FCFB /* FindGoodsModelRow.m in Sources */,
 				1FE60E561CD32E8D00045117 /* CommentsViewController.m in Sources */,
 				1F8EACDA1CDDA09200C51235 /* RefundmentViewController.m in Sources */,
@@ -4013,6 +4108,7 @@
 				D8A9AE191CE05D3F00A9FCFB /* ChooseTagsCollectionViewCell.m in Sources */,
 				D83639BE1CD0932000CC4AC0 /* CommentData.m in Sources */,
 				1F5038A11CDC3F79004F76AD /* OrderInfoCell.m in Sources */,
+				1F39058E1CEDB0DE00F95382 /* IntegralRules.m in Sources */,
 				D8363A821CD882D900CC4AC0 /* SceneSubscribeViewController.m in Sources */,
 				D8A9ACD31CD8A46900A9FCFB /* FiuSceneTableViewCell.m in Sources */,
 				D81281551CAA8532007CF08B /* HttpTool.m in Sources */,

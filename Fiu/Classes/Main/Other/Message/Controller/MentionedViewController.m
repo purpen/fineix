@@ -215,7 +215,7 @@
 -(void)headBtn:(UIButton*)sender{
     NSLog(@"头像啊");
     HomePageViewController *vc = [[HomePageViewController alloc] init];
-    vc.type = @1;
+    vc.type = @2;
     vc.isMySelf = NO;
     vc.userId = ((UserInfo*)_modelAry[sender.tag]).userId;
     [self.navigationController pushViewController:vc animated:YES];
