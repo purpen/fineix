@@ -223,7 +223,7 @@
 
 
 -(void)clickCardBtn:(UIButton*)sender{
-    UIAlertController *alertC = [UIAlertController alertControllerWithTitle:@"上传名片照片" message:nil preferredStyle:UIAlertControllerStyleActionSheet];
+    UIAlertController *alertC = [UIAlertController alertControllerWithTitle:@"上传名片" message:nil preferredStyle:UIAlertControllerStyleActionSheet];
     //判断是否支持相机。模拟器没有相机
     if ([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera]) {
         UIAlertAction *cameraAction = [UIAlertAction actionWithTitle:@"拍照" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
@@ -256,12 +256,12 @@
 -(void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary<NSString *,id> *)info{
     UIImage * editedImg = [info objectForKey:UIImagePickerControllerEditedImage];
     if ([picker.flag isEqualToNumber:@1]) {
-        [self.certView.cardBtn setBackgroundImage:[UIImage fixOrientation:editedImg] forState:UIControlStateNormal];
+        self.certView.cardImageView.image = editedImg;
         [self.certView.cardBtn setTitle:nil forState:UIControlStateNormal];
         NSData * iconData = UIImageJPEGRepresentation([UIImage fixOrientation:editedImg] , 0.5);
         _cardIcon64Str = [iconData base64EncodedStringWithOptions:NSDataBase64Encoding64CharacterLineLength];
     }else if ([picker.flag isEqualToNumber:@0]){
-        [self.certView.idBtn setBackgroundImage:[UIImage fixOrientation:editedImg] forState:UIControlStateNormal];
+        self.certView.idImageView.image = [UIImage fixOrientation:editedImg];
         [self.certView.idBtn setTitle:nil forState:UIControlStateNormal];
         NSData * iconData = UIImageJPEGRepresentation([UIImage fixOrientation:editedImg] , 0.5);
         _idIcon64Str = [iconData base64EncodedStringWithOptions:NSDataBase64Encoding64CharacterLineLength];
@@ -289,7 +289,7 @@
 
 
 -(void)clickIdBtn:(UIButton*)sender{
-    UIAlertController *alertC = [UIAlertController alertControllerWithTitle:@"上传身份证照片" message:nil preferredStyle:UIAlertControllerStyleActionSheet];
+    UIAlertController *alertC = [UIAlertController alertControllerWithTitle:@"上传身份证" message:nil preferredStyle:UIAlertControllerStyleActionSheet];
     //判断是否支持相机。模拟器没有相机
     if ([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera]) {
         UIAlertAction *cameraAction = [UIAlertAction actionWithTitle:@"拍照" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {

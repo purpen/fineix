@@ -100,14 +100,14 @@
         [_userName mas_makeConstraints:^(MASConstraintMaker *make) {
             make.size.mas_equalTo(CGSizeMake(150, 15));
             make.top.equalTo(_userView.mas_top).with.offset(0);
-            make.left.equalTo(_userHeader.mas_right).with.offset(10);
+            make.left.equalTo(_userHeader.mas_right).with.offset(5);
         }];
         
         [_userView addSubview:self.userProfile];
         [_userProfile mas_makeConstraints:^(MASConstraintMaker *make) {
             make.size.mas_equalTo(CGSizeMake(150, 15));
             make.bottom.equalTo(_userHeader.mas_bottom).with.offset(0);
-            make.left.equalTo(_userHeader.mas_right).with.offset(10);
+            make.left.equalTo(_userHeader.mas_right).with.offset(5);
         }];
         
         [_userView addSubview:self.lookNum];
@@ -121,12 +121,12 @@
         [_likeNum mas_makeConstraints:^(MASConstraintMaker *make) {
             make.size.mas_equalTo(CGSizeMake(60, 13));
             make.top.equalTo(_lookNum.mas_top).with.offset(0);
-            make.left.equalTo(_lookNum.mas_right).with.offset(40);
+            make.left.equalTo(_lookNum.mas_right).with.offset(30);
         }];
         
         [_userView addSubview:self.titleText];
         [_titleText mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.size.mas_equalTo(CGSizeMake(SCREEN_WIDTH - 40, 56));
+            make.size.mas_equalTo(CGSizeMake(SCREEN_WIDTH - 40, 50));
             make.top.equalTo(_lookNum.mas_bottom).with.offset(5);
             make.left.equalTo(_userView.mas_left).with.offset(0);
         }];
@@ -134,7 +134,7 @@
         [_userView addSubview:self.whereScene];
         [_whereScene mas_makeConstraints:^(MASConstraintMaker *make) {
             make.size.mas_equalTo(CGSizeMake(130, 13));
-            make.top.equalTo(_titleText.mas_bottom).with.offset(10);
+            make.top.equalTo(_titleText.mas_bottom).with.offset(5);
             make.left.equalTo(_userView.mas_left).with.offset(20);
         }];
         
@@ -224,7 +224,7 @@
 //  标题文字的样式
 - (void)titleTextStyle:(NSString *)title {
     if ([title length] < 8) {
-        _titleText.font = [UIFont systemFontOfSize:46];
+        _titleText.font = [UIFont systemFontOfSize:40];
     } else if ([title length] >= 8 && [title length] < 13) {
         _titleText.font = [UIFont systemFontOfSize:30];
     } else if ([title length] >= 13) {
@@ -260,7 +260,7 @@
     NSString * whereText = fiuScene;
     CGFloat textLength = [fiuScene boundingRectWithSize:CGSizeMake(320, 1000) options:(NSStringDrawingUsesLineFragmentOrigin) attributes:nil context:nil].size.width;
     [lable mas_updateConstraints:^(MASConstraintMaker *make) {
-        make.size.mas_equalTo(CGSizeMake(textLength * 1.1, 15));
+        make.size.mas_equalTo(CGSizeMake(textLength + 5, 15));
     }];
     return whereText;
 }

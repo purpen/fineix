@@ -58,14 +58,14 @@ static NSString *const ShareURL = @"http://m.taihuoniao.com/guide/app_about";
     }];
     
     //截屏
-    UIGraphicsBeginImageContextWithOptions(CGSizeMake(SCREEN_WIDTH, SCREEN_HEIGHT-64), YES, 1);     //设置截屏大小
-    [[self.view layer] renderInContext:UIGraphicsGetCurrentContext()];
-    UIImage *viewImage = UIGraphicsGetImageFromCurrentImageContext();
-    UIGraphicsEndImageContext();
-    CGImageRef imageRef = viewImage.CGImage;
-    CGRect rect = CGRectMake(0, 64, SCREEN_WIDTH, SCREEN_HEIGHT-64);//这里可以设置想要截图的区域
-    CGImageRef imageRefRect = CGImageCreateWithImageInRect(imageRef, rect);
-    _viewImage = [[UIImage alloc] initWithCGImage:imageRefRect];
+//    UIGraphicsBeginImageContextWithOptions(CGSizeMake(SCREEN_WIDTH, SCREEN_HEIGHT-64), YES, 1);     //设置截屏大小
+//    [[self.view layer] renderInContext:UIGraphicsGetCurrentContext()];
+//    UIImage *viewImage = UIGraphicsGetImageFromCurrentImageContext();
+//    UIGraphicsEndImageContext();
+//    CGImageRef imageRef = viewImage.CGImage;
+//    CGRect rect = CGRectMake(0, 64, SCREEN_WIDTH, SCREEN_HEIGHT-64);//这里可以设置想要截图的区域
+//    CGImageRef imageRefRect = CGImageCreateWithImageInRect(imageRef, rect);
+//    _viewImage = [[UIImage alloc] initWithCGImage:imageRefRect];
 }
 
 - (UIImage *)createNonInterpolatedUIImageFormCIImage:(CIImage *)image withSize:(CGFloat) size
@@ -86,6 +86,7 @@ static NSString *const ShareURL = @"http://m.taihuoniao.com/guide/app_about";
     CGImageRef scaledImage = CGBitmapContextCreateImage(bitmapRef);
     CGContextRelease(bitmapRef);
     CGImageRelease(bitmapImage);
+    _viewImage = [UIImage imageWithCGImage:scaledImage];
     return [UIImage imageWithCGImage:scaledImage];
 }
 

@@ -15,6 +15,7 @@
 #import "PictureToolViewController.h"
 #import "FiuSceneInfoData.h"
 #import "NoHaveSceneTableViewCell.h"
+#import "NearChangViewController.h"
 
 static NSString *const URLFiuSceneInfo = @"/scene_scene/view";
 static NSString *const URLFiuSceneList = @"/scene_sight/";
@@ -30,7 +31,8 @@ static NSString *const URLLikeScenePeople = @"/favorite";
 @pro_strong NSMutableArray              *   sceneListMarr;
 @pro_strong NSMutableArray              *   sceneIdMarr;
 @pro_strong NSMutableArray              *   suPeopleMarr;     //  点赞的人
-
+/**城市图标加手势 */
+@property(nonatomic,strong) UITapGestureRecognizer *cityTap;
 
 @end
 
@@ -255,6 +257,8 @@ static NSString *const URLLikeScenePeople = @"/favorite";
                 cell = [[FiuUserInfoTableViewCell alloc] initWithStyle:(UITableViewCellStyleDefault) reuseIdentifier:userInfoCellId];
             }
             [cell setFiuSceneInfoData:self.fiuSceneData];
+            cell.city.userInteractionEnabled = YES;
+            [cell.city addGestureRecognizer:self.cityTap];
             return cell;
             
         } else if (indexPath.row == 1) {
@@ -390,6 +394,21 @@ static NSString *const URLLikeScenePeople = @"/favorite";
             self.rollDown = NO;
         }
     }
+}
+
+-(UITapGestureRecognizer *)cityTap{
+    if (!_cityTap) {
+        _cityTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(clickCityTap:)];
+        _cityTap.numberOfTapsRequired = 1;
+        _cityTap.numberOfTouchesRequired = 1;
+    }
+    return _cityTap;
+}
+
+-(void)clickCityTap:(UITapGestureRecognizer*)gesture{
+    NearChangViewController *vc = [[NearChangViewController alloc] init];
+    vc.baseInfo = self.fiuSceneData;
+    [self.navigationController pushViewController:vc animated:YES];
 }
 
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView{

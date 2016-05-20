@@ -213,9 +213,14 @@
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     HomePageViewController *v = [[HomePageViewController alloc] init];
     UserInfo *model = _modelAry[indexPath.row];
+    UserInfoEntity *entity = [UserInfoEntity defaultUserInfoEntity];
     NSLog(@"userId  %@",model.userId);
     v.userId = model.userId;
-    v.isMySelf = NO;
+    if ([entity.userId integerValue] == [model.userId integerValue]) {
+        v.isMySelf = YES;
+    }else{
+        v.isMySelf = NO;
+    }
     v.type = @2;
     [self.navigationController pushViewController:v animated:YES];
 }
@@ -234,12 +239,13 @@
         [sheetVC.cancelBtn addTarget:self action:@selector(clickCancelBtn:) forControlEvents:UIControlEventTouchUpInside];
     }else{
         UserInfo *model = _modelAry[sender.tag];
-        model.is_love = @1;
-        [self.mytableView reloadRowsAtIndexPaths:[NSArray arrayWithObjects:[NSIndexPath indexPathForRow:sender.tag inSection:0], nil] withRowAnimation:UITableViewRowAnimationNone];
+        
         //请求数据
         FBRequest *request = [FBAPI postWithUrlString:@"/follow/ajax_follow" requestDictionary:@{@"follow_id":model.userId} delegate:self];
         [request startRequestSuccess:^(FBRequest *request, id result) {
             [SVProgressHUD showSuccessWithStatus:@"关注成功"];
+            model.is_love = @1;
+            [self.mytableView reloadRowsAtIndexPaths:[NSArray arrayWithObjects:[NSIndexPath indexPathForRow:sender.tag inSection:0], nil] withRowAnimation:UITableViewRowAnimationNone];
         } failure:^(FBRequest *request, NSError *error) {
             [SVProgressHUD showErrorWithStatus:error.localizedDescription];
         }];

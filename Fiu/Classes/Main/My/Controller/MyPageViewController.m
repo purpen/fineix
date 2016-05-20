@@ -137,7 +137,7 @@
 
 -(void)netGetData{
     UserInfoEntity *entity = [UserInfoEntity defaultUserInfoEntity];
-    FBRequest *request = [FBAPI postWithUrlString:@"/user/user_info" requestDictionary:@{@"user_id":entity.userId} delegate:self];
+    FBRequest *request = [FBAPI postWithUrlString:@"/auth/user" requestDictionary:@{@"user_id":entity.userId} delegate:self];
     [request startRequestSuccess:^(FBRequest *request, id result) {
         NSLog(@"&&&&&&&&result %@",result);
         NSDictionary *dataDict = result[@"data"];
@@ -178,7 +178,6 @@
     if (!_myCollectionView) {
         UICollectionViewFlowLayout *layout = [[UICollectionViewFlowLayout alloc] init];
         
-        layout.minimumInteritemSpacing = 1;
         _myCollectionView = [[UICollectionView alloc] initWithFrame:CGRectMake(0, -44, SCREEN_WIDTH, SCREEN_HEIGHT+44) collectionViewLayout:layout];
         _myCollectionView.backgroundColor = [UIColor whiteColor];
         _myCollectionView.showsVerticalScrollIndicator = NO;

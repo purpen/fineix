@@ -1,18 +1,18 @@
 //
-//  NearQingViewController.m
+//  NearChangViewController.m
 //  Fiu
 //
-//  Created by THN-Dong on 16/5/19.
+//  Created by THN-Dong on 16/5/20.
 //  Copyright © 2016年 taihuoniao. All rights reserved.
 //
 
-#import "NearQingViewController.h"
-#import "SceneInfoData.h"
+#import "NearChangViewController.h"
 #import <BaiduMapAPI_Map/BMKMapComponent.h>//引入地图功能所有的头文件
 #import "SVProgressHUD.h"
 #import <SDWebImage/UIImageView+WebCache.h>
+#import "FiuSceneInfoData.h"
 
-@interface NearQingViewController ()<BMKMapViewDelegate>
+@interface NearChangViewController ()<BMKMapViewDelegate>
 {
     float _latitude;
     float _longitude;
@@ -27,7 +27,7 @@
 
 @end
 
-@implementation NearQingViewController
+@implementation NearChangViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -59,7 +59,7 @@
 - (void)requestDataForOderListOperation
 {
     [SVProgressHUD show];
-    FBRequest *request = [FBAPI postWithUrlString:@"/scene_sight/" requestDictionary:@{
+    FBRequest *request = [FBAPI postWithUrlString:@"/scene_scene/" requestDictionary:@{
                                                                                        @"page":@1,
                                                                                        @"size":@10,
                                                                                        @"dis":@5000,
@@ -276,13 +276,13 @@
 }
 
 /*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
+ #pragma mark - Navigation
+ 
+ // In a storyboard-based application, you will often want to do a little preparation before navigation
+ - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+ // Get the new view controller using [segue destinationViewController].
+ // Pass the selected object to the new view controller.
+ }
+ */
 
 @end

@@ -156,13 +156,7 @@
 
 
 -(void)requestSucess:(FBRequest *)request result:(id)result{
-    if ([request.flag isEqualToString:@"/follow/ajax_follow"]){
-        if ([result objectForKey:@"success"]) {
-            [SVProgressHUD showSuccessWithStatus:@"关注成功"];
-        }else{
-            [SVProgressHUD showErrorWithStatus:@"关注失败"];
-        }
-    }else if ([request.flag isEqualToString:@"/follow/ajax_cancel_follow"]){
+     if ([request.flag isEqualToString:@"/follow/ajax_cancel_follow"]){
         if ([result objectForKey:@"success"]) {
             [SVProgressHUD showSuccessWithStatus:@"取消关注"];
         }else{
@@ -210,9 +204,14 @@
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     HomePageViewController *v = [[HomePageViewController alloc] init];
     UserInfo *model = _modelAry[indexPath.row];
+    UserInfoEntity *entity = [UserInfoEntity defaultUserInfoEntity];
     NSLog(@"userId  %@",model.userId);
     v.userId = model.userId;
-    v.isMySelf = NO;
+    if ([entity.userId integerValue] == [model.userId integerValue]) {
+        v.isMySelf = YES;
+    }else{
+        v.isMySelf = NO;
+    }
     v.type = @2;
     [self.navigationController pushViewController:v animated:YES];
 }
@@ -232,16 +231,20 @@
     }else{
         UserInfo *model = _modelAry[sender.tag];
         UserInfoEntity *entity = [UserInfoEntity defaultUserInfoEntity];
-        if ([entity.userId isEqual:model.userId]) {
-            model.is_love = @2;
-        }else{
-            model.level = @1;
-        }
-        [self.mytableView reloadRowsAtIndexPaths:[NSArray arrayWithObjects:[NSIndexPath indexPathForRow:sender.tag inSection:0], nil] withRowAnimation:UITableViewRowAnimationNone];
         //请求数据
         FBRequest *request = [FBAPI postWithUrlString:@"/follow/ajax_follow" requestDictionary:@{@"follow_id":model.userId} delegate:self];
-        request.flag = @"/follow/ajax_follow";
-        [request startRequest];
+        [request startRequestSuccess:^(FBRequest *request, id result) {
+            if ([entity.userId isEqualToString:model.userId]) {
+                model.is_love = @2;
+            }else{
+                model.level = @1;
+            }
+            [self.mytableView reloadRowsAtIndexPaths:[NSArray arrayWithObjects:[NSIndexPath indexPathForRow:sender.tag inSection:0], nil] withRowAnimation:UITableViewRowAnimationNone];
+
+            [SVProgressHUD showSuccessWithStatus:@"关注成功"];
+        } failure:^(FBRequest *request, NSError *error) {
+            [SVProgressHUD showErrorWithStatus:error.localizedDescription];
+        }];
     }
 }
 

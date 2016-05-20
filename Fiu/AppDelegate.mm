@@ -61,7 +61,7 @@ NSString *const determineLogin = @"/auth/check_login";
     
 //    //首先统一设置为未登录-----------------------------------------------
     UserInfoEntity *entity = [UserInfoEntity defaultUserInfoEntity];
-//    entity.isLogin = NO;
+    entity.isLogin = NO;
     //发送网络请求查看登录状态
     FBRequest *request = [FBAPI postWithUrlString:determineLogin requestDictionary:nil delegate:self];
     [request startRequestSuccess:^(FBRequest *request, id result) {

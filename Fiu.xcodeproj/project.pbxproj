@@ -59,7 +59,7 @@
 		1F3905911CEDB36D00F95382 /* IntegralRulesView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F3905901CEDB36D00F95382 /* IntegralRulesView.m */; };
 		1F3905931CEDB39400F95382 /* Integral.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1F3905921CEDB39400F95382 /* Integral.xib */; };
 		1F39059B1CEDC33700F95382 /* NearQingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F3905991CEDC33700F95382 /* NearQingViewController.m */; };
-		1F39059C1CEDC33700F95382 /* NearQingViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1F39059A1CEDC33700F95382 /* NearQingViewController.xib */; };
+		1F39059F1CEF209900F95382 /* NearChangViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F39059E1CEF209900F95382 /* NearChangViewController.m */; };
 		1F3C0A771CBF461300B84FEB /* libPods-Fiu.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 1F3C0A761CBF461300B84FEB /* libPods-Fiu.a */; };
 		1F3C0A841CBF760C00B84FEB /* SubscribePeopleViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F3C0A821CBF760C00B84FEB /* SubscribePeopleViewController.m */; };
 		1F3C0A851CBF760C00B84FEB /* SubscribePeopleViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1F3C0A831CBF760C00B84FEB /* SubscribePeopleViewController.xib */; };
@@ -561,7 +561,8 @@
 		1F3905921CEDB39400F95382 /* Integral.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = Integral.xib; sourceTree = "<group>"; };
 		1F3905981CEDC33700F95382 /* NearQingViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NearQingViewController.h; sourceTree = "<group>"; };
 		1F3905991CEDC33700F95382 /* NearQingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NearQingViewController.m; sourceTree = "<group>"; };
-		1F39059A1CEDC33700F95382 /* NearQingViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = NearQingViewController.xib; sourceTree = "<group>"; };
+		1F39059D1CEF209900F95382 /* NearChangViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NearChangViewController.h; sourceTree = "<group>"; };
+		1F39059E1CEF209900F95382 /* NearChangViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NearChangViewController.m; sourceTree = "<group>"; };
 		1F3C0A761CBF461300B84FEB /* libPods-Fiu.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = "libPods-Fiu.a"; path = "../Library/Developer/Xcode/DerivedData/Fiu-cjbswbuyriripaegqmobstwznrnk/Build/Products/Debug-iphonesimulator/libPods-Fiu.a"; sourceTree = "<group>"; };
 		1F3C0A811CBF760C00B84FEB /* SubscribePeopleViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SubscribePeopleViewController.h; sourceTree = "<group>"; };
 		1F3C0A821CBF760C00B84FEB /* SubscribePeopleViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SubscribePeopleViewController.m; sourceTree = "<group>"; };
@@ -1471,7 +1472,8 @@
 			children = (
 				1F3905981CEDC33700F95382 /* NearQingViewController.h */,
 				1F3905991CEDC33700F95382 /* NearQingViewController.m */,
-				1F39059A1CEDC33700F95382 /* NearQingViewController.xib */,
+				1F39059D1CEF209900F95382 /* NearChangViewController.h */,
+				1F39059E1CEF209900F95382 /* NearChangViewController.m */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -3710,7 +3712,6 @@
 				1F35F0511CD2336E0000DB95 /* areas.plist in Resources */,
 				D80360591CBF376B001920F9 /* RecommendedScenarioView.xib in Resources */,
 				1F5038C51CDC6A22004F76AD /* MyPageBtnCollectionViewCell.xib in Resources */,
-				1F39059C1CEDC33700F95382 /* NearQingViewController.xib in Resources */,
 				1FC678151CDAF52000535162 /* InvalidBonusCell.xib in Resources */,
 				1F5038AA1CDC406C004F76AD /* CommentView.xib in Resources */,
 				D81281721CAA8532007CF08B /* UMSocialSDKResourcesNew.bundle in Resources */,
@@ -3926,6 +3927,7 @@
 				D8363A721CD881B200CC4AC0 /* MallViewController.m in Sources */,
 				D8363A531CD8814600CC4AC0 /* RecommendGoodsCollectionViewCell.m in Sources */,
 				D8A9AD8C1CD9DFBC00A9FCFB /* PhotoAlbumsTableViewCell.m in Sources */,
+				1F39059F1CEF209900F95382 /* NearChangViewController.m in Sources */,
 				D8363ABF1CD8835D00CC4AC0 /* HomeSceneListLocation.m in Sources */,
 				1FE60E7B1CD3E6DC00045117 /* FindSceneModel.m in Sources */,
 				D8A9AD851CD9DFBC00A9FCFB /* ScenceMessageView.m in Sources */,

@@ -23,7 +23,6 @@
     NSString *email;
     NSString *tel;
     NSMutableArray *addressBookTemp;
-    
 }
 @property (nonatomic, assign)ABAddressBookRef addressBookRef;
 @property NSInteger sectionNumber;
@@ -72,9 +71,6 @@
         ABAddressBookRequestAccessWithCompletion(addressBooks, ^(bool granted, CFErrorRef error){dispatch_semaphore_signal(sema);});
         
         dispatch_semaphore_wait(sema, DISPATCH_TIME_FOREVER);
-        
-        
-        
     }
     
     else

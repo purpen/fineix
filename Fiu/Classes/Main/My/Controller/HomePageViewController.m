@@ -184,7 +184,6 @@ static NSString *const IconURL = @"/my/add_head_pic";
         _n = 0;
         [_fiuSceneList removeAllObjects];
         [_fiuSceneIdList removeAllObjects];
-        [SVProgressHUD showWithMaskType:SVProgressHUDMaskTypeClear];
         
         [self requestDataForOderListOperation];
     }else if([self.type isEqualToNumber:@2]){
@@ -204,7 +203,6 @@ static NSString *const IconURL = @"/my/add_head_pic";
         _m = 0;
         [_sceneListMarr removeAllObjects];
         [_sceneIdMarr removeAllObjects];
-        [SVProgressHUD showWithMaskType:SVProgressHUDMaskTypeClear];
         
         [self requestDataForOderListOperation];
     }
@@ -316,7 +314,6 @@ static NSString *const IconURL = @"/my/add_head_pic";
 
 
 -(void)netGetData{
-    [SVProgressHUD show];
     FBRequest *request = [FBAPI postWithUrlString:@"/user/user_info" requestDictionary:@{@"user_id":self.userId} delegate:self];
     [request startRequestSuccess:^(FBRequest *request, id result) {
         NSLog(@"AD撒娇大时代撒旦&&&&&&&&result %@",result);
@@ -326,7 +323,6 @@ static NSString *const IconURL = @"/my/add_head_pic";
         _chanelV.focusNumLabel.text = [NSString stringWithFormat:@"%@",dataDict[@"follow_count"]];
         _fansN = [dataDict[@"fans_count"] integerValue];
         
-        [SVProgressHUD dismiss];
         if (self.isMySelf) {
             UserInfo *userInfo = [UserInfo mj_objectWithKeyValues:[result objectForKey:@"data"]];
             userInfo.head_pic_url = [result objectForKey:@"data"][@"head_pic_url"];
@@ -429,7 +425,7 @@ static NSString *const IconURL = @"/my/add_head_pic";
         }else if(section == 1){
             return UIEdgeInsetsMake(3, 5, 0, 5);
         }else if (section == 2){
-            return UIEdgeInsetsMake(3, 0, 5, 0);
+            return UIEdgeInsetsMake(3, 0, 10, 0);
         }
     }
     return UIEdgeInsetsMake(0, 0, 0, 0);
@@ -676,7 +672,7 @@ static NSString *const IconURL = @"/my/add_head_pic";
     }
     if (indexPath.section == 2) {
         if ([self.type isEqualToNumber:@2]) {
-            return CGSizeMake(SCREEN_WIDTH, SCREEN_HEIGHT);
+            return CGSizeMake(SCREEN_WIDTH, SCREEN_HEIGHT+5);
         }else if ([self.type isEqualToNumber:@1]){
             return CGSizeMake((SCREEN_WIDTH-15)/2, 320/667.0*SCREEN_HEIGHT);
         }

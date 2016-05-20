@@ -22,6 +22,8 @@
 @property (weak, nonatomic) IBOutlet UIButton *cardBtn;
 @property (weak, nonatomic) IBOutlet UIButton *subBtn;
 @property (weak, nonatomic) IBOutlet UIView *selectedView;
+@property (weak, nonatomic) IBOutlet UIImageView *idImageView;
+@property (weak, nonatomic) IBOutlet UIImageView *cardImageView;
 
 +(instancetype)getCertView;
 @end
