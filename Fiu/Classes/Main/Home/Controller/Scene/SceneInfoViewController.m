@@ -22,6 +22,7 @@
 #import "LikeOrSuPeopleRow.h"
 #import "HomePageViewController.h"
 #import "NearQingViewController.h"
+#import "FBShareViewController.h"
 
 static NSString *const URLSceneInfo = @"/scene_sight/view";
 static NSString *const URLCommentList = @"/comment/getlist";
@@ -521,17 +522,17 @@ static NSString *const URLWantBuy = @"/scene_product/sight_click_stat";
     [self addBarItemLeftBarButton:@"" image:@"icon_back" isTransparent:YES];
 }
 
+- (void)rightBarItemSelected {
+    FBShareViewController * shareVC = [[FBShareViewController alloc] init];
+    [self presentViewController:shareVC animated:YES completion:nil];
+}
+
 - (void)leftBarItemSelected {
     if (self.navigationController.viewControllers.count > 1) {
         [self.navigationController popViewControllerAnimated:YES];
     } else {
         [self dismissViewControllerAnimated:YES completion:nil];
     }
-}
-
-//  点击右边barItem
-- (void)rightBarItemSelected {
-    NSLog(@"＊＊＊＊＊＊＊＊＊分享");
 }
 
 - (void)viewWillDisappear:(BOOL)animated {

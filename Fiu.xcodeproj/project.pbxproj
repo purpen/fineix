@@ -353,6 +353,8 @@
 		D86B7BE51CEC3F880019AB79 /* FBCarItemsTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D86B7BE41CEC3F880019AB79 /* FBCarItemsTableViewCell.m */; };
 		D86B7BE81CEC452A0019AB79 /* FBEditCarItemTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D86B7BE71CEC452A0019AB79 /* FBEditCarItemTableViewCell.m */; };
 		D86B7BEC1CEE0C5D0019AB79 /* FiuUserInfoTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D86B7BEB1CEE0C5D0019AB79 /* FiuUserInfoTableViewCell.m */; };
+		D86B7C2E1CEEEF3C0019AB79 /* FBShareViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D86B7C2D1CEEEF3C0019AB79 /* FBShareViewController.m */; };
+		D86B7C321CEEF4AA0019AB79 /* ShareStyleCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D86B7C311CEEF4AA0019AB79 /* ShareStyleCollectionViewCell.m */; };
 		D87B69BF1CC726BA00199EFE /* FBRollImages.m in Sources */ = {isa = PBXBuildFile; fileRef = D87B69BB1CC726BA00199EFE /* FBRollImages.m */; };
 		D87B69C01CC726BA00199EFE /* GroupHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = D87B69BD1CC726BA00199EFE /* GroupHeaderView.m */; };
 		D87B69D11CC726D500199EFE /* FBAlertViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D87B69C51CC726D500199EFE /* FBAlertViewController.m */; };
@@ -1084,6 +1086,10 @@
 		D86B7BE71CEC452A0019AB79 /* FBEditCarItemTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FBEditCarItemTableViewCell.m; sourceTree = "<group>"; };
 		D86B7BEA1CEE0C5D0019AB79 /* FiuUserInfoTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FiuUserInfoTableViewCell.h; sourceTree = "<group>"; };
 		D86B7BEB1CEE0C5D0019AB79 /* FiuUserInfoTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FiuUserInfoTableViewCell.m; sourceTree = "<group>"; };
+		D86B7C2C1CEEEF3C0019AB79 /* FBShareViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FBShareViewController.h; sourceTree = "<group>"; };
+		D86B7C2D1CEEEF3C0019AB79 /* FBShareViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FBShareViewController.m; sourceTree = "<group>"; };
+		D86B7C301CEEF4AA0019AB79 /* ShareStyleCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShareStyleCollectionViewCell.h; sourceTree = "<group>"; };
+		D86B7C311CEEF4AA0019AB79 /* ShareStyleCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ShareStyleCollectionViewCell.m; sourceTree = "<group>"; };
 		D87B69BA1CC726BA00199EFE /* FBRollImages.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FBRollImages.h; sourceTree = "<group>"; };
 		D87B69BB1CC726BA00199EFE /* FBRollImages.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FBRollImages.m; sourceTree = "<group>"; };
 		D87B69BC1CC726BA00199EFE /* GroupHeaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GroupHeaderView.h; sourceTree = "<group>"; };
@@ -3083,6 +3089,17 @@
 		D86B7BE91CEDCDEC0019AB79 /* Share */ = {
 			isa = PBXGroup;
 			children = (
+				D86B7C2C1CEEEF3C0019AB79 /* FBShareViewController.h */,
+				D86B7C2D1CEEEF3C0019AB79 /* FBShareViewController.m */,
+			);
+			path = Share;
+			sourceTree = "<group>";
+		};
+		D86B7C2F1CEEF4980019AB79 /* Share */ = {
+			isa = PBXGroup;
+			children = (
+				D86B7C301CEEF4AA0019AB79 /* ShareStyleCollectionViewCell.h */,
+				D86B7C311CEEF4AA0019AB79 /* ShareStyleCollectionViewCell.m */,
 			);
 			path = Share;
 			sourceTree = "<group>";
@@ -3185,6 +3202,7 @@
 		D89B5A881CB4E45B00DB9710 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				D86B7C2F1CEEF4980019AB79 /* Share */,
 				D8A9ACE21CD8ABD500A9FCFB /* Other */,
 				D8363A831CD8832100CC4AC0 /* Scene */,
 				D8363A901CD8832100CC4AC0 /* Home */,
@@ -3971,6 +3989,7 @@
 				1FE60E5B1CD32FD200045117 /* CommentsTableViewCell.m in Sources */,
 				D83639BF1CD0932000CC4AC0 /* CommentRow.m in Sources */,
 				D8A9ADBB1CD9E2E700A9FCFB /* SearchLocationViewController.m in Sources */,
+				D86B7C321CEEF4AA0019AB79 /* ShareStyleCollectionViewCell.m in Sources */,
 				1FBE62701CC4E3C3009606F7 /* MyFansViewController.m in Sources */,
 				1F5038B51CDC40EE004F76AD /* ProductInfoModel.m in Sources */,
 				D8363A801CD882D900CC4AC0 /* HomeViewController.m in Sources */,
@@ -4046,6 +4065,7 @@
 				1FC6782E1CDB33ED00535162 /* UIView+TYAlertView.m in Sources */,
 				1F5038C01CDC675A004F76AD /* MyPageBGCollectionViewCell.m in Sources */,
 				D8A9AEA21CE9B76000A9FCFB /* CommentModelId.m in Sources */,
+				D86B7C2E1CEEEF3C0019AB79 /* FBShareViewController.m in Sources */,
 				D8A9ACB21CD89E0000A9FCFB /* FiuScene.m in Sources */,
 				1F39058B1CEDAF4E00F95382 /* IntegralVC.m in Sources */,
 				D8363A6E1CD8818E00CC4AC0 /* GoodsBrandViewController.m in Sources */,

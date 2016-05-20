@@ -35,6 +35,7 @@
 /**
  *  是否登录
  */
+@pro_strong FBRequest   *   userLoginRequest;
 - (BOOL)isUserLogin;
 
 /**

@@ -52,7 +52,7 @@
     [self addSubview:self.time];
     [_time mas_makeConstraints:^(MASConstraintMaker *make) {
         make.size.mas_equalTo(CGSizeMake(100, 15));
-        make.top.equalTo(self.mas_top).with.offset(15);
+        make.bottom.equalTo(_userName.mas_bottom).with.offset(0);
         make.right.equalTo(self.mas_right).with.offset(-15);
     }];
     

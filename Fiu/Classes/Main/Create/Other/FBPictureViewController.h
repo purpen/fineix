@@ -12,7 +12,7 @@
 
 @interface FBPictureViewController : UIViewController
 
-@pro_strong UIView              *   navView;            //  顶部滚动栏
+@pro_strong UIView              *   navView;            //  顶部状态栏
 @pro_strong UILabel             *   navTitle;           //  顶部标题
 @pro_strong UIButton            *   openPhotoAlbums;    //  打开相薄
 @pro_strong UIButton            *   cancelBtn;          //  取消按钮
