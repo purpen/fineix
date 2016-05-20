@@ -132,6 +132,9 @@ static NSString *const URLUserAddGoods = @"/scene_product/add";
         
         [self presentViewController:markGoodsVC animated:YES completion:nil];
         markGoodsVC.getImgBlock = ^(NSString * imgUrl, NSString * title, NSString * price, NSString * ids) {
+            if (self.goodsIdData.count == 0) {
+                _idx = 391;
+            }
             [self addMarkGoodsImg:imgUrl];
             [self.goodsIdData addObject:ids];
             NSString * pri = [NSString stringWithFormat:@"￥%@",price];
@@ -153,6 +156,9 @@ static NSString *const URLUserAddGoods = @"/scene_product/add";
         
         [self presentViewController:addUrlVC animated:YES completion:nil];
         addUrlVC.findGodosBlock = ^(NSString * title, NSString * price, NSString * ids) {
+            if (self.goodsIdData.count == 0) {
+                _idx = 391;
+            }
             [self.goodsIdData addObject:ids];
             _canDelete = 1;
             [self addUserGoodsTagWithTitle:title withPrice:price];
@@ -213,7 +219,9 @@ static NSString *const URLUserAddGoods = @"/scene_product/add";
     if (_canDelete == 1) {
         [self networkDeleteUserGoods:self.goodsIdData[index]];
     } else if (_canDelete == 0) {
+        NSLog(@"＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝ %@ , %zi", self.goodsIdData, index);
         [self.goodsIdData removeObject:self.goodsIdData[index]];
+        NSLog(@"＝＝＝＝＝＝＝＝＝＝＝＝＊＊＊＊＊ %@, %zi", self.goodsIdData, index);
     }
 }
 

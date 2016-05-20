@@ -10,6 +10,7 @@
 #import "FBLoginRegisterViewController.h"
 
 NSString *const URLGoodsCarNum = @"/shopping/fetch_cart_count";
+NSString *const URLUserIsLogin = @"/user/user_info";
 
 @interface FBViewController ()
 

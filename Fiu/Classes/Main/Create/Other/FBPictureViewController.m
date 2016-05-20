@@ -17,7 +17,9 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
     [self.view addSubview:self.navView];
+    [self.navView bringSubviewToFront:self.view];
     
 }
 
@@ -65,7 +67,7 @@
     [self.navView addSubview:self.line];
 }
 
-#pragma mark - 顶部滚动的导航
+#pragma mark - 顶部导航
 - (UIView *)navView {
     if (!_navView) {
         _navView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 50)];

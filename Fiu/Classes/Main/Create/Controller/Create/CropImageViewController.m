@@ -18,13 +18,19 @@
 
 @implementation CropImageViewController
 
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    
+    [self setNavViewUI];
+    
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.view.backgroundColor = [UIColor blackColor];
 
-    [self setNavViewUI];
-    
     [self addChildViewController:self.clipImageVC];
+    
 }
 
 #pragma mark - 设置页面导航Nav
@@ -50,14 +56,14 @@
 - (ClipImageViewController *)clipImageVC {
     if (!_clipImageVC) {
         _clipImageVC = [[ClipImageViewController alloc] init];
-        
-        _clipImageVC.view.frame = CGRectMake(0, 50, SCREEN_WIDTH, SCREEN_HEIGHT - 50);
-        _clipImageVC.clipImgRect = CGRectMake((SCREEN_WIDTH - (SCREEN_WIDTH * 0.925))/2, 0, SCREEN_WIDTH * 0.925, SCREEN_HEIGHT - 50);  //  裁剪的大小
+        _clipImageVC.view.frame = CGRectMake(0, 50, SCREEN_WIDTH, SCREEN_HEIGHT + 50);
+        _clipImageVC.clipImgRect = CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT);  //  裁剪的大小
         
         UIImageView * coverView = [[UIImageView alloc] initWithFrame:_clipImageVC.clipImgRect];
         [_clipImageVC.view addSubview:coverView];
         [_clipImageVC.clipImageView setNeedsDisplay];
         [self.view addSubview:_clipImageVC.view];
+        [_clipImageVC.view sendSubviewToBack:self.view];
     }
     return _clipImageVC;
 }
