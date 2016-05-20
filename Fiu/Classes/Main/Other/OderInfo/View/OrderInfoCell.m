@@ -110,8 +110,7 @@
             break;
         case OrderInfoStateWaitDelivery:
         {
-            //[self.operation1stBtn setTitle:@"申请退款" forState:UIControlStateNormal];
-            self.operation1stBtn.hidden = YES;
+            [self.operation1stBtn setTitle:@"提醒发货" forState:UIControlStateNormal];
             self.operation2ndBtn.hidden = YES;
         }
             break;

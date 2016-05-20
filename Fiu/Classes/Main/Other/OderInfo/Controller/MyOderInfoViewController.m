@@ -49,8 +49,8 @@ static NSString *const OrderInfoCellIdentifier = @"orderInfoCell";
     HMSegmentedControl *segmentedControl = [[HMSegmentedControl alloc] initWithSectionTitles:@[@"全部", @"待付款", @"待发货", @"待收货", @"待评价"]];
 
     segmentedControl.frame = CGRectMake(0, 64, SCREEN_WIDTH, 44);//
-    segmentedControl.segmentEdgeInset = UIEdgeInsetsMake(0, 10, 0, 10);
-    segmentedControl.selectionStyle = HMSegmentedControlSelectionStyleFullWidthStripe;
+    segmentedControl.segmentEdgeInset = UIEdgeInsetsMake(5, 5, 5, 5);
+    segmentedControl.selectionStyle = HMSegmentedControlSelectionStyleTextWidthStripe;
     segmentedControl.selectionIndicatorLocation = HMSegmentedControlSelectionIndicatorLocationDown;
     segmentedControl.selectionIndicatorHeight = 2.0f;
     segmentedControl.selectionIndicatorColor = [UIColor colorWithHexString:fineixColor];

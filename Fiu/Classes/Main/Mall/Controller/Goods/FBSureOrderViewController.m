@@ -153,9 +153,7 @@ static NSString *const URLCarGoPay = @"/shopping/checkout";
         self.orderInfo = [[OrderInfoModel alloc] initWithDictionary:dataDic];
         if ([[result objectForKey:@"success"] isEqualToNumber:@1]) {
             if ([self.orderInfo.payMoney isEqualToNumber:@0]) {
-                PaySuccessViewController *vc = [[PaySuccessViewController alloc] init];
-                vc.orderInfo = self.orderInfo;
-                [self.navigationController pushViewController:vc animated:YES];
+                [self checkOrderInfoForPayStatusWithPaymentWay:nil];
             }else{
                 FBPayTheWayViewController * payWayVC = [[FBPayTheWayViewController alloc] init];
                 payWayVC.orderInfo = self.orderInfo;
@@ -168,6 +166,36 @@ static NSString *const URLCarGoPay = @"/shopping/checkout";
          [SVProgressHUD showInfoWithStatus:[error localizedDescription]];
     }];
 }
+
+#pragma mark - 请求订单状态以核实支付是否完成
+- (void)checkOrderInfoForPayStatusWithPaymentWay:(NSString *)paymentWay
+{
+    FBRequest * request = [FBAPI postWithUrlString:@"/shopping/detail" requestDictionary:@{@"rid": self.orderInfo.rid} delegate:self];
+    [SVProgressHUD showWithStatus:@"正在核实支付结果..." maskType:SVProgressHUDMaskTypeClear];
+    //延迟2秒执行以保证服务端已获取支付通知
+    double delayInSeconds = 2.0;
+    dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, delayInSeconds * NSEC_PER_SEC);
+    dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
+        
+        WEAKSELF
+        [request startRequestSuccess:^(FBRequest *request, id result) {
+            NSDictionary * dataDic = [result objectForKey:@"data"];
+            if ([[dataDic objectForKey:@"status"] isEqualToNumber:@10]) {
+                PaySuccessViewController * paySuccessVC = [[PaySuccessViewController alloc] initWithNibName:@"PaySuccessViewController" bundle:nil];
+                paySuccessVC.orderInfo = weakSelf.orderInfo;
+                paySuccessVC.paymentWay = paymentWay;
+                [weakSelf.navigationController pushViewController:paySuccessVC animated:YES];
+                
+                [SVProgressHUD showSuccessWithStatus:@"支付成功!"];
+            } else {
+                [SVProgressHUD showErrorWithStatus:@"支付未成功!"];
+            }
+        } failure:^(FBRequest *request, NSError *error) {
+            [SVProgressHUD showInfoWithStatus:[error localizedDescription]];
+        }];
+    });
+}
+
 
 #pragma mark - 设置视图
 - (void)setOrderVcUI {
