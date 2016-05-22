@@ -236,13 +236,16 @@ static NSString *const OrderInfoCellIdentifier = @"orderInfoCell";
             NSLog(@"立即支付");
         }
             break;
-        case OrderInfoStateWaitDelivery://申请退款
+        case OrderInfoStateWaitDelivery://待发货
         {
-            RefundmentViewController * refundmentVC = [[RefundmentViewController alloc] initWithNibName:@"RefundmentViewController" bundle:nil];
-            refundmentVC.orderInfoCell = orderInfoCell;
-            refundmentVC.delegate = self;
-            [self.navigationController pushViewController:refundmentVC animated:YES];
-            NSLog(@"申请退款");
+//            RefundmentViewController * refundmentVC = [[RefundmentViewController alloc] initWithNibName:@"RefundmentViewController" bundle:nil];
+//            refundmentVC.orderInfoCell = orderInfoCell;
+//            refundmentVC.delegate = self;
+//            [self.navigationController pushViewController:refundmentVC animated:YES];
+//            NSLog(@"申请退款");
+            
+            //提醒发货
+            [SVProgressHUD showInfoWithStatus:@"提醒发货"];
         }
             break;
         case OrderInfoStateWaitReceive://确认收货

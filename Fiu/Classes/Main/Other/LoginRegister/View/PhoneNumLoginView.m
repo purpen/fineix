@@ -52,7 +52,7 @@
         //忘记密码按钮
         _forgetBtn = [[UIButton alloc] initWithFrame:CGRectMake(0, 346/2/667.0*SCREEN_HEIGHT, 150/2/667.0*SCREEN_HEIGHT, 20/667.0*SCREEN_HEIGHT)];
         CGRect forgetBtnframe = _forgetBtn.frame;
-        forgetBtnframe.origin.x = _phoneTF.frame.origin.x+_phoneTF.frame.size.width-_forgetBtn.frame.size.width;
+        forgetBtnframe.origin.x = _phoneTF.frame.origin.x+_phoneTF.frame.size.width-_forgetBtn.frame.size.width + 12/667.0*SCREEN_HEIGHT;
         _forgetBtn.frame = forgetBtnframe;
         [_forgetBtn setTitle:@"忘记密码？" forState:UIControlStateNormal];
         _forgetBtn.titleLabel.font = [UIFont systemFontOfSize:12];

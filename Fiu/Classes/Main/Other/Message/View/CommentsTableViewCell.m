@@ -98,7 +98,7 @@
         [self.contentView addSubview:self.alertTipviewNum];
         self.alertTipviewNum.tipNumLabel.text = @"";
         [self.alertTipviewNum mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.size.mas_equalTo(CGSizeMake(15, 15));
+            make.size.mas_equalTo(CGSizeMake(10/667.0*SCREEN_HEIGHT, 10/667.0*SCREEN_HEIGHT));
             make.left.mas_equalTo(self.titleLbael.mas_right).with.offset(5);
             make.centerY.mas_equalTo(self.titleLbael.mas_centerY);
         }];
@@ -162,6 +162,8 @@
 -(TipNumberView *)alertTipviewNum{
     if (!_alertTipviewNum) {
         _alertTipviewNum = [TipNumberView getTipNumView];
+        _alertTipviewNum.layer.masksToBounds = YES;
+        _alertTipviewNum.layer.cornerRadius = 5/667.0*SCREEN_HEIGHT;
     }
     return _alertTipviewNum;
 }

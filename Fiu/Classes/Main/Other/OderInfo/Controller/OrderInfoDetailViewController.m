@@ -45,17 +45,16 @@ static NSString *const OrderDetailURL = @"/shopping/detail";
     [super viewDidLoad];
     self.delegate = self;
     self.navViewTitle.text = @"订单详情";
-    // Do any additional setup after loading the view from its nib.
-    CGColorSpaceRef colorSpaceRef = CGColorSpaceCreateDeviceRGB();
-    CGColorRef color = CGColorCreate(colorSpaceRef, (CGFloat[]){190 / 255, 137 / 255, 20 / 255, 1});
+//    CGColorSpaceRef colorSpaceRef = CGColorSpaceCreateDeviceRGB();
+//    CGColorRef color = CGColorCreate(colorSpaceRef, (CGFloat[]){190 / 255, 137 / 255, 20 / 255, 1});
     self.operation1stBtn.layer.cornerRadius = 2;
     self.operation1stBtn.layer.masksToBounds = YES;
     self.operation1stBtn.layer.borderWidth = 0.5;
-    self.operation1stBtn.layer.borderColor = color;
+    self.operation1stBtn.layer.borderColor = [UIColor colorWithHexString:fineixColor].CGColor;
     self.operation2ndBtn.layer.cornerRadius = 2;
     self.operation2ndBtn.layer.masksToBounds = YES;
     self.operation2ndBtn.layer.borderWidth = 0.5;
-    self.operation2ndBtn.layer.borderColor = color;
+    self.operation2ndBtn.layer.borderColor = [UIColor colorWithHexString:fineixColor].CGColor;
     
     if (self.orderInfo == nil) {
         self.orderInfo = self.orderInfoCell.orderInfo;
@@ -120,7 +119,8 @@ static NSString *const OrderDetailURL = @"/shopping/detail";
         case OrderInfoStateWaitDelivery:
         {
             [self.operation1stBtn setTitle:@"申请退款" forState:UIControlStateNormal];
-            self.operation2ndBtn.hidden = true;
+            [self.operation2ndBtn setTitle:@"提醒发货" forState:UIControlStateNormal];
+            self.operation2ndBtn.hidden = NO;
         }
             break;
         case OrderInfoStateRefunding:
@@ -301,6 +301,12 @@ static NSString *const OrderDetailURL = @"/shopping/detail";
         case OrderInfoStateWaitComment:
         {
             [self deleteOrderWithCell:self.orderInfoCell];
+        }
+            break;
+        case OrderInfoStateWaitDelivery:
+        {
+            //提醒发货
+            [SVProgressHUD showInfoWithStatus:@"提醒发货"];
         }
             break;
         default:
