@@ -17,15 +17,18 @@
 
 #import "FiuSceneViewController.h"
 #import "GoodsInfoViewController.h"
+#import "SceneInfoViewController.h"
 
 static NSString *const URLSearchList = @"/search/getlist";
 
 @interface SearchViewController ()
 
-@pro_strong NSMutableArray      *   sceneList;      //  场景
-@pro_strong NSMutableArray      *   fiuSceneList;   //  情景
-@pro_strong NSMutableArray      *   goodsList;      //  商品
-@pro_strong NSMutableArray      *   goodsIdList;    //  商品id
+@pro_strong NSMutableArray      *   sceneList;              //  场景
+@pro_strong NSMutableArray      *   sceneIdMarr;
+@pro_strong NSMutableArray      *   fiuSceneList;           //  情景
+@pro_strong NSMutableArray      *   allFiuSceneIdMarr;      //   情景Id列表
+@pro_strong NSMutableArray      *   goodsList;              //  商品
+@pro_strong NSMutableArray      *   goodsIdList;            //  商品id
 
 @end
 
@@ -88,6 +91,7 @@ static NSString *const URLSearchList = @"/search/getlist";
             for (NSDictionary * sceneDic in sceneArr) {
                 HomeSceneListRow * sceneModel = [[HomeSceneListRow alloc] initWithDictionary:sceneDic];
                 [self.sceneList addObject:sceneModel];
+                [self.sceneIdMarr addObject:[NSString stringWithFormat:@"%zi", sceneModel.idField]];
             }
 
             [self.sceneTable reloadData];
@@ -107,6 +111,7 @@ static NSString *const URLSearchList = @"/search/getlist";
             for (NSDictionary * fSceneDic in fSceneArr) {
                 FiuSceneInfoData * fSceneModel = [[FiuSceneInfoData alloc] initWithDictionary:fSceneDic];
                 [self.fiuSceneList addObject:fSceneModel];
+                [self.allFiuSceneIdMarr addObject:[NSString stringWithFormat:@"%zi", fSceneModel.idField]];
             }
         
             [self.fSceneCollection reloadData];
@@ -313,6 +318,11 @@ static NSString *const URLSearchList = @"/search/getlist";
         GoodsInfoViewController * goodsInfoVC = [[GoodsInfoViewController alloc] init];
         goodsInfoVC.goodsID = self.goodsIdList[indexPath.row];
         [self.navigationController pushViewController:goodsInfoVC animated:YES];
+    
+    } else if (tableView == self.sceneTable) {
+        SceneInfoViewController * sceneInfoVC = [[SceneInfoViewController alloc] init];
+        sceneInfoVC.sceneId = self.sceneIdMarr[indexPath.row];
+        [self.navigationController pushViewController:sceneInfoVC animated:YES];
     }
 }
 
@@ -350,7 +360,7 @@ static NSString *const URLSearchList = @"/search/getlist";
 
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
     FiuSceneViewController * fiuSceneVC = [[FiuSceneViewController alloc] init];
-//    fiuSceneVC.fiuSceneId = self.allFiuSceneIdMarr[indexPath.row];
+    fiuSceneVC.fiuSceneId = self.allFiuSceneIdMarr[indexPath.row];
     [self.navigationController pushViewController:fiuSceneVC animated:YES];
 }
 
@@ -446,11 +456,25 @@ static NSString *const URLSearchList = @"/search/getlist";
     return _sceneList;
 }
 
+- (NSMutableArray *)sceneIdMarr {
+    if (!_sceneIdMarr) {
+        _sceneIdMarr = [NSMutableArray array];
+    }
+    return _sceneIdMarr;
+}
+
 - (NSMutableArray *)fiuSceneList {
     if (!_fiuSceneList) {
         _fiuSceneList = [NSMutableArray array];
     }
     return _fiuSceneList;
+}
+
+- (NSMutableArray *)allFiuSceneIdMarr {
+    if (!_allFiuSceneIdMarr) {
+        _allFiuSceneIdMarr = [NSMutableArray array];
+    }
+    return _allFiuSceneIdMarr;
 }
 
 - (NSMutableArray *)goodsList {
