@@ -21,6 +21,7 @@
 @pro_strong UIButton            *   moreBtn;        //  更多
 @pro_strong UILabel             *   line;           //  分割线
 @pro_strong UILabel             *   bottomline;     //  分割线
+@pro_strong NSString            *   userId;
 
 - (void)setSceneDataNum:(SceneInfoData *)model;
 

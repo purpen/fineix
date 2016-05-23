@@ -480,6 +480,8 @@
 		D8B795111CF1A9E90075D985 /* LookSceneViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D8B795101CF1A9E90075D985 /* LookSceneViewController.m */; };
 		D8B795151CF1B5E70075D985 /* UIImage+Text.m in Sources */ = {isa = PBXBuildFile; fileRef = D8B795141CF1B5E70075D985 /* UIImage+Text.m */; };
 		D8B795181CF1BA6D0075D985 /* ShareStyleView.m in Sources */ = {isa = PBXBuildFile; fileRef = D8B795171CF1BA6D0075D985 /* ShareStyleView.m */; };
+		D8B795201CF349E20075D985 /* CommentId.m in Sources */ = {isa = PBXBuildFile; fileRef = D8B7951D1CF349E20075D985 /* CommentId.m */; };
+		D8B795211CF349E20075D985 /* CommentReplyComment.m in Sources */ = {isa = PBXBuildFile; fileRef = D8B7951F1CF349E20075D985 /* CommentReplyComment.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -1333,6 +1335,10 @@
 		D8B795141CF1B5E70075D985 /* UIImage+Text.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+Text.m"; sourceTree = "<group>"; };
 		D8B795161CF1BA6D0075D985 /* ShareStyleView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShareStyleView.h; sourceTree = "<group>"; };
 		D8B795171CF1BA6D0075D985 /* ShareStyleView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ShareStyleView.m; sourceTree = "<group>"; };
+		D8B7951C1CF349E20075D985 /* CommentId.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CommentId.h; sourceTree = "<group>"; };
+		D8B7951D1CF349E20075D985 /* CommentId.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CommentId.m; sourceTree = "<group>"; };
+		D8B7951E1CF349E20075D985 /* CommentReplyComment.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CommentReplyComment.h; sourceTree = "<group>"; };
+		D8B7951F1CF349E20075D985 /* CommentReplyComment.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CommentReplyComment.m; sourceTree = "<group>"; };
 		E0438B4B24E3F747F761AF4C /* Pods-Fiu.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Fiu.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Fiu/Pods-Fiu.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -2755,6 +2761,10 @@
 				D83639BA1CD0932000CC4AC0 /* CommentRow.m */,
 				D83639BB1CD0932000CC4AC0 /* CommentUser.h */,
 				D83639BC1CD0932000CC4AC0 /* CommentUser.m */,
+				D8B7951C1CF349E20075D985 /* CommentId.h */,
+				D8B7951D1CF349E20075D985 /* CommentId.m */,
+				D8B7951E1CF349E20075D985 /* CommentReplyComment.h */,
+				D8B7951F1CF349E20075D985 /* CommentReplyComment.m */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -4098,6 +4108,7 @@
 				D80360501CBF376B001920F9 /* UserInfoEntity.m in Sources */,
 				1F07A64A1CC77F3B00CF225F /* ScenceListCollectionViewCell.m in Sources */,
 				D8A9ADC11CD9E2E700A9FCFB /* CropImageViewController.m in Sources */,
+				D8B795201CF349E20075D985 /* CommentId.m in Sources */,
 				1F1837701CCDF87500933CA7 /* ChangePasswordViewController.m in Sources */,
 				D8A9ACF11CD8B74D00A9FCFB /* LikeOrSuPeople.m in Sources */,
 				1F1837661CCDCF3B00933CA7 /* EditNickNameViewController.m in Sources */,
@@ -4175,6 +4186,7 @@
 				D8A9ACF41CD8B74D00A9FCFB /* LikeOrSuPeopleRow.m in Sources */,
 				D8A9ACB51CD89E0000A9FCFB /* FiuSceneInfoCounter.m in Sources */,
 				D81281101CAA8532007CF08B /* AppDelegate.mm in Sources */,
+				D8B795211CF349E20075D985 /* CommentReplyComment.m in Sources */,
 				D8363A571CD8814600CC4AC0 /* GoodsTableViewCell.m in Sources */,
 				D8A9AE0F1CDC7F1E00A9FCFB /* SelectHotFSceneTableViewCell.m in Sources */,
 				D8A9AD8A1CD9DFBC00A9FCFB /* FBPictureView.m in Sources */,

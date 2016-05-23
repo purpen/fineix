@@ -34,10 +34,10 @@
 
 - (UIImage*)shareImage {
     UIGraphicsBeginImageContext(CGSizeMake(self.shareView.bounds.size.width, self.shareView.bounds.size.height));
-    [self.shareView.layer renderInContext:UIGraphicsGetCurrentContext()];
-    UIImage * viewImage = UIGraphicsGetImageFromCurrentImageContext();
+    [self.shareView drawViewHierarchyInRect:self.shareView.bounds afterScreenUpdates:YES];
+    UIImage * image = UIGraphicsGetImageFromCurrentImageContext();
     UIGraphicsEndImageContext();
-    return viewImage;
+    return image;
 }
 
 #pragma mark - 设置界面UI
@@ -132,7 +132,6 @@
 }
 
 - (void)shareItemSelected {
-    NSLog(@"＝＝＝＝＝＝＝分享  %@", [self shareImage]);
     ShareViewController * shareVC = [[ShareViewController alloc] init];
     shareVC.modalPresentationStyle = UIModalPresentationOverCurrentContext;
     shareVC.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;

@@ -51,7 +51,6 @@ static NSString *const URLSendSceneComment = @"/comment/ajax_comment";
     [SVProgressHUD show];
     self.sceneCommentRequest = [FBAPI getWithUrlString:URLSceneComment requestDictionary:@{@"target_id":self.targetId, @"page":@(self.currentpageNum + 1), @"type":@"12", @"size":@"20", @"sort":@"1"} delegate:self];
     [self.sceneCommentRequest startRequestSuccess:^(FBRequest *request, id result) {
-        NSLog(@"－－－－－－－ 评论：%@", result);
         NSArray * sceneArr = [[result valueForKey:@"data"] valueForKey:@"rows"];
         for (NSDictionary * sceneDic in sceneArr) {
             CommentRow * commentModel = [[CommentRow alloc] initWithDictionary:sceneDic];
@@ -87,16 +86,18 @@ static NSString *const URLSendSceneComment = @"/comment/ajax_comment";
     if ([self.writeComment.writeText.text isEqualToString:@""]) {
         [SVProgressHUD showInfoWithStatus:@"请填写评论"];
     } else {
-        self.sendCommentRequest = [FBAPI postWithUrlString:URLSendSceneComment requestDictionary:@{@"from_site":@"3", @"type":@"12", @"target_id":self.targetId, @"content":self.writeComment.writeText.text ,@"is_reply":@"0"} delegate:self];
+        self.sendCommentRequest = [FBAPI postWithUrlString:URLSendSceneComment requestDictionary:@{@"from_site":@"3", @"type":@"12", @"target_id":self.targetId, @"content":self.writeComment.writeText.text ,@"is_reply":@"0",@"target_user_id":self.sceneUserId} delegate:self];
         [self.sendCommentRequest startRequestSuccess:^(FBRequest *request, id result) {
             CommentRow * sendCommentModel = [[CommentRow alloc] initWithDictionary:[result valueForKey:@"data"]];
             [self.commentListMarr insertObject:sendCommentModel atIndex:0];
             [self.replyId insertObject:[[result valueForKey:@"data"] valueForKey:@"_id"] atIndex:0];
             [self.userId insertObject:[[result valueForKey:@"data"] valueForKey:@"user_id"] atIndex:0];
+            self.commentTabel.tableHeaderView = [UIView new];
             [self.commentTabel reloadData];
             self.writeComment.writeText.text = @"";
             [self.writeComment.writeText resignFirstResponder];
             [SVProgressHUD showSuccessWithStatus:@"评论成功"];
+            [self requestIsLastData:self.commentTabel currentPage:self.currentpageNum withTotalPage:self.totalPageNum];
             
         } failure:^(FBRequest *request, NSError *error) {
             [SVProgressHUD showErrorWithStatus:[error localizedDescription]];
@@ -111,7 +112,6 @@ static NSString *const URLSendSceneComment = @"/comment/ajax_comment";
     } else {
         self.replyCommentRequest = [FBAPI postWithUrlString:URLSendSceneComment requestDictionary:@{@"from_site":@"3", @"type":@"12", @"target_id":self.targetId, @"content":self.writeComment.writeText.text ,@"is_reply":@"1",@"reply_user_id":targetUserId, @"reply_id":replyId} delegate:self];
         [self.replyCommentRequest startRequestSuccess:^(FBRequest *request, id result) {
-            NSLog(@"－－－－－－－ 提交评论：%@", result);
             CommentRow * replyCommentModel = [[CommentRow alloc] initWithDictionary:[result valueForKey:@"data"]];
             [self.commentListMarr insertObject:replyCommentModel atIndex:0];
             [self.replyId insertObject:[[result valueForKey:@"data"] valueForKey:@"_id"] atIndex:0];
@@ -120,6 +120,7 @@ static NSString *const URLSendSceneComment = @"/comment/ajax_comment";
             self.writeComment.writeText.text = @"";
             [self.writeComment.writeText resignFirstResponder];
             [SVProgressHUD showSuccessWithStatus:@"回复成功"];
+            [self requestIsLastData:self.commentTabel currentPage:self.currentpageNum withTotalPage:self.totalPageNum];
             
         } failure:^(FBRequest *request, NSError *error) {
             [SVProgressHUD showErrorWithStatus:[error localizedDescription]];

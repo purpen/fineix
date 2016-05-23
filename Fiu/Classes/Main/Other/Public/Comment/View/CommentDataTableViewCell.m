@@ -27,7 +27,7 @@
     self.userName.text = model.user.nickname;
     self.time.text = model.createdAt;
     if (model.isReply == 1) {
-        self.content.text = [NSString stringWithFormat:@"回复 %@：%@", model.replyUserName, model.content];
+        self.content.text = [NSString stringWithFormat:@"回复 %@：%@", model.replyComment.user.nickname, model.replyComment.content];
     } else {
         self.content.text = model.content;
     }

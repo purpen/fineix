@@ -28,9 +28,10 @@
     [_likeBtn setTitle:[self abouText:_likeBtn withText:model.loveCount]  forState:(UIControlStateNormal)];
     [_commentBtn setTitle:[self abouText:_commentBtn withText:model.commentCount] forState:(UIControlStateNormal)];
     self.tagetId = [NSString stringWithFormat:@"%zi", model.idField];
+    self.userId = [NSString stringWithFormat:@"%zi", model.userId];
 }
 
-#pragma mark - 设置cell的UI
+#pragma mark - 设置cell的UIs
 - (void)setCellViewUI {
     [self addSubview:self.lookBtn];
     [_lookBtn mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -108,6 +109,7 @@
 - (void)commentBtnClick {
     CommentNViewController * commentVC = [[CommentNViewController alloc] init];
     commentVC.targetId = self.tagetId;
+    commentVC.sceneUserId = self.userId;
     [self.nav pushViewController:commentVC animated:YES];
 }
 

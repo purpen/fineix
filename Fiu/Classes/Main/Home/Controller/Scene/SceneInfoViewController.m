@@ -34,6 +34,7 @@ static NSString *const URLWantBuy = @"/scene_product/sight_click_stat";
 
 @interface SceneInfoViewController () {
     NSDictionary    *   _shareDataDict;
+    NSString        *   _sceneUserId;
 }
 
 @pro_strong SceneInfoData       *   sceneInfoModel;
@@ -82,6 +83,7 @@ static NSString *const URLWantBuy = @"/scene_product/sight_click_stat";
     [self.sceneInfoRequest startRequestSuccess:^(FBRequest *request, id result) {
         //  分享出去的场景信息
         _shareDataDict = [NSDictionary dictionaryWithDictionary:[result valueForKey:@"data"]];
+        _sceneUserId = [[result valueForKey:@"data"] valueForKey:@"user_id"];
         
         self.sceneInfoModel = [[SceneInfoData alloc] initWithDictionary:[result valueForKey:@"data"]];
         if ([[[result valueForKey:@"data"] valueForKey:@"is_love"] integerValue] == 0) {
@@ -443,6 +445,7 @@ static NSString *const URLWantBuy = @"/scene_product/sight_click_stat";
     if (indexPath.section == 1) {
         CommentNViewController * commentVC = [[CommentNViewController alloc] init];
         commentVC.targetId = self.sceneId;
+        commentVC.sceneUserId = _sceneUserId;
         [self.navigationController pushViewController:commentVC animated:YES];
     } else if (indexPath.section == 2) {
         GoodsInfoViewController * goodsInfoVC = [[GoodsInfoViewController alloc] init];
