@@ -91,18 +91,10 @@ static NSInteger const CATEGORYTAG = 283;
     self.hotTagsRequest = [FBAPI getWithUrlString:URLAllTag requestDictionary:@{@"type":@"1",@"sort":@"3",@"page":@"1",@"size":@"100",@"is_hot":@"1"} delegate:self];
     [self.hotTagsRequest startRequestSuccess:^(FBRequest *request, id result) {
         NSArray * arr = [NSArray arrayWithArray:[[result valueForKey:@"data"] valueForKey:@"rows"]];
-        if (arr.count > 20) {
-            for (NSInteger idx = 0; idx < 20; ++ idx) {
-                [self.userTagMarr addObject:[[[result valueForKey:@"data"] valueForKey:@"rows"] valueForKey:@"title_cn"][idx]];
-                [self.hotTagIdList addObject:[[[result valueForKey:@"data"] valueForKey:@"rows"] valueForKey:@"_id"][idx]];
-            }
-        } else {
-            for (NSInteger idx = 0; idx < arr.count; ++ idx) {
-                [self.userTagMarr addObject:[[[result valueForKey:@"data"] valueForKey:@"rows"] valueForKey:@"title_cn"][idx]];
-                [self.hotTagIdList addObject:[[[result valueForKey:@"data"] valueForKey:@"rows"] valueForKey:@"_id"][idx]];
-            }
+        for (NSInteger idx = 0; idx < arr.count; ++ idx) {
+            [self.userTagMarr addObject:[[[result valueForKey:@"data"] valueForKey:@"rows"] valueForKey:@"title_cn"][idx]];
+            [self.hotTagIdList addObject:[[[result valueForKey:@"data"] valueForKey:@"rows"] valueForKey:@"_id"][idx]];
         }
-        
         [self setAddTagVcUI];
         
     } failure:^(FBRequest *request, NSError *error) {
@@ -333,7 +325,7 @@ static NSInteger const CATEGORYTAG = 283;
         flowLayout.minimumLineSpacing = 5.0f;
         flowLayout.sectionInset = UIEdgeInsetsMake(0, 15, 15, 15);
         
-        _usedTagView = [[UICollectionView alloc] initWithFrame:CGRectMake(0, 59, SCREEN_WIDTH, frameH) collectionViewLayout:flowLayout];
+        _usedTagView = [[UICollectionView alloc] initWithFrame:CGRectMake(0, 59, SCREEN_WIDTH, 150) collectionViewLayout:flowLayout];
         _usedTagView.delegate = self;
         _usedTagView.dataSource = self;
         _usedTagView.backgroundColor = [UIColor whiteColor];
@@ -431,7 +423,7 @@ static NSInteger const CATEGORYTAG = 283;
 #pragma makr - 中部提示视图
 - (UIView *)centerView {
     if (!_centerView) {
-        _centerView = [[UIView alloc] initWithFrame:CGRectMake(0, frameH + 80, SCREEN_WIDTH, 45)];
+        _centerView = [[UIView alloc] initWithFrame:CGRectMake(0, 230, SCREEN_WIDTH, 45)];
         _centerView.backgroundColor = [UIColor colorWithHexString:grayLineColor];
         
         UILabel * allLab = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 23)];
@@ -459,7 +451,7 @@ static NSInteger const CATEGORYTAG = 283;
 #pragma mark - 全部标签列表
 - (UITableView *)tagListTable {
     if (!_tagListTable) {
-        _tagListTable = [[UITableView alloc] initWithFrame:CGRectMake(0, frameH + 140, SCREEN_WIDTH, self.categoryList.count * 250) style:(UITableViewStyleGrouped)];
+        _tagListTable = [[UITableView alloc] initWithFrame:CGRectMake(0, 290, SCREEN_WIDTH, self.categoryList.count * 250) style:(UITableViewStyleGrouped)];
         _tagListTable.delegate = self;
         _tagListTable.dataSource = self;
         _tagListTable.separatorStyle = UITableViewCellSeparatorStyleNone;
@@ -572,7 +564,7 @@ static NSInteger const CATEGORYTAG = 283;
             [self.tagListTable reloadData];
             
             [UIView animateWithDuration:.2 animations:^{
-                self.tagListTable.frame = CGRectMake(0, frameH + 140, SCREEN_WIDTH, (self.categoryList.count * 220));
+                self.tagListTable.frame = CGRectMake(0, 290, SCREEN_WIDTH, (self.categoryList.count * 220));
                 self.rollView.contentSize = CGSizeMake(0, self.categoryList.count * 180 + 380);
             }];
             
@@ -582,7 +574,7 @@ static NSInteger const CATEGORYTAG = 283;
             [self.tagListTable reloadData];
             
             [UIView animateWithDuration:.2 animations:^{
-                self.tagListTable.frame = CGRectMake(0, frameH + 140, SCREEN_WIDTH, (self.categoryList.count * 220) + cell.cellHeight);
+                self.tagListTable.frame = CGRectMake(0, 290, SCREEN_WIDTH, (self.categoryList.count * 220) + cell.cellHeight);
                 self.rollView.contentSize = CGSizeMake(0, self.categoryList.count * 180 + 300 + cell.cellHeight);
             }];
         }

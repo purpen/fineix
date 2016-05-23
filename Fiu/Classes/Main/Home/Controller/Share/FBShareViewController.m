@@ -8,6 +8,11 @@
 
 #import "FBShareViewController.h"
 #import "ShareStyleCollectionViewCell.h"
+#import "UMSocial.h"
+#import "WXApi.h"
+#import "WeiboSDK.h"
+#import <TencentOpenAPI/QQApiInterface.h>
+#import <SVProgressHUD/SVProgressHUD.h>
 
 @interface FBShareViewController ()
 
@@ -22,17 +27,38 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.view.backgroundColor = [UIColor whiteColor];
+    self.view.backgroundColor = [UIColor blackColor];
     
     [self setShareVcUI];
-    
+}
+
+- (UIImage*)shareImage {
+    UIGraphicsBeginImageContext(CGSizeMake(self.shareView.bounds.size.width, self.shareView.bounds.size.height));
+    [self.shareView.layer renderInContext:UIGraphicsGetCurrentContext()];
+    UIImage * viewImage = UIGraphicsGetImageFromCurrentImageContext();
+    UIGraphicsEndImageContext();
+    return viewImage;
 }
 
 #pragma mark - 设置界面UI
 - (void)setShareVcUI {
+    [self.view addSubview:self.shareView];
+    CGAffineTransform shareViewTrans = CGAffineTransformScale(self.shareView.transform, 0.76, 0.76);
+    [self.shareView setTransform:shareViewTrans];
+    self.shareView.center = CGPointMake(SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2.24);
+    
     [self.view addSubview:self.topView];
     
     [self.view addSubview:self.styleView];
+}
+
+#pragma mark - 分享场景信息视图
+- (ShareStyleView *)shareView {
+    if (!_shareView) {
+        _shareView = [[ShareStyleView alloc] initWithFrame:CGRectMake(0, 44, SCREEN_WIDTH, SCREEN_HEIGHT)];
+        [_shareView setShareSceneData:self.dataDict];
+    }
+    return _shareView;
 }
 
 #pragma mark - 分享样式视图
@@ -106,9 +132,31 @@
 }
 
 - (void)shareItemSelected {
-    NSLog(@"＝＝＝＝＝＝＝分享");
+    NSLog(@"＝＝＝＝＝＝＝分享  %@", [self shareImage]);
+    ShareViewController * shareVC = [[ShareViewController alloc] init];
+    shareVC.modalPresentationStyle = UIModalPresentationOverCurrentContext;
+    shareVC.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;
+    [shareVC.wechatBtn addTarget:self action:@selector(wechatShareBtnAction) forControlEvents:(UIControlEventTouchUpInside)];
+    [shareVC.friendBtn addTarget:self action:@selector(timelineShareBtnAction) forControlEvents:(UIControlEventTouchUpInside)];
+    [self presentViewController:shareVC animated:YES completion:nil];
 }
 
+-(void)wechatShareBtnAction {
+    [UMSocialData defaultData].extConfig.wxMessageType = UMSocialWXMessageTypeImage;
+    [[UMSocialDataService defaultDataService]  postSNSWithTypes:@[UMShareToWechatSession] content:@"" image:[self shareImage] location:nil urlResource:nil presentedController:self completion:^(UMSocialResponseEntity *response){
+        if (response.responseCode == UMSResponseCodeSuccess) {
+            [SVProgressHUD showSuccessWithStatus:@"分享成功！"];
+        }
+    }];
+}
 
+-(void)timelineShareBtnAction {
+    [UMSocialData defaultData].extConfig.wxMessageType = UMSocialWXMessageTypeImage;
+    [[UMSocialDataService defaultDataService]  postSNSWithTypes:@[UMShareToWechatTimeline] content:@"" image:[self shareImage] location:nil urlResource:nil presentedController:self completion:^(UMSocialResponseEntity *response){
+        if (response.responseCode == UMSResponseCodeSuccess) {
+            [SVProgressHUD showSuccessWithStatus:@"分享成功！"];
+        }
+    }];
+}
 
 @end

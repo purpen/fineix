@@ -57,7 +57,7 @@
 - (UILabel *)goodsPrice {
     if (!_goodsPrice) {
         _goodsPrice = [[UILabel alloc] init];
-        _goodsPrice.textColor = [UIColor colorWithHexString:fiuRedColor];
+        _goodsPrice.textColor = [UIColor colorWithHexString:fineixColor];
         _goodsPrice.font = [UIFont systemFontOfSize:Font_GoodsPrice];
         
     }

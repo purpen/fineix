@@ -19,6 +19,7 @@
 @pro_strong UIButton            *   backBtn;            //  返回按钮
 @pro_strong UIButton            *   doneBtn;            //  完成发布按钮
 @pro_strong UIButton            *   cancelDoneBtn;      //  取消创建
+@pro_strong UIButton            *   closeBtn;           //  关闭
 @pro_strong UIButton            *   nextBtn;            //  继续按钮
 @pro_strong UIButton            *   cropBack;           //  "裁剪"返回
 @pro_strong UILabel             *   line;               //  视图分割线
@@ -52,6 +53,11 @@
  *  发布按钮
  */
 - (void)addDoneButton;
+
+/*
+ *  发布按钮
+ */
+- (void)addCloseButton;
 
 /*
  *  视图的分割线

@@ -65,7 +65,7 @@
         [_sceneImage addSubview:self.titleLab];
         [_titleLab mas_makeConstraints:^(MASConstraintMaker *make) {
             make.height.mas_equalTo(@15);
-            make.bottom.equalTo(_locationIcon.mas_top).with.offset(-10);
+            make.bottom.equalTo(_locationIcon.mas_top).with.offset(-5);
             make.left.equalTo(_sceneImage.mas_left).with.offset(10);
             make.right.equalTo(_sceneImage.mas_right).with.offset(-10);
         }];

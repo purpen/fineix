@@ -32,7 +32,9 @@ static NSString *const URLCancelLike = @"/favorite/ajax_cancel_sight_love";
 static NSString *const URLSceneGoods = @"/scene_product/getlist";
 static NSString *const URLWantBuy = @"/scene_product/sight_click_stat";
 
-@interface SceneInfoViewController ()
+@interface SceneInfoViewController () {
+    NSDictionary    *   _shareDataDict;
+}
 
 @pro_strong SceneInfoData       *   sceneInfoModel;
 @pro_strong NSArray             *   commentArr;
@@ -78,6 +80,9 @@ static NSString *const URLWantBuy = @"/scene_product/sight_click_stat";
     [SVProgressHUD show];
     self.sceneInfoRequest = [FBAPI getWithUrlString:URLSceneInfo requestDictionary:@{@"id":self.sceneId} delegate:self];
     [self.sceneInfoRequest startRequestSuccess:^(FBRequest *request, id result) {
+        //  分享出去的场景信息
+        _shareDataDict = [NSDictionary dictionaryWithDictionary:[result valueForKey:@"data"]];
+        
         self.sceneInfoModel = [[SceneInfoData alloc] initWithDictionary:[result valueForKey:@"data"]];
         if ([[[result valueForKey:@"data"] valueForKey:@"is_love"] integerValue] == 0) {
             self.likeScene.likeBtn.selected = NO;
@@ -524,6 +529,7 @@ static NSString *const URLWantBuy = @"/scene_product/sight_click_stat";
 
 - (void)rightBarItemSelected {
     FBShareViewController * shareVC = [[FBShareViewController alloc] init];
+    shareVC.dataDict = _shareDataDict;
     [self presentViewController:shareVC animated:YES completion:nil];
 }
 

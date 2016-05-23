@@ -51,7 +51,12 @@
     } else {
         self.weiBoView.hidden = YES;
     }
+    
+    [self.cancelBtn addTarget:self action:@selector(cancelBtnClick) forControlEvents:(UIControlEventTouchUpInside)];
+}
 
+- (void)cancelBtnClick {
+    [self dismissViewControllerAnimated:YES completion:nil];
 }
 
 - (void)didReceiveMemoryWarning {

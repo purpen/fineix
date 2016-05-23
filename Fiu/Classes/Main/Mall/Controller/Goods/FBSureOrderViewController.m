@@ -293,6 +293,8 @@ static NSString *const URLCarGoPay = @"/shopping/checkout";
         cell.titleLab.text = NSLocalizedString(@"OrderBonus", nil);
         if (_isUserBouns == YES) {
             cell.textLab.text = [NSString stringWithFormat:@"%@%zi", NSLocalizedString(@"userBouns", nil), _bounsPrice];
+            cell.textLab.font = [UIFont systemFontOfSize:13];
+            cell.textLab.textColor = [UIColor colorWithHexString:fineixColor];
         }
         return cell;
     }

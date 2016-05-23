@@ -9,6 +9,7 @@
 #import "ReleaseViewController.h"
 #import "CreateViewController.h"
 #import "HomeViewController.h"
+#import "LookSceneViewController.h"
 
 static NSString *const URLReleaseScenen = @"/scene_sight/save";
 static NSString *const URLReleaseFiuScenen = @"/scene_scene/save";
@@ -79,11 +80,11 @@ static NSString *const URLReleaseFiuScenen = @"/scene_scene/save";
         self.releaseSceneRequest = [FBAPI postWithUrlString:URLReleaseScenen requestDictionary:paramDict delegate:self];
         
         [self.releaseSceneRequest startRequestSuccess:^(FBRequest *request, id result) {
-            [SVProgressHUD showSuccessWithStatus:@"您的场景发布成功，品味又升级啦"];
-            //  to #import "HomeViewController.h"
-            [[NSNotificationCenter defaultCenter] postNotificationName:@"refreshHomeList" object:nil];
-            [self dismissViewControllerAnimated:YES completion:nil];
-            
+            NSString * sceneId = [NSString stringWithFormat:@"%@",[[result valueForKey:@"data"] valueForKey:@"id"]];
+            LookSceneViewController * sceneInfoVC = [[LookSceneViewController alloc] init];
+            sceneInfoVC.sceneId = sceneId;
+            [self.navigationController pushViewController:sceneInfoVC animated:YES];
+        
         } failure:^(FBRequest *request, NSError *error) {
             [SVProgressHUD showErrorWithStatus:@"您的场景发布失败，刷新试一下吧"];
         }];
@@ -113,6 +114,7 @@ static NSString *const URLReleaseFiuScenen = @"/scene_scene/save";
         self.releaseSceneRequest = [FBAPI postWithUrlString:URLReleaseFiuScenen requestDictionary:paramDict delegate:self];
         
         [self.releaseSceneRequest startRequestSuccess:^(FBRequest *request, id result) {
+//            NSString * fiuSceneId = [NSString stringWithFormat:@"%@",[[result valueForKey:@"data"] valueForKey:@"id"]];
             //  to #import "AllSceneViewController.h"
             [[NSNotificationCenter defaultCenter] postNotificationName:@"refreshAllFSceneList" object:nil];
             [self dismissViewControllerAnimated:YES completion:nil];

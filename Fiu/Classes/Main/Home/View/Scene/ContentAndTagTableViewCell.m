@@ -10,8 +10,6 @@
 #import "SearchViewController.h"
 #import "ChooseTagsCollectionViewCell.h"
 
-const static NSInteger buttonTag = 421;
-
 @implementation ContentAndTagTableViewCell
 
 - (instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier {

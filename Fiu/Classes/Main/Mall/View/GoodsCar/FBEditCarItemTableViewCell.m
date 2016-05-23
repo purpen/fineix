@@ -100,7 +100,6 @@
     [_goodsNum mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(_subNumBtn.mas_bottom).with.offset(10);
         make.left.equalTo(_goodsColor.mas_right).with.offset(5);
-        
     }];
 }
 

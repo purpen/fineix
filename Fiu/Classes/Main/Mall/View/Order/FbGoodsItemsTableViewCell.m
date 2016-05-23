@@ -26,7 +26,18 @@
             make.top.equalTo(_goodsImg.mas_top).with.offset(0);
             make.left.equalTo(_goodsImg.mas_right).with.offset(15);
             make.right.equalTo(self.mas_right).with.offset(-10);
-            
+        }];
+        
+        [self addSubview:self.goodsColor];
+        [_goodsColor mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.top.equalTo(_goodsTitle.mas_bottom).with.offset(5);
+            make.left.equalTo(_goodsImg.mas_right).with.offset(15);
+        }];
+        
+        [self addSubview:self.goodsNum];
+        [_goodsNum mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.top.equalTo(_goodsColor.mas_top).with.offset(0);
+            make.left.equalTo(_goodsColor.mas_right).with.offset(5);
         }];
         
         [self addSubview:self.goodsPrice];
@@ -34,20 +45,6 @@
             make.size.mas_equalTo(CGSizeMake(100, 15));
             make.bottom.equalTo(_goodsImg.mas_bottom).with.offset(0);
             make.left.equalTo(_goodsImg.mas_right).with.offset(15);
-            
-        }];
-        
-        [self addSubview:self.goodsColor];
-        [_goodsColor mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.bottom.equalTo(_goodsPrice.mas_top).with.offset(-10);
-            make.left.equalTo(_goodsImg.mas_right).with.offset(15);
-            
-        }];
-        
-        [self addSubview:self.goodsNum];
-        [_goodsNum mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.bottom.equalTo(_goodsPrice.mas_top).with.offset(-10);
-            make.left.equalTo(_goodsColor.mas_right).with.offset(5);
             
         }];
         

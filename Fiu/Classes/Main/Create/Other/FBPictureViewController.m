@@ -121,6 +121,20 @@
     [self.navigationController popViewControllerAnimated:YES];
 }
 
+#pragma mark - 关闭
+- (UIButton *)closeBtn {
+    if (!_closeBtn) {
+        _closeBtn = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 44, 44)];
+        [_closeBtn setImage:[UIImage imageNamed:@"icon_cancel_black"] forState:(UIControlStateNormal)];
+        [_closeBtn addTarget:self action:@selector(closeBtnClick) forControlEvents:(UIControlEventTouchUpInside)];
+    }
+    return _closeBtn;
+}
+
+- (void)closeBtnClick {
+    [self dismissViewControllerAnimated:YES completion:nil];
+}
+
 #pragma mark - 设置取消创建场景按钮
 - (UIButton *)cancelBtn {
     if (!_cancelBtn) {

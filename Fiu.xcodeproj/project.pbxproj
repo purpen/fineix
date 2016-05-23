@@ -348,7 +348,6 @@
 		D86B7B7A1CEB27C30019AB79 /* FBOrderOtherTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D86B7B791CEB27C30019AB79 /* FBOrderOtherTableViewCell.m */; };
 		D86B7B801CEB2F610019AB79 /* FBOrderTimeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D86B7B7F1CEB2F610019AB79 /* FBOrderTimeViewController.m */; };
 		D86B7B831CEB2F770019AB79 /* FBOrderSendWayViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D86B7B821CEB2F770019AB79 /* FBOrderSendWayViewController.m */; };
-		D86B7BDE1CEB851F0019AB79 /* FBCarGoodsListTabelViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D86B7BDD1CEB851F0019AB79 /* FBCarGoodsListTabelViewCell.m */; };
 		D86B7BE21CEC3C5A0019AB79 /* CarGoodsModelItem.m in Sources */ = {isa = PBXBuildFile; fileRef = D86B7BE11CEC3C5A0019AB79 /* CarGoodsModelItem.m */; };
 		D86B7BE51CEC3F880019AB79 /* FBCarItemsTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D86B7BE41CEC3F880019AB79 /* FBCarItemsTableViewCell.m */; };
 		D86B7BE81CEC452A0019AB79 /* FBEditCarItemTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D86B7BE71CEC452A0019AB79 /* FBEditCarItemTableViewCell.m */; };
@@ -478,6 +477,9 @@
 		D8AEC7521CA8E3AE00A868B6 /* libiconv.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 1F0EE6A21C9FA43C000631F0 /* libiconv.tbd */; };
 		D8AEC7531CA8E3BB00A868B6 /* libstdc++.6.0.9.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 280045201C805CD7005F5C2E /* libstdc++.6.0.9.tbd */; };
 		D8AEC7541CA8E3C700A868B6 /* libsqlite3.0.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 2800451C1C805CBD005F5C2E /* libsqlite3.0.tbd */; };
+		D8B795111CF1A9E90075D985 /* LookSceneViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D8B795101CF1A9E90075D985 /* LookSceneViewController.m */; };
+		D8B795151CF1B5E70075D985 /* UIImage+Text.m in Sources */ = {isa = PBXBuildFile; fileRef = D8B795141CF1B5E70075D985 /* UIImage+Text.m */; };
+		D8B795181CF1BA6D0075D985 /* ShareStyleView.m in Sources */ = {isa = PBXBuildFile; fileRef = D8B795171CF1BA6D0075D985 /* ShareStyleView.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -1076,8 +1078,6 @@
 		D86B7B7F1CEB2F610019AB79 /* FBOrderTimeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FBOrderTimeViewController.m; sourceTree = "<group>"; };
 		D86B7B811CEB2F770019AB79 /* FBOrderSendWayViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FBOrderSendWayViewController.h; sourceTree = "<group>"; };
 		D86B7B821CEB2F770019AB79 /* FBOrderSendWayViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FBOrderSendWayViewController.m; sourceTree = "<group>"; };
-		D86B7BDC1CEB851F0019AB79 /* FBCarGoodsListTabelViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FBCarGoodsListTabelViewCell.h; sourceTree = "<group>"; };
-		D86B7BDD1CEB851F0019AB79 /* FBCarGoodsListTabelViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FBCarGoodsListTabelViewCell.m; sourceTree = "<group>"; };
 		D86B7BE01CEC3C5A0019AB79 /* CarGoodsModelItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CarGoodsModelItem.h; sourceTree = "<group>"; };
 		D86B7BE11CEC3C5A0019AB79 /* CarGoodsModelItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CarGoodsModelItem.m; sourceTree = "<group>"; };
 		D86B7BE31CEC3F880019AB79 /* FBCarItemsTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FBCarItemsTableViewCell.h; sourceTree = "<group>"; };
@@ -1327,6 +1327,12 @@
 		D8A9AEAC1CE9D0A200A9FCFB /* FBGoodsCommentViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FBGoodsCommentViewController.m; sourceTree = "<group>"; };
 		D8A9AEAE1CE9D46200A9FCFB /* FBBuyGoodsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FBBuyGoodsViewController.h; sourceTree = "<group>"; };
 		D8A9AEAF1CE9D46200A9FCFB /* FBBuyGoodsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FBBuyGoodsViewController.m; sourceTree = "<group>"; };
+		D8B7950F1CF1A9E90075D985 /* LookSceneViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LookSceneViewController.h; sourceTree = "<group>"; };
+		D8B795101CF1A9E90075D985 /* LookSceneViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LookSceneViewController.m; sourceTree = "<group>"; };
+		D8B795131CF1B5E70075D985 /* UIImage+Text.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+Text.h"; sourceTree = "<group>"; };
+		D8B795141CF1B5E70075D985 /* UIImage+Text.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+Text.m"; sourceTree = "<group>"; };
+		D8B795161CF1BA6D0075D985 /* ShareStyleView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShareStyleView.h; sourceTree = "<group>"; };
+		D8B795171CF1BA6D0075D985 /* ShareStyleView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ShareStyleView.m; sourceTree = "<group>"; };
 		E0438B4B24E3F747F761AF4C /* Pods-Fiu.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Fiu.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Fiu/Pods-Fiu.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -2456,6 +2462,7 @@
 		D812805F1CAA8532007CF08B /* Home */ = {
 			isa = PBXGroup;
 			children = (
+				D8B795121CF1B5D10075D985 /* Other */,
 				D83639401CCDBD3B00CC4AC0 /* Model */,
 				D89B5A881CB4E45B00DB9710 /* View */,
 				D81280601CAA8532007CF08B /* Controller */,
@@ -2886,8 +2893,6 @@
 			children = (
 				D8363A501CD8814600CC4AC0 /* BuyCarDefault.h */,
 				D8363A511CD8814600CC4AC0 /* BuyCarDefault.m */,
-				D86B7BDC1CEB851F0019AB79 /* FBCarGoodsListTabelViewCell.h */,
-				D86B7BDD1CEB851F0019AB79 /* FBCarGoodsListTabelViewCell.m */,
 				D86B7BE31CEC3F880019AB79 /* FBCarItemsTableViewCell.h */,
 				D86B7BE41CEC3F880019AB79 /* FBCarItemsTableViewCell.m */,
 				D86B7BE61CEC452A0019AB79 /* FBEditCarItemTableViewCell.h */,
@@ -3100,6 +3105,8 @@
 			children = (
 				D86B7C301CEEF4AA0019AB79 /* ShareStyleCollectionViewCell.h */,
 				D86B7C311CEEF4AA0019AB79 /* ShareStyleCollectionViewCell.m */,
+				D8B795161CF1BA6D0075D985 /* ShareStyleView.h */,
+				D8B795171CF1BA6D0075D985 /* ShareStyleView.m */,
 			);
 			path = Share;
 			sourceTree = "<group>";
@@ -3493,6 +3500,8 @@
 				D8A9ADB01CD9E2E700A9FCFB /* FiltersViewController.m */,
 				D8A9ADB51CD9E2E700A9FCFB /* ReleaseViewController.h */,
 				D8A9ADB61CD9E2E700A9FCFB /* ReleaseViewController.m */,
+				D8B7950F1CF1A9E90075D985 /* LookSceneViewController.h */,
+				D8B795101CF1A9E90075D985 /* LookSceneViewController.m */,
 			);
 			path = Create;
 			sourceTree = "<group>";
@@ -3627,6 +3636,15 @@
 				D8A9AE781CE74A7D00A9FCFB /* FiuPeopleUser.m */,
 			);
 			path = FiuPeople;
+			sourceTree = "<group>";
+		};
+		D8B795121CF1B5D10075D985 /* Other */ = {
+			isa = PBXGroup;
+			children = (
+				D8B795131CF1B5E70075D985 /* UIImage+Text.h */,
+				D8B795141CF1B5E70075D985 /* UIImage+Text.m */,
+			);
+			path = Other;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -3915,6 +3933,7 @@
 				1FC678211CDAFEF400535162 /* DeliveryAddressModel.m in Sources */,
 				D8A9AE5A1CE4603300A9FCFB /* MarkGoodsData.m in Sources */,
 				D8A9ADC91CD9E34600A9FCFB /* FBFootView.m in Sources */,
+				D8B795181CF1BA6D0075D985 /* ShareStyleView.m in Sources */,
 				D8A9ACAF1CD89E0000A9FCFB /* RollImage.m in Sources */,
 				1F3905911CEDB36D00F95382 /* IntegralRulesView.m in Sources */,
 				D8A9ADBA1CD9E2E700A9FCFB /* MarkGoodsViewController.m in Sources */,
@@ -4034,7 +4053,6 @@
 				D8363A2E1CD8809400CC4AC0 /* GoodsRow.m in Sources */,
 				D8A9AE8C1CE8D99E00A9FCFB /* GoodsSceneCollectionViewCell.m in Sources */,
 				D8A9ACCF1CD8A46900A9FCFB /* SuFiuScenrView.m in Sources */,
-				D86B7BDE1CEB851F0019AB79 /* FBCarGoodsListTabelViewCell.m in Sources */,
 				D8A9ACDF1CD8A49100A9FCFB /* AllSceneViewController.m in Sources */,
 				D8A9ACB31CD89E0000A9FCFB /* FiuSceneData.m in Sources */,
 				D8A9AEA01CE9B76000A9FCFB /* CommentModel.m in Sources */,
@@ -4088,8 +4106,10 @@
 				D803604D1CBF376B001920F9 /* NSNumber+UserModel.m in Sources */,
 				1FE702151CEC56CD000BA84A /* CertIdView.m in Sources */,
 				1F07A6441CC77AB800CF225F /* BackgroundCollectionViewCell.m in Sources */,
+				D8B795111CF1A9E90075D985 /* LookSceneViewController.m in Sources */,
 				D81281211CAA8532007CF08B /* FBLoadPhoto.m in Sources */,
 				1F35F03B1CD1ADAB0000DB95 /* CityModel.m in Sources */,
+				D8B795151CF1B5E70075D985 /* UIImage+Text.m in Sources */,
 				D8A9ACD51CD8A46900A9FCFB /* AllSceneCollectionViewCell.m in Sources */,
 				D8A9ADF11CDAF41200A9FCFB /* ChildTags.m in Sources */,
 				D8035FCF1CBD1021001920F9 /* FBTabBar.m in Sources */,

@@ -78,7 +78,7 @@
         CGFloat btnX = [[self.tagDataMarr[idx] valueForKey:@"x"] floatValue];
         CGFloat btnY = [[self.tagDataMarr[idx] valueForKey:@"y"] floatValue];
         NSString * title = [self.tagDataMarr[idx] valueForKey:@"title"];
-        NSString * price = [NSString stringWithFormat:@"￥%@", [self.tagDataMarr[idx] valueForKey:@"price"]];
+        NSString * price = [NSString stringWithFormat:@"￥%.2f", [[self.tagDataMarr[idx] valueForKey:@"price"] floatValue]];
         
         UserGoodsTag * userTag = [[UserGoodsTag alloc] initWithFrame:CGRectMake(btnX * SCREEN_WIDTH, btnY * SCREEN_HEIGHT, 175, 32)];
         userTag.dele.hidden = YES;

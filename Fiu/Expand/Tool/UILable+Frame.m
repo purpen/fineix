@@ -21,7 +21,6 @@
                       NSStringDrawingUsesFontLeading
                                           attributes:attribute
                                              context:nil].size;
-    
     return retSize;
 }
 

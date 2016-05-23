@@ -26,9 +26,4 @@
 @pro_strong NSString                *   replyCommentId; //  被回复的评论id
 @pro_strong UILabel                 *   promptLab;
 
-/**
- *  0:默认评论场景 ／ 1:回复评论
- */
-@pro_assign NSInteger                   isReply;        //  是否回复评论
-
 @end
