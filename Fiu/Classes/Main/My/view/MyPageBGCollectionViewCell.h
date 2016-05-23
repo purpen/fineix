@@ -20,6 +20,7 @@
 @property(nonatomic,strong) UIButton *certificationBtn;//认证按钮
 @property(nonatomic,strong) UIView *headView;
 @property(nonatomic,strong) UIImageView *idImageView;
+@property(nonatomic,strong) UIView *userView;//用户的一些信息
 
 - (void)setUI;
 

@@ -21,6 +21,7 @@
 @property(nonatomic,strong) UIButton *editBtn;
 @property(nonatomic,strong) UIView *headView;
 @property(nonatomic,strong) UIImageView *idImageView;
+@property(nonatomic,strong) UIView *userView;
 
 - (void)setUI;
 

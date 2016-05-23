@@ -17,67 +17,76 @@
 
 -(instancetype)initWithFrame:(CGRect)frame{
     if (self = [super initWithFrame:frame]) {
-                [self.contentView addSubview:self.bgImageView];
-                [_bgImageView mas_makeConstraints:^(MASConstraintMaker *make) {
-                    make.size.mas_equalTo(CGSizeMake(SCREEN_WIDTH, 344/667.0*SCREEN_HEIGHT));
-                    make.top.equalTo(self.mas_top).with.offset(0);
-                    make.left.equalTo(self.mas_left).with.offset(0);
-                }];
         
-        [self.contentView addSubview:self.focusOnBtn];
+        [self.contentView addSubview:self.bgImageView];
+        [_bgImageView mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.size.mas_equalTo(CGSizeMake(SCREEN_WIDTH, 344/667.0*SCREEN_HEIGHT));
+            make.top.equalTo(self.mas_top).with.offset(0);
+            make.left.equalTo(self.mas_left).with.offset(0);
+        }];
+        
+    }
+    return self;
+}
+
+
+-(UIView *)userView{
+    if (!_userView) {
+        _userView = [[UIView alloc] init];
+        
+        [_userView addSubview:self.focusOnBtn];
         [_focusOnBtn mas_makeConstraints:^(MASConstraintMaker *make) {
             make.size.mas_equalTo(CGSizeMake(138*0.5/667.0*SCREEN_HEIGHT, 50*0.5/667.0*SCREEN_HEIGHT));
-            make.left.mas_equalTo(self.mas_left).with.offset(113/667.0*SCREEN_HEIGHT);
-            make.bottom.mas_equalTo(self.mas_bottom).with.offset(-10/667.0*SCREEN_HEIGHT);
+            make.left.mas_equalTo(_userView.mas_left).with.offset(113/667.0*SCREEN_HEIGHT);
+            make.bottom.mas_equalTo(_userView.mas_bottom).with.offset(-10/667.0*SCREEN_HEIGHT);
         }];
         
-        [self.contentView addSubview:self.directMessages];
+        [_userView addSubview:self.directMessages];
         [_directMessages mas_makeConstraints:^(MASConstraintMaker *make) {
             make.size.mas_equalTo(CGSizeMake(138*0.5/667.0*SCREEN_HEIGHT, 50*0.5/667.0*SCREEN_HEIGHT));
-            make.right.mas_equalTo(self.mas_right).with.offset(-113/667.0*SCREEN_HEIGHT);
-            make.bottom.mas_equalTo(self.mas_bottom).with.offset(-10/667.0*SCREEN_HEIGHT);
+            make.right.mas_equalTo(_userView.mas_right).with.offset(-113/667.0*SCREEN_HEIGHT);
+            make.bottom.mas_equalTo(_userView.mas_bottom).with.offset(-10/667.0*SCREEN_HEIGHT);
         }];
         
-        [self.contentView addSubview:self.userLevelLabel];
+        [_userView addSubview:self.userLevelLabel];
         [_userLevelLabel mas_makeConstraints:^(MASConstraintMaker *make) {
             make.size.mas_equalTo(CGSizeMake(200, 12));
-            make.centerX.mas_equalTo(self.mas_centerX);
-            make.bottom.mas_equalTo(self.mas_bottom).with.offset(-44/667.0*SCREEN_HEIGHT);
+            make.centerX.mas_equalTo(_userView.mas_centerX);
+            make.bottom.mas_equalTo(_userView.mas_bottom).with.offset(-44/667.0*SCREEN_HEIGHT);
         }];
         
         
-        [self.contentView addSubview:self.userProfile];
+        [_userView addSubview:self.userProfile];
         [_userProfile mas_makeConstraints:^(MASConstraintMaker *make) {
             make.size.mas_equalTo(CGSizeMake(SCREEN_WIDTH, 12));
-            make.centerX.mas_equalTo(self.mas_centerX);
+            make.centerX.mas_equalTo(_userView.mas_centerX);
             make.bottom.mas_equalTo(_userLevelLabel.mas_top).with.offset(-5/667.0*SCREEN_HEIGHT);
         }];
         
         
-        [self.contentView addSubview:self.nickName];
+        [_userView addSubview:self.nickName];
         [_nickName mas_makeConstraints:^(MASConstraintMaker *make) {
             make.size.mas_equalTo(CGSizeMake(self.frame.size.width, 19));
-            make.centerX.mas_equalTo(self.mas_centerX);
+            make.centerX.mas_equalTo(_userView.mas_centerX);
             make.bottom.mas_equalTo(_userProfile.mas_top).with.offset(-9/667.0*SCREEN_HEIGHT);
         }];
         
         
-        [self.contentView addSubview:self.headView];
+        [_userView addSubview:self.headView];
         [_headView mas_makeConstraints:^(MASConstraintMaker *make) {
             make.size.mas_equalTo(CGSizeMake(84/667.0*SCREEN_HEIGHT, 84/667.0*SCREEN_HEIGHT));
-            make.centerX.mas_equalTo(self.mas_centerX);
+            make.centerX.mas_equalTo(_userView.mas_centerX);
             make.bottom.mas_equalTo(_nickName.mas_top).with.offset(-8/667.0*SCREEN_HEIGHT);
         }];
         
-        [self.contentView addSubview:self.idImageView];
+        [_userView addSubview:self.idImageView];
         [_idImageView mas_makeConstraints:^(MASConstraintMaker *make) {
             make.size.mas_equalTo(CGSizeMake(28, 12));
             make.centerY.mas_equalTo(_userLevelLabel.mas_centerY);
             make.left.mas_equalTo(_userLevelLabel.mas_right).with.offset(3);
         }];
-
     }
-    return self;
+    return _userView;
 }
 
 -(UIView *)headView{
@@ -141,9 +150,7 @@
         _bgImageView = [[UIImageView alloc] init];
         //_bgImageView.contentMode = UIViewContentModeScaleAspectFill;
         _bgImageView.userInteractionEnabled = YES;
-        
-        _bgImageView = [[UIImageView alloc] init];
-        _bgImageView.userInteractionEnabled = YES;
+    
         //  添加渐变层
         CAGradientLayer * shadow = [CAGradientLayer layer];
         shadow.startPoint = CGPointMake(0, 0);
@@ -152,6 +159,13 @@
                           (__bridge id)[UIColor blackColor].CGColor];
         shadow.locations = @[@(0.5f), @(1.5f)];
         shadow.frame = _bgImageView.bounds;
+        
+        [_bgImageView addSubview:self.userView];
+        [_userView mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.size.mas_equalTo(self.frame.size);
+            make.left.mas_equalTo(_bgImageView.mas_left).with.offset(0);
+            make.top.mas_equalTo(_bgImageView.mas_top).with.offset(0);
+        }];
 //        
 //        [_bgImageView addSubview:self.backBtn];
 //        [_backBtn mas_makeConstraints:^(MASConstraintMaker *make) {

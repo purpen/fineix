@@ -95,6 +95,9 @@
         ABRecordRef person = CFArrayGetValueAtIndex(allPeople, i);
         //获取个人名字
         CFTypeRef abName = ABRecordCopyValue(person, kABPersonFirstNameProperty);
+//        if (!abName) {
+//            break;
+//        }
         CFTypeRef abLastName = ABRecordCopyValue(person, kABPersonLastNameProperty);
         CFStringRef abFullName = ABRecordCopyCompositeName(person);
         NSString *nameString = (__bridge NSString *)abName;

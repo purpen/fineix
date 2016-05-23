@@ -21,6 +21,7 @@
 @property(nonatomic,strong) UIButton *directMessages;//私信按钮
 @property(nonatomic,strong) UIView *headView;
 @property(nonatomic,strong) UIImageView *idImageView;
+@property(nonatomic,strong) UIView *userView;
 
 -(void)setUIWithModel:(UserInfo*)model;
 @end
