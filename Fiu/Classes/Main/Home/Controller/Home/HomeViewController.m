@@ -218,15 +218,11 @@ static NSString *const URLSceneList = @"/scene_sight/";
 
 #pragma mark - 应用第一次打开，加载操作指示图
 - (void)setFirstAppStart {
-    if(![[NSUserDefaults standardUserDefaults] boolForKey:@"firstLaunch"]){
-        [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"firstLaunch"];
-        NSLog(@"第一次启动");
-        [self setGuideImgForVC:@"Guide_index"];
-    }else{
-        NSLog(@"已经不是第一次启动了");
+    if(![USERDEFAULT boolForKey:@"homeLaunch"]){
+        [USERDEFAULT setBool:YES forKey:@"homeLaunch"];
+        [self setHomeGuideImgForVC];
     }
 }
-
 
 - (NSMutableArray *)sceneListMarr {
     if (!_sceneListMarr) {

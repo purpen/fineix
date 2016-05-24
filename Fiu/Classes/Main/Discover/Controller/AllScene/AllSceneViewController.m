@@ -26,6 +26,7 @@ static NSString *const URLAllFiuSceneList = @"/scene_scene/";
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     
+    [self setFirstAppStart];
     [self setNavigationViewUI];
     
     self.currentpageNum = 0;
@@ -169,6 +170,14 @@ static NSString *const URLAllFiuSceneList = @"/scene_scene/";
 - (void)viewWillDisappear:(BOOL)animated {
     [super viewWillDisappear:animated];
     [SVProgressHUD dismiss];
+}
+
+#pragma mark - 应用第一次打开，加载操作指示图
+- (void)setFirstAppStart {
+    if(![USERDEFAULT boolForKey:@"allSceneLaunch"]){
+        [USERDEFAULT setBool:YES forKey:@"allSceneLaunch"];
+        [self setGuideImgForVC:@"Guide_SceneList"];
+    }
 }
 
 #pragma mark -

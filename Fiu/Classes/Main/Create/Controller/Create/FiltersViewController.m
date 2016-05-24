@@ -42,6 +42,7 @@ static NSString *const URLUserAddGoods = @"/scene_product/add";
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
 
+    [self setFirstAppStart];
 }
 
 - (void)viewDidLoad {
@@ -53,6 +54,14 @@ static NSString *const URLUserAddGoods = @"/scene_product/add";
     [self setNotification];
     
     _idx = 391;
+}
+
+#pragma mark - 应用第一次打开，加载操作指示图
+- (void)setFirstAppStart {
+    if(![USERDEFAULT boolForKey:@"flitersLaunch"]){
+        [USERDEFAULT setBool:YES forKey:@"flitersLaunch"];
+        [self setGuideImgForVC:@"Guide_stamp product"];
+    }
 }
 
 #pragma mark - 网络请求
@@ -404,21 +413,20 @@ static NSString *const URLUserAddGoods = @"/scene_product/add";
 
 #pragma mark - 合成图片
 - (UIImage *)generateImage:(UIImageView *)imageView {
-    //  获得一个位图图形上下文
+    
     CGSize size = imageView.frame.size;
-    UIGraphicsBeginImageContext(size);
+    UIGraphicsBeginImageContextWithOptions(size, NO, [UIScreen mainScreen].scale);
     CGContextRef context = UIGraphicsGetCurrentContext();
     CGContextSaveGState(context);
-    CGAffineTransform flip = CGAffineTransformMakeScale(1.0, -1.0);
-    CGAffineTransform flipThenShift = CGAffineTransformTranslate(flip,0,-size.height);
+    CGAffineTransform flip = CGAffineTransformMakeScale(1.0, - 1.0);
+    CGAffineTransform flipThenShift = CGAffineTransformTranslate(flip, 0, -size.height);
     CGContextConcatCTM(context, flipThenShift);
-    
     CGContextDrawImage(context, imageView.bounds, imageView.image.CGImage);
     CGContextRestoreGState(context);
     for (FBStickersContainer * container in self.stickersContainer) {
         CGContextSaveGState(context);
         FBSticker * sticker = [container generateSticker];
-        CGAffineTransform translateToCenter = CGAffineTransformMakeTranslation(sticker.translateCenter.x, sticker.translateCenter.y - (sticker.translateCenter.y/8));
+        CGAffineTransform translateToCenter = CGAffineTransformMakeTranslation(sticker.translateCenter.x, sticker.translateCenter.y - (sticker.translateCenter.y / 8));
         CGAffineTransform rotateAfterTranslate = CGAffineTransformRotate(translateToCenter, sticker.rotateAngle);
         CGContextConcatCTM(context, rotateAfterTranslate);
         CGContextScaleCTM(context, 1.0, -1.0);

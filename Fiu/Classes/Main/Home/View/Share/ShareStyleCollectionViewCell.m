@@ -14,7 +14,7 @@
     self = [super initWithFrame:frame];
     if (self) {
         
-        self.backgroundColor = [UIColor blackColor];
+        self.backgroundColor = [UIColor colorWithHexString:@"#000000" alpha:0];
         
         [self addSubview:self.styleImg];
         [_styleImg mas_makeConstraints:^(MASConstraintMaker *make) {

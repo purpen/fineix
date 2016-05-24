@@ -190,7 +190,7 @@ static NSString *const URLWantBuy = @"/scene_product/sight_click_stat";
         }
         
         NSString * categoryTag = [categoryTagIds componentsJoinedByString:@","];
-        [self networkRecommendGoods:categoryTag withSize:[NSString stringWithFormat:@"%zi", self.goodsList.count]];
+        [self networkRecommendGoods:categoryTag withSize:[NSString stringWithFormat:@"%zi", self.goodsList.count] withIgnoreId:goodsIds];
         
         [self.sceneTableView reloadData];
         
@@ -200,8 +200,8 @@ static NSString *const URLWantBuy = @"/scene_product/sight_click_stat";
 }
 
 #pragma mark 此场景中的推荐商品
-- (void)networkRecommendGoods:(NSString *)tagIds withSize:(NSString *)size {
-    self.recommendRequest = [FBAPI getWithUrlString:URLSceneGoods requestDictionary:@{@"category_tag_ids":tagIds, @"size":size} delegate:self];
+- (void)networkRecommendGoods:(NSString *)tagIds withSize:(NSString *)size withIgnoreId:(NSString *)ignoreIds {
+    self.recommendRequest = [FBAPI getWithUrlString:URLSceneGoods requestDictionary:@{@"category_tag_ids":tagIds, @"size":size, @"ignore_ids":ignoreIds} delegate:self];
     [self.recommendRequest startRequestSuccess:^(FBRequest *request, id result) {
         NSArray * goodsArr = [[result valueForKey:@"data"] valueForKey:@"rows"];
         for (NSDictionary * goodsDic in goodsArr) {
@@ -531,9 +531,11 @@ static NSString *const URLWantBuy = @"/scene_product/sight_click_stat";
 }
 
 - (void)rightBarItemSelected {
-    FBShareViewController * shareVC = [[FBShareViewController alloc] init];
-    shareVC.dataDict = _shareDataDict;
-    [self presentViewController:shareVC animated:YES completion:nil];
+    if ([_shareDataDict valueForKey:@"cover_url"]) {
+        FBShareViewController * shareVC = [[FBShareViewController alloc] init];
+        shareVC.dataDict = _shareDataDict;
+        [self presentViewController:shareVC animated:YES completion:nil];
+    }
 }
 
 - (void)leftBarItemSelected {

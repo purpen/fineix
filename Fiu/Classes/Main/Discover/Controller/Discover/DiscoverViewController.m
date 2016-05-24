@@ -47,7 +47,8 @@ static NSString *const URLFiuPeople = @"/user/find_user";
     [super viewWillAppear:animated];
     
     [self setNavigationViewUI];
-    [self networkFiuPeopleData];
+    
+    [self setFirstAppStart];
     //  frome #import "ReleaseViewController.h"
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(refreshHomeTable) name:@"refreshHomeList" object:nil];
 }
@@ -407,6 +408,14 @@ static NSString *const URLFiuPeople = @"/user/find_user";
 - (void)rightBarItemSelected {
     FBCityViewController * cityVC = [[FBCityViewController alloc] init];
     [self.navigationController pushViewController:cityVC animated:YES];
+}
+
+#pragma mark - 应用第一次打开，加载操作指示图
+- (void)setFirstAppStart {
+    if(![USERDEFAULT boolForKey:@"discoverLaunch"]){
+        [USERDEFAULT setBool:YES forKey:@"discoverLaunch"];
+        [self setGuideImgForVC:@"guide-scene"];
+    }
 }
 
 - (NSMutableArray *)fiuSceneList {

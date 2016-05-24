@@ -14,6 +14,8 @@
 #import <TencentOpenAPI/QQApiInterface.h>
 #import <SVProgressHUD/SVProgressHUD.h>
 
+static NSInteger const shareViewTag = 10000;
+
 @interface FBShareViewController ()
 
 @end
@@ -32,9 +34,9 @@
     [self setShareVcUI];
 }
 
-- (UIImage*)shareImage {
-    UIGraphicsBeginImageContext(CGSizeMake(self.shareView.bounds.size.width, self.shareView.bounds.size.height));
-    [self.shareView drawViewHierarchyInRect:self.shareView.bounds afterScreenUpdates:YES];
+- (UIImage *)shareImage {
+    UIGraphicsBeginImageContextWithOptions(self.shareView.bounds.size, NO, [UIScreen mainScreen].scale);
+    [self.shareView.layer renderInContext:UIGraphicsGetCurrentContext()];
     UIImage * image = UIGraphicsGetImageFromCurrentImageContext();
     UIGraphicsEndImageContext();
     return image;
@@ -53,12 +55,30 @@
 }
 
 #pragma mark - 分享场景信息视图
-- (ShareStyleView *)shareView {
+- (UIView *)shareView {
     if (!_shareView) {
-        _shareView = [[ShareStyleView alloc] initWithFrame:CGRectMake(0, 44, SCREEN_WIDTH, SCREEN_HEIGHT)];
-        [_shareView setShareSceneData:self.dataDict];
+        _shareView = [[UIView alloc] initWithFrame:CGRectMake(0, 44, SCREEN_WIDTH, SCREEN_HEIGHT)];
+        [_shareView addSubview:self.shareTopView];
     }
     return _shareView;
+}
+
+- (ShareStyleTopView *)shareTopView {
+    if (!_shareTopView) {
+        _shareTopView = [[ShareStyleTopView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT)];
+        _shareTopView.tag = shareViewTag;
+        [_shareTopView setShareSceneData:self.dataDict];
+    }
+    return _shareTopView;
+}
+
+- (ShareStyleBottomView *)shareBottomView {
+    if (!_shareBottomView) {
+        _shareBottomView = [[ShareStyleBottomView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT)];
+        _shareBottomView.tag = shareViewTag + 1;
+        [_shareBottomView setShareSceneData:self.dataDict];
+    }
+    return _shareBottomView;
 }
 
 #pragma mark - 分享样式视图
@@ -74,10 +94,10 @@
         _styleView.delegate = self;
         _styleView.dataSource = self;
         [_styleView registerClass:[ShareStyleCollectionViewCell class] forCellWithReuseIdentifier:@"shareStyleCollectionViewCellId"];
+        _styleView.backgroundColor = [UIColor colorWithHexString:@"#000000" alpha:.3];
     }
     return _styleView;
 }
-
 
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
     return 7;
@@ -90,14 +110,41 @@
 }
 
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
-    
+    if (indexPath.row == 0) {
+        if (self.shareView.subviews.count > 0) {
+            [self.shareView.subviews makeObjectsPerformSelector:@selector(removeFromSuperview)];
+            [self.shareView addSubview:self.shareTopView];
+            [self.shareTopView defultTitleFontStyle];
+        }
+        
+    } else if (indexPath.row == 1) {
+        if (self.shareView.subviews.count > 0) {
+            [self.shareView.subviews makeObjectsPerformSelector:@selector(removeFromSuperview)];
+            [self.shareView addSubview:self.shareTopView];
+            [self.shareTopView smallTitleFontStyle];
+        }
+        
+    } else if (indexPath.row == 2) {
+        if (self.shareView.subviews.count > 0) {
+            [self.shareView.subviews makeObjectsPerformSelector:@selector(removeFromSuperview)];
+            [self.shareView addSubview:self.shareBottomView];
+            [self.shareBottomView defultTitleFontStyle];
+        }
+        
+    } else if (indexPath.row == 3) {
+        if (self.shareView.subviews.count > 0) {
+            [self.shareView.subviews makeObjectsPerformSelector:@selector(removeFromSuperview)];
+            [self.shareView addSubview:self.shareBottomView];
+            [self.shareBottomView smallTitleFontStyle];
+        }
+    }
 }
 
 #pragma mark - 顶部视图
 - (UIView *)topView {
     if (!_topView) {
         _topView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 44)];
-        _topView.backgroundColor = [UIColor colorWithHexString:@"#222222"];
+        _topView.backgroundColor = [UIColor colorWithHexString:@"#222222" alpha:.3];
         
         [_topView addSubview:self.closeBtn];
         [_topView addSubview:self.shareBtn];
@@ -138,6 +185,8 @@
     [self presentViewController:shareVC animated:YES completion:nil];
     [shareVC.wechatBtn addTarget:self action:@selector(wechatShareBtnAction) forControlEvents:(UIControlEventTouchUpInside)];
     [shareVC.friendBtn addTarget:self action:@selector(timelineShareBtnAction) forControlEvents:(UIControlEventTouchUpInside)];
+    [shareVC.weiBoBtn addTarget:self action:@selector(sinaShareBtnAction) forControlEvents:(UIControlEventTouchUpInside)];
+    [shareVC.qqBtn addTarget:self action:@selector(qqShareBtnAction) forControlEvents:(UIControlEventTouchUpInside)];
     
 }
 
@@ -155,6 +204,23 @@
     [[UMSocialDataService defaultDataService]  postSNSWithTypes:@[UMShareToWechatTimeline] content:@"" image:[self shareImage] location:nil urlResource:nil presentedController:self completion:^(UMSocialResponseEntity *response){
         if (response.responseCode == UMSResponseCodeSuccess) {
             [SVProgressHUD showSuccessWithStatus:@"分享成功！"];
+        }
+    }];
+}
+
+-(void)qqShareBtnAction {
+    [UMSocialData defaultData].extConfig.qqData.qqMessageType = UMSocialQQMessageTypeImage;
+    [[UMSocialDataService defaultDataService]  postSNSWithTypes:@[UMShareToQQ] content:@"" image:[self shareImage] location:nil urlResource:nil presentedController:self completion:^(UMSocialResponseEntity *response){
+        if (response.responseCode == UMSResponseCodeSuccess) {
+            [SVProgressHUD showSuccessWithStatus:@"分享成功！"];
+        }
+    }];
+}
+
+-(void)sinaShareBtnAction {
+    [[UMSocialDataService defaultDataService]  postSNSWithTypes:@[UMShareToSina] content:@"有Fiu的生活，才够意思，快点扫码加我吧！查看个人主页>>http://m.taihuoniao.com" image:[self shareImage] location:nil urlResource:nil presentedController:self completion:^(UMSocialResponseEntity *shareResponse){
+        if (shareResponse.responseCode == UMSResponseCodeSuccess) {
+            NSLog(@"分享成功！");
         }
     }];
 }

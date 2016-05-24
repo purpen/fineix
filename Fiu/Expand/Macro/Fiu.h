@@ -16,6 +16,7 @@
 #import "Masonry.h"
 #import "UIImageView+SDWedImage.h"
 
+#define USERDEFAULT [NSUserDefaults standardUserDefaults]
 
 #undef 宽高尺寸
 //  屏幕宽
@@ -28,10 +29,9 @@
 #define BOUNDS_HEIGHT   self.bounds.size.height
 //  banner
 #define Banner_height   SCREEN_WIDTH * 0.48
-//  4寸屏幕
-#define IS_PHONE5             ( ([[UIScreen mainScreen] bounds].size.height-568) ? NO : YES )
 
-
+#define IS_PHONE5             ( ([[UIScreen mainScreen] bounds].size.height - 568) ? NO : YES )
+#define IS_PHONE6P            ( ([[UIScreen mainScreen] bounds].size.height >= 1104) ? NO : YES )
 
 #undef 颜色
 #define fineixColor             @"#BE8914"
