@@ -83,9 +83,9 @@
     
     [self addSubview:self.price];
     [_price mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.size.mas_equalTo(CGSizeMake(62.5, 23));
+        make.size.mas_equalTo(CGSizeMake(55, 23));
         make.centerY.equalTo(self);
-        make.left.equalTo(self.title.mas_right).with.offset(0);
+        make.left.equalTo(self.title.mas_right).with.offset(7);
     }];
     
     [self addSubview:self.dele];
