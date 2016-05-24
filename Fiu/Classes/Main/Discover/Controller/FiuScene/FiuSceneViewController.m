@@ -53,6 +53,7 @@ static NSString *const URLLikeScenePeople = @"/favorite";
     [self networkLikePeopleData];
 }
 
+
 #pragma mark - 网络请求
 #pragma mark 情景详情
 - (void)networkRequestData {

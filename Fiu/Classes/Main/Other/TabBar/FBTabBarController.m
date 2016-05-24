@@ -78,7 +78,7 @@
             
             return NO;
         }
-    }else{
+    } else {
         UserInfoEntity *entity = [UserInfoEntity defaultUserInfoEntity];
         FBRequest * request = [FBAPI postWithUrlString:@"/auth/check_login" requestDictionary:nil delegate:self];
         [request startRequestSuccess:^(FBRequest *request, id result) {

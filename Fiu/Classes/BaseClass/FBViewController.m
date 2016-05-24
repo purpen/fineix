@@ -9,10 +9,14 @@
 #import "FBViewController.h"
 #import "FBLoginRegisterViewController.h"
 
-NSString *const URLGoodsCarNum = @"/shopping/fetch_cart_count";
-NSString *const URLUserIsLogin = @"/user/user_info";
+static NSString *const URLGoodsCarNum = @"/shopping/fetch_cart_count";
+static NSString *const URLUserIsLogin = @"/user/user_info";
+static NSInteger const guideBtnTag = 763;
 
-@interface FBViewController ()
+@interface FBViewController () {
+    NSMutableArray * _guideImgMarr;
+    UIButton       * _guideBtn;
+}
 
 @end
 
@@ -80,6 +84,25 @@ NSString *const URLUserIsLogin = @"/user/user_info";
 }
 
 #pragma mark - 添加操作指示图
+- (void)setHomeGuideImgForVC {
+    
+    _guideImgMarr = [NSMutableArray arrayWithObjects:@"guide-index",@"guide-scene",@"guide-fiu",@"guide-tase",@"guide-personal",@"Guide_index", nil];
+    _guideBtn = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT)];
+    [_guideBtn setBackgroundImage:[UIImage imageNamed:_guideImgMarr[0]] forState:(UIControlStateNormal)];
+    [_guideBtn addTarget:self action:@selector(removeHomeGuide:) forControlEvents:(UIControlEventTouchUpInside)];
+    UIWindow * window = [UIApplication sharedApplication].keyWindow;
+    [window addSubview:_guideBtn];
+}
+
+- (void)removeHomeGuide:(UIButton *)button {
+    if (_guideImgMarr.count == 1) {
+        [_guideBtn removeFromSuperview];
+    } else {
+        [_guideImgMarr removeObjectAtIndex:0];
+        [_guideBtn setBackgroundImage:[UIImage imageNamed:_guideImgMarr[0]] forState:(UIControlStateNormal)];
+    }
+}
+
 - (void)setGuideImgForVC:(NSString *)image {
     UIButton * guideBtn = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT)];
     [guideBtn setBackgroundImage:[UIImage imageNamed:image] forState:(UIControlStateNormal)];

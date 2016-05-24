@@ -18,6 +18,8 @@
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     
+    [self setFirstAppStart];
+    
     if (self.pictureView.hidden == YES) {
         if (self.cameraView.session) {
             [self.cameraView.session startRunning];
@@ -29,8 +31,15 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
     [self setCreateControllerUI];
+}
+
+#pragma mark - 应用第一次打开，加载操作指示图
+- (void)setFirstAppStart {
+    if(![USERDEFAULT boolForKey:@"creatLaunch"]){
+        [USERDEFAULT setBool:YES forKey:@"creatLaunch"];
+        [self setGuideImgForVC:@"Guide_photo"];
+    }
 }
 
 #pragma mark - 设置顶部Nav

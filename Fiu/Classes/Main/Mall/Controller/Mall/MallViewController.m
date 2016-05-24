@@ -40,6 +40,7 @@ static NSString *const URLFiuBrand = @"/scene_brands/getlist";
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     
+    [self setFirstAppStart];
     [self getGoodsCarNumData];
     [self setNavigationViewUI];
     
@@ -337,6 +338,14 @@ static NSString *const URLFiuBrand = @"/scene_brands/getlist";
 - (void)rightBarItemSelected {
     GoodsCarViewController * goodsCarVC = [[GoodsCarViewController alloc] init];
     [self.navigationController pushViewController:goodsCarVC animated:YES];
+}
+
+#pragma mark - 应用第一次打开，加载操作指示图
+- (void)setFirstAppStart {
+    if(![USERDEFAULT boolForKey:@"mallLaunch"]){
+        [USERDEFAULT setBool:YES forKey:@"mallLaunch"];
+        [self setGuideImgForVC:@"Guide_ping"];
+    }
 }
 
 - (void)viewWillDisappear:(BOOL)animated {

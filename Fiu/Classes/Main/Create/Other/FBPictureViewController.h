@@ -74,4 +74,9 @@
  */
 - (void)showMessage:(NSString *)message;
 
+/**
+ *  添加操作指示图
+ */
+- (void)setGuideImgForVC:(NSString *)image;
+
 @end

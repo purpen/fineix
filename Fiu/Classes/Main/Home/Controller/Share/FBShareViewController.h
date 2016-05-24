@@ -8,8 +8,9 @@
 
 #import "FBViewController.h"
 #import "Fiu.h"
-#import "ShareStyleView.h"
 #import "ShareViewController.h"
+#import "ShareStyleTopView.h"
+#import "ShareStyleBottomView.h"
 
 @interface FBShareViewController : UIViewController <UICollectionViewDelegate, UICollectionViewDataSource>
 
@@ -19,6 +20,8 @@
 @pro_strong UICollectionView    *   styleView;
 @pro_strong NSDictionary        *   dataDict;
 
-@pro_strong ShareStyleView      *   shareView;
+@pro_strong UIView                  *   shareView;
+@pro_strong ShareStyleTopView       *   shareTopView;
+@pro_strong ShareStyleBottomView    *   shareBottomView;
 
 @end

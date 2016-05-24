@@ -7,31 +7,136 @@
 */
 
 //  创建场景
-"next" = "NEXT";
-"album" = "LIBRARY";
-"camera" = "PHOTO";
-"takePhotos" = "PHOTO";
-"marker" = "";
-"addUrl" = "";
-"filter" = "FILTERS";
-"addDescription" = "";
-"addTitle" = "";
-"addLocation" = "Add Location";
-"tag" = "";
-"onScene" = "";
-"release" = "";
-"cancel" = "";
-"searchLocation" = "";
-"sure" = "Done";
+"next" = "继续";
+"album" = "相册";
+"camera" = "相机";
+"takePhotos" = "拍照";
+"marker" = "标记产品";
+"addUrl" = "添加链接";
+"filter" = "滤镜";
+"addDescription" = "添加描述";
+"addTitle" = "添加标题";
+"addLocation" = "添加地点";
+"tag" = "标签";
+"onScene" = "所属情境";
+"release" = "发布";
+"cancel" = "取消";
+"sure" = "确定";
 
 //  控制器页面标题
-"createVcTitle" = "SCREENSHOTS";
-"cropVcTitle" = "";
-"filtersVcTitle" = "";
-"releaseVcTitle" = "";
-"locationVcTitle" = "";
-"addTagVcTitle" = "";
-"chooseSceneVcTitle" = "";
+"createVcTitle" = "照片胶卷";
+"cropVcTitle" = "裁剪图片";
+"filtersVcTitle" = "工具";
+"releaseVcTitle" = "创建场景";
+"freleaseVcTitle" = "创建情景";
+"locationVcTitle" = "位置";
+"addTagVcTitle" = "添加标签";
+"chooseSceneVcTitle" = "选择情景";
+"filterVcTitle" = "滤镜";
+"GoodsCategoryVcTitle" = "好货分类";
+"GoodsInfoVcTitle" = "产品详情";
+"CommentVcTitle" = "评论";
+"AllSceneVcTitle" = "全部情景";
+"GoodsCarVcTitle" = "购物车";
+"SubscribeVcTitle" = "订阅";
+"CityVcTitle" = "选择城市";
+"ReportVcTitle" = "举报";
+"SureOrderVc" = "确认订单";
+
+//  提示信息
+"netError" = "网络连接错误";
+"searchLocationing" = "正在搜索附近的位置";
+"againLocationing" = "正在重新定位";
+"searchLocationError" = "搜索位置出错";
+"openGPS" = "请开启GPS定位服务";
+"flashOn" = "闪光灯已打开";
+"flashOff" = "闪光灯已关闭";
+"flashError" = "闪光灯不可用";
+"cameraOpen" = "请开启相机权限";
+"cameraError" = "相机不可用";
+"searchFScene" = "搜索情境";
+"StockNone" = "库存只有这么多了";
+"deleteSuccess" = "删除成功";
+"deleteError" = "删除失败";
+"userBouns" = "使用红包优惠￥";
+"noneSearch" = "没找到？或许Fiu首页有你要查的东西";
+
+//  搜索框提示
+"searchLocation" = "搜索地点";
+"searchGoods" = "搜索产品";
+"search" = "搜索";
+
+//  按钮
+"JD" = "京东";
+"TaoBao" = "淘宝";
+"Tmall" = "天猫";
+"changeUrl" = "修改产品链接";
+"deleteUserGoods" = "删除产品";
+"editUserGoods" = "编辑产品";
+"buyingBtn" = "立即购买";
+"addCarBtn" = "加入购物车";
+"GoodsColors" = "颜色分类";
+"GoodsComment" = "商品评价";
+"OrderPayWay" = "支付方式";
+"OrderDistributionWay" = "配送方式";
+"SendGoodsTime" = "送货时间";
+"anySendTime" = "任意时间";
+"workSendTime" = "周一到周五工作日";
+"weekSendTime" = "周六、周日";
+"OrderBonus" = "使用红包";
+"aliPay" = "支付宝支付";
+"wechatPay" = "微信支付";
+"freeSend" = "免费配送";
+"summaryText" = "备注：";
+"writeSummary" = "请输入备注";
+"sumOrderPrice" = "合计：";
+"Default" = "默认";
+"Edit" = "编辑";
+"Done" = "完成";
+"CheckAll" = "全选";
+"GoPay" = "去结算";
+"Delete" = "删除";
+"userBounsPrice" = "节省：";
+"ShareBtn" = "分享";
+
+//  评论
+"comment" = "评论一下";
+"reply" = "回复:";
+
+//登录注册
+"passwordDigits" = "密码不能少于六位";
+"loginSuccessful" = "登录成功";
+"phoneNumberNotCorrect" = "手机号格式不正确";
+"registeredSuccessfully" = "注册成功";
+"cancel" = "取消";
+"determine" = "确定";
+"enterCorrectPhoneNumber" = "请输入正确的手机号";
+"enterVerificationCode" = "请输入验证码";
+
+//  商品详情
+"userSceneTitle" = "应用的场景";
+"recommendGoodsTitle" = "相关推荐";
+"lookMore" = "查看更多";
+"addGoodsCar" = "加入购物车";
+"buyingGoods" = "立即购买";
+"goBuyGoods" = "去购买";
+
+//  分类
+"AllGoods" = "全部";
+
+//  滤镜
+"FiltersName" = "原图";
+"FiltersNameA" = "摩卡";
+"FiltersNameB" = "暮光";
+"FiltersNameC" = "候鸟";
+"FiltersNameD" = "戏剧";
+"FiltersNameE" = "夏日";
+"FiltersNameF" = "都市";
+"FiltersNameG" = "佳人";
+"FiltersNameH" = "摩登";
+"FiltersNameI" = "流年";
+"FiltersNameJ" = "日光";
+"FiltersNameK" = "午茶";
 
 //登录注册
 "passwordDigits" = "The password may not be less than six";

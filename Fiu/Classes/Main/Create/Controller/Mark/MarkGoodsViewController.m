@@ -65,10 +65,12 @@ static NSString *const URLSearchGoods = @"/search/getlist";
             MarkGoodsRow * goodsModel = [[MarkGoodsRow alloc] initWithDictionary:goodsDict];
             [self.goodsList addObject:goodsModel];
         }
+        [self.goodsListView reloadData];
+        
         self.currentpageNum = [[[result valueForKey:@"data"] valueForKey:@"current_page"] integerValue];
         self.totalPageNum = [[[result valueForKey:@"data"] valueForKey:@"total_page"] integerValue];
         [self requestIsLastData:self.goodsListView currentPage:self.currentpageNum withTotalPage:self.totalPageNum];
-        [self.goodsListView reloadData];
+        
         [SVProgressHUD dismiss];
         
     } failure:^(FBRequest *request, NSError *error) {
@@ -86,10 +88,13 @@ static NSString *const URLSearchGoods = @"/search/getlist";
             MarkGoodsRow * goodsModel = [[MarkGoodsRow alloc] initWithDictionary:goodsDict];
             [self.goodsList addObject:goodsModel];
         }
+        
+        [self.goodsListView reloadData];
+        
         self.currentpageNum = [[[result valueForKey:@"data"] valueForKey:@"current_page"] integerValue];
         self.totalPageNum = [[[result valueForKey:@"data"] valueForKey:@"total_page"] integerValue];
         [self requestIsLastData:self.goodsListView currentPage:self.currentpageNum withTotalPage:self.totalPageNum];
-        [self.goodsListView reloadData];
+        
         [SVProgressHUD dismiss];
         
     } failure:^(FBRequest *request, NSError *error) {
@@ -170,7 +175,9 @@ static NSString *const URLSearchGoods = @"/search/getlist";
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
     MarkGoodsCollectionViewCell * cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"GoodsListViewCell" forIndexPath:indexPath];
-    [cell setMarkGoodsData:self.goodsList[indexPath.row]];
+    if (self.goodsList) {
+        [cell setMarkGoodsData:self.goodsList[indexPath.row]];
+    }
     return cell;
 }
 
