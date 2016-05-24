@@ -62,6 +62,7 @@ static NSString *const URLFiuPeople = @"/user/find_user";
     [super viewDidLoad];
     
     [self networkRollImgData];
+    [self networkFiuPeopleData];
     [self networkTagsListData];
     [self networkFiuSceneData];
     self.currentpageNum = 0;
