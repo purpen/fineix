@@ -34,9 +34,9 @@ typedef NS_ENUM(NSInteger, OrderInfoState) {
 @property (nonatomic, strong) NSString * createdAt;             //订单生成日期
 @property (nonatomic, strong) NSNumber *discount;                 //折扣
 @property (nonatomic, assign) NSInteger expiredTime;            //订单过期时间
-@property (nonatomic, strong) NSString * expressCaty;           //快递公司
-@property (nonatomic, strong) ExpressInfoModel * expressInfo;     //物流信息详细
 @property (nonatomic, strong) NSString * expressNo;             //快递单号
+@property (nonatomic, strong) NSString * express_company;       //快递公司
+@property (nonatomic, strong) ExpressInfoModel * expressInfo;     //物流信息详细
 @property (nonatomic, strong) NSNumber *freight;                  //运费
 @property (nonatomic, assign) NSInteger fromSite;               //来源站点1.web;6.wap;7.ios;8;android
 @property (nonatomic, strong) NSString * giftCode;              //礼品券码

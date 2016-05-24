@@ -35,6 +35,11 @@
 @property (weak, nonatomic) IBOutlet UIButton *operation1stBtn;
 @property (weak, nonatomic) IBOutlet UIButton *operation2ndBtn;
 @property (weak, nonatomic) IBOutlet UIView *operationView;
+@property (weak, nonatomic) IBOutlet UIView *logisticsView;
+@property (weak, nonatomic) IBOutlet UILabel *logisticsLabel;
+@property (weak, nonatomic) IBOutlet UILabel *logisticsNum;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *logisticsHeight;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *logisticsBotomHeight;
 @property (nonatomic, copy) NSArray * productInfoAry;
 @property (nonatomic, strong) ExpressInfoModel * expressInfo;
 @end
@@ -155,6 +160,21 @@ static NSString *const OrderDetailURL = @"/shopping/detail";
     self.totalMoneyLbl.text = [NSString stringWithFormat:@"￥%.2f", [self.orderInfo.totalMoney floatValue]];
     self.freightLbl.text = [NSString stringWithFormat:@"￥%.2f", [self.orderInfo.freight floatValue]];
     self.payMoneyLbl.text = [NSString stringWithFormat:@"￥%.2f", [self.orderInfo.payMoney floatValue]];
+    
+    self.logisticsLabel.text = self.orderInfo.express_company;
+    self.logisticsNum.text = self.orderInfo.expressNo;
+    //判断是否有运单号
+    if (!(self.orderInfo.expressNo.length>0)) {
+        self.logisticsHeight.constant = 0;
+        self.logisticsBotomHeight.constant = 0;
+        self.logisticsView.hidden = YES;
+    }
+    else{
+        self.logisticsHeight.constant = 64;
+        self.logisticsBotomHeight.constant = 5;
+        self.logisticsView.hidden = NO;
+    }
+
     
     [self.productView.subviews makeObjectsPerformSelector:@selector(removeFromSuperview)];
     if (self.orderInfo.productInfos.count > 0) {

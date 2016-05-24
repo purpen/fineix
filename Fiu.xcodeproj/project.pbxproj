@@ -346,8 +346,6 @@
 		1F2A90721CF40277005116C7 /* JDOrderViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1F2A8EA71CF40277005116C7 /* JDOrderViewController.xib */; };
 		1F2A90731CF40277005116C7 /* MyOderInfoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F2A8EA91CF40277005116C7 /* MyOderInfoViewController.m */; };
 		1F2A90741CF40277005116C7 /* MyOderInfoViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1F2A8EAA1CF40277005116C7 /* MyOderInfoViewController.xib */; };
-		1F2A90751CF40277005116C7 /* OrderInfoDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F2A8EAC1CF40277005116C7 /* OrderInfoDetailViewController.m */; };
-		1F2A90761CF40277005116C7 /* OrderInfoDetailViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1F2A8EAD1CF40277005116C7 /* OrderInfoDetailViewController.xib */; };
 		1F2A90771CF40277005116C7 /* RefundmentViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F2A8EAF1CF40277005116C7 /* RefundmentViewController.m */; };
 		1F2A90781CF40277005116C7 /* RefundmentViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1F2A8EB01CF40277005116C7 /* RefundmentViewController.xib */; };
 		1F2A90791CF40277005116C7 /* ReturnViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F2A8EB21CF40277005116C7 /* ReturnViewController.m */; };
@@ -425,8 +423,10 @@
 		1F2A911F1CF40495005116C7 /* libSocialQQ.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 1F2A91061CF40495005116C7 /* libSocialQQ.a */; };
 		1F2A91201CF40495005116C7 /* TencentOpenAPI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1F2A91071CF40495005116C7 /* TencentOpenAPI.framework */; };
 		1F2A91211CF40495005116C7 /* TencentOpenApi_IOS_Bundle.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 1F2A91081CF40495005116C7 /* TencentOpenApi_IOS_Bundle.bundle */; };
-		1F2A91221CF40495005116C7 /* libSocialWechat.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 1F2A910B1CF40495005116C7 /* libSocialWechat.a */; };
-		1F2A91231CF40495005116C7 /* libWeChatSDK.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 1F2A910C1CF40495005116C7 /* libWeChatSDK.a */; };
+		1F2A91271CF42EC1005116C7 /* OrderInfoDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F2A91251CF42EC1005116C7 /* OrderInfoDetailViewController.m */; };
+		1F2A91281CF42EC1005116C7 /* OrderInfoDetailViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1F2A91261CF42EC1005116C7 /* OrderInfoDetailViewController.xib */; };
+		1F2A915B1CF444BA005116C7 /* libSocialWechat.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 1F2A91551CF444BA005116C7 /* libSocialWechat.a */; };
+		1F2A915C1CF444BA005116C7 /* libWeChatSDK.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 1F2A91561CF444BA005116C7 /* libWeChatSDK.a */; };
 		1F35F03D1CD1D7170000DB95 /* AddressBook.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1F35F03C1CD1D7170000DB95 /* AddressBook.framework */; };
 		1F35F03F1CD1DC580000DB95 /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1F35F03E1CD1DC580000DB95 /* MessageUI.framework */; };
 		1F35F0411CD1DC640000DB95 /* AddressBookUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1F35F0401CD1DC640000DB95 /* AddressBookUI.framework */; };
@@ -1112,9 +1112,6 @@
 		1F2A8EA81CF40277005116C7 /* MyOderInfoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyOderInfoViewController.h; sourceTree = "<group>"; };
 		1F2A8EA91CF40277005116C7 /* MyOderInfoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyOderInfoViewController.m; sourceTree = "<group>"; };
 		1F2A8EAA1CF40277005116C7 /* MyOderInfoViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MyOderInfoViewController.xib; sourceTree = "<group>"; };
-		1F2A8EAB1CF40277005116C7 /* OrderInfoDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OrderInfoDetailViewController.h; sourceTree = "<group>"; };
-		1F2A8EAC1CF40277005116C7 /* OrderInfoDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OrderInfoDetailViewController.m; sourceTree = "<group>"; };
-		1F2A8EAD1CF40277005116C7 /* OrderInfoDetailViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = OrderInfoDetailViewController.xib; sourceTree = "<group>"; };
 		1F2A8EAE1CF40277005116C7 /* RefundmentViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RefundmentViewController.h; sourceTree = "<group>"; };
 		1F2A8EAF1CF40277005116C7 /* RefundmentViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RefundmentViewController.m; sourceTree = "<group>"; };
 		1F2A8EB01CF40277005116C7 /* RefundmentViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RefundmentViewController.xib; sourceTree = "<group>"; };
@@ -1259,12 +1256,15 @@
 		1F2A91071CF40495005116C7 /* TencentOpenAPI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = TencentOpenAPI.framework; sourceTree = "<group>"; };
 		1F2A91081CF40495005116C7 /* TencentOpenApi_IOS_Bundle.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = TencentOpenApi_IOS_Bundle.bundle; sourceTree = "<group>"; };
 		1F2A91091CF40495005116C7 /* UMSocialQQHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UMSocialQQHandler.h; sourceTree = "<group>"; };
-		1F2A910B1CF40495005116C7 /* libSocialWechat.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libSocialWechat.a; sourceTree = "<group>"; };
-		1F2A910C1CF40495005116C7 /* libWeChatSDK.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libWeChatSDK.a; sourceTree = "<group>"; };
-		1F2A910D1CF40495005116C7 /* UMSocialWechatHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UMSocialWechatHandler.h; sourceTree = "<group>"; };
-		1F2A910E1CF40495005116C7 /* WechatAuthSDK.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WechatAuthSDK.h; sourceTree = "<group>"; };
-		1F2A910F1CF40495005116C7 /* WXApi.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WXApi.h; sourceTree = "<group>"; };
-		1F2A91101CF40495005116C7 /* WXApiObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WXApiObject.h; sourceTree = "<group>"; };
+		1F2A91241CF42EC1005116C7 /* OrderInfoDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OrderInfoDetailViewController.h; sourceTree = "<group>"; };
+		1F2A91251CF42EC1005116C7 /* OrderInfoDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OrderInfoDetailViewController.m; sourceTree = "<group>"; };
+		1F2A91261CF42EC1005116C7 /* OrderInfoDetailViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = OrderInfoDetailViewController.xib; sourceTree = "<group>"; };
+		1F2A91551CF444BA005116C7 /* libSocialWechat.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libSocialWechat.a; sourceTree = "<group>"; };
+		1F2A91561CF444BA005116C7 /* libWeChatSDK.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libWeChatSDK.a; sourceTree = "<group>"; };
+		1F2A91571CF444BA005116C7 /* UMSocialWechatHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UMSocialWechatHandler.h; sourceTree = "<group>"; };
+		1F2A91581CF444BA005116C7 /* WechatAuthSDK.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WechatAuthSDK.h; sourceTree = "<group>"; };
+		1F2A915A1CF444BA005116C7 /* WXApiObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WXApiObject.h; sourceTree = "<group>"; };
+		1F2A915D1CF44521005116C7 /* WXApi.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WXApi.h; sourceTree = "<group>"; };
 		1F35F03C1CD1D7170000DB95 /* AddressBook.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AddressBook.framework; path = System/Library/Frameworks/AddressBook.framework; sourceTree = SDKROOT; };
 		1F35F03E1CD1DC580000DB95 /* MessageUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MessageUI.framework; path = System/Library/Frameworks/MessageUI.framework; sourceTree = SDKROOT; };
 		1F35F0401CD1DC640000DB95 /* AddressBookUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AddressBookUI.framework; path = System/Library/Frameworks/AddressBookUI.framework; sourceTree = SDKROOT; };
@@ -1366,7 +1366,7 @@
 				280045131C805B82005F5C2E /* QuartzCore.framework in Frameworks */,
 				2800451F1C805CCA005F5C2E /* CoreTelephony.framework in Frameworks */,
 				280045171C805C92005F5C2E /* SystemConfiguration.framework in Frameworks */,
-				1F2A91221CF40495005116C7 /* libSocialWechat.a in Frameworks */,
+				1F2A915B1CF444BA005116C7 /* libSocialWechat.a in Frameworks */,
 				1F0EE6A91C9FA4F6000631F0 /* libz.tbd in Frameworks */,
 				1F27AE8B1CE06BFA005A434B /* libc++.tbd in Frameworks */,
 				1F2A911F1CF40495005116C7 /* libSocialQQ.a in Frameworks */,
@@ -1385,7 +1385,7 @@
 				1F59E5FC1C9ABBA500E96C60 /* Accelerate.framework in Frameworks */,
 				D81281611CAA8532007CF08B /* BaiduMapAPI_Location.framework in Frameworks */,
 				D83A643B1C8E7ED2003DB8BB /* CoreImage.framework in Frameworks */,
-				1F2A91231CF40495005116C7 /* libWeChatSDK.a in Frameworks */,
+				1F2A915C1CF444BA005116C7 /* libWeChatSDK.a in Frameworks */,
 				D83A64391C8E7EC5003DB8BB /* CoreMedia.framework in Frameworks */,
 				1F2A911C1CF40495005116C7 /* libSocialSinaSSO.a in Frameworks */,
 				D83A64371C8E7EBD003DB8BB /* CoreVideo.framework in Frameworks */,
@@ -3001,6 +3001,9 @@
 		1F2A8E9E1CF40277005116C7 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
+				1F2A91241CF42EC1005116C7 /* OrderInfoDetailViewController.h */,
+				1F2A91251CF42EC1005116C7 /* OrderInfoDetailViewController.m */,
+				1F2A91261CF42EC1005116C7 /* OrderInfoDetailViewController.xib */,
 				1F2A8E9F1CF40277005116C7 /* AllOderViewController.h */,
 				1F2A8EA01CF40277005116C7 /* AllOderViewController.m */,
 				1F2A8EA11CF40277005116C7 /* AllOderViewController.xib */,
@@ -3013,9 +3016,6 @@
 				1F2A8EA81CF40277005116C7 /* MyOderInfoViewController.h */,
 				1F2A8EA91CF40277005116C7 /* MyOderInfoViewController.m */,
 				1F2A8EAA1CF40277005116C7 /* MyOderInfoViewController.xib */,
-				1F2A8EAB1CF40277005116C7 /* OrderInfoDetailViewController.h */,
-				1F2A8EAC1CF40277005116C7 /* OrderInfoDetailViewController.m */,
-				1F2A8EAD1CF40277005116C7 /* OrderInfoDetailViewController.xib */,
 				1F2A8EAE1CF40277005116C7 /* RefundmentViewController.h */,
 				1F2A8EAF1CF40277005116C7 /* RefundmentViewController.m */,
 				1F2A8EB01CF40277005116C7 /* RefundmentViewController.xib */,
@@ -3346,9 +3346,9 @@
 		1F2A90F41CF40495005116C7 /* UMSocial_Sdk_Extra_Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				1F2A91541CF444BA005116C7 /* Wechat */,
 				1F2A90F51CF40495005116C7 /* SinaSSO */,
 				1F2A91051CF40495005116C7 /* TencentOpenAPI */,
-				1F2A910A1CF40495005116C7 /* Wechat */,
 			);
 			path = UMSocial_Sdk_Extra_Frameworks;
 			sourceTree = "<group>";
@@ -3386,15 +3386,15 @@
 			path = TencentOpenAPI;
 			sourceTree = "<group>";
 		};
-		1F2A910A1CF40495005116C7 /* Wechat */ = {
+		1F2A91541CF444BA005116C7 /* Wechat */ = {
 			isa = PBXGroup;
 			children = (
-				1F2A910B1CF40495005116C7 /* libSocialWechat.a */,
-				1F2A910C1CF40495005116C7 /* libWeChatSDK.a */,
-				1F2A910D1CF40495005116C7 /* UMSocialWechatHandler.h */,
-				1F2A910E1CF40495005116C7 /* WechatAuthSDK.h */,
-				1F2A910F1CF40495005116C7 /* WXApi.h */,
-				1F2A91101CF40495005116C7 /* WXApiObject.h */,
+				1F2A915D1CF44521005116C7 /* WXApi.h */,
+				1F2A91551CF444BA005116C7 /* libSocialWechat.a */,
+				1F2A91561CF444BA005116C7 /* libWeChatSDK.a */,
+				1F2A91571CF444BA005116C7 /* UMSocialWechatHandler.h */,
+				1F2A91581CF444BA005116C7 /* WechatAuthSDK.h */,
+				1F2A915A1CF444BA005116C7 /* WXApiObject.h */,
 			);
 			path = Wechat;
 			sourceTree = "<group>";
@@ -3706,7 +3706,6 @@
 				1F2A90121CF40277005116C7 /* MyPageBtnCollectionViewCell.xib in Resources */,
 				1F2A90471CF40277005116C7 /* ImprovViewController.xib in Resources */,
 				1F2A90061CF40277005116C7 /* My.storyboard in Resources */,
-				1F2A90761CF40277005116C7 /* OrderInfoDetailViewController.xib in Resources */,
 				1F2A90491CF40277005116C7 /* SubscribeInterestedCollectionViewController.xib in Resources */,
 				1F2A90281CF40277005116C7 /* Empty.xib in Resources */,
 				1F223B1D1CD714F3007687F7 /* messages.plist in Resources */,
@@ -3731,6 +3730,7 @@
 				1F2A905D1CF40277005116C7 /* MentionedViewController.xib in Resources */,
 				1F2A901B1CF40277005116C7 /* HistoryBonusViewController.xib in Resources */,
 				1F2A8FF31CF40277005116C7 /* ModifyGenderViewController.xib in Resources */,
+				1F2A91281CF42EC1005116C7 /* OrderInfoDetailViewController.xib in Resources */,
 				1F2A905B1CF40277005116C7 /* CommentsViewController.xib in Resources */,
 				1F2A905F1CF40277005116C7 /* MessagesssViewController.xib in Resources */,
 				1F2A8FEA1CF40277005116C7 /* ChangeSumaryViewController.xib in Resources */,
@@ -4073,7 +4073,6 @@
 				1F2A8F961CF40277005116C7 /* LikeOrSuPeopleUser.m in Sources */,
 				1F2A8FB51CF40277005116C7 /* FiuBrand.m in Sources */,
 				1F2A90A91CF40277005116C7 /* AboutViewController.m in Sources */,
-				1F2A90751CF40277005116C7 /* OrderInfoDetailViewController.m in Sources */,
 				1F2A8F7F1CF40277005116C7 /* FiuHeaderTableViewCell.m in Sources */,
 				1F2A901A1CF40277005116C7 /* HistoryBonusViewController.m in Sources */,
 				1F2A90A81CF40277005116C7 /* UserHeaderTableViewCell.m in Sources */,
@@ -4166,6 +4165,7 @@
 				1F2A8FE11CF40277005116C7 /* InfoTitleTableViewCell.m in Sources */,
 				1F2A8FD21CF40277005116C7 /* BuyCarDefault.m in Sources */,
 				1F2A8F681CF40277005116C7 /* FiuPeople.m in Sources */,
+				1F2A91271CF42EC1005116C7 /* OrderInfoDetailViewController.m in Sources */,
 				D81281551CAA8532007CF08B /* HttpTool.m in Sources */,
 				1F2A8F361CF40277005116C7 /* AllNearbyScenarioViewController.m in Sources */,
 				1F2A8F611CF40277005116C7 /* ChangeAddUrlView.m in Sources */,
@@ -4353,6 +4353,7 @@
 					"$(PROJECT_DIR)/Fiu/Vendors/UMSocial_Sdk_Extra_Frameworks/TencentOpenAPI",
 					"$(PROJECT_DIR)/Fiu/Vendors/UMSocial_Sdk_Extra_Frameworks/Wechat",
 					"$(PROJECT_DIR)/Fiu/Vendors/UMSocial_Sdk_5.2",
+					"$(PROJECT_DIR)/Fiu/Vendors/UMSocial_Sdk_Extra_Frameworks/OpenSDK1.7",
 				);
 				OTHER_LIBTOOLFLAGS = "";
 				PRODUCT_BUNDLE_IDENTIFIER = com.THN.fineix;
@@ -4394,6 +4395,7 @@
 					"$(PROJECT_DIR)/Fiu/Vendors/UMSocial_Sdk_Extra_Frameworks/TencentOpenAPI",
 					"$(PROJECT_DIR)/Fiu/Vendors/UMSocial_Sdk_Extra_Frameworks/Wechat",
 					"$(PROJECT_DIR)/Fiu/Vendors/UMSocial_Sdk_5.2",
+					"$(PROJECT_DIR)/Fiu/Vendors/UMSocial_Sdk_Extra_Frameworks/OpenSDK1.7",
 				);
 				OTHER_LIBTOOLFLAGS = "";
 				PRODUCT_BUNDLE_IDENTIFIER = com.THN.fineix;

@@ -13,8 +13,10 @@
 
 #define HeaderFooterHeight 50
 
-@interface HistoryBonusViewController ()<FBNavigationBarItemsDelegate>
-
+@interface HistoryBonusViewController ()<FBNavigationBarItemsDelegate,UITableViewDelegate,UITableViewDataSource>
+{
+    UIView * _footerView;
+}
 @property (weak, nonatomic) IBOutlet UITableView *bonusTableView;
 @property (nonatomic,strong) NSMutableArray *bonusAry;
 @end
@@ -30,18 +32,21 @@ static NSString *const InvalidBonusCellIdentifier = @"invalidBonusCell";
     self.navViewTitle.text = @"过期红包";
     self.bonusTableView.rowHeight = 122;
     
+    self.bonusTableView.delegate = self;
+    self.bonusTableView.dataSource = self;
+    
     //表尾视图
-    UIView * footerView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, HeaderFooterHeight)];
-    footerView.backgroundColor = [UIColor colorWithHexString:@"#f1f1f1"];
+    _footerView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, HeaderFooterHeight)];
+    _footerView.backgroundColor = [UIColor colorWithHexString:@"#f1f1f1"];
     
     UILabel * noMoreLbl = [[UILabel alloc] initWithFrame:CGRectMake(SCREEN_WIDTH / 2 - 55, 0, 110, HeaderFooterHeight)];
     noMoreLbl.text = @"暂无过期红包";
     noMoreLbl.textAlignment = NSTextAlignmentCenter;
     noMoreLbl.textColor = [UIColor colorWithHexString:@"#888888"];
     noMoreLbl.font = [UIFont systemFontOfSize:13];
-    [footerView addSubview:noMoreLbl];
+    [_footerView addSubview:noMoreLbl];
     
-    self.bonusTableView.tableFooterView = footerView;
+    self.bonusTableView.tableFooterView = _footerView;
  
     [self.bonusTableView registerNib:[UINib nibWithNibName:@"InvalidBonusCell" bundle:nil] forCellReuseIdentifier:InvalidBonusCellIdentifier];
     
@@ -52,7 +57,7 @@ static NSString *const InvalidBonusCellIdentifier = @"invalidBonusCell";
 //请求过期红包信息
 - (void)requestDataForBonus
 {
-    NSDictionary * params = @{@"used": @0, @"is_expired": @2, @"page": @1, @"size": @50, @"sort": @0};
+    NSDictionary * params = @{@"used": @0, @"is_expired": @2, @"page": @1, @"size": @100, @"sort": @0};
     FBRequest * request = [FBAPI postWithUrlString:BonusURL requestDictionary:params delegate:self];
     request.flag = BonusURL;
     [request startRequest];
@@ -75,6 +80,7 @@ static NSString *const InvalidBonusCellIdentifier = @"invalidBonusCell";
                 BonusModel * bonus = [[BonusModel alloc] initWithDictionary:bonusDic];
                 [self.bonusAry addObject:bonus];
             }
+            _footerView.hidden = self.bonusAry.count != 0;
             [self.bonusTableView reloadData];
             
             [SVProgressHUD dismiss];
@@ -110,7 +116,7 @@ static NSString *const InvalidBonusCellIdentifier = @"invalidBonusCell";
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     InvalidBonusCell * bonusCell = [tableView dequeueReusableCellWithIdentifier:InvalidBonusCellIdentifier forIndexPath:indexPath];
-    if (self.bonusAry.count) {
+    if (self.bonusAry.count != 0) {
         bonusCell.bonus = self.bonusAry[indexPath.row];
     }
     return bonusCell;

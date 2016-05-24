@@ -205,17 +205,17 @@
                     NSLog(@"＝＝＝＝＝＝＝＝＝ %@", result);
                     NSDictionary * dataDic = [result objectForKey:@"data"];
                     PayReq * payReq = [[PayReq alloc] init];
-//                    payReq.partnerId = [dataDic objectForKey:@"partner_id"];
-//                    payReq.prepayId= [dataDic objectForKey:@"prepay_id"];
+                    payReq.partnerId = [dataDic objectForKey:@"partner_id"];
+                    payReq.prepayId= [dataDic objectForKey:@"prepay_id"];
                     payReq.package = @"Sign=WXPay";
-//                    payReq.nonceStr= [dataDic objectForKey:@"nonce_str"];
-//                    payReq.timeStamp= [[dataDic objectForKey:@"time_stamp"] intValue];
-                    
-//                    WXSignParams * signParam = [[WXSignParams alloc] initWithDictionary:dataDic];
-//                    payReq.sign= [signParam sign];
-                    payReq.sign = dataDic[@"new_sign"];
-                    [WXApi sendReq:payReq];
-                    
+                    payReq.nonceStr= [dataDic objectForKey:@"nonce_str"];
+                    payReq.timeStamp= [[dataDic objectForKey:@"time_stamp"] intValue];
+                    //之前签名是本地生成
+                    //                    WXSignParams * signParam = [[WXSignParams alloc] initWithDictionary:dataDic];
+                    //                    payReq.sign= [signParam sign];
+                    payReq.sign = [dataDic objectForKey:@"new_sign"];
+                    BOOL flag = [WXApi sendReq:payReq];
+                    NSLog(@"微信毁掉    %d",flag);
                     [SVProgressHUD dismiss];
                 } failure:^(FBRequest *request, NSError *error) {
                     [SVProgressHUD showInfoWithStatus:[error localizedDescription]];

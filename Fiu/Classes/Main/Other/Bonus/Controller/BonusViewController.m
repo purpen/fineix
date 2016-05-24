@@ -79,7 +79,7 @@ static NSString *const BonusCellIdentifier = @"bonusCell";
 //请求我的红包信息
 - (void)requestDataForBonus
 {
-    NSDictionary * params = @{@"used": @1, @"is_expired": @1, @"page": @1, @"size": @50, @"sort": @0};
+    NSDictionary * params = @{@"used": @1, @"is_expired": @1, @"page": @1, @"size": @100, @"sort": @0};
     FBRequest * request = [FBAPI postWithUrlString:BonusURL requestDictionary:params delegate:self];
     request.flag = BonusURL;
     [request startRequest];

@@ -208,7 +208,7 @@
     if (!_mapView) {
         _mapView = [[BMKMapView alloc] initWithFrame:CGRectMake(0, 64, SCREEN_WIDTH, SCREEN_HEIGHT-64)];
         _mapView.delegate = self;
-        _mapView.zoomLevel = 18;
+        _mapView.zoomLevel = 15;
         _mapView.centerCoordinate = {_latitude,_longitude};
         
         [_mapView addSubview:self.positioningBtn];

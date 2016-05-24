@@ -127,7 +127,6 @@
         
         [_userView addSubview:self.userLevelLabel];
         [_userLevelLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.size.mas_equalTo(CGSizeMake(200, 12));
             make.centerX.mas_equalTo(_userView.mas_centerX);
             make.bottom.mas_equalTo(_userView.mas_bottom).with.offset(-49/667.0*SCREEN_HEIGHT);
         }];
@@ -135,7 +134,7 @@
         
         [_userView addSubview:self.userProfile];
         [_userProfile mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.size.mas_equalTo(CGSizeMake(SCREEN_WIDTH, 12));
+            make.width.mas_equalTo(SCREEN_WIDTH-80);
             make.centerX.mas_equalTo(_userView.mas_centerX);
             make.bottom.mas_equalTo(_userLevelLabel.mas_top).with.offset(-5/667.0*SCREEN_HEIGHT);
         }];
@@ -173,6 +172,7 @@
         _userProfile.font = [UIFont systemFontOfSize:10];
         _userProfile.textAlignment = NSTextAlignmentCenter;
         _userProfile.clipsToBounds = YES;
+        _userProfile.numberOfLines = 0;
         _userProfile.autoresizingMask = UIViewAutoresizingFlexibleTopMargin;
     }
     return _userProfile;

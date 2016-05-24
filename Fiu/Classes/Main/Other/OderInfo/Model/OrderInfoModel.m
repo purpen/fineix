@@ -52,8 +52,8 @@
         self.expiredTime = [dictionary[@"expired_time"] integerValue];
     }
     
-    if(![dictionary[@"express_caty"] isKindOfClass:[NSNull class]]){
-        self.expressCaty = dictionary[@"express_caty"];
+    if(![dictionary[@"express_company"] isKindOfClass:[NSNull class]]){
+        self.express_company = dictionary[@"express_company"];
     }
     if(![dictionary[@"express_info"] isKindOfClass:[NSNull class]]){
         self.expressInfo = [[ExpressInfoModel alloc] initWithDictionary:dictionary[@"express_info"]];

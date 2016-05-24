@@ -53,6 +53,7 @@
     }
     
     [self.cancelBtn addTarget:self action:@selector(cancelBtnClick) forControlEvents:(UIControlEventTouchUpInside)];
+    [self.otherBtn addTarget:self action:@selector(cancelBtnClick) forControlEvents:UIControlEventTouchUpInside];
 }
 
 - (void)cancelBtnClick {

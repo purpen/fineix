@@ -50,33 +50,32 @@
         
         [_userView addSubview:self.userLevelLabel];
         [_userLevelLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.size.mas_equalTo(CGSizeMake(200, 12));
             make.centerX.mas_equalTo(_userView.mas_centerX);
-            make.bottom.mas_equalTo(_userView.mas_bottom).with.offset(-44/667.0*SCREEN_HEIGHT);
+            make.bottom.mas_equalTo(_userView.mas_bottom).with.offset(-45/667.0*SCREEN_HEIGHT);
         }];
         
         
         [_userView addSubview:self.userProfile];
         [_userProfile mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.size.mas_equalTo(CGSizeMake(SCREEN_WIDTH, 12));
+            make.width.mas_equalTo(SCREEN_WIDTH-80);
             make.centerX.mas_equalTo(_userView.mas_centerX);
-            make.bottom.mas_equalTo(_userLevelLabel.mas_top).with.offset(-5/667.0*SCREEN_HEIGHT);
+            make.bottom.mas_equalTo(_userLevelLabel.mas_top).with.offset(-10/667.0*SCREEN_HEIGHT);
         }];
         
         
-        [_userView addSubview:self.nickName];
-        [_nickName mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.size.mas_equalTo(CGSizeMake(self.frame.size.width, 19));
-            make.centerX.mas_equalTo(_userView.mas_centerX);
-            make.bottom.mas_equalTo(_userProfile.mas_top).with.offset(-9/667.0*SCREEN_HEIGHT);
-        }];
+//        [_userView addSubview:self.nickName];
+//        [_nickName mas_makeConstraints:^(MASConstraintMaker *make) {
+//            make.size.mas_equalTo(CGSizeMake(self.frame.size.width, 19));
+//            make.centerX.mas_equalTo(_userView.mas_centerX);
+//            make.bottom.mas_equalTo(_userProfile.mas_top).with.offset(-9/667.0*SCREEN_HEIGHT);
+//        }];
         
         
         [_userView addSubview:self.headView];
         [_headView mas_makeConstraints:^(MASConstraintMaker *make) {
             make.size.mas_equalTo(CGSizeMake(84/667.0*SCREEN_HEIGHT, 84/667.0*SCREEN_HEIGHT));
             make.centerX.mas_equalTo(_userView.mas_centerX);
-            make.bottom.mas_equalTo(_nickName.mas_top).with.offset(-8/667.0*SCREEN_HEIGHT);
+            make.bottom.mas_equalTo(_userProfile.mas_top).with.offset(-20/667.0*SCREEN_HEIGHT);
         }];
         
         [_userView addSubview:self.idImageView];
@@ -227,9 +226,10 @@
     if (!_userProfile) {
         _userProfile = [[UILabel alloc] init];
         _userProfile.textColor = [UIColor whiteColor];
-        _userProfile.font = [UIFont systemFontOfSize:10];
+        _userProfile.font = [UIFont systemFontOfSize:12];
         _userProfile.textAlignment = NSTextAlignmentCenter;
         _userProfile.clipsToBounds = YES;
+        _userProfile.numberOfLines = 0;
         _userProfile.autoresizingMask = UIViewAutoresizingFlexibleTopMargin;
     }
     return _userProfile;
@@ -239,7 +239,7 @@
     if (!_userLevelLabel) {
         _userLevelLabel = [[UILabel alloc] init];
         _userLevelLabel.textColor = [UIColor whiteColor];
-        _userLevelLabel.font = [UIFont systemFontOfSize:10];
+        _userLevelLabel.font = [UIFont systemFontOfSize:12];
         _userLevelLabel.textAlignment = NSTextAlignmentCenter;
         _userLevelLabel.clipsToBounds = YES;
         _userLevelLabel.autoresizingMask = UIViewAutoresizingFlexibleTopMargin;

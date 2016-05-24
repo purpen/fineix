@@ -192,12 +192,17 @@
     }else{
         UserInfo *model = _modelAry[indexPath.row];
         [cell setUIWithModel:model];
-        cell.alertTipviewNum.hidden = YES;
+        if (indexPath.row < self.num) {
+            cell.alertTipviewNum.hidden = NO;
+        }else{
+            cell.alertTipviewNum.hidden = YES;
+        }
         cell.focusBtn.hidden = YES;
         cell.timeLabelTwo.hidden = YES;
         cell.headBtn.tag = indexPath.row;
         [cell.headBtn addTarget:self action:@selector(headBtn:) forControlEvents:UIControlEventTouchUpInside];
     }
+    
     
     return cell;
 }
