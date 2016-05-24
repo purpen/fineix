@@ -19,6 +19,7 @@
 #import "WeiboSDK.h"
 #import <TencentOpenAPI/QQApiInterface.h>
 
+
 @interface MyQrCodeViewController ()<FBNavigationBarItemsDelegate>
 {
     UIImage *_viewImage;
@@ -59,10 +60,13 @@ static NSString *const ShareURL = @"http://m.taihuoniao.com/guide/app_about";
     }];
     
     [self getImageFromView:self.view];
+    self.navView.hidden = NO;
 }
 
 -(void)getImageFromView:(UIView*)theView{
-    UIGraphicsBeginImageContextWithOptions(self.view.bounds.size, YES, [UIScreen mainScreen].scale);
+    
+    self.navView.hidden = YES;
+    UIGraphicsBeginImageContextWithOptions(theView.bounds.size, YES, [UIScreen mainScreen].scale);
     [theView.layer renderInContext:UIGraphicsGetCurrentContext()];
     UIImage *image = UIGraphicsGetImageFromCurrentImageContext();
     UIGraphicsEndImageContext();
