@@ -402,8 +402,6 @@
 		1F2A90AA1CF40277005116C7 /* AboutViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1F2A8F1C1CF40277005116C7 /* AboutViewController.xib */; };
 		1F2A90AB1CF40277005116C7 /* ChanePwdViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F2A8F1E1CF40277005116C7 /* ChanePwdViewController.m */; };
 		1F2A90AC1CF40277005116C7 /* ChanePwdViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1F2A8F1F1CF40277005116C7 /* ChanePwdViewController.xib */; };
-		1F2A90AD1CF40277005116C7 /* ChangePwdViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F2A8F211CF40277005116C7 /* ChangePwdViewController.m */; };
-		1F2A90AE1CF40277005116C7 /* ChangePwdViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1F2A8F221CF40277005116C7 /* ChangePwdViewController.xib */; };
 		1F2A90AF1CF40277005116C7 /* OptionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F2A8F241CF40277005116C7 /* OptionViewController.m */; };
 		1F2A90B01CF40277005116C7 /* OptionViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1F2A8F251CF40277005116C7 /* OptionViewController.xib */; };
 		1F2A90B11CF40277005116C7 /* SystemSettingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F2A8F271CF40277005116C7 /* SystemSettingViewController.m */; };
@@ -1209,9 +1207,6 @@
 		1F2A8F1D1CF40277005116C7 /* ChanePwdViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChanePwdViewController.h; sourceTree = "<group>"; };
 		1F2A8F1E1CF40277005116C7 /* ChanePwdViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChanePwdViewController.m; sourceTree = "<group>"; };
 		1F2A8F1F1CF40277005116C7 /* ChanePwdViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ChanePwdViewController.xib; sourceTree = "<group>"; };
-		1F2A8F201CF40277005116C7 /* ChangePwdViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChangePwdViewController.h; sourceTree = "<group>"; };
-		1F2A8F211CF40277005116C7 /* ChangePwdViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChangePwdViewController.m; sourceTree = "<group>"; };
-		1F2A8F221CF40277005116C7 /* ChangePwdViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ChangePwdViewController.xib; sourceTree = "<group>"; };
 		1F2A8F231CF40277005116C7 /* OptionViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OptionViewController.h; sourceTree = "<group>"; };
 		1F2A8F241CF40277005116C7 /* OptionViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OptionViewController.m; sourceTree = "<group>"; };
 		1F2A8F251CF40277005116C7 /* OptionViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = OptionViewController.xib; sourceTree = "<group>"; };
@@ -3282,9 +3277,6 @@
 				1F2A8F1D1CF40277005116C7 /* ChanePwdViewController.h */,
 				1F2A8F1E1CF40277005116C7 /* ChanePwdViewController.m */,
 				1F2A8F1F1CF40277005116C7 /* ChanePwdViewController.xib */,
-				1F2A8F201CF40277005116C7 /* ChangePwdViewController.h */,
-				1F2A8F211CF40277005116C7 /* ChangePwdViewController.m */,
-				1F2A8F221CF40277005116C7 /* ChangePwdViewController.xib */,
 				1F2A8F231CF40277005116C7 /* OptionViewController.h */,
 				1F2A8F241CF40277005116C7 /* OptionViewController.m */,
 				1F2A8F251CF40277005116C7 /* OptionViewController.xib */,
@@ -3761,7 +3753,6 @@
 				1F2A90911CF40277005116C7 /* QrShareSheetViewController.xib in Resources */,
 				1F772AB31CF3FC7E0018AE40 /* UMSocialLocalizable.strings in Resources */,
 				1F2A90301CF40277005116C7 /* DeliveryAddressCell.xib in Resources */,
-				1F2A90AE1CF40277005116C7 /* ChangePwdViewController.xib in Resources */,
 				1F2A90361CF40277005116C7 /* Integral.xib in Resources */,
 				1F2A90881CF40277005116C7 /* ProductInfoView.xib in Resources */,
 				1F2A90611CF40277005116C7 /* MessageViewController.xib in Resources */,
@@ -4146,7 +4137,6 @@
 				1F2A8F741CF40277005116C7 /* FiuSceneLocation.m in Sources */,
 				1F2A90311CF40277005116C7 /* DirectMessagesViewController.m in Sources */,
 				1F2A8FC61CF40277005116C7 /* GoodsInfo.m in Sources */,
-				1F2A90AD1CF40277005116C7 /* ChangePwdViewController.m in Sources */,
 				1F2A90451CF40277005116C7 /* FBSignupViewController.m in Sources */,
 				1F2A90691CF40277005116C7 /* SystemInfoTableViewCell.m in Sources */,
 				1F2A900D1CF40277005116C7 /* FocusOnTableViewCell.m in Sources */,
