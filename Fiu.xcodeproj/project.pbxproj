@@ -9,6 +9,8 @@
 /* Begin PBXBuildFile section */
 		1F0EE6A71C9FA4E7000631F0 /* libstdc++.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 1F0EE6A61C9FA4E7000631F0 /* libstdc++.tbd */; };
 		1F0EE6A91C9FA4F6000631F0 /* libz.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 1F0EE6A81C9FA4F6000631F0 /* libz.tbd */; };
+		1F1AF3AC1CF4AE4F00CAA525 /* MallTagsView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F1AF3AB1CF4AE4F00CAA525 /* MallTagsView.m */; };
+		1F1AF3AE1CF4B39C00CAA525 /* MallTags.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1F1AF3AD1CF4B39C00CAA525 /* MallTags.xib */; };
 		1F223B1D1CD714F3007687F7 /* messages.plist in Resources */ = {isa = PBXBuildFile; fileRef = 1F223B1C1CD714F3007687F7 /* messages.plist */; };
 		1F27AE881CE06BB1005A434B /* AlipaySDK.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 1F27AE861CE06BB1005A434B /* AlipaySDK.bundle */; };
 		1F27AE891CE06BB1005A434B /* AlipaySDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1F27AE871CE06BB1005A434B /* AlipaySDK.framework */; };
@@ -496,6 +498,9 @@
 		1F0EE6A41C9FA47B000631F0 /* libsqlite3.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libsqlite3.tbd; path = usr/lib/libsqlite3.tbd; sourceTree = SDKROOT; };
 		1F0EE6A61C9FA4E7000631F0 /* libstdc++.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = "libstdc++.tbd"; path = "usr/lib/libstdc++.tbd"; sourceTree = SDKROOT; };
 		1F0EE6A81C9FA4F6000631F0 /* libz.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libz.tbd; path = usr/lib/libz.tbd; sourceTree = SDKROOT; };
+		1F1AF3AA1CF4AE4F00CAA525 /* MallTagsView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MallTagsView.h; sourceTree = "<group>"; };
+		1F1AF3AB1CF4AE4F00CAA525 /* MallTagsView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MallTagsView.m; sourceTree = "<group>"; };
+		1F1AF3AD1CF4B39C00CAA525 /* MallTags.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MallTags.xib; sourceTree = "<group>"; };
 		1F223B1C1CD714F3007687F7 /* messages.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = messages.plist; sourceTree = "<group>"; };
 		1F27AE861CE06BB1005A434B /* AlipaySDK.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = AlipaySDK.bundle; sourceTree = "<group>"; };
 		1F27AE871CE06BB1005A434B /* AlipaySDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = AlipaySDK.framework; sourceTree = "<group>"; };
@@ -1416,6 +1421,16 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		1F1AF3A91CF4AE0100CAA525 /* Mall */ = {
+			isa = PBXGroup;
+			children = (
+				1F1AF3AA1CF4AE4F00CAA525 /* MallTagsView.h */,
+				1F1AF3AB1CF4AE4F00CAA525 /* MallTagsView.m */,
+				1F1AF3AD1CF4B39C00CAA525 /* MallTags.xib */,
+			);
+			path = Mall;
+			sourceTree = "<group>";
+		};
 		1F27AE851CE06BB1005A434B /* AliPay */ = {
 			isa = PBXGroup;
 			children = (
@@ -2288,6 +2303,7 @@
 		1F2A8D4D1CF40276005116C7 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				1F1AF3A91CF4AE0100CAA525 /* Mall */,
 				1F2A8D4E1CF40276005116C7 /* Brand */,
 				1F2A8D511CF40276005116C7 /* Category */,
 				1F2A8D561CF40276005116C7 /* CollectionViewCell */,
@@ -3773,6 +3789,7 @@
 				1F2A90191CF40277005116C7 /* BonusViewController.xib in Resources */,
 				1F2A90201CF40277005116C7 /* InvalidBonusCell.xib in Resources */,
 				1F2A90701CF40277005116C7 /* CommenttwoViewController.xib in Resources */,
+				1F1AF3AE1CF4B39C00CAA525 /* MallTags.xib in Resources */,
 				1F2A903B1CF40277005116C7 /* FBLocationViewController.xib in Resources */,
 				1F2A8FEE1CF40277005116C7 /* EditNickNameViewController.xib in Resources */,
 				1F2A906A1CF40277005116C7 /* SystemInfoTableViewCell.xib in Resources */,
@@ -3860,6 +3877,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				1F2A8FF41CF40277005116C7 /* MyFansActionSheetViewController.m in Sources */,
+				1F1AF3AC1CF4AE4F00CAA525 /* MallTagsView.m in Sources */,
 				1F2A8F771CF40277005116C7 /* RollImageData.m in Sources */,
 				1F2A90A61CF40277005116C7 /* SearchMenuView.m in Sources */,
 				D81281581CAA8532007CF08B /* UIColor+Extension.m in Sources */,

@@ -49,7 +49,6 @@ static NSString *const URLFiuPeople = @"/user/find_user";
     [self setNavigationViewUI];
     
     [self setFirstAppStart];
-    
     //  frome #import "ReleaseViewController.h"
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(refreshHomeTable) name:@"refreshHomeList" object:nil];
 }
@@ -63,7 +62,6 @@ static NSString *const URLFiuPeople = @"/user/find_user";
     [super viewDidLoad];
     
     [self networkRollImgData];
-    [self networkFiuPeopleData];
     [self networkTagsListData];
     [self networkFiuSceneData];
     self.currentpageNum = 0;
@@ -92,7 +90,22 @@ static NSString *const URLFiuPeople = @"/user/find_user";
 - (void)networkFiuPeopleData {
     self.fiuPeopleRequest = [FBAPI getWithUrlString:URLFiuPeople requestDictionary:@{@"page":@"1", @"size":@"50", @"sort":@"1"} delegate:self];
     [self.fiuPeopleRequest startRequestSuccess:^(FBRequest *request, id result) {
+        
         self.fiuPeopleList = [NSMutableArray arrayWithArray:[[result valueForKey:@"data"] valueForKey:@"users"]];
+        NSLog(@"伙伴   %zi",self.fiuPeopleList.count);
+        for (int i = 0; i<_fiuView.subviews.count; i++) {
+            UIButton *btn = _fiuView.subviews[i];
+            btn.tag = i;
+            if (self.fiuPeopleList.count != 0) {
+                FiuPeopleUser * user = [[FiuPeopleUser alloc] initWithDictionary:self.fiuPeopleList[btn.tag]];
+                UIImageView * headerImg = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, btn.bounds.size.width, btn.bounds.size.width)];
+                [headerImg downloadImage:user.mediumAvatarUrl place:[UIImage imageNamed:@""]];
+                btn.layer.borderWidth = 1.0f;
+                btn.layer.borderColor = [UIColor colorWithHexString:@"#979797" alpha:.7].CGColor;
+                [btn addSubview:headerImg];
+                [btn addTarget:self action:@selector(clickUserHead:) forControlEvents:UIControlEventTouchUpInside];
+            }
+        }
         [self.discoverTableView reloadData];
         
     } failure:^(FBRequest *request, NSError *error) {
@@ -251,27 +264,28 @@ static NSString *const URLFiuPeople = @"/user/find_user";
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     if (indexPath.section == 0) {
         if (indexPath.row == 0) {
-            static NSString * fiuPeopleCellId = @"FiuPeopleCellId";
-            FiuPeopleTableViewCell * cell = [tableView dequeueReusableCellWithIdentifier:fiuPeopleCellId];
-            if (!cell) {
-                cell = [[FiuPeopleTableViewCell alloc] initWithStyle:(UITableViewCellStyleDefault) reuseIdentifier:fiuPeopleCellId];
-            }
-            [cell setFiuPeopleData:self.fiuPeopleList withType:0];
-            cell.nav = self.navigationController;
-            return cell;
-            
-//            static NSString *fiuPeopleCellId = @"FiuPeople";
-//            UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:fiuPeopleCellId];
-//            if (cell == nil) {
-//                cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:fiuPeopleCellId];
+//            static NSString * fiuPeopleCellId = @"FiuPeopleCellId";
+//            FiuPeopleTableViewCell * cell = [tableView dequeueReusableCellWithIdentifier:fiuPeopleCellId];
+//            if (!cell) {
+//                cell = [[FiuPeopleTableViewCell alloc] initWithStyle:(UITableViewCellStyleDefault) reuseIdentifier:fiuPeopleCellId];
 //            }
-//            [cell.contentView addSubview:self.fiuView];
-//            [_fiuView mas_makeConstraints:^(MASConstraintMaker *make) {
-//                make.size.mas_equalTo(CGSizeMake(SCREEN_WIDTH, 155));
-//                make.left.mas_equalTo(cell.mas_left);
-//                make.top.mas_equalTo(cell.mas_top);
-//            }];
+//            [cell setFiuPeopleData:self.fiuPeopleList withType:0];
+//            cell.nav = self.navigationController;
 //            return cell;
+            
+            static NSString *fiuPeopleCellId = @"FiuPeople";
+            UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:fiuPeopleCellId];
+            if (cell == nil) {
+                cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:fiuPeopleCellId];
+                cell.selectionStyle = UITableViewCellSelectionStyleNone;
+            }
+            [cell.contentView addSubview:self.fiuView];
+            [_fiuView mas_makeConstraints:^(MASConstraintMaker *make) {
+                make.size.mas_equalTo(CGSizeMake(SCREEN_WIDTH, 155/667.0*SCREEN_HEIGHT));
+                make.left.mas_equalTo(cell.mas_left);
+                make.top.mas_equalTo(cell.mas_top);
+            }];
+            return cell;
             
         } else if (indexPath.row == 1) {
             static NSString * fiuSceneTagCellId = @"fiuSceneTagCellId";
@@ -308,17 +322,6 @@ static NSString *const URLFiuPeople = @"/user/find_user";
 -(FiuPeopleView *)fiuView{
     if (!_fiuView) {
         _fiuView = [FiuPeopleView getFiuPeopleView];
-        for (int i = 0; i<_fiuView.subviews.count; i++) {
-            UIButton *btn = _fiuView.subviews[i];
-            btn.tag = i;
-//            FiuPeopleUser * user = [[FiuPeopleUser alloc] initWithDictionary:self.fiuPeopleList[btn.tag]];
-            UIImageView * headerImg = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, btn.bounds.size.width, btn.bounds.size.width)];
-//            [headerImg downloadImage:user.mediumAvatarUrl place:[UIImage imageNamed:@""]];
-            btn.layer.borderWidth = 1.0f;
-            btn.layer.borderColor = [UIColor colorWithHexString:@"#979797" alpha:.7].CGColor;
-            [btn addSubview:headerImg];
-            [btn addTarget:self action:@selector(clickUserHead:) forControlEvents:UIControlEventTouchUpInside];
-        }
     }
     return _fiuView;
 }
@@ -336,7 +339,7 @@ static NSString *const URLFiuPeople = @"/user/find_user";
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
     if (indexPath.section == 0) {
         if (indexPath.row == 0) {
-            return 155;
+            return 155/667.0*SCREEN_HEIGHT;
         } else if (indexPath.row == 1) {
             return 80;
         }

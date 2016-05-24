@@ -158,9 +158,29 @@
 
 #pragma mark “创建情景”的按钮事件
 - (void)createBtnClick {
-    PictureToolViewController * pictureToolVC = [[PictureToolViewController alloc] init];
-    pictureToolVC.createType = @"scene";
-    [self presentViewController:pictureToolVC animated:YES completion:nil];
+    UserInfoEntity *entity = [UserInfoEntity defaultUserInfoEntity];
+    FBRequest * request = [FBAPI postWithUrlString:@"/auth/check_login" requestDictionary:nil delegate:self];
+    [request startRequestSuccess:^(FBRequest *request, id result) {
+        NSDictionary * dataDic = [result objectForKey:@"data"];
+        entity.isLogin = [[dataDic objectForKey:@"is_login"] boolValue];
+    } failure:^(FBRequest *request, NSError *error) {
+        [SVProgressHUD showInfoWithStatus:[error localizedDescription]];
+    }];
+    //如果用户ID存在的话，说明已登陆
+    
+    if (entity.isLogin) {
+        PictureToolViewController * pictureToolVC = [[PictureToolViewController alloc] init];
+        pictureToolVC.createType = @"scene";
+        [self presentViewController:pictureToolVC animated:YES completion:nil];
+    }
+    else
+    {
+        //跳到登录页面
+        UIStoryboard *loginStory = [UIStoryboard storyboardWithName:@"LoginRegisterController" bundle:[NSBundle mainBundle]];
+        FBLoginRegisterViewController *loginSignupVC = [loginStory instantiateViewControllerWithIdentifier:@"FBLoginRegisterViewController"];
+        UINavigationController *navi = [[UINavigationController alloc] initWithRootViewController:loginSignupVC];
+        [self presentViewController:navi animated:YES completion:nil];
+    }
 }
 
 @end
