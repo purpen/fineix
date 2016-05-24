@@ -20,5 +20,6 @@
 @property (weak, nonatomic) IBOutlet UIButton *qqBtn;
 @property (weak, nonatomic) IBOutlet UIView *qqView;
 @property (weak, nonatomic) IBOutlet UIButton *cancelBtn;
+@property (weak, nonatomic) IBOutlet UIButton *otherBtn;
 
 @end

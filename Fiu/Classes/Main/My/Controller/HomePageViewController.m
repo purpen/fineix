@@ -150,6 +150,8 @@ static NSString *const IconURL = @"/my/add_head_pic";
     }else{
         [self addBarItemRightBarButton:nil image:@"more_filled" isTransparent:YES];
     }
+//    self.navView.backgroundColor = [UIColor blackColor];
+////    self.navView.alpha = 0.3;
     [[UIApplication sharedApplication] setStatusBarHidden:NO withAnimation:(UIStatusBarAnimationSlide)];
     self.navigationController.navigationBarHidden = YES;
     self.tabBarController.tabBar.hidden = YES;

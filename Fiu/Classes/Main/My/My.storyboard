@@ -1071,14 +1071,14 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="昨天 10:10" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="RUD-b7-7RN">
-                                                    <rect key="frame" x="113" y="5" width="150" height="16"/>
+                                                    <rect key="frame" x="113" y="5" width="150" height="15"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" constant="150" id="22s-rX-Gqk"/>
                                                         <constraint firstAttribute="height" constant="21" id="2Us-v4-GNT"/>
                                                         <constraint firstAttribute="height" constant="21" id="CYl-Yp-OqW"/>
                                                         <constraint firstAttribute="height" constant="21" id="n4g-tw-t7N"/>
                                                     </constraints>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                                     <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                                                     <nil key="highlightedColor"/>
                                                     <variation key="default">
@@ -1089,22 +1089,22 @@
                                                         </mask>
                                                     </variation>
                                                 </label>
-                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="user" translatesAutoresizingMaskIntoConstraints="NO" id="tIW-2v-goi">
-                                                    <rect key="frame" x="315" y="31" width="50" height="50"/>
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="tIW-2v-goi">
+                                                    <rect key="frame" x="315" y="30" width="50" height="50"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="50" id="3Qk-zL-BST"/>
                                                         <constraint firstAttribute="width" constant="50" id="nRb-GY-tX4"/>
                                                     </constraints>
                                                 </imageView>
-                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Dina Alexander" translatesAutoresizingMaskIntoConstraints="NO" id="hI7-vJ-sGI">
-                                                    <rect key="frame" x="10" y="31" width="50" height="50"/>
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="hI7-vJ-sGI">
+                                                    <rect key="frame" x="10" y="30" width="50" height="50"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" constant="50" id="OVW-yX-lh6"/>
                                                         <constraint firstAttribute="height" constant="50" id="YOh-DI-FYN"/>
                                                     </constraints>
                                                 </imageView>
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vGh-5n-g5A">
-                                                    <rect key="frame" x="70" y="31" width="84" height="27"/>
+                                                    <rect key="frame" x="70" y="30" width="84" height="27"/>
                                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" relation="lessThanOrEqual" constant="250" id="Oeg-jx-oOn"/>
@@ -1116,7 +1116,7 @@
                                                     </state>
                                                 </button>
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="D0g-mP-sMB">
-                                                    <rect key="frame" x="221" y="31" width="84" height="27"/>
+                                                    <rect key="frame" x="221" y="30" width="84" height="27"/>
                                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="60" id="L5O-a7-4yC"/>
@@ -1204,7 +1204,6 @@
     </scenes>
     <resources>
         <image name="Button + 关注" width="70" height="25"/>
-        <image name="Dina Alexander" width="84" height="84"/>
         <image name="JDSmall" width="60" height="60"/>
         <image name="amzonSmall" width="20" height="20"/>
         <image name="entr" width="8" height="15"/>
@@ -1214,6 +1213,5 @@
         <image name="paoPao2" width="11" height="27"/>
         <image name="tamallSmall" width="20" height="20"/>
         <image name="taobaoSmall" width="20" height="20"/>
-        <image name="user" width="31" height="31"/>
     </resources>
 </document>

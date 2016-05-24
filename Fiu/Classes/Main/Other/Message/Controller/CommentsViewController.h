@@ -10,4 +10,6 @@
 
 @interface CommentsViewController : FBViewController
 
+@property(nonatomic,assign) NSInteger num;
+
 @end

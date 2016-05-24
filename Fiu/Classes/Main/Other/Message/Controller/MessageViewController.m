@@ -197,6 +197,7 @@
 }
 - (IBAction)commentsBtn:(UIButton *)sender {
     CommentsViewController *vc = [[CommentsViewController alloc] init];
+    vc.num = [self.countModel.fiu_comment_count integerValue];
     [self.navigationController pushViewController:vc animated:YES];
 }
 - (IBAction)directMessagesBtn:(UIButton *)sender {
