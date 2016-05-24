@@ -85,7 +85,7 @@
         NSArray *rowsAry = [dataDict objectForKey:@"rows"];
         for (NSDictionary *rowsDict in rowsAry) {
             NSDictionary *usersDict = [rowsDict objectForKey:@"users"];
-            NSDictionary *toUserDict = [usersDict objectForKey:@"to_user"];
+            NSDictionary *toUserDict = [usersDict objectForKey:@"from_user"];
             UserInfo *model = [[UserInfo alloc] init];
             model.userId = toUserDict[@"id"];
             model.summary = rowsDict[@"last_content"][@"content"];

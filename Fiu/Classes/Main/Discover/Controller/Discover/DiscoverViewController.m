@@ -249,27 +249,27 @@ static NSString *const URLFiuPeople = @"/user/find_user";
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     if (indexPath.section == 0) {
         if (indexPath.row == 0) {
-//            static NSString * fiuPeopleCellId = @"FiuPeopleCellId";
-//            FiuPeopleTableViewCell * cell = [tableView dequeueReusableCellWithIdentifier:fiuPeopleCellId];
-//            if (!cell) {
-//                cell = [[FiuPeopleTableViewCell alloc] initWithStyle:(UITableViewCellStyleDefault) reuseIdentifier:fiuPeopleCellId];
-//            }
-//            [cell setFiuPeopleData:self.fiuPeopleList withType:0];
-//            cell.nav = self.navigationController;
-//            return cell;
-            
-            static NSString *fiuPeopleCellId = @"FiuPeople";
-            UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:fiuPeopleCellId];
-            if (cell == nil) {
-                cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:fiuPeopleCellId];
+            static NSString * fiuPeopleCellId = @"FiuPeopleCellId";
+            FiuPeopleTableViewCell * cell = [tableView dequeueReusableCellWithIdentifier:fiuPeopleCellId];
+            if (!cell) {
+                cell = [[FiuPeopleTableViewCell alloc] initWithStyle:(UITableViewCellStyleDefault) reuseIdentifier:fiuPeopleCellId];
             }
-            [cell.contentView addSubview:self.fiuView];
-            [_fiuView mas_makeConstraints:^(MASConstraintMaker *make) {
-                make.size.mas_equalTo(CGSizeMake(SCREEN_WIDTH, 155));
-                make.left.mas_equalTo(cell.mas_left);
-                make.top.mas_equalTo(cell.mas_top);
-            }];
+            [cell setFiuPeopleData:self.fiuPeopleList withType:0];
+            cell.nav = self.navigationController;
             return cell;
+            
+//            static NSString *fiuPeopleCellId = @"FiuPeople";
+//            UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:fiuPeopleCellId];
+//            if (cell == nil) {
+//                cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:fiuPeopleCellId];
+//            }
+//            [cell.contentView addSubview:self.fiuView];
+//            [_fiuView mas_makeConstraints:^(MASConstraintMaker *make) {
+//                make.size.mas_equalTo(CGSizeMake(SCREEN_WIDTH, 155));
+//                make.left.mas_equalTo(cell.mas_left);
+//                make.top.mas_equalTo(cell.mas_top);
+//            }];
+//            return cell;
             
         } else if (indexPath.row == 1) {
             static NSString * fiuSceneTagCellId = @"fiuSceneTagCellId";
