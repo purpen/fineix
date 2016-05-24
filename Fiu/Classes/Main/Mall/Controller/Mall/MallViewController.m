@@ -17,6 +17,8 @@
 #import "CategoryRow.h"
 #import "GoodsRow.h"
 #import "RollImageRow.h"
+#import "MallTagsView.h"
+#import "GoodsBrandViewController.h"
 
 static NSString *const URLTagS = @"/scene_tags/getlist";
 static NSString *const URLCategoryList = @"/category/getlist";
@@ -32,6 +34,8 @@ static NSString *const URLFiuBrand = @"/scene_brands/getlist";
 @pro_strong NSMutableArray              *   goodsIdList;
 @pro_strong NSMutableArray              *   rollList;
 @pro_strong NSMutableArray              *   brandList;
+
+@property(nonatomic,strong) MallTagsView *fiuView;
 
 @end
 
@@ -233,14 +237,29 @@ static NSString *const URLFiuBrand = @"/scene_brands/getlist";
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     if (indexPath.section == 0) {
         if (indexPath.row == 0) {
-            static NSString * mallBrandCellId = @"mallBrandCellId";
-            FiuPeopleTableViewCell * cell = [tableView dequeueReusableCellWithIdentifier:mallBrandCellId];
-            if (!cell) {
-                cell = [[FiuPeopleTableViewCell alloc] initWithStyle:(UITableViewCellStyleDefault) reuseIdentifier:mallBrandCellId];
+//            static NSString * mallBrandCellId = @"mallBrandCellId";
+//            FiuPeopleTableViewCell * cell = [tableView dequeueReusableCellWithIdentifier:mallBrandCellId];
+//            if (!cell) {
+//                cell = [[FiuPeopleTableViewCell alloc] initWithStyle:(UITableViewCellStyleDefault) reuseIdentifier:mallBrandCellId];
+//            }
+//            cell.nav = self.navigationController;
+//            [cell setFiuBrandData:self.brandList withType:1];
+//            return cell;
+            
+            static NSString *fiuPeopleCellId = @"FiuPeople";
+            UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:fiuPeopleCellId];
+            if (cell == nil) {
+                cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:fiuPeopleCellId];
+                cell.selectionStyle = UITableViewCellSelectionStyleNone;
             }
-            cell.nav = self.navigationController;
-            [cell setFiuBrandData:self.brandList withType:1];
+            [cell.contentView addSubview:self.fiuView];
+            [_fiuView mas_makeConstraints:^(MASConstraintMaker *make) {
+                make.size.mas_equalTo(CGSizeMake(SCREEN_WIDTH, 155/667.0*SCREEN_HEIGHT));
+                make.left.mas_equalTo(cell.mas_left);
+                make.top.mas_equalTo(cell.mas_top);
+            }];
             return cell;
+
             
         } else if (indexPath.row == 1) {
             static NSString * mallGoodsTagCellId = @"mallGoodsTagCellId";
@@ -273,10 +292,37 @@ static NSString *const URLFiuBrand = @"/scene_brands/getlist";
     return nil;
 }
 
+-(MallTagsView *)fiuView{
+    if (!_fiuView) {
+        _fiuView = [MallTagsView getMallTagsView];
+        for (int i = 0; i<_fiuView.subviews.count; i++) {
+            UIButton *btn = _fiuView.subviews[i];
+            btn.tag = i;
+            if (self.brandList.count != 0) {
+                FiuBrandRow * brand = [[FiuBrandRow alloc] initWithDictionary:self.brandList[btn.tag]];
+                UIImageView * headerImg = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, btn.bounds.size.width, btn.bounds.size.width)];
+                [headerImg downloadImage:brand.coverUrl place:[UIImage imageNamed:@""]];
+                btn.layer.borderWidth = 1.0f;
+                btn.layer.borderColor = [UIColor colorWithHexString:@"#979797" alpha:.7].CGColor;
+                [btn addSubview:headerImg];
+                [btn addTarget:self action:@selector(clickUserHead:) forControlEvents:UIControlEventTouchUpInside];
+            }
+        }
+    }
+    return _fiuView;
+}
+
+-(void)clickUserHead:(UIButton*)sender{
+    GoodsBrandViewController * brandVC = [[GoodsBrandViewController alloc] init];
+    FiuBrandRow * brand = [[FiuBrandRow alloc] initWithDictionary:self.brandList[sender.tag]];
+    brandVC.brandId = brand.idField.idField;
+    [self.navigationController pushViewController:brandVC animated:YES];
+}
+
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
     if (indexPath.section == 0) {
         if (indexPath.row == 0) {
-            return 155;
+            return 155/667.0*SCREEN_HEIGHT;
         } else if (indexPath.row == 1) {
             return 80;
         } else if (indexPath.row == 2) {

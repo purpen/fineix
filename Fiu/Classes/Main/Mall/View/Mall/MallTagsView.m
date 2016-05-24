@@ -1,24 +1,24 @@
 //
-//  FiuPeopleView.m
+//  MallTagsView.m
 //  Fiu
 //
-//  Created by THN-Dong on 16/5/23.
+//  Created by THN-Dong on 16/5/24.
 //  Copyright © 2016年 taihuoniao. All rights reserved.
 //
 
-#import "FiuPeopleView.h"
+#import "MallTagsView.h"
 #import "Fiu.h"
 
-@implementation FiuPeopleView
+@implementation MallTagsView
 
-+(instancetype)getFiuPeopleView{
-    FiuPeopleView *view;
++(instancetype)getMallTagsView{
+    MallTagsView *view;
     if (SCREEN_WIDTH == 414) {
-       view = [[NSBundle mainBundle] loadNibNamed:@"FiuPeople" owner:nil options:nil][1];
+        view = [[NSBundle mainBundle] loadNibNamed:@"MallTags" owner:nil options:nil][1];
     }else if (SCREEN_WIDTH == 375){
-        view = [[NSBundle mainBundle] loadNibNamed:@"FiuPeople" owner:nil options:nil][0];
+        view = [[NSBundle mainBundle] loadNibNamed:@"MallTags" owner:nil options:nil][0];
     }else if (SCREEN_WIDTH == 320){
-        view = [[NSBundle mainBundle] loadNibNamed:@"FiuPeople" owner:nil options:nil][2];
+        view = [[NSBundle mainBundle] loadNibNamed:@"MallTags" owner:nil options:nil][2];
     }
     
     for (UIButton *sender in view.subviews) {
