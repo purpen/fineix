@@ -41,6 +41,7 @@
 		1F772B5A1CF3FD070018AE40 /* ThnGoodsCommentViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F772AFC1CF3FD070018AE40 /* ThnGoodsCommentViewController.m */; };
 		1F772B5B1CF3FD070018AE40 /* ChangePwdViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F772B551CF3FD070018AE40 /* ChangePwdViewController.m */; };
 		1F772B5C1CF3FD070018AE40 /* ChangePwdViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1F772B561CF3FD070018AE40 /* ChangePwdViewController.xib */; };
+		1F772B5E1CF3FD910018AE40 /* AppDelegate.mm in Sources */ = {isa = PBXBuildFile; fileRef = 1F772B5D1CF3FD910018AE40 /* AppDelegate.mm */; };
 		1FC6782E1CDB33ED00535162 /* UIView+TYAlertView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1FC6782C1CDB33ED00535162 /* UIView+TYAlertView.m */; };
 		280045111C805B78005F5C2E /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 280045101C805B78005F5C2E /* CoreLocation.framework */; };
 		280045131C805B82005F5C2E /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 280045121C805B82005F5C2E /* QuartzCore.framework */; };
@@ -53,7 +54,6 @@
 		D8035F3B1CB784B3001920F9 /* UILable+Frame.m in Sources */ = {isa = PBXBuildFile; fileRef = D8035F3A1CB784B3001920F9 /* UILable+Frame.m */; };
 		D80D415B1CAD1437005D72B1 /* FBNavigationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D80D41591CAD1437005D72B1 /* FBNavigationViewController.m */; };
 		D80D415E1CAD144D005D72B1 /* UIBarButtonItem+Helper.m in Sources */ = {isa = PBXBuildFile; fileRef = D80D415C1CAD144D005D72B1 /* UIBarButtonItem+Helper.m */; };
-		D81281101CAA8532007CF08B /* AppDelegate.mm in Sources */ = {isa = PBXBuildFile; fileRef = D81280151CAA8532007CF08B /* AppDelegate.mm */; };
 		D81281121CAA8532007CF08B /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D81280171CAA8532007CF08B /* LaunchScreen.storyboard */; };
 		D81281131CAA8532007CF08B /* FBViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D812801C1CAA8532007CF08B /* FBViewController.m */; };
 		D81281531CAA8532007CF08B /* FBAPI.m in Sources */ = {isa = PBXBuildFile; fileRef = D81280B21CAA8532007CF08B /* FBAPI.m */; };
@@ -148,6 +148,7 @@
 		1F772B541CF3FD070018AE40 /* ChangePwdViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChangePwdViewController.h; sourceTree = "<group>"; };
 		1F772B551CF3FD070018AE40 /* ChangePwdViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChangePwdViewController.m; sourceTree = "<group>"; };
 		1F772B561CF3FD070018AE40 /* ChangePwdViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ChangePwdViewController.xib; sourceTree = "<group>"; };
+		1F772B5D1CF3FD910018AE40 /* AppDelegate.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = AppDelegate.mm; sourceTree = "<group>"; };
 		1FC6782C1CDB33ED00535162 /* UIView+TYAlertView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+TYAlertView.m"; sourceTree = "<group>"; };
 		1FC6782D1CDB33ED00535162 /* UIView+TYAutoLayout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+TYAutoLayout.h"; sourceTree = "<group>"; };
 		280045101C805B78005F5C2E /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
@@ -171,7 +172,6 @@
 		D80D415C1CAD144D005D72B1 /* UIBarButtonItem+Helper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIBarButtonItem+Helper.m"; sourceTree = "<group>"; };
 		D80D415D1CAD144D005D72B1 /* UIBarButtonItem+Helper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIBarButtonItem+Helper.h"; sourceTree = "<group>"; };
 		D81280141CAA8532007CF08B /* AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
-		D81280151CAA8532007CF08B /* AppDelegate.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = AppDelegate.mm; sourceTree = "<group>"; };
 		D81280181CAA8532007CF08B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		D812801B1CAA8532007CF08B /* FBViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FBViewController.h; sourceTree = "<group>"; };
 		D812801C1CAA8532007CF08B /* FBViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FBViewController.m; sourceTree = "<group>"; };
@@ -1623,7 +1623,7 @@
 				1F35F04F1CD2336E0000DB95 /* Resource */,
 				D81280C31CAA8532007CF08B /* International */,
 				D81280141CAA8532007CF08B /* AppDelegate.h */,
-				D81280151CAA8532007CF08B /* AppDelegate.mm */,
+				1F772B5D1CF3FD910018AE40 /* AppDelegate.mm */,
 				D81280171CAA8532007CF08B /* LaunchScreen.storyboard */,
 				D8A9AD081CD9CCA900A9FCFB /* Assets.xcassets */,
 				D81280C01CAA8532007CF08B /* fineix.xcdatamodeld */,
@@ -1927,6 +1927,7 @@
 				D80D415B1CAD1437005D72B1 /* FBNavigationViewController.m in Sources */,
 				D80D415E1CAD144D005D72B1 /* UIBarButtonItem+Helper.m in Sources */,
 				D8A9AE401CE304FF00A9FCFB /* NSTimer+Addition.m in Sources */,
+				1F772B5E1CF3FD910018AE40 /* AppDelegate.mm in Sources */,
 				1F772B591CF3FD070018AE40 /* FiuPeopleView.m in Sources */,
 				D812815A1CAA8532007CF08B /* fineix.xcdatamodeld in Sources */,
 				D81281591CAA8532007CF08B /* UIImageView+SDWedImage.m in Sources */,
@@ -1944,7 +1945,6 @@
 				D81281551CAA8532007CF08B /* HttpTool.m in Sources */,
 				D8035F2F1CB77D0C001920F9 /* UIImage+Helper.m in Sources */,
 				1F772B5B1CF3FD070018AE40 /* ChangePwdViewController.m in Sources */,
-				D81281101CAA8532007CF08B /* AppDelegate.mm in Sources */,
 				D8035F3B1CB784B3001920F9 /* UILable+Frame.m in Sources */,
 				D81281571CAA8532007CF08B /* NSString+Helper.m in Sources */,
 			);
