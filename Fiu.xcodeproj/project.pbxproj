@@ -11,6 +11,8 @@
 		1F0EE6A91C9FA4F6000631F0 /* libz.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 1F0EE6A81C9FA4F6000631F0 /* libz.tbd */; };
 		1F1AF3AC1CF4AE4F00CAA525 /* MallTagsView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F1AF3AB1CF4AE4F00CAA525 /* MallTagsView.m */; };
 		1F1AF3AE1CF4B39C00CAA525 /* MallTags.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1F1AF3AD1CF4B39C00CAA525 /* MallTags.xib */; };
+		1F1AF3B21CF58A6B00CAA525 /* IntegralViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F1AF3B01CF58A6B00CAA525 /* IntegralViewController.m */; };
+		1F1AF3B31CF58A6B00CAA525 /* IntegralViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1F1AF3B11CF58A6B00CAA525 /* IntegralViewController.xib */; };
 		1F223B1D1CD714F3007687F7 /* messages.plist in Resources */ = {isa = PBXBuildFile; fileRef = 1F223B1C1CD714F3007687F7 /* messages.plist */; };
 		1F27AE881CE06BB1005A434B /* AlipaySDK.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 1F27AE861CE06BB1005A434B /* AlipaySDK.bundle */; };
 		1F27AE891CE06BB1005A434B /* AlipaySDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1F27AE871CE06BB1005A434B /* AlipaySDK.framework */; };
@@ -205,8 +207,6 @@
 		1F2A8FE41CF40277005116C7 /* AccountManagementViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F2A8D851CF40277005116C7 /* AccountManagementViewController.m */; };
 		1F2A8FE51CF40277005116C7 /* AddreesPickerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F2A8D871CF40277005116C7 /* AddreesPickerViewController.m */; };
 		1F2A8FE61CF40277005116C7 /* AddreesPickerViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1F2A8D881CF40277005116C7 /* AddreesPickerViewController.xib */; };
-		1F2A8FE71CF40277005116C7 /* ChangePasswordViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F2A8D8A1CF40277005116C7 /* ChangePasswordViewController.m */; };
-		1F2A8FE81CF40277005116C7 /* ChangePasswordViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1F2A8D8B1CF40277005116C7 /* ChangePasswordViewController.xib */; };
 		1F2A8FE91CF40277005116C7 /* ChangeSumaryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F2A8D8D1CF40277005116C7 /* ChangeSumaryViewController.m */; };
 		1F2A8FEA1CF40277005116C7 /* ChangeSumaryViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1F2A8D8E1CF40277005116C7 /* ChangeSumaryViewController.xib */; };
 		1F2A8FEB1CF40277005116C7 /* DatePickerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F2A8D901CF40277005116C7 /* DatePickerViewController.m */; };
@@ -282,8 +282,6 @@
 		1F2A90311CF40277005116C7 /* DirectMessagesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F2A8E1C1CF40277005116C7 /* DirectMessagesViewController.m */; };
 		1F2A90321CF40277005116C7 /* AXModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F2A8E1F1CF40277005116C7 /* AXModel.m */; };
 		1F2A90331CF40277005116C7 /* ChatTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F2A8E221CF40277005116C7 /* ChatTableViewCell.m */; };
-		1F2A90341CF40277005116C7 /* IntegralRules.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F2A8E261CF40277005116C7 /* IntegralRules.m */; };
-		1F2A90351CF40277005116C7 /* IntegralVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F2A8E281CF40277005116C7 /* IntegralVC.m */; };
 		1F2A90361CF40277005116C7 /* Integral.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1F2A8E2B1CF40277005116C7 /* Integral.xib */; };
 		1F2A90371CF40277005116C7 /* IntegralRulesView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F2A8E2D1CF40277005116C7 /* IntegralRulesView.m */; };
 		1F2A90381CF40277005116C7 /* GuidePageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F2A8E311CF40277005116C7 /* GuidePageViewController.m */; };
@@ -501,6 +499,9 @@
 		1F1AF3AA1CF4AE4F00CAA525 /* MallTagsView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MallTagsView.h; sourceTree = "<group>"; };
 		1F1AF3AB1CF4AE4F00CAA525 /* MallTagsView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MallTagsView.m; sourceTree = "<group>"; };
 		1F1AF3AD1CF4B39C00CAA525 /* MallTags.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MallTags.xib; sourceTree = "<group>"; };
+		1F1AF3AF1CF58A6B00CAA525 /* IntegralViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IntegralViewController.h; sourceTree = "<group>"; };
+		1F1AF3B01CF58A6B00CAA525 /* IntegralViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IntegralViewController.m; sourceTree = "<group>"; };
+		1F1AF3B11CF58A6B00CAA525 /* IntegralViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = IntegralViewController.xib; sourceTree = "<group>"; };
 		1F223B1C1CD714F3007687F7 /* messages.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = messages.plist; sourceTree = "<group>"; };
 		1F27AE861CE06BB1005A434B /* AlipaySDK.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = AlipaySDK.bundle; sourceTree = "<group>"; };
 		1F27AE871CE06BB1005A434B /* AlipaySDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = AlipaySDK.framework; sourceTree = "<group>"; };
@@ -875,9 +876,6 @@
 		1F2A8D861CF40277005116C7 /* AddreesPickerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AddreesPickerViewController.h; sourceTree = "<group>"; };
 		1F2A8D871CF40277005116C7 /* AddreesPickerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AddreesPickerViewController.m; sourceTree = "<group>"; };
 		1F2A8D881CF40277005116C7 /* AddreesPickerViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AddreesPickerViewController.xib; sourceTree = "<group>"; };
-		1F2A8D891CF40277005116C7 /* ChangePasswordViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChangePasswordViewController.h; sourceTree = "<group>"; };
-		1F2A8D8A1CF40277005116C7 /* ChangePasswordViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChangePasswordViewController.m; sourceTree = "<group>"; };
-		1F2A8D8B1CF40277005116C7 /* ChangePasswordViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ChangePasswordViewController.xib; sourceTree = "<group>"; };
 		1F2A8D8C1CF40277005116C7 /* ChangeSumaryViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChangeSumaryViewController.h; sourceTree = "<group>"; };
 		1F2A8D8D1CF40277005116C7 /* ChangeSumaryViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChangeSumaryViewController.m; sourceTree = "<group>"; };
 		1F2A8D8E1CF40277005116C7 /* ChangeSumaryViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ChangeSumaryViewController.xib; sourceTree = "<group>"; };
@@ -1009,10 +1007,6 @@
 		1F2A8E1F1CF40277005116C7 /* AXModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AXModel.m; sourceTree = "<group>"; };
 		1F2A8E211CF40277005116C7 /* ChatTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChatTableViewCell.h; sourceTree = "<group>"; };
 		1F2A8E221CF40277005116C7 /* ChatTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChatTableViewCell.m; sourceTree = "<group>"; };
-		1F2A8E251CF40277005116C7 /* IntegralRules.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IntegralRules.h; sourceTree = "<group>"; };
-		1F2A8E261CF40277005116C7 /* IntegralRules.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IntegralRules.m; sourceTree = "<group>"; };
-		1F2A8E271CF40277005116C7 /* IntegralVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IntegralVC.h; sourceTree = "<group>"; };
-		1F2A8E281CF40277005116C7 /* IntegralVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IntegralVC.m; sourceTree = "<group>"; };
 		1F2A8E2B1CF40277005116C7 /* Integral.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = Integral.xib; sourceTree = "<group>"; };
 		1F2A8E2C1CF40277005116C7 /* IntegralRulesView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IntegralRulesView.h; sourceTree = "<group>"; };
 		1F2A8E2D1CF40277005116C7 /* IntegralRulesView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IntegralRulesView.m; sourceTree = "<group>"; };
@@ -2421,9 +2415,6 @@
 				1F2A8D861CF40277005116C7 /* AddreesPickerViewController.h */,
 				1F2A8D871CF40277005116C7 /* AddreesPickerViewController.m */,
 				1F2A8D881CF40277005116C7 /* AddreesPickerViewController.xib */,
-				1F2A8D891CF40277005116C7 /* ChangePasswordViewController.h */,
-				1F2A8D8A1CF40277005116C7 /* ChangePasswordViewController.m */,
-				1F2A8D8B1CF40277005116C7 /* ChangePasswordViewController.xib */,
 				1F2A8D8C1CF40277005116C7 /* ChangeSumaryViewController.h */,
 				1F2A8D8D1CF40277005116C7 /* ChangeSumaryViewController.m */,
 				1F2A8D8E1CF40277005116C7 /* ChangeSumaryViewController.xib */,
@@ -2741,10 +2732,9 @@
 		1F2A8E241CF40277005116C7 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
-				1F2A8E251CF40277005116C7 /* IntegralRules.h */,
-				1F2A8E261CF40277005116C7 /* IntegralRules.m */,
-				1F2A8E271CF40277005116C7 /* IntegralVC.h */,
-				1F2A8E281CF40277005116C7 /* IntegralVC.m */,
+				1F1AF3AF1CF58A6B00CAA525 /* IntegralViewController.h */,
+				1F1AF3B01CF58A6B00CAA525 /* IntegralViewController.m */,
+				1F1AF3B11CF58A6B00CAA525 /* IntegralViewController.xib */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -3757,7 +3747,6 @@
 				1F35F0511CD2336E0000DB95 /* areas.plist in Resources */,
 				1F2A908C1CF40277005116C7 /* PaySuccessViewController.xib in Resources */,
 				1F2A90571CF40277005116C7 /* Signup.xib in Resources */,
-				1F2A8FE81CF40277005116C7 /* ChangePasswordViewController.xib in Resources */,
 				1F2A905D1CF40277005116C7 /* MentionedViewController.xib in Resources */,
 				1F2A901B1CF40277005116C7 /* HistoryBonusViewController.xib in Resources */,
 				1F2A8FF31CF40277005116C7 /* ModifyGenderViewController.xib in Resources */,
@@ -3807,6 +3796,7 @@
 				1F2A8FEC1CF40277005116C7 /* DatePickerViewController.xib in Resources */,
 				1F2A90AC1CF40277005116C7 /* ChanePwdViewController.xib in Resources */,
 				1F2A911E1CF40495005116C7 /* WeiboSDK.bundle in Resources */,
+				1F1AF3B31CF58A6B00CAA525 /* IntegralViewController.xib in Resources */,
 				1F2A90141CF40277005116C7 /* MyView.xib in Resources */,
 				1F27AE9C1CE0EACE005A434B /* mapapi.bundle in Resources */,
 				1F2A902D1CF40277005116C7 /* EditAddressViewController.xib in Resources */,
@@ -3895,7 +3885,6 @@
 				1F2A90001CF40277005116C7 /* AreaModel.m in Sources */,
 				1F2A8F5E1CF40277005116C7 /* UpLookAllTagBtnTableViewCell.m in Sources */,
 				1F2A8FDF1CF40277005116C7 /* InfoGoodsHighlightsTableViewCell.m in Sources */,
-				1F2A90351CF40277005116C7 /* IntegralVC.m in Sources */,
 				1F2A8F5F1CF40277005116C7 /* UsedTagCollectionViewCell.m in Sources */,
 				1F2A8F981CF40277005116C7 /* SceneInfoCounter.m in Sources */,
 				1F2A8F671CF40277005116C7 /* FiuSceneViewController.m in Sources */,
@@ -3913,7 +3902,6 @@
 				1F2A8F511CF40277005116C7 /* FBSticker.m in Sources */,
 				1F2A90961CF40277005116C7 /* CommentReplyComment.m in Sources */,
 				1F2A90261CF40277005116C7 /* UIImagePickerController+Flag.m in Sources */,
-				1F2A8FE71CF40277005116C7 /* ChangePasswordViewController.m in Sources */,
 				1F2A8FF91CF40277005116C7 /* PraisedViewController.m in Sources */,
 				1F2A8F5D1CF40277005116C7 /* TagFlowLayout.m in Sources */,
 				1F2A8FBB1CF40277005116C7 /* CategoryRow.m in Sources */,
@@ -4045,6 +4033,7 @@
 				1F2A90211CF40277005116C7 /* IdentityTagsViewController.m in Sources */,
 				1F2A90B31CF40277005116C7 /* FBTabBar.m in Sources */,
 				1F2A8FE41CF40277005116C7 /* AccountManagementViewController.m in Sources */,
+				1F1AF3B21CF58A6B00CAA525 /* IntegralViewController.m in Sources */,
 				1F2A8F921CF40277005116C7 /* LikeOrSuPeople.m in Sources */,
 				1F2A8FCD1CF40277005116C7 /* GoodsBrandTableViewCell.m in Sources */,
 				1F2A90A21CF40277005116C7 /* SubscribePeopleTableViewCell.m in Sources */,
@@ -4056,7 +4045,6 @@
 				1F2A8F491CF40277005116C7 /* CropImageView.m in Sources */,
 				1F2A90531CF40277005116C7 /* NumView.m in Sources */,
 				1F2A90A01CF40277005116C7 /* SubscribePeopleViewController.m in Sources */,
-				1F2A90341CF40277005116C7 /* IntegralRules.m in Sources */,
 				1F2A90251CF40277005116C7 /* IdentityTagModel.m in Sources */,
 				1F2A8F391CF40277005116C7 /* SelectAllFSceneViewController.m in Sources */,
 				1F2A8FC81CF40277005116C7 /* GoodsInfoData.m in Sources */,

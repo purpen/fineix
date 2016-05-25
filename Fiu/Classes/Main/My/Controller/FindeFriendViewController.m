@@ -70,8 +70,12 @@ static NSString *const ShareURL = @"http://m.taihuoniao.com/guide/app_about";
             model.nickName = rowsDict[@"nickname"];
             model.address = rowsDict[@"areas"];
             model.isLove = rowsDict[@"is_love"];
-            model.label = rowsDict[@"label"];
+            
+            if(![rowsDict[@"label"] isKindOfClass:[NSNull class]]){
+                model.label = rowsDict[@"label"];
+            }
             model.level = rowsDict[@"level"];
+            model.is_expert = rowsDict[@"identify"][@"is_expert"];
             NSArray *sceneAry = rowsDict[@"scene_sight"];
             //model.scene = [NSMutableArray array];
             for (NSDictionary *sceneDict in sceneAry) {
@@ -156,21 +160,22 @@ static NSString *const ShareURL = @"http://m.taihuoniao.com/guide/app_about";
         [cell.headImageView sd_setImageWithURL:[NSURL URLWithString:model.avatarUrl]];
         cell.nameLbael.text = model.nickName;
         
-        UserInfoEntity *entity = [UserInfoEntity defaultUserInfoEntity];
         NSArray *tagsAry = [NSArray arrayWithObjects:@"大拿",@"行家",@"行摄家",@"艺术范",@"手艺人",@"人来疯",@"赎回自由身",@"职业buyer", nil];
-        if ([entity.is_expert isEqualToString:@"0"]) {
-            if (model.label) {
+        if ([model.is_expert isEqualToNumber:@0]) {
+            NSLog(@"dwewqebwqe %zi",model.label.length);
+            if (!model.label) {
                 cell.levelLabel.text = [NSString stringWithFormat:@"| V%d",[model.level intValue]];
             }else{
                 cell.levelLabel.text = [NSString stringWithFormat:@"%@ | V%d",model.label,[model.level intValue]];
             }
+            cell.idTagsImageView.hidden = YES;
             cell.imageView.hidden = YES;
             cell.userLevelLabel.hidden = YES;
-        }else if([entity.is_expert isEqualToString:@"1"]){
-            cell.userLevelLabel.text = [NSString stringWithFormat:@" | V%d",[entity.level intValue]];
+        }else if([model.is_expert isEqualToNumber:@1]){
+            cell.userLevelLabel.text = [NSString stringWithFormat:@" | V%d",[model.level intValue]];
             cell.idTagsImageView.hidden = NO;
             cell.userLevelLabel.hidden = NO;
-            int n = (int)[tagsAry indexOfObject:entity.label];
+            int n = (int)[tagsAry indexOfObject:model.label];
             cell.idTagsImageView.image = [UIImage imageNamed:[NSString stringWithFormat:@"tags%d",n]];
         }
 //        if (model.address.firstObject && model.address.lastObject) {
@@ -265,7 +270,7 @@ static NSString *const ShareURL = @"http://m.taihuoniao.com/guide/app_about";
     if (indexPath.section == 0) {
         if (indexPath.row == 0) {
             //微信
-            [[UMSocialDataService defaultDataService]  postSNSWithTypes:@[UMShareToWechatSession] content:@"我喜欢用图片梳理情绪，个性滤镜搭配细腻文字、还能一站购齐好设计！Fiu有一百种方式让你创新生活体验，快来让分享变成生产力。http://m.taihuoniao.com/promo/fiu" image:nil location:nil urlResource:nil presentedController:self completion:^(UMSocialResponseEntity *response){
+            [[UMSocialDataService defaultDataService]  postSNSWithTypes:@[UMShareToWechatSession] content:@"我喜欢用图片梳理情绪，个性滤镜搭配细腻文字、还能一站购齐好设计！Fiu有一百种方式让你创新生活体验，快来让分享变成生产力。http://m.taihuoniao.com/guide/fiu" image:nil location:nil urlResource:nil presentedController:self completion:^(UMSocialResponseEntity *response){
                 if (response.responseCode == UMSResponseCodeSuccess) {
                     [SVProgressHUD showSuccessWithStatus:@"分享成功！"];
                 }
@@ -274,7 +279,7 @@ static NSString *const ShareURL = @"http://m.taihuoniao.com/guide/app_about";
         }else if (indexPath.row == 1){
             //weibo
             MyQrCodeViewController *vc = [[MyQrCodeViewController alloc] init];
-            [[UMSocialDataService defaultDataService]  postSNSWithTypes:@[UMShareToSina] content:[NSString stringWithFormat:@"我喜欢用图片梳理情绪，个性滤镜搭配细腻文字、还能一站购齐好设计！Fiu有一百种方式让你创新生活体验，快来让分享变成生产力。http://m.taihuoniao.com/promo/fiu"] image:vc.qrCodeView.qrCodeImageView.image location:nil urlResource:nil presentedController:self completion:^(UMSocialResponseEntity *response){
+            [[UMSocialDataService defaultDataService]  postSNSWithTypes:@[UMShareToSina] content:[NSString stringWithFormat:@"我喜欢用图片梳理情绪，个性滤镜搭配细腻文字、还能一站购齐好设计！Fiu有一百种方式让你创新生活体验，快来让分享变成生产力。http://m.taihuoniao.com/guide/fiu"] image:vc.qrCodeView.qrCodeImageView.image location:nil urlResource:nil presentedController:self completion:^(UMSocialResponseEntity *response){
                 if (response.responseCode == UMSResponseCodeSuccess) {
                     [SVProgressHUD showSuccessWithStatus:@"分享成功！"];
                 }
@@ -283,7 +288,7 @@ static NSString *const ShareURL = @"http://m.taihuoniao.com/guide/app_about";
             //通讯录
 //            LBAddressBookViewController *vc = [[LBAddressBookViewController alloc] init];
 //            [self.navigationController pushViewController:vc animated:YES];
-            [[UMSocialDataService defaultDataService]  postSNSWithTypes:@[UMShareToSms] content:@"我喜欢用图片梳理情绪，个性滤镜搭配细腻文字、还能一站购齐好设计！Fiu有一百种方式让你创新生活体验，快来让分享变成生产力。http://m.taihuoniao.com/promo/fiu" image:nil location:nil urlResource:nil presentedController:self completion:^(UMSocialResponseEntity *shareResponse){
+            [[UMSocialDataService defaultDataService]  postSNSWithTypes:@[UMShareToSms] content:@"我喜欢用图片梳理情绪，个性滤镜搭配细腻文字、还能一站购齐好设计！Fiu有一百种方式让你创新生活体验，快来让分享变成生产力。http://m.taihuoniao.com/guide/fiu" image:nil location:nil urlResource:nil presentedController:self completion:^(UMSocialResponseEntity *shareResponse){
                 if (shareResponse.responseCode == UMSResponseCodeSuccess) {
                     [SVProgressHUD showSuccessWithStatus:@"分享成功！"];
                 }

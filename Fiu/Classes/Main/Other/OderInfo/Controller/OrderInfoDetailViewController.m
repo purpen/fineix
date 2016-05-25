@@ -326,7 +326,17 @@ static NSString *const OrderDetailURL = @"/shopping/detail";
         case OrderInfoStateWaitDelivery:
         {
             //提醒发货
-            [SVProgressHUD showInfoWithStatus:@"提醒发货"];
+            FBRequest *request = [FBAPI postWithUrlString:@"/shopping/alert_send_goods" requestDictionary:@{
+                                                                                                            @"rid":self.orderInfoCell.orderInfo.rid
+                                                                                                            } delegate:self];
+            [request startRequestSuccess:^(FBRequest *request, id result) {
+                NSLog(@"提醒发货    %@",result);
+                //提醒发货
+                [SVProgressHUD showSuccessWithStatus:[result objectForKey:@"message"]];
+                
+            } failure:^(FBRequest *request, NSError *error) {
+                
+            }];
         }
             break;
         default:

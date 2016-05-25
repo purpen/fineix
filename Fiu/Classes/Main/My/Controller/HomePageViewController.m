@@ -361,6 +361,9 @@ static NSString *const IconURL = @"/my/add_head_pic";
             if (![[result objectForKey:@"data"][@"is_love"] isKindOfClass:[NSNull class]]) {
                 _model.is_love = [result objectForKey:@"data"][@"is_love"];
             }
+            if (![[result objectForKey:@"data"][@"identify"][@"is_expert"] isKindOfClass:[NSNull class]]) {
+                _model.is_expert = [result objectForKey:@"data"][@"identify"][@"is_expert"];
+            }
             
             self.titleLabel.text = _model.nickname;
         }

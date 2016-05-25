@@ -29,13 +29,26 @@
     if (!_userView) {
         _userView = [[UIView alloc] init];
         
+        [_userView addSubview:self.lineView];
+        [_lineView mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.size.mas_equalTo(CGSizeMake(1, 12));
+            make.centerX.mas_equalTo(_userView.mas_centerX);
+            make.bottom.mas_equalTo(_userView.mas_bottom).with.offset(-49/667.0*SCREEN_HEIGHT);
+        }];
         
         [_userView addSubview:self.userLevelLabel];
         [_userLevelLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.centerX.mas_equalTo(_userView.mas_centerX);
-            make.bottom.mas_equalTo(_userView.mas_bottom).with.offset(-45/667.0*SCREEN_HEIGHT);
+            make.left.mas_equalTo(_lineView.mas_right).with.offset(3);
+            make.bottom.mas_equalTo(_userView.mas_bottom).with.offset(-49/667.0*SCREEN_HEIGHT);
+            make.centerY.mas_equalTo(_lineView.mas_centerY);
         }];
         
+        [_userView addSubview:self.idTagsLabel];
+        [_idTagsLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.right.mas_equalTo(_lineView.mas_left).with.offset(-7);
+            make.bottom.mas_equalTo(_userView.mas_bottom).with.offset(-49/667.0*SCREEN_HEIGHT);
+            make.centerY.mas_equalTo(_lineView.mas_centerY);
+        }];
         
         [_userView addSubview:self.userProfile];
         [_userProfile mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -62,11 +75,32 @@
         [_idImageView mas_makeConstraints:^(MASConstraintMaker *make) {
             make.size.mas_equalTo(CGSizeMake(28, 12));
             make.centerY.mas_equalTo(_userLevelLabel.mas_centerY);
-            make.left.mas_equalTo(_userLevelLabel.mas_right).with.offset(3);
+            make.right.mas_equalTo(_lineView.mas_left).with.offset(-4);
         }];
 
     }
     return _userView;
+}
+
+-(UILabel *)idTagsLabel{
+    if (!_idTagsLabel) {
+        _idTagsLabel = [[UILabel alloc] init];
+        _idTagsLabel = [[UILabel alloc] init];
+        _idTagsLabel.textColor = [UIColor whiteColor];
+        _idTagsLabel.font = [UIFont systemFontOfSize:13];
+        _idTagsLabel.textAlignment = NSTextAlignmentCenter;
+        _idTagsLabel.clipsToBounds = YES;
+        _idTagsLabel.autoresizingMask = UIViewAutoresizingFlexibleTopMargin;
+    }
+    return _idTagsLabel;
+}
+
+-(UIView *)lineView{
+    if (!_lineView) {
+        _lineView = [[UIView alloc] init];
+        _lineView.backgroundColor = [UIColor whiteColor];
+    }
+    return _lineView;
 }
 
 -(UIView *)headView{
@@ -98,10 +132,11 @@
     self.userProfile.text = entity.summary;
     NSArray *tagsAry = [NSArray arrayWithObjects:@"大拿",@"行家",@"行摄家",@"艺术范",@"手艺人",@"人来疯",@"赎回自由身",@"职业buyer", nil];
     if ([entity.is_expert isEqualToString:@"0"]) {
-        self.userLevelLabel.text = [NSString stringWithFormat:@"%@ | V%d",entity.label,[entity.level intValue]];
+        self.userLevelLabel.text = [NSString stringWithFormat:@"V%d",[entity.level intValue]];
+        self.idTagsLabel.text = entity.label;
         self.idImageView.hidden = YES;
     }else if([entity.is_expert isEqualToString:@"1"]){
-        self.userLevelLabel.text = [NSString stringWithFormat:@" | V%d",[entity.level intValue]];
+        self.userLevelLabel.text = [NSString stringWithFormat:@"V%d",[entity.level intValue]];
         self.idImageView.hidden = NO;
         int n = (int)[tagsAry indexOfObject:entity.label];
         self.idImageView.image = [UIImage imageNamed:[NSString stringWithFormat:@"tags%d",n]];
@@ -186,7 +221,7 @@
     if (!_userProfile) {
         _userProfile = [[UILabel alloc] init];
         _userProfile.textColor = [UIColor whiteColor];
-        _userProfile.font = [UIFont systemFontOfSize:12];
+        _userProfile.font = [UIFont systemFontOfSize:13];
         _userProfile.textAlignment = NSTextAlignmentCenter;
         _userProfile.clipsToBounds = YES;
         _userProfile.numberOfLines = 0;
@@ -199,7 +234,7 @@
     if (!_userLevelLabel) {
         _userLevelLabel = [[UILabel alloc] init];
         _userLevelLabel.textColor = [UIColor whiteColor];
-        _userLevelLabel.font = [UIFont systemFontOfSize:12];
+        _userLevelLabel.font = [UIFont systemFontOfSize:13];
         _userLevelLabel.textAlignment = NSTextAlignmentCenter;
         _userLevelLabel.clipsToBounds = YES;
         _userLevelLabel.autoresizingMask = UIViewAutoresizingFlexibleTopMargin;

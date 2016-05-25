@@ -19,5 +19,6 @@
 @property(nonatomic,strong) NSNumber *flag;
 @property(nonatomic,copy) NSString *label;
 @property(nonatomic,strong) NSNumber *level;
+@property(nonatomic,strong) NSNumber *is_expert;
 
 @end

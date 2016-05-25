@@ -316,7 +316,7 @@ NSString *const LoginURL = @"/auth/login";//登录接口
 #pragma mark -第三方登录成功后取到用户信息
 //如果成功，进行关联，并且更新当前用户信息
 -(void)afterTheSuccessOfTheThirdPartyToRegisterToGetUserInformation:(UMSocialAccountEntity *)snsAccount type:(NSNumber *)type{
-    
+    [SVProgressHUD showWithMaskType:SVProgressHUDMaskTypeClear];
     //发送注册请求
     NSDictionary *params = @{
                              @"oid":snsAccount.usid,

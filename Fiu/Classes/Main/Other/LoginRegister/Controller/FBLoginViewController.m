@@ -390,7 +390,7 @@ static NSString *const thirdRegister = @"/auth/third_sign";//第三方登录接�
     //如果微信登录失败，提示错误信息
     UMSocialSnsPlatform *snsPlatform = [UMSocialSnsPlatformManager getSocialPlatformWithName:UMShareToWechatSession];
     snsPlatform.loginClickHandler(self,[UMSocialControllerService defaultControllerService],YES,^(UMSocialResponseEntity *response){
-        //[SVProgressHUD showWithMaskType:SVProgressHUDMaskTypeClear];
+        [SVProgressHUD showWithMaskType:SVProgressHUDMaskTypeClear];
         
         if (response.responseCode == UMSResponseCodeSuccess) {
             //如果微信登录成功，取到用户信息
@@ -413,7 +413,7 @@ static NSString *const thirdRegister = @"/auth/third_sign";//第三方登录接�
     
     UMSocialSnsPlatform *snsPlatform = [UMSocialSnsPlatformManager getSocialPlatformWithName:UMShareToSina];
     snsPlatform.loginClickHandler(self,[UMSocialControllerService defaultControllerService],YES,^(UMSocialResponseEntity *response){
-        //[SVProgressHUD showWithMaskType:SVProgressHUDMaskTypeClear];
+        
         
         if (response.responseCode == UMSResponseCodeSuccess) {
             //如果微博登录成功，取到用户信息
@@ -439,7 +439,7 @@ static NSString *const thirdRegister = @"/auth/third_sign";//第三方登录接�
     UMSocialSnsPlatform *snsPlatform = [UMSocialSnsPlatformManager getSocialPlatformWithName:UMShareToQQ];
     snsPlatform.loginClickHandler(self,[UMSocialControllerService defaultControllerService],YES,^(UMSocialResponseEntity *response){
         
-        
+        [SVProgressHUD showWithMaskType:SVProgressHUDMaskTypeClear];
         if (response.responseCode == UMSResponseCodeSuccess) {
             //如果QQ登录成功，取到用户信息
             UMSocialAccountEntity *snsAccount = [[UMSocialAccountManager socialAccountDictionary] valueForKey:UMShareToQQ];
@@ -459,7 +459,7 @@ static NSString *const thirdRegister = @"/auth/third_sign";//第三方登录接�
 #pragma mark -第三方登录成功后取到用户信息
 //如果成功，进行关联，并且更新当前用户信息
 -(void)afterTheSuccessOfTheThirdPartyToRegisterToGetUserInformation:(UMSocialAccountEntity *)snsAccount type:(NSNumber *)type{
-    
+    [SVProgressHUD showWithMaskType:SVProgressHUDMaskTypeClear];
     //发送注册请求
     NSString *oid;
     if ([type isEqualToNumber:@1]) {

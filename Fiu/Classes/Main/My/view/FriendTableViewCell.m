@@ -145,7 +145,6 @@
     FiuSceneRow *model1 = [[FiuSceneRow alloc] init];
     
     model1.title = model.title;
-    NSLog(@"zheshi 这是   %@",model1.title);
     model1.coverUrl = model.cober;
     model1.address = model.address;
     [cell setFiuSceneList:model1];

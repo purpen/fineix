@@ -33,6 +33,7 @@
 -(void)getRound:(UIButton*)btn{
     btn.layer.masksToBounds = YES;
     btn.layer.cornerRadius = btn.frame.size.width*0.5;
+    btn.layer.shouldRasterize = YES;
 }
 
 @end

@@ -243,9 +243,17 @@ static NSString *const OrderInfoCellIdentifier = @"orderInfoCell";
 //            refundmentVC.delegate = self;
 //            [self.navigationController pushViewController:refundmentVC animated:YES];
 //            NSLog(@"申请退款");
-            
-            //提醒发货
-            [SVProgressHUD showInfoWithStatus:@"提醒发货"];
+            FBRequest *request = [FBAPI postWithUrlString:@"/shopping/alert_send_goods" requestDictionary:@{
+                                                                                                            @"rid":orderInfoCell.orderInfo.rid
+                                                                                                                } delegate:self];
+            [request startRequestSuccess:^(FBRequest *request, id result) {
+                NSLog(@"提醒发货    %@",result);
+                //提醒发货
+                [SVProgressHUD showSuccessWithStatus:[result objectForKey:@"message"]];
+                
+            } failure:^(FBRequest *request, NSError *error) {
+                
+            }];
         }
             break;
         case OrderInfoStateWaitReceive://确认收货
