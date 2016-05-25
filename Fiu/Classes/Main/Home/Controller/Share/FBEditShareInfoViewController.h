@@ -7,7 +7,32 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "FBViewController.h"
+#import <SVProgressHUD/SVProgressHUD.h>
+#import "MJRefresh.h"
 
-@interface FBEditShareInfoViewController : UIViewController
+typedef void(^GetEditShareText)(NSString * title, NSString * des);
+
+@interface FBEditShareInfoViewController : FBViewController <UITableViewDelegate, UITableViewDataSource, UITextFieldDelegate>
+
+@pro_strong FBRequest           *   shareTextRequest;
+@pro_strong FBRequest           *   searchListRequest;
+@pro_assign NSInteger               currentpageNum;
+@pro_assign NSInteger               totalPageNum;
+@pro_strong NSString            *   bgImg;
+@pro_strong NSString            *   afterTitle;
+@pro_strong NSString            *   afterDes;
+@pro_strong NSString            *   sceneTags;
+
+@pro_strong UIView              *   topView;
+@pro_strong UIButton            *   closeBtn;
+@pro_strong UIButton            *   shareBtn;
+@pro_strong UIImageView         *   bgImgView;
+@pro_strong UITextField         *   editTitle;
+@pro_strong UITextField         *   editDes;
+@pro_strong UITextField         *   searchView;
+@pro_strong UITableView         *   searchListTable;
+
+@pro_strong GetEditShareText        getEdtiShareText;
 
 @end

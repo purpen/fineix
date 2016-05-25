@@ -32,7 +32,7 @@
         [flowLayout setScrollDirection:(UICollectionViewScrollDirectionHorizontal)];
         flowLayout.sectionInset = UIEdgeInsetsMake(0, 10, 0, 10);
         
-        _tagCollectionView = [[UICollectionView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 40) collectionViewLayout:flowLayout];
+        _tagCollectionView = [[UICollectionView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 50) collectionViewLayout:flowLayout];
         _tagCollectionView.delegate = self;
         _tagCollectionView.dataSource = self;
         _tagCollectionView.showsHorizontalScrollIndicator = NO;

@@ -83,6 +83,9 @@
         UserGoodsTag * userTag = [[UserGoodsTag alloc] initWithFrame:CGRectMake(btnX * SCREEN_WIDTH, btnY * SCREEN_HEIGHT, 175, 32)];
         userTag.dele.hidden = YES;
         userTag.title.text = title;
+        if (price.length > 6) {
+            userTag.price.font = [UIFont systemFontOfSize:9];
+        }
         userTag.price.text = price;
         userTag.title.hidden = YES;
         userTag.price.hidden = YES;

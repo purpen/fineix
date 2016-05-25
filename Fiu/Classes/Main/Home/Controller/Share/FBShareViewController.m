@@ -8,13 +8,14 @@
 
 #import "FBShareViewController.h"
 #import "ShareStyleCollectionViewCell.h"
-#import "UMSocial.h"
-#import "WXApi.h"
-#import "WeiboSDK.h"
-#import <TencentOpenAPI/QQApiInterface.h>
-#import <SVProgressHUD/SVProgressHUD.h>
+#import "FBEditShareInfoViewController.h"
 
-@interface FBShareViewController ()
+@interface FBShareViewController () {
+    NSString * _editBgImg;
+    NSString * _editTitle;
+    NSString * _editDes;
+    NSString * _tags;
+}
 
 @end
 
@@ -50,6 +51,9 @@
     [self.view addSubview:self.topView];
     
     [self.view addSubview:self.styleView];
+    [self.styleView selectItemAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0]
+                                   animated:YES
+                             scrollPosition:(UICollectionViewScrollPositionNone)];
 }
 
 #pragma mark - 分享场景信息视图
@@ -57,14 +61,35 @@
     if (!_shareView) {
         _shareView = [[UIView alloc] initWithFrame:CGRectMake(0, 44, SCREEN_WIDTH, SCREEN_HEIGHT)];
         [_shareView addSubview:self.shareTopView];
+        
+        UITapGestureRecognizer * tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(editShareInfo)];
+        [_shareView addGestureRecognizer:tap];
     }
     return _shareView;
+}
+
+- (void)editShareInfo {
+    FBEditShareInfoViewController * editShareInfoVC = [[FBEditShareInfoViewController alloc] init];
+    editShareInfoVC.bgImg = _editBgImg;
+    editShareInfoVC.afterTitle = _editTitle;
+    editShareInfoVC.afterDes = _editDes;
+    editShareInfoVC.sceneTags = _tags;
+    [self presentViewController:editShareInfoVC animated:YES completion:nil];
+    
+    editShareInfoVC.getEdtiShareText = ^ (NSString * title, NSString * des) {
+        NSLog(@"＝＝＝＝＝＝＝ %@ －－－－%@", title, des);
+    };
 }
 
 - (ShareStyleTopView *)shareTopView {
     if (!_shareTopView) {
         _shareTopView = [[ShareStyleTopView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT)];
         [_shareTopView setShareSceneData:self.dataDict];
+        
+        _editBgImg = [self.dataDict valueForKey:@"cover_url"];
+        _editTitle = [self.dataDict valueForKey:@"title"];
+        _editDes = [self.dataDict valueForKey:@"des"];
+        _tags = [[self.dataDict valueForKey:@"tag_titles"] componentsJoinedByString:@","];
     }
     return _shareTopView;
 }

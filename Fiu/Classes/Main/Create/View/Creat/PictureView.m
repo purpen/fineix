@@ -136,7 +136,6 @@
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
     static NSString * collectionViewCellIdentifier = @"FBPictureCollectionViewCell";
-    
     FBPictureCollectionViewCell * cell = [collectionView dequeueReusableCellWithReuseIdentifier:collectionViewCellIdentifier forIndexPath:indexPath];
     FBPhoto * photo = [self.sortPhotosArr objectAtIndex:indexPath.row];
     cell.imageView.image = photo.thumbnailImage;

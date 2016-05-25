@@ -14,6 +14,12 @@
 #import "ShareStyleTitleBottomView.h"
 #import "ShareStyleTitleTopView.h"
 
+#import "UMSocial.h"
+#import "WXApi.h"
+#import "WeiboSDK.h"
+#import <TencentOpenAPI/QQApiInterface.h>
+#import <SVProgressHUD/SVProgressHUD.h>
+
 @interface FBShareViewController : UIViewController <UICollectionViewDelegate, UICollectionViewDataSource>
 
 @pro_strong UIView              *   topView;
