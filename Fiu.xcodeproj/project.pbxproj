@@ -469,6 +469,10 @@
 		D81281661CAA8532007CF08B /* JKDBHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = D81280D61CAA8532007CF08B /* JKDBHelper.m */; };
 		D81281671CAA8532007CF08B /* JKDBModel.m in Sources */ = {isa = PBXBuildFile; fileRef = D81280D81CAA8532007CF08B /* JKDBModel.m */; };
 		D8329DE71CF5823F00611025 /* FBEditShareInfoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D8329DE61CF5823F00611025 /* FBEditShareInfoViewController.m */; };
+		D8329DEF1CF611F800611025 /* ShareInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = D8329DEA1CF611F800611025 /* ShareInfo.m */; };
+		D8329DF01CF611F800611025 /* ShareInfoData.m in Sources */ = {isa = PBXBuildFile; fileRef = D8329DEC1CF611F800611025 /* ShareInfoData.m */; };
+		D8329DF11CF611F800611025 /* ShareInfoRow.m in Sources */ = {isa = PBXBuildFile; fileRef = D8329DEE1CF611F800611025 /* ShareInfoRow.m */; };
+		D8329DF41CF6158200611025 /* ShareSearchTextTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D8329DF31CF6158200611025 /* ShareSearchTextTableViewCell.m */; };
 		D83A64321C8E7765003DB8BB /* Photos.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D83A64311C8E7765003DB8BB /* Photos.framework */; };
 		D83A64331C8E7E93003DB8BB /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D802D7891C844101007AFA3D /* AVFoundation.framework */; };
 		D83A64351C8E7EAD003DB8BB /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D83A64341C8E7EAD003DB8BB /* Foundation.framework */; };
@@ -1335,6 +1339,14 @@
 		D81280D81CAA8532007CF08B /* JKDBModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JKDBModel.m; sourceTree = "<group>"; };
 		D8329DE51CF5823F00611025 /* FBEditShareInfoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FBEditShareInfoViewController.h; sourceTree = "<group>"; };
 		D8329DE61CF5823F00611025 /* FBEditShareInfoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FBEditShareInfoViewController.m; sourceTree = "<group>"; };
+		D8329DE91CF611F800611025 /* ShareInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShareInfo.h; sourceTree = "<group>"; };
+		D8329DEA1CF611F800611025 /* ShareInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ShareInfo.m; sourceTree = "<group>"; };
+		D8329DEB1CF611F800611025 /* ShareInfoData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShareInfoData.h; sourceTree = "<group>"; };
+		D8329DEC1CF611F800611025 /* ShareInfoData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ShareInfoData.m; sourceTree = "<group>"; };
+		D8329DED1CF611F800611025 /* ShareInfoRow.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShareInfoRow.h; sourceTree = "<group>"; };
+		D8329DEE1CF611F800611025 /* ShareInfoRow.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ShareInfoRow.m; sourceTree = "<group>"; };
+		D8329DF21CF6158200611025 /* ShareSearchTextTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShareSearchTextTableViewCell.h; sourceTree = "<group>"; };
+		D8329DF31CF6158200611025 /* ShareSearchTextTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ShareSearchTextTableViewCell.m; sourceTree = "<group>"; };
 		D83A64311C8E7765003DB8BB /* Photos.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Photos.framework; path = System/Library/Frameworks/Photos.framework; sourceTree = SDKROOT; };
 		D83A64341C8E7EAD003DB8BB /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		D83A64361C8E7EBD003DB8BB /* CoreVideo.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreVideo.framework; path = System/Library/Frameworks/CoreVideo.framework; sourceTree = SDKROOT; };
@@ -1975,6 +1987,7 @@
 		1F2A8CB11CF40276005116C7 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				D8329DE81CF611F800611025 /* ShareInfo */,
 				1F2A8CB21CF40276005116C7 /* Home */,
 				1F2A8CC11CF40276005116C7 /* LikeUser */,
 				1F2A8CCC1CF40276005116C7 /* Scene */,
@@ -2107,6 +2120,8 @@
 				D8B795291CF48B1D0075D985 /* ShareStyleTitleTopView.m */,
 				D8B7952B1CF48B2C0075D985 /* ShareStyleTitleBottomView.h */,
 				D8B7952C1CF48B2C0075D985 /* ShareStyleTitleBottomView.m */,
+				D8329DF21CF6158200611025 /* ShareSearchTextTableViewCell.h */,
+				D8329DF31CF6158200611025 /* ShareSearchTextTableViewCell.m */,
 			);
 			path = Share;
 			sourceTree = "<group>";
@@ -3644,6 +3659,19 @@
 			path = DBModel;
 			sourceTree = "<group>";
 		};
+		D8329DE81CF611F800611025 /* ShareInfo */ = {
+			isa = PBXGroup;
+			children = (
+				D8329DE91CF611F800611025 /* ShareInfo.h */,
+				D8329DEA1CF611F800611025 /* ShareInfo.m */,
+				D8329DEB1CF611F800611025 /* ShareInfoData.h */,
+				D8329DEC1CF611F800611025 /* ShareInfoData.m */,
+				D8329DED1CF611F800611025 /* ShareInfoRow.h */,
+				D8329DEE1CF611F800611025 /* ShareInfoRow.m */,
+			);
+			path = ShareInfo;
+			sourceTree = "<group>";
+		};
 		D87B69B91CC726BA00199EFE /* Category */ = {
 			isa = PBXGroup;
 			children = (
@@ -3901,6 +3929,7 @@
 				1F2A8F9A1CF40277005116C7 /* SceneInfoLocation.m in Sources */,
 				1F2A8F411CF40277005116C7 /* MarkGoodsData.m in Sources */,
 				1F2A8F451CF40277005116C7 /* FBLoadPhoto.m in Sources */,
+				D8329DF41CF6158200611025 /* ShareSearchTextTableViewCell.m in Sources */,
 				1F2A8FA51CF40277005116C7 /* ShareStyleCollectionViewCell.m in Sources */,
 				1F2A8FDC1CF40277005116C7 /* GoodsSceneCollectionViewCell.m in Sources */,
 				1F2A8FED1CF40277005116C7 /* EditNickNameViewController.m in Sources */,
@@ -3941,6 +3970,7 @@
 				1F2A8FD91CF40277005116C7 /* FBGoodsCommentTableViewCell.m in Sources */,
 				1F2A90291CF40277005116C7 /* TagsCollectionViewCell.m in Sources */,
 				D8A9AE401CE304FF00A9FCFB /* NSTimer+Addition.m in Sources */,
+				D8329DEF1CF611F800611025 /* ShareInfo.m in Sources */,
 				1F2A8F701CF40277005116C7 /* FiuSceneInfoCounter.m in Sources */,
 				1F2A8FFF1CF40277005116C7 /* AddreesModel.m in Sources */,
 				1F2A8F4D1CF40277005116C7 /* FiltersView.m in Sources */,
@@ -3981,6 +4011,7 @@
 				1F2A8FB21CF40277005116C7 /* MallViewController.m in Sources */,
 				1F2A907B1CF40277005116C7 /* TaoBaoOrderViewController.m in Sources */,
 				1F2A8FA81CF40277005116C7 /* GoodsCategoryViewController.m in Sources */,
+				D8329DF01CF611F800611025 /* ShareInfoData.m in Sources */,
 				1F2A8FB11CF40277005116C7 /* GoodsCarViewController.m in Sources */,
 				1F2A909E1CF40277005116C7 /* GreatPeopleViewController.m in Sources */,
 				1F2A908D1CF40277005116C7 /* WXSignParams.m in Sources */,
@@ -4052,6 +4083,7 @@
 				1F2A90A01CF40277005116C7 /* SubscribePeopleViewController.m in Sources */,
 				1F2A90251CF40277005116C7 /* IdentityTagModel.m in Sources */,
 				1F2A8F391CF40277005116C7 /* SelectAllFSceneViewController.m in Sources */,
+				D8329DF11CF611F800611025 /* ShareInfoRow.m in Sources */,
 				1F2A8FC81CF40277005116C7 /* GoodsInfoData.m in Sources */,
 				1F2A8FAC1CF40277005116C7 /* FBOrderSendWayViewController.m in Sources */,
 				1F2A906F1CF40277005116C7 /* CommenttwoViewController.m in Sources */,
