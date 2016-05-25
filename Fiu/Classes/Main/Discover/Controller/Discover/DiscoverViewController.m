@@ -66,6 +66,7 @@ static NSString *const URLFiuPeople = @"/user/find_user";
     [self networkFiuSceneData];
     self.currentpageNum = 0;
     [self networkSceneListData];
+    [self networkFiuPeopleData];
     
 }
 
@@ -92,7 +93,6 @@ static NSString *const URLFiuPeople = @"/user/find_user";
     [self.fiuPeopleRequest startRequestSuccess:^(FBRequest *request, id result) {
         
         self.fiuPeopleList = [NSMutableArray arrayWithArray:[[result valueForKey:@"data"] valueForKey:@"users"]];
-        NSLog(@"伙伴   %zi",self.fiuPeopleList.count);
         for (int i = 0; i<_fiuView.subviews.count; i++) {
             UIButton *btn = _fiuView.subviews[i];
             btn.tag = i;
