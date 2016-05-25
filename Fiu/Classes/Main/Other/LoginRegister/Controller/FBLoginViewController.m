@@ -460,6 +460,8 @@ static NSString *const thirdRegister = @"/auth/third_sign";//第三方登录接�
 //如果成功，进行关联，并且更新当前用户信息
 -(void)afterTheSuccessOfTheThirdPartyToRegisterToGetUserInformation:(UMSocialAccountEntity *)snsAccount type:(NSNumber *)type{
     [SVProgressHUD showWithMaskType:SVProgressHUDMaskTypeClear];
+    UMSocialConfig *h = [[UMSocialConfig alloc] init];
+    h.hiddenLoadingHUD = YES;
     //发送注册请求
     NSString *oid;
     if ([type isEqualToNumber:@1]) {

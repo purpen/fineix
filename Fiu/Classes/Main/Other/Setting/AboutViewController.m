@@ -26,7 +26,7 @@
 //    [self addBarItemLeftBarButton:nil image:@"icon_back"];
     
     //地址
-    NSURL *url = [NSURL URLWithString:@"http://m.taihuoniao.com/guide/app_about"];
+    NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"%@/view/about",self.formalUrl]];
     //在网页上加载
     NSURLRequest *request = [NSURLRequest requestWithURL:url];
     [self.aboutWebView loadRequest:request];

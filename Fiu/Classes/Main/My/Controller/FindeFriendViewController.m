@@ -13,7 +13,6 @@
 #import "QRCodeScanViewController.h"
 #import "UMSocial.h"
 #import "SVProgressHUD.h"
-#import "LBAddressBookViewController.h"
 #import "FBAPI.h"
 #import "FBRequest.h"
 #import "FindFriendModel.h"

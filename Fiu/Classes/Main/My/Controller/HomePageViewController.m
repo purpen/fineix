@@ -57,9 +57,15 @@ static NSString *const IconURL = @"/my/add_head_pic";
 
 @implementation HomePageViewController
 
+-(void)viewWillDisappear:(BOOL)animated{
+   [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleDefault];
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+//    UITabBarItem * item=[self.tabBarController.tabBar.items objectAtIndex:3];
+//    item.badgeValue=@" ";
     
     _fiuSceneList = [NSMutableArray array];
     _fiuSceneIdList = [NSMutableArray array];
@@ -98,7 +104,15 @@ static NSString *const IconURL = @"/my/add_head_pic";
 //    //
     [self.view addSubview:self.myCollectionView];
     
-   
+    //  添加渐变层
+    CAGradientLayer * shadow = [CAGradientLayer layer];
+    shadow.startPoint = CGPointMake(0, 2);
+    shadow.endPoint = CGPointMake(0, 0);
+    shadow.colors = @[(__bridge id)[UIColor clearColor].CGColor,
+                      (__bridge id)[UIColor blackColor].CGColor];
+    shadow.locations = @[@(0.5f), @(1.5f)];
+    shadow.frame = CGRectMake(0, 0, SCREEN_WIDTH, 64);
+    [self.view.layer addSublayer:shadow];
 }
 
 
@@ -142,6 +156,7 @@ static NSString *const IconURL = @"/my/add_head_pic";
 
 -(void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
+    [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent];
     self.delegate = self;
     [self.view addSubview:self.titleLabel];
     [self addBarItemLeftBarButton:nil image:@"Fill 1" isTransparent:YES];
@@ -160,6 +175,8 @@ static NSString *const IconURL = @"/my/add_head_pic";
     [self netGetData];
     
     [self requestDataForOderList];
+    
+    
 }
 
 -(void)loadMoreDataM{

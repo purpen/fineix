@@ -56,7 +56,11 @@
     
     
     self.orderIdLbl.text = self.orderInfo.rid;
-    self.paymentWayLbl.text = self.paymentWay;
+    if (self.paymentWay.length == 0) {
+        self.paymentWayLbl.text = @"红包支付";
+    }else{
+       self.paymentWayLbl.text = self.paymentWay;
+    }
     self.createTimeLbl.text = self.orderInfo.createdAt;
     [self addBarItemLeftBarButton:nil image:nil isTransparent:NO];
     [self addBarItemRightBarButton:@"完成" image:nil isTransparent:NO];

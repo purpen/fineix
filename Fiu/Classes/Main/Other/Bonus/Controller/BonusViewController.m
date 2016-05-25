@@ -16,9 +16,13 @@
 #define HeaderFooterHeight 50
 
 @interface BonusViewController ()<FBNavigationBarItemsDelegate,UITableViewDelegate,UITableViewDataSource>
-
+{
+    UIView *_footerView;
+}
 @property (weak, nonatomic) IBOutlet UITableView *bonusTableView;
 @property (nonatomic,strong) NSMutableArray *bonusAry;
+@pro_assign BOOL                        rollDown;               //  是否下拉
+@pro_assign CGFloat                     lastContentOffset;      //  滚动的方向
 @end
 
 static NSString *const BonusURL = @"/my/bonus";
@@ -49,14 +53,14 @@ static NSString *const BonusCellIdentifier = @"bonusCell";
 //    self.bonusTableView.tableHeaderView = headerView;
     
     //表尾视图
-    UIView * footerView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, HeaderFooterHeight)];
-    footerView.backgroundColor = [UIColor colorWithHexString:@"#f1f1f1"];
+    _footerView = [[UIView alloc] initWithFrame:CGRectMake(0, SCREEN_HEIGHT-HeaderFooterHeight, SCREEN_WIDTH, HeaderFooterHeight)];
+    _footerView.backgroundColor = [UIColor colorWithHexString:@"#f1f1f1"];
     
     UILabel * noMoreLbl = [[UILabel alloc] initWithFrame:CGRectMake(SCREEN_WIDTH / 2 - 110, 0, 110, HeaderFooterHeight)];
     noMoreLbl.text = @"没有更多可用红包";
     noMoreLbl.textColor = [UIColor colorWithHexString:@"#888888"];
     noMoreLbl.font = [UIFont systemFontOfSize:13];
-    [footerView addSubview:noMoreLbl];
+    [_footerView addSubview:noMoreLbl];
     
     UIButton * historyBtn = [UIButton buttonWithType:UIButtonTypeCustom];
     historyBtn.frame = CGRectMake(SCREEN_WIDTH / 2, 0, 110, HeaderFooterHeight);
@@ -64,16 +68,50 @@ static NSString *const BonusCellIdentifier = @"bonusCell";
     [historyBtn setTitleColor:[UIColor colorWithHexString:fineixColor] forState:UIControlStateNormal];
     historyBtn.titleLabel.font = [UIFont systemFontOfSize: 13];
     [historyBtn addTarget:self action:@selector(historyBtnAction:) forControlEvents:UIControlEventTouchUpInside];
-    [footerView addSubview:historyBtn];
-    self.bonusTableView.tableFooterView = footerView;
-    
+    [_footerView addSubview:historyBtn];
+//    self.bonusTableView.tableFooterView = footerView;
+    [self.view addSubview:_footerView];
     [self.bonusTableView registerNib:[UINib nibWithNibName:@"BonusCell" bundle:nil] forCellReuseIdentifier:BonusCellIdentifier];
     
     [self requestDataForBonus];
-
-    
-    
 }
+
+#pragma mark - 判断上／下滑状态，显示/隐藏Nav/tabBar
+- (void)scrollViewWillBeginDragging:(UIScrollView *)scrollView{
+    if (scrollView == self.bonusTableView) {
+        _lastContentOffset = scrollView.contentOffset.y;
+    }
+}
+
+- (void)scrollViewWillBeginDecelerating:(UIScrollView *)scrollView{
+    if (scrollView == self.bonusTableView) {
+        if (_lastContentOffset < scrollView.contentOffset.y) {
+            self.rollDown = YES;
+        }else{
+            self.rollDown = NO;
+        }
+    }
+}
+
+- (void)scrollViewDidScroll:(UIScrollView *)scrollView{
+    if (scrollView == self.bonusTableView) {
+        CGRect tabBarRect = _footerView.frame;
+        
+        if (self.rollDown == YES) {
+            tabBarRect = CGRectMake(0, SCREEN_HEIGHT + 20, SCREEN_WIDTH, HeaderFooterHeight);
+            [UIView animateWithDuration:.4 animations:^{
+                _footerView.frame = tabBarRect;
+            }];
+            
+        } else if (self.rollDown == NO) {
+            tabBarRect = CGRectMake(0, SCREEN_HEIGHT - HeaderFooterHeight, SCREEN_WIDTH, HeaderFooterHeight);
+            [UIView animateWithDuration:.4 animations:^{
+                _footerView.frame = tabBarRect;
+            }];
+        }
+    }
+}
+
 
 #pragma mark - Network
 //请求我的红包信息

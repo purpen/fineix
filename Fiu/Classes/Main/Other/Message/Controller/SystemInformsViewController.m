@@ -80,7 +80,6 @@
     
     FBRequest * request = [FBAPI postWithUrlString:@"/notice/getlist" requestDictionary:params delegate:self];
     [request startRequestSuccess:^(FBRequest *request, id result) {
-        NSLog(@"系统通知 %@",result);
         NSDictionary * dataDic = [result objectForKey:@"data"];
         NSArray * rowsAry = [dataDic objectForKey:@"rows"];
         
@@ -159,7 +158,6 @@
 }
 
 -(void)detailsBtn:(UIButton*)sender{
-    NSLog(@"查看详情");
     SystemInfoMessageTableViewCell *cell = [self.myTbaleView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:sender.tag inSection:0]];
     if (cell.alertTipView.hidden == NO) {
         self.num --;
@@ -188,7 +186,7 @@
 }
 
 -(void)rightBarItemSelected{
-    NSLog(@"清空");
+   
 }
 
 - (void)didReceiveMemoryWarning {

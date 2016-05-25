@@ -32,6 +32,13 @@
 - (void)getGoodsCarNumData;
 - (void)setNavGoodsCarNumLab;
 
+
+/**
+ * URL拼接
+ */
+@property(nonatomic,copy) NSString *formalUrl;
+
+
 /**
  *  是否登录
  */

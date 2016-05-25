@@ -18,6 +18,8 @@
 
 @property (weak, nonatomic) IBOutlet UITableView *addressTableView;
 @property (nonatomic, strong) NSMutableArray * addressAry;
+@property (nonatomic,strong) UIView *lineView;
+@property (weak, nonatomic) IBOutlet UIButton *addAddressBtn;
 @end
 
 static NSString *const AddressURL = @"/shopping/address";
@@ -35,6 +37,23 @@ static NSString *const DeliveryAddressCellIdentifier = @"deliveryAddressCell";
     self.addressTableView.rowHeight = 120;
     // Do any additional setup after loading the view from its nib.
     [self.addressTableView registerNib:[UINib nibWithNibName:@"DeliveryAddressCell" bundle:nil] forCellReuseIdentifier:DeliveryAddressCellIdentifier];
+    
+    [self.addAddressBtn addSubview:self.lineView];
+    [_lineView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.size.mas_equalTo(CGSizeMake(SCREEN_WIDTH, 0.5));
+        make.top.mas_equalTo(_addAddressBtn.mas_top).with.offset(0);
+        make.left.mas_equalTo(_addAddressBtn.mas_left).with.offset(0);
+        make.right.mas_equalTo(_addAddressBtn.mas_right).with.offset(0);
+    }];
+}
+
+-(UIView *)lineView{
+    if (!_lineView) {
+        _lineView = [[UIView alloc] init];
+        _lineView.backgroundColor = [UIColor grayColor];
+        _lineView.alpha = 0.5;
+    }
+    return _lineView;
 }
 
 

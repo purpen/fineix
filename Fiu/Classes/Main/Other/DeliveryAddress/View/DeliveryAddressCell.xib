@@ -30,7 +30,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="默认地址" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="OJl-o0-Olz">
-                                <rect key="frame" x="78" y="10" width="59" height="17"/>
+                                <rect key="frame" x="78" y="15" width="59" height="17"/>
                                 <color key="backgroundColor" red="0.74509803919999995" green="0.53725490200000003" blue="0.078431372550000003" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="59" id="aBv-hZ-zJQ"/>
@@ -92,7 +92,7 @@
                             <constraint firstItem="uMj-qV-ImM" firstAttribute="leading" secondItem="46D-Rb-jXY" secondAttribute="leading" id="jga-UQ-TpZ"/>
                             <constraint firstItem="OJl-o0-Olz" firstAttribute="leading" secondItem="46D-Rb-jXY" secondAttribute="trailing" constant="5" id="jh3-Th-1fG"/>
                             <constraint firstItem="mHP-dN-ZjP" firstAttribute="centerY" secondItem="B2X-c5-zmL" secondAttribute="centerY" id="pIr-cu-6n2"/>
-                            <constraint firstItem="OJl-o0-Olz" firstAttribute="top" secondItem="B2X-c5-zmL" secondAttribute="top" constant="10" id="rPi-Qh-ygs"/>
+                            <constraint firstItem="OJl-o0-Olz" firstAttribute="top" secondItem="B2X-c5-zmL" secondAttribute="top" constant="15" id="rPi-Qh-ygs"/>
                             <constraint firstItem="Mes-VV-Sk4" firstAttribute="top" secondItem="B2X-c5-zmL" secondAttribute="top" id="rzd-dz-aCF"/>
                             <constraint firstItem="OIo-2A-mjr" firstAttribute="leading" secondItem="46D-Rb-jXY" secondAttribute="leading" id="ssG-eo-PeD"/>
                             <constraint firstItem="OIo-2A-mjr" firstAttribute="top" secondItem="uMj-qV-ImM" secondAttribute="bottom" constant="5" id="zgM-E2-wU9"/>

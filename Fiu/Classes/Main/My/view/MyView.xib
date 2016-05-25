@@ -234,7 +234,7 @@
                     </constraints>
                 </view>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="bks-ip-Hwy">
-                    <rect key="frame" x="0.0" y="92" width="375" height="44"/>
+                    <rect key="frame" x="0.0" y="137" width="375" height="44"/>
                     <subviews>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="个性签名" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hzP-ba-H6X">
                             <rect key="frame" x="13" y="11" width="93" height="21"/>
@@ -271,7 +271,7 @@
                     </constraints>
                 </view>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="c1t-JX-Md4">
-                    <rect key="frame" x="0.0" y="182" width="375" height="44"/>
+                    <rect key="frame" x="0.0" y="189" width="375" height="44"/>
                     <subviews>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="地区" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dqc-oP-1Yg">
                             <rect key="frame" x="13" y="11" width="93" height="21"/>
@@ -330,7 +330,7 @@
                     </constraints>
                 </view>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="9tk-8Y-TiT">
-                    <rect key="frame" x="0.0" y="227" width="375" height="44"/>
+                    <rect key="frame" x="0.0" y="234" width="375" height="44"/>
                     <subviews>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="性别" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Oyh-vw-9tt">
                             <rect key="frame" x="13" y="11" width="93" height="21"/>
@@ -383,7 +383,7 @@
                     </constraints>
                 </view>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Npp-Vn-Gno">
-                    <rect key="frame" x="0.0" y="272" width="375" height="44"/>
+                    <rect key="frame" x="0.0" y="279" width="375" height="44"/>
                     <subviews>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="生日" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gMg-Iz-zLi">
                             <rect key="frame" x="13" y="11" width="93" height="21"/>
@@ -436,7 +436,7 @@
                     </constraints>
                 </view>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="n6A-Vm-ChT">
-                    <rect key="frame" x="0.0" y="317" width="375" height="44"/>
+                    <rect key="frame" x="0.0" y="331" width="375" height="44"/>
                     <subviews>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="我的二维码" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="IM3-E3-PW3">
                             <rect key="frame" x="13" y="11" width="93" height="21"/>
@@ -488,7 +488,7 @@
                     </variation>
                 </view>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="nql-Lm-8s9">
-                    <rect key="frame" x="0.0" y="137" width="375" height="44"/>
+                    <rect key="frame" x="0.0" y="92" width="375" height="44"/>
                     <subviews>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="身份标签" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="725-jd-BXg">
                             <rect key="frame" x="13" y="11" width="93" height="21"/>
@@ -541,6 +541,7 @@
                 <constraint firstItem="c1t-JX-Md4" firstAttribute="leading" secondItem="w17-i4-D6K" secondAttribute="leading" id="3xR-Fg-R2m"/>
                 <constraint firstAttribute="trailing" secondItem="G5R-A7-jZQ" secondAttribute="trailing" id="680-Io-25H"/>
                 <constraint firstItem="bks-ip-Hwy" firstAttribute="leading" secondItem="w17-i4-D6K" secondAttribute="leading" id="6Va-cU-AME"/>
+                <constraint firstItem="nql-Lm-8s9" firstAttribute="top" secondItem="G5R-A7-jZQ" secondAttribute="bottom" constant="1" id="CL9-pe-bQR"/>
                 <constraint firstAttribute="trailing" secondItem="bks-ip-Hwy" secondAttribute="trailing" id="CMY-nQ-8z5"/>
                 <constraint firstItem="G5R-A7-jZQ" firstAttribute="leading" secondItem="w17-i4-D6K" secondAttribute="leading" id="EGg-fx-kf4"/>
                 <constraint firstItem="Npp-Vn-Gno" firstAttribute="top" secondItem="9tk-8Y-TiT" secondAttribute="bottom" constant="1" id="Fzz-Tg-GoJ"/>
@@ -548,9 +549,11 @@
                 <constraint firstItem="9tk-8Y-TiT" firstAttribute="top" secondItem="c1t-JX-Md4" secondAttribute="bottom" constant="1" id="Gzc-q6-tfG"/>
                 <constraint firstAttribute="trailing" secondItem="Npp-Vn-Gno" secondAttribute="trailing" id="Q3U-lW-nt2"/>
                 <constraint firstItem="G5R-A7-jZQ" firstAttribute="top" secondItem="tUb-wY-BYS" secondAttribute="bottom" constant="1" id="QXR-gU-XXz"/>
-                <constraint firstItem="c1t-JX-Md4" firstAttribute="top" secondItem="nql-Lm-8s9" secondAttribute="bottom" constant="1" id="UdP-ex-rph"/>
+                <constraint firstItem="bks-ip-Hwy" firstAttribute="top" secondItem="nql-Lm-8s9" secondAttribute="bottom" constant="1" id="Qh4-oU-io6"/>
+                <constraint firstItem="c1t-JX-Md4" firstAttribute="top" secondItem="nql-Lm-8s9" secondAttribute="bottom" constant="8" id="UdP-ex-rph"/>
+                <constraint firstItem="c1t-JX-Md4" firstAttribute="top" secondItem="bks-ip-Hwy" secondAttribute="bottom" constant="8" id="Ulb-fO-ScQ"/>
                 <constraint firstAttribute="trailing" secondItem="nql-Lm-8s9" secondAttribute="trailing" id="dJp-F4-P0n"/>
-                <constraint firstItem="n6A-Vm-ChT" firstAttribute="top" secondItem="Npp-Vn-Gno" secondAttribute="bottom" constant="1" id="dqI-ho-D0I"/>
+                <constraint firstItem="n6A-Vm-ChT" firstAttribute="top" secondItem="Npp-Vn-Gno" secondAttribute="bottom" constant="8" id="dqI-ho-D0I"/>
                 <constraint firstAttribute="trailing" secondItem="c1t-JX-Md4" secondAttribute="trailing" id="eJk-Sa-zu8"/>
                 <constraint firstAttribute="trailing" secondItem="9tk-8Y-TiT" secondAttribute="trailing" id="gtY-0z-MLg"/>
                 <constraint firstItem="9tk-8Y-TiT" firstAttribute="leading" secondItem="w17-i4-D6K" secondAttribute="leading" id="heU-MN-NpX"/>
@@ -562,18 +565,21 @@
                 <constraint firstItem="tUb-wY-BYS" firstAttribute="leading" secondItem="w17-i4-D6K" secondAttribute="leading" id="pKh-2j-F5k"/>
                 <constraint firstItem="nql-Lm-8s9" firstAttribute="top" secondItem="G5R-A7-jZQ" secondAttribute="bottom" constant="1" id="qhR-kU-QqG"/>
                 <constraint firstAttribute="trailing" secondItem="tUb-wY-BYS" secondAttribute="trailing" id="sMI-yg-qNJ"/>
-                <constraint firstItem="bks-ip-Hwy" firstAttribute="top" secondItem="G5R-A7-jZQ" secondAttribute="bottom" constant="1" id="tRa-Rq-jy5"/>
+                <constraint firstItem="bks-ip-Hwy" firstAttribute="top" secondItem="G5R-A7-jZQ" secondAttribute="bottom" constant="50" id="tRa-Rq-jy5"/>
                 <constraint firstItem="nql-Lm-8s9" firstAttribute="top" secondItem="G5R-A7-jZQ" secondAttribute="bottom" constant="45" id="vfS-UL-uLR"/>
                 <constraint firstItem="tUb-wY-BYS" firstAttribute="top" secondItem="w17-i4-D6K" secondAttribute="top" constant="2" id="zJD-Kc-JMU"/>
             </constraints>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <variation key="default">
                 <mask key="constraints">
-                    <exclude reference="28t-C0-GJC"/>
-                    <exclude reference="Gxm-Y6-SqK"/>
+                    <exclude reference="jDJ-Sa-a4L"/>
                     <exclude reference="ozf-ii-7aW"/>
                     <exclude reference="qhR-kU-QqG"/>
                     <exclude reference="vfS-UL-uLR"/>
+                    <exclude reference="28t-C0-GJC"/>
+                    <exclude reference="Gxm-Y6-SqK"/>
+                    <exclude reference="tRa-Rq-jy5"/>
+                    <exclude reference="UdP-ex-rph"/>
                     <exclude reference="iDi-O1-oRk"/>
                 </mask>
             </variation>
