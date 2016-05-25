@@ -162,9 +162,15 @@ static NSString *const URLAllFiuSceneList = @"/scene_scene/";
 
 //  点击右边barItem
 - (void)rightBarItemSelected {
-    PictureToolViewController * pictureToolVC = [[PictureToolViewController alloc] init];
-    pictureToolVC.createType = @"fScene";
-    [self presentViewController:pictureToolVC animated:YES completion:nil];
+    if ([self isUserLogin]) {
+        PictureToolViewController * pictureToolVC = [[PictureToolViewController alloc] init];
+        pictureToolVC.createType = @"fScene";
+        [self presentViewController:pictureToolVC animated:YES completion:nil];
+        
+    } else {
+        [self openUserLoginVC];
+    }
+
 }
 
 - (void)viewWillDisappear:(BOOL)animated {

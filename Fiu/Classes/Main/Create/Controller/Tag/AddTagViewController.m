@@ -95,7 +95,6 @@ static NSInteger const CATEGORYTAG = 283;
             [self.userTagMarr addObject:[[[result valueForKey:@"data"] valueForKey:@"rows"] valueForKey:@"title_cn"][idx]];
             [self.hotTagIdList addObject:[[[result valueForKey:@"data"] valueForKey:@"rows"] valueForKey:@"_id"][idx]];
         }
-        [self setAddTagVcUI];
         
     } failure:^(FBRequest *request, NSError *error) {
         [SVProgressHUD showErrorWithStatus:[error localizedDescription]];
@@ -115,6 +114,8 @@ static NSInteger const CATEGORYTAG = 283;
             self.hotTagMarr = self.usedTagMarr;
             [self.usedTagView reloadData];
         }
+        
+        [self setAddTagVcUI];
         
     } failure:^(FBRequest *request, NSError *error) {
         [SVProgressHUD showErrorWithStatus:[error localizedDescription]];

@@ -84,7 +84,6 @@ static NSString *const URLWantBuy = @"/scene_product/sight_click_stat";
         //  分享出去的场景信息
         _shareDataDict = [NSDictionary dictionaryWithDictionary:[result valueForKey:@"data"]];
         _sceneUserId = [[result valueForKey:@"data"] valueForKey:@"user_id"];
-        
         self.sceneInfoModel = [[SceneInfoData alloc] initWithDictionary:[result valueForKey:@"data"]];
         if ([[[result valueForKey:@"data"] valueForKey:@"is_love"] integerValue] == 0) {
             self.likeScene.likeBtn.selected = NO;
