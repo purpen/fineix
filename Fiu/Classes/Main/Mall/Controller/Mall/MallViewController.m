@@ -339,9 +339,9 @@ static NSString *const URLFiuBrand = @"/scene_brands/getlist";
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
     self.headerView = [[GroupHeaderView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 44)];
     if (section == 0) {
-        [self.headerView addGroupHeaderViewIcon:@"Group_Brand" withTitle:@"最Fiu品牌" withSubtitle:@"[越喜欢头像越大]"];
+        [self.headerView addGroupHeaderViewIcon:@"Group_Brand" withTitle:NSLocalizedString(@"fiuBrand", nil) withSubtitle:@"[越喜欢头像越大]"];
     } else if (section ==1) {
-        [self.headerView addGroupHeaderViewIcon:@"Group_scene" withTitle:@"最Fiu商品" withSubtitle:@"[生活有你才够美]"];
+        [self.headerView addGroupHeaderViewIcon:@"Group_scene" withTitle:NSLocalizedString(@"fiuGoods", nil) withSubtitle:@"[生活有你才够美]"];
     } 
     return self.headerView;
 }

@@ -11,7 +11,6 @@
 
 static NSString *const URLGoodsCarNum = @"/shopping/fetch_cart_count";
 static NSString *const URLUserIsLogin = @"/user/user_info";
-static NSInteger const guideBtnTag = 763;
 
 @interface FBViewController () {
     NSMutableArray * _guideImgMarr;

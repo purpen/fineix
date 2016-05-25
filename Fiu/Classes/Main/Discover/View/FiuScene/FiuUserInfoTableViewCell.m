@@ -134,7 +134,7 @@
         [_userView addSubview:self.city];
         [_city mas_makeConstraints:^(MASConstraintMaker *make) {
             make.size.mas_equalTo(CGSizeMake(75, 15));
-            make.bottom.equalTo(_userLeftView.mas_top).with.offset(-10);
+            make.bottom.equalTo(_userLeftView.mas_top).with.offset(-15);
             make.left.equalTo(_userView.mas_left).with.offset(40);
         }];
         
@@ -143,6 +143,7 @@
             make.size.mas_equalTo(CGSizeMake(150, 15));
             make.bottom.equalTo(_city.mas_top).with.offset(-5);
             make.left.equalTo(_city.mas_right).with.offset(0);
+            make.right.equalTo(_userView.mas_right).with.offset(-20);
         }];
         
         [_userView addSubview:self.titleText];

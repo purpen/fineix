@@ -8,6 +8,7 @@
 
 #import "FBAlertViewController.h"
 #import "ReportViewController.h"
+#import "FBShareViewController.h"
 
 static const NSInteger actionBtnTag = 686;
 
@@ -65,10 +66,8 @@ static const NSInteger actionBtnTag = 686;
 //  用户自己创建的场景，可编辑
 - (void)userActionBtnClick:(UIButton *)button {
     if (button.tag == actionBtnTag) {
-        [SVProgressHUD showInfoWithStatus:@"删除场景"];
     
     } else if (button.tag == actionBtnTag + 1) {
-        [SVProgressHUD showInfoWithStatus:@"编辑场景"];
     
     } else if (button.tag == actionBtnTag + 2) {
         [self dismissViewControllerAnimated:YES completion:nil];
@@ -78,13 +77,14 @@ static const NSInteger actionBtnTag = 686;
 //  访客查看场景详情时
 - (void)visitorsActionBtnClick:(UIButton *)button {
     if (button.tag == actionBtnTag) {
-        [SVProgressHUD showInfoWithStatus:@"举报场景"];
         ReportViewController * reportVC = [[ReportViewController alloc] init];
         reportVC.targetId = self.targetId;
         [self presentViewController:reportVC animated:YES completion:nil];
         
     } else if (button.tag == actionBtnTag + 1) {
-        [SVProgressHUD showInfoWithStatus:@"分享场景"];
+        FBShareViewController * shareVC = [[FBShareViewController alloc] init];
+        shareVC.dataDict = self.sceneData;
+        [self presentViewController:shareVC animated:YES completion:nil];
         
     } else if (button.tag == actionBtnTag + 2) {
         [self dismissViewControllerAnimated:YES completion:nil];

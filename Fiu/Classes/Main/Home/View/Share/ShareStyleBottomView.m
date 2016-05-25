@@ -103,7 +103,7 @@
     [self addSubview:self.title];
     [_title mas_makeConstraints:^(MASConstraintMaker *make) {
         make.size.mas_equalTo(CGSizeMake(SCREEN_WIDTH * 0.68, 56));
-        make.bottom.equalTo(_describeView.mas_top).with.offset(-15);
+        make.bottom.equalTo(_addressIcon.mas_top).with.offset(-5);
         make.left.equalTo(self.mas_left).with.offset(20);
     }];
     

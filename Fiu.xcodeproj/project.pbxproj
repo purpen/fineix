@@ -468,6 +468,7 @@
 		D81281651CAA8532007CF08B /* BaiduMapAPI_Utils.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D81280D31CAA8532007CF08B /* BaiduMapAPI_Utils.framework */; };
 		D81281661CAA8532007CF08B /* JKDBHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = D81280D61CAA8532007CF08B /* JKDBHelper.m */; };
 		D81281671CAA8532007CF08B /* JKDBModel.m in Sources */ = {isa = PBXBuildFile; fileRef = D81280D81CAA8532007CF08B /* JKDBModel.m */; };
+		D8329DE71CF5823F00611025 /* FBEditShareInfoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D8329DE61CF5823F00611025 /* FBEditShareInfoViewController.m */; };
 		D83A64321C8E7765003DB8BB /* Photos.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D83A64311C8E7765003DB8BB /* Photos.framework */; };
 		D83A64331C8E7E93003DB8BB /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D802D7891C844101007AFA3D /* AVFoundation.framework */; };
 		D83A64351C8E7EAD003DB8BB /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D83A64341C8E7EAD003DB8BB /* Foundation.framework */; };
@@ -1332,6 +1333,8 @@
 		D81280D61CAA8532007CF08B /* JKDBHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JKDBHelper.m; sourceTree = "<group>"; };
 		D81280D71CAA8532007CF08B /* JKDBModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JKDBModel.h; sourceTree = "<group>"; };
 		D81280D81CAA8532007CF08B /* JKDBModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JKDBModel.m; sourceTree = "<group>"; };
+		D8329DE51CF5823F00611025 /* FBEditShareInfoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FBEditShareInfoViewController.h; sourceTree = "<group>"; };
+		D8329DE61CF5823F00611025 /* FBEditShareInfoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FBEditShareInfoViewController.m; sourceTree = "<group>"; };
 		D83A64311C8E7765003DB8BB /* Photos.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Photos.framework; path = System/Library/Frameworks/Photos.framework; sourceTree = SDKROOT; };
 		D83A64341C8E7EAD003DB8BB /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		D83A64361C8E7EBD003DB8BB /* CoreVideo.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreVideo.framework; path = System/Library/Frameworks/CoreVideo.framework; sourceTree = SDKROOT; };
@@ -1437,9 +1440,9 @@
 		1F2A8BCE1CF40276005116C7 /* Main */ = {
 			isa = PBXGroup;
 			children = (
-				1F2A8BCF1CF40276005116C7 /* Create */,
-				1F2A8C511CF40276005116C7 /* Discover */,
 				1F2A8CA31CF40276005116C7 /* Home */,
+				1F2A8C511CF40276005116C7 /* Discover */,
+				1F2A8BCF1CF40276005116C7 /* Create */,
 				1F2A8CF31CF40276005116C7 /* Mall */,
 				1F2A8D821CF40277005116C7 /* My */,
 				1F2A8DE31CF40277005116C7 /* Other */,
@@ -1954,6 +1957,8 @@
 			children = (
 				1F2A8CAC1CF40276005116C7 /* FBShareViewController.h */,
 				1F2A8CAD1CF40276005116C7 /* FBShareViewController.m */,
+				D8329DE51CF5823F00611025 /* FBEditShareInfoViewController.h */,
+				D8329DE61CF5823F00611025 /* FBEditShareInfoViewController.m */,
 			);
 			path = Share;
 			sourceTree = "<group>";
@@ -4086,6 +4091,7 @@
 				1F2A8F871CF40277005116C7 /* HomeViewController.m in Sources */,
 				1F2A8F9E1CF40277005116C7 /* SceneListTableViewCell.m in Sources */,
 				1F2A8F901CF40277005116C7 /* HomeSceneListRow.m in Sources */,
+				D8329DE71CF5823F00611025 /* FBEditShareInfoViewController.m in Sources */,
 				1F2A8FDE1CF40277005116C7 /* InfoBrandTableViewCell.m in Sources */,
 				1F2A8F6B1CF40277005116C7 /* FiuPeopleIdentify.m in Sources */,
 				1F2A8FE31CF40277005116C7 /* MallMenuTableViewCell.m in Sources */,

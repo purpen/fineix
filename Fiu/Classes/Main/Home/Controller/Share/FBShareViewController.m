@@ -14,8 +14,6 @@
 #import <TencentOpenAPI/QQApiInterface.h>
 #import <SVProgressHUD/SVProgressHUD.h>
 
-static NSInteger const shareViewTag = 10000;
-
 @interface FBShareViewController ()
 
 @end
@@ -66,7 +64,6 @@ static NSInteger const shareViewTag = 10000;
 - (ShareStyleTopView *)shareTopView {
     if (!_shareTopView) {
         _shareTopView = [[ShareStyleTopView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT)];
-        _shareTopView.tag = shareViewTag;
         [_shareTopView setShareSceneData:self.dataDict];
     }
     return _shareTopView;
@@ -75,10 +72,25 @@ static NSInteger const shareViewTag = 10000;
 - (ShareStyleBottomView *)shareBottomView {
     if (!_shareBottomView) {
         _shareBottomView = [[ShareStyleBottomView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT)];
-        _shareBottomView.tag = shareViewTag + 1;
         [_shareBottomView setShareSceneData:self.dataDict];
     }
     return _shareBottomView;
+}
+
+- (ShareStyleTitleBottomView *)shareTitleBottomView {
+    if (!_shareTitleBottomView) {
+        _shareTitleBottomView = [[ShareStyleTitleBottomView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT)];
+        [_shareTitleBottomView setShareSceneData:self.dataDict];
+    }
+    return _shareTitleBottomView;
+}
+
+- (ShareStyleTitleTopView *)shareTitleTopView {
+    if (!_shareTitleTopView) {
+        _shareTitleTopView = [[ShareStyleTitleTopView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT)];
+        [_shareTitleTopView setShareSceneData:self.dataDict];
+    }
+    return _shareTitleTopView;
 }
 
 #pragma mark - 分享样式视图
@@ -136,6 +148,26 @@ static NSInteger const shareViewTag = 10000;
             [self.shareView.subviews makeObjectsPerformSelector:@selector(removeFromSuperview)];
             [self.shareView addSubview:self.shareBottomView];
             [self.shareBottomView smallTitleFontStyle];
+        }
+        
+    } else if (indexPath.row == 4) {
+        if (self.shareView.subviews.count > 0) {
+            [self.shareView.subviews makeObjectsPerformSelector:@selector(removeFromSuperview)];
+            [self.shareView addSubview:self.shareTitleBottomView];
+        }
+    
+    } else if (indexPath.row == 5) {
+        if (self.shareView.subviews.count > 0) {
+            [self.shareView.subviews makeObjectsPerformSelector:@selector(removeFromSuperview)];
+            [self.shareView addSubview:self.shareTitleTopView];
+            [self.shareTitleTopView defultTitleFontStyle];
+        }
+    
+    } else if (indexPath.row == 6) {
+        if (self.shareView.subviews.count > 0) {
+            [self.shareView.subviews makeObjectsPerformSelector:@selector(removeFromSuperview)];
+            [self.shareView addSubview:self.shareTitleTopView];
+            [self.shareTitleTopView smallTitleFontStyle];
         }
     }
 }

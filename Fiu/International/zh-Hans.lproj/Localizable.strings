@@ -121,8 +121,16 @@
 "buyingGoods" = "立即购买";
 "goBuyGoods" = "去购买";
 
-//  分类
+//  标题
 "AllGoods" = "全部";
+"fiuFriend" = "最Fiu伙伴";
+"fiuScene" = "最Fiu场景";
+"fiuFScene" = "最Fiu情景";
+"fiuBrand" = "最Fiu品牌";
+"fiuGoods" = "最Fiu商品";
+"peopleLike" = "人赞过";
+"sceneGoods" = "此场景下的商品";
+"sceneLikeGoods" = "相近的商品";
 
 //  滤镜
 "FiltersName" = "原图";

@@ -39,12 +39,6 @@ static NSString *const URLUserAddGoods = @"/scene_product/add";
 
 @implementation FiltersViewController
 
-- (void)viewWillAppear:(BOOL)animated {
-    [super viewWillAppear:animated];
-
-    [self setFirstAppStart];
-}
-
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.view.backgroundColor = [UIColor blackColor];
@@ -104,6 +98,7 @@ static NSString *const URLUserAddGoods = @"/scene_product/add";
     
     //  判断是情景/场景
     if ([self.createType isEqualToString:@"scene"]) {
+        [self setFirstAppStart];
         [self addNavViewTitle:NSLocalizedString(@"filtersVcTitle", nil)];
     
     } else if ([self.createType isEqualToString:@"fScene"]) {
