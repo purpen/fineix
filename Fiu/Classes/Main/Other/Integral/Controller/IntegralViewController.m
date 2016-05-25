@@ -23,7 +23,7 @@
     self.navViewTitle.text = @"积分";
     FBRequest * request = [FBAPI postWithUrlString:@"/auth/check_login" requestDictionary:nil delegate:self];
     NSDictionary *dict = [request transformRequestDictionary];
-    NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"http://t.taihuoniao.com/app/api/view/fiu_point?uuid=%@&from_to=1",[dict objectForKey:@"uuid"]]];
+    NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"%@/view/fiu_point?uuid=%@&from_to=1",self.formalUrl,[dict objectForKey:@"uuid"]]];
     NSURLRequest *request1 = [NSURLRequest requestWithURL:url];
     [self.integralWebView loadRequest:request1];
     self.integralWebView.delegate = self;

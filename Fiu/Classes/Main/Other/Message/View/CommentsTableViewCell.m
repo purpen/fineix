@@ -78,7 +78,7 @@
         [_msgLabel mas_makeConstraints:^(MASConstraintMaker *make) {
             make.size.mas_equalTo(CGSizeMake(248/667.0*SCREEN_HEIGHT, 35/667.0*SCREEN_HEIGHT));
             make.left.mas_equalTo(_headImageView.mas_right).with.offset(10/667.0*SCREEN_HEIGHT);
-            make.top.mas_equalTo(_timeLabel.mas_bottom).with.offset(0);
+            make.top.mas_equalTo(_titleLbael.mas_bottom).with.offset(-3);
         }];
         
         [self.contentView addSubview:self.lineView];

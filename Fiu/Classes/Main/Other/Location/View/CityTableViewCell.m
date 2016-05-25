@@ -40,6 +40,17 @@
     if (!_bgImageView) {
         _bgImageView = [[UIImageView alloc] init];
         
+        //  添加渐变层
+        CAGradientLayer * shadow = [CAGradientLayer layer];
+        shadow.startPoint = CGPointMake(0, 0);
+        shadow.endPoint = CGPointMake(0, 1);
+        shadow.colors = @[(__bridge id)[UIColor clearColor].CGColor,
+                          (__bridge id)[UIColor blackColor].CGColor];
+        shadow.locations = @[@(0.5f), @(1.5f)];
+        shadow.frame = _bgImageView.bounds;
+        [_bgImageView.layer addSublayer:shadow];
+
+        
         [_bgImageView addSubview:self.locationImageView];
         [_locationImageView mas_makeConstraints:^(MASConstraintMaker *make) {
             make.size.mas_equalTo(CGSizeMake(20, 20));

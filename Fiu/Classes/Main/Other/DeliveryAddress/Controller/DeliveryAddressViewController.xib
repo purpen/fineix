@@ -7,6 +7,7 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="DeliveryAddressViewController">
             <connections>
+                <outlet property="addAddressBtn" destination="rpd-8R-x4p" id="710-mp-coy"/>
                 <outlet property="addressTableView" destination="Mhm-8V-DBp" id="Q29-E3-jWN"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>

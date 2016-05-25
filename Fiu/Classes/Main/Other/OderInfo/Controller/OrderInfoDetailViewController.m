@@ -142,8 +142,8 @@ static NSString *const OrderDetailURL = @"/shopping/detail";
         case OrderInfoStateWaitComment:
         {
             [self.operation1stBtn setTitle:@"发表评价" forState:UIControlStateNormal];
-            [self.operation2ndBtn setTitle:@"删除订单" forState:UIControlStateNormal];
-            self.operation2ndBtn.hidden = false;
+//            [self.operation2ndBtn setTitle:@"删除订单" forState:UIControlStateNormal];
+            self.operation2ndBtn.hidden = YES;
         }
             break;
         default:

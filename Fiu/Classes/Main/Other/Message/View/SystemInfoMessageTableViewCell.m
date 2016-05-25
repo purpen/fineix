@@ -81,8 +81,8 @@
         [_bgView addSubview:self.alertTipView];
         [_alertTipView mas_makeConstraints:^(MASConstraintMaker *make) {
             make.size.mas_equalTo(CGSizeMake(5/667.0*SCREEN_HEIGHT, 5/667.0*SCREEN_HEIGHT));
-            make.left.mas_equalTo(_tipLabel.mas_right).with.offset(10);
-            make.centerY.mas_equalTo(_tipLabel.mas_centerY);
+            make.left.mas_equalTo(_tipLabel.mas_right).with.offset(1);
+            make.top.mas_equalTo(_tipLabel.mas_top).with.offset(-1);
         }];
         
         [_bgView addSubview:self.iconImageView];

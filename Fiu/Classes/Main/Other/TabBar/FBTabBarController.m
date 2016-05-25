@@ -153,7 +153,6 @@
     [self setChildViewController:_myNav image:@"minegray" seletedImage:@"minered" itemTitle:@"我"];
     
     self.viewControllers = @[_homeNav, _discoverNav, _mallNav, _myNav];
-
 }
 
 #pragma mark “创建情景”的按钮事件

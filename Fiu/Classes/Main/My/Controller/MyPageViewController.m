@@ -43,6 +43,7 @@
 @property(nonatomic,strong) TipNumberView *tipNumView1;
 @property(nonatomic,strong) TipNumberView *tipNumView2;
 @property(nonatomic,strong) BotView *botView;
+@property(nonatomic,strong) UIView *naviViewAl;
 @end
 
 @implementation MyPageViewController
@@ -76,7 +77,17 @@
     scenarioTap3.numberOfTouchesRequired = 1;
     [_chanelV.fansView addGestureRecognizer:scenarioTap3];
     [self.view addSubview:self.myCollectionView];
+    
+    
+//    [self.view addSubview:self.naviViewAl];
+//    [_naviViewAl mas_makeConstraints:^(MASConstraintMaker *make) {
+//        make.size.mas_equalTo(CGSizeMake(SCREEN_WIDTH, 64));
+//        make.left.mas_equalTo(self.view.mas_left).with.offset(0);
+//        make.right.mas_equalTo(self.view.mas_right).with.offset(0);
+//    }];
 }
+
+
 
 -(void)signleTap:(UITapGestureRecognizer*)sender{
     //跳转到我的主页的情景的界面
@@ -102,7 +113,6 @@
 
 -(void)signleTap2:(UITapGestureRecognizer*)sender{
     //跳转到我的主页的情景的界面
-    NSLog(@"跳转到我的主页的关注的界面");
     UserInfoEntity *entity = [UserInfoEntity defaultUserInfoEntity];
     MyPageFocusOnViewController *view = [[MyPageFocusOnViewController alloc] init];
     view.userId = entity.userId;
@@ -111,7 +121,6 @@
 
 -(void)signleTap3:(UITapGestureRecognizer*)sender{
     //跳转到我的主页的情景的界面
-    NSLog(@"跳转到我的主页的粉丝的界面");
     MyFansViewController *view = [[MyFansViewController alloc] init];
     UserInfoEntity *entity = [UserInfoEntity defaultUserInfoEntity];
     view.userId = entity.userId;
@@ -153,6 +162,7 @@
             userInfo.prin = areasAry[0];
             userInfo.city = areasAry[1];
         }
+        NSLog(@"便签啊啊        %@",userInfo.label);
         userInfo.is_expert = [result objectForKey:@"data"][@"identify"][@"is_expert"];
         [userInfo saveOrUpdate];
         [userInfo updateUserInfoEntity];
