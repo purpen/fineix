@@ -428,12 +428,12 @@ static NSString *const URLWantBuy = @"/scene_product/sight_click_stat";
     if (section == 1) {
         self.headerView.backgroundColor = [UIColor whiteColor];
     } else if (section == 2) {
-        [self.headerView addGroupHeaderViewIcon:@"Group_scene" withTitle:@"此场景下的商品" withSubtitle:@""];
+        [self.headerView addGroupHeaderViewIcon:@"Group_scene" withTitle:NSLocalizedString(@"sceneGoods", nil) withSubtitle:@""];
     } else if (section == 3) {
         if (self.reGoodsList.count == 0) {
             [self.headerView addGroupHeaderViewIcon:@"" withTitle:@"" withSubtitle:@""];
         } else {
-            [self.headerView addGroupHeaderViewIcon:@"Group_scene" withTitle:@"相近的商品" withSubtitle:@""];
+            [self.headerView addGroupHeaderViewIcon:@"Group_scene" withTitle:NSLocalizedString(@"sceneLikeGoods", nil) withSubtitle:@""];
         }
     }
     
@@ -517,6 +517,7 @@ static NSString *const URLWantBuy = @"/scene_product/sight_click_stat";
     alertVC.modalPresentationStyle = UIModalPresentationOverCurrentContext;
     alertVC.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;
     alertVC.targetId = self.sceneId;
+    alertVC.sceneData = _shareDataDict;
     [self presentViewController:alertVC animated:YES completion:nil];
 }
 

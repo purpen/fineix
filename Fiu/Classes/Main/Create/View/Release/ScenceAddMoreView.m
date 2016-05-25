@@ -222,7 +222,7 @@ static const NSInteger btnTag = 100;
 #pragma mark - 添加地理位置按钮
 - (UIButton *)addLoacationBtn {
     if (!_addLoacationBtn) {
-        _addLoacationBtn = [[UIButton alloc] initWithFrame:CGRectMake(44, 0, SCREEN_WIDTH - 44, 44)];
+        _addLoacationBtn = [[UIButton alloc] initWithFrame:CGRectMake(34, 0, SCREEN_WIDTH - 44, 44)];
         [_addLoacationBtn setTitle:NSLocalizedString(@"addLocation", nil) forState:(UIControlStateNormal)];
         [_addLoacationBtn setTitleColor:[UIColor colorWithHexString:blackFont alpha:1] forState:(UIControlStateNormal)];
         _addLoacationBtn.titleLabel.font = [UIFont systemFontOfSize:Font_GroupHeader];
@@ -253,7 +253,7 @@ static const NSInteger btnTag = 100;
 #pragma mark - 显示地理位置的视图
 - (UIView *)locationView {
     if (!_locationView) {
-        _locationView = [[UIView alloc] initWithFrame:CGRectMake(44, 0, SCREEN_WIDTH - 44, 44)];
+        _locationView = [[UIView alloc] initWithFrame:CGRectMake(34, 0, SCREEN_WIDTH - 44, 44)];
         
         [_locationView addSubview:self.removeLocation];
         [_removeLocation mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -342,8 +342,6 @@ static const NSInteger btnTag = 100;
             [self changeTagFrame];
             [self.chooseTagView reloadData];
         }
-//        NSLog(@"＝＝＝＝＝＝＝＝＝ %@ ＝＝＝＝＝＝＝", self.chooseTagMarr);
-//        NSLog(@"－－－－－－－－－ %@ －－－－－－－", ids);
     };
     
     [self.nav pushViewController:addTagVC animated:YES];

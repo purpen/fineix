@@ -14,6 +14,7 @@
 
 @pro_strong NSString        *   targetId;
 @pro_strong UIView          *   alertView;
+@pro_strong NSDictionary    *   sceneData;
 
 - (void)initFBAlertVcStyle:(BOOL)isUserSelf;
 

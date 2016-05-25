@@ -511,6 +511,7 @@ static NSString *const URLWantBuy = @"/scene_product/sight_click_stat";
     alertVC.modalPresentationStyle = UIModalPresentationOverCurrentContext;
     alertVC.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;
     alertVC.targetId = self.sceneId;
+    alertVC.sceneData = _shareDataDict;
     [self presentViewController:alertVC animated:YES completion:nil];
 }
 

@@ -359,12 +359,12 @@ static NSString *const URLFiuPeople = @"/user/find_user";
     self.headerView.nav = self.navigationController;
     
     if (section == 0) {
-        [self.headerView addGroupHeaderViewIcon:@"Group_friend" withTitle:@"最Fiu伙伴" withSubtitle:@"[越喜欢头像越大]"];
+        [self.headerView addGroupHeaderViewIcon:@"Group_friend" withTitle:NSLocalizedString(@"fiuFriend", nil) withSubtitle:@"[越喜欢头像越大]"];
     } else if (section ==1) {
         [self.headerView addLookMoreBtn];
-        [self.headerView addGroupHeaderViewIcon:@"Group_scene" withTitle:@"最Fiu情景" withSubtitle:@"[我的地盘我收益]"];
+        [self.headerView addGroupHeaderViewIcon:@"Group_scene" withTitle:NSLocalizedString(@"fiuFScene", nil) withSubtitle:@"[我的地盘我收益]"];
     } else if (section == 2) {
-        [self.headerView addGroupHeaderViewIcon:@"Group_scene" withTitle:@"最Fiu场景" withSubtitle:@"[发现不一样]"];
+        [self.headerView addGroupHeaderViewIcon:@"Group_scene" withTitle:NSLocalizedString(@"fiuScene", nil) withSubtitle:@"[发现不一样]"];
     }
     
     return self.headerView;

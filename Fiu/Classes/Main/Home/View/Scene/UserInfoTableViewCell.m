@@ -47,9 +47,9 @@
     self.time.text = [NSString stringWithFormat:@"| %@", model.createdAt];
     
     if (model.loveCount/1000 > 1) {
-        self.goodNum.text = [NSString stringWithFormat:@"%zik人赞过", model.loveCount/1000];
+        self.goodNum.text = [NSString stringWithFormat:@"%zik%@", model.loveCount/1000, NSLocalizedString(@"peopleLike", nil)];
     } else {
-        self.goodNum.text = [NSString stringWithFormat:@"%zi人赞过", model.loveCount];
+        self.goodNum.text = [NSString stringWithFormat:@"%zi%@", model.loveCount, NSLocalizedString(@"peopleLike", nil)];
     }
     
     self.tagDataMarr = [NSMutableArray arrayWithArray:model.product];
@@ -214,6 +214,7 @@
             make.size.mas_equalTo(CGSizeMake(75, 15));
             make.bottom.equalTo(_userLeftView.mas_top).with.offset(-10);
             make.left.equalTo(_userView.mas_left).with.offset(40);
+            make.right.equalTo(_userView.mas_right).with.offset(-20);
         }];
         
         [_userView addSubview:self.whereScene];
