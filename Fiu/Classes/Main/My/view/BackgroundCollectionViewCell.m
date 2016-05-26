@@ -76,9 +76,23 @@
             make.centerY.mas_equalTo(_userLevelLabel.mas_centerY);
             make.right.mas_equalTo(_lineView.mas_left).with.offset(-4);
         }];
+        
+        [_userView addSubview:self.userHeadBtn];
+        [_userHeadBtn mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.size.mas_equalTo(CGSizeMake(84/667.0*SCREEN_HEIGHT, 84/667.0*SCREEN_HEIGHT));
+            make.centerX.mas_equalTo(_userView.mas_centerX);
+            make.bottom.mas_equalTo(_userProfile.mas_top).with.offset(-20/667.0*SCREEN_HEIGHT);
+        }];
 
     }
     return _userView;
+}
+
+-(UIButton *)userHeadBtn{
+    if (!_userHeadBtn) {
+        _userHeadBtn = [[UIButton alloc] init];
+    }
+    return _userHeadBtn;
 }
 
 -(UILabel *)idTagsLabel{
@@ -167,7 +181,7 @@
         //  添加渐变层
         CAGradientLayer * shadow = [CAGradientLayer layer];
         shadow.startPoint = CGPointMake(0, 0);
-        shadow.endPoint = CGPointMake(0, 1);
+        shadow.endPoint = CGPointMake(0, 5);
         shadow.colors = @[(__bridge id)[UIColor clearColor].CGColor,
                           (__bridge id)[UIColor blackColor].CGColor];
         shadow.locations = @[@(0.5f), @(1.5f)];

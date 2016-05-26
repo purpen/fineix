@@ -21,7 +21,7 @@
 #import "DatePickerViewController.h"
 #import "AddreesPickerViewController.h"
 #import "AddreesModel.h"
-#import "IdentityTagsViewController.h"
+#import "OfficialCertificationViewController.h"
 
 @interface AccountManagementViewController ()<FBNavigationBarItemsDelegate,UIImagePickerControllerDelegate,UIActionSheetDelegate,UINavigationControllerDelegate>
 {
@@ -75,7 +75,7 @@ static NSString *const UpdateInfoURL = @"/my/update_profile";
 }
 
 -(void)clickCertificationBtn:(UIButton*)sender{
-    IdentityTagsViewController *vc = [[IdentityTagsViewController alloc] init];
+    OfficialCertificationViewController *vc = [[OfficialCertificationViewController alloc] init];
     [self.navigationController pushViewController:vc animated:YES];
 }
 

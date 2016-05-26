@@ -246,6 +246,12 @@
                             <color key="textColor" red="0.40000000000000002" green="0.40000000000000002" blue="0.40000000000000002" alpha="1" colorSpace="calibratedRGB"/>
                             <nil key="highlightedColor"/>
                         </label>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4uy-3w-vFs">
+                            <rect key="frame" x="296" y="13" width="38" height="18"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                            <color key="textColor" red="0.40000000000000002" green="0.40000000000000002" blue="0.40000000000000002" alpha="1" colorSpace="calibratedRGB"/>
+                            <nil key="highlightedColor"/>
+                        </label>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="J9V-6G-f1s">
                             <rect key="frame" x="13" y="4" width="327" height="30"/>
                         </button>
@@ -260,6 +266,7 @@
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     <constraints>
                         <constraint firstAttribute="trailing" secondItem="X08-E8-QLy" secondAttribute="trailing" constant="16" id="1fg-lW-ujL"/>
+                        <constraint firstAttribute="trailing" secondItem="4uy-3w-vFs" secondAttribute="trailing" constant="41" id="2Cz-X0-zD8"/>
                         <constraint firstItem="J9V-6G-f1s" firstAttribute="leading" secondItem="bks-ip-Hwy" secondAttribute="leading" constant="13" id="3ZR-PE-wNQ"/>
                         <constraint firstAttribute="trailing" secondItem="J9V-6G-f1s" secondAttribute="trailing" constant="35" id="Gmu-dq-nSz"/>
                         <constraint firstItem="X08-E8-QLy" firstAttribute="centerY" secondItem="bks-ip-Hwy" secondAttribute="centerY" id="I18-KH-UJ5"/>
@@ -268,7 +275,14 @@
                         <constraint firstItem="hzP-ba-H6X" firstAttribute="leading" secondItem="bks-ip-Hwy" secondAttribute="leading" constant="13" id="jvS-be-pzw"/>
                         <constraint firstItem="hzP-ba-H6X" firstAttribute="centerY" secondItem="bks-ip-Hwy" secondAttribute="centerY" id="mV6-O4-Zek"/>
                         <constraint firstItem="J9V-6G-f1s" firstAttribute="top" secondItem="bks-ip-Hwy" secondAttribute="top" constant="4" id="r6I-Q4-C3C"/>
+                        <constraint firstItem="4uy-3w-vFs" firstAttribute="centerY" secondItem="bks-ip-Hwy" secondAttribute="centerY" id="tVa-bz-2Yr"/>
+                        <constraint firstItem="X08-E8-QLy" firstAttribute="leading" secondItem="4uy-3w-vFs" secondAttribute="trailing" constant="41" id="vIC-Ix-CDN"/>
                     </constraints>
+                    <variation key="default">
+                        <mask key="constraints">
+                            <exclude reference="vIC-Ix-CDN"/>
+                        </mask>
+                    </variation>
                 </view>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="c1t-JX-Md4">
                     <rect key="frame" x="0.0" y="189" width="375" height="44"/>
@@ -490,7 +504,7 @@
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="nql-Lm-8s9">
                     <rect key="frame" x="0.0" y="92" width="375" height="44"/>
                     <subviews>
-                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="身份标签" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="725-jd-BXg">
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="官方认证" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="725-jd-BXg">
                             <rect key="frame" x="13" y="11" width="93" height="21"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="21" id="IDb-FY-p5U"/>
@@ -594,6 +608,7 @@
                 <outlet property="iconUrl" destination="KUV-dt-4On" id="XtC-Io-vAa"/>
                 <outlet property="nickBtn" destination="SIa-Um-Hvw" id="d0T-17-L6c"/>
                 <outlet property="nickName" destination="KL2-7v-eUh" id="oOf-Ol-Mua"/>
+                <outlet property="personalitySignatureLabel" destination="4uy-3w-vFs" id="tvT-EV-c6Y"/>
                 <outlet property="qrcodeBtn" destination="6LQ-JJ-pdv" id="XCp-1T-Pqz"/>
                 <outlet property="sex" destination="lW1-jr-MwX" id="i4t-c6-kwA"/>
                 <outlet property="sexBtn" destination="LXT-qR-NSm" id="0j1-FZ-q9L"/>
