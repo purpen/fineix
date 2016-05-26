@@ -25,6 +25,15 @@
     return self;
 }
 
+- (void)changeWithSearchText:(NSString *)title withDes:(NSString *)des {
+    _titleText = title;
+    [self.title mas_updateConstraints:^(MASConstraintMaker *make) {
+        make.size.mas_equalTo(CGSizeMake(SCREEN_WIDTH * 0.68, 56));
+    }];
+    [self titleTextStyle:_titleText withBgColor:[UIColor colorWithPatternImage:[UIImage imageNamed:@"titleBg"]]];
+    [self changeContentLabStyle:des];
+}
+
 - (void)smallTitleFontStyle {
     self.title.font = [UIFont systemFontOfSize:18];
     [self.title mas_updateConstraints:^(MASConstraintMaker *make) {

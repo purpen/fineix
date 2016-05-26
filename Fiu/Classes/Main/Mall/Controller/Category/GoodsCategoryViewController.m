@@ -161,7 +161,7 @@ static NSString *const URLGoodsList = @"/scene_product/getlist";
 #pragma mark - 商品列表视图
 - (UITableView *)goodsListTable {
     if (!_goodsListTable) {
-        _goodsListTable = [[UITableView alloc] initWithFrame:CGRectMake(0, 148, SCREEN_WIDTH, SCREEN_HEIGHT - 148) style:(UITableViewStylePlain)];
+        _goodsListTable = [[UITableView alloc] initWithFrame:CGRectMake(0, 158, SCREEN_WIDTH, SCREEN_HEIGHT - 158) style:(UITableViewStylePlain)];
         _goodsListTable.delegate = self;
         _goodsListTable.dataSource = self;
         _goodsListTable.showsVerticalScrollIndicator = NO;
@@ -243,7 +243,7 @@ static NSString *const URLGoodsList = @"/scene_product/getlist";
 #pragma mark - 滑动导航栏
 - (FBMenuView *)categoryMenuView {
     if (!_categoryMenuView) {
-        _categoryMenuView = [[FBMenuView alloc] initWithFrame:CGRectMake(0, 64, SCREEN_WIDTH, 44)];
+        _categoryMenuView = [[FBMenuView alloc] initWithFrame:CGRectMake(0, 64, SCREEN_WIDTH, 54)];
         _categoryMenuView.delegate = self;
         _categoryMenuView.menuTitle = self.categoryTitleArr;
         [_categoryMenuView updateMenuButtonData];

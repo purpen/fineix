@@ -25,13 +25,14 @@ typedef void(^GetEditShareText)(NSString * title, NSString * des);
 @pro_strong NSString            *   sceneTags;
 
 @pro_strong UIView              *   topView;
-@pro_strong UIButton            *   closeBtn;
 @pro_strong UIButton            *   shareBtn;
 @pro_strong UIImageView         *   bgImgView;
 @pro_strong UITextField         *   editTitle;
-@pro_strong UITextField         *   editDes;
+@pro_strong UITextView          *   editDes;
 @pro_strong UITextField         *   searchView;
+@pro_strong UIButton            *   searchBtn;
 @pro_strong UITableView         *   searchListTable;
+@pro_strong UIView              *   textSearchView;
 
 @pro_strong GetEditShareText        getEdtiShareText;
 
