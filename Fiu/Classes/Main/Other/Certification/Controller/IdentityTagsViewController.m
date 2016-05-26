@@ -57,6 +57,21 @@
     [self.applyBtn addTarget:self action:@selector(clickApplyBtn:) forControlEvents:UIControlEventTouchUpInside];
 }
 
+-(void)viewWillAppear:(BOOL)animated{
+    [super viewWillAppear:animated];
+    FBRequest *request = [FBAPI postWithUrlString:@"/my/fetch_talent" requestDictionary:nil delegate:self];
+    [request startRequestSuccess:^(FBRequest *request, id result) {
+        NSDictionary *dataDict = [result objectForKey:@"data"];
+        if ([dataDict objectForKey:@"label"]) {
+            self.titleTextField.text = [dataDict objectForKey:@"label"];
+            self.tipLabel.hidden = YES;
+            self.deletAllBtn.hidden = NO;
+        }
+    } failure:^(FBRequest *request, NSError *error) {
+        
+    }];
+}
+
 -(void)clickApplyBtn:(UIButton*)sender{
     TheOfficialCertificationViewController *vc = [[TheOfficialCertificationViewController alloc] init];
     [self.navigationController pushViewController:vc animated:YES];

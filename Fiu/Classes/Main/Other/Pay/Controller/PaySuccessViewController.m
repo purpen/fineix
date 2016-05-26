@@ -62,7 +62,7 @@
        self.paymentWayLbl.text = self.paymentWay;
     }
     self.createTimeLbl.text = self.orderInfo.createdAt;
-    [self addBarItemLeftBarButton:nil image:nil isTransparent:NO];
+    self.leftBtn.hidden = YES;
     [self addBarItemRightBarButton:@"完成" image:nil isTransparent:NO];
     
     //[self NoticeWithShare];

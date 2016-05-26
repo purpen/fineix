@@ -95,7 +95,6 @@
         
         [_userView addSubview:self.idImageView];
         [_idImageView mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.size.mas_equalTo(CGSizeMake(28, 12));
             make.centerY.mas_equalTo(_userLevelLabel.mas_centerY);
             make.right.mas_equalTo(_lineView.mas_left).with.offset(-4);
         }];
@@ -131,7 +130,9 @@
     //这里要改成别人的信息
     
     //更新头像
-    [self.userHeadImageView sd_setImageWithURL:[NSURL URLWithString:model.mediumAvatarUrl] placeholderImage:nil completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
+    UIImageView * headerImg = [[UIImageView alloc] initWithFrame:self.userHeadImageView.frame];
+    [headerImg downloadImage:model.mediumAvatarUrl place:[UIImage imageNamed:@""]];
+    [self.userHeadImageView sd_setImageWithURL:[NSURL URLWithString:model.mediumAvatarUrl] placeholderImage:headerImg.image completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
         
     }];
     self.nickName.text = model.nickname;
@@ -148,8 +149,9 @@
         self.idImageView.image = [UIImage imageNamed:[NSString stringWithFormat:@"tags%d",n]];
     }
     //self.userLevelLabel.text = [NSString stringWithFormat:@"%@|V%d",model.levelDesc,[model.level intValue]];
-    
-    [self.bgImageView sd_setImageWithURL:[NSURL URLWithString:model.head_pic_url] placeholderImage:[UIImage imageNamed:@"image"]];
+    UIImageView * headerImg1 = [[UIImageView alloc] initWithFrame:self.userHeadImageView.frame];
+    [headerImg1 downloadImage:model.head_pic_url place:[UIImage imageNamed:@""]];
+    [self.bgImageView sd_setImageWithURL:[NSURL URLWithString:model.head_pic_url] placeholderImage:headerImg1.image];
 }
 
 -(UIImageView *)idImageView{
@@ -165,6 +167,7 @@
         _bgImageView = [[UIImageView alloc] init];
         //_bgImageView.contentMode = UIViewContentModeScaleAspectFill;
         _bgImageView.userInteractionEnabled = YES;
+        _bgImageView.image = [UIImage imageNamed:@"headBg"];
     
         //  添加渐变层
         CAGradientLayer * shadow = [CAGradientLayer layer];

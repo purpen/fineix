@@ -18,6 +18,7 @@
 @property(nonatomic,strong) UILabel *sheetLabel;
 @property(nonatomic,strong) UIButton *stopBtn;
 @property(nonatomic,strong) UIButton *cancelBtn;
+@property(nonatomic,strong) UIButton *otherBtn;
 
 -(void)setUIWithModel:(UserInfo*)model;
 

@@ -163,7 +163,7 @@ static NSString *const ShareURL = @"http://m.taihuoniao.com/guide/app_about";
         if ([model.is_expert isEqualToNumber:@0]) {
             NSLog(@"dwewqebwqe %zi",model.label.length);
             if (!model.label) {
-                cell.levelLabel.text = [NSString stringWithFormat:@"| V%d",[model.level intValue]];
+                cell.levelLabel.text = [NSString stringWithFormat:@" V%d",[model.level intValue]];
             }else{
                 cell.levelLabel.text = [NSString stringWithFormat:@"%@ | V%d",model.label,[model.level intValue]];
             }

@@ -24,6 +24,7 @@
 #import "WXApi.h"
 #import <AlipaySDK/AlipaySDK.h>
 #import "FBLoginRegisterViewController.h"
+#import "CounterModel.h"
 
 
 @interface AppDelegate ()<WXApiDelegate>
@@ -31,6 +32,7 @@
     BMKMapManager *_mapManager;
     float _la;
     float _lo;
+    CounterModel *_counterModel;
 }
 
 @end
@@ -55,9 +57,6 @@ NSString *const determineLogin = @"/auth/check_login";
     [self.window makeKeyAndVisible];
     
     
-    //设置引导图片
-    [self guide];
-    
     
 //    //首先统一设置为未登录-----------------------------------------------
     UserInfoEntity *entity = [UserInfoEntity defaultUserInfoEntity];
@@ -79,6 +78,9 @@ NSString *const determineLogin = @"/auth/check_login";
     }];
 //--------------------------------------------------------
     
+    //设置引导图片
+    [self guide];
+    //---------------------------------------
     
     
     
@@ -154,6 +156,20 @@ NSString *const determineLogin = @"/auth/check_login";
     
     if (userIsFirstInstalled) {
         FBTabBarController * tabBarC = [[FBTabBarController alloc] init];
+        //请求数据看看有没有通知的消息--------------------------
+        UserInfoEntity *entity = [UserInfoEntity defaultUserInfoEntity];
+        FBRequest *requestMsg = [FBAPI postWithUrlString:@"/auth/user" requestDictionary:@{@"user_id":entity.userId} delegate:self];
+        [requestMsg startRequestSuccess:^(FBRequest *request, id result) {
+            NSDictionary *dataDict = result[@"data"];
+            NSDictionary *counterDict = [dataDict objectForKey:@"counter"];
+            _counterModel = [CounterModel mj_objectWithKeyValues:counterDict];
+            NSLog(@" %@",_counterModel);
+            if (_counterModel.order_total_count!=0 || _counterModel.message_total_count!=0) {
+                UITabBarItem * item=[tabBarC.tabBar.items objectAtIndex:3];
+                item.badgeValue=@"";
+            }
+        } failure:^(FBRequest *request, NSError *error) {
+        }];
         self.window.rootViewController = tabBarC;
     }else{
         self.window.rootViewController = [[GuidePageViewController alloc] initWithPicArr:arr andRootVC:[[FBTabBarController alloc] init]];
@@ -254,15 +270,14 @@ NSString *const determineLogin = @"/auth/check_login";
     }
     
 //    //登录状态查询及本地用户信息获取
+    UserInfoEntity * userEntity = [UserInfoEntity defaultUserInfoEntity];
     FBRequest * request = [FBAPI postWithUrlString:@"/auth/check_login" requestDictionary:nil delegate:self];
     [request startRequestSuccess:^(FBRequest *request, id result) {
         NSDictionary * dataDic = [result objectForKey:@"data"];
-        UserInfoEntity * userEntity = [UserInfoEntity defaultUserInfoEntity];
         userEntity.isLogin = [[dataDic objectForKey:@"is_login"] boolValue];
     } failure:^(FBRequest *request, NSError *error) {
         [SVProgressHUD showInfoWithStatus:[error localizedDescription]];
     }];
-    
 }
 
 - (void)applicationWillTerminate:(UIApplication *)application {

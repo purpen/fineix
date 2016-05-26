@@ -140,7 +140,6 @@
     imgV.image = [UIImage imageNamed:@"Group"];
     [view addSubview:imgV];
     UIImageView *image = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 37, 37)];
-    NSLog(@"数组个数  %zi",self.coverUrlMary.count);
     if (_n < self.coverUrlMary.count) {
         [image sd_setImageWithURL:[NSURL URLWithString:self.coverUrlMary[_n]]];
         [self setLabel:CGRectMake(50, 6, 100, 10) andText:self.titleMarr[_n] andFont:13 andView:imgV andtextColor:[UIColor blackColor]];
