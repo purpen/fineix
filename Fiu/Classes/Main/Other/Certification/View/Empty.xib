@@ -3,6 +3,7 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
+        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
@@ -147,18 +148,30 @@
                             </state>
                         </button>
                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="CrM-uJ-ctr">
-                            <rect key="frame" x="98" y="387" width="180" height="120"/>
+                            <rect key="frame" x="83" y="377" width="210" height="140"/>
                             <constraints>
                                 <constraint firstAttribute="width" constant="180" id="Thu-ex-Cds"/>
-                                <constraint firstAttribute="height" constant="120" id="Z5A-eC-Yc7"/>
+                                <constraint firstAttribute="height" constant="140" id="Z5A-eC-Yc7"/>
+                                <constraint firstAttribute="width" secondItem="CrM-uJ-ctr" secondAttribute="height" multiplier="3:2" id="wp8-ji-aC0"/>
                             </constraints>
+                            <variation key="default">
+                                <mask key="constraints">
+                                    <exclude reference="Thu-ex-Cds"/>
+                                </mask>
+                            </variation>
                         </imageView>
                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="oam-7C-p67">
-                            <rect key="frame" x="97" y="574" width="180" height="120"/>
+                            <rect key="frame" x="82" y="564" width="210" height="140"/>
                             <constraints>
                                 <constraint firstAttribute="width" constant="180" id="5YF-ae-muL"/>
-                                <constraint firstAttribute="height" constant="120" id="QqR-ka-5Rk"/>
+                                <constraint firstAttribute="height" constant="140" id="QqR-ka-5Rk"/>
+                                <constraint firstAttribute="width" secondItem="oam-7C-p67" secondAttribute="height" multiplier="3:2" id="oUV-vJ-Y5c"/>
                             </constraints>
+                            <variation key="default">
+                                <mask key="constraints">
+                                    <exclude reference="5YF-ae-muL"/>
+                                </mask>
+                            </variation>
                         </imageView>
                     </subviews>
                     <color key="backgroundColor" red="0.98039215690000003" green="0.98039215690000003" blue="0.98039215690000003" alpha="1" colorSpace="calibratedRGB"/>

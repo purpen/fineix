@@ -114,7 +114,7 @@
                     <nil key="highlightedColor"/>
                 </label>
             </subviews>
-            <color key="backgroundColor" red="1" green="0.20000000000000001" blue="0.40000000000000002" alpha="1" colorSpace="calibratedRGB"/>
+            <color key="backgroundColor" red="0.94901960780000005" green="0.078431372550000003" blue="0.2784313725" alpha="1" colorSpace="calibratedRGB"/>
             <constraints>
                 <constraint firstItem="D4h-OM-oV1" firstAttribute="top" secondItem="igV-1N-mkw" secondAttribute="top" id="DbU-LC-dfn"/>
                 <constraint firstAttribute="trailing" secondItem="D4h-OM-oV1" secondAttribute="trailing" id="Fc9-Nb-Ymp"/>

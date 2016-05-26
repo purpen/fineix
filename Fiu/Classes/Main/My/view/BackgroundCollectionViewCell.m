@@ -73,7 +73,6 @@
         
         [_userView addSubview:self.idImageView];
         [_idImageView mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.size.mas_equalTo(CGSizeMake(28, 12));
             make.centerY.mas_equalTo(_userLevelLabel.mas_centerY);
             make.right.mas_equalTo(_lineView.mas_left).with.offset(-4);
         }];
@@ -122,12 +121,17 @@
 
 
 -(void)setUI{
-        UserInfoEntity *entity = [UserInfoEntity defaultUserInfoEntity];
-        //更新头像
-        [self.userHeadImageView sd_setImageWithURL:[NSURL URLWithString:entity.mediumAvatarUrl] placeholderImage:nil completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
-            
-        }];
-    [self.bgImageView sd_setImageWithURL:[NSURL URLWithString:entity.head_pic_url] placeholderImage:[UIImage imageNamed:@"image"]];
+    UserInfoEntity *entity = [UserInfoEntity defaultUserInfoEntity];
+    //更新头像
+    UIImageView * headerImg = [[UIImageView alloc] initWithFrame:self.userHeadImageView.frame];
+    [headerImg downloadImage:entity.mediumAvatarUrl place:[UIImage imageNamed:@""]];
+    [self.userHeadImageView sd_setImageWithURL:[NSURL URLWithString:entity.mediumAvatarUrl] placeholderImage:headerImg.image completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
+        
+    }];
+    
+    UIImageView * headerImg1 = [[UIImageView alloc] initWithFrame:self.userHeadImageView.frame];
+    [headerImg1 downloadImage:entity.head_pic_url place:[UIImage imageNamed:@""]];
+    [self.bgImageView sd_setImageWithURL:[NSURL URLWithString:entity.head_pic_url] placeholderImage:headerImg1.image];
     self.nickName.text = entity.nickname;
     self.userProfile.text = entity.summary;
     NSArray *tagsAry = [NSArray arrayWithObjects:@"大拿",@"行家",@"行摄家",@"艺术范",@"手艺人",@"人来疯",@"赎回自由身",@"职业buyer", nil];
@@ -155,8 +159,10 @@
 -(UIImageView *)bgImageView{
     if (!_bgImageView) {
         _bgImageView = [[UIImageView alloc] init];
+        _bgImageView.backgroundColor = [UIColor lightGrayColor];
         //_bgImageView.contentMode = UIViewContentModeScaleToFill;
         _bgImageView.userInteractionEnabled = YES;
+        _bgImageView.image = [UIImage imageNamed:@"headBg"];
     
         //  添加渐变层
         CAGradientLayer * shadow = [CAGradientLayer layer];

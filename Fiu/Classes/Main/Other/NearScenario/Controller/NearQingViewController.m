@@ -31,8 +31,8 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    _longitude = [self.baseInfo.location.coordinates[0] floatValue];
-    _latitude = [self.baseInfo.location.coordinates[1] floatValue];
+    _longitude = [self.baseInfo.location.coordinates[0] doubleValue];
+    _latitude = [self.baseInfo.location.coordinates[1] doubleValue];
     [self requestDataForOderList];
     // Do any additional setup after loading the view from its nib.
     self.navViewTitle.text = self.baseInfo.address;
@@ -82,7 +82,6 @@
             
             double la = [[NSString stringWithFormat:@"%.4f",[locaAry[1] doubleValue]] doubleValue];
             double lo = [[NSString stringWithFormat:@"%.4f",[locaAry[0] doubleValue]] doubleValue];
-            NSLog(@"经度   %.4f",la);
             // 添加一个PointAnnotation
             BMKPointAnnotation* annotation = [[BMKPointAnnotation alloc]init];
             CLLocationCoordinate2D coor;

@@ -149,10 +149,11 @@ static NSString *const URLCarGoPay = @"/shopping/checkout";
     [SVProgressHUD show];
     self.orderRrquest = [FBAPI postWithUrlString:URLSureOrder requestDictionary:orderData delegate:self];
     [self.orderRrquest startRequestSuccess:^(FBRequest *request, id result) {
+        NSLog(@" 立即下单   %@ ",result);
         NSDictionary * dataDic = [result objectForKey:@"data"];
         self.orderInfo = [[OrderInfoModel alloc] initWithDictionary:dataDic];
         if ([[result objectForKey:@"success"] isEqualToNumber:@1]) {
-            if ([self.orderInfo.payMoney isEqualToNumber:@0]) {
+            if ([self.orderInfo.payMoney isEqual:@0]) {
                 [self checkOrderInfoForPayStatusWithPaymentWay:nil];
             }else{
                 FBPayTheWayViewController * payWayVC = [[FBPayTheWayViewController alloc] init];

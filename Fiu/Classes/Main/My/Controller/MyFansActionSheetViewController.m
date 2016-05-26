@@ -21,6 +21,25 @@
     [super viewDidLoad];
     self.view.backgroundColor = [UIColor colorWithHexString:@"#000000" alpha:0.3];
     [self.view addSubview:self.alertView];
+    [self.view addSubview:self.otherBtn];
+    [_otherBtn mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.mas_equalTo(self.view.mas_left).with.offset(0);
+        make.right.mas_equalTo(self.view.mas_right).with.offset(0);
+        make.top.mas_equalTo(self.view.mas_top).with.offset(0);
+        make.bottom.mas_equalTo(_alertView.mas_top).with.offset(0);
+    }];
+}
+
+-(UIButton *)otherBtn{
+    if (!_otherBtn) {
+        _otherBtn = [[UIButton alloc] init];
+        [_otherBtn addTarget:self action:@selector(clickOtherBtn:) forControlEvents:UIControlEventTouchUpInside];
+    }
+    return _otherBtn;
+}
+
+-(void)clickOtherBtn:(UIButton*)sender{
+    [self dismissViewControllerAnimated:NO completion:nil];
 }
 
 -(void)setUIWithModel:(UserInfo *)model{

@@ -56,7 +56,6 @@
         
         [self.contentView addSubview:self.idTagsImageView];
         [_idTagsImageView mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.size.mas_equalTo(CGSizeMake(28, 12));
             make.left.mas_equalTo(_headImageView.mas_right).with.offset(9/667.0*SCREEN_HEIGHT);
             make.top.mas_equalTo(_nameLbael.mas_bottom).with.offset(4/667.0*SCREEN_HEIGHT);
         }];
@@ -78,7 +77,7 @@
         
         [self.contentView addSubview:self.levelLabel];
         [_levelLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.centerY.mas_equalTo(_idTagsImageView.mas_centerY);
+            make.top.mas_equalTo(_nameLbael.mas_bottom).with.offset(3);
             make.left.mas_equalTo(_headImageView.mas_right).with.offset(9/667.0*SCREEN_HEIGHT);
             make.height.mas_equalTo(10);
         }];
