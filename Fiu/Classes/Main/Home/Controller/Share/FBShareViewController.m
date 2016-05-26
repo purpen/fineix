@@ -77,7 +77,10 @@
     [self presentViewController:editShareInfoVC animated:YES completion:nil];
     
     editShareInfoVC.getEdtiShareText = ^ (NSString * title, NSString * des) {
-        NSLog(@"＝＝＝＝＝＝＝ %@ －－－－%@", title, des);
+        [self.shareTopView changeWithSearchText:title withDes:des];
+        [self.shareBottomView changeWithSearchText:title withDes:des];
+        [self.shareTitleBottomView changeWithSearchText:title withDes:des];
+        [self.shareTitleTopView changeWithSearchText:title withDes:des];
     };
 }
 

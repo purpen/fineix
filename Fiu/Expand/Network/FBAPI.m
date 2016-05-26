@@ -86,6 +86,12 @@
     if ([keys containsObject:@"tmp"]) {
         [keys removeObject:@"tmp"];
     }
+    if ([keys containsObject:@"id_card_a_tmp"]) {
+        [keys removeObject:@"id_card_a_tmp"];
+    }
+    if ([keys containsObject:@"business_card_tmp"]) {
+        [keys removeObject:@"business_card_tmp"];
+    }
     
     NSArray *sortedKeys = [keys sortedArrayUsingComparator:^NSComparisonResult(id obj1, id obj2){
         int tmp = 0; // 比到第几位

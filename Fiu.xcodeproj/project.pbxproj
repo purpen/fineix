@@ -1927,10 +1927,10 @@
 		1F2A8CA31CF40276005116C7 /* Home */ = {
 			isa = PBXGroup;
 			children = (
+				1F2A8CDC1CF40276005116C7 /* View */,
 				1F2A8CA41CF40276005116C7 /* Controller */,
 				1F2A8CB11CF40276005116C7 /* Model */,
 				1F2A8CD91CF40276005116C7 /* Other */,
-				1F2A8CDC1CF40276005116C7 /* View */,
 			);
 			path = Home;
 			sourceTree = "<group>";
@@ -4339,7 +4339,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 9.2;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
-				PROVISIONING_PROFILE = "5b29b37c-aff0-4f5d-9cfe-ce8fc658ba8d";
+				PROVISIONING_PROFILE = "";
 				SDKROOT = iphoneos;
 			};
 			name = Debug;
@@ -4377,7 +4377,7 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.2;
 				MTL_ENABLE_DEBUG_INFO = NO;
-				PROVISIONING_PROFILE = "5b29b37c-aff0-4f5d-9cfe-ce8fc658ba8d";
+				PROVISIONING_PROFILE = "";
 				SDKROOT = iphoneos;
 				VALIDATE_PRODUCT = YES;
 			};
@@ -4420,7 +4420,7 @@
 				OTHER_LIBTOOLFLAGS = "";
 				PRODUCT_BUNDLE_IDENTIFIER = com.THN.fineix;
 				PRODUCT_NAME = Fiu;
-				PROVISIONING_PROFILE = "5b29b37c-aff0-4f5d-9cfe-ce8fc658ba8d";
+				PROVISIONING_PROFILE = "";
 				USER_HEADER_SEARCH_PATHS = "$(SRCROOT)";
 			};
 			name = Debug;
@@ -4462,7 +4462,7 @@
 				OTHER_LIBTOOLFLAGS = "";
 				PRODUCT_BUNDLE_IDENTIFIER = com.THN.fineix;
 				PRODUCT_NAME = Fiu;
-				PROVISIONING_PROFILE = "5b29b37c-aff0-4f5d-9cfe-ce8fc658ba8d";
+				PROVISIONING_PROFILE = "";
 				USER_HEADER_SEARCH_PATHS = "$(SRCROOT)";
 			};
 			name = Release;

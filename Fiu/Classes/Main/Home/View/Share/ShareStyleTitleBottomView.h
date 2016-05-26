@@ -28,5 +28,6 @@
 @pro_strong UIButton            *   fiuLogo;        //  logo
 
 - (void)setShareSceneData:(NSDictionary *)model;
+- (void)changeWithSearchText:(NSString *)title withDes:(NSString *)des;
 
 @end

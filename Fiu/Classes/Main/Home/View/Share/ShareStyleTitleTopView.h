@@ -31,6 +31,7 @@
 
 - (void)defultTitleFontStyle;
 - (void)smallTitleFontStyle;
+- (void)changeWithSearchText:(NSString *)title withDes:(NSString *)des;
 
 
 @end
