@@ -37,7 +37,7 @@
 
 - (void)setShareTextData:(ShareInfoRow *)model {
     self.title.text = model.title;
-    self.des.text = model.content;
+    self.des.text = model.des;
 }
 
 - (UILabel *)title {

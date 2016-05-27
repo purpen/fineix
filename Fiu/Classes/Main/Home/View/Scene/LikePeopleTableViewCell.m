@@ -26,10 +26,12 @@ const static NSInteger  peopleBtnTag = 64;
 }
 
 - (void)setLikeOrSuPeopleData:(NSMutableArray *)model {
+    [self.imgMarr removeAllObjects];
+    [self.userIdMarr removeAllObjects];
     if (model.count > 0) {
         for (LikeOrSuPeopleRow * row in model) {
             [self.imgMarr addObject:row.user.avatarUrl];
-            [self.userIdMarr addObject:[NSString stringWithFormat:@"%zi", row.user.userId]];
+            [self.userIdMarr addObject:[NSString stringWithFormat:@"%zi", [row.user valueForKey:@"userId" ]]];
         }
         
         [self addLikePeopleHeader:model image:self.imgMarr];
@@ -50,9 +52,8 @@ const static NSInteger  peopleBtnTag = 64;
 
 #pragma mark - 加载用户的头像
 - (void)addLikePeopleHeader:(NSArray *)people image:(NSMutableArray *)imgUrl {
-    if (people.count > 0) {
-        [self.subviews makeObjectsPerformSelector:@selector(removeFromSuperview)];
-    }
+
+    [self.subviews makeObjectsPerformSelector:@selector(removeFromSuperview)];
     
     CGFloat btnW = 0;
     CGFloat btnH = 15;

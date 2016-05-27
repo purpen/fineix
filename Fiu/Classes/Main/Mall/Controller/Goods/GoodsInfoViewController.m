@@ -205,7 +205,7 @@ static NSString *const URLGoodsScene = @"/sight_and_product/getlist";
         return cell;
         
     } else if (indexPath.section == 3) {
-        static NSString * InfoRecommendCellId = @"InfoUseSceneCellId";
+        static NSString * InfoRecommendCellId = @"InfoRecommendCellId";
         InfoRecommendTableViewCell * cell = [tableView dequeueReusableCellWithIdentifier:InfoRecommendCellId];
         if (!cell) {
             cell = [[InfoRecommendTableViewCell alloc] initWithStyle:(UITableViewCellStyleDefault) reuseIdentifier:InfoRecommendCellId];

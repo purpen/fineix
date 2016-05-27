@@ -56,6 +56,13 @@
     } else {
         self.goodNum.text = [NSString stringWithFormat:@"%zi人订阅", model.subscriptionCount];
     }
+    
+    //  是否订阅
+    if (model.isSubscript == 0) {
+        self.goodBtn.selected = NO;
+    } else if (model.isSubscript == 1) {
+        self.goodBtn.selected = YES;
+    }
 }
 
 #pragma mark -
@@ -70,6 +77,7 @@
     if (!_bgImage) {
         _bgImage = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT)];
         _bgImage.contentMode = UIViewContentModeScaleAspectFill;
+        _bgImage.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"Defaul_Bg_750"]];
         //  添加渐变层
         CAGradientLayer * shadow = [CAGradientLayer layer];
         shadow.startPoint = CGPointMake(0, 0);
@@ -149,7 +157,7 @@
         [_userView addSubview:self.titleText];
         [_titleText mas_makeConstraints:^(MASConstraintMaker *make) {
             make.size.mas_equalTo(CGSizeMake(SCREEN_WIDTH - 40, 40));
-            make.bottom.equalTo(_time.mas_top).with.offset(-5);
+            make.bottom.equalTo(_time.mas_top).with.offset(-8);
             make.left.equalTo(_userView.mas_left).with.offset(20);
         }];
     }
@@ -170,7 +178,8 @@
 - (UIButton *)goodBtn {
     if (!_goodBtn) {
         _goodBtn = [[UIButton alloc] init];
-        [_goodBtn setBackgroundImage:[UIImage imageNamed:@"User_Su"] forState:(UIControlStateNormal)];
+        [_goodBtn setBackgroundImage:[UIImage imageNamed:@"icon_su"] forState:(UIControlStateNormal)];
+        [_goodBtn setBackgroundImage:[UIImage imageNamed:@"icon_su_selected"] forState:(UIControlStateSelected)];
         
         [_goodBtn addSubview:self.goodNum];
         [_goodNum mas_makeConstraints:^(MASConstraintMaker *make) {

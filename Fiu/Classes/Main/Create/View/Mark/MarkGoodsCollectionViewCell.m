@@ -91,7 +91,6 @@
         _goodsImage.contentMode = UIViewContentModeScaleAspectFill;
         _goodsImage.clipsToBounds  = YES;
         [_goodsImage setContentScaleFactor:[[UIScreen mainScreen] scale]];
-        _goodsImage.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"rela"]];
     }
     return _goodsImage;
 }

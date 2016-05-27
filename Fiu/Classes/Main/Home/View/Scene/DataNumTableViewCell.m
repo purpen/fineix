@@ -27,8 +27,6 @@
     [_lookBtn setTitle:[self abouText:_lookBtn withText:model.viewCount] forState:(UIControlStateNormal)];
     [_likeBtn setTitle:[self abouText:_likeBtn withText:model.loveCount]  forState:(UIControlStateNormal)];
     [_commentBtn setTitle:[self abouText:_commentBtn withText:model.commentCount] forState:(UIControlStateNormal)];
-    self.tagetId = [NSString stringWithFormat:@"%zi", model.idField];
-    self.userId = [NSString stringWithFormat:@"%zi", model.userId];
 }
 
 #pragma mark - 设置cell的UIs
@@ -101,16 +99,8 @@
         _commentBtn.titleLabel.font = [UIFont systemFontOfSize:Font_Number];
         [_commentBtn setTitleEdgeInsets:(UIEdgeInsetsMake(-15, 0, 0, 0))];
         [_commentBtn setTitleColor:[UIColor colorWithHexString:tabBarTitle alpha:1] forState:(UIControlStateNormal)];
-        [_commentBtn addTarget:self action:@selector(commentBtnClick) forControlEvents:(UIControlEventTouchUpInside)];
     }
     return _commentBtn;
-}
-
-- (void)commentBtnClick {
-    CommentNViewController * commentVC = [[CommentNViewController alloc] init];
-    commentVC.targetId = self.tagetId;
-    commentVC.sceneUserId = self.userId;
-    [self.nav pushViewController:commentVC animated:YES];
 }
 
 //  数字宽度

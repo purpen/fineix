@@ -34,11 +34,11 @@
 		self.title = dictionary[@"title"];
 	}	
 	if(![dictionary[@"x"] isKindOfClass:[NSNull class]]){
-		self.x = [dictionary[@"x"] integerValue];
+		self.x = [dictionary[@"x"] floatValue];
 	}
 
 	if(![dictionary[@"y"] isKindOfClass:[NSNull class]]){
-		self.y = [dictionary[@"y"] integerValue];
+		self.y = [dictionary[@"y"] floatValue];
 	}
 
 	return self;

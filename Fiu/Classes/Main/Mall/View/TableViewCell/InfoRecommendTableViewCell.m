@@ -51,7 +51,7 @@
     return _headerTitle;
 }
 
-#pragma mark - 情景滑动列表
+#pragma mark - 推荐商品列表
 - (UICollectionView *)recommendListView {
     if (!_recommendListView) {
         UICollectionViewFlowLayout * flowLayout = [[UICollectionViewFlowLayout alloc] init];

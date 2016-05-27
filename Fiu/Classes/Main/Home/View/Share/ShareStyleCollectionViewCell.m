@@ -18,16 +18,17 @@
         
         [self addSubview:self.styleImg];
         [_styleImg mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.left.right.equalTo(self).with.offset(0);
+            make.size.mas_equalTo(CGSizeMake(70, 87));
+            make.centerX.equalTo(self);
             make.top.equalTo(self.mas_top).with.offset(15);
             make.bottom.equalTo(self.mas_bottom).with.offset(-15);
         }];
         
         [self addSubview:self.bottomLine];
         [_bottomLine mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.height.mas_equalTo(@3);
+            make.size.mas_equalTo(CGSizeMake(70, 3));
+            make.centerX.equalTo(self);
             make.bottom.equalTo(self.mas_bottom).with.offset(0);
-            make.left.right.equalTo(self).with.offset(0);
         }];
         
     }

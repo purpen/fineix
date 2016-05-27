@@ -29,7 +29,7 @@ static const NSInteger actionBtnTag = 686;
 #pragma mark -
 - (UIView *)alertView {
     if (!_alertView) {
-        _alertView = [[UIView alloc] initWithFrame:CGRectMake(0, SCREEN_HEIGHT - 134, SCREEN_WIDTH, 134)];
+        _alertView = [[UIView alloc] initWithFrame:CGRectMake(0, SCREEN_HEIGHT - 178, SCREEN_WIDTH, 178)];
         _alertView.backgroundColor = [UIColor colorWithHexString:lineGrayColor];
     }
     return _alertView;
@@ -38,18 +38,14 @@ static const NSInteger actionBtnTag = 686;
 #pragma mark - 场景中的“更多”选项
 - (void)initFBAlertVcStyle:(BOOL)isUserSelf {
     NSArray * userTitle = [NSArray arrayWithObjects:@"删除", @"编辑", @"取消", nil];
-    NSArray * visitorsTitle = [NSArray arrayWithObjects:@"举报", @"分享", @"取消", nil];
+    NSArray * visitorsTitle = [NSArray arrayWithObjects:NSLocalizedString(@"CommentVcTitle", nil), NSLocalizedString(@"ShareBtn", nil), NSLocalizedString(@"ReportVcTitle", nil), NSLocalizedString(@"cancel", nil), nil];
     
-    for (NSUInteger idx = 0; idx < 3; ++ idx) {
+    for (NSUInteger idx = 0; idx < visitorsTitle.count; ++ idx) {
         UIButton * actionBtn = [[UIButton alloc] initWithFrame:CGRectMake(0, 45 * idx, SCREEN_WIDTH, 44)];
         actionBtn.tag = actionBtnTag + idx;
         actionBtn.titleLabel.font = [UIFont systemFontOfSize:16];
         actionBtn.backgroundColor = [UIColor whiteColor];
-        if (actionBtn.tag == actionBtnTag) {
-            [actionBtn setTitleColor:[UIColor redColor] forState:(UIControlStateNormal)];
-        } else {
-            [actionBtn setTitleColor:[UIColor blackColor] forState:(UIControlStateNormal)];
-        }
+        [actionBtn setTitleColor:[UIColor blackColor] forState:(UIControlStateNormal)];
         //
         if (isUserSelf) {
             [actionBtn setTitle:userTitle[idx] forState:(UIControlStateNormal)];
@@ -77,9 +73,9 @@ static const NSInteger actionBtnTag = 686;
 //  访客查看场景详情时
 - (void)visitorsActionBtnClick:(UIButton *)button {
     if (button.tag == actionBtnTag) {
-        ReportViewController * reportVC = [[ReportViewController alloc] init];
-        reportVC.targetId = self.targetId;
-        [self presentViewController:reportVC animated:YES completion:nil];
+        [self dismissViewControllerAnimated:YES completion:^{
+            self.openCommentVc();
+        }];
         
     } else if (button.tag == actionBtnTag + 1) {
         FBShareViewController * shareVC = [[FBShareViewController alloc] init];
@@ -87,6 +83,11 @@ static const NSInteger actionBtnTag = 686;
         [self presentViewController:shareVC animated:YES completion:nil];
         
     } else if (button.tag == actionBtnTag + 2) {
+        ReportViewController * reportVC = [[ReportViewController alloc] init];
+        reportVC.targetId = self.targetId;
+        [self presentViewController:reportVC animated:YES completion:nil];
+        
+    } else if (button.tag == actionBtnTag + 3) {
         [self dismissViewControllerAnimated:YES completion:nil];
     }
 }

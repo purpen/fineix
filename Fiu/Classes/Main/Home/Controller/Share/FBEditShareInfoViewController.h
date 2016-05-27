@@ -11,7 +11,7 @@
 #import <SVProgressHUD/SVProgressHUD.h>
 #import "MJRefresh.h"
 
-typedef void(^GetEditShareText)(NSString * title, NSString * des);
+typedef void(^GetEditShareText)(NSString * title, NSString * des, NSString * oid);
 
 @interface FBEditShareInfoViewController : FBViewController <UITableViewDelegate, UITableViewDataSource, UITextFieldDelegate>
 
@@ -32,6 +32,8 @@ typedef void(^GetEditShareText)(NSString * title, NSString * des);
 @pro_strong UITextField         *   searchView;
 @pro_strong UIButton            *   searchBtn;
 @pro_strong UITableView         *   searchListTable;
+@pro_strong UITableView         *   shareTextTable;
+@pro_strong UIView              *   editShareTextView;
 @pro_strong UIView              *   textSearchView;
 
 @pro_strong GetEditShareText        getEdtiShareText;

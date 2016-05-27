@@ -34,7 +34,10 @@
 	}	
 	if(![dictionary[@"content"] isKindOfClass:[NSNull class]]){
 		self.content = dictionary[@"content"];
-	}	
+	}
+    if(![dictionary[@"des"] isKindOfClass:[NSNull class]]){
+        self.des = dictionary[@"des"];
+    }
 	if(![dictionary[@"cover_id"] isKindOfClass:[NSNull class]]){
 		self.coverId = dictionary[@"cover_id"];
 	}	

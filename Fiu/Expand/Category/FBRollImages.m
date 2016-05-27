@@ -47,7 +47,7 @@
         _rollImageView.autoScrollTimeInterval = 3;
         _rollImageView.pageControlAliment = SDCycleScrollViewPageContolAlimentCenter;
         _rollImageView.pageControlStyle = SDCycleScrollViewPageContolStyleClassic;
-//        _rollImageView.placeholderImage = [UIImage imageNamed:@"special"];
+        _rollImageView.placeholderImage = [UIImage imageNamed:@"Defaul_Bg_420"];
         _rollImageView.delegate = self;
     }
     return _rollImageView;

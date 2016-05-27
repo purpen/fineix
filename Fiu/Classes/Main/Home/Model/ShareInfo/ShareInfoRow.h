@@ -14,6 +14,7 @@
 @property (nonatomic, assign) NSInteger assetType;
 @property (nonatomic, strong) NSString * cid;
 @property (nonatomic, strong) NSString * content;
+@property (nonatomic, strong) NSString * des;
 @property (nonatomic, strong) NSObject * coverId;
 @property (nonatomic, strong) NSString * createdOn;
 @property (nonatomic, strong) NSString * highContent;

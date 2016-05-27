@@ -22,6 +22,7 @@
 
 @interface FBShareViewController : UIViewController <UICollectionViewDelegate, UICollectionViewDataSource>
 
+@pro_strong FBRequest           *   shareTextNumRequest;
 @pro_strong UIView              *   topView;
 @pro_strong UIButton            *   closeBtn;
 @pro_strong UIButton            *   shareBtn;

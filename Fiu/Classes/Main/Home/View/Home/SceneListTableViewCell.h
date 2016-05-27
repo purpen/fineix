@@ -9,6 +9,7 @@
 #import <UIKit/UIKit.h>
 #import "Fiu.h"
 #import "HomeSceneListRow.h"
+#import "UserGoodsTag.h"
 
 @interface SceneListTableViewCell : UITableViewCell
 
@@ -23,6 +24,8 @@
 @pro_strong UILabel             *   whereScene;     //  所属情景
 @pro_strong UILabel             *   city;           //  城市
 @pro_strong UILabel             *   time;           //  时间
+@pro_strong NSMutableArray      *   tagDataMarr;
+@pro_strong NSMutableArray      *   userTagMarr;
 
 - (void)setHomeSceneListData:(HomeSceneListRow *)model;
 
