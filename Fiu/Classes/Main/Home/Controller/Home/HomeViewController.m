@@ -118,6 +118,7 @@ static NSString *const URLSceneList = @"/scene_sight/";
         _homeTableView.dataSource = self;
         _homeTableView.showsVerticalScrollIndicator = NO;
         _homeTableView.separatorStyle = UITableViewCellSeparatorStyleNone;
+        _homeTableView.pagingEnabled = YES;
         [self addMJRefresh:_homeTableView];
     }
     return _homeTableView;
@@ -141,7 +142,7 @@ static NSString *const URLSceneList = @"/scene_sight/";
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-    return SCREEN_HEIGHT + 5;
+    return SCREEN_HEIGHT;
 }
 
 #pragma mark - 跳转到场景的详情
