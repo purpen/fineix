@@ -203,7 +203,7 @@ static NSString *const URLShareText = @"/search/getlist";
     } else if (tableView == self.shareTextTable) {
         if ([[self.shareTextList[indexPath.row] valueForKey:@"title"] length] > 0) {
             self.editTitle.text = [self.shareTextList[indexPath.row] valueForKey:@"title"];
-            self.editDes.text = [self.shareTextList[indexPath.row] valueForKey:@"content"];
+            self.editDes.text = [self.shareTextList[indexPath.row] valueForKey:@"des"];
             
             [self dismissViewControllerAnimated:YES completion:^{
                 self.getEdtiShareText(self.editTitle.text, self.editDes.text, [self.shareTextList[indexPath.row] valueForKey:@"oid"]);

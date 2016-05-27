@@ -25,14 +25,14 @@
     self = [super initWithFrame:frame];
     if (self) {
         self.userInteractionEnabled = YES;
+        timerAnimation = [NSTimer scheduledTimerWithTimeInterval:3
+                                                          target:self
+                                                        selector:@selector(animationTimerDidFired)
+                                                        userInfo:nil
+                                                         repeats:YES];
+        
         [self setImage:[UIImage imageNamed:@"user_goodsTag_left"] forState:(UIControlStateHighlighted)];
         [self setImage:[UIImage imageNamed:@"user_goodsTag_left"] forState:(UIControlStateNormal)];
-        
-        timerAnimation =[NSTimer scheduledTimerWithTimeInterval:3
-                                                         target:self
-                                                       selector:@selector(animationTimerDidFired)
-                                                       userInfo:nil
-                                                        repeats:YES];
         [self setUI];
     }
     return self;
@@ -174,8 +174,8 @@
 }
 
 #pragma mark - 动画
--(void)animationTimerDidFired{
-    [UIView animateWithDuration:.5 animations:^{
+- (void)animationTimerDidFired {
+    [UIView animateWithDuration:1.5 animations:^{
         viewTapDot.transform = CGAffineTransformMakeScale(1.3,1.3);
     } completion:^(BOOL finished) {
         [UIView animateWithDuration:1.5 animations:^{

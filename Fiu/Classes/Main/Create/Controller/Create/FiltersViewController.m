@@ -223,9 +223,7 @@ static NSString *const URLUserAddGoods = @"/scene_product/add";
     if (_canDelete == 1) {
         [self networkDeleteUserGoods:self.goodsIdData[index]];
     } else if (_canDelete == 0) {
-        NSLog(@"＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝ %@ , %zi", self.goodsIdData, index);
         [self.goodsIdData removeObject:self.goodsIdData[index]];
-        NSLog(@"＝＝＝＝＝＝＝＝＝＝＝＝＊＊＊＊＊ %@, %zi", self.goodsIdData, index);
     }
 }
 

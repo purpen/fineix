@@ -28,6 +28,10 @@
 
 #pragma mark -
 - (void)setSceneInfoData:(SceneInfoData *)model {
+    //  商品标签
+    self.tagDataMarr = [NSMutableArray arrayWithArray:model.product];
+    [self setUserTagBtn];
+    
     self.goodsIds = [NSMutableArray arrayWithArray:[model.product valueForKey:@"idField"]];
     self.userId = [NSString stringWithFormat:@"%zi", model.userInfo.userId];
     
@@ -58,9 +62,6 @@
     } else {
         self.goodNum.text = [NSString stringWithFormat:@"%zi%@", model.loveCount, NSLocalizedString(@"peopleLike", nil)];
     }
-    //  商品标签
-    self.tagDataMarr = [NSMutableArray arrayWithArray:model.product];
-    [self setUserTagBtn];
 }
 
 #pragma mark - 
@@ -85,8 +86,7 @@
         CGFloat btnY = [[self.tagDataMarr[idx] valueForKey:@"y"] floatValue];
         NSString * title = [self.tagDataMarr[idx] valueForKey:@"title"];
         NSString * price = [NSString stringWithFormat:@"￥%.2f", [[self.tagDataMarr[idx] valueForKey:@"price"] floatValue]];
-        
-        UserGoodsTag * userTag = [[UserGoodsTag alloc] initWithFrame:CGRectMake(btnX * SCREEN_WIDTH, btnY * SCREEN_HEIGHT, 175, 32)];
+        UserGoodsTag * userTag = [[UserGoodsTag alloc] initWithFrame:CGRectMake(btnX * SCREEN_WIDTH, (btnY * SCREEN_HEIGHT) * 0.873, 175, 32)];
         userTag.dele.hidden = YES;
         userTag.title.text = title;
         if (price.length > 6) {

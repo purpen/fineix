@@ -542,12 +542,24 @@ static NSString *const URLWantBuy = @"/scene_product/sight_click_stat";
     self.navView.hidden = YES;
     [self.view addSubview:self.closeBtn];
     [self.view addSubview:self.shareSceneBtn];
+    
+    if([self.navigationController respondsToSelector:@selector(interactivePopGestureRecognizer)]) {
+         self.navigationController.interactivePopGestureRecognizer.enabled = NO;
+    }
 }
 
 
 - (void)viewWillDisappear:(BOOL)animated {
     [super viewWillDisappear:animated];
     [SVProgressHUD dismiss];
+}
+
+- (void)viewDidDisappear:(BOOL)animated {
+    [super viewDidDisappear:animated];
+    
+    if ([self.navigationController respondsToSelector:@selector(interactivePopGestureRecognizer)]) {
+        self.navigationController.interactivePopGestureRecognizer.enabled = YES;
+    }
 }
 
 #pragma mark -
