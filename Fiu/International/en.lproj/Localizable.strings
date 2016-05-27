@@ -7,21 +7,21 @@
 */
 
 //  创建场景
-"next" = "继续";
-"album" = "相册";
-"camera" = "相机";
-"takePhotos" = "拍照";
+"next" = "Next";
+"album" = "Photos";
+"camera" = "Camera";
+"takePhotos" = "Photo";
 "marker" = "标记产品";
-"addUrl" = "添加链接";
-"filter" = "滤镜";
-"addDescription" = "添加描述";
-"addTitle" = "添加标题";
-"addLocation" = "添加地点";
-"tag" = "标签";
-"onScene" = "所属情境";
-"release" = "发布";
-"cancel" = "取消";
-"sure" = "确定";
+"addUrl" = "Add links";
+"filter" = "Filters";
+"addDescription" = "Say something……";
+"addTitle" = "Add titles";
+"addLocation" = "Add location";
+"tag" = "Tags";
+"onScene" = "Belong to";
+"release" = "Send";
+"cancel" = "Cancel";
+"sure" = "OK";
 
 //  控制器页面标题
 "createVcTitle" = "照片胶卷";
@@ -125,18 +125,29 @@
 "AllGoods" = "全部";
 
 //  滤镜
-"FiltersName" = "原图";
-"FiltersNameA" = "摩卡";
-"FiltersNameB" = "暮光";
-"FiltersNameC" = "候鸟";
-"FiltersNameD" = "戏剧";
-"FiltersNameE" = "夏日";
-"FiltersNameF" = "都市";
-"FiltersNameG" = "佳人";
-"FiltersNameH" = "摩登";
-"FiltersNameI" = "流年";
-"FiltersNameJ" = "日光";
-"FiltersNameK" = "午茶";
+"FiltersName" = "NORMAL";
+"FiltersNameA" = "MOCHA";
+"FiltersNameB" = "TWILIGHT";
+"FiltersNameC" = "VISITANT";
+"FiltersNameD" = "DRAMA";
+"FiltersNameE" = "SUMMER";
+"FiltersNameF" = "METROPOLIS";
+"FiltersNameG" = "BEAUTY";
+"FiltersNameH" = "MODERN";
+"FiltersNameI" = "TIMES";
+"FiltersNameJ" = "SUNSHINE";
+"FiltersNameK" = "TEATIME";
+
+//  标题
+"AllGoods" = "全部";
+"fiuFriend" = "Trending  Fiuers";
+"fiuScene" = "High场景";
+"fiuFScene" = "Trending  Scenes";
+"fiuBrand" = "牛Brands";
+"fiuGoods" = "Fiu东西";
+"peopleLike" = "likes";
+"sceneGoods" = "All products in this scene";
+"sceneLikeGoods" = "Related items";
 
 //登录注册
 "passwordDigits" = "The password may not be less than six";

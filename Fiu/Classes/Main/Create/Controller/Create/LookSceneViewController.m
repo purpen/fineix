@@ -251,7 +251,6 @@ static NSString *const URLWantBuy = @"/scene_product/sight_click_stat";
             [SVProgressHUD showErrorWithStatus:[error localizedDescription]];
         }];
     }
-    
 }
 
 #pragma mark - 点赞按钮
@@ -324,7 +323,6 @@ static NSString *const URLWantBuy = @"/scene_product/sight_click_stat";
                 cell = [[DataNumTableViewCell alloc] initWithStyle:(UITableViewCellStyleDefault) reuseIdentifier:dataNumCellId];
             }
             [cell.moreBtn addTarget:self action:@selector(moreBtnClick) forControlEvents:(UIControlEventTouchUpInside)];
-            cell.nav = self.navigationController;
             [cell setSceneDataNum:self.sceneInfoModel];
             return cell;
             
@@ -512,8 +510,14 @@ static NSString *const URLWantBuy = @"/scene_product/sight_click_stat";
     alertVC.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;
     alertVC.targetId = self.sceneId;
     alertVC.sceneData = _shareDataDict;
+    alertVC.openCommentVc = ^() {
+        
+    };
     [self presentViewController:alertVC animated:YES completion:nil];
 }
+
+#pragma mark - 打开评论列表
+
 
 #pragma mark - 分享按钮
 - (UIButton *)shareSceneBtn {
@@ -538,12 +542,24 @@ static NSString *const URLWantBuy = @"/scene_product/sight_click_stat";
     self.navView.hidden = YES;
     [self.view addSubview:self.closeBtn];
     [self.view addSubview:self.shareSceneBtn];
+    
+    if([self.navigationController respondsToSelector:@selector(interactivePopGestureRecognizer)]) {
+         self.navigationController.interactivePopGestureRecognizer.enabled = NO;
+    }
 }
 
 
 - (void)viewWillDisappear:(BOOL)animated {
     [super viewWillDisappear:animated];
     [SVProgressHUD dismiss];
+}
+
+- (void)viewDidDisappear:(BOOL)animated {
+    [super viewDidDisappear:animated];
+    
+    if ([self.navigationController respondsToSelector:@selector(interactivePopGestureRecognizer)]) {
+        self.navigationController.interactivePopGestureRecognizer.enabled = YES;
+    }
 }
 
 #pragma mark -

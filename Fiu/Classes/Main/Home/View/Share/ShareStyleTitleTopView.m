@@ -34,24 +34,6 @@
     [self changeContentLabStyle:des];
 }
 
-- (void)smallTitleFontStyle {
-    self.title.font = [UIFont systemFontOfSize:18];
-    [self.title mas_updateConstraints:^(MASConstraintMaker *make) {
-        make.size.mas_equalTo(CGSizeMake(SCREEN_WIDTH * 0.68, 30));
-    }];
-    
-    [self layoutIfNeeded];
-}
-
-- (void)defultTitleFontStyle {
-    [self.title mas_updateConstraints:^(MASConstraintMaker *make) {
-        make.size.mas_equalTo(CGSizeMake(SCREEN_WIDTH * 0.68, 56));
-    }];
-    [self titleTextStyle:_titleText withBgColor:[UIColor colorWithPatternImage:[UIImage imageNamed:@"titleBg"]]];
-    
-    [self layoutIfNeeded];
-}
-
 #pragma mark - 视图信息
 - (void)setShareSceneData:(NSDictionary *)model {
     [self.sceneImg downloadImage:[model valueForKey:@"cover_url"] place:[UIImage imageNamed:@""]];

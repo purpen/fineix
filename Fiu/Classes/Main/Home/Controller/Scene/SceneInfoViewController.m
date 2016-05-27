@@ -23,6 +23,7 @@
 #import "HomePageViewController.h"
 #import "NearQingViewController.h"
 #import "FBShareViewController.h"
+#import "CommentNViewController.h"
 
 static NSString *const URLSceneInfo = @"/scene_sight/view";
 static NSString *const URLCommentList = @"/comment/getlist";
@@ -71,8 +72,6 @@ static NSString *const URLWantBuy = @"/scene_product/sight_click_stat";
 - (void)setSceneInfoViewUI {
     [self.view addSubview:self.sceneTableView];
     [self.view sendSubviewToBack:self.sceneTableView];
-    
-    [self.view addSubview:self.likeScene];
 }
 
 #pragma mark - 网络请求
@@ -85,11 +84,7 @@ static NSString *const URLWantBuy = @"/scene_product/sight_click_stat";
         _shareDataDict = [NSDictionary dictionaryWithDictionary:[result valueForKey:@"data"]];
         _sceneUserId = [[result valueForKey:@"data"] valueForKey:@"user_id"];
         self.sceneInfoModel = [[SceneInfoData alloc] initWithDictionary:[result valueForKey:@"data"]];
-        if ([[[result valueForKey:@"data"] valueForKey:@"is_love"] integerValue] == 0) {
-            self.likeScene.likeBtn.selected = NO;
-        } else if ([[[result valueForKey:@"data"] valueForKey:@"is_love"] integerValue] == 1) {
-            self.likeScene.likeBtn.selected = YES;
-        }
+        
         //  场景中商品的ids
         self.goodsId = [self.sceneInfoModel.product valueForKey:@"idField"];
         NSString * goodsIds;
@@ -112,7 +107,7 @@ static NSString *const URLWantBuy = @"/scene_product/sight_click_stat";
 #pragma mark 评论列表
 - (void)networkCommentData {
     [SVProgressHUD show];
-    
+    [self.sceneCommentMarr removeAllObjects];
     self.sceneCommentRequest = [FBAPI getWithUrlString:URLCommentList requestDictionary:@{@"type":@"12", @"target_id":self.sceneId} delegate:self];
     [self.sceneCommentRequest startRequestSuccess:^(FBRequest *request, id result) {
         self.commentArr = [[result valueForKey:@"data"] valueForKey:@"rows"];
@@ -175,6 +170,7 @@ static NSString *const URLWantBuy = @"/scene_product/sight_click_stat";
 
 #pragma mark 此场景中的商品
 - (void)networkSceneGoodsData:(NSString *)goodsIds {
+    [self.goodsList removeAllObjects];
     self.sceneGoodsRequest = [FBAPI getWithUrlString:URLSceneGoods requestDictionary:@{@"ids":goodsIds} delegate:self];
     [self.sceneGoodsRequest startRequestSuccess:^(FBRequest *request, id result) {
         NSArray * goodsArr = [[result valueForKey:@"data"] valueForKey:@"rows"];
@@ -200,6 +196,7 @@ static NSString *const URLWantBuy = @"/scene_product/sight_click_stat";
 
 #pragma mark 此场景中的推荐商品
 - (void)networkRecommendGoods:(NSString *)tagIds withSize:(NSString *)size withIgnoreId:(NSString *)ignoreIds {
+    [self.reGoodsList removeAllObjects];
     self.recommendRequest = [FBAPI getWithUrlString:URLSceneGoods requestDictionary:@{@"category_tag_ids":tagIds, @"size":size, @"ignore_ids":ignoreIds} delegate:self];
     [self.recommendRequest startRequestSuccess:^(FBRequest *request, id result) {
         NSArray * goodsArr = [[result valueForKey:@"data"] valueForKey:@"rows"];
@@ -227,12 +224,12 @@ static NSString *const URLWantBuy = @"/scene_product/sight_click_stat";
 }
 
 #pragma mark 给此场景点赞
-- (void)networkLikeSceneData {
-    if (self.likeScene.likeBtn.selected == NO) {
-        self.likeScene.likeBtn.selected = YES;
+- (void)networkLikeSceneData:(UIButton *)button {
+    if (button.selected == NO) {
         self.likeSceneRequest = [FBAPI postWithUrlString:URLLikeScene requestDictionary:@{@"id":self.sceneId} delegate:self];
         [SVProgressHUD show];
         [self.likeSceneRequest startRequestSuccess:^(FBRequest *request, id result) {
+            button.selected = YES;
             [SVProgressHUD showSuccessWithStatus:[result valueForKey:@"message"]];
             [self networkRequestData];
             [self networkLikePeopleData];
@@ -242,11 +239,11 @@ static NSString *const URLWantBuy = @"/scene_product/sight_click_stat";
             [SVProgressHUD showErrorWithStatus:[error localizedDescription]];
         }];
     
-    } else if (self.likeScene.likeBtn.selected == YES) {
-        self.likeScene.likeBtn.selected = NO;
+    } else if (button.selected == YES) {
         self.cancelLikeRequest = [FBAPI postWithUrlString:URLCancelLike requestDictionary:@{@"id":self.sceneId} delegate:self];
         [SVProgressHUD show];
         [self.cancelLikeRequest startRequestSuccess:^(FBRequest *request, id result) {
+            button.selected = NO;
             [SVProgressHUD showSuccessWithStatus:[result valueForKey:@"message"]];
             [self networkRequestData];
             [self networkLikePeopleData];
@@ -257,15 +254,6 @@ static NSString *const URLWantBuy = @"/scene_product/sight_click_stat";
         }];
     }
     
-}
-
-#pragma mark - 点赞按钮
-- (LikeSceneView *)likeScene {
-    if (!_likeScene) {
-        _likeScene = [[LikeSceneView alloc] initWithFrame:CGRectMake(0, SCREEN_HEIGHT, SCREEN_HEIGHT, 44)];
-        [_likeScene.likeBtn addTarget:self action:@selector(networkLikeSceneData) forControlEvents:(UIControlEventTouchUpInside)];
-    }
-    return _likeScene;
 }
 
 #pragma mark - 设置场景详情的视图
@@ -310,6 +298,7 @@ static NSString *const URLWantBuy = @"/scene_product/sight_click_stat";
             [cell setSceneInfoData:self.sceneInfoModel];
             cell.city.userInteractionEnabled = YES;
             [cell.city addGestureRecognizer:self.cityTap];
+            [cell.goodBtn addTarget:self action:@selector(networkLikeSceneData:) forControlEvents:(UIControlEventTouchUpInside)];
             return cell;
             
         } else if (indexPath.row == 1) {
@@ -329,7 +318,6 @@ static NSString *const URLWantBuy = @"/scene_product/sight_click_stat";
                 cell = [[DataNumTableViewCell alloc] initWithStyle:(UITableViewCellStyleDefault) reuseIdentifier:dataNumCellId];
             }
             [cell.moreBtn addTarget:self action:@selector(moreBtnClick) forControlEvents:(UIControlEventTouchUpInside)];
-            cell.nav = self.navigationController;
             [cell setSceneDataNum:self.sceneInfoModel];
             return cell;
             
@@ -475,30 +463,6 @@ static NSString *const URLWantBuy = @"/scene_product/sight_click_stat";
     }
 }
 
-- (void)scrollViewDidScroll:(UIScrollView *)scrollView{
-    if (scrollView == self.sceneTableView) {
-        CGRect likeSceneRect = self.likeScene.frame;
-        CGRect tableRect = self.sceneTableView.frame;
-        
-        if (self.rollDown == YES) {
-            tableRect = CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT - 44);
-            likeSceneRect = CGRectMake(0, SCREEN_HEIGHT - 44, SCREEN_WIDTH, 44);
-            [UIView animateWithDuration:.3 animations:^{
-                self.likeScene.frame = likeSceneRect;
-                self.sceneTableView.frame = tableRect;
-            }];
-            
-        } else if (self.rollDown == NO) {
-            tableRect = CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT);
-            likeSceneRect = CGRectMake(0, SCREEN_HEIGHT, SCREEN_WIDTH, 44);
-            [UIView animateWithDuration:.3 animations:^{
-                self.likeScene.frame = likeSceneRect;
-                self.sceneTableView.frame = tableRect;
-            }];
-        }
-    }
-}
-
 #pragma mark - 查看全部评论
 - (UIButton *)allComment {
     if (!_allComment) {
@@ -509,7 +473,7 @@ static NSString *const URLWantBuy = @"/scene_product/sight_click_stat";
     return _allComment;
 }
 
-#pragma mark - 弹出举报视图
+#pragma mark - 弹出更多视图
 - (void)moreBtnClick {
     FBAlertViewController * alertVC = [[FBAlertViewController alloc] init];
     [alertVC initFBAlertVcStyle:NO];
@@ -517,7 +481,17 @@ static NSString *const URLWantBuy = @"/scene_product/sight_click_stat";
     alertVC.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;
     alertVC.targetId = self.sceneId;
     alertVC.sceneData = _shareDataDict;
+    alertVC.openCommentVc = ^{
+        [self openCommentListVC];
+    };
     [self presentViewController:alertVC animated:YES completion:nil];
+}
+
+- (void)openCommentListVC {
+    CommentNViewController * commentVC = [[CommentNViewController alloc] init];
+    commentVC.targetId = self.sceneId;
+    commentVC.sceneUserId = _sceneUserId;
+    [self.navigationController pushViewController:commentVC animated:YES];
 }
 
 #pragma mark - 设置Nav

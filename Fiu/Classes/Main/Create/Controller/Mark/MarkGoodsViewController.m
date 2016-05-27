@@ -35,7 +35,6 @@ static NSString *const URLSearchGoods = @"/search/getlist";
     
 }
 
-
 #pragma mark - 网络请求
 #pragma mark 分类列表
 - (void)networkRequest {

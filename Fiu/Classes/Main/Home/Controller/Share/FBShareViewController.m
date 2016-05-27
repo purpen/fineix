@@ -10,11 +10,14 @@
 #import "ShareStyleCollectionViewCell.h"
 #import "FBEditShareInfoViewController.h"
 
+static NSString *const URLShareTextNum = @"/scene_sight/add_share_context_num";
+
 @interface FBShareViewController () {
     NSString * _editBgImg;
     NSString * _editTitle;
     NSString * _editDes;
     NSString * _tags;
+    NSString * _oid;
 }
 
 @end
@@ -31,6 +34,16 @@
     self.view.backgroundColor = [UIColor blackColor];
     
     [self setShareVcUI];
+}
+
+#pragma mark - 网络请求
+- (void)networkShareTextNumData:(NSString *)oid {
+    self.shareTextNumRequest = [FBAPI postWithUrlString:URLShareTextNum requestDictionary:@{@"id":oid} delegate:self];
+    [self.shareTextNumRequest startRequestSuccess:^(FBRequest *request, id result) {
+        NSLog(@"%@", result);
+    } failure:^(FBRequest *request, NSError *error) {
+        NSLog(@"%@", error);
+    }];
 }
 
 - (UIImage *)shareImage {
@@ -76,11 +89,12 @@
     editShareInfoVC.sceneTags = _tags;
     [self presentViewController:editShareInfoVC animated:YES completion:nil];
     
-    editShareInfoVC.getEdtiShareText = ^ (NSString * title, NSString * des) {
+    editShareInfoVC.getEdtiShareText = ^ (NSString * title, NSString * des, NSString * oid) {
         [self.shareTopView changeWithSearchText:title withDes:des];
         [self.shareBottomView changeWithSearchText:title withDes:des];
         [self.shareTitleBottomView changeWithSearchText:title withDes:des];
         [self.shareTitleTopView changeWithSearchText:title withDes:des];
+        _oid = oid;
     };
 }
 
@@ -126,8 +140,8 @@
     if (!_styleView) {
         UICollectionViewFlowLayout * flowLayout = [[UICollectionViewFlowLayout alloc] init];
         flowLayout.scrollDirection = UICollectionViewScrollDirectionHorizontal;
-        flowLayout.itemSize = CGSizeMake(70, 110);
-        flowLayout.sectionInset = UIEdgeInsetsMake(0, 10, 0, 10);
+        flowLayout.itemSize = CGSizeMake((SCREEN_WIDTH - 70)/4, 110);
+        flowLayout.sectionInset = UIEdgeInsetsMake(0, 20, 0, 20);
         
         _styleView = [[UICollectionView alloc] initWithFrame:CGRectMake(0, SCREEN_HEIGHT - 110, SCREEN_WIDTH, 110) collectionViewLayout:flowLayout];
         _styleView.showsHorizontalScrollIndicator = NO;
@@ -140,7 +154,7 @@
 }
 
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
-    return 7;
+    return 4;
 }
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
@@ -154,48 +168,24 @@
         if (self.shareView.subviews.count > 0) {
             [self.shareView.subviews makeObjectsPerformSelector:@selector(removeFromSuperview)];
             [self.shareView addSubview:self.shareTopView];
-            [self.shareTopView defultTitleFontStyle];
         }
         
     } else if (indexPath.row == 1) {
         if (self.shareView.subviews.count > 0) {
             [self.shareView.subviews makeObjectsPerformSelector:@selector(removeFromSuperview)];
-            [self.shareView addSubview:self.shareTopView];
-            [self.shareTopView smallTitleFontStyle];
+            [self.shareView addSubview:self.shareTitleTopView];
         }
         
     } else if (indexPath.row == 2) {
         if (self.shareView.subviews.count > 0) {
             [self.shareView.subviews makeObjectsPerformSelector:@selector(removeFromSuperview)];
-            [self.shareView addSubview:self.shareBottomView];
-            [self.shareBottomView defultTitleFontStyle];
+            [self.shareView addSubview:self.shareTitleBottomView];
         }
         
     } else if (indexPath.row == 3) {
         if (self.shareView.subviews.count > 0) {
             [self.shareView.subviews makeObjectsPerformSelector:@selector(removeFromSuperview)];
             [self.shareView addSubview:self.shareBottomView];
-            [self.shareBottomView smallTitleFontStyle];
-        }
-        
-    } else if (indexPath.row == 4) {
-        if (self.shareView.subviews.count > 0) {
-            [self.shareView.subviews makeObjectsPerformSelector:@selector(removeFromSuperview)];
-            [self.shareView addSubview:self.shareTitleBottomView];
-        }
-    
-    } else if (indexPath.row == 5) {
-        if (self.shareView.subviews.count > 0) {
-            [self.shareView.subviews makeObjectsPerformSelector:@selector(removeFromSuperview)];
-            [self.shareView addSubview:self.shareTitleTopView];
-            [self.shareTitleTopView defultTitleFontStyle];
-        }
-    
-    } else if (indexPath.row == 6) {
-        if (self.shareView.subviews.count > 0) {
-            [self.shareView.subviews makeObjectsPerformSelector:@selector(removeFromSuperview)];
-            [self.shareView addSubview:self.shareTitleTopView];
-            [self.shareTitleTopView smallTitleFontStyle];
         }
     }
 }
@@ -231,7 +221,7 @@
     if (!_shareBtn) {
         _shareBtn = [[UIButton alloc] initWithFrame:CGRectMake(SCREEN_WIDTH - 44, 0, 44, 44)];
         [_shareBtn setTitleColor:[UIColor whiteColor] forState:(UIControlStateNormal)];
-        [_shareBtn setTitle:NSLocalizedString(@"ShareBtn", nil) forState:(UIControlStateNormal)];
+        [_shareBtn setImage:[UIImage imageNamed:@"Share_white"] forState:(UIControlStateNormal)];
         _shareBtn.titleLabel.font = [UIFont systemFontOfSize:16];
         [_shareBtn addTarget:self action:@selector(shareItemSelected) forControlEvents:(UIControlEventTouchUpInside)];
     }
@@ -239,6 +229,10 @@
 }
 
 - (void)shareItemSelected {
+    if (_oid.length > 0) {
+        [self networkShareTextNumData:_oid];
+    }
+    
     ShareViewController * shareVC = [[ShareViewController alloc] init];
     shareVC.modalPresentationStyle = UIModalPresentationOverCurrentContext;
     shareVC.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;

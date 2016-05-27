@@ -12,16 +12,12 @@
 
 @interface DataNumTableViewCell : UITableViewCell
 
-@pro_strong UINavigationController  *   nav;
-
-@pro_strong NSString            *   tagetId;        //  id
 @pro_strong UIButton            *   lookBtn;        //  查看
 @pro_strong UIButton            *   likeBtn;        //  喜欢
 @pro_strong UIButton            *   commentBtn;     //  评论
 @pro_strong UIButton            *   moreBtn;        //  更多
 @pro_strong UILabel             *   line;           //  分割线
 @pro_strong UILabel             *   bottomline;     //  分割线
-@pro_strong NSString            *   userId;
 
 - (void)setSceneDataNum:(SceneInfoData *)model;
 

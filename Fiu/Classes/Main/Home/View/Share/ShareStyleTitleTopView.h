@@ -29,8 +29,6 @@
 
 - (void)setShareSceneData:(NSDictionary *)model;
 
-- (void)defultTitleFontStyle;
-- (void)smallTitleFontStyle;
 - (void)changeWithSearchText:(NSString *)title withDes:(NSString *)des;
 
 

@@ -34,6 +34,36 @@
     self.whereScene.text = [self abouText:self.whereScene withText:model.sceneTitle];
     self.city.text = [self abouText:self.city withText:model.address];
     self.time.text = [NSString stringWithFormat:@"|  %@", model.createdAt];
+    
+    //  首页显示标记点
+//    self.tagDataMarr = [NSMutableArray arrayWithArray:model.product];
+//    [self setUserTagBtn];
+}
+
+#pragma mark - 创建用户添加商品按钮
+- (void)setUserTagBtn {
+    self.userTagMarr = [NSMutableArray array];
+    
+    for (UIView * view in self.subviews) {
+        if ([view isKindOfClass:[UserGoodsTag class]]) {
+            [view removeFromSuperview];
+        }
+    }
+    
+    for (NSInteger idx = 0; idx < self.tagDataMarr.count; ++ idx) {
+        CGFloat btnX = [[self.tagDataMarr[idx] valueForKey:@"x"] floatValue];
+        CGFloat btnY = [[self.tagDataMarr[idx] valueForKey:@"y"] floatValue];
+        
+        UserGoodsTag * userTag = [[UserGoodsTag alloc] initWithFrame:CGRectMake(btnX * SCREEN_WIDTH, btnY * SCREEN_HEIGHT, 175, 32)];
+        userTag.dele.hidden = YES;
+        userTag.title.hidden = YES;
+        userTag.price.hidden = YES;
+        userTag.isMove = NO;
+        [userTag setImage:[UIImage imageNamed:@""] forState:(UIControlStateNormal)];
+
+        [self addSubview:userTag];
+        [self.userTagMarr addObject:userTag];
+    }
 }
 
 #pragma mark - 场景图
@@ -41,6 +71,7 @@
     if (!_bgImage) {
         _bgImage = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT)];
         _bgImage.contentMode = UIViewContentModeScaleAspectFill;
+        _bgImage.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"Defaul_Bg_750"]];
         
         //  添加渐变层
         CAGradientLayer * shadow = [CAGradientLayer layer];

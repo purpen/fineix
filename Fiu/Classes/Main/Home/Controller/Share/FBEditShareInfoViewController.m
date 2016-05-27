@@ -15,6 +15,7 @@ static NSString *const URLShareText = @"/search/getlist";
 @interface FBEditShareInfoViewController ()
 
 @pro_strong NSMutableArray      *   searchList;
+@pro_strong NSMutableArray      *   shareTextList;
 
 @end
 
@@ -57,21 +58,19 @@ static NSString *const URLShareText = @"/search/getlist";
 
 #pragma mark 搜索分享文字
 - (void)networkSearchData:(NSString *)keyword {
-    [self addMJRefresh:_searchListTable];
-    
     [SVProgressHUD show];
     self.searchListRequest = [FBAPI getWithUrlString:URLShareText requestDictionary:@{@"evt":@"content", @"size":@"10", @"sort":@"0", @"page":@(self.currentpageNum + 1), @"t":@"11", @"q":keyword} delegate:self];
     [self.searchListRequest startRequestSuccess:^(FBRequest *request, id result) {
         NSArray * listArr = [[result valueForKey:@"data"] valueForKey:@"rows"];
         for (NSDictionary * listDict in listArr) {
             ShareInfoRow * listModel = [[ShareInfoRow alloc] initWithDictionary:listDict];
-            [self.searchList addObject:listModel];
+            [self.shareTextList addObject:listModel];
         }
-        [self.searchListTable reloadData];
+        [self.shareTextTable reloadData];
         
         self.currentpageNum = [[[result valueForKey:@"data"] valueForKey:@"current_page"] integerValue];
         self.totalPageNum = [[[result valueForKey:@"data"] valueForKey:@"total_page"] integerValue];
-        [self requestIsLastData:self.searchListTable currentPage:self.currentpageNum withTotalPage:self.totalPageNum];
+        [self requestIsLastData:self.shareTextTable currentPage:self.currentpageNum withTotalPage:self.totalPageNum];
         
         [SVProgressHUD dismiss];
         
@@ -120,27 +119,12 @@ static NSString *const URLShareText = @"/search/getlist";
 #pragma mark - 设置界面UI
 - (void)setEditInfoVcUI {
     [self.view addSubview:self.bgImgView];
-    [self.view addSubview:self.topView];
-    [self.view addSubview:self.editTitle];
-    [self.view addSubview:self.editDes];
-    [self.view addSubview:self.searchView];
-    
-    UILabel * lineBg = [[UILabel alloc] initWithFrame:CGRectMake(0, 259, SCREEN_WIDTH, 1)];
-    lineBg.backgroundColor = [UIColor colorWithHexString:@"#FFFFFF" alpha:.5];
-    [self.view addSubview:lineBg];
-    
-    [self.view addSubview:self.searchListTable];
-}
-
-#pragma mark -
-- (NSMutableArray *)searchList {
-    if (!_searchList) {
-        _searchList = [NSMutableArray array];
-    }
-    return _searchList;
+    [self.view addSubview:self.editShareTextView];
+    [self.view addSubview:self.textSearchView];
 }
 
 #pragma mark - 搜索文字列表
+#pragma mark 推荐文字
 - (UITableView *)searchListTable {
     if (!_searchListTable) {
         _searchListTable = [[UITableView alloc] initWithFrame:CGRectMake(0, 264, SCREEN_WIDTH, SCREEN_HEIGHT - 264) style:(UITableViewStylePlain)];
@@ -154,30 +138,77 @@ static NSString *const URLShareText = @"/search/getlist";
     return _searchListTable;
 }
 
+#pragma mark 搜索文字
+- (UITableView *)shareTextTable {
+    if (!_shareTextTable) {
+        _shareTextTable = [[UITableView alloc] initWithFrame:CGRectMake(0, 94, SCREEN_WIDTH, SCREEN_HEIGHT - 94) style:(UITableViewStylePlain)];
+        _shareTextTable.delegate = self;
+        _shareTextTable.dataSource = self;
+        _shareTextTable.tableFooterView = [UIView new];
+        _shareTextTable.estimatedRowHeight = 100;
+        _shareTextTable.showsVerticalScrollIndicator = NO;
+        _shareTextTable.backgroundColor = [UIColor colorWithHexString:@"#FFFFFF" alpha:0];
+        [self addMJRefresh:_shareTextTable];
+    }
+    return _shareTextTable;
+}
+
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return self.searchList.count;
+    if (tableView == self.searchListTable) {
+        return self.searchList.count;
+    } else if (tableView == self.shareTextTable) {
+        return self.shareTextList.count;
+    }
+    return 0;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    static NSString * searchTextListCellID = @"SearchTextListCellID";
-    ShareSearchTextTableViewCell * cell = [tableView dequeueReusableCellWithIdentifier:searchTextListCellID];
-    if (!cell) {
-        cell = [[ShareSearchTextTableViewCell alloc] initWithStyle:(UITableViewCellStyleDefault) reuseIdentifier:searchTextListCellID];
+    if (tableView == self.searchListTable) {
+        static NSString * searchTextListCellID = @"SearchTextListCellID";
+        ShareSearchTextTableViewCell * cell = [tableView dequeueReusableCellWithIdentifier:searchTextListCellID];
+        if (!cell) {
+            cell = [[ShareSearchTextTableViewCell alloc] initWithStyle:(UITableViewCellStyleDefault) reuseIdentifier:searchTextListCellID];
+        }
+        if (self.searchList.count) {
+            [cell setShareTextData:self.searchList[indexPath.row]];
+        }
+        return cell;
+    
+    } else if (tableView == self.shareTextTable) {
+        static NSString * shareTextListCellID = @"ShareTextListCellID";
+        ShareSearchTextTableViewCell * cell = [tableView dequeueReusableCellWithIdentifier:shareTextListCellID];
+        if (!cell) {
+            cell = [[ShareSearchTextTableViewCell alloc] initWithStyle:(UITableViewCellStyleDefault) reuseIdentifier:shareTextListCellID];
+        }
+        if (self.shareTextList.count) {
+            [cell setShareTextData:self.shareTextList[indexPath.row]];
+        }
+        return cell;
     }
-    if (self.searchList.count) {
-        [cell setShareTextData:self.searchList[indexPath.row]];
-    }
-    return cell;
+    
+    return nil;
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    if ([[self.searchList[indexPath.row] valueForKey:@"title"] length] > 0) {
-        self.editTitle.text = [self.searchList[indexPath.row] valueForKey:@"title"];
-        self.editDes.text = [self.searchList[indexPath.row] valueForKey:@"content"];
+    if (tableView == self.searchListTable) {
+        if ([[self.searchList[indexPath.row] valueForKey:@"title"] length] > 0) {
+            self.editTitle.text = [self.searchList[indexPath.row] valueForKey:@"title"];
+            self.editDes.text = [self.searchList[indexPath.row] valueForKey:@"content"];
+            
+            [self dismissViewControllerAnimated:YES completion:^{
+                self.getEdtiShareText(self.editTitle.text, self.editDes.text, [self.searchList[indexPath.row] valueForKey:@"oid"]);
+            }];
+        }
         
-        [self dismissViewControllerAnimated:YES completion:^{
-            self.getEdtiShareText(self.editTitle.text, self.editDes.text);
-        }];
+    } else if (tableView == self.shareTextTable) {
+        if ([[self.shareTextList[indexPath.row] valueForKey:@"title"] length] > 0) {
+            self.editTitle.text = [self.shareTextList[indexPath.row] valueForKey:@"title"];
+            self.editDes.text = [self.shareTextList[indexPath.row] valueForKey:@"des"];
+            
+            [self dismissViewControllerAnimated:YES completion:^{
+                self.getEdtiShareText(self.editTitle.text, self.editDes.text, [self.shareTextList[indexPath.row] valueForKey:@"oid"]);
+            }];
+        }
     }
 }
 
@@ -218,7 +249,9 @@ static NSString *const URLShareText = @"/search/getlist";
         _searchBtn.layer.masksToBounds = YES;
         [_searchBtn addTarget:self action:@selector(openSearchView) forControlEvents:(UIControlEventTouchUpInside)];
         [_searchBtn setImage:[UIImage imageNamed:@"icon_search_white"] forState:(UIControlStateNormal)];
-        [_shareBtn setTitle:@"搜索文字" forState:(UIControlStateNormal)];
+        [_searchBtn setTitle:@"搜索文字" forState:(UIControlStateNormal)];
+        [_searchBtn setTitleColor:[UIColor colorWithHexString:@"#FFFFFF" alpha:.7] forState:(UIControlStateNormal)];
+        _searchBtn.titleLabel.font = [UIFont systemFontOfSize:13];
     }
     return _searchBtn;
 }
@@ -229,12 +262,20 @@ static NSString *const URLShareText = @"/search/getlist";
     [UIView animateWithDuration:.3 animations:^{
         self.textSearchView.frame = searchViewRect;
     }];
+    
+    CGRect editShareView = self.editShareTextView.frame;
+    editShareView.origin.x = -SCREEN_WIDTH;
+    [UIView animateWithDuration:.3 animations:^{
+        self.editShareTextView.frame = editShareView;
+    }];
+    
+    [self.searchView becomeFirstResponder];
 }
 
 #pragma mark - 添加搜索框视图
 - (UITextField *)searchView {
     if (!_searchView) {
-        _searchView = [[UITextField alloc] initWithFrame:CGRectMake(10, 212, SCREEN_WIDTH - 20, 26.5)];
+        _searchView = [[UITextField alloc] initWithFrame:CGRectMake(10, 54, SCREEN_WIDTH - 20, 26.5)];
         _searchView.delegate = self;
         _searchView.clearButtonMode = UITextFieldViewModeWhileEditing;
         _searchView.font = [UIFont systemFontOfSize:13];
@@ -261,12 +302,30 @@ static NSString *const URLShareText = @"/search/getlist";
             [SVProgressHUD showInfoWithStatus:@"关键词不能为空"];
         
         } else {
-            [self.searchList removeAllObjects];
+            [self.shareTextList removeAllObjects];
             self.currentpageNum = 0;
             [self networkSearchData:textField.text];
         }
     }
     return YES;
+}
+
+#pragma mark - 默认视图
+- (UIView *)editShareTextView {
+    if (!_editShareTextView) {
+        _editShareTextView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT)];
+        
+        UILabel * lineBg = [[UILabel alloc] initWithFrame:CGRectMake(0, 259, SCREEN_WIDTH, 1)];
+        lineBg.backgroundColor = [UIColor colorWithHexString:@"#FFFFFF" alpha:.5];
+    
+        [_editShareTextView addSubview:self.topView];
+        [_editShareTextView addSubview:self.editTitle];
+        [_editShareTextView addSubview:self.editDes];
+        [_editShareTextView addSubview:lineBg];
+        [_editShareTextView addSubview:self.searchBtn];
+        [_editShareTextView addSubview:self.searchListTable];
+    }
+    return _editShareTextView;
 }
 
 #pragma mark - 搜索视图
@@ -283,15 +342,26 @@ static NSString *const URLShareText = @"/search/getlist";
         [top addSubview:back];
         
         [_textSearchView addSubview:top];
-        
-
-        
+        [_textSearchView addSubview:self.searchView];
+        [_textSearchView addSubview:self.shareTextTable];
     }
     return _textSearchView;
 }
 
 - (void)backShareTextView {
+    CGRect searchViewRect = self.textSearchView.frame;
+    searchViewRect.origin.x = SCREEN_WIDTH;
+    [UIView animateWithDuration:.3 animations:^{
+        self.textSearchView.frame = searchViewRect;
+    }];
     
+    CGRect editShareView = self.editShareTextView.frame;
+    editShareView.origin.x = 0;
+    [UIView animateWithDuration:.3 animations:^{
+        self.editShareTextView.frame = editShareView;
+    }];
+    
+    [self.searchView resignFirstResponder];
 }
 
 #pragma mark - 背景图片
@@ -340,8 +410,23 @@ static NSString *const URLShareText = @"/search/getlist";
 
 - (void)doneItemSelected {
     [self dismissViewControllerAnimated:YES completion:^{
-        self.getEdtiShareText(self.editTitle.text, self.editDes.text);
+        self.getEdtiShareText(self.editTitle.text, self.editDes.text, @"");
     }];
+}
+
+#pragma mark -
+- (NSMutableArray *)searchList {
+    if (!_searchList) {
+        _searchList = [NSMutableArray array];
+    }
+    return _searchList;
+}
+
+- (NSMutableArray *)shareTextList {
+    if (!_shareTextList) {
+        _shareTextList = [NSMutableArray array];
+    }
+    return _shareTextList;
 }
 
 @end

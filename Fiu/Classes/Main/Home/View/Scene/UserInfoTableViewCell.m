@@ -28,8 +28,13 @@
 
 #pragma mark -
 - (void)setSceneInfoData:(SceneInfoData *)model {
+    //  商品标签
+    self.tagDataMarr = [NSMutableArray arrayWithArray:model.product];
+    [self setUserTagBtn];
+    
     self.goodsIds = [NSMutableArray arrayWithArray:[model.product valueForKey:@"idField"]];
     self.userId = [NSString stringWithFormat:@"%zi", model.userInfo.userId];
+    
     [self.bgImage sd_setBackgroundImageWithURL:[NSURL URLWithString:model.coverUrl] forState:(UIControlStateNormal)];
     [self.bgImage sd_setBackgroundImageWithURL:[NSURL URLWithString:model.coverUrl] forState:(UIControlStateHighlighted)];
     [self titleTextStyle:[NSString stringWithFormat:@"%@", model.title] withBgColor:[UIColor colorWithPatternImage:[UIImage imageNamed:@"titleBg"]]];
@@ -37,24 +42,26 @@
     self.city.text = [self abouText:self.city withText:model.address];
     [self.userHeader sd_setImageWithURL:[NSURL URLWithString:model.userInfo.avatarUrl] forState:(UIControlStateNormal)];
     self.userName.text = model.userInfo.nickname;
+    self.time.text = [NSString stringWithFormat:@"| %@", model.createdAt];
+    
     //  是否是达人
     if (model.userInfo.isExpert == 1) {
         self.userProfile.text = [NSString stringWithFormat:@"达人｜%@",model.userInfo.summary];
     } else if (model.userInfo.isExpert == 0) {
         self.userProfile.text = model.userInfo.summary;
     }
-
-    self.time.text = [NSString stringWithFormat:@"| %@", model.createdAt];
-    
+    //  是否点赞
+    if (model.isLove == 0) {
+        self.goodBtn.selected = NO;
+    } else if (model.isLove == 1) {
+        self.goodBtn.selected = YES;
+    }
+    //  点赞的人数
     if (model.loveCount/1000 > 1) {
         self.goodNum.text = [NSString stringWithFormat:@"%zik%@", model.loveCount/1000, NSLocalizedString(@"peopleLike", nil)];
     } else {
         self.goodNum.text = [NSString stringWithFormat:@"%zi%@", model.loveCount, NSLocalizedString(@"peopleLike", nil)];
     }
-    
-    self.tagDataMarr = [NSMutableArray arrayWithArray:model.product];
-    
-    [self setUserTagBtn];
 }
 
 #pragma mark - 
@@ -79,8 +86,7 @@
         CGFloat btnY = [[self.tagDataMarr[idx] valueForKey:@"y"] floatValue];
         NSString * title = [self.tagDataMarr[idx] valueForKey:@"title"];
         NSString * price = [NSString stringWithFormat:@"￥%.2f", [[self.tagDataMarr[idx] valueForKey:@"price"] floatValue]];
-        
-        UserGoodsTag * userTag = [[UserGoodsTag alloc] initWithFrame:CGRectMake(btnX * SCREEN_WIDTH, btnY * SCREEN_HEIGHT, 175, 32)];
+        UserGoodsTag * userTag = [[UserGoodsTag alloc] initWithFrame:CGRectMake(btnX * SCREEN_WIDTH, (btnY * SCREEN_HEIGHT) * 0.873, 175, 32)];
         userTag.dele.hidden = YES;
         userTag.title.text = title;
         if (price.length > 6) {
@@ -112,6 +118,7 @@
     if (!_bgImage) {
         _bgImage = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT)];
         [_bgImage addTarget:self action:@selector(showUserTag:) forControlEvents:(UIControlEventTouchUpInside)];
+        _bgImage.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"Defaul_Bg_750"]];
         //  添加渐变层
         CAGradientLayer * shadow = [CAGradientLayer layer];
         shadow.startPoint = CGPointMake(0, 0);
@@ -258,8 +265,9 @@
 - (UIButton *)goodBtn {
     if (!_goodBtn) {
         _goodBtn = [[UIButton alloc] init];
-        [_goodBtn setBackgroundImage:[UIImage imageNamed:@"User_like"] forState:(UIControlStateNormal)];
-
+        [_goodBtn setBackgroundImage:[UIImage imageNamed:@"icon_like"] forState:(UIControlStateNormal)];
+        [_goodBtn setBackgroundImage:[UIImage imageNamed:@"icon_like_seleted"] forState:(UIControlStateSelected)];
+        _goodBtn.selected = NO;
         [_goodBtn addSubview:self.goodNum];
         [_goodNum mas_makeConstraints:^(MASConstraintMaker *make) {
             make.size.mas_equalTo(CGSizeMake(89 ,13));

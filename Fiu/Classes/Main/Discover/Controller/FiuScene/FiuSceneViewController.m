@@ -60,12 +60,7 @@ static NSString *const URLLikeScenePeople = @"/favorite";
     [SVProgressHUD show];
     self.fiuSceneRequest = [FBAPI getWithUrlString:URLFiuSceneInfo requestDictionary:@{@"id":self.fiuSceneId} delegate:self];
     [self.fiuSceneRequest startRequestSuccess:^(FBRequest *request, id result) {
-        
-        if ([[[result valueForKey:@"data"] valueForKey:@"is_subscript"] integerValue] == 0) {
-            self.suBtn.suFiuBtn.selected = NO;
-        } else if ([[[result valueForKey:@"data"] valueForKey:@"is_subscript"] integerValue] == 1) {
-            self.suBtn.suFiuBtn.selected = YES;
-        }
+
         self.fiuSceneData = [[FiuSceneInfoData alloc] initWithDictionary:[result valueForKey:@"data"]];
         [self.fiuSceneTable reloadData];
         [SVProgressHUD dismiss];
@@ -94,9 +89,9 @@ static NSString *const URLLikeScenePeople = @"/favorite";
         }
         
         [self.fiuSceneTable reloadData];
+        
         self.currentpageNum = [[[result valueForKey:@"data"] valueForKey:@"current_page"] integerValue];
         self.totalPageNum = [[[result valueForKey:@"data"] valueForKey:@"total_page"] integerValue];
-        
         [self requestIsLastData:self.fiuSceneTable currentPage:self.currentpageNum withTotalPage:self.totalPageNum];
         
         [SVProgressHUD dismiss];
@@ -127,12 +122,12 @@ static NSString *const URLLikeScenePeople = @"/favorite";
 
 
 #pragma mark 订阅情景
-- (void)networkSuFiuSceneData {
-    if (self.suBtn.suFiuBtn.selected == NO) {
+- (void)networkSuFiuSceneData:(UIButton *)button {
+    if (button.selected == NO) {
         self.suFiuSceneRequest = [FBAPI postWithUrlString:URLSuFiuScene requestDictionary:@{@"id":self.fiuSceneId} delegate:self];
         [self.suFiuSceneRequest startRequestSuccess:^(FBRequest *request, id result) {
             [SVProgressHUD showSuccessWithStatus:[result valueForKey:@"message"]];
-            self.suBtn.suFiuBtn.selected = YES;
+            button.selected = YES;
             [self networkRequestData];
             [self networkLikePeopleData];
             
@@ -140,11 +135,11 @@ static NSString *const URLLikeScenePeople = @"/favorite";
             [SVProgressHUD showErrorWithStatus:[error localizedDescription]];
         }];
         
-    } else if (self.suBtn.suFiuBtn.selected == YES) {
+    } else if (button.selected == YES) {
         self.cancelSuRequest = [FBAPI postWithUrlString:URLCancelSu requestDictionary:@{@"id":self.fiuSceneId} delegate:self];
         [self.cancelSuRequest startRequestSuccess:^(FBRequest *request, id result) {
             [SVProgressHUD showSuccessWithStatus:[result valueForKey:@"message"]];
-            self.suBtn.suFiuBtn.selected = NO;
+            button.selected = NO;
             [self networkRequestData];
             [self networkLikePeopleData];
             
@@ -183,11 +178,6 @@ static NSString *const URLLikeScenePeople = @"/favorite";
 
 #pragma mark - 上拉加载 & 下拉刷新
 - (void)addMJRefresh:(UITableView *)table {
-//    table.mj_header = [MJRefreshNormalHeader headerWithRefreshingBlock:^{
-//        self.currentpageNum = 0;
-//        [self networkRequestData];
-//    }];
-    
     table.mj_footer = [MJRefreshAutoNormalFooter footerWithRefreshingBlock:^{
         if (self.currentpageNum < self.totalPageNum) {
             [self networkFiuSceneListData];
@@ -201,17 +191,6 @@ static NSString *const URLLikeScenePeople = @"/favorite";
 - (void)setSceneInfoViewUI {
     [self.view addSubview:self.fiuSceneTable];
     [self.view sendSubviewToBack:self.fiuSceneTable];
-    
-    [self.view addSubview:self.suBtn];
-}
-
-#pragma mark - 订阅按钮
-- (SuFiuScenrView *)suBtn {
-    if (!_suBtn) {
-        _suBtn = [[SuFiuScenrView alloc] initWithFrame:CGRectMake(0, SCREEN_HEIGHT, SCREEN_HEIGHT, 44)];
-        [_suBtn.suFiuBtn addTarget:self action:@selector(networkSuFiuSceneData) forControlEvents:(UIControlEventTouchUpInside)];
-    }
-    return _suBtn;
 }
 
 #pragma mark - 设置情景详情的视图
@@ -224,10 +203,7 @@ static NSString *const URLLikeScenePeople = @"/favorite";
         _fiuSceneTable.separatorStyle = UITableViewCellSeparatorStyleNone;
         _fiuSceneTable.backgroundColor = [UIColor whiteColor];
         
-        if (self.totalPageNum > 1) {
-            [self addMJRefresh:_fiuSceneTable];
-        }
-        
+        [self addMJRefresh:_fiuSceneTable];
     }
     return _fiuSceneTable;
 }
@@ -260,6 +236,7 @@ static NSString *const URLLikeScenePeople = @"/favorite";
             [cell setFiuSceneInfoData:self.fiuSceneData];
             cell.city.userInteractionEnabled = YES;
             [cell.city addGestureRecognizer:self.cityTap];
+            [cell.goodBtn addTarget:self action:@selector(networkSuFiuSceneData:) forControlEvents:(UIControlEventTouchUpInside)];
             return cell;
             
         } else if (indexPath.row == 1) {
@@ -410,30 +387,6 @@ static NSString *const URLLikeScenePeople = @"/favorite";
     NearChangViewController *vc = [[NearChangViewController alloc] init];
     vc.baseInfo = self.fiuSceneData;
     [self.navigationController pushViewController:vc animated:YES];
-}
-
-- (void)scrollViewDidScroll:(UIScrollView *)scrollView{
-    if (scrollView == self.fiuSceneTable) {
-        CGRect suBtnRect = self.suBtn.frame;
-        CGRect tableRect = self.fiuSceneTable.frame;
-        
-        if (self.rollDown == YES) {
-            tableRect = CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT - 44);
-            suBtnRect = CGRectMake(0, SCREEN_HEIGHT - 44, SCREEN_WIDTH, 44);
-            [UIView animateWithDuration:.3 animations:^{
-                self.suBtn.frame = suBtnRect;
-                self.fiuSceneTable.frame = tableRect;
-            }];
-            
-        } else if (self.rollDown == NO) {
-            tableRect = CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT);
-            suBtnRect = CGRectMake(0, SCREEN_HEIGHT, SCREEN_WIDTH, 44);
-            [UIView animateWithDuration:.3 animations:^{
-                self.suBtn.frame = suBtnRect;
-                self.fiuSceneTable.frame = tableRect;
-            }];
-        }
-    }
 }
 
 #pragma mark - 设置Nav

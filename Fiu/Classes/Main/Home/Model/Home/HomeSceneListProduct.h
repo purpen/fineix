@@ -13,8 +13,8 @@
 @property (nonatomic, assign) NSInteger idField;
 @property (nonatomic, assign) NSInteger price;
 @property (nonatomic, strong) NSString * title;
-@property (nonatomic, assign) NSInteger x;
-@property (nonatomic, assign) NSInteger y;
+@property (nonatomic, assign) CGFloat x;
+@property (nonatomic, assign) CGFloat y;
 
 -(instancetype)initWithDictionary:(NSDictionary *)dictionary;
 @end
