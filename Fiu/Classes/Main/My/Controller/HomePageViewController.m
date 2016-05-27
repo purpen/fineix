@@ -22,7 +22,6 @@
 #import <SVProgressHUD.h>
 #import "FiuSceneRow.h"
 #import "MJRefresh.h"
-
 #import "FiuSceneViewController.h"
 #import "HomeSceneListRow.h"
 #import "SceneInfoViewController.h"
@@ -31,7 +30,10 @@
 #import <SDWebImage/UIImageView+WebCache.h>
 #import "UIImage+Helper.h"
 #import "HomePageViewController.h"
+#import "UIImagePickerController+Flag.h"
 
+#define UserHeadTag 1
+#define BgTag 2
 
 @interface HomePageViewController ()<UICollectionViewDelegate,UICollectionViewDataSource,UICollectionViewDelegateFlowLayout,FBRequestDelegate,UINavigationControllerDelegate,UIImagePickerControllerDelegate,FBNavigationBarItemsDelegate>
 {
@@ -471,6 +473,39 @@ static NSString *const IconURL = @"/my/add_head_pic";
     return 5;
 }
 
+#pragma mark - 更换头像
+-(void)clickUserHeadBtn:(UIButton*)sender{
+    UIAlertController *alertC = [UIAlertController alertControllerWithTitle:@"更换头像" message:nil preferredStyle:UIAlertControllerStyleActionSheet];
+    //判断是否支持相机。模拟器没有相机
+    if ([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera]) {
+        UIAlertAction *cameraAction = [UIAlertAction actionWithTitle:@"拍照" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+            //调取相机
+            UIImagePickerController *picker = [[UIImagePickerController alloc] init];
+            picker.delegate = self;
+            picker.allowsEditing = YES;
+            picker.sourceType = UIImagePickerControllerSourceTypeCamera;
+            picker.flag = @(UserHeadTag);
+            [self presentViewController:picker animated:YES completion:nil];
+        }];
+        [alertC addAction:cameraAction];
+    }
+    UIAlertAction *phontoAction = [UIAlertAction actionWithTitle:@"从相册选择" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+        //调取相册
+        UIImagePickerController *picker = [[UIImagePickerController alloc] init];
+        picker.delegate = self;
+        picker.allowsEditing = YES;
+        picker.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
+        picker.flag = @(UserHeadTag);
+        [self presentViewController:picker animated:YES completion:nil];
+    }];
+    UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
+        [alertC dismissViewControllerAnimated:YES completion:nil];
+    }];
+    [alertC addAction:phontoAction];
+    [alertC addAction:cancelAction];
+    [self presentViewController:alertC animated:YES completion:nil];
+}
+
 
 -(UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath{
     if (indexPath.section == 0) {
@@ -479,7 +514,7 @@ static NSString *const IconURL = @"/my/add_head_pic";
             BackgroundCollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"BackgroundCollectionViewCell" forIndexPath:indexPath];
             [cell.bgImageView addGestureRecognizer:self.myTap];
             [cell setUI];
-            cell.backgroundColor = [UIColor redColor];
+            [cell.userHeadBtn addTarget:self action:@selector(clickUserHeadBtn:) forControlEvents:UIControlEventTouchUpInside];
             return cell;
         }else{
             OtherCollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"OtherCollectionViewCell" forIndexPath:indexPath];
@@ -571,6 +606,7 @@ static NSString *const IconURL = @"/my/add_head_pic";
 }
 
 
+
 -(void)clickMyTap:(UITapGestureRecognizer*)gesture{
     UIAlertController *alertC = [UIAlertController alertControllerWithTitle:@"更换背景图" message:nil preferredStyle:UIAlertControllerStyleActionSheet];
     //判断是否支持相机。模拟器没有相机
@@ -581,6 +617,7 @@ static NSString *const IconURL = @"/my/add_head_pic";
             picker.delegate = self;
             picker.allowsEditing = YES;
             picker.sourceType = UIImagePickerControllerSourceTypeCamera;
+            picker.flag = @(BgTag);
             [self presentViewController:picker animated:YES completion:nil];
         }];
         [alertC addAction:cameraAction];
@@ -591,6 +628,7 @@ static NSString *const IconURL = @"/my/add_head_pic";
         picker.delegate = self;
         picker.allowsEditing = YES;
         picker.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
+        picker.flag = @(BgTag);
         [self presentViewController:picker animated:YES completion:nil];
     }];
     UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
@@ -605,7 +643,7 @@ static NSString *const IconURL = @"/my/add_head_pic";
     UIImage * editedImg = [info objectForKey:UIImagePickerControllerEditedImage];
     NSData * iconData = UIImageJPEGRepresentation([UIImage fixOrientation:editedImg] , 0.5);
     //        NSData * iconData = UIImageJPEGRepresentation(editedImg , 0.5);
-    [self uploadIconWithData:iconData];
+    [self uploadIconWithData:iconData andType:picker.flag];
     [picker dismissViewControllerAnimated:YES completion:nil];
     
 }
@@ -615,13 +653,38 @@ static NSString *const IconURL = @"/my/add_head_pic";
 }
 
 //上传背景图
-- (void)uploadIconWithData:(NSData *)iconData
+- (void)uploadIconWithData:(NSData *)iconData andType:(NSNumber*)type
 {
     NSString * icon64Str = [iconData base64EncodedStringWithOptions:NSDataBase64Encoding64CharacterLineLength];
-    NSDictionary * params = @{@"type": @3, @"tmp": icon64Str};
-    FBRequest * request = [FBAPI postWithUrlString:IconURL requestDictionary:params delegate:self];
-    request.flag = IconURL;
-    [request startRequest];
+    if ([type isEqualToNumber:@(UserHeadTag)]) {
+        NSString * icon64Str = [iconData base64EncodedStringWithOptions:NSDataBase64Encoding64CharacterLineLength];
+        NSDictionary * params = @{@"type": @3, @"tmp": icon64Str};
+        FBRequest * request = [FBAPI postWithUrlString:@"/my/upload_token" requestDictionary:params delegate:self];
+        [request startRequestSuccess:^(FBRequest *request, id result) {
+            NSString * message = [result objectForKey:@"message"];
+            if ([[result objectForKey:@"success"] isEqualToNumber:@1]) {
+                
+                NSString * fileUrl = [[result objectForKey:@"data"] objectForKey:@"file_url"];
+                UserInfoEntity * userEntity = [UserInfoEntity defaultUserInfoEntity];
+                userEntity.mediumAvatarUrl = fileUrl;
+                [userEntity updateUserInfo];
+                BackgroundCollectionViewCell *cell = (BackgroundCollectionViewCell*)[self.myCollectionView cellForItemAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0]];
+                [cell.userHeadImageView sd_setImageWithURL:[NSURL URLWithString:fileUrl] placeholderImage:nil];
+                
+                [SVProgressHUD showSuccessWithStatus:message];
+            } else {
+                [SVProgressHUD showInfoWithStatus:message];
+            }
+            request = nil;
+        } failure:^(FBRequest *request, NSError *error) {
+            
+        }];
+    }else if([type isEqualToNumber:@(BgTag)]){
+        NSDictionary * params = @{@"type": @3, @"tmp": icon64Str};
+        FBRequest * request = [FBAPI postWithUrlString:IconURL requestDictionary:params delegate:self];
+        request.flag = IconURL;
+        [request startRequest];
+    }
     [SVProgressHUD showWithMaskType:SVProgressHUDMaskTypeClear];
 }
 

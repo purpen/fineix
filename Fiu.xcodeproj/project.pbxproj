@@ -226,8 +226,6 @@
 		1F2A8FFA1CF40277005116C7 /* QRCodeScanViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F2A8DAB1CF40277005116C7 /* QRCodeScanViewController.m */; };
 		1F2A8FFB1CF40277005116C7 /* ShieldingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F2A8DAD1CF40277005116C7 /* ShieldingViewController.m */; };
 		1F2A8FFC1CF40277005116C7 /* SubscribeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F2A8DAF1CF40277005116C7 /* SubscribeViewController.m */; };
-		1F2A8FFD1CF40277005116C7 /* TalentCertificationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F2A8DB11CF40277005116C7 /* TalentCertificationViewController.m */; };
-		1F2A8FFE1CF40277005116C7 /* TalentCertificationViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1F2A8DB21CF40277005116C7 /* TalentCertificationViewController.xib */; };
 		1F2A8FFF1CF40277005116C7 /* AddreesModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F2A8DB51CF40277005116C7 /* AddreesModel.m */; };
 		1F2A90001CF40277005116C7 /* AreaModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F2A8DB71CF40277005116C7 /* AreaModel.m */; };
 		1F2A90011CF40277005116C7 /* CounterModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F2A8DB91CF40277005116C7 /* CounterModel.m */; };
@@ -432,6 +430,8 @@
 		1F4C0AFE1CF616B9006F0EED /* libWeChatSDK.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 1F4C0AF81CF616B9006F0EED /* libWeChatSDK.a */; };
 		1F4C0B011CF61B5D006F0EED /* UITabBar+RedTip.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F4C0B001CF61B5D006F0EED /* UITabBar+RedTip.m */; };
 		1F59E5FC1C9ABBA500E96C60 /* Accelerate.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1F59E5FB1C9ABBA500E96C60 /* Accelerate.framework */; };
+		1F69CE201CF70BFA00AE3271 /* OfficialCertificationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F69CE1E1CF70BFA00AE3271 /* OfficialCertificationViewController.m */; };
+		1F69CE211CF70BFA00AE3271 /* OfficialCertificationViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1F69CE1F1CF70BFA00AE3271 /* OfficialCertificationViewController.xib */; };
 		1F772B5E1CF3FD910018AE40 /* AppDelegate.mm in Sources */ = {isa = PBXBuildFile; fileRef = 1F772B5D1CF3FD910018AE40 /* AppDelegate.mm */; };
 		1FC6782E1CDB33ED00535162 /* UIView+TYAlertView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1FC6782C1CDB33ED00535162 /* UIView+TYAlertView.m */; };
 		280045111C805B78005F5C2E /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 280045101C805B78005F5C2E /* CoreLocation.framework */; };
@@ -915,9 +915,6 @@
 		1F2A8DAD1CF40277005116C7 /* ShieldingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ShieldingViewController.m; sourceTree = "<group>"; };
 		1F2A8DAE1CF40277005116C7 /* SubscribeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SubscribeViewController.h; sourceTree = "<group>"; };
 		1F2A8DAF1CF40277005116C7 /* SubscribeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SubscribeViewController.m; sourceTree = "<group>"; };
-		1F2A8DB01CF40277005116C7 /* TalentCertificationViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TalentCertificationViewController.h; sourceTree = "<group>"; };
-		1F2A8DB11CF40277005116C7 /* TalentCertificationViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TalentCertificationViewController.m; sourceTree = "<group>"; };
-		1F2A8DB21CF40277005116C7 /* TalentCertificationViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TalentCertificationViewController.xib; sourceTree = "<group>"; };
 		1F2A8DB41CF40277005116C7 /* AddreesModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AddreesModel.h; sourceTree = "<group>"; };
 		1F2A8DB51CF40277005116C7 /* AddreesModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AddreesModel.m; sourceTree = "<group>"; };
 		1F2A8DB61CF40277005116C7 /* AreaModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AreaModel.h; sourceTree = "<group>"; };
@@ -1276,6 +1273,9 @@
 		1F4C0AFF1CF61B5D006F0EED /* UITabBar+RedTip.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UITabBar+RedTip.h"; sourceTree = "<group>"; };
 		1F4C0B001CF61B5D006F0EED /* UITabBar+RedTip.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UITabBar+RedTip.m"; sourceTree = "<group>"; };
 		1F59E5FB1C9ABBA500E96C60 /* Accelerate.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Accelerate.framework; path = System/Library/Frameworks/Accelerate.framework; sourceTree = SDKROOT; };
+		1F69CE1D1CF70BFA00AE3271 /* OfficialCertificationViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OfficialCertificationViewController.h; sourceTree = "<group>"; };
+		1F69CE1E1CF70BFA00AE3271 /* OfficialCertificationViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OfficialCertificationViewController.m; sourceTree = "<group>"; };
+		1F69CE1F1CF70BFA00AE3271 /* OfficialCertificationViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = OfficialCertificationViewController.xib; sourceTree = "<group>"; };
 		1F772B5D1CF3FD910018AE40 /* AppDelegate.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = AppDelegate.mm; sourceTree = "<group>"; };
 		1FC6782C1CDB33ED00535162 /* UIView+TYAlertView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+TYAlertView.m"; sourceTree = "<group>"; };
 		1FC6782D1CDB33ED00535162 /* UIView+TYAutoLayout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+TYAutoLayout.h"; sourceTree = "<group>"; };
@@ -2469,9 +2469,6 @@
 				1F2A8DAD1CF40277005116C7 /* ShieldingViewController.m */,
 				1F2A8DAE1CF40277005116C7 /* SubscribeViewController.h */,
 				1F2A8DAF1CF40277005116C7 /* SubscribeViewController.m */,
-				1F2A8DB01CF40277005116C7 /* TalentCertificationViewController.h */,
-				1F2A8DB11CF40277005116C7 /* TalentCertificationViewController.m */,
-				1F2A8DB21CF40277005116C7 /* TalentCertificationViewController.xib */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -2624,6 +2621,9 @@
 				1F2A8DFB1CF40277005116C7 /* TheOfficialCertificationViewController.h */,
 				1F2A8DFC1CF40277005116C7 /* TheOfficialCertificationViewController.m */,
 				1F2A8DFD1CF40277005116C7 /* TheOfficialCertificationViewController.xib */,
+				1F69CE1D1CF70BFA00AE3271 /* OfficialCertificationViewController.h */,
+				1F69CE1E1CF70BFA00AE3271 /* OfficialCertificationViewController.m */,
+				1F69CE1F1CF70BFA00AE3271 /* OfficialCertificationViewController.xib */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -3790,6 +3790,7 @@
 				1F2A8F7D1CF40277005116C7 /* FiuPeople.xib in Resources */,
 				1F2A90721CF40277005116C7 /* JDOrderViewController.xib in Resources */,
 				1F2A904A1CF40277005116C7 /* LoginRegisterController.storyboard in Resources */,
+				1F69CE211CF70BFA00AE3271 /* OfficialCertificationViewController.xib in Resources */,
 				D812815B1CAA8532007CF08B /* Info.plist in Resources */,
 				1F2A900A1CF40277005116C7 /* chanel.xib in Resources */,
 				1F2A907C1CF40277005116C7 /* TaoBaoOrderViewController.xib in Resources */,
@@ -3806,7 +3807,6 @@
 				1F2A90781CF40277005116C7 /* RefundmentViewController.xib in Resources */,
 				1F2A90841CF40277005116C7 /* CommentView.xib in Resources */,
 				1F2A91141CF40495005116C7 /* UMSCommentInputController.xib in Resources */,
-				1F2A8FFE1CF40277005116C7 /* TalentCertificationViewController.xib in Resources */,
 				1F2A91181CF40495005116C7 /* UMSLoginViewController.xib in Resources */,
 				1F2A90191CF40277005116C7 /* BonusViewController.xib in Resources */,
 				1F2A90201CF40277005116C7 /* InvalidBonusCell.xib in Resources */,
@@ -3946,6 +3946,7 @@
 				1F2A90591CF40277005116C7 /* SubmitView.m in Sources */,
 				D81281131CAA8532007CF08B /* FBViewController.m in Sources */,
 				1F2A8F651CF40277005116C7 /* AllSceneViewController.m in Sources */,
+				1F69CE201CF70BFA00AE3271 /* OfficialCertificationViewController.m in Sources */,
 				1F2A8F341CF40277005116C7 /* SearchLocationViewController.m in Sources */,
 				D80D415B1CAD1437005D72B1 /* FBNavigationViewController.m in Sources */,
 				1F2A90111CF40277005116C7 /* MyPageBtnCollectionViewCell.m in Sources */,
@@ -4215,7 +4216,6 @@
 				1F2A8F581CF40277005116C7 /* SelectHotFSceneTableViewCell.m in Sources */,
 				D87B69C01CC726BA00199EFE /* GroupHeaderView.m in Sources */,
 				1F2A8F381CF40277005116C7 /* SearchFSceneViewController.m in Sources */,
-				1F2A8FFD1CF40277005116C7 /* TalentCertificationViewController.m in Sources */,
 				1F2A8F831CF40277005116C7 /* FiuTagTableViewCell.m in Sources */,
 				1F2A8F8B1CF40277005116C7 /* HomeSceneList.m in Sources */,
 				1F2A8FC91CF40277005116C7 /* GoodsRelationProducts.m in Sources */,

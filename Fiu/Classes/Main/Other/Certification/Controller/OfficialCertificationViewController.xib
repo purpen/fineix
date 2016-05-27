@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="10116" systemVersion="15C50" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="OfficialCertificationViewController">
+            <connections>
+                <outlet property="applyBtn" destination="bcH-3A-ijU" id="7eh-at-Vmp"/>
+                <outlet property="view" destination="IOO-u2-Va3" id="HFJ-WU-5uj"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="IOO-u2-Va3">
+            <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="除了性别，你的每一处都与众不同，请认领或自拟标签申请认证，让你的主页脱颖而出。" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Bjh-iG-XZo">
+                    <rect key="frame" x="18" y="80" width="330" height="29"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                    <color key="textColor" red="0.40000000000000002" green="0.40000000000000002" blue="0.40000000000000002" alpha="1" colorSpace="calibratedRGB"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bcH-3A-ijU">
+                    <rect key="frame" x="88" y="126" width="200" height="45"/>
+                    <color key="backgroundColor" red="0.74509803919999995" green="0.53725490200000003" blue="0.078431372550000003" alpha="1" colorSpace="calibratedRGB"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="45" id="1kU-P2-fRl"/>
+                        <constraint firstAttribute="width" constant="200" id="LAF-6Q-obG"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                    <state key="normal" title="申请官方认证">
+                        <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </state>
+                </button>
+            </subviews>
+            <color key="backgroundColor" red="0.98039215690000003" green="0.98039215690000003" blue="0.98039215690000003" alpha="1" colorSpace="calibratedRGB"/>
+            <constraints>
+                <constraint firstItem="bcH-3A-ijU" firstAttribute="centerX" secondItem="IOO-u2-Va3" secondAttribute="centerX" id="Ez6-z8-nK1"/>
+                <constraint firstItem="Bjh-iG-XZo" firstAttribute="top" secondItem="IOO-u2-Va3" secondAttribute="top" constant="80" id="Mr7-ma-uBJ"/>
+                <constraint firstItem="Bjh-iG-XZo" firstAttribute="leading" secondItem="IOO-u2-Va3" secondAttribute="leading" constant="18" id="Szd-iQ-wxj"/>
+                <constraint firstItem="bcH-3A-ijU" firstAttribute="top" secondItem="Bjh-iG-XZo" secondAttribute="bottom" constant="17" id="hZY-3E-GHK"/>
+                <constraint firstAttribute="trailing" secondItem="Bjh-iG-XZo" secondAttribute="trailing" constant="27" id="tJP-3t-J6j"/>
+            </constraints>
+            <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
+            <point key="canvasLocation" x="401.5" y="407.5"/>
+        </view>
+    </objects>
+</document>

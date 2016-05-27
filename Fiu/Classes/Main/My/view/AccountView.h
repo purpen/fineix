@@ -26,6 +26,7 @@
 @property (weak, nonatomic) IBOutlet UIDatePicker *datePickerView;
 @property (weak, nonatomic) IBOutlet UIView *pickerView;
 @property (weak, nonatomic) IBOutlet UILabel *IdentityTagsLabel;
+@property (weak, nonatomic) IBOutlet UILabel *personalitySignatureLabel;
 
 
 +(instancetype)getAccountView;

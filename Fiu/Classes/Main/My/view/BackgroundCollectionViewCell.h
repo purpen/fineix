@@ -24,6 +24,7 @@
 @property(nonatomic,strong) UIView *userView;
 @property(nonatomic,strong) UIView *lineView; //白线
 @property(nonatomic,strong) UILabel *idTagsLabel;
+@property(nonatomic,strong) UIButton *userHeadBtn;
 
 - (void)setUI;
 
