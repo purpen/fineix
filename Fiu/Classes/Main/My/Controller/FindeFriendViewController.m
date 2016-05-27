@@ -160,22 +160,22 @@ static NSString *const ShareURL = @"http://m.taihuoniao.com/guide/app_about";
         cell.nameLbael.text = model.nickName;
         
         NSArray *tagsAry = [NSArray arrayWithObjects:@"大拿",@"行家",@"行摄家",@"艺术范",@"手艺人",@"人来疯",@"赎回自由身",@"职业buyer", nil];
-        if ([model.is_expert isEqualToNumber:@0]) {
-            NSLog(@"dwewqebwqe %zi",model.label.length);
-            if (!model.label) {
-                cell.levelLabel.text = [NSString stringWithFormat:@" V%d",[model.level intValue]];
-            }else{
-                cell.levelLabel.text = [NSString stringWithFormat:@"%@ | V%d",model.label,[model.level intValue]];
-            }
-            cell.idTagsImageView.hidden = YES;
-            cell.imageView.hidden = YES;
-            cell.userLevelLabel.hidden = YES;
-        }else if([model.is_expert isEqualToNumber:@1]){
-            cell.userLevelLabel.text = [NSString stringWithFormat:@" | V%d",[model.level intValue]];
+        if ([model.is_expert isEqual:@(1)]) {
+            cell.levelLabel.text = [NSString stringWithFormat:@" | Lv%d",[model.level intValue]];
             cell.idTagsImageView.hidden = NO;
-            cell.userLevelLabel.hidden = NO;
+//            cell.imageView.hidden = YES;
+            cell.userLevelLabel.hidden = YES;
             int n = (int)[tagsAry indexOfObject:model.label];
             cell.idTagsImageView.image = [UIImage imageNamed:[NSString stringWithFormat:@"tags%d",n]];
+        }else{
+            if (model.label.length == 0) {
+                cell.userLevelLabel.text = [NSString stringWithFormat:@" Lv%d",[model.level intValue]];
+            }else{
+                cell.userLevelLabel.text = [NSString stringWithFormat:@"%@ | Lv%d",model.label,[model.level intValue]];
+            }
+            cell.userLevelLabel.hidden = NO;
+            cell.idTagsImageView.hidden = YES;
+//            cell.userLevelLabel.hidden = NO;
         }
 //        if (model.address.firstObject && model.address.lastObject) {
 //            cell.deressLabel.text = [NSString stringWithFormat:@"%@ %@",model.address.firstObject,model.address.lastObject];

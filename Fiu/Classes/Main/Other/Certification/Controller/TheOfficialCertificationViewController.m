@@ -14,6 +14,7 @@
 #import "UIImage+Helper.h"
 #import "UIImagePickerController+Flag.h"
 #import "SVProgressHUD.h"
+#import "AccountManagementViewController.h"
 
 #define ITEMS_COLLECTIONVIEW_TAG 9
 #define SELECTED_COLLECTIONVIEW_TAG 10
@@ -77,6 +78,9 @@
         [requset startRequestSuccess:^(FBRequest *request, id result) {
             if ([result objectForKey:@"success"]) {
                 [SVProgressHUD showSuccessWithStatus:@"提交成功"];
+//                AccountManagementViewController *vc = [[AccountManagementViewController alloc] init];
+//                [self.navigationController popToViewController:vc animated:YES];
+                [self.navigationController popViewControllerAnimated:YES];
             }else{
                 [SVProgressHUD showErrorWithStatus:@"提交失败"];
             }

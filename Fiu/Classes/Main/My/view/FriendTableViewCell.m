@@ -84,7 +84,7 @@
         
         [self.contentView addSubview:self.userLevelLabel];
         [_userLevelLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.centerY.mas_equalTo(_idTagsImageView.mas_centerY);
+            make.top.mas_equalTo(_nameLbael.mas_bottom).with.offset(4/667.0*SCREEN_HEIGHT);
             make.left.mas_equalTo(_idTagsImageView.mas_right).with.offset(2/667.0*SCREEN_HEIGHT);
             make.height.mas_equalTo(10);
         }];

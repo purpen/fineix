@@ -374,6 +374,9 @@ static NSString *const IconURL = @"/my/add_head_pic";
             //背景图
         }else{
             _model = [UserInfo mj_objectWithKeyValues:dataDict];
+            if (![dataDict[@"label"] isKindOfClass:[NSNull class]]) {
+                _model.label = dataDict[@"label"];
+            }
             if (![[result objectForKey:@"data"][@"head_pic_url"] isKindOfClass:[NSNull class]]) {
                 _model.head_pic_url = [result objectForKey:@"data"][@"head_pic_url"];
             }

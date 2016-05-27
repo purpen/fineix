@@ -25,6 +25,7 @@
 #import "GuidePageViewController.h"
 #import "WeiboSDK.h"
 #import <TencentOpenAPI/QQApiInterface.h>
+#import "FBTabBar.h"
 
 @interface SystemSettingViewController ()<FBNavigationBarItemsDelegate,NotificationDelege,FBRequestDelegate>
 
@@ -276,7 +277,8 @@ static NSString *const logOut = @"/auth/logout";
         [UserInfo clearTable];
         [SVProgressHUD showSuccessWithStatus:@"登出成功"];
         //回到首页
-        
+        FBTabBar *tabBar = [[FBTabBar alloc] init];
+        tabBar.badgeView.hidden = YES;
         [self.tabBarController setSelectedIndex:0];
     }
     

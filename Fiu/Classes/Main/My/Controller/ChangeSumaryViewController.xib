@@ -7,6 +7,11 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="ChangeSumaryViewController">
             <connections>
+                <outlet property="deletAllBtn" destination="11E-rz-kC2" id="Kra-eS-gQX"/>
+                <outlet property="itemsView" destination="LFa-Zz-VcZ" id="YC6-UM-LuG"/>
+                <outlet property="selectedView" destination="7k2-Lj-XD7" id="hGd-CU-Xxs"/>
+                <outlet property="sumaryTF" destination="vzP-ug-YOj" id="Yab-GH-e0f"/>
+                <outlet property="tipLabel" destination="n1p-Yl-I5P" id="kfw-VH-w8o"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>
@@ -59,7 +64,7 @@
                         <constraint firstAttribute="height" constant="180" id="rln-fk-dqL"/>
                     </constraints>
                 </view>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="个性标签" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yJT-XH-486">
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="个性签名" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yJT-XH-486">
                     <rect key="frame" x="15" y="351" width="72" height="21"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="21" id="1wK-i9-Ptv"/>
@@ -72,7 +77,7 @@
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ZhM-bU-9gE">
                     <rect key="frame" x="0.0" y="387" width="375" height="44"/>
                     <subviews>
-                        <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="输入15字以内的个性签名" textAlignment="natural" clearsOnBeginEditing="YES" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="vzP-ug-YOj">
+                        <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="输入15字以内的个性签名" textAlignment="natural" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="vzP-ug-YOj">
                             <rect key="frame" x="20" y="0.0" width="355" height="44"/>
                             <fontDescription key="fontDescription" type="system" pointSize="13"/>
                             <textInputTraits key="textInputTraits"/>
@@ -108,16 +113,6 @@
             <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
             <point key="canvasLocation" x="423.5" y="380.5"/>
         </view>
-        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="认领标签" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mQX-u0-C4v">
-            <rect key="frame" x="0.0" y="0.0" width="72" height="21"/>
-            <constraints>
-                <constraint firstAttribute="height" constant="21" id="0ys-RM-jjh"/>
-                <constraint firstAttribute="width" constant="72" id="a1R-Lk-4Vw"/>
-            </constraints>
-            <fontDescription key="fontDescription" type="system" pointSize="14"/>
-            <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-            <nil key="highlightedColor"/>
-        </label>
     </objects>
     <resources>
         <image name="delateAll" width="15" height="15"/>

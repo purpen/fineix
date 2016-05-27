@@ -31,6 +31,8 @@
 @property(nonatomic,strong) NSNumber *is_love;
 @property(nonatomic,assign) BOOL isLogin;
 @property(nonatomic,copy) NSString *is_expert;
+@property(nonatomic,copy) NSString *expert_label;
+@property(nonatomic,copy) NSString *expert_info;
 
 - (void)updateUserInfoEntity;
 

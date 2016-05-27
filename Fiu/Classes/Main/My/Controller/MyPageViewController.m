@@ -162,7 +162,6 @@
             userInfo.prin = areasAry[0];
             userInfo.city = areasAry[1];
         }
-        NSLog(@"便签啊啊        %@",userInfo.label);
         userInfo.is_expert = [result objectForKey:@"data"][@"identify"][@"is_expert"];
         [userInfo saveOrUpdate];
         [userInfo updateUserInfoEntity];
@@ -170,7 +169,6 @@
         
         UserInfoEntity *entity = [UserInfoEntity defaultUserInfoEntity];
         entity.isLogin = YES;
-        NSLog(@"   地区   &&&&&&&&&  %@",entity.prin);
         NSDictionary *counterDict = [dataDict objectForKey:@"counter"];
         _counterModel = [CounterModel mj_objectWithKeyValues:counterDict];
         _counterModel.subscription_count = [result objectForKey:@"data"][@"subscription_count"];

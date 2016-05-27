@@ -11,6 +11,7 @@
 #import "UserInfoEntity.h"
 #import <SDWebImage/UIImageView+WebCache.h>
 #import "UserInfo.h"
+#import "TalentView.h"
 
 @implementation OtherCollectionViewCell
 
@@ -48,33 +49,37 @@
             make.bottom.mas_equalTo(_userView.mas_bottom).with.offset(-10/667.0*SCREEN_HEIGHT);
         }];
         
-        [_userView addSubview:self.lineView];
-        [_lineView mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.size.mas_equalTo(CGSizeMake(1, 12));
-            make.centerX.mas_equalTo(_userView.mas_centerX);
-            make.bottom.mas_equalTo(_userView.mas_bottom).with.offset(-49/667.0*SCREEN_HEIGHT);
-        }];
+//        [_userView addSubview:self.lineView];
+//        [_lineView mas_makeConstraints:^(MASConstraintMaker *make) {
+//            make.size.mas_equalTo(CGSizeMake(1, 12));
+//            make.centerX.mas_equalTo(_userView.mas_centerX);
+//            make.bottom.mas_equalTo(_userView.mas_bottom).with.offset(-49/667.0*SCREEN_HEIGHT);
+//        }];
         
         [_userView addSubview:self.userLevelLabel];
         [_userLevelLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.left.mas_equalTo(_lineView.mas_right).with.offset(3);
+            make.centerX.mas_equalTo(_userView.mas_centerX).with.offset(-10/667.0*SCREEN_HEIGHT);
             make.bottom.mas_equalTo(_userView.mas_bottom).with.offset(-49/667.0*SCREEN_HEIGHT);
-            make.centerY.mas_equalTo(_lineView.mas_centerY);
         }];
         
         
-        [_userView addSubview:self.idTagsLabel];
-        [_idTagsLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.right.mas_equalTo(_lineView.mas_left).with.offset(-7);
-            make.bottom.mas_equalTo(_userView.mas_bottom).with.offset(-49/667.0*SCREEN_HEIGHT);
-            make.centerY.mas_equalTo(_lineView.mas_centerY);
+//        [_userView addSubview:self.idTagsLabel];
+//        [_idTagsLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+//            make.right.mas_equalTo(_lineView.mas_left).with.offset(-7);
+//            make.bottom.mas_equalTo(_userView.mas_bottom).with.offset(-49/667.0*SCREEN_HEIGHT);
+//            make.centerY.mas_equalTo(_lineView.mas_centerY);
+//        }];
+        
+        [_userView addSubview:self.idImageView];
+        [_idImageView mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.bottom.mas_equalTo(_userLevelLabel.mas_top).with.offset(-5/667.0*SCREEN_HEIGHT);
+            make.left.mas_equalTo(_userView.mas_left).with.offset(109);
         }];
         
         [_userView addSubview:self.userProfile];
         [_userProfile mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.width.mas_equalTo(SCREEN_WIDTH-80);
-            make.centerX.mas_equalTo(_userView.mas_centerX);
-            make.bottom.mas_equalTo(_userLevelLabel.mas_top).with.offset(-10/667.0*SCREEN_HEIGHT);
+            make.centerY.mas_equalTo(_idImageView.mas_centerY);
+            make.left.mas_equalTo(_idImageView.mas_right).with.offset(-3/667.0*SCREEN_HEIGHT);
         }];
         
         
@@ -93,10 +98,12 @@
             make.bottom.mas_equalTo(_userProfile.mas_top).with.offset(-20/667.0*SCREEN_HEIGHT);
         }];
         
-        [_userView addSubview:self.idImageView];
-        [_idImageView mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.centerY.mas_equalTo(_userLevelLabel.mas_centerY);
-            make.right.mas_equalTo(_lineView.mas_left).with.offset(-4);
+        
+        [_userView addSubview:self.talentView];
+        [_talentView mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.right.mas_equalTo(_headView.mas_right).with.offset(-3/667.0*SCREEN_HEIGHT);
+            make.bottom.mas_equalTo(_headView.mas_bottom).with.offset(-3/667.0*SCREEN_HEIGHT);
+            make.size.mas_equalTo(CGSizeMake(17/667.0*SCREEN_HEIGHT, 17/667.0*SCREEN_HEIGHT));
         }];
     }
     return _userView;
@@ -138,17 +145,22 @@
     self.nickName.text = model.nickname;
     self.userProfile.text = model.summary;
     NSArray *tagsAry = [NSArray arrayWithObjects:@"大拿",@"行家",@"行摄家",@"艺术范",@"手艺人",@"人来疯",@"赎回自由身",@"职业buyer", nil];
-    if ([model.is_expert isEqual:@(0)]) {
-        self.userLevelLabel.text = [NSString stringWithFormat:@"V%d",[model.level intValue]];
-        self.idTagsLabel.text = model.label;
-        self.idImageView.hidden = YES;
-    }else if([model.is_expert isEqual:@(1)]){
-        self.userLevelLabel.text = [NSString stringWithFormat:@"V%d",[model.level intValue]];
+    if ([model.is_expert isEqual:@(1)]) {
+        self.talentView.hidden = NO;
+        self.userProfile.hidden = NO;
         self.idImageView.hidden = NO;
         int n = (int)[tagsAry indexOfObject:model.label];
         self.idImageView.image = [UIImage imageNamed:[NSString stringWithFormat:@"tags%d",n]];
+    }else {
+        self.talentView.hidden = YES;
+        self.userProfile.hidden = YES;
+        self.idImageView.hidden = YES;
     }
-    //self.userLevelLabel.text = [NSString stringWithFormat:@"%@|V%d",model.levelDesc,[model.level intValue]];
+    if (model.summary.length == 0) {
+        self.userLevelLabel.text = [NSString stringWithFormat:@"Lv%zi %@",[model.level intValue],model.label];
+    }else{
+        self.userLevelLabel.text = [NSString stringWithFormat:@"Lv%zi %@ | %@",[model.level intValue],model.label,model.summary];
+    }
     UIImageView * headerImg1 = [[UIImageView alloc] initWithFrame:self.userHeadImageView.frame];
     [headerImg1 downloadImage:model.head_pic_url place:[UIImage imageNamed:@""]];
     [self.bgImageView sd_setImageWithURL:[NSURL URLWithString:model.head_pic_url] placeholderImage:headerImg1.image];

@@ -35,6 +35,8 @@
     entity.head_pic_url = userInfo.head_pic_url;
     entity.is_love = userInfo.is_love;
     entity.isLogin = userInfo.isLogin;
+    entity.expert_label = userInfo.expert_label;
+    entity.expert_info = userInfo.expert_info;
     
     entity.is_expert = userInfo.is_expert;
 }
