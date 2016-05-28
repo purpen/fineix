@@ -214,8 +214,7 @@
                     //                    WXSignParams * signParam = [[WXSignParams alloc] initWithDictionary:dataDic];
                     //                    payReq.sign= [signParam sign];
                     payReq.sign = [dataDic objectForKey:@"new_sign"];
-                    BOOL flag = [WXApi sendReq:payReq];
-                    NSLog(@"微信毁掉    %d",flag);
+                    [WXApi sendReq:payReq];
                     [SVProgressHUD dismiss];
                 } failure:^(FBRequest *request, NSError *error) {
                     [SVProgressHUD showInfoWithStatus:[error localizedDescription]];
@@ -239,6 +238,7 @@
 -(void)onResp:(BaseResp*)resp
 {
     if([resp isKindOfClass:[PayResp class]]){
+        NSLog( @"   %d",resp.errCode);
         //支付返回结果，实际支付结果需要去微信服务器端查询
         switch (resp.errCode) {
             case WXSuccess:
@@ -279,7 +279,6 @@
         WEAKSELF
         [request startRequestSuccess:^(FBRequest *request, id result) {
             NSDictionary * dataDic = [result objectForKey:@"data"];
-            NSLog(@"支付宝毁掉结果   %@",result);
             if ([[dataDic objectForKey:@"status"] isEqualToNumber:@10]) {
                 PaySuccessViewController * paySuccessVC = [[PaySuccessViewController alloc] initWithNibName:@"PaySuccessViewController" bundle:nil];
                 paySuccessVC.orderInfo = weakSelf.orderInfo;

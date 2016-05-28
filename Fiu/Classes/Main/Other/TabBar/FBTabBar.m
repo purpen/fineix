@@ -34,7 +34,7 @@
         self.shadowImage = img;
         self.translucent = YES;
         
-        
+        [self addSubview:self.badgeView];
     }
     return self;
 }
@@ -101,8 +101,6 @@
     
     [self addSubview:self.createBtn];
     [self addSubview:self.createTitle];
-    
-    [self addSubview:self.badgeView];
     
     CGFloat width = self.bounds.size.width;
     CGFloat height = self.bounds.size.height;

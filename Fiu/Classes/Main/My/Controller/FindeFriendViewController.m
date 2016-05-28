@@ -73,7 +73,8 @@ static NSString *const ShareURL = @"http://m.taihuoniao.com/guide/app_about";
             if(![rowsDict[@"label"] isKindOfClass:[NSNull class]]){
                 model.label = rowsDict[@"label"];
             }
-            model.level = rowsDict[@"level"];
+            model.expert_label = rowsDict[@"expert_label"];
+            model.rank_id = rowsDict[@"rank_id"];
             model.is_expert = rowsDict[@"identify"][@"is_expert"];
             NSArray *sceneAry = rowsDict[@"scene_sight"];
             //model.scene = [NSMutableArray array];
@@ -161,17 +162,16 @@ static NSString *const ShareURL = @"http://m.taihuoniao.com/guide/app_about";
         
         NSArray *tagsAry = [NSArray arrayWithObjects:@"大拿",@"行家",@"行摄家",@"艺术范",@"手艺人",@"人来疯",@"赎回自由身",@"职业buyer", nil];
         if ([model.is_expert isEqual:@(1)]) {
-            cell.levelLabel.text = [NSString stringWithFormat:@" | Lv%d",[model.level intValue]];
+            cell.userLevelLabel.text = [NSString stringWithFormat:@" | Lv%d",[model.rank_id intValue]];
+            cell.userLevelLabel.hidden = NO;
             cell.idTagsImageView.hidden = NO;
-//            cell.imageView.hidden = YES;
-            cell.userLevelLabel.hidden = YES;
-            int n = (int)[tagsAry indexOfObject:model.label];
-            cell.idTagsImageView.image = [UIImage imageNamed:[NSString stringWithFormat:@"tags%d",n]];
+            int n = (int)[tagsAry indexOfObject:model.expert_label];
+            cell.idTagsImageView.image = [UIImage imageNamed:[NSString stringWithFormat:@"tags%d",n+1]];
         }else{
             if (model.label.length == 0) {
-                cell.userLevelLabel.text = [NSString stringWithFormat:@" Lv%d",[model.level intValue]];
+                cell.levelLabel.text = [NSString stringWithFormat:@" Lv%d",[model.rank_id intValue]];
             }else{
-                cell.userLevelLabel.text = [NSString stringWithFormat:@"%@ | Lv%d",model.label,[model.level intValue]];
+                cell.levelLabel.text = [NSString stringWithFormat:@"%@ | Lv%d",model.label,[model.rank_id intValue]];
             }
             cell.userLevelLabel.hidden = NO;
             cell.idTagsImageView.hidden = YES;

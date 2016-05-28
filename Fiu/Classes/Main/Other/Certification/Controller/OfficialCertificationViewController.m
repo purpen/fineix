@@ -16,6 +16,24 @@
 
 @implementation OfficialCertificationViewController
 
+-(void)viewWillAppear:(BOOL)animated{
+    [super viewWillAppear:animated];
+    FBRequest *request = [FBAPI postWithUrlString:@"/my/fetch_talent" requestDictionary:nil delegate:self];
+    [request startRequestSuccess:^(FBRequest *request, id result) {
+        NSDictionary *dataDict = [result objectForKey:@"data"];
+        if (dataDict.count == 1) {
+            //第一次，要提交
+            [self.applyBtn setTitle:@"申请官方认证" forState:UIControlStateNormal];
+        }else{
+            //不是第一次，要编辑
+            [self.applyBtn setTitle:@"编辑身份标签" forState:UIControlStateNormal];
+        }
+    } failure:^(FBRequest *request, NSError *error) {
+        
+    }];
+}
+
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.

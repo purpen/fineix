@@ -109,6 +109,13 @@
     return _userView;
 }
 
+-(TalentView *)talentView{
+    if (!_talentView) {
+        _talentView = [TalentView getTalentView];
+    }
+    return _talentView;
+}
+
 -(UIView *)headView{
     if (!_headView) {
         _headView = [[UIView alloc] init];
@@ -145,12 +152,13 @@
     self.nickName.text = model.nickname;
     self.userProfile.text = model.summary;
     NSArray *tagsAry = [NSArray arrayWithObjects:@"大拿",@"行家",@"行摄家",@"艺术范",@"手艺人",@"人来疯",@"赎回自由身",@"职业buyer", nil];
-    if ([model.is_expert isEqual:@(1)]) {
+    if ([model.is_expert isEqual:@"1"]) {
         self.talentView.hidden = NO;
         self.userProfile.hidden = NO;
+        self.userProfile.text = model.expert_info;
         self.idImageView.hidden = NO;
-        int n = (int)[tagsAry indexOfObject:model.label];
-        self.idImageView.image = [UIImage imageNamed:[NSString stringWithFormat:@"tags%d",n]];
+        int n = (int)[tagsAry indexOfObject:model.expert_label];
+        self.idImageView.image = [UIImage imageNamed:[NSString stringWithFormat:@"tags%d",n+1]];
     }else {
         self.talentView.hidden = YES;
         self.userProfile.hidden = YES;
@@ -188,7 +196,8 @@
         shadow.colors = @[(__bridge id)[UIColor clearColor].CGColor,
                           (__bridge id)[UIColor blackColor].CGColor];
         shadow.locations = @[@(0.5f), @(1.5f)];
-        shadow.frame = _bgImageView.bounds;
+        shadow.frame = CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_WIDTH);
+        [_bgImageView.layer addSublayer:shadow];
         
         [_bgImageView addSubview:self.userView];
         [_userView mas_makeConstraints:^(MASConstraintMaker *make) {

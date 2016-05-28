@@ -15,6 +15,7 @@
 #import "UIImagePickerController+Flag.h"
 #import "SVProgressHUD.h"
 #import "AccountManagementViewController.h"
+#import <SDWebImage/UIImageView+WebCache.h>
 
 #define ITEMS_COLLECTIONVIEW_TAG 9
 #define SELECTED_COLLECTIONVIEW_TAG 10
@@ -32,9 +33,70 @@
 @property(nonatomic,strong) UICollectionView *selectedCollectionView;
 @property(nonatomic ,strong) NSMutableArray *selectedModelAry;
 
+@property(nonatomic,copy) NSString *expert_label;
+@property(nonatomic,copy) NSString *info;
+@property(nonatomic,copy) NSString *contact;
+@property(nonatomic,copy) NSString *id_card_cover_url;
+@property(nonatomic,copy) NSString *business_card_cover_url;
+
 @end
 
 @implementation TheOfficialCertificationViewController
+
+-(void)viewWillAppear:(BOOL)animated{
+    [super viewWillAppear:animated];
+    FBRequest *request = [FBAPI postWithUrlString:@"/my/fetch_talent" requestDictionary:nil delegate:self];
+    [request startRequestSuccess:^(FBRequest *request, id result) {
+        NSDictionary *dataDict = [result objectForKey:@"data"];
+        if (dataDict.count == 1) {
+            //第一次，要提交
+            
+        }else{
+            //不是第一次，要编辑
+            
+            //获取数据------
+            if (![dataDict[@"expert_label"] isKindOfClass:[NSNull class]]) {
+                self.expert_label = dataDict[@"expert_label"];
+            }
+            if (![dataDict[@"info"] isKindOfClass:[NSNull class]]) {
+                self.info = dataDict[@"info"];
+            }
+            if (![dataDict[@"contact"] isKindOfClass:[NSNull class]]) {
+                self.contact = dataDict[@"contact"];
+            }
+            if (![dataDict[@"id_card_cover_url"] isKindOfClass:[NSNull class]]) {
+                self.id_card_cover_url = dataDict[@"id_card_cover_url"];
+            }
+            if (![dataDict[@"business_card_cover_url"] isKindOfClass:[NSNull class]]) {
+                self.business_card_cover_url = dataDict[@"business_card_cover_url"];
+            }
+            //-----------
+            
+            //展示---------
+            if (self.expert_label.length != 0) {
+                IdentityTagModel *model = [[IdentityTagModel alloc] init];
+                model.tags = self.expert_label;
+                [self.selectedModelAry addObject:model];
+                [self.selectedCollectionView reloadData];
+            }
+            if (self.info.length != 0) {
+                self.certView.informationTF.text = self.info;
+            }
+            if (self.contact.length != 0) {
+                self.certView.phoneTF.text = self.contact;
+            }
+            if (self.id_card_cover_url.length != 0) {
+                [self.certView.idImageView sd_setImageWithURL:[NSURL URLWithString:self.id_card_cover_url]];
+            }
+            if (self.business_card_cover_url.length != 0) {
+                [self.certView.cardImageView sd_setImageWithURL:[NSURL URLWithString:self.business_card_cover_url]];
+            }
+            //----------
+        }
+    } failure:^(FBRequest *request, NSError *error) {
+        
+    }];
+}
 
 - (void)viewDidLoad {
     [super viewDidLoad];

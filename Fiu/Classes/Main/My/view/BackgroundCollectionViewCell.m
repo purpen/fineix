@@ -53,13 +53,13 @@
         [_userView addSubview:self.idImageView];
         [_idImageView mas_makeConstraints:^(MASConstraintMaker *make) {
             make.bottom.mas_equalTo(_userLevelLabel.mas_top).with.offset(-5/667.0*SCREEN_HEIGHT);
-            make.left.mas_equalTo(_userView.mas_left).with.offset(109);
+            make.left.mas_equalTo(_userView.mas_left).with.offset(137/667.0*SCREEN_HEIGHT);
         }];
         
         [_userView addSubview:self.userProfile];
         [_userProfile mas_makeConstraints:^(MASConstraintMaker *make) {
             make.centerY.mas_equalTo(_idImageView.mas_centerY);
-            make.left.mas_equalTo(_idImageView.mas_right).with.offset(-3/667.0*SCREEN_HEIGHT);
+            make.left.mas_equalTo(_idImageView.mas_right).with.offset(3/667.0*SCREEN_HEIGHT);
         }];
         
 //        [_userView addSubview:self.nickName];
@@ -155,12 +155,13 @@
     self.nickName.text = entity.nickname;
     self.userProfile.text = entity.summary;
     NSArray *tagsAry = [NSArray arrayWithObjects:@"大拿",@"行家",@"行摄家",@"艺术范",@"手艺人",@"人来疯",@"赎回自由身",@"职业buyer", nil];
-    if ([entity.is_expert isEqual:@(1)]) {
+    if ([entity.is_expert isEqualToString:@"1"]) {
         self.talentView.hidden = NO;
         self.userProfile.hidden = NO;
+        self.userProfile.text = entity.expert_info;
         self.idImageView.hidden = NO;
-        int n = (int)[tagsAry indexOfObject:entity.label];
-        self.idImageView.image = [UIImage imageNamed:[NSString stringWithFormat:@"tags%d",n]];
+        int n = (int)[tagsAry indexOfObject:entity.expert_label];
+        self.idImageView.image = [UIImage imageNamed:[NSString stringWithFormat:@"tags%d",n+1]];
     }else {
         self.talentView.hidden = YES;
         self.userProfile.hidden = YES;
@@ -195,11 +196,12 @@
         //  添加渐变层
         CAGradientLayer * shadow = [CAGradientLayer layer];
         shadow.startPoint = CGPointMake(0, 0);
-        shadow.endPoint = CGPointMake(0, 5);
+        shadow.endPoint = CGPointMake(0, 1);
         shadow.colors = @[(__bridge id)[UIColor clearColor].CGColor,
                           (__bridge id)[UIColor blackColor].CGColor];
         shadow.locations = @[@(0.5f), @(1.5f)];
-        shadow.frame = _bgImageView.bounds;
+        shadow.frame = CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_WIDTH);
+        [_bgImageView.layer addSublayer:shadow];
         
         
         [_bgImageView addSubview:self.userView];
@@ -297,6 +299,13 @@
         _userHeadImageView.autoresizingMask = UIViewAutoresizingFlexibleTopMargin;
     }
     return _userHeadImageView;
+}
+
+-(TalentView *)talentView{
+    if (!_talentView) {
+        _talentView = [TalentView getTalentView];
+    }
+    return _talentView;
 }
 
 @end
