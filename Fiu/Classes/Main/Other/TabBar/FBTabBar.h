@@ -16,8 +16,5 @@
  */
 @pro_strong UIButton    *   createBtn;          //  自定义的Button
 @pro_strong UILabel     *   createTitle;
-@property(nonatomic,strong) UIView *badgeView;
-
--(void)chang;
 
 @end

@@ -31,6 +31,7 @@
 #import "FindeFriendViewController.h"
 #import "TipNumberView.h"
 #import "IntegralViewController.h"
+#import "UITabBar+badge.h"
 
 
 @interface MyPageViewController ()<FBNavigationBarItemsDelegate,UICollectionViewDelegate,UICollectionViewDataSource>
@@ -175,6 +176,13 @@
         _counterModel.sight_love_count = [result objectForKey:@"data"][@"sight_love_count"];
         [self.myCollectionView reloadData];
         [SVProgressHUD dismiss];
+        
+        //判断小圆点是否消失
+        if (_counterModel.message_total_count != 0) {
+            [self.tabBarController.tabBar showBadgeWithIndex:4];
+        }else{
+            [self.tabBarController.tabBar hideBadgeWithIndex:4];
+        }
         
     } failure:^(FBRequest *request, NSError *error) {
         [SVProgressHUD showErrorWithStatus:@"加载失败"];

@@ -25,7 +25,7 @@
 #import <AlipaySDK/AlipaySDK.h>
 #import "FBLoginRegisterViewController.h"
 #import "CounterModel.h"
-#import "FBTabBar.h"
+#import "UITabBar+badge.h"
 
 
 @interface AppDelegate ()<WXApiDelegate>
@@ -138,7 +138,10 @@ NSString *const determineLogin = @"/auth/check_login";
     
     [application registerUserNotificationSettings:notiSettings];
     //------------------------------------------------------
-
+    
+    
+    
+    
     return YES;
 }
 
@@ -156,6 +159,22 @@ NSString *const determineLogin = @"/auth/check_login";
     if (userIsFirstInstalled) {
         FBTabBarController * tabBarC = [[FBTabBarController alloc] init];
         self.window.rootViewController = tabBarC;
+        UserInfoEntity *entity = [UserInfoEntity defaultUserInfoEntity];
+        FBRequest *request = [FBAPI postWithUrlString:@"/auth/user" requestDictionary:@{@"user_id":entity.userId} delegate:self];
+        [request startRequestSuccess:^(FBRequest *request, id result) {
+            NSLog(@"&&&&&&&&result %@",result);
+            NSDictionary *dataDict = result[@"data"];
+            NSDictionary *counterDict = [dataDict objectForKey:@"counter"];
+            _counterModel = [CounterModel mj_objectWithKeyValues:counterDict];
+            //判断小圆点是否消失
+            if (_counterModel.message_total_count != 0) {
+               [tabBarC.tabBar showBadgeWithIndex:4];
+            }else{
+                [tabBarC.tabBar hideBadgeWithIndex:4];
+            }
+            
+        } failure:^(FBRequest *request, NSError *error) {
+        }];
     }else{
         self.window.rootViewController = [[GuidePageViewController alloc] initWithPicArr:arr andRootVC:[[FBTabBarController alloc] init]];
         [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"UserHasGuideView"];

@@ -11,6 +11,7 @@
 #import "CounterModel.h"
 #import "NSObject+MJKeyValue.h"
 
+
 @implementation FBTabBar
 
 - (instancetype)initWithFrame:(CGRect)frame {
@@ -33,8 +34,6 @@
         }
         self.shadowImage = img;
         self.translucent = YES;
-        
-        [self addSubview:self.badgeView];
     }
     return self;
 }
@@ -64,36 +63,6 @@
     return _createTitle;
 }
 
--(void)chang{
-    self.badgeView.backgroundColor = [UIColor whiteColor];
-}
-
--(UIView *)badgeView{
-    if (!_badgeView) {
-        _badgeView = [[UIView alloc] initWithFrame:CGRectMake(SCREEN_WIDTH - 35/667.0*SCREEN_HEIGHT, 5/667.0*SCREEN_HEIGHT, 8, 8)];
-        //请求数据看看有没有通知的消息--------------------------
-        UserInfoEntity *entity = [UserInfoEntity defaultUserInfoEntity];
-        FBRequest *requestMsg = [FBAPI postWithUrlString:@"/auth/user" requestDictionary:@{@"user_id":entity.userId} delegate:self];
-        [requestMsg startRequestSuccess:^(FBRequest *request, id result) {
-            NSDictionary *dataDict = result[@"data"];
-            NSDictionary *counterDict = [dataDict objectForKey:@"counter"];
-            CounterModel *counterModel = [CounterModel mj_objectWithKeyValues:counterDict];
-            if (counterModel.order_total_count!=0 || counterModel.message_total_count!=0) {
-                //                UITabBarItem * item=[tabBarC.tabBar.items objectAtIndex:3];
-                //                item.badgeValue=@"";
-                //显示
-                _badgeView.backgroundColor = [UIColor colorWithHexString:fineixColor];
-            }else{
-                _badgeView.backgroundColor = [UIColor whiteColor];
-            }
-        } failure:^(FBRequest *request, NSError *error) {
-        }];
-        _badgeView.layer.masksToBounds = YES;
-        _badgeView.layer.cornerRadius = 4;
-//        _badgeView.layer.shouldRasterize = YES;
-    }
-    return _badgeView;
-}
 
 #pragma mark - 调整tabBar上item的位置和尺寸
 - (void)layoutSubviews {
