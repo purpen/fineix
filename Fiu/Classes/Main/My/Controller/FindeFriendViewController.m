@@ -297,7 +297,7 @@ static NSString *const ShareURL = @"http://m.taihuoniao.com/guide/app_about";
     if (indexPath.section == 1) {
         FindFriendModel *model = _userAry[indexPath.row];
         HomePageViewController *vc = [[HomePageViewController alloc] init];
-        vc.type = @1;
+        vc.type = @2;
         vc.isMySelf = NO;
         vc.userId = [NSString stringWithFormat:@"%@",model.userid];
         [self.navigationController pushViewController:vc animated:YES];
