@@ -74,7 +74,7 @@
                                 <constraint firstAttribute="height" constant="90" id="4lK-lv-XNY"/>
                             </constraints>
                         </view>
-                        <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="输入认证信息 如：我是商量好过" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="y8M-OQ-39l">
+                        <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="如：太火鸟创始人" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="y8M-OQ-39l">
                             <rect key="frame" x="15" y="210" width="345" height="44"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="44" id="wFZ-te-Cas"/>

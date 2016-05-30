@@ -23,6 +23,7 @@
 @property (nonatomic,strong) NSMutableArray *bonusAry;
 @pro_assign BOOL                        rollDown;               //  是否下拉
 @pro_assign CGFloat                     lastContentOffset;      //  滚动的方向
+@property(nonatomic,strong) UIView *lineView;
 @end
 
 static NSString *const BonusURL = @"/my/bonus";
@@ -185,7 +186,21 @@ static NSString *const BonusCellIdentifier = @"bonusCell";
     }
     bonusCell.clickBtn.tag = indexPath.row;
     [bonusCell.clickBtn addTarget:self action:@selector(clikTipBtn:) forControlEvents:UIControlEventTouchUpInside];
+    [bonusCell.contentView addSubview:self.lineView];
+    [_lineView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.size.mas_equalTo(CGSizeMake(SCREEN_WIDTH-30, 0.5));
+        make.left.mas_equalTo(bonusCell.mas_left).with.offset(15);
+        make.bottom.mas_equalTo(bonusCell.mas_bottom).with.offset(0);
+    }];
     return bonusCell;
+}
+
+-(UIView *)lineView{
+    if (!_lineView) {
+        _lineView = [[UIView alloc] init];
+        _lineView.backgroundColor = [UIColor grayColor];
+    }
+    return _lineView;
 }
 
 - (BOOL)tableView:(UITableView *)tableView shouldHighlightRowAtIndexPath:(NSIndexPath *)indexPath

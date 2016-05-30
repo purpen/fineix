@@ -25,6 +25,7 @@
 #import <AlipaySDK/AlipaySDK.h>
 #import "FBLoginRegisterViewController.h"
 #import "CounterModel.h"
+#import "UITabBar+badge.h"
 
 
 @interface AppDelegate ()<WXApiDelegate>
@@ -55,7 +56,6 @@ NSString *const determineLogin = @"/auth/check_login";
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     self.window.backgroundColor = [UIColor whiteColor];
     [self.window makeKeyAndVisible];
-    
     
     
 //    //首先统一设置为未登录-----------------------------------------------
@@ -138,7 +138,10 @@ NSString *const determineLogin = @"/auth/check_login";
     
     [application registerUserNotificationSettings:notiSettings];
     //------------------------------------------------------
-
+    
+    
+    
+    
     return YES;
 }
 
@@ -153,24 +156,25 @@ NSString *const determineLogin = @"/auth/check_login";
     //    使用的时候用key+版本号替换UserHasGuideView
     //    这样容易控制每个版本都可以显示引导图
     BOOL userIsFirstInstalled = [[NSUserDefaults standardUserDefaults] boolForKey:@"UserHasGuideView"];
-    
     if (userIsFirstInstalled) {
         FBTabBarController * tabBarC = [[FBTabBarController alloc] init];
-        //请求数据看看有没有通知的消息--------------------------
+        self.window.rootViewController = tabBarC;
         UserInfoEntity *entity = [UserInfoEntity defaultUserInfoEntity];
-        FBRequest *requestMsg = [FBAPI postWithUrlString:@"/auth/user" requestDictionary:@{@"user_id":entity.userId} delegate:self];
-        [requestMsg startRequestSuccess:^(FBRequest *request, id result) {
+        FBRequest *request = [FBAPI postWithUrlString:@"/auth/user" requestDictionary:@{@"user_id":entity.userId} delegate:self];
+        [request startRequestSuccess:^(FBRequest *request, id result) {
+            NSLog(@"&&&&&&&&result %@",result);
             NSDictionary *dataDict = result[@"data"];
             NSDictionary *counterDict = [dataDict objectForKey:@"counter"];
             _counterModel = [CounterModel mj_objectWithKeyValues:counterDict];
-            NSLog(@" %@",_counterModel);
-            if (_counterModel.order_total_count!=0 || _counterModel.message_total_count!=0) {
-                UITabBarItem * item=[tabBarC.tabBar.items objectAtIndex:3];
-                item.badgeValue=@"";
+            //判断小圆点是否消失
+            if (_counterModel.message_total_count != 0) {
+               [tabBarC.tabBar showBadgeWithIndex:4];
+            }else{
+                [tabBarC.tabBar hideBadgeWithIndex:4];
             }
+            
         } failure:^(FBRequest *request, NSError *error) {
         }];
-        self.window.rootViewController = tabBarC;
     }else{
         self.window.rootViewController = [[GuidePageViewController alloc] initWithPicArr:arr andRootVC:[[FBTabBarController alloc] init]];
         [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"UserHasGuideView"];

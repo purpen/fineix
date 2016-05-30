@@ -8,6 +8,7 @@
 
 #import <UIKit/UIKit.h>
 @class UserInfo;
+@class TalentView;
 
 @interface OtherCollectionViewCell : UICollectionViewCell
 @property(nonatomic,strong) UIImageView *bgImageView;//背景图片
@@ -24,6 +25,7 @@
 @property(nonatomic,strong) UIView *userView;
 @property(nonatomic,strong) UIView *lineView; //白线
 @property(nonatomic,strong) UILabel *idTagsLabel;
+@property(nonatomic,strong) TalentView *talentView;
 
 -(void)setUIWithModel:(UserInfo*)model;
 @end

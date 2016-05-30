@@ -263,7 +263,6 @@
 		1F2A90211CF40277005116C7 /* IdentityTagsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F2A8DF91CF40277005116C7 /* IdentityTagsViewController.m */; };
 		1F2A90221CF40277005116C7 /* IdentityTagsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1F2A8DFA1CF40277005116C7 /* IdentityTagsViewController.xib */; };
 		1F2A90231CF40277005116C7 /* TheOfficialCertificationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F2A8DFC1CF40277005116C7 /* TheOfficialCertificationViewController.m */; };
-		1F2A90241CF40277005116C7 /* TheOfficialCertificationViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1F2A8DFD1CF40277005116C7 /* TheOfficialCertificationViewController.xib */; };
 		1F2A90251CF40277005116C7 /* IdentityTagModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F2A8E001CF40277005116C7 /* IdentityTagModel.m */; };
 		1F2A90261CF40277005116C7 /* UIImagePickerController+Flag.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F2A8E031CF40277005116C7 /* UIImagePickerController+Flag.m */; };
 		1F2A90271CF40277005116C7 /* CertIdView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F2A8E061CF40277005116C7 /* CertIdView.m */; };
@@ -428,11 +427,12 @@
 		1F3C0A771CBF461300B84FEB /* libPods-Fiu.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 1F3C0A761CBF461300B84FEB /* libPods-Fiu.a */; };
 		1F4C0AFD1CF616B9006F0EED /* libSocialWechat.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 1F4C0AF71CF616B9006F0EED /* libSocialWechat.a */; };
 		1F4C0AFE1CF616B9006F0EED /* libWeChatSDK.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 1F4C0AF81CF616B9006F0EED /* libWeChatSDK.a */; };
-		1F4C0B011CF61B5D006F0EED /* UITabBar+RedTip.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F4C0B001CF61B5D006F0EED /* UITabBar+RedTip.m */; };
+		1F520A9B1CF8771600B6882A /* TalentView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F520A9A1CF8771600B6882A /* TalentView.m */; };
 		1F59E5FC1C9ABBA500E96C60 /* Accelerate.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1F59E5FB1C9ABBA500E96C60 /* Accelerate.framework */; };
 		1F69CE201CF70BFA00AE3271 /* OfficialCertificationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F69CE1E1CF70BFA00AE3271 /* OfficialCertificationViewController.m */; };
 		1F69CE211CF70BFA00AE3271 /* OfficialCertificationViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1F69CE1F1CF70BFA00AE3271 /* OfficialCertificationViewController.xib */; };
 		1F772B5E1CF3FD910018AE40 /* AppDelegate.mm in Sources */ = {isa = PBXBuildFile; fileRef = 1F772B5D1CF3FD910018AE40 /* AppDelegate.mm */; };
+		1F96D89A1CF9A1F6003014FF /* UITabBar+badge.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F96D8991CF9A1F6003014FF /* UITabBar+badge.m */; };
 		1FC6782E1CDB33ED00535162 /* UIView+TYAlertView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1FC6782C1CDB33ED00535162 /* UIView+TYAlertView.m */; };
 		280045111C805B78005F5C2E /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 280045101C805B78005F5C2E /* CoreLocation.framework */; };
 		280045131C805B82005F5C2E /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 280045121C805B82005F5C2E /* QuartzCore.framework */; };
@@ -980,7 +980,6 @@
 		1F2A8DFA1CF40277005116C7 /* IdentityTagsViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = IdentityTagsViewController.xib; sourceTree = "<group>"; };
 		1F2A8DFB1CF40277005116C7 /* TheOfficialCertificationViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TheOfficialCertificationViewController.h; sourceTree = "<group>"; };
 		1F2A8DFC1CF40277005116C7 /* TheOfficialCertificationViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TheOfficialCertificationViewController.m; sourceTree = "<group>"; };
-		1F2A8DFD1CF40277005116C7 /* TheOfficialCertificationViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TheOfficialCertificationViewController.xib; sourceTree = "<group>"; };
 		1F2A8DFF1CF40277005116C7 /* IdentityTagModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IdentityTagModel.h; sourceTree = "<group>"; };
 		1F2A8E001CF40277005116C7 /* IdentityTagModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IdentityTagModel.m; sourceTree = "<group>"; };
 		1F2A8E021CF40277005116C7 /* UIImagePickerController+Flag.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImagePickerController+Flag.h"; sourceTree = "<group>"; };
@@ -1270,13 +1269,15 @@
 		1F4C0AFA1CF616B9006F0EED /* WechatAuthSDK.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WechatAuthSDK.h; sourceTree = "<group>"; };
 		1F4C0AFB1CF616B9006F0EED /* WXApi.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WXApi.h; sourceTree = "<group>"; };
 		1F4C0AFC1CF616B9006F0EED /* WXApiObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WXApiObject.h; sourceTree = "<group>"; };
-		1F4C0AFF1CF61B5D006F0EED /* UITabBar+RedTip.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UITabBar+RedTip.h"; sourceTree = "<group>"; };
-		1F4C0B001CF61B5D006F0EED /* UITabBar+RedTip.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UITabBar+RedTip.m"; sourceTree = "<group>"; };
+		1F520A991CF8771600B6882A /* TalentView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TalentView.h; sourceTree = "<group>"; };
+		1F520A9A1CF8771600B6882A /* TalentView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TalentView.m; sourceTree = "<group>"; };
 		1F59E5FB1C9ABBA500E96C60 /* Accelerate.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Accelerate.framework; path = System/Library/Frameworks/Accelerate.framework; sourceTree = SDKROOT; };
 		1F69CE1D1CF70BFA00AE3271 /* OfficialCertificationViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OfficialCertificationViewController.h; sourceTree = "<group>"; };
 		1F69CE1E1CF70BFA00AE3271 /* OfficialCertificationViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OfficialCertificationViewController.m; sourceTree = "<group>"; };
 		1F69CE1F1CF70BFA00AE3271 /* OfficialCertificationViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = OfficialCertificationViewController.xib; sourceTree = "<group>"; };
 		1F772B5D1CF3FD910018AE40 /* AppDelegate.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = AppDelegate.mm; sourceTree = "<group>"; };
+		1F96D8981CF9A1F6003014FF /* UITabBar+badge.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UITabBar+badge.h"; sourceTree = "<group>"; };
+		1F96D8991CF9A1F6003014FF /* UITabBar+badge.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UITabBar+badge.m"; sourceTree = "<group>"; };
 		1FC6782C1CDB33ED00535162 /* UIView+TYAlertView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+TYAlertView.m"; sourceTree = "<group>"; };
 		1FC6782D1CDB33ED00535162 /* UIView+TYAutoLayout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+TYAutoLayout.h"; sourceTree = "<group>"; };
 		280045101C805B78005F5C2E /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
@@ -2528,6 +2529,8 @@
 				1F2A8DE01CF40277005116C7 /* ScenceListCollectionViewCell.m */,
 				1F2A8DE11CF40277005116C7 /* TipNumberView.h */,
 				1F2A8DE21CF40277005116C7 /* TipNumberView.m */,
+				1F520A991CF8771600B6882A /* TalentView.h */,
+				1F520A9A1CF8771600B6882A /* TalentView.m */,
 			);
 			path = view;
 			sourceTree = "<group>";
@@ -2620,7 +2623,6 @@
 				1F2A8DFA1CF40277005116C7 /* IdentityTagsViewController.xib */,
 				1F2A8DFB1CF40277005116C7 /* TheOfficialCertificationViewController.h */,
 				1F2A8DFC1CF40277005116C7 /* TheOfficialCertificationViewController.m */,
-				1F2A8DFD1CF40277005116C7 /* TheOfficialCertificationViewController.xib */,
 				1F69CE1D1CF70BFA00AE3271 /* OfficialCertificationViewController.h */,
 				1F69CE1E1CF70BFA00AE3271 /* OfficialCertificationViewController.m */,
 				1F69CE1F1CF70BFA00AE3271 /* OfficialCertificationViewController.xib */,
@@ -3329,12 +3331,12 @@
 		1F2A8F291CF40277005116C7 /* TabBar */ = {
 			isa = PBXGroup;
 			children = (
+				1F96D8981CF9A1F6003014FF /* UITabBar+badge.h */,
+				1F96D8991CF9A1F6003014FF /* UITabBar+badge.m */,
 				1F2A8F2A1CF40277005116C7 /* FBTabBar.h */,
 				1F2A8F2B1CF40277005116C7 /* FBTabBar.m */,
 				1F2A8F2C1CF40277005116C7 /* FBTabBarController.h */,
 				1F2A8F2D1CF40277005116C7 /* FBTabBarController.m */,
-				1F4C0AFF1CF61B5D006F0EED /* UITabBar+RedTip.h */,
-				1F4C0B001CF61B5D006F0EED /* UITabBar+RedTip.m */,
 			);
 			path = TabBar;
 			sourceTree = "<group>";
@@ -3770,7 +3772,6 @@
 				1F2A90671CF40277005116C7 /* CommentsTableViewCell.xib in Resources */,
 				1F2A909F1CF40277005116C7 /* GreatPeopleViewController.xib in Resources */,
 				1F2A8FE61CF40277005116C7 /* AddreesPickerViewController.xib in Resources */,
-				1F2A90241CF40277005116C7 /* TheOfficialCertificationViewController.xib in Resources */,
 				1F2A8F371CF40277005116C7 /* AllNearbyScenarioViewController.xib in Resources */,
 				1F2A907E1CF40277005116C7 /* TianMaoOrderViewController.xib in Resources */,
 				1F2A90A11CF40277005116C7 /* SubscribePeopleViewController.xib in Resources */,
@@ -4031,6 +4032,7 @@
 				1F2A8F591CF40277005116C7 /* AllTagListTableViewCell.m in Sources */,
 				1F2A8F2E1CF40277005116C7 /* ClipImageViewController.m in Sources */,
 				1F2A90271CF40277005116C7 /* CertIdView.m in Sources */,
+				1F96D89A1CF9A1F6003014FF /* UITabBar+badge.m in Sources */,
 				1F2A908B1CF40277005116C7 /* PaySuccessViewController.m in Sources */,
 				1F2A900E1CF40277005116C7 /* FriendCollectionViewCell.m in Sources */,
 				1F2A90791CF40277005116C7 /* ReturnViewController.m in Sources */,
@@ -4089,7 +4091,6 @@
 				1F2A8FAC1CF40277005116C7 /* FBOrderSendWayViewController.m in Sources */,
 				1F2A906F1CF40277005116C7 /* CommenttwoViewController.m in Sources */,
 				1F2A90731CF40277005116C7 /* MyOderInfoViewController.m in Sources */,
-				1F4C0B011CF61B5D006F0EED /* UITabBar+RedTip.m in Sources */,
 				1F2A902A1CF40277005116C7 /* DeliveryAddressViewController.m in Sources */,
 				1F2A8FE91CF40277005116C7 /* ChangeSumaryViewController.m in Sources */,
 				1F2A90641CF40277005116C7 /* DirectMessageModel.m in Sources */,
@@ -4234,6 +4235,7 @@
 				1F2A908E1CF40277005116C7 /* FBAlertViewController.m in Sources */,
 				1F2A8FF51CF40277005116C7 /* MyFansViewController.m in Sources */,
 				1F2A90681CF40277005116C7 /* SystemInfoMessageTableViewCell.m in Sources */,
+				1F520A9B1CF8771600B6882A /* TalentView.m in Sources */,
 				1F2A8FEB1CF40277005116C7 /* DatePickerViewController.m in Sources */,
 				1F2A8FDA1CF40277005116C7 /* GoodsImgCollectionViewCell.m in Sources */,
 				1F2A8F841CF40277005116C7 /* FiuUserInfoTableViewCell.m in Sources */,

@@ -73,7 +73,8 @@ static NSString *const ShareURL = @"http://m.taihuoniao.com/guide/app_about";
             if(![rowsDict[@"label"] isKindOfClass:[NSNull class]]){
                 model.label = rowsDict[@"label"];
             }
-            model.level = rowsDict[@"level"];
+            model.expert_label = rowsDict[@"expert_label"];
+            model.rank_id = rowsDict[@"rank_id"];
             model.is_expert = rowsDict[@"identify"][@"is_expert"];
             NSArray *sceneAry = rowsDict[@"scene_sight"];
             //model.scene = [NSMutableArray array];
@@ -160,22 +161,21 @@ static NSString *const ShareURL = @"http://m.taihuoniao.com/guide/app_about";
         cell.nameLbael.text = model.nickName;
         
         NSArray *tagsAry = [NSArray arrayWithObjects:@"大拿",@"行家",@"行摄家",@"艺术范",@"手艺人",@"人来疯",@"赎回自由身",@"职业buyer", nil];
-        if ([model.is_expert isEqualToNumber:@0]) {
-            NSLog(@"dwewqebwqe %zi",model.label.length);
-            if (!model.label) {
-                cell.levelLabel.text = [NSString stringWithFormat:@" V%d",[model.level intValue]];
-            }else{
-                cell.levelLabel.text = [NSString stringWithFormat:@"%@ | V%d",model.label,[model.level intValue]];
-            }
-            cell.idTagsImageView.hidden = YES;
-            cell.imageView.hidden = YES;
-            cell.userLevelLabel.hidden = YES;
-        }else if([model.is_expert isEqualToNumber:@1]){
-            cell.userLevelLabel.text = [NSString stringWithFormat:@" | V%d",[model.level intValue]];
-            cell.idTagsImageView.hidden = NO;
+        if ([model.is_expert isEqual:@(1)]) {
+            cell.userLevelLabel.text = [NSString stringWithFormat:@" | Lv%d",[model.rank_id intValue]];
             cell.userLevelLabel.hidden = NO;
-            int n = (int)[tagsAry indexOfObject:model.label];
-            cell.idTagsImageView.image = [UIImage imageNamed:[NSString stringWithFormat:@"tags%d",n]];
+            cell.idTagsImageView.hidden = NO;
+            int n = (int)[tagsAry indexOfObject:model.expert_label];
+            cell.idTagsImageView.image = [UIImage imageNamed:[NSString stringWithFormat:@"tags%d",n+1]];
+        }else{
+            if (model.label.length == 0) {
+                cell.levelLabel.text = [NSString stringWithFormat:@" Lv%d",[model.rank_id intValue]];
+            }else{
+                cell.levelLabel.text = [NSString stringWithFormat:@"%@ | Lv%d",model.label,[model.rank_id intValue]];
+            }
+            cell.userLevelLabel.hidden = NO;
+            cell.idTagsImageView.hidden = YES;
+//            cell.userLevelLabel.hidden = NO;
         }
 //        if (model.address.firstObject && model.address.lastObject) {
 //            cell.deressLabel.text = [NSString stringWithFormat:@"%@ %@",model.address.firstObject,model.address.lastObject];
@@ -297,7 +297,7 @@ static NSString *const ShareURL = @"http://m.taihuoniao.com/guide/app_about";
     if (indexPath.section == 1) {
         FindFriendModel *model = _userAry[indexPath.row];
         HomePageViewController *vc = [[HomePageViewController alloc] init];
-        vc.type = @1;
+        vc.type = @2;
         vc.isMySelf = NO;
         vc.userId = [NSString stringWithFormat:@"%@",model.userid];
         [self.navigationController pushViewController:vc animated:YES];

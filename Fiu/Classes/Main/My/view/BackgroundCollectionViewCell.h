@@ -8,6 +8,8 @@
 
 #import <UIKit/UIKit.h>
 
+@class TalentView;
+
 @interface BackgroundCollectionViewCell : UICollectionViewCell
 @property(nonatomic,strong) UIImageView *bgImageView;//背景图片
 @property(nonatomic,strong) UIImageView *userHeadImageView;//用户的头像
@@ -25,6 +27,7 @@
 @property(nonatomic,strong) UIView *lineView; //白线
 @property(nonatomic,strong) UILabel *idTagsLabel;
 @property(nonatomic,strong) UIButton *userHeadBtn;
+@property(nonatomic,strong) TalentView *talentView;
 
 - (void)setUI;
 

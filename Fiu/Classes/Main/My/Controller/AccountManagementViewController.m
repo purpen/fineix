@@ -162,8 +162,25 @@ static NSString *const UpdateInfoURL = @"/my/update_profile";
             break;
     }
     _accountView.birthday.text = entity.birthday;
-    _accountView.IdentityTagsLabel.text = entity.label;
-
+    _accountView.personalitySignatureLabel.text = [NSString stringWithFormat:@"%@ | %@",entity.label,entity.summary];
+    
+    FBRequest *request  =[FBAPI postWithUrlString:@"/my/fetch_talent" requestDictionary:nil delegate:self];
+    [request startRequestSuccess:^(FBRequest *request, id result) {
+        NSDictionary *dataDict = [result objectForKey:@"data"];
+        NSNumber *verifiedNum = [dataDict objectForKey:@"verified"];
+        NSLog(@"%@",entity.expert_label);
+        NSString *str;
+        if ([verifiedNum isEqualToNumber:@0]) {
+            str = @"未审核";
+        }else if ([verifiedNum isEqualToNumber:@1]){
+            str = @"拒绝";
+        }else if ([verifiedNum isEqualToNumber:@2]){
+            str = entity.expert_label;
+        }
+        _accountView.IdentityTagsLabel.text = str;
+    } failure:^(FBRequest *request, NSError *error) {
+        
+    }];
 }
 
 -(void)clickSumBtn:(UIButton*)sender{

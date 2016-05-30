@@ -31,6 +31,7 @@
 #import "FindeFriendViewController.h"
 #import "TipNumberView.h"
 #import "IntegralViewController.h"
+#import "UITabBar+badge.h"
 
 
 @interface MyPageViewController ()<FBNavigationBarItemsDelegate,UICollectionViewDelegate,UICollectionViewDataSource>
@@ -162,7 +163,6 @@
             userInfo.prin = areasAry[0];
             userInfo.city = areasAry[1];
         }
-        NSLog(@"便签啊啊        %@",userInfo.label);
         userInfo.is_expert = [result objectForKey:@"data"][@"identify"][@"is_expert"];
         [userInfo saveOrUpdate];
         [userInfo updateUserInfoEntity];
@@ -170,13 +170,19 @@
         
         UserInfoEntity *entity = [UserInfoEntity defaultUserInfoEntity];
         entity.isLogin = YES;
-        NSLog(@"   地区   &&&&&&&&&  %@",entity.prin);
         NSDictionary *counterDict = [dataDict objectForKey:@"counter"];
         _counterModel = [CounterModel mj_objectWithKeyValues:counterDict];
         _counterModel.subscription_count = [result objectForKey:@"data"][@"subscription_count"];
         _counterModel.sight_love_count = [result objectForKey:@"data"][@"sight_love_count"];
         [self.myCollectionView reloadData];
         [SVProgressHUD dismiss];
+        
+        //判断小圆点是否消失
+        if (_counterModel.message_total_count != 0) {
+            [self.tabBarController.tabBar showBadgeWithIndex:4];
+        }else{
+            [self.tabBarController.tabBar hideBadgeWithIndex:4];
+        }
         
     } failure:^(FBRequest *request, NSError *error) {
         [SVProgressHUD showErrorWithStatus:@"加载失败"];

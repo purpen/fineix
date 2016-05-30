@@ -66,7 +66,7 @@ static NSString *const thirdRegister = @"/auth/third_sign";//第三方登录接�
     _phoneNumLoginV = [[PhoneNumLoginView alloc] init];
     _phoneNumLoginV.hidden = YES;
     CGRect frame = _phoneNumLoginV.frame;
-    frame.origin.y = 117.0/667.0*SCREEN_HEIGHT;
+    frame.origin.y = 240.0/667.0*SCREEN_HEIGHT;
     _phoneNumLoginV.frame = frame;
     _phoneNumLoginV.phoneTF.delegate = self;
     _phoneNumLoginV.pwdTF.delegate = self;
@@ -85,7 +85,7 @@ static NSString *const thirdRegister = @"/auth/third_sign";//第三方登录接�
     _submitView.setANewPasswordTF.delegate = self;
     _submitView.frame = CGRectMake(0, 0, SCREEN_WIDTH,244/667.0*SCREEN_HEIGHT );
     CGRect submitViewframe = _submitView.frame;
-    submitViewframe.origin.y = 50/667.0*SCREEN_HEIGHT;
+    submitViewframe.origin.y = 240/667.0*SCREEN_HEIGHT;
     _submitView.hidden = YES;
     _submitView.frame = submitViewframe;
     [self.view addSubview:_submitView];
@@ -227,7 +227,7 @@ static NSString *const thirdRegister = @"/auth/third_sign";//第三方登录接�
         _submitView.frame = submitViewframe;
     } completion:^(BOOL finished) {
         //成为第一响应者
-        
+        [_submitView.phoneNumTF becomeFirstResponder];
     }];
     
 }

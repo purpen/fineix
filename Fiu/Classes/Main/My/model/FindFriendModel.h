@@ -18,7 +18,8 @@
 @property(nonatomic,strong) NSMutableArray *scene;
 @property(nonatomic,strong) NSNumber *flag;
 @property(nonatomic,copy) NSString *label;
-@property(nonatomic,strong) NSNumber *level;
-@property(nonatomic,strong) NSNumber *is_expert;
+@property(nonatomic,strong) NSNumber *rank_id;
+@property(nonatomic,copy) NSString *is_expert;
+@property(nonatomic,copy) NSString *expert_label;
 
 @end

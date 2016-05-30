@@ -7,6 +7,10 @@
 //
 
 #import "FBTabBar.h"
+#import "UserInfoEntity.h"
+#import "CounterModel.h"
+#import "NSObject+MJKeyValue.h"
+
 
 @implementation FBTabBar
 
@@ -30,10 +34,10 @@
         }
         self.shadowImage = img;
         self.translucent = YES;
-
     }
     return self;
 }
+
 
 #pragma mark - 自定义的“创建”按钮
 - (UIButton *)createBtn {
@@ -58,6 +62,7 @@
     }
     return _createTitle;
 }
+
 
 #pragma mark - 调整tabBar上item的位置和尺寸
 - (void)layoutSubviews {
@@ -93,6 +98,7 @@
     //  标题
     self.createTitle.frame = CGRectMake(btnX, btnY, 60, 12);
     self.createTitle.center = CGPointMake(width * 0.5, height * 0.87);
+    
 }
 
 
