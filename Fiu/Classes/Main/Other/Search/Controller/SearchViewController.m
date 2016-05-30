@@ -61,7 +61,6 @@ static NSString *const URLSearchList = @"/search/getlist";
     [self clearMarrData];
     
     [SVProgressHUD show];
-    
     self.searchListRequest = [FBAPI getWithUrlString:URLSearchList requestDictionary:@{@"evt":@"tag", @"size":@"8", @"page":@(self.currentpageNum + 1), @"t":type , @"q":keyword} delegate:self];
     
     [self.searchListRequest startRequestSuccess:^(FBRequest *request, id result) {

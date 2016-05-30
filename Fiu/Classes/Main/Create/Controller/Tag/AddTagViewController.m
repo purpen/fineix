@@ -62,7 +62,7 @@ static NSInteger const CATEGORYTAG = 283;
 #pragma mark 标签列表
 - (void)networkTagListData {
     [SVProgressHUD show];
-    self.tagRequest = [FBAPI getWithUrlString:URLAllTag requestDictionary:@{@"type":@"1"} delegate:self];
+    self.tagRequest = [FBAPI getWithUrlString:URLAllTag requestDictionary:@{@"type":@"1", @"sort":@"",@"stick":@"1"} delegate:self];
     [self.tagRequest startRequestSuccess:^(FBRequest *request, id result) {
         //  一级标签
         self.fatherCategory = [[[result valueForKey:@"data"] valueForKey:@"1"] valueForKey:@"children"];

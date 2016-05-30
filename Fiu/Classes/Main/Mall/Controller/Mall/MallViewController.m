@@ -93,7 +93,7 @@ static NSString *const URLFiuBrand = @"/scene_brands/getlist";
 
 #pragma mark 标签列表
 - (void)networkTagsListData {
-    self.tagsRequest = [FBAPI getWithUrlString:URLTagS requestDictionary:@{@"is_hot":@"1", @"sort":@"5", @"page":@"1", @"size":@"50"} delegate:self];
+    self.tagsRequest = [FBAPI getWithUrlString:URLTagS requestDictionary:@{@"is_hot":@"1", @"sort":@"6", @"page":@"1", @"size":@"50", @"type":@"2"} delegate:self];
     [self.tagsRequest startRequestSuccess:^(FBRequest *request, id result) {
         NSArray * tagsArr = [[result valueForKey:@"data"] valueForKey:@"rows"];
         for (NSDictionary * tagsDic in tagsArr) {

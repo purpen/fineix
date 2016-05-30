@@ -116,7 +116,7 @@ static NSString *const URLFiuPeople = @"/user/find_user";
 
 #pragma mark 标签列表
 - (void)networkTagsListData {
-    self.tagsRequest = [FBAPI getWithUrlString:URLTagS requestDictionary:@{@"is_hot":@"1", @"sort":@"2", @"page":@"1", @"size":@"50"} delegate:self];
+    self.tagsRequest = [FBAPI getWithUrlString:URLTagS requestDictionary:@{@"is_hot":@"1", @"sort":@"6", @"page":@"1", @"size":@"50", @"type":@"1"} delegate:self];
     [self.tagsRequest startRequestSuccess:^(FBRequest *request, id result) {
         NSArray * tagsArr = [[result valueForKey:@"data"] valueForKey:@"rows"];
         for (NSDictionary * tagsDic in tagsArr) {

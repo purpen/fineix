@@ -229,6 +229,9 @@ static NSString *const URLShareTextNum = @"/scene_sight/add_share_context_num";
 }
 
 - (void)shareItemSelected {
+    //  保存图片到本地
+    UIImageWriteToSavedPhotosAlbum([self shareImage], self, nil, nil);
+    
     if (_oid.length > 0) {
         [self networkShareTextNumData:_oid];
     }

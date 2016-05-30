@@ -65,6 +65,10 @@
 - (void)setViewUI {
     [self addSubview:self.sceneImg];
     
+    UIImageView * bgImg = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT)];
+    bgImg.image = [UIImage imageNamed:@"Share_BgTop_750"];
+    [self addSubview:bgImg];
+    
     [self addSubview:self.userView];
     [_userView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.size.mas_equalTo(CGSizeMake(SCREEN_WIDTH - 40, 30));
@@ -183,14 +187,14 @@
     if (!_sceneImg) {
         _sceneImg = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT)];
         //  添加渐变层
-        CAGradientLayer * shadow = [CAGradientLayer layer];
-        shadow.startPoint = CGPointMake(0, 1);
-        shadow.endPoint = CGPointMake(0, 0);
-        shadow.colors = @[(__bridge id)[UIColor clearColor].CGColor,
-                          (__bridge id)[UIColor blackColor].CGColor];
-        shadow.locations = @[@(0.5f), @(1.5f)];
-        shadow.frame = _sceneImg.bounds;
-        [_sceneImg.layer addSublayer:shadow];
+//        CAGradientLayer * shadow = [CAGradientLayer layer];
+//        shadow.startPoint = CGPointMake(0, 1);
+//        shadow.endPoint = CGPointMake(0, 0);
+//        shadow.colors = @[(__bridge id)[UIColor clearColor].CGColor,
+//                          (__bridge id)[UIColor blackColor].CGColor];
+//        shadow.locations = @[@(0.5f), @(1.5f)];
+//        shadow.frame = _sceneImg.bounds;
+//        [_sceneImg.layer addSublayer:shadow];
     }
     return _sceneImg;
 }

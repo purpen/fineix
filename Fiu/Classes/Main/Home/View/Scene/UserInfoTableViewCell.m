@@ -43,13 +43,10 @@
     [self.userHeader sd_setImageWithURL:[NSURL URLWithString:model.userInfo.avatarUrl] forState:(UIControlStateNormal)];
     self.userName.text = model.userInfo.nickname;
     self.time.text = [NSString stringWithFormat:@"| %@", model.createdAt];
+    self.userProfile.text = model.userInfo.summary;
     
     //  是否是达人
-    if (model.userInfo.isExpert == 1) {
-        self.userProfile.text = [NSString stringWithFormat:@"达人｜%@",model.userInfo.summary];
-    } else if (model.userInfo.isExpert == 0) {
-        self.userProfile.text = model.userInfo.summary;
-    }
+
     //  是否点赞
     if (model.isLove == 0) {
         self.goodBtn.selected = NO;

@@ -80,6 +80,7 @@ static NSString *const URLWantBuy = @"/scene_product/sight_click_stat";
     [SVProgressHUD show];
     self.sceneInfoRequest = [FBAPI getWithUrlString:URLSceneInfo requestDictionary:@{@"id":self.sceneId} delegate:self];
     [self.sceneInfoRequest startRequestSuccess:^(FBRequest *request, id result) {
+        NSLog(@"＝＝＝＝＝＝＝＝＝ %@", result);
         //  分享出去的场景信息
         _shareDataDict = [NSDictionary dictionaryWithDictionary:[result valueForKey:@"data"]];
         _sceneUserId = [[result valueForKey:@"data"] valueForKey:@"user_id"];

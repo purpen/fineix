@@ -70,13 +70,11 @@
         [self.delegate cancelSearch];
     }
     [_searchInputBox resignFirstResponder];
-    [self changeSearchBoxFrame:NO];
 }
 
 #pragma mark - UITextFieldDelegate
 - (BOOL)textFieldShouldReturn:(UITextField *)textField {
     [_searchInputBox resignFirstResponder];
-    [self changeSearchBoxFrame:NO];
     if ([self.delegate respondsToSelector:@selector(beginSearch:)]) {
         [self.delegate beginSearch:textField.text];
     }

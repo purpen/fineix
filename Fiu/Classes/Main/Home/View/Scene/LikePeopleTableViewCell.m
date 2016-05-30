@@ -34,8 +34,6 @@ const static NSInteger  peopleBtnTag = 64;
             [self.userIdMarr addObject:[NSString stringWithFormat:@"%zi", [row.user valueForKey:@"userId" ]]];
         }
         
-        [self addLikePeopleHeader:model image:self.imgMarr];
-        
         CGFloat num = model.count;
         if (num/100 > 1) {
             [_morePeopel setTitle:[NSString stringWithFormat:@"%.0f00＋", num/100] forState:(UIControlStateNormal)];
@@ -47,7 +45,8 @@ const static NSInteger  peopleBtnTag = 64;
             [_morePeopel setTitle:[NSString stringWithFormat:@"%.0fk＋", num/1000] forState:(UIControlStateNormal)];
         }
     }
-
+    
+    [self addLikePeopleHeader:model image:self.imgMarr];
 }
 
 #pragma mark - 加载用户的头像
@@ -57,7 +56,7 @@ const static NSInteger  peopleBtnTag = 64;
     
     CGFloat btnW = 0;
     CGFloat btnH = 15;
-    
+    NSLog(@"＝＝＝＝＝＝ %@", imgUrl);
     for (NSInteger idx = 0; idx < people.count; ++idx) {
         UIButton * peopleBtn = [[UIButton alloc] init];
         
