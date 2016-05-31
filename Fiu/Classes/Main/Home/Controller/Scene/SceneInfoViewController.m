@@ -447,23 +447,6 @@ static NSString *const URLWantBuy = @"/scene_product/sight_click_stat";
     }
 }
 
-#pragma mark - 判断上／下滑状态，显示/隐藏Nav/tabBar
-- (void)scrollViewWillBeginDragging:(UIScrollView *)scrollView{
-    if (scrollView == self.sceneTableView) {
-        _lastContentOffset = scrollView.contentOffset.y;
-    }
-}
-
-- (void)scrollViewWillBeginDecelerating:(UIScrollView *)scrollView{
-    if (scrollView == self.sceneTableView) {
-        if (_lastContentOffset < scrollView.contentOffset.y) {
-            self.rollDown = YES;
-        }else{
-            self.rollDown = NO;
-        }
-    }
-}
-
 #pragma mark - 查看全部评论
 - (UIButton *)allComment {
     if (!_allComment) {

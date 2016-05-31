@@ -25,7 +25,6 @@
 @pro_strong GroupHeaderView         *   headerView;             //  分组头部视图
 @pro_strong UIButton                *   allComment;             //  查看全部评论
 @pro_strong NSMutableArray          *   textMar;
-@pro_assign BOOL                        rollDown;               //  是否下拉
-@pro_assign CGFloat                     lastContentOffset;      //  滚动的方向
+
 
 @end

@@ -14,6 +14,7 @@ typedef void(^OpenCommentVC)();
 
 @interface FBAlertViewController : UIViewController
 
+@pro_strong UIButton        *   closeBtn;
 @pro_strong NSString        *   targetId;
 @pro_strong UIView          *   alertView;
 @pro_strong NSDictionary    *   sceneData;

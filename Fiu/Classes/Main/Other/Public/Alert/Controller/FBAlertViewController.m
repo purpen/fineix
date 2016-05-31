@@ -24,6 +24,8 @@ static const NSInteger actionBtnTag = 686;
     self.view.backgroundColor = [UIColor colorWithHexString:@"#000000" alpha:.3];
     
     [self.view addSubview:self.alertView];
+    
+    [self.view addSubview:self.closeBtn];
 }
 
 #pragma mark -
@@ -33,6 +35,18 @@ static const NSInteger actionBtnTag = 686;
         _alertView.backgroundColor = [UIColor colorWithHexString:lineGrayColor];
     }
     return _alertView;
+}
+
+- (UIButton *)closeBtn {
+    if (!_closeBtn) {
+        _closeBtn = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT - 178)];
+        [_closeBtn addTarget:self action:@selector(closeBtnClick) forControlEvents:(UIControlEventTouchUpInside)];
+    }
+    return _closeBtn;
+}
+
+- (void)closeBtnClick {
+    [self dismissViewControllerAnimated:YES completion:nil];
 }
 
 #pragma mark - 场景中的“更多”选项

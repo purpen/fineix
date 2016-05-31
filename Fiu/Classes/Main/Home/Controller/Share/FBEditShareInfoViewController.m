@@ -243,7 +243,7 @@ static NSString *const URLShareText = @"/search/getlist";
 #pragma mark - 搜索按钮
 - (UIButton *)searchBtn {
     if (!_searchBtn) {
-        _searchBtn = [[UIButton alloc] initWithFrame:CGRectMake(10, 212, SCREEN_WIDTH - 20, 26.5)];
+        _searchBtn = [[UIButton alloc] initWithFrame:CGRectMake(10, 212, SCREEN_WIDTH - 20, 26.4)];
         _searchBtn.backgroundColor = [UIColor colorWithHexString:@"#FFFFFF" alpha:.4];
         _searchBtn.layer.cornerRadius = 5;
         _searchBtn.layer.masksToBounds = YES;
@@ -275,7 +275,7 @@ static NSString *const URLShareText = @"/search/getlist";
 #pragma mark - 添加搜索框视图
 - (UITextField *)searchView {
     if (!_searchView) {
-        _searchView = [[UITextField alloc] initWithFrame:CGRectMake(10, 54, SCREEN_WIDTH - 20, 26.5)];
+        _searchView = [[UITextField alloc] initWithFrame:CGRectMake(10, 54, SCREEN_WIDTH - 20, 26.4)];
         _searchView.delegate = self;
         _searchView.clearButtonMode = UITextFieldViewModeWhileEditing;
         _searchView.font = [UIFont systemFontOfSize:13];
@@ -286,7 +286,7 @@ static NSString *const URLShareText = @"/search/getlist";
         _searchView.layer.cornerRadius = 5;
         _searchView.layer.masksToBounds = YES;
         
-        UIButton * icon = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 30, 26.5)];
+        UIButton * icon = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 30, 26.4)];
         [icon setImage:[UIImage imageNamed:@"icon_search_white"] forState:(UIControlStateNormal)];
         _searchView.leftView = icon;
         _searchView.leftViewMode = UITextFieldViewModeAlways;
@@ -316,7 +316,7 @@ static NSString *const URLShareText = @"/search/getlist";
         _editShareTextView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT)];
         
         UILabel * lineBg = [[UILabel alloc] initWithFrame:CGRectMake(0, 259, SCREEN_WIDTH, 1)];
-        lineBg.backgroundColor = [UIColor colorWithHexString:@"#FFFFFF" alpha:.5];
+        lineBg.backgroundColor = [UIColor colorWithHexString:@"#FFFFFF" alpha:.4];
     
         [_editShareTextView addSubview:self.topView];
         [_editShareTextView addSubview:self.editTitle];
@@ -334,7 +334,7 @@ static NSString *const URLShareText = @"/search/getlist";
         _textSearchView = [[UIView alloc] initWithFrame:CGRectMake(SCREEN_WIDTH, 0, SCREEN_WIDTH, SCREEN_HEIGHT)];
         
         UIView * top = [[UIView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 44)];
-        top.backgroundColor = [UIColor colorWithHexString:@"#222222" alpha:.5];
+        top.backgroundColor = [UIColor colorWithHexString:@"#222222" alpha:.4];
         
         UIButton * back = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 44, 44)];
         [back setImage:[UIImage imageNamed:@"return"] forState:(UIControlStateNormal)];
@@ -376,7 +376,7 @@ static NSString *const URLShareText = @"/search/getlist";
         UIVisualEffectView * effectView = [[UIVisualEffectView alloc] initWithEffect:blurEffect];
         effectView.frame = _bgImgView.bounds;
         [_bgImgView addSubview:effectView];
-        effectView.alpha = .5f;
+        effectView.alpha = .4f;
 
         UIView * bgView = [[UIView alloc] initWithFrame:_bgImgView.bounds];
         bgView.backgroundColor = [UIColor colorWithHexString:@"#000000" alpha:.4];
@@ -389,7 +389,7 @@ static NSString *const URLShareText = @"/search/getlist";
 - (UIView *)topView {
     if (!_topView) {
         _topView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 44)];
-        _topView.backgroundColor = [UIColor colorWithHexString:@"#222222" alpha:.5];
+        _topView.backgroundColor = [UIColor colorWithHexString:@"#222222" alpha:.4];
         
         [_topView addSubview:self.shareBtn];
     }
