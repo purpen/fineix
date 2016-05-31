@@ -55,14 +55,13 @@ static NSInteger const CATEGORYTAG = 283;
 
     [self networkTagListData];
     [self networkHotTagData];
-    
 }
 
 #pragma mark - 网络请求
 #pragma mark 标签列表
 - (void)networkTagListData {
     [SVProgressHUD show];
-    self.tagRequest = [FBAPI getWithUrlString:URLAllTag requestDictionary:@{@"type":@"1", @"sort":@"",@"stick":@"1"} delegate:self];
+    self.tagRequest = [FBAPI getWithUrlString:URLAllTag requestDictionary:@{@"type":@"1"} delegate:self];
     [self.tagRequest startRequestSuccess:^(FBRequest *request, id result) {
         //  一级标签
         self.fatherCategory = [[[result valueForKey:@"data"] valueForKey:@"1"] valueForKey:@"children"];
@@ -148,18 +147,18 @@ static NSInteger const CATEGORYTAG = 283;
     
     [self.rollView addSubview:self.menuView];
     
-    [self .rollView addSubview:self.usedTagView];
+    [self.rollView addSubview:self.usedTagView];
     
     [self.rollView addSubview:self.noneView];
     
     [self.rollView addSubview:self.centerView];
+    
+    [self.rollView addSubview:self.tagListTable];
 }
 
 - (void)addAllTagListView {
     //  调整视图大小
     self.rollView.contentSize = CGSizeMake(0, self.categoryList.count * 200 + 300);
-    
-    [self.rollView addSubview:self.tagListTable];
 }
 
 #pragma mark － 使用过的标签 & 热门标签s

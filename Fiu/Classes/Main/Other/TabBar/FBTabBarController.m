@@ -32,7 +32,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
+
     [self setTabBarController];
     
     /**
@@ -42,7 +42,6 @@
     FBTabBar * tabBar = [[FBTabBar alloc] init];
     [self setValue:tabBar forKey:@"tabBar"];
     [tabBar.createBtn addTarget:self action:@selector(createBtnClick) forControlEvents:(UIControlEventTouchUpInside)];
-
     
     //设置代理
     self.delegate = self;
@@ -51,10 +50,7 @@
 
 - (BOOL)tabBarController:(UITabBarController *)tabBarController shouldSelectViewController:(UIViewController *)viewController
 {
-//    NSLog(@"--tabbaritem.title--%@",viewController.tabBarItem.title);
-    
     //这里我判断的是当前点击的tabBarItem的标题
-    NSLog(@"点击了    %@",viewController.tabBarItem.title);
     if ([viewController.tabBarItem.title isEqualToString:@"我"]) {
         UserInfoEntity *entity = [UserInfoEntity defaultUserInfoEntity];
         FBRequest * request = [FBAPI postWithUrlString:@"/auth/check_login" requestDictionary:nil delegate:self];
@@ -118,13 +114,17 @@
  *  @Param seletedImage 点击后的图标
  */
 - (void)setChildViewController:(UIViewController *)vc image:(NSString *)image seletedImage:(NSString *)seletedImage itemTitle:(NSString *)title {
-    vc.tabBarItem.image = [UIImage imageNamed:image];
+    UIImage * img = [UIImage imageNamed:image];
+    img = [img imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
+    vc.tabBarItem.image = img;
     vc.tabBarItem.selectedImage = [UIImage imageNamed:seletedImage];
     vc.tabBarItem.title = title;
     
     //  tabBarItem点击的文字颜色
     [vc.tabBarItem setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys:[UIColor colorWithHexString:tabBarTitle alpha:1], NSForegroundColorAttributeName, nil] forState:(UIControlStateNormal)];
     [vc.tabBarItem setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys:[UIColor colorWithHexString:fineixColor alpha:1], NSForegroundColorAttributeName, nil] forState:(UIControlStateSelected)];
+    
+    [vc.tabBarItem setTitlePositionAdjustment:UIOffsetMake(0, -2)];
     
     //  设置tabBarItem点击颜色为原图标颜色
     UIImage * seletedimg = [UIImage imageNamed:seletedImage];

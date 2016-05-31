@@ -15,7 +15,8 @@
 "addUrl" = "添加链接";
 "filter" = "滤镜";
 "addDescription" = "添加描述";
-"addTitle" = "添加标题";
+"addFiuSceneDes" = "请添加140字以内的情景描述";
+"addTitle" = "请输入20字以内的标题";
 "addLocation" = "添加地点";
 "tag" = "标签";
 "onScene" = "所属情境";
@@ -32,7 +33,7 @@
 "locationVcTitle" = "位置";
 "addTagVcTitle" = "添加标签";
 "chooseSceneVcTitle" = "选择情景";
-"filterVcTitle" = "滤镜";
+"filterVcTitle" = "选择滤镜";
 "GoodsCategoryVcTitle" = "好货分类";
 "GoodsInfoVcTitle" = "产品详情";
 "CommentVcTitle" = "评论";
@@ -124,10 +125,15 @@
 //  标题
 "AllGoods" = "全部";
 "fiuFriend" = "热Fiuer";
+"fiuFriendText" = "[有Bigger不低调]";
 "fiuScene" = "High场景";
+"fiuSceneText" = "[谁用谁上瘾]";
 "fiuFScene" = "新Land";
+"fiuFSceneText" = "[圈地有收益]";
 "fiuBrand" = "牛Brands";
+"fiuBrandText" = "[尖货这里找]";
 "fiuGoods" = "Fiu东西";
+"fiuGoodsText" = "[东西不少，牌子不小]";
 "peopleLike" = "人赞";
 "sceneGoods" = "此场景下的商品";
 "sceneLikeGoods" = "相近的商品";

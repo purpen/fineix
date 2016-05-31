@@ -16,5 +16,8 @@
 @pro_strong UIImageView         *   imageView;        //    场景照片
 @pro_strong UITextView          *   content;          //    场景描述内容
 @pro_strong UITextField         *   title;            //    场景标题
+@pro_strong NSString            *   type;             //    创建类型
+
+- (void)getCreateType:(NSString *)type;
 
 @end

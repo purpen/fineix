@@ -18,6 +18,13 @@
         self.selectionStyle = UITableViewCellSelectionStyleNone;
         self.backgroundColor = [UIColor whiteColor];
         [self addSubview:self.menuView];
+        
+        UILabel * lineLab = [[UILabel alloc] initWithFrame:CGRectMake(0, 209, SCREEN_WIDTH, 1)];
+        lineLab.backgroundColor = [UIColor colorWithHexString:@"E6E6E6" alpha:.8];
+        [self addSubview:lineLab];
+        
+        [self addSubview:lineLab];
+        
     }
     return self;
 }
@@ -37,12 +44,14 @@
     if (!_menuView) {
         UICollectionViewFlowLayout * flowLayout = [[UICollectionViewFlowLayout alloc] init];
         flowLayout.itemSize = CGSizeMake(60, 105);
+        flowLayout.minimumLineSpacing = 0.0f;
         flowLayout.sectionInset = UIEdgeInsetsMake(0, 10, 0, 10);
-        [flowLayout setScrollDirection:(UICollectionViewScrollDirectionHorizontal)];
+        [flowLayout setScrollDirection:(UICollectionViewScrollDirectionVertical)];
         
-        _menuView = [[UICollectionView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 105) collectionViewLayout:flowLayout];
+        _menuView = [[UICollectionView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 210) collectionViewLayout:flowLayout];
         _menuView.delegate = self;
         _menuView.dataSource = self;
+        _menuView.scrollEnabled = NO;
         _menuView.backgroundColor = [UIColor whiteColor];
         _menuView.showsVerticalScrollIndicator = NO;
         _menuView.showsHorizontalScrollIndicator = NO;

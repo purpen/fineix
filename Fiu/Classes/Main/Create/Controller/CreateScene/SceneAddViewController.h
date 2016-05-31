@@ -1,8 +1,8 @@
 //
-//  FiltersViewController.h
-//  fineix
+//  SceneAddViewController.h
+//  Fiu
 //
-//  Created by FLYang on 16/3/2.
+//  Created by FLYang on 16/5/30.
 //  Copyright © 2016年 taihuoniao. All rights reserved.
 //
 
@@ -11,11 +11,10 @@
 #import "FiltersView.h"
 #import "ChangeAddUrlView.h"
 
-@interface FiltersViewController : FBPictureViewController
+@interface SceneAddViewController : FBPictureViewController
 
 @pro_strong NSString            *   createType;             //  创建类型（场景/情景）
 @pro_strong NSArray             *   locationArr;            //  照片位置
-@pro_strong FiltersView         *   filtersView;            //  滤镜视图
 @pro_strong FBFootView          *   footView;               //  底部工具栏
 @pro_strong UIImageView         *   filtersImageView;       //  需要处理的图片视图
 @pro_strong UIImage             *   filtersImg;             //  需要处理的图片
@@ -25,6 +24,7 @@
 @pro_strong ChangeAddUrlView    *   changeGoodsView;        //  编辑产品
 @pro_strong FBRequest           *   deleteUserGoods;
 @pro_assign NSInteger               seleIndex;
+
 /**
  *  添加标签
  *  标题／价格／坐标

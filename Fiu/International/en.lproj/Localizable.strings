@@ -7,21 +7,22 @@
 */
 
 //  创建场景
-"next" = "Next";
-"album" = "Photos";
-"camera" = "Camera";
-"takePhotos" = "Photo";
+"next" = "继续";
+"album" = "相册";
+"camera" = "相机";
+"takePhotos" = "拍照";
 "marker" = "标记产品";
-"addUrl" = "Add links";
-"filter" = "Filters";
-"addDescription" = "Say something……";
-"addTitle" = "Add titles";
-"addLocation" = "Add location";
-"tag" = "Tags";
-"onScene" = "Belong to";
-"release" = "Send";
-"cancel" = "Cancel";
-"sure" = "OK";
+"addUrl" = "添加链接";
+"filter" = "滤镜";
+"addDescription" = "添加描述";
+"addFiuSceneDes" = "请添加140字以内的情景描述";
+"addTitle" = "请输入20字以内的标题";
+"addLocation" = "添加地点";
+"tag" = "标签";
+"onScene" = "所属情境";
+"release" = "发布";
+"cancel" = "取消";
+"sure" = "确定";
 
 //  控制器页面标题
 "createVcTitle" = "照片胶卷";
@@ -32,7 +33,7 @@
 "locationVcTitle" = "位置";
 "addTagVcTitle" = "添加标签";
 "chooseSceneVcTitle" = "选择情景";
-"filterVcTitle" = "滤镜";
+"filterVcTitle" = "选择滤镜";
 "GoodsCategoryVcTitle" = "好货分类";
 "GoodsInfoVcTitle" = "产品详情";
 "CommentVcTitle" = "评论";
@@ -121,40 +122,33 @@
 "buyingGoods" = "立即购买";
 "goBuyGoods" = "去购买";
 
-//  分类
-"AllGoods" = "全部";
-
-//  滤镜
-"FiltersName" = "NORMAL";
-"FiltersNameA" = "MOCHA";
-"FiltersNameB" = "TWILIGHT";
-"FiltersNameC" = "VISITANT";
-"FiltersNameD" = "DRAMA";
-"FiltersNameE" = "SUMMER";
-"FiltersNameF" = "METROPOLIS";
-"FiltersNameG" = "BEAUTY";
-"FiltersNameH" = "MODERN";
-"FiltersNameI" = "TIMES";
-"FiltersNameJ" = "SUNSHINE";
-"FiltersNameK" = "TEATIME";
-
 //  标题
 "AllGoods" = "全部";
-"fiuFriend" = "Trending  Fiuers";
+"fiuFriend" = "热Fiuer";
+"fiuFriendText" = "[有Bigger不低调]";
 "fiuScene" = "High场景";
-"fiuFScene" = "Trending  Scenes";
+"fiuSceneText" = "[谁用谁上瘾]";
+"fiuFScene" = "新Land";
+"fiuFSceneText" = "[圈地有收益]";
 "fiuBrand" = "牛Brands";
+"fiuBrandText" = "[尖货这里找]";
 "fiuGoods" = "Fiu东西";
-"peopleLike" = "likes";
-"sceneGoods" = "All products in this scene";
-"sceneLikeGoods" = "Related items";
+"fiuGoodsText" = "[东西不少，牌子不小]";
+"peopleLike" = "人赞";
+"sceneGoods" = "此场景下的商品";
+"sceneLikeGoods" = "相近的商品";
 
-//登录注册
-"passwordDigits" = "The password may not be less than six";
-"loginSuccessful" = "Login successful";
-"phoneNumberNotCorrect" = "Phone number format is not correct";
-"registeredSuccessfully" = "Registered successfully";
-"cancel" = "cancel";
-"determine" = "determine";
-"enterCorrectPhoneNumber" = "Please enter a correct phone number";
-"enterVerificationCode" = "Please enter the verification code";
+//  滤镜
+"FiltersName" = "原图";
+"FiltersNameA" = "摩卡";
+"FiltersNameB" = "暮光";
+"FiltersNameC" = "候鸟";
+"FiltersNameD" = "戏剧";
+"FiltersNameE" = "夏日";
+"FiltersNameF" = "都市";
+"FiltersNameG" = "佳人";
+"FiltersNameH" = "摩登";
+"FiltersNameI" = "流年";
+
+"FiltersNameJ" = "日光";
+"FiltersNameK" = "午茶";

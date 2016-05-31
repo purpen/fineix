@@ -23,12 +23,6 @@
 		1F27AE921CE06C70005A434B /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1F27AE911CE06C70005A434B /* CFNetwork.framework */; };
 		1F27AE941CE06C7E005A434B /* CoreMotion.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1F27AE931CE06C7E005A434B /* CoreMotion.framework */; };
 		1F27AE9C1CE0EACE005A434B /* mapapi.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 1F27AE9B1CE0EACE005A434B /* mapapi.bundle */; };
-		1F2A8F2E1CF40277005116C7 /* ClipImageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F2A8BD31CF40276005116C7 /* ClipImageViewController.m */; };
-		1F2A8F2F1CF40277005116C7 /* CreateViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F2A8BD51CF40276005116C7 /* CreateViewController.m */; };
-		1F2A8F301CF40277005116C7 /* CropImageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F2A8BD71CF40276005116C7 /* CropImageViewController.m */; };
-		1F2A8F311CF40277005116C7 /* FiltersViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F2A8BD91CF40276005116C7 /* FiltersViewController.m */; };
-		1F2A8F321CF40277005116C7 /* LookSceneViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F2A8BDB1CF40276005116C7 /* LookSceneViewController.m */; };
-		1F2A8F331CF40277005116C7 /* ReleaseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F2A8BDD1CF40276005116C7 /* ReleaseViewController.m */; };
 		1F2A8F341CF40277005116C7 /* SearchLocationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F2A8BE01CF40276005116C7 /* SearchLocationViewController.m */; };
 		1F2A8F351CF40277005116C7 /* MarkGoodsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F2A8BE31CF40276005116C7 /* MarkGoodsViewController.m */; };
 		1F2A8F361CF40277005116C7 /* AllNearbyScenarioViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F2A8BE61CF40276005116C7 /* AllNearbyScenarioViewController.m */; };
@@ -493,6 +487,13 @@
 		D8B795271CF48AFB0075D985 /* ShareStyleBottomView.m in Sources */ = {isa = PBXBuildFile; fileRef = D8B795261CF48AFB0075D985 /* ShareStyleBottomView.m */; };
 		D8B7952A1CF48B1D0075D985 /* ShareStyleTitleTopView.m in Sources */ = {isa = PBXBuildFile; fileRef = D8B795291CF48B1D0075D985 /* ShareStyleTitleTopView.m */; };
 		D8B7952D1CF48B2C0075D985 /* ShareStyleTitleBottomView.m in Sources */ = {isa = PBXBuildFile; fileRef = D8B7952C1CF48B2C0075D985 /* ShareStyleTitleBottomView.m */; };
+		D8E3AEB61CFC9B84006E5E8C /* ClipImageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D8E3AEA91CFC9B84006E5E8C /* ClipImageViewController.m */; };
+		D8E3AEB71CFC9B84006E5E8C /* CreateViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D8E3AEAB1CFC9B84006E5E8C /* CreateViewController.m */; };
+		D8E3AEB81CFC9B84006E5E8C /* CropImageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D8E3AEAD1CFC9B84006E5E8C /* CropImageViewController.m */; };
+		D8E3AEB91CFC9B84006E5E8C /* FiltersViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D8E3AEAF1CFC9B84006E5E8C /* FiltersViewController.m */; };
+		D8E3AEBA1CFC9B84006E5E8C /* LookSceneViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D8E3AEB11CFC9B84006E5E8C /* LookSceneViewController.m */; };
+		D8E3AEBB1CFC9B84006E5E8C /* ReleaseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D8E3AEB31CFC9B84006E5E8C /* ReleaseViewController.m */; };
+		D8E3AEBC1CFC9B84006E5E8C /* SceneAddViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D8E3AEB51CFC9B84006E5E8C /* SceneAddViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -516,18 +517,6 @@
 		1F27AE911CE06C70005A434B /* CFNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = System/Library/Frameworks/CFNetwork.framework; sourceTree = SDKROOT; };
 		1F27AE931CE06C7E005A434B /* CoreMotion.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMotion.framework; path = System/Library/Frameworks/CoreMotion.framework; sourceTree = SDKROOT; };
 		1F27AE9B1CE0EACE005A434B /* mapapi.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; name = mapapi.bundle; path = Fiu/Vendors/BaiduMapSDK/BaiduMapAPI_Map.framework/Resources/mapapi.bundle; sourceTree = "<group>"; };
-		1F2A8BD21CF40276005116C7 /* ClipImageViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ClipImageViewController.h; sourceTree = "<group>"; };
-		1F2A8BD31CF40276005116C7 /* ClipImageViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ClipImageViewController.m; sourceTree = "<group>"; };
-		1F2A8BD41CF40276005116C7 /* CreateViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CreateViewController.h; sourceTree = "<group>"; };
-		1F2A8BD51CF40276005116C7 /* CreateViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CreateViewController.m; sourceTree = "<group>"; };
-		1F2A8BD61CF40276005116C7 /* CropImageViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CropImageViewController.h; sourceTree = "<group>"; };
-		1F2A8BD71CF40276005116C7 /* CropImageViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CropImageViewController.m; sourceTree = "<group>"; };
-		1F2A8BD81CF40276005116C7 /* FiltersViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FiltersViewController.h; sourceTree = "<group>"; };
-		1F2A8BD91CF40276005116C7 /* FiltersViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FiltersViewController.m; sourceTree = "<group>"; };
-		1F2A8BDA1CF40276005116C7 /* LookSceneViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LookSceneViewController.h; sourceTree = "<group>"; };
-		1F2A8BDB1CF40276005116C7 /* LookSceneViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LookSceneViewController.m; sourceTree = "<group>"; };
-		1F2A8BDC1CF40276005116C7 /* ReleaseViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ReleaseViewController.h; sourceTree = "<group>"; };
-		1F2A8BDD1CF40276005116C7 /* ReleaseViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ReleaseViewController.m; sourceTree = "<group>"; };
 		1F2A8BDF1CF40276005116C7 /* SearchLocationViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SearchLocationViewController.h; sourceTree = "<group>"; };
 		1F2A8BE01CF40276005116C7 /* SearchLocationViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SearchLocationViewController.m; sourceTree = "<group>"; };
 		1F2A8BE21CF40276005116C7 /* MarkGoodsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MarkGoodsViewController.h; sourceTree = "<group>"; };
@@ -1372,6 +1361,20 @@
 		D8B795291CF48B1D0075D985 /* ShareStyleTitleTopView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ShareStyleTitleTopView.m; sourceTree = "<group>"; };
 		D8B7952B1CF48B2C0075D985 /* ShareStyleTitleBottomView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShareStyleTitleBottomView.h; sourceTree = "<group>"; };
 		D8B7952C1CF48B2C0075D985 /* ShareStyleTitleBottomView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ShareStyleTitleBottomView.m; sourceTree = "<group>"; };
+		D8E3AEA81CFC9B84006E5E8C /* ClipImageViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ClipImageViewController.h; sourceTree = "<group>"; };
+		D8E3AEA91CFC9B84006E5E8C /* ClipImageViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ClipImageViewController.m; sourceTree = "<group>"; };
+		D8E3AEAA1CFC9B84006E5E8C /* CreateViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CreateViewController.h; sourceTree = "<group>"; };
+		D8E3AEAB1CFC9B84006E5E8C /* CreateViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CreateViewController.m; sourceTree = "<group>"; };
+		D8E3AEAC1CFC9B84006E5E8C /* CropImageViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CropImageViewController.h; sourceTree = "<group>"; };
+		D8E3AEAD1CFC9B84006E5E8C /* CropImageViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CropImageViewController.m; sourceTree = "<group>"; };
+		D8E3AEAE1CFC9B84006E5E8C /* FiltersViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FiltersViewController.h; sourceTree = "<group>"; };
+		D8E3AEAF1CFC9B84006E5E8C /* FiltersViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FiltersViewController.m; sourceTree = "<group>"; };
+		D8E3AEB01CFC9B84006E5E8C /* LookSceneViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LookSceneViewController.h; sourceTree = "<group>"; };
+		D8E3AEB11CFC9B84006E5E8C /* LookSceneViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LookSceneViewController.m; sourceTree = "<group>"; };
+		D8E3AEB21CFC9B84006E5E8C /* ReleaseViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ReleaseViewController.h; sourceTree = "<group>"; };
+		D8E3AEB31CFC9B84006E5E8C /* ReleaseViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ReleaseViewController.m; sourceTree = "<group>"; };
+		D8E3AEB41CFC9B84006E5E8C /* SceneAddViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SceneAddViewController.h; sourceTree = "<group>"; };
+		D8E3AEB51CFC9B84006E5E8C /* SceneAddViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SceneAddViewController.m; sourceTree = "<group>"; };
 		E0438B4B24E3F747F761AF4C /* Pods-Fiu.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Fiu.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Fiu/Pods-Fiu.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -1477,7 +1480,8 @@
 		1F2A8BD01CF40276005116C7 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
-				1F2A8BD11CF40276005116C7 /* Create */,
+				D8E3AEA61CFC9B84006E5E8C /* CreateFiuScene */,
+				D8E3AEA71CFC9B84006E5E8C /* CreateScene */,
 				1F2A8BDE1CF40276005116C7 /* Location */,
 				1F2A8BE11CF40276005116C7 /* Mark */,
 				1F2A8BE41CF40276005116C7 /* SelectScene */,
@@ -1485,25 +1489,6 @@
 				1F2A8BF11CF40276005116C7 /* Url */,
 			);
 			path = Controller;
-			sourceTree = "<group>";
-		};
-		1F2A8BD11CF40276005116C7 /* Create */ = {
-			isa = PBXGroup;
-			children = (
-				1F2A8BD21CF40276005116C7 /* ClipImageViewController.h */,
-				1F2A8BD31CF40276005116C7 /* ClipImageViewController.m */,
-				1F2A8BD41CF40276005116C7 /* CreateViewController.h */,
-				1F2A8BD51CF40276005116C7 /* CreateViewController.m */,
-				1F2A8BD61CF40276005116C7 /* CropImageViewController.h */,
-				1F2A8BD71CF40276005116C7 /* CropImageViewController.m */,
-				1F2A8BD81CF40276005116C7 /* FiltersViewController.h */,
-				1F2A8BD91CF40276005116C7 /* FiltersViewController.m */,
-				1F2A8BDC1CF40276005116C7 /* ReleaseViewController.h */,
-				1F2A8BDD1CF40276005116C7 /* ReleaseViewController.m */,
-				1F2A8BDA1CF40276005116C7 /* LookSceneViewController.h */,
-				1F2A8BDB1CF40276005116C7 /* LookSceneViewController.m */,
-			);
-			path = Create;
 			sourceTree = "<group>";
 		};
 		1F2A8BDE1CF40276005116C7 /* Location */ = {
@@ -3696,6 +3681,34 @@
 			path = DataBase;
 			sourceTree = "<group>";
 		};
+		D8E3AEA61CFC9B84006E5E8C /* CreateFiuScene */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = CreateFiuScene;
+			sourceTree = "<group>";
+		};
+		D8E3AEA71CFC9B84006E5E8C /* CreateScene */ = {
+			isa = PBXGroup;
+			children = (
+				D8E3AEA81CFC9B84006E5E8C /* ClipImageViewController.h */,
+				D8E3AEA91CFC9B84006E5E8C /* ClipImageViewController.m */,
+				D8E3AEAA1CFC9B84006E5E8C /* CreateViewController.h */,
+				D8E3AEAB1CFC9B84006E5E8C /* CreateViewController.m */,
+				D8E3AEAC1CFC9B84006E5E8C /* CropImageViewController.h */,
+				D8E3AEAD1CFC9B84006E5E8C /* CropImageViewController.m */,
+				D8E3AEB41CFC9B84006E5E8C /* SceneAddViewController.h */,
+				D8E3AEB51CFC9B84006E5E8C /* SceneAddViewController.m */,
+				D8E3AEAE1CFC9B84006E5E8C /* FiltersViewController.h */,
+				D8E3AEAF1CFC9B84006E5E8C /* FiltersViewController.m */,
+				D8E3AEB21CFC9B84006E5E8C /* ReleaseViewController.h */,
+				D8E3AEB31CFC9B84006E5E8C /* ReleaseViewController.m */,
+				D8E3AEB01CFC9B84006E5E8C /* LookSceneViewController.h */,
+				D8E3AEB11CFC9B84006E5E8C /* LookSceneViewController.m */,
+			);
+			path = CreateScene;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -3908,6 +3921,7 @@
 				1F2A8FA21CF40277005116C7 /* DataNumTableViewCell.m in Sources */,
 				1F2A90511CF40277005116C7 /* ImproView.m in Sources */,
 				1F2A8F6C1CF40277005116C7 /* FiuPeopleUser.m in Sources */,
+				D8E3AEBB1CFC9B84006E5E8C /* ReleaseViewController.m in Sources */,
 				1F2A90831CF40277005116C7 /* CommentView.m in Sources */,
 				1F2A905C1CF40277005116C7 /* MentionedViewController.m in Sources */,
 				1F2A8F6E1CF40277005116C7 /* FiuSceneData.m in Sources */,
@@ -3967,12 +3981,12 @@
 				1F2A8F601CF40277005116C7 /* AddUrlView.m in Sources */,
 				1F2A8F401CF40277005116C7 /* MarkGoods.m in Sources */,
 				1F2A90011CF40277005116C7 /* CounterModel.m in Sources */,
-				1F2A8F301CF40277005116C7 /* CropImageViewController.m in Sources */,
 				D80D415E1CAD144D005D72B1 /* UIBarButtonItem+Helper.m in Sources */,
 				1F2A8FD91CF40277005116C7 /* FBGoodsCommentTableViewCell.m in Sources */,
 				1F2A90291CF40277005116C7 /* TagsCollectionViewCell.m in Sources */,
 				D8A9AE401CE304FF00A9FCFB /* NSTimer+Addition.m in Sources */,
 				D8329DEF1CF611F800611025 /* ShareInfo.m in Sources */,
+				D8E3AEBC1CFC9B84006E5E8C /* SceneAddViewController.m in Sources */,
 				1F2A8F701CF40277005116C7 /* FiuSceneInfoCounter.m in Sources */,
 				1F2A8FFF1CF40277005116C7 /* AddreesModel.m in Sources */,
 				1F2A8F4D1CF40277005116C7 /* FiltersView.m in Sources */,
@@ -4030,7 +4044,6 @@
 				1F2A8F641CF40277005116C7 /* UserGoodsTag.m in Sources */,
 				1F2A90331CF40277005116C7 /* ChatTableViewCell.m in Sources */,
 				1F2A8F591CF40277005116C7 /* AllTagListTableViewCell.m in Sources */,
-				1F2A8F2E1CF40277005116C7 /* ClipImageViewController.m in Sources */,
 				1F2A90271CF40277005116C7 /* CertIdView.m in Sources */,
 				1F96D89A1CF9A1F6003014FF /* UITabBar+badge.m in Sources */,
 				1F2A908B1CF40277005116C7 /* PaySuccessViewController.m in Sources */,
@@ -4043,8 +4056,6 @@
 				1F2A8F971CF40277005116C7 /* SceneInfo.m in Sources */,
 				D812815A1CAA8532007CF08B /* fineix.xcdatamodeld in Sources */,
 				1F2A8F7B1CF40277005116C7 /* HotTagsRow.m in Sources */,
-				1F2A8F331CF40277005116C7 /* ReleaseViewController.m in Sources */,
-				1F2A8F321CF40277005116C7 /* LookSceneViewController.m in Sources */,
 				1F2A8F6A1CF40277005116C7 /* FiuPeopleData.m in Sources */,
 				1F2A90501CF40277005116C7 /* TurnPageLayout.m in Sources */,
 				1F2A8FBE1CF40277005116C7 /* ChildTagsTag.m in Sources */,
@@ -4158,15 +4169,18 @@
 				1F2A8F801CF40277005116C7 /* FiuPeopleTableViewCell.m in Sources */,
 				1F2A900F1CF40277005116C7 /* FriendTableViewCell.m in Sources */,
 				1F2A8F731CF40277005116C7 /* FiuSceneInfoUserInfo.m in Sources */,
+				D8E3AEB61CFC9B84006E5E8C /* ClipImageViewController.m in Sources */,
 				1F2A8F891CF40277005116C7 /* FBShareViewController.m in Sources */,
 				1F2A8FD31CF40277005116C7 /* FBCarItemsTableViewCell.m in Sources */,
 				1F2A90711CF40277005116C7 /* JDOrderViewController.m in Sources */,
+				D8E3AEB91CFC9B84006E5E8C /* FiltersViewController.m in Sources */,
 				1F2A8F351CF40277005116C7 /* MarkGoodsViewController.m in Sources */,
 				1F2A8FB41CF40277005116C7 /* BrandInfoData.m in Sources */,
 				1F2A8F781CF40277005116C7 /* RollImageRow.m in Sources */,
 				1F2A8FAA1CF40277005116C7 /* FBGoodsCommentViewController.m in Sources */,
 				D87B69BF1CC726BA00199EFE /* FBRollImages.m in Sources */,
 				1F2A8F991CF40277005116C7 /* SceneInfoData.m in Sources */,
+				D8E3AEB81CFC9B84006E5E8C /* CropImageViewController.m in Sources */,
 				1F2A8F8E1CF40277005116C7 /* HomeSceneListLocation.m in Sources */,
 				1F2A8FA01CF40277005116C7 /* CommentTableViewCell.m in Sources */,
 				1F2A8FBA1CF40277005116C7 /* CategoryData.m in Sources */,
@@ -4175,6 +4189,7 @@
 				1F2A90AB1CF40277005116C7 /* ChanePwdViewController.m in Sources */,
 				1F2A8F5A1CF40277005116C7 /* ChooseTagsCollectionViewCell.m in Sources */,
 				1F2A8F3E1CF40277005116C7 /* FindGoodsModelData.m in Sources */,
+				D8E3AEBA1CFC9B84006E5E8C /* LookSceneViewController.m in Sources */,
 				D8B7952D1CF48B2C0075D985 /* ShareStyleTitleBottomView.m in Sources */,
 				1F2A90381CF40277005116C7 /* GuidePageViewController.m in Sources */,
 				1F2A90161CF40277005116C7 /* ScenceListCollectionViewCell.m in Sources */,
@@ -4185,7 +4200,6 @@
 				1F2A90131CF40277005116C7 /* MyQrCodeView.m in Sources */,
 				1F2A90401CF40277005116C7 /* CityTwoTableViewCell.m in Sources */,
 				1F2A8F481CF40277005116C7 /* CameraView.m in Sources */,
-				1F2A8F2F1CF40277005116C7 /* CreateViewController.m in Sources */,
 				1F2A8F471CF40277005116C7 /* PictureToolViewController.m in Sources */,
 				1F2A90981CF40277005116C7 /* CommentUser.m in Sources */,
 				1F2A900B1CF40277005116C7 /* ChanelView.m in Sources */,
@@ -4239,9 +4253,9 @@
 				1F2A8FEB1CF40277005116C7 /* DatePickerViewController.m in Sources */,
 				1F2A8FDA1CF40277005116C7 /* GoodsImgCollectionViewCell.m in Sources */,
 				1F2A8F841CF40277005116C7 /* FiuUserInfoTableViewCell.m in Sources */,
+				D8E3AEB71CFC9B84006E5E8C /* CreateViewController.m in Sources */,
 				1F2A8F3D1CF40277005116C7 /* FindGoodsModel.m in Sources */,
 				D8035F2F1CB77D0C001920F9 /* UIImage+Helper.m in Sources */,
-				1F2A8F311CF40277005116C7 /* FiltersViewController.m in Sources */,
 				D8035F3B1CB784B3001920F9 /* UILable+Frame.m in Sources */,
 				1F2A8FE01CF40277005116C7 /* InfoRecommendTableViewCell.m in Sources */,
 				1F2A8F721CF40277005116C7 /* FiuSceneInfoLocation.m in Sources */,

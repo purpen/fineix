@@ -57,6 +57,9 @@ static NSString *const URLReleaseFiuScenen = @"/scene_scene/save";
     if ([self.lng length] <= 0 || [title isEqualToString:@""] || [des isEqualToString:@""] || [self.addView.location.text isEqualToString:@""] || self.tagS.length <=0 || self.fSceneId.length <= 0) {
         [SVProgressHUD showInfoWithStatus:@"填写未完成"];
 
+    } else if (title.length > 20) {
+        [SVProgressHUD showInfoWithStatus:@"请输入20字以内的标题"];
+        
     } else {
         [SVProgressHUD showWithMaskType:SVProgressHUDMaskTypeBlack];
         NSData * imageData = UIImageJPEGRepresentation(self.scenceView.imageView.image, 0.7);
@@ -98,6 +101,12 @@ static NSString *const URLReleaseFiuScenen = @"/scene_scene/save";
     
     if ([self.lng length] <= 0 || [title isEqualToString:@""] || [des isEqualToString:@""] || [self.addView.location.text isEqualToString:@""] || self.tagS.length <=0) {
         [SVProgressHUD showInfoWithStatus:@"填写未完成"];
+    } else if (title.length > 20) {
+        [SVProgressHUD showInfoWithStatus:@"请输入20字以内的标题"];
+        
+    } else if (des.length > 140) {
+        [SVProgressHUD showInfoWithStatus:@"请输入140字以内的描述"];
+        
     } else {
         [SVProgressHUD showWithMaskType:SVProgressHUDMaskTypeBlack];
         NSData * imageData = UIImageJPEGRepresentation(self.scenceView.imageView.image, 0.7);
@@ -114,7 +123,6 @@ static NSString *const URLReleaseFiuScenen = @"/scene_scene/save";
         self.releaseSceneRequest = [FBAPI postWithUrlString:URLReleaseFiuScenen requestDictionary:paramDict delegate:self];
         
         [self.releaseSceneRequest startRequestSuccess:^(FBRequest *request, id result) {
-//            NSString * fiuSceneId = [NSString stringWithFormat:@"%@",[[result valueForKey:@"data"] valueForKey:@"id"]];
             //  to #import "AllSceneViewController.h"
             [[NSNotificationCenter defaultCenter] postNotificationName:@"refreshAllFSceneList" object:nil];
             [self dismissViewControllerAnimated:YES completion:nil];
@@ -143,13 +151,14 @@ static NSString *const URLReleaseFiuScenen = @"/scene_scene/save";
     } else if ([self.createType isEqualToString:@"fScene"]) {
         self.addView.addScene.hidden = YES;
     }
+
     [self.view addSubview:self.scenceView];
+    [self.scenceView getCreateType:self.createType];
     
     [self.view addSubview:self.addView];
     
     //  add #import "ScenceAddMoreView.h"
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(locationArr:) name:@"locationArr" object:nil];
-
 }
 
 - (void)locationArr:(NSNotification *)locationArr {

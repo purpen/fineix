@@ -1,5 +1,5 @@
 //
-//  ReleaseViewController.h
+//  FiltersViewController.h
 //  fineix
 //
 //  Created by FLYang on 16/3/2.
@@ -7,15 +7,17 @@
 //
 
 #import "FBPictureViewController.h"
-#import "Fiu.h"
-#import "ScenceMessageView.h"
-#import "ScenceAddMoreView.h"
-#import <SVProgressHUD/SVProgressHUD.h>
+#import "FBFootView.h"
+#import "FiltersView.h"
+#import "ChangeAddUrlView.h"
 
-@interface ReleaseViewController : FBPictureViewController
+@interface FiltersViewController : FBPictureViewController
 
-@pro_strong FBRequest           *   releaseSceneRequest;
-@pro_strong FBRequest           *   releaseFiuSceneRequest;
+@pro_strong FiltersView         *   filtersView;            //  滤镜视图
+@pro_strong UIImageView         *   filtersImageView;       //  需要处理的图片视图
+@pro_strong NSString            *   filterName;             //  选择的滤镜名字
+
+@pro_strong UIImage             *   filtersImg;             //  需要处理的图片
 @pro_strong NSString            *   createType;             //  创建类型（场景/情景）
 @pro_strong NSString            *   goodsTitle;             //  商品标题
 @pro_strong NSString            *   goodsId;                //  商品id
@@ -28,7 +30,11 @@
 @pro_strong NSString            *   lat;                    //  经度
 @pro_strong NSString            *   lng;                    //  纬度
 @pro_strong NSArray             *   locationArr;            //  照片位置
-@pro_strong ScenceMessageView   *   scenceView;             //  图片\描述\标题
-@pro_strong ScenceAddMoreView   *   addView;                //  添加地点\标签\场景
+
+/**
+ *  添加标签
+ *  标题／价格／坐标
+ */
+@pro_strong NSMutableArray      *   popData;
 
 @end

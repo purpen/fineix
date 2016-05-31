@@ -26,7 +26,7 @@
 #import "FBLoginRegisterViewController.h"
 #import "CounterModel.h"
 #import "UITabBar+badge.h"
-
+#import "IQKeyboardManager.h"
 
 @interface AppDelegate ()<WXApiDelegate>
 {
@@ -140,7 +140,12 @@ NSString *const determineLogin = @"/auth/check_login";
     //------------------------------------------------------
     
     
-    
+    //  键盘事件
+    IQKeyboardManager *manager = [IQKeyboardManager sharedManager];
+    manager.enable = YES;
+    manager.shouldResignOnTouchOutside = YES;
+    manager.shouldToolbarUsesTextFieldTintColor = YES;
+    manager.enableAutoToolbar = NO;
     
     return YES;
 }

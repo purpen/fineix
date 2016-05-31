@@ -132,7 +132,6 @@
         [SVProgressHUD showErrorWithStatus:NSLocalizedString(@"netError", nil)];
     
     }else {
-        NSLog(@"搜索结果错误 －－－－－ %d", error);
         [SVProgressHUD showErrorWithStatus:NSLocalizedString(@"searchLocationError", nil)];
     }
 }
@@ -177,7 +176,7 @@
 
     BMKNearbySearchOption * nearbySearchOption = [[BMKNearbySearchOption alloc] init];
     nearbySearchOption.pageCapacity = 100;
-    nearbySearchOption.radius = 10000;
+    nearbySearchOption.radius = 1410065408;
     nearbySearchOption.location = CLLocationCoordinate2DMake(latitude, longitude);
     nearbySearchOption.sortType = BMK_POI_SORT_BY_DISTANCE;
     nearbySearchOption.keyword = locationKeyword;
@@ -207,7 +206,6 @@
         [SVProgressHUD showErrorWithStatus:NSLocalizedString(@"netError", nil)];
         
     } else {
-        NSLog(@"搜索结果错误 －－－－－ %d", errorCode);
         [SVProgressHUD showErrorWithStatus:NSLocalizedString(@"searchLocationError", nil)];
     }
 }

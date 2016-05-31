@@ -25,6 +25,11 @@ static const NSInteger  rollTagBtnTag = 97;
             make.top.equalTo(self.mas_top).with.offset(0);
             make.left.equalTo(self.mas_left).with.offset(0);
         }];
+        
+        UILabel * lineLab = [[UILabel alloc] initWithFrame:CGRectMake(0, 79, SCREEN_WIDTH, 1)];
+        lineLab.backgroundColor = [UIColor colorWithHexString:@"E6E6E6" alpha:.8];
+        [self addSubview:lineLab];
+        
         self.selectionStyle = UITableViewCellSelectionStyleNone;
         self.backgroundColor = [UIColor whiteColor];
     }

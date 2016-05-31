@@ -15,7 +15,7 @@
     self = [super initWithFrame:frame];
     if (self) {
         
-        self.backgroundColor = [UIColor colorWithHexString:@"#F7F7F7" alpha:1];
+        self.backgroundColor = [UIColor colorWithHexString:@"#FFFFFF" alpha:1];
         
         [self setUI];
         
@@ -24,7 +24,7 @@
 }
 
 - (void)addGroupHeaderViewIcon:(NSString *)image withTitle:(NSString *)title withSubtitle:(NSString *)subTitle {
-    self.icon.image = [UIImage imageNamed:image];
+    [self.icon setImage:[UIImage imageNamed:image] forState:(UIControlStateNormal)];
     
     CGFloat titleLength = [title boundingRectWithSize:CGSizeMake(320, 1000) options:(NSStringDrawingUsesLineFragmentOrigin) attributes:nil context:nil].size.width;
     [_headerTitle mas_updateConstraints:^(MASConstraintMaker *make) {
@@ -40,14 +40,14 @@
     [_icon mas_makeConstraints:^(MASConstraintMaker *make) {
         make.size.mas_equalTo(CGSizeMake(17.5, 18));
         make.centerY.equalTo(self);
-        make.left.equalTo(self.mas_left).with.offset(20);
+        make.left.equalTo(self.mas_left).with.offset(15);
     }];
     
     [self addSubview:self.headerTitle];
     [_headerTitle mas_makeConstraints:^(MASConstraintMaker *make) {
         make.size.mas_equalTo(CGSizeMake(65, 15));
         make.centerY.equalTo(self);
-        make.left.equalTo(self.icon.mas_right).with.offset(10);
+        make.left.equalTo(self.icon.mas_right).with.offset(7);
     }];
     
     [self addSubview:self.subTitle];
@@ -67,10 +67,9 @@
     }];
 }
 
-- (UIImageView *)icon {
+- (UIButton *)icon {
     if (!_icon) {
-        _icon = [[UIImageView alloc] init];
-        _icon.contentMode = UIViewContentModeScaleAspectFill;
+        _icon = [[UIButton alloc] init];
     }
     return _icon;
 }
@@ -78,7 +77,7 @@
 - (UILabel *)headerTitle {
     if (!_headerTitle) {
         _headerTitle = [[UILabel alloc] init];
-        _headerTitle.textColor = [UIColor colorWithHexString:titleColor alpha:1];
+        _headerTitle.textColor = [UIColor colorWithHexString:@"#222222" alpha:1];
         _headerTitle.font = [UIFont systemFontOfSize:14];
     }
     return _headerTitle;
@@ -87,7 +86,7 @@
 - (UILabel *)subTitle {
     if (!_subTitle) {
         _subTitle = [[UILabel alloc] init];
-        _subTitle.textColor = [UIColor colorWithHexString:tabBarTitle alpha:1];
+        _subTitle.textColor = [UIColor colorWithHexString:@"#666666" alpha:1];
         _subTitle.font = [UIFont systemFontOfSize:11];
     }
     return _subTitle;
@@ -97,7 +96,7 @@
     if (!_moreBtn) {
         _moreBtn = [[UIButton alloc] init];
         [_moreBtn setTitle:@"查看全部" forState:(UIControlStateNormal)];
-        [_moreBtn setTitleColor:[UIColor colorWithHexString:tabBarTitle alpha:1] forState:(UIControlStateNormal)];
+        [_moreBtn setTitleColor:[UIColor colorWithHexString:@"#666666" alpha:1] forState:(UIControlStateNormal)];
         _moreBtn.titleLabel.font = [UIFont systemFontOfSize:12];
         [_moreBtn addTarget:self action:@selector(moreFiuScene) forControlEvents:(UIControlEventTouchUpInside)];
     }

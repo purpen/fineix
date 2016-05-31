@@ -225,7 +225,7 @@ static NSString *const URLFiuPeople = @"/user/find_user";
 #pragma mark - tableView
 - (UITableView *)discoverTableView {
     if (!_discoverTableView) {
-        _discoverTableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 64, SCREEN_WIDTH, SCREEN_HEIGHT - 113) style:(UITableViewStyleGrouped)];
+        _discoverTableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 64, SCREEN_WIDTH, SCREEN_HEIGHT - 64) style:(UITableViewStyleGrouped)];
         _discoverTableView.delegate = self;
         _discoverTableView.dataSource = self;
         _discoverTableView.showsVerticalScrollIndicator = NO;
@@ -360,12 +360,12 @@ static NSString *const URLFiuPeople = @"/user/find_user";
     self.headerView.nav = self.navigationController;
     
     if (section == 0) {
-        [self.headerView addGroupHeaderViewIcon:@"Group_friend" withTitle:NSLocalizedString(@"fiuFriend", nil) withSubtitle:@"[越喜欢头像越大]"];
+        [self.headerView addGroupHeaderViewIcon:@"Group_friend" withTitle:NSLocalizedString(@"fiuFriend", nil) withSubtitle:NSLocalizedString(@"fiuFriendText", nil)];
     } else if (section ==1) {
         [self.headerView addLookMoreBtn];
-        [self.headerView addGroupHeaderViewIcon:@"Group_scene" withTitle:NSLocalizedString(@"fiuFScene", nil) withSubtitle:@"[我的地盘我收益]"];
+        [self.headerView addGroupHeaderViewIcon:@"Group_FiuScene" withTitle:NSLocalizedString(@"fiuFScene", nil) withSubtitle:NSLocalizedString(@"fiuFSceneText", nil)];
     } else if (section == 2) {
-        [self.headerView addGroupHeaderViewIcon:@"Group_scene" withTitle:NSLocalizedString(@"fiuScene", nil) withSubtitle:@"[发现不一样]"];
+        [self.headerView addGroupHeaderViewIcon:@"Group_scene" withTitle:NSLocalizedString(@"fiuScene", nil) withSubtitle:NSLocalizedString(@"fiuSceneText", nil)];
     }
     
     return self.headerView;

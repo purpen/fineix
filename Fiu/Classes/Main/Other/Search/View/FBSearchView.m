@@ -44,7 +44,7 @@
 - (UITextField *)searchInputBox {
     if (!_searchInputBox) {
         _searchInputBox = [[UITextField alloc] init];
-        _searchInputBox.clearButtonMode = UITextFieldViewModeWhileEditing;
+        _searchInputBox.clearButtonMode = UITextFieldViewModeAlways;
         _searchInputBox.font = [UIFont systemFontOfSize:Font_Content];
         _searchInputBox.returnKeyType = UIReturnKeySearch;
         _searchInputBox.delegate = self;
@@ -58,7 +58,7 @@
         _cancelBtn = [[UIButton alloc] init];
         [_cancelBtn setTitle:@"取消" forState:(UIControlStateNormal)];
         [_cancelBtn setTitleColor:[UIColor colorWithHexString:titleColor] forState:(UIControlStateNormal)];
-        _cancelBtn.titleLabel.font = [UIFont systemFontOfSize:17];
+        _cancelBtn.titleLabel.font = [UIFont systemFontOfSize:14];
         [_cancelBtn addTarget:self action:@selector(canceleSearch) forControlEvents:(UIControlEventTouchUpInside)];
     }
     return _cancelBtn;

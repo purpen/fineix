@@ -17,33 +17,23 @@
 - (instancetype)initWithFrame:(CGRect)frame {
     self = [super initWithFrame:frame];
     if (self) {
-        
         self.frame = CGRectMake(0, SCREEN_HEIGHT - 59.5, SCREEN_WIDTH, 59.5);
-        //  设置tabBar边框顶部黑线跟背景颜色
-        CGRect rect = CGRectMake(0, 0, SCREEN_WIDTH, .5f);
-        UIGraphicsBeginImageContext(rect.size);
-        CGContextRef context = UIGraphicsGetCurrentContext();
-        CGContextSetFillColorWithColor(context, [UIColor colorWithHexString:@"#E1E1E1" alpha:.1].CGColor);
-        CGContextFillRect(context, rect);
-        UIImage * img = UIGraphicsGetImageFromCurrentImageContext();
-        UIGraphicsEndImageContext();
         if (SCREEN_WIDTH <= 320) {
             self.backgroundImage = [UIImage imageNamed:@"tabBar_5"];
         } else {
             self.backgroundImage = [UIImage imageNamed:@"tabBar"];
         }
-        self.shadowImage = img;
+        
+        self.shadowImage = [UIImage new];
         self.translucent = YES;
     }
     return self;
 }
 
-
 #pragma mark - 自定义的“创建”按钮
 - (UIButton *)createBtn {
     if (!_createBtn) {
         _createBtn = [[UIButton alloc] init];
-        _createBtn.backgroundColor = [UIColor whiteColor];
         [_createBtn setImage:[UIImage imageNamed:@"Create"] forState:(UIControlStateNormal)];
         [_createBtn setImage:[UIImage imageNamed:@"Create"] forState:(UIControlStateHighlighted)];
         [_createBtn sizeToFit];
@@ -62,7 +52,6 @@
     }
     return _createTitle;
 }
-
 
 #pragma mark - 调整tabBar上item的位置和尺寸
 - (void)layoutSubviews {
@@ -97,7 +86,7 @@
     
     //  标题
     self.createTitle.frame = CGRectMake(btnX, btnY, 60, 12);
-    self.createTitle.center = CGPointMake(width * 0.5, height * 0.87);
+    self.createTitle.center = CGPointMake(width * 0.5, height * 0.87 -2);
     
 }
 

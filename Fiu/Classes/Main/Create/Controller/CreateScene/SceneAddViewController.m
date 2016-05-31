@@ -1,23 +1,24 @@
 //
-//  FiltersViewController.m
-//  fineix
+//  SceneAddViewController.m
+//  Fiu
 //
-//  Created by FLYang on 16/3/2.
+//  Created by FLYang on 16/5/30.
 //  Copyright © 2016年 taihuoniao. All rights reserved.
 //
 
-#import "FiltersViewController.h"
+#import "SceneAddViewController.h"
 #import "ReleaseViewController.h"
 #import "MarkGoodsViewController.h"
 #import "AddUrlViewController.h"
 #import "FBFilters.h"
 #import "UserGoodsTag.h"
 #import "FBStickersContainer.h"
+#import "FiltersViewController.h"
 
 static NSString *const URLDeleUserGoods = @"/scene_product/deleted";
 static NSString *const URLUserAddGoods = @"/scene_product/add";
 
-@interface FiltersViewController () <FBFootViewDelegate, FBUserGoodsTagDelegaet, FBStickerContainerDelegate> {
+@interface SceneAddViewController () <FBFootViewDelegate, FBUserGoodsTagDelegaet, FBStickerContainerDelegate> {
     UserGoodsTag    * goodsTag;
     NSString        * _title;
     NSString        * _price;
@@ -37,15 +38,13 @@ static NSString *const URLUserAddGoods = @"/scene_product/add";
 
 @end
 
-@implementation FiltersViewController
+@implementation SceneAddViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.view.backgroundColor = [UIColor blackColor];
     
     [self setFiltersControllerUI];
-    
-    [self setNotification];
     
     _idx = 391;
 }
@@ -93,29 +92,13 @@ static NSString *const URLUserAddGoods = @"/scene_product/add";
         make.bottom.equalTo(self.view.mas_bottom).with.offset(0);
         make.centerX.equalTo(self.view);
     }];
-    
-    [self.view addSubview:self.filtersView];
-    
-    //  判断是情景/场景
-    if ([self.createType isEqualToString:@"scene"]) {
-        [self setFirstAppStart];
-        [self addNavViewTitle:NSLocalizedString(@"filtersVcTitle", nil)];
-    
-    } else if ([self.createType isEqualToString:@"fScene"]) {
-        [self addNavViewTitle:NSLocalizedString(@"filterVcTitle", nil)];
-        [self.footView removeFromSuperview];
-        CGRect filtersViewRect = _filtersView.frame;
-        filtersViewRect = CGRectMake(0, SCREEN_HEIGHT - 120, SCREEN_WIDTH, 120);
-        _filtersView.frame = filtersViewRect;
-    }
-
 }
 
 #pragma mark - 底部的工具栏
 - (FBFootView *)footView {
     if (!_footView) {
         _footView = [[FBFootView alloc] init];
-        NSArray * titleArr = [[NSArray alloc] initWithObjects:NSLocalizedString(@"marker", nil), NSLocalizedString(@"addUrl", nil), NSLocalizedString(@"filter", nil), nil];
+        NSArray * titleArr = [[NSArray alloc] initWithObjects:NSLocalizedString(@"marker", nil), NSLocalizedString(@"addUrl", nil), nil];
         _footView.backgroundColor = [UIColor colorWithHexString:@"#000000" alpha:0.7];
         _footView.titleArr = titleArr;
         _footView.titleFontSize = Font_GroupHeader;
@@ -132,7 +115,6 @@ static NSString *const URLUserAddGoods = @"/scene_product/add";
     AddUrlViewController * addUrlVC = [[AddUrlViewController alloc] init];
     
     if (index == 0) {
-        [self changeFiltersFrame];
         
         [self presentViewController:markGoodsVC animated:YES completion:nil];
         markGoodsVC.getImgBlock = ^(NSString * imgUrl, NSString * title, NSString * price, NSString * ids) {
@@ -156,7 +138,6 @@ static NSString *const URLUserAddGoods = @"/scene_product/add";
         };
         
     } else if (index == 1) {
-        [self changeFiltersFrame];
         
         [self presentViewController:addUrlVC animated:YES completion:nil];
         addUrlVC.findGodosBlock = ^(NSString * title, NSString * price, NSString * ids) {
@@ -183,14 +164,6 @@ static NSString *const URLUserAddGoods = @"/scene_product/add";
             [self.userAddGoodsMarr addObject:tagDataDict];
         };
         
-    } else if (index == 2) {
-        CGRect filtersViewRect = _filtersView.frame;
-        filtersViewRect = CGRectMake(0, SCREEN_HEIGHT - 170, SCREEN_WIDTH, 120);
-        [UIView animateWithDuration:.2 animations:^{
-            _filtersView.frame = filtersViewRect;
-        }];
-        [self.view bringSubviewToFront:self.filtersView];
-        [self.view bringSubviewToFront:self.footView];
     }
 }
 
@@ -212,7 +185,7 @@ static NSString *const URLUserAddGoods = @"/scene_product/add";
         UITapGestureRecognizer * tapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(showChangeGoodsData:)];
         [tag addGestureRecognizer:tapGesture];
     }
-
+    
     [self.view addSubview:tag];
     
     [self.tagBtnMarr addObject:tag];
@@ -261,7 +234,7 @@ static NSString *const URLUserAddGoods = @"/scene_product/add";
         _changeGoodsView = [[ChangeAddUrlView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT)];
         [_changeGoodsView.sure addTarget:self action:@selector(sureChange) forControlEvents:(UIControlEventTouchUpInside)];
         [_changeGoodsView.dele addTarget:self action:@selector(deleteTag) forControlEvents:(UIControlEventTouchUpInside)];
-//        [_changeGoodsView.url addTarget:self action:@selector(urlChange) forControlEvents:(UIControlEventTouchUpInside)];
+        //        [_changeGoodsView.url addTarget:self action:@selector(urlChange) forControlEvents:(UIControlEventTouchUpInside)];
     }
     return _changeGoodsView;
 }
@@ -301,17 +274,6 @@ static NSString *const URLUserAddGoods = @"/scene_product/add";
     }
 }
 
-//  修改产品链接
-//- (void)urlChange {
-//    [self delegateThisTagBtn:self.seleIndex];
-//    [self networkDeleteUserGoods:self.goodsIdData[self.seleIndex]];
-//    [self.changeGoodsView removeFromSuperview];
-//    [self buttonDidSeletedWithIndex:1];
-//    UIButton * btn = [[UIButton alloc] init];
-//    btn = self.tagBtnMarr[self.seleIndex];
-//    [btn removeFromSuperview];
-//}
-
 #pragma mark - 处理图片的视图
 - (UIImageView *)filtersImageView {
     if (!_filtersImageView) {
@@ -319,28 +281,6 @@ static NSString *const URLUserAddGoods = @"/scene_product/add";
     }
     return _filtersImageView;
 }
-
-#pragma mark - 滤镜视图
-- (FiltersView *)filtersView {
-    if (!_filtersView) {
-        _filtersView = [[FiltersView alloc] initWithFrame:CGRectMake(SCREEN_WIDTH, SCREEN_HEIGHT - 170, SCREEN_WIDTH, 120)];
-    }
-    return _filtersView;
-}
-
-#pragma mark - 使滤镜视图消失
-- (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event {
-    [self changeFiltersFrame];
-}
-
-- (void)changeFiltersFrame {
-    CGRect filtersViewRect = _filtersView.frame;
-    filtersViewRect = CGRectMake(SCREEN_WIDTH, SCREEN_HEIGHT - 170, SCREEN_WIDTH, 120);
-    [UIView animateWithDuration:.2 animations:^{
-        _filtersView.frame = filtersViewRect;
-    }];
-}
-
 
 #pragma mark - 设置顶部导航栏
 - (void)setNavViewUI {
@@ -351,9 +291,8 @@ static NSString *const URLUserAddGoods = @"/scene_product/add";
 
 #pragma mark 继续按钮的点击事件
 - (void)nextBtnClick {
-    ReleaseViewController * releaseVC = [[ReleaseViewController alloc] init];
-    
-    if ([self.createType isEqualToString:@"scene"]) {
+//    ReleaseViewController * releaseVC = [[ReleaseViewController alloc] init];
+
         if (self.goodsIdData.count > 3) {
             [SVProgressHUD showInfoWithStatus:@"最多添加三个商品的链接"];
             
@@ -380,28 +319,34 @@ static NSString *const URLUserAddGoods = @"/scene_product/add";
             NSString * goodsTitle = [self.goodsTitleData componentsJoinedByString:@","];
             NSString * btnOriginX = [originX componentsJoinedByString:@","];
             NSString * btnOriginY = [originY componentsJoinedByString:@","];
-            
             UIImage * goodsImg = [self generateImage:self.filtersImageView];
             
-            releaseVC.locationArr = self.locationArr;
-            releaseVC.scenceView.imageView.image = goodsImg;
-            releaseVC.createType = self.createType;
-            releaseVC.fSceneId = self.fSceneId;
-            releaseVC.fSceneTitle = self.fSceneTitle;
-            releaseVC.goodsTitle = goodsTitle;
-            releaseVC.goodsPrice = goodsPrice;
-            releaseVC.goodsId = goodsId;
-            releaseVC.goodsX = btnOriginX;
-            releaseVC.goodsY = btnOriginY;
-            [self.navigationController pushViewController:releaseVC animated:YES];
+            FiltersViewController * filtersVC = [[FiltersViewController alloc] init];
+            filtersVC.createType = self.createType;
+            filtersVC.locationArr = self.locationArr;
+            filtersVC.filtersImg = goodsImg;
+            filtersVC.fSceneId = self.fSceneId;
+            filtersVC.fSceneTitle = self.fSceneTitle;
+            filtersVC.goodsTitle = goodsTitle;
+            filtersVC.goodsPrice = goodsPrice;
+            filtersVC.goodsId = goodsId;
+            filtersVC.goodsX = btnOriginX;
+            filtersVC.goodsY = btnOriginY;
+
+            [self.navigationController pushViewController:filtersVC animated:YES];
+            
+//            releaseVC.locationArr = self.locationArr;
+//            releaseVC.scenceView.imageView.image = goodsImg;
+//            releaseVC.createType = self.createType;
+//            releaseVC.fSceneId = self.fSceneId;
+//            releaseVC.fSceneTitle = self.fSceneTitle;
+//            releaseVC.goodsTitle = goodsTitle;
+//            releaseVC.goodsPrice = goodsPrice;
+//            releaseVC.goodsId = goodsId;
+//            releaseVC.goodsX = btnOriginX;
+//            releaseVC.goodsY = btnOriginY;
+//            [self.navigationController pushViewController:releaseVC animated:YES];
         }
-    
-    } else if ([self.createType isEqualToString:@"fScene"]) {
-        releaseVC.locationArr = self.locationArr;
-        releaseVC.scenceView.imageView.image = self.filtersImageView.image;
-        releaseVC.createType = self.createType;
-        [self.navigationController pushViewController:releaseVC animated:YES];
-    }
 }
 
 #pragma mark - 合成图片
@@ -434,18 +379,7 @@ static NSString *const URLUserAddGoods = @"/scene_product/add";
     return newImage;
 }
 
-
-#pragma mark - 接收消息通知
-- (void)setNotification {
-    //  from "FiltersView.m"
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(changeFilter:) name:@"fitlerName" object:nil];
-}
-
-- (void)dealloc {
-    [[NSNotificationCenter defaultCenter] removeObserver:self name:@"fitlerName" object:nil];
-}
-
-#pragma mark - 
+#pragma mark -
 - (NSMutableArray *)tagBtnMarr {
     if (!_tagBtnMarr) {
         _tagBtnMarr = [NSMutableArray array];

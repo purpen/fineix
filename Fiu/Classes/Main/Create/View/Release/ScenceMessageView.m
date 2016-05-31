@@ -14,25 +14,38 @@
     self = [super initWithFrame:frame];
     if (self) {
         self.backgroundColor = [UIColor colorWithHexString:grayLineColor alpha:1];
-        
-        [self addSubview:self.topView];
-        
-        [self addSubview:self.bottomView];
-        [_bottomView mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.size.mas_equalTo(CGSizeMake(SCREEN_WIDTH, 44.5));
-            make.top.equalTo(_topView.mas_bottom).with.offset(5);
-            make.bottom.equalTo(self.mas_bottom).with.offset(-5);
-        }];
     }
     return self;
+}
+
+- (void)getCreateType:(NSString *)type {
+    self.type = type;
+    [self setUI];
+}
+
+#pragma mark - 设置视图
+- (void)setUI {
+    [self addSubview:self.bottomView];
+    [_bottomView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.size.mas_equalTo(CGSizeMake(SCREEN_WIDTH, 44.5));
+        make.top.equalTo(self.mas_top).with.offset(0);
+        make.left.equalTo(self.mas_left).with.offset(0);
+    }];
+    
+    [self addSubview:self.topView];
+    [_topView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(self.bottomView.mas_bottom).with.offset(5);
+        make.bottom.equalTo(self.mas_bottom).with.offset(-5);
+        make.left.right.equalTo(self).with.offset(0);
+    }];
 }
 
 #pragma mark - top
 - (UIView *)topView {
     if (!_topView) {
-        _topView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 182)];
+        _topView = [[UIView alloc] init];
         _topView.backgroundColor = [UIColor whiteColor];
-        
+
         [_topView addSubview:self.imageView];
         [_imageView mas_makeConstraints:^(MASConstraintMaker *make) {
             make.size.mas_equalTo(CGSizeMake(86.62, 154));
@@ -66,8 +79,12 @@
 - (UITextView *)content {
     if (!_content) {
         _content = [[UITextView alloc] init];
-        _content.font = [UIFont systemFontOfSize:Font_GoodsPrice];
-        _content.text = NSLocalizedString(@"addDescription", nil);
+        _content.font = [UIFont systemFontOfSize:14];
+        if ([self.type isEqualToString:@"scene"]) {
+            _content.text = NSLocalizedString(@"addDescription", nil);
+        } else if ([self.type isEqualToString:@"fScene"]) {
+            _content.text = NSLocalizedString(@"addFiuSceneDes", nil);
+        }
         _content.textColor = [UIColor colorWithHexString:@"#A2A2A2" alpha:1];
         _content.delegate = self;
         _content.returnKeyType = UIReturnKeyDone;
@@ -89,7 +106,11 @@
     if ([text isEqualToString:@"\n"]) {
         [_content resignFirstResponder];
         if ([_content.text isEqualToString:@""]) {
-            _content.text = NSLocalizedString(@"addDescription", nil);
+            if ([self.type isEqualToString:@"scene"]) {
+                _content.text = NSLocalizedString(@"addDescription", nil);
+            } else if ([self.type isEqualToString:@"fScene"]) {
+                _content.text = NSLocalizedString(@"addFiuSceneDes", nil);
+            }
             _content.textColor = [UIColor colorWithHexString:@"#A2A2A2" alpha:1];
         }
         return NO;
@@ -99,7 +120,11 @@
 
 - (void)textViewDidEndEditing:(UITextView *)textView {
     if ([_content.text isEqualToString:@""]) {
-        _content.text = NSLocalizedString(@"addDescription", nil);
+        if ([self.type isEqualToString:@"scene"]) {
+            _content.text = NSLocalizedString(@"addDescription", nil);
+        } else if ([self.type isEqualToString:@"fScene"]) {
+            _content.text = NSLocalizedString(@"addFiuSceneDes", nil);
+        }
         _content.textColor = [UIColor colorWithHexString:@"#A2A2A2" alpha:1];
     }
 }
@@ -125,7 +150,7 @@
     if (!_title) {
         _title = [[UITextField alloc] init];
         _title.placeholder = NSLocalizedString(@"addTitle", nil);
-        _title.font = [UIFont systemFontOfSize:Font_GoodsPrice];
+        _title.font = [UIFont systemFontOfSize:14];
         _title.clearButtonMode = UITextFieldViewModeWhileEditing;
         _title.delegate = self;
         _title.returnKeyType = UIReturnKeyDone;

@@ -327,7 +327,7 @@ static NSString *const URLFiuBrand = @"/scene_brands/getlist";
         } else if (indexPath.row == 1) {
             return 80;
         } else if (indexPath.row == 2) {
-            return 105;
+            return 210;
         }
         
     } else if (indexPath.section == 1) {
@@ -339,9 +339,9 @@ static NSString *const URLFiuBrand = @"/scene_brands/getlist";
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
     self.headerView = [[GroupHeaderView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 44)];
     if (section == 0) {
-        [self.headerView addGroupHeaderViewIcon:@"Group_Brand" withTitle:NSLocalizedString(@"fiuBrand", nil) withSubtitle:@"[越喜欢头像越大]"];
+        [self.headerView addGroupHeaderViewIcon:@"Group_Brand" withTitle:NSLocalizedString(@"fiuBrand", nil) withSubtitle:NSLocalizedString(@"fiuBrandText", nil)];
     } else if (section ==1) {
-        [self.headerView addGroupHeaderViewIcon:@"Group_scene" withTitle:NSLocalizedString(@"fiuGoods", nil) withSubtitle:@"[生活有你才够美]"];
+        [self.headerView addGroupHeaderViewIcon:@"Group_goods" withTitle:NSLocalizedString(@"fiuGoods", nil) withSubtitle:NSLocalizedString(@"fiuGoodsText", nil)];
     } 
     return self.headerView;
 }
