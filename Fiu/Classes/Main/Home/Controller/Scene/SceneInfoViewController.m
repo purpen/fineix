@@ -109,7 +109,7 @@ static NSString *const URLWantBuy = @"/scene_product/sight_click_stat";
 - (void)networkCommentData {
     [SVProgressHUD show];
     [self.sceneCommentMarr removeAllObjects];
-    self.sceneCommentRequest = [FBAPI getWithUrlString:URLCommentList requestDictionary:@{@"type":@"12", @"target_id":self.sceneId} delegate:self];
+    self.sceneCommentRequest = [FBAPI getWithUrlString:URLCommentList requestDictionary:@{@"type":@"12", @"target_id":self.sceneId, @"sort":@"1"} delegate:self];
     [self.sceneCommentRequest startRequestSuccess:^(FBRequest *request, id result) {
         self.commentArr = [[result valueForKey:@"data"] valueForKey:@"rows"];
         NSMutableArray * commentMarr = [NSMutableArray array];
