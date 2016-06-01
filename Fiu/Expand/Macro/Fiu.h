@@ -32,6 +32,7 @@
 
 #define IS_PHONE5             ( ([[UIScreen mainScreen] bounds].size.height - 568) ? NO : YES )
 #define IS_PHONE6P            ( ([[UIScreen mainScreen] bounds].size.height >= 1104) ? NO : YES )
+#define IS_PHONE6             ( ([[UIScreen mainScreen] bounds].size.width >= 375) ? NO : YES )
 
 #undef 颜色
 #define fineixColor             @"#BE8914"
