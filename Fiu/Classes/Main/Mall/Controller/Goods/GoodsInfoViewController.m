@@ -21,6 +21,7 @@
 static NSString *const URLGoodsInfo = @"/scene_product/view";
 static NSString *const URLRecommendGoods = @"/scene_product/getlist";
 static NSString *const URLGoodsScene = @"/sight_and_product/getlist";
+static NSString *const URLWantBuy = @"/scene_product/sight_click_stat";
 
 @interface GoodsInfoViewController ()
 
@@ -42,7 +43,10 @@ static NSString *const URLGoodsScene = @"/sight_and_product/getlist";
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
+    //  统计购买
+    if (self.isWant == YES) {
+        [self networkWantBuyData];
+    }
     [self networkGoodsInfoData];
     [self networkGoodsSceneList];
 
@@ -97,6 +101,16 @@ static NSString *const URLGoodsScene = @"/sight_and_product/getlist";
         
     } failure:^(FBRequest *request, NSError *error) {
         [SVProgressHUD showErrorWithStatus:[error localizedDescription]];
+    }];
+}
+
+#pragma mark 想购买产品统计
+- (void)networkWantBuyData {
+    self.wantBuyRequest = [FBAPI postWithUrlString:URLWantBuy requestDictionary:@{@"id":self.goodsID} delegate:self];
+    [self.wantBuyRequest startRequestSuccess:^(FBRequest *request, id result) {
+        NSLog(@"%@",result);
+    } failure:^(FBRequest *request, NSError *error) {
+        NSLog(@"%@",error);
     }];
 }
 

@@ -35,9 +35,7 @@ static NSString *const URLSceneList = @"/scene_sight/";
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.automaticallyAdjustsScrollViewInsets = NO;
-    
-    self.currentpageNum = 0;
+    self.automaticallyAdjustsScrollViewInsets = NO;     self.currentpageNum = 0;
     [self networkRequestData];
     
     [self.view addSubview:self.homeTableView];

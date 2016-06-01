@@ -120,6 +120,7 @@
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
     GoodsInfoViewController * goodsInfoVC = [[GoodsInfoViewController alloc] init];
     goodsInfoVC.goodsID = self.goodsId;
+    goodsInfoVC.isWant = YES;
     [self.nav pushViewController:goodsInfoVC animated:YES];
 }
 

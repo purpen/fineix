@@ -31,7 +31,6 @@ static NSString *const URLLikeScenePeople = @"/favorite";
 static NSString *const URLLikeScene = @"/favorite/ajax_sight_love";
 static NSString *const URLCancelLike = @"/favorite/ajax_cancel_sight_love";
 static NSString *const URLSceneGoods = @"/scene_product/getlist";
-static NSString *const URLWantBuy = @"/scene_product/sight_click_stat";
 
 @interface SceneInfoViewController () {
     NSDictionary    *   _shareDataDict;
@@ -80,7 +79,6 @@ static NSString *const URLWantBuy = @"/scene_product/sight_click_stat";
     [SVProgressHUD show];
     self.sceneInfoRequest = [FBAPI getWithUrlString:URLSceneInfo requestDictionary:@{@"id":self.sceneId} delegate:self];
     [self.sceneInfoRequest startRequestSuccess:^(FBRequest *request, id result) {
-        NSLog(@"＝＝＝＝＝＝＝＝＝ %@", result);
         //  分享出去的场景信息
         _shareDataDict = [NSDictionary dictionaryWithDictionary:[result valueForKey:@"data"]];
         _sceneUserId = [[result valueForKey:@"data"] valueForKey:@"user_id"];
@@ -211,16 +209,6 @@ static NSString *const URLWantBuy = @"/scene_product/sight_click_stat";
         
     } failure:^(FBRequest *request, NSError *error) {
         [SVProgressHUD showErrorWithStatus:[error localizedDescription]];
-    }];
-}
-
-#pragma mark 想购买产品统计
-- (void)networkWantBuyData:(NSString *)goodsId {
-    self.wantBuyRequest = [FBAPI postWithUrlString:URLWantBuy requestDictionary:@{@"id":goodsId} delegate:self];
-    [self.wantBuyRequest startRequestSuccess:^(FBRequest *request, id result) {
-        NSLog(@"%@",result);
-    } failure:^(FBRequest *request, NSError *error) {
-        NSLog(@"%@",error);
     }];
 }
 
@@ -437,9 +425,9 @@ static NSString *const URLWantBuy = @"/scene_product/sight_click_stat";
         [self.navigationController pushViewController:commentVC animated:YES];
     } else if (indexPath.section == 2) {
         GoodsInfoViewController * goodsInfoVC = [[GoodsInfoViewController alloc] init];
+        goodsInfoVC.isWant = YES;
         goodsInfoVC.goodsID = self.goodsIdList[indexPath.row];
         [self.navigationController pushViewController:goodsInfoVC animated:YES];
-        [self networkWantBuyData:self.goodsIdList[indexPath.row]];
     } else if (indexPath.section == 3) {
         GoodsInfoViewController * goodsInfoVC = [[GoodsInfoViewController alloc] init];
         goodsInfoVC.goodsID = self.reGoodsIdList[indexPath.row];

@@ -22,8 +22,11 @@
 @pro_strong NSString                *   goodsID;            //  商品id
 @pro_strong NSString                *   thnGoodsId;
 
+@pro_strong FBRequest               *   wantBuyRequest;
 @pro_strong FBRequest               *   goodsInfoRequest;
 @pro_strong FBRequest               *   reGoodsRequest;
 @pro_strong FBRequest               *   goodsSceneRequest;
+@pro_assign BOOL                        isWant;
+- (void)networkWantBuyData;
 
 @end
