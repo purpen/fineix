@@ -66,6 +66,11 @@ static NSString *const URLSceneList = @"/scene_sight/";
 
 //  判断是否为最后一条数据
 - (void)requestIsLastData:(UITableView *)table currentPage:(NSInteger )current withTotalPage:(NSInteger)total {
+    if (total == 0) {
+        table.mj_footer.state = MJRefreshStateNoMoreData;
+        table.mj_footer.hidden = true;
+    }
+    
     BOOL isLastPage = (current == total);
 
     if (!isLastPage) {

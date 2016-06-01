@@ -49,13 +49,6 @@ static NSString *const URLFiuPeople = @"/user/find_user";
     [self setNavigationViewUI];
     
     [self setFirstAppStart];
-    //  frome #import "ReleaseViewController.h"
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(refreshHomeTable) name:@"refreshHomeList" object:nil];
-}
-
-#pragma mark - 刷新列表
-- (void)refreshHomeTable {
-    [self.discoverTableView.mj_header beginRefreshing];
 }
 
 - (void)viewDidLoad {
@@ -65,9 +58,11 @@ static NSString *const URLFiuPeople = @"/user/find_user";
     [self networkFiuPeopleData];
     [self networkTagsListData];
     [self networkFiuSceneData];
+    [self networkFiuPeopleData];
     self.currentpageNum = 0;
     [self networkSceneListData];
-    [self networkFiuPeopleData];
+    
+    [self.view addSubview:self.discoverTableView];
     
 }
 
@@ -108,6 +103,7 @@ static NSString *const URLFiuPeople = @"/user/find_user";
             }
         }
         [self.discoverTableView reloadData];
+        [self requestIsLastData:self.discoverTableView currentPage:self.currentpageNum withTotalPage:self.totalPageNum];
         
     } failure:^(FBRequest *request, NSError *error) {
         [SVProgressHUD showErrorWithStatus:[error localizedDescription]];
@@ -124,6 +120,7 @@ static NSString *const URLFiuPeople = @"/user/find_user";
             [self.tagsList addObject:tagsModel];
         }
         [self.discoverTableView reloadData];
+        [self requestIsLastData:self.discoverTableView currentPage:self.currentpageNum withTotalPage:self.totalPageNum];
         
     } failure:^(FBRequest *request, NSError *error) {
         [SVProgressHUD showErrorWithStatus:[error localizedDescription]];
@@ -132,7 +129,6 @@ static NSString *const URLFiuPeople = @"/user/find_user";
 
 #pragma mark 情景列表
 - (void)networkFiuSceneData {
-    [SVProgressHUD show];
     self.fiuSceneRequest = [FBAPI getWithUrlString:URLFiuScene requestDictionary:@{@"sort":@"2",@"page":@"1",@"size":@"10"} delegate:self];
     [self.fiuSceneRequest startRequestSuccess:^(FBRequest *request, id result) {
         NSArray * fiuSceneArr = [[result valueForKey:@"data"] valueForKey:@"rows"];
@@ -142,7 +138,7 @@ static NSString *const URLFiuPeople = @"/user/find_user";
             [self.fiuSceneIdList addObject:[NSString stringWithFormat:@"%zi", fiuSceneModel.idField]];
         }
         [self.discoverTableView reloadData];
-        [SVProgressHUD dismiss];
+        [self requestIsLastData:self.discoverTableView currentPage:self.currentpageNum withTotalPage:self.totalPageNum];
         
     } failure:^(FBRequest *request, NSError *error) {
         NSLog(@"%@", error);
@@ -153,28 +149,33 @@ static NSString *const URLFiuPeople = @"/user/find_user";
 - (void)networkSceneListData {
     self.sceneListRequest = [FBAPI getWithUrlString:URLSceneList requestDictionary:@{@"sort":@"0", @"size":@"10", @"page":@(self.currentpageNum + 1)} delegate:self];
     [self.sceneListRequest startRequestSuccess:^(FBRequest *request, id result) {
-        [self setDiscoverViewUI];
         NSArray * sceneArr = [[result valueForKey:@"data"] valueForKey:@"rows"];
         for (NSDictionary * sceneDic in sceneArr) {
             HomeSceneListRow * homeSceneModel = [[HomeSceneListRow alloc] initWithDictionary:sceneDic];
             [self.sceneList addObject:homeSceneModel];
             [self.sceneIdList addObject:[NSString stringWithFormat:@"%zi", homeSceneModel.idField]];
         }
+        
         [self.discoverTableView reloadData];
+        
         self.currentpageNum = [[[result valueForKey:@"data"] valueForKey:@"current_page"] integerValue];
         self.totalPageNum = [[[result valueForKey:@"data"] valueForKey:@"total_page"] integerValue];
-        if (self.totalPageNum > 1) {
-            [self addMJRefresh:self.discoverTableView];
-            [self requestIsLastData:self.discoverTableView currentPage:self.currentpageNum withTotalPage:self.totalPageNum];
-        }
+        [self requestIsLastData:self.discoverTableView currentPage:self.currentpageNum withTotalPage:self.totalPageNum];
+
     } failure:^(FBRequest *request, NSError *error) {
-        
+        NSLog(@"%@", error);
     }];
 }
 
 #pragma mark 判断是否为最后一条数据
 - (void)requestIsLastData:(UITableView *)table currentPage:(NSInteger )current withTotalPage:(NSInteger)total {
+    if (total == 0) {
+        table.mj_footer.state = MJRefreshStateNoMoreData;
+        table.mj_footer.hidden = true;
+    }
+    
     BOOL isLastPage = (current == total);
+    
     if (!isLastPage) {
         if (table.mj_footer.state == MJRefreshStateNoMoreData) {
             [table.mj_footer resetNoMoreData];
@@ -199,6 +200,16 @@ static NSString *const URLFiuPeople = @"/user/find_user";
 
 #pragma mark 上拉加载 & 下拉刷新
 - (void)addMJRefresh:(UITableView *)table {
+    table.mj_header = [MJRefreshNormalHeader headerWithRefreshingBlock:^{
+        [self clearMarrData];
+        [self networkRollImgData];
+        [self networkTagsListData];
+        [self networkFiuSceneData];
+        self.currentpageNum = 0;
+        [self networkSceneListData];
+        [self networkFiuPeopleData];
+    }];
+    
     table.mj_footer = [MJRefreshAutoNormalFooter footerWithRefreshingBlock:^{
         if (self.currentpageNum < self.totalPageNum) {
             [self networkSceneListData];
@@ -206,11 +217,6 @@ static NSString *const URLFiuPeople = @"/user/find_user";
             [table.mj_footer endRefreshing];
         }
     }];
-}
-
-#pragma mark - 设置视图的UI
-- (void)setDiscoverViewUI {
-    [self.view addSubview:self.discoverTableView];
 }
 
 #pragma mark - 顶部轮播图
@@ -233,15 +239,7 @@ static NSString *const URLFiuPeople = @"/user/find_user";
         _discoverTableView.backgroundColor = [UIColor whiteColor];
         _discoverTableView.separatorStyle = UITableViewCellSeparatorStyleNone;
         
-        _discoverTableView.mj_header = [MJRefreshNormalHeader headerWithRefreshingBlock:^{
-            [self clearMarrData];
-            [self networkRollImgData];
-            [self networkTagsListData];
-            [self networkFiuSceneData];
-            self.currentpageNum = 0;
-            [self networkSceneListData];
-            [self networkFiuPeopleData];
-        }];
+        [self addMJRefresh:_discoverTableView];
     }
     return _discoverTableView;
 }
@@ -482,10 +480,6 @@ static NSString *const URLFiuPeople = @"/user/find_user";
 - (void)viewWillDisappear:(BOOL)animated {
     [super viewWillDisappear:animated];
     [SVProgressHUD dismiss];
-}
-
-- (void)dealloc {
-    [[NSNotificationCenter defaultCenter] removeObserver:self name:@"refreshHomeTable" object:nil];
 }
 
 @end

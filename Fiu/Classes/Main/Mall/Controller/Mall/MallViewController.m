@@ -57,7 +57,9 @@ static NSString *const URLFiuBrand = @"/scene_brands/getlist";
     [self networkFiuPeopleData];
     [self networkTagsListData];
     [self networkCategoryListData];
+    self.currentpageNum = 0;
     [self networkFiuGoodsData];
+    [self.view addSubview:self.mallTableView];
     
 }
 
@@ -85,6 +87,7 @@ static NSString *const URLFiuBrand = @"/scene_brands/getlist";
     [self.fiuBrandRequest startRequestSuccess:^(FBRequest *request, id result) {
         self.brandList = [NSMutableArray arrayWithArray:[[result valueForKey:@"data"] valueForKey:@"rows"]];
         [self.mallTableView reloadData];
+        [self requestIsLastData:self.mallTableView currentPage:self.currentpageNum withTotalPage:self.totalPageNum];
         
     } failure:^(FBRequest *request, NSError *error) {
         [SVProgressHUD showErrorWithStatus:[error localizedDescription]];
@@ -101,6 +104,7 @@ static NSString *const URLFiuBrand = @"/scene_brands/getlist";
             [self.tagsList addObject:tagsModel];
         }
         [self.mallTableView reloadData];
+        [self requestIsLastData:self.mallTableView currentPage:self.currentpageNum withTotalPage:self.totalPageNum];
         
     } failure:^(FBRequest *request, NSError *error) {
         [SVProgressHUD showErrorWithStatus:[error localizedDescription]];
@@ -117,6 +121,7 @@ static NSString *const URLFiuBrand = @"/scene_brands/getlist";
             [self.categoryList addObject:categoryModel];
         }
         [self.mallTableView reloadData];
+        [self requestIsLastData:self.mallTableView currentPage:self.currentpageNum withTotalPage:self.totalPageNum];
         
     } failure:^(FBRequest *request, NSError *error) {
         [SVProgressHUD showErrorWithStatus:[error localizedDescription]];
@@ -128,7 +133,6 @@ static NSString *const URLFiuBrand = @"/scene_brands/getlist";
     [SVProgressHUD show];
     self.fiuGoodsRequest = [FBAPI getWithUrlString:URLFiuGoods requestDictionary:@{@"size":@"8", @"page":@(self.currentpageNum + 1), @"fine":@"1"} delegate:self];
     [self.fiuGoodsRequest startRequestSuccess:^(FBRequest *request, id result) {
-        [self setMallViewUI];
         NSArray * goodsArr = [[result valueForKey:@"data"] valueForKey:@"rows"];
         for (NSDictionary * goodsDic in goodsArr) {
             GoodsRow * goodsModel = [[GoodsRow alloc] initWithDictionary:goodsDic];
@@ -140,12 +144,7 @@ static NSString *const URLFiuBrand = @"/scene_brands/getlist";
         
         self.currentpageNum = [[[result valueForKey:@"data"] valueForKey:@"current_page"] integerValue];
         self.totalPageNum = [[[result valueForKey:@"data"] valueForKey:@"total_page"] integerValue];
-        if (self.totalPageNum > 1) {
-            [self addMJRefresh:self.mallTableView];
-            [self requestIsLastData:self.mallTableView currentPage:self.currentpageNum withTotalPage:self.totalPageNum];
-        }
-        
-        [SVProgressHUD dismiss];
+        [self requestIsLastData:self.mallTableView currentPage:self.currentpageNum withTotalPage:self.totalPageNum];
         
     } failure:^(FBRequest *request, NSError *error) {
         [SVProgressHUD showErrorWithStatus:[error localizedDescription]];
@@ -154,15 +153,17 @@ static NSString *const URLFiuBrand = @"/scene_brands/getlist";
 
 #pragma mark 判断是否为最后一条数据
 - (void)requestIsLastData:(UITableView *)table currentPage:(NSInteger )current withTotalPage:(NSInteger)total {
+    if (total == 0) {
+        table.mj_footer.state = MJRefreshStateNoMoreData;
+        table.mj_footer.hidden = true;
+    }
+    
     BOOL isLastPage = (current == total);
     
     if (!isLastPage) {
         if (table.mj_footer.state == MJRefreshStateNoMoreData) {
             [table.mj_footer resetNoMoreData];
         }
-    } else {
-        table.mj_footer.state = MJRefreshStateNoMoreData;
-        table.mj_footer.hidden = true;
     }
     if (current == total == 1) {
         table.mj_footer.state = MJRefreshStateNoMoreData;
@@ -193,11 +194,6 @@ static NSString *const URLFiuBrand = @"/scene_brands/getlist";
     }];
 }
 
-#pragma mark - 设置视图的UI
-- (void)setMallViewUI {
-    [self.view addSubview:self.mallTableView];
-}
-
 #pragma mark - 顶部轮播图
 - (FBRollImages *)rollView {
     if (!_rollView) {
@@ -217,6 +213,7 @@ static NSString *const URLFiuBrand = @"/scene_brands/getlist";
         _mallTableView.showsVerticalScrollIndicator = NO;
         _mallTableView.backgroundColor = [UIColor whiteColor];
         _mallTableView.separatorStyle = UITableViewCellSeparatorStyleNone;
+        [self addMJRefresh:_mallTableView];
     }
     return _mallTableView;
 }
