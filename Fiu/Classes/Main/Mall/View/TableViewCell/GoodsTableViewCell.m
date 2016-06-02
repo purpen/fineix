@@ -11,6 +11,16 @@
 #import "GoodsImgFlowLayout.h"
 #import "GoodsImgCollectionViewCell.h"
 #import "GoodsInfoViewController.h"
+#import "SceneInfoViewController.h"
+#import "UIButton+WebCache.h"
+
+@interface GoodsTableViewCell () {
+    NSString * _sceneImgUrl;
+    NSString * _sceneId;
+}
+
+@end
+
 
 @implementation GoodsTableViewCell
 
@@ -32,6 +42,11 @@
         [self.goodsImgMarr removeAllObjects];
     }
     
+    if (model.sights.count > 0) {
+        _sceneImgUrl = [model.sights valueForKey:@"cover_url"][0];
+        _sceneId = [NSString stringWithFormat:@"%@", [model.sights valueForKey:@"id"][0]];
+    }
+    
     self.title.text = model.title;
     self.goodsId = [NSString stringWithFormat:@"%zi", model.idField];
     
@@ -47,16 +62,21 @@
     }
     
     self.price.text = [NSString stringWithFormat:@"¥%.2f", model.marketPrice];
-   
+    
     if (model.banner.count > 0) {
         self.goodsImgMarr = [NSMutableArray arrayWithArray:model.banner];
-        
+        if (_sceneImgUrl.length > 0) {
+            [self.goodsImgMarr insertObject:_sceneImgUrl atIndex:0];
+        }
     } else if (model.bannerAsset.count > 0) {
         self.goodsImgMarr = [NSMutableArray arrayWithArray:model.bannerAsset];
+        if (_sceneImgUrl.length > 0) {
+            [self.goodsImgMarr insertObject:_sceneImgUrl atIndex:0];
+        }
     }
     
     [self.goodsImgView reloadData];
-    
+
 }
 
 #pragma mark -
@@ -120,13 +140,8 @@
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
     GoodsImgCollectionViewCell * cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"GoodsImgCollectionViewCell" forIndexPath:indexPath];
-    
-    if (indexPath.row == 0) {
-        cell.backgroundColor = [UIColor orangeColor];
-    } else {
-        [cell.img downloadImage:self.goodsImgMarr[indexPath.row] place:[UIImage imageNamed:@""]];
-    }
-    
+    [cell.img downloadImage:self.goodsImgMarr[indexPath.row] place:[UIImage imageNamed:@""]];
+
     if (indexPath.row % 2 != 0) {
         UIImageView * line = [[UIImageView alloc] initWithFrame:CGRectMake(270, 0, 4, 150)];
         line.image = [UIImage imageNamed:@"Goods_image_bg"];
@@ -143,10 +158,25 @@
 }
 
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
-    GoodsInfoViewController * goodsInfoVC = [[GoodsInfoViewController alloc] init];
-    goodsInfoVC.goodsID = self.goodsId;
-    goodsInfoVC.isWant = YES;
-    [self.nav pushViewController:goodsInfoVC animated:YES];
+    if (indexPath.row == 0) {
+        if (_sceneId.length > 0) {
+            SceneInfoViewController * sceneInfoVC = [[SceneInfoViewController alloc] init];
+            sceneInfoVC.sceneId = _sceneId;
+            [self.nav pushViewController:sceneInfoVC animated:YES];
+            
+        } else {
+            GoodsInfoViewController * goodsInfoVC = [[GoodsInfoViewController alloc] init];
+            goodsInfoVC.goodsID = self.goodsId;
+            goodsInfoVC.isWant = YES;
+            [self.nav pushViewController:goodsInfoVC animated:YES];
+        }
+        
+    } else {
+        GoodsInfoViewController * goodsInfoVC = [[GoodsInfoViewController alloc] init];
+        goodsInfoVC.goodsID = self.goodsId;
+        goodsInfoVC.isWant = YES;
+        [self.nav pushViewController:goodsInfoVC animated:YES];
+    }
 }
 
 #pragma mark - 标题

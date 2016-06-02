@@ -133,8 +133,6 @@ static NSString *const URLFiuBrand = @"/scene_brands/getlist";
     [SVProgressHUD show];
     self.fiuGoodsRequest = [FBAPI getWithUrlString:URLFiuGoods requestDictionary:@{@"size":@"8", @"page":@(self.currentpageNum + 1), @"sort":@"2"} delegate:self];
     [self.fiuGoodsRequest startRequestSuccess:^(FBRequest *request, id result) {
-        NSLog(@"＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝ %@", result);
-        
         NSArray * goodsArr = [[result valueForKey:@"data"] valueForKey:@"rows"];
         for (NSDictionary * goodsDic in goodsArr) {
             GoodsRow * goodsModel = [[GoodsRow alloc] initWithDictionary:goodsDic];
@@ -147,6 +145,7 @@ static NSString *const URLFiuBrand = @"/scene_brands/getlist";
         self.currentpageNum = [[[result valueForKey:@"data"] valueForKey:@"current_page"] integerValue];
         self.totalPageNum = [[[result valueForKey:@"data"] valueForKey:@"total_page"] integerValue];
         [self requestIsLastData:self.mallTableView currentPage:self.currentpageNum withTotalPage:self.totalPageNum];
+        [SVProgressHUD dismiss];
         
     } failure:^(FBRequest *request, NSError *error) {
         NSLog(@"%@", error);
@@ -181,7 +180,6 @@ static NSString *const URLFiuBrand = @"/scene_brands/getlist";
             [table.mj_footer endRefreshing];
         }
     }
-    [SVProgressHUD dismiss];
 }
 
 #pragma mark 上拉加载

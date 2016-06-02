@@ -36,7 +36,9 @@
     if(![dictionary[@"banners"] isKindOfClass:[NSNull class]]){
         self.banner = dictionary[@"banners"];
     }
-    
+    if(![dictionary[@"sights"] isKindOfClass:[NSNull class]]){
+        self.sights = dictionary[@"sights"];
+    }
 	if(![dictionary[@"banner_id"] isKindOfClass:[NSNull class]]){
 		self.bannerId = [dictionary[@"banner_id"] integerValue];
 	}

@@ -355,9 +355,7 @@ static NSString *const URLWantBuy = @"/scene_product/sight_click_stat";
     } else if (indexPath.section == 3) {
         static NSString * mallGoodsCellId = @"MallGoodsCellId";
         GoodsTableViewCell * cell = [tableView dequeueReusableCellWithIdentifier:mallGoodsCellId];
-        if (cell == nil) {
-            cell = [[GoodsTableViewCell alloc] initWithStyle:(UITableViewCellStyleDefault) reuseIdentifier:mallGoodsCellId];
-        }
+        cell = [[GoodsTableViewCell alloc] initWithStyle:(UITableViewCellStyleDefault) reuseIdentifier:mallGoodsCellId];
         cell.nav = self.navigationController;
         [cell setGoodsData:self.reGoodsList[indexPath.row]];
         return cell;

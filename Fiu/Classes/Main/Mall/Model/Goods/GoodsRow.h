@@ -14,6 +14,7 @@
 @property (nonatomic, assign) NSInteger attrbute;
 @property (nonatomic, strong) NSArray * bannerAsset;
 @property (nonatomic, strong) NSArray * banner;
+@property (nonatomic, strong) NSArray * sights;
 @property (nonatomic, assign) NSInteger bannerId;
 @property (nonatomic, strong) NSString * brandId;
 @property (nonatomic, assign) NSInteger buyCount;

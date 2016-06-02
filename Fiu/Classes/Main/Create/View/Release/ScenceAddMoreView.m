@@ -93,8 +93,10 @@ static const NSInteger btnTag = 100;
         }
         
         //  最后一个为“搜索”按钮
-        [_nameMarr addObject:@"  搜索  "];
-        [self addLocationScrollView:_nameMarr];
+        if (_nameMarr.count > 0) {
+            [_nameMarr addObject:@"  搜索  "];
+            [self addLocationScrollView:_nameMarr];
+        }
         
     } else {
         NSLog(@"搜索结果错误 －－－－－ %d", error);

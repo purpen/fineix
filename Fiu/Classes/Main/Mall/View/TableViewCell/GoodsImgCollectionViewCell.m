@@ -22,9 +22,10 @@
 #pragma mark - 商品图片
 - (UIImageView *)img {
     if (!_img) {
-        _img = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 265, 150)];
+        _img = [[UIImageView alloc] initWithFrame:self.bounds];
         _img.contentMode = UIViewContentModeScaleAspectFill;
         _img.clipsToBounds  = YES;
+        [_img setContentScaleFactor:[[UIScreen mainScreen] scale]];
     }
     return _img;
 }
