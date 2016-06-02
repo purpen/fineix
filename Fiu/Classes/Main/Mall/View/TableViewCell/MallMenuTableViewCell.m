@@ -43,7 +43,7 @@
 - (UICollectionView *)menuView {
     if (!_menuView) {
         UICollectionViewFlowLayout * flowLayout = [[UICollectionViewFlowLayout alloc] init];
-        flowLayout.itemSize = CGSizeMake(60, 105);
+        flowLayout.itemSize = CGSizeMake((SCREEN_WIDTH - 70) / 5, 95);
         flowLayout.minimumLineSpacing = 0.0f;
         flowLayout.sectionInset = UIEdgeInsetsMake(0, 10, 0, 10);
         [flowLayout setScrollDirection:(UICollectionViewScrollDirectionVertical)];

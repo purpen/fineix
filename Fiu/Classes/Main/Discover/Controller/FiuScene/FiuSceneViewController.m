@@ -42,15 +42,16 @@ static NSString *const URLLikeScenePeople = @"/favorite";
     [super viewWillAppear:animated];
     
     [self setNavigationViewUI];
-    self.currentpageNum = 0;
-    [self networkFiuSceneListData];
 }
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    [self setSceneInfoViewUI];
     [self networkRequestData];
     [self networkLikePeopleData];
+    self.currentpageNum = 0;
+    [self networkFiuSceneListData];
 }
 
 
@@ -60,9 +61,9 @@ static NSString *const URLLikeScenePeople = @"/favorite";
     [SVProgressHUD show];
     self.fiuSceneRequest = [FBAPI getWithUrlString:URLFiuSceneInfo requestDictionary:@{@"id":self.fiuSceneId} delegate:self];
     [self.fiuSceneRequest startRequestSuccess:^(FBRequest *request, id result) {
-
         self.fiuSceneData = [[FiuSceneInfoData alloc] initWithDictionary:[result valueForKey:@"data"]];
         [self.fiuSceneTable reloadData];
+        [self requestIsLastData:self.fiuSceneTable currentPage:self.currentpageNum withTotalPage:self.totalPageNum];
         [SVProgressHUD dismiss];
 
     } failure:^(FBRequest *request, NSError *error) {
@@ -75,8 +76,6 @@ static NSString *const URLLikeScenePeople = @"/favorite";
     [SVProgressHUD show];
     self.fiuSceneListRequest = [FBAPI getWithUrlString:URLFiuSceneList requestDictionary:@{@"scene_id":self.fiuSceneId, @"stick":@"0", @"size":@"10",@"page":@(self.currentpageNum + 1)} delegate:self];
     [self.fiuSceneListRequest startRequestSuccess:^(FBRequest *request, id result) {
-        [self setSceneInfoViewUI];
-        
         NSArray * sceneArr = [[result valueForKey:@"data"] valueForKey:@"rows"];
         for (NSDictionary * sceneDic in sceneArr) {
             HomeSceneListRow * homeSceneModel = [[HomeSceneListRow alloc] initWithDictionary:sceneDic];
@@ -104,7 +103,6 @@ static NSString *const URLLikeScenePeople = @"/favorite";
 #pragma mark 订阅此情景的用户
 - (void)networkLikePeopleData {
     [self.suPeopleMarr removeAllObjects];
-    [SVProgressHUD show];
     self.suPeopleRequest = [FBAPI postWithUrlString:URLLikeScenePeople requestDictionary:@{@"type":@"scene", @"event":@"subscription", @"page":@"1" , @"size":@"10000", @"id":self.fiuSceneId} delegate:self];
     [self.suPeopleRequest startRequestSuccess:^(FBRequest *request, id result) {
         NSArray * likePeopleArr = [[result valueForKey:@"data"] valueForKey:@"rows"];
@@ -112,8 +110,6 @@ static NSString *const URLLikeScenePeople = @"/favorite";
             LikeOrSuPeopleRow * likePeopleModel = [[LikeOrSuPeopleRow alloc] initWithDictionary:likePeopleDic];
             [self.suPeopleMarr addObject:likePeopleModel];
         }
-        [self.fiuSceneTable reloadData];
-        [SVProgressHUD dismiss];
         
     } failure:^(FBRequest *request, NSError *error) {
         [SVProgressHUD showErrorWithStatus:[error localizedDescription]];
@@ -152,6 +148,11 @@ static NSString *const URLLikeScenePeople = @"/favorite";
 
 #pragma mark 判断是否为最后一条数据
 - (void)requestIsLastData:(UITableView *)table currentPage:(NSInteger )current withTotalPage:(NSInteger)total {
+    if (total == 0) {
+        table.mj_footer.state = MJRefreshStateNoMoreData;
+        table.mj_footer.hidden = true;
+    }
+    
     BOOL isLastPage = (current == total);
     
     if (!isLastPage) {

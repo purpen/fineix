@@ -31,7 +31,7 @@ const static NSInteger  peopleBtnTag = 64;
     if (model.count > 0) {
         for (LikeOrSuPeopleRow * row in model) {
             [self.imgMarr addObject:row.user.avatarUrl];
-            [self.userIdMarr addObject:[NSString stringWithFormat:@"%zi", [row.user valueForKey:@"userId" ]]];
+            [self.userIdMarr addObject:[NSString stringWithFormat:@"%zi", row.userId]];
         }
         
         CGFloat num = model.count;
@@ -56,7 +56,6 @@ const static NSInteger  peopleBtnTag = 64;
     
     CGFloat btnW = 0;
     CGFloat btnH = 15;
-    NSLog(@"＝＝＝＝＝＝ %@", imgUrl);
     for (NSInteger idx = 0; idx < people.count; ++idx) {
         UIButton * peopleBtn = [[UIButton alloc] init];
         

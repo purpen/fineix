@@ -117,11 +117,12 @@ static NSString *const URLUserAddGoods = @"/scene_product/add";
     if (index == 0) {
         
         [self presentViewController:markGoodsVC animated:YES completion:nil];
-        markGoodsVC.getImgBlock = ^(NSString * imgUrl, NSString * title, NSString * price, NSString * ids) {
+        markGoodsVC.getImgBlock = ^(NSString * imgUrl, NSString * title, NSString * price, NSString * ids, CGFloat imgW, CGFloat imgH) {
             if (self.goodsIdData.count == 0) {
                 _idx = 391;
             }
-            [self addMarkGoodsImg:imgUrl];
+            
+            [self addMarkGoodsImg:imgUrl withImgW:imgW withImgH:imgH];
             [self.goodsIdData addObject:ids];
             NSString * pri = [NSString stringWithFormat:@"￥%@",price];
             _canDelete = 0;
@@ -211,8 +212,8 @@ static NSString *const URLUserAddGoods = @"/scene_product/add";
 }
 
 #pragma mark - 标记一个产品图片
-- (void)addMarkGoodsImg:(NSString *)imgUrl {
-    FBStickersContainer * sticker = [[FBStickersContainer alloc] initWithFrame:CGRectMake(100, 100, 200, 200)];
+- (void)addMarkGoodsImg:(NSString *)imgUrl withImgW:(CGFloat)imgW withImgH:(CGFloat)imgH {
+    FBStickersContainer * sticker = [[FBStickersContainer alloc] initWithFrame:CGRectMake(100, 100, imgW/4, imgH/4)];
     [sticker setupSticker:imgUrl];
     sticker.delegate = self;
     [self.view addSubview:sticker];
@@ -234,7 +235,6 @@ static NSString *const URLUserAddGoods = @"/scene_product/add";
         _changeGoodsView = [[ChangeAddUrlView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT)];
         [_changeGoodsView.sure addTarget:self action:@selector(sureChange) forControlEvents:(UIControlEventTouchUpInside)];
         [_changeGoodsView.dele addTarget:self action:@selector(deleteTag) forControlEvents:(UIControlEventTouchUpInside)];
-        //        [_changeGoodsView.url addTarget:self action:@selector(urlChange) forControlEvents:(UIControlEventTouchUpInside)];
     }
     return _changeGoodsView;
 }
@@ -291,8 +291,6 @@ static NSString *const URLUserAddGoods = @"/scene_product/add";
 
 #pragma mark 继续按钮的点击事件
 - (void)nextBtnClick {
-//    ReleaseViewController * releaseVC = [[ReleaseViewController alloc] init];
-
         if (self.goodsIdData.count > 3) {
             [SVProgressHUD showInfoWithStatus:@"最多添加三个商品的链接"];
             
@@ -334,18 +332,6 @@ static NSString *const URLUserAddGoods = @"/scene_product/add";
             filtersVC.goodsY = btnOriginY;
 
             [self.navigationController pushViewController:filtersVC animated:YES];
-            
-//            releaseVC.locationArr = self.locationArr;
-//            releaseVC.scenceView.imageView.image = goodsImg;
-//            releaseVC.createType = self.createType;
-//            releaseVC.fSceneId = self.fSceneId;
-//            releaseVC.fSceneTitle = self.fSceneTitle;
-//            releaseVC.goodsTitle = goodsTitle;
-//            releaseVC.goodsPrice = goodsPrice;
-//            releaseVC.goodsId = goodsId;
-//            releaseVC.goodsX = btnOriginX;
-//            releaseVC.goodsY = btnOriginY;
-//            [self.navigationController pushViewController:releaseVC animated:YES];
         }
 }
 

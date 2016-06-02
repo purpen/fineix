@@ -77,7 +77,7 @@ static NSString *const URLFiuBrand = @"/scene_brands/getlist";
         [self.rollView setRollimageView:self.rollList];
         
     } failure:^(FBRequest *request, NSError *error) {
-        NSLog(@"%@", [error localizedDescription]);
+        NSLog(@"%@", error);
     }];
 }
 
@@ -90,7 +90,7 @@ static NSString *const URLFiuBrand = @"/scene_brands/getlist";
         [self requestIsLastData:self.mallTableView currentPage:self.currentpageNum withTotalPage:self.totalPageNum];
         
     } failure:^(FBRequest *request, NSError *error) {
-        [SVProgressHUD showErrorWithStatus:[error localizedDescription]];
+        NSLog(@"%@", error);
     }];
 }
 
@@ -107,7 +107,7 @@ static NSString *const URLFiuBrand = @"/scene_brands/getlist";
         [self requestIsLastData:self.mallTableView currentPage:self.currentpageNum withTotalPage:self.totalPageNum];
         
     } failure:^(FBRequest *request, NSError *error) {
-        [SVProgressHUD showErrorWithStatus:[error localizedDescription]];
+        NSLog(@"%@", error);
     }];
 }
 
@@ -124,15 +124,17 @@ static NSString *const URLFiuBrand = @"/scene_brands/getlist";
         [self requestIsLastData:self.mallTableView currentPage:self.currentpageNum withTotalPage:self.totalPageNum];
         
     } failure:^(FBRequest *request, NSError *error) {
-        [SVProgressHUD showErrorWithStatus:[error localizedDescription]];
+        NSLog(@"%@", error);
     }];
 }
 
 #pragma mark 最Fiu商品
 - (void)networkFiuGoodsData {
     [SVProgressHUD show];
-    self.fiuGoodsRequest = [FBAPI getWithUrlString:URLFiuGoods requestDictionary:@{@"size":@"8", @"page":@(self.currentpageNum + 1), @"fine":@"1"} delegate:self];
+    self.fiuGoodsRequest = [FBAPI getWithUrlString:URLFiuGoods requestDictionary:@{@"size":@"8", @"page":@(self.currentpageNum + 1), @"sort":@"2"} delegate:self];
     [self.fiuGoodsRequest startRequestSuccess:^(FBRequest *request, id result) {
+        NSLog(@"＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝ %@", result);
+        
         NSArray * goodsArr = [[result valueForKey:@"data"] valueForKey:@"rows"];
         for (NSDictionary * goodsDic in goodsArr) {
             GoodsRow * goodsModel = [[GoodsRow alloc] initWithDictionary:goodsDic];
@@ -147,7 +149,7 @@ static NSString *const URLFiuBrand = @"/scene_brands/getlist";
         [self requestIsLastData:self.mallTableView currentPage:self.currentpageNum withTotalPage:self.totalPageNum];
         
     } failure:^(FBRequest *request, NSError *error) {
-        [SVProgressHUD showErrorWithStatus:[error localizedDescription]];
+        NSLog(@"%@", error);
     }];
 }
 
@@ -184,6 +186,15 @@ static NSString *const URLFiuBrand = @"/scene_brands/getlist";
 
 #pragma mark 上拉加载
 - (void)addMJRefresh:(UITableView *)table {
+    table.mj_header = [MJRefreshNormalHeader headerWithRefreshingBlock:^{
+        [self clearMarrData];
+        [self networkFiuPeopleData];
+        [self networkTagsListData];
+        [self networkCategoryListData];
+        self.currentpageNum = 0;
+        [self networkFiuGoodsData];
+    }];
+    
     table.mj_footer = [MJRefreshAutoNormalFooter footerWithRefreshingBlock:^{
         if (self.currentpageNum < self.totalPageNum) {
             [self networkFiuGoodsData];
@@ -258,7 +269,6 @@ static NSString *const URLFiuBrand = @"/scene_brands/getlist";
             }];
             return cell;
 
-            
         } else if (indexPath.row == 1) {
             static NSString * mallGoodsTagCellId = @"mallGoodsTagCellId";
             FiuTagTableViewCell * cell = [tableView dequeueReusableCellWithIdentifier:mallGoodsTagCellId];
@@ -279,9 +289,7 @@ static NSString *const URLFiuBrand = @"/scene_brands/getlist";
     } else if (indexPath.section == 1) {
         static NSString * mallGoodsCellId = @"MallGoodsCellId";
         GoodsTableViewCell * cell = [tableView dequeueReusableCellWithIdentifier:mallGoodsCellId];
-        if (!cell) {
-            cell = [[GoodsTableViewCell alloc] initWithStyle:(UITableViewCellStyleDefault) reuseIdentifier:mallGoodsCellId];
-        }
+        cell = [[GoodsTableViewCell alloc] initWithStyle:(UITableViewCellStyleDefault) reuseIdentifier:mallGoodsCellId];
         cell.nav = self.navigationController;
         [cell setGoodsData:self.goodsList[indexPath.row]];
         return cell;
@@ -328,7 +336,7 @@ static NSString *const URLFiuBrand = @"/scene_brands/getlist";
         }
         
     } else if (indexPath.section == 1) {
-        return 210;
+        return 200;
     }
     return 0;
 }
@@ -379,8 +387,13 @@ static NSString *const URLFiuBrand = @"/scene_brands/getlist";
 
 //  点击右边barItem
 - (void)rightBarItemSelected {
-    GoodsCarViewController * goodsCarVC = [[GoodsCarViewController alloc] init];
-    [self.navigationController pushViewController:goodsCarVC animated:YES];
+    if ([self isUserLogin]) {
+        GoodsCarViewController * goodsCarVC = [[GoodsCarViewController alloc] init];
+        [self.navigationController pushViewController:goodsCarVC animated:YES];
+    } else {
+        [self openUserLoginVC];
+    }
+
 }
 
 #pragma mark - 应用第一次打开，加载操作指示图
@@ -430,6 +443,13 @@ static NSString *const URLFiuBrand = @"/scene_brands/getlist";
         _rollList = [NSMutableArray array];
     }
     return _rollList;
+}
+
+- (void)clearMarrData {
+    [self.tagsList removeAllObjects];
+    [self.categoryList removeAllObjects];
+    [self.goodsList removeAllObjects];
+    [self.goodsIdList removeAllObjects];
 }
 
 

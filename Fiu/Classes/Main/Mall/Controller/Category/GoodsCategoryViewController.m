@@ -71,8 +71,6 @@ static NSString *const URLGoodsList = @"/scene_product/getlist";
 #pragma mark 商品列表
 - (void)networkGoodsListData:(NSString *)categoryId withTagIds:(NSString *)tagId {
     [SVProgressHUD show];
-    //  防止加载过程中，点击其他进行操作
-    self.view.userInteractionEnabled = NO;
     
     self.goodsListRequest = [FBAPI getWithUrlString:URLGoodsList requestDictionary:@{@"size":@"8", @"page":@(self.currentpageNum + 1), @"category_id":categoryId, @"category_tag_ids":tagId} delegate:self];
     [self.goodsListRequest startRequestSuccess:^(FBRequest *request, id result) {
@@ -90,7 +88,6 @@ static NSString *const URLGoodsList = @"/scene_product/getlist";
         [self.goodsListTable reloadData];
         
         [SVProgressHUD dismiss];
-        self.view.userInteractionEnabled = YES;
         
     } failure:^(FBRequest *request, NSError *error) {
         [SVProgressHUD showErrorWithStatus:[error localizedDescription]];
@@ -182,9 +179,8 @@ static NSString *const URLGoodsList = @"/scene_product/getlist";
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     static NSString * goodsTableViewCellId = @"GoodsTableViewCellId";
     GoodsTableViewCell * cell = [tableView dequeueReusableCellWithIdentifier:goodsTableViewCellId];
-    if (!cell) {
-        cell = [[GoodsTableViewCell alloc] initWithStyle:(UITableViewCellStyleDefault) reuseIdentifier:goodsTableViewCellId];
-    }
+    cell = [[GoodsTableViewCell alloc] initWithStyle:(UITableViewCellStyleDefault) reuseIdentifier:goodsTableViewCellId];
+
     if (self.goodsList.count > 0) {
         [cell setGoodsData:self.goodsList[indexPath.row]];
     }

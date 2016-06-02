@@ -88,8 +88,11 @@
 #pragma mark - 滚动
 - (UICollectionView *)goodsImgView {
     if (!_goodsImgView) {
-        GoodsImgFlowLayout * flowLayout = [[GoodsImgFlowLayout alloc] init];
-        
+        UICollectionViewFlowLayout * flowLayout = [[UICollectionViewFlowLayout alloc] init];
+        flowLayout.sectionInset = UIEdgeInsetsMake(0, 15, 0, 5);
+        flowLayout.scrollDirection = UICollectionViewScrollDirectionHorizontal;
+        flowLayout.minimumInteritemSpacing = 5.0f;
+
         _goodsImgView = [[UICollectionView alloc] initWithFrame:CGRectMake(0, 10, SCREEN_WIDTH, 150) collectionViewLayout:flowLayout];
         _goodsImgView.dataSource = self;
         _goodsImgView.delegate = self;
@@ -97,6 +100,15 @@
         _goodsImgView.showsHorizontalScrollIndicator = NO;
         [_goodsImgView registerClass:[GoodsImgCollectionViewCell class] forCellWithReuseIdentifier:@"GoodsImgCollectionViewCell"];
         
+        CGPoint contentPoint;
+        if (SCREEN_WIDTH == 375) {
+            contentPoint = CGPointMake(50, 0);
+        } else if (SCREEN_WIDTH > 375) {
+            contentPoint = CGPointMake(30, 0);
+        } else {
+            contentPoint = CGPointMake(80, 0);
+        }
+        _goodsImgView.contentOffset = contentPoint;
     }
     return _goodsImgView;
 }
@@ -108,13 +120,26 @@
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
     GoodsImgCollectionViewCell * cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"GoodsImgCollectionViewCell" forIndexPath:indexPath];
-    [cell.img downloadImage:self.goodsImgMarr[indexPath.row] place:[UIImage imageNamed:@""]];
+    
+    if (indexPath.row == 0) {
+        cell.backgroundColor = [UIColor orangeColor];
+    } else {
+        [cell.img downloadImage:self.goodsImgMarr[indexPath.row] place:[UIImage imageNamed:@""]];
+    }
+    
     if (indexPath.row % 2 != 0) {
-        UIImageView * line = [[UIImageView alloc] initWithFrame:CGRectMake(-11, 0, 4, 150)];
+        UIImageView * line = [[UIImageView alloc] initWithFrame:CGRectMake(270, 0, 4, 150)];
         line.image = [UIImage imageNamed:@"Goods_image_bg"];
         [cell addSubview:line];
     }
     return cell;
+}
+
+- (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath {
+    if (indexPath.row == 0) {
+        return CGSizeMake(85, 150);
+    }
+    return CGSizeMake(275, 150);
 }
 
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
@@ -127,7 +152,7 @@
 #pragma mark - 标题
 - (UILabel *)title {
     if (!_title) {
-        _title = [[UILabel alloc] initWithFrame:CGRectMake(10, 0, 225, 25)];
+        _title = [[UILabel alloc] init];
         _title.textColor = [UIColor whiteColor];
         _title.font = [UIFont systemFontOfSize:Font_GoodsTitle];
     }
@@ -141,6 +166,11 @@
         _titleBg.image = [UIImage imageNamed:@"Goods_title_bg"];
         
         [_titleBg addSubview:self.title];
+        [_title mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.top.bottom.equalTo(_titleBg).with.offset(0);
+            make.left.equalTo(_titleBg.mas_left).with.offset(10);
+            make.right.equalTo(_titleBg.mas_right).with.offset(-5);
+        }];
         
     }
     return _titleBg;

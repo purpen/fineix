@@ -343,9 +343,7 @@ static NSString *const URLSceneGoods = @"/scene_product/getlist";
     } else if (indexPath.section == 3) {
         static NSString * mallGoodsCellId = @"MallGoodsCellId";
         GoodsTableViewCell * cell = [tableView dequeueReusableCellWithIdentifier:mallGoodsCellId];
-        if (cell == nil) {
-            cell = [[GoodsTableViewCell alloc] initWithStyle:(UITableViewCellStyleDefault) reuseIdentifier:mallGoodsCellId];
-        }
+        cell = [[GoodsTableViewCell alloc] initWithStyle:(UITableViewCellStyleDefault) reuseIdentifier:mallGoodsCellId];
         cell.nav = self.navigationController;
         [cell setGoodsData:self.reGoodsList[indexPath.row]];
         return cell;

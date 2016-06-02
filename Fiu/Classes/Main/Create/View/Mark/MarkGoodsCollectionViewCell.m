@@ -82,7 +82,6 @@
         make.bottom.equalTo(_goodsNewPrice.mas_top).with.offset(-10);
         make.centerX.equalTo(self);
     }];
-
 }
 
 - (UIImageView *)goodsImage {

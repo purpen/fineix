@@ -494,6 +494,7 @@
 		D8E3AEBA1CFC9B84006E5E8C /* LookSceneViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D8E3AEB11CFC9B84006E5E8C /* LookSceneViewController.m */; };
 		D8E3AEBB1CFC9B84006E5E8C /* ReleaseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D8E3AEB31CFC9B84006E5E8C /* ReleaseViewController.m */; };
 		D8E3AEBC1CFC9B84006E5E8C /* SceneAddViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D8E3AEB51CFC9B84006E5E8C /* SceneAddViewController.m */; };
+		D8E3AEBF1D003F4D006E5E8C /* FBRefresh.m in Sources */ = {isa = PBXBuildFile; fileRef = D8E3AEBE1D003F4D006E5E8C /* FBRefresh.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -1375,6 +1376,8 @@
 		D8E3AEB31CFC9B84006E5E8C /* ReleaseViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ReleaseViewController.m; sourceTree = "<group>"; };
 		D8E3AEB41CFC9B84006E5E8C /* SceneAddViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SceneAddViewController.h; sourceTree = "<group>"; };
 		D8E3AEB51CFC9B84006E5E8C /* SceneAddViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SceneAddViewController.m; sourceTree = "<group>"; };
+		D8E3AEBD1D003F4D006E5E8C /* FBRefresh.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FBRefresh.h; sourceTree = "<group>"; };
+		D8E3AEBE1D003F4D006E5E8C /* FBRefresh.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FBRefresh.m; sourceTree = "<group>"; };
 		E0438B4B24E3F747F761AF4C /* Pods-Fiu.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Fiu.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Fiu/Pods-Fiu.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -3670,6 +3673,8 @@
 				D87B69BB1CC726BA00199EFE /* FBRollImages.m */,
 				D87B69BC1CC726BA00199EFE /* GroupHeaderView.h */,
 				D87B69BD1CC726BA00199EFE /* GroupHeaderView.m */,
+				D8E3AEBD1D003F4D006E5E8C /* FBRefresh.h */,
+				D8E3AEBE1D003F4D006E5E8C /* FBRefresh.m */,
 			);
 			path = Category;
 			sourceTree = "<group>";
@@ -4263,6 +4268,7 @@
 				1F2A8FD61CF40277005116C7 /* FBOrderOtherTableViewCell.m in Sources */,
 				1F2A90B11CF40277005116C7 /* SystemSettingViewController.m in Sources */,
 				1F2A8FFC1CF40277005116C7 /* SubscribeViewController.m in Sources */,
+				D8E3AEBF1D003F4D006E5E8C /* FBRefresh.m in Sources */,
 				D81281571CAA8532007CF08B /* NSString+Helper.m in Sources */,
 				1F2A90891CF40277005116C7 /* FBPayTheWayViewController.m in Sources */,
 				1F2A90A51CF40277005116C7 /* FBSearchView.m in Sources */,

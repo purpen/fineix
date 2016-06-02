@@ -20,6 +20,7 @@
 #import "FiuPeopleView.h"
 #import "HomePageViewController.h"
 #import "UIImageView+SDWedImage.h"
+#import "UIButton+WebCache.h"
 
 static NSString *const URLDiscoverSlide = @"/gateway/slide";
 static NSString *const URLFiuScene = @"/scene_scene/";
@@ -79,7 +80,7 @@ static NSString *const URLFiuPeople = @"/user/find_user";
         [self.rollView setRollimageView:self.rollList];
         
     } failure:^(FBRequest *request, NSError *error) {
-        [SVProgressHUD showErrorWithStatus:[error localizedDescription]];
+        NSLog(@"%@", error);
     }];
 }
 
@@ -94,11 +95,12 @@ static NSString *const URLFiuPeople = @"/user/find_user";
             btn.tag = i;
             if (self.fiuPeopleList.count != 0) {
                 FiuPeopleUser * user = [[FiuPeopleUser alloc] initWithDictionary:self.fiuPeopleList[btn.tag]];
-                UIImageView * headerImg = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, btn.bounds.size.width, btn.bounds.size.width)];
-                [headerImg downloadImage:user.mediumAvatarUrl place:[UIImage imageNamed:@""]];
+//                UIImageView * headerImg = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, btn.bounds.size.width, btn.bounds.size.width)];
+//                [headerImg downloadImage:user.mediumAvatarUrl place:[UIImage imageNamed:@""]];
                 btn.layer.borderWidth = 1.0f;
                 btn.layer.borderColor = [UIColor colorWithHexString:@"#979797" alpha:.7].CGColor;
-                [btn addSubview:headerImg];
+//                [btn addSubview:headerImg];
+                [btn sd_setImageWithURL:[NSURL URLWithString:user.mediumAvatarUrl] forState:(UIControlStateNormal)];
                 [btn addTarget:self action:@selector(clickUserHead:) forControlEvents:UIControlEventTouchUpInside];
             }
         }
@@ -106,7 +108,7 @@ static NSString *const URLFiuPeople = @"/user/find_user";
         [self requestIsLastData:self.discoverTableView currentPage:self.currentpageNum withTotalPage:self.totalPageNum];
         
     } failure:^(FBRequest *request, NSError *error) {
-        [SVProgressHUD showErrorWithStatus:[error localizedDescription]];
+        NSLog(@"%@", error);
     }];
 }
 
@@ -123,7 +125,7 @@ static NSString *const URLFiuPeople = @"/user/find_user";
         [self requestIsLastData:self.discoverTableView currentPage:self.currentpageNum withTotalPage:self.totalPageNum];
         
     } failure:^(FBRequest *request, NSError *error) {
-        [SVProgressHUD showErrorWithStatus:[error localizedDescription]];
+        NSLog(@"%@", error);
     }];
 }
 
@@ -278,12 +280,17 @@ static NSString *const URLFiuPeople = @"/user/find_user";
                 cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:fiuPeopleCellId];
                 cell.selectionStyle = UITableViewCellSelectionStyleNone;
             }
-            [cell.contentView addSubview:self.fiuView];
-            [_fiuView mas_makeConstraints:^(MASConstraintMaker *make) {
-                make.size.mas_equalTo(CGSizeMake(SCREEN_WIDTH, 155/667.0*SCREEN_HEIGHT));
-                make.left.mas_equalTo(cell.mas_left);
-                make.top.mas_equalTo(cell.mas_top);
-            }];
+            
+            static dispatch_once_t onceToken;
+            dispatch_once(&onceToken, ^{
+                [cell.contentView addSubview:self.fiuView];
+                [_fiuView mas_makeConstraints:^(MASConstraintMaker *make) {
+                    make.size.mas_equalTo(CGSizeMake(SCREEN_WIDTH, 155/667.0*SCREEN_HEIGHT));
+                    make.left.mas_equalTo(cell.mas_left);
+                    make.top.mas_equalTo(cell.mas_top);
+                }];
+            });
+
             return cell;
             
         } else if (indexPath.row == 1) {

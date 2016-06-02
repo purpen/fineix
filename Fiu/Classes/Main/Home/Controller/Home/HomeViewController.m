@@ -13,6 +13,7 @@
 #import "SceneSubscribeViewController.h"
 #import "HomeSceneListRow.h"
 #import "CommentRow.h"
+#import "FBRefresh.h"
 
 static NSString *const URLSceneList = @"/scene_sight/";
 
@@ -43,7 +44,6 @@ static NSString *const URLSceneList = @"/scene_sight/";
 
 #pragma mark - 网络请求
 - (void)networkRequestData {
-    [SVProgressHUD show];
     NSDictionary *  requestParams = @{@"page":@(self.currentpageNum + 1), @"size":@10, @"sort":@"1"};
     self.sceneListRequest = [FBAPI getWithUrlString:URLSceneList requestDictionary:requestParams delegate:self];
     [self.sceneListRequest startRequestSuccess:^(FBRequest *request, id result) {
@@ -57,7 +57,6 @@ static NSString *const URLSceneList = @"/scene_sight/";
         self.currentpageNum = [[[result valueForKey:@"data"] valueForKey:@"current_page"] integerValue];
         self.totalPageNum = [[[result valueForKey:@"data"] valueForKey:@"total_page"] integerValue];
         [self requestIsLastData:self.homeTableView currentPage:self.currentpageNum withTotalPage:self.totalPageNum];
-        [SVProgressHUD dismiss];
             
     } failure:^(FBRequest *request, NSError *error) {
         [SVProgressHUD showErrorWithStatus:[error localizedDescription]];
@@ -97,12 +96,11 @@ static NSString *const URLSceneList = @"/scene_sight/";
 
 #pragma mark - 上拉加载 & 下拉刷新
 - (void)addMJRefresh:(UITableView *)table {
-    table.mj_header = [MJRefreshNormalHeader headerWithRefreshingBlock:^{
-        self.currentpageNum = 0;
-        [self.sceneListMarr removeAllObjects];
-        [self.sceneIdMarr removeAllObjects];
-        [self networkRequestData];
-    }];
+    FBRefresh *header = [FBRefresh headerWithRefreshingTarget:self refreshingAction:@selector(loadNewData)];
+    header.lastUpdatedTimeLabel.hidden = YES;
+    header.stateLabel.hidden = YES;
+    [header beginRefreshing];
+    table.mj_header = header;
     
     table.mj_footer = [MJRefreshAutoNormalFooter footerWithRefreshingBlock:^{
         if (self.currentpageNum < self.totalPageNum) {
@@ -111,6 +109,13 @@ static NSString *const URLSceneList = @"/scene_sight/";
             [table.mj_footer endRefreshing];
         }
     }];
+}
+
+- (void)loadNewData {
+    self.currentpageNum = 0;
+    [self.sceneListMarr removeAllObjects];
+    [self.sceneIdMarr removeAllObjects];
+    [self networkRequestData];
 }
 
 #pragma mark - 加载首页表格
@@ -135,9 +140,7 @@ static NSString *const URLSceneList = @"/scene_sight/";
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     static NSString * homeTableViewCellID = @"homeTableViewCellID";
     SceneListTableViewCell * cell = [tableView dequeueReusableCellWithIdentifier:homeTableViewCellID];
-    if (!cell) {
-        cell = [[SceneListTableViewCell alloc] initWithStyle:(UITableViewCellStyleDefault) reuseIdentifier:homeTableViewCellID];
-    }
+    cell = [[SceneListTableViewCell alloc] initWithStyle:(UITableViewCellStyleDefault) reuseIdentifier:homeTableViewCellID];
     if (self.sceneListMarr.count) {
         [cell setHomeSceneListData:self.sceneListMarr[indexPath.row]];
     }
@@ -150,9 +153,11 @@ static NSString *const URLSceneList = @"/scene_sight/";
 
 #pragma mark - 跳转到场景的详情
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    SceneInfoViewController * sceneInfoVC = [[SceneInfoViewController alloc] init];
-    sceneInfoVC.sceneId = self.sceneIdMarr[indexPath.row];
-    [self.navigationController pushViewController:sceneInfoVC animated:YES];
+    if (self.sceneListMarr.count)  {
+        SceneInfoViewController * sceneInfoVC = [[SceneInfoViewController alloc] init];
+        sceneInfoVC.sceneId = self.sceneIdMarr[indexPath.row];
+        [self.navigationController pushViewController:sceneInfoVC animated:YES];
+    }
 }
 
 #pragma mark - 判断上／下滑状态，显示/隐藏Nav/tabBar

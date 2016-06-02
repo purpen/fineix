@@ -11,7 +11,7 @@
 #import "GoodsRow.h"
 #import <SDWebImage/UIButton+WebCache.h>
 
-@interface GoodsTableViewCell : UITableViewCell <UIScrollViewDelegate, UICollectionViewDataSource, UICollectionViewDelegate>
+@interface GoodsTableViewCell : UITableViewCell <UIScrollViewDelegate, UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout>
 
 @pro_strong UINavigationController  *   nav;
 @pro_strong UICollectionView    *       goodsImgView;   //  图片滚动视图

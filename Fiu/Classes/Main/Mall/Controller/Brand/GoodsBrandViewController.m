@@ -163,9 +163,8 @@ static NSString *const URLGoodslist = @"/scene_product/getlist";
     } else {
         static NSString * brandGoodsCellId = @"BrandGoodsCellId";
         GoodsTableViewCell * cell = [tableView dequeueReusableCellWithIdentifier:brandGoodsCellId];
-        if (!cell) {
-            cell = [[GoodsTableViewCell alloc] initWithStyle:(UITableViewCellStyleDefault) reuseIdentifier:brandGoodsCellId];
-        }
+        cell = [[GoodsTableViewCell alloc] initWithStyle:(UITableViewCellStyleDefault) reuseIdentifier:brandGoodsCellId];
+        
         cell.nav = self.navigationController;
         [cell setGoodsData:self.goodsList[indexPath.row]];
         return cell;

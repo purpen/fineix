@@ -291,9 +291,7 @@ static NSString *const URLSearchList = @"/search/getlist";
     } else if (tableView == self.goodsTable) {
         static NSString * GoodsTablecellId = @"goodsTablecellId";
         GoodsTableViewCell * cell = [tableView dequeueReusableCellWithIdentifier:GoodsTablecellId];
-        if (!cell) {
-            cell = [[GoodsTableViewCell alloc] initWithStyle:(UITableViewCellStyleDefault) reuseIdentifier:GoodsTablecellId];
-        }
+        cell = [[GoodsTableViewCell alloc] initWithStyle:(UITableViewCellStyleDefault) reuseIdentifier:GoodsTablecellId];
         cell.nav = self.navigationController;
         [cell setGoodsData:self.goodsList[indexPath.row]];
         return cell;

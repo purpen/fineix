@@ -18,12 +18,19 @@
         
         [self addSubview:self.bgImage];
         
+        [self addSubview:self.userView];
     }
     return self;
 }
 
 #pragma mark -
 - (void)setHomeSceneListData:(HomeSceneListRow *)model {
+    CGRect userViewRect = self.userView.frame;
+    userViewRect = CGRectMake(20, SCREEN_HEIGHT - 230, SCREEN_WIDTH - 40, 160);
+    [UIView animateWithDuration:.6 animations:^{
+        self.userView.frame = userViewRect;
+    }];
+
     [self titleTextStyle:model.title];
     [self.bgImage downloadImage:model.coverUrl place:[UIImage imageNamed:@""]];
     [self.userHeader downloadImage:model.user.avatarUrl place:[UIImage imageNamed:@""]];
@@ -34,7 +41,7 @@
     self.whereScene.text = [self abouText:self.whereScene withText:model.sceneTitle];
     self.city.text = [self abouText:self.city withText:model.address];
     self.time.text = [NSString stringWithFormat:@"|  %@", model.createdAt];
-    
+
     //  首页显示标记点
 //    self.tagDataMarr = [NSMutableArray arrayWithArray:model.product];
 //    [self setUserTagBtn];
@@ -82,13 +89,6 @@
         shadow.locations = @[@(0.5f), @(1.5f)];
         shadow.frame = _bgImage.bounds;
         [_bgImage.layer addSublayer:shadow];
-        
-        [_bgImage addSubview:self.userView];
-        [_userView mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.size.mas_equalTo(CGSizeMake(SCREEN_WIDTH - 40, 160));
-            make.bottom.equalTo(_bgImage.mas_bottom).with.offset(-75);
-            make.left.equalTo(_bgImage.mas_left).with.offset(20);
-        }];
     }
     return _bgImage;
 }
@@ -96,7 +96,7 @@
 #pragma mark - 用户信息
 - (UIView *)userView {
     if (!_userView) {
-        _userView = [[UIView alloc] init];
+        _userView = [[UIView alloc] initWithFrame:CGRectMake(20, SCREEN_HEIGHT, SCREEN_WIDTH - 40, 160)];
 
         [_userView addSubview:self.userHeader];
         [_userHeader mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -160,8 +160,6 @@
             make.top.equalTo(_time.mas_bottom).with.offset(5);
             make.left.equalTo(_whereScene.mas_left).with.offset(0);
         }];
-        
-
     }
     return _userView;
 }

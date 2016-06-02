@@ -11,10 +11,12 @@
 #import "SVProgressHUD.h"
 #import "MarkGoodsRow.h"
 #import "MarkGoodsCollectionViewCell.h"
+#import "GoodsInfoData.h"
 
 static NSString *const URLMarkGoods = @"/category/getlist";
 static NSString *const URLGoodsList = @"/scene_product/getlist";
 static NSString *const URLSearchGoods = @"/search/getlist";
+static NSString *const URLGetGoodsImg = @"/scene_product/view";
 
 @interface MarkGoodsViewController ()
 
@@ -22,6 +24,7 @@ static NSString *const URLSearchGoods = @"/search/getlist";
 @pro_strong NSMutableArray      *   categoryId;
 @pro_strong NSMutableArray      *   goodsList;
 @pro_strong NSString            *   ids;
+@pro_strong GoodsInfoData       *   goodsModel;
 
 @end
 
@@ -101,6 +104,27 @@ static NSString *const URLSearchGoods = @"/search/getlist";
     }];
 }
 
+#pragma mark 获取产品详情取出图片
+- (void)networkGetGoodsImg:(NSString *)goodsId {
+    self.getImgRequest = [FBAPI getWithUrlString:URLGetGoodsImg requestDictionary:@{@"id":goodsId} delegate:self];
+    [self.getImgRequest startRequestSuccess:^(FBRequest *request, id result) {
+        self.goodsModel = [[GoodsInfoData alloc] initWithDictionary:[result valueForKey:@"data"]];
+        self.getImgBlock(
+                         [self.goodsModel.pngAsset valueForKey:@"url"][0],
+                         self.goodsModel.title,
+                         [NSString stringWithFormat:@"%.2f",self.goodsModel.salePrice],
+                         [NSString stringWithFormat:@"%zi",self.goodsModel.idField],
+                         [[self.goodsModel.pngAsset valueForKey:@"width"][0] floatValue],
+                         [[self.goodsModel.pngAsset valueForKey:@"height"][0] floatValue]
+                         );
+        
+        [self dismissViewControllerAnimated:YES completion:nil];
+
+    } failure:^(FBRequest *request, NSError *error) {
+        [SVProgressHUD showErrorWithStatus:[error localizedDescription]];
+    }];
+}
+
 //  判断是否为最后一条数据
 - (void)requestIsLastData:(UICollectionView *)collectionView currentPage:(NSInteger )current withTotalPage:(NSInteger)total {
     BOOL isLastPage = (current == total);
@@ -174,16 +198,15 @@ static NSString *const URLSearchGoods = @"/search/getlist";
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
     MarkGoodsCollectionViewCell * cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"GoodsListViewCell" forIndexPath:indexPath];
-    if (self.goodsList) {
+    if (self.goodsList.count > 0) {
         [cell setMarkGoodsData:self.goodsList[indexPath.row]];
     }
     return cell;
 }
 
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
-    CGFloat salePrice = [[self.goodsList valueForKey:@"salePrice"][indexPath.row] floatValue];
-    self.getImgBlock([self.goodsList valueForKey:@"coverUrl"][indexPath.row], [self.goodsList valueForKey:@"title"][indexPath.row], [NSString stringWithFormat:@"%.2f",salePrice], [NSString stringWithFormat:@"%@",[self.goodsList valueForKey:@"idField"][indexPath.row]]);
-    [self dismissViewControllerAnimated:YES completion:nil];
+    NSString * goodsId = [NSString stringWithFormat:@"%@",[self.goodsList valueForKey:@"idField"][indexPath.row]];
+    [self networkGetGoodsImg:goodsId];
 }
 
 #pragma mark - 添加搜索框视图
@@ -255,11 +278,5 @@ static NSString *const URLSearchGoods = @"/search/getlist";
     return _goodsList;
 }
 
-//- (NSMutableArray *)categoryId {
-//    if (!_categoryId) {
-//        _categoryId = [NSMutableArray array];
-//    }
-//    return _categoryId;
-//}
 
 @end
