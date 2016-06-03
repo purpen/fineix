@@ -26,30 +26,23 @@
     if (self = [super initWithStyle:style reuseIdentifier:reuseIdentifier]) {
         self.selectionStyle = UITableViewCellSelectionStyleNone;
         
-        [self.contentView addSubview:self.bgImageView];
-        [_bgImageView mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.top.mas_equalTo(self.mas_top).with.offset(0);
-            make.left.mas_equalTo(self.mas_left).with.offset(0);
-            make.size.mas_equalTo(CGSizeMake(SCREEN_WIDTH, 184/667.0*SCREEN_HEIGHT));
-        }];
+        [self addSubview:self.bgImageView];
     }
     return self;
 }
 
 -(UIImageView *)bgImageView{
     if (!_bgImageView) {
-        _bgImageView = [[UIImageView alloc] init];
-        
+        _bgImageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 184/667.0*SCREEN_HEIGHT)];
         //  添加渐变层
         CAGradientLayer * shadow = [CAGradientLayer layer];
         shadow.startPoint = CGPointMake(0, 0);
         shadow.endPoint = CGPointMake(0, 1);
         shadow.colors = @[(__bridge id)[UIColor clearColor].CGColor,
                           (__bridge id)[UIColor blackColor].CGColor];
-        shadow.locations = @[@(0.5f), @(1.5f)];
+        shadow.locations = @[@(0.5f), @(1.0f)];
         shadow.frame = _bgImageView.bounds;
         [_bgImageView.layer addSublayer:shadow];
-
         
         [_bgImageView addSubview:self.locationImageView];
         [_locationImageView mas_makeConstraints:^(MASConstraintMaker *make) {

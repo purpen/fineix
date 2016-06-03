@@ -23,6 +23,12 @@
     
 }
 
+#pragma mark - 获取用户登录id
+- (NSString *)getLoginUserID {
+    UserInfoEntity * entity = [UserInfoEntity defaultUserInfoEntity];
+    return entity.userId;
+}
+
 #pragma mark - 添加控件
 //  页面标题
 - (void)addNavViewTitle:(NSString *)title {

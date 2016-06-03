@@ -148,10 +148,10 @@
     _mallNav = [[FBNavigationViewController alloc] initWithRootViewController:mallVC];
     _myNav = [[FBNavigationViewController alloc] initWithRootViewController:myVC];
     
-    [self setChildViewController:_homeNav image:@"homegray" seletedImage:@"homered" itemTitle:@"情"];
-    [self setChildViewController:_discoverNav image:@"findgray" seletedImage:@"findred" itemTitle:@"景"];
-    [self setChildViewController:_mallNav image:@"shopgray" seletedImage:@"shopred" itemTitle:@"品"];
-    [self setChildViewController:_myNav image:@"minegray" seletedImage:@"minered" itemTitle:@"我"];
+    [self setChildViewController:_homeNav image:@"homegray" seletedImage:@"homered" itemTitle:@"精选"];
+    [self setChildViewController:_discoverNav image:@"findgray" seletedImage:@"findred" itemTitle:@"发现"];
+    [self setChildViewController:_mallNav image:@"shopgray" seletedImage:@"shopred" itemTitle:@"好货"];
+    [self setChildViewController:_myNav image:@"minegray" seletedImage:@"minered" itemTitle:@"个人"];
     
     self.viewControllers = @[_homeNav, _discoverNav, _mallNav, _myNav];
 }

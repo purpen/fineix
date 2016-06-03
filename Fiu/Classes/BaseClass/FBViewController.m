@@ -75,6 +75,12 @@ static NSString *const URLUserIsLogin = @"/user/user_info";
     return entity.isLogin;
 }
 
+#pragma mark - 获取用户登录id
+- (NSString *)getLoginUserID {
+    UserInfoEntity * entity = [UserInfoEntity defaultUserInfoEntity];
+    return entity.userId;
+}
+
 #pragma mark - 弹出登录
 - (void)openUserLoginVC {
     UIStoryboard *loginStory = [UIStoryboard storyboardWithName:@"LoginRegisterController" bundle:[NSBundle mainBundle]];

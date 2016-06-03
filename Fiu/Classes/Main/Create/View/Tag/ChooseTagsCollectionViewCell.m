@@ -13,17 +13,13 @@
 - (instancetype)initWithFrame:(CGRect)frame {
     self = [super initWithFrame:frame];
     if (self) {
-        
         [self addSubview:self.tagBtn];
         [_tagBtn mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.height.mas_equalTo(@20);
             make.left.equalTo(self.mas_left).with.offset(5);
             make.right.equalTo(self.mas_right).with.offset(-5);
             make.centerX.equalTo(self);
             make.centerY.equalTo(self);
         }];
-        
-        
     }
     return self;
 }

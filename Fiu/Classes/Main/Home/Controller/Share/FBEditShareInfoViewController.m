@@ -376,7 +376,6 @@ static NSString *const URLShareText = @"/search/getlist";
         UIVisualEffectView * effectView = [[UIVisualEffectView alloc] initWithEffect:blurEffect];
         effectView.frame = _bgImgView.bounds;
         [_bgImgView addSubview:effectView];
-        effectView.alpha = .4f;
 
         UIView * bgView = [[UIView alloc] initWithFrame:_bgImgView.bounds];
         bgView.backgroundColor = [UIColor colorWithHexString:@"#000000" alpha:.4];

@@ -381,7 +381,7 @@ static NSString *const IconURL = @"/my/add_head_pic";
                 _model.head_pic_url = [result objectForKey:@"data"][@"head_pic_url"];
             }
             if (![[result objectForKey:@"data"][@"is_love"] isKindOfClass:[NSNull class]]) {
-                _model.is_love = [result objectForKey:@"data"][@"is_love"];
+                _model.is_love = [[result objectForKey:@"data"][@"is_love"] integerValue];
             }
             if (![[result objectForKey:@"data"][@"identify"][@"is_expert"] isKindOfClass:[NSNull class]]) {
                 _model.is_expert = [result objectForKey:@"data"][@"identify"][@"is_expert"];
@@ -586,7 +586,7 @@ static NSString *const IconURL = @"/my/add_head_pic";
         [sheetVC.stopBtn addTarget:self action:@selector(clickStopBtn:) forControlEvents:UIControlEventTouchUpInside];
         [sheetVC.cancelBtn addTarget:self action:@selector(clickCancelBtn:) forControlEvents:UIControlEventTouchUpInside];
     }else{
-        _model.is_love = @1;
+        _model.is_love = 1;
         _fansN ++;
         [self.myCollectionView reloadItemsAtIndexPaths:[NSArray arrayWithObjects:[NSIndexPath indexPathForRow:0 inSection:0],[NSIndexPath indexPathForRow:0 inSection:1], nil]];
         //请求数据
@@ -728,7 +728,7 @@ static NSString *const IconURL = @"/my/add_head_pic";
 
 -(void)clickStopBtn:(UIButton*)sender{
     [self dismissViewControllerAnimated:YES completion:nil];
-    _model.is_love = @0;
+    _model.is_love = 0;
     _fansN --;
     [self.myCollectionView reloadItemsAtIndexPaths:[NSArray arrayWithObjects:[NSIndexPath indexPathForRow:0 inSection:0],[NSIndexPath indexPathForRow:0 inSection:1], nil]];
     FBRequest *request = [FBAPI postWithUrlString:@"/follow/ajax_cancel_follow" requestDictionary:@{@"follow_id":self.userId} delegate:self];

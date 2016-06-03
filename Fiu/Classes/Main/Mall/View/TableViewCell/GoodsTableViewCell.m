@@ -109,11 +109,11 @@
 - (UICollectionView *)goodsImgView {
     if (!_goodsImgView) {
         UICollectionViewFlowLayout * flowLayout = [[UICollectionViewFlowLayout alloc] init];
-        flowLayout.sectionInset = UIEdgeInsetsMake(0, 15, 0, 5);
+        flowLayout.sectionInset = UIEdgeInsetsMake(0, 0, 0, 0);
         flowLayout.scrollDirection = UICollectionViewScrollDirectionHorizontal;
-        flowLayout.minimumInteritemSpacing = 5.0f;
+        flowLayout.minimumInteritemSpacing = 10.0f;
 
-        _goodsImgView = [[UICollectionView alloc] initWithFrame:CGRectMake(0, 10, SCREEN_WIDTH, 150) collectionViewLayout:flowLayout];
+        _goodsImgView = [[UICollectionView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 150) collectionViewLayout:flowLayout];
         _goodsImgView.dataSource = self;
         _goodsImgView.delegate = self;
         _goodsImgView.backgroundColor = [UIColor colorWithHexString:grayLineColor];
@@ -143,7 +143,7 @@
     [cell.img downloadImage:self.goodsImgMarr[indexPath.row] place:[UIImage imageNamed:@""]];
 
     if (indexPath.row % 2 != 0) {
-        UIImageView * line = [[UIImageView alloc] initWithFrame:CGRectMake(270, 0, 4, 150)];
+        UIImageView * line = [[UIImageView alloc] initWithFrame:CGRectMake(278, 0, 3, 150)];
         line.image = [UIImage imageNamed:@"Goods_image_bg"];
         [cell addSubview:line];
     }

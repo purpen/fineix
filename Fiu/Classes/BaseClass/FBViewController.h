@@ -46,6 +46,11 @@
 - (BOOL)isUserLogin;
 
 /**
+ *  获取当前登录用户id
+ */
+- (NSString *)getLoginUserID;
+
+/**
  *  未登录弹出登录框
  */
 - (void)openUserLoginVC;

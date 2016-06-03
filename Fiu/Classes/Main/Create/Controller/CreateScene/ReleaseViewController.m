@@ -89,7 +89,8 @@ static NSString *const URLReleaseFiuScenen = @"/scene_scene/save";
             [self.navigationController pushViewController:sceneInfoVC animated:YES];
         
         } failure:^(FBRequest *request, NSError *error) {
-            [SVProgressHUD showErrorWithStatus:@"您的场景发布失败，刷新试一下吧"];
+            NSLog(@"%@", error);
+            [SVProgressHUD showErrorWithStatus:[error localizedDescription]];
         }];
     }
 }
@@ -129,7 +130,8 @@ static NSString *const URLReleaseFiuScenen = @"/scene_scene/save";
             [SVProgressHUD showSuccessWithStatus:@"您的情景发布成功，品味又升级啦"];
             
         } failure:^(FBRequest *request, NSError *error) {
-            [SVProgressHUD showErrorWithStatus:@"您的情景景发布失败，刷新试一下吧"];
+            NSLog(@"%@", error);
+            [SVProgressHUD showErrorWithStatus:[error localizedDescription]];
         }];
     }
 }

@@ -32,11 +32,18 @@ static NSString *const URLSceneList = @"/scene_sight/";
     [self setFirstAppStart];
     [self setNavigationViewUI];
     self.tabBarController.tabBar.hidden = NO;
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(deleteScene) name:@"deleteScene" object:nil];
+}
+
+- (void)deleteScene {
+    [self.homeTableView.mj_header beginRefreshing];
 }
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.automaticallyAdjustsScrollViewInsets = NO;     self.currentpageNum = 0;
+    self.automaticallyAdjustsScrollViewInsets = NO;
+    self.currentpageNum = 0;
     [self networkRequestData];
     
     [self.view addSubview:self.homeTableView];
@@ -82,6 +89,13 @@ static NSString *const URLSceneList = @"/scene_sight/";
         table.mj_footer.hidden = true;
     }
     if ([table.mj_header isRefreshing]) {
+        CGPoint tableY = table.contentOffset;
+        tableY.y = 0;
+        if (table.bounds.origin.y > 0) {
+            [UIView animateWithDuration:.3 animations:^{
+                table.contentOffset = tableY;
+            }];
+        }
         [table.mj_header endRefreshing];
     }
     if ([table.mj_footer isRefreshing]) {
@@ -180,7 +194,6 @@ static NSString *const URLSceneList = @"/scene_sight/";
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView{
     if (scrollView == self.homeTableView) {
         CGRect tabBarRect = self.tabBarController.tabBar.frame;
-        
         if (self.rollDown == YES) {
             tabBarRect = CGRectMake(0, SCREEN_HEIGHT + 20, SCREEN_WIDTH, 49);
             [UIView animateWithDuration:.4 animations:^{
@@ -250,6 +263,10 @@ static NSString *const URLSceneList = @"/scene_sight/";
 - (void)viewWillDisappear:(BOOL)animated {
     [super viewWillDisappear:animated];
     [SVProgressHUD dismiss];
+}
+
+- (void)dealloc {
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:@"deleteScene" object:nil];
 }
 
 @end

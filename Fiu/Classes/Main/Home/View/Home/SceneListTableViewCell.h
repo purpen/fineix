@@ -29,4 +29,6 @@
 
 - (void)setHomeSceneListData:(HomeSceneListRow *)model;
 
+- (void)showUserView;
+
 @end

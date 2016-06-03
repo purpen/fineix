@@ -23,6 +23,7 @@
 #import "HomePageViewController.h"
 #import "NearQingViewController.h"
 #import "FBShareViewController.h"
+#import "UIView+TYAlertView.h"
 
 static NSString *const URLSceneInfo = @"/scene_sight/view";
 static NSString *const URLCommentList = @"/comment/getlist";
@@ -31,6 +32,7 @@ static NSString *const URLLikeScene = @"/favorite/ajax_sight_love";
 static NSString *const URLCancelLike = @"/favorite/ajax_cancel_sight_love";
 static NSString *const URLSceneGoods = @"/scene_product/getlist";
 static NSString *const URLWantBuy = @"/scene_product/sight_click_stat";
+static NSString *const URLDeleteScene = @"/scene_sight/delete";
 
 @interface LookSceneViewController () {
     NSDictionary    *   _shareDataDict;
@@ -80,10 +82,9 @@ static NSString *const URLWantBuy = @"/scene_product/sight_click_stat";
     [SVProgressHUD show];
     self.sceneInfoRequest = [FBAPI getWithUrlString:URLSceneInfo requestDictionary:@{@"id":self.sceneId} delegate:self];
     [self.sceneInfoRequest startRequestSuccess:^(FBRequest *request, id result) {
-        NSLog(@"＝＝＝＝＝＝＝＝＝ %@", result);
         //  分享出去的场景信息
         _shareDataDict = [NSDictionary dictionaryWithDictionary:[result valueForKey:@"data"]];
-        _sceneUserId = [[result valueForKey:@"data"] valueForKey:@"user_id"];
+        _sceneUserId = [NSString stringWithFormat:@"%@", [[result valueForKey:@"data"] valueForKey:@"user_id"]];
         self.sceneInfoModel = [[SceneInfoData alloc] initWithDictionary:[result valueForKey:@"data"]];
         
         //  场景中商品的ids
@@ -104,6 +105,22 @@ static NSString *const URLWantBuy = @"/scene_product/sight_click_stat";
         [SVProgressHUD showErrorWithStatus:[error localizedDescription]];
     }];
 }
+
+
+#pragma mark 删除场景
+- (void)deleteTheScene {
+    self.deleteSceneRequest = [FBAPI postWithUrlString:URLDeleteScene requestDictionary:@{@"id":self.sceneId} delegate:self];
+    [self.deleteSceneRequest startRequestSuccess:^(FBRequest *request, id result) {
+        if ([[result valueForKey:@"success"] isEqualToNumber:@1]) {
+            [self dismissViewControllerAnimated:YES completion:nil];
+        }
+        
+    } failure:^(FBRequest *request, NSError *error) {
+        NSLog(@"error :%@", error);
+        [SVProgressHUD showErrorWithStatus:[error localizedDescription]];
+    }];
+}
+
 
 #pragma mark 评论列表
 - (void)networkCommentData {
@@ -458,7 +475,22 @@ static NSString *const URLWantBuy = @"/scene_product/sight_click_stat";
 #pragma mark - 弹出更多视图
 - (void)moreBtnClick {
     FBAlertViewController * alertVC = [[FBAlertViewController alloc] init];
-    [alertVC initFBAlertVcStyle:NO];
+    if ([_sceneUserId isEqualToString:[self getLoginUserID]]) {
+        [alertVC initFBAlertVcStyle:YES];
+        alertVC.deleteScene = ^ {
+            TYAlertView * cancelAlertView = [TYAlertView alertViewWithTitle:@"是否删除当前场景？" message:@""];
+            [cancelAlertView addAction:[TYAlertAction actionWithTitle:@"取消" style:(TYAlertActionStyleCancle) handler:^(TYAlertAction *action) {
+                
+            }]];
+            [cancelAlertView addAction:[TYAlertAction actionWithTitle:@"确定删除" style:(TYAlertActionStyleDefault) handler:^(TYAlertAction *action) {
+                [self deleteTheScene];
+            }]];
+            [cancelAlertView showInWindowWithBackgoundTapDismissEnable:YES];
+        };
+        
+    } else {
+        [alertVC initFBAlertVcStyle:NO];
+    }
     alertVC.modalPresentationStyle = UIModalPresentationOverCurrentContext;
     alertVC.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;
     alertVC.targetId = self.sceneId;

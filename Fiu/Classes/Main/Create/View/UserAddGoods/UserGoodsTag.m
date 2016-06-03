@@ -98,7 +98,7 @@
     viewTapDot = [self getViewTapDot];
     [self addSubview:viewTapDot];
     [viewTapDot mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.size.mas_equalTo(CGSizeMake(5, 5));
+        make.size.mas_equalTo(CGSizeMake(6, 6));
         make.centerY.equalTo(self);
         make.left.equalTo(self.mas_left).with.offset(100);
     }];
@@ -106,7 +106,7 @@
     viewSpread = [self getViewSpread];
     [self addSubview:viewSpread];
     [viewSpread mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.size.mas_equalTo(CGSizeMake(5, 5));
+        make.size.mas_equalTo(CGSizeMake(6, 6));
         make.centerY.equalTo(viewTapDot);
         make.centerX.equalTo(viewTapDot);
     }];
@@ -140,7 +140,7 @@
 - (UIView *)getViewSpread {
     UIView * view = [UIView new];
     view.backgroundColor = [UIColor colorWithHexString:@"#FFFFFF" alpha:0.7];
-    view.layer.cornerRadius = 5 / 2;
+    view.layer.cornerRadius = 6/2;
     view.layer.masksToBounds = YES;
     view.userInteractionEnabled=NO;
     return view;
@@ -149,7 +149,7 @@
 - (UIView *)getViewTapDot {
     UIView *view =[UIView new];
     view.backgroundColor=[UIColor colorWithHexString:fineixColor];
-    view.layer.cornerRadius = 5 / 2;
+    view.layer.cornerRadius = 6/2;
     view.layer.masksToBounds = YES;
     view.userInteractionEnabled=NO;
     return view;
@@ -176,7 +176,7 @@
 #pragma mark - 动画
 - (void)animationTimerDidFired {
     [UIView animateWithDuration:1.5 animations:^{
-        viewTapDot.transform = CGAffineTransformMakeScale(1.3,1.3);
+        viewTapDot.transform = CGAffineTransformMakeScale(1.4,1.4);
     } completion:^(BOOL finished) {
         [UIView animateWithDuration:1.5 animations:^{
             viewTapDot.transform = CGAffineTransformIdentity;

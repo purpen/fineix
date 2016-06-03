@@ -83,7 +83,7 @@
                 [self.coverUrlMary addObject:[dataDic objectForKey:@"cover_url"]];
             }
             UserInfo *flag = [[UserInfo alloc] init];
-            flag.is_love = @0;
+            flag.is_love = 0;
             [self.flagMary addObject:flag];
         }
         for (NSDictionary *logDict in self.locationMarr) {
@@ -310,9 +310,9 @@
     self.cellLine.backgroundColor = [UIColor colorWithHexString:lineGrayColor];
     [cell.contentView addSubview:self.cellLine];
     UserInfo *flag = self.flagMary[indexPath.row];
-    if ([flag.is_love isEqualToNumber:@0]) {
+    if (flag.is_love == 0) {
         [cell setAccessoryType:UITableViewCellAccessoryNone];
-    }else if ([flag.is_love isEqualToNumber:@1]){
+    }else if (flag.is_love == 1){
         [cell setAccessoryType:UITableViewCellAccessoryCheckmark];
     }
     
@@ -330,16 +330,16 @@
             
         }else{
             UserInfo *flag = self.flagMary[i];
-            flag.is_love = @0;
+            flag.is_love = 0;
             [tableView reloadRowsAtIndexPaths:[NSArray arrayWithObjects:[NSIndexPath indexPathForRow:i inSection:0], nil] withRowAnimation:UITableViewRowAnimationNone];
         }
     }
     UserInfo *flag = self.flagMary[indexPath.row];
-    if ([flag.is_love isEqualToNumber:@0]) {
-        flag.is_love = @1;
+    if (flag.is_love == 0) {
+        flag.is_love = 1;
         [tableView reloadRowsAtIndexPaths:[NSArray arrayWithObjects:indexPath, nil] withRowAnimation:UITableViewRowAnimationNone];
-    }else if ([flag.is_love isEqualToNumber:@1]){
-        flag.is_love = @0;
+    }else if (flag.is_love == 1){
+        flag.is_love = 0;
         [tableView reloadRowsAtIndexPaths:[NSArray arrayWithObjects:indexPath, nil] withRowAnimation:UITableViewRowAnimationNone];
     }
     NSLog(@" 选中附近的情景： id－－－%@  标题 ＝＝＝ %@", self.idMarr[indexPath.row], self.titleMarr[indexPath.row]);
@@ -350,7 +350,7 @@
     int i = 0;
     for (; i<self.flagMary.count; i++) {
         UserInfo *model = self.flagMary[i];
-        if ([model.is_love isEqualToNumber:@1]) {
+        if (model.is_love == 1) {
             flag = YES;
             break;
         }

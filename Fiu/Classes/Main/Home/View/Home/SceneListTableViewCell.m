@@ -23,14 +23,18 @@
     return self;
 }
 
-#pragma mark -
-- (void)setHomeSceneListData:(HomeSceneListRow *)model {
+#pragma mark - 动画出现场景的信息
+- (void)showUserView {
     CGRect userViewRect = self.userView.frame;
     userViewRect = CGRectMake(20, SCREEN_HEIGHT - 230, SCREEN_WIDTH - 40, 160);
-    [UIView animateWithDuration:.6 animations:^{
+    [UIView animateWithDuration:.7 animations:^{
         self.userView.frame = userViewRect;
     }];
+}
 
+#pragma mark -
+- (void)setHomeSceneListData:(HomeSceneListRow *)model {
+    [self showUserView];
     [self titleTextStyle:model.title];
     [self.bgImage downloadImage:model.coverUrl place:[UIImage imageNamed:@""]];
     [self.userHeader downloadImage:model.user.avatarUrl place:[UIImage imageNamed:@""]];

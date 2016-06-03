@@ -51,7 +51,7 @@ static const NSInteger actionBtnTag = 686;
 
 #pragma mark - 场景中的“更多”选项
 - (void)initFBAlertVcStyle:(BOOL)isUserSelf {
-    NSArray * userTitle = [NSArray arrayWithObjects:@"删除", @"编辑", @"取消", nil];
+    NSArray * userTitle = [NSArray arrayWithObjects:NSLocalizedString(@"CommentVcTitle", nil), NSLocalizedString(@"ShareBtn", nil), NSLocalizedString(@"Delete", nil), NSLocalizedString(@"cancel", nil),nil];
     NSArray * visitorsTitle = [NSArray arrayWithObjects:NSLocalizedString(@"CommentVcTitle", nil), NSLocalizedString(@"ShareBtn", nil), NSLocalizedString(@"ReportVcTitle", nil), NSLocalizedString(@"cancel", nil), nil];
     
     for (NSUInteger idx = 0; idx < visitorsTitle.count; ++ idx) {
@@ -61,7 +61,7 @@ static const NSInteger actionBtnTag = 686;
         actionBtn.backgroundColor = [UIColor whiteColor];
         [actionBtn setTitleColor:[UIColor blackColor] forState:(UIControlStateNormal)];
         //
-        if (isUserSelf) {
+        if (isUserSelf == YES) {
             [actionBtn setTitle:userTitle[idx] forState:(UIControlStateNormal)];
             [actionBtn addTarget:self action:@selector(userActionBtnClick:) forControlEvents:(UIControlEventTouchUpInside)];
         } else {
@@ -76,10 +76,21 @@ static const NSInteger actionBtnTag = 686;
 //  用户自己创建的场景，可编辑
 - (void)userActionBtnClick:(UIButton *)button {
     if (button.tag == actionBtnTag) {
-    
+        [self dismissViewControllerAnimated:YES completion:^{
+            self.openCommentVc();
+        }];
+        
     } else if (button.tag == actionBtnTag + 1) {
-    
+        FBShareViewController * shareVC = [[FBShareViewController alloc] init];
+        shareVC.dataDict = self.sceneData;
+        [self presentViewController:shareVC animated:YES completion:nil];
+        
     } else if (button.tag == actionBtnTag + 2) {
+        [self dismissViewControllerAnimated:YES completion:^{
+            self.deleteScene();
+        }];
+        
+    } else if (button.tag == actionBtnTag + 3) {
         [self dismissViewControllerAnimated:YES completion:nil];
     }
 }

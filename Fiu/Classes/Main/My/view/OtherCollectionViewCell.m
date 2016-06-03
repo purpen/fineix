@@ -136,9 +136,9 @@
 
 -(void)setUIWithModel:(UserInfo *)model{
     
-    if ([model.is_love isEqualToNumber:@0]) {
+    if (model.is_love == 0) {
         self.focusOnBtn.selected = NO;
-    }else if([model.is_love isEqualToNumber:@1]){
+    }else if(model.is_love == 1){
         self.focusOnBtn.selected = YES;
     }
     //这里要改成别人的信息

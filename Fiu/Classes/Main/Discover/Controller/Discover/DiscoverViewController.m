@@ -25,7 +25,7 @@
 static NSString *const URLDiscoverSlide = @"/gateway/slide";
 static NSString *const URLFiuScene = @"/scene_scene/";
 static NSString *const URLSceneList = @"/scene_sight/";
-static NSString *const URLTagS = @"/scene_tags/getlist";
+static NSString *const URLTagS = @"/gateway/get_fiu_hot_sight_tags";
 static NSString *const URLFiuPeople = @"/user/find_user";
 
 @interface DiscoverViewController()
@@ -50,6 +50,11 @@ static NSString *const URLFiuPeople = @"/user/find_user";
     [self setNavigationViewUI];
     
     [self setFirstAppStart];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(deleteScene) name:@"deleteScene" object:nil];
+}
+
+- (void)deleteScene {
+    [self.discoverTableView.mj_header beginRefreshing];
 }
 
 - (void)viewDidLoad {
@@ -114,13 +119,9 @@ static NSString *const URLFiuPeople = @"/user/find_user";
 
 #pragma mark 标签列表
 - (void)networkTagsListData {
-    self.tagsRequest = [FBAPI getWithUrlString:URLTagS requestDictionary:@{@"is_hot":@"1", @"sort":@"6", @"page":@"1", @"size":@"50", @"type":@"1"} delegate:self];
+    self.tagsRequest = [FBAPI getWithUrlString:URLTagS requestDictionary:nil delegate:self];
     [self.tagsRequest startRequestSuccess:^(FBRequest *request, id result) {
-        NSArray * tagsArr = [[result valueForKey:@"data"] valueForKey:@"rows"];
-        for (NSDictionary * tagsDic in tagsArr) {
-            HotTagsRow * tagsModel = [[HotTagsRow alloc] initWithDictionary:tagsDic];
-            [self.tagsList addObject:tagsModel];
-        }
+        self.tagsList = [NSMutableArray arrayWithArray:[[result valueForKey:@"data"] valueForKey:@"tags"]];
         [self.discoverTableView reloadData];
         [self requestIsLastData:self.discoverTableView currentPage:self.currentpageNum withTotalPage:self.totalPageNum];
         
@@ -297,7 +298,10 @@ static NSString *const URLFiuPeople = @"/user/find_user";
             static NSString * fiuSceneTagCellId = @"fiuSceneTagCellId";
             FiuTagTableViewCell * cell = [tableView dequeueReusableCellWithIdentifier:fiuSceneTagCellId];
             cell = [[FiuTagTableViewCell alloc] initWithStyle:(UITableViewCellStyleDefault) reuseIdentifier:fiuSceneTagCellId];
-            [cell setHotTagsData:self.tagsList];
+            static dispatch_once_t onceToken;
+            dispatch_once(&onceToken, ^{
+                [cell setHotTagsData:self.tagsList];
+            });
             cell.nav = self.navigationController;
             return cell;
         }
@@ -487,6 +491,10 @@ static NSString *const URLFiuPeople = @"/user/find_user";
 - (void)viewWillDisappear:(BOOL)animated {
     [super viewWillDisappear:animated];
     [SVProgressHUD dismiss];
+}
+
+- (void)dealloc {
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:@"deleteScene" object:nil];
 }
 
 @end

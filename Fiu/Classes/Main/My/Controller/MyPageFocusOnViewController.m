@@ -81,16 +81,21 @@
         NSDictionary *dataDict = [result objectForKey:@"data"];
         NSArray *rowsAry = [dataDict objectForKey:@"rows"];
         for (NSDictionary *rowsDict in rowsAry) {
-            NSDictionary *followsDict = [rowsDict objectForKey:@"follows"];
-            UserInfo *model = [[UserInfo alloc] init];
+            if ([[rowsDict objectForKey:@"follows"] isKindOfClass:[NSArray class]]) {
+                NSLog(@"follows是空的数组");
+                
+            } else if ([[rowsDict objectForKey:@"follows"] isKindOfClass:[NSDictionary class]]){
+                NSDictionary *followsDict = [rowsDict objectForKey:@"follows"];
+                UserInfo *model = [[UserInfo alloc] init];
+                
+                model.is_love = [followsDict[@"is_love"] integerValue];
+                model.userId = followsDict[@"user_id"];
+                model.summary = followsDict[@"summary"];
+                model.nickname = followsDict[@"nickname"];
+                model.mediumAvatarUrl = followsDict[@"avatar_url"];
+                [_modelAry addObject:model];
+            }
             
-            model.is_love = followsDict[@"is_love"];
-            model.userId = followsDict[@"user_id"];
-            NSLog(@"userid             %@",model.userId);
-            model.summary = followsDict[@"summary"];
-            model.nickname = followsDict[@"nickname"];
-            model.mediumAvatarUrl = followsDict[@"avatar_url"];
-            [_modelAry addObject:model];
         }
         if (_modelAry.count == 0) {
             [self.view addSubview:self.tipLabel];
@@ -244,7 +249,7 @@
         FBRequest *request = [FBAPI postWithUrlString:@"/follow/ajax_follow" requestDictionary:@{@"follow_id":model.userId} delegate:self];
         [request startRequestSuccess:^(FBRequest *request, id result) {
             [SVProgressHUD showSuccessWithStatus:@"关注成功"];
-            model.is_love = @1;
+            model.is_love = 1;
             [self.mytableView reloadRowsAtIndexPaths:[NSArray arrayWithObjects:[NSIndexPath indexPathForRow:sender.tag inSection:0], nil] withRowAnimation:UITableViewRowAnimationNone];
         } failure:^(FBRequest *request, NSError *error) {
             [SVProgressHUD showErrorWithStatus:error.localizedDescription];
@@ -255,7 +260,7 @@
 -(void)clickStopBtn:(UIButton*)sender{
     [self dismissViewControllerAnimated:YES completion:nil];
     UserInfo *model = _modelAry[sender.tag];
-    model.is_love = @0;
+    model.is_love = 0;
     [self.mytableView reloadRowsAtIndexPaths:[NSArray arrayWithObjects:[NSIndexPath indexPathForRow:sender.tag inSection:0], nil] withRowAnimation:UITableViewRowAnimationNone];
     FBRequest *request = [FBAPI postWithUrlString:@"/follow/ajax_cancel_follow" requestDictionary:@{@"follow_id":model.userId} delegate:self];
     request.flag = @"/follow/ajax_cancel_follow";

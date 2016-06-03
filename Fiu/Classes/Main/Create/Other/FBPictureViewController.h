@@ -9,6 +9,8 @@
 #import <UIKit/UIKit.h>
 #import "Fiu.h"
 #import "Masonry.h"
+#import "UserInfo.h"
+#import "UserInfoEntity.h"
 
 @interface FBPictureViewController : UIViewController
 
@@ -23,6 +25,11 @@
 @pro_strong UIButton            *   nextBtn;            //  继续按钮
 @pro_strong UIButton            *   cropBack;           //  "裁剪"返回
 @pro_strong UILabel             *   line;               //  视图分割线
+
+/**
+ *  获取当前登录用户id
+ */
+- (NSString *)getLoginUserID;
 
 /*
  *  导航视图
@@ -53,11 +60,6 @@
  *  发布按钮
  */
 - (void)addDoneButton;
-
-/*
- *  发布按钮
- */
-- (void)addCloseButton;
 
 /*
  *  视图的分割线

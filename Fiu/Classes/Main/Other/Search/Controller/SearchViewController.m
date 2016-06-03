@@ -58,8 +58,6 @@ static NSString *const URLSearchList = @"/search/getlist";
 #pragma mark - 网络请求
 #pragma mark 搜索场景
 - (void)networkSearchData:(NSString *)keyword withType:(NSString *)type {
-    [self clearMarrData];
-    
     [SVProgressHUD show];
     self.searchListRequest = [FBAPI getWithUrlString:URLSearchList requestDictionary:@{@"evt":@"tag", @"size":@"8", @"page":@(self.currentpageNum + 1), @"t":type , @"q":keyword} delegate:self];
     
@@ -81,9 +79,7 @@ static NSString *const URLSearchList = @"/search/getlist";
             
             self.currentpageNum = [[[result valueForKey:@"data"] valueForKey:@"current_page"] integerValue];
             self.totalPageNum = [[[result valueForKey:@"data"] valueForKey:@"total_page"] integerValue];
-            if (self.totalPageNum > 1) {
-                [self requestIsLastData:self.goodsTable currentPage:self.currentpageNum withTotalPage:self.totalPageNum];
-            }
+            [self requestIsLastData:self.goodsTable currentPage:self.currentpageNum withTotalPage:self.totalPageNum];
         
         } else if ([type isEqualToString:@"9"]) {
             NSArray * sceneArr = [[result valueForKey:@"data"] valueForKey:@"rows"];
@@ -99,11 +95,10 @@ static NSString *const URLSearchList = @"/search/getlist";
             } else {
                 self.noneLab.hidden = YES;
             }
+            
             self.currentpageNum = [[[result valueForKey:@"data"] valueForKey:@"current_page"] integerValue];
             self.totalPageNum = [[[result valueForKey:@"data"] valueForKey:@"total_page"] integerValue];
-            if (self.totalPageNum > 1) {
-                [self requestIsLastData:self.sceneTable currentPage:self.currentpageNum withTotalPage:self.totalPageNum];
-            }
+            [self requestIsLastData:self.sceneTable currentPage:self.currentpageNum withTotalPage:self.totalPageNum];
         
         } else if ([type isEqualToString:@"8"]) {
             NSArray * fSceneArr = [[result valueForKey:@"data"] valueForKey:@"rows"];
@@ -179,24 +174,6 @@ static NSString *const URLSearchList = @"/search/getlist";
     [SVProgressHUD dismiss];
 }
 
-#pragma mark 上拉加载
-- (void)addMJRefresh:(UITableView *)table {
-    table.mj_footer = [MJRefreshAutoNormalFooter footerWithRefreshingBlock:^{
-        if (self.currentpageNum < self.totalPageNum) {
-            if (self.searchType == 0) {
-                [self networkSearchData:self.searchView.searchInputBox.text withType:@"9"];
-            } else if (self.searchType == 1) {
-                [self networkSearchData:self.searchView.searchInputBox.text withType:@"8"];
-            } else if (self.searchType == 2) {
-                [self networkSearchData:self.searchView.searchInputBox.text withType:@"10"];
-            }
-            
-        } else {
-            [table.mj_footer endRefreshing];
-        }
-    }];
-}
-
 #pragma mark - 设置视图UI 
 - (void)setSearchVcUI {
     self.titleArr = [NSArray arrayWithObjects:@"场景", @"情景", @"产品", nil];
@@ -219,6 +196,9 @@ static NSString *const URLSearchList = @"/search/getlist";
         } else if (type == 0) {
             [self networkSearchData:keyword withType:@"9"];
         }
+        
+    } else if (keyword.length == 0) {
+        self.noneLab.hidden = YES;
     }
 }
 
@@ -250,6 +230,13 @@ static NSString *const URLSearchList = @"/search/getlist";
         _sceneTable.separatorStyle = UITableViewCellSeparatorStyleNone;
         _sceneTable.backgroundColor = [UIColor whiteColor];
         _sceneTable.tableFooterView = [UIView new];
+        _sceneTable.mj_footer = [MJRefreshAutoNormalFooter footerWithRefreshingBlock:^{
+            if (self.currentpageNum < self.totalPageNum) {
+                [self networkSearchData:self.searchView.searchInputBox.text withType:@"9"];
+            } else {
+                [_sceneTable.mj_footer endRefreshing];
+            }
+        }];
     }
     return _sceneTable;
 }
@@ -264,6 +251,14 @@ static NSString *const URLSearchList = @"/search/getlist";
         _goodsTable.backgroundColor = [UIColor whiteColor];
         _goodsTable.separatorStyle = UITableViewCellSeparatorStyleNone;
         _goodsTable.tableFooterView = [UIView new];
+        _goodsTable.mj_footer = [MJRefreshAutoNormalFooter footerWithRefreshingBlock:^{
+            if (self.currentpageNum < self.totalPageNum) {
+                [self networkSearchData:self.searchView.searchInputBox.text withType:@"10"];
+                
+            } else {
+                [_goodsTable.mj_footer endRefreshing];
+            }
+        }];
     }
     return _goodsTable;
 }
@@ -339,6 +334,15 @@ static NSString *const URLSearchList = @"/search/getlist";
         _fSceneCollection.showsVerticalScrollIndicator = NO;
         _fSceneCollection.showsHorizontalScrollIndicator = NO;
         [_fSceneCollection registerClass:[AllSceneCollectionViewCell class] forCellWithReuseIdentifier:@"fSceneCollectionViewCellID"];
+        
+        _fSceneCollection.mj_footer = [MJRefreshAutoNormalFooter footerWithRefreshingBlock:^{
+            if (self.currentpageNum < self.totalPageNum) {
+                [self networkSearchData:self.searchView.searchInputBox.text withType:@"8"];
+            } else {
+                [_fSceneCollection.mj_footer endRefreshing];
+            }
+        }];
+
     }
     return _fSceneCollection;
 }

@@ -70,7 +70,7 @@
     self.prin = @"";
     self.follow_count = @"";
     self.head_pic_url = @"";
-    self.is_love = @0;
+    self.is_love = 0;
     self.isLogin = NO;
     self.is_expert = @"0";
     self.expert_label = @"";

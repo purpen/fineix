@@ -11,6 +11,7 @@
 #import <SVProgressHUD/SVProgressHUD.h>
 
 typedef void(^OpenCommentVC)();
+typedef void(^DeleteScene)();
 
 @interface FBAlertViewController : UIViewController
 
@@ -18,7 +19,8 @@ typedef void(^OpenCommentVC)();
 @pro_strong NSString        *   targetId;
 @pro_strong UIView          *   alertView;
 @pro_strong NSDictionary    *   sceneData;
-@pro_strong OpenCommentVC       openCommentVc;
+@pro_copy OpenCommentVC         openCommentVc;
+@pro_copy DeleteScene           deleteScene;
 
 - (void)initFBAlertVcStyle:(BOOL)isUserSelf;
 

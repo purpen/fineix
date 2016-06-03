@@ -28,7 +28,7 @@
 @property(nonatomic,copy) NSString *prin;
 @property(nonatomic,copy) NSString *follow_count;
 @property(nonatomic,copy) NSString *head_pic_url;
-@property(nonatomic,strong) NSNumber *is_love;
+@property(nonatomic,assign) NSInteger is_love;
 @property(nonatomic,copy) NSString *is_expert;
 @property(nonatomic,copy) NSString *expert_label;
 @property(nonatomic,copy) NSString *expert_info;

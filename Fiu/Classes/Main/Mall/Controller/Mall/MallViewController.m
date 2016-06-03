@@ -20,7 +20,7 @@
 #import "MallTagsView.h"
 #import "GoodsBrandViewController.h"
 
-static NSString *const URLTagS = @"/scene_tags/getlist";
+static NSString *const URLTagS = @"/gateway/get_fiu_hot_product_tags";
 static NSString *const URLCategoryList = @"/category/getlist";
 static NSString *const URLFiuGoods = @"/scene_product/getlist";
 static NSString *const URLMallSlide = @"/gateway/slide";
@@ -96,13 +96,9 @@ static NSString *const URLFiuBrand = @"/scene_brands/getlist";
 
 #pragma mark 标签列表
 - (void)networkTagsListData {
-    self.tagsRequest = [FBAPI getWithUrlString:URLTagS requestDictionary:@{@"is_hot":@"1", @"sort":@"6", @"page":@"1", @"size":@"50", @"type":@"2"} delegate:self];
+    self.tagsRequest = [FBAPI getWithUrlString:URLTagS requestDictionary:nil delegate:self];
     [self.tagsRequest startRequestSuccess:^(FBRequest *request, id result) {
-        NSArray * tagsArr = [[result valueForKey:@"data"] valueForKey:@"rows"];
-        for (NSDictionary * tagsDic in tagsArr) {
-            HotTagsRow * tagsModel = [[HotTagsRow alloc] initWithDictionary:tagsDic];
-            [self.tagsList addObject:tagsModel];
-        }
+        self.tagsList = [NSMutableArray arrayWithArray:[[result valueForKey:@"data"] valueForKey:@"tags"]];
         [self.mallTableView reloadData];
         [self requestIsLastData:self.mallTableView currentPage:self.currentpageNum withTotalPage:self.totalPageNum];
         
@@ -215,7 +211,7 @@ static NSString *const URLFiuBrand = @"/scene_brands/getlist";
 #pragma mark - tableView
 - (UITableView *)mallTableView {
     if (!_mallTableView) {
-        _mallTableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 64, SCREEN_WIDTH, SCREEN_HEIGHT - 113) style:(UITableViewStyleGrouped)];
+        _mallTableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 64, SCREEN_WIDTH, SCREEN_HEIGHT - 64) style:(UITableViewStyleGrouped)];
         _mallTableView.delegate = self;
         _mallTableView.dataSource = self;
         _mallTableView.tableHeaderView = self.rollView;
@@ -271,7 +267,10 @@ static NSString *const URLFiuBrand = @"/scene_brands/getlist";
             static NSString * mallGoodsTagCellId = @"mallGoodsTagCellId";
             FiuTagTableViewCell * cell = [tableView dequeueReusableCellWithIdentifier:mallGoodsTagCellId];
             cell = [[FiuTagTableViewCell alloc] initWithStyle:(UITableViewCellStyleDefault) reuseIdentifier:mallGoodsTagCellId];
-            [cell setMallHotTagsData:self.tagsList];
+            static dispatch_once_t onceToken;
+            dispatch_once(&onceToken, ^{
+                [cell setMallHotTagsData:self.tagsList];
+            });
             cell.nav = self.navigationController;
             return cell;
             

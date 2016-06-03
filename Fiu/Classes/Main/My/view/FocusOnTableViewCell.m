@@ -81,9 +81,9 @@
     if ([type isEqualToNumber:@1]) {
         UserInfoEntity *entity = [UserInfoEntity defaultUserInfoEntity];
         if ([entity.userId isEqual:model.userId]) {
-            if ([model.is_love isEqualToNumber:@1]) {
+            if (model.is_love == 1) {
                 self.focusOnBtn.selected = NO;
-            }else if ([model.is_love isEqualToNumber:@2]){
+            }else if (model.is_love == 2 ){
                 self.focusOnBtn.selected = YES;
             }
         }else{
@@ -99,9 +99,9 @@
         if ([entity.userId isEqual:model.userId]) {
             self.focusOnBtn.selected = YES;
         }else{
-            if ([model.is_love isEqualToNumber:@1]) {
+            if (model.is_love == 1) {
                 self.focusOnBtn.selected = YES;
-            }else if ([model.is_love isEqualToNumber:@0]){
+            }else if (model.is_love == 0){
                 self.focusOnBtn.selected = NO;
             }
         }

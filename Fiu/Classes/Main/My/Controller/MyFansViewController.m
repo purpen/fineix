@@ -91,10 +91,10 @@
             model.summary = followsDict[@"summary"];
             model.nickname = followsDict[@"nickname"];
             model.mediumAvatarUrl = followsDict[@"avatar_url"];
-            model.is_love = rowsDict[@"type"];
+            model.is_love = [rowsDict[@"type"] integerValue];
             model.level = followsDict[@"is_love"];
             //8888888888888888888888
-            NSLog(@"类型啊   %@",model.is_love);
+            NSLog(@"类型啊   %zi",model.is_love);
             [_modelAry addObject:model];
         }
         if (_modelAry.count == 0) {
@@ -235,7 +235,7 @@
         FBRequest *request = [FBAPI postWithUrlString:@"/follow/ajax_follow" requestDictionary:@{@"follow_id":model.userId} delegate:self];
         [request startRequestSuccess:^(FBRequest *request, id result) {
             if ([entity.userId isEqualToString:model.userId]) {
-                model.is_love = @2;
+                model.is_love = 2;
             }else{
                 model.level = @1;
             }
@@ -253,7 +253,7 @@
     UserInfo *model = _modelAry[sender.tag];
     UserInfoEntity *entity = [UserInfoEntity defaultUserInfoEntity];
     if ([entity.userId isEqual:model.userId]) {
-        model.is_love = @1;
+        model.is_love = 1;
     }else{
         model.level = @0;
     }

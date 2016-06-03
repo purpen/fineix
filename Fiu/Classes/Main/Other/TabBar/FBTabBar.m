@@ -45,7 +45,7 @@
 - (UILabel *)createTitle {
     if (!_createTitle) {
         _createTitle = [[UILabel alloc] init];
-        _createTitle.text = @"Fiu";
+        _createTitle.text = @"Fiuing";
         _createTitle.textColor = [UIColor colorWithHexString:tabBarTitle alpha:1];
         _createTitle.font = [UIFont systemFontOfSize:11.5];
         _createTitle.textAlignment = NSTextAlignmentCenter;
@@ -82,7 +82,11 @@
     //  设置自定义的按钮在中间
     self.createBtn.frame = CGRectMake(btnX, btnY, 49, 49);
     self.createBtn.layer.cornerRadius = 49 / 2;
-    self.createBtn.center = CGPointMake(width * 0.5, height * 0.3);
+    if (SCREEN_WIDTH > 375) {
+        self.createBtn.center = CGPointMake(width * 0.5, height * 0.2);
+    } else {
+        self.createBtn.center = CGPointMake(width * 0.5, height * 0.3);
+    }
     
     //  标题
     self.createTitle.frame = CGRectMake(btnX, btnY, 60, 12);

@@ -21,9 +21,10 @@ static const NSInteger  rollTagBtnTag = 97;
         
         [self addSubview:self.tagRollView];
         [_tagRollView mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.size.mas_equalTo(CGSizeMake(SCREEN_WIDTH, 90));
+            make.size.mas_equalTo(CGSizeMake(SCREEN_WIDTH, 80));
             make.top.equalTo(self.mas_top).with.offset(0);
             make.left.equalTo(self.mas_left).with.offset(0);
+            make.bottom.equalTo(self.mas_bottom).with.offset(-5);
         }];
         
         UILabel * lineLab = [[UILabel alloc] initWithFrame:CGRectMake(0, 79, SCREEN_WIDTH, 1)];
@@ -39,18 +40,14 @@ static const NSInteger  rollTagBtnTag = 97;
 #pragma mark - “品”
 - (void)setMallHotTagsData:(NSMutableArray *)model {
     self.type = 2;
-    for (HotTagsRow * tag in model) {
-        [self.tagTitleArr addObject:tag.titleCn];
-    }
+    self.tagTitleArr = model;
     [self addTagButton:self.tagTitleArr];
 }
 
 #pragma mark - “景”
 - (void)setHotTagsData:(NSMutableArray *)model {
     self.type = 1;
-    for (HotTagsRow * tag in model) {
-        [self.tagTitleArr addObject:tag.titleCn];
-    }
+    self.tagTitleArr = model;
     [self addTagButton:self.tagTitleArr];
 }
 
