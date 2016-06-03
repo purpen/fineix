@@ -77,14 +77,15 @@
     return _useSceneRollView;
 }
 
-
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
     return self.sceneList.count;
 }
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
     GoodsSceneCollectionViewCell * cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"UseSceneRollViewCell" forIndexPath:indexPath];
-    cell.title.text = self.sceneList[indexPath.row];
+    if (self.sceneList.count) {
+        cell.title.text = self.sceneList[indexPath.row];
+    }
     return cell;
 }
 
@@ -95,7 +96,7 @@
 }
 
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath {
-    CGFloat btnLength = [[self.sceneList objectAtIndex:indexPath.row] boundingRectWithSize:CGSizeMake(320, 1000) options:(NSStringDrawingUsesLineFragmentOrigin) attributes:nil context:nil].size.width;
+    CGFloat btnLength = [self.sceneList[indexPath.row] boundingRectWithSize:CGSizeMake(320, 1000) options:(NSStringDrawingUsesLineFragmentOrigin) attributes:nil context:nil].size.width;
     return CGSizeMake(btnLength + 40, 29);
 }
 

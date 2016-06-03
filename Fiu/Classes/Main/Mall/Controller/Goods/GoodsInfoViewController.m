@@ -49,7 +49,6 @@ static NSString *const URLWantBuy = @"/scene_product/sight_click_stat";
     }
     [self networkGoodsInfoData];
     [self networkGoodsSceneList];
-
 }
 
 #pragma mark - 网络请求
@@ -63,7 +62,7 @@ static NSString *const URLWantBuy = @"/scene_product/sight_click_stat";
         [self.rollImgView setGoodsRollimageView:self.goodsInfo];
         [self.goodsInfoTable reloadData];
 
-        [self networkRecommendGoodsDataWithCategory:[self.goodsInfo valueForKey:@"categoryId"]];
+        [self networkRecommendGoodsDataWithCategory:[NSString stringWithFormat:@"%@", [self.goodsInfo valueForKey:@"categoryId"]]];
         
     } failure:^(FBRequest *request, NSError *error) {
         [SVProgressHUD showErrorWithStatus:[error localizedDescription]];
@@ -229,12 +228,7 @@ static NSString *const URLWantBuy = @"/scene_product/sight_click_stat";
         return cell;
     }
     
-    static NSString * GoodsInfoCellId = @"GoodsInfoCellId";
-    UITableViewCell * cell = [tableView dequeueReusableCellWithIdentifier:GoodsInfoCellId];
-    if (!cell) {
-        cell = [[UITableViewCell alloc] initWithStyle:(UITableViewCellStyleDefault) reuseIdentifier:GoodsInfoCellId];
-    }
-    return cell;
+    return nil;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {

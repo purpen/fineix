@@ -157,7 +157,7 @@ NSString *const determineLogin = @"/auth/check_login";
 
 #pragma mark -  引导图的设置
 -(void)guide{
-    NSArray *arr = [NSArray arrayWithObjects:@"guide",@"guide",@"guide",@"guide",@"guide", nil];
+    NSArray *arr = [NSArray arrayWithObjects:@"Guide_one",@"Guide_two",@"Guide_three",@"Guide_four", nil];
     //    使用的时候用key+版本号替换UserHasGuideView
     //    这样容易控制每个版本都可以显示引导图
     BOOL userIsFirstInstalled = [[NSUserDefaults standardUserDefaults] boolForKey:@"UserHasGuideView"];

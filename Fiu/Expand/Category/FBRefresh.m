@@ -13,6 +13,9 @@
 - (void)prepare{
     [super prepare];
     
+    self.lastUpdatedTimeLabel.hidden = YES;
+    self.stateLabel.hidden = YES;
+    
     // 设置普通状态的动画图片
     NSMutableArray *idleImages = [NSMutableArray array];
     for (NSUInteger i = 0; i < 30; i++) {

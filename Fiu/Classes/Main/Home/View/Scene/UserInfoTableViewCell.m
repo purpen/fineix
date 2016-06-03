@@ -37,6 +37,13 @@
     
     [self.bgImage sd_setBackgroundImageWithURL:[NSURL URLWithString:model.coverUrl] forState:(UIControlStateNormal)];
     [self.bgImage sd_setBackgroundImageWithURL:[NSURL URLWithString:model.coverUrl] forState:(UIControlStateHighlighted)];
+    
+//    UIInterpolatingMotionEffect * fairyEffX = [[UIInterpolatingMotionEffect alloc] initWithKeyPath:@"center.y" type:UIInterpolatingMotionEffectTypeTiltAlongHorizontalAxis];// type表示沿水平方向运行效果
+//    fairyEffX.maximumRelativeValue = @(50);
+//    fairyEffX.minimumRelativeValue = @(-50);
+//    // 为view添加运动效果
+//    [self.bgImage addMotionEffect:fairyEffX];
+    
     [self titleTextStyle:[NSString stringWithFormat:@"%@", model.title] withBgColor:[UIColor colorWithPatternImage:[UIImage imageNamed:@"titleBg"]]];
     self.whereScene.text = [self abouText:self.whereScene withText:model.sceneTitle];
     self.city.text = [self abouText:self.city withText:model.address];

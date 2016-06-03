@@ -19,6 +19,7 @@
 #import "RollImageRow.h"
 #import "MallTagsView.h"
 #import "GoodsBrandViewController.h"
+#import "FiuBrandRow.h"
 
 static NSString *const URLTagS = @"/gateway/get_fiu_hot_product_tags";
 static NSString *const URLCategoryList = @"/category/getlist";
@@ -86,6 +87,17 @@ static NSString *const URLFiuBrand = @"/scene_brands/getlist";
     self.fiuBrandRequest = [FBAPI getWithUrlString:URLFiuBrand requestDictionary:@{@"page":@"1", @"size":@"50", @"sort":@"1"} delegate:self];
     [self.fiuBrandRequest startRequestSuccess:^(FBRequest *request, id result) {
         self.brandList = [NSMutableArray arrayWithArray:[[result valueForKey:@"data"] valueForKey:@"rows"]];
+        for (int i = 0; i<_fiuView.subviews.count; i++) {
+            UIButton *btn = _fiuView.subviews[i];
+            btn.tag = i;
+            if (self.brandList.count != 0) {
+                FiuBrandRow * user = [[FiuBrandRow alloc] initWithDictionary:self.brandList[btn.tag]];
+                btn.layer.borderWidth = 1.0f;
+                btn.layer.borderColor = [UIColor whiteColor].CGColor;
+                [btn sd_setImageWithURL:[NSURL URLWithString:user.coverUrl] forState:(UIControlStateNormal)];
+                [btn addTarget:self action:@selector(clickUserHead:) forControlEvents:UIControlEventTouchUpInside];
+            }
+        }
         [self.mallTableView reloadData];
         [self requestIsLastData:self.mallTableView currentPage:self.currentpageNum withTotalPage:self.totalPageNum];
         
@@ -267,10 +279,7 @@ static NSString *const URLFiuBrand = @"/scene_brands/getlist";
             static NSString * mallGoodsTagCellId = @"mallGoodsTagCellId";
             FiuTagTableViewCell * cell = [tableView dequeueReusableCellWithIdentifier:mallGoodsTagCellId];
             cell = [[FiuTagTableViewCell alloc] initWithStyle:(UITableViewCellStyleDefault) reuseIdentifier:mallGoodsTagCellId];
-            static dispatch_once_t onceToken;
-            dispatch_once(&onceToken, ^{
-                [cell setMallHotTagsData:self.tagsList];
-            });
+            [cell setMallHotTagsData:self.tagsList];
             cell.nav = self.navigationController;
             return cell;
             

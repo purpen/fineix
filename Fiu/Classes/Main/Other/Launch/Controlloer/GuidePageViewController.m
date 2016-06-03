@@ -40,7 +40,7 @@
     //设置ImageView
     [self setImageView];
     //设置页码控制器
-    [self setPageController];
+//    [self setPageController];
 }
 
 //设置页码控制器
@@ -89,8 +89,8 @@
 -(UIButton *)enterBtn{
     if (!_enterBtn) {
         _enterBtn = [UIButton buttonWithType:UIButtonTypeSystem];
-        _enterBtn.backgroundColor = [UIColor whiteColor];
-        [_enterBtn setTitle:@"立即体验" forState:UIControlStateNormal];
+//        _enterBtn.backgroundColor = [UIColor whiteColor];
+//        [_enterBtn setTitle:@"立即体验" forState:UIControlStateNormal];
         [_enterBtn setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
         _enterBtn.layer.cornerRadius = 10;
         _enterBtn.layer.masksToBounds = YES;

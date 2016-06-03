@@ -79,7 +79,9 @@
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
     static NSString * collectionViewCellId = @"collectionViewCellId";
     RecommendGoodsCollectionViewCell * cell = [collectionView dequeueReusableCellWithReuseIdentifier:collectionViewCellId forIndexPath:indexPath];
-    [cell setRecommendGoodsData:self.goodsData[indexPath.row]];
+    if (self.goodsData.count) {
+        [cell setRecommendGoodsData:self.goodsData[indexPath.row]];
+    }
     return cell;
 }
 

@@ -100,11 +100,8 @@ static NSString *const URLFiuPeople = @"/user/find_user";
             btn.tag = i;
             if (self.fiuPeopleList.count != 0) {
                 FiuPeopleUser * user = [[FiuPeopleUser alloc] initWithDictionary:self.fiuPeopleList[btn.tag]];
-//                UIImageView * headerImg = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, btn.bounds.size.width, btn.bounds.size.width)];
-//                [headerImg downloadImage:user.mediumAvatarUrl place:[UIImage imageNamed:@""]];
                 btn.layer.borderWidth = 1.0f;
-                btn.layer.borderColor = [UIColor colorWithHexString:@"#979797" alpha:.7].CGColor;
-//                [btn addSubview:headerImg];
+                btn.layer.borderColor = [UIColor whiteColor].CGColor;
                 [btn sd_setImageWithURL:[NSURL URLWithString:user.mediumAvatarUrl] forState:(UIControlStateNormal)];
                 [btn addTarget:self action:@selector(clickUserHead:) forControlEvents:UIControlEventTouchUpInside];
             }
@@ -298,10 +295,7 @@ static NSString *const URLFiuPeople = @"/user/find_user";
             static NSString * fiuSceneTagCellId = @"fiuSceneTagCellId";
             FiuTagTableViewCell * cell = [tableView dequeueReusableCellWithIdentifier:fiuSceneTagCellId];
             cell = [[FiuTagTableViewCell alloc] initWithStyle:(UITableViewCellStyleDefault) reuseIdentifier:fiuSceneTagCellId];
-            static dispatch_once_t onceToken;
-            dispatch_once(&onceToken, ^{
-                [cell setHotTagsData:self.tagsList];
-            });
+            [cell setHotTagsData:self.tagsList];
             cell.nav = self.navigationController;
             return cell;
         }

@@ -9,6 +9,7 @@
 #import "CameraView.h"
 #import <SVProgressHUD/SVProgressHUD.h>
 #import "FiltersViewController.h"
+#import "SceneAddViewController.h"
 
 @implementation CameraView
 
@@ -172,12 +173,20 @@
                                                        } else {
                                                            UIImage * image = [UIImage imageWithData:photoData];
                                                            UIImage * photo = [self cropImage:image withCropSize:CGSizeMake(SCREEN_WIDTH, SCREEN_HEIGHT)];
+                                                           
                                                            //   跳转到“工具”视图
-                                                           FiltersViewController * filtersVC = [[FiltersViewController alloc] init];
-                                                           filtersVC.filtersImg = photo;
-                                                           filtersVC.createType = self.createType;
-//                                                           filtersVC.locationArr = @[];
-                                                           [self.Nav pushViewController:filtersVC animated:YES];
+                                                           if ([self.createType isEqualToString:@"scene"]) {
+                                                               SceneAddViewController * sceneAddVC = [[SceneAddViewController alloc] init];
+                                                               sceneAddVC.filtersImg = photo;
+                                                               sceneAddVC.createType = self.createType;
+                                                               [self.Nav pushViewController:sceneAddVC animated:YES];
+                                                               
+                                                           } else if ([self.createType isEqualToString:@"fScene"]) {
+                                                               FiltersViewController * filtersVC = [[FiltersViewController alloc] init];
+                                                               filtersVC.filtersImg = photo;
+                                                               filtersVC.createType = self.createType;
+                                                               [self.Nav pushViewController:filtersVC animated:YES];
+                                                           }
                                                        }
                                                     
                                                    }];

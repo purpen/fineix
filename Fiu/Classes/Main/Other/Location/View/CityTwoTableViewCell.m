@@ -40,7 +40,7 @@
         shadow.endPoint = CGPointMake(0, 1);
         shadow.colors = @[(__bridge id)[UIColor clearColor].CGColor,
                           (__bridge id)[UIColor blackColor].CGColor];
-        shadow.locations = @[@(0.5f), @(1.5f)];
+        shadow.locations = @[@(0.5f), @(1.0f)];
         shadow.frame = _bgImageView.bounds;
         [_bgImageView.layer addSublayer:shadow];
         

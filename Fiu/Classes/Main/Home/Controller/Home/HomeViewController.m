@@ -110,10 +110,9 @@ static NSString *const URLSceneList = @"/scene_sight/";
 
 #pragma mark - 上拉加载 & 下拉刷新
 - (void)addMJRefresh:(UITableView *)table {
-    FBRefresh *header = [FBRefresh headerWithRefreshingTarget:self refreshingAction:@selector(loadNewData)];
-    header.lastUpdatedTimeLabel.hidden = YES;
-    header.stateLabel.hidden = YES;
-    [header beginRefreshing];
+    FBRefresh * header = [FBRefresh headerWithRefreshingBlock:^{
+        [self loadNewData];
+    }];
     table.mj_header = header;
     
     table.mj_footer = [MJRefreshAutoNormalFooter footerWithRefreshingBlock:^{

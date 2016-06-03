@@ -67,7 +67,7 @@ static const NSInteger  rollTagBtnTag = 97;
     CGFloat btnW = 0;
     CGFloat btnH = 15;
     CGFloat titleW = 0;
-    
+
     for (NSUInteger jdx = 0; jdx < titleArr.count; ++ jdx) {
         CGFloat tagBtnWidth = [[titleArr objectAtIndex:jdx] boundingRectWithSize:CGSizeMake(320, 1000) options:(NSStringDrawingUsesLineFragmentOrigin) attributes:nil context:nil].size.width;
         
