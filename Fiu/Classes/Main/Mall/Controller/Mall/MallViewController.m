@@ -84,7 +84,7 @@ static NSString *const URLFiuBrand = @"/scene_brands/getlist";
 
 #pragma mark 最Fiu品牌
 - (void)networkFiuPeopleData {
-    self.fiuBrandRequest = [FBAPI getWithUrlString:URLFiuBrand requestDictionary:@{@"page":@"1", @"size":@"50", @"sort":@"1"} delegate:self];
+    self.fiuBrandRequest = [FBAPI getWithUrlString:URLFiuBrand requestDictionary:@{@"page":@"1", @"size":@"40", @"sort":@"1"} delegate:self];
     [self.fiuBrandRequest startRequestSuccess:^(FBRequest *request, id result) {
         self.brandList = [NSMutableArray arrayWithArray:[[result valueForKey:@"data"] valueForKey:@"rows"]];
         for (int i = 0; i<_fiuView.subviews.count; i++) {
@@ -102,7 +102,7 @@ static NSString *const URLFiuBrand = @"/scene_brands/getlist";
         [self requestIsLastData:self.mallTableView currentPage:self.currentpageNum withTotalPage:self.totalPageNum];
         
     } failure:^(FBRequest *request, NSError *error) {
-        NSLog(@"%@", error);
+        NSLog(@"%@",error);
     }];
 }
 
