@@ -10,6 +10,7 @@
 #import "InfoTitleTableViewCell.h"
 #import "InfoBrandTableViewCell.h"
 #import "InfoGoodsHighlightsTableViewCell.h"
+#import "GoodsDesTableViewCell.h"
 #import "InfoUseSceneTableViewCell.h"
 #import "InfoRecommendTableViewCell.h"
 #import "GoodsBrandViewController.h"
@@ -23,7 +24,9 @@ static NSString *const URLRecommendGoods = @"/scene_product/getlist";
 static NSString *const URLGoodsScene = @"/sight_and_product/getlist";
 static NSString *const URLWantBuy = @"/scene_product/sight_click_stat";
 
-@interface GoodsInfoViewController ()
+@interface GoodsInfoViewController () {
+    NSString * _goodsDes;
+}
 
 @pro_strong GoodsInfoData       *   goodsInfo;
 @pro_strong NSMutableArray      *   recommendGoods;
@@ -56,6 +59,8 @@ static NSString *const URLWantBuy = @"/scene_product/sight_click_stat";
 - (void)networkGoodsInfoData {
     self.goodsInfoRequest = [FBAPI getWithUrlString:URLGoodsInfo requestDictionary:@{@"id":self.goodsID} delegate:self];
     [self.goodsInfoRequest startRequestSuccess:^(FBRequest *request, id result) {
+        _goodsDes = [[result valueForKey:@"data"] valueForKey:@"description"];
+        NSLog(@"＝＝＝＝＝＝＝＝ 商品描述 %@", _goodsDes);
         self.thnGoodsId = [[result valueForKey:@"data"] valueForKey:@"oid"];
         self.goodsInfo = [[GoodsInfoData alloc] initWithDictionary:[result valueForKey:@"data"]];
         [self setGoodsInfoVcUI];
@@ -175,13 +180,16 @@ static NSString *const URLWantBuy = @"/scene_product/sight_click_stat";
         _goodsInfoTable.showsVerticalScrollIndicator = NO;
         _goodsInfoTable.tableHeaderView = self.rollImgView;
         _goodsInfoTable.tableFooterView = [UIView new];
+        _goodsInfoTable.sectionHeaderHeight = 0.01f;
+        _goodsInfoTable.sectionFooterHeight = 0.01f;
+        _goodsInfoTable.separatorStyle = UITableViewCellSeparatorStyleNone;
     }
     return _goodsInfoTable;
 }
 
 #pragma mark - tableViewDelegate & DataSource
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-    return 4;
+    return 5;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
@@ -192,37 +200,57 @@ static NSString *const URLWantBuy = @"/scene_product/sight_click_stat";
     if (indexPath.section == 0) {
         static NSString * InfoTitleCellId = @"InfoTitleCellId";
         InfoTitleTableViewCell * cell = [tableView dequeueReusableCellWithIdentifier:InfoTitleCellId];
-        if (!cell) {
-            cell = [[InfoTitleTableViewCell alloc] initWithStyle:(UITableViewCellStyleDefault) reuseIdentifier:InfoTitleCellId];
-        }
+        cell = [[InfoTitleTableViewCell alloc] initWithStyle:(UITableViewCellStyleDefault) reuseIdentifier:InfoTitleCellId];
         [cell setGoodsInfoData:self.goodsInfo];
         return cell;
     
     } else if (indexPath.section == 1) {
         static NSString * InfoBrandCellId = @"InfoBrandCellId";
-        InfoBrandTableViewCell * cell = [tableView dequeueReusableCellWithIdentifier:InfoBrandCellId];
-        if (!cell) {
+        if (self.goodsInfo.brand.coverUrl.length) {
+            InfoBrandTableViewCell * cell = [tableView dequeueReusableCellWithIdentifier:InfoBrandCellId];
             cell = [[InfoBrandTableViewCell alloc] initWithStyle:(UITableViewCellStyleDefault) reuseIdentifier:InfoBrandCellId];
+            [cell setGoodsBrandData:self.goodsInfo];
+            return cell;
+            
+        } else {
+            UITableViewCell * cell = [tableView dequeueReusableCellWithIdentifier:InfoBrandCellId];
+            cell = [[UITableViewCell alloc] initWithStyle:(UITableViewCellStyleDefault) reuseIdentifier:InfoBrandCellId];
+            return cell;
         }
-        [cell setGoodsBrandData:self.goodsInfo];
-        return cell;
-        
+    
     } else if (indexPath.section == 2) {
-        static NSString * InfoUseSceneCellId = @"InfoUseSceneCellId";
-        InfoUseSceneTableViewCell * cell = [tableView dequeueReusableCellWithIdentifier:InfoUseSceneCellId];
-        if (!cell) {
-            cell = [[InfoUseSceneTableViewCell alloc] initWithStyle:(UITableViewCellStyleDefault) reuseIdentifier:InfoUseSceneCellId];
+        static NSString * goodsDesCellId = @"GoodsDesCellId";
+        if (_goodsDes.length) {
+            GoodsDesTableViewCell * cell = [tableView dequeueReusableCellWithIdentifier:goodsDesCellId];
+            cell = [[GoodsDesTableViewCell alloc] initWithStyle:(UITableViewCellStyleDefault) reuseIdentifier:goodsDesCellId];
+            [cell setGoodsDesText:_goodsDes];
+            return cell;
+        
+        } else {
+            UITableViewCell * cell = [tableView dequeueReusableCellWithIdentifier:goodsDesCellId];
+            cell = [[UITableViewCell alloc] initWithStyle:(UITableViewCellStyleDefault) reuseIdentifier:goodsDesCellId];
+            return cell;
         }
-        cell.nav = self.navigationController;
-        [cell setGoodsScene:self.sceneList];
-        return cell;
         
     } else if (indexPath.section == 3) {
+        static NSString * InfoUseSceneCellId = @"InfoUseSceneCellId";
+        if (self.sceneList.count) {
+            InfoUseSceneTableViewCell * cell = [tableView dequeueReusableCellWithIdentifier:InfoUseSceneCellId];
+            cell = [[InfoUseSceneTableViewCell alloc] initWithStyle:(UITableViewCellStyleDefault) reuseIdentifier:InfoUseSceneCellId];
+            cell.nav = self.navigationController;
+            [cell setGoodsScene:self.sceneList];
+            return cell;
+        
+        } else {
+            UITableViewCell * cell = [tableView dequeueReusableCellWithIdentifier:InfoUseSceneCellId];
+            cell = [[UITableViewCell alloc] initWithStyle:(UITableViewCellStyleDefault) reuseIdentifier:InfoUseSceneCellId];
+            return cell;
+        }
+        
+    } else if (indexPath.section == 4) {
         static NSString * InfoRecommendCellId = @"InfoRecommendCellId";
         InfoRecommendTableViewCell * cell = [tableView dequeueReusableCellWithIdentifier:InfoRecommendCellId];
-        if (!cell) {
-            cell = [[InfoRecommendTableViewCell alloc] initWithStyle:(UITableViewCellStyleDefault) reuseIdentifier:InfoRecommendCellId];
-        }
+        cell = [[InfoRecommendTableViewCell alloc] initWithStyle:(UITableViewCellStyleDefault) reuseIdentifier:InfoRecommendCellId];
         cell.nav = self.navigationController;
         [cell setRecommendGoodsData:self.recommendGoods withType:0];
         return cell;
@@ -231,29 +259,31 @@ static NSString *const URLWantBuy = @"/scene_product/sight_click_stat";
     return nil;
 }
 
-- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
-    if (section == 0) {
-        return 0.01;
-    }
-    return 10;
-}
-
-- (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section {
-    return 0.1;
-}
-
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
     if (indexPath.section == 0) {
-        return 60;
+        return 65;
     } else if (indexPath.section == 1) {
-        if (self.goodsInfo.brandId.length <= 0) {
-            return 0.01;
+        if (self.goodsInfo.brand.coverUrl.length) {
+            return 80;
         } else {
-            return 75;
+            return 0.01;
         }
     } else if (indexPath.section == 2) {
-        return 90;
+        if (_goodsDes.length) {
+            GoodsDesTableViewCell * cell = [[GoodsDesTableViewCell alloc] init];
+            [cell getContentCellHeight:_goodsDes];
+            return  cell.cellHeight;
+        } else {
+           return 0.01;
+        }
+        
     } else if (indexPath.section == 3) {
+        if (self.sceneList.count) {
+            return 95;
+        } else {
+            return 0.01;
+        }
+    } else if (indexPath.section == 4) {
         return 280;
     }
     return 100;

@@ -1,25 +1,23 @@
 //
-//  UserInfoTableViewCell.m
+//  SceneImgView.m
 //  Fiu
 //
-//  Created by FLYang on 16/4/7.
+//  Created by FLYang on 16/6/5.
 //  Copyright © 2016年 taihuoniao. All rights reserved.
 //
 
-#import "UserInfoTableViewCell.h"
+#import "SceneImgView.h"
 #import "HomePageViewController.h"
 #import "UIButton+WebCache.h"
 #import "GoodsInfoViewController.h"
 
-@implementation UserInfoTableViewCell
+@implementation SceneImgView
 
-- (instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier {
-    self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
+- (instancetype)initWithFrame:(CGRect)frame {
+    self = [super initWithFrame:frame];
     if (self) {
         
-        self.selectionStyle = UITableViewCellSelectionStyleNone;
         self.backgroundColor = [UIColor whiteColor];
-
         [self setCellUI];
         
     }
@@ -35,14 +33,9 @@
     self.goodsIds = [NSMutableArray arrayWithArray:[model.product valueForKey:@"idField"]];
     self.userId = [NSString stringWithFormat:@"%zi", model.userInfo.userId];
     
-    [self.bgImage sd_setBackgroundImageWithURL:[NSURL URLWithString:model.coverUrl] forState:(UIControlStateNormal)];
-    [self.bgImage sd_setBackgroundImageWithURL:[NSURL URLWithString:model.coverUrl] forState:(UIControlStateHighlighted)];
-    
-//    UIInterpolatingMotionEffect * fairyEffX = [[UIInterpolatingMotionEffect alloc] initWithKeyPath:@"center.y" type:UIInterpolatingMotionEffectTypeTiltAlongHorizontalAxis];// type表示沿水平方向运行效果
-//    fairyEffX.maximumRelativeValue = @(50);
-//    fairyEffX.minimumRelativeValue = @(-50);
-//    // 为view添加运动效果
-//    [self.bgImage addMotionEffect:fairyEffX];
+//    [self.bgImage sd_setBackgroundImageWithURL:[NSURL URLWithString:model.coverUrl] forState:(UIControlStateNormal)];
+//    [self.bgImage sd_setBackgroundImageWithURL:[NSURL URLWithString:model.coverUrl] forState:(UIControlStateHighlighted)];
+    [self.bgImage downloadImage:model.coverUrl place:[UIImage imageNamed:@""]];
     
     [self titleTextStyle:[NSString stringWithFormat:@"%@", model.title] withBgColor:[UIColor colorWithPatternImage:[UIImage imageNamed:@"titleBg"]]];
     self.whereScene.text = [self abouText:self.whereScene withText:model.sceneTitle];
@@ -53,7 +46,7 @@
     self.userProfile.text = model.userInfo.summary;
     
     //  是否是达人
-
+    
     //  是否点赞
     if (model.isLove == 0) {
         self.goodBtn.selected = NO;
@@ -68,7 +61,7 @@
     }
 }
 
-#pragma mark - 
+#pragma mark -
 - (void)setCellUI {
     [self addSubview:self.bgImage];
     
@@ -118,10 +111,11 @@
 }
 
 #pragma mark - 场景图
-- (UIButton *)bgImage {
+- (UIImageView *)bgImage {
     if (!_bgImage) {
-        _bgImage = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT)];
-        [_bgImage addTarget:self action:@selector(showUserTag:) forControlEvents:(UIControlEventTouchUpInside)];
+        _bgImage = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT)];
+        
+//        [_bgImage addTarget:self action:@selector(showUserTag:) forControlEvents:(UIControlEventTouchUpInside)];
         _bgImage.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"Defaul_Bg_750"]];
         //  添加渐变层
         CAGradientLayer * shadow = [CAGradientLayer layer];
@@ -132,7 +126,7 @@
         shadow.locations = @[@(0.5f), @(1.5f)];
         shadow.frame = _bgImage.bounds;
         [_bgImage.layer addSublayer:shadow];
-        _bgImage.selected = NO;
+//        _bgImage.selected = NO;
     }
     return _bgImage;
 }
@@ -260,7 +254,7 @@
     if (!_userLeftView) {
         _userLeftView = [[UIView alloc] init];
         _userLeftView.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"User_bg_left"]];
-
+        
     }
     return _userLeftView;
 }
@@ -457,6 +451,5 @@
     icon.image = [UIImage imageNamed:iconImage];
     [lable addSubview:icon];
 }
-
 
 @end

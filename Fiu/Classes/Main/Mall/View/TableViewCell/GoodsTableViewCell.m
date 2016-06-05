@@ -153,8 +153,9 @@
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath {
     if (indexPath.row == 0) {
         return CGSizeMake(85, 150);
+    } else {
+        return CGSizeMake(275, 150);
     }
-    return CGSizeMake(275, 150);
 }
 
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {

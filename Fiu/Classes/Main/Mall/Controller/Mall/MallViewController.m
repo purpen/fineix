@@ -74,7 +74,6 @@ static NSString *const URLFiuBrand = @"/scene_brands/getlist";
             RollImageRow * rollModel = [[RollImageRow alloc] initWithDictionary:rollDic];
             [self.rollList addObject:rollModel];
         }
-        
         [self.rollView setRollimageView:self.rollList];
         
     } failure:^(FBRequest *request, NSError *error) {
@@ -147,7 +146,6 @@ static NSString *const URLFiuBrand = @"/scene_brands/getlist";
             [self.goodsList addObject:goodsModel];
             [self.goodsIdList addObject:[NSString stringWithFormat:@"%zi", goodsModel.idField]];
         }
-        
         [self.mallTableView reloadData];
         
         self.currentpageNum = [[[result valueForKey:@"data"] valueForKey:@"current_page"] integerValue];

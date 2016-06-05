@@ -41,6 +41,10 @@
         make.bottom.equalTo(self.mas_bottom).with.offset(-10);
         make.left.equalTo(self.mas_left).with.offset(15);
     }];
+    
+    UILabel * botLine = [[UILabel alloc] initWithFrame:CGRectMake(0, 60, SCREEN_WIDTH, 5)];
+    botLine.backgroundColor = [UIColor colorWithHexString:cellBgColor];
+    [self addSubview:botLine];
 }
 
 #pragma mark -  标题

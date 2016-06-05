@@ -57,6 +57,20 @@ static NSString *const URLSearchList = @"/search/getlist";
 
 #pragma mark - 网络请求
 #pragma mark 搜索场景
+- (void)networkSearchSceneData:(NSString *)keyword {
+    
+}
+
+#pragma mark 搜索情景
+- (void)networkSearchFiuSceneData:(NSString *)keyword {
+    
+}
+
+#pragma mark 搜索产品
+- (void)networkSearchGoodsData:(NSString *)keyword {
+    
+}
+
 - (void)networkSearchData:(NSString *)keyword withType:(NSString *)type {
     [SVProgressHUD show];
     self.searchListRequest = [FBAPI getWithUrlString:URLSearchList requestDictionary:@{@"evt":@"tag", @"size":@"8", @"page":@(self.currentpageNum + 1), @"t":type , @"q":keyword} delegate:self];
@@ -81,14 +95,14 @@ static NSString *const URLSearchList = @"/search/getlist";
             self.totalPageNum = [[[result valueForKey:@"data"] valueForKey:@"total_page"] integerValue];
             [self requestIsLastData:self.goodsTable currentPage:self.currentpageNum withTotalPage:self.totalPageNum];
         
-        } else if ([type isEqualToString:@"9"]) {
+        }
+        else if ([type isEqualToString:@"9"]) {
             NSArray * sceneArr = [[result valueForKey:@"data"] valueForKey:@"rows"];
             for (NSDictionary * sceneDic in sceneArr) {
                 HomeSceneListRow * sceneModel = [[HomeSceneListRow alloc] initWithDictionary:sceneDic];
                 [self.sceneList addObject:sceneModel];
                 [self.sceneIdMarr addObject:[NSString stringWithFormat:@"%zi", sceneModel.idField]];
             }
-
             [self.sceneTable reloadData];
             if (self.sceneList.count == 0) {
                 self.noneLab.hidden = NO;
@@ -188,12 +202,14 @@ static NSString *const URLSearchList = @"/search/getlist";
 #pragma mark - 搜索情景
 - (void)searchRequest:(NSInteger)type withKeyword:(NSString *)keyword {
     [self changeMenuBtnState:type];
+    
     if (keyword.length > 0) {
         if (type == 1) {
             [self networkSearchData:keyword withType:@"8"];
         } else if (type == 2) {
             [self networkSearchData:keyword withType:@"10"];
-        } else if (type == 0) {
+        }
+        else if (type == 0) {
             [self networkSearchData:keyword withType:@"9"];
         }
         
@@ -394,11 +410,19 @@ static NSString *const URLSearchList = @"/search/getlist";
 
 #pragma mark - 搜索
 - (void)beginSearch:(NSString *)searchKeyword {
+    self.currentpageNum = 0;
+
     if (self.searchType == 0) {
+        [self.sceneList removeAllObjects];
+        [self.sceneIdMarr removeAllObjects];
         [self networkSearchData:searchKeyword withType:@"9"];
     } else if (self.searchType == 1) {
+        [self.fiuSceneList removeAllObjects];
+        [self.allFiuSceneIdMarr removeAllObjects];
         [self networkSearchData:searchKeyword withType:@"8"];
     } else if (self.searchType == 2) {
+        [self.goodsList removeAllObjects];
+        [self.goodsIdList removeAllObjects];
         [self networkSearchData:searchKeyword withType:@"10"];
     }
 }
@@ -495,7 +519,9 @@ static NSString *const URLSearchList = @"/search/getlist";
 //  清空数组
 - (void)clearMarrData {
     [self.sceneList removeAllObjects];
+    [self.sceneIdMarr removeAllObjects];
     [self.fiuSceneList removeAllObjects];
+    [self.allFiuSceneIdMarr removeAllObjects];
     [self.goodsList removeAllObjects];
     [self.goodsIdList removeAllObjects];
 }

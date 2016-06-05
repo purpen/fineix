@@ -121,6 +121,7 @@
 "addGoodsCar" = "加入购物车";
 "buyingGoods" = "立即购买";
 "goBuyGoods" = "去购买";
+"goodsDes" = "商品描述";
 
 //  标题
 "AllGoods" = "全部";

@@ -15,6 +15,10 @@
     if (self) {
         
         [self addSubview:self.img];
+        [_img mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.height.mas_equalTo(@150);
+            make.top.left.right.equalTo(self).with.offset(0);
+        }];
     }
     return self;
 }
@@ -22,7 +26,7 @@
 #pragma mark - 商品图片
 - (UIImageView *)img {
     if (!_img) {
-        _img = [[UIImageView alloc] initWithFrame:self.bounds];
+        _img = [[UIImageView alloc] init];
         _img.contentMode = UIViewContentModeScaleAspectFill;
         _img.clipsToBounds  = YES;
         [_img setContentScaleFactor:[[UIScreen mainScreen] scale]];

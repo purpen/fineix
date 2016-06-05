@@ -48,6 +48,10 @@
         make.centerY.equalTo(self);
         make.right.equalTo(self.mas_right).with.offset(-15);
     }];
+    
+    UILabel * botLine = [[UILabel alloc] initWithFrame:CGRectMake(0, 80, SCREEN_WIDTH, 5)];
+    botLine.backgroundColor = [UIColor colorWithHexString:cellBgColor];
+    [self addSubview:botLine];
 }
 
 #pragma mark - LOGO
