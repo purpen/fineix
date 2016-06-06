@@ -8,8 +8,9 @@
 
 #import "FBViewController.h"
 #import "GroupHeaderView.h"
+#import "FBSceneInfoScrollView.h"
 
-@interface SceneInfoViewController : FBViewController <FBNavigationBarItemsDelegate, UITableViewDelegate, UITableViewDataSource>
+@interface SceneInfoViewController : FBViewController <FBNavigationBarItemsDelegate, UITableViewDelegate, UITableViewDataSource, UIScrollViewDelegate>
 
 @pro_strong FBRequest               *   sceneInfoRequest;
 @pro_strong FBRequest               *   sceneCommentRequest;

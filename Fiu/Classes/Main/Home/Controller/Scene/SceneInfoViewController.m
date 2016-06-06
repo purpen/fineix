@@ -25,6 +25,7 @@
 #import "FBShareViewController.h"
 #import "CommentNViewController.h"
 #import "UIView+TYAlertView.h"
+#import "UIImage+MultiFormat.h"
 
 static NSString *const URLSceneInfo = @"/scene_sight/view";
 static NSString *const URLCommentList = @"/comment/getlist";
@@ -35,8 +36,17 @@ static NSString *const URLSceneGoods = @"/scene_product/getlist";
 static NSString *const URLDeleteScene = @"/scene_sight/delete";
 
 @interface SceneInfoViewController () {
-    NSDictionary    *   _shareDataDict;
-    NSString        *   _sceneUserId;
+    NSDictionary            *   _shareDataDict;
+    NSString                *   _sceneUserId;
+    NSString                *   _sceneImgUrl;
+    CGFloat                     _newTableFrameH;
+    UIScrollView            *   _viewScroller;
+    FBSceneInfoScrollView   *   _sceneInfoScrollView;
+    CGFloat                     _commentCellH;
+    CGFloat                     _goodsCellH;
+    CGFloat                     _reGoodsCellH;
+    CGFloat                     _desCellH;
+    CGFloat                     _likeUserCellH;
 }
 
 @pro_strong SceneInfoData       *   sceneInfoModel;
@@ -59,20 +69,47 @@ static NSString *const URLDeleteScene = @"/scene_sight/delete";
     [super viewWillAppear:animated];
     
     [self setNavigationViewUI];
+    
+    [_viewScroller setFrame:CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT)];
+    [_viewScroller setContentSize:CGSizeMake(_viewScroller.frame.size.width, SCREEN_HEIGHT)];
+    [_sceneInfoScrollView setFrame:self.view.frame];
+    [_viewScroller setContentOffset:CGPointMake(0, _viewScroller.contentOffset.y)];
+    
 }
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-
+    [self setAutomaticallyAdjustsScrollViewInsets:NO];
+    
     [self networkRequestData];
     [self networkCommentData];
     [self networkLikePeopleData];
 }
 
-#pragma mark -
-- (void)setSceneInfoViewUI {
-    [self.view addSubview:self.sceneTableView];
-    [self.view sendSubviewToBack:self.sceneTableView];
+#pragma mark - 
+- (void)setRollSceneInfoView {
+    _viewScroller = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT)];
+    _viewScroller.pagingEnabled = YES;
+    _viewScroller.delegate = self;
+    _viewScroller.showsHorizontalScrollIndicator = NO;
+    [self.view addSubview:_viewScroller];
+    [self.view sendSubviewToBack:_viewScroller];
+}
+
+- (void)getTableViewFrameH {
+    _goodsCellH = (self.goodsList.count + self.reGoodsList.count) * 210;
+    _newTableFrameH = _desCellH + _goodsCellH + _likeUserCellH + _commentCellH + 305;
+    
+    CGRect newTableFrame = self.sceneTableView.frame;
+    newTableFrame = CGRectMake(0, 0, SCREEN_WIDTH, _newTableFrameH);
+    self.sceneTableView.frame = newTableFrame;
+    
+    NSData * imgData = [NSData dataWithContentsOfURL:[NSURL URLWithString:_sceneImgUrl]];
+    _sceneInfoScrollView = [[FBSceneInfoScrollView alloc] initWithFrame:self.view.frame BackgroundImage:[UIImage imageWithData:imgData] blurredImage:nil viewDistanceFromBottom:170 foregroundView:self.sceneTableView];
+    _sceneInfoScrollView.leftBtn = self.leftBtn;
+    _sceneInfoScrollView.rightBtn = self.rightBtn;
+    _sceneInfoScrollView.logoImg = self.logoImg;
+    [_viewScroller addSubview:_sceneInfoScrollView];
 }
 
 #pragma mark - 网络请求
@@ -85,6 +122,7 @@ static NSString *const URLDeleteScene = @"/scene_sight/delete";
         _shareDataDict = [NSDictionary dictionaryWithDictionary:[result valueForKey:@"data"]];
         _sceneUserId = [NSString stringWithFormat:@"%@", [[result valueForKey:@"data"] valueForKey:@"user_id"]];
         self.sceneInfoModel = [[SceneInfoData alloc] initWithDictionary:[result valueForKey:@"data"]];
+        _sceneImgUrl = self.sceneInfoModel.coverUrl;
         
         //  场景中商品的ids
         self.goodsId = [self.sceneInfoModel.product valueForKey:@"idField"];
@@ -96,9 +134,7 @@ static NSString *const URLDeleteScene = @"/scene_sight/delete";
         }
         
         [self networkSceneGoodsData:goodsIds];
-        [self setSceneInfoViewUI];
-        
-        [SVProgressHUD dismiss];
+        [self setRollSceneInfoView];
         
     } failure:^(FBRequest *request, NSError *error) {
         [SVProgressHUD showErrorWithStatus:[error localizedDescription]];
@@ -122,11 +158,11 @@ static NSString *const URLDeleteScene = @"/scene_sight/delete";
 
 #pragma mark 评论列表
 - (void)networkCommentData {
-    [SVProgressHUD show];
     [self.sceneCommentMarr removeAllObjects];
     self.sceneCommentRequest = [FBAPI getWithUrlString:URLCommentList requestDictionary:@{@"type":@"12", @"target_id":self.sceneId, @"sort":@"1"} delegate:self];
     [self.sceneCommentRequest startRequestSuccess:^(FBRequest *request, id result) {
         self.commentArr = [[result valueForKey:@"data"] valueForKey:@"rows"];
+        
         NSMutableArray * commentMarr = [NSMutableArray array];
         for (NSDictionary * commentDic in self.commentArr) {
             CommentRow * commentModel = [[CommentRow alloc] initWithDictionary:commentDic];
@@ -142,7 +178,14 @@ static NSString *const URLDeleteScene = @"/scene_sight/delete";
                 [self.sceneCommentMarr addObject:commentMarr[idx]];
             }
         }
-        [SVProgressHUD dismiss];
+        
+        //  获取评论内容的高度
+        for (NSString * commentStr in [self.sceneCommentMarr valueForKey:@"content"]) {
+            CommentTableViewCell * cell = [[CommentTableViewCell alloc] init];
+            [cell getCellHeight:commentStr];
+            _commentCellH += cell.cellHeight;
+        }
+        
         [self.sceneTableView reloadData];
         
     } failure:^(FBRequest *request, NSError *error) {
@@ -168,7 +211,7 @@ static NSString *const URLDeleteScene = @"/scene_sight/delete";
 #pragma mark 给此场景点赞的用户
 - (void)networkLikePeopleData {
     [self.likePeopleMarr removeAllObjects];
-    [SVProgressHUD show];
+
     self.likePeopleRequest = [FBAPI postWithUrlString:URLLikeScenePeople requestDictionary:@{@"type":@"sight", @"event":@"love", @"page":@"1" , @"size":@"10000", @"id":self.sceneId} delegate:self];
     [self.likePeopleRequest startRequestSuccess:^(FBRequest *request, id result) {
         NSArray * likePeopleArr = [[result valueForKey:@"data"] valueForKey:@"rows"];
@@ -176,9 +219,9 @@ static NSString *const URLDeleteScene = @"/scene_sight/delete";
             LikeOrSuPeopleRow * likePeopleModel = [[LikeOrSuPeopleRow alloc] initWithDictionary:likePeopleDic];
             [self.likePeopleMarr addObject:likePeopleModel];
         }
-        [self.sceneTableView reloadData];
-        [SVProgressHUD dismiss];
         
+        [self.sceneTableView reloadData];
+
     } failure:^(FBRequest *request, NSError *error) {
         [SVProgressHUD showErrorWithStatus:[error localizedDescription]];
     }];
@@ -221,8 +264,11 @@ static NSString *const URLDeleteScene = @"/scene_sight/delete";
             [self.reGoodsList addObject:goodsModel];
             [self.reGoodsIdList addObject:[NSString stringWithFormat:@"%zi", goodsModel.idField]];
         }
+        //  获取table全部内容高度
+        [self getTableViewFrameH];
         
         [self.sceneTableView reloadData];
+        [SVProgressHUD dismiss];
         
     } failure:^(FBRequest *request, NSError *error) {
         [SVProgressHUD showErrorWithStatus:[error localizedDescription]];
@@ -265,12 +311,16 @@ static NSString *const URLDeleteScene = @"/scene_sight/delete";
 #pragma mark - 设置场景详情的视图
 - (UITableView *)sceneTableView {
     if (!_sceneTableView) {
-        _sceneTableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT) style:(UITableViewStyleGrouped)];
+        _sceneTableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT * 2) style:(UITableViewStyleGrouped)];
         _sceneTableView.delegate = self;
         _sceneTableView.dataSource = self;
         _sceneTableView.showsVerticalScrollIndicator = NO;
         _sceneTableView.separatorStyle = UITableViewCellSeparatorStyleNone;
-        _sceneTableView.backgroundColor = [UIColor whiteColor];
+        _sceneTableView.backgroundColor = [UIColor clearColor];
+        _sceneTableView.backgroundView = [UIView new];
+        _sceneTableView.opaque = NO;
+        _sceneTableView.tableFooterView = [UIView new];
+        _sceneTableView.scrollEnabled = NO;
     }
     return _sceneTableView;
 }
@@ -373,16 +423,18 @@ static NSString *const URLDeleteScene = @"/scene_sight/delete";
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
     if (indexPath.section == 0) {
         if (indexPath.row == 0) {
-            return SCREEN_HEIGHT;
+            return 170;
         } else if (indexPath.row == 1) {
             ContentAndTagTableViewCell * cell = [[ContentAndTagTableViewCell alloc] init];
             [cell getContentCellHeight:self.sceneInfoModel.des];
+            _desCellH = cell.cellHeight;
             return cell.cellHeight;
         } else if (indexPath.row == 2) {
             return 44;
         } else if (indexPath.row == 3) {
             LikePeopleTableViewCell * cell = [[LikePeopleTableViewCell alloc] init];
             [cell getCellHeight:self.likePeopleMarr];
+            _likeUserCellH = cell.cellHeight;
             return cell.cellHeight;
         }
         return 100;
@@ -400,15 +452,13 @@ static NSString *const URLDeleteScene = @"/scene_sight/delete";
     if (section == 0) {
         return 0.01;
     } else if (section == 1) {
-        return 10;
-    } else
+        return 0.01;
+    } else {
         return 44;
+    }
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section {
-    if (section == 1) {
-        return 7;
-    }
     return 0.01;
 }
 

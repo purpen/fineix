@@ -65,7 +65,7 @@
     CGFloat labelHeight = [_comment sizeThatFits:CGSizeMake(200, MAXFLOAT)].height;
     NSNumber * count = @((labelHeight) / _comment.font.lineHeight);
 
-    self.cellHeight = size.height + ([count integerValue] * 2) + 30;
+    self.cellHeight = size.height + ([count integerValue] * 2) + 40;
     
 }
 
@@ -74,7 +74,7 @@
     [self addSubview:self.userHeader];
     [_userHeader mas_makeConstraints:^(MASConstraintMaker *make) {
         make.size.mas_equalTo(CGSizeMake(30, 30));
-        make.top.equalTo(self.mas_top).with.offset(5);
+        make.top.equalTo(self.mas_top).with.offset(10);
         make.left.equalTo(self.mas_left).with.offset(15);
     }];
     

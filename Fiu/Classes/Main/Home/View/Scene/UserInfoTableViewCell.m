@@ -18,8 +18,7 @@
     if (self) {
         
         self.selectionStyle = UITableViewCellSelectionStyleNone;
-        self.backgroundColor = [UIColor whiteColor];
-
+        self.backgroundColor = [UIColor clearColor];
         [self setCellUI];
         
     }
@@ -30,19 +29,13 @@
 - (void)setSceneInfoData:(SceneInfoData *)model {
     //  商品标签
     self.tagDataMarr = [NSMutableArray arrayWithArray:model.product];
-    [self setUserTagBtn];
+//    [self setUserTagBtn];
     
     self.goodsIds = [NSMutableArray arrayWithArray:[model.product valueForKey:@"idField"]];
     self.userId = [NSString stringWithFormat:@"%zi", model.userInfo.userId];
     
     [self.bgImage sd_setBackgroundImageWithURL:[NSURL URLWithString:model.coverUrl] forState:(UIControlStateNormal)];
     [self.bgImage sd_setBackgroundImageWithURL:[NSURL URLWithString:model.coverUrl] forState:(UIControlStateHighlighted)];
-    
-//    UIInterpolatingMotionEffect * fairyEffX = [[UIInterpolatingMotionEffect alloc] initWithKeyPath:@"center.y" type:UIInterpolatingMotionEffectTypeTiltAlongHorizontalAxis];// type表示沿水平方向运行效果
-//    fairyEffX.maximumRelativeValue = @(50);
-//    fairyEffX.minimumRelativeValue = @(-50);
-//    // 为view添加运动效果
-//    [self.bgImage addMotionEffect:fairyEffX];
     
     [self titleTextStyle:[NSString stringWithFormat:@"%@", model.title] withBgColor:[UIColor colorWithPatternImage:[UIImage imageNamed:@"titleBg"]]];
     self.whereScene.text = [self abouText:self.whereScene withText:model.sceneTitle];
@@ -70,7 +63,7 @@
 
 #pragma mark - 
 - (void)setCellUI {
-    [self addSubview:self.bgImage];
+//    [self addSubview:self.bgImage];
     
     [self addSubview:self.userView];
 }
@@ -179,7 +172,7 @@
 #pragma mark - 用户信息
 - (UIView *)userView {
     if (!_userView) {
-        _userView = [[UIView alloc] initWithFrame:CGRectMake(0, SCREEN_HEIGHT - 170, SCREEN_WIDTH, 170)];
+        _userView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 170)];
         
         [_userView addSubview:self.userLeftView];
         [_userLeftView mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -260,7 +253,6 @@
     if (!_userLeftView) {
         _userLeftView = [[UIView alloc] init];
         _userLeftView.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"User_bg_left"]];
-
     }
     return _userLeftView;
 }

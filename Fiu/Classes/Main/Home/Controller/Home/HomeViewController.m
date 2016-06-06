@@ -51,6 +51,8 @@ static NSString *const URLSceneList = @"/scene_sight/";
 
 #pragma mark - 网络请求
 - (void)networkRequestData {
+    [SVProgressHUD show];
+    
     NSDictionary *  requestParams = @{@"page":@(self.currentpageNum + 1), @"size":@10, @"sort":@"1"};
     self.sceneListRequest = [FBAPI getWithUrlString:URLSceneList requestDictionary:requestParams delegate:self];
     [self.sceneListRequest startRequestSuccess:^(FBRequest *request, id result) {
@@ -64,7 +66,8 @@ static NSString *const URLSceneList = @"/scene_sight/";
         self.currentpageNum = [[[result valueForKey:@"data"] valueForKey:@"current_page"] integerValue];
         self.totalPageNum = [[[result valueForKey:@"data"] valueForKey:@"total_page"] integerValue];
         [self requestIsLastData:self.homeTableView currentPage:self.currentpageNum withTotalPage:self.totalPageNum];
-            
+        [SVProgressHUD dismiss];
+        
     } failure:^(FBRequest *request, NSError *error) {
         [SVProgressHUD showErrorWithStatus:[error localizedDescription]];
     }];
@@ -105,7 +108,6 @@ static NSString *const URLSceneList = @"/scene_sight/";
             [table.mj_footer endRefreshing];
         }
     }
-    [SVProgressHUD dismiss];
 }
 
 #pragma mark - 上拉加载 & 下拉刷新

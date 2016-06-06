@@ -12,9 +12,10 @@
     UIScrollView    *   _backgroundScrollView;
     UIView          *   _constraitView;
     UIImageView     *   _backgroundImageView;
-    UIImageView     *   _blurredBackgroundImageView;
     UIView          *   _foregroundContainerView;
     UIImageView     *   _topMaskImageView;
+    BOOL                _rollDown;               //  是否下拉
+    CGFloat             _lastContentOffset;      //  滚动的方向
 }
 
 @end
@@ -33,9 +34,7 @@
 - (id)initWithFrame:(CGRect)frame BackgroundImage:(UIImage *)backgroundImage blurredImage:(UIImage *)blurredImage viewDistanceFromBottom:(CGFloat)viewDistanceFromBottom foregroundView:(UIView *)foregroundView {
     self = [super initWithFrame:frame];
     if (self) {
-
         _backgroundImage = backgroundImage;
-        _blurredBackgroundImage = backgroundImage;
         _viewDistanceFromBottom = viewDistanceFromBottom;
         _foregroundView = foregroundView;
         
@@ -47,10 +46,6 @@
     return self;
 }
 
-- (void)scrollVerticallyToOffset:(CGFloat)offsetY {
-    [_foregroundScrollView setContentOffset:CGPointMake(_foregroundScrollView.contentOffset.x, offsetY)];
-}
-
 #pragma mark - set
 - (void)setFrame:(CGRect)frame {
     [super setFrame:frame];
@@ -58,9 +53,9 @@
     CGRect bound = CGRectOffset(frame, -frame.origin.x, -frame.origin.y);
     
     [_backgroundScrollView setFrame:bound];
-    [_backgroundScrollView setContentSize:CGSizeMake(SCREEN_WIDTH + 0, SCREEN_HEIGHT + (SCREEN_HEIGHT / 2))];
+    [_backgroundScrollView setContentSize:CGSizeMake(bound.size.width, bound.size.height + (SCREEN_HEIGHT / 2))];
     [_backgroundScrollView setContentOffset:CGPointMake(0, 0)];
-    [_constraitView setFrame:CGRectMake(0, 0, SCREEN_WIDTH + 0, SCREEN_HEIGHT + (SCREEN_HEIGHT / 2))];
+    [_constraitView setFrame:CGRectMake(0, 0, frame.size.width, frame.size.height + (SCREEN_HEIGHT / 2))];
     
     [_foregroundContainerView setFrame:bound];
     [_foregroundScrollView setFrame:bound];
@@ -73,34 +68,28 @@
     _viewDistanceFromBottom = viewDistanceFromBottom;
 
     [_foregroundView setFrame:CGRectOffset(_foregroundView.bounds, (_foregroundScrollView.frame.size.width - _foregroundView.bounds.size.width)/2, _foregroundScrollView.frame.size.height - _foregroundScrollView.contentInset.top - _viewDistanceFromBottom)];
-    [_foregroundScrollView setContentSize:CGSizeMake(self.frame.size.width, _foregroundView.frame.origin.y + _foregroundView.frame.size.height)];
+    [_foregroundScrollView setContentSize:CGSizeMake(SCREEN_WIDTH, _foregroundView.frame.origin.y + _foregroundView.frame.size.height)];
     
 }
 
 #pragma mark - 
 - (void)createBackgroundView {
     //background
-    _backgroundScrollView = [[UIScrollView alloc] initWithFrame:self.frame];
+    _backgroundScrollView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT)];
     [_backgroundScrollView setUserInteractionEnabled:NO];
-    [_backgroundScrollView setContentSize:CGSizeMake(SCREEN_WIDTH, SCREEN_HEIGHT + (SCREEN_HEIGHT / 2))];
+    [_backgroundScrollView setContentSize:CGSizeMake(0, SCREEN_HEIGHT)];
     [self addSubview:_backgroundScrollView];
     
-    _constraitView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT + (SCREEN_HEIGHT / 2))];
+    _constraitView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT)];
     [_backgroundScrollView addSubview:_constraitView];
     
     _backgroundImageView = [[UIImageView alloc] initWithImage:_backgroundImage];
     [_backgroundImageView setTranslatesAutoresizingMaskIntoConstraints:NO];
     [_backgroundImageView setContentMode:UIViewContentModeScaleAspectFill];
     [_constraitView addSubview:_backgroundImageView];
-    
-    _blurredBackgroundImageView = [[UIImageView alloc] initWithImage:_blurredBackgroundImage];
-    [_blurredBackgroundImageView setTranslatesAutoresizingMaskIntoConstraints:NO];
-    [_blurredBackgroundImageView setContentMode:UIViewContentModeScaleAspectFill];
-    [_blurredBackgroundImageView setAlpha:0];
-    [_constraitView addSubview:_blurredBackgroundImageView];
-    
+
     [_constraitView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|[_backgroundImageView]|" options:0 metrics:0 views:NSDictionaryOfVariableBindings(_backgroundImageView)]];
-    [_constraitView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|[_blurredBackgroundImageView]|" options:0 metrics:0 views:NSDictionaryOfVariableBindings(_blurredBackgroundImageView)]];
+    [_constraitView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|[_backgroundImageView]|" options:0 metrics:0 views:NSDictionaryOfVariableBindings(_backgroundImageView)]];
 }
 
 - (void)createForegroundView {
@@ -113,29 +102,40 @@
     [_foregroundScrollView setShowsHorizontalScrollIndicator:NO];
     [_foregroundContainerView addSubview:_foregroundScrollView];
     
-    UITapGestureRecognizer *_tapRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(foregroundTapped:)];
-    [_foregroundScrollView addGestureRecognizer:_tapRecognizer];
+//    UITapGestureRecognizer *_tapRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(foregroundTapped:)];
+//    [_foregroundScrollView addGestureRecognizer:_tapRecognizer];
     
     
     [_foregroundView setFrame:CGRectOffset(_foregroundView.bounds, (_foregroundScrollView.frame.size.width - _foregroundView.bounds.size.width)/2, _foregroundScrollView.frame.size.height - _viewDistanceFromBottom)];
     [_foregroundScrollView addSubview:_foregroundView];
     
-    [_foregroundScrollView setContentSize:CGSizeMake(self.frame.size.width, _foregroundView.frame.origin.y + _foregroundView.frame.size.height)];
+    [_foregroundScrollView setContentSize:CGSizeMake(SCREEN_WIDTH, _foregroundView.frame.origin.y + _foregroundView.frame.size.height)];
 }
 
 #pragma mark - 点击
-- (void)foregroundTapped:(UITapGestureRecognizer *)tapRecognizer {
-    CGPoint tappedPoint = [tapRecognizer locationInView:_foregroundScrollView];
-    NSLog(@"%f", tappedPoint.y);
-    if (tappedPoint.y < _foregroundScrollView.frame.size.height) {
-        CGFloat ratio = _foregroundScrollView.contentOffset.y == -_foregroundScrollView.contentInset.top? 1:0;
-        [_foregroundScrollView setContentOffset:CGPointMake(0, ratio * _foregroundView.frame.origin.y - _foregroundScrollView.contentInset.top) animated:YES];
-    }
-}
-
+//- (void)foregroundTapped:(UITapGestureRecognizer *)tapRecognizer {
+//    CGPoint tappedPoint = [tapRecognizer locationInView:_foregroundScrollView];
+//    NSLog(@"%f", tappedPoint.y);
+//    if (tappedPoint.y < _foregroundScrollView.frame.size.height) {
+//        CGFloat ratio = _foregroundScrollView.contentOffset.y == -_foregroundScrollView.contentInset.top? 1:0;
+//        [_foregroundScrollView setContentOffset:CGPointMake(0, ratio * _foregroundView.frame.origin.y - _foregroundScrollView.contentInset.top) animated:YES];
+//    }
+//}
 
 #pragma mark - Delegate
 #pragma mark UIScrollView
+- (void)scrollViewWillBeginDragging:(UIScrollView *)scrollView{
+    _lastContentOffset = scrollView.contentOffset.y;
+}
+
+- (void)scrollViewWillBeginDecelerating:(UIScrollView *)scrollView{
+    if (_lastContentOffset < scrollView.contentOffset.y) {
+        _rollDown = YES;
+    }else{
+        _rollDown = NO;
+    }
+}
+
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView {
     CGFloat ratio = (scrollView.contentOffset.y + _foregroundScrollView.contentInset.top)/(_foregroundScrollView.frame.size.height - _foregroundScrollView.contentInset.top - _viewDistanceFromBottom);
     ratio = ratio<0?0:ratio;
@@ -143,12 +143,24 @@
     
     [_backgroundScrollView setContentOffset:CGPointMake(0, ratio * (SCREEN_HEIGHT / 2))];
     
-    [_blurredBackgroundImageView setAlpha:ratio];
+    if (_rollDown == YES) {
+        [UIView animateWithDuration:.4 animations:^{
+            self.leftBtn.alpha = 0;
+            self.rightBtn.alpha = 0;
+            self.logoImg.alpha = 0;
+        }];
+        
+    } else if (_rollDown == NO) {
+        [UIView animateWithDuration:.4 animations:^{
+            self.leftBtn.alpha = 1;
+            self.rightBtn.alpha = 1;
+            self.logoImg.alpha = 1;
+        }];
+    }
 }
 
 - (void)scrollViewWillEndDragging:(UIScrollView *)scrollView withVelocity:(CGPoint)velocity targetContentOffset:(inout CGPoint *)targetContentOffset {
-    
-    CGPoint point = *targetContentOffset;
+    CGPoint point = * targetContentOffset;
     CGFloat ratio = (point.y + _foregroundScrollView.contentInset.top)/(_foregroundScrollView.frame.size.height - _foregroundScrollView.contentInset.top - _viewDistanceFromBottom);
     
     if (ratio > 0 && ratio < 1) {
