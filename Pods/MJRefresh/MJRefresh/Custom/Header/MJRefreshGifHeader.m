@@ -53,7 +53,7 @@
     
     /* 根据图片设置控件的高度 */ 
     UIImage *image = [images firstObject]; 
-    if (image.size.height > self.mj_h) { 
+    if (image.size.height > self.mj_h) {
         self.mj_h = image.size.height; 
     } 
 }

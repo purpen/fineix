@@ -90,7 +90,6 @@
 //  copy
 #define pro_copy        property (nonatomic, copy)
 //  readonly
-#define pro_readonly    property (nonatomic, readonly)
-
+#define pro_strong_readonly    property (nonatomic, strong, readonly)
 
 #endif /* Fineix_h */
