@@ -148,7 +148,7 @@
     }];
     
     
-    [self.bgImageView sd_setImageWithURL:[NSURL URLWithString:entity.head_pic_url] placeholderImage:[UIImage imageNamed:@"default_head"]];
+    [self.bgImageView sd_setImageWithURL:[NSURL URLWithString:entity.head_pic_url] placeholderImage:[UIImage imageNamed:@""]];
     self.nickName.text = entity.nickname;
     self.userProfile.text = entity.summary;
     NSArray *tagsAry = [NSArray arrayWithObjects:@"大拿",@"行家",@"行摄家",@"艺术范",@"手艺人",@"人来疯",@"赎回自由身",@"职业buyer", nil];
@@ -167,7 +167,7 @@
         [self.headView mas_remakeConstraints:^(MASConstraintMaker *make) {
             make.size.mas_equalTo(CGSizeMake(84/667.0*SCREEN_HEIGHT, 84/667.0*SCREEN_HEIGHT));
             make.centerX.mas_equalTo(_userView.mas_centerX);
-            make.bottom.mas_equalTo(_userLevelLabel.mas_top).with.offset(-15/667.0*SCREEN_HEIGHT);
+            make.bottom.mas_equalTo(_userLevelLabel.mas_top).with.offset(-10/667.0*SCREEN_HEIGHT);
         }];
     }
     

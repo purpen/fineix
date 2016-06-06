@@ -11,9 +11,8 @@
                 <outlet property="applyBtn" destination="bcH-3A-ijU" id="7eh-at-Vmp"/>
                 <outlet property="editBtn" destination="ykp-MI-W0G" id="MEx-xd-pyY"/>
                 <outlet property="firstView" destination="8TS-mx-ZkC" id="LDs-Fd-Uh0"/>
-                <outlet property="idTagesImageView" destination="nP2-Zo-lBB" id="RCd-GL-gSZ"/>
-                <outlet property="idTagesLabel" destination="T8c-IW-InM" id="dwf-KH-x6X"/>
                 <outlet property="refusedView" destination="yhw-7v-5b2" id="jMe-JW-0Q4"/>
+                <outlet property="sumView" destination="cqt-xY-Vh1" id="gFH-qi-IIU"/>
                 <outlet property="throughView" destination="2D4-wu-txX" id="MrK-Va-H7M"/>
                 <outlet property="view" destination="IOO-u2-Va3" id="HFJ-WU-5uj"/>
                 <outlet property="waitingView" destination="ofa-iY-pnV" id="iTW-Uu-M37"/>
@@ -135,28 +134,9 @@
                         </label>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="cqt-xY-Vh1">
                             <rect key="frame" x="0.0" y="33" width="375" height="50"/>
-                            <subviews>
-                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="nP2-Zo-lBB">
-                                    <rect key="frame" x="20" y="11" width="28" height="12"/>
-                                    <constraints>
-                                        <constraint firstAttribute="width" constant="28" id="DrS-AA-faD"/>
-                                        <constraint firstAttribute="height" constant="12" id="FT6-Jy-Ejz"/>
-                                    </constraints>
-                                </imageView>
-                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="T8c-IW-InM">
-                                    <rect key="frame" x="20" y="29" width="0.0" height="0.0"/>
-                                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                    <color key="textColor" red="0.40000000000000002" green="0.40000000000000002" blue="0.40000000000000002" alpha="1" colorSpace="calibratedRGB"/>
-                                    <nil key="highlightedColor"/>
-                                </label>
-                            </subviews>
                             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             <constraints>
-                                <constraint firstItem="nP2-Zo-lBB" firstAttribute="top" secondItem="cqt-xY-Vh1" secondAttribute="top" constant="11" id="HHu-9R-eNY"/>
                                 <constraint firstAttribute="height" constant="50" id="XzZ-E1-Cgj"/>
-                                <constraint firstItem="nP2-Zo-lBB" firstAttribute="leading" secondItem="cqt-xY-Vh1" secondAttribute="leading" constant="20" id="Yci-Q6-hGq"/>
-                                <constraint firstItem="T8c-IW-InM" firstAttribute="leading" secondItem="cqt-xY-Vh1" secondAttribute="leading" constant="20" id="sBL-XV-20k"/>
-                                <constraint firstItem="T8c-IW-InM" firstAttribute="top" secondItem="nP2-Zo-lBB" secondAttribute="bottom" constant="6" id="xog-47-OY9"/>
                             </constraints>
                         </view>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ykp-MI-W0G">

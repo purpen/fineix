@@ -15,6 +15,7 @@
 @property(nonatomic,strong) UILabel *nameLabel;
 @property(nonatomic,strong) UILabel *sumLabel;
 @property(nonatomic,strong) UIImageView *goImage;
+@property(nonatomic,strong) UIView *lineView;
 
 -(void)setUIWithModel:(InvitationModel*)model;
 

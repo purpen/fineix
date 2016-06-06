@@ -33,6 +33,13 @@
     if (self = [super initWithStyle:style reuseIdentifier:reuseIdentifier]) {
         self.selectionStyle = UITableViewCellSelectionStyleNone;
         
+        [self.contentView addSubview:self.lineView];
+        [_lineView mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.size.mas_equalTo(CGSizeMake(SCREEN_WIDTH-10, 0.5));
+            make.left.mas_equalTo(self.mas_left).with.offset(5);
+            make.bottom.mas_equalTo(self.mas_bottom).with.offset(0);
+        }];
+        
         [self.contentView addSubview:self.headImage];
         [_headImage mas_makeConstraints:^(MASConstraintMaker *make) {
             make.size.mas_equalTo(CGSizeMake(76*0.5/667.0*SCREEN_HEIGHT, 76*0.5/667.0*SCREEN_HEIGHT));
@@ -65,6 +72,14 @@
         
     }
     return self;
+}
+
+-(UIView *)lineView{
+    if (!_lineView) {
+        _lineView = [[UIView alloc] init];
+        _lineView.backgroundColor = [UIColor lightGrayColor];
+    }
+    return _lineView;
 }
 
 -(UIImageView *)goImage{

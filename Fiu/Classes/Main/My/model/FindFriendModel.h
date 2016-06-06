@@ -21,5 +21,6 @@
 @property(nonatomic,strong) NSNumber *rank_id;
 @property(nonatomic,copy) NSString *is_expert;
 @property(nonatomic,copy) NSString *expert_label;
+@property(nonatomic,copy) NSString *summary;
 
 @end

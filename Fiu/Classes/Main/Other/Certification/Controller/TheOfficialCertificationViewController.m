@@ -55,9 +55,10 @@
             //不是第一次，要编辑
             
             //获取数据------
-            if (![dataDict[@"expert_label"] isKindOfClass:[NSNull class]]) {
-                self.expert_label = dataDict[@"expert_label"];
+            if (![dataDict[@"label"] isKindOfClass:[NSNull class]]) {
+                self.expert_label = dataDict[@"label"];
             }
+            NSLog(@" %@ ",self.expert_label);
             if (![dataDict[@"info"] isKindOfClass:[NSNull class]]) {
                 self.info = dataDict[@"info"];
             }
@@ -79,6 +80,7 @@
                 [self.selectedModelAry addObject:model];
                 [self.selectedCollectionView reloadData];
                 self.selectedCollectionView.hidden = NO;
+                self.certView.deleAllBtn.hidden = self.selectedModelAry.count == 0;
             }
             if (self.info.length != 0) {
                 self.certView.informationTF.text = self.info;

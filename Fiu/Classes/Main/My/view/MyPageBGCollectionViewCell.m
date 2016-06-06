@@ -80,6 +80,13 @@
         self.talentView.hidden = YES;
         self.userProfile.hidden = YES;
         self.idImageView.hidden = YES;
+        
+        [self layoutIfNeeded];
+        [self.nickName mas_remakeConstraints:^(MASConstraintMaker *make) {
+            make.size.mas_equalTo(CGSizeMake(self.frame.size.width, 19));
+            make.centerX.mas_equalTo(_userView.mas_centerX);
+            make.bottom.mas_equalTo(_idImageView.mas_top).with.offset(-6/667.0*SCREEN_HEIGHT);
+        }];
     }
     if (entity.summary.length == 0) {
         self.userLevelLabel.text = [NSString stringWithFormat:@"Lv%zi %@ | %@",[entity.level intValue],entity.label,@"说说你是什么人，来自哪片山川湖海"];

@@ -39,6 +39,7 @@
     if (self = [super initWithStyle:style reuseIdentifier:reuseIdentifier]) {
         self.selectionStyle = UITableViewCellSelectionStyleNone;
         
+        
         [self.contentView addSubview:self.headImageView];
         [_headImageView mas_makeConstraints:^(MASConstraintMaker *make) {
             make.size.mas_equalTo(CGSizeMake(32/667.0*SCREEN_HEIGHT, 32/667.0*SCREEN_HEIGHT));
@@ -79,6 +80,7 @@
         [_levelLabel mas_makeConstraints:^(MASConstraintMaker *make) {
             make.top.mas_equalTo(_nameLbael.mas_bottom).with.offset(3);
             make.left.mas_equalTo(_headImageView.mas_right).with.offset(9/667.0*SCREEN_HEIGHT);
+            make.right.mas_equalTo(self.focusBtn.mas_left).with.offset(5);
             make.height.mas_equalTo(10);
         }];
         

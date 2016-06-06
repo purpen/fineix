@@ -69,6 +69,7 @@ static NSString *const ShareURL = @"http://m.taihuoniao.com/guide/app_about";
             model.nickName = rowsDict[@"nickname"];
             model.address = rowsDict[@"areas"];
             model.isLove = rowsDict[@"is_love"];
+            model.summary = rowsDict[@"summary"];
             
             if(![rowsDict[@"label"] isKindOfClass:[NSNull class]]){
                 model.label = rowsDict[@"label"];
@@ -79,7 +80,6 @@ static NSString *const ShareURL = @"http://m.taihuoniao.com/guide/app_about";
             NSArray *sceneAry = rowsDict[@"scene_sight"];
             //model.scene = [NSMutableArray array];
             for (NSDictionary *sceneDict in sceneAry) {
-                
                 FindSceneModel *model1 = [[FindSceneModel alloc] init];
                 model1.id = sceneDict[@"_id"];
                 model1.title = sceneDict[@"title"];
@@ -108,6 +108,7 @@ static NSString *const ShareURL = @"http://m.taihuoniao.com/guide/app_about";
         _myTbaleView.delegate = self;
         _myTbaleView.dataSource = self;
         _myTbaleView.showsVerticalScrollIndicator = NO;
+        _myTbaleView.separatorStyle = UITableViewCellSeparatorStyleNone;
     }
     return _myTbaleView;
 }
@@ -162,16 +163,16 @@ static NSString *const ShareURL = @"http://m.taihuoniao.com/guide/app_about";
         
         NSArray *tagsAry = [NSArray arrayWithObjects:@"大拿",@"行家",@"行摄家",@"艺术范",@"手艺人",@"人来疯",@"赎回自由身",@"职业buyer", nil];
         if ([model.is_expert isEqual:@(1)]) {
-            cell.userLevelLabel.text = [NSString stringWithFormat:@" | Lv%d",[model.rank_id intValue]];
+            cell.userLevelLabel.text = [NSString stringWithFormat:@" | %@",model.expert_label];
             cell.userLevelLabel.hidden = NO;
             cell.idTagsImageView.hidden = NO;
             int n = (int)[tagsAry indexOfObject:model.expert_label];
             cell.idTagsImageView.image = [UIImage imageNamed:[NSString stringWithFormat:@"tags%d",n+1]];
         }else{
             if (model.label.length == 0) {
-                cell.levelLabel.text = [NSString stringWithFormat:@" Lv%d",[model.rank_id intValue]];
+                cell.levelLabel.text = [NSString stringWithFormat:@"%@",model.summary];
             }else{
-                cell.levelLabel.text = [NSString stringWithFormat:@"%@ | Lv%d",model.label,[model.rank_id intValue]];
+                cell.levelLabel.text = [NSString stringWithFormat:@"%@ | %@",model.label,model.summary];
             }
             cell.userLevelLabel.hidden = NO;
             cell.idTagsImageView.hidden = YES;

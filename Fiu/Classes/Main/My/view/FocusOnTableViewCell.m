@@ -111,13 +111,13 @@
     self.nickNameLabel.text = model.nickname;
     if ([entity.userId isEqual:model.userId]) {
         if (model.summary.length == 0) {
-            self.summaryLabel.text = @"说说你是什么人，来自哪片山川湖海";
+            self.summaryLabel.text = @"";
         }else{
             self.summaryLabel.text = model.summary;
         }
     }else{
         if (model.summary.length == 0) {
-            self.summaryLabel.text = @"这人好神秘，什么都不说";
+            self.summaryLabel.text = @"";
         }else{
             self.summaryLabel.text = model.summary;
         }
@@ -129,6 +129,8 @@
         _headImageView = [[UIImageView alloc] init];
         _headImageView.layer.masksToBounds = YES;
         _headImageView.layer.cornerRadius = 16/667.0*SCREEN_HEIGHT;
+        _headImageView.layer.borderWidth = 1.0;
+        _headImageView.layer.borderColor = [UIColor colorWithHexString:lineGrayColor].CGColor;
     }
     return _headImageView;
 }
@@ -154,6 +156,7 @@
     if (!_summaryLabel) {
         _summaryLabel = [[UILabel alloc] init];
         _summaryLabel.font = [UIFont systemFontOfSize:10];
+        _summaryLabel.textColor = [UIColor lightGrayColor];
     }
     return _summaryLabel;
 }
