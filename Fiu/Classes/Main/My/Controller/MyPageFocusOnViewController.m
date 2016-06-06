@@ -16,13 +16,14 @@
 #import "MJRefresh.h"
 #import "MyFansActionSheetViewController.h"
 #import "UserInfoEntity.h"
+#import "FocusNonView.h"
 
 @interface MyPageFocusOnViewController ()<FBNavigationBarItemsDelegate,UITableViewDelegate,UITableViewDataSource,FBRequestDelegate>
 {
     NSMutableArray *_modelAry;
 }
 
-@property(nonatomic,strong) UILabel *tipLabel;
+@property(nonatomic,strong) FocusNonView *scenarioNonView;
 @property (nonatomic, assign) NSInteger currentPageNumber;
 @property (nonatomic, assign) NSInteger totalPageNumber;
 
@@ -82,7 +83,6 @@
         NSArray *rowsAry = [dataDict objectForKey:@"rows"];
         for (NSDictionary *rowsDict in rowsAry) {
             if ([[rowsDict objectForKey:@"follows"] isKindOfClass:[NSArray class]]) {
-                NSLog(@"follows是空的数组");
                 
             } else if ([[rowsDict objectForKey:@"follows"] isKindOfClass:[NSDictionary class]]){
                 NSDictionary *followsDict = [rowsDict objectForKey:@"follows"];
@@ -98,15 +98,20 @@
             
         }
         if (_modelAry.count == 0) {
-            [self.view addSubview:self.tipLabel];
-            _tipLabel.text = @"看看你的关注列表都是些什么人~";
-            [_tipLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-                make.size.mas_equalTo(CGSizeMake(300, 30));
-                make.centerX.mas_equalTo(self.view.mas_centerX);
-                make.top.mas_equalTo(self.view.mas_top).with.offset(200);
+            [self.view addSubview:self.scenarioNonView];
+            UserInfoEntity *entity = [UserInfoEntity defaultUserInfoEntity];
+            if ([self.userId isEqual:entity.userId]) {
+                self.scenarioNonView.tipLabel.text = @"偷偷告诉你：关注越多，推送越精准哦";
+            }else{
+                self.scenarioNonView.tipLabel.text = @"你一定是想关注我，才点进来的对吧";
+            }
+            [_scenarioNonView mas_makeConstraints:^(MASConstraintMaker *make) {
+                make.size.mas_equalTo(CGSizeMake(SCREEN_WIDTH, SCREEN_HEIGHT));
+                make.left.mas_equalTo(self.view.mas_left).with.offset(0);
+                make.top.mas_equalTo(self.view.mas_top).with.offset(64);
             }];
         }else{
-            [self.tipLabel removeFromSuperview];
+            [self.scenarioNonView removeFromSuperview];
         }
         
         [self.mytableView reloadData];
@@ -137,7 +142,6 @@
                 [self.mytableView.mj_footer endRefreshing];
             }
         }
-        
         [SVProgressHUD dismiss];
     } failure:^(FBRequest *request, NSError *error) {
         [SVProgressHUD showInfoWithStatus:[error localizedDescription]];
@@ -146,13 +150,11 @@
 
 
 
--(UILabel *)tipLabel{
-    if (!_tipLabel) {
-        _tipLabel = [[UILabel alloc] init];
-        _tipLabel.textAlignment = NSTextAlignmentCenter;
-        _tipLabel.font = [UIFont systemFontOfSize:13];
+-(FocusNonView *)scenarioNonView{
+    if (!_scenarioNonView) {
+        _scenarioNonView = [FocusNonView getFocusNonView];
     }
-    return _tipLabel;
+    return _scenarioNonView;
 }
 
 
@@ -205,7 +207,6 @@
         cell = [[FocusOnTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellId];
     }
     [cell.focusOnBtn addTarget:self action:@selector(clickFocusBtn:) forControlEvents:UIControlEventTouchUpInside];
-    //UserInfo *model = _modelAry[indexPath.row];
     cell.focusOnBtn.tag = indexPath.row;
     if (_modelAry.count == 0) {
         

@@ -32,6 +32,7 @@
 #import "TipNumberView.h"
 #import "IntegralViewController.h"
 #import "UITabBar+badge.h"
+#import "ScenarioNonView.h"
 
 
 @interface MyPageViewController ()<FBNavigationBarItemsDelegate,UICollectionViewDelegate,UICollectionViewDataSource>
@@ -78,14 +79,6 @@
     scenarioTap3.numberOfTouchesRequired = 1;
     [_chanelV.fansView addGestureRecognizer:scenarioTap3];
     [self.view addSubview:self.myCollectionView];
-    
-    
-//    [self.view addSubview:self.naviViewAl];
-//    [_naviViewAl mas_makeConstraints:^(MASConstraintMaker *make) {
-//        make.size.mas_equalTo(CGSizeMake(SCREEN_WIDTH, 64));
-//        make.left.mas_equalTo(self.view.mas_left).with.offset(0);
-//        make.right.mas_equalTo(self.view.mas_right).with.offset(0);
-//    }];
 }
 
 
@@ -178,7 +171,7 @@
         [SVProgressHUD dismiss];
         
         //判断小圆点是否消失
-        if (_counterModel.message_total_count != 0) {
+        if (![_counterModel.message_total_count isEqual:@0]) {
             [self.tabBarController.tabBar showBadgeWithIndex:4];
         }else{
             [self.tabBarController.tabBar hideBadgeWithIndex:4];

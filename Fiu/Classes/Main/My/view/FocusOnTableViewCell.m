@@ -78,8 +78,8 @@
 }
 
 -(void)setUIWithModel:(UserInfo *)model andType:(NSNumber *)type{
+    UserInfoEntity *entity = [UserInfoEntity defaultUserInfoEntity];
     if ([type isEqualToNumber:@1]) {
-        UserInfoEntity *entity = [UserInfoEntity defaultUserInfoEntity];
         if ([entity.userId isEqual:model.userId]) {
             if (model.is_love == 1) {
                 self.focusOnBtn.selected = NO;
@@ -95,7 +95,6 @@
         }
 
     }else if ([type isEqualToNumber:@0]){
-        UserInfoEntity *entity = [UserInfoEntity defaultUserInfoEntity];
         if ([entity.userId isEqual:model.userId]) {
             self.focusOnBtn.selected = YES;
         }else{
@@ -108,10 +107,21 @@
 
     }
     
-    [self.headImageView sd_setImageWithURL:[NSURL URLWithString:model.mediumAvatarUrl] placeholderImage:[UIImage imageNamed:@"user"]];
+    [self.headImageView sd_setImageWithURL:[NSURL URLWithString:model.mediumAvatarUrl] placeholderImage:[UIImage imageNamed:@"default_head"]];
     self.nickNameLabel.text = model.nickname;
-    self.summaryLabel.text = model.summary;
-    
+    if ([entity.userId isEqual:model.userId]) {
+        if (model.summary.length == 0) {
+            self.summaryLabel.text = @"说说你是什么人，来自哪片山川湖海";
+        }else{
+            self.summaryLabel.text = model.summary;
+        }
+    }else{
+        if (model.summary.length == 0) {
+            self.summaryLabel.text = @"这人好神秘，什么都不说";
+        }else{
+            self.summaryLabel.text = model.summary;
+        }
+    }
 }
 
 -(UIImageView *)headImageView{

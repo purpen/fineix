@@ -88,8 +88,8 @@ static NSString *const ShareURL = @"http://m.taihuoniao.com/guide/app_about";
                 model1.cober = sceneDict[@"cover_url"];
                 [model.scene addObject:model1];
             }
-            FindSceneModel *model1 = model.scene[1];
-            NSLog(@"嘿嘿  %@",model1.title);
+//            FindSceneModel *model1 = model.scene[1];
+//            NSLog(@"嘿嘿  %@",model1.title);
             [_userAry addObject:model];
         }
         NSLog(@"_userAry  %@",_userAry);
@@ -157,7 +157,7 @@ static NSString *const ShareURL = @"http://m.taihuoniao.com/guide/app_about";
         }else if ([model.isLove isEqualToNumber:@1]){
             cell.focusBtn.selected = YES;
         }
-        [cell.headImageView sd_setImageWithURL:[NSURL URLWithString:model.avatarUrl]];
+        [cell.headImageView sd_setImageWithURL:[NSURL URLWithString:model.avatarUrl]placeholderImage:[UIImage imageNamed:@"default_head"]];
         cell.nameLbael.text = model.nickName;
         
         NSArray *tagsAry = [NSArray arrayWithObjects:@"大拿",@"行家",@"行摄家",@"艺术范",@"手艺人",@"人来疯",@"赎回自由身",@"职业buyer", nil];

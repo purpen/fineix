@@ -143,15 +143,12 @@
 -(void)setUI{
     UserInfoEntity *entity = [UserInfoEntity defaultUserInfoEntity];
     //更新头像
-    UIImageView * headerImg = [[UIImageView alloc] initWithFrame:self.userHeadImageView.frame];
-    [headerImg downloadImage:entity.mediumAvatarUrl place:[UIImage imageNamed:@""]];
-    [self.userHeadImageView sd_setImageWithURL:[NSURL URLWithString:entity.mediumAvatarUrl] placeholderImage:headerImg.image completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
+    [self.userHeadImageView sd_setImageWithURL:[NSURL URLWithString:entity.mediumAvatarUrl] placeholderImage:[UIImage imageNamed:@"default_head"] completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
         
     }];
     
-    UIImageView * headerImg1 = [[UIImageView alloc] initWithFrame:self.userHeadImageView.frame];
-    [headerImg1 downloadImage:entity.head_pic_url place:[UIImage imageNamed:@""]];
-    [self.bgImageView sd_setImageWithURL:[NSURL URLWithString:entity.head_pic_url] placeholderImage:headerImg1.image];
+    
+    [self.bgImageView sd_setImageWithURL:[NSURL URLWithString:entity.head_pic_url] placeholderImage:[UIImage imageNamed:@"default_head"]];
     self.nickName.text = entity.nickname;
     self.userProfile.text = entity.summary;
     NSArray *tagsAry = [NSArray arrayWithObjects:@"大拿",@"行家",@"行摄家",@"艺术范",@"手艺人",@"人来疯",@"赎回自由身",@"职业buyer", nil];
@@ -166,10 +163,16 @@
         self.talentView.hidden = YES;
         self.userProfile.hidden = YES;
         self.idImageView.hidden = YES;
+        [self layoutIfNeeded];
+        [self.headView mas_remakeConstraints:^(MASConstraintMaker *make) {
+            make.size.mas_equalTo(CGSizeMake(84/667.0*SCREEN_HEIGHT, 84/667.0*SCREEN_HEIGHT));
+            make.centerX.mas_equalTo(_userView.mas_centerX);
+            make.bottom.mas_equalTo(_userLevelLabel.mas_top).with.offset(-15/667.0*SCREEN_HEIGHT);
+        }];
     }
     
     if (entity.summary.length == 0) {
-        self.userLevelLabel.text = [NSString stringWithFormat:@"Lv%zi %@",[entity.level intValue],entity.label];
+        self.userLevelLabel.text = [NSString stringWithFormat:@"Lv%zi %@ | %@",[entity.level intValue],entity.label,@"说说你是什么人，来自哪片山川湖海"];
     }else{
         self.userLevelLabel.text = [NSString stringWithFormat:@"Lv%zi %@ | %@",[entity.level intValue],entity.label,entity.summary];
     }
@@ -196,10 +199,10 @@
         //  添加渐变层
         CAGradientLayer * shadow = [CAGradientLayer layer];
         shadow.startPoint = CGPointMake(0, 0);
-        shadow.endPoint = CGPointMake(0, 1);
+        shadow.endPoint = CGPointMake(0, 0.8);
         shadow.colors = @[(__bridge id)[UIColor clearColor].CGColor,
                           (__bridge id)[UIColor blackColor].CGColor];
-        shadow.locations = @[@(0.5f), @(1.5f)];
+        shadow.locations = @[@(0.8f), @(2.5f)];
         shadow.frame = CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_WIDTH);
         [_bgImageView.layer addSublayer:shadow];
         

@@ -428,6 +428,8 @@
 		1F772B5E1CF3FD910018AE40 /* AppDelegate.mm in Sources */ = {isa = PBXBuildFile; fileRef = 1F772B5D1CF3FD910018AE40 /* AppDelegate.mm */; };
 		1F96D89A1CF9A1F6003014FF /* UITabBar+badge.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F96D8991CF9A1F6003014FF /* UITabBar+badge.m */; };
 		1FC6782E1CDB33ED00535162 /* UIView+TYAlertView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1FC6782C1CDB33ED00535162 /* UIView+TYAlertView.m */; };
+		1FCDCC7A1D0515F700C92E78 /* ScenarioNonView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1FCDCC791D0515F700C92E78 /* ScenarioNonView.m */; };
+		1FCDCC7D1D0525A300C92E78 /* FocusNonView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1FCDCC7C1D0525A300C92E78 /* FocusNonView.m */; };
 		280045111C805B78005F5C2E /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 280045101C805B78005F5C2E /* CoreLocation.framework */; };
 		280045131C805B82005F5C2E /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 280045121C805B82005F5C2E /* QuartzCore.framework */; };
 		280045151C805B8C005F5C2E /* OpenGLES.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 280045141C805B8C005F5C2E /* OpenGLES.framework */; };
@@ -1272,6 +1274,10 @@
 		1F96D8991CF9A1F6003014FF /* UITabBar+badge.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UITabBar+badge.m"; sourceTree = "<group>"; };
 		1FC6782C1CDB33ED00535162 /* UIView+TYAlertView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+TYAlertView.m"; sourceTree = "<group>"; };
 		1FC6782D1CDB33ED00535162 /* UIView+TYAutoLayout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+TYAutoLayout.h"; sourceTree = "<group>"; };
+		1FCDCC781D0515F700C92E78 /* ScenarioNonView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ScenarioNonView.h; sourceTree = "<group>"; };
+		1FCDCC791D0515F700C92E78 /* ScenarioNonView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ScenarioNonView.m; sourceTree = "<group>"; };
+		1FCDCC7B1D0525A300C92E78 /* FocusNonView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FocusNonView.h; sourceTree = "<group>"; };
+		1FCDCC7C1D0525A300C92E78 /* FocusNonView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FocusNonView.m; sourceTree = "<group>"; };
 		280045101C805B78005F5C2E /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
 		280045121C805B82005F5C2E /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		280045141C805B8C005F5C2E /* OpenGLES.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGLES.framework; path = System/Library/Frameworks/OpenGLES.framework; sourceTree = SDKROOT; };
@@ -2529,6 +2535,10 @@
 				1F2A8DE21CF40277005116C7 /* TipNumberView.m */,
 				1F520A991CF8771600B6882A /* TalentView.h */,
 				1F520A9A1CF8771600B6882A /* TalentView.m */,
+				1FCDCC781D0515F700C92E78 /* ScenarioNonView.h */,
+				1FCDCC791D0515F700C92E78 /* ScenarioNonView.m */,
+				1FCDCC7B1D0525A300C92E78 /* FocusNonView.h */,
+				1FCDCC7C1D0525A300C92E78 /* FocusNonView.m */,
 			);
 			path = view;
 			sourceTree = "<group>";
@@ -4022,6 +4032,7 @@
 				1F2A8FD41CF40277005116C7 /* FBEditCarItemTableViewCell.m in Sources */,
 				1F2A90771CF40277005116C7 /* RefundmentViewController.m in Sources */,
 				1F2A8F541CF40277005116C7 /* ScenceAddMoreView.m in Sources */,
+				1FCDCC7A1D0515F700C92E78 /* ScenarioNonView.m in Sources */,
 				1F2A8F5B1CF40277005116C7 /* LookAllTagBtnTableViewCell.m in Sources */,
 				1F2A903F1CF40277005116C7 /* CityTableViewCell.m in Sources */,
 				1F2A907F1CF40277005116C7 /* ExpressInfoModel.m in Sources */,
@@ -4263,6 +4274,7 @@
 				D81281551CAA8532007CF08B /* HttpTool.m in Sources */,
 				1F2A8F361CF40277005116C7 /* AllNearbyScenarioViewController.m in Sources */,
 				1F2A8F611CF40277005116C7 /* ChangeAddUrlView.m in Sources */,
+				1FCDCC7D1D0525A300C92E78 /* FocusNonView.m in Sources */,
 				1F2A908E1CF40277005116C7 /* FBAlertViewController.m in Sources */,
 				1F2A8FF51CF40277005116C7 /* MyFansViewController.m in Sources */,
 				1F2A90681CF40277005116C7 /* SystemInfoMessageTableViewCell.m in Sources */,

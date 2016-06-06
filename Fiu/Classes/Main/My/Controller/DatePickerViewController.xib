@@ -18,39 +18,52 @@
             <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <datePicker contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="date" minuteInterval="1" useCurrentDate="NO" translatesAutoresizingMaskIntoConstraints="NO" id="69k-5l-NWf">
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="tng-tM-aUE">
                     <rect key="frame" x="0.0" y="451" width="375" height="216"/>
+                    <subviews>
+                        <datePicker contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="date" minuteInterval="1" useCurrentDate="NO" translatesAutoresizingMaskIntoConstraints="NO" id="69k-5l-NWf">
+                            <rect key="frame" x="0.0" y="0.0" width="375" height="216"/>
+                            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="216" id="SUo-In-1Oa"/>
+                                <constraint firstAttribute="width" secondItem="69k-5l-NWf" secondAttribute="height" multiplier="125:72" id="eSK-FH-Z0j"/>
+                            </constraints>
+                            <date key="date" timeIntervalSinceReferenceDate="-347115599.20392698">
+                                <!--1990-01-01 11:00:00 +0000-->
+                            </date>
+                            <date key="minimumDate" timeIntervalSinceReferenceDate="-61599099943">
+                                <!--0049-01-01 10:54:17 +0000-->
+                            </date>
+                            <date key="maximumDate" timeIntervalSinceReferenceDate="488977200">
+                                <!--2016-06-30 11:00:00 +0000-->
+                            </date>
+                            <variation key="default">
+                                <mask key="constraints">
+                                    <exclude reference="SUo-In-1Oa"/>
+                                </mask>
+                            </variation>
+                        </datePicker>
+                    </subviews>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     <constraints>
-                        <constraint firstAttribute="height" constant="216" id="SUo-In-1Oa"/>
-                        <constraint firstAttribute="width" secondItem="69k-5l-NWf" secondAttribute="height" multiplier="125:72" id="eSK-FH-Z0j"/>
+                        <constraint firstAttribute="trailing" secondItem="69k-5l-NWf" secondAttribute="trailing" id="HUa-Vt-cV9"/>
+                        <constraint firstItem="69k-5l-NWf" firstAttribute="top" secondItem="tng-tM-aUE" secondAttribute="top" id="LeI-Gf-sR1"/>
+                        <constraint firstAttribute="bottom" secondItem="69k-5l-NWf" secondAttribute="bottom" id="cch-FP-HIA"/>
+                        <constraint firstItem="69k-5l-NWf" firstAttribute="leading" secondItem="tng-tM-aUE" secondAttribute="leading" id="i9o-Ky-7fK"/>
                     </constraints>
-                    <date key="date" timeIntervalSinceReferenceDate="-347115599.20392698">
-                        <!--1990-01-01 11:00:00 +0000-->
-                    </date>
-                    <date key="minimumDate" timeIntervalSinceReferenceDate="-61599099943">
-                        <!--0049-01-01 10:54:17 +0000-->
-                    </date>
-                    <date key="maximumDate" timeIntervalSinceReferenceDate="488977200">
-                        <!--2016-06-30 11:00:00 +0000-->
-                    </date>
-                    <variation key="default">
-                        <mask key="constraints">
-                            <exclude reference="SUo-In-1Oa"/>
-                        </mask>
-                    </variation>
-                </datePicker>
+                </view>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0Ei-ZX-rx7">
                     <rect key="frame" x="0.0" y="0.0" width="375" height="451"/>
                 </button>
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
             <constraints>
-                <constraint firstItem="69k-5l-NWf" firstAttribute="top" secondItem="0Ei-ZX-rx7" secondAttribute="bottom" id="3cq-D3-VbL"/>
                 <constraint firstItem="0Ei-ZX-rx7" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="8y0-40-PGd"/>
-                <constraint firstAttribute="trailing" secondItem="69k-5l-NWf" secondAttribute="trailing" id="GRY-iY-krU"/>
-                <constraint firstAttribute="bottom" secondItem="69k-5l-NWf" secondAttribute="bottom" id="TgT-Hj-6gp"/>
+                <constraint firstItem="tng-tM-aUE" firstAttribute="top" secondItem="0Ei-ZX-rx7" secondAttribute="bottom" id="TOI-0V-9Nd"/>
+                <constraint firstAttribute="bottom" secondItem="tng-tM-aUE" secondAttribute="bottom" id="VmA-KQ-jq4"/>
                 <constraint firstItem="0Ei-ZX-rx7" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="Wr4-Yg-bv4"/>
-                <constraint firstItem="69k-5l-NWf" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="hlj-MP-SyQ"/>
+                <constraint firstItem="tng-tM-aUE" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="fL8-Kd-Sx2"/>
+                <constraint firstAttribute="trailing" secondItem="tng-tM-aUE" secondAttribute="trailing" id="o5D-Uc-j7p"/>
                 <constraint firstAttribute="trailing" secondItem="0Ei-ZX-rx7" secondAttribute="trailing" id="uLp-Fo-M1w"/>
             </constraints>
             <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>

@@ -26,7 +26,7 @@
 @property (nonatomic,strong) UICollectionView *itemsCollectionView;
 @property (nonatomic,strong) NSMutableArray *modelAry;
 @property(nonatomic ,strong) NSMutableArray *selectedModelAry;
-
+@property(nonatomic,copy) NSString *label;
 @end
 
 static NSString *const UpdateInfoURL = @"/my/update_profile";
@@ -55,6 +55,17 @@ static NSString *const UpdateInfoURL = @"/my/update_profile";
     self.selectedCollectionView.hidden = YES;
     self.deletAllBtn.hidden = YES;
     [self.deletAllBtn addTarget:self action:@selector(clickDeletAllBtn:) forControlEvents:UIControlEventTouchUpInside];
+}
+
+-(void)viewWillAppear:(BOOL)animated{
+    [self.selectedModelAry removeAllObjects];
+    IdentityTagModel *model = [[IdentityTagModel alloc] init];
+    UserInfoEntity *entity = [UserInfoEntity defaultUserInfoEntity];
+    model.tags = entity.label;
+    [self.selectedModelAry addObject:model];
+    [self.selectedCollectionView reloadData];
+    self.deletAllBtn.hidden = NO;
+    self.selectedCollectionView.hidden = NO;
 }
 
 -(void)clickDeletAllBtn:(UIButton*)sender{

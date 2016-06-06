@@ -25,13 +25,6 @@
             make.left.mas_equalTo(self.mas_left).with.offset(0);
         }];
         
-//        [self.contentView addSubview:self.certificationBtn];
-//        [_certificationBtn mas_makeConstraints:^(MASConstraintMaker *make) {
-//            make.size.mas_equalTo(CGSizeMake(138*0.5/667.0*SCREEN_HEIGHT, 25/667.0*SCREEN_HEIGHT));
-//            make.bottom.mas_equalTo(self.mas_bottom).with.offset(-15/667.0*SCREEN_HEIGHT);
-//            make.centerX.mas_equalTo(self.mas_centerX);
-//        }];
-        
     }
     return self;
 }
@@ -69,9 +62,7 @@
 -(void)setUI{
     UserInfoEntity *entity = [UserInfoEntity defaultUserInfoEntity];
     //更新头像
-    UIImageView * headerImg = [[UIImageView alloc] initWithFrame:self.userHeadImageView.frame];
-    [headerImg downloadImage:entity.mediumAvatarUrl place:[UIImage imageNamed:@""]];
-    [self.userHeadImageView sd_setImageWithURL:[NSURL URLWithString:entity.mediumAvatarUrl] placeholderImage:headerImg.image completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
+    [self.userHeadImageView sd_setImageWithURL:[NSURL URLWithString:entity.mediumAvatarUrl] placeholderImage:[UIImage imageNamed:@"default_head"] completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
         
     }];
     
@@ -91,7 +82,7 @@
         self.idImageView.hidden = YES;
     }
     if (entity.summary.length == 0) {
-        self.userLevelLabel.text = [NSString stringWithFormat:@"Lv%zi %@",[entity.level intValue],entity.label];
+        self.userLevelLabel.text = [NSString stringWithFormat:@"Lv%zi %@ | %@",[entity.level intValue],entity.label,@"说说你是什么人，来自哪片山川湖海"];
     }else{
         self.userLevelLabel.text = [NSString stringWithFormat:@"Lv%zi %@ | %@",[entity.level intValue],entity.label,entity.summary];
     }
@@ -118,10 +109,10 @@
         //  添加渐变层
         CAGradientLayer * shadow = [CAGradientLayer layer];
         shadow.startPoint = CGPointMake(0, 0);
-        shadow.endPoint = CGPointMake(0, 1);
+        shadow.endPoint = CGPointMake(0, 0.8);
         shadow.colors = @[(__bridge id)[UIColor clearColor].CGColor,
                           (__bridge id)[UIColor blackColor].CGColor];
-        shadow.locations = @[@(0.5f), @(1.5f)];
+        shadow.locations = @[@(0.8f), @(2.5f)];
         shadow.frame = CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_WIDTH);
         [_bgImageView.layer addSublayer:shadow];
         

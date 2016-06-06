@@ -78,6 +78,7 @@
                 model.tags = self.expert_label;
                 [self.selectedModelAry addObject:model];
                 [self.selectedCollectionView reloadData];
+                self.selectedCollectionView.hidden = NO;
             }
             if (self.info.length != 0) {
                 self.certView.informationTF.text = self.info;

@@ -144,9 +144,7 @@
     //这里要改成别人的信息
     
     //更新头像
-    UIImageView * headerImg = [[UIImageView alloc] initWithFrame:self.userHeadImageView.frame];
-    [headerImg downloadImage:model.mediumAvatarUrl place:[UIImage imageNamed:@""]];
-    [self.userHeadImageView sd_setImageWithURL:[NSURL URLWithString:model.mediumAvatarUrl] placeholderImage:headerImg.image completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
+    [self.userHeadImageView sd_setImageWithURL:[NSURL URLWithString:model.mediumAvatarUrl] placeholderImage:[UIImage imageNamed:@"default_head"] completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
         
     }];
     self.nickName.text = model.nickname;
@@ -163,9 +161,15 @@
         self.talentView.hidden = YES;
         self.userProfile.hidden = YES;
         self.idImageView.hidden = YES;
+        [self layoutIfNeeded];
+        [self.headView mas_remakeConstraints:^(MASConstraintMaker *make) {
+            make.size.mas_equalTo(CGSizeMake(84/667.0*SCREEN_HEIGHT, 84/667.0*SCREEN_HEIGHT));
+            make.centerX.mas_equalTo(_userView.mas_centerX);
+            make.bottom.mas_equalTo(_userLevelLabel.mas_top).with.offset(-10/667.0*SCREEN_HEIGHT);
+        }];
     }
     if (model.summary.length == 0) {
-        self.userLevelLabel.text = [NSString stringWithFormat:@"Lv%zi %@",[model.level intValue],model.label];
+        self.userLevelLabel.text = [NSString stringWithFormat:@"Lv%zi %@ | %@",[model.level intValue],model.label,@"这人好神秘，什么都不说"];
     }else{
         self.userLevelLabel.text = [NSString stringWithFormat:@"Lv%zi %@ | %@",[model.level intValue],model.label,model.summary];
     }
@@ -192,10 +196,10 @@
         //  添加渐变层
         CAGradientLayer * shadow = [CAGradientLayer layer];
         shadow.startPoint = CGPointMake(0, 0);
-        shadow.endPoint = CGPointMake(0, 1);
+        shadow.endPoint = CGPointMake(0, 0.8);
         shadow.colors = @[(__bridge id)[UIColor clearColor].CGColor,
                           (__bridge id)[UIColor blackColor].CGColor];
-        shadow.locations = @[@(0.5f), @(1.5f)];
+        shadow.locations = @[@(0.8f), @(2.5f)];
         shadow.frame = CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_WIDTH);
         [_bgImageView.layer addSublayer:shadow];
         

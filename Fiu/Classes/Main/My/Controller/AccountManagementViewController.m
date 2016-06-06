@@ -162,21 +162,30 @@ static NSString *const UpdateInfoURL = @"/my/update_profile";
             break;
     }
     _accountView.birthday.text = entity.birthday;
-    _accountView.personalitySignatureLabel.text = [NSString stringWithFormat:@"%@ | %@",entity.label,entity.summary];
-    
+    if (entity.summary.length == 0) {
+        _accountView.personalitySignatureLabel.text = [NSString stringWithFormat:@"%@ | %@",entity.label,@"说说你是什么人，来自哪片山川湖海"];
+    }else{
+        _accountView.personalitySignatureLabel.text = [NSString stringWithFormat:@"%@ | %@",entity.label,entity.summary];
+    }
     FBRequest *request  =[FBAPI postWithUrlString:@"/my/fetch_talent" requestDictionary:nil delegate:self];
     [request startRequestSuccess:^(FBRequest *request, id result) {
         NSDictionary *dataDict = [result objectForKey:@"data"];
         NSNumber *verifiedNum = [dataDict objectForKey:@"verified"];
         NSLog(@"%@",entity.expert_label);
         NSString *str;
-        if ([verifiedNum isEqualToNumber:@0]) {
-            str = @"未审核";
-        }else if ([verifiedNum isEqualToNumber:@1]){
+        str = @"未审核";
+        if ([verifiedNum isEqualToNumber:@1]){
             str = @"拒绝";
         }else if ([verifiedNum isEqualToNumber:@2]){
             str = entity.expert_label;
         }
+//        if ([verifiedNum isEqualToNumber:@0]) {
+//            str = @"未审核";
+//        }else if ([verifiedNum isEqualToNumber:@1]){
+//            str = @"拒绝";
+//        }else if ([verifiedNum isEqualToNumber:@2]){
+//            str = entity.expert_label;
+//        }
         _accountView.IdentityTagsLabel.text = str;
     } failure:^(FBRequest *request, NSError *error) {
         
