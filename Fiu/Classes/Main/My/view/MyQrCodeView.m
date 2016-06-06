@@ -29,7 +29,7 @@
 -(void)setUI{
     UserInfoEntity *entity = [UserInfoEntity defaultUserInfoEntity];
     self.nameLabel.text = entity.nickname;
-    [self.headImageView sd_setImageWithURL:[NSURL URLWithString:entity.mediumAvatarUrl] placeholderImage:[UIImage imageNamed:@"Circle + User"]];
+    [self.headImageView sd_setImageWithURL:[NSURL URLWithString:entity.mediumAvatarUrl] placeholderImage:[UIImage imageNamed:@"default_head"]];
     switch ([entity.sex intValue]) {
         case 0:
             break;

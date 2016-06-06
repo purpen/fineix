@@ -139,9 +139,10 @@
         
         [_userView addSubview:self.titleText];
         [_titleText mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.size.mas_equalTo(CGSizeMake(SCREEN_WIDTH - 40, 50));
+            make.size.mas_equalTo(CGSizeMake(SCREEN_WIDTH - 40, 56));
             make.top.equalTo(_lookNum.mas_bottom).with.offset(5);
             make.left.equalTo(_userView.mas_left).with.offset(0);
+            
         }];
         
         [_userView addSubview:self.whereScene];

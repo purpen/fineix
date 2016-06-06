@@ -15,6 +15,7 @@
 #import "MJRefresh.h"
 #import "HomePageViewController.h"
 #import "UserInfoEntity.h"
+#import "FocusNonView.h"
 
 
 @interface MyFansViewController ()<FBNavigationBarItemsDelegate,UITableViewDelegate,UITableViewDataSource,FBRequestDelegate>
@@ -24,7 +25,7 @@
     int _totalePage;
 }
 
-@property(nonatomic,strong) UILabel *tipLabel;
+@property(nonatomic,strong) FocusNonView *scenarioNonView;
 @property (nonatomic, assign) NSInteger currentPageNumber;
 @property (nonatomic, assign) NSInteger totalPageNumber;
 @end
@@ -98,16 +99,20 @@
             [_modelAry addObject:model];
         }
         if (_modelAry.count == 0) {
-            NSLog(@"没有情景");
-            [self.view addSubview:self.tipLabel];
-            _tipLabel.text = @"不要懈怠更新，粉丝们在看着你呢/多多分享原创内容，会有更多人关注你的";
-            [_tipLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-                make.size.mas_equalTo(CGSizeMake(300, 30));
-                make.centerX.mas_equalTo(self.view.mas_centerX);
-                make.top.mas_equalTo(self.view.mas_top).with.offset(200);
+            [self.view addSubview:self.scenarioNonView];
+            UserInfoEntity *entity = [UserInfoEntity defaultUserInfoEntity];
+            if ([self.userId isEqual:entity.userId]) {
+                self.scenarioNonView.tipLabel.text = @"给你一首歌的时间就回来哦，粉丝们还等着你的新动态呢";
+            }else{
+                self.scenarioNonView.tipLabel.text = @"众里寻他千百度，爱人之心不可无";
+            }
+            [_scenarioNonView mas_makeConstraints:^(MASConstraintMaker *make) {
+                make.size.mas_equalTo(CGSizeMake(SCREEN_WIDTH, SCREEN_HEIGHT));
+                make.left.mas_equalTo(self.view.mas_left).with.offset(0);
+                make.top.mas_equalTo(self.view.mas_top).with.offset(64);
             }];
         }else{
-            [self.tipLabel removeFromSuperview];
+            [self.scenarioNonView removeFromSuperview];
         }
         [self.mytableView reloadData];
         
@@ -145,13 +150,11 @@
 
 
 
--(UILabel *)tipLabel{
-    if (!_tipLabel) {
-        _tipLabel = [[UILabel alloc] init];
-        _tipLabel.textAlignment = NSTextAlignmentCenter;
-        _tipLabel.font = [UIFont systemFontOfSize:13];
+-(FocusNonView *)scenarioNonView{
+    if (!_scenarioNonView) {
+        _scenarioNonView = [FocusNonView getFocusNonView];
     }
-    return _tipLabel;
+    return _scenarioNonView;
 }
 
 
@@ -195,7 +198,6 @@
         cell = [[FocusOnTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellId];
     }
     [cell.focusOnBtn addTarget:self action:@selector(clickFocusBtn:) forControlEvents:UIControlEventTouchUpInside];
-    //UserInfo *model = _modelAry[indexPath.row];
     cell.focusOnBtn.tag = indexPath.row;
     [cell setUIWithModel:[_modelAry objectAtIndex:indexPath.row] andType:@1];
     return cell;

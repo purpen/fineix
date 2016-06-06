@@ -371,7 +371,7 @@
         _titleText.font = [UIFont systemFontOfSize:40];
     } else if ([title length] >= 8 && [title length] < 13) {
         _titleText.font = [UIFont systemFontOfSize:30];
-    } else if ([title length] > 13) {
+    } else if ([title length] >= 13) {
         _titleText.font = [UIFont systemFontOfSize:20];
         [_titleText mas_updateConstraints:^(MASConstraintMaker *make) {
             make.size.mas_equalTo(CGSizeMake(240, 56));

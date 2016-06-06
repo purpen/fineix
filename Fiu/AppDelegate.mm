@@ -172,7 +172,7 @@ NSString *const determineLogin = @"/auth/check_login";
             NSDictionary *counterDict = [dataDict objectForKey:@"counter"];
             _counterModel = [CounterModel mj_objectWithKeyValues:counterDict];
             //判断小圆点是否消失
-            if (_counterModel.message_total_count != 0) {
+            if (![_counterModel.message_total_count isEqual:@0]) {
                [tabBarC.tabBar showBadgeWithIndex:4];
             }else{
                 [tabBarC.tabBar hideBadgeWithIndex:4];

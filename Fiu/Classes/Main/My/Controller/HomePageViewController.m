@@ -31,6 +31,7 @@
 #import "UIImage+Helper.h"
 #import "HomePageViewController.h"
 #import "UIImagePickerController+Flag.h"
+#import "ScenarioNonView.h"
 
 #define UserHeadTag 1
 #define BgTag 2
@@ -112,7 +113,7 @@ static NSString *const IconURL = @"/my/add_head_pic";
     shadow.endPoint = CGPointMake(0, 0);
     shadow.colors = @[(__bridge id)[UIColor clearColor].CGColor,
                       (__bridge id)[UIColor blackColor].CGColor];
-    shadow.locations = @[@(0.5f), @(1.5f)];
+    shadow.locations = @[@(0.5f), @(2.5f)];
     shadow.frame = CGRectMake(0, 0, SCREEN_WIDTH, 64);
     [self.view.layer addSublayer:shadow];
 }
@@ -167,12 +168,9 @@ static NSString *const IconURL = @"/my/add_head_pic";
     }else{
         [self addBarItemRightBarButton:nil image:@"more_filled" isTransparent:YES];
     }
-//    self.navView.backgroundColor = [UIColor blackColor];
-////    self.navView.alpha = 0.3;
     [[UIApplication sharedApplication] setStatusBarHidden:NO withAnimation:(UIStatusBarAnimationSlide)];
     self.navigationController.navigationBarHidden = YES;
     self.tabBarController.tabBar.hidden = YES;
-    
     //进行网络请求
     [self netGetData];
     
@@ -202,15 +200,15 @@ static NSString *const IconURL = @"/my/add_head_pic";
     if ([self.type isEqualToNumber:@1]) {
         MJRefreshAutoGifFooter *footer = [MJRefreshAutoGifFooter footerWithRefreshingTarget:self refreshingAction:@selector(loadMoreData)];
         
-        // 设置文字
-        [footer setTitle:@"每个情境都有故事，来都来了，讲讲你的故事吧" forState:MJRefreshStateNoMoreData];
-        
-        // 设置字体
-        footer.stateLabel.font = [UIFont systemFontOfSize:13];
-        
-        // 设置颜色
-        footer.stateLabel.textColor = [UIColor blackColor];
-        
+//        // 设置文字
+//        [footer setTitle:@"每个情境都有故事，来都来了，讲讲你的故事吧" forState:MJRefreshStateNoMoreData];
+//        
+//        // 设置字体
+//        footer.stateLabel.font = [UIFont systemFontOfSize:13];
+//        
+//        // 设置颜色
+//        footer.stateLabel.textColor = [UIColor blackColor];
+//        
         // 设置尾部
         self.myCollectionView.mj_footer = footer;
         _n = 0;
@@ -221,15 +219,15 @@ static NSString *const IconURL = @"/my/add_head_pic";
     }else if([self.type isEqualToNumber:@2]){
         MJRefreshAutoGifFooter *footer = [MJRefreshAutoGifFooter footerWithRefreshingTarget:self refreshingAction:@selector(loadMoreDataM)];
         
-        // 设置文字
-        [footer setTitle:@"你还没有发表过新场景哦，快来Fiu一下嘛" forState:MJRefreshStateNoMoreData];
-        
-        // 设置字体
-        footer.stateLabel.font = [UIFont systemFontOfSize:13];
-        
-        // 设置颜色
-        footer.stateLabel.textColor = [UIColor blackColor];
-        
+//        // 设置文字
+//        [footer setTitle:@"你还没有发表过新场景哦，快来Fiu一下嘛" forState:MJRefreshStateNoMoreData];
+//        
+//        // 设置字体
+//        footer.stateLabel.font = [UIFont systemFontOfSize:13];
+//        
+//        // 设置颜色
+//        footer.stateLabel.textColor = [UIColor blackColor];
+//        
         // 设置尾部
         self.myCollectionView.mj_footer = footer;
         _m = 0;
@@ -263,7 +261,7 @@ static NSString *const IconURL = @"/my/add_head_pic";
             
             if (_totalN == 0) {
                 self.myCollectionView.mj_footer.state = MJRefreshStateNoMoreData;
-                self.myCollectionView.mj_footer.hidden = NO;
+                self.myCollectionView.mj_footer.hidden = YES;
             }
             
             BOOL isLastPage = (_n == _totalN);
@@ -298,7 +296,6 @@ static NSString *const IconURL = @"/my/add_head_pic";
         [SVProgressHUD show];
         FBRequest *request = [FBAPI postWithUrlString:@"/scene_sight/" requestDictionary:@{@"page":@(_m+1),@"size":@10,@"sort":@0,@"user_id":self.userId} delegate:self];
         [request startRequestSuccess:^(FBRequest *request, id result) {
-            NSLog(@"result %@",result);
             NSArray * sceneArr = [[result valueForKey:@"data"] valueForKey:@"rows"];
             for (NSDictionary * sceneDic in sceneArr) {
                 HomeSceneListRow * homeSceneModel = [[HomeSceneListRow alloc] initWithDictionary:sceneDic];
@@ -311,7 +308,7 @@ static NSString *const IconURL = @"/my/add_head_pic";
             BOOL isLastPage = (_m == _totalM);
             if (_totalM == 0) {
                 self.myCollectionView.mj_footer.state = MJRefreshStateNoMoreData;
-                self.myCollectionView.mj_footer.hidden = NO;
+                self.myCollectionView.mj_footer.hidden = YES;
             }
             if (!isLastPage && _totalM != 0) {
                 if (self.myCollectionView.mj_footer.state == MJRefreshStateNoMoreData) {
@@ -358,7 +355,6 @@ static NSString *const IconURL = @"/my/add_head_pic";
         if (self.isMySelf) {
             UserInfo *userInfo = [UserInfo mj_objectWithKeyValues:[result objectForKey:@"data"]];
             userInfo.head_pic_url = [result objectForKey:@"data"][@"head_pic_url"];
-            NSLog(@"头图 %@",[result objectForKey:@"data"][@"head_pic_url"]);
             NSArray *areasAry = [NSArray arrayWithArray:dataDict[@"areas"]];
             if (areasAry.count) {
                 userInfo.prin = areasAry[0];
@@ -367,7 +363,6 @@ static NSString *const IconURL = @"/my/add_head_pic";
             userInfo.is_expert = [result objectForKey:@"data"][@"identify"][@"is_expert"];
             [userInfo saveOrUpdate];
             [userInfo updateUserInfoEntity];
-            NSLog(@"%@",userInfo);
             UserInfoEntity *entity = [UserInfoEntity defaultUserInfoEntity];
             entity.isLogin = YES;
             self.titleLabel.text = entity.nickname;
@@ -436,6 +431,7 @@ static NSString *const IconURL = @"/my/add_head_pic";
         [_myCollectionView registerClass:[UICollectionViewCell class] forCellWithReuseIdentifier:@"UICollectionViewCell"];
         [_myCollectionView registerClass:[ScenceListCollectionViewCell class] forCellWithReuseIdentifier:@"ScenceListCollectionViewCell"];
         [_myCollectionView registerClass:[AllSceneCollectionViewCell class] forCellWithReuseIdentifier:@"AllSceneCollectionViewCell"];
+        [_myCollectionView registerClass:[UICollectionViewCell class] forCellWithReuseIdentifier:@"UICollectionViewCellScenarioNon"];
     }
     return _myCollectionView;
 }
@@ -445,9 +441,19 @@ static NSString *const IconURL = @"/my/add_head_pic";
 -(NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section{
     if (section == 2){
         if ([self.type isEqualToNumber:@2]) {
-            return _sceneListMarr.count;
+            if (_sceneListMarr.count == 0) {
+                return 1;
+            }else{
+               return _sceneListMarr.count;
+            }
+            
         }else if([self.type isEqualToNumber:@1]){
-            return _fiuSceneList.count;
+            if (_fiuSceneList.count == 0) {
+                return 1;
+            }else{
+                return _fiuSceneList.count; 
+            }
+            
         }
     }
     return 1;
@@ -537,19 +543,54 @@ static NSString *const IconURL = @"/my/add_head_pic";
         }
     }else if (indexPath.section == 2){
         if ([self.type isEqualToNumber:@2]) {
-            ScenceListCollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"ScenceListCollectionViewCell" forIndexPath:indexPath];
-            [cell setUIWithModel:_sceneListMarr[indexPath.row]];
-            return cell;
+            if (_sceneListMarr.count == 0) {
+                //空的
+                UICollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"UICollectionViewCellScenarioNon" forIndexPath:indexPath];
+                ScenarioNonView *view = [ScenarioNonView getScenarioNonView];
+                if (self.isMySelf) {
+                    view.tipLabel.text = @"你还没有发表过新场景哦，快来Fiu一下嘛";
+                }else{
+                    view.tipLabel.text = @"你们好像在哪儿见过，来看看他的足迹吧";
+                }
+                [cell.contentView addSubview:view];
+                [view mas_makeConstraints:^(MASConstraintMaker *make) {
+                    make.size.mas_equalTo(CGSizeMake(SCREEN_WIDTH, 320/667.0*SCREEN_HEIGHT));
+                    make.left.mas_equalTo(cell.mas_left).with.offset(0);
+                    make.top.mas_equalTo(cell.mas_top).with.offset(0);
+                }];
+                return cell;
+            }else{
+                //不是空的
+                ScenceListCollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"ScenceListCollectionViewCell" forIndexPath:indexPath];
+                [cell setUIWithModel:_sceneListMarr[indexPath.row]];
+                return cell;
+            }
         }else if([self.type isEqualToNumber:@1]){
-            AllSceneCollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"AllSceneCollectionViewCell" forIndexPath:indexPath];
-           [cell setAllFiuSceneListData:_fiuSceneList[indexPath.row]];
-
-            return cell;
+            if (_fiuSceneList.count == 0) {
+                //空的
+                UICollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"UICollectionViewCellScenarioNon" forIndexPath:indexPath];
+                ScenarioNonView *view = [ScenarioNonView getScenarioNonView];
+                if (self.isMySelf) {
+                    view.tipLabel.text = @"每个情境都有故事，来都来了，讲讲你的故事吧";
+                }else{
+                    view.tipLabel.text = @"关于TA的经历，你想知道的可能都在这里";
+                }
+                [cell.contentView addSubview:view];
+                [view mas_makeConstraints:^(MASConstraintMaker *make) {
+                    make.size.mas_equalTo(CGSizeMake(SCREEN_WIDTH, 320/667.0*SCREEN_HEIGHT));
+                    make.left.mas_equalTo(cell.mas_left).with.offset(0);
+                    make.top.mas_equalTo(cell.mas_top).with.offset(0);
+                }];
+                return cell;
+            }else{
+                //不是空的
+                AllSceneCollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"AllSceneCollectionViewCell" forIndexPath:indexPath];
+                [cell setAllFiuSceneListData:_fiuSceneList[indexPath.row]];
+                return cell;
+            }
         }
-        
     }
     return nil;
-
 }
 
 
@@ -774,7 +815,11 @@ static NSString *const IconURL = @"/my/add_head_pic";
     }
     if (indexPath.section == 2) {
         if ([self.type isEqualToNumber:@2]) {
-            return CGSizeMake(SCREEN_WIDTH, SCREEN_HEIGHT+5);
+            if (_sceneListMarr.count == 0) {
+                return CGSizeMake((SCREEN_WIDTH-15)/2, 320/667.0*SCREEN_HEIGHT);
+            }else{
+                return CGSizeMake(SCREEN_WIDTH, SCREEN_HEIGHT+5);
+            }
         }else if ([self.type isEqualToNumber:@1]){
             return CGSizeMake((SCREEN_WIDTH-15)/2, 320/667.0*SCREEN_HEIGHT);
         }
