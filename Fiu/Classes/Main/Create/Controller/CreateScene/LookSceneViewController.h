@@ -9,6 +9,7 @@
 #import "FBPictureViewController.h"
 #import "GroupHeaderView.h"
 #import "LikeSceneView.h"
+#import "FBSceneInfoScrollView.h"
 
 @interface LookSceneViewController : FBPictureViewController <UITableViewDelegate, UITableViewDataSource>
 

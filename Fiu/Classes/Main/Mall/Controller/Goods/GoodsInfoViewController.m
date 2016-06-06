@@ -59,8 +59,8 @@ static NSString *const URLWantBuy = @"/scene_product/sight_click_stat";
 - (void)networkGoodsInfoData {
     self.goodsInfoRequest = [FBAPI getWithUrlString:URLGoodsInfo requestDictionary:@{@"id":self.goodsID} delegate:self];
     [self.goodsInfoRequest startRequestSuccess:^(FBRequest *request, id result) {
-        _goodsDes = [[result valueForKey:@"data"] valueForKey:@"description"];
-        NSLog(@"＝＝＝＝＝＝＝＝ 商品描述 %@", _goodsDes);
+        _goodsDes = [[result valueForKey:@"data"] valueForKey:@"summary"];
+        NSLog(@"＝＝＝＝＝＝＝＝ 商品描述 %@", result);
         self.thnGoodsId = [[result valueForKey:@"data"] valueForKey:@"oid"];
         self.goodsInfo = [[GoodsInfoData alloc] initWithDictionary:[result valueForKey:@"data"]];
         [self setGoodsInfoVcUI];

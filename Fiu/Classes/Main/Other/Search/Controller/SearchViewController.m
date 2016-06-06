@@ -56,21 +56,6 @@ static NSString *const URLSearchList = @"/search/getlist";
 }
 
 #pragma mark - 网络请求
-#pragma mark 搜索场景
-- (void)networkSearchSceneData:(NSString *)keyword {
-    
-}
-
-#pragma mark 搜索情景
-- (void)networkSearchFiuSceneData:(NSString *)keyword {
-    
-}
-
-#pragma mark 搜索产品
-- (void)networkSearchGoodsData:(NSString *)keyword {
-    
-}
-
 - (void)networkSearchData:(NSString *)keyword withType:(NSString *)type {
     [SVProgressHUD show];
     self.searchListRequest = [FBAPI getWithUrlString:URLSearchList requestDictionary:@{@"evt":@"tag", @"size":@"8", @"page":@(self.currentpageNum + 1), @"t":type , @"q":keyword} delegate:self];

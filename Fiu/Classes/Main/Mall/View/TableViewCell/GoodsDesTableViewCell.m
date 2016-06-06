@@ -30,12 +30,19 @@
 - (void)getContentCellHeight:(NSString *)content {
     self.desContent.text = content;
     CGSize size = [self.desContent boundingRectWithSize:CGSizeMake(SCREEN_WIDTH - 30, 0)];
-    self.cellHeight = size.height + 270;
+    self.cellHeight = size.height + 78;
 }
 
 #pragma mark -
 - (void)setCellUI {
     [self addSubview:self.headerTitle];
+    
+    [self addSubview:self.desContent];
+    [_desContent mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.size.mas_equalTo(CGSizeMake(SCREEN_WIDTH - 40, 15));
+        make.top.equalTo(self.headerTitle.mas_bottom).with.offset(0);
+        make.left.equalTo(self.headerTitle.mas_left).with.offset(0);
+    }];
     
     UILabel * botLine = [[UILabel alloc] init];
     botLine.backgroundColor = [UIColor colorWithHexString:cellBgColor];
