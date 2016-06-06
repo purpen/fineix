@@ -7,6 +7,7 @@
 //
 
 #import "FBSceneInfoScrollView.h"
+#import "GoodsInfoViewController.h"
 
 @interface FBSceneInfoScrollView () {
     UIScrollView    *   _backgroundScrollView;
@@ -34,6 +35,8 @@
 - (id)initWithFrame:(CGRect)frame BackgroundImage:(UIImage *)backgroundImage blurredImage:(UIImage *)blurredImage viewDistanceFromBottom:(CGFloat)viewDistanceFromBottom foregroundView:(UIView *)foregroundView {
     self = [super initWithFrame:frame];
     if (self) {
+        self.showUserTagMarr = [NSMutableArray array];
+        
         _backgroundImage = backgroundImage;
         _viewDistanceFromBottom = viewDistanceFromBottom;
         _foregroundView = foregroundView;
@@ -42,6 +45,9 @@
         
         [self createBackgroundView];
         [self createForegroundView];
+        
+        [self addSubview:self.showGoodsTagsView];
+        self.showGoodsTagsView.alpha = 0;
     }
     return self;
 }
@@ -87,7 +93,7 @@
     [_backgroundImageView setTranslatesAutoresizingMaskIntoConstraints:NO];
     [_backgroundImageView setContentMode:UIViewContentModeScaleAspectFill];
     [_constraitView addSubview:_backgroundImageView];
-
+    
     [_constraitView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|[_backgroundImageView]|" options:0 metrics:0 views:NSDictionaryOfVariableBindings(_backgroundImageView)]];
     [_constraitView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|[_backgroundImageView]|" options:0 metrics:0 views:NSDictionaryOfVariableBindings(_backgroundImageView)]];
 }
@@ -102,9 +108,9 @@
     [_foregroundScrollView setShowsHorizontalScrollIndicator:NO];
     [_foregroundContainerView addSubview:_foregroundScrollView];
     
-//    UITapGestureRecognizer *_tapRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(foregroundTapped:)];
-//    [_foregroundScrollView addGestureRecognizer:_tapRecognizer];
-    
+    UITapGestureRecognizer *_tapRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(foregroundTapped:)];
+    _tapRecognizer.delegate = self;
+    [_foregroundScrollView addGestureRecognizer:_tapRecognizer];
     
     [_foregroundView setFrame:CGRectOffset(_foregroundView.bounds, (_foregroundScrollView.frame.size.width - _foregroundView.bounds.size.width)/2, _foregroundScrollView.frame.size.height - _viewDistanceFromBottom)];
     [_foregroundScrollView addSubview:_foregroundView];
@@ -113,14 +119,112 @@
 }
 
 #pragma mark - 点击
-//- (void)foregroundTapped:(UITapGestureRecognizer *)tapRecognizer {
-//    CGPoint tappedPoint = [tapRecognizer locationInView:_foregroundScrollView];
-//    NSLog(@"%f", tappedPoint.y);
-//    if (tappedPoint.y < _foregroundScrollView.frame.size.height) {
-//        CGFloat ratio = _foregroundScrollView.contentOffset.y == -_foregroundScrollView.contentInset.top? 1:0;
-//        [_foregroundScrollView setContentOffset:CGPointMake(0, ratio * _foregroundView.frame.origin.y - _foregroundScrollView.contentInset.top) animated:YES];
-//    }
-//}
+
+- (BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldReceiveTouch:(UITouch *)touch {
+    if ([touch.view isKindOfClass:[UIScrollView class]]) {
+        return YES;
+    }
+    return NO;
+}
+
+- (void)foregroundTapped:(UITapGestureRecognizer *)tapRecognizer {
+    for (UIView * view in _showGoodsTagsView.subviews) {
+        if ([view isKindOfClass:[UserGoodsTag class]]) {
+            [view removeFromSuperview];
+        }
+    }
+    
+    for (NSInteger idx = 0; idx < self.tagDataMarr.count; ++ idx) {
+        CGFloat btnX = [[self.tagDataMarr[idx] valueForKey:@"x"] floatValue];
+        CGFloat btnY = [[self.tagDataMarr[idx] valueForKey:@"y"] floatValue];
+        NSString * title = [self.tagDataMarr[idx] valueForKey:@"title"];
+        NSString * price = [NSString stringWithFormat:@"￥%.2f", [[self.tagDataMarr[idx] valueForKey:@"price"] floatValue]];
+        UserGoodsTag * userTag = [[UserGoodsTag alloc] initWithFrame:CGRectMake(btnX * SCREEN_WIDTH, (btnY * SCREEN_HEIGHT) * 0.873, 175, 32)];
+        userTag.dele.hidden = YES;
+        userTag.title.text = title;
+        if (price.length > 6) {
+            userTag.price.font = [UIFont systemFontOfSize:9];
+        }
+        userTag.price.text = price;
+        userTag.isMove = NO;
+        [userTag setImage:[UIImage imageNamed:@"user_goodsTag_left"] forState:(UIControlStateNormal)];
+        
+        UITapGestureRecognizer * tapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(openGoodsInfo:)];
+        [userTag addGestureRecognizer:tapGesture];
+        [self.showGoodsTagsView addSubview:userTag];
+        [self.showUserTagMarr addObject:userTag];
+    }
+    
+    [UIView animateWithDuration:.3 animations:^{
+        self.leftBtn.alpha = 0;
+        self.rightBtn.alpha = 0;
+        self.showGoodsTagsView.alpha = 1;
+    }];
+}
+
+- (void)openGoodsInfo:(UIGestureRecognizer *)button {
+    NSInteger index = [self.showUserTagMarr indexOfObject:button.view];
+    GoodsInfoViewController * goodsInfoVC = [[GoodsInfoViewController alloc] init];
+    goodsInfoVC.goodsID = self.goodsIds[index];
+    [self.nav pushViewController:goodsInfoVC animated:YES];
+}
+
+- (UIButton *)showGoodsTagsView {
+    if (!_showGoodsTagsView) {
+        _showGoodsTagsView = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT)];
+        [_showGoodsTagsView setImage:_backgroundImage forState:(UIControlStateNormal)];
+        [_showGoodsTagsView addTarget:self action:@selector(closeShowUserTag) forControlEvents:(UIControlEventTouchUpInside)];
+    }
+    return _showGoodsTagsView;
+}
+
+- (void)closeShowUserTag {
+    [self.showUserTagMarr removeAllObjects];
+    [UIView animateWithDuration:.3 animations:^{
+        self.leftBtn.alpha = 1;
+        self.rightBtn.alpha = 1;
+        self.showGoodsTagsView.alpha = 0;
+    }];
+}
+
+#pragma mark -
+- (void)setSceneInfoData:(SceneInfoData *)model {
+    self.tagDataMarr = [NSMutableArray arrayWithArray:model.product];
+    [self setUserTagBtn];
+    self.goodsIds = [NSMutableArray arrayWithArray:[model.product valueForKey:@"idField"]];
+}
+
+#pragma mark - 创建用户添加商品按钮
+- (void)setUserTagBtn {
+    self.userTagMarr = [NSMutableArray array];
+    
+    for (UIView * view in _backgroundImageView.subviews) {
+        if ([view isKindOfClass:[UserGoodsTag class]]) {
+            [view removeFromSuperview];
+        }
+    }
+    
+    for (NSInteger idx = 0; idx < self.tagDataMarr.count; ++ idx) {
+        CGFloat btnX = [[self.tagDataMarr[idx] valueForKey:@"x"] floatValue];
+        CGFloat btnY = [[self.tagDataMarr[idx] valueForKey:@"y"] floatValue];
+        NSString * title = [self.tagDataMarr[idx] valueForKey:@"title"];
+        NSString * price = [NSString stringWithFormat:@"￥%.2f", [[self.tagDataMarr[idx] valueForKey:@"price"] floatValue]];
+        UserGoodsTag * userTag = [[UserGoodsTag alloc] initWithFrame:CGRectMake(btnX * SCREEN_WIDTH, (btnY * SCREEN_HEIGHT) * 0.873, 175, 32)];
+        userTag.dele.hidden = YES;
+        userTag.title.text = title;
+        if (price.length > 6) {
+            userTag.price.font = [UIFont systemFontOfSize:9];
+        }
+        userTag.price.text = price;
+        userTag.title.hidden = YES;
+        userTag.price.hidden = YES;
+        userTag.isMove = NO;
+        [userTag setImage:[UIImage imageNamed:@""] forState:(UIControlStateNormal)];
+        
+        [_backgroundImageView addSubview:userTag];
+        [self.userTagMarr addObject:userTag];
+    }
+}
 
 #pragma mark - Delegate
 #pragma mark UIScrollView

@@ -10,6 +10,7 @@
 #import "FBViewController.h"
 #import "GroupHeaderView.h"
 #import "FBRollImages.h"
+#import "FBRefresh.h"
 
 @interface MallViewController : FBViewController <FBNavigationBarItemsDelegate, UITableViewDelegate, UITableViewDataSource>
 

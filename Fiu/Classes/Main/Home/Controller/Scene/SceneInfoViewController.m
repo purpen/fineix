@@ -82,10 +82,9 @@ static NSString *const URLDeleteScene = @"/scene_sight/delete";
     [self setAutomaticallyAdjustsScrollViewInsets:NO];
     
     [self networkRequestData];
-    [self networkCommentData];
-    [self networkLikePeopleData];
 }
 
+    
 #pragma mark - 
 - (void)setRollSceneInfoView {
     _viewScroller = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT)];
@@ -97,7 +96,16 @@ static NSString *const URLDeleteScene = @"/scene_sight/delete";
 }
 
 - (void)getTableViewFrameH {
+    [self setRollSceneInfoView];
+    
     _goodsCellH = (self.goodsList.count + self.reGoodsList.count) * 210;
+    if (_desCellH < 10) {
+        _desCellH = 44;
+    } else if (_likeUserCellH < 10) {
+        _likeUserCellH = 44;
+    } else if (_commentCellH < 10) {
+        _commentCellH = 44;
+    }
     _newTableFrameH = _desCellH + _goodsCellH + _likeUserCellH + _commentCellH + 305;
     
     CGRect newTableFrame = self.sceneTableView.frame;
@@ -109,7 +117,10 @@ static NSString *const URLDeleteScene = @"/scene_sight/delete";
     _sceneInfoScrollView.leftBtn = self.leftBtn;
     _sceneInfoScrollView.rightBtn = self.rightBtn;
     _sceneInfoScrollView.logoImg = self.logoImg;
+    _sceneInfoScrollView.nav = self.navigationController;
     [_viewScroller addSubview:_sceneInfoScrollView];
+    
+    [_sceneInfoScrollView setSceneInfoData:self.sceneInfoModel];
 }
 
 #pragma mark - 网络请求
@@ -133,8 +144,9 @@ static NSString *const URLDeleteScene = @"/scene_sight/delete";
             goodsIds = self.goodsId[0];
         }
         
+        [self networkCommentData];
+        [self networkLikePeopleData];
         [self networkSceneGoodsData:goodsIds];
-        [self setRollSceneInfoView];
         
     } failure:^(FBRequest *request, NSError *error) {
         [SVProgressHUD showErrorWithStatus:[error localizedDescription]];
@@ -212,14 +224,13 @@ static NSString *const URLDeleteScene = @"/scene_sight/delete";
 - (void)networkLikePeopleData {
     [self.likePeopleMarr removeAllObjects];
 
-    self.likePeopleRequest = [FBAPI postWithUrlString:URLLikeScenePeople requestDictionary:@{@"type":@"sight", @"event":@"love", @"page":@"1" , @"size":@"10000", @"id":self.sceneId} delegate:self];
+    self.likePeopleRequest = [FBAPI postWithUrlString:URLLikeScenePeople requestDictionary:@{@"type":@"sight", @"event":@"love", @"page":@"1" , @"size":@"30", @"id":self.sceneId} delegate:self];
     [self.likePeopleRequest startRequestSuccess:^(FBRequest *request, id result) {
         NSArray * likePeopleArr = [[result valueForKey:@"data"] valueForKey:@"rows"];
         for (NSDictionary * likePeopleDic in likePeopleArr) {
             LikeOrSuPeopleRow * likePeopleModel = [[LikeOrSuPeopleRow alloc] initWithDictionary:likePeopleDic];
             [self.likePeopleMarr addObject:likePeopleModel];
         }
-        
         [self.sceneTableView reloadData];
 
     } failure:^(FBRequest *request, NSError *error) {
@@ -264,10 +275,9 @@ static NSString *const URLDeleteScene = @"/scene_sight/delete";
             [self.reGoodsList addObject:goodsModel];
             [self.reGoodsIdList addObject:[NSString stringWithFormat:@"%zi", goodsModel.idField]];
         }
-        //  获取table全部内容高度
-        [self getTableViewFrameH];
         
         [self.sceneTableView reloadData];
+        [self getTableViewFrameH];
         [SVProgressHUD dismiss];
         
     } failure:^(FBRequest *request, NSError *error) {

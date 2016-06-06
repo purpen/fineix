@@ -12,6 +12,7 @@
 #import "FBRollImages.h"
 #import <MJRefresh/MJRefresh.h>
 #import <SVProgressHUD/SVProgressHUD.h>
+#import "FBRefresh.h"
 
 @interface DiscoverViewController : FBViewController <FBNavigationBarItemsDelegate, UITableViewDelegate, UITableViewDataSource>
 

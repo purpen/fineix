@@ -200,15 +200,10 @@ static NSString *const URLFiuPeople = @"/user/find_user";
 
 #pragma mark 上拉加载 & 下拉刷新
 - (void)addMJRefresh:(UITableView *)table {
-    table.mj_header = [MJRefreshNormalHeader headerWithRefreshingBlock:^{
-        [self clearMarrData];
-        [self networkRollImgData];
-        [self networkTagsListData];
-        [self networkFiuSceneData];
-        self.currentpageNum = 0;
-        [self networkSceneListData];
-        [self networkFiuPeopleData];
+    FBRefresh * header = [FBRefresh headerWithRefreshingBlock:^{
+        [self loadNewData];
     }];
+    table.mj_header = header;
     
     table.mj_footer = [MJRefreshAutoNormalFooter footerWithRefreshingBlock:^{
         if (self.currentpageNum < self.totalPageNum) {
@@ -217,6 +212,16 @@ static NSString *const URLFiuPeople = @"/user/find_user";
             [table.mj_footer endRefreshing];
         }
     }];
+}
+
+- (void)loadNewData {
+    [self clearMarrData];
+    [self networkRollImgData];
+    [self networkTagsListData];
+    [self networkFiuSceneData];
+    self.currentpageNum = 0;
+    [self networkSceneListData];
+    [self networkFiuPeopleData];
 }
 
 #pragma mark - 顶部轮播图
@@ -236,7 +241,7 @@ static NSString *const URLFiuPeople = @"/user/find_user";
         _discoverTableView.dataSource = self;
         _discoverTableView.showsVerticalScrollIndicator = NO;
         _discoverTableView.tableHeaderView = self.rollView;
-        _discoverTableView.backgroundColor = [UIColor whiteColor];
+        _discoverTableView.backgroundColor = [UIColor colorWithHexString:@"#F1F1F1" alpha:1];
         _discoverTableView.separatorStyle = UITableViewCellSeparatorStyleNone;
         
         [self addMJRefresh:_discoverTableView];

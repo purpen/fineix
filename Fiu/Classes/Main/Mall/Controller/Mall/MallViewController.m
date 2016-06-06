@@ -190,14 +190,10 @@ static NSString *const URLFiuBrand = @"/scene_brands/getlist";
 
 #pragma mark 上拉加载
 - (void)addMJRefresh:(UITableView *)table {
-    table.mj_header = [MJRefreshNormalHeader headerWithRefreshingBlock:^{
-        [self clearMarrData];
-        [self networkFiuPeopleData];
-        [self networkTagsListData];
-        [self networkCategoryListData];
-        self.currentpageNum = 0;
-        [self networkFiuGoodsData];
+    FBRefresh * header = [FBRefresh headerWithRefreshingBlock:^{
+        [self loadNewData];
     }];
+    table.mj_header = header;
     
     table.mj_footer = [MJRefreshAutoNormalFooter footerWithRefreshingBlock:^{
         if (self.currentpageNum < self.totalPageNum) {
@@ -207,6 +203,15 @@ static NSString *const URLFiuBrand = @"/scene_brands/getlist";
             [table.mj_footer endRefreshing];
         }
     }];
+}
+
+- (void)loadNewData {
+    [self clearMarrData];
+    [self networkFiuPeopleData];
+    [self networkTagsListData];
+    [self networkCategoryListData];
+    self.currentpageNum = 0;
+    [self networkFiuGoodsData];
 }
 
 #pragma mark - 顶部轮播图
@@ -226,7 +231,7 @@ static NSString *const URLFiuBrand = @"/scene_brands/getlist";
         _mallTableView.dataSource = self;
         _mallTableView.tableHeaderView = self.rollView;
         _mallTableView.showsVerticalScrollIndicator = NO;
-        _mallTableView.backgroundColor = [UIColor whiteColor];
+        _mallTableView.backgroundColor = [UIColor colorWithHexString:@"#F1F1F1" alpha:1];
         _mallTableView.separatorStyle = UITableViewCellSeparatorStyleNone;
         [self addMJRefresh:_mallTableView];
     }

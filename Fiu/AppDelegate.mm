@@ -74,7 +74,7 @@ NSString *const determineLogin = @"/auth/check_login";
         }
     } failure:^(FBRequest *request, NSError *error) {
         //发送失败提示失败信息
-        [SVProgressHUD showErrorWithStatus:error.localizedDescription];
+        NSLog(@"%@",error);
     }];
 //--------------------------------------------------------
     
