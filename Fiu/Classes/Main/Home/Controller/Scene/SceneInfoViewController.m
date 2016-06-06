@@ -70,21 +70,22 @@ static NSString *const URLDeleteScene = @"/scene_sight/delete";
     
     [self setNavigationViewUI];
     
-    [_viewScroller setFrame:CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT)];
-    [_viewScroller setContentSize:CGSizeMake(_viewScroller.frame.size.width, SCREEN_HEIGHT)];
-    [_sceneInfoScrollView setFrame:self.view.frame];
-    [_viewScroller setContentOffset:CGPointMake(0, _viewScroller.contentOffset.y)];
-    
 }
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self setAutomaticallyAdjustsScrollViewInsets:NO];
     
+    [_viewScroller setFrame:CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT)];
+    [_viewScroller setContentSize:CGSizeMake(_viewScroller.frame.size.width, SCREEN_HEIGHT)];
+    [_sceneInfoScrollView setFrame:self.view.frame];
+    [_viewScroller setContentOffset:CGPointMake(0, _viewScroller.contentOffset.y)];
+    
     [self networkRequestData];
+    [self networkCommentData];
+    [self networkLikePeopleData];
 }
 
-    
 #pragma mark - 
 - (void)setRollSceneInfoView {
     _viewScroller = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT)];
@@ -99,13 +100,6 @@ static NSString *const URLDeleteScene = @"/scene_sight/delete";
     [self setRollSceneInfoView];
     
     _goodsCellH = (self.goodsList.count + self.reGoodsList.count) * 210;
-    if (_desCellH < 10) {
-        _desCellH = 44;
-    } else if (_likeUserCellH < 10) {
-        _likeUserCellH = 44;
-    } else if (_commentCellH < 10) {
-        _commentCellH = 44;
-    }
     _newTableFrameH = _desCellH + _goodsCellH + _likeUserCellH + _commentCellH + 305;
     
     CGRect newTableFrame = self.sceneTableView.frame;
@@ -144,8 +138,6 @@ static NSString *const URLDeleteScene = @"/scene_sight/delete";
             goodsIds = self.goodsId[0];
         }
         
-        [self networkCommentData];
-        [self networkLikePeopleData];
         [self networkSceneGoodsData:goodsIds];
         
     } failure:^(FBRequest *request, NSError *error) {
@@ -277,7 +269,11 @@ static NSString *const URLDeleteScene = @"/scene_sight/delete";
         }
         
         [self.sceneTableView reloadData];
-        [self getTableViewFrameH];
+        
+        if (![self.view.subviews containsObject:_viewScroller]) {
+            [self getTableViewFrameH];
+        }
+        
         [SVProgressHUD dismiss];
         
     } failure:^(FBRequest *request, NSError *error) {
