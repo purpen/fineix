@@ -153,13 +153,11 @@ static NSString *const BonusCellIdentifier = @"bonusCell";
 - (void)requestFailed:(FBRequest *)request error:(NSError *)error
 {
     [SVProgressHUD dismiss];
-    NSLog(@"%@", [error localizedDescription]);
 }
 
 - (void)userCanceledFailed:(FBRequest *)request error:(NSError *)error
 {
     [SVProgressHUD dismiss];
-    NSLog(@"%@", [error localizedDescription]);
 }
 
 

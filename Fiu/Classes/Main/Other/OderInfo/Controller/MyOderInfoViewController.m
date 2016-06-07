@@ -126,7 +126,6 @@ static NSString *const OrderInfoCellIdentifier = @"orderInfoCell";
         NSDictionary * dataDic = [result objectForKey:@"data"];
         NSArray * rowsAry = [dataDic objectForKey:@"rows"];
         
-        NSLog(@"订单  %@",result);
         for (NSDictionary * orderInfoDic in rowsAry) {
             OrderInfoModel * orderInfo = [[OrderInfoModel alloc] initWithDictionary:orderInfoDic];
             [self.orderListAry addObject:orderInfo];
@@ -214,7 +213,6 @@ static NSString *const OrderInfoCellIdentifier = @"orderInfoCell";
     orderInfoDetailVC.delegate = self;
     [self.navigationController pushViewController:orderInfoDetailVC animated:YES];
     //订单详情
-    NSLog(@"订单详情");
 }
 
 - (void)operation1stBtnAction:(UIButton *)button withOrderInfoCell:(OrderInfoCell *)orderInfoCell
@@ -233,7 +231,6 @@ static NSString *const OrderInfoCellIdentifier = @"orderInfoCell";
             FBPayTheWayViewController * payWayVC = [[FBPayTheWayViewController alloc] init];
             payWayVC.orderInfo = orderInfoCell.orderInfo;
             [self.navigationController pushViewController:payWayVC animated:YES];
-            NSLog(@"立即支付");
         }
             break;
         case OrderInfoStateWaitDelivery://待发货
@@ -247,7 +244,6 @@ static NSString *const OrderInfoCellIdentifier = @"orderInfoCell";
                                                                                                             @"rid":orderInfoCell.orderInfo.rid
                                                                                                                 } delegate:self];
             [request startRequestSuccess:^(FBRequest *request, id result) {
-                NSLog(@"提醒发货    %@",result);
                 //提醒发货
                 [SVProgressHUD showSuccessWithStatus:[result objectForKey:@"message"]];
                 
@@ -267,7 +263,6 @@ static NSString *const OrderInfoCellIdentifier = @"orderInfoCell";
             commentVC.orderInfoCell = orderInfoCell;
             commentVC.delegate = self;
             [self.navigationController pushViewController:commentVC animated:YES];
-            NSLog(@"去评价");
         }
             break;
         default:

@@ -87,7 +87,6 @@ static NSString *const DeliveryAddressCellIdentifier = @"deliveryAddressCell";
 #pragma mark - FBRequest Delegate
 - (void)requestSucess:(FBRequest *)request result:(id)result
 {
-    NSLog(@"收货地址   %@", result);
     NSString * message = result[@"message"];
     if ([request.flag isEqualToString:AddressURL]) {
         if ([[result objectForKey:@"success"] isEqualToNumber:@1]) {
@@ -119,13 +118,11 @@ static NSString *const DeliveryAddressCellIdentifier = @"deliveryAddressCell";
 - (void)requestFailed:(FBRequest *)request error:(NSError *)error
 {
     [SVProgressHUD dismiss];
-    NSLog(@"%@", [error localizedDescription]);
 }
 
 - (void)userCanceledFailed:(FBRequest *)request error:(NSError *)error
 {
     [SVProgressHUD dismiss];
-    NSLog(@"%@", [error localizedDescription]);
 }
 
 

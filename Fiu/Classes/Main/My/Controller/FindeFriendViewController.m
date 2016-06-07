@@ -59,7 +59,6 @@ static NSString *const ShareURL = @"http://m.taihuoniao.com/guide/app_about";
     [SVProgressHUD show];
     FBRequest *request = [FBAPI postWithUrlString:@"/user/find_user" requestDictionary:@{@"page":@1,@"size":@5,@"type":@1,@"sight_count":@5,@"sort":@0} delegate:self];
     [request startRequestSuccess:^(FBRequest *request, id result) {
-        NSLog(@"发现好友******** result %@",result);
         NSDictionary *dataDict = [result objectForKey:@"data"];
         NSArray *rowsAry = [dataDict objectForKey:@"users"];
         for (NSDictionary *rowsDict in rowsAry) {
@@ -83,7 +82,6 @@ static NSString *const ShareURL = @"http://m.taihuoniao.com/guide/app_about";
                 FindSceneModel *model1 = [[FindSceneModel alloc] init];
                 model1.id = sceneDict[@"_id"];
                 model1.title = sceneDict[@"title"];
-                NSLog(@"标题   %@",model1.title);
                 model1.address = sceneDict[@"address"];
                 model1.cober = sceneDict[@"cover_url"];
                 [model.scene addObject:model1];
@@ -92,8 +90,6 @@ static NSString *const ShareURL = @"http://m.taihuoniao.com/guide/app_about";
 //            NSLog(@"嘿嘿  %@",model1.title);
             [_userAry addObject:model];
         }
-        NSLog(@"_userAry  %@",_userAry);
-        NSLog(@"_scenceAry  %@",_scenceAry);
         [self.myTbaleView reloadData];
         [SVProgressHUD dismiss];
     } failure:^(FBRequest *request, NSError *error) {
@@ -312,7 +308,6 @@ static NSString *const ShareURL = @"http://m.taihuoniao.com/guide/app_about";
 }
 
 -(void)rightBarItemSelected{
-    NSLog(@"扫一扫");
     QRCodeScanViewController *vc = [[QRCodeScanViewController alloc] init];
     [self.navigationController pushViewController:vc animated:YES];
 }

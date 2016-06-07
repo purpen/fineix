@@ -49,7 +49,6 @@
     UserInfoEntity *entity = [UserInfoEntity defaultUserInfoEntity];
     FBRequest *request = [FBAPI postWithUrlString:@"/user/user_info" requestDictionary:@{@"user_id":entity.userId} delegate:self];
     [request startRequestSuccess:^(FBRequest *request, id result) {
-        NSLog(@"&&&&&&&&result %@",result);
         NSDictionary *dataDict = result[@"data"];
         NSDictionary *counterDict = [dataDict objectForKey:@"counter"];
         self.counterModel = [CounterModel mj_objectWithKeyValues:counterDict];

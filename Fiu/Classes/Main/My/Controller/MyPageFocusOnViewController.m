@@ -78,7 +78,6 @@
     
     FBRequest *request = [FBAPI postWithUrlString:@"/follow" requestDictionary:@{@"page":@(_currentPageNumber+1),@"size":@15,@"user_id":self.userId,@"find_type":@1} delegate:self];
     [request startRequestSuccess:^(FBRequest *request, id result) {
-        NSLog(@"result  %@",result);
         NSDictionary *dataDict = [result objectForKey:@"data"];
         NSArray *rowsAry = [dataDict objectForKey:@"rows"];
         for (NSDictionary *rowsDict in rowsAry) {
@@ -220,7 +219,6 @@
     HomePageViewController *v = [[HomePageViewController alloc] init];
     UserInfo *model = _modelAry[indexPath.row];
     UserInfoEntity *entity = [UserInfoEntity defaultUserInfoEntity];
-    NSLog(@"userId  %@",model.userId);
     v.userId = model.userId;
     if ([entity.userId integerValue] == [model.userId integerValue]) {
         v.isMySelf = YES;

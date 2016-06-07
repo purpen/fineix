@@ -430,6 +430,8 @@
 		1FC6782E1CDB33ED00535162 /* UIView+TYAlertView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1FC6782C1CDB33ED00535162 /* UIView+TYAlertView.m */; };
 		1FCDCC7A1D0515F700C92E78 /* ScenarioNonView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1FCDCC791D0515F700C92E78 /* ScenarioNonView.m */; };
 		1FCDCC7D1D0525A300C92E78 /* FocusNonView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1FCDCC7C1D0525A300C92E78 /* FocusNonView.m */; };
+		1FCDCC821D066D2700C92E78 /* SexSheetViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1FCDCC801D066D2700C92E78 /* SexSheetViewController.m */; };
+		1FCDCC831D066D2700C92E78 /* SexSheetViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1FCDCC811D066D2700C92E78 /* SexSheetViewController.xib */; };
 		280045111C805B78005F5C2E /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 280045101C805B78005F5C2E /* CoreLocation.framework */; };
 		280045131C805B82005F5C2E /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 280045121C805B82005F5C2E /* QuartzCore.framework */; };
 		280045151C805B8C005F5C2E /* OpenGLES.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 280045141C805B8C005F5C2E /* OpenGLES.framework */; };
@@ -1278,6 +1280,9 @@
 		1FCDCC791D0515F700C92E78 /* ScenarioNonView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ScenarioNonView.m; sourceTree = "<group>"; };
 		1FCDCC7B1D0525A300C92E78 /* FocusNonView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FocusNonView.h; sourceTree = "<group>"; };
 		1FCDCC7C1D0525A300C92E78 /* FocusNonView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FocusNonView.m; sourceTree = "<group>"; };
+		1FCDCC7F1D066D2700C92E78 /* SexSheetViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SexSheetViewController.h; sourceTree = "<group>"; };
+		1FCDCC801D066D2700C92E78 /* SexSheetViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SexSheetViewController.m; sourceTree = "<group>"; };
+		1FCDCC811D066D2700C92E78 /* SexSheetViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SexSheetViewController.xib; sourceTree = "<group>"; };
 		280045101C805B78005F5C2E /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
 		280045121C805B82005F5C2E /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		280045141C805B8C005F5C2E /* OpenGLES.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGLES.framework; path = System/Library/Frameworks/OpenGLES.framework; sourceTree = SDKROOT; };
@@ -2423,6 +2428,7 @@
 		1F2A8D821CF40277005116C7 /* My */ = {
 			isa = PBXGroup;
 			children = (
+				1FCDCC7E1D066D0000C92E78 /* Other */,
 				1F2A8D831CF40277005116C7 /* Controller */,
 				1F2A8DB31CF40277005116C7 /* model */,
 				1F2A8DC21CF40277005116C7 /* My.storyboard */,
@@ -3459,6 +3465,16 @@
 			path = Wechat;
 			sourceTree = "<group>";
 		};
+		1FCDCC7E1D066D0000C92E78 /* Other */ = {
+			isa = PBXGroup;
+			children = (
+				1FCDCC7F1D066D2700C92E78 /* SexSheetViewController.h */,
+				1FCDCC801D066D2700C92E78 /* SexSheetViewController.m */,
+				1FCDCC811D066D2700C92E78 /* SexSheetViewController.xib */,
+			);
+			path = Other;
+			sourceTree = "<group>";
+		};
 		40FF7B08F78941EBD75F7965 /* Pods */ = {
 			isa = PBXGroup;
 			children = (
@@ -3864,6 +3880,7 @@
 				1F2A906A1CF40277005116C7 /* SystemInfoTableViewCell.xib in Resources */,
 				1F2A91171CF40495005116C7 /* UMShareEditViewControlleriPad.xib in Resources */,
 				1F2A91211CF40495005116C7 /* TencentOpenApi_IOS_Bundle.bundle in Resources */,
+				1FCDCC831D066D2700C92E78 /* SexSheetViewController.xib in Resources */,
 				1F2A91151CF40495005116C7 /* UMSCommentInputControlleriPad.xib in Resources */,
 				1F2A90B01CF40277005116C7 /* OptionViewController.xib in Resources */,
 				1F2A901E1CF40277005116C7 /* BonusCell.xib in Resources */,
@@ -4009,6 +4026,7 @@
 				1F2A8FA91CF40277005116C7 /* FBBuyGoodsViewController.m in Sources */,
 				1F2A90431CF40277005116C7 /* FBLoginRegisterViewController.m in Sources */,
 				1F2A90A41CF40277005116C7 /* SearchViewController.m in Sources */,
+				1FCDCC821D066D2700C92E78 /* SexSheetViewController.m in Sources */,
 				1F2A90661CF40277005116C7 /* CommentsTableViewCell.m in Sources */,
 				1F2A904C1CF40277005116C7 /* NSString+UserModel.m in Sources */,
 				1F2A8FC71CF40277005116C7 /* GoodsInfoBrand.m in Sources */,

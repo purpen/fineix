@@ -102,12 +102,10 @@
 
 - (void)wayBtnClick:(UIButton *)button {
     if (button.tag == wayBtnTag) {
-        NSLog(@"选择了［支付宝］");
         self.chooseAliPayBtn.selected = YES;
         self.chooseWeChatBtn.selected = NO;
         self.paymentWay = 1;
     } else if (button.tag == wayBtnTag +1) {
-        NSLog(@"选择了［微信支付］");
         self.chooseWeChatBtn.selected = YES;
         self.chooseAliPayBtn.selected = NO;
         self.paymentWay = 2;
@@ -202,7 +200,6 @@
                 FBRequest * request = [FBAPI postWithUrlString:@"/shopping/payed" requestDictionary:@{@"rid": self.orderInfo.rid, @"payaway": @"weichat"} delegate:self];
                 [SVProgressHUD showWithMaskType:SVProgressHUDMaskTypeClear];
                 [request startRequestSuccess:^(FBRequest *request, id result) {
-                    NSLog(@"＝＝＝＝＝＝＝＝＝ %@", result);
                     NSDictionary * dataDic = [result objectForKey:@"data"];
                     PayReq * payReq = [[PayReq alloc] init];
                     payReq.partnerId = [dataDic objectForKey:@"partner_id"];
@@ -238,7 +235,6 @@
 -(void)onResp:(BaseResp*)resp
 {
     if([resp isKindOfClass:[PayResp class]]){
-        NSLog( @"   %d",resp.errCode);
         //支付返回结果，实际支付结果需要去微信服务器端查询
         switch (resp.errCode) {
             case WXSuccess:

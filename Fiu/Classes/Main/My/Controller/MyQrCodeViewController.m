@@ -122,7 +122,6 @@ static NSString *const ShareURL = @"http://m.taihuoniao.com/guide/app_about";
 }
 
 -(void)rightBarItemSelected{
-    NSLog(@"更多");
     QrShareSheetViewController *sheetVC = [[QrShareSheetViewController alloc] init];
     [self judgeWith:sheetVC];
     sheetVC.modalPresentationStyle = UIModalPresentationOverCurrentContext;
@@ -196,7 +195,6 @@ static NSString *const ShareURL = @"http://m.taihuoniao.com/guide/app_about";
 -(void)sinaShareBtnAction:(UIButton*)sender{
     [[UMSocialDataService defaultDataService]  postSNSWithTypes:@[UMShareToSina] content:@"有Fiu的生活，才够意思，快点扫码加我吧！查看个人主页>>http://www.taihuoniao.com" image:_viewImage location:nil urlResource:nil presentedController:self completion:^(UMSocialResponseEntity *shareResponse){
         if (shareResponse.responseCode == UMSResponseCodeSuccess) {
-            NSLog(@"分享成功！");
         }
     }];
 }
@@ -216,7 +214,6 @@ static NSString *const ShareURL = @"http://m.taihuoniao.com/guide/app_about";
 
 #pragma mark - 保存图片
 -(void)savePicture:(UIButton*)sender{
-    NSLog(@"保存图片");
     
     //viewImage就是获取的截图，如果要将图片存入相册，只需在后面调用
     UIImageWriteToSavedPhotosAlbum(_viewImage, self, @selector(imageSavedToPhotosAlbum:didFinishSavingWithError:contextInfo:), nil);

@@ -291,7 +291,6 @@ static NSString *const thirdRegister = @"/auth/third_sign";//第三方登录接�
             UserInfo *userInfo = [UserInfo mj_objectWithKeyValues:[result objectForKey:@"data"]];
             [userInfo saveOrUpdate];
             [userInfo updateUserInfoEntity];
-            NSLog(@"%@",userInfo);
             UserInfoEntity *entity = [UserInfoEntity defaultUserInfoEntity];
             entity.isLogin = YES;
             
@@ -476,11 +475,9 @@ static NSString *const thirdRegister = @"/auth/third_sign";//第三方登录接�
                              @"from_to":@1
                              };
     FBRequest *request = [FBAPI postWithUrlString:thirdRegister requestDictionary:params delegate:self];
-    NSLog(@"**************%@",snsAccount.usid);
     [request startRequestSuccess:^(FBRequest *request, id result) {
         //如果请求成功
         NSDictionary *dataDic = [result objectForKey:@"data"];
-        NSLog(@"***************************%@",[dataDic objectForKey:@"has_user"]);
         if ([[dataDic objectForKey:@"has_user"] isEqualToNumber:@1]) {
             //用户存在，更新当前用户的信息
             UserInfo *userinfo = [UserInfo mj_objectWithKeyValues:[dataDic objectForKey:@"user"]];
@@ -513,7 +510,6 @@ static NSString *const thirdRegister = @"/auth/third_sign";//第三方登录接�
         }
     } failure:^(FBRequest *request, NSError *error) {
         //如果请求失败，提示错误信息
-        NSLog(@"%@",error);
         [SVProgressHUD showErrorWithStatus:[error localizedDescription]];
     }];
     

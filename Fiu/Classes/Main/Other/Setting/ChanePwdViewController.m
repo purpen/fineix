@@ -49,7 +49,6 @@ static NSString *const ChangePwdURL = @"/my/modify_password";
 #pragma mark - FBRequest Delegate
 - (void)requestSucess:(FBRequest *)request result:(id)result
 {
-    NSLog(@"%@", result);
     
     if ([request.flag isEqualToString:ChangePwdURL]) {
         NSString * message = [result objectForKey:@"message"];
@@ -67,13 +66,11 @@ static NSString *const ChangePwdURL = @"/my/modify_password";
 - (void)requestFailed:(FBRequest *)request error:(NSError *)error
 {
     [SVProgressHUD dismiss];
-    NSLog(@"%@", [error localizedDescription]);
 }
 
 - (void)userCanceledFailed:(FBRequest *)request error:(NSError *)error
 {
     [SVProgressHUD dismiss];
-    NSLog(@"%@", [error localizedDescription]);
 }
 
 

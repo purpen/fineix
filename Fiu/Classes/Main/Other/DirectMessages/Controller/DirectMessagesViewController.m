@@ -76,7 +76,6 @@
     //进行情景的网络请求
     FBRequest *request = [FBAPI postWithUrlString:@"/message/view" requestDictionary:@{@"to_user_id":self.userId} delegate:self];
     [request startRequestSuccess:^(FBRequest *request, id result) {
-        NSLog(@"result000000000000000000000000000000000000 %@",result);
         NSArray * fiuSceneArr = [[result valueForKey:@"data"] valueForKey:@"mailbox"];
         // 字典数组 -> 模型数组
         NSMutableArray *messageArray = [NSMutableArray array];
@@ -102,7 +101,6 @@
             [self.myTableVuew setContentOffset:CGPointMake(0, 200*(self.messages.count-1)) animated:NO];
         }
         [self.myTableVuew reloadData];
-        NSLog(@" 聊天数量    %zi",self.messages.count);
         
     } failure:^(FBRequest *request, NSError *error) {
         [SVProgressHUD showErrorWithStatus:[error localizedDescription]];
@@ -155,7 +153,6 @@
                                                                                                @"content":self.msgTF.text
                                                                                                } delegate:self];
     [request startRequestSuccess:^(FBRequest *request, id result) {
-        NSLog(@"发送  %@",result);
         [self networkRequestData];
         [self.myTableVuew setContentOffset:CGPointMake(0, 200*(self.messages.count)) animated:NO];
     } failure:^(FBRequest *request, NSError *error) {

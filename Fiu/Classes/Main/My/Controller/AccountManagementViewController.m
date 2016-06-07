@@ -22,15 +22,19 @@
 #import "AddreesPickerViewController.h"
 #import "AddreesModel.h"
 #import "OfficialCertificationViewController.h"
+#import "SexSheetViewController.h"
 
-@interface AccountManagementViewController ()<FBNavigationBarItemsDelegate,UIImagePickerControllerDelegate,UIActionSheetDelegate,UINavigationControllerDelegate>
+
+@interface AccountManagementViewController ()<FBNavigationBarItemsDelegate,UIImagePickerControllerDelegate,UIActionSheetDelegate,UINavigationControllerDelegate,FBRequestDelegate>
 {
     NSMutableArray *_provinceAry;
     NSMutableArray *_cityAry;
+    NSNumber *_sex;
 }
 @property(nonatomic,strong) AccountView *accountView;
 @property(nonatomic,strong) DatePickerViewController *pickerVC;
 @property(nonatomic,strong) AddreesPickerViewController *addreesPickerVC;
+@property(nonatomic,strong) SexSheetViewController *sexPickerVC;
 
 @end
 
@@ -43,6 +47,8 @@ static NSString *const UpdateInfoURL = @"/my/update_profile";
     [super viewDidLoad];
     _provinceAry = [NSMutableArray array];
     _cityAry = [NSMutableArray array];
+    UserInfoEntity *entity = [UserInfoEntity defaultUserInfoEntity];
+    _sex = entity.sex;
     // Do any additional setup after loading the view.
     self.delegate = self;
     self.view.backgroundColor = [UIColor lightGrayColor];
@@ -108,6 +114,13 @@ static NSString *const UpdateInfoURL = @"/my/update_profile";
 
 }
 
+-(SexSheetViewController *)sexPickerVC{
+    if (!_sexPickerVC) {
+        _sexPickerVC = [[SexSheetViewController alloc] init];
+    }
+    return _sexPickerVC;
+}
+
 -(AddreesPickerViewController *)addreesPickerVC{
     if (!_addreesPickerVC) {
         _addreesPickerVC = [[AddreesPickerViewController alloc] init];
@@ -120,6 +133,35 @@ static NSString *const UpdateInfoURL = @"/my/update_profile";
     [self presentViewController:_addreesPickerVC animated:NO completion:nil];
     [_addreesPickerVC.pickerBtn addTarget:self action:@selector(clickAddreesPickerBtn:) forControlEvents:UIControlEventTouchUpInside];
 }
+
+-(void)clickSexPickerBtn:(UIButton*)sender{
+    //进行更新
+    FBRequest *request = [FBAPI postWithUrlString:@"/my/update_profile" requestDictionary:@{@"sex":self.sexPickerVC.sexNum} delegate:self];
+    [request startRequestSuccess:^(FBRequest *request, id result) {
+        UserInfoEntity *entity = [UserInfoEntity defaultUserInfoEntity];
+        entity.sex = self.sexPickerVC.sexNum;
+        [entity updateUserInfo];
+        request = nil;
+        switch ([entity.sex intValue]) {
+            case 0:
+                _accountView.sex.text = @"保密";
+                break;
+            case 1:
+                _accountView.sex.text = @"男";
+                break;
+            case 2:
+                _accountView.sex.text = @"女";
+                break;
+                
+            default:
+                break;
+        }
+        [self.sexPickerVC dismissViewControllerAnimated:NO completion:nil];
+    } failure:^(FBRequest *request, NSError *error) {
+        
+    }];
+}
+
 
 -(void)clickAddreesPickerBtn:(UIButton*)sender{
     //拿到ID名称 更新列表，更新服务器上的 然后消失
@@ -163,7 +205,7 @@ static NSString *const UpdateInfoURL = @"/my/update_profile";
     }
     _accountView.birthday.text = entity.birthday;
     if (entity.summary.length == 0) {
-        _accountView.personalitySignatureLabel.text = [NSString stringWithFormat:@"%@ | %@",entity.label,@"说说你是什么人，来自哪片山川湖海"];
+        _accountView.personalitySignatureLabel.text = [NSString stringWithFormat:@"%@",entity.label];
     }else{
         _accountView.personalitySignatureLabel.text = [NSString stringWithFormat:@"%@ | %@",entity.label,entity.summary];
     }
@@ -179,13 +221,6 @@ static NSString *const UpdateInfoURL = @"/my/update_profile";
         }else if ([verifiedNum isEqualToNumber:@2]){
             str = entity.expert_label;
         }
-//        if ([verifiedNum isEqualToNumber:@0]) {
-//            str = @"未审核";
-//        }else if ([verifiedNum isEqualToNumber:@1]){
-//            str = @"拒绝";
-//        }else if ([verifiedNum isEqualToNumber:@2]){
-//            str = entity.expert_label;
-//        }
         _accountView.IdentityTagsLabel.text = str;
     } failure:^(FBRequest *request, NSError *error) {
         
@@ -198,8 +233,13 @@ static NSString *const UpdateInfoURL = @"/my/update_profile";
 }
 
 -(void)clickSexBtn:(UIButton*)sender{
-    ModifyGenderViewController *vc = [[ModifyGenderViewController alloc] init];
-    [self.navigationController pushViewController:vc animated:YES];
+    self.sexPickerVC.modalPresentationStyle = UIModalPresentationOverCurrentContext;
+    UserInfoEntity *entity = [UserInfoEntity defaultUserInfoEntity];
+    _sex = entity.sex;
+    NSLog(@"%zi",[entity.sex intValue]);
+    [self.sexPickerVC.sexPickerView selectRow:[_sex intValue] inComponent:0 animated:NO];
+    [self presentViewController:_sexPickerVC animated:NO completion:nil];
+    [_sexPickerVC.backBtn addTarget:self action:@selector(clickSexPickerBtn:) forControlEvents:UIControlEventTouchUpInside];
 }
 
 -(void)clickNickBtn:(UIButton*)sender{
@@ -292,7 +332,6 @@ static NSString *const UpdateInfoURL = @"/my/update_profile";
     }
     
     if ([request.flag isEqualToString:@"UpdateInfoURL"]) {
-        NSLog(@"修改地区  %@",result);
         NSDictionary *dataDict = result[@"data"];
         UserInfoEntity * userEntity = [UserInfoEntity defaultUserInfoEntity];
         NSArray *areasAry = [NSArray arrayWithArray:dataDict[@"areas"]];
@@ -311,7 +350,6 @@ static NSString *const UpdateInfoURL = @"/my/update_profile";
 }
 
 -(void)rightBarItemSelected{
-    NSLog(@"保存");
     
 }
 

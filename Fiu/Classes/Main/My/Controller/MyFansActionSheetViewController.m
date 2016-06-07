@@ -148,6 +148,8 @@
         _headImageView = [[UIImageView alloc] init];
         _headImageView.layer.masksToBounds = YES;
         _headImageView.layer.cornerRadius = 16/667.0*SCREEN_HEIGHT;
+        _headImageView.layer.borderWidth = 1.0;
+        _headImageView.layer.borderColor = [UIColor colorWithHexString:lineGrayColor].CGColor;
     }
     return _headImageView;
 }

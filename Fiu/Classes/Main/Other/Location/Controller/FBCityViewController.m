@@ -72,7 +72,6 @@ static NSString *cityListStr = @"/estore/get_city_list";
                 cell = [[CityTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellOne];
             }
             CityModel *model = _modelAry[indexPath.row];
-            NSLog(@"model%@",model.name);
             [cell.bgImageView sd_setImageWithURL:[NSURL URLWithString:model.image_url]];
             cell.locationLabel.text = [NSString stringWithFormat:@"当前位置：%@",model.name];
             return cell;
@@ -141,11 +140,9 @@ static NSString *cityListStr = @"/estore/get_city_list";
 
 #pragma mark -BMKLocationServiceDelegate
 -(void)willStartLocatingUser{
-    NSLog(@"开始定位");
 }
 
 -(void)didFailToLocateUserWithError:(NSError *)error{
-    NSLog(@"定位失败%@",error);
     //[_hud hideAnimated:YES];
 }
 
@@ -154,7 +151,6 @@ static NSString *cityListStr = @"/estore/get_city_list";
     _la = userLocation.location.coordinate.latitude;
     _lo = userLocation.location.coordinate.longitude;
     
-    NSLog(@"定位成功");
     [_locationSevice stopUserLocationService];
     
     //发起反向地理编码检索
@@ -168,11 +164,9 @@ static NSString *cityListStr = @"/estore/get_city_list";
         BOOL flag = [self.codeSearch reverseGeoCode:_reverseGeoCodeSearchOption];
         if(flag)
         {
-            NSLog(@"反geo检索发送成功");
         }
         else
         {
-            NSLog(@"反geo检索发送失败");
         }
 }
 
@@ -182,10 +176,8 @@ static NSString *cityListStr = @"/estore/get_city_list";
 errorCode:(BMKSearchErrorCode)error{
   if (error == BMK_SEARCH_NO_ERROR) {
       //在此处理正常结果
-      NSLog(@"%@",result.address);
       for (CityModel *model in _modelAry) {
           if ([result.address rangeOfString:model.name].location != NSNotFound) {
-              NSLog(@"model %@",model.name);
               NSUInteger i = [_modelAry indexOfObject:model];
               [_modelAry exchangeObjectAtIndex:i withObjectAtIndex:0];
               _isHave = YES;
@@ -195,7 +187,6 @@ errorCode:(BMKSearchErrorCode)error{
       }
   }
   else {
-      NSLog(@"抱歉，未找到结果");
   }
 }
 

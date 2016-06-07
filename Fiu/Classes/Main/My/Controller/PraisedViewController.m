@@ -71,7 +71,6 @@ static NSString *const URLSceneList = @"/scene_sight/";
     self.sceneListRequest = [FBAPI getWithUrlString:@"/favorite" requestDictionary:requestParams delegate:self];
     [self.sceneListRequest startRequestSuccess:^(FBRequest *request, id result) {
         
-        NSLog(@"场景  %@",result);
         NSArray * sceneArr = [[result valueForKey:@"data"] valueForKey:@"rows"];
     
         for (NSDictionary * sceneDic in sceneArr) {

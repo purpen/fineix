@@ -38,7 +38,6 @@ static NSString *const UpdateInfoURL = @"/my/update_profile";
 }
 
 -(void)rightBarItemSelected{
-    NSLog(@"保存");
     UserInfoEntity *entity = [UserInfoEntity defaultUserInfoEntity];
     if (![self.nickNameTF.text isEqualToString:entity.nickname]) {
         //保存更改的信息
@@ -53,7 +52,6 @@ static NSString *const UpdateInfoURL = @"/my/update_profile";
 
 
 -(void)requestSucess:(FBRequest *)request result:(id)result{
-    NSLog(@"result%@",result);
     NSString *message = [result objectForKey:@"message"];
     if ([[result objectForKey:@"success"] isEqualToNumber:@1]) {
         UserInfoEntity *entity = [UserInfoEntity defaultUserInfoEntity];

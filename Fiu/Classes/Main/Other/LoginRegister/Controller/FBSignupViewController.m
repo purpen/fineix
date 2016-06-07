@@ -110,7 +110,6 @@ NSString *const LoginURL = @"/auth/login";//登录接口
         FBRequest *request1 = [FBAPI postWithUrlString:@"/auth/check_account" requestDictionary:@{@"account":_signupView.phoneNumTF.text} delegate:self];
         
         [request1 startRequestSuccess:^(FBRequest *request, id result) {
-            NSLog( @"手机号的验证 %@",_signupView.phoneNumTF.text);
             if ([result objectForKey:@"success"]) {
                 //如果手机号正确，发送短信
                 NSDictionary *params = @{
@@ -266,7 +265,6 @@ NSString *const LoginURL = @"/auth/login";//登录接口
         //[SVProgressHUD showWithMaskType:SVProgressHUDMaskTypeClear];
         if (response.responseCode == UMSResponseCodeSuccess) {
             UMSocialAccountEntity *snsAccount = [[UMSocialAccountManager socialAccountDictionary] valueForKey:UMShareToWechatSession];
-            NSLog(@"*****************%@************%@",snsAccount.usid,snsAccount.unionId);
             //如果成功，进行关联，并且更新当前用户信息
             [self afterTheSuccessOfTheThirdPartyToRegisterToGetUserInformation:snsAccount type:@1];
         }//如果失败，提示失败信息
@@ -284,7 +282,6 @@ NSString *const LoginURL = @"/auth/login";//登录接口
         //[SVProgressHUD showWithMaskType:SVProgressHUDMaskTypeClear];
         if (response.responseCode == UMSResponseCodeSuccess) {
             UMSocialAccountEntity *snsAccount = [[UMSocialAccountManager socialAccountDictionary] valueForKey:UMShareToSina];
-             NSLog(@"*****************%@",snsAccount.unionId);
             //如果成功，进行关联，并且更新当前用户信息
             [self afterTheSuccessOfTheThirdPartyToRegisterToGetUserInformation:snsAccount type:@2];
         }//如果失败，提示失败信息
@@ -303,7 +300,6 @@ NSString *const LoginURL = @"/auth/login";//登录接口
         //[SVProgressHUD showWithMaskType:SVProgressHUDMaskTypeClear];
         if (response.responseCode == UMSResponseCodeSuccess) {
             UMSocialAccountEntity *snsAccount = [[UMSocialAccountManager socialAccountDictionary] valueForKey:UMShareToQQ];
-            NSLog(@"*****************%@",snsAccount.usid);
             //如果成功，进行关联，并且更新当前用户信息
             [self afterTheSuccessOfTheThirdPartyToRegisterToGetUserInformation:snsAccount type:@3];
         }//如果失败，提示失败信息
@@ -325,11 +321,9 @@ NSString *const LoginURL = @"/auth/login";//登录接口
                              @"from_to":@1
                              };
     FBRequest *request = [FBAPI postWithUrlString:thirdRegister requestDictionary:params delegate:self];
-    NSLog(@"**************%@",request.urlString);
     [request startRequestSuccess:^(FBRequest *request, id result) {
         //如果请求成功
         NSDictionary *dataDic = [result objectForKey:@"data"];
-        NSLog(@"***************************%@",dataDic);
         if ([[dataDic objectForKey:@"has_user"] isEqualToNumber:@1]) {
             //用户存在，更新当前用户的信息
             UserInfo *userinfo = [UserInfo mj_objectWithKeyValues:[dataDic objectForKey:@"user"]];
@@ -392,7 +386,6 @@ NSString *const LoginURL = @"/auth/login";//登录接口
                 [request startRequestSuccess:^(FBRequest *request, id result) {
                     //如果请求成功，并获取用户信息来更新当前用户信息
                     NSDictionary *dataDic = [result objectForKey:@"data"];
-                    NSLog(@"dataDict  %@",dataDic);
                     UserInfo *info = [UserInfo mj_objectWithKeyValues:dataDic];
                     [info saveOrUpdate];
                     [info updateUserInfoEntity];
@@ -409,7 +402,6 @@ NSString *const LoginURL = @"/auth/login";//登录接口
                 
             }];
             UIAlertAction *otherAction = [UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
-                NSLog(@"The \"Okay/Cancel\" alert's other action occured.");
                 //跳转到绑定手机号界面
                 BindIngViewController *bing = [[BindIngViewController alloc] init];
                 bing.snsAccount = snsAccount;
@@ -423,7 +415,6 @@ NSString *const LoginURL = @"/auth/login";//登录接口
         }
     } failure:^(FBRequest *request, NSError *error) {
         //如果请求失败，提示错误信息
-        NSLog(@"%@",error);
         [SVProgressHUD showErrorWithStatus:[error localizedDescription]];
     }];
     

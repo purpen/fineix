@@ -173,9 +173,7 @@
     }else{
         self.userLevelLabel.text = [NSString stringWithFormat:@"Lv%zi %@ | %@",[model.level intValue],model.label,model.summary];
     }
-    UIImageView * headerImg1 = [[UIImageView alloc] initWithFrame:self.userHeadImageView.frame];
-    [headerImg1 downloadImage:model.head_pic_url place:[UIImage imageNamed:@""]];
-    [self.bgImageView sd_setImageWithURL:[NSURL URLWithString:model.head_pic_url] placeholderImage:headerImg1.image];
+    [self.bgImageView sd_setImageWithURL:[NSURL URLWithString:model.head_pic_url] placeholderImage:[UIImage imageNamed:@"personalDefaultBg"]];
 }
 
 -(UIImageView *)idImageView{

@@ -54,7 +54,6 @@ NSString *const feedbackUrl = @"/gateway/feedback";//意见反馈接口
                              };
     FBRequest *request = [FBAPI postWithUrlString:feedbackUrl requestDictionary:params delegate:self];
     [request startRequestSuccess:^(FBRequest *request, id result) {
-        NSLog(@"%@",result);
         //根据返回信息判断是否反馈成功
         NSNumber *successStr = [result objectForKey:@"success"];
         //反馈成功

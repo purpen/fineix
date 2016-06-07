@@ -39,7 +39,7 @@ static NSString *const UpdateInfoURL = @"/my/update_profile";
     self.delegate = self;
     //self.navigationController.navigationBarHidden = NO;
     self.navViewTitle.text = @"个性签名";
-    [self addBarItemRightBarButton:@"完成" image:nil isTransparent:NO];
+    [self addBarItemRightBarButton:@"保存" image:nil isTransparent:NO];
     UserInfoEntity *entity = [UserInfoEntity defaultUserInfoEntity];
     self.sumaryTF.text = entity.summary;
     self.sumaryTF.delegate = self;
@@ -61,11 +61,15 @@ static NSString *const UpdateInfoURL = @"/my/update_profile";
     [self.selectedModelAry removeAllObjects];
     IdentityTagModel *model = [[IdentityTagModel alloc] init];
     UserInfoEntity *entity = [UserInfoEntity defaultUserInfoEntity];
-    model.tags = entity.label;
-    [self.selectedModelAry addObject:model];
-    [self.selectedCollectionView reloadData];
-    self.deletAllBtn.hidden = NO;
-    self.selectedCollectionView.hidden = NO;
+    if (entity.label.length == 0) {
+        
+    }else{
+        model.tags = entity.label;
+        [self.selectedModelAry addObject:model];
+        [self.selectedCollectionView reloadData];
+        self.deletAllBtn.hidden = NO;
+        self.selectedCollectionView.hidden = NO;
+    }
 }
 
 -(void)clickDeletAllBtn:(UIButton*)sender{
@@ -232,7 +236,6 @@ static NSString *const UpdateInfoURL = @"/my/update_profile";
         UserInfoEntity *entity = [UserInfoEntity defaultUserInfoEntity];
         entity.summary = self.sumaryTF.text;
         [entity updateUserInfo];
-        NSLog(@"边间   %@",entity.summary);
         [SVProgressHUD showSuccessWithStatus:message];
     }else{
         [SVProgressHUD showInfoWithStatus:message];

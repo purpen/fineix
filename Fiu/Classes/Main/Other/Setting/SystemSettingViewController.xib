@@ -218,7 +218,7 @@
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="h88-aj-ioh">
                     <rect key="frame" x="0.0" y="393" width="375" height="44"/>
                     <subviews>
-                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="关于太火鸟" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lIr-hM-TpZ">
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="关于Fiu" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lIr-hM-TpZ">
                             <rect key="frame" x="15" y="12" width="82" height="21"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="21" id="IUt-Pb-WMd"/>
@@ -307,7 +307,7 @@
                         </mask>
                     </variation>
                 </view>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="如果你要关闭或开启新消息通知，请在iPhone的&quot;设置&quot;-&quot;通知&quot;功能中，找到应用程序&quot;太火鸟&quot;更改" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="exT-t7-6XE">
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="如果你要关闭或开启新消息通知，请在iPhone的&quot;设置&quot;-&quot;通知&quot;功能中，找到应用程序&quot;Fiu&quot;更改" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="exT-t7-6XE">
                     <rect key="frame" x="15" y="120" width="343" height="41"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="41" id="qci-8q-wKd"/>

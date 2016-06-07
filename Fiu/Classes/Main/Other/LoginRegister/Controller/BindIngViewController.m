@@ -154,7 +154,6 @@ static NSString *const thirdRegisteredNotBinding = @"/auth/third_register_withou
     [request startRequestSuccess:^(FBRequest *request, id result) {
         //如果请求成功，并获取用户信息来更新当前用户信息
         NSDictionary *dataDic = [result objectForKey:@"data"];
-        NSLog(@"dataDict  %@",dataDic);
         UserInfo *info = [UserInfo mj_objectWithKeyValues:dataDic];
         [info saveOrUpdate];
         [info updateUserInfoEntity];

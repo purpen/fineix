@@ -85,7 +85,6 @@
 
 -(void)signleTap:(UITapGestureRecognizer*)sender{
     //跳转到我的主页的情景的界面
-    NSLog(@"跳转到我的主页的情景的界面");
     UserInfoEntity *entity = [UserInfoEntity defaultUserInfoEntity];
     HomePageViewController *myHomeVC = [[HomePageViewController alloc] init];
     myHomeVC.userId = entity.userId;
@@ -96,7 +95,6 @@
 
 -(void)signleTap1:(UITapGestureRecognizer*)sender{
     //跳转到我的主页的情景的界面
-    NSLog(@"跳转到我的主页的场景的界面");
     UserInfoEntity *entity = [UserInfoEntity defaultUserInfoEntity];
     HomePageViewController *myHomeVC = [[HomePageViewController alloc] init];
     myHomeVC.userId = entity.userId;
@@ -142,7 +140,6 @@
     UserInfoEntity *entity = [UserInfoEntity defaultUserInfoEntity];
     FBRequest *request = [FBAPI postWithUrlString:@"/auth/user" requestDictionary:@{@"user_id":entity.userId} delegate:self];
     [request startRequestSuccess:^(FBRequest *request, id result) {
-        NSLog(@"&&&&&&&&result %@",result);
         NSDictionary *dataDict = result[@"data"];
         _chanelV.scenarioNumLabel.text = [NSString stringWithFormat:@"%@",dataDict[@"scene_count"]];
         _chanelV.fieldNumLabel.text = [NSString stringWithFormat:@"%@",dataDict[@"sight_count"]];
@@ -349,7 +346,6 @@
 
 //订单按钮
 -(void)orderBtn:(UIButton*)sender{
-    NSLog(@"#########");
     //跳转到全部订单页
     AllOderViewController *vc = [[AllOderViewController alloc] init];
     vc.counterModel = _counterModel;
@@ -358,28 +354,24 @@
 
 //消息按钮
 -(void)messageBtn:(UIButton*)sender{
-    NSLog(@"#########");
     MessageViewController *vc = [[MessageViewController alloc] init];
     vc.countModel = _counterModel;
     [self.navigationController pushViewController:vc animated:YES];
 }
 //订阅按钮
 -(void)subscribeBtn:(UIButton*)sender{
-    NSLog(@"#########");
     SubscribeViewController *vc = [[SubscribeViewController alloc] init];
     [self.navigationController pushViewController:vc animated:YES];
 }
 
 //收藏按钮
 -(void)collectionBtn:(UIButton*)sender{
-    NSLog(@"#########");
     SystemSettingViewController *systemVC = [[SystemSettingViewController alloc] init];
     [self.navigationController pushViewController:systemVC animated:YES];
 }
 
 //赞过按钮
 -(void)praiseBtn:(UIButton*)sender{
-    NSLog(@"#########");
     PraisedViewController *vc = [[PraisedViewController alloc] init];
     [self.navigationController pushViewController:vc animated:YES];
 }
@@ -392,26 +384,22 @@
 
 //礼券按钮
 -(void)giftBtn:(UIButton*)sender{
-    NSLog(@"#########");
     BonusViewController *vc = [[BonusViewController alloc] init];
     [self.navigationController pushViewController:vc animated:YES];
 }
 
 //收货地址按钮
 -(void)shippingAddressBtn:(UIButton*)sender{
-    NSLog(@"#########");
     DeliveryAddressViewController *vc = [[DeliveryAddressViewController alloc] init];
     [self.navigationController pushViewController:vc animated:YES];
 }
 
 //服务条款按钮
 -(void)serviceBtn:(UIButton*)sender{
-    NSLog(@"#########");
 }
 
 //账户管理按钮
 -(void)accountManagementBtn:(UIButton*)sender{
-    NSLog(@"#########");
     
     
 }
@@ -429,7 +417,6 @@
 
 -(void)clickMyTap:(UITapGestureRecognizer*)gesture{
     //跳转到我的主页的情景的界面
-    NSLog(@"跳转到我的主页的情景的界面");
     UserInfoEntity *entity = [UserInfoEntity defaultUserInfoEntity];
     HomePageViewController *myHomeVC = [[HomePageViewController alloc] init];
     myHomeVC.userId = entity.userId;

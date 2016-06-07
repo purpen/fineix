@@ -101,11 +101,9 @@ static NSString * const reuseIdentifier = @"Cell";
 
 #pragma mark -BMKLocationServiceDelegate
 -(void)willStartLocatingUser{
-    NSLog(@"开始定位");
 }
 
 -(void)didFailToLocateUserWithError:(NSError *)error{
-    NSLog(@"定位失败%@",error);
     //[_hud hideAnimated:YES];
     //发送请求获取数据
     NSDictionary *params = @{
@@ -127,7 +125,7 @@ static NSString * const reuseIdentifier = @"Cell";
     _la = userLocation.location.coordinate.latitude;
     _lo = userLocation.location.coordinate.longitude;
     
-    NSLog(@"定位成功");
+
     [_locationSevice stopUserLocationService];
     //发送请求获取数据
     NSDictionary *params = @{
@@ -151,7 +149,6 @@ static NSString * const reuseIdentifier = @"Cell";
     if ([request.flag isEqualToString:recommendedScenarioURL]) {
         NSDictionary *dataDic = result[@"data"];
         NSArray *dataAry = dataDic[@"rows"];
-        NSLog(@"dataAry %@",dataAry);
         for (int i = 0; i<dataAry.count; i++) {
             NSDictionary *modelDict = dataAry[i];
             NSDictionary *modellDict = @{
