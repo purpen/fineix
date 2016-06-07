@@ -98,7 +98,11 @@ static NSString *const URLDeleteScene = @"/scene_sight/delete";
 
 - (void)getTableViewFrameH {
     [self setRollSceneInfoView];
-    
+    if (_desCellH == 0) {
+        _desCellH = 60;
+    } else if (_likeUserCellH == 0) {
+        _likeUserCellH = 50;
+    }
     _goodsCellH = (self.goodsList.count + self.reGoodsList.count) * 210;
     _newTableFrameH = _desCellH + _goodsCellH + _likeUserCellH + _commentCellH + 305;
     

@@ -55,7 +55,7 @@
 - (UILabel *)promptLab {
     if (!_promptLab) {
         _promptLab = [[UILabel alloc] init];
-        _promptLab.text = @"购物车又空啦，回“品”入点新货吧";
+        _promptLab.text = NSLocalizedString(@"goodsCarIsNil", nil);
         _promptLab.textColor = [UIColor colorWithHexString:titleColor];
         _promptLab.font = [UIFont systemFontOfSize:12];
         _promptLab.textAlignment = NSTextAlignmentCenter;
@@ -68,7 +68,7 @@
     if (!_goHomeBtn) {
         _goHomeBtn = [[UIButton alloc] init];
         _goHomeBtn.backgroundColor = [UIColor colorWithHexString:fineixColor];
-        [_goHomeBtn setTitle:@"去逛逛" forState:(UIControlStateNormal)];
+        [_goHomeBtn setTitle:NSLocalizedString(@"goLookGoods", nil) forState:(UIControlStateNormal)];
         [_goHomeBtn setTitleColor:[UIColor whiteColor] forState:(UIControlStateNormal)];
         _goHomeBtn.titleLabel.font = [UIFont systemFontOfSize:16];
         _goHomeBtn.layer.cornerRadius = 4;

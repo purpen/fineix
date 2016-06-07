@@ -212,7 +212,7 @@ static NSString *const URLGoodsList = @"/scene_product/getlist";
     [self.goodsList removeAllObjects];
     [self.goodsIdList removeAllObjects];
     self.currentpageNum = 0;
-    NSInteger idIndex = (self.categoryMenuView.selectedBtn.tag - menuBtnTag) - 1;
+    NSInteger idIndex = (self.categoryMenuView.selectedBtn.tag - menuBtnTag);
     [self networkGoodsListData:self.idMarr[idIndex] withTagIds:self.childTagsId[index]];
     self.tagId = self.childTagsId[index];
 }
@@ -221,14 +221,14 @@ static NSString *const URLGoodsList = @"/scene_product/getlist";
 - (void)showCategoryTag:(NSInteger)index {
     CGRect rect = self.goodsListTable.frame;
     if (index == 0) {
-        rect = CGRectMake(0, 108, SCREEN_WIDTH, SCREEN_HEIGHT - 108);
+        rect = CGRectMake(0, 113, SCREEN_WIDTH, SCREEN_HEIGHT - 113);
         [UIView animateWithDuration:.3 animations:^{
             self.headerView.alpha = 0;
             self.goodsListTable.frame = rect;
         }];
         
     } else {
-        rect = CGRectMake(0, 148, SCREEN_WIDTH, SCREEN_HEIGHT - 148);
+        rect = CGRectMake(0, 158, SCREEN_WIDTH, SCREEN_HEIGHT - 158);
         [UIView animateWithDuration:.3 animations:^{
             self.headerView.alpha = 1;
             self.goodsListTable.frame = rect;
@@ -253,15 +253,10 @@ static NSString *const URLGoodsList = @"/scene_product/getlist";
     [self.goodsIdList removeAllObjects];
     self.currentpageNum = 0;
     
-    if (index > 0) {
-        [self networkChildTagsData:self.categoryIdMarr[index - 1]];
-        //  分类商品列表
-        NSInteger idIndex = [self.categoryIdMarr indexOfObject:self.categoryIdMarr[index - 1]];
-        [self networkGoodsListData:self.idMarr[idIndex] withTagIds:@""];
-    
-    }   else if (index == 0) {
-        [self networkGoodsListData:@"" withTagIds:@""];
-    }
+    [self networkChildTagsData:self.categoryIdMarr[index]];
+    //  分类商品列表
+    NSInteger idIndex = [self.categoryIdMarr indexOfObject:self.categoryIdMarr[index]];
+    [self networkGoodsListData:self.idMarr[idIndex] withTagIds:@""];
     
     [self showCategoryTag:index];
 }
