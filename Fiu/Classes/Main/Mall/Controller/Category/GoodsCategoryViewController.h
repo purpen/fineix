@@ -29,6 +29,6 @@
 @pro_strong CategoryTagRollView         *       headerView;             //  分类标签视图
 @pro_strong UITableView                 *       goodsListTable;         //  商品列表
 
-
+- (void)showCategoryTag:(NSInteger)index;
 
 @end

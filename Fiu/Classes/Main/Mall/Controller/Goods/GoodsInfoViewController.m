@@ -25,7 +25,7 @@ static NSString *const URLGoodsScene = @"/sight_and_product/getlist";
 static NSString *const URLWantBuy = @"/scene_product/sight_click_stat";
 
 @interface GoodsInfoViewController () {
-    NSString * _goodsDes;
+    NSString    *   _goodsDes;
 }
 
 @pro_strong GoodsInfoData       *   goodsInfo;
@@ -60,7 +60,17 @@ static NSString *const URLWantBuy = @"/scene_product/sight_click_stat";
     self.goodsInfoRequest = [FBAPI getWithUrlString:URLGoodsInfo requestDictionary:@{@"id":self.goodsID} delegate:self];
     [self.goodsInfoRequest startRequestSuccess:^(FBRequest *request, id result) {
         _goodsDes = [[result valueForKey:@"data"] valueForKey:@"summary"];
-        NSLog(@"＝＝＝＝＝＝＝＝ 商品描述 %@", result);
+        NSLog(@"＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝ %@", result);
+        if ([[[result valueForKey:@"data"] valueForKey:@"attrbute"] integerValue] == 1) {
+            [self.gobuyBtn setTitle:NSLocalizedString(@"goBuyGoods", nil) forState:(UIControlStateNormal)];
+        } else if ([[[result valueForKey:@"data"] valueForKey:@"attrbute"] integerValue] == 2) {
+            [self.gobuyBtn setTitle:NSLocalizedString(@"goTbBuyGoods", nil) forState:(UIControlStateNormal)];
+        } else if ([[[result valueForKey:@"data"] valueForKey:@"attrbute"] integerValue] == 3) {
+            [self.gobuyBtn setTitle:NSLocalizedString(@"goTmBuyGoods", nil) forState:(UIControlStateNormal)];
+        } else if ([[[result valueForKey:@"data"] valueForKey:@"attrbute"] integerValue] == 4) {
+            [self.gobuyBtn setTitle:NSLocalizedString(@"goJdBuyGoods", nil) forState:(UIControlStateNormal)];
+        }
+        
         self.thnGoodsId = [[result valueForKey:@"data"] valueForKey:@"oid"];
         self.goodsInfo = [[GoodsInfoData alloc] initWithDictionary:[result valueForKey:@"data"]];
         [self setGoodsInfoVcUI];
@@ -123,8 +133,8 @@ static NSString *const URLWantBuy = @"/scene_product/sight_click_stat";
     
     [self.view addSubview:self.goodsInfoTable];
     
-    [self.view addSubview:self.buyView];
-    [_buyView mas_makeConstraints:^(MASConstraintMaker *make) {
+    [self.view addSubview:self.gobuyBtn];
+    [_gobuyBtn mas_makeConstraints:^(MASConstraintMaker *make) {
         make.size.mas_equalTo(CGSizeMake(SCREEN_WIDTH, 44));
         make.top.equalTo(self.goodsInfoTable.mas_bottom).with.offset(0);
         make.left.equalTo(self.view.mas_left).with.offset(0);
@@ -133,18 +143,15 @@ static NSString *const URLWantBuy = @"/scene_product/sight_click_stat";
 }
 
 #pragma mark - 去购买
-- (UIView *)buyView {
-    if (!_buyView) {
-        _buyView = [[UIView alloc] init];
-        UIButton * gobuyBtn = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 44)];
-        [gobuyBtn setTitle:NSLocalizedString(@"goBuyGoods", nil) forState:(UIControlStateNormal)];
-        gobuyBtn.backgroundColor = [UIColor colorWithHexString:fineixColor];
-        [gobuyBtn setTitleColor:[UIColor whiteColor] forState:(UIControlStateNormal)];
-        gobuyBtn.titleLabel.font = [UIFont systemFontOfSize:Font_InfoTitle];
-        [gobuyBtn addTarget:self action:@selector(buyCarBtnClick) forControlEvents:(UIControlEventTouchUpInside)];
-        [_buyView addSubview:gobuyBtn];
+- (UIButton *)gobuyBtn {
+    if (!_gobuyBtn) {
+        _gobuyBtn = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 44)];
+        _gobuyBtn.backgroundColor = [UIColor colorWithHexString:fineixColor];
+        [_gobuyBtn setTitleColor:[UIColor whiteColor] forState:(UIControlStateNormal)];
+        _gobuyBtn.titleLabel.font = [UIFont systemFontOfSize:Font_InfoTitle];
+        [_gobuyBtn addTarget:self action:@selector(buyCarBtnClick) forControlEvents:(UIControlEventTouchUpInside)];
     }
-    return _buyView;
+    return _gobuyBtn;
 }
 
 - (void)buyCarBtnClick {

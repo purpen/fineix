@@ -33,7 +33,6 @@
 - (void)setCategoryData:(NSMutableArray *)category {
     self.rowMarr = category;
     self.titleMarr = [NSMutableArray arrayWithArray:[category valueForKey:@"title"]];
-    [self.titleMarr insertObject:NSLocalizedString(@"AllGoods", nil) atIndex:0];
     self.categoryIdMarr = [NSMutableArray arrayWithArray:[category valueForKey:@"tagId"]];
     self.idMarr = [NSMutableArray arrayWithArray:[category valueForKey:@"idField"]];
     [self.menuView reloadData];
@@ -78,7 +77,8 @@
     goodsCategoryVC.categoryTitleArr = self.titleMarr;
     goodsCategoryVC.categoryId = self.categoryIdMarr[indexPath.row];
     goodsCategoryVC.categoryIdMarr = self.categoryIdMarr;
-    [goodsCategoryVC.categoryMenuView updateMenuBtnState:indexPath.row + 1];
+    [goodsCategoryVC.categoryMenuView updateMenuBtnState:indexPath.row];
+    [goodsCategoryVC showCategoryTag:indexPath.row];
     goodsCategoryVC.idMarr = self.idMarr;
     [self.nav pushViewController:goodsCategoryVC animated:YES];
 }

@@ -11,8 +11,9 @@
 #import "SuFiuScenrView.h"
 #import "MJRefresh.h"
 #import <SVProgressHUD/SVProgressHUD.h>
+#import "FBSceneInfoScrollView.h"
 
-@interface FiuSceneViewController : FBViewController <FBNavigationBarItemsDelegate, UITableViewDelegate, UITableViewDataSource>
+@interface FiuSceneViewController : FBViewController <FBNavigationBarItemsDelegate, UITableViewDelegate, UITableViewDataSource, UIScrollViewDelegate>
 
 @pro_strong FBRequest               *   fiuSceneRequest;
 @pro_strong FBRequest               *   fiuSceneListRequest;

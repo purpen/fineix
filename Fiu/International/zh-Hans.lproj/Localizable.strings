@@ -19,7 +19,7 @@
 "addTitle" = "请输入20字以内的标题";
 "addLocation" = "添加地点";
 "tag" = "标签";
-"onScene" = "所属情境";
+"onScene" = "所属情景";
 "release" = "发布";
 "cancel" = "取消";
 "sure" = "确定";
@@ -61,7 +61,8 @@
 "deleteError" = "删除失败";
 "userBouns" = "使用红包优惠￥";
 "noneSearch" = "没找到？或许Fiu首页有你要查的东西";
-
+"goodsCarIsNil" = "购物车又空啦，回“好货”入点新货吧";
+"goLookGoods" = "去逛逛";
 //  搜索框提示
 "searchLocation" = "搜索地点";
 "searchGoods" = "搜索产品";
@@ -121,7 +122,10 @@
 "addGoodsCar" = "加入购物车";
 "buyingGoods" = "立即购买";
 "goBuyGoods" = "去购买";
-"goodsDes" = "商品描述";
+"goTbBuyGoods" = "去淘宝购买";
+"goTmBuyGoods" = "去天猫购买";
+"goJdBuyGoods" = "去京东购买";
+"goodsDes" = "产品描述/亮点";
 
 //  标题
 "AllGoods" = "全部";

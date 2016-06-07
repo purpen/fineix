@@ -65,6 +65,8 @@
         _goodsImg = [[UIImageView alloc] init];
         _goodsImg.contentMode = UIViewContentModeScaleAspectFill;
         _goodsImg.clipsToBounds = YES;
+        _goodsImg.layer.borderWidth = 1.0f;
+        _goodsImg.layer.borderColor = [UIColor colorWithHexString:@"#F1F1F1" alpha:1].CGColor;
     }
     return _goodsImg;
 }

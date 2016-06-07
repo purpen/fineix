@@ -53,6 +53,7 @@
         _goodsTitle = [[UILabel alloc] init];
         _goodsTitle.textColor = [UIColor colorWithHexString:titleColor];
         _goodsTitle.font = [UIFont systemFontOfSize:Font_InfoTitle];
+//        _goodsTitle.backgroundColor = [UIColor orangeColor];
     }
     return _goodsTitle;
 }

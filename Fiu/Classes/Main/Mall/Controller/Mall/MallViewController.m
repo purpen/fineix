@@ -120,13 +120,14 @@ static NSString *const URLFiuBrand = @"/scene_brands/getlist";
 
 #pragma mark 分类列表
 - (void)networkCategoryListData {
-    self.categoryRequest = [FBAPI getWithUrlString:URLCategoryList requestDictionary:@{@"domain":@"10"} delegate:self];
+    self.categoryRequest = [FBAPI getWithUrlString:URLCategoryList requestDictionary:@{@"domain":@"10", @"show_all":@"1"} delegate:self];
     [self.categoryRequest startRequestSuccess:^(FBRequest *request, id result) {
         NSArray * categoryArr = [[result valueForKey:@"data"] valueForKey:@"rows"];
         for (NSDictionary * categoryDic in categoryArr) {
             CategoryRow * categoryModel = [[CategoryRow alloc] initWithDictionary:categoryDic];
             [self.categoryList addObject:categoryModel];
         }
+
         [self.mallTableView reloadData];
         [self requestIsLastData:self.mallTableView currentPage:self.currentpageNum withTotalPage:self.totalPageNum];
         
