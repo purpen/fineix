@@ -173,7 +173,6 @@
             make.size.mas_equalTo(CGSizeMake(SCREEN_WIDTH - 40, 56));
             make.top.equalTo(_lookNum.mas_bottom).with.offset(5);
             make.left.equalTo(_userView.mas_left).with.offset(0);
-            
         }];
         
         [_userView addSubview:self.whereScene];
@@ -293,7 +292,7 @@
     if ([title length] < 8) {
         _titleText.font = [UIFont systemFontOfSize:40];
     } else if ([title length] >= 8 && [title length] < 13) {
-        _titleText.font = [UIFont systemFontOfSize:30];
+        _titleText.font = [UIFont systemFontOfSize:26];
     } else if ([title length] >= 13) {
         _titleText.font = [UIFont systemFontOfSize:20];
         [_titleText mas_updateConstraints:^(MASConstraintMaker *make) {

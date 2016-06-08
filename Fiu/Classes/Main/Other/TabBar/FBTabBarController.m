@@ -52,22 +52,21 @@
 {
     //这里我判断的是当前点击的tabBarItem的标题
     if ([viewController.tabBarItem.title isEqualToString:@"个人"]) {
+        
         UserInfoEntity *entity = [UserInfoEntity defaultUserInfoEntity];
         FBRequest * request = [FBAPI postWithUrlString:@"/auth/check_login" requestDictionary:nil delegate:self];
         [request startRequestSuccess:^(FBRequest *request, id result) {
             NSDictionary * dataDic = [result objectForKey:@"data"];
             entity.isLogin = [[dataDic objectForKey:@"is_login"] boolValue];
         } failure:^(FBRequest *request, NSError *error) {
-//            [SVProgressHUD showInfoWithStatus:[error localizedDescription]];
+            [SVProgressHUD showInfoWithStatus:[error localizedDescription]];
         }];
-        //如果用户ID存在的话，说明已登陆
         
         if (entity.isLogin) {
             return YES;
         }
         else
         {
-            //跳到登录页面
             UIStoryboard *loginStory = [UIStoryboard storyboardWithName:@"LoginRegisterController" bundle:[NSBundle mainBundle]];
             FBLoginRegisterViewController *loginSignupVC = [loginStory instantiateViewControllerWithIdentifier:@"FBLoginRegisterViewController"];
             UINavigationController *navi = [[UINavigationController alloc] initWithRootViewController:loginSignupVC];
@@ -75,6 +74,7 @@
             
             return NO;
         }
+        
     } else {
         UserInfoEntity *entity = [UserInfoEntity defaultUserInfoEntity];
         FBRequest * request = [FBAPI postWithUrlString:@"/auth/check_login" requestDictionary:nil delegate:self];
@@ -82,7 +82,7 @@
             NSDictionary * dataDic = [result objectForKey:@"data"];
             entity.isLogin = [[dataDic objectForKey:@"is_login"] boolValue];
         } failure:^(FBRequest *request, NSError *error) {
-//            [SVProgressHUD showInfoWithStatus:[error localizedDescription]];
+            [SVProgressHUD showInfoWithStatus:[error localizedDescription]];
         }];
         return YES;
     }
@@ -164,7 +164,7 @@
         NSDictionary * dataDic = [result objectForKey:@"data"];
         entity.isLogin = [[dataDic objectForKey:@"is_login"] boolValue];
     } failure:^(FBRequest *request, NSError *error) {
-//        [SVProgressHUD showInfoWithStatus:[error localizedDescription]];
+        [SVProgressHUD showInfoWithStatus:[error localizedDescription]];
     }];
     //如果用户ID存在的话，说明已登陆
     
