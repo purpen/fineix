@@ -3596,8 +3596,8 @@
 		D81280191CAA8532007CF08B /* Classes */ = {
 			isa = PBXGroup;
 			children = (
-				1F2A8BCE1CF40276005116C7 /* Main */,
 				D812801A1CAA8532007CF08B /* BaseClass */,
+				1F2A8BCE1CF40276005116C7 /* Main */,
 			);
 			path = Classes;
 			sourceTree = "<group>";
