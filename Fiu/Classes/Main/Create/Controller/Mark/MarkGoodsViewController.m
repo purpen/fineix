@@ -23,6 +23,7 @@ static NSString *const URLGetGoodsImg = @"/scene_product/view";
 @pro_strong NSMutableArray      *   categoryTitle;
 @pro_strong NSMutableArray      *   categoryId;
 @pro_strong NSMutableArray      *   goodsList;
+@pro_strong NSMutableArray      *   searchGoodsList;
 @pro_strong NSString            *   ids;
 @pro_strong GoodsInfoData       *   goodsModel;
 
@@ -58,20 +59,20 @@ static NSString *const URLGetGoodsImg = @"/scene_product/view";
 
 #pragma mark 搜索商品
 - (void)networkSearchGoods:(NSString *)keyword {
-    [self.goodsList removeAllObjects];
     [SVProgressHUD show];
-    self.searchRequest = [FBAPI getWithUrlString:URLSearchGoods requestDictionary:@{@"t":@"10", @"q":keyword} delegate:self];
+    self.searchRequest = [FBAPI getWithUrlString:URLSearchGoods requestDictionary:@{@"t":@"10", @"q":keyword,@"evt":@"content", @"page":@(self.searchCurrentpageNum + 1), @"size":@"8"} delegate:self];
     [self.searchRequest startRequestSuccess:^(FBRequest *request, id result) {
         NSArray * goodsArr = [[result valueForKey:@"data"] valueForKey:@"rows"];
         for (NSDictionary * goodsDict in goodsArr) {
             MarkGoodsRow * goodsModel = [[MarkGoodsRow alloc] initWithDictionary:goodsDict];
-            [self.goodsList addObject:goodsModel];
+            [self.searchGoodsList addObject:goodsModel];
         }
-        [self.goodsListView reloadData];
+        NSLog(@"－＝＝＝＝＝＝＝＝＝＝＝ %@", self.searchGoodsList);
+        [self.searchListView reloadData];
         
-        self.currentpageNum = [[[result valueForKey:@"data"] valueForKey:@"current_page"] integerValue];
-        self.totalPageNum = [[[result valueForKey:@"data"] valueForKey:@"total_page"] integerValue];
-        [self requestIsLastData:self.goodsListView currentPage:self.currentpageNum withTotalPage:self.totalPageNum];
+        self.searchCurrentpageNum = [[[result valueForKey:@"data"] valueForKey:@"current_page"] integerValue];
+        self.searchTotalPageNum = [[[result valueForKey:@"data"] valueForKey:@"total_page"] integerValue];
+        [self requestIsLastData:self.searchListView currentPage:self.searchCurrentpageNum withTotalPage:self.searchTotalPageNum];
         
         [SVProgressHUD dismiss];
         
@@ -106,6 +107,7 @@ static NSString *const URLGetGoodsImg = @"/scene_product/view";
 
 #pragma mark 获取产品详情取出图片
 - (void)networkGetGoodsImg:(NSString *)goodsId {
+    self.view.userInteractionEnabled = NO;
     self.getImgRequest = [FBAPI getWithUrlString:URLGetGoodsImg requestDictionary:@{@"id":goodsId} delegate:self];
     [self.getImgRequest startRequestSuccess:^(FBRequest *request, id result) {
         self.goodsModel = [[GoodsInfoData alloc] initWithDictionary:[result valueForKey:@"data"]];
@@ -117,8 +119,8 @@ static NSString *const URLGetGoodsImg = @"/scene_product/view";
                          [[self.goodsModel.pngAsset valueForKey:@"width"][0] floatValue],
                          [[self.goodsModel.pngAsset valueForKey:@"height"][0] floatValue]
                          );
-        
         [self dismissViewControllerAnimated:YES completion:nil];
+        self.view.userInteractionEnabled = NO;
 
     } failure:^(FBRequest *request, NSError *error) {
         [SVProgressHUD showErrorWithStatus:[error localizedDescription]];
@@ -162,6 +164,36 @@ static NSString *const URLGetGoodsImg = @"/scene_product/view";
 
 }
 
+#pragma mark - 搜索列表
+- (UICollectionView *)searchListView {
+    if (!_searchListView) {
+        UICollectionViewFlowLayout * flowLayout = [[UICollectionViewFlowLayout alloc] init];
+        flowLayout.minimumLineSpacing = 10.0f;
+        flowLayout.minimumInteritemSpacing = 10.0f;
+        flowLayout.itemSize = CGSizeMake((SCREEN_WIDTH - 30)/2, ((SCREEN_WIDTH - 30)/2) * 1.33);
+        flowLayout.sectionInset = UIEdgeInsetsMake(5, 10, 10, 10);
+        
+        _searchListView = [[UICollectionView alloc] initWithFrame:CGRectMake(0, 94, SCREEN_WIDTH, SCREEN_HEIGHT - 94) collectionViewLayout:flowLayout];
+        _searchListView.delegate = self;
+        _searchListView.dataSource = self;
+        _searchListView.backgroundColor = [UIColor colorWithHexString:lineGrayColor];
+
+        _searchListView.showsVerticalScrollIndicator = NO;
+        _searchListView.showsHorizontalScrollIndicator = NO;
+        [_searchListView registerClass:[MarkGoodsCollectionViewCell class] forCellWithReuseIdentifier:@"searchGoodsListViewCell"];
+        _searchListView.mj_footer = [MJRefreshAutoNormalFooter footerWithRefreshingBlock:^{
+            if (self.searchCurrentpageNum < self.searchTotalPageNum) {
+                [self networkSearchGoods:self.searchGoods.searchInputBox.text];
+            } else {
+                [_searchListView.mj_footer endRefreshing];
+            }
+        }];
+        
+    }
+    return _searchListView;
+}
+
+
 #pragma mark - 商品列表
 - (UICollectionView *)goodsListView {
     if (!_goodsListView) {
@@ -193,20 +225,39 @@ static NSString *const URLGetGoodsImg = @"/scene_product/view";
 
 
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
-    return self.goodsList.count;
+    if (collectionView == self.goodsListView) {
+        return self.goodsList.count;
+    } else if (collectionView == self.searchListView) {
+        return self.searchGoodsList.count;
+    }
+    return 0;
 }
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
-    MarkGoodsCollectionViewCell * cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"GoodsListViewCell" forIndexPath:indexPath];
-    if (self.goodsList.count > 0) {
-        [cell setMarkGoodsData:self.goodsList[indexPath.row]];
+    if (collectionView == self.goodsListView) {
+        MarkGoodsCollectionViewCell * cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"GoodsListViewCell" forIndexPath:indexPath];
+        if (self.goodsList.count > 0) {
+            [cell setMarkGoodsData:self.goodsList[indexPath.row]];
+        }
+        return cell;
+    } else if (collectionView == self.searchListView) {
+        MarkGoodsCollectionViewCell * cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"searchGoodsListViewCell" forIndexPath:indexPath];
+        if (self.searchGoodsList.count > 0) {
+            [cell setMarkGoodsData:self.searchGoodsList[indexPath.row]];
+        }
+        return cell;
     }
-    return cell;
+    return nil;
 }
 
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
-    NSString * goodsId = [NSString stringWithFormat:@"%@",[self.goodsList valueForKey:@"idField"][indexPath.row]];
-    [self networkGetGoodsImg:goodsId];
+    if (collectionView == self.goodsListView) {
+        NSString * goodsId = [NSString stringWithFormat:@"%@",[self.goodsList valueForKey:@"idField"][indexPath.row]];
+        [self networkGetGoodsImg:goodsId];
+    } else if (collectionView == self.searchListView) {
+        NSString * goodsId = [NSString stringWithFormat:@"%@",[self.searchGoodsList valueForKey:@"idField"][indexPath.row]];
+        [self networkGetGoodsImg:goodsId];
+    }
 }
 
 #pragma mark - 添加搜索框视图
@@ -221,7 +272,15 @@ static NSString *const URLGetGoodsImg = @"/scene_product/view";
 
 #pragma mark - 搜索产品
 - (void)beginSearch:(NSString *)searchKeyword {
+    [self.searchGoodsList removeAllObjects];
+    self.searchCurrentpageNum = 0;
+    [self.view addSubview:self.searchListView];
     [self networkSearchGoods:searchKeyword];
+}
+
+#pragma mark - 取消搜索
+- (void)cancelSearch {
+    [self.searchListView removeFromSuperview];
 }
 
 #pragma mark - 导航菜单视图
@@ -278,5 +337,11 @@ static NSString *const URLGetGoodsImg = @"/scene_product/view";
     return _goodsList;
 }
 
+- (NSMutableArray *)searchGoodsList {
+    if (!_searchGoodsList) {
+        _searchGoodsList = [NSMutableArray array];
+    }
+    return _searchGoodsList;
+}
 
 @end

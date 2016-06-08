@@ -7,13 +7,16 @@
 //
 
 #import "SearchFSceneViewController.h"
-#import "AllSceneCollectionViewCell.h"
+#import "SelectAllFSceneCollectionViewCell.h"
+#import "ReleaseViewController.h"
 
 static NSString *const URLSearchFScene = @"/search/getlist";
 
 @interface SearchFSceneViewController ()
 
 @pro_strong NSMutableArray          *   allFiuSceneMarr;        //   情景列表
+@pro_strong NSMutableArray          *   allFiuSceneIdMarr;      //   情景Id列表
+@pro_strong NSMutableArray          *   allFiuSceneTitleMarr;   //   情景Id列表
 
 @end
 
@@ -43,6 +46,8 @@ static NSString *const URLSearchFScene = @"/search/getlist";
         for (NSDictionary * sceneDic in sceneArr) {
             FiuSceneInfoData * allFiuScene = [[FiuSceneInfoData alloc] initWithDictionary:sceneDic];
             [self.allFiuSceneMarr addObject:allFiuScene];
+            [self.allFiuSceneIdMarr addObject:[NSString stringWithFormat:@"%zi", allFiuScene.idField]];
+            [self.allFiuSceneTitleMarr addObject:allFiuScene.title];
         }
         self.currentpageNum = [[[result valueForKey:@"data"] valueForKey:@"current_page"] integerValue];
         self.totalPageNum = [[[result valueForKey:@"data"] valueForKey:@"total_page"] integerValue];
@@ -110,7 +115,7 @@ static NSString *const URLSearchFScene = @"/search/getlist";
         _allSceneView.backgroundColor = [UIColor whiteColor];
         _allSceneView.showsVerticalScrollIndicator = NO;
         _allSceneView.showsHorizontalScrollIndicator = NO;
-        [_allSceneView registerClass:[AllSceneCollectionViewCell class] forCellWithReuseIdentifier:@"allSceneCollectionViewCellID"];
+        [_allSceneView registerClass:[SelectAllFSceneCollectionViewCell class] forCellWithReuseIdentifier:@"searchSceneCollectionViewCellID"];
 
     }
     return _allSceneView;
@@ -122,10 +127,15 @@ static NSString *const URLSearchFScene = @"/search/getlist";
 }
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
-    static NSString * collectionViewCellId = @"allSceneCollectionViewCellID";
-    AllSceneCollectionViewCell * cell = [collectionView dequeueReusableCellWithReuseIdentifier:collectionViewCellId forIndexPath:indexPath];
+    static NSString * collectionViewCellId = @"searchSceneCollectionViewCellID";
+    SelectAllFSceneCollectionViewCell * cell = [collectionView dequeueReusableCellWithReuseIdentifier:collectionViewCellId forIndexPath:indexPath];
     [cell setAllFiuSceneListData:self.allFiuSceneMarr[indexPath.row]];
     return cell;
+}
+
+- (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
+    self.fiuSceneId = self.allFiuSceneIdMarr[indexPath.row];
+    self.fiuSceneTitle = self.allFiuSceneTitleMarr[indexPath.row];
 }
 
 #pragma mark - 搜素框
@@ -168,8 +178,26 @@ static NSString *const URLSearchFScene = @"/search/getlist";
         [_sureBtn setTitleColor:[UIColor blackColor] forState:(UIControlStateNormal)];
         _sureBtn.titleLabel.font = [UIFont systemFontOfSize:Font_ControllerTitle];
         [self.sureBtn setTitle:NSLocalizedString(@"sure", nil) forState:(UIControlStateNormal)];
+        [self.sureBtn addTarget:self action:@selector(sureBtnClick) forControlEvents:(UIControlEventTouchUpInside)];
     }
     return _sureBtn;
+}
+
+#pragma mark - 返回“发布页”
+- (void)sureBtnClick {
+    if (self.fiuSceneId.length > 0) {
+        for (UIViewController * vc in self.navigationController.viewControllers) {
+            if ([vc isKindOfClass:[ReleaseViewController class]]) {
+                //  to :ReleaseViewController.h
+                [[NSNotificationCenter defaultCenter] postNotificationName:@"selectFiuSceneId" object:self.fiuSceneId];
+                [[NSNotificationCenter defaultCenter] postNotificationName:@"selectFiuSceneTitle" object:self.fiuSceneTitle];
+                [self.navigationController popToViewController:vc animated:YES];
+            }
+        }
+        
+    } else {
+        [SVProgressHUD showInfoWithStatus:@"请选择一个情景"];
+    }
 }
 
 - (void)viewWillDisappear:(BOOL)animated {
@@ -183,6 +211,20 @@ static NSString *const URLSearchFScene = @"/search/getlist";
         _allFiuSceneMarr = [NSMutableArray array];
     }
     return _allFiuSceneMarr;
+}
+
+- (NSMutableArray *)allFiuSceneIdMarr {
+    if (!_allFiuSceneIdMarr) {
+        _allFiuSceneIdMarr = [NSMutableArray array];
+    }
+    return _allFiuSceneIdMarr;
+}
+
+- (NSMutableArray *)allFiuSceneTitleMarr {
+    if (!_allFiuSceneTitleMarr) {
+        _allFiuSceneTitleMarr = [NSMutableArray array];
+    }
+    return _allFiuSceneTitleMarr;
 }
 
 @end

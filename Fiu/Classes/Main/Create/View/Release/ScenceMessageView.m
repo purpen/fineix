@@ -94,7 +94,9 @@
 
 #pragma mark UITextViewDelegate
 - (BOOL)textViewShouldBeginEditing:(UITextView *)textView {
-    if ([_content.text  isEqualToString:NSLocalizedString(@"addFiuSceneDes", nil)]) {
+    if ([_content.text isEqualToString:NSLocalizedString(@"addDescription", nil)]) {
+        _content.text = @"";
+    } else if ([_content.text isEqualToString:NSLocalizedString(@"addFiuSceneDes", nil)]) {
         _content.text = @"";
     }
     _content.textColor = [UIColor blackColor];

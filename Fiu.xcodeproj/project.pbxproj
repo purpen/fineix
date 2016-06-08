@@ -486,6 +486,8 @@
 		D87B69E11CC7274900199EFE /* FBMenuView.m in Sources */ = {isa = PBXBuildFile; fileRef = D87B69DF1CC7274900199EFE /* FBMenuView.m */; };
 		D89CFE031D041819002701B8 /* GoodsDesTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D89CFE021D041819002701B8 /* GoodsDesTableViewCell.m */; };
 		D89CFE0C1D052AF1002701B8 /* FBSceneInfoScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = D89CFE0B1D052AF1002701B8 /* FBSceneInfoScrollView.m */; };
+		D89CFE0F1D070EAB002701B8 /* GoodsTagsTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D89CFE0E1D070EAB002701B8 /* GoodsTagsTableViewCell.m */; };
+		D89CFE121D080F50002701B8 /* FBUserTagsLable.m in Sources */ = {isa = PBXBuildFile; fileRef = D89CFE111D080F50002701B8 /* FBUserTagsLable.m */; };
 		D8A9AD091CD9CCA900A9FCFB /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D8A9AD081CD9CCA900A9FCFB /* Assets.xcassets */; };
 		D8A9ADC91CD9E34600A9FCFB /* FBFootView.m in Sources */ = {isa = PBXBuildFile; fileRef = D8A9ADC81CD9E34600A9FCFB /* FBFootView.m */; };
 		D8A9AE401CE304FF00A9FCFB /* NSTimer+Addition.m in Sources */ = {isa = PBXBuildFile; fileRef = D8A9AE3F1CE304FF00A9FCFB /* NSTimer+Addition.m */; };
@@ -1376,6 +1378,10 @@
 		D89CFE021D041819002701B8 /* GoodsDesTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GoodsDesTableViewCell.m; sourceTree = "<group>"; };
 		D89CFE0A1D052AF1002701B8 /* FBSceneInfoScrollView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FBSceneInfoScrollView.h; sourceTree = "<group>"; };
 		D89CFE0B1D052AF1002701B8 /* FBSceneInfoScrollView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FBSceneInfoScrollView.m; sourceTree = "<group>"; };
+		D89CFE0D1D070EAB002701B8 /* GoodsTagsTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GoodsTagsTableViewCell.h; sourceTree = "<group>"; };
+		D89CFE0E1D070EAB002701B8 /* GoodsTagsTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GoodsTagsTableViewCell.m; sourceTree = "<group>"; };
+		D89CFE101D080F50002701B8 /* FBUserTagsLable.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FBUserTagsLable.h; sourceTree = "<group>"; };
+		D89CFE111D080F50002701B8 /* FBUserTagsLable.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FBUserTagsLable.m; sourceTree = "<group>"; };
 		D8A9AD081CD9CCA900A9FCFB /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		D8A9ADC71CD9E34600A9FCFB /* FBFootView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FBFootView.h; sourceTree = "<group>"; };
 		D8A9ADC81CD9E34600A9FCFB /* FBFootView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FBFootView.m; sourceTree = "<group>"; };
@@ -2094,6 +2100,8 @@
 			children = (
 				1F2A8CDE1CF40276005116C7 /* SceneListTableViewCell.h */,
 				1F2A8CDF1CF40276005116C7 /* SceneListTableViewCell.m */,
+				D89CFE101D080F50002701B8 /* FBUserTagsLable.h */,
+				D89CFE111D080F50002701B8 /* FBUserTagsLable.m */,
 			);
 			path = Home;
 			sourceTree = "<group>";
@@ -2431,6 +2439,8 @@
 				D89CFE021D041819002701B8 /* GoodsDesTableViewCell.m */,
 				1F2A8D801CF40276005116C7 /* MallMenuTableViewCell.h */,
 				1F2A8D811CF40276005116C7 /* MallMenuTableViewCell.m */,
+				D89CFE0D1D070EAB002701B8 /* GoodsTagsTableViewCell.h */,
+				D89CFE0E1D070EAB002701B8 /* GoodsTagsTableViewCell.m */,
 			);
 			path = TableViewCell;
 			sourceTree = "<group>";
@@ -4023,6 +4033,7 @@
 				1F2A8F451CF40277005116C7 /* FBLoadPhoto.m in Sources */,
 				D8329DF41CF6158200611025 /* ShareSearchTextTableViewCell.m in Sources */,
 				1F2A8FA51CF40277005116C7 /* ShareStyleCollectionViewCell.m in Sources */,
+				D89CFE121D080F50002701B8 /* FBUserTagsLable.m in Sources */,
 				1F2A8FDC1CF40277005116C7 /* GoodsSceneCollectionViewCell.m in Sources */,
 				1F2A8FED1CF40277005116C7 /* EditNickNameViewController.m in Sources */,
 				1F2A8F511CF40277005116C7 /* FBSticker.m in Sources */,
@@ -4272,6 +4283,7 @@
 				1F2A8F3E1CF40277005116C7 /* FindGoodsModelData.m in Sources */,
 				D8E3AEBA1CFC9B84006E5E8C /* LookSceneViewController.m in Sources */,
 				D8B7952D1CF48B2C0075D985 /* ShareStyleTitleBottomView.m in Sources */,
+				D89CFE0F1D070EAB002701B8 /* GoodsTagsTableViewCell.m in Sources */,
 				1F2A90381CF40277005116C7 /* GuidePageViewController.m in Sources */,
 				1F2A90161CF40277005116C7 /* ScenceListCollectionViewCell.m in Sources */,
 				1F2A906B1CF40277005116C7 /* NearChangViewController.m in Sources */,

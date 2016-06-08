@@ -410,7 +410,7 @@ static NSString *const URLFiuBrand = @"/scene_brands/getlist";
 - (void)setFirstAppStart {
     if(![USERDEFAULT boolForKey:@"mallLaunch"]){
         [USERDEFAULT setBool:YES forKey:@"mallLaunch"];
-        [self setGuideImgForVC:@"Guide_ping"];
+        [self setMoreGuideImgForVC:@[@"guide-tase",@"Guide_ping"]];
     }
 }
 

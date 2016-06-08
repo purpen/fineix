@@ -31,9 +31,20 @@
 }
 
 -(void)getRound:(UIButton*)btn{
-    btn.layer.masksToBounds = YES;
+//    UIBezierPath *maskPath = [UIBezierPath bezierPathWithRoundedRect:btn.bounds byRoundingCorners:UIRectCornerTopLeft | UIRectCornerBottomLeft cornerRadii:CGSizeMake(20, 0)];
+//    CAShapeLayer *maskLayer = [[CAShapeLayer alloc] init];
+//    maskLayer.frame = btn.bounds;
+//    maskLayer.path = maskPath.CGPath;
+//    btn.layer.mask = maskLayer;
+//    btn.layer.cornerRadius = btn.frame.size.width*0.5;
+//    btn.layer.masksToBounds = YES;
+    
     btn.layer.cornerRadius = btn.frame.size.width*0.5;
-//    btn.layer.shouldRasterize = YES;
+    btn.layer.masksToBounds = YES;
+    btn.layer.shouldRasterize = YES;
+    btn.layer.rasterizationScale = [UIScreen mainScreen].scale;
+    btn.layer.borderWidth = 1.0f;
+    btn.layer.borderColor = [UIColor whiteColor].CGColor;
 }
 
 @end

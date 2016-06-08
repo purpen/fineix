@@ -88,7 +88,7 @@
     self.cellHeight = size.height + 70;
 }
 
-#pragma mark - 选中的标签列表
+#pragma mark - 标签列表
 - (UICollectionView *)chooseTagView {
     if (!_chooseTagView) {
         UICollectionViewFlowLayout * flowLayout = [[UICollectionViewFlowLayout alloc] init];
@@ -128,8 +128,5 @@
     searchVC.searchType = 0;
     [self.nav pushViewController:searchVC animated:YES];
 }
-
-
-
 
 @end

@@ -36,21 +36,13 @@
         CGFloat labelHeight = [_comment sizeThatFits:CGSizeMake(200, MAXFLOAT)].height;
         NSNumber * count = @((labelHeight) / _comment.font.lineHeight);
         
-        [_comment mas_updateConstraints:^(MASConstraintMaker *make) {
-            make.size.mas_equalTo(CGSizeMake(200, size.height + ([count integerValue] * 2) + 15));
-        }];
-        
         [_bubble mas_updateConstraints:^(MASConstraintMaker *make) {
             make.size.mas_equalTo(CGSizeMake(220, size.height + ([count integerValue] * 2) + 15));
         }];
         
     } else {
-        [_comment mas_updateConstraints:^(MASConstraintMaker *make) {
-            make.size.mas_equalTo(CGSizeMake(size.width, 15));
-        }];
-        
         [_bubble mas_updateConstraints:^(MASConstraintMaker *make) {
-            make.size.mas_equalTo(CGSizeMake(size.width + 27, size.height + 15));
+            make.size.mas_equalTo(CGSizeMake(size.width + 30, size.height + 15));
         }];
     }
     
@@ -87,9 +79,10 @@
 
     [self.bubble addSubview:self.comment];
     [_comment mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.size.mas_equalTo(CGSizeMake(100, 15));
         make.left.equalTo(_bubble.mas_left).with.offset(15);
-        make.centerY.equalTo(_bubble);
+        make.right.equalTo(_bubble.mas_right).with.offset(-10);
+        make.top.equalTo(_bubble.mas_top).with.offset(5);
+        make.bottom.equalTo(_bubble.mas_bottom).with.offset(-5);
     }];
     
 }

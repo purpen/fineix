@@ -118,7 +118,7 @@
  *  添加操作指示图
  */
 - (void)setGuideImgForVC:(NSString *)image;
-- (void)setHomeGuideImgForVC;
+- (void)setMoreGuideImgForVC:(NSArray *)imgArr;
 
 /**
  *  提示语
