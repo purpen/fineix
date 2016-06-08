@@ -158,63 +158,65 @@ NSString *const determineLogin = @"/auth/check_login";
 
 #pragma mark -  引导图的设置
 -(void)guide{
-    BOOL codeFlag = [[NSUserDefaults standardUserDefaults] boolForKey:@"codeFlag"];
-    if (codeFlag) {
-        NSArray *arr = [NSArray arrayWithObjects:@"Guide_one",@"Guide_two",@"Guide_three",@"Guide_four", nil];
-        //    使用的时候用key+版本号替换UserHasGuideView
-        //    这样容易控制每个版本都可以显示引导图
-        BOOL userIsFirstInstalled = [[NSUserDefaults standardUserDefaults] boolForKey:@"UserHasGuideView"];
-        if (userIsFirstInstalled) {
-            FBTabBarController * tabBarC = [[FBTabBarController alloc] init];
-            self.window.rootViewController = tabBarC;
-            UserInfoEntity *entity = [UserInfoEntity defaultUserInfoEntity];
-            FBRequest *request = [FBAPI postWithUrlString:@"/auth/user" requestDictionary:@{@"user_id":entity.userId} delegate:self];
-            [request startRequestSuccess:^(FBRequest *request, id result) {
-                NSDictionary *dataDict = result[@"data"];
-                NSDictionary *counterDict = [dataDict objectForKey:@"counter"];
-                _counterModel = [CounterModel mj_objectWithKeyValues:counterDict];
-                //判断小圆点是否消失
-                if (![_counterModel.message_total_count isEqual:@0]) {
-                    [tabBarC.tabBar showBadgeWithIndex:4];
-                }else{
-                    [tabBarC.tabBar hideBadgeWithIndex:4];
-                }
-            } failure:^(FBRequest *request, NSError *error) {
-            }];
-        }else{
-            self.window.rootViewController = [[GuidePageViewController alloc] initWithPicArr:arr andRootVC:[[FBTabBarController alloc] init]];
-            [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"UserHasGuideView"];
-        }
-    }else{
-        self.window.rootViewController = [[InviteCCodeViewController alloc] init];
-    }
-    
-//    NSArray *arr = [NSArray arrayWithObjects:@"Guide_one",@"Guide_two",@"Guide_three",@"Guide_four", nil];
-//    //    使用的时候用key+版本号替换UserHasGuideView
-//    //    这样容易控制每个版本都可以显示引导图
-//    BOOL userIsFirstInstalled = [[NSUserDefaults standardUserDefaults] boolForKey:@"UserHasGuideView"];
-//    if (userIsFirstInstalled) {
-//        FBTabBarController * tabBarC = [[FBTabBarController alloc] init];
-//        self.window.rootViewController = tabBarC;
-//        UserInfoEntity *entity = [UserInfoEntity defaultUserInfoEntity];
-//        FBRequest *request = [FBAPI postWithUrlString:@"/auth/user" requestDictionary:@{@"user_id":entity.userId} delegate:self];
-//        [request startRequestSuccess:^(FBRequest *request, id result) {
-//            NSDictionary *dataDict = result[@"data"];
-//            NSDictionary *counterDict = [dataDict objectForKey:@"counter"];
-//            _counterModel = [CounterModel mj_objectWithKeyValues:counterDict];
-//            //判断小圆点是否消失
-//            if (![_counterModel.message_total_count isEqual:@0]) {
-//                [tabBarC.tabBar showBadgeWithIndex:4];
-//            }else{
-//                [tabBarC.tabBar hideBadgeWithIndex:4];
-//            }
-//        } failure:^(FBRequest *request, NSError *error) {
-//        }];
+//    BOOL codeFlag = [[NSUserDefaults standardUserDefaults] boolForKey:@"codeFlag"];
+//    if (codeFlag) {
+//        NSArray *arr = [NSArray arrayWithObjects:@"Guide_one",@"Guide_two",@"Guide_three",@"Guide_four", nil];
+//        //    使用的时候用key+版本号替换UserHasGuideView
+//        //    这样容易控制每个版本都可以显示引导图
+//        BOOL userIsFirstInstalled = [[NSUserDefaults standardUserDefaults] boolForKey:@"UserHasGuideView"];
+//        if (userIsFirstInstalled) {
+//            FBTabBarController * tabBarC = [[FBTabBarController alloc] init];
+//            self.window.rootViewController = tabBarC;
+//            UserInfoEntity *entity = [UserInfoEntity defaultUserInfoEntity];
+//            FBRequest *request = [FBAPI postWithUrlString:@"/auth/user" requestDictionary:@{@"user_id":entity.userId} delegate:self];
+//            [request startRequestSuccess:^(FBRequest *request, id result) {
+//                NSDictionary *dataDict = result[@"data"];
+//                NSDictionary *counterDict = [dataDict objectForKey:@"counter"];
+//                _counterModel = [CounterModel mj_objectWithKeyValues:counterDict];
+//                //判断小圆点是否消失
+//                if (![_counterModel.message_total_count isEqual:@0]) {
+//                    [tabBarC.tabBar showBadgeWithIndex:4];
+//                }else{
+//                    [tabBarC.tabBar hideBadgeWithIndex:4];
+//                }
+//            } failure:^(FBRequest *request, NSError *error) {
+//            }];
+//        }else{
+//            self.window.rootViewController = [[GuidePageViewController alloc] initWithPicArr:arr andRootVC:[[FBTabBarController alloc] init]];
+//            [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"UserHasGuideView"];
+//        }
 //    }else{
-//        self.window.rootViewController = [[GuidePageViewController alloc] initWithPicArr:arr andRootVC:[[FBTabBarController alloc] init]];
-//        [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"UserHasGuideView"];
+//        self.window.rootViewController = [[InviteCCodeViewController alloc] init];
 //    }
     
+    NSArray *arr = [NSArray arrayWithObjects:@"Guide_one",@"Guide_two",@"Guide_three",@"Guide_four", nil];
+    //    使用的时候用key+版本号替换UserHasGuideView
+    //    这样容易控制每个版本都可以显示引导图
+    BOOL codeFlag = [[NSUserDefaults standardUserDefaults] boolForKey:@"codeFlag"];
+    BOOL userIsFirstInstalled = [[NSUserDefaults standardUserDefaults] boolForKey:@"UserHasGuideView"];
+    if (userIsFirstInstalled && codeFlag) {
+        FBTabBarController * tabBarC = [[FBTabBarController alloc] init];
+        self.window.rootViewController = tabBarC;
+        UserInfoEntity *entity = [UserInfoEntity defaultUserInfoEntity];
+        FBRequest *request = [FBAPI postWithUrlString:@"/auth/user" requestDictionary:@{@"user_id":entity.userId} delegate:self];
+        [request startRequestSuccess:^(FBRequest *request, id result) {
+            NSDictionary *dataDict = result[@"data"];
+            NSDictionary *counterDict = [dataDict objectForKey:@"counter"];
+            _counterModel = [CounterModel mj_objectWithKeyValues:counterDict];
+            //判断小圆点是否消失
+            if (![_counterModel.message_total_count isEqual:@0]) {
+                [tabBarC.tabBar showBadgeWithIndex:4];
+            }else{
+                [tabBarC.tabBar hideBadgeWithIndex:4];
+            }
+        } failure:^(FBRequest *request, NSError *error) {
+        }];
+    }else if(!userIsFirstInstalled){
+        self.window.rootViewController = [[GuidePageViewController alloc] initWithPicArr:arr andRootVC:[[FBTabBarController alloc] init]];
+        [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"UserHasGuideView"];
+    }else if (userIsFirstInstalled && !codeFlag){
+        self.window.rootViewController = [[InviteCCodeViewController alloc] init];
+    }
 }
 
 #pragma mark -注册百度地图代理

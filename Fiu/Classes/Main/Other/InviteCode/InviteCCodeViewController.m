@@ -56,33 +56,10 @@
                                                                                                              } delegate:self];
             
             [backRequst startRequestSuccess:^(FBRequest *request, id result) {
-                [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"codeFlag"];
-                NSArray *arr = [NSArray arrayWithObjects:@"Guide_one",@"Guide_two",@"Guide_three",@"Guide_four", nil];
-                AppDelegate *appli = (AppDelegate*)[UIApplication sharedApplication].delegate;
-                //    使用的时候用key+版本号替换UserHasGuideView
-                //    这样容易控制每个版本都可以显示引导图
-                BOOL userIsFirstInstalled = [[NSUserDefaults standardUserDefaults] boolForKey:@"UserHasGuideView"];
-                if (userIsFirstInstalled) {
-                    FBTabBarController * tabBarC = [[FBTabBarController alloc] init];
-                    appli.window.rootViewController = tabBarC;
-                    UserInfoEntity *entity = [UserInfoEntity defaultUserInfoEntity];
-                    FBRequest *request = [FBAPI postWithUrlString:@"/auth/user" requestDictionary:@{@"user_id":entity.userId} delegate:self];
-                    [request startRequestSuccess:^(FBRequest *request, id result) {
-                        NSDictionary *dataDict = result[@"data"];
-                        NSDictionary *counterDict = [dataDict objectForKey:@"counter"];
-                        _counterModel = [CounterModel mj_objectWithKeyValues:counterDict];
-                        //判断小圆点是否消失
-                        if (![_counterModel.message_total_count isEqual:@0]) {
-                            [tabBarC.tabBar showBadgeWithIndex:4];
-                        }else{
-                            [tabBarC.tabBar hideBadgeWithIndex:4];
-                        }
-                    } failure:^(FBRequest *request, NSError *error) {
-                    }];
-                }else{
-                    appli.window.rootViewController = [[GuidePageViewController alloc] initWithPicArr:arr andRootVC:[[FBTabBarController alloc] init]];
-                    [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"UserHasGuideView"];
-                }
+                [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"codeFlag"];                
+                FBTabBarController *tab = [[FBTabBarController alloc] init];
+                [tab setSelectedIndex:0];
+                [self presentViewController:tab animated:YES completion:nil];
             } failure:^(FBRequest *request, NSError *error) {
                 
             }];
