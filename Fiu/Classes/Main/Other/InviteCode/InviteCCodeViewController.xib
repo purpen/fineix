@@ -57,6 +57,9 @@
                                     <exclude reference="Y3l-Qe-ffj"/>
                                 </mask>
                             </variation>
+                            <connections>
+                                <action selector="clickOkBtn:" destination="-1" eventType="touchUpInside" id="t0G-Fi-QGE"/>
+                            </connections>
                         </button>
                     </subviews>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>

@@ -532,7 +532,7 @@ static NSString *const IconURL = @"/my/add_head_pic";
             }else{
                 //不是空的
                 ScenceListCollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"ScenceListCollectionViewCell" forIndexPath:indexPath];
-                [cell setUIWithModel:_sceneListMarr[indexPath.row]];
+                [cell setHomeSceneListData:_sceneListMarr[indexPath.row]];
                 return cell;
             }
         }else if([self.type isEqualToNumber:@1]){

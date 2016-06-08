@@ -9,6 +9,10 @@
 #import "ScenceListCollectionViewCell.h"
 #import "Fiu.h"
 #import "HomeSceneListRow.h"
+#import "UserGoodsTag.h"
+#import "UILable+Frame.h"
+#import "FBUserTagsLable.h"
+
 
 @implementation ScenceListCollectionViewCell
 //
@@ -37,32 +41,89 @@
                     make.top.equalTo(self.mas_top).with.offset(0);
                     make.left.equalTo(self.mas_left).with.offset(0);
                 }];
+        [self addSubview:self.userView];
     }
     return self;
 }
 
 
+#pragma mark - 动画出现场景的信息
+- (void)showUserView {
+    CGRect userViewRect = self.userView.frame;
+    userViewRect = CGRectMake(20, SCREEN_HEIGHT - 230, SCREEN_WIDTH - 40, 160);
+    [UIView animateWithDuration:.7 animations:^{
+        self.userView.frame = userViewRect;
+    }];
+}
+
 #pragma mark -
-- (void)setUIWithModel:(HomeSceneListRow *)model {
-    
+- (void)setHomeSceneListData:(HomeSceneListRow *)model {
+    [self showUserView];
     [self titleTextStyle:model.title];
     [self.bgImage downloadImage:model.coverUrl place:[UIImage imageNamed:@""]];
     [self.userHeader downloadImage:model.user.avatarUrl place:[UIImage imageNamed:@""]];
     self.userName.text = model.user.nickname;
-    self.userProfile.text = model.user.summary;
     self.lookNum.text = [self aboutCount:self.lookNum withCount:model.viewCount];
     self.likeNum.text = [self aboutCount:self.likeNum withCount:model.loveCount];
     self.whereScene.text = [self abouText:self.whereScene withText:model.sceneTitle];
     self.city.text = [self abouText:self.city withText:model.address];
-    self.time.text = [NSString stringWithFormat:@"| %@", model.createdAt];
+    self.time.text = [NSString stringWithFormat:@"|  %@", model.createdAt];
+    
+    
+    if (model.user.isExpert == 1) {
+        self.userVimg.hidden = NO;
+        [self.userStar setUserTagInfo:model.user.expertLabel];
+        self.userProfile.text = [NSString stringWithFormat:@"%@", model.user.expertInfo];
+        CGSize size = [self.userStar boundingRectWithSize:CGSizeMake(100, 0)];
+        
+        [self.userStar mas_updateConstraints:^(MASConstraintMaker *make) {
+            make.width.mas_equalTo(size.width + 10);
+        }];
+        [self.userProfile mas_updateConstraints:^(MASConstraintMaker *make) {
+            make.left.equalTo(self.userStar.mas_right).with.offset(5);
+        }];
+        
+    } else if (model.user.isExpert == 0) {
+        self.userProfile.text = model.user.summary;
+    }
+    
+    //  首页显示标记点
+    //    self.tagDataMarr = [NSMutableArray arrayWithArray:model.product];
+    //    [self setUserTagBtn];
 }
 
+#pragma mark - 创建用户添加商品按钮
+- (void)setUserTagBtn {
+    self.userTagMarr = [NSMutableArray array];
+    
+    for (UIView * view in self.subviews) {
+        if ([view isKindOfClass:[UserGoodsTag class]]) {
+            [view removeFromSuperview];
+        }
+    }
+    
+    for (NSInteger idx = 0; idx < self.tagDataMarr.count; ++ idx) {
+        CGFloat btnX = [[self.tagDataMarr[idx] valueForKey:@"x"] floatValue];
+        CGFloat btnY = [[self.tagDataMarr[idx] valueForKey:@"y"] floatValue];
+        
+        UserGoodsTag * userTag = [[UserGoodsTag alloc] initWithFrame:CGRectMake(btnX * SCREEN_WIDTH, btnY * SCREEN_HEIGHT, 175, 32)];
+        userTag.dele.hidden = YES;
+        userTag.title.hidden = YES;
+        userTag.price.hidden = YES;
+        userTag.isMove = NO;
+        [userTag setImage:[UIImage imageNamed:@""] forState:(UIControlStateNormal)];
+        
+        [self addSubview:userTag];
+        [self.userTagMarr addObject:userTag];
+    }
+}
 
 #pragma mark - 场景图
 - (UIImageView *)bgImage {
     if (!_bgImage) {
         _bgImage = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT)];
         _bgImage.contentMode = UIViewContentModeScaleAspectFill;
+        _bgImage.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"Defaul_Bg_750"]];
         
         //  添加渐变层
         CAGradientLayer * shadow = [CAGradientLayer layer];
@@ -73,13 +134,6 @@
         shadow.locations = @[@(0.5f), @(1.5f)];
         shadow.frame = _bgImage.bounds;
         [_bgImage.layer addSublayer:shadow];
-        
-        [_bgImage addSubview:self.userView];
-        [_userView mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.size.mas_equalTo(CGSizeMake(SCREEN_WIDTH - 40, 160));
-            make.bottom.equalTo(_bgImage.mas_bottom).with.offset(-75);
-            make.left.equalTo(_bgImage.mas_left).with.offset(20);
-        }];
     }
     return _bgImage;
 }
@@ -87,7 +141,7 @@
 #pragma mark - 用户信息
 - (UIView *)userView {
     if (!_userView) {
-        _userView = [[UIView alloc] init];
+        _userView = [[UIView alloc] initWithFrame:CGRectMake(20, SCREEN_HEIGHT, SCREEN_WIDTH - 40, 160)];
         
         [_userView addSubview:self.userHeader];
         [_userHeader mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -96,18 +150,32 @@
             make.left.equalTo(_userView.mas_left).with.offset(0);
         }];
         
+        [_userView addSubview:self.userVimg];
+        [_userVimg mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.size.mas_equalTo(CGSizeMake(10, 10));
+            make.bottom.equalTo(_userHeader.mas_bottom).with.offset(0);
+            make.left.equalTo(_userHeader.mas_right).with.offset(-9);
+        }];
+        
         [_userView addSubview:self.userName];
         [_userName mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.size.mas_equalTo(CGSizeMake(150, 15));
-            make.top.equalTo(_userView.mas_top).with.offset(0);
-            make.left.equalTo(_userHeader.mas_right).with.offset(5);
+            make.size.mas_equalTo(CGSizeMake(150, 14));
+            make.top.equalTo(_userHeader.mas_top).with.offset(0);
+            make.left.equalTo(_userHeader.mas_right).with.offset(6);
+        }];
+        
+        [_userView addSubview:self.userStar];
+        [_userStar mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.size.mas_equalTo(CGSizeMake(0, 14));
+            make.bottom.equalTo(_userHeader.mas_bottom).with.offset(0);
+            make.left.equalTo(_userHeader.mas_right).with.offset(6);
         }];
         
         [_userView addSubview:self.userProfile];
         [_userProfile mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.size.mas_equalTo(CGSizeMake(150, 15));
+            make.size.mas_equalTo(CGSizeMake(220, 14));
             make.bottom.equalTo(_userHeader.mas_bottom).with.offset(0);
-            make.left.equalTo(_userHeader.mas_right).with.offset(5);
+            make.left.equalTo(self.userStar.mas_right).with.offset(0);
         }];
         
         [_userView addSubview:self.lookNum];
@@ -126,9 +194,10 @@
         
         [_userView addSubview:self.titleText];
         [_titleText mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.size.mas_equalTo(CGSizeMake(SCREEN_WIDTH - 40, 50));
+            make.size.mas_equalTo(CGSizeMake(SCREEN_WIDTH - 40, 56));
             make.top.equalTo(_lookNum.mas_bottom).with.offset(5);
             make.left.equalTo(_userView.mas_left).with.offset(0);
+            
         }];
         
         [_userView addSubview:self.whereScene];
@@ -151,8 +220,6 @@
             make.top.equalTo(_time.mas_bottom).with.offset(5);
             make.left.equalTo(_whereScene.mas_left).with.offset(0);
         }];
-        
-        
     }
     return _userView;
 }
@@ -167,6 +234,30 @@
         _userHeader.layer.cornerRadius = 15;
     }
     return _userHeader;
+}
+
+#pragma mark - 加V标志
+- (UIImageView *)userVimg {
+    if (!_userVimg) {
+        _userVimg = [[UIImageView alloc] init];
+        _userVimg.image = [UIImage imageNamed:@"talent"];
+        _userVimg.contentMode = UIViewContentModeScaleToFill;
+        _userVimg.hidden = YES;
+    }
+    return _userVimg;
+}
+
+#pragma mark - 认证标签
+- (FBUserTagsLable *)userStar {
+    if (!_userStar) {
+        _userStar = [[FBUserTagsLable alloc] init];
+        _userStar.font = [UIFont systemFontOfSize:10];
+        _userStar.textAlignment = NSTextAlignmentCenter;
+        _userStar.layer.cornerRadius = 3;
+        _userStar.layer.masksToBounds = YES;
+        _userStar.layer.borderWidth = 0.5f;
+    }
+    return _userStar;
 }
 
 #pragma mark - 用户昵称
@@ -184,7 +275,7 @@
     if (!_userProfile) {
         _userProfile = [[UILabel alloc] init];
         _userProfile.textColor = [UIColor whiteColor];
-        _userProfile.font = [UIFont systemFontOfSize:12];
+        _userProfile.font = [UIFont systemFontOfSize:11];
     }
     return _userProfile;
 }
@@ -305,6 +396,5 @@
     icon.image = [UIImage imageNamed:iconImage];
     [lable addSubview:icon];
 }
-
 
 @end
