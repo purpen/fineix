@@ -64,7 +64,7 @@
 - (void)cycleScrollView:(SDCycleScrollView *)cycleScrollView didSelectItemAtIndex:(NSInteger)index {
     NSString * type = self.typeMarr[index];
     NSString * ids = self.targetIdMarr[index];
-    NSLog(@"＝＝＝＝＝＝＝＝＝＝＝ %@", ids);
+//    NSLog(@"＝＝＝＝＝＝＝＝＝＝＝ %@", ids);
     
     if ([type isEqualToString:@"8"]) {
         SceneInfoViewController * sceneInfoVC = [[SceneInfoViewController alloc] init];
