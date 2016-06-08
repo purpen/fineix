@@ -143,7 +143,7 @@
         idStr = ((IdentityTagModel*)self.selectedModelAry[0]).tags;
         [SVProgressHUD showWithMaskType:SVProgressHUDMaskTypeClear];
         FBRequest *requset = [FBAPI postWithUrlString:@"/my/talent_save" requestDictionary:@{
-                                                                                             @"id":self.idd,
+//                                                                                             @"id":self.idd,
                                                                                              @"info":self.certView.informationTF.text,
                                                                                              @"label":idStr,
                                                                                              @"contact":self.certView.phoneTF.text,

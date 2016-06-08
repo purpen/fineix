@@ -30,7 +30,24 @@
     [self.bgImage downloadImage:model.coverUrl place:[UIImage imageNamed:@""]];
     [self.userHeader sd_setImageWithURL:[NSURL URLWithString:model.userInfo.avatarUrl] forState:(UIControlStateNormal)];
     self.userName.text = model.userInfo.nickname;
-    self.userProfile.text = model.userInfo.summary;
+
+    //  是否是达人
+    if (model.userInfo.isExpert == 1) {
+        self.userVimg.hidden = NO;
+        [self.userStar setUserTagInfo:model.userInfo.expertLabel];
+        self.userProfile.text = [NSString stringWithFormat:@"%@", model.userInfo.expertInfo];
+        CGSize size = [self.userStar boundingRectWithSize:CGSizeMake(100, 0)];
+        
+        [self.userStar mas_updateConstraints:^(MASConstraintMaker *make) {
+            make.width.mas_equalTo(size.width + 10);
+        }];
+        [self.userProfile mas_updateConstraints:^(MASConstraintMaker *make) {
+            make.left.equalTo(self.userStar.mas_right).with.offset(5);
+        }];
+        
+    } else if (model.userInfo.isExpert == 0) {
+        self.userProfile.text = model.userInfo.summary;
+    }
     
     UIColor * fsceneColor = [UIColor blackColor];
     [self titleTextStyle:[NSString stringWithFormat:@"%@", model.title] withBgColor:fsceneColor];
@@ -114,11 +131,11 @@
             make.right.equalTo(_userView.mas_right).with.offset(0);
         }];
         
-        [_userView addSubview:self.userHeader];
-        [_userHeader mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.size.mas_equalTo(CGSizeMake(30, 30));
-            make.centerY.equalTo(_userLeftView);
-            make.left.equalTo(_userLeftView.mas_left).with.offset(20);
+        [_userView addSubview:self.userVimg];
+        [_userVimg mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.size.mas_equalTo(CGSizeMake(10, 10));
+            make.bottom.equalTo(_userHeader.mas_bottom).with.offset(0);
+            make.left.equalTo(_userHeader.mas_right).with.offset(-9);
         }];
         
         [_userView addSubview:self.userName];
@@ -128,11 +145,18 @@
             make.left.equalTo(_userHeader.mas_right).with.offset(10);
         }];
         
+        [_userView addSubview:self.userStar];
+        [_userStar mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.size.mas_equalTo(CGSizeMake(0, 14));
+            make.bottom.equalTo(_userHeader.mas_bottom).with.offset(0);
+            make.left.equalTo(_userHeader.mas_right).with.offset(6);
+        }];
+        
         [_userView addSubview:self.userProfile];
         [_userProfile mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.size.mas_equalTo(CGSizeMake(150, 15));
+            make.size.mas_equalTo(CGSizeMake(220, 14));
             make.bottom.equalTo(_userHeader.mas_bottom).with.offset(0);
-            make.left.equalTo(_userHeader.mas_right).with.offset(10);
+            make.left.equalTo(self.userStar.mas_right).with.offset(0);
         }];
         
         [_userView addSubview:self.goodBtn];
@@ -224,6 +248,31 @@
     }
     return _userHeader;
 }
+
+#pragma mark - 加V标志
+- (UIImageView *)userVimg {
+    if (!_userVimg) {
+        _userVimg = [[UIImageView alloc] init];
+        _userVimg.image = [UIImage imageNamed:@"talent"];
+        _userVimg.contentMode = UIViewContentModeScaleToFill;
+        _userVimg.hidden = YES;
+    }
+    return _userVimg;
+}
+
+#pragma mark - 认证标签
+- (FBUserTagsLable *)userStar {
+    if (!_userStar) {
+        _userStar = [[FBUserTagsLable alloc] init];
+        _userStar.font = [UIFont systemFontOfSize:10];
+        _userStar.textAlignment = NSTextAlignmentCenter;
+        _userStar.layer.cornerRadius = 3;
+        _userStar.layer.masksToBounds = YES;
+        _userStar.layer.borderWidth = 0.5f;
+    }
+    return _userStar;
+}
+
 
 - (void)lookUserHome {
     HomePageViewController * peopleHomeVC = [[HomePageViewController alloc] init];

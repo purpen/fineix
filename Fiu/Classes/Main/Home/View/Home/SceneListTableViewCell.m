@@ -39,7 +39,6 @@
     [self.bgImage downloadImage:model.coverUrl place:[UIImage imageNamed:@""]];
     [self.userHeader downloadImage:model.user.avatarUrl place:[UIImage imageNamed:@""]];
     self.userName.text = model.user.nickname;
-    self.userProfile.text = model.user.summary;
     self.lookNum.text = [self aboutCount:self.lookNum withCount:model.viewCount];
     self.likeNum.text = [self aboutCount:self.likeNum withCount:model.loveCount];
     self.whereScene.text = [self abouText:self.whereScene withText:model.sceneTitle];
@@ -47,46 +46,22 @@
     self.time.text = [NSString stringWithFormat:@"|  %@", model.createdAt];
     
     
-//    if (model.user.isExpert == 1) {
-//        self.userVimg.hidden = NO;
-//        self.userStar.text = model.user.expertLabel;
-//        CGSize size = [self.userStar boundingRectWithSize:CGSizeMake(100, 0)];
-//    
-//        [self.userStar mas_updateConstraints:^(MASConstraintMaker *make) {
-//            make.width.mas_equalTo(size.width);
-//        }];
-//        [self.userProfile mas_updateConstraints:^(MASConstraintMaker *make) {
-//            make.left.equalTo(self.userStar.mas_right).with.offset(5);
-//        }];
-//    
-//    } else if (model.user.isExpert == 0) {
-//        
-//    }
-
-//    if ([entity.is_expert isEqualToString:@"1"]) {
-//        self.talentView.hidden = NO;
-//        self.userProfile.hidden = NO;
-//        self.userProfile.text = entity.expert_info;
-//        self.idImageView.hidden = NO;
-//        int n = (int)[tagsAry indexOfObject:entity.expert_label];
-//        self.idImageView.image = [UIImage imageNamed:[NSString stringWithFormat:@"tags%d",n+1]];
-//    }else {
-//        self.talentView.hidden = YES;
-//        self.userProfile.hidden = YES;
-//        self.idImageView.hidden = YES;
-//        [self layoutIfNeeded];
-//        [self.headView mas_remakeConstraints:^(MASConstraintMaker *make) {
-//            make.size.mas_equalTo(CGSizeMake(84/667.0*SCREEN_HEIGHT, 84/667.0*SCREEN_HEIGHT));
-//            make.centerX.mas_equalTo(_userView.mas_centerX);
-//            make.bottom.mas_equalTo(_userLevelLabel.mas_top).with.offset(-10/667.0*SCREEN_HEIGHT);
-//        }];
-//    }
-//    
-//    if (entity.summary.length == 0) {
-//        self.userLevelLabel.text = [NSString stringWithFormat:@"Lv%zi %@ | %@",[entity.level intValue],entity.label,@"说说你是什么人，来自哪片山川湖海"];
-//    }else{
-//        self.userLevelLabel.text = [NSString stringWithFormat:@"Lv%zi %@ | %@",[entity.level intValue],entity.label,entity.summary];
-//    }
+    if (model.user.isExpert == 1) {
+        self.userVimg.hidden = NO;
+        [self.userStar setUserTagInfo:model.user.expertLabel];
+        self.userProfile.text = [NSString stringWithFormat:@"%@", model.user.expertInfo];
+        CGSize size = [self.userStar boundingRectWithSize:CGSizeMake(100, 0)];
+    
+        [self.userStar mas_updateConstraints:^(MASConstraintMaker *make) {
+            make.width.mas_equalTo(size.width + 10);
+        }];
+        [self.userProfile mas_updateConstraints:^(MASConstraintMaker *make) {
+            make.left.equalTo(self.userStar.mas_right).with.offset(5);
+        }];
+    
+    } else if (model.user.isExpert == 0) {
+        self.userProfile.text = model.user.summary;
+    }
 
     //  首页显示标记点
 //    self.tagDataMarr = [NSMutableArray arrayWithArray:model.product];
@@ -160,24 +135,24 @@
         
         [_userView addSubview:self.userName];
         [_userName mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.size.mas_equalTo(CGSizeMake(150, 15));
-            make.top.equalTo(_userView.mas_top).with.offset(0);
+            make.size.mas_equalTo(CGSizeMake(150, 14));
+            make.top.equalTo(_userHeader.mas_top).with.offset(0);
             make.left.equalTo(_userHeader.mas_right).with.offset(6);
         }];
         
-//        [_userView addSubview:self.userStar];
-//        [_userStar mas_makeConstraints:^(MASConstraintMaker *make) {
-//            make.size.mas_equalTo(CGSizeMake(0, 14));
-//            make.bottom.equalTo(_userHeader.mas_bottom).with.offset(0);
-//            make.left.equalTo(_userHeader.mas_right).with.offset(6);
-//        }];
+        [_userView addSubview:self.userStar];
+        [_userStar mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.size.mas_equalTo(CGSizeMake(0, 14));
+            make.bottom.equalTo(_userHeader.mas_bottom).with.offset(0);
+            make.left.equalTo(_userHeader.mas_right).with.offset(6);
+        }];
         
-//        [_userView addSubview:self.userProfile];
-//        [_userProfile mas_makeConstraints:^(MASConstraintMaker *make) {
-//            make.size.mas_equalTo(CGSizeMake(150, 15));
-//            make.bottom.equalTo(_userHeader.mas_bottom).with.offset(0);
-//            make.left.equalTo(self.userStar.mas_right).with.offset(0);
-//        }];
+        [_userView addSubview:self.userProfile];
+        [_userProfile mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.size.mas_equalTo(CGSizeMake(220, 14));
+            make.bottom.equalTo(_userHeader.mas_bottom).with.offset(0);
+            make.left.equalTo(self.userStar.mas_right).with.offset(0);
+        }];
         
         [_userView addSubview:self.lookNum];
         [_lookNum mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -249,13 +224,14 @@
 }
 
 #pragma mark - 认证标签
-- (UILabel *)userStar {
-    if (_userStar) {
-        _userStar = [[UILabel alloc] init];
-        _userStar.font = [UIFont systemFontOfSize:12];
+- (FBUserTagsLable *)userStar {
+    if (!_userStar) {
+        _userStar = [[FBUserTagsLable alloc] init];
+        _userStar.font = [UIFont systemFontOfSize:10];
         _userStar.textAlignment = NSTextAlignmentCenter;
-        _userStar.textColor = [UIColor whiteColor];
         _userStar.layer.cornerRadius = 3;
+        _userStar.layer.masksToBounds = YES;
+        _userStar.layer.borderWidth = 0.5f;
     }
     return _userStar;
 }
@@ -275,7 +251,7 @@
     if (!_userProfile) {
         _userProfile = [[UILabel alloc] init];
         _userProfile.textColor = [UIColor whiteColor];
-        _userProfile.font = [UIFont systemFontOfSize:12];
+        _userProfile.font = [UIFont systemFontOfSize:11];
     }
     return _userProfile;
 }

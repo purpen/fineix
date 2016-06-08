@@ -107,6 +107,7 @@ static NSString *const URLGetGoodsImg = @"/scene_product/view";
 
 #pragma mark 获取产品详情取出图片
 - (void)networkGetGoodsImg:(NSString *)goodsId {
+    self.view.userInteractionEnabled = NO;
     self.getImgRequest = [FBAPI getWithUrlString:URLGetGoodsImg requestDictionary:@{@"id":goodsId} delegate:self];
     [self.getImgRequest startRequestSuccess:^(FBRequest *request, id result) {
         self.goodsModel = [[GoodsInfoData alloc] initWithDictionary:[result valueForKey:@"data"]];
@@ -118,8 +119,8 @@ static NSString *const URLGetGoodsImg = @"/scene_product/view";
                          [[self.goodsModel.pngAsset valueForKey:@"width"][0] floatValue],
                          [[self.goodsModel.pngAsset valueForKey:@"height"][0] floatValue]
                          );
-        
         [self dismissViewControllerAnimated:YES completion:nil];
+        self.view.userInteractionEnabled = NO;
 
     } failure:^(FBRequest *request, NSError *error) {
         [SVProgressHUD showErrorWithStatus:[error localizedDescription]];

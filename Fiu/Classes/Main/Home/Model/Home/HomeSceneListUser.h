@@ -21,6 +21,7 @@
 @property (nonatomic, strong) NSString * summary;
 @property (nonatomic, strong) NSString * userLable;
 @property (nonatomic, strong) NSString * expertLabel;
+@property (nonatomic, strong) NSString * expertInfo;
 @property (nonatomic, assign) NSInteger isExpert;
 @property (nonatomic, strong) NSObject * userId;
 @property (nonatomic, strong) NSString * userRank;

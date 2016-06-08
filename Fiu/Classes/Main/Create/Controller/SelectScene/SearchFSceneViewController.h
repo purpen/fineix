@@ -14,6 +14,8 @@
 @interface SearchFSceneViewController : FBPictureViewController <FBSearchDelegate, UICollectionViewDelegate, UICollectionViewDataSource>
 
 @pro_strong UIButton                *   sureBtn;                //  确定按钮
+@pro_strong NSString                *   fiuSceneId;             //  所选情景id
+@pro_strong NSString                *   fiuSceneTitle;          //  所选情景title
 @pro_strong FBSearchView            *   searchView;             //  搜索框
 
 @pro_strong FBRequest               *   allSceneListRequest;

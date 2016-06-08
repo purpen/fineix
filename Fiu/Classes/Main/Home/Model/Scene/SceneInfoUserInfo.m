@@ -64,7 +64,10 @@
     if(![dictionary[@"expert_label"] isKindOfClass:[NSNull class]]){
         self.expertLabel = dictionary[@"expert_label"];
     }
-
+    
+    if(![dictionary[@"expert_info"] isKindOfClass:[NSNull class]]){
+        self.expertInfo = dictionary[@"expert_info"];
+    }
 	if(![dictionary[@"user_rank"] isKindOfClass:[NSNull class]]){
 		self.userRank = dictionary[@"user_rank"];
 	}	
