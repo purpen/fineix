@@ -10,6 +10,7 @@
 #import "Fiu.h"
 #import "UserInfoEntity.h"
 #import "FBTabBarController.h"
+#import "InviteCCodeViewController.h"
 
 @interface GuidePageViewController ()<UIScrollViewDelegate>
 {
@@ -127,9 +128,17 @@
 -(void)clickSkips:(UIButton*)sender{
     if ([_mainController isKindOfClass:[FBTabBarController class]]) {
 
-        FBTabBarController *tab = [[FBTabBarController alloc] init];
-        [tab setSelectedIndex:0];
-        [self presentViewController:tab animated:YES completion:nil];
+        BOOL codeFlag = [[NSUserDefaults standardUserDefaults] boolForKey:@"codeFlag"];
+        if (codeFlag) {
+            FBTabBarController *tab = [[FBTabBarController alloc] init];
+            [tab setSelectedIndex:0];
+            [self presentViewController:tab animated:YES completion:nil];
+        }else{
+            [self presentViewController:[[InviteCCodeViewController alloc] init] animated:YES completion:nil];
+        }
+
+        
+        
     }else{
         [self dismissViewControllerAnimated:YES completion:nil];
     }

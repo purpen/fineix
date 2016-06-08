@@ -19,20 +19,17 @@
             <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <imageView userInteractionEnabled="NO" alpha="0.29999999999999999" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="Guide_one" translatesAutoresizingMaskIntoConstraints="NO" id="6y4-py-65P">
-                    <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
-                </imageView>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="1z3-gw-vnt">
-                    <rect key="frame" x="37" y="224" width="300" height="220"/>
+                    <rect key="frame" x="37" y="274" width="300" height="120"/>
                     <subviews>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="请输入您的邀请码" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5ss-mV-lxn">
-                            <rect key="frame" x="90" y="60" width="120" height="18"/>
+                            <rect key="frame" x="90" y="18" width="120" height="18"/>
                             <fontDescription key="fontDescription" type="system" pointSize="15"/>
                             <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
-                            <nil key="highlightedColor"/>
+                            <color key="highlightedColor" red="0.13333333333333333" green="0.13333333333333333" blue="0.13333333333333333" alpha="1" colorSpace="calibratedRGB"/>
                         </label>
                         <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="EvU-KE-oPJ">
-                            <rect key="frame" x="17" y="103" width="178" height="45"/>
+                            <rect key="frame" x="17" y="56" width="188" height="39"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="45" id="vLq-Pc-RDP"/>
                             </constraints>
@@ -45,12 +42,12 @@
                             </variation>
                         </textField>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Fss-uM-DKS">
-                            <rect key="frame" x="205" y="103" width="80" height="45"/>
+                            <rect key="frame" x="215" y="56" width="70" height="39"/>
                             <color key="backgroundColor" red="0.74509803919999995" green="0.53725490200000003" blue="0.078431372550000003" alpha="1" colorSpace="calibratedRGB"/>
                             <constraints>
                                 <constraint firstAttribute="width" secondItem="Fss-uM-DKS" secondAttribute="height" multiplier="16:9" id="2yO-9y-2Xk"/>
                                 <constraint firstAttribute="height" constant="35" id="Y3l-Qe-ffj"/>
-                                <constraint firstAttribute="width" constant="80" id="xyY-VD-NZq"/>
+                                <constraint firstAttribute="width" constant="70" id="xyY-VD-NZq"/>
                             </constraints>
                             <state key="normal" title="确认">
                                 <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -68,14 +65,14 @@
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     <constraints>
                         <constraint firstAttribute="width" secondItem="1z3-gw-vnt" secondAttribute="height" multiplier="60:49" id="0UN-hS-reQ"/>
-                        <constraint firstItem="Fss-uM-DKS" firstAttribute="top" secondItem="5ss-mV-lxn" secondAttribute="bottom" constant="25" id="3kE-Ek-cpS"/>
-                        <constraint firstItem="5ss-mV-lxn" firstAttribute="top" secondItem="1z3-gw-vnt" secondAttribute="top" constant="60" id="64G-3m-bt0"/>
+                        <constraint firstItem="Fss-uM-DKS" firstAttribute="top" secondItem="5ss-mV-lxn" secondAttribute="bottom" constant="20" id="3kE-Ek-cpS"/>
+                        <constraint firstItem="5ss-mV-lxn" firstAttribute="top" secondItem="1z3-gw-vnt" secondAttribute="top" constant="18" id="64G-3m-bt0"/>
                         <constraint firstAttribute="height" constant="245" id="DEq-af-GMJ"/>
                         <constraint firstItem="Fss-uM-DKS" firstAttribute="leading" secondItem="EvU-KE-oPJ" secondAttribute="trailing" constant="10" id="KlO-CS-YRe"/>
                         <constraint firstItem="Fss-uM-DKS" firstAttribute="height" secondItem="EvU-KE-oPJ" secondAttribute="height" id="SEL-fy-LnZ"/>
-                        <constraint firstAttribute="height" constant="220" id="T9q-fe-kUL"/>
+                        <constraint firstAttribute="height" constant="120" id="T9q-fe-kUL"/>
                         <constraint firstItem="Fss-uM-DKS" firstAttribute="top" secondItem="1z3-gw-vnt" secondAttribute="top" constant="111" id="XkW-0L-M0I"/>
-                        <constraint firstItem="EvU-KE-oPJ" firstAttribute="top" secondItem="5ss-mV-lxn" secondAttribute="bottom" constant="25" id="Zct-Mc-QeJ"/>
+                        <constraint firstItem="EvU-KE-oPJ" firstAttribute="top" secondItem="5ss-mV-lxn" secondAttribute="bottom" constant="20" id="Zct-Mc-QeJ"/>
                         <constraint firstItem="5ss-mV-lxn" firstAttribute="centerX" secondItem="1z3-gw-vnt" secondAttribute="centerX" id="lE8-lJ-huT"/>
                         <constraint firstAttribute="trailing" secondItem="Fss-uM-DKS" secondAttribute="trailing" constant="15" id="lvK-01-GNG"/>
                         <constraint firstAttribute="width" constant="300" id="wub-YW-43m"/>
@@ -98,7 +95,4 @@
             <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
         </view>
     </objects>
-    <resources>
-        <image name="Guide_one" width="375" height="667"/>
-    </resources>
 </document>

@@ -18,6 +18,7 @@
 #import "UserInfoEntity.h"
 #import "PictureToolViewController.h"
 #import "FBPictureViewController.h"
+#import "InviteCCodeViewController.h"
 
 @interface FBTabBarController () <UITabBarControllerDelegate>
 
@@ -51,6 +52,8 @@
 - (BOOL)tabBarController:(UITabBarController *)tabBarController shouldSelectViewController:(UIViewController *)viewController
 {
     //这里我判断的是当前点击的tabBarItem的标题
+    
+    
     if ([viewController.tabBarItem.title isEqualToString:@"个人"]) {
         
         UserInfoEntity *entity = [UserInfoEntity defaultUserInfoEntity];
@@ -75,7 +78,9 @@
             return NO;
         }
         
-    } else {
+    } 
+    
+    else {
         UserInfoEntity *entity = [UserInfoEntity defaultUserInfoEntity];
         FBRequest * request = [FBAPI postWithUrlString:@"/auth/check_login" requestDictionary:nil delegate:self];
         [request startRequestSuccess:^(FBRequest *request, id result) {
