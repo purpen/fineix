@@ -73,7 +73,7 @@
         [_userView addSubview:self.idImageView];
         [_idImageView mas_makeConstraints:^(MASConstraintMaker *make) {
             make.bottom.mas_equalTo(_userLevelLabel.mas_top).with.offset(-5/667.0*SCREEN_HEIGHT);
-            make.left.mas_equalTo(_userView.mas_left).with.offset(109);
+            make.right.mas_equalTo(_userView.mas_centerX).with.offset(-2/667.0*SCREEN_HEIGHT);
         }];
         
         [_userView addSubview:self.userProfile];
