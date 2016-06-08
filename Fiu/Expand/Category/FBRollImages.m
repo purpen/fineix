@@ -7,6 +7,10 @@
 //
 
 #import "FBRollImages.h"
+#import "SceneInfoViewController.h"
+#import "FiuSceneViewController.h"
+#import "GoodsInfoViewController.h"
+
 
 @implementation FBRollImages
 
@@ -14,6 +18,8 @@
     self = [super initWithFrame:frame];
     if (self) {
         self.imgMarr = [NSMutableArray array];
+        self.targetIdMarr = [NSMutableArray array];
+        self.typeMarr = [NSMutableArray array];
         
         [self addSubview:self.rollImageView];
         [_rollImageView mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -29,6 +35,8 @@
 - (void)setRollimageView:(NSMutableArray *)model {
     for (RollImageRow * row in model) {
         [self.imgMarr addObject:row.coverUrl];
+        [self.typeMarr addObject:row.type];
+        [self.targetIdMarr addObject:[NSString stringWithFormat:@"%zi",row.idField]];
     }
     self.rollImageView.imageURLStringsGroup = self.imgMarr;
 }
@@ -54,7 +62,25 @@
 }
 
 - (void)cycleScrollView:(SDCycleScrollView *)cycleScrollView didSelectItemAtIndex:(NSInteger)index {
-
+    NSString * type = self.typeMarr[index];
+    NSString * ids = self.targetIdMarr[index];
+    NSLog(@"＝＝＝＝＝＝＝＝＝＝＝ %@", ids);
+    
+    if ([type isEqualToString:@"8"]) {
+        SceneInfoViewController * sceneInfoVC = [[SceneInfoViewController alloc] init];
+        sceneInfoVC.sceneId = ids;
+        [self.navVC pushViewController:sceneInfoVC animated:YES];
+        
+    } else if ([type isEqualToString:@"9"]) {
+        GoodsInfoViewController * goodsInfoVC = [[GoodsInfoViewController alloc] init];
+        goodsInfoVC.goodsID = ids;
+        [self.navVC pushViewController:goodsInfoVC animated:YES];
+        
+    } else if ([type isEqualToString:@"10"]) {
+        FiuSceneViewController * fiuSceneVC = [[FiuSceneViewController alloc] init];
+        fiuSceneVC.fiuSceneId = ids;
+        [self.navVC pushViewController:fiuSceneVC animated:YES];
+    }
 }
 
 @end
