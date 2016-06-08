@@ -52,9 +52,7 @@ static NSString *const URLSceneList = @"/scene_sight/";
 #pragma mark - 网络请求
 - (void)networkRequestData {
     [SVProgressHUD show];
-    
-    NSDictionary *  requestParams = @{@"page":@(self.currentpageNum + 1), @"size":@10, @"sort":@"1"};
-    self.sceneListRequest = [FBAPI getWithUrlString:URLSceneList requestDictionary:requestParams delegate:self];
+    self.sceneListRequest = [FBAPI getWithUrlString:URLSceneList requestDictionary:@{@"page":@(self.currentpageNum + 1), @"size":@10, @"sort":@"1"} delegate:self];
     [self.sceneListRequest startRequestSuccess:^(FBRequest *request, id result) {
         NSArray * sceneArr = [[result valueForKey:@"data"] valueForKey:@"rows"];
         for (NSDictionary * sceneDic in sceneArr) {
@@ -243,7 +241,7 @@ static NSString *const URLSceneList = @"/scene_sight/";
 - (void)setFirstAppStart {
     if(![USERDEFAULT boolForKey:@"homeLaunch"]){
         [USERDEFAULT setBool:YES forKey:@"homeLaunch"];
-        [self setHomeGuideImgForVC];
+        [self setMoreGuideImgForVC:@[@"guide_home",@"Guide_index"]];
     }
 }
 

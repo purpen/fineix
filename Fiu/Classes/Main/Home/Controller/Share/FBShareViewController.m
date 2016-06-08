@@ -173,19 +173,19 @@ static NSString *const URLShareTextNum = @"/scene_sight/add_share_context_num";
     } else if (indexPath.row == 1) {
         if (self.shareView.subviews.count > 0) {
             [self.shareView.subviews makeObjectsPerformSelector:@selector(removeFromSuperview)];
-            [self.shareView addSubview:self.shareTitleTopView];
+            [self.shareView addSubview:self.shareBottomView];
         }
         
     } else if (indexPath.row == 2) {
         if (self.shareView.subviews.count > 0) {
             [self.shareView.subviews makeObjectsPerformSelector:@selector(removeFromSuperview)];
-            [self.shareView addSubview:self.shareTitleBottomView];
+            [self.shareView addSubview:self.shareTitleTopView];
         }
         
     } else if (indexPath.row == 3) {
         if (self.shareView.subviews.count > 0) {
             [self.shareView.subviews makeObjectsPerformSelector:@selector(removeFromSuperview)];
-            [self.shareView addSubview:self.shareBottomView];
+            [self.shareView addSubview:self.shareTitleBottomView];
         }
     }
 }

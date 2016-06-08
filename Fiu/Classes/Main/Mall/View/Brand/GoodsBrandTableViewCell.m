@@ -53,7 +53,7 @@
 - (void)getContentCellHeight:(NSString *)content {
     self.brandIntroduce.text = content;
     CGSize size = [self.brandIntroduce boundingRectWithSize:CGSizeMake(SCREEN_WIDTH - 30, 0)];
-    self.cellHeight = size.height + 270;
+    self.cellHeight = size.height + 260;
 }
 
 #pragma mark -
@@ -107,7 +107,7 @@
 - (UILabel *)brandIntroduce {
     if (!_brandIntroduce) {
         _brandIntroduce = [[UILabel alloc] init];
-        _brandIntroduce.textColor = [UIColor colorWithHexString:@"#222222"];
+        _brandIntroduce.textColor = [UIColor colorWithHexString:@"#555555"];
         _brandIntroduce.font = [UIFont systemFontOfSize:Font_Tag];
         _brandIntroduce.numberOfLines = 0;
     }

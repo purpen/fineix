@@ -37,13 +37,16 @@
     
     CGFloat cityLength = [model.address boundingRectWithSize:CGSizeMake(320, 1000) options:(NSStringDrawingUsesLineFragmentOrigin) attributes:nil context:nil].size.width;
     self.city.text = model.address;
-    
     [self.city mas_updateConstraints:^(MASConstraintMaker *make) {
-        make.size.mas_equalTo(CGSizeMake(cityLength + 5, 15));
+        if (cityLength > 280) {
+            make.size.mas_equalTo(CGSizeMake(220, 15));
+        } else {
+            make.size.mas_equalTo(CGSizeMake(cityLength * 1.01, 15));
+        }
         make.left.equalTo(self.mas_left).with.offset(40);
     }];
     
-    self.time.text = [NSString stringWithFormat:@"| %@", model.createdAt];
+    self.time.text = [NSString stringWithFormat:@"|  %@", model.createdAt];
     [self.time mas_updateConstraints:^(MASConstraintMaker *make) {
         make.left.equalTo(self.city.mas_right).with.offset(10);
         make.bottom.equalTo(self.city.mas_bottom).with.offset(0);
@@ -141,14 +144,14 @@
         
         [_userView addSubview:self.city];
         [_city mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.size.mas_equalTo(CGSizeMake(75, 15));
+            make.size.mas_equalTo(CGSizeMake(120, 15));
             make.bottom.equalTo(_userLeftView.mas_top).with.offset(-15);
             make.left.equalTo(_userView.mas_left).with.offset(40);
         }];
         
         [_userView addSubview:self.time];
         [_time mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.size.mas_equalTo(CGSizeMake(150, 15));
+            make.height.mas_equalTo(CGSizeMake(150, 15));
             make.bottom.equalTo(_city.mas_top).with.offset(-5);
             make.left.equalTo(_city.mas_right).with.offset(0);
             make.right.equalTo(_userView.mas_right).with.offset(-20);

@@ -55,7 +55,7 @@
 "flashError" = "闪光灯不可用";
 "cameraOpen" = "请开启相机权限";
 "cameraError" = "相机不可用";
-"searchFScene" = "搜索情境";
+"searchFScene" = "搜索情景";
 "StockNone" = "库存只有这么多了";
 "deleteSuccess" = "删除成功";
 "deleteError" = "删除失败";

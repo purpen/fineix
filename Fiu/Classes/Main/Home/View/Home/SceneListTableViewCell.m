@@ -45,6 +45,48 @@
     self.whereScene.text = [self abouText:self.whereScene withText:model.sceneTitle];
     self.city.text = [self abouText:self.city withText:model.address];
     self.time.text = [NSString stringWithFormat:@"|  %@", model.createdAt];
+    
+    
+//    if (model.user.isExpert == 1) {
+//        self.userVimg.hidden = NO;
+//        self.userStar.text = model.user.expertLabel;
+//        CGSize size = [self.userStar boundingRectWithSize:CGSizeMake(100, 0)];
+//    
+//        [self.userStar mas_updateConstraints:^(MASConstraintMaker *make) {
+//            make.width.mas_equalTo(size.width);
+//        }];
+//        [self.userProfile mas_updateConstraints:^(MASConstraintMaker *make) {
+//            make.left.equalTo(self.userStar.mas_right).with.offset(5);
+//        }];
+//    
+//    } else if (model.user.isExpert == 0) {
+//        
+//    }
+
+//    if ([entity.is_expert isEqualToString:@"1"]) {
+//        self.talentView.hidden = NO;
+//        self.userProfile.hidden = NO;
+//        self.userProfile.text = entity.expert_info;
+//        self.idImageView.hidden = NO;
+//        int n = (int)[tagsAry indexOfObject:entity.expert_label];
+//        self.idImageView.image = [UIImage imageNamed:[NSString stringWithFormat:@"tags%d",n+1]];
+//    }else {
+//        self.talentView.hidden = YES;
+//        self.userProfile.hidden = YES;
+//        self.idImageView.hidden = YES;
+//        [self layoutIfNeeded];
+//        [self.headView mas_remakeConstraints:^(MASConstraintMaker *make) {
+//            make.size.mas_equalTo(CGSizeMake(84/667.0*SCREEN_HEIGHT, 84/667.0*SCREEN_HEIGHT));
+//            make.centerX.mas_equalTo(_userView.mas_centerX);
+//            make.bottom.mas_equalTo(_userLevelLabel.mas_top).with.offset(-10/667.0*SCREEN_HEIGHT);
+//        }];
+//    }
+//    
+//    if (entity.summary.length == 0) {
+//        self.userLevelLabel.text = [NSString stringWithFormat:@"Lv%zi %@ | %@",[entity.level intValue],entity.label,@"说说你是什么人，来自哪片山川湖海"];
+//    }else{
+//        self.userLevelLabel.text = [NSString stringWithFormat:@"Lv%zi %@ | %@",[entity.level intValue],entity.label,entity.summary];
+//    }
 
     //  首页显示标记点
 //    self.tagDataMarr = [NSMutableArray arrayWithArray:model.product];
@@ -109,19 +151,33 @@
             make.left.equalTo(_userView.mas_left).with.offset(0);
         }];
         
+        [_userView addSubview:self.userVimg];
+        [_userVimg mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.size.mas_equalTo(CGSizeMake(10, 10));
+            make.bottom.equalTo(_userHeader.mas_bottom).with.offset(0);
+            make.left.equalTo(_userHeader.mas_right).with.offset(-9);
+        }];
+        
         [_userView addSubview:self.userName];
         [_userName mas_makeConstraints:^(MASConstraintMaker *make) {
             make.size.mas_equalTo(CGSizeMake(150, 15));
             make.top.equalTo(_userView.mas_top).with.offset(0);
-            make.left.equalTo(_userHeader.mas_right).with.offset(5);
+            make.left.equalTo(_userHeader.mas_right).with.offset(6);
         }];
         
-        [_userView addSubview:self.userProfile];
-        [_userProfile mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.size.mas_equalTo(CGSizeMake(150, 15));
-            make.bottom.equalTo(_userHeader.mas_bottom).with.offset(0);
-            make.left.equalTo(_userHeader.mas_right).with.offset(5);
-        }];
+//        [_userView addSubview:self.userStar];
+//        [_userStar mas_makeConstraints:^(MASConstraintMaker *make) {
+//            make.size.mas_equalTo(CGSizeMake(0, 14));
+//            make.bottom.equalTo(_userHeader.mas_bottom).with.offset(0);
+//            make.left.equalTo(_userHeader.mas_right).with.offset(6);
+//        }];
+        
+//        [_userView addSubview:self.userProfile];
+//        [_userProfile mas_makeConstraints:^(MASConstraintMaker *make) {
+//            make.size.mas_equalTo(CGSizeMake(150, 15));
+//            make.bottom.equalTo(_userHeader.mas_bottom).with.offset(0);
+//            make.left.equalTo(self.userStar.mas_right).with.offset(0);
+//        }];
         
         [_userView addSubview:self.lookNum];
         [_lookNum mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -179,6 +235,29 @@
         _userHeader.layer.cornerRadius = 15;
     }
     return _userHeader;
+}
+
+#pragma mark - 加V标志
+- (UIImageView *)userVimg {
+    if (!_userVimg) {
+        _userVimg = [[UIImageView alloc] init];
+        _userVimg.image = [UIImage imageNamed:@"talent"];
+        _userVimg.contentMode = UIViewContentModeScaleToFill;
+        _userVimg.hidden = YES;
+    }
+    return _userVimg;
+}
+
+#pragma mark - 认证标签
+- (UILabel *)userStar {
+    if (_userStar) {
+        _userStar = [[UILabel alloc] init];
+        _userStar.font = [UIFont systemFontOfSize:12];
+        _userStar.textAlignment = NSTextAlignmentCenter;
+        _userStar.textColor = [UIColor whiteColor];
+        _userStar.layer.cornerRadius = 3;
+    }
+    return _userStar;
 }
 
 #pragma mark - 用户昵称

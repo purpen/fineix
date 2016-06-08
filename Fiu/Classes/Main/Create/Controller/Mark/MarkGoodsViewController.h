@@ -22,7 +22,10 @@ typedef void(^GetImgBlock)(NSString * imgUrl, NSString * title, NSString * price
 @pro_strong FBRequest               *   getImgRequest;
 @pro_assign NSInteger                   currentpageNum;
 @pro_assign NSInteger                   totalPageNum;
+@pro_assign NSInteger                   searchCurrentpageNum;
+@pro_assign NSInteger                   searchTotalPageNum;
 
+@pro_strong UICollectionView        *   searchListView;
 @pro_strong UICollectionView        *   goodsListView;          //  商品列表
 @pro_strong FBMenuView              *   categoryMenuView;       //  滑动导航栏
 @pro_strong FBSearchView            *   searchGoods;            //  搜索框

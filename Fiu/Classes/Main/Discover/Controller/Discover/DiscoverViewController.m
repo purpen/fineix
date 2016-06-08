@@ -100,8 +100,6 @@ static NSString *const URLFiuPeople = @"/user/find_user";
             btn.tag = i;
             if (self.fiuPeopleList.count != 0) {
                 FiuPeopleUser * user = [[FiuPeopleUser alloc] initWithDictionary:self.fiuPeopleList[btn.tag]];
-                btn.layer.borderWidth = 1.0f;
-                btn.layer.borderColor = [UIColor whiteColor].CGColor;
                 [btn sd_setImageWithURL:[NSURL URLWithString:user.mediumAvatarUrl] forState:(UIControlStateNormal)];
                 [btn addTarget:self action:@selector(clickUserHead:) forControlEvents:UIControlEventTouchUpInside];
             }
@@ -286,7 +284,7 @@ static NSString *const URLFiuPeople = @"/user/find_user";
             
             static dispatch_once_t onceToken;
             dispatch_once(&onceToken, ^{
-                [cell.contentView addSubview:self.fiuView];
+                [cell addSubview:self.fiuView];
                 [_fiuView mas_makeConstraints:^(MASConstraintMaker *make) {
                     make.size.mas_equalTo(CGSizeMake(SCREEN_WIDTH, 155/667.0*SCREEN_HEIGHT));
                     make.left.mas_equalTo(cell.mas_left);

@@ -23,7 +23,17 @@
 
 - (void)setGoodsInfoData:(GoodsInfoData *)model {
     self.goodsTitle.text = model.title;
+    CGSize size = [self.goodsTitle boundingRectWithSize:CGSizeMake(SCREEN_WIDTH - 30, 0)];
+    [self.goodsTitle mas_updateConstraints:^(MASConstraintMaker *make) {
+        make.size.mas_equalTo(CGSizeMake(SCREEN_WIDTH - 30 , size.height+5));
+    }];
     self.goodsPrice.text = [NSString stringWithFormat:@"¥ %.2f", model.marketPrice];
+}
+
+- (void)getContentCellHeight:(NSString *)content {
+    self.goodsTitle.text = content;
+    CGSize size = [self.goodsTitle boundingRectWithSize:CGSizeMake(SCREEN_WIDTH - 30, 0)];
+    self.cellHeight = size.height + 50;
 }
 
 #pragma mark -
@@ -42,9 +52,14 @@
         make.left.equalTo(self.mas_left).with.offset(15);
     }];
     
-    UILabel * botLine = [[UILabel alloc] initWithFrame:CGRectMake(0, 60, SCREEN_WIDTH, 5)];
+    UILabel * botLine = [[UILabel alloc] init];
     botLine.backgroundColor = [UIColor colorWithHexString:cellBgColor];
     [self addSubview:botLine];
+    [botLine mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.size.mas_equalTo(CGSizeMake(SCREEN_WIDTH, 5));
+        make.bottom.equalTo(self.mas_bottom).with.offset(0);
+        make.left.equalTo(self.mas_left).with.offset(0);
+    }];
 }
 
 #pragma mark -  标题
@@ -53,7 +68,7 @@
         _goodsTitle = [[UILabel alloc] init];
         _goodsTitle.textColor = [UIColor colorWithHexString:titleColor];
         _goodsTitle.font = [UIFont systemFontOfSize:Font_InfoTitle];
-//        _goodsTitle.backgroundColor = [UIColor orangeColor];
+        _goodsTitle.numberOfLines = 2;
     }
     return _goodsTitle;
 }

@@ -90,8 +90,8 @@ static NSString *const URLUserIsLogin = @"/user/user_info";
 }
 
 #pragma mark - 添加操作指示图
-- (void)setHomeGuideImgForVC {
-    _guideImgMarr = [NSMutableArray arrayWithObjects:@"guide_indxe",@"guide-scene",@"guide-fiu",@"guide-tase",@"guide-personal",@"Guide_index", nil];
+- (void)setMoreGuideImgForVC:(NSArray *)imgArr {
+    _guideImgMarr = [NSMutableArray arrayWithArray:imgArr];
     _guideBtn = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT)];
     [_guideBtn setBackgroundImage:[UIImage imageNamed:_guideImgMarr[0]] forState:(UIControlStateNormal)];
     [_guideBtn addTarget:self action:@selector(removeHomeGuide:) forControlEvents:(UIControlEventTouchUpInside)];

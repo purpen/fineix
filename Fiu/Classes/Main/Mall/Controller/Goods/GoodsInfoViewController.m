@@ -11,6 +11,7 @@
 #import "InfoBrandTableViewCell.h"
 #import "InfoGoodsHighlightsTableViewCell.h"
 #import "GoodsDesTableViewCell.h"
+#import "GoodsTagsTableViewCell.h"
 #import "InfoUseSceneTableViewCell.h"
 #import "InfoRecommendTableViewCell.h"
 #import "GoodsBrandViewController.h"
@@ -26,6 +27,7 @@ static NSString *const URLWantBuy = @"/scene_product/sight_click_stat";
 
 @interface GoodsInfoViewController () {
     NSString    *   _goodsDes;
+    NSArray     *   _goodsTags;
 }
 
 @pro_strong GoodsInfoData       *   goodsInfo;
@@ -60,7 +62,8 @@ static NSString *const URLWantBuy = @"/scene_product/sight_click_stat";
     self.goodsInfoRequest = [FBAPI getWithUrlString:URLGoodsInfo requestDictionary:@{@"id":self.goodsID} delegate:self];
     [self.goodsInfoRequest startRequestSuccess:^(FBRequest *request, id result) {
         _goodsDes = [[result valueForKey:@"data"] valueForKey:@"summary"];
-        NSLog(@"＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝ %@", result);
+        _goodsTags = [NSArray arrayWithArray:[[result valueForKey:@"data"] valueForKey:@"tags"]];
+        
         if ([[[result valueForKey:@"data"] valueForKey:@"attrbute"] integerValue] == 1) {
             [self.gobuyBtn setTitle:NSLocalizedString(@"goBuyGoods", nil) forState:(UIControlStateNormal)];
         } else if ([[[result valueForKey:@"data"] valueForKey:@"attrbute"] integerValue] == 2) {
@@ -196,7 +199,7 @@ static NSString *const URLWantBuy = @"/scene_product/sight_click_stat";
 
 #pragma mark - tableViewDelegate & DataSource
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-    return 5;
+    return 6;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
@@ -240,6 +243,14 @@ static NSString *const URLWantBuy = @"/scene_product/sight_click_stat";
         }
         
     } else if (indexPath.section == 3) {
+        static NSString * goodsTagsCellId = @"GoodsTagsCellId";
+        GoodsTagsTableViewCell * cell = [tableView dequeueReusableCellWithIdentifier:goodsTagsCellId];
+        cell = [[GoodsTagsTableViewCell alloc] initWithStyle:(UITableViewCellStyleDefault) reuseIdentifier:goodsTagsCellId];
+        cell.nav = self.navigationController;
+        [cell setGoodsTagsTitleData:_goodsTags];
+        return cell;
+        
+    } else if (indexPath.section == 4) {
         static NSString * InfoUseSceneCellId = @"InfoUseSceneCellId";
         if (self.sceneList.count) {
             InfoUseSceneTableViewCell * cell = [tableView dequeueReusableCellWithIdentifier:InfoUseSceneCellId];
@@ -254,7 +265,7 @@ static NSString *const URLWantBuy = @"/scene_product/sight_click_stat";
             return cell;
         }
         
-    } else if (indexPath.section == 4) {
+    } else if (indexPath.section == 5) {
         static NSString * InfoRecommendCellId = @"InfoRecommendCellId";
         InfoRecommendTableViewCell * cell = [tableView dequeueReusableCellWithIdentifier:InfoRecommendCellId];
         cell = [[InfoRecommendTableViewCell alloc] initWithStyle:(UITableViewCellStyleDefault) reuseIdentifier:InfoRecommendCellId];
@@ -268,7 +279,10 @@ static NSString *const URLWantBuy = @"/scene_product/sight_click_stat";
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
     if (indexPath.section == 0) {
-        return 65;
+        InfoTitleTableViewCell * cell = [[InfoTitleTableViewCell alloc] init];
+        [cell getContentCellHeight:self.goodsInfo.title];
+        return cell.cellHeight;
+        
     } else if (indexPath.section == 1) {
         if (self.goodsInfo.brand.coverUrl.length) {
             return 80;
@@ -285,12 +299,19 @@ static NSString *const URLWantBuy = @"/scene_product/sight_click_stat";
         }
         
     } else if (indexPath.section == 3) {
+        if (_goodsTags.count == 0) {
+            return 0.01;
+        } else {
+            return 49;
+        }
+        
+    } else if (indexPath.section == 4) {
         if (self.sceneList.count) {
             return 95;
         } else {
             return 0.01;
         }
-    } else if (indexPath.section == 4) {
+    } else if (indexPath.section == 5) {
         return 280;
     }
     return 100;

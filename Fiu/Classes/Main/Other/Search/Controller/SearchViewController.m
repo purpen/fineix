@@ -21,7 +21,9 @@
 
 static NSString *const URLSearchList = @"/search/getlist";
 
-@interface SearchViewController ()
+@interface SearchViewController () {
+    NSString * _searchEvt;
+}
 
 @pro_strong NSMutableArray      *   sceneList;              //  场景
 @pro_strong NSMutableArray      *   sceneIdMarr;
@@ -56,9 +58,10 @@ static NSString *const URLSearchList = @"/search/getlist";
 }
 
 #pragma mark - 网络请求
-- (void)networkSearchData:(NSString *)keyword withType:(NSString *)type {
+- (void)networkSearchData:(NSString *)keyword withType:(NSString *)type withSearchType:(NSString *)evt {
     [SVProgressHUD show];
-    self.searchListRequest = [FBAPI getWithUrlString:URLSearchList requestDictionary:@{@"evt":@"tag", @"size":@"8", @"page":@(self.currentpageNum + 1), @"t":type , @"q":keyword} delegate:self];
+    self.searchListRequest = [FBAPI getWithUrlString:URLSearchList requestDictionary:@{@"evt":evt, @"size":@"8", @"page":@(self.currentpageNum + 1), @"t":type , @"q":keyword} delegate:self];
+    _searchEvt = evt;
     
     [self.searchListRequest startRequestSuccess:^(FBRequest *request, id result) {
         if ([type isEqualToString:@"10"]) {
@@ -190,12 +193,12 @@ static NSString *const URLSearchList = @"/search/getlist";
     
     if (keyword.length > 0) {
         if (type == 1) {
-            [self networkSearchData:keyword withType:@"8"];
+            [self networkSearchData:keyword withType:@"8" withSearchType:@"tag"];
         } else if (type == 2) {
-            [self networkSearchData:keyword withType:@"10"];
+            [self networkSearchData:keyword withType:@"10" withSearchType:@"tag"];
         }
         else if (type == 0) {
-            [self networkSearchData:keyword withType:@"9"];
+            [self networkSearchData:keyword withType:@"9" withSearchType:@"tag"];
         }
         
     } else if (keyword.length == 0) {
@@ -233,7 +236,7 @@ static NSString *const URLSearchList = @"/search/getlist";
         _sceneTable.tableFooterView = [UIView new];
         _sceneTable.mj_footer = [MJRefreshAutoNormalFooter footerWithRefreshingBlock:^{
             if (self.currentpageNum < self.totalPageNum) {
-                [self networkSearchData:self.searchView.searchInputBox.text withType:@"9"];
+                [self networkSearchData:self.searchView.searchInputBox.text withType:@"9" withSearchType:_searchEvt];
             } else {
                 [_sceneTable.mj_footer endRefreshing];
             }
@@ -254,7 +257,7 @@ static NSString *const URLSearchList = @"/search/getlist";
         _goodsTable.tableFooterView = [UIView new];
         _goodsTable.mj_footer = [MJRefreshAutoNormalFooter footerWithRefreshingBlock:^{
             if (self.currentpageNum < self.totalPageNum) {
-                [self networkSearchData:self.searchView.searchInputBox.text withType:@"10"];
+                [self networkSearchData:self.searchView.searchInputBox.text withType:@"10" withSearchType:_searchEvt];
                 
             } else {
                 [_goodsTable.mj_footer endRefreshing];
@@ -338,7 +341,7 @@ static NSString *const URLSearchList = @"/search/getlist";
         
         _fSceneCollection.mj_footer = [MJRefreshAutoNormalFooter footerWithRefreshingBlock:^{
             if (self.currentpageNum < self.totalPageNum) {
-                [self networkSearchData:self.searchView.searchInputBox.text withType:@"8"];
+                [self networkSearchData:self.searchView.searchInputBox.text withType:@"8" withSearchType:_searchEvt];
             } else {
                 [_fSceneCollection.mj_footer endRefreshing];
             }
@@ -400,15 +403,15 @@ static NSString *const URLSearchList = @"/search/getlist";
     if (self.searchType == 0) {
         [self.sceneList removeAllObjects];
         [self.sceneIdMarr removeAllObjects];
-        [self networkSearchData:searchKeyword withType:@"9"];
+        [self networkSearchData:searchKeyword withType:@"9" withSearchType:@"content"];
     } else if (self.searchType == 1) {
         [self.fiuSceneList removeAllObjects];
         [self.allFiuSceneIdMarr removeAllObjects];
-        [self networkSearchData:searchKeyword withType:@"8"];
+        [self networkSearchData:searchKeyword withType:@"8" withSearchType:@"content"];
     } else if (self.searchType == 2) {
         [self.goodsList removeAllObjects];
         [self.goodsIdList removeAllObjects];
-        [self networkSearchData:searchKeyword withType:@"10"];
+        [self networkSearchData:searchKeyword withType:@"10" withSearchType:@"content"];
     }
 }
 

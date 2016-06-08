@@ -9,12 +9,16 @@
 #import <UIKit/UIKit.h>
 #import "Fiu.h"
 #import "GoodsInfoData.h"
+#import "UILable+Frame.h"
 
 @interface InfoTitleTableViewCell : UITableViewCell
 
 @pro_strong UILabel         *       goodsTitle;     //  商品标题
 @pro_strong UILabel         *       goodsPrice;     //  商品价格
+@pro_assign CGFloat                 cellHeight;
 
 - (void)setGoodsInfoData:(GoodsInfoData *)model;
+
+- (void)getContentCellHeight:(NSString *)content;
 
 @end
