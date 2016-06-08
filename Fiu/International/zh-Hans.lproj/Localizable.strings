@@ -157,5 +157,38 @@
 "FiltersNameJ" = "日光";
 "FiltersNameK" = "午茶";
 
+//性别
+"secret" = "保密";
+"men" = "男";
+"women" = "女";
+
+//个人中心
+"personalInformation" = "个人信息";
+"notAudit" = "未审核";
+"refused" = "拒绝";
+"replaceHeadPortrait" = "更换头像";
+"takingPictures" = "拍照";
+"fromAlbumToChoose" = "从相册选择";
+"cancel" = "取消";
+"individualitySignature" = "个性签名";
+"save" = "保存";
+"Content is empty" = "内容为空";
+"Individuality signature is too long" = "个性签名过长";
+"ModifyNickname" = "修改昵称";
+"findFriend" = "发现好友";
+"request failed" = "请求失败";
+"Invite WeChat friends" = "邀请微信好友";
+"Share with friends" = "分享给好友";
+"Connect the weibo" = "连接微博";
+"Connect the address book" = "连接通讯录";
+"Focus on what you know" = "关注你认识的好友";
+"Stop caring about" = "停止关注";
+"Focus on success" = "关注成功";
+"Pay attention to fail" = "关注失败";
+"Remove focus on success" = "取消关注成功";
+"The operation failure" = "操作失败";
+
+
+
 
 

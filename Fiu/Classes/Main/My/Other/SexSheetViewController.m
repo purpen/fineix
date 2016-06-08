@@ -34,7 +34,7 @@
 
 -(NSArray *)sexAry{
     if (!_sexAry) {
-        _sexAry = [NSArray arrayWithObjects:@"保密",@"男",@"女", nil];
+        _sexAry = [NSArray arrayWithObjects:NSLocalizedString(@"secret", nil),NSLocalizedString(@"men", nil),NSLocalizedString(@"women", nil), nil];
     }
     return _sexAry;
 }

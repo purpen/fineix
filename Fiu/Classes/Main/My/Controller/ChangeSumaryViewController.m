@@ -38,8 +38,8 @@ static NSString *const UpdateInfoURL = @"/my/update_profile";
     // Do any additional setup after loading the view from its nib.
     self.delegate = self;
     //self.navigationController.navigationBarHidden = NO;
-    self.navViewTitle.text = @"个性签名";
-    [self addBarItemRightBarButton:@"保存" image:nil isTransparent:NO];
+    self.navViewTitle.text = NSLocalizedString(@"individualitySignature", nil);
+    [self addBarItemRightBarButton:NSLocalizedString(@"save", nil) image:nil isTransparent:NO];
     UserInfoEntity *entity = [UserInfoEntity defaultUserInfoEntity];
     self.sumaryTF.text = entity.summary;
     self.sumaryTF.delegate = self;
@@ -195,11 +195,11 @@ static NSString *const UpdateInfoURL = @"/my/update_profile";
 
 -(void)rightBarItemSelected{
     if (self.sumaryTF.text.length == 0 && self.selectedModelAry.count !=0) {
-        [SVProgressHUD showErrorWithStatus:@"内容为空"];
+        [SVProgressHUD showErrorWithStatus:NSLocalizedString(@"Content is empty", nil)];
     }else{
         if (self.sumaryTF.text.length == 0) {
         }else if (self.sumaryTF.text.length > 30) {
-            [SVProgressHUD showErrorWithStatus:@"个性签名过长"];
+            [SVProgressHUD showErrorWithStatus:NSLocalizedString(@"Individuality signature is too long", nil)];
         }else{
             //推送
             FBRequest *request = [FBAPI postWithUrlString:UpdateInfoURL requestDictionary:@{@"summary":self.sumaryTF.text} delegate:self];

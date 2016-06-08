@@ -53,7 +53,7 @@ static NSString *const UpdateInfoURL = @"/my/update_profile";
     self.delegate = self;
     self.view.backgroundColor = [UIColor lightGrayColor];
     //[self addBarItemRightBarButton:@"保存" image:nil isTransparent:NO];
-    self.navViewTitle.text = @"个人信息";
+    self.navViewTitle.text = NSLocalizedString(@"personalInformation", nil);
     [self addBarItemRightBarButton:nil image:@"" isTransparent:NO];
     
     [self.view addSubview:self.accountView];
@@ -144,13 +144,13 @@ static NSString *const UpdateInfoURL = @"/my/update_profile";
         request = nil;
         switch ([entity.sex intValue]) {
             case 0:
-                _accountView.sex.text = @"保密";
+                _accountView.sex.text = NSLocalizedString(@"secret", nil);
                 break;
             case 1:
-                _accountView.sex.text = @"男";
+                _accountView.sex.text = NSLocalizedString(@"men", nil);
                 break;
             case 2:
-                _accountView.sex.text = @"女";
+                _accountView.sex.text = NSLocalizedString(@"women", nil);
                 break;
                 
             default:
@@ -191,13 +191,13 @@ static NSString *const UpdateInfoURL = @"/my/update_profile";
     }
     switch ([entity.sex intValue]) {
         case 0:
-            _accountView.sex.text = @"保密";
+            _accountView.sex.text = NSLocalizedString(@"secret", nil);
             break;
         case 1:
-            _accountView.sex.text = @"男";
+            _accountView.sex.text = NSLocalizedString(@"men", nil);
             break;
         case 2:
-            _accountView.sex.text = @"女";
+            _accountView.sex.text = NSLocalizedString(@"women", nil);
             break;
             
         default:
@@ -215,9 +215,9 @@ static NSString *const UpdateInfoURL = @"/my/update_profile";
         NSNumber *verifiedNum = [dataDict objectForKey:@"verified"];
         NSLog(@"%@",entity.expert_label);
         NSString *str;
-        str = @"未审核";
+        str = NSLocalizedString(@"notAudit", nil);
         if ([verifiedNum isEqualToNumber:@1]){
-            str = @"拒绝";
+            str = NSLocalizedString(@"refused", nil);
         }else if ([verifiedNum isEqualToNumber:@2]){
             str = entity.expert_label;
         }
@@ -248,10 +248,10 @@ static NSString *const UpdateInfoURL = @"/my/update_profile";
 }
 
 -(void)clickHeadImageBtn:(UIButton*)sender{
-    UIAlertController *alertC = [UIAlertController alertControllerWithTitle:@"更换头像" message:nil preferredStyle:UIAlertControllerStyleActionSheet];
+    UIAlertController *alertC = [UIAlertController alertControllerWithTitle:NSLocalizedString(@"replaceHeadPortrait", nil) message:nil preferredStyle:UIAlertControllerStyleActionSheet];
     //判断是否支持相机。模拟器没有相机
     if ([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera]) {
-        UIAlertAction *cameraAction = [UIAlertAction actionWithTitle:@"拍照" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+        UIAlertAction *cameraAction = [UIAlertAction actionWithTitle:NSLocalizedString(@"takingPictures", nil) style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
             //调取相机xx
             UIImagePickerController *picker = [[UIImagePickerController alloc] init];
             picker.delegate = self;
@@ -261,7 +261,7 @@ static NSString *const UpdateInfoURL = @"/my/update_profile";
         }];
         [alertC addAction:cameraAction];
     }
-    UIAlertAction *phontoAction = [UIAlertAction actionWithTitle:@"从相册选择" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+    UIAlertAction *phontoAction = [UIAlertAction actionWithTitle:NSLocalizedString(@"fromAlbumToChoose", nil) style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
         //调取相册
         UIImagePickerController *picker = [[UIImagePickerController alloc] init];
         picker.delegate = self;
@@ -269,7 +269,7 @@ static NSString *const UpdateInfoURL = @"/my/update_profile";
         picker.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
         [self presentViewController:picker animated:YES completion:nil];
     }];
-    UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
+    UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:NSLocalizedString(@"cancel", nil) style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
         [self dismissViewControllerAnimated:YES completion:nil];
     }];
     [alertC addAction:phontoAction];
