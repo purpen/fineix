@@ -25,9 +25,9 @@ static NSString *const UpdateInfoURL = @"/my/update_profile";
     // Do any additional setup after loading the view from its nib.
     self.delegate = self;
     //self.navigationController.navigationBarHidden = NO;
-    self.navViewTitle.text = @"修改昵称";
+    self.navViewTitle.text = NSLocalizedString(@"ModifyNickname", nil);
 //    [self addBarItemLeftBarButton:nil image:@"icon_back"];
-    [self addBarItemRightBarButton:@"保存" image:@"" isTransparent:NO];
+    [self addBarItemRightBarButton:NSLocalizedString(@"save", nil) image:@"" isTransparent:NO];
     
     UserInfoEntity *entity = [UserInfoEntity defaultUserInfoEntity];
     self.nickNameTF.text = entity.nickname;
@@ -38,7 +38,6 @@ static NSString *const UpdateInfoURL = @"/my/update_profile";
 }
 
 -(void)rightBarItemSelected{
-    NSLog(@"保存");
     UserInfoEntity *entity = [UserInfoEntity defaultUserInfoEntity];
     if (![self.nickNameTF.text isEqualToString:entity.nickname]) {
         //保存更改的信息
@@ -53,7 +52,6 @@ static NSString *const UpdateInfoURL = @"/my/update_profile";
 
 
 -(void)requestSucess:(FBRequest *)request result:(id)result{
-    NSLog(@"result%@",result);
     NSString *message = [result objectForKey:@"message"];
     if ([[result objectForKey:@"success"] isEqualToNumber:@1]) {
         UserInfoEntity *entity = [UserInfoEntity defaultUserInfoEntity];

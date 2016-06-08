@@ -9,6 +9,7 @@
 #import "AccountView.h"
 #import "UserInfoEntity.h"
 #import <SDWebImage/UIImageView+WebCache.h>
+#import "Fiu.h"
 
 @implementation AccountView
 
@@ -16,6 +17,8 @@
     AccountView *view = [[NSBundle mainBundle] loadNibNamed:@"MyView" owner:nil options:nil][2];
     view.iconUrl.layer.masksToBounds = YES;
     view.iconUrl.layer.cornerRadius = 15;
+    view.iconUrl.layer.borderWidth = 1.0;
+    view.iconUrl.layer.borderColor = [UIColor colorWithHexString:lineGrayColor].CGColor;
 //    UserInfoEntity *entity = [UserInfoEntity defaultUserInfoEntity];
 //    //更新头像
 //    [view.iconUrl sd_setImageWithURL:[NSURL URLWithString:entity.mediumAvatarUrl] placeholderImage:[UIImage imageNamed:@"Circle + User"] completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {

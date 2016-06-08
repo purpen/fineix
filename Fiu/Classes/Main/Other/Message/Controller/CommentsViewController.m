@@ -111,17 +111,17 @@
             [_modelAry addObject:model];
             
         }
-        if (_modelAry.count == 0) {
-            [self.view addSubview:self.tipLabel];
-            _tipLabel.text = @"快去找人聊天吧";
-            [_tipLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-                make.size.mas_equalTo(CGSizeMake(200, 30));
-                make.centerX.mas_equalTo(self.view.mas_centerX);
-                make.top.mas_equalTo(self.view.mas_top).with.offset(200);
-            }];
-        }else{
-            [self.tipLabel removeFromSuperview];
-        }
+//        if (_modelAry.count == 0) {
+//            [self.view addSubview:self.tipLabel];
+//            _tipLabel.text = @"快去找人聊天吧";
+//            [_tipLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+//                make.size.mas_equalTo(CGSizeMake(200, 30));
+//                make.centerX.mas_equalTo(self.view.mas_centerX);
+//                make.top.mas_equalTo(self.view.mas_top).with.offset(200);
+//            }];
+//        }else{
+//            [self.tipLabel removeFromSuperview];
+//        }
         
         [self.myTbaleView reloadData];
 

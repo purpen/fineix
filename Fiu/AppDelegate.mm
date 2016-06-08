@@ -167,7 +167,6 @@ NSString *const determineLogin = @"/auth/check_login";
         UserInfoEntity *entity = [UserInfoEntity defaultUserInfoEntity];
         FBRequest *request = [FBAPI postWithUrlString:@"/auth/user" requestDictionary:@{@"user_id":entity.userId} delegate:self];
         [request startRequestSuccess:^(FBRequest *request, id result) {
-            NSLog(@"&&&&&&&&result %@",result);
             NSDictionary *dataDict = result[@"data"];
             NSDictionary *counterDict = [dataDict objectForKey:@"counter"];
             _counterModel = [CounterModel mj_objectWithKeyValues:counterDict];
@@ -285,7 +284,7 @@ NSString *const determineLogin = @"/auth/check_login";
         NSDictionary * dataDic = [result objectForKey:@"data"];
         userEntity.isLogin = [[dataDic objectForKey:@"is_login"] boolValue];
     } failure:^(FBRequest *request, NSError *error) {
-        [SVProgressHUD showInfoWithStatus:[error localizedDescription]];
+//        [SVProgressHUD showInfoWithStatus:[error localizedDescription]];
     }];
 }
 

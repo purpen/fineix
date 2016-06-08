@@ -79,7 +79,7 @@
 {
     
     [SVProgressHUD show];
-    FBRequest *request = [FBAPI postWithUrlString:@"/follow" requestDictionary:@{@"page":@(_page),@"size":@15,@"user_id":self.userId,@"find_type":@2} delegate:self];
+    FBRequest *request = [FBAPI postWithUrlString:@"/follow" requestDictionary:@{@"page":@(_currentPageNumber+1),@"size":@15,@"user_id":self.userId,@"find_type":@2} delegate:self];
     [request startRequestSuccess:^(FBRequest *request, id result) {
         NSLog(@"result dadadad %@",result);
         NSDictionary *dataDict = [result objectForKey:@"data"];
@@ -95,7 +95,6 @@
             model.is_love = [rowsDict[@"type"] integerValue];
             model.level = followsDict[@"is_love"];
             //8888888888888888888888
-            NSLog(@"类型啊   %zi",model.is_love);
             [_modelAry addObject:model];
         }
         if (_modelAry.count == 0) {
@@ -207,7 +206,6 @@
     HomePageViewController *v = [[HomePageViewController alloc] init];
     UserInfo *model = _modelAry[indexPath.row];
     UserInfoEntity *entity = [UserInfoEntity defaultUserInfoEntity];
-    NSLog(@"userId  %@",model.userId);
     v.userId = model.userId;
     if ([entity.userId integerValue] == [model.userId integerValue]) {
         v.isMySelf = YES;

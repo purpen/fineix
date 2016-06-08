@@ -45,7 +45,7 @@ static NSString *const ShareURL = @"http://m.taihuoniao.com/guide/app_about";
     
     
     //设置导航
-    self.navViewTitle.text = @"发现好友";
+    self.navViewTitle.text = NSLocalizedString(@"findFriend", nil);
     self.view.backgroundColor = [UIColor whiteColor];
     [self addBarItemLeftBarButton:nil image:@"icon_back" isTransparent:NO];
     self.delegate = self;
@@ -59,7 +59,6 @@ static NSString *const ShareURL = @"http://m.taihuoniao.com/guide/app_about";
     [SVProgressHUD show];
     FBRequest *request = [FBAPI postWithUrlString:@"/user/find_user" requestDictionary:@{@"page":@1,@"size":@5,@"type":@1,@"sight_count":@5,@"sort":@0} delegate:self];
     [request startRequestSuccess:^(FBRequest *request, id result) {
-        NSLog(@"发现好友******** result %@",result);
         NSDictionary *dataDict = [result objectForKey:@"data"];
         NSArray *rowsAry = [dataDict objectForKey:@"users"];
         for (NSDictionary *rowsDict in rowsAry) {
@@ -83,7 +82,6 @@ static NSString *const ShareURL = @"http://m.taihuoniao.com/guide/app_about";
                 FindSceneModel *model1 = [[FindSceneModel alloc] init];
                 model1.id = sceneDict[@"_id"];
                 model1.title = sceneDict[@"title"];
-                NSLog(@"标题   %@",model1.title);
                 model1.address = sceneDict[@"address"];
                 model1.cober = sceneDict[@"cover_url"];
                 [model.scene addObject:model1];
@@ -92,13 +90,11 @@ static NSString *const ShareURL = @"http://m.taihuoniao.com/guide/app_about";
 //            NSLog(@"嘿嘿  %@",model1.title);
             [_userAry addObject:model];
         }
-        NSLog(@"_userAry  %@",_userAry);
-        NSLog(@"_scenceAry  %@",_scenceAry);
         [self.myTbaleView reloadData];
         [SVProgressHUD dismiss];
     } failure:^(FBRequest *request, NSError *error) {
         [SVProgressHUD dismiss];
-        [SVProgressHUD showErrorWithStatus:@"请求失败"];
+        [SVProgressHUD showErrorWithStatus:NSLocalizedString(@"request failed", nil)];
     }];
 }
 
@@ -127,9 +123,9 @@ static NSString *const ShareURL = @"http://m.taihuoniao.com/guide/app_about";
 
 -(NSArray *)aryOne{
     if (!_aryOne) {
-        InvitationModel *modelOne = [[InvitationModel alloc] initWithHeadStr:@"icon_wechat" :@"邀请微信好友" :@"分享给好友"];
-        InvitationModel *modelTwo = [[InvitationModel alloc] initWithHeadStr:@"icon_weibo" :@"连接微博" :@"分享给好友"];
-        InvitationModel *modelThree = [[InvitationModel alloc] initWithHeadStr:@"Circle + User" :@"连接通讯录" :@"关注你认识的好友"];
+        InvitationModel *modelOne = [[InvitationModel alloc] initWithHeadStr:@"icon_wechat" :NSLocalizedString(@"Invite WeChat friends", nil) :NSLocalizedString(@"Share with friends", nil)];
+        InvitationModel *modelTwo = [[InvitationModel alloc] initWithHeadStr:@"icon_weibo" :NSLocalizedString(@"Connect the weibo", nil) :NSLocalizedString(@"Share with friends", nil)];
+        InvitationModel *modelThree = [[InvitationModel alloc] initWithHeadStr:@"Circle + User" :NSLocalizedString(@"Connect the address book", nil) :NSLocalizedString(@"Focus on what you know", nil)];
         _aryOne = [NSArray arrayWithObjects:modelOne,modelTwo,modelThree, nil];
     }
     return _aryOne;
@@ -194,7 +190,7 @@ static NSString *const ShareURL = @"http://m.taihuoniao.com/guide/app_about";
         MyFansActionSheetViewController *sheetVC = [[MyFansActionSheetViewController alloc] init];
         
         [sheetVC.headImageView sd_setImageWithURL:[NSURL URLWithString:model.avatarUrl]];
-        sheetVC.sheetLabel.text = [NSString stringWithFormat:@"停止关注 %@",model.nickName];
+        sheetVC.sheetLabel.text = [NSString stringWithFormat:@"%@ %@",NSLocalizedString(@"Stop caring about", nil),model.nickName];
         sheetVC.modalPresentationStyle = UIModalPresentationOverCurrentContext;
         sheetVC.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;
         [self presentViewController:sheetVC animated:YES completion:nil];
@@ -209,9 +205,9 @@ static NSString *const ShareURL = @"http://m.taihuoniao.com/guide/app_about";
             if ([result objectForKey:@"success"]) {
                 model.isLove = @1;
                 [self.myTbaleView reloadRowsAtIndexPaths:[NSArray arrayWithObjects:[NSIndexPath indexPathForRow:sender.tag inSection:1], nil] withRowAnimation:UITableViewRowAnimationNone];
-                [SVProgressHUD showSuccessWithStatus:@"关注成功"];
+                [SVProgressHUD showSuccessWithStatus:NSLocalizedString(@"Focus on success", nil)];
             }else{
-                [SVProgressHUD showErrorWithStatus:@"关注失败"];
+                [SVProgressHUD showErrorWithStatus:NSLocalizedString(@"Pay attention to fail", nil)];
             }
         } failure:^(FBRequest *request, NSError *error) {
             
@@ -230,12 +226,12 @@ static NSString *const ShareURL = @"http://m.taihuoniao.com/guide/app_about";
     FBRequest *request = [FBAPI postWithUrlString:@"/follow/ajax_cancel_follow" requestDictionary:@{@"follow_id":model.userid} delegate:self];
     [request startRequestSuccess:^(FBRequest *request, id result) {
         if ([result objectForKey:@"success"]) {
-            [SVProgressHUD showSuccessWithStatus:@"取消关注成功"];
+            [SVProgressHUD showSuccessWithStatus:NSLocalizedString(@"Remove focus on success", nil)];
             model.isLove = @0;
             
             [self.myTbaleView reloadRowsAtIndexPaths:[NSArray arrayWithObjects:[NSIndexPath indexPathForRow:sender.tag inSection:1], nil] withRowAnimation:UITableViewRowAnimationNone];
         }else{
-            [SVProgressHUD showErrorWithStatus:@"操作失败"];
+            [SVProgressHUD showErrorWithStatus:NSLocalizedString(@"The operation failure", nil)];
         }
     } failure:^(FBRequest *request, NSError *error) {
         
@@ -312,7 +308,6 @@ static NSString *const ShareURL = @"http://m.taihuoniao.com/guide/app_about";
 }
 
 -(void)rightBarItemSelected{
-    NSLog(@"扫一扫");
     QRCodeScanViewController *vc = [[QRCodeScanViewController alloc] init];
     [self.navigationController pushViewController:vc animated:YES];
 }

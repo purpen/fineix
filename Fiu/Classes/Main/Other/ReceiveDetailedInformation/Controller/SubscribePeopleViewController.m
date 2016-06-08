@@ -98,7 +98,7 @@ static NSString *const subscribePeople = @"/favorite";
 -(void)clickBtn:(UIButton*)sender{
     //跳转到他人的个人主页
     //将信息传过去
-    UserInfo *model = _modelAry[sender.tag];
+//    UserInfo *model = _modelAry[sender.tag];
     
 }
 

@@ -47,9 +47,8 @@
     
     FBRequest *request = [FBAPI postWithUrlString:@"/my/fetch_talent" requestDictionary:nil delegate:self];
     [request startRequestSuccess:^(FBRequest *request, id result) {
-        NSLog(@"result  %@",result);
         NSDictionary *dataDict = [result objectForKey:@"data"];
-        if (!result[@"success"]) {
+        if ([[result objectForKey:@"verified"] isEqual:@(-1)]) {
             
         }else{
             //不是第一次，要编辑
@@ -73,7 +72,6 @@
                 self.throughView.hidden = NO;
                 NSArray *tagsAry = [NSArray arrayWithObjects:@"大拿",@"行家",@"行摄家",@"艺术范",@"手艺人",@"人来疯",@"赎回自由身",@"职业buyer", nil];
                 int n = (int)[tagsAry indexOfObject:dataDict[@"label"]];
-                NSLog(@"   %@",dataDict[@"label"]);
                 self.idTagesImageView.image = [UIImage imageNamed:[NSString stringWithFormat:@"tags%d",n+1]];
                 self.idTagesLabel.text = dataDict[@"info"];
             }

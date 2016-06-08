@@ -38,8 +38,8 @@ static NSString *const UpdateInfoURL = @"/my/update_profile";
     // Do any additional setup after loading the view from its nib.
     self.delegate = self;
     //self.navigationController.navigationBarHidden = NO;
-    self.navViewTitle.text = @"个性签名";
-    [self addBarItemRightBarButton:@"完成" image:nil isTransparent:NO];
+    self.navViewTitle.text = NSLocalizedString(@"individualitySignature", nil);
+    [self addBarItemRightBarButton:NSLocalizedString(@"save", nil) image:nil isTransparent:NO];
     UserInfoEntity *entity = [UserInfoEntity defaultUserInfoEntity];
     self.sumaryTF.text = entity.summary;
     self.sumaryTF.delegate = self;
@@ -61,11 +61,15 @@ static NSString *const UpdateInfoURL = @"/my/update_profile";
     [self.selectedModelAry removeAllObjects];
     IdentityTagModel *model = [[IdentityTagModel alloc] init];
     UserInfoEntity *entity = [UserInfoEntity defaultUserInfoEntity];
-    model.tags = entity.label;
-    [self.selectedModelAry addObject:model];
-    [self.selectedCollectionView reloadData];
-    self.deletAllBtn.hidden = NO;
-    self.selectedCollectionView.hidden = NO;
+    if (entity.label.length == 0) {
+        
+    }else{
+        model.tags = entity.label;
+        [self.selectedModelAry addObject:model];
+        [self.selectedCollectionView reloadData];
+        self.deletAllBtn.hidden = NO;
+        self.selectedCollectionView.hidden = NO;
+    }
 }
 
 -(void)clickDeletAllBtn:(UIButton*)sender{
@@ -191,11 +195,11 @@ static NSString *const UpdateInfoURL = @"/my/update_profile";
 
 -(void)rightBarItemSelected{
     if (self.sumaryTF.text.length == 0 && self.selectedModelAry.count !=0) {
-        [SVProgressHUD showErrorWithStatus:@"内容为空"];
+        [SVProgressHUD showErrorWithStatus:NSLocalizedString(@"Content is empty", nil)];
     }else{
         if (self.sumaryTF.text.length == 0) {
         }else if (self.sumaryTF.text.length > 30) {
-            [SVProgressHUD showErrorWithStatus:@"个性签名过长"];
+            [SVProgressHUD showErrorWithStatus:NSLocalizedString(@"Individuality signature is too long", nil)];
         }else{
             //推送
             FBRequest *request = [FBAPI postWithUrlString:UpdateInfoURL requestDictionary:@{@"summary":self.sumaryTF.text} delegate:self];
@@ -232,7 +236,6 @@ static NSString *const UpdateInfoURL = @"/my/update_profile";
         UserInfoEntity *entity = [UserInfoEntity defaultUserInfoEntity];
         entity.summary = self.sumaryTF.text;
         [entity updateUserInfo];
-        NSLog(@"边间   %@",entity.summary);
         [SVProgressHUD showSuccessWithStatus:message];
     }else{
         [SVProgressHUD showInfoWithStatus:message];

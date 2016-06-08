@@ -145,7 +145,7 @@ static NSString *const logOut = @"/auth/logout";
 
 
 - (IBAction)welcomePageBtn:(UIButton *)sender {
-    NSArray *arr = [NSArray arrayWithObjects:@"guide",@"guide",@"guide",@"guide",@"guide", nil];
+    NSArray *arr = [NSArray arrayWithObjects:@"Guide_one",@"Guide_two",@"Guide_three",@"Guide_four", nil];
     GuidePageViewController *vc = [[GuidePageViewController alloc] initWithPicArr:arr andRootVC:self];
     [self presentViewController:vc animated:YES completion:nil];
 }
@@ -250,7 +250,6 @@ static NSString *const logOut = @"/auth/logout";
 
 #pragma mark - 修改密码
 - (IBAction)changePwd:(UIButton *)sender {
-    NSLog(@"修改密码");
     ChanePwdViewController *vc = [[ChanePwdViewController alloc] init];
     [self.navigationController pushViewController:vc animated:YES];
 }

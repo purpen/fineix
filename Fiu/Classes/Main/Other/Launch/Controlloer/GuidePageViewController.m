@@ -102,7 +102,7 @@
 //点击『立即使用』按钮
 -(void)clickSkips:(UIButton*)sender{
     if ([_mainController isKindOfClass:[FBTabBarController class]]) {
-        //弹出登录注册界面
+
         FBTabBarController *tab = [[FBTabBarController alloc] init];
         [tab setSelectedIndex:0];
         [self presentViewController:tab animated:YES completion:nil];

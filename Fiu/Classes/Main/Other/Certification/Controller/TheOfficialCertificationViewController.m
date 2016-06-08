@@ -38,6 +38,7 @@
 @property(nonatomic,copy) NSString *contact;
 @property(nonatomic,copy) NSString *id_card_cover_url;
 @property(nonatomic,copy) NSString *business_card_cover_url;
+@property(nonatomic,copy) NSString *idd;
 
 @end
 
@@ -48,17 +49,19 @@
     FBRequest *request = [FBAPI postWithUrlString:@"/my/fetch_talent" requestDictionary:nil delegate:self];
     [request startRequestSuccess:^(FBRequest *request, id result) {
         NSDictionary *dataDict = [result objectForKey:@"data"];
-        if (dataDict.count == 1) {
+        if ([[result objectForKey:@"verified"] isEqual:@(-1)]) {
             //第一次，要提交
             
         }else{
             //不是第一次，要编辑
             
             //获取数据------
+            if (![dataDict[@"_id"] isKindOfClass:[NSNull class]]) {
+                self.idd = dataDict[@"_id"];
+            }
             if (![dataDict[@"label"] isKindOfClass:[NSNull class]]) {
                 self.expert_label = dataDict[@"label"];
             }
-            NSLog(@" %@ ",self.expert_label);
             if (![dataDict[@"info"] isKindOfClass:[NSNull class]]) {
                 self.info = dataDict[@"info"];
             }
@@ -90,9 +93,15 @@
             }
             if (self.id_card_cover_url.length != 0) {
                 [self.certView.idImageView sd_setImageWithURL:[NSURL URLWithString:self.id_card_cover_url]];
+                NSData * data = [NSData dataWithContentsOfURL:[NSURL URLWithString:self.id_card_cover_url]];
+                NSData * iconData = UIImageJPEGRepresentation([UIImage fixOrientation:[UIImage imageWithData:data]] , 0.5);
+                _idIcon64Str = [iconData base64EncodedStringWithOptions:NSDataBase64Encoding64CharacterLineLength];
             }
             if (self.business_card_cover_url.length != 0) {
                 [self.certView.cardImageView sd_setImageWithURL:[NSURL URLWithString:self.business_card_cover_url]];
+                NSData * data = [NSData dataWithContentsOfURL:[NSURL URLWithString:self.business_card_cover_url]];
+                NSData * iconData = UIImageJPEGRepresentation([UIImage fixOrientation:[UIImage imageWithData:data]] , 0.5);
+                _cardIcon64Str = [iconData base64EncodedStringWithOptions:NSDataBase64Encoding64CharacterLineLength];
             }
             //----------
         }
@@ -134,6 +143,7 @@
         idStr = ((IdentityTagModel*)self.selectedModelAry[0]).tags;
         [SVProgressHUD showWithMaskType:SVProgressHUDMaskTypeClear];
         FBRequest *requset = [FBAPI postWithUrlString:@"/my/talent_save" requestDictionary:@{
+                                                                                             @"id":self.idd,
                                                                                              @"info":self.certView.informationTF.text,
                                                                                              @"label":idStr,
                                                                                              @"contact":self.certView.phoneTF.text,

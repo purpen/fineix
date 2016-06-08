@@ -52,7 +52,7 @@
         
         [_userView addSubview:self.idImageView];
         [_idImageView mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.bottom.mas_equalTo(_userLevelLabel.mas_top).with.offset(-5/667.0*SCREEN_HEIGHT);
+            make.bottom.mas_equalTo(_userLevelLabel.mas_top).with.offset(-12/667.0*SCREEN_HEIGHT);
             make.left.mas_equalTo(_userView.mas_left).with.offset(137/667.0*SCREEN_HEIGHT);
         }];
         
@@ -148,7 +148,7 @@
     }];
     
     
-    [self.bgImageView sd_setImageWithURL:[NSURL URLWithString:entity.head_pic_url] placeholderImage:[UIImage imageNamed:@""]];
+    [self.bgImageView sd_setImageWithURL:[NSURL URLWithString:entity.head_pic_url] placeholderImage:[UIImage imageNamed:@"personalDefaultBg"]];
     self.nickName.text = entity.nickname;
     self.userProfile.text = entity.summary;
     NSArray *tagsAry = [NSArray arrayWithObjects:@"大拿",@"行家",@"行摄家",@"艺术范",@"手艺人",@"人来疯",@"赎回自由身",@"职业buyer", nil];

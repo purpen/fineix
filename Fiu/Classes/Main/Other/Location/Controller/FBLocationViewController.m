@@ -66,11 +66,9 @@
     BOOL flag = [_searcher geoCode:geoCodeSearchOption];
     if(flag)
     {
-        NSLog(@"geo检索发送成功");
     }
     else
     {
-        NSLog(@"geo检索发送失败");
     }
 
 }
@@ -82,7 +80,6 @@
         
     }
     else {
-        NSLog(@"抱歉，未找到结果");
     }
 }
 
@@ -102,7 +99,6 @@
         
         [self POIsearch:_m :@"景点"];
         _m++;
-        NSLog(@"%d",_m);
         //self.tableV.mj_footer.hidden = YES;
         [self.tableV.mj_footer endRefreshing];
     }];
@@ -111,12 +107,9 @@
 
 #pragma mark -BMKLocationServiceDelegate
 -(void)willStartLocatingUser{
-    NSLog(@"开始定位");
 }
 
 -(void)didFailToLocateUserWithError:(NSError *)error{
-    NSLog(@"定位失败%@",error);
-    //[_hud hideAnimated:YES];
 }
 
 //定位成功，再次定位
@@ -124,7 +117,6 @@
     _la = userLocation.location.coordinate.latitude;
     _lo = userLocation.location.coordinate.longitude;
     
-    NSLog(@"定位成功");
     [self POIsearch:0 :@"景点"];
     [_locationSevice stopUserLocationService];
 }
@@ -154,11 +146,9 @@
     BOOL flag = [_poiSearcher poiSearchNearBy:option];
     if(flag)
     {
-        NSLog(@"周边检索发送成功");
     }
     else
     {
-        NSLog(@"周边检索发送失败");
     }
 }
 
@@ -168,7 +158,6 @@
     if (error == BMK_SEARCH_NO_ERROR) {
         //在此处理正常结果
         //数据展示
-        NSLog(@"*************%@",((BMKPoiInfo*)poiResultList.poiInfoList[0]).name);
         for (int i = 0; i<poiResultList.poiInfoList.count; i++) {
             [_dataAry addObject:((BMKPoiInfo*)poiResultList.poiInfoList[i]).name];
             [_detailsAry addObject:((BMKPoiInfo*)poiResultList.poiInfoList[i]).address];
@@ -178,9 +167,7 @@
     else if (error == BMK_SEARCH_AMBIGUOUS_KEYWORD){
         //当在设置城市未找到结果，但在其他城市找到结果时，回调建议检索城市列表
         // result.cityList;
-        NSLog(@"起始点有歧义");
     } else {
-        NSLog(@"抱歉，未找到结果");
     }
 }
 
@@ -204,7 +191,6 @@
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:str];
     }
     cell.backgroundColor = [UIColor colorWithRed:250/255.0 green:251/255.0 blue:253/255.0 alpha:1];
-    NSLog(@"%zi",_dataAry.count);
     cell.textLabel.text = _dataAry[indexPath.row];
     cell.detailTextLabel.text = _detailsAry[indexPath.row];
     cell.detailTextLabel.textColor = [UIColor grayColor];

@@ -247,11 +247,9 @@
 
 #pragma mark - 处理扫描结果
 -(void)scanResultWithStr:(NSString*)resultStr{
-    NSLog(@"resultStr  %@",resultStr);
     NSData *jsonData = [resultStr dataUsingEncoding:NSUTF8StringEncoding];
     NSError *err;
     id resultObj = [NSJSONSerialization JSONObjectWithData:jsonData options:NSJSONReadingMutableContainers error:&err];
-    NSLog(@"resultObj  %@",resultObj);
     //判断是不是自己的二维码
     if ([resultStr rangeOfString:@"taihuoniao.com"].location == NSNotFound || [resultStr rangeOfString:@"infoType"].location == NSNotFound) {
         
@@ -271,7 +269,6 @@
     }else if ([resultStr rangeOfString:@"taihuoniao.com"].location != NSNotFound && [resultStr rangeOfString:@"infoType"].location != NSNotFound){
         NSArray *oneAry = [resultStr componentsSeparatedByString:@"?"];
         NSString *infoStr = oneAry[1];
-        NSLog(@"分割   %@",infoStr);
         NSArray *twoAry = [infoStr componentsSeparatedByString:@"&"];
         NSString *infoType = [twoAry[0] substringWithRange:NSMakeRange(9, 2)];
         NSString *infoId = [twoAry[1] substringWithRange:NSMakeRange(7, 5)];
@@ -295,7 +292,6 @@
             HomePageViewController *homeOpage = [[HomePageViewController alloc] init];
             homeOpage.type = @2;
             homeOpage.userId = infoId;
-            NSLog(@"个人主页  0  %@",infoId);
             UserInfoEntity *entity = [UserInfoEntity defaultUserInfoEntity];
             if ([entity.userId isEqualToString:infoId]) {
                 homeOpage.isMySelf = YES;

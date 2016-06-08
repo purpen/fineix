@@ -146,7 +146,6 @@ static NSString *const DeleteAddressURL = @"/shopping/remove_address";
 #pragma mark - FBRequest Delegate
 - (void)requestSucess:(FBRequest *)request result:(id)result
 {
-    NSLog(@"%@", result);
     NSString * message = result[@"message"];
     if ([request.flag isEqualToString:EditAddressURL]) {
         if ([[result objectForKey:@"success"] isEqualToNumber:@1]) {
@@ -170,13 +169,11 @@ static NSString *const DeleteAddressURL = @"/shopping/remove_address";
 - (void)requestFailed:(FBRequest *)request error:(NSError *)error
 {
     [SVProgressHUD dismiss];
-    NSLog(@"%@", [error localizedDescription]);
 }
 
 - (void)userCanceledFailed:(FBRequest *)request error:(NSError *)error
 {
     [SVProgressHUD dismiss];
-    NSLog(@"%@", [error localizedDescription]);
 }
 
 

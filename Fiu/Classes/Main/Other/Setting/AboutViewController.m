@@ -22,7 +22,7 @@
     self.delegate = self;
     self.view.backgroundColor = [UIColor whiteColor];
     //self.navigationController.navigationBarHidden = NO;
-    self.navViewTitle.text = @"关于太火鸟";
+    self.navViewTitle.text = @"关于Fiu";
 //    [self addBarItemLeftBarButton:nil image:@"icon_back"];
     
     //地址

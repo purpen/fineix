@@ -82,7 +82,6 @@ static NSString *const OrderDetailURL = @"/shopping/detail";
 #pragma mark - FBRequest Delegate
 - (void)requestSucess:(FBRequest *)request result:(id)result
 {
-    NSLog(@"%@", result);
     NSString * message = result[@"message"];
     if ([request.flag isEqualToString:OrderDetailURL]) {
         if ([[result objectForKey:@"success"] isEqualToNumber:@1]) {
@@ -209,13 +208,11 @@ static NSString *const OrderDetailURL = @"/shopping/detail";
 - (void)requestFailed:(FBRequest *)request error:(NSError *)error
 {
     [SVProgressHUD dismiss];
-    NSLog(@"%@", [error localizedDescription]);
 }
 
 - (void)userCanceledFailed:(FBRequest *)request error:(NSError *)error
 {
     [SVProgressHUD dismiss];
-    NSLog(@"%@", [error localizedDescription]);
 }
 
 
@@ -330,7 +327,6 @@ static NSString *const OrderDetailURL = @"/shopping/detail";
                                                                                                             @"rid":self.orderInfoCell.orderInfo.rid
                                                                                                             } delegate:self];
             [request startRequestSuccess:^(FBRequest *request, id result) {
-                NSLog(@"提醒发货    %@",result);
                 //提醒发货
                 [SVProgressHUD showSuccessWithStatus:[result objectForKey:@"message"]];
                 

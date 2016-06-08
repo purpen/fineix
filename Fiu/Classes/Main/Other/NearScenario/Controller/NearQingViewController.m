@@ -67,7 +67,6 @@
                                                                                        @"lat":self.baseInfo.location.coordinates[1]
                                                                                        } delegate:self];
     [request startRequestSuccess:^(FBRequest *request, id result) {
-        NSLog(@"附近的场景   %@",result);
         NSDictionary *dataDict = [result objectForKey:@"data"];
         NSArray *rowsAry = dataDict[@"rows"];
         for (NSDictionary *rowsDict in rowsAry) {
@@ -77,6 +76,11 @@
             [_addressMarr addObject:rowsDict[@"address"]];
             [_locationMarr addObject:rowsDict[@"location"][@"coordinates"]];
         }
+        [_idMarr addObject:@(self.baseInfo.idField)];
+        [_titleMarr addObject:self.baseInfo.title];
+        [_coverUrlMary addObject:self.baseInfo.coverUrl];
+        [_addressMarr addObject:self.baseInfo.address];
+        [_locationMarr addObject:self.baseInfo.location.coordinates];
         
         for (NSArray *locaAry in _locationMarr) {
             
@@ -103,7 +107,7 @@
         BMKPinAnnotationView *newAnnotationView = [[BMKPinAnnotationView alloc] initWithAnnotation:annotation reuseIdentifier:@"myAnnotation"];
         newAnnotationView.pinColor = BMKPinAnnotationColorPurple;
         newAnnotationView.animatesDrop = YES;// 设置该标注点动画显示
-        if (_n == 0) {
+        if (_n == _idMarr.count-1) {
             [newAnnotationView setSelected:YES animated:YES];
         }
         //[self.listMary addObject:newAnnotationView];
@@ -139,7 +143,6 @@
     imgV.image = [UIImage imageNamed:@"Group"];
     [view addSubview:imgV];
     UIImageView *image = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 37, 37)];
-    NSLog(@"数组个数  %zi",self.coverUrlMary.count);
     if (_n < self.coverUrlMary.count) {
         [image sd_setImageWithURL:[NSURL URLWithString:self.coverUrlMary[_n]]];
         [self setLabel:CGRectMake(50, 6, 100, 10) andText:self.titleMarr[_n] andFont:13 andView:imgV andtextColor:[UIColor blackColor]];

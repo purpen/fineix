@@ -44,11 +44,9 @@
 
 #pragma mark -BMKLocationServiceDelegate
 -(void)willStartLocatingUser{
-    NSLog(@"开始定位");
 }
 
 -(void)didFailToLocateUserWithError:(NSError *)error{
-    NSLog(@"定位失败%@",error);
     
 }
 
@@ -60,7 +58,6 @@
     
     //设置标注的位置坐标
     
-    NSLog(@"纬度%f,经度%f",userLocation.location.coordinate.latitude,userLocation.location.coordinate.longitude);
     _latitude = userLocation.location.coordinate.latitude;
     _longitude = userLocation.location.coordinate.longitude;
     // 添加一个PointAnnotation
@@ -153,7 +150,6 @@
 
 
 -(void)handleSingleTapFrom{
-    NSLog(@"aaa");
 }
 
 -(UIView*)creatPaopaoView{

@@ -49,6 +49,7 @@
     int _totalM;
     UserInfo *_model;
     NSInteger _fansN;
+    UITapGestureRecognizer *_scenarioTap;
 }
 
 @property(nonatomic,strong) UILabel *tipLabel;
@@ -81,10 +82,10 @@ static NSString *const IconURL = @"/my/add_head_pic";
     _chanelV = [ChanelView getChanelView];
     //情景
     _chanelV.scenarioView.userInteractionEnabled = YES;
-    UITapGestureRecognizer *scenarioTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(signleTap:)];
-    scenarioTap.numberOfTapsRequired = 1;
-    scenarioTap.numberOfTouchesRequired = 1;
-    [_chanelV.scenarioView addGestureRecognizer:scenarioTap];
+    _scenarioTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(signleTap:)];
+    _scenarioTap.numberOfTapsRequired = 1;
+    _scenarioTap.numberOfTouchesRequired = 1;
+    [_chanelV.scenarioView addGestureRecognizer:_scenarioTap];
     //场景
     _chanelV.fieldView.userInteractionEnabled = YES;
     UITapGestureRecognizer *scenarioTap1 = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(signleTap1:)];
@@ -166,7 +167,7 @@ static NSString *const IconURL = @"/my/add_head_pic";
     if (self.isMySelf) {
         [self addBarItemRightBarButton:nil image:@"SET" isTransparent:YES];
     }else{
-        [self addBarItemRightBarButton:nil image:@"more_filled" isTransparent:YES];
+//        [self addBarItemRightBarButton:nil image:@"more_filled" isTransparent:YES];
     }
     [[UIApplication sharedApplication] setStatusBarHidden:NO withAnimation:(UIStatusBarAnimationSlide)];
     self.navigationController.navigationBarHidden = YES;
@@ -175,7 +176,7 @@ static NSString *const IconURL = @"/my/add_head_pic";
     [self netGetData];
     
     [self requestDataForOderList];
-    
+
     
 }
 
@@ -198,56 +199,33 @@ static NSString *const IconURL = @"/my/add_head_pic";
 - (void)requestDataForOderList
 {
     if ([self.type isEqualToNumber:@1]) {
-        MJRefreshAutoGifFooter *footer = [MJRefreshAutoGifFooter footerWithRefreshingTarget:self refreshingAction:@selector(loadMoreData)];
-        
-//        // 设置文字
-//        [footer setTitle:@"每个情境都有故事，来都来了，讲讲你的故事吧" forState:MJRefreshStateNoMoreData];
-//        
-//        // 设置字体
-//        footer.stateLabel.font = [UIFont systemFontOfSize:13];
-//        
-//        // 设置颜色
-//        footer.stateLabel.textColor = [UIColor blackColor];
-//        
-        // 设置尾部
-        self.myCollectionView.mj_footer = footer;
+        self.myCollectionView.mj_footer = [MJRefreshAutoNormalFooter footerWithRefreshingBlock:^{
+            [self loadMoreData];
+        }];
         _n = 0;
         [_fiuSceneList removeAllObjects];
         [_fiuSceneIdList removeAllObjects];
-        
         [self requestDataForOderListOperation];
     }else if([self.type isEqualToNumber:@2]){
-        MJRefreshAutoGifFooter *footer = [MJRefreshAutoGifFooter footerWithRefreshingTarget:self refreshingAction:@selector(loadMoreDataM)];
-        
-//        // 设置文字
-//        [footer setTitle:@"你还没有发表过新场景哦，快来Fiu一下嘛" forState:MJRefreshStateNoMoreData];
-//        
-//        // 设置字体
-//        footer.stateLabel.font = [UIFont systemFontOfSize:13];
-//        
-//        // 设置颜色
-//        footer.stateLabel.textColor = [UIColor blackColor];
-//        
-        // 设置尾部
-        self.myCollectionView.mj_footer = footer;
+        self.myCollectionView.mj_footer = [MJRefreshAutoNormalFooter footerWithRefreshingBlock:^{
+            [self loadMoreDataM];
+        }];
         _m = 0;
         [_sceneListMarr removeAllObjects];
         [_sceneIdMarr removeAllObjects];
-        
         [self requestDataForOderListOperation];
     }
-    
 }
 
 //上拉下拉分页请求订单列表
 - (void)requestDataForOderListOperation
 {
     if ([self.type isEqualToNumber:@1]) {
+        self.myCollectionView.mj_footer.hidden = YES;
         //进行情景的网络请求
-        [SVProgressHUD show];
+//        [SVProgressHUD show];
         FBRequest *request = [FBAPI postWithUrlString:@"/scene_scene/" requestDictionary:@{@"page":@(_n+1),@"size":@6,@"sort":@0,@"user_id":self.userId} delegate:self];
         [request startRequestSuccess:^(FBRequest *request, id result) {
-            NSLog(@"result %@",result);
             NSArray * fiuSceneArr = [[result valueForKey:@"data"] valueForKey:@"rows"];
             for (NSDictionary * fiuSceneDic in fiuSceneArr) {
                 FiuSceneRow * fiuSceneModel = [[FiuSceneRow alloc] initWithDictionary:fiuSceneDic];
@@ -258,7 +236,6 @@ static NSString *const IconURL = @"/my/add_head_pic";
             [self.myCollectionView reloadData];
             _n = [[[result objectForKey:@"data"] objectForKey:@"current_page"] intValue];
             _totalN = [[[result objectForKey:@"data"] objectForKey:@"total_page"] intValue];
-            
             if (_totalN == 0) {
                 self.myCollectionView.mj_footer.state = MJRefreshStateNoMoreData;
                 self.myCollectionView.mj_footer.hidden = YES;
@@ -282,8 +259,7 @@ static NSString *const IconURL = @"/my/add_head_pic";
             if ([self.myCollectionView.mj_footer isRefreshing]) {
                 if (isLastPage) {
                     [self.myCollectionView.mj_footer endRefreshingWithNoMoreData];
-                } else  {
-                    [self.myCollectionView.mj_footer endRefreshing];
+                    self.myCollectionView.mj_footer.hidden = YES;
                 }
             }
             
@@ -293,10 +269,11 @@ static NSString *const IconURL = @"/my/add_head_pic";
         }];
     }else if ([self.type isEqualToNumber:@2]){
         //进行场景的网络请求
-        [SVProgressHUD show];
+//        [SVProgressHUD show];
+        self.myCollectionView.mj_footer.hidden = YES;
         FBRequest *request = [FBAPI postWithUrlString:@"/scene_sight/" requestDictionary:@{@"page":@(_m+1),@"size":@10,@"sort":@0,@"user_id":self.userId} delegate:self];
         [request startRequestSuccess:^(FBRequest *request, id result) {
-            NSArray * sceneArr = [[result valueForKey:@"data"] valueForKey:@"rows"];
+            NSArray *sceneArr = [[result valueForKey:@"data"] valueForKey:@"rows"];
             for (NSDictionary * sceneDic in sceneArr) {
                 HomeSceneListRow * homeSceneModel = [[HomeSceneListRow alloc] initWithDictionary:sceneDic];
                 [_sceneListMarr addObject:homeSceneModel];
@@ -327,16 +304,12 @@ static NSString *const IconURL = @"/my/add_head_pic";
                 if (isLastPage) {
                     [self.myCollectionView.mj_footer endRefreshingWithNoMoreData];
                     self.myCollectionView.mj_footer.hidden = YES;
-                } else  {
-                    [self.myCollectionView.mj_footer endRefreshing];
                 }
             }
-            
             [SVProgressHUD dismiss];
         } failure:^(FBRequest *request, NSError *error) {
             [SVProgressHUD showInfoWithStatus:[error localizedDescription]];
         }];
-
     }
 }
 
@@ -345,7 +318,6 @@ static NSString *const IconURL = @"/my/add_head_pic";
 -(void)netGetData{
     FBRequest *request = [FBAPI postWithUrlString:@"/user/user_info" requestDictionary:@{@"user_id":self.userId} delegate:self];
     [request startRequestSuccess:^(FBRequest *request, id result) {
-        NSLog(@"AD撒娇大时代撒旦&&&&&&&&result %@",result);
         NSDictionary *dataDict = result[@"data"];
         _chanelV.scenarioNumLabel.text = [NSString stringWithFormat:@"%@",dataDict[@"scene_count"]];
         _chanelV.fieldNumLabel.text = [NSString stringWithFormat:@"%@",dataDict[@"sight_count"]];
@@ -391,26 +363,22 @@ static NSString *const IconURL = @"/my/add_head_pic";
 }
 
 -(void)signleTap:(UITapGestureRecognizer*)sender{
-    NSLog(@"情景");
     self.type = @1;
     [self requestDataForOderList];
 }
 
 -(void)signleTap1:(UITapGestureRecognizer*)sender{
-    NSLog(@"场景");
     self.type = @2;
     [self requestDataForOderList];
 }
 
 -(void)signleTap2:(UITapGestureRecognizer*)sender{
-    NSLog(@"跳转到我的主页的关注的界面");
     MyPageFocusOnViewController *view = [[MyPageFocusOnViewController alloc] init];
     view.userId = self.userId;
     [self.navigationController pushViewController:view animated:YES];
 }
 
 -(void)signleTap3:(UITapGestureRecognizer*)sender{
-    NSLog(@"跳转到我的主页的粉丝的界面");
     MyFansViewController *view = [[MyFansViewController alloc] init];
     view.userId = self.userId;
     [self.navigationController pushViewController:view animated:YES];
@@ -546,6 +514,7 @@ static NSString *const IconURL = @"/my/add_head_pic";
             if (_sceneListMarr.count == 0) {
                 //空的
                 UICollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"UICollectionViewCellScenarioNon" forIndexPath:indexPath];
+                cell.userInteractionEnabled = NO;
                 ScenarioNonView *view = [ScenarioNonView getScenarioNonView];
                 if (self.isMySelf) {
                     view.tipLabel.text = @"你还没有发表过新场景哦，快来Fiu一下嘛";
@@ -569,6 +538,7 @@ static NSString *const IconURL = @"/my/add_head_pic";
             if (_fiuSceneList.count == 0) {
                 //空的
                 UICollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"UICollectionViewCellScenarioNon" forIndexPath:indexPath];
+                cell.userInteractionEnabled = NO;
                 ScenarioNonView *view = [ScenarioNonView getScenarioNonView];
                 if (self.isMySelf) {
                     view.tipLabel.text = @"每个情境都有故事，来都来了，讲讲你的故事吧";
@@ -612,7 +582,6 @@ static NSString *const IconURL = @"/my/add_head_pic";
 
 
 -(void)clickBackBtn:(UIButton*)sender{
-    NSLog(@"backBtn");
     [self.navigationController popViewControllerAnimated:YES];
 }
 
@@ -635,7 +604,6 @@ static NSString *const IconURL = @"/my/add_head_pic";
         request.flag = @"/follow/ajax_follow";
         [request startRequest];
     }
-
 }
 
 
@@ -751,7 +719,6 @@ static NSString *const IconURL = @"/my/add_head_pic";
     if ([request.flag isEqualToString:IconURL]) {
         NSString * message = [result objectForKey:@"message"];
         if ([result objectForKey:@"success"]) {
-            NSLog(@"背景图 %@",result);
             NSString * fileUrl = [[result objectForKey:@"data"] objectForKey:@"head_pic_url"];
             UserInfoEntity * userEntity = [UserInfoEntity defaultUserInfoEntity];
             userEntity.head_pic_url = fileUrl;
@@ -793,7 +760,6 @@ static NSString *const IconURL = @"/my/add_head_pic";
 
 
 -(void)shieldingBtn:(UIButton*)sender{
-    NSLog(@"拉黑");
 }
 
 -(void)cancelBtn:(UIButton*)sender{

@@ -58,7 +58,7 @@
             NSDictionary * dataDic = [result objectForKey:@"data"];
             entity.isLogin = [[dataDic objectForKey:@"is_login"] boolValue];
         } failure:^(FBRequest *request, NSError *error) {
-            [SVProgressHUD showInfoWithStatus:[error localizedDescription]];
+//            [SVProgressHUD showInfoWithStatus:[error localizedDescription]];
         }];
         //如果用户ID存在的话，说明已登陆
         
@@ -82,7 +82,7 @@
             NSDictionary * dataDic = [result objectForKey:@"data"];
             entity.isLogin = [[dataDic objectForKey:@"is_login"] boolValue];
         } failure:^(FBRequest *request, NSError *error) {
-            [SVProgressHUD showInfoWithStatus:[error localizedDescription]];
+//            [SVProgressHUD showInfoWithStatus:[error localizedDescription]];
         }];
         return YES;
     }
@@ -164,7 +164,7 @@
         NSDictionary * dataDic = [result objectForKey:@"data"];
         entity.isLogin = [[dataDic objectForKey:@"is_login"] boolValue];
     } failure:^(FBRequest *request, NSError *error) {
-        [SVProgressHUD showInfoWithStatus:[error localizedDescription]];
+//        [SVProgressHUD showInfoWithStatus:[error localizedDescription]];
     }];
     //如果用户ID存在的话，说明已登陆
     
