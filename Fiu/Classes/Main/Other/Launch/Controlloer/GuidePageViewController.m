@@ -41,6 +41,30 @@
     [self setImageView];
     //设置页码控制器
 //    [self setPageController];
+//    InviteCCodeViewController *vc = [[InviteCCodeViewController alloc] init];
+//    BOOL userIsFirstInstalled = [[NSUserDefaults standardUserDefaults] boolForKey:@"UserHasGuideView"];
+//    if (userIsFirstInstalled) {
+//        FBTabBarController * tabBarC = [[FBTabBarController alloc] init];
+//        self.window.rootViewController = tabBarC;
+//        UserInfoEntity *entity = [UserInfoEntity defaultUserInfoEntity];
+//        FBRequest *request = [FBAPI postWithUrlString:@"/auth/user" requestDictionary:@{@"user_id":entity.userId} delegate:self];
+//        [request startRequestSuccess:^(FBRequest *request, id result) {
+//            NSDictionary *dataDict = result[@"data"];
+//            NSDictionary *counterDict = [dataDict objectForKey:@"counter"];
+//            _counterModel = [CounterModel mj_objectWithKeyValues:counterDict];
+//            //判断小圆点是否消失
+//            if (![_counterModel.message_total_count isEqual:@0]) {
+//                [tabBarC.tabBar showBadgeWithIndex:4];
+//            }else{
+//                [tabBarC.tabBar hideBadgeWithIndex:4];
+//            }
+//        } failure:^(FBRequest *request, NSError *error) {
+//        }];
+//    }else{
+//        self.window.rootViewController = [[GuidePageViewController alloc] initWithPicArr:arr andRootVC:[[FBTabBarController alloc] init]];
+//        [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"UserHasGuideView"];
+//    }
+
 }
 
 //设置页码控制器

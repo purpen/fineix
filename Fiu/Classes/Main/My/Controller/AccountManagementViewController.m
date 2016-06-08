@@ -213,7 +213,6 @@ static NSString *const UpdateInfoURL = @"/my/update_profile";
     [request startRequestSuccess:^(FBRequest *request, id result) {
         NSDictionary *dataDict = [result objectForKey:@"data"];
         NSNumber *verifiedNum = [dataDict objectForKey:@"verified"];
-        NSLog(@"%@",entity.expert_label);
         NSString *str;
         str = NSLocalizedString(@"notAudit", nil);
         if ([verifiedNum isEqualToNumber:@1]){
