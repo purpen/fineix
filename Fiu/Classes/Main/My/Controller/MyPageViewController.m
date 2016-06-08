@@ -33,6 +33,8 @@
 #import "IntegralViewController.h"
 #import "UITabBar+badge.h"
 #import "ScenarioNonView.h"
+#import "ServiceViewController.h"
+
 
 
 @interface MyPageViewController ()<FBNavigationBarItemsDelegate,UICollectionViewDelegate,UICollectionViewDataSource>
@@ -396,6 +398,8 @@
 
 //服务条款按钮
 -(void)serviceBtn:(UIButton*)sender{
+    ServiceViewController *vc = [[ServiceViewController alloc] init];
+    [self.navigationController pushViewController:vc animated:YES];
 }
 
 //账户管理按钮

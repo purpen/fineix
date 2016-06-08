@@ -40,15 +40,107 @@
 @property(nonatomic,copy) NSString *business_card_cover_url;
 @property(nonatomic,copy) NSString *idd;
 
+/** 标志 */
+@property (nonatomic, strong) NSNumber *verified;
+
 @end
 
 @implementation TheOfficialCertificationViewController
 
--(void)viewWillAppear:(BOOL)animated{
-    [super viewWillAppear:animated];
+//-(void)viewWillAppear:(BOOL)animated{
+//    [super viewWillAppear:animated];
+//    FBRequest *request = [FBAPI postWithUrlString:@"/my/fetch_talent" requestDictionary:nil delegate:self];
+//    [request startRequestSuccess:^(FBRequest *request, id result) {
+//        NSDictionary *dataDict = [result objectForKey:@"data"];
+//        self.verified = [dataDict objectForKey:@"verified"];
+//        if ([[result objectForKey:@"verified"] isEqual:@(-1)]) {
+//            //第一次，要提交
+//            
+//        }else{
+//            //不是第一次，要编辑
+//            
+//            //获取数据------
+//            if (![dataDict[@"_id"] isKindOfClass:[NSNull class]]) {
+//                self.idd = dataDict[@"_id"];
+//            }
+//            if (![dataDict[@"label"] isKindOfClass:[NSNull class]]) {
+//                self.expert_label = dataDict[@"label"];
+//            }
+//            if (![dataDict[@"info"] isKindOfClass:[NSNull class]]) {
+//                self.info = dataDict[@"info"];
+//            }
+//            if (![dataDict[@"contact"] isKindOfClass:[NSNull class]]) {
+//                self.contact = dataDict[@"contact"];
+//            }
+//            if (![dataDict[@"id_card_cover_url"] isKindOfClass:[NSNull class]]) {
+//                self.id_card_cover_url = dataDict[@"id_card_cover_url"];
+//            }
+//            if (![dataDict[@"business_card_cover_url"] isKindOfClass:[NSNull class]]) {
+//                self.business_card_cover_url = dataDict[@"business_card_cover_url"];
+//            }
+//            //-----------
+//            
+//            //展示---------
+//            if (self.expert_label.length != 0) {
+//                IdentityTagModel *model = [[IdentityTagModel alloc] init];
+//                model.tags = self.expert_label;
+//                [self.selectedModelAry addObject:model];
+//                [self.selectedCollectionView reloadData];
+//                self.selectedCollectionView.hidden = NO;
+//                self.certView.deleAllBtn.hidden = self.selectedModelAry.count == 0;
+//            }
+//            if (self.info.length != 0) {
+//                self.certView.informationTF.text = self.info;
+//            }
+//            if (self.contact.length != 0) {
+//                self.certView.phoneTF.text = self.contact;
+//            }
+//            if (self.id_card_cover_url.length != 0) {
+//                [self.certView.idImageView sd_setImageWithURL:[NSURL URLWithString:self.id_card_cover_url]];
+//                NSData * data = [NSData dataWithContentsOfURL:[NSURL URLWithString:self.id_card_cover_url]];
+//                NSData * iconData = UIImageJPEGRepresentation([UIImage fixOrientation:[UIImage imageWithData:data]] , 0.5);
+//                _idIcon64Str = [iconData base64EncodedStringWithOptions:NSDataBase64Encoding64CharacterLineLength];
+//            }
+//            if (self.business_card_cover_url.length != 0) {
+//                [self.certView.cardImageView sd_setImageWithURL:[NSURL URLWithString:self.business_card_cover_url]];
+//                NSData * data = [NSData dataWithContentsOfURL:[NSURL URLWithString:self.business_card_cover_url]];
+//                NSData * iconData = UIImageJPEGRepresentation([UIImage fixOrientation:[UIImage imageWithData:data]] , 0.5);
+//                _cardIcon64Str = [iconData base64EncodedStringWithOptions:NSDataBase64Encoding64CharacterLineLength];
+//            }
+//            //----------
+//        }
+//    } failure:^(FBRequest *request, NSError *error) {
+//        
+//    }];
+//}
+
+- (void)viewDidLoad {
+    [super viewDidLoad];
+    // Do any additional setup after loading the view from its nib.
+    self.delegate = self;
+    self.navViewTitle.text = @"官方认证";
+    
+    [self.view addSubview:self.myScrollView];
+    self.myScrollView.contentSize = CGSizeMake(0, self.certView.frame.origin.y+self.certView.frame.size.height);
+    
+    NSArray *tagsAry = [NSArray arrayWithObjects:@"大拿",@"行家",@"行摄家",@"艺术范",@"手艺人",@"人来疯",@"赎回自由身",@"职业buyer", nil];
+    for (int i = 0; i< tagsAry.count; i++) {
+        IdentityTagModel *model = [[IdentityTagModel alloc] init];
+        model.tags = tagsAry[i];
+        [self.modelAry addObject:model];
+    }
+    
+    [self.certView.itemView addSubview:self.itemsCollectionView];
+    [self.certView.selectedView addSubview:self.selectedCollectionView];
+    self.selectedCollectionView.hidden = YES;
+    self.certView.deleAllBtn.hidden = YES;
+    [self.certView.deleAllBtn addTarget:self action:@selector(clickDeletAllBtn:) forControlEvents:UIControlEventTouchUpInside];
+    [self.certView.subBtn addTarget:self action:@selector(clickApplyBtn:) forControlEvents:UIControlEventTouchUpInside];
+    
     FBRequest *request = [FBAPI postWithUrlString:@"/my/fetch_talent" requestDictionary:nil delegate:self];
     [request startRequestSuccess:^(FBRequest *request, id result) {
         NSDictionary *dataDict = [result objectForKey:@"data"];
+        self.verified = [dataDict objectForKey:@"verified"];
         if ([[result objectForKey:@"verified"] isEqual:@(-1)]) {
             //第一次，要提交
             
@@ -110,30 +202,6 @@
     }];
 }
 
-- (void)viewDidLoad {
-    [super viewDidLoad];
-    // Do any additional setup after loading the view from its nib.
-    self.delegate = self;
-    self.navViewTitle.text = @"官方认证";
-    
-    [self.view addSubview:self.myScrollView];
-    self.myScrollView.contentSize = CGSizeMake(0, self.certView.frame.origin.y+self.certView.frame.size.height);
-    
-    NSArray *tagsAry = [NSArray arrayWithObjects:@"大拿",@"行家",@"行摄家",@"艺术范",@"手艺人",@"人来疯",@"赎回自由身",@"职业buyer", nil];
-    for (int i = 0; i< tagsAry.count; i++) {
-        IdentityTagModel *model = [[IdentityTagModel alloc] init];
-        model.tags = tagsAry[i];
-        [self.modelAry addObject:model];
-    }
-    
-    [self.certView.itemView addSubview:self.itemsCollectionView];
-    [self.certView.selectedView addSubview:self.selectedCollectionView];
-    self.selectedCollectionView.hidden = YES;
-    self.certView.deleAllBtn.hidden = YES;
-    [self.certView.deleAllBtn addTarget:self action:@selector(clickDeletAllBtn:) forControlEvents:UIControlEventTouchUpInside];
-    [self.certView.subBtn addTarget:self action:@selector(clickApplyBtn:) forControlEvents:UIControlEventTouchUpInside];
-}
-
 -(void)clickApplyBtn:(UIButton*)sender{
     if (self.certView.informationTF.text.length == 0 || self.selectedModelAry.count == 0 || self.certView.phoneTF.text.length==0 || _idIcon64Str.length==0 || _cardIcon64Str.length==0) {
         [SVProgressHUD showErrorWithStatus:@"请完善信息"];
@@ -142,25 +210,47 @@
         NSString *idStr;
         idStr = ((IdentityTagModel*)self.selectedModelAry[0]).tags;
         [SVProgressHUD showWithMaskType:SVProgressHUDMaskTypeClear];
-        FBRequest *requset = [FBAPI postWithUrlString:@"/my/talent_save" requestDictionary:@{
-                                                                                             @"id":self.idd,
-                                                                                             @"info":self.certView.informationTF.text,
-                                                                                             @"label":idStr,
-                                                                                             @"contact":self.certView.phoneTF.text,
-                                                                                             @"id_card_a_tmp":_idIcon64Str,
-                                                                                             @"business_card_tmp":_cardIcon64Str
-                                                                                             } delegate:self];
-        [requset startRequestSuccess:^(FBRequest *request, id result) {
-            if ([result objectForKey:@"success"]) {
-                [SVProgressHUD showSuccessWithStatus:@"提交成功"];
-//                AccountManagementViewController *vc = [[AccountManagementViewController alloc] init];
-//                [self.navigationController popToViewController:vc animated:YES];
-                [self.navigationController popViewControllerAnimated:YES];
-            }else{
-                [SVProgressHUD showErrorWithStatus:@"提交失败"];
-            }
-        } failure:^(FBRequest *request, NSError *error) {
-        }]; 
+        
+        if ([self.verified isEqual:@(-1)]) {
+            FBRequest *requset = [FBAPI postWithUrlString:@"/my/talent_save" requestDictionary:@{
+                                                                                                 @"info":self.certView.informationTF.text,
+                                                                                                 @"label":idStr,
+                                                                                                 @"contact":self.certView.phoneTF.text,
+                                                                                                 @"id_card_a_tmp":_idIcon64Str,
+                                                                                                 @"business_card_tmp":_cardIcon64Str
+                                                                                                 } delegate:self];
+            [requset startRequestSuccess:^(FBRequest *request, id result) {
+                if ([result objectForKey:@"success"]) {
+                    [SVProgressHUD showSuccessWithStatus:@"提交成功"];
+                    //                AccountManagementViewController *vc = [[AccountManagementViewController alloc] init];
+                    //                [self.navigationController popToViewController:vc animated:YES];
+                    [self.navigationController popViewControllerAnimated:YES];
+                }else{
+                    [SVProgressHUD showErrorWithStatus:@"提交失败"];
+                }
+            } failure:^(FBRequest *request, NSError *error) {
+            }];
+        }else{
+            FBRequest *requset = [FBAPI postWithUrlString:@"/my/talent_save" requestDictionary:@{
+                                                                                                 @"id":self.idd,
+                                                                                                 @"info":self.certView.informationTF.text,
+                                                                                                 @"label":idStr,
+                                                                                                 @"contact":self.certView.phoneTF.text,
+                                                                                                 @"id_card_a_tmp":_idIcon64Str,
+                                                                                                 @"business_card_tmp":_cardIcon64Str
+                                                                                                 } delegate:self];
+            [requset startRequestSuccess:^(FBRequest *request, id result) {
+                if ([result objectForKey:@"success"]) {
+                    [SVProgressHUD showSuccessWithStatus:@"提交成功"];
+                    //                AccountManagementViewController *vc = [[AccountManagementViewController alloc] init];
+                    //                [self.navigationController popToViewController:vc animated:YES];
+                    [self.navigationController popViewControllerAnimated:YES];
+                }else{
+                    [SVProgressHUD showErrorWithStatus:@"提交失败"];
+                }
+            } failure:^(FBRequest *request, NSError *error) {
+            }];
+        }
     }
 }
 

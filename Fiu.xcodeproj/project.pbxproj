@@ -432,6 +432,10 @@
 		1FCDCC7D1D0525A300C92E78 /* FocusNonView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1FCDCC7C1D0525A300C92E78 /* FocusNonView.m */; };
 		1FCDCC821D066D2700C92E78 /* SexSheetViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1FCDCC801D066D2700C92E78 /* SexSheetViewController.m */; };
 		1FCDCC831D066D2700C92E78 /* SexSheetViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1FCDCC811D066D2700C92E78 /* SexSheetViewController.xib */; };
+		1FCDCC871D07F50D00C92E78 /* ServiceViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1FCDCC851D07F50D00C92E78 /* ServiceViewController.m */; };
+		1FCDCC881D07F50D00C92E78 /* ServiceViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1FCDCC861D07F50D00C92E78 /* ServiceViewController.xib */; };
+		1FCDCC8D1D08085000C92E78 /* InviteCCodeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1FCDCC8B1D08085000C92E78 /* InviteCCodeViewController.m */; };
+		1FCDCC8E1D08085000C92E78 /* InviteCCodeViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1FCDCC8C1D08085000C92E78 /* InviteCCodeViewController.xib */; };
 		280045111C805B78005F5C2E /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 280045101C805B78005F5C2E /* CoreLocation.framework */; };
 		280045131C805B82005F5C2E /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 280045121C805B82005F5C2E /* QuartzCore.framework */; };
 		280045151C805B8C005F5C2E /* OpenGLES.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 280045141C805B8C005F5C2E /* OpenGLES.framework */; };
@@ -1283,6 +1287,12 @@
 		1FCDCC7F1D066D2700C92E78 /* SexSheetViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SexSheetViewController.h; sourceTree = "<group>"; };
 		1FCDCC801D066D2700C92E78 /* SexSheetViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SexSheetViewController.m; sourceTree = "<group>"; };
 		1FCDCC811D066D2700C92E78 /* SexSheetViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SexSheetViewController.xib; sourceTree = "<group>"; };
+		1FCDCC841D07F50D00C92E78 /* ServiceViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ServiceViewController.h; sourceTree = "<group>"; };
+		1FCDCC851D07F50D00C92E78 /* ServiceViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ServiceViewController.m; sourceTree = "<group>"; };
+		1FCDCC861D07F50D00C92E78 /* ServiceViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ServiceViewController.xib; sourceTree = "<group>"; };
+		1FCDCC8A1D08085000C92E78 /* InviteCCodeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InviteCCodeViewController.h; sourceTree = "<group>"; };
+		1FCDCC8B1D08085000C92E78 /* InviteCCodeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InviteCCodeViewController.m; sourceTree = "<group>"; };
+		1FCDCC8C1D08085000C92E78 /* InviteCCodeViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = InviteCCodeViewController.xib; sourceTree = "<group>"; };
 		280045101C805B78005F5C2E /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
 		280045121C805B82005F5C2E /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		280045141C805B8C005F5C2E /* OpenGLES.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGLES.framework; path = System/Library/Frameworks/OpenGLES.framework; sourceTree = SDKROOT; };
@@ -2551,6 +2561,7 @@
 		1F2A8DE31CF40277005116C7 /* Other */ = {
 			isa = PBXGroup;
 			children = (
+				1FCDCC891D08082900C92E78 /* InviteCode */,
 				1F2A8DE41CF40277005116C7 /* Bonus */,
 				1F2A8DF61CF40277005116C7 /* Certification */,
 				1F2A8E0A1CF40277005116C7 /* DeliveryAddress */,
@@ -2768,6 +2779,9 @@
 				1F1AF3AF1CF58A6B00CAA525 /* IntegralViewController.h */,
 				1F1AF3B01CF58A6B00CAA525 /* IntegralViewController.m */,
 				1F1AF3B11CF58A6B00CAA525 /* IntegralViewController.xib */,
+				1FCDCC841D07F50D00C92E78 /* ServiceViewController.h */,
+				1FCDCC851D07F50D00C92E78 /* ServiceViewController.m */,
+				1FCDCC861D07F50D00C92E78 /* ServiceViewController.xib */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -3475,6 +3489,16 @@
 			path = Other;
 			sourceTree = "<group>";
 		};
+		1FCDCC891D08082900C92E78 /* InviteCode */ = {
+			isa = PBXGroup;
+			children = (
+				1FCDCC8A1D08085000C92E78 /* InviteCCodeViewController.h */,
+				1FCDCC8B1D08085000C92E78 /* InviteCCodeViewController.m */,
+				1FCDCC8C1D08085000C92E78 /* InviteCCodeViewController.xib */,
+			);
+			path = InviteCode;
+			sourceTree = "<group>";
+		};
 		40FF7B08F78941EBD75F7965 /* Pods */ = {
 			isa = PBXGroup;
 			children = (
@@ -3870,6 +3894,8 @@
 				1F2A90781CF40277005116C7 /* RefundmentViewController.xib in Resources */,
 				1F2A90841CF40277005116C7 /* CommentView.xib in Resources */,
 				1F2A91141CF40495005116C7 /* UMSCommentInputController.xib in Resources */,
+				1FCDCC881D07F50D00C92E78 /* ServiceViewController.xib in Resources */,
+				1FCDCC8E1D08085000C92E78 /* InviteCCodeViewController.xib in Resources */,
 				1F2A91181CF40495005116C7 /* UMSLoginViewController.xib in Resources */,
 				1F2A90191CF40277005116C7 /* BonusViewController.xib in Resources */,
 				1F2A90201CF40277005116C7 /* InvalidBonusCell.xib in Resources */,
@@ -4069,6 +4095,7 @@
 				1F2A8F9B1CF40277005116C7 /* SceneInfoProduct.m in Sources */,
 				1F2A8F521CF40277005116C7 /* FBStickersContainer.m in Sources */,
 				1F2A90441CF40277005116C7 /* FBLoginViewController.m in Sources */,
+				1FCDCC8D1D08085000C92E78 /* InviteCCodeViewController.m in Sources */,
 				1F2A8F761CF40277005116C7 /* RollImage.m in Sources */,
 				1F2A8FD51CF40277005116C7 /* FbGoodsItemsTableViewCell.m in Sources */,
 				1F2A90921CF40277005116C7 /* CommentNViewController.m in Sources */,
@@ -4266,6 +4293,7 @@
 				1F2A8F3F1CF40277005116C7 /* FindGoodsModelRow.m in Sources */,
 				1F2A8FAE1CF40277005116C7 /* FBSureOrderViewController.m in Sources */,
 				1F2A8F741CF40277005116C7 /* FiuSceneLocation.m in Sources */,
+				1FCDCC871D07F50D00C92E78 /* ServiceViewController.m in Sources */,
 				1F2A90311CF40277005116C7 /* DirectMessagesViewController.m in Sources */,
 				1F2A8FC61CF40277005116C7 /* GoodsInfo.m in Sources */,
 				1F2A90451CF40277005116C7 /* FBSignupViewController.m in Sources */,

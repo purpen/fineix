@@ -318,6 +318,7 @@ static NSString *const IconURL = @"/my/add_head_pic";
 -(void)netGetData{
     FBRequest *request = [FBAPI postWithUrlString:@"/user/user_info" requestDictionary:@{@"user_id":self.userId} delegate:self];
     [request startRequestSuccess:^(FBRequest *request, id result) {
+//        NSLog(@" hhhhhhhh   %@",result); 
         NSDictionary *dataDict = result[@"data"];
         _chanelV.scenarioNumLabel.text = [NSString stringWithFormat:@"%@",dataDict[@"scene_count"]];
         _chanelV.fieldNumLabel.text = [NSString stringWithFormat:@"%@",dataDict[@"sight_count"]];

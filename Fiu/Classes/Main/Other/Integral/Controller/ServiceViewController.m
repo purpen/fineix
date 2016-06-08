@@ -1,34 +1,33 @@
 //
-//  IntegralViewController.m
+//  ServiceViewController.m
 //  Fiu
 //
-//  Created by THN-Dong on 16/5/25.
+//  Created by THN-Dong on 16/6/8.
 //  Copyright © 2016年 taihuoniao. All rights reserved.
 //
 
-#import "IntegralViewController.h"
+#import "ServiceViewController.h"
 #import "SVProgressHUD.h"
 #import "FBRequest.h"
 
-@interface IntegralViewController ()<UIWebViewDelegate,FBRequestDelegate>
-@property (weak, nonatomic) IBOutlet UIWebView *integralWebView;
+@interface ServiceViewController ()<UIWebViewDelegate,FBRequestDelegate>
+@property (weak, nonatomic) IBOutlet UIWebView *serviceWebView;
 
 @end
 
-@implementation IntegralViewController
+@implementation ServiceViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
-    self.navViewTitle.text = @"积分";
+    self.navViewTitle.text = @"服务条款";
     FBRequest * request = [FBAPI postWithUrlString:@"/auth/check_login" requestDictionary:nil delegate:self];
     NSDictionary *dict = [request transformRequestDictionary];
-    NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"http://m.taihuoniao.com/app/api/view/fiu_point?uuid=%@&from_to=1&app_type=2",[dict objectForKey:@"uuid"]]];
+    NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"http://m.taihuoniao.com/app/api/view/fiu_service_term?uuid=%@&from_to=1&app_type=2",[dict objectForKey:@"uuid"]]];
     NSURLRequest *request1 = [NSURLRequest requestWithURL:url];
-    [self.integralWebView loadRequest:request1];
-    self.integralWebView.delegate = self;
+    [self.serviceWebView loadRequest:request1];
+    self.serviceWebView.delegate = self;
 }
-
 
 //UIWebViewDelegate
 //网页开始加载时出现进度条
@@ -43,7 +42,6 @@
 -(void)webView:(UIWebView *)webView didFailLoadWithError:(NSError *)error{
     [SVProgressHUD showInfoWithStatus:error.localizedDescription];
 }
-
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
