@@ -221,14 +221,14 @@
         [_userName mas_makeConstraints:^(MASConstraintMaker *make) {
             make.size.mas_equalTo(CGSizeMake(150, 15));
             make.top.equalTo(_userHeader.mas_top).with.offset(0);
-            make.left.equalTo(_userHeader.mas_right).with.offset(10);
+            make.left.equalTo(_userHeader.mas_right).with.offset(6);
         }];
         
         [_userView addSubview:self.userStar];
         [_userStar mas_makeConstraints:^(MASConstraintMaker *make) {
             make.size.mas_equalTo(CGSizeMake(0, 14));
             make.bottom.equalTo(_userHeader.mas_bottom).with.offset(0);
-            make.left.equalTo(_userHeader.mas_right).with.offset(6);
+            make.left.equalTo(self.userName.mas_left).with.offset(0);
         }];
         
         [_userView addSubview:self.userProfile];
