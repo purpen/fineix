@@ -128,17 +128,49 @@
 -(void)clickSkips:(UIButton*)sender{
     if ([_mainController isKindOfClass:[FBTabBarController class]]) {
 
-        BOOL codeFlag = [[NSUserDefaults standardUserDefaults] boolForKey:@"codeFlag"];
-        if (codeFlag) {
-            FBTabBarController *tab = [[FBTabBarController alloc] init];
-            [tab setSelectedIndex:0];
-            [self presentViewController:tab animated:YES completion:nil];
-        }else{
-            [self presentViewController:[[InviteCCodeViewController alloc] init] animated:YES completion:nil];
-        }
-
-        
-        
+        __block BOOL invitation;
+        FBRequest *request = [FBAPI postWithUrlString:@"/gateway/is_invited" requestDictionary:nil delegate:self];
+        [request startRequestSuccess:^(FBRequest *request, id result) {
+            NSDictionary *dict = [result objectForKey:@"data"];
+            NSNumber *code = [dict objectForKey:@"status"];
+            if ([code isEqual:@(1)]) {
+                //开启了邀请功能
+                invitation = YES;
+                BOOL codeFlag = [[NSUserDefaults standardUserDefaults] boolForKey:@"codeFlag"];
+                if (codeFlag) {
+                    FBTabBarController *tab = [[FBTabBarController alloc] init];
+                    [tab setSelectedIndex:0];
+                    [self presentViewController:tab animated:YES completion:nil];
+                }else{
+                    if (invitation) {
+                        [self presentViewController:[[InviteCCodeViewController alloc] init] animated:YES completion:nil];
+                    }else{
+                        FBTabBarController *tab = [[FBTabBarController alloc] init];
+                        [tab setSelectedIndex:0];
+                        [self presentViewController:tab animated:YES completion:nil];
+                    }
+                }
+            }else if([code isEqual:@(0)]){
+                //没有开启邀请功能
+                invitation = NO;
+                BOOL codeFlag = [[NSUserDefaults standardUserDefaults] boolForKey:@"codeFlag"];
+                if (codeFlag) {
+                    FBTabBarController *tab = [[FBTabBarController alloc] init];
+                    [tab setSelectedIndex:0];
+                    [self presentViewController:tab animated:YES completion:nil];
+                }else{
+                    if (invitation) {
+                        [self presentViewController:[[InviteCCodeViewController alloc] init] animated:YES completion:nil];
+                    }else{
+                        FBTabBarController *tab = [[FBTabBarController alloc] init];
+                        [tab setSelectedIndex:0];
+                        [self presentViewController:tab animated:YES completion:nil];
+                    }
+                }
+            }
+        } failure:^(FBRequest *request, NSError *error) {
+            
+        }];
     }else{
         [self dismissViewControllerAnimated:YES completion:nil];
     }

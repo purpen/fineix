@@ -192,6 +192,26 @@ NSString *const determineLogin = @"/auth/check_login";
     NSArray *arr = [NSArray arrayWithObjects:@"Guide_one",@"Guide_two",@"Guide_three",@"Guide_four", nil];
     //    使用的时候用key+版本号替换UserHasGuideView
     //    这样容易控制每个版本都可以显示引导图
+    
+    __block BOOL invitation;
+    FBRequest *request = [FBAPI postWithUrlString:@"/gateway/is_invited" requestDictionary:nil delegate:self];
+    [request startRequestSuccess:^(FBRequest *request, id result) {
+        NSDictionary *dict = [result objectForKey:@"data"];
+        NSNumber *code = [dict objectForKey:@"status"];
+        if ([code isEqual:@(1)]) {
+            //开启了邀请功能
+            invitation = YES;
+        }else if([code isEqual:@(0)]){
+            //没有开启邀请功能
+            invitation = NO;
+        }
+    } failure:^(FBRequest *request, NSError *error) {
+        
+    }];
+    
+    
+    
+    
     BOOL codeFlag = [[NSUserDefaults standardUserDefaults] boolForKey:@"codeFlag"];
     BOOL userIsFirstInstalled = [[NSUserDefaults standardUserDefaults] boolForKey:@"UserHasGuideView"];
     if (userIsFirstInstalled && codeFlag) {
@@ -215,7 +235,26 @@ NSString *const determineLogin = @"/auth/check_login";
         self.window.rootViewController = [[GuidePageViewController alloc] initWithPicArr:arr andRootVC:[[FBTabBarController alloc] init]];
         [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"UserHasGuideView"];
     }else if (userIsFirstInstalled && !codeFlag){
-        self.window.rootViewController = [[InviteCCodeViewController alloc] init];
+        if (invitation) {
+            self.window.rootViewController = [[InviteCCodeViewController alloc] init];
+        }else{
+            FBTabBarController * tabBarC = [[FBTabBarController alloc] init];
+            self.window.rootViewController = tabBarC;
+            UserInfoEntity *entity = [UserInfoEntity defaultUserInfoEntity];
+            FBRequest *request = [FBAPI postWithUrlString:@"/auth/user" requestDictionary:@{@"user_id":entity.userId} delegate:self];
+            [request startRequestSuccess:^(FBRequest *request, id result) {
+                NSDictionary *dataDict = result[@"data"];
+                NSDictionary *counterDict = [dataDict objectForKey:@"counter"];
+                _counterModel = [CounterModel mj_objectWithKeyValues:counterDict];
+                //判断小圆点是否消失
+                if (![_counterModel.message_total_count isEqual:@0]) {
+                    [tabBarC.tabBar showBadgeWithIndex:4];
+                }else{
+                    [tabBarC.tabBar hideBadgeWithIndex:4];
+                }
+            } failure:^(FBRequest *request, NSError *error) {
+            }];
+        }
     }
 }
 
