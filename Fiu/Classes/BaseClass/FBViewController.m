@@ -31,7 +31,7 @@ static NSString *const URLUserIsLogin = @"/user/user_info";
     [self addNavBackBtn];
     
     [self getGoodsCarNumData];
-    self.formalUrl = @"http://t.taihuoniao.com/app/api";
+    self.formalUrl = @"http://m.taihuoniao.com/app/api";
 }
 
 #pragma mark - 获取购物车数量

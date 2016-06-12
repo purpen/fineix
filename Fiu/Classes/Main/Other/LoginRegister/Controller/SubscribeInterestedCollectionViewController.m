@@ -140,9 +140,6 @@ static NSString * const reuseIdentifier = @"Cell";
     FBRequest *request = [FBAPI postWithUrlString:recommendedScenarioURL requestDictionary:params delegate:self];
     request.flag = recommendedScenarioURL;
     [request startRequest];
-    
-    
-
 }
 
 -(void)requestSucess:(FBRequest *)request result:(id)result{
@@ -167,7 +164,6 @@ static NSString * const reuseIdentifier = @"Cell";
         [self.collectionView reloadData];
         _numV.totalNumberLabel.text = [NSString stringWithFormat:@"/%d",(int)_modelAry.count];
     }
-    
 }
 
 
@@ -208,7 +204,6 @@ static NSString * const reuseIdentifier = @"Cell";
     
     int page = (int)(_scrollView.contentOffset.x/(250/667.0*kScreenHeight+30/667.0*kScreenHeight)+0.5);
     _numV.currentNumberLabel.text = [NSString stringWithFormat:@"%d",page+1];
-    
 }
 
 
