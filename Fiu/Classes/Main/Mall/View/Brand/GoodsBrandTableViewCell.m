@@ -78,7 +78,6 @@
         make.top.equalTo(self.brandBgImg.mas_bottom).with.offset(25);
         make.left.equalTo(self.mas_left).with.offset(15);
     }];
-    
 }
 
 #pragma mark - 品牌背景
@@ -86,6 +85,7 @@
     if (!_brandBgImg) {
         _brandBgImg = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 210)];
         _brandBgImg.contentMode = UIViewContentModeScaleAspectFill;
+        _brandBgImg.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"Defaul_Bg_420"]];
     }
     return _brandBgImg;
 }
