@@ -174,10 +174,18 @@ static NSString *const IconURL = @"/my/add_head_pic";
     self.tabBarController.tabBar.hidden = YES;
     //进行网络请求
     [self netGetData];
-    
-    [self requestDataForOderList];
 
-    
+    if ([self.type isEqualToNumber:@1]) {
+        self.myCollectionView.mj_footer = [MJRefreshAutoNormalFooter footerWithRefreshingBlock:^{
+            [self loadMoreData];
+        }];
+        [self requestDataForOderListOperation];
+    }else if([self.type isEqualToNumber:@2]){
+        self.myCollectionView.mj_footer = [MJRefreshAutoNormalFooter footerWithRefreshingBlock:^{
+            [self loadMoreDataM];
+        }];
+        [self requestDataForOderListOperation];
+    }
 }
 
 -(void)loadMoreDataM{
@@ -185,6 +193,7 @@ static NSString *const IconURL = @"/my/add_head_pic";
         [self requestDataForOderListOperation];
     } else {
         [self.myCollectionView.mj_footer endRefreshing];
+        self.myCollectionView.mj_footer.hidden = YES;
     }
 }
 
@@ -193,35 +202,16 @@ static NSString *const IconURL = @"/my/add_head_pic";
         [self requestDataForOderListOperation];
     } else {
         [self.myCollectionView.mj_footer endRefreshing];
-    }
-}
-
-- (void)requestDataForOderList
-{
-    if ([self.type isEqualToNumber:@1]) {
-        self.myCollectionView.mj_footer = [MJRefreshAutoNormalFooter footerWithRefreshingBlock:^{
-            [self loadMoreData];
-        }];
-        _n = 0;
-        [_fiuSceneList removeAllObjects];
-        [_fiuSceneIdList removeAllObjects];
-        [self requestDataForOderListOperation];
-    }else if([self.type isEqualToNumber:@2]){
-        self.myCollectionView.mj_footer = [MJRefreshAutoNormalFooter footerWithRefreshingBlock:^{
-            [self loadMoreDataM];
-        }];
-        _m = 0;
-        [_sceneListMarr removeAllObjects];
-        [_sceneIdMarr removeAllObjects];
-        [self requestDataForOderListOperation];
+        self.myCollectionView.mj_footer.hidden = YES;
     }
 }
 
 //上拉下拉分页请求订单列表
 - (void)requestDataForOderListOperation
 {
+//    self.myCollectionView.mj_footer.hidden = YES;
     if ([self.type isEqualToNumber:@1]) {
-        self.myCollectionView.mj_footer.hidden = YES;
+        
         //进行情景的网络请求
 //        [SVProgressHUD show];
         FBRequest *request = [FBAPI postWithUrlString:@"/scene_scene/" requestDictionary:@{@"page":@(_n+1),@"size":@6,@"sort":@0,@"user_id":self.userId} delegate:self];
@@ -236,10 +226,6 @@ static NSString *const IconURL = @"/my/add_head_pic";
             [self.myCollectionView reloadData];
             _n = [[[result objectForKey:@"data"] objectForKey:@"current_page"] intValue];
             _totalN = [[[result objectForKey:@"data"] objectForKey:@"total_page"] intValue];
-            if (_totalN == 0) {
-                self.myCollectionView.mj_footer.state = MJRefreshStateNoMoreData;
-                self.myCollectionView.mj_footer.hidden = YES;
-            }
             
             BOOL isLastPage = (_n == _totalN);
             
@@ -263,6 +249,11 @@ static NSString *const IconURL = @"/my/add_head_pic";
                 }
             }
             
+            if (_totalN == 0) {
+                self.myCollectionView.mj_footer.state = MJRefreshStateNoMoreData;
+                self.myCollectionView.mj_footer.hidden = YES;
+            }
+            
             [SVProgressHUD dismiss];
         } failure:^(FBRequest *request, NSError *error) {
             [SVProgressHUD showInfoWithStatus:[error localizedDescription]];
@@ -270,7 +261,6 @@ static NSString *const IconURL = @"/my/add_head_pic";
     }else if ([self.type isEqualToNumber:@2]){
         //进行场景的网络请求
 //        [SVProgressHUD show];
-        self.myCollectionView.mj_footer.hidden = YES;
         FBRequest *request = [FBAPI postWithUrlString:@"/scene_sight/" requestDictionary:@{@"page":@(_m+1),@"size":@10,@"sort":@0,@"user_id":self.userId} delegate:self];
         [request startRequestSuccess:^(FBRequest *request, id result) {
             NSArray *sceneArr = [[result valueForKey:@"data"] valueForKey:@"rows"];
@@ -365,12 +355,26 @@ static NSString *const IconURL = @"/my/add_head_pic";
 
 -(void)signleTap:(UITapGestureRecognizer*)sender{
     self.type = @1;
-    [self requestDataForOderList];
+    _n = 0;
+    [_fiuSceneList removeAllObjects];
+    [_fiuSceneIdList removeAllObjects];
+    [self requestDataForOderListOperation];
+    _chanelV.scenarioView.userInteractionEnabled = NO;
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+        _chanelV.scenarioView.userInteractionEnabled = YES;
+    });
 }
 
 -(void)signleTap1:(UITapGestureRecognizer*)sender{
     self.type = @2;
-    [self requestDataForOderList];
+    _m = 0;
+    [_sceneListMarr removeAllObjects];
+    [_sceneIdMarr removeAllObjects];
+    [self requestDataForOderListOperation];
+    _chanelV.fieldView.userInteractionEnabled = NO;
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+        _chanelV.fieldView.userInteractionEnabled = YES;
+    });
 }
 
 -(void)signleTap2:(UITapGestureRecognizer*)sender{
