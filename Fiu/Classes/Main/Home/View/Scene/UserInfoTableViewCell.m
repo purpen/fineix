@@ -422,12 +422,18 @@
 - (void)titleTextStyle:(NSString *)title withBgColor:(UIColor *)color {
     if ([title length] < 8) {
         _titleText.font = [UIFont systemFontOfSize:40];
-    } else if ([title length] >= 8 && [title length] < 12) {
-        _titleText.font = [UIFont systemFontOfSize:26];
-    } else if ([title length] >= 12) {
-        _titleText.font = [UIFont systemFontOfSize:20];
         [_titleText mas_updateConstraints:^(MASConstraintMaker *make) {
             make.size.mas_equalTo(CGSizeMake(240, 56));
+        }];
+    } else if ([title length] >= 8 && [title length] < 13) {
+        _titleText.font = [UIFont systemFontOfSize:26];
+        [_titleText mas_updateConstraints:^(MASConstraintMaker *make) {
+            make.size.mas_equalTo(CGSizeMake(240, 36));
+        }];
+    } else if ([title length] >= 13) {
+        _titleText.font = [UIFont systemFontOfSize:20];
+        [_titleText mas_updateConstraints:^(MASConstraintMaker *make) {
+            make.size.mas_equalTo(CGSizeMake(240, 30));
         }];
     }
     NSMutableAttributedString * titleText = [[NSMutableAttributedString alloc] initWithString:title];

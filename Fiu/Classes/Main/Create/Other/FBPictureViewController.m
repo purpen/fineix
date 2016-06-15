@@ -63,6 +63,11 @@
     [self.navView addSubview:self.doneBtn];
 }
 
+//  关闭按钮
+- (void)addCloseBtn {
+    [self.navView addSubview:self.closeBtn];
+}
+
 //  取消发布
 - (void)addCancelDoneButton {
     [self.navView addSubview:self.cancelDoneBtn];
@@ -82,7 +87,7 @@
     return _navView;
 }
 
-#pragma mark -  页面的标题
+#pragma mark - 页面的标题
 - (UILabel *)navTitle {
     if (!_navTitle) {
         _navTitle = [[UILabel alloc] initWithFrame:CGRectMake(50, 0, (SCREEN_WIDTH - 100), 50)];
@@ -130,7 +135,7 @@
 #pragma mark - 关闭
 - (UIButton *)closeBtn {
     if (!_closeBtn) {
-        _closeBtn = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 44, 44)];
+        _closeBtn = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 50, 50)];
         [_closeBtn setImage:[UIImage imageNamed:@"icon_cancel_black"] forState:(UIControlStateNormal)];
         [_closeBtn addTarget:self action:@selector(closeBtnClick) forControlEvents:(UIControlEventTouchUpInside)];
     }

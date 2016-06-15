@@ -54,7 +54,7 @@ static NSString *const URLReleaseFiuScenen = @"/scene_scene/save";
     NSString * title = [self.scenceView.title.text stringByReplacingOccurrencesOfString:@" " withString:@""];
     NSString * des = [self.scenceView.content.text stringByReplacingOccurrencesOfString:@" " withString:@""];
 
-    if ([self.lng length] <= 0 || [title isEqualToString:@""] || [des isEqualToString:@""] || [self.addView.location.text isEqualToString:@""] || self.tagS.length <=0 || self.fSceneId.length <= 0) {
+    if ([self.lng length] <= 0 || [title isEqualToString:@""] || [des isEqualToString:NSLocalizedString(@"addDescription", nil)] || [des isEqualToString:@""] || [self.addView.location.text isEqualToString:@""] || self.tagS.length <=0 || self.fSceneId.length <= 0) {
         [SVProgressHUD showInfoWithStatus:@"填写未完成"];
 
     } else if (title.length > 20) {
@@ -100,7 +100,7 @@ static NSString *const URLReleaseFiuScenen = @"/scene_scene/save";
     NSString * title = [self.scenceView.title.text stringByReplacingOccurrencesOfString:@" " withString:@""];
     NSString * des = [self.scenceView.content.text stringByReplacingOccurrencesOfString:@" " withString:@""];
     
-    if ([self.lng length] <= 0 || [title isEqualToString:@""] || [des isEqualToString:@""] || [self.addView.location.text isEqualToString:@""] || self.tagS.length <=0) {
+    if ([self.lng length] <= 0 || [title isEqualToString:@""] || [des isEqualToString:NSLocalizedString(@"addFiuSceneDes", nil)] || [des isEqualToString:@""] || [self.addView.location.text isEqualToString:@""] || self.tagS.length <=0) {
         [SVProgressHUD showInfoWithStatus:@"填写未完成"];
     } else if (title.length > 20) {
         [SVProgressHUD showInfoWithStatus:@"请输入20字以内的标题"];

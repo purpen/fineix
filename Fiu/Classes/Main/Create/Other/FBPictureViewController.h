@@ -62,6 +62,11 @@
 - (void)addDoneButton;
 
 /*
+ *  关闭按钮
+ */
+- (void)addCloseBtn;
+
+/*
  *  视图的分割线
  */
 - (void)addLine;

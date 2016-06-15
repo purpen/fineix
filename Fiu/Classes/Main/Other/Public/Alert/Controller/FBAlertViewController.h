@@ -15,6 +15,7 @@ typedef void(^DeleteScene)();
 
 @interface FBAlertViewController : UIViewController
 
+@pro_strong NSString        *   type;
 @pro_strong UIButton        *   closeBtn;
 @pro_strong NSString        *   targetId;
 @pro_strong UIView          *   alertView;

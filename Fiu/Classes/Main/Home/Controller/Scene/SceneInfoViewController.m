@@ -542,6 +542,7 @@ static NSString *const URLDeleteScene = @"/scene_sight/delete";
     }
     alertVC.modalPresentationStyle = UIModalPresentationOverCurrentContext;
     alertVC.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;
+    alertVC.type = @"scene";
     alertVC.targetId = self.sceneId;
     alertVC.sceneData = _shareDataDict;
     alertVC.openCommentVc = ^{

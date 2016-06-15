@@ -482,6 +482,7 @@
 		D83A64391C8E7EC5003DB8BB /* CoreMedia.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D83A64381C8E7EC5003DB8BB /* CoreMedia.framework */; };
 		D83A643B1C8E7ED2003DB8BB /* CoreImage.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D83A643A1C8E7ED2003DB8BB /* CoreImage.framework */; };
 		D8615C121D0D794800C12FA2 /* Fiu.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = D8615C111D0D794800C12FA2 /* Fiu.mp4 */; };
+		D8615C551D0FDC4E00C12FA2 /* EditViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D8615C541D0FDC4E00C12FA2 /* EditViewController.m */; };
 		D87B69BF1CC726BA00199EFE /* FBRollImages.m in Sources */ = {isa = PBXBuildFile; fileRef = D87B69BB1CC726BA00199EFE /* FBRollImages.m */; };
 		D87B69C01CC726BA00199EFE /* GroupHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = D87B69BD1CC726BA00199EFE /* GroupHeaderView.m */; };
 		D87B69E11CC7274900199EFE /* FBMenuView.m in Sources */ = {isa = PBXBuildFile; fileRef = D87B69DF1CC7274900199EFE /* FBMenuView.m */; };
@@ -1370,6 +1371,8 @@
 		D83A64381C8E7EC5003DB8BB /* CoreMedia.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMedia.framework; path = System/Library/Frameworks/CoreMedia.framework; sourceTree = SDKROOT; };
 		D83A643A1C8E7ED2003DB8BB /* CoreImage.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreImage.framework; path = System/Library/Frameworks/CoreImage.framework; sourceTree = SDKROOT; };
 		D8615C111D0D794800C12FA2 /* Fiu.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; name = Fiu.mp4; path = ../../../Desktop/Fiu.mp4; sourceTree = "<group>"; };
+		D8615C531D0FDC4E00C12FA2 /* EditViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EditViewController.h; sourceTree = "<group>"; };
+		D8615C541D0FDC4E00C12FA2 /* EditViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EditViewController.m; sourceTree = "<group>"; };
 		D87B69BA1CC726BA00199EFE /* FBRollImages.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FBRollImages.h; sourceTree = "<group>"; };
 		D87B69BB1CC726BA00199EFE /* FBRollImages.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FBRollImages.m; sourceTree = "<group>"; };
 		D87B69BC1CC726BA00199EFE /* GroupHeaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GroupHeaderView.h; sourceTree = "<group>"; };
@@ -1518,6 +1521,7 @@
 		1F2A8BD01CF40276005116C7 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
+				D8615C521D0FDA5100C12FA2 /* Edit */,
 				D8E3AEA61CFC9B84006E5E8C /* CreateFiuScene */,
 				D8E3AEA71CFC9B84006E5E8C /* CreateScene */,
 				1F2A8BDE1CF40276005116C7 /* Location */,
@@ -3734,6 +3738,15 @@
 			path = ShareInfo;
 			sourceTree = "<group>";
 		};
+		D8615C521D0FDA5100C12FA2 /* Edit */ = {
+			isa = PBXGroup;
+			children = (
+				D8615C531D0FDC4E00C12FA2 /* EditViewController.h */,
+				D8615C541D0FDC4E00C12FA2 /* EditViewController.m */,
+			);
+			path = Edit;
+			sourceTree = "<group>";
+		};
 		D87B69B91CC726BA00199EFE /* Category */ = {
 			isa = PBXGroup;
 			children = (
@@ -4031,6 +4044,7 @@
 				1F2A8F6F1CF40277005116C7 /* FiuSceneInfo.m in Sources */,
 				1F2A909C1CF40277005116C7 /* ShareViewController.m in Sources */,
 				1F2A8FF01CF40277005116C7 /* HomePageViewController.m in Sources */,
+				D8615C551D0FDC4E00C12FA2 /* EditViewController.m in Sources */,
 				1F2A90621CF40277005116C7 /* SystemInformsViewController.m in Sources */,
 				1F2A8F9A1CF40277005116C7 /* SceneInfoLocation.m in Sources */,
 				1F2A8F411CF40277005116C7 /* MarkGoodsData.m in Sources */,

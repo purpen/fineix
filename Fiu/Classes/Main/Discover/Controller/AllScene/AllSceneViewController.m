@@ -11,6 +11,7 @@
 #import "AllSceneCollectionViewCell.h"
 #import "FiuSceneViewController.h"
 #import "FiuSceneInfoData.h"
+#import "FBRefresh.h"
 
 static NSString *const URLAllFiuSceneList = @"/scene_scene/";
 
@@ -50,7 +51,6 @@ static NSString *const URLAllFiuSceneList = @"/scene_scene/";
 
 #pragma mark - 网络请求
 - (void)networkAllFiuSceneList {
-    [SVProgressHUD show];
     self.allSceneListRequest = [FBAPI getWithUrlString:URLAllFiuSceneList requestDictionary:@{@"stick":@"0", @"size":@"10", @"page":@(self.currentpageNum + 1)} delegate:self];
     [self.allSceneListRequest startRequestSuccess:^(FBRequest *request, id result) {
         NSArray * sceneArr = [[result valueForKey:@"data"] valueForKey:@"rows"];
@@ -85,7 +85,6 @@ static NSString *const URLAllFiuSceneList = @"/scene_scene/";
                 [self.allSceneView.mj_footer endRefreshing];
             }
         }
-        [SVProgressHUD dismiss];
         
     } failure:^(FBRequest *request, NSError *error) {
         
@@ -114,14 +113,11 @@ static NSString *const URLAllFiuSceneList = @"/scene_scene/";
         _allSceneView.showsHorizontalScrollIndicator = NO;
         [_allSceneView registerClass:[AllSceneCollectionViewCell class] forCellWithReuseIdentifier:@"allSceneCollectionViewCellID"];
         
-        _allSceneView.mj_header = [MJRefreshNormalHeader headerWithRefreshingBlock:^{
-            [self.allFiuSceneMarr removeAllObjects];
-            [self.allFiuSceneIdMarr removeAllObjects];
-            
-            self.currentpageNum = 0;
-            [self networkAllFiuSceneList];
+        FBRefresh * header = [FBRefresh headerWithRefreshingBlock:^{
+            [self loadNewData];
         }];
-        
+        _allSceneView.mj_header = header;
+
         _allSceneView.mj_footer = [MJRefreshAutoNormalFooter footerWithRefreshingBlock:^{
             if (self.currentpageNum < self.totalPageNum) {
                 [self networkAllFiuSceneList];
@@ -131,6 +127,14 @@ static NSString *const URLAllFiuSceneList = @"/scene_scene/";
         }];
     }
     return _allSceneView;
+}
+
+- (void)loadNewData {
+    [self.allFiuSceneMarr removeAllObjects];
+    [self.allFiuSceneIdMarr removeAllObjects];
+    
+    self.currentpageNum = 0;
+    [self networkAllFiuSceneList];
 }
 
 #pragma mark  UICollectionViewDataSource
