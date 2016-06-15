@@ -236,7 +236,7 @@ static NSString *const URLDeleteScene = @"/scene_sight/delete";
         }
         
         NSString * categoryTag = [categoryTagIds componentsJoinedByString:@","];
-        [self networkRecommendGoods:categoryTag withSize:[NSString stringWithFormat:@"%zi", self.goodsList.count] withIgnoreId:goodsIds];
+        [self networkRecommendGoods:categoryTag withIgnoreId:goodsIds];
         
         [self.sceneTableView reloadData];
         
@@ -246,9 +246,9 @@ static NSString *const URLDeleteScene = @"/scene_sight/delete";
 }
 
 #pragma mark 此场景中的推荐商品
-- (void)networkRecommendGoods:(NSString *)tagIds withSize:(NSString *)size withIgnoreId:(NSString *)ignoreIds {
+- (void)networkRecommendGoods:(NSString *)tagIds withIgnoreId:(NSString *)ignoreIds {
     [self.reGoodsList removeAllObjects];
-    self.recommendRequest = [FBAPI getWithUrlString:URLSceneGoods requestDictionary:@{@"category_tag_ids":tagIds, @"size":size, @"ignore_ids":ignoreIds} delegate:self];
+    self.recommendRequest = [FBAPI getWithUrlString:URLSceneGoods requestDictionary:@{@"category_tag_ids":tagIds, @"size":@"3", @"ignore_ids":ignoreIds} delegate:self];
     [self.recommendRequest startRequestSuccess:^(FBRequest *request, id result) {
         NSArray * goodsArr = [[result valueForKey:@"data"] valueForKey:@"rows"];
         for (NSDictionary * goodsDic in goodsArr) {
@@ -486,6 +486,12 @@ static NSString *const URLDeleteScene = @"/scene_sight/delete";
         GoodsInfoViewController * goodsInfoVC = [[GoodsInfoViewController alloc] init];
         goodsInfoVC.goodsID = self.reGoodsIdList[indexPath.row];
         [self.navigationController pushViewController:goodsInfoVC animated:YES];
+    }
+}
+
+- (void)scrollViewDidScroll:(UIScrollView *)scrollView {
+    if (self.sceneTableView.contentOffset.y <= 0) {
+        self.sceneTableView.scrollEnabled = NO;
     }
 }
 

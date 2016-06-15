@@ -32,7 +32,7 @@
 }
 
 #pragma mark - init
-- (id)initWithFrame:(CGRect)frame BackgroundImage:(UIImage *)backgroundImage blurredImage:(UIImage *)blurredImage viewDistanceFromBottom:(CGFloat)viewDistanceFromBottom foregroundView:(UIView *)foregroundView {
+- (id)initWithFrame:(CGRect)frame BackgroundImage:(UIImage *)backgroundImage blurredImage:(UIImage *)blurredImage viewDistanceFromBottom:(CGFloat)viewDistanceFromBottom foregroundView:(UITableView *)foregroundView {
     self = [super initWithFrame:frame];
     if (self) {
         self.showUserTagMarr = [NSMutableArray array];
@@ -40,6 +40,7 @@
         _backgroundImage = backgroundImage;
         _viewDistanceFromBottom = viewDistanceFromBottom;
         _foregroundView = foregroundView;
+        _foregroundView.scrollEnabled = NO;
         
         [self setAutoresizingMask:UIViewAutoresizingFlexibleHeight|UIViewAutoresizingFlexibleWidth];
         
@@ -230,8 +231,6 @@
 #pragma mark UIScrollView
 - (void)scrollViewWillBeginDragging:(UIScrollView *)scrollView{
     _lastContentOffset = scrollView.contentOffset.y;
-    
-    NSLog(@"＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝ %f", _lastContentOffset);
 }
 
 - (void)scrollViewWillBeginDecelerating:(UIScrollView *)scrollView{
@@ -240,8 +239,6 @@
     }else{
         _rollDown = NO;
     }
-    
-    NSLog(@"＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊ %f", _lastContentOffset);
 }
 
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView {
@@ -266,7 +263,11 @@
         }];
     }
     
-    NSLog(@"－－－－－－－－－－－ %f", _lastContentOffset);
+    if (scrollView.contentOffset.y > 0) {
+        _foregroundView.scrollEnabled = YES;
+    } else if (scrollView.contentOffset.y <= 0) {
+        _foregroundView.scrollEnabled = NO;
+    }
 }
 
 - (void)scrollViewWillEndDragging:(UIScrollView *)scrollView withVelocity:(CGPoint)velocity targetContentOffset:(inout CGPoint *)targetContentOffset {
