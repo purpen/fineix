@@ -126,6 +126,7 @@
 
 //点击『立即使用』按钮
 -(void)clickSkips:(UIButton*)sender{
+    [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"UserHasGuideView"];
     if ([_mainController isKindOfClass:[FBTabBarController class]]) {
 
         __block BOOL invitation;
@@ -143,7 +144,10 @@
                     [self presentViewController:tab animated:YES completion:nil];
                 }else{
                     if (invitation) {
-                        [self presentViewController:[[InviteCCodeViewController alloc] init] animated:YES completion:nil];
+                        InviteCCodeViewController *vc = [[InviteCCodeViewController alloc] init];
+                        vc.modalPresentationStyle = UIModalPresentationOverCurrentContext;
+                        vc.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;
+                        [self presentViewController:vc animated:YES completion:nil];
                     }else{
                         FBTabBarController *tab = [[FBTabBarController alloc] init];
                         [tab setSelectedIndex:0];
@@ -152,21 +156,9 @@
                 }
             }else if([code isEqual:@(0)]){
                 //没有开启邀请功能
-                invitation = NO;
-                BOOL codeFlag = [[NSUserDefaults standardUserDefaults] boolForKey:@"codeFlag"];
-                if (codeFlag) {
-                    FBTabBarController *tab = [[FBTabBarController alloc] init];
-                    [tab setSelectedIndex:0];
-                    [self presentViewController:tab animated:YES completion:nil];
-                }else{
-                    if (invitation) {
-                        [self presentViewController:[[InviteCCodeViewController alloc] init] animated:YES completion:nil];
-                    }else{
-                        FBTabBarController *tab = [[FBTabBarController alloc] init];
-                        [tab setSelectedIndex:0];
-                        [self presentViewController:tab animated:YES completion:nil];
-                    }
-                }
+                FBTabBarController *tab = [[FBTabBarController alloc] init];
+                [tab setSelectedIndex:0];
+                [self presentViewController:tab animated:YES completion:nil];
             }
         } failure:^(FBRequest *request, NSError *error) {
             
