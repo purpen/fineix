@@ -80,7 +80,11 @@
 }
 
 - (void)cancelVCBtnClick {
-    [self.navigationController popViewControllerAnimated:YES];
+    if ([self.type isEqualToString:@"release"]) {
+        [self.navigationController popViewControllerAnimated:YES];
+    } else if ([self.type isEqualToString:@"edit"]) {
+        [self dismissViewControllerAnimated:YES completion:nil];
+    }
 }
 
 #pragma mark - 初始化百度地图服务
@@ -251,7 +255,12 @@
 #pragma mark - 选中位置
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     self.selectedLocationBlock(self.locationNameMarr[indexPath.row], self.locationCityMarr[indexPath.row], self.latitudeMarr[indexPath.row], self.longitudeMarr[indexPath.row]);
-     [self.navigationController popViewControllerAnimated:YES];
+    
+    if ([self.type isEqualToString:@"release"]) {
+        [self.navigationController popViewControllerAnimated:YES];
+    } else if ([self.type isEqualToString:@"edit"]) {
+        [self dismissViewControllerAnimated:YES completion:nil];
+    }
 }
 
 - (void)viewWillDisappear:(BOOL)animated {

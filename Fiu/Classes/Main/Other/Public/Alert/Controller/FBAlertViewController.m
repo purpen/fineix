@@ -94,6 +94,13 @@ static const NSInteger actionBtnTag = 686;
     } else if (button.tag == actionBtnTag + 2) {
         EditViewController * editVC = [[EditViewController alloc] init];
         editVC.createType = self.type;
+        editVC.ids = self.targetId;
+        editVC.data = self.sceneData;
+        editVC.editDone = ^ {
+            [self dismissViewControllerAnimated:YES completion:^{
+                self.editDoneAndRefresh();
+            }];
+        };
         [self presentViewController:editVC animated:YES completion:nil];
         
     } else if (button.tag == actionBtnTag + 3) {

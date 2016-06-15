@@ -86,7 +86,7 @@ static NSString *const URLDeleteScene = @"/scene_sight/delete";
     [self networkLikePeopleData];
 }
 
-#pragma mark - 
+#pragma mark -
 - (void)setRollSceneInfoView {
     _viewScroller = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT)];
     _viewScroller.pagingEnabled = YES;
@@ -98,18 +98,6 @@ static NSString *const URLDeleteScene = @"/scene_sight/delete";
 
 - (void)getTableViewFrameH {
     [self setRollSceneInfoView];
-    if (_desCellH == 0) {
-        _desCellH = 60;
-    } else if (_likeUserCellH == 0) {
-        _likeUserCellH = 50;
-    }
-    _goodsCellH = (self.goodsList.count + self.reGoodsList.count) * 210;
-    _newTableFrameH = _desCellH + _goodsCellH + _likeUserCellH + _commentCellH + 305;
-    
-    CGRect newTableFrame = self.sceneTableView.frame;
-    newTableFrame = CGRectMake(0, 0, SCREEN_WIDTH, _newTableFrameH);
-    self.sceneTableView.frame = newTableFrame;
-    
     NSData * imgData = [NSData dataWithContentsOfURL:[NSURL URLWithString:_sceneImgUrl]];
     _sceneInfoScrollView = [[FBSceneInfoScrollView alloc] initWithFrame:self.view.frame BackgroundImage:[UIImage imageWithData:imgData] blurredImage:nil viewDistanceFromBottom:170 foregroundView:self.sceneTableView];
     _sceneInfoScrollView.leftBtn = self.leftBtn;
@@ -127,12 +115,15 @@ static NSString *const URLDeleteScene = @"/scene_sight/delete";
     [SVProgressHUD show];
     self.sceneInfoRequest = [FBAPI getWithUrlString:URLSceneInfo requestDictionary:@{@"id":self.sceneId} delegate:self];
     [self.sceneInfoRequest startRequestSuccess:^(FBRequest *request, id result) {
-        NSLog(@"＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝ 场景详情%@", result);
         //  分享出去的场景信息
         _shareDataDict = [NSDictionary dictionaryWithDictionary:[result valueForKey:@"data"]];
         _sceneUserId = [NSString stringWithFormat:@"%@", [[result valueForKey:@"data"] valueForKey:@"user_id"]];
         self.sceneInfoModel = [[SceneInfoData alloc] initWithDictionary:[result valueForKey:@"data"]];
         _sceneImgUrl = self.sceneInfoModel.coverUrl;
+        
+        if (![self.view.subviews containsObject:_viewScroller]) {
+            [self getTableViewFrameH];
+        }
         
         //  场景中商品的ids
         self.goodsId = [self.sceneInfoModel.product valueForKey:@"idField"];
@@ -188,13 +179,6 @@ static NSString *const URLDeleteScene = @"/scene_sight/delete";
             }
         }
         
-        //  获取评论内容的高度
-        for (NSString * commentStr in [self.sceneCommentMarr valueForKey:@"content"]) {
-            CommentTableViewCell * cell = [[CommentTableViewCell alloc] init];
-            [cell getCellHeight:commentStr];
-            _commentCellH += cell.cellHeight;
-        }
-        
         [self.sceneTableView reloadData];
         
     } failure:^(FBRequest *request, NSError *error) {
@@ -238,7 +222,7 @@ static NSString *const URLDeleteScene = @"/scene_sight/delete";
 #pragma mark 此场景中的商品
 - (void)networkSceneGoodsData:(NSString *)goodsIds {
     [self.goodsList removeAllObjects];
-    self.sceneGoodsRequest = [FBAPI getWithUrlString:URLSceneGoods requestDictionary:@{@"ids":goodsIds} delegate:self];
+    self.sceneGoodsRequest = [FBAPI getWithUrlString:URLSceneGoods requestDictionary:@{@"ids":goodsIds, @"size":@"3"} delegate:self];
     [self.sceneGoodsRequest startRequestSuccess:^(FBRequest *request, id result) {
         NSArray * goodsArr = [[result valueForKey:@"data"] valueForKey:@"rows"];
         NSMutableArray * categoryTagIds = [NSMutableArray array];
@@ -274,11 +258,6 @@ static NSString *const URLDeleteScene = @"/scene_sight/delete";
         }
         
         [self.sceneTableView reloadData];
-        
-        if (![self.view.subviews containsObject:_viewScroller]) {
-            [self getTableViewFrameH];
-        }
-        
         [SVProgressHUD dismiss];
         
     } failure:^(FBRequest *request, NSError *error) {
@@ -322,7 +301,7 @@ static NSString *const URLDeleteScene = @"/scene_sight/delete";
 #pragma mark - 设置场景详情的视图
 - (UITableView *)sceneTableView {
     if (!_sceneTableView) {
-        _sceneTableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT * 2) style:(UITableViewStyleGrouped)];
+        _sceneTableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT) style:(UITableViewStyleGrouped)];
         _sceneTableView.delegate = self;
         _sceneTableView.dataSource = self;
         _sceneTableView.showsVerticalScrollIndicator = NO;
@@ -331,7 +310,6 @@ static NSString *const URLDeleteScene = @"/scene_sight/delete";
         _sceneTableView.backgroundView = [UIView new];
         _sceneTableView.opaque = NO;
         _sceneTableView.tableFooterView = [UIView new];
-        _sceneTableView.scrollEnabled = NO;
     }
     return _sceneTableView;
 }
@@ -548,6 +526,9 @@ static NSString *const URLDeleteScene = @"/scene_sight/delete";
     alertVC.openCommentVc = ^{
         [self openCommentListVC];
     };
+    alertVC.editDoneAndRefresh = ^{
+        [self refreshRequestData];
+    };
     [self presentViewController:alertVC animated:YES completion:nil];
 }
 
@@ -556,6 +537,28 @@ static NSString *const URLDeleteScene = @"/scene_sight/delete";
     commentVC.targetId = self.sceneId;
     commentVC.sceneUserId = _sceneUserId;
     [self.navigationController pushViewController:commentVC animated:YES];
+}
+
+- (void)refreshRequestData {
+    [SVProgressHUD show];
+    self.sceneInfoRequest = [FBAPI getWithUrlString:URLSceneInfo requestDictionary:@{@"id":self.sceneId} delegate:self];
+    [self.sceneInfoRequest startRequestSuccess:^(FBRequest *request, id result) {
+        //  分享出去的场景信息
+        _shareDataDict = [NSDictionary dictionaryWithDictionary:[result valueForKey:@"data"]];
+        _sceneUserId = [NSString stringWithFormat:@"%@", [[result valueForKey:@"data"] valueForKey:@"user_id"]];
+        self.sceneInfoModel = [[SceneInfoData alloc] initWithDictionary:[result valueForKey:@"data"]];
+        _sceneImgUrl = self.sceneInfoModel.coverUrl;
+        
+        NSIndexPath * indexPath = [NSIndexPath indexPathForRow:0 inSection:0];
+        [self.sceneTableView reloadRowsAtIndexPaths:[NSArray arrayWithObjects:indexPath,nil] withRowAnimation:UITableViewRowAnimationNone];
+        NSIndexPath * contentIndexPath = [NSIndexPath indexPathForRow:1 inSection:0];
+        [self.sceneTableView reloadRowsAtIndexPaths:[NSArray arrayWithObjects:contentIndexPath,nil] withRowAnimation:UITableViewRowAnimationNone];
+        
+        [SVProgressHUD dismiss];
+        
+    } failure:^(FBRequest *request, NSError *error) {
+        [SVProgressHUD showErrorWithStatus:[error localizedDescription]];
+    }];
 }
 
 #pragma mark - 设置Nav

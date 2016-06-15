@@ -230,6 +230,8 @@
 #pragma mark UIScrollView
 - (void)scrollViewWillBeginDragging:(UIScrollView *)scrollView{
     _lastContentOffset = scrollView.contentOffset.y;
+    
+    NSLog(@"＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝ %f", _lastContentOffset);
 }
 
 - (void)scrollViewWillBeginDecelerating:(UIScrollView *)scrollView{
@@ -238,6 +240,8 @@
     }else{
         _rollDown = NO;
     }
+    
+    NSLog(@"＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊ %f", _lastContentOffset);
 }
 
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView {
@@ -261,6 +265,8 @@
             self.logoImg.alpha = 1;
         }];
     }
+    
+    NSLog(@"－－－－－－－－－－－ %f", _lastContentOffset);
 }
 
 - (void)scrollViewWillEndDragging:(UIScrollView *)scrollView withVelocity:(CGPoint)velocity targetContentOffset:(inout CGPoint *)targetContentOffset {

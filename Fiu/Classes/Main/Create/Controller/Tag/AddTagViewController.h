@@ -11,12 +11,18 @@
 
 typedef void(^ChooseTagsBlock)(NSMutableArray * tilte, NSMutableArray * ids);
 
-@interface AddTagViewController : FBPictureViewController <UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, UITableViewDelegate,UITableViewDataSource>
+@interface AddTagViewController : FBPictureViewController <
+    UICollectionViewDelegate,
+    UICollectionViewDataSource,
+    UICollectionViewDelegateFlowLayout,
+    UITableViewDelegate,
+    UITableViewDataSource
+>
 
 @pro_strong FBRequest           *   tagRequest;         //  标签
 @pro_strong FBRequest           *   usedTagsRequest;    //  使用过的标签
 @pro_strong FBRequest           *   hotTagsRequest;     //  热门标签
-
+@pro_strong NSString            *   type;
 @pro_strong UIView              *   menuView;           //  导航菜单
 @pro_strong UIView              *   categoryView;       //  分类菜单
 @pro_strong UILabel             *   menuLine;

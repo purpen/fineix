@@ -1,21 +1,19 @@
 //
-//  ScenceAddMoreView.m
-//  fineix
+//  EditSceneAddMoreView.m
+//  Fiu
 //
-//  Created by FLYang on 16/3/11.
+//  Created by FLYang on 16/6/15.
 //  Copyright © 2016年 taihuoniao. All rights reserved.
 //
 
-#import "ScenceAddMoreView.h"
+#import "EditSceneAddMoreView.h"
 #import "SearchLocationViewController.h"
 #import "AddTagViewController.h"
 #import "SelectSceneViewController.h"
 #import "AddTagViewController.h"
 #import "ChooseTagsCollectionViewCell.h"
 
-static const NSInteger btnTag = 100;
-
-@implementation ScenceAddMoreView
+@implementation EditSceneAddMoreView
 
 - (instancetype)initWithFrame:(CGRect)frame {
     self = [super initWithFrame:frame];
@@ -23,9 +21,6 @@ static const NSInteger btnTag = 100;
         self.backgroundColor = [UIColor colorWithHexString:grayLineColor alpha:1];
         
         [self setUI];
-        
-        [self initBMKSearch];
-
     }
     return self;
 }
@@ -52,122 +47,6 @@ static const NSInteger btnTag = 100;
         make.top.equalTo(self.addTag.mas_bottom).with.offset(5);
         make.left.equalTo(self.mas_left).with.offset(0);
     }];
-}
-
-#pragma mark - 搜索照片所带位置的附近
-- (void)changeLocationFrame:(NSArray *)locationArr {
-    [self searchPhotoLocation:[locationArr[1] floatValue] withLongitude:[locationArr[0] floatValue]];
-
-}
-
-#pragma mark - 初始化geo地理编码搜索
-- (void)initBMKSearch {
-    _geoCodeSearch = [[BMKGeoCodeSearch alloc] init];
-    _geoCodeSearch.delegate = self;
-    
-    _nameMarr = [NSMutableArray array];
-    _cityMarr = [NSMutableArray array];
-}
-
-- (void)searchPhotoLocation:(CGFloat )latitude withLongitude:(CGFloat )longitude {
-    BMKReverseGeoCodeOption * option = [[BMKReverseGeoCodeOption alloc] init];
-    option.reverseGeoPoint = CLLocationCoordinate2DMake(latitude, longitude);
-    [_geoCodeSearch reverseGeoCode:option];
-}
-
-- (void)onGetReverseGeoCodeResult:(BMKGeoCodeSearch *)searcher result:(BMKReverseGeoCodeResult *)result errorCode:(BMKSearchErrorCode)error {
-    if (error == BMK_SEARCH_NO_ERROR) {
-        if (result.poiList.count > 5) {
-            for (NSUInteger idx = 0; idx < 5; ++ idx) {
-                BMKPoiInfo * poi = [result.poiList objectAtIndex:idx];
-                [_nameMarr addObject:poi.name];
-                [_cityMarr addObject:poi.city];
-            }
-            
-        } else if (result.poiList.count > 5) {
-            for (NSUInteger idx = 0; idx < result.poiList.count; ++ idx) {
-                BMKPoiInfo * poi = [result.poiList objectAtIndex:idx];
-                [_nameMarr addObject:poi.name];
-                [_cityMarr addObject:poi.city];
-            }
-        }
-        
-        //  最后一个为“搜索”按钮
-        if (_nameMarr.count > 0) {
-            [_nameMarr addObject:@"  搜索  "];
-            [self addLocationScrollView:_nameMarr];
-        }
-        
-    } else {
-        NSLog(@"搜索结果错误 －－－－－ %d", error);
-    }
-}
-
-- (void)dealloc {
-    _geoCodeSearch.delegate = nil;
-}
-
-- (void)addLocationScrollView:(NSMutableArray *)locationMarr {
-    
-    CGFloat width = 0;
-    CGFloat height = 8;
-
-    for (NSUInteger idx = 0; idx < locationMarr.count; ++ idx) {
-        UIButton * locationBtn = [[UIButton alloc] init];
-        CGFloat btnLength = [[locationMarr objectAtIndex:idx] boundingRectWithSize:CGSizeMake(320, 1000) options:(NSStringDrawingUsesLineFragmentOrigin) attributes:nil context:nil].size.width;
-        [locationBtn setTitle:locationMarr[idx] forState:(UIControlStateNormal)];
-        [locationBtn setTitleColor:[UIColor colorWithHexString:blackFont alpha:1] forState:(UIControlStateNormal)];
-        locationBtn.titleLabel.font = [UIFont systemFontOfSize:Font_Number];
-        locationBtn.layer.cornerRadius = 5;
-        locationBtn.layer.borderColor = [UIColor colorWithHexString:@"#979797" alpha:1].CGColor;
-        locationBtn.layer.borderWidth = 0.5f;
-        locationBtn.frame = CGRectMake(15 + width + (10 * idx), height, btnLength + 40, 29);
-        width = locationBtn.frame.size.width + width;
-        locationBtn.tag = btnTag + idx;
-        
-        if (locationBtn.tag == btnTag + 5) {
-            [locationBtn setImage:[UIImage imageNamed:@"Search"] forState:(UIControlStateNormal)];
-        }
-        
-        [locationBtn addTarget:self action:@selector(changeLocationName:) forControlEvents:(UIControlEventTouchUpInside)];
-        [self.locationScrollView addSubview:locationBtn];
-    }
-    self.locationScrollView.contentSize = CGSizeMake(width + 80, 0);
-    [_addLoacation addSubview:self.locationScrollView];
-    
-    //  分割线
-    UILabel * line = [[UILabel alloc] initWithFrame:CGRectMake(0, 43, SCREEN_WIDTH, .5)];
-    line.backgroundColor = [UIColor colorWithHexString:@"#E7E7E7" alpha:1];
-    [_addLoacation addSubview:line];
-    
-    [self onLocationFrame];
-   
-}
-
-#pragma mark - 选择推荐位置改变选择地点 
-- (void)changeLocationName:(UIButton *)button {
-    
-    //  搜索地点
-    if (button.tag == btnTag + 5) {
-        SearchLocationViewController * searchLocationVC = [[SearchLocationViewController alloc] init];
-        [self.nav pushViewController:searchLocationVC animated:YES];
-        
-    } else {
-        _location.text = [NSString stringWithFormat:@"%@ %@", _cityMarr[button.tag - btnTag], _nameMarr[button.tag - btnTag]];
-        _addLoacationBtn.hidden = YES;
-        _locationView.hidden = NO;
-        [self offLocationFrame];
-    }
-}
-
-#pragma mark - 创建根据照片位置推荐的五个附近
-- (UIScrollView *)locationScrollView {
-    if(!_locationScrollView) {
-        _locationScrollView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 44, SCREEN_WIDTH, 44)];
-        _locationScrollView.showsHorizontalScrollIndicator = NO;
-        _locationScrollView.showsVerticalScrollIndicator = NO;
-    }
-    return _locationScrollView;
 }
 
 #pragma mark - 添加地理位置
@@ -197,7 +76,6 @@ static const NSInteger btnTag = 100;
             [_addLoacation layoutIfNeeded];
         }];
     }];
-    
 }
 
 //  如果有推荐的位置，更新“添加地点”的约束
@@ -238,7 +116,7 @@ static const NSInteger btnTag = 100;
 //  选择地理位置
 - (void)changeLocation {
     SearchLocationViewController * searchLocation = [[SearchLocationViewController alloc] init];
-    searchLocation.type = @"release";
+    searchLocation.type = @"edit";
     searchLocation.selectedLocationBlock = ^(NSString * location, NSString * city, NSString * latitude, NSString * longitude){
         _location.text = [NSString stringWithFormat:@"%@ %@", city, location];
         _latitude = latitude;
@@ -250,7 +128,7 @@ static const NSInteger btnTag = 100;
         //  from #import "ReleaseViewController.h"
         [[NSNotificationCenter defaultCenter] postNotificationName:@"locationArr" object:locaArr];
     };
-    [self.nav pushViewController:searchLocation animated:YES];
+    [self.vc presentViewController:searchLocation animated:YES completion:nil];
 }
 
 #pragma mark - 显示地理位置的视图
@@ -266,7 +144,7 @@ static const NSInteger btnTag = 100;
         }];
         
         [_locationView addSubview:self.location];
-    
+        
     }
     return _locationView;
 }
@@ -337,7 +215,7 @@ static const NSInteger btnTag = 100;
 //  去选择标签
 - (void)chooesTag {
     AddTagViewController * addTagVC = [[AddTagViewController alloc] init];
-    addTagVC.type = @"release";
+    addTagVC.type = @"edit";
     addTagVC.chooseTagsBlock = ^(NSMutableArray * title, NSMutableArray * ids) {
         self.chooseTagMarr = title;
         self.chooseTagIdMarr = ids;
@@ -347,8 +225,8 @@ static const NSInteger btnTag = 100;
         }
     };
     
-    [self.nav pushViewController:addTagVC animated:YES];
-
+    [self.vc presentViewController:addTagVC animated:YES completion:nil];
+    
 }
 
 #pragma mark - 选中的标签列表
@@ -430,7 +308,7 @@ static const NSInteger btnTag = 100;
     }];
     
     [self addSelectFSceneBtn:title];
-
+    
 }
 
 - (UIButton *)selectFSceneBtn {
@@ -456,12 +334,12 @@ static const NSInteger btnTag = 100;
 //  去选择所属的情境
 - (void)chooseScene {
     SelectSceneViewController * selectSceneVC = [[SelectSceneViewController alloc] init];
-    selectSceneVC.type = @"release";
+    selectSceneVC.type = @"edit";
     selectSceneVC.getIdxAndTitltBlock = ^(NSString * idx, NSString * title) {
         [self changeSceneFrame:title];
         self.fiuId = idx;
     };
-    [self.nav pushViewController:selectSceneVC animated:YES];
+    [self.vc presentViewController:selectSceneVC animated:YES completion:nil];
 }
 
 @end

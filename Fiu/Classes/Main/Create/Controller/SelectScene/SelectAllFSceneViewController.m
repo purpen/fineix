@@ -141,7 +141,11 @@ static NSString *const URLAllFiuSceneList = @"/scene_scene/";
     self.navView.backgroundColor = [UIColor whiteColor];
     [self addNavViewTitle:NSLocalizedString(@"chooseSceneVcTitle", nil)];
     self.navTitle.textColor = [UIColor blackColor];
-    [self addBackButton:@"icon_back"];
+    if ([self.type isEqualToString:@"release"]) {
+        [self addBackButton:@"icon_back"];
+    } else if ([self.type isEqualToString:@"edit"]) {
+        [self addCloseBtn];
+    }
     [self addLine];
     [self.navView addSubview:self.sureBtn];
 }
@@ -161,13 +165,21 @@ static NSString *const URLAllFiuSceneList = @"/scene_scene/";
 #pragma mark - 返回“发布页”
 - (void)sureBtnClick {
     if (self.fiuSceneId.length > 0) {
-        for (UIViewController * vc in self.navigationController.viewControllers) {
-            if ([vc isKindOfClass:[ReleaseViewController class]]) {
-                //  to :ReleaseViewController.h
-                [[NSNotificationCenter defaultCenter] postNotificationName:@"selectFiuSceneId" object:self.fiuSceneId];
-                [[NSNotificationCenter defaultCenter] postNotificationName:@"selectFiuSceneTitle" object:self.fiuSceneTitle];
-                [self.navigationController popToViewController:vc animated:YES];
+        //  to :ReleaseViewController.h
+        [[NSNotificationCenter defaultCenter] postNotificationName:@"selectFiuSceneId" object:self.fiuSceneId];
+        [[NSNotificationCenter defaultCenter] postNotificationName:@"selectFiuSceneTitle" object:self.fiuSceneTitle];
+        
+        if ([self.type isEqualToString:@"release"]) {
+            for (UIViewController * vc in self.navigationController.viewControllers) {
+                if ([vc isKindOfClass:[ReleaseViewController class]]) {
+                    [self.navigationController popToViewController:vc animated:YES];
+                }
             }
+            
+        } else if ([self.type isEqualToString:@"edit"]) {
+            [self dismissViewControllerAnimated:YES completion:^{
+                self.dismissVC();
+            }];
         }
         
     } else {

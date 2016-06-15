@@ -12,6 +12,7 @@
 
 typedef void(^OpenCommentVC)();
 typedef void(^DeleteScene)();
+typedef void(^EditDoneAndRefresh)();
 
 @interface FBAlertViewController : UIViewController
 
@@ -22,6 +23,7 @@ typedef void(^DeleteScene)();
 @pro_strong NSDictionary    *   sceneData;
 @pro_copy OpenCommentVC         openCommentVc;
 @pro_copy DeleteScene           deleteScene;
+@pro_copy EditDoneAndRefresh    editDoneAndRefresh;
 
 - (void)initFBAlertVcStyle:(BOOL)isUserSelf;
 

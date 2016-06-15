@@ -501,6 +501,7 @@
 		D8B795271CF48AFB0075D985 /* ShareStyleBottomView.m in Sources */ = {isa = PBXBuildFile; fileRef = D8B795261CF48AFB0075D985 /* ShareStyleBottomView.m */; };
 		D8B7952A1CF48B1D0075D985 /* ShareStyleTitleTopView.m in Sources */ = {isa = PBXBuildFile; fileRef = D8B795291CF48B1D0075D985 /* ShareStyleTitleTopView.m */; };
 		D8B7952D1CF48B2C0075D985 /* ShareStyleTitleBottomView.m in Sources */ = {isa = PBXBuildFile; fileRef = D8B7952C1CF48B2C0075D985 /* ShareStyleTitleBottomView.m */; };
+		D8C690B41D1125F80026EAB5 /* EditSceneAddMoreView.m in Sources */ = {isa = PBXBuildFile; fileRef = D8C690B31D1125F80026EAB5 /* EditSceneAddMoreView.m */; };
 		D8E3AEB61CFC9B84006E5E8C /* ClipImageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D8E3AEA91CFC9B84006E5E8C /* ClipImageViewController.m */; };
 		D8E3AEB71CFC9B84006E5E8C /* CreateViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D8E3AEAB1CFC9B84006E5E8C /* CreateViewController.m */; };
 		D8E3AEB81CFC9B84006E5E8C /* CropImageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D8E3AEAD1CFC9B84006E5E8C /* CropImageViewController.m */; };
@@ -1400,6 +1401,8 @@
 		D8B795291CF48B1D0075D985 /* ShareStyleTitleTopView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ShareStyleTitleTopView.m; sourceTree = "<group>"; };
 		D8B7952B1CF48B2C0075D985 /* ShareStyleTitleBottomView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShareStyleTitleBottomView.h; sourceTree = "<group>"; };
 		D8B7952C1CF48B2C0075D985 /* ShareStyleTitleBottomView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ShareStyleTitleBottomView.m; sourceTree = "<group>"; };
+		D8C690B21D1125F80026EAB5 /* EditSceneAddMoreView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EditSceneAddMoreView.h; sourceTree = "<group>"; };
+		D8C690B31D1125F80026EAB5 /* EditSceneAddMoreView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EditSceneAddMoreView.m; sourceTree = "<group>"; };
 		D8E3AEA81CFC9B84006E5E8C /* ClipImageViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ClipImageViewController.h; sourceTree = "<group>"; };
 		D8E3AEA91CFC9B84006E5E8C /* ClipImageViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ClipImageViewController.m; sourceTree = "<group>"; };
 		D8E3AEAA1CFC9B84006E5E8C /* CreateViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CreateViewController.h; sourceTree = "<group>"; };
@@ -1648,6 +1651,7 @@
 		1F2A8C0F1CF40276005116C7 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				D8C690B11D1125C80026EAB5 /* Edit */,
 				1F2A8C101CF40276005116C7 /* Creat */,
 				1F2A8C231CF40276005116C7 /* Mark */,
 				1F2A8C2A1CF40276005116C7 /* Release */,
@@ -3780,6 +3784,15 @@
 			path = RollSceneInfo;
 			sourceTree = "<group>";
 		};
+		D8C690B11D1125C80026EAB5 /* Edit */ = {
+			isa = PBXGroup;
+			children = (
+				D8C690B21D1125F80026EAB5 /* EditSceneAddMoreView.h */,
+				D8C690B31D1125F80026EAB5 /* EditSceneAddMoreView.m */,
+			);
+			path = Edit;
+			sourceTree = "<group>";
+		};
 		D8E3AEA61CFC9B84006E5E8C /* CreateFiuScene */ = {
 			isa = PBXGroup;
 			children = (
@@ -4260,6 +4273,7 @@
 				1F2A8F7F1CF40277005116C7 /* FiuHeaderTableViewCell.m in Sources */,
 				1F2A901A1CF40277005116C7 /* HistoryBonusViewController.m in Sources */,
 				1F2A90A81CF40277005116C7 /* UserHeaderTableViewCell.m in Sources */,
+				D8C690B41D1125F80026EAB5 /* EditSceneAddMoreView.m in Sources */,
 				1F2A8F461CF40277005116C7 /* FBPictureViewController.m in Sources */,
 				1F2A8FB81CF40277005116C7 /* FiuBrandRow.m in Sources */,
 				1F2A8F941CF40277005116C7 /* LikeOrSuPeopleData.m in Sources */,

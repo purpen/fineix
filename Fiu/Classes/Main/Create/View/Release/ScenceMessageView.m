@@ -55,10 +55,10 @@
         
         [_topView addSubview:self.content];
         [_content mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.top.equalTo(_topView.mas_top).with.offset(15);
-            make.left.equalTo(_imageView.mas_right).with.offset(15);
+            make.top.equalTo(self.imageView.mas_top).with.offset(0);
+            make.left.equalTo(self.imageView.mas_right).with.offset(15);
             make.right.equalTo(_topView.mas_right).with.offset(-15);
-            make.bottom.equalTo(_topView.mas_bottom).with.offset(-15);
+            make.bottom.equalTo(self.imageView.mas_bottom).with.offset(0);
         }];
     }
     return _topView;

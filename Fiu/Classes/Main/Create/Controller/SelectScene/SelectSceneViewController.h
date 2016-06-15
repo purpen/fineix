@@ -12,13 +12,18 @@
 
 typedef void(^GetSeletFSceneIdAndTitlelBlock)(NSString * idx, NSString * title);
 
-@interface SelectSceneViewController : FBPictureViewController <UITableViewDelegate, UITableViewDataSource, BMKLocationServiceDelegate>
+@interface SelectSceneViewController : FBPictureViewController <
+    UITableViewDelegate,
+    UITableViewDataSource,
+    BMKLocationServiceDelegate
+>
 {
     BMKLocationService  *   _locationSearch;
     CGFloat                 latitude;       //  纬度
     CGFloat                 longitude;      //  经度
 }
 
+@pro_strong NSString            *   type;
 @pro_strong UITableView         *   selectTable;
 @pro_strong UIButton            *   beginSearchBtn;     //  搜索情境
 @pro_strong UIButton            *   sureBtn;            //  确定按钮

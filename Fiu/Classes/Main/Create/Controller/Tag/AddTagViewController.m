@@ -608,7 +608,11 @@ static NSInteger const CATEGORYTAG = 283;
     [self addNavViewTitle:NSLocalizedString(@"addTagVcTitle", nil)];
     self.navTitle.textColor = [UIColor blackColor];
     [self addLine];
-    [self addBackButton:@"icon_back"];
+    if ([self.type isEqualToString:@"release"]) {
+        [self addBackButton:@"icon_back"];
+    } else if ([self.type isEqualToString:@"edit"]) {
+        [self addCloseBtn];
+    }
     [self.navView addSubview:self.sureBtn];
 }
 
@@ -628,7 +632,11 @@ static NSInteger const CATEGORYTAG = 283;
 #pragma makr - 确定选择的标签
 - (void)sureBtnClick {
     self.chooseTagsBlock(self.chooseTagMarr, self.chooseTagIdList);
-    [self.navigationController popViewControllerAnimated:YES];
+    if ([self.type isEqualToString:@"release"]) {
+        [self.navigationController popViewControllerAnimated:YES];
+    } else if ([self.type isEqualToString:@"edit"]) {
+        [self dismissViewControllerAnimated:YES completion:nil];
+    }
 }
 
 #pragma mark - 

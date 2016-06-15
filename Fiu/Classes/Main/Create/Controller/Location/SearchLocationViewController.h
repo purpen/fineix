@@ -14,7 +14,14 @@
 
 typedef void(^SelectedLocationBlock)(NSString * location, NSString * city, NSString * latitude, NSString * longitude);
 
-@interface SearchLocationViewController : FBPictureViewController <FBSearchDelegate, UITableViewDataSource, UITableViewDelegate, BMKPoiSearchDelegate, BMKLocationServiceDelegate, BMKGeoCodeSearchDelegate>
+@interface SearchLocationViewController : FBPictureViewController <
+    FBSearchDelegate,
+    UITableViewDataSource,
+    UITableViewDelegate,
+    BMKPoiSearchDelegate,
+    BMKLocationServiceDelegate,
+    BMKGeoCodeSearchDelegate
+>
 {
     BMKPoiSearch        *   _poiSearch;
     BMKLocationService  *   _locationSearch;
@@ -23,6 +30,7 @@ typedef void(^SelectedLocationBlock)(NSString * location, NSString * city, NSStr
     CGFloat                 longitude;      //  经度
 }
 
+@pro_strong NSString            *   type;
 @pro_strong UIButton            *   positioningBtn;         //  定位按钮
 @pro_strong UIButton            *   cancelVCBtn;            //  确定按钮
 @pro_strong FBSearchView        *   searchView;             //  搜索框

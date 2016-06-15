@@ -40,7 +40,6 @@ static NSString *const URLFSceneList = @"/scene_scene/";
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(getSelectId:) name:@"getSelectId" object:nil];
 }
 
-
 - (void)viewDidLoad {
     [super viewDidLoad];
     
@@ -238,7 +237,15 @@ static NSString *const URLFSceneList = @"/scene_scene/";
 #pragma mark - 查看全部情景
 - (void)lookAllFScene {
     SelectAllFSceneViewController * allFSceneVC = [[SelectAllFSceneViewController alloc] init];
-    [self.navigationController pushViewController:allFSceneVC animated:YES];
+    allFSceneVC.type = self.type;
+    if ([self.type isEqualToString:@"release"]) {
+        [self.navigationController pushViewController:allFSceneVC animated:YES];
+    } else if ([self.type isEqualToString:@"edit"]) {
+        allFSceneVC.dismissVC = ^ {
+            [self dismissViewControllerAnimated:YES completion:nil];
+        };
+        [self presentViewController:allFSceneVC animated:YES completion:nil];
+    }
 }
 
 #pragma mark - 查看全部附近的情景
@@ -249,15 +256,13 @@ static NSString *const URLFSceneList = @"/scene_scene/";
 
 #pragma mark - 选中附近的情景
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-//    NSArray * array = [tableView visibleCells];
-//    for (UITableViewCell * cell in array) {
-//        [cell setAccessoryType:UITableViewCellAccessoryNone];
-//    }
-//    UITableViewCell * cell = [self.selectTable cellForRowAtIndexPath:indexPath];
-//    [cell setAccessoryType:UITableViewCellAccessoryCheckmark];
     if (indexPath.section == 1) {
-        [self.navigationController popViewControllerAnimated:YES];
         self.getIdxAndTitltBlock(self.idMarr[indexPath.row], self.titleMarr[indexPath.row]);
+        if ([self.type isEqualToString:@"release"]) {
+            [self.navigationController popViewControllerAnimated:YES];
+        } else if ([self.type isEqualToString:@"edit"]) {
+            [self dismissViewControllerAnimated:YES completion:nil];
+        }
     }
 }
 
@@ -308,7 +313,15 @@ static NSString *const URLFSceneList = @"/scene_scene/";
 #pragma mark - 跳转搜索情境
 - (void)searchBtnClick {
     SearchFSceneViewController * searchFSceneVC = [[SearchFSceneViewController alloc] init];
-    [self.navigationController pushViewController:searchFSceneVC animated:YES];
+    searchFSceneVC.type = self.type;
+    if ([self.type isEqualToString:@"release"]) {
+        [self.navigationController pushViewController:searchFSceneVC animated:YES];
+    } else if ([self.type isEqualToString:@"edit"]) {
+        searchFSceneVC.dismissVC = ^ {
+            [self dismissViewControllerAnimated:YES completion:nil];
+        };
+        [self presentViewController:searchFSceneVC animated:YES completion:nil];
+    }
 }
 
 #pragma mark - 设置顶部导航栏
@@ -317,7 +330,11 @@ static NSString *const URLFSceneList = @"/scene_scene/";
     self.navView.backgroundColor = [UIColor whiteColor];
     [self addNavViewTitle:NSLocalizedString(@"chooseSceneVcTitle", nil)];
     self.navTitle.textColor = [UIColor blackColor];
-    [self addBackButton:@"icon_back"];
+    if ([self.type isEqualToString:@"release"]) {
+        [self addBackButton:@"icon_back"];
+    } else if ([self.type isEqualToString:@"edit"]) {
+        [self addCloseBtn];
+    }
     [self addLine];
     [self.navView addSubview:self.sureBtn];
 }
@@ -336,8 +353,12 @@ static NSString *const URLFSceneList = @"/scene_scene/";
 
 #pragma mark - 选择情景返回
 - (void)sureBtnClick {
-    [self.navigationController popViewControllerAnimated:YES];
     self.getIdxAndTitltBlock(self.fSceneId, self.fSceneTitle);
+    if ([self.type isEqualToString:@"release"]) {
+        [self.navigationController popViewControllerAnimated:YES];
+    } else if ([self.type isEqualToString:@"edit"]) {
+        [self dismissViewControllerAnimated:YES completion:nil];
+    }
 }
 
 - (void)viewWillDisappear:(BOOL)animated {
