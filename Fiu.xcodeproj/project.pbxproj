@@ -436,7 +436,6 @@
 		1FCDCC881D07F50D00C92E78 /* ServiceViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1FCDCC861D07F50D00C92E78 /* ServiceViewController.xib */; };
 		1FCDCC8D1D08085000C92E78 /* InviteCCodeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1FCDCC8B1D08085000C92E78 /* InviteCCodeViewController.m */; };
 		1FCDCC8E1D08085000C92E78 /* InviteCCodeViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1FCDCC8C1D08085000C92E78 /* InviteCCodeViewController.xib */; };
-		1FD59C0B1D1157920025A800 /* Fiu.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = 1FD59C0A1D1157920025A800 /* Fiu.mp4 */; };
 		1FD59C131D115FD50025A800 /* ProjectViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1FD59C111D115FD50025A800 /* ProjectViewController.m */; };
 		1FD59C141D115FD50025A800 /* ProjectViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1FD59C121D115FD50025A800 /* ProjectViewController.xib */; };
 		1FD59C181D11A8190025A800 /* ProjectViewCommentsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1FD59C161D11A8190025A800 /* ProjectViewCommentsViewController.m */; };
@@ -1301,7 +1300,6 @@
 		1FCDCC8A1D08085000C92E78 /* InviteCCodeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InviteCCodeViewController.h; sourceTree = "<group>"; };
 		1FCDCC8B1D08085000C92E78 /* InviteCCodeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InviteCCodeViewController.m; sourceTree = "<group>"; };
 		1FCDCC8C1D08085000C92E78 /* InviteCCodeViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = InviteCCodeViewController.xib; sourceTree = "<group>"; };
-		1FD59C0A1D1157920025A800 /* Fiu.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = Fiu.mp4; sourceTree = "<group>"; };
 		1FD59C101D115FD50025A800 /* ProjectViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProjectViewController.h; sourceTree = "<group>"; };
 		1FD59C111D115FD50025A800 /* ProjectViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ProjectViewController.m; sourceTree = "<group>"; };
 		1FD59C121D115FD50025A800 /* ProjectViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ProjectViewController.xib; sourceTree = "<group>"; };
@@ -3488,7 +3486,6 @@
 		1F35F04F1CD2336E0000DB95 /* Resource */ = {
 			isa = PBXGroup;
 			children = (
-				1FD59C0A1D1157920025A800 /* Fiu.mp4 */,
 				1F223B1C1CD714F3007687F7 /* messages.plist */,
 				1F35F0501CD2336E0000DB95 /* areas.plist */,
 			);
@@ -3958,7 +3955,6 @@
 				1F2A91281CF42EC1005116C7 /* OrderInfoDetailViewController.xib in Resources */,
 				1F2A905B1CF40277005116C7 /* CommentsViewController.xib in Resources */,
 				1F2A905F1CF40277005116C7 /* MessagesssViewController.xib in Resources */,
-				1FD59C0B1D1157920025A800 /* Fiu.mp4 in Resources */,
 				1F2A8FEA1CF40277005116C7 /* ChangeSumaryViewController.xib in Resources */,
 				1F2A8F7D1CF40277005116C7 /* FiuPeople.xib in Resources */,
 				1F2A90721CF40277005116C7 /* JDOrderViewController.xib in Resources */,
