@@ -49,22 +49,29 @@
 //        _soonBtn.frame = soonBtnframe;
 //        [_soonBtn setTitle:@"快速注册" forState:UIControlStateNormal];
 //        _soonBtn.titleLabel.font = [UIFont systemFontOfSize:12];
-        //忘记密码按钮
-        _forgetBtn = [[UIButton alloc] initWithFrame:CGRectMake(0, 346/2/667.0*SCREEN_HEIGHT, 150/2/667.0*SCREEN_HEIGHT, 20/667.0*SCREEN_HEIGHT)];
-        CGRect forgetBtnframe = _forgetBtn.frame;
-        forgetBtnframe.origin.x = _phoneTF.frame.origin.x+_phoneTF.frame.size.width-_forgetBtn.frame.size.width + 12/667.0*SCREEN_HEIGHT;
-        _forgetBtn.frame = forgetBtnframe;
-        [_forgetBtn setTitle:@"忘记密码？" forState:UIControlStateNormal];
-        _forgetBtn.titleLabel.font = [UIFont systemFontOfSize:12];
 
         //添加
         [self addSubview:_phoneTF];
         [self addSubview:_pwdTF];
         [self addSubview:_loginBtn];
         //[self addSubview:_soonBtn];
-        [self addSubview:_forgetBtn];
+        [self addSubview:self.forgetBtn];
+        [_forgetBtn mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.right.mas_equalTo(_phoneTF.mas_right).offset(0);
+            make.top.mas_equalTo(_loginBtn.mas_bottom).offset(15);
+        }];
+        
     }
     return self;
+}
+
+-(UIButton *)forgetBtn{
+    if (!_forgetBtn) {
+        _forgetBtn = [[UIButton alloc] init];
+        [_forgetBtn setTitle:@"忘记密码?" forState:UIControlStateNormal];
+        _forgetBtn.titleLabel.font = [UIFont systemFontOfSize:12];
+    }
+    return _forgetBtn;
 }
 
 @end

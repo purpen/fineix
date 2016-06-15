@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="10116" systemVersion="15C50" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="10117" systemVersion="15C50" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
@@ -19,13 +19,16 @@
             <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
+                <imageView userInteractionEnabled="NO" alpha="0.20000000000000001" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Guide_four" translatesAutoresizingMaskIntoConstraints="NO" id="3c8-ZD-kGl">
+                    <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                </imageView>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="1z3-gw-vnt">
                     <rect key="frame" x="37" y="274" width="300" height="120"/>
                     <subviews>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="请输入您的邀请码" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5ss-mV-lxn">
                             <rect key="frame" x="90" y="18" width="120" height="18"/>
                             <fontDescription key="fontDescription" type="system" pointSize="15"/>
-                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                            <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                             <color key="highlightedColor" red="0.13333333333333333" green="0.13333333333333333" blue="0.13333333333333333" alpha="1" colorSpace="calibratedRGB"/>
                         </label>
                         <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="EvU-KE-oPJ">
@@ -89,10 +92,23 @@
             </subviews>
             <color key="backgroundColor" red="0.31372549019607843" green="0.31372549019607843" blue="0.31372549019607843" alpha="1" colorSpace="calibratedRGB"/>
             <constraints>
+                <constraint firstAttribute="bottom" secondItem="3c8-ZD-kGl" secondAttribute="bottom" id="3Cu-sW-EBf"/>
+                <constraint firstAttribute="trailing" secondItem="3c8-ZD-kGl" secondAttribute="trailing" id="Hya-5f-780"/>
                 <constraint firstItem="1z3-gw-vnt" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="SQ4-Bv-5Fl"/>
+                <constraint firstItem="3c8-ZD-kGl" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="e3V-RZ-Teo"/>
+                <constraint firstItem="3c8-ZD-kGl" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="omM-d6-Vjf"/>
                 <constraint firstItem="1z3-gw-vnt" firstAttribute="centerY" secondItem="i5M-Pr-FkT" secondAttribute="centerY" id="ph1-pN-jp9"/>
+                <constraint firstItem="1z3-gw-vnt" firstAttribute="top" secondItem="3c8-ZD-kGl" secondAttribute="bottom" id="tXU-sM-Deq"/>
             </constraints>
             <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
+            <variation key="default">
+                <mask key="constraints">
+                    <exclude reference="tXU-sM-Deq"/>
+                </mask>
+            </variation>
         </view>
     </objects>
+    <resources>
+        <image name="Guide_four" width="375" height="667"/>
+    </resources>
 </document>
