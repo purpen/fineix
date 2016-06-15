@@ -168,7 +168,6 @@ NSString *const determineLogin = @"/auth/check_login";
         
         NSDictionary *dict = [result objectForKey:@"data"];
         NSNumber *code = [dict objectForKey:@"status"];
-        NSLog(@"invitation  %@ ",code);
         if ([code isEqual:@(1)]) {
             //开启了邀请功能
             [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"invitation"];
@@ -242,30 +241,7 @@ NSString *const determineLogin = @"/auth/check_login";
 }
 
 
-//- (BOOL)application:(UIApplication *)app openURL:(NSURL *)url options:(NSDictionary<NSString *,id> *)options{
-//    NSLog(@"%@",url.absoluteURL);
-//    NSLog(@"%@",url.absoluteString);
-//    NSLog(@"%@",url.host);
-//    [UMSocialSnsService handleOpenURL:url];
-//    if ([url.host isEqualToString:@"pay"]) {
-//        [WXApi handleOpenURL:url delegate:self];
-//    }
-//    //如果极简开发包不可用，会跳转支付宝钱包进行支付，需要将支付宝钱包的支付结果回传给开发包
-//    if ([url.host isEqualToString:@"safepay"]) {
-//        [[AlipaySDK defaultService] processOrderWithPaymentResult:url standbyCallback:^(NSDictionary *resultDic) {
-//            //【由于在跳转支付宝客户端支付的过程中，商户app在后台很可能被系统kill了，所以pay接口的callback就会失效，请商户对standbyCallback返回的回调结果进行处理,就是在这个方法里面处理跟callback一样的逻辑】
-//            if (_aliDelegate && [_aliDelegate respondsToSelector:@selector(standbyCallbackWithResultDic:)]) {
-//                [_aliDelegate standbyCallbackWithResultDic:resultDic];
-//            }
-//        }];
-//    }
-//    return YES;
-//    
-//}
-
-
 -(BOOL)application:(UIApplication *)application openURL:(NSURL *)url sourceApplication:(NSString *)sourceApplication annotation:(id)annotation{
-    NSLog(@"url %@    ****    %@",url,sourceApplication);
     if ([UMSocialSnsService handleOpenURL:url]) {
         return YES;
     }

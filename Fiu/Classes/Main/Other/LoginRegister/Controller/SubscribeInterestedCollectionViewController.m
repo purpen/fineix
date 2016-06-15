@@ -52,12 +52,12 @@ static NSString * const reuseIdentifier = @"Cell";
     self.navigationItem.title = @"订阅感兴趣的情景";
     _modelAry = [NSMutableArray array];
     //创建定为服务对象
-    self.locationSevice = [[BMKLocationService alloc] init];
-    //设置定位服务对象代理
-    self.locationSevice.delegate = self;
-    self.locationSevice.desiredAccuracy = kCLLocationAccuracyBestForNavigation;
+//    self.locationSevice = [[BMKLocationService alloc] init];
+//    //设置定位服务对象代理
+//    self.locationSevice.delegate = self;
+//    self.locationSevice.desiredAccuracy = kCLLocationAccuracyBestForNavigation;
     //1，开启定位服务
-    [self.locationSevice startUserLocationService];
+//    [self.locationSevice startUserLocationService];
     
     UIButton *nextBtn = [[UIButton alloc] initWithFrame:CGRectMake(0, kScreenHeight-44, kScreenWidth, 44)];
     nextBtn.backgroundColor = [UIColor colorWithHexString:fineixColor];
@@ -87,9 +87,16 @@ static NSString * const reuseIdentifier = @"Cell";
     self.collectionView.bounces = NO;
     // Do any additional setup after loading the view.
     
-    //第一张的时候左边展示最后一张
-    
-    //最后一张的时候右边展示第一张
+    //发送请求获取数据
+    NSDictionary *params = @{
+                             @"page" : @1,
+                             @"size" : @15,
+                             @"sort" : @0,
+                             @"stick" : @1,
+                             };
+    FBRequest *request = [FBAPI postWithUrlString:recommendedScenarioURL requestDictionary:params delegate:self];
+    request.flag = recommendedScenarioURL;
+    [request startRequest];
     
 }
 
@@ -99,48 +106,48 @@ static NSString * const reuseIdentifier = @"Cell";
     self.navigationController.navigationBarHidden = NO;
 }
 
-#pragma mark -BMKLocationServiceDelegate
--(void)willStartLocatingUser{
-}
+//#pragma mark -BMKLocationServiceDelegate
+//-(void)willStartLocatingUser{
+//}
 
--(void)didFailToLocateUserWithError:(NSError *)error{
-    //[_hud hideAnimated:YES];
-    //发送请求获取数据
-    NSDictionary *params = @{
-                             @"page" : @1,
-                             @"size" : @15,
-                             @"sort" : @0,
-                             @"stick" : @1,
-                             @"dis" : @5000,
-                             @"lng" : @(39.9),
-                             @"lat" : @(116.3)
-                             };
-    FBRequest *request = [FBAPI postWithUrlString:recommendedScenarioURL requestDictionary:params delegate:self];
-    request.flag = recommendedScenarioURL;
-    [request startRequest];
-}
+//-(void)didFailToLocateUserWithError:(NSError *)error{
+//    //[_hud hideAnimated:YES];
+//    //发送请求获取数据
+//    NSDictionary *params = @{
+//                             @"page" : @1,
+//                             @"size" : @15,
+//                             @"sort" : @0,
+//                             @"stick" : @1,
+//                             @"dis" : @5000,
+//                             @"lng" : @(39.9),
+//                             @"lat" : @(116.3)
+//                             };
+//    FBRequest *request = [FBAPI postWithUrlString:recommendedScenarioURL requestDictionary:params delegate:self];
+//    request.flag = recommendedScenarioURL;
+//    [request startRequest];
+//}
 
-//定位成功，再次定位
--(void)didUpdateBMKUserLocation:(BMKUserLocation *)userLocation{
-    _la = userLocation.location.coordinate.latitude;
-    _lo = userLocation.location.coordinate.longitude;
-    
-
-    [_locationSevice stopUserLocationService];
-    //发送请求获取数据
-    NSDictionary *params = @{
-                             @"page" : @1,
-                             @"size" : @15,
-                             @"sort" : @0,
-                             @"stick" : @1,
-                             @"dis" : @5000,
-                             @"lng" : @(_lo),
-                             @"lat" : @(_la)
-                                 };
-    FBRequest *request = [FBAPI postWithUrlString:recommendedScenarioURL requestDictionary:params delegate:self];
-    request.flag = recommendedScenarioURL;
-    [request startRequest];
-}
+////定位成功，再次定位
+//-(void)didUpdateBMKUserLocation:(BMKUserLocation *)userLocation{
+//    _la = userLocation.location.coordinate.latitude;
+//    _lo = userLocation.location.coordinate.longitude;
+//    
+//
+//    [_locationSevice stopUserLocationService];
+//    //发送请求获取数据
+//    NSDictionary *params = @{
+//                             @"page" : @1,
+//                             @"size" : @15,
+//                             @"sort" : @0,
+//                             @"stick" : @1,
+//                             @"dis" : @5000,
+//                             @"lng" : @(_lo),
+//                             @"lat" : @(_la)
+//                                 };
+//    FBRequest *request = [FBAPI postWithUrlString:recommendedScenarioURL requestDictionary:params delegate:self];
+//    request.flag = recommendedScenarioURL;
+//    [request startRequest];
+//}
 
 -(void)requestSucess:(FBRequest *)request result:(id)result{
     if ([request.flag isEqualToString:recommendedScenarioURL]) {
