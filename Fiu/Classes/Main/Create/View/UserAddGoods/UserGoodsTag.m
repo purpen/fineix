@@ -176,7 +176,7 @@
 #pragma mark - 动画
 - (void)animationTimerDidFired {
     [UIView animateWithDuration:1.5 animations:^{
-        viewTapDot.transform = CGAffineTransformMakeScale(1.4,1.4);
+        viewTapDot.transform = CGAffineTransformMakeScale(1.2,1.2);
     } completion:^(BOOL finished) {
         [UIView animateWithDuration:1.5 animations:^{
             viewTapDot.transform = CGAffineTransformIdentity;

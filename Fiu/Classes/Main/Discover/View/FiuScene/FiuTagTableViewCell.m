@@ -21,7 +21,7 @@ static const NSInteger  rollTagBtnTag = 97;
         
         [self addSubview:self.tagRollView];
         [_tagRollView mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.size.mas_equalTo(CGSizeMake(SCREEN_WIDTH, 80));
+            make.width.mas_equalTo(SCREEN_WIDTH);
             make.top.equalTo(self.mas_top).with.offset(0);
             make.left.equalTo(self.mas_left).with.offset(0);
             make.bottom.equalTo(self.mas_bottom).with.offset(-5);

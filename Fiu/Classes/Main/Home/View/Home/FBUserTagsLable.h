@@ -24,6 +24,6 @@ typedef NS_ENUM(NSInteger, TagColor) {
 
 @pro_assign TagColor    colorType;
 
-- (void)setUserTagInfo:(NSString *)info;
+//- (void)setUserTagInfo:(NSString *)info;
 
 @end

@@ -11,7 +11,8 @@
 #import "FBShareViewController.h"
 #import "EditViewController.h"
 
-static const NSInteger actionBtnTag = 686;
+static NSInteger const actionBtnTag = 686;
+static NSInteger const fiuActionBtnTag = 696;
 
 @interface FBAlertViewController ()
 
@@ -48,6 +49,46 @@ static const NSInteger actionBtnTag = 686;
 
 - (void)closeBtnClick {
     [self dismissViewControllerAnimated:YES completion:nil];
+}
+
+#pragma mark - 情景中的“更多”选项
+- (void)initFiuSceneAlertStyle {
+    self.alertView.frame = CGRectMake(0, SCREEN_HEIGHT - 135, SCREEN_WIDTH, 135);
+    NSArray * alertTitle = @[NSLocalizedString(@"Edit", nil), NSLocalizedString(@"Delete", nil), NSLocalizedString(@"cancel", nil)];
+    for (NSUInteger idx = 0; idx < alertTitle.count; ++ idx) {
+        UIButton * actionBtn = [[UIButton alloc] initWithFrame:CGRectMake(0, 45 * idx, SCREEN_WIDTH, 44)];
+        actionBtn.tag = fiuActionBtnTag + idx;
+        actionBtn.titleLabel.font = [UIFont systemFontOfSize:16];
+        actionBtn.backgroundColor = [UIColor whiteColor];
+        [actionBtn setTitleColor:[UIColor blackColor] forState:(UIControlStateNormal)];
+        [actionBtn setTitle:alertTitle[idx] forState:(UIControlStateNormal)];
+        [actionBtn addTarget:self action:@selector(fiuActionBtnClick:) forControlEvents:(UIControlEventTouchUpInside)];
+        [self.alertView addSubview:actionBtn];
+    }
+}
+
+#pragma mark - 情景选项
+- (void)fiuActionBtnClick:(UIButton *)button {
+    if (button.tag == fiuActionBtnTag) {
+        EditViewController * editVC = [[EditViewController alloc] init];
+        editVC.createType = self.type;
+        editVC.ids = self.targetId;
+        editVC.data = self.fiuSceneData;
+        editVC.editDone = ^ {
+            [self dismissViewControllerAnimated:YES completion:^{
+                self.editDoneAndRefresh();
+            }];
+        };
+        [self presentViewController:editVC animated:YES completion:nil];
+        
+    } else if (button.tag == fiuActionBtnTag + 1) {
+        [self dismissViewControllerAnimated:YES completion:^{
+            self.deleteScene();
+        }];
+        
+    } else if (button.tag == fiuActionBtnTag + 2) {
+        [self dismissViewControllerAnimated:YES completion:nil];
+    }
 }
 
 #pragma mark - 场景中的“更多”选项

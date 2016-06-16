@@ -17,8 +17,10 @@
         [self addSubview:self.img];
         [_img mas_makeConstraints:^(MASConstraintMaker *make) {
             make.height.mas_equalTo(@150);
-            make.top.left.right.equalTo(self).with.offset(0);
+            make.top.left.equalTo(self).with.offset(0);
+            make.right.equalTo(self.mas_right).with.offset(0);
         }];
+        
     }
     return self;
 }

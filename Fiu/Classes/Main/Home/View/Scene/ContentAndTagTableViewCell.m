@@ -25,7 +25,19 @@
 }
 
 #pragma mark -
-- (void)setFiuSceneDescription:(FiuSceneInfoData *)model {
+- (void)setFiuSceneDescription:(FiuSceneInfoData *)model withEidt:(BOOL)canEidt {
+    if (canEidt) {
+        [self.chooseTagView mas_updateConstraints:^(MASConstraintMaker *make) {
+            make.width.mas_equalTo(SCREEN_WIDTH - 64);
+        }];
+        
+        [self addSubview:self.moreBtn];
+        [_moreBtn mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.size.mas_equalTo(CGSizeMake(44, 44));
+            make.centerY.equalTo(self.chooseTagView);
+            make.right.equalTo(self.mas_right).with.offset(-10);
+        }];
+    }
     [self changeContentLabStyle:model.des];
     self.chooseTagMarr = [NSMutableArray arrayWithArray:model.tagTitles];
     [self.chooseTagView reloadData];
@@ -39,19 +51,28 @@
 
 #pragma mark - 创建视图UI
 - (void)setCellViewUI {
-    [self.contentView addSubview:self.contentLab];
+    [self addSubview:self.contentLab];
     [_contentLab mas_makeConstraints:^(MASConstraintMaker *make) {
         make.size.mas_equalTo(CGSizeMake(SCREEN_WIDTH - 30, 15));
         make.top.equalTo(self.mas_top).with.offset(10);
         make.left.equalTo(self.mas_left).with.offset(20);
     }];
     
-    [self.contentView addSubview:self.chooseTagView];
+    [self addSubview:self.chooseTagView];
     [_chooseTagView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.size.mas_equalTo(CGSizeMake(SCREEN_WIDTH, 40));
-        make.top.equalTo(_contentLab.mas_bottom).with.offset(0);
+        make.bottom.equalTo(self.mas_bottom).with.offset(0);
         make.left.equalTo(self.mas_left).with.offset(0);
     }];
+}
+
+#pragma mark - 更多
+- (UIButton *)moreBtn {
+    if (!_moreBtn) {
+        _moreBtn = [[UIButton alloc] init];
+        [_moreBtn setImage:[UIImage imageNamed:@"more"] forState:(UIControlStateNormal)];
+    }
+    return _moreBtn;
 }
 
 #pragma mark - 描述内容文字
@@ -77,7 +98,7 @@
     CGSize size = [_contentLab boundingRectWithSize:CGSizeMake(SCREEN_WIDTH - 30, 0)];
     
     [_contentLab mas_updateConstraints:^(MASConstraintMaker *make) {
-        make.size.mas_equalTo(CGSizeMake(size.width , size.height + 20));
+        make.size.mas_equalTo(CGSizeMake(size.width , size.height * 1.2));
     }];
 }
 
@@ -85,7 +106,7 @@
 - (void)getContentCellHeight:(NSString *)content {
     _contentLab.text = content;
     CGSize size = [_contentLab boundingRectWithSize:CGSizeMake(SCREEN_WIDTH - 30, 0)];
-    self.cellHeight = size.height + 70;
+    self.cellHeight = (size.height * 1.2) + 60;
 }
 
 #pragma mark - 标签列表

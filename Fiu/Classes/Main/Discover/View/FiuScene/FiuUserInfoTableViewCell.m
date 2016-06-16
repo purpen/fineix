@@ -34,12 +34,13 @@
     //  是否是达人
     if (model.userInfo.isExpert == 1) {
         self.userVimg.hidden = NO;
-        [self.userStar setUserTagInfo:model.userInfo.expertLabel];
-        self.userProfile.text = [NSString stringWithFormat:@"%@", model.userInfo.expertInfo];
+//        [self.userStar setUserTagInfo:model.userInfo.expertLabel];
+        self.userStar.text = model.userInfo.expertLabel;
+        self.userProfile.text = [NSString stringWithFormat:@"|  %@", model.userInfo.expertInfo];
         CGSize size = [self.userStar boundingRectWithSize:CGSizeMake(100, 0)];
         
         [self.userStar mas_updateConstraints:^(MASConstraintMaker *make) {
-            make.width.mas_equalTo(size.width + 10);
+            make.width.mas_equalTo(size.width);
         }];
         [self.userProfile mas_updateConstraints:^(MASConstraintMaker *make) {
             make.left.equalTo(self.userStar.mas_right).with.offset(5);
@@ -183,7 +184,6 @@
         [_userView addSubview:self.time];
         [_time mas_makeConstraints:^(MASConstraintMaker *make) {
             make.height.mas_equalTo(CGSizeMake(150, 15));
-            make.bottom.equalTo(_city.mas_top).with.offset(-5);
             make.left.equalTo(_city.mas_right).with.offset(0);
             make.right.equalTo(_userView.mas_right).with.offset(-20);
         }];
@@ -203,7 +203,6 @@
     if (!_userLeftView) {
         _userLeftView = [[UIView alloc] init];
         _userLeftView.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"User_bg_left"]];
-        
     }
     return _userLeftView;
 }
@@ -268,14 +267,11 @@
 }
 
 #pragma mark - 认证标签
-- (FBUserTagsLable *)userStar {
+- (UILabel *)userStar {
     if (!_userStar) {
-        _userStar = [[FBUserTagsLable alloc] init];
-        _userStar.font = [UIFont systemFontOfSize:10];
-        _userStar.textAlignment = NSTextAlignmentCenter;
-        _userStar.layer.cornerRadius = 3;
-        _userStar.layer.masksToBounds = YES;
-        _userStar.layer.borderWidth = 0.5f;
+        _userStar = [[UILabel alloc] init];
+        _userStar.font = [UIFont systemFontOfSize:9];
+        _userStar.textColor = [UIColor colorWithHexString:@"#666666" alpha:1];
     }
     return _userStar;
 }

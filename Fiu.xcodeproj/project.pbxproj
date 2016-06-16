@@ -1908,6 +1908,7 @@
 		1F2A8C891CF40276005116C7 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				D8C690B51D11AA490026EAB5 /* FiuHeader */,
 				1F2A8C8A1CF40276005116C7 /* AllScene */,
 				1F2A8C8D1CF40276005116C7 /* Discover */,
 				1F2A8C911CF40276005116C7 /* FiuScene */,
@@ -3838,6 +3839,13 @@
 				D8C690B31D1125F80026EAB5 /* EditSceneAddMoreView.m */,
 			);
 			path = Edit;
+			sourceTree = "<group>";
+		};
+		D8C690B51D11AA490026EAB5 /* FiuHeader */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = FiuHeader;
 			sourceTree = "<group>";
 		};
 		D8E3AEA61CFC9B84006E5E8C /* CreateFiuScene */ = {

@@ -292,7 +292,7 @@
 - (UILabel *)describe {
     if (!_describe) {
         _describe = [[UILabel alloc] init];
-        _describe.textColor = [UIColor colorWithHexString:@"#666666" alpha:1];
+        _describe.textColor = [UIColor colorWithHexString:@"#222222" alpha:1];
         
         _describe.font = [UIFont systemFontOfSize:13];
         if (IS_PHONE5) {

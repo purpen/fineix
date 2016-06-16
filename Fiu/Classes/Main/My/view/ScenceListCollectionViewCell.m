@@ -72,7 +72,7 @@
     
     if (model.user.isExpert == 1) {
         self.userVimg.hidden = NO;
-        [self.userStar setUserTagInfo:model.user.expertLabel];
+//        [self.userStar setUserTagInfo:model.user.expertLabel];
         self.userProfile.text = [NSString stringWithFormat:@"%@", model.user.expertInfo];
         CGSize size = [self.userStar boundingRectWithSize:CGSizeMake(100, 0)];
         

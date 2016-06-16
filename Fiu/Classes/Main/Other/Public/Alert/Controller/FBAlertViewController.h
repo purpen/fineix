@@ -21,10 +21,13 @@ typedef void(^EditDoneAndRefresh)();
 @pro_strong NSString        *   targetId;
 @pro_strong UIView          *   alertView;
 @pro_strong NSDictionary    *   sceneData;
+@pro_strong NSDictionary    *   fiuSceneData;
 @pro_copy OpenCommentVC         openCommentVc;
 @pro_copy DeleteScene           deleteScene;
 @pro_copy EditDoneAndRefresh    editDoneAndRefresh;
 
 - (void)initFBAlertVcStyle:(BOOL)isUserSelf;
+
+- (void)initFiuSceneAlertStyle;
 
 @end

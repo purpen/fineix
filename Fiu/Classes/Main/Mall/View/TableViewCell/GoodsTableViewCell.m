@@ -21,7 +21,6 @@
 
 @end
 
-
 @implementation GoodsTableViewCell
 
 - (instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier {
@@ -143,7 +142,7 @@
     [cell.img downloadImage:self.goodsImgMarr[indexPath.row] place:[UIImage imageNamed:@""]];
 
     if (indexPath.row % 2 != 0) {
-        UIImageView * line = [[UIImageView alloc] initWithFrame:CGRectMake(278, 0, 3, 150)];
+        UIImageView * line = [[UIImageView alloc] initWithFrame:CGRectMake(278.5, 0, 3, 150)];
         line.image = [UIImage imageNamed:@"Goods_image_bg"];
         [cell addSubview:line];
     }

@@ -52,7 +52,7 @@ static NSString *const URLSceneList = @"/scene_sight/";
 #pragma mark - 网络请求
 - (void)networkRequestData {
     [SVProgressHUD show];
-    self.sceneListRequest = [FBAPI getWithUrlString:URLSceneList requestDictionary:@{@"page":@(self.currentpageNum + 1), @"size":@10, @"sort":@"1"} delegate:self];
+    self.sceneListRequest = [FBAPI getWithUrlString:URLSceneList requestDictionary:@{@"page":@(self.currentpageNum + 1), @"size":@10, @"sort":@"2",@"fine":@"1"} delegate:self];
     [self.sceneListRequest startRequestSuccess:^(FBRequest *request, id result) {
         NSArray * sceneArr = [[result valueForKey:@"data"] valueForKey:@"rows"];
         for (NSDictionary * sceneDic in sceneArr) {
