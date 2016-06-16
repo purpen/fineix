@@ -7,8 +7,10 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="ProjectViewController">
             <connections>
+                <outlet property="commentCountLabel" destination="FvF-lj-5DX" id="RHs-rM-wW0"/>
                 <outlet property="commentsBtn" destination="l6u-fR-QtN" id="LOp-pU-gHA"/>
                 <outlet property="loveBtn" destination="3fV-xL-wAy" id="j3S-N5-5tq"/>
+                <outlet property="loveContLabel" destination="OXg-Js-0Ou" id="dYT-eU-Jxt"/>
                 <outlet property="projectWebView" destination="YL1-l6-28g" id="3xS-v7-vt5"/>
                 <outlet property="shareBtn" destination="z9e-Gz-RIa" id="ccL-gw-FSt"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
@@ -22,36 +24,63 @@
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="YUT-u0-1Bo">
                     <rect key="frame" x="0.0" y="556" width="600" height="44"/>
                     <subviews>
-                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="z9e-Gz-RIa">
-                            <rect key="frame" x="277" y="7" width="46" height="30"/>
-                            <state key="normal" title="Button"/>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="z9e-Gz-RIa">
+                            <rect key="frame" x="294" y="11" width="13" height="22"/>
+                            <state key="normal" image="share_red"/>
+                            <connections>
+                                <action selector="shareBtn:" destination="-1" eventType="touchUpInside" id="5ce-bR-HGD"/>
+                            </connections>
                         </button>
-                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3fV-xL-wAy">
-                            <rect key="frame" x="30" y="7" width="46" height="30"/>
-                            <state key="normal" title="Button"/>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3fV-xL-wAy">
+                            <rect key="frame" x="50" y="13" width="25" height="18"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                            <inset key="contentEdgeInsets" minX="5" minY="0.0" maxX="0.0" maxY="0.0"/>
+                            <state key="normal" image="icon_like-1">
+                                <color key="titleColor" red="0.31372549020000001" green="0.31372549020000001" blue="0.31372549020000001" alpha="1" colorSpace="calibratedRGB"/>
+                            </state>
+                            <state key="selected" image="icon_like2"/>
+                            <connections>
+                                <action selector="loveBtn:" destination="-1" eventType="touchUpInside" id="JCJ-2g-DWl"/>
+                            </connections>
                         </button>
-                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="l6u-fR-QtN">
-                            <rect key="frame" x="524" y="7" width="46" height="30"/>
-                            <state key="normal" title="Button"/>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="l6u-fR-QtN">
+                            <rect key="frame" x="526" y="11" width="24" height="22"/>
+                            <state key="normal" image="comment_red"/>
                             <connections>
                                 <action selector="clickCommentsBtn:" destination="-1" eventType="touchUpInside" id="eR1-bk-HdT"/>
                             </connections>
                         </button>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="OXg-Js-0Ou">
+                            <rect key="frame" x="85" y="13" width="10" height="18"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                            <color key="textColor" red="0.31372549020000001" green="0.31372549020000001" blue="0.31372549020000001" alpha="1" colorSpace="calibratedRGB"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="FvF-lj-5DX">
+                            <rect key="frame" x="560" y="13" width="10" height="18"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                            <color key="textColor" red="0.31372549020000001" green="0.31372549020000001" blue="0.31372549020000001" alpha="1" colorSpace="calibratedRGB"/>
+                            <nil key="highlightedColor"/>
+                        </label>
                     </subviews>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     <constraints>
-                        <constraint firstItem="3fV-xL-wAy" firstAttribute="leading" secondItem="YUT-u0-1Bo" secondAttribute="leading" constant="30" id="0gj-DJ-JId"/>
+                        <constraint firstItem="3fV-xL-wAy" firstAttribute="leading" secondItem="YUT-u0-1Bo" secondAttribute="leading" constant="50" id="0gj-DJ-JId"/>
+                        <constraint firstItem="FvF-lj-5DX" firstAttribute="leading" secondItem="l6u-fR-QtN" secondAttribute="trailing" constant="10" id="A9B-dS-re6"/>
                         <constraint firstItem="z9e-Gz-RIa" firstAttribute="centerY" secondItem="YUT-u0-1Bo" secondAttribute="centerY" id="B4v-q5-sYw"/>
-                        <constraint firstAttribute="trailing" secondItem="l6u-fR-QtN" secondAttribute="trailing" constant="30" id="FGY-IJ-Qld"/>
+                        <constraint firstAttribute="trailing" secondItem="l6u-fR-QtN" secondAttribute="trailing" constant="50" id="FGY-IJ-Qld"/>
                         <constraint firstItem="z9e-Gz-RIa" firstAttribute="centerX" secondItem="YUT-u0-1Bo" secondAttribute="centerX" id="JJ6-fr-Jzw"/>
                         <constraint firstItem="3fV-xL-wAy" firstAttribute="centerY" secondItem="YUT-u0-1Bo" secondAttribute="centerY" id="L1v-qP-9s9"/>
                         <constraint firstAttribute="height" constant="44" id="L7i-Hi-TVN"/>
+                        <constraint firstItem="FvF-lj-5DX" firstAttribute="centerY" secondItem="YUT-u0-1Bo" secondAttribute="centerY" id="TrN-FH-4Y7"/>
                         <constraint firstItem="l6u-fR-QtN" firstAttribute="centerY" secondItem="YUT-u0-1Bo" secondAttribute="centerY" id="U09-ln-CtF"/>
+                        <constraint firstItem="OXg-Js-0Ou" firstAttribute="centerY" secondItem="YUT-u0-1Bo" secondAttribute="centerY" id="jr5-hN-I3u"/>
+                        <constraint firstItem="OXg-Js-0Ou" firstAttribute="leading" secondItem="3fV-xL-wAy" secondAttribute="trailing" constant="10" id="uHW-TR-JdQ"/>
                     </constraints>
                 </view>
                 <webView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="YL1-l6-28g">
                     <rect key="frame" x="0.0" y="64" width="600" height="492"/>
-                    <color key="backgroundColor" red="0.36078431370000003" green="0.38823529410000002" blue="0.4039215686" alpha="1" colorSpace="deviceRGB"/>
+                    <color key="backgroundColor" red="0.98039215690000003" green="0.98039215690000003" blue="0.98039215690000003" alpha="1" colorSpace="calibratedRGB"/>
                 </webView>
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
@@ -66,4 +95,10 @@
             </constraints>
         </view>
     </objects>
+    <resources>
+        <image name="comment_red" width="24" height="19"/>
+        <image name="icon_like-1" width="20" height="18"/>
+        <image name="icon_like2" width="20" height="18"/>
+        <image name="share_red" width="13" height="19"/>
+    </resources>
 </document>

@@ -439,6 +439,7 @@
 		1FD59C131D115FD50025A800 /* ProjectViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1FD59C111D115FD50025A800 /* ProjectViewController.m */; };
 		1FD59C141D115FD50025A800 /* ProjectViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1FD59C121D115FD50025A800 /* ProjectViewController.xib */; };
 		1FD59C181D11A8190025A800 /* ProjectViewCommentsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1FD59C161D11A8190025A800 /* ProjectViewCommentsViewController.m */; };
+		1FD5BD7A1D12565100EB345D /* ProjectModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 1FD5BD791D12565100EB345D /* ProjectModel.m */; };
 		280045111C805B78005F5C2E /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 280045101C805B78005F5C2E /* CoreLocation.framework */; };
 		280045131C805B82005F5C2E /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 280045121C805B82005F5C2E /* QuartzCore.framework */; };
 		280045151C805B8C005F5C2E /* OpenGLES.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 280045141C805B8C005F5C2E /* OpenGLES.framework */; };
@@ -1305,6 +1306,8 @@
 		1FD59C121D115FD50025A800 /* ProjectViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ProjectViewController.xib; sourceTree = "<group>"; };
 		1FD59C151D11A8190025A800 /* ProjectViewCommentsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProjectViewCommentsViewController.h; sourceTree = "<group>"; };
 		1FD59C161D11A8190025A800 /* ProjectViewCommentsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ProjectViewCommentsViewController.m; sourceTree = "<group>"; };
+		1FD5BD781D12565100EB345D /* ProjectModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProjectModel.h; sourceTree = "<group>"; };
+		1FD5BD791D12565100EB345D /* ProjectModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ProjectModel.m; sourceTree = "<group>"; };
 		280045101C805B78005F5C2E /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
 		280045121C805B82005F5C2E /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		280045141C805B8C005F5C2E /* OpenGLES.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGLES.framework; path = System/Library/Frameworks/OpenGLES.framework; sourceTree = SDKROOT; };
@@ -3551,6 +3554,8 @@
 		1FD59C0E1D115FB20025A800 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				1FD5BD781D12565100EB345D /* ProjectModel.h */,
+				1FD5BD791D12565100EB345D /* ProjectModel.m */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -4208,6 +4213,7 @@
 				1F2A902E1CF40277005116C7 /* DeliveryAddressModel.m in Sources */,
 				1F2A90991CF40277005116C7 /* CommentDataTableViewCell.m in Sources */,
 				1F2A8F641CF40277005116C7 /* UserGoodsTag.m in Sources */,
+				1FD5BD7A1D12565100EB345D /* ProjectModel.m in Sources */,
 				1F2A90331CF40277005116C7 /* ChatTableViewCell.m in Sources */,
 				1F2A8F591CF40277005116C7 /* AllTagListTableViewCell.m in Sources */,
 				1F2A90271CF40277005116C7 /* CertIdView.m in Sources */,
