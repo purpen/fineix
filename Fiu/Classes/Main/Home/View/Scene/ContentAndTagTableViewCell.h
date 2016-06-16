@@ -16,12 +16,13 @@
 @interface ContentAndTagTableViewCell : UITableViewCell <UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout>
 
 @pro_strong UINavigationController      *   nav;
+@pro_strong UIButton                    *   moreBtn;        //  更多
 @pro_strong UILabel                     *   contentLab;     //  场景内容文字
 @pro_assign CGFloat                         cellHeight;
 @pro_strong UICollectionView            *   chooseTagView;  //  选择的标签列表
 @pro_strong NSMutableArray              *   chooseTagMarr;
 
-- (void)setFiuSceneDescription:(FiuSceneInfoData *)model;
+- (void)setFiuSceneDescription:(FiuSceneInfoData *)model withEidt:(BOOL)canEidt;
 
 - (void)setSceneDescription:(SceneInfoData *)model;
 

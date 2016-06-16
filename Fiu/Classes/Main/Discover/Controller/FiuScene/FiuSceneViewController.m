@@ -7,32 +7,20 @@
 //
 
 #import "FiuSceneViewController.h"
-#import "FiuUserInfoTableViewCell.h"
-#import "ContentAndTagTableViewCell.h"
-#import "LikePeopleTableViewCell.h"
-#import "SceneListTableViewCell.h"
-#import "SceneInfoViewController.h"
-#import "PictureToolViewController.h"
-#import "FiuSceneInfoData.h"
-#import "NoHaveSceneTableViewCell.h"
-#import "NearChangViewController.h"
 
 static NSString *const URLFiuSceneInfo = @"/scene_scene/view";
 static NSString *const URLFiuSceneList = @"/scene_sight/";
 static NSString *const URLSuFiuScene = @"/favorite/ajax_subscription";
 static NSString *const URLCancelSu = @"/favorite/ajax_cancel_subscription";
 static NSString *const URLLikeScenePeople = @"/favorite";
+static NSString *const URLDeleteScene = @"/scene_scene/delete";
 
 @interface FiuSceneViewController () {
-    BOOL    _isHave;     //  是否有场景
+    BOOL              _isHave;        //  是否有场景
+    BOOL              _canEdit;       //  是否可以编辑
+    NSString        * _creatUserId;   //  创建用户id
+    NSDictionary    * _fiuData;       //  情景数据
 }
-
-@pro_strong FiuSceneInfoData            *   fiuSceneData;
-@pro_strong NSMutableArray              *   sceneListMarr;
-@pro_strong NSMutableArray              *   sceneIdMarr;
-@pro_strong NSMutableArray              *   suPeopleMarr;     //  点赞的人
-/**城市图标加手势 */
-@property(nonatomic,strong) UITapGestureRecognizer *cityTap;
 
 @end
 
@@ -47,6 +35,8 @@ static NSString *const URLLikeScenePeople = @"/favorite";
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    _canEdit = NO;
+    
     [self setSceneInfoViewUI];
     [self networkRequestData];
     [self networkLikePeopleData];
@@ -54,14 +44,17 @@ static NSString *const URLLikeScenePeople = @"/favorite";
     [self networkFiuSceneListData];
 }
 
-
 #pragma mark - 网络请求
 #pragma mark 情景详情
 - (void)networkRequestData {
     [SVProgressHUD show];
     self.fiuSceneRequest = [FBAPI getWithUrlString:URLFiuSceneInfo requestDictionary:@{@"id":self.fiuSceneId} delegate:self];
     [self.fiuSceneRequest startRequestSuccess:^(FBRequest *request, id result) {
-        NSLog(@"＝＝＝＝＝＝＝＝＝＝ 情景 %@", result);
+        _fiuData = [NSDictionary dictionaryWithDictionary:[result valueForKey:@"data"]];
+        _creatUserId = [NSString stringWithFormat:@"%@", [[result valueForKey:@"data"] valueForKey:@"user_id"]];
+        if ([_creatUserId isEqualToString:[self getLoginUserID]]) {
+            _canEdit = YES;
+        }
         self.fiuSceneData = [[FiuSceneInfoData alloc] initWithDictionary:[result valueForKey:@"data"]];
         [self.fiuSceneTable reloadData];
         [self requestIsLastData:self.fiuSceneTable currentPage:self.currentpageNum withTotalPage:self.totalPageNum];
@@ -144,7 +137,19 @@ static NSString *const URLLikeScenePeople = @"/favorite";
             [SVProgressHUD showErrorWithStatus:[error localizedDescription]];
         }];
     }
-    
+}
+
+#pragma mark - 删除情景
+- (void)deleteTheScene {
+    self.delFiuSceneRequest = [FBAPI postWithUrlString:URLDeleteScene requestDictionary:@{@"id":self.fiuSceneId} delegate:self];
+    [self.delFiuSceneRequest startRequestSuccess:^(FBRequest *request, id result) {
+        if ([[result valueForKey:@"success"] isEqualToNumber:@1]) {
+            [self.navigationController popViewControllerAnimated:YES];
+        }
+    } failure:^(FBRequest *request, NSError *error) {
+        NSLog(@"error :%@", error);
+        [SVProgressHUD showErrorWithStatus:[error localizedDescription]];
+    }];
 }
 
 #pragma mark 判断是否为最后一条数据
@@ -248,7 +253,10 @@ static NSString *const URLLikeScenePeople = @"/favorite";
                 cell = [[ContentAndTagTableViewCell alloc] initWithStyle:(UITableViewCellStyleDefault) reuseIdentifier:contentCellId];
             }
             cell.nav = self.navigationController;
-            [cell setFiuSceneDescription:self.fiuSceneData];
+            [cell setFiuSceneDescription:self.fiuSceneData withEidt:_canEdit];
+            if (_canEdit) {
+                [cell.moreBtn addTarget:self action:@selector(moreBtnClick) forControlEvents:(UIControlEventTouchUpInside)];
+            }
             return cell;
             
         } else if (indexPath.row == 2) {
@@ -357,6 +365,60 @@ static NSString *const URLLikeScenePeople = @"/favorite";
             [self presentViewController:pictureToolVC animated:YES completion:nil];
         }
     }
+}
+
+#pragma mark - 情景编辑／删除
+- (void)moreBtnClick {
+    FBAlertViewController * alertVC = [[FBAlertViewController alloc] init];
+    [alertVC initFiuSceneAlertStyle];
+    alertVC.modalPresentationStyle = UIModalPresentationOverCurrentContext;
+    alertVC.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;
+    alertVC.type = @"fScene";
+    alertVC.targetId = self.fiuSceneId;
+    alertVC.fiuSceneData = _fiuData;
+    alertVC.deleteScene = ^ {
+        if (_isHave) {
+            [SVProgressHUD showInfoWithStatus:@"此情景下有场景，不能删除"];
+            
+        } else {
+            TYAlertView * cancelAlertView = [TYAlertView alertViewWithTitle:@"是否删除当前情景？" message:@""];
+            [cancelAlertView addAction:[TYAlertAction actionWithTitle:@"取消" style:(TYAlertActionStyleCancle) handler:^(TYAlertAction *action) {
+                
+            }]];
+            [cancelAlertView addAction:[TYAlertAction actionWithTitle:@"确定删除" style:(TYAlertActionStyleDefault) handler:^(TYAlertAction *action) {
+                [self deleteTheScene];
+            }]];
+            [cancelAlertView showInWindowWithBackgoundTapDismissEnable:YES];
+        }
+    };
+    alertVC.editDoneAndRefresh = ^{
+        [self refreshRequestData];
+    };
+
+    [self presentViewController:alertVC animated:YES completion:nil];
+}
+
+- (void)refreshRequestData {
+    [SVProgressHUD show];
+    self.fiuSceneRequest = [FBAPI getWithUrlString:URLFiuSceneInfo requestDictionary:@{@"id":self.fiuSceneId} delegate:self];
+    [self.fiuSceneRequest startRequestSuccess:^(FBRequest *request, id result) {
+        _fiuData = [NSDictionary dictionaryWithDictionary:[result valueForKey:@"data"]];
+        _creatUserId = [NSString stringWithFormat:@"%@", [[result valueForKey:@"data"] valueForKey:@"user_id"]];
+        if ([_creatUserId isEqualToString:[self getLoginUserID]]) {
+            _canEdit = YES;
+        }
+        self.fiuSceneData = [[FiuSceneInfoData alloc] initWithDictionary:[result valueForKey:@"data"]];
+        NSIndexPath * indexPath = [NSIndexPath indexPathForRow:0 inSection:0];
+        [self.fiuSceneTable reloadRowsAtIndexPaths:[NSArray arrayWithObjects:indexPath,nil] withRowAnimation:UITableViewRowAnimationNone];
+        NSIndexPath * contentIndexPath = [NSIndexPath indexPathForRow:1 inSection:0];
+        [self.fiuSceneTable reloadRowsAtIndexPaths:[NSArray arrayWithObjects:contentIndexPath,nil] withRowAnimation:UITableViewRowAnimationNone];
+        
+        [self requestIsLastData:self.fiuSceneTable currentPage:self.currentpageNum withTotalPage:self.totalPageNum];
+        [SVProgressHUD dismiss];
+        
+    } failure:^(FBRequest *request, NSError *error) {
+        [SVProgressHUD showErrorWithStatus:[error localizedDescription]];
+    }];
 }
 
 #pragma mark - 判断上／下滑状态，显示/隐藏Nav/tabBar

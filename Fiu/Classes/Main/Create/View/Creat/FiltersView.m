@@ -30,19 +30,20 @@
                              NSLocalizedString(@"FiltersNameK", nil),
                              nil];
         
-        self.filters = [NSArray arrayWithObjects:
-                        @"CIColorCrossPolynomial",
-                        @"CIColorMonochrome",
-                        @"CIFalseColor",
-                        @"CIMaximumComponent",
-                        @"CIMinimumComponent",
-                        @"CIPhotoEffectChrome",
-                        @"CIPhotoEffectFade",
-                        @"CIPhotoEffectInstant",
-                        @"CIPhotoEffectNoir",
-                        @"CIPhotoEffectProcess",
-                        @"CIPhotoEffectTransfer",
-                        @"CISepiaTone", nil];
+        self.filters = @[
+                         @"CIColorCrossPolynomial",
+                         @"CIPhotoEffectFade",
+                         @"CIPhotoEffectNoir",
+                         @"CIPhotoEffectTransfer",
+                         @"CIColorMonochrome",
+                         @"CIPhotoEffectInstant",
+                         @"CIMaximumComponent",
+                         @"CIPhotoEffectChrome",
+                         @"CISepiaTone",
+                         @"CIMinimumComponent",
+                         @"CIPhotoEffectProcess",
+                         @"CIFalseColor"
+                         ];
         
         
         

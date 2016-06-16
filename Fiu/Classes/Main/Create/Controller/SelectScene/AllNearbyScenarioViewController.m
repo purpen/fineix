@@ -15,7 +15,7 @@
 #import "UserInfo.h"
 #import "ReleaseViewController.h"
 
-@interface AllNearbyScenarioViewController ()<FBNavigationBarItemsDelegate,UITableViewDelegate,UITableViewDataSource,BMKLocationServiceDelegate,BMKMapViewDelegate>
+@interface AllNearbyScenarioViewController ()<UITableViewDelegate,UITableViewDataSource,BMKLocationServiceDelegate,BMKMapViewDelegate>
 {
     BMKLocationService *_locService;
     float _latitude;
@@ -41,13 +41,16 @@
 
 @implementation AllNearbyScenarioViewController
 
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    
+    [self setNavViewUI];
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     _n = 0;
-    // Do any additional setup after loading the view from its nib.
-    self.delegate = self;
-    self.navViewTitle.text = @"选择情景";
-    [self addBarItemRightBarButton:@"确定" image:nil isTransparent:NO];
+    
     [self getLocation];
     
     self.sceneListTableView.delegate = self;
@@ -64,6 +67,65 @@
             [self.sceneListTableView.mj_footer endRefreshing];
         }
     }];
+}
+
+#pragma mark - 设置顶部导航栏
+- (void)setNavViewUI {
+    self.view.backgroundColor = [UIColor whiteColor];
+    self.navView.backgroundColor = [UIColor whiteColor];
+    [self addNavViewTitle:NSLocalizedString(@"chooseSceneVcTitle", nil)];
+    self.navTitle.textColor = [UIColor blackColor];
+    if ([self.type isEqualToString:@"release"]) {
+        [self addBackButton:@"icon_back"];
+    } else if ([self.type isEqualToString:@"edit"]) {
+        [self addCloseBtn];
+    }
+    [self addLine];
+    [self.navView addSubview:self.sureBtn];
+}
+
+#pragma mark - 确定按钮
+- (UIButton *)sureBtn {
+    if (!_sureBtn) {
+        _sureBtn = [[UIButton alloc] initWithFrame:CGRectMake((SCREEN_WIDTH - 60), 0, 50, 50)];
+        [_sureBtn setTitleColor:[UIColor blackColor] forState:(UIControlStateNormal)];
+        _sureBtn.titleLabel.font = [UIFont systemFontOfSize:Font_ControllerTitle];
+        [self.sureBtn setTitle:NSLocalizedString(@"sure", nil) forState:(UIControlStateNormal)];
+        [self.sureBtn addTarget:self action:@selector(editSureBtnClick) forControlEvents:(UIControlEventTouchUpInside)];
+    }
+    return _sureBtn;
+}
+
+- (void)editSureBtnClick {
+    BOOL flag = NO;
+    int i = 0;
+    for (; i<self.flagMary.count; i++) {
+        UserInfo *model = self.flagMary[i];
+        if (model.is_love == 1) {
+            flag = YES;
+            break;
+        }
+    }
+    if (flag) {
+        [[NSNotificationCenter defaultCenter] postNotificationName:@"selectFiuSceneId" object:self.idMarr[i]];
+        [[NSNotificationCenter defaultCenter] postNotificationName:@"selectFiuSceneTitle" object:self.titleMarr[i]];
+        
+        if ([self.type isEqualToString:@"release"]) {
+            for (UIViewController * vc in self.navigationController.viewControllers) {
+                if ([vc isKindOfClass:[ReleaseViewController class]]) {
+                    [self.navigationController popToViewController:vc animated:YES];
+                }
+            }
+            
+        } else if ([self.type isEqualToString:@"edit"]) {
+            [self dismissViewControllerAnimated:YES completion:^{
+                self.dismissVC();
+            }];
+        }
+        
+    } else {
+        [SVProgressHUD showInfoWithStatus:@"请选择一个情景"];
+    }
 }
 
 //上拉
@@ -343,35 +405,6 @@
         [tableView reloadRowsAtIndexPaths:[NSArray arrayWithObjects:indexPath, nil] withRowAnimation:UITableViewRowAnimationNone];
     }
     NSLog(@" 选中附近的情景： id－－－%@  标题 ＝＝＝ %@", self.idMarr[indexPath.row], self.titleMarr[indexPath.row]);
-}
-
--(void)rightBarItemSelected{
-    BOOL flag = NO;
-    int i = 0;
-    for (; i<self.flagMary.count; i++) {
-        UserInfo *model = self.flagMary[i];
-        if (model.is_love == 1) {
-            flag = YES;
-            break;
-        }
-    }
-    if (flag) {
-        for (UIViewController * vc in self.navigationController.viewControllers) {
-            if ([vc isKindOfClass:[ReleaseViewController class]]) {
-                [[NSNotificationCenter defaultCenter] postNotificationName:@"selectFiuSceneId" object:self.idMarr[i]];
-                [[NSNotificationCenter defaultCenter] postNotificationName:@"selectFiuSceneTitle" object:self.titleMarr[i]];
-                [self.navigationController popToViewController:vc animated:YES];
-            }
-        }
-        
-    } else {
-        [SVProgressHUD showInfoWithStatus:@"请选择一个情景"];
-    }
-}
-
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
 }
 
 -(void)dealloc{

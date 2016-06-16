@@ -45,15 +45,15 @@
     self.city.text = [self abouText:self.city withText:model.address];
     self.time.text = [NSString stringWithFormat:@"|  %@", model.createdAt];
     
-    
     if (model.user.isExpert == 1) {
         self.userVimg.hidden = NO;
-        [self.userStar setUserTagInfo:model.user.expertLabel];
-        self.userProfile.text = [NSString stringWithFormat:@"%@", model.user.expertInfo];
+//        [self.userStar setUserTagInfo:model.user.expertLabel];
+        self.userStar.text = model.user.expertLabel;
+        self.userProfile.text = [NSString stringWithFormat:@"|  %@", model.user.expertInfo];
         CGSize size = [self.userStar boundingRectWithSize:CGSizeMake(100, 0)];
     
         [self.userStar mas_updateConstraints:^(MASConstraintMaker *make) {
-            make.width.mas_equalTo(size.width + 10);
+            make.width.mas_equalTo(size.width);
         }];
         [self.userProfile mas_updateConstraints:^(MASConstraintMaker *make) {
             make.left.equalTo(self.userStar.mas_right).with.offset(5);
@@ -64,8 +64,8 @@
     }
 
     //  首页显示标记点
-//    self.tagDataMarr = [NSMutableArray arrayWithArray:model.product];
-//    [self setUserTagBtn];
+    self.tagDataMarr = [NSMutableArray arrayWithArray:model.product];
+    [self setUserTagBtn];
 }
 
 #pragma mark - 创建用户添加商品按钮
@@ -223,14 +223,11 @@
 }
 
 #pragma mark - 认证标签
-- (FBUserTagsLable *)userStar {
+- (UILabel *)userStar {
     if (!_userStar) {
-        _userStar = [[FBUserTagsLable alloc] init];
-        _userStar.font = [UIFont systemFontOfSize:10];
-        _userStar.textAlignment = NSTextAlignmentCenter;
-        _userStar.layer.cornerRadius = 3;
-        _userStar.layer.masksToBounds = YES;
-        _userStar.layer.borderWidth = 0.5f;
+        _userStar = [[UILabel alloc] init];
+        _userStar.font = [UIFont systemFontOfSize:11];
+        _userStar.textColor = [UIColor whiteColor];
     }
     return _userStar;
 }

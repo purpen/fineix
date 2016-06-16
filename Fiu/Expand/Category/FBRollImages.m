@@ -33,6 +33,10 @@
 }
 
 - (void)setRollimageView:(NSMutableArray *)model {
+    [self.imgMarr removeAllObjects];
+    [self.typeMarr removeAllObjects];
+    [self.targetIdMarr removeAllObjects];
+    
     for (RollImageRow * row in model) {
         [self.imgMarr addObject:row.coverUrl];
         [self.typeMarr addObject:row.type];

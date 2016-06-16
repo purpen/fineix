@@ -127,7 +127,7 @@ static NSString *const URLFiuPeople = @"/user/find_user";
 
 #pragma mark 情景列表
 - (void)networkFiuSceneData {
-    self.fiuSceneRequest = [FBAPI getWithUrlString:URLFiuScene requestDictionary:@{@"sort":@"2",@"page":@"1",@"size":@"10"} delegate:self];
+    self.fiuSceneRequest = [FBAPI getWithUrlString:URLFiuScene requestDictionary:@{@"sort":@"2",@"fine":@"1",@"page":@"1",@"size":@"10"} delegate:self];
     [self.fiuSceneRequest startRequestSuccess:^(FBRequest *request, id result) {
         NSArray * fiuSceneArr = [[result valueForKey:@"data"] valueForKey:@"rows"];
         for (NSDictionary * fiuSceneDic in fiuSceneArr) {
@@ -266,38 +266,35 @@ static NSString *const URLFiuPeople = @"/user/find_user";
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     if (indexPath.section == 0) {
         if (indexPath.row == 0) {
-//            static NSString * fiuPeopleCellId = @"FiuPeopleCellId";
-//            FiuPeopleTableViewCell * cell = [tableView dequeueReusableCellWithIdentifier:fiuPeopleCellId];
-//            if (!cell) {
-//                cell = [[FiuPeopleTableViewCell alloc] initWithStyle:(UITableViewCellStyleDefault) reuseIdentifier:fiuPeopleCellId];
-//            }
+            static NSString * fiuPeopleCellId = @"FiuPeopleCellId";
+            FiuPeopleTableViewCell * cell = [tableView dequeueReusableCellWithIdentifier:fiuPeopleCellId];
+            cell = [[FiuPeopleTableViewCell alloc] initWithStyle:(UITableViewCellStyleDefault) reuseIdentifier:fiuPeopleCellId];
 //            [cell setFiuPeopleData:self.fiuPeopleList withType:0];
-//            cell.nav = self.navigationController;
-//            return cell;
-            
-            static NSString *fiuPeopleCellId = @"FiuPeople";
-            UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:fiuPeopleCellId];
-            if (cell == nil) {
-                cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:fiuPeopleCellId];
-                cell.selectionStyle = UITableViewCellSelectionStyleNone;
-            }
-            
-            static dispatch_once_t onceToken;
-            dispatch_once(&onceToken, ^{
-                [cell addSubview:self.fiuView];
-                [_fiuView mas_makeConstraints:^(MASConstraintMaker *make) {
-                    make.size.mas_equalTo(CGSizeMake(SCREEN_WIDTH, 155/667.0*SCREEN_HEIGHT));
-                    make.left.mas_equalTo(cell.mas_left);
-                    make.top.mas_equalTo(cell.mas_top);
-                }];
-            });
-
+            cell.nav = self.navigationController;
             return cell;
+            
+            
+//            static NSString *fiuPeopleCellId = @"FiuPeople";
+//            UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:fiuPeopleCellId];
+//            cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:fiuPeopleCellId];
+//            cell.selectionStyle = UITableViewCellSelectionStyleNone;
+//            static dispatch_once_t onceToken;
+//            dispatch_once(&onceToken, ^{
+//                [cell addSubview:self.fiuView];
+//                [_fiuView mas_makeConstraints:^(MASConstraintMaker *make) {
+//                    make.size.mas_equalTo(CGSizeMake(SCREEN_WIDTH, 155/667.0*SCREEN_HEIGHT));
+//                    make.left.mas_equalTo(cell.mas_left);
+//                    make.top.mas_equalTo(cell.mas_top);
+//                }];
+//            });
+//            return cell;
             
         } else if (indexPath.row == 1) {
             static NSString * fiuSceneTagCellId = @"fiuSceneTagCellId";
             FiuTagTableViewCell * cell = [tableView dequeueReusableCellWithIdentifier:fiuSceneTagCellId];
-            cell = [[FiuTagTableViewCell alloc] initWithStyle:(UITableViewCellStyleDefault) reuseIdentifier:fiuSceneTagCellId];
+            if (!cell) {
+                cell = [[FiuTagTableViewCell alloc] initWithStyle:(UITableViewCellStyleDefault) reuseIdentifier:fiuSceneTagCellId];
+            }
             [cell setHotTagsData:self.tagsList];
             cell.nav = self.navigationController;
             return cell;
@@ -306,7 +303,9 @@ static NSString *const URLFiuPeople = @"/user/find_user";
     } else if (indexPath.section == 1) {
         static NSString * fiuSceneCellId = @"fiuSceneCellId";
         FiuSceneTableViewCell * cell = [tableView dequeueReusableCellWithIdentifier:fiuSceneCellId];
-        cell = [[FiuSceneTableViewCell alloc] initWithStyle:(UITableViewCellStyleDefault) reuseIdentifier:fiuSceneCellId];
+        if (!cell) {
+            cell = [[FiuSceneTableViewCell alloc] initWithStyle:(UITableViewCellStyleDefault) reuseIdentifier:fiuSceneCellId];
+        }
         [cell setFiuSceneList:self.fiuSceneList idMarr:self.fiuSceneIdList];
         cell.nav = self.navigationController;
         return cell;
@@ -314,7 +313,9 @@ static NSString *const URLFiuPeople = @"/user/find_user";
     } else if (indexPath.section == 2) {
         static NSString * sceneListCellId = @"sceneListCellId";
         SceneListTableViewCell * cell = [tableView dequeueReusableCellWithIdentifier:sceneListCellId];
-        cell = [[SceneListTableViewCell alloc] initWithStyle:(UITableViewCellStyleDefault) reuseIdentifier:sceneListCellId];
+        if (!cell) {
+            cell = [[SceneListTableViewCell alloc] initWithStyle:(UITableViewCellStyleDefault) reuseIdentifier:sceneListCellId];
+        }
         [cell setHomeSceneListData:self.sceneList[indexPath.row]];
         return cell;
     }

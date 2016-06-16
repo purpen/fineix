@@ -18,7 +18,6 @@
 @pro_strong NSMutableArray          *   userTagMarr;
 @pro_strong NSMutableArray          *   showUserTagMarr;
 @pro_strong NSMutableArray          *   goodsIds;
-@pro_strong UIButton                *   showGoodsTagsView;
 
 @pro_strong UIImage                 *   backgroundImage;
 @pro_strong UIImage                 *   blurredBackgroundImage;

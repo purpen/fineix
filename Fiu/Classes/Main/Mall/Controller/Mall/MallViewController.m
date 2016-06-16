@@ -256,33 +256,33 @@ static NSString *const URLFiuBrand = @"/scene_brands/getlist";
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     if (indexPath.section == 0) {
         if (indexPath.row == 0) {
-//            static NSString * mallBrandCellId = @"mallBrandCellId";
-//            FiuPeopleTableViewCell * cell = [tableView dequeueReusableCellWithIdentifier:mallBrandCellId];
-//            if (!cell) {
-//                cell = [[FiuPeopleTableViewCell alloc] initWithStyle:(UITableViewCellStyleDefault) reuseIdentifier:mallBrandCellId];
-//            }
-//            cell.nav = self.navigationController;
+            static NSString * mallBrandCellId = @"mallBrandCellId";
+            FiuPeopleTableViewCell * cell = [tableView dequeueReusableCellWithIdentifier:mallBrandCellId];
+            cell = [[FiuPeopleTableViewCell alloc] initWithStyle:(UITableViewCellStyleDefault) reuseIdentifier:mallBrandCellId];
+            cell.nav = self.navigationController;
 //            [cell setFiuBrandData:self.brandList withType:1];
-//            return cell;
-            
-            static NSString *fiuPeopleCellId = @"FiuPeople";
-            UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:fiuPeopleCellId];
-            if (cell == nil) {
-                cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:fiuPeopleCellId];
-                cell.selectionStyle = UITableViewCellSelectionStyleNone;
-            }
-            [cell.contentView addSubview:self.fiuView];
-            [_fiuView mas_makeConstraints:^(MASConstraintMaker *make) {
-                make.size.mas_equalTo(CGSizeMake(SCREEN_WIDTH, 155/667.0*SCREEN_HEIGHT));
-                make.left.mas_equalTo(cell.mas_left);
-                make.top.mas_equalTo(cell.mas_top);
-            }];
             return cell;
+            
+//            static NSString *fiuPeopleCellId = @"FiuPeople";
+//            UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:fiuPeopleCellId];
+//            if (cell == nil) {
+//                cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:fiuPeopleCellId];
+//                cell.selectionStyle = UITableViewCellSelectionStyleNone;
+//            }
+//            [cell.contentView addSubview:self.fiuView];
+//            [_fiuView mas_makeConstraints:^(MASConstraintMaker *make) {
+//                make.size.mas_equalTo(CGSizeMake(SCREEN_WIDTH, 155/667.0*SCREEN_HEIGHT));
+//                make.left.mas_equalTo(cell.mas_left);
+//                make.top.mas_equalTo(cell.mas_top);
+//            }];
+//            return cell;
 
         } else if (indexPath.row == 1) {
             static NSString * mallGoodsTagCellId = @"mallGoodsTagCellId";
             FiuTagTableViewCell * cell = [tableView dequeueReusableCellWithIdentifier:mallGoodsTagCellId];
-            cell = [[FiuTagTableViewCell alloc] initWithStyle:(UITableViewCellStyleDefault) reuseIdentifier:mallGoodsTagCellId];
+            if (!cell) {
+                cell = [[FiuTagTableViewCell alloc] initWithStyle:(UITableViewCellStyleDefault) reuseIdentifier:mallGoodsTagCellId];
+            }
             [cell setMallHotTagsData:self.tagsList];
             cell.nav = self.navigationController;
             return cell;
@@ -290,7 +290,9 @@ static NSString *const URLFiuBrand = @"/scene_brands/getlist";
         }  else if (indexPath.row == 2) {
             static NSString * mallMenuTableViewCellID = @"mallMenuTableViewCell";
             MallMenuTableViewCell * cell = [tableView dequeueReusableCellWithIdentifier:mallMenuTableViewCellID];
-            cell = [[MallMenuTableViewCell alloc] initWithStyle:(UITableViewCellStyleDefault) reuseIdentifier:mallMenuTableViewCellID];
+            if (!cell) {
+                cell = [[MallMenuTableViewCell alloc] initWithStyle:(UITableViewCellStyleDefault) reuseIdentifier:mallMenuTableViewCellID];
+            }
             [cell setCategoryData:self.categoryList];
             cell.nav = self.navigationController;
             return cell;

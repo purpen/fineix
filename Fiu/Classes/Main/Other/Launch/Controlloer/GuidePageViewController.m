@@ -36,11 +36,11 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-//    [self.player play];
+    [self.player play];
     //设置scrollview
-    [self setScrollView];
+//    [self setScrollView];
     //设置ImageView
-    [self setImageView];
+//    [self setImageView];
 
     //设置页码控制器
 //    [self setPageController];
@@ -70,34 +70,34 @@
 }
 
 #pragma mark - 首次启动视频
-//- (AVPlayer *)player {
-//    if (!_player) {
-//        AVAudioSession * session = [AVAudioSession sharedInstance];
-//        [session setCategory:AVAudioSessionCategoryPlayback error:nil];
-//        [session setActive:YES error:nil];
-//        
-//        NSString * audioPath = [[NSBundle mainBundle] pathForResource:@"Fiu" ofType:@"mp4"];
-//        NSURL * playUrl = [NSURL fileURLWithPath:audioPath];
-//        AVAsset *movieAsset = [AVURLAsset URLAssetWithURL:playUrl options:nil];
-//        AVPlayerItem *playerItem = [AVPlayerItem playerItemWithAsset:movieAsset];
-//        
-//        _player = [AVPlayer playerWithPlayerItem:playerItem];
-//        
-//        AVPlayerLayer * layer = [AVPlayerLayer playerLayerWithPlayer:_player];
-//        layer.frame = CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT);
-//        [self.view.layer addSublayer:layer];
-//        
-//        [[NSNotificationCenter  defaultCenter] addObserver:self selector:@selector(startRollImg) name:AVPlayerItemDidPlayToEndTimeNotification object:nil];
-//    }
-//    return _player;
-//}
-//
-//- (void)startRollImg {
-//    //设置scrollview
-//    [self setScrollView];
-//    //设置ImageView
-//    [self setImageView];
-//}
+- (AVPlayer *)player {
+    if (!_player) {
+        AVAudioSession * session = [AVAudioSession sharedInstance];
+        [session setCategory:AVAudioSessionCategoryPlayback error:nil];
+        [session setActive:YES error:nil];
+        
+        NSString * audioPath = [[NSBundle mainBundle] pathForResource:@"Fiu" ofType:@"mp4"];
+        NSURL * playUrl = [NSURL fileURLWithPath:audioPath];
+        AVAsset *movieAsset = [AVURLAsset URLAssetWithURL:playUrl options:nil];
+        AVPlayerItem *playerItem = [AVPlayerItem playerItemWithAsset:movieAsset];
+        
+        _player = [AVPlayer playerWithPlayerItem:playerItem];
+        
+        AVPlayerLayer * layer = [AVPlayerLayer playerLayerWithPlayer:_player];
+        layer.frame = CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT);
+        [self.view.layer addSublayer:layer];
+        
+        [[NSNotificationCenter  defaultCenter] addObserver:self selector:@selector(startRollImg) name:AVPlayerItemDidPlayToEndTimeNotification object:nil];
+    }
+    return _player;
+}
+
+- (void)startRollImg {
+    //设置scrollview
+    [self setScrollView];
+    //设置ImageView
+    [self setImageView];
+}
 
 //设置页码控制器
 -(void)setPageController{

@@ -250,8 +250,16 @@ static NSString *const URLFSceneList = @"/scene_scene/";
 
 #pragma mark - 查看全部附近的情景
 - (void)lookNearbyFScene {
-    AllNearbyScenarioViewController *vc = [[AllNearbyScenarioViewController alloc] init];
-    [self.navigationController pushViewController:vc animated:YES];
+    AllNearbyScenarioViewController * nearFiuSceneVC = [[AllNearbyScenarioViewController alloc] init];
+    nearFiuSceneVC.type = self.type;
+    if ([self.type isEqualToString:@"release"]) {
+        [self.navigationController pushViewController:nearFiuSceneVC animated:YES];
+    } else if ([self.type isEqualToString:@"edit"]) {
+        nearFiuSceneVC.dismissVC = ^ {
+            [self dismissViewControllerAnimated:YES completion:nil];
+        };
+        [self presentViewController:nearFiuSceneVC animated:YES completion:nil];
+    }
 }
 
 #pragma mark - 选中附近的情景
