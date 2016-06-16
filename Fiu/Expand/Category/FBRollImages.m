@@ -10,6 +10,7 @@
 #import "SceneInfoViewController.h"
 #import "FiuSceneViewController.h"
 #import "GoodsInfoViewController.h"
+#import "ProjectViewController.h"
 
 
 @implementation FBRollImages
@@ -83,6 +84,10 @@
             FiuSceneViewController * fiuSceneVC = [[FiuSceneViewController alloc] init];
             fiuSceneVC.fiuSceneId = ids;
             [self.navVC pushViewController:fiuSceneVC animated:YES];
+        }else if ([type isEqualToString:@"11"]){
+            ProjectViewController *vc = [[ProjectViewController alloc] init];
+            vc.projectId = ids;
+            [self.navVC pushViewController:vc animated:YES];
         }
     }
 }

@@ -164,10 +164,8 @@
         self.userProfile.hidden = YES;
         self.idImageView.hidden = YES;
         [self layoutIfNeeded];
-        [self.headView mas_remakeConstraints:^(MASConstraintMaker *make) {
-            make.size.mas_equalTo(CGSizeMake(84/667.0*SCREEN_HEIGHT, 84/667.0*SCREEN_HEIGHT));
-            make.centerX.mas_equalTo(_userView.mas_centerX);
-            make.bottom.mas_equalTo(_userLevelLabel.mas_top).with.offset(-10/667.0*SCREEN_HEIGHT);
+        [self.headView mas_updateConstraints:^(MASConstraintMaker *make) {
+           make.bottom.mas_equalTo(_userLevelLabel.mas_top).with.offset(-10/667.0*SCREEN_HEIGHT);
         }];
     }
     

@@ -436,6 +436,9 @@
 		1FCDCC881D07F50D00C92E78 /* ServiceViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1FCDCC861D07F50D00C92E78 /* ServiceViewController.xib */; };
 		1FCDCC8D1D08085000C92E78 /* InviteCCodeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1FCDCC8B1D08085000C92E78 /* InviteCCodeViewController.m */; };
 		1FCDCC8E1D08085000C92E78 /* InviteCCodeViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1FCDCC8C1D08085000C92E78 /* InviteCCodeViewController.xib */; };
+		1FD59C131D115FD50025A800 /* ProjectViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1FD59C111D115FD50025A800 /* ProjectViewController.m */; };
+		1FD59C141D115FD50025A800 /* ProjectViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1FD59C121D115FD50025A800 /* ProjectViewController.xib */; };
+		1FD59C181D11A8190025A800 /* ProjectViewCommentsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1FD59C161D11A8190025A800 /* ProjectViewCommentsViewController.m */; };
 		280045111C805B78005F5C2E /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 280045101C805B78005F5C2E /* CoreLocation.framework */; };
 		280045131C805B82005F5C2E /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 280045121C805B82005F5C2E /* QuartzCore.framework */; };
 		280045151C805B8C005F5C2E /* OpenGLES.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 280045141C805B8C005F5C2E /* OpenGLES.framework */; };
@@ -481,7 +484,6 @@
 		D83A64371C8E7EBD003DB8BB /* CoreVideo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D83A64361C8E7EBD003DB8BB /* CoreVideo.framework */; };
 		D83A64391C8E7EC5003DB8BB /* CoreMedia.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D83A64381C8E7EC5003DB8BB /* CoreMedia.framework */; };
 		D83A643B1C8E7ED2003DB8BB /* CoreImage.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D83A643A1C8E7ED2003DB8BB /* CoreImage.framework */; };
-		D8615C121D0D794800C12FA2 /* Fiu.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = D8615C111D0D794800C12FA2 /* Fiu.mp4 */; };
 		D8615C551D0FDC4E00C12FA2 /* EditViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D8615C541D0FDC4E00C12FA2 /* EditViewController.m */; };
 		D87B69BF1CC726BA00199EFE /* FBRollImages.m in Sources */ = {isa = PBXBuildFile; fileRef = D87B69BB1CC726BA00199EFE /* FBRollImages.m */; };
 		D87B69C01CC726BA00199EFE /* GroupHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = D87B69BD1CC726BA00199EFE /* GroupHeaderView.m */; };
@@ -1298,6 +1300,11 @@
 		1FCDCC8A1D08085000C92E78 /* InviteCCodeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InviteCCodeViewController.h; sourceTree = "<group>"; };
 		1FCDCC8B1D08085000C92E78 /* InviteCCodeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InviteCCodeViewController.m; sourceTree = "<group>"; };
 		1FCDCC8C1D08085000C92E78 /* InviteCCodeViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = InviteCCodeViewController.xib; sourceTree = "<group>"; };
+		1FD59C101D115FD50025A800 /* ProjectViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProjectViewController.h; sourceTree = "<group>"; };
+		1FD59C111D115FD50025A800 /* ProjectViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ProjectViewController.m; sourceTree = "<group>"; };
+		1FD59C121D115FD50025A800 /* ProjectViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ProjectViewController.xib; sourceTree = "<group>"; };
+		1FD59C151D11A8190025A800 /* ProjectViewCommentsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProjectViewCommentsViewController.h; sourceTree = "<group>"; };
+		1FD59C161D11A8190025A800 /* ProjectViewCommentsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ProjectViewCommentsViewController.m; sourceTree = "<group>"; };
 		280045101C805B78005F5C2E /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
 		280045121C805B82005F5C2E /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		280045141C805B8C005F5C2E /* OpenGLES.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGLES.framework; path = System/Library/Frameworks/OpenGLES.framework; sourceTree = SDKROOT; };
@@ -1371,7 +1378,6 @@
 		D83A64361C8E7EBD003DB8BB /* CoreVideo.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreVideo.framework; path = System/Library/Frameworks/CoreVideo.framework; sourceTree = SDKROOT; };
 		D83A64381C8E7EC5003DB8BB /* CoreMedia.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMedia.framework; path = System/Library/Frameworks/CoreMedia.framework; sourceTree = SDKROOT; };
 		D83A643A1C8E7ED2003DB8BB /* CoreImage.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreImage.framework; path = System/Library/Frameworks/CoreImage.framework; sourceTree = SDKROOT; };
-		D8615C111D0D794800C12FA2 /* Fiu.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; name = Fiu.mp4; path = ../../../Desktop/Fiu.mp4; sourceTree = "<group>"; };
 		D8615C531D0FDC4E00C12FA2 /* EditViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EditViewController.h; sourceTree = "<group>"; };
 		D8615C541D0FDC4E00C12FA2 /* EditViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EditViewController.m; sourceTree = "<group>"; };
 		D87B69BA1CC726BA00199EFE /* FBRollImages.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FBRollImages.h; sourceTree = "<group>"; };
@@ -2582,6 +2588,7 @@
 		1F2A8DE31CF40277005116C7 /* Other */ = {
 			isa = PBXGroup;
 			children = (
+				1FD59C0C1D115FB20025A800 /* Project */,
 				1FCDCC891D08082900C92E78 /* InviteCode */,
 				1F2A8DE41CF40277005116C7 /* Bonus */,
 				1F2A8DF61CF40277005116C7 /* Certification */,
@@ -3480,7 +3487,6 @@
 		1F35F04F1CD2336E0000DB95 /* Resource */ = {
 			isa = PBXGroup;
 			children = (
-				D8615C111D0D794800C12FA2 /* Fiu.mp4 */,
 				1F223B1C1CD714F3007687F7 /* messages.plist */,
 				1F35F0501CD2336E0000DB95 /* areas.plist */,
 			);
@@ -3519,6 +3525,42 @@
 				1FCDCC8C1D08085000C92E78 /* InviteCCodeViewController.xib */,
 			);
 			path = InviteCode;
+			sourceTree = "<group>";
+		};
+		1FD59C0C1D115FB20025A800 /* Project */ = {
+			isa = PBXGroup;
+			children = (
+				1FD59C0D1D115FB20025A800 /* Controller */,
+				1FD59C0E1D115FB20025A800 /* Model */,
+				1FD59C0F1D115FB20025A800 /* View */,
+			);
+			path = Project;
+			sourceTree = "<group>";
+		};
+		1FD59C0D1D115FB20025A800 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				1FD59C101D115FD50025A800 /* ProjectViewController.h */,
+				1FD59C111D115FD50025A800 /* ProjectViewController.m */,
+				1FD59C121D115FD50025A800 /* ProjectViewController.xib */,
+				1FD59C151D11A8190025A800 /* ProjectViewCommentsViewController.h */,
+				1FD59C161D11A8190025A800 /* ProjectViewCommentsViewController.m */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		1FD59C0E1D115FB20025A800 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		1FD59C0F1D115FB20025A800 /* View */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = View;
 			sourceTree = "<group>";
 		};
 		40FF7B08F78941EBD75F7965 /* Pods */ = {
@@ -3893,6 +3935,7 @@
 			files = (
 				1F2A90A31CF40277005116C7 /* SubscribePeopleTableViewCell.xib in Resources */,
 				1F2A90121CF40277005116C7 /* MyPageBtnCollectionViewCell.xib in Resources */,
+				1FD59C141D115FD50025A800 /* ProjectViewController.xib in Resources */,
 				1F2A90471CF40277005116C7 /* ImprovViewController.xib in Resources */,
 				1F2A90061CF40277005116C7 /* My.storyboard in Resources */,
 				1F2A90491CF40277005116C7 /* SubscribeInterestedCollectionViewController.xib in Resources */,
@@ -3941,7 +3984,6 @@
 				1F2A90781CF40277005116C7 /* RefundmentViewController.xib in Resources */,
 				1F2A90841CF40277005116C7 /* CommentView.xib in Resources */,
 				1F2A91141CF40495005116C7 /* UMSCommentInputController.xib in Resources */,
-				D8615C121D0D794800C12FA2 /* Fiu.mp4 in Resources */,
 				1FCDCC881D07F50D00C92E78 /* ServiceViewController.xib in Resources */,
 				1FCDCC8E1D08085000C92E78 /* InviteCCodeViewController.xib in Resources */,
 				1F2A91181CF40495005116C7 /* UMSLoginViewController.xib in Resources */,
@@ -4118,6 +4160,7 @@
 				1F2A8F701CF40277005116C7 /* FiuSceneInfoCounter.m in Sources */,
 				1F2A8FFF1CF40277005116C7 /* AddreesModel.m in Sources */,
 				1F2A8F4D1CF40277005116C7 /* FiltersView.m in Sources */,
+				1FD59C181D11A8190025A800 /* ProjectViewCommentsViewController.m in Sources */,
 				D89CFE031D041819002701B8 /* GoodsDesTableViewCell.m in Sources */,
 				1F2A8FAF1CF40277005116C7 /* GoodsInfoViewController.m in Sources */,
 				1F2A8FA31CF40277005116C7 /* LikePeopleTableViewCell.m in Sources */,
@@ -4225,6 +4268,7 @@
 				1F2A8F751CF40277005116C7 /* FiuSceneRow.m in Sources */,
 				1F2A8F491CF40277005116C7 /* CropImageView.m in Sources */,
 				1F2A90531CF40277005116C7 /* NumView.m in Sources */,
+				1FD59C131D115FD50025A800 /* ProjectViewController.m in Sources */,
 				1F2A90A01CF40277005116C7 /* SubscribePeopleViewController.m in Sources */,
 				1F2A90251CF40277005116C7 /* IdentityTagModel.m in Sources */,
 				1F2A8F391CF40277005116C7 /* SelectAllFSceneViewController.m in Sources */,
