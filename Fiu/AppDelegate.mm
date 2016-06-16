@@ -188,6 +188,15 @@ NSString *const determineLogin = @"/auth/check_login";
     NSArray *arr = [NSArray arrayWithObjects:@"Guide_one",@"Guide_two",@"Guide_three",@"Guide_four", nil];
     BOOL codeFlag = [[NSUserDefaults standardUserDefaults] boolForKey:@"codeFlag"];
     BOOL userIsFirstInstalled = [[NSUserDefaults standardUserDefaults] boolForKey:@"UserHasGuideView"];
+    // 获取当前的版本号
+    NSString *v = [[NSUserDefaults standardUserDefaults] stringForKey:@"version"];
+    NSString *version = [NSBundle mainBundle].infoDictionary[@"CFBundleShortVersionString"];
+    if ([v isEqualToString:version]) {
+        
+    }else{
+        [[NSUserDefaults standardUserDefaults] setBool:NO forKey:@"UserHasGuideView"];
+        [[NSUserDefaults standardUserDefaults] setObject:version forKey:@"version"];
+    }
     if (userIsFirstInstalled && codeFlag) {
         FBTabBarController * tabBarC = [[FBTabBarController alloc] init];
         self.window.rootViewController = tabBarC;
@@ -293,7 +302,6 @@ NSString *const determineLogin = @"/auth/check_login";
 
 - (void)applicationWillEnterForeground:(UIApplication *)application {
     // Called as part of the transition from the background to the inactive state; here you can undo many of the changes made on entering the background.
-    NSLog(@"%s %d", __FUNCTION__, __LINE__);
     
     //回到前台时刷新通知状态
     if (_notiDelegate && [_notiDelegate respondsToSelector:@selector(resetNotificationState)]) {
