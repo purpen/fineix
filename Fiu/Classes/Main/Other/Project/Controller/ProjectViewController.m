@@ -244,16 +244,6 @@ static NSString *const ShareURL = @"http://m.taihuoniao.com/guide/app_about";
 }
 
 -(void)wechatShareBtnAction:(UIButton*)sender{
-//    [UMSocialData defaultData].extConfig.wxMessageType = UMSocialWXMessageTypeWeb;
-//    [UMSocialData defaultData].extConfig.wechatSessionData.title = self.model.title;
-//    UMSocialUrlResource * imgUrl = [[UMSocialUrlResource alloc] initWithSnsResourceType:(UMSocialUrlResourceTypeImage) url:self.model.share_view_url];
-//    NSData * data = [NSData dataWithContentsOfURL:[NSURL URLWithString:self.model.cover_url]]; //得到图像数据
-//    UIImage *image = [UIImage imageWithData:data];
-//    [[UMSocialDataService defaultDataService]  postSNSWithTypes:@[UMShareToWechatSession] content:self.model.share_desc image:image location:nil urlResource:imgUrl presentedController:self completion:^(UMSocialResponseEntity *response){
-//        if (response.responseCode == UMSResponseCodeSuccess) {
-//            [SVProgressHUD showSuccessWithStatus:@"分享成功！"];
-//        }
-//    }];
     
     
     
