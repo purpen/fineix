@@ -9,8 +9,8 @@
 #import <Foundation/Foundation.h>
 
 typedef enum {
-    ProjectLove = 0,
-    ProjectNotLove = 1
+    ProjectLove = 1,
+    ProjectNotLove = 0
 } ProjectLoveType;
 
 @interface ProjectModel : NSObject
@@ -29,6 +29,8 @@ typedef enum {
 @property (nonatomic, strong) NSNumber *comment_count;
 /** 分享的链接 */
 @property(nonatomic,copy) NSString *share_view_url;
+/** 分享的内容 */
+@property(nonatomic,copy) NSString *share_desc;
 
 +(instancetype)projectWithDict:(NSDictionary*)dict;
 

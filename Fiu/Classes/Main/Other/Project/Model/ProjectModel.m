@@ -19,6 +19,7 @@
     model.personId = dict[@"user_id"];
     model.comment_count = dict[@"comment_count"];
     model.share_view_url = dict[@"share_view_url"];
+    model.share_desc = dict[@"share_desc"];
     return model;
 }
 

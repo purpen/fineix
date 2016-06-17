@@ -196,7 +196,7 @@ static NSString *const ShareURL = @"http://m.taihuoniao.com/guide/app_about";
     UMSocialUrlResource * imgUrl = [[UMSocialUrlResource alloc] initWithSnsResourceType:(UMSocialUrlResourceTypeImage) url:self.model.share_view_url];
     
     [[UMSocialDataService defaultDataService]  postSNSWithTypes:@[UMShareToWechatSession]
-                                                        content:self.model.title
+                                                        content:self.model.share_desc
                                                           image:nil
                                                        location:nil
                                                     urlResource:imgUrl
@@ -210,29 +210,64 @@ static NSString *const ShareURL = @"http://m.taihuoniao.com/guide/app_about";
 }
 
 -(void)timelineShareBtnAction:(UIButton*)sender{
-    [UMSocialData defaultData].extConfig.wechatTimelineData.url = ShareURL;
-    [[UMSocialDataService defaultDataService]  postSNSWithTypes:@[UMShareToWechatTimeline] content:@"我喜欢用图片梳理情绪，个性滤镜搭配细腻文字、还能一站购齐好设计！Fiu有一百种方式让你创新生活体验，快来让分享变成生产力。http://m.taihuoniao.com/guide/fiu" image:nil location:nil urlResource:nil presentedController:self completion:^(UMSocialResponseEntity *response){
-        if (response.responseCode == UMSResponseCodeSuccess) {
-            [SVProgressHUD showSuccessWithStatus:@"分享成功！"];
-        }
-    }];
+    
+    [UMSocialData defaultData].extConfig.wechatSessionData.url = self.model.share_view_url;
+    [UMSocialData defaultData].extConfig.wechatSessionData.title = self.model.title;
+    UMSocialUrlResource * imgUrl = [[UMSocialUrlResource alloc] initWithSnsResourceType:(UMSocialUrlResourceTypeImage) url:self.model.share_view_url];
+    
+    [[UMSocialDataService defaultDataService]  postSNSWithTypes:@[UMShareToWechatTimeline]
+                                                        content:self.model.share_desc
+                                                          image:nil
+                                                       location:nil
+                                                    urlResource:imgUrl
+                                            presentedController:self completion:^(UMSocialResponseEntity *response){
+                                                if (response.responseCode == UMSResponseCodeSuccess) {
+                                                    [SVProgressHUD showSuccessWithStatus:@"分享成功"];
+                                                } else {
+                                                    [SVProgressHUD showErrorWithStatus:@"分享失败"];
+                                                }
+                                            }];
 }
 
 -(void)qqShareBtnAction:(UIButton*)sender{
-    [UMSocialData defaultData].extConfig.qqData.url = ShareURL;
-    [[UMSocialDataService defaultDataService]  postSNSWithTypes:@[UMShareToQQ] content:@"我喜欢用图片梳理情绪，个性滤镜搭配细腻文字、还能一站购齐好设计！Fiu有一百种方式让你创新生活体验，快来让分享变成生产力。http://m.taihuoniao.com/guide/fiu" image:nil location:nil urlResource:nil presentedController:self completion:^(UMSocialResponseEntity *response){
-        if (response.responseCode == UMSResponseCodeSuccess) {
-            [SVProgressHUD showSuccessWithStatus:@"分享成功！"];
-        }
-    }];
+    
+    [UMSocialData defaultData].extConfig.wechatSessionData.url = self.model.share_view_url;
+    [UMSocialData defaultData].extConfig.wechatSessionData.title = self.model.title;
+    UMSocialUrlResource * imgUrl = [[UMSocialUrlResource alloc] initWithSnsResourceType:(UMSocialUrlResourceTypeImage) url:self.model.share_view_url];
+    
+    [[UMSocialDataService defaultDataService]  postSNSWithTypes:@[UMShareToQQ]
+                                                        content:self.model.share_desc
+                                                          image:nil
+                                                       location:nil
+                                                    urlResource:imgUrl
+                                            presentedController:self completion:^(UMSocialResponseEntity *response){
+                                                if (response.responseCode == UMSResponseCodeSuccess) {
+                                                    [SVProgressHUD showSuccessWithStatus:@"分享成功"];
+                                                } else {
+                                                    [SVProgressHUD showErrorWithStatus:@"分享失败"];
+                                                }
+                                            }];
+
 }
 
 -(void)sinaShareBtnAction:(UIButton*)sender{
-    [[UMSocialDataService defaultDataService]  postSNSWithTypes:@[UMShareToSina] content:@"我喜欢用图片梳理情绪，个性滤镜搭配细腻文字、还能一站购齐好设计！Fiu有一百种方式让你创新生活体验，快来让分享变成生产力。http://m.taihuoniao.com/guide/fiu" image:nil location:nil urlResource:nil presentedController:self completion:^(UMSocialResponseEntity *response){
-        if (response.responseCode == UMSResponseCodeSuccess) {
-            [SVProgressHUD showSuccessWithStatus:@"分享成功！"];
-        }
-    }];
+    
+    [UMSocialData defaultData].extConfig.wechatSessionData.url = self.model.share_view_url;
+    [UMSocialData defaultData].extConfig.wechatSessionData.title = self.model.title;
+    UMSocialUrlResource * imgUrl = [[UMSocialUrlResource alloc] initWithSnsResourceType:(UMSocialUrlResourceTypeImage) url:self.model.share_view_url];
+    
+    [[UMSocialDataService defaultDataService]  postSNSWithTypes:@[UMShareToSina]
+                                                        content:self.model.share_desc
+                                                          image:nil
+                                                       location:nil
+                                                    urlResource:imgUrl
+                                            presentedController:self completion:^(UMSocialResponseEntity *response){
+                                                if (response.responseCode == UMSResponseCodeSuccess) {
+                                                    [SVProgressHUD showSuccessWithStatus:@"分享成功"];
+                                                } else {
+                                                    [SVProgressHUD showErrorWithStatus:@"分享失败"];
+                                                }
+                                            }];
 }
 
 -(void)cancleBtnAction:(UIButton*)sender{
