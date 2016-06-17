@@ -15,6 +15,7 @@
 #import <TencentOpenAPI/QQApiInterface.h>
 #import "ProjectModel.h"
 #import "FBLoginRegisterViewController.h"
+#import "FiuSceneViewController.h"
 
 @interface ProjectViewController ()<UIWebViewDelegate>
 @property (weak, nonatomic) IBOutlet UIWebView *projectWebView;
@@ -35,12 +36,13 @@ static NSString *const ShareURL = @"http://m.taihuoniao.com/guide/app_about";
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
 }
 
 -(void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
     [self requestGetDataFromeNet];
+    UIApplication *app = [UIApplication sharedApplication];
+    [app setStatusBarHidden:NO];
 }
 
 /**
@@ -90,7 +92,57 @@ static NSString *const ShareURL = @"http://m.taihuoniao.com/guide/app_about";
 -(void)webView:(UIWebView *)webView didFailLoadWithError:(NSError *)error{
     [SVProgressHUD showInfoWithStatus:error.localizedDescription];
 }
-
+#pragma mark - 截取网页点击事件，获取url
+- (BOOL)webView:(UIWebView *)webView shouldStartLoadWithRequest:(NSURLRequest *)request navigationType:(UIWebViewNavigationType)navigationType
+{
+    //判断是否是单击
+    if (navigationType == UIWebViewNavigationTypeLinkClicked)
+    {
+        NSURL *url = [request URL];
+        NSString *str = [url absoluteString];
+        NSLog(@"str  %@",str);
+        if([str rangeOfString:@"infoType"].location == NSNotFound){
+            [SVProgressHUD showErrorWithStatus:@"参数不足"];
+        }else if ([str rangeOfString:@"taihuoniao.com"].location != NSNotFound && [str rangeOfString:@"infoType"].location != NSNotFound){
+            NSArray *oneAry = [str componentsSeparatedByString:@"?"];
+            NSString *infoStr = oneAry[1];
+            NSArray *twoAry = [infoStr componentsSeparatedByString:@"&"];
+            NSString *infoType = [twoAry[0] substringWithRange:NSMakeRange(9, 2)];
+            NSArray *threeAry = [twoAry[1] componentsSeparatedByString:@"="];
+            NSString *infoId = threeAry[1];
+            if ([infoType isEqualToString:@"10"]) {
+                //情景
+                FiuSceneViewController * fiuSceneVC = [[FiuSceneViewController alloc] init];
+                fiuSceneVC.fiuSceneId = infoId;
+                [self.navigationController pushViewController:fiuSceneVC animated:YES];
+            }else if ([infoType isEqualToString:@"11"]) {
+                //场景
+                SceneInfoViewController * sceneInfoVC = [[SceneInfoViewController alloc] init];
+                sceneInfoVC.sceneId = infoId;
+                [self.navigationController pushViewController:sceneInfoVC animated:YES];
+            }else if ([infoType isEqualToString:@"12"]) {
+                //产品
+                GoodsInfoViewController * goodsInfoVC = [[GoodsInfoViewController alloc] init];
+                goodsInfoVC.goodsID = infoId;
+                [self.navigationController pushViewController:goodsInfoVC animated:YES];
+            }else if ([infoType isEqualToString:@"13"]) {
+                //用户
+                HomePageViewController *homeOpage = [[HomePageViewController alloc] init];
+                homeOpage.type = @2;
+                homeOpage.userId = infoId;
+                UserInfoEntity *entity = [UserInfoEntity defaultUserInfoEntity];
+                if ([entity.userId isEqualToString:infoId]) {
+                    homeOpage.isMySelf = YES;
+                }else{
+                    homeOpage.isMySelf = NO;
+                }
+                [self.navigationController pushViewController:homeOpage animated:YES];
+            }
+        }
+        return NO;
+    }
+    return YES;
+}
 
 /**
  *  进入专题的评论界面
