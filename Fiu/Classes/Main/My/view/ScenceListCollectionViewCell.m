@@ -36,11 +36,11 @@
 -(instancetype)initWithFrame:(CGRect)frame{
     if (self = [super initWithFrame:frame]) {
                 [self addSubview:self.bgImage];
-                [_bgImage mas_makeConstraints:^(MASConstraintMaker *make) {
-                    make.size.mas_equalTo(CGSizeMake(SCREEN_WIDTH, SCREEN_HEIGHT));
-                    make.top.equalTo(self.mas_top).with.offset(0);
-                    make.left.equalTo(self.mas_left).with.offset(0);
-                }];
+//                [_bgImage mas_makeConstraints:^(MASConstraintMaker *make) {
+//                    make.size.mas_equalTo(CGSizeMake(SCREEN_WIDTH, SCREEN_HEIGHT));
+//                    make.top.equalTo(self.mas_top).with.offset(0);
+//                    make.left.equalTo(self.mas_left).with.offset(0);
+//                }];
         [self addSubview:self.userView];
     }
     return self;
@@ -69,15 +69,15 @@
     self.city.text = [self abouText:self.city withText:model.address];
     self.time.text = [NSString stringWithFormat:@"|  %@", model.createdAt];
     
-    
     if (model.user.isExpert == 1) {
         self.userVimg.hidden = NO;
-//        [self.userStar setUserTagInfo:model.user.expertLabel];
-        self.userProfile.text = [NSString stringWithFormat:@"%@", model.user.expertInfo];
+        //        [self.userStar setUserTagInfo:model.user.expertLabel];
+        self.userStar.text = model.user.expertLabel;
+        self.userProfile.text = [NSString stringWithFormat:@"|  %@", model.user.expertInfo];
         CGSize size = [self.userStar boundingRectWithSize:CGSizeMake(100, 0)];
         
         [self.userStar mas_updateConstraints:^(MASConstraintMaker *make) {
-            make.width.mas_equalTo(size.width + 10);
+            make.width.mas_equalTo(size.width);
         }];
         [self.userProfile mas_updateConstraints:^(MASConstraintMaker *make) {
             make.left.equalTo(self.userStar.mas_right).with.offset(5);
@@ -88,8 +88,8 @@
     }
     
     //  首页显示标记点
-    //    self.tagDataMarr = [NSMutableArray arrayWithArray:model.product];
-    //    [self setUserTagBtn];
+    self.tagDataMarr = [NSMutableArray arrayWithArray:model.product];
+    [self setUserTagBtn];
 }
 
 #pragma mark - 创建用户添加商品按钮
@@ -197,7 +197,6 @@
             make.size.mas_equalTo(CGSizeMake(SCREEN_WIDTH - 40, 56));
             make.top.equalTo(_lookNum.mas_bottom).with.offset(5);
             make.left.equalTo(_userView.mas_left).with.offset(0);
-            
         }];
         
         [_userView addSubview:self.whereScene];
@@ -248,14 +247,11 @@
 }
 
 #pragma mark - 认证标签
-- (FBUserTagsLable *)userStar {
+- (UILabel *)userStar {
     if (!_userStar) {
-        _userStar = [[FBUserTagsLable alloc] init];
-        _userStar.font = [UIFont systemFontOfSize:10];
-        _userStar.textAlignment = NSTextAlignmentCenter;
-        _userStar.layer.cornerRadius = 3;
-        _userStar.layer.masksToBounds = YES;
-        _userStar.layer.borderWidth = 0.5f;
+        _userStar = [[UILabel alloc] init];
+        _userStar.font = [UIFont systemFontOfSize:11];
+        _userStar.textColor = [UIColor whiteColor];
     }
     return _userStar;
 }
@@ -316,12 +312,18 @@
 - (void)titleTextStyle:(NSString *)title {
     if ([title length] < 8) {
         _titleText.font = [UIFont systemFontOfSize:40];
+        [_titleText mas_updateConstraints:^(MASConstraintMaker *make) {
+            make.size.mas_equalTo(CGSizeMake(240, 56));
+        }];
     } else if ([title length] >= 8 && [title length] < 13) {
-        _titleText.font = [UIFont systemFontOfSize:30];
+        _titleText.font = [UIFont systemFontOfSize:26];
+        [_titleText mas_updateConstraints:^(MASConstraintMaker *make) {
+            make.size.mas_equalTo(CGSizeMake(240, 36));
+        }];
     } else if ([title length] >= 13) {
         _titleText.font = [UIFont systemFontOfSize:20];
         [_titleText mas_updateConstraints:^(MASConstraintMaker *make) {
-            make.size.mas_equalTo(CGSizeMake(240, 56));
+            make.size.mas_equalTo(CGSizeMake(240, 30));
         }];
     }
     NSMutableAttributedString * titleText = [[NSMutableAttributedString alloc] initWithString:title];
