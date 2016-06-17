@@ -75,7 +75,7 @@ static NSString *const logOut = @"/auth/logout";
     [[UIApplication sharedApplication] openURL:[NSURL URLWithString:UIApplicationOpenSettingsURLString ]];
 }
 - (IBAction)clearBtn:(UIButton *)sender {
-    self.memoryLabel.text = @"0.0M";
+    
     //清空缓存
     NSString *cachesPath = [NSSearchPathForDirectoriesInDomains(NSCachesDirectory, NSUserDomainMask, YES) firstObject];
     NSFileManager *manager = [NSFileManager defaultManager];
@@ -101,6 +101,7 @@ static NSString *const logOut = @"/auth/logout";
             }
         }
     }
+    self.memoryLabel.text = @"0.0M";
 }
 
 
