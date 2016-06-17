@@ -20,6 +20,9 @@
     model.comment_count = dict[@"comment_count"];
     model.share_view_url = dict[@"share_view_url"];
     model.share_desc = dict[@"share_desc"];
+    if (![dict[@"cover_url"] isKindOfClass:[NSNull class]]) {
+        model.cover_url = dict[@"cover_url"];
+    }
     return model;
 }
 

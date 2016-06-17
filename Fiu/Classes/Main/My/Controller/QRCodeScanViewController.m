@@ -271,7 +271,8 @@
         NSString *infoStr = oneAry[1];
         NSArray *twoAry = [infoStr componentsSeparatedByString:@"&"];
         NSString *infoType = [twoAry[0] substringWithRange:NSMakeRange(9, 2)];
-        NSString *infoId = [twoAry[1] substringWithRange:NSMakeRange(7, 5)];
+        NSArray *threeAry = [twoAry[1] componentsSeparatedByString:@"="];
+        NSString *infoId = threeAry[1];
         if ([infoType isEqualToString:@"10"]) {
             //情景
             FiuSceneViewController * fiuSceneVC = [[FiuSceneViewController alloc] init];

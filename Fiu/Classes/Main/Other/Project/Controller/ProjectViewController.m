@@ -16,6 +16,7 @@
 #import "ProjectModel.h"
 #import "FBLoginRegisterViewController.h"
 #import "FiuSceneViewController.h"
+#import "UIImageView+WebCache.h"
 
 @interface ProjectViewController ()<UIWebViewDelegate>
 @property (weak, nonatomic) IBOutlet UIWebView *projectWebView;
@@ -243,9 +244,22 @@ static NSString *const ShareURL = @"http://m.taihuoniao.com/guide/app_about";
 }
 
 -(void)wechatShareBtnAction:(UIButton*)sender{
+//    [UMSocialData defaultData].extConfig.wxMessageType = UMSocialWXMessageTypeWeb;
+//    [UMSocialData defaultData].extConfig.wechatSessionData.title = self.model.title;
+//    UMSocialUrlResource * imgUrl = [[UMSocialUrlResource alloc] initWithSnsResourceType:(UMSocialUrlResourceTypeImage) url:self.model.share_view_url];
+//    NSData * data = [NSData dataWithContentsOfURL:[NSURL URLWithString:self.model.cover_url]]; //得到图像数据
+//    UIImage *image = [UIImage imageWithData:data];
+//    [[UMSocialDataService defaultDataService]  postSNSWithTypes:@[UMShareToWechatSession] content:self.model.share_desc image:image location:nil urlResource:imgUrl presentedController:self completion:^(UMSocialResponseEntity *response){
+//        if (response.responseCode == UMSResponseCodeSuccess) {
+//            [SVProgressHUD showSuccessWithStatus:@"分享成功！"];
+//        }
+//    }];
+    
+    
+    
     [UMSocialData defaultData].extConfig.wechatSessionData.url = self.model.share_view_url;
     [UMSocialData defaultData].extConfig.wechatSessionData.title = self.model.title;
-    UMSocialUrlResource * imgUrl = [[UMSocialUrlResource alloc] initWithSnsResourceType:(UMSocialUrlResourceTypeImage) url:self.model.share_view_url];
+    UMSocialUrlResource * imgUrl = [[UMSocialUrlResource alloc] initWithSnsResourceType:(UMSocialUrlResourceTypeImage) url:self.model.cover_url];
     
     [[UMSocialDataService defaultDataService]  postSNSWithTypes:@[UMShareToWechatSession]
                                                         content:self.model.share_desc
@@ -262,10 +276,9 @@ static NSString *const ShareURL = @"http://m.taihuoniao.com/guide/app_about";
 }
 
 -(void)timelineShareBtnAction:(UIButton*)sender{
-    
-    [UMSocialData defaultData].extConfig.wechatSessionData.url = self.model.share_view_url;
-    [UMSocialData defaultData].extConfig.wechatSessionData.title = self.model.title;
-    UMSocialUrlResource * imgUrl = [[UMSocialUrlResource alloc] initWithSnsResourceType:(UMSocialUrlResourceTypeImage) url:self.model.share_view_url];
+    [UMSocialData defaultData].extConfig.wechatTimelineData.url = self.model.share_view_url;
+    [UMSocialData defaultData].extConfig.wechatTimelineData.title = self.model.title;
+    UMSocialUrlResource * imgUrl = [[UMSocialUrlResource alloc] initWithSnsResourceType:(UMSocialUrlResourceTypeImage) url:self.model.cover_url];
     
     [[UMSocialDataService defaultDataService]  postSNSWithTypes:@[UMShareToWechatTimeline]
                                                         content:self.model.share_desc
@@ -282,44 +295,40 @@ static NSString *const ShareURL = @"http://m.taihuoniao.com/guide/app_about";
 }
 
 -(void)qqShareBtnAction:(UIButton*)sender{
-    
-    [UMSocialData defaultData].extConfig.wechatSessionData.url = self.model.share_view_url;
-    [UMSocialData defaultData].extConfig.wechatSessionData.title = self.model.title;
-    UMSocialUrlResource * imgUrl = [[UMSocialUrlResource alloc] initWithSnsResourceType:(UMSocialUrlResourceTypeImage) url:self.model.share_view_url];
+    [UMSocialData defaultData].extConfig.qqData.url = self.model.share_view_url;
+    [UMSocialData defaultData].extConfig.qqData.title = self.model.title;
+    UMSocialUrlResource * imgUrl = [[UMSocialUrlResource alloc] initWithSnsResourceType:UMSocialUrlResourceTypeImage url:self.model.cover_url];
     
     [[UMSocialDataService defaultDataService]  postSNSWithTypes:@[UMShareToQQ]
                                                         content:self.model.share_desc
                                                           image:nil
                                                        location:nil
                                                     urlResource:imgUrl
-                                            presentedController:self completion:^(UMSocialResponseEntity *response){
-                                                if (response.responseCode == UMSResponseCodeSuccess) {
-                                                    [SVProgressHUD showSuccessWithStatus:@"分享成功"];
-                                                } else {
-                                                    [SVProgressHUD showErrorWithStatus:@"分享失败"];
-                                                }
-                                            }];
-
+                                            presentedController:self
+                                                     completion:^(UMSocialResponseEntity *response){
+                                                         if (response.responseCode == UMSResponseCodeSuccess) {
+                                                             [SVProgressHUD showSuccessWithStatus:@"分享成功"];
+                                                         } else {
+                                                             [SVProgressHUD showErrorWithStatus:@"分享失败"];
+                                                         }
+                                                     }];
 }
 
 -(void)sinaShareBtnAction:(UIButton*)sender{
-    
-    [UMSocialData defaultData].extConfig.wechatSessionData.url = self.model.share_view_url;
-    [UMSocialData defaultData].extConfig.wechatSessionData.title = self.model.title;
-    UMSocialUrlResource * imgUrl = [[UMSocialUrlResource alloc] initWithSnsResourceType:(UMSocialUrlResourceTypeImage) url:self.model.share_view_url];
-    
+    UMSocialUrlResource *urlResource = [[UMSocialUrlResource alloc] initWithSnsResourceType:UMSocialUrlResourceTypeImage url:self.model.cover_url];
     [[UMSocialDataService defaultDataService]  postSNSWithTypes:@[UMShareToSina]
-                                                        content:self.model.share_desc
+                                                        content:[NSString stringWithFormat:@"%@，%@。%@", self.model.title, self.model.share_desc, self.model.cover_url]
                                                           image:nil
                                                        location:nil
-                                                    urlResource:imgUrl
-                                            presentedController:self completion:^(UMSocialResponseEntity *response){
-                                                if (response.responseCode == UMSResponseCodeSuccess) {
-                                                    [SVProgressHUD showSuccessWithStatus:@"分享成功"];
-                                                } else {
-                                                    [SVProgressHUD showErrorWithStatus:@"分享失败"];
-                                                }
-                                            }];
+                                                    urlResource:urlResource
+                                            presentedController:self
+                                                     completion:^(UMSocialResponseEntity *shareResponse){
+                                                         if (shareResponse.responseCode == UMSResponseCodeSuccess) {
+                                                             [SVProgressHUD showSuccessWithStatus:@"分享成功"];
+                                                         } else {
+                                                             [SVProgressHUD showErrorWithStatus:@"分享失败"];
+                                                         }
+                                                     }];
 }
 
 -(void)cancleBtnAction:(UIButton*)sender{

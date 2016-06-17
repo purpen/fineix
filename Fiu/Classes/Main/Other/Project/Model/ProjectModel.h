@@ -31,6 +31,8 @@ typedef enum {
 @property(nonatomic,copy) NSString *share_view_url;
 /** 分享的内容 */
 @property(nonatomic,copy) NSString *share_desc;
+/** 分享里的图片 */
+@property(nonatomic,copy) NSString *cover_url;
 
 +(instancetype)projectWithDict:(NSDictionary*)dict;
 
