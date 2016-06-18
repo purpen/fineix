@@ -249,7 +249,7 @@
         
         [_userView addSubview:self.city];
         [_city mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.size.mas_equalTo(CGSizeMake(75, 15));
+            make.height.mas_equalTo(15);
             make.bottom.equalTo(_userLeftView.mas_top).with.offset(-10);
             make.left.equalTo(_userView.mas_left).with.offset(40);
             make.right.equalTo(_userView.mas_right).with.offset(-20);
@@ -432,7 +432,7 @@
     } else if ([title length] >= 13) {
         _titleText.font = [UIFont systemFontOfSize:20];
         [_titleText mas_updateConstraints:^(MASConstraintMaker *make) {
-            make.size.mas_equalTo(CGSizeMake(SCREEN_WIDTH - 40, 30));
+            make.size.mas_equalTo(CGSizeMake(240, 52));
         }];
     }
     NSMutableAttributedString * titleText = [[NSMutableAttributedString alloc] initWithString:title];

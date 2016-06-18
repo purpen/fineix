@@ -14,5 +14,5 @@ target "Fiu" do
  pod 'IQKeyboardManager'
  pod 'HMSegmentedControl'
  pod 'HTHorizontalSelectionList'
- pod 'UITableView+FDTemplateLayoutCell', '~> 1.5.beta'
+ pod 'ZYCornerRadius'
 end

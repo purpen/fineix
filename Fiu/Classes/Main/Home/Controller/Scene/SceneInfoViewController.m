@@ -87,6 +87,7 @@ static NSString *const URLDeleteScene = @"/scene_sight/delete";
     [SVProgressHUD show];
     self.sceneInfoRequest = [FBAPI getWithUrlString:URLSceneInfo requestDictionary:@{@"id":self.sceneId} delegate:self];
     [self.sceneInfoRequest startRequestSuccess:^(FBRequest *request, id result) {
+        NSLog(@"＝＝＝＝＝＝＝＝＝＝     %@", result);
         //  分享出去的场景信息
         _shareDataDict = [NSDictionary dictionaryWithDictionary:[result valueForKey:@"data"]];
         _sceneUserId = [NSString stringWithFormat:@"%@", [[result valueForKey:@"data"] valueForKey:@"user_id"]];

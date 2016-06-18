@@ -82,7 +82,7 @@
         CGFloat btnX = [[self.tagDataMarr[idx] valueForKey:@"x"] floatValue];
         CGFloat btnY = [[self.tagDataMarr[idx] valueForKey:@"y"] floatValue];
         
-        UserGoodsTag * userTag = [[UserGoodsTag alloc] initWithFrame:CGRectMake(btnX * SCREEN_WIDTH, btnY * SCREEN_HEIGHT, 175, 32)];
+        UserGoodsTag * userTag = [[UserGoodsTag alloc] initWithFrame:CGRectMake(btnX * SCREEN_WIDTH, btnY * SCREEN_HEIGHT * 0.873, 175, 32)];
         userTag.dele.hidden = YES;
         userTag.title.hidden = YES;
         userTag.price.hidden = YES;
@@ -191,9 +191,10 @@
         
         [_userView addSubview:self.city];
         [_city mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.size.mas_equalTo(CGSizeMake(75, 13));
+            make.height.mas_equalTo(13);
             make.top.equalTo(_time.mas_bottom).with.offset(5);
-            make.left.equalTo(_whereScene.mas_left).with.offset(0);
+            make.left.equalTo(_userView.mas_left).with.offset(20);
+            make.right.equalTo(_userView.mas_right).with.offset(-40);
         }];
     }
     return _userView;
@@ -289,17 +290,17 @@
     if ([title length] < 8) {
         _titleText.font = [UIFont systemFontOfSize:40];
         [_titleText mas_updateConstraints:^(MASConstraintMaker *make) {
-            make.size.mas_equalTo(CGSizeMake(240, 56));
+            make.size.mas_equalTo(CGSizeMake(SCREEN_WIDTH - 40, 56));
         }];
     } else if ([title length] >= 8 && [title length] < 13) {
         _titleText.font = [UIFont systemFontOfSize:26];
         [_titleText mas_updateConstraints:^(MASConstraintMaker *make) {
-            make.size.mas_equalTo(CGSizeMake(240, 36));
+            make.size.mas_equalTo(CGSizeMake(SCREEN_WIDTH - 40, 36));
         }];
     } else if ([title length] >= 13) {
         _titleText.font = [UIFont systemFontOfSize:20];
         [_titleText mas_updateConstraints:^(MASConstraintMaker *make) {
-            make.size.mas_equalTo(CGSizeMake(240, 30));
+            make.size.mas_equalTo(CGSizeMake(240, 52));
         }];
     }
     NSMutableAttributedString * titleText = [[NSMutableAttributedString alloc] initWithString:title];
@@ -328,9 +329,11 @@
 - (NSString *)abouText:(UILabel *)lable withText:(NSString *)fiuScene {
     NSString * whereText = fiuScene;
     CGFloat textLength = [fiuScene boundingRectWithSize:CGSizeMake(320, 1000) options:(NSStringDrawingUsesLineFragmentOrigin) attributes:nil context:nil].size.width;
-    [lable mas_updateConstraints:^(MASConstraintMaker *make) {
-        make.size.mas_equalTo(CGSizeMake(textLength + 5, 15));
-    }];
+    if (lable == self.whereScene) {
+        [lable mas_updateConstraints:^(MASConstraintMaker *make) {
+            make.size.mas_equalTo(CGSizeMake(textLength + 5, 15));
+        }];
+    }
     return whereText;
 }
 

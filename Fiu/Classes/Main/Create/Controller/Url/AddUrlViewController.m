@@ -44,7 +44,7 @@ static NSString *const Tmall = @"https://s.m.tmall.com/m/search.htm?q=";
 #pragma mark - 网络请求
 #pragma mark 获取商品信息
 - (void)networkSearchGoodsData:(NSInteger)type {
-    [SVProgressHUD show];
+    [SVProgressHUD showWithMaskType:(SVProgressHUDMaskTypeBlack)];
     if (type == 1 || type == 2) {
         self.findGoodsRequest = [FBAPI getWithUrlString:URLTaobaoGoods requestDictionary:@{@"ids":self.goodsId} delegate:self];
     } else if (type == 0) {
@@ -72,7 +72,7 @@ static NSString *const Tmall = @"https://s.m.tmall.com/m/search.htm?q=";
 
 #pragma mark 添加产品
 - (void)networkAddGoods:(NSDictionary *)dict {
-    [SVProgressHUD show];
+    [SVProgressHUD showWithMaskType:(SVProgressHUDMaskTypeBlack)];
     self.addGoodsRequest = [FBAPI getWithUrlString:URLUserAddGoods requestDictionary:dict delegate:self];
     [self.addGoodsRequest startRequestSuccess:^(FBRequest *request, id result) {
         _ids = [[result valueForKey:@"data"] valueForKey:@"id"];

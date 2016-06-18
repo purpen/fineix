@@ -23,5 +23,12 @@
 @pro_strong UILabel     *   title;
 @pro_strong UILabel     *   price;
 @pro_assign BOOL            isMove;
+@pro_strong NSString    *   goodsId;
+/**
+ *  类型
+ *  0:产品库产品
+ *  1:添加链接产品
+ */
+@pro_assign NSInteger       type;
 
 @end

@@ -11,6 +11,7 @@
 #import "FBEditShareInfoViewController.h"
 
 static NSString *const URLShareTextNum = @"/scene_sight/add_share_context_num";
+static NSString *const URLGiveExp = @"/user/send_exp";
 
 @interface FBShareViewController () {
     NSString * _editBgImg;
@@ -44,6 +45,11 @@ static NSString *const URLShareTextNum = @"/scene_sight/add_share_context_num";
     } failure:^(FBRequest *request, NSError *error) {
         NSLog(@"%@", error);
     }];
+}
+
+#pragma mark 分享成功送积分
+- (void)networkGiveExp {
+    
 }
 
 - (UIImage *)shareImage {

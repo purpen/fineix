@@ -37,7 +37,7 @@ PODS:
   - SDWebImage/Core (3.7.3)
   - SVProgressHUD (1.1.3)
   - TYAlertController (1.1.3)
-  - UITableView+FDTemplateLayoutCell (1.5.beta)
+  - ZYCornerRadius (0.6.1)
 
 DEPENDENCIES:
   - AFNetworking (~> 2.0)
@@ -52,7 +52,7 @@ DEPENDENCIES:
   - SDWebImage (~> 3.7.1)
   - SVProgressHUD (~> 1.1.3)
   - TYAlertController (~> 1.1.3)
-  - UITableView+FDTemplateLayoutCell (~> 1.5.beta)
+  - ZYCornerRadius
 
 SPEC CHECKSUMS:
   AFNetworking: cb8d14a848e831097108418f5d49217339d4eb60
@@ -67,8 +67,8 @@ SPEC CHECKSUMS:
   SDWebImage: 1d2b1a1efda1ade1b00b6f8498865f8ddedc8a84
   SVProgressHUD: 748080e4f36e603f6c02aec292664239df5279c1
   TYAlertController: 849283e546e297d4c33708d81d12605901adbba7
-  UITableView+FDTemplateLayoutCell: 02b508ab1cb4cea16a8c17ac83d2cd1fd72124f9
+  ZYCornerRadius: 86f76224de123e39e48c33cecdada2424dccb0a0
 
-PODFILE CHECKSUM: b018a5864d53de694ec6550414e96357748905e0
+PODFILE CHECKSUM: 9b8fa554f80d295ee7fa0309dc664716ea9a2d87
 
 COCOAPODS: 1.0.0.beta.4

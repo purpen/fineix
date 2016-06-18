@@ -446,6 +446,7 @@
 		280045171C805C92005F5C2E /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 280045161C805C92005F5C2E /* SystemConfiguration.framework */; };
 		2800451B1C805CAC005F5C2E /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2800451A1C805CAC005F5C2E /* Security.framework */; };
 		2800451F1C805CCA005F5C2E /* CoreTelephony.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2800451E1C805CCA005F5C2E /* CoreTelephony.framework */; };
+		428C2359477649891E4F6061 /* libPods-Fiu.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 09E4F3F5D97AC3732034757F /* libPods-Fiu.a */; };
 		D802D7791C821D41007AFA3D /* AssetsLibrary.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D802D7781C821D41007AFA3D /* AssetsLibrary.framework */; };
 		D8035F2F1CB77D0C001920F9 /* UIImage+Helper.m in Sources */ = {isa = PBXBuildFile; fileRef = D8035F2E1CB77D0C001920F9 /* UIImage+Helper.m */; };
 		D8035F3B1CB784B3001920F9 /* UILable+Frame.m in Sources */ = {isa = PBXBuildFile; fileRef = D8035F3A1CB784B3001920F9 /* UILable+Frame.m */; };
@@ -505,6 +506,10 @@
 		D8B7952A1CF48B1D0075D985 /* ShareStyleTitleTopView.m in Sources */ = {isa = PBXBuildFile; fileRef = D8B795291CF48B1D0075D985 /* ShareStyleTitleTopView.m */; };
 		D8B7952D1CF48B2C0075D985 /* ShareStyleTitleBottomView.m in Sources */ = {isa = PBXBuildFile; fileRef = D8B7952C1CF48B2C0075D985 /* ShareStyleTitleBottomView.m */; };
 		D8C690B41D1125F80026EAB5 /* EditSceneAddMoreView.m in Sources */ = {isa = PBXBuildFile; fileRef = D8C690B31D1125F80026EAB5 /* EditSceneAddMoreView.m */; };
+		D8C690BF1D13DFC70026EAB5 /* LMSpringboardItemView.m in Sources */ = {isa = PBXBuildFile; fileRef = D8C690BA1D13DFC70026EAB5 /* LMSpringboardItemView.m */; };
+		D8C690C01D13DFC70026EAB5 /* LMSpringboardView.m in Sources */ = {isa = PBXBuildFile; fileRef = D8C690BC1D13DFC70026EAB5 /* LMSpringboardView.m */; };
+		D8C690C41D13DFFE0026EAB5 /* FiuHeaderWatchTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D8C690C31D13DFFE0026EAB5 /* FiuHeaderWatchTableViewCell.m */; };
+		D8C690E01D13FFFA0026EAB5 /* Fiu.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = D8C690DF1D13FFFA0026EAB5 /* Fiu.mp4 */; };
 		D8E3AEB61CFC9B84006E5E8C /* ClipImageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D8E3AEA91CFC9B84006E5E8C /* ClipImageViewController.m */; };
 		D8E3AEB71CFC9B84006E5E8C /* CreateViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D8E3AEAB1CFC9B84006E5E8C /* CreateViewController.m */; };
 		D8E3AEB81CFC9B84006E5E8C /* CropImageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D8E3AEAD1CFC9B84006E5E8C /* CropImageViewController.m */; };
@@ -516,6 +521,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		09E4F3F5D97AC3732034757F /* libPods-Fiu.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Fiu.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		105868C9EE6A797B288440BF /* Pods-Fiu.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Fiu.release.xcconfig"; path = "Pods/Target Support Files/Pods-Fiu/Pods-Fiu.release.xcconfig"; sourceTree = "<group>"; };
 		1F0EE6A21C9FA43C000631F0 /* libiconv.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libiconv.tbd; path = usr/lib/libiconv.tbd; sourceTree = SDKROOT; };
 		1F0EE6A41C9FA47B000631F0 /* libsqlite3.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libsqlite3.tbd; path = usr/lib/libsqlite3.tbd; sourceTree = SDKROOT; };
@@ -1412,6 +1418,13 @@
 		D8B7952C1CF48B2C0075D985 /* ShareStyleTitleBottomView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ShareStyleTitleBottomView.m; sourceTree = "<group>"; };
 		D8C690B21D1125F80026EAB5 /* EditSceneAddMoreView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EditSceneAddMoreView.h; sourceTree = "<group>"; };
 		D8C690B31D1125F80026EAB5 /* EditSceneAddMoreView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EditSceneAddMoreView.m; sourceTree = "<group>"; };
+		D8C690B91D13DFC70026EAB5 /* LMSpringboardItemView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LMSpringboardItemView.h; sourceTree = "<group>"; };
+		D8C690BA1D13DFC70026EAB5 /* LMSpringboardItemView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LMSpringboardItemView.m; sourceTree = "<group>"; };
+		D8C690BB1D13DFC70026EAB5 /* LMSpringboardView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LMSpringboardView.h; sourceTree = "<group>"; };
+		D8C690BC1D13DFC70026EAB5 /* LMSpringboardView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LMSpringboardView.m; sourceTree = "<group>"; };
+		D8C690C21D13DFFE0026EAB5 /* FiuHeaderWatchTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FiuHeaderWatchTableViewCell.h; sourceTree = "<group>"; };
+		D8C690C31D13DFFE0026EAB5 /* FiuHeaderWatchTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FiuHeaderWatchTableViewCell.m; sourceTree = "<group>"; };
+		D8C690DF1D13FFFA0026EAB5 /* Fiu.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = Fiu.mp4; sourceTree = "<group>"; };
 		D8E3AEA81CFC9B84006E5E8C /* ClipImageViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ClipImageViewController.h; sourceTree = "<group>"; };
 		D8E3AEA91CFC9B84006E5E8C /* ClipImageViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ClipImageViewController.m; sourceTree = "<group>"; };
 		D8E3AEAA1CFC9B84006E5E8C /* CreateViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CreateViewController.h; sourceTree = "<group>"; };
@@ -1481,6 +1494,7 @@
 				D812815F1CAA8532007CF08B /* BaiduMapAPI_Base.framework in Frameworks */,
 				D81281631CAA8532007CF08B /* BaiduMapAPI_Radar.framework in Frameworks */,
 				D81281641CAA8532007CF08B /* BaiduMapAPI_Search.framework in Frameworks */,
+				428C2359477649891E4F6061 /* libPods-Fiu.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1908,6 +1922,7 @@
 		1F2A8C891CF40276005116C7 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				D8C690B81D13DFC70026EAB5 /* LMSpringboardView */,
 				D8C690B51D11AA490026EAB5 /* FiuHeader */,
 				1F2A8C8A1CF40276005116C7 /* AllScene */,
 				1F2A8C8D1CF40276005116C7 /* Discover */,
@@ -3490,6 +3505,7 @@
 		1F35F04F1CD2336E0000DB95 /* Resource */ = {
 			isa = PBXGroup;
 			children = (
+				D8C690DF1D13FFFA0026EAB5 /* Fiu.mp4 */,
 				1F223B1C1CD714F3007687F7 /* messages.plist */,
 				1F35F0501CD2336E0000DB95 /* areas.plist */,
 			);
@@ -3610,6 +3626,7 @@
 				280045141C805B8C005F5C2E /* OpenGLES.framework */,
 				280045121C805B82005F5C2E /* QuartzCore.framework */,
 				280045101C805B78005F5C2E /* CoreLocation.framework */,
+				09E4F3F5D97AC3732034757F /* libPods-Fiu.a */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -3844,8 +3861,21 @@
 		D8C690B51D11AA490026EAB5 /* FiuHeader */ = {
 			isa = PBXGroup;
 			children = (
+				D8C690C21D13DFFE0026EAB5 /* FiuHeaderWatchTableViewCell.h */,
+				D8C690C31D13DFFE0026EAB5 /* FiuHeaderWatchTableViewCell.m */,
 			);
 			path = FiuHeader;
+			sourceTree = "<group>";
+		};
+		D8C690B81D13DFC70026EAB5 /* LMSpringboardView */ = {
+			isa = PBXGroup;
+			children = (
+				D8C690B91D13DFC70026EAB5 /* LMSpringboardItemView.h */,
+				D8C690BA1D13DFC70026EAB5 /* LMSpringboardItemView.m */,
+				D8C690BB1D13DFC70026EAB5 /* LMSpringboardView.h */,
+				D8C690BC1D13DFC70026EAB5 /* LMSpringboardView.m */,
+			);
+			path = LMSpringboardView;
 			sourceTree = "<group>";
 		};
 		D8E3AEA61CFC9B84006E5E8C /* CreateFiuScene */ = {
@@ -3967,6 +3997,7 @@
 				1F2A8FF31CF40277005116C7 /* ModifyGenderViewController.xib in Resources */,
 				1F2A91281CF42EC1005116C7 /* OrderInfoDetailViewController.xib in Resources */,
 				1F2A905B1CF40277005116C7 /* CommentsViewController.xib in Resources */,
+				D8C690E01D13FFFA0026EAB5 /* Fiu.mp4 in Resources */,
 				1F2A905F1CF40277005116C7 /* MessagesssViewController.xib in Resources */,
 				1F2A8FEA1CF40277005116C7 /* ChangeSumaryViewController.xib in Resources */,
 				1F2A8F7D1CF40277005116C7 /* FiuPeople.xib in Resources */,
@@ -4124,6 +4155,7 @@
 				1F2A8FED1CF40277005116C7 /* EditNickNameViewController.m in Sources */,
 				1F2A8F511CF40277005116C7 /* FBSticker.m in Sources */,
 				1F2A90961CF40277005116C7 /* CommentReplyComment.m in Sources */,
+				D8C690BF1D13DFC70026EAB5 /* LMSpringboardItemView.m in Sources */,
 				1F2A90261CF40277005116C7 /* UIImagePickerController+Flag.m in Sources */,
 				1F2A8FF91CF40277005116C7 /* PraisedViewController.m in Sources */,
 				1F2A8F5D1CF40277005116C7 /* TagFlowLayout.m in Sources */,
@@ -4134,6 +4166,7 @@
 				D81281531CAA8532007CF08B /* FBAPI.m in Sources */,
 				1F2A90591CF40277005116C7 /* SubmitView.m in Sources */,
 				D81281131CAA8532007CF08B /* FBViewController.m in Sources */,
+				D8C690C41D13DFFE0026EAB5 /* FiuHeaderWatchTableViewCell.m in Sources */,
 				1F2A8F651CF40277005116C7 /* AllSceneViewController.m in Sources */,
 				1F69CE201CF70BFA00AE3271 /* OfficialCertificationViewController.m in Sources */,
 				1F2A8F341CF40277005116C7 /* SearchLocationViewController.m in Sources */,
@@ -4172,6 +4205,7 @@
 				1F2A904E1CF40277005116C7 /* UserInfoEntity.m in Sources */,
 				1F2A8FF71CF40277005116C7 /* MyPageViewController.m in Sources */,
 				D8B795271CF48AFB0075D985 /* ShareStyleBottomView.m in Sources */,
+				D8C690C01D13DFC70026EAB5 /* LMSpringboardView.m in Sources */,
 				1F2A8F9F1CF40277005116C7 /* LikeSceneView.m in Sources */,
 				1F2A8F951CF40277005116C7 /* LikeOrSuPeopleRow.m in Sources */,
 				1F2A8F931CF40277005116C7 /* LikeOrSuPeopleCounter.m in Sources */,
@@ -4623,6 +4657,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.THN.fineix;
 				PRODUCT_NAME = Fiu;
 				PROVISIONING_PROFILE = "";
+				RUN_CLANG_STATIC_ANALYZER = NO;
 				USER_HEADER_SEARCH_PATHS = "$(SRCROOT)";
 			};
 			name = Debug;
@@ -4665,6 +4700,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.THN.fineix;
 				PRODUCT_NAME = Fiu;
 				PROVISIONING_PROFILE = "";
+				RUN_CLANG_STATIC_ANALYZER = NO;
 				USER_HEADER_SEARCH_PATHS = "$(SRCROOT)";
 			};
 			name = Release;

@@ -10,17 +10,16 @@
 #import "FiuSceneTableViewCell.h"
 #import "SceneListTableViewCell.h"
 #import "FiuTagTableViewCell.h"
-#import "FiuPeopleTableViewCell.h"
 #import "FBCityViewController.h"
 #import "SearchViewController.h"
 #import "SceneInfoViewController.h"
 #import "FiuSceneRow.h"
 #import "HotTagsData.h"
 #import "FiuPeopleUser.h"
-#import "FiuPeopleView.h"
 #import "HomePageViewController.h"
 #import "UIImageView+SDWedImage.h"
 #import "UIButton+WebCache.h"
+#import "FiuHeaderWatchTableViewCell.h"
 
 static NSString *const URLDiscoverSlide = @"/gateway/slide";
 static NSString *const URLFiuScene = @"/scene_scene/";
@@ -28,7 +27,10 @@ static NSString *const URLSceneList = @"/scene_sight/";
 static NSString *const URLTagS = @"/gateway/get_fiu_hot_sight_tags";
 static NSString *const URLFiuPeople = @"/user/find_user";
 
-@interface DiscoverViewController()
+@interface DiscoverViewController() {
+    NSArray     *   _headerImgArr;
+    NSArray     *   _headerIdArr;
+}
 
 @pro_strong NSMutableArray              *   fiuSceneList;
 @pro_strong NSMutableArray              *   fiuSceneIdList;
@@ -37,8 +39,6 @@ static NSString *const URLFiuPeople = @"/user/find_user";
 @pro_strong NSMutableArray              *   tagsList;
 @pro_strong NSMutableArray              *   rollList;
 @pro_strong NSMutableArray              *   fiuPeopleList;
-
-@property(nonatomic,strong) FiuPeopleView *fiuView;
 
 @end
 
@@ -69,7 +69,7 @@ static NSString *const URLFiuPeople = @"/user/find_user";
     [self networkSceneListData];
     
     [self.view addSubview:self.discoverTableView];
-    
+
 }
 
 #pragma mark - 网络请求
@@ -91,21 +91,15 @@ static NSString *const URLFiuPeople = @"/user/find_user";
 
 #pragma mark 最Fiu伙伴
 - (void)networkFiuPeopleData {
+    [SVProgressHUD show];
     self.fiuPeopleRequest = [FBAPI getWithUrlString:URLFiuPeople requestDictionary:@{@"page":@"1", @"size":@"50", @"sort":@"1"} delegate:self];
     [self.fiuPeopleRequest startRequestSuccess:^(FBRequest *request, id result) {
-        
         self.fiuPeopleList = [NSMutableArray arrayWithArray:[[result valueForKey:@"data"] valueForKey:@"users"]];
-        for (int i = 0; i<_fiuView.subviews.count; i++) {
-            UIButton *btn = _fiuView.subviews[i];
-            btn.tag = i;
-            if (self.fiuPeopleList.count != 0) {
-                FiuPeopleUser * user = [[FiuPeopleUser alloc] initWithDictionary:self.fiuPeopleList[btn.tag]];
-                [btn sd_setImageWithURL:[NSURL URLWithString:user.mediumAvatarUrl] forState:(UIControlStateNormal)];
-                [btn addTarget:self action:@selector(clickUserHead:) forControlEvents:UIControlEventTouchUpInside];
-            }
-        }
+        _headerImgArr = [NSArray arrayWithArray:[self.fiuPeopleList valueForKey:@"medium_avatar_url"]];
+        _headerIdArr = [NSArray arrayWithArray:[self.fiuPeopleList valueForKey:@"_id"]];
         [self.discoverTableView reloadData];
         [self requestIsLastData:self.discoverTableView currentPage:self.currentpageNum withTotalPage:self.totalPageNum];
+        [SVProgressHUD dismiss];
         
     } failure:^(FBRequest *request, NSError *error) {
         NSLog(@"%@", error);
@@ -266,28 +260,16 @@ static NSString *const URLFiuPeople = @"/user/find_user";
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     if (indexPath.section == 0) {
         if (indexPath.row == 0) {
-            static NSString * fiuPeopleCellId = @"FiuPeopleCellId";
-            FiuPeopleTableViewCell * cell = [tableView dequeueReusableCellWithIdentifier:fiuPeopleCellId];
-            cell = [[FiuPeopleTableViewCell alloc] initWithStyle:(UITableViewCellStyleDefault) reuseIdentifier:fiuPeopleCellId];
-//            [cell setFiuPeopleData:self.fiuPeopleList withType:0];
+            static NSString * fiuHeaderCellId = @"FiuHeaderCellId";
+            FiuHeaderWatchTableViewCell * cell = [tableView dequeueReusableCellWithIdentifier:fiuHeaderCellId];
+            if (!cell) {
+                cell = [[FiuHeaderWatchTableViewCell alloc] initWithStyle:(UITableViewCellStyleDefault) reuseIdentifier:fiuHeaderCellId];
+            }
             cell.nav = self.navigationController;
+            if (_headerImgArr.count > 0) {
+                [cell setHeaderImage:_headerImgArr withId:_headerIdArr withType:0];
+            }
             return cell;
-            
-            
-//            static NSString *fiuPeopleCellId = @"FiuPeople";
-//            UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:fiuPeopleCellId];
-//            cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:fiuPeopleCellId];
-//            cell.selectionStyle = UITableViewCellSelectionStyleNone;
-//            static dispatch_once_t onceToken;
-//            dispatch_once(&onceToken, ^{
-//                [cell addSubview:self.fiuView];
-//                [_fiuView mas_makeConstraints:^(MASConstraintMaker *make) {
-//                    make.size.mas_equalTo(CGSizeMake(SCREEN_WIDTH, 155/667.0*SCREEN_HEIGHT));
-//                    make.left.mas_equalTo(cell.mas_left);
-//                    make.top.mas_equalTo(cell.mas_top);
-//                }];
-//            });
-//            return cell;
             
         } else if (indexPath.row == 1) {
             static NSString * fiuSceneTagCellId = @"fiuSceneTagCellId";
@@ -323,37 +305,18 @@ static NSString *const URLFiuPeople = @"/user/find_user";
     return nil;
 }
 
--(FiuPeopleView *)fiuView{
-    if (!_fiuView) {
-        _fiuView = [FiuPeopleView getFiuPeopleView];
-    }
-    return _fiuView;
-}
-
--(void)clickUserHead:(UIButton*)sender{
-    HomePageViewController * peopleHomeVC = [[HomePageViewController alloc] init];
-    peopleHomeVC.isMySelf = NO;
-    peopleHomeVC.type = @2;
-    FiuPeopleUser * user = [[FiuPeopleUser alloc] initWithDictionary:self.fiuPeopleList[sender.tag]];
-    peopleHomeVC.userId = [NSString stringWithFormat:@"%zi",user.idField];
-    [self.navigationController pushViewController:peopleHomeVC animated:YES];
-}
-
-
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
     if (indexPath.section == 0) {
         if (indexPath.row == 0) {
-            return 155/667.0*SCREEN_HEIGHT;
+            return 160;
         } else if (indexPath.row == 1) {
             return 80;
         }
-        
     } else if (indexPath.section == 1) {
         return 266.5;
         
     } else if (indexPath.section == 2) {
         return SCREEN_HEIGHT + 5;
-        
     }
     return 0;
 }

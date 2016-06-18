@@ -43,7 +43,7 @@
 
 #pragma mark - webViewDelegate
 - (void)webViewDidStartLoad:(UIWebView *)webView {
-    [SVProgressHUD show];
+    [SVProgressHUD showWithMaskType:(SVProgressHUDMaskTypeBlack)];
 }
 
 - (void)webViewDidFinishLoad:(UIWebView *)webView {

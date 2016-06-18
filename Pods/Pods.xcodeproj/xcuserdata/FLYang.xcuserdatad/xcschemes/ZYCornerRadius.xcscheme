@@ -14,10 +14,10 @@
             buildForArchiving = "YES">
             <BuildableReference
                BuildableIdentifier = 'primary'
-               BlueprintIdentifier = '2D961A407676C566606F6DEF1AFB522D'
-               BlueprintName = 'UITableView+FDTemplateLayoutCell'
+               BlueprintIdentifier = 'BF3A3DD9AE826D76B5A3CCAA88E2918A'
+               BlueprintName = 'ZYCornerRadius'
                ReferencedContainer = 'container:Pods.xcodeproj'
-               BuildableName = 'libUITableView+FDTemplateLayoutCell.a'>
+               BuildableName = 'libZYCornerRadius.a'>
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>

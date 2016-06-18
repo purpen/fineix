@@ -19,11 +19,11 @@
 
 @pro_strong UIImage             *   filtersImg;             //  需要处理的图片
 @pro_strong NSString            *   createType;             //  创建类型（场景/情景）
-@pro_strong NSString            *   goodsTitle;             //  商品标题
-@pro_strong NSString            *   goodsId;                //  商品id
-@pro_strong NSString            *   goodsPrice;             //  商品价格
-@pro_strong NSString            *   goodsX;                 //  商品坐标
-@pro_strong NSString            *   goodsY;                 //  商品坐标
+@pro_strong NSArray             *   goodsTitle;             //  商品标题
+@pro_strong NSArray             *   goodsId;                //  商品id
+@pro_strong NSArray             *   goodsPrice;             //  商品价格
+@pro_strong NSArray             *   goodsX;                 //  商品坐标
+@pro_strong NSArray             *   goodsY;                 //  商品坐标
 @pro_strong NSString            *   tagS;                   //  标签
 @pro_strong NSString            *   fSceneId;               //  情景id
 @pro_strong NSString            *   fSceneTitle;

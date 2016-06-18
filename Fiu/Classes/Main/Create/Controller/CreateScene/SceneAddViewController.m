@@ -24,7 +24,7 @@ static NSString *const URLUserAddGoods = @"/scene_product/add";
     NSString        * _price;
     NSString        * _imgUrl;
     NSInteger         _idx;
-    NSInteger         _canDelete;
+    BOOL              _urlGoods;
 }
 
 @pro_strong UserGoodsTag           *   userGoodsTag;
@@ -125,8 +125,7 @@ static NSString *const URLUserAddGoods = @"/scene_product/add";
             [self addMarkGoodsImg:imgUrl withImgW:imgW withImgH:imgH];
             [self.goodsIdData addObject:ids];
             NSString * pri = [NSString stringWithFormat:@"￥%@",price];
-            _canDelete = 0;
-            [self addUserGoodsTagWithTitle:title withPrice:pri];
+            [self addUserGoodsTagWithTitle:title withPrice:pri withType:0 withGoodsId:ids];
             
             [self.goodsTitleData addObject:title];
             [self.goodsPriceData addObject:price];
@@ -139,15 +138,14 @@ static NSString *const URLUserAddGoods = @"/scene_product/add";
         };
         
     } else if (index == 1) {
-        
         [self presentViewController:addUrlVC animated:YES completion:nil];
         addUrlVC.findGodosBlock = ^(NSString * title, NSString * price, NSString * ids) {
             if (self.goodsIdData.count == 0) {
                 _idx = 391;
             }
             [self.goodsIdData addObject:ids];
-            _canDelete = 1;
-            [self addUserGoodsTagWithTitle:title withPrice:price];
+            [self addUserGoodsTagWithTitle:title withPrice:price withType:1 withGoodsId:ids];
+            _urlGoods = YES;
         };
         
         addUrlVC.userAddGoodsBlock = ^(NSDictionary * dict) {
@@ -169,7 +167,7 @@ static NSString *const URLUserAddGoods = @"/scene_product/add";
 }
 
 #pragma mark - 创建一个标签
-- (void)addUserGoodsTagWithTitle:(NSString *)title withPrice:(NSString *)price {
+- (void)addUserGoodsTagWithTitle:(NSString *)title withPrice:(NSString *)price withType:(NSInteger)type withGoodsId:(NSString *)ids {
     _idx += 1;
     int tagX = (arc4random() % 4);
     int tagY = (arc4random() % 2) + 10;
@@ -180,9 +178,11 @@ static NSString *const URLUserAddGoods = @"/scene_product/add";
     tag.isMove = YES;
     tag.tag = _idx;
     tag.index = _idx - 392;
+    tag.type = type;
+    tag.goodsId = ids;
     tag.delegate = self;
     
-    if (_canDelete == 1) {
+    if (type == 1) {
         UITapGestureRecognizer * tapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(showChangeGoodsData:)];
         [tag addGestureRecognizer:tapGesture];
     }
@@ -194,10 +194,16 @@ static NSString *const URLUserAddGoods = @"/scene_product/add";
 
 #pragma mark 删除标签
 - (void)delegateThisTagBtn:(NSInteger)index {
-    if (_canDelete == 1) {
-        [self networkDeleteUserGoods:self.goodsIdData[index]];
-    } else if (_canDelete == 0) {
-        [self.goodsIdData removeObject:self.goodsIdData[index]];
+    UserGoodsTag * userTag = [[UserGoodsTag alloc] init];
+    userTag = self.tagBtnMarr[index];
+    [self.tagBtnMarr removeObject:userTag];
+    
+    if (userTag.type == 1) {
+        [self networkDeleteUserGoods:userTag.goodsId];
+    } else if (userTag.type == 0) {
+        [self.goodsIdData removeObject:userTag.goodsId];
+        [self.goodsTitleData removeObject:userTag.title.text];
+        [self.goodsPriceData removeObject:userTag.price.text];
     }
 }
 
@@ -239,9 +245,9 @@ static NSString *const URLUserAddGoods = @"/scene_product/add";
     return _changeGoodsView;
 }
 
-//  修改标签
+#pragma mark - 修改标签
 - (void)sureChange {
-    if (_canDelete == YES) {
+    if (_urlGoods == YES) {
         [self.goodsTitleData removeObjectAtIndex:self.seleIndex];
         [self.goodsPriceData removeObjectAtIndex:self.seleIndex];
         
@@ -262,16 +268,10 @@ static NSString *const URLUserAddGoods = @"/scene_product/add";
     }
 }
 
-//  删除标签
+#pragma mark - 删除标签
 - (void)deleteTag {
-    if (_canDelete == 1) {
-        [self delegateThisTagBtn:self.seleIndex];
-        [self networkDeleteUserGoods:self.goodsIdData[self.seleIndex]];
-        [self.changeGoodsView removeFromSuperview];
-        UIButton * btn = [[UIButton alloc] init];
-        btn = self.tagBtnMarr[self.seleIndex];
-        [btn removeFromSuperview];
-    }
+    [self delegateThisTagBtn:self.seleIndex];
+    [self.changeGoodsView removeFromSuperview];
 }
 
 #pragma mark - 处理图片的视图
@@ -311,12 +311,7 @@ static NSString *const URLUserAddGoods = @"/scene_product/add";
                 NSString * price = [str stringByTrimmingCharactersInSet:set];
                 [priceMarr addObject:price];
             }
-            
-            NSString * goodsPrice = [priceMarr componentsJoinedByString:@","];
-            NSString * goodsId = [self.goodsIdData componentsJoinedByString:@","];
-            NSString * goodsTitle = [self.goodsTitleData componentsJoinedByString:@","];
-            NSString * btnOriginX = [originX componentsJoinedByString:@","];
-            NSString * btnOriginY = [originY componentsJoinedByString:@","];
+
             UIImage * goodsImg = [self generateImage:self.filtersImageView];
             
             FiltersViewController * filtersVC = [[FiltersViewController alloc] init];
@@ -325,11 +320,11 @@ static NSString *const URLUserAddGoods = @"/scene_product/add";
             filtersVC.filtersImg = goodsImg;
             filtersVC.fSceneId = self.fSceneId;
             filtersVC.fSceneTitle = self.fSceneTitle;
-            filtersVC.goodsTitle = goodsTitle;
-            filtersVC.goodsPrice = goodsPrice;
-            filtersVC.goodsId = goodsId;
-            filtersVC.goodsX = btnOriginX;
-            filtersVC.goodsY = btnOriginY;
+            filtersVC.goodsTitle = self.goodsTitleData;
+            filtersVC.goodsPrice = priceMarr;
+            filtersVC.goodsId = self.goodsIdData;
+            filtersVC.goodsX = originX;
+            filtersVC.goodsY = originY;
 
             [self.navigationController pushViewController:filtersVC animated:YES];
         }

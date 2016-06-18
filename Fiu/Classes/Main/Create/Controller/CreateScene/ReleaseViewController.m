@@ -62,6 +62,18 @@ static NSString *const URLReleaseFiuScenen = @"/scene_scene/save";
         
     } else {
         [SVProgressHUD showWithMaskType:SVProgressHUDMaskTypeBlack];
+        NSMutableArray * goodsMarr = [NSMutableArray array];
+        for (NSUInteger idx = 0; idx < self.goodsId.count; ++ idx) {
+            NSDictionary *  goodsDict = @{@"id":self.goodsId[idx],
+                                          @"price":self.goodsPrice[idx],
+                                          @"title":self.goodsTitle[idx],
+                                          @"x":self.goodsX[idx],
+                                          @"y":self.goodsY[idx]};
+            [goodsMarr addObject:goodsDict];
+        }
+        NSData * jsonData = [NSJSONSerialization dataWithJSONObject:goodsMarr options:0 error:nil];
+        NSString * json = [[NSString alloc] initWithData:jsonData encoding:NSUTF8StringEncoding];
+        
         NSData * imageData = UIImageJPEGRepresentation(self.scenceView.imageView.image, 0.7);
         NSString * icon64Str = [imageData base64EncodedStringWithOptions:NSDataBase64Encoding64CharacterLineLength];
         NSDictionary * paramDict = @{
@@ -71,11 +83,7 @@ static NSString *const URLReleaseFiuScenen = @"/scene_scene/save";
                                      @"lng":self.lng,
                                      @"lat":self.lat,
                                      @"address":self.addView.location.text,
-                                     @"product_id":self.goodsId,
-                                     @"product_title":self.goodsTitle,
-                                     @"product_price":self.goodsPrice,
-                                     @"product_x":self.goodsX,
-                                     @"product_y":self.goodsY,
+                                     @"products":json,
                                      @"tags":self.tagS,
                                      @"scene_id":self.fSceneId,
                                      };

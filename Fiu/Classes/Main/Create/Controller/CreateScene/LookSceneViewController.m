@@ -572,24 +572,11 @@ static NSString *const URLDeleteScene = @"/scene_sight/delete";
     self.view.backgroundColor = [UIColor whiteColor];
     self.navView.hidden = YES;
     [self.view addSubview:self.closeBtn];
-    
-    if([self.navigationController respondsToSelector:@selector(interactivePopGestureRecognizer)]) {
-         self.navigationController.interactivePopGestureRecognizer.enabled = NO;
-    }
 }
-
 
 - (void)viewWillDisappear:(BOOL)animated {
     [super viewWillDisappear:animated];
     [SVProgressHUD dismiss];
-}
-
-- (void)viewDidDisappear:(BOOL)animated {
-    [super viewDidDisappear:animated];
-    
-    if ([self.navigationController respondsToSelector:@selector(interactivePopGestureRecognizer)]) {
-        self.navigationController.interactivePopGestureRecognizer.enabled = YES;
-    }
 }
 
 #pragma mark -

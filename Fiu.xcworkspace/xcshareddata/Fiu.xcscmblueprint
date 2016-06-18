@@ -1,18 +1,20 @@
 {
-  "DVTSourceControlWorkspaceBlueprintPrimaryRemoteRepositoryKey" : "524C33DF3B48254121DF6A7C8C32ED53E28A2D81+++76DF78A",
+  "DVTSourceControlWorkspaceBlueprintPrimaryRemoteRepositoryKey" : "524C33DF3B48254121DF6A7C8C32ED53E28A2D81+++C636DA9",
   "DVTSourceControlWorkspaceBlueprintWorkingCopyRepositoryLocationsKey" : {
 
   },
   "DVTSourceControlWorkspaceBlueprintWorkingCopyStatesKey" : {
+    "524C33DF3B48254121DF6A7C8C32ED53E28A2D81+++C636DA9" : 0,
     "524C33DF3B48254121DF6A7C8C32ED53E28A2D81+++76DF78A" : 0,
-    "524C33DF3B48254121DF6A7C8C32ED53E28A2D81+++A713DE9" : 0,
-    "524C33DF3B48254121DF6A7C8C32ED53E28A2D81+++2B92B70" : 0
+    "524C33DF3B48254121DF6A7C8C32ED53E28A2D81+++2B92B70" : 0,
+    "524C33DF3B48254121DF6A7C8C32ED53E28A2D81+++A713DE9" : 0
   },
   "DVTSourceControlWorkspaceBlueprintIdentifierKey" : "9C581EE6-F4E2-4EE4-B63F-429673A2839A",
   "DVTSourceControlWorkspaceBlueprintWorkingCopyPathsKey" : {
+    "524C33DF3B48254121DF6A7C8C32ED53E28A2D81+++C636DA9" : "THN_Fiu\/",
     "524C33DF3B48254121DF6A7C8C32ED53E28A2D81+++76DF78A" : "Fiu\/",
-    "524C33DF3B48254121DF6A7C8C32ED53E28A2D81+++A713DE9" : "fineix\/",
-    "524C33DF3B48254121DF6A7C8C32ED53E28A2D81+++2B92B70" : "fineix\/"
+    "524C33DF3B48254121DF6A7C8C32ED53E28A2D81+++2B92B70" : "fineix\/",
+    "524C33DF3B48254121DF6A7C8C32ED53E28A2D81+++A713DE9" : "fineix\/"
   },
   "DVTSourceControlWorkspaceBlueprintNameKey" : "Fiu",
   "DVTSourceControlWorkspaceBlueprintVersion" : 204,
@@ -32,6 +34,11 @@
       "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/github.com\/purpen\/fineix.git",
       "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
       "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "524C33DF3B48254121DF6A7C8C32ED53E28A2D81+++A713DE9"
+    },
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/github.com\/purpen\/fineix.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "524C33DF3B48254121DF6A7C8C32ED53E28A2D81+++C636DA9"
     }
   ]
 }
