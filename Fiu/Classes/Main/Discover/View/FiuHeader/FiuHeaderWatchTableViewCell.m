@@ -36,7 +36,6 @@
     _headerImgMarr = img;
     _headerIdMarr = ids;
     _type = type;
-    NSLog(@"＝＝＝＝＝＝＝＝＝ %@ ----- %zi",ids, type);
     _springboard = [[LMSpringboardView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 160)];
     _springboard.backgroundColor = [UIColor colorWithHexString:cellBgColor];
     
