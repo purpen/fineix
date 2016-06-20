@@ -38,7 +38,7 @@
     
     [self addSubview:self.useSceneRollView];
     
-    UILabel * botLine = [[UILabel alloc] initWithFrame:CGRectMake(0, 95, SCREEN_WIDTH, 5)];
+    UILabel * botLine = [[UILabel alloc] initWithFrame:CGRectMake(0, 90, SCREEN_WIDTH, 5)];
     botLine.backgroundColor = [UIColor colorWithHexString:cellBgColor];
     [self addSubview:botLine];
 }

@@ -61,9 +61,10 @@ static NSString *const URLWantBuy = @"/scene_product/sight_click_stat";
 - (void)networkGoodsInfoData {
     self.goodsInfoRequest = [FBAPI getWithUrlString:URLGoodsInfo requestDictionary:@{@"id":self.goodsID} delegate:self];
     [self.goodsInfoRequest startRequestSuccess:^(FBRequest *request, id result) {
+//        NSLog(@"＝＝＝＝＝＝＝＝＝＝＝＝＝＝ 商品详情 ：%@", result);
         _goodsDes = [[result valueForKey:@"data"] valueForKey:@"summary"];
         _goodsTags = [NSArray arrayWithArray:[[result valueForKey:@"data"] valueForKey:@"tags"]];
-        
+    
         if ([[[result valueForKey:@"data"] valueForKey:@"attrbute"] integerValue] == 1) {
             [self.gobuyBtn setTitle:NSLocalizedString(@"goBuyGoods", nil) forState:(UIControlStateNormal)];
         } else if ([[[result valueForKey:@"data"] valueForKey:@"attrbute"] integerValue] == 2) {
@@ -78,7 +79,6 @@ static NSString *const URLWantBuy = @"/scene_product/sight_click_stat";
         self.goodsInfo = [[GoodsInfoData alloc] initWithDictionary:[result valueForKey:@"data"]];
         [self setGoodsInfoVcUI];
         [self.rollImgView setGoodsRollimageView:self.goodsInfo];
-        [self.goodsInfoTable reloadData];
 
         [self networkRecommendGoodsDataWithCategory:[NSString stringWithFormat:@"%@", [self.goodsInfo valueForKey:@"categoryId"]]];
         
@@ -97,7 +97,8 @@ static NSString *const URLWantBuy = @"/scene_product/sight_click_stat";
             GoodsInfoData * goodsInfo = [[GoodsInfoData alloc] initWithDictionary:goodsDict];
             [self.recommendGoods addObject:goodsInfo];
         }
-        [self.goodsInfoTable reloadData];
+        NSIndexPath * indexPath = [NSIndexPath indexPathForRow:0 inSection:5];
+        [self.goodsInfoTable reloadRowsAtIndexPaths:[NSArray arrayWithObjects:indexPath,nil] withRowAnimation:UITableViewRowAnimationNone];
         [SVProgressHUD dismiss];
         
     } failure:^(FBRequest *request, NSError *error) {
@@ -114,7 +115,8 @@ static NSString *const URLWantBuy = @"/scene_product/sight_click_stat";
             SceneInfoData * sceneModel = [[SceneInfoData alloc] initWithDictionary:sceneDict];
             [self.sceneList addObject:sceneModel];
         }
-        [self.goodsInfoTable reloadData];
+        NSIndexPath * indexPath = [NSIndexPath indexPathForRow:0 inSection:4];
+        [self.goodsInfoTable reloadRowsAtIndexPaths:[NSArray arrayWithObjects:indexPath,nil] withRowAnimation:UITableViewRowAnimationNone];
         
     } failure:^(FBRequest *request, NSError *error) {
         [SVProgressHUD showErrorWithStatus:[error localizedDescription]];
@@ -244,11 +246,18 @@ static NSString *const URLWantBuy = @"/scene_product/sight_click_stat";
         
     } else if (indexPath.section == 3) {
         static NSString * goodsTagsCellId = @"GoodsTagsCellId";
-        GoodsTagsTableViewCell * cell = [tableView dequeueReusableCellWithIdentifier:goodsTagsCellId];
-        cell = [[GoodsTagsTableViewCell alloc] initWithStyle:(UITableViewCellStyleDefault) reuseIdentifier:goodsTagsCellId];
-        cell.nav = self.navigationController;
-        [cell setGoodsTagsTitleData:_goodsTags];
-        return cell;
+        if (_goodsTags.count) {
+            GoodsTagsTableViewCell * cell = [tableView dequeueReusableCellWithIdentifier:goodsTagsCellId];
+            cell = [[GoodsTagsTableViewCell alloc] initWithStyle:(UITableViewCellStyleDefault) reuseIdentifier:goodsTagsCellId];
+            cell.nav = self.navigationController;
+            [cell setGoodsTagsTitleData:_goodsTags];
+            return cell;
+        
+        }else {
+            UITableViewCell * cell = [tableView dequeueReusableCellWithIdentifier:goodsTagsCellId];
+            cell = [[UITableViewCell alloc] initWithStyle:(UITableViewCellStyleDefault) reuseIdentifier:goodsTagsCellId];
+            return cell;
+        }
         
     } else if (indexPath.section == 4) {
         static NSString * InfoUseSceneCellId = @"InfoUseSceneCellId";
@@ -299,12 +308,12 @@ static NSString *const URLWantBuy = @"/scene_product/sight_click_stat";
         }
         
     } else if (indexPath.section == 3) {
-        if (_goodsTags.count == 0) {
-            return 0.01;
-        } else {
+        if (_goodsTags.count) {
             return 49;
+        } else {
+            return 0.01;
         }
-        
+    
     } else if (indexPath.section == 4) {
         if (self.sceneList.count) {
             return 95;
@@ -314,7 +323,7 @@ static NSString *const URLWantBuy = @"/scene_product/sight_click_stat";
     } else if (indexPath.section == 5) {
         return 280;
     }
-    return 100;
+    return 44;
 }
 
 #pragma mark - 点击跳转

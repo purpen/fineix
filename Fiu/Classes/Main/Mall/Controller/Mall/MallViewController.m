@@ -298,7 +298,7 @@ static NSString *const URLFiuBrand = @"/scene_brands/getlist";
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
     if (indexPath.section == 0) {
         if (indexPath.row == 0) {
-            return 155/667.0*SCREEN_HEIGHT;
+            return 160;
         } else if (indexPath.row == 1) {
             return 80;
         } else if (indexPath.row == 2) {
