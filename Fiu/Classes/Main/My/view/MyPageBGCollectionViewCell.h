@@ -21,7 +21,7 @@
 @property(nonatomic,strong) UILabel *userLevelBottomLabel;//用户等级下面的
 @property(nonatomic,strong) UIButton *certificationBtn;//认证按钮
 @property(nonatomic,strong) UIView *headView;
-@property(nonatomic,strong) UIImageView *idImageView;
+//@property(nonatomic,strong) UIImageView *idImageView;
 @property(nonatomic,strong) UIView *userView;//用户的一些信息
 @property(nonatomic,strong) UIView *lineView; //白线
 @property(nonatomic,strong) UILabel *idTagsLabel;

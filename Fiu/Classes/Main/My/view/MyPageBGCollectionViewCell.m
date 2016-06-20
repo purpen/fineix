@@ -68,24 +68,23 @@
     
     self.nickName.text = entity.nickname;
 //    self.userProfile.text = entity.summary;
-    NSArray *tagsAry = [NSArray arrayWithObjects:@"大拿",@"行家",@"行摄家",@"艺术范",@"手艺人",@"人来疯",@"赎回自由身",@"职业buyer", nil];
+//    NSArray *tagsAry = [NSArray arrayWithObjects:@"大拿",@"行家",@"行摄家",@"艺术范",@"手艺人",@"人来疯",@"赎回自由身",@"职业buyer", nil];
     if ([entity.is_expert isEqualToString:@"1"]) {
         self.talentView.hidden = NO;
         self.userProfile.hidden = NO;
         self.userProfile.text = entity.expert_info;
-        self.idImageView.hidden = NO;
-        int n = (int)[tagsAry indexOfObject:entity.expert_label];
-        self.idImageView.image = [UIImage imageNamed:[NSString stringWithFormat:@"tags%d",n+1]];
+        self.idTagsLabel.text = [NSString stringWithFormat:@"%@ |",entity.expert_label];
+//        self.idImageView.hidden = NO;
+//        int n = (int)[tagsAry indexOfObject:entity.expert_label];
+//        self.idImageView.image = [UIImage imageNamed:[NSString stringWithFormat:@"tags%d",n+1]];
     }else {
         self.talentView.hidden = YES;
         self.userProfile.hidden = YES;
-        self.idImageView.hidden = YES;
+//        self.idImageView.hidden = YES;
         
         [self layoutIfNeeded];
-        [self.nickName mas_remakeConstraints:^(MASConstraintMaker *make) {
-            make.size.mas_equalTo(CGSizeMake(self.frame.size.width, 19));
-            make.centerX.mas_equalTo(_userView.mas_centerX);
-            make.bottom.mas_equalTo(_idImageView.mas_top).with.offset(-6/667.0*SCREEN_HEIGHT);
+        [self.nickName mas_updateConstraints:^(MASConstraintMaker *make) {
+           make.bottom.mas_equalTo(_idTagsLabel.mas_top).with.offset(-6/667.0*SCREEN_HEIGHT);
         }];
     }
     if (entity.summary.length == 0) {
@@ -96,12 +95,12 @@
     [self.bgImageView sd_setImageWithURL:[NSURL URLWithString:entity.head_pic_url] placeholderImage:[UIImage imageNamed:@"personalDefaultBg"]];
 }
 
--(UIImageView *)idImageView{
-    if (!_idImageView) {
-        _idImageView = [[UIImageView alloc] init];
-    }
-    return _idImageView;
-}
+//-(UIImageView *)idImageView{
+//    if (!_idImageView) {
+//        _idImageView = [[UIImageView alloc] init];
+//    }
+//    return _idImageView;
+//}
 
 #pragma mark - 个人信息背景图
 -(UIImageView *)bgImageView{
@@ -149,25 +148,24 @@
             make.bottom.mas_equalTo(_userView.mas_bottom).with.offset(-49/667.0*SCREEN_HEIGHT);
         }];
         
-//        [_userView addSubview:self.idTagsLabel];
-//        [_idTagsLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-//           make.right.mas_equalTo(_lineView.mas_left).with.offset(-7);
-//            make.bottom.mas_equalTo(_userView.mas_bottom).with.offset(-49/667.0*SCREEN_HEIGHT);
-//            make.centerY.mas_equalTo(_lineView.mas_centerY);
-//        }];
-        
-        [_userView addSubview:self.idImageView];
-        [_idImageView mas_makeConstraints:^(MASConstraintMaker *make) {
+        [_userView addSubview:self.idTagsLabel];
+        [_idTagsLabel mas_makeConstraints:^(MASConstraintMaker *make) {
             make.bottom.mas_equalTo(_userLevelLabel.mas_top).with.offset(-5/667.0*SCREEN_HEIGHT);
             make.right.mas_equalTo(_userView.mas_centerX).with.offset(-2/667.0*SCREEN_HEIGHT);
-            //            make.left.mas_equalTo(_userView.mas_left).with.offset(SCREEN_WIDTH*0.5-40/667.0*SCREEN_HEIGHT);
         }];
+        
+//        [_userView addSubview:self.idImageView];
+//        [_idImageView mas_makeConstraints:^(MASConstraintMaker *make) {
+//            make.bottom.mas_equalTo(_userLevelLabel.mas_top).with.offset(-5/667.0*SCREEN_HEIGHT);
+//            make.right.mas_equalTo(_userView.mas_centerX).with.offset(-2/667.0*SCREEN_HEIGHT);
+//            //            make.left.mas_equalTo(_userView.mas_left).with.offset(SCREEN_WIDTH*0.5-40/667.0*SCREEN_HEIGHT);
+//        }];
         
         [_userView addSubview:self.nickName];
         [_nickName mas_makeConstraints:^(MASConstraintMaker *make) {
             make.size.mas_equalTo(CGSizeMake(self.frame.size.width, 19));
             make.centerX.mas_equalTo(_userView.mas_centerX);
-            make.bottom.mas_equalTo(_idImageView.mas_top).with.offset(-9/667.0*SCREEN_HEIGHT);
+            make.bottom.mas_equalTo(_idTagsLabel.mas_top).with.offset(-9/667.0*SCREEN_HEIGHT);
         }];
         
         
@@ -181,8 +179,8 @@
         
         [_userView addSubview:self.userProfile];
         [_userProfile mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.centerY.mas_equalTo(_idImageView.mas_centerY);
-            make.left.mas_equalTo(_idImageView.mas_right).with.offset(3/667.0*SCREEN_HEIGHT);
+            make.centerY.mas_equalTo(_idTagsLabel.mas_centerY);
+            make.left.mas_equalTo(_idTagsLabel.mas_right).with.offset(3/667.0*SCREEN_HEIGHT);
         }];
         
         [_userView addSubview:self.talentView];
