@@ -509,7 +509,6 @@
 		D8C690BF1D13DFC70026EAB5 /* LMSpringboardItemView.m in Sources */ = {isa = PBXBuildFile; fileRef = D8C690BA1D13DFC70026EAB5 /* LMSpringboardItemView.m */; };
 		D8C690C01D13DFC70026EAB5 /* LMSpringboardView.m in Sources */ = {isa = PBXBuildFile; fileRef = D8C690BC1D13DFC70026EAB5 /* LMSpringboardView.m */; };
 		D8C690C41D13DFFE0026EAB5 /* FiuHeaderWatchTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D8C690C31D13DFFE0026EAB5 /* FiuHeaderWatchTableViewCell.m */; };
-		D8C690E01D13FFFA0026EAB5 /* Fiu.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = D8C690DF1D13FFFA0026EAB5 /* Fiu.mp4 */; };
 		D8E3AEB61CFC9B84006E5E8C /* ClipImageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D8E3AEA91CFC9B84006E5E8C /* ClipImageViewController.m */; };
 		D8E3AEB71CFC9B84006E5E8C /* CreateViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D8E3AEAB1CFC9B84006E5E8C /* CreateViewController.m */; };
 		D8E3AEB81CFC9B84006E5E8C /* CropImageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D8E3AEAD1CFC9B84006E5E8C /* CropImageViewController.m */; };
@@ -1424,7 +1423,6 @@
 		D8C690BC1D13DFC70026EAB5 /* LMSpringboardView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LMSpringboardView.m; sourceTree = "<group>"; };
 		D8C690C21D13DFFE0026EAB5 /* FiuHeaderWatchTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FiuHeaderWatchTableViewCell.h; sourceTree = "<group>"; };
 		D8C690C31D13DFFE0026EAB5 /* FiuHeaderWatchTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FiuHeaderWatchTableViewCell.m; sourceTree = "<group>"; };
-		D8C690DF1D13FFFA0026EAB5 /* Fiu.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = Fiu.mp4; sourceTree = "<group>"; };
 		D8E3AEA81CFC9B84006E5E8C /* ClipImageViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ClipImageViewController.h; sourceTree = "<group>"; };
 		D8E3AEA91CFC9B84006E5E8C /* ClipImageViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ClipImageViewController.m; sourceTree = "<group>"; };
 		D8E3AEAA1CFC9B84006E5E8C /* CreateViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CreateViewController.h; sourceTree = "<group>"; };
@@ -3505,7 +3503,6 @@
 		1F35F04F1CD2336E0000DB95 /* Resource */ = {
 			isa = PBXGroup;
 			children = (
-				D8C690DF1D13FFFA0026EAB5 /* Fiu.mp4 */,
 				1F223B1C1CD714F3007687F7 /* messages.plist */,
 				1F35F0501CD2336E0000DB95 /* areas.plist */,
 			);
@@ -3997,7 +3994,6 @@
 				1F2A8FF31CF40277005116C7 /* ModifyGenderViewController.xib in Resources */,
 				1F2A91281CF42EC1005116C7 /* OrderInfoDetailViewController.xib in Resources */,
 				1F2A905B1CF40277005116C7 /* CommentsViewController.xib in Resources */,
-				D8C690E01D13FFFA0026EAB5 /* Fiu.mp4 in Resources */,
 				1F2A905F1CF40277005116C7 /* MessagesssViewController.xib in Resources */,
 				1F2A8FEA1CF40277005116C7 /* ChangeSumaryViewController.xib in Resources */,
 				1F2A8F7D1CF40277005116C7 /* FiuPeople.xib in Resources */,

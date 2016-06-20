@@ -79,6 +79,11 @@
 			<key>orderHint</key>
 			<integer>16</integer>
 		</dict>
+		<key>ZYCornerRadius.xcscheme</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>17</integer>
+		</dict>
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
@@ -122,6 +127,16 @@
 			<key>primary</key>
 			<true/>
 		</dict>
+		<key>7C25AF4C13C979FFF7E8F528759467FC</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>812377B50DD96DECBCFC376B363626C4</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
 		<key>8A2571F967991B0829F9D0C2F65DFDAC</key>
 		<dict>
 			<key>primary</key>
@@ -157,6 +172,21 @@
 			<key>primary</key>
 			<true/>
 		</dict>
+		<key>BF3A3DD9AE826D76B5A3CCAA88E2918A</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>C1EAB616EA466DEA2715E2B85C22FF0B</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>CE9EB78EB65953A07E4270F72D6AFD17</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
 		<key>D14CB4184350CC115136DFFCC74A1FBA</key>
 		<dict>
 			<key>primary</key>
@@ -173,6 +203,11 @@
 			<true/>
 		</dict>
 		<key>E4929B037A097E9F08505B56334394F4</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>FEEE32B15FD30D529AEDFA0884B48BFF</key>
 		<dict>
 			<key>primary</key>
 			<true/>
