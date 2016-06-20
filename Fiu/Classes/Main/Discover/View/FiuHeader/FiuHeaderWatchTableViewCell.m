@@ -36,8 +36,10 @@
     _headerImgMarr = img;
     _headerIdMarr = ids;
     _type = type;
+    
     _springboard = [[LMSpringboardView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 160)];
     _springboard.backgroundColor = [UIColor colorWithHexString:cellBgColor];
+    _springboard.autoresizingMask = UIViewAutoresizingFlexibleHeight | UIViewAutoresizingFlexibleWidth;
     
     NSMutableArray * itemViews = [NSMutableArray array];
 

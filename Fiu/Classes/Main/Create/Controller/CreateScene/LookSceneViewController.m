@@ -25,6 +25,7 @@
 #import "FBShareViewController.h"
 #import "UIView+TYAlertView.h"
 #import "UIImage+MultiFormat.h"
+#import "FBShareViewController.h"
 
 static NSString *const URLSceneInfo = @"/scene_sight/view";
 static NSString *const URLCommentList = @"/comment/getlist";
@@ -101,6 +102,7 @@ static NSString *const URLDeleteScene = @"/scene_sight/delete";
     NSData * imgData = [NSData dataWithContentsOfURL:[NSURL URLWithString:_sceneImgUrl]];
     _sceneInfoScrollView = [[FBSceneInfoScrollView alloc] initWithFrame:self.view.frame BackgroundImage:[UIImage imageWithData:imgData] blurredImage:nil viewDistanceFromBottom:0 foregroundView:self.sceneTableView];
     _sceneInfoScrollView.leftBtn = self.closeBtn;
+    _sceneInfoScrollView.rightBtn = self.shareSceneBtn;
     _sceneInfoScrollView.nav = self.navigationController;
     [_viewScroller addSubview:_sceneInfoScrollView];
     
@@ -572,6 +574,25 @@ static NSString *const URLDeleteScene = @"/scene_sight/delete";
     self.view.backgroundColor = [UIColor whiteColor];
     self.navView.hidden = YES;
     [self.view addSubview:self.closeBtn];
+    [self.view addSubview:self.shareSceneBtn];
+}
+
+- (UIButton *)shareSceneBtn {
+    if (!_shareSceneBtn) {
+        _shareSceneBtn = [[UIButton alloc] initWithFrame:CGRectMake(SCREEN_WIDTH - 50, 0, 50, 50)];
+        [_shareSceneBtn setImage:[UIImage imageNamed:@"Share_Scene"] forState:(UIControlStateNormal)];
+        [_shareSceneBtn addTarget:self action:@selector(shareBtnClick) forControlEvents:(UIControlEventTouchUpInside)];
+    }
+    return _shareSceneBtn;
+    
+}
+
+- (void)shareBtnClick {
+    if ([_shareDataDict valueForKey:@"cover_url"]) {
+        FBShareViewController * shareVC = [[FBShareViewController alloc] init];
+        shareVC.dataDict = _shareDataDict;
+        [self presentViewController:shareVC animated:YES completion:nil];
+    }
 }
 
 - (void)viewWillDisappear:(BOOL)animated {
