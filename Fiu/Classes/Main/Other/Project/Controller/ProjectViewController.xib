@@ -24,9 +24,8 @@
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="YUT-u0-1Bo">
                     <rect key="frame" x="0.0" y="556" width="600" height="44"/>
                     <subviews>
-                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="z9e-Gz-RIa">
-                            <rect key="frame" x="294" y="11" width="13" height="22"/>
-                            <state key="normal" image="share_red"/>
+                        <button opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="z9e-Gz-RIa">
+                            <rect key="frame" x="285" y="5" width="30" height="34"/>
                             <connections>
                                 <action selector="shareBtn:" destination="-1" eventType="touchUpInside" id="5ce-bR-HGD"/>
                             </connections>
@@ -99,6 +98,5 @@
         <image name="comment_red" width="24" height="19"/>
         <image name="icon_like-1" width="20" height="18"/>
         <image name="icon_like2" width="20" height="18"/>
-        <image name="share_red" width="13" height="19"/>
     </resources>
 </document>
