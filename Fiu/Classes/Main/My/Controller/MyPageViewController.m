@@ -272,11 +272,12 @@
         [cell.btn2 addTarget:self action:@selector(messageBtn:) forControlEvents:UIControlEventTouchUpInside];
         [cell.btn3 addTarget:self action:@selector(subscribeBtn:) forControlEvents:UIControlEventTouchUpInside];
         [cell.btn4 addTarget:self action:@selector(praiseBtn:) forControlEvents:UIControlEventTouchUpInside];
-        [cell.btn5 addTarget:self action:@selector(integralBtn:) forControlEvents:UIControlEventTouchUpInside];
-        [cell.btn6 addTarget:self action:@selector(giftBtn:) forControlEvents:UIControlEventTouchUpInside];
-        [cell.btn7 addTarget:self action:@selector(shippingAddressBtn:) forControlEvents:UIControlEventTouchUpInside];
-        [cell.btn8 addTarget:self action:@selector(serviceBtn:) forControlEvents:UIControlEventTouchUpInside];
-        [cell.btn9 addTarget:self action:@selector(collectionBtn:) forControlEvents:UIControlEventTouchUpInside];
+        [cell.btn5 addTarget:self action:@selector(collectionBtnbtn:) forControlEvents:UIControlEventTouchUpInside];
+        [cell.btn6 addTarget:self action:@selector(integralBtn:) forControlEvents:UIControlEventTouchUpInside];
+        [cell.btn7 addTarget:self action:@selector(giftBtn:) forControlEvents:UIControlEventTouchUpInside];
+        [cell.btn8 addTarget:self action:@selector(shippingAddressBtn:) forControlEvents:UIControlEventTouchUpInside];
+        [cell.btn9 addTarget:self action:@selector(serviceBtn:) forControlEvents:UIControlEventTouchUpInside];
+        [cell.btn10 addTarget:self action:@selector(collectionBtn:) forControlEvents:UIControlEventTouchUpInside];
         return cell;
     }
     else if(indexPath.section == 3){
@@ -290,6 +291,17 @@
     return nil;
     
 }
+
+/**
+ *  收藏按钮
+ *
+ *  @return <#return value description#>
+ */
+#pragma mark - 收藏按钮
+-(void)collectionBtnbtn:(UIButton*)sender{
+    
+}
+
 
 -(BotView *)botView{
     if (!_botView) {
