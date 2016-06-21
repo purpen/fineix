@@ -13,7 +13,10 @@
 + (instancetype)messageWithDict:(NSDictionary *)dict
 {
     AXModel *message = [[self alloc] init];
-    [message setValuesForKeysWithDictionary:dict];
+//    [message setValuesForKeysWithDictionary:dict];
+    message.content = [dict objectForKey:@"content"];
+    message.created_at = [dict objectForKey:@"created_at"];
+    message.user_type = [dict objectForKey:@"user_type"];
     return message;
 }
 

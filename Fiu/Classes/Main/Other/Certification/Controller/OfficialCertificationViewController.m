@@ -16,7 +16,9 @@
 @property (weak, nonatomic) IBOutlet UIButton *applyAgineBtn;
 @property (weak, nonatomic) IBOutlet UIView *waitingView;
 @property (weak, nonatomic) IBOutlet UIView *throughView;
-@property (strong, nonatomic) UIImageView *idTagesImageView;
+//@property (strong, nonatomic) UIImageView *idTagesImageView;
+/** 官方认证标签 */
+@property (nonatomic, strong) UILabel *idTagsLabelNew;
 @property (strong, nonatomic) UILabel *idTagesLabel;
 @property (weak, nonatomic) IBOutlet UIButton *editBtn;
 @property (weak, nonatomic) IBOutlet UIView *sumView;
@@ -33,8 +35,8 @@
     self.throughView.hidden = YES;
     
     
-    [self.sumView addSubview:self.idTagesImageView];
-    [_idTagesImageView mas_makeConstraints:^(MASConstraintMaker *make) {
+    [self.sumView addSubview:self.idTagsLabelNew];
+    [_idTagsLabelNew mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.mas_equalTo(self.sumView.mas_left).with.offset(20);
         make.top.mas_equalTo(self.sumView.mas_top).with.offset(8/667.0*SCREEN_HEIGHT);
     }];
@@ -42,7 +44,7 @@
     [self.sumView addSubview:self.idTagesLabel];
     [_idTagesLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.mas_equalTo(self.sumView.mas_left).with.offset(20);
-        make.top.mas_equalTo(self.idTagesImageView.mas_bottom).with.offset(3/667.0*SCREEN_HEIGHT);
+        make.top.mas_equalTo(self.idTagsLabelNew.mas_bottom).with.offset(3/667.0*SCREEN_HEIGHT);
     }];
     
     FBRequest *request = [FBAPI postWithUrlString:@"/my/fetch_talent" requestDictionary:nil delegate:self];
@@ -70,9 +72,10 @@
                 self.refusedView.hidden = YES;
                 self.waitingView.hidden = YES;
                 self.throughView.hidden = NO;
-                NSArray *tagsAry = [NSArray arrayWithObjects:@"大拿",@"行家",@"行摄家",@"艺术范",@"手艺人",@"人来疯",@"赎回自由身",@"职业buyer", nil];
-                int n = (int)[tagsAry indexOfObject:dataDict[@"label"]];
-                self.idTagesImageView.image = [UIImage imageNamed:[NSString stringWithFormat:@"tags%d",n+1]];
+//                NSArray *tagsAry = [NSArray arrayWithObjects:@"大拿",@"行家",@"行摄家",@"艺术范",@"手艺人",@"人来疯",@"赎回自由身",@"职业buyer", nil];
+//                int n = (int)[tagsAry indexOfObject:dataDict[@"label"]];
+//                self.idTagesImageView.image = [UIImage imageNamed:[NSString stringWithFormat:@"tags%d",n+1]];
+                self.idTagsLabelNew.text = dataDict[@"label"];
                 self.idTagesLabel.text = dataDict[@"info"];
             }
             //3 审核通过
@@ -91,11 +94,21 @@
     [self.navigationController pushViewController:vc animated:YES];
 }
 
--(UIImageView *)idTagesImageView{
-    if (!_idTagesImageView) {
-        _idTagesImageView = [[UIImageView alloc] init];
+//-(UIImageView *)idTagesImageView{
+//    if (!_idTagesImageView) {
+//        _idTagesImageView = [[UIImageView alloc] init];
+//    }
+//    return _idTagesImageView;
+//}
+
+#pragma mark - 官方注册标签
+-(UILabel *)idTagsLabelNew{
+    if (!_idTagsLabelNew) {
+        _idTagsLabelNew = [[UILabel alloc] init];
+        _idTagsLabelNew.font = [UIFont systemFontOfSize:13];
+        _idTagsLabelNew.textColor = [UIColor lightGrayColor];
     }
-    return _idTagesImageView;
+    return _idTagsLabelNew;
 }
 
 -(UILabel *)idTagesLabel{

@@ -11,6 +11,14 @@
 #import "Fiu.h"
 #import <SDWebImage/UIImageView+WebCache.h>
 #import "UserInfoEntity.h"
+#import "HomePageViewController.h"
+
+@interface ChatTableViewCell()
+
+/** 私信对象头像的点击手势 */
+@property (nonatomic, strong) UITapGestureRecognizer *otherHeadImageTap;
+
+@end
 
 @implementation ChatTableViewCell
 
@@ -45,6 +53,27 @@
     } else { // 左边
         [self settingShowTextButton:self.otherTextBtn showIconView:self.otherIconImageView hideTextButton:self.myTextBtn hideIconView:self.myIconImageView];
     }
+    
+    self.otherIconImageView.userInteractionEnabled = YES;
+    [self.otherIconImageView addGestureRecognizer:self.otherHeadImageTap];
+    
+    
+}
+
+#pragma mark - 私信对象头像点击手势
+-(UITapGestureRecognizer *)otherHeadImageTap{
+    if (!_otherHeadImageTap) {
+        _otherHeadImageTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(clickOtherHeadImage)];
+    }
+    return _otherHeadImageTap;
+}
+
+#pragma mark - 点击私信对象头像事件
+-(void)clickOtherHeadImage{
+    HomePageViewController *vc = [[HomePageViewController alloc] init];
+    vc.type = @2;
+    vc.userId = _message.userId;
+    [self.cellNavi pushViewController:vc animated:YES];
 }
 
 /**

@@ -17,5 +17,7 @@
 @property (weak, nonatomic) IBOutlet UIButton *myTextBtn;
 @property (weak, nonatomic) IBOutlet UIImageView *otherIconImageView;
 @property (weak, nonatomic) IBOutlet UIButton *otherTextBtn;
+/** 导航控制器 */
+@property (nonatomic, strong) UINavigationController *cellNavi;
 
 @end

@@ -21,7 +21,7 @@
 @property(nonatomic,strong) UIButton *focusOnBtn;//关注按钮
 @property(nonatomic,strong) UIButton *directMessages;//私信按钮
 @property(nonatomic,strong) UIView *headView;
-@property(nonatomic,strong) UIImageView *idImageView;
+//@property(nonatomic,strong) UIImageView *idImageView;
 @property(nonatomic,strong) UIView *userView;
 @property(nonatomic,strong) UIView *lineView; //白线
 @property(nonatomic,strong) UILabel *idTagsLabel;

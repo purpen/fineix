@@ -13,6 +13,8 @@
 @property (nonatomic, copy) NSString *content;
 @property (nonatomic, copy) NSString *created_at;
 @property (nonatomic, strong) NSNumber *user_type;
+/** 私信用户的ID */
+@property(nonatomic,copy) NSString *userId;
 
 /** cell的高度 */
 @property (nonatomic, assign) CGFloat cellHeight;
