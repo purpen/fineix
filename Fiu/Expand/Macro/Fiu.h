@@ -28,7 +28,7 @@
 //  高度
 #define BOUNDS_HEIGHT   self.bounds.size.height
 //  banner
-#define Banner_height   SCREEN_WIDTH * 0.48
+#define Banner_height   211
 
 #define IS_PHONE5             ( ([[UIScreen mainScreen] bounds].size.height - 568) ? NO : YES )
 #define IS_PHONE6P            ( ([[UIScreen mainScreen] bounds].size.height >= 1104) ? NO : YES )

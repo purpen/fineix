@@ -176,7 +176,7 @@ static NSString *const URLWantBuy = @"/scene_product/sight_click_stat";
 #pragma mark - 轮播图
 - (FBRollImages *)rollImgView {
     if (!_rollImgView) {
-        _rollImgView = [[FBRollImages alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_WIDTH * 0.48)];
+        _rollImgView = [[FBRollImages alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, Banner_height)];
         _rollImgView.navVC = self.navigationController;
     }
     return _rollImgView;

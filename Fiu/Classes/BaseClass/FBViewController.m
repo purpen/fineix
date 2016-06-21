@@ -56,7 +56,7 @@ static NSString *const URLUserIsLogin = @"/user/user_info";
         _countLab = [[UILabel alloc] initWithFrame:CGRectMake(SCREEN_WIDTH - 20, 25, 15, 15)];
         _countLab.layer.cornerRadius = 15 / 2;
         _countLab.layer.masksToBounds = YES;
-        _countLab.backgroundColor = [UIColor blackColor];
+        _countLab.backgroundColor = [UIColor colorWithHexString:fineixColor];
         _countLab.textColor = [UIColor whiteColor];
         _countLab.textAlignment = NSTextAlignmentCenter;
         _countLab.font = [UIFont systemFontOfSize:9];
@@ -66,6 +66,7 @@ static NSString *const URLUserIsLogin = @"/user/user_info";
 
 #pragma mark - 显示购物车数量按钮
 - (void)setNavGoodsCarNumLab {
+    self.countLab.hidden = YES;
     [self.navView addSubview:self.countLab];
 }
 

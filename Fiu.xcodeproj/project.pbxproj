@@ -452,7 +452,6 @@
 		D8035F3B1CB784B3001920F9 /* UILable+Frame.m in Sources */ = {isa = PBXBuildFile; fileRef = D8035F3A1CB784B3001920F9 /* UILable+Frame.m */; };
 		D80D415B1CAD1437005D72B1 /* FBNavigationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D80D41591CAD1437005D72B1 /* FBNavigationViewController.m */; };
 		D80D415E1CAD144D005D72B1 /* UIBarButtonItem+Helper.m in Sources */ = {isa = PBXBuildFile; fileRef = D80D415C1CAD144D005D72B1 /* UIBarButtonItem+Helper.m */; };
-		D81281121CAA8532007CF08B /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D81280171CAA8532007CF08B /* LaunchScreen.storyboard */; };
 		D81281131CAA8532007CF08B /* FBViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D812801C1CAA8532007CF08B /* FBViewController.m */; };
 		D81281531CAA8532007CF08B /* FBAPI.m in Sources */ = {isa = PBXBuildFile; fileRef = D81280B21CAA8532007CF08B /* FBAPI.m */; };
 		D81281541CAA8532007CF08B /* FBRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = D81280B41CAA8532007CF08B /* FBRequest.m */; };
@@ -490,6 +489,7 @@
 		D87B69BF1CC726BA00199EFE /* FBRollImages.m in Sources */ = {isa = PBXBuildFile; fileRef = D87B69BB1CC726BA00199EFE /* FBRollImages.m */; };
 		D87B69C01CC726BA00199EFE /* GroupHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = D87B69BD1CC726BA00199EFE /* GroupHeaderView.m */; };
 		D87B69E11CC7274900199EFE /* FBMenuView.m in Sources */ = {isa = PBXBuildFile; fileRef = D87B69DF1CC7274900199EFE /* FBMenuView.m */; };
+		D8932E461D17FE8100428FC7 /* Launch Screen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D8932E451D17FE8100428FC7 /* Launch Screen.storyboard */; };
 		D89CFE031D041819002701B8 /* GoodsDesTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D89CFE021D041819002701B8 /* GoodsDesTableViewCell.m */; };
 		D89CFE0C1D052AF1002701B8 /* FBSceneInfoScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = D89CFE0B1D052AF1002701B8 /* FBSceneInfoScrollView.m */; };
 		D89CFE0F1D070EAB002701B8 /* GoodsTagsTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D89CFE0E1D070EAB002701B8 /* GoodsTagsTableViewCell.m */; };
@@ -1335,7 +1335,6 @@
 		D80D415C1CAD144D005D72B1 /* UIBarButtonItem+Helper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIBarButtonItem+Helper.m"; sourceTree = "<group>"; };
 		D80D415D1CAD144D005D72B1 /* UIBarButtonItem+Helper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIBarButtonItem+Helper.h"; sourceTree = "<group>"; };
 		D81280141CAA8532007CF08B /* AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
-		D81280181CAA8532007CF08B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		D812801B1CAA8532007CF08B /* FBViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FBViewController.h; sourceTree = "<group>"; };
 		D812801C1CAA8532007CF08B /* FBViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FBViewController.m; sourceTree = "<group>"; };
 		D81280AE1CAA8532007CF08B /* FBConfig.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FBConfig.h; sourceTree = "<group>"; };
@@ -1395,6 +1394,7 @@
 		D87B69BD1CC726BA00199EFE /* GroupHeaderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GroupHeaderView.m; sourceTree = "<group>"; };
 		D87B69DF1CC7274900199EFE /* FBMenuView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FBMenuView.m; sourceTree = "<group>"; };
 		D87B69E01CC7274900199EFE /* FBMenuView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FBMenuView.h; sourceTree = "<group>"; };
+		D8932E451D17FE8100428FC7 /* Launch Screen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = "Launch Screen.storyboard"; sourceTree = "<group>"; };
 		D89CFE011D041819002701B8 /* GoodsDesTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GoodsDesTableViewCell.h; sourceTree = "<group>"; };
 		D89CFE021D041819002701B8 /* GoodsDesTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GoodsDesTableViewCell.m; sourceTree = "<group>"; };
 		D89CFE0A1D052AF1002701B8 /* FBSceneInfoScrollView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FBSceneInfoScrollView.h; sourceTree = "<group>"; };
@@ -3660,7 +3660,7 @@
 				D81280C31CAA8532007CF08B /* International */,
 				D81280141CAA8532007CF08B /* AppDelegate.h */,
 				1F772B5D1CF3FD910018AE40 /* AppDelegate.mm */,
-				D81280171CAA8532007CF08B /* LaunchScreen.storyboard */,
+				D8932E451D17FE8100428FC7 /* Launch Screen.storyboard */,
 				D8A9AD081CD9CCA900A9FCFB /* Assets.xcassets */,
 				D81280C01CAA8532007CF08B /* fineix.xcdatamodeld */,
 				D81280C21CAA8532007CF08B /* Info.plist */,
@@ -3973,6 +3973,7 @@
 				1FD59C141D115FD50025A800 /* ProjectViewController.xib in Resources */,
 				1F2A90471CF40277005116C7 /* ImprovViewController.xib in Resources */,
 				1F2A90061CF40277005116C7 /* My.storyboard in Resources */,
+				D8932E461D17FE8100428FC7 /* Launch Screen.storyboard in Resources */,
 				1F2A90491CF40277005116C7 /* SubscribeInterestedCollectionViewController.xib in Resources */,
 				1F2A90281CF40277005116C7 /* Empty.xib in Resources */,
 				1F223B1D1CD714F3007687F7 /* messages.plist in Resources */,
@@ -3986,7 +3987,6 @@
 				1F2A8F371CF40277005116C7 /* AllNearbyScenarioViewController.xib in Resources */,
 				1F2A907E1CF40277005116C7 /* TianMaoOrderViewController.xib in Resources */,
 				1F2A90A11CF40277005116C7 /* SubscribePeopleViewController.xib in Resources */,
-				D81281121CAA8532007CF08B /* LaunchScreen.storyboard in Resources */,
 				1F2A90421CF40277005116C7 /* BindIngViewController.xib in Resources */,
 				D8A9AD091CD9CCA900A9FCFB /* Assets.xcassets in Resources */,
 				1F35F0511CD2336E0000DB95 /* areas.plist in Resources */,
@@ -4504,14 +4504,6 @@
 				1F2A90F31CF40495005116C7 /* zh-Hans */,
 			);
 			name = UMSocialLocalizable.strings;
-			sourceTree = "<group>";
-		};
-		D81280171CAA8532007CF08B /* LaunchScreen.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				D81280181CAA8532007CF08B /* Base */,
-			);
-			name = LaunchScreen.storyboard;
 			sourceTree = "<group>";
 		};
 		D81280C41CAA8532007CF08B /* InfoPlist.strings */ = {

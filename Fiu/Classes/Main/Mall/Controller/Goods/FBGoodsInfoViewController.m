@@ -112,7 +112,7 @@ static NSString *const URLAddCar = @"/shopping/add_cart";
 #pragma mark - 轮播图
 - (FBRollImages *)rollImgView {
     if (!_rollImgView) {
-        _rollImgView = [[FBRollImages alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_WIDTH * 0.48)];
+        _rollImgView = [[FBRollImages alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, Banner_height)];
         _rollImgView.navVC = self.navigationController;
     }
     return _rollImgView;

@@ -89,7 +89,7 @@ static NSString *const URLFiuBrand = @"/scene_brands/getlist";
     [self.fiuBrandRequest startRequestSuccess:^(FBRequest *request, id result) {
         self.brandList = [NSMutableArray arrayWithArray:[[result valueForKey:@"data"] valueForKey:@"rows"]];
         _headerImgArr = [NSArray arrayWithArray:[self.brandList valueForKey:@"cover_url"]];
-        _headerIdArr = [NSArray arrayWithArray:[[self.brandList valueForKey:@"_id"] valueForKey:@"$id"]];
+        _headerIdArr = [NSArray arrayWithArray:[self.brandList valueForKey:@"_id"]];
 
         [self.mallTableView reloadData];
         [self requestIsLastData:self.mallTableView currentPage:self.currentpageNum withTotalPage:self.totalPageNum];
