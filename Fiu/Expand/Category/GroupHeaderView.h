@@ -17,8 +17,9 @@
 @pro_strong UILabel                 *   subTitle;         //    副标题
 @pro_strong UIButton                *   moreBtn;          //    查看全部
 
-- (void)addLookMoreBtn;
-
-- (void)addGroupHeaderViewIcon:(NSString *)image withTitle:(NSString *)title withSubtitle:(NSString *)subTitle;
+- (void)addGroupHeaderViewIcon:(NSString *)image
+                     withTitle:(NSString *)title
+                  withSubtitle:(NSString *)subTitle
+                 withRightMore:(NSString *)more;
 
 @end

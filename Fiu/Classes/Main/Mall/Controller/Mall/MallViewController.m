@@ -314,9 +314,15 @@ static NSString *const URLFiuBrand = @"/scene_brands/getlist";
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
     self.headerView = [[GroupHeaderView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 44)];
     if (section == 0) {
-        [self.headerView addGroupHeaderViewIcon:@"Group_Brand" withTitle:NSLocalizedString(@"fiuBrand", nil) withSubtitle:NSLocalizedString(@"fiuBrandText", nil)];
+        [self.headerView addGroupHeaderViewIcon:@"Group_Brand"
+                                      withTitle:NSLocalizedString(@"fiuBrand", nil)
+                                   withSubtitle:NSLocalizedString(@"fiuBrandText", nil)
+                                  withRightMore:@""];
     } else if (section ==1) {
-        [self.headerView addGroupHeaderViewIcon:@"Group_goods" withTitle:NSLocalizedString(@"fiuGoods", nil) withSubtitle:NSLocalizedString(@"fiuGoodsText", nil)];
+        [self.headerView addGroupHeaderViewIcon:@"Group_goods"
+                                      withTitle:NSLocalizedString(@"fiuGoods", nil)
+                                   withSubtitle:NSLocalizedString(@"fiuGoodsText", nil)
+                                  withRightMore:@""];
     } 
     return self.headerView;
 }

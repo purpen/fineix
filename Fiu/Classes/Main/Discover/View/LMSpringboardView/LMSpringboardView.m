@@ -205,7 +205,6 @@
     self.bouncesZoom = YES;
     self.decelerationRate = UIScrollViewDecelerationRateFast;
     self.delegate = self;
-    
     self.itemDiameter = 52;
     self.itemPadding = 32;
     self.minimumItemScaling = 0.5;
@@ -219,7 +218,6 @@
     [self addSubview:_touchView];
     
     _contentView = [[UIView alloc] init];
-    //_contentView.backgroundColor = [UIColor greenColor];
     [self addSubview:_contentView];
     
     /*_debugRectInContent = [[UIView alloc] init];
@@ -294,7 +292,7 @@
     float yOffset = 0;
     
     double distanceToBeOffset = _itemDiameter*zoomScale*(MIN(size.width, size.height)/320);
-    //double distanceToBeOffset = MIN(size.width, size.height)*0.5*zoomScale;
+//    double distanceToBeOffset = MIN(size.width, size.height)*0.5*zoomScale;
     float leftDistance = center.x-padding-insets.left;
     if(leftDistance < distanceToBeOffset)
     {
@@ -472,7 +470,7 @@
     contentCenter.y /= zoomScale;
     CGSize contentSizeNoExtras = CGSizeMake(_contentSizeUnscaled.width-_contentSizeExtra.width, _contentSizeUnscaled.height-_contentSizeExtra.height);
     CGRect contentFrame = CGRectMake(contentCenter.x-contentSizeNoExtras.width*0.5, contentCenter.y-contentSizeNoExtras.height*0.5, contentSizeNoExtras.width, contentSizeNoExtras.height);
-    //_debugRectInContent.frame = contentFrame;
+//    _debugRectInContent.frame = contentFrame;
     
     if(CGRectContainsPoint(contentFrame, proposedTargetCenter) == NO)
     {

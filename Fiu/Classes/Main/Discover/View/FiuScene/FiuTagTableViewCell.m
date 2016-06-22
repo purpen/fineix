@@ -73,36 +73,36 @@ static const NSInteger  rollTagBtnTag = 97;
         
         titleW += tagBtnWidth + 35;
     }
-
     self.tagRollView.contentSize = CGSizeMake(titleW / 1.9 , 0);
     
-    for (NSUInteger idx = 0; idx < titleArr.count; ++ idx) {
-        CGFloat tagBtnWidth = [[titleArr objectAtIndex:idx] boundingRectWithSize:CGSizeMake(320, 1000) options:(NSStringDrawingUsesLineFragmentOrigin) attributes:nil context:nil].size.width;
-        
-        UIButton * tagBtn = [[UIButton alloc] init];
-        [tagBtn setBackgroundImage:[UIImage resizedImage:@"tagBg_gray"] forState:(UIControlStateNormal)];
-        [tagBtn setBackgroundImage:[UIImage resizedImage:@"tagBg_yellow"] forState:(UIControlStateHighlighted)];
-        [tagBtn setTitle:titleArr[idx] forState:(UIControlStateNormal)];
-        [tagBtn setTitleEdgeInsets:(UIEdgeInsetsMake(0, -5, 0, 0))];
-        [tagBtn setTitleColor:[UIColor colorWithHexString:titleColor alpha:1] forState:(UIControlStateNormal)];
-        [tagBtn setTitleColor:[UIColor whiteColor] forState:(UIControlStateHighlighted)];
-        tagBtn.titleLabel.font = [UIFont systemFontOfSize:Font_Tag];
-        tagBtn.tag = rollTagBtnTag + idx;
-        
-        tagBtn.frame = CGRectMake(btnW + 10, btnH, tagBtnWidth + 25, 20);
-        //  长度超出屏幕自动折行
-        if((btnW + 10 + tagBtnWidth + 25) > (titleW / 1.9)) {
-            btnW = 0;
-            btnH = btnH + tagBtn.frame.size.height + 10;
+    if (self.tagRollView.subviews.count <= 0) {
+        for (NSUInteger idx = 0; idx < titleArr.count; ++ idx) {
+            CGFloat tagBtnWidth = [[titleArr objectAtIndex:idx] boundingRectWithSize:CGSizeMake(320, 1000) options:(NSStringDrawingUsesLineFragmentOrigin) attributes:nil context:nil].size.width;
+            
+            UIButton * tagBtn = [[UIButton alloc] init];
+            [tagBtn setBackgroundImage:[UIImage resizedImage:@"tagBg_gray"] forState:(UIControlStateNormal)];
+            [tagBtn setBackgroundImage:[UIImage resizedImage:@"tagBg_yellow"] forState:(UIControlStateHighlighted)];
+            [tagBtn setTitle:titleArr[idx] forState:(UIControlStateNormal)];
+            [tagBtn setTitleEdgeInsets:(UIEdgeInsetsMake(0, -5, 0, 0))];
+            [tagBtn setTitleColor:[UIColor colorWithHexString:titleColor alpha:1] forState:(UIControlStateNormal)];
+            [tagBtn setTitleColor:[UIColor whiteColor] forState:(UIControlStateHighlighted)];
+            tagBtn.titleLabel.font = [UIFont systemFontOfSize:Font_Tag];
+            tagBtn.tag = rollTagBtnTag + idx;
+            
             tagBtn.frame = CGRectMake(btnW + 10, btnH, tagBtnWidth + 25, 20);
+            //  长度超出屏幕自动折行
+            if((btnW + 10 + tagBtnWidth + 25) > (titleW / 1.9)) {
+                btnW = 0;
+                btnH = btnH + tagBtn.frame.size.height + 10;
+                tagBtn.frame = CGRectMake(btnW + 10, btnH, tagBtnWidth + 25, 20);
+            }
+            btnW = tagBtn.frame.size.width + tagBtn.frame.origin.x;
+            
+            [tagBtn addTarget:self action:@selector(tagBtnClick:) forControlEvents:(UIControlEventTouchUpInside)];
+            
+            [self.tagRollView addSubview:tagBtn];
         }
-        btnW = tagBtn.frame.size.width + tagBtn.frame.origin.x;
-        
-        [tagBtn addTarget:self action:@selector(tagBtnClick:) forControlEvents:(UIControlEventTouchUpInside)];
-        
-        [self.tagRollView addSubview:tagBtn];
     }
-
 }
 
 //  标签的点击方法

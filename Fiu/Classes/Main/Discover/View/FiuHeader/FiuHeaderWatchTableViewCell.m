@@ -37,22 +37,24 @@
     _headerIdMarr = ids;
     _type = type;
     
-    _springboard = [[LMSpringboardView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 160)];
-    _springboard.backgroundColor = [UIColor colorWithHexString:cellBgColor];
-    _springboard.autoresizingMask = UIViewAutoresizingFlexibleHeight | UIViewAutoresizingFlexibleWidth;
-    
-    NSMutableArray * itemViews = [NSMutableArray array];
-
-    for(NSUInteger idx = 0; idx < img.count; ++ idx) {
-        LMSpringboardItemView * item = [[LMSpringboardItemView alloc] init];
-        [item.icon downloadImage:img[idx] place:[UIImage imageNamed:@""]];
-        UITapGestureRecognizer* tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(OpenUserHomePage:)];
-        [item addGestureRecognizer:tap];
-        [itemViews addObject:item];
+    if (![self.subviews containsObject:_springboard]) {
+        _springboard = [[LMSpringboardView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 160)];
+        _springboard.backgroundColor = [UIColor colorWithHexString:cellBgColor];
+        _springboard.autoresizingMask = UIViewAutoresizingFlexibleHeight | UIViewAutoresizingFlexibleWidth;
+        
+        NSMutableArray * itemViews = [NSMutableArray array];
+        
+        for(NSUInteger idx = 0; idx < img.count; ++ idx) {
+            LMSpringboardItemView * item = [[LMSpringboardItemView alloc] init];
+            [item.icon downloadImage:img[idx] place:[UIImage imageNamed:@""]];
+            UITapGestureRecognizer* tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(OpenUserHomePage:)];
+            [item addGestureRecognizer:tap];
+            [itemViews addObject:item];
+        }
+        _springboard.itemViews = itemViews;
+        
+        [self addSubview:_springboard];
     }
-    _springboard.itemViews = itemViews;
-    
-    [self addSubview:_springboard];
 }
 
 
