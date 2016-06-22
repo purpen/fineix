@@ -215,9 +215,10 @@
     
     _touchView = [[UIView alloc] init];
 //    _touchView.backgroundColor = [UIColor purpleColor];
-    [self addSubview:_touchView];
+//    [self addSubview:_touchView];
     
     _contentView = [[UIView alloc] init];
+//    _contentView.backgroundColor = [UIColor orangeColor];
     [self addSubview:_contentView];
     
     /*_debugRectInContent = [[UIView alloc] init];
@@ -553,6 +554,7 @@
         _contentSizeUnscaled.width += _contentSizeExtra.width;
         _contentSizeUnscaled.height += _contentSizeExtra.height;
         _contentView.bounds = CGRectMake(0, 0, _contentSizeUnscaled.width, _contentSizeUnscaled.height);
+//        _contentView.bounds = CGRectMake(0, 0, _contentSizeUnscaled.width*0.5, _contentSizeUnscaled.height*0.5);
     }
     if(_minimumZoomLevelIsDirty == YES)
     {
@@ -562,9 +564,11 @@
         {
             self.zoomScale = newZoom;
             _zoomScaleCache = newZoom;
-            
-            _contentView.center = CGPointMake(_contentSizeUnscaled.width*0.5*newZoom, _contentSizeUnscaled.height*0.5*newZoom);
-            self.contentSize = CGSizeMake(_contentSizeUnscaled.width*newZoom, _contentSizeUnscaled.height*newZoom);
+
+//            _contentView.center = CGPointMake(_contentSizeUnscaled.width*0.5*newZoom, _contentSizeUnscaled.height*0.5*newZoom);
+//            self.contentSize = CGSizeMake(_contentSizeUnscaled.width*newZoom, _contentSizeUnscaled.height*newZoom);
+            _contentView.center = CGPointMake(_contentSizeUnscaled.width*0.47, _contentSizeUnscaled.height*0.47);
+            self.contentSize = CGSizeMake(_contentSizeUnscaled.width*0.55, _contentSizeUnscaled.height*0.75);
         }
     }
     if(_contentSizeIsDirty == YES)
@@ -618,10 +622,8 @@
     }
     
     _zoomScaleCache = self.zoomScale;
-    
     _touchView.bounds = CGRectMake(0, 0, (_contentSizeUnscaled.width-_contentSizeExtra.width)*_zoomScaleCache, (_contentSizeUnscaled.height-_contentSizeExtra.height)*_zoomScaleCache);
     _touchView.center = CGPointMake(_contentSizeUnscaled.width*0.5*_zoomScaleCache, _contentSizeUnscaled.height*0.5*_zoomScaleCache);
-    
     double scale = MIN(_minimumItemScaling*_transformFactor+(1-_transformFactor), 1);
     _minTransform = CGAffineTransformMakeScale(scale, scale);
     for(LMSpringboardItemView* view in _itemViews)
