@@ -335,8 +335,8 @@ NSString *const LoginURL = @"/auth/login";//登录接口
             
             
             [SVProgressHUD showSuccessWithStatus:@"认证成功"];
-            
-            if ([[result objectForKey:@"first_login"] isEqualToNumber:@0]) {
+            NSNumber *str = dataDic[@"user"][@"identify"][@"is_scene_subscribe"];
+            if ([str isEqualToNumber:@0]) {
                 //跳转到推荐界面
                 SubscribeInterestedCollectionViewController *subscribeVC = [[SubscribeInterestedCollectionViewController alloc] init];
                 [self.navigationController pushViewController:subscribeVC animated:YES];

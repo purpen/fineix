@@ -293,8 +293,9 @@ static NSString *const thirdRegister = @"/auth/third_sign";//第三方登录接�
             [userInfo updateUserInfoEntity];
             UserInfoEntity *entity = [UserInfoEntity defaultUserInfoEntity];
             entity.isLogin = YES;
-            
-            if ([[result objectForKey:@"first_login"] isEqualToNumber:@0]) {
+            NSDictionary *dataDic = result[@"data"];
+            NSNumber *str = dataDic[@"identify"][@"is_scene_subscribe"];
+            if ([str isEqualToNumber:@0]) {
                 //跳转到推荐界面
                 SubscribeInterestedCollectionViewController *subscribeVC = [[SubscribeInterestedCollectionViewController alloc] init];
                 [self.navigationController pushViewController:subscribeVC animated:YES];
@@ -490,10 +491,8 @@ static NSString *const thirdRegister = @"/auth/third_sign";//第三方登录接�
             
             [SVProgressHUD showSuccessWithStatus:@"认证成功"];
             
-            NSLog(@"result  %@",result);
             
             NSNumber *str = dataDic[@"user"][@"identify"][@"is_scene_subscribe"];
-            NSLog(@"str  %@",str);
             if ([str isEqualToNumber:@0]) {
                 //跳转到推荐界面
                 SubscribeInterestedCollectionViewController *subscribeVC = [[SubscribeInterestedCollectionViewController alloc] init];
