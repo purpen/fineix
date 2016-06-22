@@ -357,6 +357,7 @@ NSString *const LoginURL = @"/auth/login";//登录接口
                 [self dismissViewControllerAnimated:YES completion:nil];
             }
         }else{
+            [SVProgressHUD dismiss];
             //跳转到绑定手机号界面
             BindIngViewController *bing = [[BindIngViewController alloc] init];
             bing.snsAccount = snsAccount;
