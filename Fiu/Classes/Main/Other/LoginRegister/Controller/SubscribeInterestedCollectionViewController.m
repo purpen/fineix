@@ -91,8 +91,7 @@ static NSString * const reuseIdentifier = @"Cell";
     NSDictionary *params = @{
                              @"page" : @1,
                              @"size" : @15,
-                             @"sort" : @0,
-                             @"stick" : @1,
+                             @"sort" : @1,
                              };
     FBRequest *request = [FBAPI postWithUrlString:recommendedScenarioURL requestDictionary:params delegate:self];
     request.flag = recommendedScenarioURL;
