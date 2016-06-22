@@ -92,6 +92,15 @@
     if ([keys containsObject:@"business_card_tmp"]) {
         [keys removeObject:@"business_card_tmp"];
     }
+    if ([keys containsObject:@"link"]) {
+        [keys removeObject:@"link"];
+    }
+    if ([keys containsObject:@"cover_url"]) {
+        [keys removeObject:@"cover_url"];
+    }
+    if ([keys containsObject:@"banners_url"]) {
+        [keys removeObject:@"banners_url"];
+    }
     
     NSArray *sortedKeys = [keys sortedArrayUsingComparator:^NSComparisonResult(id obj1, id obj2){
         int tmp = 0; // 比到第几位
