@@ -148,6 +148,7 @@ static NSString *const logOut = @"/auth/logout";
 - (IBAction)welcomePageBtn:(UIButton *)sender {
     NSArray *arr = [NSArray arrayWithObjects:@"Guide_one",@"Guide_two",@"Guide_three",@"Guide_four", nil];
     GuidePageViewController *vc = [[GuidePageViewController alloc] initWithPicArr:arr andRootVC:self];
+    vc.flag = welcomePage;
     [self presentViewController:vc animated:YES completion:nil];
 }
 

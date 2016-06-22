@@ -18,5 +18,11 @@
 
 + (UIImage *)fixOrientation:(UIImage *)aImage;
 
+// 圆形裁剪
++ (UIImage *)imageWithClipImage:(UIImage *)image borderWidth:(CGFloat)borderWidth borderColor:(UIColor *)color;
+
+// 控件截屏
++ (UIImage *)imageWithCaputureView:(UIView *)view;
+
 @end
 
