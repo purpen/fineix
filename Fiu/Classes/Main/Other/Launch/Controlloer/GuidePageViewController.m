@@ -79,7 +79,6 @@
 -(UITapGestureRecognizer *)avLayerTap{
     if (!_avLayerTap) {
         _avLayerTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(avLayerTapClick:)];
-        
     }
     return _avLayerTap;
 }
