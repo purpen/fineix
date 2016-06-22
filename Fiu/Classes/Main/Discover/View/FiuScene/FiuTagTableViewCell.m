@@ -46,7 +46,7 @@ static const NSInteger  rollTagBtnTag = 97;
 
 #pragma mark - “景”
 - (void)setHotTagsData:(NSMutableArray *)model {
-    self.type = 1;
+    self.type = 0;
     self.tagTitleArr = model;
     [self addTagButton:self.tagTitleArr];
 }
@@ -112,7 +112,6 @@ static const NSInteger  rollTagBtnTag = 97;
     searchVC.searchType = self.type;
     [self.nav pushViewController:searchVC animated:YES];
 }
-
 
 
 @end

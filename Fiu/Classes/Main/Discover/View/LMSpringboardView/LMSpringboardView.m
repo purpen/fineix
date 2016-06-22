@@ -200,10 +200,10 @@
     self.delaysContentTouches = NO;
     self.showsHorizontalScrollIndicator = NO;
     self.showsVerticalScrollIndicator = NO;
-    self.alwaysBounceHorizontal = YES;
-    self.alwaysBounceVertical = YES;
-    self.bouncesZoom = YES;
-    self.decelerationRate = UIScrollViewDecelerationRateFast;
+//    self.alwaysBounceHorizontal = YES;
+//    self.alwaysBounceVertical = YES;
+//    self.bouncesZoom = YES;
+//    self.decelerationRate = UIScrollViewDecelerationRateFast;
     self.delegate = self;
     self.itemDiameter = 52;
     self.itemPadding = 32;
@@ -568,7 +568,9 @@
 //            _contentView.center = CGPointMake(_contentSizeUnscaled.width*0.5*newZoom, _contentSizeUnscaled.height*0.5*newZoom);
 //            self.contentSize = CGSizeMake(_contentSizeUnscaled.width*newZoom, _contentSizeUnscaled.height*newZoom);
             _contentView.center = CGPointMake(_contentSizeUnscaled.width*0.47, _contentSizeUnscaled.height*0.47);
+//            _contentView.backgroundColor = [UIColor orangeColor];
             self.contentSize = CGSizeMake(_contentSizeUnscaled.width*0.55, _contentSizeUnscaled.height*0.75);
+            NSLog(@"＝＝＝＝＝＝＝＝  %f ----  %f", _contentSizeUnscaled.width * 0.55, _contentSizeUnscaled.height*0.75);
         }
     }
     if(_contentSizeIsDirty == YES)

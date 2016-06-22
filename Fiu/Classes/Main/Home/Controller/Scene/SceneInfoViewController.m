@@ -186,9 +186,6 @@ static NSString *const URLDeleteScene = @"/scene_sight/delete";
             [self.likePeopleMarr addObject:likePeopleModel];
         }
         [self.sceneTableView reloadData];
-//        NSIndexPath * indexPath = [NSIndexPath indexPathForRow:0 inSection:0];
-//        [self.sceneTableView reloadRowsAtIndexPaths:[NSArray arrayWithObjects:indexPath,nil] withRowAnimation:UITableViewRowAnimationNone];
-
     } failure:^(FBRequest *request, NSError *error) {
         [SVProgressHUD showErrorWithStatus:[error localizedDescription]];
     }];

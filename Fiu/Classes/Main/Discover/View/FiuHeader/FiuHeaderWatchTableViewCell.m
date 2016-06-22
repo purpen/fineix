@@ -14,9 +14,9 @@
 #import "GoodsBrandViewController.h"
 
 @interface FiuHeaderWatchTableViewCell () {
-    NSInteger           _type;  //  0:用户 1:品牌
-    NSArray         *   _headerImgMarr;
-    NSArray         *   _headerIdMarr;
+    NSInteger                  _type;  //  0:用户 1:品牌
+    NSArray                *   _headerImgMarr;
+    NSMutableArray         *   _headerIdMarr;
 }
 
 @end
@@ -26,6 +26,7 @@
 - (instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier {
     self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
     if (self) {
+        _headerIdMarr = [NSMutableArray array];
         self.backgroundColor = [UIColor colorWithHexString:cellBgColor];
         self.selectionStyle = UITableViewCellSelectionStyleNone;
     }
@@ -34,7 +35,6 @@
 
 - (void)setHeaderImage:(NSArray *)img withId:(NSArray *)ids withType:(NSInteger)type {
     _headerImgMarr = img;
-    _headerIdMarr = ids;
     _type = type;
     
     if (![self.subviews containsObject:_springboard]) {
@@ -50,6 +50,7 @@
             UITapGestureRecognizer* tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(OpenUserHomePage:)];
             [item addGestureRecognizer:tap];
             [itemViews addObject:item];
+            [_headerIdMarr addObject:ids[idx]];
         }
         _springboard.itemViews = itemViews;
         

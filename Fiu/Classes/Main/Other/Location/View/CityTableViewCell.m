@@ -34,6 +34,7 @@
 -(UIImageView *)bgImageView{
     if (!_bgImageView) {
         _bgImageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 184/667.0*SCREEN_HEIGHT)];
+        _bgImageView.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"Defaul_Bg_420"]];
         //  添加渐变层
         CAGradientLayer * shadow = [CAGradientLayer layer];
         shadow.startPoint = CGPointMake(0, 0);
