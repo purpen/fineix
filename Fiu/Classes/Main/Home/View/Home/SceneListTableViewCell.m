@@ -47,7 +47,6 @@
     
     if (model.user.isExpert == 1) {
         self.userVimg.hidden = NO;
-//        [self.userStar setUserTagInfo:model.user.expertLabel];
         self.userStar.text = model.user.expertLabel;
         self.userProfile.text = [NSString stringWithFormat:@"|  %@", model.user.expertInfo];
         CGSize size = [self.userStar boundingRectWithSize:CGSizeMake(100, 0)];
@@ -59,8 +58,16 @@
             make.left.equalTo(self.userStar.mas_right).with.offset(5);
         }];
     
-    } else if (model.user.isExpert == 0) {
+    } else {
+        self.userVimg.hidden = YES;
+        self.userStar.text = @"";
         self.userProfile.text = model.user.summary;
+        [self.userStar mas_updateConstraints:^(MASConstraintMaker *make) {
+            make.width.mas_equalTo(0);
+        }];
+        [self.userProfile mas_updateConstraints:^(MASConstraintMaker *make) {
+            make.left.equalTo(self.userStar.mas_right).with.offset(0);
+        }];
     }
 
     //  首页显示标记点
