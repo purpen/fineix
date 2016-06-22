@@ -235,7 +235,9 @@ NSString *const determineLogin = @"/auth/check_login";
         } failure:^(FBRequest *request, NSError *error) {
         }];
     }else if(!userIsFirstInstalled){
-        self.window.rootViewController = [[GuidePageViewController alloc] initWithPicArr:arr andRootVC:[[FBTabBarController alloc] init]];
+        GuidePageViewController *vc = [[GuidePageViewController alloc] initWithPicArr:arr andRootVC:[[FBTabBarController alloc] init]];
+        vc.flag = shouYe;
+        self.window.rootViewController = vc;
     }else if (userIsFirstInstalled && !codeFlag){
         if (flag) {
             self.window.rootViewController = [[InviteCCodeViewController alloc] init];

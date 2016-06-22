@@ -21,6 +21,8 @@
     UIPageControl *_guidePageController;
 }
 @property (nonatomic,strong) UIButton *enterBtn;
+/** 播放器点按手势 */
+@property (nonatomic, strong) UITapGestureRecognizer *avLayerTap;
 @end
 
 @implementation GuidePageViewController
@@ -36,7 +38,12 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    [self.player play];
+    if (self.flag == shouYe) {
+        [self.player play];
+    }else if (self.flag == welcomePage){
+        [self startRollImg];
+    }
+    
     //设置scrollview
 //    [self setScrollView];
     //设置ImageView
@@ -68,6 +75,19 @@
 //        [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"UserHasGuideView"];
 //    }
 }
+#pragma mark - 手势
+-(UITapGestureRecognizer *)avLayerTap{
+    if (!_avLayerTap) {
+        _avLayerTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(avLayerTapClick:)];
+        
+    }
+    return _avLayerTap;
+}
+
+-(void)avLayerTapClick:(UIGestureRecognizer*)tap{
+    [self dismissViewControllerAnimated:YES completion:nil];
+    [self.player pause];
+}
 
 #pragma mark - 首次启动视频
 - (AVPlayer *)player {
@@ -86,6 +106,7 @@
         AVPlayerLayer * layer = [AVPlayerLayer playerLayerWithPlayer:_player];
         layer.frame = CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT);
         [self.view.layer addSublayer:layer];
+        
         
         [[NSNotificationCenter  defaultCenter] addObserver:self selector:@selector(startRollImg) name:AVPlayerItemDidPlayToEndTimeNotification object:nil];
     }
