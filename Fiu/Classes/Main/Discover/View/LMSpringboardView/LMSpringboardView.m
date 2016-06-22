@@ -205,7 +205,6 @@
     self.bouncesZoom = YES;
     self.decelerationRate = UIScrollViewDecelerationRateFast;
     self.delegate = self;
-    
     self.itemDiameter = 52;
     self.itemPadding = 32;
     self.minimumItemScaling = 0.5;
@@ -216,10 +215,10 @@
     
     _touchView = [[UIView alloc] init];
 //    _touchView.backgroundColor = [UIColor purpleColor];
-    [self addSubview:_touchView];
+//    [self addSubview:_touchView];
     
     _contentView = [[UIView alloc] init];
-    //_contentView.backgroundColor = [UIColor greenColor];
+//    _contentView.backgroundColor = [UIColor orangeColor];
     [self addSubview:_contentView];
     
     /*_debugRectInContent = [[UIView alloc] init];
@@ -294,7 +293,7 @@
     float yOffset = 0;
     
     double distanceToBeOffset = _itemDiameter*zoomScale*(MIN(size.width, size.height)/320);
-    //double distanceToBeOffset = MIN(size.width, size.height)*0.5*zoomScale;
+//    double distanceToBeOffset = MIN(size.width, size.height)*0.5*zoomScale;
     float leftDistance = center.x-padding-insets.left;
     if(leftDistance < distanceToBeOffset)
     {
@@ -472,7 +471,7 @@
     contentCenter.y /= zoomScale;
     CGSize contentSizeNoExtras = CGSizeMake(_contentSizeUnscaled.width-_contentSizeExtra.width, _contentSizeUnscaled.height-_contentSizeExtra.height);
     CGRect contentFrame = CGRectMake(contentCenter.x-contentSizeNoExtras.width*0.5, contentCenter.y-contentSizeNoExtras.height*0.5, contentSizeNoExtras.width, contentSizeNoExtras.height);
-    //_debugRectInContent.frame = contentFrame;
+//    _debugRectInContent.frame = contentFrame;
     
     if(CGRectContainsPoint(contentFrame, proposedTargetCenter) == NO)
     {
@@ -555,6 +554,7 @@
         _contentSizeUnscaled.width += _contentSizeExtra.width;
         _contentSizeUnscaled.height += _contentSizeExtra.height;
         _contentView.bounds = CGRectMake(0, 0, _contentSizeUnscaled.width, _contentSizeUnscaled.height);
+//        _contentView.bounds = CGRectMake(0, 0, _contentSizeUnscaled.width*0.5, _contentSizeUnscaled.height*0.5);
     }
     if(_minimumZoomLevelIsDirty == YES)
     {
@@ -564,9 +564,11 @@
         {
             self.zoomScale = newZoom;
             _zoomScaleCache = newZoom;
-            
-            _contentView.center = CGPointMake(_contentSizeUnscaled.width*0.5*newZoom, _contentSizeUnscaled.height*0.5*newZoom);
-            self.contentSize = CGSizeMake(_contentSizeUnscaled.width*newZoom, _contentSizeUnscaled.height*newZoom);
+
+//            _contentView.center = CGPointMake(_contentSizeUnscaled.width*0.5*newZoom, _contentSizeUnscaled.height*0.5*newZoom);
+//            self.contentSize = CGSizeMake(_contentSizeUnscaled.width*newZoom, _contentSizeUnscaled.height*newZoom);
+            _contentView.center = CGPointMake(_contentSizeUnscaled.width*0.47, _contentSizeUnscaled.height*0.47);
+            self.contentSize = CGSizeMake(_contentSizeUnscaled.width*0.55, _contentSizeUnscaled.height*0.75);
         }
     }
     if(_contentSizeIsDirty == YES)
@@ -620,10 +622,8 @@
     }
     
     _zoomScaleCache = self.zoomScale;
-    
     _touchView.bounds = CGRectMake(0, 0, (_contentSizeUnscaled.width-_contentSizeExtra.width)*_zoomScaleCache, (_contentSizeUnscaled.height-_contentSizeExtra.height)*_zoomScaleCache);
     _touchView.center = CGPointMake(_contentSizeUnscaled.width*0.5*_zoomScaleCache, _contentSizeUnscaled.height*0.5*_zoomScaleCache);
-    
     double scale = MIN(_minimumItemScaling*_transformFactor+(1-_transformFactor), 1);
     _minTransform = CGAffineTransformMakeScale(scale, scale);
     for(LMSpringboardItemView* view in _itemViews)

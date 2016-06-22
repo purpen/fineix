@@ -23,16 +23,23 @@
     return self;
 }
 
-- (void)addGroupHeaderViewIcon:(NSString *)image withTitle:(NSString *)title withSubtitle:(NSString *)subTitle {
-    [self.icon setImage:[UIImage imageNamed:image] forState:(UIControlStateNormal)];
+- (void)addGroupHeaderViewIcon:(NSString *)image
+                     withTitle:(NSString *)title
+                  withSubtitle:(NSString *)subTitle
+                 withRightMore:(NSString *)more {
     
+    [self.icon setImage:[UIImage imageNamed:image] forState:(UIControlStateNormal)];
+    self.headerTitle.text = title;
+    self.subTitle.text = subTitle;
+    if (more.length > 0) {
+        [self.moreBtn setTitle:more forState:(UIControlStateNormal)];
+    } else {
+        self.moreBtn.hidden = YES;
+    }
     CGFloat titleLength = [title boundingRectWithSize:CGSizeMake(320, 1000) options:(NSStringDrawingUsesLineFragmentOrigin) attributes:nil context:nil].size.width;
     [_headerTitle mas_updateConstraints:^(MASConstraintMaker *make) {
-        make.size.mas_equalTo(CGSizeMake(titleLength + 15, 15));
+        make.size.mas_equalTo(CGSizeMake(titleLength * 1.3, 15));
     }];
-    self.headerTitle.text = title;
-    
-    self.subTitle.text = subTitle;
 }
 
 - (void)setUI {
@@ -56,9 +63,7 @@
         make.left.equalTo(self.headerTitle.mas_right).with.offset(0);
         make.right.equalTo(self.mas_right).with.offset(-15);
     }];
-}
-
-- (void)addLookMoreBtn {
+    
     [self addSubview:self.moreBtn];
     [_moreBtn mas_makeConstraints:^(MASConstraintMaker *make) {
         make.size.mas_equalTo(CGSizeMake(50, 44));

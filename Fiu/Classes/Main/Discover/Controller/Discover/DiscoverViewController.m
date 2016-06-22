@@ -97,7 +97,10 @@ static NSString *const URLFiuPeople = @"/user/find_user";
         self.fiuPeopleList = [NSMutableArray arrayWithArray:[[result valueForKey:@"data"] valueForKey:@"users"]];
         _headerImgArr = [NSArray arrayWithArray:[self.fiuPeopleList valueForKey:@"medium_avatar_url"]];
         _headerIdArr = [NSArray arrayWithArray:[self.fiuPeopleList valueForKey:@"_id"]];
-        [self.discoverTableView reloadData];
+
+        NSIndexPath * indexPath = [NSIndexPath indexPathForRow:0 inSection:0];
+        [self.discoverTableView reloadRowsAtIndexPaths:[NSArray arrayWithObjects:indexPath,nil] withRowAnimation:UITableViewRowAnimationNone];
+        
         [self requestIsLastData:self.discoverTableView currentPage:self.currentpageNum withTotalPage:self.totalPageNum];
         [SVProgressHUD dismiss];
         
@@ -111,7 +114,10 @@ static NSString *const URLFiuPeople = @"/user/find_user";
     self.tagsRequest = [FBAPI getWithUrlString:URLTagS requestDictionary:nil delegate:self];
     [self.tagsRequest startRequestSuccess:^(FBRequest *request, id result) {
         self.tagsList = [NSMutableArray arrayWithArray:[[result valueForKey:@"data"] valueForKey:@"tags"]];
-        [self.discoverTableView reloadData];
+        
+        NSIndexPath * indexPath = [NSIndexPath indexPathForRow:1 inSection:0];
+        [self.discoverTableView reloadRowsAtIndexPaths:[NSArray arrayWithObjects:indexPath,nil] withRowAnimation:UITableViewRowAnimationNone];
+        
         [self requestIsLastData:self.discoverTableView currentPage:self.currentpageNum withTotalPage:self.totalPageNum];
         
     } failure:^(FBRequest *request, NSError *error) {
@@ -129,7 +135,10 @@ static NSString *const URLFiuPeople = @"/user/find_user";
             [self.fiuSceneList addObject:fiuSceneModel];
             [self.fiuSceneIdList addObject:[NSString stringWithFormat:@"%zi", fiuSceneModel.idField]];
         }
-        [self.discoverTableView reloadData];
+        
+        NSIndexSet * indexSet = [[NSIndexSet alloc] initWithIndex:1];
+        [self.discoverTableView reloadSections:indexSet withRowAnimation:UITableViewRowAnimationAutomatic];
+        
         [self requestIsLastData:self.discoverTableView currentPage:self.currentpageNum withTotalPage:self.totalPageNum];
         
     } failure:^(FBRequest *request, NSError *error) {
@@ -148,7 +157,8 @@ static NSString *const URLFiuPeople = @"/user/find_user";
             [self.sceneIdList addObject:[NSString stringWithFormat:@"%zi", homeSceneModel.idField]];
         }
         
-        [self.discoverTableView reloadData];
+        NSIndexSet * indexSet = [[NSIndexSet alloc] initWithIndex:2];
+        [self.discoverTableView reloadSections:indexSet withRowAnimation:UITableViewRowAnimationAutomatic];
         
         self.currentpageNum = [[[result valueForKey:@"data"] valueForKey:@"current_page"] integerValue];
         self.totalPageNum = [[[result valueForKey:@"data"] valueForKey:@"total_page"] integerValue];
@@ -265,10 +275,10 @@ static NSString *const URLFiuPeople = @"/user/find_user";
             if (!cell) {
                 cell = [[FiuHeaderWatchTableViewCell alloc] initWithStyle:(UITableViewCellStyleDefault) reuseIdentifier:fiuHeaderCellId];
             }
-            cell.nav = self.navigationController;
             if (_headerImgArr.count > 0) {
                 [cell setHeaderImage:_headerImgArr withId:_headerIdArr withType:0];
             }
+            cell.nav = self.navigationController;
             return cell;
             
         } else if (indexPath.row == 1) {
@@ -326,12 +336,20 @@ static NSString *const URLFiuPeople = @"/user/find_user";
     self.headerView.nav = self.navigationController;
     
     if (section == 0) {
-        [self.headerView addGroupHeaderViewIcon:@"Group_friend" withTitle:NSLocalizedString(@"fiuFriend", nil) withSubtitle:NSLocalizedString(@"fiuFriendText", nil)];
+        [self.headerView addGroupHeaderViewIcon:@"Group_friend"
+                                      withTitle:NSLocalizedString(@"fiuFriend", nil)
+                                   withSubtitle:NSLocalizedString(@"fiuFriendText", nil)
+                                   withRightMore:@""];
     } else if (section ==1) {
-        [self.headerView addLookMoreBtn];
-        [self.headerView addGroupHeaderViewIcon:@"Group_FiuScene" withTitle:NSLocalizedString(@"fiuFScene", nil) withSubtitle:NSLocalizedString(@"fiuFSceneText", nil)];
+        [self.headerView addGroupHeaderViewIcon:@"Group_FiuScene"
+                                      withTitle:NSLocalizedString(@"fiuFScene", nil)
+                                   withSubtitle:NSLocalizedString(@"fiuFSceneText", nil)
+                                  withRightMore:@"查看全部"];
     } else if (section == 2) {
-        [self.headerView addGroupHeaderViewIcon:@"Group_scene" withTitle:NSLocalizedString(@"fiuScene", nil) withSubtitle:NSLocalizedString(@"fiuSceneText", nil)];
+        [self.headerView addGroupHeaderViewIcon:@"Group_scene"
+                                      withTitle:NSLocalizedString(@"fiuScene", nil)
+                                   withSubtitle:NSLocalizedString(@"fiuSceneText", nil)
+                                  withRightMore:@""];
     }
     
     return self.headerView;

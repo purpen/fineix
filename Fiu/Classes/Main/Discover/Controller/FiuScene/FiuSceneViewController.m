@@ -341,7 +341,10 @@ static NSString *const URLDeleteScene = @"/scene_scene/delete";
     self.headerView.backgroundColor = [UIColor colorWithHexString:cellBgColor alpha:1];
     
     if (section == 1) {
-        [self.headerView addGroupHeaderViewIcon:@"Group_scene" withTitle:@"此情景下的场景" withSubtitle:@""];
+        [self.headerView addGroupHeaderViewIcon:@"Group_scene"
+                                      withTitle:@"此情景下的场景"
+                                   withSubtitle:@""
+                                  withRightMore:@""];
     }
     
     return self.headerView;

@@ -458,12 +458,21 @@ static NSString *const URLDeleteScene = @"/scene_sight/delete";
     if (section == 1) {
         self.headerView.backgroundColor = [UIColor whiteColor];
     } else if (section == 2) {
-        [self.headerView addGroupHeaderViewIcon:@"Group_scene" withTitle:NSLocalizedString(@"sceneGoods", nil) withSubtitle:@""];
+        [self.headerView addGroupHeaderViewIcon:@"Group_scene"
+                                      withTitle:NSLocalizedString(@"sceneGoods", nil)
+                                   withSubtitle:@""
+                                  withRightMore:@""];
     } else if (section == 3) {
         if (self.reGoodsList.count == 0) {
-            [self.headerView addGroupHeaderViewIcon:@"" withTitle:@"" withSubtitle:@""];
+            [self.headerView addGroupHeaderViewIcon:@""
+                                          withTitle:@""
+                                       withSubtitle:@""
+                                      withRightMore:@""];
         } else {
-            [self.headerView addGroupHeaderViewIcon:@"Group_scene" withTitle:NSLocalizedString(@"sceneLikeGoods", nil) withSubtitle:@""];
+            [self.headerView addGroupHeaderViewIcon:@"Group_scene"
+                                          withTitle:NSLocalizedString(@"sceneLikeGoods", nil)
+                                       withSubtitle:@""
+                                      withRightMore:@""];
         }
     }
     

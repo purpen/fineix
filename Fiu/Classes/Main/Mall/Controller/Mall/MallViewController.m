@@ -85,7 +85,7 @@ static NSString *const URLFiuBrand = @"/scene_brands/getlist";
 #pragma mark 最Fiu品牌
 - (void)networkFiuPeopleData {
     [SVProgressHUD show];
-    self.fiuBrandRequest = [FBAPI getWithUrlString:URLFiuBrand requestDictionary:@{@"page":@"1", @"size":@"50", @"sort":@"1"} delegate:self];
+    self.fiuBrandRequest = [FBAPI getWithUrlString:URLFiuBrand requestDictionary:@{@"page":@"1", @"size":@"100", @"sort":@"1"} delegate:self];
     [self.fiuBrandRequest startRequestSuccess:^(FBRequest *request, id result) {
         self.brandList = [NSMutableArray arrayWithArray:[[result valueForKey:@"data"] valueForKey:@"rows"]];
         _headerImgArr = [NSArray arrayWithArray:[self.brandList valueForKey:@"cover_url"]];
@@ -314,9 +314,15 @@ static NSString *const URLFiuBrand = @"/scene_brands/getlist";
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
     self.headerView = [[GroupHeaderView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 44)];
     if (section == 0) {
-        [self.headerView addGroupHeaderViewIcon:@"Group_Brand" withTitle:NSLocalizedString(@"fiuBrand", nil) withSubtitle:NSLocalizedString(@"fiuBrandText", nil)];
+        [self.headerView addGroupHeaderViewIcon:@"Group_Brand"
+                                      withTitle:NSLocalizedString(@"fiuBrand", nil)
+                                   withSubtitle:NSLocalizedString(@"fiuBrandText", nil)
+                                  withRightMore:@""];
     } else if (section ==1) {
-        [self.headerView addGroupHeaderViewIcon:@"Group_goods" withTitle:NSLocalizedString(@"fiuGoods", nil) withSubtitle:NSLocalizedString(@"fiuGoodsText", nil)];
+        [self.headerView addGroupHeaderViewIcon:@"Group_goods"
+                                      withTitle:NSLocalizedString(@"fiuGoods", nil)
+                                   withSubtitle:NSLocalizedString(@"fiuGoodsText", nil)
+                                  withRightMore:@""];
     } 
     return self.headerView;
 }
