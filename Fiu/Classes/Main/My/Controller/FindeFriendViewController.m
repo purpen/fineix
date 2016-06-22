@@ -59,6 +59,9 @@ static NSString *const ShareURL = @"http://m.taihuoniao.com/guide/app_about";
     [SVProgressHUD show];
     FBRequest *request = [FBAPI postWithUrlString:@"/user/find_user" requestDictionary:@{@"page":@1,@"size":@15,@"type":@1,@"sight_count":@5,@"sort":@0} delegate:self];
     [request startRequestSuccess:^(FBRequest *request, id result) {
+        
+        
+        NSLog( @" reslut   %@",result);
         NSDictionary *dataDict = [result objectForKey:@"data"];
         NSArray *rowsAry = [dataDict objectForKey:@"users"];
         for (NSDictionary *rowsDict in rowsAry) {
@@ -74,6 +77,7 @@ static NSString *const ShareURL = @"http://m.taihuoniao.com/guide/app_about";
                 model.label = rowsDict[@"label"];
             }
             model.expert_label = rowsDict[@"expert_label"];
+            model.expert_info = rowsDict[@"expert_info"];
             model.rank_id = rowsDict[@"rank_id"];
             model.is_expert = rowsDict[@"identify"][@"is_expert"];
             NSArray *sceneAry = rowsDict[@"scene_sight"];
@@ -157,22 +161,27 @@ static NSString *const ShareURL = @"http://m.taihuoniao.com/guide/app_about";
         [cell.headImageView sd_setImageWithURL:[NSURL URLWithString:model.avatarUrl]placeholderImage:[UIImage imageNamed:@"default_head"]];
         cell.nameLbael.text = model.nickName;
         
-        NSArray *tagsAry = [NSArray arrayWithObjects:@"大拿",@"行家",@"行摄家",@"艺术范",@"手艺人",@"人来疯",@"赎回自由身",@"职业buyer", nil];
+//        NSArray *tagsAry = [NSArray arrayWithObjects:@"大拿",@"行家",@"行摄家",@"艺术范",@"手艺人",@"人来疯",@"赎回自由身",@"职业buyer", nil];
         if ([model.is_expert isEqual:@(1)]) {
-            cell.userLevelLabel.text = [NSString stringWithFormat:@" | %@",model.expert_label];
-            cell.userLevelLabel.hidden = NO;
-            cell.idTagsImageView.hidden = NO;
-            int n = (int)[tagsAry indexOfObject:model.expert_label];
-            cell.idTagsImageView.image = [UIImage imageNamed:[NSString stringWithFormat:@"tags%d",n+1]];
+            cell.levelLabel.text = [NSString stringWithFormat:@"%@ | %@",model.expert_label,model.expert_info];
+            cell.userLevelLabel.hidden = YES;
+//            cell.idTagsImageView.hidden = NO;
+//            int n = (int)[tagsAry indexOfObject:model.expert_label];
+//            cell.idTagsImageView.image = [UIImage imageNamed:[NSString stringWithFormat:@"tags%d",n+1]];
         }else{
             if (model.label.length == 0) {
-                cell.levelLabel.text = [NSString stringWithFormat:@"%@",model.summary];
+                if (model.summary.length == 0) {
+                    
+                }else{
+                    cell.levelLabel.text = [NSString stringWithFormat:@"%@",model.summary];
+                }
             }else{
-                cell.levelLabel.text = [NSString stringWithFormat:@"%@ | %@",model.label,model.summary];
+                if (model.summary.length == 0) {
+                    cell.levelLabel.text = [NSString stringWithFormat:@"%@",model.label];
+                }else{
+                    cell.levelLabel.text = [NSString stringWithFormat:@"%@ | %@",model.label,model.summary];
+                }
             }
-            cell.userLevelLabel.hidden = NO;
-            cell.idTagsImageView.hidden = YES;
-//            cell.userLevelLabel.hidden = NO;
         }
 //        if (model.address.firstObject && model.address.lastObject) {
 //            cell.deressLabel.text = [NSString stringWithFormat:@"%@ %@",model.address.firstObject,model.address.lastObject];

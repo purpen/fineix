@@ -22,5 +22,7 @@
 @property(nonatomic,copy) NSString *is_expert;
 @property(nonatomic,copy) NSString *expert_label;
 @property(nonatomic,copy) NSString *summary;
+/** 认证信息 */
+@property(nonatomic,copy) NSString *expert_info;
 
 @end
