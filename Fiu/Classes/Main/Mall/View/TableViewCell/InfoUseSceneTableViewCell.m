@@ -94,6 +94,7 @@
 }
 
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
+    NSLog(@"====  %@",self.sceneIds[indexPath.row]);
     SceneInfoViewController * sceneInfoVC = [[SceneInfoViewController alloc] init];
     sceneInfoVC.sceneId = self.sceneIds[indexPath.row];
     [self.nav pushViewController:sceneInfoVC animated:YES];

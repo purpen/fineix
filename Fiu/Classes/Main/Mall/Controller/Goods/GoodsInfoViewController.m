@@ -110,7 +110,10 @@ static NSString *const URLWantBuy = @"/scene_product/sight_click_stat";
 - (void)networkGoodsSceneList {
     self.goodsSceneRequest = [FBAPI getWithUrlString:URLGoodsScene requestDictionary:@{@"product_id":self.goodsID, @"page":@"1", @"size":@"5"} delegate:self];
     [self.goodsSceneRequest startRequestSuccess:^(FBRequest *request, id result) {
-        NSArray * sceneArr = [[[result valueForKey:@"data"] valueForKey:@"rows"] valueForKey:@"sight"];
+        NSMutableArray * sceneArr = [NSMutableArray arrayWithArray:[[[result valueForKey:@"data"] valueForKey:@"rows"] valueForKey:@"sight"]];
+        if ([sceneArr containsObject:[NSArray array]]) {
+            [sceneArr removeObject:[NSArray array]];
+        }
         for (NSDictionary * sceneDict in sceneArr) {
             SceneInfoData * sceneModel = [[SceneInfoData alloc] initWithDictionary:sceneDict];
             [self.sceneList addObject:sceneModel];
@@ -265,7 +268,9 @@ static NSString *const URLWantBuy = @"/scene_product/sight_click_stat";
             InfoUseSceneTableViewCell * cell = [tableView dequeueReusableCellWithIdentifier:InfoUseSceneCellId];
             cell = [[InfoUseSceneTableViewCell alloc] initWithStyle:(UITableViewCellStyleDefault) reuseIdentifier:InfoUseSceneCellId];
             cell.nav = self.navigationController;
-            [cell setGoodsScene:self.sceneList];
+            if (self.sceneList.count > 0) {
+                [cell setGoodsScene:self.sceneList];
+            }
             return cell;
         
         } else {

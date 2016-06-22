@@ -66,7 +66,7 @@ static NSString *const URLFiuBrand = @"/scene_brands/getlist";
 }
 
 #pragma mark - 网络请求
-#pragma mark 轮播图
+#pragma mark 轮播图r
 - (void)networkRollImgData {
     self.rollImgRequest = [FBAPI getWithUrlString:URLMallSlide requestDictionary:@{@"name":@"app_fiu_product_index_slide"} delegate:self];
     [self.rollImgRequest startRequestSuccess:^(FBRequest *request, id result) {
@@ -87,6 +87,7 @@ static NSString *const URLFiuBrand = @"/scene_brands/getlist";
     [SVProgressHUD show];
     self.fiuBrandRequest = [FBAPI getWithUrlString:URLFiuBrand requestDictionary:@{@"page":@"1", @"size":@"100", @"sort":@"1"} delegate:self];
     [self.fiuBrandRequest startRequestSuccess:^(FBRequest *request, id result) {
+        NSLog(@"＝＝＝＝＝＝＝＝  最Fiu品牌:   %@", result);
         self.brandList = [NSMutableArray arrayWithArray:[[result valueForKey:@"data"] valueForKey:@"rows"]];
         _headerImgArr = [NSArray arrayWithArray:[self.brandList valueForKey:@"cover_url"]];
         _headerIdArr = [NSArray arrayWithArray:[self.brandList valueForKey:@"_id"]];

@@ -97,10 +97,8 @@ static NSString *const URLFiuPeople = @"/user/find_user";
         self.fiuPeopleList = [NSMutableArray arrayWithArray:[[result valueForKey:@"data"] valueForKey:@"users"]];
         _headerImgArr = [NSArray arrayWithArray:[self.fiuPeopleList valueForKey:@"medium_avatar_url"]];
         _headerIdArr = [NSArray arrayWithArray:[self.fiuPeopleList valueForKey:@"_id"]];
-
-        NSIndexPath * indexPath = [NSIndexPath indexPathForRow:0 inSection:0];
-        [self.discoverTableView reloadRowsAtIndexPaths:[NSArray arrayWithObjects:indexPath,nil] withRowAnimation:UITableViewRowAnimationNone];
         
+        [self.discoverTableView reloadData];
         [self requestIsLastData:self.discoverTableView currentPage:self.currentpageNum withTotalPage:self.totalPageNum];
         [SVProgressHUD dismiss];
         
@@ -115,9 +113,7 @@ static NSString *const URLFiuPeople = @"/user/find_user";
     [self.tagsRequest startRequestSuccess:^(FBRequest *request, id result) {
         self.tagsList = [NSMutableArray arrayWithArray:[[result valueForKey:@"data"] valueForKey:@"tags"]];
         
-        NSIndexPath * indexPath = [NSIndexPath indexPathForRow:1 inSection:0];
-        [self.discoverTableView reloadRowsAtIndexPaths:[NSArray arrayWithObjects:indexPath,nil] withRowAnimation:UITableViewRowAnimationNone];
-        
+        [self.discoverTableView reloadData];
         [self requestIsLastData:self.discoverTableView currentPage:self.currentpageNum withTotalPage:self.totalPageNum];
         
     } failure:^(FBRequest *request, NSError *error) {
@@ -136,9 +132,7 @@ static NSString *const URLFiuPeople = @"/user/find_user";
             [self.fiuSceneIdList addObject:[NSString stringWithFormat:@"%zi", fiuSceneModel.idField]];
         }
         
-        NSIndexSet * indexSet = [[NSIndexSet alloc] initWithIndex:1];
-        [self.discoverTableView reloadSections:indexSet withRowAnimation:UITableViewRowAnimationAutomatic];
-        
+        [self.discoverTableView reloadData];
         [self requestIsLastData:self.discoverTableView currentPage:self.currentpageNum withTotalPage:self.totalPageNum];
         
     } failure:^(FBRequest *request, NSError *error) {
@@ -157,9 +151,7 @@ static NSString *const URLFiuPeople = @"/user/find_user";
             [self.sceneIdList addObject:[NSString stringWithFormat:@"%zi", homeSceneModel.idField]];
         }
         
-        NSIndexSet * indexSet = [[NSIndexSet alloc] initWithIndex:2];
-        [self.discoverTableView reloadSections:indexSet withRowAnimation:UITableViewRowAnimationAutomatic];
-        
+        [self.discoverTableView reloadData];
         self.currentpageNum = [[[result valueForKey:@"data"] valueForKey:@"current_page"] integerValue];
         self.totalPageNum = [[[result valueForKey:@"data"] valueForKey:@"total_page"] integerValue];
         [self requestIsLastData:self.discoverTableView currentPage:self.currentpageNum withTotalPage:self.totalPageNum];
@@ -287,7 +279,9 @@ static NSString *const URLFiuPeople = @"/user/find_user";
             if (!cell) {
                 cell = [[FiuTagTableViewCell alloc] initWithStyle:(UITableViewCellStyleDefault) reuseIdentifier:fiuSceneTagCellId];
             }
-            [cell setHotTagsData:self.tagsList];
+            if (self.tagsList.count > 0) {
+                [cell setHotTagsData:self.tagsList];
+            }
             cell.nav = self.navigationController;
             return cell;
         }

@@ -37,7 +37,6 @@ static NSString *const URLDeleteScene = @"/scene_scene/delete";
     
     _canEdit = NO;
     
-    [self setSceneInfoViewUI];
     [self networkRequestData];
     [self networkLikePeopleData];
     self.currentpageNum = 0;
@@ -50,6 +49,8 @@ static NSString *const URLDeleteScene = @"/scene_scene/delete";
     [SVProgressHUD show];
     self.fiuSceneRequest = [FBAPI getWithUrlString:URLFiuSceneInfo requestDictionary:@{@"id":self.fiuSceneId} delegate:self];
     [self.fiuSceneRequest startRequestSuccess:^(FBRequest *request, id result) {
+        [self setSceneInfoViewUI];
+        
         _fiuData = [NSDictionary dictionaryWithDictionary:[result valueForKey:@"data"]];
         _creatUserId = [NSString stringWithFormat:@"%@", [[result valueForKey:@"data"] valueForKey:@"user_id"]];
         if ([_creatUserId isEqualToString:[self getLoginUserID]]) {
@@ -104,7 +105,7 @@ static NSString *const URLDeleteScene = @"/scene_scene/delete";
             LikeOrSuPeopleRow * likePeopleModel = [[LikeOrSuPeopleRow alloc] initWithDictionary:likePeopleDic];
             [self.suPeopleMarr addObject:likePeopleModel];
         }
-        
+        [self.fiuSceneTable reloadData];
     } failure:^(FBRequest *request, NSError *error) {
         [SVProgressHUD showErrorWithStatus:[error localizedDescription]];
     }];
@@ -116,7 +117,7 @@ static NSString *const URLDeleteScene = @"/scene_scene/delete";
     if (button.selected == NO) {
         self.suFiuSceneRequest = [FBAPI postWithUrlString:URLSuFiuScene requestDictionary:@{@"id":self.fiuSceneId} delegate:self];
         [self.suFiuSceneRequest startRequestSuccess:^(FBRequest *request, id result) {
-            [SVProgressHUD showSuccessWithStatus:[result valueForKey:@"message"]];
+            [SVProgressHUD showSuccessWithStatus:@"订阅成功"];
             button.selected = YES;
             [self networkRequestData];
             [self networkLikePeopleData];
@@ -128,7 +129,7 @@ static NSString *const URLDeleteScene = @"/scene_scene/delete";
     } else if (button.selected == YES) {
         self.cancelSuRequest = [FBAPI postWithUrlString:URLCancelSu requestDictionary:@{@"id":self.fiuSceneId} delegate:self];
         [self.cancelSuRequest startRequestSuccess:^(FBRequest *request, id result) {
-            [SVProgressHUD showSuccessWithStatus:[result valueForKey:@"message"]];
+            [SVProgressHUD showSuccessWithStatus:@"取消订阅"];
             button.selected = NO;
             [self networkRequestData];
             [self networkLikePeopleData];

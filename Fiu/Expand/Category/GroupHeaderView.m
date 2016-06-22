@@ -32,6 +32,7 @@
     self.headerTitle.text = title;
     self.subTitle.text = subTitle;
     if (more.length > 0) {
+        self.moreBtn.hidden = NO;
         [self.moreBtn setTitle:more forState:(UIControlStateNormal)];
     } else {
         self.moreBtn.hidden = YES;
@@ -65,6 +66,7 @@
     }];
     
     [self addSubview:self.moreBtn];
+    _moreBtn.hidden = YES;
     [_moreBtn mas_makeConstraints:^(MASConstraintMaker *make) {
         make.size.mas_equalTo(CGSizeMake(50, 44));
         make.centerY.equalTo(self);
