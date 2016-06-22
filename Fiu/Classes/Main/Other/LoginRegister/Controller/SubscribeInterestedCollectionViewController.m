@@ -175,18 +175,25 @@ static NSString * const reuseIdentifier = @"Cell";
 
 //下一步按钮
 -(void)clickNextBtn:(UIButton*)sender{
-    UserInfoEntity *entity = [UserInfoEntity defaultUserInfoEntity];
-    if (entity.nickname) {
-        //已经订阅过，直接个人中心
-        //跳回个人主页
-        //跳回个人主页
-        [self dismissViewControllerAnimated:YES completion:nil];
-        [self.tabBarController setSelectedIndex:3];
-    }else{
-        //跳转到个人信息完善页面
-        ImprovViewController *improveVC = [[ImprovViewController alloc] init];
-        [self.navigationController pushViewController:improveVC animated:YES];
-    }
+    FBRequest *request = [FBAPI postWithUrlString:@"/my/update_user_identify" requestDictionary:@{
+                                                                                                  @"type":@1
+                                                                                                  } delegate:self];
+    [request startRequestSuccess:^(FBRequest *request, id result) {
+        UserInfoEntity *entity = [UserInfoEntity defaultUserInfoEntity];
+        if (entity.nickname) {
+            //已经订阅过，直接个人中心
+            //跳回个人主页
+            //跳回个人主页
+            [self dismissViewControllerAnimated:YES completion:nil];
+            [self.tabBarController setSelectedIndex:3];
+        }else{
+            //跳转到个人信息完善页面
+            ImprovViewController *improveVC = [[ImprovViewController alloc] init];
+            [self.navigationController pushViewController:improveVC animated:YES];
+        }
+    } failure:^(FBRequest *request, NSError *error) {
+        
+    }];
 }
 
 #pragma mark - UIScrollViewDelegate
