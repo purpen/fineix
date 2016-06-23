@@ -458,7 +458,6 @@
 		D81281131CAA8532007CF08B /* FBViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D812801C1CAA8532007CF08B /* FBViewController.m */; };
 		D81281531CAA8532007CF08B /* FBAPI.m in Sources */ = {isa = PBXBuildFile; fileRef = D81280B21CAA8532007CF08B /* FBAPI.m */; };
 		D81281541CAA8532007CF08B /* FBRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = D81280B41CAA8532007CF08B /* FBRequest.m */; };
-		D81281551CAA8532007CF08B /* HttpTool.m in Sources */ = {isa = PBXBuildFile; fileRef = D81280B61CAA8532007CF08B /* HttpTool.m */; };
 		D81281561CAA8532007CF08B /* NSString+FBMD5.m in Sources */ = {isa = PBXBuildFile; fileRef = D81280B91CAA8532007CF08B /* NSString+FBMD5.m */; };
 		D81281571CAA8532007CF08B /* NSString+Helper.m in Sources */ = {isa = PBXBuildFile; fileRef = D81280BB1CAA8532007CF08B /* NSString+Helper.m */; };
 		D81281581CAA8532007CF08B /* UIColor+Extension.m in Sources */ = {isa = PBXBuildFile; fileRef = D81280BD1CAA8532007CF08B /* UIColor+Extension.m */; };
@@ -1349,8 +1348,6 @@
 		D81280B21CAA8532007CF08B /* FBAPI.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FBAPI.m; sourceTree = "<group>"; };
 		D81280B31CAA8532007CF08B /* FBRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FBRequest.h; sourceTree = "<group>"; };
 		D81280B41CAA8532007CF08B /* FBRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FBRequest.m; sourceTree = "<group>"; };
-		D81280B51CAA8532007CF08B /* HttpTool.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HttpTool.h; sourceTree = "<group>"; };
-		D81280B61CAA8532007CF08B /* HttpTool.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HttpTool.m; sourceTree = "<group>"; };
 		D81280B81CAA8532007CF08B /* NSString+FBMD5.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+FBMD5.h"; sourceTree = "<group>"; };
 		D81280B91CAA8532007CF08B /* NSString+FBMD5.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+FBMD5.m"; sourceTree = "<group>"; };
 		D81280BA1CAA8532007CF08B /* NSString+Helper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+Helper.h"; sourceTree = "<group>"; };
@@ -3757,8 +3754,6 @@
 				D81280B21CAA8532007CF08B /* FBAPI.m */,
 				D81280B31CAA8532007CF08B /* FBRequest.h */,
 				D81280B41CAA8532007CF08B /* FBRequest.m */,
-				D81280B51CAA8532007CF08B /* HttpTool.h */,
-				D81280B61CAA8532007CF08B /* HttpTool.m */,
 			);
 			path = Network;
 			sourceTree = "<group>";
@@ -4503,7 +4498,6 @@
 				1F2A8FD21CF40277005116C7 /* BuyCarDefault.m in Sources */,
 				1F2A8F681CF40277005116C7 /* FiuPeople.m in Sources */,
 				1F2A91271CF42EC1005116C7 /* OrderInfoDetailViewController.m in Sources */,
-				D81281551CAA8532007CF08B /* HttpTool.m in Sources */,
 				1F2A8F361CF40277005116C7 /* AllNearbyScenarioViewController.m in Sources */,
 				1F2A8F611CF40277005116C7 /* ChangeAddUrlView.m in Sources */,
 				1FCDCC7D1D0525A300C92E78 /* FocusNonView.m in Sources */,

@@ -249,10 +249,9 @@
         
         [_userView addSubview:self.city];
         [_city mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.height.mas_equalTo(15);
+            make.size.mas_equalTo(CGSizeMake(SCREEN_WIDTH - 60, 15));
             make.bottom.equalTo(_userLeftView.mas_top).with.offset(-10);
             make.left.equalTo(_userView.mas_left).with.offset(40);
-            make.right.equalTo(_userView.mas_right).with.offset(-20);
         }];
         
         [_userView addSubview:self.whereScene];

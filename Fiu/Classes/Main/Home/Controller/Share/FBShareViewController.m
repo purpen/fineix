@@ -49,7 +49,12 @@ static NSString *const URLGiveExp = @"/user/send_exp";
 
 #pragma mark 分享成功送积分
 - (void)networkGiveExp {
-    
+    self.giveExpRequest = [FBAPI postWithUrlString:URLGiveExp requestDictionary:@{@"type":@"2", @"evt":@"1", @"target_id":self.sceneId} delegate:self];
+    [self.giveExpRequest  startRequestSuccess:^(FBRequest *request, id result) {
+        NSLog(@"＝＝＝＝＝＝＝＝  分享场景成功：%@", result);
+    } failure:^(FBRequest *request, NSError *error) {
+        NSLog(@"%@",error);
+    }];
 }
 
 - (UIImage *)shareImage {
@@ -108,7 +113,6 @@ static NSString *const URLGiveExp = @"/user/send_exp";
     if (!_shareTopView) {
         _shareTopView = [[ShareStyleTopView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT)];
         [_shareTopView setShareSceneData:self.dataDict];
-        
         _editBgImg = [self.dataDict valueForKey:@"cover_url"];
         _editTitle = [self.dataDict valueForKey:@"title"];
         _editDes = [self.dataDict valueForKey:@"des"];
@@ -257,6 +261,7 @@ static NSString *const URLGiveExp = @"/user/send_exp";
     [UMSocialData defaultData].extConfig.wxMessageType = UMSocialWXMessageTypeImage;
     [[UMSocialDataService defaultDataService]  postSNSWithTypes:@[UMShareToWechatSession] content:@"" image:[self shareImage] location:nil urlResource:nil presentedController:self completion:^(UMSocialResponseEntity *response){
         if (response.responseCode == UMSResponseCodeSuccess) {
+            [self networkGiveExp];
             [SVProgressHUD showSuccessWithStatus:@"分享成功！"];
         }
     }];
@@ -266,6 +271,7 @@ static NSString *const URLGiveExp = @"/user/send_exp";
     [UMSocialData defaultData].extConfig.wxMessageType = UMSocialWXMessageTypeImage;
     [[UMSocialDataService defaultDataService]  postSNSWithTypes:@[UMShareToWechatTimeline] content:@"" image:[self shareImage] location:nil urlResource:nil presentedController:self completion:^(UMSocialResponseEntity *response){
         if (response.responseCode == UMSResponseCodeSuccess) {
+            [self networkGiveExp];
             [SVProgressHUD showSuccessWithStatus:@"分享成功！"];
         }
     }];
@@ -275,6 +281,7 @@ static NSString *const URLGiveExp = @"/user/send_exp";
     [UMSocialData defaultData].extConfig.qqData.qqMessageType = UMSocialQQMessageTypeImage;
     [[UMSocialDataService defaultDataService]  postSNSWithTypes:@[UMShareToQQ] content:@"" image:[self shareImage] location:nil urlResource:nil presentedController:self completion:^(UMSocialResponseEntity *response){
         if (response.responseCode == UMSResponseCodeSuccess) {
+            [self networkGiveExp];
             [SVProgressHUD showSuccessWithStatus:@"分享成功！"];
         }
     }];
@@ -283,7 +290,8 @@ static NSString *const URLGiveExp = @"/user/send_exp";
 -(void)sinaShareBtnAction {
     [[UMSocialDataService defaultDataService]  postSNSWithTypes:@[UMShareToSina] content:@"有Fiu的生活，才够意思，快点扫码加我吧！查看个人主页>>http://m.taihuoniao.com" image:[self shareImage] location:nil urlResource:nil presentedController:self completion:^(UMSocialResponseEntity *shareResponse){
         if (shareResponse.responseCode == UMSResponseCodeSuccess) {
-            NSLog(@"分享成功！");
+            [self networkGiveExp];
+            [SVProgressHUD showSuccessWithStatus:@"分享成功！"];
         }
     }];
 }
