@@ -22,6 +22,7 @@
 -(instancetype)initWithDictionary:(NSDictionary *)dictionary
 {
 	self = [super init];
+    
 	if(![dictionary[@"_id"] isKindOfClass:[NSNull class]]){
 		self.idField = [dictionary[@"_id"] integerValue];
 	}

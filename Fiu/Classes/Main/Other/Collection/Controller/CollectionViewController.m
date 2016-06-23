@@ -77,7 +77,6 @@ static NSString *const URLFiuGoods = @"/favorite/get_new_list";
         _collectionGoodsTableView.mj_footer.state = MJRefreshStateNoMoreData;
         _collectionGoodsTableView.mj_footer.hidden = YES;
     }
-    
 }
 
 #pragma mark - 收藏的商品数组
@@ -116,11 +115,14 @@ static NSString *const URLFiuGoods = @"/favorite/get_new_list";
     [request startRequestSuccess:^(FBRequest *request, id result) {
         NSArray * goodsArr = [[result valueForKey:@"data"] valueForKey:@"rows"];
         for (NSDictionary * goodsDic in goodsArr) {
-            GoodsRow * goodsModel = [[GoodsRow alloc] initWithDictionary:goodsDic];
-            [self.goodsList addObject:goodsModel];
-            [self.goodsIdList addObject:[NSString stringWithFormat:@"%zi", goodsModel.idField]];
-            [_collectionGoodsTableView reloadData];
-            [self dealWithHeaderAndFooterAccordingToTheNumWithResult:result];
+            if (![goodsDic[@"scene_product"] isKindOfClass:[NSNull class]]) {
+                NSDictionary *productDict = goodsDic[@"scene_product"];
+                GoodsRow * goodsModel = [[GoodsRow alloc] initWithDictionary:productDict];
+                [self.goodsList addObject:goodsModel];
+                [self.goodsIdList addObject:[NSString stringWithFormat:@"%zi", goodsModel.idField]];
+                [_collectionGoodsTableView reloadData];
+                [self dealWithHeaderAndFooterAccordingToTheNumWithResult:result];
+            }
         }
     } failure:^(FBRequest *request, NSError *error) {
         [SVProgressHUD showErrorWithStatus:error.localizedDescription];
