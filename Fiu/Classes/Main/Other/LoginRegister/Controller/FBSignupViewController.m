@@ -313,9 +313,17 @@ NSString *const LoginURL = @"/auth/login";//登录接口
 //如果成功，进行关联，并且更新当前用户信息
 -(void)afterTheSuccessOfTheThirdPartyToRegisterToGetUserInformation:(UMSocialAccountEntity *)snsAccount type:(NSNumber *)type{
     [SVProgressHUD showWithMaskType:SVProgressHUDMaskTypeClear];
+    UMSocialConfig *h = [[UMSocialConfig alloc] init];
+    h.hiddenLoadingHUD = YES;
     //发送注册请求
+    NSString *oid;
+    if ([type isEqualToNumber:@1]) {
+        oid = snsAccount.unionId;
+    }else{
+        oid = snsAccount.usid;
+    }
     NSDictionary *params = @{
-                             @"oid":snsAccount.usid,
+                             @"oid":oid,
                              @"access_token":snsAccount.accessToken,
                              @"type":type,
                              @"from_to":@1
@@ -335,6 +343,8 @@ NSString *const LoginURL = @"/auth/login";//登录接口
             
             
             [SVProgressHUD showSuccessWithStatus:@"认证成功"];
+            
+            
             NSNumber *str = dataDic[@"user"][@"identify"][@"is_scene_subscribe"];
             if ([str isEqualToNumber:@0]) {
                 //跳转到推荐界面
@@ -346,72 +356,14 @@ NSString *const LoginURL = @"/auth/login";//登录接口
                 //跳回个人主页
                 [self dismissViewControllerAnimated:YES completion:nil];
             }
-            
-            
         }else{
+            [SVProgressHUD dismiss];
+            //跳转到绑定手机号界面
+            BindIngViewController *bing = [[BindIngViewController alloc] init];
+            bing.snsAccount = snsAccount;
+            bing.type = type;
+            [self.navigationController pushViewController:bing animated:YES];
             //如果用户不存在,提示用户是否进行绑定
-            
-            UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"是否进行用户绑定" message:nil preferredStyle:UIAlertControllerStyleAlert];
-            UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:^(UIAlertAction *action) {
-                NSLog(@"The \"Okay/Cancel\" alert's cancel action occured.");
-                //发送请求来存储用户信息
-                NSDictionary *params;
-                if ([type isEqualToNumber:@1]) {
-                    //如果是微信需要snsAccount.unionId
-                    params = @{
-                               @"third_source":type,
-                               @"oid":snsAccount.usid,
-                               @"union_id":snsAccount.unionId,
-                               @"access_token":snsAccount.accessToken,
-                               @"nickname":snsAccount.userName,
-                               @"avatar_url":snsAccount.iconURL,
-                               @"from_to":@1
-                               };
-                    
-                }
-                //如果不是微信不需要snsAccount.unionId
-                else{
-                    params = @{
-                               @"third_source":type,
-                               @"oid":snsAccount.usid,
-                               //@"union_id":snsAccount.unionId,
-                               @"access_token":snsAccount.accessToken,
-                               @"nickname":snsAccount.userName,
-                               @"avatar_url":snsAccount.iconURL,
-                               @"from_to":@1
-                               };
-                    
-                }
-                FBRequest *request = [FBAPI postWithUrlString:thirdRegisteredNotBinding requestDictionary:params delegate:self];
-                [request startRequestSuccess:^(FBRequest *request, id result) {
-                    //如果请求成功，并获取用户信息来更新当前用户信息
-                    NSDictionary *dataDic = [result objectForKey:@"data"];
-                    UserInfo *info = [UserInfo mj_objectWithKeyValues:dataDic];
-                    [info saveOrUpdate];
-                    [info updateUserInfoEntity];
-                    UserInfoEntity *entity = [UserInfoEntity defaultUserInfoEntity];
-                    entity.isLogin = YES;
-                    [SVProgressHUD showSuccessWithStatus:NSLocalizedString(@"registeredSuccessfully", nil)];
-                    //跳转到推荐界面
-                    SubscribeInterestedCollectionViewController *subscribeVC = [[SubscribeInterestedCollectionViewController alloc] init];
-                    [self.navigationController pushViewController:subscribeVC animated:YES];
-                } failure:^(FBRequest *request, NSError *error) {
-                    //如果请求失败提示失败信息
-                    [SVProgressHUD showErrorWithStatus:error.localizedDescription];
-                }];
-                
-            }];
-            UIAlertAction *otherAction = [UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
-                //跳转到绑定手机号界面
-                BindIngViewController *bing = [[BindIngViewController alloc] init];
-                bing.snsAccount = snsAccount;
-                bing.type = type;
-                [self.navigationController pushViewController:bing animated:YES];
-            }];
-            [alertController addAction:cancelAction];
-            [alertController addAction:otherAction];
-            
-            [self presentViewController:alertController animated:YES completion:nil];
         }
     } failure:^(FBRequest *request, NSError *error) {
         //如果请求失败，提示错误信息
@@ -419,6 +371,118 @@ NSString *const LoginURL = @"/auth/login";//登录接口
     }];
     
 }
+
+
+//#pragma mark -第三方登录成功后取到用户信息
+////如果成功，进行关联，并且更新当前用户信息
+//-(void)afterTheSuccessOfTheThirdPartyToRegisterToGetUserInformation:(UMSocialAccountEntity *)snsAccount type:(NSNumber *)type{
+//    [SVProgressHUD showWithMaskType:SVProgressHUDMaskTypeClear];
+//    //发送注册请求
+//    NSDictionary *params = @{
+//                             @"oid":snsAccount.usid,
+//                             @"access_token":snsAccount.accessToken,
+//                             @"type":type,
+//                             @"from_to":@1
+//                             };
+//    FBRequest *request = [FBAPI postWithUrlString:thirdRegister requestDictionary:params delegate:self];
+//    [request startRequestSuccess:^(FBRequest *request, id result) {
+//        //如果请求成功
+//        NSDictionary *dataDic = [result objectForKey:@"data"];
+//        if ([[dataDic objectForKey:@"has_user"] isEqualToNumber:@1]) {
+//            //用户存在，更新当前用户的信息
+//            UserInfo *userinfo = [UserInfo mj_objectWithKeyValues:[dataDic objectForKey:@"user"]];
+//            [userinfo saveOrUpdate];
+//            [userinfo updateUserInfoEntity];
+//            
+//            UserInfoEntity *entity = [UserInfoEntity defaultUserInfoEntity];
+//            entity.isLogin = YES;
+//            
+//            
+//            [SVProgressHUD showSuccessWithStatus:@"认证成功"];
+//            NSNumber *str = dataDic[@"user"][@"identify"][@"is_scene_subscribe"];
+//            if ([str isEqualToNumber:@0]) {
+//                //跳转到推荐界面
+//                SubscribeInterestedCollectionViewController *subscribeVC = [[SubscribeInterestedCollectionViewController alloc] init];
+//                [self.navigationController pushViewController:subscribeVC animated:YES];
+//            }else{
+//                //已经订阅过，直接个人中心
+//                //跳回个人主页
+//                //跳回个人主页
+//                [self dismissViewControllerAnimated:YES completion:nil];
+//            }
+//            
+//            
+//        }else{
+//            //如果用户不存在,提示用户是否进行绑定
+//            
+//            UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"是否进行用户绑定" message:nil preferredStyle:UIAlertControllerStyleAlert];
+//            UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:^(UIAlertAction *action) {
+//                NSLog(@"The \"Okay/Cancel\" alert's cancel action occured.");
+//                //发送请求来存储用户信息
+//                NSDictionary *params;
+//                if ([type isEqualToNumber:@1]) {
+//                    //如果是微信需要snsAccount.unionId
+//                    params = @{
+//                               @"third_source":type,
+//                               @"oid":snsAccount.usid,
+//                               @"union_id":snsAccount.unionId,
+//                               @"access_token":snsAccount.accessToken,
+//                               @"nickname":snsAccount.userName,
+//                               @"avatar_url":snsAccount.iconURL,
+//                               @"from_to":@1
+//                               };
+//                    
+//                }
+//                //如果不是微信不需要snsAccount.unionId
+//                else{
+//                    params = @{
+//                               @"third_source":type,
+//                               @"oid":snsAccount.usid,
+//                               //@"union_id":snsAccount.unionId,
+//                               @"access_token":snsAccount.accessToken,
+//                               @"nickname":snsAccount.userName,
+//                               @"avatar_url":snsAccount.iconURL,
+//                               @"from_to":@1
+//                               };
+//                    
+//                }
+//                FBRequest *request = [FBAPI postWithUrlString:thirdRegisteredNotBinding requestDictionary:params delegate:self];
+//                [request startRequestSuccess:^(FBRequest *request, id result) {
+//                    //如果请求成功，并获取用户信息来更新当前用户信息
+//                    NSDictionary *dataDic = [result objectForKey:@"data"];
+//                    UserInfo *info = [UserInfo mj_objectWithKeyValues:dataDic];
+//                    [info saveOrUpdate];
+//                    [info updateUserInfoEntity];
+//                    UserInfoEntity *entity = [UserInfoEntity defaultUserInfoEntity];
+//                    entity.isLogin = YES;
+//                    [SVProgressHUD showSuccessWithStatus:NSLocalizedString(@"registeredSuccessfully", nil)];
+//                    //跳转到推荐界面
+//                    SubscribeInterestedCollectionViewController *subscribeVC = [[SubscribeInterestedCollectionViewController alloc] init];
+//                    [self.navigationController pushViewController:subscribeVC animated:YES];
+//                } failure:^(FBRequest *request, NSError *error) {
+//                    //如果请求失败提示失败信息
+//                    [SVProgressHUD showErrorWithStatus:error.localizedDescription];
+//                }];
+//                
+//            }];
+//            UIAlertAction *otherAction = [UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
+//                //跳转到绑定手机号界面
+//                BindIngViewController *bing = [[BindIngViewController alloc] init];
+//                bing.snsAccount = snsAccount;
+//                bing.type = type;
+//                [self.navigationController pushViewController:bing animated:YES];
+//            }];
+//            [alertController addAction:cancelAction];
+//            [alertController addAction:otherAction];
+//            
+//            [self presentViewController:alertController animated:YES completion:nil];
+//        }
+//    } failure:^(FBRequest *request, NSError *error) {
+//        //如果请求失败，提示错误信息
+//        [SVProgressHUD showErrorWithStatus:[error localizedDescription]];
+//    }];
+//    
+//}
 
 //取消按钮,返回首页
 - (IBAction)cancelBtn:(UIButton *)sender {

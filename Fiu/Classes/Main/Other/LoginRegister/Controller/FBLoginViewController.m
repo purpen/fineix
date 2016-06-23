@@ -504,6 +504,7 @@ static NSString *const thirdRegister = @"/auth/third_sign";//第三方登录接�
                 [self dismissViewControllerAnimated:YES completion:nil];
             }
         }else{
+            [SVProgressHUD dismiss];
             //跳转到绑定手机号界面
             BindIngViewController *bing = [[BindIngViewController alloc] init];
             bing.snsAccount = snsAccount;
