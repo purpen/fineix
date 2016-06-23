@@ -21,7 +21,6 @@
             make.size.mas_equalTo(CGSizeMake(70, 87));
             make.centerX.equalTo(self);
             make.top.equalTo(self.mas_top).with.offset(15);
-            make.bottom.equalTo(self.mas_bottom).with.offset(-15);
         }];
         
         [self addSubview:self.bottomLine];

@@ -570,7 +570,6 @@
             _contentView.center = CGPointMake(_contentSizeUnscaled.width*0.47, _contentSizeUnscaled.height*0.47);
 //            _contentView.backgroundColor = [UIColor orangeColor];
             self.contentSize = CGSizeMake(_contentSizeUnscaled.width*0.55, _contentSizeUnscaled.height*0.75);
-            NSLog(@"＝＝＝＝＝＝＝＝  %f ----  %f", _contentSizeUnscaled.width * 0.55, _contentSizeUnscaled.height*0.75);
         }
     }
     if(_contentSizeIsDirty == YES)
