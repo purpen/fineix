@@ -86,6 +86,7 @@
         _desContent = [[UILabel alloc] init];
         _desContent.font = [UIFont systemFontOfSize:12];
         _desContent.textColor = [UIColor colorWithHexString:@"#555555"];
+        _desContent.numberOfLines = 0;
     }
     return _desContent;
 }
