@@ -19,15 +19,19 @@
 #import "GoodsInfoData.h"
 #import "SceneInfoData.h"
 #import "FBGoodsInfoViewController.h"
+//#import "ShareViewController.h"
 
 static NSString *const URLGoodsInfo = @"/scene_product/view";
 static NSString *const URLRecommendGoods = @"/scene_product/getlist";
 static NSString *const URLGoodsScene = @"/sight_and_product/getlist";
 static NSString *const URLWantBuy = @"/scene_product/sight_click_stat";
+static NSString *const URlGoodsCollect = @"/favorite/ajax_favorite";
+static NSString *const URlCancelCollect = @"/favorite/ajax_cancel_favorite";
 
 @interface GoodsInfoViewController () {
     NSString    *   _goodsDes;
     NSArray     *   _goodsTags;
+    NSInteger       _collect;
 }
 
 @pro_strong GoodsInfoData       *   goodsInfo;
@@ -61,9 +65,16 @@ static NSString *const URLWantBuy = @"/scene_product/sight_click_stat";
 - (void)networkGoodsInfoData {
     self.goodsInfoRequest = [FBAPI getWithUrlString:URLGoodsInfo requestDictionary:@{@"id":self.goodsID} delegate:self];
     [self.goodsInfoRequest startRequestSuccess:^(FBRequest *request, id result) {
-//        NSLog(@"＝＝＝＝＝＝＝＝＝＝＝＝＝＝ 商品详情 ：%@", result);
+        NSLog(@"＝＝＝＝＝＝＝＝ %@", result);
         _goodsDes = [[result valueForKey:@"data"] valueForKey:@"summary"];
         _goodsTags = [NSArray arrayWithArray:[[result valueForKey:@"data"] valueForKey:@"tags"]];
+        _collect = [[[result valueForKey:@"data"] valueForKey:@"is_favorite"] integerValue];
+        
+        if (_collect == 0) {
+            self.collectBtn.selected = NO;
+        } else if (_collect == 1) {
+            self.collectBtn.selected = YES;
+        }
     
         if ([[[result valueForKey:@"data"] valueForKey:@"attrbute"] integerValue] == 1) {
             [self.gobuyBtn setTitle:NSLocalizedString(@"goBuyGoods", nil) forState:(UIControlStateNormal)];
@@ -136,24 +147,112 @@ static NSString *const URLWantBuy = @"/scene_product/sight_click_stat";
     }];
 }
 
+#pragma mark 商品收藏
+- (void)networkCollectGoods:(UIButton *)button {
+    if (button.selected == NO) {
+        self.collectRequest = [FBAPI postWithUrlString:URlGoodsCollect requestDictionary:@{@"id":self.goodsID, @"type":@"10"} delegate:self];
+        [self.collectRequest startRequestSuccess:^(FBRequest *request, id result) {
+            button.selected = YES;
+            [SVProgressHUD showSuccessWithStatus:NSLocalizedString(@"collectSuccess", nil)];
+            
+        } failure:^(FBRequest *request, NSError *error) {
+            [SVProgressHUD showErrorWithStatus:[error localizedDescription]];
+        }];
+    
+    } else if (button.selected == YES) {
+        self.cancelCollectRequest = [FBAPI postWithUrlString:URlCancelCollect requestDictionary:@{@"id":self.goodsID, @"type":@"10"} delegate:self];
+        [self.cancelCollectRequest startRequestSuccess:^(FBRequest *request, id result) {
+            button.selected = NO;
+            [SVProgressHUD showSuccessWithStatus:NSLocalizedString(@"cancelCollect", nil)];
+            
+        } failure:^(FBRequest *request, NSError *error) {
+            [SVProgressHUD showErrorWithStatus:[error localizedDescription]];
+        }];
+    }
+    
+}
+
 #pragma mark -
 - (void)setGoodsInfoVcUI {
     
     [self.view addSubview:self.goodsInfoTable];
     
-    [self.view addSubview:self.gobuyBtn];
-    [_gobuyBtn mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.size.mas_equalTo(CGSizeMake(SCREEN_WIDTH, 44));
-        make.top.equalTo(self.goodsInfoTable.mas_bottom).with.offset(0);
+    [self.view addSubview:self.collectBtn];
+    [_collectBtn mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.size.mas_equalTo(CGSizeMake(SCREEN_WIDTH/4, 44));
+        make.top.equalTo(_goodsInfoTable.mas_bottom).with.offset(0);
         make.left.equalTo(self.view.mas_left).with.offset(0);
     }];
     
+//    [self.view addSubview:self.shareBtn];
+//    [_shareBtn mas_makeConstraints:^(MASConstraintMaker *make) {
+//        make.size.mas_equalTo(CGSizeMake(SCREEN_WIDTH/4, 44));
+//        make.top.equalTo(_goodsInfoTable.mas_bottom).with.offset(0);
+//        make.left.equalTo(_collectBtn.mas_right).with.offset(0);
+//    }];
+    
+    [self.view addSubview:self.gobuyBtn];
+    [_gobuyBtn mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.size.mas_equalTo(CGSizeMake(SCREEN_WIDTH/2, 44));
+        make.top.equalTo(_goodsInfoTable.mas_bottom).with.offset(0);
+        make.left.equalTo(self.view.mas_left).with.offset(SCREEN_WIDTH/2);
+    }];
+    
+    UILabel * viewLine = [[UILabel alloc] init];
+    viewLine.backgroundColor = [UIColor colorWithHexString:lineGrayColor];
+    [self.view addSubview:viewLine];
+    [viewLine mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.size.mas_equalTo(CGSizeMake(SCREEN_WIDTH, 1));
+        make.top.equalTo(_collectBtn.mas_top).with.offset(0);
+        make.left.equalTo(self.view.mas_left).with.offset(0);
+    }];
 }
+
+#pragma mark - 收藏
+- (UIButton *)collectBtn {
+    if (!_collectBtn) {
+        _collectBtn = [[UIButton alloc] init];
+        [_collectBtn setTitle:NSLocalizedString(@"Collect", nil) forState:(UIControlStateNormal)];
+//        [_collectBtn setTitle:NSLocalizedString(@"CollectDone", nil) forState:(UIControlStateSelected)];
+        [_collectBtn setTitleColor:[UIColor colorWithHexString:@"#555555"] forState:(UIControlStateNormal)];
+        _collectBtn.titleLabel.font = [UIFont systemFontOfSize:10];
+        
+        [_collectBtn setTitleEdgeInsets:(UIEdgeInsetsMake(30, -25, 0, 0))];
+        [_collectBtn setImage:[UIImage imageNamed:@"goods_star"] forState:(UIControlStateNormal)];
+        [_collectBtn setImage:[UIImage imageNamed:@"goods_star_seleted"] forState:(UIControlStateSelected)];
+        [_collectBtn setImageEdgeInsets:(UIEdgeInsetsMake(-10, 16, 0, 0))];
+        [_collectBtn addTarget:self action:@selector(networkCollectGoods:) forControlEvents:(UIControlEventTouchUpInside)];
+    }
+    return _collectBtn;
+}
+
+//#pragma mark - 分享
+//- (UIButton *)shareBtn {
+//    if (!_shareBtn) {
+//        _shareBtn = [[UIButton alloc] init];
+//        [_shareBtn setTitle:NSLocalizedString(@"ShareBtn", nil) forState:(UIControlStateNormal)];
+//        [_shareBtn setTitleColor:[UIColor colorWithHexString:@"#555555"] forState:(UIControlStateNormal)];
+//        _shareBtn.titleLabel.font = [UIFont systemFontOfSize:10];
+//        [_shareBtn setTitleEdgeInsets:(UIEdgeInsetsMake(30, -25, 0, 0))];
+//        [_shareBtn setImageEdgeInsets:(UIEdgeInsetsMake(-10, 16, 0, 0))];
+//        [_shareBtn setImage:[UIImage imageNamed:@"goods_share"] forState:(UIControlStateNormal)];
+//        [_shareBtn addTarget:self action:@selector(ShareGoodsInfo) forControlEvents:(UIControlEventTouchUpInside)];
+//    }
+//    return _shareBtn;
+//}
+//
+//#pragma mark - 分享商品
+//- (void)ShareGoodsInfo {
+//    ShareViewController * shareVC = [[ShareViewController alloc] init];
+//    shareVC.modalPresentationStyle = UIModalPresentationOverCurrentContext;
+//    shareVC.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;
+//    [self presentViewController:shareVC animated:YES completion:nil];
+//}
 
 #pragma mark - 去购买
 - (UIButton *)gobuyBtn {
     if (!_gobuyBtn) {
-        _gobuyBtn = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 44)];
+        _gobuyBtn = [[UIButton alloc] init];
         _gobuyBtn.backgroundColor = [UIColor colorWithHexString:fineixColor];
         [_gobuyBtn setTitleColor:[UIColor whiteColor] forState:(UIControlStateNormal)];
         _gobuyBtn.titleLabel.font = [UIFont systemFontOfSize:Font_InfoTitle];

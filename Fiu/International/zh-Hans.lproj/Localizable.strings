@@ -65,6 +65,9 @@
 "noneSearch" = "没找到？或许Fiu首页有你要查的东西";
 "goodsCarIsNil" = "购物车又空啦，回“好货”入点新货吧";
 "goLookGoods" = "去逛逛";
+"collectSuccess" = "收藏成功";
+"cancelCollect" = "取消收藏";
+
 //  搜索框提示
 "searchLocation" = "搜索地点";
 "searchGoods" = "搜索产品";
@@ -102,6 +105,8 @@
 "Delete" = "删除";
 "userBounsPrice" = "节省：";
 "ShareBtn" = "分享";
+"Collect" = "收藏";
+"CollectDone" = "已收藏";
 
 //  评论
 "comment" = "评论一下";
