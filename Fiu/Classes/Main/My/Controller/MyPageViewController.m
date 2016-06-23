@@ -34,7 +34,7 @@
 #import "UITabBar+badge.h"
 #import "ScenarioNonView.h"
 #import "ServiceViewController.h"
-
+#import "CollectionViewController.h"
 
 
 @interface MyPageViewController ()<FBNavigationBarItemsDelegate,UICollectionViewDelegate,UICollectionViewDataSource>
@@ -299,7 +299,8 @@
  */
 #pragma mark - 收藏按钮
 -(void)collectionBtnbtn:(UIButton*)sender{
-    
+    CollectionViewController *vc = [[CollectionViewController alloc] init];
+    [self.navigationController pushViewController:vc animated:YES];
 }
 
 

@@ -10,6 +10,8 @@
 		1F0EE6A71C9FA4E7000631F0 /* libstdc++.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 1F0EE6A61C9FA4E7000631F0 /* libstdc++.tbd */; };
 		1F0EE6A91C9FA4F6000631F0 /* libz.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 1F0EE6A81C9FA4F6000631F0 /* libz.tbd */; };
 		1F1134AC1D17F5CB00DFFA74 /* Fiu.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = 1F1134AB1D17F5CB00DFFA74 /* Fiu.mp4 */; };
+		1F1134B41D1BC34D00DFFA74 /* CollectionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F1134B21D1BC34D00DFFA74 /* CollectionViewController.m */; };
+		1F1134B51D1BC34D00DFFA74 /* CollectionViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1F1134B31D1BC34D00DFFA74 /* CollectionViewController.xib */; };
 		1F1AF3AC1CF4AE4F00CAA525 /* MallTagsView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F1AF3AB1CF4AE4F00CAA525 /* MallTagsView.m */; };
 		1F1AF3AE1CF4B39C00CAA525 /* MallTags.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1F1AF3AD1CF4B39C00CAA525 /* MallTags.xib */; };
 		1F1AF3B21CF58A6B00CAA525 /* IntegralViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F1AF3B01CF58A6B00CAA525 /* IntegralViewController.m */; };
@@ -528,6 +530,9 @@
 		1F0EE6A61C9FA4E7000631F0 /* libstdc++.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = "libstdc++.tbd"; path = "usr/lib/libstdc++.tbd"; sourceTree = SDKROOT; };
 		1F0EE6A81C9FA4F6000631F0 /* libz.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libz.tbd; path = usr/lib/libz.tbd; sourceTree = SDKROOT; };
 		1F1134AB1D17F5CB00DFFA74 /* Fiu.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = Fiu.mp4; sourceTree = "<group>"; };
+		1F1134B11D1BC34D00DFFA74 /* CollectionViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CollectionViewController.h; sourceTree = "<group>"; };
+		1F1134B21D1BC34D00DFFA74 /* CollectionViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CollectionViewController.m; sourceTree = "<group>"; };
+		1F1134B31D1BC34D00DFFA74 /* CollectionViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CollectionViewController.xib; sourceTree = "<group>"; };
 		1F1AF3AA1CF4AE4F00CAA525 /* MallTagsView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MallTagsView.h; sourceTree = "<group>"; };
 		1F1AF3AB1CF4AE4F00CAA525 /* MallTagsView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MallTagsView.m; sourceTree = "<group>"; };
 		1F1AF3AD1CF4B39C00CAA525 /* MallTags.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MallTags.xib; sourceTree = "<group>"; };
@@ -1501,6 +1506,40 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		1F1134AD1D1BC32400DFFA74 /* Collection */ = {
+			isa = PBXGroup;
+			children = (
+				1F1134AE1D1BC32400DFFA74 /* Controller */,
+				1F1134AF1D1BC32400DFFA74 /* Model */,
+				1F1134B01D1BC32400DFFA74 /* View */,
+			);
+			path = Collection;
+			sourceTree = "<group>";
+		};
+		1F1134AE1D1BC32400DFFA74 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				1F1134B11D1BC34D00DFFA74 /* CollectionViewController.h */,
+				1F1134B21D1BC34D00DFFA74 /* CollectionViewController.m */,
+				1F1134B31D1BC34D00DFFA74 /* CollectionViewController.xib */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		1F1134AF1D1BC32400DFFA74 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		1F1134B01D1BC32400DFFA74 /* View */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
 		1F1AF3A91CF4AE0100CAA525 /* Mall */ = {
 			isa = PBXGroup;
 			children = (
@@ -2606,6 +2645,7 @@
 		1F2A8DE31CF40277005116C7 /* Other */ = {
 			isa = PBXGroup;
 			children = (
+				1F1134AD1D1BC32400DFFA74 /* Collection */,
 				1FD59C0C1D115FB20025A800 /* Project */,
 				1FCDCC891D08082900C92E78 /* InviteCode */,
 				1F2A8DE41CF40277005116C7 /* Bonus */,
@@ -3974,6 +4014,7 @@
 				1F2A90471CF40277005116C7 /* ImprovViewController.xib in Resources */,
 				1F2A90061CF40277005116C7 /* My.storyboard in Resources */,
 				D8932E461D17FE8100428FC7 /* Launch Screen.storyboard in Resources */,
+				1F1134B51D1BC34D00DFFA74 /* CollectionViewController.xib in Resources */,
 				1F2A90491CF40277005116C7 /* SubscribeInterestedCollectionViewController.xib in Resources */,
 				1F2A90281CF40277005116C7 /* Empty.xib in Resources */,
 				1F223B1D1CD714F3007687F7 /* messages.plist in Resources */,
@@ -4450,6 +4491,7 @@
 				D87B69C01CC726BA00199EFE /* GroupHeaderView.m in Sources */,
 				1F2A8F381CF40277005116C7 /* SearchFSceneViewController.m in Sources */,
 				1F2A8F831CF40277005116C7 /* FiuTagTableViewCell.m in Sources */,
+				1F1134B41D1BC34D00DFFA74 /* CollectionViewController.m in Sources */,
 				1F2A8F8B1CF40277005116C7 /* HomeSceneList.m in Sources */,
 				1F2A8FC91CF40277005116C7 /* GoodsRelationProducts.m in Sources */,
 				1F2A8FD11CF40277005116C7 /* RecommendGoodsCollectionViewCell.m in Sources */,
