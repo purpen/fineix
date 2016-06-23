@@ -98,6 +98,8 @@ static NSString *const URLFiuGoods = @"/favorite/get_new_list";
 -(void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
     [self getCollectionGoodsFromeNet];
+    UIApplication *app = [UIApplication sharedApplication];
+    app.statusBarHidden = NO;
 }
 
 
