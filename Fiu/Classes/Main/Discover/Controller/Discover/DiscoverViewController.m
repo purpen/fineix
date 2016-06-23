@@ -145,7 +145,6 @@ static NSString *const URLFiuPeople = @"/user/find_user";
     self.sceneListRequest = [FBAPI getWithUrlString:URLSceneList requestDictionary:@{@"sort":@"0", @"size":@"10", @"page":@(self.currentpageNum + 1)} delegate:self];
     [self.sceneListRequest startRequestSuccess:^(FBRequest *request, id result) {
         NSArray * sceneArr = [[result valueForKey:@"data"] valueForKey:@"rows"];
-         NSLog(@"＝＝＝＝＝＝＝＝ %@", sceneArr);
         for (NSDictionary * sceneDic in sceneArr) {
             HomeSceneListRow * homeSceneModel = [[HomeSceneListRow alloc] initWithDictionary:sceneDic];
             [self.sceneList addObject:homeSceneModel];
