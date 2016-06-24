@@ -72,6 +72,7 @@
     if ([entity.is_expert isEqualToString:@"1"]) {
         self.talentView.hidden = NO;
         self.userProfile.hidden = NO;
+        self.idTagsLabel.hidden = NO;
         self.userProfile.text = entity.expert_info;
         self.idTagsLabel.text = [NSString stringWithFormat:@"%@ |",entity.expert_label];
 //        self.idImageView.hidden = NO;
@@ -80,6 +81,7 @@
     }else {
         self.talentView.hidden = YES;
         self.userProfile.hidden = YES;
+        self.idTagsLabel.hidden = YES;
 //        self.idImageView.hidden = YES;
         
         [self layoutIfNeeded];
