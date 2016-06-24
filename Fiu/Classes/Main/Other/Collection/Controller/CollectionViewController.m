@@ -33,7 +33,7 @@ static NSString *const URLFiuGoods = @"/favorite/get_new_list";
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self setNavi];
-    [_collectionGoodsTableView registerClass:[GoodsTableViewCell class] forCellReuseIdentifier:GoodsTableViewCellId];
+//    [_collectionGoodsTableView registerClass:[GoodsTableViewCell class] forCellReuseIdentifier:GoodsTableViewCellId];
     [self headerAndFooter];
 }
 
@@ -143,7 +143,9 @@ static NSString *const URLFiuGoods = @"/favorite/get_new_list";
 }
 
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
+    static NSString *str = @"goodsTableViewCell";
     GoodsTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:GoodsTableViewCellId];
+    cell = [[GoodsTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:str];
     cell.nav = self.navigationController;
     if (self.goodsList.count != 0) {
         [cell setGoodsData:self.goodsList[indexPath.row]];
