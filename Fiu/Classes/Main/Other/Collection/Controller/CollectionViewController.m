@@ -145,7 +145,9 @@ static NSString *const URLFiuGoods = @"/favorite/get_new_list";
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     GoodsTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:GoodsTableViewCellId];
     cell.nav = self.navigationController;
-    [cell setGoodsData:self.goodsList[indexPath.row]];
+    if (self.goodsList.count != 0) {
+        [cell setGoodsData:self.goodsList[indexPath.row]];
+    }
     return cell;
 }
 
