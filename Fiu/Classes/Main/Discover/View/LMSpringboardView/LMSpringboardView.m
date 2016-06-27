@@ -567,7 +567,7 @@
 
 //            _contentView.center = CGPointMake(_contentSizeUnscaled.width*0.5*newZoom, _contentSizeUnscaled.height*0.5*newZoom);
 //            self.contentSize = CGSizeMake(_contentSizeUnscaled.width*newZoom, _contentSizeUnscaled.height*newZoom);
-            _contentView.center = CGPointMake(_contentSizeUnscaled.width*0.47, _contentSizeUnscaled.height*0.47);
+            _contentView.center = CGPointMake(_contentSizeUnscaled.width*0.475, _contentSizeUnscaled.height*0.475);
 //            _contentView.backgroundColor = [UIColor orangeColor];
             self.contentSize = CGSizeMake(_contentSizeUnscaled.width*0.55, _contentSizeUnscaled.height*0.75);
         }

@@ -138,7 +138,7 @@
         CGFloat btnY = [[self.tagDataMarr[idx] valueForKey:@"y"] floatValue];
         NSString * title = [self.tagDataMarr[idx] valueForKey:@"title"];
         NSString * price = [NSString stringWithFormat:@"￥%.2f", [[self.tagDataMarr[idx] valueForKey:@"price"] floatValue]];
-        UserGoodsTag * userTag = [[UserGoodsTag alloc] initWithFrame:CGRectMake(btnX * SCREEN_WIDTH, (btnY * SCREEN_HEIGHT) * 0.873, 175, 32)];
+        UserGoodsTag * userTag = [[UserGoodsTag alloc] initWithFrame:CGRectMake(btnX * SCREEN_WIDTH, btnY * SCREEN_HEIGHT, 175, 32)];
         userTag.dele.hidden = YES;
         userTag.title.text = title;
         if (price.length > 6) {

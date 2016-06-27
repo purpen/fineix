@@ -89,7 +89,7 @@
         CGFloat btnX = [[self.tagDataMarr[idx] valueForKey:@"x"] floatValue];
         CGFloat btnY = [[self.tagDataMarr[idx] valueForKey:@"y"] floatValue];
         
-        UserGoodsTag * userTag = [[UserGoodsTag alloc] initWithFrame:CGRectMake(btnX * SCREEN_WIDTH, btnY * SCREEN_HEIGHT * 0.873, 175, 32)];
+        UserGoodsTag * userTag = [[UserGoodsTag alloc] initWithFrame:CGRectMake(btnX * SCREEN_WIDTH, btnY * SCREEN_HEIGHT, 175, 32)];
         userTag.dele.hidden = YES;
         userTag.title.hidden = YES;
         userTag.price.hidden = YES;

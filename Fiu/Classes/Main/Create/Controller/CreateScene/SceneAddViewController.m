@@ -169,10 +169,10 @@ static NSString *const URLUserAddGoods = @"/scene_product/add";
 #pragma mark - 创建一个标签
 - (void)addUserGoodsTagWithTitle:(NSString *)title withPrice:(NSString *)price withType:(NSInteger)type withGoodsId:(NSString *)ids {
     _idx += 1;
-    int tagX = (arc4random() % 4);
-    int tagY = (arc4random() % 2) + 10;
+    int tagX = (arc4random() % 4) * 40;
+    int tagY = ((arc4random() % 2) + 10) * 25;
     
-    UserGoodsTag * tag = [[UserGoodsTag alloc] initWithFrame:CGRectMake(tagX * 50, tagY * 20, 175, 32)];
+    UserGoodsTag * tag = [[UserGoodsTag alloc] initWithFrame:CGRectMake(tagX, tagY, 175, 32)];
     tag.title.text = title;
     tag.price.text = price;
     tag.isMove = YES;
@@ -302,9 +302,9 @@ static NSString *const URLUserAddGoods = @"/scene_product/add";
             NSMutableArray * originY = [NSMutableArray array];
             for (UserGoodsTag * btn in self.tagBtnMarr) {
                 [originX addObject:[NSString stringWithFormat:@"%f", btn.frame.origin.x / SCREEN_WIDTH]];
-                [originY addObject:[NSString stringWithFormat:@"%f", btn.frame.origin.y / SCREEN_HEIGHT]];
+                [originY addObject:[NSString stringWithFormat:@"%f", (btn.frame.origin.y - 50) / SCREEN_HEIGHT]];
             }
-            
+        
             NSMutableArray * priceMarr = [NSMutableArray array];
             NSCharacterSet * set = [NSCharacterSet characterSetWithCharactersInString:@"￥"];
             for (NSString * str in self.goodsPriceData) {
