@@ -372,6 +372,7 @@ static NSString *const URLFiuPeople = @"/user/find_user";
     self.view.backgroundColor = [UIColor whiteColor];
     self.delegate = self;
     [self addNavLogoImgisTransparent:NO];
+    self.baseTable = self.discoverTableView;
     [self addBarItemLeftBarButton:@"" image:@"Nav_Search" isTransparent:NO];
     [self addBarItemRightBarButton:@"" image:@"Nav_Location" isTransparent:NO];
 }

@@ -26,7 +26,7 @@
 @pro_strong_readonly UIScrollView   *   foregroundScrollView;
 @pro_strong UIButton                *   leftBtn;
 @pro_strong UIButton                *   rightBtn;
-@pro_strong UIImageView             *   logoImg;
+@pro_strong UIButton                *   logoImg;
 
 - (id)initWithFrame:(CGRect)frame BackgroundImage:(UIImage *)backgroundImage blurredImage:(UIImage *)blurredImage viewDistanceFromBottom:(CGFloat)viewDistanceFromBottom foregroundView:(UITableView *)foregroundView;
 

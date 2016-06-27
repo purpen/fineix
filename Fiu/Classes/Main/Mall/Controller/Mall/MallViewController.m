@@ -87,7 +87,6 @@ static NSString *const URLFiuBrand = @"/scene_brands/getlist";
     [SVProgressHUD show];
     self.fiuBrandRequest = [FBAPI getWithUrlString:URLFiuBrand requestDictionary:@{@"page":@"1", @"size":@"100", @"sort":@"1"} delegate:self];
     [self.fiuBrandRequest startRequestSuccess:^(FBRequest *request, id result) {
-        NSLog(@"＝＝＝＝＝＝＝＝  最Fiu品牌:   %@", result);
         self.brandList = [NSMutableArray arrayWithArray:[[result valueForKey:@"data"] valueForKey:@"rows"]];
         _headerImgArr = [NSArray arrayWithArray:[self.brandList valueForKey:@"cover_url"]];
         _headerIdArr = [NSArray arrayWithArray:[self.brandList valueForKey:@"_id"]];
@@ -350,6 +349,7 @@ static NSString *const URLFiuBrand = @"/scene_brands/getlist";
     self.view.backgroundColor = [UIColor whiteColor];
     self.delegate = self;
     [self addNavLogoImgisTransparent:NO];
+    self.baseTable = self.mallTableView;
     [self addBarItemLeftBarButton:@"" image:@"Nav_Search" isTransparent:NO];
     [self addBarItemRightBarButton:@"" image:@"Nav_Car" isTransparent:NO];
     [self setNavGoodsCarNumLab];

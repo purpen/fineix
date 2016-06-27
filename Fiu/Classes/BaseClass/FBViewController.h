@@ -83,7 +83,12 @@
 /*
  *  Nav中间的Logo
  */
-@pro_strong UIImageView *   logoImg;
+@pro_strong UIButton    *   logoImg;
+
+/*
+ *  表格
+ */
+@pro_strong UITableView *   baseTable;
 
 /*
  *  视图分割线

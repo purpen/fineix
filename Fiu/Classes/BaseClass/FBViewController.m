@@ -177,12 +177,18 @@ static NSString *const URLUserIsLogin = @"/user/user_info";
 }
 
 #pragma mark - Nav中间的Logo
-- (UIImageView *)logoImg {
+- (UIButton *)logoImg {
     if (!_logoImg) {
-        _logoImg = [[UIImageView alloc] init];
-        _logoImg.image = [UIImage imageNamed:@"Nav_Title"];
+        _logoImg = [[UIButton alloc] init];
+        [_logoImg setImage:[UIImage imageNamed:@"Nav_Title"] forState:(UIControlStateNormal)];
+        [_logoImg setImage:[UIImage imageNamed:@"Nav_Title"] forState:(UIControlStateHighlighted)];
+        [_logoImg addTarget:self action:@selector(backTop) forControlEvents:(UIControlEventTouchUpInside)];
     }
     return _logoImg;
+}
+
+- (void)backTop {
+    [self.baseTable scrollRectToVisible:CGRectMake(0, 0, 1, 1) animated:YES];
 }
 
 #pragma mark - 视图分割线
