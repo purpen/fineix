@@ -46,8 +46,8 @@ NSString *const SinaAppSecret = @"ed4fe8faa35c5b006ad7a87d76e60583";
 NSString *const WechatAppID = @"wxdf5f6f5907a238e8";
 NSString *const WechatAppSecret = @"227f6fe4c54ad3e51eed975815167b0b";
 
-NSString *const QQAppID = @"1105228778";
-NSString *const QQAppKey = @"SFUAKQBkqY8AjWGh";
+NSString *const QQAppID = @"1105329592";  // 1105228778
+NSString *const QQAppKey = @"CaKcLeg32YeVF7b9";    // SFUAKQBkqY8AjWGh
 NSString *const determineLogin = @"/auth/check_login";
 
 @implementation AppDelegate
