@@ -168,7 +168,7 @@ static NSString *const URLAllFiuSceneList = @"/scene_scene/";
 #pragma mark - 设置Nav
 - (void)setNavigationViewUI {
     self.view.backgroundColor = [UIColor whiteColor];
-    self.navViewTitle.text = @"订阅的情景";
+    self.navViewTitle.text = @"订阅的地盘";
     self.delegate = self;
 }
 

@@ -79,7 +79,6 @@
     UserInfoEntity *entity = [UserInfoEntity defaultUserInfoEntity];
     FBRequest *request = [FBAPI postWithUrlString:@"/my/comment_list" requestDictionary:@{@"page":@(_currentPageNumber+1),@"size":@15,@"target_user_id":entity.userId,@"type":@12} delegate:self];
     [request startRequestSuccess:^(FBRequest *request, id result) {
-        NSLog(@"评论丫丫丫result  %@",result);
         NSDictionary *dataDict = [result objectForKey:@"data"];
         NSArray *rowsAry = [dataDict objectForKey:@"rows"];
         for (NSDictionary *rowsDict in rowsAry) {
@@ -107,7 +106,6 @@
                 NSString *target_id = rowsDict[@"target_id"];
                 [_sceneIdMarr addObject:target_id];
             }
-            NSLog(@"时间啊啊   %@",rowsDict[@"created_at"]);
             [_modelAry addObject:model];
             
         }
@@ -208,7 +206,6 @@
 }
 
 -(void)headBtn:(UIButton*)sender{
-    NSLog(@"头像啊");
     HomePageViewController *vc = [[HomePageViewController alloc] init];
     vc.type = @2;
     vc.isMySelf = NO;
