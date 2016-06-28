@@ -198,12 +198,12 @@
     
         //  添加渐变层
         CAGradientLayer * shadow = [CAGradientLayer layer];
+        shadow.frame = CGRectMake(0, 0, SCREEN_WIDTH, 64);
+        shadow.opacity = 0;
         shadow.startPoint = CGPointMake(0, 0);
-        shadow.endPoint = CGPointMake(0, 0.8);
-        shadow.colors = @[(__bridge id)[UIColor clearColor].CGColor,
-                          (__bridge id)[UIColor blackColor].CGColor];
-        shadow.locations = @[@(0.8f), @(2.5f)];
-        shadow.frame = CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_WIDTH);
+        shadow.endPoint = CGPointMake(0, 1);
+        shadow.colors = @[(id)[UIColor clearColor].CGColor,(id)[UIColor blackColor].CGColor];
+        shadow.locations = @[@0.1,@0.4,@0.8,@1];
         [_bgImageView.layer addSublayer:shadow];
         
         
