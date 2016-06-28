@@ -146,7 +146,7 @@
         
         [_userView addSubview:self.userLevelLabel];
         [_userLevelLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.width.mas_offset(SCREEN_WIDTH - 20);
+            make.width.mas_offset(SCREEN_WIDTH-60);
             make.centerX.mas_equalTo(_userView.mas_centerX).with.offset(-10/667.0*SCREEN_HEIGHT);
             make.bottom.mas_equalTo(_userView.mas_bottom).with.offset(-49/667.0*SCREEN_HEIGHT);
         }];
