@@ -69,7 +69,7 @@ static NSString * const reuseIdentifier = @"Cell";
     headLabelcenter.x = self.view.center.x;
     headLabel.center = headLabelcenter;
     headLabel.font = [UIFont systemFontOfSize:13];
-    headLabel.text = @"现在你可以订阅感兴趣的情景来开始";
+    headLabel.text = @"现在你可以订阅感兴趣的情景";
     headLabel.textColor = [UIColor grayColor];
     [self.view addSubview:headLabel];
     _numV = [NumView getNumView];

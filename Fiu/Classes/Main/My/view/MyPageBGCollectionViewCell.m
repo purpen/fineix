@@ -146,12 +146,14 @@
         
         [_userView addSubview:self.userLevelLabel];
         [_userLevelLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.width.mas_offset(SCREEN_WIDTH-60);
             make.centerX.mas_equalTo(_userView.mas_centerX).with.offset(-10/667.0*SCREEN_HEIGHT);
             make.bottom.mas_equalTo(_userView.mas_bottom).with.offset(-49/667.0*SCREEN_HEIGHT);
         }];
         
         [_userView addSubview:self.idTagsLabel];
         [_idTagsLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+            
             make.bottom.mas_equalTo(_userLevelLabel.mas_top).with.offset(-5/667.0*SCREEN_HEIGHT);
             make.right.mas_equalTo(_userView.mas_centerX).with.offset(-2/667.0*SCREEN_HEIGHT);
         }];
@@ -235,6 +237,7 @@
         _userLevelLabel = [[UILabel alloc] init];
         _userLevelLabel.textColor = [UIColor whiteColor];
         _userLevelLabel.font = [UIFont systemFontOfSize:13];
+        _userLevelLabel.numberOfLines = 0;
         _userLevelLabel.textAlignment = NSTextAlignmentCenter;
         _userLevelLabel.clipsToBounds = YES;
         _userLevelLabel.autoresizingMask = UIViewAutoresizingFlexibleTopMargin;
