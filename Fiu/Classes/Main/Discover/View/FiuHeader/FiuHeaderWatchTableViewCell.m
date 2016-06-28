@@ -63,9 +63,14 @@
     NSInteger index = [_springboard.itemViews indexOfObject:sender.view];
     if (_type == 0) {
             HomePageViewController * peopleHomeVC = [[HomePageViewController alloc] init];
-            peopleHomeVC.isMySelf = NO;
-            peopleHomeVC.type = @2;
             peopleHomeVC.userId = _headerIdMarr[index];
+            UserInfoEntity *entity = [UserInfoEntity defaultUserInfoEntity];
+            if ([entity.userId intValue] == [_headerIdMarr[index] intValue]) {
+                peopleHomeVC.isMySelf = YES;
+            }else{
+                peopleHomeVC.isMySelf = NO;
+            }
+            peopleHomeVC.type = @2;
             [self.nav pushViewController:peopleHomeVC animated:YES];
     
     } else if (_type == 1) {
