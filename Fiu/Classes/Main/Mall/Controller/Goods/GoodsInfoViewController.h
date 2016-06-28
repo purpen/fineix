@@ -18,7 +18,6 @@
  */
 @pro_strong UIButton                *   gobuyBtn;           //  去购买
 @pro_strong UIButton                *   collectBtn;         //  收藏
-//@pro_strong UIButton                *   shareBtn;           //  分享
 @pro_strong UITableView             *   goodsInfoTable;     //  商品详情
 @pro_strong FBRollImages            *   rollImgView;        //  轮播图
 @pro_strong NSString                *   goodsID;            //  商品id

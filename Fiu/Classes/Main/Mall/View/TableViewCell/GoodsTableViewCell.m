@@ -107,10 +107,7 @@
 #pragma mark - 滚动
 - (UICollectionView *)goodsImgView {
     if (!_goodsImgView) {
-        UICollectionViewFlowLayout * flowLayout = [[UICollectionViewFlowLayout alloc] init];
-        flowLayout.sectionInset = UIEdgeInsetsMake(0, 0, 0, 0);
-        flowLayout.scrollDirection = UICollectionViewScrollDirectionHorizontal;
-        flowLayout.minimumInteritemSpacing = 10.0f;
+        GoodsImgFlowLayout * flowLayout = [[GoodsImgFlowLayout alloc] init];
 
         _goodsImgView = [[UICollectionView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 150) collectionViewLayout:flowLayout];
         _goodsImgView.dataSource = self;

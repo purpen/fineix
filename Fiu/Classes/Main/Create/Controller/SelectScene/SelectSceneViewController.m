@@ -202,9 +202,9 @@ static NSString *const URLFSceneList = @"/scene_scene/";
 
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
     if (section == 1) {
-        return [self addHeaderView:@"附近的情景" withType:1];
+        return [self addHeaderView:NSLocalizedString(@"nearFiuScene", nil) withType:1];
     } else if (section == 2) {
-        return [self addHeaderView:@"推荐情景" withType:2];
+        return [self addHeaderView:NSLocalizedString(@"reFiuScene", nil) withType:2];
     }
     return nil;
 }
@@ -221,7 +221,7 @@ static NSString *const URLFSceneList = @"/scene_scene/";
     [view addSubview:lab];
     
     UIButton * btn = [[UIButton alloc] initWithFrame:CGRectMake(SCREEN_WIDTH - 70, 0, 60, 40)];
-    [btn setTitle:@"查看全部" forState:(UIControlStateNormal)];
+    [btn setTitle:NSLocalizedString(@"lookAll", nil) forState:(UIControlStateNormal)];
     [btn setTitleColor:[UIColor colorWithHexString:titleColor] forState:(UIControlStateNormal)];
     btn.titleLabel.font = [UIFont systemFontOfSize:13];
     if (type == 2) {

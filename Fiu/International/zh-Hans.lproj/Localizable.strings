@@ -15,11 +15,11 @@
 "addUrl" = "添加链接";
 "filter" = "滤镜";
 "addDescription" = "添加描述";
-"addFiuSceneDes" = "请添加140字以内的情景描述";
+"addFiuSceneDes" = "请添加140字以内的地盘描述";
 "addTitle" = "请输入20字以内的标题";
 "addLocation" = "添加地点";
 "tag" = "标签";
-"onScene" = "所属情景";
+"onScene" = "所属地盘";
 "release" = "发布";
 "cancel" = "取消";
 "sure" = "确定";
@@ -29,17 +29,17 @@
 "cropVcTitle" = "裁剪图片";
 "filtersVcTitle" = "工具";
 "releaseVcTitle" = "创建场景";
-"freleaseVcTitle" = "创建情景";
+"freleaseVcTitle" = "创建地盘";
 "editScene" = "编辑场景";
-"editFiuScene" = "编辑情景";
+"editFiuScene" = "编辑地盘";
 "locationVcTitle" = "位置";
 "addTagVcTitle" = "添加标签";
-"chooseSceneVcTitle" = "选择情景";
+"chooseSceneVcTitle" = "选择地盘";
 "filterVcTitle" = "选择滤镜";
 "GoodsCategoryVcTitle" = "好货分类";
 "GoodsInfoVcTitle" = "产品详情";
 "CommentVcTitle" = "评论";
-"AllSceneVcTitle" = "全部情景";
+"AllSceneVcTitle" = "全部地盘";
 "GoodsCarVcTitle" = "购物车";
 "SubscribeVcTitle" = "订阅";
 "CityVcTitle" = "选择城市";
@@ -57,7 +57,7 @@
 "flashError" = "闪光灯不可用";
 "cameraOpen" = "请开启相机权限";
 "cameraError" = "相机不可用";
-"searchFScene" = "搜索情景";
+"searchFScene" = "搜索地盘";
 "StockNone" = "库存只有这么多了";
 "deleteSuccess" = "删除成功";
 "deleteError" = "删除失败";
@@ -107,6 +107,9 @@
 "ShareBtn" = "分享";
 "Collect" = "收藏";
 "CollectDone" = "已收藏";
+"nearFiuScene" = "附近的地盘";
+"reFiuScene" = "推荐地盘";
+"lookAll" = "查看全部";
 
 //  评论
 "comment" = "评论一下";

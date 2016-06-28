@@ -20,7 +20,6 @@
             make.top.left.equalTo(self).with.offset(0);
             make.right.equalTo(self.mas_right).with.offset(0);
         }];
-        
     }
     return self;
 }

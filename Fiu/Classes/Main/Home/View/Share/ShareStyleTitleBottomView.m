@@ -7,6 +7,8 @@
 //
 
 #import "ShareStyleTitleBottomView.h"
+#import "HomeSceneListRow.h"
+#import "UILable+Frame.h"
 
 @interface ShareStyleTitleBottomView () {
     NSString    *   _titleText;
@@ -36,28 +38,40 @@
 
 #pragma mark - 视图信息
 - (void)setShareSceneData:(NSDictionary *)model {
-    [self.sceneImg downloadImage:[model valueForKey:@"cover_url"] place:[UIImage imageNamed:@""]];
+    HomeSceneListRow * sceneModel = [[HomeSceneListRow alloc] initWithDictionary:model];
+    [self.sceneImg downloadImage:sceneModel.coverUrl place:[UIImage imageNamed:@""]];
+    [self.userHeader downloadImage:sceneModel.user.avatarUrl place:[UIImage imageNamed:@""]];
+    self.userName.text = sceneModel.user.nickname;
     
-    [self.userHeader downloadImage:[[model valueForKey:@"user_info"] valueForKey:@"avatar_url"] place:[UIImage imageNamed:@""]];
-    self.userName.text = [[model valueForKey:@"user_info"] valueForKey:@"nickname"];
-    NSString * aboutText;
-    if ([[[model valueForKey:@"user_info"] valueForKey:@"summary"] isKindOfClass:[NSNull class]]) {
-        aboutText = @"";
+    if (sceneModel.user.isExpert == 1) {
+        self.userVimg.hidden = NO;
+        self.userStar.text = sceneModel.user.expertLabel;
+        self.userAbout.text = [NSString stringWithFormat:@"|  %@", sceneModel.user.expertInfo];
+        CGSize size = [self.userStar boundingRectWithSize:CGSizeMake(100, 0)];
+        
+        [self.userStar mas_updateConstraints:^(MASConstraintMaker *make) {
+            make.width.mas_equalTo(size.width);
+        }];
+        [self.userAbout mas_updateConstraints:^(MASConstraintMaker *make) {
+            make.left.equalTo(_userStar.mas_right).with.offset(5);
+        }];
+        
     } else {
-        aboutText = [[model valueForKey:@"user_info"] valueForKey:@"summary"];
+        self.userVimg.hidden = YES;
+        self.userStar.text = @"";
+        self.userAbout.text = sceneModel.user.summary;
+        [self.userStar mas_updateConstraints:^(MASConstraintMaker *make) {
+            make.width.mas_equalTo(0);
+        }];
+        [self.userAbout mas_updateConstraints:^(MASConstraintMaker *make) {
+            make.left.equalTo(_userStar.mas_right).with.offset(0);
+        }];
     }
-    self.userAbout.text = aboutText;
-    CGFloat aboutW = [aboutText boundingRectWithSize:CGSizeMake(320, 1000) options:(NSStringDrawingUsesLineFragmentOrigin) attributes:nil context:nil].size.width;
-    [self.userAbout mas_updateConstraints:^(MASConstraintMaker *make) {
-        make.width.mas_equalTo(aboutW);
-    }];
-    self.address.text = [model valueForKey:@"address"];
     
-    _titleText = [model valueForKey:@"title"];
-    [self titleTextStyle:[model valueForKey:@"title"] withBgColor:[UIColor colorWithPatternImage:[UIImage imageNamed:@"titleBg"]]];
-    
-    [self changeContentLabStyle:[model valueForKey:@"des"]];
-    
+    self.address.text = sceneModel.address;
+    _titleText = sceneModel.title;
+    [self titleTextStyle:sceneModel.title withBgColor:[UIColor colorWithPatternImage:[UIImage imageNamed:@"titleBg"]]];
+    [self changeContentLabStyle:sceneModel.des];
     self.fiuSlogan.text = @"|  创新产品情景式购物平台";
 }
 
@@ -128,18 +142,32 @@
             make.left.equalTo(_userView.mas_left).with.offset(0);
         }];
         
+        [_userView addSubview:self.userVimg];
+        [_userVimg mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.size.mas_equalTo(CGSizeMake(10, 10));
+            make.bottom.equalTo(_userHeader.mas_bottom).with.offset(0);
+            make.left.equalTo(_userHeader.mas_right).with.offset(-9);
+        }];
+        
         [_userView addSubview:self.userName];
         [_userName mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.size.mas_equalTo(CGSizeMake(200, 15));
+            make.size.mas_equalTo(CGSizeMake(200, 14));
             make.top.equalTo(_userHeader.mas_top).with.offset(0);
-            make.left.equalTo(_userHeader.mas_right).with.offset(5);
+            make.left.equalTo(_userHeader.mas_right).with.offset(6);
+        }];
+        
+        [_userView addSubview:self.userStar];
+        [_userStar mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.size.mas_equalTo(CGSizeMake(0, 14));
+            make.bottom.equalTo(_userHeader.mas_bottom).with.offset(0);
+            make.left.equalTo(_userHeader.mas_right).with.offset(6);
         }];
         
         [_userView addSubview:self.userAbout];
         [_userAbout mas_makeConstraints:^(MASConstraintMaker *make) {
             make.size.mas_equalTo(CGSizeMake(60, 15));
             make.bottom.equalTo(_userHeader.mas_bottom).with.offset(0);
-            make.left.equalTo(_userHeader.mas_right).with.offset(5);
+            make.left.equalTo(_userStar.mas_right).with.offset(5);
         }];
     }
     return _userView;
@@ -187,6 +215,27 @@
         }];
     }
     return _describeView;
+}
+
+#pragma mark - 加V标志
+- (UIImageView *)userVimg {
+    if (!_userVimg) {
+        _userVimg = [[UIImageView alloc] init];
+        _userVimg.image = [UIImage imageNamed:@"talent"];
+        _userVimg.contentMode = UIViewContentModeScaleToFill;
+        _userVimg.hidden = YES;
+    }
+    return _userVimg;
+}
+
+#pragma mark - 认证标签
+- (UILabel *)userStar {
+    if (!_userStar) {
+        _userStar = [[UILabel alloc] init];
+        _userStar.font = [UIFont systemFontOfSize:11];
+        _userStar.textColor = [UIColor whiteColor];
+    }
+    return _userStar;
 }
 
 - (UIImageView *)sceneImg {
