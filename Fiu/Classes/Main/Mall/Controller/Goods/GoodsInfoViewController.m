@@ -179,17 +179,10 @@ static NSString *const URlCancelCollect = @"/favorite/ajax_cancel_favorite";
     
     [self.view addSubview:self.collectBtn];
     [_collectBtn mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.size.mas_equalTo(CGSizeMake(SCREEN_WIDTH/4, 44));
+        make.size.mas_equalTo(CGSizeMake(44, 44));
         make.top.equalTo(_goodsInfoTable.mas_bottom).with.offset(0);
         make.left.equalTo(self.view.mas_left).with.offset(0);
     }];
-    
-//    [self.view addSubview:self.shareBtn];
-//    [_shareBtn mas_makeConstraints:^(MASConstraintMaker *make) {
-//        make.size.mas_equalTo(CGSizeMake(SCREEN_WIDTH/4, 44));
-//        make.top.equalTo(_goodsInfoTable.mas_bottom).with.offset(0);
-//        make.left.equalTo(_collectBtn.mas_right).with.offset(0);
-//    }];
     
     [self.view addSubview:self.gobuyBtn];
     [_gobuyBtn mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -217,37 +210,14 @@ static NSString *const URlCancelCollect = @"/favorite/ajax_cancel_favorite";
         [_collectBtn setTitleColor:[UIColor colorWithHexString:@"#555555"] forState:(UIControlStateNormal)];
         _collectBtn.titleLabel.font = [UIFont systemFontOfSize:10];
         
-        [_collectBtn setTitleEdgeInsets:(UIEdgeInsetsMake(30, -25, 0, 0))];
+        [_collectBtn setTitleEdgeInsets:(UIEdgeInsetsMake(30, -15, 0, 0))];
         [_collectBtn setImage:[UIImage imageNamed:@"goods_star"] forState:(UIControlStateNormal)];
         [_collectBtn setImage:[UIImage imageNamed:@"goods_star_seleted"] forState:(UIControlStateSelected)];
-        [_collectBtn setImageEdgeInsets:(UIEdgeInsetsMake(-10, 16, 0, 0))];
+        [_collectBtn setImageEdgeInsets:(UIEdgeInsetsMake(-10, 13, 0, 0))];
         [_collectBtn addTarget:self action:@selector(networkCollectGoods:) forControlEvents:(UIControlEventTouchUpInside)];
     }
     return _collectBtn;
 }
-
-//#pragma mark - 分享
-//- (UIButton *)shareBtn {
-//    if (!_shareBtn) {
-//        _shareBtn = [[UIButton alloc] init];
-//        [_shareBtn setTitle:NSLocalizedString(@"ShareBtn", nil) forState:(UIControlStateNormal)];
-//        [_shareBtn setTitleColor:[UIColor colorWithHexString:@"#555555"] forState:(UIControlStateNormal)];
-//        _shareBtn.titleLabel.font = [UIFont systemFontOfSize:10];
-//        [_shareBtn setTitleEdgeInsets:(UIEdgeInsetsMake(30, -25, 0, 0))];
-//        [_shareBtn setImageEdgeInsets:(UIEdgeInsetsMake(-10, 16, 0, 0))];
-//        [_shareBtn setImage:[UIImage imageNamed:@"goods_share"] forState:(UIControlStateNormal)];
-//        [_shareBtn addTarget:self action:@selector(ShareGoodsInfo) forControlEvents:(UIControlEventTouchUpInside)];
-//    }
-//    return _shareBtn;
-//}
-//
-//#pragma mark - 分享商品
-//- (void)ShareGoodsInfo {
-//    ShareViewController * shareVC = [[ShareViewController alloc] init];
-//    shareVC.modalPresentationStyle = UIModalPresentationOverCurrentContext;
-//    shareVC.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;
-//    [self presentViewController:shareVC animated:YES completion:nil];
-//}
 
 #pragma mark - 去购买
 - (UIButton *)gobuyBtn {

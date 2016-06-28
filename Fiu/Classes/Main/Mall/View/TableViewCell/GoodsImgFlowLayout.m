@@ -26,26 +26,24 @@
     [super prepareLayout];
     
     self.scrollDirection = UICollectionViewScrollDirectionHorizontal;
-    
-    self.itemSize = CGSizeMake(220, 150);
-    
-    self.sectionInset = UIEdgeInsetsMake(0, 0, 0, 50);
+    self.sectionInset = UIEdgeInsetsMake(0, 0, 0, 0);
+    self.minimumInteritemSpacing = 10.0f;
 }
 
 #pragma mark - 初始化Cell布局
-- (NSArray<UICollectionViewLayoutAttributes *> *)layoutAttributesForElementsInRect:(CGRect)rect {
-    NSArray * arr = [super layoutAttributesForElementsInRect:rect];
-    
-    CGFloat centerX = self.collectionView.contentOffset.x + self.collectionView.frame.size.width * 0.5;
-    
-    for (UICollectionViewLayoutAttributes * attributes in arr) {
-        CGFloat center = ABS(centerX - attributes.center.x);
-        CGFloat scale = 1 - center / (self.collectionView.frame.size.width + self.itemSize.width);
-        attributes.transform = CGAffineTransformMakeScale(scale, scale);
-    }
-    
-    return arr;
-}
+//- (NSArray<UICollectionViewLayoutAttributes *> *)layoutAttributesForElementsInRect:(CGRect)rect {
+//    NSArray * arr = [super layoutAttributesForElementsInRect:rect];
+//    
+//    CGFloat centerX = self.collectionView.contentOffset.x + self.collectionView.frame.size.width * 0.5;
+//    
+//    for (UICollectionViewLayoutAttributes * attributes in arr) {
+//        CGFloat center = ABS(centerX - attributes.center.x);
+//        CGFloat scale = 1 - center / (self.collectionView.frame.size.width + self.itemSize.width);
+//        attributes.transform = CGAffineTransformMakeScale(scale, scale);
+//    }
+//    
+//    return arr;
+//}
 
 #pragma mark - 刷新布局
 - (BOOL)shouldInvalidateLayoutForBoundsChange:(CGRect)newBounds {
@@ -68,7 +66,6 @@
             min = attributes.center.x - centerX;
         }
     }
-    
     return CGPointMake(proposedContentOffset.x + min, proposedContentOffset.y);
 }
 

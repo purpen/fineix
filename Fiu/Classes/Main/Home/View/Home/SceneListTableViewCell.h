@@ -18,8 +18,8 @@
 @pro_strong UIImageView         *   bgImage;        //  场景图
 @pro_strong UIView              *   userView;       //  用户信息视图
 @pro_strong UIImageView         *   userHeader;     //  用户头像
-@pro_strong UIImageView         *   userVimg;       //  加V
 //@pro_strong FBUserTagsLable     *   userStar;       //  认证信息
+@pro_strong UIImageView         *   userVimg;       //  加V
 @pro_strong UILabel             *   userStar;       //  认证信息
 @pro_strong UILabel             *   userName;       //  用户昵称
 @pro_strong UILabel             *   userProfile;    //  用户简介

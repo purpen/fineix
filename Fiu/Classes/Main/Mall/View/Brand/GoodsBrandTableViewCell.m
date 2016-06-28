@@ -24,7 +24,7 @@
 
 - (void)setBrandInfoData:(BrandInfoData *)model {
     [self.brandBgImg downloadImage:model.bannerUrl place:[UIImage imageNamed:@""]];
-    UIView * bgView = [[UIView alloc] initWithFrame:_brandBgImg.bounds];
+    UIView * bgView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 210)];
     bgView.backgroundColor = [UIColor colorWithHexString:@"#555555" alpha:.2];
     [_brandBgImg addSubview:bgView];
     
@@ -83,8 +83,9 @@
 #pragma mark - 品牌背景
 - (UIImageView *)brandBgImg {
     if (!_brandBgImg) {
-        _brandBgImg = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 210)];
+        _brandBgImg = [[UIImageView alloc] init];
         _brandBgImg.contentMode = UIViewContentModeScaleAspectFill;
+        _brandBgImg.clipsToBounds = YES;
         _brandBgImg.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"Defaul_Bg_420"]];
     }
     return _brandBgImg;
