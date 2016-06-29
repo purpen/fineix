@@ -67,6 +67,7 @@
 "goLookGoods" = "去逛逛";
 "collectSuccess" = "收藏成功";
 "cancelCollect" = "取消收藏";
+"SceneOfFiu" = "此地盘下的场景";
 
 //  搜索框提示
 "searchLocation" = "搜索地点";

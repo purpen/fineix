@@ -50,6 +50,7 @@ static NSString *const URLDeleteScene = @"/scene_scene/delete";
     self.fiuSceneRequest = [FBAPI getWithUrlString:URLFiuSceneInfo requestDictionary:@{@"id":self.fiuSceneId} delegate:self];
     [self.fiuSceneRequest startRequestSuccess:^(FBRequest *request, id result) {
         [self setSceneInfoViewUI];
+        NSLog(@"＝＝＝＝＝＝＝＝＝＝＝ %@", result);
         
         _fiuData = [NSDictionary dictionaryWithDictionary:[result valueForKey:@"data"]];
         _creatUserId = [NSString stringWithFormat:@"%@", [[result valueForKey:@"data"] valueForKey:@"user_id"]];
@@ -343,7 +344,7 @@ static NSString *const URLDeleteScene = @"/scene_scene/delete";
     
     if (section == 1) {
         [self.headerView addGroupHeaderViewIcon:@"Group_scene"
-                                      withTitle:@"此情景下的场景"
+                                      withTitle:NSLocalizedString(@"SceneOfFiu", nil)
                                    withSubtitle:@""
                                   withRightMore:@""];
     }
