@@ -16,6 +16,7 @@
 #import "HomePageViewController.h"
 #import "UserInfoEntity.h"
 #import "FocusNonView.h"
+#import "UserInfoEntity.h"
 
 
 @interface MyFansViewController ()<FBNavigationBarItemsDelegate,UITableViewDelegate,UITableViewDataSource,FBRequestDelegate>
@@ -196,9 +197,12 @@
     if (cell == nil) {
         cell = [[FocusOnTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellId];
     }
+    
+    UserInfo *model = [_modelAry objectAtIndex:indexPath.row];
+    
     [cell.focusOnBtn addTarget:self action:@selector(clickFocusBtn:) forControlEvents:UIControlEventTouchUpInside];
     cell.focusOnBtn.tag = indexPath.row;
-    [cell setUIWithModel:[_modelAry objectAtIndex:indexPath.row] andType:@1];
+    [cell setUIWithModel:model andType:@1];
     return cell;
 }
 

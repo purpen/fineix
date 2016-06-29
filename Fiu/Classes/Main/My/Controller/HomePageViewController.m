@@ -601,9 +601,6 @@ static NSString *const IconURL = @"/my/add_head_pic";
         [sheetVC.stopBtn addTarget:self action:@selector(clickStopBtn:) forControlEvents:UIControlEventTouchUpInside];
         [sheetVC.cancelBtn addTarget:self action:@selector(clickCancelBtn:) forControlEvents:UIControlEventTouchUpInside];
     }else{
-        _model.is_love = 1;
-        _fansN ++;
-        [self.myCollectionView reloadItemsAtIndexPaths:[NSArray arrayWithObjects:[NSIndexPath indexPathForRow:0 inSection:0],[NSIndexPath indexPathForRow:0 inSection:1], nil]];
         //请求数据
         FBRequest *request = [FBAPI postWithUrlString:@"/follow/ajax_follow" requestDictionary:@{@"follow_id":self.userId} delegate:self];
         request.flag = @"/follow/ajax_follow";
@@ -708,10 +705,14 @@ static NSString *const IconURL = @"/my/add_head_pic";
 
 -(void)requestSucess:(FBRequest *)request result:(id)result{
     if ([request.flag isEqualToString:@"/follow/ajax_follow"]){
-        if ([result objectForKey:@"success"]) {
+        if (![[result objectForKey:@"success"] isEqualToNumber:@0]) {
+            NSLog(@"result  %@",result);
             [SVProgressHUD showSuccessWithStatus:@"关注成功"];
+            _model.is_love = 1;
+            _fansN ++;
+            [self.myCollectionView reloadItemsAtIndexPaths:[NSArray arrayWithObjects:[NSIndexPath indexPathForRow:0 inSection:0],[NSIndexPath indexPathForRow:0 inSection:1], nil]];
         }else{
-            [SVProgressHUD showErrorWithStatus:@"关注失败"];
+            [SVProgressHUD showErrorWithStatus:result[@"message"]];
         }
     }else if ([request.flag isEqualToString:@"/follow/ajax_cancel_follow"]){
         if ([result objectForKey:@"success"]) {

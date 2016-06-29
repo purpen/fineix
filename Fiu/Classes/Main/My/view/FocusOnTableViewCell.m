@@ -80,13 +80,14 @@
 -(void)setUIWithModel:(UserInfo *)model andType:(NSNumber *)type{
     UserInfoEntity *entity = [UserInfoEntity defaultUserInfoEntity];
     if ([type isEqualToNumber:@1]) {
-        if ([entity.userId isEqual:model.userId]) {
+        if ([entity.userId intValue] == [model.userId intValue]) {
+            self.focusOnBtn.hidden = YES;
             if (model.is_love == 1) {
-                self.focusOnBtn.selected = NO;
             }else if (model.is_love == 2 ){
                 self.focusOnBtn.selected = YES;
             }
         }else{
+            self.focusOnBtn.hidden = NO;
             if ([model.level isEqualToNumber:@1]) {
                 self.focusOnBtn.selected = YES;
             }else if ([model.level isEqualToNumber:@0]){
@@ -95,9 +96,10 @@
         }
 
     }else if ([type isEqualToNumber:@0]){
-        if ([entity.userId isEqual:model.userId]) {
-            self.focusOnBtn.selected = YES;
+        if ([entity.userId intValue] == [model.userId intValue]) {
+            self.focusOnBtn.hidden = YES;
         }else{
+            self.focusOnBtn.hidden = NO;
             if (model.is_love == 1) {
                 self.focusOnBtn.selected = YES;
             }else if (model.is_love == 0){
