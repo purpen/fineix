@@ -168,7 +168,7 @@ static NSString *const ShareURL = @"http://m.taihuoniao.com/guide/app_about";
     [UMSocialData defaultData].extConfig.wxMessageType = UMSocialWXMessageTypeImage;
     [[UMSocialDataService defaultDataService]  postSNSWithTypes:@[UMShareToWechatSession] content:@"" image:_viewImage location:nil urlResource:nil presentedController:self completion:^(UMSocialResponseEntity *response){
         if (response.responseCode == UMSResponseCodeSuccess) {
-            [SVProgressHUD showSuccessWithStatus:@"分享成功！"];
+            [SVProgressHUD showSuccessWithStatus:@"让分享变成生产力，别让生活偷走远方的精彩"];
         }
     }];
 }
@@ -178,7 +178,7 @@ static NSString *const ShareURL = @"http://m.taihuoniao.com/guide/app_about";
     [UMSocialData defaultData].extConfig.wxMessageType = UMSocialWXMessageTypeImage;
     [[UMSocialDataService defaultDataService]  postSNSWithTypes:@[UMShareToWechatTimeline] content:@"" image:_viewImage location:nil urlResource:nil presentedController:self completion:^(UMSocialResponseEntity *response){
         if (response.responseCode == UMSResponseCodeSuccess) {
-            [SVProgressHUD showSuccessWithStatus:@"分享成功！"];
+            [SVProgressHUD showSuccessWithStatus:@"让分享变成生产力，别让生活偷走远方的精彩"];
         }
     }];
 }
@@ -187,7 +187,7 @@ static NSString *const ShareURL = @"http://m.taihuoniao.com/guide/app_about";
     [UMSocialData defaultData].extConfig.qqData.qqMessageType = UMSocialQQMessageTypeImage;
     [[UMSocialDataService defaultDataService]  postSNSWithTypes:@[UMShareToQQ] content:@"" image:_viewImage location:nil urlResource:nil presentedController:self completion:^(UMSocialResponseEntity *response){
         if (response.responseCode == UMSResponseCodeSuccess) {
-            [SVProgressHUD showSuccessWithStatus:@"分享成功！"];
+            [SVProgressHUD showSuccessWithStatus:@"让分享变成生产力，别让生活偷走远方的精彩"];
         }
     }];
 }
@@ -195,6 +195,7 @@ static NSString *const ShareURL = @"http://m.taihuoniao.com/guide/app_about";
 -(void)sinaShareBtnAction:(UIButton*)sender{
     [[UMSocialDataService defaultDataService]  postSNSWithTypes:@[UMShareToSina] content:@"有Fiu的生活，才够意思，快点扫码加我吧！查看个人主页>>http://www.taihuoniao.com" image:_viewImage location:nil urlResource:nil presentedController:self completion:^(UMSocialResponseEntity *shareResponse){
         if (shareResponse.responseCode == UMSResponseCodeSuccess) {
+            [SVProgressHUD showSuccessWithStatus:@"让分享变成生产力，别让生活偷走远方的精彩"];
         }
     }];
 }

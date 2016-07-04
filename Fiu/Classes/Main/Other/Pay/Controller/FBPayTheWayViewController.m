@@ -182,7 +182,7 @@
                         if ([[resultDic objectForKey:@"resultStatus"] isEqualToString:@"9000"]) {
                             [self checkOrderInfoForPayStatusWithPaymentWay:@"支付宝"];
                         } else {
-                            [SVProgressHUD showErrorWithStatus:@"支付失败!"];
+                            [SVProgressHUD showErrorWithStatus:@"您的订单尚未支付成功，请刷新重试或者点这里重新下单"];
                         }
                     }];
                     [SVProgressHUD dismiss];
@@ -249,7 +249,7 @@
                 break;
             default:
             {
-                [SVProgressHUD showErrorWithStatus:@"支付失败!"];
+                [SVProgressHUD showErrorWithStatus:@"您的订单尚未支付成功，请刷新重试或者点这里重新下单"];
             }
                 break;
         }
@@ -281,9 +281,9 @@
                 paySuccessVC.paymentWay = paymentWay;
                 [weakSelf.navigationController pushViewController:paySuccessVC animated:YES];
                 
-                [SVProgressHUD showSuccessWithStatus:@"支付成功!"];
+                [SVProgressHUD showSuccessWithStatus:@"您的订单已经支付成功"];
             } else {
-                [SVProgressHUD showErrorWithStatus:@"支付未成功!"];
+                [SVProgressHUD showErrorWithStatus:@"您的订单尚未支付成功，请刷新重试或者点这里重新下单"];
             }
         } failure:^(FBRequest *request, NSError *error) {
             [SVProgressHUD showInfoWithStatus:[error localizedDescription]];
@@ -298,7 +298,7 @@
     if ([[resultDic objectForKey:@"resultStatus"] isEqualToString:@"9000"]) {
         [self checkOrderInfoForPayStatusWithPaymentWay:@"支付宝"];
     } else {
-        [SVProgressHUD showErrorWithStatus:@"支付失败!"];
+        [SVProgressHUD showErrorWithStatus:@"您的订单尚未支付成功，请刷新重试或者点这里重新下单"];
     }
 }
 
