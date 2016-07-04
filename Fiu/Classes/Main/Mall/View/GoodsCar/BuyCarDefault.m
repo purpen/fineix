@@ -55,7 +55,7 @@
 - (UILabel *)promptLab {
     if (!_promptLab) {
         _promptLab = [[UILabel alloc] init];
-        _promptLab.text = NSLocalizedString(@"goodsCarIsNil", nil);
+        _promptLab.text = NSLocalizedString(@"NoGoods", nil);
         _promptLab.textColor = [UIColor colorWithHexString:titleColor];
         _promptLab.font = [UIFont systemFontOfSize:12];
         _promptLab.textAlignment = NSTextAlignmentCenter;

@@ -18,11 +18,18 @@
     
         [self addSubview:self.bgView];
         [_bgView mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.size.mas_equalTo(CGSizeMake(self.bounds.size.width - 30, 30));
+            make.size.mas_equalTo(CGSizeMake(self.bounds.size.width - 70, 30));
             make.centerY.equalTo(self);
             make.left.equalTo(self.mas_left).with.offset(15);
         }];
         
+        [self addSubview:self.cancelBtn];
+        [_cancelBtn mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.size.mas_equalTo(CGSizeMake(44, 44));
+            make.top.equalTo(self.mas_top).with.offset(0);
+            make.right.equalTo(self.mas_right).with.offset(-5);
+        }];
+    
         [self addSubview:self.line];
     }
     
@@ -35,7 +42,6 @@
         _searchIcon = [[UIImageView alloc] init];
         _searchIcon.image = [UIImage imageNamed:@"Search"];
         _searchIcon.contentMode = UIViewContentModeCenter;
-
     }
     return _searchIcon;
 }
@@ -56,7 +62,7 @@
 - (UIButton *)cancelBtn {
     if (!_cancelBtn) {
         _cancelBtn = [[UIButton alloc] init];
-        [_cancelBtn setTitle:@"取消" forState:(UIControlStateNormal)];
+        [_cancelBtn setTitle:NSLocalizedString(@"cancel", nil) forState:(UIControlStateNormal)];
         [_cancelBtn setTitleColor:[UIColor colorWithHexString:titleColor] forState:(UIControlStateNormal)];
         _cancelBtn.titleLabel.font = [UIFont systemFontOfSize:14];
         [_cancelBtn addTarget:self action:@selector(canceleSearch) forControlEvents:(UIControlEventTouchUpInside)];
@@ -81,9 +87,9 @@
     return YES;
 }
 
-- (void)textFieldDidBeginEditing:(UITextField *)textField {
-    [self changeSearchBoxFrame:YES];
-}
+//- (void)textFieldDidBeginEditing:(UITextField *)textField {
+//    [self changeSearchBoxFrame:YES];
+//}
 
 #pragma mark - 视图分割线
 - (UILabel *)line {
@@ -121,38 +127,36 @@
     return _bgView;
 }
 
-#pragma mark - 改变输入框状态
-- (void)changeSearchBoxFrame:(BOOL)type {
-    if (type == YES) {
-        [UIView animateWithDuration:.2 animations:^{
-            [_bgView mas_updateConstraints:^(MASConstraintMaker *make) {
-                make.width.mas_equalTo(self.bounds.size.width - 70);
-            }];
-            
-            [_bgView layoutIfNeeded];
-            
-        } completion:^(BOOL finished) {
-            [self addSubview:self.cancelBtn];
-            [_cancelBtn mas_makeConstraints:^(MASConstraintMaker *make) {
-                make.size.mas_equalTo(CGSizeMake(44, 44));
-                make.top.equalTo(self.mas_top).with.offset(0);
-                make.right.equalTo(self.mas_right).with.offset(-5);
-            }];
-        }];
-    
-    } else if (type == NO) {
-        [_cancelBtn removeFromSuperview];
-        [UIView animateWithDuration:.2 animations:^{
-            [_bgView mas_updateConstraints:^(MASConstraintMaker *make) {
-                make.width.mas_equalTo(self.bounds.size.width - 30);
-            }];
-            
-            [_bgView layoutIfNeeded];
-        }];
-
-    }
-    
-    
-}
+//#pragma mark - 改变输入框状态
+//- (void)changeSearchBoxFrame:(BOOL)type {
+//    if (type == YES) {
+//        [UIView animateWithDuration:.2 animations:^{
+//            [_bgView mas_updateConstraints:^(MASConstraintMaker *make) {
+//                make.width.mas_equalTo(self.bounds.size.width - 70);
+//            }];
+//            
+//            [_bgView layoutIfNeeded];
+//            
+//        } completion:^(BOOL finished) {
+//            [self addSubview:self.cancelBtn];
+//            [_cancelBtn mas_makeConstraints:^(MASConstraintMaker *make) {
+//                make.size.mas_equalTo(CGSizeMake(44, 44));
+//                make.top.equalTo(self.mas_top).with.offset(0);
+//                make.right.equalTo(self.mas_right).with.offset(-5);
+//            }];
+//        }];
+//    
+//    } else if (type == NO) {
+//        [_cancelBtn removeFromSuperview];
+//        [UIView animateWithDuration:.2 animations:^{
+//            [_bgView mas_updateConstraints:^(MASConstraintMaker *make) {
+//                make.width.mas_equalTo(self.bounds.size.width - 30);
+//            }];
+//            
+//            [_bgView layoutIfNeeded];
+//        }];
+//
+//    }
+//}
 
 @end

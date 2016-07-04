@@ -27,6 +27,6 @@
 
 @pro_weak id <FBSearchDelegate> delegate;
 
-- (void)changeSearchBoxFrame:(BOOL)type;
+//- (void)changeSearchBoxFrame:(BOOL)type;
 
 @end

@@ -16,6 +16,7 @@ typedef void(^DismissVC)();
 
 @pro_strong NSString                *   type;
 @pro_strong UIButton                *   sureBtn;                //  确定按钮
+@pro_strong UIButton                *   beginSearchBtn;         //  搜索情境
 @pro_strong NSString                *   fiuSceneId;             //  所选情景id
 @pro_strong NSString                *   fiuSceneTitle;          //  所选情景title
 @pro_strong FBRequest               *   allSceneListRequest;

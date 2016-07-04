@@ -25,7 +25,6 @@ typedef void(^GetSeletFSceneIdAndTitlelBlock)(NSString * idx, NSString * title);
 
 @pro_strong NSString            *   type;
 @pro_strong UITableView         *   selectTable;
-@pro_strong UIButton            *   beginSearchBtn;     //  搜索情境
 @pro_strong UIButton            *   sureBtn;            //  确定按钮
 @pro_strong UILabel             *   cellLine;
 @pro_strong FBRequest           *   fSceneRequest;      //  赴京的情景

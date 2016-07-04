@@ -110,6 +110,7 @@ static const NSInteger  rollTagBtnTag = 97;
     SearchViewController * searchVC = [[SearchViewController alloc] init];
     searchVC.keyword = self.tagTitleArr[button.tag - rollTagBtnTag];
     searchVC.searchType = self.type;
+    searchVC.beginSearch = NO;
     [self.nav pushViewController:searchVC animated:YES];
 }
 

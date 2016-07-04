@@ -313,16 +313,19 @@ static NSString *const URLFiuBrand = @"/scene_brands/getlist";
 
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
     self.headerView = [[GroupHeaderView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 44)];
+    self.headerView.nav = self.navigationController;
     if (section == 0) {
         [self.headerView addGroupHeaderViewIcon:@"Group_Brand"
                                       withTitle:NSLocalizedString(@"fiuBrand", nil)
                                    withSubtitle:NSLocalizedString(@"fiuBrandText", nil)
-                                  withRightMore:@""];
+                                  withRightMore:NSLocalizedString(@"lookAll", nil)
+                                   withMoreType:2];
     } else if (section ==1) {
         [self.headerView addGroupHeaderViewIcon:@"Group_goods"
                                       withTitle:NSLocalizedString(@"fiuGoods", nil)
                                    withSubtitle:NSLocalizedString(@"fiuGoodsText", nil)
-                                  withRightMore:@""];
+                                  withRightMore:@""
+                                   withMoreType:0];
     } 
     return self.headerView;
 }
@@ -359,6 +362,7 @@ static NSString *const URLFiuBrand = @"/scene_brands/getlist";
 - (void)leftBarItemSelected {
     SearchViewController * searchVC = [[SearchViewController alloc] init];
     searchVC.searchType = 2;
+    searchVC.beginSearch = YES;
     [self.navigationController pushViewController:searchVC animated:YES];
 }
 

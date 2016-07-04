@@ -476,6 +476,8 @@
 		D81281651CAA8532007CF08B /* BaiduMapAPI_Utils.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D81280D31CAA8532007CF08B /* BaiduMapAPI_Utils.framework */; };
 		D81281661CAA8532007CF08B /* JKDBHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = D81280D61CAA8532007CF08B /* JKDBHelper.m */; };
 		D81281671CAA8532007CF08B /* JKDBModel.m in Sources */ = {isa = PBXBuildFile; fileRef = D81280D81CAA8532007CF08B /* JKDBModel.m */; };
+		D81EA3FE1D2A52D40032FAAB /* FiuPeopleListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D81EA3FD1D2A52D40032FAAB /* FiuPeopleListViewController.m */; };
+		D81EA4011D2A52DD0032FAAB /* FiuBrandListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D81EA4001D2A52DD0032FAAB /* FiuBrandListViewController.m */; };
 		D8329DE71CF5823F00611025 /* FBEditShareInfoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D8329DE61CF5823F00611025 /* FBEditShareInfoViewController.m */; };
 		D8329DEF1CF611F800611025 /* ShareInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = D8329DEA1CF611F800611025 /* ShareInfo.m */; };
 		D8329DF01CF611F800611025 /* ShareInfoData.m in Sources */ = {isa = PBXBuildFile; fileRef = D8329DEC1CF611F800611025 /* ShareInfoData.m */; };
@@ -1374,6 +1376,10 @@
 		D81280D61CAA8532007CF08B /* JKDBHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JKDBHelper.m; sourceTree = "<group>"; };
 		D81280D71CAA8532007CF08B /* JKDBModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JKDBModel.h; sourceTree = "<group>"; };
 		D81280D81CAA8532007CF08B /* JKDBModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JKDBModel.m; sourceTree = "<group>"; };
+		D81EA3FC1D2A52D40032FAAB /* FiuPeopleListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FiuPeopleListViewController.h; sourceTree = "<group>"; };
+		D81EA3FD1D2A52D40032FAAB /* FiuPeopleListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FiuPeopleListViewController.m; sourceTree = "<group>"; };
+		D81EA3FF1D2A52DD0032FAAB /* FiuBrandListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FiuBrandListViewController.h; sourceTree = "<group>"; };
+		D81EA4001D2A52DD0032FAAB /* FiuBrandListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FiuBrandListViewController.m; sourceTree = "<group>"; };
 		D8329DE51CF5823F00611025 /* FBEditShareInfoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FBEditShareInfoViewController.h; sourceTree = "<group>"; };
 		D8329DE61CF5823F00611025 /* FBEditShareInfoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FBEditShareInfoViewController.m; sourceTree = "<group>"; };
 		D8329DE91CF611F800611025 /* ShareInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShareInfo.h; sourceTree = "<group>"; };
@@ -1842,6 +1848,7 @@
 		1F2A8C521CF40276005116C7 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
+				D81EA3FA1D2A52930032FAAB /* FiuPeopleList */,
 				1F2A8C531CF40276005116C7 /* AllScene */,
 				1F2A8C561CF40276005116C7 /* Discover */,
 				1F2A8C591CF40276005116C7 /* FiuScene */,
@@ -2235,6 +2242,7 @@
 		1F2A8CF41CF40276005116C7 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
+				D81EA3FB1D2A529A0032FAAB /* FiuBrandList */,
 				1F2A8CF51CF40276005116C7 /* Brand */,
 				1F2A8CF81CF40276005116C7 /* Category */,
 				1F2A8CFB1CF40276005116C7 /* Goods */,
@@ -3829,6 +3837,24 @@
 			path = DBModel;
 			sourceTree = "<group>";
 		};
+		D81EA3FA1D2A52930032FAAB /* FiuPeopleList */ = {
+			isa = PBXGroup;
+			children = (
+				D81EA3FC1D2A52D40032FAAB /* FiuPeopleListViewController.h */,
+				D81EA3FD1D2A52D40032FAAB /* FiuPeopleListViewController.m */,
+			);
+			path = FiuPeopleList;
+			sourceTree = "<group>";
+		};
+		D81EA3FB1D2A529A0032FAAB /* FiuBrandList */ = {
+			isa = PBXGroup;
+			children = (
+				D81EA3FF1D2A52DD0032FAAB /* FiuBrandListViewController.h */,
+				D81EA4001D2A52DD0032FAAB /* FiuBrandListViewController.m */,
+			);
+			path = FiuBrandList;
+			sourceTree = "<group>";
+		};
 		D8329DE81CF611F800611025 /* ShareInfo */ = {
 			isa = PBXGroup;
 			children = (
@@ -4274,6 +4300,7 @@
 				1F2A902F1CF40277005116C7 /* DeliveryAddressCell.m in Sources */,
 				1F2A901C1CF40277005116C7 /* BonusModel.m in Sources */,
 				1F2A8FB21CF40277005116C7 /* MallViewController.m in Sources */,
+				D81EA4011D2A52DD0032FAAB /* FiuBrandListViewController.m in Sources */,
 				1F2A907B1CF40277005116C7 /* TaoBaoOrderViewController.m in Sources */,
 				1F2A8FA81CF40277005116C7 /* GoodsCategoryViewController.m in Sources */,
 				D8329DF01CF611F800611025 /* ShareInfoData.m in Sources */,
@@ -4287,6 +4314,7 @@
 				1F2A8FAD1CF40277005116C7 /* FBOrderTimeViewController.m in Sources */,
 				1F2A8F621CF40277005116C7 /* FindGoodsView.m in Sources */,
 				1F2A8F8A1CF40277005116C7 /* SceneSubscribeViewController.m in Sources */,
+				D81EA3FE1D2A52D40032FAAB /* FiuPeopleListViewController.m in Sources */,
 				1F2A90021CF40277005116C7 /* FindeFirendTwoModel.m in Sources */,
 				1F2A902E1CF40277005116C7 /* DeliveryAddressModel.m in Sources */,
 				1F2A90991CF40277005116C7 /* CommentDataTableViewCell.m in Sources */,

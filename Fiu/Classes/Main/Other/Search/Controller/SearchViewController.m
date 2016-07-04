@@ -41,8 +41,10 @@ static NSString *const URLSearchList = @"/search/getlist";
     
     [self setNavigationViewUI];
     
-//    [self.searchView.searchInputBox becomeFirstResponder];
-    
+    if (self.beginSearch == YES) {
+        [self.searchView.searchInputBox becomeFirstResponder];
+    }
+
 }
 
 - (void)viewDidLoad {
@@ -178,7 +180,7 @@ static NSString *const URLSearchList = @"/search/getlist";
 
 #pragma mark - 设置视图UI 
 - (void)setSearchVcUI {
-    self.titleArr = [NSArray arrayWithObjects:@"场景", @"情景", @"产品", nil];
+    self.titleArr = @[NSLocalizedString(@"SceneBtn", nil), NSLocalizedString(@"FiuSceneBtn", nil), NSLocalizedString(@"GoodsBtn", nil)];
     
     [self.view addSubview:self.menuView];
     

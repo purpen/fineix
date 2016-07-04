@@ -346,7 +346,8 @@ static NSString *const URLDeleteScene = @"/scene_scene/delete";
         [self.headerView addGroupHeaderViewIcon:@"Group_scene"
                                       withTitle:NSLocalizedString(@"SceneOfFiu", nil)
                                    withSubtitle:@""
-                                  withRightMore:@""];
+                                  withRightMore:@""
+                                   withMoreType:0];
     }
     
     return self.headerView;

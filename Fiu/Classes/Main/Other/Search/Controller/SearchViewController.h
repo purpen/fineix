@@ -18,6 +18,7 @@
 @pro_assign NSInteger                           currentpageNum;
 @pro_assign NSInteger                           totalPageNum;
 
+@pro_assign BOOL                                beginSearch;
 @pro_strong UIScrollView                    *   resultsView;            //  搜索结果视图
 @pro_strong FBSearchView                    *   searchView;             //  搜索框
 @pro_strong NSArray                         *   titleArr;               //  分类标题

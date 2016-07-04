@@ -8,6 +8,8 @@
 
 #import "GroupHeaderView.h"
 #import "AllSceneViewController.h"
+#import "FiuPeopleListViewController.h"
+#import "FiuBrandListViewController.h"
 
 @implementation GroupHeaderView
 
@@ -26,8 +28,10 @@
 - (void)addGroupHeaderViewIcon:(NSString *)image
                      withTitle:(NSString *)title
                   withSubtitle:(NSString *)subTitle
-                 withRightMore:(NSString *)more {
+                 withRightMore:(NSString *)more
+                  withMoreType:(NSInteger)openType {
     
+    self.openType = openType;
     [self.icon setImage:[UIImage imageNamed:image] forState:(UIControlStateNormal)];
     self.headerTitle.text = title;
     self.subTitle.text = subTitle;
@@ -102,7 +106,7 @@
 - (UIButton *)moreBtn {
     if (!_moreBtn) {
         _moreBtn = [[UIButton alloc] init];
-        [_moreBtn setTitle:@"查看全部" forState:(UIControlStateNormal)];
+        [_moreBtn setTitle:NSLocalizedString(@"lookAll", nil) forState:(UIControlStateNormal)];
         [_moreBtn setTitleColor:[UIColor colorWithHexString:@"#666666" alpha:1] forState:(UIControlStateNormal)];
         _moreBtn.titleLabel.font = [UIFont systemFontOfSize:12];
         [_moreBtn addTarget:self action:@selector(moreFiuScene) forControlEvents:(UIControlEventTouchUpInside)];
@@ -111,8 +115,21 @@
 }
 
 - (void)moreFiuScene {
-    AllSceneViewController * allSceneVC = [[AllSceneViewController alloc] init];
-    [self.nav pushViewController:allSceneVC animated:YES];
+    
+    if (self.openType == 0) {
+        AllSceneViewController * allSceneVC = [[AllSceneViewController alloc] init];
+        [self.nav pushViewController:allSceneVC animated:YES];
+        
+    } else if (self.openType == 1) {
+        FiuPeopleListViewController * peopleListVC = [[FiuPeopleListViewController alloc] init];
+        [self.nav pushViewController:peopleListVC animated:YES];
+        
+    } else if (self.openType == 2) {
+        FiuBrandListViewController * brandListVC = [[FiuBrandListViewController alloc] init];
+        [self.nav pushViewController:brandListVC animated:YES];
+        
+    }
+    
 }
 
 @end

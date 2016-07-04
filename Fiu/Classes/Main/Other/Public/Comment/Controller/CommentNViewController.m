@@ -189,7 +189,7 @@ static NSString *const URLSendSceneComment = @"/comment/ajax_comment";
 - (UILabel *)promptLab {
     if (!_promptLab) {
         _promptLab = [[UILabel alloc] initWithFrame:CGRectMake(0, 100, SCREEN_WIDTH, 100)];
-        _promptLab.text = @"你可是第一个看到它的人，快来评论一下吧";
+        _promptLab.text = NSLocalizedString(@"NoComment", nil);
         _promptLab.textColor = [UIColor colorWithHexString:titleColor];
         _promptLab.font = [UIFont systemFontOfSize:13];
         _promptLab.textAlignment = NSTextAlignmentCenter;

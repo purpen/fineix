@@ -7,7 +7,6 @@
 //
 
 #import "SelectSceneViewController.h"
-#import "SearchFSceneViewController.h"
 #import "SelectAllFSceneViewController.h"
 #import "SelectHotFSceneTableViewCell.h"
 #import "FiuSceneInfoData.h"
@@ -99,15 +98,13 @@ static NSString *const URLFSceneList = @"/scene_scene/";
 
 #pragma mark - 设置视图
 - (void)setSelectFSceneVcUI {
-    [self.view addSubview:self.beginSearchBtn];
-    
     [self.view addSubview:self.selectTable];
 }
 
 #pragma mark - 
 - (UITableView *)selectTable {
     if (!_selectTable) {
-        _selectTable = [[UITableView alloc] initWithFrame:CGRectMake(0, 100, SCREEN_WIDTH, SCREEN_HEIGHT - 100) style:(UITableViewStyleGrouped)];
+        _selectTable = [[UITableView alloc] initWithFrame:CGRectMake(0, 50, SCREEN_WIDTH, SCREEN_HEIGHT - 50) style:(UITableViewStyleGrouped)];
         _selectTable.delegate = self;
         _selectTable.dataSource = self;
         _selectTable.sectionFooterHeight = 0.01f;
@@ -298,38 +295,6 @@ static NSString *const URLFSceneList = @"/scene_scene/";
     longitude = _locationSearch.userLocation.location.coordinate.longitude;
     
     [_locationSearch stopUserLocationService];
-}
-
-#pragma mark - 搜索情境按钮
-- (UIButton *)beginSearchBtn {
-    if (!_beginSearchBtn) {
-        _beginSearchBtn = [[UIButton alloc] initWithFrame:CGRectMake(15, 57, SCREEN_WIDTH - 30, 32)];
-        _beginSearchBtn.layer.borderColor = [UIColor colorWithHexString:@"#CCCCCC"].CGColor;
-        _beginSearchBtn.layer.borderWidth = 0.5f;
-        _beginSearchBtn.layer.cornerRadius = 4;
-        _beginSearchBtn.layer.masksToBounds = YES;
-        [_beginSearchBtn setTitle:NSLocalizedString(@"searchFScene", nil) forState:(UIControlStateNormal)];
-        [_beginSearchBtn setTitleColor:[UIColor colorWithHexString:titleColor] forState:(UIControlStateNormal)];
-        _beginSearchBtn.titleLabel.font = [UIFont systemFontOfSize:13];
-        [_beginSearchBtn setImage:[UIImage imageNamed:@"Search"] forState:(UIControlStateNormal)];
-        [_beginSearchBtn setImageEdgeInsets:(UIEdgeInsetsMake(0, -10, 0, 0))];
-        [_beginSearchBtn addTarget:self action:@selector(searchBtnClick) forControlEvents:(UIControlEventTouchUpInside)];
-    }
-    return _beginSearchBtn;
-}
-
-#pragma mark - 跳转搜索情境
-- (void)searchBtnClick {
-    SearchFSceneViewController * searchFSceneVC = [[SearchFSceneViewController alloc] init];
-    searchFSceneVC.type = self.type;
-    if ([self.type isEqualToString:@"release"]) {
-        [self.navigationController pushViewController:searchFSceneVC animated:YES];
-    } else if ([self.type isEqualToString:@"edit"]) {
-        searchFSceneVC.dismissVC = ^ {
-            [self dismissViewControllerAnimated:YES completion:nil];
-        };
-        [self presentViewController:searchFSceneVC animated:YES completion:nil];
-    }
 }
 
 #pragma mark - 设置顶部导航栏

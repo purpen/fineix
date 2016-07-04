@@ -461,18 +461,21 @@ static NSString *const URLDeleteScene = @"/scene_sight/delete";
         [self.headerView addGroupHeaderViewIcon:@"Group_scene"
                                       withTitle:NSLocalizedString(@"sceneGoods", nil)
                                    withSubtitle:@""
-                                  withRightMore:@""];
+                                  withRightMore:@""
+                                   withMoreType:0];
     } else if (section == 3) {
         if (self.reGoodsList.count == 0) {
             [self.headerView addGroupHeaderViewIcon:@""
                                           withTitle:@""
                                        withSubtitle:@""
-                                      withRightMore:@""];
+                                      withRightMore:@""
+                                       withMoreType:0];
         } else {
             [self.headerView addGroupHeaderViewIcon:@"Group_scene"
                                           withTitle:NSLocalizedString(@"sceneLikeGoods", nil)
                                        withSubtitle:@""
-                                      withRightMore:@""];
+                                      withRightMore:@""
+                                       withMoreType:0];
         }
     }
     

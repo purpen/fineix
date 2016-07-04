@@ -49,6 +49,9 @@ static NSString *const URLSearchFScene = @"/search/getlist";
             [self.allFiuSceneIdMarr addObject:[NSString stringWithFormat:@"%zi", allFiuScene.idField]];
             [self.allFiuSceneTitleMarr addObject:allFiuScene.title];
         }
+        
+        [self.allSceneView reloadData];
+        
         self.currentpageNum = [[[result valueForKey:@"data"] valueForKey:@"current_page"] integerValue];
         self.totalPageNum = [[[result valueForKey:@"data"] valueForKey:@"total_page"] integerValue];
 
@@ -84,7 +87,6 @@ static NSString *const URLSearchFScene = @"/search/getlist";
             }
         }
         
-        [self.allSceneView reloadData];
         [SVProgressHUD dismiss];
         
     } failure:^(FBRequest *request, NSError *error) {
@@ -151,7 +153,7 @@ static NSString *const URLSearchFScene = @"/search/getlist";
 #pragma mark - 开始搜索
 - (void)beginSearch:(NSString *)searchKeyword {
     if ([searchKeyword isEqualToString:@""]) {
-        [SVProgressHUD showInfoWithStatus:@"请输入关键字"];
+        [SVProgressHUD showInfoWithStatus:NSLocalizedString(@"noKeyword", nil)];
         
     } else {
         self.currentpageNum = 0;
@@ -208,7 +210,7 @@ static NSString *const URLSearchFScene = @"/search/getlist";
         }
         
     } else {
-        [SVProgressHUD showInfoWithStatus:@"请选择一个情景"];
+        [SVProgressHUD showInfoWithStatus:NSLocalizedString(@"chooseFScene", nil)];
     }
 }
 

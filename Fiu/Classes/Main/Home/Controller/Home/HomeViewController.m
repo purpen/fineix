@@ -227,6 +227,7 @@ static NSString *const URLSceneList = @"/scene_sight/";
 - (void)leftBarItemSelected {
     SearchViewController * searchVC = [[SearchViewController alloc] init];
     searchVC.searchType = 0;
+    searchVC.beginSearch = YES;
     [self.navigationController pushViewController:searchVC animated:YES];
 }
 

@@ -333,17 +333,20 @@ static NSString *const URLFiuPeople = @"/user/find_user";
         [self.headerView addGroupHeaderViewIcon:@"Group_friend"
                                       withTitle:NSLocalizedString(@"fiuFriend", nil)
                                    withSubtitle:NSLocalizedString(@"fiuFriendText", nil)
-                                   withRightMore:@""];
+                                   withRightMore:NSLocalizedString(@"lookAll", nil)
+                                   withMoreType:1];
     } else if (section ==1) {
         [self.headerView addGroupHeaderViewIcon:@"Group_FiuScene"
                                       withTitle:NSLocalizedString(@"fiuFScene", nil)
                                    withSubtitle:NSLocalizedString(@"fiuFSceneText", nil)
-                                  withRightMore:@"查看全部"];
+                                  withRightMore:NSLocalizedString(@"lookAll", nil)
+                                   withMoreType:0];
     } else if (section == 2) {
         [self.headerView addGroupHeaderViewIcon:@"Group_scene"
                                       withTitle:NSLocalizedString(@"fiuScene", nil)
                                    withSubtitle:NSLocalizedString(@"fiuSceneText", nil)
-                                  withRightMore:@""];
+                                  withRightMore:@""
+                                   withMoreType:0];
     }
     
     return self.headerView;
@@ -381,6 +384,7 @@ static NSString *const URLFiuPeople = @"/user/find_user";
 - (void)leftBarItemSelected {
     SearchViewController * searchVC = [[SearchViewController alloc] init];
     searchVC.searchType = 1;
+    searchVC.beginSearch = YES;
     [self.navigationController pushViewController:searchVC animated:YES];
 }
 

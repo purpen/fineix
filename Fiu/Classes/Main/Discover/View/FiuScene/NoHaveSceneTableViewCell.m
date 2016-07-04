@@ -63,7 +63,7 @@
     if (!_content) {
         _content = [[UILabel alloc] init];
         _content.font = [UIFont systemFontOfSize:14];
-        _content.text = @"即刻发表你的第一个场景";
+        _content.text = NSLocalizedString(@"NoScene", nil);
         _content.textColor = [UIColor colorWithHexString:@"#999999"];
         _content.textAlignment = NSTextAlignmentCenter;
         _content.numberOfLines = 0;
