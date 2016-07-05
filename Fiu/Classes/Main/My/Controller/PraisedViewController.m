@@ -12,15 +12,19 @@
 #import "MJRefresh.h"
 #import "SceneInfoViewController.h"
 #import "UserInfoEntity.h"
+#import "AllSceneCollectionViewCell.h"
 
-@interface PraisedViewController ()<FBNavigationBarItemsDelegate,UITableViewDelegate,UITableViewDataSource>
+@interface PraisedViewController ()<FBNavigationBarItemsDelegate,UICollectionViewDelegate,UICollectionViewDataSource>
 @pro_strong NSMutableArray      *   sceneListMarr;
 @pro_strong NSMutableArray      *   sceneIdMarr;
 @property (nonatomic, assign) NSInteger currentPageNumber;
 @property (nonatomic, assign) NSInteger totalPageNumber;
+/** 主体部分 */
+@property (nonatomic, strong) UICollectionView *myCollectionView;
 @end
 
 static NSString *const URLSceneList = @"/scene_sight/";
+static NSString *cellId = @"allScene";
 
 @implementation PraisedViewController
 
@@ -31,7 +35,7 @@ static NSString *const URLSceneList = @"/scene_sight/";
     [self requestDataForOderList];
     
     // 下拉刷新
-    self.homeTableView.mj_header = [MJRefreshNormalHeader headerWithRefreshingBlock:^{
+    self.myCollectionView.mj_header = [MJRefreshNormalHeader headerWithRefreshingBlock:^{
         _currentPageNumber = 0;
         [self.sceneListMarr removeAllObjects];
         [self.sceneIdMarr removeAllObjects];
@@ -39,13 +43,13 @@ static NSString *const URLSceneList = @"/scene_sight/";
     }];
     
     //上拉加载更多
-    self.homeTableView.mj_footer = [MJRefreshAutoNormalFooter footerWithRefreshingBlock:^{
+    self.myCollectionView.mj_footer = [MJRefreshAutoNormalFooter footerWithRefreshingBlock:^{
         if (_currentPageNumber < _totalPageNumber) {
 //            [self.sceneListMarr removeAllObjects];
 //            [self.sceneIdMarr removeAllObjects];
             [self requestDataForOderListOperation];
         } else {
-            [self.homeTableView.mj_footer endRefreshing];
+            [self.myCollectionView.mj_footer endRefreshing];
         }
     }];
 }
@@ -78,30 +82,30 @@ static NSString *const URLSceneList = @"/scene_sight/";
             [self.sceneListMarr addObject:homeSceneModel];
             [self.sceneIdMarr addObject:[NSString stringWithFormat:@"%zi", homeSceneModel.idField]];
         }
-        [self.homeTableView reloadData];
+        [self.myCollectionView reloadData];
         _currentPageNumber = [[[result valueForKey:@"data"] valueForKey:@"current_page"] integerValue];
         _totalPageNumber = [[[result valueForKey:@"data"] valueForKey:@"total_page"] integerValue];
         
         BOOL isLastPage = (_currentPageNumber == _totalPageNumber);
         
         if (!isLastPage) {
-            if (self.homeTableView.mj_footer.state == MJRefreshStateNoMoreData) {
-                [self.homeTableView.mj_footer resetNoMoreData];
+            if (self.myCollectionView.mj_footer.state == MJRefreshStateNoMoreData) {
+                [self.myCollectionView.mj_footer resetNoMoreData];
             }
         }
         if (_currentPageNumber == _totalPageNumber == 1) {
-            self.homeTableView.mj_footer.state = MJRefreshStateNoMoreData;
-            self.homeTableView.mj_footer.hidden = true;
+            self.myCollectionView.mj_footer.state = MJRefreshStateNoMoreData;
+            self.myCollectionView.mj_footer.hidden = true;
         }
         
-        if ([self.homeTableView.mj_header isRefreshing]) {
-            [self.homeTableView.mj_header endRefreshing];
+        if ([self.myCollectionView.mj_header isRefreshing]) {
+            [self.myCollectionView.mj_header endRefreshing];
         }
-        if ([self.homeTableView.mj_footer isRefreshing]) {
+        if ([self.myCollectionView.mj_footer isRefreshing]) {
             if (isLastPage) {
-                [self.homeTableView.mj_footer endRefreshingWithNoMoreData];
+                [self.myCollectionView.mj_footer endRefreshingWithNoMoreData];
             } else  {
-                [self.homeTableView.mj_footer endRefreshing];
+                [self.myCollectionView.mj_footer endRefreshing];
             }
         }
         
@@ -114,56 +118,59 @@ static NSString *const URLSceneList = @"/scene_sight/";
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    [self.view addSubview:self.homeTableView];
+    [self.view addSubview:self.myCollectionView];
     
 }
 
 #pragma mark - 加载首页表格
-- (UITableView *)homeTableView {
-    if (!_homeTableView) {
-        _homeTableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 64, SCREEN_WIDTH, SCREEN_HEIGHT-64)];
-        _homeTableView.delegate = self;
-        _homeTableView.dataSource = self;
-        _homeTableView.showsVerticalScrollIndicator = NO;
-        _homeTableView.separatorStyle = UITableViewCellSeparatorStyleNone;
+-(UICollectionView *)myCollectionView{
+    if (!_myCollectionView) {
+        UICollectionViewFlowLayout *layout = [[UICollectionViewFlowLayout alloc] init];
+        layout.minimumInteritemSpacing = 1;
+        _myCollectionView = [[UICollectionView alloc] initWithFrame:CGRectMake(0, 64, SCREEN_WIDTH, SCREEN_HEIGHT-64) collectionViewLayout:layout];
+        _myCollectionView.backgroundColor = [UIColor whiteColor];
+        _myCollectionView.delegate = self;
+        _myCollectionView.dataSource = self;
+        [_myCollectionView registerClass:[AllSceneCollectionViewCell class] forCellWithReuseIdentifier:cellId];
     }
-    return _homeTableView;
+    return _myCollectionView;
 }
 
-#pragma mark - tableView Delegate & dataSource
-- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+-(NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section{
     return self.sceneListMarr.count;
 }
 
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    static NSString * homeTableViewCellID = @"hqzomeTableViewCellID";
-    SceneListTableViewCell * cell = [tableView dequeueReusableCellWithIdentifier:homeTableViewCellID];
-    if (!cell) {
-        cell = [[SceneListTableViewCell alloc] initWithStyle:(UITableViewCellStyleDefault) reuseIdentifier:homeTableViewCellID];
-    }
+-(UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath{
+    AllSceneCollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:cellId forIndexPath:indexPath];
     if (self.sceneListMarr.count) {
-        [cell setHomeSceneListData:self.sceneListMarr[indexPath.row]];
+        [cell setAllFiuSceneListData:self.sceneListMarr[indexPath.row]];
     }
     return cell;
 }
 
-- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-    return SCREEN_HEIGHT + 5;
+-(CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath{
+    return CGSizeMake((SCREEN_WIDTH-15)/2, 320/667.0*SCREEN_HEIGHT);
 }
 
-#pragma mark - 跳转到场景的详情
-- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+-(void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath{
     SceneInfoViewController * sceneInfoVC = [[SceneInfoViewController alloc] init];
     sceneInfoVC.sceneId = self.sceneIdMarr[indexPath.row];
     [self.navigationController pushViewController:sceneInfoVC animated:YES];
 }
 
+-(UIEdgeInsets)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout insetForSectionAtIndex:(NSInteger)section{
+    return UIEdgeInsetsMake(0, 5, 0, 5);
+}
+
+-(CGFloat)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout minimumLineSpacingForSectionAtIndex:(NSInteger)section{
+    return 2.5;
+}
 
 #pragma mark - 设置Nav
 - (void)setNavigationViewUI {
     self.view.backgroundColor = [UIColor whiteColor];
     self.delegate = self;
-    self.navViewTitle.text = @"赞过的场景";
+    self.navViewTitle.text = @"赞过的情景";
 }
 
 

@@ -445,7 +445,7 @@ static NSString *const IconURL = @"/my/add_head_pic";
         }else if(section == 1){
             return UIEdgeInsetsMake(3, 5, 0, 5);
         }else if (section == 2){
-            return UIEdgeInsetsMake(3, 0, 10, 0);
+            return UIEdgeInsetsMake(3, 5, 0, 5);
         }
     }
     return UIEdgeInsetsMake(0, 0, 0, 0);
@@ -535,8 +535,8 @@ static NSString *const IconURL = @"/my/add_head_pic";
                 return cell;
             }else{
                 //不是空的
-                ScenceListCollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"ScenceListCollectionViewCell" forIndexPath:indexPath];
-                [cell setHomeSceneListData:_sceneListMarr[indexPath.row]];
+                AllSceneCollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"AllSceneCollectionViewCell" forIndexPath:indexPath];
+                [cell setAllFiuSceneListData:_sceneListMarr[indexPath.row]];
                 return cell;
             }
         }else if([self.type isEqualToNumber:@1]){
@@ -773,7 +773,7 @@ static NSString *const IconURL = @"/my/add_head_pic";
 }
 
 -(CGFloat)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout minimumLineSpacingForSectionAtIndex:(NSInteger)section{
-    return 1;
+    return 2.5;
 }
 
 -(CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath{
@@ -790,7 +790,7 @@ static NSString *const IconURL = @"/my/add_head_pic";
             if (_sceneListMarr.count == 0) {
                 return CGSizeMake((SCREEN_WIDTH-15)/2, 320/667.0*SCREEN_HEIGHT);
             }else{
-                return CGSizeMake(SCREEN_WIDTH, SCREEN_HEIGHT+5);
+                return CGSizeMake((SCREEN_WIDTH-15)/2, 320/667.0*SCREEN_HEIGHT);
             }
         }else if ([self.type isEqualToNumber:@1]){
             return CGSizeMake((SCREEN_WIDTH-15)/2, 320/667.0*SCREEN_HEIGHT);
