@@ -30,8 +30,8 @@
                                 <action selector="shareBtn:" destination="-1" eventType="touchUpInside" id="5ce-bR-HGD"/>
                             </connections>
                         </button>
-                        <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3fV-xL-wAy">
-                            <rect key="frame" x="50" y="13" width="25" height="18"/>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3fV-xL-wAy">
+                            <rect key="frame" x="50" y="13" width="27" height="19"/>
                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
                             <inset key="contentEdgeInsets" minX="5" minY="0.0" maxX="0.0" maxY="0.0"/>
                             <state key="normal" image="icon_like-1">
@@ -49,8 +49,8 @@
                                 <action selector="clickCommentsBtn:" destination="-1" eventType="touchUpInside" id="eR1-bk-HdT"/>
                             </connections>
                         </button>
-                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="0" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="OXg-Js-0Ou">
-                            <rect key="frame" x="85" y="13" width="10" height="18"/>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="OXg-Js-0Ou">
+                            <rect key="frame" x="87" y="13" width="10" height="18"/>
                             <fontDescription key="fontDescription" type="system" pointSize="15"/>
                             <color key="textColor" red="0.31372549020000001" green="0.31372549020000001" blue="0.31372549020000001" alpha="1" colorSpace="calibratedRGB"/>
                             <nil key="highlightedColor"/>
