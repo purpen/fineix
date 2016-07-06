@@ -49,10 +49,10 @@ static double const kLMSpringboardItemViewSmallThreshold = 0.75;
             [_visualEffectView addSubview:vev];
             [self insertSubview:_visualEffectView atIndex:0];
             
-            _visualEffectMaskView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"Icon.png"]];
-            _visualEffectMaskView.contentMode = UIViewContentModeScaleAspectFit;
-            _visualEffectMaskView.autoresizingMask = vev.autoresizingMask;
-            _visualEffectView.maskView = _visualEffectMaskView;
+//            _visualEffectMaskView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"Icon.png"]];
+//            _visualEffectMaskView.contentMode = UIViewContentModeScaleAspectFit;
+//            _visualEffectMaskView.autoresizingMask = vev.autoresizingMask;
+//            _visualEffectView.maskView = _visualEffectMaskView;
         }
         else
         {
@@ -102,7 +102,7 @@ static double const kLMSpringboardItemViewSmallThreshold = 0.75;
     CGSize size = self.bounds.size;
     
     _icon.center = CGPointMake(size.width*0.5, size.height*0.5);
-    _icon.bounds = CGRectMake(0, 0, size.width, size.height);
+    _icon.bounds = CGRectMake(0, 0, size.width*0.9, size.height*0.9);
     [_icon zy_cornerRadiusRoundingRect];
     
     _visualEffectView.center = _icon.center;

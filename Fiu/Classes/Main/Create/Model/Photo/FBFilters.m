@@ -24,7 +24,8 @@
         
         //  创建滤镜
         CIFilter * filter = [CIFilter filterWithName:name
-                                       keysAndValues:kCIInputImageKey, ciImg, nil];
+                                       keysAndValues:kCIInputImageKey,ciImg ,nil];
+          
         [filter setDefaults];
         
         //  绘制内容
