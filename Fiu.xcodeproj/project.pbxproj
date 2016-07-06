@@ -501,6 +501,7 @@
 		D8A9AD091CD9CCA900A9FCFB /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D8A9AD081CD9CCA900A9FCFB /* Assets.xcassets */; };
 		D8A9ADC91CD9E34600A9FCFB /* FBFootView.m in Sources */ = {isa = PBXBuildFile; fileRef = D8A9ADC81CD9E34600A9FCFB /* FBFootView.m */; };
 		D8A9AE401CE304FF00A9FCFB /* NSTimer+Addition.m in Sources */ = {isa = PBXBuildFile; fileRef = D8A9AE3F1CE304FF00A9FCFB /* NSTimer+Addition.m */; };
+		D8AC3DF31D2CEAF400148522 /* FiuPeopleListTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D8AC3DF21D2CEAF400148522 /* FiuPeopleListTableViewCell.m */; };
 		D8AEC7511CA8E3A000A868B6 /* libsqlite3.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 1F0EE6A41C9FA47B000631F0 /* libsqlite3.tbd */; };
 		D8AEC7521CA8E3AE00A868B6 /* libiconv.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 1F0EE6A21C9FA43C000631F0 /* libiconv.tbd */; };
 		D8AEC7531CA8E3BB00A868B6 /* libstdc++.6.0.9.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 280045201C805CD7005F5C2E /* libstdc++.6.0.9.tbd */; };
@@ -1417,6 +1418,8 @@
 		D8A9ADC81CD9E34600A9FCFB /* FBFootView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FBFootView.m; sourceTree = "<group>"; };
 		D8A9AE3E1CE304FF00A9FCFB /* NSTimer+Addition.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSTimer+Addition.h"; sourceTree = "<group>"; };
 		D8A9AE3F1CE304FF00A9FCFB /* NSTimer+Addition.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSTimer+Addition.m"; sourceTree = "<group>"; };
+		D8AC3DF11D2CEAF400148522 /* FiuPeopleListTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FiuPeopleListTableViewCell.h; sourceTree = "<group>"; };
+		D8AC3DF21D2CEAF400148522 /* FiuPeopleListTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FiuPeopleListTableViewCell.m; sourceTree = "<group>"; };
 		D8B795221CF48ADD0075D985 /* ShareStyleTopView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShareStyleTopView.h; sourceTree = "<group>"; };
 		D8B795231CF48ADD0075D985 /* ShareStyleTopView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ShareStyleTopView.m; sourceTree = "<group>"; };
 		D8B795251CF48AFB0075D985 /* ShareStyleBottomView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShareStyleBottomView.h; sourceTree = "<group>"; };
@@ -1965,6 +1968,7 @@
 		1F2A8C891CF40276005116C7 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				D8AC3DF01D2CEAE200148522 /* FiuPeopleList */,
 				D8C690B81D13DFC70026EAB5 /* LMSpringboardView */,
 				D8C690B51D11AA490026EAB5 /* FiuHeader */,
 				1F2A8C8A1CF40276005116C7 /* AllScene */,
@@ -3910,6 +3914,15 @@
 			path = RollSceneInfo;
 			sourceTree = "<group>";
 		};
+		D8AC3DF01D2CEAE200148522 /* FiuPeopleList */ = {
+			isa = PBXGroup;
+			children = (
+				D8AC3DF11D2CEAF400148522 /* FiuPeopleListTableViewCell.h */,
+				D8AC3DF21D2CEAF400148522 /* FiuPeopleListTableViewCell.m */,
+			);
+			path = FiuPeopleList;
+			sourceTree = "<group>";
+		};
 		D8C690B11D1125C80026EAB5 /* Edit */ = {
 			isa = PBXGroup;
 			children = (
@@ -4435,6 +4448,7 @@
 				1F2A8F941CF40277005116C7 /* LikeOrSuPeopleData.m in Sources */,
 				1F2A8FA11CF40277005116C7 /* ContentAndTagTableViewCell.m in Sources */,
 				1F2A8F431CF40277005116C7 /* FBFilters.m in Sources */,
+				D8AC3DF31D2CEAF400148522 /* FiuPeopleListTableViewCell.m in Sources */,
 				1F2A908F1CF40277005116C7 /* FBSheetViewController.m in Sources */,
 				1F2A8F861CF40277005116C7 /* SuFiuScenrView.m in Sources */,
 				1F2A909A1CF40277005116C7 /* WriteCommentView.m in Sources */,

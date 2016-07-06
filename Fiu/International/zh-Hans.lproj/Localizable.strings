@@ -45,8 +45,8 @@
 "CityVcTitle" = "选择城市";
 "ReportVcTitle" = "举报";
 "SureOrderVc" = "确认订单";
-"FiuPeopleListVC" = "最Fiu用户";
-"FiuBrandListVC" = "最Fiu品牌";
+"FiuPeopleListVC" = "用户排行";
+"FiuBrandListVC" = "品牌";
 
 //  提示信息
 "netError" = "网络连接错误";

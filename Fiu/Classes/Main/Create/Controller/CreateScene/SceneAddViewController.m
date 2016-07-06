@@ -294,10 +294,7 @@ static NSString *const URLUserAddGoods = @"/scene_product/add";
         if (self.goodsIdData.count > 3) {
             [SVProgressHUD showInfoWithStatus:@"最多添加三个商品的链接"];
             
-        } else if (self.goodsIdData.count == 0) {
-            [SVProgressHUD showInfoWithStatus:@"至少添加一个商品的链接"];
-            
-        } else if (self.goodsIdData.count > 0 && self.goodsIdData.count <= 3) {
+        } else if (self.goodsIdData.count <= 3) {
             NSMutableArray * originX = [NSMutableArray array];
             NSMutableArray * originY = [NSMutableArray array];
             for (UserGoodsTag * btn in self.tagBtnMarr) {

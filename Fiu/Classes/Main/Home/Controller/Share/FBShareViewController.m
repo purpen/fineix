@@ -53,7 +53,7 @@ static NSString *const URLGiveExp = @"/user/send_exp";
     [self.giveExpRequest  startRequestSuccess:^(FBRequest *request, id result) {
         NSLog(@"＝＝＝＝＝＝＝＝  分享场景成功：%@", result);
     } failure:^(FBRequest *request, NSError *error) {
-        NSLog(@"%@",error);
+        NSLog(@"－－－－送积分错误%@",error);
     }];
 }
 
@@ -86,28 +86,29 @@ static NSString *const URLGiveExp = @"/user/send_exp";
         _shareView = [[UIView alloc] initWithFrame:CGRectMake(0, 44, SCREEN_WIDTH, SCREEN_HEIGHT)];
         [_shareView addSubview:self.shareTopView];
         
-        UITapGestureRecognizer * tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(editShareInfo)];
-        [_shareView addGestureRecognizer:tap];
+//        UITapGestureRecognizer * tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(editShareInfo)];
+//        [_shareView addGestureRecognizer:tap];
     }
     return _shareView;
 }
 
-- (void)editShareInfo {
-    FBEditShareInfoViewController * editShareInfoVC = [[FBEditShareInfoViewController alloc] init];
-    editShareInfoVC.bgImg = _editBgImg;
-    editShareInfoVC.afterTitle = _editTitle;
-    editShareInfoVC.afterDes = _editDes;
-    editShareInfoVC.sceneTags = _tags;
-    [self presentViewController:editShareInfoVC animated:YES completion:nil];
-    
-    editShareInfoVC.getEdtiShareText = ^ (NSString * title, NSString * des, NSString * oid) {
-        [self.shareTopView changeWithSearchText:title withDes:des];
-        [self.shareBottomView changeWithSearchText:title withDes:des];
-        [self.shareTitleBottomView changeWithSearchText:title withDes:des];
-        [self.shareTitleTopView changeWithSearchText:title withDes:des];
-        _oid = oid;
-    };
-}
+//#pragma mark - 打开编辑场景语境的视图
+//- (void)editShareInfo {
+//    FBEditShareInfoViewController * editShareInfoVC = [[FBEditShareInfoViewController alloc] init];
+//    editShareInfoVC.bgImg = _editBgImg;
+//    editShareInfoVC.afterTitle = _editTitle;
+//    editShareInfoVC.afterDes = _editDes;
+//    editShareInfoVC.sceneTags = _tags;
+//    [self presentViewController:editShareInfoVC animated:YES completion:nil];
+//    
+//    editShareInfoVC.getEdtiShareText = ^ (NSString * title, NSString * des, NSString * oid) {
+//        [self.shareTopView changeWithSearchText:title withDes:des];
+//        [self.shareBottomView changeWithSearchText:title withDes:des];
+//        [self.shareTitleBottomView changeWithSearchText:title withDes:des];
+//        [self.shareTitleTopView changeWithSearchText:title withDes:des];
+//        _oid = oid;
+//    };
+//}
 
 - (ShareStyleTopView *)shareTopView {
     if (!_shareTopView) {

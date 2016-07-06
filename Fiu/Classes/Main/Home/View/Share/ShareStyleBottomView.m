@@ -159,7 +159,7 @@
         
         [_userView addSubview:self.userAbout];
         [_userAbout mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.size.mas_equalTo(CGSizeMake(60, 15));
+            make.size.mas_equalTo(CGSizeMake(300, 15));
             make.bottom.equalTo(_userHeader.mas_bottom).with.offset(0);
             make.left.equalTo(_userStar.mas_right).with.offset(5);
         }];
