@@ -37,6 +37,7 @@ static NSString *const ShareURL = @"http://m.taihuoniao.com/guide/app_about";
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    [self requestUrl];
 }
 
 -(void)viewWillAppear:(BOOL)animated{
@@ -44,6 +45,27 @@ static NSString *const ShareURL = @"http://m.taihuoniao.com/guide/app_about";
     [self requestGetDataFromeNet];
     UIApplication *app = [UIApplication sharedApplication];
     [app setStatusBarHidden:NO];
+}
+
+/**
+ *  获取网页连接
+ */
+-(void)requestUrl{
+    FBRequest *request = [FBAPI postWithUrlString:@"/scene_subject/view" requestDictionary:@{
+                                                                                             @"id":self.projectId
+                                                                                             } delegate:self];
+    [request startRequestSuccess:^(FBRequest *request, id result) {
+        NSDictionary *dataDict = [result objectForKey:@"data"];
+        self.model = [ProjectModel projectWithDict:dataDict];
+        //地址
+        NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"%@",self.model.content_view_url]];
+        //在网页上加载
+        NSURLRequest *webRequest = [NSURLRequest requestWithURL:url];
+        [self.projectWebView loadRequest:webRequest];
+        self.projectWebView.delegate = self;
+    } failure:^(FBRequest *request, NSError *error) {
+        
+    }];
 }
 
 /**
@@ -64,13 +86,7 @@ static NSString *const ShareURL = @"http://m.taihuoniao.com/guide/app_about";
         }
         self.loveContLabel.text = [NSString stringWithFormat:@"%@",self.model.love_count];
         self.commentCountLabel.text = [NSString stringWithFormat:@"%@",self.model.comment_count];
-        //地址
-        NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"%@",self.model.content_view_url]];
-        //在网页上加载
-        NSURLRequest *webRequest = [NSURLRequest requestWithURL:url];
-        [self.projectWebView loadRequest:webRequest];
-        self.projectWebView.delegate = self;
-    } failure:^(FBRequest *request, NSError *error) {
+        } failure:^(FBRequest *request, NSError *error) {
         
     }];
 }

@@ -57,10 +57,23 @@
             make.top.mas_equalTo(self.btn3.mas_bottom).with.offset(8/667.*SCREEN_HEIGHT);
         }];
         
+        [self.contentView addSubview:self.btn5];
+        [_btn5 mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.size.mas_equalTo(CGSizeMake(50/667.0*SCREEN_HEIGHT, 50/667.0*SCREEN_HEIGHT));
+            make.left.mas_equalTo(self.btn3.mas_right).with.offset(25/667.0*SCREEN_HEIGHT);
+            make.top.mas_equalTo(self.mas_top).with.offset(15/667.0*SCREEN_HEIGHT);
+        }];
+        [self.contentView addSubview:self.label5];
+        [_label5 mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.size.mas_equalTo(CGSizeMake(60, 15));
+            make.centerX.mas_equalTo(self.btn5.mas_centerX);
+            make.top.mas_equalTo(self.btn5.mas_bottom).with.offset(8/667.*SCREEN_HEIGHT);
+        }];
+        
         [self.contentView addSubview:self.btn4];
         [_btn4 mas_makeConstraints:^(MASConstraintMaker *make) {
             make.size.mas_equalTo(CGSizeMake(50/667.0*SCREEN_HEIGHT, 50/667.0*SCREEN_HEIGHT));
-            make.left.mas_equalTo(self.btn3.mas_right).with.offset(25/667.0*SCREEN_HEIGHT);
+            make.left.mas_equalTo(self.btn5.mas_right).with.offset(25/667.0*SCREEN_HEIGHT);
             make.top.mas_equalTo(self.mas_top).with.offset(15/667.0*SCREEN_HEIGHT);
         }];
         [self.contentView addSubview:self.label4];
@@ -70,18 +83,6 @@
             make.top.mas_equalTo(self.btn4.mas_bottom).with.offset(8/667.*SCREEN_HEIGHT);
         }];
         
-        [self.contentView addSubview:self.btn5];
-        [_btn5 mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.size.mas_equalTo(CGSizeMake(50/667.0*SCREEN_HEIGHT, 50/667.0*SCREEN_HEIGHT));
-            make.left.mas_equalTo(self.btn4.mas_right).with.offset(25/667.0*SCREEN_HEIGHT);
-            make.top.mas_equalTo(self.mas_top).with.offset(15/667.0*SCREEN_HEIGHT);
-        }];
-        [self.contentView addSubview:self.label5];
-        [_label5 mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.size.mas_equalTo(CGSizeMake(60, 15));
-            make.centerX.mas_equalTo(self.btn5.mas_centerX);
-            make.top.mas_equalTo(self.btn5.mas_bottom).with.offset(8/667.*SCREEN_HEIGHT);
-        }];
         
         [self.contentView addSubview:self.btn6];
         [_btn6 mas_makeConstraints:^(MASConstraintMaker *make) {
