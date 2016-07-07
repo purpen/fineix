@@ -353,7 +353,7 @@ static NSString *const URLFiuBrand = @"/scene_brands/getlist";
 #pragma mark - 上滑出现的商品分类菜单
 - (CategoryMenuView *)categoryMenu {
     if (!_categoryMenu) {
-        _categoryMenu = [[CategoryMenuView alloc] initWithFrame:CGRectMake(SCREEN_WIDTH, 0, SCREEN_WIDTH, 85)];
+        _categoryMenu = [[CategoryMenuView alloc] initWithFrame:CGRectMake(0, -85, SCREEN_WIDTH, 75)];
         _categoryMenu.nav = self.navigationController;
     }
     return _categoryMenu;
@@ -403,7 +403,7 @@ static NSString *const URLFiuBrand = @"/scene_brands/getlist";
             
         } else if (_rollDown == NO) {
             if (scrollView.contentOffset.y < SCREEN_HEIGHT) {
-                categoryMenu = CGRectMake(SCREEN_WIDTH, 0, SCREEN_WIDTH, 80);
+                categoryMenu = CGRectMake(0, -85, SCREEN_WIDTH, 80);
                 [UIView animateWithDuration:0.3 animations:^{
                     self.categoryMenu.frame = categoryMenu;
                 }];

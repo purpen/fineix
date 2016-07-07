@@ -7,6 +7,7 @@
 //
 
 #import "FBViewController.h"
+#import <SVProgressHUD/SVProgressHUD.h>
 
 @interface FiuPeopleListViewController : FBViewController <FBNavigationBarItemsDelegate, UITableViewDataSource, UITableViewDelegate>
 

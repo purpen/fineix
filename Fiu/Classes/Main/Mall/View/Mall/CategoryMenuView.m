@@ -17,7 +17,6 @@
     if (self) {
         
         [self addSubview:self.categoryMenu];
-        
     }
     return self;
 }
@@ -33,12 +32,13 @@
 - (UICollectionView *)categoryMenu {
     if (!_categoryMenu) {
         UICollectionViewFlowLayout * flowLayout = [[UICollectionViewFlowLayout alloc] init];
-        flowLayout.itemSize = CGSizeMake(50, 85);
+        flowLayout.itemSize = CGSizeMake(50, 75);
         flowLayout.sectionInset = UIEdgeInsetsMake(10, 10, 10, 10);
         flowLayout.minimumInteritemSpacing = 5.0;
+        flowLayout.minimumLineSpacing = 20.0f;
         [flowLayout setScrollDirection:(UICollectionViewScrollDirectionHorizontal)];
         
-        _categoryMenu = [[UICollectionView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 85) collectionViewLayout:flowLayout];
+        _categoryMenu = [[UICollectionView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 75) collectionViewLayout:flowLayout];
         _categoryMenu.delegate = self;
         _categoryMenu.dataSource = self;
         _categoryMenu.backgroundColor = [UIColor whiteColor];

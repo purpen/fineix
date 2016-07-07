@@ -23,22 +23,21 @@
 }
 
 - (void)setCategoryData:(CategoryRow *)model {
-    [self.categoryImg downloadImage:model.appCoverUrl place:[UIImage imageNamed:@""]];
+    [self.categoryImg downloadImage:model.backUrl place:[UIImage imageNamed:@""]];
     self.categoryLab.text = model.title;
 }
 
 - (UIImageView *)categoryImg {
     if (!_categoryImg) {
-        _categoryImg = [[UIImageView alloc] initWithFrame:CGRectMake(0, 10, 50, 50)];
-        _categoryImg.layer.cornerRadius = 25;
-        _categoryImg.layer.masksToBounds = YES;
+        _categoryImg = [[UIImageView alloc] initWithFrame:CGRectMake(5, 10, 40, 40)];
+        _categoryImg.contentMode = UIViewContentModeScaleAspectFit;
     }
     return _categoryImg;
 }
 
 - (UILabel *)categoryLab {
     if (!_categoryLab) {
-        _categoryLab = [[UILabel alloc] initWithFrame:CGRectMake(0, 65, 50, 12)];
+        _categoryLab = [[UILabel alloc] initWithFrame:CGRectMake(0, 55, 50, 12)];
         _categoryLab.textAlignment = NSTextAlignmentCenter;
         _categoryLab.font = [UIFont systemFontOfSize:12];
     }

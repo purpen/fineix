@@ -514,6 +514,7 @@
 		D8B3555F1D2E002E000BA26D /* CategoryMenuCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D8B3555E1D2E002E000BA26D /* CategoryMenuCollectionViewCell.m */; };
 		D8B355621D2E2DF5000BA26D /* DownSceneInfoView.m in Sources */ = {isa = PBXBuildFile; fileRef = D8B355611D2E2DF5000BA26D /* DownSceneInfoView.m */; };
 		D8B355651D2E3567000BA26D /* AllSceneSearchViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D8B355641D2E3567000BA26D /* AllSceneSearchViewController.m */; };
+		D8B355681D2E50C1000BA26D /* FiuPeopleListRow.m in Sources */ = {isa = PBXBuildFile; fileRef = D8B355671D2E50C1000BA26D /* FiuPeopleListRow.m */; };
 		D8B795241CF48ADD0075D985 /* ShareStyleTopView.m in Sources */ = {isa = PBXBuildFile; fileRef = D8B795231CF48ADD0075D985 /* ShareStyleTopView.m */; };
 		D8B795271CF48AFB0075D985 /* ShareStyleBottomView.m in Sources */ = {isa = PBXBuildFile; fileRef = D8B795261CF48AFB0075D985 /* ShareStyleBottomView.m */; };
 		D8B7952A1CF48B1D0075D985 /* ShareStyleTitleTopView.m in Sources */ = {isa = PBXBuildFile; fileRef = D8B795291CF48B1D0075D985 /* ShareStyleTitleTopView.m */; };
@@ -1438,6 +1439,8 @@
 		D8B355611D2E2DF5000BA26D /* DownSceneInfoView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DownSceneInfoView.m; sourceTree = "<group>"; };
 		D8B355631D2E3567000BA26D /* AllSceneSearchViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AllSceneSearchViewController.h; sourceTree = "<group>"; };
 		D8B355641D2E3567000BA26D /* AllSceneSearchViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AllSceneSearchViewController.m; sourceTree = "<group>"; };
+		D8B355661D2E50C1000BA26D /* FiuPeopleListRow.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FiuPeopleListRow.h; sourceTree = "<group>"; };
+		D8B355671D2E50C1000BA26D /* FiuPeopleListRow.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FiuPeopleListRow.m; sourceTree = "<group>"; };
 		D8B795221CF48ADD0075D985 /* ShareStyleTopView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShareStyleTopView.h; sourceTree = "<group>"; };
 		D8B795231CF48ADD0075D985 /* ShareStyleTopView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ShareStyleTopView.m; sourceTree = "<group>"; };
 		D8B795251CF48AFB0075D985 /* ShareStyleBottomView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShareStyleBottomView.h; sourceTree = "<group>"; };
@@ -1938,6 +1941,8 @@
 				1F2A8C651CF40276005116C7 /* FiuPeopleIdentify.m */,
 				1F2A8C661CF40276005116C7 /* FiuPeopleUser.h */,
 				1F2A8C671CF40276005116C7 /* FiuPeopleUser.m */,
+				D8B355661D2E50C1000BA26D /* FiuPeopleListRow.h */,
+				D8B355671D2E50C1000BA26D /* FiuPeopleListRow.m */,
 			);
 			path = FiuPeople;
 			sourceTree = "<group>";
@@ -4496,6 +4501,7 @@
 				D8B355651D2E3567000BA26D /* AllSceneSearchViewController.m in Sources */,
 				1F2A8FA41CF40277005116C7 /* UserInfoTableViewCell.m in Sources */,
 				D8B3555F1D2E002E000BA26D /* CategoryMenuCollectionViewCell.m in Sources */,
+				D8B355681D2E50C1000BA26D /* FiuPeopleListRow.m in Sources */,
 				1F2A8F8D1CF40277005116C7 /* HomeSceneListData.m in Sources */,
 				D87B69E11CC7274900199EFE /* FBMenuView.m in Sources */,
 				1F2A8F801CF40277005116C7 /* FiuPeopleTableViewCell.m in Sources */,
