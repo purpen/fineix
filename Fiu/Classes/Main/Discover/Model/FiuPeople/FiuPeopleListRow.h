@@ -18,7 +18,7 @@
 @property (nonatomic, strong) NSString * expertLabel;
 @property (nonatomic, strong) NSString * expertInfo;
 @property (nonatomic, assign) NSInteger isExpert;
-@property (nonatomic, assign) NSInteger  userRank;
+@property (nonatomic, assign) NSInteger userRank;
 
 -(instancetype)initWithDictionary:(NSDictionary *)dictionary;
 

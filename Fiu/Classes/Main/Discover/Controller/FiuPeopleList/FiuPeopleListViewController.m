@@ -9,6 +9,7 @@
 #import "FiuPeopleListViewController.h"
 #import "FiuPeopleListTableViewCell.h"
 #import "FiuPeopleListRow.h"
+#import "HomePageViewController.h"
 
 static NSString *const FiuPeople = @"/user/activity_user";
 
@@ -21,12 +22,18 @@ static NSString *const FiuPeople = @"/user/activity_user";
 
 @implementation FiuPeopleListViewController
 
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    
+    [self setNavigationViewUI];
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    [self setNavigationViewUI];
-//    [self.view addSubview:self.userListTable];
-//    [self networkFiuPeople];
+    [self networkFiuPeople];
+    [self.view addSubview:self.userListTable];
+    
 }
 
 #pragma mark - 网络请求
@@ -63,13 +70,13 @@ static NSString *const FiuPeople = @"/user/activity_user";
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    static NSString * fiuPeopleListCellId = @"fiuPeopleListCellId";
-    FiuPeopleListTableViewCell * cell = [tableView dequeueReusableCellWithIdentifier:fiuPeopleListCellId];
+    static NSString * peopleListCellId = @"peopleListCellId";
+    FiuPeopleListTableViewCell * cell = [tableView dequeueReusableCellWithIdentifier:peopleListCellId];
     if (!cell) {
-        cell = [[FiuPeopleListTableViewCell alloc] initWithStyle:(UITableViewCellStyleDefault) reuseIdentifier:fiuPeopleListCellId];
+        cell = [[FiuPeopleListTableViewCell alloc] initWithStyle:(UITableViewCellStyleDefault) reuseIdentifier:peopleListCellId];
     }
     if (self.peopleList.count) {
-        [cell setFiuPeopleListData:indexPath.row+1];
+        [cell setFiuPeopleListData:indexPath.row+1 withData:self.peopleList[indexPath.row]];
     }
     return cell;
 }
@@ -79,7 +86,16 @@ static NSString *const FiuPeople = @"/user/activity_user";
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    NSLog(@"－－－－－－－－－－－－－－－－－－－－ %@", self.fiuPeopleIdMarr[indexPath.row]);
+    HomePageViewController * peopleHomeVC = [[HomePageViewController alloc] init];
+    peopleHomeVC.userId = self.fiuPeopleIdMarr[indexPath.row];
+    UserInfoEntity *entity = [UserInfoEntity defaultUserInfoEntity];
+    if ([entity.userId intValue] == [self.fiuPeopleIdMarr[indexPath.row] intValue]) {
+        peopleHomeVC.isMySelf = YES;
+    }else{
+        peopleHomeVC.isMySelf = NO;
+    }
+    peopleHomeVC.type = @2;
+    [self.navigationController pushViewController:peopleHomeVC animated:YES];
 }
 
 #pragma mark - 设置Nav

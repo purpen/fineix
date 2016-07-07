@@ -14,17 +14,19 @@
 - (instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier {
     self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
     if (self) {
+        self.selectionStyle = UITableViewCellSelectionStyleNone;
         [self setCellUI];
     }
     return self;
 }
 
-- (void)setFiuPeopleListData:(NSInteger)num {
-//    self.userName.text = model.nickname;
-//    [self.userHeader downloadImage:model.avatarUrl place:[UIImage imageNamed:@""]];
-//    
-//    if (model.isExpert == 1) {
-//        self.userVimg.hidden = NO;
+- (void)setFiuPeopleListData:(NSInteger)num withData:(FiuPeopleListRow *)model {
+    self.userName.text = model.nickname;
+    [self.userHeader downloadImage:model.avatarUrl place:[UIImage imageNamed:@""]];
+    self.userLevel.text = [NSString stringWithFormat:@"LV%zi",model.userRank];
+    NSLog(@"＝＝＝＝＝＝＝ %zi", model.isExpert);
+    if (model.isExpert == 1) {
+        self.userVimg.hidden = NO;
 //        self.userStar.text = model.expertLabel;
 //        self.userProfile.text = [NSString stringWithFormat:@"|  %@", model.expertInfo];
 //        CGSize size = [self.userStar boundingRectWithSize:CGSizeMake(100, 0)];
@@ -35,9 +37,9 @@
 //        [self.userProfile mas_updateConstraints:^(MASConstraintMaker *make) {
 //            make.left.equalTo(self.userStar.mas_right).with.offset(5);
 //        }];
-//        
-//    } else {
-//        self.userVimg.hidden = YES;
+        
+    } else {
+        self.userVimg.hidden = YES;
 //        self.userStar.text = @"";
 //        self.userProfile.text = model.summary;
 //        [self.userStar mas_updateConstraints:^(MASConstraintMaker *make) {
@@ -46,7 +48,7 @@
 //        [self.userProfile mas_updateConstraints:^(MASConstraintMaker *make) {
 //            make.left.equalTo(self.userStar.mas_right).with.offset(0);
 //        }];
-//    }
+    }
 
     //  显示奖牌图像
     self.numLab.text = [NSString stringWithFormat:@"%zi", num];
@@ -99,27 +101,27 @@
         make.top.equalTo(_userHeader.mas_top).with.offset(5);
         make.left.equalTo(_userHeader.mas_right).with.offset(10);
     }];
-    
-    [self addSubview:self.userLv];
-    [_userLv mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.size.mas_equalTo(CGSizeMake(20,14));
-        make.bottom.equalTo(_userHeader.mas_bottom).with.offset(-5);
-        make.left.equalTo(_userStar.mas_right).with.offset(0);
+
+    [self addSubview:self.userLevel];
+    [_userLevel mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.size.mas_equalTo(CGSizeMake(30,14));
+        make.top.equalTo(_userName.mas_bottom).with.offset(5);
+        make.left.equalTo(_userName.mas_left).with.offset(0);
     }];
 
-    [self addSubview:self.userStar];
-    [_userStar mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.size.mas_equalTo(CGSizeMake(0, 14));
-        make.bottom.equalTo(_userHeader.mas_bottom).with.offset(0);
-        make.left.equalTo(_userLv.mas_right).with.offset(10);
-    }];
-    
-    [self addSubview:self.userProfile];
-    [_userProfile mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.size.mas_equalTo(CGSizeMake(220, 14));
-        make.bottom.equalTo(_userHeader.mas_bottom).with.offset(-5);
-        make.left.equalTo(_userLv.mas_right).with.offset(0);
-    }];
+//    [self addSubview:self.userStar];
+//    [_userStar mas_makeConstraints:^(MASConstraintMaker *make) {
+//        make.size.mas_equalTo(CGSizeMake(0, 14));
+//        make.bottom.equalTo(_userHeader.mas_bottom).with.offset(0);
+//        make.left.equalTo(_userLv.mas_right).with.offset(10);
+//    }];
+//    
+//    [self addSubview:self.userProfile];
+//    [_userProfile mas_makeConstraints:^(MASConstraintMaker *make) {
+//        make.size.mas_equalTo(CGSizeMake(220, 14));
+//        make.bottom.equalTo(_userHeader.mas_bottom).with.offset(-5);
+//        make.left.equalTo(_userLv.mas_right).with.offset(0);
+//    }];
     
 }
 
@@ -143,13 +145,13 @@
 }
 
 #pragma mark - 等级
-- (UILabel *)userLv {
-    if (!_userLv) {
-        _userLv = [[UILabel alloc] init];
-        _userLv.textColor = [UIColor colorWithHexString:fineixColor];
-        _userLv.font = [UIFont systemFontOfSize:11];
+- (UILabel *)userLevel {
+    if (!_userLevel) {
+        _userLevel = [[UILabel alloc] init];
+        _userLevel.textColor = [UIColor colorWithHexString:fineixColor];
+        _userLevel.font = [UIFont systemFontOfSize:11];
     }
-    return _userLv;
+    return _userLevel;
 }
 
 #pragma mark - 用户头像
@@ -160,7 +162,6 @@
         _userHeader.layer.borderWidth = 1;
         _userHeader.layer.masksToBounds = YES;
         _userHeader.layer.cornerRadius = 20;
-        _userHeader.backgroundColor = [UIColor orangeColor];
     }
     return _userHeader;
 }

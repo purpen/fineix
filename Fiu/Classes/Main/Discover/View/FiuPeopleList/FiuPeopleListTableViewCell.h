@@ -19,8 +19,8 @@
 @pro_strong UIImageView         *   userVimg;       //  加V
 @pro_strong UILabel             *   userStar;       //  认证信息
 @pro_strong UILabel             *   userProfile;    //  用户简介
-@pro_strong UILabel             *   userLv;         //  用户等级
+@pro_strong UILabel             *   userLevel;      //  用户等级
 
-- (void)setFiuPeopleListData:(NSInteger)num;
+- (void)setFiuPeopleListData:(NSInteger)num withData:(FiuPeopleListRow *)model;
 
 @end

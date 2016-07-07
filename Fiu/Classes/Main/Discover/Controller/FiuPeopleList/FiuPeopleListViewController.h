@@ -11,8 +11,7 @@
 
 @interface FiuPeopleListViewController : FBViewController <FBNavigationBarItemsDelegate, UITableViewDataSource, UITableViewDelegate>
 
-@pro_strong FBRequest       *   fiuPeopleRequest;
-
-@pro_strong UITableView     *   userListTable;
+@pro_strong FBRequest               *   fiuPeopleRequest;
+@pro_strong UITableView             *   userListTable;
 
 @end

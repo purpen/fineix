@@ -8,6 +8,11 @@
 
 #import "FiuPeopleListRow.h"
 
+@interface FiuPeopleListRow ()
+
+@end
+
+
 @implementation FiuPeopleListRow
 
 -(instancetype)initWithDictionary:(NSDictionary *)dictionary
@@ -16,6 +21,7 @@
     if(![dictionary[@"_id"] isKindOfClass:[NSNull class]]){
         self.idField = [dictionary[@"_id"] integerValue];
     }
+    
     if(![dictionary[@"avatar_url"] isKindOfClass:[NSNull class]]){
         self.avatarUrl = dictionary[@"avatar_url"];
     }
@@ -39,12 +45,15 @@
     if(![dictionary[@"expert_label"] isKindOfClass:[NSNull class]]){
         self.expertLabel = dictionary[@"expert_label"];
     }
+    
     if(![dictionary[@"expert_info"] isKindOfClass:[NSNull class]]){
         self.expertInfo = dictionary[@"expert_info"];
     }
+    
     if(![dictionary[@"rank_id"] isKindOfClass:[NSNull class]]){
         self.userRank = [dictionary[@"rank_id"] integerValue];
-    }	
+    }
+    
     return self;
 }
 
