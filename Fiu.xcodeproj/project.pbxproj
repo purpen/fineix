@@ -246,7 +246,6 @@
 		1F2A90131CF40277005116C7 /* MyQrCodeView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F2A8DDB1CF40277005116C7 /* MyQrCodeView.m */; };
 		1F2A90141CF40277005116C7 /* MyView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1F2A8DDC1CF40277005116C7 /* MyView.xib */; };
 		1F2A90151CF40277005116C7 /* OtherCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F2A8DDE1CF40277005116C7 /* OtherCollectionViewCell.m */; };
-		1F2A90161CF40277005116C7 /* ScenceListCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F2A8DE01CF40277005116C7 /* ScenceListCollectionViewCell.m */; };
 		1F2A90171CF40277005116C7 /* TipNumberView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F2A8DE21CF40277005116C7 /* TipNumberView.m */; };
 		1F2A90181CF40277005116C7 /* BonusViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F2A8DE71CF40277005116C7 /* BonusViewController.m */; };
 		1F2A90191CF40277005116C7 /* BonusViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1F2A8DE81CF40277005116C7 /* BonusViewController.xib */; };
@@ -422,6 +421,7 @@
 		1F35F0411CD1DC640000DB95 /* AddressBookUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1F35F0401CD1DC640000DB95 /* AddressBookUI.framework */; };
 		1F35F0511CD2336E0000DB95 /* areas.plist in Resources */ = {isa = PBXBuildFile; fileRef = 1F35F0501CD2336E0000DB95 /* areas.plist */; };
 		1F3C0A771CBF461300B84FEB /* libPods-Fiu.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 1F3C0A761CBF461300B84FEB /* libPods-Fiu.a */; };
+		1F45A7041D2DF708009D7EE1 /* SceneCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F45A7031D2DF708009D7EE1 /* SceneCollectionViewCell.m */; };
 		1F4C0AFD1CF616B9006F0EED /* libSocialWechat.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 1F4C0AF71CF616B9006F0EED /* libSocialWechat.a */; };
 		1F4C0AFE1CF616B9006F0EED /* libWeChatSDK.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 1F4C0AF81CF616B9006F0EED /* libWeChatSDK.a */; };
 		1F520A9B1CF8771600B6882A /* TalentView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F520A9A1CF8771600B6882A /* TalentView.m */; };
@@ -979,8 +979,6 @@
 		1F2A8DDC1CF40277005116C7 /* MyView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MyView.xib; sourceTree = "<group>"; };
 		1F2A8DDD1CF40277005116C7 /* OtherCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OtherCollectionViewCell.h; sourceTree = "<group>"; };
 		1F2A8DDE1CF40277005116C7 /* OtherCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OtherCollectionViewCell.m; sourceTree = "<group>"; };
-		1F2A8DDF1CF40277005116C7 /* ScenceListCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ScenceListCollectionViewCell.h; sourceTree = "<group>"; };
-		1F2A8DE01CF40277005116C7 /* ScenceListCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ScenceListCollectionViewCell.m; sourceTree = "<group>"; };
 		1F2A8DE11CF40277005116C7 /* TipNumberView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TipNumberView.h; sourceTree = "<group>"; };
 		1F2A8DE21CF40277005116C7 /* TipNumberView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TipNumberView.m; sourceTree = "<group>"; };
 		1F2A8DE61CF40277005116C7 /* BonusViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BonusViewController.h; sourceTree = "<group>"; };
@@ -1285,6 +1283,8 @@
 		1F35F0401CD1DC640000DB95 /* AddressBookUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AddressBookUI.framework; path = System/Library/Frameworks/AddressBookUI.framework; sourceTree = SDKROOT; };
 		1F35F0501CD2336E0000DB95 /* areas.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = areas.plist; sourceTree = "<group>"; };
 		1F3C0A761CBF461300B84FEB /* libPods-Fiu.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = "libPods-Fiu.a"; path = "../Library/Developer/Xcode/DerivedData/Fiu-cjbswbuyriripaegqmobstwznrnk/Build/Products/Debug-iphonesimulator/libPods-Fiu.a"; sourceTree = "<group>"; };
+		1F45A7021D2DF708009D7EE1 /* SceneCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SceneCollectionViewCell.h; sourceTree = "<group>"; };
+		1F45A7031D2DF708009D7EE1 /* SceneCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SceneCollectionViewCell.m; sourceTree = "<group>"; };
 		1F4C0AF71CF616B9006F0EED /* libSocialWechat.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libSocialWechat.a; sourceTree = "<group>"; };
 		1F4C0AF81CF616B9006F0EED /* libWeChatSDK.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libWeChatSDK.a; sourceTree = "<group>"; };
 		1F4C0AF91CF616B9006F0EED /* UMSocialWechatHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UMSocialWechatHandler.h; sourceTree = "<group>"; };
@@ -2637,8 +2637,6 @@
 				1F2A8DDC1CF40277005116C7 /* MyView.xib */,
 				1F2A8DDD1CF40277005116C7 /* OtherCollectionViewCell.h */,
 				1F2A8DDE1CF40277005116C7 /* OtherCollectionViewCell.m */,
-				1F2A8DDF1CF40277005116C7 /* ScenceListCollectionViewCell.h */,
-				1F2A8DE01CF40277005116C7 /* ScenceListCollectionViewCell.m */,
 				1F2A8DE11CF40277005116C7 /* TipNumberView.h */,
 				1F2A8DE21CF40277005116C7 /* TipNumberView.m */,
 				1F520A991CF8771600B6882A /* TalentView.h */,
@@ -2647,6 +2645,8 @@
 				1FCDCC791D0515F700C92E78 /* ScenarioNonView.m */,
 				1FCDCC7B1D0525A300C92E78 /* FocusNonView.h */,
 				1FCDCC7C1D0525A300C92E78 /* FocusNonView.m */,
+				1F45A7021D2DF708009D7EE1 /* SceneCollectionViewCell.h */,
+				1F45A7031D2DF708009D7EE1 /* SceneCollectionViewCell.m */,
 			);
 			path = view;
 			sourceTree = "<group>";
@@ -4255,6 +4255,7 @@
 				1F2A8F4A1CF40277005116C7 /* FBFiltersCollectionViewCell.m in Sources */,
 				1F2A905A1CF40277005116C7 /* CommentsViewController.m in Sources */,
 				1F2A8FA91CF40277005116C7 /* FBBuyGoodsViewController.m in Sources */,
+				1F45A7041D2DF708009D7EE1 /* SceneCollectionViewCell.m in Sources */,
 				1F2A90431CF40277005116C7 /* FBLoginRegisterViewController.m in Sources */,
 				1F2A90A41CF40277005116C7 /* SearchViewController.m in Sources */,
 				1FCDCC821D066D2700C92E78 /* SexSheetViewController.m in Sources */,
@@ -4487,7 +4488,6 @@
 				D8B7952D1CF48B2C0075D985 /* ShareStyleTitleBottomView.m in Sources */,
 				D89CFE0F1D070EAB002701B8 /* GoodsTagsTableViewCell.m in Sources */,
 				1F2A90381CF40277005116C7 /* GuidePageViewController.m in Sources */,
-				1F2A90161CF40277005116C7 /* ScenceListCollectionViewCell.m in Sources */,
 				1F2A906B1CF40277005116C7 /* NearChangViewController.m in Sources */,
 				1F2A8FCC1CF40277005116C7 /* OrderItems.m in Sources */,
 				1F2A90171CF40277005116C7 /* TipNumberView.m in Sources */,

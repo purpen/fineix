@@ -12,7 +12,6 @@
 #import "MyFansViewController.h"
 #import "BackgroundCollectionViewCell.h"
 #import "OtherCollectionViewCell.h"
-#import "ScenceListCollectionViewCell.h"
 #import "AllSceneCollectionViewCell.h"
 #import "ShieldingViewController.h"
 #import "Fiu.h"
@@ -32,6 +31,7 @@
 #import "HomePageViewController.h"
 #import "UIImagePickerController+Flag.h"
 #import "ScenarioNonView.h"
+#import "SceneCollectionViewCell.h"
 
 #define UserHeadTag 1
 #define BgTag 2
@@ -58,6 +58,7 @@
 @end
 
 static NSString *const IconURL = @"/my/add_head_pic";
+static NSString *sceneCellId = @"SceneCollectionViewCell";
 
 @implementation HomePageViewController
 
@@ -402,9 +403,9 @@ static NSString *const IconURL = @"/my/add_head_pic";
         [_myCollectionView registerClass:[BackgroundCollectionViewCell class] forCellWithReuseIdentifier:@"BackgroundCollectionViewCell"];
         [_myCollectionView registerClass:[OtherCollectionViewCell class] forCellWithReuseIdentifier:@"OtherCollectionViewCell"];
         [_myCollectionView registerClass:[UICollectionViewCell class] forCellWithReuseIdentifier:@"UICollectionViewCell"];
-        [_myCollectionView registerClass:[ScenceListCollectionViewCell class] forCellWithReuseIdentifier:@"ScenceListCollectionViewCell"];
         [_myCollectionView registerClass:[AllSceneCollectionViewCell class] forCellWithReuseIdentifier:@"AllSceneCollectionViewCell"];
         [_myCollectionView registerClass:[UICollectionViewCell class] forCellWithReuseIdentifier:@"UICollectionViewCellScenarioNon"];
+        [_myCollectionView registerClass:[SceneCollectionViewCell class] forCellWithReuseIdentifier:sceneCellId];
     }
     return _myCollectionView;
 }
@@ -535,7 +536,7 @@ static NSString *const IconURL = @"/my/add_head_pic";
                 return cell;
             }else{
                 //不是空的
-                AllSceneCollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"AllSceneCollectionViewCell" forIndexPath:indexPath];
+                SceneCollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:sceneCellId forIndexPath:indexPath];
                 [cell setAllFiuSceneListData:_sceneListMarr[indexPath.row]];
                 return cell;
             }
