@@ -44,7 +44,7 @@
 
 #pragma mark 判断是否是手机号
 - (BOOL)checkTel { //^((13[0-9])|(147)|(15[^4,\\D])|(18[0,5-9]))\\d{8}$
-    NSString *regex = @"^(13[\\d]{9}|15[\\d]{9}|18[\\d]{9}|14[5,7][\\d]{8}|17[6,7,8][\\d]{8})$";
+    NSString *regex = @"^(13[\\d]{9}|15[\\d]{9}|18[\\d]{9}|14[5,7][\\d]{8}|17[\\d]{9})$";
     
     NSPredicate *pred = [NSPredicate predicateWithFormat:@"SELF MATCHES %@", regex];
     

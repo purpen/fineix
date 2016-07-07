@@ -12,7 +12,7 @@
 #import "MJRefresh.h"
 #import "SceneInfoViewController.h"
 #import "UserInfoEntity.h"
-#import "AllSceneCollectionViewCell.h"
+#import "SceneCollectionViewCell.h"
 
 @interface PraisedViewController ()<FBNavigationBarItemsDelegate,UICollectionViewDelegate,UICollectionViewDataSource>
 @pro_strong NSMutableArray      *   sceneListMarr;
@@ -24,7 +24,7 @@
 @end
 
 static NSString *const URLSceneList = @"/scene_sight/";
-static NSString *cellId = @"allScene";
+static NSString *sceneCollectionCellId = @"SceneCollectionViewCell";
 
 @implementation PraisedViewController
 
@@ -131,7 +131,7 @@ static NSString *cellId = @"allScene";
         _myCollectionView.backgroundColor = [UIColor whiteColor];
         _myCollectionView.delegate = self;
         _myCollectionView.dataSource = self;
-        [_myCollectionView registerClass:[AllSceneCollectionViewCell class] forCellWithReuseIdentifier:cellId];
+        [_myCollectionView registerClass:[SceneCollectionViewCell class] forCellWithReuseIdentifier:sceneCollectionCellId];
     }
     return _myCollectionView;
 }
@@ -141,7 +141,7 @@ static NSString *cellId = @"allScene";
 }
 
 -(UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath{
-    AllSceneCollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:cellId forIndexPath:indexPath];
+    SceneCollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:sceneCollectionCellId forIndexPath:indexPath];
     if (self.sceneListMarr.count) {
         [cell setAllFiuSceneListData:self.sceneListMarr[indexPath.row]];
     }
