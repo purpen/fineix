@@ -322,9 +322,44 @@ static NSString *const URLUserAddGoods = @"/scene_product/add";
             filtersVC.goodsId = self.goodsIdData;
             filtersVC.goodsX = originX;
             filtersVC.goodsY = originY;
-
+            
             [self.navigationController pushViewController:filtersVC animated:YES];
+
+//            pg_edit_sdk_controller *editCtl = nil;
+//            {
+//                //构建编辑对象    Construct edit target
+//                pg_edit_sdk_controller_object *obje = [[pg_edit_sdk_controller_object alloc] init];
+//                {
+//                    //输入原图  Input original
+//                    obje.pCSA_fullImage = [self.filtersImg copy];
+//                }
+//                editCtl = [[pg_edit_sdk_controller alloc] initWithEditObject:obje withDelegate:self];
+//            }
+//            if (editCtl) {
+//                [self.navigationController pushViewController:editCtl animated:YES];
+//            }
         }
+}
+
+- (void)dgPhotoEditingViewControllerDidCancel:(UIViewController *)pController withClickSaveButton:(BOOL)isClickSaveBtn
+{
+    if (isClickSaveBtn) {
+        NSLog(@"＝＝＝＝＝11");
+        [SVProgressHUD showWithStatus:@"图片编辑完成，跳转发布"];
+    } else {
+        NSLog(@"－－－－－22");
+        [self.navigationController popViewControllerAnimated:YES];
+    }
+}
+
+- (void)dgPhotoEditingViewControllerShowLoadingView:(UIView *)view
+{
+    [SVProgressHUD show];
+}
+
+- (void)dgPhotoEditingViewControllerHideLoadingView:(UIView *)view
+{
+    [SVProgressHUD dismiss];
 }
 
 #pragma mark - 合成图片

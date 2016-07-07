@@ -12,6 +12,7 @@
 #import "FiuSceneViewController.h"
 #import "FiuSceneInfoData.h"
 #import "FBRefresh.h"
+#import "AllSceneSearchViewController.h"
 
 static NSString *const URLAllFiuSceneList = @"/scene_scene/";
 
@@ -93,7 +94,32 @@ static NSString *const URLAllFiuSceneList = @"/scene_scene/";
 
 #pragma mark - 
 - (void)setAllSceneViewUI {
+    [self.view addSubview:self.beginSearchBtn];
     [self.view addSubview:self.allSceneView];
+}
+
+#pragma mark - 搜索情境按钮
+- (UIButton *)beginSearchBtn {
+    if (!_beginSearchBtn) {
+        _beginSearchBtn = [[UIButton alloc] initWithFrame:CGRectMake(15, 74, SCREEN_WIDTH - 30, 32)];
+        _beginSearchBtn.layer.borderColor = [UIColor colorWithHexString:@"#CCCCCC"].CGColor;
+        _beginSearchBtn.layer.borderWidth = 0.5f;
+        _beginSearchBtn.layer.cornerRadius = 4;
+        _beginSearchBtn.layer.masksToBounds = YES;
+        [_beginSearchBtn setTitle:NSLocalizedString(@"searchFScene", nil) forState:(UIControlStateNormal)];
+        [_beginSearchBtn setTitleColor:[UIColor colorWithHexString:titleColor] forState:(UIControlStateNormal)];
+        _beginSearchBtn.titleLabel.font = [UIFont systemFontOfSize:13];
+        [_beginSearchBtn setImage:[UIImage imageNamed:@"Search"] forState:(UIControlStateNormal)];
+        [_beginSearchBtn setImageEdgeInsets:(UIEdgeInsetsMake(0, -10, 0, 0))];
+        [_beginSearchBtn addTarget:self action:@selector(searchBtnClick) forControlEvents:(UIControlEventTouchUpInside)];
+    }
+    return _beginSearchBtn;
+}
+
+#pragma mark - 跳转搜索情境
+- (void)searchBtnClick {
+    AllSceneSearchViewController * searchFSceneVC = [[AllSceneSearchViewController alloc] init];
+    [self.navigationController pushViewController:searchFSceneVC animated:YES];
 }
 
 #pragma mark - 情景列表
@@ -105,7 +131,7 @@ static NSString *const URLAllFiuSceneList = @"/scene_scene/";
         flowLayout.minimumInteritemSpacing = 5.0;
         flowLayout.minimumLineSpacing = 5.0;
         
-        _allSceneView = [[UICollectionView alloc] initWithFrame:CGRectMake(0, 64, SCREEN_WIDTH, SCREEN_HEIGHT - 64) collectionViewLayout:flowLayout];
+        _allSceneView = [[UICollectionView alloc] initWithFrame:CGRectMake(0, 117, SCREEN_WIDTH, SCREEN_HEIGHT - 117) collectionViewLayout:flowLayout];
         _allSceneView.delegate = self;
         _allSceneView.dataSource = self;
         _allSceneView.backgroundColor = [UIColor whiteColor];

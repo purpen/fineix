@@ -11,6 +11,7 @@
 #import "GroupHeaderView.h"
 #import "FBRollImages.h"
 #import "FBRefresh.h"
+#import "CategoryMenuView.h"
 
 @interface MallViewController : FBViewController <FBNavigationBarItemsDelegate, UITableViewDelegate, UITableViewDataSource>
 
@@ -25,5 +26,6 @@
 @pro_strong UITableView             *   mallTableView;
 @pro_strong GroupHeaderView         *   headerView;
 @pro_strong FBRollImages            *   rollView;
+@pro_strong CategoryMenuView        *   categoryMenu;
 
 @end

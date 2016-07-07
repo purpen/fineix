@@ -7,6 +7,7 @@
 //
 
 #import "SceneInfoViewController.h"
+#import "SceneListTableViewCell.h"
 
 static NSString *const URLSceneInfo = @"/scene_sight/view";
 static NSString *const URLCommentList = @"/comment/getlist";
@@ -56,6 +57,8 @@ static NSString *const URLDeleteScene = @"/scene_sight/delete";
     [self networkRequestData];
     [self networkCommentData];
     [self networkLikePeopleData];
+    [self XuDingYiLookSceneInfo];
+    
 }
 
 #pragma mark -
@@ -92,6 +95,10 @@ static NSString *const URLDeleteScene = @"/scene_sight/delete";
         _sceneUserId = [NSString stringWithFormat:@"%@", [[result valueForKey:@"data"] valueForKey:@"user_id"]];
         self.sceneInfoModel = [[SceneInfoData alloc] initWithDictionary:[result valueForKey:@"data"]];
         _sceneImgUrl = self.sceneInfoModel.coverUrl;
+        self.homeSceneModel = [[HomeSceneListRow alloc] initWithDictionary:[result valueForKey:@"data"]];
+        
+        //  保存场景封面
+        [self.view addSubview:self.downImgView];
         
         if (![self.view.subviews containsObject:_viewScroller]) {
             [self getTableViewFrameH];
@@ -99,7 +106,6 @@ static NSString *const URLDeleteScene = @"/scene_sight/delete";
         
         //  场景中商品的ids
         self.goodsId = [self.sceneInfoModel.product valueForKey:@"idField"];
-        NSLog(@"＝＝＝＝＝ %@", self.goodsId);
         if (self.goodsId.count > 0) {
             NSString * goodsIds;
             if (self.goodsId.count > 1) {
@@ -653,6 +659,39 @@ static NSString *const URLDeleteScene = @"/scene_sight/delete";
         _reGoodsIdList = [NSMutableArray array];
     }
     return _reGoodsIdList;
+}
+
+#pragma mark - 许丁伊🚺需要的查看封面大图功能
+- (void)XuDingYiLookSceneInfo {
+    if ([[self getLoginUserID] isEqualToString:@"1067749"]) {
+        UIButton * button = [[UIButton alloc] initWithFrame:CGRectMake(44, 20, 44, 44)];
+        [button setImage:[UIImage imageNamed:@"icon_newScene"] forState:(UIControlStateNormal)];
+        [button addTarget:self action:@selector(lookSceneImg) forControlEvents:(UIControlEventTouchUpInside)];
+        [self.view addSubview:button];
+    }
+}
+
+#pragma mark 保存场景封面
+- (void)lookSceneImg {
+    UIImageWriteToSavedPhotosAlbum([self downImage], self, nil, nil);
+    [SVProgressHUD showSuccessWithStatus:@"保存到相册了～"];
+}
+
+- (UIImage *)downImage {
+    UIGraphicsBeginImageContextWithOptions(self.downImgView.bounds.size, NO, [UIScreen mainScreen].scale);
+    [self.downImgView.layer renderInContext:UIGraphicsGetCurrentContext()];
+    UIImage * image = UIGraphicsGetImageFromCurrentImageContext();
+    UIGraphicsEndImageContext();
+    return image;
+}
+
+#pragma mark 场景封面
+- (DownSceneInfoView *)downImgView {
+    if (!_downImgView) {
+        _downImgView = [[DownSceneInfoView alloc] initWithFrame:CGRectMake(SCREEN_WIDTH, 0, SCREEN_WIDTH, SCREEN_HEIGHT)];
+        [_downImgView setHomeSceneListData:self.homeSceneModel];
+    }
+    return _downImgView;
 }
 
 @end

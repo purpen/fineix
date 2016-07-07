@@ -13,6 +13,7 @@
     NSTimer *   timerAnimation;
     UIView  *   viewSpread;
     UIView  *   viewTapDot;
+    UIView  *   viewMidPoint;
     CGPoint     startPoint;
     CGPoint     _translateCenter;
 }
@@ -111,6 +112,14 @@
         make.centerX.equalTo(viewTapDot);
     }];
     
+    viewMidPoint = [self getViewMidPoint];
+    [self addSubview:viewMidPoint];
+    [viewMidPoint mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.size.mas_equalTo(CGSizeMake(6, 6));
+        make.centerY.equalTo(viewTapDot);
+        make.centerX.equalTo(viewTapDot);
+    }];
+    
     [timerAnimation resumeTimer];
 }
 
@@ -139,7 +148,7 @@
 #pragma mark - 圆点
 - (UIView *)getViewSpread {
     UIView * view = [UIView new];
-    view.backgroundColor = [UIColor colorWithHexString:@"#FFFFFF" alpha:0.7];
+    view.backgroundColor = [UIColor colorWithHexString:@"#FFFFFF" alpha:0.9];
     view.layer.cornerRadius = 6/2;
     view.layer.masksToBounds = YES;
     view.userInteractionEnabled=NO;
@@ -147,8 +156,17 @@
 }
 
 - (UIView *)getViewTapDot {
-    UIView *view =[UIView new];
-    view.backgroundColor=[UIColor colorWithHexString:fineixColor];
+    UIView * view =[UIView new];
+    view.backgroundColor= [UIColor colorWithHexString:@"#FFFFFF" alpha:0.3];
+    view.layer.cornerRadius = 6/2;
+    view.layer.masksToBounds = YES;
+    view.userInteractionEnabled=NO;
+    return view;
+}
+
+- (UIView *)getViewMidPoint {
+    UIView * view = [UIView new];
+    view.backgroundColor = [UIColor colorWithHexString:fineixColor alpha:0.8];
     view.layer.cornerRadius = 6/2;
     view.layer.masksToBounds = YES;
     view.userInteractionEnabled=NO;
@@ -176,7 +194,7 @@
 #pragma mark - 动画
 - (void)animationTimerDidFired {
     [UIView animateWithDuration:1.5 animations:^{
-        viewTapDot.transform = CGAffineTransformMakeScale(1.2,1.2);
+        viewTapDot.transform = CGAffineTransformMakeScale(5,5);
     } completion:^(BOOL finished) {
         [UIView animateWithDuration:1.5 animations:^{
             viewTapDot.transform = CGAffineTransformIdentity;

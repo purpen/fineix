@@ -13,6 +13,7 @@
 @property (nonatomic, assign) NSInteger idField;
 @property (nonatomic, strong) NSString * appCoverSUrl;
 @property (nonatomic, strong) NSString * appCoverUrl;
+@property (nonatomic, strong) NSString * backUrl;
 @property (nonatomic, assign) NSInteger domain;
 @property (nonatomic, assign) NSInteger gid;
 @property (nonatomic, strong) NSString * name;

@@ -10,7 +10,6 @@
 #import "LMSpringboardItemView.h"
 #import "UIImageView+CornerRadius.h"
 
-
 static double const kLMSpringboardItemViewSmallThreshold = 0.75;
 
 @interface LMSpringboardItemView ()

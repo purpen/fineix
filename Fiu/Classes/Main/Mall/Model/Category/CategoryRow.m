@@ -31,7 +31,10 @@
 	}	
 	if(![dictionary[@"app_cover_url"] isKindOfClass:[NSNull class]]){
 		self.appCoverUrl = dictionary[@"app_cover_url"];
-	}	
+	}
+    if(![dictionary[@"back_url"] isKindOfClass:[NSNull class]]){
+        self.backUrl = dictionary[@"back_url"];
+    }
 	if(![dictionary[@"domain"] isKindOfClass:[NSNull class]]){
 		self.domain = [dictionary[@"domain"] integerValue];
 	}

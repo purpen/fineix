@@ -12,6 +12,8 @@
 #import "FiuSceneInfoData.h"
 #import "MapTableViewCell.h"
 #import "AllNearbyScenarioViewController.h"
+#import "FiuSceneTableViewCell.h"
+#import "FiuSceneRow.h"
 
 static NSString *const URLFSceneList = @"/scene_scene/";
 
@@ -19,11 +21,10 @@ static NSString *const URLFSceneList = @"/scene_scene/";
 
 @pro_strong NSMutableArray      *   idMarr;         //  附近情景的ID
 @pro_strong NSMutableArray      *   titleMarr;      //  标题
-@pro_strong NSMutableArray      *   addressMarr;    //  地址
-@pro_strong NSMutableArray      *   locationMarr;   //  位置
 @pro_strong NSMutableArray      *   fiuInfoData;    //  情景数据
 @pro_strong NSMutableArray      *   fiuIdMarr;      //  情景id
 @pro_strong NSMutableArray      *   fiuTitleMarr;   //  情景标题
+@pro_strong NSMutableArray      *   fiuSceneList;
 
 @end
 
@@ -60,12 +61,12 @@ static NSString *const URLFSceneList = @"/scene_scene/";
     self.fSceneRequest = [FBAPI getWithUrlString:URLFSceneList requestDictionary:@{@"lng":@(longitude), @"lat":@(latitude), @"dis":@(5000), @"page":@"1", @"size":@"3"} delegate:self];
     [self.fSceneRequest startRequestSuccess:^(FBRequest *request, id result) {
         [self setSelectFSceneVcUI];
-        NSArray * dataArr = [[result valueForKey:@"data"] valueForKey:@"rows"];
-        for (NSDictionary * dataDic in dataArr) {
-            [self.idMarr addObject:[NSString stringWithFormat:@"%@", [dataDic valueForKey:@"_id"]]];
-            [self.titleMarr addObject:[dataDic valueForKey:@"title"]];
-            [self.addressMarr addObject:[dataDic valueForKey:@"address"]];
-            [self.locationMarr addObject:[dataDic valueForKey:@"location"]];
+        NSArray * fiuSceneArr = [[result valueForKey:@"data"] valueForKey:@"rows"];
+        for (NSDictionary * fiuSceneDic in fiuSceneArr) {
+            FiuSceneRow * fiuSceneModel = [[FiuSceneRow alloc] initWithDictionary:fiuSceneDic];
+            [self.fiuSceneList addObject:fiuSceneModel];
+            [self.idMarr addObject:[NSString stringWithFormat:@"%zi", fiuSceneModel.idField]];
+            [self.titleMarr addObject:fiuSceneModel.title];
         }
         
         [self.selectTable reloadData];
@@ -124,8 +125,6 @@ static NSString *const URLFSceneList = @"/scene_scene/";
     if (section == 0) {
         return 1;
     } else if (section == 1) {
-        return self.titleMarr.count;
-    } else if (section == 2) {
         return 1;
     }
     return 1;
@@ -133,32 +132,15 @@ static NSString *const URLFSceneList = @"/scene_scene/";
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     if (indexPath.section == 0) {
-        static NSString *mapCellId = @"mapCellId";
-        MapTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:mapCellId];
-        if (cell == nil) {
-            cell = [[MapTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:mapCellId];
-        }
-        cell.ary = self.locationMarr;
-        [cell setUIWithAry:self.locationMarr];
-        return cell;
-    }
-    if (indexPath.section == 1) {
-        static NSString * nearbyFSceneCellId = @"NearbyFSceneCellId";
-        UITableViewCell * cell = [tableView dequeueReusableCellWithIdentifier:nearbyFSceneCellId];
+        static NSString * fiuSceneCellId = @"fiuSceneCellId";
+        FiuSceneTableViewCell * cell = [tableView dequeueReusableCellWithIdentifier:fiuSceneCellId];
         if (!cell) {
-            cell = [[UITableViewCell alloc] initWithStyle:(UITableViewCellStyleSubtitle) reuseIdentifier:nearbyFSceneCellId];
+            cell = [[FiuSceneTableViewCell alloc] initWithStyle:(UITableViewCellStyleDefault) reuseIdentifier:fiuSceneCellId];
         }
-        cell.textLabel.text = self.titleMarr[indexPath.row];
-        cell.textLabel.font = [UIFont systemFontOfSize:14];
-        cell.detailTextLabel.text = self.addressMarr[indexPath.row];
-        cell.detailTextLabel.textColor = [UIColor colorWithHexString:titleColor];
-        cell.selectionStyle = UITableViewCellSelectionStyleNone;
-        self.cellLine = [[UILabel alloc] initWithFrame:CGRectMake(15, 59, SCREEN_WIDTH - 15, 1)];
-        self.cellLine.backgroundColor = [UIColor colorWithHexString:lineGrayColor];
-        [cell.contentView addSubview:self.cellLine];
+        [cell setFiuSceneList:self.fiuSceneList idMarr:self.idMarr];
         return cell;
     
-    } else if (indexPath.section == 2) {
+    } else if (indexPath.section == 1) {
         static NSString * selectHotFsceneCellId = @"SelectHotFsceneCellId";
         SelectHotFSceneTableViewCell * cell = [tableView dequeueReusableCellWithIdentifier:selectHotFsceneCellId];
         if (!cell) {
@@ -179,28 +161,24 @@ static NSString *const URLFSceneList = @"/scene_scene/";
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
     if (indexPath.section == 0) {
-        return 145;
+        return 266.5;
+        
     } else if (indexPath.section == 1) {
-        return 60;
-    } else if (indexPath.section == 2) {
         SelectHotFSceneTableViewCell * cell = [[SelectHotFSceneTableViewCell alloc] init];
         [cell getCellHeiht:self.fiuInfoData];
-        return cell.cellHeight + 5;
+        return cell.cellHeight;
     }
     return 1;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
-    if (section == 0) {
-        return 0.01;
-    }
     return 40;
 }
 
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
-    if (section == 1) {
+    if (section == 0) {
         return [self addHeaderView:NSLocalizedString(@"nearFiuScene", nil) withType:1];
-    } else if (section == 2) {
+    } else if (section == 1) {
         return [self addHeaderView:NSLocalizedString(@"reFiuScene", nil) withType:2];
     }
     return nil;
@@ -346,6 +324,13 @@ static NSString *const URLFSceneList = @"/scene_scene/";
 }
 
 #pragma mark -
+- (NSMutableArray *)fiuSceneList {
+    if (!_fiuSceneList) {
+        _fiuSceneList = [NSMutableArray array];
+    }
+    return _fiuSceneList;
+}
+
 - (NSMutableArray *)idMarr {
     if (!_idMarr) {
         _idMarr = [NSMutableArray array];
@@ -358,20 +343,6 @@ static NSString *const URLFSceneList = @"/scene_scene/";
         _titleMarr = [NSMutableArray array];
     }
     return _titleMarr;
-}
-
-- (NSMutableArray *)addressMarr {
-    if (!_addressMarr) {
-        _addressMarr = [NSMutableArray array];
-    }
-    return _addressMarr;
-}
-
-- (NSMutableArray *)locationMarr {
-    if (!_locationMarr) {
-        _locationMarr = [NSMutableArray array];
-    }
-    return _locationMarr;
 }
 
 - (NSMutableArray *)fiuInfoData {

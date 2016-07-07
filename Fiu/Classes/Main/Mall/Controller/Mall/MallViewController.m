@@ -29,6 +29,8 @@ static NSString *const URLFiuBrand = @"/scene_brands/getlist";
 @interface MallViewController () {
     NSArray     *   _headerImgArr;
     NSArray     *   _headerIdArr;
+    BOOL            _rollDown;
+    CGFloat         _lastContentOffset;
 }
 
 @pro_strong NSMutableArray              *   tagsList;
@@ -62,6 +64,7 @@ static NSString *const URLFiuBrand = @"/scene_brands/getlist";
     self.currentpageNum = 0;
     [self networkFiuGoodsData];
     [self.view addSubview:self.mallTableView];
+    [self.view addSubview:self.categoryMenu];
     
 }
 
@@ -122,7 +125,8 @@ static NSString *const URLFiuBrand = @"/scene_brands/getlist";
             CategoryRow * categoryModel = [[CategoryRow alloc] initWithDictionary:categoryDic];
             [self.categoryList addObject:categoryModel];
         }
-
+        
+        [self.categoryMenu setCategoryData:self.categoryList];
         [self.mallTableView reloadData];
         [self requestIsLastData:self.mallTableView currentPage:self.currentpageNum withTotalPage:self.totalPageNum];
         
@@ -343,6 +347,79 @@ static NSString *const URLFiuBrand = @"/scene_brands/getlist";
         GoodsInfoViewController * goodsInfoVC = [[GoodsInfoViewController alloc] init];
         goodsInfoVC.goodsID = self.goodsIdList[indexPath.row];
         [self.navigationController pushViewController:goodsInfoVC animated:YES];
+    }
+}
+
+#pragma mark - 上滑出现的商品分类菜单
+- (CategoryMenuView *)categoryMenu {
+    if (!_categoryMenu) {
+        _categoryMenu = [[CategoryMenuView alloc] initWithFrame:CGRectMake(SCREEN_WIDTH, 0, SCREEN_WIDTH, 85)];
+        _categoryMenu.nav = self.navigationController;
+    }
+    return _categoryMenu;
+}
+
+#pragma mark - 判断上／下滑状态，显示/隐藏Nav/tabBar
+- (void)scrollViewWillBeginDragging:(UIScrollView *)scrollView{
+    if (scrollView == _mallTableView) {
+        _lastContentOffset = scrollView.contentOffset.y;
+    }
+}
+
+- (void)scrollViewWillBeginDecelerating:(UIScrollView *)scrollView{
+    if (scrollView == _mallTableView) {
+        if (_lastContentOffset < scrollView.contentOffset.y) {
+            _rollDown = YES;
+        }else{
+            _rollDown = NO;
+        }
+    }
+}
+
+- (void)scrollViewDidScroll:(UIScrollView *)scrollView{
+    if (scrollView == _mallTableView) {
+        CGRect tabBarRect = self.tabBarController.tabBar.frame;
+        CGRect tableRect = self.mallTableView.frame;
+        CGRect categoryMenu = self.categoryMenu.frame;
+        
+        if (_rollDown == YES) {
+            if (scrollView.contentOffset.y > SCREEN_HEIGHT) {
+                categoryMenu = CGRectMake(0, 0, SCREEN_WIDTH, 80);
+                [UIView animateWithDuration:0.3 animations:^{
+                    self.categoryMenu.frame = categoryMenu;
+                }];
+            }
+            
+            tabBarRect = CGRectMake(0, SCREEN_HEIGHT + 20, SCREEN_WIDTH, 49);
+            tableRect = CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT);
+            [UIView animateWithDuration:.4 animations:^{
+                self.tabBarController.tabBar.frame = tabBarRect;
+                self.mallTableView.frame = tableRect;
+                self.leftBtn.alpha = 0;
+                self.rightBtn.alpha = 0;
+                self.navView.alpha = 0;
+                [[UIApplication sharedApplication] setStatusBarHidden:YES withAnimation:(UIStatusBarAnimationSlide)];
+            }];
+            
+        } else if (_rollDown == NO) {
+            if (scrollView.contentOffset.y < SCREEN_HEIGHT) {
+                categoryMenu = CGRectMake(SCREEN_WIDTH, 0, SCREEN_WIDTH, 80);
+                [UIView animateWithDuration:0.3 animations:^{
+                    self.categoryMenu.frame = categoryMenu;
+                }];
+                
+                tabBarRect = CGRectMake(0, SCREEN_HEIGHT - 49, SCREEN_WIDTH, 49);
+                tableRect = CGRectMake(0, 64, SCREEN_WIDTH, SCREEN_HEIGHT-64);
+                [UIView animateWithDuration:.4 animations:^{
+                    self.tabBarController.tabBar.frame = tabBarRect;
+                    self.mallTableView.frame = tableRect;
+                    self.leftBtn.alpha = 1;
+                    self.rightBtn.alpha = 1;
+                    self.navView.alpha = 1;
+                }];
+                [[UIApplication sharedApplication] setStatusBarHidden:NO withAnimation:(UIStatusBarAnimationSlide)];
+            }
+        }
     }
 }
 
