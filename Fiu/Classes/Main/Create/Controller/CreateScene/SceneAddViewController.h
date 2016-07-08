@@ -10,9 +10,7 @@
 #import "FBFootView.h"
 #import "FiltersView.h"
 #import "ChangeAddUrlView.h"
-#import <PhotoEditFramework/PhotoEditFramework.h>
-
-@interface SceneAddViewController : FBPictureViewController <pg_edit_sdk_controller_delegate>
+@interface SceneAddViewController : FBPictureViewController 
 
 @pro_strong NSString            *   createType;             //  创建类型（场景/情景）
 @pro_strong NSArray             *   locationArr;            //  照片位置

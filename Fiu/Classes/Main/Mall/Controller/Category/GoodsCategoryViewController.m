@@ -29,7 +29,7 @@ static NSString *const URLGoodsList = @"/scene_product/getlist";
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
-    
+    [[UIApplication sharedApplication] setStatusBarHidden:NO withAnimation:(UIStatusBarAnimationSlide)];
     [self getGoodsCarNumData];
     [self setNavigationViewUI];
 }

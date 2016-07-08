@@ -497,14 +497,10 @@
 		D8A9ADC91CD9E34600A9FCFB /* FBFootView.m in Sources */ = {isa = PBXBuildFile; fileRef = D8A9ADC81CD9E34600A9FCFB /* FBFootView.m */; };
 		D8A9AE401CE304FF00A9FCFB /* NSTimer+Addition.m in Sources */ = {isa = PBXBuildFile; fileRef = D8A9AE3F1CE304FF00A9FCFB /* NSTimer+Addition.m */; };
 		D8AC3DF31D2CEAF400148522 /* FiuPeopleListTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D8AC3DF21D2CEAF400148522 /* FiuPeopleListTableViewCell.m */; };
-		D8AC3DF71D2CFF6200148522 /* pg_edit_sdk_common.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D8AC3DF41D2CFF6200148522 /* pg_edit_sdk_common.framework */; };
-		D8AC3DF81D2CFF6200148522 /* PhotoEditFramework.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D8AC3DF51D2CFF6200148522 /* PhotoEditFramework.framework */; };
-		D8AC3DF91D2CFF6200148522 /* pg_edit_sdk_cdb_piratesdk.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D8AC3DF61D2CFF6200148522 /* pg_edit_sdk_cdb_piratesdk.framework */; };
 		D8AC3DFB1D2CFFA000148522 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D8AC3DFA1D2CFFA000148522 /* CoreData.framework */; };
 		D8AC3DFD1D2CFFB200148522 /* ImageIO.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D8AC3DFC1D2CFFB200148522 /* ImageIO.framework */; };
 		D8AC3DFF1D2CFFD600148522 /* libstdc++.6.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = D8AC3DFE1D2CFFD600148522 /* libstdc++.6.tbd */; };
 		D8AC3E011D2CFFEC00148522 /* libz.1.2.5.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = D8AC3E001D2CFFEC00148522 /* libz.1.2.5.tbd */; };
-		D8AC3E091D2D036D00148522 /* pg_edit_sdk_resource.bundle in Resources */ = {isa = PBXBuildFile; fileRef = D8AC3E081D2D036D00148522 /* pg_edit_sdk_resource.bundle */; };
 		D8AC3E111D2DF9D900148522 /* FBTabBar.m in Sources */ = {isa = PBXBuildFile; fileRef = D8AC3E0C1D2DF9D900148522 /* FBTabBar.m */; };
 		D8AC3E121D2DF9D900148522 /* FBTabBarController.m in Sources */ = {isa = PBXBuildFile; fileRef = D8AC3E0E1D2DF9D900148522 /* FBTabBarController.m */; };
 		D8AC3E131D2DF9D900148522 /* UITabBar+badge.m in Sources */ = {isa = PBXBuildFile; fileRef = D8AC3E101D2DF9D900148522 /* UITabBar+badge.m */; };
@@ -1422,14 +1418,10 @@
 		D8A9AE3F1CE304FF00A9FCFB /* NSTimer+Addition.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSTimer+Addition.m"; sourceTree = "<group>"; };
 		D8AC3DF11D2CEAF400148522 /* FiuPeopleListTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FiuPeopleListTableViewCell.h; sourceTree = "<group>"; };
 		D8AC3DF21D2CEAF400148522 /* FiuPeopleListTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FiuPeopleListTableViewCell.m; sourceTree = "<group>"; };
-		D8AC3DF41D2CFF6200148522 /* pg_edit_sdk_common.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = pg_edit_sdk_common.framework; path = "../../Downloads/Camera360EditSDK_iOS1-2.3/doc/framework/pg_edit_sdk_common.framework"; sourceTree = "<group>"; };
-		D8AC3DF51D2CFF6200148522 /* PhotoEditFramework.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = PhotoEditFramework.framework; path = "../../Downloads/Camera360EditSDK_iOS1-2.3/doc/framework/PhotoEditFramework.framework"; sourceTree = "<group>"; };
-		D8AC3DF61D2CFF6200148522 /* pg_edit_sdk_cdb_piratesdk.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = pg_edit_sdk_cdb_piratesdk.framework; path = "../../Downloads/Camera360EditSDK_iOS1-2.3/doc/framework/pg_edit_sdk_cdb_piratesdk.framework"; sourceTree = "<group>"; };
 		D8AC3DFA1D2CFFA000148522 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
 		D8AC3DFC1D2CFFB200148522 /* ImageIO.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ImageIO.framework; path = System/Library/Frameworks/ImageIO.framework; sourceTree = SDKROOT; };
 		D8AC3DFE1D2CFFD600148522 /* libstdc++.6.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = "libstdc++.6.tbd"; path = "usr/lib/libstdc++.6.tbd"; sourceTree = SDKROOT; };
 		D8AC3E001D2CFFEC00148522 /* libz.1.2.5.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libz.1.2.5.tbd; path = usr/lib/libz.1.2.5.tbd; sourceTree = SDKROOT; };
-		D8AC3E081D2D036D00148522 /* pg_edit_sdk_resource.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; name = pg_edit_sdk_resource.bundle; path = Vendors/pg_edit_sdk_resource.bundle; sourceTree = "<group>"; };
 		D8AC3E0B1D2DF9D900148522 /* FBTabBar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FBTabBar.h; sourceTree = "<group>"; };
 		D8AC3E0C1D2DF9D900148522 /* FBTabBar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FBTabBar.m; sourceTree = "<group>"; };
 		D8AC3E0D1D2DF9D900148522 /* FBTabBarController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FBTabBarController.h; sourceTree = "<group>"; };
@@ -1490,9 +1482,6 @@
 				D8AC3DFF1D2CFFD600148522 /* libstdc++.6.tbd in Frameworks */,
 				D8AC3DFD1D2CFFB200148522 /* ImageIO.framework in Frameworks */,
 				D8AC3DFB1D2CFFA000148522 /* CoreData.framework in Frameworks */,
-				D8AC3DF71D2CFF6200148522 /* pg_edit_sdk_common.framework in Frameworks */,
-				D8AC3DF81D2CFF6200148522 /* PhotoEditFramework.framework in Frameworks */,
-				D8AC3DF91D2CFF6200148522 /* pg_edit_sdk_cdb_piratesdk.framework in Frameworks */,
 				1F27AE891CE06BB1005A434B /* AlipaySDK.framework in Frameworks */,
 				1F27AE941CE06C7E005A434B /* CoreMotion.framework in Frameworks */,
 				1F27AE921CE06C70005A434B /* CFNetwork.framework in Frameworks */,
@@ -3675,9 +3664,6 @@
 				D8AC3DFE1D2CFFD600148522 /* libstdc++.6.tbd */,
 				D8AC3DFC1D2CFFB200148522 /* ImageIO.framework */,
 				D8AC3DFA1D2CFFA000148522 /* CoreData.framework */,
-				D8AC3DF41D2CFF6200148522 /* pg_edit_sdk_common.framework */,
-				D8AC3DF51D2CFF6200148522 /* PhotoEditFramework.framework */,
-				D8AC3DF61D2CFF6200148522 /* pg_edit_sdk_cdb_piratesdk.framework */,
 				1F27AE931CE06C7E005A434B /* CoreMotion.framework */,
 				1F27AE911CE06C70005A434B /* CFNetwork.framework */,
 				1F27AE8F1CE06C56005A434B /* UIKit.framework */,
@@ -3746,7 +3732,6 @@
 				D81280C01CAA8532007CF08B /* fineix.xcdatamodeld */,
 				D81280C21CAA8532007CF08B /* Info.plist */,
 				D81280CA1CAA8532007CF08B /* main.m */,
-				D8AC3E081D2D036D00148522 /* pg_edit_sdk_resource.bundle */,
 				1F27AE9B1CE0EACE005A434B /* mapapi.bundle */,
 			);
 			path = Fiu;
@@ -4106,7 +4091,6 @@
 				1F2A909D1CF40277005116C7 /* ShareViewController.xib in Resources */,
 				1F27AE881CE06BB1005A434B /* AlipaySDK.bundle in Resources */,
 				1F2A90671CF40277005116C7 /* CommentsTableViewCell.xib in Resources */,
-				D8AC3E091D2D036D00148522 /* pg_edit_sdk_resource.bundle in Resources */,
 				1F2A909F1CF40277005116C7 /* GreatPeopleViewController.xib in Resources */,
 				1F2A8FE61CF40277005116C7 /* AddreesPickerViewController.xib in Resources */,
 				1F2A8F371CF40277005116C7 /* AllNearbyScenarioViewController.xib in Resources */,
