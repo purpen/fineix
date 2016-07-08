@@ -8,30 +8,48 @@
 
 #import "FiuPeopleListViewController.h"
 #import "FiuPeopleListTableViewCell.h"
+#import "FiuPeopleListRow.h"
+#import "HomePageViewController.h"
 
 static NSString *const FiuPeople = @"/user/activity_user";
 
 @interface FiuPeopleListViewController ()
 
+@pro_strong NSMutableArray       *   peopleList;
+@pro_strong NSMutableArray       *   fiuPeopleIdMarr;
+
 @end
 
 @implementation FiuPeopleListViewController
 
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    
+    [self setNavigationViewUI];
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    [self setNavigationViewUI];
-    
     [self networkFiuPeople];
-    
     [self.view addSubview:self.userListTable];
+    
 }
 
 #pragma mark - 网络请求
 - (void)networkFiuPeople {
+    [SVProgressHUD show];
     self.fiuPeopleRequest = [FBAPI getWithUrlString:FiuPeople requestDictionary:@{@"sort":@"1", @"page":@"1", @"size":@"100"} delegate:self];
     [self.fiuPeopleRequest startRequestSuccess:^(FBRequest *request, id result) {
-        NSLog(@"＝＝＝＝＝＝＝＝＝＝ 用户排行%@", result);
+        NSArray * fiuPeopleArr = [[result valueForKey:@"data"] valueForKey:@"rows"];
+        for (NSDictionary * fiuPeopleDic in fiuPeopleArr) {
+            FiuPeopleListRow * fiuSceneModel = [[FiuPeopleListRow alloc] initWithDictionary:fiuPeopleDic];
+            [self.peopleList addObject:fiuSceneModel];
+            [self.fiuPeopleIdMarr addObject:[NSString stringWithFormat:@"%zi", fiuSceneModel.idField]];
+        }
+        [self.userListTable reloadData];
+        [SVProgressHUD dismiss];
+        
     } failure:^(FBRequest *request, NSError *error) {
         NSLog(@"%@", error);
     }];
@@ -40,7 +58,7 @@ static NSString *const FiuPeople = @"/user/activity_user";
 #pragma makr - 用户排行列表
 - (UITableView *)userListTable {
     if (!_userListTable) {
-        _userListTable = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT) style:(UITableViewStylePlain)];
+        _userListTable = [[UITableView alloc] initWithFrame:CGRectMake(0, 64, SCREEN_WIDTH, SCREEN_HEIGHT - 64) style:(UITableViewStylePlain)];
         _userListTable.delegate = self;
         _userListTable.dataSource = self;
     }
@@ -48,16 +66,36 @@ static NSString *const FiuPeople = @"/user/activity_user";
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return 100;
+    return self.peopleList.count;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    static NSString * fiuPeopleListCellId = @"fiuPeopleListCellId";
-    FiuPeopleListTableViewCell * cell = [tableView dequeueReusableCellWithIdentifier:fiuPeopleListCellId];
+    static NSString * peopleListCellId = @"peopleListCellId";
+    FiuPeopleListTableViewCell * cell = [tableView dequeueReusableCellWithIdentifier:peopleListCellId];
     if (!cell) {
-        cell = [[FiuPeopleListTableViewCell alloc] initWithStyle:(UITableViewCellStyleDefault) reuseIdentifier:fiuPeopleListCellId];
+        cell = [[FiuPeopleListTableViewCell alloc] initWithStyle:(UITableViewCellStyleDefault) reuseIdentifier:peopleListCellId];
+    }
+    if (self.peopleList.count) {
+        [cell setFiuPeopleListData:indexPath.row+1 withData:self.peopleList[indexPath.row]];
     }
     return cell;
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
+    return 65;
+}
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    HomePageViewController * peopleHomeVC = [[HomePageViewController alloc] init];
+    peopleHomeVC.userId = self.fiuPeopleIdMarr[indexPath.row];
+    UserInfoEntity *entity = [UserInfoEntity defaultUserInfoEntity];
+    if ([entity.userId intValue] == [self.fiuPeopleIdMarr[indexPath.row] intValue]) {
+        peopleHomeVC.isMySelf = YES;
+    }else{
+        peopleHomeVC.isMySelf = NO;
+    }
+    peopleHomeVC.type = @2;
+    [self.navigationController pushViewController:peopleHomeVC animated:YES];
 }
 
 #pragma mark - 设置Nav
@@ -66,6 +104,20 @@ static NSString *const FiuPeople = @"/user/activity_user";
     self.navViewTitle.text = NSLocalizedString(@"FiuPeopleListVC", nil);
     self.delegate = self;
     [[UIApplication sharedApplication] setStatusBarHidden:NO withAnimation:(UIStatusBarAnimationSlide)];
+}
+
+- (NSMutableArray *)peopleList {
+    if (!_peopleList) {
+        _peopleList = [NSMutableArray array];
+    }
+    return _peopleList;
+}
+
+- (NSMutableArray *)fiuPeopleIdMarr {
+    if (!_fiuPeopleIdMarr) {
+        _fiuPeopleIdMarr = [NSMutableArray array];
+    }
+    return _fiuPeopleIdMarr;
 }
 
 @end

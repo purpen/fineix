@@ -28,6 +28,7 @@
 #import "CommentNViewController.h"
 #import "UIView+TYAlertView.h"
 #import "UIImage+MultiFormat.h"
+#import "DownSceneInfoView.h"
 
 @interface SceneInfoViewController : FBViewController <FBNavigationBarItemsDelegate, UITableViewDelegate, UITableViewDataSource, UIScrollViewDelegate>
 
@@ -42,10 +43,12 @@
 
 @pro_strong NSString                *   sceneId;                //  场景ID
 @pro_strong UITableView             *   sceneTableView;         //  场景视图
+@pro_strong DownSceneInfoView       *   downImgView;
 @pro_strong GroupHeaderView         *   headerView;             //  分组头部视图
 @pro_strong UIButton                *   allComment;             //  查看全部评论
 @pro_strong NSMutableArray          *   textMar;
 
+@pro_strong HomeSceneListRow    *   homeSceneModel;
 @pro_strong SceneInfoData       *   sceneInfoModel;
 @pro_strong NSArray             *   commentArr;
 @pro_strong NSMutableArray      *   sceneCommentMarr;   //  场景评论

@@ -25,11 +25,13 @@ static NSString *const URLDiscoverSlide = @"/gateway/slide";
 static NSString *const URLFiuScene = @"/scene_scene/";
 static NSString *const URLSceneList = @"/scene_sight/";
 static NSString *const URLTagS = @"/gateway/get_fiu_hot_sight_tags";
-static NSString *const URLFiuPeople = @"/user/find_user";
+static NSString *const URLFiuPeople = @"/user/activity_user";
 
 @interface DiscoverViewController() {
     NSArray     *   _headerImgArr;
     NSArray     *   _headerIdArr;
+    BOOL            _rollDown;
+    CGFloat         _lastContentOffset;
 }
 
 @pro_strong NSMutableArray              *   fiuSceneList;
@@ -94,8 +96,8 @@ static NSString *const URLFiuPeople = @"/user/find_user";
     [SVProgressHUD show];
     self.fiuPeopleRequest = [FBAPI getWithUrlString:URLFiuPeople requestDictionary:@{@"page":@"1", @"size":@"100", @"sort":@"1"} delegate:self];
     [self.fiuPeopleRequest startRequestSuccess:^(FBRequest *request, id result) {
-        self.fiuPeopleList = [NSMutableArray arrayWithArray:[[result valueForKey:@"data"] valueForKey:@"users"]];
-        _headerImgArr = [NSArray arrayWithArray:[self.fiuPeopleList valueForKey:@"medium_avatar_url"]];
+        self.fiuPeopleList = [NSMutableArray arrayWithArray:[[result valueForKey:@"data"] valueForKey:@"rows"]];
+        _headerImgArr = [NSArray arrayWithArray:[self.fiuPeopleList valueForKey:@"avatar_url"]];
         _headerIdArr = [NSArray arrayWithArray:[self.fiuPeopleList valueForKey:@"_id"]];
         
         [self.discoverTableView reloadData];
@@ -366,6 +368,54 @@ static NSString *const URLFiuPeople = @"/user/find_user";
         SceneInfoViewController * sceneVC = [[SceneInfoViewController alloc] init];
         sceneVC.sceneId = self.sceneIdList[indexPath.row];
         [self.navigationController pushViewController:sceneVC animated:YES];
+    }
+}
+
+#pragma mark - 判断上／下滑状态，显示/隐藏Nav/tabBar
+- (void)scrollViewWillBeginDragging:(UIScrollView *)scrollView{
+    if (scrollView == _discoverTableView) {
+        _lastContentOffset = scrollView.contentOffset.y;
+    }
+}
+
+- (void)scrollViewWillBeginDecelerating:(UIScrollView *)scrollView{
+    if (scrollView == _discoverTableView) {
+        if (_lastContentOffset < scrollView.contentOffset.y) {
+            _rollDown = YES;
+        }else{
+            _rollDown = NO;
+        }
+    }
+}
+
+- (void)scrollViewDidScroll:(UIScrollView *)scrollView{
+    if (scrollView == _discoverTableView) {
+        CGRect tabBarRect = self.tabBarController.tabBar.frame;
+        CGRect tableRect = self.discoverTableView.frame;
+        if (_rollDown == YES) {
+            tabBarRect = CGRectMake(0, SCREEN_HEIGHT + 20, SCREEN_WIDTH, 49);
+            tableRect = CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT);
+            [UIView animateWithDuration:.4 animations:^{
+                self.tabBarController.tabBar.frame = tabBarRect;
+                self.discoverTableView.frame = tableRect;
+                self.leftBtn.alpha = 0;
+                self.rightBtn.alpha = 0;
+                self.navView.alpha = 0;
+                [[UIApplication sharedApplication] setStatusBarHidden:YES withAnimation:(UIStatusBarAnimationSlide)];
+            }];
+            
+        } else if (_rollDown == NO) {
+            tabBarRect = CGRectMake(0, SCREEN_HEIGHT - 49, SCREEN_WIDTH, 49);
+            tableRect = CGRectMake(0, 64, SCREEN_WIDTH, SCREEN_HEIGHT-64);
+            [UIView animateWithDuration:.4 animations:^{
+                self.tabBarController.tabBar.frame = tabBarRect;
+                self.discoverTableView.frame = tableRect;
+                self.leftBtn.alpha = 1;
+                self.rightBtn.alpha = 1;
+                self.navView.alpha = 1;
+                [[UIApplication sharedApplication] setStatusBarHidden:NO withAnimation:(UIStatusBarAnimationSlide)];
+            }];
+        }
     }
 }
 

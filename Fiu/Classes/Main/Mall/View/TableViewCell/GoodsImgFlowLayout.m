@@ -8,8 +8,8 @@
 
 #import "GoodsImgFlowLayout.h"
 
-#define __NSABS_IMPL__(A,L) ({ __typeof__(A) __NSX_PASTE__(__a,L) = (A); (__NSX_PASTE__(__a,L) < 0) ? - __NSX_PASTE__(__a,L) : __NSX_PASTE__(__a,L); })
-#define ABS(A) __NSABS_IMPL__(A,__COUNTER__)
+//#define __NSABS_IMPL__(A,L) ({ __typeof__(A) __NSX_PASTE__(__a,L) = (A); (__NSX_PASTE__(__a,L) < 0) ? - __NSX_PASTE__(__a,L) : __NSX_PASTE__(__a,L); })
+//#define FIU(A) __NSABS_IMPL__(A,__COUNTER__)
 
 @implementation GoodsImgFlowLayout
 
