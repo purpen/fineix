@@ -12,6 +12,9 @@
 @interface FiuSceneTableViewCell : UITableViewCell <UICollectionViewDelegate, UICollectionViewDataSource>
 
 @pro_strong UINavigationController      *   nav;
+@pro_strong UIViewController            *   vc;
+@pro_assign BOOL                            choose;
+@pro_strong NSString                    *   type;
 @pro_strong UICollectionView            *   sceneListView;  //  滑动情景列表
 
 - (void)setFiuSceneList:(NSMutableArray *)dataMarr idMarr:(NSMutableArray *)idMarr;

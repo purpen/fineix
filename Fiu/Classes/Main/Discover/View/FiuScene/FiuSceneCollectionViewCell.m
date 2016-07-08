@@ -20,6 +20,31 @@
     return self;
 }
 
+- (void)setSelected:(BOOL)selected {
+    if (self.choose == YES) {
+        if (selected) {
+            [UIView animateWithDuration:.3 animations:^{
+                self.bgImg.alpha = 1;
+            }];
+            
+        } else {
+            [UIView animateWithDuration:.3 animations:^{
+                self.bgImg.alpha = 0;
+            }];
+        }
+    }
+}
+
+#pragma mark - 遮罩
+- (UIImageView *)bgImg {
+    if (!_bgImg) {
+        _bgImg = [[UIImageView alloc] initWithFrame:self.bounds];
+        _bgImg.image = [UIImage imageNamed:@"shade"];
+        _bgImg.alpha = 0;
+    }
+    return _bgImg;
+}
+
 - (void)setFiuSceneList:(FiuSceneRow *)model {
     [self.sceneImage downloadImage:model.coverUrl place:[UIImage imageNamed:@""]];
     [self titleTextStyle:model.title];
@@ -30,6 +55,10 @@
 #pragma mark - 
 - (void)setCollectionCellViewUI {
     [self addSubview:self.sceneImage];
+    
+    if (self.choose == YES) {
+        [self addSubview:self.bgImg];
+    }
 }
 
 #pragma mark - 情景图片

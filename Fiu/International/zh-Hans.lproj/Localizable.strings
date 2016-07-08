@@ -117,6 +117,7 @@
 "SceneBtn" = "情景";
 "FiuSceneBtn" = "地盘";
 "GoodsBtn" = "产品";
+"ChooseText" = "选择语境";
 
 //  评论
 "comment" = "评论一下";

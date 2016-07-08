@@ -16,6 +16,11 @@
     self = [super initWithFrame:frame];
     if (self) {
         
+        UIBlurEffect * blurEffect = [UIBlurEffect effectWithStyle:UIBlurEffectStyleLight];
+        UIVisualEffectView * effectView = [[UIVisualEffectView alloc] initWithEffect:blurEffect];
+        effectView.frame = self.bounds;
+        [self addSubview:effectView];
+        
         [self addSubview:self.categoryMenu];
     }
     return self;
@@ -41,7 +46,7 @@
         _categoryMenu = [[UICollectionView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 75) collectionViewLayout:flowLayout];
         _categoryMenu.delegate = self;
         _categoryMenu.dataSource = self;
-        _categoryMenu.backgroundColor = [UIColor whiteColor];
+        _categoryMenu.backgroundColor = [UIColor clearColor];
         _categoryMenu.showsVerticalScrollIndicator = NO;
         _categoryMenu.showsHorizontalScrollIndicator = NO;
         [_categoryMenu registerClass:[CategoryMenuCollectionViewCell class] forCellWithReuseIdentifier:@"CategoryMenuCollectionViewCellID"];

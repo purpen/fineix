@@ -10,6 +10,15 @@
 #import "HomePageViewController.h"
 #import "UIButton+WebCache.h"
 #import "GoodsInfoViewController.h"
+#import "FiuSceneViewController.h"
+
+@interface UserInfoTableViewCell () {
+    NSString    *   _fiuSceneId;
+}
+
+@property(nonatomic,strong) UITapGestureRecognizer * FiuSceneTap;
+
+@end
 
 @implementation UserInfoTableViewCell
 
@@ -75,6 +84,8 @@
     } else {
         self.goodNum.text = [NSString stringWithFormat:@"%zi%@", model.loveCount, NSLocalizedString(@"peopleLike", nil)];
     }
+    
+    _fiuSceneId = [NSString stringWithFormat:@"%zi",model.sceneId];
 }
 
 #pragma mark - 
@@ -473,8 +484,25 @@
         [self addIcon:_whereScene withImage:@"icon_star"];
         _whereScene.font = [UIFont systemFontOfSize:Font_Number];
         _whereScene.textColor = [UIColor whiteColor];
+        _whereScene.userInteractionEnabled = YES;
+        [_whereScene addGestureRecognizer:self.FiuSceneTap];
     }
     return _whereScene;
+}
+
+- (UITapGestureRecognizer *)FiuSceneTap {
+    if (!_FiuSceneTap) {
+        _FiuSceneTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(clickFiuScene:)];
+        _FiuSceneTap.numberOfTapsRequired = 1;
+        _FiuSceneTap.numberOfTouchesRequired = 1;
+    }
+    return _FiuSceneTap;
+}
+
+- (void)clickFiuScene:(UITapGestureRecognizer *)tap {
+    FiuSceneViewController * fiuSceneVC = [[FiuSceneViewController alloc] init];
+    fiuSceneVC.fiuSceneId = _fiuSceneId;
+    [self.nav pushViewController:fiuSceneVC animated:YES];
 }
 
 #pragma mark - 城市

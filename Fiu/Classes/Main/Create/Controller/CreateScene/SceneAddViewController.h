@@ -10,7 +10,7 @@
 #import "FBFootView.h"
 #import "FiltersView.h"
 #import "ChangeAddUrlView.h"
-@interface SceneAddViewController : FBPictureViewController 
+@interface SceneAddViewController : FBPictureViewController
 
 @pro_strong NSString            *   createType;             //  创建类型（场景/情景）
 @pro_strong NSArray             *   locationArr;            //  照片位置

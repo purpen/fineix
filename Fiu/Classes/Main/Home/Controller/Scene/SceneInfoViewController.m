@@ -8,6 +8,7 @@
 
 #import "SceneInfoViewController.h"
 #import "SceneListTableViewCell.h"
+#import "FiuSceneViewController.h"
 
 static NSString *const URLSceneInfo = @"/scene_sight/view";
 static NSString *const URLCommentList = @"/comment/getlist";
@@ -167,21 +168,6 @@ static NSString *const URLDeleteScene = @"/scene_sight/delete";
     } failure:^(FBRequest *request, NSError *error) {
         [SVProgressHUD showErrorWithStatus:[error localizedDescription]];
     }];
-}
-
--(UITapGestureRecognizer *)cityTap{
-    if (!_cityTap) {
-        _cityTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(clickCityTap:)];
-        _cityTap.numberOfTapsRequired = 1;
-        _cityTap.numberOfTouchesRequired = 1;
-    }
-    return _cityTap;
-}
-
--(void)clickCityTap:(UITapGestureRecognizer*)gesture{
-    NearQingViewController *vc = [[NearQingViewController alloc] init];
-    vc.baseInfo = self.sceneInfoModel;
-    [self.navigationController pushViewController:vc animated:YES];
 }
 
 #pragma mark 给此场景点赞的用户
@@ -498,6 +484,21 @@ static NSString *const URLDeleteScene = @"/scene_sight/delete";
     if (self.sceneTableView.contentOffset.y <= 0) {
         self.sceneTableView.scrollEnabled = NO;
     }
+}
+
+-(UITapGestureRecognizer *)cityTap{
+    if (!_cityTap) {
+        _cityTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(clickCityTap:)];
+        _cityTap.numberOfTapsRequired = 1;
+        _cityTap.numberOfTouchesRequired = 1;
+    }
+    return _cityTap;
+}
+
+-(void)clickCityTap:(UITapGestureRecognizer*)gesture{
+    NearQingViewController *vc = [[NearQingViewController alloc] init];
+    vc.baseInfo = self.sceneInfoModel;
+    [self.navigationController pushViewController:vc animated:YES];
 }
 
 #pragma mark - 查看全部评论

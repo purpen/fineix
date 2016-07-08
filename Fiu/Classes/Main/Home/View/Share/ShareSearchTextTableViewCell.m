@@ -44,7 +44,7 @@
     if (!_title) {
         _title = [[UILabel alloc] init];
         _title.textColor = [UIColor colorWithHexString:@"#FFFFFF" alpha:.9];
-        _title.font = [UIFont systemFontOfSize:13];
+        _title.font = [UIFont systemFontOfSize:14];
         _title.numberOfLines = 0;
     }
     return _title;
