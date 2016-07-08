@@ -8,16 +8,20 @@
 
 #import "SearchLocationViewController.h"
 #import "SVProgressHUD.h"
+#import <BaiduMapAPI_Map/BMKMapComponent.h>//引入地图功能所有的头文件
+#import "MapAnnotionViewController.h"
 #define MAPHEGHIT 150
-@interface SearchLocationViewController ()
-
+@interface SearchLocationViewController ()<BMKLocationServiceDelegate,BMKMapViewDelegate,MapannotionDelegate>
+/** 地图 */
+@property (nonatomic, strong) BMKMapView *mapView;
+/** 地图点击手势 */
+@property (nonatomic, strong) UITapGestureRecognizer *mapTap;
 @end
 
 @implementation SearchLocationViewController
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
-    
     _poiSearch.delegate = self;
     _locationSearch.delegate = self;
     _geoCodeSearch.delegate = self;
@@ -25,12 +29,13 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+     NSLog(@"%@",self.delegeta);
     self.view.backgroundColor = [UIColor whiteColor];
     [self setNavViewUI];
     [self.view addSubview:self.searchView];
     [self.view addSubview:self.locationTableView];
     [self initLocationMarr];
-    
+    [self.view addSubview:self.mapView];
     //  判断是否开启GPS定位
     if ([CLLocationManager locationServicesEnabled]) {
         [self initBMKService];
@@ -40,6 +45,50 @@
         [SVProgressHUD showInfoWithStatus:NSLocalizedString(@"openGPS", nil)];
     }
 }
+
+
+
+-(UITapGestureRecognizer *)mapTap{
+    if (!_mapTap) {
+        _mapTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapMap)];
+    }
+    return _mapTap;
+}
+
+-(void)tapMap{
+    MapAnnotionViewController *vc = [[MapAnnotionViewController alloc] init];
+    vc.firstName = self.locationNameMarr[0];
+    vc.lat = [self.latitudeMarr[0] doubleValue];
+    vc.lon = [self.longitudeMarr[0] doubleValue];
+    vc.delegate = self;
+    [self.navigationController pushViewController:vc animated:YES];
+}
+
+-(void)mapAnnoWithName:(NSString *)name{
+    NSLog(@"%@",self.delegeta);
+    if ([self.delegeta respondsToSelector:@selector(getUserInfo:)]) {
+        [self.delegeta getUserInfo:name];
+    }
+}
+
+-(BMKMapView *)mapView{
+    if (!_mapView) {
+        _mapView = [[BMKMapView alloc] initWithFrame:CGRectMake(0, SCREEN_HEIGHT-MAPHEGHIT, SCREEN_WIDTH, MAPHEGHIT)];
+        _mapView.zoomLevel = 15;
+        _mapView.delegate = self;
+        [_mapView addGestureRecognizer:self.mapTap];
+        //添加渐变层
+        CAGradientLayer * shadow = [CAGradientLayer layer];
+        shadow.frame = CGRectMake(0, 0, SCREEN_WIDTH, 7);
+        shadow.opacity = 0.5;
+        shadow.startPoint = CGPointMake(0, 1);
+        shadow.endPoint = CGPointMake(0, 0);
+        shadow.colors = @[(id)[UIColor clearColor].CGColor,(id)[UIColor blackColor].CGColor];
+        [_mapView.layer addSublayer:shadow];
+    }
+    return _mapView;
+}
+
 
 #pragma mark - 设置顶部导航栏
 - (void)setNavViewUI {
@@ -104,6 +153,10 @@
     [self setDefaultLocation];
     
     [_locationSearch stopUserLocationService];
+    _mapView.showsUserLocation = YES;
+    [_mapView updateLocationData:userLocation];
+    [_locationSearch stopUserLocationService];
+    _mapView.centerCoordinate = userLocation.location.coordinate;
 }
 
 #pragma mark - 默认搜索周边位置
@@ -132,7 +185,13 @@
         }
         [self.locationTableView reloadData];
         [SVProgressHUD dismiss];
-        
+        self.mapView.centerCoordinate = CLLocationCoordinate2DMake([self.latitudeMarr[0] doubleValue], [self.longitudeMarr[0] doubleValue]);
+        BMKPointAnnotation *annotation = [[BMKPointAnnotation alloc] init];
+        CLLocationCoordinate2D coor;
+        coor.latitude = [[self.latitudeMarr firstObject] doubleValue];
+        coor.longitude = [[self.longitudeMarr firstObject] doubleValue];
+        annotation.coordinate = coor;
+        [self.mapView addAnnotation:annotation];
     } else if (error == BMK_SEARCH_NETWOKR_ERROR) {
         [SVProgressHUD showErrorWithStatus:NSLocalizedString(@"netError", nil)];
     
@@ -140,6 +199,16 @@
         [SVProgressHUD showErrorWithStatus:NSLocalizedString(@"searchLocationError", nil)];
     }
 }
+
+-(BMKAnnotationView *)mapView:(BMKMapView *)mapView viewForAnnotation:(id<BMKAnnotation>)annotation{
+    if ([annotation isKindOfClass:[BMKPointAnnotation class]]) {
+        BMKPinAnnotationView *newAnnotationView = [[BMKPinAnnotationView alloc] initWithAnnotation:annotation reuseIdentifier:@"myAnnotation"];
+        newAnnotationView.pinColor = BMKPinAnnotationColorPurple;
+        return newAnnotationView;
+    }
+    return nil;
+}
+
 
 #pragma mark - 初始化保存地理位置的数组
 - (void)initLocationMarr {
@@ -178,7 +247,6 @@
 #pragma mark - 搜索地理位置
 - (void)beginSearchLocation:(NSString *)locationKeyword {
     [SVProgressHUD showWithStatus:NSLocalizedString(@"searchLocationing", nil)];
-
     BMKNearbySearchOption * nearbySearchOption = [[BMKNearbySearchOption alloc] init];
     nearbySearchOption.pageCapacity = 100;
     nearbySearchOption.radius = 1410065408;
@@ -206,7 +274,13 @@
         }
         [self.locationTableView reloadData];
         [SVProgressHUD dismiss];
-    
+        [self.mapView removeAnnotations:self.mapView.annotations];
+        BMKPointAnnotation *annotation = [[BMKPointAnnotation alloc] init];
+        CLLocationCoordinate2D coor;
+        coor.latitude = [[self.latitudeMarr firstObject] doubleValue];
+        coor.longitude = [[self.longitudeMarr firstObject] doubleValue];
+        annotation.coordinate = coor;
+        [self.mapView addAnnotation:annotation];
     } else if (errorCode == BMK_SEARCH_NETWOKR_ERROR) {
         [SVProgressHUD showErrorWithStatus:NSLocalizedString(@"netError", nil)];
         
@@ -284,6 +358,7 @@
     if (_geoCodeSearch.delegate != nil) {
         _geoCodeSearch.delegate = nil;
     }
+    self.mapView.delegate = nil;
 }
 
 @end

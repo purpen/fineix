@@ -9,8 +9,9 @@
 #import <BaiduMapAPI_Search/BMKSearchComponent.h>
 #import <UIKit/UIKit.h>
 #import "Fiu.h"
+#import "SearchLocationViewController.h"
 
-@interface ScenceAddMoreView : UIView <BMKGeoCodeSearchDelegate, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout> {
+@interface ScenceAddMoreView : UIView <BMKGeoCodeSearchDelegate, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout,SearDelaget> {
     
     BMKGeoCodeSearch    *   _geoCodeSearch;
     NSMutableArray      *   _cityMarr;

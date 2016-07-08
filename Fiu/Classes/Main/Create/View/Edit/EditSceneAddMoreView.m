@@ -7,12 +7,11 @@
 //
 
 #import "EditSceneAddMoreView.h"
-#import "SceneLocationViewController.h"
+#import "SearchLocationViewController.h"
 #import "AddTagViewController.h"
 #import "SelectSceneViewController.h"
 #import "AddTagViewController.h"
 #import "ChooseTagsCollectionViewCell.h"
-#import "SceneLocationViewController.h"
 
 @implementation EditSceneAddMoreView
 
@@ -116,7 +115,7 @@
 
 //  选择地理位置
 - (void)changeLocation {
-    SceneLocationViewController * searchLocation = [[SceneLocationViewController alloc] init];
+    SearchLocationViewController * searchLocation = [[SearchLocationViewController alloc] init];
     searchLocation.type = @"edit";
     searchLocation.selectedLocationBlock = ^(NSString * location, NSString * city, NSString * latitude, NSString * longitude){
         _location.text = [NSString stringWithFormat:@"%@ %@", city, location];

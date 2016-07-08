@@ -416,8 +416,6 @@
 		1F35F0511CD2336E0000DB95 /* areas.plist in Resources */ = {isa = PBXBuildFile; fileRef = 1F35F0501CD2336E0000DB95 /* areas.plist */; };
 		1F3C0A771CBF461300B84FEB /* libPods-Fiu.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 1F3C0A761CBF461300B84FEB /* libPods-Fiu.a */; };
 		1F45A7041D2DF708009D7EE1 /* SceneCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F45A7031D2DF708009D7EE1 /* SceneCollectionViewCell.m */; };
-		1F45A78E1D2E6422009D7EE1 /* SceneLocationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F45A78C1D2E6422009D7EE1 /* SceneLocationViewController.m */; };
-		1F45A78F1D2E6422009D7EE1 /* SceneLocationViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1F45A78D1D2E6422009D7EE1 /* SceneLocationViewController.xib */; };
 		1F45A7931D2F5263009D7EE1 /* MapAnnotionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F45A7911D2F5263009D7EE1 /* MapAnnotionViewController.m */; };
 		1F45A7941D2F5263009D7EE1 /* MapAnnotionViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1F45A7921D2F5263009D7EE1 /* MapAnnotionViewController.xib */; };
 		1F4C0AFD1CF616B9006F0EED /* libSocialWechat.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 1F4C0AF71CF616B9006F0EED /* libSocialWechat.a */; };
@@ -1284,9 +1282,6 @@
 		1F3C0A761CBF461300B84FEB /* libPods-Fiu.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = "libPods-Fiu.a"; path = "../Library/Developer/Xcode/DerivedData/Fiu-cjbswbuyriripaegqmobstwznrnk/Build/Products/Debug-iphonesimulator/libPods-Fiu.a"; sourceTree = "<group>"; };
 		1F45A7021D2DF708009D7EE1 /* SceneCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SceneCollectionViewCell.h; sourceTree = "<group>"; };
 		1F45A7031D2DF708009D7EE1 /* SceneCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SceneCollectionViewCell.m; sourceTree = "<group>"; };
-		1F45A78B1D2E6422009D7EE1 /* SceneLocationViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SceneLocationViewController.h; sourceTree = "<group>"; };
-		1F45A78C1D2E6422009D7EE1 /* SceneLocationViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SceneLocationViewController.m; sourceTree = "<group>"; };
-		1F45A78D1D2E6422009D7EE1 /* SceneLocationViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SceneLocationViewController.xib; sourceTree = "<group>"; };
 		1F45A7901D2F5263009D7EE1 /* MapAnnotionViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MapAnnotionViewController.h; sourceTree = "<group>"; };
 		1F45A7911D2F5263009D7EE1 /* MapAnnotionViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MapAnnotionViewController.m; sourceTree = "<group>"; };
 		1F45A7921D2F5263009D7EE1 /* MapAnnotionViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MapAnnotionViewController.xib; sourceTree = "<group>"; };
@@ -1637,9 +1632,6 @@
 			children = (
 				1F2A8BDF1CF40276005116C7 /* SearchLocationViewController.h */,
 				1F2A8BE01CF40276005116C7 /* SearchLocationViewController.m */,
-				1F45A78B1D2E6422009D7EE1 /* SceneLocationViewController.h */,
-				1F45A78C1D2E6422009D7EE1 /* SceneLocationViewController.m */,
-				1F45A78D1D2E6422009D7EE1 /* SceneLocationViewController.xib */,
 				1F45A7901D2F5263009D7EE1 /* MapAnnotionViewController.h */,
 				1F45A7911D2F5263009D7EE1 /* MapAnnotionViewController.m */,
 				1F45A7921D2F5263009D7EE1 /* MapAnnotionViewController.xib */,
@@ -4094,7 +4086,6 @@
 				1F2A90281CF40277005116C7 /* Empty.xib in Resources */,
 				1F223B1D1CD714F3007687F7 /* messages.plist in Resources */,
 				1F2A91131CF40495005116C7 /* UMSCommentDetailController.xib in Resources */,
-				1F45A78F1D2E6422009D7EE1 /* SceneLocationViewController.xib in Resources */,
 				1F2A908A1CF40277005116C7 /* FBPayTheWayViewController.xib in Resources */,
 				1F2A909D1CF40277005116C7 /* ShareViewController.xib in Resources */,
 				1F27AE881CE06BB1005A434B /* AlipaySDK.bundle in Resources */,
@@ -4306,7 +4297,6 @@
 				1F2A8FC71CF40277005116C7 /* GoodsInfoBrand.m in Sources */,
 				1F2A8F601CF40277005116C7 /* AddUrlView.m in Sources */,
 				1F2A8F401CF40277005116C7 /* MarkGoods.m in Sources */,
-				1F45A78E1D2E6422009D7EE1 /* SceneLocationViewController.m in Sources */,
 				1F2A90011CF40277005116C7 /* CounterModel.m in Sources */,
 				D80D415E1CAD144D005D72B1 /* UIBarButtonItem+Helper.m in Sources */,
 				1F2A8FD91CF40277005116C7 /* FBGoodsCommentTableViewCell.m in Sources */,
