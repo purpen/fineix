@@ -324,20 +324,6 @@ static NSString *const URLUserAddGoods = @"/scene_product/add";
             filtersVC.goodsY = originY;
             
             [self.navigationController pushViewController:filtersVC animated:YES];
-
-//            pg_edit_sdk_controller *editCtl = nil;
-//            {
-//                //构建编辑对象    Construct edit target
-//                pg_edit_sdk_controller_object *obje = [[pg_edit_sdk_controller_object alloc] init];
-//                {
-//                    //输入原图  Input original
-//                    obje.pCSA_fullImage = [self.filtersImg copy];
-//                }
-//                editCtl = [[pg_edit_sdk_controller alloc] initWithEditObject:obje withDelegate:self];
-//            }
-//            if (editCtl) {
-//                [self.navigationController pushViewController:editCtl animated:YES];
-//            }
         }
 }
 
