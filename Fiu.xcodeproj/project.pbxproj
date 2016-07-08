@@ -418,6 +418,8 @@
 		1F45A7041D2DF708009D7EE1 /* SceneCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F45A7031D2DF708009D7EE1 /* SceneCollectionViewCell.m */; };
 		1F45A78E1D2E6422009D7EE1 /* SceneLocationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F45A78C1D2E6422009D7EE1 /* SceneLocationViewController.m */; };
 		1F45A78F1D2E6422009D7EE1 /* SceneLocationViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1F45A78D1D2E6422009D7EE1 /* SceneLocationViewController.xib */; };
+		1F45A7931D2F5263009D7EE1 /* MapAnnotionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F45A7911D2F5263009D7EE1 /* MapAnnotionViewController.m */; };
+		1F45A7941D2F5263009D7EE1 /* MapAnnotionViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1F45A7921D2F5263009D7EE1 /* MapAnnotionViewController.xib */; };
 		1F4C0AFD1CF616B9006F0EED /* libSocialWechat.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 1F4C0AF71CF616B9006F0EED /* libSocialWechat.a */; };
 		1F4C0AFE1CF616B9006F0EED /* libWeChatSDK.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 1F4C0AF81CF616B9006F0EED /* libWeChatSDK.a */; };
 		1F520A9B1CF8771600B6882A /* TalentView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F520A9A1CF8771600B6882A /* TalentView.m */; };
@@ -1285,6 +1287,9 @@
 		1F45A78B1D2E6422009D7EE1 /* SceneLocationViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SceneLocationViewController.h; sourceTree = "<group>"; };
 		1F45A78C1D2E6422009D7EE1 /* SceneLocationViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SceneLocationViewController.m; sourceTree = "<group>"; };
 		1F45A78D1D2E6422009D7EE1 /* SceneLocationViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SceneLocationViewController.xib; sourceTree = "<group>"; };
+		1F45A7901D2F5263009D7EE1 /* MapAnnotionViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MapAnnotionViewController.h; sourceTree = "<group>"; };
+		1F45A7911D2F5263009D7EE1 /* MapAnnotionViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MapAnnotionViewController.m; sourceTree = "<group>"; };
+		1F45A7921D2F5263009D7EE1 /* MapAnnotionViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MapAnnotionViewController.xib; sourceTree = "<group>"; };
 		1F4C0AF71CF616B9006F0EED /* libSocialWechat.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libSocialWechat.a; sourceTree = "<group>"; };
 		1F4C0AF81CF616B9006F0EED /* libWeChatSDK.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libWeChatSDK.a; sourceTree = "<group>"; };
 		1F4C0AF91CF616B9006F0EED /* UMSocialWechatHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UMSocialWechatHandler.h; sourceTree = "<group>"; };
@@ -1635,6 +1640,9 @@
 				1F45A78B1D2E6422009D7EE1 /* SceneLocationViewController.h */,
 				1F45A78C1D2E6422009D7EE1 /* SceneLocationViewController.m */,
 				1F45A78D1D2E6422009D7EE1 /* SceneLocationViewController.xib */,
+				1F45A7901D2F5263009D7EE1 /* MapAnnotionViewController.h */,
+				1F45A7911D2F5263009D7EE1 /* MapAnnotionViewController.m */,
+				1F45A7921D2F5263009D7EE1 /* MapAnnotionViewController.xib */,
 			);
 			path = Location;
 			sourceTree = "<group>";
@@ -4096,6 +4104,7 @@
 				1F2A8F371CF40277005116C7 /* AllNearbyScenarioViewController.xib in Resources */,
 				1F2A907E1CF40277005116C7 /* TianMaoOrderViewController.xib in Resources */,
 				1F2A90A11CF40277005116C7 /* SubscribePeopleViewController.xib in Resources */,
+				1F45A7941D2F5263009D7EE1 /* MapAnnotionViewController.xib in Resources */,
 				1F2A90421CF40277005116C7 /* BindIngViewController.xib in Resources */,
 				D8A9AD091CD9CCA900A9FCFB /* Assets.xcassets in Resources */,
 				1F35F0511CD2336E0000DB95 /* areas.plist in Resources */,
@@ -4439,6 +4448,7 @@
 				1F2A8F9D1CF40277005116C7 /* UIImage+Text.m in Sources */,
 				1F2A90231CF40277005116C7 /* TheOfficialCertificationViewController.m in Sources */,
 				1F2A8F4B1CF40277005116C7 /* FBPictureCollectionViewCell.m in Sources */,
+				1F45A7931D2F5263009D7EE1 /* MapAnnotionViewController.m in Sources */,
 				1F2A8FEF1CF40277005116C7 /* FindeFriendViewController.m in Sources */,
 				D81281661CAA8532007CF08B /* JKDBHelper.m in Sources */,
 				1F2A8FE51CF40277005116C7 /* AddreesPickerViewController.m in Sources */,

@@ -8,7 +8,7 @@
 
 #import "SearchLocationViewController.h"
 #import "SVProgressHUD.h"
-
+#define MAPHEGHIT 150
 @interface SearchLocationViewController ()
 
 @end
@@ -112,6 +112,7 @@
     option.reverseGeoPoint = CLLocationCoordinate2DMake(latitude, longitude);
     [_geoCodeSearch reverseGeoCode:option];
 }
+
 
 - (void)onGetReverseGeoCodeResult:(BMKGeoCodeSearch *)searcher result:(BMKReverseGeoCodeResult *)result errorCode:(BMKSearchErrorCode)error {
     if (error == BMK_SEARCH_NO_ERROR) {
@@ -217,7 +218,7 @@
 #pragma mark - 搜索地理位置列表
 - (UITableView *)locationTableView {
     if (!_locationTableView) {
-        _locationTableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 94, SCREEN_WIDTH, SCREEN_HEIGHT-94) style:(UITableViewStylePlain)];
+        _locationTableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 94, SCREEN_WIDTH, SCREEN_HEIGHT-MAPHEGHIT)];
         _locationTableView.showsHorizontalScrollIndicator = NO;
         _locationTableView.showsVerticalScrollIndicator = NO;
         _locationTableView.bounces = YES;
