@@ -28,7 +28,6 @@
         self.selectionStyle = UITableViewCellSelectionStyleNone;
         self.backgroundColor = [UIColor whiteColor];
         [self addSubview:self.sceneListView];
-        
     }
     return self;
 }
@@ -67,15 +66,21 @@
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
     static NSString * collectionViewCellId = @"collectionViewCellId";
     FiuSceneCollectionViewCell * cell = [collectionView dequeueReusableCellWithReuseIdentifier:collectionViewCellId forIndexPath:indexPath];
+    cell.choose = self.choose;
     [cell setFiuSceneList:_fiuSceneListData[indexPath.row]];
     return cell;
 }
 
 #pragma mark UICollectionViewDelegate
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
-    FiuSceneViewController * fiuSceneVC = [[FiuSceneViewController alloc] init];
-    fiuSceneVC.fiuSceneId = _fiuSceneIdData[indexPath.row];
-    [self.nav pushViewController:fiuSceneVC animated:YES];
+    if (self.choose == NO) {
+        FiuSceneViewController * fiuSceneVC = [[FiuSceneViewController alloc] init];
+        fiuSceneVC.fiuSceneId = _fiuSceneIdData[indexPath.row];
+        [self.nav pushViewController:fiuSceneVC animated:YES];
+        
+    } else if (self.choose == YES) {
+        [[NSNotificationCenter defaultCenter] postNotificationName:@"getSelectFiuId" object:[NSString stringWithFormat:@"%zi", indexPath.row]];
+    }
 }
 
 

@@ -294,6 +294,7 @@ static NSString *const URLFiuPeople = @"/user/activity_user";
         if (!cell) {
             cell = [[FiuSceneTableViewCell alloc] initWithStyle:(UITableViewCellStyleDefault) reuseIdentifier:fiuSceneCellId];
         }
+        cell.choose = NO;
         [cell setFiuSceneList:self.fiuSceneList idMarr:self.fiuSceneIdList];
         cell.nav = self.navigationController;
         return cell;

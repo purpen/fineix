@@ -402,23 +402,21 @@ static NSString *const URLFiuBrand = @"/scene_brands/getlist";
             }];
             
         } else if (_rollDown == NO) {
-            if (scrollView.contentOffset.y < SCREEN_HEIGHT) {
-                categoryMenu = CGRectMake(0, -85, SCREEN_WIDTH, 80);
-                [UIView animateWithDuration:0.3 animations:^{
-                    self.categoryMenu.frame = categoryMenu;
-                }];
-                
-                tabBarRect = CGRectMake(0, SCREEN_HEIGHT - 49, SCREEN_WIDTH, 49);
-                tableRect = CGRectMake(0, 64, SCREEN_WIDTH, SCREEN_HEIGHT-64);
-                [UIView animateWithDuration:.4 animations:^{
-                    self.tabBarController.tabBar.frame = tabBarRect;
-                    self.mallTableView.frame = tableRect;
-                    self.leftBtn.alpha = 1;
-                    self.rightBtn.alpha = 1;
-                    self.navView.alpha = 1;
-                }];
-                [[UIApplication sharedApplication] setStatusBarHidden:NO withAnimation:(UIStatusBarAnimationSlide)];
-            }
+            categoryMenu = CGRectMake(0, -85, SCREEN_WIDTH, 80);
+            [UIView animateWithDuration:0.3 animations:^{
+                self.categoryMenu.frame = categoryMenu;
+            }];
+            
+            tabBarRect = CGRectMake(0, SCREEN_HEIGHT - 49, SCREEN_WIDTH, 49);
+            tableRect = CGRectMake(0, 64, SCREEN_WIDTH, SCREEN_HEIGHT-64);
+            [UIView animateWithDuration:.4 animations:^{
+                self.tabBarController.tabBar.frame = tabBarRect;
+                self.mallTableView.frame = tableRect;
+                self.leftBtn.alpha = 1;
+                self.rightBtn.alpha = 1;
+                self.navView.alpha = 1;
+            }];
+            [[UIApplication sharedApplication] setStatusBarHidden:NO withAnimation:(UIStatusBarAnimationSlide)];
         }
     }
 }

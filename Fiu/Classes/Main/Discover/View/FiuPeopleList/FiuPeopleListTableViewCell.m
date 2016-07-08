@@ -24,30 +24,30 @@
     self.userName.text = model.nickname;
     [self.userHeader downloadImage:model.avatarUrl place:[UIImage imageNamed:@""]];
     self.userLevel.text = [NSString stringWithFormat:@"LV%zi",model.userRank];
-    NSLog(@"＝＝＝＝＝＝＝ %zi", model.isExpert);
     if (model.isExpert == 1) {
         self.userVimg.hidden = NO;
-//        self.userStar.text = model.expertLabel;
-//        self.userProfile.text = [NSString stringWithFormat:@"|  %@", model.expertInfo];
-//        CGSize size = [self.userStar boundingRectWithSize:CGSizeMake(100, 0)];
-//        
-//        [self.userStar mas_updateConstraints:^(MASConstraintMaker *make) {
-//            make.width.mas_equalTo(size.width);
-//        }];
-//        [self.userProfile mas_updateConstraints:^(MASConstraintMaker *make) {
-//            make.left.equalTo(self.userStar.mas_right).with.offset(5);
-//        }];
+        self.userStar.text = model.expertLabel;
+        self.userProfile.text = [NSString stringWithFormat:@"|  %@", model.expertInfo];
+        
+        CGSize size = [self.userStar boundingRectWithSize:CGSizeMake(100, 0)];
+        [self.userStar mas_updateConstraints:^(MASConstraintMaker *make) {
+            make.width.mas_equalTo(size.width);
+        }];
+        [self.userProfile mas_updateConstraints:^(MASConstraintMaker *make) {
+            make.left.equalTo(self.userStar.mas_right).with.offset(5);
+        }];
         
     } else {
         self.userVimg.hidden = YES;
-//        self.userStar.text = @"";
-//        self.userProfile.text = model.summary;
-//        [self.userStar mas_updateConstraints:^(MASConstraintMaker *make) {
-//            make.width.mas_equalTo(0);
-//        }];
-//        [self.userProfile mas_updateConstraints:^(MASConstraintMaker *make) {
-//            make.left.equalTo(self.userStar.mas_right).with.offset(0);
-//        }];
+        self.userStar.text = @"";
+        self.userProfile.text = model.summary;
+        
+        [self.userStar mas_updateConstraints:^(MASConstraintMaker *make) {
+            make.width.mas_equalTo(0);
+        }];
+        [self.userProfile mas_updateConstraints:^(MASConstraintMaker *make) {
+            make.left.equalTo(self.userStar.mas_right).with.offset(0);
+        }];
     }
 
     //  显示奖牌图像
@@ -109,19 +109,19 @@
         make.left.equalTo(_userName.mas_left).with.offset(0);
     }];
 
-//    [self addSubview:self.userStar];
-//    [_userStar mas_makeConstraints:^(MASConstraintMaker *make) {
-//        make.size.mas_equalTo(CGSizeMake(0, 14));
-//        make.bottom.equalTo(_userHeader.mas_bottom).with.offset(0);
-//        make.left.equalTo(_userLv.mas_right).with.offset(10);
-//    }];
-//    
-//    [self addSubview:self.userProfile];
-//    [_userProfile mas_makeConstraints:^(MASConstraintMaker *make) {
-//        make.size.mas_equalTo(CGSizeMake(220, 14));
-//        make.bottom.equalTo(_userHeader.mas_bottom).with.offset(-5);
-//        make.left.equalTo(_userLv.mas_right).with.offset(0);
-//    }];
+    [self addSubview:self.userStar];
+    [_userStar mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.size.mas_equalTo(CGSizeMake(0, 14));
+        make.bottom.equalTo(_userLevel.mas_bottom).with.offset(0);
+        make.left.equalTo(_userLevel.mas_right).with.offset(0);
+    }];
+
+    [self addSubview:self.userProfile];
+    [_userProfile mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.size.mas_equalTo(CGSizeMake(220, 14));
+        make.bottom.equalTo(_userLevel.mas_bottom).with.offset(0);
+        make.left.equalTo(_userLevel.mas_right).with.offset(0);
+    }];
     
 }
 

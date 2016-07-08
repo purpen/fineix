@@ -363,7 +363,7 @@
         [_describeIcon mas_makeConstraints:^(MASConstraintMaker *make) {
             make.size.mas_equalTo(CGSizeMake(15, 15));
             make.bottom.equalTo(_describe.mas_bottom).with.offset(0);
-            make.right.equalTo(_describe.mas_right).with.offset(-1);
+            make.right.equalTo(_describe.mas_right).with.offset(1);
         }];
         
         [self.describe mas_updateConstraints:^(MASConstraintMaker *make) {

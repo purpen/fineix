@@ -40,6 +40,7 @@
         _categoryLab = [[UILabel alloc] initWithFrame:CGRectMake(0, 55, 50, 12)];
         _categoryLab.textAlignment = NSTextAlignmentCenter;
         _categoryLab.font = [UIFont systemFontOfSize:12];
+        _categoryLab.textColor = [UIColor colorWithHexString:@"#666666"];
     }
     return _categoryLab;
 }

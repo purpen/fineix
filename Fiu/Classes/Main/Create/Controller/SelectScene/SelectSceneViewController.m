@@ -38,6 +38,8 @@ static NSString *const URLFSceneList = @"/scene_scene/";
     
     //  from: "SelectHotFSceneTableViewCell.h"
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(getSelectId:) name:@"getSelectId" object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(getSelectFiuId:) name:@"getSelectFiuId" object:nil];
+    
 }
 
 - (void)viewDidLoad {
@@ -52,6 +54,11 @@ static NSString *const URLFSceneList = @"/scene_scene/";
 - (void)getSelectId:(NSNotification *)idx {
     self.fSceneId = self.fiuIdMarr[[[idx object] integerValue]];
     self.fSceneTitle = self.fiuTitleMarr[[[idx object] integerValue]];
+}
+
+- (void)getSelectFiuId:(NSNotification *)index {
+    self.fSceneId = self.idMarr[[[index object] integerValue]];
+    self.fSceneTitle = self.titleMarr[[[index object] integerValue]];
 }
 
 #pragma mark - 网络请求
@@ -137,6 +144,7 @@ static NSString *const URLFSceneList = @"/scene_scene/";
         if (!cell) {
             cell = [[FiuSceneTableViewCell alloc] initWithStyle:(UITableViewCellStyleDefault) reuseIdentifier:fiuSceneCellId];
         }
+        cell.choose = YES;
         [cell setFiuSceneList:self.fiuSceneList idMarr:self.idMarr];
         return cell;
     
@@ -237,18 +245,6 @@ static NSString *const URLFSceneList = @"/scene_scene/";
     }
 }
 
-#pragma mark - 选中附近的情景
-- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    if (indexPath.section == 1) {
-        self.getIdxAndTitltBlock(self.idMarr[indexPath.row], self.titleMarr[indexPath.row]);
-        if ([self.type isEqualToString:@"release"]) {
-            [self.navigationController popViewControllerAnimated:YES];
-        } else if ([self.type isEqualToString:@"edit"]) {
-            [self dismissViewControllerAnimated:YES completion:nil];
-        }
-    }
-}
-
 #pragma mark - 获取当前位置坐标
 - (void)getLocation {
     //  判断是否开启GPS定位
@@ -321,6 +317,7 @@ static NSString *const URLFSceneList = @"/scene_scene/";
 
 - (void)dealloc {
     [[NSNotificationCenter defaultCenter] removeObserver:self name:@"getSelectId" object:nil];
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:@"getSelectFiuId" object:nil];
 }
 
 #pragma mark -

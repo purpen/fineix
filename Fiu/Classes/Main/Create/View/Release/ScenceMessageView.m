@@ -7,6 +7,7 @@
 //
 
 #import "ScenceMessageView.h"
+#import "FBEditShareInfoViewController.h"
 
 @implementation ScenceMessageView
 
@@ -139,11 +140,17 @@
         
         [_bottomView addSubview:self.title];
         [_title mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.size.mas_equalTo(CGSizeMake(SCREEN_WIDTH - 30, 44.5));
+            make.size.mas_equalTo(CGSizeMake(SCREEN_WIDTH - 84, 44.5));
             make.top.equalTo(_bottomView.mas_top).with.offset(0);
             make.left.equalTo(_bottomView.mas_left).with.offset(15);
         }];
         
+        [_bottomView addSubview:self.chooseText];
+        [_chooseText mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.size.mas_equalTo(CGSizeMake(54, 44.5));
+            make.top.equalTo(_bottomView.mas_top).with.offset(0);
+            make.right.equalTo(_bottomView.mas_right).with.offset(-10);
+        }];
     }
     return _bottomView;
 }
@@ -167,6 +174,30 @@
         return NO;
     }
     return YES;
+}
+
+#pragma mark - 选择语境
+- (UIButton *)chooseText {
+    if (!_chooseText) {
+        _chooseText = [[UIButton alloc] init];
+        _chooseText.titleLabel.font = [UIFont systemFontOfSize:12];
+        [_chooseText setTitle:NSLocalizedString(@"ChooseText", nil) forState:(UIControlStateNormal)];
+        [_chooseText setTitleColor:[UIColor colorWithHexString:@"#666666"] forState:(UIControlStateNormal)];
+        [_chooseText addTarget:self action:@selector(goChooseText) forControlEvents:(UIControlEventTouchUpInside)];
+    }
+    return _chooseText;
+}
+
+- (void)goChooseText {
+    FBEditShareInfoViewController * chooseTextVC = [[FBEditShareInfoViewController alloc] init];
+    chooseTextVC.bgImg = self.imageView.image;
+    [self.vc presentViewController:chooseTextVC animated:YES completion:nil];
+    
+    chooseTextVC.getEdtiShareText = ^ (NSString * title, NSString * des) {
+        self.title.text = title;
+        self.content.text = des;
+        self.content.textColor = [UIColor colorWithHexString:@"#000000" alpha:1];
+    };
 }
 
 @end

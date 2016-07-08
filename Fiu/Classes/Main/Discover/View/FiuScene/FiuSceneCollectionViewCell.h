@@ -13,10 +13,12 @@
 
 @interface FiuSceneCollectionViewCell : UICollectionViewCell
 
+@pro_assign BOOL                            choose;
 @pro_strong UIImageView                 *   sceneImage;     //  情景图片
 @pro_strong UILabel                     *   titleLab;       //  情景标题
 @pro_strong UIImageView                 *   locationIcon;   //  地理位置图标
 @pro_strong UILabel                     *   locationLab;    //  地理位置
+@pro_strong UIImageView                 *   bgImg;          //  遮罩
 
 - (void)setFiuSceneList:(FiuSceneRow *)model;
 

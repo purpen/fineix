@@ -180,6 +180,7 @@ static NSString *const URLReleaseFiuScenen = @"/scene_scene/save";
 - (ScenceMessageView *)scenceView {
     if (!_scenceView) {
         _scenceView = [[ScenceMessageView alloc] initWithFrame:CGRectMake(0, 50, SCREEN_WIDTH, 236.5)];
+        _scenceView.vc = self;
     }
     return _scenceView;
 }

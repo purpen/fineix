@@ -61,6 +61,7 @@ static NSString *const FiuPeople = @"/user/activity_user";
         _userListTable = [[UITableView alloc] initWithFrame:CGRectMake(0, 64, SCREEN_WIDTH, SCREEN_HEIGHT - 64) style:(UITableViewStylePlain)];
         _userListTable.delegate = self;
         _userListTable.dataSource = self;
+        _userListTable.tableFooterView = [UIView new];
     }
     return _userListTable;
 }
