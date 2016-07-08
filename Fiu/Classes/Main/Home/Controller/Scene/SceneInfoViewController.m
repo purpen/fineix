@@ -130,7 +130,7 @@ static NSString *const URLDeleteScene = @"/scene_sight/delete";
     self.deleteSceneRequest = [FBAPI postWithUrlString:URLDeleteScene requestDictionary:@{@"id":self.sceneId} delegate:self];
     [self.deleteSceneRequest startRequestSuccess:^(FBRequest *request, id result) {
         if ([[result valueForKey:@"success"] isEqualToNumber:@1]) {
-            [[NSNotificationCenter defaultCenter] postNotificationName:@"deleteScene" object:nil];
+            [[NSNotificationCenter defaultCenter] postNotificationName:@"refreshTable" object:nil];
             [self.navigationController popViewControllerAnimated:YES];
         }
         

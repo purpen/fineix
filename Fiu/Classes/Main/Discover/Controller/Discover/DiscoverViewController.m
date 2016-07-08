@@ -52,10 +52,10 @@ static NSString *const URLFiuPeople = @"/user/activity_user";
     [self setNavigationViewUI];
     
     [self setFirstAppStart];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(deleteScene) name:@"deleteScene" object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(refreshTable) name:@"refreshTable" object:nil];
 }
 
-- (void)deleteScene {
+- (void)refreshTable {
     [self.discoverTableView.mj_header beginRefreshing];
 }
 
@@ -519,7 +519,7 @@ static NSString *const URLFiuPeople = @"/user/activity_user";
 }
 
 - (void)dealloc {
-    [[NSNotificationCenter defaultCenter] removeObserver:self name:@"deleteScene" object:nil];
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:@"refreshTable" object:nil];
 }
 
 @end

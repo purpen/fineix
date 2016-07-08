@@ -93,10 +93,15 @@ static NSString *const URLReleaseFiuScenen = @"/scene_scene/save";
         self.releaseSceneRequest = [FBAPI postWithUrlString:URLReleaseScenen requestDictionary:paramDict delegate:self];
         
         [self.releaseSceneRequest startRequestSuccess:^(FBRequest *request, id result) {
-            NSString * sceneId = [NSString stringWithFormat:@"%@",[[result valueForKey:@"data"] valueForKey:@"id"]];
-            LookSceneViewController * sceneInfoVC = [[LookSceneViewController alloc] init];
-            sceneInfoVC.sceneId = sceneId;
-            [self.navigationController pushViewController:sceneInfoVC animated:YES];
+//            NSString * sceneId = [NSString stringWithFormat:@"%@",[[result valueForKey:@"data"] valueForKey:@"id"]];
+//            LookSceneViewController * sceneInfoVC = [[LookSceneViewController alloc] init];
+//            sceneInfoVC.sceneId = sceneId;
+//            [self.navigationController pushViewController:sceneInfoVC animated:YES];
+            
+            [SVProgressHUD dismiss];
+            [self dismissViewControllerAnimated:YES completion:^{
+                [[NSNotificationCenter defaultCenter] postNotificationName:@"refreshTable" object:nil];
+            }];
         
         } failure:^(FBRequest *request, NSError *error) {
             NSLog(@"%@", error);
