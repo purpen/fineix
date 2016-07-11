@@ -158,8 +158,8 @@
 - (UIImageView *)userHeader {
     if (!_userHeader) {
         _userHeader = [[UIImageView alloc] init];
-        _userHeader.layer.borderColor = [UIColor colorWithHexString:@"#666666" alpha:.7].CGColor;
-        _userHeader.layer.borderWidth = 1;
+        _userHeader.layer.borderColor = [UIColor colorWithHexString:@"#666666" alpha:.5].CGColor;
+        _userHeader.layer.borderWidth = 0.5f;
         _userHeader.layer.masksToBounds = YES;
         _userHeader.layer.cornerRadius = 20;
     }

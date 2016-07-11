@@ -7,7 +7,16 @@
 //
 
 #import "FBViewController.h"
+#import "FBBrandGoodsView.h"
+#import "BrandListModel.h"
+#import <SVProgressHUD/SVProgressHUD.h>
 
-@interface FiuBrandListViewController : FBViewController <FBNavigationBarItemsDelegate>
+@interface FiuBrandListViewController : FBViewController <FBNavigationBarItemsDelegate, UITableViewDelegate, UITableViewDataSource>
+
+@pro_strong FBRequest               *   brandListRequest;
+@pro_strong FBRequest               *   selfBrandListRequest;
+
+@pro_strong FBBrandGoodsView        *   seleBrandView;
+@pro_strong UITableView             *   brandTable;
 
 @end
