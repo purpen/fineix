@@ -293,7 +293,7 @@
 #pragma mark - 搜索地理位置列表
 - (UITableView *)locationTableView {
     if (!_locationTableView) {
-        _locationTableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 94, SCREEN_WIDTH, SCREEN_HEIGHT-MAPHEGHIT)];
+        _locationTableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 94, SCREEN_WIDTH, SCREEN_HEIGHT-MAPHEGHIT-94)];
         _locationTableView.showsHorizontalScrollIndicator = NO;
         _locationTableView.showsVerticalScrollIndicator = NO;
         _locationTableView.bounces = YES;
