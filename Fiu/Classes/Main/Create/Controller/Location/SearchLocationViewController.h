@@ -12,6 +12,12 @@
 #import "FBPictureViewController.h"
 #import "FBSearchView.h"
 
+@protocol SearDelaget <NSObject>
+
+-(void)getUserInfo:(NSString *)name;
+
+@end
+
 typedef void(^SelectedLocationBlock)(NSString * location, NSString * city, NSString * latitude, NSString * longitude);
 
 @interface SearchLocationViewController : FBPictureViewController <
@@ -41,6 +47,8 @@ typedef void(^SelectedLocationBlock)(NSString * location, NSString * city, NSStr
 @pro_strong NSMutableArray      *   latitudeMarr;           //  纬度
 @pro_strong NSMutableArray      *   longitudeMarr;          //  纬度
 
+/**  */
+@property (nonatomic, weak) id<SearDelaget> delegeta;
 
 @pro_strong SelectedLocationBlock selectedLocationBlock;
 

@@ -39,6 +39,8 @@ static NSString *const URLReleaseFiuScenen = @"/scene_scene/save";
     self.addView.fiuId = @"";
 }
 
+
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.view.backgroundColor = [UIColor whiteColor];
@@ -212,6 +214,8 @@ static NSString *const URLReleaseFiuScenen = @"/scene_scene/save";
     }
     return _addView;
 }
+
+
 
 #pragma mark -  设置导航栏
 - (void)setNavViewUI {

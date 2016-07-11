@@ -10,7 +10,8 @@
 #import <BaiduMapAPI_Map/BMKMapComponent.h>//引入地图功能所有的头文件
 #import <BaiduMapAPI_Location/BMKLocationComponent.h>
 #import <BaiduMapAPI_Search/BMKSearchComponent.h>
-#import "EditViewController.h"
+#import "ReleaseViewController.h"
+#import "SearchLocationViewController.h"
 #define MAP_TOP 125
 
 typedef void(^SelectedLocationBlock)(NSString * location, NSString * city, NSString * latitude, NSString * longitude);
@@ -18,6 +19,8 @@ typedef void(^SelectedLocationBlock)(NSString * location, NSString * city, NSStr
 @interface MapAnnotionViewController ()<BMKMapViewDelegate,BMKLocationServiceDelegate,BMKGeoCodeSearchDelegate>
 {
     CLLocationCoordinate2D _pt;
+    NSString *_titile;
+    NSString *_subTitle;
 }
 /** 地图 */
 @property (nonatomic, strong) BMKMapView *mapView;
@@ -80,7 +83,11 @@ typedef void(^SelectedLocationBlock)(NSString * location, NSString * city, NSStr
 }
 
 - (void)cancelVCBtnClick {
-    NSLog(@"确定");
+    if ([self.delegate respondsToSelector:@selector(mapAnnoWithName:)]) {
+        [self.delegate mapAnnoWithName:_titile];
+    }
+    UIViewController *vc = self.navigationController.viewControllers[4];
+    [self.navigationController popToViewController:vc animated:YES];
 }
 
 //  分割线
@@ -117,6 +124,7 @@ typedef void(^SelectedLocationBlock)(NSString * location, NSString * city, NSStr
 -(void)rightBarItemSelected{
 //    self.selectedLocationBlock(nil, nil, nil, nil);
 //   [self.navigationController popViewControllerAnimated:YES];
+    
 }
 
 -(BMKMapView *)mapView{
@@ -141,6 +149,8 @@ typedef void(^SelectedLocationBlock)(NSString * location, NSString * city, NSStr
 -(void)onGetReverseGeoCodeResult:(BMKGeoCodeSearch *)searcher result:(BMKReverseGeoCodeResult *)result errorCode:(BMKSearchErrorCode)error{
     if (result.poiList.count) {
         self.locationLabel.text = ((BMKPoiInfo *)result.poiList[0]).name;
+        _titile = ((BMKPoiInfo *)result.poiList[0]).name;
+        _subTitle = result.address;
     }
 }
 

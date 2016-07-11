@@ -7,7 +7,7 @@
 //
 
 #import "ScenceAddMoreView.h"
-#import "SceneLocationViewController.h"
+#import "SearchLocationViewController.h"
 #import "AddTagViewController.h"
 #import "SelectSceneViewController.h"
 #import "AddTagViewController.h"
@@ -146,10 +146,11 @@ static const NSInteger btnTag = 100;
 
 #pragma mark - 选择推荐位置改变选择地点 
 - (void)changeLocationName:(UIButton *)button {
-    
-    //  搜索地点
+    //  搜索地点d
     if (button.tag == btnTag + 5) {
-        SceneLocationViewController * searchLocationVC = [[SceneLocationViewController alloc] init];
+        SearchLocationViewController * searchLocationVC = [[SearchLocationViewController alloc] init];
+        searchLocationVC.delegeta = self;
+        NSLog(@"%@",searchLocationVC.delegeta);
         [self.nav pushViewController:searchLocationVC animated:YES];
         
     } else {
@@ -158,6 +159,10 @@ static const NSInteger btnTag = 100;
         _locationView.hidden = NO;
         [self offLocationFrame];
     }
+}
+
+-(void)getUserInfo:(NSString *)name{
+    self.location.text = name;
 }
 
 #pragma mark - 创建根据照片位置推荐的五个附近
@@ -237,8 +242,9 @@ static const NSInteger btnTag = 100;
 
 //  选择地理位置
 - (void)changeLocation {
-    SceneLocationViewController * searchLocation = [[SceneLocationViewController alloc] init];
+    SearchLocationViewController * searchLocation = [[SearchLocationViewController alloc] init];
     searchLocation.type = @"release";
+    searchLocation.delegeta = self;
     searchLocation.selectedLocationBlock = ^(NSString * location, NSString * city, NSString * latitude, NSString * longitude){
         _location.text = [NSString stringWithFormat:@"%@ %@", city, location];
         _latitude = latitude;
