@@ -10,7 +10,7 @@
 #import "SVProgressHUD.h"
 #import <BaiduMapAPI_Map/BMKMapComponent.h>//引入地图功能所有的头文件
 #import "MapAnnotionViewController.h"
-#define MAPHEGHIT 150
+#define MAPHEGHIT 100
 @interface SearchLocationViewController ()<BMKLocationServiceDelegate,BMKMapViewDelegate,MapannotionDelegate>
 /** 地图 */
 @property (nonatomic, strong) BMKMapView *mapView;
@@ -60,14 +60,15 @@
     vc.firstName = self.locationNameMarr[0];
     vc.lat = [self.latitudeMarr[0] doubleValue];
     vc.lon = [self.longitudeMarr[0] doubleValue];
+    vc.firstCity = self.locationCityMarr[0];
     vc.delegate = self;
     [self.navigationController pushViewController:vc animated:YES];
 }
 
--(void)mapAnnoWithName:(NSString *)name{
-    NSLog(@"%@",self.delegeta);
-    if ([self.delegeta respondsToSelector:@selector(getUserInfo:)]) {
-        [self.delegeta getUserInfo:name];
+
+-(void)mapAnnoWithName:(NSString *)name andCity:(NSString *)city andLat:(NSString *)lat andLon:(NSString *)lon{
+    if ([self.delegeta respondsToSelector:@selector(searchLocationWithName:andCity:andLat:andLon:)]) {
+        [self.delegeta searchLocationWithName:name andCity:city andLat:lat andLon:lon];
     }
 }
 
@@ -292,7 +293,7 @@
 #pragma mark - 搜索地理位置列表
 - (UITableView *)locationTableView {
     if (!_locationTableView) {
-        _locationTableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 94, SCREEN_WIDTH, SCREEN_HEIGHT-MAPHEGHIT)];
+        _locationTableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 94, SCREEN_WIDTH, SCREEN_HEIGHT-MAPHEGHIT-94)];
         _locationTableView.showsHorizontalScrollIndicator = NO;
         _locationTableView.showsVerticalScrollIndicator = NO;
         _locationTableView.bounces = YES;
@@ -324,7 +325,7 @@
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-    return 70;
+    return 50;
 }
 
 #pragma mark - 选中位置

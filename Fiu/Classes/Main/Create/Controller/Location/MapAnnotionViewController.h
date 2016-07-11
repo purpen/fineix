@@ -10,7 +10,7 @@
 
 @protocol MapannotionDelegate <NSObject>
 
--(void)mapAnnoWithName:(NSString *)name;
+-(void)mapAnnoWithName:(NSString *)name andCity:(NSString *)city andLat:(NSString*)lat andLon:(NSString*)lon;
 
 @end
 
@@ -22,6 +22,8 @@
 @property (nonatomic, assign) double lat;
 /** 经度 */
 @property (nonatomic, assign) double lon;
+/**  */
+@property(nonatomic,copy) NSString *firstCity;
 
 
 @property (nonatomic, weak) id<MapannotionDelegate> delegate;

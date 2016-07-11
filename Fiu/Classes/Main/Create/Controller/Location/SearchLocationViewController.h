@@ -14,7 +14,7 @@
 
 @protocol SearDelaget <NSObject>
 
--(void)getUserInfo:(NSString *)name;
+-(void)searchLocationWithName:(NSString *)name andCity:(NSString *)city andLat:(NSString*)lat andLon:(NSString*)lon;
 
 @end
 

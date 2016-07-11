@@ -21,6 +21,7 @@ typedef void(^SelectedLocationBlock)(NSString * location, NSString * city, NSStr
     CLLocationCoordinate2D _pt;
     NSString *_titile;
     NSString *_subTitle;
+    NSString *_city;
 }
 /** 地图 */
 @property (nonatomic, strong) BMKMapView *mapView;
@@ -54,6 +55,11 @@ typedef void(^SelectedLocationBlock)(NSString * location, NSString * city, NSStr
     [self.location startUserLocationService];
     [self.view addSubview:self.annoImageView];
     self.annoImageView.center = self.mapView.center;
+    
+    _titile = _firstName;
+    _city = _firstCity;
+    _lat = self.lat;
+    _lon = self.lon;
 }
 
 #pragma mark - 重新定位按钮
@@ -83,9 +89,14 @@ typedef void(^SelectedLocationBlock)(NSString * location, NSString * city, NSStr
 }
 
 - (void)cancelVCBtnClick {
-    if ([self.delegate respondsToSelector:@selector(mapAnnoWithName:)]) {
-        [self.delegate mapAnnoWithName:_titile];
-    }
+    NSNotification * notice =[NSNotification notificationWithName:@"a" object:nil userInfo:@{
+                                                                                             @"name":_titile,
+                                                                                             @"city":_city,
+                                                                                             @"lat":[NSString stringWithFormat:@"%f",_pt.latitude],
+                                                                                             @"lon":[NSString stringWithFormat:@"%f",_pt.longitude]
+                                                                                             }];
+    //发送消息
+    [[NSNotificationCenter defaultCenter]postNotification:notice];
     UIViewController *vc = self.navigationController.viewControllers[4];
     [self.navigationController popToViewController:vc animated:YES];
 }
@@ -150,6 +161,8 @@ typedef void(^SelectedLocationBlock)(NSString * location, NSString * city, NSStr
     if (result.poiList.count) {
         self.locationLabel.text = ((BMKPoiInfo *)result.poiList[0]).name;
         _titile = ((BMKPoiInfo *)result.poiList[0]).name;
+        _city = ((BMKPoiInfo *)result.poiList[0]).city;
+        NSLog(@"_titile%@",_titile);
         _subTitle = result.address;
     }
 }
