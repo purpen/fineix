@@ -100,6 +100,7 @@ static NSString *const URLReleaseFiuScenen = @"/scene_scene/save";
             
             [SVProgressHUD dismiss];
             [self dismissViewControllerAnimated:YES completion:^{
+                [SVProgressHUD showSuccessWithStatus:@"您的情景发布成功，品味又升级啦"];
                 [[NSNotificationCenter defaultCenter] postNotificationName:@"refreshTable" object:nil];
             }];
         
@@ -142,7 +143,7 @@ static NSString *const URLReleaseFiuScenen = @"/scene_scene/save";
             //  to #import "AllSceneViewController.h"
             [[NSNotificationCenter defaultCenter] postNotificationName:@"refreshAllFSceneList" object:nil];
             [self dismissViewControllerAnimated:YES completion:nil];
-            [SVProgressHUD showSuccessWithStatus:@"您的情景发布成功，品味又升级啦"];
+            [SVProgressHUD showSuccessWithStatus:@"您的地盘发布成功，品味又升级啦"];
             
         } failure:^(FBRequest *request, NSError *error) {
             NSLog(@"%@", error);

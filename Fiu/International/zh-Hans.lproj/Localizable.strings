@@ -37,7 +37,7 @@
 "chooseSceneVcTitle" = "选择地盘";
 "filterVcTitle" = "选择滤镜";
 "GoodsCategoryVcTitle" = "好货分类";
-"GoodsInfoVcTitle" = "产品详情";
+"GoodsInfoVcTitle" = "好货详情";
 "CommentVcTitle" = "评论";
 "AllSceneVcTitle" = "全部地盘";
 "GoodsCarVcTitle" = "购物车";
@@ -135,7 +135,7 @@
 
 //  商品详情
 "userSceneTitle" = "应用的情景";
-"recommendGoodsTitle" = "相关推荐";
+"recommendGoodsTitle" = "相关好货推荐";
 "lookMore" = "查看更多";
 "addGoodsCar" = "加入购物车";
 "buyingGoods" = "立即购买";
@@ -143,7 +143,7 @@
 "goTbBuyGoods" = "去淘宝购买";
 "goTmBuyGoods" = "去天猫购买";
 "goJdBuyGoods" = "去京东购买";
-"goodsDes" = "产品描述/亮点";
+"goodsDes" = "好货描述/亮点";
 
 //  标题
 "AllGoods" = "全部";
@@ -158,8 +158,8 @@
 "fiuGoods" = "Fiu东西";
 "fiuGoodsText" = "[东西不少，牌子不小]";
 "peopleLike" = "人赞";
-"sceneGoods" = "此情景下的商品";
-"sceneLikeGoods" = "相近的商品";
+"sceneGoods" = "此情景下的好货";
+"sceneLikeGoods" = "相近的好货";
 
 //  滤镜
 "FiltersName" = "原图";
