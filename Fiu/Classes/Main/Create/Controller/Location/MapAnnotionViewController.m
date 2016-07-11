@@ -14,14 +14,10 @@
 #import "SearchLocationViewController.h"
 #define MAP_TOP 125
 
-typedef void(^SelectedLocationBlock)(NSString * location, NSString * city, NSString * latitude, NSString * longitude);
-
 @interface MapAnnotionViewController ()<BMKMapViewDelegate,BMKLocationServiceDelegate,BMKGeoCodeSearchDelegate>
 {
     CLLocationCoordinate2D _pt;
-    NSString *_titile;
     NSString *_subTitle;
-    NSString *_city;
 }
 /** 地图 */
 @property (nonatomic, strong) BMKMapView *mapView;
@@ -32,11 +28,13 @@ typedef void(^SelectedLocationBlock)(NSString * location, NSString * city, NSStr
 @property (nonatomic, strong) UIImageView *annoImageView;
 /** 反向地理编码 */
 @property (nonatomic, strong) BMKGeoCodeSearch *searcher;
-@pro_strong SelectedLocationBlock selectedLocationBlock;
 /**  */
 @property (nonatomic, strong) UIButton *positioningBtn;
 /**  */
 @property (nonatomic, strong) UIButton *cancelVCBtn;
+/**  */
+@property (nonatomic, strong) NSMutableArray *addressAry;
+
 @end
 
 @implementation MapAnnotionViewController
@@ -51,15 +49,17 @@ typedef void(^SelectedLocationBlock)(NSString * location, NSString * city, NSStr
     [self.navView addSubview:self.cancelVCBtn];
 
     [self.view addSubview:self.mapView];
-    _locationLabel.text = self.firstName;
+    _locationLabel.text = self.nameAry[0];
     [self.location startUserLocationService];
     [self.view addSubview:self.annoImageView];
     self.annoImageView.center = self.mapView.center;
-    
-    _titile = _firstName;
-    _city = _firstCity;
-    _lat = self.lat;
-    _lon = self.lon;
+}
+
+-(NSMutableArray *)addressAry{
+    if (!_addressAry) {
+        _addressAry = [[NSMutableArray alloc] init];
+    }
+    return _addressAry;
 }
 
 #pragma mark - 重新定位按钮
@@ -84,21 +84,25 @@ typedef void(^SelectedLocationBlock)(NSString * location, NSString * city, NSStr
         _cancelVCBtn.titleLabel.font = [UIFont systemFontOfSize:Font_ControllerTitle];
         [self.cancelVCBtn setTitle:@"确定" forState:(UIControlStateNormal)];
         [self.cancelVCBtn addTarget:self action:@selector(cancelVCBtnClick) forControlEvents:(UIControlEventTouchUpInside)];
+        _cancelVCBtn.enabled = NO;
+        [_cancelVCBtn setTitleColor:[UIColor lightGrayColor] forState:UIControlStateNormal];
     }
     return _cancelVCBtn;
 }
 
 - (void)cancelVCBtnClick {
-    NSNotification * notice =[NSNotification notificationWithName:@"a" object:nil userInfo:@{
-                                                                                             @"name":_titile,
-                                                                                             @"city":_city,
-                                                                                             @"lat":[NSString stringWithFormat:@"%f",_pt.latitude],
-                                                                                             @"lon":[NSString stringWithFormat:@"%f",_pt.longitude]
+    NSNotification * notice =[NSNotification notificationWithName:@"b" object:nil userInfo:@{
+                                                                                             @"name":self.nameAry,
+                                                                                             @"city":self.cityAry,
+                                                                                             @"lat":self.latAry,
+                                                                                             @"lon":self.lonAry,
+                                                                                             @"add":self.addressAry,
+                                                                                             @"lat1":@(_pt.latitude),
+                                                                                             @"lon1":@(_pt.longitude)
                                                                                              }];
     //发送消息
     [[NSNotificationCenter defaultCenter]postNotification:notice];
-    UIViewController *vc = self.navigationController.viewControllers[4];
-    [self.navigationController popToViewController:vc animated:YES];
+    [self.navigationController popViewControllerAnimated:YES];
 }
 
 //  分割线
@@ -144,7 +148,7 @@ typedef void(^SelectedLocationBlock)(NSString * location, NSString * city, NSStr
         _mapView.zoomLevel = 18;
         _mapView.delegate = self;
         _mapView.showsUserLocation = YES;
-        _mapView.centerCoordinate = CLLocationCoordinate2DMake(self.lat, self.lon);
+        _mapView.centerCoordinate = CLLocationCoordinate2DMake([self.latAry[0] doubleValue], [self.lonAry[0] doubleValue]);
     }
     return _mapView;
 }
@@ -153,6 +157,7 @@ typedef void(^SelectedLocationBlock)(NSString * location, NSString * city, NSStr
     CGPoint center = CGPointMake(self.view.center.x, self.view.center.y-MAP_TOP*0.5);
     CLLocationCoordinate2D pt = [self.mapView convertPoint:center toCoordinateFromView:self.mapView];
     _pt = pt;
+    
     BMKReverseGeoCodeOption *reverGeoCodeSearchOption = [[BMKReverseGeoCodeOption alloc] init];
     reverGeoCodeSearchOption.reverseGeoPoint = pt;
     [self.searcher reverseGeoCode:reverGeoCodeSearchOption];
@@ -160,10 +165,30 @@ typedef void(^SelectedLocationBlock)(NSString * location, NSString * city, NSStr
 
 -(void)onGetReverseGeoCodeResult:(BMKGeoCodeSearch *)searcher result:(BMKReverseGeoCodeResult *)result errorCode:(BMKSearchErrorCode)error{
     if (result.poiList.count) {
+        [self.nameAry removeAllObjects];
+        [self.cityAry removeAllObjects];
+        [self.latAry removeAllObjects];
+        [self.lonAry removeAllObjects];
+        [self.addressAry removeAllObjects];
+        self.cancelVCBtn.enabled = YES;
+        [_cancelVCBtn setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
         self.locationLabel.text = ((BMKPoiInfo *)result.poiList[0]).name;
-        _titile = ((BMKPoiInfo *)result.poiList[0]).name;
-        _city = ((BMKPoiInfo *)result.poiList[0]).city;
-        _subTitle = result.address;
+        [result.poiList enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+            BMKPoiInfo *info = obj;
+            [self.nameAry addObject:info.name];
+            [self.cityAry addObject:info.city];
+            [self.latAry addObject:[NSString stringWithFormat:@"%f",info.pt.latitude]];
+            [self.lonAry addObject:[NSString stringWithFormat:@"%f",info.pt.longitude]];
+            [self.addressAry addObject:info.address];
+        }];
+        if (self.addressAry.count == self.nameAry.count) {
+            
+        }else{
+            int n = (int)self.nameAry.count - (int)self.addressAry.count;
+            for (int i = 0; i < n; i++) {
+                [self.addressAry addObject:@" "];
+            }
+        }
     }
 }
 
