@@ -84,7 +84,7 @@
 - (UIImageView *)brandBgImg {
     if (!_brandBgImg) {
         _brandBgImg = [[UIImageView alloc] init];
-        _brandBgImg.contentMode = UIViewContentModeScaleAspectFill;
+        _brandBgImg.contentMode = UIViewContentModeScaleAspectFit;
         _brandBgImg.clipsToBounds = YES;
         _brandBgImg.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"Defaul_Bg_420"]];
     }

@@ -158,6 +158,7 @@ static NSString *const URLReleaseFiuScenen = @"/scene_scene/save";
         _scenceView = [[ScenceMessageView alloc] initWithFrame:CGRectMake(0, 50, SCREEN_WIDTH, 236.5)];
         _scenceView.title.text = [self.data valueForKey:@"title"];
         _scenceView.content.text = [self.data valueForKey:@"des"];
+        _scenceView.vc = self;
         [_scenceView.imageView downloadImage:[self.data valueForKey:@"cover_url"] place:[UIImage imageNamed:@""]];
     }
     return _scenceView;

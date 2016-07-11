@@ -323,7 +323,7 @@ static NSString *const URLFiuPeople = @"/user/activity_user";
         return 266.5;
         
     } else if (indexPath.section == 2) {
-        return SCREEN_HEIGHT + 5;
+        return SCREEN_HEIGHT;
     }
     return 0;
 }
