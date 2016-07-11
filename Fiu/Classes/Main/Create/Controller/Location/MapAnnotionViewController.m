@@ -150,7 +150,8 @@ typedef void(^SelectedLocationBlock)(NSString * location, NSString * city, NSStr
 }
 
 -(void)mapView:(BMKMapView *)mapView regionDidChangeAnimated:(BOOL)animated{
-    CLLocationCoordinate2D pt = [self.mapView convertPoint:self.mapView.center toCoordinateFromView:self.mapView];
+    CGPoint center = CGPointMake(self.view.center.x, self.view.center.y-MAP_TOP*0.5);
+    CLLocationCoordinate2D pt = [self.mapView convertPoint:center toCoordinateFromView:self.mapView];
     _pt = pt;
     BMKReverseGeoCodeOption *reverGeoCodeSearchOption = [[BMKReverseGeoCodeOption alloc] init];
     reverGeoCodeSearchOption.reverseGeoPoint = pt;
@@ -162,7 +163,6 @@ typedef void(^SelectedLocationBlock)(NSString * location, NSString * city, NSStr
         self.locationLabel.text = ((BMKPoiInfo *)result.poiList[0]).name;
         _titile = ((BMKPoiInfo *)result.poiList[0]).name;
         _city = ((BMKPoiInfo *)result.poiList[0]).city;
-        NSLog(@"_titile%@",_titile);
         _subTitle = result.address;
     }
 }
