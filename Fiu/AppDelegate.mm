@@ -171,6 +171,7 @@ NSString *const determineLogin = @"/auth/check_login";
     }
 }
 
+
 -(void)application:(UIApplication *)application didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken{
     
 }
@@ -289,18 +290,14 @@ NSString *const determineLogin = @"/auth/check_login";
             }
         }];
     }
-    
     return YES;
 }
 
 -(BOOL)application:(UIApplication *)app openURL:(NSURL *)url options:(NSDictionary<NSString *,id> *)options{
-    if ([UMSocialSnsService handleOpenURL:url]) {
-        return YES;
+    [UMSocialSnsService handleOpenURL:url];
+    if ([url.host isEqualToString:@"pay"]) {
+        [WXApi handleOpenURL:url delegate:self];
     }
-    if ([WXApi handleOpenURL:url delegate:self]) {
-        return YES;
-    }
-    
     //如果极简开发包不可用，会跳转支付宝钱包进行支付，需要将支付宝钱包的支付结果回传给开发包
     if ([url.host isEqualToString:@"safepay"]) {
         [[AlipaySDK defaultService] processOrderWithPaymentResult:url standbyCallback:^(NSDictionary *resultDic) {
@@ -310,7 +307,6 @@ NSString *const determineLogin = @"/auth/check_login";
             }
         }];
     }
-    
     return YES;
 }
 
