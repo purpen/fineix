@@ -100,8 +100,8 @@
         [_mapView addGestureRecognizer:self.mapTap];
         //添加渐变层
         CAGradientLayer * shadow = [CAGradientLayer layer];
-        shadow.frame = CGRectMake(0, 0, SCREEN_WIDTH, 7);
-        shadow.opacity = 0.5;
+        shadow.frame = CGRectMake(0, 0, SCREEN_WIDTH, 5);
+        shadow.opacity = 0.3;
         shadow.startPoint = CGPointMake(0, 1);
         shadow.endPoint = CGPointMake(0, 0);
         shadow.colors = @[(id)[UIColor clearColor].CGColor,(id)[UIColor blackColor].CGColor];
@@ -244,6 +244,12 @@
 - (FBSearchView *)searchView {
     if (!_searchView) {
         _searchView = [[FBSearchView alloc] initWithFrame:CGRectMake(0, 50, SCREEN_WIDTH, 44)];
+        _searchView.cancelBtn.hidden = YES;
+        [_searchView.bgView mas_remakeConstraints:^(MASConstraintMaker *make) {
+            make.size.mas_equalTo(CGSizeMake(SCREEN_WIDTH-30, 30));
+            make.centerY.equalTo(_searchView);
+            make.left.equalTo(_searchView.mas_left).with.offset(15);
+        }];
         _searchView.searchInputBox.placeholder = NSLocalizedString(@"searchLocation", nil);
         _searchView.delegate = self;
     }

@@ -336,7 +336,7 @@ NSString *const determineLogin = @"/auth/check_login";
 }
 
 - (void)applicationDidBecomeActive:(UIApplication *)application {
-    
+    [UMSocialSnsService  applicationDidBecomeActive];
 }
 
 - (void)applicationDidEnterBackground:(UIApplication *)application {
