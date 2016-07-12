@@ -13,6 +13,7 @@
 #import "ShareStyleBottomView.h"
 #import "ShareStyleTitleBottomView.h"
 #import "ShareStyleTitleTopView.h"
+#import "FBPopupView.h"
 
 #import "UMSocial.h"
 #import "WXApi.h"
@@ -23,7 +24,7 @@
 @interface FBShareViewController : UIViewController <UICollectionViewDelegate, UICollectionViewDataSource, UMSocialUIDelegate>
 
 @pro_strong FBRequest           *   shareTextNumRequest;
-@pro_strong FBRequest           *   giveExpRequest;
+@pro_strong FBRequest           *   sendExpRequest;
 @pro_strong UIView              *   topView;
 @pro_strong UIButton            *   closeBtn;
 @pro_strong UIButton            *   shareBtn;
@@ -36,5 +37,6 @@
 @pro_strong ShareStyleBottomView        *   shareBottomView;
 @pro_strong ShareStyleTitleBottomView   *   shareTitleBottomView;
 @pro_strong ShareStyleTitleTopView      *   shareTitleTopView;
+@pro_strong FBPopupView         *   sharePopView;
 
 @end

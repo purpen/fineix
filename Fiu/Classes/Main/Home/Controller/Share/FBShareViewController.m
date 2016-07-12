@@ -21,6 +21,8 @@ static NSString *const URLGiveExp = @"/user/send_exp";
     NSString * _oid;
 }
 
+@pro_strong  ShareViewController  *  shareVC;
+
 @end
 
 @implementation FBShareViewController
@@ -33,8 +35,14 @@ static NSString *const URLGiveExp = @"/user/send_exp";
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.view.backgroundColor = [UIColor blackColor];
-    
     [self setShareVcUI];
+}
+
+- (FBPopupView *)sharePopView {
+    if (!_sharePopView) {
+        _sharePopView = [[FBPopupView alloc] init];
+    }
+    return _sharePopView;
 }
 
 #pragma mark - 网络请求
@@ -49,11 +57,21 @@ static NSString *const URLGiveExp = @"/user/send_exp";
 
 #pragma mark 分享成功送积分
 - (void)networkGiveExp {
-    self.giveExpRequest = [FBAPI postWithUrlString:URLGiveExp requestDictionary:@{@"type":@"2", @"evt":@"1", @"target_id":self.sceneId} delegate:self];
-    [self.giveExpRequest  startRequestSuccess:^(FBRequest *request, id result) {
-        NSLog(@"＝＝＝＝＝＝＝＝  分享场景成功：%@", result);
+    [self.shareVC dismissViewControllerAnimated:YES completion:nil];
+    
+    self.sendExpRequest = [FBAPI postWithUrlString:URLGiveExp requestDictionary:@{@"type":@"2", @"evt":@"1", @"target_id":self.sceneId} delegate:self];
+    [self.sendExpRequest  startRequestSuccess:^(FBRequest *request, id result) {
+        if ([[result valueForKey:@"success"] integerValue] == 1) {
+            NSInteger expNum = [[[result valueForKey:@"data"] valueForKey:@"exp"] integerValue];
+            if (expNum > 0) {
+                [self.sharePopView showPopupViewOnWindowStyleTwo:NSLocalizedString(@"shareDoneContent", nil) withAddJifen:expNum];
+            
+            } else if (expNum == 0) {
+                [SVProgressHUD showSuccessWithStatus:NSLocalizedString(@"shareDone", nil)];
+            }
+        }
     } failure:^(FBRequest *request, NSError *error) {
-        NSLog(@"－－－－送积分错误%@",error);
+        [SVProgressHUD showErrorWithStatus:[error localizedDescription]];
     }];
 }
 
@@ -247,14 +265,14 @@ static NSString *const URLGiveExp = @"/user/send_exp";
         [self networkShareTextNumData:_oid];
     }
     
-    ShareViewController * shareVC = [[ShareViewController alloc] init];
-    shareVC.modalPresentationStyle = UIModalPresentationOverCurrentContext;
-    shareVC.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;
-    [self presentViewController:shareVC animated:YES completion:nil];
-    [shareVC.wechatBtn addTarget:self action:@selector(wechatShareBtnAction) forControlEvents:(UIControlEventTouchUpInside)];
-    [shareVC.friendBtn addTarget:self action:@selector(timelineShareBtnAction) forControlEvents:(UIControlEventTouchUpInside)];
-    [shareVC.weiBoBtn addTarget:self action:@selector(sinaShareBtnAction) forControlEvents:(UIControlEventTouchUpInside)];
-    [shareVC.qqBtn addTarget:self action:@selector(qqShareBtnAction) forControlEvents:(UIControlEventTouchUpInside)];
+    self.shareVC = [[ShareViewController alloc] init];
+    self.shareVC.modalPresentationStyle = UIModalPresentationOverCurrentContext;
+    self.shareVC.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;
+    [self presentViewController:self.shareVC animated:YES completion:nil];
+    [self.shareVC.wechatBtn addTarget:self action:@selector(wechatShareBtnAction) forControlEvents:(UIControlEventTouchUpInside)];
+    [self.shareVC.friendBtn addTarget:self action:@selector(timelineShareBtnAction) forControlEvents:(UIControlEventTouchUpInside)];
+    [self.shareVC.weiBoBtn addTarget:self action:@selector(sinaShareBtnAction) forControlEvents:(UIControlEventTouchUpInside)];
+    [self.shareVC.qqBtn addTarget:self action:@selector(qqShareBtnAction) forControlEvents:(UIControlEventTouchUpInside)];
     
 }
 
@@ -263,7 +281,6 @@ static NSString *const URLGiveExp = @"/user/send_exp";
     [[UMSocialDataService defaultDataService]  postSNSWithTypes:@[UMShareToWechatSession] content:@"" image:[self shareImage] location:nil urlResource:nil presentedController:self completion:^(UMSocialResponseEntity *response){
         if (response.responseCode == UMSResponseCodeSuccess) {
             [self networkGiveExp];
-            [SVProgressHUD showSuccessWithStatus:@"分享成功！"];
         }
     }];
 }
@@ -273,7 +290,6 @@ static NSString *const URLGiveExp = @"/user/send_exp";
     [[UMSocialDataService defaultDataService]  postSNSWithTypes:@[UMShareToWechatTimeline] content:@"" image:[self shareImage] location:nil urlResource:nil presentedController:self completion:^(UMSocialResponseEntity *response){
         if (response.responseCode == UMSResponseCodeSuccess) {
             [self networkGiveExp];
-            [SVProgressHUD showSuccessWithStatus:@"分享成功！"];
         }
     }];
 }
@@ -283,7 +299,6 @@ static NSString *const URLGiveExp = @"/user/send_exp";
     [[UMSocialDataService defaultDataService]  postSNSWithTypes:@[UMShareToQQ] content:@"" image:[self shareImage] location:nil urlResource:nil presentedController:self completion:^(UMSocialResponseEntity *response){
         if (response.responseCode == UMSResponseCodeSuccess) {
             [self networkGiveExp];
-            [SVProgressHUD showSuccessWithStatus:@"分享成功！"];
         }
     }];
 }
@@ -292,7 +307,6 @@ static NSString *const URLGiveExp = @"/user/send_exp";
     [[UMSocialDataService defaultDataService]  postSNSWithTypes:@[UMShareToSina] content:@"有Fiu的生活，才够意思，快点扫码加我吧！查看个人主页>>http://m.taihuoniao.com" image:[self shareImage] location:nil urlResource:nil presentedController:self completion:^(UMSocialResponseEntity *shareResponse){
         if (shareResponse.responseCode == UMSResponseCodeSuccess) {
             [self networkGiveExp];
-            [SVProgressHUD showSuccessWithStatus:@"分享成功！"];
         }
     }];
 }

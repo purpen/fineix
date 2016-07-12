@@ -15,6 +15,6 @@
 
 - (void)showPopupViewOnWindowStyleOne:(NSString *)text withSceneData:(NSDictionary *)data;
 
-- (void)showPopupViewOnWindowStyleTwo:(NSString *)text;
+- (void)showPopupViewOnWindowStyleTwo:(NSString *)text withAddJifen:(NSInteger)num;
 
 @end
