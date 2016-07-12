@@ -71,6 +71,7 @@
 "cancelCollect" = "取消收藏";
 "SceneOfFiu" = "此地盘下的情景";
 "chooseFScene" = "请选择一个情景";
+"releaseSceneDone" = "您的情景发布成功，品味又升级啦. 分享给好友即可获得积分奖励～";
 
 //  搜索框提示
 "searchLocation" = "搜索地点";

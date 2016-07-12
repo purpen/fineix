@@ -10,6 +10,7 @@
 #import "GroupHeaderView.h"
 #import "LikeSceneView.h"
 #import "FBSceneInfoScrollView.h"
+#import "FBPopupView.h"
 
 @interface LookSceneViewController : FBPictureViewController <UITableViewDelegate, UITableViewDataSource>
 
@@ -29,5 +30,6 @@
 @pro_strong UIButton                *   allComment;             //  查看全部评论
 @pro_strong NSMutableArray          *   textMar;
 @pro_strong UIButton                *   shareSceneBtn;          //  分享
+@pro_strong FBPopupView         *   popupView;
 
 @end

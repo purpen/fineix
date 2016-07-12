@@ -11,6 +11,7 @@
 #import <SVProgressHUD/SVProgressHUD.h>
 
 typedef void(^DismissVC)();
+typedef void(^GetSeletFSceneIdAndTitlelBlock)(NSString * idx, NSString * title);
 
 @interface SelectAllFSceneViewController : FBPictureViewController <UICollectionViewDelegate, UICollectionViewDataSource>
 
@@ -23,6 +24,8 @@ typedef void(^DismissVC)();
 @pro_assign NSInteger                   currentpageNum;
 @pro_assign NSInteger                   totalPageNum;
 @pro_strong UICollectionView        *   allSceneView;           //  全部的情景
+
 @pro_copy DismissVC dismissVC;
+@pro_copy GetSeletFSceneIdAndTitlelBlock  getIdxAndTitltBlock;
 
 @end

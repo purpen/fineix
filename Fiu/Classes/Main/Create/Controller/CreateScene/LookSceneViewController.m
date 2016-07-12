@@ -109,6 +109,14 @@ static NSString *const URLDeleteScene = @"/scene_sight/delete";
     [_sceneInfoScrollView setSceneInfoData:self.sceneInfoModel];
 }
 
+- (FBPopupView *)popupView {
+    if (!_popupView) {
+        _popupView = [[FBPopupView alloc] init];
+        _popupView.vc = self;
+    }
+    return _popupView;
+}
+
 #pragma mark - 网络请求
 #pragma mark 场景详情
 - (void)networkRequestData {
@@ -117,6 +125,9 @@ static NSString *const URLDeleteScene = @"/scene_sight/delete";
     [self.sceneInfoRequest startRequestSuccess:^(FBRequest *request, id result) {
         //  分享出去的场景信息
         _shareDataDict = [NSDictionary dictionaryWithDictionary:[result valueForKey:@"data"]];
+        
+        [self.popupView showPopupViewOnWindowStyleOne:NSLocalizedString(@"releaseSceneDone", nil) withSceneData:_shareDataDict];
+        
         _sceneUserId = [NSString stringWithFormat:@"%@", [[result valueForKey:@"data"] valueForKey:@"user_id"]];
         self.sceneInfoModel = [[SceneInfoData alloc] initWithDictionary:[result valueForKey:@"data"]];
         _sceneImgUrl = self.sceneInfoModel.coverUrl;
@@ -127,14 +138,17 @@ static NSString *const URLDeleteScene = @"/scene_sight/delete";
         
         //  场景中商品的ids
         self.goodsId = [self.sceneInfoModel.product valueForKey:@"idField"];
-        NSString * goodsIds;
-        if (self.goodsId.count > 1) {
-            goodsIds = [self.goodsId componentsJoinedByString:@","];
-        } else {
-            goodsIds = self.goodsId[0];
+        if (self.goodsId.count > 0) {
+            NSString * goodsIds;
+            if (self.goodsId.count > 1) {
+                goodsIds = [self.goodsId componentsJoinedByString:@","];
+            } else {
+                goodsIds = self.goodsId[0];
+            }
+            
+            [self networkSceneGoodsData:goodsIds];
         }
-        
-        [self networkSceneGoodsData:goodsIds];
+        [SVProgressHUD dismiss];
         
     } failure:^(FBRequest *request, NSError *error) {
         [SVProgressHUD showErrorWithStatus:[error localizedDescription]];
@@ -258,7 +272,6 @@ static NSString *const URLDeleteScene = @"/scene_sight/delete";
         }
         
         [self.sceneTableView reloadData];
-        [SVProgressHUD dismiss];
         
     } failure:^(FBRequest *request, NSError *error) {
         [SVProgressHUD showErrorWithStatus:[error localizedDescription]];
@@ -432,9 +445,15 @@ static NSString *const URLDeleteScene = @"/scene_sight/delete";
         CommentTableViewCell * cell = [[CommentTableViewCell alloc] init];
         [cell getCellHeight:[self.sceneCommentMarr valueForKey:@"content"][indexPath.row]];
         return cell.cellHeight;
+        
+    } else if (indexPath.section == 2 || indexPath.section == 3) {
+        if (self.goodsId.count > 0) {
+            return 210;
+        } else
+            return 0.01;
     }
     
-    return 210;
+    return 1;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
@@ -443,7 +462,11 @@ static NSString *const URLDeleteScene = @"/scene_sight/delete";
     } else if (section == 1) {
         return 0.01;
     } else {
-        return 44;
+        if (self.goodsId.count > 0) {
+            return 44;
+        } else {
+            return 0.01;
+        }
     }
 }
 
@@ -455,27 +478,29 @@ static NSString *const URLDeleteScene = @"/scene_sight/delete";
     self.headerView = [[GroupHeaderView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 44)];
     self.headerView.backgroundColor = [UIColor colorWithHexString:cellBgColor alpha:1];
     
-    if (section == 1) {
-        self.headerView.backgroundColor = [UIColor whiteColor];
-    } else if (section == 2) {
-        [self.headerView addGroupHeaderViewIcon:@"Group_scene"
-                                      withTitle:NSLocalizedString(@"sceneGoods", nil)
-                                   withSubtitle:@""
-                                  withRightMore:@""
-                                   withMoreType:0];
-    } else if (section == 3) {
-        if (self.reGoodsList.count == 0) {
-            [self.headerView addGroupHeaderViewIcon:@""
-                                          withTitle:@""
-                                       withSubtitle:@""
-                                      withRightMore:@""
-                                       withMoreType:0];
-        } else {
+    if (self.goodsId.count > 0) {
+        if (section == 1) {
+            self.headerView.backgroundColor = [UIColor whiteColor];
+        } else if (section == 2) {
             [self.headerView addGroupHeaderViewIcon:@"Group_scene"
-                                          withTitle:NSLocalizedString(@"sceneLikeGoods", nil)
+                                          withTitle:NSLocalizedString(@"sceneGoods", nil)
                                        withSubtitle:@""
                                       withRightMore:@""
                                        withMoreType:0];
+        } else if (section == 3) {
+            if (self.reGoodsList.count == 0) {
+                [self.headerView addGroupHeaderViewIcon:@""
+                                              withTitle:@""
+                                           withSubtitle:@""
+                                          withRightMore:@""
+                                           withMoreType:0];
+            } else {
+                [self.headerView addGroupHeaderViewIcon:@"Group_scene"
+                                              withTitle:NSLocalizedString(@"sceneLikeGoods", nil)
+                                           withSubtitle:@""
+                                          withRightMore:@""
+                                           withMoreType:0];
+            }
         }
     }
     
@@ -500,7 +525,6 @@ static NSString *const URLDeleteScene = @"/scene_sight/delete";
         [self.navigationController pushViewController:goodsInfoVC animated:YES];
     }
 }
-
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView {
     if (self.sceneTableView.contentOffset.y <= 0) {
         self.sceneTableView.scrollEnabled = NO;

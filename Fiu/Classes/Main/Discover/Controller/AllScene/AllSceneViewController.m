@@ -54,6 +54,7 @@ static NSString *const URLAllFiuSceneList = @"/scene_scene/";
 - (void)networkAllFiuSceneList {
     self.allSceneListRequest = [FBAPI getWithUrlString:URLAllFiuSceneList requestDictionary:@{@"stick":@"0", @"size":@"10", @"page":@(self.currentpageNum + 1)} delegate:self];
     [self.allSceneListRequest startRequestSuccess:^(FBRequest *request, id result) {
+        NSLog(@"＝－－－－－－－－－－－ %@", result);
         NSArray * sceneArr = [[result valueForKey:@"data"] valueForKey:@"rows"];
         for (NSDictionary * sceneDic in sceneArr) {
             FiuSceneInfoData * allFiuScene = [[FiuSceneInfoData alloc] initWithDictionary:sceneDic];
@@ -193,9 +194,10 @@ static NSString *const URLAllFiuSceneList = @"/scene_scene/";
 //  点击右边barItem
 - (void)rightBarItemSelected {
     if ([self isUserLogin]) {
-        PictureToolViewController * pictureToolVC = [[PictureToolViewController alloc] init];
-        pictureToolVC.createType = @"fScene";
-        [self presentViewController:pictureToolVC animated:YES completion:nil];
+        [SVProgressHUD showInfoWithStatus:@"暂无权限发布地盘"];
+//        PictureToolViewController * pictureToolVC = [[PictureToolViewController alloc] init];
+//        pictureToolVC.createType = @"fScene";
+//        [self presentViewController:pictureToolVC animated:YES completion:nil];
         
     } else {
         [self openUserLoginVC];

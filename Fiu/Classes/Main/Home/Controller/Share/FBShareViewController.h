@@ -20,7 +20,7 @@
 #import <TencentOpenAPI/QQApiInterface.h>
 #import <SVProgressHUD/SVProgressHUD.h>
 
-@interface FBShareViewController : UIViewController <UICollectionViewDelegate, UICollectionViewDataSource>
+@interface FBShareViewController : UIViewController <UICollectionViewDelegate, UICollectionViewDataSource, UMSocialUIDelegate>
 
 @pro_strong FBRequest           *   shareTextNumRequest;
 @pro_strong FBRequest           *   giveExpRequest;

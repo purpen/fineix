@@ -203,12 +203,14 @@ static NSString *const URLAllFiuSceneList = @"/scene_scene/";
         [[NSNotificationCenter defaultCenter] postNotificationName:@"selectFiuSceneId" object:self.fiuSceneId];
         [[NSNotificationCenter defaultCenter] postNotificationName:@"selectFiuSceneTitle" object:self.fiuSceneTitle];
         
+        self.getIdxAndTitltBlock(self.fiuSceneId, self.fiuSceneTitle);
         if ([self.type isEqualToString:@"release"]) {
-            for (UIViewController * vc in self.navigationController.viewControllers) {
-                if ([vc isKindOfClass:[ReleaseViewController class]]) {
-                    [self.navigationController popToViewController:vc animated:YES];
-                }
-            }
+//            for (UIViewController * vc in self.navigationController.viewControllers) {
+//                if ([vc isKindOfClass:[ReleaseViewController class]]) {
+//                    [self.navigationController popToViewController:vc animated:YES];
+//                }
+//            }
+            [self.navigationController popViewControllerAnimated:YES];
             
         } else if ([self.type isEqualToString:@"edit"]) {
             [self dismissViewControllerAnimated:YES completion:^{

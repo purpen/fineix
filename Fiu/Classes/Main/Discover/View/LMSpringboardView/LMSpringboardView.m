@@ -231,9 +231,9 @@
      _debugRectInScroll.alpha= 0.4;
      [self addSubview:_debugRectInScroll];*/
     
-    _doubleTapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(LM_didZoomGesture:)];
-    _doubleTapGesture.numberOfTapsRequired = 1;
-    [_contentView addGestureRecognizer:_doubleTapGesture];
+//    _doubleTapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(LM_didZoomGesture:)];
+//    _doubleTapGesture.numberOfTapsRequired = 1;
+//    [_contentView addGestureRecognizer:_doubleTapGesture];
 }
 
 - (CGPoint)LM_pointInSelfToContent:(CGPoint)point
@@ -538,16 +538,16 @@
     }
 }
 
-- (UIView*)viewForZoomingInScrollView:(UIScrollView *)scrollView
-{
-    return _contentView;
-}
-
-- (void)scrollViewDidZoom:(UIScrollView *)scrollView
-{
-    _zoomScaleCache = self.zoomScale;
-    [self LM_centerViewIfSmaller];
-}
+//- (UIView*)viewForZoomingInScrollView:(UIScrollView *)scrollView
+//{
+//    return _contentView;
+//}
+//
+//- (void)scrollViewDidZoom:(UIScrollView *)scrollView
+//{
+//    _zoomScaleCache = self.zoomScale;
+//    [self LM_centerViewIfSmaller];
+//}
 
 #pragma mark - UIView
 

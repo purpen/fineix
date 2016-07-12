@@ -526,6 +526,7 @@
 		D8C690BF1D13DFC70026EAB5 /* LMSpringboardItemView.m in Sources */ = {isa = PBXBuildFile; fileRef = D8C690BA1D13DFC70026EAB5 /* LMSpringboardItemView.m */; };
 		D8C690C01D13DFC70026EAB5 /* LMSpringboardView.m in Sources */ = {isa = PBXBuildFile; fileRef = D8C690BC1D13DFC70026EAB5 /* LMSpringboardView.m */; };
 		D8C690C41D13DFFE0026EAB5 /* FiuHeaderWatchTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D8C690C31D13DFFE0026EAB5 /* FiuHeaderWatchTableViewCell.m */; };
+		D8DDEE101D338D760020FF66 /* FBPopupView.m in Sources */ = {isa = PBXBuildFile; fileRef = D8DDEE0F1D338D760020FF66 /* FBPopupView.m */; };
 		D8E3AEB61CFC9B84006E5E8C /* ClipImageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D8E3AEA91CFC9B84006E5E8C /* ClipImageViewController.m */; };
 		D8E3AEB71CFC9B84006E5E8C /* CreateViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D8E3AEAB1CFC9B84006E5E8C /* CreateViewController.m */; };
 		D8E3AEB81CFC9B84006E5E8C /* CropImageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D8E3AEAD1CFC9B84006E5E8C /* CropImageViewController.m */; };
@@ -1469,6 +1470,8 @@
 		D8C690BC1D13DFC70026EAB5 /* LMSpringboardView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LMSpringboardView.m; sourceTree = "<group>"; };
 		D8C690C21D13DFFE0026EAB5 /* FiuHeaderWatchTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FiuHeaderWatchTableViewCell.h; sourceTree = "<group>"; };
 		D8C690C31D13DFFE0026EAB5 /* FiuHeaderWatchTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FiuHeaderWatchTableViewCell.m; sourceTree = "<group>"; };
+		D8DDEE0E1D338D760020FF66 /* FBPopupView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FBPopupView.h; sourceTree = "<group>"; };
+		D8DDEE0F1D338D760020FF66 /* FBPopupView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FBPopupView.m; sourceTree = "<group>"; };
 		D8E3AEA81CFC9B84006E5E8C /* ClipImageViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ClipImageViewController.h; sourceTree = "<group>"; };
 		D8E3AEA91CFC9B84006E5E8C /* ClipImageViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ClipImageViewController.m; sourceTree = "<group>"; };
 		D8E3AEAA1CFC9B84006E5E8C /* CreateViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CreateViewController.h; sourceTree = "<group>"; };
@@ -3939,6 +3942,8 @@
 				D87B69BD1CC726BA00199EFE /* GroupHeaderView.m */,
 				D8E3AEBD1D003F4D006E5E8C /* FBRefresh.h */,
 				D8E3AEBE1D003F4D006E5E8C /* FBRefresh.m */,
+				D8DDEE0E1D338D760020FF66 /* FBPopupView.h */,
+				D8DDEE0F1D338D760020FF66 /* FBPopupView.m */,
 			);
 			path = Category;
 			sourceTree = "<group>";
@@ -4623,6 +4628,7 @@
 				1F2A8FE01CF40277005116C7 /* InfoRecommendTableViewCell.m in Sources */,
 				1F2A8F721CF40277005116C7 /* FiuSceneInfoLocation.m in Sources */,
 				1F2A909B1CF40277005116C7 /* ReportViewController.m in Sources */,
+				D8DDEE101D338D760020FF66 /* FBPopupView.m in Sources */,
 				1F2A8FD61CF40277005116C7 /* FBOrderOtherTableViewCell.m in Sources */,
 				1F2A90B11CF40277005116C7 /* SystemSettingViewController.m in Sources */,
 				1F2A8FFC1CF40277005116C7 /* SubscribeViewController.m in Sources */,

@@ -23,6 +23,8 @@
     if (!_imageView) {
         _imageView = [[UIImageView alloc] initWithFrame:self.bounds];
         _imageView.layer.borderColor = [UIColor colorWithHexString:fineixColor alpha:1].CGColor;
+        _imageView.contentMode = UIViewContentModeScaleAspectFill;
+        _imageView.clipsToBounds = YES;
     }
     return _imageView;
 }
