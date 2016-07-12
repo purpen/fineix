@@ -99,7 +99,7 @@ static NSString *const URLBrandList = @"/scene_brands/getlist";
 #pragma mark - 自营商品列表
 - (FBBrandGoodsView *)seleBrandView {
     if (!_seleBrandView) {
-        _seleBrandView = [[FBBrandGoodsView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 280)];
+        _seleBrandView = [[FBBrandGoodsView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_WIDTH * 0.61 + 50)];
         _seleBrandView.nav = self.navigationController;
     }
     return _seleBrandView;
@@ -126,6 +126,7 @@ static NSString *const URLBrandList = @"/scene_brands/getlist";
         _brandTable.sectionHeaderHeight = 20.0f;
         _brandTable.sectionFooterHeight = 0.01f;
         _brandTable.sectionIndexColor = [UIColor colorWithHexString:@"#666666"];
+        _brandTable.tableFooterView = [UIView new];
     }
     return _brandTable;
 }

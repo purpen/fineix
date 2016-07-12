@@ -48,7 +48,7 @@
         flowLayout.minimumLineSpacing = 10.0f;
         flowLayout.sectionInset = UIEdgeInsetsMake(10, 15, 0, 15);
         
-        _selfBrandList = [[UICollectionView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 230) collectionViewLayout:flowLayout];
+        _selfBrandList = [[UICollectionView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_WIDTH * 0.62) collectionViewLayout:flowLayout];
         _selfBrandList.backgroundColor = [UIColor whiteColor];
         _selfBrandList.delegate = self;
         _selfBrandList.dataSource = self;
@@ -78,7 +78,7 @@
 #pragma mark - 查看全部自营品牌按钮
 - (UIButton *)allselfBrand {
     if (!_allselfBrand) {
-        _allselfBrand = [[UIButton alloc] initWithFrame:CGRectMake(0, 230, SCREEN_WIDTH, 44)];
+        _allselfBrand = [[UIButton alloc] initWithFrame:CGRectMake(0, SCREEN_WIDTH * 0.61, SCREEN_WIDTH, 44)];
         [_allselfBrand setTitle:NSLocalizedString(@"lookAllSelfBrand", nil) forState:(UIControlStateNormal)];
         _allselfBrand.titleLabel.font = [UIFont systemFontOfSize:12];
         [_allselfBrand setTitleColor:[UIColor colorWithHexString:@"#999999" alpha:1] forState:(UIControlStateNormal)];
