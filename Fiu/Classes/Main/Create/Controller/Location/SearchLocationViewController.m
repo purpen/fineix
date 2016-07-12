@@ -44,8 +44,28 @@
     } else {
         [SVProgressHUD showInfoWithStatus:NSLocalizedString(@"openGPS", nil)];
     }
+    
+    NSNotificationCenter *center = [NSNotificationCenter defaultCenter];
+    [center addObserver:self selector:@selector(reciveInfo:) name:@"b" object:nil];
 }
 
+-(void)reciveInfo:(NSNotification*)sender{
+    NSDictionary *dict = sender.userInfo;
+    self.locationNameMarr = dict[@"name"];
+    self.locationCityMarr = dict[@"city"];
+    self.latitudeMarr = dict[@"lat"];
+    self.longitudeMarr = dict[@"lon"];
+    self.locationAddressMarr = dict[@"add"];
+    [self.locationTableView reloadData];
+    [self.mapView removeAnnotations:self.mapView.annotations];
+    BMKPointAnnotation *annotation = [[BMKPointAnnotation alloc] init];
+    CLLocationCoordinate2D coor;
+    coor.latitude = [dict[@"lat1"] doubleValue];
+    coor.longitude = [dict[@"lon1"] doubleValue];
+    annotation.coordinate = coor;
+    [self.mapView addAnnotation:annotation];
+    self.mapView.centerCoordinate = coor;
+}
 
 
 -(UITapGestureRecognizer *)mapTap{
@@ -57,10 +77,10 @@
 
 -(void)tapMap{
     MapAnnotionViewController *vc = [[MapAnnotionViewController alloc] init];
-    vc.firstName = self.locationNameMarr[0];
-    vc.lat = [self.latitudeMarr[0] doubleValue];
-    vc.lon = [self.longitudeMarr[0] doubleValue];
-    vc.firstCity = self.locationCityMarr[0];
+    vc.nameAry = self.locationNameMarr;
+    vc.latAry = self.latitudeMarr;
+    vc.lonAry = self.longitudeMarr;
+    vc.cityAry = self.locationCityMarr;
     vc.delegate = self;
     [self.navigationController pushViewController:vc animated:YES];
 }
@@ -360,6 +380,7 @@
         _geoCodeSearch.delegate = nil;
     }
     self.mapView.delegate = nil;
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:@"b" object:nil];
 }
 
 @end

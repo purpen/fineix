@@ -272,6 +272,8 @@ static NSString *const ShareURL = @"http://m.taihuoniao.com/guide/app_about";
 }
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+    UMSocialConfig *h = [[UMSocialConfig alloc] init];
+    h.hiddenLoadingHUD = YES;
     if (indexPath.section == 0) {
         if (indexPath.row == 0) {
             //微信

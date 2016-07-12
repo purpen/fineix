@@ -17,13 +17,13 @@
 @interface MapAnnotionViewController : FBPictureViewController
 
 /** 第一个地理位置名字 */
-@property(nonatomic,copy) NSString *firstName;
+@property(nonatomic,strong) NSMutableArray *nameAry;
 /** 纬度 */
-@property (nonatomic, assign) double lat;
+@property (nonatomic, strong) NSMutableArray *latAry;
 /** 经度 */
-@property (nonatomic, assign) double lon;
+@property (nonatomic, strong) NSMutableArray *lonAry;
 /**  */
-@property(nonatomic,copy) NSString *firstCity;
+@property(nonatomic,strong) NSMutableArray *cityAry;
 
 
 @property (nonatomic, weak) id<MapannotionDelegate> delegate;
