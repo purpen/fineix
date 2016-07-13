@@ -14,6 +14,9 @@
 #import "SceneInfoViewController.h"
 #import "UIButton+WebCache.h"
 
+static CGFloat const imgW = SCREEN_WIDTH * 0.72;
+static CGFloat const sceneImgW = SCREEN_WIDTH * 0.23;
+
 @interface GoodsTableViewCell () {
     NSString * _sceneImgUrl;
     NSString * _sceneId;
@@ -116,15 +119,7 @@
         _goodsImgView.showsHorizontalScrollIndicator = NO;
         [_goodsImgView registerClass:[GoodsImgCollectionViewCell class] forCellWithReuseIdentifier:@"GoodsImgCollectionViewCell"];
         
-        CGPoint contentPoint;
-        if (SCREEN_WIDTH == 375) {
-            contentPoint = CGPointMake(50, 0);
-        } else if (SCREEN_WIDTH > 375) {
-            contentPoint = CGPointMake(30, 0);
-        } else {
-            contentPoint = CGPointMake(80, 0);
-        }
-        _goodsImgView.contentOffset = contentPoint;
+        _goodsImgView.contentOffset = CGPointMake(SCREEN_WIDTH * 0.12, 0);
     }
     return _goodsImgView;
 }
@@ -137,20 +132,17 @@
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
     GoodsImgCollectionViewCell * cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"GoodsImgCollectionViewCell" forIndexPath:indexPath];
     [cell.img downloadImage:self.goodsImgMarr[indexPath.row] place:[UIImage imageNamed:@""]];
-
-    if (indexPath.row % 2 != 0) {
-        UIImageView * line = [[UIImageView alloc] initWithFrame:CGRectMake(278.5, 0, 3, 150)];
-        line.image = [UIImage imageNamed:@"Goods_image_bg"];
-        [cell addSubview:line];
+    if (indexPath.row % 2 == 0) {
+        cell.line.hidden = YES;
     }
     return cell;
 }
 
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath {
     if (indexPath.row == 0) {
-        return CGSizeMake(85, 150);
+        return CGSizeMake(sceneImgW, 150);
     } else {
-        return CGSizeMake(275, 150);
+        return CGSizeMake(imgW + 5, 150);
     }
 }
 
@@ -174,6 +166,10 @@
         goodsInfoVC.isWant = YES;
         [self.nav pushViewController:goodsInfoVC animated:YES];
     }
+}
+
+- (void)scrollViewDidScroll:(UIScrollView *)scrollView {
+
 }
 
 #pragma mark - 标题

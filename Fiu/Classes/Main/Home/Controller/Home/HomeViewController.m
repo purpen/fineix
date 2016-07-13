@@ -173,13 +173,13 @@ static NSString *const URLSceneList = @"/scene_sight/";
 }
 
 #pragma mark - 判断上／下滑状态，显示/隐藏Nav/tabBar
-- (void)scrollViewWillBeginDragging:(UIScrollView *)scrollView{
+- (void)scrollViewWillBeginDragging:(UIScrollView *)scrollView {
     if (scrollView == self.homeTableView) {
         _lastContentOffset = scrollView.contentOffset.y;
     }
 }
 
-- (void)scrollViewWillBeginDecelerating:(UIScrollView *)scrollView{
+- (void)scrollViewWillBeginDecelerating:(UIScrollView *)scrollView {
     if (scrollView == self.homeTableView) {
         if (_lastContentOffset < scrollView.contentOffset.y) {
             self.rollDown = YES;
@@ -189,7 +189,7 @@ static NSString *const URLSceneList = @"/scene_sight/";
     }
 }
 
-- (void)scrollViewDidScroll:(UIScrollView *)scrollView{
+- (void)scrollViewDidScroll:(UIScrollView *)scrollView {
     if (scrollView == self.homeTableView) {
         CGRect tabBarRect = self.tabBarController.tabBar.frame;
         if (self.rollDown == YES) {

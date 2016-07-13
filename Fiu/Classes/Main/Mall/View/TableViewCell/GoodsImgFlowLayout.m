@@ -28,18 +28,27 @@
     self.scrollDirection = UICollectionViewScrollDirectionHorizontal;
     self.sectionInset = UIEdgeInsetsMake(0, 0, 0, 0);
     self.minimumInteritemSpacing = 10.0f;
+
 }
 
 #pragma mark - 初始化Cell布局
 //- (NSArray<UICollectionViewLayoutAttributes *> *)layoutAttributesForElementsInRect:(CGRect)rect {
 //    NSArray * arr = [super layoutAttributesForElementsInRect:rect];
-//    
+//
 //    CGFloat centerX = self.collectionView.contentOffset.x + self.collectionView.frame.size.width * 0.5;
 //    
 //    for (UICollectionViewLayoutAttributes * attributes in arr) {
-//        CGFloat center = ABS(centerX - attributes.center.x);
-//        CGFloat scale = 1 - center / (self.collectionView.frame.size.width + self.itemSize.width);
-//        attributes.transform = CGAffineTransformMakeScale(scale, scale);
+////        if ([attributes isEqual:[arr objectAtIndex:1]]) {
+////            attributes.alpha = 1;
+////        } else {
+////            attributes.alpha = 0.3;
+////        }
+//        
+//        if (attributes.center.x != centerX) {
+//            attributes.alpha = 0.3;
+//        } else {
+//            attributes.alpha = 1;
+//        }
 //    }
 //    
 //    return arr;
@@ -66,7 +75,9 @@
             min = attributes.center.x - centerX;
         }
     }
+    
     return CGPointMake(proposedContentOffset.x + min, proposedContentOffset.y);
 }
+
 
 @end

@@ -72,7 +72,7 @@
     _titleText = sceneModel.title;
     [self titleTextStyle:sceneModel.title withBgColor:[UIColor colorWithPatternImage:[UIImage imageNamed:@"titleBg"]]];
     [self changeContentLabStyle:sceneModel.des];
-    self.fiuSlogan.text = @"|  创新产品情景式购物平台";
+    self.fiuSlogan.text = NSLocalizedString(@"slognText", nil);
 }
 
 #pragma mark - 视图UI

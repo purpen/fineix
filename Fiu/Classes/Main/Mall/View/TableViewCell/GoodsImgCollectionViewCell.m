@@ -20,6 +20,14 @@
             make.top.left.equalTo(self).with.offset(0);
             make.right.equalTo(self.mas_right).with.offset(0);
         }];
+        
+        [self addSubview:self.line];
+        [_line mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.size.mas_equalTo(CGSizeMake(3, 150));
+            make.top.equalTo(self).with.offset(0);
+            make.left.equalTo(_img.mas_right).with.offset(3);
+        }];
+        
     }
     return self;
 }
@@ -33,6 +41,15 @@
         [_img setContentScaleFactor:[[UIScreen mainScreen] scale]];
     }
     return _img;
+}
+
+#pragma makr - 分隔线
+- (UIImageView *)line {
+    if (!_line) {
+        _line = [[UIImageView alloc] init];
+        _line.image = [UIImage imageNamed:@"Goods_image_bg"];
+    }
+    return _line;
 }
 
 @end

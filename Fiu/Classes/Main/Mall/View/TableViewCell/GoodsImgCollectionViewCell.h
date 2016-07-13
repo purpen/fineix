@@ -12,5 +12,6 @@
 @interface GoodsImgCollectionViewCell : UICollectionViewCell
 
 @pro_strong UIImageView     *   img;
+@pro_strong UIImageView     *   line;
 
 @end
