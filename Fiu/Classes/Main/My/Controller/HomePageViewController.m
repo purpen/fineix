@@ -161,6 +161,9 @@ static NSString *sceneCellId = @"SceneCollectionViewCell";
 
 -(void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
+    _m = 0;
+    [_sceneIdMarr removeAllObjects];
+    [_sceneListMarr removeAllObjects];
     [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent];
     self.delegate = self;
     [self.view addSubview:self.titleLabel];
@@ -176,17 +179,22 @@ static NSString *sceneCellId = @"SceneCollectionViewCell";
     //进行网络请求
     [self netGetData];
 
-    if ([self.type isEqualToNumber:@1]) {
-        self.myCollectionView.mj_footer = [MJRefreshAutoNormalFooter footerWithRefreshingBlock:^{
-            [self loadMoreData];
-        }];
-        [self requestDataForOderListOperation];
-    }else if([self.type isEqualToNumber:@2]){
-        self.myCollectionView.mj_footer = [MJRefreshAutoNormalFooter footerWithRefreshingBlock:^{
-            [self loadMoreDataM];
-        }];
-        [self requestDataForOderListOperation];
-    }
+    self.myCollectionView.mj_footer = [MJRefreshAutoNormalFooter footerWithRefreshingBlock:^{
+        [self loadMoreDataM];
+    }];
+    [self requestDataForOderListOperation];
+    
+//    if ([self.type isEqualToNumber:@1]) {
+//        self.myCollectionView.mj_footer = [MJRefreshAutoNormalFooter footerWithRefreshingBlock:^{
+//            [self loadMoreData];
+//        }];
+//        [self requestDataForOderListOperation];
+//    }else if([self.type isEqualToNumber:@2]){
+//        self.myCollectionView.mj_footer = [MJRefreshAutoNormalFooter footerWithRefreshingBlock:^{
+//            [self loadMoreDataM];
+//        }];
+//        [self requestDataForOderListOperation];
+//    }
 }
 
 -(void)loadMoreDataM{
@@ -259,7 +267,7 @@ static NSString *sceneCellId = @"SceneCollectionViewCell";
         } failure:^(FBRequest *request, NSError *error) {
             [SVProgressHUD showInfoWithStatus:[error localizedDescription]];
         }];
-    }else if ([self.type isEqualToNumber:@2]){
+    }else{
         //进行场景的网络请求
 //        [SVProgressHUD show];
         FBRequest *request = [FBAPI postWithUrlString:@"/scene_sight/" requestDictionary:@{@"page":@(_m+1),@"size":@10,@"sort":@0,@"user_id":self.userId} delegate:self];

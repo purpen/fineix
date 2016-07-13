@@ -63,6 +63,13 @@ static NSString *const logOut = @"/auth/logout";
     //清空缓存
     NSString * cachesPath = [NSSearchPathForDirectoriesInDomains(NSCachesDirectory, NSUserDomainMask, YES) firstObject];
     self.memoryLabel.text = [NSString stringWithFormat:@"%.1fM", [self folderSizeAtPath:cachesPath]];
+    
+    [_backBtn.layer setMasksToBounds:YES];//设置按钮的圆角半径不会被遮挡
+    
+    [_backBtn.layer setCornerRadius:4];
+    
+    [_backBtn.layer setBorderWidth:1];//设置边界的宽度
+    _backBtn.layer.borderColor = [UIColor lightGrayColor].CGColor;
 }
 
 

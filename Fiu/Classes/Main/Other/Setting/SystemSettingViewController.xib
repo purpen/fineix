@@ -318,16 +318,17 @@
                     <nil key="highlightedColor"/>
                 </label>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="yxg-PK-hVr">
-                    <rect key="frame" x="15" y="497" width="345" height="44"/>
-                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <rect key="frame" x="63" y="497" width="250" height="45"/>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     <constraints>
                         <constraint firstAttribute="width" secondItem="yxg-PK-hVr" secondAttribute="height" multiplier="345:44" id="M7f-oi-dK6"/>
-                        <constraint firstAttribute="height" constant="44" id="MdY-ib-Ixo"/>
+                        <constraint firstAttribute="height" constant="45" id="MdY-ib-Ixo"/>
                         <constraint firstAttribute="height" constant="44" id="i0i-oZ-pDC"/>
+                        <constraint firstAttribute="width" constant="250" id="wLv-na-5p0"/>
                     </constraints>
                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                     <state key="normal" title="退出当前账户">
-                        <color key="titleColor" red="0.74509803919999995" green="0.53725490200000003" blue="0.078431372550000003" alpha="1" colorSpace="calibratedRGB"/>
+                        <color key="titleColor" red="0.40000000000000002" green="0.40000000000000002" blue="0.40000000000000002" alpha="1" colorSpace="calibratedRGB"/>
                     </state>
                     <variation key="default">
                         <mask key="constraints">
@@ -448,6 +449,7 @@
                 <constraint firstItem="GhL-LK-yNz" firstAttribute="top" secondItem="exT-t7-6XE" secondAttribute="bottom" constant="7" id="8jC-X0-hiV"/>
                 <constraint firstItem="h1o-oN-8gb" firstAttribute="width" secondItem="h1o-oN-8gb" secondAttribute="height" multiplier="375:44" id="AZd-md-mMn"/>
                 <constraint firstItem="h1o-oN-8gb" firstAttribute="top" secondItem="BbZ-bm-7Rb" secondAttribute="bottom" constant="1" id="Dtf-vH-iDY"/>
+                <constraint firstItem="yxg-PK-hVr" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="E8L-Q2-v7B"/>
                 <constraint firstItem="h1o-oN-8gb" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="ET2-iU-6H2"/>
                 <constraint firstAttribute="trailing" secondItem="yxg-PK-hVr" secondAttribute="trailing" constant="15" id="FIA-Fe-VKa"/>
                 <constraint firstAttribute="trailing" secondItem="AdS-gT-f4j" secondAttribute="trailing" id="FMe-Hd-P9p"/>
@@ -511,6 +513,8 @@
                     <exclude reference="6iW-jC-NQt"/>
                     <exclude reference="j8f-Oh-Wmt"/>
                     <exclude reference="eN3-y4-Znx"/>
+                    <exclude reference="FIA-Fe-VKa"/>
+                    <exclude reference="isj-EC-TJD"/>
                     <exclude reference="mh8-PA-kdK"/>
                     <exclude reference="xmK-3y-Uri"/>
                 </mask>
