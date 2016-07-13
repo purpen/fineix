@@ -27,7 +27,7 @@
     [self.goodsTitle mas_updateConstraints:^(MASConstraintMaker *make) {
         make.size.mas_equalTo(CGSizeMake(SCREEN_WIDTH - 30 , size.height+5));
     }];
-    self.goodsPrice.text = [NSString stringWithFormat:@"¥ %.2f", model.marketPrice];
+    self.goodsPrice.text = [NSString stringWithFormat:@"¥ %.2f", model.salePrice];
 }
 
 - (void)getContentCellHeight:(NSString *)content {

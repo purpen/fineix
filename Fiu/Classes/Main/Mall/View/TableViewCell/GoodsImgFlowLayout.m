@@ -38,19 +38,12 @@
 //    CGFloat centerX = self.collectionView.contentOffset.x + self.collectionView.frame.size.width * 0.5;
 //    
 //    for (UICollectionViewLayoutAttributes * attributes in arr) {
-////        if ([attributes isEqual:[arr objectAtIndex:1]]) {
-////            attributes.alpha = 1;
-////        } else {
-////            attributes.alpha = 0.3;
-////        }
-//        
 //        if (attributes.center.x != centerX) {
 //            attributes.alpha = 0.3;
 //        } else {
 //            attributes.alpha = 1;
 //        }
 //    }
-//    
 //    return arr;
 //}
 
@@ -75,7 +68,6 @@
             min = attributes.center.x - centerX;
         }
     }
-    
     return CGPointMake(proposedContentOffset.x + min, proposedContentOffset.y);
 }
 
