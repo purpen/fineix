@@ -27,7 +27,7 @@
 #import <TencentOpenAPI/QQApiInterface.h>
 #import "UITabBar+badge.h"
 
-@interface SystemSettingViewController ()<FBNavigationBarItemsDelegate,NotificationDelege,FBRequestDelegate>
+@interface SystemSettingViewController ()<FBNavigationBarItemsDelegate,NotificationDelege,FBRequestDelegate,UMSocialUIDelegate>
 
 @property (weak, nonatomic) IBOutlet UILabel *pushStateLabel;
 @property (weak, nonatomic) IBOutlet UIButton *backBtn;
@@ -45,8 +45,6 @@ static NSString *const logOut = @"/auth/logout";
     //设置导航
     self.navViewTitle.text = @"系统设置";
     self.delegate = self;
-    self.backBtn.layer.masksToBounds = YES;
-    self.backBtn.layer.cornerRadius = 3;
     //-----
     //更改通知状态的代理
     AppDelegate *appDelegate = (AppDelegate*)[UIApplication sharedApplication].delegate;
@@ -64,6 +62,7 @@ static NSString *const logOut = @"/auth/logout";
     NSString * cachesPath = [NSSearchPathForDirectoriesInDomains(NSCachesDirectory, NSUserDomainMask, YES) firstObject];
     self.memoryLabel.text = [NSString stringWithFormat:@"%.1fM", [self folderSizeAtPath:cachesPath]];
 }
+
 
 -(void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
@@ -178,13 +177,12 @@ static NSString *const logOut = @"/auth/logout";
 }
 
 
-
 -(void)wechatShareBtnAction:(UIButton*)sender{
     UMSocialConfig *h = [[UMSocialConfig alloc] init];
     h.hiddenStatusTip = YES;
-    [[UMSocialDataService defaultDataService]  postSNSWithTypes:@[UMShareToWechatSession] content:@"我喜欢用图片梳理情绪，个性滤镜搭配细腻文字、还能一站购齐好设计！Fiu有一百种方式让你创新生活体验，快来让分享变成生产力。https://itunes.apple.com/cn/app/id1089442815" image:nil location:nil urlResource:nil presentedController:self completion:^(UMSocialResponseEntity *response){
+    [[UMSocialDataService defaultDataService]  postSNSWithTypes:@[UMShareToWechatSession] content:@"买到念念不忘的好设计，结识用心经营生活的同路人。Fiu有一百种方式让你创新生活体验，快来让分享变成生产力。http://m.taihuoniao.com/guide/fiu" image:nil location:nil urlResource:nil presentedController:self completion:^(UMSocialResponseEntity *response){
         if (response.responseCode == UMSResponseCodeSuccess) {
-            [SVProgressHUD showSuccessWithStatus:@"让分享变成生产力，别让生活偷走远方的精彩"];
+            [SVProgressHUD showSuccessWithStatus:@"让分享变成生产力，别让生活偷走远方的精彩"];            
         }
     }];
 }
@@ -193,7 +191,7 @@ static NSString *const logOut = @"/auth/logout";
     UMSocialConfig *h = [[UMSocialConfig alloc] init];
     h.hiddenStatusTip = YES;
     [UMSocialData defaultData].extConfig.wechatTimelineData.url = ShareURL;
-    [[UMSocialDataService defaultDataService]  postSNSWithTypes:@[UMShareToWechatTimeline] content:@"我喜欢用图片梳理情绪，个性滤镜搭配细腻文字、还能一站购齐好设计！Fiu有一百种方式让你创新生活体验，快来让分享变成生产力。https://itunes.apple.com/cn/app/id1089442815" image:nil location:nil urlResource:nil presentedController:self completion:^(UMSocialResponseEntity *response){
+    [[UMSocialDataService defaultDataService]  postSNSWithTypes:@[UMShareToWechatTimeline] content:@"买到念念不忘的好设计，结识用心经营生活的同路人。Fiu有一百种方式让你创新生活体验，快来让分享变成生产力。http://m.taihuoniao.com/guide/fiu" image:nil location:nil urlResource:nil presentedController:self completion:^(UMSocialResponseEntity *response){
         if (response.responseCode == UMSResponseCodeSuccess) {
             [SVProgressHUD showSuccessWithStatus:@"让分享变成生产力，别让生活偷走远方的精彩"];
         }
@@ -204,7 +202,7 @@ static NSString *const logOut = @"/auth/logout";
     UMSocialConfig *h = [[UMSocialConfig alloc] init];
     h.hiddenStatusTip = YES;
     [UMSocialData defaultData].extConfig.qqData.url = ShareURL;
-    [[UMSocialDataService defaultDataService]  postSNSWithTypes:@[UMShareToQQ] content:@"我喜欢用图片梳理情绪，个性滤镜搭配细腻文字、还能一站购齐好设计！Fiu有一百种方式让你创新生活体验，快来让分享变成生产力。https://itunes.apple.com/cn/app/id1089442815" image:nil location:nil urlResource:nil presentedController:self completion:^(UMSocialResponseEntity *response){
+    [[UMSocialDataService defaultDataService]  postSNSWithTypes:@[UMShareToQQ] content:@"买到念念不忘的好设计，结识用心经营生活的同路人。Fiu有一百种方式让你创新生活体验，快来让分享变成生产力。http://m.taihuoniao.com/guide/fiu" image:nil location:nil urlResource:nil presentedController:self completion:^(UMSocialResponseEntity *response){
         if (response.responseCode == UMSResponseCodeSuccess) {
             [SVProgressHUD showSuccessWithStatus:@"让分享变成生产力，别让生活偷走远方的精彩"];
         }
@@ -214,7 +212,7 @@ static NSString *const logOut = @"/auth/logout";
 -(void)sinaShareBtnAction:(UIButton*)sender{
     UMSocialConfig *h = [[UMSocialConfig alloc] init];
     h.hiddenStatusTip = YES;
-    [[UMSocialDataService defaultDataService]  postSNSWithTypes:@[UMShareToSina] content:@"我喜欢用图片梳理情绪，个性滤镜搭配细腻文字、还能一站购齐好设计！Fiu有一百种方式让你创新生活体验，快来让分享变成生产力。https://itunes.apple.com/cn/app/id1089442815" image:nil location:nil urlResource:nil presentedController:self completion:^(UMSocialResponseEntity *response){
+    [[UMSocialDataService defaultDataService]  postSNSWithTypes:@[UMShareToSina] content:@"买到念念不忘的好设计，结识用心经营生活的同路人。Fiu有一百种方式让你创新生活体验，快来让分享变成生产力。http://m.taihuoniao.com/guide/fiu" image:nil location:nil urlResource:nil presentedController:self completion:^(UMSocialResponseEntity *response){
         if (response.responseCode == UMSResponseCodeSuccess) {
             [SVProgressHUD showSuccessWithStatus:@"让分享变成生产力，别让生活偷走远方的精彩"];
         }
@@ -288,10 +286,8 @@ static NSString *const logOut = @"/auth/logout";
         //回到首页
         //圆点消失
         [self.tabBarController.tabBar hideBadgeWithIndex:4];
-        
         [self.tabBarController setSelectedIndex:0];
     }
-    
 }
 
 -(void)resetNotificationState{

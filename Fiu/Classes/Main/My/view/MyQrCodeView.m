@@ -11,6 +11,7 @@
 #import "UserInfoEntity.h"
 #import <SDWebImage/UIImageView+WebCache.h>
 
+
 @implementation MyQrCodeView
 
 -(instancetype)init{
