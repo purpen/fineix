@@ -44,10 +44,10 @@ static NSString *const UpdateInfoURL = @"/my/update_profile";
     self.sumaryTF.text = entity.summary;
     self.sumaryTF.delegate = self;
     
-    NSArray *tagsAry = [NSArray arrayWithObjects:@"老司机",@"过气网红",@"梦想家",@"先锋派",@"小鲜肉",@"肌肉男",@"路人甲",@"外星人",@"未知生物",@"特殊人物",@"老炮儿",@"特种兵",@"孤独癖",@"夜猫子",@"party animal",@"玻璃心",@"专治不服",@"帅到爆炸",@"德艺双馨",@"少女萌妹子",@"铲屎猫奴",@"素人", nil];
-    for (int i = 0; i< tagsAry.count; i++) {
+    NSArray *tagsAry1 = tagsAry;
+    for (int i = 0; i< tagsAry1.count; i++) {
         IdentityTagModel *model = [[IdentityTagModel alloc] init];
-        model.tags = tagsAry[i];
+        model.tags = tagsAry1[i];
         [self.modelAry addObject:model];
     }
     [self.itemsView addSubview:self.itemsCollectionView];

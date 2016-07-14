@@ -18,7 +18,7 @@
 #import "WXApi.h"
 #import "WeiboSDK.h"
 #import <TencentOpenAPI/QQApiInterface.h>
-
+#import "UIView+Size.h"
 
 @interface MyQrCodeViewController ()<FBNavigationBarItemsDelegate>
 {
@@ -47,9 +47,9 @@ static NSString *const ShareURL = @"http://m.taihuoniao.com/guide/app_about";
     [self.filter setDefaults];
     UserInfoEntity *entity = [UserInfoEntity defaultUserInfoEntity];
     NSString *str = [NSString stringWithFormat:@"http://m.taihuoniao.com/guide/appload?infoType=13&infoId=%@",entity.userId];
+
     NSData *data = [str dataUsingEncoding:NSUTF8StringEncoding];
     [_filter setValue:data forKey:@"inputMessage"];
-    
     
     [self.view addSubview:self.qrCodeView];
     [_qrCodeView mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -61,6 +61,11 @@ static NSString *const ShareURL = @"http://m.taihuoniao.com/guide/app_about";
     
     [self getImageFromView:self.view];
     self.navView.hidden = NO;
+    
+    UIImageView *logoImageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"QRLogo"]];
+    logoImageView.size = CGSizeMake(80, 80);
+    logoImageView.center = CGPointMake(_qrCodeView.qrCodeImageView.frame.size.width*0.5, _qrCodeView.qrCodeImageView.frame.size.height*0.5);
+    [_qrCodeView.qrCodeImageView addSubview:logoImageView];
 }
 
 -(void)getImageFromView:(UIView*)theView{

@@ -57,10 +57,10 @@
     [self.view addSubview:self.myScrollView];
     self.myScrollView.contentSize = CGSizeMake(0, self.certView.frame.origin.y+self.certView.frame.size.height);
     
-    NSArray *tagsAry = [NSArray arrayWithObjects:@"大拿",@"行家",@"行摄家",@"艺术范",@"手艺人",@"人来疯",@"赎回自由身",@"职业buyer", nil];
-    for (int i = 0; i< tagsAry.count; i++) {
+    NSArray *tagsAry1 = NormalTagsAry;
+    for (int i = 0; i< tagsAry1.count; i++) {
         IdentityTagModel *model = [[IdentityTagModel alloc] init];
-        model.tags = tagsAry[i];
+        model.tags = tagsAry1[i];
         [self.modelAry addObject:model];
     }
     

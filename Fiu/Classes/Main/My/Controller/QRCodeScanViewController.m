@@ -232,6 +232,7 @@
         _resultStr = stringValue;
     }
     if (stringValue.length) {
+        [_timer invalidate];
         [_session stopRunning];
         //处理扫描结果
         [self scanResultWithStr:stringValue];
@@ -302,7 +303,6 @@
             [self.navigationController pushViewController:homeOpage animated:YES];
         }
     }
-    [_session startRunning];
 }
 
 - (void)didReceiveMemoryWarning {

@@ -406,6 +406,7 @@
 		1F69CE201CF70BFA00AE3271 /* OfficialCertificationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F69CE1E1CF70BFA00AE3271 /* OfficialCertificationViewController.m */; };
 		1F69CE211CF70BFA00AE3271 /* OfficialCertificationViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1F69CE1F1CF70BFA00AE3271 /* OfficialCertificationViewController.xib */; };
 		1F772B5E1CF3FD910018AE40 /* AppDelegate.mm in Sources */ = {isa = PBXBuildFile; fileRef = 1F772B5D1CF3FD910018AE40 /* AppDelegate.mm */; };
+		1FA204E51D378AAB00B89699 /* UIView+Size.m in Sources */ = {isa = PBXBuildFile; fileRef = 1FA204E41D378AAB00B89699 /* UIView+Size.m */; };
 		1FA4BDED1D35F2200067A196 /* UMSocialLocalizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 1FA4BDB61D35F2200067A196 /* UMSocialLocalizable.strings */; };
 		1FA4BDEE1D35F2200067A196 /* libUMSocial_Sdk_5.2.1.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 1FA4BDC41D35F2200067A196 /* libUMSocial_Sdk_5.2.1.a */; };
 		1FA4BDEF1D35F2200067A196 /* UMSCommentDetailController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1FA4BDC61D35F2200067A196 /* UMSCommentDetailController.xib */; };
@@ -1256,6 +1257,9 @@
 		1F69CE1E1CF70BFA00AE3271 /* OfficialCertificationViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OfficialCertificationViewController.m; sourceTree = "<group>"; };
 		1F69CE1F1CF70BFA00AE3271 /* OfficialCertificationViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = OfficialCertificationViewController.xib; sourceTree = "<group>"; };
 		1F772B5D1CF3FD910018AE40 /* AppDelegate.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = AppDelegate.mm; sourceTree = "<group>"; };
+		1FA204E31D378AAB00B89699 /* UIView+Size.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+Size.h"; sourceTree = "<group>"; };
+		1FA204E41D378AAB00B89699 /* UIView+Size.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+Size.m"; sourceTree = "<group>"; };
+		1FA204E71D3792AF00B89699 /* PrefixHeader.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PrefixHeader.pch; sourceTree = "<group>"; };
 		1FA4BDB71D35F2200067A196 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/UMSocialLocalizable.strings; sourceTree = "<group>"; };
 		1FA4BDB91D35F2200067A196 /* UMSocial.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UMSocial.h; sourceTree = "<group>"; };
 		1FA4BDBA1D35F2200067A196 /* UMSocialAccountManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UMSocialAccountManager.h; sourceTree = "<group>"; };
@@ -3753,6 +3757,7 @@
 				D81280C31CAA8532007CF08B /* International */,
 				D81280141CAA8532007CF08B /* AppDelegate.h */,
 				1F772B5D1CF3FD910018AE40 /* AppDelegate.mm */,
+				1FA204E71D3792AF00B89699 /* PrefixHeader.pch */,
 				D8932E451D17FE8100428FC7 /* Launch Screen.storyboard */,
 				D8A9AD081CD9CCA900A9FCFB /* Assets.xcassets */,
 				D81280C01CAA8532007CF08B /* fineix.xcdatamodeld */,
@@ -3837,6 +3842,8 @@
 				D8035F3A1CB784B3001920F9 /* UILable+Frame.m */,
 				D8A9AE3E1CE304FF00A9FCFB /* NSTimer+Addition.h */,
 				D8A9AE3F1CE304FF00A9FCFB /* NSTimer+Addition.m */,
+				1FA204E31D378AAB00B89699 /* UIView+Size.h */,
+				1FA204E41D378AAB00B89699 /* UIView+Size.m */,
 			);
 			path = Tool;
 			sourceTree = "<group>";
@@ -4573,6 +4580,7 @@
 				1F2A8F3B1CF40277005116C7 /* AddTagViewController.m in Sources */,
 				1F2A90951CF40277005116C7 /* CommentId.m in Sources */,
 				1F2A8F3F1CF40277005116C7 /* FindGoodsModelRow.m in Sources */,
+				1FA204E51D378AAB00B89699 /* UIView+Size.m in Sources */,
 				1F2A8FAE1CF40277005116C7 /* FBSureOrderViewController.m in Sources */,
 				1F2A8F741CF40277005116C7 /* FiuSceneLocation.m in Sources */,
 				1FCDCC871D07F50D00C92E78 /* ServiceViewController.m in Sources */,
@@ -4780,6 +4788,7 @@
 					"$(PROJECT_DIR)/Fiu/Vendors/AliPay",
 				);
 				GCC_INPUT_FILETYPE = sourcecode.cpp.objcpp;
+				GCC_PREFIX_HEADER = Fiu/PrefixHeader.pch;
 				INFOPLIST_FILE = Fiu/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -4825,6 +4834,7 @@
 					"$(PROJECT_DIR)/Fiu/Vendors/AliPay",
 				);
 				GCC_INPUT_FILETYPE = sourcecode.cpp.objcpp;
+				GCC_PREFIX_HEADER = Fiu/PrefixHeader.pch;
 				INFOPLIST_FILE = Fiu/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
