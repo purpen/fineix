@@ -8,15 +8,15 @@
 
 #import "FBViewController.h"
 #import <SVProgressHUD/SVProgressHUD.h>
-#import "GoodsInfoData.h"
+#import "FBGoodsInfoModelData.h"
 
-typedef void(^GetGoodsInfoModelBlock)(GoodsInfoData * model);
+typedef void(^GetGoodsInfoModelBlock)(FBGoodsInfoModelData * model);
 typedef void(^BuyingGoodsBlock)(NSDictionary * orderData);
 typedef void(^AddGoodsCarBlock)(NSDictionary * addCarGoodsData);
 
 @interface FBBuyGoodsViewController : FBViewController <UICollectionViewDelegate, UICollectionViewDataSource>
 
-@pro_strong GoodsInfoData       *   goodsInfo;
+@pro_strong FBGoodsInfoModelData       *   goodsInfo;
 @pro_strong UIView              *   buyView;
 @pro_strong UIButton            *   cancelBtn;
 @pro_strong UIImageView         *   goodsImg;

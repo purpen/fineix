@@ -527,6 +527,9 @@
 		D8C690C41D13DFFE0026EAB5 /* FiuHeaderWatchTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D8C690C31D13DFFE0026EAB5 /* FiuHeaderWatchTableViewCell.m */; };
 		D8DDEE101D338D760020FF66 /* FBPopupView.m in Sources */ = {isa = PBXBuildFile; fileRef = D8DDEE0F1D338D760020FF66 /* FBPopupView.m */; };
 		D8DDEE121D34C81A0020FF66 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D8DDEE111D34C81A0020FF66 /* Assets.xcassets */; };
+		D8DDEE1A1D37EABD0020FF66 /* FBGoodsInfoModel.m in Sources */ = {isa = PBXBuildFile; fileRef = D8DDEE151D37EABD0020FF66 /* FBGoodsInfoModel.m */; };
+		D8DDEE1B1D37EABD0020FF66 /* FBGoodsInfoModelData.m in Sources */ = {isa = PBXBuildFile; fileRef = D8DDEE171D37EABD0020FF66 /* FBGoodsInfoModelData.m */; };
+		D8DDEE1C1D37EABD0020FF66 /* FBGoodsInfoModelRelationProduct.m in Sources */ = {isa = PBXBuildFile; fileRef = D8DDEE191D37EABD0020FF66 /* FBGoodsInfoModelRelationProduct.m */; };
 		D8E3AEB61CFC9B84006E5E8C /* ClipImageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D8E3AEA91CFC9B84006E5E8C /* ClipImageViewController.m */; };
 		D8E3AEB71CFC9B84006E5E8C /* CreateViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D8E3AEAB1CFC9B84006E5E8C /* CreateViewController.m */; };
 		D8E3AEB81CFC9B84006E5E8C /* CropImageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D8E3AEAD1CFC9B84006E5E8C /* CropImageViewController.m */; };
@@ -1472,6 +1475,12 @@
 		D8DDEE0E1D338D760020FF66 /* FBPopupView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FBPopupView.h; sourceTree = "<group>"; };
 		D8DDEE0F1D338D760020FF66 /* FBPopupView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FBPopupView.m; sourceTree = "<group>"; };
 		D8DDEE111D34C81A0020FF66 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		D8DDEE141D37EABD0020FF66 /* FBGoodsInfoModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FBGoodsInfoModel.h; sourceTree = "<group>"; };
+		D8DDEE151D37EABD0020FF66 /* FBGoodsInfoModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FBGoodsInfoModel.m; sourceTree = "<group>"; };
+		D8DDEE161D37EABD0020FF66 /* FBGoodsInfoModelData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FBGoodsInfoModelData.h; sourceTree = "<group>"; };
+		D8DDEE171D37EABD0020FF66 /* FBGoodsInfoModelData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FBGoodsInfoModelData.m; sourceTree = "<group>"; };
+		D8DDEE181D37EABD0020FF66 /* FBGoodsInfoModelRelationProduct.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FBGoodsInfoModelRelationProduct.h; sourceTree = "<group>"; };
+		D8DDEE191D37EABD0020FF66 /* FBGoodsInfoModelRelationProduct.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FBGoodsInfoModelRelationProduct.m; sourceTree = "<group>"; };
 		D8E3AEA81CFC9B84006E5E8C /* ClipImageViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ClipImageViewController.h; sourceTree = "<group>"; };
 		D8E3AEA91CFC9B84006E5E8C /* ClipImageViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ClipImageViewController.m; sourceTree = "<group>"; };
 		D8E3AEAA1CFC9B84006E5E8C /* CreateViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CreateViewController.h; sourceTree = "<group>"; };
@@ -2365,6 +2374,7 @@
 		1F2A8D121CF40276005116C7 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				D8DDEE131D37EABD0020FF66 /* FBGoods */,
 				1F2A8D131CF40276005116C7 /* Brand */,
 				1F2A8D201CF40276005116C7 /* Category */,
 				1F2A8D271CF40276005116C7 /* ChildTags */,
@@ -4015,6 +4025,19 @@
 			path = LMSpringboardView;
 			sourceTree = "<group>";
 		};
+		D8DDEE131D37EABD0020FF66 /* FBGoods */ = {
+			isa = PBXGroup;
+			children = (
+				D8DDEE141D37EABD0020FF66 /* FBGoodsInfoModel.h */,
+				D8DDEE151D37EABD0020FF66 /* FBGoodsInfoModel.m */,
+				D8DDEE161D37EABD0020FF66 /* FBGoodsInfoModelData.h */,
+				D8DDEE171D37EABD0020FF66 /* FBGoodsInfoModelData.m */,
+				D8DDEE181D37EABD0020FF66 /* FBGoodsInfoModelRelationProduct.h */,
+				D8DDEE191D37EABD0020FF66 /* FBGoodsInfoModelRelationProduct.m */,
+			);
+			path = FBGoods;
+			sourceTree = "<group>";
+		};
 		D8E3AEA61CFC9B84006E5E8C /* CreateFiuScene */ = {
 			isa = PBXGroup;
 			children = (
@@ -4280,6 +4303,7 @@
 				1F2A909C1CF40277005116C7 /* ShareViewController.m in Sources */,
 				1F2A8FF01CF40277005116C7 /* HomePageViewController.m in Sources */,
 				D8615C551D0FDC4E00C12FA2 /* EditViewController.m in Sources */,
+				D8DDEE1C1D37EABD0020FF66 /* FBGoodsInfoModelRelationProduct.m in Sources */,
 				1F2A90621CF40277005116C7 /* SystemInformsViewController.m in Sources */,
 				1F2A8F9A1CF40277005116C7 /* SceneInfoLocation.m in Sources */,
 				D8AC3E131D2DF9D900148522 /* UITabBar+badge.m in Sources */,
@@ -4469,6 +4493,7 @@
 				1F2A8FB71CF40277005116C7 /* FiuBrandId.m in Sources */,
 				1F2A8F9D1CF40277005116C7 /* UIImage+Text.m in Sources */,
 				1F2A90231CF40277005116C7 /* TheOfficialCertificationViewController.m in Sources */,
+				D8DDEE1B1D37EABD0020FF66 /* FBGoodsInfoModelData.m in Sources */,
 				1F2A8F4B1CF40277005116C7 /* FBPictureCollectionViewCell.m in Sources */,
 				1F45A7931D2F5263009D7EE1 /* MapAnnotionViewController.m in Sources */,
 				1F2A8FEF1CF40277005116C7 /* FindeFriendViewController.m in Sources */,
@@ -4578,6 +4603,7 @@
 				1FCDCC871D07F50D00C92E78 /* ServiceViewController.m in Sources */,
 				1F2A90311CF40277005116C7 /* DirectMessagesViewController.m in Sources */,
 				1F2A8FC61CF40277005116C7 /* GoodsInfo.m in Sources */,
+				D8DDEE1A1D37EABD0020FF66 /* FBGoodsInfoModel.m in Sources */,
 				1F2A90451CF40277005116C7 /* FBSignupViewController.m in Sources */,
 				1F2A90691CF40277005116C7 /* SystemInfoTableViewCell.m in Sources */,
 				1F2A900D1CF40277005116C7 /* FocusOnTableViewCell.m in Sources */,

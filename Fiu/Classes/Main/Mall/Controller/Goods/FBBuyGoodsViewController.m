@@ -32,7 +32,7 @@
     self.num = 1;
     
     __weak __typeof(self) weakSelf = self;
-    self.getGoodsModel = ^(GoodsInfoData * model) {
+    self.getGoodsModel = ^(FBGoodsInfoModelData * model) {
         CGRect buyViewRect = weakSelf.buyView.frame;
         buyViewRect = CGRectMake(0, SCREEN_HEIGHT - 410, SCREEN_WIDTH, 410);
         [UIView animateWithDuration:.3 animations:^{
@@ -52,7 +52,7 @@
 }
 
 #pragma mark - 设置购买信息
-- (void)setBuyGoodsData:(GoodsInfoData *)model {
+- (void)setBuyGoodsData:(FBGoodsInfoModelData *)model {
     [self.goodsImg downloadImage:model.coverUrl place:[UIImage imageNamed:@""]];
     self.goodsTitle.text = model.title;
     self.goodsPrice.text = [NSString stringWithFormat:@"￥%.2f", model.salePrice];

@@ -9,6 +9,7 @@
 #import <UIKit/UIKit.h>
 #import "Fiu.h"
 #import "GoodsInfoData.h"
+#import "FBGoodsInfoModelData.h"
 #import "UILable+Frame.h"
 
 @interface InfoTitleTableViewCell : UITableViewCell
@@ -18,6 +19,8 @@
 @pro_assign CGFloat                 cellHeight;
 
 - (void)setGoodsInfoData:(GoodsInfoData *)model;
+
+- (void)setThnGoodsInfoData:(FBGoodsInfoModelData *)model;
 
 - (void)getContentCellHeight:(NSString *)content;
 

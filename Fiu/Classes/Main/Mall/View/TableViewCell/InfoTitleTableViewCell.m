@@ -21,6 +21,15 @@
     return self;
 }
 
+- (void)setThnGoodsInfoData:(FBGoodsInfoModelData *)model {
+    self.goodsTitle.text = model.title;
+    CGSize size = [self.goodsTitle boundingRectWithSize:CGSizeMake(SCREEN_WIDTH - 30, 0)];
+    [self.goodsTitle mas_updateConstraints:^(MASConstraintMaker *make) {
+        make.size.mas_equalTo(CGSizeMake(SCREEN_WIDTH - 30 , size.height+5));
+    }];
+    self.goodsPrice.text = [NSString stringWithFormat:@"¥ %.2f", model.salePrice];
+}
+
 - (void)setGoodsInfoData:(GoodsInfoData *)model {
     self.goodsTitle.text = model.title;
     CGSize size = [self.goodsTitle boundingRectWithSize:CGSizeMake(SCREEN_WIDTH - 30, 0)];

@@ -9,6 +9,7 @@
 #import "FBGoodsInfoViewController.h"
 #import "GoodsCarViewController.h"
 #import "GoodsInfoData.h"
+#import "FBGoodsInfoModelData.h"
 #import "InfoTitleTableViewCell.h"
 #import "InfoRecommendTableViewCell.h"
 #import "FBGoodsColorTableViewCell.h"
@@ -25,9 +26,9 @@ static NSString *const URLAddCar = @"/shopping/add_cart";
 
 @interface FBGoodsInfoViewController ()
 
-@pro_strong GoodsInfoData       *   goodsInfo;
-@pro_strong NSMutableArray      *   recommendGoods;
-@pro_strong NSMutableArray      *   goodsComment;
+@pro_strong FBGoodsInfoModelData        *   goodsInfo;
+@pro_strong NSMutableArray              *   recommendGoods;
+@pro_strong NSMutableArray              *   goodsComment;
 
 @end
 
@@ -54,8 +55,9 @@ static NSString *const URLAddCar = @"/shopping/add_cart";
     [SVProgressHUD show];
     self.goodsInfoRequest = [FBAPI getWithUrlString:URLGoodsInfo requestDictionary:@{@"id":self.goodsID} delegate:self];
     [self.goodsInfoRequest startRequestSuccess:^(FBRequest *request, id result) {
+        NSLog(@"＝＝＝＝＝＝＝＝ %@", result);
         [self setThnGoodsInfoVcUI];
-        self.goodsInfo = [[GoodsInfoData alloc] initWithDictionary:[result valueForKey:@"data"]];
+        self.goodsInfo = [[FBGoodsInfoModelData alloc] initWithDictionary:[result valueForKey:@"data"]];
         NSArray * goodsArr  = [[result valueForKey:@"data"] valueForKey:@"relation_products"];
         for (NSDictionary * goodsDict in goodsArr) {
             GoodsRelationProducts * goodsModel = [[GoodsRelationProducts alloc] initWithDictionary:goodsDict];
@@ -151,7 +153,7 @@ static NSString *const URLAddCar = @"/shopping/add_cart";
         if (!cell) {
             cell = [[InfoTitleTableViewCell alloc] initWithStyle:(UITableViewCellStyleDefault) reuseIdentifier:InfoTitleCellId];
         }
-        [cell setGoodsInfoData:self.goodsInfo];
+        [cell setThnGoodsInfoData:self.goodsInfo];
         return cell;
         
     } else if (indexPath.section == 1) {

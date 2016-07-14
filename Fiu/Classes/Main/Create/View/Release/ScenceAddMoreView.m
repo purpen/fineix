@@ -13,6 +13,7 @@
 #import "AddTagViewController.h"
 #import "ChooseTagsCollectionViewCell.h"
 #import "SelectAllFSceneViewController.h"
+#import "TagFlowLayout.h"
 
 static const NSInteger btnTag = 100;
 
@@ -42,7 +43,7 @@ static const NSInteger btnTag = 100;
     
     [self addSubview:self.addTag];
     [_addTag mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.size.mas_equalTo(CGSizeMake(SCREEN_WIDTH, 44));
+        make.size.mas_equalTo(CGSizeMake(SCREEN_WIDTH, 160));
         make.top.equalTo(self.addLoacation.mas_bottom).with.offset(5);
         make.left.equalTo(self.mas_left).with.offset(0);
     }];
@@ -325,18 +326,34 @@ static const NSInteger btnTag = 100;
     _addLoacationBtn.hidden = NO;
 }
 
+#pragma mark - 标签图标
+- (UIImageView *)tagIcon {
+    if (!_tagIcon) {
+        _tagIcon = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 44, 44)];
+        _tagIcon.image = [UIImage imageNamed:@"icon_map"];
+        _tagIcon.contentMode = UIViewContentModeCenter;
+    }
+    return _tagIcon;
+}
+
 #pragma mark - 添加标签
 - (UIView *)addTag {
     if (!_addTag) {
         _addTag = [[UIView alloc] init];
         _addTag.backgroundColor = [UIColor whiteColor];
         
+        UILabel * addTagLab = [[UILabel alloc] initWithFrame:CGRectMake(0, 44, SCREEN_WIDTH, 40)];
+        addTagLab.text = @"推荐标签";
+        addTagLab.textAlignment = NSTextAlignmentCenter;
+        addTagLab.font = [UIFont systemFontOfSize:13];
+        addTagLab.textColor = [UIColor colorWithHexString:@"#999999"];
+        [_addTag addSubview:addTagLab];
+        
+        self.chooseTagMarr = [NSMutableArray arrayWithArray:@[@"蓝天", @"大海", @"晴空万里", @"哈哈哈", @"蓝天", @"奔跑吧兄弟", @"晴空万里", @"上天了"]];
+        
+        [_addTag addSubview:self.tagIcon];
         [_addTag addSubview:self.addTagBtn];
         [_addTag addSubview:self.chooseTagView];
-        
-        UIButton * goIcon = [[UIButton alloc] initWithFrame:CGRectMake(SCREEN_WIDTH - 44, 0, 44, 44)];
-        [goIcon setImage:[UIImage imageNamed:@"entr"] forState:(UIControlStateNormal)];
-        [_addTag addSubview:goIcon];
     }
     return _addTag;
 }
@@ -344,51 +361,50 @@ static const NSInteger btnTag = 100;
 //  添加标签
 - (UIButton *)addTagBtn {
     if (!_addTagBtn) {
-        _addTagBtn = [[UIButton alloc] initWithFrame:CGRectMake(15, 0, SCREEN_WIDTH - 15, 44)];
+        _addTagBtn = [[UIButton alloc] initWithFrame:CGRectMake(34, 0, SCREEN_WIDTH - 44, 44)];
         [_addTagBtn setTitle:NSLocalizedString(@"tag", nil) forState:(UIControlStateNormal)];
         [_addTagBtn setTitleColor:[UIColor colorWithHexString:blackFont alpha:1] forState:(UIControlStateNormal)];
         _addTagBtn.titleLabel.font = [UIFont systemFontOfSize:Font_GroupHeader];
         _addTagBtn.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
         _addTagBtn.backgroundColor = [UIColor whiteColor];
-        [_addTagBtn addTarget:self action:@selector(chooesTag) forControlEvents:(UIControlEventTouchUpInside)];
+//        [_addTagBtn addTarget:self action:@selector(chooesTag) forControlEvents:(UIControlEventTouchUpInside)];
     }
     return _addTagBtn;
 }
 
-//  改变高度
-- (void)changeTagFrame {
-    [_addTag mas_updateConstraints:^(MASConstraintMaker *make) {
-        make.height.equalTo(@88);
-    }];
-}
+////  改变高度
+//- (void)changeTagFrame {
+//    [_addTag mas_updateConstraints:^(MASConstraintMaker *make) {
+//        make.height.equalTo(@88);
+//    }];
+//}
 
-//  去选择标签
-- (void)chooesTag {
-    AddTagViewController * addTagVC = [[AddTagViewController alloc] init];
-    addTagVC.type = @"release";
-    addTagVC.chooseTagsBlock = ^(NSMutableArray * title, NSMutableArray * ids) {
-        self.chooseTagMarr = title;
-        self.chooseTagIdMarr = ids;
-        if (self.chooseTagMarr.count > 0) {
-            [self changeTagFrame];
-            [self.chooseTagView reloadData];
-        }
-    };
-    
-    [self.nav pushViewController:addTagVC animated:YES];
-
-}
+////  去选择标签
+//- (void)chooesTag {
+//    AddTagViewController * addTagVC = [[AddTagViewController alloc] init];
+//    addTagVC.type = @"release";
+//    addTagVC.chooseTagsBlock = ^(NSMutableArray * title, NSMutableArray * ids) {
+//        self.chooseTagMarr = title;
+//        self.chooseTagIdMarr = ids;
+//        if (self.chooseTagMarr.count > 0) {
+//            [self changeTagFrame];
+//            [self.chooseTagView reloadData];
+//        }
+//    };
+//    
+//    [self.nav pushViewController:addTagVC animated:YES];
+//
+//}
 
 #pragma mark - 选中的标签列表
 - (UICollectionView *)chooseTagView {
     if (!_chooseTagView) {
-        UICollectionViewFlowLayout * flowLayout = [[UICollectionViewFlowLayout alloc] init];
+        TagFlowLayout * flowLayout = [[TagFlowLayout alloc] init];
         flowLayout.minimumLineSpacing = 1.0f;
-        flowLayout.minimumInteritemSpacing = 1.0f;
-        flowLayout.sectionInset = UIEdgeInsetsMake(0, 15, 0, 15);
-        flowLayout.scrollDirection = UICollectionViewScrollDirectionHorizontal;
+        flowLayout.max = 5.0f;
+        flowLayout.sectionInset = UIEdgeInsetsMake(0, 10, 0, 10);
         
-        _chooseTagView = [[UICollectionView alloc] initWithFrame:CGRectMake(0, 44, SCREEN_WIDTH,44) collectionViewLayout:flowLayout];
+        _chooseTagView = [[UICollectionView alloc] initWithFrame:CGRectMake(0, 84, SCREEN_WIDTH, 70) collectionViewLayout:flowLayout];
         _chooseTagView.backgroundColor = [UIColor whiteColor];
         _chooseTagView.delegate = self;
         _chooseTagView.dataSource = self;
@@ -414,7 +430,11 @@ static const NSInteger btnTag = 100;
 
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath {
     CGFloat tagW = [self.chooseTagMarr[indexPath.row] boundingRectWithSize:CGSizeMake(SCREEN_WIDTH, 1000) options:(NSStringDrawingUsesLineFragmentOrigin) attributes:nil context:nil].size.width;
-    return CGSizeMake(tagW + 30, 35);
+    return CGSizeMake(tagW + 30, 28);
+}
+
+- (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
+    [SVProgressHUD showSuccessWithStatus:[NSString stringWithFormat:@"选中标签:%@", self.chooseTagMarr[indexPath.row]]];
 }
 
 
@@ -424,9 +444,6 @@ static const NSInteger btnTag = 100;
         _addScene = [[UIView alloc] init];
         _addScene.backgroundColor = [UIColor whiteColor];
         [_addScene addSubview:self.addSceneBtn];
-        UILabel * line = [[UILabel alloc] initWithFrame:CGRectMake(0, 44, SCREEN_WIDTH, 1)];
-        line.backgroundColor = [UIColor colorWithHexString:lineGrayColor];
-        [_addScene addSubview:line];
         [_addScene addSubview:self.selectFSceneBtn];
     }
     return _addScene;

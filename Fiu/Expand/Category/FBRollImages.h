@@ -11,6 +11,7 @@
 #import "Fiu.h"
 #import "GoodsInfoData.h"
 #import "RollImageRow.h"
+#import "FBGoodsInfoModelData.h"
 
 @interface FBRollImages : UIView <SDCycleScrollViewDelegate>
 
@@ -26,6 +27,6 @@
 
 - (void)setGoodsRollimageView:(GoodsInfoData *)model;
 
-- (void)setThnGoodsRollImgData:(GoodsInfoData *)model;
+- (void)setThnGoodsRollImgData:(FBGoodsInfoModelData *)model;
 
 @end

@@ -22,6 +22,7 @@
 
 @pro_strong UIView          *   addLoacation;       //  添加地点
 @pro_strong UIImageView     *   locationIcon;       //  地点图标
+@pro_strong UIImageView     *   tagIcon;       //  地点图标
 @pro_strong UIButton        *   addLoacationBtn;    //  添加位置按钮
 @pro_strong UIView          *   locationView;       //  显示地理位置
 @pro_strong UILabel         *   location;           //  地理位置

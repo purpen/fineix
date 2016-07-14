@@ -29,7 +29,7 @@
     if (!_tagBtn) {
         _tagBtn = [[UIButton alloc] init];
         [_tagBtn setBackgroundImage:[UIImage resizedImage:@"tagBg_gray"] forState:(UIControlStateNormal)];
-        [_tagBtn setTitleColor:[UIColor colorWithHexString:titleColor] forState:(UIControlStateNormal)];
+        [_tagBtn setTitleColor:[UIColor colorWithHexString:@"#555555"] forState:(UIControlStateNormal)];
         _tagBtn.titleLabel.font = [UIFont systemFontOfSize:12];
         [_tagBtn setTitleEdgeInsets:(UIEdgeInsetsMake(0, -5, 0, 0))];
         _tagBtn.userInteractionEnabled = NO;
