@@ -18,10 +18,10 @@
 @property (weak, nonatomic) IBOutlet UIView *throughView;
 //@property (strong, nonatomic) UIImageView *idTagesImageView;
 /** 官方认证标签 */
-@property (nonatomic, strong) UILabel *idTagsLabelNew;
-@property (strong, nonatomic) UILabel *idTagesLabel;
 @property (weak, nonatomic) IBOutlet UIButton *editBtn;
 @property (weak, nonatomic) IBOutlet UIView *sumView;
+@property (weak, nonatomic) IBOutlet UILabel *certInfoLabel;
+@property (weak, nonatomic) IBOutlet UILabel *certShenFenLabel;
 
 @end
 
@@ -34,18 +34,6 @@
     self.waitingView.hidden = YES;
     self.throughView.hidden = YES;
     
-    
-    [self.sumView addSubview:self.idTagsLabelNew];
-    [_idTagsLabelNew mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.mas_equalTo(self.sumView.mas_left).with.offset(20);
-        make.top.mas_equalTo(self.sumView.mas_top).with.offset(8/667.0*SCREEN_HEIGHT);
-    }];
-    
-    [self.sumView addSubview:self.idTagesLabel];
-    [_idTagesLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.mas_equalTo(self.sumView.mas_left).with.offset(20);
-        make.top.mas_equalTo(self.idTagsLabelNew.mas_bottom).with.offset(3/667.0*SCREEN_HEIGHT);
-    }];
     
     FBRequest *request = [FBAPI postWithUrlString:@"/my/fetch_talent" requestDictionary:nil delegate:self];
     [request startRequestSuccess:^(FBRequest *request, id result) {
@@ -75,8 +63,8 @@
 //                NSArray *tagsAry = [NSArray arrayWithObjects:@"大拿",@"行家",@"行摄家",@"艺术范",@"手艺人",@"人来疯",@"赎回自由身",@"职业buyer", nil];
 //                int n = (int)[tagsAry indexOfObject:dataDict[@"label"]];
 //                self.idTagesImageView.image = [UIImage imageNamed:[NSString stringWithFormat:@"tags%d",n+1]];
-                self.idTagsLabelNew.text = dataDict[@"label"];
-                self.idTagesLabel.text = dataDict[@"info"];
+                self.certShenFenLabel.text = dataDict[@"label"];
+                self.certInfoLabel.text = dataDict[@"info"];
             }
             //3 审核通过
         
@@ -101,24 +89,6 @@
 //    return _idTagesImageView;
 //}
 
-#pragma mark - 官方注册标签
--(UILabel *)idTagsLabelNew{
-    if (!_idTagsLabelNew) {
-        _idTagsLabelNew = [[UILabel alloc] init];
-        _idTagsLabelNew.font = [UIFont systemFontOfSize:13];
-        _idTagsLabelNew.textColor = [UIColor lightGrayColor];
-    }
-    return _idTagsLabelNew;
-}
-
--(UILabel *)idTagesLabel{
-    if (!_idTagesLabel) {
-        _idTagesLabel = [[UILabel alloc] init];
-        _idTagesLabel.font = [UIFont systemFontOfSize:13];
-        _idTagesLabel.textColor = [UIColor lightGrayColor];
-    }
-    return _idTagesLabel;
-}
 
 - (void)viewDidLoad {
     [super viewDidLoad];

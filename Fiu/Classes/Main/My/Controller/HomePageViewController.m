@@ -452,9 +452,9 @@ static NSString *sceneCellId = @"SceneCollectionViewCell";
         if (section == 0) {
             return UIEdgeInsetsMake(0, 0, 0, 0);
         }else if(section == 1){
-            return UIEdgeInsetsMake(3, 5, 0, 5);
+            return UIEdgeInsetsMake(5, 5, 0, 5);
         }else if (section == 2){
-            return UIEdgeInsetsMake(3, 5, 0, 5);
+            return UIEdgeInsetsMake(5, 5, 0, 5);
         }
     }
     return UIEdgeInsetsMake(0, 0, 0, 0);
