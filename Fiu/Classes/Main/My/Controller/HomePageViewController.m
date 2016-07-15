@@ -531,7 +531,7 @@ static NSString *sceneCellId = @"SceneCollectionViewCell";
                 cell.userInteractionEnabled = NO;
                 ScenarioNonView *view = [ScenarioNonView getScenarioNonView];
                 if (self.isMySelf) {
-                    view.tipLabel.text = @"你还没有发表过新场景哦，快来Fiu一下嘛";
+                    view.tipLabel.text = @"你还没有发表过新情景哦，快来Fiu一下嘛";
                 }else{
                     view.tipLabel.text = @"你们好像在哪儿见过，来看看他的足迹吧";
                 }
