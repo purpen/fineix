@@ -204,7 +204,7 @@ static NSString *const ShareURL = @"http://m.taihuoniao.com/guide/app_about";
 -(void)sinaShareBtnAction:(UIButton*)sender{
     UMSocialConfig *h = [[UMSocialConfig alloc] init];
     h.hiddenStatusTip = YES;
-    [[UMSocialDataService defaultDataService]  postSNSWithTypes:@[UMShareToSina] content:@"有Fiu的生活，才够意思，快点扫码加我吧！查看个人主页>>http://www.taihuoniao.com" image:_viewImage location:nil urlResource:nil presentedController:self completion:^(UMSocialResponseEntity *shareResponse){
+    [[UMSocialDataService defaultDataService]  postSNSWithTypes:@[UMShareToSina] content:@"我在Fiu浮游寻找同路人；希望和你一起用文字来记录内心情绪，用滤镜来表达情感色彩，用分享去变现原创价值；带你发现美学科技的力量和感性生活的温度！来吧，一起Fiu >>> http://m.taihuoniao.com/guide/fiu" image:_viewImage location:nil urlResource:nil presentedController:self completion:^(UMSocialResponseEntity *shareResponse){
         if (shareResponse.responseCode == UMSResponseCodeSuccess) {
             [SVProgressHUD showSuccessWithStatus:@"让分享变成生产力，别让生活偷走远方的精彩"];
         }

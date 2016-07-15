@@ -277,7 +277,7 @@ static NSString *const ShareURL = @"http://m.taihuoniao.com/guide/app_about";
     if (indexPath.section == 0) {
         if (indexPath.row == 0) {
             //微信
-            [[UMSocialDataService defaultDataService]  postSNSWithTypes:@[UMShareToWechatSession] content:@"买到念念不忘的好设计，结识用心经营生活的同路人。Fiu有一百种方式让你创新生活体验，快来让分享变成生产力。http://m.taihuoniao.com/guide/fiu" image:nil location:nil urlResource:nil presentedController:self completion:^(UMSocialResponseEntity *response){
+            [[UMSocialDataService defaultDataService]  postSNSWithTypes:@[UMShareToWechatSession] content:@"我在Fiu浮游寻找同路人；希望和你一起用文字来记录内心情绪，用滤镜来表达情感色彩，用分享去变现原创价值；带你发现美学科技的力量和感性生活的温度！来吧，一起Fiu >>> http://m.taihuoniao.com/guide/fiu" image:nil location:nil urlResource:nil presentedController:self completion:^(UMSocialResponseEntity *response){
                 if (response.responseCode == UMSResponseCodeSuccess) {
                     [SVProgressHUD showSuccessWithStatus:@"让分享变成生产力，别让生活偷走远方的精彩"];
                 }
@@ -286,7 +286,7 @@ static NSString *const ShareURL = @"http://m.taihuoniao.com/guide/app_about";
         }else if (indexPath.row == 1){
             //weibo
             MyQrCodeViewController *vc = [[MyQrCodeViewController alloc] init];
-            [[UMSocialDataService defaultDataService]  postSNSWithTypes:@[UMShareToSina] content:[NSString stringWithFormat:@"买到念念不忘的好设计，结识用心经营生活的同路人。Fiu有一百种方式让你创新生活体验，快来让分享变成生产力。http://m.taihuoniao.com/guide/fiu"] image:vc.qrCodeView.qrCodeImageView.image location:nil urlResource:nil presentedController:self completion:^(UMSocialResponseEntity *response){
+            [[UMSocialDataService defaultDataService]  postSNSWithTypes:@[UMShareToSina] content:[NSString stringWithFormat:@"我在Fiu浮游寻找同路人；希望和你一起用文字来记录内心情绪，用滤镜来表达情感色彩，用分享去变现原创价值；带你发现美学科技的力量和感性生活的温度！来吧，一起Fiu >>> http://m.taihuoniao.com/guide/fiu"] image:vc.qrCodeView.qrCodeImageView.image location:nil urlResource:nil presentedController:self completion:^(UMSocialResponseEntity *response){
                 if (response.responseCode == UMSResponseCodeSuccess) {
                     [SVProgressHUD showSuccessWithStatus:@"让分享变成生产力，别让生活偷走远方的精彩"];
                 }
@@ -295,7 +295,7 @@ static NSString *const ShareURL = @"http://m.taihuoniao.com/guide/app_about";
             //通讯录
 //            LBAddressBookViewController *vc = [[LBAddressBookViewController alloc] init];
 //            [self.navigationController pushViewController:vc animated:YES];
-            [[UMSocialDataService defaultDataService]  postSNSWithTypes:@[UMShareToSms] content:@"买到念念不忘的好设计，结识用心经营生活的同路人。Fiu有一百种方式让你创新生活体验，快来让分享变成生产力。http://m.taihuoniao.com/guide/fiu" image:nil location:nil urlResource:nil presentedController:self completion:^(UMSocialResponseEntity *shareResponse){
+            [[UMSocialDataService defaultDataService]  postSNSWithTypes:@[UMShareToSms] content:@"我在Fiu浮游寻找同路人；希望和你一起用文字来记录内心情绪，用滤镜来表达情感色彩，用分享去变现原创价值；带你发现美学科技的力量和感性生活的温度！来吧，一起Fiu >>> http://m.taihuoniao.com/guide/fiu" image:nil location:nil urlResource:nil presentedController:self completion:^(UMSocialResponseEntity *shareResponse){
                 if (shareResponse.responseCode == UMSResponseCodeSuccess) {
                     [SVProgressHUD showSuccessWithStatus:@"让分享变成生产力，别让生活偷走远方的精彩"];
                 }
