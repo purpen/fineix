@@ -434,8 +434,6 @@ static NSString *const thirdRegister = @"/auth/third_sign";//第三方登录接�
 
 - (IBAction)clickQQBtn:(UIButton *)sender {
     //QQ登录
-    
-    
     UMSocialSnsPlatform *snsPlatform = [UMSocialSnsPlatformManager getSocialPlatformWithName:UMShareToQQ];
     snsPlatform.loginClickHandler(self,[UMSocialControllerService defaultControllerService],YES,^(UMSocialResponseEntity *response){
         

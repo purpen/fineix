@@ -151,26 +151,6 @@ NSString *const determineLogin = @"/auth/check_login";
     return YES;
 }
 
-/**
- *  程序接受到内存警告
- *  将图片缓存清空
- *  @param application 
- */
--(void)applicationDidReceiveMemoryWarning:(UIApplication *)application{
-    //清空缓存
-    NSString *cachesPath = [NSSearchPathForDirectoriesInDomains(NSCachesDirectory, NSUserDomainMask, YES) firstObject];
-    NSFileManager *manager = [NSFileManager defaultManager];
-    NSArray *files = [manager subpathsAtPath:cachesPath];
-    //如果数组里有内容需要遍历清空
-    for (NSString *fileName in files) {
-        NSError *error = nil;
-        NSString *filePath = [cachesPath stringByAppendingPathComponent:fileName];
-        if ([manager fileExistsAtPath:filePath]) {
-            [manager removeItemAtPath:filePath error:&error];
-        }
-    }
-}
-
 
 -(void)application:(UIApplication *)application didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken{
     
