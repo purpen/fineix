@@ -206,7 +206,10 @@ static NSString *const URLAddCar = @"/shopping/add_cart";
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
     if (indexPath.section == 0) {
-        return 60;
+        InfoTitleTableViewCell * cell = [[InfoTitleTableViewCell alloc] init];
+        [cell getContentCellHeight:self.goodsInfo.title];
+        return cell.cellHeight;
+        
     } else if (indexPath.section == 1) {
         return 44;
     } else if (indexPath.section == 2) {

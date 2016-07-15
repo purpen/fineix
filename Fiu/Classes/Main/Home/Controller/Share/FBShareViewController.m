@@ -102,7 +102,7 @@ static NSString *const URLGiveExp = @"/user/send_exp";
 - (UIView *)shareView {
     if (!_shareView) {
         _shareView = [[UIView alloc] initWithFrame:CGRectMake(0, 44, SCREEN_WIDTH, SCREEN_HEIGHT)];
-        [_shareView addSubview:self.shareTopView];
+        [_shareView addSubview:self.shareBottomView];
         
 //        UITapGestureRecognizer * tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(editShareInfo)];
 //        [_shareView addGestureRecognizer:tap];
@@ -196,25 +196,25 @@ static NSString *const URLGiveExp = @"/user/send_exp";
     if (indexPath.row == 0) {
         if (self.shareView.subviews.count > 0) {
             [self.shareView.subviews makeObjectsPerformSelector:@selector(removeFromSuperview)];
-            [self.shareView addSubview:self.shareTopView];
+            [self.shareView addSubview:self.shareBottomView];
         }
         
     } else if (indexPath.row == 1) {
         if (self.shareView.subviews.count > 0) {
             [self.shareView.subviews makeObjectsPerformSelector:@selector(removeFromSuperview)];
-            [self.shareView addSubview:self.shareBottomView];
+            [self.shareView addSubview:self.shareTopView];
         }
         
     } else if (indexPath.row == 2) {
         if (self.shareView.subviews.count > 0) {
             [self.shareView.subviews makeObjectsPerformSelector:@selector(removeFromSuperview)];
-            [self.shareView addSubview:self.shareTitleTopView];
+            [self.shareView addSubview:self.shareTitleBottomView];
         }
         
     } else if (indexPath.row == 3) {
         if (self.shareView.subviews.count > 0) {
             [self.shareView.subviews makeObjectsPerformSelector:@selector(removeFromSuperview)];
-            [self.shareView addSubview:self.shareTitleBottomView];
+            [self.shareView addSubview:self.shareTitleTopView];
         }
     }
 }

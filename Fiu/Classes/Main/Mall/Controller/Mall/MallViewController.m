@@ -69,7 +69,7 @@ static NSString *const URLFiuBrand = @"/scene_brands/getlist";
 }
 
 #pragma mark - 网络请求
-#pragma mark 轮播图r
+#pragma mark 轮播图
 - (void)networkRollImgData {
     self.rollImgRequest = [FBAPI getWithUrlString:URLMallSlide requestDictionary:@{@"name":@"app_fiu_product_index_slide"} delegate:self];
     [self.rollImgRequest startRequestSuccess:^(FBRequest *request, id result) {
@@ -353,7 +353,7 @@ static NSString *const URLFiuBrand = @"/scene_brands/getlist";
 #pragma mark - 上滑出现的商品分类菜单
 - (CategoryMenuView *)categoryMenu {
     if (!_categoryMenu) {
-        _categoryMenu = [[CategoryMenuView alloc] initWithFrame:CGRectMake(0, -85, SCREEN_WIDTH, 75)];
+        _categoryMenu = [[CategoryMenuView alloc] initWithFrame:CGRectMake(0, -85, SCREEN_WIDTH, 65)];
         _categoryMenu.nav = self.navigationController;
     }
     return _categoryMenu;
