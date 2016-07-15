@@ -15,6 +15,7 @@
     if (self) {
         
         self.selectionStyle = UITableViewCellSelectionStyleNone;
+        self.backgroundColor = [UIColor whiteColor];
         [self setCellUI];
         
     }
@@ -37,6 +38,16 @@
         make.size.mas_equalTo(CGSizeMake(SCREEN_WIDTH - 30 , size.height+5));
     }];
     self.goodsPrice.text = [NSString stringWithFormat:@"¥ %.2f", model.salePrice];
+    
+    UILabel * botLine = [[UILabel alloc] init];
+    botLine.backgroundColor = [UIColor colorWithHexString:cellBgColor];
+    [self addSubview:botLine];
+    [botLine mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.size.mas_equalTo(CGSizeMake(SCREEN_WIDTH, 5));
+        make.bottom.equalTo(self.mas_bottom).with.offset(0);
+        make.left.equalTo(self.mas_left).with.offset(0);
+    }];
+
 }
 
 - (void)getContentCellHeight:(NSString *)content {
@@ -59,15 +70,6 @@
         make.size.mas_equalTo(CGSizeMake(SCREEN_WIDTH - 30 , 17));
         make.bottom.equalTo(self.mas_bottom).with.offset(-10);
         make.left.equalTo(self.mas_left).with.offset(15);
-    }];
-    
-    UILabel * botLine = [[UILabel alloc] init];
-    botLine.backgroundColor = [UIColor colorWithHexString:cellBgColor];
-    [self addSubview:botLine];
-    [botLine mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.size.mas_equalTo(CGSizeMake(SCREEN_WIDTH, 5));
-        make.bottom.equalTo(self.mas_bottom).with.offset(0);
-        make.left.equalTo(self.mas_left).with.offset(0);
     }];
 }
 

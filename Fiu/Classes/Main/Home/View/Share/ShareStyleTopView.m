@@ -3,12 +3,19 @@
 //  Fiu
 //
 //  Created by FLYang on 16/5/24.
-//  Copyright © 2016年 taihuoniao. All rights reserved.
+//  Copyright © 1516年 taihuoniao. All rights reserved.
 //
 
 #import "ShareStyleTopView.h"
 #import "HomeSceneListRow.h"
 #import "UILable+Frame.h"
+
+static CGFloat const desFont = 9.0f;
+static CGFloat const addressFont = 9.0f;
+static CGFloat const slognFont = 8.0f;
+static CGFloat const userNameFont = 10.0f;
+static CGFloat const userAboutFont = 9.0f;
+static CGFloat const userStarFont = 9.0f;
 
 @interface ShareStyleTopView () {
     NSString    *   _titleText;
@@ -85,41 +92,36 @@
     
     [self addSubview:self.userView];
     [_userView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.size.mas_equalTo(CGSizeMake(SCREEN_WIDTH - 40, 30));
-        make.top.equalTo(self.mas_top).with.offset(20);
-        make.left.equalTo(self.mas_left).with.offset(20);
+        make.size.mas_equalTo(CGSizeMake(SCREEN_WIDTH - 30, 26));
+        make.top.equalTo(self.mas_top).with.offset(15);
+        make.left.equalTo(self.mas_left).with.offset(15);
     }];
     
     [self addSubview:self.title];
     [_title mas_makeConstraints:^(MASConstraintMaker *make) {
         make.size.mas_equalTo(CGSizeMake(SCREEN_WIDTH * 0.68, 56));
         make.top.equalTo(_userView.mas_bottom).with.offset(5);
-        make.left.equalTo(self.mas_left).with.offset(20);
+        make.left.equalTo(self.mas_left).with.offset(15);
     }];
     
     [self addSubview:self.describeView];
     [_describeView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.size.mas_equalTo(CGSizeMake(SCREEN_WIDTH * 0.68, 65));
         make.top.equalTo(_title.mas_bottom).with.offset(5);
-        make.left.equalTo(self.mas_left).with.offset(20);
+        make.left.equalTo(self.mas_left).with.offset(15);
     }];
     
     [self addSubview:self.qrCode];
     [_qrCode mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.size.mas_equalTo(CGSizeMake(65, 65));
+        make.size.mas_equalTo(CGSizeMake(50, 50));
         make.top.equalTo(_describeView.mas_top).with.offset(0);
-        make.right.equalTo(self.mas_right).with.offset(-20);
+        make.right.equalTo(self.mas_right).with.offset(-15);
     }];
-    if (IS_PHONE5) {
-        [_qrCode mas_updateConstraints:^(MASConstraintMaker *make) {
-            make.size.mas_equalTo(CGSizeMake(50, 50));
-        }];
-    }
-    
+
     [self addSubview:self.fiuLogo];
     [_fiuLogo mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.equalTo(self.mas_left).with.offset(0);
-        make.bottom.equalTo(self.mas_bottom).with.offset(-20);
+        make.bottom.equalTo(self.mas_bottom).with.offset(-15);
         make.size.mas_equalTo(CGSizeMake(SCREEN_WIDTH, 50));
     }];
 }
@@ -131,7 +133,7 @@
         
         [_userView addSubview:self.userHeader];
         [_userHeader mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.size.mas_equalTo(CGSizeMake(30, 30));
+            make.size.mas_equalTo(CGSizeMake(26, 26));
             make.centerY.equalTo(_userView);
             make.left.equalTo(_userView.mas_left).with.offset(0);
         }];
@@ -145,7 +147,7 @@
         
         [_userView addSubview:self.userName];
         [_userName mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.size.mas_equalTo(CGSizeMake(200, 14));
+            make.size.mas_equalTo(CGSizeMake(150, 14));
             make.top.equalTo(_userHeader.mas_top).with.offset(0);
             make.left.equalTo(_userHeader.mas_right).with.offset(6);
         }];
@@ -159,7 +161,7 @@
         
         [_userView addSubview:self.userAbout];
         [_userAbout mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.size.mas_equalTo(CGSizeMake(300, 15));
+            make.size.mas_equalTo(CGSizeMake(300, 10));
             make.bottom.equalTo(_userHeader.mas_bottom).with.offset(0);
             make.left.equalTo(_userStar.mas_right).with.offset(5);
         }];
@@ -196,7 +198,7 @@
         [_describeView addSubview:self.sloganIcon];
         [_sloganIcon mas_makeConstraints:^(MASConstraintMaker *make) {
             make.size.mas_equalTo(CGSizeMake(27, 15));
-            make.top.equalTo(_describe.mas_bottom).with.offset(7);
+            make.top.equalTo(_describe.mas_bottom).with.offset(5);
             make.left.equalTo(_describe.mas_left).with.offset(-5);
         }];
         
@@ -233,7 +235,7 @@
 - (UILabel *)userStar {
     if (!_userStar) {
         _userStar = [[UILabel alloc] init];
-        _userStar.font = [UIFont systemFontOfSize:11];
+        _userStar.font = [UIFont systemFontOfSize:userStarFont];
         _userStar.textColor = [UIColor whiteColor];
     }
     return _userStar;
@@ -242,7 +244,7 @@
 - (UIImageView *)userHeader {
     if (!_userHeader) {
         _userHeader = [[UIImageView alloc] init];
-        _userHeader.layer.cornerRadius = 15;
+        _userHeader.layer.cornerRadius = 13;
         _userHeader.layer.masksToBounds = YES;
         _userHeader.layer.borderColor = [UIColor colorWithHexString:@"#FFFFFF"].CGColor;
         _userHeader.layer.borderWidth = 1.0f;
@@ -254,7 +256,7 @@
     if (!_userName) {
         _userName = [[UILabel alloc] init];
         _userName.textColor = [UIColor colorWithHexString:@"#FFFFFF" alpha:1];
-        _userName.font = [UIFont systemFontOfSize:13];
+        _userName.font = [UIFont systemFontOfSize:userNameFont];
     }
     return _userName;
 }
@@ -263,7 +265,7 @@
     if (!_userAbout) {
         _userAbout = [[UILabel alloc] init];
         _userAbout.textColor = [UIColor colorWithHexString:@"#FFFFFF" alpha:1];
-        _userAbout.font = [UIFont systemFontOfSize:11];
+        _userAbout.font = [UIFont systemFontOfSize:userAboutFont];
     }
     return _userAbout;
 }
@@ -271,7 +273,7 @@
 - (UILabel *)address {
     if (!_address) {
         _address = [[UILabel alloc] init];
-        _address.font = [UIFont systemFontOfSize:10];
+        _address.font = [UIFont systemFontOfSize:addressFont];
         _address.textColor = [UIColor colorWithHexString:@"#FFFFFF" alpha:1];
     }
     return _address;
@@ -296,20 +298,31 @@
 }
 
 - (void)titleTextStyle:(NSString *)title withBgColor:(UIColor *)color {
-    if (title.length < 7) {
-        _title.font = [UIFont systemFontOfSize:40];
-    } else if (title.length >= 7 && title.length <= 11) {
+    if (title.length < 8) {
+        _title.font = [UIFont systemFontOfSize:36];
+    } else if (title.length >= 8 && [title length] < 12) {
         [self.title mas_updateConstraints:^(MASConstraintMaker *make) {
-            make.size.mas_equalTo(CGSizeMake(SCREEN_WIDTH * 0.68, 35));
+            make.size.mas_equalTo(CGSizeMake(SCREEN_WIDTH * 0.68, 30));
         }];
-        _title.font = [UIFont systemFontOfSize:20];
-        
-    } else if (title.length > 11) {
+        _title.font = [UIFont systemFontOfSize:23];
+    } else if ([title length] == 12){
+        if (IS_PHONE6P) {
+            [self.title mas_updateConstraints:^(MASConstraintMaker *make) {
+                make.size.mas_equalTo(CGSizeMake(SCREEN_WIDTH * 0.68, 30));
+            }];
+        } else {
+            [self.title mas_updateConstraints:^(MASConstraintMaker *make) {
+                make.size.mas_equalTo(CGSizeMake(SCREEN_WIDTH * 0.68, 56));
+            }];
+        }
+        _title.font = [UIFont systemFontOfSize:23];
+    } else if ([title length] > 12){
         [self.title mas_updateConstraints:^(MASConstraintMaker *make) {
             make.size.mas_equalTo(CGSizeMake(SCREEN_WIDTH * 0.68, 56));
         }];
-        _title.font = [UIFont systemFontOfSize:20];
+        _title.font = [UIFont systemFontOfSize:23];
     }
+
     
     NSMutableAttributedString * titleText = [[NSMutableAttributedString alloc] initWithString:title];
     NSMutableParagraphStyle * paragraphStyle = [[NSMutableParagraphStyle alloc] init];
@@ -335,33 +348,54 @@
     if (!_describe) {
         _describe = [[UILabel alloc] init];
         _describe.textColor = [UIColor colorWithHexString:@"#FFFFFF" alpha:1];
-        
-        _describe.font = [UIFont systemFontOfSize:13];
-        if (IS_PHONE5) {
-            _describe.font = [UIFont systemFontOfSize:9];
-        } else if (IS_PHONE6P) {
-            _describe.font = [UIFont systemFontOfSize:12];
-        }
-        
+        _describe.font = [UIFont systemFontOfSize:desFont];
         _describe.numberOfLines = 2;
     }
     return _describe;
 }
 
 - (void)changeContentLabStyle:(NSString *)str {
-    if (str.length > 46) {
-        str = [str substringToIndex:44];
-        [_describeView addSubview:self.describeIcon];
-        [_describeIcon mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.size.mas_equalTo(CGSizeMake(15, 15));
-            make.bottom.equalTo(_describe.mas_bottom).with.offset(0);
-            make.right.equalTo(_describe.mas_right).with.offset(1);
-        }];
+    if (IS_PHONE6P) {
+        if (str.length > 63) {
+            str = [str substringToIndex:62];
+            [_describeView addSubview:self.describeIcon];
+            [_describeIcon mas_makeConstraints:^(MASConstraintMaker *make) {
+                make.size.mas_equalTo(CGSizeMake(15, 15));
+                make.bottom.equalTo(_describe.mas_bottom).with.offset(1);
+                make.right.equalTo(_describe.mas_right).with.offset(0);
+            }];
+            
+            [self.describe mas_updateConstraints:^(MASConstraintMaker *make) {
+                make.height.mas_equalTo(26);
+            }];
+            
+        } else if (str.length > 30) {
+            [self.describe mas_updateConstraints:^(MASConstraintMaker *make) {
+                make.height.mas_equalTo(26);
+            }];
+        }
         
-        [self.describe mas_updateConstraints:^(MASConstraintMaker *make) {
-            make.height.mas_equalTo(32);
-        }];
+    } else {
+        if (str.length > 57) {
+            str = [str substringToIndex:57];
+            [_describeView addSubview:self.describeIcon];
+            [_describeIcon mas_makeConstraints:^(MASConstraintMaker *make) {
+                make.size.mas_equalTo(CGSizeMake(15, 15));
+                make.bottom.equalTo(_describe.mas_bottom).with.offset(1);
+                make.right.equalTo(_describe.mas_right).with.offset(0);
+            }];
+            
+            [self.describe mas_updateConstraints:^(MASConstraintMaker *make) {
+                make.height.mas_equalTo(26);
+            }];
+            
+        } else if (str.length > 28) {
+            [self.describe mas_updateConstraints:^(MASConstraintMaker *make) {
+                make.height.mas_equalTo(26);
+            }];
+        }
     }
+    
     
     NSMutableAttributedString * contentText = [[NSMutableAttributedString alloc] initWithString:str];
     NSMutableParagraphStyle * paragraphStyle = [[NSMutableParagraphStyle alloc] init];
@@ -383,7 +417,7 @@
     if (!_fiuSlogan) {
         _fiuSlogan = [[UILabel alloc] init];
         _fiuSlogan.textColor = [UIColor colorWithHexString:@"#FFFFFF" alpha:1];
-        _fiuSlogan.font = [UIFont systemFontOfSize:10];
+        _fiuSlogan.font = [UIFont systemFontOfSize:slognFont];
     }
     return _fiuSlogan;
 }

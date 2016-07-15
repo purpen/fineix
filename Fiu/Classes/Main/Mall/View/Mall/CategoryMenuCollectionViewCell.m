@@ -29,7 +29,7 @@
 
 - (UIImageView *)categoryImg {
     if (!_categoryImg) {
-        _categoryImg = [[UIImageView alloc] initWithFrame:CGRectMake(5, 10, 40, 40)];
+        _categoryImg = [[UIImageView alloc] initWithFrame:CGRectMake(10, 10, 30, 30)];
         _categoryImg.contentMode = UIViewContentModeScaleAspectFit;
     }
     return _categoryImg;
@@ -37,7 +37,7 @@
 
 - (UILabel *)categoryLab {
     if (!_categoryLab) {
-        _categoryLab = [[UILabel alloc] initWithFrame:CGRectMake(0, 55, 50, 12)];
+        _categoryLab = [[UILabel alloc] initWithFrame:CGRectMake(0, 45, 50, 12)];
         _categoryLab.textAlignment = NSTextAlignmentCenter;
         _categoryLab.font = [UIFont systemFontOfSize:12];
         _categoryLab.textColor = [UIColor colorWithHexString:@"#666666"];
