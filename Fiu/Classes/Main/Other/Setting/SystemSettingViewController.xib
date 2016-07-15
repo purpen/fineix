@@ -428,9 +428,9 @@
                     <rect key="frame" x="0.0" y="497" width="375" height="44"/>
                     <subviews>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="退出当前账户" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eSU-WJ-cVc">
-                            <rect key="frame" x="15" y="14" width="84" height="17"/>
+                            <rect key="frame" x="146" y="14" width="84" height="17"/>
                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                            <color key="textColor" red="0.40000000000000002" green="0.40000000000000002" blue="0.40000000000000002" alpha="1" colorSpace="calibratedRGB"/>
+                            <color key="textColor" red="0.74509803919999995" green="0.53725490200000003" blue="0.078431372550000003" alpha="1" colorSpace="calibratedRGB"/>
                             <nil key="highlightedColor"/>
                         </label>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="yxg-PK-hVr">
@@ -463,6 +463,7 @@
                     </subviews>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     <constraints>
+                        <constraint firstItem="eSU-WJ-cVc" firstAttribute="centerX" secondItem="Xqq-DT-dIN" secondAttribute="centerX" id="2dn-jI-6D4"/>
                         <constraint firstItem="eSU-WJ-cVc" firstAttribute="leading" secondItem="Xqq-DT-dIN" secondAttribute="leading" constant="15" id="HHt-G7-YnS"/>
                         <constraint firstItem="yxg-PK-hVr" firstAttribute="leading" secondItem="Xqq-DT-dIN" secondAttribute="leading" id="WyJ-x8-X1i"/>
                         <constraint firstAttribute="bottom" secondItem="yxg-PK-hVr" secondAttribute="bottom" id="dpW-11-vHg"/>
@@ -471,6 +472,11 @@
                         <constraint firstItem="yxg-PK-hVr" firstAttribute="top" secondItem="Xqq-DT-dIN" secondAttribute="top" id="tM4-BD-wfl"/>
                         <constraint firstAttribute="trailing" secondItem="yxg-PK-hVr" secondAttribute="trailing" id="wSx-IT-h9o"/>
                     </constraints>
+                    <variation key="default">
+                        <mask key="constraints">
+                            <exclude reference="HHt-G7-YnS"/>
+                        </mask>
+                    </variation>
                 </view>
             </subviews>
             <color key="backgroundColor" red="0.95973086350000003" green="0.95973086350000003" blue="0.95973086350000003" alpha="1" colorSpace="calibratedRGB"/>

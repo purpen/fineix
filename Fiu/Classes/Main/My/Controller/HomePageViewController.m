@@ -452,9 +452,9 @@ static NSString *sceneCellId = @"SceneCollectionViewCell";
         if (section == 0) {
             return UIEdgeInsetsMake(0, 0, 0, 0);
         }else if(section == 1){
-            return UIEdgeInsetsMake(3, 5, 0, 5);
+            return UIEdgeInsetsMake(5, 5, 0, 5);
         }else if (section == 2){
-            return UIEdgeInsetsMake(3, 5, 0, 5);
+            return UIEdgeInsetsMake(5, 5, 0, 5);
         }
     }
     return UIEdgeInsetsMake(0, 0, 0, 0);
@@ -531,7 +531,7 @@ static NSString *sceneCellId = @"SceneCollectionViewCell";
                 cell.userInteractionEnabled = NO;
                 ScenarioNonView *view = [ScenarioNonView getScenarioNonView];
                 if (self.isMySelf) {
-                    view.tipLabel.text = @"你还没有发表过新场景哦，快来Fiu一下嘛";
+                    view.tipLabel.text = @"你还没有发表过新情景哦，快来Fiu一下嘛";
                 }else{
                     view.tipLabel.text = @"你们好像在哪儿见过，来看看他的足迹吧";
                 }

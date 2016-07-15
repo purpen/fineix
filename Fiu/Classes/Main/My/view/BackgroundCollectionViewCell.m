@@ -21,7 +21,6 @@
             make.top.mas_equalTo(self.mas_top).with.offset(0);
             make.left.mas_equalTo(self.mas_left).with.offset(0);
         }];
-        
     }
     return self;
 }
@@ -89,7 +88,6 @@
             make.bottom.mas_equalTo(_headView.mas_bottom).with.offset(-3/667.0*SCREEN_HEIGHT);
             make.size.mas_equalTo(CGSizeMake(17/667.0*SCREEN_HEIGHT, 17/667.0*SCREEN_HEIGHT));
         }];
-
     }
     return _userView;
 }
