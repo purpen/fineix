@@ -9,9 +9,9 @@
 #ifndef PrefixHeader_pch
 #define PrefixHeader_pch
 
-#define tagsAry  [NSArray arrayWithObjects:@"创业先锋",@"IT互联网",@"设计师",@"女神",@"公务员",@"职场新人",@"女强人",@"白领",@"学生",@"买手",@"程序猿",@"BOSS",@"直男",@"驴友",@"吃货",@"单身", nil];
+#define tagsAry  [NSArray arrayWithObjects:@"创业先锋",@"IT互联网",@"设计师",@"女神",@"公务员",@"职场新人",@"女强人",@"白领",@"学生",@"买手",@"程序猿",@"BOSS",@"直男",@"驴友",@"吃货",@"单身",@"文艺范", nil];
 
-#define NormalTagsAry [NSArray arrayWithObjects:@"大咖",@"行家",@"媒体",@"摄影师",@"匠人",@"CEO",@"设计狮",@"红人", nil];
+#define NormalTagsAry [NSArray arrayWithObjects:@"大咖",@"行家",@"媒体",@"摄影师",@"匠人",@"CEO",@"设计狮",@"红人",@"诗人", nil];
 
 #ifdef DEBUG
 #define FBLog(...) NSLog(__VA_ARGS__)
