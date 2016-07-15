@@ -44,7 +44,7 @@ static NSString *const UpdateInfoURL = @"/my/update_profile";
     self.sumaryTF.text = entity.summary;
     self.sumaryTF.delegate = self;
     
-    NSArray *tagsAry1 = tagsAry;
+    NSArray *tagsAry1 = [NSArray arrayWithObjects:@"创业先锋",@"IT互联网",@"设计师",@"女神",@"公务员",@"职场新人",@"女强人",@"白领",@"学生",@"买手",@"程序猿",@"BOSS",@"直男",@"驴友",@"吃货",@"单身",@"文艺范", nil];
     for (int i = 0; i< tagsAry1.count; i++) {
         IdentityTagModel *model = [[IdentityTagModel alloc] init];
         model.tags = tagsAry1[i];
