@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10116" systemVersion="15C50" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10117" systemVersion="15E65" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
@@ -1060,7 +1060,7 @@
                                 </variation>
                             </view>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="158" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="tje-el-t3b">
-                                <rect key="frame" x="0.0" y="60" width="375" height="563"/>
+                                <rect key="frame" x="0.0" y="64" width="375" height="559"/>
                                 <color key="backgroundColor" red="0.96862745098039216" green="0.96862745098039216" blue="0.96862745098039216" alpha="1" colorSpace="calibratedRGB"/>
                                 <prototypes>
                                     <tableViewCell contentMode="scaleToFill" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="message" rowHeight="158" id="qYf-YV-OIv" customClass="ChatTableViewCell">
@@ -1164,6 +1164,7 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="60y-mG-VIe" firstAttribute="top" secondItem="tje-el-t3b" secondAttribute="bottom" id="MJA-k0-ghR"/>
+                            <constraint firstItem="tje-el-t3b" firstAttribute="top" secondItem="w0L-fc-wf3" secondAttribute="top" constant="64" id="Vcz-3Y-Zm9"/>
                             <constraint firstItem="tje-el-t3b" firstAttribute="top" secondItem="umt-lD-3vB" secondAttribute="bottom" constant="44" id="X2Y-MA-q2B"/>
                             <constraint firstItem="tje-el-t3b" firstAttribute="leading" secondItem="w0L-fc-wf3" secondAttribute="leading" id="Yo4-N3-FKI"/>
                             <constraint firstAttribute="trailing" secondItem="tje-el-t3b" secondAttribute="trailing" id="dkC-pN-LIz"/>
@@ -1184,6 +1185,7 @@
                                 <exclude reference="qdO-RX-G1y"/>
                                 <exclude reference="s2p-zd-d9O"/>
                                 <exclude reference="vTy-Fg-wGQ"/>
+                                <exclude reference="yAD-ik-KKB"/>
                                 <exclude reference="z27-04-m1R"/>
                             </mask>
                         </variation>

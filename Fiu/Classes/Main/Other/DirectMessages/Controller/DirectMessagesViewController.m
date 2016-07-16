@@ -59,10 +59,19 @@
     CGRect rect = [note.userInfo[UIKeyboardFrameEndUserInfoKey] CGRectValue];
     double time = [note.userInfo[UIKeyboardAnimationDurationUserInfoKey] doubleValue];
     self.bottomSpaceing.constant = [UIScreen mainScreen].bounds.size.height - rect.origin.y;
+    if (self.messages.count == 0) {
+        
+    }else{
+        __block float heights = 0;
+        [self.messages enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+            AXModel *message = obj;
+            heights += message.cellHeight;
+        }];
+        [self.myTableVuew setContentOffset:CGPointMake(0, heights) animated:NO];
+    }
     [UIView animateWithDuration:time animations:^{
         [self.view layoutIfNeeded];
     }];
-    
 }
 
 -(void)viewWillAppear:(BOOL)animated{
@@ -96,7 +105,12 @@
         if (self.messages.count == 0) {
            
         }else{
-            [self.myTableVuew setContentOffset:CGPointMake(0, 200*(self.messages.count-1)) animated:NO];
+            __block float heights = 0;
+            [self.messages enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+                AXModel *message = obj;
+                heights += message.cellHeight;
+            }];
+            [self.myTableVuew setContentOffset:CGPointMake(0, heights) animated:NO];
         }
         [self.myTableVuew reloadData];
         
@@ -152,7 +166,12 @@
                                                                                                } delegate:self];
     [request startRequestSuccess:^(FBRequest *request, id result) {
         [self networkRequestData];
-        [self.myTableVuew setContentOffset:CGPointMake(0, 200*(self.messages.count)) animated:NO];
+        __block float heights = 0;
+        [self.messages enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+            AXModel *message = obj;
+            heights += message.cellHeight;
+        }];
+        [self.myTableVuew setContentOffset:CGPointMake(0, heights) animated:NO];
     } failure:^(FBRequest *request, NSError *error) {
         [SVProgressHUD showErrorWithStatus:error.localizedDescription];
     }];
