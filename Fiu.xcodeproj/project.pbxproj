@@ -397,7 +397,6 @@
 		1F35F03F1CD1DC580000DB95 /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1F35F03E1CD1DC580000DB95 /* MessageUI.framework */; };
 		1F35F0411CD1DC640000DB95 /* AddressBookUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1F35F0401CD1DC640000DB95 /* AddressBookUI.framework */; };
 		1F35F0511CD2336E0000DB95 /* areas.plist in Resources */ = {isa = PBXBuildFile; fileRef = 1F35F0501CD2336E0000DB95 /* areas.plist */; };
-		1F3C0A771CBF461300B84FEB /* libPods-Fiu.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 1F3C0A761CBF461300B84FEB /* libPods-Fiu.a */; };
 		1F45A7041D2DF708009D7EE1 /* SceneCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F45A7031D2DF708009D7EE1 /* SceneCollectionViewCell.m */; };
 		1F45A7931D2F5263009D7EE1 /* MapAnnotionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F45A7911D2F5263009D7EE1 /* MapAnnotionViewController.m */; };
 		1F45A7941D2F5263009D7EE1 /* MapAnnotionViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1F45A7921D2F5263009D7EE1 /* MapAnnotionViewController.xib */; };
@@ -539,6 +538,7 @@
 		D8E3AEBB1CFC9B84006E5E8C /* ReleaseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D8E3AEB31CFC9B84006E5E8C /* ReleaseViewController.m */; };
 		D8E3AEBC1CFC9B84006E5E8C /* SceneAddViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D8E3AEB51CFC9B84006E5E8C /* SceneAddViewController.m */; };
 		D8E3AEBF1D003F4D006E5E8C /* FBRefresh.m in Sources */ = {isa = PBXBuildFile; fileRef = D8E3AEBE1D003F4D006E5E8C /* FBRefresh.m */; };
+		D8F1C2B01D3A377900AE717F /* CatagoryFiuSceneModel.m in Sources */ = {isa = PBXBuildFile; fileRef = D8F1C2AF1D3A377900AE717F /* CatagoryFiuSceneModel.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -1247,7 +1247,6 @@
 		1F35F03E1CD1DC580000DB95 /* MessageUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MessageUI.framework; path = System/Library/Frameworks/MessageUI.framework; sourceTree = SDKROOT; };
 		1F35F0401CD1DC640000DB95 /* AddressBookUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AddressBookUI.framework; path = System/Library/Frameworks/AddressBookUI.framework; sourceTree = SDKROOT; };
 		1F35F0501CD2336E0000DB95 /* areas.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = areas.plist; sourceTree = "<group>"; };
-		1F3C0A761CBF461300B84FEB /* libPods-Fiu.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = "libPods-Fiu.a"; path = "../Library/Developer/Xcode/DerivedData/Fiu-cjbswbuyriripaegqmobstwznrnk/Build/Products/Debug-iphonesimulator/libPods-Fiu.a"; sourceTree = "<group>"; };
 		1F45A7021D2DF708009D7EE1 /* SceneCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SceneCollectionViewCell.h; sourceTree = "<group>"; };
 		1F45A7031D2DF708009D7EE1 /* SceneCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SceneCollectionViewCell.m; sourceTree = "<group>"; };
 		1F45A7901D2F5263009D7EE1 /* MapAnnotionViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MapAnnotionViewController.h; sourceTree = "<group>"; };
@@ -1500,6 +1499,8 @@
 		D8E3AEB51CFC9B84006E5E8C /* SceneAddViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SceneAddViewController.m; sourceTree = "<group>"; };
 		D8E3AEBD1D003F4D006E5E8C /* FBRefresh.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FBRefresh.h; sourceTree = "<group>"; };
 		D8E3AEBE1D003F4D006E5E8C /* FBRefresh.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FBRefresh.m; sourceTree = "<group>"; };
+		D8F1C2AE1D3A377900AE717F /* CatagoryFiuSceneModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CatagoryFiuSceneModel.h; sourceTree = "<group>"; };
+		D8F1C2AF1D3A377900AE717F /* CatagoryFiuSceneModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CatagoryFiuSceneModel.m; sourceTree = "<group>"; };
 		E0438B4B24E3F747F761AF4C /* Pods-Fiu.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Fiu.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Fiu/Pods-Fiu.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -1530,7 +1531,6 @@
 				1F35F0411CD1DC640000DB95 /* AddressBookUI.framework in Frameworks */,
 				1F35F03F1CD1DC580000DB95 /* MessageUI.framework in Frameworks */,
 				1F35F03D1CD1D7170000DB95 /* AddressBook.framework in Frameworks */,
-				1F3C0A771CBF461300B84FEB /* libPods-Fiu.a in Frameworks */,
 				D8AEC7541CA8E3C700A868B6 /* libsqlite3.0.tbd in Frameworks */,
 				D8AEC7531CA8E3BB00A868B6 /* libstdc++.6.0.9.tbd in Frameworks */,
 				D8AEC7521CA8E3AE00A868B6 /* libiconv.tbd in Frameworks */,
@@ -1947,6 +1947,7 @@
 		1F2A8C5C1CF40276005116C7 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				D8F1C2AD1D3A375D00AE717F /* CatagoryFiuScene */,
 				1F2A8C5D1CF40276005116C7 /* FiuPeople */,
 				1F2A8C681CF40276005116C7 /* FiuScene */,
 				1F2A8C7B1CF40276005116C7 /* RollImage */,
@@ -3711,7 +3712,6 @@
 				1F35F0401CD1DC640000DB95 /* AddressBookUI.framework */,
 				1F35F03E1CD1DC580000DB95 /* MessageUI.framework */,
 				1F35F03C1CD1D7170000DB95 /* AddressBook.framework */,
-				1F3C0A761CBF461300B84FEB /* libPods-Fiu.a */,
 				1F0EE6A81C9FA4F6000631F0 /* libz.tbd */,
 				1F0EE6A61C9FA4E7000631F0 /* libstdc++.tbd */,
 				1F0EE6A41C9FA47B000631F0 /* libsqlite3.tbd */,
@@ -4071,6 +4071,15 @@
 			path = CreateScene;
 			sourceTree = "<group>";
 		};
+		D8F1C2AD1D3A375D00AE717F /* CatagoryFiuScene */ = {
+			isa = PBXGroup;
+			children = (
+				D8F1C2AE1D3A377900AE717F /* CatagoryFiuSceneModel.h */,
+				D8F1C2AF1D3A377900AE717F /* CatagoryFiuSceneModel.m */,
+			);
+			path = CatagoryFiuScene;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -4387,6 +4396,7 @@
 				1F2A8F541CF40277005116C7 /* ScenceAddMoreView.m in Sources */,
 				1FCDCC7A1D0515F700C92E78 /* ScenarioNonView.m in Sources */,
 				1F2A8F5B1CF40277005116C7 /* LookAllTagBtnTableViewCell.m in Sources */,
+				D8F1C2B01D3A377900AE717F /* CatagoryFiuSceneModel.m in Sources */,
 				1F2A903F1CF40277005116C7 /* CityTableViewCell.m in Sources */,
 				D8B355621D2E2DF5000BA26D /* DownSceneInfoView.m in Sources */,
 				1F2A907F1CF40277005116C7 /* ExpressInfoModel.m in Sources */,
@@ -4726,7 +4736,7 @@
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Developer: Xiaoyi Tian (65JXH7V6N9)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Xiaoyi Tian (65JXH7V6N9)";
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = dwarf;
@@ -4749,7 +4759,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 9.2;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
-				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE = "20d88b71-6e3e-4019-9fc0-e1e87477522d";
 				SDKROOT = iphoneos;
 			};
 			name = Debug;
@@ -4771,7 +4781,7 @@
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Developer: Xiaoyi Tian (65JXH7V6N9)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Xiaoyi Tian (65JXH7V6N9)";
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
@@ -4787,7 +4797,7 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.2;
 				MTL_ENABLE_DEBUG_INFO = NO;
-				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE = "20d88b71-6e3e-4019-9fc0-e1e87477522d";
 				SDKROOT = iphoneos;
 				VALIDATE_PRODUCT = YES;
 			};
@@ -4801,7 +4811,7 @@
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CLANG_CXX_LANGUAGE_STANDARD = "c++0x";
 				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Xiaoyi Tian (65JXH7V6N9)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -4847,7 +4857,7 @@
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CLANG_CXX_LANGUAGE_STANDARD = "c++0x";
 				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Xiaoyi Tian (65JXH7V6N9)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",

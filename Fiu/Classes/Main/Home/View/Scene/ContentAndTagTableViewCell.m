@@ -39,13 +39,13 @@
         }];
     }
     [self changeContentLabStyle:model.des];
-    self.chooseTagMarr = [NSMutableArray arrayWithArray:model.tagTitles];
+    self.chooseTagMarr = [NSMutableArray arrayWithArray:model.tags];
     [self.chooseTagView reloadData];
 }
 
 - (void)setSceneDescription:(SceneInfoData *)model {
     [self changeContentLabStyle:model.des];
-    self.chooseTagMarr = [NSMutableArray arrayWithArray:model.tagTitles];
+    self.chooseTagMarr = [NSMutableArray arrayWithArray:model.tags];
     [self.chooseTagView reloadData];
 }
 

@@ -50,8 +50,6 @@ static NSString *const URLDeleteScene = @"/scene_scene/delete";
     self.fiuSceneRequest = [FBAPI getWithUrlString:URLFiuSceneInfo requestDictionary:@{@"id":self.fiuSceneId} delegate:self];
     [self.fiuSceneRequest startRequestSuccess:^(FBRequest *request, id result) {
         [self setSceneInfoViewUI];
-        NSLog(@"＝＝＝＝＝＝＝＝＝＝＝ %@", result);
-        
         _fiuData = [NSDictionary dictionaryWithDictionary:[result valueForKey:@"data"]];
         _creatUserId = [NSString stringWithFormat:@"%@", [[result valueForKey:@"data"] valueForKey:@"user_id"]];
         if ([_creatUserId isEqualToString:[self getLoginUserID]]) {
@@ -107,6 +105,8 @@ static NSString *const URLDeleteScene = @"/scene_scene/delete";
             [self.suPeopleMarr addObject:likePeopleModel];
         }
         [self.fiuSceneTable reloadData];
+        [self requestIsLastData:self.fiuSceneTable currentPage:self.currentpageNum withTotalPage:self.totalPageNum];
+        
     } failure:^(FBRequest *request, NSError *error) {
         [SVProgressHUD showErrorWithStatus:[error localizedDescription]];
     }];

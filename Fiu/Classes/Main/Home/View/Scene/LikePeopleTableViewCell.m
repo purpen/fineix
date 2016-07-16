@@ -33,16 +33,16 @@ const static NSInteger  peopleBtnTag = 64;
             [self.imgMarr addObject:row.user.avatarUrl];
             [self.userIdMarr addObject:[NSString stringWithFormat:@"%zi", row.userId]];
         }
-        
+
         CGFloat num = model.count;
         if (num/100 > 1) {
-            [_morePeopel setTitle:[NSString stringWithFormat:@"%.0f00＋", num/100] forState:(UIControlStateNormal)];
+            [self.morePeopel setTitle:[NSString stringWithFormat:@"%.0f00＋", num/100] forState:(UIControlStateNormal)];
         }
         if (num/10 > 1) {
-            [_morePeopel setTitle:[NSString stringWithFormat:@"%.0f0＋", num/10] forState:(UIControlStateNormal)];
+            [self.morePeopel setTitle:[NSString stringWithFormat:@"%.0f0＋", num/10] forState:(UIControlStateNormal)];
         }
         if (num/1000 > 1) {
-            [_morePeopel setTitle:[NSString stringWithFormat:@"%.0fk＋", num/1000] forState:(UIControlStateNormal)];
+            [self.morePeopel setTitle:[NSString stringWithFormat:@"%.0fk＋", num/1000] forState:(UIControlStateNormal)];
         }
     }
     
