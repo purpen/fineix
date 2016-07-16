@@ -16,7 +16,7 @@
 "filter" = "滤镜";
 "addDescription" = "添加描述";
 "addFiuSceneDes" = "请添加140字以内的地盘描述";
-"addTitle" = "请输入20字以内的标题";
+"addTitle" = "请输入20字以内的标题或选择语境";
 "addLocation" = "添加地点";
 "tag" = "标签";
 "onScene" = "所属地盘";
@@ -75,6 +75,7 @@
 "shareDone" = "分享成功!";
 "shareDoneContent" = "恭喜您获得积分奖励！";
 "slognText" = "｜ 你在发现 谁在惊呼？";
+"pleaseChooseFiuScene" = "请选择一个地盘";
 
 //  搜索框提示
 "searchLocation" = "搜索地点";
@@ -125,6 +126,7 @@
 "ChooseText" = "选择语境";
 "lookAllSelfBrand" = "查看全部自营";
 "doneAndKnow" = "知道了";
+"SearchContent" = "搜索语境";
 
 //  评论
 "comment" = "评论一下";

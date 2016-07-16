@@ -26,6 +26,7 @@ const NSInteger menuBtnTag = 324;
 @pro_strong NSArray                 *   menuTitle;      //  导航按钮名称
 @pro_strong NSMutableArray          *   btnMarr;        //  全部按钮
 @pro_strong NSArray                 *   widthArr;       //  动态宽度
+@pro_strong NSString                *   defaultColor;
 @pro_strong UIButton                *   selectedBtn;
 @pro_strong UIButton                *   nowSelectedBtn;
 

@@ -9,9 +9,9 @@
 #import "EditSceneAddMoreView.h"
 #import "SearchLocationViewController.h"
 #import "AddTagViewController.h"
-#import "SelectSceneViewController.h"
 #import "AddTagViewController.h"
 #import "ChooseTagsCollectionViewCell.h"
+#import "SelectAllFSceneViewController.h"
 
 @interface EditSceneAddMoreView()
 
@@ -370,7 +370,7 @@
 
 //  去选择所属的情境
 - (void)chooseScene {
-    SelectSceneViewController * selectSceneVC = [[SelectSceneViewController alloc] init];
+    SelectAllFSceneViewController * selectSceneVC = [[SelectAllFSceneViewController alloc] init];
     selectSceneVC.type = @"edit";
     selectSceneVC.getIdxAndTitltBlock = ^(NSString * idx, NSString * title) {
         [self changeSceneFrame:title];

@@ -26,11 +26,8 @@
 		1F27AE9C1CE0EACE005A434B /* mapapi.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 1F27AE9B1CE0EACE005A434B /* mapapi.bundle */; };
 		1F2A8F341CF40277005116C7 /* SearchLocationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F2A8BE01CF40276005116C7 /* SearchLocationViewController.m */; };
 		1F2A8F351CF40277005116C7 /* MarkGoodsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F2A8BE31CF40276005116C7 /* MarkGoodsViewController.m */; };
-		1F2A8F361CF40277005116C7 /* AllNearbyScenarioViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F2A8BE61CF40276005116C7 /* AllNearbyScenarioViewController.m */; };
-		1F2A8F371CF40277005116C7 /* AllNearbyScenarioViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1F2A8BE71CF40276005116C7 /* AllNearbyScenarioViewController.xib */; };
 		1F2A8F381CF40277005116C7 /* SearchFSceneViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F2A8BE91CF40276005116C7 /* SearchFSceneViewController.m */; };
 		1F2A8F391CF40277005116C7 /* SelectAllFSceneViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F2A8BEB1CF40276005116C7 /* SelectAllFSceneViewController.m */; };
-		1F2A8F3A1CF40277005116C7 /* SelectSceneViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F2A8BED1CF40276005116C7 /* SelectSceneViewController.m */; };
 		1F2A8F3B1CF40277005116C7 /* AddTagViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F2A8BF01CF40276005116C7 /* AddTagViewController.m */; };
 		1F2A8F3C1CF40277005116C7 /* AddUrlViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F2A8BF31CF40276005116C7 /* AddUrlViewController.m */; };
 		1F2A8F3D1CF40277005116C7 /* FindGoodsModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F2A8BF71CF40276005116C7 /* FindGoodsModel.m */; };
@@ -568,15 +565,10 @@
 		1F2A8BE01CF40276005116C7 /* SearchLocationViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SearchLocationViewController.m; sourceTree = "<group>"; };
 		1F2A8BE21CF40276005116C7 /* MarkGoodsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MarkGoodsViewController.h; sourceTree = "<group>"; };
 		1F2A8BE31CF40276005116C7 /* MarkGoodsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MarkGoodsViewController.m; sourceTree = "<group>"; };
-		1F2A8BE51CF40276005116C7 /* AllNearbyScenarioViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AllNearbyScenarioViewController.h; sourceTree = "<group>"; };
-		1F2A8BE61CF40276005116C7 /* AllNearbyScenarioViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AllNearbyScenarioViewController.m; sourceTree = "<group>"; };
-		1F2A8BE71CF40276005116C7 /* AllNearbyScenarioViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AllNearbyScenarioViewController.xib; sourceTree = "<group>"; };
 		1F2A8BE81CF40276005116C7 /* SearchFSceneViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SearchFSceneViewController.h; sourceTree = "<group>"; };
 		1F2A8BE91CF40276005116C7 /* SearchFSceneViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SearchFSceneViewController.m; sourceTree = "<group>"; };
 		1F2A8BEA1CF40276005116C7 /* SelectAllFSceneViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SelectAllFSceneViewController.h; sourceTree = "<group>"; };
 		1F2A8BEB1CF40276005116C7 /* SelectAllFSceneViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SelectAllFSceneViewController.m; sourceTree = "<group>"; };
-		1F2A8BEC1CF40276005116C7 /* SelectSceneViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SelectSceneViewController.h; sourceTree = "<group>"; };
-		1F2A8BED1CF40276005116C7 /* SelectSceneViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SelectSceneViewController.m; sourceTree = "<group>"; };
 		1F2A8BEF1CF40276005116C7 /* AddTagViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AddTagViewController.h; sourceTree = "<group>"; };
 		1F2A8BF01CF40276005116C7 /* AddTagViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AddTagViewController.m; sourceTree = "<group>"; };
 		1F2A8BF21CF40276005116C7 /* AddUrlViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AddUrlViewController.h; sourceTree = "<group>"; };
@@ -1681,15 +1673,10 @@
 		1F2A8BE41CF40276005116C7 /* SelectScene */ = {
 			isa = PBXGroup;
 			children = (
-				1F2A8BE51CF40276005116C7 /* AllNearbyScenarioViewController.h */,
-				1F2A8BE61CF40276005116C7 /* AllNearbyScenarioViewController.m */,
-				1F2A8BE71CF40276005116C7 /* AllNearbyScenarioViewController.xib */,
-				1F2A8BE81CF40276005116C7 /* SearchFSceneViewController.h */,
-				1F2A8BE91CF40276005116C7 /* SearchFSceneViewController.m */,
 				1F2A8BEA1CF40276005116C7 /* SelectAllFSceneViewController.h */,
 				1F2A8BEB1CF40276005116C7 /* SelectAllFSceneViewController.m */,
-				1F2A8BEC1CF40276005116C7 /* SelectSceneViewController.h */,
-				1F2A8BED1CF40276005116C7 /* SelectSceneViewController.m */,
+				1F2A8BE81CF40276005116C7 /* SearchFSceneViewController.h */,
+				1F2A8BE91CF40276005116C7 /* SearchFSceneViewController.m */,
 			);
 			path = SelectScene;
 			sourceTree = "<group>";
@@ -4161,7 +4148,6 @@
 				1F2A90671CF40277005116C7 /* CommentsTableViewCell.xib in Resources */,
 				1F2A909F1CF40277005116C7 /* GreatPeopleViewController.xib in Resources */,
 				1F2A8FE61CF40277005116C7 /* AddreesPickerViewController.xib in Resources */,
-				1F2A8F371CF40277005116C7 /* AllNearbyScenarioViewController.xib in Resources */,
 				1F2A907E1CF40277005116C7 /* TianMaoOrderViewController.xib in Resources */,
 				1F2A90A11CF40277005116C7 /* SubscribePeopleViewController.xib in Resources */,
 				1F45A7941D2F5263009D7EE1 /* MapAnnotionViewController.xib in Resources */,
@@ -4629,7 +4615,6 @@
 				1F2A8FCF1CF40277005116C7 /* ChildTagsCollectionViewCell.m in Sources */,
 				1F2A8FC21CF40277005116C7 /* CommentModelRow.m in Sources */,
 				1F2A8F8F1CF40277005116C7 /* HomeSceneListProduct.m in Sources */,
-				1F2A8F3A1CF40277005116C7 /* SelectSceneViewController.m in Sources */,
 				D81281671CAA8532007CF08B /* JKDBModel.m in Sources */,
 				D8B795241CF48ADD0075D985 /* ShareStyleTopView.m in Sources */,
 				1F2A905E1CF40277005116C7 /* MessagesssViewController.m in Sources */,
@@ -4650,7 +4635,6 @@
 				1F2A8FD21CF40277005116C7 /* BuyCarDefault.m in Sources */,
 				1F2A8F681CF40277005116C7 /* FiuPeople.m in Sources */,
 				1F2A91271CF42EC1005116C7 /* OrderInfoDetailViewController.m in Sources */,
-				1F2A8F361CF40277005116C7 /* AllNearbyScenarioViewController.m in Sources */,
 				1F2A8F611CF40277005116C7 /* ChangeAddUrlView.m in Sources */,
 				1FCDCC7D1D0525A300C92E78 /* FocusNonView.m in Sources */,
 				1F2A908E1CF40277005116C7 /* FBAlertViewController.m in Sources */,

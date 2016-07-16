@@ -211,8 +211,6 @@ static NSString *const URLReleaseFiuScenen = @"/scene_scene/save";
     return _addView;
 }
 
-
-
 #pragma mark -  设置导航栏
 - (void)setNavViewUI {
     self.navView.backgroundColor = [UIColor whiteColor];

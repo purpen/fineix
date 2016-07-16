@@ -9,7 +9,6 @@
 #import "ScenceAddMoreView.h"
 #import "SearchLocationViewController.h"
 #import "AddTagViewController.h"
-#import "SelectSceneViewController.h"
 #import "AddTagViewController.h"
 #import "ChooseTagsCollectionViewCell.h"
 #import "SelectAllFSceneViewController.h"

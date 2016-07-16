@@ -56,10 +56,10 @@
         
         [_topView addSubview:self.content];
         [_content mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.top.equalTo(self.imageView.mas_top).with.offset(0);
-            make.left.equalTo(self.imageView.mas_right).with.offset(15);
-            make.right.equalTo(_topView.mas_right).with.offset(-15);
-            make.bottom.equalTo(self.imageView.mas_bottom).with.offset(0);
+            make.top.equalTo(_topView.mas_top).with.offset(5);
+            make.left.equalTo(_imageView.mas_right).with.offset(10);
+            make.right.equalTo(_topView.mas_right).with.offset(-10);
+            make.bottom.equalTo(_topView.mas_bottom).with.offset(-5);
         }];
     }
     return _topView;
@@ -193,10 +193,12 @@
     chooseTextVC.bgImg = self.imageView.image;
     [self.vc presentViewController:chooseTextVC animated:YES completion:nil];
     
-    chooseTextVC.getEdtiShareText = ^ (NSString * title, NSString * des) {
+    chooseTextVC.getEdtiShareText = ^ (NSString * title, NSString * des, NSArray * tagS) {
         self.title.text = title;
         self.content.text = des;
         self.content.textColor = [UIColor colorWithHexString:@"#000000" alpha:1];
+        self.tagS = [NSArray arrayWithArray:tagS];
+        NSLog(@"＝＝＝＝＝＝＝＝＝＝＝ %@", self.tagS);
     };
 }
 

@@ -19,6 +19,7 @@
 @pro_strong UITextField         *   title;            //    场景标题
 @pro_strong NSString            *   type;             //    创建类型
 @pro_strong UIButton            *   chooseText;       //    选择语境
+@pro_strong NSArray             *   tagS;
 
 - (void)getCreateType:(NSString *)type;
 

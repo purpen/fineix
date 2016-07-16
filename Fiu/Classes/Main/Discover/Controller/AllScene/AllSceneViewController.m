@@ -80,7 +80,6 @@ static NSString *const URLFiuCategoryList = @"/category/getlist";
 
 #pragma mark 地盘列表
 - (void)networkAllFiuSceneList:(NSString *)categoryId {
-    NSLog(@"＝＝＝＝＝＝＝＝ %@", _categoryId);
     [SVProgressHUD show];
     self.allSceneListRequest = [FBAPI getWithUrlString:URLAllFiuSceneList requestDictionary:@{@"sort":@"1", @"category_id":categoryId, @"size":@"10", @"page":@(self.currentpageNum + 1)} delegate:self];
     [self.allSceneListRequest startRequestSuccess:^(FBRequest *request, id result) {
@@ -138,6 +137,7 @@ static NSString *const URLFiuCategoryList = @"/category/getlist";
         _categoryMenuView = [[FBMenuView alloc] initWithFrame:CGRectMake(0, 106, SCREEN_WIDTH, 54)];
         _categoryMenuView.delegate = self;
         _categoryMenuView.menuTitle = self.categoryTitleMarr;
+        _categoryMenuView.defaultColor = titleColor;
         [_categoryMenuView updateMenuButtonData];
         [_categoryMenuView updateMenuBtnState:0];
     }
@@ -152,6 +152,7 @@ static NSString *const URLFiuCategoryList = @"/category/getlist";
     self.currentpageNum = 0;
     [self networkAllFiuSceneList:_categoryId];
 }
+
 #pragma mark - 搜索情境按钮
 - (UIButton *)beginSearchBtn {
     if (!_beginSearchBtn) {

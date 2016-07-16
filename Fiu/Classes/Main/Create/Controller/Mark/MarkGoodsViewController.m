@@ -287,6 +287,7 @@ static NSString *const URLGetGoodsImg = @"/scene_product/view";
     if (!_categoryMenuView) {
         _categoryMenuView = [[FBMenuView alloc] initWithFrame:CGRectMake(0, 88, SCREEN_WIDTH, 44)];
         _categoryMenuView.delegate = self;
+        _categoryMenuView.defaultColor = titleColor;
         _categoryMenuView.menuTitle = self.categoryTitle;
         [_categoryMenuView updateMenuButtonData];
     }
