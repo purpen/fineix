@@ -18,6 +18,7 @@
     NSMutableArray      *   _nameMarr;
 }
 
+@pro_strong UIViewController        *   vc;
 @pro_strong UINavigationController  *   nav;
 
 @pro_strong UIView          *   addLoacation;       //  添加地点
@@ -37,9 +38,14 @@
 @pro_strong NSString        *   longitude;          //  经度
 @pro_strong NSString        *   fiuId;
 
-@pro_strong UICollectionView    *   chooseTagView;      //  选择的标签列表
+@pro_strong UIView              *   recommendView;
+@pro_strong UILabel             *   addTagLab;
+@pro_strong UICollectionView    *   recommendTagView;      //  推荐的标签列表
+@pro_strong NSMutableArray      *   recommendTagMarr;
+@pro_strong UICollectionView    *   chooseTagView;         //  选择的标签列表
 @pro_strong NSMutableArray      *   chooseTagMarr;
-@pro_strong NSMutableArray      *   chooseTagIdMarr;
+
+- (void)getRecommendTagS:(NSMutableArray *)tags;
 
 - (void)changeLocationFrame:(NSArray *)locationArr;
 

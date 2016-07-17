@@ -13,8 +13,15 @@
 #import "ChooseTagsCollectionViewCell.h"
 #import "SelectAllFSceneViewController.h"
 #import "TagFlowLayout.h"
+#import "EditChooseTagsViewController.h"
 
 static const NSInteger btnTag = 100;
+
+@interface ScenceAddMoreView () {
+    CGFloat  _tagsViewH;
+}
+
+@end
 
 @implementation ScenceAddMoreView
 
@@ -42,15 +49,22 @@ static const NSInteger btnTag = 100;
     
     [self addSubview:self.addTag];
     [_addTag mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.size.mas_equalTo(CGSizeMake(SCREEN_WIDTH, 160));
+        make.size.mas_equalTo(CGSizeMake(SCREEN_WIDTH, 44));
         make.top.equalTo(self.addLoacation.mas_bottom).with.offset(5);
+        make.left.equalTo(self.mas_left).with.offset(0);
+    }];
+    
+    [self addSubview:self.recommendView];
+    [_recommendView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.size.mas_equalTo(CGSizeMake(SCREEN_WIDTH, 0));
+        make.top.equalTo(_addTag.mas_bottom).with.offset(0);
         make.left.equalTo(self.mas_left).with.offset(0);
     }];
     
     [self addSubview:self.addScene];
     [_addScene mas_makeConstraints:^(MASConstraintMaker *make) {
         make.size.mas_equalTo(CGSizeMake(SCREEN_WIDTH, 44));
-        make.top.equalTo(self.addTag.mas_bottom).with.offset(5);
+        make.top.equalTo(_recommendView.mas_bottom).with.offset(5);
         make.left.equalTo(self.mas_left).with.offset(0);
     }];
 }
@@ -307,7 +321,6 @@ static const NSInteger btnTag = 100;
         _location.font = [UIFont systemFontOfSize:Font_GroupHeader];
     }
     return _location;
-    
 }
 
 #pragma mark - 删除地点
@@ -341,20 +354,21 @@ static const NSInteger btnTag = 100;
         _addTag = [[UIView alloc] init];
         _addTag.backgroundColor = [UIColor whiteColor];
         
-        UILabel * addTagLab = [[UILabel alloc] initWithFrame:CGRectMake(0, 44, SCREEN_WIDTH, 40)];
-        addTagLab.text = @"推荐标签";
-        addTagLab.textAlignment = NSTextAlignmentCenter;
-        addTagLab.font = [UIFont systemFontOfSize:13];
-        addTagLab.textColor = [UIColor colorWithHexString:@"#999999"];
-        [_addTag addSubview:addTagLab];
-        
-        self.chooseTagMarr = [NSMutableArray arrayWithArray:@[@"蓝天", @"大海", @"晴空万里", @"哈哈哈", @"蓝天", @"奔跑吧兄弟", @"晴空万里", @"上天了"]];
-        
         [_addTag addSubview:self.tagIcon];
         [_addTag addSubview:self.addTagBtn];
-        [_addTag addSubview:self.chooseTagView];
     }
     return _addTag;
+}
+
+- (UILabel *)addTagLab {
+    if (!_addTagLab) {
+        _addTagLab = [[UILabel alloc] init];
+        _addTagLab.text = NSLocalizedString(@"recommendTag", nil);
+        _addTagLab.textAlignment = NSTextAlignmentCenter;
+        _addTagLab.font = [UIFont systemFontOfSize:13];
+        _addTagLab.textColor = [UIColor colorWithHexString:@"#999999"];
+    }
+    return _addTagLab;
 }
 
 //  添加标签
@@ -366,76 +380,177 @@ static const NSInteger btnTag = 100;
         _addTagBtn.titleLabel.font = [UIFont systemFontOfSize:Font_GroupHeader];
         _addTagBtn.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
         _addTagBtn.backgroundColor = [UIColor whiteColor];
-//        [_addTagBtn addTarget:self action:@selector(chooesTag) forControlEvents:(UIControlEventTouchUpInside)];
     }
     return _addTagBtn;
 }
 
-////  改变高度
-//- (void)changeTagFrame {
-//    [_addTag mas_updateConstraints:^(MASConstraintMaker *make) {
-//        make.height.equalTo(@88);
-//    }];
-//}
 
-////  去选择标签
-//- (void)chooesTag {
-//    AddTagViewController * addTagVC = [[AddTagViewController alloc] init];
-//    addTagVC.type = @"release";
-//    addTagVC.chooseTagsBlock = ^(NSMutableArray * title, NSMutableArray * ids) {
-//        self.chooseTagMarr = title;
-//        self.chooseTagIdMarr = ids;
-//        if (self.chooseTagMarr.count > 0) {
-//            [self changeTagFrame];
-//            [self.chooseTagView reloadData];
-//        }
-//    };
-//    
-//    [self.nav pushViewController:addTagVC animated:YES];
-//
-//}
-
-#pragma mark - 选中的标签列表
+#pragma mark - 选择的标签列表
 - (UICollectionView *)chooseTagView {
     if (!_chooseTagView) {
         TagFlowLayout * flowLayout = [[TagFlowLayout alloc] init];
         flowLayout.minimumLineSpacing = 1.0f;
         flowLayout.max = 5.0f;
-        flowLayout.sectionInset = UIEdgeInsetsMake(0, 10, 0, 10);
+        flowLayout.sectionInset = UIEdgeInsetsMake(0, 0, 0, 10);
         
-        _chooseTagView = [[UICollectionView alloc] initWithFrame:CGRectMake(0, 84, SCREEN_WIDTH, 70) collectionViewLayout:flowLayout];
+        _chooseTagView = [[UICollectionView alloc] initWithFrame:CGRectMake(34, 0, SCREEN_WIDTH - 44, 0) collectionViewLayout:flowLayout];
         _chooseTagView.backgroundColor = [UIColor whiteColor];
         _chooseTagView.delegate = self;
         _chooseTagView.dataSource = self;
         _chooseTagView.showsHorizontalScrollIndicator = NO;
         [_chooseTagView registerClass:[ChooseTagsCollectionViewCell class] forCellWithReuseIdentifier:@"ChooseTagsCollectionViewCell"];
-        
-        UILabel * lab = [[UILabel alloc] initWithFrame:CGRectMake(0, 43, SCREEN_WIDTH, 1)];
-        lab.backgroundColor = [UIColor colorWithHexString:lineGrayColor];
-        [self.addTag addSubview:lab];
     }
     return _chooseTagView;
 }
 
+#pragma mark - 有选择的标签时改变frame
+- (void)chooseTags {
+    [self.addTag addSubview:self.chooseTagView];
+    [_chooseTagView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.width.equalTo(@(SCREEN_WIDTH - 44));
+        make.top.equalTo(_addTag.mas_top).with.offset(8);
+        make.left.equalTo(_addTag.mas_left).with.offset(34);
+        make.bottom.equalTo(_addTag.mas_bottom).with.offset(0);
+    }];
+    
+    CGFloat tagsWidth = 0.0f;
+    for (NSUInteger idx = 0; idx < self.chooseTagMarr.count; ++ idx) {
+        CGFloat tagW = [self.chooseTagMarr[idx] boundingRectWithSize:CGSizeMake(SCREEN_WIDTH - 44, 1000) options:(NSStringDrawingUsesLineFragmentOrigin) attributes:nil context:nil].size.width;
+        tagsWidth += (tagW + 40);
+    }
+    
+    CGFloat tagsLineNum = tagsWidth/SCREEN_WIDTH;
+    if (tagsLineNum < 1) {
+        tagsLineNum = 1;
+    }
+    CGFloat tagsViewH = (tagsLineNum * 44) + 20;
+    
+    [_addTag mas_updateConstraints:^(MASConstraintMaker *make) {
+        make.height.equalTo(@(tagsViewH));
+    }];
+    
+    [self.chooseTagView reloadData];
+}
+
+#pragma mark - 推荐标签视图
+- (UIView *)recommendView {
+    if (!_recommendView) {
+        _recommendView = [[UIView alloc] init];
+        _recommendView.backgroundColor = [UIColor whiteColor];
+    }
+    return _recommendView;
+}
+
+#pragma mark - 推荐的标签列表
+- (UICollectionView *)recommendTagView {
+    if (!_recommendTagView) {
+        TagFlowLayout * flowLayout = [[TagFlowLayout alloc] init];
+        flowLayout.minimumLineSpacing = 1.0f;
+        flowLayout.max = 5.0f;
+        flowLayout.sectionInset = UIEdgeInsetsMake(0, 10, 0, 10);
+        
+        _recommendTagView = [[UICollectionView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 44) collectionViewLayout:flowLayout];
+        _recommendTagView.backgroundColor = [UIColor whiteColor];
+        _recommendTagView.delegate = self;
+        _recommendTagView.dataSource = self;
+        _recommendTagView.showsHorizontalScrollIndicator = NO;
+        [_recommendTagView registerClass:[ChooseTagsCollectionViewCell class] forCellWithReuseIdentifier:@"RecommendTagsCollectionViewCell"];
+    }
+    return _recommendTagView;
+}
+
+#pragma mark - 有推荐标签时改变frame
+- (void)getRecommendTagS:(NSMutableArray *)tags {
+    
+    self.recommendTagMarr = tags;
+    
+    UILabel * lab = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 1)];
+    lab.backgroundColor = [UIColor colorWithHexString:lineGrayColor];
+    [self.recommendView addSubview:lab];
+    
+    [self.recommendView addSubview:self.addTagLab];
+    [_addTagLab mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.size.mas_equalTo(CGSizeMake(SCREEN_WIDTH, 30));
+        make.left.equalTo(_recommendView.mas_left).with.offset(0);
+        make.top.equalTo(_recommendView.mas_top).with.offset(10);
+    }];
+    
+    [self.recommendView addSubview:self.recommendTagView];
+    [_recommendTagView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.width.equalTo(@(SCREEN_WIDTH));
+        make.top.equalTo(_addTagLab.mas_bottom).with.offset(5);
+        make.left.equalTo(_recommendView.mas_left).with.offset(0);
+        make.bottom.equalTo(_recommendView.mas_bottom).with.offset(0);
+    }];
+    
+    CGFloat tagsWidth = 0.0f;
+    for (NSUInteger idx = 0; idx < self.recommendTagMarr.count; ++ idx) {
+        CGFloat tagW = [self.recommendTagMarr[idx] boundingRectWithSize:CGSizeMake(SCREEN_WIDTH, 1000) options:(NSStringDrawingUsesLineFragmentOrigin) attributes:nil context:nil].size.width;
+        tagsWidth += (tagW + 40);
+    }
+    
+    CGFloat tagsLineNum = tagsWidth/SCREEN_WIDTH;
+    if (tagsLineNum < 1) {
+        tagsLineNum = 1;
+    }
+    _tagsViewH = tagsLineNum * 44 + 40;
+    
+    [_recommendView mas_updateConstraints:^(MASConstraintMaker *make) {
+        make.height.equalTo(@(_tagsViewH));
+    }];
+    
+    [self layoutIfNeeded];
+}
+
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
-    return self.chooseTagMarr.count;
+    if (collectionView == self.recommendTagView) {
+        return self.recommendTagMarr.count;
+    } else if (collectionView == self.chooseTagView) {
+        return self.chooseTagMarr.count;
+    }
+    return 0;
 }
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
-    ChooseTagsCollectionViewCell * cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"ChooseTagsCollectionViewCell" forIndexPath:indexPath];
-    [cell.tagBtn setTitle:self.chooseTagMarr[indexPath.row] forState:(UIControlStateNormal)];
-    return cell;
+    if (collectionView == self.recommendTagView) {
+        ChooseTagsCollectionViewCell * cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"RecommendTagsCollectionViewCell" forIndexPath:indexPath];
+        [cell.tagBtn setTitle:self.recommendTagMarr[indexPath.row] forState:(UIControlStateNormal)];
+        return cell;
+    } else if (collectionView == self.chooseTagView) {
+        ChooseTagsCollectionViewCell * cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"ChooseTagsCollectionViewCell" forIndexPath:indexPath];
+        [cell.tagBtn setTitle:self.chooseTagMarr[indexPath.row] forState:(UIControlStateNormal)];
+        return cell;
+    }
+    return nil;
 }
 
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath {
-    CGFloat tagW = [self.chooseTagMarr[indexPath.row] boundingRectWithSize:CGSizeMake(SCREEN_WIDTH, 1000) options:(NSStringDrawingUsesLineFragmentOrigin) attributes:nil context:nil].size.width;
-    return CGSizeMake(tagW + 30, 28);
+    if (collectionView == self.recommendTagView) {
+        CGFloat tagW = [self.recommendTagMarr[indexPath.row] boundingRectWithSize:CGSizeMake(SCREEN_WIDTH, 1000) options:(NSStringDrawingUsesLineFragmentOrigin) attributes:nil context:nil].size.width;
+        return CGSizeMake(tagW + 30, 28);
+    } else if (collectionView == self.chooseTagView) {
+        
+        CGFloat tagW = [self.chooseTagMarr[indexPath.row] boundingRectWithSize:CGSizeMake(SCREEN_WIDTH, 1000) options:(NSStringDrawingUsesLineFragmentOrigin) attributes:nil context:nil].size.width;
+        return CGSizeMake(tagW + 30, 28);
+    }
+    return CGSizeMake(0.01, 0.01);
 }
 
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
-    [SVProgressHUD showSuccessWithStatus:[NSString stringWithFormat:@"选中标签:%@", self.chooseTagMarr[indexPath.row]]];
+    if (collectionView == self.recommendTagView) {
+        if ([self.chooseTagMarr containsObject:self.recommendTagMarr[indexPath.row]]) {
+            [SVProgressHUD showInfoWithStatus:@"不可添加重复标签"];
+        } else {
+            [self.chooseTagMarr addObject:self.recommendTagMarr[indexPath.row]];
+            [self chooseTags];
+        }
+        
+    } else if (collectionView == self.chooseTagView) {
+        EditChooseTagsViewController * editTagsVC = [[EditChooseTagsViewController alloc] init];
+        
+        [self.vc presentViewController:editTagsVC animated:YES completion:nil];
+    }
 }
-
 
 #pragma mark - 添加所属情景
 - (UIView *)addScene {
@@ -508,4 +623,18 @@ static const NSInteger btnTag = 100;
     [self.nav pushViewController:selectSceneVC animated:YES];
 }
 
+#pragma mark - 
+- (NSMutableArray *)recommendTagMarr {
+    if (!_recommendTagMarr) {
+        _recommendTagMarr = [NSMutableArray array];
+    }
+    return _recommendTagMarr;
+}
+
+- (NSMutableArray *)chooseTagMarr {
+    if (!_chooseTagMarr) {
+        _chooseTagMarr = [NSMutableArray array];
+    }
+    return _chooseTagMarr;
+}
 @end

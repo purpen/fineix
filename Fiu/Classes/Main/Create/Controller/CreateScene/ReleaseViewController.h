@@ -23,7 +23,6 @@
 @pro_strong NSArray             *   goodsPrice;             //  商品价格
 @pro_strong NSArray             *   goodsX;                 //  商品坐标
 @pro_strong NSArray             *   goodsY;                 //  商品坐标
-@pro_strong NSString            *   tagS;                   //  标签
 @pro_strong NSString            *   fSceneId;               //  情景id
 @pro_strong NSString            *   fSceneTitle;
 @pro_strong NSString            *   lat;                    //  经度

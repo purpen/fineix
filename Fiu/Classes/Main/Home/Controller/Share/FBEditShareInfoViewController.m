@@ -50,6 +50,7 @@ static NSString *const URLListText = @"/scene_context/getlist";
 #pragma mark - 网络请求
 #pragma mark 语境分类
 - (void)networkSceneContentCategory {
+    [SVProgressHUD show];
     self.categoryRequest = [FBAPI getWithUrlString:URLCategroy requestDictionary:@{@"domain":@"11", @"show_all":@"1"} delegate:self];
     [self.categoryRequest startRequestSuccess:^(FBRequest *request, id result) {
         NSArray * categoryArr = [[result valueForKey:@"data"] valueForKey:@"rows"];
@@ -62,6 +63,7 @@ static NSString *const URLListText = @"/scene_context/getlist";
         if (self.categoryTitleMarr.count) {
             [self.listView addSubview:self.categoryMenuView];
         }
+        [SVProgressHUD dismiss];
 
     } failure:^(FBRequest *request, NSError *error) {
         [SVProgressHUD showErrorWithStatus:[error localizedDescription]];
@@ -438,11 +440,16 @@ static NSString *const URLListText = @"/scene_context/getlist";
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     if (tableView == self.shareTextTable) {
         ShareInfoRow * shareInfoRow = self.shareTextList[indexPath.row];
+        //  frome #import "ReleaseViewController.h"
+        [[NSNotificationCenter defaultCenter] postNotificationName:@"getSceneTags" object:shareInfoRow.tags];
         [self dismissViewControllerAnimated:YES completion:^{
             self.getEdtiShareText(shareInfoRow.title , shareInfoRow.des, shareInfoRow.tags);
         }];
     } else if (tableView == self.listTable) {
         ShareInfoRow * listInfoRow = self.listMarr[indexPath.row];
+        //  frome #import "ReleaseViewController.h"
+        [[NSNotificationCenter defaultCenter] postNotificationName:@"getSceneTags" object:listInfoRow.tags];
+        
         [self dismissViewControllerAnimated:YES completion:^{
             self.getEdtiShareText(listInfoRow.title , listInfoRow.des, listInfoRow.tags);
         }];

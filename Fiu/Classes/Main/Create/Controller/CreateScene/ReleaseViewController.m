@@ -25,12 +25,25 @@ static NSString *const URLReleaseFiuScenen = @"/scene_scene/save";
     //  from: "SelectAllFSceneViewController.h"
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(getFiuSceneId:) name:@"selectFiuSceneId" object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(getFiuSceneTitle:) name:@"selectFiuSceneTitle" object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(getSceneTags:) name:@"getSceneTags" object:nil];
     
     if (self.addView.fiuId.length > 0) {
         self.fSceneId = self.addView.fiuId;
     }
+}
+
+- (void)getSceneTags:(NSNotification *)tags {
+    NSArray * tagsArr = [tags object];
+    NSMutableArray * tagsMarr = [NSMutableArray array];
+    if (tagsArr.count > 10) {
+        for (NSUInteger idx = 0; idx < 10; ++ idx) {
+            [tagsMarr addObject:tagsArr[idx]];
+        }
+    } else {
+        tagsMarr = [NSMutableArray arrayWithArray:tagsArr];
+    }
     
-    self.tagS = [self.addView.chooseTagIdMarr componentsJoinedByString:@","];
+    [self.addView getRecommendTagS:tagsMarr];
 }
 
 - (void)viewDidDisappear:(BOOL)animated {
@@ -38,8 +51,6 @@ static NSString *const URLReleaseFiuScenen = @"/scene_scene/save";
     
     self.addView.fiuId = @"";
 }
-
-
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -55,8 +66,9 @@ static NSString *const URLReleaseFiuScenen = @"/scene_scene/save";
 - (void)networkNewSceneData {
     NSString * title = [self.scenceView.title.text stringByReplacingOccurrencesOfString:@" " withString:@""];
     NSString * des = [self.scenceView.content.text stringByReplacingOccurrencesOfString:@" " withString:@""];
+    NSString * tags =  [self.addView.chooseTagMarr componentsJoinedByString:@","];
 
-    if ([self.lng length] <= 0 || [title isEqualToString:@""] || [des isEqualToString:NSLocalizedString(@"addDescription", nil)] || [des isEqualToString:@""] || [self.addView.location.text isEqualToString:@""] || self.tagS.length <=0 || self.fSceneId.length <= 0) {
+    if ([self.lng length] <= 0 || [title isEqualToString:@""] || [des isEqualToString:NSLocalizedString(@"addDescription", nil)] || [des isEqualToString:@""] || [self.addView.location.text isEqualToString:@""] || tags.length <=0 || self.fSceneId.length <= 0) {
         [SVProgressHUD showInfoWithStatus:@"填写未完成"];
 
     } else if (title.length > 20) {
@@ -86,7 +98,7 @@ static NSString *const URLReleaseFiuScenen = @"/scene_scene/save";
                                      @"lat":self.lat,
                                      @"address":self.addView.location.text,
                                      @"products":json,
-                                     @"tags":self.tagS,
+                                     @"tags":tags,
                                      @"scene_id":self.fSceneId,
                                      };
         
@@ -111,8 +123,9 @@ static NSString *const URLReleaseFiuScenen = @"/scene_scene/save";
 - (void)networkNewFiuSceneData {
     NSString * title = [self.scenceView.title.text stringByReplacingOccurrencesOfString:@" " withString:@""];
     NSString * des = [self.scenceView.content.text stringByReplacingOccurrencesOfString:@" " withString:@""];
+    NSString * tags =  [self.addView.chooseTagMarr componentsJoinedByString:@","];
     
-    if ([self.lng length] <= 0 || [title isEqualToString:@""] || [des isEqualToString:NSLocalizedString(@"addFiuSceneDes", nil)] || [des isEqualToString:@""] || [self.addView.location.text isEqualToString:@""] || self.tagS.length <=0) {
+    if ([self.lng length] <= 0 || [title isEqualToString:@""] || [des isEqualToString:NSLocalizedString(@"addFiuSceneDes", nil)] || [des isEqualToString:@""] || [self.addView.location.text isEqualToString:@""] || tags.length <=0) {
         [SVProgressHUD showInfoWithStatus:@"填写未完成"];
     } else if (title.length > 20) {
         [SVProgressHUD showInfoWithStatus:@"请输入20字以内的标题"];
@@ -131,7 +144,7 @@ static NSString *const URLReleaseFiuScenen = @"/scene_scene/save";
                                      @"lng":self.lng,
                                      @"lat":self.lat,
                                      @"address":self.addView.location.text,
-                                     @"tags":self.tagS,
+                                     @"tags":tags,
                                      };
         self.releaseSceneRequest = [FBAPI postWithUrlString:URLReleaseFiuScenen requestDictionary:paramDict delegate:self];
         
@@ -194,6 +207,8 @@ static NSString *const URLReleaseFiuScenen = @"/scene_scene/save";
     if (!_addView) {
         _addView = [[ScenceAddMoreView alloc] initWithFrame:CGRectMake(0, 290, SCREEN_WIDTH, SCREEN_HEIGHT- 290)];
         _addView.nav = self.navigationController;
+        _addView.vc = self;
+        
         if ([self.locationArr[0] isEqualToString:@"0.000000"]) {
             NSLog(@"照片上没有位置信息");
         } else {
@@ -241,6 +256,7 @@ static NSString *const URLReleaseFiuScenen = @"/scene_scene/save";
     [[NSNotificationCenter defaultCenter] removeObserver:self name:@"locationArr" object:nil];
     [[NSNotificationCenter defaultCenter] removeObserver:self name:@"selectFiuSceneId" object:nil];
     [[NSNotificationCenter defaultCenter] removeObserver:self name:@"selectFiuSceneTitle" object:nil];
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:@"getSceneTags" object:nil];
 }
 
 @end

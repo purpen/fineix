@@ -536,6 +536,7 @@
 		D8E3AEBC1CFC9B84006E5E8C /* SceneAddViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D8E3AEB51CFC9B84006E5E8C /* SceneAddViewController.m */; };
 		D8E3AEBF1D003F4D006E5E8C /* FBRefresh.m in Sources */ = {isa = PBXBuildFile; fileRef = D8E3AEBE1D003F4D006E5E8C /* FBRefresh.m */; };
 		D8F1C2B01D3A377900AE717F /* CatagoryFiuSceneModel.m in Sources */ = {isa = PBXBuildFile; fileRef = D8F1C2AF1D3A377900AE717F /* CatagoryFiuSceneModel.m */; };
+		D8F1C2B31D3BED3F00AE717F /* EditChooseTagsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D8F1C2B21D3BED3F00AE717F /* EditChooseTagsViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -1493,6 +1494,8 @@
 		D8E3AEBE1D003F4D006E5E8C /* FBRefresh.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FBRefresh.m; sourceTree = "<group>"; };
 		D8F1C2AE1D3A377900AE717F /* CatagoryFiuSceneModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CatagoryFiuSceneModel.h; sourceTree = "<group>"; };
 		D8F1C2AF1D3A377900AE717F /* CatagoryFiuSceneModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CatagoryFiuSceneModel.m; sourceTree = "<group>"; };
+		D8F1C2B11D3BED3F00AE717F /* EditChooseTagsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EditChooseTagsViewController.h; sourceTree = "<group>"; };
+		D8F1C2B21D3BED3F00AE717F /* EditChooseTagsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EditChooseTagsViewController.m; sourceTree = "<group>"; };
 		E0438B4B24E3F747F761AF4C /* Pods-Fiu.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Fiu.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Fiu/Pods-Fiu.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -4054,6 +4057,8 @@
 				D8E3AEB31CFC9B84006E5E8C /* ReleaseViewController.m */,
 				D8E3AEB01CFC9B84006E5E8C /* LookSceneViewController.h */,
 				D8E3AEB11CFC9B84006E5E8C /* LookSceneViewController.m */,
+				D8F1C2B11D3BED3F00AE717F /* EditChooseTagsViewController.h */,
+				D8F1C2B21D3BED3F00AE717F /* EditChooseTagsViewController.m */,
 			);
 			path = CreateScene;
 			sourceTree = "<group>";
@@ -4608,6 +4613,7 @@
 				1F2A90691CF40277005116C7 /* SystemInfoTableViewCell.m in Sources */,
 				1F2A900D1CF40277005116C7 /* FocusOnTableViewCell.m in Sources */,
 				1F2A900C1CF40277005116C7 /* FindeFriendTableViewCell.m in Sources */,
+				D8F1C2B31D3BED3F00AE717F /* EditChooseTagsViewController.m in Sources */,
 				1F2A90901CF40277005116C7 /* QrShareSheetViewController.m in Sources */,
 				1F2A90651CF40277005116C7 /* SystemNoticeModel.m in Sources */,
 				D8BE89DB1D33419000DE5029 /* FBBrandGoodsCollectionViewCell.m in Sources */,

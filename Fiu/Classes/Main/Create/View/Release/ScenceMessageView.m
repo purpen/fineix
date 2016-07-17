@@ -198,7 +198,7 @@
         self.content.text = des;
         self.content.textColor = [UIColor colorWithHexString:@"#000000" alpha:1];
         self.tagS = [NSArray arrayWithArray:tagS];
-        NSLog(@"＝＝＝＝＝＝＝＝＝＝＝ %@", self.tagS);
+//        NSLog(@"＝＝＝＝＝＝＝＝＝＝＝ %@", self.tagS);
     };
 }
 

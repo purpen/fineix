@@ -48,6 +48,7 @@
 "FiuPeopleListVC" = "用户排行";
 "FiuBrandListVC" = "品牌";
 "SeleBrandVC" = "自营品牌";
+"editTagsVC" = "编辑标签";
 
 //  提示信息
 "netError" = "网络连接错误";
@@ -76,6 +77,7 @@
 "shareDoneContent" = "恭喜您获得积分奖励！";
 "slognText" = "｜ 你在发现 谁在惊呼？";
 "pleaseChooseFiuScene" = "请选择一个地盘";
+"recommendTag" = "推荐标签";
 
 //  搜索框提示
 "searchLocation" = "搜索地点";
