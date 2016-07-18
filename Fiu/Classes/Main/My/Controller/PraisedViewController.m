@@ -126,7 +126,7 @@ static NSString *sceneCollectionCellId = @"SceneCollectionViewCell";
 -(UICollectionView *)myCollectionView{
     if (!_myCollectionView) {
         UICollectionViewFlowLayout *layout = [[UICollectionViewFlowLayout alloc] init];
-        layout.minimumInteritemSpacing = 1;
+        layout.minimumInteritemSpacing = 0;
         _myCollectionView = [[UICollectionView alloc] initWithFrame:CGRectMake(0, 64, SCREEN_WIDTH, SCREEN_HEIGHT-64) collectionViewLayout:layout];
         _myCollectionView.backgroundColor = [UIColor whiteColor];
         _myCollectionView.delegate = self;

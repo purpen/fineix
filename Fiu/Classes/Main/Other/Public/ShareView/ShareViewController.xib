@@ -9,15 +9,15 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="ShareViewController">
             <connections>
                 <outlet property="cancelBtn" destination="RWa-6R-fQe" id="8eI-27-55n"/>
-                <outlet property="friendBtn" destination="7CH-TD-WgK" id="Kq6-gb-vvg"/>
+                <outlet property="friendBtn" destination="7CH-TD-WgK" id="GcV-t6-dKy"/>
                 <outlet property="friendView" destination="E6L-go-WJh" id="YNT-zZ-7ft"/>
                 <outlet property="otherBtn" destination="yRe-VN-3Bg" id="4z5-49-zWP"/>
-                <outlet property="qqBtn" destination="7O2-ZH-iFh" id="5RY-aa-qQI"/>
+                <outlet property="qqBtn" destination="7O2-ZH-iFh" id="yTi-fy-58o"/>
                 <outlet property="qqView" destination="2oH-cx-ivf" id="xsb-t6-cAh"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
-                <outlet property="wechatBtn" destination="75h-pW-dX0" id="dN9-Lm-p2S"/>
+                <outlet property="wechatBtn" destination="75h-pW-dX0" id="xI6-OV-rZP"/>
                 <outlet property="wechatView" destination="WZF-CI-Yi0" id="9Nb-Ps-4gg"/>
-                <outlet property="weiBoBtn" destination="o7d-E0-CY7" id="Yoo-IM-SOv"/>
+                <outlet property="weiBoBtn" destination="o7d-E0-CY7" id="VuV-c9-lXv"/>
                 <outlet property="weiBoView" destination="MVz-M4-e2N" id="NVf-jP-OJ2"/>
             </connections>
         </placeholder>
@@ -92,14 +92,6 @@
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="MVz-M4-e2N">
                             <rect key="frame" x="188" y="0.0" width="93" height="113"/>
                             <subviews>
-                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="o7d-E0-CY7">
-                                    <rect key="frame" x="27" y="30" width="38" height="38"/>
-                                    <constraints>
-                                        <constraint firstAttribute="height" constant="38" id="4b7-cT-eA3"/>
-                                        <constraint firstAttribute="width" constant="38" id="xg8-Ef-2Lo"/>
-                                    </constraints>
-                                    <state key="normal" image="icon_weibo"/>
-                                </button>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="新浪微博" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1Q0-gv-qNa">
                                     <rect key="frame" x="18" y="76" width="56" height="21"/>
                                     <constraints>
@@ -110,6 +102,14 @@
                                     <color key="textColor" red="0.40000000000000002" green="0.40000000000000002" blue="0.40000000000000002" alpha="1" colorSpace="calibratedRGB"/>
                                     <nil key="highlightedColor"/>
                                 </label>
+                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="o7d-E0-CY7">
+                                    <rect key="frame" x="27" y="30" width="38" height="38"/>
+                                    <constraints>
+                                        <constraint firstAttribute="height" constant="38" id="4b7-cT-eA3"/>
+                                        <constraint firstAttribute="width" constant="38" id="xg8-Ef-2Lo"/>
+                                    </constraints>
+                                    <state key="normal" image="icon_weibo"/>
+                                </button>
                             </subviews>
                             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                             <constraints>

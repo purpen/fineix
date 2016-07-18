@@ -13,6 +13,7 @@
 #import "WXApi.h"
 #import <TencentOpenAPI/QQApiInterface.h>
 #import "WeiboSDK.h"
+#import "SVProgressHUD.h"
 
 @interface ShareViewController ()
 
@@ -32,11 +33,9 @@
     
     if ([WXApi isWXAppInstalled]) {
         self.wechatView.hidden = NO;
-        
         self.friendView.hidden = NO;
     } else {
         self.wechatView.hidden = YES;
-        
         self.friendView.hidden = YES;
     }
     
@@ -55,6 +54,8 @@
     [self.cancelBtn addTarget:self action:@selector(cancelBtnClick) forControlEvents:(UIControlEventTouchUpInside)];
     [self.otherBtn addTarget:self action:@selector(cancelBtnClick) forControlEvents:UIControlEventTouchUpInside];
 }
+
+
 
 - (void)cancelBtnClick {
     [self dismissViewControllerAnimated:YES completion:nil];
