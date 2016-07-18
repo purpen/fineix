@@ -69,6 +69,7 @@
     if (!_forgetBtn) {
         _forgetBtn = [[UIButton alloc] init];
         [_forgetBtn setTitle:@"忘记密码?" forState:UIControlStateNormal];
+        [_forgetBtn setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
         _forgetBtn.titleLabel.font = [UIFont systemFontOfSize:12];
     }
     return _forgetBtn;

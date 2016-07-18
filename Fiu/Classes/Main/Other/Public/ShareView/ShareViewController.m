@@ -33,11 +33,9 @@
     
     if ([WXApi isWXAppInstalled]) {
         self.wechatView.hidden = NO;
-        
         self.friendView.hidden = NO;
     } else {
         self.wechatView.hidden = YES;
-        
         self.friendView.hidden = YES;
     }
     
