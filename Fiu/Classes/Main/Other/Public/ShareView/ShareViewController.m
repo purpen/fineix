@@ -13,6 +13,7 @@
 #import "WXApi.h"
 #import <TencentOpenAPI/QQApiInterface.h>
 #import "WeiboSDK.h"
+#import "SVProgressHUD.h"
 
 @interface ShareViewController ()
 
@@ -55,6 +56,8 @@
     [self.cancelBtn addTarget:self action:@selector(cancelBtnClick) forControlEvents:(UIControlEventTouchUpInside)];
     [self.otherBtn addTarget:self action:@selector(cancelBtnClick) forControlEvents:UIControlEventTouchUpInside];
 }
+
+
 
 - (void)cancelBtnClick {
     [self dismissViewControllerAnimated:YES completion:nil];
