@@ -419,11 +419,8 @@ static const NSInteger btnTag = 100;
         tagsWidth += (tagW + 40);
     }
     
-    CGFloat tagsLineNum = tagsWidth/SCREEN_WIDTH;
-    if (tagsLineNum < 1) {
-        tagsLineNum = 1;
-    }
-    CGFloat tagsViewH = (tagsLineNum * 44) + 20;
+    NSInteger tagsLineNum = tagsWidth/SCREEN_WIDTH;
+    CGFloat tagsViewH = ((tagsLineNum + 1) * 44);
     
     [_addTag mas_updateConstraints:^(MASConstraintMaker *make) {
         make.height.equalTo(@(tagsViewH));
@@ -464,6 +461,19 @@ static const NSInteger btnTag = 100;
     
     self.recommendTagMarr = tags;
     
+    CGFloat tagsWidth = 0.0f;
+    for (NSUInteger idx = 0; idx < self.recommendTagMarr.count; ++ idx) {
+        CGFloat tagW = [self.recommendTagMarr[idx] boundingRectWithSize:CGSizeMake(SCREEN_WIDTH, 1000) options:(NSStringDrawingUsesLineFragmentOrigin) attributes:nil context:nil].size.width;
+        tagsWidth += (tagW + 40);
+    }
+    
+    NSInteger tagsLineNum = tagsWidth/SCREEN_WIDTH;
+    _tagsViewH = (tagsLineNum + 1) * 44 + 30;
+    
+    [_recommendView mas_updateConstraints:^(MASConstraintMaker *make) {
+        make.height.equalTo(@(_tagsViewH));
+    }];
+    
     UILabel * lab = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 1)];
     lab.backgroundColor = [UIColor colorWithHexString:lineGrayColor];
     [self.recommendView addSubview:lab];
@@ -483,21 +493,7 @@ static const NSInteger btnTag = 100;
         make.bottom.equalTo(_recommendView.mas_bottom).with.offset(0);
     }];
     
-    CGFloat tagsWidth = 0.0f;
-    for (NSUInteger idx = 0; idx < self.recommendTagMarr.count; ++ idx) {
-        CGFloat tagW = [self.recommendTagMarr[idx] boundingRectWithSize:CGSizeMake(SCREEN_WIDTH, 1000) options:(NSStringDrawingUsesLineFragmentOrigin) attributes:nil context:nil].size.width;
-        tagsWidth += (tagW + 40);
-    }
-    
-    CGFloat tagsLineNum = tagsWidth/SCREEN_WIDTH;
-    if (tagsLineNum < 1) {
-        tagsLineNum = 1;
-    }
-    _tagsViewH = tagsLineNum * 44 + 40;
-    
-    [_recommendView mas_updateConstraints:^(MASConstraintMaker *make) {
-        make.height.equalTo(@(_tagsViewH));
-    }];
+    [self.recommendTagView reloadData];
     
     [self layoutIfNeeded];
 }

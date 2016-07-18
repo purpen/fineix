@@ -16,6 +16,7 @@
 
 @pro_strong FBRequest           *   releaseSceneRequest;
 @pro_strong FBRequest           *   releaseFiuSceneRequest;
+@pro_strong FBRequest           *   getUserDesTagsRequest;
 
 @pro_strong NSString            *   createType;             //  创建类型（场景/情景）
 @pro_strong NSArray             *   goodsTitle;             //  商品标题

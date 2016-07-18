@@ -251,7 +251,7 @@ static NSString *const URLListText = @"/scene_context/getlist";
 #pragma mark - 分类语境列表
 - (UITableView *)listTable {
     if (!_listTable) {
-        _listTable = [[UITableView alloc] initWithFrame:CGRectMake(0, 95, SCREEN_WIDTH, SCREEN_HEIGHT - 95)];
+        _listTable = [[UITableView alloc] initWithFrame:CGRectMake(0, 95, SCREEN_WIDTH, SCREEN_HEIGHT - 138)];
         _listTable.delegate = self;
         _listTable.dataSource = self;
         _listTable.tableFooterView = [UIView new];
@@ -259,11 +259,13 @@ static NSString *const URLListText = @"/scene_context/getlist";
         _listTable.showsVerticalScrollIndicator = NO;
         _listTable.backgroundColor = [UIColor colorWithHexString:@"#FFFFFF" alpha:0];
         
-        if (self.listCurrentpageNum < self.listTotalPageNum) {
-            [self networkContentList:_categoryId];
-        } else {
-            [_listTable.mj_footer endRefreshing];
-        }
+        _listTable.mj_footer = [MJRefreshAutoNormalFooter footerWithRefreshingBlock:^{
+            if (self.listCurrentpageNum < self.listTotalPageNum) {
+                [self networkContentList:_categoryId];
+            } else {
+                [_listTable.mj_footer endRefreshing];
+            }
+        }];
     }
     return _listTable;
 }
@@ -439,19 +441,23 @@ static NSString *const URLListText = @"/scene_context/getlist";
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     if (tableView == self.shareTextTable) {
+        [SVProgressHUD show];
         ShareInfoRow * shareInfoRow = self.shareTextList[indexPath.row];
         //  frome #import "ReleaseViewController.h"
         [[NSNotificationCenter defaultCenter] postNotificationName:@"getSceneTags" object:shareInfoRow.tags];
         [self dismissViewControllerAnimated:YES completion:^{
             self.getEdtiShareText(shareInfoRow.title , shareInfoRow.des, shareInfoRow.tags);
+            [SVProgressHUD dismiss];
         }];
     } else if (tableView == self.listTable) {
+        [SVProgressHUD show];
         ShareInfoRow * listInfoRow = self.listMarr[indexPath.row];
         //  frome #import "ReleaseViewController.h"
         [[NSNotificationCenter defaultCenter] postNotificationName:@"getSceneTags" object:listInfoRow.tags];
         
         [self dismissViewControllerAnimated:YES completion:^{
             self.getEdtiShareText(listInfoRow.title , listInfoRow.des, listInfoRow.tags);
+            [SVProgressHUD dismiss];
         }];
     }
 }
