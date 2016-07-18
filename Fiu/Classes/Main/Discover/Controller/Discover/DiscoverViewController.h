@@ -24,6 +24,7 @@
 @pro_assign NSInteger                   currentpageNum;
 @pro_assign NSInteger                   totalPageNum;
 
+@pro_strong UIButton                *   discoverlogoImg;
 @pro_strong UITableView             *   discoverTableView;
 @pro_strong GroupHeaderView         *   headerView;
 @pro_strong FBRollImages            *   rollView;

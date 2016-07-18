@@ -129,6 +129,11 @@
             _content.text = NSLocalizedString(@"addFiuSceneDes", nil);
         }
         _content.textColor = [UIColor colorWithHexString:@"#A2A2A2" alpha:1];
+    
+    } else {
+        if ([_delegate respondsToSelector:@selector(EditDoneGoGetTags:)]){
+            [_delegate EditDoneGoGetTags:textView.text];
+        }
     }
 }
 

@@ -45,9 +45,9 @@
 - (UILabel *)createTitle {
     if (!_createTitle) {
         _createTitle = [[UILabel alloc] init];
-        _createTitle.text = @"Fiu";
+        _createTitle.text = @"Fiu 浮游";
         _createTitle.textColor = [UIColor colorWithHexString:tabBarTitle alpha:1];
-        _createTitle.font = [UIFont systemFontOfSize:11.5];
+        _createTitle.font = [UIFont systemFontOfSize:10];
         _createTitle.textAlignment = NSTextAlignmentCenter;
     }
     return _createTitle;

@@ -71,7 +71,7 @@ static NSString *const URLFiuBrand = @"/scene_brands/getlist";
 #pragma mark - 网络请求
 #pragma mark 轮播图
 - (void)networkRollImgData {
-    self.rollImgRequest = [FBAPI getWithUrlString:URLMallSlide requestDictionary:@{@"name":@"app_fiu_product_index_slide"} delegate:self];
+    self.rollImgRequest = [FBAPI getWithUrlString:URLMallSlide requestDictionary:@{@"name":@"app_fiu_product_index_slide", @"size":@"5"} delegate:self];
     [self.rollImgRequest startRequestSuccess:^(FBRequest *request, id result) {
         NSArray * rollArr = [[result valueForKey:@"data"] valueForKey:@"rows"];
         for (NSDictionary * rollDic in rollArr) {
@@ -88,7 +88,7 @@ static NSString *const URLFiuBrand = @"/scene_brands/getlist";
 #pragma mark 最Fiu品牌
 - (void)networkFiuPeopleData {
     [SVProgressHUD show];
-    self.fiuBrandRequest = [FBAPI getWithUrlString:URLFiuBrand requestDictionary:@{@"page":@"1", @"size":@"100", @"sort":@"1"} delegate:self];
+    self.fiuBrandRequest = [FBAPI getWithUrlString:URLFiuBrand requestDictionary:@{@"page":@"1", @"size":@"1000", @"sort":@"1"} delegate:self];
     [self.fiuBrandRequest startRequestSuccess:^(FBRequest *request, id result) {
         self.brandList = [NSMutableArray arrayWithArray:[[result valueForKey:@"data"] valueForKey:@"rows"]];
         _headerImgArr = [NSArray arrayWithArray:[self.brandList valueForKey:@"cover_url"]];
@@ -272,7 +272,9 @@ static NSString *const URLFiuBrand = @"/scene_brands/getlist";
             if (!cell) {
                 cell = [[FiuTagTableViewCell alloc] initWithStyle:(UITableViewCellStyleDefault) reuseIdentifier:mallGoodsTagCellId];
             }
-            [cell setMallHotTagsData:self.tagsList];
+            if (self.tagsList.count) {
+                [cell setMallHotTagsData:self.tagsList];
+            }
             cell.nav = self.navigationController;
             return cell;
             
@@ -282,7 +284,9 @@ static NSString *const URLFiuBrand = @"/scene_brands/getlist";
             if (!cell) {
                 cell = [[MallMenuTableViewCell alloc] initWithStyle:(UITableViewCellStyleDefault) reuseIdentifier:mallMenuTableViewCellID];
             }
-            [cell setCategoryData:self.categoryList];
+            if (self.categoryList.count) {
+                [cell setCategoryData:self.categoryList];
+            }
             cell.nav = self.navigationController;
             return cell;
         }
@@ -292,7 +296,9 @@ static NSString *const URLFiuBrand = @"/scene_brands/getlist";
         GoodsTableViewCell * cell = [tableView dequeueReusableCellWithIdentifier:mallGoodsCellId];
         cell = [[GoodsTableViewCell alloc] initWithStyle:(UITableViewCellStyleDefault) reuseIdentifier:mallGoodsCellId];
         cell.nav = self.navigationController;
-        [cell setGoodsData:self.goodsList[indexPath.row]];
+        if (self.goodsList.count) {
+            [cell setGoodsData:self.goodsList[indexPath.row]];
+        }
         return cell;
     }
     

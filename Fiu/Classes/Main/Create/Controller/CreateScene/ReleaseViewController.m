@@ -67,7 +67,20 @@ static NSString *const URLGetUserDesTags = @"/gateway/fetch_chinese_word";
 - (void)networkGetUserDesTags:(NSString *)title withDes:(NSString *)des {
     self.getUserDesTagsRequest = [FBAPI postWithUrlString:URLGetUserDesTags requestDictionary:@{@"title":title, @"content":des} delegate:self];
     [self.getUserDesTagsRequest startRequestSuccess:^(FBRequest *request, id result) {
-        NSLog(@"＝＝＝＝＝＝＝ 获取的标签%@", result);
+        NSArray * tagsArr = [[result valueForKey:@"data"] valueForKey:@"word"];
+        NSMutableArray * tagsMarr = [NSMutableArray array];
+        if (tagsArr.count > 10) {
+            for (NSUInteger idx = 0; idx < 10; ++ idx) {
+                [tagsMarr addObject:tagsArr[idx]];
+            }
+        } else {
+            tagsMarr = [NSMutableArray arrayWithArray:tagsArr];
+        }
+        
+        if (tagsArr.count > 0) {
+            [self.addView getRecommendTagS:tagsMarr];
+        }
+        
     } failure:^(FBRequest *request, NSError *error) {
         NSLog(@"%@", error);
     }];
@@ -209,8 +222,13 @@ static NSString *const URLGetUserDesTags = @"/gateway/fetch_chinese_word";
     if (!_scenceView) {
         _scenceView = [[ScenceMessageView alloc] initWithFrame:CGRectMake(0, 50, SCREEN_WIDTH, 236.5)];
         _scenceView.vc = self;
+        _scenceView.delegate = self;
     }
     return _scenceView;
+}
+
+- (void)EditDoneGoGetTags:(NSString *)des {
+    [self networkGetUserDesTags:_scenceView.title.text withDes:des];
 }
 
 #pragma mark - 添加位置／标签／所属情景的视图

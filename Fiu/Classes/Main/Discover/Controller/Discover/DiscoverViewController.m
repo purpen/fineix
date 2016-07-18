@@ -71,13 +71,14 @@ static NSString *const URLFiuPeople = @"/user/activity_user";
     [self networkSceneListData];
     
     [self.view addSubview:self.discoverTableView];
+    [self.view addSubview:self.discoverlogoImg];
 
 }
 
 #pragma mark - 网络请求
 #pragma mark 轮播图
 - (void)networkRollImgData {
-    self.rollImgRequest = [FBAPI getWithUrlString:URLDiscoverSlide requestDictionary:@{@"name":@"app_fiu_sight_index_slide"} delegate:self];
+    self.rollImgRequest = [FBAPI getWithUrlString:URLDiscoverSlide requestDictionary:@{@"name":@"app_fiu_sight_index_slide", @"size":@"5"} delegate:self];
     [self.rollImgRequest startRequestSuccess:^(FBRequest *request, id result) {
         NSArray * rollArr = [[result valueForKey:@"data"] valueForKey:@"rows"];
         for (NSDictionary * rollDic in rollArr) {
@@ -94,7 +95,7 @@ static NSString *const URLFiuPeople = @"/user/activity_user";
 #pragma mark 最Fiu伙伴
 - (void)networkFiuPeopleData {
     [SVProgressHUD show];
-    self.fiuPeopleRequest = [FBAPI getWithUrlString:URLFiuPeople requestDictionary:@{@"page":@"1", @"size":@"100", @"sort":@"1"} delegate:self];
+    self.fiuPeopleRequest = [FBAPI getWithUrlString:URLFiuPeople requestDictionary:@{@"page":@"1", @"size":@"1000", @"sort":@"1"} delegate:self];
     [self.fiuPeopleRequest startRequestSuccess:^(FBRequest *request, id result) {
         self.fiuPeopleList = [NSMutableArray arrayWithArray:[[result valueForKey:@"data"] valueForKey:@"rows"]];
         _headerImgArr = [NSArray arrayWithArray:[self.fiuPeopleList valueForKey:@"avatar_url"]];
@@ -123,7 +124,7 @@ static NSString *const URLFiuPeople = @"/user/activity_user";
     }];
 }
 
-#pragma mark 情景列表
+#pragma mark 地盘列表
 - (void)networkFiuSceneData {
     self.fiuSceneRequest = [FBAPI getWithUrlString:URLFiuScene requestDictionary:@{@"sort":@"2",@"fine":@"1",@"page":@"1",@"size":@"10"} delegate:self];
     [self.fiuSceneRequest startRequestSuccess:^(FBRequest *request, id result) {
@@ -218,6 +219,17 @@ static NSString *const URLFiuPeople = @"/user/activity_user";
     self.currentpageNum = 0;
     [self networkSceneListData];
     [self networkFiuPeopleData];
+}
+
+#pragma mark - Nav中间的Logo
+- (UIButton *)discoverlogoImg {
+    if (!_discoverlogoImg) {
+        _discoverlogoImg = [[UIButton alloc] initWithFrame:CGRectMake(0, 20, SCREEN_WIDTH, 44)];
+        [_discoverlogoImg setImage:[UIImage imageNamed:@"Nav_Title"] forState:(UIControlStateNormal)];
+        [_discoverlogoImg setImage:[UIImage imageNamed:@"Nav_Title"] forState:(UIControlStateHighlighted)];
+        _discoverlogoImg.alpha = 0;
+    }
+    return _discoverlogoImg;
 }
 
 #pragma mark - 顶部轮播图
@@ -402,6 +414,7 @@ static NSString *const URLFiuPeople = @"/user/activity_user";
                 self.leftBtn.alpha = 0;
                 self.rightBtn.alpha = 0;
                 self.navView.alpha = 0;
+                self.discoverlogoImg.alpha = 1;
                 [[UIApplication sharedApplication] setStatusBarHidden:YES withAnimation:(UIStatusBarAnimationSlide)];
             }];
             
@@ -414,6 +427,7 @@ static NSString *const URLFiuPeople = @"/user/activity_user";
                 self.leftBtn.alpha = 1;
                 self.rightBtn.alpha = 1;
                 self.navView.alpha = 1;
+                self.discoverlogoImg.alpha = 0;
                 [[UIApplication sharedApplication] setStatusBarHidden:NO withAnimation:(UIStatusBarAnimationSlide)];
             }];
         }
