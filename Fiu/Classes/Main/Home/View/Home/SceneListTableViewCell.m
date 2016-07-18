@@ -289,6 +289,7 @@
         _titleText.numberOfLines = 2;
         _titleText.textColor = [UIColor whiteColor];
     }
+
     return _titleText;
 }
 

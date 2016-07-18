@@ -55,15 +55,18 @@ static CGFloat const userStarFont = 9.0f;
         self.userStar.text = sceneModel.user.expertLabel;
         self.userAbout.text = [NSString stringWithFormat:@"|  %@", sceneModel.user.expertInfo];
         CGSize size = [self.userStar boundingRectWithSize:CGSizeMake(100, 0)];
+        CGFloat starSize = [sceneModel.user.expertLabel boundingRectWithSize:CGSizeMake(320, 1000) options:(NSStringDrawingUsesLineFragmentOrigin) attributes:nil context:nil].size.width;
         
         [self.userStar mas_updateConstraints:^(MASConstraintMaker *make) {
             make.width.mas_equalTo(size.width);
         }];
         [self.userAbout mas_updateConstraints:^(MASConstraintMaker *make) {
+            make.width.mas_equalTo(starSize * 1.6);
             make.left.equalTo(_userStar.mas_right).with.offset(5);
         }];
         
     } else {
+        CGFloat aboutSize = [sceneModel.user.summary boundingRectWithSize:CGSizeMake(320, 1000) options:(NSStringDrawingUsesLineFragmentOrigin) attributes:nil context:nil].size.width;
         self.userVimg.hidden = YES;
         self.userStar.text = @"";
         self.userAbout.text = sceneModel.user.summary;
@@ -71,6 +74,7 @@ static CGFloat const userStarFont = 9.0f;
             make.width.mas_equalTo(0);
         }];
         [self.userAbout mas_updateConstraints:^(MASConstraintMaker *make) {
+            make.width.mas_equalTo(aboutSize * 0.8);
             make.left.equalTo(_userStar.mas_right).with.offset(0);
         }];
     }
@@ -106,7 +110,7 @@ static CGFloat const userStarFont = 9.0f;
     
     [self addSubview:self.describeView];
     [_describeView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.size.mas_equalTo(CGSizeMake(SCREEN_WIDTH * 0.68, 65));
+        make.size.mas_equalTo(CGSizeMake(SCREEN_WIDTH * 0.68, 50));
         make.bottom.equalTo(self.mas_bottom).with.offset(-15);
         make.left.equalTo(self.mas_left).with.offset(15);
     }];
@@ -114,7 +118,7 @@ static CGFloat const userStarFont = 9.0f;
     [self addSubview:self.title];
     [_title mas_makeConstraints:^(MASConstraintMaker *make) {
         make.size.mas_equalTo(CGSizeMake(SCREEN_WIDTH * 0.68, 50));
-        make.bottom.equalTo(_addressIcon.mas_top).with.offset(-5);
+        make.bottom.equalTo(_describeView.mas_top).with.offset(-5);
         make.left.equalTo(self.mas_left).with.offset(15);
     }];
     
@@ -123,6 +127,14 @@ static CGFloat const userStarFont = 9.0f;
         make.size.mas_equalTo(CGSizeMake(SCREEN_WIDTH - 30, 26));
         make.bottom.equalTo(_title.mas_top).with.offset(-5);
         make.left.equalTo(self.mas_left).with.offset(15);
+    }];
+    
+    [self.userView addSubview:self.address];
+    [_address mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.height.mas_equalTo(10);
+        make.centerY.equalTo(_userAbout);
+        make.left.equalTo(_addressIcon.mas_right).with.offset(5);
+        make.right.equalTo(self.mas_right).with.offset(-18);
     }];
 }
 
@@ -165,6 +177,13 @@ static CGFloat const userStarFont = 9.0f;
             make.bottom.equalTo(_userHeader.mas_bottom).with.offset(0);
             make.left.equalTo(_userStar.mas_right).with.offset(5);
         }];
+        
+        [_userView addSubview:self.addressIcon];
+        [_addressIcon mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.size.mas_equalTo(CGSizeMake(8, 11));
+            make.centerY.equalTo(_userAbout);
+            make.left.equalTo(_userAbout.mas_right).with.offset(5);
+        }];
     }
     return _userView;
 }
@@ -195,20 +214,7 @@ static CGFloat const userStarFont = 9.0f;
             make.left.right.equalTo(_describeView).with.offset(0);
             make.height.mas_equalTo(@9);
         }];
-        
-        [_describeView addSubview:self.addressIcon];
-        [_addressIcon mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.size.mas_equalTo(CGSizeMake(8, 11));
-            make.bottom.equalTo(_describe.mas_top).with.offset(-5);
-            make.left.equalTo(_describeView.mas_left).with.offset(0);
-        }];
-        
-        [_describeView addSubview:self.address];
-        [_address mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.height.mas_equalTo(11);
-            make.top.equalTo(_addressIcon.mas_top).with.offset(0);
-            make.left.equalTo(_addressIcon.mas_right).with.offset(5);
-        }];
+
     }
     return _describeView;
 }

@@ -34,7 +34,6 @@
     //  是否是达人
     if (model.userInfo.isExpert == 1) {
         self.userVimg.hidden = NO;
-//        [self.userStar setUserTagInfo:model.userInfo.expertLabel];
         self.userStar.text = model.userInfo.expertLabel;
         self.userProfile.text = [NSString stringWithFormat:@"|  %@", model.userInfo.expertInfo];
         CGSize size = [self.userStar boundingRectWithSize:CGSizeMake(100, 0)];
@@ -162,7 +161,7 @@
         
         [_userView addSubview:self.userProfile];
         [_userProfile mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.size.mas_equalTo(CGSizeMake(220, 14));
+            make.size.mas_equalTo(CGSizeMake(170, 14));
             make.bottom.equalTo(_userHeader.mas_bottom).with.offset(0);
             make.left.equalTo(self.userStar.mas_right).with.offset(0);
         }];

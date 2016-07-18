@@ -242,6 +242,7 @@ static NSString *const URLGoodsList = @"/scene_product/getlist";
         _categoryMenuView = [[FBMenuView alloc] initWithFrame:CGRectMake(0, 64, SCREEN_WIDTH, 54)];
         _categoryMenuView.delegate = self;
         _categoryMenuView.menuTitle = self.categoryTitleArr;
+        _categoryMenuView.defaultColor = titleColor;
         [_categoryMenuView updateMenuButtonData];
     }
     return _categoryMenuView;

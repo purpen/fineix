@@ -68,7 +68,7 @@
     for (NSUInteger idx = 0; idx < self.menuTitle.count; ++ idx) {
         UIButton * menuBtn = [[UIButton alloc] initWithFrame:CGRectMake(menuBtnW, 0, [widths[idx] floatValue], 44)];
         [menuBtn setTitle:self.menuTitle[idx] forState:(UIControlStateNormal)];
-        [menuBtn setTitleColor:[UIColor colorWithHexString:titleColor] forState:(UIControlStateNormal)];
+        [menuBtn setTitleColor:[UIColor colorWithHexString:self.defaultColor] forState:(UIControlStateNormal)];
         [menuBtn setTitleColor:[UIColor colorWithHexString:fineixColor] forState:(UIControlStateSelected)];
         menuBtn.titleLabel.font = [UIFont systemFontOfSize:14];
         menuBtn.tag = menuBtnTag + idx;
