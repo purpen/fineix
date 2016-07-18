@@ -41,6 +41,7 @@ static NSString *const URLGoodsList = @"/scene_product/getlist";
     [self networkChildTagsData:self.categoryId];
     
     //  分类商品列表
+    self.currentpageNum = 0;
     NSInteger index = [self.categoryIdMarr indexOfObject:self.categoryId];
     [self networkGoodsListData:self.idMarr[index] withTagIds:@""];
 
@@ -71,7 +72,6 @@ static NSString *const URLGoodsList = @"/scene_product/getlist";
 #pragma mark 商品列表
 - (void)networkGoodsListData:(NSString *)categoryId withTagIds:(NSString *)tagId {
     [SVProgressHUD show];
-    
     self.goodsListRequest = [FBAPI getWithUrlString:URLGoodsList requestDictionary:@{@"size":@"8", @"page":@(self.currentpageNum + 1), @"category_id":categoryId, @"category_tag_ids":tagId} delegate:self];
     [self.goodsListRequest startRequestSuccess:^(FBRequest *request, id result) {
         NSArray * goodsArr = [[result valueForKey:@"data"] valueForKey:@"rows"];
@@ -106,6 +106,7 @@ static NSString *const URLGoodsList = @"/scene_product/getlist";
         table.mj_footer.state = MJRefreshStateNoMoreData;
         table.mj_footer.hidden = true;
     }
+    
     if (current == total == 1) {
         table.mj_footer.state = MJRefreshStateNoMoreData;
         table.mj_footer.hidden = true;
@@ -132,7 +133,7 @@ static NSString *const URLGoodsList = @"/scene_product/getlist";
                 [self networkGoodsListData:@"" withTagIds:self.tagId];
                 
             } else {
-                NSInteger idIndex = (self.categoryMenuView.selectedBtn.tag - menuBtnTag) - 1;
+                NSInteger idIndex = self.categoryMenuView.selectedBtn.tag - menuBtnTag;
                 if (idIndex > 0) {
                     [self networkGoodsListData:self.idMarr[idIndex] withTagIds:@""];
                 } else {
@@ -253,11 +254,9 @@ static NSString *const URLGoodsList = @"/scene_product/getlist";
     [self.goodsList removeAllObjects];
     [self.goodsIdList removeAllObjects];
     self.currentpageNum = 0;
-    
     [self networkChildTagsData:self.categoryIdMarr[index]];
     //  分类商品列表
-    NSInteger idIndex = [self.categoryIdMarr indexOfObject:self.categoryIdMarr[index]];
-    [self networkGoodsListData:self.idMarr[idIndex] withTagIds:@""];
+    [self networkGoodsListData:self.idMarr[index] withTagIds:@""];
     
     [self showCategoryTag:index];
 }

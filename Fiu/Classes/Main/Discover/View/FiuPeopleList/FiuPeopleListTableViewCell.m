@@ -34,7 +34,7 @@
             make.width.mas_equalTo(size.width);
         }];
         [self.userProfile mas_updateConstraints:^(MASConstraintMaker *make) {
-            make.left.equalTo(self.userStar.mas_right).with.offset(5);
+            make.left.equalTo(_userStar.mas_right).with.offset(5);
         }];
         
     } else {
@@ -119,8 +119,8 @@
     [self addSubview:self.userProfile];
     [_userProfile mas_makeConstraints:^(MASConstraintMaker *make) {
         make.size.mas_equalTo(CGSizeMake(220, 14));
-        make.bottom.equalTo(_userLevel.mas_bottom).with.offset(0);
-        make.left.equalTo(_userLevel.mas_right).with.offset(0);
+        make.bottom.equalTo(_userStar.mas_bottom).with.offset(0);
+        make.left.equalTo(_userStar.mas_right).with.offset(0);
     }];
     
 }

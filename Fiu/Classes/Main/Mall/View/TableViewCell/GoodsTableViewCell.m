@@ -63,7 +63,7 @@ static CGFloat const sceneImgW = SCREEN_WIDTH * 0.23;
         self.typeImg.image = [UIImage imageNamed:@"Goods_JD"];
     }
     
-    self.price.text = [NSString stringWithFormat:@"¥%.2f", model.marketPrice];
+    self.price.text = [NSString stringWithFormat:@"¥%.2f", model.salePrice];
     
     if (model.banner.count > 0) {
         self.goodsImgMarr = [NSMutableArray arrayWithArray:model.banner];

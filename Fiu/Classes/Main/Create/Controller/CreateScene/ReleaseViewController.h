@@ -12,7 +12,7 @@
 #import "ScenceAddMoreView.h"
 #import <SVProgressHUD/SVProgressHUD.h>
 
-@interface ReleaseViewController : FBPictureViewController
+@interface ReleaseViewController : FBPictureViewController <ScenceMessageViewDelegate>
 
 @pro_strong FBRequest           *   releaseSceneRequest;
 @pro_strong FBRequest           *   releaseFiuSceneRequest;

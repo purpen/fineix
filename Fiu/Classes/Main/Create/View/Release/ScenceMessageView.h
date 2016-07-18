@@ -9,6 +9,13 @@
 #import <UIKit/UIKit.h>
 #import "Fiu.h"
 
+@protocol ScenceMessageViewDelegate <NSObject>
+
+@optional
+- (void)EditDoneGoGetTags:(NSString *)des;
+
+@end
+
 @interface ScenceMessageView : UIView <UITextFieldDelegate, UITextViewDelegate>
 
 @pro_strong UIViewController    *   vc;
@@ -20,6 +27,7 @@
 @pro_strong NSString            *   type;             //    创建类型
 @pro_strong UIButton            *   chooseText;       //    选择语境
 @pro_strong NSArray             *   tagS;
+@pro_weak id <ScenceMessageViewDelegate> delegate;
 
 - (void)getCreateType:(NSString *)type;
 

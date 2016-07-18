@@ -139,7 +139,6 @@ static NSString *const URLListText = @"/scene_context/getlist";
             [table.mj_footer endRefreshing];
         }
     }
-    [SVProgressHUD dismiss];
 }
 
 #pragma mark 上拉加载

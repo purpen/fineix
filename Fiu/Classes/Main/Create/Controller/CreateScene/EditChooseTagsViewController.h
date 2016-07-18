@@ -9,7 +9,17 @@
 #import "FBPictureViewController.h"
 #import "Fiu.h"
 #import <SVProgressHUD/SVProgressHUD.h>
+#import "FBTagView.h"
+#import "FBTagItem.h"
 
-@interface EditChooseTagsViewController : FBPictureViewController
+typedef void(^GetAddTags)(NSArray * tags);
+
+@interface EditChooseTagsViewController : FBPictureViewController <FBTagViewDelegate>
+
+//@pro_strong UITextField
+@pro_strong NSMutableArray      *   chooseTags;
+@pro_strong FBTagView           *   tagEditor;
+@pro_strong FBTagView           *   tagForSelect;
+@pro_copy GetAddTags    getAddTags;
 
 @end

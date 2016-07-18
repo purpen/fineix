@@ -517,6 +517,8 @@
 		D8B795271CF48AFB0075D985 /* ShareStyleBottomView.m in Sources */ = {isa = PBXBuildFile; fileRef = D8B795261CF48AFB0075D985 /* ShareStyleBottomView.m */; };
 		D8B7952A1CF48B1D0075D985 /* ShareStyleTitleTopView.m in Sources */ = {isa = PBXBuildFile; fileRef = D8B795291CF48B1D0075D985 /* ShareStyleTitleTopView.m */; };
 		D8B7952D1CF48B2C0075D985 /* ShareStyleTitleBottomView.m in Sources */ = {isa = PBXBuildFile; fileRef = D8B7952C1CF48B2C0075D985 /* ShareStyleTitleBottomView.m */; };
+		D8B855BB1D3CCC190008BD57 /* FBTagItem.m in Sources */ = {isa = PBXBuildFile; fileRef = D8B855BA1D3CCC190008BD57 /* FBTagItem.m */; };
+		D8B855BE1D3CCC3E0008BD57 /* FBTagView.m in Sources */ = {isa = PBXBuildFile; fileRef = D8B855BD1D3CCC3E0008BD57 /* FBTagView.m */; };
 		D8BE89D81D33401C00DE5029 /* FBBrandGoodsView.m in Sources */ = {isa = PBXBuildFile; fileRef = D8BE89D71D33401C00DE5029 /* FBBrandGoodsView.m */; };
 		D8BE89DB1D33419000DE5029 /* FBBrandGoodsCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D8BE89DA1D33419000DE5029 /* FBBrandGoodsCollectionViewCell.m */; };
 		D8BE89DE1D334ADD00DE5029 /* BrandsListTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D8BE89DD1D334ADD00DE5029 /* BrandsListTableViewCell.m */; };
@@ -1456,6 +1458,10 @@
 		D8B795291CF48B1D0075D985 /* ShareStyleTitleTopView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ShareStyleTitleTopView.m; sourceTree = "<group>"; };
 		D8B7952B1CF48B2C0075D985 /* ShareStyleTitleBottomView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShareStyleTitleBottomView.h; sourceTree = "<group>"; };
 		D8B7952C1CF48B2C0075D985 /* ShareStyleTitleBottomView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ShareStyleTitleBottomView.m; sourceTree = "<group>"; };
+		D8B855B91D3CCC190008BD57 /* FBTagItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FBTagItem.h; sourceTree = "<group>"; };
+		D8B855BA1D3CCC190008BD57 /* FBTagItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FBTagItem.m; sourceTree = "<group>"; };
+		D8B855BC1D3CCC3E0008BD57 /* FBTagView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FBTagView.h; sourceTree = "<group>"; };
+		D8B855BD1D3CCC3E0008BD57 /* FBTagView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FBTagView.m; sourceTree = "<group>"; };
 		D8BE89D61D33401C00DE5029 /* FBBrandGoodsView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FBBrandGoodsView.h; sourceTree = "<group>"; };
 		D8BE89D71D33401C00DE5029 /* FBBrandGoodsView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FBBrandGoodsView.m; sourceTree = "<group>"; };
 		D8BE89D91D33419000DE5029 /* FBBrandGoodsCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FBBrandGoodsCollectionViewCell.h; sourceTree = "<group>"; };
@@ -1765,6 +1771,7 @@
 		1F2A8C0F1CF40276005116C7 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				D8B855B81D3CCC000008BD57 /* AddTags */,
 				D8C690B11D1125C80026EAB5 /* Edit */,
 				1F2A8C101CF40276005116C7 /* Creat */,
 				1F2A8C231CF40276005116C7 /* Mark */,
@@ -4004,6 +4011,17 @@
 			path = TabBar;
 			sourceTree = "<group>";
 		};
+		D8B855B81D3CCC000008BD57 /* AddTags */ = {
+			isa = PBXGroup;
+			children = (
+				D8B855B91D3CCC190008BD57 /* FBTagItem.h */,
+				D8B855BA1D3CCC190008BD57 /* FBTagItem.m */,
+				D8B855BC1D3CCC3E0008BD57 /* FBTagView.h */,
+				D8B855BD1D3CCC3E0008BD57 /* FBTagView.m */,
+			);
+			path = AddTags;
+			sourceTree = "<group>";
+		};
 		D8C690B11D1125C80026EAB5 /* Edit */ = {
 			isa = PBXGroup;
 			children = (
@@ -4541,6 +4559,7 @@
 				1F2A90A81CF40277005116C7 /* UserHeaderTableViewCell.m in Sources */,
 				D8C690B41D1125F80026EAB5 /* EditSceneAddMoreView.m in Sources */,
 				1F2A8F461CF40277005116C7 /* FBPictureViewController.m in Sources */,
+				D8B855BB1D3CCC190008BD57 /* FBTagItem.m in Sources */,
 				1F2A8FB81CF40277005116C7 /* FiuBrandRow.m in Sources */,
 				1F2A8F941CF40277005116C7 /* LikeOrSuPeopleData.m in Sources */,
 				1F2A8FA11CF40277005116C7 /* ContentAndTagTableViewCell.m in Sources */,
@@ -4632,6 +4651,7 @@
 				D8BE89E11D33509400DE5029 /* BrandListModel.m in Sources */,
 				1F2A8F8B1CF40277005116C7 /* HomeSceneList.m in Sources */,
 				1F2A8FC91CF40277005116C7 /* GoodsRelationProducts.m in Sources */,
+				D8B855BE1D3CCC3E0008BD57 /* FBTagView.m in Sources */,
 				1F2A8FD11CF40277005116C7 /* RecommendGoodsCollectionViewCell.m in Sources */,
 				1F2A8F421CF40277005116C7 /* MarkGoodsRow.m in Sources */,
 				1F2A90551CF40277005116C7 /* RecommendedScenarioView.m in Sources */,

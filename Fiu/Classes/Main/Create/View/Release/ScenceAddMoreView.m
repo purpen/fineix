@@ -342,7 +342,7 @@ static const NSInteger btnTag = 100;
 - (UIImageView *)tagIcon {
     if (!_tagIcon) {
         _tagIcon = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 44, 44)];
-        _tagIcon.image = [UIImage imageNamed:@"icon_map"];
+        _tagIcon.image = [UIImage imageNamed:@"iconfont-biaoqian"];
         _tagIcon.contentMode = UIViewContentModeCenter;
     }
     return _tagIcon;
@@ -380,10 +380,19 @@ static const NSInteger btnTag = 100;
         _addTagBtn.titleLabel.font = [UIFont systemFontOfSize:Font_GroupHeader];
         _addTagBtn.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
         _addTagBtn.backgroundColor = [UIColor whiteColor];
+        [_addTagBtn addTarget:self action:@selector(addTagBtnClick) forControlEvents:(UIControlEventTouchUpInside)];
     }
     return _addTagBtn;
 }
 
+- (void)addTagBtnClick {
+    EditChooseTagsViewController * editTagsVC = [[EditChooseTagsViewController alloc] init];
+    editTagsVC.getAddTags = ^ (NSArray * tags){
+        self.chooseTagMarr = [NSMutableArray arrayWithArray:tags];
+        [self chooseTags];
+    };
+    [self.vc presentViewController:editTagsVC animated:YES completion:nil];
+}
 
 #pragma mark - 选择的标签列表
 - (UICollectionView *)chooseTagView {
@@ -405,13 +414,15 @@ static const NSInteger btnTag = 100;
 
 #pragma mark - 有选择的标签时改变frame
 - (void)chooseTags {
-    [self.addTag addSubview:self.chooseTagView];
-    [_chooseTagView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.width.equalTo(@(SCREEN_WIDTH - 44));
-        make.top.equalTo(_addTag.mas_top).with.offset(8);
-        make.left.equalTo(_addTag.mas_left).with.offset(34);
-        make.bottom.equalTo(_addTag.mas_bottom).with.offset(0);
-    }];
+    if (![self.addTag.subviews containsObject:self.chooseTagView]) {
+        [self.addTag addSubview:self.chooseTagView];
+        [_chooseTagView mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.width.equalTo(@(SCREEN_WIDTH - 44));
+            make.top.equalTo(_addTag.mas_top).with.offset(8);
+            make.left.equalTo(_addTag.mas_left).with.offset(34);
+            make.bottom.equalTo(_addTag.mas_bottom).with.offset(0);
+        }];
+    }
     
     CGFloat tagsWidth = 0.0f;
     for (NSUInteger idx = 0; idx < self.chooseTagMarr.count; ++ idx) {
@@ -420,13 +431,15 @@ static const NSInteger btnTag = 100;
     }
     
     NSInteger tagsLineNum = tagsWidth/SCREEN_WIDTH;
-    CGFloat tagsViewH = ((tagsLineNum + 1) * 44);
-    
+    CGFloat tagsViewH = ((tagsLineNum + 1) * 40);
+
     [_addTag mas_updateConstraints:^(MASConstraintMaker *make) {
         make.height.equalTo(@(tagsViewH));
     }];
     
     [self.chooseTagView reloadData];
+    
+    [self layoutIfNeeded];
 }
 
 #pragma mark - 推荐标签视图
@@ -490,7 +503,7 @@ static const NSInteger btnTag = 100;
         make.width.equalTo(@(SCREEN_WIDTH));
         make.top.equalTo(_addTagLab.mas_bottom).with.offset(5);
         make.left.equalTo(_recommendView.mas_left).with.offset(0);
-        make.bottom.equalTo(_recommendView.mas_bottom).with.offset(0);
+        make.bottom.equalTo(_recommendView.mas_bottom).with.offset(-5);
     }];
     
     [self.recommendTagView reloadData];
@@ -543,9 +556,23 @@ static const NSInteger btnTag = 100;
         
     } else if (collectionView == self.chooseTagView) {
         EditChooseTagsViewController * editTagsVC = [[EditChooseTagsViewController alloc] init];
-        
+        editTagsVC.chooseTags = self.chooseTagMarr;
+        editTagsVC.getAddTags = ^ (NSArray * tags){
+            self.chooseTagMarr = [NSMutableArray arrayWithArray:tags];
+            [self chooseTags];
+        };
         [self.vc presentViewController:editTagsVC animated:YES completion:nil];
     }
+}
+
+#pragma mark - 标签图标
+- (UIImageView *)fiuSceneIcon {
+    if (!_fiuSceneIcon) {
+        _fiuSceneIcon = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 44, 44)];
+        _fiuSceneIcon.image = [UIImage imageNamed:@"iconfont-dipan"];
+        _fiuSceneIcon.contentMode = UIViewContentModeCenter;
+    }
+    return _fiuSceneIcon;
 }
 
 #pragma mark - 添加所属情景
@@ -553,6 +580,7 @@ static const NSInteger btnTag = 100;
     if (!_addScene) {
         _addScene = [[UIView alloc] init];
         _addScene.backgroundColor = [UIColor whiteColor];
+        [_addScene addSubview:self.fiuSceneIcon];
         [_addScene addSubview:self.addSceneBtn];
         [_addScene addSubview:self.selectFSceneBtn];
     }
@@ -562,7 +590,7 @@ static const NSInteger btnTag = 100;
 //  所属情景
 - (UIButton *)addSceneBtn {
     if (!_addSceneBtn) {
-        _addSceneBtn = [[UIButton alloc] initWithFrame:CGRectMake(15, 0, SCREEN_WIDTH - 15, 44)];
+        _addSceneBtn = [[UIButton alloc] initWithFrame:CGRectMake(34, 0, SCREEN_WIDTH - 44, 44)];
         [_addSceneBtn setTitle:NSLocalizedString(@"onScene", nil) forState:(UIControlStateNormal)];
         [_addSceneBtn setTitleColor:[UIColor colorWithHexString:blackFont alpha:1] forState:(UIControlStateNormal)];
         _addSceneBtn.titleLabel.font = [UIFont systemFontOfSize:Font_GroupHeader];

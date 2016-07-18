@@ -43,7 +43,7 @@ static NSString *const URLBrandList = @"/scene_brands/getlist";
 - (void)networkBrandListData {
     [SVProgressHUD show];
     
-    self.selfBrandListRequest = [FBAPI getWithUrlString:URLBrandList requestDictionary:@{@"page":@"1", @"size":@"100", @"sort":@"1", @"self_run":@"1"} delegate:self];
+    self.selfBrandListRequest = [FBAPI getWithUrlString:URLBrandList requestDictionary:@{@"page":@"1", @"size":@"100000", @"self_run":@"1"} delegate:self];
     [self.selfBrandListRequest startRequestSuccess:^(FBRequest *request, id result) {
         NSArray * selfBrandListArr = [[result valueForKey:@"data"] valueForKey:@"rows"];
         for (NSDictionary * selfBrandDict in selfBrandListArr) {
@@ -56,7 +56,7 @@ static NSString *const URLBrandList = @"/scene_brands/getlist";
         NSLog(@"%@",error);
     }];
     
-    self.brandListRequest = [FBAPI getWithUrlString:URLBrandList requestDictionary:@{@"page":@"1", @"size":@"100", @"sort":@"1"} delegate:self];
+    self.brandListRequest = [FBAPI getWithUrlString:URLBrandList requestDictionary:@{@"page":@"1", @"size":@"100000", @"sort":@"1"} delegate:self];
     [self.brandListRequest startRequestSuccess:^(FBRequest *request, id result) {
         NSArray * brandListArr = [[result valueForKey:@"data"] valueForKey:@"rows"];
         for (NSDictionary * brandDict in brandListArr) {
@@ -99,7 +99,7 @@ static NSString *const URLBrandList = @"/scene_brands/getlist";
 #pragma mark - 自营商品列表
 - (FBBrandGoodsView *)seleBrandView {
     if (!_seleBrandView) {
-        _seleBrandView = [[FBBrandGoodsView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_WIDTH * 0.61 + 50)];
+        _seleBrandView = [[FBBrandGoodsView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_WIDTH * 0.65 + 50)];
         _seleBrandView.nav = self.navigationController;
     }
     return _seleBrandView;
