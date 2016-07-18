@@ -47,7 +47,6 @@
     self.msgTF.leftViewMode = UITextFieldViewModeAlways;
     //通知
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyBoardWillChangeFrame:) name:UIKeyboardWillChangeFrameNotification object:nil];
-    
 }
 
 -(void)dealloc{
@@ -62,12 +61,13 @@
     if (self.messages.count == 0) {
         
     }else{
-        __block float heights = 0;
-        [self.messages enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
-            AXModel *message = obj;
-            heights += message.cellHeight;
-        }];
-        [self.myTableVuew setContentOffset:CGPointMake(0, heights) animated:NO];
+//        __block float heights = 0;
+//        [self.messages enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+//            AXModel *message = obj;
+//            heights += message.cellHeight;
+//        }];
+//        [self.myTableVuew setContentOffset:CGPointMake(0, heights) animated:NO];
+        [self.myTableVuew setContentOffset:CGPointMake(0, self.messages.count*200) animated:NO];
     }
     [UIView animateWithDuration:time animations:^{
         [self.view layoutIfNeeded];
@@ -105,12 +105,7 @@
         if (self.messages.count == 0) {
            
         }else{
-            __block float heights = 0;
-            [self.messages enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
-                AXModel *message = obj;
-                heights += message.cellHeight;
-            }];
-            [self.myTableVuew setContentOffset:CGPointMake(0, heights) animated:NO];
+            [self.myTableVuew setContentOffset:CGPointMake(0, self.messages.count*200) animated:NO];
         }
         [self.myTableVuew reloadData];
         
@@ -166,12 +161,6 @@
                                                                                                } delegate:self];
     [request startRequestSuccess:^(FBRequest *request, id result) {
         [self networkRequestData];
-        __block float heights = 0;
-        [self.messages enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
-            AXModel *message = obj;
-            heights += message.cellHeight;
-        }];
-        [self.myTableVuew setContentOffset:CGPointMake(0, heights) animated:NO];
     } failure:^(FBRequest *request, NSError *error) {
         [SVProgressHUD showErrorWithStatus:error.localizedDescription];
     }];
