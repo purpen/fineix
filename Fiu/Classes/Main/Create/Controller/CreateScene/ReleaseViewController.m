@@ -13,6 +13,7 @@
 
 static NSString *const URLReleaseScenen = @"/scene_sight/save";
 static NSString *const URLReleaseFiuScenen = @"/scene_scene/save";
+static NSString *const URLGetUserDesTags = @"/gateway/fetch_chinese_word";
 
 @interface ReleaseViewController ()
 
@@ -62,6 +63,16 @@ static NSString *const URLReleaseFiuScenen = @"/scene_scene/save";
 }
 
 #pragma mark - 网络请求
+#pragma mark 获取用户填写描述的标签
+- (void)networkGetUserDesTags:(NSString *)title withDes:(NSString *)des {
+    self.getUserDesTagsRequest = [FBAPI postWithUrlString:URLGetUserDesTags requestDictionary:@{@"title":title, @"content":des} delegate:self];
+    [self.getUserDesTagsRequest startRequestSuccess:^(FBRequest *request, id result) {
+        NSLog(@"＝＝＝＝＝＝＝ 获取的标签%@", result);
+    } failure:^(FBRequest *request, NSError *error) {
+        NSLog(@"%@", error);
+    }];
+}
+
 #pragma mark 发布场景
 - (void)networkNewSceneData {
     NSString * title = [self.scenceView.title.text stringByReplacingOccurrencesOfString:@" " withString:@""];
@@ -218,6 +229,7 @@ static NSString *const URLReleaseFiuScenen = @"/scene_scene/save";
                 self.lat = self.locationArr[1];
             }
         }
+        
         if (self.fSceneId.length > 0) {
             _addView.addSceneBtn.userInteractionEnabled = NO;
             [_addView changeSceneFrame:self.fSceneTitle];
