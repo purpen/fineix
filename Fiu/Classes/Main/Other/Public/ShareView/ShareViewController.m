@@ -16,13 +16,16 @@
 #import "SVProgressHUD.h"
 
 @interface ShareViewController ()
-
+{
+    BOOL _flag;
+}
 @end
 
 @implementation ShareViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    _flag = NO;
     // Do any additional setup after loading the view from its nib.
     self.view.backgroundColor = [UIColor colorWithHexString:@"#000000" alpha:0.3];
     
@@ -56,6 +59,43 @@
 }
 
 
+- (IBAction)weChatBtn:(UIButton *)sender {
+    [[UMSocialDataService defaultDataService]  postSNSWithTypes:@[UMShareToWechatSession] content:self.content image:self.image location:nil urlResource:nil presentedController:self completion:^(UMSocialResponseEntity *response){
+        if (response.responseCode == UMSResponseCodeSuccess) {
+            if ([self.shareDelegate respondsToSelector:@selector(afterShare)]) {
+                [self.shareDelegate afterShare];
+            }
+        }
+    }];
+}
+
+- (IBAction)timeLineBtn:(UIButton *)sender {
+    [[UMSocialDataService defaultDataService]  postSNSWithTypes:@[UMShareToWechatTimeline] content:self.content image:self.image location:nil urlResource:nil presentedController:self completion:^(UMSocialResponseEntity *response){
+        if (response.responseCode == UMSResponseCodeSuccess) {
+            if ([self.shareDelegate respondsToSelector:@selector(afterShare)]) {
+                [self.shareDelegate afterShare];
+            }
+        }
+    }];
+}
+- (IBAction)sinaBtn:(UIButton *)sender {
+    [[UMSocialDataService defaultDataService]  postSNSWithTypes:@[UMShareToSina] content:self.content image:self.image location:nil urlResource:nil presentedController:self completion:^(UMSocialResponseEntity *response){
+        if (response.responseCode == UMSResponseCodeSuccess) {
+            if ([self.shareDelegate respondsToSelector:@selector(afterShare)]) {
+                [self.shareDelegate afterShare];
+            }
+        }
+    }];
+}
+- (IBAction)qqBtn:(UIButton *)sender {
+    [[UMSocialDataService defaultDataService]  postSNSWithTypes:@[UMShareToQQ] content:self.content image:self.image location:nil urlResource:nil presentedController:self completion:^(UMSocialResponseEntity *response){
+        if (response.responseCode == UMSResponseCodeSuccess) {
+            if ([self.shareDelegate respondsToSelector:@selector(afterShare)]) {
+                [self.shareDelegate afterShare];
+            }
+        }
+    }];
+}
 
 - (void)cancelBtnClick {
     [self dismissViewControllerAnimated:YES completion:nil];
@@ -66,14 +106,5 @@
     // Dispose of any resources that can be recreated.
 }
 
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
 
 @end

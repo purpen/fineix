@@ -7,7 +7,18 @@
 //
 
 #import <UIKit/UIKit.h>
-@class UMSocialSnsData;
+#import "UMSocial.h"
+#import "WXApi.h"
+#import "WeiboSDK.h"
+#import <TencentOpenAPI/QQApiInterface.h>
+#import <SVProgressHUD/SVProgressHUD.h>
+
+@protocol ShareViewControllerDelegate <NSObject>
+
+-(void)afterShare;
+
+@end
+
 
 @interface ShareViewController : UIViewController
 
@@ -21,5 +32,12 @@
 @property (weak, nonatomic) IBOutlet UIView *qqView;
 @property (weak, nonatomic) IBOutlet UIButton *cancelBtn;
 @property (weak, nonatomic) IBOutlet UIButton *otherBtn;
+/** 分享语 */
+@property (nonatomic, strong) NSString *content;
+/** 分享图片 */
+@property (nonatomic, strong) UIImage *image;
+
+/**  */
+@property (nonatomic, weak) id<ShareViewControllerDelegate> shareDelegate;
 
 @end

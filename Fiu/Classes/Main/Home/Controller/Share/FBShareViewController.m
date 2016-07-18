@@ -29,7 +29,6 @@ static NSString *const URLGiveExp = @"/user/send_exp";
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
-    
 }
 
 - (void)viewDidLoad {
@@ -273,7 +272,10 @@ static NSString *const URLGiveExp = @"/user/send_exp";
     [self.shareVC.friendBtn addTarget:self action:@selector(timelineShareBtnAction) forControlEvents:(UIControlEventTouchUpInside)];
     [self.shareVC.weiBoBtn addTarget:self action:@selector(sinaShareBtnAction) forControlEvents:(UIControlEventTouchUpInside)];
     [self.shareVC.qqBtn addTarget:self action:@selector(qqShareBtnAction) forControlEvents:(UIControlEventTouchUpInside)];
-    
+}
+
+-(void)afterShare{
+    [self networkGiveExp];
 }
 
 -(void)wechatShareBtnAction {

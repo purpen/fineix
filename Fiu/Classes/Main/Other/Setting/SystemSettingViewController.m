@@ -27,7 +27,7 @@
 #import <TencentOpenAPI/QQApiInterface.h>
 #import "UITabBar+badge.h"
 
-@interface SystemSettingViewController ()<FBNavigationBarItemsDelegate,NotificationDelege,FBRequestDelegate,UMSocialUIDelegate>
+@interface SystemSettingViewController ()<FBNavigationBarItemsDelegate,NotificationDelege,FBRequestDelegate,UMSocialUIDelegate,ShareViewControllerDelegate>
 
 @property (weak, nonatomic) IBOutlet UILabel *pushStateLabel;
 @property (weak, nonatomic) IBOutlet UIButton *backBtn;
@@ -168,51 +168,12 @@ static NSString *const logOut = @"/auth/logout";
     self.shareVC.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;
     self.shareVC.modalPresentationStyle = UIModalPresentationOverCurrentContext;
     [self presentViewController:_shareVC animated:YES completion:nil];
-    //给每一个分享按钮添加点击事件
-    [_shareVC.wechatBtn addTarget:self action:@selector(wechatShareBtnAction:) forControlEvents:UIControlEventTouchUpInside];
-    [_shareVC.friendBtn addTarget:self action:@selector(timelineShareBtnAction:) forControlEvents:UIControlEventTouchUpInside];
-    [_shareVC.qqBtn addTarget:self action:@selector(qqShareBtnAction:) forControlEvents:UIControlEventTouchUpInside];
-    [_shareVC.weiBoBtn addTarget:self action:@selector(sinaShareBtnAction:) forControlEvents:UIControlEventTouchUpInside];
-    [_shareVC.cancelBtn addTarget:self action:@selector(cancleBtnAction:) forControlEvents:UIControlEventTouchUpInside];
+    self.shareVC.shareDelegate = self;
+    self.shareVC.content = @"我在Fiu浮游寻找同路人；希望和你一起用文字来记录内心情绪，用滤镜来表达情感色彩，用分享去变现原创价值；带你发现美学科技的力量和感性生活的温度！来吧，一起Fiu >>> http://m.taihuoniao.com/guide/fiu";
 }
 
-
--(void)wechatShareBtnAction:(UIButton*)sender{
-    UMSocialConfig *h = [[UMSocialConfig alloc] init];
-    h.hiddenStatusTip = YES;
-    [[UMSocialDataService defaultDataService]  postSNSWithTypes:@[UMShareToWechatSession] content:@"我在Fiu浮游寻找同路人；希望和你一起用文字来记录内心情绪，用滤镜来表达情感色彩，用分享去变现原创价值；带你发现美学科技的力量和感性生活的温度！来吧，一起Fiu >>> http://m.taihuoniao.com/guide/fiu" image:nil location:nil urlResource:nil presentedController:self completion:^(UMSocialResponseEntity *response){
-        if (response.responseCode == UMSResponseCodeSuccess) {
-            [SVProgressHUD showSuccessWithStatus:@"让分享变成生产力，别让生活偷走远方的精彩"];            
-        }
-    }];
-}
-
--(void)timelineShareBtnAction:(UIButton*)sender{
-    UMSocialConfig *h = [[UMSocialConfig alloc] init];
-    h.hiddenStatusTip = YES;
-    [UMSocialData defaultData].extConfig.wechatTimelineData.url = ShareURL;
-    [[UMSocialDataService defaultDataService]  postSNSWithTypes:@[UMShareToWechatTimeline] content:@"我在Fiu浮游寻找同路人；希望和你一起用文字来记录内心情绪，用滤镜来表达情感色彩，用分享去变现原创价值；带你发现美学科技的力量和感性生活的温度！来吧，一起Fiu >>> http://m.taihuoniao.com/guide/fiu" image:nil location:nil urlResource:nil presentedController:self completion:^(UMSocialResponseEntity *response){
-        if (response.responseCode == UMSResponseCodeSuccess) {
-            [SVProgressHUD showSuccessWithStatus:@"让分享变成生产力，别让生活偷走远方的精彩"];
-        }
-    }];
-}
-
--(void)qqShareBtnAction:(UIButton*)sender{
-    [UMSocialData defaultData].extConfig.qqData.url = ShareURL;
-    [[UMSocialDataService defaultDataService]  postSNSWithTypes:@[UMShareToQQ] content:@"我在Fiu浮游寻找同路人；希望和你一起用文字来记录内心情绪，用滤镜来表达情感色彩，用分享去变现原创价值；带你发现美学科技的力量和感性生活的温度！来吧，一起Fiu >>> http://m.taihuoniao.com/guide/fiu" image:nil location:nil urlResource:nil presentedController:self completion:^(UMSocialResponseEntity *response){
-        if (response.responseCode == UMSResponseCodeSuccess) {
-            [SVProgressHUD showSuccessWithStatus:@"让分享变成生产力，别让生活偷走远方的精彩"];
-        }
-    }];
-}
-
--(void)sinaShareBtnAction:(UIButton*)sender{
-    [[UMSocialDataService defaultDataService]  postSNSWithTypes:@[UMShareToSina] content:@"我在Fiu浮游寻找同路人；希望和你一起用文字来记录内心情绪，用滤镜来表达情感色彩，用分享去变现原创价值；带你发现美学科技的力量和感性生活的温度！来吧，一起Fiu >>> http://m.taihuoniao.com/guide/fiu" image:nil location:nil urlResource:nil presentedController:self completion:^(UMSocialResponseEntity *response){
-        if (response.responseCode == UMSResponseCodeSuccess) {
-            [SVProgressHUD showSuccessWithStatus:@"让分享变成生产力，别让生活偷走远方的精彩"];
-        }
-    }];
+-(void)afterShare{
+    [SVProgressHUD showSuccessWithStatus:@"让分享变成生产力，别让生活偷走远方的精彩"];
 }
 
 -(void)cancleBtnAction:(UIButton*)sender{
