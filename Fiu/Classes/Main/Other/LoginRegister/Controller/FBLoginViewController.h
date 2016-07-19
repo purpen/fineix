@@ -9,7 +9,5 @@
 #import <UIKit/UIKit.h>
 
 @interface FBLoginViewController : UIViewController
-@property (weak, nonatomic) IBOutlet UIButton *phoneNumTFBtn;
-- (IBAction)clickPhoneNumTF:(UIButton *)sender;
 
 @end

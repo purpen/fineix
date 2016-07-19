@@ -32,10 +32,25 @@
 {
     SignupView *_signupView;
 }
-@property (weak, nonatomic) IBOutlet UIView *topView;//微信等按钮的view
-@property (weak, nonatomic) IBOutlet UIButton *weChatBtn;
-@property (weak, nonatomic) IBOutlet UIButton *weiBoBtn;
+@property (nonatomic, assign) BOOL isPopup;
 @property (weak, nonatomic) IBOutlet UIButton *qqBtn;
+@property (weak, nonatomic) IBOutlet UIButton *wechatBtn;
+@property (weak, nonatomic) IBOutlet UIButton *weiboBtn;
+@property (weak, nonatomic) IBOutlet UITextField *accountField;
+@property (weak, nonatomic) IBOutlet UIView *subBottomView;
+@property (weak, nonatomic) IBOutlet UITextField *verfyCodeField;
+@property (weak, nonatomic) IBOutlet UIView *topView;
+@property (weak, nonatomic) IBOutlet UILabel *thirdPartyTitleLbl;
+
+@property (weak, nonatomic) IBOutlet UIButton *sendBtn;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *bottomView_top;
+@property (weak, nonatomic) IBOutlet UITextField *passwordField;
+
+@property (weak, nonatomic) IBOutlet UIView *bottomView;
+
+@property (weak, nonatomic) IBOutlet UIView *fetchCodeView;
+
+@property (weak, nonatomic) IBOutlet UIView *submitButton;
 
 @end
 static NSString *const RegisterCodeURL = @"/auth/register";//手机号注册
@@ -48,72 +63,55 @@ NSString *const LoginURL = @"/auth/login";//登录接口
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-    _topView.hidden = NO;
-    //隐藏的view
-    _signupView = [SignupView getSignupView];
-    _signupView.frame = CGRectMake(0, 0, SCREEN_WIDTH, 244/667.0*SCREEN_HEIGHT);
-    CGRect frame = _signupView.frame;
-    _signupView.hidden = YES;
-    frame.origin.y = 117.0/667.0*SCREEN_HEIGHT;
-    _signupView.frame = frame;
-    [self.view addSubview:_signupView];
-    _signupView.phoneNumTF.delegate = self;
-    //给注册连接方法
-    [_signupView.signupBtn addTarget:self action:@selector(clicksignupBtn:) forControlEvents:UIControlEventTouchUpInside];
-    [_signupView.sendVerificationBtn addTarget:self action:@selector(clikSendVerBtn:) forControlEvents:UIControlEventTouchUpInside];
-    //
-    _signupView.toResendV.hidden = YES;
-    //
-    self.weChatBtn.layer.masksToBounds = YES;
-    self.weChatBtn.layer.cornerRadius = 3;
-    self.weiBoBtn.layer.masksToBounds = YES;
-    self.weiBoBtn.layer.cornerRadius = 3;
+    
+    self.accountField.delegate = self;
+    self.accountField.keyboardAppearance = UIKeyboardAppearanceLight;
+    self.accountField.keyboardType = UIKeyboardTypeASCIICapable;
+    self.accountField.returnKeyType = UIReturnKeyNext;
+    self.accountField.clearButtonMode = UITextFieldViewModeWhileEditing;
+    
+    self.verfyCodeField.delegate = self;
+    self.verfyCodeField.keyboardAppearance = UIKeyboardAppearanceLight;
+    self.verfyCodeField.keyboardType = UIKeyboardTypeNumberPad;
+    self.verfyCodeField.returnKeyType = UIReturnKeyNext;
+    
+    self.passwordField.delegate = self;
+    self.passwordField.keyboardAppearance = UIKeyboardAppearanceLight;
+    self.passwordField.keyboardType = UIKeyboardTypeASCIICapable;
+    self.passwordField.returnKeyType = UIReturnKeyGo;
+    self.passwordField.clearButtonMode = UITextFieldViewModeWhileEditing;
+    self.passwordField.secureTextEntry = YES;
+    
+    self.wechatBtn.layer.cornerRadius  = 2;
+    self.wechatBtn.layer.masksToBounds = YES;
+    self.weiboBtn.layer.cornerRadius  = 2;
+    self.weiboBtn.layer.masksToBounds = YES;
+    self.qqBtn.layer.cornerRadius  = 2;
     self.qqBtn.layer.masksToBounds = YES;
-    self.qqBtn.layer.cornerRadius = 3;
+    self.submitButton.layer.cornerRadius  = 2;
+    self.submitButton.layer.masksToBounds = YES;
     
     [self judge];
 }
 
-#pragma mark -判断手机是否安装了相应的客户端
--(void)judge{
-    if ([WXApi isWXAppInstalled] == NO) {
-        self.weChatBtn.hidden = YES;
-    }else{
-        self.weChatBtn.hidden = NO;
-    }
+- (IBAction)sendVerBtn:(UIButton *)sender {
+    //    //如果手机号正确，发送短信
+    //    NSDictionary *params = @{
+    //                             @"mobile":_signupView.phoneNumTF.text
+    //                             };
+    //    FBRequest *request = [FBAPI postWithUrlString:VerifyCodeURL requestDictionary:params delegate:self];
+    //    request.flag = VerifyCodeURL;
+    //    [request startRequest];
     
-    if ([WeiboSDK isWeiboAppInstalled] == NO) {
-        self.weiBoBtn.hidden = YES;
-    }else{
-        self.weiBoBtn.hidden = NO;
-    }
-    
-    if ([QQApiInterface isQQInstalled] == NO) {
-        self.qqBtn.hidden = YES;
-    }else{
-        self.qqBtn.hidden = NO;
-    }
-}
-
-//点击发送验证码，判断手机号如果手机号正确发送验证码，并且重新发送view出现，并且开始跳字
--(void)clikSendVerBtn:(UIButton*)sender{
-//    //如果手机号正确，发送短信
-//    NSDictionary *params = @{
-//                             @"mobile":_signupView.phoneNumTF.text
-//                             };
-//    FBRequest *request = [FBAPI postWithUrlString:VerifyCodeURL requestDictionary:params delegate:self];
-//    request.flag = VerifyCodeURL;
-//    [request startRequest];
-
-    if ([_signupView.phoneNumTF.text checkTel]) {
-
-        FBRequest *request1 = [FBAPI postWithUrlString:@"/auth/check_account" requestDictionary:@{@"account":_signupView.phoneNumTF.text} delegate:self];
+    if ([_accountField.text checkTel]) {
+        
+        FBRequest *request1 = [FBAPI postWithUrlString:@"/auth/check_account" requestDictionary:@{@"account":_accountField.text} delegate:self];
         
         [request1 startRequestSuccess:^(FBRequest *request, id result) {
             if ([result objectForKey:@"success"]) {
                 //如果手机号正确，发送短信
                 NSDictionary *params = @{
-                                         @"mobile":_signupView.phoneNumTF.text
+                                         @"mobile":_accountField.text
                                          };
                 FBRequest *request = [FBAPI postWithUrlString:VerifyCodeURL requestDictionary:params delegate:self];
                 request.flag = VerifyCodeURL;
@@ -130,8 +128,50 @@ NSString *const LoginURL = @"/auth/login";//登录接口
     }else{
         [SVProgressHUD showErrorWithStatus:@"手机号不正确"];
     }
-    
 }
+
+- (IBAction)signupBtn:(UIButton *)sender {
+    if (![_accountField.text checkTel]) {
+        [SVProgressHUD showInfoWithStatus:NSLocalizedString(@"enterCorrectPhoneNumber", nil)];
+        return;
+    }
+    if (!_verfyCodeField.text.length) {
+        [SVProgressHUD showInfoWithStatus:NSLocalizedString(@"enterVerificationCode", nil)];
+        return;
+    }
+    if (_passwordField.text.length < 6) {
+        [SVProgressHUD showInfoWithStatus:@"密码不得少于6位"];
+        return;
+    }
+    NSDictionary *params = @{
+                             @"mobile": _accountField.text,
+                             @"password": _passwordField.text,
+                             @"verify_code": _verfyCodeField.text,
+                             @"from_to" : @1
+                             };
+    FBRequest *request = [FBAPI postWithUrlString:RegisterCodeURL requestDictionary:params delegate:self];
+    request.flag = RegisterCodeURL;
+    [request startRequest];
+    [SVProgressHUD showWithMaskType:SVProgressHUDMaskTypeClear];
+}
+
+#pragma mark -判断手机是否安装了相应的客户端
+-(void)judge{
+    //隐藏未安装的第三方登录平台
+    if (![WXApi isWXAppInstalled] && ![WeiboSDK isWeiboAppInstalled] && ![QQApiInterface isQQInstalled]) {
+        self.thirdPartyTitleLbl.hidden = true;
+    }
+    if ([WXApi isWXAppInstalled] == FALSE) {
+        self.wechatBtn.hidden = true;
+    }
+    if ([WeiboSDK isWeiboAppInstalled] == FALSE) {
+        self.weiboBtn.hidden = true;
+    }
+    if ([QQApiInterface isQQInstalled] == FALSE) {
+        self.qqBtn.hidden = true;
+    }
+}
+
 
 //开始倒计时准备重新发送
 -(void)startTime{
@@ -161,24 +201,23 @@ NSString *const LoginURL = @"/auth/login";//登录接口
         }
     });
     dispatch_resume(_timer);
-    
-    
 }
 
-//点击手机号注册
-- (IBAction)clickPhoneNumTF:(UIButton *)sender {
-    [UIView animateWithDuration:0.5 animations:^{
-        self.topView.hidden = YES;
-        CGRect frame = _signupView.frame;
-        frame.origin.y = 117.0/667.0*SCREEN_HEIGHT;
-        _signupView.frame = frame;
-        _signupView.hidden = NO;
-    } completion:^(BOOL finished) {
-        //成为第一响应者
-        [_signupView.phoneNumTF becomeFirstResponder];
-    }];
-    
+#pragma mark - UITextField Delegate
+- (BOOL)textFieldShouldBeginEditing:(UITextField *)textField
+{
+    if (!self.isPopup) {
+        [UIView animateWithDuration:0.3 animations:^{
+            self.bottomView_top.constant = -230;
+            [self.view layoutIfNeeded];
+            self.topView.alpha = 0;
+            self.subBottomView.alpha = 1;
+        }];
+        self.isPopup = true;
+    }
+    return YES;
 }
+
 
 //键盘收回
 -(BOOL)textFieldShouldReturn:(UITextField *)textField{
@@ -232,7 +271,7 @@ NSString *const LoginURL = @"/auth/login";//登录接口
             UIStoryboard *loginStory = [UIStoryboard storyboardWithName:@"LoginRegisterController" bundle:nil];
             FBLoginViewController *loginVC = [loginStory instantiateViewControllerWithIdentifier:@"FBLoginViewController"];
             //手机号登录按钮选中
-            [loginVC clickPhoneNumTF:loginVC.phoneNumTFBtn];
+//            [loginVC clickPhoneNumTF:loginVC.phoneNumTFBtn];
             [self.navigationController pushViewController:loginVC animated:YES];
         } else {
             NSString * message = result[@"message"];
@@ -248,11 +287,7 @@ NSString *const LoginURL = @"/auth/login";//登录接口
             [SVProgressHUD showInfoWithStatus:message];
         }
     }
-
-    
-    
 }
-
 
 
 //第三方注册
@@ -373,116 +408,10 @@ NSString *const LoginURL = @"/auth/login";//登录接口
 }
 
 
-//#pragma mark -第三方登录成功后取到用户信息
-////如果成功，进行关联，并且更新当前用户信息
-//-(void)afterTheSuccessOfTheThirdPartyToRegisterToGetUserInformation:(UMSocialAccountEntity *)snsAccount type:(NSNumber *)type{
-//    [SVProgressHUD showWithMaskType:SVProgressHUDMaskTypeClear];
-//    //发送注册请求
-//    NSDictionary *params = @{
-//                             @"oid":snsAccount.usid,
-//                             @"access_token":snsAccount.accessToken,
-//                             @"type":type,
-//                             @"from_to":@1
-//                             };
-//    FBRequest *request = [FBAPI postWithUrlString:thirdRegister requestDictionary:params delegate:self];
-//    [request startRequestSuccess:^(FBRequest *request, id result) {
-//        //如果请求成功
-//        NSDictionary *dataDic = [result objectForKey:@"data"];
-//        if ([[dataDic objectForKey:@"has_user"] isEqualToNumber:@1]) {
-//            //用户存在，更新当前用户的信息
-//            UserInfo *userinfo = [UserInfo mj_objectWithKeyValues:[dataDic objectForKey:@"user"]];
-//            [userinfo saveOrUpdate];
-//            [userinfo updateUserInfoEntity];
-//            
-//            UserInfoEntity *entity = [UserInfoEntity defaultUserInfoEntity];
-//            entity.isLogin = YES;
-//            
-//            
-//            [SVProgressHUD showSuccessWithStatus:@"认证成功"];
-//            NSNumber *str = dataDic[@"user"][@"identify"][@"is_scene_subscribe"];
-//            if ([str isEqualToNumber:@0]) {
-//                //跳转到推荐界面
-//                SubscribeInterestedCollectionViewController *subscribeVC = [[SubscribeInterestedCollectionViewController alloc] init];
-//                [self.navigationController pushViewController:subscribeVC animated:YES];
-//            }else{
-//                //已经订阅过，直接个人中心
-//                //跳回个人主页
-//                //跳回个人主页
-//                [self dismissViewControllerAnimated:YES completion:nil];
-//            }
-//            
-//            
-//        }else{
-//            //如果用户不存在,提示用户是否进行绑定
-//            
-//            UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"是否进行用户绑定" message:nil preferredStyle:UIAlertControllerStyleAlert];
-//            UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:^(UIAlertAction *action) {
-//                NSLog(@"The \"Okay/Cancel\" alert's cancel action occured.");
-//                //发送请求来存储用户信息
-//                NSDictionary *params;
-//                if ([type isEqualToNumber:@1]) {
-//                    //如果是微信需要snsAccount.unionId
-//                    params = @{
-//                               @"third_source":type,
-//                               @"oid":snsAccount.usid,
-//                               @"union_id":snsAccount.unionId,
-//                               @"access_token":snsAccount.accessToken,
-//                               @"nickname":snsAccount.userName,
-//                               @"avatar_url":snsAccount.iconURL,
-//                               @"from_to":@1
-//                               };
-//                    
-//                }
-//                //如果不是微信不需要snsAccount.unionId
-//                else{
-//                    params = @{
-//                               @"third_source":type,
-//                               @"oid":snsAccount.usid,
-//                               //@"union_id":snsAccount.unionId,
-//                               @"access_token":snsAccount.accessToken,
-//                               @"nickname":snsAccount.userName,
-//                               @"avatar_url":snsAccount.iconURL,
-//                               @"from_to":@1
-//                               };
-//                    
-//                }
-//                FBRequest *request = [FBAPI postWithUrlString:thirdRegisteredNotBinding requestDictionary:params delegate:self];
-//                [request startRequestSuccess:^(FBRequest *request, id result) {
-//                    //如果请求成功，并获取用户信息来更新当前用户信息
-//                    NSDictionary *dataDic = [result objectForKey:@"data"];
-//                    UserInfo *info = [UserInfo mj_objectWithKeyValues:dataDic];
-//                    [info saveOrUpdate];
-//                    [info updateUserInfoEntity];
-//                    UserInfoEntity *entity = [UserInfoEntity defaultUserInfoEntity];
-//                    entity.isLogin = YES;
-//                    [SVProgressHUD showSuccessWithStatus:NSLocalizedString(@"registeredSuccessfully", nil)];
-//                    //跳转到推荐界面
-//                    SubscribeInterestedCollectionViewController *subscribeVC = [[SubscribeInterestedCollectionViewController alloc] init];
-//                    [self.navigationController pushViewController:subscribeVC animated:YES];
-//                } failure:^(FBRequest *request, NSError *error) {
-//                    //如果请求失败提示失败信息
-//                    [SVProgressHUD showErrorWithStatus:error.localizedDescription];
-//                }];
-//                
-//            }];
-//            UIAlertAction *otherAction = [UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
-//                //跳转到绑定手机号界面
-//                BindIngViewController *bing = [[BindIngViewController alloc] init];
-//                bing.snsAccount = snsAccount;
-//                bing.type = type;
-//                [self.navigationController pushViewController:bing animated:YES];
-//            }];
-//            [alertController addAction:cancelAction];
-//            [alertController addAction:otherAction];
-//            
-//            [self presentViewController:alertController animated:YES completion:nil];
-//        }
-//    } failure:^(FBRequest *request, NSError *error) {
-//        //如果请求失败，提示错误信息
-//        [SVProgressHUD showErrorWithStatus:[error localizedDescription]];
-//    }];
-//    
-//}
+-(void)viewWillDisappear:(BOOL)animated{
+    [super viewWillDisappear:animated];
+    [self.view endEditing:true];
+}
 
 //取消按钮,返回首页
 - (IBAction)cancelBtn:(UIButton *)sender {
@@ -491,25 +420,18 @@ NSString *const LoginURL = @"/auth/login";//登录接口
 
 //返回按钮
 - (IBAction)backBtn:(UIButton *)sender {
-    
-    //如果topView消失，让他出现,另一个view消失
-    if (self.topView.hidden == YES) {
-        [UIView animateWithDuration:0.5 animations:^{
-            CGRect frame = _signupView.frame;
-            frame.origin.y = 117.0/667.0*SCREEN_HEIGHT;
-            _signupView.frame = frame;
-            _signupView.hidden = YES;
-        } completion:^(BOOL finished) {
-            self.topView.hidden = NO;
-            [self.view endEditing:YES];
+    if (self.isPopup) {
+        [self.accountField resignFirstResponder];
+        [UIView animateWithDuration:0.3 animations:^{
+            self.bottomView_top.constant = 0;
+            [self.view layoutIfNeeded];
+            self.topView.alpha = 1;
+            self.subBottomView.alpha = 0;
         }];
-        
-        
-    }//如果topview没有消失，返回
-    else{
-        [self.navigationController popViewControllerAnimated:YES];
+        self.isPopup = false;
+        return;
     }
-    
+    [self.navigationController popViewControllerAnimated:YES];
 }
 
 /*

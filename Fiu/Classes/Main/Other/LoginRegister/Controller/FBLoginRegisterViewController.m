@@ -25,6 +25,8 @@
     self.tabBarController.tabBar.hidden = YES;
     self.signupBtn.layer.masksToBounds = YES;
     self.signupBtn.layer.cornerRadius = 3;
+    UIApplication *app = [UIApplication sharedApplication];
+    [app setStatusBarHidden:YES];
 }
 
 - (void)didReceiveMemoryWarning {

@@ -11,6 +11,7 @@
 #import "UserInfo.h"
 #import <SDWebImage/UIImageView+WebCache.h>
 #import "UserInfoEntity.h"
+#import "TalentView.h"
 
 @implementation FocusOnTableViewCell
 
@@ -34,6 +35,13 @@
             make.size.mas_equalTo(CGSizeMake(32/667.0*SCREEN_HEIGHT,32/667.0*SCREEN_HEIGHT));
             make.centerY.mas_equalTo(self.mas_centerY);
             make.left.mas_equalTo(self.mas_left).with.offset(15/667.0*SCREEN_HEIGHT);
+        }];
+        
+        [self.contentView addSubview:self.talentView];
+        [_talentView mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.size.mas_equalTo(CGSizeMake(10/667.0*SCREEN_HEIGHT, 10/667.0*SCREEN_HEIGHT));
+            make.right.mas_equalTo(_headImageView.mas_right).offset(0);
+            make.bottom.mas_equalTo(_headImageView.mas_bottom).offset(0);
         }];
         
         [self.contentView addSubview:self.focusOnBtn];
@@ -68,6 +76,14 @@
     return self;
 }
 
+-(TalentView *)talentView{
+    if (!_talentView) {
+        _talentView = [TalentView getTalentView];
+        _talentView.hidden = YES;
+    }
+    return _talentView;
+}
+
 -(UIView *)lineView{
     if (!_lineView) {
         _lineView = [[UIView alloc] init];
@@ -82,10 +98,6 @@
     if ([type isEqualToNumber:@1]) {
         if ([entity.userId intValue] == [model.userId intValue]) {
             self.focusOnBtn.hidden = YES;
-            if (model.is_love == 1) {
-            }else if (model.is_love == 2 ){
-                self.focusOnBtn.selected = YES;
-            }
         }else{
             self.focusOnBtn.hidden = NO;
             if ([model.level isEqualToNumber:@1]) {
@@ -106,23 +118,18 @@
                 self.focusOnBtn.selected = NO;
             }
         }
-
     }
-    
     [self.headImageView sd_setImageWithURL:[NSURL URLWithString:model.mediumAvatarUrl] placeholderImage:[UIImage imageNamed:@"default_head"]];
     self.nickNameLabel.text = model.nickname;
-    if ([entity.userId isEqual:model.userId]) {
-        if (model.summary.length == 0) {
-            self.summaryLabel.text = @"";
-        }else{
-            self.summaryLabel.text = model.summary;
-        }
+    if (model.summary.length == 0) {
+        self.summaryLabel.text = @"";
     }else{
-        if (model.summary.length == 0) {
-            self.summaryLabel.text = @"";
-        }else{
-            self.summaryLabel.text = model.summary;
-        }
+        self.summaryLabel.text = model.summary;
+    }
+    NSString *str = [NSString stringWithFormat:@"%@ | %@",model.expert_label,model.expert_info];
+    if ([model.is_expert integerValue] == 1) {
+        self.summaryLabel.text = str;
+        self.talentView.hidden = NO;
     }
 }
 
