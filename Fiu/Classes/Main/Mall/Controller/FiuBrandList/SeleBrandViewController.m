@@ -50,7 +50,6 @@ static NSString *const URLBrandList = @"/scene_brands/getlist";
     }];
 }
 
-
 #pragma mark - 自营商品列表
 - (UICollectionView *)selfBrandList {
     if (!_selfBrandList) {

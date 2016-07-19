@@ -313,7 +313,7 @@ static NSString *const URLDeleteScene = @"/scene_scene/delete";
         
     } else if (indexPath.section == 1) {
         if (_isHave == YES) {
-            return SCREEN_HEIGHT + 5;
+            return SCREEN_HEIGHT;
         } else {
             return 250;
         }

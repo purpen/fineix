@@ -15,7 +15,7 @@
     if (self) {
         
         self.layer.borderWidth = 0.5f;
-        self.layer.borderColor = [UIColor colorWithHexString:@"#666666" alpha:.5].CGColor;
+        self.layer.borderColor = [UIColor colorWithHexString:@"#666666" alpha:.3].CGColor;
         
         [self addSubview:self.brandImg];
         

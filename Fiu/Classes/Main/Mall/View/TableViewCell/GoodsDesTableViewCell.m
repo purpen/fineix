@@ -30,7 +30,7 @@
 - (void)getContentCellHeight:(NSString *)content {
     self.desContent.text = content;
     CGSize size = [self.desContent boundingRectWithSize:CGSizeMake(SCREEN_WIDTH - 30, 0)];
-    self.cellHeight = size.height + 78;
+    self.cellHeight = size.height + 68;
 }
 
 #pragma mark -
@@ -65,14 +65,14 @@
     CGSize size = [lable boundingRectWithSize:CGSizeMake(SCREEN_WIDTH - 30, 0)];
     
     [lable mas_updateConstraints:^(MASConstraintMaker *make) {
-        make.size.mas_equalTo(CGSizeMake(size.width , size.height + 20));
+        make.size.mas_equalTo(CGSizeMake(size.width , size.height + 10));
     }];
 }
 
 #pragma mark - 标题
 - (UILabel *)headerTitle {
     if (!_headerTitle) {
-        _headerTitle = [[UILabel alloc] initWithFrame:CGRectMake(15, 5, 200, 44)];
+        _headerTitle = [[UILabel alloc] initWithFrame:CGRectMake(15, 5, 200, 34)];
         _headerTitle.text = NSLocalizedString(@"goodsDes", nil);
         _headerTitle.textColor = [UIColor colorWithHexString:@"#333333"];
         _headerTitle.font = [UIFont systemFontOfSize:Font_GoodsTitle];

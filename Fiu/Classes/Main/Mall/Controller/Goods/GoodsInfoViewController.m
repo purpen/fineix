@@ -367,7 +367,7 @@ static NSString *const URlCancelCollect = @"/favorite/ajax_cancel_favorite";
         
     } else if (indexPath.section == 1) {
         if (self.goodsInfo.brand.coverUrl.length) {
-            return 80;
+            return 65;
         } else {
             return 0.01;
         }
@@ -389,7 +389,7 @@ static NSString *const URlCancelCollect = @"/favorite/ajax_cancel_favorite";
     
     } else if (indexPath.section == 4) {
         if (self.sceneList.count) {
-            return 95;
+            return ((SCREEN_WIDTH - 15)/2 * 1.77) + 60;
         } else {
             return 0.01;
         }

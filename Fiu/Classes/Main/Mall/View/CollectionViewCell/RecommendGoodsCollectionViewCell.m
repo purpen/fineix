@@ -67,7 +67,7 @@
         _goodsImg.clipsToBounds = YES;
         _goodsImg.layer.borderWidth = 1.0f;
         _goodsImg.layer.borderColor = [UIColor colorWithHexString:@"#F1F1F1" alpha:1].CGColor;
-        _goodsImg.backgroundColor = [UIColor colorWithHexString:@"#F1F1F1" alpha:.5];
+        _goodsImg.backgroundColor = [UIColor whiteColor];
     }
     return _goodsImg;
 }
