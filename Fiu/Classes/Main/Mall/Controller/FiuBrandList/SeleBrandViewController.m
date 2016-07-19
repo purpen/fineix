@@ -56,7 +56,7 @@ static NSString *const URLBrandList = @"/scene_brands/getlist";
     if (!_selfBrandList) {
         
         UICollectionViewFlowLayout * flowLayout = [[UICollectionViewFlowLayout alloc] init];
-        flowLayout.itemSize = CGSizeMake((SCREEN_WIDTH - 40)/2, ((SCREEN_WIDTH - 40)/2)*0.62);
+        flowLayout.itemSize = CGSizeMake((SCREEN_WIDTH - 50)/3, (SCREEN_WIDTH - 50)/3);
         flowLayout.minimumLineSpacing = 10.0f;
         flowLayout.sectionInset = UIEdgeInsetsMake(10, 15, 0, 15);
         
