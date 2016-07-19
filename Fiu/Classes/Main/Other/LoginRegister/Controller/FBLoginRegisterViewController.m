@@ -11,6 +11,7 @@
 
 @interface FBLoginRegisterViewController ()
 
+@property (weak, nonatomic) IBOutlet UIImageView *bgImageView;
 
 
 @end

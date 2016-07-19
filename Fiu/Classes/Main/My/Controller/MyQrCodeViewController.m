@@ -58,14 +58,9 @@ static NSString *const ShareURL = @"http://m.taihuoniao.com/guide/app_about";
         make.right.mas_equalTo(self.view.mas_right).with.offset(0);
         make.top.mas_equalTo(self.view.mas_top).with.offset(64);
     }];
-    
+        
     [self getImageFromView:self.view];
     self.navView.hidden = NO;
-    
-    UIImageView *logoImageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"QRLogo"]];
-    logoImageView.size = CGSizeMake(80, 80);
-    logoImageView.center = CGPointMake(_qrCodeView.qrCodeImageView.frame.size.width*0.5, _qrCodeView.qrCodeImageView.frame.size.height*0.5);
-    [_qrCodeView.qrCodeImageView addSubview:logoImageView];
 }
 
 -(void)getImageFromView:(UIView*)theView{
@@ -218,8 +213,6 @@ static NSString *const ShareURL = @"http://m.taihuoniao.com/guide/app_about";
 
 #pragma mark -扫描二维码
 -(void)scanQrCode:(UIButton*)sender{
-//    QRCodeScanViewController *scanVC = [[QRCodeScanViewController alloc] init];
-//    [self .navigationController pushViewController:scanVC animated:YES];
     [self dismissViewControllerAnimated:NO completion:nil];
     [self.navigationController popViewControllerAnimated:YES];
 }
@@ -231,15 +224,6 @@ static NSString *const ShareURL = @"http://m.taihuoniao.com/guide/app_about";
     UIImageWriteToSavedPhotosAlbum(_viewImage, self, @selector(imageSavedToPhotosAlbum:didFinishSavingWithError:contextInfo:), nil);
     
     [self dismissViewControllerAnimated:NO completion:nil];
-    
-    
-    
-//    NSData *imageViewData = UIImagePNGRepresentation(sendImage);
-//    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
-//    NSString *documentsDirectory = [paths objectAtIndex:0];
-//    NSString *pictureName= [NSString stringWithFormat:@"screenShow_%d.png",ScreenshotIndex];
-//    NSString *savedImagePath = [documentsDirectory stringByAppendingPathComponent:pictureName];
-//    NSLog(@"截屏路径打印: %@", savedImagePath);
 }
 
 -(void)imageSavedToPhotosAlbum:(UIImage*)image didFinishSavingWithError:(NSError*)error contextInfo:(void*)contextInfo{
@@ -250,14 +234,5 @@ static NSString *const ShareURL = @"http://m.taihuoniao.com/guide/app_about";
     }
 }
 
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
 
 @end
