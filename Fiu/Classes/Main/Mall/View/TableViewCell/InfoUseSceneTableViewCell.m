@@ -9,7 +9,7 @@
 #import "InfoUseSceneTableViewCell.h"
 #import "SceneInfoData.h"
 #import "SceneInfoViewController.h"
-#import "GoodsSceneCollectionViewCell.h"
+#import "SceneCollectionViewCell.h"
 
 @implementation InfoUseSceneTableViewCell
 
@@ -25,8 +25,7 @@
 }
 
 - (void)setGoodsScene:(NSMutableArray *)scene {
-    self.sceneList = [NSMutableArray arrayWithArray:[scene valueForKey:@"title"]];
-    self.sceneIds = [NSMutableArray arrayWithArray:[scene valueForKey:@"idField"]];
+    self.sceneList = scene;
     [self.useSceneRollView reloadData];
 }
 
@@ -38,7 +37,7 @@
     
     [self addSubview:self.useSceneRollView];
     
-    UILabel * botLine = [[UILabel alloc] initWithFrame:CGRectMake(0, 90, SCREEN_WIDTH, 5)];
+    UILabel * botLine = [[UILabel alloc] initWithFrame:CGRectMake(0, ((SCREEN_WIDTH - 15)/2 * 1.77) + 55, SCREEN_WIDTH, 5)];
     botLine.backgroundColor = [UIColor colorWithHexString:cellBgColor];
     [self addSubview:botLine];
 }
@@ -57,7 +56,7 @@
 #pragma mark - 分割线
 - (UILabel *)line {
     if (!_line) {
-        _line = [[UILabel alloc] initWithFrame:CGRectMake(0, 44, SCREEN_WIDTH, 1)];
+        _line = [[UILabel alloc] initWithFrame:CGRectMake(0, 45, SCREEN_WIDTH, 1)];
         _line.backgroundColor = [UIColor colorWithHexString:lineGrayColor];
     }
     return _line;
@@ -70,13 +69,13 @@
         flowLayout.scrollDirection = UICollectionViewScrollDirectionHorizontal;
         flowLayout.sectionInset = UIEdgeInsetsMake(3.5, 15, 3.5, 15);
         
-        _useSceneRollView = [[UICollectionView alloc] initWithFrame:CGRectMake(0, 45, SCREEN_WIDTH, 45) collectionViewLayout:flowLayout];
+        _useSceneRollView = [[UICollectionView alloc] initWithFrame:CGRectMake(0, 45, SCREEN_WIDTH, (SCREEN_WIDTH - 15)/2 * 1.77) collectionViewLayout:flowLayout];
         _useSceneRollView.dataSource = self;
         _useSceneRollView.delegate = self;
         _useSceneRollView.showsVerticalScrollIndicator = NO;
         _useSceneRollView.showsHorizontalScrollIndicator = NO;
         _useSceneRollView.backgroundColor = [UIColor whiteColor];
-        [_useSceneRollView registerClass:[GoodsSceneCollectionViewCell class] forCellWithReuseIdentifier:@"UseSceneRollViewCell"];
+        [_useSceneRollView registerClass:[SceneCollectionViewCell class] forCellWithReuseIdentifier:@"UseSceneRollViewCell"];
     }
     return _useSceneRollView;
 }
@@ -86,24 +85,28 @@
 }
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
-    GoodsSceneCollectionViewCell * cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"UseSceneRollViewCell" forIndexPath:indexPath];
+    SceneCollectionViewCell * cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"UseSceneRollViewCell" forIndexPath:indexPath];
     if (self.sceneList.count) {
-        cell.title.text = self.sceneList[indexPath.row];
+        [cell setAllFiuSceneListData:self.sceneList[indexPath.row]];
     }
     return cell;
 }
 
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
-    NSLog(@"====  %@",self.sceneIds[indexPath.row]);
     SceneInfoViewController * sceneInfoVC = [[SceneInfoViewController alloc] init];
-    sceneInfoVC.sceneId = self.sceneIds[indexPath.row];
+    sceneInfoVC.sceneId = [NSString stringWithFormat:@"%zi", [[self.sceneList[indexPath.row] valueForKey:@"idField"] integerValue]];
     [self.nav pushViewController:sceneInfoVC animated:YES];
 }
 
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath {
-    CGFloat btnLength = [self.sceneList[indexPath.row] boundingRectWithSize:CGSizeMake(320, 1000) options:(NSStringDrawingUsesLineFragmentOrigin) attributes:nil context:nil].size.width;
-    return CGSizeMake(btnLength + 40, 29);
+    return CGSizeMake((SCREEN_WIDTH - 15)/2, (SCREEN_WIDTH - 15)/2 * 1.77);
 }
 
+- (NSMutableArray *)sceneList {
+    if (!_sceneList) {
+        _sceneList = [NSMutableArray array];
+    }
+    return _sceneList;
+}
 
 @end

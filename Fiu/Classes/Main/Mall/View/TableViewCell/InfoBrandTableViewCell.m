@@ -31,15 +31,15 @@
     [self addSubview:self.brandImg];
     [_brandImg mas_makeConstraints:^(MASConstraintMaker *make) {
         make.size.mas_equalTo(CGSizeMake(50, 50));
-        make.centerY.equalTo(self);
+        make.top.equalTo(self.mas_top).with.offset(5);
         make.left.equalTo(self.mas_left).with.offset(15);
     }];
     
     [self addSubview:self.brandTitle];
     [_brandTitle mas_makeConstraints:^(MASConstraintMaker *make) {
         make.size.mas_equalTo(CGSizeMake(200, 15));
-        make.centerY.equalTo(self);
-        make.left.equalTo(self.brandImg.mas_right).with.offset(10);
+        make.centerY.equalTo(_brandImg);
+        make.left.equalTo(_brandImg.mas_right).with.offset(10);
     }];
     
     [self addSubview:self.nextIcon];
@@ -49,7 +49,7 @@
         make.right.equalTo(self.mas_right).with.offset(-15);
     }];
     
-    UILabel * botLine = [[UILabel alloc] initWithFrame:CGRectMake(0, 80, SCREEN_WIDTH, 5)];
+    UILabel * botLine = [[UILabel alloc] initWithFrame:CGRectMake(0, 60, SCREEN_WIDTH, 5)];
     botLine.backgroundColor = [UIColor colorWithHexString:cellBgColor];
     [self addSubview:botLine];
 }

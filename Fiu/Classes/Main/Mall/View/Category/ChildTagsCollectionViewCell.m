@@ -14,7 +14,7 @@
     self = [super initWithFrame:frame];
     if (self) {
         self.layer.borderWidth = .5;
-        self.layer.borderColor = [UIColor colorWithHexString:titleColor].CGColor;
+        self.layer.borderColor = [UIColor colorWithHexString:titleColor alpha:0.8].CGColor;
         self.layer.cornerRadius = 3;
         self.layer.masksToBounds = YES;
         
@@ -41,10 +41,10 @@
 - (void)setSelected:(BOOL)selected {
     if (selected) {
         self.titleLab.textColor = [UIColor colorWithHexString:fineixColor];
-        self.layer.borderColor = [UIColor colorWithHexString:fineixColor].CGColor;
+        self.layer.borderColor = [UIColor colorWithHexString:fineixColor alpha:0.8].CGColor;
     } else {
         self.titleLab.textColor = [UIColor colorWithHexString:titleColor];
-        self.layer.borderColor = [UIColor colorWithHexString:titleColor].CGColor;
+        self.layer.borderColor = [UIColor colorWithHexString:titleColor alpha:0.8].CGColor;
     }
 }
 
