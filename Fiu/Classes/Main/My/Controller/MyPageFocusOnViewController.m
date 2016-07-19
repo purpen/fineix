@@ -78,6 +78,7 @@
     
     FBRequest *request = [FBAPI postWithUrlString:@"/follow" requestDictionary:@{@"page":@(_currentPageNumber+1),@"size":@15,@"user_id":self.userId,@"find_type":@1} delegate:self];
     [request startRequestSuccess:^(FBRequest *request, id result) {
+        NSLog(@"result  %@",result);
         NSDictionary *dataDict = [result objectForKey:@"data"];
         NSArray *rowsAry = [dataDict objectForKey:@"rows"];
         for (NSDictionary *rowsDict in rowsAry) {

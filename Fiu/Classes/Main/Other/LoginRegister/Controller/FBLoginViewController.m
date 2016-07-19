@@ -35,6 +35,7 @@
     SubmitView *_submitView;
 }
 
+@property (weak, nonatomic) IBOutlet UIImageView *bgImageView;
 @property (weak, nonatomic) IBOutlet UIButton *wechatBtn;
 @property (weak, nonatomic) IBOutlet UIButton *weiboBtn;
 @property (weak, nonatomic) IBOutlet UIButton *qqBtn;
@@ -102,6 +103,7 @@ static NSString *const thirdRegister = @"/auth/third_sign";//第三方登录接�
     
     //判断手机是否安装了相应的客户端
     [self judge];
+    self.bgImageView.alpha = 0.6;
 }
 
 #pragma mark -判断手机是否安装了相应的客户端

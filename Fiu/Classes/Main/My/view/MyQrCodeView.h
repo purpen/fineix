@@ -17,6 +17,8 @@
 @property(nonatomic,strong) UILabel *adressLabel;
 @property(nonatomic,strong) UIImageView *qrCodeImageView;
 @property(nonatomic,strong) UILabel *tipLabel;
+/** 中间的图标 */
+@property (nonatomic, strong) UIImageView *centerLogoImageView;
 
 -(void)setUI;
 

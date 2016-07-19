@@ -117,8 +117,22 @@
 -(UIImageView *)qrCodeImageView{
     if (!_qrCodeImageView) {
         _qrCodeImageView = [[UIImageView alloc] init];
+        
+        [_qrCodeImageView addSubview:self.centerLogoImageView];
+        [_centerLogoImageView mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.height.mas_equalTo(80/667.0*SCREEN_HEIGHT);
+            make.width.mas_equalTo(80/667.0*SCREEN_HEIGHT);
+            make.center.mas_equalTo(_qrCodeImageView.center);
+        }];
     }
     return _qrCodeImageView;
+}
+
+-(UIImageView *)centerLogoImageView{
+    if (!_centerLogoImageView) {
+        _centerLogoImageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"QRLogo"]];
+    }
+    return _centerLogoImageView;
 }
 
 -(UILabel *)adressLabel{

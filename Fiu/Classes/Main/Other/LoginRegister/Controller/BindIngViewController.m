@@ -40,6 +40,7 @@ static NSString *const thirdRegisteredNotBinding = @"/auth/third_register_withou
     
     self.phoneNumTF.delegate = self;
     self.pwdTF.delegate = self;
+    
 }
 
 - (void)didReceiveMemoryWarning {
