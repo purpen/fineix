@@ -61,6 +61,9 @@
                                         <constraint firstAttribute="height" constant="38" id="erc-BN-XRD"/>
                                     </constraints>
                                     <state key="normal" image="icon_wechat"/>
+                                    <connections>
+                                        <action selector="weChatBtn:" destination="-1" eventType="touchUpInside" id="8rN-sB-2jj"/>
+                                    </connections>
                                 </button>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="微信好友" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8G2-JP-seA">
                                     <rect key="frame" x="19" y="76" width="56" height="21"/>
@@ -109,6 +112,9 @@
                                         <constraint firstAttribute="width" constant="38" id="xg8-Ef-2Lo"/>
                                     </constraints>
                                     <state key="normal" image="icon_weibo"/>
+                                    <connections>
+                                        <action selector="sinaBtn:" destination="-1" eventType="touchUpInside" id="UAw-vH-BEb"/>
+                                    </connections>
                                 </button>
                             </subviews>
                             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
@@ -137,6 +143,9 @@
                                         <constraint firstAttribute="height" constant="38" id="nZC-Mq-G6j"/>
                                     </constraints>
                                     <state key="normal" image="icon_qq"/>
+                                    <connections>
+                                        <action selector="qqBtn:" destination="-1" eventType="touchUpInside" id="NKm-ex-wip"/>
+                                    </connections>
                                 </button>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="QQ" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Cxj-Rk-i0J">
                                     <rect key="frame" x="19" y="76" width="56" height="21"/>
@@ -175,6 +184,9 @@
                                         <constraint firstAttribute="height" constant="38" id="P7J-rh-16o"/>
                                     </constraints>
                                     <state key="normal" image="icon_friends"/>
+                                    <connections>
+                                        <action selector="timeLineBtn:" destination="-1" eventType="touchUpInside" id="9ob-Ic-fL5"/>
+                                    </connections>
                                 </button>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="微信朋友圈" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="RvX-37-whP">
                                     <rect key="frame" x="12" y="76" width="69" height="21"/>

@@ -24,13 +24,6 @@
                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="background_login" translatesAutoresizingMaskIntoConstraints="NO" id="oSt-Ss-VXy">
                                         <rect key="frame" x="0.0" y="0.0" width="383" height="667"/>
                                     </imageView>
-                                    <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="logo" translatesAutoresizingMaskIntoConstraints="NO" id="KA8-kW-VeQ">
-                                        <rect key="frame" x="129" y="75" width="125" height="97"/>
-                                        <constraints>
-                                            <constraint firstAttribute="height" constant="97" id="2oM-W7-2Bn"/>
-                                            <constraint firstAttribute="width" constant="125" id="w7h-bV-Y71"/>
-                                        </constraints>
-                                    </imageView>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0wD-DK-j9E">
                                         <rect key="frame" x="25" y="543" width="333" height="44"/>
                                         <color key="backgroundColor" red="0.74509803919999995" green="0.53725490200000003" blue="0.078431372550000003" alpha="1" colorSpace="calibratedRGB"/>
@@ -99,8 +92,6 @@
                                     <constraint firstAttribute="bottom" secondItem="SJj-15-pKC" secondAttribute="bottom" constant="40" id="MQW-2L-nul"/>
                                     <constraint firstItem="0wD-DK-j9E" firstAttribute="leading" secondItem="Qqk-yE-DsW" secondAttribute="leading" constant="25" id="NA9-XV-Aop"/>
                                     <constraint firstAttribute="trailing" secondItem="0wD-DK-j9E" secondAttribute="trailing" constant="25" id="NxC-rS-3ID"/>
-                                    <constraint firstItem="KA8-kW-VeQ" firstAttribute="centerX" secondItem="Qqk-yE-DsW" secondAttribute="centerX" id="Tm6-ZN-SBa"/>
-                                    <constraint firstItem="KA8-kW-VeQ" firstAttribute="top" secondItem="Qqk-yE-DsW" secondAttribute="top" constant="75" id="cq0-wD-QB3"/>
                                     <constraint firstAttribute="bottom" secondItem="oSt-Ss-VXy" secondAttribute="bottom" id="ow4-hO-G8U"/>
                                     <constraint firstAttribute="trailing" secondItem="oSt-Ss-VXy" secondAttribute="trailing" id="pvJ-ja-TGX"/>
                                     <constraint firstItem="SJj-15-pKC" firstAttribute="centerX" secondItem="Qqk-yE-DsW" secondAttribute="centerX" id="tp3-7H-B2a"/>
@@ -1769,7 +1760,6 @@
         <image name="background_login" width="375" height="667"/>
         <image name="background_login_blur" width="420" height="712"/>
         <image name="close" width="17" height="17"/>
-        <image name="logo" width="141" height="77"/>
         <image name="return" width="11" height="19"/>
     </resources>
 </document>
