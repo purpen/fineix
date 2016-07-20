@@ -61,9 +61,14 @@
             [self.mytableView.mj_footer endRefreshing];
         }
     }];
-
     [self.view addSubview:self.mytableView];
 }
+
+//void printN(int N){
+//    if (!N) return;
+//    printN(N-1);
+//    printf("%d",N);
+//}
 
 #pragma mark - Network
 - (void)requestDataForOderList
@@ -82,7 +87,7 @@
     [SVProgressHUD show];
     FBRequest *request = [FBAPI postWithUrlString:@"/follow" requestDictionary:@{@"page":@(_currentPageNumber+1),@"size":@15,@"user_id":self.userId,@"find_type":@2} delegate:self];
     [request startRequestSuccess:^(FBRequest *request, id result) {
-        NSLog(@"result dadadad %@",result);
+        NSLog(@"result %@",result);
         NSDictionary *dataDict = [result objectForKey:@"data"];
         NSArray *rowsAry = [dataDict objectForKey:@"rows"];
         for (NSDictionary *rowsDict in rowsAry) {
@@ -95,6 +100,9 @@
             model.mediumAvatarUrl = followsDict[@"avatar_url"];
             model.is_love = [rowsDict[@"type"] integerValue];
             model.level = followsDict[@"is_love"];
+            model.expert_info = followsDict[@"expert_info"];
+            model.expert_label = followsDict[@"expert_label"];
+            model.is_expert = followsDict[@"is_expert"];
             //8888888888888888888888
             [_modelAry addObject:model];
         }
@@ -130,7 +138,6 @@
             self.mytableView.mj_footer.state = MJRefreshStateNoMoreData;
             self.mytableView.mj_footer.hidden = true;
         }
-        
         if ([self.mytableView.mj_header isRefreshing]) {
             [self.mytableView.mj_header endRefreshing];
         }
@@ -141,7 +148,6 @@
                 [self.mytableView.mj_footer endRefreshing];
             }
         }
-        
         [SVProgressHUD dismiss];
     } failure:^(FBRequest *request, NSError *error) {
         [SVProgressHUD showInfoWithStatus:[error localizedDescription]];

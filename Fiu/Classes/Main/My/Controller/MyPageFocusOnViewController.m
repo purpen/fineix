@@ -78,7 +78,6 @@
     
     FBRequest *request = [FBAPI postWithUrlString:@"/follow" requestDictionary:@{@"page":@(_currentPageNumber+1),@"size":@15,@"user_id":self.userId,@"find_type":@1} delegate:self];
     [request startRequestSuccess:^(FBRequest *request, id result) {
-        NSLog(@"result  %@",result);
         NSDictionary *dataDict = [result objectForKey:@"data"];
         NSArray *rowsAry = [dataDict objectForKey:@"rows"];
         for (NSDictionary *rowsDict in rowsAry) {
@@ -93,6 +92,9 @@
                 model.summary = followsDict[@"summary"];
                 model.nickname = followsDict[@"nickname"];
                 model.mediumAvatarUrl = followsDict[@"avatar_url"];
+                model.expert_info = followsDict[@"expert_info"];
+                model.expert_label = followsDict[@"expert_label"];
+                model.is_expert = followsDict[@"is_expert"];
                 [_modelAry addObject:model];
             }
             

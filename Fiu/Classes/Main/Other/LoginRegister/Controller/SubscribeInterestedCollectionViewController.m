@@ -49,7 +49,7 @@ static NSString * const reuseIdentifier = @"Cell";
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.navigationItem.title = @"订阅感兴趣的情景";
+    self.navigationItem.title = @"订阅感兴趣的地盘";
     _modelAry = [NSMutableArray array];
     //创建定为服务对象
 //    self.locationSevice = [[BMKLocationService alloc] init];
@@ -69,7 +69,7 @@ static NSString * const reuseIdentifier = @"Cell";
     headLabelcenter.x = self.view.center.x;
     headLabel.center = headLabelcenter;
     headLabel.font = [UIFont systemFontOfSize:13];
-    headLabel.text = @"现在你可以订阅感兴趣的情景";
+    headLabel.text = @"现在你可以订阅感兴趣的地盘";
     headLabel.textColor = [UIColor grayColor];
     [self.view addSubview:headLabel];
     _numV = [NumView getNumView];
