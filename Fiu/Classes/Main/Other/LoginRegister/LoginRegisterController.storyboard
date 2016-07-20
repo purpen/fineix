@@ -397,6 +397,7 @@
                         <outlet property="subBottomView" destination="ose-tG-dgm" id="bLV-fI-dNn"/>
                         <outlet property="topLabel" destination="sd2-WU-sGY" id="lSq-2Q-FjI"/>
                         <outlet property="topView" destination="iO6-MF-78G" id="YFV-cX-KaB"/>
+                        <outlet property="topView_top" destination="6af-lR-LB0" id="d6v-ue-da3"/>
                         <outlet property="wechatBtn" destination="jMP-SO-jPu" id="jVg-o3-iq6"/>
                         <outlet property="weiboBtn" destination="1em-nn-o5y" id="fOG-zW-XEw"/>
                     </connections>
@@ -778,27 +779,6 @@
                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="csi-wn-l4w">
                                                         <rect key="frame" x="218" y="0.0" width="150" height="44"/>
                                                         <subviews>
-                                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xy7-yh-HsK">
-                                                                <rect key="frame" x="0.0" y="0.0" width="150" height="44"/>
-                                                                <color key="backgroundColor" red="0.92549019610000005" green="0.90588235289999997" blue="0.91372549020000005" alpha="1" colorSpace="calibratedRGB"/>
-                                                                <constraints>
-                                                                    <constraint firstAttribute="width" secondItem="xy7-yh-HsK" secondAttribute="height" multiplier="3:1" id="K92-KG-T1F"/>
-                                                                    <constraint firstAttribute="height" constant="44" id="odl-rO-maY"/>
-                                                                </constraints>
-                                                                <fontDescription key="fontDescription" type="system" pointSize="13"/>
-                                                                <state key="normal" title="发送验证码">
-                                                                    <color key="titleColor" red="0.74509803919999995" green="0.53725490200000003" blue="0.078431372550000003" alpha="1" colorSpace="calibratedRGB"/>
-                                                                </state>
-                                                                <variation key="default">
-                                                                    <mask key="constraints">
-                                                                        <exclude reference="odl-rO-maY"/>
-                                                                        <exclude reference="K92-KG-T1F"/>
-                                                                    </mask>
-                                                                </variation>
-                                                                <connections>
-                                                                    <action selector="sendVerBtn:" destination="eTZ-kg-fLL" eventType="touchUpInside" id="ZsC-ad-UFo"/>
-                                                                </connections>
-                                                            </button>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="251" text="" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sd2-an-9ue">
                                                                 <rect key="frame" x="75" y="12" width="0.0" height="21"/>
                                                                 <constraints>
@@ -816,6 +796,27 @@
                                                                     </mask>
                                                                 </variation>
                                                             </label>
+                                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xy7-yh-HsK">
+                                                                <rect key="frame" x="0.0" y="0.0" width="150" height="44"/>
+                                                                <color key="backgroundColor" red="0.92549019610000005" green="0.90588235289999997" blue="0.91372549020000005" alpha="1" colorSpace="calibratedRGB"/>
+                                                                <constraints>
+                                                                    <constraint firstAttribute="width" secondItem="xy7-yh-HsK" secondAttribute="height" multiplier="3:1" id="K92-KG-T1F"/>
+                                                                    <constraint firstAttribute="height" constant="44" id="odl-rO-maY"/>
+                                                                </constraints>
+                                                                <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                                                                <state key="normal" title="发送验证码">
+                                                                    <color key="titleColor" red="0.74509803919999995" green="0.53725490200000003" blue="0.078431372550000003" alpha="1" colorSpace="calibratedRGB"/>
+                                                                </state>
+                                                                <variation key="default">
+                                                                    <mask key="constraints">
+                                                                        <exclude reference="K92-KG-T1F"/>
+                                                                        <exclude reference="odl-rO-maY"/>
+                                                                    </mask>
+                                                                </variation>
+                                                                <connections>
+                                                                    <action selector="sendVerBtn:" destination="eTZ-kg-fLL" eventType="touchUpInside" id="ZsC-ad-UFo"/>
+                                                                </connections>
+                                                            </button>
                                                         </subviews>
                                                         <color key="backgroundColor" red="0.92549019610000005" green="0.90588235289999997" blue="0.91372549020000005" alpha="1" colorSpace="calibratedRGB"/>
                                                         <constraints>
@@ -941,7 +942,9 @@
                         <outlet property="subBottomView" destination="a4p-IR-vB8" id="kiJ-ho-mmC"/>
                         <outlet property="submitButton" destination="sDx-DE-8hs" id="rOe-fJ-S4L"/>
                         <outlet property="thirdPartyTitleLbl" destination="QPu-98-WHE" id="LqT-pU-DQO"/>
+                        <outlet property="timeLabel" destination="sd2-an-9ue" id="Pyy-mf-XAT"/>
                         <outlet property="topView" destination="ZG2-8p-Gdc" id="qEu-nF-s0s"/>
+                        <outlet property="topView_top" destination="P2W-VU-yKQ" id="kBF-v0-au2"/>
                         <outlet property="verfyCodeField" destination="z4E-PH-n85" id="vhc-jQ-8x4"/>
                         <outlet property="wechatBtn" destination="xG5-vA-OI0" id="JiU-dC-rSb"/>
                         <outlet property="weiboBtn" destination="Nne-ok-tEE" id="euP-lr-7yU"/>

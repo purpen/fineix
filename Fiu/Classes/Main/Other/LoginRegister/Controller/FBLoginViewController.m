@@ -36,6 +36,7 @@
     SubmitView *_submitView;
 }
 
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *topView_top;
 @property (nonatomic, assign) BOOL isPopup;//弹出状态
 
 @property (weak, nonatomic) IBOutlet UILabel *topLabel;
@@ -167,7 +168,8 @@ static NSString *const thirdRegister = @"/auth/third_sign";//第三方登录接�
 {
     if (!self.isPopup) {
         [UIView animateWithDuration:0.3 animations:^{
-            self.bottomView_top.constant = -230;
+            self.topView_top.constant = -230+40;
+            self.bottomView_top.constant = 0;
             [self.view layoutIfNeeded];
             self.topView.alpha = 0;
             self.subBottomView.alpha = 1;
@@ -188,6 +190,7 @@ static NSString *const thirdRegister = @"/auth/third_sign";//第三方登录接�
     if (self.isPopup) {
         [self.accountField resignFirstResponder];
         [UIView animateWithDuration:0.3 animations:^{
+            self.topView_top.constant = 40;
             self.bottomView_top.constant = 0;
             [self.view layoutIfNeeded];
             self.topView.alpha = 1;

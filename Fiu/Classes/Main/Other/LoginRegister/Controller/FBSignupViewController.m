@@ -47,7 +47,9 @@
 @property (weak, nonatomic) IBOutlet UITextField *passwordField;
 
 @property (weak, nonatomic) IBOutlet UIView *bottomView;
+@property (weak, nonatomic) IBOutlet UILabel *timeLabel;
 
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *topView_top;
 @property (weak, nonatomic) IBOutlet UIView *fetchCodeView;
 
 @property (weak, nonatomic) IBOutlet UIView *submitButton;
@@ -117,7 +119,7 @@ NSString *const LoginURL = @"/auth/login";//登录接口
                 request.flag = VerifyCodeURL;
                 [request startRequest];
                 //[SVProgressHUD showWithMaskType:SVProgressHUDMaskTypeClear];
-                _signupView.toResendV.hidden = NO;
+                self.sendBtn.hidden = YES;
                 [self startTime];
             }else{
                 [SVProgressHUD showWithStatus:[result objectForKey:@"message"]];
@@ -185,7 +187,8 @@ NSString *const LoginURL = @"/auth/login";//登录接口
             dispatch_source_cancel(_timer);
             dispatch_async(dispatch_get_main_queue(), ^{
                 //时间到了后重新发送view消失
-                _signupView.toResendV.hidden = YES;
+//                _signupView.toResendV.hidden = YES;
+                self.sendBtn.hidden = NO;
             });
         }//按钮显示剩余时间
         else{
@@ -194,7 +197,7 @@ NSString *const LoginURL = @"/auth/login";//登录接口
             dispatch_async(dispatch_get_main_queue(), ^{
                 [UIView beginAnimations:nil context:nil];
                 [UIView setAnimationDuration:1];
-                _signupView.backToTheTimeL.text = strTime;
+                _timeLabel.text = strTime;
                 [UIView commitAnimations];
             });
             timeout --;
@@ -208,7 +211,8 @@ NSString *const LoginURL = @"/auth/login";//登录接口
 {
     if (!self.isPopup) {
         [UIView animateWithDuration:0.3 animations:^{
-            self.bottomView_top.constant = -230;
+            self.topView_top.constant = -230+40;
+            self.bottomView_top.constant = 0;
             [self.view layoutIfNeeded];
             self.topView.alpha = 0;
             self.subBottomView.alpha = 1;
@@ -424,6 +428,7 @@ NSString *const LoginURL = @"/auth/login";//登录接口
         [self.accountField resignFirstResponder];
         [UIView animateWithDuration:0.3 animations:^{
             self.bottomView_top.constant = 0;
+            self.topView_top.constant = 40;
             [self.view layoutIfNeeded];
             self.topView.alpha = 1;
             self.subBottomView.alpha = 0;

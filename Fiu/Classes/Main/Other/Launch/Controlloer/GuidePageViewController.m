@@ -21,8 +21,8 @@
     UIPageControl *_guidePageController;
 }
 @property (nonatomic,strong) UIButton *enterBtn;
-/** 播放器点按手势 */
-@property (nonatomic, strong) UITapGestureRecognizer *avLayerTap;
+/** 点按手势 */
+@property (nonatomic, strong) UITapGestureRecognizer *bgImageTap;
 @end
 
 @implementation GuidePageViewController
@@ -42,6 +42,7 @@
         [self.player play];
     }else if (self.flag == welcomePage){
         [self startRollImg];
+        [_guideScrollView.subviews[_pictureArr.count-1] addGestureRecognizer:self.bgImageTap];
     }
     
     //设置scrollview
@@ -75,17 +76,16 @@
 //        [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"UserHasGuideView"];
 //    }
 }
-#pragma mark - 手势
--(UITapGestureRecognizer *)avLayerTap{
-    if (!_avLayerTap) {
-        _avLayerTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(avLayerTapClick:)];
+
+-(UITapGestureRecognizer *)bgImageTap{
+    if (!_bgImageTap) {
+        _bgImageTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapLastImage)];
     }
-    return _avLayerTap;
+    return _bgImageTap;
 }
 
--(void)avLayerTapClick:(UIGestureRecognizer*)tap{
+-(void)tapLastImage{
     [self dismissViewControllerAnimated:YES completion:nil];
-    [self.player pause];
 }
 
 #pragma mark - 首次启动视频
