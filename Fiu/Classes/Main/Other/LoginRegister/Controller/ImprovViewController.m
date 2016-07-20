@@ -39,6 +39,7 @@
 
 static NSString *const modifyUserInformation = @"/my/update_profile";
 static NSString *const IconURL = @"/my/upload_token";
+static NSString *const updateIdentify = @"/my/update_user_identify";
 
 @implementation ImprovViewController
 

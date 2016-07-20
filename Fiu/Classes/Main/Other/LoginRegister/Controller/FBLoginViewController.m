@@ -142,12 +142,19 @@ static NSString *const thirdRegister = @"/auth/third_sign";//第三方登录接�
             [userInfo updateUserInfoEntity];
             UserInfoEntity *entity = [UserInfoEntity defaultUserInfoEntity];
             entity.isLogin = YES;
+            //跳回个人主页
+            [SVProgressHUD showSuccessWithStatus:@"登录成功"];
+            //跳回个人主页
+            [self dismissViewControllerAnimated:YES completion:nil];
+            
+            
             NSDictionary *dataDic = result[@"data"];
-            NSNumber *str = dataDic[@"identify"][@"is_scene_subscribe"];
-            if ([str isEqualToNumber:@0]) {
+            NSString *str = dataDic[@"identify"][@"is_scene_subscribe"];
+            if ([str integerValue] == 0) {
                 //跳转到推荐界面
-                SubscribeInterestedCollectionViewController *subscribeVC = [[SubscribeInterestedCollectionViewController alloc] init];
-                [self.navigationController pushViewController:subscribeVC animated:YES];
+//                SubscribeInterestedCollectionViewController *subscribeVC = [[SubscribeInterestedCollectionViewController alloc] init];
+                ImprovViewController *vc = [[ImprovViewController alloc] init];
+                [self.navigationController pushViewController:vc animated:YES];
             }else{
                 //跳回个人主页
                 [SVProgressHUD showSuccessWithStatus:@"登录成功"];
@@ -313,15 +320,13 @@ static NSString *const thirdRegister = @"/auth/third_sign";//第三方登录接�
             [SVProgressHUD showSuccessWithStatus:@"认证成功"];
             
             
-            NSNumber *str = dataDic[@"user"][@"identify"][@"is_scene_subscribe"];
-            if ([str isEqualToNumber:@0]) {
-                //跳转到推荐界面
-                SubscribeInterestedCollectionViewController *subscribeVC = [[SubscribeInterestedCollectionViewController alloc] init];
-                [self.navigationController pushViewController:subscribeVC animated:YES];
+            NSString *str = dataDic[@"user"][@"identify"][@"is_scene_subscribe"];
+            if ([str integerValue] == 0) {
+//                //跳转到推荐界面
+//                SubscribeInterestedCollectionViewController *subscribeVC = [[SubscribeInterestedCollectionViewController alloc] init];
+                ImprovViewController *vc = [[ImprovViewController alloc] init];
+                [self.navigationController pushViewController:vc animated:YES];
             }else{
-                //已经订阅过，直接个人中心
-                //跳回个人主页
-                //跳回个人主页
                 [self dismissViewControllerAnimated:YES completion:nil];
             }
         }else{
