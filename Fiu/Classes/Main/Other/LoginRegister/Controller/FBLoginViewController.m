@@ -144,12 +144,14 @@ static NSString *const thirdRegister = @"/auth/third_sign";//第三方登录接�
             entity.isLogin = YES;
             //跳回个人主页
             [SVProgressHUD showSuccessWithStatus:@"登录成功"];
-            //跳回个人主页
-            [self dismissViewControllerAnimated:YES completion:nil];
             
             
             NSDictionary *dataDic = result[@"data"];
             NSString *str = dataDic[@"identify"][@"is_scene_subscribe"];
+            
+//            ImprovViewController *vc = [[ImprovViewController alloc] init];
+//            [self.navigationController pushViewController:vc animated:YES];
+            
             if ([str integerValue] == 0) {
                 //跳转到推荐界面
 //                SubscribeInterestedCollectionViewController *subscribeVC = [[SubscribeInterestedCollectionViewController alloc] init];

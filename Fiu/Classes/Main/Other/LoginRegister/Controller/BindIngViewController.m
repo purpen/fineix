@@ -88,28 +88,22 @@ static NSString *const thirdRegisteredNotBinding = @"/auth/third_register_withou
                 NSDictionary *identifyDict = [dataDic objectForKey:@"identify"];
                 if ([[identifyDict objectForKey:@"is_scene_subscribe"] isEqualToNumber:@0]) {
                     //跳转到推荐界面
-                    SubscribeInterestedCollectionViewController *subscribeVC = [[SubscribeInterestedCollectionViewController alloc] init];
-                    [self.navigationController pushViewController:subscribeVC animated:YES];
+//                    SubscribeInterestedCollectionViewController *subscribeVC = [[SubscribeInterestedCollectionViewController alloc] init];
+                    ImprovViewController *vc = [[ImprovViewController alloc] init];
+                    [self.navigationController pushViewController:vc animated:YES];
                 }else{
-                    //已经订阅过，直接个人中心
-                    //跳回个人主页
-                    //跳回个人主页
                     [self dismissViewControllerAnimated:YES completion:nil];
                     [self.tabBarController setSelectedIndex:3];
                 }
-                
-                
             } failure:^(FBRequest *request, NSError *error) {
                 //请求失败，提示错误信息
                 [SVProgressHUD showErrorWithStatus:error.localizedDescription];
-                
             }];
         }
     }//如果手机号格式错误提示错误信息
     else{
         [SVProgressHUD showErrorWithStatus:NSLocalizedString(@"phoneNumberNotCorrect", nil)];
     }
-
 }
 
 
@@ -162,8 +156,9 @@ static NSString *const thirdRegisteredNotBinding = @"/auth/third_register_withou
         entity.isLogin = YES;
         [SVProgressHUD showSuccessWithStatus:NSLocalizedString(@"registeredSuccessfully", nil)];
         //跳转到推荐界面
-        SubscribeInterestedCollectionViewController *subscribeVC = [[SubscribeInterestedCollectionViewController alloc] init];
-        [self.navigationController pushViewController:subscribeVC animated:YES];
+//        SubscribeInterestedCollectionViewController *subscribeVC = [[SubscribeInterestedCollectionViewController alloc] init];
+        ImprovViewController *vc = [[ImprovViewController alloc] init];
+        [self.navigationController pushViewController:vc animated:YES];
     } failure:^(FBRequest *request, NSError *error) {
         //如果请求失败提示失败信息
         [SVProgressHUD showErrorWithStatus:error.localizedDescription];

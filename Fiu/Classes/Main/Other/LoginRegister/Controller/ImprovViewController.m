@@ -17,17 +17,15 @@
 #import <SDWebImage/UIImageView+WebCache.h>
 #import "NSString+Helper.h"
 #import "FBTabBarController.h"
+#import "PersonLabelPickerViewController.h"
 
-@interface ImprovViewController ()<UIImagePickerControllerDelegate,UIActionSheetDelegate,UINavigationControllerDelegate,UITextFieldDelegate,FBRequestDelegate>
+@interface ImprovViewController ()<UIImagePickerControllerDelegate,UIActionSheetDelegate,UINavigationControllerDelegate,UITextFieldDelegate,FBRequestDelegate,PersonLabelDelegate>
 
 {
     NSString *_sex;
 }
-@property (weak, nonatomic) IBOutlet UIView *myView;
-
 @property (weak, nonatomic) IBOutlet UIImageView *headImageView;
 @property (weak, nonatomic) IBOutlet UIButton *manBtn;
-
 @property (weak, nonatomic) IBOutlet UIButton *womenBtn;
 @property (weak, nonatomic) IBOutlet UIButton *secretBtn;
 @property (weak, nonatomic) IBOutlet UITextField *nickNameTF;
@@ -35,6 +33,9 @@
 @property (weak, nonatomic) IBOutlet UIView *manView;
 @property (weak, nonatomic) IBOutlet UIView *womenView;
 @property (weak, nonatomic) IBOutlet UIView *secretView;
+@property (weak, nonatomic) IBOutlet UITextField *personalityLabelTF;
+/**  */
+@property (nonatomic, strong) UIPickerView *personalityLabelPickerView;
 @end
 
 static NSString *const modifyUserInformation = @"/my/update_profile";
@@ -62,9 +63,8 @@ static NSString *const updateIdentify = @"/my/update_user_identify";
     [self.womenBtn addTarget:self action:@selector(clickWomenBtn:) forControlEvents:UIControlEventTouchUpInside];
     [self.secretBtn addTarget:self action:@selector(clickSecretBtn:) forControlEvents:UIControlEventTouchUpInside];
     
-    //
-    self.nickNameTF.delegate = self;
-    self.sumaryTF.delegate = self;
+    self.personalityLabelTF.delegate = self;
+    
     
     self.manView.hidden = NO;
     self.womenView.hidden = YES;
@@ -107,54 +107,19 @@ static NSString *const updateIdentify = @"/my/update_user_identify";
     
 }
 
-//-(void)textFieldDidBeginEditing:(UITextField *)textField
-//
-//{
-//    
-//    CGRect frame = textField.frame;
-//    
-//    int offset = frame.origin.y + 70 - (self.view.frame.size.height - 216.0);//iPhone键盘高度216，iPad的为352
-//    
-//    
-//    
-//    [UIView beginAnimations:@"ResizeForKeyboard" context:nil];
-//    
-//    [UIView setAnimationDuration:0.5f];
-//    
-//    
-//    
-//    //将视图的Y坐标向上移动offset个单位，以使下面腾出地方用于软键盘的显示
-//    
-//    if(offset > 0){
-//        CGRect frame = self.view.frame;
-//        frame.origin.y -= offset;
-//        self.view.frame = frame;
-//        [UIView commitAnimations];
-//    }
-//}
+-(BOOL)textFieldShouldBeginEditing:(UITextField *)textField{
+    PersonLabelPickerViewController *sheetVC = [[PersonLabelPickerViewController alloc] init];
+    sheetVC.modalPresentationStyle = UIModalPresentationOverCurrentContext;
+    sheetVC.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;
+    sheetVC.personDelegate = self;
+    [self presentViewController:sheetVC animated:YES completion:nil];
+    return NO;
+}
 
-//输入框编辑完成以后，将视图恢复到原始状态
-//
-//-(void)textFieldDidEndEditing:(UITextField *)textField
-//
-//{
-//    
-//    CGRect frame = textField.frame;
-//    
-//    int offset = frame.origin.y + 70 - (self.view.frame.size.height - 216.0);//iPhone键盘高度216，iPad的为352
-//    
-//    
-//    
-//    [UIView beginAnimations:@"ResizeForKeyboard" context:nil];
-//    
-//    [UIView setAnimationDuration:0.5f];
-//    
-//    CGRect frame1 = self.view.frame;
-//    frame1.origin.y -= offset;
-//    self.view.frame = frame1;
-//    [UIView commitAnimations];
-//
-//}
+-(void)personLabelStr:(NSString *)str{
+    self.personalityLabelTF.text = str;
+}
+
 
 -(void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event{
     [self.nickNameTF resignFirstResponder];
@@ -230,12 +195,15 @@ static NSString *const updateIdentify = @"/my/update_user_identify";
             entiey.sex = [result objectForKey:@"data"][@"sex"];
             entiey.summary = [result objectForKey:@"data"][@"summary"];
             [SVProgressHUD showSuccessWithStatus:message];
-            //成功后跳转到home页
-//            FBTabBarController *tab = [[FBTabBarController alloc] init];
-//            [tab setSelectedIndex:3];
-//            [self presentViewController:tab animated:YES completion:nil];
-            [self dismissViewControllerAnimated:YES completion:nil];
-            [self.tabBarController setSelectedIndex:3];
+            FBRequest *requestId = [FBAPI postWithUrlString:updateIdentify requestDictionary:@{
+                                                                                           @"type":@1
+                                                                                           } delegate:self];
+            [requestId startRequestSuccess:^(FBRequest *request, id result) {
+                [self dismissViewControllerAnimated:YES completion:nil];
+                [self.tabBarController setSelectedIndex:3];
+            } failure:^(FBRequest *request, NSError *error) {
+                
+            }];
         } else {
             [SVProgressHUD showInfoWithStatus:message];
         }

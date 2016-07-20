@@ -400,6 +400,8 @@
 		1F520A9B1CF8771600B6882A /* TalentView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F520A9A1CF8771600B6882A /* TalentView.m */; };
 		1F533E1A1D3E2793006FC72D /* ForgetViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F533E181D3E2793006FC72D /* ForgetViewController.m */; };
 		1F533E1B1D3E2793006FC72D /* ForgetViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1F533E191D3E2793006FC72D /* ForgetViewController.xib */; };
+		1F533E241D3F785A006FC72D /* PersonLabelPickerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F533E221D3F785A006FC72D /* PersonLabelPickerViewController.m */; };
+		1F533E251D3F785A006FC72D /* PersonLabelPickerViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1F533E231D3F785A006FC72D /* PersonLabelPickerViewController.xib */; };
 		1F59E5FC1C9ABBA500E96C60 /* Accelerate.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1F59E5FB1C9ABBA500E96C60 /* Accelerate.framework */; };
 		1F69CE201CF70BFA00AE3271 /* OfficialCertificationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F69CE1E1CF70BFA00AE3271 /* OfficialCertificationViewController.m */; };
 		1F69CE211CF70BFA00AE3271 /* OfficialCertificationViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1F69CE1F1CF70BFA00AE3271 /* OfficialCertificationViewController.xib */; };
@@ -1254,6 +1256,9 @@
 		1F533E171D3E2793006FC72D /* ForgetViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ForgetViewController.h; sourceTree = "<group>"; };
 		1F533E181D3E2793006FC72D /* ForgetViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ForgetViewController.m; sourceTree = "<group>"; };
 		1F533E191D3E2793006FC72D /* ForgetViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ForgetViewController.xib; sourceTree = "<group>"; };
+		1F533E211D3F785A006FC72D /* PersonLabelPickerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PersonLabelPickerViewController.h; sourceTree = "<group>"; };
+		1F533E221D3F785A006FC72D /* PersonLabelPickerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PersonLabelPickerViewController.m; sourceTree = "<group>"; };
+		1F533E231D3F785A006FC72D /* PersonLabelPickerViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PersonLabelPickerViewController.xib; sourceTree = "<group>"; };
 		1F59E5FB1C9ABBA500E96C60 /* Accelerate.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Accelerate.framework; path = System/Library/Frameworks/Accelerate.framework; sourceTree = SDKROOT; };
 		1F69CE1D1CF70BFA00AE3271 /* OfficialCertificationViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OfficialCertificationViewController.h; sourceTree = "<group>"; };
 		1F69CE1E1CF70BFA00AE3271 /* OfficialCertificationViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OfficialCertificationViewController.m; sourceTree = "<group>"; };
@@ -3063,6 +3068,9 @@
 				1F533E171D3E2793006FC72D /* ForgetViewController.h */,
 				1F533E181D3E2793006FC72D /* ForgetViewController.m */,
 				1F533E191D3E2793006FC72D /* ForgetViewController.xib */,
+				1F533E211D3F785A006FC72D /* PersonLabelPickerViewController.h */,
+				1F533E221D3F785A006FC72D /* PersonLabelPickerViewController.m */,
+				1F533E231D3F785A006FC72D /* PersonLabelPickerViewController.xib */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -4234,6 +4242,7 @@
 				1F2A8FEC1CF40277005116C7 /* DatePickerViewController.xib in Resources */,
 				1FA4BDF41D35F2200067A196 /* UMSLoginViewController.xib in Resources */,
 				1F2A90AC1CF40277005116C7 /* ChanePwdViewController.xib in Resources */,
+				1F533E251D3F785A006FC72D /* PersonLabelPickerViewController.xib in Resources */,
 				1F1AF3B31CF58A6B00CAA525 /* IntegralViewController.xib in Resources */,
 				1F2A90141CF40277005116C7 /* MyView.xib in Resources */,
 				1F27AE9C1CE0EACE005A434B /* mapapi.bundle in Resources */,
@@ -4518,6 +4527,7 @@
 				1F2A8FAC1CF40277005116C7 /* FBOrderSendWayViewController.m in Sources */,
 				1F2A906F1CF40277005116C7 /* CommenttwoViewController.m in Sources */,
 				1F2A90731CF40277005116C7 /* MyOderInfoViewController.m in Sources */,
+				1F533E241D3F785A006FC72D /* PersonLabelPickerViewController.m in Sources */,
 				1F2A902A1CF40277005116C7 /* DeliveryAddressViewController.m in Sources */,
 				1F2A8FE91CF40277005116C7 /* ChangeSumaryViewController.m in Sources */,
 				1F2A90641CF40277005116C7 /* DirectMessageModel.m in Sources */,

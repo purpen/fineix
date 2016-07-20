@@ -151,15 +151,15 @@
                                     <variation key="default">
                                         <mask key="constraints">
                                             <exclude reference="WD5-Yu-pSi"/>
+                                            <exclude reference="Kxh-Ng-F7l"/>
                                             <exclude reference="WRZ-FO-leJ"/>
                                             <exclude reference="xzH-rC-sQX"/>
-                                            <exclude reference="Kxh-Ng-F7l"/>
+                                            <exclude reference="1EM-B7-Nz4"/>
+                                            <exclude reference="8zm-3I-1VT"/>
                                             <exclude reference="PII-tN-oaj"/>
                                             <exclude reference="nU9-Fg-7jz"/>
-                                            <exclude reference="zPZ-1h-8uY"/>
-                                            <exclude reference="8zm-3I-1VT"/>
                                             <exclude reference="tDq-SX-18E"/>
-                                            <exclude reference="1EM-B7-Nz4"/>
+                                            <exclude reference="zPZ-1h-8uY"/>
                                         </mask>
                                     </variation>
                                 </view>
