@@ -51,7 +51,7 @@
     if (!_title) {
         _title = [[UILabel alloc] init];
         _title.font = [UIFont systemFontOfSize:18];
-        _title.text = @"创建新的场景";
+        _title.text = NSLocalizedString(@"creatNewFiuScene", nil);
         _title.textColor = [UIColor colorWithHexString:titleColor];
         _title.textAlignment = NSTextAlignmentCenter;
     }
@@ -62,7 +62,7 @@
 - (UILabel *)content {
     if (!_content) {
         _content = [[UILabel alloc] init];
-        _content.font = [UIFont systemFontOfSize:14];
+        _content.font = [UIFont systemFontOfSize:12];
         _content.text = NSLocalizedString(@"NoScene", nil);
         _content.textColor = [UIColor colorWithHexString:@"#999999"];
         _content.textAlignment = NSTextAlignmentCenter;
@@ -76,7 +76,7 @@
     if (!_addNew) {
         _addNew = [[UILabel alloc] init];
         _addNew.font = [UIFont systemFontOfSize:16];
-        _addNew.text = @"＋ 创建场景";
+        _addNew.text = NSLocalizedString(@"creatFiuSceneBtn", nil);
         _addNew.textColor = [UIColor whiteColor];
         _addNew.backgroundColor = [UIColor colorWithHexString:fineixColor];
         _addNew.layer.cornerRadius = 5;

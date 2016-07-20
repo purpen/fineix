@@ -104,6 +104,7 @@
         
         AVPlayerLayer * layer = [AVPlayerLayer playerLayerWithPlayer:_player];
         layer.frame = CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT);
+        layer.videoGravity = AVLayerVideoGravityResizeAspectFill;
         [self.view.layer addSublayer:layer];
         
         

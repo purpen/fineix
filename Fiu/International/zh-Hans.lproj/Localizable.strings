@@ -129,6 +129,8 @@
 "lookAllSelfBrand" = "查看全部自营";
 "doneAndKnow" = "知道了";
 "SearchContent" = "搜索语境";
+"creatNewFiuScene" = "创建新的情景";
+"creatFiuSceneBtn" = "＋ 创建情景";
 
 //  评论
 "comment" = "评论一下";
