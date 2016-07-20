@@ -234,25 +234,8 @@
                         </mask>
                     </variation>
                 </view>
-                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="个性签名" textAlignment="center" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="FgK-iZ-oAQ">
-                    <rect key="frame" x="51" y="291" width="273" height="44"/>
-                    <constraints>
-                        <constraint firstAttribute="height" constant="44" id="FB8-wW-68v"/>
-                        <constraint firstAttribute="width" constant="273" id="Kn8-MP-aje"/>
-                        <constraint firstAttribute="width" secondItem="FgK-iZ-oAQ" secondAttribute="height" multiplier="273:44" id="Qm7-sA-gJU"/>
-                        <constraint firstAttribute="height" constant="44" id="b7p-xk-tN3"/>
-                    </constraints>
-                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                    <textInputTraits key="textInputTraits"/>
-                    <variation key="default">
-                        <mask key="constraints">
-                            <exclude reference="Qm7-sA-gJU"/>
-                            <exclude reference="b7p-xk-tN3"/>
-                        </mask>
-                    </variation>
-                </textField>
                 <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="昵称" textAlignment="center" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="eiK-Fe-fPm">
-                    <rect key="frame" x="51" y="355" width="273" height="44"/>
+                    <rect key="frame" x="51" y="291" width="273" height="44"/>
                     <constraints>
                         <constraint firstAttribute="width" secondItem="eiK-Fe-fPm" secondAttribute="height" multiplier="273:44" id="Uf0-Rc-TuW"/>
                         <constraint firstAttribute="height" constant="44" id="fjr-Ts-zDQ"/>
@@ -268,14 +251,31 @@
                         </mask>
                     </variation>
                 </textField>
-                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="个性签名" textAlignment="center" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="sBz-Om-HZd">
-                    <rect key="frame" x="51" y="419" width="273" height="44"/>
+                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="个性标签" textAlignment="center" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="sBz-Om-HZd">
+                    <rect key="frame" x="51" y="355" width="273" height="44"/>
                     <constraints>
                         <constraint firstAttribute="width" constant="273" id="2bm-g0-Sl9"/>
                         <constraint firstAttribute="height" constant="44" id="WYf-rf-XNQ"/>
                     </constraints>
                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                     <textInputTraits key="textInputTraits"/>
+                </textField>
+                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="个性签名" textAlignment="center" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="FgK-iZ-oAQ">
+                    <rect key="frame" x="51" y="419" width="273" height="44"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="44" id="FB8-wW-68v"/>
+                        <constraint firstAttribute="width" constant="273" id="Kn8-MP-aje"/>
+                        <constraint firstAttribute="width" secondItem="FgK-iZ-oAQ" secondAttribute="height" multiplier="273:44" id="Qm7-sA-gJU"/>
+                        <constraint firstAttribute="height" constant="44" id="b7p-xk-tN3"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                    <textInputTraits key="textInputTraits"/>
+                    <variation key="default">
+                        <mask key="constraints">
+                            <exclude reference="Qm7-sA-gJU"/>
+                            <exclude reference="b7p-xk-tN3"/>
+                        </mask>
+                    </variation>
                 </textField>
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
@@ -284,6 +284,8 @@
                 <constraint firstItem="v6t-19-Q4p" firstAttribute="top" secondItem="9o6-yh-fQI" secondAttribute="bottom" constant="67" id="3Be-wr-Xqi"/>
                 <constraint firstAttribute="trailing" secondItem="eiK-Fe-fPm" secondAttribute="trailing" constant="51" id="6A0-no-HOJ"/>
                 <constraint firstItem="9o6-yh-fQI" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="101" id="ALt-2D-K5a"/>
+                <constraint firstItem="eiK-Fe-fPm" firstAttribute="top" secondItem="v6t-19-Q4p" secondAttribute="bottom" constant="20" id="CVL-NP-GxI"/>
+                <constraint firstItem="FgK-iZ-oAQ" firstAttribute="top" secondItem="sBz-Om-HZd" secondAttribute="bottom" constant="20" id="MSn-HS-5fz"/>
                 <constraint firstItem="sBz-Om-HZd" firstAttribute="top" secondItem="eiK-Fe-fPm" secondAttribute="bottom" constant="20" id="N0f-e7-c7t"/>
                 <constraint firstItem="Gvx-4d-Iab" firstAttribute="top" secondItem="eiK-Fe-fPm" secondAttribute="bottom" constant="224" id="NOS-kC-Nnk"/>
                 <constraint firstItem="FgK-iZ-oAQ" firstAttribute="top" secondItem="v6t-19-Q4p" secondAttribute="bottom" constant="20" id="NWK-92-aee"/>
@@ -307,7 +309,10 @@
                 <constraint firstItem="sBz-Om-HZd" firstAttribute="top" secondItem="eiK-Fe-fPm" secondAttribute="bottom" constant="20" id="iyV-fJ-FWR"/>
                 <constraint firstItem="eiK-Fe-fPm" firstAttribute="top" secondItem="FgK-iZ-oAQ" secondAttribute="bottom" constant="20" id="jkI-MW-8ij"/>
                 <constraint firstItem="eiK-Fe-fPm" firstAttribute="top" secondItem="FgK-iZ-oAQ" secondAttribute="bottom" constant="20" id="nWE-Ne-Zj0"/>
+                <constraint firstItem="eiK-Fe-fPm" firstAttribute="top" secondItem="FgK-iZ-oAQ" secondAttribute="bottom" constant="20" id="oFz-sf-Y6A"/>
+                <constraint firstItem="eiK-Fe-fPm" firstAttribute="top" secondItem="v6t-19-Q4p" secondAttribute="bottom" constant="20" id="qB7-1d-DLm"/>
                 <constraint firstItem="v6t-19-Q4p" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="77" id="rnt-8v-w94"/>
+                <constraint firstItem="sBz-Om-HZd" firstAttribute="top" secondItem="eiK-Fe-fPm" secondAttribute="bottom" constant="20" id="uCc-Ac-Ubg"/>
                 <constraint firstAttribute="trailing" secondItem="Gvx-4d-Iab" secondAttribute="trailing" id="w4I-cB-SGZ"/>
             </constraints>
             <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
@@ -319,15 +324,20 @@
                     <exclude reference="R3f-LH-krS"/>
                     <exclude reference="aUa-y4-t8P"/>
                     <exclude reference="rnt-8v-w94"/>
-                    <exclude reference="0Ws-TI-wC8"/>
-                    <exclude reference="NWK-92-aee"/>
-                    <exclude reference="XtN-jH-DuK"/>
-                    <exclude reference="aff-Os-Roy"/>
                     <exclude reference="6A0-no-HOJ"/>
                     <exclude reference="X5y-2B-2m8"/>
                     <exclude reference="cUZ-Yz-0p7"/>
                     <exclude reference="jkI-MW-8ij"/>
+                    <exclude reference="nWE-Ne-Zj0"/>
+                    <exclude reference="oFz-sf-Y6A"/>
+                    <exclude reference="qB7-1d-DLm"/>
+                    <exclude reference="N0f-e7-c7t"/>
                     <exclude reference="iyV-fJ-FWR"/>
+                    <exclude reference="0Ws-TI-wC8"/>
+                    <exclude reference="NWK-92-aee"/>
+                    <exclude reference="XtN-jH-DuK"/>
+                    <exclude reference="aff-Os-Roy"/>
+                    <exclude reference="bE6-EJ-l8b"/>
                     <exclude reference="NOS-kC-Nnk"/>
                 </mask>
             </variation>

@@ -18,6 +18,7 @@
     [super viewDidLoad];
     self.view.backgroundColor = [UIColor colorWithHexString:@"#000000" alpha:0.3];
     self.navView.hidden = YES;
+    _personLabelstr = self.sexAry[0];
 }
 
 -(NSArray *)sexAry{
