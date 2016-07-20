@@ -383,16 +383,13 @@ NSString *const LoginURL = @"/auth/login";//登录接口
             
             [SVProgressHUD showSuccessWithStatus:@"认证成功"];
             
-            
-            NSNumber *str = dataDic[@"user"][@"identify"][@"is_scene_subscribe"];
-            if ([str isEqualToNumber:@0]) {
-                //跳转到推荐界面
-                SubscribeInterestedCollectionViewController *subscribeVC = [[SubscribeInterestedCollectionViewController alloc] init];
-                [self.navigationController pushViewController:subscribeVC animated:YES];
+            NSString *str = dataDic[@"user"][@"identify"][@"is_scene_subscribe"];
+            if ([str integerValue] == 0) {
+//                //跳转到推荐界面
+//                SubscribeInterestedCollectionViewController *subscribeVC = [[SubscribeInterestedCollectionViewController alloc] init];
+                ImprovViewController *vc = [[ImprovViewController alloc] init];
+                [self.navigationController pushViewController:vc animated:YES];
             }else{
-                //已经订阅过，直接个人中心
-                //跳回个人主页
-                //跳回个人主页
                 [self dismissViewControllerAnimated:YES completion:nil];
             }
         }else{
@@ -408,7 +405,6 @@ NSString *const LoginURL = @"/auth/login";//登录接口
         //如果请求失败，提示错误信息
         [SVProgressHUD showErrorWithStatus:[error localizedDescription]];
     }];
-    
 }
 
 
