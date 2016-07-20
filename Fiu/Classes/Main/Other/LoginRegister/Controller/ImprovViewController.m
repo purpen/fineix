@@ -215,7 +215,8 @@ static NSString *const updateIdentify = @"/my/update_user_identify";
     NSDictionary *params = @{
                              @"nickname":self.nickNameTF.text,
                              @"sex":_sex,
-                             @"summary":self.sumaryTF.text
+                             @"summary":self.sumaryTF.text,
+                             @"label":self.personalityLabelTF.text
                              };
     FBRequest *request = [FBAPI postWithUrlString:modifyUserInformation requestDictionary:params delegate:self];
     request.flag = modifyUserInformation;
