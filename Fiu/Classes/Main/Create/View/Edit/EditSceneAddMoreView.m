@@ -136,24 +136,25 @@
 
 //  选择地理位置
 - (void)changeLocation {
-    //获取通知中心
-    NSNotificationCenter * center =[NSNotificationCenter defaultCenter];
-    
-    //添加观察者 Observer表示观察者  reciveNotice:表示接收到的消息  name表示再通知中心注册的通知名  object表示可以相应的对象 为nil的话表示所有对象都可以相应
-    [center addObserver:self selector:@selector(reciveNotice:) name:@"a" object:nil];    SearchLocationViewController * searchLocation = [[SearchLocationViewController alloc] init];
-    searchLocation.type = @"edit";
-    searchLocation.selectedLocationBlock = ^(NSString * location, NSString * city, NSString * latitude, NSString * longitude){
-        _location.text = [NSString stringWithFormat:@"%@ %@", city, location];
-        _latitude = latitude;
-        _longitude = longitude;
-        _addLoacationBtn.hidden = YES;
-        _locationView.hidden = NO;
-        [self offLocationFrame];
-        NSArray * locaArr = [NSArray arrayWithObjects:_latitude, _longitude, nil];
-        //  from #import "ReleaseViewController.h"
-        [[NSNotificationCenter defaultCenter] postNotificationName:@"locationArr" object:locaArr];
-    };
-    [self.vc presentViewController:searchLocation animated:YES completion:nil];
+//    //获取通知中心
+//    NSNotificationCenter * center =[NSNotificationCenter defaultCenter];
+//    
+//    //添加观察者 Observer表示观察者  reciveNotice:表示接收到的消息  name表示再通知中心注册的通知名  object表示可以相应的对象 为nil的话表示所有对象都可以相应
+//    [center addObserver:self selector:@selector(reciveNotice:) name:@"a" object:nil];
+//    SearchLocationViewController * searchLocation = [[SearchLocationViewController alloc] init];
+//    searchLocation.type = @"edit";
+//    searchLocation.selectedLocationBlock = ^(NSString * location, NSString * city, NSString * latitude, NSString * longitude){
+//        _location.text = [NSString stringWithFormat:@"%@ %@", city, location];
+//        _latitude = latitude;
+//        _longitude = longitude;
+//        _addLoacationBtn.hidden = YES;
+//        _locationView.hidden = NO;
+//        [self offLocationFrame];
+//        NSArray * locaArr = [NSArray arrayWithObjects:_latitude, _longitude, nil];
+//        //  from #import "ReleaseViewController.h"
+//        [[NSNotificationCenter defaultCenter] postNotificationName:@"locationArr" object:locaArr];
+//    };
+//    [self.vc presentViewController:searchLocation animated:YES completion:nil];
 }
 
 //-(void)searchLocationWithName:(NSString *)name andCity:(NSString *)city andLat:(NSString *)lat andLon:(NSString *)lon{

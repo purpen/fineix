@@ -19,8 +19,6 @@
     [super viewDidLoad];
     
     [self.view addSubview:self.navView];
-    [self.navView bringSubviewToFront:self.view];
-    
 }
 
 #pragma mark - 获取用户登录id

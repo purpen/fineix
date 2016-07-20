@@ -17,12 +17,15 @@
 "addDescription" = "添加描述";
 "addFiuSceneDes" = "请添加140字以内的地盘描述";
 "addTitle" = "想省事？向右看，Fiu语境有你要的文字";
-"addLocation" = "添加地点";
+"addLocation" = "添加情景地点";
+"addCategory" = "添加情景分类";
+"addContent" = "点击添加情景标题";
 "tag" = "标签";
 "onScene" = "所属地盘";
 "release" = "发布";
 "cancel" = "取消";
 "sure" = "确定";
+"chooseCategoryVC" = "选择情景分类";
 
 //  控制器页面标题
 "createVcTitle" = "照片胶卷";

@@ -73,7 +73,8 @@
 }
 
 - (void)positioningBtnClick {
-    [self.navigationController popViewControllerAnimated:YES];
+    [self dismissViewControllerAnimated:YES completion:nil];
+//    [self.navigationController popViewControllerAnimated:YES];
 }
 
 #pragma mark - 取消按钮
@@ -102,7 +103,8 @@
                                                                                              }];
     //发送消息
     [[NSNotificationCenter defaultCenter]postNotification:notice];
-    [self.navigationController popViewControllerAnimated:YES];
+//    [self.navigationController popViewControllerAnimated:YES];
+    [self dismissViewControllerAnimated:YES completion:nil];
 }
 
 //  分割线

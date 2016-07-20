@@ -82,7 +82,8 @@
     vc.lonAry = self.longitudeMarr;
     vc.cityAry = self.locationCityMarr;
     vc.delegate = self;
-    [self.navigationController pushViewController:vc animated:YES];
+    [self presentViewController:vc animated:YES completion:nil];
+//    [self.navigationController pushViewController:vc animated:YES];
 }
 
 
