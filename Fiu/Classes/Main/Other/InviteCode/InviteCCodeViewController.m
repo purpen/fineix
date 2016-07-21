@@ -56,7 +56,8 @@
                                                                                                              } delegate:self];
             
             [backRequst startRequestSuccess:^(FBRequest *request, id result) {
-                [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"codeFlag"];                
+                [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"codeFlag"];
+                [[NSUserDefaults standardUserDefaults] synchronize];
                 FBTabBarController *tab = [[FBTabBarController alloc] init];
                 [tab setSelectedIndex:0];
                 [self presentViewController:tab animated:YES completion:nil];

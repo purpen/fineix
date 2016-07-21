@@ -172,9 +172,11 @@ NSString *const determineLogin = @"/auth/check_login";
         if ([code isEqual:@(1)]) {
             //开启了邀请功能
             [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"invitation"];
+            [[NSUserDefaults standardUserDefaults] synchronize];
         }else if([code isEqual:@(0)]){
             //没有开启邀请功能
             [[NSUserDefaults standardUserDefaults] setBool:NO forKey:@"invitation"];
+            [[NSUserDefaults standardUserDefaults] synchronize];
         }
     } failure:^(FBRequest *request, NSError *error) {
         
@@ -197,6 +199,7 @@ NSString *const determineLogin = @"/auth/check_login";
     }else{
         [[NSUserDefaults standardUserDefaults] setBool:NO forKey:@"UserHasGuideView"];
         [[NSUserDefaults standardUserDefaults] setObject:version forKey:@"version"];
+        [[NSUserDefaults standardUserDefaults] synchronize];
     }
     if (userIsFirstInstalled && codeFlag) {
         FBTabBarController * tabBarC = [[FBTabBarController alloc] init];
