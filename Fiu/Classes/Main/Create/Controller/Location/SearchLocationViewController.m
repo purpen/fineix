@@ -11,6 +11,7 @@
 #import <BaiduMapAPI_Map/BMKMapComponent.h>//引入地图功能所有的头文件
 #import "MapAnnotionViewController.h"
 #define MAPHEGHIT 100
+#define TABLEVIEW_Y (self.searchView.frame.origin.y + self.searchView.frame.size.height)
 @interface SearchLocationViewController ()<BMKLocationServiceDelegate,BMKMapViewDelegate,MapannotionDelegate>
 /** 地图 */
 @property (nonatomic, strong) BMKMapView *mapView;
@@ -29,7 +30,6 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-     NSLog(@"%@",self.delegeta);
     self.view.backgroundColor = [UIColor whiteColor];
     [self setNavViewUI];
     [self.view addSubview:self.searchView];
@@ -320,14 +320,14 @@
 #pragma mark - 搜索地理位置列表
 - (UITableView *)locationTableView {
     if (!_locationTableView) {
-        _locationTableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 94, SCREEN_WIDTH, SCREEN_HEIGHT-MAPHEGHIT-94)];
+        _locationTableView = [[UITableView alloc] initWithFrame:CGRectMake(0,TABLEVIEW_Y , SCREEN_WIDTH, SCREEN_HEIGHT-MAPHEGHIT-TABLEVIEW_Y)];
         _locationTableView.showsHorizontalScrollIndicator = NO;
         _locationTableView.showsVerticalScrollIndicator = NO;
         _locationTableView.bounces = YES;
         _locationTableView.delegate = self;
         _locationTableView.dataSource = self;
         _locationTableView.backgroundColor = [UIColor colorWithHexString:grayLineColor alpha:1];
-        _locationTableView.tableFooterView = [[UIView alloc] init];
+//        _locationTableView.tableFooterView = [[UIView alloc] init];
     }
     return _locationTableView;
 }

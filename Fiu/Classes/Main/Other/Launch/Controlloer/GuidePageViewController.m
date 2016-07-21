@@ -12,7 +12,7 @@
 #import "FBTabBarController.h"
 #import "InviteCCodeViewController.h"
 
-@interface GuidePageViewController ()<UIScrollViewDelegate>
+@interface GuidePageViewController ()<UIScrollViewDelegate,FBRequestDelegate>
 {
     NSArray *_pictureArr;
     UIViewController *_mainController;
@@ -24,7 +24,7 @@
 /** 点按手势 */
 @property (nonatomic, strong) UITapGestureRecognizer *bgImageTap;
 @end
-
+static NSString *userActivationUrl = @"/gateway/record_fiu_user_active";
 @implementation GuidePageViewController
 
 -(instancetype)initWithPicArr:(NSArray *)picArr andRootVC:(UIViewController *)controller{
@@ -35,11 +35,19 @@
     return self;
 }
 
+-(void)requestSucess:(FBRequest *)request result:(id)result{
+    
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     
     if (self.flag == shouYe) {
         [self.player play];
+        FBRequest *request = [FBAPI postWithUrlString:userActivationUrl requestDictionary:nil delegate:self];
+        request.flag = userActivationUrl;
+        request.delegate = self;
+        [request startRequest];
     }else if (self.flag == welcomePage){
         [self startRollImg];
         [_guideScrollView.subviews[_pictureArr.count-1] addGestureRecognizer:self.bgImageTap];

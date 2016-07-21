@@ -166,7 +166,6 @@ static const NSInteger btnTag = 100;
     if (button.tag == btnTag + 5) {
         SearchLocationViewController * searchLocationVC = [[SearchLocationViewController alloc] init];
         searchLocationVC.delegeta = self;
-        NSLog(@"%@",searchLocationVC.delegeta);
         [self.nav pushViewController:searchLocationVC animated:YES];
         
     } else {

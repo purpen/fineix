@@ -37,10 +37,15 @@
     [self.navigationController popViewControllerAnimated:YES];
 }
 
+-(void)viewWillDisappear:(BOOL)animated{
+    [super viewWillDisappear:animated];
+    [SVProgressHUD dismiss];
+}
+
 //UIWebViewDelegate
 //网页开始加载时出现进度条
 -(void)webViewDidStartLoad:(UIWebView *)webView{
-    [SVProgressHUD showWithMaskType:SVProgressHUDMaskTypeClear];
+    [SVProgressHUD show];
 }
 //网页加载完成进度条消失
 -(void)webViewDidFinishLoad:(UIWebView *)webView{

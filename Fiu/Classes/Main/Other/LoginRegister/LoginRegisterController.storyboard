@@ -296,7 +296,7 @@
                                             <constraint firstAttribute="height" constant="44" id="AXv-IM-qyw"/>
                                         </constraints>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                        <textInputTraits key="textInputTraits"/>
+                                        <textInputTraits key="textInputTraits" keyboardType="numberPad"/>
                                     </textField>
                                     <view alpha="0.0" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ose-tG-dgm" userLabel="SubBottomView">
                                         <rect key="frame" x="0.0" y="59" width="375" height="171"/>
@@ -741,7 +741,7 @@
                                                     <constraint firstAttribute="height" constant="44" id="jzc-Rc-s75"/>
                                                 </constraints>
                                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                <textInputTraits key="textInputTraits"/>
+                                                <textInputTraits key="textInputTraits" keyboardType="numberPad"/>
                                             </textField>
                                             <view alpha="0.0" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="a4p-IR-vB8" userLabel="SubBottomView">
                                                 <rect key="frame" x="0.0" y="59" width="383" height="171"/>
