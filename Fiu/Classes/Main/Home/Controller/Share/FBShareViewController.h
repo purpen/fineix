@@ -37,6 +37,6 @@
 @pro_strong ShareStyleBottomView        *   shareBottomView;
 @pro_strong ShareStyleTitleBottomView   *   shareTitleBottomView;
 @pro_strong ShareStyleTitleTopView      *   shareTitleTopView;
-@pro_strong FBPopupView         *   sharePopView;
+@pro_strong FBPopupView                 *   sharePopView;
 
 @end

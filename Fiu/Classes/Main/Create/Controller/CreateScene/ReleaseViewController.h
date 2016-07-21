@@ -11,6 +11,9 @@
 #import "ScenceMessageView.h"
 #import "ScenceAddMoreView.h"
 #import <SVProgressHUD/SVProgressHUD.h>
+#import "AddLocationView.h"
+#import "AddCategoryView.h"
+#import "AddContentView.h"
 
 @interface ReleaseViewController : FBPictureViewController <ScenceMessageViewDelegate>
 
@@ -31,5 +34,14 @@
 @pro_strong NSArray             *   locationArr;            //  照片位置
 @pro_strong ScenceMessageView   *   scenceView;             //  图片\描述\标题
 @pro_strong ScenceAddMoreView   *   addView;                //  添加地点\标签\场景
+
+/*-- --*/
+@pro_strong UIImageView         *   bgImgView;
+@pro_strong UIImage             *   bgImg;
+@pro_strong UIView              *   topView;
+@pro_strong AddLocationView     *   addLocaiton;
+@pro_strong AddCategoryView     *   addCategory;
+@pro_strong AddContentView      *   addContent;
+@pro_strong UIButton            *   addContentBtn;
 
 @end

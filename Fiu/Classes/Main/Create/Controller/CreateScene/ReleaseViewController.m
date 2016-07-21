@@ -15,7 +15,9 @@ static NSString *const URLReleaseScenen = @"/scene_sight/save";
 static NSString *const URLReleaseFiuScenen = @"/scene_scene/save";
 static NSString *const URLGetUserDesTags = @"/gateway/fetch_chinese_word";
 
-@interface ReleaseViewController ()
+@interface ReleaseViewController () {
+
+}
 
 @end
 
@@ -23,41 +25,13 @@ static NSString *const URLGetUserDesTags = @"/gateway/fetch_chinese_word";
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
-    //  from: "SelectAllFSceneViewController.h"
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(getFiuSceneId:) name:@"selectFiuSceneId" object:nil];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(getFiuSceneTitle:) name:@"selectFiuSceneTitle" object:nil];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(getSceneTags:) name:@"getSceneTags" object:nil];
-    
-    if (self.addView.fiuId.length > 0) {
-        self.fSceneId = self.addView.fiuId;
-    }
-}
 
-- (void)getSceneTags:(NSNotification *)tags {
-    NSArray * tagsArr = [tags object];
-    NSMutableArray * tagsMarr = [NSMutableArray array];
-    if (tagsArr.count > 10) {
-        for (NSUInteger idx = 0; idx < 10; ++ idx) {
-            [tagsMarr addObject:tagsArr[idx]];
-        }
-    } else {
-        tagsMarr = [NSMutableArray arrayWithArray:tagsArr];
-    }
+    [self setNavViewUI];
     
-    [self.addView getRecommendTagS:tagsMarr];
-}
-
-- (void)viewDidDisappear:(BOOL)animated {
-    [super viewDidDisappear:animated];
-    
-    self.addView.fiuId = @"";
 }
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.view.backgroundColor = [UIColor whiteColor];
-    
-    [self setNavViewUI];
     
     [self setReleaseViewUI];
 }
@@ -185,36 +159,98 @@ static NSString *const URLGetUserDesTags = @"/gateway/fetch_chinese_word";
     }
 }
 
-//  所选情景的iD
-- (void)getFiuSceneId:(NSNotification *)fiuSceneId {
-    self.fSceneId = [fiuSceneId object];
-}
-
-//  所选情景的标题
-- (void)getFiuSceneTitle:(NSNotification *)fiuSceneTitle {
-    [self.addView changeSceneFrame:[fiuSceneTitle object]];
-}
-
 #pragma mark - 设置视图UI
 - (void)setReleaseViewUI {
-    if ([self.createType isEqualToString:@"scene"]) {
-        self.addView.addScene.hidden = NO;
-    } else if ([self.createType isEqualToString:@"fScene"]) {
-        self.addView.addScene.hidden = YES;
-    }
-
-    [self.view addSubview:self.scenceView];
-    [self.scenceView getCreateType:self.createType];
-    
-    [self.view addSubview:self.addView];
-    
-    //  add #import "ScenceAddMoreView.h"
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(locationArr:) name:@"locationArr" object:nil];
+    [self.view addSubview:self.bgImgView];
+    [self.view bringSubviewToFront:self.navView];
+    [self.view addSubview:self.topView];
+    [self.view addSubview:self.addContentBtn];
+    [self.view addSubview:self.addContent];
 }
 
-- (void)locationArr:(NSNotification *)locationArr {
-    self.lat = [locationArr object][0];
-    self.lng = [locationArr object][1];
+#pragma mark - 情景背景图片
+- (UIImageView *)bgImgView {
+    if (!_bgImgView) {
+        _bgImgView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT)];
+        _bgImgView.image = self.bgImg;
+        _bgImgView.contentMode = UIViewContentModeScaleAspectFill;
+        _bgImgView.clipsToBounds = YES;
+        
+        UIBlurEffect * blurEffect = [UIBlurEffect effectWithStyle:UIBlurEffectStyleDark];
+        UIVisualEffectView * effectView = [[UIVisualEffectView alloc] initWithEffect:blurEffect];
+        effectView.frame = _bgImgView.bounds;
+        effectView.alpha = 1.0f;
+        [_bgImgView addSubview:effectView];
+    }
+    return _bgImgView;
+}
+
+- (UIView *)topView {
+    if (!_topView) {
+        _topView = [[UIView alloc] initWithFrame:CGRectMake(0, 50, SCREEN_WIDTH, 88)];
+        
+        [_topView addSubview:self.addLocaiton];
+        [_topView addSubview:self.addCategory];
+    }
+    return _topView;
+}
+
+#pragma mark - 添加地点
+- (AddLocationView *)addLocaiton {
+    if (!_addLocaiton) {
+        _addLocaiton = [[AddLocationView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 44)];
+        _addLocaiton.vc = self;
+    }
+    return _addLocaiton;
+}
+
+#pragma mark - 添加分类
+- (AddCategoryView *)addCategory {
+    if (!_addCategory) {
+        _addCategory = [[AddCategoryView alloc] initWithFrame:CGRectMake(0, 44, SCREEN_WIDTH, 44)];
+        _addCategory.vc = self;
+    }
+    return _addCategory;
+}
+
+#pragma mark - 添加内容按钮
+- (UIButton *)addContentBtn {
+    if (!_addContentBtn) {
+        _addContentBtn = [[UIButton alloc] initWithFrame:CGRectMake(15, SCREEN_HEIGHT - 100, SCREEN_WIDTH - 15, 44)];
+        [_addContentBtn setTitle:NSLocalizedString(@"addContent", nil) forState:(UIControlStateNormal)];
+        _addContentBtn.titleLabel.font = [UIFont systemFontOfSize:14];
+        [_addContentBtn setTitleColor:[UIColor colorWithHexString:@"#FFFFFF" alpha:0.8] forState:(UIControlStateNormal)];
+        _addContentBtn.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
+        [_addContentBtn addTarget:self action:@selector(addContentBtnClick) forControlEvents:(UIControlEventTouchUpInside)];
+        
+        UILabel * lineLab = [[UILabel alloc] initWithFrame:CGRectMake(0, 43, SCREEN_WIDTH - 15, 1)];
+        lineLab.backgroundColor = [UIColor colorWithHexString:@"#FFFFFF" alpha:0.3];
+        [_addContentBtn addSubview:lineLab];
+    }
+    return _addContentBtn;
+}
+
+#pragma mark - 改变视图位置，弹出内容输入框
+- (void)addContentBtnClick {
+    CGRect topRect = CGRectMake(0, -100, SCREEN_WIDTH, 0);
+    [UIView animateWithDuration:.3 animations:^{
+        self.topView.frame = topRect;
+        self.addContentBtn.alpha = 0;
+    }];
+
+    CGRect contentRect = CGRectMake(0, 100, SCREEN_WIDTH, 200);
+    [UIView animateWithDuration:0.3 animations:^{
+        self.addContent.frame = contentRect;
+    }];
+}
+
+#pragma mark - 内容视图
+- (AddContentView *)addContent {
+    if (!_addContent) {
+        _addContent = [[AddContentView alloc] initWithFrame:CGRectMake(0, SCREEN_HEIGHT, SCREEN_WIDTH, 200)];
+        _addContent.vc = self;
+    }
+    return _addContent;
 }
 
 #pragma mark - 添加文字信息的视图
@@ -258,17 +294,19 @@ static NSString *const URLGetUserDesTags = @"/gateway/fetch_chinese_word";
 
 #pragma mark -  设置导航栏
 - (void)setNavViewUI {
-    self.navView.backgroundColor = [UIColor whiteColor];
-    
+    self.view.backgroundColor = [UIColor whiteColor];
+    self.navView.backgroundColor = [UIColor colorWithHexString:@"#FFFFFF" alpha:0];
     if ([self.createType isEqualToString:@"scene"]) {
         [self addNavViewTitle:NSLocalizedString(@"releaseVcTitle", nil)];
     } else if ([self.createType isEqualToString:@"fScene"]) {
         [self addNavViewTitle:NSLocalizedString(@"freleaseVcTitle", nil)];
     }
 
-    self.navTitle.textColor = [UIColor blackColor];
+    self.navTitle.textColor = [UIColor whiteColor];
+    [self.cancelDoneBtn setImage:[UIImage imageNamed:@"icon_cancel"] forState:(UIControlStateNormal)];
     [self addCancelDoneButton];
     [self addDoneButton];
+    self.line.backgroundColor = [UIColor colorWithHexString:lineGrayColor alpha:0.3];
     [self addLine];
     [self.doneBtn addTarget:self action:@selector(releaseScene) forControlEvents:(UIControlEventTouchUpInside)];
 }
@@ -283,10 +321,7 @@ static NSString *const URLGetUserDesTags = @"/gateway/fetch_chinese_word";
 }
 
 - (void)dealloc {
-    [[NSNotificationCenter defaultCenter] removeObserver:self name:@"locationArr" object:nil];
-    [[NSNotificationCenter defaultCenter] removeObserver:self name:@"selectFiuSceneId" object:nil];
-    [[NSNotificationCenter defaultCenter] removeObserver:self name:@"selectFiuSceneTitle" object:nil];
-    [[NSNotificationCenter defaultCenter] removeObserver:self name:@"getSceneTags" object:nil];
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:@"a" object:nil];
 }
 
 @end

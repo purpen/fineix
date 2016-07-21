@@ -23,40 +23,7 @@
     [self setFiltersControllerUI];
     
     [self setNotification];
-    
-//    pg_edit_sdk_controller *editCtl = nil;
-//    {
-//        //构建编辑对象    Construct edit target
-//        pg_edit_sdk_controller_object *obje = [[pg_edit_sdk_controller_object alloc] init];
-//        {
-//            //输入原图  Input original
-//            obje.pCSA_fullImage = [self.filtersImg copy];
-//        }
-//        editCtl = [[pg_edit_sdk_controller alloc] initWithEditObject:obje withDelegate:self];
-//    }
-//    NSAssert(editCtl, @"Error");
-//    if (editCtl) {
-//        
-//        [self.navigationController pushViewController:editCtl animated:YES];
-//
-//    }
 }
-
-//- (void)dgPhotoEditingViewControllerDidCancel:(UIViewController *)pController withClickSaveButton:(BOOL)isClickSaveBtn
-//{
-//    [self.navigationController popViewControllerAnimated:YES];
-//}
-//
-//- (void)dgPhotoEditingViewControllerShowLoadingView:(UIView *)view
-//{
-//    [SVProgressHUD show];
-//}
-//
-//- (void)dgPhotoEditingViewControllerHideLoadingView:(UIView *)view
-//{
-//    [SVProgressHUD dismiss];
-//}
-
 
 #pragma mark - 应用第一次打开，加载操作指示图
 - (void)setFirstAppStart {
@@ -98,6 +65,7 @@
 
 #pragma mark - 设置顶部导航栏
 - (void)setNavViewUI {
+    [self addNavViewTitle:NSLocalizedString(@"filterVcTitle", nil)];
     [self addBackButton:@"icon_back_white"];
     [self addNextButton];
     [self.nextBtn addTarget:self action:@selector(nextBtnClick) forControlEvents:(UIControlEventTouchUpInside)];
@@ -108,17 +76,18 @@
     ReleaseViewController * releaseVC = [[ReleaseViewController alloc] init];
     
     if ([self.createType isEqualToString:@"scene"]) {
-        releaseVC.locationArr = self.locationArr;
-        releaseVC.scenceView.imageView.image = self.filtersImageView.image;
         releaseVC.createType = self.createType;
-        releaseVC.fSceneId = self.fSceneId;
-        releaseVC.fSceneTitle = self.fSceneTitle;
-        releaseVC.goodsTitle = self.goodsTitle;
-        releaseVC.goodsPrice = self.goodsPrice;
-        releaseVC.goodsId = self.goodsId;
-        releaseVC.goodsX = self.goodsX;
-        releaseVC.goodsY = self.goodsY;
-        releaseVC.scenceView.type = self.createType;
+        releaseVC.bgImg = self.filtersImageView.image;
+//        releaseVC.locationArr = self.locationArr;
+//        releaseVC.scenceView.imageView.image = self.filtersImageView.image;
+//        releaseVC.fSceneId = self.fSceneId;
+//        releaseVC.fSceneTitle = self.fSceneTitle;
+//        releaseVC.goodsTitle = self.goodsTitle;
+//        releaseVC.goodsPrice = self.goodsPrice;
+//        releaseVC.goodsId = self.goodsId;
+//        releaseVC.goodsX = self.goodsX;
+//        releaseVC.goodsY = self.goodsY;
+//        releaseVC.scenceView.type = self.createType;
         [self.navigationController pushViewController:releaseVC animated:YES];
     
     } else if ([self.createType isEqualToString:@"fScene"]) {
