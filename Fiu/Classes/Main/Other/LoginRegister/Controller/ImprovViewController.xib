@@ -46,7 +46,7 @@
                     </connections>
                 </button>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="v6t-19-Q4p" userLabel="sex">
-                    <rect key="frame" x="77" y="226" width="221" height="45"/>
+                    <rect key="frame" x="77" y="260" width="221" height="45"/>
                     <subviews>
                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Rectangle" translatesAutoresizingMaskIntoConstraints="NO" id="rss-HO-iYP">
                             <rect key="frame" x="0.0" y="0.0" width="221" height="45"/>
@@ -187,7 +187,7 @@
                     </variation>
                 </view>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="9o6-yh-fQI" userLabel="head">
-                    <rect key="frame" x="135" y="101" width="105" height="105"/>
+                    <rect key="frame" x="135" y="135" width="105" height="105"/>
                     <subviews>
                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Circle + User" translatesAutoresizingMaskIntoConstraints="NO" id="gb6-gs-zvW">
                             <rect key="frame" x="0.0" y="0.0" width="105" height="105"/>
@@ -235,7 +235,7 @@
                     </variation>
                 </view>
                 <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="昵称" textAlignment="center" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="eiK-Fe-fPm">
-                    <rect key="frame" x="51" y="291" width="273" height="44"/>
+                    <rect key="frame" x="51" y="325" width="273" height="44"/>
                     <constraints>
                         <constraint firstAttribute="width" secondItem="eiK-Fe-fPm" secondAttribute="height" multiplier="273:44" id="Uf0-Rc-TuW"/>
                         <constraint firstAttribute="height" constant="44" id="fjr-Ts-zDQ"/>
@@ -252,7 +252,7 @@
                     </variation>
                 </textField>
                 <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="个性标签" textAlignment="center" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="sBz-Om-HZd">
-                    <rect key="frame" x="51" y="355" width="273" height="44"/>
+                    <rect key="frame" x="51" y="389" width="273" height="44"/>
                     <constraints>
                         <constraint firstAttribute="width" constant="273" id="2bm-g0-Sl9"/>
                         <constraint firstAttribute="height" constant="44" id="WYf-rf-XNQ"/>
@@ -260,8 +260,8 @@
                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                     <textInputTraits key="textInputTraits"/>
                 </textField>
-                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="个性签名" textAlignment="center" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="FgK-iZ-oAQ">
-                    <rect key="frame" x="51" y="419" width="273" height="44"/>
+                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="个性签名(最多15个字)" textAlignment="center" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="FgK-iZ-oAQ">
+                    <rect key="frame" x="51" y="453" width="273" height="44"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="44" id="FB8-wW-68v"/>
                         <constraint firstAttribute="width" constant="273" id="Kn8-MP-aje"/>
@@ -308,6 +308,7 @@
                 <constraint firstItem="sBz-Om-HZd" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="iES-4I-ugV"/>
                 <constraint firstItem="sBz-Om-HZd" firstAttribute="top" secondItem="eiK-Fe-fPm" secondAttribute="bottom" constant="20" id="iyV-fJ-FWR"/>
                 <constraint firstItem="eiK-Fe-fPm" firstAttribute="top" secondItem="FgK-iZ-oAQ" secondAttribute="bottom" constant="20" id="jkI-MW-8ij"/>
+                <constraint firstItem="9o6-yh-fQI" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="135" id="mNR-EJ-cjZ"/>
                 <constraint firstItem="eiK-Fe-fPm" firstAttribute="top" secondItem="FgK-iZ-oAQ" secondAttribute="bottom" constant="20" id="nWE-Ne-Zj0"/>
                 <constraint firstItem="eiK-Fe-fPm" firstAttribute="top" secondItem="FgK-iZ-oAQ" secondAttribute="bottom" constant="20" id="oFz-sf-Y6A"/>
                 <constraint firstItem="eiK-Fe-fPm" firstAttribute="top" secondItem="v6t-19-Q4p" secondAttribute="bottom" constant="20" id="qB7-1d-DLm"/>
@@ -318,6 +319,7 @@
             <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
             <variation key="default">
                 <mask key="constraints">
+                    <exclude reference="ALt-2D-K5a"/>
                     <exclude reference="Zud-LK-MHV"/>
                     <exclude reference="aJn-Qs-65T"/>
                     <exclude reference="3Be-wr-Xqi"/>

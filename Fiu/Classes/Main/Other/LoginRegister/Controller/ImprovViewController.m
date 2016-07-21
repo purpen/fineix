@@ -46,7 +46,10 @@ static NSString *const updateIdentify = @"/my/update_user_identify";
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    UIApplication *app = [UIApplication sharedApplication];
+    [app setStatusBarHidden:NO];
     // Do any additional setup after loading the view from its nib.
+    self.navigationController.navigationBarHidden = NO;
     [self.navigationItem setHidesBackButton:YES];
     self.navigationItem.title = @"完善个人资料";
     self.headImageView.layer.masksToBounds = YES;
@@ -69,11 +72,11 @@ static NSString *const updateIdentify = @"/my/update_user_identify";
     self.manView.hidden = NO;
     self.womenView.hidden = YES;
     self.secretView.hidden = YES;
-    
     //点击头像可以更换头像
     self.headImageView.userInteractionEnabled = YES;
     
 }
+
 
 -(void)singleTap:(UITapGestureRecognizer*)recognizer{
     
