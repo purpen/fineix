@@ -13,5 +13,8 @@
 @interface ChooseTagsCollectionViewCell : UICollectionViewCell
 
 @pro_strong UIButton            *   tagBtn;     //  标签
+@pro_assign BOOL                    isSelected;
+
+- (void)updateCellState:(BOOL)select;
 
 @end

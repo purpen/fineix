@@ -17,7 +17,7 @@
         
         [self addSubview:self.addCategory];
         UILabel * lineLab = [[UILabel alloc] initWithFrame:CGRectMake(15, 43, SCREEN_WIDTH - 15, 1)];
-        lineLab.backgroundColor = [UIColor colorWithHexString:@"#FFFFFF" alpha:0.3];
+        lineLab.backgroundColor = [UIColor colorWithHexString:@"#FFFFFF" alpha:0.2];
         [self addSubview:lineLab];
         
     }
@@ -44,6 +44,7 @@
     ChooseCategotyViewController * chooseCategoryVC = [[ChooseCategotyViewController alloc] init];
     chooseCategoryVC.getCategoryData = ^ (NSString * title, NSString * ids){
         [self.addCategory setTitle:title forState:(UIControlStateNormal)];
+        [self.addCategory setTitleColor:[UIColor colorWithHexString:@"#FFFFFF" alpha:1] forState:(UIControlStateNormal)];
         self.categoryId = ids;
     };
     [self.vc presentViewController:chooseCategoryVC animated:YES completion:nil];

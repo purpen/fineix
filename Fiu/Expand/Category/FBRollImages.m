@@ -40,7 +40,7 @@
     for (RollImageRow * row in model) {
         [self.imgMarr addObject:row.coverUrl];
         [self.typeMarr addObject:row.type];
-        [self.targetIdMarr addObject:[NSString stringWithFormat:@"%zi",row.webUrl]];
+        [self.targetIdMarr addObject:[NSString stringWithFormat:@"%@",row.webUrl]];
     }
     self.rollImageView.imageURLStringsGroup = self.imgMarr;
 }
@@ -83,10 +83,16 @@
             FiuSceneViewController * fiuSceneVC = [[FiuSceneViewController alloc] init];
             fiuSceneVC.fiuSceneId = ids;
             [self.navVC pushViewController:fiuSceneVC animated:YES];
-        }else if ([type isEqualToString:@"11"]){
+        } else if ([type isEqualToString:@"11"]){
             ProjectViewController *vc = [[ProjectViewController alloc] init];
             vc.projectId = ids;
             [self.navVC pushViewController:vc animated:YES];
+        } else if ([type isEqualToString:@"1"]){
+            BOOL isExsit = [[UIApplication sharedApplication] canOpenURL:[NSURL URLWithString:ids]];
+            if (isExsit) {
+                [[UIApplication sharedApplication] openURL:[NSURL URLWithString:ids]];
+            }
+
         }
     }
 }
