@@ -22,7 +22,7 @@
 @property (nonatomic, strong) NSString * summary;
 @property (nonatomic, strong) NSString * title;
 @property (nonatomic, strong) NSString * type;
-@property (nonatomic, assign) NSInteger webUrl;
+@property (nonatomic, strong) NSString * webUrl;
 
 -(instancetype)initWithDictionary:(NSDictionary *)dictionary;
 @end

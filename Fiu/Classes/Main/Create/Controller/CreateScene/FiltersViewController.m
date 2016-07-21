@@ -91,8 +91,7 @@
         [self.navigationController pushViewController:releaseVC animated:YES];
     
     } else if ([self.createType isEqualToString:@"fScene"]) {
-        releaseVC.locationArr = self.locationArr;
-        releaseVC.scenceView.imageView.image = self.filtersImageView.image;
+        releaseVC.bgImg = self.filtersImageView.image;
         releaseVC.createType = self.createType;
         [self.navigationController pushViewController:releaseVC animated:YES];
     }

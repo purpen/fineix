@@ -65,7 +65,7 @@
 		self.type = dictionary[@"type"];
 	}	
 	if(![dictionary[@"web_url"] isKindOfClass:[NSNull class]]){
-		self.webUrl = [dictionary[@"web_url"] integerValue];
+		self.webUrl = dictionary[@"web_url"];
 	}	
 	return self;
 }

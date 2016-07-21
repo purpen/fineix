@@ -1939,9 +1939,9 @@
 		1F2A8C521CF40276005116C7 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
+				1F2A8C561CF40276005116C7 /* Discover */,
 				D81EA3FA1D2A52930032FAAB /* FiuPeopleList */,
 				1F2A8C531CF40276005116C7 /* AllScene */,
-				1F2A8C561CF40276005116C7 /* Discover */,
 				1F2A8C591CF40276005116C7 /* FiuScene */,
 			);
 			path = Controller;

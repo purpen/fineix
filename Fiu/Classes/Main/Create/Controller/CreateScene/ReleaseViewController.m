@@ -51,8 +51,13 @@ static NSString *const URLGetUserDesTags = @"/gateway/fetch_chinese_word";
             tagsMarr = [NSMutableArray arrayWithArray:tagsArr];
         }
         
-        if (tagsArr.count > 0) {
-            [self.addView getRecommendTagS:tagsMarr];
+        if (self.addContent.chooseTagMarr.count > 0) {
+            [self.addContent getUserEditTags:self.addContent.chooseTagMarr];
+            
+        } else {
+            if (tagsMarr.count > 0) {
+                [self.addContent getUserEditTags:tagsMarr];
+            }
         }
         
     } failure:^(FBRequest *request, NSError *error) {
@@ -62,11 +67,11 @@ static NSString *const URLGetUserDesTags = @"/gateway/fetch_chinese_word";
 
 #pragma mark 发布场景
 - (void)networkNewSceneData {
-    NSString * title = [self.scenceView.title.text stringByReplacingOccurrencesOfString:@" " withString:@""];
-    NSString * des = [self.scenceView.content.text stringByReplacingOccurrencesOfString:@" " withString:@""];
-    NSString * tags =  [self.addView.chooseTagMarr componentsJoinedByString:@","];
+    NSString * title = [self.addContent.title.text stringByReplacingOccurrencesOfString:@" " withString:@""];
+    NSString * des = [self.addContent.content.text stringByReplacingOccurrencesOfString:@" " withString:@""];
+    NSString * tags =  [self.addContent.chooseTagMarr componentsJoinedByString:@","];
 
-    if ([self.lng length] <= 0 || [title isEqualToString:@""] || [des isEqualToString:NSLocalizedString(@"addDescription", nil)] || [des isEqualToString:@""] || [self.addView.location.text isEqualToString:@""] || tags.length <=0 || self.fSceneId.length <= 0) {
+    if ([self.addLocaiton.longitude length] <= 0 || [title isEqualToString:@""] || [des isEqualToString:NSLocalizedString(@"addDescription", nil)] || [des isEqualToString:@""] || [self.addLocaiton.locationLab.text isEqualToString:@""] || tags.length <=0) {
         [SVProgressHUD showInfoWithStatus:@"填写未完成"];
 
     } else if (title.length > 20) {
@@ -86,18 +91,18 @@ static NSString *const URLGetUserDesTags = @"/gateway/fetch_chinese_word";
         NSData * jsonData = [NSJSONSerialization dataWithJSONObject:goodsMarr options:0 error:nil];
         NSString * json = [[NSString alloc] initWithData:jsonData encoding:NSUTF8StringEncoding];
         
-        NSData * imageData = UIImageJPEGRepresentation(self.scenceView.imageView.image, 0.7);
+        NSData * imageData = UIImageJPEGRepresentation(self.bgImg, 0.7);
         NSString * icon64Str = [imageData base64EncodedStringWithOptions:NSDataBase64Encoding64CharacterLineLength];
         NSDictionary * paramDict = @{
                                      @"tmp":icon64Str,
                                      @"title":title,
                                      @"des":des,
-                                     @"lng":self.lng,
-                                     @"lat":self.lat,
-                                     @"address":self.addView.location.text,
+                                     @"lng":self.addLocaiton.longitude,
+                                     @"lat":self.addLocaiton.latitude,
+                                     @"address":self.addLocaiton.locationLab.text,
                                      @"products":json,
                                      @"tags":tags,
-                                     @"scene_id":self.fSceneId,
+                                     @"category_id":self.addCategory.categoryId,
                                      };
         
         self.releaseSceneRequest = [FBAPI postWithUrlString:URLReleaseScenen requestDictionary:paramDict delegate:self];
@@ -107,7 +112,6 @@ static NSString *const URLGetUserDesTags = @"/gateway/fetch_chinese_word";
             LookSceneViewController * sceneInfoVC = [[LookSceneViewController alloc] init];
             sceneInfoVC.sceneId = sceneId;
             [self.navigationController pushViewController:sceneInfoVC animated:YES];
-
             [SVProgressHUD dismiss];
 
         } failure:^(FBRequest *request, NSError *error) {
@@ -117,47 +121,47 @@ static NSString *const URLGetUserDesTags = @"/gateway/fetch_chinese_word";
     }
 }
 
-#pragma mark 发布情景
-- (void)networkNewFiuSceneData {
-    NSString * title = [self.scenceView.title.text stringByReplacingOccurrencesOfString:@" " withString:@""];
-    NSString * des = [self.scenceView.content.text stringByReplacingOccurrencesOfString:@" " withString:@""];
-    NSString * tags =  [self.addView.chooseTagMarr componentsJoinedByString:@","];
-    
-    if ([self.lng length] <= 0 || [title isEqualToString:@""] || [des isEqualToString:NSLocalizedString(@"addFiuSceneDes", nil)] || [des isEqualToString:@""] || [self.addView.location.text isEqualToString:@""] || tags.length <=0) {
-        [SVProgressHUD showInfoWithStatus:@"填写未完成"];
-    } else if (title.length > 20) {
-        [SVProgressHUD showInfoWithStatus:@"请输入20字以内的标题"];
-        
-    } else if (des.length > 140) {
-        [SVProgressHUD showInfoWithStatus:@"请输入140字以内的描述"];
-        
-    } else {
-        [SVProgressHUD showWithMaskType:SVProgressHUDMaskTypeBlack];
-        NSData * imageData = UIImageJPEGRepresentation(self.scenceView.imageView.image, 0.7);
-        NSString * icon64Str = [imageData base64EncodedStringWithOptions:NSDataBase64Encoding64CharacterLineLength];
-        NSDictionary * paramDict = @{
-                                     @"tmp":icon64Str,
-                                     @"title":self.scenceView.title.text,
-                                     @"des":self.scenceView.content.text,
-                                     @"lng":self.lng,
-                                     @"lat":self.lat,
-                                     @"address":self.addView.location.text,
-                                     @"tags":tags,
-                                     };
-        self.releaseSceneRequest = [FBAPI postWithUrlString:URLReleaseFiuScenen requestDictionary:paramDict delegate:self];
-        
-        [self.releaseSceneRequest startRequestSuccess:^(FBRequest *request, id result) {
-            //  to #import "AllSceneViewController.h"
-            [[NSNotificationCenter defaultCenter] postNotificationName:@"refreshAllFSceneList" object:nil];
-            [self dismissViewControllerAnimated:YES completion:nil];
-            [SVProgressHUD showSuccessWithStatus:@"您的地盘发布成功，品味又升级啦"];
-            
-        } failure:^(FBRequest *request, NSError *error) {
-            NSLog(@"%@", error);
-            [SVProgressHUD showErrorWithStatus:[error localizedDescription]];
-        }];
-    }
-}
+#pragma mark 发布地盘
+//- (void)networkNewFiuSceneData {
+//    NSString * title = [self.scenceView.title.text stringByReplacingOccurrencesOfString:@" " withString:@""];
+//    NSString * des = [self.scenceView.content.text stringByReplacingOccurrencesOfString:@" " withString:@""];
+//    NSString * tags =  [self.addView.chooseTagMarr componentsJoinedByString:@","];
+//    
+//    if ([self.lng length] <= 0 || [title isEqualToString:@""] || [des isEqualToString:NSLocalizedString(@"addFiuSceneDes", nil)] || [des isEqualToString:@""] || [self.addView.location.text isEqualToString:@""] || tags.length <=0) {
+//        [SVProgressHUD showInfoWithStatus:@"填写未完成"];
+//    } else if (title.length > 20) {
+//        [SVProgressHUD showInfoWithStatus:@"请输入20字以内的标题"];
+//        
+//    } else if (des.length > 140) {
+//        [SVProgressHUD showInfoWithStatus:@"请输入140字以内的描述"];
+//        
+//    } else {
+//        [SVProgressHUD showWithMaskType:SVProgressHUDMaskTypeBlack];
+//        NSData * imageData = UIImageJPEGRepresentation(self.scenceView.imageView.image, 0.7);
+//        NSString * icon64Str = [imageData base64EncodedStringWithOptions:NSDataBase64Encoding64CharacterLineLength];
+//        NSDictionary * paramDict = @{
+//                                     @"tmp":icon64Str,
+//                                     @"title":self.scenceView.title.text,
+//                                     @"des":self.scenceView.content.text,
+//                                     @"lng":self.lng,
+//                                     @"lat":self.lat,
+//                                     @"address":self.addView.location.text,
+//                                     @"tags":tags,
+//                                     };
+//        self.releaseSceneRequest = [FBAPI postWithUrlString:URLReleaseFiuScenen requestDictionary:paramDict delegate:self];
+//        
+//        [self.releaseSceneRequest startRequestSuccess:^(FBRequest *request, id result) {
+//            //  to #import "AllSceneViewController.h"
+//            [[NSNotificationCenter defaultCenter] postNotificationName:@"refreshAllFSceneList" object:nil];
+//            [self dismissViewControllerAnimated:YES completion:nil];
+//            [SVProgressHUD showSuccessWithStatus:@"您的地盘发布成功，品味又升级啦"];
+//            
+//        } failure:^(FBRequest *request, NSError *error) {
+//            NSLog(@"%@", error);
+//            [SVProgressHUD showErrorWithStatus:[error localizedDescription]];
+//        }];
+//    }
+//}
 
 #pragma mark - 设置视图UI
 - (void)setReleaseViewUI {
@@ -232,64 +236,77 @@ static NSString *const URLGetUserDesTags = @"/gateway/fetch_chinese_word";
 
 #pragma mark - 改变视图位置，弹出内容输入框
 - (void)addContentBtnClick {
-    CGRect topRect = CGRectMake(0, -100, SCREEN_WIDTH, 0);
+    CGRect topRect = CGRectMake(0, -100, SCREEN_WIDTH, 88);
     [UIView animateWithDuration:.3 animations:^{
+        self.navView.alpha = 0;
         self.topView.frame = topRect;
         self.addContentBtn.alpha = 0;
     }];
 
-    CGRect contentRect = CGRectMake(0, 100, SCREEN_WIDTH, 200);
+    CGRect contentRect = CGRectMake(0, SCREEN_HEIGHT - 530, SCREEN_WIDTH, 280);
     [UIView animateWithDuration:0.3 animations:^{
+        self.addContent.alpha = 1;
         self.addContent.frame = contentRect;
+        self.addContent.chooseText.hidden = NO;
+        [self.addContent.title becomeFirstResponder];
     }];
+}
+
+- (void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event {
+    for (UIView * view in self.view.subviews) {
+        if ([view isKindOfClass:[self.bgImgView class]]) {
+            [self editDone];
+        }
+    }
+}
+
+#pragma mark - 点击空白处，编辑完成
+- (void)editDone {
+    if (self.addContent.title.text.length > 0 && ![self.addContent.content.text isEqualToString:NSLocalizedString(@"addDescription", nil)]) {
+        CGRect topRect = CGRectMake(0, 50, SCREEN_WIDTH, 88);
+        [UIView animateWithDuration:.3 animations:^{
+            self.navView.alpha = 1;
+            self.topView.frame = topRect;
+        }];
+        
+        CGRect contentRect = CGRectMake(0, SCREEN_HEIGHT - 230, SCREEN_WIDTH, 280);
+        [UIView animateWithDuration:0.3 animations:^{
+            self.addContent.alpha = 1;
+            self.addContent.frame = contentRect;
+            self.addContent.chooseText.hidden = YES;
+            [self.addContent.title resignFirstResponder];
+        }];
+        [self.addContent.title resignFirstResponder];
+        [self.addContent.content resignFirstResponder];
+        [self networkGetUserDesTags:self.addContent.title.text withDes:self.addContent.content.text];
+        
+    } else {
+        CGRect topRect = CGRectMake(0, 50, SCREEN_WIDTH, 88);
+        [UIView animateWithDuration:.3 animations:^{
+            self.navView.alpha = 1;
+            self.topView.frame = topRect;
+            self.addContentBtn.alpha = 1;
+        }];
+        
+        [UIView animateWithDuration:0.3 animations:^{
+            self.addContent.alpha = 0;
+            [self.addContent.title resignFirstResponder];
+        }];
+    }
 }
 
 #pragma mark - 内容视图
 - (AddContentView *)addContent {
     if (!_addContent) {
-        _addContent = [[AddContentView alloc] initWithFrame:CGRectMake(0, SCREEN_HEIGHT, SCREEN_WIDTH, 200)];
+        _addContent = [[AddContentView alloc] initWithFrame:CGRectMake(0, SCREEN_HEIGHT, SCREEN_WIDTH, 280)];
         _addContent.vc = self;
+        _addContent.delegate = self;
     }
     return _addContent;
 }
 
-#pragma mark - 添加文字信息的视图
-- (ScenceMessageView *)scenceView {
-    if (!_scenceView) {
-        _scenceView = [[ScenceMessageView alloc] initWithFrame:CGRectMake(0, 50, SCREEN_WIDTH, 236.5)];
-        _scenceView.vc = self;
-        _scenceView.delegate = self;
-    }
-    return _scenceView;
-}
-
-- (void)EditDoneGoGetTags:(NSString *)des {
-    [self networkGetUserDesTags:_scenceView.title.text withDes:des];
-}
-
-#pragma mark - 添加位置／标签／所属情景的视图
-- (ScenceAddMoreView *)addView {
-    if (!_addView) {
-        _addView = [[ScenceAddMoreView alloc] initWithFrame:CGRectMake(0, 290, SCREEN_WIDTH, SCREEN_HEIGHT- 290)];
-        _addView.nav = self.navigationController;
-        _addView.vc = self;
-        
-        if ([self.locationArr[0] isEqualToString:@"0.000000"]) {
-            NSLog(@"照片上没有位置信息");
-        } else {
-            if (self.locationArr.count > 0) {
-                [_addView changeLocationFrame:self.locationArr];
-                self.lng = self.locationArr[0];
-                self.lat = self.locationArr[1];
-            }
-        }
-        
-        if (self.fSceneId.length > 0) {
-            _addView.addSceneBtn.userInteractionEnabled = NO;
-            [_addView changeSceneFrame:self.fSceneTitle];
-        }
-    }
-    return _addView;
+- (void)EditBegin {
+    [self addContentBtnClick];
 }
 
 #pragma mark -  设置导航栏
@@ -298,9 +315,10 @@ static NSString *const URLGetUserDesTags = @"/gateway/fetch_chinese_word";
     self.navView.backgroundColor = [UIColor colorWithHexString:@"#FFFFFF" alpha:0];
     if ([self.createType isEqualToString:@"scene"]) {
         [self addNavViewTitle:NSLocalizedString(@"releaseVcTitle", nil)];
-    } else if ([self.createType isEqualToString:@"fScene"]) {
-        [self addNavViewTitle:NSLocalizedString(@"freleaseVcTitle", nil)];
     }
+//    else if ([self.createType isEqualToString:@"fScene"]) {
+//        [self addNavViewTitle:NSLocalizedString(@"freleaseVcTitle", nil)];
+//    }
 
     self.navTitle.textColor = [UIColor whiteColor];
     [self.cancelDoneBtn setImage:[UIImage imageNamed:@"icon_cancel"] forState:(UIControlStateNormal)];
@@ -315,9 +333,10 @@ static NSString *const URLGetUserDesTags = @"/gateway/fetch_chinese_word";
 - (void)releaseScene {
     if ([self.createType isEqualToString:@"scene"]) {
         [self networkNewSceneData];
-    } else if ([self.createType isEqualToString:@"fScene"]) {
-        [self networkNewFiuSceneData];
     }
+//        else if ([self.createType isEqualToString:@"fScene"]) {
+//        [self networkNewFiuSceneData];
+//    }
 }
 
 - (void)dealloc {

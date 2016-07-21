@@ -19,7 +19,7 @@
         [self addSubview:self.locationView];
         [self addSubview:self.clearBtn];
         UILabel * lineLab = [[UILabel alloc] initWithFrame:CGRectMake(15, 43, SCREEN_WIDTH - 15, 1)];
-        lineLab.backgroundColor = [UIColor colorWithHexString:@"#FFFFFF" alpha:0.3];
+        lineLab.backgroundColor = [UIColor colorWithHexString:@"#FFFFFF" alpha:0.2];
         [self addSubview:lineLab];
     }
     return self;
