@@ -12,17 +12,18 @@
 #import "UIImage+Helper.h"
 #import "FBRequest.h"
 #import "FBAPI.h"
-#import "SVProgressHUD.h"
 #import "UserInfoEntity.h"
 #import <SDWebImage/UIImageView+WebCache.h>
 #import "NSString+Helper.h"
 #import "FBTabBarController.h"
 #import "PersonLabelPickerViewController.h"
+#import "SVProgressHUD.h"
 
 @interface ImprovViewController ()<UIImagePickerControllerDelegate,UIActionSheetDelegate,UINavigationControllerDelegate,UITextFieldDelegate,FBRequestDelegate,PersonLabelDelegate>
 
 {
     NSString *_sex;
+    NSNumber *_sexNum;
 }
 @property (weak, nonatomic) IBOutlet UIImageView *headImageView;
 @property (weak, nonatomic) IBOutlet UIButton *manBtn;
@@ -55,8 +56,10 @@ static NSString *const updateIdentify = @"/my/update_user_identify";
     self.headImageView.layer.masksToBounds = YES;
     self.headImageView.layer.cornerRadius = 105*0.5;
     _sex = @"男";
+    _sexNum = @1;
     UserInfoEntity *entity = [UserInfoEntity defaultUserInfoEntity];
     [self.headImageView sd_setImageWithURL:[NSURL URLWithString:entity.mediumAvatarUrl]];
+    self.nickNameTF.text = entity.nickname;
     UITapGestureRecognizer* singleRecognizer;
     singleRecognizer = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(singleTap:)];
     singleRecognizer.numberOfTapsRequired = 1;
@@ -134,6 +137,7 @@ static NSString *const updateIdentify = @"/my/update_user_identify";
     self.womenView.hidden = YES;
     self.secretView.hidden = YES;
     _sex = @"男";
+    _sexNum = @1;
 }
 
 -(void)clickWomenBtn:(UIButton*)sender{
@@ -141,6 +145,7 @@ static NSString *const updateIdentify = @"/my/update_user_identify";
     self.womenView.hidden = NO;
     self.secretView.hidden = YES;
     _sex = @"女";
+    _sexNum = @2;
 }
 
 -(void)clickSecretBtn:(UIButton*)sender{
@@ -148,6 +153,7 @@ static NSString *const updateIdentify = @"/my/update_user_identify";
     self.womenView.hidden = YES;
     self.secretView.hidden = NO;
     _sex = @"保密";
+    _sexNum = @0;
 }
 
 -(void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary<NSString *,id> *)info{
@@ -217,7 +223,7 @@ static NSString *const updateIdentify = @"/my/update_user_identify";
     //开始传送数据
     NSDictionary *params = @{
                              @"nickname":self.nickNameTF.text,
-                             @"sex":_sex,
+                             @"sex":_sexNum,
                              @"summary":self.sumaryTF.text,
                              @"label":self.personalityLabelTF.text
                              };

@@ -8,9 +8,19 @@
 
 #import "QrShareSheetViewController.h"
 #import "Fiu.h"
+#import "UMSocial.h"
+#import "WXApi.h"
+#import "WeiboSDK.h"
+#import <TencentOpenAPI/QQApiInterface.h>
+#import <SVProgressHUD/SVProgressHUD.h>
 
 @interface QrShareSheetViewController ()
 
+@property (weak, nonatomic) IBOutlet UIView *wechatView;
+@property (weak, nonatomic) IBOutlet UIView *friendView;
+@property (weak, nonatomic) IBOutlet UIView *qqView;
+
+@property (weak, nonatomic) IBOutlet UIView *weiBoView;
 @end
 
 @implementation QrShareSheetViewController
@@ -18,6 +28,25 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
+    if ([WXApi isWXAppInstalled]) {
+        self.wechatView.hidden = NO;
+        self.friendView.hidden = NO;
+    } else {
+        self.wechatView.hidden = YES;
+        self.friendView.hidden = YES;
+    }
+    
+    if ([QQApiInterface isQQInstalled]) {
+        self.qqView.hidden = NO;
+    } else {
+        self.qqView.hidden = YES;
+    }
+    
+    if ([WeiboSDK isWeiboAppInstalled]) {
+        self.weiBoView.hidden = NO;
+    } else {
+        self.weiBoView.hidden = YES;
+    }
     self.view.backgroundColor = [UIColor colorWithHexString:@"#000000" alpha:0.3];
 }
 
