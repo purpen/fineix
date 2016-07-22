@@ -11,10 +11,12 @@
 #import "AddLocationView.h"
 #import "AddCategoryView.h"
 #import "AddContentView.h"
+#import "ShowContentView.h"
+#import "AddTagsView.h"
 
 typedef void(^EditSceneDone)();
 
-@interface EditViewController : FBPictureViewController 
+@interface EditViewController : FBPictureViewController <ShowContentViewDelegate, AddTagsViewDelegate>
 
 @pro_strong FBRequest               *   editSceneRequest;
 @pro_strong FBRequest               *   editFiuSceneRequest;
@@ -34,6 +36,8 @@ typedef void(^EditSceneDone)();
 @pro_strong AddLocationView     *   addLocaiton;
 @pro_strong AddCategoryView     *   addCategory;
 @pro_strong AddContentView      *   addContent;
+@pro_strong ShowContentView     *   showContent;
+@pro_strong AddTagsView         *   addTagsView;
 @pro_strong UIButton            *   addContentBtn;
 
 @pro_copy EditSceneDone  editSceneDone;

@@ -285,11 +285,6 @@
     return _tagsIcon;
 }
 
-#pragma mark 用户选择标签
-- (void)getUserEditTags:(NSMutableArray *)tagsMarr {
-    self.chooseTagMarr = tagsMarr;
-}
-
 #pragma mark 推荐标签
 - (UICollectionView *)tagsColleciton {
     if (!_tagsColleciton) {
