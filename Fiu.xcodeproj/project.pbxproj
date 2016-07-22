@@ -490,6 +490,8 @@
 		D84763311D426EED00C88379 /* AddTagsView.m in Sources */ = {isa = PBXBuildFile; fileRef = D84763301D426EED00C88379 /* AddTagsView.m */; };
 		D84763341D427E0100C88379 /* AdSupport.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D84763321D427E0100C88379 /* AdSupport.framework */; };
 		D84763351D427E0100C88379 /* iAd.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D84763331D427E0100C88379 /* iAd.framework */; };
+		D84763381D427F7500C88379 /* AppDelegate+UMAnalytics.m in Sources */ = {isa = PBXBuildFile; fileRef = D84763371D427F7500C88379 /* AppDelegate+UMAnalytics.m */; };
+		D847633A1D427FCA00C88379 /* UMMobClick.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D84763391D427FCA00C88379 /* UMMobClick.framework */; };
 		D8615C551D0FDC4E00C12FA2 /* EditViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D8615C541D0FDC4E00C12FA2 /* EditViewController.m */; };
 		D8707F071D37FA3200007835 /* FBGoodsInfoModel.m in Sources */ = {isa = PBXBuildFile; fileRef = D8707F021D37FA3200007835 /* FBGoodsInfoModel.m */; };
 		D8707F081D37FA3200007835 /* FBGoodsInfoModelData.m in Sources */ = {isa = PBXBuildFile; fileRef = D8707F041D37FA3200007835 /* FBGoodsInfoModelData.m */; };
@@ -1428,6 +1430,9 @@
 		D84763301D426EED00C88379 /* AddTagsView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AddTagsView.m; sourceTree = "<group>"; };
 		D84763321D427E0100C88379 /* AdSupport.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AdSupport.framework; path = System/Library/Frameworks/AdSupport.framework; sourceTree = SDKROOT; };
 		D84763331D427E0100C88379 /* iAd.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = iAd.framework; path = System/Library/Frameworks/iAd.framework; sourceTree = SDKROOT; };
+		D84763361D427F7500C88379 /* AppDelegate+UMAnalytics.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "AppDelegate+UMAnalytics.h"; sourceTree = "<group>"; };
+		D84763371D427F7500C88379 /* AppDelegate+UMAnalytics.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "AppDelegate+UMAnalytics.m"; sourceTree = "<group>"; };
+		D84763391D427FCA00C88379 /* UMMobClick.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = UMMobClick.framework; sourceTree = "<group>"; };
 		D8615C531D0FDC4E00C12FA2 /* EditViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EditViewController.h; sourceTree = "<group>"; };
 		D8615C541D0FDC4E00C12FA2 /* EditViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EditViewController.m; sourceTree = "<group>"; };
 		D8707F011D37FA3200007835 /* FBGoodsInfoModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FBGoodsInfoModel.h; sourceTree = "<group>"; };
@@ -1570,6 +1575,7 @@
 				1F0EE6A91C9FA4F6000631F0 /* libz.tbd in Frameworks */,
 				1F27AE8B1CE06BFA005A434B /* libc++.tbd in Frameworks */,
 				1F35F0411CD1DC640000DB95 /* AddressBookUI.framework in Frameworks */,
+				D847633A1D427FCA00C88379 /* UMMobClick.framework in Frameworks */,
 				1F35F03F1CD1DC580000DB95 /* MessageUI.framework in Frameworks */,
 				1F35F03D1CD1D7170000DB95 /* AddressBook.framework in Frameworks */,
 				D8AEC7541CA8E3C700A868B6 /* libsqlite3.0.tbd in Frameworks */,
@@ -3827,6 +3833,8 @@
 				D81280C31CAA8532007CF08B /* International */,
 				D81280141CAA8532007CF08B /* AppDelegate.h */,
 				1F772B5D1CF3FD910018AE40 /* AppDelegate.mm */,
+				D84763361D427F7500C88379 /* AppDelegate+UMAnalytics.h */,
+				D84763371D427F7500C88379 /* AppDelegate+UMAnalytics.m */,
 				D8932E451D17FE8100428FC7 /* Launch Screen.storyboard */,
 				D8A9AD081CD9CCA900A9FCFB /* Assets.xcassets */,
 				D81280C01CAA8532007CF08B /* fineix.xcdatamodeld */,
@@ -3929,6 +3937,7 @@
 		D81280CB1CAA8532007CF08B /* Vendors */ = {
 			isa = PBXGroup;
 			children = (
+				D84763391D427FCA00C88379 /* UMMobClick.framework */,
 				1FA4BDB51D35F2200067A196 /* UMSocial_Sdk_5.2.1 */,
 				1FA4BDD01D35F2200067A196 /* UMSocial_Sdk_Extra_Frameworks */,
 				1F27AE851CE06BB1005A434B /* AliPay */,
@@ -4631,6 +4640,7 @@
 				D8C690B41D1125F80026EAB5 /* EditSceneAddMoreView.m in Sources */,
 				1F2A8F461CF40277005116C7 /* FBPictureViewController.m in Sources */,
 				D84763311D426EED00C88379 /* AddTagsView.m in Sources */,
+				D84763381D427F7500C88379 /* AppDelegate+UMAnalytics.m in Sources */,
 				D8B855BB1D3CCC190008BD57 /* FBTagItem.m in Sources */,
 				1F2A8FB81CF40277005116C7 /* FiuBrandRow.m in Sources */,
 				1F2A8F941CF40277005116C7 /* LikeOrSuPeopleData.m in Sources */,
@@ -4906,6 +4916,7 @@
 					"$(PROJECT_DIR)/Fiu/Vendors/BaiduMapSDK",
 					"$(PROJECT_DIR)/Fiu/Vendors/UMSocial_Sdk_Extra_Frameworks/TencentOpenAPI",
 					"$(PROJECT_DIR)/Fiu/Vendors/AliPay",
+					"$(PROJECT_DIR)/Fiu/Vendors",
 				);
 				GCC_INPUT_FILETYPE = sourcecode.cpp.objcpp;
 				GCC_PREFIX_HEADER = "";
@@ -4952,6 +4963,7 @@
 					"$(PROJECT_DIR)/Fiu/Vendors/BaiduMapSDK",
 					"$(PROJECT_DIR)/Fiu/Vendors/UMSocial_Sdk_Extra_Frameworks/TencentOpenAPI",
 					"$(PROJECT_DIR)/Fiu/Vendors/AliPay",
+					"$(PROJECT_DIR)/Fiu/Vendors",
 				);
 				GCC_INPUT_FILETYPE = sourcecode.cpp.objcpp;
 				GCC_PREFIX_HEADER = "";
