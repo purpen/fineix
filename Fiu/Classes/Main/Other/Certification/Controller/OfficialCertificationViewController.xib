@@ -153,23 +153,41 @@
                                 <constraint firstItem="1K7-B4-kso" firstAttribute="centerY" secondItem="cqt-xY-Vh1" secondAttribute="centerY" id="tFN-kY-WIH"/>
                             </constraints>
                         </view>
-                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ykp-MI-W0G">
-                            <rect key="frame" x="203" y="111" width="46" height="30"/>
+                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="xlc-Jw-7BP" userLabel="认证信息">
+                            <rect key="frame" x="95" y="105" width="186" height="30"/>
+                            <subviews>
+                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ykp-MI-W0G">
+                                    <rect key="frame" x="116" y="0.0" width="46" height="30"/>
+                                    <constraints>
+                                        <constraint firstAttribute="width" constant="46" id="5h1-oj-wGQ"/>
+                                        <constraint firstAttribute="height" constant="30" id="iiR-3F-buA"/>
+                                    </constraints>
+                                    <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                                    <state key="normal" title="编辑">
+                                        <color key="titleColor" red="0.74509803919999995" green="0.53725490200000003" blue="0.078431372550000003" alpha="1" colorSpace="calibratedRGB"/>
+                                    </state>
+                                </button>
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="修改认证说明信息" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="urc-RZ-yUc">
+                                    <rect key="frame" x="20" y="7" width="104" height="16"/>
+                                    <constraints>
+                                        <constraint firstAttribute="height" constant="16" id="MxO-vz-CP4"/>
+                                        <constraint firstAttribute="width" constant="104" id="PwN-wU-arV"/>
+                                    </constraints>
+                                    <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                                    <color key="textColor" red="0.40000000000000002" green="0.40000000000000002" blue="0.40000000000000002" alpha="1" colorSpace="calibratedRGB"/>
+                                    <nil key="highlightedColor"/>
+                                </label>
+                            </subviews>
+                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                             <constraints>
-                                <constraint firstAttribute="width" constant="46" id="5h1-oj-wGQ"/>
-                                <constraint firstAttribute="height" constant="30" id="iiR-3F-buA"/>
+                                <constraint firstAttribute="height" constant="30" id="Ki9-VN-jrH"/>
+                                <constraint firstAttribute="trailing" secondItem="ykp-MI-W0G" secondAttribute="trailing" constant="24" id="NAp-oA-Lhq"/>
+                                <constraint firstItem="urc-RZ-yUc" firstAttribute="leading" secondItem="xlc-Jw-7BP" secondAttribute="leading" constant="20" id="fPP-ly-B27"/>
+                                <constraint firstItem="ykp-MI-W0G" firstAttribute="centerY" secondItem="xlc-Jw-7BP" secondAttribute="centerY" id="omw-46-1kt"/>
+                                <constraint firstItem="urc-RZ-yUc" firstAttribute="centerY" secondItem="xlc-Jw-7BP" secondAttribute="centerY" id="pbe-Xc-xqf"/>
+                                <constraint firstAttribute="width" constant="186" id="siO-Mo-7rD"/>
                             </constraints>
-                            <fontDescription key="fontDescription" type="system" pointSize="13"/>
-                            <state key="normal" title="编辑">
-                                <color key="titleColor" red="0.74509803919999995" green="0.53725490200000003" blue="0.078431372550000003" alpha="1" colorSpace="calibratedRGB"/>
-                            </state>
-                        </button>
-                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="修改认证说明信息" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="urc-RZ-yUc">
-                            <rect key="frame" x="103" y="118" width="104" height="16"/>
-                            <fontDescription key="fontDescription" type="system" pointSize="13"/>
-                            <color key="textColor" red="0.40000000000000002" green="0.40000000000000002" blue="0.40000000000000002" alpha="1" colorSpace="calibratedRGB"/>
-                            <nil key="highlightedColor"/>
-                        </label>
+                        </view>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="WM0-zk-72F">
                             <rect key="frame" x="0.0" y="0.0" width="375" height="50"/>
                             <subviews>
@@ -198,17 +216,15 @@
                     </subviews>
                     <color key="backgroundColor" red="0.98039215690000003" green="0.98039215690000003" blue="0.98039215690000003" alpha="1" colorSpace="calibratedRGB"/>
                     <constraints>
-                        <constraint firstItem="urc-RZ-yUc" firstAttribute="top" secondItem="cqt-xY-Vh1" secondAttribute="bottom" constant="13" id="0Om-7y-XGY"/>
-                        <constraint firstAttribute="trailing" secondItem="ykp-MI-W0G" secondAttribute="trailing" constant="126" id="0hn-aN-Btr"/>
                         <constraint firstAttribute="height" constant="188" id="3jf-ib-DFt"/>
+                        <constraint firstItem="xlc-Jw-7BP" firstAttribute="top" secondItem="cqt-xY-Vh1" secondAttribute="bottom" id="6sx-H4-2KA"/>
                         <constraint firstItem="cqt-xY-Vh1" firstAttribute="top" secondItem="2D4-wu-txX" secondAttribute="top" constant="55" id="CJ5-gJ-tM0"/>
-                        <constraint firstItem="urc-RZ-yUc" firstAttribute="leading" secondItem="2D4-wu-txX" secondAttribute="leading" constant="103" id="Qim-9i-g7M"/>
                         <constraint firstItem="cqt-xY-Vh1" firstAttribute="top" secondItem="WM0-zk-72F" secondAttribute="bottom" constant="5" id="WV9-Bo-zAt"/>
+                        <constraint firstItem="xlc-Jw-7BP" firstAttribute="centerX" secondItem="2D4-wu-txX" secondAttribute="centerX" id="WW4-rU-eQR"/>
                         <constraint firstAttribute="trailing" secondItem="WM0-zk-72F" secondAttribute="trailing" id="YlS-l4-iYs"/>
                         <constraint firstAttribute="trailing" secondItem="cqt-xY-Vh1" secondAttribute="trailing" id="eEK-Ej-ra4"/>
                         <constraint firstItem="WM0-zk-72F" firstAttribute="top" secondItem="2D4-wu-txX" secondAttribute="top" id="f35-Fr-hCD"/>
                         <constraint firstItem="cqt-xY-Vh1" firstAttribute="leading" secondItem="2D4-wu-txX" secondAttribute="leading" id="lC4-se-t6M"/>
-                        <constraint firstItem="ykp-MI-W0G" firstAttribute="centerY" secondItem="urc-RZ-yUc" secondAttribute="centerY" id="mgP-U4-GmH"/>
                         <constraint firstItem="WM0-zk-72F" firstAttribute="leading" secondItem="2D4-wu-txX" secondAttribute="leading" id="wXt-w2-9hl"/>
                     </constraints>
                     <variation key="default">

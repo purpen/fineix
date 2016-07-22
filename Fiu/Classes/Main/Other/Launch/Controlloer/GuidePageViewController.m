@@ -11,6 +11,7 @@
 #import "UserInfoEntity.h"
 #import "FBTabBarController.h"
 #import "InviteCCodeViewController.h"
+#import <AdSupport/AdSupport.h>
 
 @interface GuidePageViewController ()<UIScrollViewDelegate,FBRequestDelegate>
 {
@@ -44,7 +45,10 @@ static NSString *userActivationUrl = @"/gateway/record_fiu_user_active";
     
     if (self.flag == shouYe) {
         [self.player play];
-        FBRequest *request = [FBAPI postWithUrlString:userActivationUrl requestDictionary:nil delegate:self];
+        NSString *adId = [[[ASIdentifierManager sharedManager] advertisingIdentifier] UUIDString];
+        FBRequest *request = [FBAPI postWithUrlString:userActivationUrl requestDictionary:@{
+                                                                                        @"idfa":adId
+                                                                                            } delegate:self];
         request.flag = userActivationUrl;
         request.delegate = self;
         [request startRequest];

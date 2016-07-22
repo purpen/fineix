@@ -402,6 +402,7 @@
 		1F533E1B1D3E2793006FC72D /* ForgetViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1F533E191D3E2793006FC72D /* ForgetViewController.xib */; };
 		1F533E241D3F785A006FC72D /* PersonLabelPickerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F533E221D3F785A006FC72D /* PersonLabelPickerViewController.m */; };
 		1F533E251D3F785A006FC72D /* PersonLabelPickerViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1F533E231D3F785A006FC72D /* PersonLabelPickerViewController.xib */; };
+		1F533E271D41E9C6006FC72D /* AdSupport.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1F533E261D41E9C6006FC72D /* AdSupport.framework */; };
 		1F59E5FC1C9ABBA500E96C60 /* Accelerate.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1F59E5FB1C9ABBA500E96C60 /* Accelerate.framework */; };
 		1F69CE201CF70BFA00AE3271 /* OfficialCertificationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F69CE1E1CF70BFA00AE3271 /* OfficialCertificationViewController.m */; };
 		1F69CE211CF70BFA00AE3271 /* OfficialCertificationViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1F69CE1F1CF70BFA00AE3271 /* OfficialCertificationViewController.xib */; };
@@ -1264,6 +1265,7 @@
 		1F533E211D3F785A006FC72D /* PersonLabelPickerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PersonLabelPickerViewController.h; sourceTree = "<group>"; };
 		1F533E221D3F785A006FC72D /* PersonLabelPickerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PersonLabelPickerViewController.m; sourceTree = "<group>"; };
 		1F533E231D3F785A006FC72D /* PersonLabelPickerViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PersonLabelPickerViewController.xib; sourceTree = "<group>"; };
+		1F533E261D41E9C6006FC72D /* AdSupport.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AdSupport.framework; path = System/Library/Frameworks/AdSupport.framework; sourceTree = SDKROOT; };
 		1F59E5FB1C9ABBA500E96C60 /* Accelerate.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Accelerate.framework; path = System/Library/Frameworks/Accelerate.framework; sourceTree = SDKROOT; };
 		1F69CE1D1CF70BFA00AE3271 /* OfficialCertificationViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OfficialCertificationViewController.h; sourceTree = "<group>"; };
 		1F69CE1E1CF70BFA00AE3271 /* OfficialCertificationViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OfficialCertificationViewController.m; sourceTree = "<group>"; };
@@ -1535,6 +1537,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1F533E271D41E9C6006FC72D /* AdSupport.framework in Frameworks */,
 				D8AC3E011D2CFFEC00148522 /* libz.1.2.5.tbd in Frameworks */,
 				1FA4BDFC1D35F2200067A196 /* TencentOpenAPI.framework in Frameworks */,
 				D8AC3DFF1D2CFFD600148522 /* libstdc++.6.tbd in Frameworks */,
@@ -3738,6 +3741,7 @@
 		4121957EDE4D4049941B2B88 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				1F533E261D41E9C6006FC72D /* AdSupport.framework */,
 				D8AC3E001D2CFFEC00148522 /* libz.1.2.5.tbd */,
 				D8AC3DFE1D2CFFD600148522 /* libstdc++.6.tbd */,
 				D8AC3DFC1D2CFFB200148522 /* ImageIO.framework */,
@@ -4819,7 +4823,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 9.2;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
-				PROVISIONING_PROFILE = "b206b0c8-b4b8-474d-a61a-0d01f3b49a82";
+				PROVISIONING_PROFILE = "68229318-888d-4d23-9586-1a46706c4314";
 				SDKROOT = iphoneos;
 			};
 			name = Debug;
@@ -4857,7 +4861,7 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.2;
 				MTL_ENABLE_DEBUG_INFO = NO;
-				PROVISIONING_PROFILE = "b206b0c8-b4b8-474d-a61a-0d01f3b49a82";
+				PROVISIONING_PROFILE = "68229318-888d-4d23-9586-1a46706c4314";
 				SDKROOT = iphoneos;
 				VALIDATE_PRODUCT = YES;
 			};
@@ -4903,7 +4907,7 @@
 				OTHER_LIBTOOLFLAGS = "-all_load";
 				PRODUCT_BUNDLE_IDENTIFIER = com.THN.fineix;
 				PRODUCT_NAME = Fiu;
-				PROVISIONING_PROFILE = "b206b0c8-b4b8-474d-a61a-0d01f3b49a82";
+				PROVISIONING_PROFILE = "68229318-888d-4d23-9586-1a46706c4314";
 				RUN_CLANG_STATIC_ANALYZER = NO;
 				USER_HEADER_SEARCH_PATHS = "$(SRCROOT)";
 			};
@@ -4949,7 +4953,7 @@
 				OTHER_LIBTOOLFLAGS = "-all_load";
 				PRODUCT_BUNDLE_IDENTIFIER = com.THN.fineix;
 				PRODUCT_NAME = Fiu;
-				PROVISIONING_PROFILE = "b206b0c8-b4b8-474d-a61a-0d01f3b49a82";
+				PROVISIONING_PROFILE = "68229318-888d-4d23-9586-1a46706c4314";
 				RUN_CLANG_STATIC_ANALYZER = NO;
 				USER_HEADER_SEARCH_PATHS = "$(SRCROOT)";
 			};
