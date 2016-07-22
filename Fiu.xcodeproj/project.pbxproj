@@ -447,6 +447,8 @@
 		2800451B1C805CAC005F5C2E /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2800451A1C805CAC005F5C2E /* Security.framework */; };
 		2800451F1C805CCA005F5C2E /* CoreTelephony.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2800451E1C805CCA005F5C2E /* CoreTelephony.framework */; };
 		428C2359477649891E4F6061 /* libPods-Fiu.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 09E4F3F5D97AC3732034757F /* libPods-Fiu.a */; };
+		48C0708E1D4254AE002F461E /* UMMobClick.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 48C0708D1D4254AE002F461E /* UMMobClick.framework */; };
+		48C070911D4254D1002F461E /* AppDelegate+UMAnalytics.m in Sources */ = {isa = PBXBuildFile; fileRef = 48C070901D4254D1002F461E /* AppDelegate+UMAnalytics.m */; };
 		D802D7791C821D41007AFA3D /* AssetsLibrary.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D802D7781C821D41007AFA3D /* AssetsLibrary.framework */; };
 		D8035F2F1CB77D0C001920F9 /* UIImage+Helper.m in Sources */ = {isa = PBXBuildFile; fileRef = D8035F2E1CB77D0C001920F9 /* UIImage+Helper.m */; };
 		D8035F3B1CB784B3001920F9 /* UILable+Frame.m in Sources */ = {isa = PBXBuildFile; fileRef = D8035F3A1CB784B3001920F9 /* UILable+Frame.m */; };
@@ -1352,6 +1354,9 @@
 		2800451C1C805CBD005F5C2E /* libsqlite3.0.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libsqlite3.0.tbd; path = usr/lib/libsqlite3.0.tbd; sourceTree = SDKROOT; };
 		2800451E1C805CCA005F5C2E /* CoreTelephony.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreTelephony.framework; path = System/Library/Frameworks/CoreTelephony.framework; sourceTree = SDKROOT; };
 		280045201C805CD7005F5C2E /* libstdc++.6.0.9.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = "libstdc++.6.0.9.tbd"; path = "usr/lib/libstdc++.6.0.9.tbd"; sourceTree = SDKROOT; };
+		48C0708D1D4254AE002F461E /* UMMobClick.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = UMMobClick.framework; sourceTree = "<group>"; };
+		48C0708F1D4254D1002F461E /* AppDelegate+UMAnalytics.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "AppDelegate+UMAnalytics.h"; sourceTree = "<group>"; };
+		48C070901D4254D1002F461E /* AppDelegate+UMAnalytics.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "AppDelegate+UMAnalytics.m"; sourceTree = "<group>"; };
 		800507341C7A9CDD005AF0BE /* Fiu.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Fiu.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D802D7781C821D41007AFA3D /* AssetsLibrary.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AssetsLibrary.framework; path = System/Library/Frameworks/AssetsLibrary.framework; sourceTree = SDKROOT; };
 		D802D7891C844101007AFA3D /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
@@ -1585,6 +1590,7 @@
 				D812815F1CAA8532007CF08B /* BaiduMapAPI_Base.framework in Frameworks */,
 				D81281631CAA8532007CF08B /* BaiduMapAPI_Radar.framework in Frameworks */,
 				D81281641CAA8532007CF08B /* BaiduMapAPI_Search.framework in Frameworks */,
+				48C0708E1D4254AE002F461E /* UMMobClick.framework in Frameworks */,
 				1FA4BDFB1D35F2200067A196 /* libSocialQQ.a in Frameworks */,
 				428C2359477649891E4F6061 /* libPods-Fiu.a in Frameworks */,
 			);
@@ -3808,6 +3814,8 @@
 				D81280C31CAA8532007CF08B /* International */,
 				D81280141CAA8532007CF08B /* AppDelegate.h */,
 				1F772B5D1CF3FD910018AE40 /* AppDelegate.mm */,
+				48C0708F1D4254D1002F461E /* AppDelegate+UMAnalytics.h */,
+				48C070901D4254D1002F461E /* AppDelegate+UMAnalytics.m */,
 				D8932E451D17FE8100428FC7 /* Launch Screen.storyboard */,
 				D8A9AD081CD9CCA900A9FCFB /* Assets.xcassets */,
 				D81280C01CAA8532007CF08B /* fineix.xcdatamodeld */,
@@ -3910,6 +3918,7 @@
 		D81280CB1CAA8532007CF08B /* Vendors */ = {
 			isa = PBXGroup;
 			children = (
+				48C0708D1D4254AE002F461E /* UMMobClick.framework */,
 				1FA4BDB51D35F2200067A196 /* UMSocial_Sdk_5.2.1 */,
 				1FA4BDD01D35F2200067A196 /* UMSocial_Sdk_Extra_Frameworks */,
 				1F27AE851CE06BB1005A434B /* AliPay */,
@@ -4675,6 +4684,7 @@
 				1F2A8F3B1CF40277005116C7 /* AddTagViewController.m in Sources */,
 				1F2A90951CF40277005116C7 /* CommentId.m in Sources */,
 				1F2A8F3F1CF40277005116C7 /* FindGoodsModelRow.m in Sources */,
+				48C070911D4254D1002F461E /* AppDelegate+UMAnalytics.m in Sources */,
 				1FA204E51D378AAB00B89699 /* UIView+Size.m in Sources */,
 				1F2A8FAE1CF40277005116C7 /* FBSureOrderViewController.m in Sources */,
 				1F2A8F741CF40277005116C7 /* FiuSceneLocation.m in Sources */,
@@ -4884,6 +4894,7 @@
 					"$(PROJECT_DIR)/Fiu/Vendors/BaiduMapSDK",
 					"$(PROJECT_DIR)/Fiu/Vendors/UMSocial_Sdk_Extra_Frameworks/TencentOpenAPI",
 					"$(PROJECT_DIR)/Fiu/Vendors/AliPay",
+					"$(PROJECT_DIR)/Fiu/Vendors",
 				);
 				GCC_INPUT_FILETYPE = sourcecode.cpp.objcpp;
 				GCC_PREFIX_HEADER = "";
@@ -4930,6 +4941,7 @@
 					"$(PROJECT_DIR)/Fiu/Vendors/BaiduMapSDK",
 					"$(PROJECT_DIR)/Fiu/Vendors/UMSocial_Sdk_Extra_Frameworks/TencentOpenAPI",
 					"$(PROJECT_DIR)/Fiu/Vendors/AliPay",
+					"$(PROJECT_DIR)/Fiu/Vendors",
 				);
 				GCC_INPUT_FILETYPE = sourcecode.cpp.objcpp;
 				GCC_PREFIX_HEADER = "";
