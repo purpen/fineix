@@ -177,7 +177,6 @@ static NSString *const updateIdentify = @"/my/update_user_identify";
     FBRequest * request = [FBAPI postWithUrlString:IconURL requestDictionary:params delegate:self];
     request.flag = IconURL;
     [request startRequest];
-    [SVProgressHUD showWithMaskType:SVProgressHUDMaskTypeClear];
 }
 
 -(void)requestSucess:(FBRequest *)request result:(id)result{
