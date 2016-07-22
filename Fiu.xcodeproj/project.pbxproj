@@ -488,6 +488,8 @@
 		D847632B1D41CE3900C88379 /* MarkGoodsView.m in Sources */ = {isa = PBXBuildFile; fileRef = D847632A1D41CE3900C88379 /* MarkGoodsView.m */; };
 		D847632E1D424DCD00C88379 /* ShowContentView.m in Sources */ = {isa = PBXBuildFile; fileRef = D847632D1D424DCD00C88379 /* ShowContentView.m */; };
 		D84763311D426EED00C88379 /* AddTagsView.m in Sources */ = {isa = PBXBuildFile; fileRef = D84763301D426EED00C88379 /* AddTagsView.m */; };
+		D84763341D427E0100C88379 /* AdSupport.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D84763321D427E0100C88379 /* AdSupport.framework */; };
+		D84763351D427E0100C88379 /* iAd.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D84763331D427E0100C88379 /* iAd.framework */; };
 		D8615C551D0FDC4E00C12FA2 /* EditViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D8615C541D0FDC4E00C12FA2 /* EditViewController.m */; };
 		D8707F071D37FA3200007835 /* FBGoodsInfoModel.m in Sources */ = {isa = PBXBuildFile; fileRef = D8707F021D37FA3200007835 /* FBGoodsInfoModel.m */; };
 		D8707F081D37FA3200007835 /* FBGoodsInfoModelData.m in Sources */ = {isa = PBXBuildFile; fileRef = D8707F041D37FA3200007835 /* FBGoodsInfoModelData.m */; };
@@ -1424,6 +1426,8 @@
 		D847632D1D424DCD00C88379 /* ShowContentView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ShowContentView.m; sourceTree = "<group>"; };
 		D847632F1D426EED00C88379 /* AddTagsView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AddTagsView.h; sourceTree = "<group>"; };
 		D84763301D426EED00C88379 /* AddTagsView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AddTagsView.m; sourceTree = "<group>"; };
+		D84763321D427E0100C88379 /* AdSupport.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AdSupport.framework; path = System/Library/Frameworks/AdSupport.framework; sourceTree = SDKROOT; };
+		D84763331D427E0100C88379 /* iAd.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = iAd.framework; path = System/Library/Frameworks/iAd.framework; sourceTree = SDKROOT; };
 		D8615C531D0FDC4E00C12FA2 /* EditViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EditViewController.h; sourceTree = "<group>"; };
 		D8615C541D0FDC4E00C12FA2 /* EditViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EditViewController.m; sourceTree = "<group>"; };
 		D8707F011D37FA3200007835 /* FBGoodsInfoModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FBGoodsInfoModel.h; sourceTree = "<group>"; };
@@ -1544,6 +1548,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D84763341D427E0100C88379 /* AdSupport.framework in Frameworks */,
+				D84763351D427E0100C88379 /* iAd.framework in Frameworks */,
 				D8AC3E011D2CFFEC00148522 /* libz.1.2.5.tbd in Frameworks */,
 				1FA4BDFC1D35F2200067A196 /* TencentOpenAPI.framework in Frameworks */,
 				D8AC3DFF1D2CFFD600148522 /* libstdc++.6.tbd in Frameworks */,
@@ -3753,6 +3759,8 @@
 		4121957EDE4D4049941B2B88 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				D84763321D427E0100C88379 /* AdSupport.framework */,
+				D84763331D427E0100C88379 /* iAd.framework */,
 				D8AC3E001D2CFFEC00148522 /* libz.1.2.5.tbd */,
 				D8AC3DFE1D2CFFD600148522 /* libstdc++.6.tbd */,
 				D8AC3DFC1D2CFFB200148522 /* ImageIO.framework */,

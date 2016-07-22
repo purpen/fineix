@@ -19,8 +19,9 @@
 #import "UIImageView+WebCache.h"
 
 @interface ProjectViewController ()<UIWebViewDelegate>
+
 @property (weak, nonatomic) IBOutlet UIWebView *projectWebView;
-@property (weak, nonatomic) IBOutlet UIButton *shareBtn;
+
 @property (weak, nonatomic) IBOutlet UIButton *commentsBtn;
 @property (weak, nonatomic) IBOutlet UIButton *loveBtn;
 @property (weak, nonatomic) IBOutlet UILabel *loveContLabel;
@@ -46,6 +47,8 @@ static NSString *const ShareURL = @"http://m.taihuoniao.com/guide/app_about";
     UIApplication *app = [UIApplication sharedApplication];
     [app setStatusBarHidden:NO];
 }
+
+
 
 /**
  *  获取网页连接
@@ -96,10 +99,15 @@ static NSString *const ShareURL = @"http://m.taihuoniao.com/guide/app_about";
     // Dispose of any resources that can be recreated.
 }
 
+-(void)viewWillDisappear:(BOOL)animated{
+    [super viewWillDisappear:animated];
+    [SVProgressHUD dismiss];
+}
+
 //UIWebViewDelegate
 //网页开始加载时出现进度条
 -(void)webViewDidStartLoad:(UIWebView *)webView{
-    [SVProgressHUD showWithMaskType:SVProgressHUDMaskTypeClear];
+    [SVProgressHUD show];
 }
 //网页加载完成进度条消失
 -(void)webViewDidFinishLoad:(UIWebView *)webView{
@@ -240,7 +248,7 @@ static NSString *const ShareURL = @"http://m.taihuoniao.com/guide/app_about";
  *
  *  @param sender 中间的那个按钮
  */
-- (IBAction)shareBtn:(UIButton *)sender {
+- (IBAction)sharBtn:(id)sender {
     self.shareVC.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;
     self.shareVC.modalPresentationStyle = UIModalPresentationOverCurrentContext;
     [self presentViewController:_shareVC animated:YES completion:nil];
@@ -249,8 +257,8 @@ static NSString *const ShareURL = @"http://m.taihuoniao.com/guide/app_about";
     [_shareVC.friendBtn addTarget:self action:@selector(timelineShareBtnAction:) forControlEvents:UIControlEventTouchUpInside];
     [_shareVC.qqBtn addTarget:self action:@selector(qqShareBtnAction:) forControlEvents:UIControlEventTouchUpInside];
     [_shareVC.weiBoBtn addTarget:self action:@selector(sinaShareBtnAction:) forControlEvents:UIControlEventTouchUpInside];
-    [_shareVC.cancelBtn addTarget:self action:@selector(cancleBtnAction:) forControlEvents:UIControlEventTouchUpInside];
 }
+
 
 -(ShareViewController *)shareVC{
     if (!_shareVC) {
@@ -274,7 +282,7 @@ static NSString *const ShareURL = @"http://m.taihuoniao.com/guide/app_about";
                                                     urlResource:imgUrl
                                             presentedController:self completion:^(UMSocialResponseEntity *response){
                                                 if (response.responseCode == UMSResponseCodeSuccess) {
-                                                    [SVProgressHUD showSuccessWithStatus:@"分享成功"];
+                                                    [SVProgressHUD showSuccessWithStatus:@"让分享变成生产力，别让生活偷走远方的精彩"];
                                                 } else {
                                                     [SVProgressHUD showErrorWithStatus:@"分享失败"];
                                                 }
@@ -293,7 +301,7 @@ static NSString *const ShareURL = @"http://m.taihuoniao.com/guide/app_about";
                                                     urlResource:imgUrl
                                             presentedController:self completion:^(UMSocialResponseEntity *response){
                                                 if (response.responseCode == UMSResponseCodeSuccess) {
-                                                    [SVProgressHUD showSuccessWithStatus:@"分享成功"];
+                                                    [SVProgressHUD showSuccessWithStatus:@"让分享变成生产力，别让生活偷走远方的精彩"];
                                                 } else {
                                                     [SVProgressHUD showErrorWithStatus:@"分享失败"];
                                                 }
@@ -313,7 +321,7 @@ static NSString *const ShareURL = @"http://m.taihuoniao.com/guide/app_about";
                                             presentedController:self
                                                      completion:^(UMSocialResponseEntity *response){
                                                          if (response.responseCode == UMSResponseCodeSuccess) {
-                                                             [SVProgressHUD showSuccessWithStatus:@"分享成功"];
+                                                             [SVProgressHUD showSuccessWithStatus:@"让分享变成生产力，别让生活偷走远方的精彩"];
                                                          } else {
                                                              [SVProgressHUD showErrorWithStatus:@"分享失败"];
                                                          }
@@ -330,7 +338,7 @@ static NSString *const ShareURL = @"http://m.taihuoniao.com/guide/app_about";
                                             presentedController:self
                                                      completion:^(UMSocialResponseEntity *shareResponse){
                                                          if (shareResponse.responseCode == UMSResponseCodeSuccess) {
-                                                             [SVProgressHUD showSuccessWithStatus:@"分享成功"];
+                                                             [SVProgressHUD showSuccessWithStatus:@"让分享变成生产力，别让生活偷走远方的精彩"];
                                                          } else {
                                                              [SVProgressHUD showErrorWithStatus:@"分享失败"];
                                                          }

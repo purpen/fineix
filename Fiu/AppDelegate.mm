@@ -28,6 +28,7 @@
 #import "UITabBar+badge.h"
 #import "IQKeyboardManager.h"
 #import "InviteCCodeViewController.h"
+#import "AppDelegate+UMAnalytics.h"
 
 @interface AppDelegate ()<WXApiDelegate>
 {
@@ -39,7 +40,7 @@
 
 @end
 
-NSString *const UMSocialAppKey = @"56ef6ab167e58e85710005b3";
+NSString *const UMSocialAppKey = @"5791f41b67e58e8de5002568";
 NSString *const SinaAppKey = @"1342896218";
 NSString *const SinaAppSecret = @"ed4fe8faa35c5b006ad7a87d76e60583";
 
@@ -114,6 +115,8 @@ NSString *const determineLogin = @"/auth/check_login";
 
     //设置友盟社会化组件appkey--------------------------------------------------
     [UMSocialData setAppKey:UMSocialAppKey];
+    //注册友盟统计
+    [self RegistrUMAnalyticsWithAppkey:UMSocialAppKey];
     //设置微信AppId、appSecret，分享url
     [UMSocialWechatHandler setWXAppId:WechatAppID appSecret:WechatAppSecret url:@"http://www.taihuoniao.com"];
     

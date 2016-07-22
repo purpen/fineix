@@ -466,7 +466,7 @@ static NSString *const URLDeleteScene = @"/scene_scene/delete";
     self.view.backgroundColor = [UIColor whiteColor];
     self.delegate = self;
     [self addNavLogoImgisTransparent:YES];
-    [self addBarItemRightBarButton:@"" image:@"icon_newScene" isTransparent:YES];
+//    [self addBarItemRightBarButton:@"" image:@"icon_newScene" isTransparent:YES];
     [self addBarItemLeftBarButton:@"" image:@"icon_back" isTransparent:YES];
 }
 
@@ -478,11 +478,11 @@ static NSString *const URLDeleteScene = @"/scene_scene/delete";
     }
 }
 
-- (void)rightBarItemSelected {
-    PictureToolViewController * pictureToolVC = [[PictureToolViewController alloc] init];
-    pictureToolVC.createType = @"fScene";
-    [self presentViewController:pictureToolVC animated:YES completion:nil];
-}
+//- (void)rightBarItemSelected {
+//    PictureToolViewController * pictureToolVC = [[PictureToolViewController alloc] init];
+//    pictureToolVC.createType = @"fScene";
+//    [self presentViewController:pictureToolVC animated:YES completion:nil];
+//}
 
 - (void)viewWillDisappear:(BOOL)animated {
     [super viewWillDisappear:animated];

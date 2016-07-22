@@ -68,7 +68,7 @@ NSString *const LoginURL = @"/auth/login";//登录接口
     
     self.accountField.delegate = self;
     self.accountField.keyboardAppearance = UIKeyboardAppearanceLight;
-    self.accountField.keyboardType = UIKeyboardTypeASCIICapable;
+    self.accountField.keyboardType = UIKeyboardTypeNumberPad;
     self.accountField.returnKeyType = UIReturnKeyNext;
     self.accountField.clearButtonMode = UITextFieldViewModeWhileEditing;
     

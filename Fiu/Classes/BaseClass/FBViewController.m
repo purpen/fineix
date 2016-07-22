@@ -257,8 +257,8 @@ static NSString *const URLUserIsLogin = @"/user/user_info";
     [self.rightBtn setTitle:title forState:UIControlStateNormal];
     if ([title isEqualToString:@"全部城市"]) {
         [self.rightBtn setTitleColor:[UIColor colorWithHexString:fineixColor] forState:UIControlStateNormal];
-        self.rightBtn.imageEdgeInsets = UIEdgeInsetsMake(0, -30, 0, 0);
-        self.rightBtn.titleEdgeInsets = UIEdgeInsetsMake(0, -25, 0, 0);
+        self.rightBtn.imageEdgeInsets = UIEdgeInsetsMake(0, -42, 0, 0);
+        self.rightBtn.titleEdgeInsets = UIEdgeInsetsMake(0, -37, 0, 0);
         self.rightBtn.titleLabel.font = [UIFont systemFontOfSize:12];
     }
     if ([title isEqualToString:@"保存"]) {

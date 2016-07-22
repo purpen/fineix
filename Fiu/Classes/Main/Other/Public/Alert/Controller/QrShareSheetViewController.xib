@@ -10,12 +10,16 @@
             <connections>
                 <outlet property="cancelBtn" destination="Msd-Ea-ok2" id="Tld-Fb-Q68"/>
                 <outlet property="firendBtn" destination="Kna-ok-Mdg" id="xfa-53-cfL"/>
+                <outlet property="friendView" destination="fqE-Mo-iHR" id="ZQ4-MW-mIL"/>
                 <outlet property="otherBtn" destination="lSv-T1-pd3" id="NsC-BR-cfc"/>
                 <outlet property="qqBtn" destination="nTR-Pf-hMe" id="sEu-0c-eGm"/>
+                <outlet property="qqView" destination="SMy-0k-31H" id="EcG-xq-Sat"/>
                 <outlet property="saoMiaoBtn" destination="1R4-MF-mrZ" id="ius-kQ-ulo"/>
                 <outlet property="saveBtn" destination="IgY-P8-AxC" id="YAO-52-l1i"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
                 <outlet property="weChatBtn" destination="QbQ-dv-OjL" id="gO0-aF-pGT"/>
+                <outlet property="wechatView" destination="ZEE-hx-t5i" id="HHN-CU-z5R"/>
+                <outlet property="weiBoView" destination="PIf-l1-Vro" id="cGo-W0-dkx"/>
                 <outlet property="weiboBtn" destination="VlF-VU-Ksh" id="R8U-dx-dym"/>
             </connections>
         </placeholder>
@@ -125,6 +129,12 @@
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="fqE-Mo-iHR">
                             <rect key="frame" x="94" y="0.0" width="94" height="115"/>
                             <subviews>
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="微信朋友圈" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="j0c-XN-WrI">
+                                    <rect key="frame" x="17" y="81" width="60" height="15"/>
+                                    <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                    <nil key="highlightedColor"/>
+                                </label>
                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Kna-ok-Mdg">
                                     <rect key="frame" x="28" y="28" width="38" height="38"/>
                                     <constraints>
@@ -133,12 +143,6 @@
                                     </constraints>
                                     <state key="normal" image="icon_friends"/>
                                 </button>
-                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="微信朋友圈" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="j0c-XN-WrI">
-                                    <rect key="frame" x="17" y="81" width="60" height="15"/>
-                                    <fontDescription key="fontDescription" type="system" pointSize="12"/>
-                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
-                                    <nil key="highlightedColor"/>
-                                </label>
                             </subviews>
                             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             <constraints>
@@ -185,8 +189,8 @@
                                     </constraints>
                                     <state key="normal" image="icon_qq"/>
                                 </button>
-                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="QQ空间" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ejO-n7-jjs">
-                                    <rect key="frame" x="26" y="81" width="43" height="15"/>
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="QQ" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ejO-n7-jjs">
+                                    <rect key="frame" x="38" y="81" width="19" height="15"/>
                                     <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                     <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                     <nil key="highlightedColor"/>
