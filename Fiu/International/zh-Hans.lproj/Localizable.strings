@@ -135,6 +135,7 @@
 "creatNewFiuScene" = "创建新的情景";
 "creatFiuSceneBtn" = "＋ 创建情景";
 "markGoodsBtnTitle" = "标记情景中的产品或产品链接";
+"addTagsBtn" = "添加标签";
 
 //  评论
 "comment" = "评论一下";

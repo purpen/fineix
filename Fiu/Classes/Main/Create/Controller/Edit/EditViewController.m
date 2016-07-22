@@ -40,7 +40,6 @@ static NSString *const URLReleaseFiuScenen = @"/scene_scene/save";
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    NSLog(@"%@", self.data);
     [self setReleaseViewUI];
 }
 
@@ -205,11 +204,12 @@ static NSString *const URLReleaseFiuScenen = @"/scene_scene/save";
 
 #pragma mark - 改变视图位置，弹出内容输入框
 - (void)addContentBtnClick {
+    
     CGRect topRect = CGRectMake(0, -100, SCREEN_WIDTH, 88);
     [UIView animateWithDuration:.3 animations:^{
         self.navView.alpha = 0;
         self.topView.frame = topRect;
-        self.addContentBtn.alpha = 0;
+        self.addContentBtn.hidden = YES;
     }];
     
     CGRect contentRect = CGRectMake(0, SCREEN_HEIGHT - 530, SCREEN_WIDTH, 280);
@@ -221,60 +221,11 @@ static NSString *const URLReleaseFiuScenen = @"/scene_scene/save";
     }];
 }
 
-- (void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event {
-    for (UIView * view in self.view.subviews) {
-        if ([view isKindOfClass:[self.bgImgView class]]) {
-            [self editDone];
-        }
-    }
-}
-
-#pragma mark - 点击空白处，编辑完成
-- (void)editDone {
-    if (self.addContent.title.text.length > 0 && ![self.addContent.content.text isEqualToString:NSLocalizedString(@"addDescription", nil)]) {
-        CGRect topRect = CGRectMake(0, 50, SCREEN_WIDTH, 88);
-        [UIView animateWithDuration:.3 animations:^{
-            self.navView.alpha = 1;
-            self.topView.frame = topRect;
-        }];
-        
-        CGRect contentRect = CGRectMake(0, SCREEN_HEIGHT - 230, SCREEN_WIDTH, 280);
-        [UIView animateWithDuration:0.3 animations:^{
-            self.addContent.alpha = 1;
-            self.addContent.frame = contentRect;
-            self.addContent.chooseText.hidden = YES;
-            [self.addContent.title resignFirstResponder];
-        }];
-        [self.addContent.title resignFirstResponder];
-        [self.addContent.content resignFirstResponder];
-        
-        if (self.addContent.chooseTagMarr.count > 0) {
-            [self.addContent getUserEditTags:self.addContent.chooseTagMarr];
-        }
-        
-    } else {
-        self.addContentBtn.hidden = NO;
-        
-        CGRect topRect = CGRectMake(0, 50, SCREEN_WIDTH, 88);
-        [UIView animateWithDuration:.3 animations:^{
-            self.navView.alpha = 1;
-            self.topView.frame = topRect;
-            self.addContentBtn.alpha = 1;
-        }];
-        
-        [UIView animateWithDuration:0.3 animations:^{
-            self.addContent.alpha = 0;
-            [self.addContent.title resignFirstResponder];
-        }];
-    }
-}
-
 #pragma mark - 内容视图
 - (AddContentView *)addContent {
     if (!_addContent) {
         _addContent = [[AddContentView alloc] initWithFrame:CGRectMake(0, SCREEN_HEIGHT - 230, SCREEN_WIDTH, 280)];
         _addContent.vc = self;
-        _addContent.delegate = self;
         _addContent.chooseText.hidden = YES;
         _addContent.title.text = [self.data valueForKey:@"title"];
         _addContent.content.text = [self.data valueForKey:@"des"];
@@ -305,11 +256,7 @@ static NSString *const URLReleaseFiuScenen = @"/scene_scene/save";
 - (void)releaseScene {
     if ([self.createType isEqualToString:@"scene"]) {
         [self networkNewSceneData];
-        
     }
-//    else if ([self.createType isEqualToString:@"fScene"]) {
-//        [self networkNewFiuSceneData];
-//    }
 }
 
 - (void)dealloc {

@@ -14,7 +14,7 @@
 
 typedef void(^EditSceneDone)();
 
-@interface EditViewController : FBPictureViewController <AddContentViewDelegate>
+@interface EditViewController : FBPictureViewController 
 
 @pro_strong FBRequest               *   editSceneRequest;
 @pro_strong FBRequest               *   editFiuSceneRequest;

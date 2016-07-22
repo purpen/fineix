@@ -166,7 +166,7 @@ static NSString *const URLListText = @"/scene_context/getlist";
         _bgImgView.contentMode = UIViewContentModeScaleAspectFill;
         _bgImgView.clipsToBounds = YES;
         
-        UIBlurEffect * blurEffect = [UIBlurEffect effectWithStyle:UIBlurEffectStyleLight];
+        UIBlurEffect * blurEffect = [UIBlurEffect effectWithStyle:UIBlurEffectStyleDark];
         UIVisualEffectView * effectView = [[UIVisualEffectView alloc] initWithEffect:blurEffect];
         effectView.frame = _bgImgView.bounds;
         [_bgImgView addSubview:effectView];

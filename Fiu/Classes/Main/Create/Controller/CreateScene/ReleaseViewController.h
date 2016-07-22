@@ -12,8 +12,10 @@
 #import "AddLocationView.h"
 #import "AddCategoryView.h"
 #import "AddContentView.h"
+#import "ShowContentView.h"
+#import "AddTagsView.h"
 
-@interface ReleaseViewController : FBPictureViewController <AddContentViewDelegate>
+@interface ReleaseViewController : FBPictureViewController <ShowContentViewDelegate, AddTagsViewDelegate>
 
 @pro_strong FBRequest           *   releaseSceneRequest;
 @pro_strong FBRequest           *   releaseFiuSceneRequest;
@@ -35,6 +37,8 @@
 @pro_strong AddLocationView     *   addLocaiton;
 @pro_strong AddCategoryView     *   addCategory;
 @pro_strong AddContentView      *   addContent;
+@pro_strong ShowContentView     *   showContent;
+@pro_strong AddTagsView         *   addTagsView;
 @pro_strong UIButton            *   addContentBtn;
 
 @end

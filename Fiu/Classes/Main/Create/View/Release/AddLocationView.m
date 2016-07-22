@@ -15,9 +15,14 @@
     self = [super initWithFrame:frame];
     if (self) {
         
+        UILabel * topLineLab = [[UILabel alloc] initWithFrame:CGRectMake(15, 0, SCREEN_WIDTH - 15, 1)];
+        topLineLab.backgroundColor = [UIColor colorWithHexString:@"#FFFFFF" alpha:0.3];
+        [self addSubview:topLineLab];
+        
         [self addSubview:self.addLocation];
         [self addSubview:self.locationView];
         [self addSubview:self.clearBtn];
+        
         UILabel * lineLab = [[UILabel alloc] initWithFrame:CGRectMake(15, 43, SCREEN_WIDTH - 15, 1)];
         lineLab.backgroundColor = [UIColor colorWithHexString:@"#FFFFFF" alpha:0.2];
         [self addSubview:lineLab];

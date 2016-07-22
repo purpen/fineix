@@ -486,6 +486,8 @@
 		D83A64391C8E7EC5003DB8BB /* CoreMedia.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D83A64381C8E7EC5003DB8BB /* CoreMedia.framework */; };
 		D83A643B1C8E7ED2003DB8BB /* CoreImage.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D83A643A1C8E7ED2003DB8BB /* CoreImage.framework */; };
 		D847632B1D41CE3900C88379 /* MarkGoodsView.m in Sources */ = {isa = PBXBuildFile; fileRef = D847632A1D41CE3900C88379 /* MarkGoodsView.m */; };
+		D847632E1D424DCD00C88379 /* ShowContentView.m in Sources */ = {isa = PBXBuildFile; fileRef = D847632D1D424DCD00C88379 /* ShowContentView.m */; };
+		D84763311D426EED00C88379 /* AddTagsView.m in Sources */ = {isa = PBXBuildFile; fileRef = D84763301D426EED00C88379 /* AddTagsView.m */; };
 		D8615C551D0FDC4E00C12FA2 /* EditViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D8615C541D0FDC4E00C12FA2 /* EditViewController.m */; };
 		D8707F071D37FA3200007835 /* FBGoodsInfoModel.m in Sources */ = {isa = PBXBuildFile; fileRef = D8707F021D37FA3200007835 /* FBGoodsInfoModel.m */; };
 		D8707F081D37FA3200007835 /* FBGoodsInfoModelData.m in Sources */ = {isa = PBXBuildFile; fileRef = D8707F041D37FA3200007835 /* FBGoodsInfoModelData.m */; };
@@ -1418,6 +1420,10 @@
 		D83A643A1C8E7ED2003DB8BB /* CoreImage.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreImage.framework; path = System/Library/Frameworks/CoreImage.framework; sourceTree = SDKROOT; };
 		D84763291D41CE3900C88379 /* MarkGoodsView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MarkGoodsView.h; sourceTree = "<group>"; };
 		D847632A1D41CE3900C88379 /* MarkGoodsView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MarkGoodsView.m; sourceTree = "<group>"; };
+		D847632C1D424DCD00C88379 /* ShowContentView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShowContentView.h; sourceTree = "<group>"; };
+		D847632D1D424DCD00C88379 /* ShowContentView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ShowContentView.m; sourceTree = "<group>"; };
+		D847632F1D426EED00C88379 /* AddTagsView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AddTagsView.h; sourceTree = "<group>"; };
+		D84763301D426EED00C88379 /* AddTagsView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AddTagsView.m; sourceTree = "<group>"; };
 		D8615C531D0FDC4E00C12FA2 /* EditViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EditViewController.h; sourceTree = "<group>"; };
 		D8615C541D0FDC4E00C12FA2 /* EditViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EditViewController.m; sourceTree = "<group>"; };
 		D8707F011D37FA3200007835 /* FBGoodsInfoModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FBGoodsInfoModel.h; sourceTree = "<group>"; };
@@ -1867,6 +1873,10 @@
 				D8B855C71D3F748B0008BD57 /* AddCategoryView.m */,
 				D8B855CC1D3F7F1F0008BD57 /* AddContentView.h */,
 				D8B855CD1D3F7F1F0008BD57 /* AddContentView.m */,
+				D847632C1D424DCD00C88379 /* ShowContentView.h */,
+				D847632D1D424DCD00C88379 /* ShowContentView.m */,
+				D847632F1D426EED00C88379 /* AddTagsView.h */,
+				D84763301D426EED00C88379 /* AddTagsView.m */,
 			);
 			path = Release;
 			sourceTree = "<group>";
@@ -4529,6 +4539,7 @@
 				1F2A8F5C1CF40277005116C7 /* OpenAllTagListTableViewCell.m in Sources */,
 				1F2A8F631CF40277005116C7 /* SearchGoodsView.m in Sources */,
 				D8BE89D81D33401C00DE5029 /* FBBrandGoodsView.m in Sources */,
+				D847632E1D424DCD00C88379 /* ShowContentView.m in Sources */,
 				1F2A8FA71CF40277005116C7 /* GoodsBrandViewController.m in Sources */,
 				1F2A906D1CF40277005116C7 /* AllOderViewController.m in Sources */,
 				1F2A90801CF40277005116C7 /* MyOderModel.m in Sources */,
@@ -4611,6 +4622,7 @@
 				1F2A90A81CF40277005116C7 /* UserHeaderTableViewCell.m in Sources */,
 				D8C690B41D1125F80026EAB5 /* EditSceneAddMoreView.m in Sources */,
 				1F2A8F461CF40277005116C7 /* FBPictureViewController.m in Sources */,
+				D84763311D426EED00C88379 /* AddTagsView.m in Sources */,
 				D8B855BB1D3CCC190008BD57 /* FBTagItem.m in Sources */,
 				1F2A8FB81CF40277005116C7 /* FiuBrandRow.m in Sources */,
 				1F2A8F941CF40277005116C7 /* LikeOrSuPeopleData.m in Sources */,

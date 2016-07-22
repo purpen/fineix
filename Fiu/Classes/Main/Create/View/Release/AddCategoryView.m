@@ -27,6 +27,7 @@
 
 - (void)getChooseFScene:(NSString *)title {
     [self.addCategory setTitle:title forState:(UIControlStateNormal)];
+    [self.addCategory setTitleColor:[UIColor whiteColor] forState:(UIControlStateNormal)];
 }
 
 #pragma mark 选择情景分类
