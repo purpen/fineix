@@ -442,7 +442,7 @@ static NSString *const URLFiuPeople = @"/user/activity_user";
     [self addNavLogoImgisTransparent:NO];
     self.baseTable = self.discoverTableView;
     [self addBarItemLeftBarButton:@"" image:@"Nav_Search" isTransparent:NO];
-    [self addBarItemRightBarButton:@"" image:@"Nav_Location" isTransparent:NO];
+//    [self addBarItemRightBarButton:@"" image:@"Nav_Location" isTransparent:NO];
 }
 
 //  点击左边barItem

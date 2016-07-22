@@ -37,7 +37,6 @@ static NSString *userActivationUrl = @"/gateway/record_fiu_user_active";
 }
 
 -(void)requestSucess:(FBRequest *)request result:(id)result{
-    
 }
 
 - (void)viewDidLoad {
