@@ -21,6 +21,10 @@
         self.categoryId = [dictionary[@"_id"] integerValue];
     }
     
+    if(![dictionary[@"app_cover_url"] isKindOfClass:[NSNull class]]){
+        self.appCoverUrl = dictionary[@"app_cover_url"];
+    }
+    
     return self;
 }
 

@@ -11,9 +11,6 @@
 #import <SVProgressHUD/SVProgressHUD.h>
 #import "FBMenuView.h"
 
-typedef void(^DismissVC)();
-typedef void(^GetSeletFSceneIdAndTitlelBlock)(NSString * idx, NSString * title);
-
 @interface SelectAllFSceneViewController : FBPictureViewController <UICollectionViewDelegate, UICollectionViewDataSource, FBMenuViewDelegate>
 
 @pro_strong NSString                *   type;
@@ -22,14 +19,11 @@ typedef void(^GetSeletFSceneIdAndTitlelBlock)(NSString * idx, NSString * title);
 @pro_strong NSString                *   fiuSceneId;             //  所选情景id
 @pro_strong NSString                *   fiuSceneTitle;          //  所选情景title
 @pro_strong UICollectionView        *   allSceneView;           //  全部的情景
-@pro_strong FBMenuView              *   categoryMenuView;       //  滑动导航栏
 
-@pro_strong FBRequest               *   categoryListRequest;
 @pro_strong FBRequest               *   allSceneListRequest;
+@pro_strong NSString                *   categoryId;
 @pro_assign NSInteger                   currentpageNum;
 @pro_assign NSInteger                   totalPageNum;
 
-@pro_copy DismissVC dismissVC;
-@pro_copy GetSeletFSceneIdAndTitlelBlock  getIdxAndTitltBlock;
 
 @end

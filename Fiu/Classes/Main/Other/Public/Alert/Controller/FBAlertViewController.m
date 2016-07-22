@@ -74,7 +74,7 @@ static NSInteger const fiuActionBtnTag = 696;
         editVC.createType = self.type;
         editVC.ids = self.targetId;
         editVC.data = self.fiuSceneData;
-        editVC.editDone = ^ {
+        editVC.editSceneDone = ^ {
             [self dismissViewControllerAnimated:YES completion:^{
                 self.editDoneAndRefresh();
             }];
@@ -137,7 +137,8 @@ static NSInteger const fiuActionBtnTag = 696;
         editVC.createType = self.type;
         editVC.ids = self.targetId;
         editVC.data = self.sceneData;
-        editVC.editDone = ^ {
+        [editVC.bgImgView downloadImage:[self.sceneData valueForKey:@"cover_url"] place:[UIImage imageNamed:@""]];
+        editVC.editSceneDone = ^ {
             [self dismissViewControllerAnimated:YES completion:^{
                 self.editDoneAndRefresh();
             }];

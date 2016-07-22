@@ -219,7 +219,7 @@
     _popView = [self getPopView];
     [_bgView addSubview:_popView];
     [_popView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.size.mas_equalTo(CGSizeMake(300, 300));
+        make.size.mas_equalTo(CGSizeMake(300, 200));
         make.centerY.equalTo(_bgView);
         make.centerX.equalTo(_bgView);
     }];
@@ -239,29 +239,29 @@
         make.top.equalTo(popView.mas_top).with.offset(0);
     }];
     
-    _shareBtn = [self getShareBtn];
-    [popView addSubview:_shareBtn];
-    [_shareBtn mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.size.mas_equalTo(CGSizeMake(250, 44));
-        make.centerX.equalTo(popView);
-        make.top.equalTo(popView.mas_top).with.offset(70);
-    }];
-    
     _shareText = [self getShareText];
     [popView addSubview:_shareText];
     [_shareText mas_makeConstraints:^(MASConstraintMaker *make) {
         make.size.mas_equalTo(CGSizeMake(230, 50));
         make.centerX.equalTo(popView);
-        make.top.equalTo(_shareBtn.mas_bottom).with.offset(15);
+        make.top.equalTo(popView.mas_top).with.offset(60);
     }];
     
-    _bottomView = [self getBottomView];
-    [popView addSubview:_bottomView];
-    [_bottomView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.size.mas_equalTo(CGSizeMake(240, 80));
+    _shareBtn = [self getShareBtn];
+    [popView addSubview:_shareBtn];
+    [_shareBtn mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.size.mas_equalTo(CGSizeMake(250, 44));
         make.centerX.equalTo(popView);
-        make.bottom.equalTo(popView.mas_bottom).with.offset(-20);
+        make.bottom.equalTo(popView.mas_bottom).with.offset(-30);
     }];
+    
+//    _bottomView = [self getBottomView];
+//    [popView addSubview:_bottomView];
+//    [_bottomView mas_makeConstraints:^(MASConstraintMaker *make) {
+//        make.size.mas_equalTo(CGSizeMake(240, 80));
+//        make.centerX.equalTo(popView);
+//        make.bottom.equalTo(popView.mas_bottom).with.offset(-20);
+//    }];
     
     return popView;
 }

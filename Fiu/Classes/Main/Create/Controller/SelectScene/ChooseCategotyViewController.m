@@ -9,6 +9,7 @@
 #import "ChooseCategotyViewController.h"
 #import "ChooseCategoryCollectionViewCell.h"
 #import "CatagoryFiuSceneModel.h"
+#import "SelectAllFSceneViewController.h"
 
 static NSString *const URLFiuCategoryList = @"/category/getlist";
 
@@ -37,7 +38,7 @@ static NSString *const URLFiuCategoryList = @"/category/getlist";
 
 #pragma mark - 网络请求
 - (void)networkAllFiuSceneCategory {
-    self.categoryListRequest = [FBAPI getWithUrlString:URLFiuCategoryList requestDictionary:@{@"domain":@"13", @"show_all":@"0"} delegate:self];
+    self.categoryListRequest = [FBAPI getWithUrlString:URLFiuCategoryList requestDictionary:@{@"domain":@"12", @"show_all":@"0", @"size":@"100",@"page":@"1"} delegate:self];
     [self.categoryListRequest startRequestSuccess:^(FBRequest *request, id result) {
         NSArray * categoryArr = [[result valueForKey:@"data"] valueForKey:@"rows"];
         for (NSDictionary * categoryDic in categoryArr) {
@@ -66,6 +67,8 @@ static NSString *const URLFiuCategoryList = @"/category/getlist";
         _categoryView.delegate = self;
         _categoryView.dataSource = self;
         _categoryView.backgroundColor = [UIColor whiteColor];
+        _categoryView.showsVerticalScrollIndicator = NO;
+        _categoryView.showsHorizontalScrollIndicator = NO;
         [_categoryView registerClass:[ChooseCategoryCollectionViewCell class] forCellWithReuseIdentifier:@"ChooseCategoryCollectionViewCellID"];
     }
     return _categoryView;
@@ -84,9 +87,9 @@ static NSString *const URLFiuCategoryList = @"/category/getlist";
 }
 
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
-    [self dismissViewControllerAnimated:YES completion:^{
-        self.getCategoryData([self.categoryMarr valueForKey:@"categoryTitle"][indexPath.row], self.categoryIdMarr[indexPath.row]);
-    }];
+    SelectAllFSceneViewController * fsceneVC = [[SelectAllFSceneViewController alloc] init];
+    fsceneVC.categoryId = self.categoryIdMarr[indexPath.row];
+    [self.navigationController pushViewController:fsceneVC animated:YES];
 }
 
 #pragma mark - 设置顶部导航栏

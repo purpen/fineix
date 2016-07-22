@@ -25,6 +25,8 @@
 @pro_strong NSArray             *   goodsPrice;             //  商品价格
 @pro_strong NSArray             *   goodsX;                 //  商品坐标
 @pro_strong NSArray             *   goodsY;                 //  商品坐标
+@pro_strong NSString            *   fSceneId;
+@pro_strong NSString            *   fSceneTitle;
 
 /*-- --*/
 @pro_strong UIImageView         *   bgImgView;

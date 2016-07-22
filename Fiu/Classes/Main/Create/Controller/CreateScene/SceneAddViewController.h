@@ -7,14 +7,16 @@
 //
 
 #import "FBPictureViewController.h"
-#import "FBFootView.h"
 #import "FiltersView.h"
 #import "ChangeAddUrlView.h"
+#import "MarkGoodsView.h"
+
 @interface SceneAddViewController : FBPictureViewController
 
 @pro_strong NSString            *   createType;             //  创建类型（场景/情景）
 @pro_strong NSArray             *   locationArr;            //  照片位置
-@pro_strong FBFootView          *   footView;               //  底部工具栏
+@pro_strong UIButton            *   bottomBtn;
+@pro_strong MarkGoodsView       *   markView;
 @pro_strong UIImageView         *   filtersImageView;       //  需要处理的图片视图
 @pro_strong UIImage             *   filtersImg;             //  需要处理的图片
 @pro_strong NSString            *   filterName;             //  选择的滤镜名字

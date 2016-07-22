@@ -136,9 +136,9 @@
 
 #pragma mark UITextViewDelegate
 - (BOOL)textViewShouldBeginEditing:(UITextView *)textView {
-    [self.title resignFirstResponder];
     if ([_content.text isEqualToString:NSLocalizedString(@"addDescription", nil)]) {
         _content.text = @"";
+        _content.textColor = [UIColor colorWithHexString:@"#FFFFFF" alpha:1];
     }
     if ([_delegate respondsToSelector:@selector(EditBegin)]){
         [_delegate EditBegin];
@@ -182,7 +182,7 @@
     return _tagsIcon;
 }
 
-#pragma mark 用户编辑内容推荐标签
+#pragma mark 用户选择标签
 - (void)getUserEditTags:(NSMutableArray *)tagsMarr {
     self.tagsColleciton.hidden = YES;
     self.chooseCollection.hidden = NO;

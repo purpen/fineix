@@ -78,16 +78,13 @@
     if ([self.createType isEqualToString:@"scene"]) {
         releaseVC.createType = self.createType;
         releaseVC.bgImg = self.filtersImageView.image;
-//        releaseVC.locationArr = self.locationArr;
-//        releaseVC.scenceView.imageView.image = self.filtersImageView.image;
-//        releaseVC.fSceneId = self.fSceneId;
-//        releaseVC.fSceneTitle = self.fSceneTitle;
-//        releaseVC.goodsTitle = self.goodsTitle;
-//        releaseVC.goodsPrice = self.goodsPrice;
-//        releaseVC.goodsId = self.goodsId;
-//        releaseVC.goodsX = self.goodsX;
-//        releaseVC.goodsY = self.goodsY;
-//        releaseVC.scenceView.type = self.createType;
+        releaseVC.fSceneId = self.fSceneId;
+        releaseVC.fSceneTitle = self.fSceneTitle;
+        releaseVC.goodsTitle = self.goodsTitle;
+        releaseVC.goodsPrice = self.goodsPrice;
+        releaseVC.goodsId = self.goodsId;
+        releaseVC.goodsX = self.goodsX;
+        releaseVC.goodsY = self.goodsY;
         [self.navigationController pushViewController:releaseVC animated:YES];
     
     } else if ([self.createType isEqualToString:@"fScene"]) {

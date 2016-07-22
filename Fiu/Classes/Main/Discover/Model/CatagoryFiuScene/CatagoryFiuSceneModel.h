@@ -10,6 +10,7 @@
 
 @interface CatagoryFiuSceneModel : NSObject
 
+@property (nonatomic, strong) NSString * appCoverUrl;
 @property (nonatomic, strong) NSString * categoryTitle;
 @property (nonatomic, assign) NSInteger  categoryId;
 

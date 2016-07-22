@@ -372,11 +372,6 @@
 //  去选择所属的情境
 - (void)chooseScene {
     SelectAllFSceneViewController * selectSceneVC = [[SelectAllFSceneViewController alloc] init];
-    selectSceneVC.type = @"edit";
-    selectSceneVC.getIdxAndTitltBlock = ^(NSString * idx, NSString * title) {
-        [self changeSceneFrame:title];
-        self.fiuId = idx;
-    };
     [self.vc presentViewController:selectSceneVC animated:YES completion:nil];
 }
 

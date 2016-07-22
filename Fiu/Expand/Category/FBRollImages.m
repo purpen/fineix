@@ -37,12 +37,14 @@
     [self.typeMarr removeAllObjects];
     [self.targetIdMarr removeAllObjects];
     
-    for (RollImageRow * row in model) {
-        [self.imgMarr addObject:row.coverUrl];
-        [self.typeMarr addObject:row.type];
-        [self.targetIdMarr addObject:[NSString stringWithFormat:@"%@",row.webUrl]];
+    if (model.count > 0) {
+        for (RollImageRow * row in model) {
+            [self.imgMarr addObject:row.coverUrl];
+            [self.typeMarr addObject:row.type];
+            [self.targetIdMarr addObject:[NSString stringWithFormat:@"%@",row.webUrl]];
+        }
+        self.rollImageView.imageURLStringsGroup = self.imgMarr;
     }
-    self.rollImageView.imageURLStringsGroup = self.imgMarr;
 }
 
 - (void)setGoodsRollimageView:(GoodsInfoData *)model {

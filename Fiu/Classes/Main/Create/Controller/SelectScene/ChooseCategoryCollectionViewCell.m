@@ -13,8 +13,6 @@
 - (instancetype)initWithFrame:(CGRect)frame {
     self = [super initWithFrame:frame];
     if (self) {
-        self.layer.borderWidth = 0.5f;
-        self.layer.borderColor = [UIColor colorWithHexString:fineixColor].CGColor;
         
         [self addSubview:self.categoryImg];
         [self addSubview:self.categoryTitle];
@@ -23,13 +21,22 @@
 }
 
 - (void)setCategoryData:(CatagoryFiuSceneModel *)model {
+    if (model.appCoverUrl.length > 0) {
+        [self.categoryImg downloadImage:model.appCoverUrl place:[UIImage imageNamed:@""]];
+    }
     self.categoryTitle.text = model.categoryTitle;
 }
 
 - (UIImageView *)categoryImg {
     if (!_categoryImg) {
         _categoryImg = [[UIImageView alloc] initWithFrame:self.bounds];
+        _categoryImg.backgroundColor = [UIColor colorWithHexString:@"#F1F1F1" alpha:1];
         _categoryImg.contentMode = UIViewContentModeScaleAspectFill;
+        _categoryImg.clipsToBounds = YES;
+        
+        UIView * shadowView = [[UIView alloc] initWithFrame:_categoryImg.bounds];
+        shadowView.backgroundColor = [UIColor colorWithHexString:@"#000000" alpha:0.3];
+        [_categoryImg addSubview:shadowView];
     }
     return _categoryImg;
 }
@@ -39,6 +46,7 @@
         _categoryTitle = [[UILabel alloc] initWithFrame:self.bounds];
         _categoryTitle.font = [UIFont systemFontOfSize:16];
         _categoryTitle.textAlignment = NSTextAlignmentCenter;
+        _categoryTitle.textColor = [UIColor whiteColor];
     }
     return _categoryTitle;
 }

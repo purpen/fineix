@@ -25,9 +25,22 @@ static NSString *const URLGetUserDesTags = @"/gateway/fetch_chinese_word";
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(getFSceneId:) name:@"selectFiuSceneId" object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(getFSceneTitle:) name:@"selectFiuSceneTitle" object:nil];
 
     [self setNavViewUI];
-    
+}
+
+- (void)getFSceneId:(NSNotification *)fsceneId {
+    self.fSceneId = [fsceneId object];
+}
+
+- (void)getFSceneTitle:(NSNotification *)fsceneTitle {
+    self.fSceneTitle = [fsceneTitle object];
+    if (self.fSceneTitle.length > 0) {
+        [self.addCategory getChooseFScene:self.fSceneTitle];
+    }
 }
 
 - (void)viewDidLoad {
@@ -100,9 +113,10 @@ static NSString *const URLGetUserDesTags = @"/gateway/fetch_chinese_word";
                                      @"lng":self.addLocaiton.longitude,
                                      @"lat":self.addLocaiton.latitude,
                                      @"address":self.addLocaiton.locationLab.text,
+                                     @"city":self.addLocaiton.cityLab.text,
                                      @"products":json,
                                      @"tags":tags,
-                                     @"category_id":self.addCategory.categoryId,
+                                     @"scene_id":self.fSceneId
                                      };
         
         self.releaseSceneRequest = [FBAPI postWithUrlString:URLReleaseScenen requestDictionary:paramDict delegate:self];
@@ -341,6 +355,8 @@ static NSString *const URLGetUserDesTags = @"/gateway/fetch_chinese_word";
 
 - (void)dealloc {
     [[NSNotificationCenter defaultCenter] removeObserver:self name:@"a" object:nil];
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:@"selectFiuSceneId" object:nil];
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:@"selectFiuSceneTitle" object:nil];
 }
 
 @end

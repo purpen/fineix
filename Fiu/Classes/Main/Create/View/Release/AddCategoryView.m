@@ -8,6 +8,7 @@
 
 #import "AddCategoryView.h"
 #import "ChooseCategotyViewController.h"
+#import "FBNavigationViewController.h"
 
 @implementation AddCategoryView
 
@@ -22,6 +23,10 @@
         
     }
     return self;
+}
+
+- (void)getChooseFScene:(NSString *)title {
+    [self.addCategory setTitle:title forState:(UIControlStateNormal)];
 }
 
 #pragma mark 选择情景分类
@@ -42,12 +47,8 @@
 
 - (void)addCategoryClick {
     ChooseCategotyViewController * chooseCategoryVC = [[ChooseCategotyViewController alloc] init];
-    chooseCategoryVC.getCategoryData = ^ (NSString * title, NSString * ids){
-        [self.addCategory setTitle:title forState:(UIControlStateNormal)];
-        [self.addCategory setTitleColor:[UIColor colorWithHexString:@"#FFFFFF" alpha:1] forState:(UIControlStateNormal)];
-        self.categoryId = ids;
-    };
-    [self.vc presentViewController:chooseCategoryVC animated:YES completion:nil];
+    FBNavigationViewController * nav = [[FBNavigationViewController alloc] initWithRootViewController:chooseCategoryVC];
+    [self.vc presentViewController:nav animated:YES completion:nil];
 }
 
 @end

@@ -15,4 +15,6 @@
 @pro_strong UIButton            *   addCategory;
 @pro_strong NSString            *   categoryId;
 
+- (void)getChooseFScene:(NSString *)title;
+
 @end

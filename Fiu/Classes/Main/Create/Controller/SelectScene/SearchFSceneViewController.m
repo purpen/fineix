@@ -168,11 +168,7 @@ static NSString *const URLSearchFScene = @"/search/getlist";
     self.navView.backgroundColor = [UIColor whiteColor];
     [self addNavViewTitle:NSLocalizedString(@"chooseSceneVcTitle", nil)];
     self.navTitle.textColor = [UIColor blackColor];
-    if ([self.type isEqualToString:@"release"]) {
-        [self addBackButton:@"icon_back"];
-    } else if ([self.type isEqualToString:@"edit"]) {
-        [self addCloseBtn];
-    }
+    [self addBackButton:@"icon_back"];
     [self addLine];
     [self.navView addSubview:self.sureBtn];
 }
@@ -195,19 +191,7 @@ static NSString *const URLSearchFScene = @"/search/getlist";
         //  to :ReleaseViewController.h
         [[NSNotificationCenter defaultCenter] postNotificationName:@"selectFiuSceneId" object:self.fiuSceneId];
         [[NSNotificationCenter defaultCenter] postNotificationName:@"selectFiuSceneTitle" object:self.fiuSceneTitle];
-        
-        if ([self.type isEqualToString:@"release"]) {
-            for (UIViewController * vc in self.navigationController.viewControllers) {
-                if ([vc isKindOfClass:[ReleaseViewController class]]) {
-                    [self.navigationController popToViewController:vc animated:YES];
-                }
-            }
-        
-        } else if ([self.type isEqualToString:@"edit"]) {
-            [self dismissViewControllerAnimated:YES completion:^{
-                self.dismissVC();
-            }];
-        }
+        [self dismissViewControllerAnimated:YES completion:nil];
         
     } else {
         [SVProgressHUD showInfoWithStatus:NSLocalizedString(@"chooseFScene", nil)];

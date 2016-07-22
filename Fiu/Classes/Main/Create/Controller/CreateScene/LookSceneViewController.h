@@ -30,6 +30,6 @@
 @pro_strong UIButton                *   allComment;             //  查看全部评论
 @pro_strong NSMutableArray          *   textMar;
 @pro_strong UIButton                *   shareSceneBtn;          //  分享
-@pro_strong FBPopupView         *   popupView;
+@pro_strong FBPopupView             *   popupView;
 
 @end

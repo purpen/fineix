@@ -18,7 +18,7 @@
 "addFiuSceneDes" = "请添加140字以内的地盘描述";
 "addTitle" = "想省事？向右看，Fiu语境有你要的文字";
 "addLocation" = "添加情景地点";
-"addCategory" = "添加情景分类";
+"addCategory" = "选择地盘";
 "addContent" = "点击添加情景标题";
 "tag" = "标签";
 "onScene" = "所属地盘";
@@ -134,6 +134,7 @@
 "SearchContent" = "搜索语境";
 "creatNewFiuScene" = "创建新的情景";
 "creatFiuSceneBtn" = "＋ 创建情景";
+"markGoodsBtnTitle" = "标记情景中的产品或产品链接";
 
 //  评论
 "comment" = "评论一下";

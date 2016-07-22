@@ -86,84 +86,96 @@ static NSString *const URLUserAddGoods = @"/scene_product/add";
         make.centerX.equalTo(self.view);
     }];
     
-    [self.view addSubview:self.footView];
-    [self.footView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.size.mas_equalTo(CGSizeMake(SCREEN_WIDTH, 50));
-        make.bottom.equalTo(self.view.mas_bottom).with.offset(0);
-        make.centerX.equalTo(self.view);
-    }];
+    [self.view addSubview:self.bottomBtn];
+    
+//    [self.view addSubview:self.footView];
+//    [self.footView mas_makeConstraints:^(MASConstraintMaker *make) {
+//        make.size.mas_equalTo(CGSizeMake(SCREEN_WIDTH, 50));
+//        make.bottom.equalTo(self.view.mas_bottom).with.offset(0);
+//        make.centerX.equalTo(self.view);
+//    }];
 }
 
 #pragma mark - 底部的工具栏
-- (FBFootView *)footView {
-    if (!_footView) {
-        _footView = [[FBFootView alloc] init];
-        NSArray * titleArr = [[NSArray alloc] initWithObjects:NSLocalizedString(@"marker", nil), NSLocalizedString(@"addUrl", nil), nil];
-        _footView.backgroundColor = [UIColor colorWithHexString:@"#000000" alpha:0.7];
-        _footView.titleArr = titleArr;
-        _footView.titleFontSize = Font_GroupHeader;
-        _footView.titleNormalColor = [UIColor whiteColor];
-        _footView.titleSeletedColor = [UIColor whiteColor];
-        [_footView addFootViewButton];
-        _footView.delegate = self;
+- (UIButton *)bottomBtn {
+    if (!_bottomBtn) {
+        _bottomBtn = [[UIButton alloc] initWithFrame:CGRectMake(0, SCREEN_HEIGHT - 50, SCREEN_WIDTH, 50)];
+        [_bottomBtn setTitle:NSLocalizedString(@"markGoodsBtnTitle", nil) forState:(UIControlStateNormal)];
+        [_bottomBtn setTitleColor:[UIColor colorWithHexString:@"#FFFFFF" alpha:1] forState:(UIControlStateNormal)];
+        _bottomBtn.titleLabel.font = [UIFont systemFontOfSize:14];
+        [_bottomBtn setImage:[UIImage imageNamed:@"ic_touch_app"] forState:(UIControlStateNormal)];
+        _bottomBtn.backgroundColor = [UIColor colorWithHexString:@"#000000" alpha:0.6];
+        [_bottomBtn setImageEdgeInsets:(UIEdgeInsetsMake(0, -10, 0, 0))];
+        [_bottomBtn addTarget:self action:@selector(bottomBtnClick) forControlEvents:(UIControlEventTouchUpInside)];
     }
-    return _footView;
+    return _bottomBtn;
 }
 
-- (void)buttonDidSeletedWithIndex:(NSInteger)index {
-    MarkGoodsViewController * markGoodsVC = [[MarkGoodsViewController alloc] init];
-    AddUrlViewController * addUrlVC = [[AddUrlViewController alloc] init];
-    
-    if (index == 0) {
-        
-        [self presentViewController:markGoodsVC animated:YES completion:nil];
-        markGoodsVC.getImgBlock = ^(NSString * imgUrl, NSString * title, NSString * price, NSString * ids, CGFloat imgW, CGFloat imgH) {
-            if (self.goodsIdData.count == 0) {
-                _idx = 391;
-            }
-            
-            [self addMarkGoodsImg:imgUrl withImgW:imgW withImgH:imgH];
-            [self.goodsIdData addObject:ids];
-            NSString * pri = [NSString stringWithFormat:@"￥%@",price];
-            [self addUserGoodsTagWithTitle:title withPrice:pri withType:0 withGoodsId:ids];
-            
-            [self.goodsTitleData addObject:title];
-            [self.goodsPriceData addObject:price];
-            
-            NSMutableDictionary * tagDataDict = [NSMutableDictionary dictionary];
-            [tagDataDict setObject:title forKey:@"title"];
-            [tagDataDict setObject:price forKey:@"price"];
-            [tagDataDict setObject:imgUrl forKey:@"img"];
-            [self.userAddGoodsMarr addObject:tagDataDict];
-        };
-        
-    } else if (index == 1) {
-        [self presentViewController:addUrlVC animated:YES completion:nil];
-        addUrlVC.findGodosBlock = ^(NSString * title, NSString * price, NSString * ids) {
-            if (self.goodsIdData.count == 0) {
-                _idx = 391;
-            }
-            [self.goodsIdData addObject:ids];
-            [self addUserGoodsTagWithTitle:title withPrice:price withType:1 withGoodsId:ids];
-            _urlGoods = YES;
-        };
-        
-        addUrlVC.userAddGoodsBlock = ^(NSDictionary * dict) {
-            _title = [dict valueForKey:@"title"];
-            _price = [dict valueForKey:@"sale_price"];
-            _imgUrl = [dict valueForKey:@"cover_url"];
-            
-            [self.goodsTitleData addObject:_title];
-            [self.goodsPriceData addObject:_price];
-            
-            NSMutableDictionary * tagDataDict = [NSMutableDictionary dictionary];
-            [tagDataDict setObject:_title forKey:@"title"];
-            [tagDataDict setObject:_price forKey:@"price"];
-            [tagDataDict setObject:_imgUrl forKey:@"img"];
-            [self.userAddGoodsMarr addObject:tagDataDict];
-        };
-        
+- (void)bottomBtnClick {
+    [self.view addSubview:self.markView];
+}
+
+- (MarkGoodsView *)markView {
+    if (!_markView) {
+        _markView = [[MarkGoodsView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT)];
+        [_markView.goodsBtn addTarget:self action:@selector(markGoodsClick) forControlEvents:(UIControlEventTouchUpInside)];
+        [_markView.urlBtn addTarget:self action:@selector(markUrlClick) forControlEvents:(UIControlEventTouchUpInside)];
     }
+    return _markView;
+}
+
+- (void)markGoodsClick {
+    MarkGoodsViewController * markGoodsVC = [[MarkGoodsViewController alloc] init];
+    [self presentViewController:markGoodsVC animated:YES completion:nil];
+    markGoodsVC.getImgBlock = ^(NSString * imgUrl, NSString * title, NSString * price, NSString * ids, CGFloat imgW, CGFloat imgH) {
+        if (self.goodsIdData.count == 0) {
+            _idx = 391;
+        }
+        
+        [self addMarkGoodsImg:imgUrl withImgW:imgW withImgH:imgH];
+        [self.goodsIdData addObject:ids];
+        NSString * pri = [NSString stringWithFormat:@"￥%@",price];
+        [self addUserGoodsTagWithTitle:title withPrice:pri withType:0 withGoodsId:ids];
+        
+        [self.goodsTitleData addObject:title];
+        [self.goodsPriceData addObject:price];
+        
+        NSMutableDictionary * tagDataDict = [NSMutableDictionary dictionary];
+        [tagDataDict setObject:title forKey:@"title"];
+        [tagDataDict setObject:price forKey:@"price"];
+        [tagDataDict setObject:imgUrl forKey:@"img"];
+        [self.userAddGoodsMarr addObject:tagDataDict];
+    };
+
+}
+
+- (void)markUrlClick {
+    AddUrlViewController * addUrlVC = [[AddUrlViewController alloc] init];
+    [self presentViewController:addUrlVC animated:YES completion:nil];
+    addUrlVC.findGodosBlock = ^(NSString * title, NSString * price, NSString * ids) {
+        if (self.goodsIdData.count == 0) {
+            _idx = 391;
+        }
+        [self.goodsIdData addObject:ids];
+        [self addUserGoodsTagWithTitle:title withPrice:price withType:1 withGoodsId:ids];
+        _urlGoods = YES;
+    };
+    
+    addUrlVC.userAddGoodsBlock = ^(NSDictionary * dict) {
+        _title = [dict valueForKey:@"title"];
+        _price = [dict valueForKey:@"sale_price"];
+        _imgUrl = [dict valueForKey:@"cover_url"];
+        
+        [self.goodsTitleData addObject:_title];
+        [self.goodsPriceData addObject:_price];
+        
+        NSMutableDictionary * tagDataDict = [NSMutableDictionary dictionary];
+        [tagDataDict setObject:_title forKey:@"title"];
+        [tagDataDict setObject:_price forKey:@"price"];
+        [tagDataDict setObject:_imgUrl forKey:@"img"];
+        [self.userAddGoodsMarr addObject:tagDataDict];
+    };
+
 }
 
 #pragma mark - 创建一个标签
@@ -190,6 +202,7 @@ static NSString *const URLUserAddGoods = @"/scene_product/add";
     [self.view addSubview:tag];
     
     [self.tagBtnMarr addObject:tag];
+    [self.markView removeFromSuperview];
 }
 
 #pragma mark 删除标签
@@ -284,6 +297,7 @@ static NSString *const URLUserAddGoods = @"/scene_product/add";
 
 #pragma mark - 设置顶部导航栏
 - (void)setNavViewUI {
+    [self addNavViewTitle:NSLocalizedString(@"marker", nil)];
     [self addBackButton:@"icon_back_white"];
     [self addNextButton];
     [self.nextBtn addTarget:self action:@selector(nextBtnClick) forControlEvents:(UIControlEventTouchUpInside)];
@@ -325,27 +339,6 @@ static NSString *const URLUserAddGoods = @"/scene_product/add";
             
             [self.navigationController pushViewController:filtersVC animated:YES];
         }
-}
-
-- (void)dgPhotoEditingViewControllerDidCancel:(UIViewController *)pController withClickSaveButton:(BOOL)isClickSaveBtn
-{
-    if (isClickSaveBtn) {
-        NSLog(@"＝＝＝＝＝11");
-        [SVProgressHUD showWithStatus:@"图片编辑完成，跳转发布"];
-    } else {
-        NSLog(@"－－－－－22");
-        [self.navigationController popViewControllerAnimated:YES];
-    }
-}
-
-- (void)dgPhotoEditingViewControllerShowLoadingView:(UIView *)view
-{
-    [SVProgressHUD show];
-}
-
-- (void)dgPhotoEditingViewControllerHideLoadingView:(UIView *)view
-{
-    [SVProgressHUD dismiss];
 }
 
 #pragma mark - 合成图片

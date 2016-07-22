@@ -7,13 +7,14 @@
 //
 
 #import "FBPictureViewController.h"
-#import "ScenceMessageView.h"
-#import "EditSceneAddMoreView.h"
 #import <SVProgressHUD/SVProgressHUD.h>
+#import "AddLocationView.h"
+#import "AddCategoryView.h"
+#import "AddContentView.h"
 
-typedef void(^EditDone)();
+typedef void(^EditSceneDone)();
 
-@interface EditViewController : FBPictureViewController
+@interface EditViewController : FBPictureViewController <AddContentViewDelegate>
 
 @pro_strong FBRequest               *   editSceneRequest;
 @pro_strong FBRequest               *   editFiuSceneRequest;
@@ -25,8 +26,16 @@ typedef void(^EditDone)();
 @pro_strong NSString                *   fSceneTitle;
 @pro_strong NSString                *   lat;                    //  经度
 @pro_strong NSString                *   lng;                    //  纬度
-@pro_strong ScenceMessageView       *   scenceView;             //  图片\描述\标题
-@pro_strong EditSceneAddMoreView    *   addView;                //  添加地点\标签\场景
-@pro_copy EditDone  editDone;
+
+/*-- --*/
+@pro_strong UIImageView         *   bgImgView;
+@pro_strong UIImage             *   bgImg;
+@pro_strong UIView              *   topView;
+@pro_strong AddLocationView     *   addLocaiton;
+@pro_strong AddCategoryView     *   addCategory;
+@pro_strong AddContentView      *   addContent;
+@pro_strong UIButton            *   addContentBtn;
+
+@pro_copy EditSceneDone  editSceneDone;
 
 @end
