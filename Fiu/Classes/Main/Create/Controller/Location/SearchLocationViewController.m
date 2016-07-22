@@ -322,6 +322,7 @@
     if (!_locationTableView) {
         _locationTableView = [[UITableView alloc] initWithFrame:CGRectMake(0,TABLEVIEW_Y , SCREEN_WIDTH, SCREEN_HEIGHT-MAPHEGHIT-TABLEVIEW_Y)];
         _locationTableView.showsHorizontalScrollIndicator = NO;
+        _locationTableView.contentInset = UIEdgeInsetsMake(0, 0, 10, 0);
         _locationTableView.showsVerticalScrollIndicator = NO;
         _locationTableView.bounces = YES;
         _locationTableView.delegate = self;

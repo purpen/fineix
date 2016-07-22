@@ -68,7 +68,7 @@ static NSString *const thirdRegister = @"/auth/third_sign";//第三方登录接�
     
     self.accountField.delegate = self;
     self.accountField.keyboardAppearance = UIKeyboardAppearanceLight;
-    self.accountField.keyboardType = UIKeyboardTypeASCIICapable;
+    self.accountField.keyboardType = UIKeyboardTypeNumberPad;
     self.accountField.returnKeyType = UIReturnKeyNext;
     self.accountField.clearButtonMode = UITextFieldViewModeWhileEditing;
     self.accountField.tag = 1101;
