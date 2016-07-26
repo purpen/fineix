@@ -25,6 +25,7 @@
 @pro_strong UICollectionView    *   chooseCollection;
 @pro_strong NSMutableArray      *   chooseTagMarr;
 @pro_strong UIButton            *   addTagBtn;
+
 @pro_weak id <ShowContentViewDelegate> delegate;
 
 - (void)setEditContentData:(NSString *)title withDes:(NSString *)des withTags:(NSMutableArray *)tags;

@@ -51,19 +51,21 @@ static NSString *const URLReleaseFiuScenen = @"/scene_scene/save";
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self editSceneData];
-    [self setReleaseViewUI];
+    [self setEditSceneUI];
 }
 
 #pragma mark -
 - (void)editSceneData {
     _title = [self.data valueForKey:@"title"];
     _des = [self.data valueForKey:@"des"];
-    _chooseTags = [self.data valueForKey:@"tags"];
+    _chooseTags = [NSMutableArray arrayWithArray:[self.data valueForKey:@"tags"]];
+    [self.showContent setEditContentData:_title withDes:_des withTags:_chooseTags];
     
     _address = [self.data valueForKey:@"address"];
     _city = [self.data valueForKey:@"city"];
     _lng = [NSString stringWithFormat:@"%@", [[self.data valueForKey:@"location"] valueForKey:@"coordinates"][0]];
     _lat = [NSString stringWithFormat:@"%@", [[self.data valueForKey:@"location"] valueForKey:@"coordinates"][1]];
+    [self.addLocaiton setEditSceneLocationData:_lat withLng:_lng];
     
     _fSceneTitle = [self.data valueForKey:@"scene_title"];
     _fSceneId = [NSString stringWithFormat:@"%zi", [[self.data valueForKey:@"scene_id"] integerValue]];
@@ -94,6 +96,7 @@ static NSString *const URLReleaseFiuScenen = @"/scene_scene/save";
                                      @"lng":self.addLocaiton.longitude,
                                      @"lat":self.addLocaiton.latitude,
                                      @"address":self.addLocaiton.locationLab.text,
+                                     @"city":self.addLocaiton.cityLab.text,
                                      @"tags":tags,
                                      @"scene_id":self.fSceneId
                                      };
@@ -112,7 +115,7 @@ static NSString *const URLReleaseFiuScenen = @"/scene_scene/save";
     }
 }
 #pragma mark - 设置视图UI
-- (void)setReleaseViewUI {
+- (void)setEditSceneUI {
     [self.view addSubview:self.bgImgView];
     [self.view bringSubviewToFront:self.navView];
     
@@ -131,6 +134,15 @@ static NSString *const URLReleaseFiuScenen = @"/scene_scene/save";
     }];
     
     [self.view addSubview:self.addContent];
+    
+    self.addContentBtn.hidden = YES;
+    [self.view addSubview:self.showContent];
+    [_showContent mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.width.equalTo(@(SCREEN_WIDTH));
+        make.left.equalTo(self.view.mas_left).with.offset(0);
+        make.bottom.equalTo(self.topView.mas_top).with.offset(0);
+        make.top.equalTo(self.view.mas_top).with.offset(100);
+    }];
     
     [self.view addSubview:self.addTagsView];
 }
@@ -185,8 +197,6 @@ static NSString *const URLReleaseFiuScenen = @"/scene_scene/save";
         _addLocaiton.clearBtn.hidden = NO;
         _addLocaiton.cityLab.text = _city;
         _addLocaiton.locationLab.text = _address;
-        _addLocaiton.latitude = _lat;
-        _addLocaiton.longitude = _lng;
     }
     return _addLocaiton;
 }
@@ -231,24 +241,6 @@ static NSString *const URLReleaseFiuScenen = @"/scene_scene/save";
         self.addContent.alpha = 1;
         [self.addContent.title becomeFirstResponder];
     }];
-    
-    __weak __typeof(self)weakSelf = self;
-    self.addContent.getEditContentAndTags = ^ (NSString * title, NSString * des, NSMutableArray * tags){
-        if (title.length > 0) {
-            weakSelf.addContentBtn.hidden = YES;
-            [weakSelf.view addSubview:weakSelf.showContent];
-            [weakSelf.showContent mas_makeConstraints:^(MASConstraintMaker *make) {
-                make.width.equalTo(@(SCREEN_WIDTH));
-                make.left.equalTo(weakSelf.view.mas_left).with.offset(0);
-                make.bottom.equalTo(weakSelf.topView.mas_top).with.offset(0);
-                make.top.equalTo(weakSelf.view.mas_top).with.offset(100);
-            }];
-            [weakSelf.showContent setEditContentData:title withDes:des withTags:tags];
-            
-        } else {
-            weakSelf.addContentBtn.hidden = NO;
-        }
-    };
 }
 
 #pragma mark - 添加内容视图
@@ -277,12 +269,29 @@ static NSString *const URLReleaseFiuScenen = @"/scene_scene/save";
 }
 
 - (void)EditContentData {
+    __weak __typeof(self)weakSelf = self;
+    self.addContent.getEditContentAndTags = ^ (NSString * title, NSString * des, NSMutableArray * tags){
+        if (title.length > 0) {
+            weakSelf.addContentBtn.hidden = YES;
+            [weakSelf.view addSubview:weakSelf.showContent];
+            [weakSelf.showContent mas_makeConstraints:^(MASConstraintMaker *make) {
+                make.width.equalTo(@(SCREEN_WIDTH));
+                make.left.equalTo(weakSelf.view.mas_left).with.offset(0);
+                make.bottom.equalTo(weakSelf.topView.mas_top).with.offset(0);
+                make.top.equalTo(weakSelf.view.mas_top).with.offset(100);
+            }];
+            [weakSelf.showContent setEditContentData:title withDes:des withTags:tags];
+            
+        } else {
+            weakSelf.addContentBtn.hidden = NO;
+        }
+    };
+    
     [UIView animateWithDuration:.3 animations:^{
         self.addContent.alpha = 1;
         [self.addContent.title becomeFirstResponder];
     }];
 }
-
 
 #pragma mark - 添加标签
 - (void)BeginAddTag {
@@ -300,7 +309,6 @@ static NSString *const URLReleaseFiuScenen = @"/scene_scene/save";
         _addTagsView.bgImage = self.bgImg;
         _addTagsView.alpha = 0;
         _addTagsView.delegate = self;
-        _addTagsView.chooseTagMarr = _chooseTags;
     }
     return _addTagsView;
 }

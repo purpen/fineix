@@ -21,4 +21,6 @@
 @pro_strong NSString            *   latitude;           //  纬度
 @pro_strong NSString            *   longitude;          //  经度
 
+- (void)setEditSceneLocationData:(NSString *)latitude withLng:(NSString *)longitude;
+
 @end

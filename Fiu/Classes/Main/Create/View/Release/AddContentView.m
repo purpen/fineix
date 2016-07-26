@@ -30,6 +30,11 @@
     return self;
 }
 
+- (void)getUserEditTags:(NSMutableArray *)tagsMarr {
+    self.tagS = tagsMarr;
+    [self.tagsColleciton reloadData];
+}
+
 #pragma mark - 
 - (void)setViewUI {
     

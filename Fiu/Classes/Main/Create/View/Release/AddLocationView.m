@@ -29,6 +29,11 @@
     return self;
 }
 
+- (void)setEditSceneLocationData:(NSString *)latitude withLng:(NSString *)longitude {
+    self.latitude = latitude;
+    self.longitude = longitude;
+}
+
 #pragma mark - 显示位置信息视图
 - (UIView *)locationView {
     if (!_locationView) {

@@ -48,10 +48,8 @@
 - (void)setEditContentData:(NSString *)title withDes:(NSString *)des withTags:(NSMutableArray *)tags {
     [self titleTextStyle:title];
     [self desTitleStyle:des];
-    if (tags.count > 0) {
-        self.chooseTagMarr = tags;
-        [self.chooseCollection reloadData];
-    }
+    self.chooseTagMarr = tags;
+    [self.chooseCollection reloadData];
 }
 
 #pragma mark -
