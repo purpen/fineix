@@ -72,7 +72,7 @@
     if (!_brandTitle) {
         _brandTitle = [[UILabel alloc] init];
         _brandTitle.textColor = [UIColor colorWithHexString:titleColor];
-        _brandTitle.font = [UIFont systemFontOfSize:Font_GoodsTitle];
+        _brandTitle.font = [UIFont fontWithName:@"PingFangSC-Light" size:Font_GoodsTitle];
     }
     return _brandTitle;
 }

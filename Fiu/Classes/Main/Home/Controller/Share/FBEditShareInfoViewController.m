@@ -200,7 +200,7 @@ static NSString *const URLListText = @"/scene_context/getlist";
         _searchBtn.layer.masksToBounds = YES;
         [_searchBtn setTitle:NSLocalizedString(@"SearchContent", nil) forState:(UIControlStateNormal)];
         [_searchBtn setTitleColor:[UIColor colorWithHexString:@"#FFFFFF" alpha:0.8] forState:(UIControlStateNormal)];
-        _searchBtn.titleLabel.font = [UIFont systemFontOfSize:13];
+        _searchBtn.titleLabel.font = [UIFont fontWithName:@"PingFangSC-Light" size:13];
         [_searchBtn setImage:[UIImage imageNamed:@"Search"] forState:(UIControlStateNormal)];
         [_searchBtn setImageEdgeInsets:(UIEdgeInsetsMake(0, -10, 0, 0))];
         [_searchBtn addTarget:self action:@selector(searchBtnClick) forControlEvents:(UIControlEventTouchUpInside)];
@@ -311,7 +311,7 @@ static NSString *const URLListText = @"/scene_context/getlist";
         _searchField = [[UITextField alloc] initWithFrame:CGRectMake(10, 10, SCREEN_WIDTH - 20, 26.4)];
         _searchField.delegate = self;
         _searchField.clearButtonMode = UITextFieldViewModeWhileEditing;
-        _searchField.font = [UIFont systemFontOfSize:13];
+        _searchField.font = [UIFont fontWithName:@"PingFangSC-Light" size:13];
         _searchField.returnKeyType = UIReturnKeySearch;
         _searchField.textColor = [UIColor colorWithHexString:@"#FFFFFF" alpha:.7];
         _searchField.backgroundColor = [UIColor colorWithHexString:@"#FFFFFF" alpha:.4];
@@ -363,7 +363,7 @@ static NSString *const URLListText = @"/scene_context/getlist";
 - (UIButton *)cancelSearchBtn {
     if (!_cancelSearchBtn) {
         _cancelSearchBtn = [[UIButton alloc] initWithFrame:CGRectMake(SCREEN_WIDTH - 50, 10, 40, 26)];
-        _cancelSearchBtn.titleLabel.font = [UIFont systemFontOfSize:14];
+        _cancelSearchBtn.titleLabel.font = [UIFont fontWithName:@"PingFangSC-Light" size:14];
         [_cancelSearchBtn setTitle:NSLocalizedString(@"cancel", nil) forState:(UIControlStateNormal)];
         [_cancelSearchBtn setTitleColor:[UIColor colorWithHexString:@"#FFFFFF" alpha:.7] forState:(UIControlStateNormal)];
         _cancelSearchBtn.alpha = 0;

@@ -76,7 +76,7 @@
 - (UILabel *)title {
     if (!_title) {
         _title = [[UILabel alloc] init];
-        _title.font = [UIFont systemFontOfSize:10];
+        _title.font = [UIFont fontWithName:@"PingFangSC-Light" size:10];
         _title.textColor = [UIColor colorWithHexString:titleColor];
         _title.numberOfLines = 2;
     }
@@ -97,7 +97,7 @@
     if (!_price) {
         _price = [[UILabel alloc] init];
         _price.textColor = [UIColor colorWithHexString:fineixColor];
-        _price.font = [UIFont systemFontOfSize:12];
+        _price.font = [UIFont fontWithName:@"PingFangSC-Light" size:12];
     }
     return _price;
 }

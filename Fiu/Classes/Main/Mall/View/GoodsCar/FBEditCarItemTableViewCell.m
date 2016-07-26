@@ -134,7 +134,7 @@
 - (UILabel *)goodsColor {
     if (!_goodsColor) {
         _goodsColor = [[UILabel alloc] init];
-        _goodsColor.font = [UIFont systemFontOfSize:10];
+        _goodsColor.font = [UIFont fontWithName:@"PingFangSC-Light" size:10];
         _goodsColor.textColor = [UIColor colorWithHexString:titleColor];
         _goodsColor.textAlignment = NSTextAlignmentLeft;
         _goodsColor.numberOfLines = 1;
@@ -146,7 +146,7 @@
 - (UILabel *)goodsNum {
     if (!_goodsNum) {
         _goodsNum = [[UILabel alloc] init];
-        _goodsNum.font = [UIFont systemFontOfSize:10];
+        _goodsNum.font = [UIFont fontWithName:@"PingFangSC-Light" size:10];
         _goodsNum.textColor = [UIColor colorWithHexString:titleColor];
         _goodsNum.textAlignment = NSTextAlignmentLeft;
     }
@@ -156,7 +156,7 @@
 - (UILabel *)numLab {
     if (!_numLab) {
         _numLab = [[UILabel alloc] init];
-        _numLab.font = [UIFont systemFontOfSize:13];
+        _numLab.font = [UIFont fontWithName:@"PingFangSC-Light" size:13];
         _numLab.textAlignment = NSTextAlignmentCenter;
         _numLab.textColor = [UIColor blackColor];
         _numLab.layer.borderColor = [UIColor colorWithHexString:@"#dfdfdf" alpha:1].CGColor;
@@ -171,7 +171,7 @@
         _addNumBtn.backgroundColor = [UIColor colorWithHexString:fineixColor];
         [_addNumBtn setTitle:@"＋" forState:(UIControlStateNormal)];
         [_addNumBtn setTitleColor:[UIColor whiteColor] forState:(UIControlStateNormal)];
-        _addNumBtn.titleLabel.font = [UIFont systemFontOfSize:14];
+        _addNumBtn.titleLabel.font = [UIFont fontWithName:@"PingFangSC-Light" size:14];
         [_addNumBtn addTarget:self action:@selector(addGoodsStock:) forControlEvents:(UIControlEventTouchUpInside)];
     }
     return _addNumBtn;
@@ -198,7 +198,7 @@
         _subNumBtn.backgroundColor = [UIColor colorWithHexString:fineixColor];
         [_subNumBtn setTitle:@"－" forState:(UIControlStateNormal)];
         [_subNumBtn setTitleColor:[UIColor whiteColor] forState:(UIControlStateNormal)];
-        _subNumBtn.titleLabel.font = [UIFont systemFontOfSize:14];
+        _subNumBtn.titleLabel.font = [UIFont fontWithName:@"PingFangSC-Light" size:14];
         [_subNumBtn addTarget:self action:@selector(subGoodsStock:) forControlEvents:(UIControlEventTouchUpInside)];
     }
     return _subNumBtn;

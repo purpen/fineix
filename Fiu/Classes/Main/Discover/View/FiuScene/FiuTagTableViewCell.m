@@ -86,7 +86,7 @@ static const NSInteger  rollTagBtnTag = 97;
             [tagBtn setTitleEdgeInsets:(UIEdgeInsetsMake(0, -5, 0, 0))];
             [tagBtn setTitleColor:[UIColor colorWithHexString:titleColor alpha:1] forState:(UIControlStateNormal)];
             [tagBtn setTitleColor:[UIColor whiteColor] forState:(UIControlStateHighlighted)];
-            tagBtn.titleLabel.font = [UIFont systemFontOfSize:Font_Tag];
+            tagBtn.titleLabel.font = [UIFont fontWithName:@"PingFangSC-Light" size:Font_Tag];
             tagBtn.tag = rollTagBtnTag + idx;
             
             tagBtn.frame = CGRectMake(btnW + 10, btnH, tagBtnWidth + 25, 20);

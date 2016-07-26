@@ -27,7 +27,7 @@
         _lookAll = [[UIButton alloc] initWithFrame:CGRectMake(0, 15, SCREEN_WIDTH, 30)];
         [_lookAll setTitle:@"收起" forState:(UIControlStateNormal)];
         [_lookAll setTitleColor:[UIColor colorWithHexString:titleColor] forState:(UIControlStateNormal)];
-        _lookAll.titleLabel.font = [UIFont systemFontOfSize:11];
+        _lookAll.titleLabel.font = [UIFont fontWithName:@"PingFangSC-Light" size:11];
         [_lookAll setImage:[UIImage imageNamed:@"icon_upward_up"] forState:(UIControlStateNormal)];
         [_lookAll setTitleEdgeInsets:(UIEdgeInsetsMake(-10, -10, 0, 0))];
         [_lookAll setImageEdgeInsets:(UIEdgeInsetsMake(20, 20, 0, 0))];

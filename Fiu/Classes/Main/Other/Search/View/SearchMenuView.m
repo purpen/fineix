@@ -28,7 +28,7 @@
         UIButton * menuBtn = [[UIButton alloc] initWithFrame:CGRectMake((SCREEN_WIDTH / title.count) * idx, 0, (SCREEN_WIDTH / title.count), 44)];
         [menuBtn setTitleColor:[UIColor blackColor] forState:(UIControlStateNormal)];
         [menuBtn setTitleColor:[UIColor colorWithHexString:fineixColor alpha:1] forState:(UIControlStateSelected)];
-        menuBtn.titleLabel.font = [UIFont systemFontOfSize:Font_SceneTitle];
+        menuBtn.titleLabel.font = [UIFont fontWithName:@"PingFangSC-Light" size:Font_SceneTitle];
         menuBtn.tag = idx + menuBtnTag;
         if (menuBtn.tag == menuBtnTag) {
             menuBtn.selected = YES;

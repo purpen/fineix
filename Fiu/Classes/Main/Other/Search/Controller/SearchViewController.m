@@ -392,7 +392,7 @@ static NSString *const URLSearchList = @"/search/getlist";
         _noneLab = [[UILabel alloc] initWithFrame:CGRectMake(0, 100, SCREEN_WIDTH, 200)];
         _noneLab.textAlignment = NSTextAlignmentCenter;
         _noneLab.textColor = [UIColor colorWithHexString:titleColor];
-        _noneLab.font = [UIFont systemFontOfSize:12];
+        _noneLab.font = [UIFont fontWithName:@"PingFangSC-Light" size:12];
         _noneLab.text = NSLocalizedString(@"noneSearch", nil);
     }
     return _noneLab;

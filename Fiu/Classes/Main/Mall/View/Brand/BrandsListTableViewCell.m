@@ -60,7 +60,7 @@
 - (UILabel *)brandName {
     if (!_brandName) {
         _brandName = [[UILabel alloc] init];
-        _brandName.font = [UIFont systemFontOfSize:14];
+        _brandName.font = [UIFont fontWithName:@"PingFangSC-Light" size:14];
         _brandName.textColor = [UIColor colorWithHexString:@"#222222" alpha:1];
     }
     return _brandName;

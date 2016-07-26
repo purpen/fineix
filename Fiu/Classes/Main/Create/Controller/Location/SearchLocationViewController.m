@@ -143,7 +143,7 @@
     if (!_cancelVCBtn) {
         _cancelVCBtn = [[UIButton alloc] initWithFrame:CGRectMake((SCREEN_WIDTH - 60), 0, 50, 50)];
         [_cancelVCBtn setTitleColor:[UIColor blackColor] forState:(UIControlStateNormal)];
-        _cancelVCBtn.titleLabel.font = [UIFont systemFontOfSize:Font_ControllerTitle];
+        _cancelVCBtn.titleLabel.font = [UIFont fontWithName:@"PingFangSC-Light" size:Font_ControllerTitle];
         [self.cancelVCBtn setTitle:NSLocalizedString(@"cancel", nil) forState:(UIControlStateNormal)];
         [self.cancelVCBtn addTarget:self action:@selector(cancelVCBtnClick) forControlEvents:(UIControlEventTouchUpInside)];
     }

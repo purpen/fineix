@@ -125,7 +125,7 @@ static NSString *sceneCellId = @"SceneCollectionViewCell";
     if (!_tipLabel) {
         _tipLabel = [[UILabel alloc] init];
         _tipLabel.textAlignment = NSTextAlignmentCenter;
-        _tipLabel.font = [UIFont systemFontOfSize:13];
+        _tipLabel.font = [UIFont fontWithName:@"PingFangSC-Light" size:13];
     }
     return _tipLabel;
 }
@@ -153,7 +153,7 @@ static NSString *sceneCellId = @"SceneCollectionViewCell";
     if (!_titleLabel) {
         _titleLabel = [[UILabel alloc] initWithFrame:CGRectMake(44, 20, SCREEN_WIDTH - 88, 44)];
         _titleLabel.textColor = [UIColor whiteColor];
-        _titleLabel.font = [UIFont systemFontOfSize:17.0f];
+        _titleLabel.font = [UIFont fontWithName:@"PingFangSC-Light" size:17.0f];
         _titleLabel.textAlignment = NSTextAlignmentCenter;
     }
     return _titleLabel;

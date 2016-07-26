@@ -65,7 +65,7 @@
         _sumTF.placeholder = @"昵称";
         _sumTF.textAlignment = NSTextAlignmentCenter;
         _sumTF.borderStyle = UITextBorderStyleRoundedRect;
-        _sumTF.font = [UIFont systemFontOfSize:14];
+        _sumTF.font = [UIFont fontWithName:@"PingFangSC-Light" size:14];
     }
     return _sumTF;
 }
@@ -76,7 +76,7 @@
         _nickNameTF.placeholder = @"昵称";
         _nickNameTF.textAlignment = NSTextAlignmentCenter;
         _nickNameTF.borderStyle = UITextBorderStyleRoundedRect;
-        _nickNameTF.font = [UIFont systemFontOfSize:14];
+        _nickNameTF.font = [UIFont fontWithName:@"PingFangSC-Light" size:14];
     }
     return _nickNameTF;
 }

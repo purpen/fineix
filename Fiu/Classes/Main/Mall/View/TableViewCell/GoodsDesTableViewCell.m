@@ -75,7 +75,7 @@
         _headerTitle = [[UILabel alloc] initWithFrame:CGRectMake(15, 5, 200, 34)];
         _headerTitle.text = NSLocalizedString(@"goodsDes", nil);
         _headerTitle.textColor = [UIColor colorWithHexString:@"#333333"];
-        _headerTitle.font = [UIFont systemFontOfSize:Font_GoodsTitle];
+        _headerTitle.font = [UIFont fontWithName:@"PingFangSC-Light" size:Font_GoodsTitle];
     }
     return _headerTitle;
 }
@@ -84,7 +84,7 @@
 - (UILabel *)desContent {
     if (!_desContent) {
         _desContent = [[UILabel alloc] init];
-        _desContent.font = [UIFont systemFontOfSize:12];
+        _desContent.font = [UIFont fontWithName:@"PingFangSC-Light" size:12];
         _desContent.textColor = [UIColor colorWithHexString:@"#555555"];
         _desContent.numberOfLines = 0;
     }

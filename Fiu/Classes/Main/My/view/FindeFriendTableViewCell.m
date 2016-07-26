@@ -102,7 +102,7 @@
 -(UILabel *)nameLabel{
     if (!_nameLabel) {
         _nameLabel = [[UILabel alloc] init];
-        _nameLabel.font = [UIFont systemFontOfSize:13];
+        _nameLabel.font = [UIFont fontWithName:@"PingFangSC-Light" size:13];
     }
     return _nameLabel;
 }
@@ -110,7 +110,7 @@
 -(UILabel *)sumLabel{
     if (!_sumLabel) {
         _sumLabel = [[UILabel alloc] init];
-        _sumLabel.font = [UIFont systemFontOfSize:10];
+        _sumLabel.font = [UIFont fontWithName:@"PingFangSC-Light" size:10];
     }
     return _sumLabel;
 }

@@ -54,7 +54,7 @@
         _certificationBtn.layer.borderWidth = 0.5;
         _certificationBtn.layer.borderColor = color;
         [_certificationBtn setTitle:@"我要认证" forState:UIControlStateNormal];
-        _certificationBtn.titleLabel.font = [UIFont systemFontOfSize:10];
+        _certificationBtn.titleLabel.font = [UIFont fontWithName:@"PingFangSC-Light" size:10];
     }
     return _certificationBtn;
 }
@@ -203,7 +203,7 @@
         _idTagsLabel = [[UILabel alloc] init];
         _idTagsLabel = [[UILabel alloc] init];
         _idTagsLabel.textColor = [UIColor whiteColor];
-        _idTagsLabel.font = [UIFont systemFontOfSize:13];
+        _idTagsLabel.font = [UIFont fontWithName:@"PingFangSC-Light" size:13];
         _idTagsLabel.textAlignment = NSTextAlignmentCenter;
         _idTagsLabel.clipsToBounds = YES;
         _idTagsLabel.autoresizingMask = UIViewAutoresizingFlexibleTopMargin;
@@ -223,7 +223,7 @@
     if (!_userProfile) {
         _userProfile = [[UILabel alloc] init];
         _userProfile.textColor = [UIColor whiteColor];
-        _userProfile.font = [UIFont systemFontOfSize:13];
+        _userProfile.font = [UIFont fontWithName:@"PingFangSC-Light" size:13];
         _userProfile.textAlignment = NSTextAlignmentCenter;
         _userProfile.clipsToBounds = YES;
         _userProfile.numberOfLines = 0;
@@ -236,7 +236,7 @@
     if (!_userLevelLabel) {
         _userLevelLabel = [[UILabel alloc] init];
         _userLevelLabel.textColor = [UIColor whiteColor];
-        _userLevelLabel.font = [UIFont systemFontOfSize:13];
+        _userLevelLabel.font = [UIFont fontWithName:@"PingFangSC-Light" size:13];
         _userLevelLabel.numberOfLines = 0;
         _userLevelLabel.textAlignment = NSTextAlignmentCenter;
         _userLevelLabel.clipsToBounds = YES;
@@ -249,7 +249,7 @@
     if (!_nickName) {
         _nickName = [[UILabel alloc] init];
         _nickName.textColor = [UIColor whiteColor];
-        _nickName.font = [UIFont systemFontOfSize:14];
+        _nickName.font = [UIFont fontWithName:@"PingFangSC-Light" size:14];
         _nickName.textAlignment = NSTextAlignmentCenter;
         _nickName.clipsToBounds = YES;
         _nickName.autoresizingMask = UIViewAutoresizingFlexibleTopMargin;

@@ -45,7 +45,7 @@
     if (!_titleLab) {
         _titleLab = [[UILabel alloc] init];
         _titleLab.textColor = [UIColor colorWithHexString:titleColor];
-        _titleLab.font = [UIFont systemFontOfSize:14];
+        _titleLab.font = [UIFont fontWithName:@"PingFangSC-Light" size:14];
         _titleLab.textAlignment = NSTextAlignmentLeft;
     }
     return _titleLab;
@@ -55,7 +55,7 @@
     if (!_textLab) {
         _textLab = [[UILabel alloc] init];
         _textLab.textColor = [UIColor blackColor];
-        _textLab.font = [UIFont systemFontOfSize:14];
+        _textLab.font = [UIFont fontWithName:@"PingFangSC-Light" size:14];
         _textLab.textAlignment = NSTextAlignmentLeft;
         
     }

@@ -102,8 +102,8 @@
         _sureBtn.layer.borderColor = [UIColor colorWithHexString:fineixColor].CGColor;
         _sureBtn.backgroundColor = [UIColor whiteColor];
         [_sureBtn setTitleColor:[UIColor colorWithHexString:fineixColor] forState:(UIControlStateNormal)];
-        [_sureBtn setTitle:@"确认添加" forState:(UIControlStateNormal)];
-        _sureBtn.titleLabel.font = [UIFont systemFontOfSize:16];
+        [_sureBtn setTitle:NSLocalizedString(@"sureAddGoods", nil) forState:(UIControlStateNormal)];
+        _sureBtn.titleLabel.font = [UIFont fontWithName:@"PingFangSC-Light" size:16];
     }
     return _sureBtn;
 }
@@ -113,7 +113,7 @@
     if (!_goodsPrice) {
         _goodsPrice = [[UITextField alloc] init];
         _goodsPrice.borderStyle = UITextBorderStyleRoundedRect;
-        _goodsPrice.font = [UIFont systemFontOfSize:14];
+        _goodsPrice.font = [UIFont fontWithName:@"PingFangSC-Light" size:14];
         _goodsPrice.textColor = [UIColor colorWithHexString:titleColor];
         _goodsPrice.keyboardType = UIKeyboardTypeNumberPad;
     }
@@ -125,7 +125,7 @@
     if (!_goodsTitle) {
         _goodsTitle = [[UITextField alloc] init];
         _goodsTitle.borderStyle = UITextBorderStyleRoundedRect;
-        _goodsTitle.font = [UIFont systemFontOfSize:14];
+        _goodsTitle.font = [UIFont fontWithName:@"PingFangSC-Light" size:14];
         _goodsTitle.textColor = [UIColor colorWithHexString:titleColor];
     }
     return _goodsTitle;

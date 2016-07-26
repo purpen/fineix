@@ -51,7 +51,7 @@
 #pragma mark - 动态获取按钮宽度
 - (NSArray *)getMenuBtnWidthByTitle:(NSArray *)titles {
     NSMutableArray * allWidths = [[NSMutableArray alloc] init];
-    UIFont * font = [UIFont systemFontOfSize:14];
+    UIFont * font = [UIFont fontWithName:@"PingFangSC-Light" size:14];
     for (NSString * title in titles) {
         CGSize size = [title sizeWithAttributes:@{font:NSFontAttributeName}];
         NSNumber * width = [NSNumber numberWithFloat:size.width + 40];
@@ -70,7 +70,7 @@
         [menuBtn setTitle:self.menuTitle[idx] forState:(UIControlStateNormal)];
         [menuBtn setTitleColor:[UIColor colorWithHexString:self.defaultColor] forState:(UIControlStateNormal)];
         [menuBtn setTitleColor:[UIColor colorWithHexString:fineixColor] forState:(UIControlStateSelected)];
-        menuBtn.titleLabel.font = [UIFont systemFontOfSize:14];
+        menuBtn.titleLabel.font = [UIFont fontWithName:@"PingFangSC-Light" size:14];
         menuBtn.tag = menuBtnTag + idx;
         if (menuBtn.tag == menuBtnTag) {
             menuBtn.selected = YES;

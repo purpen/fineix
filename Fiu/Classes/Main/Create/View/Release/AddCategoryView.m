@@ -35,7 +35,7 @@
     if (!_addCategory) {
         _addCategory = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 44)];
         [_addCategory setTitle:NSLocalizedString(@"addCategory", nil) forState:(UIControlStateNormal)];
-        _addCategory.titleLabel.font = [UIFont systemFontOfSize:12];
+        _addCategory.titleLabel.font = [UIFont fontWithName:@"PingFangSC-Light" size:12];
         [_addCategory setTitleColor:[UIColor colorWithHexString:@"#FFFFFF" alpha:0.8] forState:(UIControlStateNormal)];
         _addCategory.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
         [_addCategory setImage:[UIImage imageNamed:@"icon_addCategory"] forState:(UIControlStateNormal)];

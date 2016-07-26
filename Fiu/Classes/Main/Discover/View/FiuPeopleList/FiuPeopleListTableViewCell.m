@@ -149,7 +149,7 @@
     if (!_userLevel) {
         _userLevel = [[UILabel alloc] init];
         _userLevel.textColor = [UIColor colorWithHexString:fineixColor];
-        _userLevel.font = [UIFont systemFontOfSize:11];
+        _userLevel.font = [UIFont fontWithName:@"PingFangSC-Light" size:11];
     }
     return _userLevel;
 }
@@ -181,7 +181,7 @@
 - (UILabel *)userStar {
     if (!_userStar) {
         _userStar = [[UILabel alloc] init];
-        _userStar.font = [UIFont systemFontOfSize:11];
+        _userStar.font = [UIFont fontWithName:@"PingFangSC-Light" size:11];
         _userStar.textColor = [UIColor colorWithHexString:@"#666666"];
     }
     return _userStar;
@@ -192,7 +192,7 @@
     if (!_userName) {
         _userName = [[UILabel alloc] init];
         _userName.textColor = [UIColor blackColor];
-        _userName.font = [UIFont systemFontOfSize:14];
+        _userName.font = [UIFont fontWithName:@"PingFangSC-Light" size:14];
     }
     return _userName;
 }
@@ -202,7 +202,7 @@
     if (!_userProfile) {
         _userProfile = [[UILabel alloc] init];
         _userProfile.textColor = [UIColor colorWithHexString:@"#666666"];
-        _userProfile.font = [UIFont systemFontOfSize:11];
+        _userProfile.font = [UIFont fontWithName:@"PingFangSC-Light" size:11];
     }
     return _userProfile;
 }

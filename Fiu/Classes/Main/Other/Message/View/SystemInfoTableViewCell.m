@@ -84,7 +84,7 @@
 -(UILabel *)msgLabel{
     if (!_msgLabel) {
         _msgLabel = [[UILabel alloc] init];
-        _msgLabel.font = [UIFont systemFontOfSize:10];
+        _msgLabel.font = [UIFont fontWithName:@"PingFangSC-Light" size:10];
         _msgLabel.textColor = [UIColor lightGrayColor];
         _msgLabel.numberOfLines = 0;
     }
@@ -102,7 +102,7 @@
     if (!_titleLbael) {
         _titleLbael = [[UILabel alloc] init];
         _titleLbael.text = @"系统消息";
-        _titleLbael.font = [UIFont systemFontOfSize:14];
+        _titleLbael.font = [UIFont fontWithName:@"PingFangSC-Light" size:14];
     }
     return _titleLbael;
 }
@@ -110,7 +110,7 @@
 -(UILabel *)timeLabel{
     if (!_timeLabel) {
         _timeLabel = [[UILabel alloc] init];
-        _timeLabel.font = [UIFont systemFontOfSize:13];
+        _timeLabel.font = [UIFont fontWithName:@"PingFangSC-Light" size:13];
         _timeLabel.textColor = [UIColor lightGrayColor];
     }
     return _timeLabel;

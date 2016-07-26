@@ -32,7 +32,7 @@
     if (!_title) {
         _title = [[UILabel alloc] init];
         _title.textColor = [UIColor colorWithHexString:titleColor];
-        _title.font = [UIFont systemFontOfSize:12];
+        _title.font = [UIFont fontWithName:@"PingFangSC-Light" size:12];
         _title.textAlignment = NSTextAlignmentCenter;
     }
     return _title;

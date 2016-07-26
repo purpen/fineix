@@ -57,7 +57,7 @@
         _promptLab = [[UILabel alloc] init];
         _promptLab.text = NSLocalizedString(@"NoGoods", nil);
         _promptLab.textColor = [UIColor colorWithHexString:titleColor];
-        _promptLab.font = [UIFont systemFontOfSize:12];
+        _promptLab.font = [UIFont fontWithName:@"PingFangSC-Light" size:12];
         _promptLab.textAlignment = NSTextAlignmentCenter;
         
     }
@@ -70,7 +70,7 @@
         _goHomeBtn.backgroundColor = [UIColor colorWithHexString:fineixColor];
         [_goHomeBtn setTitle:NSLocalizedString(@"goLookGoods", nil) forState:(UIControlStateNormal)];
         [_goHomeBtn setTitleColor:[UIColor whiteColor] forState:(UIControlStateNormal)];
-        _goHomeBtn.titleLabel.font = [UIFont systemFontOfSize:16];
+        _goHomeBtn.titleLabel.font = [UIFont fontWithName:@"PingFangSC-Light" size:16];
         _goHomeBtn.layer.cornerRadius = 4;
         [_goHomeBtn addTarget:self action:@selector(goHomeBtnClick) forControlEvents:(UIControlEventTouchUpInside)];
     }

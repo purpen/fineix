@@ -139,7 +139,7 @@
     label.tagviewDelegate = self;
     label.padding = self.tagTextPadding;
     label.text = tag;
-    label.label.font = [UIFont systemFontOfSize:self.tagFontSize];
+    label.label.font = [UIFont fontWithName:@"PingFangSC-Light" size:self.tagFontSize];
     [label sizeToFit];
     [label setStyle:style];
     return label;

@@ -80,7 +80,7 @@
     if (!_userName) {
         _userName = [[UILabel alloc] init];
         _userName.textColor = [UIColor colorWithHexString:@"#222222"];
-        _userName.font = [UIFont systemFontOfSize:12];
+        _userName.font = [UIFont fontWithName:@"PingFangSC-Light" size:12];
     }
     return _userName;
 }
@@ -90,7 +90,7 @@
     if (!_content) {
         _content = [[UILabel alloc] init];
         _content.textColor = [UIColor colorWithHexString:titleColor];
-        _content.font = [UIFont systemFontOfSize:12];
+        _content.font = [UIFont fontWithName:@"PingFangSC-Light" size:12];
         _content.numberOfLines = 0;
     }
     return _content;
@@ -101,7 +101,7 @@
     if (!_time) {
         _time = [[UILabel alloc] init];
         _time.textColor = [UIColor colorWithHexString:@"#999999"];
-        _time.font = [UIFont systemFontOfSize:12];
+        _time.font = [UIFont fontWithName:@"PingFangSC-Light" size:12];
         _time.textAlignment = NSTextAlignmentRight;
     }
     return _time;

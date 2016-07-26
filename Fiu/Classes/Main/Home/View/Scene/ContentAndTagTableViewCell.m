@@ -80,7 +80,7 @@
     if (!_contentLab) {
         _contentLab = [[UILabel alloc] init];
         _contentLab.textColor = [UIColor colorWithHexString:pictureNavColor alpha:1];
-        _contentLab.font = [UIFont systemFontOfSize:Font_Content];
+        _contentLab.font = [UIFont fontWithName:@"PingFangSC-Light" size:Font_Content];
         _contentLab.numberOfLines = 0;
     }
     return _contentLab;

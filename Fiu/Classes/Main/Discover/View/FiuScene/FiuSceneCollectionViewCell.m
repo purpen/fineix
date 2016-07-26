@@ -107,7 +107,7 @@
 - (UILabel *)titleLab {
     if (!_titleLab) {
         _titleLab = [[UILabel alloc] init];
-        _titleLab.font = [UIFont systemFontOfSize:Font_SceneTitle];
+        _titleLab.font = [UIFont fontWithName:@"PingFangSC-Light" size:Font_SceneTitle];
         _titleLab.textColor = [UIColor whiteColor];
         _titleLab.numberOfLines = 2;
     }
@@ -150,7 +150,7 @@
 - (UILabel *)locationLab {
     if (!_locationLab) {
         _locationLab = [[UILabel alloc] init];
-        _locationLab.font = [UIFont systemFontOfSize:Font_Place];
+        _locationLab.font = [UIFont fontWithName:@"PingFangSC-Light" size:Font_Place];
         _locationLab.textColor = [UIColor whiteColor];
     }
     return _locationLab;

@@ -96,7 +96,7 @@
 - (UILabel *)userNameLab {
     if (!_userNameLab) {
         _userNameLab = [[UILabel alloc] init];
-        _userNameLab.font = [UIFont systemFontOfSize:10];
+        _userNameLab.font = [UIFont fontWithName:@"PingFangSC-Light" size:10];
         _userNameLab.textColor = [UIColor colorWithHexString:titleColor];
         _userNameLab.textAlignment = NSTextAlignmentLeft;
         
@@ -108,7 +108,7 @@
     if (!_timeLab) {
         _timeLab = [[UILabel alloc] init];
         _timeLab = [[UILabel alloc] init];
-        _timeLab.font = [UIFont systemFontOfSize:10];
+        _timeLab.font = [UIFont fontWithName:@"PingFangSC-Light" size:10];
         _timeLab.textColor = [UIColor colorWithHexString:titleColor];
         _timeLab.textAlignment = NSTextAlignmentLeft;
         
@@ -146,7 +146,7 @@
 - (UILabel *)textLab {
     if (!_textLab) {
         _textLab = [[UILabel alloc] init];
-        _textLab.font = [UIFont systemFontOfSize:10];
+        _textLab.font = [UIFont fontWithName:@"PingFangSC-Light" size:10];
         _textLab.textColor = [UIColor colorWithHexString:titleColor];
         _textLab.numberOfLines = 0;
     }

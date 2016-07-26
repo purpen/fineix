@@ -18,7 +18,7 @@
         
         self.backgroundColor = [UIColor clearColor];
         [self setViewUI];
-        
+
     }
     return self;
 }
@@ -77,7 +77,7 @@
         _addTagWrite = [[UITextField alloc] init];
         _addTagWrite.delegate = self;
         _addTagWrite.textColor = [UIColor whiteColor];
-        _addTagWrite.font = [UIFont systemFontOfSize:12];
+        _addTagWrite.font = [UIFont fontWithName:@"PingFangSC-Light" size:12];
         _addTagWrite.returnKeyType = UIReturnKeyDone;
     }
     return _addTagWrite;
@@ -161,7 +161,7 @@
     if (!_vcTitle) {
         _vcTitle = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 50)];
         _vcTitle.text = NSLocalizedString(@"addTagsBtn", nil);
-        _vcTitle.font = [UIFont systemFontOfSize:16];
+        _vcTitle.font = [UIFont fontWithName:@"PingFangSC-Light" size:16];
         _vcTitle.textColor = [UIColor whiteColor];
         _vcTitle.textAlignment = NSTextAlignmentCenter;
     }
@@ -173,7 +173,7 @@
         _doneBtn = [[UIButton alloc] initWithFrame:CGRectMake(SCREEN_WIDTH - 50, 0, 50, 50)];
         [_doneBtn setTitle:NSLocalizedString(@"Done", nil) forState:(UIControlStateNormal)];
         [_doneBtn setTitleColor:[UIColor whiteColor] forState:(UIControlStateNormal)];
-        _doneBtn.titleLabel.font = [UIFont systemFontOfSize:16];
+        _doneBtn.titleLabel.font = [UIFont fontWithName:@"PingFangSC-Light" size:16];
         [_doneBtn addTarget:self action:@selector(doneBtnClick) forControlEvents:(UIControlEventTouchUpInside)];
     }
     return _doneBtn;

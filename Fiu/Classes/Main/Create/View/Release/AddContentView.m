@@ -134,7 +134,7 @@
         _title = [[UITextField alloc] init];
         _title.attributedPlaceholder = [[NSAttributedString alloc] initWithString:NSLocalizedString(@"addTitle", nil)
                                                                        attributes:@{NSForegroundColorAttributeName:[UIColor colorWithHexString:@"#FFFFFF" alpha:0.7]}];
-        _title.font = [UIFont systemFontOfSize:12];
+        _title.font = [UIFont fontWithName:@"PingFangSC-Light" size:12];
         _title.clearButtonMode = UITextFieldViewModeWhileEditing;
         _title.delegate = self;
         _title.returnKeyType = UIReturnKeyDone;
@@ -174,7 +174,7 @@
 - (UIButton *)chooseText {
     if (!_chooseText) {
         _chooseText = [[UIButton alloc] init];
-        _chooseText.titleLabel.font = [UIFont systemFontOfSize:12];
+        _chooseText.titleLabel.font = [UIFont fontWithName:@"PingFangSC-Light" size:12];
         [_chooseText setTitle:NSLocalizedString(@"ChooseText", nil) forState:(UIControlStateNormal)];
         [_chooseText setTitleColor:[UIColor colorWithHexString:fineixColor] forState:(UIControlStateNormal)];
         [_chooseText addTarget:self action:@selector(goChooseText) forControlEvents:(UIControlEventTouchUpInside)];
@@ -227,7 +227,7 @@
 - (UITextView *)content {
     if (!_content) {
         _content = [[UITextView alloc] init];
-        _content.font = [UIFont systemFontOfSize:12];
+        _content.font = [UIFont fontWithName:@"PingFangSC-Light" size:12];
         _content.text = NSLocalizedString(@"addDescription", nil);
         _content.textColor = [UIColor colorWithHexString:@"#FFFFFF" alpha:0.7];
         _content.backgroundColor = [UIColor clearColor];

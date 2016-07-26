@@ -207,7 +207,7 @@ static NSString *const URlCancelCollect = @"/favorite/ajax_cancel_favorite";
         [_collectBtn setTitle:NSLocalizedString(@"Collect", nil) forState:(UIControlStateNormal)];
 //        [_collectBtn setTitle:NSLocalizedString(@"CollectDone", nil) forState:(UIControlStateSelected)];
         [_collectBtn setTitleColor:[UIColor colorWithHexString:@"#555555"] forState:(UIControlStateNormal)];
-        _collectBtn.titleLabel.font = [UIFont systemFontOfSize:10];
+        _collectBtn.titleLabel.font = [UIFont fontWithName:@"PingFangSC-Light" size:10];
         
         [_collectBtn setTitleEdgeInsets:(UIEdgeInsetsMake(30, -15, 0, 0))];
         [_collectBtn setImage:[UIImage imageNamed:@"goods_star"] forState:(UIControlStateNormal)];
@@ -224,7 +224,7 @@ static NSString *const URlCancelCollect = @"/favorite/ajax_cancel_favorite";
         _gobuyBtn = [[UIButton alloc] init];
         _gobuyBtn.backgroundColor = [UIColor colorWithHexString:fineixColor];
         [_gobuyBtn setTitleColor:[UIColor whiteColor] forState:(UIControlStateNormal)];
-        _gobuyBtn.titleLabel.font = [UIFont systemFontOfSize:Font_InfoTitle];
+        _gobuyBtn.titleLabel.font = [UIFont fontWithName:@"PingFangSC-Light" size:Font_InfoTitle];
         [_gobuyBtn addTarget:self action:@selector(buyCarBtnClick) forControlEvents:(UIControlEventTouchUpInside)];
     }
     return _gobuyBtn;

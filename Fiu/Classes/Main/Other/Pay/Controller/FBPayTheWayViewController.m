@@ -90,7 +90,7 @@
         
         UILabel * wayTitleLab = [[UILabel alloc] init];
         wayTitleLab.text = payTitleArr[idx];
-        wayTitleLab.font = [UIFont systemFontOfSize:13];
+        wayTitleLab.font = [UIFont fontWithName:@"PingFangSC-Light" size:13];
         [wayBtn addSubview:wayTitleLab];
         [wayTitleLab mas_makeConstraints:^(MASConstraintMaker *make) {
             make.size.mas_equalTo(CGSizeMake(100, 14));
@@ -137,14 +137,14 @@
         self.payWayTitleView = [[UILabel alloc] initWithFrame:CGRectMake(15, 0, 150, 50)];
         self.payWayTitleView.text = @"请选择支付方式";
         self.payWayTitleView.textColor = [UIColor colorWithHexString:@"#666666" alpha:1];
-        self.payWayTitleView.font = [UIFont systemFontOfSize:14];
+        self.payWayTitleView.font = [UIFont fontWithName:@"PingFangSC-Light" size:14];
         [_payWayView addSubview:self.payWayTitleView];
         
         self.payPrice = [[UILabel alloc] initWithFrame:CGRectMake(150, 0, SCREEN_WIDTH-170, 50)];
         self.payPrice.text = [NSString stringWithFormat:@"￥%.2f", [self.orderInfo.payMoney floatValue]];
         self.payPrice.textAlignment = NSTextAlignmentRight;
         self.payPrice.textColor = [UIColor colorWithHexString:fineixColor];
-        self.payPrice.font = [UIFont systemFontOfSize:14];
+        self.payPrice.font = [UIFont fontWithName:@"PingFangSC-Light" size:14];
         [_payWayView addSubview:self.payPrice];
     }
     return _payWayView;
@@ -157,7 +157,7 @@
         _okPayBtn.backgroundColor = [UIColor colorWithHexString:fineixColor alpha:1];
         [_okPayBtn setTitle:@"立即支付" forState:(UIControlStateNormal)];
         [_okPayBtn setTitleColor:[UIColor whiteColor] forState:(UIControlStateNormal)];
-        _okPayBtn.titleLabel.font = [UIFont systemFontOfSize:14];
+        _okPayBtn.titleLabel.font = [UIFont fontWithName:@"PingFangSC-Light" size:14];
         [_okPayBtn addTarget:self action:@selector(okPayClick) forControlEvents:(UIControlEventTouchUpInside)];
     }
     return _okPayBtn;

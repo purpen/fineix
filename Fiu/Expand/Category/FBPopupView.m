@@ -147,7 +147,7 @@
 
 - (UILabel *)getDoneText {
     UILabel * doneText = [[UILabel alloc] init];
-    doneText.font = [UIFont boldSystemFontOfSize:18];
+    doneText.font = [UIFont fontWithName:@"PingFangSC-Light" size:18];
     doneText.textAlignment = NSTextAlignmentCenter;
     doneText.textColor = [UIColor colorWithHexString:@"#222222"];
     doneText.text = NSLocalizedString(@"shareDone", nil);
@@ -172,7 +172,7 @@
 - (UILabel *)getAddExpNum {
     UILabel * addExpNum = [[UILabel alloc] init];
     addExpNum.textColor = [UIColor colorWithHexString:fineixColor];
-    addExpNum.font = [UIFont boldSystemFontOfSize:18];
+    addExpNum.font = [UIFont fontWithName:@"PingFangSC-Light" size:18];
     addExpNum.textAlignment = NSTextAlignmentCenter;
     addExpNum.text = [NSString stringWithFormat:@"＋%zi", _shareExpNum];
     
@@ -181,7 +181,7 @@
 
 - (UILabel *)getAddExpContent {
     UILabel * addExpContent = [[UILabel alloc] init];
-    addExpContent.font = [UIFont systemFontOfSize:16];
+    addExpContent.font = [UIFont fontWithName:@"PingFangSC-Light" size:16];
     addExpContent.textColor = [UIColor colorWithHexString:@"#666666"];
     addExpContent.textAlignment = NSTextAlignmentCenter;
     addExpContent.text = _shareDoneText;
@@ -194,7 +194,7 @@
     doneBtn.layer.borderWidth = 0.5f;
     doneBtn.layer.borderColor = [UIColor colorWithHexString:fineixColor].CGColor;
     [doneBtn setTitle:NSLocalizedString(@"doneAndKnow", nil) forState:(UIControlStateNormal)];
-    doneBtn.titleLabel.font = [UIFont systemFontOfSize:16];
+    doneBtn.titleLabel.font = [UIFont fontWithName:@"PingFangSC-Light" size:16];
     [doneBtn setTitleColor:[UIColor colorWithHexString:fineixColor] forState:(UIControlStateNormal)];
     [doneBtn addTarget:self action:@selector(doneBtnClick) forControlEvents:(UIControlEventTouchUpInside)];
     return doneBtn;
@@ -285,7 +285,7 @@
     UIButton * shareBtn = [[UIButton alloc] init];
     shareBtn.backgroundColor = [UIColor colorWithHexString:fineixColor];
     [shareBtn setTitle:NSLocalizedString(@"ShareBtn", nil) forState:(UIControlStateNormal)];
-    shareBtn.titleLabel.font = [UIFont boldSystemFontOfSize:16];
+    shareBtn.titleLabel.font = [UIFont fontWithName:@"PingFangSC-Light" size:16];
     [shareBtn setTitleColor:[UIColor whiteColor] forState:(UIControlStateNormal)];
     shareBtn.layer.cornerRadius = 3;
     [shareBtn addTarget:self action:@selector(searchBarClick) forControlEvents:(UIControlEventTouchUpInside)];
@@ -304,7 +304,7 @@
 - (UILabel *)getShareText {
     UILabel * shareText = [[UILabel alloc] init];
     shareText.textColor = [UIColor colorWithHexString:@"#222222"];
-    shareText.font = [UIFont systemFontOfSize:14];
+    shareText.font = [UIFont fontWithName:@"PingFangSC-Light" size:14];
     shareText.textAlignment = NSTextAlignmentCenter;
     shareText.numberOfLines = 0;
     

@@ -173,7 +173,7 @@
 -(UILabel *)msgLabel{
     if (!_msgLabel) {
         _msgLabel = [[UILabel alloc] init];
-        _msgLabel.font = [UIFont systemFontOfSize:10];
+        _msgLabel.font = [UIFont fontWithName:@"PingFangSC-Light" size:10];
         _msgLabel.textColor = [UIColor lightGrayColor];
         _msgLabel.numberOfLines = 0;
     }
@@ -190,7 +190,7 @@
 -(UILabel *)titleLbael{
     if (!_titleLbael) {
         _titleLbael = [[UILabel alloc] init];
-        _titleLbael.font = [UIFont systemFontOfSize:14];
+        _titleLbael.font = [UIFont fontWithName:@"PingFangSC-Light" size:14];
     }
     return _titleLbael;
 }
@@ -198,7 +198,7 @@
 -(UILabel *)timeLabelTwo{
     if (!_timeLabelTwo) {
         _timeLabelTwo = [[UILabel alloc] init];
-        _timeLabelTwo.font = [UIFont systemFontOfSize:13];
+        _timeLabelTwo.font = [UIFont fontWithName:@"PingFangSC-Light" size:13];
         _timeLabelTwo.textAlignment = NSTextAlignmentRight;
         _timeLabelTwo.textColor = [UIColor lightGrayColor];
     }
@@ -208,7 +208,7 @@
 -(UILabel *)timeLabel{
     if (!_timeLabel) {
         _timeLabel = [[UILabel alloc] init];
-        _timeLabel.font = [UIFont systemFontOfSize:13];
+        _timeLabel.font = [UIFont fontWithName:@"PingFangSC-Light" size:13];
         _timeLabel.textColor = [UIColor lightGrayColor];
         _timeLabel.textAlignment = NSTextAlignmentRight;
     }

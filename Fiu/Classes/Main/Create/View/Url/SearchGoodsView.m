@@ -85,9 +85,9 @@
     if (!_findDoneBtn) {
         _findDoneBtn = [[UIButton alloc] initWithFrame:CGRectMake(0, SCREEN_HEIGHT - 49, SCREEN_WIDTH, 49)];
         _findDoneBtn.backgroundColor = [UIColor colorWithHexString:fineixColor];
-        [_findDoneBtn setTitle:@"找到" forState:(UIControlStateNormal)];
+        [_findDoneBtn setTitle:NSLocalizedString(@"findGoodsDone", nil) forState:(UIControlStateNormal)];
         [_findDoneBtn setTitleColor:[UIColor whiteColor] forState:(UIControlStateNormal)];
-        _findDoneBtn.titleLabel.font = [UIFont systemFontOfSize:16];
+        _findDoneBtn.titleLabel.font = [UIFont fontWithName:@"PingFangSC-Light" size:16];
        
     }
     return _findDoneBtn;
@@ -107,7 +107,7 @@
     if (!_closeBtn) {
         _closeBtn = [[UIButton alloc] initWithFrame:CGRectMake(SCREEN_WIDTH - 50, 0, 50, 50)];
         [_closeBtn setTitle:@"关闭" forState:(UIControlStateNormal)];
-        _closeBtn.titleLabel.font = [UIFont systemFontOfSize:16];
+        _closeBtn.titleLabel.font = [UIFont fontWithName:@"PingFangSC-Light" size:16];
         [_closeBtn setTitleColor:[UIColor blackColor] forState:(UIControlStateNormal)];
     }
     return _closeBtn;

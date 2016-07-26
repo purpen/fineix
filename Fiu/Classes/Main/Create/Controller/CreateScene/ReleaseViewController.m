@@ -226,7 +226,7 @@ static NSString *const URLGetUserDesTags = @"/gateway/fetch_chinese_word";
     if (!_addContentBtn) {
         _addContentBtn = [[UIButton alloc] init];
         [_addContentBtn setTitle:NSLocalizedString(@"addContent", nil) forState:(UIControlStateNormal)];
-        _addContentBtn.titleLabel.font = [UIFont systemFontOfSize:21];
+        _addContentBtn.titleLabel.font = [UIFont fontWithName:@"PingFangSC-Light" size:21];
         [_addContentBtn setTitleColor:[UIColor colorWithHexString:@"#FFFFFF" alpha:1] forState:(UIControlStateNormal)];
         _addContentBtn.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
         [_addContentBtn addTarget:self action:@selector(addContentBtnClick) forControlEvents:(UIControlEventTouchUpInside)];

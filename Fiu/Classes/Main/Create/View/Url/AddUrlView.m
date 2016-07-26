@@ -50,7 +50,7 @@ static const NSInteger webBtnTag = 200;
 - (void)initWebButton:(NSMutableArray *)btnTitle {
     for (NSUInteger idx = 0; idx < btnTitle.count; ++ idx) {
         UIButton * webBtn = [[UIButton alloc] initWithFrame:CGRectMake(((((SCREEN_WIDTH - 180)/4)*idx) + (60*idx)) + ((SCREEN_WIDTH-180)/4), 0, 60, 60)];
-        webBtn.titleLabel.font = [UIFont systemFontOfSize:14];
+        webBtn.titleLabel.font = [UIFont fontWithName:@"PingFangSC-Light" size:14];
         webBtn.layer.cornerRadius = 8;
         webBtn.layer.masksToBounds = YES;
         [webBtn setImage:[UIImage imageNamed:[NSString stringWithFormat:@"web_%zi", idx]] forState:(UIControlStateNormal)];
@@ -62,7 +62,7 @@ static const NSInteger webBtnTag = 200;
         webLab.text = btnTitle[idx];
         webLab.textColor = [UIColor blackColor];
         webLab.textAlignment = NSTextAlignmentCenter;
-        webLab.font = [UIFont systemFontOfSize:14];
+        webLab.font = [UIFont fontWithName:@"PingFangSC-Light" size:14];
         [_webBtnView addSubview:webLab];
     }
 }

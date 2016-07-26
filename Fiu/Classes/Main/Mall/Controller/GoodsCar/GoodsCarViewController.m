@@ -274,7 +274,7 @@ static NSString *const URLEditItemsNum = @"/shopping/edit_cart";
         
         UILabel * sumPrice = [[UILabel alloc] init];
         sumPrice.textColor = [UIColor colorWithHexString:fineixColor];
-        sumPrice.font = [UIFont systemFontOfSize:14];
+        sumPrice.font = [UIFont fontWithName:@"PingFangSC-Light" size:14];
         self.sumPrice = sumPrice;
         [_bottomView addSubview:sumPrice];
         [sumPrice mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -286,7 +286,7 @@ static NSString *const URLEditItemsNum = @"/shopping/edit_cart";
         
         UILabel * sumLab = [[UILabel alloc] init];
         sumLab.textColor = [UIColor colorWithHexString:titleColor];
-        sumLab.font = [UIFont systemFontOfSize:14];
+        sumLab.font = [UIFont fontWithName:@"PingFangSC-Light" size:14];
         sumLab.text = NSLocalizedString(@"sumOrderPrice", nil);
         self.sumLab = sumLab;
         [_bottomView addSubview:sumLab];
@@ -315,7 +315,7 @@ static NSString *const URLEditItemsNum = @"/shopping/edit_cart";
         [_chooseAllBtn setImage:[UIImage imageNamed:@"Check_red"] forState:(UIControlStateSelected)];
         [_chooseAllBtn setTitle:NSLocalizedString(@"CheckAll", nil) forState:(UIControlStateNormal)];
         [_chooseAllBtn setTitleEdgeInsets:(UIEdgeInsetsMake(0, 15, 0, 0))];
-        _chooseAllBtn.titleLabel.font = [UIFont systemFontOfSize:14];
+        _chooseAllBtn.titleLabel.font = [UIFont fontWithName:@"PingFangSC-Light" size:14];
         [_chooseAllBtn setTitleColor:[UIColor colorWithHexString:titleColor] forState:(UIControlStateNormal)];
         _chooseAllBtn.selected = NO;
         [_chooseAllBtn addTarget:self action:@selector(chooseAllBtnClick:) forControlEvents:(UIControlEventTouchUpInside)];
@@ -363,7 +363,7 @@ static NSString *const URLEditItemsNum = @"/shopping/edit_cart";
         [_goPayBtn setTitle:NSLocalizedString(@"GoPay", nil) forState:(UIControlStateNormal)];
         [_goPayBtn setTitle:NSLocalizedString(@"Delete", nil) forState:(UIControlStateSelected)];
         [_goPayBtn setTitleColor:[UIColor whiteColor] forState:(UIControlStateNormal)];
-        _goPayBtn.titleLabel.font = [UIFont systemFontOfSize:16];
+        _goPayBtn.titleLabel.font = [UIFont fontWithName:@"PingFangSC-Light" size:16];
         _goPayBtn.backgroundColor = [UIColor colorWithHexString:fineixColor];
         [_goPayBtn addTarget:self action:@selector(goPayBtnClick:) forControlEvents:(UIControlEventTouchUpInside)];
     }
@@ -403,7 +403,7 @@ static NSString *const URLEditItemsNum = @"/shopping/edit_cart";
         [_editBtn setTitle:NSLocalizedString(@"Edit", nil) forState:(UIControlStateNormal)];
         [_editBtn setTitle:NSLocalizedString(@"Done", nil) forState:(UIControlStateSelected)];
         [_editBtn setTitleColor:[UIColor blackColor] forState:(UIControlStateNormal)];
-        _editBtn.titleLabel.font = [UIFont systemFontOfSize:17];
+        _editBtn.titleLabel.font = [UIFont fontWithName:@"PingFangSC-Light" size:17];
         _editBtn.selected = NO;
         [_editBtn addTarget:self action:@selector(beginEditCar:) forControlEvents:(UIControlEventTouchUpInside)];
     }

@@ -174,7 +174,7 @@ static NSInteger const CATEGORYTAG = 283;
             [menuBtn setTitle:titleArr[idx] forState:(UIControlStateNormal)];
             [menuBtn setTitleColor:[UIColor colorWithHexString:titleColor] forState:(UIControlStateNormal)];
             [menuBtn setTitleColor:[UIColor colorWithHexString:fineixColor] forState:(UIControlStateSelected)];
-            menuBtn.titleLabel.font = [UIFont systemFontOfSize:16];
+            menuBtn.titleLabel.font = [UIFont fontWithName:@"PingFangSC-Light" size:16];
             menuBtn.tag = MENUTAG + idx;
             if (menuBtn.tag == MENUTAG) {
                 menuBtn.selected = YES;
@@ -212,7 +212,7 @@ static NSInteger const CATEGORYTAG = 283;
             [menuBtn setTitle:[self.fatherCategory valueForKey:@"title_cn"][idx] forState:(UIControlStateNormal)];
             [menuBtn setTitleColor:[UIColor colorWithHexString:titleColor] forState:(UIControlStateNormal)];
             [menuBtn setTitleColor:[UIColor colorWithHexString:fineixColor] forState:(UIControlStateSelected)];
-            menuBtn.titleLabel.font = [UIFont systemFontOfSize:16];
+            menuBtn.titleLabel.font = [UIFont fontWithName:@"PingFangSC-Light" size:16];
             menuBtn.tag = CATEGORYTAG + idx;
             if (menuBtn.tag == CATEGORYTAG) {
                 menuBtn.selected = YES;
@@ -414,7 +414,7 @@ static NSInteger const CATEGORYTAG = 283;
         UILabel * lab = [[UILabel alloc] initWithFrame:CGRectMake(0, 50, SCREEN_WIDTH, 20)];
         lab.text = @"没有使用记录";
         lab.textAlignment = NSTextAlignmentCenter;
-        lab.font = [UIFont systemFontOfSize:16];
+        lab.font = [UIFont fontWithName:@"PingFangSC-Light" size:16];
         [_noneView addSubview:lab];
     }
     return _noneView;
@@ -428,7 +428,7 @@ static NSInteger const CATEGORYTAG = 283;
         
         UILabel * allLab = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 23)];
         allLab.text = @"全部标签";
-        allLab.font = [UIFont systemFontOfSize:16];
+        allLab.font = [UIFont fontWithName:@"PingFangSC-Light" size:16];
         allLab.textAlignment = NSTextAlignmentCenter;
         [_centerView addSubview:allLab];
         
@@ -440,7 +440,7 @@ static NSInteger const CATEGORYTAG = 283;
         
         UILabel * lab = [[UILabel alloc] initWithFrame:CGRectMake(0, 30, SCREEN_WIDTH, 13)];
         lab.text = @"请在情绪、环境、时间、人物中各选择一个";
-        lab.font = [UIFont systemFontOfSize:12];
+        lab.font = [UIFont fontWithName:@"PingFangSC-Light" size:12];
         lab.textColor = [UIColor colorWithHexString:titleColor];
         lab.textAlignment = NSTextAlignmentCenter;
         [_centerView addSubview:lab];
@@ -622,7 +622,7 @@ static NSInteger const CATEGORYTAG = 283;
     if (!_sureBtn) {
         _sureBtn = [[UIButton alloc] initWithFrame:CGRectMake((SCREEN_WIDTH - 60), 0, 50, 50)];
         [_sureBtn setTitleColor:[UIColor blackColor] forState:(UIControlStateNormal)];
-        _sureBtn.titleLabel.font = [UIFont systemFontOfSize:Font_ControllerTitle];
+        _sureBtn.titleLabel.font = [UIFont fontWithName:@"PingFangSC-Light" size:Font_ControllerTitle];
         [self.sureBtn setTitle:NSLocalizedString(@"sure", nil) forState:(UIControlStateNormal)];
         [self.sureBtn addTarget:self action:@selector(sureBtnClick) forControlEvents:(UIControlEventTouchUpInside)];
     }

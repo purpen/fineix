@@ -112,7 +112,7 @@ static NSString *const URLComment = @"/comment/getlist";
         _promptLab = [[UILabel alloc] initWithFrame:CGRectMake(0, 100, SCREEN_WIDTH, 100)];
         _promptLab.text = @"购买商品来评论一下吧";
         _promptLab.textColor = [UIColor colorWithHexString:titleColor];
-        _promptLab.font = [UIFont systemFontOfSize:13];
+        _promptLab.font = [UIFont fontWithName:@"PingFangSC-Light" size:13];
         _promptLab.textAlignment = NSTextAlignmentCenter;
     }
     return _promptLab;

@@ -81,7 +81,7 @@
     if (!_userName) {
         _userName = [[UILabel alloc] init];
         _userName.textColor = [UIColor colorWithHexString:@"#888888"];
-        _userName.font = [UIFont systemFontOfSize:Font_UserName];
+        _userName.font = [UIFont fontWithName:@"PingFangSC-Light" size:Font_UserName];
     }
     return _userName;
 }
@@ -91,7 +91,7 @@
     if (!_userProfile) {
         _userProfile = [[UILabel alloc] init];
         _userProfile.textColor = [UIColor colorWithHexString:titleColor];
-        _userProfile.font = [UIFont systemFontOfSize:Font_UserProfile];
+        _userProfile.font = [UIFont fontWithName:@"PingFangSC-Light" size:Font_UserProfile];
         
     }
     return _userProfile;
@@ -109,7 +109,7 @@
         [_concernBtn setTitleColor:[UIColor colorWithHexString:titleColor] forState:(UIControlStateNormal)];
         [_concernBtn setTitleColor:[UIColor whiteColor] forState:(UIControlStateSelected)];
         [_concernBtn setBackgroundImage:[UIImage imageNamed:@"Button Background"] forState:(UIControlStateSelected)];
-        _concernBtn.titleLabel.font = [UIFont systemFontOfSize:13];
+        _concernBtn.titleLabel.font = [UIFont fontWithName:@"PingFangSC-Light" size:13];
     }
     return _concernBtn;
 }

@@ -28,7 +28,7 @@
         [_suFiuBtn setTitle:@"＋订阅情景 " forState:(UIControlStateNormal)];
         [_suFiuBtn setTitle:@" 已订阅" forState:(UIControlStateSelected)];
         [_suFiuBtn setTitleColor:[UIColor colorWithHexString:fineixColor] forState:(UIControlStateNormal)];
-        _suFiuBtn.titleLabel.font = [UIFont systemFontOfSize:16];
+        _suFiuBtn.titleLabel.font = [UIFont fontWithName:@"PingFangSC-Light" size:16];
         [_suFiuBtn setImage:[UIImage imageNamed:@"Su_FScene"] forState:(UIControlStateNormal)];
         [_suFiuBtn setImage:[UIImage imageNamed:@"Su_FScene_Selected"] forState:(UIControlStateSelected)];
         [_suFiuBtn setImageEdgeInsets:(UIEdgeInsetsMake(0, -10, 0, 0))];

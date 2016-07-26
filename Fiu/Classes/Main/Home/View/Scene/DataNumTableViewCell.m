@@ -70,7 +70,7 @@
         _lookBtn = [[UIButton alloc] init];
         [_lookBtn setImage:[UIImage imageNamed:@"lookNum"] forState:(UIControlStateNormal)];
         [_lookBtn setImageEdgeInsets:(UIEdgeInsetsMake(0, -10, 0, 0))];
-        _lookBtn.titleLabel.font = [UIFont systemFontOfSize:Font_Number];
+        _lookBtn.titleLabel.font = [UIFont fontWithName:@"PingFangSC-Light" size:Font_Number];
         [_lookBtn setTitleEdgeInsets:(UIEdgeInsetsMake(-15, 0, 0, 0))];
         [_lookBtn setTitleColor:[UIColor colorWithHexString:tabBarTitle alpha:1] forState:(UIControlStateNormal)];
     }
@@ -83,7 +83,7 @@
         _likeBtn = [[UIButton alloc] init];
         [_likeBtn setImage:[UIImage imageNamed:@"likeNum"] forState:(UIControlStateNormal)];
         [_likeBtn setImageEdgeInsets:(UIEdgeInsetsMake(0, -10, 0, 0))];
-        _likeBtn.titleLabel.font = [UIFont systemFontOfSize:Font_Number];
+        _likeBtn.titleLabel.font = [UIFont fontWithName:@"PingFangSC-Light" size:Font_Number];
         [_likeBtn setTitleEdgeInsets:(UIEdgeInsetsMake(-15, 0, 0, 0))];
         [_likeBtn setTitleColor:[UIColor colorWithHexString:tabBarTitle alpha:1] forState:(UIControlStateNormal)];
     }
@@ -96,7 +96,7 @@
         _commentBtn = [[UIButton alloc] init];
         [_commentBtn setImage:[UIImage imageNamed:@"commentNum"] forState:(UIControlStateNormal)];
         [_commentBtn setImageEdgeInsets:(UIEdgeInsetsMake(0, -10, 0, 0))];
-        _commentBtn.titleLabel.font = [UIFont systemFontOfSize:Font_Number];
+        _commentBtn.titleLabel.font = [UIFont fontWithName:@"PingFangSC-Light" size:Font_Number];
         [_commentBtn setTitleEdgeInsets:(UIEdgeInsetsMake(-15, 0, 0, 0))];
         [_commentBtn setTitleColor:[UIColor colorWithHexString:tabBarTitle alpha:1] forState:(UIControlStateNormal)];
     }

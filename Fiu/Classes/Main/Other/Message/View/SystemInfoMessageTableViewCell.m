@@ -160,7 +160,7 @@
 -(UILabel *)titleLabelTwo{
     if (!_titleLabelTwo) {
         _titleLabelTwo = [[UILabel alloc] init];
-        _titleLabelTwo.font = [UIFont systemFontOfSize:13];
+        _titleLabelTwo.font = [UIFont fontWithName:@"PingFangSC-Light" size:13];
         _titleLabelTwo.textColor = [UIColor grayColor];
         _titleLabelTwo.numberOfLines = 0;
     }
@@ -178,7 +178,7 @@
 -(UILabel *)detailsLabel{
     if (!_detailsLabel) {
         _detailsLabel = [[UILabel alloc] init];
-        _detailsLabel.font = [UIFont systemFontOfSize:13];
+        _detailsLabel.font = [UIFont fontWithName:@"PingFangSC-Light" size:13];
         _detailsLabel.text = @"查看详情";
     }
     return _detailsLabel;
@@ -196,7 +196,7 @@
 -(UILabel *)tittleLabel{
     if (!_tittleLabel) {
         _tittleLabel = [[UILabel alloc] init];
-        _tittleLabel.font = [UIFont systemFontOfSize:12];
+        _tittleLabel.font = [UIFont fontWithName:@"PingFangSC-Light" size:12];
         _tittleLabel.textColor = [UIColor grayColor];
         _tittleLabel.numberOfLines = 0;
     }
@@ -215,7 +215,7 @@
 -(UILabel *)tipLabel{
     if (!_tipLabel) {
         _tipLabel = [[UILabel alloc] init];
-        _tipLabel.font = [UIFont systemFontOfSize:13];
+        _tipLabel.font = [UIFont fontWithName:@"PingFangSC-Light" size:13];
     }
     return _tipLabel;
 }
@@ -223,7 +223,7 @@
 -(UILabel *)timeLabel{
     if (!_timeLabel) {
         _timeLabel = [[UILabel alloc] init];
-        _timeLabel.font = [UIFont systemFontOfSize:12];
+        _timeLabel.font = [UIFont fontWithName:@"PingFangSC-Light" size:12];
         _timeLabel.textAlignment = NSTextAlignmentCenter;
         _timeLabel.textColor = [UIColor whiteColor];
         _timeLabel.backgroundColor = [UIColor lightGrayColor];

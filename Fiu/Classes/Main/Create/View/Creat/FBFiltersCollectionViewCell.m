@@ -51,7 +51,7 @@
 - (UILabel *)filtersTitle {
     if (!_filtersTitle) {
         _filtersTitle = [[UILabel alloc] init];
-        _filtersTitle.font = [UIFont systemFontOfSize:Font_filtersTitle];
+        _filtersTitle.font = [UIFont fontWithName:@"PingFangSC-Light" size:Font_filtersTitle];
         _filtersTitle.textColor = [UIColor whiteColor];
         _filtersTitle.textAlignment = NSTextAlignmentCenter;
         

@@ -250,7 +250,7 @@ static NSString *const URLGiveExp = @"/user/send_exp";
         _shareBtn = [[UIButton alloc] initWithFrame:CGRectMake(SCREEN_WIDTH - 44, 0, 44, 44)];
         [_shareBtn setTitleColor:[UIColor whiteColor] forState:(UIControlStateNormal)];
         [_shareBtn setImage:[UIImage imageNamed:@"Share_white"] forState:(UIControlStateNormal)];
-        _shareBtn.titleLabel.font = [UIFont systemFontOfSize:16];
+        _shareBtn.titleLabel.font = [UIFont fontWithName:@"PingFangSC-Light" size:16];
         [_shareBtn addTarget:self action:@selector(shareItemSelected) forControlEvents:(UIControlEventTouchUpInside)];
     }
     return _shareBtn;

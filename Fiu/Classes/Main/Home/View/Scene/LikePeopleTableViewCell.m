@@ -103,7 +103,7 @@ const static NSInteger  peopleBtnTag = 64;
     if (!_morePeopel) {
         _morePeopel = [[UIButton alloc] init];
         [_morePeopel setBackgroundImage:[UIImage imageNamed:@"peopleNum"] forState:(UIControlStateNormal)];
-        _morePeopel.titleLabel.font = [UIFont systemFontOfSize:Font_Tag];
+        _morePeopel.titleLabel.font = [UIFont fontWithName:@"PingFangSC-Light" size:Font_Tag];
     }
     return _morePeopel;
 }

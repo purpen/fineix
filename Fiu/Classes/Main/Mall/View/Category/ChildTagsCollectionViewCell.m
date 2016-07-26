@@ -33,7 +33,7 @@
         _titleLab = [[UILabel alloc] init];
         _titleLab.textAlignment = NSTextAlignmentCenter;
         _titleLab.textColor = [UIColor colorWithHexString:titleColor];
-        _titleLab.font = [UIFont systemFontOfSize:12];
+        _titleLab.font = [UIFont fontWithName:@"PingFangSC-Light" size:12];
     }
     return _titleLab;
 }

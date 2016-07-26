@@ -27,7 +27,7 @@
         _likeBtn.backgroundColor = [UIColor whiteColor];
         [_likeBtn setTitle:@" 赞" forState:(UIControlStateNormal)];
         [_likeBtn setTitleColor:[UIColor colorWithHexString:fineixColor] forState:(UIControlStateNormal)];
-        _likeBtn.titleLabel.font = [UIFont systemFontOfSize:16];
+        _likeBtn.titleLabel.font = [UIFont fontWithName:@"PingFangSC-Light" size:16];
         [_likeBtn setImage:[UIImage imageNamed:@"Like_Scene"] forState:(UIControlStateNormal)];
         [_likeBtn setImage:[UIImage imageNamed:@"Like_Scene_Selected"] forState:(UIControlStateSelected)];
         [_likeBtn setImageEdgeInsets:(UIEdgeInsetsMake(0, -10, 0, 0))];

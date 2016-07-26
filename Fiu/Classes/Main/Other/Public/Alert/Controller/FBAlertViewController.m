@@ -58,7 +58,7 @@ static NSInteger const fiuActionBtnTag = 696;
     for (NSUInteger idx = 0; idx < alertTitle.count; ++ idx) {
         UIButton * actionBtn = [[UIButton alloc] initWithFrame:CGRectMake(0, 45 * idx, SCREEN_WIDTH, 44)];
         actionBtn.tag = fiuActionBtnTag + idx;
-        actionBtn.titleLabel.font = [UIFont systemFontOfSize:16];
+        actionBtn.titleLabel.font = [UIFont fontWithName:@"PingFangSC-Light" size:16];
         actionBtn.backgroundColor = [UIColor whiteColor];
         [actionBtn setTitleColor:[UIColor blackColor] forState:(UIControlStateNormal)];
         [actionBtn setTitle:alertTitle[idx] forState:(UIControlStateNormal)];
@@ -105,7 +105,7 @@ static NSInteger const fiuActionBtnTag = 696;
     for (NSUInteger idx = 0; idx < alertTitle.count; ++ idx) {
         UIButton * actionBtn = [[UIButton alloc] initWithFrame:CGRectMake(0, 45 * idx, SCREEN_WIDTH, 44)];
         actionBtn.tag = actionBtnTag + idx;
-        actionBtn.titleLabel.font = [UIFont systemFontOfSize:16];
+        actionBtn.titleLabel.font = [UIFont fontWithName:@"PingFangSC-Light" size:16];
         actionBtn.backgroundColor = [UIColor whiteColor];
         [actionBtn setTitleColor:[UIColor blackColor] forState:(UIControlStateNormal)];
         [actionBtn setTitle:alertTitle[idx] forState:(UIControlStateNormal)];

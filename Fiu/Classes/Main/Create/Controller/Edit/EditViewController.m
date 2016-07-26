@@ -59,12 +59,15 @@ static NSString *const URLReleaseFiuScenen = @"/scene_scene/save";
     _title = [self.data valueForKey:@"title"];
     _des = [self.data valueForKey:@"des"];
     _chooseTags = [self.data valueForKey:@"tags"];
+    
     _address = [self.data valueForKey:@"address"];
     _city = [self.data valueForKey:@"city"];
     _lng = [NSString stringWithFormat:@"%@", [[self.data valueForKey:@"location"] valueForKey:@"coordinates"][0]];
     _lat = [NSString stringWithFormat:@"%@", [[self.data valueForKey:@"location"] valueForKey:@"coordinates"][1]];
+    
     _fSceneTitle = [self.data valueForKey:@"scene_title"];
     _fSceneId = [NSString stringWithFormat:@"%zi", [[self.data valueForKey:@"scene_id"] integerValue]];
+    self.fSceneId = _fSceneId;
 }
 
 #pragma mark - 网络请求
@@ -182,6 +185,8 @@ static NSString *const URLReleaseFiuScenen = @"/scene_scene/save";
         _addLocaiton.clearBtn.hidden = NO;
         _addLocaiton.cityLab.text = _city;
         _addLocaiton.locationLab.text = _address;
+        _addLocaiton.latitude = _lat;
+        _addLocaiton.longitude = _lng;
     }
     return _addLocaiton;
 }
@@ -201,7 +206,7 @@ static NSString *const URLReleaseFiuScenen = @"/scene_scene/save";
     if (!_addContentBtn) {
         _addContentBtn = [[UIButton alloc] init];
         [_addContentBtn setTitle:NSLocalizedString(@"addContent", nil) forState:(UIControlStateNormal)];
-        _addContentBtn.titleLabel.font = [UIFont systemFontOfSize:21];
+        _addContentBtn.titleLabel.font = [UIFont fontWithName:@"PingFangSC-Light" size:21];
         [_addContentBtn setTitleColor:[UIColor colorWithHexString:@"#FFFFFF" alpha:1] forState:(UIControlStateNormal)];
         _addContentBtn.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
         [_addContentBtn addTarget:self action:@selector(addContentBtnClick) forControlEvents:(UIControlEventTouchUpInside)];
@@ -295,6 +300,7 @@ static NSString *const URLReleaseFiuScenen = @"/scene_scene/save";
         _addTagsView.bgImage = self.bgImg;
         _addTagsView.alpha = 0;
         _addTagsView.delegate = self;
+        _addTagsView.chooseTagMarr = _chooseTags;
     }
     return _addTagsView;
 }

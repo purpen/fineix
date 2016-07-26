@@ -156,7 +156,7 @@
 -(UILabel *)nickNameLabel{
     if (!_nickNameLabel) {
         _nickNameLabel = [[UILabel alloc] init];
-        _nickNameLabel.font = [UIFont systemFontOfSize:14];
+        _nickNameLabel.font = [UIFont fontWithName:@"PingFangSC-Light" size:14];
     }
     return _nickNameLabel;
 }
@@ -164,7 +164,7 @@
 -(UILabel *)summaryLabel{
     if (!_summaryLabel) {
         _summaryLabel = [[UILabel alloc] init];
-        _summaryLabel.font = [UIFont systemFontOfSize:10];
+        _summaryLabel.font = [UIFont fontWithName:@"PingFangSC-Light" size:10];
         _summaryLabel.textColor = [UIColor lightGrayColor];
     }
     return _summaryLabel;

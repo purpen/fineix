@@ -37,7 +37,7 @@
         [_tagBtn setBackgroundImage:[UIImage resizedImage:@"tagBg_yellow"] forState:(UIControlStateSelected)];
         [_tagBtn setTitleColor:[UIColor colorWithHexString:@"#555555"] forState:(UIControlStateNormal)];
         [_tagBtn setTitleColor:[UIColor colorWithHexString:@"#FFFFF"] forState:(UIControlStateSelected)];
-        _tagBtn.titleLabel.font = [UIFont systemFontOfSize:12];
+        _tagBtn.titleLabel.font = [UIFont fontWithName:@"PingFangSC-Light" size:12];
         [_tagBtn setTitleEdgeInsets:(UIEdgeInsetsMake(0, -5, 0, 0))];
         _tagBtn.userInteractionEnabled = NO;
         _tagBtn.selected = NO;

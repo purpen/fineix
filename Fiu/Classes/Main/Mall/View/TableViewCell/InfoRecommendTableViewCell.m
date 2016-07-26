@@ -46,7 +46,7 @@
         _headerTitle = [[UILabel alloc] initWithFrame:CGRectMake(15, 0, 200, 44)];
         _headerTitle.text = NSLocalizedString(@"recommendGoodsTitle", nil);
         _headerTitle.textColor = [UIColor colorWithHexString:@"#333333"];
-        _headerTitle.font = [UIFont systemFontOfSize:Font_GoodsTitle];
+        _headerTitle.font = [UIFont fontWithName:@"PingFangSC-Light" size:Font_GoodsTitle];
     }
     return _headerTitle;
 }

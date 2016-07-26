@@ -232,7 +232,7 @@ static NSString *const URLCarGoPay = @"/shopping/checkout";
         
         UILabel * summaryLab = [[UILabel alloc] initWithFrame:CGRectMake(10, 5, 50, 44)];
         summaryLab.text = NSLocalizedString(@"summaryText", nil);
-        summaryLab.font = [UIFont systemFontOfSize:14];
+        summaryLab.font = [UIFont fontWithName:@"PingFangSC-Light" size:14];
         summaryLab.textColor = [UIColor colorWithHexString:titleColor];
         
         [_footerView addSubview:summaryLab];
@@ -245,7 +245,7 @@ static NSString *const URLCarGoPay = @"/shopping/checkout";
     if (!_summaryText) {
         _summaryText = [[UITextField alloc] initWithFrame:CGRectMake(60, 5, SCREEN_WIDTH - 70, 44)];
         _summaryText.placeholder = NSLocalizedString(@"writeSummary", nil);
-        _summaryText.font = [UIFont systemFontOfSize:14];
+        _summaryText.font = [UIFont fontWithName:@"PingFangSC-Light" size:14];
     }
     return _summaryText;
 }
@@ -321,7 +321,7 @@ static NSString *const URLCarGoPay = @"/shopping/checkout";
         cell.titleLab.text = NSLocalizedString(@"OrderBonus", nil);
         if (_isUserBouns == YES) {
             cell.textLab.text = [NSString stringWithFormat:@"%@%zi", NSLocalizedString(@"userBouns", nil), _bounsPrice];
-            cell.textLab.font = [UIFont systemFontOfSize:13];
+            cell.textLab.font = [UIFont fontWithName:@"PingFangSC-Light" size:13];
             cell.textLab.textColor = [UIColor colorWithHexString:fineixColor];
         }
         return cell;
@@ -408,14 +408,14 @@ static NSString *const URLCarGoPay = @"/shopping/checkout";
         UIButton * sureBtn = [[UIButton alloc] initWithFrame:CGRectMake(SCREEN_WIDTH - 120, 0, 120, 44)];
         sureBtn.backgroundColor = [UIColor colorWithHexString:fineixColor];
         [sureBtn setTitle:@"确认订单" forState:(UIControlStateNormal)];
-        sureBtn.titleLabel.font = [UIFont systemFontOfSize:16];
+        sureBtn.titleLabel.font = [UIFont fontWithName:@"PingFangSC-Light" size:16];
         [sureBtn setTitleColor:[UIColor whiteColor] forState:(UIControlStateNormal)];
         [sureBtn addTarget:self action:@selector(sureOrederData) forControlEvents:(UIControlEventTouchUpInside)];
         [_sureView addSubview:sureBtn];
         
         self.sumPrice = [[UILabel alloc] init];
         self.sumPrice.textColor = [UIColor colorWithHexString:fineixColor];
-        self.sumPrice.font = [UIFont systemFontOfSize:14];
+        self.sumPrice.font = [UIFont fontWithName:@"PingFangSC-Light" size:14];
         [_sureView addSubview:self.sumPrice];
         [self.sumPrice mas_makeConstraints:^(MASConstraintMaker *make) {
             make.height.mas_equalTo(@44);
@@ -426,7 +426,7 @@ static NSString *const URLCarGoPay = @"/shopping/checkout";
         
         UILabel * sumLab = [[UILabel alloc] init];
         sumLab.textColor = [UIColor colorWithHexString:titleColor];
-        sumLab.font = [UIFont systemFontOfSize:14];
+        sumLab.font = [UIFont fontWithName:@"PingFangSC-Light" size:14];
         sumLab.text = NSLocalizedString(@"sumOrderPrice", nil);
         [_sureView addSubview:sumLab];
         [sumLab mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -442,7 +442,7 @@ static NSString *const URLCarGoPay = @"/shopping/checkout";
         
         self.bounsPriceLab = [[UILabel alloc] init];
         self.bounsPriceLab.textColor = [UIColor colorWithHexString:fineixColor];
-        self.bounsPriceLab.font = [UIFont systemFontOfSize:14];
+        self.bounsPriceLab.font = [UIFont fontWithName:@"PingFangSC-Light" size:14];
         [_sureView addSubview:self.bounsPriceLab];
         [self.bounsPriceLab mas_makeConstraints:^(MASConstraintMaker *make) {
             make.size.mas_equalTo(CGSizeMake(44, 44));
@@ -453,7 +453,7 @@ static NSString *const URLCarGoPay = @"/shopping/checkout";
         
         self.bounsLab = [[UILabel alloc] init];
         self.bounsLab.textColor = [UIColor whiteColor];
-        self.bounsLab.font = [UIFont systemFontOfSize:14];
+        self.bounsLab.font = [UIFont fontWithName:@"PingFangSC-Light" size:14];
         self.bounsLab.text = NSLocalizedString(@"userBounsPrice", nil);
         [_sureView addSubview:self.bounsLab];
         [self.bounsLab mas_makeConstraints:^(MASConstraintMaker *make) {

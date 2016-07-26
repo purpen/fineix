@@ -99,7 +99,7 @@
         _addLab = [[UILabel alloc] init];
         _addLab.text = @"请添加收货地址";
         _addLab.textColor = [UIColor colorWithHexString:titleColor];
-        _addLab.font = [UIFont systemFontOfSize:14];
+        _addLab.font = [UIFont fontWithName:@"PingFangSC-Light" size:14];
         _addLab.textAlignment = NSTextAlignmentCenter;
     }
     return _addLab;
@@ -117,7 +117,7 @@
 - (UILabel *)userName {
     if (!_userName) {
         _userName = [[UILabel alloc] init];
-        _userName.font = [UIFont systemFontOfSize:13];
+        _userName.font = [UIFont fontWithName:@"PingFangSC-Light" size:13];
     }
     return _userName;
 }
@@ -125,7 +125,7 @@
 - (UILabel *)cityName {
     if (!_cityName) {
         _cityName = [[UILabel alloc] init];
-        _cityName.font = [UIFont systemFontOfSize:10];
+        _cityName.font = [UIFont fontWithName:@"PingFangSC-Light" size:10];
     }
     return _cityName;
 }
@@ -133,7 +133,7 @@
 - (UILabel *)addressLab {
     if (!_addressLab) {
         _addressLab = [[UILabel alloc] init];
-        _addressLab.font = [UIFont systemFontOfSize:10];
+        _addressLab.font = [UIFont fontWithName:@"PingFangSC-Light" size:10];
         _addressLab.numberOfLines = 2;
     }
     return _addressLab;
@@ -142,7 +142,7 @@
 - (UILabel *)phoneNum {
     if (!_phoneNum) {
         _phoneNum = [[UILabel alloc] init];
-        _phoneNum.font = [UIFont systemFontOfSize:10];
+        _phoneNum.font = [UIFont fontWithName:@"PingFangSC-Light" size:10];
     }
     return _phoneNum;
 }

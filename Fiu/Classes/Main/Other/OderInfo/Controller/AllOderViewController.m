@@ -81,7 +81,7 @@
     }else{
         //显示
         tipView.tipNumLabel.text = [NSString stringWithFormat:@"%zi",num];
-        CGSize size = [tipView.tipNumLabel.text sizeWithAttributes:@{NSFontAttributeName: [UIFont systemFontOfSize:12.0f]}];
+        CGSize size = [tipView.tipNumLabel.text sizeWithAttributes:@{NSFontAttributeName: [UIFont fontWithName:@"PingFangSC-Light" size:12.0f]}];
         [btn addSubview:tipView];
         [tipView mas_makeConstraints:^(MASConstraintMaker *make) {
             if ((size.width+9) > 15) {

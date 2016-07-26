@@ -99,9 +99,9 @@
         _goodsTitle = [[UILabel alloc] init];
         _goodsTitle.textColor = [UIColor colorWithHexString:@"#666666"];
         if (IS_PHONE5) {
-            _goodsTitle.font = [UIFont systemFontOfSize:11];
+            _goodsTitle.font = [UIFont fontWithName:@"PingFangSC-Light" size:11];
         } else
-            _goodsTitle.font = [UIFont systemFontOfSize:12];
+            _goodsTitle.font = [UIFont fontWithName:@"PingFangSC-Light" size:12];
         _goodsTitle.numberOfLines = 2;
         _goodsTitle.textAlignment = NSTextAlignmentLeft;
         
@@ -121,9 +121,9 @@
     if (!_goodsNewPrice) {
         _goodsNewPrice = [[UILabel alloc] init];
         if (IS_PHONE5) {
-            _goodsNewPrice.font = [UIFont systemFontOfSize:10];
+            _goodsNewPrice.font = [UIFont fontWithName:@"PingFangSC-Light" size:10];
         } else {
-            _goodsNewPrice.font = [UIFont systemFontOfSize:12];
+            _goodsNewPrice.font = [UIFont fontWithName:@"PingFangSC-Light" size:12];
         }
         _goodsNewPrice.textColor = [UIColor colorWithHexString:fineixColor];
         _goodsNewPrice.textAlignment = NSTextAlignmentLeft;
@@ -136,9 +136,9 @@
     if (!_goodsMarketPrice) {
         _goodsMarketPrice = [[UILabel alloc] init];
         if (IS_PHONE5) {
-            _goodsMarketPrice.font = [UIFont systemFontOfSize:8];
+            _goodsMarketPrice.font = [UIFont fontWithName:@"PingFangSC-Light" size:8];
         } else {
-            _goodsMarketPrice.font = [UIFont systemFontOfSize:9];
+            _goodsMarketPrice.font = [UIFont fontWithName:@"PingFangSC-Light" size:9];
         }
         _goodsMarketPrice.textColor = [UIColor grayColor];
         _goodsMarketPrice.textAlignment = NSTextAlignmentLeft;
@@ -150,9 +150,9 @@
     if (!_likeNumLab) {
         _likeNumLab = [[UILabel alloc] init];
         if (IS_PHONE5) {
-            _likeNumLab.font = [UIFont systemFontOfSize:8];
+            _likeNumLab.font = [UIFont fontWithName:@"PingFangSC-Light" size:8];
         } else {
-            _likeNumLab.font = [UIFont systemFontOfSize:9];
+            _likeNumLab.font = [UIFont fontWithName:@"PingFangSC-Light" size:9];
         }
         _likeNumLab.textColor = [UIColor grayColor];
         _likeNumLab.textAlignment = NSTextAlignmentLeft;

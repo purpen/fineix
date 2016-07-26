@@ -157,7 +157,7 @@
 -(void)setLabel:(CGRect)frame andText:(NSString*)title andFont:(int)font andView:(UIView *)view andtextColor:(UIColor*)color{
     UILabel *titlelabel = [[UILabel alloc] initWithFrame:frame];
     titlelabel.text = title;
-    titlelabel.font = [UIFont systemFontOfSize:font];
+    titlelabel.font = [UIFont fontWithName:@"PingFangSC-Light" size:font];
     titlelabel.textColor = color;
     [view addSubview:titlelabel];
     view.userInteractionEnabled = YES;
@@ -237,7 +237,7 @@
         _searchBtn.layer.cornerRadius = 2;
         [_searchBtn setTitle:@"重新搜索该区域" forState:UIControlStateNormal];
         [_searchBtn setTitleColor:[UIColor colorWithHexString:fineixColor] forState:UIControlStateNormal];
-        _searchBtn.titleLabel.font = [UIFont systemFontOfSize:12];
+        _searchBtn.titleLabel.font = [UIFont fontWithName:@"PingFangSC-Light" size:12];
         _searchBtn.backgroundColor = [UIColor whiteColor];
         //[_searchBtn addTarget:self action:@selector(clickSearchBtn:) forControlEvents:UIControlEventTouchUpInside];
     }

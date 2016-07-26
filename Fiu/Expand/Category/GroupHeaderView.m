@@ -98,7 +98,7 @@
     if (!_subTitle) {
         _subTitle = [[UILabel alloc] init];
         _subTitle.textColor = [UIColor colorWithHexString:@"#666666" alpha:1];
-        _subTitle.font = [UIFont systemFontOfSize:11];
+        _subTitle.font = [UIFont fontWithName:@"PingFangSC-Light" size:11];
     }
     return _subTitle;
 }
@@ -108,7 +108,7 @@
         _moreBtn = [[UIButton alloc] init];
         [_moreBtn setTitle:NSLocalizedString(@"lookAll", nil) forState:(UIControlStateNormal)];
         [_moreBtn setTitleColor:[UIColor colorWithHexString:@"#666666" alpha:1] forState:(UIControlStateNormal)];
-        _moreBtn.titleLabel.font = [UIFont systemFontOfSize:12];
+        _moreBtn.titleLabel.font = [UIFont fontWithName:@"PingFangSC-Light" size:12];
         [_moreBtn addTarget:self action:@selector(moreFiuScene) forControlEvents:(UIControlEventTouchUpInside)];
     }
     return _moreBtn;

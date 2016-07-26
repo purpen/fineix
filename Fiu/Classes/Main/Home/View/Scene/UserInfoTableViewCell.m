@@ -114,7 +114,7 @@
         userTag.dele.hidden = YES;
         userTag.title.text = title;
         if (price.length > 6) {
-            userTag.price.font = [UIFont systemFontOfSize:9];
+            userTag.price.font = [UIFont fontWithName:@"PingFangSC-Light" size:9];
         }
         userTag.price.text = price;
         userTag.title.hidden = YES;
@@ -321,7 +321,7 @@
         _goodNum = [[UILabel alloc] init];
         _goodNum.textColor = [UIColor whiteColor];
         _goodNum.textAlignment = NSTextAlignmentCenter;
-        _goodNum.font = [UIFont systemFontOfSize:Font_Number];
+        _goodNum.font = [UIFont fontWithName:@"PingFangSC-Light" size:Font_Number];
     }
     return _goodNum;
 }
@@ -359,7 +359,7 @@
     if (!_userName) {
         _userName = [[UILabel alloc] init];
         _userName.textColor = [UIColor colorWithHexString:@"#222222" alpha:1];
-        _userName.font = [UIFont systemFontOfSize:Font_UserName];
+        _userName.font = [UIFont fontWithName:@"PingFangSC-Light" size:11];
     }
     return _userName;
 }
@@ -379,7 +379,7 @@
 - (UILabel *)userStar {
     if (!_userStar) {
         _userStar = [[UILabel alloc] init];
-        _userStar.font = [UIFont systemFontOfSize:9];
+        _userStar.font = [UIFont fontWithName:@"PingFangSC-Light" size:9];
         _userStar.textColor = [UIColor colorWithHexString:@"#666666" alpha:1];
     }
     return _userStar;
@@ -390,7 +390,7 @@
     if (!_userProfile) {
         _userProfile = [[UILabel alloc] init];
         _userProfile.textColor = [UIColor colorWithHexString:@"#666666" alpha:1];
-        _userProfile.font = [UIFont systemFontOfSize:Font_UserProfile];
+        _userProfile.font = [UIFont fontWithName:@"PingFangSC-Light" size:Font_UserProfile];
     }
     return _userProfile;
 }
@@ -400,7 +400,7 @@
     if (!_lookNum) {
         _lookNum = [[UILabel alloc] init];
         [self addIcon:_lookNum withImage:@"look"];
-        _lookNum.font = [UIFont systemFontOfSize:Font_UserProfile];
+        _lookNum.font = [UIFont fontWithName:@"PingFangSC-Light" size:Font_UserProfile];
         _lookNum.textColor = [UIColor colorWithHexString:@"#666666" alpha:1];
     }
     return _lookNum;
@@ -411,7 +411,7 @@
     if (!_likeNum) {
         _likeNum = [[UILabel alloc] init];
         [self addIcon:_likeNum withImage:@"like"];
-        _likeNum.font = [UIFont systemFontOfSize:Font_UserProfile];
+        _likeNum.font = [UIFont fontWithName:@"PingFangSC-Light" size:Font_UserProfile];
         _likeNum.textColor = [UIColor colorWithHexString:@"#666666" alpha:1];
     }
     return _likeNum;
@@ -435,7 +435,7 @@
             make.size.mas_equalTo(CGSizeMake(SCREEN_WIDTH - 40, 56));
         }];
     } else if ([title length] >= 8 && [title length] < 13) {
-        _titleText.font = [UIFont systemFontOfSize:26];
+        _titleText.font = [UIFont systemFontOfSize:28];
         [_titleText mas_updateConstraints:^(MASConstraintMaker *make) {
             make.size.mas_equalTo(CGSizeMake(SCREEN_WIDTH - 40, 36));
         }];
@@ -482,7 +482,7 @@
     if (!_whereScene) {
         _whereScene = [[UILabel alloc] init];
         [self addIcon:_whereScene withImage:@"icon_star"];
-        _whereScene.font = [UIFont systemFontOfSize:Font_Number];
+        _whereScene.font = [UIFont fontWithName:@"PingFangSC-Light" size:Font_Number];
         _whereScene.textColor = [UIColor whiteColor];
         _whereScene.userInteractionEnabled = YES;
         [_whereScene addGestureRecognizer:self.FiuSceneTap];
@@ -510,7 +510,7 @@
     if (!_city) {
         _city = [[UILabel alloc] init];
         [self addIcon:_city withImage:@"icon_city"];
-        _city.font = [UIFont systemFontOfSize:Font_Number];
+        _city.font = [UIFont fontWithName:@"PingFangSC-Light" size:Font_Number];
         _city.textColor = [UIColor whiteColor];
     }
     return _city;
@@ -521,7 +521,7 @@
     if (!_time) {
         _time = [[UILabel alloc] init];
         _time.textColor = [UIColor blackColor];
-        _time.font = [UIFont systemFontOfSize:Font_Number];
+        _time.font = [UIFont fontWithName:@"PingFangSC-Light" size:Font_Number];
         _time.textColor = [UIColor whiteColor];
     }
     return _time;

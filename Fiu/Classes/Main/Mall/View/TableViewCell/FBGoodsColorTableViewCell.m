@@ -35,7 +35,7 @@
 - (UILabel *)goodsColorLab {
     if (!_goodsColorLab) {
         _goodsColorLab = [[UILabel alloc] init];
-        _goodsColorLab.font = [UIFont systemFontOfSize:Font_GoodsTitle];
+        _goodsColorLab.font = [UIFont fontWithName:@"PingFangSC-Light" size:Font_GoodsTitle];
         _goodsColorLab.textAlignment = NSTextAlignmentLeft;
         _goodsColorLab.textColor = [UIColor blackColor];
     }

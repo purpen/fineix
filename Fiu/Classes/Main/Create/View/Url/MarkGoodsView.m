@@ -49,7 +49,7 @@
         _goodsBtn = [[UIButton alloc] init];
         [_goodsBtn setImage:[UIImage imageNamed:@"icon_markGoods"] forState:(UIControlStateNormal)];
         [_goodsBtn setTitle:NSLocalizedString(@"marker", nil) forState:(UIControlStateNormal)];
-        _goodsBtn.titleLabel.font = [UIFont systemFontOfSize:14];
+        _goodsBtn.titleLabel.font = [UIFont fontWithName:@"PingFangSC-Light" size:14];
         [_goodsBtn setTitleColor:[UIColor whiteColor] forState:(UIControlStateNormal)];
         [_goodsBtn setImageEdgeInsets:(UIEdgeInsetsMake(-20, 7, 0, 0))];
         [_goodsBtn setTitleEdgeInsets:(UIEdgeInsetsMake(70, -55, 0, 0))];
@@ -62,7 +62,7 @@
         _urlBtn = [[UIButton alloc] init];
         [_urlBtn setImage:[UIImage imageNamed:@"icon_markUrl"] forState:(UIControlStateNormal)];
         [_urlBtn setTitle:NSLocalizedString(@"addUrl", nil) forState:(UIControlStateNormal)];
-        _urlBtn.titleLabel.font = [UIFont systemFontOfSize:14];
+        _urlBtn.titleLabel.font = [UIFont fontWithName:@"PingFangSC-Light" size:14];
         [_urlBtn setTitleColor:[UIColor whiteColor] forState:(UIControlStateNormal)];
         [_urlBtn setImageEdgeInsets:(UIEdgeInsetsMake(-20, 7, 0, 0))];
         [_urlBtn setTitleEdgeInsets:(UIEdgeInsetsMake(70, -55, 0, 0))];

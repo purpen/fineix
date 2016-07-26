@@ -51,7 +51,7 @@ static NSString *const URLReport = @"/report_tip/save";
         UIButton * reportBtn = [[UIButton alloc] initWithFrame:CGRectMake(0, 64 + (44 * idx), SCREEN_WIDTH, 44)];
         reportBtn.backgroundColor = [UIColor whiteColor];
         [reportBtn setTitle:titleArr[idx] forState:(UIControlStateNormal)];
-        reportBtn.titleLabel.font = [UIFont systemFontOfSize:14];
+        reportBtn.titleLabel.font = [UIFont fontWithName:@"PingFangSC-Light" size:14];
         [reportBtn setTitleColor:[UIColor colorWithHexString:@"#333333"] forState:(UIControlStateNormal)];
         reportBtn.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
         [reportBtn setTitleEdgeInsets:(UIEdgeInsetsMake(0, 15, 0, 0))];
@@ -82,7 +82,7 @@ static NSString *const URLReport = @"/report_tip/save";
     
     UILabel * lab = [[UILabel alloc] initWithFrame:CGRectMake(15, 15, SCREEN_WIDTH - 30, 40)];
     lab.textColor = [UIColor colorWithHexString:titleColor];
-    lab.font = [UIFont systemFontOfSize:14];
+    lab.font = [UIFont fontWithName:@"PingFangSC-Light" size:14];
     lab.numberOfLines = 0;
     lab.text = @"感谢你的举报，如果此照片违反了我们的规定，我们会将其移除。";
     [view addSubview:lab];

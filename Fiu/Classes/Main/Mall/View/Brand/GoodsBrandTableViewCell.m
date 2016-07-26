@@ -109,7 +109,7 @@
     if (!_brandIntroduce) {
         _brandIntroduce = [[UILabel alloc] init];
         _brandIntroduce.textColor = [UIColor colorWithHexString:@"#555555"];
-        _brandIntroduce.font = [UIFont systemFontOfSize:Font_Tag];
+        _brandIntroduce.font = [UIFont fontWithName:@"PingFangSC-Light" size:Font_Tag];
         _brandIntroduce.numberOfLines = 0;
     }
     return _brandIntroduce;

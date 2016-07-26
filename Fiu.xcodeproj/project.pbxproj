@@ -53,8 +53,6 @@
 		1F2A8F511CF40277005116C7 /* FBSticker.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F2A8C251CF40276005116C7 /* FBSticker.m */; };
 		1F2A8F521CF40277005116C7 /* FBStickersContainer.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F2A8C271CF40276005116C7 /* FBStickersContainer.m */; };
 		1F2A8F531CF40277005116C7 /* MarkGoodsCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F2A8C291CF40276005116C7 /* MarkGoodsCollectionViewCell.m */; };
-		1F2A8F541CF40277005116C7 /* ScenceAddMoreView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F2A8C2C1CF40276005116C7 /* ScenceAddMoreView.m */; };
-		1F2A8F551CF40277005116C7 /* ScenceMessageView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F2A8C2E1CF40276005116C7 /* ScenceMessageView.m */; };
 		1F2A8F561CF40277005116C7 /* MapTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F2A8C311CF40276005116C7 /* MapTableViewCell.m */; };
 		1F2A8F571CF40277005116C7 /* SelectAllFSceneCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F2A8C331CF40276005116C7 /* SelectAllFSceneCollectionViewCell.m */; };
 		1F2A8F581CF40277005116C7 /* SelectHotFSceneTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F2A8C351CF40276005116C7 /* SelectHotFSceneTableViewCell.m */; };
@@ -638,10 +636,6 @@
 		1F2A8C271CF40276005116C7 /* FBStickersContainer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FBStickersContainer.m; sourceTree = "<group>"; };
 		1F2A8C281CF40276005116C7 /* MarkGoodsCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MarkGoodsCollectionViewCell.h; sourceTree = "<group>"; };
 		1F2A8C291CF40276005116C7 /* MarkGoodsCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MarkGoodsCollectionViewCell.m; sourceTree = "<group>"; };
-		1F2A8C2B1CF40276005116C7 /* ScenceAddMoreView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ScenceAddMoreView.h; sourceTree = "<group>"; };
-		1F2A8C2C1CF40276005116C7 /* ScenceAddMoreView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ScenceAddMoreView.m; sourceTree = "<group>"; };
-		1F2A8C2D1CF40276005116C7 /* ScenceMessageView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ScenceMessageView.h; sourceTree = "<group>"; };
-		1F2A8C2E1CF40276005116C7 /* ScenceMessageView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ScenceMessageView.m; sourceTree = "<group>"; };
 		1F2A8C301CF40276005116C7 /* MapTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MapTableViewCell.h; sourceTree = "<group>"; };
 		1F2A8C311CF40276005116C7 /* MapTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MapTableViewCell.m; sourceTree = "<group>"; };
 		1F2A8C321CF40276005116C7 /* SelectAllFSceneCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SelectAllFSceneCollectionViewCell.h; sourceTree = "<group>"; };
@@ -1875,10 +1869,6 @@
 		1F2A8C2A1CF40276005116C7 /* Release */ = {
 			isa = PBXGroup;
 			children = (
-				1F2A8C2B1CF40276005116C7 /* ScenceAddMoreView.h */,
-				1F2A8C2C1CF40276005116C7 /* ScenceAddMoreView.m */,
-				1F2A8C2D1CF40276005116C7 /* ScenceMessageView.h */,
-				1F2A8C2E1CF40276005116C7 /* ScenceMessageView.m */,
 				D8B855C01D3F6BA10008BD57 /* AddLocationView.h */,
 				D8B855C11D3F6BA10008BD57 /* AddLocationView.m */,
 				D8B855C61D3F748B0008BD57 /* AddCategoryView.h */,
@@ -4478,7 +4468,6 @@
 				1F2A8FD41CF40277005116C7 /* FBEditCarItemTableViewCell.m in Sources */,
 				1F2A90771CF40277005116C7 /* RefundmentViewController.m in Sources */,
 				D8AC3E121D2DF9D900148522 /* FBTabBarController.m in Sources */,
-				1F2A8F541CF40277005116C7 /* ScenceAddMoreView.m in Sources */,
 				1FCDCC7A1D0515F700C92E78 /* ScenarioNonView.m in Sources */,
 				1F2A8F5B1CF40277005116C7 /* LookAllTagBtnTableViewCell.m in Sources */,
 				D8F1C2B01D3A377900AE717F /* CatagoryFiuSceneModel.m in Sources */,
@@ -4512,7 +4501,6 @@
 				1F2A90581CF40277005116C7 /* SignupView.m in Sources */,
 				1F2A90AF1CF40277005116C7 /* OptionViewController.m in Sources */,
 				1F2A8FFB1CF40277005116C7 /* ShieldingViewController.m in Sources */,
-				1F2A8F551CF40277005116C7 /* ScenceMessageView.m in Sources */,
 				1F2A8FAD1CF40277005116C7 /* FBOrderTimeViewController.m in Sources */,
 				1F2A8F621CF40277005116C7 /* FindGoodsView.m in Sources */,
 				1F2A8F8A1CF40277005116C7 /* SceneSubscribeViewController.m in Sources */,

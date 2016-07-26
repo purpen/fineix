@@ -72,7 +72,7 @@
     if (!_goodsDescribe) {
         _goodsDescribe = [[UILabel alloc] init];
         _goodsDescribe.text = @"产品描述";
-        _goodsDescribe.font = [UIFont systemFontOfSize:Font_GoodsTitle];
+        _goodsDescribe.font = [UIFont fontWithName:@"PingFangSC-Light" size:Font_GoodsTitle];
         _goodsDescribe.textColor = [UIColor colorWithHexString:@"#222222"];
     }
     return _goodsDescribe;
@@ -81,7 +81,7 @@
 - (UILabel *)describe {
     if (!_describe) {
         _describe = [[UILabel alloc] init];
-        _describe.font = [UIFont systemFontOfSize:Font_Tag];
+        _describe.font = [UIFont fontWithName:@"PingFangSC-Light" size:Font_Tag];
         _describe.textColor = [UIColor colorWithHexString:@"#333333"];
         _describe.numberOfLines = 0;
     }

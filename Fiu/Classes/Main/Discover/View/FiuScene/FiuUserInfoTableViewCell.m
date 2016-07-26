@@ -229,7 +229,7 @@
         _goodNum = [[UILabel alloc] init];
         _goodNum.textColor = [UIColor whiteColor];
         _goodNum.textAlignment = NSTextAlignmentCenter;
-        _goodNum.font = [UIFont systemFontOfSize:Font_Number];
+        _goodNum.font = [UIFont fontWithName:@"PingFangSC-Light" size:Font_Number];
     }
     return _goodNum;
 }
@@ -269,7 +269,7 @@
 - (UILabel *)userStar {
     if (!_userStar) {
         _userStar = [[UILabel alloc] init];
-        _userStar.font = [UIFont systemFontOfSize:9];
+        _userStar.font = [UIFont fontWithName:@"PingFangSC-Light" size:9];
         _userStar.textColor = [UIColor colorWithHexString:@"#666666" alpha:1];
     }
     return _userStar;
@@ -288,7 +288,7 @@
     if (!_userName) {
         _userName = [[UILabel alloc] init];
         _userName.textColor = [UIColor colorWithHexString:@"#222222" alpha:1];
-        _userName.font = [UIFont systemFontOfSize:Font_UserName];
+        _userName.font = [UIFont fontWithName:@"PingFangSC-Light" size:Font_UserName];
     }
     return _userName;
 }
@@ -298,7 +298,7 @@
     if (!_userProfile) {
         _userProfile = [[UILabel alloc] init];
         _userProfile.textColor = [UIColor colorWithHexString:@"#666666" alpha:1];
-        _userProfile.font = [UIFont systemFontOfSize:Font_UserProfile];
+        _userProfile.font = [UIFont fontWithName:@"PingFangSC-Light" size:Font_UserProfile];
     }
     return _userProfile;
 }
@@ -315,10 +315,10 @@
 
 //  标题文字的样式
 - (void)titleTextStyle:(NSString *)title withBgColor:(UIColor *)color {
-    if ([title length] <= 11) {
-        _titleText.font = [UIFont systemFontOfSize:40];
-    } else if ([title length] > 11 ) {
-        _titleText.font = [UIFont systemFontOfSize:28];
+    if ([title length] <= 10) {
+        _titleText.font = [UIFont fontWithName:@"PingFangSC-Light" size:40];
+    } else if ([title length] > 10 ) {
+        _titleText.font = [UIFont fontWithName:@"PingFangSC-Light" size:26];
         [_titleText mas_updateConstraints:^(MASConstraintMaker *make) {
             make.height.mas_equalTo(@70);
         }];
@@ -340,7 +340,7 @@
     if (!_city) {
         _city = [[UILabel alloc] init];
         [self addIcon:_city withImage:@"icon_city"];
-        _city.font = [UIFont systemFontOfSize:Font_Number];
+        _city.font = [UIFont fontWithName:@"PingFangSC-Light" size:Font_Number];
         _city.textColor = [UIColor whiteColor];
     }
     return _city;
@@ -351,7 +351,7 @@
     if (!_time) {
         _time = [[UILabel alloc] init];
         _time.textColor = [UIColor blackColor];
-        _time.font = [UIFont systemFontOfSize:Font_Number];
+        _time.font = [UIFont fontWithName:@"PingFangSC-Light" size:Font_Number];
         _time.textColor = [UIColor whiteColor];
     }
     return _time;
