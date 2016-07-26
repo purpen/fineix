@@ -17,6 +17,7 @@ typedef void(^SelectedCellBlock)(DeliveryAddressCell *cell);
 @property (nonatomic, strong) DeliveryAddressModel * deliveryAddress;
 
 @property (nonatomic, copy) SelectedCellBlock selectedCellBlock;
+@property (weak, nonatomic) IBOutlet UIImageView *unSelectedImage;
 
 @property (weak, nonatomic) IBOutlet UIImageView *selectedImgView;
 @property (weak, nonatomic) IBOutlet UILabel *defaultLbl;
