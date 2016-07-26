@@ -14,7 +14,7 @@
 #import "NSString+Helper.h"
 #import "AddreesPickerViewController.h"
 
-@interface EditAddressViewController ()<FBNavigationBarItemsDelegate>
+@interface EditAddressViewController ()<FBNavigationBarItemsDelegate,UITextFieldDelegate>
 
 @property (weak, nonatomic) IBOutlet UITextField *nameTF;
 @property (weak, nonatomic) IBOutlet UITextField *zipTF;
@@ -69,6 +69,10 @@ static NSString *const DeleteAddressURL = @"/shopping/remove_address";
     self.cityId = self.deliveryAddress.city;
     //通知
     //[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyBoardWillChangeFrame:) name:UIKeyboardWillChangeFrameNotification object:nil];
+}
+
+-(BOOL)textFieldShouldReturn:(UITextField *)textField{
+    return [textField resignFirstResponder];
 }
 
 -(void)keyBoardWillChangeFrame:(NSNotification*)note{

@@ -157,7 +157,9 @@ static NSString *const DeliveryAddressCellIdentifier = @"deliveryAddressCell";
         if (self.isSelectType) {
             if ([addressCell.deliveryAddress.idField isEqualToString:self.selectedAddress.idField]) {
                 addressCell.selectedImgView.hidden = false;
+                addressCell.unSelectedImage.hidden = YES;
             } else {
+                addressCell.unSelectedImage.hidden = NO;
                 addressCell.selectedImgView.hidden = true;
             }
             if (addressCell.deliveryAddress.isDefault) {
@@ -167,9 +169,11 @@ static NSString *const DeliveryAddressCellIdentifier = @"deliveryAddressCell";
             }
         } else {
             if (addressCell.deliveryAddress.isDefault) {
+                addressCell.unSelectedImage.hidden = YES;
                 addressCell.selectedImgView.hidden = false;
                 addressCell.defaultLbl.hidden = false;
             } else {
+                addressCell.unSelectedImage.hidden = NO;
                 addressCell.selectedImgView.hidden = true;
                 addressCell.defaultLbl.hidden = true;
             }
