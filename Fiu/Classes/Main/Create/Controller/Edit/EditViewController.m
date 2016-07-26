@@ -54,7 +54,7 @@ static NSString *const URLReleaseFiuScenen = @"/scene_scene/save";
     [self setReleaseViewUI];
 }
 
-#pragma mark - 
+#pragma mark -
 - (void)editSceneData {
     _title = [self.data valueForKey:@"title"];
     _des = [self.data valueForKey:@"des"];
