@@ -444,6 +444,23 @@ static NSString *const URLDeleteScene = @"/scene_scene/delete";
     }
 }
 
+- (void)scrollViewDidScroll:(UIScrollView *)scrollView {
+    if (scrollView == self.fiuSceneTable) {
+        if (self.rollDown == YES) {
+            [UIView animateWithDuration:.4 animations:^{
+                self.leftBtn.alpha = 0;
+                self.logoImg.alpha = 0;
+            }];
+            
+        } else if (self.rollDown == NO) {
+            [UIView animateWithDuration:.4 animations:^{
+                self.leftBtn.alpha = 1;
+                self.logoImg.alpha = 1;
+            }];
+        }
+    }
+}
+
 -(UITapGestureRecognizer *)cityTap{
     if (!_cityTap) {
         _cityTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(clickCityTap:)];

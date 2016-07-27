@@ -15,6 +15,7 @@
 
 @interface ContentAndTagTableViewCell : UITableViewCell <UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout>
 
+@pro_assign NSInteger                       searchType;
 @pro_strong UINavigationController      *   nav;
 @pro_strong UIButton                    *   moreBtn;        //  更多
 @pro_strong UILabel                     *   contentLab;     //  场景内容文字

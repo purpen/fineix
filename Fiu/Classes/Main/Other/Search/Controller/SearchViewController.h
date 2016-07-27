@@ -31,7 +31,7 @@
 
 /*
  *  搜索的类型
- *  0:场景 / 1:情景 / 2:产品
+ *  0:情景 / 1:地盘 / 2:产品
  */
 @pro_assign NSInteger                           searchType;
 

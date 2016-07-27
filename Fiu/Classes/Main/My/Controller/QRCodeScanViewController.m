@@ -18,6 +18,7 @@
 #import "FiuSceneViewController.h"
 #import "SceneInfoViewController.h"
 #import "GoodsInfoViewController.h"
+#import "FBGoodsInfoViewController.h"
 #import "UserInfoEntity.h"
 
 @interface QRCodeScanViewController ()<FBNavigationBarItemsDelegate,UIAlertViewDelegate,AVCaptureMetadataOutputObjectsDelegate>
@@ -275,20 +276,25 @@
         NSArray *threeAry = [twoAry[1] componentsSeparatedByString:@"="];
         NSString *infoId = threeAry[1];
         if ([infoType isEqualToString:@"10"]) {
-            //情景
+            //地盘
             FiuSceneViewController * fiuSceneVC = [[FiuSceneViewController alloc] init];
             fiuSceneVC.fiuSceneId = infoId;
             [self.navigationController pushViewController:fiuSceneVC animated:YES];
         }else if ([infoType isEqualToString:@"11"]) {
-            //场景
+            //情景
             SceneInfoViewController * sceneInfoVC = [[SceneInfoViewController alloc] init];
             sceneInfoVC.sceneId = infoId;
             [self.navigationController pushViewController:sceneInfoVC animated:YES];
         }else if ([infoType isEqualToString:@"12"]) {
-            //产品
+            //情景商品
             GoodsInfoViewController * goodsInfoVC = [[GoodsInfoViewController alloc] init];
             goodsInfoVC.goodsID = infoId;
             [self.navigationController pushViewController:goodsInfoVC animated:YES];
+        }else if ([infoType isEqualToString:@"1"]) {
+            //自营商品
+            FBGoodsInfoViewController * fbGoodsInfoVC = [[FBGoodsInfoViewController alloc] init];
+            fbGoodsInfoVC.goodsID = infoId;
+            [self.navigationController pushViewController:fbGoodsInfoVC animated:YES];
         }else if ([infoType isEqualToString:@"13"]) {
             //用户
             HomePageViewController *homeOpage = [[HomePageViewController alloc] init];

@@ -95,6 +95,10 @@
  */
 @pro_strong UILabel     *   navLine;
 
+/*
+ *  二维码扫描
+ */
+@pro_strong UIButton    *   qrBtn;
 
 
 @pro_weak id <FBNavigationBarItemsDelegate> delegate;
@@ -118,6 +122,11 @@
  *  在Nav上添加右边的按钮
  */
 - (void)addBarItemRightBarButton:(NSString *)title image:(NSString *)image isTransparent:(BOOL)transparent;
+
+/*
+ *  在Nav上添加左边的按钮
+ */
+- (void)addQRBtn;
 
 /**
  *  添加操作指示图

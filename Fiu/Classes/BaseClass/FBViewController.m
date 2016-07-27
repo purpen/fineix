@@ -8,6 +8,7 @@
 
 #import "FBViewController.h"
 #import "FBLoginRegisterViewController.h"
+#import "QRCodeScanViewController.h"
 
 static NSString *const URLGoodsCarNum = @"/shopping/fetch_cart_count";
 static NSString *const URLUserIsLogin = @"/user/user_info";
@@ -187,6 +188,26 @@ static NSString *const URLUserIsLogin = @"/user/user_info";
     return _logoImg;
 }
 
+#pragma mark - 二维码扫描
+- (UIButton *)qrBtn {
+    if (!_qrBtn) {
+        _qrBtn = [[UIButton alloc] initWithFrame:CGRectMake(SCREEN_WIDTH - 78, 20, 44, 44)];
+        [_qrBtn setImage:[UIImage imageNamed:@"qr_saoyisao"] forState:(UIControlStateNormal)];
+        [_qrBtn addTarget:self action:@selector(openQR) forControlEvents:(UIControlEventTouchUpInside)];
+    }
+    return _qrBtn;
+}
+
+//  打开二维码扫描
+- (void)openQR {
+    QRCodeScanViewController * qrVC = [[QRCodeScanViewController alloc] init];
+    [self.navigationController pushViewController:qrVC animated:YES];
+}
+
+- (void)addQRBtn {
+    [self.view addSubview:self.qrBtn];
+}
+
 - (void)backTop {
     [self.baseTable scrollRectToVisible:CGRectMake(0, 0, 1, 1) animated:YES];
 }
@@ -251,7 +272,7 @@ static NSString *const URLUserIsLogin = @"/user/user_info";
     }
 }
 
-#pragma mark - 添加Nav左边的按钮
+#pragma mark - 添加Nav右边的按钮
 - (void)addBarItemRightBarButton:(NSString *)title image:(NSString *)image isTransparent:(BOOL)transparent {
     [self.rightBtn setImage:[UIImage imageNamed:image] forState:(UIControlStateNormal)];
     [self.rightBtn setTitle:title forState:UIControlStateNormal];

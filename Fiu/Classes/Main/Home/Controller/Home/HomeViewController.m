@@ -198,6 +198,7 @@ static NSString *const URLSceneList = @"/scene_sight/";
                 self.tabBarController.tabBar.frame = tabBarRect;
                 self.leftBtn.alpha = 0;
                 self.rightBtn.alpha = 0;
+                self.qrBtn.alpha = 0;
                 [[UIApplication sharedApplication] setStatusBarHidden:YES withAnimation:(UIStatusBarAnimationSlide)];
             }];
             
@@ -207,6 +208,7 @@ static NSString *const URLSceneList = @"/scene_sight/";
                 self.tabBarController.tabBar.frame = tabBarRect;
                 self.leftBtn.alpha = 1;
                 self.rightBtn.alpha = 1;
+                self.qrBtn.alpha = 1;
                 [[UIApplication sharedApplication] setStatusBarHidden:NO withAnimation:(UIStatusBarAnimationSlide)];
             }];
         }
@@ -220,6 +222,7 @@ static NSString *const URLSceneList = @"/scene_sight/";
     [self addNavLogoImgisTransparent:YES];
     [self addBarItemLeftBarButton:@"" image:@"Nav_Search" isTransparent:YES];
     [self addBarItemRightBarButton:@"" image:@"Nav_Concern" isTransparent:YES];
+    [self addQRBtn];
     [[UIApplication sharedApplication] setStatusBarHidden:NO withAnimation:(UIStatusBarAnimationSlide)];
 }
 

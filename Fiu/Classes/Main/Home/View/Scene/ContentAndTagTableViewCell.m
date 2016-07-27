@@ -26,6 +26,7 @@
 
 #pragma mark -
 - (void)setFiuSceneDescription:(FiuSceneInfoData *)model withEidt:(BOOL)canEidt {
+    self.searchType = 1;
     if (canEidt) {
         [self.chooseTagView mas_updateConstraints:^(MASConstraintMaker *make) {
             make.width.mas_equalTo(SCREEN_WIDTH - 64);
@@ -44,6 +45,7 @@
 }
 
 - (void)setSceneDescription:(SceneInfoData *)model {
+    self.searchType = 0;
     [self changeContentLabStyle:model.des];
     self.chooseTagMarr = [NSMutableArray arrayWithArray:model.tags];
     [self.chooseTagView reloadData];
@@ -146,7 +148,7 @@
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
     SearchViewController * searchVC = [[SearchViewController alloc] init];
     searchVC.keyword = self.chooseTagMarr[indexPath.row];
-    searchVC.searchType = 0;
+    searchVC.searchType = self.searchType;
     [self.nav pushViewController:searchVC animated:YES];
 }
 
