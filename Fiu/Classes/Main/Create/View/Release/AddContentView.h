@@ -35,4 +35,6 @@ typedef void(^GetEditContentAndTags)(NSString * title, NSString * des, NSMutable
 
 - (void)getUserEditTags:(NSMutableArray *)tagsMarr;
 
+- (void)setDefaultChooseTags:(NSMutableArray *)chooseMarr;
+
 @end

@@ -30,6 +30,10 @@
     return self;
 }
 
+- (void)setDefaultChooseTags:(NSMutableArray *)chooseMarr {
+    self.chooseTagMarr = chooseMarr;
+}
+
 - (void)getUserEditTags:(NSMutableArray *)tagsMarr {
     self.tagS = tagsMarr;
     [self.tagsColleciton reloadData];

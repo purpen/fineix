@@ -32,10 +32,8 @@
 }
 
 - (void)setAddTags:(NSMutableArray *)addTags {
-    if (addTags.count > 0) {
-        self.chooseTagMarr = addTags;
-        [self.chooseCollection reloadData];
-    }
+    self.chooseTagMarr = addTags;
+    [self.chooseCollection reloadData];
 }
 
 - (void)editContentData:(UIGestureRecognizer *)tap {

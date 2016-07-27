@@ -60,6 +60,7 @@ static NSString *const URLReleaseFiuScenen = @"/scene_scene/save";
     _des = [self.data valueForKey:@"des"];
     _chooseTags = [NSMutableArray arrayWithArray:[self.data valueForKey:@"tags"]];
     [self.showContent setEditContentData:_title withDes:_des withTags:_chooseTags];
+    [self.addContent setDefaultChooseTags:_chooseTags];
     
     _address = [self.data valueForKey:@"address"];
     _city = [self.data valueForKey:@"city"];
