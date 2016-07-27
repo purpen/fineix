@@ -17,7 +17,7 @@
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="B2X-c5-zmL" userLabel="MainView">
                         <rect key="frame" x="0.0" y="0.0" width="355" height="97"/>
                         <subviews>
-                            <imageView hidden="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Select Reveal" translatesAutoresizingMaskIntoConstraints="NO" id="mHP-dN-ZjP">
+                            <imageView hidden="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" image="Select Reveal" translatesAutoresizingMaskIntoConstraints="NO" id="mHP-dN-ZjP">
                                 <rect key="frame" x="15" y="40" width="18" height="18"/>
                             </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="崔波" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="46D-Rb-jXY">

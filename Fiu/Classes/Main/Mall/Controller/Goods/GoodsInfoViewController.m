@@ -65,6 +65,7 @@ static NSString *const URlCancelCollect = @"/favorite/ajax_cancel_favorite";
 - (void)networkGoodsInfoData {
     self.goodsInfoRequest = [FBAPI getWithUrlString:URLGoodsInfo requestDictionary:@{@"id":self.goodsID} delegate:self];
     [self.goodsInfoRequest startRequestSuccess:^(FBRequest *request, id result) {
+        NSLog(@"%@",result);
         _goodsDes = [[result valueForKey:@"data"] valueForKey:@"summary"];
         _goodsTags = [NSArray arrayWithArray:[[result valueForKey:@"data"] valueForKey:@"tags"]];
         _collect = [[[result valueForKey:@"data"] valueForKey:@"is_favorite"] integerValue];
