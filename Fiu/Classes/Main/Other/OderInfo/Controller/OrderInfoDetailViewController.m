@@ -18,6 +18,7 @@
 #import "RefundmentViewController.h"
 #import "FBPayTheWayViewController.h"
 #import "GoodsInfoViewController.h"
+#import "FBGoodsInfoViewController.h"
 
 @interface OrderInfoDetailViewController ()<ProductInfoViewDelegate,FBNavigationBarItemsDelegate>
 
@@ -378,8 +379,8 @@ static NSString *const OrderDetailURL = @"/shopping/detail";
 #pragma mark - ProductInfoViewDelegate
 - (void)tapProductInfoView:(ProductInfoView *)productInfoView withProductInfo:(ProductInfoModel *)productInfo
 {
-    GoodsInfoViewController * goodsInfoVC = [[GoodsInfoViewController alloc] init];
-    goodsInfoVC.goodsID = self.orderInfo.idField;
+    FBGoodsInfoViewController * goodsInfoVC = [[FBGoodsInfoViewController alloc] init];
+    goodsInfoVC.goodsID = [NSString stringWithFormat:@"%ld",productInfo.productId];
     [self.navigationController pushViewController:goodsInfoVC animated:YES];
 }
 
