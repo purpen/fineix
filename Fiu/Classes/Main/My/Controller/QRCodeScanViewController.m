@@ -272,7 +272,12 @@
         NSArray *oneAry = [resultStr componentsSeparatedByString:@"?"];
         NSString *infoStr = oneAry[1];
         NSArray *twoAry = [infoStr componentsSeparatedByString:@"&"];
-        NSString *infoType = [twoAry[0] substringWithRange:NSMakeRange(9, 2)];
+        NSString *infoType;
+        if (((NSString*)twoAry[0]).length == 11) {
+            infoType = [twoAry[0] substringWithRange:NSMakeRange(9, 2)];
+        }else if(((NSString*)twoAry[0]).length == 10){
+            infoType = [twoAry[0] substringWithRange:NSMakeRange(9, 1)];
+        }
         NSArray *threeAry = [twoAry[1] componentsSeparatedByString:@"="];
         NSString *infoId = threeAry[1];
         if ([infoType isEqualToString:@"10"]) {
