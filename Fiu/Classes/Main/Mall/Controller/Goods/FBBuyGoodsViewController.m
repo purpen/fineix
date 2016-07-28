@@ -238,6 +238,7 @@
         } else {
             _goodsChoose.font = [UIFont systemFontOfSize:12];
         }
+        _goodsChoose.text = @"";
         _goodsChoose.numberOfLines = 2;
     }
     return _goodsChoose;
@@ -346,36 +347,46 @@
 }
 
 - (void)addChooseNum:(UIButton *)button {
-    self.num += 1;
-    if (self.num >= self.quantity) {
-        button.userInteractionEnabled = NO;
-        button.backgroundColor = [UIColor colorWithHexString:lineGrayColor];
-        [self showMessage:@"库存不足了～"];
+    if ([self.goodsChoose.text isEqualToString:@""]) {
+        [self showMessage:@"请先选择喜欢的颜色分类吧"];
         
-    } else if (self.num <= self.quantity) {
-        self.subBtn.userInteractionEnabled = YES;
-        self.subBtn.backgroundColor = [UIColor whiteColor];
+    } else {
+        self.num += 1;
+        if (self.num >= self.quantity) {
+            button.userInteractionEnabled = NO;
+            button.backgroundColor = [UIColor colorWithHexString:lineGrayColor];
+            [self showMessage:@"库存不足了～"];
+            
+        } else if (self.num <= self.quantity) {
+            self.subBtn.userInteractionEnabled = YES;
+            self.subBtn.backgroundColor = [UIColor whiteColor];
+        }
+        
+        self.chooseNum.text = [NSString stringWithFormat:@"%zi", self.num];
     }
-    
-    self.chooseNum.text = [NSString stringWithFormat:@"%zi", self.num];
 }
 
 - (void)subChooseNum:(UIButton *)button {
-    if (self.num > 1) {
-        self.num -= 1;
-    }
-    
-    if (self.num <= 1) {
-        button.userInteractionEnabled = NO;
-        button.backgroundColor = [UIColor colorWithHexString:lineGrayColor];
-        [self showMessage:@"不能再少了～"];
+    if ([self.goodsChoose.text isEqualToString:@""]) {
+        [self showMessage:@"请先选择喜欢的颜色分类吧"];
         
-    } else if (self.num <= self.quantity) {
-        self.addBtn.userInteractionEnabled = YES;
-        self.addBtn.backgroundColor = [UIColor whiteColor];
+    } else {
+        if (self.num > 1) {
+            self.num -= 1;
+        }
+        
+        if (self.num <= 1) {
+            button.userInteractionEnabled = NO;
+            button.backgroundColor = [UIColor colorWithHexString:lineGrayColor];
+            [self showMessage:@"不能再少了～"];
+            
+        } else if (self.num <= self.quantity) {
+            self.addBtn.userInteractionEnabled = YES;
+            self.addBtn.backgroundColor = [UIColor whiteColor];
+        }
+        
+        self.chooseNum.text = [NSString stringWithFormat:@"%zi", self.num];
     }
-    
-    self.chooseNum.text = [NSString stringWithFormat:@"%zi", self.num];
 }
 
 #pragma mark 数量

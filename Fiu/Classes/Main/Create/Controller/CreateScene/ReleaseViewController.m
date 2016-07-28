@@ -92,7 +92,7 @@ static NSString *const URLGetUserDesTags = @"/gateway/fetch_chinese_word";
     NSString * tags =  [self.showContent.chooseTagMarr componentsJoinedByString:@","];
 
     if ([self.addLocaiton.longitude length] <= 0 || [title isEqualToString:@""] || [des isEqualToString:NSLocalizedString(@"addDescription", nil)] || [des isEqualToString:@""] || [self.addLocaiton.locationLab.text isEqualToString:@""]) {
-        [SVProgressHUD showInfoWithStatus:@"填写未完成"];
+        [SVProgressHUD showInfoWithStatus:@"检查下哪里遗漏了吧～"];
 
     } else if (title.length > 20) {
         [SVProgressHUD showInfoWithStatus:@"请输入20字以内的标题"];
