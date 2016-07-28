@@ -323,7 +323,7 @@
     TYAlertView * alertView = [TYAlertView alertViewWithTitle:@"放弃当前付款?" message:nil];
     TYAlertAction * cancel = [TYAlertAction actionWithTitle:@"取消" style:TYAlertActionStyleCancle handler:nil];
     TYAlertAction * ok = [TYAlertAction actionWithTitle:@"确定" style:TYAlertActionStyleDefault handler:^(TYAlertAction *action) {
-        [self.navigationController popToRootViewControllerAnimated:YES];
+        [self.navigationController popToViewController:self.navigationController.childViewControllers[2] animated:YES];
 //        [self.navigationController popViewControllerAnimated:YES];
     }];
     [alertView addAction:cancel];
