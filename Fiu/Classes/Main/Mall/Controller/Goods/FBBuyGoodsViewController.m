@@ -368,7 +368,7 @@
 
 - (void)subChooseNum:(UIButton *)button {
     if ([self.goodsChoose.text isEqualToString:@""]) {
-        [self showMessage:@"请先选择喜欢的颜色分类吧"];
+        [self showMessage:@"请先选择喜欢的颜色分类吧～"];
         
     } else {
         if (self.num > 1) {
