@@ -39,14 +39,14 @@ static NSString *const URLEditItemsNum = @"/shopping/edit_cart";
     
     [self setNavigationViewUI];
     
+    [self networkGoodsCarList];
+    
 }
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     
     [self setGoodsCarVcUI];
-    
-    [self networkGoodsCarList];
 }
 
 #pragma mark - 网络请求
@@ -409,8 +409,6 @@ static NSString *const URLEditItemsNum = @"/shopping/edit_cart";
         }
     }
 }
-
-
 
 #pragma mark - 编辑购物车
 - (UIButton *)editBtn {
