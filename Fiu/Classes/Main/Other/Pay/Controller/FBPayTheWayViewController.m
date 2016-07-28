@@ -16,6 +16,7 @@
 #import "SVProgressHUD.h"
 #import "WXSignParams.h"
 #import <AlipaySDK/AlipaySDK.h>
+#import "GoodsCarViewController.h"
 #import "PaySuccessViewController.h"
 
 #define wayBtnTag 55
@@ -323,6 +324,13 @@
     TYAlertView * alertView = [TYAlertView alertViewWithTitle:@"放弃当前付款?" message:nil];
     TYAlertAction * cancel = [TYAlertAction actionWithTitle:@"取消" style:TYAlertActionStyleCancle handler:nil];
     TYAlertAction * ok = [TYAlertAction actionWithTitle:@"确定" style:TYAlertActionStyleDefault handler:^(TYAlertAction *action) {
+        
+        
+        for (UIViewController *vc in self.navigationController.childViewControllers) {
+            if ([NSStringFromClass([vc class]) isEqualToString:NSStringFromClass([GoodsCarViewController class])]) {
+                [self.navigationController popToViewController:vc animated:YES];
+            }
+        }
         [self.navigationController popToViewController:self.navigationController.childViewControllers[2] animated:YES];
 //        [self.navigationController popViewControllerAnimated:YES];
     }];
