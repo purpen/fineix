@@ -44,7 +44,11 @@
     if (!_title) {
         _title = [[UILabel alloc] init];
         _title.textColor = [UIColor colorWithHexString:@"#FFFFFF" alpha:.9];
-        _title.font = [UIFont fontWithName:@"PingFangSC-Light" size:14];
+        if (IS_iOS9) {
+            _title.font = [UIFont fontWithName:@"PingFangSC-Light" size:14];
+        } else {
+            _title.font = [UIFont systemFontOfSize:14];
+        }
         _title.numberOfLines = 0;
     }
     return _title;
@@ -54,7 +58,11 @@
     if (!_des) {
         _des = [[UILabel alloc] init];
         _des.textColor = [UIColor colorWithHexString:@"#FFFFFF" alpha:.8];
-        _des.font = [UIFont fontWithName:@"PingFangSC-Light" size:12];
+        if (IS_iOS9) {
+            _des.font = [UIFont fontWithName:@"PingFangSC-Light" size:12];
+        } else {
+            _des.font = [UIFont systemFontOfSize:12];
+        }
         _des.numberOfLines = 0;
     }
     return _des;

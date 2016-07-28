@@ -82,7 +82,11 @@
     if (!_contentLab) {
         _contentLab = [[UILabel alloc] init];
         _contentLab.textColor = [UIColor colorWithHexString:pictureNavColor alpha:1];
-        _contentLab.font = [UIFont fontWithName:@"PingFangSC-Light" size:Font_Content];
+        if (IS_iOS9) {
+            _contentLab.font = [UIFont fontWithName:@"PingFangSC-Light" size:14];
+        } else {
+            _contentLab.font = [UIFont systemFontOfSize:14];
+        }
         _contentLab.numberOfLines = 0;
     }
     return _contentLab;

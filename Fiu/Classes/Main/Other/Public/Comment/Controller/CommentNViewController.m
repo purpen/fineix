@@ -192,7 +192,11 @@ static NSString *const URLSendSceneComment = @"/comment/ajax_comment";
         _promptLab = [[UILabel alloc] initWithFrame:CGRectMake(0, 100, SCREEN_WIDTH, 100)];
         _promptLab.text = NSLocalizedString(@"NoComment", nil);
         _promptLab.textColor = [UIColor colorWithHexString:titleColor];
-        _promptLab.font = [UIFont fontWithName:@"PingFangSC-Light" size:13];
+        if (IS_iOS9) {
+            _promptLab.font = [UIFont fontWithName:@"PingFangSC-Light" size:13];
+        } else {
+            _promptLab.font = [UIFont systemFontOfSize:13];
+        }
         _promptLab.textAlignment = NSTextAlignmentCenter;
     }
     return _promptLab;

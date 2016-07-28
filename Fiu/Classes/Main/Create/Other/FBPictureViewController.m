@@ -89,7 +89,7 @@
 - (UILabel *)navTitle {
     if (!_navTitle) {
         _navTitle = [[UILabel alloc] initWithFrame:CGRectMake(50, 0, (SCREEN_WIDTH - 100), 50)];
-        _navTitle.font = [UIFont fontWithName:@"PingFangSC-Light" size:Font_ControllerTitle];
+        _navTitle.font = [UIFont systemFontOfSize:Font_ControllerTitle];
         _navTitle.textColor = [UIColor whiteColor];
         _navTitle.textAlignment = NSTextAlignmentCenter;
     }
@@ -111,8 +111,11 @@
         _nextBtn = [[UIButton alloc] initWithFrame:CGRectMake((SCREEN_WIDTH - 60), 0, 50, 50)];
         [_nextBtn setTitle:NSLocalizedString(@"next", nil) forState:(UIControlStateNormal)];
         [_nextBtn setTitleColor:[UIColor whiteColor] forState:(UIControlStateNormal)];
-        _nextBtn.titleLabel.font = [UIFont fontWithName:@"PingFangSC-Light" size:Font_ControllerTitle];
-
+        if (IS_iOS9) {
+            _nextBtn.titleLabel.font = [UIFont fontWithName:@"PingFangSC-Light" size:Font_ControllerTitle];
+        } else {
+            _nextBtn.titleLabel.font = [UIFont systemFontOfSize:Font_ControllerTitle];
+        }
     }
     return _nextBtn;
 }
@@ -163,7 +166,11 @@
         _doneBtn = [[UIButton alloc] initWithFrame:CGRectMake((SCREEN_WIDTH - 60), 0, 50, 50)];
         [_doneBtn setTitle:NSLocalizedString(@"release", nil) forState:(UIControlStateNormal)];
         [_doneBtn setTitleColor:[UIColor colorWithHexString:fineixColor alpha:1] forState:(UIControlStateNormal)];
-        _doneBtn.titleLabel.font = [UIFont fontWithName:@"PingFangSC-Light" size:Font_ControllerTitle];
+        if (IS_iOS9) {
+            _doneBtn.titleLabel.font = [UIFont fontWithName:@"PingFangSC-Light" size:Font_ControllerTitle];
+        } else {
+            _doneBtn.titleLabel.font = [UIFont systemFontOfSize:Font_ControllerTitle];
+        }
     }
     return _doneBtn;
 }
@@ -209,7 +216,7 @@
     label.textColor = [UIColor whiteColor];
     label.textAlignment = NSTextAlignmentCenter;
     label.backgroundColor = [UIColor clearColor];
-    label.font = [UIFont fontWithName:@"PingFangSC-Light" size:14];
+    label.font = [UIFont systemFontOfSize:14];
     [showview addSubview:label];
     
     [UIView animateWithDuration:2.0 animations:^{

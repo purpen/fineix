@@ -71,7 +71,11 @@
 - (UILabel *)titleLab {
     if (!_titleLab) {
         _titleLab = [[UILabel alloc] initWithFrame:CGRectMake(15, 20, SCREEN_WIDTH - 30, 20)];
-        _titleLab.font = [UIFont fontWithName:@"PingFangSC-Light" size:14];
+        if (IS_iOS9) {
+            _titleLab.font = [UIFont fontWithName:@"PingFangSC-Light" size:14];
+        } else {
+            _titleLab.font = [UIFont systemFontOfSize:14];
+        }
         _titleLab.textColor = [UIColor colorWithHexString:@"#222222"];
     }
     return _titleLab;

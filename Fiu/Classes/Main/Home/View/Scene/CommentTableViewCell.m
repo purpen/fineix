@@ -110,7 +110,11 @@
     if (!_comment) {
         _comment = [[UILabel alloc] init];
         _comment.textColor = [UIColor colorWithHexString:titleColor alpha:1];
-        _comment.font = [UIFont fontWithName:@"PingFangSC-Light" size:Font_Comment];
+        if (IS_iOS9) {
+            _comment.font = [UIFont fontWithName:@"PingFangSC-Light" size:Font_Comment];
+        } else {
+            _comment.font = [UIFont systemFontOfSize:Font_Comment];
+        }
         _comment.numberOfLines = 0;
     }
     return _comment;

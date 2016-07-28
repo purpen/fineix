@@ -61,8 +61,7 @@
     if (!_titleLab) {
         _titleLab = [[UILabel alloc] init];
         _titleLab.textColor = [UIColor whiteColor];
-        _titleLab.font = [UIFont fontWithName:@"PingFangSC-Light" size:Font_GroupHeader];
-        
+        _titleLab.font = [UIFont systemFontOfSize:Font_GroupHeader];
     }
     return _titleLab;
 }
@@ -72,7 +71,7 @@
     if (!_photoCount) {
         _photoCount = [[UILabel alloc] init];
         _photoCount.textColor = [UIColor grayColor];
-        _photoCount.font = [UIFont fontWithName:@"PingFangSC-Light" size:Font_GroupHeader];
+        _photoCount.font = [UIFont systemFontOfSize:Font_GroupHeader];
         _photoCount.textAlignment = NSTextAlignmentRight;
     }
     return _photoCount;

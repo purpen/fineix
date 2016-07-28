@@ -25,10 +25,14 @@
     if (!_suFiuBtn) {
         _suFiuBtn = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 44)];
         _suFiuBtn.backgroundColor = [UIColor whiteColor];
-        [_suFiuBtn setTitle:@"＋订阅情景 " forState:(UIControlStateNormal)];
-        [_suFiuBtn setTitle:@" 已订阅" forState:(UIControlStateSelected)];
+        [_suFiuBtn setTitle:NSLocalizedString(@"suFiuBtn", nil) forState:(UIControlStateNormal)];
+        [_suFiuBtn setTitle:NSLocalizedString(@"suFiuDone", nil) forState:(UIControlStateSelected)];
         [_suFiuBtn setTitleColor:[UIColor colorWithHexString:fineixColor] forState:(UIControlStateNormal)];
-        _suFiuBtn.titleLabel.font = [UIFont fontWithName:@"PingFangSC-Light" size:16];
+        if (IS_iOS9) {
+            _suFiuBtn.titleLabel.font = [UIFont fontWithName:@"PingFangSC-Light" size:16];
+        } else {
+            _suFiuBtn.titleLabel.font = [UIFont systemFontOfSize:16];
+        }
         [_suFiuBtn setImage:[UIImage imageNamed:@"Su_FScene"] forState:(UIControlStateNormal)];
         [_suFiuBtn setImage:[UIImage imageNamed:@"Su_FScene_Selected"] forState:(UIControlStateSelected)];
         [_suFiuBtn setImageEdgeInsets:(UIEdgeInsetsMake(0, -10, 0, 0))];

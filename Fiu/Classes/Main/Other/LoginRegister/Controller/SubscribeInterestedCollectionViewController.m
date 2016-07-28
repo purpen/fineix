@@ -68,7 +68,7 @@ static NSString * const reuseIdentifier = @"Cell";
     CGPoint headLabelcenter = headLabel.center;
     headLabelcenter.x = self.view.center.x;
     headLabel.center = headLabelcenter;
-    headLabel.font = [UIFont fontWithName:@"PingFangSC-Light" size:13];
+    headLabel.font = [UIFont systemFontOfSize:13];
     headLabel.text = @"现在你可以订阅感兴趣的地盘";
     headLabel.textColor = [UIColor grayColor];
     [self.view addSubview:headLabel];

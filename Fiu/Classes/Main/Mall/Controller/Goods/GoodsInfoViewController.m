@@ -65,7 +65,6 @@ static NSString *const URlCancelCollect = @"/favorite/ajax_cancel_favorite";
 - (void)networkGoodsInfoData {
     self.goodsInfoRequest = [FBAPI getWithUrlString:URLGoodsInfo requestDictionary:@{@"id":self.goodsID} delegate:self];
     [self.goodsInfoRequest startRequestSuccess:^(FBRequest *request, id result) {
-        NSLog(@"%@",result);
         _goodsDes = [[result valueForKey:@"data"] valueForKey:@"summary"];
         _goodsTags = [NSArray arrayWithArray:[[result valueForKey:@"data"] valueForKey:@"tags"]];
         _collect = [[[result valueForKey:@"data"] valueForKey:@"is_favorite"] integerValue];
@@ -101,7 +100,7 @@ static NSString *const URlCancelCollect = @"/favorite/ajax_cancel_favorite";
 #pragma mark 相关推荐
 - (void)networkRecommendGoodsDataWithCategory:(NSString *)categoryId {
     [SVProgressHUD show];
-    self.reGoodsRequest = [FBAPI getWithUrlString:URLRecommendGoods requestDictionary:@{@"category_id":categoryId, @"sort":@"1", @"page":@"1", @"size":@"8"} delegate:self];
+    self.reGoodsRequest = [FBAPI getWithUrlString:URLRecommendGoods requestDictionary:@{@"category_id":categoryId, @"ignore_ids":self.goodsID, @"sort":@"1", @"page":@"1", @"size":@"8"} delegate:self];
     [self.reGoodsRequest startRequestSuccess:^(FBRequest *request, id result) {
         NSArray * goodsArr = [[result valueForKey:@"data"] valueForKey:@"rows"];
         for (NSDictionary * goodsDict in goodsArr) {
@@ -208,7 +207,11 @@ static NSString *const URlCancelCollect = @"/favorite/ajax_cancel_favorite";
         [_collectBtn setTitle:NSLocalizedString(@"Collect", nil) forState:(UIControlStateNormal)];
 //        [_collectBtn setTitle:NSLocalizedString(@"CollectDone", nil) forState:(UIControlStateSelected)];
         [_collectBtn setTitleColor:[UIColor colorWithHexString:@"#555555"] forState:(UIControlStateNormal)];
-        _collectBtn.titleLabel.font = [UIFont fontWithName:@"PingFangSC-Light" size:10];
+        if (IS_iOS9) {
+            _collectBtn.titleLabel.font = [UIFont fontWithName:@"PingFangSC-Light" size:10];
+        } else {
+            _collectBtn.titleLabel.font = [UIFont systemFontOfSize:10];
+        }
         
         [_collectBtn setTitleEdgeInsets:(UIEdgeInsetsMake(30, -15, 0, 0))];
         [_collectBtn setImage:[UIImage imageNamed:@"goods_star"] forState:(UIControlStateNormal)];
@@ -225,7 +228,11 @@ static NSString *const URlCancelCollect = @"/favorite/ajax_cancel_favorite";
         _gobuyBtn = [[UIButton alloc] init];
         _gobuyBtn.backgroundColor = [UIColor colorWithHexString:fineixColor];
         [_gobuyBtn setTitleColor:[UIColor whiteColor] forState:(UIControlStateNormal)];
-        _gobuyBtn.titleLabel.font = [UIFont fontWithName:@"PingFangSC-Light" size:Font_InfoTitle];
+        if (IS_iOS9) {
+            _gobuyBtn.titleLabel.font = [UIFont fontWithName:@"PingFangSC-Light" size:16];
+        } else {
+            _gobuyBtn.titleLabel.font = [UIFont systemFontOfSize:16];
+        }
         [_gobuyBtn addTarget:self action:@selector(buyCarBtnClick) forControlEvents:(UIControlEventTouchUpInside)];
     }
     return _gobuyBtn;
@@ -395,7 +402,7 @@ static NSString *const URlCancelCollect = @"/favorite/ajax_cancel_favorite";
             return 0.01;
         }
     } else if (indexPath.section == 5) {
-        return 280;
+        return ((self.recommendGoods.count/2) * (((SCREEN_WIDTH - 40) / 2) * 1.3)) + 44;
     }
     return 44;
 }

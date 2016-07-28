@@ -103,7 +103,11 @@ static NSString *const URLAllFiuSceneList = @"/scene_scene/";
         _beginSearchBtn.layer.masksToBounds = YES;
         [_beginSearchBtn setTitle:NSLocalizedString(@"searchFScene", nil) forState:(UIControlStateNormal)];
         [_beginSearchBtn setTitleColor:[UIColor colorWithHexString:titleColor] forState:(UIControlStateNormal)];
-        _beginSearchBtn.titleLabel.font = [UIFont fontWithName:@"PingFangSC-Light" size:13];
+        if (IS_iOS9) {
+            _beginSearchBtn.titleLabel.font = [UIFont fontWithName:@"PingFangSC-Light" size:13];
+        } else {
+            _beginSearchBtn.titleLabel.font = [UIFont systemFontOfSize:13];
+        }
         [_beginSearchBtn setImage:[UIImage imageNamed:@"Search"] forState:(UIControlStateNormal)];
         [_beginSearchBtn setImageEdgeInsets:(UIEdgeInsetsMake(0, -10, 0, 0))];
         [_beginSearchBtn addTarget:self action:@selector(searchBtnClick) forControlEvents:(UIControlEventTouchUpInside)];
@@ -185,7 +189,7 @@ static NSString *const URLAllFiuSceneList = @"/scene_scene/";
     if (!_sureBtn) {
         _sureBtn = [[UIButton alloc] initWithFrame:CGRectMake((SCREEN_WIDTH - 60), 0, 50, 50)];
         [_sureBtn setTitleColor:[UIColor blackColor] forState:(UIControlStateNormal)];
-        _sureBtn.titleLabel.font = [UIFont fontWithName:@"PingFangSC-Light" size:Font_ControllerTitle];
+        _sureBtn.titleLabel.font = [UIFont systemFontOfSize:Font_ControllerTitle];
         [self.sureBtn setTitle:NSLocalizedString(@"sure", nil) forState:(UIControlStateNormal)];
         [self.sureBtn addTarget:self action:@selector(sureBtnClick) forControlEvents:(UIControlEventTouchUpInside)];
     }

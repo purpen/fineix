@@ -71,9 +71,9 @@
                 self.findGoodsId = [urlStr substringWithRange:idRange];
             
             } else if ([urlStr containsString:@"detail.m.tmall.com"]) {
-                NSRange range = [urlStr rangeOfString:@"&id="];
-                NSString * tmallUrl = [urlStr substringFromIndex:range.location + 4];
-                NSRange rrange = [tmallUrl rangeOfString:@"&"];
+                NSRange range = [urlStr rangeOfString:@"id="];
+                NSString * tmallUrl = [urlStr substringFromIndex:range.location + 3];
+                NSRange rrange = [tmallUrl rangeOfString:@"&sid"];
                 self.findGoodsId = [tmallUrl substringToIndex:rrange.location];
             }
         }
@@ -87,8 +87,11 @@
         _findDoneBtn.backgroundColor = [UIColor colorWithHexString:fineixColor];
         [_findDoneBtn setTitle:NSLocalizedString(@"findGoodsDone", nil) forState:(UIControlStateNormal)];
         [_findDoneBtn setTitleColor:[UIColor whiteColor] forState:(UIControlStateNormal)];
-        _findDoneBtn.titleLabel.font = [UIFont fontWithName:@"PingFangSC-Light" size:16];
-       
+        if (IS_iOS9) {
+            _findDoneBtn.titleLabel.font = [UIFont fontWithName:@"PingFangSC-Light" size:16];
+        } else {
+            _findDoneBtn.titleLabel.font = [UIFont systemFontOfSize:16];
+        }
     }
     return _findDoneBtn;
 }
@@ -107,7 +110,7 @@
     if (!_closeBtn) {
         _closeBtn = [[UIButton alloc] initWithFrame:CGRectMake(SCREEN_WIDTH - 50, 0, 50, 50)];
         [_closeBtn setTitle:@"关闭" forState:(UIControlStateNormal)];
-        _closeBtn.titleLabel.font = [UIFont fontWithName:@"PingFangSC-Light" size:16];
+        _closeBtn.titleLabel.font = [UIFont systemFontOfSize:16];
         [_closeBtn setTitleColor:[UIColor blackColor] forState:(UIControlStateNormal)];
     }
     return _closeBtn;

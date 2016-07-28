@@ -109,7 +109,11 @@
         _addLoacationBtn = [[UIButton alloc] initWithFrame:CGRectMake(34, 0, SCREEN_WIDTH - 44, 44)];
         [_addLoacationBtn setTitle:NSLocalizedString(@"addLocation", nil) forState:(UIControlStateNormal)];
         [_addLoacationBtn setTitleColor:[UIColor colorWithHexString:blackFont alpha:1] forState:(UIControlStateNormal)];
-        _addLoacationBtn.titleLabel.font = [UIFont fontWithName:@"PingFangSC-Light" size:Font_GroupHeader];
+        if (IS_iOS9) {
+            _addLoacationBtn.titleLabel.font = [UIFont fontWithName:@"PingFangSC-Light" size:14];
+        } else {
+            _addLoacationBtn.titleLabel.font = [UIFont systemFontOfSize:14];
+        }
         _addLoacationBtn.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
         _addLoacationBtn.backgroundColor = [UIColor whiteColor];
         [_addLoacationBtn addTarget:self action:@selector(changeLocation) forControlEvents:(UIControlEventTouchUpInside)];
@@ -192,7 +196,11 @@
     if (!_location) {
         _location = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH - 88, 44)];
         _location.textColor = [UIColor colorWithHexString:@"#333333" alpha:1];
-        _location.font = [UIFont fontWithName:@"PingFangSC-Light" size:Font_GroupHeader];
+        if (IS_iOS9) {
+            _location.font = [UIFont fontWithName:@"PingFangSC-Light" size:14];
+        } else {
+            _location.font = [UIFont systemFontOfSize:14];
+        }
     }
     return _location;
     
@@ -235,7 +243,11 @@
         _addTagBtn = [[UIButton alloc] initWithFrame:CGRectMake(15, 0, SCREEN_WIDTH - 15, 44)];
         [_addTagBtn setTitle:NSLocalizedString(@"tag", nil) forState:(UIControlStateNormal)];
         [_addTagBtn setTitleColor:[UIColor colorWithHexString:blackFont alpha:1] forState:(UIControlStateNormal)];
-        _addTagBtn.titleLabel.font = [UIFont fontWithName:@"PingFangSC-Light" size:Font_GroupHeader];
+        if (IS_iOS9) {
+            _addTagBtn.titleLabel.font = [UIFont fontWithName:@"PingFangSC-Light" size:14];
+        } else {
+            _addTagBtn.titleLabel.font = [UIFont systemFontOfSize:14];
+        }
         _addTagBtn.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
         _addTagBtn.backgroundColor = [UIColor whiteColor];
         [_addTagBtn addTarget:self action:@selector(chooesTag) forControlEvents:(UIControlEventTouchUpInside)];
@@ -326,7 +338,11 @@
         _addSceneBtn = [[UIButton alloc] initWithFrame:CGRectMake(15, 0, SCREEN_WIDTH - 15, 44)];
         [_addSceneBtn setTitle:NSLocalizedString(@"onScene", nil) forState:(UIControlStateNormal)];
         [_addSceneBtn setTitleColor:[UIColor colorWithHexString:blackFont alpha:1] forState:(UIControlStateNormal)];
-        _addSceneBtn.titleLabel.font = [UIFont fontWithName:@"PingFangSC-Light" size:Font_GroupHeader];
+        if (IS_iOS9) {
+            _addSceneBtn.titleLabel.font = [UIFont fontWithName:@"PingFangSC-Light" size:14];
+        } else {
+            _addSceneBtn.titleLabel.font = [UIFont systemFontOfSize:14];
+        }
         _addSceneBtn.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
         _addSceneBtn.backgroundColor = [UIColor whiteColor];
         [_addSceneBtn addTarget:self action:@selector(chooseScene) forControlEvents:(UIControlEventTouchUpInside)];
@@ -351,13 +367,17 @@
 
 - (UIButton *)selectFSceneBtn {
     if (!_selectFSceneBtn) {
-        self.selectFSceneBtn = [[UIButton alloc] init];
-        [self.selectFSceneBtn setTitleColor:[UIColor colorWithHexString:fineixColor] forState:(UIControlStateNormal)];
-        self.selectFSceneBtn.titleLabel.font = [UIFont fontWithName:@"PingFangSC-Light" size:12];
-        self.selectFSceneBtn.layer.borderColor = [UIColor colorWithHexString:fineixColor].CGColor;
-        self.selectFSceneBtn.layer.borderWidth = 0.5f;
-        self.selectFSceneBtn.layer.cornerRadius = 3;
-        self.selectFSceneBtn.layer.masksToBounds = YES;
+        _selectFSceneBtn = [[UIButton alloc] init];
+        [_selectFSceneBtn setTitleColor:[UIColor colorWithHexString:fineixColor] forState:(UIControlStateNormal)];
+        if (IS_iOS9) {
+            _selectFSceneBtn.titleLabel.font = [UIFont fontWithName:@"PingFangSC-Light" size:12];
+        } else {
+            _selectFSceneBtn.titleLabel.font = [UIFont systemFontOfSize:12];
+        }
+        _selectFSceneBtn.layer.borderColor = [UIColor colorWithHexString:fineixColor].CGColor;
+        _selectFSceneBtn.layer.borderWidth = 0.5f;
+        _selectFSceneBtn.layer.cornerRadius = 3;
+        _selectFSceneBtn.layer.masksToBounds = YES;
     }
     return _selectFSceneBtn;
 }

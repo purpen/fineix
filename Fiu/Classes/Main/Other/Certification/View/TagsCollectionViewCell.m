@@ -38,7 +38,11 @@
         [_tagBtn setBackgroundImage:[UIImage resizedImage:@"tagBg_gray"] forState:(UIControlStateNormal)];
         [_tagBtn setBackgroundImage:[UIImage resizedImage:@"tagBg_yellow"] forState:UIControlStateHighlighted];
         [_tagBtn setTitleColor:[UIColor colorWithHexString:titleColor] forState:(UIControlStateNormal)];
-        _tagBtn.titleLabel.font = [UIFont fontWithName:@"PingFangSC-Light" size:12];
+        if (IS_iOS9) {
+            _tagBtn.titleLabel.font = [UIFont fontWithName:@"PingFangSC-Light" size:12];
+        } else {
+            _tagBtn.titleLabel.font = [UIFont systemFontOfSize:12];
+        }
         [_tagBtn setTitleEdgeInsets:(UIEdgeInsetsMake(0, -5, 0, 0))];
     }
     return _tagBtn;

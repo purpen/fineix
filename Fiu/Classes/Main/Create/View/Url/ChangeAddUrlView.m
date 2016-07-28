@@ -100,7 +100,11 @@
         _title.backgroundColor = [UIColor whiteColor];
         _title.text = NSLocalizedString(@"editUserGoods", nil);
         _title.textAlignment = NSTextAlignmentCenter;
-        _title.font = [UIFont fontWithName:@"PingFangSC-Light" size:14];
+        if (IS_iOS9) {
+            _title.font = [UIFont fontWithName:@"PingFangSC-Light" size:14];
+        } else {
+            _title.font = [UIFont systemFontOfSize:11];
+        }
         _title.textColor = [UIColor colorWithHexString:@"#999999"];
     }
     return _title;
@@ -113,7 +117,11 @@
         _cancel.backgroundColor = [UIColor whiteColor];
         [_cancel setTitle:NSLocalizedString(@"cancel", nil) forState:(UIControlStateNormal)];
         [_cancel setTitleColor:[UIColor blackColor] forState:(UIControlStateNormal)];
-        _cancel.titleLabel.font = [UIFont fontWithName:@"PingFangSC-Light" size:14];
+        if (IS_iOS9) {
+            _cancel.titleLabel.font = [UIFont fontWithName:@"PingFangSC-Light" size:14];
+        } else {
+            _cancel.titleLabel.font = [UIFont systemFontOfSize:14];
+        }
         [_cancel addTarget:self action:@selector(cancelBtnClick) forControlEvents:(UIControlEventTouchUpInside)];
     }
     return _cancel;
@@ -131,7 +139,11 @@
         _sure.backgroundColor = [UIColor colorWithHexString:fineixColor];
         [_sure setTitle:NSLocalizedString(@"determine", nil) forState:(UIControlStateNormal)];
         [_sure setTitleColor:[UIColor whiteColor] forState:(UIControlStateNormal)];
-        _sure.titleLabel.font = [UIFont fontWithName:@"PingFangSC-Light" size:14];
+        if (IS_iOS9) {
+            _sure.titleLabel.font = [UIFont fontWithName:@"PingFangSC-Light" size:14];
+        } else {
+            _sure.titleLabel.font = [UIFont systemFontOfSize:14];
+        }
     }
     return _sure;
 }
@@ -143,7 +155,11 @@
         _url.backgroundColor = [UIColor whiteColor];
         [_url setTitle:NSLocalizedString(@"changeUrl", nil) forState:(UIControlStateNormal)];
         [_url setTitleColor:[UIColor colorWithHexString:fineixColor] forState:(UIControlStateNormal)];
-        _url.titleLabel.font = [UIFont fontWithName:@"PingFangSC-Light" size:14];
+        if (IS_iOS9) {
+            _url.titleLabel.font = [UIFont fontWithName:@"PingFangSC-Light" size:14];
+        } else {
+            _url.titleLabel.font = [UIFont systemFontOfSize:14];
+        }
         _url.layer.borderColor = [UIColor colorWithHexString:fineixColor].CGColor;
         _url.layer.borderWidth = 1;
         _url.layer.cornerRadius = 3;
@@ -158,7 +174,11 @@
         _dele.backgroundColor = [UIColor whiteColor];
         [_dele setTitle:NSLocalizedString(@"deleteUserGoods", nil) forState:(UIControlStateNormal)];
         [_dele setTitleColor:[UIColor colorWithHexString:fineixColor] forState:(UIControlStateNormal)];
-        _dele.titleLabel.font = [UIFont fontWithName:@"PingFangSC-Light" size:14];
+        if (IS_iOS9) {
+            _dele.titleLabel.font = [UIFont fontWithName:@"PingFangSC-Light" size:14];
+        } else {
+            _dele.titleLabel.font = [UIFont systemFontOfSize:14];
+        }
         _dele.layer.borderColor = [UIColor colorWithHexString:fineixColor].CGColor;
         _dele.layer.borderWidth = 1;
         _dele.layer.cornerRadius = 3;
@@ -171,7 +191,11 @@
     if (!_goodsPrice) {
         _goodsPrice = [[UITextField alloc] init];
         _goodsPrice.borderStyle = UITextBorderStyleRoundedRect;
-        _goodsPrice.font = [UIFont fontWithName:@"PingFangSC-Light" size:14];
+        if (IS_iOS9) {
+            _goodsPrice.font = [UIFont fontWithName:@"PingFangSC-Light" size:14];
+        } else {
+            _goodsPrice.font = [UIFont systemFontOfSize:14];
+        }
         _goodsPrice.textColor = [UIColor colorWithHexString:titleColor];
         _goodsPrice.keyboardType = UIKeyboardTypeNumberPad;
     }
@@ -183,7 +207,11 @@
     if (!_goodsTitle) {
         _goodsTitle = [[UITextField alloc] init];
         _goodsTitle.borderStyle = UITextBorderStyleRoundedRect;
-        _goodsTitle.font = [UIFont fontWithName:@"PingFangSC-Light" size:14];
+        if (IS_iOS9) {
+            _goodsTitle.font = [UIFont fontWithName:@"PingFangSC-Light" size:14];
+        } else {
+            _goodsTitle.font = [UIFont systemFontOfSize:14];
+        }
         _goodsTitle.textColor = [UIColor colorWithHexString:titleColor];
     }
     return _goodsTitle;

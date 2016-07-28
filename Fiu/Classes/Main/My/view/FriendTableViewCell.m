@@ -96,7 +96,11 @@
 -(UILabel *)levelLabel{
     if (!_levelLabel) {
         _levelLabel = [[UILabel alloc] init];
-        _levelLabel.font = [UIFont fontWithName:@"PingFangSC-Light" size:9];
+        if (IS_iOS9) {
+            _levelLabel.font = [UIFont fontWithName:@"PingFangSC-Light" size:9];
+        } else {
+            _levelLabel.font = [UIFont systemFontOfSize:9];
+        }
         _levelLabel.textColor = [UIColor lightGrayColor];
     }
     return _levelLabel;
@@ -105,7 +109,11 @@
 -(UILabel *)userLevelLabel{
     if (!_userLevelLabel) {
         _userLevelLabel = [[UILabel alloc] init];
-        _userLevelLabel.font = [UIFont fontWithName:@"PingFangSC-Light" size:9];
+        if (IS_iOS9) {
+            _userLevelLabel.font = [UIFont fontWithName:@"PingFangSC-Light" size:9];
+        } else {
+            _userLevelLabel.font = [UIFont systemFontOfSize:9];
+        }
         _userLevelLabel.textColor = [UIColor lightGrayColor];
     }
     return _userLevelLabel;
@@ -171,7 +179,11 @@
 -(UILabel *)nameLbael{
     if (!_nameLbael) {
         _nameLbael = [[UILabel alloc] init];
-        _nameLbael.font = [UIFont fontWithName:@"PingFangSC-Light" size:11];
+        if (IS_iOS9) {
+            _nameLbael.font = [UIFont fontWithName:@"PingFangSC-Light" size:11];
+        } else {
+            _nameLbael.font = [UIFont systemFontOfSize:11];
+        }
     }
     return _nameLbael;
 }

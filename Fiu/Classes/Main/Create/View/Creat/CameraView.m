@@ -68,7 +68,11 @@
         _cameraTitlt.textColor = [UIColor whiteColor];
         _cameraTitlt.textAlignment = NSTextAlignmentCenter;
         _cameraTitlt.text = NSLocalizedString(@"takePhotos", nil);
-        _cameraTitlt.font = [UIFont fontWithName:@"PingFangSC-Light" size:Font_ControllerTitle];
+        if (IS_iOS9) {
+            _cameraTitlt.font = [UIFont fontWithName:@"PingFangSC-Light" size:Font_ControllerTitle];
+        } else {
+            _cameraTitlt.font = [UIFont systemFontOfSize:Font_ControllerTitle];
+        }
     }
     return _cameraTitlt;
 }
@@ -128,7 +132,7 @@
     label.textColor = [UIColor whiteColor];
     label.textAlignment = NSTextAlignmentCenter;
     label.backgroundColor = [UIColor clearColor];
-    label.font = [UIFont fontWithName:@"PingFangSC-Light" size:14];
+    label.font = [UIFont systemFontOfSize:14];
     [showview addSubview:label];
     
     [UIView animateWithDuration:2.0 animations:^{

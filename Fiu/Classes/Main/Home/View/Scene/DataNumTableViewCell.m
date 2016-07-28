@@ -70,7 +70,11 @@
         _lookBtn = [[UIButton alloc] init];
         [_lookBtn setImage:[UIImage imageNamed:@"lookNum"] forState:(UIControlStateNormal)];
         [_lookBtn setImageEdgeInsets:(UIEdgeInsetsMake(0, -10, 0, 0))];
-        _lookBtn.titleLabel.font = [UIFont fontWithName:@"PingFangSC-Light" size:Font_Number];
+        if (IS_iOS9) {
+            _lookBtn.titleLabel.font = [UIFont fontWithName:@"PingFangSC-Light" size:12];
+        } else {
+            _lookBtn.titleLabel.font = [UIFont systemFontOfSize:12];
+        }
         [_lookBtn setTitleEdgeInsets:(UIEdgeInsetsMake(-15, 0, 0, 0))];
         [_lookBtn setTitleColor:[UIColor colorWithHexString:tabBarTitle alpha:1] forState:(UIControlStateNormal)];
     }
@@ -83,7 +87,11 @@
         _likeBtn = [[UIButton alloc] init];
         [_likeBtn setImage:[UIImage imageNamed:@"likeNum"] forState:(UIControlStateNormal)];
         [_likeBtn setImageEdgeInsets:(UIEdgeInsetsMake(0, -10, 0, 0))];
-        _likeBtn.titleLabel.font = [UIFont fontWithName:@"PingFangSC-Light" size:Font_Number];
+        if (IS_iOS9) {
+            _likeBtn.titleLabel.font = [UIFont fontWithName:@"PingFangSC-Light" size:12];
+        } else {
+            _likeBtn.titleLabel.font = [UIFont systemFontOfSize:12];
+        }
         [_likeBtn setTitleEdgeInsets:(UIEdgeInsetsMake(-15, 0, 0, 0))];
         [_likeBtn setTitleColor:[UIColor colorWithHexString:tabBarTitle alpha:1] forState:(UIControlStateNormal)];
     }
@@ -96,7 +104,11 @@
         _commentBtn = [[UIButton alloc] init];
         [_commentBtn setImage:[UIImage imageNamed:@"commentNum"] forState:(UIControlStateNormal)];
         [_commentBtn setImageEdgeInsets:(UIEdgeInsetsMake(0, -10, 0, 0))];
-        _commentBtn.titleLabel.font = [UIFont fontWithName:@"PingFangSC-Light" size:Font_Number];
+        if (IS_iOS9) {
+            _commentBtn.titleLabel.font = [UIFont fontWithName:@"PingFangSC-Light" size:12];
+        } else {
+            _commentBtn.titleLabel.font = [UIFont systemFontOfSize:12];
+        }
         [_commentBtn setTitleEdgeInsets:(UIEdgeInsetsMake(-15, 0, 0, 0))];
         [_commentBtn setTitleColor:[UIColor colorWithHexString:tabBarTitle alpha:1] forState:(UIControlStateNormal)];
     }

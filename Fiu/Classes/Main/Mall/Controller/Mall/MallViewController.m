@@ -328,7 +328,7 @@ static NSString *const URLFiuBrand = @"/scene_brands/getlist";
         [self.headerView addGroupHeaderViewIcon:@"Group_Brand"
                                       withTitle:NSLocalizedString(@"fiuBrand", nil)
                                    withSubtitle:NSLocalizedString(@"fiuBrandText", nil)
-                                  withRightMore:NSLocalizedString(@"lookAll", nil)
+                                  withRightMore:NSLocalizedString(@"lookAllData", nil)
                                    withMoreType:2];
     } else if (section ==1) {
         [self.headerView addGroupHeaderViewIcon:@"Group_goods"

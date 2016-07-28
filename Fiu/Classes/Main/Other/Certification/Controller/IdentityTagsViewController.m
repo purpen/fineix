@@ -196,12 +196,12 @@
 -(CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath{
     if (collectionView.tag == ITEMS_COLLECTIONVIEW_TAG) {
         IdentityTagModel *model = self.modelAry[indexPath.row];
-        CGSize size = [model.tags sizeWithAttributes:@{NSFontAttributeName: [UIFont fontWithName:@"PingFangSC-Light" size:12.0f]}];
+        CGSize size = [model.tags sizeWithAttributes:@{NSFontAttributeName: [UIFont systemFontOfSize:12]}];
         
         return CGSizeMake(size.width+30, 35);
     }else{
         IdentityTagModel *model = self.selectedModelAry[indexPath.row];
-        CGSize size = [model.tags sizeWithAttributes:@{NSFontAttributeName: [UIFont fontWithName:@"PingFangSC-Light" size:12.0f]}];
+        CGSize size = [model.tags sizeWithAttributes:@{NSFontAttributeName: [UIFont systemFontOfSize:12]}];
         
         return CGSizeMake(size.width+30, 35);
     }

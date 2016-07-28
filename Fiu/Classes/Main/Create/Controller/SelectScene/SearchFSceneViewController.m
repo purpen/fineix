@@ -178,7 +178,7 @@ static NSString *const URLSearchFScene = @"/search/getlist";
     if (!_sureBtn) {
         _sureBtn = [[UIButton alloc] initWithFrame:CGRectMake((SCREEN_WIDTH - 60), 0, 50, 50)];
         [_sureBtn setTitleColor:[UIColor blackColor] forState:(UIControlStateNormal)];
-        _sureBtn.titleLabel.font = [UIFont fontWithName:@"PingFangSC-Light" size:Font_ControllerTitle];
+        _sureBtn.titleLabel.font = [UIFont systemFontOfSize:Font_ControllerTitle];
         [self.sureBtn setTitle:NSLocalizedString(@"sure", nil) forState:(UIControlStateNormal)];
         [self.sureBtn addTarget:self action:@selector(sureBtnClick) forControlEvents:(UIControlEventTouchUpInside)];
     }

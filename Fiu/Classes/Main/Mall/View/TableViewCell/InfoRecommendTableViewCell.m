@@ -17,9 +17,9 @@
     self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
     if (self) {
         
+        self.backgroundColor = [UIColor whiteColor];
         self.selectionStyle = UITableViewCellSelectionStyleNone;
         self.goodsData = [NSMutableArray array];
-        [self setCellUI];
         
     }
     return self;
@@ -30,6 +30,7 @@
     self.type = type;
     self.goodsData = model;
     self.goodsIds = [model valueForKey:@"idField"];
+    [self setCellUI];
     [self.recommendListView reloadData];
 }
 
@@ -46,7 +47,11 @@
         _headerTitle = [[UILabel alloc] initWithFrame:CGRectMake(15, 0, 200, 44)];
         _headerTitle.text = NSLocalizedString(@"recommendGoodsTitle", nil);
         _headerTitle.textColor = [UIColor colorWithHexString:@"#333333"];
-        _headerTitle.font = [UIFont fontWithName:@"PingFangSC-Light" size:Font_GoodsTitle];
+        if (IS_iOS9) {
+            _headerTitle.font = [UIFont fontWithName:@"PingFangSC-Light" size:Font_GoodsTitle];
+        } else {
+            _headerTitle.font = [UIFont systemFontOfSize:Font_GoodsTitle];
+        }
     }
     return _headerTitle;
 }
@@ -55,14 +60,15 @@
 - (UICollectionView *)recommendListView {
     if (!_recommendListView) {
         UICollectionViewFlowLayout * flowLayout = [[UICollectionViewFlowLayout alloc] init];
-        flowLayout.itemSize = CGSizeMake((SCREEN_WIDTH - 30) / 2, ((SCREEN_WIDTH - 30) / 2) * 1.3);
+        flowLayout.itemSize = CGSizeMake((SCREEN_WIDTH - 40) / 2, ((SCREEN_WIDTH - 40) / 2) * 1.3);
         flowLayout.sectionInset = UIEdgeInsetsMake(0, 15, 0, 15);
         flowLayout.minimumInteritemSpacing = 5.0;
-        [flowLayout setScrollDirection:(UICollectionViewScrollDirectionHorizontal)];
+        [flowLayout setScrollDirection:(UICollectionViewScrollDirectionVertical)];
         
-        _recommendListView = [[UICollectionView alloc] initWithFrame:CGRectMake(0, 44, SCREEN_WIDTH, 225) collectionViewLayout:flowLayout];
+        _recommendListView = [[UICollectionView alloc] initWithFrame:CGRectMake(0, 44, SCREEN_WIDTH, (self.goodsData.count/2) * (((SCREEN_WIDTH - 40) / 2) * 1.3)) collectionViewLayout:flowLayout];
         _recommendListView.delegate = self;
         _recommendListView.dataSource = self;
+        _recommendListView.scrollEnabled = NO;
         _recommendListView.backgroundColor = [UIColor whiteColor];
         _recommendListView.showsVerticalScrollIndicator = NO;
         _recommendListView.showsHorizontalScrollIndicator = NO;

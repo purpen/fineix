@@ -536,7 +536,11 @@ static NSString *const URLDeleteScene = @"/scene_sight/delete";
     if (!_allComment) {
         _allComment = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 44)];
         [_allComment setTitleColor:[UIColor colorWithHexString:titleColor] forState:(UIControlStateNormal)];
-        _allComment.titleLabel.font = [UIFont fontWithName:@"PingFangSC-Light" size:12];
+        if (IS_iOS9) {
+            _allComment.titleLabel.font = [UIFont fontWithName:@"PingFangSC-Light" size:12];
+        } else {
+            _allComment.titleLabel.font = [UIFont systemFontOfSize:12];
+        }
     }
     return _allComment;
 }

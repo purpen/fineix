@@ -100,7 +100,11 @@
 -(UILabel *)tipLabel{
     if (!_tipLabel) {
         _tipLabel = [[UILabel alloc] init];
-        _tipLabel.font = [UIFont fontWithName:@"PingFangSC-Light" size:13];
+        if (IS_iOS9) {
+            _tipLabel.font = [UIFont fontWithName:@"PingFangSC-Light" size:13];
+        } else {
+            _tipLabel.font = [UIFont systemFontOfSize:13];
+        }
         _tipLabel.textColor = [UIColor colorWithHexString:fineixColor];
         _tipLabel.text = @"扫描我的二维码关注我的Fiu";
     }
@@ -138,7 +142,11 @@
 -(UILabel *)adressLabel{
     if (!_adressLabel) {
         _adressLabel = [[UILabel alloc] init];
-        _adressLabel.font = [UIFont fontWithName:@"PingFangSC-Light" size:11];
+        if (IS_iOS9) {
+            _adressLabel.font = [UIFont fontWithName:@"PingFangSC-Light" size:11];
+        } else {
+            _adressLabel.font = [UIFont systemFontOfSize:11];
+        }
         _adressLabel.textColor = [UIColor grayColor];
     }
     return _adressLabel;
@@ -148,7 +156,11 @@
 -(UILabel *)nameLabel{
     if (!_nameLabel) {
         _nameLabel = [[UILabel alloc] init];
-        _nameLabel.font = [UIFont fontWithName:@"PingFangSC-Light" size:13];
+        if (IS_iOS9) {
+            _nameLabel.font = [UIFont fontWithName:@"PingFangSC-Light" size:13];
+        } else {
+            _nameLabel.font = [UIFont systemFontOfSize:13];
+        }
     }
     return _nameLabel;
 }

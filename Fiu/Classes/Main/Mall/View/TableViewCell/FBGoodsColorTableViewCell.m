@@ -35,7 +35,11 @@
 - (UILabel *)goodsColorLab {
     if (!_goodsColorLab) {
         _goodsColorLab = [[UILabel alloc] init];
-        _goodsColorLab.font = [UIFont fontWithName:@"PingFangSC-Light" size:Font_GoodsTitle];
+        if (IS_iOS9) {
+            _goodsColorLab.font = [UIFont fontWithName:@"PingFangSC-Light" size:14];
+        } else {
+            _goodsColorLab.font = [UIFont systemFontOfSize:14];
+        }
         _goodsColorLab.textAlignment = NSTextAlignmentLeft;
         _goodsColorLab.textColor = [UIColor blackColor];
     }

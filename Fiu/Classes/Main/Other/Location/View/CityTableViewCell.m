@@ -81,7 +81,11 @@
 -(UILabel *)locationLabel{
     if (!_locationLabel) {
         _locationLabel = [[UILabel alloc] init];
-        _locationLabel.font = [UIFont fontWithName:@"PingFangSC-Light" size:16];
+        if (IS_iOS9) {
+            _locationLabel.font = [UIFont fontWithName:@"PingFangSC-Light" size:16];
+        } else {
+            _locationLabel.font = [UIFont systemFontOfSize:16];
+        }
         _locationLabel.textColor = [UIColor whiteColor];
     }
     return _locationLabel;

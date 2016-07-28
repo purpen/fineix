@@ -234,7 +234,11 @@
 - (UILabel *)userStar {
     if (!_userStar) {
         _userStar = [[UILabel alloc] init];
-        _userStar.font = [UIFont fontWithName:@"PingFangSC-Light" size:11];
+        if (IS_iOS9) {
+            _userStar.font = [UIFont fontWithName:@"PingFangSC-Light" size:11];
+        } else {
+            _userStar.font = [UIFont systemFontOfSize:11];
+        }
         _userStar.textColor = [UIColor whiteColor];
     }
     return _userStar;
@@ -255,7 +259,11 @@
     if (!_userProfile) {
         _userProfile = [[UILabel alloc] init];
         _userProfile.textColor = [UIColor whiteColor];
-        _userProfile.font = [UIFont fontWithName:@"PingFangSC-Light" size:11];
+        if (IS_iOS9) {
+            _userProfile.font = [UIFont fontWithName:@"PingFangSC-Light" size:11];
+        } else {
+            _userProfile.font = [UIFont systemFontOfSize:11];
+        }
     }
     return _userProfile;
 }
@@ -265,7 +273,11 @@
     if (!_lookNum) {
         _lookNum = [[UILabel alloc] init];
         [self addIcon:_lookNum withImage:@"look"];
-        _lookNum.font = [UIFont fontWithName:@"PingFangSC-Light" size:Font_Number];
+        if (IS_iOS9) {
+            _lookNum.font = [UIFont fontWithName:@"PingFangSC-Light" size:Font_Number];
+        } else {
+            _lookNum.font = [UIFont systemFontOfSize:Font_Number];
+        }
         _lookNum.textColor = [UIColor whiteColor];
     }
     return _lookNum;
@@ -276,7 +288,11 @@
     if (!_likeNum) {
         _likeNum = [[UILabel alloc] init];
         [self addIcon:_likeNum withImage:@"like"];
-        _likeNum.font = [UIFont fontWithName:@"PingFangSC-Light" size:Font_Number];
+        if (IS_iOS9) {
+            _likeNum.font = [UIFont fontWithName:@"PingFangSC-Light" size:Font_Number];
+        } else {
+            _likeNum.font = [UIFont systemFontOfSize:Font_Number];
+        }
         _likeNum.textColor = [UIColor whiteColor];
     }
     return _likeNum;
@@ -350,7 +366,11 @@
     if (!_whereScene) {
         _whereScene = [[UILabel alloc] init];
         [self addIcon:_whereScene withImage:@"icon_star"];
-        _whereScene.font = [UIFont fontWithName:@"PingFangSC-Light" size:Font_Number];
+        if (IS_iOS9) {
+            _whereScene.font = [UIFont fontWithName:@"PingFangSC-Light" size:Font_Number];
+        } else {
+            _whereScene.font = [UIFont systemFontOfSize:Font_Number];
+        }
         _whereScene.textColor = [UIColor whiteColor];
     }
     return _whereScene;
@@ -361,7 +381,11 @@
     if (!_city) {
         _city = [[UILabel alloc] init];
         [self addIcon:_city withImage:@"icon_city"];
-        _city.font = [UIFont fontWithName:@"PingFangSC-Light" size:Font_Number];
+        if (IS_iOS9) {
+            _city.font = [UIFont fontWithName:@"PingFangSC-Light" size:Font_Number];
+        } else {
+            _city.font = [UIFont systemFontOfSize:Font_Number];
+        }
         _city.textColor = [UIColor whiteColor];
     }
     return _city;
@@ -372,7 +396,11 @@
     if (!_time) {
         _time = [[UILabel alloc] init];
         _time.textColor = [UIColor blackColor];
-        _time.font = [UIFont fontWithName:@"PingFangSC-Light" size:Font_Number];
+        if (IS_iOS9) {
+            _time.font = [UIFont fontWithName:@"PingFangSC-Light" size:Font_Number];
+        } else {
+            _time.font = [UIFont systemFontOfSize:Font_Number];
+        }
         _time.textColor = [UIColor whiteColor];
     }
     return _time;

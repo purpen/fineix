@@ -25,9 +25,13 @@
     if (!_likeBtn) {
         _likeBtn = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 44)];
         _likeBtn.backgroundColor = [UIColor whiteColor];
-        [_likeBtn setTitle:@" 赞" forState:(UIControlStateNormal)];
+        [_likeBtn setTitle:NSLocalizedString(@"sceneLike", nil) forState:(UIControlStateNormal)];
         [_likeBtn setTitleColor:[UIColor colorWithHexString:fineixColor] forState:(UIControlStateNormal)];
-        _likeBtn.titleLabel.font = [UIFont fontWithName:@"PingFangSC-Light" size:16];
+        if (IS_iOS9) {
+            _likeBtn.titleLabel.font = [UIFont fontWithName:@"PingFangSC-Light" size:16];
+        } else {
+            _likeBtn.titleLabel.font = [UIFont systemFontOfSize:16];
+        }
         [_likeBtn setImage:[UIImage imageNamed:@"Like_Scene"] forState:(UIControlStateNormal)];
         [_likeBtn setImage:[UIImage imageNamed:@"Like_Scene_Selected"] forState:(UIControlStateSelected)];
         [_likeBtn setImageEdgeInsets:(UIEdgeInsetsMake(0, -10, 0, 0))];
