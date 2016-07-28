@@ -57,7 +57,11 @@
     if (!_menuTitle) {
         _menuTitle = [[UILabel alloc] init];
         _menuTitle.textColor = [UIColor colorWithHexString:titleColor alpha:1];
-        _menuTitle.font = [UIFont fontWithName:@"PingFangSC-Light" size:12];
+        if (IS_iOS9) {
+            _menuTitle.font = [UIFont fontWithName:@"PingFangSC-Light" size:12];
+        } else {
+            _menuTitle.font = [UIFont systemFontOfSize:12];
+        }
         _menuTitle.textAlignment = NSTextAlignmentCenter;
     }
     return _menuTitle;

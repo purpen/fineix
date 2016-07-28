@@ -129,7 +129,7 @@
 -(void)setLabel:(CGRect)frame andText:(NSString*)title andFont:(int)font andView:(UIView *)view andtextColor:(UIColor*)color{
     UILabel *titlelabel = [[UILabel alloc] initWithFrame:frame];
     titlelabel.text = title;
-    titlelabel.font = [UIFont fontWithName:@"PingFangSC-Light" size:font];
+    titlelabel.font = [UIFont systemFontOfSize:font];
     titlelabel.textColor = color;
     [view addSubview:titlelabel];
     view.userInteractionEnabled = YES;

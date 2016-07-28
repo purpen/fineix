@@ -236,7 +236,7 @@
             //显示
 
             self.tipNumView1.tipNumLabel.text = [NSString stringWithFormat:@"%@",_counterModel.order_total_count];
-            CGSize size = [self.tipNumView1.tipNumLabel.text sizeWithAttributes:@{NSFontAttributeName: [UIFont fontWithName:@"PingFangSC-Light" size:12.0f]}];
+            CGSize size = [self.tipNumView1.tipNumLabel.text sizeWithAttributes:@{NSFontAttributeName: [UIFont systemFontOfSize:12]}];
             [cell.btn1 addSubview:self.tipNumView1];
             [self.tipNumView1 mas_makeConstraints:^(MASConstraintMaker *make) {
                 if ((size.width+9) > 15) {
@@ -255,7 +255,7 @@
         }else{
             //显示
             self.tipNumView2.tipNumLabel.text = [NSString stringWithFormat:@"%@",_counterModel.message_total_count];
-            CGSize size = [self.tipNumView2.tipNumLabel.text sizeWithAttributes:@{NSFontAttributeName: [UIFont fontWithName:@"PingFangSC-Light" size:12.0f]}];
+            CGSize size = [self.tipNumView2.tipNumLabel.text sizeWithAttributes:@{NSFontAttributeName: [UIFont systemFontOfSize:12]}];
             [cell.btn2 addSubview:self.tipNumView2];
             [self.tipNumView2 mas_makeConstraints:^(MASConstraintMaker *make) {
                 if ((size.width+9) > 15) {

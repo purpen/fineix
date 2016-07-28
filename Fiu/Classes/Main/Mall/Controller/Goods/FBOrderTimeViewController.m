@@ -32,7 +32,11 @@ static NSInteger const timeBtnTag = 232;
         UIButton * timeBtn = [[UIButton alloc] initWithFrame:CGRectMake(0, 74 + (54 * idx), SCREEN_WIDTH, 44)];
         [timeBtn setTitle:titleArr[idx] forState:(UIControlStateNormal)];
         [timeBtn setTitleColor:[UIColor colorWithHexString:titleColor] forState:(UIControlStateNormal)];
-        timeBtn.titleLabel.font = [UIFont fontWithName:@"PingFangSC-Light" size:14];
+        if (IS_iOS9) {
+            timeBtn.titleLabel.font = [UIFont fontWithName:@"PingFangSC-Light" size:14];
+        } else {
+            timeBtn.titleLabel.font = [UIFont systemFontOfSize:14];
+        }
         timeBtn.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
         timeBtn.contentEdgeInsets = UIEdgeInsetsMake(0, 15, 0, 0);
         [timeBtn addTarget:self action:@selector(timeBtnClick:) forControlEvents:(UIControlEventTouchUpInside)];

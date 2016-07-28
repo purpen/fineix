@@ -77,7 +77,11 @@
 - (UILabel *)titleLab {
     if (!_titleLab) {
         _titleLab = [[UILabel alloc] init];
-        _titleLab.font = [UIFont fontWithName:@"PingFangSC-Light" size:Font_SceneTitle];
+        if (IS_iOS9) {
+            _titleLab.font = [UIFont fontWithName:@"PingFangSC-Light" size:Font_SceneTitle];
+        } else {
+            _titleLab.font = [UIFont systemFontOfSize:Font_SceneTitle];
+        }
         _titleLab.textColor = [UIColor whiteColor];
         _titleLab.numberOfLines = 2;
     }
@@ -86,11 +90,11 @@
 
 //  标题文字的样式
 - (void)titleTextStyle:(NSString *)title {
-    if (title.length > 11) {
+    if (title.length > 12) {
         [self.titleLab mas_updateConstraints:^(MASConstraintMaker *make) {
-            make.height.mas_equalTo(@40);
+            make.height.mas_equalTo(@44);
         }];
-    } else if (title.length <= 11) {
+    } else if (title.length <= 12) {
         [self.titleLab mas_updateConstraints:^(MASConstraintMaker *make) {
             make.height.mas_equalTo(@15);
         }];
@@ -120,7 +124,11 @@
 - (UILabel *)locationLab {
     if (!_locationLab) {
         _locationLab = [[UILabel alloc] init];
-        _locationLab.font = [UIFont fontWithName:@"PingFangSC-Light" size:Font_Place];
+        if (IS_iOS9) {
+            _locationLab.font = [UIFont fontWithName:@"PingFangSC-Light" size:Font_Place];
+        } else {
+            _locationLab.font = [UIFont systemFontOfSize:Font_Place];
+        }
         _locationLab.textColor = [UIColor whiteColor];
     }
     return _locationLab;

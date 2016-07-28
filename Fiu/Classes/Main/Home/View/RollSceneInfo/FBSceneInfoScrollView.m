@@ -142,7 +142,11 @@
         userTag.dele.hidden = YES;
         userTag.title.text = title;
         if (price.length > 6) {
-            userTag.price.font = [UIFont fontWithName:@"PingFangSC-Light" size:9];
+            if (IS_iOS9) {
+                userTag.price.font = [UIFont fontWithName:@"PingFangSC-Light" size:9];
+            } else {
+                userTag.price.font = [UIFont systemFontOfSize:9];
+            }
         }
         userTag.price.text = price;
         userTag.title.hidden = NO;

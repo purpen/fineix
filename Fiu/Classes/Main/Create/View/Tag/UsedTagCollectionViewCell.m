@@ -33,7 +33,11 @@
         _tagLab = [[UILabel alloc] init];
         _tagLab.textAlignment = NSTextAlignmentCenter;
         _tagLab.textColor = [UIColor colorWithHexString:titleColor];
-        _tagLab.font = [UIFont fontWithName:@"PingFangSC-Light" size:12];
+        if (IS_iOS9) {
+            _tagLab.font = [UIFont fontWithName:@"PingFangSC-Light" size:12];
+        } else {
+            _tagLab.font = [UIFont systemFontOfSize:12];
+        }
     }
     return _tagLab;
 }

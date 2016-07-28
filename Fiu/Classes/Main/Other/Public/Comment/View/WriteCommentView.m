@@ -42,7 +42,11 @@
     if (!_writeText) {
         _writeText = [[UITextField alloc] init];
         _writeText.placeholder = NSLocalizedString(@"comment", nil);
-        _writeText.font = [UIFont fontWithName:@"PingFangSC-Light" size:Font_Comment];
+        if (IS_iOS9) {
+            _writeText.font = [UIFont fontWithName:@"PingFangSC-Light" size:12];
+        } else {
+            _writeText.font = [UIFont systemFontOfSize:12];
+        }
         _writeText.layer.cornerRadius = 5;
         _writeText.layer.masksToBounds = YES;
         _writeText.clearButtonMode = UITextFieldViewModeWhileEditing;
@@ -68,9 +72,13 @@
 - (UIButton *)sendBtn {
     if (!_sendBtn) {
         _sendBtn = [[UIButton alloc] init];
-        [_sendBtn setTitle:@"发送" forState:(UIControlStateNormal)];
+        [_sendBtn setTitle:NSLocalizedString(@"sendComment", nil) forState:(UIControlStateNormal)];
         [_sendBtn setTitleColor:[UIColor whiteColor] forState:(UIControlStateNormal)];
-        _sendBtn.titleLabel.font = [UIFont fontWithName:@"PingFangSC-Light" size:Font_Comment];
+        if (IS_iOS9) {
+            _sendBtn.titleLabel.font = [UIFont fontWithName:@"PingFangSC-Light" size:12];
+        } else {
+            _sendBtn.titleLabel.font = [UIFont systemFontOfSize:12];
+        }
         _sendBtn.backgroundColor = [UIColor colorWithHexString:fineixColor];
         _sendBtn.layer.cornerRadius = 5;
         _sendBtn.layer.masksToBounds = YES;

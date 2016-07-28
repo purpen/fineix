@@ -81,7 +81,11 @@
     if (!_allselfBrand) {
         _allselfBrand = [[UIButton alloc] initWithFrame:CGRectMake(0, SCREEN_WIDTH * 0.65, SCREEN_WIDTH, 44)];
         [_allselfBrand setTitle:NSLocalizedString(@"lookAllSelfBrand", nil) forState:(UIControlStateNormal)];
-        _allselfBrand.titleLabel.font = [UIFont fontWithName:@"PingFangSC-Light" size:12];
+        if (IS_iOS9) {
+            _allselfBrand.titleLabel.font = [UIFont fontWithName:@"PingFangSC-Light" size:12];
+        } else {
+            _allselfBrand.titleLabel.font = [UIFont systemFontOfSize:12];
+        }
         [_allselfBrand setTitleColor:[UIColor colorWithHexString:@"#999999" alpha:1] forState:(UIControlStateNormal)];
         [_allselfBrand setImage:[UIImage imageNamed:@"button_right_next"] forState:(UIControlStateNormal)];
         [_allselfBrand setImageEdgeInsets:(UIEdgeInsetsMake(0, 170, 0, 0))];

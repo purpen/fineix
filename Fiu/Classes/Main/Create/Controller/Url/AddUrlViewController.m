@@ -167,7 +167,7 @@ static NSString *const Tmall = @"https://s.m.tmall.com/m/search.htm?q=";
 - (void)findDoneBtnClick {
     if (self.searchGoodsView.findGoodsId.length > 0) {
         self.goodsId = self.searchGoodsView.findGoodsId;
-        NSLog(@"找到的商品ID：%@, 链接：%@", self.goodsId, self.searchGoodsView.findGoodsUrl);
+//        NSLog(@"找到的商品ID：%@, 链接：%@", self.goodsId, self.searchGoodsView.findGoodsUrl);
         
         [self networkSearchGoodsData:_type];
     }

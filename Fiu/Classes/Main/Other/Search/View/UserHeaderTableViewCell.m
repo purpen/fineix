@@ -81,7 +81,11 @@
     if (!_userName) {
         _userName = [[UILabel alloc] init];
         _userName.textColor = [UIColor colorWithHexString:@"#888888"];
-        _userName.font = [UIFont fontWithName:@"PingFangSC-Light" size:Font_UserName];
+        if (IS_iOS9) {
+            _userName.font = [UIFont fontWithName:@"PingFangSC-Light" size:12];
+        } else {
+            _userName.font = [UIFont systemFontOfSize:12];
+        }
     }
     return _userName;
 }
@@ -91,8 +95,11 @@
     if (!_userProfile) {
         _userProfile = [[UILabel alloc] init];
         _userProfile.textColor = [UIColor colorWithHexString:titleColor];
-        _userProfile.font = [UIFont fontWithName:@"PingFangSC-Light" size:Font_UserProfile];
-        
+        if (IS_iOS9) {
+            _userProfile.font = [UIFont fontWithName:@"PingFangSC-Light" size:9];
+        } else {
+            _userProfile.font = [UIFont systemFontOfSize:9];
+        }
     }
     return _userProfile;
 }
@@ -104,12 +111,16 @@
         _concernBtn.layer.borderColor = [UIColor colorWithHexString:titleColor].CGColor;
         _concernBtn.layer.borderWidth = 1;
         _concernBtn.layer.cornerRadius = 3;
-        [_concernBtn setTitle:@"关注" forState:(UIControlStateNormal)];
-        [_concernBtn setTitle:@"已关注" forState:(UIControlStateSelected)];
+        [_concernBtn setTitle:NSLocalizedString(@"concern", nil) forState:(UIControlStateNormal)];
+        [_concernBtn setTitle:NSLocalizedString(@"concernDone", nil) forState:(UIControlStateSelected)];
         [_concernBtn setTitleColor:[UIColor colorWithHexString:titleColor] forState:(UIControlStateNormal)];
         [_concernBtn setTitleColor:[UIColor whiteColor] forState:(UIControlStateSelected)];
         [_concernBtn setBackgroundImage:[UIImage imageNamed:@"Button Background"] forState:(UIControlStateSelected)];
-        _concernBtn.titleLabel.font = [UIFont fontWithName:@"PingFangSC-Light" size:13];
+        if (IS_iOS9) {
+            _concernBtn.titleLabel.font = [UIFont fontWithName:@"PingFangSC-Light" size:13];
+        } else {
+            _concernBtn.titleLabel.font = [UIFont systemFontOfSize:13];
+        }
     }
     return _concernBtn;
 }

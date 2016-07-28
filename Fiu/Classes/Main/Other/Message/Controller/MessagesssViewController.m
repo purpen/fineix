@@ -141,7 +141,11 @@
     if (!_tipLabel) {
         _tipLabel = [[UILabel alloc] init];
         _tipLabel.textAlignment = NSTextAlignmentCenter;
-        _tipLabel.font = [UIFont fontWithName:@"PingFangSC-Light" size:13];
+        if (IS_iOS9) {
+            _tipLabel.font = [UIFont fontWithName:@"PingFangSC-Light" size:13];
+        } else {
+            _tipLabel.font = [UIFont systemFontOfSize:13];
+        }
     }
     return _tipLabel;
 }

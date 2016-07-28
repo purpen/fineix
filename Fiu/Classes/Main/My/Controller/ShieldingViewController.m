@@ -34,7 +34,11 @@
     for (int i = 0; i<ary.count; i++) {
         UIButton *btn = [[UIButton alloc] initWithFrame:CGRectMake(0, 44/667.0*SCREEN_HEIGHT*i, SCREEN_WIDTH, 44/667.0*SCREEN_HEIGHT)];
         [btn setTitle:ary[i] forState:UIControlStateNormal];
-        btn.titleLabel.font = [UIFont fontWithName:@"PingFangSC-Light" size:14];
+        if (IS_iOS9) {
+            btn.titleLabel.font = [UIFont fontWithName:@"PingFangSC-Light" size:14];
+        } else {
+            btn.titleLabel.font = [UIFont systemFontOfSize:14];
+        }
         [btn setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
         [_sheetView addSubview:btn];
         

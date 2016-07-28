@@ -124,7 +124,11 @@
     if (!_goodsTitle) {
         _goodsTitle = [[UILabel alloc] init];
         _goodsTitle.numberOfLines = 2;
-        _goodsTitle.font = [UIFont fontWithName:@"PingFangSC-Light" size:12];
+        if (IS_iOS9) {
+            _goodsTitle.font = [UIFont fontWithName:@"PingFangSC-Light" size:12];
+        } else {
+            _goodsTitle.font = [UIFont systemFontOfSize:12];
+        }
         _goodsTitle.textAlignment = NSTextAlignmentLeft;
         _goodsTitle.textColor = [UIColor blackColor];
         
@@ -135,7 +139,11 @@
 - (UILabel *)goodsColor {
     if (!_goodsColor) {
         _goodsColor = [[UILabel alloc] init];
-        _goodsColor.font = [UIFont fontWithName:@"PingFangSC-Light" size:10];
+        if (IS_iOS9) {
+            _goodsColor.font = [UIFont fontWithName:@"PingFangSC-Light" size:10];
+        } else {
+            _goodsColor.font = [UIFont systemFontOfSize:10];
+        }
         _goodsColor.textColor = [UIColor colorWithHexString:titleColor];
         _goodsColor.textAlignment = NSTextAlignmentLeft;
         _goodsColor.numberOfLines = 1;
@@ -147,7 +155,11 @@
 - (UILabel *)goodsNum {
     if (!_goodsNum) {
         _goodsNum = [[UILabel alloc] init];
-        _goodsNum.font = [UIFont fontWithName:@"PingFangSC-Light" size:10];
+        if (IS_iOS9) {
+            _goodsNum.font = [UIFont fontWithName:@"PingFangSC-Light" size:10];
+        } else {
+            _goodsNum.font = [UIFont systemFontOfSize:10];
+        }
         _goodsNum.textColor = [UIColor colorWithHexString:titleColor];
         _goodsNum.textAlignment = NSTextAlignmentLeft;
         
@@ -158,7 +170,11 @@
 - (UILabel *)goodsPrice {
     if (!_goodsPrice) {
         _goodsPrice = [[UILabel alloc] init];
-        _goodsPrice.font = [UIFont fontWithName:@"PingFangSC-Light" size:13];
+        if (IS_iOS9) {
+            _goodsPrice.font = [UIFont fontWithName:@"PingFangSC-Light" size:13];
+        } else {
+            _goodsPrice.font = [UIFont systemFontOfSize:13];
+        }
         _goodsPrice.textColor = [UIColor colorWithHexString:fineixColor];
         _goodsPrice.textAlignment = NSTextAlignmentLeft;
     }

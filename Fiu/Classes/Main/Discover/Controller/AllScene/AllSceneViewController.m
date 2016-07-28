@@ -163,7 +163,11 @@ static NSString *const URLFiuCategoryList = @"/category/getlist";
         _beginSearchBtn.layer.masksToBounds = YES;
         [_beginSearchBtn setTitle:NSLocalizedString(@"searchFScene", nil) forState:(UIControlStateNormal)];
         [_beginSearchBtn setTitleColor:[UIColor colorWithHexString:titleColor] forState:(UIControlStateNormal)];
-        _beginSearchBtn.titleLabel.font = [UIFont fontWithName:@"PingFangSC-Light" size:13];
+        if (IS_iOS9) {
+            _beginSearchBtn.titleLabel.font = [UIFont fontWithName:@"PingFangSC-Light" size:13];
+        } else {
+            _beginSearchBtn.titleLabel.font = [UIFont systemFontOfSize:13];
+        }
         [_beginSearchBtn setImage:[UIImage imageNamed:@"Search"] forState:(UIControlStateNormal)];
         [_beginSearchBtn setImageEdgeInsets:(UIEdgeInsetsMake(0, -10, 0, 0))];
         [_beginSearchBtn addTarget:self action:@selector(searchBtnClick) forControlEvents:(UIControlEventTouchUpInside)];

@@ -102,7 +102,11 @@ static NSString *const URLUserAddGoods = @"/scene_product/add";
         _bottomBtn = [[UIButton alloc] initWithFrame:CGRectMake(0, SCREEN_HEIGHT - 50, SCREEN_WIDTH, 50)];
         [_bottomBtn setTitle:NSLocalizedString(@"markGoodsBtnTitle", nil) forState:(UIControlStateNormal)];
         [_bottomBtn setTitleColor:[UIColor colorWithHexString:@"#FFFFFF" alpha:1] forState:(UIControlStateNormal)];
-        _bottomBtn.titleLabel.font = [UIFont fontWithName:@"PingFangSC-Light" size:14];
+        if (IS_iOS9) {
+            _bottomBtn.titleLabel.font = [UIFont fontWithName:@"PingFangSC-Light" size:14];
+        } else {
+            _bottomBtn.titleLabel.font = [UIFont systemFontOfSize:14];
+        }
         [_bottomBtn setImage:[UIImage imageNamed:@"ic_touch_app"] forState:(UIControlStateNormal)];
         _bottomBtn.backgroundColor = [UIColor colorWithHexString:@"#000000" alpha:0.6];
         [_bottomBtn setImageEdgeInsets:(UIEdgeInsetsMake(0, -10, 0, 0))];

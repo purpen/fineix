@@ -103,7 +103,11 @@
 - (UILabel *)titleLab {
     if (!_titleLab) {
         _titleLab = [[UILabel alloc] init];
-        _titleLab.font = [UIFont fontWithName:@"PingFangSC-Light" size:Font_SceneTitle];
+        if (IS_iOS9) {
+            _titleLab.font = [UIFont fontWithName:@"PingFangSC-Light" size:14];
+        } else {
+            _titleLab.font = [UIFont systemFontOfSize:14];
+        }
         _titleLab.textColor = [UIColor whiteColor];
         _titleLab.numberOfLines = 2;
     }
@@ -114,7 +118,7 @@
 - (void)titleTextStyle:(NSString *)title {
     if (title.length > 11) {
         [self.titleLab mas_updateConstraints:^(MASConstraintMaker *make) {
-            make.height.mas_equalTo(@40);
+            make.height.mas_equalTo(@44);
         }];
     } else if (title.length <= 11) {
         [self.titleLab mas_updateConstraints:^(MASConstraintMaker *make) {
@@ -146,7 +150,11 @@
 - (UILabel *)locationLab {
     if (!_locationLab) {
         _locationLab = [[UILabel alloc] init];
-        _locationLab.font = [UIFont fontWithName:@"PingFangSC-Light" size:Font_Place];
+        if (IS_iOS9) {
+            _locationLab.font = [UIFont fontWithName:@"PingFangSC-Light" size:10];
+        } else {
+            _locationLab.font = [UIFont systemFontOfSize:10];
+        }
         _locationLab.textColor = [UIColor whiteColor];
     }
     return _locationLab;

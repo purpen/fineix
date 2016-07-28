@@ -103,7 +103,11 @@
     if (!_idTagsLabel) {
         _idTagsLabel = [[UILabel alloc] init];
         _idTagsLabel.textColor = [UIColor whiteColor];
-        _idTagsLabel.font = [UIFont fontWithName:@"PingFangSC-Light" size:13];
+        if (IS_iOS9) {
+            _idTagsLabel.font = [UIFont fontWithName:@"PingFangSC-Light" size:13];
+        } else {
+            _idTagsLabel.font = [UIFont systemFontOfSize:13];
+        }
         _idTagsLabel.clipsToBounds = YES;
         _idTagsLabel.autoresizingMask = UIViewAutoresizingFlexibleTopMargin;
     }
@@ -258,7 +262,11 @@
     if (!_userProfile) {
         _userProfile = [[UILabel alloc] init];
         _userProfile.textColor = [UIColor whiteColor];
-        _userProfile.font = [UIFont fontWithName:@"PingFangSC-Light" size:13];
+        if (IS_iOS9) {
+            _userProfile.font = [UIFont fontWithName:@"PingFangSC-Light" size:13];
+        } else {
+            _userProfile.font = [UIFont systemFontOfSize:13];
+        }
         _userProfile.textAlignment = NSTextAlignmentCenter;
         _userProfile.clipsToBounds = YES;
         _userProfile.numberOfLines = 0;
@@ -272,7 +280,11 @@
         _userLevelLabel = [[UILabel alloc] init];
         _userLevelLabel.numberOfLines = 0;
         _userLevelLabel.textColor = [UIColor whiteColor];
-        _userLevelLabel.font = [UIFont fontWithName:@"PingFangSC-Light" size:13];
+        if (IS_iOS9) {
+            _userLevelLabel.font = [UIFont fontWithName:@"PingFangSC-Light" size:13];
+        } else {
+            _userLevelLabel.font = [UIFont systemFontOfSize:13];
+        }
         _userLevelLabel.textAlignment = NSTextAlignmentCenter;
         _userLevelLabel.clipsToBounds = YES;
         _userLevelLabel.autoresizingMask = UIViewAutoresizingFlexibleTopMargin;
@@ -284,7 +296,11 @@
     if (!_nickName) {
         _nickName = [[UILabel alloc] init];
         _nickName.textColor = [UIColor whiteColor];
-        _nickName.font = [UIFont fontWithName:@"PingFangSC-Light" size:14];
+        if (IS_iOS9) {
+            _nickName.font = [UIFont fontWithName:@"PingFangSC-Light" size:14];
+        } else {
+            _nickName.font = [UIFont systemFontOfSize:13];
+        }
         _nickName.textAlignment = NSTextAlignmentCenter;
         _nickName.clipsToBounds = YES;
         _nickName.autoresizingMask = UIViewAutoresizingFlexibleTopMargin;

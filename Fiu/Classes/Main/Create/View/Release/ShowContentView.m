@@ -102,19 +102,31 @@
 //  标题文字的样式
 - (void)titleTextStyle:(NSString *)title {
     if ([title length] < 8) {
-        _titleText.font = [UIFont fontWithName:@"PingFangSC-Light" size:40];
+        if (IS_iOS9) {
+            _titleText.font = [UIFont fontWithName:@"PingFangSC-Light" size:40];
+        } else {
+            _titleText.font = [UIFont systemFontOfSize:40];
+        }
         [_titleText mas_updateConstraints:^(MASConstraintMaker *make) {
             make.size.mas_equalTo(CGSizeMake(SCREEN_WIDTH - 40, 56));
         }];
     } else if ([title length] >= 8 && [title length] < 13) {
-        _titleText.font = [UIFont fontWithName:@"PingFangSC-Light" size:26];
+        if (IS_iOS9) {
+            _titleText.font = [UIFont fontWithName:@"PingFangSC-Light" size:26];
+        } else {
+            _titleText.font = [UIFont systemFontOfSize:26];
+        }
         [_titleText mas_updateConstraints:^(MASConstraintMaker *make) {
-            make.size.mas_equalTo(CGSizeMake(SCREEN_WIDTH - 40, 36));
+            make.size.mas_equalTo(CGSizeMake(SCREEN_WIDTH - 40, 40));
         }];
     } else if ([title length] >= 13) {
-        _titleText.font = [UIFont fontWithName:@"PingFangSC-Light" size:20];
+        if (IS_iOS9) {
+            _titleText.font = [UIFont fontWithName:@"PingFangSC-Light" size:20];
+        } else {
+            _titleText.font = [UIFont systemFontOfSize:20];
+        }
         [_titleText mas_updateConstraints:^(MASConstraintMaker *make) {
-            make.size.mas_equalTo(CGSizeMake(240, 52));
+            make.size.mas_equalTo(CGSizeMake(240, 56));
         }];
     }
     NSMutableAttributedString * titleText = [[NSMutableAttributedString alloc] initWithString:title];
@@ -133,7 +145,11 @@
 - (UITextView *)desText {
     if (!_desText) {
         _desText = [[UITextView alloc] init];
-        _desText.font = [UIFont fontWithName:@"PingFangSC-Light" size:12];
+        if (IS_iOS9) {
+            _desText.font = [UIFont fontWithName:@"PingFangSC-Light" size:12];
+        } else {
+            _desText.font = [UIFont systemFontOfSize:12];
+        }
         _desText.backgroundColor = [UIColor clearColor];
         _desText.editable = NO;
         _desText.returnKeyType = UIReturnKeyDefault;
@@ -147,7 +163,7 @@
     paragraphStyle.lineSpacing = 3;
     NSDictionary * attributes = @{NSParagraphStyleAttributeName:paragraphStyle,
                                   NSForegroundColorAttributeName:[UIColor whiteColor],
-                                  NSFontAttributeName:[UIFont fontWithName:@"PingFangSC-Light" size:12]};
+                                  NSFontAttributeName:[UIFont systemFontOfSize:12]};
     self.desText.attributedText = [[NSAttributedString alloc] initWithString:des attributes:attributes];
     
     CGSize tagTitleSize = [des boundingRectWithSize:CGSizeMake(SCREEN_WIDTH - 20, 1000) options:(NSStringDrawingUsesLineFragmentOrigin) attributes:attributes context:nil].size;
@@ -176,7 +192,11 @@
 - (UIButton *)addTagBtn {
     if (!_addTagBtn) {
         _addTagBtn = [[UIButton alloc] init];
-        _addTagBtn.titleLabel.font = [UIFont fontWithName:@"PingFangSC-Light" size:12];
+        if (IS_iOS9) {
+            _addTagBtn.titleLabel.font = [UIFont fontWithName:@"PingFangSC-Light" size:12];
+        } else {
+            _addTagBtn.titleLabel.font = [UIFont systemFontOfSize:12];
+        }
         [_addTagBtn setTitle:NSLocalizedString(@"addTagsBtn", nil) forState:(UIControlStateNormal)];
         [_addTagBtn setTitleColor:[UIColor colorWithHexString:fineixColor] forState:(UIControlStateNormal)];
         [_addTagBtn addTarget:self action:@selector(goAddTags) forControlEvents:(UIControlEventTouchUpInside)];

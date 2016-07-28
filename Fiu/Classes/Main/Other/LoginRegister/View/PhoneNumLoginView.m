@@ -20,7 +20,7 @@
         _phoneTF.center = center;
         _phoneTF.borderStyle = UITextBorderStyleRoundedRect;
         _phoneTF.placeholder = @"手机号或邮箱";
-        _phoneTF.font = [UIFont fontWithName:@"PingFangSC-Light" size:13];
+        _phoneTF.font = [UIFont systemFontOfSize:13];
         _phoneTF.backgroundColor = [UIColor whiteColor];
         _pwdTF = [[UITextField alloc] initWithFrame:CGRectMake(0, 113/2/667.0*SCREEN_HEIGHT, 345/667.0*SCREEN_HEIGHT, 44/667.0*SCREEN_HEIGHT)];
         CGPoint centerpwd = _pwdTF.center;
@@ -29,7 +29,7 @@
         _pwdTF.borderStyle = UITextBorderStyleRoundedRect;
         _pwdTF.placeholder = @"密码";
         _pwdTF.secureTextEntry = YES;
-        _pwdTF.font = [UIFont fontWithName:@"PingFangSC-Light" size:13];
+        _pwdTF.font = [UIFont systemFontOfSize:13];
         _pwdTF.backgroundColor = [UIColor whiteColor];
         //登录按钮
         _loginBtn = [[UIButton alloc] initWithFrame:CGRectMake(0, 227/2/667.0*SCREEN_HEIGHT, 345/667.0*SCREEN_HEIGHT, 44/667.0*SCREEN_HEIGHT)];
@@ -39,7 +39,7 @@
         _loginBtn.layer.masksToBounds = YES;
         _loginBtn.layer.cornerRadius = 3;
         [_loginBtn setTitle:@"登录" forState:UIControlStateNormal];
-        _loginBtn.titleLabel.font = [UIFont fontWithName:@"PingFangSC-Light" size:17];
+        _loginBtn.titleLabel.font = [UIFont systemFontOfSize:17];
         [_loginBtn setTitleColor:[UIColor colorWithHexString:fineixColor] forState:UIControlStateNormal];
         _loginBtn.backgroundColor = [UIColor whiteColor];
 //        //快速注册按钮
@@ -70,7 +70,7 @@
         _forgetBtn = [[UIButton alloc] init];
         [_forgetBtn setTitle:@"忘记密码?" forState:UIControlStateNormal];
         [_forgetBtn setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
-        _forgetBtn.titleLabel.font = [UIFont fontWithName:@"PingFangSC-Light" size:12];
+        _forgetBtn.titleLabel.font = [UIFont systemFontOfSize:12];
     }
     return _forgetBtn;
 }

@@ -99,7 +99,11 @@
         _addLab = [[UILabel alloc] init];
         _addLab.text = @"请添加收货地址";
         _addLab.textColor = [UIColor colorWithHexString:titleColor];
-        _addLab.font = [UIFont fontWithName:@"PingFangSC-Light" size:14];
+        if (IS_iOS9) {
+            _addLab.font = [UIFont fontWithName:@"PingFangSC-Light" size:14];
+        } else {
+            _addLab.font = [UIFont systemFontOfSize:14];
+        }
         _addLab.textAlignment = NSTextAlignmentCenter;
     }
     return _addLab;
@@ -117,7 +121,11 @@
 - (UILabel *)userName {
     if (!_userName) {
         _userName = [[UILabel alloc] init];
-        _userName.font = [UIFont fontWithName:@"PingFangSC-Light" size:13];
+        if (IS_iOS9) {
+            _userName.font = [UIFont fontWithName:@"PingFangSC-Light" size:13];
+        } else {
+            _userName.font = [UIFont systemFontOfSize:13];
+        }
     }
     return _userName;
 }
@@ -125,7 +133,11 @@
 - (UILabel *)cityName {
     if (!_cityName) {
         _cityName = [[UILabel alloc] init];
-        _cityName.font = [UIFont fontWithName:@"PingFangSC-Light" size:10];
+        if (IS_iOS9) {
+            _cityName.font = [UIFont fontWithName:@"PingFangSC-Light" size:10];
+        } else {
+            _cityName.font = [UIFont systemFontOfSize:10];
+        }
     }
     return _cityName;
 }
@@ -133,7 +145,11 @@
 - (UILabel *)addressLab {
     if (!_addressLab) {
         _addressLab = [[UILabel alloc] init];
-        _addressLab.font = [UIFont fontWithName:@"PingFangSC-Light" size:10];
+        if (IS_iOS9) {
+            _addressLab.font = [UIFont fontWithName:@"PingFangSC-Light" size:10];
+        } else {
+            _addressLab.font = [UIFont systemFontOfSize:10];
+        }
         _addressLab.numberOfLines = 2;
     }
     return _addressLab;
@@ -142,7 +158,11 @@
 - (UILabel *)phoneNum {
     if (!_phoneNum) {
         _phoneNum = [[UILabel alloc] init];
-        _phoneNum.font = [UIFont fontWithName:@"PingFangSC-Light" size:10];
+        if (IS_iOS9) {
+            _phoneNum.font = [UIFont fontWithName:@"PingFangSC-Light" size:10];
+        } else {
+            _phoneNum.font = [UIFont systemFontOfSize:10];
+        }
     }
     return _phoneNum;
 }

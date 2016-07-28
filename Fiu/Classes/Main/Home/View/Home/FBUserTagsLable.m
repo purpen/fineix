@@ -13,7 +13,11 @@
 - (instancetype)initWithFrame:(CGRect)frame {
     self = [super initWithFrame:frame];
     if (self) {
-        self.font = [UIFont fontWithName:@"PingFangSC-Light" size:10];
+        if (IS_iOS9) {
+            self.font = [UIFont fontWithName:@"PingFangSC-Light" size:10];
+        } else {
+            self.font = [UIFont systemFontOfSize:10];
+        }
         self.textAlignment = NSTextAlignmentCenter;
 //        self.layer.cornerRadius = 3;
 //        self.layer.masksToBounds = YES;

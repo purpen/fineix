@@ -59,7 +59,11 @@
     if (!pickerLabel){
         pickerLabel = [[UILabel alloc] init];
         pickerLabel.textAlignment = NSTextAlignmentCenter;
-        pickerLabel.font = [UIFont fontWithName:@"PingFangSC-Light" size:20];
+        if (IS_iOS9) {
+            pickerLabel.font = [UIFont fontWithName:@"PingFangSC-Light" size:20];
+        } else {
+            pickerLabel.font = [UIFont systemFontOfSize:12];
+        }
         pickerLabel.adjustsFontSizeToFitWidth = YES;
     }
     

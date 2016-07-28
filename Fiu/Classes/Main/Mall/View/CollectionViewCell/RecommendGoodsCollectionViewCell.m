@@ -44,7 +44,7 @@
     
     [self addSubview:self.title];
     [_title mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.size.mas_equalTo(CGSizeMake(BOUNDS_WIDTH, 25));
+        make.size.mas_equalTo(CGSizeMake(BOUNDS_WIDTH, 30));
         make.bottom.equalTo(self.line.mas_top).with.offset(-10);
         make.centerX.equalTo(self);
     }];
@@ -76,7 +76,11 @@
 - (UILabel *)title {
     if (!_title) {
         _title = [[UILabel alloc] init];
-        _title.font = [UIFont fontWithName:@"PingFangSC-Light" size:10];
+        if (IS_iOS9) {
+            _title.font = [UIFont fontWithName:@"PingFangSC-Light" size:10];
+        } else {
+            _title.font = [UIFont systemFontOfSize:10];
+        }
         _title.textColor = [UIColor colorWithHexString:titleColor];
         _title.numberOfLines = 2;
     }
@@ -97,7 +101,11 @@
     if (!_price) {
         _price = [[UILabel alloc] init];
         _price.textColor = [UIColor colorWithHexString:fineixColor];
-        _price.font = [UIFont fontWithName:@"PingFangSC-Light" size:12];
+        if (IS_iOS9) {
+            _price.font = [UIFont fontWithName:@"PingFangSC-Light" size:12];
+        } else {
+            _price.font = [UIFont systemFontOfSize:12];
+        }
     }
     return _price;
 }

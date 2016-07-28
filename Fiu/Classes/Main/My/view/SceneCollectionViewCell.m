@@ -18,7 +18,7 @@
 - (void)titleTextStyle:(NSString *)title {
     if (title.length > 11) {
         [self.titleLab mas_updateConstraints:^(MASConstraintMaker *make) {
-            make.height.mas_equalTo(@40);
+            make.height.mas_equalTo(@44);
         }];
     } else if (title.length <= 11) {
         [self.titleLab mas_updateConstraints:^(MASConstraintMaker *make) {

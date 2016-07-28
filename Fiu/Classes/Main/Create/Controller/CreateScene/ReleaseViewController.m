@@ -84,12 +84,15 @@ static NSString *const URLGetUserDesTags = @"/gateway/fetch_chinese_word";
 
 #pragma mark 发布场景
 - (void)networkNewSceneData {
-    NSString * title = [self.showContent.titleText.text stringByReplacingOccurrencesOfString:@" " withString:@""];
-    NSString * des = [self.showContent.desText.text stringByReplacingOccurrencesOfString:@" " withString:@""];
+//    NSString * title = [self.showContent.titleText.text stringByReplacingOccurrencesOfString:@" " withString:@""];
+//    NSString * des = [self.showContent.desText.text stringByReplacingOccurrencesOfString:@" " withString:@""];
+    NSString * title = self.showContent.titleText.text;
+    NSString * des = self.showContent.desText.text;
+    
     NSString * tags =  [self.showContent.chooseTagMarr componentsJoinedByString:@","];
 
     if ([self.addLocaiton.longitude length] <= 0 || [title isEqualToString:@""] || [des isEqualToString:NSLocalizedString(@"addDescription", nil)] || [des isEqualToString:@""] || [self.addLocaiton.locationLab.text isEqualToString:@""]) {
-        [SVProgressHUD showInfoWithStatus:@"填写未完成"];
+        [SVProgressHUD showInfoWithStatus:@"检查下哪里遗漏了吧～"];
 
     } else if (title.length > 20) {
         [SVProgressHUD showInfoWithStatus:@"请输入20字以内的标题"];
@@ -226,7 +229,11 @@ static NSString *const URLGetUserDesTags = @"/gateway/fetch_chinese_word";
     if (!_addContentBtn) {
         _addContentBtn = [[UIButton alloc] init];
         [_addContentBtn setTitle:NSLocalizedString(@"addContent", nil) forState:(UIControlStateNormal)];
-        _addContentBtn.titleLabel.font = [UIFont fontWithName:@"PingFangSC-Light" size:21];
+        if (IS_iOS9) {
+            _addContentBtn.titleLabel.font = [UIFont fontWithName:@"PingFangSC-Light" size:21];
+        } else {
+            _addContentBtn.titleLabel.font = [UIFont systemFontOfSize:21];
+        }
         [_addContentBtn setTitleColor:[UIColor colorWithHexString:@"#FFFFFF" alpha:1] forState:(UIControlStateNormal)];
         _addContentBtn.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
         [_addContentBtn addTarget:self action:@selector(addContentBtnClick) forControlEvents:(UIControlEventTouchUpInside)];
@@ -343,9 +350,7 @@ static NSString *const URLGetUserDesTags = @"/gateway/fetch_chinese_word";
 
 #pragma mark - 确认发布场景
 - (void)releaseScene {
-    if ([self.createType isEqualToString:@"scene"]) {
-        [self networkNewSceneData];
-    }
+    [self networkNewSceneData];
 }
 
 - (void)dealloc {

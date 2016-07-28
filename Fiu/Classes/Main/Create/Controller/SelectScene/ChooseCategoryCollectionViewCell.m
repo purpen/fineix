@@ -44,7 +44,11 @@
 - (UILabel *)categoryTitle {
     if (!_categoryTitle) {
         _categoryTitle = [[UILabel alloc] initWithFrame:self.bounds];
-        _categoryTitle.font = [UIFont fontWithName:@"PingFangSC-Light" size:16];
+        if (IS_iOS9) {
+            _categoryTitle.font = [UIFont fontWithName:@"PingFangSC-Light" size:16];
+        } else {
+            _categoryTitle.font = [UIFont systemFontOfSize:16];
+        }
         _categoryTitle.textAlignment = NSTextAlignmentCenter;
         _categoryTitle.textColor = [UIColor whiteColor];
     }

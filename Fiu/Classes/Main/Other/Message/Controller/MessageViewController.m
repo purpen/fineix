@@ -93,7 +93,7 @@
         }else{
             [self.remindView addSubview:self.alertTipviewNum];
             self.alertTipviewNum.tipNumLabel.text = [NSString stringWithFormat:@"%@",self.countModel.fiu_alert_count];
-            CGSize size = [self.alertTipviewNum.tipNumLabel.text sizeWithAttributes:@{NSFontAttributeName: [UIFont fontWithName:@"PingFangSC-Light" size:12.0f]}];
+            CGSize size = [self.alertTipviewNum.tipNumLabel.text sizeWithAttributes:@{NSFontAttributeName: [UIFont systemFontOfSize:12]}];
             [self.alertTipviewNum mas_makeConstraints:^(MASConstraintMaker *make) {
                 if ((size.width+9) > 15) {
                     make.size.mas_equalTo(CGSizeMake(size.width+9, 15));
@@ -110,7 +110,7 @@
         }else{
             [self.noticeView addSubview:self.fiu_notice_countTipviewNum];
             self.fiu_notice_countTipviewNum.tipNumLabel.text = [NSString stringWithFormat:@"%@",self.countModel.fiu_notice_count];
-            CGSize size = [self.fiu_notice_countTipviewNum.tipNumLabel.text sizeWithAttributes:@{NSFontAttributeName: [UIFont fontWithName:@"PingFangSC-Light" size:12.0f]}];
+            CGSize size = [self.fiu_notice_countTipviewNum.tipNumLabel.text sizeWithAttributes:@{NSFontAttributeName: [UIFont systemFontOfSize:12]}];
             [self.fiu_notice_countTipviewNum mas_makeConstraints:^(MASConstraintMaker *make) {
                 if ((size.width+9) > 15) {
                     make.size.mas_equalTo(CGSizeMake(size.width+9, 15));
@@ -128,7 +128,7 @@
         }else{
             [self.commentView addSubview:self.fiu_comment_countTipviewNum];
             self.fiu_comment_countTipviewNum.tipNumLabel.text = [NSString stringWithFormat:@"%@",self.countModel.fiu_comment_count];
-            CGSize size = [self.fiu_comment_countTipviewNum.tipNumLabel.text sizeWithAttributes:@{NSFontAttributeName: [UIFont fontWithName:@"PingFangSC-Light" size:12.0f]}];
+            CGSize size = [self.fiu_comment_countTipviewNum.tipNumLabel.text sizeWithAttributes:@{NSFontAttributeName: [UIFont systemFontOfSize:12]}];
             [self.fiu_comment_countTipviewNum mas_makeConstraints:^(MASConstraintMaker *make) {
                 if ((size.width+9) > 15) {
                     make.size.mas_equalTo(CGSizeMake(size.width+9, 15));
@@ -147,7 +147,7 @@
         }else{
             [self.messageView addSubview:self.message_countTipviewNum];
             self.message_countTipviewNum.tipNumLabel.text = [NSString stringWithFormat:@"%@",self.countModel.message_count];
-            CGSize size = [self.message_countTipviewNum.tipNumLabel.text sizeWithAttributes:@{NSFontAttributeName: [UIFont fontWithName:@"PingFangSC-Light" size:12.0f]}];
+            CGSize size = [self.message_countTipviewNum.tipNumLabel.text sizeWithAttributes:@{NSFontAttributeName: [UIFont systemFontOfSize:12]}];
             [self.message_countTipviewNum mas_makeConstraints:^(MASConstraintMaker *make) {
                 if ((size.width+9) > 15) {
                     make.size.mas_equalTo(CGSizeMake(size.width+9, 15));
@@ -167,7 +167,7 @@
         }else{
             [self.remindView addSubview:self.alert_countTipviewNum];
             self.alert_countTipviewNum.tipNumLabel.text = [NSString stringWithFormat:@"%@",self.countModel.alert_count];
-            CGSize size = [self.alert_countTipviewNum.tipNumLabel.text sizeWithAttributes:@{NSFontAttributeName: [UIFont fontWithName:@"PingFangSC-Light" size:12.0f]}];
+            CGSize size = [self.alert_countTipviewNum.tipNumLabel.text sizeWithAttributes:@{NSFontAttributeName: [UIFont systemFontOfSize:12]}];
             [self.alert_countTipviewNum mas_makeConstraints:^(MASConstraintMaker *make) {
                 if ((size.width+9) > 15) {
                     make.size.mas_equalTo(CGSizeMake(size.width+9, 15));

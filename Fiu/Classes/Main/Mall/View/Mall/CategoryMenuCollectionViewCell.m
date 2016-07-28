@@ -39,7 +39,11 @@
     if (!_categoryLab) {
         _categoryLab = [[UILabel alloc] initWithFrame:CGRectMake(0, 45, 50, 12)];
         _categoryLab.textAlignment = NSTextAlignmentCenter;
-        _categoryLab.font = [UIFont fontWithName:@"PingFangSC-Light" size:11];
+        if (IS_iOS9) {
+            _categoryLab.font = [UIFont fontWithName:@"PingFangSC-Light" size:11];
+        } else {
+            _categoryLab.font = [UIFont systemFontOfSize:11];
+        }
         _categoryLab.textColor = [UIColor colorWithHexString:@"#666666"];
     }
     return _categoryLab;

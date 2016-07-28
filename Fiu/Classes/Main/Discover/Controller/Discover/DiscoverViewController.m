@@ -348,13 +348,13 @@ static NSString *const URLFiuPeople = @"/user/activity_user";
         [self.headerView addGroupHeaderViewIcon:@"Group_friend"
                                       withTitle:NSLocalizedString(@"fiuFriend", nil)
                                    withSubtitle:NSLocalizedString(@"fiuFriendText", nil)
-                                   withRightMore:NSLocalizedString(@"lookAll", nil)
+                                   withRightMore:NSLocalizedString(@"lookAllData", nil)
                                    withMoreType:1];
     } else if (section ==1) {
         [self.headerView addGroupHeaderViewIcon:@"Group_FiuScene"
                                       withTitle:NSLocalizedString(@"fiuFScene", nil)
                                    withSubtitle:NSLocalizedString(@"fiuFSceneText", nil)
-                                  withRightMore:NSLocalizedString(@"lookAll", nil)
+                                  withRightMore:NSLocalizedString(@"lookAllData", nil)
                                    withMoreType:0];
     } else if (section == 2) {
         [self.headerView addGroupHeaderViewIcon:@"Group_scene"

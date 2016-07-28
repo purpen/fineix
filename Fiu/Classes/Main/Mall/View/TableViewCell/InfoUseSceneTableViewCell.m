@@ -48,7 +48,11 @@
         _headerTitle = [[UILabel alloc] initWithFrame:CGRectMake(15, 0, 200, 44)];
         _headerTitle.text = NSLocalizedString(@"userSceneTitle", nil);
         _headerTitle.textColor = [UIColor colorWithHexString:@"#333333"];
-        _headerTitle.font = [UIFont fontWithName:@"PingFangSC-Light" size:Font_GoodsTitle];
+        if (IS_iOS9) {
+            _headerTitle.font = [UIFont fontWithName:@"PingFangSC-Light" size:Font_GoodsTitle];
+        } else {
+            _headerTitle.font = [UIFont systemFontOfSize:Font_GoodsTitle];
+        }
     }
     return _headerTitle;
 }
@@ -67,7 +71,7 @@
     if (!_useSceneRollView) {
         UICollectionViewFlowLayout * flowLayout = [[UICollectionViewFlowLayout alloc] init];
         flowLayout.scrollDirection = UICollectionViewScrollDirectionHorizontal;
-        flowLayout.sectionInset = UIEdgeInsetsMake(3.5, 15, 3.5, 15);
+        flowLayout.sectionInset = UIEdgeInsetsMake(0, 15, 0, 15);
         
         _useSceneRollView = [[UICollectionView alloc] initWithFrame:CGRectMake(0, 45, SCREEN_WIDTH, (SCREEN_WIDTH - 15)/2 * 1.77) collectionViewLayout:flowLayout];
         _useSceneRollView.dataSource = self;

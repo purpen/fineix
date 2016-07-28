@@ -43,7 +43,11 @@ static NSString *const InvalidBonusCellIdentifier = @"invalidBonusCell";
     noMoreLbl.text = @"暂无过期红包";
     noMoreLbl.textAlignment = NSTextAlignmentCenter;
     noMoreLbl.textColor = [UIColor colorWithHexString:@"#888888"];
-    noMoreLbl.font = [UIFont fontWithName:@"PingFangSC-Light" size:13];
+    if (IS_iOS9) {
+        noMoreLbl.font = [UIFont fontWithName:@"PingFangSC-Light" size:13];
+    } else {
+        noMoreLbl.font = [UIFont systemFontOfSize:13];
+    }
     [_footerView addSubview:noMoreLbl];
     
     self.bonusTableView.tableFooterView = _footerView;

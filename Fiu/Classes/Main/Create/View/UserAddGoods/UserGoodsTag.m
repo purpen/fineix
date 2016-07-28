@@ -128,7 +128,11 @@
     if (!_title) {
         _title = [[UILabel alloc] init];
         _title.textColor = [UIColor colorWithHexString:fineixColor];
-        _title.font = [UIFont fontWithName:@"PingFangSC-Light" size:12];
+        if (IS_iOS9) {
+            _title.font = [UIFont fontWithName:@"PingFangSC-Light" size:12];
+        } else {
+            _title.font = [UIFont systemFontOfSize:12];
+        }
         _title.textAlignment = NSTextAlignmentCenter;
     }
     return _title;
@@ -139,7 +143,11 @@
     if (!_price) {
         _price = [[UILabel alloc] init];
         _price.textColor = [UIColor whiteColor];
-        _price.font = [UIFont fontWithName:@"PingFangSC-Light" size:12];
+        if (IS_iOS9) {
+            _price.font = [UIFont fontWithName:@"PingFangSC-Light" size:12];
+        } else {
+            _price.font = [UIFont systemFontOfSize:12];
+        }
         _price.textAlignment = NSTextAlignmentCenter;
     }
     return _price;

@@ -85,7 +85,11 @@
         
         UILabel * colorLab = [[UILabel alloc] initWithFrame:CGRectMake(15, 120, SCREEN_WIDTH - 30, 20)];
         colorLab.text = @"颜色分类";
-        colorLab.font = [UIFont fontWithName:@"PingFangSC-Light" size:16];
+        if (IS_iOS9) {
+            colorLab.font = [UIFont fontWithName:@"PingFangSC-Light" size:16];
+        } else {
+            colorLab.font = [UIFont systemFontOfSize:16];
+        }
         
         [_buyView addSubview:self.buyingBtn];
         [_buyView addSubview:self.addCarBtn];
@@ -112,7 +116,11 @@
         _buyingBtn = [[UIButton alloc] initWithFrame:CGRectMake(SCREEN_WIDTH/2, 410 - 44, SCREEN_WIDTH/2, 44)];
         [_buyingBtn setTitle:NSLocalizedString(@"buyingBtn", nil) forState:(UIControlStateNormal)];
         [_buyingBtn setTitleColor:[UIColor whiteColor] forState:(UIControlStateNormal)];
-        _buyingBtn.titleLabel.font = [UIFont fontWithName:@"PingFangSC-Light" size:14];
+        if (IS_iOS9) {
+            _buyingBtn.titleLabel.font = [UIFont fontWithName:@"PingFangSC-Light" size:14];
+        } else {
+            _buyingBtn.titleLabel.font = [UIFont systemFontOfSize:14];
+        }
         _buyingBtn.backgroundColor = [UIColor colorWithHexString:@"#BE8914"];
         [_buyingBtn addTarget:self action:@selector(buyingBtnClick) forControlEvents:(UIControlEventTouchUpInside)];
     }
@@ -148,7 +156,11 @@
         _addCarBtn = [[UIButton alloc] initWithFrame:CGRectMake(0, 410 - 44, SCREEN_WIDTH/2, 44)];
         [_addCarBtn setTitle:NSLocalizedString(@"addCarBtn", nil) forState:(UIControlStateNormal)];
         [_addCarBtn setTitleColor:[UIColor whiteColor] forState:(UIControlStateNormal)];
-        _addCarBtn.titleLabel.font = [UIFont fontWithName:@"PingFangSC-Light" size:14];
+        if (IS_iOS9) {
+            _addCarBtn.titleLabel.font = [UIFont fontWithName:@"PingFangSC-Light" size:14];
+        } else {
+            _addCarBtn.titleLabel.font = [UIFont systemFontOfSize:14];
+        }
         _addCarBtn.backgroundColor = [UIColor colorWithHexString:@"DB9E18"];
         [_addCarBtn addTarget:self action:@selector(addCarBtnClick) forControlEvents:(UIControlEventTouchUpInside)];
     }
@@ -191,7 +203,11 @@
     if (!_goodsTitle) {
         _goodsTitle = [[UILabel alloc] initWithFrame:CGRectMake(105, 15, SCREEN_WIDTH - 120, 35)];
         _goodsTitle.textColor = [UIColor colorWithHexString:titleColor];
-        _goodsTitle.font = [UIFont fontWithName:@"PingFangSC-Light" size:14];
+        if (IS_iOS9) {
+            _goodsTitle.font = [UIFont fontWithName:@"PingFangSC-Light" size:14];
+        } else {
+            _goodsTitle.font = [UIFont systemFontOfSize:14];
+        }
         _goodsTitle.numberOfLines = 2;
     }
     return _goodsTitle;
@@ -202,7 +218,11 @@
     if (!_goodsPrice) {
         _goodsPrice = [[UILabel alloc] initWithFrame:CGRectMake(105, 55, SCREEN_WIDTH - 115, 25)];
         _goodsPrice.textColor = [UIColor colorWithHexString:fineixColor];
-        _goodsPrice.font = [UIFont fontWithName:@"PingFangSC-Light" size:14];
+        if (IS_iOS9) {
+            _goodsPrice.font = [UIFont fontWithName:@"PingFangSC-Light" size:14];
+        } else {
+            _goodsPrice.font = [UIFont systemFontOfSize:14];
+        }
         _goodsPrice.numberOfLines = 2;
     }
     return _goodsPrice;
@@ -213,7 +233,12 @@
     if (!_goodsChoose) {
         _goodsChoose = [[UILabel alloc] initWithFrame:CGRectMake(105, 80, SCREEN_WIDTH - 120, 15)];
         _goodsChoose.textColor = [UIColor colorWithHexString:titleColor];
-        _goodsChoose.font = [UIFont fontWithName:@"PingFangSC-Light" size:12];
+        if (IS_iOS9) {
+            _goodsChoose.font = [UIFont fontWithName:@"PingFangSC-Light" size:12];
+        } else {
+            _goodsChoose.font = [UIFont systemFontOfSize:12];
+        }
+        _goodsChoose.text = @"";
         _goodsChoose.numberOfLines = 2;
     }
     return _goodsChoose;
@@ -276,14 +301,22 @@
         
         UILabel * chooseNumTitle = [[UILabel alloc] initWithFrame:CGRectMake(0, 10, SCREEN_WIDTH - 30, 20)];
         chooseNumTitle.text = @"数量";
-        chooseNumTitle.font = [UIFont fontWithName:@"PingFangSC-Light" size:16];
+        if (IS_iOS9) {
+            chooseNumTitle.font = [UIFont fontWithName:@"PingFangSC-Light" size:16];
+        } else {
+            chooseNumTitle.font = [UIFont systemFontOfSize:16];
+        }
         
         UIButton * addBtn = [[UIButton alloc] initWithFrame:CGRectMake(110, 40, 30, 30)];
         addBtn.layer.borderColor = [UIColor colorWithHexString:titleColor alpha:.5].CGColor;
         addBtn.layer.borderWidth = 1.0f;
         [addBtn setTitleColor:[UIColor colorWithHexString:titleColor] forState:(UIControlStateNormal)];
         [addBtn setTitle:@"＋" forState:(UIControlStateNormal)];
-        addBtn.titleLabel.font = [UIFont fontWithName:@"PingFangSC-Light" size:14];
+        if (IS_iOS9) {
+            addBtn.titleLabel.font = [UIFont fontWithName:@"PingFangSC-Light" size:14];
+        } else {
+            addBtn.titleLabel.font = [UIFont systemFontOfSize:14];
+        }
         [addBtn addTarget:self action:@selector(addChooseNum:) forControlEvents:(UIControlEventTouchUpInside)];
         self.addBtn = addBtn;
         
@@ -292,7 +325,11 @@
         subBtn.layer.borderWidth = 1.0f;
         [subBtn setTitleColor:[UIColor colorWithHexString:titleColor] forState:(UIControlStateNormal)];
         [subBtn setTitle:@"－" forState:(UIControlStateNormal)];
-        subBtn.titleLabel.font = [UIFont fontWithName:@"PingFangSC-Light" size:14];
+        if (IS_iOS9) {
+            subBtn.titleLabel.font = [UIFont fontWithName:@"PingFangSC-Light" size:14];
+        } else {
+            subBtn.titleLabel.font = [UIFont systemFontOfSize:14];
+        }
         [subBtn addTarget:self action:@selector(subChooseNum:) forControlEvents:(UIControlEventTouchUpInside)];
         self.subBtn = subBtn;
         
@@ -310,36 +347,46 @@
 }
 
 - (void)addChooseNum:(UIButton *)button {
-    self.num += 1;
-    if (self.num >= self.quantity) {
-        button.userInteractionEnabled = NO;
-        button.backgroundColor = [UIColor colorWithHexString:lineGrayColor];
-        [self showMessage:@"库存不足了～"];
+    if ([self.goodsChoose.text isEqualToString:@""]) {
+        [self showMessage:@"请先选择喜欢的颜色分类吧"];
         
-    } else if (self.num <= self.quantity) {
-        self.subBtn.userInteractionEnabled = YES;
-        self.subBtn.backgroundColor = [UIColor whiteColor];
+    } else {
+        self.num += 1;
+        if (self.num >= self.quantity) {
+            button.userInteractionEnabled = NO;
+            button.backgroundColor = [UIColor colorWithHexString:lineGrayColor];
+            [self showMessage:@"库存不足了～"];
+            
+        } else if (self.num <= self.quantity) {
+            self.subBtn.userInteractionEnabled = YES;
+            self.subBtn.backgroundColor = [UIColor whiteColor];
+        }
+        
+        self.chooseNum.text = [NSString stringWithFormat:@"%zi", self.num];
     }
-    
-    self.chooseNum.text = [NSString stringWithFormat:@"%zi", self.num];
 }
 
 - (void)subChooseNum:(UIButton *)button {
-    if (self.num > 1) {
-        self.num -= 1;
-    }
-    
-    if (self.num <= 1) {
-        button.userInteractionEnabled = NO;
-        button.backgroundColor = [UIColor colorWithHexString:lineGrayColor];
-        [self showMessage:@"不能再少了～"];
+    if ([self.goodsChoose.text isEqualToString:@""]) {
+        [self showMessage:@"请先选择喜欢的颜色分类吧"];
         
-    } else if (self.num <= self.quantity) {
-        self.addBtn.userInteractionEnabled = YES;
-        self.addBtn.backgroundColor = [UIColor whiteColor];
+    } else {
+        if (self.num > 1) {
+            self.num -= 1;
+        }
+        
+        if (self.num <= 1) {
+            button.userInteractionEnabled = NO;
+            button.backgroundColor = [UIColor colorWithHexString:lineGrayColor];
+            [self showMessage:@"不能再少了～"];
+            
+        } else if (self.num <= self.quantity) {
+            self.addBtn.userInteractionEnabled = YES;
+            self.addBtn.backgroundColor = [UIColor whiteColor];
+        }
+        
+        self.chooseNum.text = [NSString stringWithFormat:@"%zi", self.num];
     }
-    
-    self.chooseNum.text = [NSString stringWithFormat:@"%zi", self.num];
 }
 
 #pragma mark 数量
@@ -348,7 +395,11 @@
         _chooseNum = [[UILabel alloc] initWithFrame:CGRectMake(30, 40, 80, 30)];
         _chooseNum.text = @"1";
         _chooseNum.textColor = [UIColor colorWithHexString:titleColor];
-        _chooseNum.font = [UIFont fontWithName:@"PingFangSC-Light" size:14];
+        if (IS_iOS9) {
+            _chooseNum.font = [UIFont fontWithName:@"PingFangSC-Light" size:14];
+        } else {
+            _chooseNum.font = [UIFont systemFontOfSize:14];
+        }
         _chooseNum.textAlignment = NSTextAlignmentCenter;
         _chooseNum.layer.borderColor = [UIColor colorWithHexString:titleColor alpha:.5].CGColor;
         _chooseNum.layer.borderWidth = 0.5f;

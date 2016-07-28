@@ -60,14 +60,22 @@ static NSString *const BonusCellIdentifier = @"bonusCell";
     UILabel * noMoreLbl = [[UILabel alloc] initWithFrame:CGRectMake(SCREEN_WIDTH / 2 - 110, 0, 110, HeaderFooterHeight)];
     noMoreLbl.text = @"没有更多可用红包";
     noMoreLbl.textColor = [UIColor colorWithHexString:@"#888888"];
-    noMoreLbl.font = [UIFont fontWithName:@"PingFangSC-Light" size:13];
+    if (IS_iOS9) {
+        noMoreLbl.font = [UIFont fontWithName:@"PingFangSC-Light" size:13];
+    } else {
+        noMoreLbl.font = [UIFont systemFontOfSize:13];
+    }
     [_footerView addSubview:noMoreLbl];
     
     UIButton * historyBtn = [UIButton buttonWithType:UIButtonTypeCustom];
     historyBtn.frame = CGRectMake(SCREEN_WIDTH / 2, 0, 110, HeaderFooterHeight);
     [historyBtn setTitle:@"查看过期红包>>" forState:UIControlStateNormal];
     [historyBtn setTitleColor:[UIColor colorWithHexString:fineixColor] forState:UIControlStateNormal];
-    historyBtn.titleLabel.font = [UIFont fontWithName:@"PingFangSC-Light" size:13];
+    if (IS_iOS9) {
+        historyBtn.titleLabel.font = [UIFont fontWithName:@"PingFangSC-Light" size:13];
+    } else {
+        historyBtn.titleLabel.font = [UIFont systemFontOfSize:13];
+    }
     [historyBtn addTarget:self action:@selector(historyBtnAction:) forControlEvents:UIControlEventTouchUpInside];
     [_footerView addSubview:historyBtn];
 //    self.bonusTableView.tableFooterView = footerView;

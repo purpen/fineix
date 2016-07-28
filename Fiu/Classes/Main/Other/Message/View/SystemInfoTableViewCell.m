@@ -74,17 +74,14 @@
     return _lineView;
 }
 
--(void)setUI{
-    self.timeLabel.text = @"2天前";
-    self.iconImageView.image = [UIImage imageNamed:@"Bitmap-3"];
-    self.msgLabel.text = @"春天太短，能每一天是一天";
-}
-
-
 -(UILabel *)msgLabel{
     if (!_msgLabel) {
         _msgLabel = [[UILabel alloc] init];
-        _msgLabel.font = [UIFont fontWithName:@"PingFangSC-Light" size:10];
+        if (IS_iOS9) {
+            _msgLabel.font = [UIFont fontWithName:@"PingFangSC-Light" size:10];
+        } else {
+            _msgLabel.font = [UIFont systemFontOfSize:10];
+        }
         _msgLabel.textColor = [UIColor lightGrayColor];
         _msgLabel.numberOfLines = 0;
     }
@@ -102,7 +99,11 @@
     if (!_titleLbael) {
         _titleLbael = [[UILabel alloc] init];
         _titleLbael.text = @"系统消息";
-        _titleLbael.font = [UIFont fontWithName:@"PingFangSC-Light" size:14];
+        if (IS_iOS9) {
+            _titleLbael.font = [UIFont fontWithName:@"PingFangSC-Light" size:14];
+        } else {
+            _titleLbael.font = [UIFont systemFontOfSize:14];
+        }
     }
     return _titleLbael;
 }
@@ -110,7 +111,11 @@
 -(UILabel *)timeLabel{
     if (!_timeLabel) {
         _timeLabel = [[UILabel alloc] init];
-        _timeLabel.font = [UIFont fontWithName:@"PingFangSC-Light" size:13];
+        if (IS_iOS9) {
+            _timeLabel.font = [UIFont fontWithName:@"PingFangSC-Light" size:13];
+        } else {
+            _timeLabel.font = [UIFont systemFontOfSize:13];
+        }
         _timeLabel.textColor = [UIColor lightGrayColor];
     }
     return _timeLabel;
