@@ -221,7 +221,6 @@
         MyPageBGCollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"MyPageBGCollectionViewCell" forIndexPath:indexPath];
         [cell.bgImageView addGestureRecognizer:self.myTap];
         [cell setUI];
-        cell.backgroundColor = [UIColor redColor];
         return cell;
     }else if (indexPath.section == 1){
         UICollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"UICollectionViewCell" forIndexPath:indexPath];
