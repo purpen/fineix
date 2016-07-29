@@ -12,7 +12,10 @@
 #import "MapAnnotionViewController.h"
 #define MAPHEGHIT 100
 #define TABLEVIEW_Y (self.searchView.frame.origin.y + self.searchView.frame.size.height)
-@interface SearchLocationViewController ()<BMKLocationServiceDelegate,BMKMapViewDelegate,MapannotionDelegate>
+@interface SearchLocationViewController ()<BMKLocationServiceDelegate,BMKMapViewDelegate,MapannotionDelegate,UIAlertViewDelegate>
+{
+    BOOL _flag;
+}
 /** 地图 */
 @property (nonatomic, strong) BMKMapView *mapView;
 /** 地图点击手势 */
@@ -28,6 +31,7 @@
     _geoCodeSearch.delegate = self;
 }
 
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.view.backgroundColor = [UIColor whiteColor];
@@ -38,15 +42,45 @@
     [self.view addSubview:self.mapView];
     //  判断是否开启GPS定位
     if ([CLLocationManager locationServicesEnabled]) {
-        [self initBMKService];
-        [SVProgressHUD showWithStatus:NSLocalizedString(@"searchLocationing", nil)];
+        CLAuthorizationStatus status = [CLLocationManager authorizationStatus];
+        
+        if (kCLAuthorizationStatusDenied == status || kCLAuthorizationStatusRestricted == status) {
+            [SVProgressHUD showInfoWithStatus:NSLocalizedString(@"openGPS", nil)];
+            _flag = NO;
+        }else{
+            [self initBMKService];
+            [SVProgressHUD showWithStatus:NSLocalizedString(@"searchLocationing", nil)];
+            _flag = YES;
+        }
         
     } else {
-        [SVProgressHUD showInfoWithStatus:NSLocalizedString(@"openGPS", nil)];
+        
     }
     
     NSNotificationCenter *center = [NSNotificationCenter defaultCenter];
     [center addObserver:self selector:@selector(reciveInfo:) name:@"b" object:nil];
+}
+
+-(void)viewDidAppear:(BOOL)animated{
+    if (_flag) {
+        return;
+    }
+    NSString *mediaMessage = @"请在设置->隐私->定位服务 中打开本应用的访问权限并在返回后重新打开该页面";
+    UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"提示" message:mediaMessage delegate:nil cancelButtonTitle:@"确定" otherButtonTitles:@"取消", nil];
+    alertView.delegate = self;
+    [alertView show];
+}
+
+-(void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex{
+    if (buttonIndex == 0) {
+        NSURL * url = [NSURL URLWithString:UIApplicationOpenSettingsURLString];
+        
+        if([[UIApplication sharedApplication] canOpenURL:url]) {
+            [[UIApplication sharedApplication] openURL:url];
+            
+        }
+    }
+    
 }
 
 -(void)reciveInfo:(NSNotification*)sender{
