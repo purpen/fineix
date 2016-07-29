@@ -65,7 +65,7 @@ static NSString *const URLDeleteScene = @"/scene_sight/delete";
 #pragma mark -
 - (void)setRollSceneInfoView {
     _viewScroller = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT)];
-    _viewScroller.pagingEnabled = YES;
+    _viewScroller.pagingEnabled = NO;
     _viewScroller.delegate = self;
     _viewScroller.showsHorizontalScrollIndicator = NO;
     [self.view addSubview:_viewScroller];
@@ -507,9 +507,9 @@ static NSString *const URLDeleteScene = @"/scene_sight/delete";
         _allComment = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 44)];
         [_allComment setTitleColor:[UIColor colorWithHexString:titleColor] forState:(UIControlStateNormal)];
         if (IS_iOS9) {
-            _allComment.font = [UIFont fontWithName:@"PingFangSC-Light" size:12];
+            _allComment.titleLabel.font = [UIFont fontWithName:@"PingFangSC-Light" size:12];
         } else {
-            _allComment.font = [UIFont systemFontOfSize:12];
+            _allComment.titleLabel.font = [UIFont systemFontOfSize:12];
         }
     }
     return _allComment;

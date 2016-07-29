@@ -9,6 +9,7 @@
 #import "FBViewController.h"
 #import "FBLoginRegisterViewController.h"
 #import "QRCodeScanViewController.h"
+#import "HomeViewController.h"
 
 static NSString *const URLGoodsCarNum = @"/shopping/fetch_cart_count";
 static NSString *const URLUserIsLogin = @"/user/user_info";

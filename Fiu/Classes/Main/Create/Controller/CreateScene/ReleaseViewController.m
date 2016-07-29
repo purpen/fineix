@@ -88,10 +88,9 @@ static NSString *const URLGetUserDesTags = @"/gateway/fetch_chinese_word";
 //    NSString * des = [self.showContent.desText.text stringByReplacingOccurrencesOfString:@" " withString:@""];
     NSString * title = self.showContent.titleText.text;
     NSString * des = self.showContent.desText.text;
-    
     NSString * tags =  [self.showContent.chooseTagMarr componentsJoinedByString:@","];
 
-    if ([self.addLocaiton.longitude length] <= 0 || [title isEqualToString:@""] || [des isEqualToString:NSLocalizedString(@"addDescription", nil)] || [des isEqualToString:@""] || [self.addLocaiton.locationLab.text isEqualToString:@""]) {
+    if ([self.addLocaiton.longitude length] <= 0 || [title isEqualToString:@""] || [des isEqualToString:NSLocalizedString(@"addDescription", nil)] || [des isEqualToString:@""] || [self.addLocaiton.locationLab.text isEqualToString:@""] || tags.length <= 0) {
         [SVProgressHUD showInfoWithStatus:@"检查下哪里遗漏了吧～"];
 
     } else if (title.length > 20) {

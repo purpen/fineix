@@ -244,7 +244,7 @@ static NSString *const URLSceneList = @"/scene_sight/";
 - (void)setFirstAppStart {
     if(![USERDEFAULT boolForKey:@"homeLaunch"]){
         [USERDEFAULT setBool:YES forKey:@"homeLaunch"];
-        [self setMoreGuideImgForVC:@[@"guide_home",@"Guide_index"]];
+        [self setMoreGuideImgForVC:@[@"guide_home",@"Guide_index",@"guide-fiu",@"guide-personal"]];
     }
 }
 

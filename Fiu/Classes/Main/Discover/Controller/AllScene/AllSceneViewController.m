@@ -60,7 +60,7 @@ static NSString *const URLFiuCategoryList = @"/category/getlist";
 #pragma mark - 网络请求
 #pragma mark 地盘分类
 - (void)networkAllFiuSceneCategory {
-    self.categoryListRequest = [FBAPI getWithUrlString:URLFiuCategoryList requestDictionary:@{@"domain":@"12", @"show_all":@"1"} delegate:self];
+    self.categoryListRequest = [FBAPI getWithUrlString:URLFiuCategoryList requestDictionary:@{@"domain":@"12", @"show_all":@"1", @"size":@"100",@"page":@"1"} delegate:self];
     [self.categoryListRequest startRequestSuccess:^(FBRequest *request, id result) {
         NSArray * categoryArr = [[result valueForKey:@"data"] valueForKey:@"rows"];
         for (NSDictionary * categoryDic in categoryArr) {

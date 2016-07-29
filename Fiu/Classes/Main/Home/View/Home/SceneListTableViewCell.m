@@ -52,7 +52,7 @@
         CGSize size = [self.userStar boundingRectWithSize:CGSizeMake(100, 0)];
     
         [self.userStar mas_updateConstraints:^(MASConstraintMaker *make) {
-            make.width.mas_equalTo(size.width);
+            make.width.mas_equalTo(size.width + 3);
         }];
         [self.userProfile mas_updateConstraints:^(MASConstraintMaker *make) {
             make.left.equalTo(self.userStar.mas_right).with.offset(5);
