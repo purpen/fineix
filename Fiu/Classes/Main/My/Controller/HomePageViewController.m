@@ -55,6 +55,8 @@
 @property(nonatomic,strong) UILabel *tipLabel;
 @property(nonatomic,strong) UITapGestureRecognizer *myTap;
 @property(nonatomic,strong) UILabel *titleLabel;
+/**  */
+@property (nonatomic, strong) ScenarioNonView *defaultView;
 @end
 
 static NSString *const IconURL = @"/my/add_head_pic";
@@ -507,6 +509,20 @@ static NSString *sceneCellId = @"SceneCollectionViewCell";
 }
 
 
+-(ScenarioNonView *)defaultView{
+    if (!_defaultView) {
+        _defaultView = [ScenarioNonView getScenarioNonView];
+        if (self.isMySelf) {
+            _defaultView.tipLabel.text = @"你还没有发表过新情景哦，快来Fiu一下嘛";
+            _defaultView.creatBtn.hidden = NO;
+        }else{
+            _defaultView.tipLabel.text = @"你们好像在哪儿见过，来看看他的足迹吧";
+            _defaultView.creatBtn.hidden = YES;
+        }
+    }
+    return _defaultView;
+}
+
 -(UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath{
     if (indexPath.section == 0) {
         
@@ -538,16 +554,8 @@ static NSString *sceneCellId = @"SceneCollectionViewCell";
                 //空的
                 UICollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"UICollectionViewCellScenarioNon" forIndexPath:indexPath];
                 cell.userInteractionEnabled = YES;
-                ScenarioNonView *view = [ScenarioNonView getScenarioNonView];
-                if (self.isMySelf) {
-                    view.tipLabel.text = @"你还没有发表过新情景哦，快来Fiu一下嘛";
-                    view.creatBtn.hidden = NO;
-                }else{
-                    view.tipLabel.text = @"你们好像在哪儿见过，来看看他的足迹吧";
-                    view.creatBtn.hidden = YES;
-                }
-                [cell.contentView addSubview:view];
-                [view mas_makeConstraints:^(MASConstraintMaker *make) {
+                [cell addSubview:self.defaultView];
+                [self.defaultView mas_makeConstraints:^(MASConstraintMaker *make) {
                     make.size.mas_equalTo(CGSizeMake(SCREEN_WIDTH, 320/667.0*SCREEN_HEIGHT));
                     make.left.mas_equalTo(cell.mas_left).with.offset(0);
                     make.top.mas_equalTo(cell.mas_top).with.offset(0);
@@ -811,7 +819,7 @@ static NSString *sceneCellId = @"SceneCollectionViewCell";
     if (indexPath.section == 2) {
         if ([self.type isEqualToNumber:@2]) {
             if (_sceneListMarr.count == 0) {
-                return CGSizeMake((SCREEN_WIDTH-15)/2, 320/667.0*SCREEN_HEIGHT);
+                return CGSizeMake(SCREEN_WIDTH, 320/667.0*SCREEN_HEIGHT);
             }else{
                 return CGSizeMake((SCREEN_WIDTH-15)/2, 320/667.0*SCREEN_HEIGHT);
             }
