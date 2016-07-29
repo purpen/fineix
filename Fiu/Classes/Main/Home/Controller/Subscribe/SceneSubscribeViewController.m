@@ -33,7 +33,7 @@ static NSString *const URLSubScene = @"/my/my_subscription";
     
     self.currentpageNum = 0;
     [self networkRequestData];
-    
+    [self.view addSubview:self.noSubscribeView];
     [self.view addSubview:self.homeTableView];
 }
 
@@ -49,10 +49,18 @@ static NSString *const URLSubScene = @"/my/my_subscription";
             [self.sceneListMarr addObject:homeSceneModel];
             [self.sceneIdMarr addObject:[NSString stringWithFormat:@"%zi", homeSceneModel.idField]];
         }
-        [self.homeTableView reloadData];
-        self.currentpageNum = [[[result valueForKey:@"data"] valueForKey:@"current_page"] integerValue];
-        self.totalPageNum = [[[result valueForKey:@"data"] valueForKey:@"total_page"] integerValue];
-        [self requestIsLastData:self.homeTableView currentPage:self.currentpageNum withTotalPage:self.totalPageNum];
+        if (self.sceneListMarr.count > 0) {
+            [self.homeTableView reloadData];
+            self.currentpageNum = [[[result valueForKey:@"data"] valueForKey:@"current_page"] integerValue];
+            self.totalPageNum = [[[result valueForKey:@"data"] valueForKey:@"total_page"] integerValue];
+            [self requestIsLastData:self.homeTableView currentPage:self.currentpageNum withTotalPage:self.totalPageNum];
+            self.noSubscribeView.hidden = YES;
+            
+        } else {
+            self.homeTableView.hidden = YES;
+            self.noSubscribeView.hidden = NO;
+        }
+        
         [SVProgressHUD dismiss];
         
     } failure:^(FBRequest *request, NSError *error) {
@@ -102,6 +110,15 @@ static NSString *const URLSubScene = @"/my/my_subscription";
             [table.mj_footer endRefreshing];
         }
     }];
+}
+
+#pragma makr - 没有订阅时的默认视图
+- (NoSubscribeView *)noSubscribeView {
+    if (!_noSubscribeView) {
+        _noSubscribeView = [[NoSubscribeView alloc] initWithFrame:CGRectMake(0, 64, SCREEN_WIDTH, SCREEN_HEIGHT - 64)];
+        _noSubscribeView.nav = self.navigationController;
+    }
+    return _noSubscribeView;
 }
 
 #pragma mark - 加载首页表格

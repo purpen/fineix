@@ -25,7 +25,7 @@
 "release" = "发布";
 "cancel" = "取消";
 "sure" = "确定";
-"chooseCategoryVC" = "选择情景分类";
+"chooseCategoryVC" = "选择地盘分类";
 
 //  控制器页面标题
 "createVcTitle" = "照片胶卷";
@@ -81,6 +81,8 @@
 "slognText" = "｜ 你在发现 谁在惊呼？";
 "pleaseChooseFiuScene" = "请选择一个地盘";
 "recommendTag" = "推荐标签";
+"WriteAddTag" = "请输入标签";
+"NoSubscribe" = "“点击订阅地盘，自由收看大千世界”";
 
 //  搜索框提示
 "searchLocation" = "搜索地点";
@@ -124,7 +126,7 @@
 "CollectDone" = "已收藏";
 "nearFiuScene" = "相似的地盘";
 "reFiuScene" = "推荐地盘";
-"lookAll" = "查看全部";
+"lookAllData" = "查看全部";
 "SceneBtn" = "情景";
 "FiuSceneBtn" = "地盘";
 "GoodsBtn" = "产品";
@@ -136,6 +138,15 @@
 "creatFiuSceneBtn" = "＋ 创建情景";
 "markGoodsBtnTitle" = "标记情景中的产品或产品链接";
 "addTagsBtn" = "添加标签";
+"sureAddGoods" = "确认添加";
+"findGoodsDone" = "找到";
+"sceneLike" = " 赞";
+"lookAll" = "更多";
+"suFiuBtn" = "＋订阅地盘";
+"suFiuDone" = "已订阅";
+"concern" = "关注";
+"concernDone" = "已关注";
+"sendComment" = "发送";
 
 //  评论
 "comment" = "评论一下";

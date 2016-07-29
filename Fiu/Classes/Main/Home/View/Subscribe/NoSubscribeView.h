@@ -11,7 +11,9 @@
 
 @interface NoSubscribeView : UIView
 
-@pro_strong UILabel     *   NoSubscribeLab;
+@pro_strong UINavigationController  *   nav;
+
+@pro_strong UILabel     *   noSubscribeLab;
 @pro_strong UIButton    *   goSubscribeBtn;
 
 @end

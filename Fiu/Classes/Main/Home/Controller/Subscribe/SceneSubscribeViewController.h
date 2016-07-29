@@ -9,12 +9,14 @@
 #import "FBViewController.h"
 #import <SVProgressHUD/SVProgressHUD.h>
 #import "MJRefresh.h"
+#import "NoSubscribeView.h"
 
 @interface SceneSubscribeViewController : FBViewController <UITableViewDelegate, UITableViewDataSource>
 
 @pro_strong FBRequest               *   sceneListRequest;
 @pro_assign NSInteger                   currentpageNum;
 @pro_assign NSInteger                   totalPageNum;
-@pro_strong UITableView             *   homeTableView;   
+@pro_strong UITableView             *   homeTableView;
+@pro_strong NoSubscribeView         *   noSubscribeView;
 
 @end
