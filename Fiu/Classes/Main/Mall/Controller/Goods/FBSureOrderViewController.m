@@ -160,7 +160,6 @@ static NSString *const URLCarGoPay = @"/shopping/checkout";
                 [self.navigationController pushViewController:payWayVC animated:YES];
             }
         }
-        [SVProgressHUD dismiss];
         
     } failure:^(FBRequest *request, NSError *error) {
          [SVProgressHUD showInfoWithStatus:[error localizedDescription]];
