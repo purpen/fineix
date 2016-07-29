@@ -49,7 +49,10 @@
     [self.navView addSubview:self.cancelVCBtn];
 
     [self.view addSubview:self.mapView];
-    _locationLabel.text = self.nameAry[0];
+    if (self.nameAry.count > 0) {
+        
+        _locationLabel.text = self.nameAry[0];
+    }
     [self.location startUserLocationService];
     [self.view addSubview:self.annoImageView];
     self.annoImageView.center = self.mapView.center;
@@ -136,8 +139,11 @@
 
 -(BMKLocationService *)location{
     if (!_location) {
-        _location = [[BMKLocationService alloc] init];
-        _location.delegate = self;
+        if ([CLLocationManager locationServicesEnabled]){
+            
+            _location = [[BMKLocationService alloc] init];
+            _location.delegate = self;
+        }
     }
     return _location;
 }
@@ -154,7 +160,10 @@
         _mapView.zoomLevel = 18;
         _mapView.delegate = self;
         _mapView.showsUserLocation = YES;
-        _mapView.centerCoordinate = CLLocationCoordinate2DMake([self.latAry[0] doubleValue], [self.lonAry[0] doubleValue]);
+        if (self.latAry.count > 0) {
+            
+            _mapView.centerCoordinate = CLLocationCoordinate2DMake([self.latAry[0] doubleValue], [self.lonAry[0] doubleValue]);
+        }
     }
     return _mapView;
 }

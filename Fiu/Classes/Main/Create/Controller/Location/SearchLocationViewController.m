@@ -207,7 +207,9 @@
         }
         [self.locationTableView reloadData];
         [SVProgressHUD dismiss];
-        self.mapView.centerCoordinate = CLLocationCoordinate2DMake([self.latitudeMarr[0] doubleValue], [self.longitudeMarr[0] doubleValue]);
+        if (self.latitudeMarr.count > 0) {
+            self.mapView.centerCoordinate = CLLocationCoordinate2DMake([self.latitudeMarr[0] doubleValue], [self.longitudeMarr[0] doubleValue]);
+        }
         BMKPointAnnotation *annotation = [[BMKPointAnnotation alloc] init];
         CLLocationCoordinate2D coor;
         coor.latitude = [[self.latitudeMarr firstObject] doubleValue];
