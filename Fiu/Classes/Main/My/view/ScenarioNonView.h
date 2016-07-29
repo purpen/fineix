@@ -11,6 +11,7 @@
 @interface ScenarioNonView : UIView
 
 @property (weak, nonatomic) IBOutlet UILabel *tipLabel;
+@property (weak, nonatomic) IBOutlet UIButton *creatBtn;
 
 +(instancetype)getScenarioNonView;
 

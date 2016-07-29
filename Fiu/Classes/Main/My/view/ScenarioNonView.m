@@ -7,11 +7,23 @@
 //
 
 #import "ScenarioNonView.h"
+#import "PictureToolViewController.h"
 
 @implementation ScenarioNonView
 
 +(instancetype)getScenarioNonView{
-    return [[NSBundle mainBundle] loadNibNamed:@"MyView" owner:nil options:nil][4];
+    ScenarioNonView *view = [[NSBundle mainBundle] loadNibNamed:@"MyView" owner:nil options:nil][4];
+    view.creatBtn.layer.masksToBounds = YES;
+    view.creatBtn.layer.cornerRadius = 3;
+    
+    return view;
 }
+
+- (IBAction)creatBtnClick:(id)sender {
+    PictureToolViewController * pictureToolVC = [[PictureToolViewController alloc] init];
+    pictureToolVC.createType = @"scene";
+    [[UIApplication sharedApplication].keyWindow.rootViewController presentViewController:pictureToolVC animated:YES completion:nil];
+}
+
 
 @end
