@@ -281,6 +281,7 @@ static NSString *sceneCellId = @"SceneCollectionViewCell";
         FBRequest *request = [FBAPI postWithUrlString:@"/scene_sight/" requestDictionary:@{@"page":@(_m+1),@"size":@10,@"sort":@0,@"user_id":self.userId} delegate:self];
         [request startRequestSuccess:^(FBRequest *request, id result) {
             NSArray *sceneArr = [[result valueForKey:@"data"] valueForKey:@"rows"];
+            NSLog(@"sceneArr  %@",sceneArr);
             for (NSDictionary * sceneDic in sceneArr) {
                 HomeSceneListRow * homeSceneModel = [[HomeSceneListRow alloc] initWithDictionary:sceneDic];
                 [_sceneListMarr addObject:homeSceneModel];
@@ -536,12 +537,14 @@ static NSString *sceneCellId = @"SceneCollectionViewCell";
             if (_sceneListMarr.count == 0) {
                 //空的
                 UICollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"UICollectionViewCellScenarioNon" forIndexPath:indexPath];
-                cell.userInteractionEnabled = NO;
+                cell.userInteractionEnabled = YES;
                 ScenarioNonView *view = [ScenarioNonView getScenarioNonView];
                 if (self.isMySelf) {
                     view.tipLabel.text = @"你还没有发表过新情景哦，快来Fiu一下嘛";
+                    view.creatBtn.hidden = NO;
                 }else{
                     view.tipLabel.text = @"你们好像在哪儿见过，来看看他的足迹吧";
+                    view.creatBtn.hidden = YES;
                 }
                 [cell.contentView addSubview:view];
                 [view mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -594,6 +597,9 @@ static NSString *sceneCellId = @"SceneCollectionViewCell";
             fiuSceneVC.fiuSceneId = _fiuSceneIdList[indexPath.row];
             [self.navigationController pushViewController:fiuSceneVC animated:YES];
         }else if([self.type isEqualToNumber:@2]){
+            if (_sceneListMarr.count == 0) {
+                return;
+            }
             SceneInfoViewController * sceneInfoVC = [[SceneInfoViewController alloc] init];
             sceneInfoVC.sceneId = _sceneIdMarr[indexPath.row];
             [self.navigationController pushViewController:sceneInfoVC animated:YES];

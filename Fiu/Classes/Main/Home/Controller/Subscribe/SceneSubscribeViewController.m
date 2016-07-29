@@ -155,8 +155,8 @@ static NSString *const URLSubScene = @"/my/my_subscription";
 
 #pragma mark - 应用第一次打开，加载操作指示图
 - (void)setFirstAppStart {
-    if(![[NSUserDefaults standardUserDefaults] boolForKey:@"firstLaunch"]){
-        [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"firstLaunch"];
+    if(![[NSUserDefaults standardUserDefaults] boolForKey:@"userSuLaunch"]){
+        [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"userSuLaunch"];
         NSLog(@"第一次启动");
     }else{
         NSLog(@"已经不是第一次启动了");

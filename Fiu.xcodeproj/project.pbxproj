@@ -553,6 +553,7 @@
 		D8E3AEBF1D003F4D006E5E8C /* FBRefresh.m in Sources */ = {isa = PBXBuildFile; fileRef = D8E3AEBE1D003F4D006E5E8C /* FBRefresh.m */; };
 		D8F1C2B01D3A377900AE717F /* CatagoryFiuSceneModel.m in Sources */ = {isa = PBXBuildFile; fileRef = D8F1C2AF1D3A377900AE717F /* CatagoryFiuSceneModel.m */; };
 		D8F1C2B31D3BED3F00AE717F /* EditChooseTagsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D8F1C2B21D3BED3F00AE717F /* EditChooseTagsViewController.m */; };
+		D8F89E301D4B26860098F158 /* NoSubscribeView.m in Sources */ = {isa = PBXBuildFile; fileRef = D8F89E2F1D4B26860098F158 /* NoSubscribeView.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -1539,6 +1540,8 @@
 		D8F1C2AF1D3A377900AE717F /* CatagoryFiuSceneModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CatagoryFiuSceneModel.m; sourceTree = "<group>"; };
 		D8F1C2B11D3BED3F00AE717F /* EditChooseTagsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EditChooseTagsViewController.h; sourceTree = "<group>"; };
 		D8F1C2B21D3BED3F00AE717F /* EditChooseTagsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EditChooseTagsViewController.m; sourceTree = "<group>"; };
+		D8F89E2E1D4B26860098F158 /* NoSubscribeView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NoSubscribeView.h; sourceTree = "<group>"; };
+		D8F89E2F1D4B26860098F158 /* NoSubscribeView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NoSubscribeView.m; sourceTree = "<group>"; };
 		E0438B4B24E3F747F761AF4C /* Pods-Fiu.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Fiu.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Fiu/Pods-Fiu.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -2275,6 +2278,7 @@
 		1F2A8CDC1CF40276005116C7 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				D8F89E2D1D4B267C0098F158 /* Subscribe */,
 				D89CFE091D052AA7002701B8 /* RollSceneInfo */,
 				1F2A8CDD1CF40276005116C7 /* Home */,
 				1F2A8CE01CF40276005116C7 /* Other */,
@@ -4153,6 +4157,15 @@
 			path = CatagoryFiuScene;
 			sourceTree = "<group>";
 		};
+		D8F89E2D1D4B267C0098F158 /* Subscribe */ = {
+			isa = PBXGroup;
+			children = (
+				D8F89E2E1D4B26860098F158 /* NoSubscribeView.h */,
+				D8F89E2F1D4B26860098F158 /* NoSubscribeView.m */,
+			);
+			path = Subscribe;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -4700,6 +4713,7 @@
 				1F2A8F741CF40277005116C7 /* FiuSceneLocation.m in Sources */,
 				1FCDCC871D07F50D00C92E78 /* ServiceViewController.m in Sources */,
 				1F2A90311CF40277005116C7 /* DirectMessagesViewController.m in Sources */,
+				D8F89E301D4B26860098F158 /* NoSubscribeView.m in Sources */,
 				1F2A8FC61CF40277005116C7 /* GoodsInfo.m in Sources */,
 				1F2A90451CF40277005116C7 /* FBSignupViewController.m in Sources */,
 				1F533E1A1D3E2793006FC72D /* ForgetViewController.m in Sources */,

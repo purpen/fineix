@@ -82,6 +82,7 @@
 "pleaseChooseFiuScene" = "请选择一个地盘";
 "recommendTag" = "推荐标签";
 "WriteAddTag" = "请输入标签";
+"NoSubscribe" = "“点击订阅地盘，自由收看大千世界”";
 
 //  搜索框提示
 "searchLocation" = "搜索地点";

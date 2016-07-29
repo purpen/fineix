@@ -664,15 +664,31 @@
                     <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                     <nil key="highlightedColor"/>
                 </label>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="uAI-uA-MwD">
+                    <rect key="frame" x="128" y="184" width="120" height="35"/>
+                    <color key="backgroundColor" red="0.74509803919999995" green="0.53725490200000003" blue="0.078431372550000003" alpha="1" colorSpace="calibratedRGB"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="120" id="qqQ-A7-FdN"/>
+                        <constraint firstAttribute="height" constant="35" id="z15-Ei-qro"/>
+                    </constraints>
+                    <state key="normal" title="去创建">
+                        <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </state>
+                    <connections>
+                        <action selector="creatBtnClick:" destination="ILW-cD-a5y" eventType="touchUpInside" id="c07-Zy-dDs"/>
+                    </connections>
+                </button>
             </subviews>
             <color key="backgroundColor" red="0.96862745098039216" green="0.96862745098039216" blue="0.96862745098039216" alpha="1" colorSpace="calibratedRGB"/>
             <constraints>
+                <constraint firstItem="uAI-uA-MwD" firstAttribute="top" secondItem="aLu-j0-oCg" secondAttribute="bottom" constant="30" id="5NK-yW-6Rv"/>
                 <constraint firstItem="00J-qs-IiC" firstAttribute="centerY" secondItem="ILW-cD-a5y" secondAttribute="centerY" id="CeW-4A-GOG"/>
                 <constraint firstItem="00J-qs-IiC" firstAttribute="top" secondItem="ILW-cD-a5y" secondAttribute="top" constant="86" id="D2k-aa-wsJ"/>
                 <constraint firstItem="00J-qs-IiC" firstAttribute="centerX" secondItem="ILW-cD-a5y" secondAttribute="centerX" id="Jfy-pU-Txs"/>
                 <constraint firstItem="00J-qs-IiC" firstAttribute="top" secondItem="ILW-cD-a5y" secondAttribute="top" constant="86" id="i5k-Ir-OGs"/>
                 <constraint firstItem="aLu-j0-oCg" firstAttribute="centerX" secondItem="ILW-cD-a5y" secondAttribute="centerX" id="mR6-ST-Bdf"/>
                 <constraint firstItem="aLu-j0-oCg" firstAttribute="top" secondItem="00J-qs-IiC" secondAttribute="bottom" constant="8" id="oal-5c-9Y1"/>
+                <constraint firstItem="uAI-uA-MwD" firstAttribute="centerX" secondItem="ILW-cD-a5y" secondAttribute="centerX" id="zp2-Pp-eAG"/>
             </constraints>
             <nil key="simulatedStatusBarMetrics"/>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
@@ -683,6 +699,7 @@
                 </mask>
             </variation>
             <connections>
+                <outlet property="creatBtn" destination="uAI-uA-MwD" id="fhQ-bG-edE"/>
                 <outlet property="tipLabel" destination="aLu-j0-oCg" id="5e0-i3-oll"/>
             </connections>
             <point key="canvasLocation" x="297.5" y="2596.5"/>
