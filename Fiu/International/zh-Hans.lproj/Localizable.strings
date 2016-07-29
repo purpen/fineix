@@ -59,6 +59,7 @@
 "againLocationing" = "正在重新定位";
 "searchLocationError" = "搜索位置出错";
 "openGPS" = "请开启GPS定位服务";
+"GetLocationError" = "定位失败了";
 "flashOn" = "闪光灯已打开";
 "flashOff" = "闪光灯已关闭";
 "flashError" = "闪光灯不可用";
