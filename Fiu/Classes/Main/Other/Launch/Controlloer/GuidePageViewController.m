@@ -28,6 +28,11 @@
 static NSString *userActivationUrl = @"/gateway/record_fiu_user_active";
 @implementation GuidePageViewController
 
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    
+}
+
 -(instancetype)initWithPicArr:(NSArray *)picArr andRootVC:(UIViewController *)controller{
     if (self == [super init]) {
         _pictureArr = picArr;
@@ -118,10 +123,19 @@ static NSString *userActivationUrl = @"/gateway/record_fiu_user_active";
         layer.videoGravity = AVLayerVideoGravityResizeAspectFill;
         [self.view.layer addSublayer:layer];
         
-        
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(playAv) name:UIApplicationDidBecomeActiveNotification object:nil];
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(stopAv) name:UIApplicationDidEnterBackgroundNotification object:nil];
         [[NSNotificationCenter  defaultCenter] addObserver:self selector:@selector(startRollImg) name:AVPlayerItemDidPlayToEndTimeNotification object:nil];
     }
     return _player;
+}
+
+- (void)stopAv {
+    [self.player pause];
+}
+
+- (void)playAv {
+    [self.player play];
 }
 
 - (void)startRollImg {
@@ -263,6 +277,8 @@ static NSString *userActivationUrl = @"/gateway/record_fiu_user_active";
 
 - (void)dealloc {
     [[NSNotificationCenter defaultCenter] removeObserver:self name:AVPlayerItemDidPlayToEndTimeNotification object:nil];
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:UIApplicationDidBecomeActiveNotification object:nil];
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:UIApplicationDidEnterBackgroundNotification object:nil];
 }
 
 @end
