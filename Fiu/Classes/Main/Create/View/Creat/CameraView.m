@@ -29,7 +29,6 @@
             make.top.equalTo(self.mas_top).with.offset((SCREEN_WIDTH  *1.33) + 10);
             make.centerX.equalTo(self);
         }];
-
     }
     return self;
 }

@@ -20,13 +20,15 @@
     
     [self setFirstAppStart];
     
-    if (self.pictureView.hidden == YES) {
-        if (self.cameraView.session) {
-            [self.cameraView.session startRunning];
+    if ([self isAllowMedia]) {
+        if (self.pictureView.hidden == YES) {
+            if (self.cameraView.session) {
+                [self.cameraView.session startRunning];
+            }
         }
     }
     
-     [self setNavViewUI];
+    [self setNavViewUI];
 }
 
 - (void)viewDidLoad {
@@ -118,11 +120,13 @@
 #pragma mark 底部选项的点击事件
 - (void)buttonDidSeletedWithIndex:(NSInteger)index {
     if (index == 1) {
-        if (self.cameraView.session) {
-            [self.cameraView.session startRunning];
+        if ([self isAllowMedia]) {
+            if (self.cameraView.session) {
+                [self.cameraView.session startRunning];
+            }
+            self.pictureView.hidden = YES;
+            [self.view addSubview:self.cameraView];
         }
-        self.pictureView.hidden = YES;
-        [self.view addSubview:self.cameraView];
         
     } else if (index == 0) {
         if (self.cameraView.session) {
@@ -132,6 +136,24 @@
         self.pictureView.hidden = NO;
 
     }
+}
+
+- (BOOL)isAllowMedia{
+    BOOL isMedia;
+    NSString *mediaMessage = @"请在设置->隐私->相机 中打开本应用的访问权限";
+    AVAuthorizationStatus authStatus = [AVCaptureDevice authorizationStatusForMediaType:AVMediaTypeVideo];
+    if (authStatus == AVAuthorizationStatusRestricted || authStatus == AVAuthorizationStatusDenied) {
+        isMedia = NO;
+    }else{
+        isMedia = YES;
+    }
+    if (!isMedia) {
+        UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"提示" message:mediaMessage delegate:nil cancelButtonTitle:@"确定" otherButtonTitles:nil, nil];
+        alertView.tag = 7;
+        alertView.delegate = self;
+        [alertView show];
+    }
+    return isMedia;
 }
 
 #pragma mark - 相册的页面

@@ -10,6 +10,8 @@
 #import "FBFootView.h"
 #import "CameraView.h"
 #import "PictureView.h"
+#import <AVFoundation/AVFoundation.h>
+#import <AVFoundation/AVMediaFormat.h>
 
 @interface CreateViewController : FBPictureViewController
 
