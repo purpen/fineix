@@ -437,6 +437,9 @@
 		1FD59C141D115FD50025A800 /* ProjectViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1FD59C121D115FD50025A800 /* ProjectViewController.xib */; };
 		1FD59C181D11A8190025A800 /* ProjectViewCommentsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1FD59C161D11A8190025A800 /* ProjectViewCommentsViewController.m */; };
 		1FD5BD7A1D12565100EB345D /* ProjectModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 1FD5BD791D12565100EB345D /* ProjectModel.m */; };
+		1FF36E9A1D4F192400EB3C93 /* JDPayViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1FF36E981D4F192400EB3C93 /* JDPayViewController.m */; };
+		1FF36E9B1D4F192400EB3C93 /* JDPayViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1FF36E991D4F192400EB3C93 /* JDPayViewController.xib */; };
+		1FF36EA01D4F401600EB3C93 /* JDPayModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 1FF36E9F1D4F401600EB3C93 /* JDPayModel.m */; };
 		280045111C805B78005F5C2E /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 280045101C805B78005F5C2E /* CoreLocation.framework */; };
 		280045131C805B82005F5C2E /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 280045121C805B82005F5C2E /* QuartzCore.framework */; };
 		280045151C805B8C005F5C2E /* OpenGLES.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 280045141C805B8C005F5C2E /* OpenGLES.framework */; };
@@ -486,8 +489,6 @@
 		D847632B1D41CE3900C88379 /* MarkGoodsView.m in Sources */ = {isa = PBXBuildFile; fileRef = D847632A1D41CE3900C88379 /* MarkGoodsView.m */; };
 		D847632E1D424DCD00C88379 /* ShowContentView.m in Sources */ = {isa = PBXBuildFile; fileRef = D847632D1D424DCD00C88379 /* ShowContentView.m */; };
 		D84763311D426EED00C88379 /* AddTagsView.m in Sources */ = {isa = PBXBuildFile; fileRef = D84763301D426EED00C88379 /* AddTagsView.m */; };
-		D84763341D427E0100C88379 /* AdSupport.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D84763321D427E0100C88379 /* AdSupport.framework */; };
-		D84763351D427E0100C88379 /* iAd.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D84763331D427E0100C88379 /* iAd.framework */; };
 		D84763381D427F7500C88379 /* AppDelegate+UMAnalytics.m in Sources */ = {isa = PBXBuildFile; fileRef = D84763371D427F7500C88379 /* AppDelegate+UMAnalytics.m */; };
 		D847633A1D427FCA00C88379 /* UMMobClick.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D84763391D427FCA00C88379 /* UMMobClick.framework */; };
 		D8615C551D0FDC4E00C12FA2 /* EditViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D8615C541D0FDC4E00C12FA2 /* EditViewController.m */; };
@@ -1343,6 +1344,11 @@
 		1FD59C161D11A8190025A800 /* ProjectViewCommentsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ProjectViewCommentsViewController.m; sourceTree = "<group>"; };
 		1FD5BD781D12565100EB345D /* ProjectModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProjectModel.h; sourceTree = "<group>"; };
 		1FD5BD791D12565100EB345D /* ProjectModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ProjectModel.m; sourceTree = "<group>"; };
+		1FF36E971D4F192400EB3C93 /* JDPayViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JDPayViewController.h; sourceTree = "<group>"; };
+		1FF36E981D4F192400EB3C93 /* JDPayViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JDPayViewController.m; sourceTree = "<group>"; };
+		1FF36E991D4F192400EB3C93 /* JDPayViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = JDPayViewController.xib; sourceTree = "<group>"; };
+		1FF36E9E1D4F401600EB3C93 /* JDPayModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JDPayModel.h; sourceTree = "<group>"; };
+		1FF36E9F1D4F401600EB3C93 /* JDPayModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JDPayModel.m; sourceTree = "<group>"; };
 		280045101C805B78005F5C2E /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
 		280045121C805B82005F5C2E /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		280045141C805B8C005F5C2E /* OpenGLES.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGLES.framework; path = System/Library/Frameworks/OpenGLES.framework; sourceTree = SDKROOT; };
@@ -1550,8 +1556,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D84763341D427E0100C88379 /* AdSupport.framework in Frameworks */,
-				D84763351D427E0100C88379 /* iAd.framework in Frameworks */,
 				D8AC3E011D2CFFEC00148522 /* libz.1.2.5.tbd in Frameworks */,
 				1FA4BDFC1D35F2200067A196 /* TencentOpenAPI.framework in Frameworks */,
 				D8AC3DFF1D2CFFD600148522 /* libstdc++.6.tbd in Frameworks */,
@@ -3371,6 +3375,9 @@
 				1F2A8ED21CF40277005116C7 /* PaySuccessViewController.h */,
 				1F2A8ED31CF40277005116C7 /* PaySuccessViewController.m */,
 				1F2A8ED41CF40277005116C7 /* PaySuccessViewController.xib */,
+				1FF36E971D4F192400EB3C93 /* JDPayViewController.h */,
+				1FF36E981D4F192400EB3C93 /* JDPayViewController.m */,
+				1FF36E991D4F192400EB3C93 /* JDPayViewController.xib */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -3380,6 +3387,8 @@
 			children = (
 				1F2A8ED61CF40277005116C7 /* WXSignParams.h */,
 				1F2A8ED71CF40277005116C7 /* WXSignParams.m */,
+				1FF36E9E1D4F401600EB3C93 /* JDPayModel.h */,
+				1FF36E9F1D4F401600EB3C93 /* JDPayModel.m */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -4313,6 +4322,7 @@
 				1F2A90861CF40277005116C7 /* OrderInfoCell.xib in Resources */,
 				D812815C1CAA8532007CF08B /* InfoPlist.strings in Resources */,
 				1FA4BDED1D35F2200067A196 /* UMSocialLocalizable.strings in Resources */,
+				1FF36E9B1D4F192400EB3C93 /* JDPayViewController.xib in Resources */,
 				1F2A90741CF40277005116C7 /* MyOderInfoViewController.xib in Resources */,
 				1FA4BDFD1D35F2200067A196 /* TencentOpenApi_IOS_Bundle.bundle in Resources */,
 				1F2A90521CF40277005116C7 /* Login.xib in Resources */,
@@ -4503,6 +4513,7 @@
 				1F2A8F811CF40277005116C7 /* FiuSceneCollectionViewCell.m in Sources */,
 				1F2A902F1CF40277005116C7 /* DeliveryAddressCell.m in Sources */,
 				1F2A901C1CF40277005116C7 /* BonusModel.m in Sources */,
+				1FF36E9A1D4F192400EB3C93 /* JDPayViewController.m in Sources */,
 				1F2A8FB21CF40277005116C7 /* MallViewController.m in Sources */,
 				D81EA4011D2A52DD0032FAAB /* FiuBrandListViewController.m in Sources */,
 				1F2A907B1CF40277005116C7 /* TaoBaoOrderViewController.m in Sources */,
@@ -4724,6 +4735,7 @@
 				1F2A90901CF40277005116C7 /* QrShareSheetViewController.m in Sources */,
 				1F2A90651CF40277005116C7 /* SystemNoticeModel.m in Sources */,
 				D8BE89DB1D33419000DE5029 /* FBBrandGoodsCollectionViewCell.m in Sources */,
+				1FF36EA01D4F401600EB3C93 /* JDPayModel.m in Sources */,
 				1F2A8FBF1CF40277005116C7 /* CommentModel.m in Sources */,
 				1F2A8FCF1CF40277005116C7 /* ChildTagsCollectionViewCell.m in Sources */,
 				1F2A8FC21CF40277005116C7 /* CommentModelRow.m in Sources */,
@@ -4857,7 +4869,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 9.2;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
-				PROVISIONING_PROFILE = "38736fb6-f8a9-4075-b98f-85f06063d856";
+				PROVISIONING_PROFILE = "68229318-888d-4d23-9586-1a46706c4314";
 				SDKROOT = iphoneos;
 			};
 			name = Debug;
@@ -4895,7 +4907,7 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.2;
 				MTL_ENABLE_DEBUG_INFO = NO;
-				PROVISIONING_PROFILE = "38736fb6-f8a9-4075-b98f-85f06063d856";
+				PROVISIONING_PROFILE = "68229318-888d-4d23-9586-1a46706c4314";
 				SDKROOT = iphoneos;
 				VALIDATE_PRODUCT = YES;
 			};
@@ -4942,7 +4954,7 @@
 				OTHER_LIBTOOLFLAGS = "-all_load";
 				PRODUCT_BUNDLE_IDENTIFIER = com.THN.fineix;
 				PRODUCT_NAME = Fiu;
-				PROVISIONING_PROFILE = "38736fb6-f8a9-4075-b98f-85f06063d856";
+				PROVISIONING_PROFILE = "68229318-888d-4d23-9586-1a46706c4314";
 				RUN_CLANG_STATIC_ANALYZER = NO;
 				USER_HEADER_SEARCH_PATHS = "$(SRCROOT)";
 			};
@@ -4989,7 +5001,7 @@
 				OTHER_LIBTOOLFLAGS = "-all_load";
 				PRODUCT_BUNDLE_IDENTIFIER = com.THN.fineix;
 				PRODUCT_NAME = Fiu;
-				PROVISIONING_PROFILE = "38736fb6-f8a9-4075-b98f-85f06063d856";
+				PROVISIONING_PROFILE = "68229318-888d-4d23-9586-1a46706c4314";
 				RUN_CLANG_STATIC_ANALYZER = NO;
 				USER_HEADER_SEARCH_PATHS = "$(SRCROOT)";
 			};
