@@ -279,7 +279,12 @@
     self.goodsChoose.text = [NSString stringWithFormat:@"已选：%@", [self.goodsSkus valueForKey:@"mode"][indexPath.row]];
     self.goodsPrice.text = [NSString stringWithFormat:@"￥%@", [self.goodsSkus valueForKey:@"price"][indexPath.row]];
     self.quantity = [[self.goodsSkus valueForKey:@"quantity"][indexPath.row] integerValue];
-    self.chooseNum.text = @"1";
+    if (self.quantity == 0) {
+        [self NotCanBuy];
+    } else {
+        [self IsCanBuy];
+        self.chooseNum.text = @"1";
+    }
     self.num = 1;
     if ([[self.goodsSkus valueForKey:@"mode"][indexPath.row] isEqualToString:NSLocalizedString(@"Default", nil)]) {
         self.skuId = [NSString stringWithFormat:@"%@", [self.goodsSkus valueForKey:@"targetId"][indexPath.row]];
@@ -291,6 +296,30 @@
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath {
     CGFloat btnLength = [[[self.goodsSkus valueForKey:@"mode"] objectAtIndex:indexPath.row] boundingRectWithSize:CGSizeMake(320, 1000) options:(NSStringDrawingUsesLineFragmentOrigin) attributes:nil context:nil].size.width;
     return CGSizeMake(btnLength + 40, 30);
+}
+
+- (void)NotCanBuy {
+    [self showMessage:@"库存不足了"];
+    
+    self.addCarBtn.backgroundColor = [UIColor colorWithHexString:@"#999999"];
+    self.addCarBtn.userInteractionEnabled = NO;
+    
+    self.buyingBtn.backgroundColor = [UIColor colorWithHexString:@"#666666"];
+    self.buyingBtn.userInteractionEnabled = NO;
+    
+    self.subBtn.userInteractionEnabled = NO;
+    self.addBtn.userInteractionEnabled = NO;
+}
+
+- (void)IsCanBuy {
+    self.addCarBtn.backgroundColor = [UIColor colorWithHexString:@"#DB9E18"];
+    self.addCarBtn.userInteractionEnabled = YES;
+    
+    self.buyingBtn.backgroundColor = [UIColor colorWithHexString:@"#BE8914"];
+    self.buyingBtn.userInteractionEnabled = YES;
+    
+    self.subBtn.userInteractionEnabled = YES;
+    self.addBtn.userInteractionEnabled = YES;
 }
 
 #pragma mark - 选择数量视图
