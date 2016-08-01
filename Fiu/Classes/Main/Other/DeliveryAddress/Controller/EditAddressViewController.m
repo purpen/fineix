@@ -125,10 +125,27 @@ static NSString *const DeleteAddressURL = @"/shopping/remove_address";
 
 
 - (IBAction)submitBtn:(UIButton *)sender {
-    if (self.nameTF.text.length < 2 || ![self.phoneNumTF.text checkTel] || self.zipTF.text.length != 6 || self.prinLabel.text.length == 0 || self.cityLabel.text.length == 0 || self.detailsAddressTF.text.length < 5) {
-        [SVProgressHUD showInfoWithStatus:@"信息格式有误，请修改后提交"];
+    if (self.nameTF.text.length < 2) {
+        [SVProgressHUD showInfoWithStatus:@"请补全姓名"];
         return;
     }
+    if (self.phoneNumTF.text.length != 11) {
+        [SVProgressHUD showInfoWithStatus:@"手机号位数不对"];
+        return;
+    }
+    if (self.zipTF.text.length != 6) {
+        [SVProgressHUD showInfoWithStatus:@"邮编位数不对"];
+        return;
+    }
+    if (self.prinLabel.text.length == 0 || self.cityLabel.text.length == 0) {
+        [SVProgressHUD showInfoWithStatus:@"省市未填写"];
+        return;
+    }
+    if (self.detailsAddressTF.text.length < 5) {
+        [SVProgressHUD showInfoWithStatus:@"详细地址字数不能小于5位"];
+        return;
+    }
+    
     [self requestDataForCommitAddress];
 }
 
