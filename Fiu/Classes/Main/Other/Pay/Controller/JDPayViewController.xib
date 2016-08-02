@@ -5,9 +5,9 @@
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
     </dependencies>
     <objects>
-        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="MessagesssViewController">
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="JDPayViewController">
             <connections>
-                <outlet property="myTbaleView" destination="GvE-2b-Ddp" id="y2U-lq-l1p"/>
+                <outlet property="jdPayWenView" destination="uvO-jS-hYC" id="a2u-hL-Zga"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>
@@ -16,17 +16,17 @@
             <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="none" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="GvE-2b-Ddp">
+                <webView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="uvO-jS-hYC">
                     <rect key="frame" x="0.0" y="44" width="375" height="623"/>
-                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                </tableView>
+                    <color key="backgroundColor" red="0.36078431370000003" green="0.38823529410000002" blue="0.4039215686" alpha="1" colorSpace="deviceRGB"/>
+                </webView>
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
             <constraints>
-                <constraint firstItem="GvE-2b-Ddp" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="44" id="Dvh-Uu-caa"/>
-                <constraint firstAttribute="trailing" secondItem="GvE-2b-Ddp" secondAttribute="trailing" id="RiT-ew-AkS"/>
-                <constraint firstAttribute="bottom" secondItem="GvE-2b-Ddp" secondAttribute="bottom" id="iHP-Se-0gz"/>
-                <constraint firstItem="GvE-2b-Ddp" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="nZj-vf-guy"/>
+                <constraint firstItem="uvO-jS-hYC" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="8By-DZ-0Bn"/>
+                <constraint firstItem="uvO-jS-hYC" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="44" id="GqW-nk-up9"/>
+                <constraint firstAttribute="trailing" secondItem="uvO-jS-hYC" secondAttribute="trailing" id="M9z-CC-1SB"/>
+                <constraint firstAttribute="bottom" secondItem="uvO-jS-hYC" secondAttribute="bottom" id="SSt-TV-o4P"/>
             </constraints>
             <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
         </view>

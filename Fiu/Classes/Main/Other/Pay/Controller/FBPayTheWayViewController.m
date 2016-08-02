@@ -18,6 +18,7 @@
 #import <AlipaySDK/AlipaySDK.h>
 #import "GoodsCarViewController.h"
 #import "PaySuccessViewController.h"
+#import "JDPayViewController.h"
 
 #define wayBtnTag 55
 #define chooseBtnTag 66
@@ -48,9 +49,9 @@
 - (void)loadingPayWayView {
     [self.view addSubview:self.payTheWayView];
     
-    NSArray * payTitleArr = [NSArray arrayWithObjects:@"支付宝",@"微信支付", nil];
-    NSArray * payImgArr = [NSArray arrayWithObjects:@"zhifubao",@"weixinpay", nil];
-    for (NSInteger idx = 0; idx < 2; idx++) {
+    NSArray * payTitleArr = [NSArray arrayWithObjects:@"支付宝",@"微信支付",@"京东支付", nil];
+    NSArray * payImgArr = [NSArray arrayWithObjects:@"zhifubao",@"weixinpay",@"jingDong", nil];
+    for (NSInteger idx = 0; idx < payTitleArr.count; idx++) {
         UIButton * wayBtn = [[UIButton alloc] initWithFrame:CGRectMake(0, 70+ 60*idx, SCREEN_WIDTH, 50)];
         wayBtn.backgroundColor = [UIColor whiteColor];
         wayBtn.tag = idx + wayBtnTag;
@@ -71,6 +72,8 @@
             self.chooseAliPayBtn = chooseBtn;
         } else if (chooseBtn.tag == chooseBtnTag + 1) {
             self.chooseWeChatBtn = chooseBtn;
+        }else if (chooseBtn.tag == chooseBtnTag + 2){
+            self.chooseJDPayBtn = chooseBtn;
         }
         
         [wayBtn addSubview:chooseBtn];
@@ -109,11 +112,18 @@
     if (button.tag == wayBtnTag) {
         self.chooseAliPayBtn.selected = YES;
         self.chooseWeChatBtn.selected = NO;
+        self.chooseJDPayBtn.selected = NO;
         self.paymentWay = 1;
     } else if (button.tag == wayBtnTag +1) {
         self.chooseWeChatBtn.selected = YES;
         self.chooseAliPayBtn.selected = NO;
+        self.chooseJDPayBtn.selected = NO;
         self.paymentWay = 2;
+    }else if (button.tag == wayBtnTag + 2){
+        self.chooseWeChatBtn.selected = NO;
+        self.chooseAliPayBtn.selected = NO;
+        self.chooseJDPayBtn.selected = YES;
+        self.paymentWay = 3;
     }
 }
 
@@ -181,7 +191,7 @@
 }
 
 - (void)okPayClick {
-    if (self.chooseAliPayBtn.selected == NO && self.chooseWeChatBtn.selected == NO) {
+    if (self.chooseAliPayBtn.selected == NO && self.chooseWeChatBtn.selected == NO && self.chooseJDPayBtn.selected == NO) {
         [SVProgressHUD showInfoWithStatus:@"请选择支付方式"];
     } else {
         //跳转到第三方支付软件
@@ -235,6 +245,15 @@
                 }];
             }
                 break;
+                
+            case 3: //京东支付
+            {
+                JDPayViewController *vc = [[JDPayViewController alloc] init];
+                vc.rid = self.orderInfo.rid;
+                [self.navigationController pushViewController:vc animated:YES];
+            }
+                break;
+
             default:
                 break;
         }

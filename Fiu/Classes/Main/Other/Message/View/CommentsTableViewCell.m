@@ -76,9 +76,10 @@
         
         [self.contentView addSubview:self.msgLabel];
         [_msgLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.size.mas_equalTo(CGSizeMake(248/667.0*SCREEN_HEIGHT, 35/667.0*SCREEN_HEIGHT));
             make.left.mas_equalTo(_headImageView.mas_right).with.offset(10/667.0*SCREEN_HEIGHT);
-            make.top.mas_equalTo(_titleLbael.mas_bottom).with.offset(-3);
+            make.top.mas_equalTo(_titleLbael.mas_bottom).with.offset(-5/667.0*SCREEN_HEIGHT);
+            make.bottom.mas_equalTo(self.contentView.mas_bottom).offset(-5/667.0*SCREEN_HEIGHT);
+            make.right.mas_equalTo(self.iconImageView.mas_left).offset(-5/667.0*SCREEN_HEIGHT);
         }];
         
         [self.contentView addSubview:self.lineView];
@@ -179,7 +180,7 @@
             _msgLabel.font = [UIFont systemFontOfSize:10];
         }
         _msgLabel.textColor = [UIColor lightGrayColor];
-        _msgLabel.numberOfLines = 0;
+        _msgLabel.numberOfLines = 1;
     }
     return _msgLabel;
 }

@@ -17,6 +17,8 @@
 @property (strong, nonatomic) UIButton              *       wayBtnSelected;
 @property (strong, nonatomic) UIButton              *       chooseWeChatBtn;
 @property (strong, nonatomic) UIButton              *       chooseAliPayBtn;
+/** jd支付按钮 */
+@property (nonatomic, strong) UIButton              *       chooseJDPayBtn;
 @property (strong, nonatomic) UIButton              *       okPayBtn;
 @property (strong, nonatomic) UIView                *       payWayView;
 @property (strong, nonatomic) UILabel               *       payWayTitleView;
