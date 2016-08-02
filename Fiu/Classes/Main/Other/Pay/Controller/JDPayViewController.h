@@ -8,7 +8,10 @@
 
 #import "FBViewController.h"
 
+@class OrderInfoModel;
+
 @interface JDPayViewController : FBViewController
-/** rid */
-@property (nonatomic, strong) NSString *rid;
+
+@property (nonatomic, strong) OrderInfoModel * orderInfo;
+
 @end

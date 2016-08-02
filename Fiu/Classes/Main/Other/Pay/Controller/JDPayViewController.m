@@ -10,8 +10,15 @@
 #import "SVProgressHUD.h"
 #import "JDPayModel.h"
 #import <MJExtension.h>
+#import "PaySuccessViewController.h"
+#import "OrderInfoModel.h"
 
-@interface JDPayViewController ()<UIWebViewDelegate>
+@interface JDPayViewController ()<UIWebViewDelegate,FBNavigationBarItemsDelegate>
+
+{
+    BOOL _flag;
+}
+
 @property (weak, nonatomic) IBOutlet UIWebView *jdPayWenView;
 /**  */
 @property (nonatomic, strong) JDPayModel *model;
@@ -24,10 +31,12 @@ static NSString * const JDPayUrl = @"/shopping/payed";
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    _flag = NO;
     self.navViewTitle.text = @"京东支付";
+    self.delegate = self;
     self.jdPayWenView.delegate = self;
     FBRequest *request = [FBAPI postWithUrlString:JDPayUrl requestDictionary:@{
-                                                                            @"rid":self.rid,
+                                                                            @"rid":self.orderInfo.rid,
                                                                             @"payaway":@"jdpay"
                                                                                } delegate:self];
     [request startRequestSuccess:^(FBRequest *request, id result) {
@@ -43,9 +52,17 @@ static NSString * const JDPayUrl = @"/shopping/payed";
     
 }
 
+-(void)leftBarItemSelected{
+    if (_flag) {
+        [self checkOrderInfoForPayStatusWithPaymentWay:@"京东支付"];
+    }else{
+        [self.navigationController popViewControllerAnimated:YES];
+    }
+}
+
 
 -(void)loadTheJDRequest{
-    [SVProgressHUD showInfoWithStatus:@"正在跳转请稍候"];
+    [SVProgressHUD showWithStatus:@"正在跳转请稍候"];
     NSMutableDictionary *formDic = [[NSMutableDictionary alloc] init];
     [formDic setObject:_model.callbackUrl ? _model.callbackUrl :@"" forKey:@"callbackUrl"];
     [formDic setObject:_model.tradeDesc ? _model.tradeDesc :@"" forKey:@"tradeDesc"];
@@ -97,38 +114,62 @@ static NSString * const JDPayUrl = @"/shopping/payed";
 
 -(BOOL)webView:(UIWebView *)webView shouldStartLoadWithRequest:(NSURLRequest *)request navigationType:(UIWebViewNavigationType)navigationType {
 
-    NSLog(@"request     %@",request.URL);
-    
-    if ([request.URL.absoluteString rangeOfString:@"callbackUrl"].location !=NSNotFound) {
-        if ([request.URL.absoluteString rangeOfString:@"token"].location !=NSNotFound) {
+    if (_flag == NO) {
+        if ([request.URL.absoluteString rangeOfString:@"taihuoniao"].location !=NSNotFound) {
             
-            NSString *token = [[request.URL.absoluteString componentsSeparatedByString:@"token="]lastObject];
-            NSString *gettoken = [[token componentsSeparatedByString:@"&"]firstObject];
-
+            [self checkOrderInfoForPayStatusWithPaymentWay:@"京东支付"];
+            _flag = YES;
             
-            [[NSUserDefaults standardUserDefaults] setObject:gettoken forKey:@"JDTOKEN"];
-            [[NSUserDefaults standardUserDefaults] synchronize];
-            
-            
-            [self.navigationController popToViewController:self.navigationController.viewControllers[self.navigationController.viewControllers.count - 3] animated:YES];
-        } else {
-            UIAlertView *alt=[[UIAlertView alloc] initWithTitle:@"支付失败" message:nil delegate:self cancelButtonTitle:@"稍后尝试" otherButtonTitles:@"再次提交",nil];
-            alt.tag=1000;
-            [alt show];
         }
     }
+    
     return YES;
 }
+
+//请求订单状态以核实支付是否完成
+- (void)checkOrderInfoForPayStatusWithPaymentWay:(NSString *)paymentWay
+{
+    FBRequest * request = [FBAPI postWithUrlString:@"/shopping/detail" requestDictionary:@{@"rid": self.orderInfo.rid} delegate:self];
+    [SVProgressHUD showWithStatus:@"正在核实支付结果..." maskType:SVProgressHUDMaskTypeClear];
+    //延迟2秒执行以保证服务端已获取支付通知
+    double delayInSeconds = 2.0;
+    dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, delayInSeconds * NSEC_PER_SEC);
+    dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
+        
+        WEAKSELF
+        [request startRequestSuccess:^(FBRequest *request, id result) {
+            NSDictionary * dataDic = [result objectForKey:@"data"];
+            if ([[dataDic objectForKey:@"status"] isEqualToNumber:@10]) {
+                PaySuccessViewController * paySuccessVC = [[PaySuccessViewController alloc] initWithNibName:@"PaySuccessViewController" bundle:nil];
+                paySuccessVC.orderInfo = weakSelf.orderInfo;
+                paySuccessVC.paymentWay = paymentWay;
+                [weakSelf.navigationController pushViewController:paySuccessVC animated:YES];
+                [SVProgressHUD showSuccessWithStatus:@"您的订单已经支付成功"];
+            } else {
+                [SVProgressHUD showErrorWithStatus:@"您的订单尚未支付成功，请刷新重试或者重新下单"];
+                UIAlertView *alt=[[UIAlertView alloc] initWithTitle:@"支付失败" message:nil delegate:self cancelButtonTitle:@"稍后尝试" otherButtonTitles:@"再次提交",nil];
+                alt.tag=1000;
+                [alt show];
+            }
+        } failure:^(FBRequest *request, NSError *error) {
+            [SVProgressHUD showInfoWithStatus:[error localizedDescription]];
+        }];
+    });
+}
+
 
 -(void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex {
     if (alertView.tag ==1000) {
         if (buttonIndex == alertView.cancelButtonIndex) {
+            [alertView dismissWithClickedButtonIndex:buttonIndex animated:YES];
             [self.navigationController popViewControllerAnimated:YES];
         } else {
             [self loadTheJDRequest];
         }
     }
 }
+
+
 
 -(void)webViewDidFinishLoad:(UIWebView *)webView {
     [SVProgressHUD dismiss];

@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="10117" systemVersion="15C50" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="94" id="KGk-i7-Jjw" customClass="SearchPepoleTableViewCell">
+            <rect key="frame" x="0.0" y="0.0" width="320" height="94"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
+                <rect key="frame" x="0.0" y="0.0" width="320" height="93"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="UqL-OQ-9xD" userLabel="用户头像">
+                        <rect key="frame" x="5" y="29" width="35" height="35"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="35" id="Xpg-KY-etu"/>
+                            <constraint firstAttribute="width" constant="35" id="aiS-cq-dQn"/>
+                        </constraints>
+                        <state key="normal" image="default_head"/>
+                    </button>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="J6Q-jo-UGB" userLabel="昵称">
+                        <rect key="frame" x="45" y="26" width="0.0" height="0.0"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                        <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Pxu-5F-yzH" userLabel="个性签名">
+                        <rect key="frame" x="45" y="31" width="255" height="0.0"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                        <color key="textColor" red="0.40000000000000002" green="0.40000000000000002" blue="0.40000000000000002" alpha="1" colorSpace="calibratedRGB"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <view alpha="0.5" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="w4T-kC-MZE" userLabel="线">
+                        <rect key="frame" x="40" y="92" width="280" height="1"/>
+                        <color key="backgroundColor" red="0.40000000000000002" green="0.40000000000000002" blue="0.40000000000000002" alpha="1" colorSpace="calibratedRGB"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="1" id="Pqu-O1-yjb"/>
+                        </constraints>
+                    </view>
+                </subviews>
+                <constraints>
+                    <constraint firstAttribute="bottom" secondItem="w4T-kC-MZE" secondAttribute="bottom" id="0RS-pj-8fK"/>
+                    <constraint firstItem="Pxu-5F-yzH" firstAttribute="leading" secondItem="J6Q-jo-UGB" secondAttribute="leading" id="3or-Da-zaJ"/>
+                    <constraint firstItem="J6Q-jo-UGB" firstAttribute="top" secondItem="UqL-OQ-9xD" secondAttribute="top" constant="-3" id="9ig-Jw-FH0"/>
+                    <constraint firstItem="Pxu-5F-yzH" firstAttribute="top" secondItem="J6Q-jo-UGB" secondAttribute="bottom" constant="5" id="Aqm-aM-Z9p"/>
+                    <constraint firstItem="J6Q-jo-UGB" firstAttribute="leading" secondItem="UqL-OQ-9xD" secondAttribute="trailing" constant="5" id="GIw-rJ-2vd"/>
+                    <constraint firstItem="w4T-kC-MZE" firstAttribute="leading" secondItem="UqL-OQ-9xD" secondAttribute="trailing" id="GhO-01-OPO"/>
+                    <constraint firstAttribute="trailing" secondItem="Pxu-5F-yzH" secondAttribute="trailing" constant="20" id="IlB-z1-piB"/>
+                    <constraint firstAttribute="trailing" secondItem="w4T-kC-MZE" secondAttribute="trailing" id="e25-pA-hkH"/>
+                    <constraint firstItem="UqL-OQ-9xD" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="5" id="iVI-Xx-09o"/>
+                    <constraint firstItem="Pxu-5F-yzH" firstAttribute="leading" secondItem="J6Q-jo-UGB" secondAttribute="leading" id="uth-q0-l1c"/>
+                    <constraint firstItem="UqL-OQ-9xD" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="wH7-s4-ixB"/>
+                </constraints>
+                <variation key="default">
+                    <mask key="constraints">
+                        <exclude reference="uth-q0-l1c"/>
+                    </mask>
+                </variation>
+            </tableViewCellContentView>
+            <connections>
+                <outlet property="headBtn" destination="UqL-OQ-9xD" id="Og1-rC-22I"/>
+                <outlet property="nickNameLabel" destination="J6Q-jo-UGB" id="5Jd-eM-OUh"/>
+                <outlet property="signatureLabel" destination="Pxu-5F-yzH" id="rRC-LO-3mV"/>
+            </connections>
+            <point key="canvasLocation" x="306" y="420"/>
+        </tableViewCell>
+    </objects>
+    <resources>
+        <image name="default_head" width="80" height="80"/>
+    </resources>
+</document>
