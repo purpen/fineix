@@ -143,6 +143,9 @@
             [self dismissViewControllerAnimated:YES completion:^{
                 self.buyingGoodsBlock(orderDict); 
             }];
+            
+        } else {
+            [self showMessage:@"请选择喜欢的颜色分类"];
         }
        
     } else {
@@ -183,6 +186,9 @@
             [self dismissViewControllerAnimated:YES completion:^{
                 self.addGoodsCarBlock(orderDict);
             }];
+        
+        } else {
+            [self showMessage:@"请选择喜欢的颜色分类"];
         }
         
     } else {

@@ -27,10 +27,20 @@
 
 #pragma mark -
 - (void)setRecommendGoodsData:(NSMutableArray *)model withType:(NSInteger)type {
+    [self setCellUI];
     self.type = type;
     self.goodsData = model;
     self.goodsIds = [model valueForKey:@"idField"];
-    [self setCellUI];
+    
+    if (type == 0) {
+        [self.flowLayout setScrollDirection:(UICollectionViewScrollDirectionVertical)];
+        [_recommendListView mas_updateConstraints:^(MASConstraintMaker *make) {
+            make.height.equalTo(@((self.goodsData.count/2) * (((SCREEN_WIDTH - 40) / 2) * 1.3) + 44));
+        }];
+    } else if (type == 1) {
+        [self.flowLayout setScrollDirection:(UICollectionViewScrollDirectionHorizontal)];
+    }
+    
     [self.recommendListView reloadData];
 }
 
@@ -39,6 +49,11 @@
     [self addSubview:self.headerTitle];
     
     [self addSubview:self.recommendListView];
+    [_recommendListView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.size.mas_equalTo(CGSizeMake(SCREEN_WIDTH, ((SCREEN_WIDTH - 40) / 2) * 1.3));
+        make.top.equalTo(self.headerTitle.mas_bottom).with.offset(0);
+        make.left.equalTo(self.mas_left).with.offset(0);
+    }];
 }
 
 #pragma mark - 标题
@@ -59,16 +74,16 @@
 #pragma mark - 推荐商品列表
 - (UICollectionView *)recommendListView {
     if (!_recommendListView) {
-        UICollectionViewFlowLayout * flowLayout = [[UICollectionViewFlowLayout alloc] init];
-        flowLayout.itemSize = CGSizeMake((SCREEN_WIDTH - 40) / 2, ((SCREEN_WIDTH - 40) / 2) * 1.3);
-        flowLayout.sectionInset = UIEdgeInsetsMake(0, 15, 0, 15);
-        flowLayout.minimumInteritemSpacing = 5.0;
-        [flowLayout setScrollDirection:(UICollectionViewScrollDirectionVertical)];
+        self.flowLayout = [[UICollectionViewFlowLayout alloc] init];
+        self.flowLayout.itemSize = CGSizeMake((SCREEN_WIDTH - 40) / 2, ((SCREEN_WIDTH - 40) / 2) * 1.3);
+        self.flowLayout.sectionInset = UIEdgeInsetsMake(0, 15, 0, 15);
+        self.flowLayout.minimumInteritemSpacing = 5.0;
+        [self.flowLayout setScrollDirection:(UICollectionViewScrollDirectionVertical)];
         
-        _recommendListView = [[UICollectionView alloc] initWithFrame:CGRectMake(0, 44, SCREEN_WIDTH, (self.goodsData.count/2) * (((SCREEN_WIDTH - 40) / 2) * 1.3)) collectionViewLayout:flowLayout];
+        _recommendListView = [[UICollectionView alloc] initWithFrame:CGRectMake(0, 44, SCREEN_WIDTH, ((SCREEN_WIDTH - 40) / 2) * 1.3) collectionViewLayout:self.flowLayout];
         _recommendListView.delegate = self;
         _recommendListView.dataSource = self;
-        _recommendListView.scrollEnabled = NO;
+        _recommendListView.scrollEnabled = YES;
         _recommendListView.backgroundColor = [UIColor whiteColor];
         _recommendListView.showsVerticalScrollIndicator = NO;
         _recommendListView.showsHorizontalScrollIndicator = NO;

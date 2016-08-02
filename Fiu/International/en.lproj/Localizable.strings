@@ -59,6 +59,7 @@
 "againLocationing" = "正在重新定位";
 "searchLocationError" = "搜索位置出错";
 "openGPS" = "请开启GPS定位服务";
+"GetLocationError" = "定位失败了";
 "flashOn" = "闪光灯已打开";
 "flashOff" = "闪光灯已关闭";
 "flashError" = "闪光灯不可用";
@@ -184,7 +185,7 @@
 "fiuFSceneText" = "[圈地盘有收益]";
 "fiuBrand" = "牛Brands";
 "fiuBrandText" = "[尖货这里找]";
-"fiuGoods" = "Fiu东西";
+"fiuGoods" = "Fiu好货";
 "fiuGoodsText" = "[东西不少，牌子不小]";
 "peopleLike" = "人赞";
 "sceneGoods" = "此情景下的好货";

@@ -84,6 +84,7 @@
 "recommendTag" = "推荐标签";
 "WriteAddTag" = "请输入标签";
 "NoSubscribe" = "“点击订阅地盘，自由收看大千世界”";
+"goodsPullLab" = "继续上拉查看商品详情";
 
 //  搜索框提示
 "searchLocation" = "搜索地点";
@@ -185,7 +186,7 @@
 "fiuFSceneText" = "[圈地盘有收益]";
 "fiuBrand" = "牛Brands";
 "fiuBrandText" = "[尖货这里找]";
-"fiuGoods" = "Fiu东西";
+"fiuGoods" = "Fiu好货";
 "fiuGoodsText" = "[东西不少，牌子不小]";
 "peopleLike" = "人赞";
 "sceneGoods" = "此情景下的好货";

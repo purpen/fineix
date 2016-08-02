@@ -110,7 +110,9 @@ static CGFloat const userStarFont = 9.0f;
     
     [self addSubview:self.describeView];
     [_describeView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.size.mas_equalTo(CGSizeMake(SCREEN_WIDTH * 0.68, 50));
+//        make.size.mas_equalTo(CGSizeMake(SCREEN_WIDTH * 0.68, 50));
+        make.height.equalTo(@50);
+        make.right.equalTo(self.qrCode.mas_left).with.offset(-15);
         make.bottom.equalTo(self.mas_bottom).with.offset(-15);
         make.left.equalTo(self.mas_left).with.offset(15);
     }];
