@@ -56,7 +56,7 @@ static NSString *const URLBrandList = @"/scene_brands/getlist";
         NSLog(@"%@",error);
     }];
     
-    self.brandListRequest = [FBAPI getWithUrlString:URLBrandList requestDictionary:@{@"page":@"1", @"size":@"100000", @"sort":@"1"} delegate:self];
+    self.brandListRequest = [FBAPI getWithUrlString:URLBrandList requestDictionary:@{@"page":@"1", @"size":@"100000"} delegate:self];
     [self.brandListRequest startRequestSuccess:^(FBRequest *request, id result) {
         NSArray * brandListArr = [[result valueForKey:@"data"] valueForKey:@"rows"];
         for (NSDictionary * brandDict in brandListArr) {

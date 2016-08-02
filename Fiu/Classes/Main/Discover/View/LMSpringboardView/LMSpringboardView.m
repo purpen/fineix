@@ -206,8 +206,8 @@
     self.decelerationRate = UIScrollViewDecelerationRateFast;
     self.delegate = self;
     
-    self.itemDiameter = 50;
-    self.itemPadding = 30;
+    self.itemDiameter = 45;
+    self.itemPadding = 25;
     self.minimumItemScaling = 0.5;
     
     _transformFactor = 1;

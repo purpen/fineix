@@ -95,7 +95,7 @@ static NSString *const URLFiuPeople = @"/user/activity_user";
 #pragma mark 最Fiu伙伴
 - (void)networkFiuPeopleData {
     [SVProgressHUD show];
-    self.fiuPeopleRequest = [FBAPI getWithUrlString:URLFiuPeople requestDictionary:@{@"page":@"1", @"size":@"100", @"sort":@"1"} delegate:self];
+    self.fiuPeopleRequest = [FBAPI getWithUrlString:URLFiuPeople requestDictionary:@{@"page":@"1", @"size":@"200", @"sort":@"1"} delegate:self];
     [self.fiuPeopleRequest startRequestSuccess:^(FBRequest *request, id result) {
         self.fiuPeopleList = [NSMutableArray arrayWithArray:[[result valueForKey:@"data"] valueForKey:@"rows"]];
         _headerImgArr = [NSArray arrayWithArray:[self.fiuPeopleList valueForKey:@"avatar_url"]];

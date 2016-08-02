@@ -34,7 +34,7 @@ static NSString *const URLBrandList = @"/scene_brands/getlist";
 - (void)networkBrandListData {
     [SVProgressHUD show];
     
-    self.selfBrandListRequest = [FBAPI getWithUrlString:URLBrandList requestDictionary:@{@"page":@"1", @"size":@"100", @"sort":@"1", @"self_run":@"1"} delegate:self];
+    self.selfBrandListRequest = [FBAPI getWithUrlString:URLBrandList requestDictionary:@{@"page":@"1", @"size":@"10000", @"self_run":@"1"} delegate:self];
     [self.selfBrandListRequest startRequestSuccess:^(FBRequest *request, id result) {
         NSArray * selfBrandListArr = [[result valueForKey:@"data"] valueForKey:@"rows"];
         for (NSDictionary * selfBrandDict in selfBrandListArr) {

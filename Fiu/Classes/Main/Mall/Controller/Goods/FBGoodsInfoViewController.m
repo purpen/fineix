@@ -24,7 +24,9 @@ static NSString *const URLGoodsInfo = @"/product/view";
 static NSString *const URLGoodsCommet = @"/comment/getlist";
 static NSString *const URLAddCar = @"/shopping/add_cart";
 
-@interface FBGoodsInfoViewController ()
+@interface FBGoodsInfoViewController () {
+    NSString * _goodsInfoUrl;
+}
 
 @pro_strong FBGoodsInfoModelData        *   goodsInfo;
 @pro_strong NSMutableArray              *   recommendGoods;
@@ -55,7 +57,7 @@ static NSString *const URLAddCar = @"/shopping/add_cart";
     [SVProgressHUD show];
     self.goodsInfoRequest = [FBAPI getWithUrlString:URLGoodsInfo requestDictionary:@{@"id":self.goodsID} delegate:self];
     [self.goodsInfoRequest startRequestSuccess:^(FBRequest *request, id result) {
-        NSLog(@"＝＝＝＝＝＝＝＝ %@", result);
+        _goodsInfoUrl = [[result valueForKey:@"data"] valueForKey:@"content_view_url"];
         [self setThnGoodsInfoVcUI];
         self.goodsInfo = [[FBGoodsInfoModelData alloc] initWithDictionary:[result valueForKey:@"data"]];
         NSArray * goodsArr  = [[result valueForKey:@"data"] valueForKey:@"relation_products"];
@@ -64,8 +66,8 @@ static NSString *const URLAddCar = @"/shopping/add_cart";
             [self.recommendGoods addObject:goodsModel];
         }
         [self.rollImgView setThnGoodsRollImgData:self.goodsInfo];
-        [self networkGoodsCommentData];
         [self.goodsTable reloadData];
+        [self networkGoodsCommentData];
         [SVProgressHUD dismiss];
         
     } failure:^(FBRequest *request, NSError *error) {
@@ -85,6 +87,7 @@ static NSString *const URLAddCar = @"/shopping/add_cart";
             }
         }
         [self.goodsTable reloadData];
+        [self.goodsTable addSubview:self.pullLab];
         
     } failure:^(FBRequest *request, NSError *error) {
         [SVProgressHUD showErrorWithStatus:[error localizedDescription]];
@@ -97,7 +100,7 @@ static NSString *const URLAddCar = @"/shopping/add_cart";
     [self.addCarRequest startRequestSuccess:^(FBRequest *request, id result) {
         if ([[result valueForKey:@"success"] isEqualToNumber:@1]) {
             [self getGoodsCarNumData];
-            [self showMessage:@"加入购物车成功～"];
+            [self showMessage:@"加入购物车成功"];
         }
         
     } failure:^(FBRequest *request, NSError *error) {
@@ -108,6 +111,7 @@ static NSString *const URLAddCar = @"/shopping/add_cart";
 #pragma mark - 设置视图x
 - (void)setThnGoodsInfoVcUI {
     [self.view addSubview:self.goodsTable];
+    [self.view addSubview:self.goodsInfoWeb];
     [self.view addSubview:self.buyView];
 }
 
@@ -118,6 +122,84 @@ static NSString *const URLAddCar = @"/shopping/add_cart";
         _rollImgView.navVC = self.navigationController;
     }
     return _rollImgView;
+}
+
+#pragma mark - 商品详情
+- (UIWebView *)goodsInfoWeb {
+    if (!_goodsInfoWeb) {
+        _goodsInfoWeb = [[UIWebView alloc] initWithFrame:CGRectMake(0, SCREEN_HEIGHT, SCREEN_WIDTH, SCREEN_HEIGHT - 108)];
+        _goodsInfoWeb.delegate = self;
+        _goodsInfoWeb.scrollView.delegate = self;
+        _goodsInfoWeb.scrollView.bounces = YES;
+        _goodsInfoWeb.backgroundColor = [UIColor whiteColor];
+        _goodsInfoWeb.scrollView.showsVerticalScrollIndicator = NO;
+        _goodsInfoWeb.scalesPageToFit = YES;
+    }
+    return _goodsInfoWeb;
+}
+
+- (void)webViewDidStartLoad:(UIWebView *)webView {
+    [SVProgressHUD show];
+}
+- (void)webViewDidFinishLoad:(UIWebView *)webView {
+    [SVProgressHUD dismiss];
+}
+
+//  上拉提示
+- (UILabel *)pullLab {
+    if (!_pullLab) {
+        _pullLab = [[UILabel alloc] initWithFrame:CGRectMake(0, self.goodsTable.contentSize.height + 30, SCREEN_WIDTH, 20)];
+        _pullLab.text = NSLocalizedString(@"goodsPullLab", nil);
+        _pullLab.font = [UIFont systemFontOfSize:12];
+        _pullLab.textColor = [UIColor colorWithHexString:@"#555555"];
+        _pullLab.textAlignment = NSTextAlignmentCenter;
+    }
+    return _pullLab;
+}
+
+#pragma mark 产品详情的上拉&下拉加载
+- (void)scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate {
+    decelerate = YES;
+    if (scrollView == self.goodsTable) {
+        CGPoint contentOffsetPoint = self.goodsTable.contentOffset;
+        if (contentOffsetPoint.y >  self.goodsTable.contentSize.height - self.goodsTable.frame.size.height + 50) {
+            
+            CGRect goodsTableRect = self.goodsTable.frame;
+            goodsTableRect.origin.y = -SCREEN_HEIGHT;
+            [UIView animateWithDuration:.3 animations:^{
+                self.goodsTable.frame = goodsTableRect;
+            }];
+            
+            CGRect goodsInfoRect = self.goodsInfoWeb.frame;
+            goodsInfoRect.origin.y = 64;
+            [UIView animateWithDuration:.3 animations:^{
+                self.goodsInfoWeb.frame = goodsInfoRect;
+            }];
+            
+            //  加载商品的web详情
+            NSURLRequest *request =[NSURLRequest requestWithURL:[NSURL URLWithString:_goodsInfoUrl]];
+            [self.goodsInfoWeb loadRequest:request];
+        }
+        
+    } else if (scrollView == self.goodsInfoWeb.scrollView) {
+        CGPoint webContentOffset = self.goodsInfoWeb.scrollView.contentOffset;
+        if (webContentOffset.y < -50) {
+            
+            CGRect goodsTableRect = self.goodsTable.frame;
+            goodsTableRect.origin.y = 64;
+            [UIView animateWithDuration:.3 animations:^{
+                self.goodsTable.frame = goodsTableRect;
+            }];
+            
+            CGRect goodsInfoRect = self.goodsInfoWeb.frame;
+            goodsInfoRect.origin.y = SCREEN_HEIGHT;
+            [UIView animateWithDuration:.3 animations:^{
+                self.goodsInfoWeb.frame = goodsInfoRect;
+            }];
+            
+            [SVProgressHUD dismiss];
+        }
+    }
 }
 
 #pragma mark - 商品信息列表
@@ -195,13 +277,8 @@ static NSString *const URLAddCar = @"/shopping/add_cart";
             return cell;
         }
     }
-    
-    static NSString * GoodsInfoCellId = @"GoodsInfoCellId";
-    UITableViewCell * cell = [tableView dequeueReusableCellWithIdentifier:GoodsInfoCellId];
-    if (!cell) {
-        cell = [[UITableViewCell alloc] initWithStyle:(UITableViewCellStyleDefault) reuseIdentifier:GoodsInfoCellId];
-    }
-    return cell;
+
+    return nil;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -212,8 +289,10 @@ static NSString *const URLAddCar = @"/shopping/add_cart";
         
     } else if (indexPath.section == 1) {
         return 44;
+        
     } else if (indexPath.section == 2) {
         return 280;
+        
     } else if (indexPath.section == 3) {
         if (indexPath.row == 0) {
             return 44;

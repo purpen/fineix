@@ -402,7 +402,7 @@ static NSString *const URlCancelCollect = @"/favorite/ajax_cancel_favorite";
             return 0.01;
         }
     } else if (indexPath.section == 5) {
-        return ((self.recommendGoods.count/2) * (((SCREEN_WIDTH - 40) / 2) * 1.3)) + 44;
+        return ((self.recommendGoods.count/2) * (((SCREEN_WIDTH - 40) / 2) * 1.3)) + 88;
     }
     return 44;
 }
