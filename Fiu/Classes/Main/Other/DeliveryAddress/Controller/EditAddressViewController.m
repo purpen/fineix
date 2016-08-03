@@ -126,23 +126,41 @@ static NSString *const DeleteAddressURL = @"/shopping/remove_address";
 
 - (IBAction)submitBtn:(UIButton *)sender {
     if (self.nameTF.text.length < 2) {
-        [SVProgressHUD showInfoWithStatus:@"请补全姓名"];
+        [SVProgressHUD showInfoWithStatus:@"收货人姓名至少2个字符"];
         return;
     }
+    
+    if (self.phoneNumTF.text.length == 0) {
+        [SVProgressHUD showInfoWithStatus:@"请填写联系方式"];
+        return;
+    }
+    
+    if (self.zipTF.text.length == 0) {
+        [SVProgressHUD showInfoWithStatus:@"请填写邮编"];
+        return;
+    }
+    
+    if (self.prinLabel.text.length == 0 || self.cityLabel.text.length == 0) {
+        [SVProgressHUD showInfoWithStatus:@"请选择所在地区"];
+        return;
+    }
+    
+    if (self.detailsAddressTF.text.length == 5) {
+        [SVProgressHUD showInfoWithStatus:@"请填写详细地址"];
+        return;
+    }
+    
+    if (self.detailsAddressTF.text.length < 5) {
+        [SVProgressHUD showInfoWithStatus:@"详细地址描述信息不得少于5个字符"];
+        return;
+    }
+    
     if (self.phoneNumTF.text.length != 11) {
-        [SVProgressHUD showInfoWithStatus:@"手机号位数不对"];
+        [SVProgressHUD showInfoWithStatus:@"内地手机号码为11位数字"];
         return;
     }
     if (self.zipTF.text.length != 6) {
-        [SVProgressHUD showInfoWithStatus:@"邮编位数不对"];
-        return;
-    }
-    if (self.prinLabel.text.length == 0 || self.cityLabel.text.length == 0) {
-        [SVProgressHUD showInfoWithStatus:@"省市未填写"];
-        return;
-    }
-    if (self.detailsAddressTF.text.length < 5) {
-        [SVProgressHUD showInfoWithStatus:@"详细地址字数不能小于5位"];
+        [SVProgressHUD showInfoWithStatus:@"邮编为6位数字"];
         return;
     }
     

@@ -440,6 +440,11 @@
 		1FF36E9A1D4F192400EB3C93 /* JDPayViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1FF36E981D4F192400EB3C93 /* JDPayViewController.m */; };
 		1FF36E9B1D4F192400EB3C93 /* JDPayViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1FF36E991D4F192400EB3C93 /* JDPayViewController.xib */; };
 		1FF36EA01D4F401600EB3C93 /* JDPayModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 1FF36E9F1D4F401600EB3C93 /* JDPayModel.m */; };
+		1FF36EA31D507BA600EB3C93 /* SearchView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1FF36EA21D507BA600EB3C93 /* SearchView.m */; };
+		1FF36EA61D5088FD00EB3C93 /* SearchTF.m in Sources */ = {isa = PBXBuildFile; fileRef = 1FF36EA51D5088FD00EB3C93 /* SearchTF.m */; };
+		1FF36EA91D5099AA00EB3C93 /* UIView+FSExtension.m in Sources */ = {isa = PBXBuildFile; fileRef = 1FF36EA81D5099AA00EB3C93 /* UIView+FSExtension.m */; };
+		1FF36EAD1D50A7C500EB3C93 /* SearchPepoleTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 1FF36EAB1D50A7C500EB3C93 /* SearchPepoleTableViewCell.m */; };
+		1FF36EAE1D50A7C500EB3C93 /* SearchPepoleTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1FF36EAC1D50A7C500EB3C93 /* SearchPepoleTableViewCell.xib */; };
 		280045111C805B78005F5C2E /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 280045101C805B78005F5C2E /* CoreLocation.framework */; };
 		280045131C805B82005F5C2E /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 280045121C805B82005F5C2E /* QuartzCore.framework */; };
 		280045151C805B8C005F5C2E /* OpenGLES.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 280045141C805B8C005F5C2E /* OpenGLES.framework */; };
@@ -1350,6 +1355,15 @@
 		1FF36E991D4F192400EB3C93 /* JDPayViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = JDPayViewController.xib; sourceTree = "<group>"; };
 		1FF36E9E1D4F401600EB3C93 /* JDPayModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JDPayModel.h; sourceTree = "<group>"; };
 		1FF36E9F1D4F401600EB3C93 /* JDPayModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JDPayModel.m; sourceTree = "<group>"; };
+		1FF36EA11D507BA600EB3C93 /* SearchView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SearchView.h; sourceTree = "<group>"; };
+		1FF36EA21D507BA600EB3C93 /* SearchView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SearchView.m; sourceTree = "<group>"; };
+		1FF36EA41D5088FD00EB3C93 /* SearchTF.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SearchTF.h; sourceTree = "<group>"; };
+		1FF36EA51D5088FD00EB3C93 /* SearchTF.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SearchTF.m; sourceTree = "<group>"; };
+		1FF36EA71D5099AA00EB3C93 /* UIView+FSExtension.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+FSExtension.h"; sourceTree = "<group>"; };
+		1FF36EA81D5099AA00EB3C93 /* UIView+FSExtension.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+FSExtension.m"; sourceTree = "<group>"; };
+		1FF36EAA1D50A7C500EB3C93 /* SearchPepoleTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SearchPepoleTableViewCell.h; sourceTree = "<group>"; };
+		1FF36EAB1D50A7C500EB3C93 /* SearchPepoleTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SearchPepoleTableViewCell.m; sourceTree = "<group>"; };
+		1FF36EAC1D50A7C500EB3C93 /* SearchPepoleTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SearchPepoleTableViewCell.xib; sourceTree = "<group>"; };
 		280045101C805B78005F5C2E /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
 		280045121C805B82005F5C2E /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		280045141C805B8C005F5C2E /* OpenGLES.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGLES.framework; path = System/Library/Frameworks/OpenGLES.framework; sourceTree = SDKROOT; };
@@ -2777,6 +2791,13 @@
 				1FCDCC7C1D0525A300C92E78 /* FocusNonView.m */,
 				1F45A7021D2DF708009D7EE1 /* SceneCollectionViewCell.h */,
 				1F45A7031D2DF708009D7EE1 /* SceneCollectionViewCell.m */,
+				1FF36EA11D507BA600EB3C93 /* SearchView.h */,
+				1FF36EA21D507BA600EB3C93 /* SearchView.m */,
+				1FF36EA41D5088FD00EB3C93 /* SearchTF.h */,
+				1FF36EA51D5088FD00EB3C93 /* SearchTF.m */,
+				1FF36EAA1D50A7C500EB3C93 /* SearchPepoleTableViewCell.h */,
+				1FF36EAB1D50A7C500EB3C93 /* SearchPepoleTableViewCell.m */,
+				1FF36EAC1D50A7C500EB3C93 /* SearchPepoleTableViewCell.xib */,
 			);
 			path = view;
 			sourceTree = "<group>";
@@ -3908,6 +3929,8 @@
 		D81280B71CAA8532007CF08B /* Tool */ = {
 			isa = PBXGroup;
 			children = (
+				1FF36EA71D5099AA00EB3C93 /* UIView+FSExtension.h */,
+				1FF36EA81D5099AA00EB3C93 /* UIView+FSExtension.m */,
 				1FC6782C1CDB33ED00535162 /* UIView+TYAlertView.m */,
 				1FC6782D1CDB33ED00535162 /* UIView+TYAutoLayout.h */,
 				D8035F2D1CB77D0C001920F9 /* UIImage+Helper.h */,
@@ -4282,6 +4305,7 @@
 				1F2A901B1CF40277005116C7 /* HistoryBonusViewController.xib in Resources */,
 				1F2A8FF31CF40277005116C7 /* ModifyGenderViewController.xib in Resources */,
 				1F2A91281CF42EC1005116C7 /* OrderInfoDetailViewController.xib in Resources */,
+				1FF36EAE1D50A7C500EB3C93 /* SearchPepoleTableViewCell.xib in Resources */,
 				1FA4BDF21D35F2200067A196 /* UMShareEditViewController.xib in Resources */,
 				1F2A905B1CF40277005116C7 /* CommentsViewController.xib in Resources */,
 				1F1134AC1D17F5CB00DFFA74 /* Fiu.mp4 in Resources */,
@@ -4422,6 +4446,7 @@
 				1F2A8FDF1CF40277005116C7 /* InfoGoodsHighlightsTableViewCell.m in Sources */,
 				1F2A8F5F1CF40277005116C7 /* UsedTagCollectionViewCell.m in Sources */,
 				1F2A8F981CF40277005116C7 /* SceneInfoCounter.m in Sources */,
+				1FF36EA91D5099AA00EB3C93 /* UIView+FSExtension.m in Sources */,
 				1F2A8F671CF40277005116C7 /* FiuSceneViewController.m in Sources */,
 				1F2A8F8C1CF40277005116C7 /* HomeSceneListCounter.m in Sources */,
 				1F2A8F6F1CF40277005116C7 /* FiuSceneInfo.m in Sources */,
@@ -4471,6 +4496,7 @@
 				1F2A90A41CF40277005116C7 /* SearchViewController.m in Sources */,
 				1FCDCC821D066D2700C92E78 /* SexSheetViewController.m in Sources */,
 				1F2A90661CF40277005116C7 /* CommentsTableViewCell.m in Sources */,
+				1FF36EA31D507BA600EB3C93 /* SearchView.m in Sources */,
 				1F2A904C1CF40277005116C7 /* NSString+UserModel.m in Sources */,
 				1F2A8FC71CF40277005116C7 /* GoodsInfoBrand.m in Sources */,
 				1F2A8F601CF40277005116C7 /* AddUrlView.m in Sources */,
@@ -4542,6 +4568,7 @@
 				1F2A8FAD1CF40277005116C7 /* FBOrderTimeViewController.m in Sources */,
 				1F2A8F621CF40277005116C7 /* FindGoodsView.m in Sources */,
 				1F2A8F8A1CF40277005116C7 /* SceneSubscribeViewController.m in Sources */,
+				1FF36EAD1D50A7C500EB3C93 /* SearchPepoleTableViewCell.m in Sources */,
 				D81EA3FE1D2A52D40032FAAB /* FiuPeopleListViewController.m in Sources */,
 				1F2A90021CF40277005116C7 /* FindeFirendTwoModel.m in Sources */,
 				1F2A902E1CF40277005116C7 /* DeliveryAddressModel.m in Sources */,
@@ -4715,6 +4742,7 @@
 				1F2A8F3E1CF40277005116C7 /* FindGoodsModelData.m in Sources */,
 				D8E3AEBA1CFC9B84006E5E8C /* LookSceneViewController.m in Sources */,
 				D8B7952D1CF48B2C0075D985 /* ShareStyleTitleBottomView.m in Sources */,
+				1FF36EA61D5088FD00EB3C93 /* SearchTF.m in Sources */,
 				D89CFE0F1D070EAB002701B8 /* GoodsTagsTableViewCell.m in Sources */,
 				1F2A90381CF40277005116C7 /* GuidePageViewController.m in Sources */,
 				1F2A906B1CF40277005116C7 /* NearChangViewController.m in Sources */,

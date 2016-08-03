@@ -23,14 +23,27 @@
 #import "MyQrCodeViewController.h"
 #import "MyQrCodeView.h"
 #import "UMSocial.h"
+#import "SearchView.h"
+#import "SearchTF.h"
+#import "UIView+FSExtension.h"
+#import "SearchPepoleTableViewCell.h"
 
 static NSString *const ShareURlText = @"我在Fiu浮游™寻找同路人；希望和你一起用文字来记录内心情绪，用滤镜来表达情感色彩，用分享去变现原创价值；带你发现美学科技的力量和感性生活的温度！来吧，去Fiu一下 >>> http://m.taihuoniao.com/fiu";
 
-@interface FindeFriendViewController ()<FBNavigationBarItemsDelegate,UITableViewDelegate,UITableViewDataSource,FBRequestDelegate>
+@interface FindeFriendViewController ()<FBNavigationBarItemsDelegate,UITableViewDelegate,UITableViewDataSource,FBRequestDelegate,UITextFieldDelegate>
 {
     NSMutableArray *_userAry;
     NSMutableArray *_scenceAry;
 }
+
+/**  */
+@property (nonatomic, strong) UIWindow *window;
+/**  */
+@property (nonatomic, strong) SearchView *searchView;
+
+/**  */
+@property (nonatomic, strong) UITableView *searchTableView;
+
 @end
 
 static NSString *const ShareURL = @"http://m.taihuoniao.com/guide/app_about";
@@ -92,8 +105,6 @@ static NSString *const ShareURL = @"http://m.taihuoniao.com/guide/app_about";
                 model1.cober = sceneDict[@"cover_url"];
                 [model.scene addObject:model1];
             }
-//            FindSceneModel *model1 = model.scene[1];
-//            NSLog(@"嘿嘿  %@",model1.title);
             [_userAry addObject:model];
         }
         [self.myTbaleView reloadData];
@@ -107,6 +118,17 @@ static NSString *const ShareURL = @"http://m.taihuoniao.com/guide/app_about";
 -(UITableView *)myTbaleView{
     if (!_myTbaleView) {
         _myTbaleView = [[UITableView alloc] initWithFrame:CGRectMake(0, 64, SCREEN_WIDTH, SCREEN_HEIGHT-64) style:UITableViewStyleGrouped];
+        
+        SearchView *searchView = [[SearchView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 44)];
+        searchView.searchTF.delegate = self;
+        [searchView.cancelBtn addTarget:self action:@selector(cancelBtn:) forControlEvents:UIControlEventTouchUpInside];
+        searchView.cancelBtn.hidden = YES;
+        self.searchView = searchView;
+        
+        
+        _myTbaleView.tableHeaderView = searchView;
+        
+        
         _myTbaleView.delegate = self;
         _myTbaleView.dataSource = self;
         _myTbaleView.showsVerticalScrollIndicator = NO;
@@ -115,15 +137,80 @@ static NSString *const ShareURL = @"http://m.taihuoniao.com/guide/app_about";
     return _myTbaleView;
 }
 
+-(void)cancelBtn:(UIButton*)sender{
+    [UIView animateWithDuration:0.25 animations:^{
+        
+        [self.view endEditing:YES];
+        self.searchView.searchTF.view.frame = CGRectMake(0, 0, [UIScreen mainScreen].bounds.size.width * 0.5 - 40, 35);
+        self.searchView.searchTF.searchIcon.frame = CGRectMake([UIScreen mainScreen].bounds.size.width * 0.5 - 40 -16, 9.5, 16, 16);
+        self.window = nil;
+        _myTbaleView.frame = CGRectMake(0, 64, SCREEN_WIDTH, SCREEN_HEIGHT-64);
+        CGRect frame = self.searchView.searchTF.frame;
+        frame.size.width = SCREEN_WIDTH - 15 * 2;
+        self.searchView.searchTF.frame = frame;
+        self.searchView.cancelBtn.hidden = YES;
+        self.navView.y = 0;
+    } completion:^(BOOL finished) {
+        
+    }];
+    
+}
+
+
+-(BOOL)textFieldShouldBeginEditing:(UITextField *)textField{
+    UIWindow *window = [[UIWindow alloc] initWithFrame:CGRectMake(0, 64, SCREEN_WIDTH, SCREEN_HEIGHT-64)];
+    UITableView *tableView = [[UITableView alloc] init];
+    tableView.frame = window.bounds;
+    tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
+    self.searchTableView = tableView;
+    self.searchTableView.delegate = self;
+    self.searchTableView.tag = 10;
+    [UIView animateWithDuration:0.25 animations:^{
+        self.navView.y = -64;
+        _myTbaleView.frame = CGRectMake(0, 20, SCREEN_WIDTH, SCREEN_HEIGHT);
+        
+        
+        CGRect frame = self.searchView.searchTF.frame;
+        frame.size.width = SCREEN_WIDTH - 15 - 15 - 10 - 35;
+        self.searchView.searchTF.frame = frame;
+        
+        self.searchView.cancelBtn.hidden = NO;
+        
+        window.hidden = NO;
+        self.window = window;
+        
+        [self.window addSubview:self.searchTableView];
+        
+    } completion:^(BOOL finished) {
+        
+    }];
+    return YES;
+}
+
+-(BOOL)textFieldShouldReturn:(UITextField *)textField{
+    BOOL flag = [textField resignFirstResponder];
+    self.searchView.searchTF.view.frame = CGRectMake(0, 0, 15 + 16, 35);
+    self.searchView.searchTF.searchIcon.frame = CGRectMake(15, 9.5, 16, 16);
+    return flag;
+}
+
 -(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
-    return 2;
+    if (tableView.tag == 10) {
+        return 1;
+    }else{
+        return 2;
+    }
 }
 
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
-    if (section == 0) {
-        return 3;
+    if (tableView.tag == 10) {
+        return 10;
     }else{
-        return _userAry.count;
+        if (section == 0) {
+            return 3;
+        }else{
+            return _userAry.count;
+        }
     }
 }
 
@@ -138,59 +225,68 @@ static NSString *const ShareURL = @"http://m.taihuoniao.com/guide/app_about";
 }
 
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
-    if (indexPath.section == 0) {
-        static NSString *id = @"cellOne";
-        FindeFriendTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:id];
+    if (tableView.tag == 10) {
+        static NSString *cellId = @"search";
+        SearchPepoleTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellId];
         if (cell == nil) {
-            cell = [[FindeFriendTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:id];
+            cell = [[SearchPepoleTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellId];
         }
-        InvitationModel *model = self.aryOne[indexPath.row];
-        [cell setUIWithModel:model];
         return cell;
     }else{
-        static NSString *cellId = @"cellTwo";
-        FriendTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellId];
-        if (cell == nil) {
-            cell = [[FriendTableViewCell alloc] init];
-        }
-        FindFriendModel *model = _userAry[indexPath.row];
-        cell.focusBtn.tag = indexPath.row;
-        if ([model.isLove isEqualToNumber:@0]) {
-            cell.focusBtn.selected = NO;
-        }else if ([model.isLove isEqualToNumber:@1]){
-            cell.focusBtn.selected = YES;
-        }
-        [cell.headImageView sd_setImageWithURL:[NSURL URLWithString:model.avatarUrl]placeholderImage:[UIImage imageNamed:@"default_head"]];
-        cell.nameLbael.text = model.nickName;
-        
-//        NSArray *tagsAry = [NSArray arrayWithObjects:@"大拿",@"行家",@"行摄家",@"艺术范",@"手艺人",@"人来疯",@"赎回自由身",@"职业buyer", nil];
-        if ([model.is_expert isEqual:@(1)]) {
-            cell.levelLabel.text = [NSString stringWithFormat:@"%@ | %@",model.expert_label,model.expert_info];
-            cell.userLevelLabel.hidden = YES;
-//            cell.idTagsImageView.hidden = NO;
-//            int n = (int)[tagsAry indexOfObject:model.expert_label];
-//            cell.idTagsImageView.image = [UIImage imageNamed:[NSString stringWithFormat:@"tags%d",n+1]];
+        if (indexPath.section == 0) {
+            static NSString *id = @"cellOne";
+            FindeFriendTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:id];
+            if (cell == nil) {
+                cell = [[FindeFriendTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:id];
+            }
+            InvitationModel *model = self.aryOne[indexPath.row];
+            [cell setUIWithModel:model];
+            return cell;
         }else{
-            if (model.label.length == 0) {
-                if (model.summary.length == 0) {
-                    
-                }else{
-                    cell.levelLabel.text = [NSString stringWithFormat:@"%@",model.summary];
-                }
+            static NSString *cellId = @"cellTwo";
+            FriendTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellId];
+            if (cell == nil) {
+                cell = [[FriendTableViewCell alloc] init];
+            }
+            FindFriendModel *model = _userAry[indexPath.row];
+            cell.focusBtn.tag = indexPath.row;
+            if ([model.isLove isEqualToNumber:@0]) {
+                cell.focusBtn.selected = NO;
+            }else if ([model.isLove isEqualToNumber:@1]){
+                cell.focusBtn.selected = YES;
+            }
+            [cell.headImageView sd_setImageWithURL:[NSURL URLWithString:model.avatarUrl]placeholderImage:[UIImage imageNamed:@"default_head"]];
+            cell.nameLbael.text = model.nickName;
+            
+            //        NSArray *tagsAry = [NSArray arrayWithObjects:@"大拿",@"行家",@"行摄家",@"艺术范",@"手艺人",@"人来疯",@"赎回自由身",@"职业buyer", nil];
+            if ([model.is_expert isEqual:@(1)]) {
+                cell.levelLabel.text = [NSString stringWithFormat:@"%@ | %@",model.expert_label,model.expert_info];
+                cell.userLevelLabel.hidden = YES;
+                //            cell.idTagsImageView.hidden = NO;
+                //            int n = (int)[tagsAry indexOfObject:model.expert_label];
+                //            cell.idTagsImageView.image = [UIImage imageNamed:[NSString stringWithFormat:@"tags%d",n+1]];
             }else{
-                if (model.summary.length == 0) {
-                    cell.levelLabel.text = [NSString stringWithFormat:@"%@",model.label];
+                if (model.label.length == 0) {
+                    if (model.summary.length == 0) {
+                        
+                    }else{
+                        cell.levelLabel.text = [NSString stringWithFormat:@"%@",model.summary];
+                    }
                 }else{
-                    cell.levelLabel.text = [NSString stringWithFormat:@"%@ | %@",model.label,model.summary];
+                    if (model.summary.length == 0) {
+                        cell.levelLabel.text = [NSString stringWithFormat:@"%@",model.label];
+                    }else{
+                        cell.levelLabel.text = [NSString stringWithFormat:@"%@ | %@",model.label,model.summary];
+                    }
                 }
             }
+            //        if (model.address.firstObject && model.address.lastObject) {
+            //            cell.deressLabel.text = [NSString stringWithFormat:@"%@ %@",model.address.firstObject,model.address.lastObject];
+            //        }
+            cell.sceneAry = model.scene;
+            [cell.focusBtn addTarget:self action:@selector(clickFocusBtn:) forControlEvents:UIControlEventTouchUpInside];
+            return cell;
         }
-//        if (model.address.firstObject && model.address.lastObject) {
-//            cell.deressLabel.text = [NSString stringWithFormat:@"%@ %@",model.address.firstObject,model.address.lastObject];
-//        }
-        cell.sceneAry = model.scene;
-        [cell.focusBtn addTarget:self action:@selector(clickFocusBtn:) forControlEvents:UIControlEventTouchUpInside];
-        return cell;
     }
     return nil;
 }
@@ -255,10 +351,14 @@ static NSString *const ShareURL = @"http://m.taihuoniao.com/guide/app_about";
 
 
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
-    if (indexPath.section == 0) {
-        return 60/667.0*SCREEN_HEIGHT;
+    if (tableView.tag == 10) {
+        return 44;
     }else{
-        return 542*0.5/667.0*SCREEN_HEIGHT;
+        if (indexPath.section == 0) {
+            return 60/667.0*SCREEN_HEIGHT;
+        }else{
+            return 542*0.5/667.0*SCREEN_HEIGHT;
+        }
     }
 }
 

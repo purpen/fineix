@@ -249,7 +249,7 @@
             case 3: //京东支付
             {
                 JDPayViewController *vc = [[JDPayViewController alloc] init];
-                vc.rid = self.orderInfo.rid;
+                vc.orderInfo = self.orderInfo;
                 [self.navigationController pushViewController:vc animated:YES];
             }
                 break;
