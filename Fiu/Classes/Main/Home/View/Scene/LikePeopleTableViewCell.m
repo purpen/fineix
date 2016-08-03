@@ -8,6 +8,7 @@
 
 #import "LikePeopleTableViewCell.h"
 #import "HomePageViewController.h"
+#import "MorePeopleViewController.h"
 
 const static NSInteger  peopleBtnTag = 64;
 
@@ -25,13 +26,15 @@ const static NSInteger  peopleBtnTag = 64;
     return self;
 }
 
-- (void)setLikeOrSuPeopleData:(NSMutableArray *)model {
+- (void)setLikeOrSuPeopleData:(NSMutableArray *)model withType:(NSInteger)type {
+    self.moreType = type;
     [self.imgMarr removeAllObjects];
     [self.userIdMarr removeAllObjects];
     if (model.count > 0) {
         for (LikeOrSuPeopleRow * row in model) {
             [self.imgMarr addObject:row.user.avatarUrl];
             [self.userIdMarr addObject:[NSString stringWithFormat:@"%zi", row.userId]];
+            self.ids = [NSString stringWithFormat:@"%zi", row.targetId];
         }
 
         CGFloat num = model.count;
@@ -108,8 +111,16 @@ const static NSInteger  peopleBtnTag = 64;
         } else {
             _morePeopel.titleLabel.font = [UIFont systemFontOfSize:Font_Tag];
         }
+        [_morePeopel addTarget:self action:@selector(lookMorePeople) forControlEvents:(UIControlEventTouchUpInside)];
     }
     return _morePeopel;
+}
+
+- (void)lookMorePeople {
+    MorePeopleViewController * morePeopleVC = [[MorePeopleViewController alloc] init];
+    morePeopleVC.type = self.moreType;
+    morePeopleVC.ids = self.ids;
+    [self.nav pushViewController:morePeopleVC animated:YES];
 }
 
 #pragma mark - 获取高度

@@ -308,16 +308,18 @@
     }
     [shareBtn setTitleColor:[UIColor whiteColor] forState:(UIControlStateNormal)];
     shareBtn.layer.cornerRadius = 3;
-    [shareBtn addTarget:self action:@selector(searchBarClick) forControlEvents:(UIControlEventTouchUpInside)];
+    [shareBtn addTarget:self action:@selector(shareBtnClick) forControlEvents:(UIControlEventTouchUpInside)];
     
     return shareBtn;
 }
 
-- (void)searchBarClick {
+- (void)shareBtnClick {
     if ([_sceneData valueForKey:@"cover_url"]) {
         FBShareViewController * shareVC = [[FBShareViewController alloc] init];
         shareVC.dataDict = _sceneData;
-        [self.vc presentViewController:shareVC animated:YES completion:nil];
+        [self.vc presentViewController:shareVC animated:YES completion:^{
+            [_bgView removeFromSuperview];
+        }];
     }
 }
 

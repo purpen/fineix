@@ -462,15 +462,15 @@
         [_titleText mas_updateConstraints:^(MASConstraintMaker *make) {
             make.size.mas_equalTo(CGSizeMake(SCREEN_WIDTH - 40, 56));
         }];
-    } else if ([title length] >= 8 && [title length] < 13) {
-        _titleText.font = [UIFont systemFontOfSize:28];
+    } else if ([title length] >= 8 && [title length] < 12) {
+        _titleText.font = [UIFont systemFontOfSize:30];
         [_titleText mas_updateConstraints:^(MASConstraintMaker *make) {
             make.size.mas_equalTo(CGSizeMake(SCREEN_WIDTH - 40, 36));
         }];
-    } else if ([title length] >= 13) {
-        _titleText.font = [UIFont systemFontOfSize:20];
+    } else if ([title length] >= 12) {
+        _titleText.font = [UIFont systemFontOfSize:22];
         [_titleText mas_updateConstraints:^(MASConstraintMaker *make) {
-            make.size.mas_equalTo(CGSizeMake(240, 52));
+            make.size.mas_equalTo(CGSizeMake(240, 56));
         }];
     }
     NSMutableAttributedString * titleText = [[NSMutableAttributedString alloc] initWithString:title];

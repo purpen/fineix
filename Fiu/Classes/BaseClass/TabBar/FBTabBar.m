@@ -17,15 +17,17 @@
 - (instancetype)initWithFrame:(CGRect)frame {
     self = [super initWithFrame:frame];
     if (self) {
-        self.frame = CGRectMake(0, SCREEN_HEIGHT - 59.5, SCREEN_WIDTH, 59.5);
-        if (SCREEN_WIDTH <= 320) {
-            self.backgroundImage = [UIImage imageNamed:@"tabBar_5"];
-        } else {
-            self.backgroundImage = [UIImage imageNamed:@"tabBar"];
-        }
+        self.frame = CGRectMake(0, SCREEN_HEIGHT - 49, SCREEN_WIDTH, 49);
+        CGRect rect = CGRectMake(0.0f, 0.0f, 0.0f, 0.0f);
+        UIGraphicsBeginImageContext(rect.size);
+        CGContextRef context = UIGraphicsGetCurrentContext();
+        CGContextSetFillColorWithColor(context, [[UIColor whiteColor] CGColor]);
+        CGContextFillRect(context, rect);
+        UIImage *image = UIGraphicsGetImageFromCurrentImageContext();
+        UIGraphicsEndImageContext();
+        self.backgroundImage = image;
         
-        self.shadowImage = [UIImage new];
-        self.translucent = YES;
+        self.translucent = NO;
     }
     return self;
 }
@@ -37,6 +39,7 @@
         [_createBtn setImage:[UIImage imageNamed:@"Create"] forState:(UIControlStateNormal)];
         [_createBtn setImage:[UIImage imageNamed:@"Create"] forState:(UIControlStateHighlighted)];
         [_createBtn sizeToFit];
+        _createBtn.backgroundColor = [UIColor whiteColor];
     }
     return _createBtn;
 }
@@ -56,9 +59,6 @@
 #pragma mark - 调整tabBar上item的位置和尺寸
 - (void)layoutSubviews {
     [super layoutSubviews];
-    
-    [self addSubview:self.createBtn];
-    [self addSubview:self.createTitle];
     
     CGFloat width = self.bounds.size.width;
     CGFloat height = self.bounds.size.height;
@@ -80,18 +80,37 @@
         }
     }
     //  设置自定义的按钮在中间
-    self.createBtn.frame = CGRectMake(btnX, btnY, 49, 49);
-    self.createBtn.layer.cornerRadius = 49 / 2;
+    self.createBtn.frame = CGRectMake(btnX, btnY, 40, 40);
+    self.createBtn.layer.cornerRadius = 40 / 2;
     if (SCREEN_WIDTH > 375) {
-        self.createBtn.center = CGPointMake(width * 0.5, height * 0.2);
+        self.createBtn.center = CGPointMake(width * 0.5, height * 0.25);
     } else {
-        self.createBtn.center = CGPointMake(width * 0.5, height * 0.3);
+        self.createBtn.center = CGPointMake(width * 0.5, height * 0.4);
     }
     
     //  标题
     self.createTitle.frame = CGRectMake(btnX, btnY, 60, 12);
     self.createTitle.center = CGPointMake(width * 0.5, height * 0.87 -2);
     
+    UIButton * btn = [[UIButton alloc] initWithFrame:CGRectMake(btnX, btnY, 49, 49)];
+    btn.backgroundColor = [UIColor whiteColor];
+    btn.layer.borderColor = [UIColor grayColor].CGColor;
+    btn.layer.borderWidth = 0.3f;
+    btn.layer.cornerRadius = 49 / 2;
+    if (SCREEN_WIDTH > 375) {
+        btn.center = CGPointMake(width * 0.5, height * 0.2);
+    } else {
+        btn.center = CGPointMake(width * 0.5, height * 0.3);
+    }
+    [self addSubview:btn];
+    
+    UILabel * bglab = [[UILabel alloc] initWithFrame:CGRectMake(btnX, btnY, 50, 49)];
+    bglab.backgroundColor = [UIColor whiteColor];
+    bglab.center = CGPointMake(width * 0.5, height * 0.5);
+    [self addSubview:bglab];
+    
+    [self addSubview:self.createBtn];
+    [self addSubview:self.createTitle];
 }
 
 

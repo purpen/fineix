@@ -268,7 +268,7 @@ static NSString *const URLDeleteScene = @"/scene_scene/delete";
                 cell = [[LikePeopleTableViewCell alloc] initWithStyle:(UITableViewCellStyleDefault) reuseIdentifier:likePeopleCellId];
             }
             cell.nav = self.navigationController;
-            [cell setLikeOrSuPeopleData:self.suPeopleMarr];
+            [cell setLikeOrSuPeopleData:self.suPeopleMarr withType:1];
             return cell;
         }
         
