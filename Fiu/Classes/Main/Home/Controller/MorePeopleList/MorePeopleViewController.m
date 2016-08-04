@@ -11,7 +11,7 @@
 #import "FocusOnTableViewCell.h"
 #import "HomePageViewController.h"
 
-static NSString *const URLLikeScenePeople = @"/favorite";
+static NSString *const URLLikeScenePeople = @"/favorite/get_new_list";
 
 @interface MorePeopleViewController ()
 
@@ -30,12 +30,12 @@ static NSString *const URLLikeScenePeople = @"/favorite";
     
     [self.view addSubview:self.peopleTable];
     if (self.type == 0) {
-        self.likeType = @"sight";
-        self.event = @"love";
+        self.likeType = @"12";
+        self.event = @"2";
         
     } else if (self.type == 1) {
-        self.likeType = @"scene";
-        self.event = @"subscription";
+        self.likeType = @"11";
+        self.event = @"4";
     }
     self.currentpageNum = 0;
     [self networkLikePeopleData];

@@ -82,11 +82,7 @@
     //  设置自定义的按钮在中间
     self.createBtn.frame = CGRectMake(btnX, btnY, 40, 40);
     self.createBtn.layer.cornerRadius = 40 / 2;
-    if (SCREEN_WIDTH > 375) {
-        self.createBtn.center = CGPointMake(width * 0.5, height * 0.25);
-    } else {
-        self.createBtn.center = CGPointMake(width * 0.5, height * 0.4);
-    }
+    self.createBtn.center = CGPointMake(width * 0.5, height * 0.3);
     
     //  标题
     self.createTitle.frame = CGRectMake(btnX, btnY, 60, 12);

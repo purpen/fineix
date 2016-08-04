@@ -90,12 +90,18 @@ static NSString *const URLGetUserDesTags = @"/gateway/fetch_chinese_word";
     NSString * des = self.showContent.desText.text;
     NSString * tags =  [self.showContent.chooseTagMarr componentsJoinedByString:@","];
 
-    if ([self.addLocaiton.longitude length] <= 0 || [title isEqualToString:@""] || [des isEqualToString:NSLocalizedString(@"addDescription", nil)] || [des isEqualToString:@""] || [self.addLocaiton.locationLab.text isEqualToString:@""] || tags.length <= 0) {
-        [SVProgressHUD showInfoWithStatus:@"检查下哪里遗漏了吧～"];
-
+    if ([title isEqualToString:@""]) {
+        [self showMessage:@"您还没有添加情景标题哦"];
+    } else if ([des isEqualToString:NSLocalizedString(@"addDescription", nil)] || [des isEqualToString:@""]) {
+        [self showMessage:@"您还没有写情景描述呢"];
+    } else if ([self.addLocaiton.longitude length] <= 0 || [self.addLocaiton.locationLab.text isEqualToString:@""]) {
+        [self showMessage:@"定位标记了吗？"];
+    } else if (tags.length <= 0) {
+        [self showMessage:@"请选择几个标签"];
+    } else if (self.fSceneId.length <= 0) {
+        [self showMessage:@"您的情景还没有分类哦"];
     } else if (title.length > 20) {
-        [SVProgressHUD showInfoWithStatus:@"请输入20字以内的标题"];
-        
+        [self showMessage:@"标题在20字以内哦"];
     } else {
         [SVProgressHUD showWithMaskType:SVProgressHUDMaskTypeBlack];
         NSMutableArray * goodsMarr = [NSMutableArray array];
