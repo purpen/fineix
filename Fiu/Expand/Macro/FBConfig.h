@@ -27,8 +27,8 @@
 #define kFontFamily           @"HelveticaNeue"
 
 // App Store ID
-#define kAppStoreId           @"FrBrid2.0"
-#define kAppName              @"太火鸟+"
+#define kAppStoreId           @"Fiu2.0"
+#define kAppName              @"Fiu"
 
 // Error Domain
 #define kDomain               @"TaiHuoNiao"

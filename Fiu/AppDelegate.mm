@@ -7,6 +7,7 @@
 //
 
 #import "AppDelegate.h"
+#import "THNTabBarController.h"
 #import "FBTabBarController.h"
 #import <BaiduMapAPI_Map/BMKMapComponent.h>
 #import <SVProgressHUD/SVProgressHUD.h>
@@ -205,7 +206,7 @@ NSString *const determineLogin = @"/auth/check_login";
         [[NSUserDefaults standardUserDefaults] synchronize];
     }
     if (userIsFirstInstalled && codeFlag) {
-        FBTabBarController * tabBarC = [[FBTabBarController alloc] init];
+        THNTabBarController * tabBarC = [[THNTabBarController alloc] init];
         self.window.rootViewController = tabBarC;
         UserInfoEntity *entity = [UserInfoEntity defaultUserInfoEntity];
         FBRequest *request = [FBAPI postWithUrlString:@"/auth/user" requestDictionary:@{@"user_id":entity.userId} delegate:self];

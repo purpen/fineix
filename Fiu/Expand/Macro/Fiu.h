@@ -80,7 +80,6 @@
 //  用户简介
 #define Font_UserProfile        9
 
-
 #undef  创建属性
 //  strong
 #define pro_strong      property (nonatomic, strong)

@@ -11,7 +11,6 @@
 #import "CounterModel.h"
 #import "NSObject+MJKeyValue.h"
 
-
 @implementation FBTabBar
 
 - (instancetype)initWithFrame:(CGRect)frame {

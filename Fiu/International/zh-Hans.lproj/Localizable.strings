@@ -6,6 +6,17 @@
   Copyright © 2016年 taihuoniao. All rights reserved.
 */
 
+//  控制器
+"TabBar_Creat" = "Fiu";
+"TabBar_Home" = "精选";
+"TabBar_Discover" = "发现";
+"TabBar_Mall" = "好货";
+"TabBar_MyCenter" = "个人";
+
+//  首页
+"Home_Theme" = "精选主题";
+"Home_Scene" = "精选情景";
+
 //  创建情景
 "next" = "继续";
 "album" = "相册";

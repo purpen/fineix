@@ -496,6 +496,16 @@
 		D84763311D426EED00C88379 /* AddTagsView.m in Sources */ = {isa = PBXBuildFile; fileRef = D84763301D426EED00C88379 /* AddTagsView.m */; };
 		D84763381D427F7500C88379 /* AppDelegate+UMAnalytics.m in Sources */ = {isa = PBXBuildFile; fileRef = D84763371D427F7500C88379 /* AppDelegate+UMAnalytics.m */; };
 		D847633A1D427FCA00C88379 /* UMMobClick.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D84763391D427FCA00C88379 /* UMMobClick.framework */; };
+		D85174301D54AC58005F5722 /* THNHomeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D851742C1D54AC58005F5722 /* THNHomeViewController.m */; };
+		D85174371D5871C5005F5722 /* THNNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = D85174361D5871C5005F5722 /* THNNavigationController.m */; };
+		D851743B1D587479005F5722 /* THNViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D851743A1D587479005F5722 /* THNViewController.m */; };
+		D851743E1D58749D005F5722 /* THNTabBarController.m in Sources */ = {isa = PBXBuildFile; fileRef = D851743D1D58749D005F5722 /* THNTabBarController.m */; };
+		D85174411D5874EF005F5722 /* THNTabBar.m in Sources */ = {isa = PBXBuildFile; fileRef = D85174401D5874EF005F5722 /* THNTabBar.m */; };
+		D85174511D5878F7005F5722 /* THNDiscoverViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D85174501D5878F7005F5722 /* THNDiscoverViewController.m */; };
+		D85174541D587908005F5722 /* THNMallViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D85174531D587908005F5722 /* THNMallViewController.m */; };
+		D85174571D587917005F5722 /* THNMyCenterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D85174561D587917005F5722 /* THNMyCenterViewController.m */; };
+		D851745A1D58B250005F5722 /* HomeThemeTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D85174591D58B250005F5722 /* HomeThemeTableViewCell.m */; };
+		D851745D1D58B307005F5722 /* HomeThemeCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D851745C1D58B307005F5722 /* HomeThemeCollectionViewCell.m */; };
 		D8615C551D0FDC4E00C12FA2 /* EditViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D8615C541D0FDC4E00C12FA2 /* EditViewController.m */; };
 		D8707F071D37FA3200007835 /* FBGoodsInfoModel.m in Sources */ = {isa = PBXBuildFile; fileRef = D8707F021D37FA3200007835 /* FBGoodsInfoModel.m */; };
 		D8707F081D37FA3200007835 /* FBGoodsInfoModelData.m in Sources */ = {isa = PBXBuildFile; fileRef = D8707F041D37FA3200007835 /* FBGoodsInfoModelData.m */; };
@@ -1449,6 +1459,27 @@
 		D84763361D427F7500C88379 /* AppDelegate+UMAnalytics.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "AppDelegate+UMAnalytics.h"; sourceTree = "<group>"; };
 		D84763371D427F7500C88379 /* AppDelegate+UMAnalytics.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "AppDelegate+UMAnalytics.m"; sourceTree = "<group>"; };
 		D84763391D427FCA00C88379 /* UMMobClick.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = UMMobClick.framework; sourceTree = "<group>"; };
+		D851742B1D54AC58005F5722 /* THNHomeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THNHomeViewController.h; sourceTree = "<group>"; };
+		D851742C1D54AC58005F5722 /* THNHomeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THNHomeViewController.m; sourceTree = "<group>"; };
+		D85174351D5871C5005F5722 /* THNNavigationController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THNNavigationController.h; sourceTree = "<group>"; };
+		D85174361D5871C5005F5722 /* THNNavigationController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THNNavigationController.m; sourceTree = "<group>"; };
+		D85174381D5871FA005F5722 /* THNMacro.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = THNMacro.h; sourceTree = "<group>"; };
+		D85174391D587479005F5722 /* THNViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THNViewController.h; sourceTree = "<group>"; };
+		D851743A1D587479005F5722 /* THNViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THNViewController.m; sourceTree = "<group>"; };
+		D851743C1D58749D005F5722 /* THNTabBarController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THNTabBarController.h; sourceTree = "<group>"; };
+		D851743D1D58749D005F5722 /* THNTabBarController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THNTabBarController.m; sourceTree = "<group>"; };
+		D851743F1D5874EF005F5722 /* THNTabBar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THNTabBar.h; sourceTree = "<group>"; };
+		D85174401D5874EF005F5722 /* THNTabBar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THNTabBar.m; sourceTree = "<group>"; };
+		D851744F1D5878F7005F5722 /* THNDiscoverViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THNDiscoverViewController.h; sourceTree = "<group>"; };
+		D85174501D5878F7005F5722 /* THNDiscoverViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THNDiscoverViewController.m; sourceTree = "<group>"; };
+		D85174521D587908005F5722 /* THNMallViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THNMallViewController.h; sourceTree = "<group>"; };
+		D85174531D587908005F5722 /* THNMallViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THNMallViewController.m; sourceTree = "<group>"; };
+		D85174551D587917005F5722 /* THNMyCenterViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THNMyCenterViewController.h; sourceTree = "<group>"; };
+		D85174561D587917005F5722 /* THNMyCenterViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THNMyCenterViewController.m; sourceTree = "<group>"; };
+		D85174581D58B250005F5722 /* HomeThemeTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HomeThemeTableViewCell.h; sourceTree = "<group>"; };
+		D85174591D58B250005F5722 /* HomeThemeTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HomeThemeTableViewCell.m; sourceTree = "<group>"; };
+		D851745B1D58B307005F5722 /* HomeThemeCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HomeThemeCollectionViewCell.h; sourceTree = "<group>"; };
+		D851745C1D58B307005F5722 /* HomeThemeCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HomeThemeCollectionViewCell.m; sourceTree = "<group>"; };
 		D8615C531D0FDC4E00C12FA2 /* EditViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EditViewController.h; sourceTree = "<group>"; };
 		D8615C541D0FDC4E00C12FA2 /* EditViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EditViewController.m; sourceTree = "<group>"; };
 		D8707F011D37FA3200007835 /* FBGoodsInfoModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FBGoodsInfoModel.h; sourceTree = "<group>"; };
@@ -3876,6 +3907,8 @@
 		D81280191CAA8532007CF08B /* Classes */ = {
 			isa = PBXGroup;
 			children = (
+				D85174311D58714F005F5722 /* NewBaseClass */,
+				D85174261D54AC58005F5722 /* NewMain */,
 				D812801A1CAA8532007CF08B /* BaseClass */,
 				1F2A8BCE1CF40276005116C7 /* Main */,
 			);
@@ -3909,6 +3942,7 @@
 		D81280AD1CAA8532007CF08B /* Macro */ = {
 			isa = PBXGroup;
 			children = (
+				D85174381D5871FA005F5722 /* THNMacro.h */,
 				D81280AE1CAA8532007CF08B /* FBConfig.h */,
 				D81280AF1CAA8532007CF08B /* Fiu.h */,
 			);
@@ -4033,6 +4067,176 @@
 				D8329DEE1CF611F800611025 /* ShareInfoRow.m */,
 			);
 			path = ShareInfo;
+			sourceTree = "<group>";
+		};
+		D85174261D54AC58005F5722 /* NewMain */ = {
+			isa = PBXGroup;
+			children = (
+				D85174291D54AC58005F5722 /* NewHome */,
+				D85174431D5878C8005F5722 /* NewDiscover */,
+				D85174421D5878C8005F5722 /* NewCreate */,
+				D85174471D5878C8005F5722 /* NewMall */,
+				D851744B1D5878C8005F5722 /* NewMyCenter */,
+			);
+			path = NewMain;
+			sourceTree = "<group>";
+		};
+		D85174291D54AC58005F5722 /* NewHome */ = {
+			isa = PBXGroup;
+			children = (
+				D851742A1D54AC58005F5722 /* Controller */,
+				D851742D1D54AC58005F5722 /* Model */,
+				D851742E1D54AC58005F5722 /* View */,
+			);
+			path = NewHome;
+			sourceTree = "<group>";
+		};
+		D851742A1D54AC58005F5722 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				D851742B1D54AC58005F5722 /* THNHomeViewController.h */,
+				D851742C1D54AC58005F5722 /* THNHomeViewController.m */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		D851742D1D54AC58005F5722 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		D851742E1D54AC58005F5722 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				D85174581D58B250005F5722 /* HomeThemeTableViewCell.h */,
+				D85174591D58B250005F5722 /* HomeThemeTableViewCell.m */,
+				D851745B1D58B307005F5722 /* HomeThemeCollectionViewCell.h */,
+				D851745C1D58B307005F5722 /* HomeThemeCollectionViewCell.m */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		D85174311D58714F005F5722 /* NewBaseClass */ = {
+			isa = PBXGroup;
+			children = (
+				D85174391D587479005F5722 /* THNViewController.h */,
+				D851743A1D587479005F5722 /* THNViewController.m */,
+				D85174351D5871C5005F5722 /* THNNavigationController.h */,
+				D85174361D5871C5005F5722 /* THNNavigationController.m */,
+				D851743C1D58749D005F5722 /* THNTabBarController.h */,
+				D851743D1D58749D005F5722 /* THNTabBarController.m */,
+				D851743F1D5874EF005F5722 /* THNTabBar.h */,
+				D85174401D5874EF005F5722 /* THNTabBar.m */,
+			);
+			path = NewBaseClass;
+			sourceTree = "<group>";
+		};
+		D85174421D5878C8005F5722 /* NewCreate */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = NewCreate;
+			sourceTree = "<group>";
+		};
+		D85174431D5878C8005F5722 /* NewDiscover */ = {
+			isa = PBXGroup;
+			children = (
+				D85174441D5878C8005F5722 /* Controller */,
+				D85174451D5878C8005F5722 /* Model */,
+				D85174461D5878C8005F5722 /* View */,
+			);
+			path = NewDiscover;
+			sourceTree = "<group>";
+		};
+		D85174441D5878C8005F5722 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				D851744F1D5878F7005F5722 /* THNDiscoverViewController.h */,
+				D85174501D5878F7005F5722 /* THNDiscoverViewController.m */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		D85174451D5878C8005F5722 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		D85174461D5878C8005F5722 /* View */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		D85174471D5878C8005F5722 /* NewMall */ = {
+			isa = PBXGroup;
+			children = (
+				D85174481D5878C8005F5722 /* Controller */,
+				D85174491D5878C8005F5722 /* Model */,
+				D851744A1D5878C8005F5722 /* View */,
+			);
+			path = NewMall;
+			sourceTree = "<group>";
+		};
+		D85174481D5878C8005F5722 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				D85174521D587908005F5722 /* THNMallViewController.h */,
+				D85174531D587908005F5722 /* THNMallViewController.m */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		D85174491D5878C8005F5722 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		D851744A1D5878C8005F5722 /* View */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		D851744B1D5878C8005F5722 /* NewMyCenter */ = {
+			isa = PBXGroup;
+			children = (
+				D851744C1D5878C8005F5722 /* Controller */,
+				D851744D1D5878C8005F5722 /* Model */,
+				D851744E1D5878C8005F5722 /* View */,
+			);
+			path = NewMyCenter;
+			sourceTree = "<group>";
+		};
+		D851744C1D5878C8005F5722 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				D85174551D587917005F5722 /* THNMyCenterViewController.h */,
+				D85174561D587917005F5722 /* THNMyCenterViewController.m */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		D851744D1D5878C8005F5722 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		D851744E1D5878C8005F5722 /* View */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = View;
 			sourceTree = "<group>";
 		};
 		D8615C521D0FDA5100C12FA2 /* Edit */ = {
@@ -4441,6 +4645,7 @@
 				D847632B1D41CE3900C88379 /* MarkGoodsView.m in Sources */,
 				1F2A90031CF40277005116C7 /* FindFriendModel.m in Sources */,
 				D89CFE0C1D052AF1002701B8 /* FBSceneInfoScrollView.m in Sources */,
+				D85174571D587917005F5722 /* THNMyCenterViewController.m in Sources */,
 				1F2A90001CF40277005116C7 /* AreaModel.m in Sources */,
 				1F2A8F5E1CF40277005116C7 /* UpLookAllTagBtnTableViewCell.m in Sources */,
 				1F2A8FDF1CF40277005116C7 /* InfoGoodsHighlightsTableViewCell.m in Sources */,
@@ -4459,7 +4664,9 @@
 				1F2A8F411CF40277005116C7 /* MarkGoodsData.m in Sources */,
 				1F2A8F451CF40277005116C7 /* FBLoadPhoto.m in Sources */,
 				D8329DF41CF6158200611025 /* ShareSearchTextTableViewCell.m in Sources */,
+				D85174511D5878F7005F5722 /* THNDiscoverViewController.m in Sources */,
 				1F2A8FA51CF40277005116C7 /* ShareStyleCollectionViewCell.m in Sources */,
+				D851743B1D587479005F5722 /* THNViewController.m in Sources */,
 				D89CFE121D080F50002701B8 /* FBUserTagsLable.m in Sources */,
 				1F2A8FDC1CF40277005116C7 /* GoodsSceneCollectionViewCell.m in Sources */,
 				1F2A8FED1CF40277005116C7 /* EditNickNameViewController.m in Sources */,
@@ -4510,6 +4717,7 @@
 				D8E3AEBC1CFC9B84006E5E8C /* SceneAddViewController.m in Sources */,
 				1F2A8F701CF40277005116C7 /* FiuSceneInfoCounter.m in Sources */,
 				1F2A8FFF1CF40277005116C7 /* AddreesModel.m in Sources */,
+				D85174301D54AC58005F5722 /* THNHomeViewController.m in Sources */,
 				1F2A8F4D1CF40277005116C7 /* FiltersView.m in Sources */,
 				1FD59C181D11A8190025A800 /* ProjectViewCommentsViewController.m in Sources */,
 				D89CFE031D041819002701B8 /* GoodsDesTableViewCell.m in Sources */,
@@ -4519,6 +4727,7 @@
 				1F2A8FF71CF40277005116C7 /* MyPageViewController.m in Sources */,
 				D8B795271CF48AFB0075D985 /* ShareStyleBottomView.m in Sources */,
 				D8C690C01D13DFC70026EAB5 /* LMSpringboardView.m in Sources */,
+				D85174411D5874EF005F5722 /* THNTabBar.m in Sources */,
 				1F2A8F9F1CF40277005116C7 /* LikeSceneView.m in Sources */,
 				1F2A8F951CF40277005116C7 /* LikeOrSuPeopleRow.m in Sources */,
 				1F2A8F931CF40277005116C7 /* LikeOrSuPeopleCounter.m in Sources */,
@@ -4566,6 +4775,7 @@
 				1F2A90AF1CF40277005116C7 /* OptionViewController.m in Sources */,
 				1F2A8FFB1CF40277005116C7 /* ShieldingViewController.m in Sources */,
 				1F2A8FAD1CF40277005116C7 /* FBOrderTimeViewController.m in Sources */,
+				D85174371D5871C5005F5722 /* THNNavigationController.m in Sources */,
 				1F2A8F621CF40277005116C7 /* FindGoodsView.m in Sources */,
 				1F2A8F8A1CF40277005116C7 /* SceneSubscribeViewController.m in Sources */,
 				1FF36EAD1D50A7C500EB3C93 /* SearchPepoleTableViewCell.m in Sources */,
@@ -4662,6 +4872,7 @@
 				1F2A90811CF40277005116C7 /* OrderInfoModel.m in Sources */,
 				1F2A8FF61CF40277005116C7 /* MyPageFocusOnViewController.m in Sources */,
 				1F2A8FC51CF40277005116C7 /* GoodsData.m in Sources */,
+				D851745D1D58B307005F5722 /* HomeThemeCollectionViewCell.m in Sources */,
 				1F2A8F7C1CF40277005116C7 /* AllSceneCollectionViewCell.m in Sources */,
 				1F2A90411CF40277005116C7 /* BindIngViewController.m in Sources */,
 				1F2A903C1CF40277005116C7 /* FBMapLocatinViewController.m in Sources */,
@@ -4686,6 +4897,7 @@
 				1F2A8F961CF40277005116C7 /* LikeOrSuPeopleUser.m in Sources */,
 				D8B855CB1D3F76E40008BD57 /* ChooseCategoryCollectionViewCell.m in Sources */,
 				1F2A8FB51CF40277005116C7 /* FiuBrand.m in Sources */,
+				D851743E1D58749D005F5722 /* THNTabBarController.m in Sources */,
 				1F2A90A91CF40277005116C7 /* AboutViewController.m in Sources */,
 				1F2A8F7F1CF40277005116C7 /* FiuHeaderTableViewCell.m in Sources */,
 				1F2A901A1CF40277005116C7 /* HistoryBonusViewController.m in Sources */,
@@ -4766,6 +4978,7 @@
 				1F2A8F741CF40277005116C7 /* FiuSceneLocation.m in Sources */,
 				1FCDCC871D07F50D00C92E78 /* ServiceViewController.m in Sources */,
 				1F2A90311CF40277005116C7 /* DirectMessagesViewController.m in Sources */,
+				D85174541D587908005F5722 /* THNMallViewController.m in Sources */,
 				D8F89E301D4B26860098F158 /* NoSubscribeView.m in Sources */,
 				1F2A8FC61CF40277005116C7 /* GoodsInfo.m in Sources */,
 				1F2A90451CF40277005116C7 /* FBSignupViewController.m in Sources */,
@@ -4781,6 +4994,7 @@
 				1F2A8FBF1CF40277005116C7 /* CommentModel.m in Sources */,
 				1F2A8FCF1CF40277005116C7 /* ChildTagsCollectionViewCell.m in Sources */,
 				1F2A8FC21CF40277005116C7 /* CommentModelRow.m in Sources */,
+				D851745A1D58B250005F5722 /* HomeThemeTableViewCell.m in Sources */,
 				1F2A8F8F1CF40277005116C7 /* HomeSceneListProduct.m in Sources */,
 				D81281671CAA8532007CF08B /* JKDBModel.m in Sources */,
 				D8B795241CF48ADD0075D985 /* ShareStyleTopView.m in Sources */,
