@@ -37,7 +37,7 @@ static CGFloat const userStarFont = 9.0f;
 - (void)changeWithSearchText:(NSString *)title withDes:(NSString *)des {
     _titleText = title;
     [self.title mas_updateConstraints:^(MASConstraintMaker *make) {
-        make.size.mas_equalTo(CGSizeMake(SCREEN_WIDTH * 0.68, 56));
+        make.size.mas_equalTo(CGSizeMake(SCREEN_WIDTH * 0.7, 56));
     }];
     [self titleTextStyle:_titleText withBgColor:[UIColor colorWithPatternImage:[UIImage imageNamed:@"titleBg"]]];
     [self changeContentLabStyle:des];
@@ -103,14 +103,14 @@ static CGFloat const userStarFont = 9.0f;
     
     [self addSubview:self.title];
     [_title mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.size.mas_equalTo(CGSizeMake(SCREEN_WIDTH * 0.68, 56));
+        make.size.mas_equalTo(CGSizeMake(SCREEN_WIDTH * 0.7, 56));
         make.top.equalTo(_userView.mas_bottom).with.offset(5);
         make.left.equalTo(self.mas_left).with.offset(15);
     }];
     
     [self addSubview:self.describeView];
     [_describeView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.size.mas_equalTo(CGSizeMake(SCREEN_WIDTH * 0.68, 50));
+        make.size.mas_equalTo(CGSizeMake(SCREEN_WIDTH * 0.7, 50));
         make.top.equalTo(_title.mas_bottom).with.offset(5);
         make.left.equalTo(self.mas_left).with.offset(15);
     }];
@@ -361,12 +361,12 @@ static CGFloat const userStarFont = 9.0f;
 
 - (void)changeContentLabStyle:(NSString *)str {
     if (IS_PHONE6P) {
-        if (str.length > 63) {
-            str = [str substringToIndex:62];
+        if (str.length > 61) {
+            str = [str substringToIndex:61];
             [_describeView addSubview:self.describeIcon];
             [_describeIcon mas_makeConstraints:^(MASConstraintMaker *make) {
-                make.size.mas_equalTo(CGSizeMake(15, 15));
-                make.bottom.equalTo(_describe.mas_bottom).with.offset(1);
+                make.size.mas_equalTo(CGSizeMake(9, 9));
+                make.bottom.equalTo(_describe.mas_bottom).with.offset(-1);
                 make.right.equalTo(_describe.mas_right).with.offset(0);
             }];
             
@@ -381,12 +381,12 @@ static CGFloat const userStarFont = 9.0f;
         }
         
     } else {
-        if (str.length > 57) {
-            str = [str substringToIndex:57];
+        if (str.length > 56) {
+            str = [str substringToIndex:56];
             [_describeView addSubview:self.describeIcon];
             [_describeIcon mas_makeConstraints:^(MASConstraintMaker *make) {
-                make.size.mas_equalTo(CGSizeMake(15, 15));
-                make.bottom.equalTo(_describe.mas_bottom).with.offset(1);
+                make.size.mas_equalTo(CGSizeMake(9, 9));
+                make.bottom.equalTo(_describe.mas_bottom).with.offset(-1);
                 make.right.equalTo(_describe.mas_right).with.offset(0);
             }];
             

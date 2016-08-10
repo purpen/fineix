@@ -12,7 +12,7 @@ static NSString *const URLFiuSceneInfo = @"/scene_scene/view";
 static NSString *const URLFiuSceneList = @"/scene_sight/";
 static NSString *const URLSuFiuScene = @"/favorite/ajax_subscription";
 static NSString *const URLCancelSu = @"/favorite/ajax_cancel_subscription";
-static NSString *const URLLikeScenePeople = @"/favorite";
+static NSString *const URLLikeScenePeople = @"/favorite/get_new_list";
 static NSString *const URLDeleteScene = @"/scene_scene/delete";
 
 @interface FiuSceneViewController () {
@@ -97,7 +97,7 @@ static NSString *const URLDeleteScene = @"/scene_scene/delete";
 #pragma mark 订阅此情景的用户
 - (void)networkLikePeopleData {
     [self.suPeopleMarr removeAllObjects];
-    self.suPeopleRequest = [FBAPI postWithUrlString:URLLikeScenePeople requestDictionary:@{@"type":@"scene", @"event":@"subscription", @"page":@"1" , @"size":@"10000", @"id":self.fiuSceneId} delegate:self];
+    self.suPeopleRequest = [FBAPI postWithUrlString:URLLikeScenePeople requestDictionary:@{@"type":@"11", @"event":@"4", @"page":@"1" , @"size":@"30", @"target_id":self.fiuSceneId} delegate:self];
     [self.suPeopleRequest startRequestSuccess:^(FBRequest *request, id result) {
         NSArray * likePeopleArr = [[result valueForKey:@"data"] valueForKey:@"rows"];
         for (NSDictionary * likePeopleDic in likePeopleArr) {
@@ -268,7 +268,7 @@ static NSString *const URLDeleteScene = @"/scene_scene/delete";
                 cell = [[LikePeopleTableViewCell alloc] initWithStyle:(UITableViewCellStyleDefault) reuseIdentifier:likePeopleCellId];
             }
             cell.nav = self.navigationController;
-            [cell setLikeOrSuPeopleData:self.suPeopleMarr];
+            [cell setLikeOrSuPeopleData:self.suPeopleMarr withType:1];
             return cell;
         }
         

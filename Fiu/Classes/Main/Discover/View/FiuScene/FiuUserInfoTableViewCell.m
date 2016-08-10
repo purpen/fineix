@@ -189,7 +189,7 @@
         
         [_userView addSubview:self.titleText];
         [_titleText mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.size.mas_equalTo(CGSizeMake(SCREEN_WIDTH - 40, 40));
+            make.size.mas_equalTo(CGSizeMake(SCREEN_WIDTH - 40, 56));
             make.bottom.equalTo(_time.mas_top).with.offset(-8);
             make.left.equalTo(_userView.mas_left).with.offset(20);
         }];
@@ -331,24 +331,21 @@
 
 //  标题文字的样式
 - (void)titleTextStyle:(NSString *)title withBgColor:(UIColor *)color {
-    if ([title length] <= 9) {
-        if (IS_iOS9) {
-            _titleText.font = [UIFont fontWithName:@"PingFangSC-Light" size:40];
-        } else {
-            _titleText.font = [UIFont systemFontOfSize:40];
-        }
-    } else if ([title length] > 9 && [title length] <= 12) {
-        if (IS_iOS9) {
-            _titleText.font = [UIFont fontWithName:@"PingFangSC-Light" size:30];
-        } else {
-            _titleText.font = [UIFont systemFontOfSize:30];
-        }
-    } else if ([title length] > 12) {
-        if (IS_iOS9) {
-            _titleText.font = [UIFont fontWithName:@"PingFangSC-Light" size:20];
-        } else {
-            _titleText.font = [UIFont systemFontOfSize:20];
-        }
+    if ([title length] < 8) {
+        _titleText.font = [UIFont systemFontOfSize:40];
+        [_titleText mas_updateConstraints:^(MASConstraintMaker *make) {
+            make.size.mas_equalTo(CGSizeMake(SCREEN_WIDTH - 40, 56));
+        }];
+    } else if ([title length] >= 8 && [title length] < 12) {
+        _titleText.font = [UIFont systemFontOfSize:30];
+        [_titleText mas_updateConstraints:^(MASConstraintMaker *make) {
+            make.size.mas_equalTo(CGSizeMake(SCREEN_WIDTH - 40, 36));
+        }];
+    } else if ([title length] >= 12) {
+        _titleText.font = [UIFont systemFontOfSize:22];
+        [_titleText mas_updateConstraints:^(MASConstraintMaker *make) {
+            make.size.mas_equalTo(CGSizeMake(240, 56));
+        }];
     }
     
     NSMutableAttributedString * titleText = [[NSMutableAttributedString alloc] initWithString:title];

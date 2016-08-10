@@ -557,6 +557,7 @@
 		D8E3AEBB1CFC9B84006E5E8C /* ReleaseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D8E3AEB31CFC9B84006E5E8C /* ReleaseViewController.m */; };
 		D8E3AEBC1CFC9B84006E5E8C /* SceneAddViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D8E3AEB51CFC9B84006E5E8C /* SceneAddViewController.m */; };
 		D8E3AEBF1D003F4D006E5E8C /* FBRefresh.m in Sources */ = {isa = PBXBuildFile; fileRef = D8E3AEBE1D003F4D006E5E8C /* FBRefresh.m */; };
+		D8EF56FA1D5092F2004230FE /* MorePeopleViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D8EF56F91D5092F2004230FE /* MorePeopleViewController.m */; };
 		D8F1C2B01D3A377900AE717F /* CatagoryFiuSceneModel.m in Sources */ = {isa = PBXBuildFile; fileRef = D8F1C2AF1D3A377900AE717F /* CatagoryFiuSceneModel.m */; };
 		D8F1C2B31D3BED3F00AE717F /* EditChooseTagsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D8F1C2B21D3BED3F00AE717F /* EditChooseTagsViewController.m */; };
 		D8F89E301D4B26860098F158 /* NoSubscribeView.m in Sources */ = {isa = PBXBuildFile; fileRef = D8F89E2F1D4B26860098F158 /* NoSubscribeView.m */; };
@@ -1556,6 +1557,8 @@
 		D8E3AEB51CFC9B84006E5E8C /* SceneAddViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SceneAddViewController.m; sourceTree = "<group>"; };
 		D8E3AEBD1D003F4D006E5E8C /* FBRefresh.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FBRefresh.h; sourceTree = "<group>"; };
 		D8E3AEBE1D003F4D006E5E8C /* FBRefresh.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FBRefresh.m; sourceTree = "<group>"; };
+		D8EF56F81D5092F2004230FE /* MorePeopleViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MorePeopleViewController.h; sourceTree = "<group>"; };
+		D8EF56F91D5092F2004230FE /* MorePeopleViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MorePeopleViewController.m; sourceTree = "<group>"; };
 		D8F1C2AE1D3A377900AE717F /* CatagoryFiuSceneModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CatagoryFiuSceneModel.h; sourceTree = "<group>"; };
 		D8F1C2AF1D3A377900AE717F /* CatagoryFiuSceneModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CatagoryFiuSceneModel.m; sourceTree = "<group>"; };
 		D8F1C2B11D3BED3F00AE717F /* EditChooseTagsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EditChooseTagsViewController.h; sourceTree = "<group>"; };
@@ -2170,6 +2173,7 @@
 		1F2A8CA41CF40276005116C7 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
+				D8EF56F71D5092E4004230FE /* MorePeopleList */,
 				1F2A8CA51CF40276005116C7 /* Home */,
 				1F2A8CA81CF40276005116C7 /* Scene */,
 				1F2A8CAB1CF40276005116C7 /* Share */,
@@ -4180,6 +4184,15 @@
 			path = CreateScene;
 			sourceTree = "<group>";
 		};
+		D8EF56F71D5092E4004230FE /* MorePeopleList */ = {
+			isa = PBXGroup;
+			children = (
+				D8EF56F81D5092F2004230FE /* MorePeopleViewController.h */,
+				D8EF56F91D5092F2004230FE /* MorePeopleViewController.m */,
+			);
+			path = MorePeopleList;
+			sourceTree = "<group>";
+		};
 		D8F1C2AD1D3A375D00AE717F /* CatagoryFiuScene */ = {
 			isa = PBXGroup;
 			children = (
@@ -4544,6 +4557,7 @@
 				D81EA4011D2A52DD0032FAAB /* FiuBrandListViewController.m in Sources */,
 				1F2A907B1CF40277005116C7 /* TaoBaoOrderViewController.m in Sources */,
 				1F2A8FA81CF40277005116C7 /* GoodsCategoryViewController.m in Sources */,
+				D8EF56FA1D5092F2004230FE /* MorePeopleViewController.m in Sources */,
 				D8329DF01CF611F800611025 /* ShareInfoData.m in Sources */,
 				1F2A8FB11CF40277005116C7 /* GoodsCarViewController.m in Sources */,
 				1F2A909E1CF40277005116C7 /* GreatPeopleViewController.m in Sources */,
@@ -4897,7 +4911,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 9.2;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
-				PROVISIONING_PROFILE = "68229318-888d-4d23-9586-1a46706c4314";
+				PROVISIONING_PROFILE = "38736fb6-f8a9-4075-b98f-85f06063d856";
 				SDKROOT = iphoneos;
 			};
 			name = Debug;
@@ -4935,7 +4949,7 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.2;
 				MTL_ENABLE_DEBUG_INFO = NO;
-				PROVISIONING_PROFILE = "68229318-888d-4d23-9586-1a46706c4314";
+				PROVISIONING_PROFILE = "38736fb6-f8a9-4075-b98f-85f06063d856";
 				SDKROOT = iphoneos;
 				VALIDATE_PRODUCT = YES;
 			};
@@ -4982,7 +4996,7 @@
 				OTHER_LIBTOOLFLAGS = "-all_load";
 				PRODUCT_BUNDLE_IDENTIFIER = com.THN.fineix;
 				PRODUCT_NAME = Fiu;
-				PROVISIONING_PROFILE = "68229318-888d-4d23-9586-1a46706c4314";
+				PROVISIONING_PROFILE = "38736fb6-f8a9-4075-b98f-85f06063d856";
 				RUN_CLANG_STATIC_ANALYZER = NO;
 				USER_HEADER_SEARCH_PATHS = "$(SRCROOT)";
 			};
@@ -5029,7 +5043,7 @@
 				OTHER_LIBTOOLFLAGS = "-all_load";
 				PRODUCT_BUNDLE_IDENTIFIER = com.THN.fineix;
 				PRODUCT_NAME = Fiu;
-				PROVISIONING_PROFILE = "68229318-888d-4d23-9586-1a46706c4314";
+				PROVISIONING_PROFILE = "38736fb6-f8a9-4075-b98f-85f06063d856";
 				RUN_CLANG_STATIC_ANALYZER = NO;
 				USER_HEADER_SEARCH_PATHS = "$(SRCROOT)";
 			};

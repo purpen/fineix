@@ -52,6 +52,8 @@
 "FiuBrandListVC" = "品牌";
 "SeleBrandVC" = "自营品牌";
 "editTagsVC" = "编辑标签";
+"likePeopleVC" = "赞的人";
+"suPeopleVC" = "订阅的人";
 
 //  提示信息
 "netError" = "网络连接错误";

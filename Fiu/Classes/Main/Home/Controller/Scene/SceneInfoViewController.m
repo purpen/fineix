@@ -12,7 +12,7 @@
 
 static NSString *const URLSceneInfo = @"/scene_sight/view";
 static NSString *const URLCommentList = @"/comment/getlist";
-static NSString *const URLLikeScenePeople = @"/favorite";
+static NSString *const URLLikeScenePeople = @"/favorite/get_new_list";
 static NSString *const URLLikeScene = @"/favorite/ajax_sight_love";
 static NSString *const URLCancelLike = @"/favorite/ajax_cancel_sight_love";
 static NSString *const URLSceneGoods = @"/scene_product/getlist";
@@ -174,7 +174,7 @@ static NSString *const URLDeleteScene = @"/scene_sight/delete";
 - (void)networkLikePeopleData {
     [self.likePeopleMarr removeAllObjects];
 
-    self.likePeopleRequest = [FBAPI postWithUrlString:URLLikeScenePeople requestDictionary:@{@"type":@"sight", @"event":@"love", @"page":@"1" , @"size":@"30", @"id":self.sceneId} delegate:self];
+    self.likePeopleRequest = [FBAPI postWithUrlString:URLLikeScenePeople requestDictionary:@{@"type":@"12", @"event":@"2", @"page":@"1" , @"size":@"30", @"target_id":self.sceneId} delegate:self];
     [self.likePeopleRequest startRequestSuccess:^(FBRequest *request, id result) {
         NSArray * likePeopleArr = [[result valueForKey:@"data"] valueForKey:@"rows"];
         for (NSDictionary * likePeopleDic in likePeopleArr) {
@@ -340,7 +340,7 @@ static NSString *const URLDeleteScene = @"/scene_sight/delete";
                 cell = [[LikePeopleTableViewCell alloc] initWithStyle:(UITableViewCellStyleDefault) reuseIdentifier:likePeopleCellId];
             }
             cell.nav = self.navigationController;
-            [cell setLikeOrSuPeopleData:self.likePeopleMarr];
+            [cell setLikeOrSuPeopleData:self.likePeopleMarr withType:0];
             return cell;
         }
         

@@ -18,8 +18,14 @@
 @pro_strong NSMutableArray              *   imgMarr;        //  用户头像
 @pro_strong NSMutableArray              *   userIdMarr;     //  用户id
 @pro_assign CGFloat                         cellHeight;
+@pro_assign NSInteger                       moreType;
+@pro_strong NSString                    *   ids;
 
-- (void)setLikeOrSuPeopleData:(NSMutableArray *)model;
+/**
+ *  type
+ *  0:点赞； 1:订阅
+ */
+- (void)setLikeOrSuPeopleData:(NSMutableArray *)model withType:(NSInteger)type;
 
 - (void)getCellHeight:(NSArray *)people;
 
