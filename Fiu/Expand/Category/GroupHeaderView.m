@@ -38,7 +38,7 @@
     if (more.length > 0) {
         [self.moreBtn setTitle:more forState:(UIControlStateNormal)];
     } else {
-        [self.moreBtn setImage:[UIImage imageNamed:@"button_right_next"] forState:(UIControlStateNormal)];
+        [self.moreBtn setImage:[UIImage imageNamed:@"icon_Next"] forState:(UIControlStateNormal)];
     }
     CGFloat titleLength = [title boundingRectWithSize:CGSizeMake(320, 1000) options:(NSStringDrawingUsesLineFragmentOrigin) attributes:nil context:nil].size.width;
     [_headerTitle mas_updateConstraints:^(MASConstraintMaker *make) {
@@ -86,8 +86,8 @@
 - (UILabel *)headerTitle {
     if (!_headerTitle) {
         _headerTitle = [[UILabel alloc] init];
-        _headerTitle.textColor = [UIColor colorWithHexString:@"#222222" alpha:1];
-        _headerTitle.font = [UIFont systemFontOfSize:12];
+        _headerTitle.textColor = [UIColor colorWithHexString:@"#000000"];
+        _headerTitle.font = [UIFont systemFontOfSize:14];
     }
     return _headerTitle;
 }
@@ -95,7 +95,7 @@
 - (UILabel *)subTitle {
     if (!_subTitle) {
         _subTitle = [[UILabel alloc] init];
-        _subTitle.textColor = [UIColor colorWithHexString:@"#666666" alpha:1];
+        _subTitle.textColor = [UIColor colorWithHexString:@"#666666"];
         if (IS_iOS9) {
             _subTitle.font = [UIFont fontWithName:@"PingFangSC-Light" size:11];
         } else {

@@ -15,4 +15,5 @@ target "Fiu" do
  pod 'HMSegmentedControl'
  pod 'HTHorizontalSelectionList'
  pod 'ZYCornerRadius'
+ pod 'pop', '~> 1.0'
 end

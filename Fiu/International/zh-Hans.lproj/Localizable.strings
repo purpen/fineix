@@ -16,6 +16,8 @@
 //  首页
 "Home_Theme" = "精选主题";
 "Home_Scene" = "精选情景";
+"User_follow" = "＋关注";
+"User_followDone" = "已关注";
 
 //  创建情景
 "next" = "继续";

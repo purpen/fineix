@@ -11,7 +11,8 @@
 
 @interface HomeThemeTableViewCell : UITableViewCell <
     UICollectionViewDelegate,
-    UICollectionViewDataSource
+    UICollectionViewDataSource,
+    UICollectionViewDelegateFlowLayout
 >
 
 @pro_strong UICollectionView *themeCollectionView;

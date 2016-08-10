@@ -24,8 +24,8 @@
 - (UIButton *)createBtn {
     if (!_createBtn) {
         _createBtn = [[UIButton alloc] init];
-        [_createBtn setImage:[UIImage imageNamed:@"Create"] forState:(UIControlStateNormal)];
-        [_createBtn setImage:[UIImage imageNamed:@"Create"] forState:(UIControlStateHighlighted)];
+        [_createBtn setImage:[UIImage imageNamed:@"tabBar_Create"] forState:(UIControlStateNormal)];
+        [_createBtn setImage:[UIImage imageNamed:@"tabBar_Create"] forState:(UIControlStateHighlighted)];
         [_createBtn sizeToFit];
         _createBtn.backgroundColor = [UIColor colorWithHexString:BLACK_COLOR];
     }

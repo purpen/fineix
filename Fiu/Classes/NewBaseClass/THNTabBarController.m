@@ -121,10 +121,10 @@
     _mallNav = [[THNNavigationController alloc] initWithRootViewController:mallVC];
     _myNav = [[THNNavigationController alloc] initWithRootViewController:myVC];
     
-    [self setChildViewController:_homeNav image:@"homegray" seletedImage:@"homered" itemTitle:NSLocalizedString(@"TabBar_Home", nil)];
-    [self setChildViewController:_discoverNav image:@"findgray" seletedImage:@"findred" itemTitle:NSLocalizedString(@"TabBar_Discover", nil)];
-    [self setChildViewController:_mallNav image:@"shopgray" seletedImage:@"shopred" itemTitle:NSLocalizedString(@"TabBar_Mall", nil)];
-    [self setChildViewController:_myNav image:@"minegray" seletedImage:@"minered" itemTitle:NSLocalizedString(@"TabBar_MyCenter", nil)];
+    [self setChildViewController:_homeNav image:@"tabBar_Home" seletedImage:@"tabBar_Home_Se" itemTitle:NSLocalizedString(@"TabBar_Home", nil)];
+    [self setChildViewController:_discoverNav image:@"tabBar_Discover" seletedImage:@"tabBar_Discover_Se" itemTitle:NSLocalizedString(@"TabBar_Discover", nil)];
+    [self setChildViewController:_mallNav image:@"tabBar_Mall" seletedImage:@"tabBar_Mall_Se" itemTitle:NSLocalizedString(@"TabBar_Mall", nil)];
+    [self setChildViewController:_myNav image:@"tabBar_MyCenter" seletedImage:@"tabBar_MyCenter_Se" itemTitle:NSLocalizedString(@"TabBar_MyCenter", nil)];
     
     self.viewControllers = @[_homeNav, _discoverNav, _mallNav, _myNav];
 }

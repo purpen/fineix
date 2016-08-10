@@ -92,8 +92,8 @@
 - (UIButton *)logoImg {
     if (!_logoImg) {
         _logoImg = [[UIButton alloc] initWithFrame:CGRectMake(SCREEN_WIDTH/2 - 22, 20, 44, 44)];
-        [_logoImg setImage:[UIImage imageNamed:@"Nav_Title"] forState:(UIControlStateNormal)];
-        [_logoImg setImage:[UIImage imageNamed:@"Nav_Title"] forState:(UIControlStateHighlighted)];
+        [_logoImg setImage:[UIImage imageNamed:@"shouye_Logo"] forState:(UIControlStateNormal)];
+        [_logoImg setImage:[UIImage imageNamed:@"shouye_Logo"] forState:(UIControlStateHighlighted)];
         [_logoImg addTarget:self action:@selector(backTop) forControlEvents:(UIControlEventTouchUpInside)];
     }
     return _logoImg;

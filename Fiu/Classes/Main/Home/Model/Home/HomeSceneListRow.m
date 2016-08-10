@@ -96,9 +96,13 @@
 		self.usedCount = [dictionary[@"used_count"] integerValue];
 	}
 
-	if(![dictionary[@"user_info"] isKindOfClass:[NSNull class]]){
-		self.user = [[HomeSceneListUser alloc] initWithDictionary:dictionary[@"user_info"]];
-	}
+    if(![dictionary[@"user_info"] isKindOfClass:[NSNull class]]){
+        self.user = [[HomeSceneListUser alloc] initWithDictionary:dictionary[@"user_info"]];
+    }
+    
+    if(![dictionary[@"comments"] isKindOfClass:[NSNull class]]){
+        self.comments = [[HomeSceneListComments alloc] initWithDictionary:dictionary[@"comments"]];
+    }
 
 	if(![dictionary[@"user_id"] isKindOfClass:[NSNull class]]){
 		self.userId = [dictionary[@"user_id"] integerValue];

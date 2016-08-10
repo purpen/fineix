@@ -506,6 +506,12 @@
 		D85174571D587917005F5722 /* THNMyCenterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D85174561D587917005F5722 /* THNMyCenterViewController.m */; };
 		D851745A1D58B250005F5722 /* HomeThemeTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D85174591D58B250005F5722 /* HomeThemeTableViewCell.m */; };
 		D851745D1D58B307005F5722 /* HomeThemeCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D851745C1D58B307005F5722 /* HomeThemeCollectionViewCell.m */; };
+		D85174601D598D1D005F5722 /* THNUserInfoTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D851745F1D598D1D005F5722 /* THNUserInfoTableViewCell.m */; };
+		D85174631D598D36005F5722 /* THNSceneImageTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D85174621D598D36005F5722 /* THNSceneImageTableViewCell.m */; };
+		D85174661D598D47005F5722 /* THNDataInfoTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D85174651D598D47005F5722 /* THNDataInfoTableViewCell.m */; };
+		D85174691D598D60005F5722 /* THNSceneInfoTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D85174681D598D60005F5722 /* THNSceneInfoTableViewCell.m */; };
+		D851746C1D5AD70E005F5722 /* THNSceneCommentTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D851746B1D5AD70E005F5722 /* THNSceneCommentTableViewCell.m */; };
+		D851746F1D5AF586005F5722 /* THNSceneTagsCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D851746E1D5AF586005F5722 /* THNSceneTagsCollectionViewCell.m */; };
 		D8615C551D0FDC4E00C12FA2 /* EditViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D8615C541D0FDC4E00C12FA2 /* EditViewController.m */; };
 		D8707F071D37FA3200007835 /* FBGoodsInfoModel.m in Sources */ = {isa = PBXBuildFile; fileRef = D8707F021D37FA3200007835 /* FBGoodsInfoModel.m */; };
 		D8707F081D37FA3200007835 /* FBGoodsInfoModelData.m in Sources */ = {isa = PBXBuildFile; fileRef = D8707F041D37FA3200007835 /* FBGoodsInfoModelData.m */; };
@@ -513,6 +519,7 @@
 		D87B69BF1CC726BA00199EFE /* FBRollImages.m in Sources */ = {isa = PBXBuildFile; fileRef = D87B69BB1CC726BA00199EFE /* FBRollImages.m */; };
 		D87B69C01CC726BA00199EFE /* GroupHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = D87B69BD1CC726BA00199EFE /* GroupHeaderView.m */; };
 		D87B69E11CC7274900199EFE /* FBMenuView.m in Sources */ = {isa = PBXBuildFile; fileRef = D87B69DF1CC7274900199EFE /* FBMenuView.m */; };
+		D88F47EB1D5B2CCE00C83A0C /* HomeSceneListComments.m in Sources */ = {isa = PBXBuildFile; fileRef = D88F47EA1D5B2CCE00C83A0C /* HomeSceneListComments.m */; };
 		D8932E461D17FE8100428FC7 /* Launch Screen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D8932E451D17FE8100428FC7 /* Launch Screen.storyboard */; };
 		D89CFE031D041819002701B8 /* GoodsDesTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D89CFE021D041819002701B8 /* GoodsDesTableViewCell.m */; };
 		D89CFE0C1D052AF1002701B8 /* FBSceneInfoScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = D89CFE0B1D052AF1002701B8 /* FBSceneInfoScrollView.m */; };
@@ -1480,6 +1487,18 @@
 		D85174591D58B250005F5722 /* HomeThemeTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HomeThemeTableViewCell.m; sourceTree = "<group>"; };
 		D851745B1D58B307005F5722 /* HomeThemeCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HomeThemeCollectionViewCell.h; sourceTree = "<group>"; };
 		D851745C1D58B307005F5722 /* HomeThemeCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HomeThemeCollectionViewCell.m; sourceTree = "<group>"; };
+		D851745E1D598D1D005F5722 /* THNUserInfoTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THNUserInfoTableViewCell.h; sourceTree = "<group>"; };
+		D851745F1D598D1D005F5722 /* THNUserInfoTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THNUserInfoTableViewCell.m; sourceTree = "<group>"; };
+		D85174611D598D36005F5722 /* THNSceneImageTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THNSceneImageTableViewCell.h; sourceTree = "<group>"; };
+		D85174621D598D36005F5722 /* THNSceneImageTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THNSceneImageTableViewCell.m; sourceTree = "<group>"; };
+		D85174641D598D47005F5722 /* THNDataInfoTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THNDataInfoTableViewCell.h; sourceTree = "<group>"; };
+		D85174651D598D47005F5722 /* THNDataInfoTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THNDataInfoTableViewCell.m; sourceTree = "<group>"; };
+		D85174671D598D60005F5722 /* THNSceneInfoTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THNSceneInfoTableViewCell.h; sourceTree = "<group>"; };
+		D85174681D598D60005F5722 /* THNSceneInfoTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THNSceneInfoTableViewCell.m; sourceTree = "<group>"; };
+		D851746A1D5AD70E005F5722 /* THNSceneCommentTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THNSceneCommentTableViewCell.h; sourceTree = "<group>"; };
+		D851746B1D5AD70E005F5722 /* THNSceneCommentTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THNSceneCommentTableViewCell.m; sourceTree = "<group>"; };
+		D851746D1D5AF586005F5722 /* THNSceneTagsCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THNSceneTagsCollectionViewCell.h; sourceTree = "<group>"; };
+		D851746E1D5AF586005F5722 /* THNSceneTagsCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THNSceneTagsCollectionViewCell.m; sourceTree = "<group>"; };
 		D8615C531D0FDC4E00C12FA2 /* EditViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EditViewController.h; sourceTree = "<group>"; };
 		D8615C541D0FDC4E00C12FA2 /* EditViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EditViewController.m; sourceTree = "<group>"; };
 		D8707F011D37FA3200007835 /* FBGoodsInfoModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FBGoodsInfoModel.h; sourceTree = "<group>"; };
@@ -1494,6 +1513,8 @@
 		D87B69BD1CC726BA00199EFE /* GroupHeaderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GroupHeaderView.m; sourceTree = "<group>"; };
 		D87B69DF1CC7274900199EFE /* FBMenuView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FBMenuView.m; sourceTree = "<group>"; };
 		D87B69E01CC7274900199EFE /* FBMenuView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FBMenuView.h; sourceTree = "<group>"; };
+		D88F47E91D5B2CCE00C83A0C /* HomeSceneListComments.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HomeSceneListComments.h; sourceTree = "<group>"; };
+		D88F47EA1D5B2CCE00C83A0C /* HomeSceneListComments.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HomeSceneListComments.m; sourceTree = "<group>"; };
 		D8932E451D17FE8100428FC7 /* Launch Screen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = "Launch Screen.storyboard"; sourceTree = "<group>"; };
 		D89CFE011D041819002701B8 /* GoodsDesTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GoodsDesTableViewCell.h; sourceTree = "<group>"; };
 		D89CFE021D041819002701B8 /* GoodsDesTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GoodsDesTableViewCell.m; sourceTree = "<group>"; };
@@ -2279,6 +2300,8 @@
 				1F2A8CBE1CF40276005116C7 /* HomeSceneListRow.m */,
 				1F2A8CBF1CF40276005116C7 /* HomeSceneListUser.h */,
 				1F2A8CC01CF40276005116C7 /* HomeSceneListUser.m */,
+				D88F47E91D5B2CCE00C83A0C /* HomeSceneListComments.h */,
+				D88F47EA1D5B2CCE00C83A0C /* HomeSceneListComments.m */,
 			);
 			path = Home;
 			sourceTree = "<group>";
@@ -4114,6 +4137,18 @@
 				D85174591D58B250005F5722 /* HomeThemeTableViewCell.m */,
 				D851745B1D58B307005F5722 /* HomeThemeCollectionViewCell.h */,
 				D851745C1D58B307005F5722 /* HomeThemeCollectionViewCell.m */,
+				D851745E1D598D1D005F5722 /* THNUserInfoTableViewCell.h */,
+				D851745F1D598D1D005F5722 /* THNUserInfoTableViewCell.m */,
+				D85174611D598D36005F5722 /* THNSceneImageTableViewCell.h */,
+				D85174621D598D36005F5722 /* THNSceneImageTableViewCell.m */,
+				D85174641D598D47005F5722 /* THNDataInfoTableViewCell.h */,
+				D85174651D598D47005F5722 /* THNDataInfoTableViewCell.m */,
+				D85174671D598D60005F5722 /* THNSceneInfoTableViewCell.h */,
+				D85174681D598D60005F5722 /* THNSceneInfoTableViewCell.m */,
+				D851746D1D5AF586005F5722 /* THNSceneTagsCollectionViewCell.h */,
+				D851746E1D5AF586005F5722 /* THNSceneTagsCollectionViewCell.m */,
+				D851746A1D5AD70E005F5722 /* THNSceneCommentTableViewCell.h */,
+				D851746B1D5AD70E005F5722 /* THNSceneCommentTableViewCell.m */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -4632,6 +4667,8 @@
 				1F2A90A61CF40277005116C7 /* SearchMenuView.m in Sources */,
 				D81281581CAA8532007CF08B /* UIColor+Extension.m in Sources */,
 				1F2A8FA21CF40277005116C7 /* DataNumTableViewCell.m in Sources */,
+				D85174661D598D47005F5722 /* THNDataInfoTableViewCell.m in Sources */,
+				D85174631D598D36005F5722 /* THNSceneImageTableViewCell.m in Sources */,
 				1F2A90511CF40277005116C7 /* ImproView.m in Sources */,
 				1F2A8F6C1CF40277005116C7 /* FiuPeopleUser.m in Sources */,
 				D8E3AEBB1CFC9B84006E5E8C /* ReleaseViewController.m in Sources */,
@@ -4644,6 +4681,7 @@
 				1F2A8F661CF40277005116C7 /* DiscoverViewController.m in Sources */,
 				D847632B1D41CE3900C88379 /* MarkGoodsView.m in Sources */,
 				1F2A90031CF40277005116C7 /* FindFriendModel.m in Sources */,
+				D851746C1D5AD70E005F5722 /* THNSceneCommentTableViewCell.m in Sources */,
 				D89CFE0C1D052AF1002701B8 /* FBSceneInfoScrollView.m in Sources */,
 				D85174571D587917005F5722 /* THNMyCenterViewController.m in Sources */,
 				1F2A90001CF40277005116C7 /* AreaModel.m in Sources */,
@@ -4788,6 +4826,7 @@
 				1F2A90331CF40277005116C7 /* ChatTableViewCell.m in Sources */,
 				1F2A8F591CF40277005116C7 /* AllTagListTableViewCell.m in Sources */,
 				1F2A90271CF40277005116C7 /* CertIdView.m in Sources */,
+				D85174691D598D60005F5722 /* THNSceneInfoTableViewCell.m in Sources */,
 				1F2A908B1CF40277005116C7 /* PaySuccessViewController.m in Sources */,
 				1F2A900E1CF40277005116C7 /* FriendCollectionViewCell.m in Sources */,
 				1F2A90791CF40277005116C7 /* ReturnViewController.m in Sources */,
@@ -4825,6 +4864,7 @@
 				1F2A90801CF40277005116C7 /* MyOderModel.m in Sources */,
 				D8BE89DE1D334ADD00DE5029 /* BrandsListTableViewCell.m in Sources */,
 				1F2A90041CF40277005116C7 /* FindSceneModel.m in Sources */,
+				D851746F1D5AF586005F5722 /* THNSceneTagsCollectionViewCell.m in Sources */,
 				1F2A8F6D1CF40277005116C7 /* FiuScene.m in Sources */,
 				1F2A8FC41CF40277005116C7 /* Goods.m in Sources */,
 				1F2A90211CF40277005116C7 /* IdentityTagsViewController.m in Sources */,
@@ -4901,6 +4941,7 @@
 				1F2A90A91CF40277005116C7 /* AboutViewController.m in Sources */,
 				1F2A8F7F1CF40277005116C7 /* FiuHeaderTableViewCell.m in Sources */,
 				1F2A901A1CF40277005116C7 /* HistoryBonusViewController.m in Sources */,
+				D88F47EB1D5B2CCE00C83A0C /* HomeSceneListComments.m in Sources */,
 				1F2A90A81CF40277005116C7 /* UserHeaderTableViewCell.m in Sources */,
 				D8C690B41D1125F80026EAB5 /* EditSceneAddMoreView.m in Sources */,
 				1F2A8F461CF40277005116C7 /* FBPictureViewController.m in Sources */,
@@ -4981,6 +5022,7 @@
 				D85174541D587908005F5722 /* THNMallViewController.m in Sources */,
 				D8F89E301D4B26860098F158 /* NoSubscribeView.m in Sources */,
 				1F2A8FC61CF40277005116C7 /* GoodsInfo.m in Sources */,
+				D85174601D598D1D005F5722 /* THNUserInfoTableViewCell.m in Sources */,
 				1F2A90451CF40277005116C7 /* FBSignupViewController.m in Sources */,
 				1F533E1A1D3E2793006FC72D /* ForgetViewController.m in Sources */,
 				1F2A90691CF40277005116C7 /* SystemInfoTableViewCell.m in Sources */,

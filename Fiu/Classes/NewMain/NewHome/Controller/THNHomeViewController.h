@@ -16,9 +16,16 @@
     UITableViewDataSource
 >
 
-@pro_strong FBRollImages *homerollView;     //  轮播图
+@pro_strong FBRollImages *homerollView;
 @pro_strong FBRequest *rollImgRequest;
-@pro_strong UITableView *homeTable;         //  首页列表
-@pro_strong GroupHeaderView *headerView;    //  单元格分组视图
+@pro_strong UITableView *homeTable;
+@pro_strong FBRequest *sceneListRequest;
+@pro_assign NSInteger currentpageNum;
+@pro_assign NSInteger totalPageNum;
+@pro_strong GroupHeaderView *headerView;
+
+@pro_strong NSMutableArray *rollList;
+@pro_strong NSMutableArray *sceneListMarr;
+@pro_strong NSMutableArray *sceneIdMarr;
 
 @end

@@ -26,8 +26,8 @@ static NSString *const themeCollectionCellID = @"ThemeCollectionCellID";
 - (UICollectionView *)themeCollectionView {
     if (!_themeCollectionView) {
         UICollectionViewFlowLayout * flowLayout = [[UICollectionViewFlowLayout alloc] init];
-        flowLayout.itemSize = CGSizeMake(150, 70);
-        flowLayout.minimumLineSpacing = 4.0f;
+        flowLayout.minimumLineSpacing = 10.0f;
+        flowLayout.sectionInset = UIEdgeInsetsMake(0, 15, 0, 15);
         flowLayout.scrollDirection = UICollectionViewScrollDirectionHorizontal;
         
         _themeCollectionView = [[UICollectionView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 70)
@@ -44,6 +44,13 @@ static NSString *const themeCollectionCellID = @"ThemeCollectionCellID";
 
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
     return 5;
+}
+
+- (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath {
+    if (indexPath.row == 4) {
+        return CGSizeMake(50, 70);
+    } else
+        return CGSizeMake(160, 70);
 }
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
