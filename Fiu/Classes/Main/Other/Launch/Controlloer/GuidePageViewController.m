@@ -9,8 +9,9 @@
 #import "GuidePageViewController.h"
 #import "Fiu.h"
 #import "UserInfoEntity.h"
-#import "FBTabBarController.h"
+#import "THNTabBarController.h"
 #import "InviteCCodeViewController.h"
+#import <MediaPlayer/MediaPlayer.h>
 //#import <AdSupport/AdSupport.h>
 
 @interface GuidePageViewController ()<UIScrollViewDelegate,FBRequestDelegate>
@@ -22,8 +23,13 @@
     UIPageControl *_guidePageController;
 }
 @property (nonatomic,strong) UIButton *enterBtn;
-/** 点按手势 */
-@property (nonatomic, strong) UITapGestureRecognizer *bgImageTap;
+@property (nonatomic,strong) MPMoviePlayerController *moviePlayer;//视频播放控制器
+/**  */
+@property (nonatomic, strong) UIButton *soundBtn;
+/**  */
+@property (nonatomic, strong) UIButton *unSoundBtn;
+/**  */
+@property (nonatomic, strong) UIButton *skipBtn;
 @end
 static NSString *userActivationUrl = @"/gateway/record_fiu_user_active";
 @implementation GuidePageViewController
@@ -47,8 +53,12 @@ static NSString *userActivationUrl = @"/gateway/record_fiu_user_active";
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    
     if (self.flag == shouYe) {
-        [self.player play];
+        //播放
+        [self.moviePlayer play];
+        //添加通知
+        [self addNotification];
 //        NSString *adId = [[[ASIdentifierManager sharedManager] advertisingIdentifier] UUIDString];
 //        FBRequest *request = [FBAPI postWithUrlString:userActivationUrl requestDictionary:@{
 //                                                                                        @"idfa":adId
@@ -58,84 +68,97 @@ static NSString *userActivationUrl = @"/gateway/record_fiu_user_active";
 //        [request startRequest];
     }else if (self.flag == welcomePage){
         [self startRollImg];
-        [_guideScrollView.subviews[_pictureArr.count-1] addGestureRecognizer:self.bgImageTap];
     }
     
-    //设置scrollview
-//    [self setScrollView];
-    //设置ImageView
-//    [self setImageView];
-
-    //设置页码控制器
-//    [self setPageController];
-//    InviteCCodeViewController *vc = [[InviteCCodeViewController alloc] init];
-//    BOOL userIsFirstInstalled = [[NSUserDefaults standardUserDefaults] boolForKey:@"UserHasGuideView"];
-//    if (userIsFirstInstalled) {
-//        FBTabBarController * tabBarC = [[FBTabBarController alloc] init];
-//        self.window.rootViewController = tabBarC;
-//        UserInfoEntity *entity = [UserInfoEntity defaultUserInfoEntity];
-//        FBRequest *request = [FBAPI postWithUrlString:@"/auth/user" requestDictionary:@{@"user_id":entity.userId} delegate:self];
-//        [request startRequestSuccess:^(FBRequest *request, id result) {
-//            NSDictionary *dataDict = result[@"data"];
-//            NSDictionary *counterDict = [dataDict objectForKey:@"counter"];
-//            _counterModel = [CounterModel mj_objectWithKeyValues:counterDict];
-//            //判断小圆点是否消失
-//            if (![_counterModel.message_total_count isEqual:@0]) {
-//                [tabBarC.tabBar showBadgeWithIndex:4];
-//            }else{
-//                [tabBarC.tabBar hideBadgeWithIndex:4];
-//            }
-//        } failure:^(FBRequest *request, NSError *error) {
-//        }];
-//    }else{
-//        self.window.rootViewController = [[GuidePageViewController alloc] initWithPicArr:arr andRootVC:[[FBTabBarController alloc] init]];
-//        [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"UserHasGuideView"];
-//    }
 }
 
--(UITapGestureRecognizer *)bgImageTap{
-    if (!_bgImageTap) {
-        _bgImageTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapLastImage)];
-    }
-    return _bgImageTap;
-}
-
--(void)tapLastImage{
-    [self dismissViewControllerAnimated:YES completion:nil];
-}
-
-#pragma mark - 首次启动视频
-- (AVPlayer *)player {
-    if (!_player) {
-        AVAudioSession * session = [AVAudioSession sharedInstance];
-        [session setCategory:AVAudioSessionCategoryPlayback error:nil];
-        [session setActive:YES error:nil];
-        
+/**
+ *  创建媒体播放控制器
+ *
+ *  @return 媒体播放控制器
+ */
+-(MPMoviePlayerController *)moviePlayer{
+    if (!_moviePlayer) {
         NSString * audioPath = [[NSBundle mainBundle] pathForResource:@"Fiu" ofType:@"mp4"];
         NSURL * playUrl = [NSURL fileURLWithPath:audioPath];
-        AVAsset *movieAsset = [AVURLAsset URLAssetWithURL:playUrl options:nil];
-        AVPlayerItem *playerItem = [AVPlayerItem playerItemWithAsset:movieAsset];
+        _moviePlayer=[[MPMoviePlayerController alloc]initWithContentURL:playUrl];
+        _moviePlayer.view.frame=self.view.bounds;
+        _moviePlayer.view.autoresizingMask=UIViewAutoresizingFlexibleWidth|UIViewAutoresizingFlexibleHeight;
+        _moviePlayer.controlStyle = MPMovieControlStyleNone;
+
+        [_moviePlayer.view addSubview:self.soundBtn];
+        [_moviePlayer.view addSubview:self.unSoundBtn];
+        [_moviePlayer.view addSubview:self.skipBtn];
         
-        _player = [AVPlayer playerWithPlayerItem:playerItem];
-        
-        AVPlayerLayer * layer = [AVPlayerLayer playerLayerWithPlayer:_player];
-        layer.frame = CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT);
-        layer.videoGravity = AVLayerVideoGravityResizeAspectFill;
-        [self.view.layer addSublayer:layer];
-        
-        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(playAv) name:UIApplicationDidBecomeActiveNotification object:nil];
-        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(stopAv) name:UIApplicationDidEnterBackgroundNotification object:nil];
-        [[NSNotificationCenter  defaultCenter] addObserver:self selector:@selector(startRollImg) name:AVPlayerItemDidPlayToEndTimeNotification object:nil];
+        [self.view addSubview:_moviePlayer.view];
+        [[AVAudioSession sharedInstance] setCategory:AVAudioSessionCategoryPlayback error:nil];
     }
-    return _player;
+    return _moviePlayer;
 }
 
-- (void)stopAv {
-    [self.player pause];
+/**
+ *  添加通知监控媒体播放控制器状态
+ */
+-(void)addNotification{
+    NSNotificationCenter *notificationCenter=[NSNotificationCenter defaultCenter];
+    [notificationCenter addObserver:self selector:@selector(mediaPlayerPlaybackFinished:) name:MPMoviePlayerPlaybackDidFinishNotification object:self.moviePlayer];
+    
 }
 
-- (void)playAv {
-    [self.player play];
+/**
+ *  播放完成
+ *
+ *  @param notification 通知对象
+ */
+-(void)mediaPlayerPlaybackFinished:(NSNotification *)notification{
+    [self startRollImg];
+}
+
+-(UIButton *)soundBtn{
+    if (!_soundBtn) {
+        _soundBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+        _soundBtn.frame = CGRectMake(15, 15, 28, 28);
+        _soundBtn.layer.masksToBounds = YES;
+        _soundBtn.layer.cornerRadius = 14;
+        _soundBtn.backgroundColor = [UIColor colorWithHexString:@"#231916" alpha:0.6];
+        [_soundBtn setImage:[UIImage imageNamed:@"guide_sound"] forState:UIControlStateNormal];
+        [_soundBtn addTarget:self action:@selector(soundClick) forControlEvents:UIControlEventTouchUpInside];
+    }
+    return _soundBtn;
+}
+
+-(UIButton *)unSoundBtn{
+    if (!_unSoundBtn) {
+        _unSoundBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+        _unSoundBtn.frame = CGRectMake(48, 19, 20, 20);
+        [_unSoundBtn setImage:[UIImage imageNamed:@"guide_unSound"] forState:UIControlStateNormal];
+        [_unSoundBtn addTarget:self action:@selector(unSoundClick) forControlEvents:UIControlEventTouchUpInside];
+    }
+    return _unSoundBtn;
+}
+
+-(UIButton *)skipBtn{
+    if (!_skipBtn) {
+        _skipBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+        _skipBtn.frame = CGRectMake(SCREEN_WIDTH - 15 - 40, 15, 40, 21);
+        _skipBtn.backgroundColor = [UIColor colorWithHexString:@"#231916" alpha:0.6];
+        [_skipBtn setTitle:@"跳过" forState:UIControlStateNormal];
+        _skipBtn.titleLabel.font = [UIFont systemFontOfSize:13];
+        [_skipBtn addTarget:self action:@selector(skipClick) forControlEvents:UIControlEventTouchUpInside];
+    }
+    return _skipBtn;
+}
+
+-(void)skipClick{
+    [self.moviePlayer stop];
+}
+
+-(void)unSoundClick{
+    [[AVAudioSession sharedInstance] setCategory:AVAudioSessionCategoryAmbient error:nil];
+}
+
+-(void)soundClick{
+    [[AVAudioSession sharedInstance] setCategory:AVAudioSessionCategoryPlayback error:nil];
 }
 
 - (void)startRollImg {
@@ -204,7 +227,7 @@ static NSString *userActivationUrl = @"/gateway/record_fiu_user_active";
 //点击『立即使用』按钮
 -(void)clickSkips:(UIButton*)sender{
     [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"UserHasGuideView"];
-    if ([_mainController isKindOfClass:[FBTabBarController class]]) {
+    if ([_mainController isKindOfClass:[THNTabBarController class]]) {
 
         __block BOOL invitation;
         FBRequest *request = [FBAPI postWithUrlString:@"/gateway/is_invited" requestDictionary:nil delegate:self];
@@ -216,7 +239,7 @@ static NSString *userActivationUrl = @"/gateway/record_fiu_user_active";
                 invitation = YES;
                 BOOL codeFlag = [[NSUserDefaults standardUserDefaults] boolForKey:@"codeFlag"];
                 if (codeFlag) {
-                    FBTabBarController *tab = [[FBTabBarController alloc] init];
+                    THNTabBarController *tab = [[THNTabBarController alloc] init];
                     [tab setSelectedIndex:0];
                     [self presentViewController:tab animated:YES completion:nil];
                 }else{
@@ -226,14 +249,14 @@ static NSString *userActivationUrl = @"/gateway/record_fiu_user_active";
                         vc.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;
                         [self presentViewController:vc animated:YES completion:nil];
                     }else{
-                        FBTabBarController *tab = [[FBTabBarController alloc] init];
+                        THNTabBarController *tab = [[THNTabBarController alloc] init];
                         [tab setSelectedIndex:0];
                         [self presentViewController:tab animated:YES completion:nil];
                     }
                 }
             }else if([code isEqual:@(0)]){
                 //没有开启邀请功能
-                FBTabBarController *tab = [[FBTabBarController alloc] init];
+                THNTabBarController *tab = [[THNTabBarController alloc] init];
                 [tab setSelectedIndex:0];
                 [self presentViewController:tab animated:YES completion:nil];
             }
@@ -244,20 +267,6 @@ static NSString *userActivationUrl = @"/gateway/record_fiu_user_active";
         [self dismissViewControllerAnimated:YES completion:nil];
     }
     
-    
-
-//    //如果没有登录过弹出登录注册界面
-//    UserInfoEntity *entity = [UserInfoEntity defaultUserInfoEntity];
-//    if (entity.isLogin == NO) {
-//        //转到我的界面
-//        UIStoryboard *loginStory = [UIStoryboard storyboardWithName:@"My" bundle:nil];
-//        MyViewController *loginVC = [loginStory instantiateViewControllerWithIdentifier:@"MyViewController"];
-//        UINavigationController *navi = [[UINavigationController alloc] initWithRootViewController:loginVC];
-//        [self presentViewController:navi animated:YES completion:nil];
-//    }//跳到首页页面，如果没有登录过弹出登录注册界面
-//    else{
-//        [self presentViewController:_mainController animated:YES completion:nil];
-//    }
     
 }
 
@@ -276,9 +285,9 @@ static NSString *userActivationUrl = @"/gateway/record_fiu_user_active";
 }
 
 - (void)dealloc {
-    [[NSNotificationCenter defaultCenter] removeObserver:self name:AVPlayerItemDidPlayToEndTimeNotification object:nil];
-    [[NSNotificationCenter defaultCenter] removeObserver:self name:UIApplicationDidBecomeActiveNotification object:nil];
-    [[NSNotificationCenter defaultCenter] removeObserver:self name:UIApplicationDidEnterBackgroundNotification object:nil];
+    
+    //移除所有通知监控
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
 @end

@@ -75,8 +75,6 @@ static NSString *const ShareURL = @"http://m.taihuoniao.com/guide/app_about";
     FBRequest *request = [FBAPI postWithUrlString:@"/user/find_user" requestDictionary:@{@"page":@1,@"size":@15,@"type":@1,@"sight_count":@5,@"sort":@0} delegate:self];
     [request startRequestSuccess:^(FBRequest *request, id result) {
         
-        
-        NSLog( @" reslut   %@",result);
         NSDictionary *dataDict = [result objectForKey:@"data"];
         NSArray *rowsAry = [dataDict objectForKey:@"users"];
         for (NSDictionary *rowsDict in rowsAry) {

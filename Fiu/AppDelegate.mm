@@ -223,14 +223,14 @@ NSString *const determineLogin = @"/auth/check_login";
         } failure:^(FBRequest *request, NSError *error) {
         }];
     }else if(!userIsFirstInstalled){
-        GuidePageViewController *vc = [[GuidePageViewController alloc] initWithPicArr:arr andRootVC:[[FBTabBarController alloc] init]];
+        GuidePageViewController *vc = [[GuidePageViewController alloc] initWithPicArr:arr andRootVC:[[THNTabBarController alloc] init]];
         vc.flag = shouYe;
         self.window.rootViewController = vc;
     }else if (userIsFirstInstalled && !codeFlag){
         if (flag) {
             self.window.rootViewController = [[InviteCCodeViewController alloc] init];
         }else{
-            FBTabBarController * tabBarC = [[FBTabBarController alloc] init];
+            THNTabBarController * tabBarC = [[THNTabBarController alloc] init];
             self.window.rootViewController = tabBarC;
             UserInfoEntity *entity = [UserInfoEntity defaultUserInfoEntity];
             FBRequest *request = [FBAPI postWithUrlString:@"/auth/user" requestDictionary:@{@"user_id":entity.userId} delegate:self];

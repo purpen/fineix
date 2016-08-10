@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="10117" systemVersion="15C50" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="THNSignUpViewController">
+            <connections>
+                <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="i5M-Pr-FkT">
+            <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="background_login" translatesAutoresizingMaskIntoConstraints="NO" id="Pas-yW-i4X">
+                    <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                </imageView>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="UjV-hR-siP">
+                    <rect key="frame" x="15" y="30" width="10" height="22"/>
+                    <state key="normal" image="l_back"/>
+                </button>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="请输入手机号" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="EQX-CB-vfv">
+                    <rect key="frame" x="146" y="183" width="84" height="17"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                    <color key="textColor" red="0.76078431372549016" green="0.76078431372549016" blue="0.76078431372549016" alpha="1" colorSpace="calibratedRGB"/>
+                    <nil key="highlightedColor"/>
+                </label>
+            </subviews>
+            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+            <constraints>
+                <constraint firstItem="UjV-hR-siP" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="15" id="9D1-E9-M12"/>
+                <constraint firstItem="EQX-CB-vfv" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="Nle-1A-qCI"/>
+                <constraint firstAttribute="bottom" secondItem="Pas-yW-i4X" secondAttribute="bottom" id="R2f-kw-D9P"/>
+                <constraint firstItem="EQX-CB-vfv" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="183" id="S97-TS-UQ3"/>
+                <constraint firstItem="Pas-yW-i4X" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="fG7-f4-WVx"/>
+                <constraint firstAttribute="trailing" secondItem="Pas-yW-i4X" secondAttribute="trailing" id="hLo-Rw-tnF"/>
+                <constraint firstItem="UjV-hR-siP" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="30" id="iD0-Jm-Obx"/>
+                <constraint firstItem="Pas-yW-i4X" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="lDS-39-fSF"/>
+            </constraints>
+            <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
+        </view>
+    </objects>
+    <resources>
+        <image name="background_login" width="375" height="667"/>
+        <image name="l_back" width="10" height="18"/>
+    </resources>
+</document>

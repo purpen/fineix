@@ -403,6 +403,11 @@
 		1F59E5FC1C9ABBA500E96C60 /* Accelerate.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1F59E5FB1C9ABBA500E96C60 /* Accelerate.framework */; };
 		1F69CE201CF70BFA00AE3271 /* OfficialCertificationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F69CE1E1CF70BFA00AE3271 /* OfficialCertificationViewController.m */; };
 		1F69CE211CF70BFA00AE3271 /* OfficialCertificationViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1F69CE1F1CF70BFA00AE3271 /* OfficialCertificationViewController.xib */; };
+		1F6CA25D1D5B0FA600DFB79E /* MediaPlayer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1F6CA25C1D5B0FA600DFB79E /* MediaPlayer.framework */; };
+		1F6CA2611D5B1DC300DFB79E /* THNLoginRegisterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F6CA25F1D5B1DC300DFB79E /* THNLoginRegisterViewController.m */; };
+		1F6CA2621D5B1DC300DFB79E /* THNLoginRegisterViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1F6CA2601D5B1DC300DFB79E /* THNLoginRegisterViewController.xib */; };
+		1F6CA2661D5B324000DFB79E /* THNSignUpViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F6CA2641D5B324000DFB79E /* THNSignUpViewController.m */; };
+		1F6CA2671D5B324000DFB79E /* THNSignUpViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1F6CA2651D5B324000DFB79E /* THNSignUpViewController.xib */; };
 		1F772B5E1CF3FD910018AE40 /* AppDelegate.mm in Sources */ = {isa = PBXBuildFile; fileRef = 1F772B5D1CF3FD910018AE40 /* AppDelegate.mm */; };
 		1FA204E51D378AAB00B89699 /* UIView+Size.m in Sources */ = {isa = PBXBuildFile; fileRef = 1FA204E41D378AAB00B89699 /* UIView+Size.m */; };
 		1FA4BDED1D35F2200067A196 /* UMSocialLocalizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 1FA4BDB61D35F2200067A196 /* UMSocialLocalizable.strings */; };
@@ -1287,6 +1292,13 @@
 		1F69CE1D1CF70BFA00AE3271 /* OfficialCertificationViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OfficialCertificationViewController.h; sourceTree = "<group>"; };
 		1F69CE1E1CF70BFA00AE3271 /* OfficialCertificationViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OfficialCertificationViewController.m; sourceTree = "<group>"; };
 		1F69CE1F1CF70BFA00AE3271 /* OfficialCertificationViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = OfficialCertificationViewController.xib; sourceTree = "<group>"; };
+		1F6CA25C1D5B0FA600DFB79E /* MediaPlayer.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MediaPlayer.framework; path = System/Library/Frameworks/MediaPlayer.framework; sourceTree = SDKROOT; };
+		1F6CA25E1D5B1DC300DFB79E /* THNLoginRegisterViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THNLoginRegisterViewController.h; sourceTree = "<group>"; };
+		1F6CA25F1D5B1DC300DFB79E /* THNLoginRegisterViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THNLoginRegisterViewController.m; sourceTree = "<group>"; };
+		1F6CA2601D5B1DC300DFB79E /* THNLoginRegisterViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = THNLoginRegisterViewController.xib; sourceTree = "<group>"; };
+		1F6CA2631D5B324000DFB79E /* THNSignUpViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THNSignUpViewController.h; sourceTree = "<group>"; };
+		1F6CA2641D5B324000DFB79E /* THNSignUpViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THNSignUpViewController.m; sourceTree = "<group>"; };
+		1F6CA2651D5B324000DFB79E /* THNSignUpViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = THNSignUpViewController.xib; sourceTree = "<group>"; };
 		1F772B5D1CF3FD910018AE40 /* AppDelegate.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = AppDelegate.mm; sourceTree = "<group>"; };
 		1FA204E31D378AAB00B89699 /* UIView+Size.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+Size.h"; sourceTree = "<group>"; };
 		1FA204E41D378AAB00B89699 /* UIView+Size.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+Size.m"; sourceTree = "<group>"; };
@@ -1604,6 +1616,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1F6CA25D1D5B0FA600DFB79E /* MediaPlayer.framework in Frameworks */,
 				D8AC3E011D2CFFEC00148522 /* libz.1.2.5.tbd in Frameworks */,
 				1FA4BDFC1D35F2200067A196 /* TencentOpenAPI.framework in Frameworks */,
 				D8AC3DFF1D2CFFD600148522 /* libstdc++.6.tbd in Frameworks */,
@@ -3177,6 +3190,12 @@
 				1F533E211D3F785A006FC72D /* PersonLabelPickerViewController.h */,
 				1F533E221D3F785A006FC72D /* PersonLabelPickerViewController.m */,
 				1F533E231D3F785A006FC72D /* PersonLabelPickerViewController.xib */,
+				1F6CA25E1D5B1DC300DFB79E /* THNLoginRegisterViewController.h */,
+				1F6CA25F1D5B1DC300DFB79E /* THNLoginRegisterViewController.m */,
+				1F6CA2601D5B1DC300DFB79E /* THNLoginRegisterViewController.xib */,
+				1F6CA2631D5B324000DFB79E /* THNSignUpViewController.h */,
+				1F6CA2641D5B324000DFB79E /* THNSignUpViewController.m */,
+				1F6CA2651D5B324000DFB79E /* THNSignUpViewController.xib */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -3824,6 +3843,7 @@
 		4121957EDE4D4049941B2B88 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				1F6CA25C1D5B0FA600DFB79E /* MediaPlayer.framework */,
 				D84763321D427E0100C88379 /* AdSupport.framework */,
 				D84763331D427E0100C88379 /* iAd.framework */,
 				D8AC3E001D2CFFEC00148522 /* libz.1.2.5.tbd */,
@@ -4444,6 +4464,7 @@
 		8005072C1C7A9CDD005AF0BE /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
+				CLASSPREFIX = THN;
 				LastUpgradeCheck = 0720;
 				ORGANIZATIONNAME = taihuoniao;
 				TargetAttributes = {
@@ -4523,6 +4544,7 @@
 				1F2A907C1CF40277005116C7 /* TaoBaoOrderViewController.xib in Resources */,
 				1F2A90221CF40277005116C7 /* IdentityTagsViewController.xib in Resources */,
 				D812815D1CAA8532007CF08B /* Localizable.strings in Resources */,
+				1F6CA2621D5B1DC300DFB79E /* THNLoginRegisterViewController.xib in Resources */,
 				1F2A906E1CF40277005116C7 /* AllOderViewController.xib in Resources */,
 				1F2A90911CF40277005116C7 /* QrShareSheetViewController.xib in Resources */,
 				1F2A90301CF40277005116C7 /* DeliveryAddressCell.xib in Resources */,
@@ -4551,6 +4573,7 @@
 				1F2A90561CF40277005116C7 /* RecommendedScenarioView.xib in Resources */,
 				1F2A8FEC1CF40277005116C7 /* DatePickerViewController.xib in Resources */,
 				1FA4BDF41D35F2200067A196 /* UMSLoginViewController.xib in Resources */,
+				1F6CA2671D5B324000DFB79E /* THNSignUpViewController.xib in Resources */,
 				1F2A90AC1CF40277005116C7 /* ChanePwdViewController.xib in Resources */,
 				1F533E251D3F785A006FC72D /* PersonLabelPickerViewController.xib in Resources */,
 				1F1AF3B31CF58A6B00CAA525 /* IntegralViewController.xib in Resources */,
@@ -4694,6 +4717,7 @@
 				1F2A8FC01CF40277005116C7 /* CommentModelData.m in Sources */,
 				1F2A8F691CF40277005116C7 /* FiuPeopleCounter.m in Sources */,
 				1F2A8F4E1CF40277005116C7 /* PhotoAlbumsTableViewCell.m in Sources */,
+				1F6CA2661D5B324000DFB79E /* THNSignUpViewController.m in Sources */,
 				1F2A90051CF40277005116C7 /* InvitationModel.m in Sources */,
 				1F2A8F4A1CF40277005116C7 /* FBFiltersCollectionViewCell.m in Sources */,
 				1F2A905A1CF40277005116C7 /* CommentsViewController.m in Sources */,
@@ -4835,6 +4859,7 @@
 				1F2A90A21CF40277005116C7 /* SubscribePeopleTableViewCell.m in Sources */,
 				1F2A90461CF40277005116C7 /* ImprovViewController.m in Sources */,
 				1F2A901D1CF40277005116C7 /* BonusCell.m in Sources */,
+				1F6CA2611D5B1DC300DFB79E /* THNLoginRegisterViewController.m in Sources */,
 				1F2A8FDD1CF40277005116C7 /* GoodsTableViewCell.m in Sources */,
 				1F2A90091CF40277005116C7 /* BotView.m in Sources */,
 				1F2A8F751CF40277005116C7 /* FiuSceneRow.m in Sources */,
@@ -5125,7 +5150,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 9.2;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
-				PROVISIONING_PROFILE = "38736fb6-f8a9-4075-b98f-85f06063d856";
+				PROVISIONING_PROFILE = "68229318-888d-4d23-9586-1a46706c4314";
 				SDKROOT = iphoneos;
 			};
 			name = Debug;
@@ -5163,7 +5188,7 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.2;
 				MTL_ENABLE_DEBUG_INFO = NO;
-				PROVISIONING_PROFILE = "38736fb6-f8a9-4075-b98f-85f06063d856";
+				PROVISIONING_PROFILE = "68229318-888d-4d23-9586-1a46706c4314";
 				SDKROOT = iphoneos;
 				VALIDATE_PRODUCT = YES;
 			};
@@ -5210,7 +5235,7 @@
 				OTHER_LIBTOOLFLAGS = "-all_load";
 				PRODUCT_BUNDLE_IDENTIFIER = com.THN.fineix;
 				PRODUCT_NAME = Fiu;
-				PROVISIONING_PROFILE = "38736fb6-f8a9-4075-b98f-85f06063d856";
+				PROVISIONING_PROFILE = "68229318-888d-4d23-9586-1a46706c4314";
 				RUN_CLANG_STATIC_ANALYZER = NO;
 				USER_HEADER_SEARCH_PATHS = "$(SRCROOT)";
 			};
@@ -5257,7 +5282,7 @@
 				OTHER_LIBTOOLFLAGS = "-all_load";
 				PRODUCT_BUNDLE_IDENTIFIER = com.THN.fineix;
 				PRODUCT_NAME = Fiu;
-				PROVISIONING_PROFILE = "38736fb6-f8a9-4075-b98f-85f06063d856";
+				PROVISIONING_PROFILE = "68229318-888d-4d23-9586-1a46706c4314";
 				RUN_CLANG_STATIC_ANALYZER = NO;
 				USER_HEADER_SEARCH_PATHS = "$(SRCROOT)";
 			};
