@@ -16,6 +16,7 @@
 #import "THNMyCenterViewController.h"
 #import "UserInfoEntity.h"
 #import "THNLoginRegisterViewController.h"
+#import "MyPageViewController.h"
 
 @implementation THNTabBarController {
     THNNavigationController * _homeNav;
@@ -115,7 +116,7 @@
     THNHomeViewController *homeVC = [[THNHomeViewController alloc] init];
     THNDiscoverViewController *discoverVC = [[THNDiscoverViewController alloc] init];
     THNMallViewController *mallVC = [[THNMallViewController alloc] init];
-    THNMyCenterViewController *myVC = [[THNMyCenterViewController alloc] init];
+    MyPageViewController *myVC = [[MyPageViewController alloc] init];
     
     _homeNav = [[THNNavigationController alloc] initWithRootViewController:homeVC];
     _discoverNav = [[THNNavigationController alloc] initWithRootViewController:discoverVC];
