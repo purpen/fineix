@@ -403,6 +403,23 @@
 		1F59E5FC1C9ABBA500E96C60 /* Accelerate.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1F59E5FB1C9ABBA500E96C60 /* Accelerate.framework */; };
 		1F69CE201CF70BFA00AE3271 /* OfficialCertificationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F69CE1E1CF70BFA00AE3271 /* OfficialCertificationViewController.m */; };
 		1F69CE211CF70BFA00AE3271 /* OfficialCertificationViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1F69CE1F1CF70BFA00AE3271 /* OfficialCertificationViewController.xib */; };
+		1F6CA25D1D5B0FA600DFB79E /* MediaPlayer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1F6CA25C1D5B0FA600DFB79E /* MediaPlayer.framework */; };
+		1F6CA2611D5B1DC300DFB79E /* THNLoginRegisterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F6CA25F1D5B1DC300DFB79E /* THNLoginRegisterViewController.m */; };
+		1F6CA2621D5B1DC300DFB79E /* THNLoginRegisterViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1F6CA2601D5B1DC300DFB79E /* THNLoginRegisterViewController.xib */; };
+		1F6CA2661D5B324000DFB79E /* THNSignUpViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F6CA2641D5B324000DFB79E /* THNSignUpViewController.m */; };
+		1F6CA2671D5B324000DFB79E /* THNSignUpViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1F6CA2651D5B324000DFB79E /* THNSignUpViewController.xib */; };
+		1F6CA26D1D5C1A0600DFB79E /* THNTFView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F6CA26C1D5C1A0600DFB79E /* THNTFView.m */; };
+		1F6CA2711D5C468A00DFB79E /* THNInputCodeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F6CA26F1D5C468A00DFB79E /* THNInputCodeViewController.m */; };
+		1F6CA2721D5C468A00DFB79E /* THNInputCodeViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1F6CA2701D5C468A00DFB79E /* THNInputCodeViewController.xib */; };
+		1F6CA2761D5C4B6F00DFB79E /* THNInformationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F6CA2741D5C4B6F00DFB79E /* THNInformationViewController.m */; };
+		1F6CA2771D5C4B6F00DFB79E /* THNInformationViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1F6CA2751D5C4B6F00DFB79E /* THNInformationViewController.xib */; };
+		1F6CA27F1D5C54D700DFB79E /* THNTFCodeView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F6CA27E1D5C54D700DFB79E /* THNTFCodeView.m */; };
+		1F6CA2831D5C58A400DFB79E /* THNSetPwdViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F6CA2811D5C58A400DFB79E /* THNSetPwdViewController.m */; };
+		1F6CA2841D5C58A400DFB79E /* THNSetPwdViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1F6CA2821D5C58A400DFB79E /* THNSetPwdViewController.xib */; };
+		1F6CA2881D5C77BF00DFB79E /* THNLoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F6CA2861D5C77BF00DFB79E /* THNLoginViewController.m */; };
+		1F6CA2891D5C77BF00DFB79E /* THNLoginViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1F6CA2871D5C77BF00DFB79E /* THNLoginViewController.xib */; };
+		1F6CA28D1D5C85A500DFB79E /* THNForgetViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F6CA28B1D5C85A500DFB79E /* THNForgetViewController.m */; };
+		1F6CA28E1D5C85A500DFB79E /* THNForgetViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1F6CA28C1D5C85A500DFB79E /* THNForgetViewController.xib */; };
 		1F772B5E1CF3FD910018AE40 /* AppDelegate.mm in Sources */ = {isa = PBXBuildFile; fileRef = 1F772B5D1CF3FD910018AE40 /* AppDelegate.mm */; };
 		1FA204E51D378AAB00B89699 /* UIView+Size.m in Sources */ = {isa = PBXBuildFile; fileRef = 1FA204E41D378AAB00B89699 /* UIView+Size.m */; };
 		1FA4BDED1D35F2200067A196 /* UMSocialLocalizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 1FA4BDB61D35F2200067A196 /* UMSocialLocalizable.strings */; };
@@ -433,6 +450,14 @@
 		1FCDCC881D07F50D00C92E78 /* ServiceViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1FCDCC861D07F50D00C92E78 /* ServiceViewController.xib */; };
 		1FCDCC8D1D08085000C92E78 /* InviteCCodeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1FCDCC8B1D08085000C92E78 /* InviteCCodeViewController.m */; };
 		1FCDCC8E1D08085000C92E78 /* InviteCCodeViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1FCDCC8C1D08085000C92E78 /* InviteCCodeViewController.xib */; };
+		1FD10C8A1D5DA0A0005898EE /* THNAgeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1FD10C881D5DA0A0005898EE /* THNAgeViewController.m */; };
+		1FD10C8B1D5DA0A0005898EE /* THNAgeViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1FD10C891D5DA0A0005898EE /* THNAgeViewController.xib */; };
+		1FD10C911D5DA46E005898EE /* THNAgeBtn.m in Sources */ = {isa = PBXBuildFile; fileRef = 1FD10C901D5DA46E005898EE /* THNAgeBtn.m */; };
+		1FD10C951D5DB9BB005898EE /* THNScenarioViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1FD10C931D5DB9BB005898EE /* THNScenarioViewController.m */; };
+		1FD10C961D5DB9BB005898EE /* THNScenarioViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1FD10C941D5DB9BB005898EE /* THNScenarioViewController.xib */; };
+		1FD10C991D5DC644005898EE /* THNTopicsModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 1FD10C981D5DC644005898EE /* THNTopicsModel.m */; };
+		1FD10C9C1D5DC8B8005898EE /* THNTopicView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1FD10C9B1D5DC8B8005898EE /* THNTopicView.m */; };
+		1FD10C9E1D5DC8D1005898EE /* THNTopicView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1FD10C9D1D5DC8D1005898EE /* THNTopicView.xib */; };
 		1FD59C131D115FD50025A800 /* ProjectViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1FD59C111D115FD50025A800 /* ProjectViewController.m */; };
 		1FD59C141D115FD50025A800 /* ProjectViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1FD59C121D115FD50025A800 /* ProjectViewController.xib */; };
 		1FD59C181D11A8190025A800 /* ProjectViewCommentsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1FD59C161D11A8190025A800 /* ProjectViewCommentsViewController.m */; };
@@ -1295,6 +1320,32 @@
 		1F69CE1D1CF70BFA00AE3271 /* OfficialCertificationViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OfficialCertificationViewController.h; sourceTree = "<group>"; };
 		1F69CE1E1CF70BFA00AE3271 /* OfficialCertificationViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OfficialCertificationViewController.m; sourceTree = "<group>"; };
 		1F69CE1F1CF70BFA00AE3271 /* OfficialCertificationViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = OfficialCertificationViewController.xib; sourceTree = "<group>"; };
+		1F6CA25C1D5B0FA600DFB79E /* MediaPlayer.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MediaPlayer.framework; path = System/Library/Frameworks/MediaPlayer.framework; sourceTree = SDKROOT; };
+		1F6CA25E1D5B1DC300DFB79E /* THNLoginRegisterViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THNLoginRegisterViewController.h; sourceTree = "<group>"; };
+		1F6CA25F1D5B1DC300DFB79E /* THNLoginRegisterViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THNLoginRegisterViewController.m; sourceTree = "<group>"; };
+		1F6CA2601D5B1DC300DFB79E /* THNLoginRegisterViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = THNLoginRegisterViewController.xib; sourceTree = "<group>"; };
+		1F6CA2631D5B324000DFB79E /* THNSignUpViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THNSignUpViewController.h; sourceTree = "<group>"; };
+		1F6CA2641D5B324000DFB79E /* THNSignUpViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THNSignUpViewController.m; sourceTree = "<group>"; };
+		1F6CA2651D5B324000DFB79E /* THNSignUpViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = THNSignUpViewController.xib; sourceTree = "<group>"; };
+		1F6CA26B1D5C1A0600DFB79E /* THNTFView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THNTFView.h; sourceTree = "<group>"; };
+		1F6CA26C1D5C1A0600DFB79E /* THNTFView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THNTFView.m; sourceTree = "<group>"; };
+		1F6CA26E1D5C468A00DFB79E /* THNInputCodeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THNInputCodeViewController.h; sourceTree = "<group>"; };
+		1F6CA26F1D5C468A00DFB79E /* THNInputCodeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THNInputCodeViewController.m; sourceTree = "<group>"; };
+		1F6CA2701D5C468A00DFB79E /* THNInputCodeViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = THNInputCodeViewController.xib; sourceTree = "<group>"; };
+		1F6CA2731D5C4B6F00DFB79E /* THNInformationViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THNInformationViewController.h; sourceTree = "<group>"; };
+		1F6CA2741D5C4B6F00DFB79E /* THNInformationViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THNInformationViewController.m; sourceTree = "<group>"; };
+		1F6CA2751D5C4B6F00DFB79E /* THNInformationViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = THNInformationViewController.xib; sourceTree = "<group>"; };
+		1F6CA27D1D5C54D700DFB79E /* THNTFCodeView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THNTFCodeView.h; sourceTree = "<group>"; };
+		1F6CA27E1D5C54D700DFB79E /* THNTFCodeView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THNTFCodeView.m; sourceTree = "<group>"; };
+		1F6CA2801D5C58A400DFB79E /* THNSetPwdViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THNSetPwdViewController.h; sourceTree = "<group>"; };
+		1F6CA2811D5C58A400DFB79E /* THNSetPwdViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THNSetPwdViewController.m; sourceTree = "<group>"; };
+		1F6CA2821D5C58A400DFB79E /* THNSetPwdViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = THNSetPwdViewController.xib; sourceTree = "<group>"; };
+		1F6CA2851D5C77BF00DFB79E /* THNLoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THNLoginViewController.h; sourceTree = "<group>"; };
+		1F6CA2861D5C77BF00DFB79E /* THNLoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THNLoginViewController.m; sourceTree = "<group>"; };
+		1F6CA2871D5C77BF00DFB79E /* THNLoginViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = THNLoginViewController.xib; sourceTree = "<group>"; };
+		1F6CA28A1D5C85A500DFB79E /* THNForgetViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THNForgetViewController.h; sourceTree = "<group>"; };
+		1F6CA28B1D5C85A500DFB79E /* THNForgetViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THNForgetViewController.m; sourceTree = "<group>"; };
+		1F6CA28C1D5C85A500DFB79E /* THNForgetViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = THNForgetViewController.xib; sourceTree = "<group>"; };
 		1F772B5D1CF3FD910018AE40 /* AppDelegate.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = AppDelegate.mm; sourceTree = "<group>"; };
 		1FA204E31D378AAB00B89699 /* UIView+Size.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+Size.h"; sourceTree = "<group>"; };
 		1FA204E41D378AAB00B89699 /* UIView+Size.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+Size.m"; sourceTree = "<group>"; };
@@ -1361,6 +1412,19 @@
 		1FCDCC8A1D08085000C92E78 /* InviteCCodeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InviteCCodeViewController.h; sourceTree = "<group>"; };
 		1FCDCC8B1D08085000C92E78 /* InviteCCodeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InviteCCodeViewController.m; sourceTree = "<group>"; };
 		1FCDCC8C1D08085000C92E78 /* InviteCCodeViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = InviteCCodeViewController.xib; sourceTree = "<group>"; };
+		1FD10C871D5DA0A0005898EE /* THNAgeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THNAgeViewController.h; sourceTree = "<group>"; };
+		1FD10C881D5DA0A0005898EE /* THNAgeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THNAgeViewController.m; sourceTree = "<group>"; };
+		1FD10C891D5DA0A0005898EE /* THNAgeViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = THNAgeViewController.xib; sourceTree = "<group>"; };
+		1FD10C8F1D5DA46E005898EE /* THNAgeBtn.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THNAgeBtn.h; sourceTree = "<group>"; };
+		1FD10C901D5DA46E005898EE /* THNAgeBtn.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THNAgeBtn.m; sourceTree = "<group>"; };
+		1FD10C921D5DB9BB005898EE /* THNScenarioViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THNScenarioViewController.h; sourceTree = "<group>"; };
+		1FD10C931D5DB9BB005898EE /* THNScenarioViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THNScenarioViewController.m; sourceTree = "<group>"; };
+		1FD10C941D5DB9BB005898EE /* THNScenarioViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = THNScenarioViewController.xib; sourceTree = "<group>"; };
+		1FD10C971D5DC644005898EE /* THNTopicsModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THNTopicsModel.h; sourceTree = "<group>"; };
+		1FD10C981D5DC644005898EE /* THNTopicsModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THNTopicsModel.m; sourceTree = "<group>"; };
+		1FD10C9A1D5DC8B8005898EE /* THNTopicView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THNTopicView.h; sourceTree = "<group>"; };
+		1FD10C9B1D5DC8B8005898EE /* THNTopicView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THNTopicView.m; sourceTree = "<group>"; };
+		1FD10C9D1D5DC8D1005898EE /* THNTopicView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = THNTopicView.xib; sourceTree = "<group>"; };
 		1FD59C101D115FD50025A800 /* ProjectViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProjectViewController.h; sourceTree = "<group>"; };
 		1FD59C111D115FD50025A800 /* ProjectViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ProjectViewController.m; sourceTree = "<group>"; };
 		1FD59C121D115FD50025A800 /* ProjectViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ProjectViewController.xib; sourceTree = "<group>"; };
@@ -1628,6 +1692,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1F6CA25D1D5B0FA600DFB79E /* MediaPlayer.framework in Frameworks */,
 				D8AC3E011D2CFFEC00148522 /* libz.1.2.5.tbd in Frameworks */,
 				1FA4BDFC1D35F2200067A196 /* TencentOpenAPI.framework in Frameworks */,
 				D8AC3DFF1D2CFFD600148522 /* libstdc++.6.tbd in Frameworks */,
@@ -3203,6 +3268,33 @@
 				1F533E211D3F785A006FC72D /* PersonLabelPickerViewController.h */,
 				1F533E221D3F785A006FC72D /* PersonLabelPickerViewController.m */,
 				1F533E231D3F785A006FC72D /* PersonLabelPickerViewController.xib */,
+				1F6CA25E1D5B1DC300DFB79E /* THNLoginRegisterViewController.h */,
+				1F6CA25F1D5B1DC300DFB79E /* THNLoginRegisterViewController.m */,
+				1F6CA2601D5B1DC300DFB79E /* THNLoginRegisterViewController.xib */,
+				1F6CA2631D5B324000DFB79E /* THNSignUpViewController.h */,
+				1F6CA2641D5B324000DFB79E /* THNSignUpViewController.m */,
+				1F6CA2651D5B324000DFB79E /* THNSignUpViewController.xib */,
+				1F6CA26E1D5C468A00DFB79E /* THNInputCodeViewController.h */,
+				1F6CA26F1D5C468A00DFB79E /* THNInputCodeViewController.m */,
+				1F6CA2701D5C468A00DFB79E /* THNInputCodeViewController.xib */,
+				1F6CA2731D5C4B6F00DFB79E /* THNInformationViewController.h */,
+				1F6CA2741D5C4B6F00DFB79E /* THNInformationViewController.m */,
+				1F6CA2751D5C4B6F00DFB79E /* THNInformationViewController.xib */,
+				1F6CA2801D5C58A400DFB79E /* THNSetPwdViewController.h */,
+				1F6CA2811D5C58A400DFB79E /* THNSetPwdViewController.m */,
+				1F6CA2821D5C58A400DFB79E /* THNSetPwdViewController.xib */,
+				1F6CA2851D5C77BF00DFB79E /* THNLoginViewController.h */,
+				1F6CA2861D5C77BF00DFB79E /* THNLoginViewController.m */,
+				1F6CA2871D5C77BF00DFB79E /* THNLoginViewController.xib */,
+				1F6CA28A1D5C85A500DFB79E /* THNForgetViewController.h */,
+				1F6CA28B1D5C85A500DFB79E /* THNForgetViewController.m */,
+				1F6CA28C1D5C85A500DFB79E /* THNForgetViewController.xib */,
+				1FD10C871D5DA0A0005898EE /* THNAgeViewController.h */,
+				1FD10C881D5DA0A0005898EE /* THNAgeViewController.m */,
+				1FD10C891D5DA0A0005898EE /* THNAgeViewController.xib */,
+				1FD10C921D5DB9BB005898EE /* THNScenarioViewController.h */,
+				1FD10C931D5DB9BB005898EE /* THNScenarioViewController.m */,
+				1FD10C941D5DB9BB005898EE /* THNScenarioViewController.xib */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -3212,6 +3304,8 @@
 			children = (
 				1F2A8E571CF40277005116C7 /* DBModel */,
 				1F2A8E601CF40277005116C7 /* RecommendedScenarioModel */,
+				1FD10C971D5DC644005898EE /* THNTopicsModel.h */,
+				1FD10C981D5DC644005898EE /* THNTopicsModel.m */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -3267,6 +3361,15 @@
 				1F2A8E731CF40277005116C7 /* SignupView.m */,
 				1F2A8E741CF40277005116C7 /* SubmitView.h */,
 				1F2A8E751CF40277005116C7 /* SubmitView.m */,
+				1F6CA26B1D5C1A0600DFB79E /* THNTFView.h */,
+				1F6CA26C1D5C1A0600DFB79E /* THNTFView.m */,
+				1F6CA27D1D5C54D700DFB79E /* THNTFCodeView.h */,
+				1F6CA27E1D5C54D700DFB79E /* THNTFCodeView.m */,
+				1FD10C8F1D5DA46E005898EE /* THNAgeBtn.h */,
+				1FD10C901D5DA46E005898EE /* THNAgeBtn.m */,
+				1FD10C9A1D5DC8B8005898EE /* THNTopicView.h */,
+				1FD10C9B1D5DC8B8005898EE /* THNTopicView.m */,
+				1FD10C9D1D5DC8D1005898EE /* THNTopicView.xib */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -3850,6 +3953,7 @@
 		4121957EDE4D4049941B2B88 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				1F6CA25C1D5B0FA600DFB79E /* MediaPlayer.framework */,
 				D84763321D427E0100C88379 /* AdSupport.framework */,
 				D84763331D427E0100C88379 /* iAd.framework */,
 				D8AC3E001D2CFFEC00148522 /* libz.1.2.5.tbd */,
@@ -4484,6 +4588,7 @@
 		8005072C1C7A9CDD005AF0BE /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
+				CLASSPREFIX = THN;
 				LastUpgradeCheck = 0720;
 				ORGANIZATIONNAME = taihuoniao;
 				TargetAttributes = {
@@ -4549,6 +4654,7 @@
 				1F2A901B1CF40277005116C7 /* HistoryBonusViewController.xib in Resources */,
 				1F2A8FF31CF40277005116C7 /* ModifyGenderViewController.xib in Resources */,
 				1F2A91281CF42EC1005116C7 /* OrderInfoDetailViewController.xib in Resources */,
+				1F6CA2771D5C4B6F00DFB79E /* THNInformationViewController.xib in Resources */,
 				1FF36EAE1D50A7C500EB3C93 /* SearchPepoleTableViewCell.xib in Resources */,
 				1FA4BDF21D35F2200067A196 /* UMShareEditViewController.xib in Resources */,
 				1F2A905B1CF40277005116C7 /* CommentsViewController.xib in Resources */,
@@ -4556,22 +4662,28 @@
 				1F2A905F1CF40277005116C7 /* MessagesssViewController.xib in Resources */,
 				1F2A8FEA1CF40277005116C7 /* ChangeSumaryViewController.xib in Resources */,
 				1F2A90721CF40277005116C7 /* JDOrderViewController.xib in Resources */,
+				1FD10C961D5DB9BB005898EE /* THNScenarioViewController.xib in Resources */,
 				1F2A904A1CF40277005116C7 /* LoginRegisterController.storyboard in Resources */,
 				1F69CE211CF70BFA00AE3271 /* OfficialCertificationViewController.xib in Resources */,
+				1FD10C9E1D5DC8D1005898EE /* THNTopicView.xib in Resources */,
 				D812815B1CAA8532007CF08B /* Info.plist in Resources */,
 				1F2A900A1CF40277005116C7 /* chanel.xib in Resources */,
 				1F2A907C1CF40277005116C7 /* TaoBaoOrderViewController.xib in Resources */,
 				1F2A90221CF40277005116C7 /* IdentityTagsViewController.xib in Resources */,
 				D812815D1CAA8532007CF08B /* Localizable.strings in Resources */,
+				1F6CA2621D5B1DC300DFB79E /* THNLoginRegisterViewController.xib in Resources */,
 				1F2A906E1CF40277005116C7 /* AllOderViewController.xib in Resources */,
 				1F2A90911CF40277005116C7 /* QrShareSheetViewController.xib in Resources */,
 				1F2A90301CF40277005116C7 /* DeliveryAddressCell.xib in Resources */,
 				1F2A90361CF40277005116C7 /* Integral.xib in Resources */,
 				1F2A90881CF40277005116C7 /* ProductInfoView.xib in Resources */,
+				1F6CA2841D5C58A400DFB79E /* THNSetPwdViewController.xib in Resources */,
 				1F2A90611CF40277005116C7 /* MessageViewController.xib in Resources */,
 				1F2A90781CF40277005116C7 /* RefundmentViewController.xib in Resources */,
 				1F2A90841CF40277005116C7 /* CommentView.xib in Resources */,
+				1F6CA2891D5C77BF00DFB79E /* THNLoginViewController.xib in Resources */,
 				1FCDCC881D07F50D00C92E78 /* ServiceViewController.xib in Resources */,
+				1FD10C8B1D5DA0A0005898EE /* THNAgeViewController.xib in Resources */,
 				1FA4BDF11D35F2200067A196 /* UMSCommentInputControlleriPad.xib in Resources */,
 				1FCDCC8E1D08085000C92E78 /* InviteCCodeViewController.xib in Resources */,
 				1F2A90191CF40277005116C7 /* BonusViewController.xib in Resources */,
@@ -4583,14 +4695,17 @@
 				1F2A906A1CF40277005116C7 /* SystemInfoTableViewCell.xib in Resources */,
 				1FA4BDFA1D35F2200067A196 /* WeiboSDK.bundle in Resources */,
 				1FA4BDF01D35F2200067A196 /* UMSCommentInputController.xib in Resources */,
+				1F6CA2721D5C468A00DFB79E /* THNInputCodeViewController.xib in Resources */,
 				1FCDCC831D066D2700C92E78 /* SexSheetViewController.xib in Resources */,
 				1F2A90B01CF40277005116C7 /* OptionViewController.xib in Resources */,
 				1F2A901E1CF40277005116C7 /* BonusCell.xib in Resources */,
 				1F2A902B1CF40277005116C7 /* DeliveryAddressViewController.xib in Resources */,
+				1F6CA28E1D5C85A500DFB79E /* THNForgetViewController.xib in Resources */,
 				1F2A90631CF40277005116C7 /* SystemInformsViewController.xib in Resources */,
 				1F2A90561CF40277005116C7 /* RecommendedScenarioView.xib in Resources */,
 				1F2A8FEC1CF40277005116C7 /* DatePickerViewController.xib in Resources */,
 				1FA4BDF41D35F2200067A196 /* UMSLoginViewController.xib in Resources */,
+				1F6CA2671D5B324000DFB79E /* THNSignUpViewController.xib in Resources */,
 				1F2A90AC1CF40277005116C7 /* ChanePwdViewController.xib in Resources */,
 				1F533E251D3F785A006FC72D /* PersonLabelPickerViewController.xib in Resources */,
 				1F1AF3B31CF58A6B00CAA525 /* IntegralViewController.xib in Resources */,
@@ -4678,6 +4793,7 @@
 				1F2A8F6C1CF40277005116C7 /* FiuPeopleUser.m in Sources */,
 				D8E3AEBB1CFC9B84006E5E8C /* ReleaseViewController.m in Sources */,
 				1F2A90831CF40277005116C7 /* CommentView.m in Sources */,
+				1F6CA2711D5C468A00DFB79E /* THNInputCodeViewController.m in Sources */,
 				1F2A905C1CF40277005116C7 /* MentionedViewController.m in Sources */,
 				1F2A8F6E1CF40277005116C7 /* FiuSceneData.m in Sources */,
 				1F2A8FCA1CF40277005116C7 /* GoodsRow.m in Sources */,
@@ -4737,6 +4853,8 @@
 				1F2A8FC01CF40277005116C7 /* CommentModelData.m in Sources */,
 				1F2A8F691CF40277005116C7 /* FiuPeopleCounter.m in Sources */,
 				1F2A8F4E1CF40277005116C7 /* PhotoAlbumsTableViewCell.m in Sources */,
+				1F6CA2661D5B324000DFB79E /* THNSignUpViewController.m in Sources */,
+				1FD10C991D5DC644005898EE /* THNTopicsModel.m in Sources */,
 				1F2A90051CF40277005116C7 /* InvitationModel.m in Sources */,
 				1F2A8F4A1CF40277005116C7 /* FBFiltersCollectionViewCell.m in Sources */,
 				1F2A905A1CF40277005116C7 /* CommentsViewController.m in Sources */,
@@ -4744,6 +4862,7 @@
 				1F45A7041D2DF708009D7EE1 /* SceneCollectionViewCell.m in Sources */,
 				1F2A90431CF40277005116C7 /* FBLoginRegisterViewController.m in Sources */,
 				1F2A90A41CF40277005116C7 /* SearchViewController.m in Sources */,
+				1F6CA27F1D5C54D700DFB79E /* THNTFCodeView.m in Sources */,
 				1FCDCC821D066D2700C92E78 /* SexSheetViewController.m in Sources */,
 				1F2A90661CF40277005116C7 /* CommentsTableViewCell.m in Sources */,
 				1FF36EA31D507BA600EB3C93 /* SearchView.m in Sources */,
@@ -4773,6 +4892,7 @@
 				D8C690C01D13DFC70026EAB5 /* LMSpringboardView.m in Sources */,
 				D85174411D5874EF005F5722 /* THNTabBar.m in Sources */,
 				1F2A8F9F1CF40277005116C7 /* LikeSceneView.m in Sources */,
+				1FD10C911D5DA46E005898EE /* THNAgeBtn.m in Sources */,
 				1F2A8F951CF40277005116C7 /* LikeOrSuPeopleRow.m in Sources */,
 				1F2A8F931CF40277005116C7 /* LikeOrSuPeopleCounter.m in Sources */,
 				1F2A90821CF40277005116C7 /* ProductInfoModel.m in Sources */,
@@ -4798,6 +4918,7 @@
 				1FCDCC8D1D08085000C92E78 /* InviteCCodeViewController.m in Sources */,
 				1F2A8F761CF40277005116C7 /* RollImage.m in Sources */,
 				1F2A8FD51CF40277005116C7 /* FbGoodsItemsTableViewCell.m in Sources */,
+				1FD10C951D5DB9BB005898EE /* THNScenarioViewController.m in Sources */,
 				1F2A90921CF40277005116C7 /* CommentNViewController.m in Sources */,
 				1F2A8F9C1CF40277005116C7 /* SceneInfoUserInfo.m in Sources */,
 				1F2A90601CF40277005116C7 /* MessageViewController.m in Sources */,
@@ -4846,6 +4967,7 @@
 				1F2A8F6A1CF40277005116C7 /* FiuPeopleData.m in Sources */,
 				1F2A90501CF40277005116C7 /* TurnPageLayout.m in Sources */,
 				1F2A8FBE1CF40277005116C7 /* ChildTagsTag.m in Sources */,
+				1F6CA2881D5C77BF00DFB79E /* THNLoginViewController.m in Sources */,
 				1F2A8F3C1CF40277005116C7 /* AddUrlViewController.m in Sources */,
 				D8707F081D37FA3200007835 /* FBGoodsInfoModelData.m in Sources */,
 				D81281591CAA8532007CF08B /* UIImageView+SDWedImage.m in Sources */,
@@ -4861,6 +4983,7 @@
 				1F2A903A1CF40277005116C7 /* FBLocationViewController.m in Sources */,
 				1F2A90391CF40277005116C7 /* FBCityViewController.m in Sources */,
 				1F2A8FB91CF40277005116C7 /* Category.m in Sources */,
+				1F6CA2831D5C58A400DFB79E /* THNSetPwdViewController.m in Sources */,
 				1F2A8F5C1CF40277005116C7 /* OpenAllTagListTableViewCell.m in Sources */,
 				1F2A8F631CF40277005116C7 /* SearchGoodsView.m in Sources */,
 				D8BE89D81D33401C00DE5029 /* FBBrandGoodsView.m in Sources */,
@@ -4881,6 +5004,7 @@
 				1F2A90A21CF40277005116C7 /* SubscribePeopleTableViewCell.m in Sources */,
 				1F2A90461CF40277005116C7 /* ImprovViewController.m in Sources */,
 				1F2A901D1CF40277005116C7 /* BonusCell.m in Sources */,
+				1F6CA2611D5B1DC300DFB79E /* THNLoginRegisterViewController.m in Sources */,
 				1F2A8FDD1CF40277005116C7 /* GoodsTableViewCell.m in Sources */,
 				1F2A90091CF40277005116C7 /* BotView.m in Sources */,
 				1F2A8F751CF40277005116C7 /* FiuSceneRow.m in Sources */,
@@ -4906,6 +5030,7 @@
 				1F2A90231CF40277005116C7 /* TheOfficialCertificationViewController.m in Sources */,
 				1F2A8F4B1CF40277005116C7 /* FBPictureCollectionViewCell.m in Sources */,
 				1F45A7931D2F5263009D7EE1 /* MapAnnotionViewController.m in Sources */,
+				1F6CA2761D5C4B6F00DFB79E /* THNInformationViewController.m in Sources */,
 				1F2A8FEF1CF40277005116C7 /* FindeFriendViewController.m in Sources */,
 				D81281661CAA8532007CF08B /* JKDBHelper.m in Sources */,
 				1F2A8FE51CF40277005116C7 /* AddreesPickerViewController.m in Sources */,
@@ -4985,6 +5110,7 @@
 				1F2A8F351CF40277005116C7 /* MarkGoodsViewController.m in Sources */,
 				1F2A8FB41CF40277005116C7 /* BrandInfoData.m in Sources */,
 				1F2A8F781CF40277005116C7 /* RollImageRow.m in Sources */,
+				1FD10C9C1D5DC8B8005898EE /* THNTopicView.m in Sources */,
 				1F2A8FAA1CF40277005116C7 /* FBGoodsCommentViewController.m in Sources */,
 				D8B855C21D3F6BA10008BD57 /* AddLocationView.m in Sources */,
 				D87B69BF1CC726BA00199EFE /* FBRollImages.m in Sources */,
@@ -4994,6 +5120,7 @@
 				1F2A8FA01CF40277005116C7 /* CommentTableViewCell.m in Sources */,
 				1F2A8FBA1CF40277005116C7 /* CategoryData.m in Sources */,
 				D8B855CE1D3F7F1F0008BD57 /* AddContentView.m in Sources */,
+				1FD10C8A1D5DA0A0005898EE /* THNAgeViewController.m in Sources */,
 				1F2A90941CF40277005116C7 /* CommentData.m in Sources */,
 				1F2A904B1CF40277005116C7 /* NSNumber+UserModel.m in Sources */,
 				1F2A90AB1CF40277005116C7 /* ChanePwdViewController.m in Sources */,
@@ -5010,6 +5137,7 @@
 				1F2A8F4C1CF40277005116C7 /* FBPictureView.m in Sources */,
 				1F2A90131CF40277005116C7 /* MyQrCodeView.m in Sources */,
 				1F2A90401CF40277005116C7 /* CityTwoTableViewCell.m in Sources */,
+				1F6CA28D1D5C85A500DFB79E /* THNForgetViewController.m in Sources */,
 				1F2A8F481CF40277005116C7 /* CameraView.m in Sources */,
 				1F2A8F471CF40277005116C7 /* PictureToolViewController.m in Sources */,
 				1F2A90981CF40277005116C7 /* CommentUser.m in Sources */,
@@ -5064,6 +5192,7 @@
 				1F2A8FE11CF40277005116C7 /* InfoTitleTableViewCell.m in Sources */,
 				1F2A8FD21CF40277005116C7 /* BuyCarDefault.m in Sources */,
 				1F2A8F681CF40277005116C7 /* FiuPeople.m in Sources */,
+				1F6CA26D1D5C1A0600DFB79E /* THNTFView.m in Sources */,
 				1F2A91271CF42EC1005116C7 /* OrderInfoDetailViewController.m in Sources */,
 				1F2A8F611CF40277005116C7 /* ChangeAddUrlView.m in Sources */,
 				1FCDCC7D1D0525A300C92E78 /* FocusNonView.m in Sources */,
@@ -5173,7 +5302,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 9.2;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
-				PROVISIONING_PROFILE = "38736fb6-f8a9-4075-b98f-85f06063d856";
+				PROVISIONING_PROFILE = "68229318-888d-4d23-9586-1a46706c4314";
 				SDKROOT = iphoneos;
 			};
 			name = Debug;
@@ -5211,7 +5340,7 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.2;
 				MTL_ENABLE_DEBUG_INFO = NO;
-				PROVISIONING_PROFILE = "38736fb6-f8a9-4075-b98f-85f06063d856";
+				PROVISIONING_PROFILE = "68229318-888d-4d23-9586-1a46706c4314";
 				SDKROOT = iphoneos;
 				VALIDATE_PRODUCT = YES;
 			};
@@ -5258,7 +5387,7 @@
 				OTHER_LIBTOOLFLAGS = "-all_load";
 				PRODUCT_BUNDLE_IDENTIFIER = com.THN.fineix;
 				PRODUCT_NAME = Fiu;
-				PROVISIONING_PROFILE = "38736fb6-f8a9-4075-b98f-85f06063d856";
+				PROVISIONING_PROFILE = "68229318-888d-4d23-9586-1a46706c4314";
 				RUN_CLANG_STATIC_ANALYZER = NO;
 				USER_HEADER_SEARCH_PATHS = "$(SRCROOT)";
 			};
@@ -5305,7 +5434,7 @@
 				OTHER_LIBTOOLFLAGS = "-all_load";
 				PRODUCT_BUNDLE_IDENTIFIER = com.THN.fineix;
 				PRODUCT_NAME = Fiu;
-				PROVISIONING_PROFILE = "38736fb6-f8a9-4075-b98f-85f06063d856";
+				PROVISIONING_PROFILE = "68229318-888d-4d23-9586-1a46706c4314";
 				RUN_CLANG_STATIC_ANALYZER = NO;
 				USER_HEADER_SEARCH_PATHS = "$(SRCROOT)";
 			};

@@ -10,6 +10,11 @@
 
 @implementation UIView (FSExtension)
 
+-(void)circle:(NSInteger)r{
+    self.layer.masksToBounds = YES;
+    self.layer.cornerRadius = r;
+}
+
 - (void)setSize:(CGSize)size
 {
     CGRect frame = self.frame;

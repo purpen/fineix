@@ -33,6 +33,10 @@
 @property(nonatomic,copy) NSString *is_expert;
 @property(nonatomic,copy) NSString *expert_label;
 @property(nonatomic,copy) NSString *expert_info;
+/** 年龄段 */
+@property(nonatomic,copy) NSString *age_group;
+/** 资产 */
+@property(nonatomic,copy) NSString *assets;
 
 - (void)updateUserInfoEntity;
 
