@@ -69,11 +69,6 @@ static NSString *const URLUserAddGoods = @"/scene_product/add";
     }];
 }
 
-- (void)changeFilter:(NSNotification *)filterName {
-    UIImage * showFilterImage = [[FBFilters alloc] initWithImage:self.filtersImg filterName:[filterName object]].filterImg;
-    self.filtersImageView.image = showFilterImage;
-}
-
 #pragma mark - 设置视图UI
 - (void)setFiltersControllerUI {
     [self setNavViewUI];
@@ -81,25 +76,83 @@ static NSString *const URLUserAddGoods = @"/scene_product/add";
     self.filtersImageView.image = self.filtersImg;
     [self.view addSubview:self.filtersImageView];
     [_filtersImageView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.size.mas_equalTo(CGSizeMake(SCREEN_WIDTH, SCREEN_HEIGHT));
-        make.top.equalTo(self.view.mas_top).with.offset(50);
+        make.size.mas_equalTo(CGSizeMake(SCREEN_WIDTH, SCREEN_WIDTH));
+        make.top.equalTo(self.view.mas_top).with.offset(45);
         make.centerX.equalTo(self.view);
     }];
     
     [self.view addSubview:self.bottomBtn];
+    [_bottomBtn mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.size.mas_equalTo(CGSizeMake(SCREEN_WIDTH, SCREEN_HEIGHT-(SCREEN_WIDTH+90)));
+        make.bottom.equalTo(self.view.mas_bottom).with.offset(-45);
+        make.left.equalTo(self.view.mas_left).with.offset(0);
+    }];
     
-//    [self.view addSubview:self.footView];
-//    [self.footView mas_makeConstraints:^(MASConstraintMaker *make) {
-//        make.size.mas_equalTo(CGSizeMake(SCREEN_WIDTH, 50));
-//        make.bottom.equalTo(self.view.mas_bottom).with.offset(0);
-//        make.centerX.equalTo(self.view);
-//    }];
+    [self.view addSubview:self.footView];
+    [_footView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.size.mas_equalTo(CGSizeMake(SCREEN_WIDTH, 45));
+        make.bottom.equalTo(self.view.mas_bottom).with.offset(0);
+        make.centerX.equalTo(self.view);
+    }];
+    
+    [self.view addSubview:self.filtersView];
+    [_filtersView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.size.mas_equalTo(CGSizeMake(SCREEN_WIDTH, 120));
+        make.top.equalTo(self.view.mas_top).with.offset(SCREEN_WIDTH+90);
+        make.left.equalTo(self.view.mas_left).with.offset(SCREEN_WIDTH);
+    }];
+    
+    [self setNotification];
 }
 
-#pragma mark - 底部的工具栏
+#pragma mark - 底部选项工具栏
+- (FBFootView *)footView {
+    if (!_footView) {
+        NSArray * arr = [NSArray arrayWithObjects:NSLocalizedString(@"tag", nil), NSLocalizedString(@"filter", nil), nil];
+        _footView = [[FBFootView alloc] init];
+        _footView.backgroundColor = [UIColor colorWithHexString:@"#222222"];
+        _footView.titleArr = arr;
+        _footView.titleFontSize = Font_ControllerTitle;
+        _footView.btnBgColor = [UIColor colorWithHexString:@"#222222"];
+        _footView.titleNormalColor = [UIColor whiteColor];
+        _footView.titleSeletedColor = [UIColor colorWithHexString:fineixColor alpha:1];
+        [_footView addFootViewButton];
+        [_footView showLineWithButton];
+        _footView.delegate = self;
+    }
+    return _footView;
+}
+
+#pragma mark 底部选项的点击事件
+- (void)buttonDidSeletedWithIndex:(NSInteger)index {
+    if (index == 1) {
+        [self showFiltersViewFrame:0];
+    } else if (index == 0) {
+        [self showFiltersViewFrame:1];
+    }
+}
+
+- (void)showFiltersViewFrame:(NSInteger)index {
+    [UIView animateWithDuration:0.3
+                          delay:0
+         usingSpringWithDamping:2.0f
+          initialSpringVelocity:1.0f
+                        options:(UIViewAnimationOptionLayoutSubviews)
+                     animations:^{
+        [self.filtersView mas_updateConstraints:^(MASConstraintMaker *make) {
+            make.left.equalTo(self.view.mas_left).with.offset(SCREEN_WIDTH * index);
+        }];
+        [self.bottomBtn mas_updateConstraints:^(MASConstraintMaker *make) {
+            make.left.equalTo(self.view.mas_left).with.offset(SCREEN_WIDTH * (index-1));
+        }];
+                         
+        [self.view layoutIfNeeded];
+    } completion:nil];
+}
+
 - (UIButton *)bottomBtn {
     if (!_bottomBtn) {
-        _bottomBtn = [[UIButton alloc] initWithFrame:CGRectMake(0, SCREEN_HEIGHT - 50, SCREEN_WIDTH, 50)];
+        _bottomBtn = [[UIButton alloc] init];
         [_bottomBtn setTitle:NSLocalizedString(@"markGoodsBtnTitle", nil) forState:(UIControlStateNormal)];
         [_bottomBtn setTitleColor:[UIColor colorWithHexString:@"#FFFFFF" alpha:1] forState:(UIControlStateNormal)];
         if (IS_iOS9) {
@@ -110,15 +163,36 @@ static NSString *const URLUserAddGoods = @"/scene_product/add";
         [_bottomBtn setImage:[UIImage imageNamed:@"ic_touch_app"] forState:(UIControlStateNormal)];
         _bottomBtn.backgroundColor = [UIColor colorWithHexString:@"#000000" alpha:0.6];
         [_bottomBtn setImageEdgeInsets:(UIEdgeInsetsMake(0, -10, 0, 0))];
-        [_bottomBtn addTarget:self action:@selector(bottomBtnClick) forControlEvents:(UIControlEventTouchUpInside)];
     }
     return _bottomBtn;
 }
 
-- (void)bottomBtnClick {
-    [self.view addSubview:self.markView];
+#pragma mark - 滤镜视图
+- (FiltersView *)filtersView {
+    if (!_filtersView) {
+        _filtersView = [[FiltersView alloc] init];
+    }
+    return _filtersView;
 }
 
+#pragma mark 接收消息通知
+- (void)setNotification {
+    //  from "FiltersView.m"
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(changeFilter:) name:@"fitlerName" object:nil];
+}
+
+- (void)dealloc {
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:@"fitlerName" object:nil];
+}
+
+#pragma mark 改变滤镜
+- (void)changeFilter:(NSNotification *)filterName {
+    UIImage * showFilterImage = [[FBFilters alloc] initWithImage:self.filtersImg filterName:[filterName object]].filterImg;
+    self.filtersImageView.image = showFilterImage;
+}
+
+
+#pragma mark - 标记产品信息视图
 - (MarkGoodsView *)markView {
     if (!_markView) {
         _markView = [[MarkGoodsView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT)];
@@ -309,40 +383,44 @@ static NSString *const URLUserAddGoods = @"/scene_product/add";
 
 #pragma mark 继续按钮的点击事件
 - (void)nextBtnClick {
-        if (self.goodsIdData.count > 3) {
-            [SVProgressHUD showInfoWithStatus:@"最多添加三个商品的链接"];
-            
-        } else if (self.goodsIdData.count <= 3) {
-            NSMutableArray * originX = [NSMutableArray array];
-            NSMutableArray * originY = [NSMutableArray array];
-            for (UserGoodsTag * btn in self.tagBtnMarr) {
-                [originX addObject:[NSString stringWithFormat:@"%f", btn.frame.origin.x / SCREEN_WIDTH]];
-                [originY addObject:[NSString stringWithFormat:@"%f", (btn.frame.origin.y - 50) / SCREEN_HEIGHT]];
-            }
-        
-            NSMutableArray * priceMarr = [NSMutableArray array];
-            NSCharacterSet * set = [NSCharacterSet characterSetWithCharactersInString:@"￥"];
-            for (NSString * str in self.goodsPriceData) {
-                NSString * price = [str stringByTrimmingCharactersInSet:set];
-                [priceMarr addObject:price];
-            }
-
-            UIImage * goodsImg = [self generateImage:self.filtersImageView];
-            
-            FiltersViewController * filtersVC = [[FiltersViewController alloc] init];
-            filtersVC.createType = self.createType;
-            filtersVC.locationArr = self.locationArr;
-            filtersVC.filtersImg = goodsImg;
-            filtersVC.fSceneId = self.fSceneId;
-            filtersVC.fSceneTitle = self.fSceneTitle;
-            filtersVC.goodsTitle = self.goodsTitleData;
-            filtersVC.goodsPrice = priceMarr;
-            filtersVC.goodsId = self.goodsIdData;
-            filtersVC.goodsX = originX;
-            filtersVC.goodsY = originY;
-            
-            [self.navigationController pushViewController:filtersVC animated:YES];
-        }
+//        if (self.goodsIdData.count > 3) {
+//            [SVProgressHUD showInfoWithStatus:@"最多添加三个商品的链接"];
+//            
+//        } else if (self.goodsIdData.count <= 3) {
+//            NSMutableArray * originX = [NSMutableArray array];
+//            NSMutableArray * originY = [NSMutableArray array];
+//            for (UserGoodsTag * btn in self.tagBtnMarr) {
+//                [originX addObject:[NSString stringWithFormat:@"%f", btn.frame.origin.x / SCREEN_WIDTH]];
+//                [originY addObject:[NSString stringWithFormat:@"%f", (btn.frame.origin.y - 45) / SCREEN_HEIGHT]];
+//            }
+//        
+//            NSMutableArray * priceMarr = [NSMutableArray array];
+//            NSCharacterSet * set = [NSCharacterSet characterSetWithCharactersInString:@"￥"];
+//            for (NSString * str in self.goodsPriceData) {
+//                NSString * price = [str stringByTrimmingCharactersInSet:set];
+//                [priceMarr addObject:price];
+//            }
+//
+//            UIImage * goodsImg = [self generateImage:self.filtersImageView];
+//            
+//            FiltersViewController * filtersVC = [[FiltersViewController alloc] init];
+//            filtersVC.locationArr = self.locationArr;
+//            filtersVC.filtersImg = goodsImg;
+//            filtersVC.fSceneId = self.fSceneId;
+//            filtersVC.fSceneTitle = self.fSceneTitle;
+//            filtersVC.goodsTitle = self.goodsTitleData;
+//            filtersVC.goodsPrice = priceMarr;
+//            filtersVC.goodsId = self.goodsIdData;
+//            filtersVC.goodsX = originX;
+//            filtersVC.goodsY = originY;
+//            
+//            [self.navigationController pushViewController:filtersVC animated:YES];
+//        }
+    
+    ReleaseViewController * releaseVC = [[ReleaseViewController alloc] init];
+    releaseVC.bgImg = self.filtersImageView.image;
+    [self.navigationController pushViewController:releaseVC animated:YES];
+    
 }
 
 #pragma mark - 合成图片

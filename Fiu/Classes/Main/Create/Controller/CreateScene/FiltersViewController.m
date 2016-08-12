@@ -74,24 +74,16 @@
 #pragma mark 继续按钮的点击事件
 - (void)nextBtnClick {
     ReleaseViewController * releaseVC = [[ReleaseViewController alloc] init];
-    
-    if ([self.createType isEqualToString:@"scene"]) {
-        releaseVC.createType = self.createType;
-        releaseVC.bgImg = self.filtersImageView.image;
-        releaseVC.fSceneId = self.fSceneId;
-        releaseVC.fSceneTitle = self.fSceneTitle;
-        releaseVC.goodsTitle = self.goodsTitle;
-        releaseVC.goodsPrice = self.goodsPrice;
-        releaseVC.goodsId = self.goodsId;
-        releaseVC.goodsX = self.goodsX;
-        releaseVC.goodsY = self.goodsY;
-        [self.navigationController pushViewController:releaseVC animated:YES];
-    
-    } else if ([self.createType isEqualToString:@"fScene"]) {
-        releaseVC.bgImg = self.filtersImageView.image;
-        releaseVC.createType = self.createType;
-        [self.navigationController pushViewController:releaseVC animated:YES];
-    }
+    releaseVC.createType = self.createType;
+    releaseVC.bgImg = self.filtersImageView.image;
+    releaseVC.fSceneId = self.fSceneId;
+    releaseVC.fSceneTitle = self.fSceneTitle;
+    releaseVC.goodsTitle = self.goodsTitle;
+    releaseVC.goodsPrice = self.goodsPrice;
+    releaseVC.goodsId = self.goodsId;
+    releaseVC.goodsX = self.goodsX;
+    releaseVC.goodsY = self.goodsY;
+    [self.navigationController pushViewController:releaseVC animated:YES];
 }
 
 #pragma mark - 接收消息通知

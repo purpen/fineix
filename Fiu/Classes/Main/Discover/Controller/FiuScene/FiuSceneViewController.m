@@ -363,7 +363,6 @@ static NSString *const URLDeleteScene = @"/scene_scene/delete";
        
         } else {
             PictureToolViewController * pictureToolVC = [[PictureToolViewController alloc] init];
-            pictureToolVC.createType = @"scene";
             if (self.fiuSceneId.length > 0) {
                 pictureToolVC.fSceneId = self.fiuSceneId;
                 pictureToolVC.fSceneTitle = [self.fiuSceneData valueForKey:@"title"];

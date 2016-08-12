@@ -520,6 +520,7 @@
 		D87B69C01CC726BA00199EFE /* GroupHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = D87B69BD1CC726BA00199EFE /* GroupHeaderView.m */; };
 		D87B69E11CC7274900199EFE /* FBMenuView.m in Sources */ = {isa = PBXBuildFile; fileRef = D87B69DF1CC7274900199EFE /* FBMenuView.m */; };
 		D88F47EB1D5B2CCE00C83A0C /* HomeSceneListComments.m in Sources */ = {isa = PBXBuildFile; fileRef = D88F47EA1D5B2CCE00C83A0C /* HomeSceneListComments.m */; };
+		D88F47EE1D5C5BD300C83A0C /* FBCategoryView.m in Sources */ = {isa = PBXBuildFile; fileRef = D88F47ED1D5C5BD300C83A0C /* FBCategoryView.m */; };
 		D8932E461D17FE8100428FC7 /* Launch Screen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D8932E451D17FE8100428FC7 /* Launch Screen.storyboard */; };
 		D89CFE031D041819002701B8 /* GoodsDesTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D89CFE021D041819002701B8 /* GoodsDesTableViewCell.m */; };
 		D89CFE0C1D052AF1002701B8 /* FBSceneInfoScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = D89CFE0B1D052AF1002701B8 /* FBSceneInfoScrollView.m */; };
@@ -1515,6 +1516,8 @@
 		D87B69E01CC7274900199EFE /* FBMenuView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FBMenuView.h; sourceTree = "<group>"; };
 		D88F47E91D5B2CCE00C83A0C /* HomeSceneListComments.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HomeSceneListComments.h; sourceTree = "<group>"; };
 		D88F47EA1D5B2CCE00C83A0C /* HomeSceneListComments.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HomeSceneListComments.m; sourceTree = "<group>"; };
+		D88F47EC1D5C5BD300C83A0C /* FBCategoryView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FBCategoryView.h; sourceTree = "<group>"; };
+		D88F47ED1D5C5BD300C83A0C /* FBCategoryView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FBCategoryView.m; sourceTree = "<group>"; };
 		D8932E451D17FE8100428FC7 /* Launch Screen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = "Launch Screen.storyboard"; sourceTree = "<group>"; };
 		D89CFE011D041819002701B8 /* GoodsDesTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GoodsDesTableViewCell.h; sourceTree = "<group>"; };
 		D89CFE021D041819002701B8 /* GoodsDesTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GoodsDesTableViewCell.m; sourceTree = "<group>"; };
@@ -4311,6 +4314,8 @@
 				D8E3AEBE1D003F4D006E5E8C /* FBRefresh.m */,
 				D8DDEE0E1D338D760020FF66 /* FBPopupView.h */,
 				D8DDEE0F1D338D760020FF66 /* FBPopupView.m */,
+				D88F47EC1D5C5BD300C83A0C /* FBCategoryView.h */,
+				D88F47ED1D5C5BD300C83A0C /* FBCategoryView.m */,
 			);
 			path = Category;
 			sourceTree = "<group>";
@@ -4750,6 +4755,7 @@
 				D80D415E1CAD144D005D72B1 /* UIBarButtonItem+Helper.m in Sources */,
 				1F2A8FD91CF40277005116C7 /* FBGoodsCommentTableViewCell.m in Sources */,
 				1F2A90291CF40277005116C7 /* TagsCollectionViewCell.m in Sources */,
+				D88F47EE1D5C5BD300C83A0C /* FBCategoryView.m in Sources */,
 				D8A9AE401CE304FF00A9FCFB /* NSTimer+Addition.m in Sources */,
 				D8329DEF1CF611F800611025 /* ShareInfo.m in Sources */,
 				D8E3AEBC1CFC9B84006E5E8C /* SceneAddViewController.m in Sources */,

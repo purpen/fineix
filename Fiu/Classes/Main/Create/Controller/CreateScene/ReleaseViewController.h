@@ -31,14 +31,8 @@
 @pro_strong NSString            *   fSceneTitle;
 
 /*-- --*/
-@pro_strong UIImageView         *   bgImgView;
 @pro_strong UIImage             *   bgImg;
-@pro_strong UIView              *   topView;
 @pro_strong AddLocationView     *   addLocaiton;
-@pro_strong AddCategoryView     *   addCategory;
 @pro_strong AddContentView      *   addContent;
-@pro_strong ShowContentView     *   showContent;
-@pro_strong AddTagsView         *   addTagsView;
-@pro_strong UIButton            *   addContentBtn;
 
 @end

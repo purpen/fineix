@@ -40,9 +40,13 @@ static NSString *const commentsCellId = @"CommentsCellId";
 
 @implementation THNHomeViewController
 
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    [[UIApplication sharedApplication] setStatusBarHidden:NO];
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
     [self thn_setFirstAppStart];
     [self thn_setNavigationViewUI];
     [self thn_setHomeViewUI];
@@ -193,7 +197,7 @@ static NSString *const commentsCellId = @"CommentsCellId";
         _homeTable.dataSource = self;
         _homeTable.tableHeaderView = self.homerollView;
         _homeTable.showsVerticalScrollIndicator = NO;
-        _homeTable.backgroundColor = [UIColor colorWithHexString:@"#F1F1F1" alpha:1];
+        _homeTable.backgroundColor = [UIColor colorWithHexString:WHITE_COLOR];
         _homeTable.separatorStyle = UITableViewCellSeparatorStyleNone;
         [self addMJRefresh:_homeTable];
     }
@@ -203,8 +207,8 @@ static NSString *const commentsCellId = @"CommentsCellId";
 #pragma mark tableViewDelegate & dataSource
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
     return self.sceneListMarr.count + 1;
-    
 }
+
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     if (section == 0) {
         return 1;
@@ -299,13 +303,13 @@ static NSString *const commentsCellId = @"CommentsCellId";
                                       withTitle:NSLocalizedString(@"Home_Theme", nil)
                                    withSubtitle:@""
                                   withRightMore:@""
-                                   withMoreType:2];
+                                   withMoreType:1];
     } else if (section ==1) {
         [self.headerView addGroupHeaderViewIcon:@"shouye_jingxuan"
                                       withTitle:NSLocalizedString(@"Home_Scene", nil)
                                    withSubtitle:@""
                                   withRightMore:@""
-                                   withMoreType:0];
+                                   withMoreType:2];
     }
     return self.headerView;
 }
@@ -324,7 +328,7 @@ static NSString *const commentsCellId = @"CommentsCellId";
 
 -(void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath {
     if (indexPath.section != 0) {
-        cell.layer.transform = CATransform3DMakeScale(0.9, 0.9, 1);
+        cell.layer.transform = CATransform3DMakeScale(1, 1, 1);
         [UIView animateWithDuration:0.5 animations:^{
             cell.layer.transform = CATransform3DMakeScale(1, 1, 1);
         }];
@@ -353,21 +357,22 @@ static NSString *const commentsCellId = @"CommentsCellId";
     self.delegate = self;
     self.baseTable = self.homeTable;
     [self thn_addNavLogoImage];
-    [self thn_addQRBtn];
     [self thn_addBarItemLeftBarButton:@"" image:@"shouye_search"];
     [self thn_addBarItemRightBarButton:@"" image:@"shouye_dingyue"];
 }
 
 - (void)thn_leftBarItemSelected {
-    SearchViewController * searchVC = [[SearchViewController alloc] init];
-    searchVC.searchType = 0;
-    searchVC.beginSearch = YES;
-    [self.navigationController pushViewController:searchVC animated:YES];
+    [SVProgressHUD showSuccessWithStatus:@"搜索"];
+//    SearchViewController * searchVC = [[SearchViewController alloc] init];
+//    searchVC.searchType = 0;
+//    searchVC.beginSearch = YES;
+//    [self.navigationController pushViewController:searchVC animated:YES];
 }
 
 - (void)thn_rightBarItemSelected {
-    SceneSubscribeViewController * sceneSubVC = [[SceneSubscribeViewController alloc] init];
-    [self.navigationController pushViewController:sceneSubVC animated:YES];
+    [SVProgressHUD showSuccessWithStatus:@"订阅列表"];
+//    SceneSubscribeViewController * sceneSubVC = [[SceneSubscribeViewController alloc] init];
+//    [self.navigationController pushViewController:sceneSubVC animated:YES];
 }
 
 #pragma mark - 首次打开加载指示图

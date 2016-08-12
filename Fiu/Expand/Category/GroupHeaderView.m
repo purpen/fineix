@@ -18,7 +18,6 @@
     if (self) {
         
         self.backgroundColor = [UIColor colorWithHexString:@"#FFFFFF" alpha:1];
-        
         [self setUI];
         
     }
@@ -40,6 +39,13 @@
     } else {
         [self.moreBtn setImage:[UIImage imageNamed:@"icon_Next"] forState:(UIControlStateNormal)];
     }
+    
+    if (openType == 0) {
+        self.moreBtn.hidden = YES;
+    } else {
+        self.moreBtn.hidden = NO;
+    }
+    
     CGFloat titleLength = [title boundingRectWithSize:CGSizeMake(320, 1000) options:(NSStringDrawingUsesLineFragmentOrigin) attributes:nil context:nil].size.width;
     [_headerTitle mas_updateConstraints:^(MASConstraintMaker *make) {
         make.size.mas_equalTo(CGSizeMake(titleLength * 1.3, 15));
@@ -120,7 +126,6 @@
 }
 
 - (void)moreFiuScene {
-    
     if (self.openType == 0) {
         AllSceneViewController * allSceneVC = [[AllSceneViewController alloc] init];
         [self.nav pushViewController:allSceneVC animated:YES];

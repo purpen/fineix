@@ -15,24 +15,32 @@
 
 //  首页
 "Home_Theme" = "精选主题";
-"Home_Scene" = "精选情景";
+"Home_Scene" = "精选情境";
 "User_follow" = "＋关注";
 "User_followDone" = "已关注";
 
-//  创建情景
+//  发现
+"discoverSearch" = "搜索情境或用户";
+"newScene" = "最新情境";
+
+//  好货
+"mallSearch" = "搜索好货或品牌";
+"newGoods" = "最新商品";
+
+//  创建情境
 "next" = "继续";
 "album" = "相册";
 "camera" = "相机";
 "takePhotos" = "拍照";
 "marker" = "标记产品";
-"addUrl" = "添加链接";
+"addText" = "  添加标题  ";
 "filter" = "滤镜";
-"addDescription" = "添加描述";
+"addDescription" = "说说你现在的想法";
 "addFiuSceneDes" = "请添加140字以内的地盘描述";
 "addTitle" = "想省事？向右看，Fiu语境有你要的文字";
-"addLocation" = "添加情景地点";
+"addLocation" = "添加地点";
 "addCategory" = "选择地盘";
-"addContent" = "点击添加情景标题";
+"addContent" = "点击添加情境标题";
 "tag" = "标签";
 "onScene" = "所属地盘";
 "release" = "发布";
@@ -44,9 +52,9 @@
 "createVcTitle" = "照片胶卷";
 "cropVcTitle" = "裁剪图片";
 "filtersVcTitle" = "工具";
-"releaseVcTitle" = "创建情景";
+"releaseVcTitle" = "创建情境";
 "freleaseVcTitle" = "创建地盘";
-"editScene" = "编辑情景";
+"editScene" = "编辑情境";
 "editFiuScene" = "编辑地盘";
 "locationVcTitle" = "位置";
 "addTagVcTitle" = "添加标签";
@@ -89,9 +97,9 @@
 "goLookGoods" = "去逛逛";
 "collectSuccess" = "收藏成功";
 "cancelCollect" = "取消收藏";
-"SceneOfFiu" = "此地盘下的情景";
-"chooseFScene" = "请选择一个情景";
-"releaseSceneDone" = "您的情景发布成功，品味又升级啦. 分享给好友即可获得积分奖励～";
+"SceneOfFiu" = "此地盘下的情境";
+"chooseFScene" = "请选择一个情境";
+"releaseSceneDone" = "您的情境发布成功，品味又升级啦. 分享给好友即可获得积分奖励～";
 "shareDone" = "分享成功!";
 "shareDoneContent" = "恭喜您获得积分奖励！";
 "slognText" = "｜ 你在发现 谁在惊呼？";
@@ -144,16 +152,16 @@
 "nearFiuScene" = "相似的地盘";
 "reFiuScene" = "推荐地盘";
 "lookAllData" = "查看全部";
-"SceneBtn" = "情景";
+"SceneBtn" = "情境";
 "FiuSceneBtn" = "地盘";
 "GoodsBtn" = "产品";
 "ChooseText" = "选择语境";
 "lookAllSelfBrand" = "查看全部自营";
 "doneAndKnow" = "知道了";
 "SearchContent" = "搜索语境";
-"creatNewFiuScene" = "创建新的情景";
-"creatFiuSceneBtn" = "＋ 创建情景";
-"markGoodsBtnTitle" = "标记情景中的产品或产品链接";
+"creatNewFiuScene" = "创建新的情境";
+"creatFiuSceneBtn" = "＋ 创建情境";
+"markGoodsBtnTitle" = "点击图片标记产品信息";
 "addTagsBtn" = "添加标签";
 "sureAddGoods" = "确认添加";
 "findGoodsDone" = "找到";
@@ -180,7 +188,7 @@
 "enterVerificationCode" = "请输入验证码";
 
 //  商品详情
-"userSceneTitle" = "应用的情景";
+"userSceneTitle" = "应用的情境";
 "recommendGoodsTitle" = "相关好货推荐";
 "lookMore" = "查看更多";
 "addGoodsCar" = "加入购物车";
@@ -195,7 +203,7 @@
 "AllGoods" = "全部";
 "fiuFriend" = "热Fiuer";
 "fiuFriendText" = "[有Bigger不低调]";
-"fiuScene" = "High情景";
+"fiuScene" = "High情境";
 "fiuSceneText" = "[谁用谁上瘾]";
 "fiuFScene" = "新Land";
 "fiuFSceneText" = "[圈地盘有收益]";
@@ -204,7 +212,7 @@
 "fiuGoods" = "Fiu好货";
 "fiuGoodsText" = "[东西不少，牌子不小]";
 "peopleLike" = "人赞";
-"sceneGoods" = "此情景下的好货";
+"sceneGoods" = "此情境下的好货";
 "sceneLikeGoods" = "相近的好货";
 
 //  滤镜

@@ -8,29 +8,33 @@
 
 #import "HomeSceneListComments.h"
 
+NSString *const kHomeSceneListCommentIdField = @"_id";
+NSString *const kHomeSceneListCommentContent = @"content";
+NSString *const kHomeSceneListCommentUserAvatarUrl = @"user_avatar_url";
+NSString *const kHomeSceneListCommentUserId = @"user_id";
+NSString *const kHomeSceneListCommentUserNickname = @"user_nickname";
+
 @implementation HomeSceneListComments
 
 -(instancetype)initWithDictionary:(NSDictionary *)dictionary
 {
     self = [super init];
-    if(![dictionary[@"_id"] isKindOfClass:[NSNull class]]){
-        self.commentId = dictionary[@"_id"];
+    if(![dictionary[kHomeSceneListCommentIdField] isKindOfClass:[NSNull class]]){
+        self.idField = dictionary[kHomeSceneListCommentIdField];
     }
-    if(![dictionary[@"user_avatar_url"] isKindOfClass:[NSNull class]]){
-        self.avatarUrl = dictionary[@"user_avatar_url"];
+    if(![dictionary[kHomeSceneListCommentContent] isKindOfClass:[NSNull class]]){
+        self.content = dictionary[kHomeSceneListCommentContent];
     }
-
-    if(![dictionary[@"user_nickname"] isKindOfClass:[NSNull class]]){
-        self.nickname = dictionary[@"user_nickname"];
+    if(![dictionary[kHomeSceneListCommentUserAvatarUrl] isKindOfClass:[NSNull class]]){
+        self.userAvatarUrl = dictionary[kHomeSceneListCommentUserAvatarUrl];
     }
-    
-    if(![dictionary[@"content"] isKindOfClass:[NSNull class]]){
-        self.content = dictionary[@"content"];
+    if(![dictionary[kHomeSceneListCommentUserId] isKindOfClass:[NSNull class]]){
+        self.userId = [dictionary[kHomeSceneListCommentUserId] integerValue];
     }
     
-    if(![dictionary[@"user_id"] isKindOfClass:[NSNull class]]){
-        self.userId = [dictionary[@"user_id"] integerValue];
-    }
+    if(![dictionary[kHomeSceneListCommentUserNickname] isKindOfClass:[NSNull class]]){
+        self.userNickname = dictionary[kHomeSceneListCommentUserNickname];
+    }	
     return self;
 }
 

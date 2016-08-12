@@ -15,6 +15,7 @@
 @interface THNUserInfoTableViewCell : UITableViewCell
 
 @pro_strong UIButton *head;
+@pro_strong UIImageView *certificate;
 @pro_strong UILabel *name;
 @pro_strong UIButton *time;
 @pro_strong UIButton *address;

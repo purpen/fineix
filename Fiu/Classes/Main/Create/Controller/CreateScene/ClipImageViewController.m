@@ -46,11 +46,34 @@
     [self setGestureOperation];
 }
 
+- (void)setViewUI {
+    [self.view addSubview:self.clipImageView];
+    
+    [self.view addSubview:self.pictureView];
+    [_pictureView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.width.equalTo(@(SCREEN_WIDTH));
+        make.bottom.equalTo(self.view.mas_bottom).with.offset(0);
+        make.top.equalTo(self.view.mas_top).with.offset(SCREEN_WIDTH);
+        make.left.equalTo(self.view.mas_left).with.offset(0);
+    }];
+}
+
+- (PictureView *)pictureView {
+    if (!_pictureView) {
+        _pictureView = [[PictureView alloc] init];
+//        _pictureView.navView = self.navView;
+//        _pictureView.photoAlbumsView.photoAlbumsBtn = self.openPhotoAlbums;
+//        _pictureView.photoAlbumsView.nextBtn = self.nextBtn;
+        //  from "PhotoAlbumsView.h"
+//        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(changeViewTitle:) name:@"PhotoAlbumsName" object:nil];
+    }
+    return _pictureView;
+}
+
 #pragma mark - 懒加载
 - (CropImageView *)clipImageView {
     if (!_clipImageView) {
-        _clipImageView = [[CropImageView alloc] initWithFrame:self.view.bounds];
-        [self.view addSubview:_clipImageView];
+        _clipImageView = [[CropImageView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_WIDTH)];
     }
     return _clipImageView;
 }

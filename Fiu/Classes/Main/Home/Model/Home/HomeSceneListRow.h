@@ -34,7 +34,7 @@
 @property (nonatomic, assign) NSInteger updatedOn;
 @property (nonatomic, assign) NSInteger usedCount;
 @property (nonatomic, strong) HomeSceneListUser * user;
-@property (nonatomic, strong) HomeSceneListComments * comments;
+@property (nonatomic, strong) NSArray * comments;
 @property (nonatomic, assign) NSInteger userId;
 @property (nonatomic, assign) NSInteger viewCount;
 

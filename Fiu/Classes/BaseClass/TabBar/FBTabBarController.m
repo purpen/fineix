@@ -156,7 +156,6 @@
     
     if (entity.isLogin) {
         PictureToolViewController * pictureToolVC = [[PictureToolViewController alloc] init];
-        pictureToolVC.createType = @"scene";
         [self presentViewController:pictureToolVC animated:YES completion:nil];
     }
     else

@@ -6,15 +6,15 @@
 //  Copyright © 2016年 taihuoniao. All rights reserved.
 //
 
-#import <Foundation/Foundation.h>
+#import <UIKit/UIKit.h>
 
 @interface HomeSceneListComments : NSObject
 
-@property (nonatomic, strong) NSString * commentId;
-@property (nonatomic, strong) NSString * avatarUrl;
-@property (nonatomic, strong) NSString * nickname;
+@property (nonatomic, strong) NSString * idField;
 @property (nonatomic, strong) NSString * content;
+@property (nonatomic, strong) NSString * userAvatarUrl;
 @property (nonatomic, assign) NSInteger userId;
+@property (nonatomic, strong) NSString * userNickname;
 
 -(instancetype)initWithDictionary:(NSDictionary *)dictionary;
 

@@ -8,6 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import "Fiu.h"
+#import "PictureView.h"
 
 @class CropImageView;
 
@@ -16,6 +17,7 @@
 @pro_strong CropImageView           *   clipImageView;      //  裁剪图片视图
 @pro_assign CGRect                      clipImgRect;        //  裁剪的位置和大小
 @pro_strong UIImage                 *   clipImage;          //  需要裁剪的图片
+@pro_strong PictureView             *   pictureView;        //  相册页面
 
 - (UIImage *)clippingImage;
 

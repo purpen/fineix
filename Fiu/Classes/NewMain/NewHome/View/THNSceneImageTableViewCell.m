@@ -55,7 +55,7 @@
             make.bottom.equalTo(self.mas_bottom).with.offset(-48);
         }];
         
-    } else {
+    } else if (sceneModel.title.length < 10) {
         NSString * title = [NSString stringWithFormat:@"    %@  ", sceneModel.title];
         self.title.text = title;
         [self.title mas_updateConstraints:^(MASConstraintMaker *make) {

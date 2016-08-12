@@ -11,37 +11,56 @@
 #import "FiltersViewController.h"
 #import "SceneAddViewController.h"
 
+@interface CameraView () {
+    BOOL isUsingFrontFacingCamera;
+}
+
+@end
+
 @implementation CameraView
 
 - (instancetype)initWithFrame:(CGRect)frame {
     self = [super initWithFrame:frame];
     if (self) {
-        
         self.backgroundColor = [UIColor blackColor];
-        
         [self addSubview:self.cameraNavView];
-        
         [self setCamere];
-        
-        [self addSubview:self.takePhotosBtn];
-        [_takePhotosBtn mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.size.mas_equalTo(CGSizeMake(80, 80));
-            make.top.equalTo(self.mas_top).with.offset((SCREEN_WIDTH  *1.33) + 10);
-            make.centerX.equalTo(self);
-        }];
+        [self setCameraViewUI];
     }
     return self;
+}
+
+#pragma marm - setUI
+- (void)setCameraViewUI {
+    [self addSubview:self.takePhotosBtn];
+    [_takePhotosBtn mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.size.mas_equalTo(CGSizeMake(80, 80));
+        make.bottom.equalTo(self.mas_bottom).with.offset(-63);
+        make.centerX.equalTo(self);
+    }];
+    
+    [self addSubview:self.flashBtn];
+    [_flashBtn mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.size.mas_equalTo(CGSizeMake(45, 45));
+        make.right.equalTo(self.mas_right).with.offset(0);
+        make.top.equalTo(self.mas_top).with.offset(SCREEN_WIDTH);
+    }];
+    
+    [self addSubview:self.selfTimerBtn];
+    [_selfTimerBtn mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.size.mas_equalTo(CGSizeMake(45, 45));
+        make.left.equalTo(self.mas_left).with.offset(0);
+        make.top.equalTo(self.mas_top).with.offset(SCREEN_WIDTH);
+    }];
 }
 
 #pragma mark - 顶部导航
 - (UIView *)cameraNavView {
     if (!_cameraNavView) {
-        _cameraNavView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 50)];
+        _cameraNavView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 45)];
         _cameraNavView.backgroundColor = [UIColor colorWithHexString:pictureNavColor alpha:1];
-        
         [_cameraNavView addSubview:self.cameraCancelBtn];
         [_cameraNavView addSubview:self.cameraTitlt];
-        [_cameraNavView addSubview:self.flashBtn];
     }
     return _cameraNavView;
 }
@@ -49,7 +68,7 @@
 #pragma mark - 取消按钮
 - (UIButton *)cameraCancelBtn {
     if (!_cameraCancelBtn) {
-        _cameraCancelBtn = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 50, 50)];
+        _cameraCancelBtn = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 45, 45)];
         [_cameraCancelBtn setImage:[UIImage imageNamed:@"icon_cancel"] forState:(UIControlStateNormal)];
         [_cameraCancelBtn addTarget:self action:@selector(cameraCancelBtnClick) forControlEvents:(UIControlEventTouchUpInside)];
     }
@@ -63,7 +82,7 @@
 #pragma mark - 页面标题
 - (UILabel *)cameraTitlt {
     if (!_cameraTitlt) {
-        _cameraTitlt = [[UILabel alloc] initWithFrame:CGRectMake(60, 0, SCREEN_WIDTH - 120, 50)];
+        _cameraTitlt = [[UILabel alloc] initWithFrame:CGRectMake(60, 0, SCREEN_WIDTH - 120, 45)];
         _cameraTitlt.textColor = [UIColor whiteColor];
         _cameraTitlt.textAlignment = NSTextAlignmentCenter;
         _cameraTitlt.text = NSLocalizedString(@"takePhotos", nil);
@@ -76,10 +95,44 @@
     return _cameraTitlt;
 }
 
+#pragma mark - 自拍按钮
+- (UIButton *)selfTimerBtn {
+    if (!_selfTimerBtn) {
+        _selfTimerBtn = [[UIButton alloc] init];
+        [_selfTimerBtn setImage:[UIImage imageNamed:@"camera_selfTimer"] forState:(UIControlStateNormal)];
+        [_selfTimerBtn setImage:[UIImage imageNamed:@"camera_selfTimer"] forState:(UIControlStateSelected)];
+        [_selfTimerBtn addTarget:self action:@selector(selfTimerBtnClick:) forControlEvents:(UIControlEventTouchUpInside)];
+    }
+    return _selfTimerBtn;
+}
+
+- (void)selfTimerBtnClick:(UIButton *)button {
+    AVCaptureDevicePosition desiredPosition;
+    if (isUsingFrontFacingCamera){
+        desiredPosition = AVCaptureDevicePositionBack;
+    } else {
+        desiredPosition = AVCaptureDevicePositionFront;
+    }
+    
+    for (AVCaptureDevice *d in [AVCaptureDevice devicesWithMediaType:AVMediaTypeVideo]) {
+        if ([d position] == desiredPosition) {
+            [self.previewPhoto.session beginConfiguration];
+            AVCaptureDeviceInput *input = [AVCaptureDeviceInput deviceInputWithDevice:d error:nil];
+            for (AVCaptureInput *oldInput in self.previewPhoto.session.inputs) {
+                [[self.previewPhoto session] removeInput:oldInput];
+            }
+            [self.previewPhoto.session addInput:input];
+            [self.previewPhoto.session commitConfiguration];
+            break;
+        }
+    }
+    isUsingFrontFacingCamera = !isUsingFrontFacingCamera;
+}
+
 #pragma mark - 闪光灯按钮
 - (UIButton *)flashBtn {
     if (!_flashBtn) {
-        _flashBtn = [[UIButton alloc] initWithFrame:CGRectMake(SCREEN_WIDTH - 50, 0, 50, 50)];
+        _flashBtn = [[UIButton alloc] init];
         [_flashBtn setImage:[UIImage imageNamed:@"ic_flash off"] forState:(UIControlStateNormal)];
         [_flashBtn setImage:[UIImage imageNamed:@"ic_flash on"] forState:(UIControlStateSelected)];
         [_flashBtn addTarget:self action:@selector(flashBtnClick) forControlEvents:(UIControlEventTouchUpInside)];
@@ -121,12 +174,12 @@
     showview.layer.masksToBounds = YES;
     [window addSubview:showview];
     [showview mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.size.mas_equalTo(CGSizeMake(150,44));
+        make.size.mas_equalTo(CGSizeMake(145,44));
         make.centerX.equalTo(window);
         make.centerY.equalTo(window);
     }];
     
-    UILabel *label = [[UILabel alloc]initWithFrame:CGRectMake(0, 0 , 150, 44)];
+    UILabel *label = [[UILabel alloc]initWithFrame:CGRectMake(0, 0 , 145, 44)];
     label.text = message;
     label.textColor = [UIColor whiteColor];
     label.textAlignment = NSTextAlignmentCenter;
@@ -175,21 +228,10 @@
                                                        
                                                        } else {
                                                            UIImage * image = [UIImage imageWithData:photoData];
-                                                           UIImage * photo = [self cropImage:image withCropSize:CGSizeMake(SCREEN_WIDTH, SCREEN_HEIGHT)];
-                                                           
-                                                           //   跳转到“工具”视图
-                                                           if ([self.createType isEqualToString:@"scene"]) {
-                                                               SceneAddViewController * sceneAddVC = [[SceneAddViewController alloc] init];
-                                                               sceneAddVC.filtersImg = photo;
-                                                               sceneAddVC.createType = self.createType;
-                                                               [self.Nav pushViewController:sceneAddVC animated:YES];
-                                                               
-                                                           } else if ([self.createType isEqualToString:@"fScene"]) {
-                                                               FiltersViewController * filtersVC = [[FiltersViewController alloc] init];
-                                                               filtersVC.filtersImg = photo;
-                                                               filtersVC.createType = self.createType;
-                                                               [self.Nav pushViewController:filtersVC animated:YES];
-                                                           }
+                                                           UIImage * photo = [self cropImage:image withCropSize:CGSizeMake(SCREEN_WIDTH, SCREEN_WIDTH)];
+                                                           SceneAddViewController * sceneAddVC = [[SceneAddViewController alloc] init];
+                                                           sceneAddVC.filtersImg = photo;
+                                                           [self.Nav pushViewController:sceneAddVC animated:YES];
                                                        }
                                                     
                                                    }];
@@ -251,7 +293,6 @@
 }
 
 #pragma mark 获取设备的方向
-
 - (AVCaptureVideoOrientation)photoDeviceOrientation:(UIDeviceOrientation)deviceOrientation {
     AVCaptureVideoOrientation videoOrientation = (AVCaptureVideoOrientation)deviceOrientation;
     if (deviceOrientation == UIDeviceOrientationLandscapeLeft) {
@@ -265,25 +306,19 @@
 
 #pragma mark - 初始化相机
 - (void)setCamere {
-    
     AVCaptureDevice * device = [AVCaptureDevice defaultDeviceWithMediaType:AVMediaTypeVideo];
-    
     if ([device isFlashAvailable]) {
         [device lockForConfiguration:nil];
         //设置闪光灯为关闭
         [device setFlashMode:AVCaptureFlashModeOff];
         [device unlockForConfiguration];
         
-        
         //  初始化数据连接
         self.session = [[AVCaptureSession alloc] init];
-        
         //  初始化设备
         AVCaptureDevice * cameraDevice = [AVCaptureDevice defaultDeviceWithMediaType:AVMediaTypeVideo];
-        
         //  初始化输入设备
         self.cameraInput = [[AVCaptureDeviceInput alloc] initWithDevice:cameraDevice error:nil];
-        
         //  初始化图片输出
         self.photosOutput = [[AVCaptureStillImageOutput alloc] init];
         
@@ -301,8 +336,7 @@
         //  初始化预览图层
         self.previewPhoto = [[AVCaptureVideoPreviewLayer alloc] initWithSession:self.session];
         [self.previewPhoto setVideoGravity:AVLayerVideoGravityResizeAspectFill];
-        //  预览图层的尺寸(4:3)
-        self.previewPhoto.frame = CGRectMake(0, 50, SCREEN_WIDTH, SCREEN_WIDTH * 1.33);
+        self.previewPhoto.frame = CGRectMake(0, 45, SCREEN_WIDTH, SCREEN_WIDTH);
         self.layer.masksToBounds = YES;
         [self.layer addSublayer:self.previewPhoto];
     

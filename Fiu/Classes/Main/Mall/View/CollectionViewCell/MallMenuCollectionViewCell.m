@@ -13,9 +13,7 @@
 - (instancetype)initWithFrame:(CGRect)frame {
     self = [super initWithFrame:frame];
     if (self) {
-        
         [self setCellViewUI];
-        
     }
     return self;
 }
@@ -29,25 +27,26 @@
 - (void)setCellViewUI {
     [self addSubview:self.menuImg];
     [_menuImg mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.size.mas_equalTo(CGSizeMake(50, 50));
-        make.top.equalTo(self.mas_top).with.offset(15);
+        make.size.mas_equalTo(CGSizeMake(60, 60));
         make.centerX.equalTo(self);
+        make.centerY.equalTo(self);
     }];
     
-    [self addSubview:self.menuTitle];
-    [_menuTitle mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.size.mas_equalTo(CGSizeMake(50, 15));
-        make.top.equalTo(_menuImg.mas_bottom).with.offset(15);
-        make.centerX.equalTo(self);
-    }];
+//    [self addSubview:self.menuTitle];
+//    [_menuTitle mas_makeConstraints:^(MASConstraintMaker *make) {
+//        make.size.mas_equalTo(CGSizeMake(50, 15));
+//        make.top.equalTo(_menuImg.mas_bottom).with.offset(15);
+//        make.centerX.equalTo(self);
+//    }];
 }
 
 #pragma mark - 导航图
 - (UIImageView *)menuImg {
     if (!_menuImg) {
         _menuImg = [[UIImageView alloc] init];
-        _menuImg.layer.cornerRadius = 25;
+        _menuImg.layer.cornerRadius = 60/2;
         _menuImg.layer.masksToBounds = YES;
+        _menuImg.backgroundColor = [UIColor colorWithHexString:@"#F1F1F1"];
     }
     return _menuImg;
 }

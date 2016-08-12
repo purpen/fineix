@@ -100,14 +100,19 @@
         self.user = [[HomeSceneListUser alloc] initWithDictionary:dictionary[@"user_info"]];
     }
     
-    if(![dictionary[@"comments"] isKindOfClass:[NSNull class]]){
-        self.comments = [[HomeSceneListComments alloc] initWithDictionary:dictionary[@"comments"]];
+    if(dictionary[@"comments"] != nil && [dictionary[@"comments"] isKindOfClass:[NSArray class]]){
+        NSArray * commentsDictionaries = dictionary[@"comments"];
+        NSMutableArray * commentsItems = [NSMutableArray array];
+        for(NSDictionary * commentsDictionary in commentsDictionaries){
+            HomeSceneListComments * commentsItem = [[HomeSceneListComments alloc] initWithDictionary:commentsDictionary];
+            [commentsItems addObject:commentsItem];
+        }
+        self.comments = commentsItems;
     }
 
 	if(![dictionary[@"user_id"] isKindOfClass:[NSNull class]]){
 		self.userId = [dictionary[@"user_id"] integerValue];
 	}
-    
 
 	if(![dictionary[@"view_count"] isKindOfClass:[NSNull class]]){
 		self.viewCount = [dictionary[@"view_count"] integerValue];

@@ -32,9 +32,8 @@ static NSString *const URLListText = @"/scene_context/getlist";
     [super viewWillAppear:animated];
     
     self.navView.hidden = YES;
-    self.view.backgroundColor = [UIColor blackColor];
+    self.view.backgroundColor = [UIColor colorWithHexString:@"#000000" alpha:0.8f];
 }
-
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -152,7 +151,7 @@ static NSString *const URLListText = @"/scene_context/getlist";
 
 #pragma mark - 设置界面UI
 - (void)setEditInfoVcUI {
-    [self.view addSubview:self.bgImgView];
+//    [self.view addSubview:self.bgImgView];
     [self.view addSubview:self.topView];
     [self.view addSubview:self.listView];
     [self.view addSubview:self.searchView];
@@ -183,7 +182,6 @@ static NSString *const URLListText = @"/scene_context/getlist";
     if (!_listView) {
         _listView = [[UIView alloc] initWithFrame:CGRectMake(0, 44, SCREEN_WIDTH, SCREEN_HEIGHT - 44)];
         _listView.backgroundColor = [UIColor colorWithHexString:@"#FFFFFF" alpha:0];
-        
         [_listView addSubview:self.searchBtn];
         [_listView addSubview:self.listTable];
     }

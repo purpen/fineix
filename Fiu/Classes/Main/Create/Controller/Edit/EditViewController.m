@@ -60,7 +60,6 @@ static NSString *const URLReleaseFiuScenen = @"/scene_scene/save";
     _des = [self.data valueForKey:@"des"];
     _chooseTags = [NSMutableArray arrayWithArray:[self.data valueForKey:@"tags"]];
     [self.showContent setEditContentData:_title withDes:_des withTags:_chooseTags];
-    [self.addContent setDefaultChooseTags:_chooseTags];
     
     _address = [self.data valueForKey:@"address"];
     _city = [self.data valueForKey:@"city"];
@@ -78,10 +77,9 @@ static NSString *const URLReleaseFiuScenen = @"/scene_scene/save";
 - (void)networkNewSceneData {
     NSString * title = [self.addContent.title.text stringByReplacingOccurrencesOfString:@" " withString:@""];
     NSString * des = [self.addContent.content.text stringByReplacingOccurrencesOfString:@" " withString:@""];
-    NSString * tags =  [self.addContent.chooseTagMarr componentsJoinedByString:@","];
     NSString * sceneId = [NSString stringWithFormat:@"%zi", [[self.data valueForKey:@"_id"] integerValue]];
     
-    if ([self.addLocaiton.longitude length] <= 0 || [title isEqualToString:@""] || [des isEqualToString:NSLocalizedString(@"addDescription", nil)] || [des isEqualToString:@""] || [self.addLocaiton.locationLab.text isEqualToString:@""] || tags.length <=0) {
+    if ([self.addLocaiton.longitude length] <= 0 || [title isEqualToString:@""] || [des isEqualToString:NSLocalizedString(@"addDescription", nil)] || [des isEqualToString:@""] || [self.addLocaiton.locationLab.text isEqualToString:@""]) {
         [SVProgressHUD showInfoWithStatus:@"填写未完成"];
         
     } else if (title.length > 20) {
@@ -98,7 +96,6 @@ static NSString *const URLReleaseFiuScenen = @"/scene_scene/save";
                                      @"lat":self.addLocaiton.latitude,
                                      @"address":self.addLocaiton.locationLab.text,
                                      @"city":self.addLocaiton.cityLab.text,
-                                     @"tags":tags,
                                      @"scene_id":self.fSceneId
                                      };
         

@@ -7,12 +7,10 @@
 //
 
 #import "CropImageViewController.h"
-#import "ClipImageViewController.h"
 #import "FiltersViewController.h"
 #import "SceneAddViewController.h"
 
 @interface CropImageViewController ()
-
 
 @end
 
@@ -22,7 +20,6 @@
     [super viewWillAppear:animated];
     
     [self setNavViewUI];
-    
 }
 
 - (void)viewDidLoad {
@@ -43,24 +40,12 @@
 
 //  “继续”
 - (void)nextBtnClick {
-    if ([self.createType isEqualToString:@"scene"]) {
-        SceneAddViewController * sceneAddVC = [[SceneAddViewController alloc] init];
-        sceneAddVC.locationArr = self.locationArr;
-        sceneAddVC.filtersImg = [self.clipImageVC clippingImage];
-        sceneAddVC.createType = self.createType;
-        sceneAddVC.fSceneId = self.fSceneId;
-        sceneAddVC.fSceneTitle = self.fSceneTitle;
-        [self.navigationController pushViewController:sceneAddVC animated:YES];
-        
-    } else if ([self.createType isEqualToString:@"fScene"]) {
-        FiltersViewController * filtersVC = [[FiltersViewController alloc] init];
-        filtersVC.locationArr = self.locationArr;
-        filtersVC.filtersImg = [self.clipImageVC clippingImage];
-        filtersVC.createType = self.createType;
-        filtersVC.fSceneId = self.fSceneId;
-        filtersVC.fSceneTitle = self.fSceneTitle;
-        [self.navigationController pushViewController:filtersVC animated:YES];
-    }
+    SceneAddViewController * sceneAddVC = [[SceneAddViewController alloc] init];
+    sceneAddVC.locationArr = self.locationArr;
+    sceneAddVC.filtersImg = [self.clipImageVC clippingImage];
+    sceneAddVC.fSceneId = self.fSceneId;
+    sceneAddVC.fSceneTitle = self.fSceneTitle;
+    [self.navigationController pushViewController:sceneAddVC animated:YES];
 }
 
 #pragma mark - 设置裁剪视图

@@ -26,6 +26,7 @@
 @pro_strong UIButton *rightBtn;     //  rightItem
 @pro_strong UIButton *logoImg;      //  Nav中间的Logo
 @pro_strong UIButton *qrBtn;        //  二维码扫描
+@pro_strong UIButton *searchBtn;       //  搜索
 @pro_strong UITableView *baseTable; //  当前列表
 
 /*
@@ -42,6 +43,12 @@
  *  添加二维码扫描按钮
  */
 - (void)thn_addQRBtn;
+
+/*
+ *  添加搜索按钮
+ *  type:搜索的类型：1: ／ 2:
+ */
+- (void)thn_addSearchBtnText:(NSString *)title type:(NSInteger)type;
 
 /*
  *  在Nav上添加leftItem

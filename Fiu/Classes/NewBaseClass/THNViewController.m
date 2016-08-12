@@ -66,7 +66,7 @@
 }
 
 - (void)leftAction {
-    if ([self.delegate respondsToSelector:@selector(leftBarItemSelected)]) {
+    if ([self.delegate respondsToSelector:@selector(thn_leftBarItemSelected)]) {
         [self.delegate thn_leftBarItemSelected];
     }
 }
@@ -76,15 +76,13 @@
     if (!_rightBtn) {
         _rightBtn = [[UIButton alloc] initWithFrame:CGRectMake(SCREEN_WIDTH - 44, 20, 44, 44)];
         [_rightBtn addTarget:self action:@selector(rightAction) forControlEvents:(UIControlEventTouchUpInside)];
-        [_rightBtn setTitleColor:[UIColor blackColor] forState:(UIControlStateNormal)];
-        _rightBtn.titleLabel.font = [UIFont systemFontOfSize:16];
     }
     return _rightBtn;
 }
 
 - (void)rightAction {
-    if ([self.delegate respondsToSelector:@selector(rightBarItemSelected)]) {
-        [self.delegate thn_leftBarItemSelected];
+    if ([self.delegate respondsToSelector:@selector(thn_rightBarItemSelected)]) {
+        [self.delegate thn_rightBarItemSelected];
     }
 }
 
@@ -118,13 +116,39 @@
     [self.navigationController pushViewController:qrVC animated:YES];
 }
 
+#pragma mark 搜索
+- (UIButton *)searchBtn {
+    if (!_searchBtn) {
+        _searchBtn = [[UIButton alloc] initWithFrame:CGRectMake(50, 29, SCREEN_WIDTH - 100, 26)];
+        [_searchBtn setImage:[UIImage imageNamed:@"button_search"] forState:(UIControlStateNormal)];
+        [_searchBtn setImageEdgeInsets:(UIEdgeInsetsMake(0, -10, 0, 0))];
+        [_searchBtn setTitleColor:[UIColor colorWithHexString:@"#888888"] forState:(UIControlStateNormal)];
+        _searchBtn.titleLabel.font = [UIFont systemFontOfSize:12];
+        _searchBtn.backgroundColor = [UIColor whiteColor];
+        _searchBtn.layer.cornerRadius = 3.0f;
+        _searchBtn.clipsToBounds = YES;
+        [_searchBtn addTarget:self action:@selector(searchBtnClick:) forControlEvents:(UIControlEventTouchUpInside)];
+    }
+    return _searchBtn;
+}
+
+- (void)searchBtnClick:(UIButton *)button {
+    [SVProgressHUD showSuccessWithStatus:@"去搜索"];
+}
+
 #pragma mark - 加载控件
 - (void)thn_addNavLogoImage {
     [self.navView addSubview:self.logoImg];
 }
 
 - (void)thn_addQRBtn {
-    [self.view addSubview:self.qrBtn];
+    [self.navView addSubview:self.qrBtn];
+}
+
+- (void)thn_addSearchBtnText:(NSString *)title type:(NSInteger)type {
+    [self.searchBtn setTitle:title forState:(UIControlStateNormal)];
+    [self.navView addSubview:self.searchBtn];
+    
 }
 
 - (void)thn_addBarItemLeftBarButton:(NSString *)title image:(NSString *)image {

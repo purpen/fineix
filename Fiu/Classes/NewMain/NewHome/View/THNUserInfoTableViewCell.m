@@ -31,11 +31,15 @@
         make.width.equalTo(@([self getTextSizeWidth:userModel.createdAt].width * 1.3));
     }];
     [self.address setTitle:userModel.address forState:(UIControlStateNormal)];
+    if (userModel.user.isExpert == 1) {
+        self.certificate.hidden = NO;
+    } else {
+        self.certificate.hidden = YES;
+    }
 }
 
 - (CGSize)getTextSizeWidth:(NSString *)text {
     NSDictionary *attribute = @{NSFontAttributeName: [UIFont systemFontOfSize:10]};
-    
     CGSize retSize = [text boundingRectWithSize:CGSizeMake(SCREEN_WIDTH, 0)
                                         options:\
                       NSStringDrawingTruncatesLastVisibleLine |
@@ -53,6 +57,13 @@
         make.size.mas_equalTo(CGSizeMake(30, 30));
         make.left.equalTo(self.mas_left).with.offset(15);
         make.centerY.equalTo(self);
+    }];
+    
+    [self addSubview:self.certificate];
+    [_certificate mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.size.mas_equalTo(CGSizeMake(10, 10));
+        make.right.equalTo(_head.mas_right).with.offset(2);
+        make.bottom.equalTo(_head.mas_bottom).with.offset(0);
     }];
     
     [self addSubview:self.name];
@@ -98,6 +109,14 @@
 
 - (void)headClick:(UIButton *)button {
     [SVProgressHUD showSuccessWithStatus:@"打开个人中心"];
+}
+
+- (UIImageView *)certificate {
+    if (!_certificate) {
+        _certificate = [[UIImageView alloc] init];
+        _certificate.image = [UIImage imageNamed:@"user_jiaV"];
+    }
+    return _certificate;
 }
 
 - (UILabel *)name {

@@ -12,14 +12,17 @@
 #import "PictureView.h"
 #import <AVFoundation/AVFoundation.h>
 #import <AVFoundation/AVMediaFormat.h>
+#import "ClipImageViewController.h"
 
-@interface CreateViewController : FBPictureViewController
+@interface CreateViewController : FBPictureViewController <
+    FBFootViewDelegate
+>
 
-@pro_strong NSString            *   createType;         //  创建类型（场景/情景）
-@pro_strong FBFootView          *   footView;           //  底部功能选择视图
-@pro_strong PictureView         *   pictureView;        //  相册页面
-@pro_strong CameraView          *   cameraView;         //  相机页面
-@pro_strong NSString            *   fSceneId;
-@pro_strong NSString            *   fSceneTitle;
+@pro_strong FBFootView *footView;           //  底部功能选择视图
+@pro_strong PictureView *pictureView;       //  相册页面
+@pro_strong CameraView *cameraView;         //  相机页面
+@pro_strong NSString *fSceneId;
+@pro_strong NSString *fSceneTitle;
+@pro_strong ClipImageViewController *clipImageVC;
 
 @end

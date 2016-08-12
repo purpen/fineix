@@ -13,7 +13,7 @@
 #import "ReleaseViewController.h"
 
 @interface PictureToolViewController () {
-    CreateViewController        * _createVC;
+    CreateViewController *_createVC;
 }
 
 @end
@@ -23,13 +23,10 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.navigationBar.hidden = YES;
-    
     _createVC = [[CreateViewController alloc] init];
-    _createVC.createType = self.createType;
     _createVC.fSceneId = self.fSceneId;
     _createVC.fSceneTitle = self.fSceneTitle;
     [self addChildViewController:_createVC];
-    
 }
 
 

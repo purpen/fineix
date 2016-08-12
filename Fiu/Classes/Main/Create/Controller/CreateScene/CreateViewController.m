@@ -7,9 +7,9 @@
 //
 
 #import "CreateViewController.h"
-#import "CropImageViewController.h"
+#import "SceneAddViewController.h"
 
-@interface CreateViewController () <FBFootViewDelegate>
+@interface CreateViewController ()
 
 @end
 
@@ -27,7 +27,6 @@
             }
         }
     }
-    
     [self setNavViewUI];
 }
 
@@ -57,21 +56,17 @@
 
 #pragma mark - 点击“继续”
 - (void)nextButtonClick:(UIImage *)image {
-    CropImageViewController * cropVC = [[CropImageViewController alloc] init];
-    cropVC.locationArr = self.pictureView.locationArr;
-    cropVC.clipImageVC.clipImage = self.pictureView.photoImgView.image;
-    cropVC.view.frame = self.view.frame;
-    cropVC.createType = self.createType;
-    cropVC.fSceneId = self.fSceneId;
-    cropVC.fSceneTitle = self.fSceneTitle;
-    [self.navigationController pushViewController:cropVC animated:YES];
+    SceneAddViewController * addVC = [[SceneAddViewController alloc] init];
+    addVC.locationArr = self.pictureView.locationArr;
+    addVC.filtersImg = self.pictureView.photoImgView.image;
+    [self.navigationController pushViewController:addVC animated:YES];
 }
 
 #pragma mark - 打开相册列表
 - (void)openPhotoAlbumsClick {
     if (self.openPhotoAlbums.selected == YES) {
         self.openPhotoAlbums.selected = NO;
-        CGRect openPhotoAlbumsRect = CGRectMake(0, SCREEN_HEIGHT, SCREEN_WIDTH, SCREEN_HEIGHT-50);
+        CGRect openPhotoAlbumsRect = CGRectMake(0, SCREEN_HEIGHT, SCREEN_WIDTH, SCREEN_HEIGHT-45);
         [UIView animateWithDuration:.3 animations:^{
             self.pictureView.photoAlbumsView.frame = openPhotoAlbumsRect;
             self.nextBtn.hidden = NO;
@@ -79,7 +74,7 @@
         
     } else if (self.openPhotoAlbums.selected == NO){
         self.openPhotoAlbums.selected = YES;
-        CGRect openPhotoAlbumsRect = CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT-50);
+        CGRect openPhotoAlbumsRect = CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT-45);
         [UIView animateWithDuration:.3 animations:^{
             self.pictureView.photoAlbumsView.frame = openPhotoAlbumsRect;
             self.nextBtn.hidden = YES;
@@ -91,7 +86,7 @@
 - (void)setCreateControllerUI {
     [self.view addSubview:self.footView];
     [_footView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.size.mas_equalTo(CGSizeMake(SCREEN_WIDTH, 50));
+        make.size.mas_equalTo(CGSizeMake(SCREEN_WIDTH, 45));
         make.bottom.equalTo(self.view.mas_bottom).with.offset(0);
         make.centerX.equalTo(self.view);
     }];
@@ -104,10 +99,10 @@
     if (!_footView) {
         NSArray * arr = [NSArray arrayWithObjects:NSLocalizedString(@"album", nil), NSLocalizedString(@"camera", nil), nil];
         _footView = [[FBFootView alloc] init];
-        _footView.backgroundColor = [UIColor blackColor];
+        _footView.backgroundColor = [UIColor colorWithHexString:@"#222222"];
         _footView.titleArr = arr;
         _footView.titleFontSize = Font_ControllerTitle;
-        _footView.btnBgColor = [UIColor blackColor];
+        _footView.btnBgColor = [UIColor colorWithHexString:@"#222222"];
         _footView.titleNormalColor = [UIColor whiteColor];
         _footView.titleSeletedColor = [UIColor colorWithHexString:fineixColor alpha:1];
         [_footView addFootViewButton];
@@ -159,7 +154,7 @@
 #pragma mark - 相册的页面
 - (PictureView *)pictureView {
     if (!_pictureView) {
-        _pictureView = [[PictureView alloc] initWithFrame:CGRectMake(0, 50, SCREEN_WIDTH, SCREEN_HEIGHT - 100)];
+        _pictureView = [[PictureView alloc] initWithFrame:CGRectMake(0, 45, SCREEN_WIDTH, SCREEN_HEIGHT - 90)];
         _pictureView.navView = self.navView;
         _pictureView.photoAlbumsView.photoAlbumsBtn = self.openPhotoAlbums;
         _pictureView.photoAlbumsView.nextBtn = self.nextBtn;
@@ -176,10 +171,9 @@
 #pragma mark - 打开相机的页面
 - (CameraView *)cameraView {
     if (!_cameraView) {
-        _cameraView = [[CameraView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT - 49)];
+        _cameraView = [[CameraView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT - 45)];
         _cameraView.VC = self;
         _cameraView.Nav = self.navigationController;
-        _cameraView.createType = self.createType;
     }
     return _cameraView;
 }
