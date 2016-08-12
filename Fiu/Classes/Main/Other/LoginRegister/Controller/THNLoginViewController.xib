@@ -10,8 +10,12 @@
                 <outlet property="loginBtn" destination="q8f-OJ-6SW" id="1Wk-No-Aa6"/>
                 <outlet property="phoneTF" destination="vPz-vm-Lrx" id="Oag-3n-UuU"/>
                 <outlet property="pwdTF" destination="7ss-5Z-jws" id="unn-xP-4Xc"/>
+                <outlet property="qqBtn" destination="pOh-4p-Xxa" id="UkK-an-n1p"/>
                 <outlet property="seeView" destination="0cx-AR-5F3" id="cuT-TI-DuZ"/>
+                <outlet property="sinaBtn" destination="1Zz-GB-seu" id="xDU-o6-bGd"/>
+                <outlet property="thirdView" destination="roT-Hm-4o1" id="vkJ-hE-yTG"/>
                 <outlet property="view" destination="1gv-9n-1Hm" id="9tx-zi-5fg"/>
+                <outlet property="wechatBtn" destination="fXp-MC-yTn" id="ZfM-gA-qUQ"/>
             </connections>
         </placeholder>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>

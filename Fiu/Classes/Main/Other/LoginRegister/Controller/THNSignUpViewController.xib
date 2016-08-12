@@ -10,6 +10,7 @@
                 <outlet property="qqBtn" destination="Pab-FO-M2k" id="9Mq-DB-JG9"/>
                 <outlet property="sinaBtn" destination="0j1-Bc-Ssa" id="D8K-Cs-5Vs"/>
                 <outlet property="thirdTipBtn" destination="bjf-Yb-NI5" id="dk4-Lo-chc"/>
+                <outlet property="thirdView" destination="QcM-dK-csO" id="Yid-PQ-yhX"/>
                 <outlet property="tipLabel" destination="EQX-CB-vfv" id="km9-D9-wv1"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
                 <outlet property="wechatBtn" destination="rPo-I8-U2g" id="xfA-n9-aBg"/>

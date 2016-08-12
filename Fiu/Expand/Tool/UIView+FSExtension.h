@@ -19,5 +19,6 @@
 @property (nonatomic, assign) CGFloat centerY;
 
 + (instancetype)viewFromXib;
+- (void)circle:(NSInteger)r;
 
 @end

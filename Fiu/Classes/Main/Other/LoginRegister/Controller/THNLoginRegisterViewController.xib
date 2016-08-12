@@ -13,6 +13,7 @@
                 <outlet property="signUpBtn" destination="w7G-0a-3Wc" id="pyA-N5-vmv"/>
                 <outlet property="sinaBtn" destination="yz3-7F-K4F" id="JOT-6A-wvg"/>
                 <outlet property="thirdTipBtn" destination="GZw-vx-Emq" id="Tjj-Hs-e6e"/>
+                <outlet property="thirdView" destination="h0e-at-rQg" id="iNF-lc-b81"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
                 <outlet property="wechatBtn" destination="bEU-Ao-bXu" id="GhX-tM-Ay3"/>
             </connections>

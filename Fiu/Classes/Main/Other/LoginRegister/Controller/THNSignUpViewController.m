@@ -36,6 +36,7 @@
 @property (weak, nonatomic) IBOutlet UIButton *wechatBtn;
 @property (weak, nonatomic) IBOutlet UIButton *sinaBtn;
 @property (weak, nonatomic) IBOutlet UIButton *qqBtn;
+@property (weak, nonatomic) IBOutlet UIView *thirdView;
 @end
 
 static NSString *const VerifyCodeURL = @"/auth/verify_code";//发送验证码借口
@@ -71,7 +72,7 @@ static NSString *const thirdRegister = @"/auth/third_sign";//第三方登录接�
 -(void)judge{
     //隐藏未安装的第三方登录平台
     if (![WXApi isWXAppInstalled] && ![WeiboSDK isWeiboAppInstalled] && ![QQApiInterface isQQInstalled]) {
-        self.thirdTipBtn.hidden = true;
+        self.thirdView.hidden = true;
     }
     if ([WXApi isWXAppInstalled] == FALSE) {
         self.wechatBtn.hidden = true;
