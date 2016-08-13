@@ -477,6 +477,10 @@
 		2800451B1C805CAC005F5C2E /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2800451A1C805CAC005F5C2E /* Security.framework */; };
 		2800451F1C805CCA005F5C2E /* CoreTelephony.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2800451E1C805CCA005F5C2E /* CoreTelephony.framework */; };
 		428C2359477649891E4F6061 /* libPods-Fiu.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 09E4F3F5D97AC3732034757F /* libPods-Fiu.a */; };
+		48F0F60D1D5F719100379D7F /* THNFocusViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 48F0F60B1D5F719100379D7F /* THNFocusViewController.m */; };
+		48F0F60E1D5F719100379D7F /* THNFocusViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 48F0F60C1D5F719100379D7F /* THNFocusViewController.xib */; };
+		48F0F6111D5F71DD00379D7F /* THNFocusUserModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 48F0F6101D5F71DD00379D7F /* THNFocusUserModel.m */; };
+		48F0F6141D5F724000379D7F /* THNFucosPeopleView.m in Sources */ = {isa = PBXBuildFile; fileRef = 48F0F6131D5F724000379D7F /* THNFucosPeopleView.m */; };
 		D802D7791C821D41007AFA3D /* AssetsLibrary.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D802D7781C821D41007AFA3D /* AssetsLibrary.framework */; };
 		D8035F2F1CB77D0C001920F9 /* UIImage+Helper.m in Sources */ = {isa = PBXBuildFile; fileRef = D8035F2E1CB77D0C001920F9 /* UIImage+Helper.m */; };
 		D8035F3B1CB784B3001920F9 /* UILable+Frame.m in Sources */ = {isa = PBXBuildFile; fileRef = D8035F3A1CB784B3001920F9 /* UILable+Frame.m */; };
@@ -1455,6 +1459,13 @@
 		2800451C1C805CBD005F5C2E /* libsqlite3.0.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libsqlite3.0.tbd; path = usr/lib/libsqlite3.0.tbd; sourceTree = SDKROOT; };
 		2800451E1C805CCA005F5C2E /* CoreTelephony.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreTelephony.framework; path = System/Library/Frameworks/CoreTelephony.framework; sourceTree = SDKROOT; };
 		280045201C805CD7005F5C2E /* libstdc++.6.0.9.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = "libstdc++.6.0.9.tbd"; path = "usr/lib/libstdc++.6.0.9.tbd"; sourceTree = SDKROOT; };
+		48F0F60A1D5F719100379D7F /* THNFocusViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THNFocusViewController.h; sourceTree = "<group>"; };
+		48F0F60B1D5F719100379D7F /* THNFocusViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THNFocusViewController.m; sourceTree = "<group>"; };
+		48F0F60C1D5F719100379D7F /* THNFocusViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = THNFocusViewController.xib; sourceTree = "<group>"; };
+		48F0F60F1D5F71DD00379D7F /* THNFocusUserModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THNFocusUserModel.h; sourceTree = "<group>"; };
+		48F0F6101D5F71DD00379D7F /* THNFocusUserModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THNFocusUserModel.m; sourceTree = "<group>"; };
+		48F0F6121D5F724000379D7F /* THNFucosPeopleView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THNFucosPeopleView.h; sourceTree = "<group>"; };
+		48F0F6131D5F724000379D7F /* THNFucosPeopleView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THNFucosPeopleView.m; sourceTree = "<group>"; };
 		800507341C7A9CDD005AF0BE /* Fiu.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Fiu.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D802D7781C821D41007AFA3D /* AssetsLibrary.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AssetsLibrary.framework; path = System/Library/Frameworks/AssetsLibrary.framework; sourceTree = SDKROOT; };
 		D802D7891C844101007AFA3D /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
@@ -3247,6 +3258,9 @@
 		1F2A8E451CF40277005116C7 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
+				48F0F60A1D5F719100379D7F /* THNFocusViewController.h */,
+				48F0F60B1D5F719100379D7F /* THNFocusViewController.m */,
+				48F0F60C1D5F719100379D7F /* THNFocusViewController.xib */,
 				1F2A8E461CF40277005116C7 /* BindIngViewController.h */,
 				1F2A8E471CF40277005116C7 /* BindIngViewController.m */,
 				1F2A8E481CF40277005116C7 /* BindIngViewController.xib */,
@@ -3302,6 +3316,8 @@
 		1F2A8E561CF40277005116C7 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				48F0F60F1D5F71DD00379D7F /* THNFocusUserModel.h */,
+				48F0F6101D5F71DD00379D7F /* THNFocusUserModel.m */,
 				1F2A8E571CF40277005116C7 /* DBModel */,
 				1F2A8E601CF40277005116C7 /* RecommendedScenarioModel */,
 				1FD10C971D5DC644005898EE /* THNTopicsModel.h */,
@@ -3346,6 +3362,8 @@
 		1F2A8E661CF40277005116C7 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				48F0F6121D5F724000379D7F /* THNFucosPeopleView.h */,
+				48F0F6131D5F724000379D7F /* THNFucosPeopleView.m */,
 				1F2A8E671CF40277005116C7 /* ImproView.h */,
 				1F2A8E681CF40277005116C7 /* ImproView.m */,
 				1F2A8E691CF40277005116C7 /* Login.xib */,
@@ -4657,6 +4675,7 @@
 				1F6CA2771D5C4B6F00DFB79E /* THNInformationViewController.xib in Resources */,
 				1FF36EAE1D50A7C500EB3C93 /* SearchPepoleTableViewCell.xib in Resources */,
 				1FA4BDF21D35F2200067A196 /* UMShareEditViewController.xib in Resources */,
+				48F0F60E1D5F719100379D7F /* THNFocusViewController.xib in Resources */,
 				1F2A905B1CF40277005116C7 /* CommentsViewController.xib in Resources */,
 				1F1134AC1D17F5CB00DFFA74 /* Fiu.mp4 in Resources */,
 				1F2A905F1CF40277005116C7 /* MessagesssViewController.xib in Resources */,
@@ -4896,12 +4915,14 @@
 				1F2A8F951CF40277005116C7 /* LikeOrSuPeopleRow.m in Sources */,
 				1F2A8F931CF40277005116C7 /* LikeOrSuPeopleCounter.m in Sources */,
 				1F2A90821CF40277005116C7 /* ProductInfoModel.m in Sources */,
+				48F0F6141D5F724000379D7F /* THNFucosPeopleView.m in Sources */,
 				1F2A90871CF40277005116C7 /* ProductInfoView.m in Sources */,
 				1F2A8F851CF40277005116C7 /* NoHaveSceneTableViewCell.m in Sources */,
 				1F2A902C1CF40277005116C7 /* EditAddressViewController.m in Sources */,
 				1F2A8FB01CF40277005116C7 /* ThnGoodsCommentViewController.m in Sources */,
 				1F2A8FD41CF40277005116C7 /* FBEditCarItemTableViewCell.m in Sources */,
 				1F2A90771CF40277005116C7 /* RefundmentViewController.m in Sources */,
+				48F0F60D1D5F719100379D7F /* THNFocusViewController.m in Sources */,
 				D8AC3E121D2DF9D900148522 /* FBTabBarController.m in Sources */,
 				1FCDCC7A1D0515F700C92E78 /* ScenarioNonView.m in Sources */,
 				1F2A8F5B1CF40277005116C7 /* LookAllTagBtnTableViewCell.m in Sources */,
@@ -4987,6 +5008,7 @@
 				1F2A8F5C1CF40277005116C7 /* OpenAllTagListTableViewCell.m in Sources */,
 				1F2A8F631CF40277005116C7 /* SearchGoodsView.m in Sources */,
 				D8BE89D81D33401C00DE5029 /* FBBrandGoodsView.m in Sources */,
+				48F0F6111D5F71DD00379D7F /* THNFocusUserModel.m in Sources */,
 				D847632E1D424DCD00C88379 /* ShowContentView.m in Sources */,
 				1F2A8FA71CF40277005116C7 /* GoodsBrandViewController.m in Sources */,
 				1F2A906D1CF40277005116C7 /* AllOderViewController.m in Sources */,
