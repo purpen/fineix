@@ -18,6 +18,7 @@
 #import "FBAPI.h"
 #import <SVProgressHUD.h>
 #import "UserInfoEntity.h"
+#import "THNFocusViewController.h"
 
 @interface THNScenarioViewController ()
 
@@ -130,30 +131,37 @@ static NSString *getList = @"/category/getlist";
 
 
 - (IBAction)next:(id)sender {
-//    [SVProgressHUD showWithMaskType:SVProgressHUDMaskTypeClear];
-//    if (self.modelAry.count > 0) {
-//        //开始传送数据
-//        NSDictionary *params = @{
-//                                 @"interest_scene_cate":self.age_group
-//                                 };
-//        FBRequest *request = [FBAPI postWithUrlString:updatInfo requestDictionary:params delegate:self];
-//        [request startRequestSuccess:^(FBRequest *request, id result) {
-//            NSString * message = [result objectForKey:@"message"];
-//            if ([[result objectForKey:@"success"] isEqualToNumber:@1]) {
-//                
-//                UserInfoEntity *entiey = [UserInfoEntity defaultUserInfoEntity];
-//                entiey.age_group = [result objectForKey:@"data"][@"age_group"];
-//                entiey.assets = [result objectForKey:@"data"][@"assets"];
-//                [SVProgressHUD showSuccessWithStatus:message];
-//                THNAgeViewController *vc = [[THNAgeViewController alloc] init];
-//                [self.navigationController pushViewController:vc animated:YES];
-//            } else {
-//                [SVProgressHUD showInfoWithStatus:message];
-//            }
-//        } failure:^(FBRequest *request, NSError *error) {
-//            
-//        }];
+    THNFocusViewController *vc = [[THNFocusViewController alloc] init];
+    [self.navigationController pushViewController:vc animated:YES];
+    
+//    NSMutableString *str = [NSMutableString string];
+//    for (int i = 0; i < self.idAry.count; i ++) {
+//        [str appendString:self.idAry[i]];
+//        if (i == self.idAry.count - 1) {
+//            break;
+//        }
+//        [str appendString:@","];
 //    }
+//    
+//    
+//    [SVProgressHUD showWithMaskType:SVProgressHUDMaskTypeClear];
+//    //开始传送数据
+//    NSDictionary *params = @{
+//                             @"interest_scene_cate":str
+//                             };
+//    FBRequest *request = [FBAPI postWithUrlString:@"/my/update_profile" requestDictionary:params delegate:self];
+//    [request startRequestSuccess:^(FBRequest *request, id result) {
+//        NSString * message = [result objectForKey:@"message"];
+//        if ([[result objectForKey:@"success"] isEqualToNumber:@1]) {
+//            [SVProgressHUD showSuccessWithStatus:message];
+//            THNFocusViewController *vc = [[THNFocusViewController alloc] init];
+//            [self.navigationController pushViewController:vc animated:YES];
+//        } else {
+//            [SVProgressHUD showInfoWithStatus:message];
+//        }
+//    } failure:^(FBRequest *request, NSError *error) {
+//        
+//    }];
 }
 
 @end
