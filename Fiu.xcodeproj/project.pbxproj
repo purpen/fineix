@@ -460,13 +460,13 @@
 		280045171C805C92005F5C2E /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 280045161C805C92005F5C2E /* SystemConfiguration.framework */; };
 		2800451B1C805CAC005F5C2E /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2800451A1C805CAC005F5C2E /* Security.framework */; };
 		2800451F1C805CCA005F5C2E /* CoreTelephony.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2800451E1C805CCA005F5C2E /* CoreTelephony.framework */; };
-		428C2359477649891E4F6061 /* libPods-Fiu.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 09E4F3F5D97AC3732034757F /* libPods-Fiu.a */; };
 		484C45241D60109D009D6155 /* THNPeopleView.m in Sources */ = {isa = PBXBuildFile; fileRef = 484C45231D60109D009D6155 /* THNPeopleView.m */; };
 		484C45261D6010E5009D6155 /* THNPeopleView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 484C45251D6010E5009D6155 /* THNPeopleView.xib */; };
 		48F0F60D1D5F719100379D7F /* THNFocusViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 48F0F60B1D5F719100379D7F /* THNFocusViewController.m */; };
 		48F0F60E1D5F719100379D7F /* THNFocusViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 48F0F60C1D5F719100379D7F /* THNFocusViewController.xib */; };
 		48F0F6111D5F71DD00379D7F /* THNFocusUserModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 48F0F6101D5F71DD00379D7F /* THNFocusUserModel.m */; };
 		48F0F6141D5F724000379D7F /* THNFucosPeopleView.m in Sources */ = {isa = PBXBuildFile; fileRef = 48F0F6131D5F724000379D7F /* THNFucosPeopleView.m */; };
+		54BFA5F10B8809A41A2FB1FE /* libPods-Fiu.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 8FE709C050E67C1697806BB0 /* libPods-Fiu.a */; };
 		D802D7791C821D41007AFA3D /* AssetsLibrary.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D802D7781C821D41007AFA3D /* AssetsLibrary.framework */; };
 		D8035F2F1CB77D0C001920F9 /* UIImage+Helper.m in Sources */ = {isa = PBXBuildFile; fileRef = D8035F2E1CB77D0C001920F9 /* UIImage+Helper.m */; };
 		D8035F3B1CB784B3001920F9 /* UILable+Frame.m in Sources */ = {isa = PBXBuildFile; fileRef = D8035F3A1CB784B3001920F9 /* UILable+Frame.m */; };
@@ -615,8 +615,6 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		09E4F3F5D97AC3732034757F /* libPods-Fiu.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Fiu.a"; sourceTree = BUILT_PRODUCTS_DIR; };
-		105868C9EE6A797B288440BF /* Pods-Fiu.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Fiu.release.xcconfig"; path = "Pods/Target Support Files/Pods-Fiu/Pods-Fiu.release.xcconfig"; sourceTree = "<group>"; };
 		1F0EE6A21C9FA43C000631F0 /* libiconv.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libiconv.tbd; path = usr/lib/libiconv.tbd; sourceTree = SDKROOT; };
 		1F0EE6A41C9FA47B000631F0 /* libsqlite3.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libsqlite3.tbd; path = usr/lib/libsqlite3.tbd; sourceTree = SDKROOT; };
 		1F0EE6A61C9FA4E7000631F0 /* libstdc++.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = "libstdc++.tbd"; path = "usr/lib/libstdc++.tbd"; sourceTree = SDKROOT; };
@@ -1433,6 +1431,7 @@
 		2800451C1C805CBD005F5C2E /* libsqlite3.0.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libsqlite3.0.tbd; path = usr/lib/libsqlite3.0.tbd; sourceTree = SDKROOT; };
 		2800451E1C805CCA005F5C2E /* CoreTelephony.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreTelephony.framework; path = System/Library/Frameworks/CoreTelephony.framework; sourceTree = SDKROOT; };
 		280045201C805CD7005F5C2E /* libstdc++.6.0.9.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = "libstdc++.6.0.9.tbd"; path = "usr/lib/libstdc++.6.0.9.tbd"; sourceTree = SDKROOT; };
+		4585AB191E703A396CB6D2F9 /* Pods-Fiu.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Fiu.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Fiu/Pods-Fiu.debug.xcconfig"; sourceTree = "<group>"; };
 		484C45221D60109D009D6155 /* THNPeopleView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THNPeopleView.h; sourceTree = "<group>"; };
 		484C45231D60109D009D6155 /* THNPeopleView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THNPeopleView.m; sourceTree = "<group>"; };
 		484C45251D6010E5009D6155 /* THNPeopleView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = THNPeopleView.xib; sourceTree = "<group>"; };
@@ -1443,7 +1442,9 @@
 		48F0F6101D5F71DD00379D7F /* THNFocusUserModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THNFocusUserModel.m; sourceTree = "<group>"; };
 		48F0F6121D5F724000379D7F /* THNFucosPeopleView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THNFucosPeopleView.h; sourceTree = "<group>"; };
 		48F0F6131D5F724000379D7F /* THNFucosPeopleView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THNFucosPeopleView.m; sourceTree = "<group>"; };
+		5689422642F92A50300BB9CE /* Pods-Fiu.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Fiu.release.xcconfig"; path = "Pods/Target Support Files/Pods-Fiu/Pods-Fiu.release.xcconfig"; sourceTree = "<group>"; };
 		800507341C7A9CDD005AF0BE /* Fiu.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Fiu.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		8FE709C050E67C1697806BB0 /* libPods-Fiu.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Fiu.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		D802D7781C821D41007AFA3D /* AssetsLibrary.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AssetsLibrary.framework; path = System/Library/Frameworks/AssetsLibrary.framework; sourceTree = SDKROOT; };
 		D802D7891C844101007AFA3D /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
 		D8035F2D1CB77D0C001920F9 /* UIImage+Helper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+Helper.h"; sourceTree = "<group>"; };
@@ -1706,7 +1707,6 @@
 		D8F1C2B21D3BED3F00AE717F /* EditChooseTagsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EditChooseTagsViewController.m; sourceTree = "<group>"; };
 		D8F89E2E1D4B26860098F158 /* NoSubscribeView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NoSubscribeView.h; sourceTree = "<group>"; };
 		D8F89E2F1D4B26860098F158 /* NoSubscribeView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NoSubscribeView.m; sourceTree = "<group>"; };
-		E0438B4B24E3F747F761AF4C /* Pods-Fiu.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Fiu.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Fiu/Pods-Fiu.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -1764,7 +1764,7 @@
 				D81281631CAA8532007CF08B /* BaiduMapAPI_Radar.framework in Frameworks */,
 				D81281641CAA8532007CF08B /* BaiduMapAPI_Search.framework in Frameworks */,
 				1FA4BDFB1D35F2200067A196 /* libSocialQQ.a in Frameworks */,
-				428C2359477649891E4F6061 /* libPods-Fiu.a in Frameworks */,
+				54BFA5F10B8809A41A2FB1FE /* libPods-Fiu.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -3866,15 +3866,6 @@
 			path = View;
 			sourceTree = "<group>";
 		};
-		40FF7B08F78941EBD75F7965 /* Pods */ = {
-			isa = PBXGroup;
-			children = (
-				E0438B4B24E3F747F761AF4C /* Pods-Fiu.debug.xcconfig */,
-				105868C9EE6A797B288440BF /* Pods-Fiu.release.xcconfig */,
-			);
-			name = Pods;
-			sourceTree = "<group>";
-		};
 		4121957EDE4D4049941B2B88 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
@@ -3914,7 +3905,7 @@
 				280045141C805B8C005F5C2E /* OpenGLES.framework */,
 				280045121C805B82005F5C2E /* QuartzCore.framework */,
 				280045101C805B78005F5C2E /* CoreLocation.framework */,
-				09E4F3F5D97AC3732034757F /* libPods-Fiu.a */,
+				8FE709C050E67C1697806BB0 /* libPods-Fiu.a */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -3925,7 +3916,7 @@
 				D81280131CAA8532007CF08B /* Fiu */,
 				800507351C7A9CDD005AF0BE /* Products */,
 				4121957EDE4D4049941B2B88 /* Frameworks */,
-				40FF7B08F78941EBD75F7965 /* Pods */,
+				CAA8BF1207A681706DAD173F /* Pods */,
 			);
 			sourceTree = "<group>";
 		};
@@ -3935,6 +3926,15 @@
 				800507341C7A9CDD005AF0BE /* Fiu.app */,
 			);
 			name = Products;
+			sourceTree = "<group>";
+		};
+		CAA8BF1207A681706DAD173F /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				4585AB191E703A396CB6D2F9 /* Pods-Fiu.debug.xcconfig */,
+				5689422642F92A50300BB9CE /* Pods-Fiu.release.xcconfig */,
+			);
+			name = Pods;
 			sourceTree = "<group>";
 		};
 		D81280131CAA8532007CF08B /* Fiu */ = {
@@ -4602,12 +4602,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 8005074E1C7A9CDD005AF0BE /* Build configuration list for PBXNativeTarget "Fiu" */;
 			buildPhases = (
-				7FCF39AA77DCC3588513F560 /* Check Pods Manifest.lock */,
+				7DE575F1DA086C2C39045BE0 /* Check Pods Manifest.lock */,
 				800507301C7A9CDD005AF0BE /* Sources */,
 				800507311C7A9CDD005AF0BE /* Frameworks */,
 				800507321C7A9CDD005AF0BE /* Resources */,
-				F2B768E18F650286324CD0B8 /* Embed Pods Frameworks */,
-				394BDE2E8ED241B92F81AAFD /* Copy Pods Resources */,
+				EDF16C021CE7B1AD60646CE4 /* Embed Pods Frameworks */,
+				10EE820AAB912E9E18FE108C /* Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -4768,7 +4768,7 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		394BDE2E8ED241B92F81AAFD /* Copy Pods Resources */ = {
+		10EE820AAB912E9E18FE108C /* Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -4783,7 +4783,7 @@
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Fiu/Pods-Fiu-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
-		7FCF39AA77DCC3588513F560 /* Check Pods Manifest.lock */ = {
+		7DE575F1DA086C2C39045BE0 /* Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -4798,7 +4798,7 @@
 			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
-		F2B768E18F650286324CD0B8 /* Embed Pods Frameworks */ = {
+		EDF16C021CE7B1AD60646CE4 /* Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -5392,7 +5392,7 @@
 		};
 		8005074F1C7A9CDD005AF0BE /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = E0438B4B24E3F747F761AF4C /* Pods-Fiu.debug.xcconfig */;
+			baseConfigurationReference = 4585AB191E703A396CB6D2F9 /* Pods-Fiu.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
@@ -5439,7 +5439,7 @@
 		};
 		800507501C7A9CDD005AF0BE /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 105868C9EE6A797B288440BF /* Pods-Fiu.release.xcconfig */;
+			baseConfigurationReference = 5689422642F92A50300BB9CE /* Pods-Fiu.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;

@@ -23,8 +23,6 @@ typedef NS_ENUM(NSInteger, HTHorizontalSelectionIndicatorAnimationMode) {
     HTHorizontalSelectionIndicatorAnimationModeNoBounce
 };
 
-NS_ASSUME_NONNULL_BEGIN
-
 @interface HTHorizontalSelectionList : UIView
 
 /**
@@ -33,8 +31,8 @@ NS_ASSUME_NONNULL_BEGIN
  */
 @property (nonatomic) NSInteger selectedButtonIndex;
 
-@property (nonatomic, weak, nullable) id<HTHorizontalSelectionListDataSource> dataSource;
-@property (nonatomic, weak, nullable) id<HTHorizontalSelectionListDelegate> delegate;
+@property (nonatomic, weak) id<HTHorizontalSelectionListDataSource> dataSource;
+@property (nonatomic, weak) id<HTHorizontalSelectionListDelegate> delegate;
 
 @property (nonatomic) CGFloat selectionIndicatorHeight;
 @property (nonatomic) CGFloat selectionIndicatorHorizontalPadding;
@@ -47,13 +45,8 @@ NS_ASSUME_NONNULL_BEGIN
 /// Default is NO.  If set to YES, the buttons will fade away near the edges of the list.
 @property (nonatomic) BOOL showsEdgeFadeEffect;
 
-/// Default is NO.  Centers buttons within the selection list.  Has no effect if the buttons do not fill the space horizontally.
-@property (nonatomic) BOOL centerButtons;
-
-/// Default is YES.  Controls how buttons are aligned when centered.  Has no effect if `centerButtons` is NO.
-/// When set to YES, buttons will be spaced evenly within the selection list.
-/// If NO, buttons will clustered together in the center of the selection list (with the standard button padding between adjacent items).
-@property (nonatomic) BOOL evenlySpaceButtons;
+/// Default is NO.  Only has an affect if the number of buttons in the selection list does not fill the space horizontally.
+@property (nonatomic) BOOL centerAlignButtons;
 
 /// Default is NO.  If YES, the selected button will be centered on selection.
 @property (nonatomic) BOOL centerOnSelection;
@@ -80,7 +73,6 @@ NS_ASSUME_NONNULL_BEGIN
 // Deprecations
 
 @property (nonatomic) BOOL autocorrectCentralItemSelection __attribute__((deprecated("Use snapToCenter instead.")));
-@property (nonatomic) BOOL centerAlignButtons __attribute__((deprecated("Use centerButtons instead.")));
 
 @end
 
@@ -89,10 +81,10 @@ NS_ASSUME_NONNULL_BEGIN
 - (NSInteger)numberOfItemsInSelectionList:(HTHorizontalSelectionList *)selectionList;
 
 @optional
-- (nullable NSString *)selectionList:(HTHorizontalSelectionList *)selectionList titleForItemWithIndex:(NSInteger)index;
-- (nullable UIView *)selectionList:(HTHorizontalSelectionList *)selectionList viewForItemWithIndex:(NSInteger)index;
+- (NSString *)selectionList:(HTHorizontalSelectionList *)selectionList titleForItemWithIndex:(NSInteger)index;
+- (UIView *)selectionList:(HTHorizontalSelectionList *)selectionList viewForItemWithIndex:(NSInteger)index;
 
-- (nullable NSString *)selectionList:(HTHorizontalSelectionList *)selectionList badgeValueForItemWithIndex:(NSInteger)index;
+- (NSString *)selectionList:(HTHorizontalSelectionList *)selectionList badgeValueForItemWithIndex:(NSInteger)index;
 
 @end
 
@@ -101,5 +93,3 @@ NS_ASSUME_NONNULL_BEGIN
 - (void)selectionList:(HTHorizontalSelectionList *)selectionList didSelectButtonWithIndex:(NSInteger)index;
 
 @end
-
-NS_ASSUME_NONNULL_END
