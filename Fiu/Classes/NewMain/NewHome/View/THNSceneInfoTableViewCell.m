@@ -12,9 +12,7 @@
 
 static NSString *const sceneTagsCellId = @"SceneTagsCellId";
 
-@interface THNSceneInfoTableViewCell () {
-    NSMutableArray *_tagsMarr;
-}
+@interface THNSceneInfoTableViewCell ()
 
 @end
 
@@ -32,28 +30,32 @@ static NSString *const sceneTagsCellId = @"SceneTagsCellId";
 
 #pragma mark - setModel
 - (void)thn_setSceneContentData:(HomeSceneListRow *)contentModel {
-    [self changeLineSpacing:contentModel.des forLable:self.content];
-    CGSize size = [_content boundingRectWithSize:CGSizeMake(SCREEN_WIDTH - 50, 0)];
-    if (((size.height * 1.2) + 40) < 100) {
-        self.defaultCellHigh = (size.height * 1.2) + 40;
-    } else {
-        self.defaultCellHigh = 100;
-    }
-    self.cellHigh = (size.height * 1.2) + 40;
+    [self getContentWithTags:contentModel.des];
     
-    _tagsMarr = [NSMutableArray arrayWithArray:contentModel.tags];
-    [self.tags reloadData];
+    CGSize size = [_content boundingRectWithSize:CGSizeMake(SCREEN_WIDTH - 50, 0)];
+    if (size.height*2 < 70) {
+        self.defaultCellHigh = size.height*2;
+    } else {
+        self.defaultCellHigh = 70;
+    }
+    self.cellHigh = size.height*1.5;
 }
 
-- (void)changeLineSpacing:(NSString *)text forLable:(UILabel *)lable {
-    NSMutableAttributedString *contentText = [[NSMutableAttributedString alloc] initWithString:text];
-    NSMutableParagraphStyle *paragraphStyle = [[NSMutableParagraphStyle alloc] init];
-    paragraphStyle.lineSpacing = 4.0f;
-    paragraphStyle.lineBreakMode = NSLineBreakByTruncatingTail;
-    paragraphStyle.alignment = NSTextAlignmentJustified;
-    NSDictionary *textDict = @{NSParagraphStyleAttributeName:paragraphStyle};
-    [contentText addAttributes:textDict range:NSMakeRange(0, contentText.length)];
-    lable.attributedText = contentText;
+//  检索描述内容中的标签
+- (void)getContentWithTags:(NSString *)content {
+    self.content.attributedText = [[NSAttributedString alloc] initWithString:content];
+    NSRegularExpression *regex = [NSRegularExpression regularExpressionWithPattern:@"\\#[^\\s]*" options:0 error:nil];
+    NSArray *arr = [regex matchesInString:content options:0 range:NSMakeRange(0, content.length)];
+    for (NSUInteger idx = 0; idx < arr.count; ++ idx) {
+        NSTextCheckingResult *result = arr[idx];
+        NSString *str = [content substringWithRange:result.range];
+#pragma unused(str)
+        [self.content addLinkToURL:[NSURL URLWithString:[NSString stringWithFormat:@"scheme://tag=22"]] withRange:result.range];
+    }
+}
+
+- (void)attributedLabel:(TTTAttributedLabel *)label didSelectLinkWithURL:(NSURL *)url {
+    NSLog(@"－－＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝ %@", url);
 }
 
 #pragma mark - setUI
@@ -66,20 +68,12 @@ static NSString *const sceneTagsCellId = @"SceneTagsCellId";
         make.bottom.equalTo(self.mas_bottom).with.offset(0);
     }];
     
-    [self addSubview:self.tags];
-    [_tags mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.height.equalTo(@20);
-        make.left.equalTo(_graybackView.mas_left).with.offset(10);
-        make.right.equalTo(_graybackView.mas_right).with.offset(-10);
-        make.bottom.equalTo(_graybackView.mas_bottom).with.offset(0);
-    }];
-    
     [self addSubview:self.content];
     [_content mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.equalTo(_graybackView.mas_left).with.offset(10);
-        make.right.equalTo(_graybackView.mas_right).with.offset(-10);
-        make.top.equalTo(_graybackView.mas_top).with.offset(10);
-        make.bottom.equalTo(_tags.mas_top).with.offset(-7);
+        make.left.equalTo(_graybackView).with.offset(10);
+        make.right.equalTo(_graybackView).with.offset(-10);
+        make.top.equalTo(_graybackView).with.offset(5);
+        make.bottom.equalTo(_graybackView).with.offset(-5);
     }];
     
 //    [self addSubview:self.moreIcon];
@@ -99,13 +93,17 @@ static NSString *const sceneTagsCellId = @"SceneTagsCellId";
     return _graybackView;
 }
 
-- (UILabel *)content {
+- (TTTAttributedLabel *)content {
     if (!_content) {
-        _content = [[UILabel alloc] init];
+        _content = [[TTTAttributedLabel alloc] initWithFrame:CGRectMake(0, 0, 0, 0)];
         _content.textColor = [UIColor colorWithHexString:@"#666666"];
         _content.numberOfLines = 0;
-        [_content sizeToFit];
+        _content.delegate = self;
+        _content.enabledTextCheckingTypes = NSTextCheckingTypeLink;
         _content.font = [UIFont systemFontOfSize:12];
+        NSDictionary *linkAttributes = @{(NSString *)kCTUnderlineStyleAttributeName:[NSNumber numberWithBool:NO],
+                                        (NSString *)kCTForegroundColorAttributeName:(__bridge id)[UIColor colorWithHexString:MAIN_COLOR].CGColor};
+        _content.linkAttributes = linkAttributes;
     }
     return _content;
 }
@@ -118,44 +116,6 @@ static NSString *const sceneTagsCellId = @"SceneTagsCellId";
     return _moreIcon;
 }
 
-- (UICollectionView *)tags {
-    if (!_tags) {
-        UICollectionViewFlowLayout * flowLayout = [[UICollectionViewFlowLayout alloc] init];
-        flowLayout.minimumInteritemSpacing = 5.0f;
-        flowLayout.sectionInset = UIEdgeInsetsMake(0, 0, 0, 0);
-        flowLayout.scrollDirection = UICollectionViewScrollDirectionHorizontal;
-        
-        _tags = [[UICollectionView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH - 50, 20)
-                                   collectionViewLayout:flowLayout];
-        _tags.backgroundColor = [UIColor colorWithHexString:@"#F5F5F5"];
-        _tags.delegate = self;
-        _tags.dataSource = self;
-        _tags.showsHorizontalScrollIndicator = NO;
-        [_tags registerClass:[THNSceneTagsCollectionViewCell class] forCellWithReuseIdentifier:sceneTagsCellId];
-    }
-    return _tags;
-}
-
-- (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
-    return _tagsMarr.count;
-}
-
-- (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath {
-//    if (_tagsMarr.count) {
-//        return CGSizeMake([self getTextFrame:_tagsMarr[indexPath.row]].width * 1.5, 20);
-//    } else
-        return CGSizeMake(30, 20);
-}
-
-- (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
-    THNSceneTagsCollectionViewCell * cell = [collectionView dequeueReusableCellWithReuseIdentifier:sceneTagsCellId
-                                                                                      forIndexPath:indexPath];
-//    if (_tagsMarr.count) {
-//        [cell thn_setSceneTagsData:_tagsMarr[indexPath.row]];
-//    }
-    return cell;
-}
-
 - (CGSize)getTextFrame:(NSString *)text {
     NSDictionary *attribute = @{NSFontAttributeName:[UIFont systemFontOfSize:12]};
     CGSize textSize = [text boundingRectWithSize:CGSizeMake(SCREEN_WIDTH - 50, 0)
@@ -166,10 +126,6 @@ static NSString *const sceneTagsCellId = @"SceneTagsCellId";
                                           attributes:attribute
                                              context:nil].size;
     return textSize;
-}
-
-- (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
-    [SVProgressHUD showSuccessWithStatus:[NSString stringWithFormat:@"搜索标签:%@", _tagsMarr[indexPath.row]]];
 }
 
 @end

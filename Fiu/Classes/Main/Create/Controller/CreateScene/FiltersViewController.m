@@ -74,10 +74,7 @@
 #pragma mark 继续按钮的点击事件
 - (void)nextBtnClick {
     ReleaseViewController * releaseVC = [[ReleaseViewController alloc] init];
-    releaseVC.createType = self.createType;
     releaseVC.bgImg = self.filtersImageView.image;
-    releaseVC.fSceneId = self.fSceneId;
-    releaseVC.fSceneTitle = self.fSceneTitle;
     releaseVC.goodsTitle = self.goodsTitle;
     releaseVC.goodsPrice = self.goodsPrice;
     releaseVC.goodsId = self.goodsId;

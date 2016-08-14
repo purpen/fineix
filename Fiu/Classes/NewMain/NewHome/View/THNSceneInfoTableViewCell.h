@@ -9,17 +9,15 @@
 #import <UIKit/UIKit.h>
 #import "THNMacro.h"
 #import "HomeSceneListRow.h"
+#import "TTTAttributedLabel.h"
 
 @interface THNSceneInfoTableViewCell : UITableViewCell <
-    UICollectionViewDelegate,
-    UICollectionViewDataSource,
-    UICollectionViewDelegateFlowLayout
+    TTTAttributedLabelDelegate
 >
 
 @pro_strong UIView *graybackView;
-@pro_strong UILabel *content;
+@pro_strong TTTAttributedLabel *content;
 @pro_strong UIButton *moreIcon;
-@pro_strong UICollectionView *tags;
 @pro_assign CGFloat cellHigh;
 @pro_assign CGFloat defaultCellHigh;
 

@@ -36,12 +36,10 @@ static NSString *const URLListText = @"/scene_context/getlist";
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
     [self networkSceneContentCategory];
     _categoryId = @"0";
     self.listCurrentpageNum = 0;
     [self networkContentList:_categoryId];
-    
     [self setEditInfoVcUI];
 }
 
@@ -55,7 +53,9 @@ static NSString *const URLListText = @"/scene_context/getlist";
 }
 
 - (void)thn_sureButtonAction {
-    
+    [self dismissViewControllerAnimated:YES completion:^{
+        self.getEdtiShareText(self.titleText.text, self.desText.text, @[@"天气", @"真好"]);
+    }];
 }
 
 #pragma mark - 网络请求
@@ -500,16 +500,18 @@ static NSString *const URLListText = @"/scene_context/getlist";
             self.getEdtiShareText(shareInfoRow.title , shareInfoRow.des, shareInfoRow.tags);
             [SVProgressHUD dismiss];
         }];
-    } else if (tableView == self.listTable) {
-        [SVProgressHUD show];
-        ShareInfoRow * listInfoRow = self.listMarr[indexPath.row];
-        //  frome #import "ReleaseViewController.h"
-        [[NSNotificationCenter defaultCenter] postNotificationName:@"getSceneTags" object:listInfoRow.tags];
         
-        [self dismissViewControllerAnimated:YES completion:^{
-            self.getEdtiShareText(listInfoRow.title , listInfoRow.des, listInfoRow.tags);
-            [SVProgressHUD dismiss];
-        }];
+    } else if (tableView == self.listTable) {
+//        [SVProgressHUD show];
+        ShareInfoRow *listInfoRow = self.listMarr[indexPath.row];
+        self.desText.text = listInfoRow.des;
+        self.titleText.text = listInfoRow.title;
+//        //  frome #import "ReleaseViewController.h"
+//        [[NSNotificationCenter defaultCenter] postNotificationName:@"getSceneTags" object:listInfoRow.tags];
+//        [self dismissViewControllerAnimated:YES completion:^{
+//            self.getEdtiShareText(listInfoRow.title , listInfoRow.des, listInfoRow.tags);
+//            [SVProgressHUD dismiss];
+//        }];
     }
 }
 

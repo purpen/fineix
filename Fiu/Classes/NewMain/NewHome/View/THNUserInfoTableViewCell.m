@@ -27,8 +27,9 @@
                  placeholderImage:[UIImage imageNamed:@""]];
     self.name.text = userModel.user.nickname;
     [self.time setTitle:userModel.createdAt forState:(UIControlStateNormal)];
+    NSString *timeStr = [NSString stringWithFormat:@"      %@",userModel.createdAt];
     [self.time mas_updateConstraints:^(MASConstraintMaker *make) {
-        make.width.equalTo(@([self getTextSizeWidth:userModel.createdAt].width * 1.3));
+        make.width.equalTo(@([self getTextSizeWidth:timeStr].width));
     }];
     [self.address setTitle:userModel.address forState:(UIControlStateNormal)];
     if (userModel.user.isExpert == 1) {

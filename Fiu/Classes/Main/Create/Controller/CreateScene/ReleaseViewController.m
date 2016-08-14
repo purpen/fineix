@@ -51,17 +51,20 @@ static NSString *const URLGetUserDesTags = @"/gateway/fetch_chinese_word";
 
 #pragma mark 发布场景
 - (void)networkNewSceneData {
-    NSString * title = self.addContent.title.text;
-    NSString * des = self.addContent.content.text;
-
+    NSString *title = self.addContent.title.text;
+    NSString *des = self.addContent.content.text;
+    NSString *address = self.addLocaiton.locationLab.text;
+    NSString *city = self.addLocaiton.cityLab.text;
+    NSString *lng = self.addLocaiton.longitude;
+    NSString *lat = self.addLocaiton.latitude;
+    NSString *tags = @"天气,真的很好啊,很蓝";
+    NSLog(@"＝＝＝＝＝＝＝＝＝ %@ %@ %@ %@ %@ %@", title, des, address, city, lng, lat);
     if ([title isEqualToString:@""]) {
         [self showMessage:@"您还没有添加情景标题哦"];
     } else if ([des isEqualToString:NSLocalizedString(@"addDescription", nil)] || [des isEqualToString:@""]) {
         [self showMessage:@"您还没有写情景描述呢"];
-    } else if ([self.addLocaiton.longitude length] <= 0 || [self.addLocaiton.locationLab.text isEqualToString:@""]) {
+    } else if (lng.length == 0 || address.length == 0) {
         [self showMessage:@"定位标记了吗？"];
-    } else if (self.fSceneId.length <= 0) {
-        [self showMessage:@"您的情景还没有分类哦"];
     } else if (title.length > 20) {
         [self showMessage:@"标题在20字以内哦"];
     } else {
@@ -89,17 +92,13 @@ static NSString *const URLGetUserDesTags = @"/gateway/fetch_chinese_word";
                                      @"address":self.addLocaiton.locationLab.text,
                                      @"city":self.addLocaiton.cityLab.text,
                                      @"products":json,
-//                                     @"tags":tags,
-                                     @"scene_id":self.fSceneId
+                                     @"tags":tags,
                                      };
         
         self.releaseSceneRequest = [FBAPI postWithUrlString:URLReleaseScenen requestDictionary:paramDict delegate:self];
         
         [self.releaseSceneRequest startRequestSuccess:^(FBRequest *request, id result) {
-            NSString * sceneId = [NSString stringWithFormat:@"%@",[[result valueForKey:@"data"] valueForKey:@"id"]];
-            LookSceneViewController * sceneInfoVC = [[LookSceneViewController alloc] init];
-            sceneInfoVC.sceneId = sceneId;
-            [self.navigationController pushViewController:sceneInfoVC animated:YES];
+            NSLog(@"－－－－－－－－%@", result);
             [SVProgressHUD dismiss];
 
         } failure:^(FBRequest *request, NSError *error) {

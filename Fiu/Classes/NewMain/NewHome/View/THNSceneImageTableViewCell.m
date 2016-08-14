@@ -38,12 +38,12 @@
         self.suTitle.hidden = YES;
         
     } else if (sceneModel.title.length > 10) {
-        NSString * title = [sceneModel.title substringToIndex:10];
-        _titleStr = [NSString stringWithFormat:@"    %@  ", title];
+        NSString *titleStr = [sceneModel.title substringToIndex:10];
+        _titleStr = [NSString stringWithFormat:@"    %@  ", titleStr];
         self.title.text = _titleStr;
         
-        NSString * suTitle = [sceneModel.title substringFromIndex:10];
-        _suTitleStr = [NSString stringWithFormat:@"    %@  ", suTitle];
+        NSString *suTitleStr = [sceneModel.title substringFromIndex:10];
+        _suTitleStr = [NSString stringWithFormat:@"    %@  ", suTitleStr];
         self.suTitle.text = _suTitleStr;
         
         [self.suTitle mas_updateConstraints:^(MASConstraintMaker *make) {
@@ -56,10 +56,10 @@
         }];
         
     } else if (sceneModel.title.length < 10) {
-        NSString * title = [NSString stringWithFormat:@"    %@  ", sceneModel.title];
-        self.title.text = title;
+        NSString *titleStr = [NSString stringWithFormat:@"    %@  ", sceneModel.title];
+        self.title.text = titleStr;
         [self.title mas_updateConstraints:^(MASConstraintMaker *make) {
-            make.width.equalTo(@([self getTextSizeWidth:title].width));
+            make.width.equalTo(@([self getTextSizeWidth:titleStr].width));
         }];
     }
 }
@@ -88,14 +88,14 @@
     
     [self addSubview:self.suTitle];
     [_suTitle mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.size.mas_equalTo(CGSizeMake(100, 25));
+        make.size.mas_equalTo(CGSizeMake(50, 25));
         make.left.equalTo(self.mas_left).with.offset(0);
         make.bottom.equalTo(self.mas_bottom).with.offset(-20);
     }];
     
     [self addSubview:self.title];
     [_title mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.size.mas_equalTo(CGSizeMake(100, 25));
+        make.size.mas_equalTo(CGSizeMake(50, 25));
         make.left.equalTo(self.mas_left).with.offset(0);
         make.bottom.equalTo(self.mas_bottom).with.offset(-20);
     }];

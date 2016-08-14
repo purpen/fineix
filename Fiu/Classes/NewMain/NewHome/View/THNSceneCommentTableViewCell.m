@@ -22,7 +22,7 @@
 
 #pragma mark - setModel
 - (void)thn_setSceneContentData:(HomeSceneListRow *)contentModel {
-    NSLog(@"－－－－－－－－－－－－－     %@", [contentModel.comments valueForKey:@"content"]);
+//    NSLog(@"－－－－－－－－－－－－－     评论%@", [contentModel.comments valueForKey:@"content"]);
     
 }
 
