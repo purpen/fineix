@@ -62,8 +62,14 @@
 }
 
 //  关闭按钮
-- (void)addCloseBtn {
+- (void)addCloseBtn:(NSString *)image {
+    [self.closeBtn setImage:[UIImage imageNamed:image] forState:(UIControlStateNormal)];
     [self.navView addSubview:self.closeBtn];
+}
+
+//  确定
+- (void)addSureButton {
+    [self.navView addSubview:self.sureButton];
 }
 
 //  取消发布
@@ -88,7 +94,7 @@
 #pragma mark - 页面的标题
 - (UILabel *)navTitle {
     if (!_navTitle) {
-        _navTitle = [[UILabel alloc] initWithFrame:CGRectMake(45, 0, (SCREEN_WIDTH - 100), 45)];
+        _navTitle = [[UILabel alloc] initWithFrame:CGRectMake(50, 0, SCREEN_WIDTH-100, 45)];
         _navTitle.font = [UIFont systemFontOfSize:Font_ControllerTitle];
         _navTitle.textColor = [UIColor whiteColor];
         _navTitle.textAlignment = NSTextAlignmentCenter;
@@ -108,7 +114,7 @@
 #pragma mark - 继续下一步的执行事件
 - (UIButton *)nextBtn {
     if (!_nextBtn) {
-        _nextBtn = [[UIButton alloc] initWithFrame:CGRectMake((SCREEN_WIDTH - 60), 0, 45, 45)];
+        _nextBtn = [[UIButton alloc] initWithFrame:CGRectMake(SCREEN_WIDTH - 50, 0, 45, 45)];
         [_nextBtn setTitle:NSLocalizedString(@"next", nil) forState:(UIControlStateNormal)];
         [_nextBtn setTitleColor:[UIColor whiteColor] forState:(UIControlStateNormal)];
         if (IS_iOS9) {
@@ -137,7 +143,6 @@
 - (UIButton *)closeBtn {
     if (!_closeBtn) {
         _closeBtn = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 45, 45)];
-        [_closeBtn setImage:[UIImage imageNamed:@"icon_cancel_black"] forState:(UIControlStateNormal)];
         [_closeBtn addTarget:self action:@selector(closeBtnClick) forControlEvents:(UIControlEventTouchUpInside)];
     }
     return _closeBtn;
@@ -145,6 +150,25 @@
 
 - (void)closeBtnClick {
     [self dismissViewControllerAnimated:YES completion:nil];
+}
+
+#pragma mark - 确定
+- (UIButton *)sureButton {
+    if (!_sureButton) {
+        _sureButton = [[UIButton alloc] initWithFrame:CGRectMake(SCREEN_WIDTH - 50, 0, 45, 45)];
+        [_sureButton addTarget:self action:@selector(sureButtonClick) forControlEvents:(UIControlEventTouchUpInside)];
+        [_sureButton setTitle:NSLocalizedString(@"sure", nil) forState:(UIControlStateNormal)];
+        [_sureButton setTitleColor:[UIColor whiteColor] forState:(UIControlStateNormal)];
+        _sureButton.titleLabel.font = [UIFont systemFontOfSize:Font_ControllerTitle];
+    }
+    return _sureButton;
+}
+
+- (void)sureButtonClick {
+    if ([self.delegate respondsToSelector:@selector(thn_sureButtonAction)]) {
+        [self.delegate thn_sureButtonAction];
+        [self dismissViewControllerAnimated:YES completion:nil];
+    }
 }
 
 #pragma mark - 设置取消创建场景按钮
@@ -163,14 +187,10 @@
 #pragma mark - 设置发布场景景按钮
 - (UIButton *)doneBtn {
     if (!_doneBtn) {
-        _doneBtn = [[UIButton alloc] initWithFrame:CGRectMake((SCREEN_WIDTH - 60), 0, 45, 45)];
+        _doneBtn = [[UIButton alloc] initWithFrame:CGRectMake(SCREEN_WIDTH - 50, 0, 45, 45)];
         [_doneBtn setTitle:NSLocalizedString(@"release", nil) forState:(UIControlStateNormal)];
         [_doneBtn setTitleColor:[UIColor colorWithHexString:fineixColor alpha:1] forState:(UIControlStateNormal)];
-        if (IS_iOS9) {
-            _doneBtn.titleLabel.font = [UIFont fontWithName:@"PingFangSC-Light" size:Font_ControllerTitle];
-        } else {
-            _doneBtn.titleLabel.font = [UIFont systemFontOfSize:Font_ControllerTitle];
-        }
+        _doneBtn.titleLabel.font = [UIFont systemFontOfSize:Font_ControllerTitle];
     }
     return _doneBtn;
 }

@@ -619,7 +619,7 @@ static NSInteger const CATEGORYTAG = 283;
     if ([self.type isEqualToString:@"release"]) {
         [self addBackButton:@"icon_back"];
     } else if ([self.type isEqualToString:@"edit"]) {
-        [self addCloseBtn];
+        [self addCloseBtn:@"icon_cancel_black"];
     }
     [self.navView addSubview:self.sureBtn];
 }

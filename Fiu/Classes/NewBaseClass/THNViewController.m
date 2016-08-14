@@ -14,11 +14,14 @@
     UIButton       *_guideBtn;
 }
 
-- (void)viewDidLoad {
-    [super viewDidLoad];
-    
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
     [UIApplication sharedApplication].statusBarHidden = NO;
     [UIApplication sharedApplication].statusBarStyle = UIStatusBarStyleLightContent;
+}
+
+- (void)viewDidLoad {
+    [super viewDidLoad];
     [self thn_setNavViewUI];
 }
 
@@ -190,6 +193,14 @@
 
 - (void)removeGuide:(UIButton *)button {
     [button removeFromSuperview];
+}
+
+- (void)thn_addNavBackBtn {
+    
+}
+
+- (void)thn_showMessage:(NSString *)message {
+    
 }
 
 @end

@@ -13,10 +13,11 @@
 #import "THNDiscoverViewController.h"
 #import "THNMallViewController.h"
 #import "THNMallViewController.h"
-#import "THNMyCenterViewController.h"
+#import "MyPageViewController.h"
 #import "UserInfoEntity.h"
 #import "THNLoginRegisterViewController.h"
-#import "MyPageViewController.h"
+#import "PictureToolViewController.h"
+#import "FBLoginRegisterViewController.h"
 
 @implementation THNTabBarController {
     THNNavigationController * _homeNav;
@@ -31,14 +32,10 @@
     [self thn_setTabBarController];
 }
 
-//
 - (BOOL)tabBarController:(UITabBarController *)tabBarController shouldSelectViewController:(UIViewController *)viewController
 {
     //这里我判断的是当前点击的tabBarItem的标题
-    
-    
-    if ([viewController.tabBarItem.title isEqualToString:@"个人"]) {
-        
+    if ([viewController.tabBarItem.title isEqualToString:NSLocalizedString(@"TabBar_MyCenter", nil)]) {
         UserInfoEntity *entity = [UserInfoEntity defaultUserInfoEntity];
         FBRequest * request = [FBAPI postWithUrlString:@"/auth/check_login" requestDictionary:nil delegate:self];
         [request startRequestSuccess:^(FBRequest *request, id result) {
@@ -50,9 +47,7 @@
         
         if (entity.isLogin) {
             return YES;
-        }
-        else
-        {
+        } else {
             THNLoginRegisterViewController *vc = [[THNLoginRegisterViewController alloc] init];
             UINavigationController *navi = [[UINavigationController alloc] initWithRootViewController:vc];
             [self presentViewController:navi animated:YES completion:nil];
@@ -60,9 +55,7 @@
             return NO;
         }
         
-    }
-    
-    else {
+    } else {
         UserInfoEntity *entity = [UserInfoEntity defaultUserInfoEntity];
         FBRequest * request = [FBAPI postWithUrlString:@"/auth/check_login" requestDictionary:nil delegate:self];
         [request startRequestSuccess:^(FBRequest *request, id result) {
@@ -123,39 +116,50 @@
     _mallNav = [[THNNavigationController alloc] initWithRootViewController:mallVC];
     _myNav = [[THNNavigationController alloc] initWithRootViewController:myVC];
     
-    [self setChildViewController:_homeNav image:@"homegray" seletedImage:@"homered" itemTitle:NSLocalizedString(@"TabBar_Home", nil)];
-    [self setChildViewController:_discoverNav image:@"findgray" seletedImage:@"findred" itemTitle:NSLocalizedString(@"TabBar_Discover", nil)];
-    [self setChildViewController:_mallNav image:@"shopgray" seletedImage:@"shopred" itemTitle:NSLocalizedString(@"TabBar_Mall", nil)];
-    [self setChildViewController:_myNav image:@"minegray" seletedImage:@"minered" itemTitle:NSLocalizedString(@"TabBar_MyCenter", nil)];
+    [self setChildViewController:_homeNav
+                           image:@"tabBar_Home"
+                    seletedImage:@"tabBar_Home_Se"
+                       itemTitle:NSLocalizedString(@"TabBar_Home", nil)];
+    [self setChildViewController:_discoverNav
+                           image:@"tabBar_Discover"
+                    seletedImage:@"tabBar_Discover_Se"
+                       itemTitle:NSLocalizedString(@"TabBar_Discover", nil)];
+    [self setChildViewController:_mallNav
+                           image:@"tabBar_Mall"
+                    seletedImage:@"tabBar_Mall_Se"
+                       itemTitle:NSLocalizedString(@"TabBar_Mall", nil)];
+    [self setChildViewController:_myNav
+                           image:@"tabBar_MyCenter"
+                    seletedImage:@"tabBar_MyCenter_Se"
+                       itemTitle:NSLocalizedString(@"TabBar_MyCenter", nil)];
     
     self.viewControllers = @[_homeNav, _discoverNav, _mallNav, _myNav];
 }
 
 #pragma mark “创建情景”的按钮事件
 - (void)createBtnClick {
-//    UserInfoEntity *entity = [UserInfoEntity defaultUserInfoEntity];
-//    FBRequest * request = [FBAPI postWithUrlString:@"/auth/check_login" requestDictionary:nil delegate:self];
-//    [request startRequestSuccess:^(FBRequest *request, id result) {
-//        NSDictionary * dataDic = [result objectForKey:@"data"];
-//        entity.isLogin = [[dataDic objectForKey:@"is_login"] boolValue];
-//    } failure:^(FBRequest *request, NSError *error) {
-//        [SVProgressHUD showInfoWithStatus:[error localizedDescription]];
-//    }];
-//    //如果用户ID存在的话，说明已登陆
-//    
-//    if (entity.isLogin) {
-//        PictureToolViewController * pictureToolVC = [[PictureToolViewController alloc] init];
-//        pictureToolVC.createType = @"scene";
-//        [self presentViewController:pictureToolVC animated:YES completion:nil];
-//    }
-//    else
-//    {
-//        //跳到登录页面
-//        UIStoryboard *loginStory = [UIStoryboard storyboardWithName:@"LoginRegisterController" bundle:[NSBundle mainBundle]];
-//        FBLoginRegisterViewController *loginSignupVC = [loginStory instantiateViewControllerWithIdentifier:@"FBLoginRegisterViewController"];
-//        UINavigationController *navi = [[UINavigationController alloc] initWithRootViewController:loginSignupVC];
+    UserInfoEntity *entity = [UserInfoEntity defaultUserInfoEntity];
+    FBRequest *request = [FBAPI postWithUrlString:@"/auth/check_login" requestDictionary:nil delegate:self];
+    [request startRequestSuccess:^(FBRequest *request, id result) {
+        NSDictionary * dataDic = [result objectForKey:@"data"];
+        entity.isLogin = [[dataDic objectForKey:@"is_login"] boolValue];
+    } failure:^(FBRequest *request, NSError *error) {
+        [SVProgressHUD showInfoWithStatus:[error localizedDescription]];
+    }];
+    
+    if (entity.isLogin) {
+        PictureToolViewController * pictureToolVC = [[PictureToolViewController alloc] init];
+        [self presentViewController:pictureToolVC animated:YES completion:nil];
+    } else {
+        UIStoryboard *loginStory = [UIStoryboard storyboardWithName:@"LoginRegisterController" bundle:[NSBundle mainBundle]];
+        FBLoginRegisterViewController *loginSignupVC = [loginStory instantiateViewControllerWithIdentifier:@"FBLoginRegisterViewController"];
+        UINavigationController *navi = [[UINavigationController alloc] initWithRootViewController:loginSignupVC];
+        [self presentViewController:navi animated:YES completion:nil];
+        
+//        THNLoginRegisterViewController *vc = [[THNLoginRegisterViewController alloc] init];
+//        UINavigationController *navi = [[UINavigationController alloc] initWithRootViewController:vc];
 //        [self presentViewController:navi animated:YES completion:nil];
-//    }
+    }
 }
 
 @end

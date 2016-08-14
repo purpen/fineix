@@ -98,7 +98,7 @@ static NSString *const URLFiuCategoryList = @"/category/getlist";
     self.navView.backgroundColor = [UIColor whiteColor];
     [self addNavViewTitle:NSLocalizedString(@"chooseCategoryVC", nil)];
     self.navTitle.textColor = [UIColor blackColor];
-    [self addCloseBtn];
+    [self addCloseBtn:@"icon_cancel_black"];
     [self addLine];
 }
 

@@ -12,19 +12,28 @@
 #import "UserInfo.h"
 #import "UserInfoEntity.h"
 
+@protocol FBPictureViewControllerDelegate <NSObject>
+
+@optional
+- (void)thn_sureButtonAction;
+
+@end
+
 @interface FBPictureViewController : UIViewController
 
-@pro_strong UIView              *   navView;            //  顶部状态栏
-@pro_strong UILabel             *   navTitle;           //  顶部标题
-@pro_strong UIButton            *   openPhotoAlbums;    //  打开相薄
-@pro_strong UIButton            *   cancelBtn;          //  取消按钮
-@pro_strong UIButton            *   backBtn;            //  返回按钮
-@pro_strong UIButton            *   doneBtn;            //  完成发布按钮
-@pro_strong UIButton            *   cancelDoneBtn;      //  取消创建
-@pro_strong UIButton            *   closeBtn;           //  关闭
-@pro_strong UIButton            *   nextBtn;            //  继续按钮
-@pro_strong UIButton            *   cropBack;           //  "裁剪"返回
-@pro_strong UILabel             *   line;               //  视图分割线
+@pro_strong UIView *navView;            //  顶部状态栏
+@pro_strong UILabel *navTitle;          //  顶部标题
+@pro_strong UIButton *openPhotoAlbums;  //  打开相薄
+@pro_strong UIButton *cancelBtn;        //  取消按钮
+@pro_strong UIButton *backBtn;          //  返回按钮
+@pro_strong UIButton *doneBtn;          //  完成发布按钮
+@pro_strong UIButton *cancelDoneBtn;    //  取消创建
+@pro_strong UIButton *closeBtn;         //  关闭
+@pro_strong UIButton *sureButton;       //  确定
+@pro_strong UIButton *nextBtn;          //  继续按钮
+@pro_strong UIButton *cropBack;         //  "裁剪"返回
+@pro_strong UILabel *line;              //  视图分割线
+@pro_weak id <FBPictureViewControllerDelegate> delegate;
 
 /**
  *  获取当前登录用户id
@@ -62,9 +71,14 @@
 - (void)addDoneButton;
 
 /*
+ *  确定按钮
+ */
+- (void)addSureButton;
+
+/*
  *  关闭按钮
  */
-- (void)addCloseBtn;
+- (void)addCloseBtn:(NSString *)image;
 
 /*
  *  视图的分割线
