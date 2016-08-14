@@ -477,6 +477,8 @@
 		2800451B1C805CAC005F5C2E /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2800451A1C805CAC005F5C2E /* Security.framework */; };
 		2800451F1C805CCA005F5C2E /* CoreTelephony.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2800451E1C805CCA005F5C2E /* CoreTelephony.framework */; };
 		428C2359477649891E4F6061 /* libPods-Fiu.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 09E4F3F5D97AC3732034757F /* libPods-Fiu.a */; };
+		484C45241D60109D009D6155 /* THNPeopleView.m in Sources */ = {isa = PBXBuildFile; fileRef = 484C45231D60109D009D6155 /* THNPeopleView.m */; };
+		484C45261D6010E5009D6155 /* THNPeopleView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 484C45251D6010E5009D6155 /* THNPeopleView.xib */; };
 		48F0F60D1D5F719100379D7F /* THNFocusViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 48F0F60B1D5F719100379D7F /* THNFocusViewController.m */; };
 		48F0F60E1D5F719100379D7F /* THNFocusViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 48F0F60C1D5F719100379D7F /* THNFocusViewController.xib */; };
 		48F0F6111D5F71DD00379D7F /* THNFocusUserModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 48F0F6101D5F71DD00379D7F /* THNFocusUserModel.m */; };
@@ -1459,6 +1461,9 @@
 		2800451C1C805CBD005F5C2E /* libsqlite3.0.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libsqlite3.0.tbd; path = usr/lib/libsqlite3.0.tbd; sourceTree = SDKROOT; };
 		2800451E1C805CCA005F5C2E /* CoreTelephony.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreTelephony.framework; path = System/Library/Frameworks/CoreTelephony.framework; sourceTree = SDKROOT; };
 		280045201C805CD7005F5C2E /* libstdc++.6.0.9.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = "libstdc++.6.0.9.tbd"; path = "usr/lib/libstdc++.6.0.9.tbd"; sourceTree = SDKROOT; };
+		484C45221D60109D009D6155 /* THNPeopleView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THNPeopleView.h; sourceTree = "<group>"; };
+		484C45231D60109D009D6155 /* THNPeopleView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THNPeopleView.m; sourceTree = "<group>"; };
+		484C45251D6010E5009D6155 /* THNPeopleView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = THNPeopleView.xib; sourceTree = "<group>"; };
 		48F0F60A1D5F719100379D7F /* THNFocusViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THNFocusViewController.h; sourceTree = "<group>"; };
 		48F0F60B1D5F719100379D7F /* THNFocusViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THNFocusViewController.m; sourceTree = "<group>"; };
 		48F0F60C1D5F719100379D7F /* THNFocusViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = THNFocusViewController.xib; sourceTree = "<group>"; };
@@ -3388,6 +3393,9 @@
 				1FD10C9A1D5DC8B8005898EE /* THNTopicView.h */,
 				1FD10C9B1D5DC8B8005898EE /* THNTopicView.m */,
 				1FD10C9D1D5DC8D1005898EE /* THNTopicView.xib */,
+				484C45221D60109D009D6155 /* THNPeopleView.h */,
+				484C45231D60109D009D6155 /* THNPeopleView.m */,
+				484C45251D6010E5009D6155 /* THNPeopleView.xib */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -4652,6 +4660,7 @@
 				1FA4BDF61D35F2200067A196 /* UMSShareListController.xib in Resources */,
 				1F2A90491CF40277005116C7 /* SubscribeInterestedCollectionViewController.xib in Resources */,
 				1F2A90281CF40277005116C7 /* Empty.xib in Resources */,
+				484C45261D6010E5009D6155 /* THNPeopleView.xib in Resources */,
 				1F223B1D1CD714F3007687F7 /* messages.plist in Resources */,
 				1F2A908A1CF40277005116C7 /* FBPayTheWayViewController.xib in Resources */,
 				1F2A909D1CF40277005116C7 /* ShareViewController.xib in Resources */,
@@ -4949,6 +4958,7 @@
 				1F2A901C1CF40277005116C7 /* BonusModel.m in Sources */,
 				1FF36E9A1D4F192400EB3C93 /* JDPayViewController.m in Sources */,
 				1F2A8FB21CF40277005116C7 /* MallViewController.m in Sources */,
+				484C45241D60109D009D6155 /* THNPeopleView.m in Sources */,
 				D81EA4011D2A52DD0032FAAB /* FiuBrandListViewController.m in Sources */,
 				1F2A907B1CF40277005116C7 /* TaoBaoOrderViewController.m in Sources */,
 				1F2A8FA81CF40277005116C7 /* GoodsCategoryViewController.m in Sources */,
