@@ -1209,7 +1209,7 @@
         <image name="JDSmall" width="60" height="60"/>
         <image name="amzonSmall" width="20" height="20"/>
         <image name="entr" width="8" height="15"/>
-        <image name="icon_back" width="10" height="18"/>
+        <image name="icon_back" width="5" height="8"/>
         <image name="icon_find friend" width="27" height="19"/>
         <image name="paoPao" width="11" height="27"/>
         <image name="paoPao2" width="11" height="27"/>

@@ -15,6 +15,7 @@
 #import "THNFucosPeopleView.h"
 #import "UIColor+Extension.h"
 #import <Masonry.h>
+#import "THNPeopleView.h"
 
 @interface THNFocusViewController ()<UIScrollViewDelegate>
 /**  */
@@ -128,7 +129,7 @@
         _pagrControl.numberOfPages = 3;
         _pagrControl.currentPage = 1;
         _pagrControl.currentPageIndicatorTintColor = [UIColor whiteColor];
-        _pagrControl.pageIndicatorTintColor = [UIColor colorWithHexString:@"#D7D7D7" alpha:1];
+        _pagrControl.pageIndicatorTintColor = [UIColor colorWithHexString:@"#909090" alpha:1];
     }
     return _pagrControl;
 }

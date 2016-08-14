@@ -10,10 +10,69 @@
         <view contentMode="scaleToFill" id="iN0-l3-epB" customClass="THNPeopleView">
             <rect key="frame" x="0.0" y="0.0" width="219" height="213"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="L8o-5J-ajJ">
+                    <rect key="frame" x="85" y="25" width="50" height="50"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="50" id="cce-gq-MVE"/>
+                        <constraint firstAttribute="width" constant="50" id="wTG-Tw-JJM"/>
+                    </constraints>
+                </imageView>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="TxR-YR-bbC">
+                    <rect key="frame" x="5" y="85" width="209" height="17"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                    <color key="textColor" red="0.2196078431372549" green="0.2196078431372549" blue="0.2196078431372549" alpha="1" colorSpace="calibratedRGB"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7qi-Zk-zdc">
+                    <rect key="frame" x="5" y="104" width="209" height="17"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                    <color key="textColor" red="0.6470588235294118" green="0.6470588235294118" blue="0.6470588235294118" alpha="1" colorSpace="calibratedRGB"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="yXF-01-15g">
+                    <rect key="frame" x="88" y="171" width="44" height="30"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="60" id="CHf-Gq-otS"/>
+                        <constraint firstAttribute="height" constant="24" id="PXn-wo-vWN"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                    <state key="normal" title="+ 关注">
+                        <color key="titleColor" red="0.1803921568627451" green="0.1803921568627451" blue="0.1803921568627451" alpha="1" colorSpace="calibratedRGB"/>
+                    </state>
+                    <state key="selected" image="Bitmap"/>
+                    <connections>
+                        <action selector="fucos:" destination="iN0-l3-epB" eventType="touchUpInside" id="lE4-qw-6vD"/>
+                    </connections>
+                </button>
+            </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+            <constraints>
+                <constraint firstItem="yXF-01-15g" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="7e4-X6-73n"/>
+                <constraint firstItem="7qi-Zk-zdc" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="DfY-GA-PhC"/>
+                <constraint firstItem="TxR-YR-bbC" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="5" id="Fap-fG-4Nc"/>
+                <constraint firstItem="L8o-5J-ajJ" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="25" id="PSy-2x-IMB"/>
+                <constraint firstItem="TxR-YR-bbC" firstAttribute="top" secondItem="L8o-5J-ajJ" secondAttribute="bottom" constant="10" id="R1R-tU-9Xq"/>
+                <constraint firstItem="L8o-5J-ajJ" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="Shj-30-JXI"/>
+                <constraint firstItem="TxR-YR-bbC" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="bed-eC-d9s"/>
+                <constraint firstItem="7qi-Zk-zdc" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="5" id="cyB-vU-uYE"/>
+                <constraint firstAttribute="bottom" secondItem="yXF-01-15g" secondAttribute="bottom" constant="15" id="fWQ-Jv-aZ6"/>
+                <constraint firstAttribute="trailing" secondItem="TxR-YR-bbC" secondAttribute="trailing" constant="5" id="jPQ-ND-srU"/>
+                <constraint firstItem="7qi-Zk-zdc" firstAttribute="top" secondItem="TxR-YR-bbC" secondAttribute="bottom" constant="2" id="pge-FU-w9c"/>
+                <constraint firstAttribute="trailing" secondItem="7qi-Zk-zdc" secondAttribute="trailing" constant="5" id="u7a-he-a9e"/>
+            </constraints>
             <nil key="simulatedStatusBarMetrics"/>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <connections>
+                <outlet property="fucosBtn" destination="yXF-01-15g" id="pyR-Qq-6cb"/>
+                <outlet property="headImageView" destination="L8o-5J-ajJ" id="krB-WF-irz"/>
+                <outlet property="nickNameLabel" destination="TxR-YR-bbC" id="RET-MS-37P"/>
+                <outlet property="profielLabel" destination="7qi-Zk-zdc" id="Ks4-fk-Azp"/>
+            </connections>
             <point key="canvasLocation" x="314.5" y="83.5"/>
         </view>
     </objects>
+    <resources>
+        <image name="Bitmap" width="90" height="60"/>
+    </resources>
 </document>
