@@ -15,6 +15,7 @@
 #import "THNFucosPeopleView.h"
 #import "UIColor+Extension.h"
 #import <Masonry.h>
+#import "THNPeopleView.h"
 
 @interface THNFocusViewController ()<UIScrollViewDelegate>
 /**  */
@@ -31,6 +32,9 @@
 @property (nonatomic, strong) NSMutableArray *aryAry;
 /**  */
 @property (nonatomic, strong) UIPageControl *pagrControl;
+
+@property(nonatomic, strong) UIButton *enterBtn;
+
 @end
 
 @implementation THNFocusViewController
@@ -120,6 +124,32 @@
         make.top.mas_equalTo(self.contentScrollView.mas_bottom).offset(10);
         make.centerX.mas_equalTo(self.view.mas_centerX);
     }];
+    
+    [self.view addSubview:self.enterBtn];
+    [_enterBtn mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.width.mas_equalTo(130);
+        make.height.mas_equalTo(35);
+        make.top.mas_equalTo(self.pagrControl.mas_bottom).offset(20);
+        make.centerX.mas_equalTo(self.view.mas_centerX);
+    }];
+}
+
+-(UIButton *)enterBtn{
+    if (!_enterBtn) {
+        _enterBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+        [_enterBtn setTitle:@"进入Fiu世界" forState:UIControlStateNormal];
+        _enterBtn.titleLabel.font = [UIFont systemFontOfSize:14];
+        _enterBtn.backgroundColor = [UIColor colorWithHexString:@"#BE8914"];
+        [_enterBtn setTitleColor:[UIColor colorWithHexString:@"#161002"] forState:UIControlStateNormal];
+        _enterBtn.layer.masksToBounds = YES;
+        _enterBtn.layer.cornerRadius = 3;
+        [_enterBtn addTarget:self action:@selector(enter) forControlEvents:UIControlEventTouchUpInside];
+    }
+    return _enterBtn;
+}
+
+-(void)enter{
+    [self dismissViewControllerAnimated:YES completion:nil];
 }
 
 -(UIPageControl *)pagrControl{
@@ -128,7 +158,7 @@
         _pagrControl.numberOfPages = 3;
         _pagrControl.currentPage = 1;
         _pagrControl.currentPageIndicatorTintColor = [UIColor whiteColor];
-        _pagrControl.pageIndicatorTintColor = [UIColor colorWithHexString:@"#D7D7D7" alpha:1];
+        _pagrControl.pageIndicatorTintColor = [UIColor colorWithHexString:@"#909090" alpha:1];
     }
     return _pagrControl;
 }

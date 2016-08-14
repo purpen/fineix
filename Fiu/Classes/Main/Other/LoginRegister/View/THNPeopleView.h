@@ -8,6 +8,11 @@
 
 #import <UIKit/UIKit.h>
 
+@class THNFocusUserModel;
+
 @interface THNPeopleView : UIView
+
+@property(nonatomic, strong) THNFocusUserModel *model;
+
 
 @end

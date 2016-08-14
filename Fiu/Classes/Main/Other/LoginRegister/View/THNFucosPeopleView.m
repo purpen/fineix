@@ -8,6 +8,8 @@
 
 #import "THNFucosPeopleView.h"
 #import "UIView+FSExtension.h"
+#import "THNPeopleView.h"
+#import "UIColor+Extension.h"
 
 @implementation THNFucosPeopleView
 
@@ -19,6 +21,7 @@
     return self;
 }
 
+
 -(void)setModelAry:(NSArray *)modelAry{
     _modelAry = modelAry;
     for (int i = 0; i < modelAry.count; i ++) {
@@ -28,8 +31,10 @@
         float x = 10 + (i % 3) * (5 + w);
         float y = 0 + (i % 2) * (h + 5);
         
-        UIView *view = [[UIView alloc] initWithFrame:CGRectMake(x, y, w, h)];
-        view.backgroundColor = [UIColor whiteColor];
+        THNPeopleView *view = [THNPeopleView viewFromXib];
+        view.model = modelAry[i];
+        view.frame = CGRectMake(x, y, w, h);
+        view.backgroundColor = [UIColor colorWithHexString:@"#FFFFFF"];
         [self addSubview:view];
         
     }
