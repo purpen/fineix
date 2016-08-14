@@ -9,7 +9,9 @@
 #import "MJRefreshGifHeader.h"
 
 @interface MJRefreshGifHeader()
-@property (weak, nonatomic) UIImageView *gifView;
+{
+    __unsafe_unretained UIImageView *_gifView;
+}
 /** 所有状态对应的动画图片 */
 @property (strong, nonatomic) NSMutableDictionary *stateImages;
 /** 所有状态对应的动画时间 */
@@ -53,14 +55,14 @@
     
     /* 根据图片设置控件的高度 */ 
     UIImage *image = [images firstObject]; 
-    if (image.size.height > self.mj_h) {
+    if (image.size.height > self.mj_h) { 
         self.mj_h = image.size.height; 
     } 
 }
 
 - (void)setImages:(NSArray *)images forState:(MJRefreshState)state 
 { 
-    [self setImages:images duration:images.count * 0.05 forState:state];
+    [self setImages:images duration:images.count * 0.1 forState:state]; 
 }
 
 #pragma mark - 实现父类的方法

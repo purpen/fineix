@@ -30,7 +30,6 @@ const CGFloat kHTHorizontalSelectionListHorizontalMargin = 10;
 const CGFloat kHTHorizontalSelectionListTrimHeight = 0.5;
 const CGFloat kHTHorizontalSelectionListLabelCellInternalPadding = 15;
 
-
 static NSString *LabelCellIdentifier = @"LabelCell";
 static NSString *ViewCellIdentifier = @"ViewCell";
 
@@ -57,8 +56,6 @@ static NSString *ViewCellIdentifier = @"ViewCell";
 
     UICollectionViewFlowLayout *flowLayout = [[UICollectionViewFlowLayout alloc] init];
     flowLayout.scrollDirection = UICollectionViewScrollDirectionHorizontal;
-    flowLayout.minimumInteritemSpacing = 0;
-    flowLayout.minimumLineSpacing = 0;
 
     _collectionView = [[UICollectionView alloc] initWithFrame:self.bounds collectionViewLayout:flowLayout];
     _collectionView.dataSource = self;
@@ -146,7 +143,7 @@ static NSString *ViewCellIdentifier = @"ViewCell";
                                                                  metrics:@{@"height" : @(kHTHorizontalSelectionListTrimHeight)}
                                                                    views:NSDictionaryOfVariableBindings(_bottomTrim)]];
 
-    _buttonInsets = UIEdgeInsetsMake(5, 5, 5, 5);
+    _buttonInsets = UIEdgeInsetsMake(0, 5, 0, 5);
     _selectionIndicatorHeight = 3;
     _selectionIndicatorHorizontalPadding = kHTHorizontalSelectionListLabelCellInternalPadding/2;
     _selectionIndicatorStyle = HTHorizontalSelectionIndicatorStyleBottomBar;
@@ -160,7 +157,8 @@ static NSString *ViewCellIdentifier = @"ViewCell";
     _titleFontsByState = [NSMutableDictionary dictionaryWithDictionary:@{@(UIControlStateNormal) : [UIFont systemFontOfSize:13]}];
 
     _centerOnSelection = NO;
-    _centerAlignButtons = NO;
+    _centerButtons = NO;
+    _evenlySpaceButtons = YES;
     _scrollingDirectly = NO;
     _snapToCenter = NO;
     _autoselectCentralItem = NO;
@@ -264,6 +262,14 @@ static NSString *ViewCellIdentifier = @"ViewCell";
     return _snapToCenter;
 }
 
+- (void)setCenterAlignButtons:(BOOL)centerAlignButtons {
+    _centerButtons = centerAlignButtons;
+}
+
+- (BOOL)centerAlignButtons {
+    return _centerButtons;
+}
+
 #pragma mark - Public Methods
 
 - (void)setTitleColor:(UIColor *)color forState:(UIControlState)state {
@@ -308,7 +314,7 @@ static NSString *ViewCellIdentifier = @"ViewCell";
 
         switch (self.selectionIndicatorStyle) {
             case HTHorizontalSelectionIndicatorStyleBottomBar: {
-                [self alignSelectionIndicatorWithCellWithIndexPath:selectedIndexPath];
+                [self alignSelectionIndicatorWithCellAtIndexPath:selectedIndexPath];
                 break;
             }
 
@@ -366,7 +372,7 @@ static NSString *ViewCellIdentifier = @"ViewCell";
 
                          switch (self.selectionIndicatorStyle) {
                              case HTHorizontalSelectionIndicatorStyleBottomBar: {
-                                 [self alignSelectionIndicatorWithCellWithIndexPath:selectedIndexPath];
+                                 [self alignSelectionIndicatorWithCellAtIndexPath:selectedIndexPath];
                                  break;
                              }
 
@@ -396,6 +402,8 @@ static NSString *ViewCellIdentifier = @"ViewCell";
                                  break;
                              }
                          }
+
+                         [self.collectionView scrollToItemAtIndexPath:selectedIndexPath atScrollPosition:UICollectionViewScrollPositionNone animated:NO];
 
                          if (self.centerOnSelection) {
                              [self.collectionView scrollToItemAtIndexPath:selectedCellAttributes.indexPath
@@ -447,6 +455,11 @@ static NSString *ViewCellIdentifier = @"ViewCell";
             [((HTHorizontalSelectionListLabelCell *)cell) setTitleFont:self.titleFontsByState[controlState]
                                                               forState:controlState.integerValue];
         }
+    }
+
+    if ([self.delegate respondsToSelector:@selector(selectionList:badgeValueForItemWithIndex:)]) {
+        NSString *badgeValue = [self.dataSource selectionList:self badgeValueForItemWithIndex:indexPath.item];
+        ((HTHorizontalSelectionListLabelCell *)cell).badgeValue = badgeValue;
     }
 
     if (self.selectionIndicatorStyle == HTHorizontalSelectionIndicatorStyleButtonBorder) {
@@ -505,17 +518,15 @@ static NSString *ViewCellIdentifier = @"ViewCell";
         CGSize titleSize = [HTHorizontalSelectionListLabelCell sizeForTitle:title withFont:self.titleFontsByState[@(UIControlStateNormal)]];
 
         CGFloat width = titleSize.width + horizontalPadding + kHTHorizontalSelectionListLabelCellInternalPadding;
-        CGFloat height = MAX(MIN(titleSize.height + verticalPadding,
-                                 collectionViewHeight - self.buttonInsets.top - self.buttonInsets.bottom), collectionViewHeight / 1.9);
 
-        return CGSizeMake(width, height);
+        return CGSizeMake(width, MAX(0, MIN(collectionViewHeight, collectionViewHeight - verticalPadding)));
     }
 
     return CGSizeZero;
 }
 
 - (UIEdgeInsets)collectionView:(UICollectionView *)collectionView
-                        layout:(UICollectionViewLayout *)collectionViewLayout
+                        layout:(UICollectionViewFlowLayout *)collectionViewLayout
         insetForSectionAtIndex:(NSInteger)section {
 
     NSInteger numberOfItems = [self.dataSource numberOfItemsInSelectionList:self];
@@ -536,23 +547,33 @@ static NSString *ViewCellIdentifier = @"ViewCell";
             return UIEdgeInsetsMake(0, halfWidth - (firstItemWidth / 2), 0, halfWidth - (lastItemWidth / 2));
         }
 
-    } else if (self.centerAlignButtons) {
-        CGFloat interitemSpacing = collectionView.frame.size.width - 2*kHTHorizontalSelectionListHorizontalMargin;
+    } else if (self.centerButtons) {
+        CGFloat extraSpace = collectionView.frame.size.width - 2*kHTHorizontalSelectionListHorizontalMargin;
 
         for (NSInteger item = 0; item < numberOfItems; item++) {
-            interitemSpacing -= [self collectionView:collectionView
-                                              layout:collectionViewLayout
-                              sizeForItemAtIndexPath:[NSIndexPath indexPathForItem:item inSection:section]].width;
+            extraSpace -= [self collectionView:collectionView
+                                        layout:collectionViewLayout
+                        sizeForItemAtIndexPath:[NSIndexPath indexPathForItem:item inSection:section]].width;
 
-            if (interitemSpacing < 0) {
+            if (extraSpace < 0) {
                 break;
             }
         }
 
-        if (interitemSpacing > 0 && numberOfItems > 0) {
-            CGFloat inset = (interitemSpacing / (2 * numberOfItems)) + kHTHorizontalSelectionListHorizontalMargin;
+        if (self.evenlySpaceButtons) {
+            if (extraSpace > 0 && numberOfItems > 0) {
+                CGFloat inset = (extraSpace / (2 * numberOfItems)) + kHTHorizontalSelectionListHorizontalMargin;
 
-            return UIEdgeInsetsMake(0, inset, 0, inset);
+                return UIEdgeInsetsMake(0, inset, 0, inset);
+            }
+        } else {
+            extraSpace -= numberOfItems * kHTHorizontalSelectionListHorizontalMargin;
+
+            if (extraSpace > 0 && numberOfItems > 0) {
+                CGFloat inset = extraSpace / 2 + kHTHorizontalSelectionListHorizontalMargin;
+
+                return UIEdgeInsetsMake(0, inset, 0, inset);
+            }
         }
     }
 
@@ -561,23 +582,32 @@ static NSString *ViewCellIdentifier = @"ViewCell";
 
 - (CGFloat)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout minimumInteritemSpacingForSectionAtIndex:(NSInteger)section {
 
-    if (self.centerAlignButtons) {
+    return [self collectionView:collectionView layout:collectionViewLayout minimumLineSpacingForSectionAtIndex:section];
+}
+
+- (CGFloat)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout minimumLineSpacingForSectionAtIndex:(NSInteger)section {
+
+    if (self.centerButtons) {
+        if (!self.evenlySpaceButtons) {
+            return kHTHorizontalSelectionListHorizontalMargin;
+        }
+
         NSInteger numberOfItems = [self.dataSource numberOfItemsInSelectionList:self];
 
-        CGFloat interitemSpacing = collectionView.frame.size.width - 2*kHTHorizontalSelectionListHorizontalMargin;
+        CGFloat lineSpacing = collectionView.frame.size.width - 2*kHTHorizontalSelectionListHorizontalMargin;
 
         for (NSInteger item = 0; item < numberOfItems; item++) {
-            interitemSpacing -= [self collectionView:collectionView
-                                              layout:collectionViewLayout
-                              sizeForItemAtIndexPath:[NSIndexPath indexPathForItem:item inSection:section]].width;
+            lineSpacing -= [self collectionView:collectionView
+                                         layout:collectionViewLayout
+                         sizeForItemAtIndexPath:[NSIndexPath indexPathForItem:item inSection:section]].width;
 
-            if (interitemSpacing < 0) {
+            if (lineSpacing < 0) {
                 break;
             }
         }
 
-        if (interitemSpacing > 0 && numberOfItems > 0) {
-            return interitemSpacing / numberOfItems;
+        if (lineSpacing > 0 && numberOfItems > 0) {
+            return lineSpacing / numberOfItems;
         }
     }
 
@@ -693,7 +723,7 @@ static NSString *ViewCellIdentifier = @"ViewCell";
 
 #pragma mark - Private Methods
 
-- (void)alignSelectionIndicatorWithCellWithIndexPath:(NSIndexPath *)indexPath {
+- (void)alignSelectionIndicatorWithCellAtIndexPath:(NSIndexPath *)indexPath {
     if (indexPath) {
         UICollectionViewLayoutAttributes *attributes = [self.collectionView layoutAttributesForItemAtIndexPath:indexPath];
         CGRect cellRect = attributes.frame;

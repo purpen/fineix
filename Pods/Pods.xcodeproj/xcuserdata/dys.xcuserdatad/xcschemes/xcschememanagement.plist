@@ -6,78 +6,98 @@
 	<dict>
 		<key>AFNetworking.xcscheme</key>
 		<dict>
-			<key>orderHint</key>
-			<integer>1</integer>
+			<key>isShown</key>
+			<false/>
 		</dict>
 		<key>FMDB.xcscheme</key>
 		<dict>
-			<key>orderHint</key>
-			<integer>2</integer>
+			<key>isShown</key>
+			<false/>
 		</dict>
 		<key>HMSegmentedControl.xcscheme</key>
 		<dict>
-			<key>orderHint</key>
-			<integer>3</integer>
+			<key>isShown</key>
+			<false/>
 		</dict>
 		<key>HTHorizontalSelectionList.xcscheme</key>
 		<dict>
-			<key>orderHint</key>
-			<integer>4</integer>
+			<key>isShown</key>
+			<false/>
 		</dict>
 		<key>IQKeyboardManager.xcscheme</key>
 		<dict>
-			<key>orderHint</key>
-			<integer>5</integer>
+			<key>isShown</key>
+			<false/>
+		</dict>
+		<key>M13BadgeView.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
 		</dict>
 		<key>MJExtension.xcscheme</key>
 		<dict>
-			<key>orderHint</key>
-			<integer>7</integer>
+			<key>isShown</key>
+			<false/>
 		</dict>
 		<key>MJRefresh.xcscheme</key>
 		<dict>
-			<key>orderHint</key>
-			<integer>8</integer>
+			<key>isShown</key>
+			<false/>
 		</dict>
 		<key>Masonry.xcscheme</key>
 		<dict>
-			<key>orderHint</key>
-			<integer>6</integer>
+			<key>isShown</key>
+			<false/>
 		</dict>
 		<key>Pods-Fiu.xcscheme</key>
 		<dict>
-			<key>orderHint</key>
-			<integer>9</integer>
+			<key>isShown</key>
+			<false/>
 		</dict>
 		<key>SDCycleScrollView.xcscheme</key>
 		<dict>
-			<key>orderHint</key>
-			<integer>10</integer>
+			<key>isShown</key>
+			<false/>
 		</dict>
 		<key>SDWebImage.xcscheme</key>
 		<dict>
-			<key>orderHint</key>
-			<integer>11</integer>
+			<key>isShown</key>
+			<false/>
 		</dict>
 		<key>SVProgressHUD.xcscheme</key>
 		<dict>
-			<key>orderHint</key>
-			<integer>12</integer>
+			<key>isShown</key>
+			<false/>
 		</dict>
 		<key>TYAlertController.xcscheme</key>
 		<dict>
-			<key>orderHint</key>
-			<integer>13</integer>
+			<key>isShown</key>
+			<false/>
 		</dict>
-		<key>UITableView+FDTemplateLayoutCell.xcscheme</key>
+		<key>ZYCornerRadius.xcscheme</key>
 		<dict>
-			<key>orderHint</key>
-			<integer>14</integer>
+			<key>isShown</key>
+			<false/>
+		</dict>
+		<key>pop.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
 		</dict>
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
-		<key>1958E43384E584DF798DDC73BDEC74F1</key>
+		<key>0DCF5E260B53BEE76BB19402DE10ADE5</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>2803AB181F70F250C734E6290936AF56</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>29B86DC20390F07D8D6D65FCE57AFCDE</key>
 		<dict>
 			<key>primary</key>
 			<true/>
@@ -87,22 +107,7 @@
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>2D961A407676C566606F6DEF1AFB522D</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>3140B1AEE0585BEFCF058676A45B73EC</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
 		<key>410B25DF16EA5C5B3E2698F74F9625FB</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>501204C2BEC1A6EF5BF3E328C5566B80</key>
 		<dict>
 			<key>primary</key>
 			<true/>
@@ -117,17 +122,27 @@
 			<key>primary</key>
 			<true/>
 		</dict>
+		<key>5EE2A6C722868B749BBDCD1CFB06D427</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
 		<key>8F74D9EA91F4C43190670066BAC37D44</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>93914A1DC7FFD893A53AAF821C6416E9</key>
+		<key>8FBD00DFC64FB07F310D7CC7ECF8927E</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>9EE89E94F9A4E323664CE3645623B11E</key>
+		<key>977C175F1CDF0FE8D0FA2C1E573843F8</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>9EAB3E42EF957541E6C3C76D35FD008E</key>
 		<dict>
 			<key>primary</key>
 			<true/>
@@ -137,12 +152,17 @@
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>B23B3D15FFC0FC9893968F478086D58D</key>
+		<key>A0CDD6E0982408F2FEA30E26E83D0DAC</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>DA4F6062280D0967DFC0CC80A6734040</key>
+		<key>BFF6F7150F07FDFD4B325F345D9A4202</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>EEE9D6972DA9200EA0155C1577A21F8D</key>
 		<dict>
 			<key>primary</key>
 			<true/>

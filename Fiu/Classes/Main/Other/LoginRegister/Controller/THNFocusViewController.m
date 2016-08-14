@@ -66,16 +66,17 @@
         
         NSArray *users = result[@"data"][@"users"];
         self.modelAry = [THNFocusUserModel mj_objectArrayWithKeyValuesArray:users];
+        NSLog(@"%zd",self.modelAry.count);
         for (int i = 0; i < 6; i ++) {
             [self.oneModelAry addObject:self.modelAry[i]];
         }
         for (int i = 6; i < 12; i ++) {
             [self.twoModelAry addObject:self.modelAry[i]];
         }
-        for (int i = 12; i < 18; i ++) {
+        for (int i = 12; i < 17; i ++) {
             [self.threeModelAry addObject:self.modelAry[i]];
         }
-        NSLog(@"%zd",self.modelAry.count);
+        
         self.aryAry = [NSArray arrayWithObjects:self.oneModelAry,self.twoModelAry,self.threeModelAry, nil];
     } failure:^(FBRequest *request, NSError *error) {
         
