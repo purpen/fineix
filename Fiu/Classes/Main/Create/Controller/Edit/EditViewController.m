@@ -330,7 +330,7 @@ static NSString *const URLReleaseFiuScenen = @"/scene_scene/save";
     [self addNavViewTitle:NSLocalizedString(@"editScene", nil)];
     self.navTitle.textColor = [UIColor whiteColor];
     [self.closeBtn setImage:[UIImage imageNamed:@"icon_cancel"] forState:(UIControlStateNormal)];
-    [self addCloseBtn];
+    [self addCloseBtn:@"icon_cancel_black"];
     [self addDoneButton];
     [self.doneBtn addTarget:self action:@selector(releaseScene) forControlEvents:(UIControlEventTouchUpInside)];
 }

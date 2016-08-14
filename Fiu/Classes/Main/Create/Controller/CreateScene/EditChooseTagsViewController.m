@@ -68,7 +68,7 @@ static NSInteger SelectViewTag = 2;
     self.navView.backgroundColor = [UIColor whiteColor];
     [self addNavViewTitle:NSLocalizedString(@"editTagsVC", nil)];
     self.navTitle.textColor = [UIColor blackColor];
-    [self addCloseBtn];
+    [self addCloseBtn:@"icon_cancel_black"];
     [self addDoneButton];
     [self.doneBtn setTitle:NSLocalizedString(@"Done", nil) forState:(UIControlStateNormal)];
     [self addLine];

@@ -130,6 +130,7 @@
 -(void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
     [[UIApplication sharedApplication] setStatusBarHidden:NO withAnimation:(UIStatusBarAnimationSlide)];
+    [UIApplication sharedApplication].statusBarStyle = UIStatusBarStyleDefault;
     self.delegate = self;
     [self addNavLogoImgisTransparent:YES];
     [self addBarItemLeftBarButton:@"" image:@"Page 1" isTransparent:YES];

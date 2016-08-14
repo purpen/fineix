@@ -80,7 +80,7 @@
     return _sceneImgView;
 }
 
-#pragma mark - 添加标题
+#pragma mark - 添加标题按钮
 - (UIButton *)addText {
     if (!_addText) {
         _addText = [[UIButton alloc] init];

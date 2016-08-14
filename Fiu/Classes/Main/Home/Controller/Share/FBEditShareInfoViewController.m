@@ -10,6 +10,7 @@
 #import "ShareInfoRow.h"
 #import "ShareSearchTextTableViewCell.h"
 #import "CatagoryFiuSceneModel.h"
+#import "THNAddTagViewController.h"
 
 static NSString *const URLCategroy = @"/category/getlist";
 static NSString *const URLShareText = @"/search/getlist";
@@ -30,9 +31,7 @@ static NSString *const URLListText = @"/scene_context/getlist";
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
-    
-    self.navView.hidden = YES;
-    self.view.backgroundColor = [UIColor colorWithHexString:@"#000000" alpha:0.8f];
+    [self setNavViewUI];
 }
 
 - (void)viewDidLoad {
@@ -44,6 +43,19 @@ static NSString *const URLListText = @"/scene_context/getlist";
     [self networkContentList:_categoryId];
     
     [self setEditInfoVcUI];
+}
+
+#pragma mark -  设置导航栏
+- (void)setNavViewUI {
+    self.view.backgroundColor = [UIColor colorWithHexString:@"#000000" alpha:0.8f];
+    self.delegate = self;
+    [self addNavViewTitle:NSLocalizedString(@"addSceneInfoVC", nil)];
+    [self addCloseBtn:@"icon_cancel"];
+    [self addSureButton];
+}
+
+- (void)thn_sureButtonAction {
+    
 }
 
 #pragma mark - 网络请求
@@ -69,22 +81,18 @@ static NSString *const URLListText = @"/scene_context/getlist";
 
 #pragma mark 语境列表
 - (void)networkContentList:(NSString *)categoryId {
-    [SVProgressHUD show];
     self.listRequest = [FBAPI getWithUrlString:URLListText requestDictionary:@{@"category_id":categoryId, @"size":@"10", @"sort":@"1", @"page":@(self.listCurrentpageNum + 1)} delegate:self];
     [self.listRequest startRequestSuccess:^(FBRequest *request, id result) {
-        
         NSArray * listArr = [[result valueForKey:@"data"] valueForKey:@"rows"];
         for (NSDictionary * listDict in listArr) {
             ShareInfoRow * listModel = [[ShareInfoRow alloc] initWithDictionary:listDict];
             [self.listMarr addObject:listModel];
         }
         [self.listTable reloadData];
-        
         self.listCurrentpageNum = [[[result valueForKey:@"data"] valueForKey:@"current_page"] integerValue];
         self.listTotalPageNum = [[[result valueForKey:@"data"] valueForKey:@"total_page"] integerValue];
         [self requestIsLastData:self.listTable currentPage:self.listCurrentpageNum withTotalPage:self.listTotalPageNum];
         
-        [SVProgressHUD dismiss];
     } failure:^(FBRequest *request, NSError *error) {
         [SVProgressHUD showErrorWithStatus:[error localizedDescription]];
     }];
@@ -101,11 +109,9 @@ static NSString *const URLListText = @"/scene_context/getlist";
             [self.shareTextList addObject:listModel];
         }
         [self.shareTextTable reloadData];
-        
         self.currentpageNum = [[[result valueForKey:@"data"] valueForKey:@"current_page"] integerValue];
         self.totalPageNum = [[[result valueForKey:@"data"] valueForKey:@"total_page"] integerValue];
         [self requestIsLastData:self.shareTextTable currentPage:self.currentpageNum withTotalPage:self.totalPageNum];
-        
         [SVProgressHUD dismiss];
         
     } failure:^(FBRequest *request, NSError *error) {
@@ -152,7 +158,6 @@ static NSString *const URLListText = @"/scene_context/getlist";
 #pragma mark - 设置界面UI
 - (void)setEditInfoVcUI {
 //    [self.view addSubview:self.bgImgView];
-    [self.view addSubview:self.topView];
     [self.view addSubview:self.listView];
     [self.view addSubview:self.searchView];
 }
@@ -177,11 +182,64 @@ static NSString *const URLListText = @"/scene_context/getlist";
     return _bgImgView;
 }
 
+#pragma mark - 输入标题
+- (UITextField *)titleText {
+    if (!_titleText) {
+        _titleText = [[UITextField alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 40)];
+        _titleText.backgroundColor = [UIColor colorWithHexString:@"#FFFFFF" alpha:0.25f];
+        _titleText.delegate = self;
+        _titleText.attributedPlaceholder = [[NSAttributedString alloc] initWithString:NSLocalizedString(@"addTitleText", nil)
+                                                                           attributes:@{NSForegroundColorAttributeName:[UIColor colorWithHexString:@"#CCCCCC"]}];
+        _titleText.leftView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 15, 40)];
+        _titleText.leftViewMode = UITextFieldViewModeAlways;
+        _titleText.font = [UIFont systemFontOfSize:12];
+        _titleText.clearButtonMode = UITextFieldViewModeAlways;
+        _titleText.textColor = [UIColor colorWithHexString:@"#FFFFFF"];
+    }
+    return _titleText;
+}
+
+#pragma mark - 输入描述
+- (UITextView *)desText {
+    if (!_desText) {
+        _desText = [[UITextView alloc] initWithFrame:CGRectMake(0, 44, SCREEN_WIDTH, 80)];
+        _desText.delegate = self;
+        _desText.font = [UIFont systemFontOfSize:12];
+        _desText.textColor = [UIColor colorWithHexString:@"#FFFFFF"];
+        _desText.backgroundColor = [UIColor colorWithHexString:@"#FFFFFF" alpha:0.25f];
+        _desText.inputAccessoryView = self.keyboardToolbar;
+        _desText.textContainerInset = UIEdgeInsetsMake(5, 10, 5, 10);
+    }
+    return _desText;
+}
+
+#pragma mark - 键盘工具栏
+- (FBKeyboradToolbar *)keyboardToolbar {
+    if (!_keyboardToolbar) {
+        _keyboardToolbar = [[FBKeyboradToolbar alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 44)];
+        _keyboardToolbar.thn_delegate = self;
+        [_keyboardToolbar thn_setRightBarItemContent:@"Fiu App上线"];
+    }
+    return _keyboardToolbar;
+}
+
+- (void)thn_keyboardLeftBarItemAction {
+    THNAddTagViewController * tagVC = [[THNAddTagViewController alloc] init];
+    [self presentViewController:tagVC animated:YES completion:nil];
+}
+
+- (void)thn_keyboardRightBarItemAction:(NSString *)text {
+    self.desText.text = text;
+    [SVProgressHUD showInfoWithStatus:[NSString stringWithFormat:@"插入标签：%@", text]];
+}
+
 #pragma mark - 分类列表视图
 - (UIView *)listView {
     if (!_listView) {
         _listView = [[UIView alloc] initWithFrame:CGRectMake(0, 44, SCREEN_WIDTH, SCREEN_HEIGHT - 44)];
         _listView.backgroundColor = [UIColor colorWithHexString:@"#FFFFFF" alpha:0];
+        [_listView addSubview:self.titleText];
+        [_listView addSubview:self.desText];
         [_listView addSubview:self.searchBtn];
         [_listView addSubview:self.listTable];
     }
@@ -191,7 +249,7 @@ static NSString *const URLListText = @"/scene_context/getlist";
 #pragma mark - 搜索语境按钮
 - (UIButton *)searchBtn {
     if (!_searchBtn) {
-        _searchBtn = [[UIButton alloc] initWithFrame:CGRectMake(15, 10, SCREEN_WIDTH - 30, 32)];
+        _searchBtn = [[UIButton alloc] initWithFrame:CGRectMake(15, 132, SCREEN_WIDTH - 30, 32)];
         _searchBtn.layer.borderColor = [UIColor colorWithHexString:@"#CCCCCC"].CGColor;
         _searchBtn.layer.borderWidth = 0.5f;
         _searchBtn.layer.cornerRadius = 4;
@@ -227,7 +285,7 @@ static NSString *const URLListText = @"/scene_context/getlist";
 #pragma mark - 滑动导航栏
 - (FBMenuView *)categoryMenuView {
     if (!_categoryMenuView) {
-        _categoryMenuView = [[FBMenuView alloc] initWithFrame:CGRectMake(0, 42, SCREEN_WIDTH, 54)];
+        _categoryMenuView = [[FBMenuView alloc] initWithFrame:CGRectMake(0, 167, SCREEN_WIDTH, 54)];
         _categoryMenuView.delegate = self;
         _categoryMenuView.menuTitle = self.categoryTitleMarr;
         _categoryMenuView.backgroundColor = [UIColor clearColor];
@@ -250,14 +308,14 @@ static NSString *const URLListText = @"/scene_context/getlist";
 #pragma mark - 分类语境列表
 - (UITableView *)listTable {
     if (!_listTable) {
-        _listTable = [[UITableView alloc] initWithFrame:CGRectMake(0, 95, SCREEN_WIDTH, SCREEN_HEIGHT - 138)];
+        _listTable = [[UITableView alloc] initWithFrame:CGRectMake(0, 218, SCREEN_WIDTH, SCREEN_HEIGHT - 222)];
         _listTable.delegate = self;
         _listTable.dataSource = self;
         _listTable.tableFooterView = [UIView new];
         _listTable.estimatedRowHeight = 100;
         _listTable.showsVerticalScrollIndicator = NO;
+        _listTable.separatorColor = [UIColor colorWithHexString:@"#FFFFFF" alpha:0.5f];
         _listTable.backgroundColor = [UIColor colorWithHexString:@"#FFFFFF" alpha:0];
-        
         _listTable.mj_footer = [MJRefreshAutoNormalFooter footerWithRefreshingBlock:^{
             if (self.listCurrentpageNum < self.listTotalPageNum) {
                 [self networkContentList:_categoryId];
@@ -280,31 +338,6 @@ static NSString *const URLListText = @"/scene_context/getlist";
         [_searchView addSubview:self.shareTextTable];
     }
     return _searchView;
-}
-
-#pragma mark - 顶部Nav条
-- (UIView *)topView {
-    if (!_topView) {
-        _topView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 44)];
-        _topView.backgroundColor = [UIColor colorWithHexString:@"#000000" alpha:.3];
-        [_topView addSubview:self.clooseBtn];
-    }
-    return _topView;
-}
-
-#pragma mark -  关闭
-- (UIButton *)clooseBtn {
-    if (!_clooseBtn) {
-        _clooseBtn = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 44, 44)];
-        [_clooseBtn setTitleColor:[UIColor whiteColor] forState:(UIControlStateNormal)];
-        [_clooseBtn setImage:[UIImage imageNamed:@"icon_cancel"] forState:(UIControlStateNormal)];
-        [_clooseBtn addTarget:self action:@selector(clooseBtnClick) forControlEvents:(UIControlEventTouchUpInside)];
-    }
-    return _clooseBtn;
-}
-
-- (void)clooseBtnClick {
-    [self dismissViewControllerAnimated:YES completion:nil];
 }
 
 #pragma mark - 添加搜索框视图
@@ -334,19 +367,30 @@ static NSString *const URLListText = @"/scene_context/getlist";
 }
 
 - (void)textFieldDidBeginEditing:(UITextField *)textField {
-    CGRect searchFildRect = CGRectMake(10, 10, SCREEN_WIDTH - 60, 26.4);
-    [UIView animateWithDuration:0.3 animations:^{
-        self.searchField.frame = searchFildRect;
-        self.cancelSearchBtn.alpha = 1;
-    }];
+    if (textField == self.titleText) {
+        
+    } else {
+        CGRect searchFildRect = CGRectMake(10, 10, SCREEN_WIDTH - 60, 26.4);
+        [UIView animateWithDuration:0.3 animations:^{
+            self.searchField.frame = searchFildRect;
+            self.cancelSearchBtn.alpha = 1;
+        }];
+    }
 }
 
 - (void)textFieldDidEndEditing:(UITextField *)textField {
-    CGRect searchFildRect = CGRectMake(10, 10, SCREEN_WIDTH - 20, 26.4);
-    [UIView animateWithDuration:0.3 animations:^{
-        self.searchField.frame = searchFildRect;
-        self.cancelSearchBtn.alpha = 0;
-    }];
+    if (textField == self.titleText) {
+        if (textField.text.length > 20) {
+            [SVProgressHUD showInfoWithStatus:@"标题不能超过20字～"];
+        }
+        
+    } else {
+        CGRect searchFildRect = CGRectMake(10, 10, SCREEN_WIDTH - 20, 26.4);
+        [UIView animateWithDuration:0.3 animations:^{
+            self.searchField.frame = searchFildRect;
+            self.cancelSearchBtn.alpha = 0;
+        }];
+    }
 }
 
 #pragma mark - 搜索文字

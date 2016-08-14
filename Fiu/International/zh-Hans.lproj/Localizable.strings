@@ -35,6 +35,7 @@
 "marker" = "标记产品";
 "addText" = "  添加标题  ";
 "filter" = "滤镜";
+"addTitleText" =  "添加20字以内的标题";
 "addDescription" = "说说你现在的想法";
 "addFiuSceneDes" = "请添加140字以内的地盘描述";
 "addTitle" = "想省事？向右看，Fiu语境有你要的文字";
@@ -75,6 +76,7 @@
 "editTagsVC" = "编辑标签";
 "likePeopleVC" = "赞的人";
 "suPeopleVC" = "订阅的人";
+"addSceneInfoVC" = "添加语境";
 
 //  提示信息
 "netError" = "网络连接错误";

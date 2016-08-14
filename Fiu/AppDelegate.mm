@@ -60,23 +60,19 @@ NSString *const determineLogin = @"/auth/check_login";
     self.window.backgroundColor = [UIColor whiteColor];
     [self.window makeKeyAndVisible];
     
-    
-//    //首先统一设置为未登录-----------------------------------------------
+    //首先统一设置为未登录-----------------------------------------------
     UserInfoEntity *entity = [UserInfoEntity defaultUserInfoEntity];
     entity.isLogin = NO;
     //发送网络请求查看登录状态
     FBRequest *request = [FBAPI postWithUrlString:determineLogin requestDictionary:nil delegate:self];
     [request startRequestSuccess:^(FBRequest *request, id result) {
-        //发送成功查看登录信息
         NSDictionary *dataDic = [result objectForKey:@"data"];
         if ([[dataDic objectForKey:@"is_login"] boolValue]) {
             //已经登录的获取用户信息，更改登录状态
-            
             [[[UserInfo findAll] lastObject] updateUserInfoEntity];
             entity.isLogin = YES;
         }
     } failure:^(FBRequest *request, NSError *error) {
-        //发送失败提示失败信息
         NSLog(@"%@",error);
     }];
 //--------------------------------------------------------
@@ -85,14 +81,10 @@ NSString *const determineLogin = @"/auth/check_login";
     [self guide];
     //---------------------------------------
     
-    
-    
     //  设置SVP颜色---------------------------------------
     [SVProgressHUD setBackgroundColor:[UIColor whiteColor]];
     [SVProgressHUD setForegroundColor:[UIColor colorWithHexString:fineixColor alpha:1]];
     //---------------------------------------------------
-    
-    
     
     //设置百度地图代理---------------------------------
     [self bmkMap];
@@ -113,7 +105,6 @@ NSString *const determineLogin = @"/auth/check_login";
     }];
     //---------------------------------------------------
    
-
     //设置友盟社会化组件appkey--------------------------------------------------
     [UMSocialData setAppKey:UMSocialAppKey];
     //注册友盟统计
@@ -131,8 +122,6 @@ NSString *const determineLogin = @"/auth/check_login";
     [UMSocialConfig hiddenNotInstallPlatforms:@[UMShareToQQ, UMShareToWechatSession, UMShareToWechatTimeline, UMShareToSina]];
     //---------------------------------------------------------------------
     
-    
-    
     //微信支付注册appId-------------------------
     [WXApi registerApp:WechatAppID];
     //----------------------------------------
@@ -144,12 +133,10 @@ NSString *const determineLogin = @"/auth/check_login";
     [application registerUserNotificationSettings:notiSettings];
     //------------------------------------------------------
     
-    
     //  键盘事件
     IQKeyboardManager *manager = [IQKeyboardManager sharedManager];
     manager.enable = YES;
     manager.shouldResignOnTouchOutside = YES;
-    manager.shouldToolbarUsesTextFieldTintColor = YES;
     manager.enableAutoToolbar = NO;
     
     return YES;
