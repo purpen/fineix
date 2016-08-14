@@ -14,7 +14,7 @@
             buildForArchiving = "YES">
             <BuildableReference
                BuildableIdentifier = 'primary'
-               BlueprintIdentifier = '234C5F21B51A348B1F51E50F'
+               BlueprintIdentifier = 'D40EED7F7FE181DF3CD936AD'
                BlueprintName = 'HTHorizontalSelectionList'
                ReferencedContainer = 'container:Pods.xcodeproj'
                BuildableName = 'libHTHorizontalSelectionList.a'>
