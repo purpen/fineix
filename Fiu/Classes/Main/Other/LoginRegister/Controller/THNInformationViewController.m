@@ -47,6 +47,9 @@ static NSString *const modifyUserInformation = @"/my/update_profile";
     UserInfoEntity *entity = [UserInfoEntity defaultUserInfoEntity];
     [self.headImage sd_setImageWithURL:[NSURL URLWithString:entity.mediumAvatarUrl] placeholderImage:[UIImage imageNamed:@"default_head"]];
     self.nameTF.text = entity.nickname;
+    
+    self.headImage.layer.masksToBounds = YES;
+    self.headImage.layer.cornerRadius = 45;
 }
 - (IBAction)head:(id)sender {
     UIAlertController *alertC = [UIAlertController alertControllerWithTitle:@"更换头像" message:nil preferredStyle:UIAlertControllerStyleActionSheet];

@@ -149,14 +149,14 @@
                                     <variation key="default">
                                         <mask key="constraints">
                                             <exclude reference="YZa-E3-Id3"/>
-                                            <exclude reference="lo9-eE-frp"/>
-                                            <exclude reference="jal-D9-iEd"/>
                                             <exclude reference="gIo-3u-H9w"/>
-                                            <exclude reference="HBA-Hh-IJb"/>
+                                            <exclude reference="jal-D9-iEd"/>
+                                            <exclude reference="lo9-eE-frp"/>
                                             <exclude reference="0Oo-Pc-MJg"/>
-                                            <exclude reference="K2H-nH-zwc"/>
                                             <exclude reference="31U-O2-aRN"/>
                                             <exclude reference="5vZ-xm-L9K"/>
+                                            <exclude reference="HBA-Hh-IJb"/>
+                                            <exclude reference="K2H-nH-zwc"/>
                                             <exclude reference="caH-Q9-LIJ"/>
                                         </mask>
                                     </variation>

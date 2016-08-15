@@ -142,7 +142,7 @@ static NSString *updatInfo = @"/my/update_profile";
             entiey.age_group = [result objectForKey:@"data"][@"age_group"];
             entiey.assets = [result objectForKey:@"data"][@"assets"];
             [SVProgressHUD showSuccessWithStatus:message];
-            THNAgeViewController *vc = [[THNAgeViewController alloc] init];
+            THNScenarioViewController *vc = [[THNScenarioViewController alloc] init];
             [self.navigationController pushViewController:vc animated:YES];
         } else {
             [SVProgressHUD showInfoWithStatus:message];
