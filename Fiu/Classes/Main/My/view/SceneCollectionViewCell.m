@@ -8,6 +8,7 @@
 
 #import "SceneCollectionViewCell.h"
 
+
 @implementation SceneCollectionViewCell
 
 -(void)setAllFiuSceneListData:(FiuSceneInfoData *)model{
@@ -30,7 +31,7 @@
     paragraphStyle.alignment = NSTextAlignmentJustified;
     paragraphStyle.lineSpacing = 3.0f;
     NSDictionary * textDict = @{
-                                NSBackgroundColorAttributeName:[UIColor colorWithPatternImage:[UIImage imageNamed:@"titleBg"]] ,
+                                NSBackgroundColorAttributeName:[UIColor blackColor] ,
                                 NSParagraphStyleAttributeName :paragraphStyle
                                 };
     [titleText addAttributes:textDict range:NSMakeRange(0, titleText.length)];

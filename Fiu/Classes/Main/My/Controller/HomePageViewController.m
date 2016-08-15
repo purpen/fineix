@@ -32,6 +32,7 @@
 #import "UIImagePickerController+Flag.h"
 #import "ScenarioNonView.h"
 #import "SceneCollectionViewCell.h"
+#import "UIView+FSExtension.h"
 
 #define UserHeadTag 1
 #define BgTag 2
@@ -463,7 +464,7 @@ static NSString *sceneCellId = @"SceneCollectionViewCell";
         if (section == 0) {
             return UIEdgeInsetsMake(0, 0, 0, 0);
         }else if(section == 1){
-            return UIEdgeInsetsMake(3, 5, 0, 5);
+            return UIEdgeInsetsMake(0, 5, 0, 5);
         }else if (section == 2){
             return UIEdgeInsetsMake(5, 5, 0, 5);
         }
@@ -565,6 +566,8 @@ static NSString *sceneCellId = @"SceneCollectionViewCell";
                 //不是空的
                 SceneCollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:sceneCellId forIndexPath:indexPath];
                 [cell setAllFiuSceneListData:_sceneListMarr[indexPath.row]];
+                cell.width = (SCREEN_WIDTH - 15 * 3) * 0.5;
+                cell.height = 0.25 * SCREEN_HEIGHT;
                 return cell;
             }
         }else if([self.type isEqualToNumber:@1]){
@@ -810,7 +813,7 @@ static NSString *sceneCellId = @"SceneCollectionViewCell";
 -(CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath{
     if (indexPath.section == 0) {
         if (indexPath.row == 0) {
-            return CGSizeMake(SCREEN_WIDTH, SCREEN_WIDTH);
+            return CGSizeMake(SCREEN_WIDTH, SCREEN_WIDTH - 20);
         }
     }
     if (indexPath.section == 1) {
@@ -821,7 +824,7 @@ static NSString *sceneCellId = @"SceneCollectionViewCell";
             if (_sceneListMarr.count == 0) {
                 return CGSizeMake(SCREEN_WIDTH, 320/667.0*SCREEN_HEIGHT);
             }else{
-                return CGSizeMake((SCREEN_WIDTH-15)/2, 320/667.0*SCREEN_HEIGHT);
+                return CGSizeMake((SCREEN_WIDTH - 15 * 3) * 0.5, 0.25 * SCREEN_HEIGHT);
             }
         }else if ([self.type isEqualToNumber:@1]){
             return CGSizeMake((SCREEN_WIDTH-15)/2, 320/667.0*SCREEN_HEIGHT);
