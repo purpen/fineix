@@ -34,6 +34,7 @@ static NSString *const commentsCellId = @"CommentsCellId";
     NSIndexPath *_selectedIndexPath;
     CGFloat _contentHigh;
     CGFloat _defaultContentHigh;
+    CGFloat _commentHigh;
 }
 
 @end
@@ -256,14 +257,16 @@ static NSString *const commentsCellId = @"CommentsCellId";
                 _contentHigh = cell.cellHigh;
                 _defaultContentHigh = cell.defaultCellHigh;
             }
+            cell.nav = self.navigationController;
             return cell;
             
         } else if (indexPath.row == 4) {
             THNSceneCommentTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:commentsCellId];
             cell = [[THNSceneCommentTableViewCell alloc] initWithStyle:(UITableViewCellStyleDefault) reuseIdentifier:commentsCellId];
             if (self.sceneListMarr.count) {
-                [cell thn_setSceneContentData:self.sceneListMarr[indexPath.section - 1]];
+//                [cell thn_setSceneContentData:self.sceneListMarr[indexPath.section - 1]];
             }
+            _commentHigh = cell.cellHigh;
             return cell;
         }
     }
@@ -288,7 +291,8 @@ static NSString *const commentsCellId = @"CommentsCellId";
                 return _defaultContentHigh;
             }
         } else if (indexPath.row == 4) {
-            return 100;
+            return _commentHigh;
+//            return 40;
         }
     }
     return 0;
@@ -322,7 +326,11 @@ static NSString *const commentsCellId = @"CommentsCellId";
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section {
-    return 0.01;
+    if (section == 0) {
+        return 0.01;
+    } else {
+        return 15;
+    }
 }
 
 -(void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -361,11 +369,10 @@ static NSString *const commentsCellId = @"CommentsCellId";
 }
 
 - (void)thn_leftBarItemSelected {
-    [SVProgressHUD showSuccessWithStatus:@"搜索"];
-//    SearchViewController * searchVC = [[SearchViewController alloc] init];
-//    searchVC.searchType = 0;
-//    searchVC.beginSearch = YES;
-//    [self.navigationController pushViewController:searchVC animated:YES];
+    SearchViewController * searchVC = [[SearchViewController alloc] init];
+    searchVC.searchType = 0;
+    searchVC.beginSearch = YES;
+    [self.navigationController pushViewController:searchVC animated:YES];
 }
 
 - (void)thn_rightBarItemSelected {

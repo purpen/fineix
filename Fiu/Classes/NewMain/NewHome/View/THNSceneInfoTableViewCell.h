@@ -15,6 +15,7 @@
     TTTAttributedLabelDelegate
 >
 
+@pro_strong UINavigationController *nav;
 @pro_strong UIView *graybackView;
 @pro_strong TTTAttributedLabel *content;
 @pro_strong UIButton *moreIcon;

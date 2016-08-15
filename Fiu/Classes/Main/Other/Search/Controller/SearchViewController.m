@@ -44,18 +44,14 @@ static NSString *const URLSearchList = @"/search/getlist";
     if (self.beginSearch == YES) {
         [self.searchView.searchInputBox becomeFirstResponder];
     }
-
 }
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
     [self setSearchVcUI];
-    
     if (self.keyword.length > 0) {
         self.searchView.searchInputBox.text = self.keyword;
     }
-    
     [self searchRequest:self.searchType withKeyword:self.keyword];
 }
 
@@ -456,6 +452,7 @@ static NSString *const URLSearchList = @"/search/getlist";
 #pragma mark - 设置Nav
 - (void)setNavigationViewUI {
     [[UIApplication sharedApplication] setStatusBarHidden:NO withAnimation:(UIStatusBarAnimationSlide)];
+    [[UIApplication sharedApplication] setStatusBarStyle:(UIStatusBarStyleDefault)];
     self.view.backgroundColor = [UIColor whiteColor];
     [self.navView addSubview:self.searchView];
     self.navLine.hidden = YES;
