@@ -141,33 +141,31 @@ static NSString *const modifyUserInformation = @"/my/update_profile";
     self.sexNum = @0;
 }
 - (IBAction)next:(id)sender {
-    THNAgeViewController *vc = [[THNAgeViewController alloc] init];
-    [self.navigationController pushViewController:vc animated:YES];
     
     
-//    [SVProgressHUD showWithMaskType:SVProgressHUDMaskTypeClear];
-//    //开始传送数据
-//    NSDictionary *params = @{
-//                             @"nickname":self.nameTF.text,
-//                             @"sex":_sexNum,
-//                             };
-//    FBRequest *request = [FBAPI postWithUrlString:modifyUserInformation requestDictionary:params delegate:self];
-//    [request startRequestSuccess:^(FBRequest *request, id result) {
-//        NSString * message = [result objectForKey:@"message"];
-//        if ([[result objectForKey:@"success"] isEqualToNumber:@1]) {
-//            //更新用户名，性别，个人简介
-//            UserInfoEntity *entiey = [UserInfoEntity defaultUserInfoEntity];
-//            entiey.nickname = [result objectForKey:@"data"][@"nickname"];
-//            entiey.sex = [result objectForKey:@"data"][@"sex"];
-//            [SVProgressHUD showSuccessWithStatus:message];
-//            THNAgeViewController *vc = [[THNAgeViewController alloc] init];
-//            [self.navigationController pushViewController:vc animated:YES];
-//        } else {
-//            [SVProgressHUD showInfoWithStatus:message];
-//        }
-//    } failure:^(FBRequest *request, NSError *error) {
-//        
-//    }];
+    [SVProgressHUD showWithMaskType:SVProgressHUDMaskTypeClear];
+    //开始传送数据
+    NSDictionary *params = @{
+                             @"nickname":self.nameTF.text,
+                             @"sex":_sexNum,
+                             };
+    FBRequest *request = [FBAPI postWithUrlString:modifyUserInformation requestDictionary:params delegate:self];
+    [request startRequestSuccess:^(FBRequest *request, id result) {
+        NSString * message = [result objectForKey:@"message"];
+        if ([[result objectForKey:@"success"] isEqualToNumber:@1]) {
+            //更新用户名，性别，个人简介
+            UserInfoEntity *entiey = [UserInfoEntity defaultUserInfoEntity];
+            entiey.nickname = [result objectForKey:@"data"][@"nickname"];
+            entiey.sex = [result objectForKey:@"data"][@"sex"];
+            [SVProgressHUD showSuccessWithStatus:message];
+            THNAgeViewController *vc = [[THNAgeViewController alloc] init];
+            [self.navigationController pushViewController:vc animated:YES];
+        } else {
+            [SVProgressHUD showInfoWithStatus:message];
+        }
+    } failure:^(FBRequest *request, NSError *error) {
+        
+    }];
 
 }
 

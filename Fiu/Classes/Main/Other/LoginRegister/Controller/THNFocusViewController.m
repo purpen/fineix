@@ -150,7 +150,15 @@
 }
 
 -(void)enter{
-    [self dismissViewControllerAnimated:YES completion:nil];
+    FBRequest *request = [FBAPI postWithUrlString:@"/my/update_user_identify" requestDictionary:@{
+                                                                                                  @"type":@1
+                                                                                                  } delegate:self];
+    [request startRequestSuccess:^(FBRequest *request, id result) {
+        [self dismissViewControllerAnimated:YES completion:nil];
+    } failure:^(FBRequest *request, NSError *error) {
+        
+    }];
+
 }
 
 -(UIPageControl *)pagrControl{

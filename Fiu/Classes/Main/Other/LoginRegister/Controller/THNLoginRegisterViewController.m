@@ -18,6 +18,7 @@
 #import "UserInfoEntity.h"
 #import "THNInformationViewController.h"
 #import "THNLoginViewController.h"
+#import "BindIngViewController.h"
 
 @interface THNLoginRegisterViewController ()<FBRequestDelegate>
 @property (weak, nonatomic) IBOutlet UIButton *loginBtn;
@@ -140,10 +141,10 @@ static NSString *const thirdRegister = @"/auth/third_sign";//第三方登录接�
         }else{
             [SVProgressHUD dismiss];
             //跳转到绑定手机号界面
-//            BindIngViewController *bing = [[BindIngViewController alloc] init];
-//            bing.snsAccount = snsAccount;
-//            bing.type = type;
-//            [self.navigationController pushViewController:bing animated:YES];
+            BindIngViewController *bing = [[BindIngViewController alloc] init];
+            bing.snsAccount = snsAccount;
+            bing.type = type;
+            [self.navigationController pushViewController:bing animated:YES];
             //如果用户不存在,提示用户是否进行绑定
         }
     } failure:^(FBRequest *request, NSError *error) {

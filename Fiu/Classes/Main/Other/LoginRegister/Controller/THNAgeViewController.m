@@ -126,33 +126,30 @@ static NSString *updatInfo = @"/my/update_profile";
 
 - (IBAction)next:(id)sender {
     
-    THNScenarioViewController *vc = [[THNScenarioViewController alloc] init];
-    [self.navigationController pushViewController:vc animated:YES];
     
-    
-//    [SVProgressHUD showWithMaskType:SVProgressHUDMaskTypeClear];
-//    //开始传送数据
-//    NSDictionary *params = @{
-//                             @"age_group":self.age_group,
-//                             @"assets":self.assets,
-//                             };
-//    FBRequest *request = [FBAPI postWithUrlString:updatInfo requestDictionary:params delegate:self];
-//    [request startRequestSuccess:^(FBRequest *request, id result) {
-//        NSString * message = [result objectForKey:@"message"];
-//        if ([[result objectForKey:@"success"] isEqualToNumber:@1]) {
-//            
-//            UserInfoEntity *entiey = [UserInfoEntity defaultUserInfoEntity];
-//            entiey.age_group = [result objectForKey:@"data"][@"age_group"];
-//            entiey.assets = [result objectForKey:@"data"][@"assets"];
-//            [SVProgressHUD showSuccessWithStatus:message];
-//            THNAgeViewController *vc = [[THNAgeViewController alloc] init];
-//            [self.navigationController pushViewController:vc animated:YES];
-//        } else {
-//            [SVProgressHUD showInfoWithStatus:message];
-//        }
-//    } failure:^(FBRequest *request, NSError *error) {
-//        
-//    }];
+    [SVProgressHUD showWithMaskType:SVProgressHUDMaskTypeClear];
+    //开始传送数据
+    NSDictionary *params = @{
+                             @"age_group":self.age_group,
+                             @"assets":self.assets,
+                             };
+    FBRequest *request = [FBAPI postWithUrlString:updatInfo requestDictionary:params delegate:self];
+    [request startRequestSuccess:^(FBRequest *request, id result) {
+        NSString * message = [result objectForKey:@"message"];
+        if ([[result objectForKey:@"success"] isEqualToNumber:@1]) {
+            
+            UserInfoEntity *entiey = [UserInfoEntity defaultUserInfoEntity];
+            entiey.age_group = [result objectForKey:@"data"][@"age_group"];
+            entiey.assets = [result objectForKey:@"data"][@"assets"];
+            [SVProgressHUD showSuccessWithStatus:message];
+            THNAgeViewController *vc = [[THNAgeViewController alloc] init];
+            [self.navigationController pushViewController:vc animated:YES];
+        } else {
+            [SVProgressHUD showInfoWithStatus:message];
+        }
+    } failure:^(FBRequest *request, NSError *error) {
+        
+    }];
 }
 
 @end

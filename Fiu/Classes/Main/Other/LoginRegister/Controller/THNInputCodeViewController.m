@@ -24,6 +24,7 @@
 @end
 
 static NSString *const checkVerify = @"/auth/check_verify_code";//第三方登录接口
+static NSString * const XMGPlacerholderColorKeyPath = @"_placeholderLabel.textColor";
 
 @implementation THNInputCodeViewController
 
@@ -63,24 +64,23 @@ static NSString *const checkVerify = @"/auth/check_verify_code";//第三方登�
 }
 
 -(void)commitClick{
-    THNSetPwdViewController *vc = [[THNSetPwdViewController alloc] init];
-    vc.phoneStr = self.phoneString;
-    vc.codeStr = self.tFView.textField.text;
-    [self.navigationController pushViewController:vc animated:YES];
     
-//    [SVProgressHUD showWithMaskType:SVProgressHUDMaskTypeClear];
-//    //请求数据，如果正确就跳转
-//    FBRequest *request = [FBAPI postWithUrlString:checkVerify requestDictionary:@{
-//                                                                                @"phone" : self.phoneString,
-//                                                                                @"code"  : self.tFView.textField.text
-//                                                                                } delegate:self];
-//    [request startRequestSuccess:^(FBRequest *request, id result) {
-//        [SVProgressHUD dismiss];
-//        THNSetPwdViewController *vc = [[THNSetPwdViewController alloc] init];
-//        [self.navigationController pushViewController:vc animated:YES];
-//    } failure:^(FBRequest *request, NSError *error) {
-//        [SVProgressHUD showErrorWithStatus:@"验证码错误"];
-//    }];
+    
+    [SVProgressHUD showWithMaskType:SVProgressHUDMaskTypeClear];
+    //请求数据，如果正确就跳转
+    FBRequest *request = [FBAPI postWithUrlString:checkVerify requestDictionary:@{
+                                                                                @"phone" : self.phoneString,
+                                                                                @"code"  : self.tFView.textField.text
+                                                                                } delegate:self];
+    [request startRequestSuccess:^(FBRequest *request, id result) {
+        [SVProgressHUD dismiss];
+        THNSetPwdViewController *vc = [[THNSetPwdViewController alloc] init];
+        vc.phoneStr = self.phoneString;
+        vc.codeStr = self.tFView.textField.text;
+        [self.navigationController pushViewController:vc animated:YES];
+    } failure:^(FBRequest *request, NSError *error) {
+        [SVProgressHUD showErrorWithStatus:@"验证码错误"];
+    }];
 }
 
 -(THNTFCodeView *)tFView{

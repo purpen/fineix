@@ -18,8 +18,7 @@
 #import "WXApi.h"
 #import "WeiboSDK.h"
 #import <TencentOpenAPI/QQApiInterface.h>
-#import "ImprovViewController.h"
-#import "SubscribeInterestedCollectionViewController.h"
+#import "THNInformationViewController.h"
 
 @interface BindIngViewController ()<UITextFieldDelegate>
 
@@ -30,6 +29,7 @@
 @end
 NSString *thirdRegistrationBindingMobilePhone = @"/auth/third_register_with_phone";
 static NSString *const thirdRegisteredNotBinding = @"/auth/third_register_without_phone";//第三方快捷注册(不绑定手机号)接口
+static NSString * const XMGPlacerholderColorKeyPath = @"_placeholderLabel.textColor";
 @implementation BindIngViewController
 
 - (void)viewDidLoad {
@@ -41,6 +41,10 @@ static NSString *const thirdRegisteredNotBinding = @"/auth/third_register_withou
     self.phoneNumTF.delegate = self;
     self.pwdTF.delegate = self;
     
+    [self.phoneNumTF setValue:[UIColor lightGrayColor] forKeyPath:XMGPlacerholderColorKeyPath];
+    self.phoneNumTF.tintColor = [UIColor lightGrayColor];
+    [self.pwdTF setValue:[UIColor lightGrayColor] forKeyPath:XMGPlacerholderColorKeyPath];
+    self.pwdTF.tintColor = [UIColor lightGrayColor];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -89,7 +93,7 @@ static NSString *const thirdRegisteredNotBinding = @"/auth/third_register_withou
                 if ([[identifyDict objectForKey:@"is_scene_subscribe"] isEqualToNumber:@0]) {
                     //跳转到推荐界面
 //                    SubscribeInterestedCollectionViewController *subscribeVC = [[SubscribeInterestedCollectionViewController alloc] init];
-                    ImprovViewController *vc = [[ImprovViewController alloc] init];
+                    THNInformationViewController *vc = [[THNInformationViewController alloc] init];
                     [self.navigationController pushViewController:vc animated:YES];
                 }else{
                     [self dismissViewControllerAnimated:YES completion:nil];
@@ -155,10 +159,13 @@ static NSString *const thirdRegisteredNotBinding = @"/auth/third_register_withou
         UserInfoEntity *entity = [UserInfoEntity defaultUserInfoEntity];
         entity.isLogin = YES;
         [SVProgressHUD showSuccessWithStatus:NSLocalizedString(@"registeredSuccessfully", nil)];
-        //跳转到推荐界面
-//        SubscribeInterestedCollectionViewController *subscribeVC = [[SubscribeInterestedCollectionViewController alloc] init];
-        ImprovViewController *vc = [[ImprovViewController alloc] init];
-        [self.navigationController pushViewController:vc animated:YES];
+        NSString *str = dataDic[@"identify"][@"is_scene_subscribe"];
+        if ([str integerValue] == 0) {
+            THNInformationViewController *vc = [[THNInformationViewController alloc] init];
+            [self.navigationController pushViewController:vc animated:YES];
+        }else{
+            [self dismissViewControllerAnimated:YES completion:nil];
+        } 
     } failure:^(FBRequest *request, NSError *error) {
         //如果请求失败提示失败信息
         [SVProgressHUD showErrorWithStatus:error.localizedDescription];
