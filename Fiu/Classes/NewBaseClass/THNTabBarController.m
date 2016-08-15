@@ -17,7 +17,7 @@
 #import "UserInfoEntity.h"
 #import "THNLoginRegisterViewController.h"
 #import "PictureToolViewController.h"
-#import "FBLoginRegisterViewController.h"
+#import "THNLoginRegisterViewController.h"
 
 @implementation THNTabBarController {
     THNNavigationController * _homeNav;
@@ -151,8 +151,7 @@
         PictureToolViewController * pictureToolVC = [[PictureToolViewController alloc] init];
         [self presentViewController:pictureToolVC animated:YES completion:nil];
     } else {
-        UIStoryboard *loginStory = [UIStoryboard storyboardWithName:@"LoginRegisterController" bundle:[NSBundle mainBundle]];
-        FBLoginRegisterViewController *loginSignupVC = [loginStory instantiateViewControllerWithIdentifier:@"FBLoginRegisterViewController"];
+        THNLoginRegisterViewController *loginSignupVC = [[THNLoginRegisterViewController alloc] init];
         UINavigationController *navi = [[UINavigationController alloc] initWithRootViewController:loginSignupVC];
         [self presentViewController:navi animated:YES completion:nil];
         

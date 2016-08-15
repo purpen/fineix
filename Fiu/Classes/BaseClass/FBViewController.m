@@ -7,7 +7,7 @@
 //
 
 #import "FBViewController.h"
-#import "FBLoginRegisterViewController.h"
+#import "THNLoginRegisterViewController.h"
 #import "QRCodeScanViewController.h"
 #import "HomeViewController.h"
 
@@ -91,7 +91,7 @@ static NSString *const URLUserIsLogin = @"/user/user_info";
 #pragma mark - 弹出登录
 - (void)openUserLoginVC {
     UIStoryboard *loginStory = [UIStoryboard storyboardWithName:@"LoginRegisterController" bundle:[NSBundle mainBundle]];
-    FBLoginRegisterViewController * loginSignupVC = [loginStory instantiateViewControllerWithIdentifier:@"FBLoginRegisterViewController"];
+    THNLoginRegisterViewController * loginSignupVC = [[THNLoginRegisterViewController alloc] init];
     UINavigationController * navi = [[UINavigationController alloc] initWithRootViewController:loginSignupVC];
     [self presentViewController:navi animated:YES completion:nil];
 }

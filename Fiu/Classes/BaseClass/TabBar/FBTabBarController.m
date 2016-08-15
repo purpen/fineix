@@ -9,7 +9,7 @@
 #import "FBTabBarController.h"
 #import "FBNavigationViewController.h"
 #import "FBTabBar.h"
-#import "FBLoginRegisterViewController.h"
+#import "THNLoginRegisterViewController.h"
 #import "HomeViewController.h"
 #import "DiscoverViewController.h"
 #import "CreateViewController.h"
@@ -70,8 +70,7 @@
         }
         else
         {
-            UIStoryboard *loginStory = [UIStoryboard storyboardWithName:@"LoginRegisterController" bundle:[NSBundle mainBundle]];
-            FBLoginRegisterViewController *loginSignupVC = [loginStory instantiateViewControllerWithIdentifier:@"FBLoginRegisterViewController"];
+            THNLoginRegisterViewController *loginSignupVC = [[THNLoginRegisterViewController alloc] init];
             UINavigationController *navi = [[UINavigationController alloc] initWithRootViewController:loginSignupVC];
             [self presentViewController:navi animated:YES completion:nil];
             
@@ -161,8 +160,7 @@
     else
     {
         //跳到登录页面
-        UIStoryboard *loginStory = [UIStoryboard storyboardWithName:@"LoginRegisterController" bundle:[NSBundle mainBundle]];
-        FBLoginRegisterViewController *loginSignupVC = [loginStory instantiateViewControllerWithIdentifier:@"FBLoginRegisterViewController"];
+        THNLoginRegisterViewController *loginSignupVC = [[THNLoginRegisterViewController alloc] init];
         UINavigationController *navi = [[UINavigationController alloc] initWithRootViewController:loginSignupVC];
         [self presentViewController:navi animated:YES completion:nil];
     }

@@ -24,7 +24,7 @@
 #import "HomePageViewController.h"
 #import "WXApi.h"
 #import <AlipaySDK/AlipaySDK.h>
-#import "FBLoginRegisterViewController.h"
+#import "THNLoginRegisterViewController.h"
 #import "CounterModel.h"
 #import "UITabBar+badge.h"
 #import "IQKeyboardManager.h"
