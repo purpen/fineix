@@ -7,6 +7,7 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="THNFocusViewController">
             <connections>
+                <outlet property="logoView" destination="hpf-c0-LDM" id="edw-qu-pzd"/>
                 <outlet property="view" destination="dwq-7C-4WE" id="Ug5-gb-x4n"/>
             </connections>
         </placeholder>
