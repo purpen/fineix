@@ -113,44 +113,41 @@ static NSString *const thirdRegister = @"/auth/third_sign";//第三方登录接�
 
 - (IBAction)login:(id)sender {
     
-    THNInformationViewController *vc = [[THNInformationViewController alloc] init];
-    [self.navigationController pushViewController:vc animated:YES];
+    [SVProgressHUD showWithMaskType:SVProgressHUDMaskTypeClear];
+    if (![self.phoneTF.text checkTel]) {
+        //手机号错误提示
+        [SVProgressHUD showErrorWithStatus:NSLocalizedString(@"enterCorrectPhoneNumber", nil)];
+        return;
+    }else if(self.pwdTF.text.length < 6){
+        [SVProgressHUD showErrorWithStatus:NSLocalizedString(@"passwordDigits", nil)];
+        return;
+    }
+    NSDictionary *params = @{
+                             @"mobile":self.phoneTF.text,
+                             @"password":self.pwdTF.text,
+                             @"from_to":@1
+                             };
+    FBRequest *request = [FBAPI postWithUrlString:LoginURL requestDictionary:params delegate:self];
+    [request startRequestSuccess:^(FBRequest *request, id result) {
+        UserInfo *userInfo = [UserInfo mj_objectWithKeyValues:[result objectForKey:@"data"]];
+        [userInfo saveOrUpdate];
+        [userInfo updateUserInfoEntity];
+        UserInfoEntity *entity = [UserInfoEntity defaultUserInfoEntity];
+        entity.isLogin = YES;
+        //跳回个人主页
+        [SVProgressHUD showSuccessWithStatus:@"登录成功"];
+        NSDictionary *dataDic = result[@"data"];
+        NSString *str = dataDic[@"identify"][@"is_scene_subscribe"];
+        if ([str integerValue] == 0) {
+            THNInformationViewController *vc = [[THNInformationViewController alloc] init];
+            [self.navigationController pushViewController:vc animated:YES];
+        }else{
+            [self dismissViewControllerAnimated:YES completion:nil];
+        }
+    } failure:^(FBRequest *request, NSError *error) {
+        [SVProgressHUD showErrorWithStatus:error.localizedDescription];
+    }];
     
-    
-//    [SVProgressHUD showWithMaskType:SVProgressHUDMaskTypeClear];
-//    if (![self.phoneTF.text checkTel]) {
-//        //手机号错误提示
-//        [SVProgressHUD showErrorWithStatus:NSLocalizedString(@"enterCorrectPhoneNumber", nil)];
-//        return;
-//    }else if(self.pwdTF.text.length < 6){
-//        [SVProgressHUD showErrorWithStatus:NSLocalizedString(@"passwordDigits", nil)];
-//        return;
-//    }
-//    NSDictionary *params = @{
-//                             @"mobile":self.phoneTF.text,
-//                             @"password":self.pwdTF.text,
-//                             @"from_to":@1
-//                             };
-//    FBRequest *request = [FBAPI postWithUrlString:LoginURL requestDictionary:params delegate:self];
-//    [request startRequestSuccess:^(FBRequest *request, id result) {
-//        UserInfo *userInfo = [UserInfo mj_objectWithKeyValues:[result objectForKey:@"data"]];
-//        [userInfo saveOrUpdate];
-//        [userInfo updateUserInfoEntity];
-//        UserInfoEntity *entity = [UserInfoEntity defaultUserInfoEntity];
-//        entity.isLogin = YES;
-//        //跳回个人主页
-//        [SVProgressHUD showSuccessWithStatus:@"登录成功"];
-//        NSDictionary *dataDic = result[@"data"];
-//        NSString *str = dataDic[@"identify"][@"is_scene_subscribe"];
-//        if ([str integerValue] == 0) {
-//            THNInformationViewController *vc = [[THNInformationViewController alloc] init];
-//            [self.navigationController pushViewController:vc animated:YES];
-//        }else{
-//            [self dismissViewControllerAnimated:YES completion:nil];
-//        }
-//    } failure:^(FBRequest *request, NSError *error) {
-//        [SVProgressHUD showErrorWithStatus:error.localizedDescription];
-//    }];
 }
 
 - (IBAction)forget:(id)sender {

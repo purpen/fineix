@@ -7,7 +7,7 @@
 //
 
 #import "InviteCCodeViewController.h"
-#import "FBTabBarController.h"
+#import "THNTabBarController.h"
 #import "AppDelegate.h"
 #import "CounterModel.h"
 #import "UITabBar+badge.h"
@@ -58,7 +58,7 @@
             [backRequst startRequestSuccess:^(FBRequest *request, id result) {
                 [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"codeFlag"];
                 [[NSUserDefaults standardUserDefaults] synchronize];
-                FBTabBarController *tab = [[FBTabBarController alloc] init];
+                THNTabBarController *tab = [[THNTabBarController alloc] init];
                 [tab setSelectedIndex:0];
                 [self presentViewController:tab animated:YES completion:nil];
             } failure:^(FBRequest *request, NSError *error) {

@@ -21,7 +21,6 @@
 /** 认证信息 */
 @property(nonatomic,copy) NSString *expert_info;
 
-@property(nonatomic, assign) BOOL flag;
 
 
 @end

@@ -19,7 +19,7 @@
             <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="background_login_gs" translatesAutoresizingMaskIntoConstraints="NO" id="go5-dd-yME">
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="background_login" translatesAutoresizingMaskIntoConstraints="NO" id="go5-dd-yME">
                     <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                 </imageView>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="714-Nb-SAG">
@@ -31,17 +31,6 @@
                     <state key="normal" image="return"/>
                     <connections>
                         <action selector="backBtn:" destination="-1" eventType="touchUpInside" id="M60-RK-vgw"/>
-                    </connections>
-                </button>
-                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="M3Z-hI-d9R">
-                    <rect key="frame" x="343" y="35" width="17" height="22"/>
-                    <constraints>
-                        <constraint firstAttribute="width" constant="17" id="0qy-dM-qoP"/>
-                        <constraint firstAttribute="height" constant="22" id="eRy-Ka-otZ"/>
-                    </constraints>
-                    <state key="normal" image="close"/>
-                    <connections>
-                        <action selector="cancelBtn:" destination="-1" eventType="touchUpInside" id="vSR-ke-y4X"/>
                     </connections>
                 </button>
                 <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="手机号" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="XeG-OL-67l">
@@ -154,7 +143,6 @@
                 <constraint firstAttribute="trailing" secondItem="XeG-OL-67l" secondAttribute="trailing" constant="15" id="58P-pS-ybN"/>
                 <constraint firstItem="CFv-OM-3kV" firstAttribute="top" secondItem="XEC-Di-b72" secondAttribute="bottom" constant="12" id="64i-Zz-6Lq"/>
                 <constraint firstItem="7Be-Vj-eQb" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="6LF-a6-PZn"/>
-                <constraint firstItem="M3Z-hI-d9R" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="35" id="7xf-91-As3"/>
                 <constraint firstItem="7Be-Vj-eQb" firstAttribute="top" secondItem="CFv-OM-3kV" secondAttribute="bottom" constant="16" id="CGJ-K9-H9N"/>
                 <constraint firstAttribute="trailing" secondItem="CFv-OM-3kV" secondAttribute="trailing" constant="15" id="FyH-GD-5kj"/>
                 <constraint firstItem="CFv-OM-3kV" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="15" id="Jez-jK-BE0"/>
@@ -167,7 +155,6 @@
                 <constraint firstItem="XEC-Di-b72" firstAttribute="top" secondItem="XeG-OL-67l" secondAttribute="bottom" constant="12" id="exP-Xd-MVp"/>
                 <constraint firstAttribute="trailing" secondItem="go5-dd-yME" secondAttribute="trailing" id="lUS-FR-6bR"/>
                 <constraint firstItem="go5-dd-yME" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="nON-7B-g3M"/>
-                <constraint firstAttribute="trailing" secondItem="M3Z-hI-d9R" secondAttribute="trailing" constant="15" id="sbK-ZF-mB4"/>
                 <constraint firstItem="go5-dd-yME" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="sfa-is-xmy"/>
                 <constraint firstItem="XeG-OL-67l" firstAttribute="top" secondItem="puc-tM-yfP" secondAttribute="bottom" constant="8" id="uIJ-ia-ys9"/>
                 <constraint firstItem="XEC-Di-b72" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="15" id="uQB-Xh-kdf"/>
@@ -177,8 +164,7 @@
         </view>
     </objects>
     <resources>
-        <image name="background_login_gs" width="375" height="667"/>
-        <image name="close" width="17" height="17"/>
+        <image name="background_login" width="375" height="667"/>
         <image name="return" width="11" height="19"/>
     </resources>
 </document>

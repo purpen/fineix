@@ -35,6 +35,7 @@
 
 @property(nonatomic, strong) UIButton *enterBtn;
 
+@property (weak, nonatomic) IBOutlet UIView *logoView;
 @end
 
 @implementation THNFocusViewController
@@ -99,9 +100,9 @@
         for (int i = 0; i < 3; i ++) {
             
             float w = [UIScreen mainScreen].bounds.size.width;
-            float h = 0.53 * [UIScreen mainScreen].bounds.size.height;
+            float h = self.contentScrollView.height;
             float x = i * w;
-            float y = 0;
+            float y = -20;
             
             THNFucosPeopleView *view = [[THNFucosPeopleView alloc] initWithFrame:CGRectMake(x, y, w, h)];
             view.modelAry = self.aryAry[i];

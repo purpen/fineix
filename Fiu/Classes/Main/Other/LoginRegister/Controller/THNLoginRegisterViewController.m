@@ -34,12 +34,16 @@ static NSString *const thirdRegister = @"/auth/third_sign";//第三方登录接�
 
 @implementation THNLoginRegisterViewController
 
+-(void)viewWillAppear:(BOOL)animated{
+    UIApplication *app = [UIApplication sharedApplication];
+    [app setStatusBarHidden:YES];
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.navigationController.navigationBarHidden = YES;
     self.navView.hidden = YES;
-    UIApplication *app = [UIApplication sharedApplication];
-    [app setStatusBarHidden:YES];
+    
     
     self.loginBtn.layer.masksToBounds = YES;
     self.loginBtn.layer.cornerRadius = 3;
