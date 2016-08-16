@@ -32,6 +32,8 @@
 
 #pragma marm - setUI
 - (void)setCameraViewUI {
+    [self addSubview:self.previewView];
+    
     [self addSubview:self.takePhotosBtn];
     [_takePhotosBtn mas_makeConstraints:^(MASConstraintMaker *make) {
         make.size.mas_equalTo(CGSizeMake(80, 80));
@@ -107,6 +109,16 @@
 }
 
 - (void)selfTimerBtnClick:(UIButton *)button {
+    [UIView beginAnimations:@"doflip" context:nil];
+    [UIView setAnimationDuration:0.5f];
+    [UIView setAnimationCurve:UIViewAnimationCurveEaseInOut];
+    [UIView setAnimationDelegate:self];
+    [UIView setAnimationTransition:UIViewAnimationTransitionFlipFromLeft forView:self.previewView cache:YES];
+    [UIView setAnimationWillStartSelector:@selector(animationFinished:)];
+    [UIView commitAnimations];
+}
+
+- (void)animationFinished:(id)sender {
     AVCaptureDevicePosition desiredPosition;
     if (isUsingFrontFacingCamera){
         desiredPosition = AVCaptureDevicePositionBack;
@@ -192,6 +204,14 @@
     } completion:^(BOOL finished) {
         [showview removeFromSuperview];
     }];
+}
+
+#pragma mark - 预览图层
+- (UIView *)previewView {
+    if (!_previewView) {
+        _previewView = [[UIView alloc] initWithFrame:CGRectMake(0, 45, SCREEN_WIDTH, SCREEN_WIDTH)];
+    }
+    return _previewView;
 }
 
 #pragma mark - 拍照按钮
@@ -336,9 +356,8 @@
         //  初始化预览图层
         self.previewPhoto = [[AVCaptureVideoPreviewLayer alloc] initWithSession:self.session];
         [self.previewPhoto setVideoGravity:AVLayerVideoGravityResizeAspectFill];
-        self.previewPhoto.frame = CGRectMake(0, 45, SCREEN_WIDTH, SCREEN_WIDTH);
-        self.layer.masksToBounds = YES;
-        [self.layer addSublayer:self.previewPhoto];
+        self.previewPhoto.frame = CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_WIDTH);
+        [self.previewView.layer addSublayer:self.previewPhoto];
     
     } else {
         [SVProgressHUD showErrorWithStatus:NSLocalizedString(@"cameraError", nil)];

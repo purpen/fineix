@@ -54,6 +54,8 @@
 "writeGoodsInfo" = "或自行输入产品信息";
 "goodsBrand" = "品牌";
 "goodsName" = "产品名称";
+"canAddGoods" = "您还可以继续标记";
+"addGoodsNum" = "个产品";
 
 //  控制器页面标题
 "createVcTitle" = "照片胶卷";

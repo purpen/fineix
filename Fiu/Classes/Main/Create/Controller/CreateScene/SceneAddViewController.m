@@ -260,6 +260,8 @@ static NSString *const URLUserAddGoods = @"/scene_product/add";
     } completion:^(BOOL finished) {
         [self.markGoodsView removeFromSuperview];
     }];
+    
+    [self getNowAddGoodsInfoNum:self.tagBtnMarr.count];
 }
 
 #pragma mark 删除标签
@@ -376,40 +378,52 @@ static NSString *const URLUserAddGoods = @"/scene_product/add";
 
 #pragma mark 继续按钮的点击事件
 - (void)nextBtnClick {
-//    NSMutableArray * originX = [NSMutableArray array];
-//    NSMutableArray * originY = [NSMutableArray array];
-//    for (UserGoodsTag * btn in self.tagBtnMarr) {
-//        [originX addObject:[NSString stringWithFormat:@"%f", btn.frame.origin.x / SCREEN_WIDTH]];
-//        [originY addObject:[NSString stringWithFormat:@"%f", (btn.frame.origin.y - 45) / SCREEN_HEIGHT]];
-//    }
-//    
-//    NSMutableArray * priceMarr = [NSMutableArray array];
-//    NSCharacterSet * set = [NSCharacterSet characterSetWithCharactersInString:@"￥"];
-//    for (NSString * str in self.goodsPriceData) {
-//        NSString * price = [str stringByTrimmingCharactersInSet:set];
-//        [priceMarr addObject:price];
-//    }
-//    
-//    UIImage * goodsImg = [self generateImage:self.filtersImageView];
-//    
-//    FiltersViewController * filtersVC = [[FiltersViewController alloc] init];
-//    filtersVC.locationArr = self.locationArr;
-//    filtersVC.filtersImg = goodsImg;
-//    filtersVC.fSceneId = self.fSceneId;
-//    filtersVC.fSceneTitle = self.fSceneTitle;
-//    filtersVC.goodsTitle = self.goodsTitleData;
-//    filtersVC.goodsPrice = priceMarr;
-//    filtersVC.goodsId = self.goodsIdData;
-//    filtersVC.goodsX = originX;
-//    filtersVC.goodsY = originY;
-//    
-//    [self.navigationController pushViewController:filtersVC animated:YES];
-
+//        if (self.goodsIdData.count > 3) {
+//            [SVProgressHUD showInfoWithStatus:@"最多标记三个产品信息哦～"];
+//            
+//        } else if (self.goodsIdData.count <= 3) {
+//            NSMutableArray * originX = [NSMutableArray array];
+//            NSMutableArray * originY = [NSMutableArray array];
+//            for (UserGoodsTag * btn in self.tagBtnMarr) {
+//                [originX addObject:[NSString stringWithFormat:@"%f", btn.frame.origin.x / SCREEN_WIDTH]];
+//                [originY addObject:[NSString stringWithFormat:@"%f", (btn.frame.origin.y - 45) / SCREEN_HEIGHT]];
+//            }
+//        
+//            NSMutableArray * priceMarr = [NSMutableArray array];
+//            NSCharacterSet * set = [NSCharacterSet characterSetWithCharactersInString:@"￥"];
+//            for (NSString * str in self.goodsPriceData) {
+//                NSString * price = [str stringByTrimmingCharactersInSet:set];
+//                [priceMarr addObject:price];
+//            }
+//
+//            UIImage * goodsImg = [self generateImage:self.filtersImageView];
+//            
+//            FiltersViewController * filtersVC = [[FiltersViewController alloc] init];
+//            filtersVC.locationArr = self.locationArr;
+//            filtersVC.filtersImg = goodsImg;
+//            filtersVC.fSceneId = self.fSceneId;
+//            filtersVC.fSceneTitle = self.fSceneTitle;
+//            filtersVC.goodsTitle = self.goodsTitleData;
+//            filtersVC.goodsPrice = priceMarr;
+//            filtersVC.goodsId = self.goodsIdData;
+//            filtersVC.goodsX = originX;
+//            filtersVC.goodsY = originY;
+//            
+//            [self.navigationController pushViewController:filtersVC animated:YES];
+//        }
     
     ReleaseViewController * releaseVC = [[ReleaseViewController alloc] init];
     releaseVC.bgImg = [self generateImage:self.filtersImageView];
     [self.navigationController pushViewController:releaseVC animated:YES];
     
+}
+
+#pragma mark - 计算当前添加产品信息数量
+- (void)getNowAddGoodsInfoNum:(NSInteger)count {
+    [self.bottomBtn setTitle:[NSString stringWithFormat:@"%@ %zi %@", NSLocalizedString(@"canAddGoods", nil),
+                                                                    (3 - count),
+                                                                    NSLocalizedString(@"addGoodsNum", nil)]
+                    forState:(UIControlStateNormal)];
 }
 
 #pragma mark - 合成图片
