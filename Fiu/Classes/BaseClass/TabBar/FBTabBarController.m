@@ -12,7 +12,6 @@
 #import "FBLoginRegisterViewController.h"
 #import "HomeViewController.h"
 #import "DiscoverViewController.h"
-#import "CreateViewController.h"
 #import "MallViewController.h"
 #import "MyPageViewController.h"
 #import "UserInfoEntity.h"

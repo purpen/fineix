@@ -21,13 +21,13 @@
 }
 
 - (void)thn_setRightBarItemContent:(NSString *)content {
-    [self.rightBarItem setTitle:[NSString stringWithFormat:@"＃%@ ", content] forState:(UIControlStateNormal)];
+    [self.rightBarItem setTitle:[NSString stringWithFormat:@"#%@ ", content] forState:(UIControlStateNormal)];
 }
 
 - (UIButton *)leftBarItem {
     if (!_leftBarItem) {
         _leftBarItem = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 44, 44)];
-        [_leftBarItem setTitle:@"＃" forState:(UIControlStateNormal)];
+        [_leftBarItem setTitle:@"#" forState:(UIControlStateNormal)];
         [_leftBarItem setTitleColor:[UIColor colorWithHexString:@"#666666"] forState:(UIControlStateNormal)];
         _leftBarItem.titleLabel.font = [UIFont systemFontOfSize:14];
         [_leftBarItem addTarget:self action:@selector(leftBarItemClick) forControlEvents:(UIControlEventTouchUpInside)];

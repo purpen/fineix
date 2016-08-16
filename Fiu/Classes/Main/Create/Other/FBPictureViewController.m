@@ -35,8 +35,22 @@
 }
 
 //  打开相薄
-- (void)addOpenPhotoAlbumsButton {
+- (void)addOpenPhotoAlbumsButton:(NSString *)title {
+    [self.openPhotoAlbums setTitle:title forState:(UIControlStateNormal)];
     [self.navView addSubview:self.openPhotoAlbums];
+}
+
+- (void)getPhotoAlbumsTitleSize:(NSString *)title {
+    NSDictionary *attribute = @{NSFontAttributeName: [UIFont systemFontOfSize:17]};
+    CGFloat titleW = [title boundingRectWithSize:CGSizeMake(320, 0)
+                                         options:\
+                      NSStringDrawingTruncatesLastVisibleLine |
+                      NSStringDrawingUsesLineFragmentOrigin |
+                      NSStringDrawingUsesFontLeading
+                                      attributes:attribute
+                                         context:nil].size.width;
+    
+    [_openPhotoAlbums setImageEdgeInsets:(UIEdgeInsetsMake(0, (titleW+20)*2, 0, 0))];
 }
 
 //  取消创建按钮
@@ -249,11 +263,13 @@
 #pragma mark - 打开相薄
 - (UIButton *)openPhotoAlbums {
     if (!_openPhotoAlbums) {
-        _openPhotoAlbums = [[UIButton alloc] initWithFrame:CGRectMake(SCREEN_WIDTH/2 - 45, 0, 110, 45)];
+        _openPhotoAlbums = [[UIButton alloc] initWithFrame:CGRectMake(50, 0, SCREEN_WIDTH - 100, 45)];
+        [_openPhotoAlbums setTitleColor:[UIColor whiteColor] forState:(UIControlStateNormal)];
         [_openPhotoAlbums setImage:[UIImage imageNamed:@"icon_down"] forState:(UIControlStateNormal)];
         [_openPhotoAlbums setImage:[UIImage imageNamed:@"icon_upward"] forState:(UIControlStateSelected)];
-        [_openPhotoAlbums setImageEdgeInsets:(UIEdgeInsetsMake(0, 90, 0, 0))];
+        _openPhotoAlbums.titleLabel.font = [UIFont systemFontOfSize:17];
         _openPhotoAlbums.selected = NO;
+        _openPhotoAlbums.clipsToBounds = YES;
     }
     return _openPhotoAlbums;
 }

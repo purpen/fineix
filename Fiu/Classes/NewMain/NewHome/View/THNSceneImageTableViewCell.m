@@ -36,29 +36,27 @@
     if (sceneModel.title.length == 0) {
         self.title.hidden = YES;
         self.suTitle.hidden = YES;
-        
+
     } else if (sceneModel.title.length > 10) {
         self.title.hidden = NO;
         self.suTitle.hidden = NO;
         
-        NSString *titleStr = [sceneModel.title substringToIndex:10];
-        _titleStr = [NSString stringWithFormat:@"    %@  ", titleStr];
-        self.title.text = _titleStr;
+        NSString *titleStr = [NSString stringWithFormat:@"    %@  ", [sceneModel.title substringToIndex:10]];
+        self.title.text = titleStr;
         
-        NSString *suTitleStr = [sceneModel.title substringFromIndex:10];
-        _suTitleStr = [NSString stringWithFormat:@"    %@  ", suTitleStr];
-        self.suTitle.text = _suTitleStr;
+        NSString *suTitleStr = [NSString stringWithFormat:@"    %@  ", [sceneModel.title substringFromIndex:10]];
+        self.suTitle.text = suTitleStr;
         
         [self.suTitle mas_updateConstraints:^(MASConstraintMaker *make) {
-            make.width.equalTo(@([self getTextSizeWidth:_suTitleStr].width));
+            make.width.equalTo(@([self getTextSizeWidth:suTitleStr].width));
         }];
         
         [self.title mas_updateConstraints:^(MASConstraintMaker *make) {
-            make.width.equalTo(@([self getTextSizeWidth:_titleStr].width));
+            make.width.equalTo(@([self getTextSizeWidth:titleStr].width));
             make.bottom.equalTo(self.mas_bottom).with.offset(-48);
         }];
         
-    } else if (sceneModel.title.length < 10) {
+    } else if (sceneModel.title.length <= 10) {
         self.suTitle.hidden = YES;
         self.title.hidden = NO;
         
@@ -68,8 +66,6 @@
             make.width.equalTo(@([self getTextSizeWidth:titleStr].width));
         }];
     }
-    
-    [self layoutIfNeeded];
 }
 
 - (CGSize)getTextSizeWidth:(NSString *)text {

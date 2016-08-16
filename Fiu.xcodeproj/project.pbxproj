@@ -42,7 +42,6 @@
 		1F2A8F461CF40277005116C7 /* FBPictureViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F2A8C0C1CF40276005116C7 /* FBPictureViewController.m */; };
 		1F2A8F471CF40277005116C7 /* PictureToolViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F2A8C0E1CF40276005116C7 /* PictureToolViewController.m */; };
 		1F2A8F481CF40277005116C7 /* CameraView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F2A8C121CF40276005116C7 /* CameraView.m */; };
-		1F2A8F491CF40277005116C7 /* CropImageView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F2A8C141CF40276005116C7 /* CropImageView.m */; };
 		1F2A8F4A1CF40277005116C7 /* FBFiltersCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F2A8C161CF40276005116C7 /* FBFiltersCollectionViewCell.m */; };
 		1F2A8F4B1CF40277005116C7 /* FBPictureCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F2A8C181CF40276005116C7 /* FBPictureCollectionViewCell.m */; };
 		1F2A8F4C1CF40277005116C7 /* FBPictureView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F2A8C1A1CF40276005116C7 /* FBPictureView.m */; };
@@ -528,6 +527,7 @@
 		D851746C1D5AD70E005F5722 /* THNSceneCommentTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D851746B1D5AD70E005F5722 /* THNSceneCommentTableViewCell.m */; };
 		D851746F1D5AF586005F5722 /* THNSceneTagsCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D851746E1D5AF586005F5722 /* THNSceneTagsCollectionViewCell.m */; };
 		D8615C551D0FDC4E00C12FA2 /* EditViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D8615C541D0FDC4E00C12FA2 /* EditViewController.m */; };
+		D86809031D622049002714B2 /* FBImageScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = D86809021D622049002714B2 /* FBImageScrollView.m */; };
 		D869BD671D6036A000432423 /* FBAlertViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D869BD411D6036A000432423 /* FBAlertViewController.m */; };
 		D869BD681D6036A000432423 /* FBSheetViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D869BD431D6036A000432423 /* FBSheetViewController.m */; };
 		D869BD691D6036A000432423 /* QrShareSheetViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D869BD451D6036A000432423 /* QrShareSheetViewController.m */; };
@@ -601,8 +601,6 @@
 		D8C690C41D13DFFE0026EAB5 /* FiuHeaderWatchTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D8C690C31D13DFFE0026EAB5 /* FiuHeaderWatchTableViewCell.m */; };
 		D8DDEE101D338D760020FF66 /* FBPopupView.m in Sources */ = {isa = PBXBuildFile; fileRef = D8DDEE0F1D338D760020FF66 /* FBPopupView.m */; };
 		D8E3AEB61CFC9B84006E5E8C /* ClipImageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D8E3AEA91CFC9B84006E5E8C /* ClipImageViewController.m */; };
-		D8E3AEB71CFC9B84006E5E8C /* CreateViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D8E3AEAB1CFC9B84006E5E8C /* CreateViewController.m */; };
-		D8E3AEB81CFC9B84006E5E8C /* CropImageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D8E3AEAD1CFC9B84006E5E8C /* CropImageViewController.m */; };
 		D8E3AEB91CFC9B84006E5E8C /* FiltersViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D8E3AEAF1CFC9B84006E5E8C /* FiltersViewController.m */; };
 		D8E3AEBA1CFC9B84006E5E8C /* LookSceneViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D8E3AEB11CFC9B84006E5E8C /* LookSceneViewController.m */; };
 		D8E3AEBB1CFC9B84006E5E8C /* ReleaseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D8E3AEB31CFC9B84006E5E8C /* ReleaseViewController.m */; };
@@ -671,8 +669,6 @@
 		1F2A8C0E1CF40276005116C7 /* PictureToolViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PictureToolViewController.m; sourceTree = "<group>"; };
 		1F2A8C111CF40276005116C7 /* CameraView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CameraView.h; sourceTree = "<group>"; };
 		1F2A8C121CF40276005116C7 /* CameraView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CameraView.m; sourceTree = "<group>"; };
-		1F2A8C131CF40276005116C7 /* CropImageView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CropImageView.h; sourceTree = "<group>"; };
-		1F2A8C141CF40276005116C7 /* CropImageView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CropImageView.m; sourceTree = "<group>"; };
 		1F2A8C151CF40276005116C7 /* FBFiltersCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FBFiltersCollectionViewCell.h; sourceTree = "<group>"; };
 		1F2A8C161CF40276005116C7 /* FBFiltersCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FBFiltersCollectionViewCell.m; sourceTree = "<group>"; };
 		1F2A8C171CF40276005116C7 /* FBPictureCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FBPictureCollectionViewCell.h; sourceTree = "<group>"; };
@@ -1555,6 +1551,8 @@
 		D851746E1D5AF586005F5722 /* THNSceneTagsCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THNSceneTagsCollectionViewCell.m; sourceTree = "<group>"; };
 		D8615C531D0FDC4E00C12FA2 /* EditViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EditViewController.h; sourceTree = "<group>"; };
 		D8615C541D0FDC4E00C12FA2 /* EditViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EditViewController.m; sourceTree = "<group>"; };
+		D86809011D622049002714B2 /* FBImageScrollView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FBImageScrollView.h; sourceTree = "<group>"; };
+		D86809021D622049002714B2 /* FBImageScrollView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FBImageScrollView.m; sourceTree = "<group>"; };
 		D869BD401D6036A000432423 /* FBAlertViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FBAlertViewController.h; sourceTree = "<group>"; };
 		D869BD411D6036A000432423 /* FBAlertViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FBAlertViewController.m; sourceTree = "<group>"; };
 		D869BD421D6036A000432423 /* FBSheetViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FBSheetViewController.h; sourceTree = "<group>"; };
@@ -1685,10 +1683,6 @@
 		D8DDEE0F1D338D760020FF66 /* FBPopupView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FBPopupView.m; sourceTree = "<group>"; };
 		D8E3AEA81CFC9B84006E5E8C /* ClipImageViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ClipImageViewController.h; sourceTree = "<group>"; };
 		D8E3AEA91CFC9B84006E5E8C /* ClipImageViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ClipImageViewController.m; sourceTree = "<group>"; };
-		D8E3AEAA1CFC9B84006E5E8C /* CreateViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CreateViewController.h; sourceTree = "<group>"; };
-		D8E3AEAB1CFC9B84006E5E8C /* CreateViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CreateViewController.m; sourceTree = "<group>"; };
-		D8E3AEAC1CFC9B84006E5E8C /* CropImageViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CropImageViewController.h; sourceTree = "<group>"; };
-		D8E3AEAD1CFC9B84006E5E8C /* CropImageViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CropImageViewController.m; sourceTree = "<group>"; };
 		D8E3AEAE1CFC9B84006E5E8C /* FiltersViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FiltersViewController.h; sourceTree = "<group>"; };
 		D8E3AEAF1CFC9B84006E5E8C /* FiltersViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FiltersViewController.m; sourceTree = "<group>"; };
 		D8E3AEB01CFC9B84006E5E8C /* LookSceneViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LookSceneViewController.h; sourceTree = "<group>"; };
@@ -1998,8 +1992,6 @@
 			children = (
 				1F2A8C111CF40276005116C7 /* CameraView.h */,
 				1F2A8C121CF40276005116C7 /* CameraView.m */,
-				1F2A8C131CF40276005116C7 /* CropImageView.h */,
-				1F2A8C141CF40276005116C7 /* CropImageView.m */,
 				1F2A8C151CF40276005116C7 /* FBFiltersCollectionViewCell.h */,
 				1F2A8C161CF40276005116C7 /* FBFiltersCollectionViewCell.m */,
 				1F2A8C171CF40276005116C7 /* FBPictureCollectionViewCell.h */,
@@ -2014,6 +2006,8 @@
 				1F2A8C201CF40276005116C7 /* PhotoAlbumsView.m */,
 				1F2A8C211CF40276005116C7 /* PictureView.h */,
 				1F2A8C221CF40276005116C7 /* PictureView.m */,
+				D86809011D622049002714B2 /* FBImageScrollView.h */,
+				D86809021D622049002714B2 /* FBImageScrollView.m */,
 			);
 			path = Creat;
 			sourceTree = "<group>";
@@ -4548,10 +4542,6 @@
 			children = (
 				D8E3AEA81CFC9B84006E5E8C /* ClipImageViewController.h */,
 				D8E3AEA91CFC9B84006E5E8C /* ClipImageViewController.m */,
-				D8E3AEAA1CFC9B84006E5E8C /* CreateViewController.h */,
-				D8E3AEAB1CFC9B84006E5E8C /* CreateViewController.m */,
-				D8E3AEAC1CFC9B84006E5E8C /* CropImageViewController.h */,
-				D8E3AEAD1CFC9B84006E5E8C /* CropImageViewController.m */,
 				D8E3AEB41CFC9B84006E5E8C /* SceneAddViewController.h */,
 				D8E3AEB51CFC9B84006E5E8C /* SceneAddViewController.m */,
 				D8E3AEAE1CFC9B84006E5E8C /* FiltersViewController.h */,
@@ -5055,7 +5045,6 @@
 				1F2A8FDD1CF40277005116C7 /* GoodsTableViewCell.m in Sources */,
 				1F2A90091CF40277005116C7 /* BotView.m in Sources */,
 				1F2A8F751CF40277005116C7 /* FiuSceneRow.m in Sources */,
-				1F2A8F491CF40277005116C7 /* CropImageView.m in Sources */,
 				1F2A90531CF40277005116C7 /* NumView.m in Sources */,
 				1FD59C131D115FD50025A800 /* ProjectViewController.m in Sources */,
 				1F2A90A01CF40277005116C7 /* SubscribePeopleViewController.m in Sources */,
@@ -5161,7 +5150,6 @@
 				D8B855C21D3F6BA10008BD57 /* AddLocationView.m in Sources */,
 				D87B69BF1CC726BA00199EFE /* FBRollImages.m in Sources */,
 				1F2A8F991CF40277005116C7 /* SceneInfoData.m in Sources */,
-				D8E3AEB81CFC9B84006E5E8C /* CropImageViewController.m in Sources */,
 				1F2A8F8E1CF40277005116C7 /* HomeSceneListLocation.m in Sources */,
 				1F2A8FA01CF40277005116C7 /* CommentTableViewCell.m in Sources */,
 				1F2A8FBA1CF40277005116C7 /* CategoryData.m in Sources */,
@@ -5222,6 +5210,7 @@
 				1F2A8F581CF40277005116C7 /* SelectHotFSceneTableViewCell.m in Sources */,
 				D87B69C01CC726BA00199EFE /* GroupHeaderView.m in Sources */,
 				1F2A8F381CF40277005116C7 /* SearchFSceneViewController.m in Sources */,
+				D86809031D622049002714B2 /* FBImageScrollView.m in Sources */,
 				1F2A8F831CF40277005116C7 /* FiuTagTableViewCell.m in Sources */,
 				1F1134B41D1BC34D00DFFA74 /* CollectionViewController.m in Sources */,
 				D8BE89E11D33509400DE5029 /* BrandListModel.m in Sources */,
@@ -5245,7 +5234,6 @@
 				1F2A8FEB1CF40277005116C7 /* DatePickerViewController.m in Sources */,
 				1F2A8FDA1CF40277005116C7 /* GoodsImgCollectionViewCell.m in Sources */,
 				1F2A8F841CF40277005116C7 /* FiuUserInfoTableViewCell.m in Sources */,
-				D8E3AEB71CFC9B84006E5E8C /* CreateViewController.m in Sources */,
 				1F2A8F3D1CF40277005116C7 /* FindGoodsModel.m in Sources */,
 				D869BD691D6036A000432423 /* QrShareSheetViewController.m in Sources */,
 				D8035F2F1CB77D0C001920F9 /* UIImage+Helper.m in Sources */,
@@ -5346,7 +5334,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 9.2;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
-				PROVISIONING_PROFILE = "68229318-888d-4d23-9586-1a46706c4314";
+				PROVISIONING_PROFILE = "38736fb6-f8a9-4075-b98f-85f06063d856";
 				SDKROOT = iphoneos;
 			};
 			name = Debug;
@@ -5384,7 +5372,7 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.2;
 				MTL_ENABLE_DEBUG_INFO = NO;
-				PROVISIONING_PROFILE = "68229318-888d-4d23-9586-1a46706c4314";
+				PROVISIONING_PROFILE = "38736fb6-f8a9-4075-b98f-85f06063d856";
 				SDKROOT = iphoneos;
 				VALIDATE_PRODUCT = YES;
 			};
@@ -5431,7 +5419,7 @@
 				OTHER_LIBTOOLFLAGS = "-all_load";
 				PRODUCT_BUNDLE_IDENTIFIER = com.THN.fineix;
 				PRODUCT_NAME = Fiu;
-				PROVISIONING_PROFILE = "68229318-888d-4d23-9586-1a46706c4314";
+				PROVISIONING_PROFILE = "38736fb6-f8a9-4075-b98f-85f06063d856";
 				RUN_CLANG_STATIC_ANALYZER = NO;
 				USER_HEADER_SEARCH_PATHS = "$(SRCROOT)";
 			};
@@ -5478,7 +5466,7 @@
 				OTHER_LIBTOOLFLAGS = "-all_load";
 				PRODUCT_BUNDLE_IDENTIFIER = com.THN.fineix;
 				PRODUCT_NAME = Fiu;
-				PROVISIONING_PROFILE = "68229318-888d-4d23-9586-1a46706c4314";
+				PROVISIONING_PROFILE = "38736fb6-f8a9-4075-b98f-85f06063d856";
 				RUN_CLANG_STATIC_ANALYZER = NO;
 				USER_HEADER_SEARCH_PATHS = "$(SRCROOT)";
 			};

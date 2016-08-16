@@ -7,8 +7,12 @@
 //
 
 #import "THNDataInfoTableViewCell.h"
+#import "CommentNViewController.h"
 
-@implementation THNDataInfoTableViewCell
+@implementation THNDataInfoTableViewCell {
+    NSString *_sceneId;
+    NSString *_userId;
+}
 
 - (instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier {
     self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
@@ -24,6 +28,8 @@
 - (void)thn_setSceneData:(HomeSceneListRow *)dataModel {
     [self.look setTitle:[NSString stringWithFormat:@"%zi", dataModel.viewCount] forState:(UIControlStateNormal)];
     [self.like setTitle:[NSString stringWithFormat:@"%zi", dataModel.loveCount] forState:(UIControlStateNormal)];
+    _sceneId = [NSString stringWithFormat:@"%zi", dataModel.idField];
+    _userId = [NSString stringWithFormat:@"%zi", dataModel.userId];
 }
 
 #pragma mark - setUI
@@ -113,7 +119,10 @@
 }
 
 - (void)commentsClick:(UIButton *)button {
-    [SVProgressHUD showSuccessWithStatus:@"评论"];
+    CommentNViewController * commentVC = [[CommentNViewController alloc] init];
+    commentVC.targetId = _sceneId;
+    commentVC.sceneUserId = _userId;
+    [self.nav pushViewController:commentVC animated:YES];
 }
 
 - (UIButton *)like {

@@ -270,6 +270,7 @@ static NSString *const URLSendSceneComment = @"/comment/ajax_comment";
     self.view.backgroundColor = [UIColor whiteColor];
     self.navViewTitle.text = NSLocalizedString(@"CommentVcTitle", nil);
     [[UIApplication sharedApplication] setStatusBarHidden:NO withAnimation:(UIStatusBarAnimationSlide)];
+    [[UIApplication sharedApplication] setStatusBarStyle:(UIStatusBarStyleDefault)];
 }
 
 - (void)viewWillDisappear:(BOOL)animated {

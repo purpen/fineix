@@ -27,5 +27,7 @@
 @pro_strong NSMutableArray *rollList;
 @pro_strong NSMutableArray *sceneListMarr;
 @pro_strong NSMutableArray *sceneIdMarr;
+@pro_strong NSMutableArray *userIdMarr;
+@pro_strong NSMutableArray *commentsMarr;
 
 @end

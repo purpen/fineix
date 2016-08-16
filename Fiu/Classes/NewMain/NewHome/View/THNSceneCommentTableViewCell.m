@@ -17,28 +17,30 @@
         self.selectionStyle = UITableViewCellSelectionStyleNone;
         self.backgroundColor = [UIColor whiteColor];
         [self setCellUI];
-        [self getContentWithComment:@"Fynn: 今天的天气真不错啊哈气真不错啊哈气真不错啊哈气真不错啊哈哈哈哈"];
-        CGSize size = [_comment boundingRectWithSize:CGSizeMake(SCREEN_WIDTH - 50, 0)];
-        self.cellHigh = size.height*1.3;
     }
     return self;
 }
 
 #pragma mark - setModel
-- (void)thn_setScenecommentData:(HomeSceneListRow *)commentModel {
-    NSLog(@"－－－－－－－－－－－－－     评论%@", [commentModel.comments valueForKey:@"comment"]);
-//    NSString *comment = [NSString stringWithFormat:@"%@: %@", [commentModel.comments valueForKey:@"userNickname"], [commentModel.comments valueForKey:@"comment"]];
-
-//    [self getContentWithComment:@"Fynn: 今天的天气真不错啊哈哈哈哈"];
-//    CGSize size = [_comment boundingRectWithSize:CGSizeMake(SCREEN_WIDTH - 50, 0)];
-//    self.cellHigh = size.height*1.5;
+- (void)thn_setScenecommentData:(NSDictionary *)commentModel {
+    HomeSceneListComments *model = [[HomeSceneListComments alloc] initWithDictionary:commentModel];
+    [self.headImage sd_setImageWithURL:[NSURL URLWithString:model.userAvatarUrl] forState:(UIControlStateNormal)];
+    NSString *comment = [NSString stringWithFormat:@"%@: %@", model.userNickname, model.content];
+    [self getContentWithComment:comment];
+    CGSize size = [_comment boundingRectWithSize:CGSizeMake(SCREEN_WIDTH - 70, 0)];
     
+    if (size.height < 35.0f) {
+        self.cellHigh = 35.0f;
+    } else {
+        self.cellHigh = size.height;
+    }
 }
 
 //  检索评论中的用户昵称
 - (void)getContentWithComment:(NSString *)content {
     NSMutableParagraphStyle *paragraphStyle = [[NSMutableParagraphStyle alloc] init];
     paragraphStyle.lineSpacing = 5.0f;
+    
     self.comment.attributedText = [[NSAttributedString alloc] initWithString:content
                                                                   attributes:@{(NSString *)kCTForegroundColorAttributeName:(__bridge id)[UIColor colorWithHexString:@"#666666"].CGColor,
                                                                                NSFontAttributeName:[UIFont systemFontOfSize:12],
@@ -69,15 +71,15 @@
     [_headImage mas_makeConstraints:^(MASConstraintMaker *make) {
         make.size.mas_equalTo(CGSizeMake(24, 24));
         make.left.equalTo(_graybackView.mas_left).with.offset(10);
-        make.top.equalTo(_graybackView.mas_top).with.offset(5);
+        make.top.equalTo(_graybackView.mas_top).with.offset(0);
     }];
     
     [self addSubview:self.comment];
     [_comment mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.equalTo(_graybackView).with.offset(40);
         make.right.equalTo(_graybackView).with.offset(-10);
-        make.top.equalTo(_graybackView).with.offset(0);
-        make.bottom.equalTo(_graybackView).with.offset(-5);
+        make.top.equalTo(_graybackView).with.offset(5);
+        make.bottom.equalTo(_graybackView).with.offset(0);
     }];
 }
 
@@ -93,7 +95,7 @@
 - (UIButton *)headImage {
     if (!_headImage) {
         _headImage = [[UIButton alloc] init];
-        _headImage.backgroundColor = [UIColor colorWithHexString:@"#000000"];
+        _headImage.backgroundColor = [UIColor colorWithHexString:@"#FFFFFF"];
         _headImage.layer.cornerRadius = 24/2;
         _headImage.layer.masksToBounds = YES;
     }
@@ -105,6 +107,7 @@
         _comment = [[TTTAttributedLabel alloc] initWithFrame:CGRectMake(0, 0, 0, 0)];
         _comment.numberOfLines = 0;
         _comment.delegate = self;
+        _comment.verticalAlignment = TTTAttributedLabelVerticalAlignmentTop;
         _comment.enabledTextCheckingTypes = NSTextCheckingTypeLink;
         NSDictionary *linkAttributes = @{(NSString *)kCTUnderlineStyleAttributeName:[NSNumber numberWithBool:NO],
                                          (NSString *)kCTFontAttributeName:[UIFont boldSystemFontOfSize:12],
@@ -116,6 +119,7 @@
                                                (NSString *)kCTForegroundColorAttributeName:(__bridge id)[UIColor colorWithHexString:BLACK_COLOR].CGColor
                                                };
         _comment.activeLinkAttributes = activelinkAttributes;
+//        _comment.backgroundColor = [UIColor orangeColor];
     }
     return _comment;
 }
