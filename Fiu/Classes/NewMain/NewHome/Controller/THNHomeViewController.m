@@ -19,9 +19,12 @@
 #import "FBRefresh.h"
 #import "HomeSceneListRow.h"
 #import "CommentRow.h"
+#import "FBSubjectModelRow.h"
+#import "CommentNViewController.h"
 
 static NSString *const URLBannerSlide = @"/gateway/slide";
 static NSString *const URLSceneList = @"/scene_sight/";
+static NSString *const URLSubject = @"/scene_subject/getlist";
 
 static NSString *const themeCellId = @"ThemeCellId";
 static NSString *const userInfoCellId = @"UserInfoCellId";
@@ -29,11 +32,15 @@ static NSString *const sceneImgCellId = @"SceneImgCellId";
 static NSString *const dataInfoCellId = @"DataInfoCellId";
 static NSString *const sceneInfoCellId = @"SceneInfoCellId";
 static NSString *const commentsCellId = @"CommentsCellId";
+static NSString *const twoCommentsCellId = @"TwoCommentsCellId";
 
 @interface THNHomeViewController () {
     NSIndexPath *_selectedIndexPath;
     CGFloat _contentHigh;
     CGFloat _defaultContentHigh;
+    CGFloat _commentHigh;
+    NSString *_sceneId;
+    NSString *_userId;
 }
 
 @end
@@ -51,6 +58,7 @@ static NSString *const commentsCellId = @"CommentsCellId";
     [self thn_setNavigationViewUI];
     [self thn_setHomeViewUI];
     [self thn_networkRollImageData];
+    [self thn_networkSubjectData];
     [self thn_networkSceneListData];
 }
 
@@ -59,7 +67,7 @@ static NSString *const commentsCellId = @"CommentsCellId";
 - (void)thn_networkRollImageData {
     self.rollImgRequest = [FBAPI getWithUrlString:URLBannerSlide requestDictionary:@{@"name":@"app_fiu_product_index_slide", @"size":@"5"} delegate:self];
     [self.rollImgRequest startRequestSuccess:^(FBRequest *request, id result) {
-        NSArray * rollArr = [[result valueForKey:@"data"] valueForKey:@"rows"];
+        NSArray *rollArr = [[result valueForKey:@"data"] valueForKey:@"rows"];
         for (NSDictionary * rollDic in rollArr) {
             RollImageRow * rollModel = [[RollImageRow alloc] initWithDictionary:rollDic];
             [self.rollList addObject:rollModel];
@@ -67,21 +75,44 @@ static NSString *const commentsCellId = @"CommentsCellId";
         [self.homerollView setRollimageView:self.rollList];
         
     } failure:^(FBRequest *request, NSError *error) {
-
         [SVProgressHUD showErrorWithStatus:[error localizedDescription]];
     }];
 }
 
+#pragma mark 主题
+- (void)thn_networkSubjectData {
+    self.subjectRequest = [FBAPI getWithUrlString:URLSubject requestDictionary:@{@"page":@"1", @"size":@"4", @"fine":@"1"} delegate:self];
+    [self.subjectRequest startRequestSuccess:^(FBRequest *request, id result) {
+        NSArray *subArr = [[result valueForKey:@"data"] valueForKey:@"rows"];
+        for (NSDictionary *subDic in subArr) {
+            FBSubjectModelRow *subModel = [[FBSubjectModelRow alloc] initWithDictionary:subDic];
+            [self.subjectMarr addObject:subModel];
+        }
+        
+        if (self.sceneListMarr.count) {
+            NSIndexSet *indexSet = [[NSIndexSet alloc] initWithIndex:0];
+            [self.homeTable reloadSections:indexSet withRowAnimation:UITableViewRowAnimationAutomatic];
+        }
+    
+    } failure:^(FBRequest *request, NSError *error) {
+        [SVProgressHUD showErrorWithStatus:[error localizedDescription]];
+    }];
+}
+
+#pragma mark 情景列表
 - (void)thn_networkSceneListData {
     [SVProgressHUD show];
     self.sceneListRequest = [FBAPI getWithUrlString:URLSceneList requestDictionary:@{@"page":@(self.currentpageNum + 1), @"size":@10, @"sort":@"0"} delegate:self];
     [self.sceneListRequest startRequestSuccess:^(FBRequest *request, id result) {
-        NSArray * sceneArr = [[result valueForKey:@"data"] valueForKey:@"rows"];
+        NSArray *sceneArr = [[result valueForKey:@"data"] valueForKey:@"rows"];
         for (NSDictionary * sceneDic in sceneArr) {
-            HomeSceneListRow * homeSceneModel = [[HomeSceneListRow alloc] initWithDictionary:sceneDic];
+            HomeSceneListRow *homeSceneModel = [[HomeSceneListRow alloc] initWithDictionary:sceneDic];
             [self.sceneListMarr addObject:homeSceneModel];
             [self.sceneIdMarr addObject:[NSString stringWithFormat:@"%zi", homeSceneModel.idField]];
+            [self.userIdMarr addObject:[NSString stringWithFormat:@"%zi", homeSceneModel.userId]];
         }
+        [self.commentsMarr addObjectsFromArray:[sceneArr valueForKey:@"comments"]];
+        
         [self.homeTable reloadData];
         self.currentpageNum = [[[result valueForKey:@"data"] valueForKey:@"current_page"] integerValue];
         self.totalPageNum = [[[result valueForKey:@"data"] valueForKey:@"total_page"] integerValue];
@@ -147,10 +178,14 @@ static NSString *const commentsCellId = @"CommentsCellId";
 
 - (void)loadNewData {
     self.currentpageNum = 0;
+    [self.rollList removeAllObjects];
     [self.sceneListMarr removeAllObjects];
     [self.sceneIdMarr removeAllObjects];
+    [self.commentsMarr removeAllObjects];
+    [self.subjectMarr removeAllObjects];
     [self thn_networkSceneListData];
     [self thn_networkRollImageData];
+    [self thn_networkSubjectData];
 }
 
 #pragma mark - 初始化数据
@@ -159,6 +194,13 @@ static NSString *const commentsCellId = @"CommentsCellId";
         _rollList = [NSMutableArray array];
     }
     return _rollList;
+}
+
+- (NSMutableArray *)subjectMarr {
+    if (!_subjectMarr) {
+        _subjectMarr = [NSMutableArray array];
+    }
+    return _subjectMarr;
 }
 
 - (NSMutableArray *)sceneListMarr {
@@ -173,6 +215,20 @@ static NSString *const commentsCellId = @"CommentsCellId";
         _sceneIdMarr = [NSMutableArray array];
     }
     return _sceneIdMarr;
+}
+
+- (NSMutableArray *)userIdMarr {
+    if (!_userIdMarr) {
+        _userIdMarr = [NSMutableArray array];
+    }
+    return _userIdMarr;
+}
+
+- (NSMutableArray *)commentsMarr {
+    if (!_commentsMarr) {
+        _commentsMarr = [NSMutableArray array];
+    }
+    return _commentsMarr;
 }
 
 #pragma mark - 设置视图UI
@@ -212,7 +268,7 @@ static NSString *const commentsCellId = @"CommentsCellId";
     if (section == 0) {
         return 1;
     } else {
-        return 5;
+        return 6;
     }
     return 0;
 }
@@ -221,6 +277,10 @@ static NSString *const commentsCellId = @"CommentsCellId";
     if (indexPath.section == 0) {
         HomeThemeTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:themeCellId];
         cell = [[HomeThemeTableViewCell alloc] initWithStyle:(UITableViewCellStyleDefault) reuseIdentifier:themeCellId];
+        if (self.subjectMarr.count) {
+            [cell setThemeModelArr:self.subjectMarr];
+        }
+        cell.nav = self.navigationController;
         return cell;
         
     } else {
@@ -246,6 +306,7 @@ static NSString *const commentsCellId = @"CommentsCellId";
             if (self.sceneListMarr.count) {
                 [cell thn_setSceneData:self.sceneListMarr[indexPath.section - 1]];
             }
+            cell.nav = self.navigationController;
             return cell;
             
         } else if (indexPath.row == 3) {
@@ -256,15 +317,37 @@ static NSString *const commentsCellId = @"CommentsCellId";
                 _contentHigh = cell.cellHigh;
                 _defaultContentHigh = cell.defaultCellHigh;
             }
+            cell.nav = self.navigationController;
             return cell;
             
         } else if (indexPath.row == 4) {
-            THNSceneCommentTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:commentsCellId];
-            cell = [[THNSceneCommentTableViewCell alloc] initWithStyle:(UITableViewCellStyleDefault) reuseIdentifier:commentsCellId];
-            if (self.sceneListMarr.count) {
-                [cell thn_setSceneContentData:self.sceneListMarr[indexPath.section - 1]];
+            if ([self.commentsMarr[indexPath.section - 1] count] > 0) {
+                THNSceneCommentTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:commentsCellId];
+                cell = [[THNSceneCommentTableViewCell alloc] initWithStyle:(UITableViewCellStyleDefault) reuseIdentifier:commentsCellId];
+                [cell thn_setScenecommentData:self.commentsMarr[indexPath.section - 1][0]];
+                _commentHigh = cell.cellHigh;
+                return cell;
+            
+            } else {
+                UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:commentsCellId];
+                cell = [[UITableViewCell alloc] initWithStyle:(UITableViewCellStyleDefault) reuseIdentifier:commentsCellId];
+                return cell;
             }
-            return cell;
+            
+        } else if (indexPath.row == 5) {
+            if ([self.commentsMarr[indexPath.section - 1] count] > 1) {
+                THNSceneCommentTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:twoCommentsCellId];
+                cell = [[THNSceneCommentTableViewCell alloc] initWithStyle:(UITableViewCellStyleDefault) reuseIdentifier:twoCommentsCellId];
+                [cell thn_setScenecommentData:self.commentsMarr[indexPath.section - 1][1]];
+                _commentHigh = cell.cellHigh;
+                return cell;
+                
+            } else {
+                UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:twoCommentsCellId];
+                cell = [[UITableViewCell alloc] initWithStyle:(UITableViewCellStyleDefault) reuseIdentifier:twoCommentsCellId];
+                return cell;
+            }
+            
         }
     }
     return nil;
@@ -288,7 +371,17 @@ static NSString *const commentsCellId = @"CommentsCellId";
                 return _defaultContentHigh;
             }
         } else if (indexPath.row == 4) {
-            return 100;
+            if ([self.commentsMarr[indexPath.section -1] count] > 0) {
+                return _commentHigh;
+            } else {
+                return 0.01f;
+            }
+        } else if (indexPath.row == 5) {
+            if ([self.commentsMarr[indexPath.section -1] count] > 1) {
+                return _commentHigh;
+            } else {
+                return 0.01f;
+            }
         }
     }
     return 0;
@@ -322,7 +415,11 @@ static NSString *const commentsCellId = @"CommentsCellId";
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section {
-    return 0.01;
+    if (section == 0) {
+        return 0.01;
+    } else {
+        return 15;
+    }
 }
 
 -(void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -337,15 +434,20 @@ static NSString *const commentsCellId = @"CommentsCellId";
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     if (indexPath.section != 0) {
         if (indexPath.row == 3) {
-            if (_selectedIndexPath && _selectedIndexPath.section == indexPath.section) {
-                _selectedIndexPath = nil;
-            } else {
-                _selectedIndexPath = indexPath;
+            if (_contentHigh > 70.0f) {
+                if (_selectedIndexPath && _selectedIndexPath.section == indexPath.section) {
+                    _selectedIndexPath = nil;
+                } else {
+                    _selectedIndexPath = indexPath;
+                }
+                [tableView reloadRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
             }
-            [tableView reloadRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
             
-        } else if (indexPath.row == 4) {
-            [SVProgressHUD showSuccessWithStatus:@"打开情景评论"];
+        } else if (indexPath.row == 4 || indexPath.row == 5) {
+            CommentNViewController * commentVC = [[CommentNViewController alloc] init];
+            commentVC.targetId = self.sceneIdMarr[indexPath.section - 1];
+            commentVC.sceneUserId = self.userIdMarr[indexPath.section - 1];
+            [self.navigationController pushViewController:commentVC animated:YES];
         }
     }
 }
@@ -361,11 +463,10 @@ static NSString *const commentsCellId = @"CommentsCellId";
 }
 
 - (void)thn_leftBarItemSelected {
-    [SVProgressHUD showSuccessWithStatus:@"搜索"];
-//    SearchViewController * searchVC = [[SearchViewController alloc] init];
-//    searchVC.searchType = 0;
-//    searchVC.beginSearch = YES;
-//    [self.navigationController pushViewController:searchVC animated:YES];
+    SearchViewController * searchVC = [[SearchViewController alloc] init];
+    searchVC.searchType = 0;
+    searchVC.beginSearch = YES;
+    [self.navigationController pushViewController:searchVC animated:YES];
 }
 
 - (void)thn_rightBarItemSelected {

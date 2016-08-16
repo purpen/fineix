@@ -12,7 +12,14 @@
 #import <SVProgressHUD/SVProgressHUD.h>
 #import "MJRefresh.h"
 
-@interface SearchViewController : FBViewController <SearchMenuBtnSelectedDelegate, FBSearchDelegate, UITableViewDelegate, UITableViewDataSource, UICollectionViewDelegate, UICollectionViewDataSource>
+@interface SearchViewController : FBViewController <
+    SearchMenuBtnSelectedDelegate,
+    FBSearchDelegate,
+    UITableViewDelegate,
+    UITableViewDataSource,
+    UICollectionViewDelegate,
+    UICollectionViewDataSource
+>
 
 @pro_strong FBRequest                       *   searchListRequest;
 @pro_assign NSInteger                           currentpageNum;

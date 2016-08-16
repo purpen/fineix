@@ -21,8 +21,6 @@
 @implementation FBLoadPhoto
 
 #pragma mark - 获取相片
-
-//  单例
 + (FBLoadPhoto *)shareLoad {
     static FBLoadPhoto * load;
     static dispatch_once_t onceToken;

@@ -13,6 +13,7 @@
 
 @interface THNDataInfoTableViewCell : UITableViewCell
 
+@pro_strong UINavigationController *nav;
 @pro_strong UIButton *look;
 @pro_strong UIButton *like;
 @pro_strong UIButton *comments;

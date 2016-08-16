@@ -9,6 +9,7 @@
 #import "THNSceneInfoTableViewCell.h"
 #import "THNSceneTagsCollectionViewCell.h"
 #import "UILable+Frame.h"
+#import "SearchViewController.h"
 
 static NSString *const sceneTagsCellId = @"SceneTagsCellId";
 
@@ -43,19 +44,32 @@ static NSString *const sceneTagsCellId = @"SceneTagsCellId";
 
 //  检索描述内容中的标签
 - (void)getContentWithTags:(NSString *)content {
-    self.content.attributedText = [[NSAttributedString alloc] initWithString:content];
+    NSMutableParagraphStyle *paragraphStyle = [[NSMutableParagraphStyle alloc] init];
+    paragraphStyle.lineSpacing = 5.0f;
+    self.content.attributedText = [[NSAttributedString alloc] initWithString:content
+                                                                  attributes:@{(NSString *)kCTForegroundColorAttributeName:(__bridge id)[UIColor colorWithHexString:@"#666666"].CGColor,
+                                                                               NSFontAttributeName:[UIFont systemFontOfSize:12],
+                                                                               NSParagraphStyleAttributeName:paragraphStyle}];
+    
     NSRegularExpression *regex = [NSRegularExpression regularExpressionWithPattern:@"\\#[^\\s]*" options:0 error:nil];
     NSArray *arr = [regex matchesInString:content options:0 range:NSMakeRange(0, content.length)];
     for (NSUInteger idx = 0; idx < arr.count; ++ idx) {
         NSTextCheckingResult *result = arr[idx];
         NSString *str = [content substringWithRange:result.range];
-#pragma unused(str)
-        [self.content addLinkToURL:[NSURL URLWithString:[NSString stringWithFormat:@"scheme://tag=22"]] withRange:result.range];
+        NSString *urlStr = [NSString stringWithFormat:@"scheme://tag=%@", str];
+        NSString *tagStr = [urlStr stringByAddingPercentEscapesUsingEncoding:(NSUTF8StringEncoding)];
+        [self.content addLinkToURL:[NSURL URLWithString:tagStr] withRange:result.range];
     }
 }
 
 - (void)attributedLabel:(TTTAttributedLabel *)label didSelectLinkWithURL:(NSURL *)url {
-    NSLog(@"－－＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝ %@", url);
+    NSString *tagUrl = [[url absoluteString] stringByReplacingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+    NSString *tag = [tagUrl substringFromIndex:14];
+    SearchViewController * searchVC = [[SearchViewController alloc] init];
+    searchVC.searchType = 0;
+    searchVC.beginSearch = YES;
+    searchVC.keyword = tag;
+    [self.nav pushViewController:searchVC animated:YES];
 }
 
 #pragma mark - setUI
@@ -102,8 +116,13 @@ static NSString *const sceneTagsCellId = @"SceneTagsCellId";
         _content.enabledTextCheckingTypes = NSTextCheckingTypeLink;
         _content.font = [UIFont systemFontOfSize:12];
         NSDictionary *linkAttributes = @{(NSString *)kCTUnderlineStyleAttributeName:[NSNumber numberWithBool:NO],
-                                        (NSString *)kCTForegroundColorAttributeName:(__bridge id)[UIColor colorWithHexString:MAIN_COLOR].CGColor};
+                                        (NSString *)kCTForegroundColorAttributeName:(__bridge id)[UIColor colorWithHexString:MAIN_COLOR].CGColor
+                                         };
         _content.linkAttributes = linkAttributes;
+        NSDictionary *activelinkAttributes = @{(NSString *)kCTUnderlineStyleAttributeName:[NSNumber numberWithBool:YES],
+                                         (NSString *)kCTForegroundColorAttributeName:(__bridge id)[UIColor colorWithHexString:MAIN_COLOR].CGColor
+                                         };
+        _content.activeLinkAttributes = activelinkAttributes;
     }
     return _content;
 }

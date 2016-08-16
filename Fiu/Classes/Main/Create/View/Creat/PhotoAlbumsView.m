@@ -40,7 +40,6 @@
         UIView * footView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 100)];
         footView.backgroundColor = [UIColor blackColor];
         _photoAlbumsTableView.tableFooterView = footView;
-        
     }
     return _photoAlbumsTableView;
 }

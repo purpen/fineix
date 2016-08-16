@@ -95,6 +95,10 @@
 
 - (void)goChooseText {
     FBEditShareInfoViewController * chooseTextVC = [[FBEditShareInfoViewController alloc] init];
+    if (self.title.text.length > 0) {
+        chooseTextVC.titleText.text = [self.title.text stringByReplacingOccurrencesOfString:@" " withString:@""];
+        chooseTextVC.desText.text = self.content.text;
+    }
     chooseTextVC.modalPresentationStyle = UIModalPresentationOverCurrentContext;
     [self.vc presentViewController:chooseTextVC animated:YES completion:nil];
     
@@ -116,20 +120,18 @@
         self.suTitle.hidden = NO;
         self.addText.hidden = YES;
         
-        NSString * str = [title substringToIndex:10];
-        _titleStr = [NSString stringWithFormat:@"    %@  ", str];
-        self.title.text = _titleStr;
+        NSString * titleStr = [NSString stringWithFormat:@"    %@  ", [title substringToIndex:10]];
+        self.title.text = titleStr;
         
-        NSString * suTitle = [title substringFromIndex:10];
-        _suTitleStr = [NSString stringWithFormat:@"    %@  ", suTitle];
-        self.suTitle.text = _suTitleStr;
+        NSString * suTitleStr = [NSString stringWithFormat:@"    %@  ", [title substringFromIndex:10]];
+        self.suTitle.text = suTitleStr;
         
         [self.suTitle mas_updateConstraints:^(MASConstraintMaker *make) {
-            make.width.equalTo(@([self getTitleSizeWidth:_suTitleStr].width));
+            make.width.equalTo(@([self getTitleSizeWidth:suTitleStr].width));
         }];
         
         [self.title mas_updateConstraints:^(MASConstraintMaker *make) {
-            make.width.equalTo(@([self getTitleSizeWidth:_titleStr].width));
+            make.width.equalTo(@([self getTitleSizeWidth:titleStr].width));
             make.bottom.equalTo(_sceneImgView.mas_bottom).with.offset(-48);
         }];
         

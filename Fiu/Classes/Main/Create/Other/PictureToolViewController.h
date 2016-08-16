@@ -11,7 +11,4 @@
 
 @interface PictureToolViewController : UINavigationController
 
-@pro_strong NSString *fSceneId;
-@pro_strong NSString *fSceneTitle;
-
 @end

@@ -16,10 +16,10 @@
 @pro_strong UITableView         *   photoAlbumsTableView;    //     相册列表
 @pro_strong NSMutableArray      *   photoAlbums;             //     相薄
 
-@pro_strong UIButton            *   photoAlbumsBtn;          //     ->相薄的相册按钮
-@pro_strong UIButton            *   nextBtn;                 //     ->下一步的按钮
-@pro_strong UICollectionView    *   collectionView;          //     ->相册列表
-@pro_strong UIImageView         *   showImageView;           //     ->展示的图片视图
+@pro_strong UIButton            *   photoAlbumsBtn;          //     相薄的相册按钮
+@pro_strong UIButton            *   nextBtn;                 //     下一步的按钮
+@pro_strong UICollectionView    *   collectionView;          //     相册列表
+@pro_strong UIImageView         *   showImageView;           //     展示的图片视图
 @pro_strong NSMutableArray      *   photosMarr;
 
 @end

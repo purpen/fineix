@@ -48,7 +48,8 @@
 /*
  *  打开相薄按钮
  */
-- (void)addOpenPhotoAlbumsButton;
+- (void)addOpenPhotoAlbumsButton:(NSString *)title;
+- (void)getPhotoAlbumsTitleSize:(NSString *)title;
 
 /*
  *  取消按钮

@@ -19,13 +19,17 @@
 @pro_strong FBRollImages *homerollView;
 @pro_strong FBRequest *rollImgRequest;
 @pro_strong UITableView *homeTable;
+@pro_strong FBRequest *subjectRequest;
 @pro_strong FBRequest *sceneListRequest;
 @pro_assign NSInteger currentpageNum;
 @pro_assign NSInteger totalPageNum;
 @pro_strong GroupHeaderView *headerView;
 
 @pro_strong NSMutableArray *rollList;
+@pro_strong NSMutableArray *subjectMarr;
 @pro_strong NSMutableArray *sceneListMarr;
 @pro_strong NSMutableArray *sceneIdMarr;
+@pro_strong NSMutableArray *userIdMarr;
+@pro_strong NSMutableArray *commentsMarr;
 
 @end

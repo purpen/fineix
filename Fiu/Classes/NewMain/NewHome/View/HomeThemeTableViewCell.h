@@ -15,6 +15,10 @@
     UICollectionViewDelegateFlowLayout
 >
 
+@pro_strong UINavigationController *nav;
 @pro_strong UICollectionView *themeCollectionView;
+@pro_strong NSMutableArray *themeMarr;
+
+- (void)setThemeModelArr:(NSMutableArray *)data;
 
 @end

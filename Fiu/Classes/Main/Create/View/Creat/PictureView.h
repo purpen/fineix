@@ -11,11 +11,15 @@
 #import "Fiu.h"
 #import "PhotoAlbumsView.h"
 
-@interface PictureView : UIView <UICollectionViewDataSource, UICollectionViewDelegate, UIGestureRecognizerDelegate>
+@interface PictureView : UIView <
+    UICollectionViewDataSource,
+    UICollectionViewDelegate,
+    UIGestureRecognizerDelegate
+>
 
 @pro_strong UIView  * navView;
 @pro_strong UIView              *   createView;         //  创建场景页面
-@pro_strong UICollectionView    *   pictureView;        //  照片列表
+@pro_strong UICollectionView    *   photosView;         //  照片列表
 @pro_strong UIImageView         *   photoImgView;       //  选中显示的照片
 @pro_strong UIButton            *   recoveryFrameBtn;   //  恢复视图位置
 @pro_strong PhotoAlbumsView     *   photoAlbumsView;    //  相薄页面

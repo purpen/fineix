@@ -218,7 +218,7 @@ static NSString *const URLListText = @"/scene_context/getlist";
     if (!_keyboardToolbar) {
         _keyboardToolbar = [[FBKeyboradToolbar alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 44)];
         _keyboardToolbar.thn_delegate = self;
-        [_keyboardToolbar thn_setRightBarItemContent:@"Fiu App上线"];
+        [_keyboardToolbar thn_setRightBarItemContent:@"FiuApp上线"];
     }
     return _keyboardToolbar;
 }
@@ -229,8 +229,10 @@ static NSString *const URLListText = @"/scene_context/getlist";
 }
 
 - (void)thn_keyboardRightBarItemAction:(NSString *)text {
-    self.desText.text = text;
-    [SVProgressHUD showInfoWithStatus:[NSString stringWithFormat:@"插入标签：%@", text]];
+    NSMutableString *desStr = [[NSMutableString alloc] initWithString:self.desText.text];
+    [desStr appendString:text];
+//    [String1 appendFormat:[NSString stringWithFormat:@", I will be adding some character"]];
+    self.desText.text = desStr;
 }
 
 #pragma mark - 分类列表视图

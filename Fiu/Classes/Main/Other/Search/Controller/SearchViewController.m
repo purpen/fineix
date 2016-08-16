@@ -44,18 +44,14 @@ static NSString *const URLSearchList = @"/search/getlist";
     if (self.beginSearch == YES) {
         [self.searchView.searchInputBox becomeFirstResponder];
     }
-
 }
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
     [self setSearchVcUI];
-    
     if (self.keyword.length > 0) {
         self.searchView.searchInputBox.text = self.keyword;
     }
-    
     [self searchRequest:self.searchType withKeyword:self.keyword];
 }
 

@@ -7,7 +7,6 @@
 //
 
 #import "ReleaseViewController.h"
-#import "CreateViewController.h"
 #import "HomeViewController.h"
 #import "LookSceneViewController.h"
 #import "IQKeyboardManager.h"
@@ -51,7 +50,7 @@ static NSString *const URLGetUserDesTags = @"/gateway/fetch_chinese_word";
 
 #pragma mark 发布场景
 - (void)networkNewSceneData {
-    NSString *title = self.addContent.title.text;
+    NSString *title = [self.addContent.title.text stringByReplacingOccurrencesOfString:@" " withString:@""];
     NSString *des = self.addContent.content.text;
     NSString *address = self.addLocaiton.locationLab.text;
     NSString *city = self.addLocaiton.cityLab.text;
@@ -99,6 +98,9 @@ static NSString *const URLGetUserDesTags = @"/gateway/fetch_chinese_word";
         
         [self.releaseSceneRequest startRequestSuccess:^(FBRequest *request, id result) {
             NSLog(@"－－－－－－－－%@", result);
+            if ([[result valueForKey:@"success"] isEqualToNumber:@1]) {
+                [self dismissViewControllerAnimated:YES completion:nil];
+            }
             [SVProgressHUD dismiss];
 
         } failure:^(FBRequest *request, NSError *error) {
