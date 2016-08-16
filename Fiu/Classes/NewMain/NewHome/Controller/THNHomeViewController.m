@@ -19,10 +19,12 @@
 #import "FBRefresh.h"
 #import "HomeSceneListRow.h"
 #import "CommentRow.h"
+#import "FBSubjectModelRow.h"
 #import "CommentNViewController.h"
 
 static NSString *const URLBannerSlide = @"/gateway/slide";
 static NSString *const URLSceneList = @"/scene_sight/";
+static NSString *const URLSubject = @"/scene_subject/getlist";
 
 static NSString *const themeCellId = @"ThemeCellId";
 static NSString *const userInfoCellId = @"UserInfoCellId";
@@ -56,6 +58,7 @@ static NSString *const twoCommentsCellId = @"TwoCommentsCellId";
     [self thn_setNavigationViewUI];
     [self thn_setHomeViewUI];
     [self thn_networkRollImageData];
+    [self thn_networkSubjectData];
     [self thn_networkSceneListData];
 }
 
@@ -64,7 +67,7 @@ static NSString *const twoCommentsCellId = @"TwoCommentsCellId";
 - (void)thn_networkRollImageData {
     self.rollImgRequest = [FBAPI getWithUrlString:URLBannerSlide requestDictionary:@{@"name":@"app_fiu_product_index_slide", @"size":@"5"} delegate:self];
     [self.rollImgRequest startRequestSuccess:^(FBRequest *request, id result) {
-        NSArray * rollArr = [[result valueForKey:@"data"] valueForKey:@"rows"];
+        NSArray *rollArr = [[result valueForKey:@"data"] valueForKey:@"rows"];
         for (NSDictionary * rollDic in rollArr) {
             RollImageRow * rollModel = [[RollImageRow alloc] initWithDictionary:rollDic];
             [self.rollList addObject:rollModel];
@@ -72,11 +75,31 @@ static NSString *const twoCommentsCellId = @"TwoCommentsCellId";
         [self.homerollView setRollimageView:self.rollList];
         
     } failure:^(FBRequest *request, NSError *error) {
-
         [SVProgressHUD showErrorWithStatus:[error localizedDescription]];
     }];
 }
 
+#pragma mark 主题
+- (void)thn_networkSubjectData {
+    self.subjectRequest = [FBAPI getWithUrlString:URLSubject requestDictionary:@{@"page":@"1", @"size":@"4", @"fine":@"1"} delegate:self];
+    [self.subjectRequest startRequestSuccess:^(FBRequest *request, id result) {
+        NSArray *subArr = [[result valueForKey:@"data"] valueForKey:@"rows"];
+        for (NSDictionary *subDic in subArr) {
+            FBSubjectModelRow *subModel = [[FBSubjectModelRow alloc] initWithDictionary:subDic];
+            [self.subjectMarr addObject:subModel];
+        }
+        
+        if (self.sceneListMarr.count) {
+            NSIndexSet *indexSet = [[NSIndexSet alloc] initWithIndex:0];
+            [self.homeTable reloadSections:indexSet withRowAnimation:UITableViewRowAnimationAutomatic];
+        }
+    
+    } failure:^(FBRequest *request, NSError *error) {
+        [SVProgressHUD showErrorWithStatus:[error localizedDescription]];
+    }];
+}
+
+#pragma mark 情景列表
 - (void)thn_networkSceneListData {
     [SVProgressHUD show];
     self.sceneListRequest = [FBAPI getWithUrlString:URLSceneList requestDictionary:@{@"page":@(self.currentpageNum + 1), @"size":@10, @"sort":@"0"} delegate:self];
@@ -159,8 +182,10 @@ static NSString *const twoCommentsCellId = @"TwoCommentsCellId";
     [self.sceneListMarr removeAllObjects];
     [self.sceneIdMarr removeAllObjects];
     [self.commentsMarr removeAllObjects];
+    [self.subjectMarr removeAllObjects];
     [self thn_networkSceneListData];
     [self thn_networkRollImageData];
+    [self thn_networkSubjectData];
 }
 
 #pragma mark - 初始化数据
@@ -169,6 +194,13 @@ static NSString *const twoCommentsCellId = @"TwoCommentsCellId";
         _rollList = [NSMutableArray array];
     }
     return _rollList;
+}
+
+- (NSMutableArray *)subjectMarr {
+    if (!_subjectMarr) {
+        _subjectMarr = [NSMutableArray array];
+    }
+    return _subjectMarr;
 }
 
 - (NSMutableArray *)sceneListMarr {
@@ -245,6 +277,10 @@ static NSString *const twoCommentsCellId = @"TwoCommentsCellId";
     if (indexPath.section == 0) {
         HomeThemeTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:themeCellId];
         cell = [[HomeThemeTableViewCell alloc] initWithStyle:(UITableViewCellStyleDefault) reuseIdentifier:themeCellId];
+        if (self.subjectMarr.count) {
+            [cell setThemeModelArr:self.subjectMarr];
+        }
+        cell.nav = self.navigationController;
         return cell;
         
     } else {

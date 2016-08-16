@@ -506,6 +506,9 @@
 		D851746F1D5AF586005F5722 /* THNSceneTagsCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D851746E1D5AF586005F5722 /* THNSceneTagsCollectionViewCell.m */; };
 		D8615C551D0FDC4E00C12FA2 /* EditViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D8615C541D0FDC4E00C12FA2 /* EditViewController.m */; };
 		D86809031D622049002714B2 /* FBImageScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = D86809021D622049002714B2 /* FBImageScrollView.m */; };
+		D868090A1D6301C1002714B2 /* FBSubjectModel.m in Sources */ = {isa = PBXBuildFile; fileRef = D86809051D6301C1002714B2 /* FBSubjectModel.m */; };
+		D868090B1D6301C1002714B2 /* FBSubjectModelData.m in Sources */ = {isa = PBXBuildFile; fileRef = D86809071D6301C1002714B2 /* FBSubjectModelData.m */; };
+		D868090C1D6301C1002714B2 /* FBSubjectModelRow.m in Sources */ = {isa = PBXBuildFile; fileRef = D86809091D6301C1002714B2 /* FBSubjectModelRow.m */; };
 		D869BD671D6036A000432423 /* FBAlertViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D869BD411D6036A000432423 /* FBAlertViewController.m */; };
 		D869BD681D6036A000432423 /* FBSheetViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D869BD431D6036A000432423 /* FBSheetViewController.m */; };
 		D869BD691D6036A000432423 /* QrShareSheetViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D869BD451D6036A000432423 /* QrShareSheetViewController.m */; };
@@ -1495,6 +1498,12 @@
 		D8615C541D0FDC4E00C12FA2 /* EditViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EditViewController.m; sourceTree = "<group>"; };
 		D86809011D622049002714B2 /* FBImageScrollView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FBImageScrollView.h; sourceTree = "<group>"; };
 		D86809021D622049002714B2 /* FBImageScrollView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FBImageScrollView.m; sourceTree = "<group>"; };
+		D86809041D6301C1002714B2 /* FBSubjectModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FBSubjectModel.h; sourceTree = "<group>"; };
+		D86809051D6301C1002714B2 /* FBSubjectModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FBSubjectModel.m; sourceTree = "<group>"; };
+		D86809061D6301C1002714B2 /* FBSubjectModelData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FBSubjectModelData.h; sourceTree = "<group>"; };
+		D86809071D6301C1002714B2 /* FBSubjectModelData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FBSubjectModelData.m; sourceTree = "<group>"; };
+		D86809081D6301C1002714B2 /* FBSubjectModelRow.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FBSubjectModelRow.h; sourceTree = "<group>"; };
+		D86809091D6301C1002714B2 /* FBSubjectModelRow.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FBSubjectModelRow.m; sourceTree = "<group>"; };
 		D869BD401D6036A000432423 /* FBAlertViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FBAlertViewController.h; sourceTree = "<group>"; };
 		D869BD411D6036A000432423 /* FBAlertViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FBAlertViewController.m; sourceTree = "<group>"; };
 		D869BD421D6036A000432423 /* FBSheetViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FBSheetViewController.h; sourceTree = "<group>"; };
@@ -4050,6 +4059,12 @@
 		D851742D1D54AC58005F5722 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				D86809041D6301C1002714B2 /* FBSubjectModel.h */,
+				D86809051D6301C1002714B2 /* FBSubjectModel.m */,
+				D86809061D6301C1002714B2 /* FBSubjectModelData.h */,
+				D86809071D6301C1002714B2 /* FBSubjectModelData.m */,
+				D86809081D6301C1002714B2 /* FBSubjectModelRow.h */,
+				D86809091D6301C1002714B2 /* FBSubjectModelRow.m */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -4714,6 +4729,7 @@
 				D869BD6B1D6036A000432423 /* CommentNViewController.m in Sources */,
 				1F6CA2711D5C468A00DFB79E /* THNInputCodeViewController.m in Sources */,
 				1F2A905C1CF40277005116C7 /* MentionedViewController.m in Sources */,
+				D868090B1D6301C1002714B2 /* FBSubjectModelData.m in Sources */,
 				1F2A8F6E1CF40277005116C7 /* FiuSceneData.m in Sources */,
 				1F2A8FCA1CF40277005116C7 /* GoodsRow.m in Sources */,
 				1F2A8FC31CF40277005116C7 /* CommentModelUser.m in Sources */,
@@ -4779,6 +4795,7 @@
 				1F2A8FA91CF40277005116C7 /* FBBuyGoodsViewController.m in Sources */,
 				1F45A7041D2DF708009D7EE1 /* SceneCollectionViewCell.m in Sources */,
 				1F2A90A41CF40277005116C7 /* SearchViewController.m in Sources */,
+				D868090C1D6301C1002714B2 /* FBSubjectModelRow.m in Sources */,
 				1F6CA27F1D5C54D700DFB79E /* THNTFCodeView.m in Sources */,
 				1FCDCC821D066D2700C92E78 /* SexSheetViewController.m in Sources */,
 				D869BD711D6036A000432423 /* CommentUser.m in Sources */,
@@ -4926,7 +4943,6 @@
 				1F2A8FDD1CF40277005116C7 /* GoodsTableViewCell.m in Sources */,
 				1F2A90091CF40277005116C7 /* BotView.m in Sources */,
 				1F2A8F751CF40277005116C7 /* FiuSceneRow.m in Sources */,
-				1F2A8F491CF40277005116C7 /* CropImageView.m in Sources */,
 				1FD59C131D115FD50025A800 /* ProjectViewController.m in Sources */,
 				1F2A90A01CF40277005116C7 /* SubscribePeopleViewController.m in Sources */,
 				1F2A90251CF40277005116C7 /* IdentityTagModel.m in Sources */,
@@ -5031,6 +5047,7 @@
 				D87B69BF1CC726BA00199EFE /* FBRollImages.m in Sources */,
 				1F2A8F991CF40277005116C7 /* SceneInfoData.m in Sources */,
 				1F2A8F8E1CF40277005116C7 /* HomeSceneListLocation.m in Sources */,
+				D868090A1D6301C1002714B2 /* FBSubjectModel.m in Sources */,
 				1F2A8FA01CF40277005116C7 /* CommentTableViewCell.m in Sources */,
 				1F2A8FBA1CF40277005116C7 /* CategoryData.m in Sources */,
 				D8B855CE1D3F7F1F0008BD57 /* AddContentView.m in Sources */,

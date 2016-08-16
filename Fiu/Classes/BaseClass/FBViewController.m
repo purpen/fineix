@@ -131,7 +131,7 @@ static NSString *const URLUserIsLogin = @"/user/user_info";
 - (UIView *)navView {
     if (!_navView) {
         _navView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 64)];
-        _navView.backgroundColor = [UIColor whiteColor];
+        _navView.backgroundColor = [UIColor blackColor];
         
         [_navView addSubview:self.navViewTitle];
 
@@ -145,7 +145,7 @@ static NSString *const URLUserIsLogin = @"/user/user_info";
 - (UILabel *)navViewTitle {
     if (!_navViewTitle) {
         _navViewTitle = [[UILabel alloc] initWithFrame:CGRectMake(44, 20, SCREEN_WIDTH - 88, 44)];
-        _navViewTitle.textColor = [UIColor blackColor];
+        _navViewTitle.textColor = [UIColor whiteColor];
         if (IS_iOS9) {
             _navViewTitle.font = [UIFont fontWithName:@"PingFangSC-Light" size:17];
         } else {
