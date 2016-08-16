@@ -77,12 +77,10 @@ static NSString *const RegisterCodeURL = @"/auth/register";//手机号注册
     }];
 }
 
-- (IBAction)see:(id)sender {
-    self.pwdTF.secureTextEntry = NO;
-}
 
-- (IBAction)lock:(id)sender {
-    self.pwdTF.secureTextEntry = YES;
+- (IBAction)lock:(UIButton*)sender {
+    sender.selected = !sender.selected;
+    self.pwdTF.secureTextEntry = sender.selected;
 }
 
 @end

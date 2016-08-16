@@ -7,6 +7,7 @@
 //
 
 #import "AllSceneCollectionViewCell.h"
+#import "UIView+FSExtension.h"
 
 @implementation AllSceneCollectionViewCell
 - (instancetype)initWithFrame:(CGRect)frame {
@@ -34,7 +35,7 @@
 #pragma mark - 情景图片
 - (UIImageView *)sceneImage {
     if (!_sceneImage) {
-        _sceneImage = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, (SCREEN_WIDTH - 15)/2, (SCREEN_WIDTH - 15)/2 * 1.77)];
+        _sceneImage = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, self.width, self.height)];
         _sceneImage.contentMode = UIViewContentModeScaleAspectFill;
         _sceneImage.clipsToBounds  = YES;
         _sceneImage.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"Defaul_Bg_180"]];

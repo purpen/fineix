@@ -34,7 +34,7 @@
 #import "UITabBar+badge.h"
 #import "ScenarioNonView.h"
 #import "ServiceViewController.h"
-#import "CollectionViewController.h"
+#import "THNCollectionViewController.h"
 
 
 @interface MyPageViewController ()<FBNavigationBarItemsDelegate,UICollectionViewDelegate,UICollectionViewDataSource>
@@ -82,8 +82,6 @@
     [_chanelV.fansView addGestureRecognizer:scenarioTap3];
     [self.view addSubview:self.myCollectionView];
 }
-
-
 
 -(void)signleTap:(UITapGestureRecognizer*)sender{
     //跳转到我的主页的情景的界面
@@ -251,7 +249,7 @@
                 }else{
                     make.size.mas_equalTo(CGSizeMake(15, 15));
                 }
-                make.right.mas_equalTo(cell.btn1.mas_right).with.offset(0);
+                make.right.mas_equalTo(cell.btn1.mas_right).with.offset(9);
                 make.top.mas_equalTo(cell.btn1.mas_top).with.offset(0/667.0*SCREEN_HEIGHT);
             }];
         }
@@ -303,7 +301,7 @@
  */
 #pragma mark - 收藏按钮
 -(void)collectionBtnbtn:(UIButton*)sender{
-    CollectionViewController *vc = [[CollectionViewController alloc] init];
+    THNCollectionViewController *vc = [[THNCollectionViewController alloc] init];
     [self.navigationController pushViewController:vc animated:YES];
 }
 

@@ -247,7 +247,7 @@
         [_focusOnBtn setTitle:@"已关注" forState:UIControlStateSelected];
         _focusOnBtn.layer.masksToBounds = YES;
         _focusOnBtn.layer.cornerRadius = 3;
-        _focusOnBtn.titleLabel.font = [UIFont systemFontOfSize:14];
+        _focusOnBtn.titleLabel.font = [UIFont systemFontOfSize:13];
         _focusOnBtn.backgroundColor = [UIColor colorWithHexString:@"#BE8914"];
         [_focusOnBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
         [_focusOnBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateSelected];
@@ -262,7 +262,7 @@
         _directMessages.layer.masksToBounds = YES;
         _directMessages.layer.cornerRadius = 3;
         [_directMessages setTitle:@"私信" forState:UIControlStateNormal];
-        _directMessages.titleLabel.font = [UIFont systemFontOfSize:14];
+        _directMessages.titleLabel.font = [UIFont systemFontOfSize:13];
         _directMessages.titleEdgeInsets = UIEdgeInsetsMake(0, 2, 0, 0);
         _directMessages.imageEdgeInsets = UIEdgeInsetsMake(0, -2, 0, 0);
         _directMessages.backgroundColor = [UIColor blackColor];

@@ -67,14 +67,15 @@ static NSString *getList = @"/category/getlist";
                                                                               @"domain" : @13
                                                                               } delegate:self];
     [request startRequestSuccess:^(FBRequest *request, id result) {
+        NSLog(@"result  %@",result);
         NSArray *rowsAry = result[@"data"][@"rows"];
         self.modelAry = [THNTopicsModel mj_objectArrayWithKeyValuesArray:rowsAry];
         for (int i = 1; i <= self.modelAry.count; i ++) {
             
             float w = ([UIScreen mainScreen].bounds.size.width - 40 -10) * 0.5;
             float h = 0.092 * [UIScreen mainScreen].bounds.size.height;
-            float x = 20 + (i % 2) * (w + 10);
-            float y = 175 + (i % 5) * (h + 10);
+            float x = 20 + ((i - 1) % 2) * (w + 10);
+            float y = 175 + ((i - 1) / 2) * (h + 10);
             
             THNTopicView *view = [THNTopicView viewFromXib];
             view.frame = CGRectMake(x, y,w , h);
@@ -140,22 +141,16 @@ static NSString *getList = @"/category/getlist";
         }
         [str appendString:@","];
     }
-    
-    
-    [SVProgressHUD showWithMaskType:SVProgressHUDMaskTypeClear];
     //开始传送数据
     NSDictionary *params = @{
                              @"interest_scene_cate":str
                              };
     FBRequest *request = [FBAPI postWithUrlString:@"/my/update_profile" requestDictionary:params delegate:self];
     [request startRequestSuccess:^(FBRequest *request, id result) {
-        NSString * message = [result objectForKey:@"message"];
         if ([[result objectForKey:@"success"] isEqualToNumber:@1]) {
-            [SVProgressHUD showSuccessWithStatus:message];
             THNFocusViewController *vc = [[THNFocusViewController alloc] init];
             [self.navigationController pushViewController:vc animated:YES];
         } else {
-            [SVProgressHUD showInfoWithStatus:message];
         }
     } failure:^(FBRequest *request, NSError *error) {
         
