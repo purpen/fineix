@@ -81,23 +81,25 @@
         
         NSArray *users = result[@"data"][@"users"];
         self.modelAry = [THNFocusUserModel mj_objectArrayWithKeyValuesArray:users];
-        
+  
         for (int i = 0; i < 6; i ++) {
             [self.oneModelAry addObject:self.modelAry[i]];
         }
+        [self.aryAry addObject:self.oneModelAry];
+
         for (int i = 6; i < 12; i ++) {
             [self.twoModelAry addObject:self.modelAry[i]];
         }
+        [self.aryAry addObject:self.twoModelAry];
+
         for (int i = 12; i < 17; i ++) {
             [self.threeModelAry addObject:self.modelAry[i]];
         }
-        
-        [self.aryAry addObject:self.oneModelAry];
-        [self.aryAry addObject:self.twoModelAry];
         [self.aryAry addObject:self.threeModelAry];
         
-        
-        for (int i = 0; i < 3; i ++) {
+        NSInteger n = self.modelAry.count / 6;
+        NSInteger m = self.modelAry.count % 6 ? 1 : 0;
+        for (int i = 0; i < (m + n); i ++) {
             
             float w = [UIScreen mainScreen].bounds.size.width;
             float h = self.contentScrollView.height;

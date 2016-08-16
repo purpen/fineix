@@ -168,12 +168,6 @@
         }else{
             [SVProgressHUD showErrorWithStatus:@"关注失败"];
         }
-    }else if ([request.flag isEqualToString:@"/follow/ajax_cancel_follow"]){
-        if ([result objectForKey:@"success"]) {
-            [SVProgressHUD showSuccessWithStatus:@"取消关注"];
-        }else{
-            [SVProgressHUD showErrorWithStatus:@"连接失败"];
-        }
     }
 }
 
@@ -191,6 +185,7 @@
 -(UITableView *)mytableView{
     if (!_mytableView) {
         _mytableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 64, SCREEN_WIDTH, SCREEN_HEIGHT-64) style:UITableViewStylePlain];
+        _mytableView.backgroundColor = [UIColor colorWithHexString:@"#F7F7F7"];
         self.mytableView.delegate = self;
         self.mytableView.dataSource = self;
         self.mytableView.separatorStyle = UITableViewCellSeparatorStyleNone;
@@ -235,6 +230,7 @@
 -(void)clickFocusBtn:(UIButton*)sender{
     
     if (sender.selected) {
+        
         MyFansActionSheetViewController *sheetVC = [[MyFansActionSheetViewController alloc] init];
         UserInfo *model = _modelAry[sender.tag];
         [sheetVC setUIWithModel:model];
@@ -265,8 +261,17 @@
     model.is_love = 0;
     [self.mytableView reloadRowsAtIndexPaths:[NSArray arrayWithObjects:[NSIndexPath indexPathForRow:sender.tag inSection:0], nil] withRowAnimation:UITableViewRowAnimationNone];
     FBRequest *request = [FBAPI postWithUrlString:@"/follow/ajax_cancel_follow" requestDictionary:@{@"follow_id":model.userId} delegate:self];
-    request.flag = @"/follow/ajax_cancel_follow";
-    [request startRequest];
+    [request startRequestSuccess:^(FBRequest *request, id result) {
+        if ([result objectForKey:@"success"]) {
+            [SVProgressHUD showSuccessWithStatus:@"取消关注"];
+            FocusOnTableViewCell *cell = [self.mytableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:sender.tag inSection:0]];
+            cell.focusOnBtn.backgroundColor = [UIColor whiteColor];
+            cell.focusOnBtn.layer.borderWidth = 1;
+            cell.focusOnBtn.layer.borderColor = [UIColor lightGrayColor].CGColor;
+        }else{
+            [SVProgressHUD showErrorWithStatus:@"连接失败"];
+        }
+    } failure:nil];
 }
 
 -(void)clickCancelBtn:(UIButton*)sender{

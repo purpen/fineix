@@ -107,7 +107,7 @@
                             <fontDescription key="fontDescription" type="system" pointSize="10"/>
                             <inset key="titleEdgeInsets" minX="3" minY="0.0" maxX="0.0" maxY="0.0"/>
                             <inset key="imageEdgeInsets" minX="-2" minY="0.0" maxX="0.0" maxY="0.0"/>
-                            <state key="normal" title="情景" image="my_ scenario"/>
+                            <state key="normal" title="情境" image="my_ scenario"/>
                         </button>
                     </subviews>
                     <color key="backgroundColor" red="0.74509803919999995" green="0.53725490200000003" blue="0.078431372550000003" alpha="1" colorSpace="calibratedRGB"/>

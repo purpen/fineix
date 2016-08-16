@@ -329,7 +329,7 @@ static NSString *sceneCellId = @"SceneCollectionViewCell";
 -(void)netGetData{
     FBRequest *request = [FBAPI postWithUrlString:@"/user/user_info" requestDictionary:@{@"user_id":self.userId} delegate:self];
     [request startRequestSuccess:^(FBRequest *request, id result) {
-//        NSLog(@" hhhhhhhh   %@",result); 
+        NSLog(@" hhhhhhhh   %@",result); 
         NSDictionary *dataDict = result[@"data"];
         _chanelV.scenarioNumLabel.text = [NSString stringWithFormat:@"%@",dataDict[@"scene_count"]];
         _chanelV.fieldNumLabel.text = [NSString stringWithFormat:@"%@",dataDict[@"sight_count"]];
@@ -466,7 +466,7 @@ static NSString *sceneCellId = @"SceneCollectionViewCell";
         }else if(section == 1){
             return UIEdgeInsetsMake(0, 5, 0, 5);
         }else if (section == 2){
-            return UIEdgeInsetsMake(5, 5, 0, 5);
+            return UIEdgeInsetsMake(15, 15, 1, 15);
         }
     }
     return UIEdgeInsetsMake(0, 0, 0, 0);
@@ -807,7 +807,7 @@ static NSString *sceneCellId = @"SceneCollectionViewCell";
 }
 
 -(CGFloat)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout minimumLineSpacingForSectionAtIndex:(NSInteger)section{
-    return 2.5;
+    return 15;
 }
 
 -(CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath{

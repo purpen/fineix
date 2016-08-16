@@ -19,7 +19,7 @@
 #import "UserInfoEntity.h"
 
 
-@interface MyFansViewController ()<FBNavigationBarItemsDelegate,UITableViewDelegate,UITableViewDataSource,FBRequestDelegate>
+@interface MyFansViewController ()<THNNavigationBarItemsDelegate,UITableViewDelegate,UITableViewDataSource,FBRequestDelegate>
 {
     NSMutableArray *_modelAry;
     int _page;
@@ -186,6 +186,7 @@
 -(UITableView *)mytableView{
     if (!_mytableView) {
         _mytableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 64, SCREEN_WIDTH, SCREEN_HEIGHT-64) style:UITableViewStylePlain];
+        _mytableView.backgroundColor = [UIColor colorWithHexString:@"#F7F7F7"];
         self.mytableView.delegate = self;
         self.mytableView.dataSource = self;
         self.mytableView.separatorStyle = UITableViewCellSeparatorStyleNone;
@@ -269,8 +270,15 @@
     }
     [self.mytableView reloadRowsAtIndexPaths:[NSArray arrayWithObjects:[NSIndexPath indexPathForRow:sender.tag inSection:0], nil] withRowAnimation:UITableViewRowAnimationNone];
     FBRequest *request = [FBAPI postWithUrlString:@"/follow/ajax_cancel_follow" requestDictionary:@{@"follow_id":model.userId} delegate:self];
-    request.flag = @"/follow/ajax_cancel_follow";
-    [request startRequest];
+    [request startRequestSuccess:^(FBRequest *request, id result) {
+        if ([result objectForKey:@"success"]) {
+            [SVProgressHUD showSuccessWithStatus:@"取消关注"];
+//            FocusOnTableViewCell *cell = [self.mytableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:sender.tag inSection:0]];
+            
+        }else{
+            [SVProgressHUD showErrorWithStatus:@"连接失败"];
+        }
+    } failure:nil];
 }
 
 -(void)clickCancelBtn:(UIButton*)sender{

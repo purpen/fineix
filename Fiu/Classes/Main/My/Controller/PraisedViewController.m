@@ -140,6 +140,10 @@ static NSString *sceneCollectionCellId = @"SceneCollectionViewCell";
     return self.sceneListMarr.count;
 }
 
+-(UIEdgeInsets)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout insetForSectionAtIndex:(NSInteger)section{
+    return UIEdgeInsetsMake(15, 15, 1, 15);
+}
+
 -(UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath{
     SceneCollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:sceneCollectionCellId forIndexPath:indexPath];
     if (self.sceneListMarr.count) {
@@ -149,7 +153,7 @@ static NSString *sceneCollectionCellId = @"SceneCollectionViewCell";
 }
 
 -(CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath{
-    return CGSizeMake((SCREEN_WIDTH-15)/2, 320/667.0*SCREEN_HEIGHT);
+    return CGSizeMake((SCREEN_WIDTH - 15 * 3) * 0.5, 0.25 * SCREEN_HEIGHT);
 }
 
 -(void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath{
@@ -158,12 +162,9 @@ static NSString *sceneCollectionCellId = @"SceneCollectionViewCell";
     [self.navigationController pushViewController:sceneInfoVC animated:YES];
 }
 
--(UIEdgeInsets)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout insetForSectionAtIndex:(NSInteger)section{
-    return UIEdgeInsetsMake(0, 5, 0, 5);
-}
 
 -(CGFloat)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout minimumLineSpacingForSectionAtIndex:(NSInteger)section{
-    return 2.5;
+    return 15;
 }
 
 #pragma mark - 设置Nav

@@ -121,7 +121,7 @@
         shadow.startPoint = CGPointMake(0, 0);
         shadow.endPoint = CGPointMake(0, 0.8);
         shadow.colors = @[(__bridge id)[UIColor clearColor].CGColor,
-                          (__bridge id)[UIColor blackColor].CGColor];
+                          (__bridge id)[UIColor whiteColor].CGColor];
         shadow.locations = @[@(0.8f), @(2.5f)];
         shadow.frame = CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_WIDTH);
         [_bgImageView.layer addSublayer:shadow];
@@ -205,7 +205,7 @@
 -(UILabel *)idTagsLabel{
     if (!_idTagsLabel) {
         _idTagsLabel = [[UILabel alloc] init];
-        _idTagsLabel = [[UILabel alloc] init];
+        _idTagsLabel.textColor = [UIColor whiteColor];
         if (IS_iOS9) {
             _idTagsLabel.font = [UIFont fontWithName:@"PingFangSC-Light" size:13];
         } else {
@@ -221,6 +221,7 @@
 -(UIView *)lineView{
     if (!_lineView) {
         _lineView = [[UIView alloc] init];
+        _lineView.backgroundColor = [UIColor whiteColor];
     }
     return _lineView;
 }
@@ -228,6 +229,7 @@
 -(UILabel *)userProfile{
     if (!_userProfile) {
         _userProfile = [[UILabel alloc] init];
+        _userProfile.textColor = [UIColor whiteColor];
         if (IS_iOS9) {
             _userProfile.font = [UIFont fontWithName:@"PingFangSC-Light" size:13];
         } else {
@@ -244,6 +246,7 @@
 -(UILabel *)userLevelLabel{
     if (!_userLevelLabel) {
         _userLevelLabel = [[UILabel alloc] init];
+        _userLevelLabel.textColor = [UIColor whiteColor];
         if (IS_iOS9) {
             _userLevelLabel.font = [UIFont fontWithName:@"PingFangSC-Light" size:13];
         } else {
@@ -260,7 +263,7 @@
 -(UILabel *)nickName{
     if (!_nickName) {
         _nickName = [[UILabel alloc] init];
-        _nickName.textColor = [UIColor blackColor];
+        _nickName.textColor = [UIColor whiteColor];
         if (IS_iOS9) {
             _nickName.font = [UIFont fontWithName:@"PingFangSC-Light" size:14];
         } else {
