@@ -133,10 +133,16 @@
     [UIApplication sharedApplication].statusBarStyle = UIStatusBarStyleDefault;
     self.delegate = self;
     [self addNavLogoImgisTransparent:YES];
-    [self addBarItemLeftBarButton:@"" image:@"Page 1" isTransparent:YES];
+    [self addBarItemLeftBarButton:@"" image:@"my_riLi" isTransparent:YES];
+    [self addBarItemRightBarButton:@"" image:@"my_set" isTransparent:YES];
     //网络请求
     [self netGetData];
     self.tabBarController.tabBar.hidden = NO;
+}
+
+-(void)rightBarItemSelected{
+    SystemSettingViewController *vc = [[SystemSettingViewController alloc] init];
+    [self.navigationController pushViewController:vc animated:YES];
 }
 
 -(void)netGetData{
@@ -209,7 +215,7 @@
     if (section == 0) {
         return UIEdgeInsetsMake(0, 0, 0, 0);
     }else{
-        return UIEdgeInsetsMake(3, 5, 0, 5);
+        return UIEdgeInsetsMake(0, 5, 0, 5);
     }
 }
 
@@ -271,13 +277,11 @@
         [cell.btn1 addTarget:self action:@selector(orderBtn:) forControlEvents:UIControlEventTouchUpInside];
         [cell.btn2 addTarget:self action:@selector(messageBtn:) forControlEvents:UIControlEventTouchUpInside];
         [cell.btn3 addTarget:self action:@selector(subscribeBtn:) forControlEvents:UIControlEventTouchUpInside];
-        [cell.btn4 addTarget:self action:@selector(praiseBtn:) forControlEvents:UIControlEventTouchUpInside];
-        [cell.btn5 addTarget:self action:@selector(collectionBtnbtn:) forControlEvents:UIControlEventTouchUpInside];
-        [cell.btn6 addTarget:self action:@selector(integralBtn:) forControlEvents:UIControlEventTouchUpInside];
-        [cell.btn7 addTarget:self action:@selector(giftBtn:) forControlEvents:UIControlEventTouchUpInside];
-        [cell.btn8 addTarget:self action:@selector(shippingAddressBtn:) forControlEvents:UIControlEventTouchUpInside];
-        [cell.btn9 addTarget:self action:@selector(serviceBtn:) forControlEvents:UIControlEventTouchUpInside];
-        [cell.btn10 addTarget:self action:@selector(collectionBtn:) forControlEvents:UIControlEventTouchUpInside];
+        [cell.btn4 addTarget:self action:@selector(collectionBtnbtn:) forControlEvents:UIControlEventTouchUpInside];
+        [cell.btn6 addTarget:self action:@selector(praiseBtn:) forControlEvents:UIControlEventTouchUpInside];
+        [cell.btn7 addTarget:self action:@selector(integralBtn:) forControlEvents:UIControlEventTouchUpInside];
+        [cell.btn8 addTarget:self action:@selector(giftBtn:) forControlEvents:UIControlEventTouchUpInside];
+        [cell.btn9 addTarget:self action:@selector(shippingAddressBtn:) forControlEvents:UIControlEventTouchUpInside];
         return cell;
     }
     else if(indexPath.section == 3){
@@ -332,8 +336,8 @@
 }
 
 -(void)leftBarItemSelected{
-    FindeFriendViewController *vc = [[FindeFriendViewController alloc] init];
-    [self.navigationController pushViewController:vc animated:YES];
+//    FindeFriendViewController *vc = [[FindeFriendViewController alloc] init];
+//    [self.navigationController pushViewController:vc animated:YES];
 }
 
 -(void)optionBtn:(UIButton*)sender{
@@ -344,14 +348,14 @@
 -(CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath{
     if (indexPath.section == 0) {
         if (indexPath.row == 0) {
-            return CGSizeMake(SCREEN_WIDTH, SCREEN_WIDTH);
+            return CGSizeMake(SCREEN_WIDTH, SCREEN_WIDTH - 20);
         }
     }
     if (indexPath.section == 1) {
         return CGSizeMake(SCREEN_WIDTH, 60/667.0*SCREEN_HEIGHT);
     }
     if (indexPath.section == 2) {
-        return CGSizeMake(SCREEN_WIDTH, 388*0.5/667.0*SCREEN_HEIGHT);
+        return CGSizeMake(SCREEN_WIDTH, 368*0.5/667.0*SCREEN_HEIGHT);
     }
     if (indexPath.section == 3) {
         return CGSizeMake(SCREEN_HEIGHT, 200);

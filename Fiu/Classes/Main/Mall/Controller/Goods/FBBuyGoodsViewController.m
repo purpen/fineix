@@ -8,7 +8,7 @@
 
 #import "FBBuyGoodsViewController.h"
 #import "GoodsSceneCollectionViewCell.h"
-#import "FBLoginRegisterViewController.h"
+#import "THNLoginRegisterViewController.h"
 #import "FBGoodsInfoViewController.h"
 
 @interface FBBuyGoodsViewController ()

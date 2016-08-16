@@ -14,7 +14,7 @@
 #import "WeiboSDK.h"
 #import <TencentOpenAPI/QQApiInterface.h>
 #import "ProjectModel.h"
-#import "FBLoginRegisterViewController.h"
+#import "THNLoginRegisterViewController.h"
 #import "FiuSceneViewController.h"
 #import "UIImageView+WebCache.h"
 
@@ -217,7 +217,7 @@ static NSString *const ShareURL = @"http://m.taihuoniao.com/guide/app_about";
     {
         //如果没有登录就提示用户登录
         UIStoryboard *loginStory = [UIStoryboard storyboardWithName:@"LoginRegisterController" bundle:[NSBundle mainBundle]];
-        FBLoginRegisterViewController *loginSignupVC = [loginStory instantiateViewControllerWithIdentifier:@"FBLoginRegisterViewController"];
+        THNLoginRegisterViewController *loginSignupVC = [[THNLoginRegisterViewController alloc] init];
         UINavigationController *navi = [[UINavigationController alloc] initWithRootViewController:loginSignupVC];
         [self presentViewController:navi animated:YES completion:nil];
     }

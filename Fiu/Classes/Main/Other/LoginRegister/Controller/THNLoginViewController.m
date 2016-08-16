@@ -20,6 +20,7 @@
 #import "WXApi.h"
 #import "WeiboSDK.h"
 #import <TencentOpenAPI/QQApiInterface.h>
+#import "BindIngViewController.h"
 
 @interface THNLoginViewController ()
 @property (weak, nonatomic) IBOutlet UITextField *phoneTF;
@@ -172,6 +173,8 @@ static NSString *const thirdRegister = @"/auth/third_sign";//第三方登录接�
 
 #pragma mark -第三方登录成功后取到用户信息
 -(void)afterTheSuccessOfTheThirdPartyToRegisterToGetUserInformation:(UMSocialAccountEntity *)snsAccount type:(NSNumber *)type{
+    
+    
     UMSocialConfig *h = [[UMSocialConfig alloc] init];
     h.hiddenLoadingHUD = YES;
     NSString *oid;
@@ -209,10 +212,10 @@ static NSString *const thirdRegister = @"/auth/third_sign";//第三方登录接�
         }else{
             [SVProgressHUD dismiss];
             //跳转到绑定手机号界面
-            //            BindIngViewController *bing = [[BindIngViewController alloc] init];
-            //            bing.snsAccount = snsAccount;
-            //            bing.type = type;
-            //            [self.navigationController pushViewController:bing animated:YES];
+            BindIngViewController *bing = [[BindIngViewController alloc] init];
+            bing.snsAccount = snsAccount;
+            bing.type = type;
+            [self.navigationController pushViewController:bing animated:YES];
             //如果用户不存在,提示用户是否进行绑定
         }
     } failure:^(FBRequest *request, NSError *error) {

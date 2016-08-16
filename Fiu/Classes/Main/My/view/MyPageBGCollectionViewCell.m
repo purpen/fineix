@@ -206,7 +206,6 @@
     if (!_idTagsLabel) {
         _idTagsLabel = [[UILabel alloc] init];
         _idTagsLabel = [[UILabel alloc] init];
-        _idTagsLabel.textColor = [UIColor whiteColor];
         if (IS_iOS9) {
             _idTagsLabel.font = [UIFont fontWithName:@"PingFangSC-Light" size:13];
         } else {
@@ -222,7 +221,6 @@
 -(UIView *)lineView{
     if (!_lineView) {
         _lineView = [[UIView alloc] init];
-        _lineView.backgroundColor = [UIColor whiteColor];
     }
     return _lineView;
 }
@@ -230,7 +228,6 @@
 -(UILabel *)userProfile{
     if (!_userProfile) {
         _userProfile = [[UILabel alloc] init];
-        _userProfile.textColor = [UIColor whiteColor];
         if (IS_iOS9) {
             _userProfile.font = [UIFont fontWithName:@"PingFangSC-Light" size:13];
         } else {
@@ -247,7 +244,6 @@
 -(UILabel *)userLevelLabel{
     if (!_userLevelLabel) {
         _userLevelLabel = [[UILabel alloc] init];
-        _userLevelLabel.textColor = [UIColor whiteColor];
         if (IS_iOS9) {
             _userLevelLabel.font = [UIFont fontWithName:@"PingFangSC-Light" size:13];
         } else {
@@ -264,7 +260,7 @@
 -(UILabel *)nickName{
     if (!_nickName) {
         _nickName = [[UILabel alloc] init];
-        _nickName.textColor = [UIColor whiteColor];
+        _nickName.textColor = [UIColor blackColor];
         if (IS_iOS9) {
             _nickName.font = [UIFont fontWithName:@"PingFangSC-Light" size:14];
         } else {
