@@ -74,6 +74,11 @@
     [self.navigationController pushViewController:addVC animated:YES];
 }
 
+- (void)setNavItemAction:(BOOL)action {
+    self.cancelBtn.hidden = action;
+    self.nextBtn.hidden = action;
+}
+
 - (void)setViewUI {
     [self.view addSubview:self.pictureView];
     [self.pictureView addSubview:self.clipImageView];
@@ -360,6 +365,13 @@
                 self.gripView.transform = CGAffineTransformIdentity;
                 self.gripView.transform = CGAffineTransformMakeRotation(topFrame.origin.y == 0 ? 0 : (M_PI * (180)/180.0));
             }];
+            
+            if (topFrame.origin.y == 0) {
+                [self setNavItemAction:NO];
+            } else {
+                [self setNavItemAction:YES];
+            }
+            
             break;
         }
         case UIGestureRecognizerStateBegan:
@@ -412,6 +424,12 @@
         self.gripView.transform = CGAffineTransformIdentity;
         self.gripView.transform = CGAffineTransformMakeRotation(topFrame.origin.y == 0 ? 0 : (M_PI * (180)/180.0));
     }];
+    
+    if (topFrame.origin.y == 0) {
+        [self setNavItemAction:NO];
+    } else {
+        [self setNavItemAction:YES];
+    }
 }
 
 #pragma mark - 停止运行相机

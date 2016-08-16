@@ -31,7 +31,7 @@
     //  添加删除线
     [attributedStr addAttribute:NSStrikethroughStyleAttributeName value:[NSNumber numberWithInteger:NSUnderlineStyleSingle] range:NSMakeRange(0,attributedStr.length)];
     self.goodsMarketPrice.attributedText = attributedStr;
-    self.likeNumLab.text = [NSString stringWithFormat:@"%zi",model.loveCount];
+//    self.likeNumLab.text = [NSString stringWithFormat:@"%zi",model.loveCount];
 }
 
 #pragma mark - 
@@ -60,21 +60,21 @@
     [self addSubview:self.goodsMarketPrice];
     [_goodsMarketPrice mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.equalTo(_goodsNewPrice.mas_right).with.offset(1);
-        make.bottom.equalTo(_goodsNewPrice.mas_bottom).with.offset(0);
+        make.bottom.equalTo(_goodsNewPrice.mas_bottom).with.offset(-2);
     }];
-    
-    [self addSubview:self.likeNumLab];
-    [_likeNumLab mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.centerY.equalTo(_goodsNewPrice);
-        make.right.equalTo(self.mas_right).with.offset(-10);
-    }];
-    
-    [self addSubview:self.likeIcon];
-    [_likeIcon mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.size.mas_equalTo(CGSizeMake(10,9));
-        make.centerY.equalTo(_likeNumLab);
-        make.right.equalTo(_likeNumLab.mas_left).with.offset(-3);
-    }];
+
+//    [self addSubview:self.likeNumLab];
+//    [_likeNumLab mas_makeConstraints:^(MASConstraintMaker *make) {
+//        make.centerY.equalTo(_goodsNewPrice);
+//        make.right.equalTo(self.mas_right).with.offset(-10);
+//    }];
+//    
+//    [self addSubview:self.likeIcon];
+//    [_likeIcon mas_makeConstraints:^(MASConstraintMaker *make) {
+//        make.size.mas_equalTo(CGSizeMake(10,9));
+//        make.centerY.equalTo(_likeNumLab);
+//        make.right.equalTo(_likeNumLab.mas_left).with.offset(-3);
+//    }];
     
     [self addSubview:self.lineLab];
     [_lineLab mas_makeConstraints:^(MASConstraintMaker *make) {

@@ -100,7 +100,7 @@
 - (UIView *)navView {
     if (!_navView) {
         _navView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 45)];
-        _navView.backgroundColor = [UIColor colorWithHexString:pictureNavColor alpha:1];
+        _navView.backgroundColor = [UIColor colorWithHexString:@"#000000" alpha:1];
     }
     return _navView;
 }

@@ -108,7 +108,7 @@ static NSString *const URLUserAddGoods = @"/scene_product/add";
 #pragma mark - 底部选项工具栏
 - (FBFootView *)footView {
     if (!_footView) {
-        NSArray * arr = [NSArray arrayWithObjects:NSLocalizedString(@"tag", nil), NSLocalizedString(@"filter", nil), nil];
+        NSArray * arr = [NSArray arrayWithObjects:NSLocalizedString(@"marker", nil), NSLocalizedString(@"filter", nil), nil];
         _footView = [[FBFootView alloc] init];
         _footView.backgroundColor = [UIColor colorWithHexString:@"#222222"];
         _footView.titleArr = arr;
@@ -117,7 +117,6 @@ static NSString *const URLUserAddGoods = @"/scene_product/add";
         _footView.titleNormalColor = [UIColor whiteColor];
         _footView.titleSeletedColor = [UIColor colorWithHexString:fineixColor alpha:1];
         [_footView addFootViewButton];
-        [_footView showLineWithButton];
         _footView.delegate = self;
     }
     return _footView;
@@ -133,11 +132,11 @@ static NSString *const URLUserAddGoods = @"/scene_product/add";
 }
 
 - (void)showFiltersViewFrame:(NSInteger)index {
-    [UIView animateWithDuration:0.3
+    [UIView animateWithDuration:0.5f
                           delay:0
-         usingSpringWithDamping:2.0f
-          initialSpringVelocity:1.0f
-                        options:(UIViewAnimationOptionLayoutSubviews)
+         usingSpringWithDamping:10.0f
+          initialSpringVelocity:5.0f
+                        options:(UIViewAnimationOptionOverrideInheritedDuration)
                      animations:^{
         [self.filtersView mas_updateConstraints:^(MASConstraintMaker *make) {
             make.left.equalTo(self.view.mas_left).with.offset(SCREEN_WIDTH * index);
@@ -147,9 +146,11 @@ static NSString *const URLUserAddGoods = @"/scene_product/add";
         }];
                          
         [self.view layoutIfNeeded];
+                         
     } completion:nil];
 }
 
+#pragma mark - 标记视图
 - (UIButton *)bottomBtn {
     if (!_bottomBtn) {
         _bottomBtn = [[UIButton alloc] init];
@@ -193,13 +194,12 @@ static NSString *const URLUserAddGoods = @"/scene_product/add";
 
 
 #pragma mark - 标记产品信息视图
-- (MarkGoodsView *)markView {
-    if (!_markView) {
-        _markView = [[MarkGoodsView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT)];
-        [_markView.goodsBtn addTarget:self action:@selector(markGoodsClick) forControlEvents:(UIControlEventTouchUpInside)];
-        [_markView.urlBtn addTarget:self action:@selector(markUrlClick) forControlEvents:(UIControlEventTouchUpInside)];
+- (THNMarkGoodsView *)markGoodsView {
+    if (!_markGoodsView) {
+        _markGoodsView = [[THNMarkGoodsView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT)];
+        [_markGoodsView.chooseGoods addTarget:self action:@selector(markGoodsClick) forControlEvents:(UIControlEventTouchUpInside)];
     }
-    return _markView;
+    return _markGoodsView;
 }
 
 - (void)markGoodsClick {
@@ -209,7 +209,7 @@ static NSString *const URLUserAddGoods = @"/scene_product/add";
         if (self.goodsIdData.count == 0) {
             _idx = 391;
         }
-        
+        NSLog(@"＝＝＝＝＝＝＝＝ %@", imgUrl);
         [self addMarkGoodsImg:imgUrl withImgW:imgW withImgH:imgH];
         [self.goodsIdData addObject:ids];
         NSString * pri = [NSString stringWithFormat:@"￥%@",price];
@@ -224,43 +224,14 @@ static NSString *const URLUserAddGoods = @"/scene_product/add";
         [tagDataDict setObject:imgUrl forKey:@"img"];
         [self.userAddGoodsMarr addObject:tagDataDict];
     };
-
-}
-
-- (void)markUrlClick {
-    AddUrlViewController * addUrlVC = [[AddUrlViewController alloc] init];
-    [self presentViewController:addUrlVC animated:YES completion:nil];
-    addUrlVC.findGodosBlock = ^(NSString * title, NSString * price, NSString * ids) {
-        if (self.goodsIdData.count == 0) {
-            _idx = 391;
-        }
-        [self.goodsIdData addObject:ids];
-        [self addUserGoodsTagWithTitle:title withPrice:price withType:1 withGoodsId:ids];
-        _urlGoods = YES;
-    };
     
-    addUrlVC.userAddGoodsBlock = ^(NSDictionary * dict) {
-        _title = [dict valueForKey:@"title"];
-        _price = [dict valueForKey:@"sale_price"];
-        _imgUrl = [dict valueForKey:@"cover_url"];
-        
-        [self.goodsTitleData addObject:_title];
-        [self.goodsPriceData addObject:_price];
-        
-        NSMutableDictionary * tagDataDict = [NSMutableDictionary dictionary];
-        [tagDataDict setObject:_title forKey:@"title"];
-        [tagDataDict setObject:_price forKey:@"price"];
-        [tagDataDict setObject:_imgUrl forKey:@"img"];
-        [self.userAddGoodsMarr addObject:tagDataDict];
-    };
-
 }
 
 #pragma mark - 创建一个标签
 - (void)addUserGoodsTagWithTitle:(NSString *)title withPrice:(NSString *)price withType:(NSInteger)type withGoodsId:(NSString *)ids {
     _idx += 1;
-    int tagX = (arc4random() % 4) * 40;
-    int tagY = ((arc4random() % 2) + 10) * 25;
+    int tagX = (arc4random() % 4) * 30;
+    int tagY = ((arc4random() % 2) + 10) * 20;
     
     UserGoodsTag * tag = [[UserGoodsTag alloc] initWithFrame:CGRectMake(tagX, tagY, 175, 32)];
     tag.title.text = title;
@@ -277,10 +248,18 @@ static NSString *const URLUserAddGoods = @"/scene_product/add";
         [tag addGestureRecognizer:tapGesture];
     }
     
-    [self.view addSubview:tag];
+    [self.filtersImageView addSubview:tag];
     
     [self.tagBtnMarr addObject:tag];
-    [self.markView removeFromSuperview];
+    
+    self.markGoodsView.transform = CGAffineTransformMakeScale(1, 1);
+    self.markGoodsView.alpha = 1;
+    [UIView animateWithDuration:0.3 animations:^{
+        self.markGoodsView.alpha = 0;
+        self.markGoodsView.transform = CGAffineTransformMakeScale(0.9, 0.9);
+    } completion:^(BOOL finished) {
+        [self.markGoodsView removeFromSuperview];
+    }];
 }
 
 #pragma mark 删除标签
@@ -310,10 +289,10 @@ static NSString *const URLUserAddGoods = @"/scene_product/add";
 
 #pragma mark - 标记一个产品图片
 - (void)addMarkGoodsImg:(NSString *)imgUrl withImgW:(CGFloat)imgW withImgH:(CGFloat)imgH {
-    FBStickersContainer * sticker = [[FBStickersContainer alloc] initWithFrame:CGRectMake(100, 100, imgW/4, imgH/4)];
+    FBStickersContainer * sticker = [[FBStickersContainer alloc] initWithFrame:CGRectMake(100, 100, imgW/5, imgH/5)];
     [sticker setupSticker:imgUrl];
     sticker.delegate = self;
-    [self.view addSubview:sticker];
+    [self.filtersImageView addSubview:sticker];
     [self.stickersContainer addObject:sticker];
     
     for (UserGoodsTag * userTag in self.tagBtnMarr) {
@@ -369,8 +348,22 @@ static NSString *const URLUserAddGoods = @"/scene_product/add";
 - (UIImageView *)filtersImageView {
     if (!_filtersImageView) {
         _filtersImageView = [[UIImageView alloc] init];
+        _filtersImageView.userInteractionEnabled = YES;
+        
+        UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(showMarkGoodsView:)];
+        [_filtersImageView addGestureRecognizer:tap];
     }
     return _filtersImageView;
+}
+
+- (void)showMarkGoodsView:(UITapGestureRecognizer *)tap {
+    self.markGoodsView.transform = CGAffineTransformMakeScale(1.3, 1.3);
+    self.markGoodsView.alpha = 0;
+    [UIView animateWithDuration:0.3 animations:^{
+        self.markGoodsView.alpha = 1;
+        self.markGoodsView.transform = CGAffineTransformMakeScale(1, 1);
+    }];
+    [self.view addSubview:self.markGoodsView];
 }
 
 #pragma mark - 设置顶部导航栏
@@ -383,42 +376,38 @@ static NSString *const URLUserAddGoods = @"/scene_product/add";
 
 #pragma mark 继续按钮的点击事件
 - (void)nextBtnClick {
-//        if (self.goodsIdData.count > 3) {
-//            [SVProgressHUD showInfoWithStatus:@"最多添加三个商品的链接"];
-//            
-//        } else if (self.goodsIdData.count <= 3) {
-//            NSMutableArray * originX = [NSMutableArray array];
-//            NSMutableArray * originY = [NSMutableArray array];
-//            for (UserGoodsTag * btn in self.tagBtnMarr) {
-//                [originX addObject:[NSString stringWithFormat:@"%f", btn.frame.origin.x / SCREEN_WIDTH]];
-//                [originY addObject:[NSString stringWithFormat:@"%f", (btn.frame.origin.y - 45) / SCREEN_HEIGHT]];
-//            }
-//        
-//            NSMutableArray * priceMarr = [NSMutableArray array];
-//            NSCharacterSet * set = [NSCharacterSet characterSetWithCharactersInString:@"￥"];
-//            for (NSString * str in self.goodsPriceData) {
-//                NSString * price = [str stringByTrimmingCharactersInSet:set];
-//                [priceMarr addObject:price];
-//            }
-//
-//            UIImage * goodsImg = [self generateImage:self.filtersImageView];
-//            
-//            FiltersViewController * filtersVC = [[FiltersViewController alloc] init];
-//            filtersVC.locationArr = self.locationArr;
-//            filtersVC.filtersImg = goodsImg;
-//            filtersVC.fSceneId = self.fSceneId;
-//            filtersVC.fSceneTitle = self.fSceneTitle;
-//            filtersVC.goodsTitle = self.goodsTitleData;
-//            filtersVC.goodsPrice = priceMarr;
-//            filtersVC.goodsId = self.goodsIdData;
-//            filtersVC.goodsX = originX;
-//            filtersVC.goodsY = originY;
-//            
-//            [self.navigationController pushViewController:filtersVC animated:YES];
-//        }
+//    NSMutableArray * originX = [NSMutableArray array];
+//    NSMutableArray * originY = [NSMutableArray array];
+//    for (UserGoodsTag * btn in self.tagBtnMarr) {
+//        [originX addObject:[NSString stringWithFormat:@"%f", btn.frame.origin.x / SCREEN_WIDTH]];
+//        [originY addObject:[NSString stringWithFormat:@"%f", (btn.frame.origin.y - 45) / SCREEN_HEIGHT]];
+//    }
+//    
+//    NSMutableArray * priceMarr = [NSMutableArray array];
+//    NSCharacterSet * set = [NSCharacterSet characterSetWithCharactersInString:@"￥"];
+//    for (NSString * str in self.goodsPriceData) {
+//        NSString * price = [str stringByTrimmingCharactersInSet:set];
+//        [priceMarr addObject:price];
+//    }
+//    
+//    UIImage * goodsImg = [self generateImage:self.filtersImageView];
+//    
+//    FiltersViewController * filtersVC = [[FiltersViewController alloc] init];
+//    filtersVC.locationArr = self.locationArr;
+//    filtersVC.filtersImg = goodsImg;
+//    filtersVC.fSceneId = self.fSceneId;
+//    filtersVC.fSceneTitle = self.fSceneTitle;
+//    filtersVC.goodsTitle = self.goodsTitleData;
+//    filtersVC.goodsPrice = priceMarr;
+//    filtersVC.goodsId = self.goodsIdData;
+//    filtersVC.goodsX = originX;
+//    filtersVC.goodsY = originY;
+//    
+//    [self.navigationController pushViewController:filtersVC animated:YES];
+
     
     ReleaseViewController * releaseVC = [[ReleaseViewController alloc] init];
-    releaseVC.bgImg = self.filtersImageView.image;
+    releaseVC.bgImg = [self generateImage:self.filtersImageView];
     [self.navigationController pushViewController:releaseVC animated:YES];
     
 }

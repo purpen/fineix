@@ -509,6 +509,7 @@
 		D868090A1D6301C1002714B2 /* FBSubjectModel.m in Sources */ = {isa = PBXBuildFile; fileRef = D86809051D6301C1002714B2 /* FBSubjectModel.m */; };
 		D868090B1D6301C1002714B2 /* FBSubjectModelData.m in Sources */ = {isa = PBXBuildFile; fileRef = D86809071D6301C1002714B2 /* FBSubjectModelData.m */; };
 		D868090C1D6301C1002714B2 /* FBSubjectModelRow.m in Sources */ = {isa = PBXBuildFile; fileRef = D86809091D6301C1002714B2 /* FBSubjectModelRow.m */; };
+		D868090F1D6349B0002714B2 /* THNMarkGoodsView.m in Sources */ = {isa = PBXBuildFile; fileRef = D868090E1D6349B0002714B2 /* THNMarkGoodsView.m */; };
 		D869BD671D6036A000432423 /* FBAlertViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D869BD411D6036A000432423 /* FBAlertViewController.m */; };
 		D869BD681D6036A000432423 /* FBSheetViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D869BD431D6036A000432423 /* FBSheetViewController.m */; };
 		D869BD691D6036A000432423 /* QrShareSheetViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D869BD451D6036A000432423 /* QrShareSheetViewController.m */; };
@@ -1504,6 +1505,8 @@
 		D86809071D6301C1002714B2 /* FBSubjectModelData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FBSubjectModelData.m; sourceTree = "<group>"; };
 		D86809081D6301C1002714B2 /* FBSubjectModelRow.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FBSubjectModelRow.h; sourceTree = "<group>"; };
 		D86809091D6301C1002714B2 /* FBSubjectModelRow.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FBSubjectModelRow.m; sourceTree = "<group>"; };
+		D868090D1D6349B0002714B2 /* THNMarkGoodsView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THNMarkGoodsView.h; sourceTree = "<group>"; };
+		D868090E1D6349B0002714B2 /* THNMarkGoodsView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THNMarkGoodsView.m; sourceTree = "<group>"; };
 		D869BD401D6036A000432423 /* FBAlertViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FBAlertViewController.h; sourceTree = "<group>"; };
 		D869BD411D6036A000432423 /* FBAlertViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FBAlertViewController.m; sourceTree = "<group>"; };
 		D869BD421D6036A000432423 /* FBSheetViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FBSheetViewController.h; sourceTree = "<group>"; };
@@ -1972,6 +1975,8 @@
 				1F2A8C271CF40276005116C7 /* FBStickersContainer.m */,
 				1F2A8C281CF40276005116C7 /* MarkGoodsCollectionViewCell.h */,
 				1F2A8C291CF40276005116C7 /* MarkGoodsCollectionViewCell.m */,
+				D868090D1D6349B0002714B2 /* THNMarkGoodsView.h */,
+				D868090E1D6349B0002714B2 /* THNMarkGoodsView.m */,
 			);
 			path = Mark;
 			sourceTree = "<group>";
@@ -5036,6 +5041,7 @@
 				1F2A8F891CF40277005116C7 /* FBShareViewController.m in Sources */,
 				1F2A8FD31CF40277005116C7 /* FBCarItemsTableViewCell.m in Sources */,
 				1F2A90711CF40277005116C7 /* JDOrderViewController.m in Sources */,
+				D868090F1D6349B0002714B2 /* THNMarkGoodsView.m in Sources */,
 				D8E3AEB91CFC9B84006E5E8C /* FiltersViewController.m in Sources */,
 				D8B855C51D3F746D0008BD57 /* ChooseCategotyViewController.m in Sources */,
 				1F2A8F351CF40277005116C7 /* MarkGoodsViewController.m in Sources */,

@@ -49,6 +49,12 @@
 "sure" = "确定";
 "chooseCategoryVC" = "选择地盘分类";
 
+//  标记产品
+"chooseGoodsImage" = "选择产品添加到当前图片中";
+"writeGoodsInfo" = "或自行输入产品信息";
+"goodsBrand" = "品牌";
+"goodsName" = "产品名称";
+
 //  控制器页面标题
 "createVcTitle" = "照片胶卷";
 "cropVcTitle" = "裁剪图片";

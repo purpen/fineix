@@ -56,14 +56,14 @@
     [self addSubview:self.icon];
     [_icon mas_makeConstraints:^(MASConstraintMaker *make) {
         make.size.mas_equalTo(CGSizeMake(17.5, 18));
-        make.centerY.equalTo(self);
+        make.centerY.equalTo(self.mas_centerY).with.offset(3);
         make.left.equalTo(self.mas_left).with.offset(15);
     }];
     
     [self addSubview:self.headerTitle];
     [_headerTitle mas_makeConstraints:^(MASConstraintMaker *make) {
         make.size.mas_equalTo(CGSizeMake(65, 15));
-        make.centerY.equalTo(self);
+        make.centerY.equalTo(_icon);
         make.left.equalTo(self.icon.mas_right).with.offset(7);
     }];
     
@@ -77,7 +77,7 @@
     [self addSubview:self.moreBtn];
     [_moreBtn mas_makeConstraints:^(MASConstraintMaker *make) {
         make.size.mas_equalTo(CGSizeMake(40, 20));
-        make.centerY.equalTo(self);
+        make.centerY.equalTo(_icon);
         make.right.equalTo(self.mas_right).with.offset(0);
     }];
 }

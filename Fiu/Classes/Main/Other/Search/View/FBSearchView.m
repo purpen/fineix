@@ -67,7 +67,7 @@
     if (!_cancelBtn) {
         _cancelBtn = [[UIButton alloc] init];
         [_cancelBtn setTitle:NSLocalizedString(@"cancel", nil) forState:(UIControlStateNormal)];
-        [_cancelBtn setTitleColor:[UIColor colorWithHexString:titleColor] forState:(UIControlStateNormal)];
+        [_cancelBtn setTitleColor:[UIColor colorWithHexString:@"#FFFFFF"] forState:(UIControlStateNormal)];
         if (IS_iOS9) {
             _cancelBtn.titleLabel.font = [UIFont fontWithName:@"PingFangSC-Light" size:14];
         } else {

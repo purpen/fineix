@@ -483,4 +483,9 @@ static NSString *const twoCommentsCellId = @"TwoCommentsCellId";
     }
 }
 
+- (void)viewDidDisappear:(BOOL)animated {
+    [super viewDidDisappear:animated];
+    [SVProgressHUD dismiss];
+}
+
 @end

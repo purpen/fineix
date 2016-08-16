@@ -110,6 +110,7 @@ static NSString *const URLGetGoodsImg = @"/scene_product/view";
     self.getImgRequest = [FBAPI getWithUrlString:URLGetGoodsImg requestDictionary:@{@"id":goodsId} delegate:self];
     [self.getImgRequest startRequestSuccess:^(FBRequest *request, id result) {
         self.goodsModel = [[GoodsInfoData alloc] initWithDictionary:[result valueForKey:@"data"]];
+        NSLog(@"－－－－－－－－ %@", result);
         self.getImgBlock(
                          [self.goodsModel.pngAsset valueForKey:@"url"][0],
                          self.goodsModel.title,
@@ -262,7 +263,7 @@ static NSString *const URLGetGoodsImg = @"/scene_product/view";
 #pragma mark - 添加搜索框视图
 - (FBSearchView *)searchGoods {
     if (!_searchGoods) {
-        _searchGoods = [[FBSearchView alloc] initWithFrame:CGRectMake(0, 50, SCREEN_WIDTH, 44)];
+        _searchGoods = [[FBSearchView alloc] initWithFrame:CGRectMake(0, 45, SCREEN_WIDTH, 44)];
         _searchGoods.searchInputBox.placeholder = NSLocalizedString(@"searchGoods", nil);
         _searchGoods.delegate = self;
     }
@@ -310,13 +311,10 @@ static NSString *const URLGetGoodsImg = @"/scene_product/view";
 
 #pragma mark - 设置导航视图
 - (void)setNavViewUI {
-    self.view.backgroundColor = [UIColor colorWithHexString:lineGrayColor];
-    self.navView.backgroundColor = [UIColor whiteColor];
+    self.view.backgroundColor = [UIColor whiteColor];
     [self addNavViewTitle:NSLocalizedString(@"marker", nil)];
-    self.navTitle.textColor = [UIColor blackColor];
-    [self addCancelButton:@"icon_cancel_black"];
+    [self addCancelButton:@"icon_cancel"];
     [self.cancelBtn addTarget:self action:@selector(cancelBtnClick) forControlEvents:(UIControlEventTouchUpInside)];
-    [self addLine];
 }
 
 - (void)cancelBtnClick {

@@ -147,18 +147,14 @@
         [SVProgressHUD showInfoWithStatus:[error localizedDescription]];
     }];
     
-    if (entity.isLogin) {
+//    if (entity.isLogin) {
         PictureToolViewController * pictureToolVC = [[PictureToolViewController alloc] init];
         [self presentViewController:pictureToolVC animated:YES completion:nil];
-    } else {
-        THNLoginRegisterViewController *loginSignupVC = [[THNLoginRegisterViewController alloc] init];
-        UINavigationController *navi = [[UINavigationController alloc] initWithRootViewController:loginSignupVC];
-        [self presentViewController:navi animated:YES completion:nil];
-        
-//        THNLoginRegisterViewController *vc = [[THNLoginRegisterViewController alloc] init];
-//        UINavigationController *navi = [[UINavigationController alloc] initWithRootViewController:vc];
+//    } else {
+//        THNLoginRegisterViewController *loginSignupVC = [[THNLoginRegisterViewController alloc] init];
+//        UINavigationController *navi = [[UINavigationController alloc] initWithRootViewController:loginSignupVC];
 //        [self presentViewController:navi animated:YES completion:nil];
-    }
+//    }
 }
 
 @end

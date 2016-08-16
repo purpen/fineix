@@ -63,8 +63,8 @@
         _translateCenter.x = MIN(self.superview.bounds.size.width - halfx, _translateCenter.x);
         
         float halfy = CGRectGetMidY(self.bounds);
-        _translateCenter.y = MAX(halfy + 50, _translateCenter.y);
-        _translateCenter.y = MIN(self.superview.bounds.size.height - halfy - 50, _translateCenter.y);
+        _translateCenter.y = MAX(halfy, _translateCenter.y);
+        _translateCenter.y = MIN(self.superview.bounds.size.height - halfy, _translateCenter.y);
         
         //移动view
         self.center = _translateCenter;
