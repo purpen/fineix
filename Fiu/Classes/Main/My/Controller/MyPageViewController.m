@@ -54,6 +54,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent];
     //
     _chanelV = [ChanelView getChanelView];
     //情景
@@ -131,8 +132,21 @@
     [UIApplication sharedApplication].statusBarStyle = UIStatusBarStyleDefault;
     self.delegate = self;
     [self addNavLogoImgisTransparent:YES];
-    [self addBarItemLeftBarButton:@"" image:@"my_riLi" isTransparent:YES];
-    [self addBarItemRightBarButton:@"" image:@"my_set" isTransparent:YES];
+    [self addBarItemLeftBarButton:nil image:@"my_riLi" isTransparent:YES];
+    [self addBarItemRightBarButton:nil image:@"my_set" isTransparent:YES];
+    [self.view insertSubview:self.navView aboveSubview:self.myCollectionView];
+    self.navView.backgroundColor = [UIColor clearColor];
+    //  添加渐变层
+    CAGradientLayer * shadow = [CAGradientLayer layer];
+    shadow.startPoint = CGPointMake(0, 0);
+    shadow.opacity = 0.3;
+    shadow.endPoint = CGPointMake(0, 1);
+    shadow.colors = @[(__bridge id)[UIColor blackColor].CGColor,
+                      (__bridge id)[UIColor clearColor].CGColor];
+    shadow.locations = @[@0];
+    shadow.frame = CGRectMake(0, 0, SCREEN_WIDTH, 64);
+    [self.navView.layer insertSublayer:shadow below:self.logoImg.layer];
+    
     //网络请求
     [self netGetData];
     self.tabBarController.tabBar.hidden = NO;

@@ -13,6 +13,6 @@
 @interface THNPeopleView : UIView
 
 @property(nonatomic, strong) THNFocusUserModel *model;
-
+@property (weak, nonatomic) IBOutlet UIButton *fucosBtn;
 
 @end

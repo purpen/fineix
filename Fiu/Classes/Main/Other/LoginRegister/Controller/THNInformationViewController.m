@@ -112,7 +112,7 @@ static NSString *const modifyUserInformation = @"/my/update_profile";
             NSString * fileUrl = [[result objectForKey:@"data"] objectForKey:@"file_url"];
             UserInfoEntity * userEntity = [UserInfoEntity defaultUserInfoEntity];
             userEntity.mediumAvatarUrl = fileUrl;
-            [self.headImage sd_setImageWithURL:[NSURL URLWithString:fileUrl] placeholderImage:nil];
+            [self.headImage sd_setImageWithURL:[NSURL URLWithString:fileUrl] placeholderImage:[UIImage imageNamed:@"default_head"]];
             
             [SVProgressHUD showSuccessWithStatus:message];
         } else {
@@ -145,6 +145,7 @@ static NSString *const modifyUserInformation = @"/my/update_profile";
 }
 - (IBAction)next:(id)sender {
 
+    [SVProgressHUD showWithMaskType:SVProgressHUDMaskTypeClear];
     //开始传送数据
     NSDictionary *params = @{
                              @"nickname":self.nameTF.text,
@@ -152,6 +153,7 @@ static NSString *const modifyUserInformation = @"/my/update_profile";
                              };
     FBRequest *request = [FBAPI postWithUrlString:modifyUserInformation requestDictionary:params delegate:self];
     [request startRequestSuccess:^(FBRequest *request, id result) {
+        [SVProgressHUD dismiss];
         if ([[result objectForKey:@"success"] isEqualToNumber:@1]) {
             //更新用户名，性别，个人简介
             UserInfoEntity *entiey = [UserInfoEntity defaultUserInfoEntity];
@@ -162,7 +164,7 @@ static NSString *const modifyUserInformation = @"/my/update_profile";
         } else {
         }
     } failure:^(FBRequest *request, NSError *error) {
-        
+        [SVProgressHUD dismiss];
     }];
 
 }

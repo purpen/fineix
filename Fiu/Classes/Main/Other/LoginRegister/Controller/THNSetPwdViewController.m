@@ -11,6 +11,9 @@
 #import <SVProgressHUD.h>
 #import "FBRequest.h"
 #import "FBAPI.h"
+#import "UserInfo.h"
+#import "UserInfoEntity.h"
+#import "THNInformationViewController.h"
 
 @interface THNSetPwdViewController ()
 @property (weak, nonatomic) IBOutlet UITextField *pwdTF;
@@ -71,7 +74,19 @@ static NSString *const RegisterCodeURL = @"/auth/register";//手机号注册
     FBRequest *request = [FBAPI postWithUrlString:RegisterCodeURL requestDictionary:params delegate:self];
     [request startRequestSuccess:^(FBRequest *request, id result) {
         [SVProgressHUD showSuccessWithStatus:@"注册成功"];
-        [self.navigationController popToRootViewControllerAnimated:YES];
+        UserInfo * userInfo = [UserInfo mj_objectWithKeyValues:[result objectForKey:@"data"]];
+        [userInfo updateUserInfoEntity];
+        UserInfoEntity * userEntity = [UserInfoEntity defaultUserInfoEntity];
+        userEntity.isLogin = YES;
+        dispatch_async(dispatch_get_global_queue(0, 0), ^{
+            [userInfo saveOrUpdate];
+            //                NSUserDefaults * userSet = [NSUserDefaults standardUserDefaults];
+            //                [userSet setObject:[NSNumber numberWithBool:userEntity.isLogin] forKey:@"isLogin"];
+            //                [userSet synchronize];
+        });
+        
+        THNInformationViewController *vc = [[THNInformationViewController alloc] init];
+        [self.navigationController pushViewController:vc animated:YES];
     } failure:^(FBRequest *request, NSError *error) {
         [SVProgressHUD showInfoWithStatus:error.localizedDescription];
     }];
@@ -80,7 +95,7 @@ static NSString *const RegisterCodeURL = @"/auth/register";//手机号注册
 
 - (IBAction)lock:(UIButton*)sender {
     sender.selected = !sender.selected;
-    self.pwdTF.secureTextEntry = sender.selected;
+    self.pwdTF.secureTextEntry = !sender.selected;
 }
 
 @end

@@ -20,7 +20,7 @@
                     <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                 </imageView>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hpf-c0-LDM">
-                    <rect key="frame" x="0.0" y="43" width="375" height="143"/>
+                    <rect key="frame" x="0.0" y="43" width="375" height="106"/>
                     <subviews>
                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="logo_small_n" translatesAutoresizingMaskIntoConstraints="NO" id="bDe-Gp-82b">
                             <rect key="frame" x="161" y="10" width="53" height="29"/>
@@ -46,7 +46,7 @@
                         <constraint firstItem="2QX-4c-n4s" firstAttribute="centerX" secondItem="hpf-c0-LDM" secondAttribute="centerX" id="djl-Hz-e7m"/>
                         <constraint firstItem="hXz-Q1-1Hg" firstAttribute="centerX" secondItem="hpf-c0-LDM" secondAttribute="centerX" id="etT-Ll-F7F"/>
                         <constraint firstItem="hXz-Q1-1Hg" firstAttribute="top" secondItem="bDe-Gp-82b" secondAttribute="bottom" constant="15" id="gav-Z3-Rw3"/>
-                        <constraint firstAttribute="height" constant="143" id="rsB-ue-WdQ"/>
+                        <constraint firstAttribute="height" constant="106" id="rsB-ue-WdQ"/>
                         <constraint firstItem="bDe-Gp-82b" firstAttribute="top" secondItem="hpf-c0-LDM" secondAttribute="top" constant="10" id="wLu-rv-SEQ"/>
                         <constraint firstItem="bDe-Gp-82b" firstAttribute="centerX" secondItem="hpf-c0-LDM" secondAttribute="centerX" id="xXP-BE-kfT"/>
                     </constraints>

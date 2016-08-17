@@ -11,6 +11,7 @@
 #import "UserInfoEntity.h"
 #import <SDWebImage/UIImageView+WebCache.h>
 #import "TalentView.h"
+#import "UIView+FSExtension.h"
 
 @implementation MyPageBGCollectionViewCell
 
@@ -101,12 +102,6 @@
     [self.bgImageView sd_setImageWithURL:[NSURL URLWithString:entity.head_pic_url] placeholderImage:[UIImage imageNamed:@"personalDefaultBg"]];
 }
 
-//-(UIImageView *)idImageView{
-//    if (!_idImageView) {
-//        _idImageView = [[UIImageView alloc] init];
-//    }
-//    return _idImageView;
-//}
 
 #pragma mark - 个人信息背景图
 -(UIImageView *)bgImageView{
@@ -119,11 +114,12 @@
         //  添加渐变层
         CAGradientLayer * shadow = [CAGradientLayer layer];
         shadow.startPoint = CGPointMake(0, 0);
-        shadow.endPoint = CGPointMake(0, 0.8);
+        shadow.opacity = 0.5;
+        shadow.endPoint = CGPointMake(0, 1);
         shadow.colors = @[(__bridge id)[UIColor clearColor].CGColor,
-                          (__bridge id)[UIColor whiteColor].CGColor];
-        shadow.locations = @[@(0.8f), @(2.5f)];
-        shadow.frame = CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_WIDTH);
+                          (__bridge id)[UIColor blackColor].CGColor];
+        shadow.locations = @[@0];
+        shadow.frame = CGRectMake(0, SCREEN_WIDTH - 150, SCREEN_WIDTH, 150);
         [_bgImageView.layer addSublayer:shadow];
         
         [_bgImageView addSubview:self.userView];

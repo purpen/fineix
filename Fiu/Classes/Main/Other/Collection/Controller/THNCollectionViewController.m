@@ -27,8 +27,8 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent];
     self.navViewTitle.text = @"收藏";
-    self.navViewTitle.textColor = [UIColor whiteColor];
     // 初始化子控制器
     [self setupChildVces];
     // 设置顶部的标签栏
@@ -137,15 +137,16 @@
  */
 - (void)setupChildVces
 {
-    THNContentViewController *good = [[THNContentViewController alloc] init];
-    good.title = @"产品";
-    good.type = CollectionTypeGood;
-    [self addChildViewController:good];
     
     THNContentViewController *sence = [[THNContentViewController alloc] init];
     sence.title = @"情境";
     sence.type = CollectionTypeSence;
     [self addChildViewController:sence];
+    
+    THNContentViewController *good = [[THNContentViewController alloc] init];
+    good.title = @"产品";
+    good.type = CollectionTypeGood;
+    [self addChildViewController:good];
 
 }
 

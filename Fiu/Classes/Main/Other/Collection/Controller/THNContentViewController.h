@@ -6,14 +6,14 @@
 //  Copyright © 2016年 taihuoniao. All rights reserved.
 //
 
-#import "THNViewController.h"
+#import "FBViewController.h"
 
 typedef enum {
     CollectionTypeGood = 10,
     CollectionTypeSence = 12
 } CollectionType;
 
-@interface THNContentViewController : THNViewController
+@interface THNContentViewController : FBViewController
 
 /**  */
 @property (nonatomic, assign) CollectionType type;

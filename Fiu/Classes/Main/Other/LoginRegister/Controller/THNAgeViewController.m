@@ -125,7 +125,7 @@ static NSString *updatInfo = @"/my/update_profile";
 }
 
 - (IBAction)next:(id)sender {
-    
+    [SVProgressHUD showWithMaskType:SVProgressHUDMaskTypeClear];
     //开始传送数据
     NSDictionary *params = @{
                              @"age_group":self.age_group,
@@ -133,6 +133,7 @@ static NSString *updatInfo = @"/my/update_profile";
                              };
     FBRequest *request = [FBAPI postWithUrlString:updatInfo requestDictionary:params delegate:self];
     [request startRequestSuccess:^(FBRequest *request, id result) {
+        [SVProgressHUD dismiss];
         if ([[result objectForKey:@"success"] isEqualToNumber:@1]) {
             
             UserInfoEntity *entiey = [UserInfoEntity defaultUserInfoEntity];
@@ -143,7 +144,7 @@ static NSString *updatInfo = @"/my/update_profile";
         } else {
         }
     } failure:^(FBRequest *request, NSError *error) {
-        
+        [SVProgressHUD dismiss];
     }];
 }
 

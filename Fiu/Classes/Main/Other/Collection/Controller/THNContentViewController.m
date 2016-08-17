@@ -15,6 +15,7 @@
 #import "THNGoodsCollectionViewCell.h"
 #import "GoodsInfoViewController.h"
 #import "HomeSceneListRow.h"
+#import "SceneInfoViewController.h"
 
 @interface THNContentViewController ()<UICollectionViewDelegate,UICollectionViewDataSource>
 {
@@ -285,6 +286,10 @@ static NSString *const URLFiuGoods = @"/favorite/get_new_list";
         goodsInfoVC.goodsID = self.goodsIdList[indexPath.row];
         goodsInfoVC.isWant = YES;
         [self.navigationController pushViewController:goodsInfoVC animated:YES];
+    }else{
+        SceneInfoViewController * sceneInfoVC = [[SceneInfoViewController alloc] init];
+        sceneInfoVC.sceneId = _sceneIdMarr[indexPath.row];
+        [self.navigationController pushViewController:sceneInfoVC animated:YES];
     }
 }
 

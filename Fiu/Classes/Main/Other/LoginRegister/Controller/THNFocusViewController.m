@@ -12,10 +12,10 @@
 #import "UIView+FSExtension.h"
 #import "THNFocusUserModel.h"
 #import <MJExtension.h>
-#import "THNFucosPeopleView.h"
 #import "UIColor+Extension.h"
 #import <Masonry.h>
 #import "THNPeopleView.h"
+#import <SVProgressHUD.h>
 
 @interface THNFocusViewController ()<UIScrollViewDelegate>
 /**  */
@@ -23,53 +23,38 @@
 /**  */
 @property (nonatomic, strong) NSArray *modelAry;
 /**  */
-@property (nonatomic, strong) NSMutableArray *oneModelAry;
+@property (nonatomic, strong) NSMutableArray *idAry;
 /**  */
-@property (nonatomic, strong) NSMutableArray *twoModelAry;
-/**  */
-@property (nonatomic, strong) NSMutableArray *threeModelAry;
-/**  */
-@property (nonatomic, strong) NSMutableArray *aryAry;
+@property (nonatomic, strong) NSMutableArray *viewAry;
 /**  */
 @property (nonatomic, strong) UIPageControl *pagrControl;
 
 @property(nonatomic, strong) UIButton *enterBtn;
 
 @property (weak, nonatomic) IBOutlet UIView *logoView;
+/**  */
+@property (nonatomic, assign) NSInteger page;
+
 @end
 
 @implementation THNFocusViewController
 
--(NSMutableArray *)aryAry{
-    if (!_aryAry) {
-        _aryAry = [NSMutableArray array];
+-(NSMutableArray *)idAry{
+    if (!_idAry) {
+        _idAry = [NSMutableArray array];
     }
-    return _aryAry;
+    return _idAry;
 }
 
--(NSMutableArray *)oneModelAry{
-    if (!_oneModelAry) {
-        _oneModelAry = [NSMutableArray array];
+-(NSMutableArray *)viewAry{
+    if (!_viewAry) {
+        _viewAry = [NSMutableArray array];
     }
-    return _oneModelAry;
+    return _viewAry;
 }
 
--(NSMutableArray *)twoModelAry{
-    if (!_twoModelAry) {
-        _twoModelAry = [NSMutableArray array];
-    }
-    return _twoModelAry;
-}
-
--(NSMutableArray *)threeModelAry{
-    if (!_threeModelAry) {
-        _threeModelAry = [NSMutableArray array];
-    }
-    return _threeModelAry;
-}
-
-- (void)viewDidLoad {
-    [super viewDidLoad];
+-(void)viewWillAppear:(BOOL)animated{
+    [super viewWillAppear:animated];
     
     FBRequest *request = [FBAPI postWithUrlString:@"/user/find_user" requestDictionary:@{
                                                                                          @"size" : @18,
@@ -80,61 +65,77 @@
     [request startRequestSuccess:^(FBRequest *request, id result) {
         
         NSArray *users = result[@"data"][@"users"];
+        
         self.modelAry = [THNFocusUserModel mj_objectArrayWithKeyValuesArray:users];
-  
-        for (int i = 0; i < 6; i ++) {
-            [self.oneModelAry addObject:self.modelAry[i]];
-        }
-        [self.aryAry addObject:self.oneModelAry];
-
-        for (int i = 6; i < 12; i ++) {
-            [self.twoModelAry addObject:self.modelAry[i]];
-        }
-        [self.aryAry addObject:self.twoModelAry];
-
-        for (int i = 12; i < 17; i ++) {
-            [self.threeModelAry addObject:self.modelAry[i]];
-        }
-        [self.aryAry addObject:self.threeModelAry];
+        int n = self.modelAry.count % 6;
+        int m = n > 0 ? 1 : 0;
+        self.page = self.modelAry.count / 6 + m;
+        self.contentScrollView.frame = CGRectMake(0, 160 / 667.0 * [UIScreen mainScreen].bounds.size.height, [UIScreen mainScreen].bounds.size.width, 0.53 * [UIScreen mainScreen].bounds.size.height);
+        self.contentScrollView.contentSize = CGSizeMake([UIScreen mainScreen].bounds.size.width * self.page, 0);
         
-        NSInteger n = self.modelAry.count / 6;
-        NSInteger m = self.modelAry.count % 6 ? 1 : 0;
-        for (int i = 0; i < (m + n); i ++) {
-            
-            float w = [UIScreen mainScreen].bounds.size.width;
-            float h = self.contentScrollView.height;
-            float x = i * w;
-            float y = -20;
-            
-            THNFucosPeopleView *view = [[THNFucosPeopleView alloc] initWithFrame:CGRectMake(x, y, w, h)];
-            view.modelAry = self.aryAry[i];
-            [_contentScrollView addSubview:view];
-        }
-
-    } failure:^(FBRequest *request, NSError *error) {
         
-    }];
+        for (int i = 0; i < self.modelAry.count; i ++) {
+            int page = i / 6;
+            
+            float w = ([UIScreen mainScreen].bounds.size.width - 15 * 2 - 8 * 2) / 3;
+            float h = (self.contentScrollView.height - 7.5) * 0.5;
+            float x = 15 + (i % 3) * (w + 8) + page * [UIScreen mainScreen].bounds.size.width;
+            float y = 0 + ((i - page * 6) / 3) * (h + 7.5);
+            THNPeopleView *view = [THNPeopleView viewFromXib];
+            view.model = self.modelAry[i];
+            view.frame = CGRectMake(x, y, w, h);
+            [view.fucosBtn addTarget:self action:@selector(fucos:) forControlEvents:UIControlEventTouchUpInside];
+            view.fucosBtn.tag = i;
+            
+            [self.contentScrollView addSubview:view];
+            [self.viewAry addObject:view];
+            if (page == 0) {
+                [self fucos:view.fucosBtn];
+            }
+        }
+        [self.view addSubview:self.contentScrollView];
+        
+        [self.view addSubview:self.pagrControl];
+        [_pagrControl mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.width.mas_equalTo(50);
+            make.height.mas_equalTo(20);
+            make.top.mas_equalTo(self.contentScrollView.mas_bottom).offset(10);
+            make.centerX.mas_equalTo(self.view.mas_centerX);
+        }];
+        
+        [self.view addSubview:self.enterBtn];
+        [_enterBtn mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.width.mas_equalTo(130);
+            make.height.mas_equalTo(35);
+            make.top.mas_equalTo(self.pagrControl.mas_bottom).offset(20);
+            make.centerX.mas_equalTo(self.view.mas_centerX);
+        }];
+    } failure:nil];
+
+}
+
+- (void)viewDidLoad {
+    [super viewDidLoad];
     
-    [self.view addSubview:self.contentScrollView];
-    CGPoint offset = self.contentScrollView.contentOffset;
-    offset.x = 1 * self.contentScrollView.width;
-    [self.contentScrollView setContentOffset:offset animated:YES];
     
-    [self.view addSubview:self.pagrControl];
-    [_pagrControl mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.width.mas_equalTo(50);
-        make.height.mas_equalTo(20);
-        make.top.mas_equalTo(self.contentScrollView.mas_bottom).offset(10);
-        make.centerX.mas_equalTo(self.view.mas_centerX);
-    }];
+}
+
+-(void)fucos:(UIButton*)sender{
     
-    [self.view addSubview:self.enterBtn];
-    [_enterBtn mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.width.mas_equalTo(130);
-        make.height.mas_equalTo(35);
-        make.top.mas_equalTo(self.pagrControl.mas_bottom).offset(20);
-        make.centerX.mas_equalTo(self.view.mas_centerX);
-    }];
+    sender.selected = !sender.selected;
+    
+    if (sender.selected) {
+        sender.backgroundColor = [UIColor colorWithHexString:@"#BE8914"];
+        sender.layer.borderColor = [UIColor clearColor].CGColor;
+
+        [self.idAry addObject:((THNPeopleView*)self.viewAry[sender.tag]).model._id];
+    }else{
+        sender.backgroundColor = [UIColor clearColor];
+        sender.layer.borderColor = [UIColor colorWithHexString:@"#C6C6C6"].CGColor;
+        
+        [self.idAry removeObject:((THNPeopleView*)self.viewAry[sender.tag]).model._id];
+    }
+    
 }
 
 -(UIButton *)enterBtn{
@@ -152,6 +153,32 @@
 }
 
 -(void)enter{
+    [SVProgressHUD showWithMaskType:SVProgressHUDMaskTypeClear];
+    NSMutableString *str = [NSMutableString string];
+    for (int i = 0; i < self.idAry.count; i ++) {
+        [str appendString:self.idAry[i]];
+        if (i == self.idAry.count - 1) {
+            break;
+        }
+        [str appendString:@","];
+    }
+    //开始传送数据
+    NSDictionary *params = @{
+                             @"follow_ids":str
+                             };
+    FBRequest *request1 = [FBAPI postWithUrlString:@"/follow/batch_follow" requestDictionary:params delegate:self];
+    [request1 startRequestSuccess:^(FBRequest *request, id result) {
+        if ([result objectForKey:@"success"]) {
+            [SVProgressHUD dismiss];
+        } else {
+            [SVProgressHUD dismiss];
+        }
+        [self updateIdentify];
+    } failure:nil];
+
+}
+
+-(void)updateIdentify{
     FBRequest *request = [FBAPI postWithUrlString:@"/my/update_user_identify" requestDictionary:@{
                                                                                                   @"type":@1
                                                                                                   } delegate:self];
@@ -160,14 +187,13 @@
     } failure:^(FBRequest *request, NSError *error) {
         
     }];
-
 }
 
 -(UIPageControl *)pagrControl{
     if (!_pagrControl) {
         _pagrControl = [[UIPageControl alloc] init];
-        _pagrControl.numberOfPages = 3;
-        _pagrControl.currentPage = 1;
+        _pagrControl.numberOfPages = self.page;
+        _pagrControl.currentPage = 0;
         _pagrControl.currentPageIndicatorTintColor = [UIColor whiteColor];
         _pagrControl.pageIndicatorTintColor = [UIColor colorWithHexString:@"#909090" alpha:1];
     }
@@ -181,11 +207,10 @@
 
 -(UIScrollView *)contentScrollView{
     if (!_contentScrollView) {
-        _contentScrollView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 160 / 667.0 * [UIScreen mainScreen].bounds.size.height, [UIScreen mainScreen].bounds.size.width, 0.53 * [UIScreen mainScreen].bounds.size.height)];
+        _contentScrollView = [[UIScrollView alloc] init];
         _contentScrollView.delegate = self;
         _contentScrollView.pagingEnabled = YES;
         _contentScrollView.bounces = NO;
-        _contentScrollView.contentSize = CGSizeMake([UIScreen mainScreen].bounds.size.width * 3, 0);
         _contentScrollView.backgroundColor = [UIColor clearColor];
         _contentScrollView.showsHorizontalScrollIndicator = NO;
     }

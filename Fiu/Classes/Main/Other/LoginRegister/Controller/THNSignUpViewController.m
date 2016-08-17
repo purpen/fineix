@@ -21,7 +21,7 @@
 #import "UserInfo.h"
 #import "UserInfoEntity.h"
 #import "THNInformationViewController.h"
-#import "BindIngViewController.h"
+#import "THNBingViewController.h"
 
 @interface THNSignUpViewController ()<UITextFieldDelegate,FBRequestDelegate>
 
@@ -99,7 +99,7 @@ static NSString *const thirdRegister = @"/auth/third_sign";//第三方登录接�
     
     UMSocialSnsPlatform *snsPlatform = [UMSocialSnsPlatformManager getSocialPlatformWithName:UMShareToSina];
     snsPlatform.loginClickHandler(self,[UMSocialControllerService defaultControllerService],YES,^(UMSocialResponseEntity *response){
-        
+        [SVProgressHUD showWithMaskType:SVProgressHUDMaskTypeClear];
         
         if (response.responseCode == UMSResponseCodeSuccess) {
             //如果微博登录成功，取到用户信息
@@ -120,8 +120,6 @@ static NSString *const thirdRegister = @"/auth/third_sign";//第三方登录接�
 
 #pragma mark -第三方登录成功后取到用户信息
 -(void)afterTheSuccessOfTheThirdPartyToRegisterToGetUserInformation:(UMSocialAccountEntity *)snsAccount type:(NSNumber *)type{
-    UMSocialConfig *h = [[UMSocialConfig alloc] init];
-    h.hiddenLoadingHUD = YES;
     NSString *oid;
     if ([type isEqualToNumber:@1]) {
         oid = snsAccount.unionId;
@@ -137,6 +135,7 @@ static NSString *const thirdRegister = @"/auth/third_sign";//第三方登录接�
     FBRequest *request = [FBAPI postWithUrlString:thirdRegister requestDictionary:params delegate:self];
     [request startRequestSuccess:^(FBRequest *request, id result) {
         //如果请求成功
+        [SVProgressHUD dismiss];
         NSDictionary *dataDic = [result objectForKey:@"data"];
         if ([[dataDic objectForKey:@"has_user"] isEqualToNumber:@1]){
             //用户存在，更新当前用户的信息
@@ -155,9 +154,9 @@ static NSString *const thirdRegister = @"/auth/third_sign";//第三方登录接�
                 [self dismissViewControllerAnimated:YES completion:nil];
             }
         }else{
-            [SVProgressHUD dismiss];
+            
 
-            BindIngViewController *bing = [[BindIngViewController alloc] init];
+            THNBingViewController *bing = [[THNBingViewController alloc] init];
             bing.snsAccount = snsAccount;
             bing.type = type;
             [self.navigationController pushViewController:bing animated:YES];
@@ -206,6 +205,7 @@ static NSString *const thirdRegister = @"/auth/third_sign";//第三方登录接�
 }
 
 -(void)sendClick{
+    
     if ([self.tFView.textField.text checkTel]){
         FBRequest *request1 = [FBAPI postWithUrlString:@"/auth/check_account" requestDictionary:@{@"account":self.tFView.textField.text} delegate:self];
         [SVProgressHUD showWithMaskType:SVProgressHUDMaskTypeClear];
