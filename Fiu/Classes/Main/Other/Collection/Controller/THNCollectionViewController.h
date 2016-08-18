@@ -6,8 +6,8 @@
 //  Copyright © 2016年 taihuoniao. All rights reserved.
 //
 
-#import "THNViewController.h"
+#import "FBViewController.h"
 
-@interface THNCollectionViewController : THNViewController
+@interface THNCollectionViewController : FBViewController
 
 @end

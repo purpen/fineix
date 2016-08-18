@@ -14,6 +14,7 @@
 #import "FiuSceneRow.h"
 #import "FBAPI.h"
 #import "FBRequest.h"
+#import "THNSubHeadView.h"
 
 @interface SubscribeViewController ()<FBNavigationBarItemsDelegate,UICollectionViewDelegate,UICollectionViewDataSource,UICollectionViewDelegateFlowLayout,FBRequestDelegate>
 @pro_strong NSMutableArray          *   allFiuSceneMarr;        //   情景列表
@@ -57,9 +58,10 @@ static NSString *const URLAllFiuSceneList = @"/scene_scene/";
 {
     [SVProgressHUD show];
     UserInfoEntity *entity = [UserInfoEntity defaultUserInfoEntity];
-    self.allSceneListRequest = [FBAPI getWithUrlString:@"/favorite" requestDictionary:@{@"size":@"10", @"page":@(_currentPageNumber + 1),@"user_id":entity.userId,@"type":@"scene",@"event":@"subscription"} delegate:self];
+    self.allSceneListRequest = [FBAPI getWithUrlString:@"/favorite/get_new_list" requestDictionary:@{@"size":@"10", @"page":@(_currentPageNumber + 1),@"user_id":entity.userId,@"type":@13,@"event":@4} delegate:self];
     
     [self.allSceneListRequest startRequestSuccess:^(FBRequest *request, id result) {
+        NSLog(@"情景  %@",result);
         NSArray * sceneArr = [[result valueForKey:@"data"] valueForKey:@"rows"];
         for (NSDictionary * sceneDic in sceneArr) {
             FiuSceneInfoData * allFiuScene = [[FiuSceneInfoData alloc] initWithDictionary:sceneDic];
@@ -115,11 +117,13 @@ static NSString *const URLAllFiuSceneList = @"/scene_scene/";
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
+    self.view.backgroundColor = [UIColor colorWithHexString:@"#F7F7F7"];
+    [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent];
+    THNSubHeadView *view = [[THNSubHeadView alloc] initWithFrame:CGRectMake(0, 64, SCREEN_WIDTH, 44)];
+    [self.view addSubview:view];
     [self setAllSceneViewUI];
     
 }
-
 
 
 #pragma mark -
@@ -132,19 +136,25 @@ static NSString *const URLAllFiuSceneList = @"/scene_scene/";
     if (!_allSceneView) {
         UICollectionViewFlowLayout * flowLayout = [[UICollectionViewFlowLayout alloc] init];
         flowLayout.itemSize = CGSizeMake((SCREEN_WIDTH - 15)/2, (SCREEN_WIDTH - 15)/2 * 1.77);
-        flowLayout.sectionInset = UIEdgeInsetsMake(5, 5, 5, 5);
+        flowLayout.sectionInset = UIEdgeInsetsMake(15, 15, 15, 15);
         flowLayout.minimumInteritemSpacing = 5.0;
         flowLayout.minimumLineSpacing = 5.0;
         
-        _allSceneView = [[UICollectionView alloc] initWithFrame:CGRectMake(0, 64, SCREEN_WIDTH, SCREEN_HEIGHT - 64) collectionViewLayout:flowLayout];
+        _allSceneView = [[UICollectionView alloc] initWithFrame:CGRectMake(0, 64 + 44, SCREEN_WIDTH, SCREEN_HEIGHT - 64) collectionViewLayout:flowLayout];
+        
+        
+        _allSceneView.backgroundColor = [UIColor colorWithHexString:@"#F7F7F7"];
         _allSceneView.delegate = self;
         _allSceneView.dataSource = self;
-        _allSceneView.backgroundColor = [UIColor whiteColor];
         _allSceneView.showsVerticalScrollIndicator = NO;
         _allSceneView.showsHorizontalScrollIndicator = NO;
         [_allSceneView registerClass:[AllSceneCollectionViewCell class] forCellWithReuseIdentifier:@"allSceneCollectionViewCellID"];
     }
     return _allSceneView;
+}
+
+-(CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath{
+    return CGSizeMake((SCREEN_WIDTH - 15 * 3) * 0.5, 0.25 * SCREEN_HEIGHT);
 }
 
 #pragma mark  UICollectionViewDataSource
@@ -168,7 +178,7 @@ static NSString *const URLAllFiuSceneList = @"/scene_scene/";
 #pragma mark - 设置Nav
 - (void)setNavigationViewUI {
     self.view.backgroundColor = [UIColor whiteColor];
-    self.navViewTitle.text = @"订阅的地盘";
+    self.navViewTitle.text = @"订阅";
     self.delegate = self;
 }
 

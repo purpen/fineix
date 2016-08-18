@@ -39,7 +39,7 @@
                     </connections>
                 </button>
                 <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="输入6位以上密码" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="yHW-7s-YIY">
-                    <rect key="frame" x="20" y="215" width="295" height="44"/>
+                    <rect key="frame" x="20" y="215" width="305" height="44"/>
                     <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="44" id="JmI-Xp-BlX"/>
@@ -49,10 +49,10 @@
                     <textInputTraits key="textInputTraits" keyboardAppearance="alert" secureTextEntry="YES"/>
                 </textField>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="uVP-o2-kdf">
-                    <rect key="frame" x="315" y="215" width="40" height="44"/>
+                    <rect key="frame" x="325" y="215" width="30" height="44"/>
                     <subviews>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1cx-GH-Kcd">
-                            <rect key="frame" x="0.0" y="0.0" width="40" height="44"/>
+                            <rect key="frame" x="0.0" y="0.0" width="30" height="44"/>
                             <state key="normal" image="l_see"/>
                             <state key="selected" image="l_lock"/>
                             <connections>
@@ -67,7 +67,7 @@
                         <constraint firstAttribute="bottom" secondItem="1cx-GH-Kcd" secondAttribute="bottom" id="Hl0-ue-u3G"/>
                         <constraint firstItem="1cx-GH-Kcd" firstAttribute="top" secondItem="uVP-o2-kdf" secondAttribute="top" id="K3U-au-rGt"/>
                         <constraint firstItem="1cx-GH-Kcd" firstAttribute="leading" secondItem="uVP-o2-kdf" secondAttribute="leading" id="bn9-km-NTh"/>
-                        <constraint firstAttribute="width" constant="40" id="dI6-QS-6hS"/>
+                        <constraint firstAttribute="width" constant="30" id="dI6-QS-6hS"/>
                     </constraints>
                 </view>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="注册即表明同意 [ Fiu浮游™用户条款 ]" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="WYi-j6-E9j">

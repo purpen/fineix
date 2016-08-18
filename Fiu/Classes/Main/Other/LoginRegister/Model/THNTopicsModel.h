@@ -16,5 +16,7 @@
 @property(nonatomic,copy) NSString *title;
 /** 图片地址 */
 @property(nonatomic,copy) NSString *back_url;
+/**  */
+@property(nonatomic,copy) NSString *stick;
 
 @end

@@ -67,7 +67,9 @@ static NSString *getList = @"/category/getlist";
                                                                               @"domain" : @13
                                                                               } delegate:self];
     [request startRequestSuccess:^(FBRequest *request, id result) {
+        
         NSLog(@"result  %@",result);
+        
         NSArray *rowsAry = result[@"data"][@"rows"];
         self.modelAry = [THNTopicsModel mj_objectArrayWithKeyValuesArray:rowsAry];
         for (int i = 1; i <= self.modelAry.count; i ++) {
@@ -89,6 +91,10 @@ static NSString *getList = @"/category/getlist";
             if (i == self.modelAry.count) {
                 self.subscribeBtn.frame = CGRectMake([UIScreen mainScreen].bounds.size.width * 0.5 - 70 * 0.5, 175 + 4 * (h + 10) + h + 15, 70, 24);
                 [self.view addSubview:self.subscribeBtn];
+            }
+            
+            if ([((THNTopicsModel*)self.modelAry[i - 1]).stick integerValue] == 1) {
+                [self tipClick:view.tipBtn];
             }
         }
         

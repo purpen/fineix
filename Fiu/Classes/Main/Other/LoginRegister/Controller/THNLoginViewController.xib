@@ -38,7 +38,7 @@
                     </connections>
                 </button>
                 <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="密码" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="7ss-5Z-jws">
-                    <rect key="frame" x="20" y="269" width="285" height="44"/>
+                    <rect key="frame" x="20" y="269" width="305" height="44"/>
                     <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="44" id="mLC-vj-Ex8"/>
@@ -48,35 +48,25 @@
                     <textInputTraits key="textInputTraits" keyboardAppearance="alert" secureTextEntry="YES"/>
                 </textField>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="0cx-AR-5F3">
-                    <rect key="frame" x="305" y="269" width="50" height="44"/>
+                    <rect key="frame" x="325" y="269" width="30" height="44"/>
                     <subviews>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7mb-56-h2L">
-                            <rect key="frame" x="25" y="0.0" width="25" height="44"/>
-                            <state key="normal" image="l_lock"/>
+                            <rect key="frame" x="0.0" y="0.0" width="30" height="44"/>
+                            <state key="normal" image="l_see"/>
+                            <state key="selected" image="l_lock"/>
                             <connections>
                                 <action selector="lock:" destination="-1" eventType="touchUpInside" id="0dc-s2-Nel"/>
-                            </connections>
-                        </button>
-                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="lan-Rm-lmn">
-                            <rect key="frame" x="0.0" y="0.0" width="25" height="44"/>
-                            <state key="normal" image="l_see"/>
-                            <connections>
-                                <action selector="see:" destination="-1" eventType="touchUpInside" id="fMV-0x-upb"/>
                             </connections>
                         </button>
                     </subviews>
                     <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                     <constraints>
-                        <constraint firstItem="lan-Rm-lmn" firstAttribute="top" secondItem="0cx-AR-5F3" secondAttribute="top" id="442-hI-xMY"/>
                         <constraint firstAttribute="trailing" secondItem="7mb-56-h2L" secondAttribute="trailing" id="5Vt-Fu-JvA"/>
                         <constraint firstAttribute="bottom" secondItem="7mb-56-h2L" secondAttribute="bottom" id="8tY-ke-NJR"/>
                         <constraint firstItem="7mb-56-h2L" firstAttribute="top" secondItem="0cx-AR-5F3" secondAttribute="top" id="HtV-5E-UJZ"/>
-                        <constraint firstAttribute="width" constant="50" id="IOL-HE-Sjo"/>
-                        <constraint firstItem="lan-Rm-lmn" firstAttribute="leading" secondItem="0cx-AR-5F3" secondAttribute="leading" id="PrF-UU-LYw"/>
+                        <constraint firstAttribute="width" constant="30" id="IOL-HE-Sjo"/>
                         <constraint firstAttribute="height" constant="44" id="XLF-db-Oqs"/>
-                        <constraint firstItem="7mb-56-h2L" firstAttribute="width" secondItem="lan-Rm-lmn" secondAttribute="width" id="dUc-7e-7IA"/>
-                        <constraint firstItem="7mb-56-h2L" firstAttribute="leading" secondItem="lan-Rm-lmn" secondAttribute="trailing" id="l8d-QX-GJo"/>
-                        <constraint firstAttribute="bottom" secondItem="lan-Rm-lmn" secondAttribute="bottom" id="muW-Rv-cV3"/>
+                        <constraint firstItem="7mb-56-h2L" firstAttribute="leading" secondItem="0cx-AR-5F3" secondAttribute="leading" id="e1C-LF-7aF"/>
                     </constraints>
                 </view>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="q8f-OJ-6SW">
@@ -112,7 +102,7 @@
                     <textInputTraits key="textInputTraits" keyboardType="numberPad" keyboardAppearance="alert"/>
                 </textField>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="noU-fF-dwI">
-                    <rect key="frame" x="139" y="397" width="98" height="30"/>
+                    <rect key="frame" x="139" y="387" width="98" height="30"/>
                     <fontDescription key="fontDescription" type="system" pointSize="15"/>
                     <state key="normal" title="忘记登录密码?">
                         <color key="titleColor" red="0.52156862745098043" green="0.52156862745098043" blue="0.52156862745098043" alpha="1" colorSpace="calibratedRGB"/>
@@ -199,7 +189,7 @@
                 <constraint firstItem="roT-Hm-4o1" firstAttribute="leading" secondItem="1gv-9n-1Hm" secondAttribute="leading" id="ngF-JX-xQJ"/>
                 <constraint firstItem="0cx-AR-5F3" firstAttribute="leading" secondItem="7ss-5Z-jws" secondAttribute="trailing" id="oDM-TG-Eht"/>
                 <constraint firstItem="7ss-5Z-jws" firstAttribute="top" secondItem="vPz-vm-Lrx" secondAttribute="bottom" constant="15" id="ro9-fU-xVX"/>
-                <constraint firstItem="noU-fF-dwI" firstAttribute="top" secondItem="q8f-OJ-6SW" secondAttribute="bottom" constant="25" id="tlj-SM-efa"/>
+                <constraint firstItem="noU-fF-dwI" firstAttribute="top" secondItem="q8f-OJ-6SW" secondAttribute="bottom" constant="15" id="tlj-SM-efa"/>
                 <constraint firstItem="q8f-OJ-6SW" firstAttribute="top" secondItem="7ss-5Z-jws" secondAttribute="bottom" constant="15" id="yYw-VA-ZYx"/>
                 <constraint firstAttribute="trailing" secondItem="0cx-AR-5F3" secondAttribute="trailing" constant="20" id="zgR-jO-b6m"/>
             </constraints>

@@ -54,6 +54,7 @@ static NSString * const XMGPlacerholderColorKeyPath = @"_placeholderLabel.textCo
 
 
 - (IBAction)clickBingBtn:(UIButton *)sender {
+    [SVProgressHUD showWithMaskType:SVProgressHUDMaskTypeClear];
     //判断手机号格式
     if ([self.phoneNumTF.text checkTel]) {
         //如果手机号格式正确判断密码格式
@@ -121,6 +122,7 @@ static NSString * const XMGPlacerholderColorKeyPath = @"_placeholderLabel.textCo
 }
 
 - (IBAction)loginBtn:(UIButton *)sender {
+    [SVProgressHUD showWithMaskType:SVProgressHUDMaskTypeClear];
     //发送请求来存储用户信息
     NSDictionary *params;
     if ([self.type isEqualToNumber:@1]) {

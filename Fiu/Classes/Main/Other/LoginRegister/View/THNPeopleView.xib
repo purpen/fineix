@@ -31,21 +31,18 @@
                     <nil key="highlightedColor"/>
                 </label>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="yXF-01-15g">
-                    <rect key="frame" x="79" y="174" width="62" height="24"/>
+                    <rect key="frame" x="80" y="174" width="60" height="24"/>
                     <constraints>
-                        <constraint firstAttribute="width" constant="62" id="CHf-Gq-otS"/>
+                        <constraint firstAttribute="width" constant="60" id="CHf-Gq-otS"/>
                         <constraint firstAttribute="height" constant="24" id="PXn-wo-vWN"/>
                     </constraints>
-                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="13"/>
                     <inset key="titleEdgeInsets" minX="2" minY="0.0" maxX="0.0" maxY="0.0"/>
                     <inset key="imageEdgeInsets" minX="-2" minY="0.0" maxX="0.0" maxY="0.0"/>
                     <state key="normal" title="关注" image="l_fucos_e">
                         <color key="titleColor" red="0.1803921568627451" green="0.1803921568627451" blue="0.1803921568627451" alpha="1" colorSpace="calibratedRGB"/>
                     </state>
                     <state key="selected" title="已关注" image="l_fucos_r"/>
-                    <connections>
-                        <action selector="fucos:" destination="iN0-l3-epB" eventType="touchUpInside" id="lE4-qw-6vD"/>
-                    </connections>
                 </button>
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
@@ -66,7 +63,7 @@
             <nil key="simulatedStatusBarMetrics"/>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <connections>
-                <outlet property="fucosBtn" destination="yXF-01-15g" id="pyR-Qq-6cb"/>
+                <outlet property="fucosBtn" destination="yXF-01-15g" id="mx7-pb-663"/>
                 <outlet property="headImageView" destination="L8o-5J-ajJ" id="krB-WF-irz"/>
                 <outlet property="nickNameLabel" destination="TxR-YR-bbC" id="RET-MS-37P"/>
                 <outlet property="profielLabel" destination="7qi-Zk-zdc" id="Ks4-fk-Azp"/>
@@ -75,7 +72,7 @@
         </view>
     </objects>
     <resources>
-        <image name="l_fucos_e" width="14" height="14"/>
+        <image name="l_fucos_e" width="7" height="7"/>
         <image name="l_fucos_r" width="9" height="7"/>
     </resources>
 </document>

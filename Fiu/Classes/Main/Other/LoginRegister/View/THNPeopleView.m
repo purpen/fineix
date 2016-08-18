@@ -19,7 +19,7 @@
 @property (weak, nonatomic) IBOutlet UIImageView *headImageView;
 @property (weak, nonatomic) IBOutlet UILabel *nickNameLabel;
 @property (weak, nonatomic) IBOutlet UILabel *profielLabel;
-@property (weak, nonatomic) IBOutlet UIButton *fucosBtn;
+
 
 
 @end
@@ -48,42 +48,42 @@
 }
 
 - (IBAction)fucos:(UIButton*)sender {
-    [SVProgressHUD showWithMaskType:SVProgressHUDMaskTypeClear];
-    
-    sender.selected = !sender.selected;
-    
-    
-    if (sender.selected) {
-        
-        sender.backgroundColor = [UIColor colorWithHexString:@"#BE8914"];
-        sender.layer.borderColor = [UIColor clearColor].CGColor;
-        
-        FBRequest *request = [FBAPI postWithUrlString:@"/follow/ajax_follow" requestDictionary:@{
-                                                                @"follow_id" : self.model._id
-                                                                } delegate:self];
-        [request startRequestSuccess:^(FBRequest *request, id result) {
-            if ([result objectForKey:@"success"]) {
-                [SVProgressHUD showSuccessWithStatus:@"关注成功"];
-            }else{
-                [SVProgressHUD showErrorWithStatus:@"关注失败"];
-            }
-        } failure:nil];
-    }else{
-        
-        sender.backgroundColor = [UIColor clearColor];
-        sender.layer.borderColor = [UIColor colorWithHexString:@"#C6C6C6"].CGColor;
-        
-        FBRequest *request = [FBAPI postWithUrlString:@"/follow/ajax_cancel_follow" requestDictionary:@{
-                                                                                                 @"follow_id" : self.model._id
-                                                                                                 } delegate:self];
-        [request startRequestSuccess:^(FBRequest *request, id result) {
-            if ([result objectForKey:@"success"]) {
-                [SVProgressHUD showSuccessWithStatus:@"取消关注"];
-            }else{
-                [SVProgressHUD showErrorWithStatus:@"取消关注失败"];
-            }
-        } failure:nil];
-    }
+//    [SVProgressHUD showWithMaskType:SVProgressHUDMaskTypeClear];
+//    
+//    sender.selected = !sender.selected;
+//    
+//    
+//    if (sender.selected) {
+//        
+//        sender.backgroundColor = [UIColor colorWithHexString:@"#BE8914"];
+//        sender.layer.borderColor = [UIColor clearColor].CGColor;
+//        
+//        FBRequest *request = [FBAPI postWithUrlString:@"/follow/ajax_follow" requestDictionary:@{
+//                                                                @"follow_id" : self.model._id
+//                                                                } delegate:self];
+//        [request startRequestSuccess:^(FBRequest *request, id result) {
+//            if ([result objectForKey:@"success"]) {
+//                [SVProgressHUD showSuccessWithStatus:@"关注成功"];
+//            }else{
+//                [SVProgressHUD showErrorWithStatus:@"关注失败"];
+//            }
+//        } failure:nil];
+//    }else{
+//        
+//        sender.backgroundColor = [UIColor clearColor];
+//        sender.layer.borderColor = [UIColor colorWithHexString:@"#C6C6C6"].CGColor;
+//        
+//        FBRequest *request = [FBAPI postWithUrlString:@"/follow/ajax_cancel_follow" requestDictionary:@{
+//                                                                                                 @"follow_id" : self.model._id
+//                                                                                                 } delegate:self];
+//        [request startRequestSuccess:^(FBRequest *request, id result) {
+//            if ([result objectForKey:@"success"]) {
+//                [SVProgressHUD showSuccessWithStatus:@"取消关注"];
+//            }else{
+//                [SVProgressHUD showErrorWithStatus:@"取消关注失败"];
+//            }
+//        } failure:nil];
+//    }
     
 }
 

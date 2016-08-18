@@ -422,6 +422,9 @@
 		1FD10CB31D62E89D005898EE /* THNContentViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1FD10CB11D62E89D005898EE /* THNContentViewController.xib */; };
 		1FD10CBA1D62FBF5005898EE /* THNGoodsCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 1FD10CB81D62FBF5005898EE /* THNGoodsCollectionViewCell.m */; };
 		1FD10CBB1D62FBF5005898EE /* THNGoodsCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1FD10CB91D62FBF5005898EE /* THNGoodsCollectionViewCell.xib */; };
+		1FD10CBE1D647B2C005898EE /* THNSubHeadView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1FD10CBD1D647B2C005898EE /* THNSubHeadView.m */; };
+		1FD10CC21D64850D005898EE /* THNBingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1FD10CC01D64850D005898EE /* THNBingViewController.m */; };
+		1FD10CC31D64850D005898EE /* THNBingViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1FD10CC11D64850D005898EE /* THNBingViewController.xib */; };
 		1FD59C131D115FD50025A800 /* ProjectViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1FD59C111D115FD50025A800 /* ProjectViewController.m */; };
 		1FD59C141D115FD50025A800 /* ProjectViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1FD59C121D115FD50025A800 /* ProjectViewController.xib */; };
 		1FD59C181D11A8190025A800 /* ProjectViewCommentsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1FD59C161D11A8190025A800 /* ProjectViewCommentsViewController.m */; };
@@ -1352,6 +1355,11 @@
 		1FD10CB71D62FBF5005898EE /* THNGoodsCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = THNGoodsCollectionViewCell.h; path = Fiu/Classes/Main/Other/Collection/Controller/THNGoodsCollectionViewCell.h; sourceTree = SOURCE_ROOT; };
 		1FD10CB81D62FBF5005898EE /* THNGoodsCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = THNGoodsCollectionViewCell.m; path = Fiu/Classes/Main/Other/Collection/Controller/THNGoodsCollectionViewCell.m; sourceTree = SOURCE_ROOT; };
 		1FD10CB91D62FBF5005898EE /* THNGoodsCollectionViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = THNGoodsCollectionViewCell.xib; path = Fiu/Classes/Main/Other/Collection/Controller/THNGoodsCollectionViewCell.xib; sourceTree = SOURCE_ROOT; };
+		1FD10CBC1D647B2C005898EE /* THNSubHeadView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THNSubHeadView.h; sourceTree = "<group>"; };
+		1FD10CBD1D647B2C005898EE /* THNSubHeadView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THNSubHeadView.m; sourceTree = "<group>"; };
+		1FD10CBF1D64850D005898EE /* THNBingViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THNBingViewController.h; sourceTree = "<group>"; };
+		1FD10CC01D64850D005898EE /* THNBingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THNBingViewController.m; sourceTree = "<group>"; };
+		1FD10CC11D64850D005898EE /* THNBingViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = THNBingViewController.xib; sourceTree = "<group>"; };
 		1FD59C101D115FD50025A800 /* ProjectViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProjectViewController.h; sourceTree = "<group>"; };
 		1FD59C111D115FD50025A800 /* ProjectViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ProjectViewController.m; sourceTree = "<group>"; };
 		1FD59C121D115FD50025A800 /* ProjectViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ProjectViewController.xib; sourceTree = "<group>"; };
@@ -2911,6 +2919,8 @@
 				1FF36EAA1D50A7C500EB3C93 /* SearchPepoleTableViewCell.h */,
 				1FF36EAB1D50A7C500EB3C93 /* SearchPepoleTableViewCell.m */,
 				1FF36EAC1D50A7C500EB3C93 /* SearchPepoleTableViewCell.xib */,
+				1FD10CBC1D647B2C005898EE /* THNSubHeadView.h */,
+				1FD10CBD1D647B2C005898EE /* THNSubHeadView.m */,
 			);
 			path = view;
 			sourceTree = "<group>";
@@ -3272,6 +3282,9 @@
 				1FD10C921D5DB9BB005898EE /* THNScenarioViewController.h */,
 				1FD10C931D5DB9BB005898EE /* THNScenarioViewController.m */,
 				1FD10C941D5DB9BB005898EE /* THNScenarioViewController.xib */,
+				1FD10CBF1D64850D005898EE /* THNBingViewController.h */,
+				1FD10CC01D64850D005898EE /* THNBingViewController.m */,
+				1FD10CC11D64850D005898EE /* THNBingViewController.xib */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -4623,6 +4636,7 @@
 				1F2A90721CF40277005116C7 /* JDOrderViewController.xib in Resources */,
 				1FD10C961D5DB9BB005898EE /* THNScenarioViewController.xib in Resources */,
 				1F69CE211CF70BFA00AE3271 /* OfficialCertificationViewController.xib in Resources */,
+				1FD10CC31D64850D005898EE /* THNBingViewController.xib in Resources */,
 				1FD10C9E1D5DC8D1005898EE /* THNTopicView.xib in Resources */,
 				D812815B1CAA8532007CF08B /* Info.plist in Resources */,
 				1F2A900A1CF40277005116C7 /* chanel.xib in Resources */,
@@ -4876,6 +4890,7 @@
 				D8F1C2B01D3A377900AE717F /* CatagoryFiuSceneModel.m in Sources */,
 				1F2A903F1CF40277005116C7 /* CityTableViewCell.m in Sources */,
 				D8B355621D2E2DF5000BA26D /* DownSceneInfoView.m in Sources */,
+				1FD10CC21D64850D005898EE /* THNBingViewController.m in Sources */,
 				1F2A907F1CF40277005116C7 /* ExpressInfoModel.m in Sources */,
 				1F2A8F821CF40277005116C7 /* FiuSceneTableViewCell.m in Sources */,
 				1F2A8F711CF40277005116C7 /* FiuSceneInfoData.m in Sources */,
@@ -5145,6 +5160,7 @@
 				1F2A8FCB1CF40277005116C7 /* CarGoodsModelItem.m in Sources */,
 				1F2A8FE11CF40277005116C7 /* InfoTitleTableViewCell.m in Sources */,
 				1F2A8FD21CF40277005116C7 /* BuyCarDefault.m in Sources */,
+				1FD10CBE1D647B2C005898EE /* THNSubHeadView.m in Sources */,
 				1F2A8F681CF40277005116C7 /* FiuPeople.m in Sources */,
 				1F6CA26D1D5C1A0600DFB79E /* THNTFView.m in Sources */,
 				1F2A91271CF42EC1005116C7 /* OrderInfoDetailViewController.m in Sources */,
@@ -5256,7 +5272,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 9.2;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
-				PROVISIONING_PROFILE = "38736fb6-f8a9-4075-b98f-85f06063d856";
+				PROVISIONING_PROFILE = "68229318-888d-4d23-9586-1a46706c4314";
 				SDKROOT = iphoneos;
 			};
 			name = Debug;
@@ -5294,7 +5310,7 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.2;
 				MTL_ENABLE_DEBUG_INFO = NO;
-				PROVISIONING_PROFILE = "38736fb6-f8a9-4075-b98f-85f06063d856";
+				PROVISIONING_PROFILE = "68229318-888d-4d23-9586-1a46706c4314";
 				SDKROOT = iphoneos;
 				VALIDATE_PRODUCT = YES;
 			};
@@ -5341,7 +5357,7 @@
 				OTHER_LIBTOOLFLAGS = "-all_load";
 				PRODUCT_BUNDLE_IDENTIFIER = com.THN.fineix;
 				PRODUCT_NAME = Fiu;
-				PROVISIONING_PROFILE = "38736fb6-f8a9-4075-b98f-85f06063d856";
+				PROVISIONING_PROFILE = "68229318-888d-4d23-9586-1a46706c4314";
 				RUN_CLANG_STATIC_ANALYZER = NO;
 				USER_HEADER_SEARCH_PATHS = "$(SRCROOT)";
 			};
@@ -5388,7 +5404,7 @@
 				OTHER_LIBTOOLFLAGS = "-all_load";
 				PRODUCT_BUNDLE_IDENTIFIER = com.THN.fineix;
 				PRODUCT_NAME = Fiu;
-				PROVISIONING_PROFILE = "38736fb6-f8a9-4075-b98f-85f06063d856";
+				PROVISIONING_PROFILE = "68229318-888d-4d23-9586-1a46706c4314";
 				RUN_CLANG_STATIC_ANALYZER = NO;
 				USER_HEADER_SEARCH_PATHS = "$(SRCROOT)";
 			};
