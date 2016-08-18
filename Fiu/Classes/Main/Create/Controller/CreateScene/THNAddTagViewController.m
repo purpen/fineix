@@ -313,6 +313,10 @@ static NSString *const searchListCellID = @"SearchListCellID";
     }];
 }
 
+- (void)scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate {
+    [self.tagsTextField resignFirstResponder];
+}
+
 #pragma mark -  设置导航栏
 - (void)setNavViewUI {
     self.view.backgroundColor = [UIColor colorWithHexString:@"#FFFFFF"];

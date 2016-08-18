@@ -49,7 +49,7 @@
     for (NSDictionary * brandDict in model) {
         FiuBrandRow * brand = [[FiuBrandRow alloc] initWithDictionary:brandDict];
         [self.headerMarr addObject:brand.coverUrl];
-        [self.userIdMarr addObject:brand.idField.idField];
+        [self.userIdMarr addObject:brand.idx];
     }
     [self.peopleView reloadData];
 }

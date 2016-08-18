@@ -7,8 +7,25 @@
 //
 
 #import "MarkBrandsViewController.h"
+#import "THNSearchBrandTableViewCell.h"
+#import "THNSearchGoodsTableViewCell.h"
+#import "FiuBrandRow.h"
 
-@interface MarkBrandsViewController ()
+static NSString *const URLBrandList = @"/scene_brands/getlist";
+static NSString *const URLGoodsList = @"/scene_product/getlist";
+
+static NSString *const brandCellId = @"BrandCellId";
+static NSString *const goodsCellId = @"GoodsCellId";
+
+@interface MarkBrandsViewController () {
+    NSString *_chooseBrandTitle;
+}
+
+@pro_strong NSMutableArray *brandMarr;
+@pro_strong NSMutableArray *brandTitleMarr;
+@pro_strong NSMutableArray *brandIdMarr;
+@pro_strong NSMutableArray *goodsMarr;
+@pro_strong NSMutableArray *goodsIdMarr;
 
 @end
 
@@ -26,9 +43,156 @@
     [self setUI];
 }
 
+#pragma mark - 网络请求
+#pragma mark 品牌列表
+- (void)networkSearchBrand:(NSString *)keyword {
+    [self.brandMarr removeAllObjects];
+    [self.brandIdMarr removeAllObjects];
+    
+    self.brandRequest = [FBAPI getWithUrlString:URLBrandList requestDictionary:@{@"title":keyword, @"from_to":@"1", @"kind":@"1", @"size":@"100"} delegate:self];
+    [self.brandRequest startRequestSuccess:^(FBRequest *request, id result) {
+        NSArray *brandArr = [[result valueForKey:@"data"] valueForKey:@"rows"];
+        for (NSDictionary *dic in brandArr) {
+            FiuBrandRow *model = [[FiuBrandRow alloc] initWithDictionary:dic];
+            [self.brandMarr addObject:model];
+            [self.brandIdMarr addObject:model.idx];
+            [self.brandTitleMarr addObject:model.title];
+        }
+        [self.brandList reloadData];
+        
+    } failure:^(FBRequest *request, NSError *error) {
+        NSLog(@"%@", error);
+    }];
+}
+
+#pragma mark 产品
+- (void)networkBrandOfGoods:(NSString *)brandId {
+    self.goodsRequest = [FBAPI getWithUrlString:URLGoodsList requestDictionary:@{@"brand_id":brandId, @"kind":@"1", @"size":@"1000"} delegate:self];
+    [self.goodsRequest startRequestSuccess:^(FBRequest *request, id result) {
+        self.goodsMarr = [[[result valueForKey:@"data"] valueForKey:@"rows"] valueForKey:@"title"];
+        [self.goodsList reloadData];
+        
+    } failure:^(FBRequest *request, NSError *error) {
+        NSLog(@"%@", error);
+    }];
+}
+
 #pragma mark - 设置视图UI
 - (void)setUI {
     [self.view addSubview:self.searchGoods];
+    [self.view addSubview:self.brandList];
+    [self.view addSubview:self.goodsList];
+}
+
+- (UITableView *)goodsList {
+    if (!_goodsList) {
+        _goodsList = [[UITableView alloc] initWithFrame:CGRectMake(SCREEN_WIDTH, 64, SCREEN_WIDTH, SCREEN_HEIGHT - 64)];
+        _goodsList.delegate = self;
+        _goodsList.dataSource = self;
+        _goodsList.showsVerticalScrollIndicator = NO;
+        _goodsList.backgroundColor = [UIColor colorWithHexString:@"#F8F8F8"];
+        _goodsList.tableFooterView = [UIView new];
+    }
+    return _goodsList;
+}
+
+- (UITableView *)brandList {
+    if (!_brandList) {
+        _brandList = [[UITableView alloc] initWithFrame:CGRectMake(0, 64, SCREEN_WIDTH, SCREEN_HEIGHT - 64)];
+        _brandList.delegate = self;
+        _brandList.dataSource = self;
+        _brandList.showsVerticalScrollIndicator = NO;
+        _brandList.backgroundColor = [UIColor colorWithHexString:@"#F8F8F8"];
+        _brandList.tableFooterView = [UIView new];
+    }
+    return _brandList;
+}
+
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+    if (tableView == self.brandList) {
+        return self.brandMarr.count/2;
+    } else if (tableView == self.goodsList) {
+        return self.goodsMarr.count;
+    }
+    return 1;
+}
+
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+    if (tableView == self.brandList) {
+        THNSearchBrandTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:brandCellId];
+        cell = [[THNSearchBrandTableViewCell alloc] initWithStyle:(UITableViewCellStyleDefault) reuseIdentifier:brandCellId];
+        if (self.brandMarr.count) {
+            [cell setBrandData:self.brandMarr[indexPath.row]];
+        }
+        return cell;
+    
+    } else if (tableView == self.goodsList) {
+        THNSearchGoodsTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:goodsCellId];
+        cell = [[THNSearchGoodsTableViewCell alloc] initWithStyle:(UITableViewCellStyleDefault) reuseIdentifier:goodsCellId];
+        if (self.goodsMarr.count) {
+            [cell setGoodsInfo:_chooseBrandTitle withGoods:self.goodsMarr[indexPath.row]];
+        }
+        return cell;
+    }
+    
+    return nil;
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
+    if (tableView == self.brandList) {
+        return 80;
+    } else if (tableView == self.goodsList) {
+        return 44;
+    }
+    return 44;
+}
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    if (tableView == self.brandList) {
+        _chooseBrandTitle = self.brandTitleMarr[indexPath.row];
+        [self setBrandName:self.brandTitleMarr[indexPath.row]];
+        [self networkBrandOfGoods:self.brandIdMarr[indexPath.row]];
+        
+    } else if (tableView == self.goodsList) {
+        [self dismissViewControllerAnimated:YES completion:^{
+            self.getBrandAndGoodsInfoBlock(_chooseBrandTitle, self.goodsMarr[indexPath.row]);
+        }];
+    }
+}
+
+- (void)scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate {
+    [self.searchGoods.searchInputBox resignFirstResponder];
+}
+
+#pragma mark - 搜索框固定品牌名称
+- (void)setBrandName:(NSString *)title {
+    CGSize width = [title boundingRectWithSize:CGSizeMake(320, 0)
+                                       options:(NSStringDrawingUsesFontLeading)
+                                    attributes:@{NSFontAttributeName:[UIFont systemFontOfSize:12]}
+                                       context:nil].size;
+    
+    self.brandNameBtn.frame = CGRectMake(0, 0, width.width * 1.5, 30);
+    [self.brandNameBtn setTitle:title forState:(UIControlStateNormal)];
+    self.searchGoods.searchInputBox.leftViewMode = UITextFieldViewModeAlways;
+    
+    self.searchGoods.searchInputBox.text = @"";
+    self.searchGoods.searchInputBox.placeholder = NSLocalizedString(@"pleaseWriteGoods", nil);
+    [self.searchGoods.searchInputBox becomeFirstResponder];
+    
+    CGRect goodsListFrame = CGRectMake(0, 64, SCREEN_WIDTH, SCREEN_HEIGHT - 64);
+    CGRect brandListFrame = CGRectMake(-SCREEN_WIDTH, 64, SCREEN_WIDTH, SCREEN_HEIGHT - 64);
+    self.goodsList.frame = goodsListFrame;
+    self.brandList.frame = brandListFrame;
+
+}
+
+- (UIButton *)brandNameBtn {
+    if (!_brandNameBtn) {
+        _brandNameBtn = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 0, 30)];
+        _brandNameBtn.titleLabel.font = [UIFont systemFontOfSize:12];
+        [_brandNameBtn setTitleColor:[UIColor colorWithHexString:@"#000000"] forState:(UIControlStateNormal)];
+    }
+    return _brandNameBtn;
 }
 
 #pragma mark - 添加搜索框视图
@@ -38,8 +202,18 @@
         _searchGoods.searchInputBox.placeholder = NSLocalizedString(@"pleaseWriteBrand", nil);
         _searchGoods.delegate = self;
         [_searchGoods.searchInputBox becomeFirstResponder];
+        _searchGoods.searchInputBox.returnKeyType = UIReturnKeyDone;
+        _searchGoods.searchInputBox.leftView = self.brandNameBtn;
+        _searchGoods.searchInputBox.leftViewMode = UITextFieldViewModeAlways;
+        [_searchGoods.searchInputBox addTarget:self action:@selector(searchKeyword:) forControlEvents:(UIControlEventEditingChanged)];
     }
     return _searchGoods;
+}
+
+- (void)searchKeyword:(UITextField *)textField {
+    if (![textField.text isEqualToString:@""]) {
+        [self networkSearchBrand:textField.text];
+    }
 }
 
 #pragma mark - 搜索产品
@@ -59,6 +233,28 @@
     self.view.backgroundColor = [UIColor blackColor];
     [[UIApplication sharedApplication] setStatusBarHidden:NO withAnimation:(UIStatusBarAnimationSlide)];
     self.navView.hidden = YES;
+}
+
+#pragma mark - NSMutablerArray
+- (NSMutableArray *)brandMarr {
+    if (!_brandMarr) {
+        _brandMarr = [NSMutableArray array];
+    }
+    return _brandMarr;
+}
+
+- (NSMutableArray *)brandIdMarr {
+    if (!_brandIdMarr) {
+        _brandIdMarr = [NSMutableArray array];
+    }
+    return _brandIdMarr;
+}
+
+- (NSMutableArray *)brandTitleMarr {
+    if (!_brandTitleMarr) {
+        _brandTitleMarr = [NSMutableArray array];
+    }
+    return _brandTitleMarr;
 }
 
 @end

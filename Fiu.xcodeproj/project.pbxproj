@@ -523,6 +523,9 @@
 		D868090F1D6349B0002714B2 /* THNMarkGoodsView.m in Sources */ = {isa = PBXBuildFile; fileRef = D868090E1D6349B0002714B2 /* THNMarkGoodsView.m */; };
 		D86809121D6433B0002714B2 /* MarkBrandsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D86809111D6433B0002714B2 /* MarkBrandsViewController.m */; };
 		D86809151D643AA0002714B2 /* THNMarkGoodsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D86809141D643AA0002714B2 /* THNMarkGoodsViewController.m */; };
+		D86809181D65EE5F002714B2 /* THNSearchBrandTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D86809171D65EE5F002714B2 /* THNSearchBrandTableViewCell.m */; };
+		D868091B1D6609ED002714B2 /* THNSearchGoodsTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D868091A1D6609ED002714B2 /* THNSearchGoodsTableViewCell.m */; };
+		D86809211D662382002714B2 /* THNAddGoodsBtn.m in Sources */ = {isa = PBXBuildFile; fileRef = D86809201D662382002714B2 /* THNAddGoodsBtn.m */; };
 		D869BD671D6036A000432423 /* FBAlertViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D869BD411D6036A000432423 /* FBAlertViewController.m */; };
 		D869BD681D6036A000432423 /* FBSheetViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D869BD431D6036A000432423 /* FBSheetViewController.m */; };
 		D869BD691D6036A000432423 /* QrShareSheetViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D869BD451D6036A000432423 /* QrShareSheetViewController.m */; };
@@ -1541,6 +1544,12 @@
 		D86809111D6433B0002714B2 /* MarkBrandsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MarkBrandsViewController.m; sourceTree = "<group>"; };
 		D86809131D643AA0002714B2 /* THNMarkGoodsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THNMarkGoodsViewController.h; sourceTree = "<group>"; };
 		D86809141D643AA0002714B2 /* THNMarkGoodsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THNMarkGoodsViewController.m; sourceTree = "<group>"; };
+		D86809161D65EE5F002714B2 /* THNSearchBrandTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THNSearchBrandTableViewCell.h; sourceTree = "<group>"; };
+		D86809171D65EE5F002714B2 /* THNSearchBrandTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THNSearchBrandTableViewCell.m; sourceTree = "<group>"; };
+		D86809191D6609ED002714B2 /* THNSearchGoodsTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THNSearchGoodsTableViewCell.h; sourceTree = "<group>"; };
+		D868091A1D6609ED002714B2 /* THNSearchGoodsTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THNSearchGoodsTableViewCell.m; sourceTree = "<group>"; };
+		D868091F1D662382002714B2 /* THNAddGoodsBtn.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THNAddGoodsBtn.h; sourceTree = "<group>"; };
+		D86809201D662382002714B2 /* THNAddGoodsBtn.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THNAddGoodsBtn.m; sourceTree = "<group>"; };
 		D869BD401D6036A000432423 /* FBAlertViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FBAlertViewController.h; sourceTree = "<group>"; };
 		D869BD411D6036A000432423 /* FBAlertViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FBAlertViewController.m; sourceTree = "<group>"; };
 		D869BD421D6036A000432423 /* FBSheetViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FBSheetViewController.h; sourceTree = "<group>"; };
@@ -2019,6 +2028,12 @@
 				1F2A8C291CF40276005116C7 /* MarkGoodsCollectionViewCell.m */,
 				D868090D1D6349B0002714B2 /* THNMarkGoodsView.h */,
 				D868090E1D6349B0002714B2 /* THNMarkGoodsView.m */,
+				D86809161D65EE5F002714B2 /* THNSearchBrandTableViewCell.h */,
+				D86809171D65EE5F002714B2 /* THNSearchBrandTableViewCell.m */,
+				D86809191D6609ED002714B2 /* THNSearchGoodsTableViewCell.h */,
+				D868091A1D6609ED002714B2 /* THNSearchGoodsTableViewCell.m */,
+				D868091F1D662382002714B2 /* THNAddGoodsBtn.h */,
+				D86809201D662382002714B2 /* THNAddGoodsBtn.m */,
 			);
 			path = Mark;
 			sourceTree = "<group>";
@@ -4910,6 +4925,7 @@
 				48F0F60D1D5F719100379D7F /* THNFocusViewController.m in Sources */,
 				D8AC3E121D2DF9D900148522 /* FBTabBarController.m in Sources */,
 				1FCDCC7A1D0515F700C92E78 /* ScenarioNonView.m in Sources */,
+				D86809211D662382002714B2 /* THNAddGoodsBtn.m in Sources */,
 				1F2A8F5B1CF40277005116C7 /* LookAllTagBtnTableViewCell.m in Sources */,
 				D8F1C2B01D3A377900AE717F /* CatagoryFiuSceneModel.m in Sources */,
 				1F2A903F1CF40277005116C7 /* CityTableViewCell.m in Sources */,
@@ -4959,6 +4975,7 @@
 				1F2A90271CF40277005116C7 /* CertIdView.m in Sources */,
 				D85174691D598D60005F5722 /* THNSceneInfoTableViewCell.m in Sources */,
 				1F2A908B1CF40277005116C7 /* PaySuccessViewController.m in Sources */,
+				D868091B1D6609ED002714B2 /* THNSearchGoodsTableViewCell.m in Sources */,
 				1F2A900E1CF40277005116C7 /* FriendCollectionViewCell.m in Sources */,
 				1F2A90791CF40277005116C7 /* ReturnViewController.m in Sources */,
 				D869BD6F1D6036A000432423 /* CommentReplyComment.m in Sources */,
@@ -4975,6 +4992,7 @@
 				1F2A8F3C1CF40277005116C7 /* AddUrlViewController.m in Sources */,
 				D8707F081D37FA3200007835 /* FBGoodsInfoModelData.m in Sources */,
 				D81281591CAA8532007CF08B /* UIImageView+SDWedImage.m in Sources */,
+				D86809181D65EE5F002714B2 /* THNSearchBrandTableViewCell.m in Sources */,
 				D8AC3E111D2DF9D900148522 /* FBTabBar.m in Sources */,
 				1F2A8F501CF40277005116C7 /* PictureView.m in Sources */,
 				1F2A901F1CF40277005116C7 /* InvalidBonusCell.m in Sources */,

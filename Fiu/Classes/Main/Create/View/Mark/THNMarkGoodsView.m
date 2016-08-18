@@ -119,7 +119,7 @@
         _brand.layer.borderWidth = 0.5f;
         _brand.layer.borderColor = [UIColor colorWithHexString:@"#FFFFFF" alpha:0.6f].CGColor;
         _brand.layer.cornerRadius = 5.0f;
-        
+        _brand.clearButtonMode = UITextFieldViewModeUnlessEditing;
         _brand.leftView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 10, 35)];
         _brand.leftViewMode = UITextFieldViewModeAlways;
         _brand.delegate = self;
@@ -132,7 +132,12 @@
     
     if (textField == self.brand) {
         MarkBrandsViewController *markBrandVC = [[MarkBrandsViewController alloc] init];
-        [self.vc presentViewController:markBrandVC animated:YES completion:nil];
+        [self.vc presentViewController:markBrandVC animated:YES completion:^{
+            markBrandVC.getBrandAndGoodsInfoBlock = ^ (NSString *brandTitle, NSString *goodsTitle) {
+                self.brand.text = brandTitle;
+                self.goods.text = goodsTitle;
+            };
+        }];
         
         if ([self.delegate respondsToSelector:@selector(mark_AddBands)]) {
             [self.delegate mark_AddBands];
@@ -160,7 +165,7 @@
         _goods.layer.borderWidth = 0.5f;
         _goods.layer.borderColor = [UIColor colorWithHexString:@"#FFFFFF" alpha:0.6f].CGColor;
         _goods.layer.cornerRadius = 5.0f;
-        
+        _goods.clearButtonMode = UITextFieldViewModeUnlessEditing;
         _goods.leftView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 10, 35)];
         _goods.leftViewMode = UITextFieldViewModeAlways;
         _goods.delegate = self;

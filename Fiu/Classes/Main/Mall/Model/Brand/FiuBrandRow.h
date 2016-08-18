@@ -7,11 +7,11 @@
 //	Model file Generated using JSONExport: https://github.com/Ahmed-Ali/JSONExport
 
 #import <UIKit/UIKit.h>
-#import "FiuBrandId.h"
+//#import "FiuBrandId.h"
 
 @interface FiuBrandRow : NSObject
 
-@property (nonatomic, strong) FiuBrandId * idField;
+//@property (nonatomic, strong) FiuBrandId * idField;
 @property (nonatomic, assign) NSInteger brandsSizeType;
 @property (nonatomic, strong) NSString * coverUrl;
 @property (nonatomic, assign) NSInteger createdOn;
@@ -21,6 +21,7 @@
 @property (nonatomic, strong) NSString * title;
 @property (nonatomic, assign) NSInteger updatedOn;
 @property (nonatomic, assign) NSInteger usedCount;
+@property (nonatomic, strong) NSString * idx;
 
 -(instancetype)initWithDictionary:(NSDictionary *)dictionary;
 @end

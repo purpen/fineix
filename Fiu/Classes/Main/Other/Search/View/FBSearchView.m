@@ -51,11 +51,7 @@
     if (!_searchInputBox) {
         _searchInputBox = [[UITextField alloc] init];
         _searchInputBox.clearButtonMode = UITextFieldViewModeAlways;
-        if (IS_iOS9) {
-            _searchInputBox.font = [UIFont fontWithName:@"PingFangSC-Light" size:14];
-        } else {
-            _searchInputBox.font = [UIFont systemFontOfSize:14];
-        }
+        _searchInputBox.font = [UIFont systemFontOfSize:14];
         _searchInputBox.returnKeyType = UIReturnKeySearch;
         _searchInputBox.delegate = self;
     }

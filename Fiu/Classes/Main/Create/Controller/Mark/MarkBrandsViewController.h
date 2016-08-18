@@ -11,11 +11,21 @@
 #import "FBMenuView.h"
 #import <SVProgressHUD/SVProgressHUD.h>
 
+typedef void(^GetBrandAndGoodsInfoBlock)(NSString *brandTitle, NSString *goodsTitle);
 @interface MarkBrandsViewController : FBPictureViewController <
     FBSearchDelegate,
-    FBMenuViewDelegate
+    FBMenuViewDelegate,
+    UITableViewDelegate,
+    UITableViewDataSource
 >
 
 @pro_strong FBSearchView *searchGoods;  //  搜索框
+@pro_strong UIButton *brandNameBtn;
+@pro_strong UITableView *brandList;
+@pro_strong UITableView *goodsList;
+@pro_strong FBRequest *brandRequest;
+@pro_strong FBRequest *goodsRequest;
+
+@pro_copy GetBrandAndGoodsInfoBlock getBrandAndGoodsInfoBlock;
 
 @end
