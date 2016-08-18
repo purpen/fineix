@@ -7,6 +7,8 @@
 //
 
 #import "THNMarkGoodsView.h"
+#import "MarkBrandsViewController.h"
+#import "THNMarkGoodsViewController.h"
 
 @implementation THNMarkGoodsView
 
@@ -80,19 +82,21 @@
         _chooseGoods.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
         [_chooseGoods setImage:[UIImage imageNamed:@"thn_icon_next_white"] forState:(UIControlStateNormal)];
         [_chooseGoods setImageEdgeInsets:(UIEdgeInsetsMake(0, SCREEN_WIDTH - 90, 0, 0))];
-//        [_chooseGoods addTarget:self action:@selector(chooseGoodsClick:) forControlEvents:(UIControlEventTouchUpInside)];
         for (NSUInteger idx = 0; idx < 2; ++ idx) {
             UILabel *btnLine = [[UILabel alloc] initWithFrame:CGRectMake(0, idx * 39, SCREEN_WIDTH-80, 0.5)];
             btnLine.backgroundColor = [UIColor colorWithHexString:@"#FFFFFF" alpha:0.6f];
             [_chooseGoods addSubview:btnLine];
         }
+        [_chooseGoods addTarget:self action:@selector(markGoodsClick) forControlEvents:(UIControlEventTouchUpInside)];
     }
     return _chooseGoods;
 }
 
-//- (void)chooseGoodsClick:(UIButton *)button {
-//    
-//}
+- (void)markGoodsClick {
+    if ([self.delegate respondsToSelector:@selector(mark_GoodsImageAndInfo)]) {
+        [self.delegate mark_GoodsImageAndInfo];
+    }
+}
 
 - (UILabel *)writeLab {
     if (!_writeLab) {
@@ -118,9 +122,47 @@
         
         _brand.leftView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 10, 35)];
         _brand.leftViewMode = UITextFieldViewModeAlways;
+        _brand.delegate = self;
     }
     return _brand;
 }
+
+- (BOOL)textFieldShouldBeginEditing:(UITextField *)textField {
+    [textField resignFirstResponder];
+    
+    if (textField == self.brand) {
+        MarkBrandsViewController *markBrandVC = [[MarkBrandsViewController alloc] init];
+        [self.vc presentViewController:markBrandVC animated:YES completion:nil];
+        
+        if ([self.delegate respondsToSelector:@selector(mark_AddBands)]) {
+            [self.delegate mark_AddBands];
+        }
+    
+    } else if (textField == self.goods) {
+        THNMarkGoodsViewController *markGoodVC = [[THNMarkGoodsViewController alloc] init];
+        [self.vc presentViewController:markGoodVC animated:YES completion:nil];
+        
+        if ([self.delegate respondsToSelector:@selector(mark_AddGoods)]) {
+            [self.delegate mark_AddGoods];
+        }
+    }
+    return YES;
+}
+
+//- (void)textFieldDidBeginEditing:(UITextField *)textField {
+//    if (textField == self.brand) {
+//        if ([self.delegate respondsToSelector:@selector(mark_AddBands)]) {
+//            [self.delegate mark_AddBands];
+//            MarkBrandsViewController *markBrandVC = [[MarkBrandsViewController alloc] init];
+//            [self.vc presentViewController:markBrandVC animated:YES completion:nil];
+//        }
+//        
+//    } else if (textField == self.goods) {
+//        if ([self.delegate respondsToSelector:@selector(mark_AddGoods)]) {
+//            [self.delegate mark_AddGoods];
+//        }
+//    }
+//}
 
 - (UITextField *)goods {
     if (!_goods) {
@@ -136,6 +178,7 @@
         
         _goods.leftView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 10, 35)];
         _goods.leftViewMode = UITextFieldViewModeAlways;
+        _goods.delegate = self;
     }
     return _goods;
 }

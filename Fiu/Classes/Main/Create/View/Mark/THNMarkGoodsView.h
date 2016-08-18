@@ -10,16 +10,27 @@
 #import "THNMacro.h"
 #import "FBFootView.h"
 
+@protocol THNMarkGoodsViewDelegate <NSObject>
+
+@optional
+- (void)mark_AddBands;
+- (void)mark_AddGoods;
+- (void)mark_GoodsImageAndInfo;
+
+@end
+
 @interface THNMarkGoodsView : UIView <
     FBFootViewDelegate,
     UITextFieldDelegate
 >
 
+@pro_strong UIViewController *vc;
 @pro_strong UIView *bgView;
 @pro_strong FBFootView *footView;   //  底部功能选择视图
 @pro_strong UIButton *chooseGoods;
 @pro_strong UILabel *writeLab;
 @pro_strong UITextField *brand;
 @pro_strong UITextField *goods;
+@pro_weak id <THNMarkGoodsViewDelegate> delegate;
 
 @end

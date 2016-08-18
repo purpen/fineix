@@ -105,6 +105,7 @@ static NSString *const twoCommentsCellId = @"TwoCommentsCellId";
     self.sceneListRequest = [FBAPI getWithUrlString:URLSceneList requestDictionary:@{@"page":@(self.currentpageNum + 1), @"size":@10, @"sort":@"0"} delegate:self];
     [self.sceneListRequest startRequestSuccess:^(FBRequest *request, id result) {
         NSArray *sceneArr = [[result valueForKey:@"data"] valueForKey:@"rows"];
+        NSLog(@"－－－－－－－ %@", sceneArr[0]);
         for (NSDictionary * sceneDic in sceneArr) {
             HomeSceneListRow *homeSceneModel = [[HomeSceneListRow alloc] initWithDictionary:sceneDic];
             [self.sceneListMarr addObject:homeSceneModel];
@@ -298,6 +299,7 @@ static NSString *const twoCommentsCellId = @"TwoCommentsCellId";
             if (self.sceneListMarr.count) {
                 [cell thn_setSceneImageData:self.sceneListMarr[indexPath.section - 1]];
             }
+            cell.nav = self.navigationController;
             return cell;
             
         } else if (indexPath.row == 2) {

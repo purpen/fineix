@@ -56,6 +56,9 @@
 "goodsName" = "产品名称";
 "canAddGoods" = "您还可以继续标记";
 "addGoodsNum" = "个产品";
+"markGoodsOver" = "最多标记三个产品哦～";
+"pleaseWriteBrand" = "请输入品牌";
+"pleaseWriteGoods" = "请输入产品名称";
 
 //  控制器页面标题
 "createVcTitle" = "照片胶卷";

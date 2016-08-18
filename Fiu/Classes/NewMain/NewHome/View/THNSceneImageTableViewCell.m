@@ -7,6 +7,9 @@
 //
 
 #import "THNSceneImageTableViewCell.h"
+#import "GoodsInfoViewController.h"
+#import "UILable+Frame.h"
+#import "UIImage+Helper.h"
 
 @interface THNSceneImageTableViewCell () {
     NSString *_titleStr;
@@ -29,6 +32,10 @@
 
 #pragma mark - setModel
 - (void)thn_setSceneImageData:(HomeSceneListRow *)sceneModel {
+     self.tagDataMarr = [NSMutableArray arrayWithArray:sceneModel.product];
+     self.goodsIds = [NSMutableArray arrayWithArray:[sceneModel.product valueForKey:@"idField"]];
+    [self setUserTagBtn];
+    
     [self.sceneImage sd_setImageWithURL:[NSURL URLWithString:sceneModel.coverUrl]
                                forState:(UIControlStateNormal)
                        placeholderImage:[UIImage imageNamed:@""]];
@@ -79,6 +86,56 @@
                                      attributes:attribute
                                         context:nil].size;
     return retSize;
+}
+
+#pragma mark - 创建用户添加商品按钮
+- (void)setUserTagBtn {
+    self.userTagMarr = [NSMutableArray array];
+    
+    for (UIView * view in self.subviews) {
+        if ([view isKindOfClass:[UserGoodsTag class]]) {
+            [view removeFromSuperview];
+        }
+    }
+    
+    for (NSInteger idx = 0; idx < self.tagDataMarr.count; ++ idx) {
+        CGFloat btnX = [[self.tagDataMarr[idx] valueForKey:@"x"] floatValue];
+        CGFloat btnY = [[self.tagDataMarr[idx] valueForKey:@"y"] floatValue];
+        NSString * title = [self.tagDataMarr[idx] valueForKey:@"title"];
+        NSInteger loc = [[self.tagDataMarr[idx] valueForKey:@"loc"] integerValue];
+        
+        UserGoodsTag * userTag = [[UserGoodsTag alloc] init];
+        userTag.dele.hidden = YES;
+        userTag.title.text = title;
+        userTag.isMove = NO;
+        CGFloat width = [userTag.title boundingRectWithSize:CGSizeMake(320, 0)].width;
+        if (width*1.3 > SCREEN_WIDTH/2) {
+            width = SCREEN_WIDTH/2;
+        } else {
+            width = [userTag.title boundingRectWithSize:CGSizeMake(320, 0)].width * 1.3;
+        }
+        
+        if (loc == 1) {
+            userTag.frame = CGRectMake((btnX*SCREEN_WIDTH) - ((width+25)-18), btnY*SCREEN_WIDTH-32, width+25, 32);
+        } else if (loc == 2) {
+            userTag.frame = CGRectMake(btnX*SCREEN_WIDTH-44, btnY*SCREEN_WIDTH-32, width+25, 32);
+        }
+        [userTag thn_setSceneImageUserGoodsTagLoc:loc];
+
+        UITapGestureRecognizer * tapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(openGoodsInfo:)];
+        [userTag addGestureRecognizer:tapGesture];
+        
+        [self addSubview:userTag];
+        [self.userTagMarr addObject:userTag];
+    }
+}
+
+- (void)openGoodsInfo:(UITapGestureRecognizer *)tapGesture {
+    NSInteger index = [self.userTagMarr indexOfObject:tapGesture.view];
+    GoodsInfoViewController * goodsInfoVC = [[GoodsInfoViewController alloc] init];
+    goodsInfoVC.goodsID = self.goodsIds[index];
+    [self.nav pushViewController:goodsInfoVC animated:YES];
+    
 }
 
 #pragma mark - setUI

@@ -513,6 +513,8 @@
 		D868090B1D6301C1002714B2 /* FBSubjectModelData.m in Sources */ = {isa = PBXBuildFile; fileRef = D86809071D6301C1002714B2 /* FBSubjectModelData.m */; };
 		D868090C1D6301C1002714B2 /* FBSubjectModelRow.m in Sources */ = {isa = PBXBuildFile; fileRef = D86809091D6301C1002714B2 /* FBSubjectModelRow.m */; };
 		D868090F1D6349B0002714B2 /* THNMarkGoodsView.m in Sources */ = {isa = PBXBuildFile; fileRef = D868090E1D6349B0002714B2 /* THNMarkGoodsView.m */; };
+		D86809121D6433B0002714B2 /* MarkBrandsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D86809111D6433B0002714B2 /* MarkBrandsViewController.m */; };
+		D86809151D643AA0002714B2 /* THNMarkGoodsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D86809141D643AA0002714B2 /* THNMarkGoodsViewController.m */; };
 		D869BD671D6036A000432423 /* FBAlertViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D869BD411D6036A000432423 /* FBAlertViewController.m */; };
 		D869BD681D6036A000432423 /* FBSheetViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D869BD431D6036A000432423 /* FBSheetViewController.m */; };
 		D869BD691D6036A000432423 /* QrShareSheetViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D869BD451D6036A000432423 /* QrShareSheetViewController.m */; };
@@ -586,7 +588,6 @@
 		D8C690C41D13DFFE0026EAB5 /* FiuHeaderWatchTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D8C690C31D13DFFE0026EAB5 /* FiuHeaderWatchTableViewCell.m */; };
 		D8DDEE101D338D760020FF66 /* FBPopupView.m in Sources */ = {isa = PBXBuildFile; fileRef = D8DDEE0F1D338D760020FF66 /* FBPopupView.m */; };
 		D8E3AEB61CFC9B84006E5E8C /* ClipImageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D8E3AEA91CFC9B84006E5E8C /* ClipImageViewController.m */; };
-		D8E3AEB91CFC9B84006E5E8C /* FiltersViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D8E3AEAF1CFC9B84006E5E8C /* FiltersViewController.m */; };
 		D8E3AEBA1CFC9B84006E5E8C /* LookSceneViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D8E3AEB11CFC9B84006E5E8C /* LookSceneViewController.m */; };
 		D8E3AEBB1CFC9B84006E5E8C /* ReleaseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D8E3AEB31CFC9B84006E5E8C /* ReleaseViewController.m */; };
 		D8E3AEBC1CFC9B84006E5E8C /* SceneAddViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D8E3AEB51CFC9B84006E5E8C /* SceneAddViewController.m */; };
@@ -1515,6 +1516,10 @@
 		D86809091D6301C1002714B2 /* FBSubjectModelRow.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FBSubjectModelRow.m; sourceTree = "<group>"; };
 		D868090D1D6349B0002714B2 /* THNMarkGoodsView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THNMarkGoodsView.h; sourceTree = "<group>"; };
 		D868090E1D6349B0002714B2 /* THNMarkGoodsView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THNMarkGoodsView.m; sourceTree = "<group>"; };
+		D86809101D6433B0002714B2 /* MarkBrandsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MarkBrandsViewController.h; sourceTree = "<group>"; };
+		D86809111D6433B0002714B2 /* MarkBrandsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MarkBrandsViewController.m; sourceTree = "<group>"; };
+		D86809131D643AA0002714B2 /* THNMarkGoodsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THNMarkGoodsViewController.h; sourceTree = "<group>"; };
+		D86809141D643AA0002714B2 /* THNMarkGoodsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THNMarkGoodsViewController.m; sourceTree = "<group>"; };
 		D869BD401D6036A000432423 /* FBAlertViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FBAlertViewController.h; sourceTree = "<group>"; };
 		D869BD411D6036A000432423 /* FBAlertViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FBAlertViewController.m; sourceTree = "<group>"; };
 		D869BD421D6036A000432423 /* FBSheetViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FBSheetViewController.h; sourceTree = "<group>"; };
@@ -1645,8 +1650,6 @@
 		D8DDEE0F1D338D760020FF66 /* FBPopupView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FBPopupView.m; sourceTree = "<group>"; };
 		D8E3AEA81CFC9B84006E5E8C /* ClipImageViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ClipImageViewController.h; sourceTree = "<group>"; };
 		D8E3AEA91CFC9B84006E5E8C /* ClipImageViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ClipImageViewController.m; sourceTree = "<group>"; };
-		D8E3AEAE1CFC9B84006E5E8C /* FiltersViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FiltersViewController.h; sourceTree = "<group>"; };
-		D8E3AEAF1CFC9B84006E5E8C /* FiltersViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FiltersViewController.m; sourceTree = "<group>"; };
 		D8E3AEB01CFC9B84006E5E8C /* LookSceneViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LookSceneViewController.h; sourceTree = "<group>"; };
 		D8E3AEB11CFC9B84006E5E8C /* LookSceneViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LookSceneViewController.m; sourceTree = "<group>"; };
 		D8E3AEB21CFC9B84006E5E8C /* ReleaseViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ReleaseViewController.h; sourceTree = "<group>"; };
@@ -1842,6 +1845,10 @@
 			children = (
 				1F2A8BE21CF40276005116C7 /* MarkGoodsViewController.h */,
 				1F2A8BE31CF40276005116C7 /* MarkGoodsViewController.m */,
+				D86809101D6433B0002714B2 /* MarkBrandsViewController.h */,
+				D86809111D6433B0002714B2 /* MarkBrandsViewController.m */,
+				D86809131D643AA0002714B2 /* THNMarkGoodsViewController.h */,
+				D86809141D643AA0002714B2 /* THNMarkGoodsViewController.m */,
 			);
 			path = Mark;
 			sourceTree = "<group>";
@@ -4475,8 +4482,6 @@
 				D8E3AEA91CFC9B84006E5E8C /* ClipImageViewController.m */,
 				D8E3AEB41CFC9B84006E5E8C /* SceneAddViewController.h */,
 				D8E3AEB51CFC9B84006E5E8C /* SceneAddViewController.m */,
-				D8E3AEAE1CFC9B84006E5E8C /* FiltersViewController.h */,
-				D8E3AEAF1CFC9B84006E5E8C /* FiltersViewController.m */,
 				D8E3AEB21CFC9B84006E5E8C /* ReleaseViewController.h */,
 				D8E3AEB31CFC9B84006E5E8C /* ReleaseViewController.m */,
 				D8E3AEB01CFC9B84006E5E8C /* LookSceneViewController.h */,
@@ -4830,6 +4835,7 @@
 				1F2A90011CF40277005116C7 /* CounterModel.m in Sources */,
 				D80D415E1CAD144D005D72B1 /* UIBarButtonItem+Helper.m in Sources */,
 				1F2A8FD91CF40277005116C7 /* FBGoodsCommentTableViewCell.m in Sources */,
+				D86809121D6433B0002714B2 /* MarkBrandsViewController.m in Sources */,
 				1F2A90291CF40277005116C7 /* TagsCollectionViewCell.m in Sources */,
 				D88F47EE1D5C5BD300C83A0C /* FBCategoryView.m in Sources */,
 				D8A9AE401CE304FF00A9FCFB /* NSTimer+Addition.m in Sources */,
@@ -4862,6 +4868,7 @@
 				1F2A8FB01CF40277005116C7 /* ThnGoodsCommentViewController.m in Sources */,
 				1F2A8FD41CF40277005116C7 /* FBEditCarItemTableViewCell.m in Sources */,
 				1F2A90771CF40277005116C7 /* RefundmentViewController.m in Sources */,
+				D86809151D643AA0002714B2 /* THNMarkGoodsViewController.m in Sources */,
 				48F0F60D1D5F719100379D7F /* THNFocusViewController.m in Sources */,
 				D8AC3E121D2DF9D900148522 /* FBTabBarController.m in Sources */,
 				1FCDCC7A1D0515F700C92E78 /* ScenarioNonView.m in Sources */,
@@ -5059,7 +5066,6 @@
 				1F2A8FD31CF40277005116C7 /* FBCarItemsTableViewCell.m in Sources */,
 				1F2A90711CF40277005116C7 /* JDOrderViewController.m in Sources */,
 				D868090F1D6349B0002714B2 /* THNMarkGoodsView.m in Sources */,
-				D8E3AEB91CFC9B84006E5E8C /* FiltersViewController.m in Sources */,
 				D8B855C51D3F746D0008BD57 /* ChooseCategotyViewController.m in Sources */,
 				1F2A8F351CF40277005116C7 /* MarkGoodsViewController.m in Sources */,
 				1F2A8FB41CF40277005116C7 /* BrandInfoData.m in Sources */,

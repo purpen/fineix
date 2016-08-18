@@ -40,6 +40,10 @@
 	if(![dictionary[@"y"] isKindOfClass:[NSNull class]]){
 		self.y = [dictionary[@"y"] floatValue];
 	}
+    
+    if(![dictionary[@"loc"] isKindOfClass:[NSNull class]]){
+        self.loc = [dictionary[@"loc"] integerValue];
+    }
 
 	return self;
 }

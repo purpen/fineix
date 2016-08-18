@@ -14,7 +14,8 @@
 #import "THNMarkGoodsView.h"
 
 @interface SceneAddViewController : FBPictureViewController <
-    FBFootViewDelegate
+    FBFootViewDelegate,
+    THNMarkGoodsViewDelegate
 >
 
 @pro_strong NSArray             *locationArr;            //  照片位置

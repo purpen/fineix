@@ -7,7 +7,6 @@
 //
 
 #import "PictureToolViewController.h"
-#import "FiltersViewController.h"
 #import "ReleaseViewController.h"
 #import "ClipImageViewController.h"
 

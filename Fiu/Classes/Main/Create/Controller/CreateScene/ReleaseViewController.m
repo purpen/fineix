@@ -71,10 +71,10 @@ static NSString *const URLGetUserDesTags = @"/gateway/fetch_chinese_word";
         NSMutableArray * goodsMarr = [NSMutableArray array];
         for (NSUInteger idx = 0; idx < self.goodsId.count; ++ idx) {
             NSDictionary *  goodsDict = @{@"id":self.goodsId[idx],
-                                          @"price":self.goodsPrice[idx],
                                           @"title":self.goodsTitle[idx],
                                           @"x":self.goodsX[idx],
-                                          @"y":self.goodsY[idx]};
+                                          @"y":self.goodsY[idx],
+                                          @"loc":self.goodsLoc[idx]};
             [goodsMarr addObject:goodsDict];
         }
         NSData * jsonData = [NSJSONSerialization dataWithJSONObject:goodsMarr options:0 error:nil];

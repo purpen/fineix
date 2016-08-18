@@ -30,7 +30,7 @@
             make.right.equalTo(self.mas_right).with.offset(-5);
         }];
     
-        [self addSubview:self.line];
+//        [self addSubview:self.line];
     }
     
     return self;

@@ -282,6 +282,7 @@
     if (!_searchView) {
         _searchView = [[FBSearchView alloc] initWithFrame:CGRectMake(0, 50, SCREEN_WIDTH, 44)];
         _searchView.cancelBtn.hidden = YES;
+        _searchView.backgroundColor = [UIColor whiteColor];
         [_searchView.bgView mas_remakeConstraints:^(MASConstraintMaker *make) {
             make.size.mas_equalTo(CGSizeMake(SCREEN_WIDTH-30, 30));
             make.centerY.equalTo(_searchView);

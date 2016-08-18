@@ -15,6 +15,7 @@
 @property (nonatomic, strong) NSString * title;
 @property (nonatomic, assign) CGFloat x;
 @property (nonatomic, assign) CGFloat y;
+@property (nonatomic, assign) NSInteger loc;
 
 -(instancetype)initWithDictionary:(NSDictionary *)dictionary;
 @end
