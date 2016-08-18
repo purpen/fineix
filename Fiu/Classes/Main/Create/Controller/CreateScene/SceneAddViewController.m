@@ -390,9 +390,7 @@ static NSString *const URLUserAddGoods = @"/scene_product/add";
             releaseVC.goodsX = originX;
             releaseVC.goodsY = originY;
             releaseVC.goodsLoc = loc;
-
-            NSLog(@"＝＝＝＝＝＝＝＝＝＝%@\n , %@\n , %@ \n , %@\n , %@\n", self.goodsTitleData, self.goodsIdData, originX, originY, loc);
-            
+//            NSLog(@"＝＝＝＝＝＝＝＝＝＝%@\n , %@\n , %@ \n , %@\n , %@\n", self.goodsTitleData, self.goodsIdData, originX, originY, loc);
             [self.navigationController pushViewController:releaseVC animated:YES];
         }
 }

@@ -105,7 +105,6 @@ static NSString *const twoCommentsCellId = @"TwoCommentsCellId";
     self.sceneListRequest = [FBAPI getWithUrlString:URLSceneList requestDictionary:@{@"page":@(self.currentpageNum + 1), @"size":@10, @"sort":@"0"} delegate:self];
     [self.sceneListRequest startRequestSuccess:^(FBRequest *request, id result) {
         NSArray *sceneArr = [[result valueForKey:@"data"] valueForKey:@"rows"];
-        NSLog(@"－－－－－－－ %@", sceneArr[0]);
         for (NSDictionary * sceneDic in sceneArr) {
             HomeSceneListRow *homeSceneModel = [[HomeSceneListRow alloc] initWithDictionary:sceneDic];
             [self.sceneListMarr addObject:homeSceneModel];

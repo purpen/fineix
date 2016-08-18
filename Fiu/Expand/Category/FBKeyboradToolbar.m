@@ -21,7 +21,11 @@
 }
 
 - (void)thn_setRightBarItemContent:(NSString *)content {
-    [self.rightBarItem setTitle:[NSString stringWithFormat:@"#%@ ", content] forState:(UIControlStateNormal)];
+    if (content.length == 0) {
+        self.rightBarItem.hidden = YES;
+    } else {
+        [self.rightBarItem setTitle:[NSString stringWithFormat:@"#%@ ", content] forState:(UIControlStateNormal)];
+    }
 }
 
 - (UIButton *)leftBarItem {

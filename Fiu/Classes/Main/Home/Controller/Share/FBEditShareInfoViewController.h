@@ -13,7 +13,7 @@
 #import "FBMenuView.h"
 #import "FBKeyboradToolbar.h"
 
-typedef void(^GetEditShareText)(NSString * title, NSString * des, NSArray * tagsArr);
+typedef void(^GetEditShareText)(NSString * title, NSString * des, NSMutableArray * tagsArr);
 
 @interface FBEditShareInfoViewController : FBPictureViewController <
     UITableViewDelegate,
@@ -28,6 +28,7 @@ typedef void(^GetEditShareText)(NSString * title, NSString * des, NSArray * tags
 @pro_strong FBRequest           *   categoryRequest;
 @pro_strong FBRequest           *   listRequest;
 @pro_strong FBRequest           *   searchListRequest;
+@pro_strong FBRequest           *   actionTagRequest;
 @pro_assign NSInteger               listCurrentpageNum;
 @pro_assign NSInteger               listTotalPageNum;
 @pro_assign NSInteger               currentpageNum;
@@ -37,6 +38,7 @@ typedef void(^GetEditShareText)(NSString * title, NSString * des, NSArray * tags
 @pro_strong UITextView          *   desText;
 @pro_strong UIImageView         *   bgImgView;
 @pro_strong UIImage             *   bgImg;
+@pro_strong NSString            *   actionTag;
 
 /*  默认进入的分类语境列表视图 */
 @pro_strong UIView              *   listView;

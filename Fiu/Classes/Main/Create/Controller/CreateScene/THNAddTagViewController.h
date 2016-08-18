@@ -8,8 +8,21 @@
 
 #import "FBPictureViewController.h"
 
+typedef void(^GetAddTagsDataBlock)(NSString *text, NSString *actionTag);
+
 @interface THNAddTagViewController : FBPictureViewController <
-    FBPictureViewControllerDelegate
+    FBPictureViewControllerDelegate,
+    UITextFieldDelegate,
+    UITableViewDelegate,
+    UITableViewDataSource
 >
+
+@pro_strong FBRequest *hotTagsRequest;
+@pro_strong FBRequest *usedTagsRequest;
+@pro_strong FBRequest *searchRequest;
+@pro_strong UITextField *tagsTextField;
+@pro_strong UITableView *tagsList;
+@pro_strong UITableView *searchList;
+@pro_copy GetAddTagsDataBlock getAddTagsDataBlock;
 
 @end

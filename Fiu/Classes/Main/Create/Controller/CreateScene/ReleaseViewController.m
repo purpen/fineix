@@ -56,58 +56,48 @@ static NSString *const URLGetUserDesTags = @"/gateway/fetch_chinese_word";
     NSString *city = self.addLocaiton.cityLab.text;
     NSString *lng = self.addLocaiton.longitude;
     NSString *lat = self.addLocaiton.latitude;
-    NSString *tags = @"天气,真的很好啊,很蓝";
-    NSLog(@"＝＝＝＝＝＝＝＝＝ %@ %@ %@ %@ %@ %@", title, des, address, city, lng, lat);
-    if ([title isEqualToString:@""]) {
-        [self showMessage:@"您还没有添加情景标题哦"];
-    } else if ([des isEqualToString:NSLocalizedString(@"addDescription", nil)] || [des isEqualToString:@""]) {
-        [self showMessage:@"您还没有写情景描述呢"];
-    } else if (lng.length == 0 || address.length == 0) {
-        [self showMessage:@"定位标记了吗？"];
-    } else if (title.length > 20) {
-        [self showMessage:@"标题在20字以内哦"];
-    } else {
-        [SVProgressHUD showWithMaskType:SVProgressHUDMaskTypeBlack];
-        NSMutableArray * goodsMarr = [NSMutableArray array];
-        for (NSUInteger idx = 0; idx < self.goodsId.count; ++ idx) {
-            NSDictionary *  goodsDict = @{@"id":self.goodsId[idx],
-                                          @"title":self.goodsTitle[idx],
-                                          @"x":self.goodsX[idx],
-                                          @"y":self.goodsY[idx],
-                                          @"loc":self.goodsLoc[idx]};
-            [goodsMarr addObject:goodsDict];
-        }
-        NSData * jsonData = [NSJSONSerialization dataWithJSONObject:goodsMarr options:0 error:nil];
-        NSString * json = [[NSString alloc] initWithData:jsonData encoding:NSUTF8StringEncoding];
-        
-        NSData * imageData = UIImageJPEGRepresentation(self.bgImg, 0.7);
-        NSString * icon64Str = [imageData base64EncodedStringWithOptions:NSDataBase64Encoding64CharacterLineLength];
-        NSDictionary * paramDict = @{
-                                     @"tmp":icon64Str,
-                                     @"title":title,
-                                     @"des":des,
-                                     @"lng":self.addLocaiton.longitude,
-                                     @"lat":self.addLocaiton.latitude,
-                                     @"address":self.addLocaiton.locationLab.text,
-                                     @"city":self.addLocaiton.cityLab.text,
-                                     @"products":json,
-                                     @"tags":tags,
-                                     };
-        
-        self.releaseSceneRequest = [FBAPI postWithUrlString:URLReleaseScenen requestDictionary:paramDict delegate:self];
-        
-        [self.releaseSceneRequest startRequestSuccess:^(FBRequest *request, id result) {
-            NSLog(@"－－－－－－－－%@", result);
-            if ([[result valueForKey:@"success"] isEqualToNumber:@1]) {
-                [self dismissViewControllerAnimated:YES completion:nil];
-            }
-            [SVProgressHUD dismiss];
-
-        } failure:^(FBRequest *request, NSError *error) {
-            NSLog(@"%@", error);
-            [SVProgressHUD showErrorWithStatus:[error localizedDescription]];
-        }];
+    NSString *tags = [self.addContent.userAddTags componentsJoinedByString:@","];
+    NSLog(@"＝＝＝＝＝＝＝＝＝ %@ %@ %@ %@ %@ %@ %@", title, des, address, city, lng, lat, tags);
+    
+    [SVProgressHUD showWithMaskType:SVProgressHUDMaskTypeBlack];
+    NSMutableArray * goodsMarr = [NSMutableArray array];
+    for (NSUInteger idx = 0; idx < self.goodsId.count; ++ idx) {
+        NSDictionary *  goodsDict = @{@"id":self.goodsId[idx],
+                                      @"title":self.goodsTitle[idx],
+                                      @"x":self.goodsX[idx],
+                                      @"y":self.goodsY[idx],
+                                      @"loc":self.goodsLoc[idx]};
+        [goodsMarr addObject:goodsDict];
     }
+    NSData * jsonData = [NSJSONSerialization dataWithJSONObject:goodsMarr options:0 error:nil];
+    NSString * json = [[NSString alloc] initWithData:jsonData encoding:NSUTF8StringEncoding];
+    
+    NSData * imageData = UIImageJPEGRepresentation(self.bgImg, 0.7);
+    NSString * icon64Str = [imageData base64EncodedStringWithOptions:NSDataBase64Encoding64CharacterLineLength];
+    NSDictionary * paramDict = @{
+                                 @"tmp":icon64Str,
+                                 @"title":title,
+                                 @"des":des,
+                                 @"lng":self.addLocaiton.longitude,
+                                 @"lat":self.addLocaiton.latitude,
+                                 @"address":self.addLocaiton.locationLab.text,
+                                 @"city":self.addLocaiton.cityLab.text,
+                                 @"products":json,
+                                 @"tags":tags,
+                                 };
+    
+    self.releaseSceneRequest = [FBAPI postWithUrlString:URLReleaseScenen requestDictionary:paramDict delegate:self];
+    
+    [self.releaseSceneRequest startRequestSuccess:^(FBRequest *request, id result) {
+        if ([[result valueForKey:@"success"] isEqualToNumber:@1]) {
+            [self dismissViewControllerAnimated:YES completion:nil];
+        }
+        [SVProgressHUD dismiss];
+        
+    } failure:^(FBRequest *request, NSError *error) {
+        NSLog(@"%@", error);
+        [SVProgressHUD showErrorWithStatus:[error localizedDescription]];
+    }];
 }
 
 #pragma mark - 设置视图UI
