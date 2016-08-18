@@ -33,7 +33,7 @@
 - (void)setCellUI {
     [self addSubview:self.icon];
     [_icon mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.size.mas_equalTo(CGSizeMake(44, 44));
+        make.size.mas_equalTo(CGSizeMake(40, 44));
         make.left.equalTo(self.mas_left).with.offset(0);
         make.centerY.equalTo(self);
     }];
@@ -41,21 +41,23 @@
     [self addSubview:self.add];
     [_add mas_makeConstraints:^(MASConstraintMaker *make) {
         make.size.mas_equalTo(CGSizeMake(100, 44));
-        make.left.equalTo(_icon.mas_right).with.offset(10);
+        make.left.equalTo(_icon.mas_right).with.offset(0);
         make.centerY.equalTo(self);
     }];
     
     [self addSubview:self.name];
     [_name mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.size.mas_equalTo(CGSizeMake(100, 44));
-        make.left.equalTo(_add.mas_right).with.offset(10);
+        make.height.equalTo(@44);
+        make.left.equalTo(_add.mas_right).with.offset(0);
+        make.right.equalTo(self.mas_right).with.offset(-15);
         make.centerY.equalTo(self);
     }];
     
     UILabel *botLine = [[UILabel alloc] init];
+    botLine.backgroundColor = [UIColor colorWithHexString:@"#CCCCCC"];
     [self addSubview:botLine];
     [botLine mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.height.equalTo(@1);
+        make.height.equalTo(@0.5);
         make.left.equalTo(self.mas_left).with.offset(15);
         make.right.bottom.equalTo(self).with.offset(0);
     }];

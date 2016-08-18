@@ -10,6 +10,8 @@
 #import "THNMacro.h"
 #import "FBFootView.h"
 
+typedef void(^AddBrandInfoDoneBlock)(NSString *brand, NSString *goods);
+
 @protocol THNMarkGoodsViewDelegate <NSObject>
 
 @optional
@@ -32,5 +34,6 @@
 @pro_strong UITextField *brand;
 @pro_strong UITextField *goods;
 @pro_weak id <THNMarkGoodsViewDelegate> delegate;
+@pro_copy AddBrandInfoDoneBlock addBrandInfoDoneBlock;
 
 @end

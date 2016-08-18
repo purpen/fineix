@@ -9,6 +9,7 @@
 #import "FBPictureViewController.h"
 #import "FBSearchView.h"
 #import "FBMenuView.h"
+#import "THNAddGoodsBtn.h"
 #import <SVProgressHUD/SVProgressHUD.h>
 
 typedef void(^GetBrandAndGoodsInfoBlock)(NSString *brandTitle, NSString *goodsTitle);
@@ -25,6 +26,7 @@ typedef void(^GetBrandAndGoodsInfoBlock)(NSString *brandTitle, NSString *goodsTi
 @pro_strong UITableView *goodsList;
 @pro_strong FBRequest *brandRequest;
 @pro_strong FBRequest *goodsRequest;
+@pro_strong THNAddGoodsBtn *addGoodBtn;
 
 @pro_copy GetBrandAndGoodsInfoBlock getBrandAndGoodsInfoBlock;
 

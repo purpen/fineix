@@ -58,7 +58,16 @@ static NSString *const goodsCellId = @"GoodsCellId";
             [self.brandIdMarr addObject:model.idx];
             [self.brandTitleMarr addObject:model.title];
         }
-        [self.brandList reloadData];
+        
+        if (self.brandMarr.count) {
+            self.brandList.hidden = NO;
+            self.addGoodBtn.hidden = YES;
+            [self.brandList reloadData];
+        } else {
+            self.brandList.hidden = YES;
+            [self.addGoodBtn setAddGoodsOrBrandInfo:1 withText:self.searchGoods.searchInputBox.text];
+            self.addGoodBtn.hidden = NO;
+        }
         
     } failure:^(FBRequest *request, NSError *error) {
         NSLog(@"%@", error);
@@ -70,7 +79,11 @@ static NSString *const goodsCellId = @"GoodsCellId";
     self.goodsRequest = [FBAPI getWithUrlString:URLGoodsList requestDictionary:@{@"brand_id":brandId, @"kind":@"1", @"size":@"1000"} delegate:self];
     [self.goodsRequest startRequestSuccess:^(FBRequest *request, id result) {
         self.goodsMarr = [[[result valueForKey:@"data"] valueForKey:@"rows"] valueForKey:@"title"];
-        [self.goodsList reloadData];
+        
+        if (self.goodsMarr.count) {
+            self.addGoodBtn.hidden = YES;
+            [self.goodsList reloadData];
+        }
         
     } failure:^(FBRequest *request, NSError *error) {
         NSLog(@"%@", error);
@@ -82,6 +95,7 @@ static NSString *const goodsCellId = @"GoodsCellId";
     [self.view addSubview:self.searchGoods];
     [self.view addSubview:self.brandList];
     [self.view addSubview:self.goodsList];
+    [self.view addSubview:self.addGoodBtn];
 }
 
 - (UITableView *)goodsList {
@@ -171,7 +185,7 @@ static NSString *const goodsCellId = @"GoodsCellId";
                                     attributes:@{NSFontAttributeName:[UIFont systemFontOfSize:12]}
                                        context:nil].size;
     
-    self.brandNameBtn.frame = CGRectMake(0, 0, width.width * 1.5, 30);
+    self.brandNameBtn.frame = CGRectMake(0, 0, width.width * 1.3, 30);
     [self.brandNameBtn setTitle:title forState:(UIControlStateNormal)];
     self.searchGoods.searchInputBox.leftViewMode = UITextFieldViewModeAlways;
     
@@ -183,7 +197,6 @@ static NSString *const goodsCellId = @"GoodsCellId";
     CGRect brandListFrame = CGRectMake(-SCREEN_WIDTH, 64, SCREEN_WIDTH, SCREEN_HEIGHT - 64);
     self.goodsList.frame = goodsListFrame;
     self.brandList.frame = brandListFrame;
-
 }
 
 - (UIButton *)brandNameBtn {
@@ -211,7 +224,11 @@ static NSString *const goodsCellId = @"GoodsCellId";
 }
 
 - (void)searchKeyword:(UITextField *)textField {
-    if (![textField.text isEqualToString:@""]) {
+    if (self.brandNameBtn.titleLabel.text.length > 0) {
+        [self.addGoodBtn setAddGoodsOrBrandInfo:2 withText:self.searchGoods.searchInputBox.text];
+        self.addGoodBtn.hidden = NO;
+        
+    } else {
         [self networkSearchBrand:textField.text];
     }
 }
@@ -228,11 +245,37 @@ static NSString *const goodsCellId = @"GoodsCellId";
     }];
 }
 
+#pragma mark - 没有搜索结果时自定义添加
+- (THNAddGoodsBtn *)addGoodBtn {
+    if (!_addGoodBtn) {
+        _addGoodBtn = [[THNAddGoodsBtn alloc] initWithFrame:CGRectMake(0, 64, SCREEN_WIDTH, 44)];
+        _addGoodBtn.hidden = YES;
+        [_addGoodBtn addTarget:self action:@selector(addUserGoodsInfo:) forControlEvents:(UIControlEventTouchUpInside)];
+    }
+    return _addGoodBtn;
+}
+
+- (void)addUserGoodsInfo:(THNAddGoodsBtn *)button {
+    if (self.brandNameBtn.titleLabel.text.length == 0) {
+        [self setBrandName:button.name.text];
+        [button setAddGoodsOrBrandInfo:2 withText:@""];
+        CGRect goodsListFrame = CGRectMake(0, 64, SCREEN_WIDTH, SCREEN_HEIGHT - 64);
+        CGRect brandListFrame = CGRectMake(-SCREEN_WIDTH, 64, SCREEN_WIDTH, SCREEN_HEIGHT - 64);
+        self.goodsList.frame = goodsListFrame;
+        self.brandList.frame = brandListFrame;
+        
+    } else {
+        [self dismissViewControllerAnimated:YES completion:^{
+            self.getBrandAndGoodsInfoBlock(self.brandNameBtn.titleLabel.text, button.name.text);
+        }];
+    }
+}
+
 #pragma mark - 设置导航视图
 - (void)setNavViewUI {
-    self.view.backgroundColor = [UIColor blackColor];
+    self.view.backgroundColor = [UIColor colorWithHexString:@"#F8F8F8"];
     [[UIApplication sharedApplication] setStatusBarHidden:NO withAnimation:(UIStatusBarAnimationSlide)];
-    self.navView.hidden = YES;
+    self.navTitle.hidden = YES;
 }
 
 #pragma mark - NSMutablerArray

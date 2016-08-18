@@ -526,6 +526,8 @@
 		D86809181D65EE5F002714B2 /* THNSearchBrandTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D86809171D65EE5F002714B2 /* THNSearchBrandTableViewCell.m */; };
 		D868091B1D6609ED002714B2 /* THNSearchGoodsTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D868091A1D6609ED002714B2 /* THNSearchGoodsTableViewCell.m */; };
 		D86809211D662382002714B2 /* THNAddGoodsBtn.m in Sources */ = {isa = PBXBuildFile; fileRef = D86809201D662382002714B2 /* THNAddGoodsBtn.m */; };
+		D86809251D662490002714B2 /* THNSenceTopicView.m in Sources */ = {isa = PBXBuildFile; fileRef = D86809231D662490002714B2 /* THNSenceTopicView.m */; };
+		D86809261D662490002714B2 /* THNSenceTopicView.xib in Resources */ = {isa = PBXBuildFile; fileRef = D86809241D662490002714B2 /* THNSenceTopicView.xib */; };
 		D869BD671D6036A000432423 /* FBAlertViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D869BD411D6036A000432423 /* FBAlertViewController.m */; };
 		D869BD681D6036A000432423 /* FBSheetViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D869BD431D6036A000432423 /* FBSheetViewController.m */; };
 		D869BD691D6036A000432423 /* QrShareSheetViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D869BD451D6036A000432423 /* QrShareSheetViewController.m */; };
@@ -1550,6 +1552,9 @@
 		D868091A1D6609ED002714B2 /* THNSearchGoodsTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THNSearchGoodsTableViewCell.m; sourceTree = "<group>"; };
 		D868091F1D662382002714B2 /* THNAddGoodsBtn.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THNAddGoodsBtn.h; sourceTree = "<group>"; };
 		D86809201D662382002714B2 /* THNAddGoodsBtn.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THNAddGoodsBtn.m; sourceTree = "<group>"; };
+		D86809221D662490002714B2 /* THNSenceTopicView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THNSenceTopicView.h; sourceTree = "<group>"; };
+		D86809231D662490002714B2 /* THNSenceTopicView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THNSenceTopicView.m; sourceTree = "<group>"; };
+		D86809241D662490002714B2 /* THNSenceTopicView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = THNSenceTopicView.xib; sourceTree = "<group>"; };
 		D869BD401D6036A000432423 /* FBAlertViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FBAlertViewController.h; sourceTree = "<group>"; };
 		D869BD411D6036A000432423 /* FBAlertViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FBAlertViewController.m; sourceTree = "<group>"; };
 		D869BD421D6036A000432423 /* FBSheetViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FBSheetViewController.h; sourceTree = "<group>"; };
@@ -2908,6 +2913,9 @@
 		1F2A8DC31CF40277005116C7 /* view */ = {
 			isa = PBXGroup;
 			children = (
+				D86809221D662490002714B2 /* THNSenceTopicView.h */,
+				D86809231D662490002714B2 /* THNSenceTopicView.m */,
+				D86809241D662490002714B2 /* THNSenceTopicView.xib */,
 				1F2A8DC41CF40277005116C7 /* AccountView.h */,
 				1F2A8DC51CF40277005116C7 /* AccountView.m */,
 				1F2A8DC61CF40277005116C7 /* BackgroundCollectionViewCell.h */,
@@ -4677,6 +4685,7 @@
 				1FD10C9E1D5DC8D1005898EE /* THNTopicView.xib in Resources */,
 				D812815B1CAA8532007CF08B /* Info.plist in Resources */,
 				1F2A900A1CF40277005116C7 /* chanel.xib in Resources */,
+				D86809261D662490002714B2 /* THNSenceTopicView.xib in Resources */,
 				1F2A907C1CF40277005116C7 /* TaoBaoOrderViewController.xib in Resources */,
 				1F2A90221CF40277005116C7 /* IdentityTagsViewController.xib in Resources */,
 				D812815D1CAA8532007CF08B /* Localizable.strings in Resources */,
@@ -5091,6 +5100,7 @@
 				D851743E1D58749D005F5722 /* THNTabBarController.m in Sources */,
 				1F2A90A91CF40277005116C7 /* AboutViewController.m in Sources */,
 				1F2A8F7F1CF40277005116C7 /* FiuHeaderTableViewCell.m in Sources */,
+				D86809251D662490002714B2 /* THNSenceTopicView.m in Sources */,
 				1F2A901A1CF40277005116C7 /* HistoryBonusViewController.m in Sources */,
 				D88F47EB1D5B2CCE00C83A0C /* HomeSceneListComments.m in Sources */,
 				1F2A90A81CF40277005116C7 /* UserHeaderTableViewCell.m in Sources */,

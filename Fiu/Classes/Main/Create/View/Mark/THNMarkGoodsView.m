@@ -193,7 +193,21 @@
 #pragma mark 底部选项的点击事件
 - (void)buttonDidSeletedWithIndex:(NSInteger)index {
     if (index == 1) {
-        [SVProgressHUD showInfoWithStatus:@"完成"];
+        self.transform = CGAffineTransformMakeScale(1, 1);
+        self.alpha = 1;
+        [UIView animateWithDuration:0.3 animations:^{
+            self.alpha = 0;
+            self.transform = CGAffineTransformMakeScale(0.9, 0.9);
+            if (![self.brand.text isEqualToString:@""] || ![self.goods.text isEqualToString:@""]) {
+                self.addBrandInfoDoneBlock(self.brand.text, self.goods.text);
+            }
+            self.brand.text = @"";
+            self.goods.text = @"";
+            
+        } completion:^(BOOL finished) {
+            [self removeFromSuperview];
+        }];
+        
     } else if (index == 0) {
         self.transform = CGAffineTransformMakeScale(1, 1);
         self.alpha = 1;

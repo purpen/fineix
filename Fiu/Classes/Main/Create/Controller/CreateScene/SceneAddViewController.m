@@ -352,6 +352,14 @@ static NSString *const URLUserAddGoods = @"/scene_product/add";
         self.markGoodsView.transform = CGAffineTransformMakeScale(1, 1);
     }];
     [self.view addSubview:self.markGoodsView];
+    
+    __weak __typeof(self)weakSelf = self;
+    self.markGoodsView.addBrandInfoDoneBlock = ^(NSString *brand, NSString *goods) {
+        [weakSelf addUserGoodsTagWithTitle:[NSString stringWithFormat:@"%@ %@", brand, goods]
+                             withPrice:@""
+                              withType:2
+                           withGoodsId:@""];
+    };
 }
 
 #pragma mark - 设置顶部导航栏
