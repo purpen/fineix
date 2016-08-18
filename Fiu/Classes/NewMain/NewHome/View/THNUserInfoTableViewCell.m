@@ -172,7 +172,7 @@
 - (UIButton *)time {
     if (!_time) {
         _time = [[UIButton alloc] init];
-        [_time setImage:[UIImage imageNamed:@"icon_map_white"] forState:(UIControlStateNormal)];
+        [_time setImage:[UIImage imageNamed:@"icon_time"] forState:(UIControlStateNormal)];
         [_time setTitleEdgeInsets:(UIEdgeInsetsMake(0, 5, 0, 0))];
         _time.titleLabel.font = [UIFont systemFontOfSize:10];
         [_time setTitleColor:[UIColor colorWithHexString:@"#999999"] forState:(UIControlStateNormal)];
@@ -184,7 +184,7 @@
 - (UIButton *)address {
     if (!_address) {
         _address = [[UIButton alloc] init];
-        [_address setImage:[UIImage imageNamed:@"icon_map_white"] forState:(UIControlStateNormal)];
+        [_address setImage:[UIImage imageNamed:@"icon_location"] forState:(UIControlStateNormal)];
         [_address setTitleEdgeInsets:(UIEdgeInsetsMake(0, 5, 0, 0))];
         _address.titleLabel.font = [UIFont systemFontOfSize:10];
         [_address setTitleColor:[UIColor colorWithHexString:@"#999999"] forState:(UIControlStateNormal)];

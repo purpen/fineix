@@ -240,19 +240,22 @@ static NSString *const URLActionTags = @"/scene_sight/stick_active_tags";
 
 - (void)textViewDidChange:(UITextView *)textView {
     if (textView == self.desText) {
-        NSString *desIdentify = [textView.text substringToIndex:textView.selectedRange.location];
-        NSString *isTag = [desIdentify substringFromIndex:desIdentify.length - 1];
-        if ([isTag isEqualToString:@"#"]) {
-            THNAddTagViewController * tagVC = [[THNAddTagViewController alloc] init];
-            [self presentViewController:tagVC animated:YES completion:^{
-                tagVC.getAddTagsDataBlock = ^(NSString *tags, NSString *tagsId) {
-                    self.actionTag = tagsId;
-                    NSMutableString *desText = [[NSMutableString alloc] initWithString:self.desText.text];
-                    [desText insertString:tags atIndex:self.desText.selectedRange.location];
-                    self.desText.text = desText;
-                    [self.userAddTagMarr addObject:tags];
-                };
-            }];
+        if (![textView.text isEqualToString:@""]) {
+            NSString *desIdentify = [textView.text substringToIndex:textView.selectedRange.location];
+            NSString *isTag = [desIdentify substringFromIndex:desIdentify.length - 1];
+            if ([isTag isEqualToString:@"#"]) {
+                THNAddTagViewController * tagVC = [[THNAddTagViewController alloc] init];
+                [self presentViewController:tagVC animated:YES completion:^{
+                    tagVC.getAddTagsDataBlock = ^(NSString *tags, NSString *tagsId) {
+                        self.actionTag = tagsId;
+                        NSMutableString *desText = [[NSMutableString alloc] initWithString:self.desText.text];
+                        [desText insertString:tags atIndex:self.desText.selectedRange.location];
+                        self.desText.text = desText;
+                        [self.userAddTagMarr addObject:tags];
+                    };
+                }];
+            }
+
         }
     }
 }

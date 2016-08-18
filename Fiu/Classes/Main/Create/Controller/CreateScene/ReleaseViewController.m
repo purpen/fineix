@@ -51,6 +51,9 @@ static NSString *const URLGetUserDesTags = @"/gateway/fetch_chinese_word";
 #pragma mark 发布场景
 - (void)networkNewSceneData {
     NSString *title = [self.addContent.title.text stringByReplacingOccurrencesOfString:@" " withString:@""];
+    if ([self.addContent.content.text isEqualToString:NSLocalizedString(@"addDescription", nil)]) {
+        self.addContent.content.text = @"";
+    }
     NSString *des = self.addContent.content.text;
     NSString *address = self.addLocaiton.locationLab.text;
     NSString *city = self.addLocaiton.cityLab.text;
@@ -58,11 +61,10 @@ static NSString *const URLGetUserDesTags = @"/gateway/fetch_chinese_word";
     NSString *lat = self.addLocaiton.latitude;
     NSString *tags = [self.addContent.userAddTags componentsJoinedByString:@","];
     NSLog(@"＝＝＝＝＝＝＝＝＝ %@ %@ %@ %@ %@ %@ %@", title, des, address, city, lng, lat, tags);
-    
     [SVProgressHUD showWithMaskType:SVProgressHUDMaskTypeBlack];
     NSMutableArray * goodsMarr = [NSMutableArray array];
     for (NSUInteger idx = 0; idx < self.goodsId.count; ++ idx) {
-        NSDictionary *  goodsDict = @{@"id":self.goodsId[idx],
+        NSDictionary * goodsDict = @{@"id":self.goodsId[idx],
                                       @"title":self.goodsTitle[idx],
                                       @"x":self.goodsX[idx],
                                       @"y":self.goodsY[idx],
@@ -141,7 +143,7 @@ static NSString *const URLGetUserDesTags = @"/gateway/fetch_chinese_word";
     self.view.backgroundColor = [UIColor colorWithHexString:@"#F8F8F8"];
     [self addNavViewTitle:NSLocalizedString(@"releaseVcTitle", nil)];
     self.navTitle.textColor = [UIColor whiteColor];
-    [self.cancelDoneBtn setImage:[UIImage imageNamed:@"icon_cancel"] forState:(UIControlStateNormal)];
+    [self.cancelDoneBtn setImage:[UIImage imageNamed:@"icon_back_white"] forState:(UIControlStateNormal)];
     [self addCancelDoneButton];
     [self addDoneButton];
     [self.doneBtn addTarget:self action:@selector(releaseScene) forControlEvents:(UIControlEventTouchUpInside)];

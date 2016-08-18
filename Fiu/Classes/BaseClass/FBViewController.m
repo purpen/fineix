@@ -61,11 +61,7 @@ static NSString *const URLUserIsLogin = @"/user/user_info";
         _countLab.backgroundColor = [UIColor colorWithHexString:fineixColor];
         _countLab.textColor = [UIColor whiteColor];
         _countLab.textAlignment = NSTextAlignmentCenter;
-        if (IS_iOS9) {
-            _countLab.font = [UIFont fontWithName:@"PingFangSC-Light" size:9];
-        } else {
-            _countLab.font = [UIFont systemFontOfSize:9];
-        }
+        _countLab.font = [UIFont systemFontOfSize:9];
     }
     return _countLab;
 }
@@ -146,11 +142,7 @@ static NSString *const URLUserIsLogin = @"/user/user_info";
     if (!_navViewTitle) {
         _navViewTitle = [[UILabel alloc] initWithFrame:CGRectMake(44, 20, SCREEN_WIDTH - 88, 44)];
         _navViewTitle.textColor = [UIColor whiteColor];
-        if (IS_iOS9) {
-            _navViewTitle.font = [UIFont fontWithName:@"PingFangSC-Light" size:17];
-        } else {
-            _navViewTitle.font = [UIFont systemFontOfSize:17];
-        }
+        _navViewTitle.font = [UIFont systemFontOfSize:17];
         _navViewTitle.textAlignment = NSTextAlignmentCenter;
     }
     return _navViewTitle;
@@ -160,7 +152,7 @@ static NSString *const URLUserIsLogin = @"/user/user_info";
 - (UIButton *)navBackBtn {
     if (!_navBackBtn) {
         _navBackBtn = [[UIButton alloc] initWithFrame:CGRectMake(0, 20, 44, 44)];
-        [_navBackBtn setImage:[UIImage imageNamed:@"icon_back"] forState:(UIControlStateNormal)];
+        [_navBackBtn setImage:[UIImage imageNamed:@"icon_back_white"] forState:(UIControlStateNormal)];
         [_navBackBtn addTarget:self action:@selector(popViewController) forControlEvents:(UIControlEventTouchUpInside)];
     }
     return _navBackBtn;
@@ -181,11 +173,8 @@ static NSString *const URLUserIsLogin = @"/user/user_info";
         _rightBtn = [[UIButton alloc] initWithFrame:CGRectMake(SCREEN_WIDTH - 44, 20, 44, 44)];
         [_rightBtn addTarget:self action:@selector(rightAction) forControlEvents:(UIControlEventTouchUpInside)];
         [_rightBtn setTitleColor:[UIColor blackColor] forState:(UIControlStateNormal)];
-        if (IS_iOS9) {
-            _rightBtn.titleLabel.font = [UIFont fontWithName:@"PingFangSC-Light" size:16];
-        } else {
-            _rightBtn.titleLabel.font = [UIFont systemFontOfSize:16];
-        }
+        _rightBtn.titleLabel.font = [UIFont systemFontOfSize:16];
+
     }
     return _rightBtn;
 }
@@ -293,11 +282,7 @@ static NSString *const URLUserIsLogin = @"/user/user_info";
         [self.rightBtn setTitleColor:[UIColor colorWithHexString:fineixColor] forState:UIControlStateNormal];
         self.rightBtn.imageEdgeInsets = UIEdgeInsetsMake(0, -42, 0, 0);
         self.rightBtn.titleEdgeInsets = UIEdgeInsetsMake(0, -37, 0, 0);
-        if (IS_iOS9) {
-            self.rightBtn.titleLabel.font = [UIFont fontWithName:@"PingFangSC-Light" size:12];
-        } else {
-            self.rightBtn.titleLabel.font = [UIFont systemFontOfSize:12];
-        }
+        self.rightBtn.titleLabel.font = [UIFont systemFontOfSize:12];
     }
     if ([title isEqualToString:@"保存"]) {
         self.rightBtn.titleEdgeInsets = UIEdgeInsetsMake(0, -20, 0, 0);

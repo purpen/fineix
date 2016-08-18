@@ -149,21 +149,6 @@
     return YES;
 }
 
-//- (void)textFieldDidBeginEditing:(UITextField *)textField {
-//    if (textField == self.brand) {
-//        if ([self.delegate respondsToSelector:@selector(mark_AddBands)]) {
-//            [self.delegate mark_AddBands];
-//            MarkBrandsViewController *markBrandVC = [[MarkBrandsViewController alloc] init];
-//            [self.vc presentViewController:markBrandVC animated:YES completion:nil];
-//        }
-//        
-//    } else if (textField == self.goods) {
-//        if ([self.delegate respondsToSelector:@selector(mark_AddGoods)]) {
-//            [self.delegate mark_AddGoods];
-//        }
-//    }
-//}
-
 - (UITextField *)goods {
     if (!_goods) {
         _goods = [[UITextField alloc] init];
