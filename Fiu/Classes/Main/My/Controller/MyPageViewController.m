@@ -37,7 +37,7 @@
 #import "THNCollectionViewController.h"
 
 
-@interface MyPageViewController ()<FBNavigationBarItemsDelegate,UICollectionViewDelegate,UICollectionViewDataSource>
+@interface MyPageViewController ()<THNNavigationBarItemsDelegate,UICollectionViewDelegate,UICollectionViewDataSource>
 {
     ChanelView *_chanelV;
     CounterModel *_counterModel;
@@ -128,12 +128,10 @@
 
 -(void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
-    [[UIApplication sharedApplication] setStatusBarHidden:NO withAnimation:(UIStatusBarAnimationSlide)];
-    [UIApplication sharedApplication].statusBarStyle = UIStatusBarStyleDefault;
     self.delegate = self;
-    [self addNavLogoImgisTransparent:YES];
-    [self addBarItemLeftBarButton:nil image:@"my_riLi" isTransparent:YES];
-    [self addBarItemRightBarButton:nil image:@"my_set" isTransparent:YES];
+    [self thn_addNavLogoImage];
+    [self thn_addBarItemLeftBarButton:nil image:@"my_riLi"];
+    [self thn_addBarItemRightBarButton:nil image:@"my_set"];
     [self.view insertSubview:self.navView aboveSubview:self.myCollectionView];
     self.navView.backgroundColor = [UIColor clearColor];
     //  添加渐变层
@@ -152,15 +150,17 @@
     self.tabBarController.tabBar.hidden = NO;
 }
 
--(void)rightBarItemSelected{
+-(void)thn_rightBarItemSelected{
     SystemSettingViewController *vc = [[SystemSettingViewController alloc] init];
     [self.navigationController pushViewController:vc animated:YES];
 }
+
 
 -(void)netGetData{
     UserInfoEntity *entity = [UserInfoEntity defaultUserInfoEntity];
     FBRequest *request = [FBAPI postWithUrlString:@"/auth/user" requestDictionary:@{@"user_id":entity.userId} delegate:self];
     [request startRequestSuccess:^(FBRequest *request, id result) {
+        
         NSDictionary *dataDict = result[@"data"];
         _chanelV.scenarioNumLabel.text = [NSString stringWithFormat:@"%@",dataDict[@"scene_count"]];
         _chanelV.fieldNumLabel.text = [NSString stringWithFormat:@"%@",dataDict[@"sight_count"]];
@@ -168,6 +168,18 @@
         _chanelV.fansNumLabel.text = [NSString stringWithFormat:@"%@",dataDict[@"fans_count"]];
         
         UserInfo *userInfo = [UserInfo mj_objectWithKeyValues:[result objectForKey:@"data"]];
+        NSArray *ary = [result objectForKey:@"data"][@"interest_scene_cate"];
+        NSLog(@"用户  %@",result);
+        NSMutableString *str = [NSMutableString string];
+        for (int i = 0; i < ary.count; i ++) {
+            [str appendString:[NSString stringWithFormat:@"%@",ary[i]]];
+            if (i == ary.count - 1) {
+                break;
+            }
+            [str appendString:@","];
+        }
+        userInfo.interest_scene_cate = str;
+        
         userInfo.head_pic_url = [result objectForKey:@"data"][@"head_pic_url"];
         NSArray *areasAry = [NSArray arrayWithArray:dataDict[@"areas"]];
         if (areasAry.count) {

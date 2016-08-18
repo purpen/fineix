@@ -70,9 +70,10 @@
         
         [self.contentView addSubview:self.lineView];
         [_lineView mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.size.mas_equalTo(CGSizeMake(SCREEN_WIDTH, 0.5));
+            make.height.mas_equalTo(0.5);
             make.bottom.mas_equalTo(self.mas_bottom).with.offset(0);
-            make.left.mas_equalTo(self.mas_left).with.offset(0);
+            make.left.mas_equalTo(self.nickNameLabel.mas_left).with.offset(0);
+            make.right.mas_equalTo(self.mas_right).offset(0);
         }];
     }
     return self;

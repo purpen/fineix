@@ -37,6 +37,10 @@
 @property(nonatomic,copy) NSString *age_group;
 /** 资产 */
 @property(nonatomic,copy) NSString *assets;
+/** 订阅的情境主题 */
+@property (nonatomic, copy) NSString *interest_scene_cate;
+/** 小的头像 */
+@property(nonatomic,copy) NSString *avatar_url;
 
 - (void)updateUserInfoEntity;
 

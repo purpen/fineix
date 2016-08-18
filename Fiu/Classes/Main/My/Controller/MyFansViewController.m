@@ -19,7 +19,7 @@
 #import "UserInfoEntity.h"
 
 
-@interface MyFansViewController ()<THNNavigationBarItemsDelegate,UITableViewDelegate,UITableViewDataSource,FBRequestDelegate>
+@interface MyFansViewController ()<FBNavigationBarItemsDelegate,UITableViewDelegate,UITableViewDataSource,FBRequestDelegate>
 {
     NSMutableArray *_modelAry;
     int _page;

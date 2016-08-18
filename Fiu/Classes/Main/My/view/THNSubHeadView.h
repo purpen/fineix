@@ -10,4 +10,9 @@
 
 @interface THNSubHeadView : UIView
 
+/**  */
+@property (nonatomic, strong) UINavigationController *navi;
+/**  */
+@property (nonatomic, assign) NSInteger num;
+
 @end

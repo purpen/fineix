@@ -8,7 +8,9 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="THNForgetViewController">
             <connections>
                 <outlet property="backToTheTimeL" destination="2D4-tH-edO" id="jWf-pj-HSf"/>
+                <outlet property="commitBtn" destination="pI0-dE-shX" id="tcG-Pf-vKj"/>
                 <outlet property="phoneTF" destination="cjx-gA-fUt" id="iGJ-mn-Tab"/>
+                <outlet property="sendBtn" destination="q0R-Od-JpK" id="V6G-Yi-6Xy"/>
                 <outlet property="setNewPwd" destination="Q9Q-mF-DNB" id="yBe-SH-85f"/>
                 <outlet property="toResendV" destination="HeG-Mc-DFR" id="Ys5-pN-yBx"/>
                 <outlet property="vertCodeTF" destination="tby-hb-sMw" id="gHM-lL-HcH"/>
@@ -77,7 +79,7 @@
                                     </variation>
                                 </textField>
                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="q0R-Od-JpK">
-                                    <rect key="frame" x="228" y="85" width="132" height="44"/>
+                                    <rect key="frame" x="228" y="85" width="127" height="44"/>
                                     <color key="backgroundColor" red="0.54117647059999996" green="0.54117647059999996" blue="0.54117647059999996" alpha="1" colorSpace="calibratedRGB"/>
                                     <constraints>
                                         <constraint firstAttribute="height" constant="44" id="7L5-yf-doD"/>
@@ -91,10 +93,10 @@
                                     </connections>
                                 </button>
                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="HeG-Mc-DFR">
-                                    <rect key="frame" x="228" y="85" width="132" height="44"/>
+                                    <rect key="frame" x="228" y="85" width="127" height="44"/>
                                     <subviews>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="251" text="" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2D4-tH-edO">
-                                            <rect key="frame" x="8" y="12" width="53" height="21"/>
+                                            <rect key="frame" x="8" y="12" width="50" height="21"/>
                                             <constraints>
                                                 <constraint firstAttribute="height" constant="21" id="BHs-ea-Aja"/>
                                                 <constraint firstAttribute="height" constant="21" id="I6B-Um-XD3"/>
@@ -111,7 +113,7 @@
                                             </variation>
                                         </label>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="s" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="oO5-YU-xvz">
-                                            <rect key="frame" x="63" y="12" width="7" height="21"/>
+                                            <rect key="frame" x="60" y="12" width="7" height="21"/>
                                             <constraints>
                                                 <constraint firstAttribute="height" constant="21" id="Wez-iQ-qZX"/>
                                                 <constraint firstAttribute="height" constant="21" id="fyI-kO-Z8U"/>
@@ -188,7 +190,7 @@
                             </subviews>
                             <constraints>
                                 <constraint firstItem="uEI-SE-n2b" firstAttribute="top" secondItem="QMk-3g-xrB" secondAttribute="top" id="45N-e0-cfa"/>
-                                <constraint firstAttribute="trailing" secondItem="q0R-Od-JpK" secondAttribute="trailing" constant="15" id="5pj-52-lvr"/>
+                                <constraint firstAttribute="trailing" secondItem="q0R-Od-JpK" secondAttribute="trailing" constant="20" id="5pj-52-lvr"/>
                                 <constraint firstItem="q0R-Od-JpK" firstAttribute="leading" secondItem="QMk-3g-xrB" secondAttribute="leading" constant="228" id="9Ji-GI-be4"/>
                                 <constraint firstItem="cjx-gA-fUt" firstAttribute="top" secondItem="uEI-SE-n2b" secondAttribute="bottom" constant="10" id="9Jq-dG-WA2"/>
                                 <constraint firstItem="Q9Q-mF-DNB" firstAttribute="top" secondItem="tby-hb-sMw" secondAttribute="bottom" constant="10" id="JOg-Dt-h1g"/>
@@ -201,7 +203,7 @@
                                 <constraint firstAttribute="trailing" secondItem="tby-hb-sMw" secondAttribute="trailing" constant="20" id="XEy-Dt-8ys"/>
                                 <constraint firstItem="cjx-gA-fUt" firstAttribute="centerX" secondItem="QMk-3g-xrB" secondAttribute="centerX" id="ZwY-uJ-J0v"/>
                                 <constraint firstItem="q0R-Od-JpK" firstAttribute="centerY" secondItem="tby-hb-sMw" secondAttribute="centerY" id="cki-4b-Ka0"/>
-                                <constraint firstAttribute="trailing" secondItem="HeG-Mc-DFR" secondAttribute="trailing" constant="15" id="dVt-gi-zl0"/>
+                                <constraint firstAttribute="trailing" secondItem="HeG-Mc-DFR" secondAttribute="trailing" constant="20" id="dVt-gi-zl0"/>
                                 <constraint firstItem="uEI-SE-n2b" firstAttribute="leading" secondItem="QMk-3g-xrB" secondAttribute="leading" constant="15" id="iav-35-em5"/>
                                 <constraint firstItem="HeG-Mc-DFR" firstAttribute="leading" secondItem="QMk-3g-xrB" secondAttribute="leading" constant="228" id="jqN-ic-Cqd"/>
                                 <constraint firstAttribute="trailing" secondItem="pI0-dE-shX" secondAttribute="trailing" constant="20" id="mb8-Cn-smy"/>

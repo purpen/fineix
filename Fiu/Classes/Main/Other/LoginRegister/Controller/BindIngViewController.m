@@ -47,11 +47,6 @@ static NSString * const XMGPlacerholderColorKeyPath = @"_placeholderLabel.textCo
     self.pwdTF.tintColor = [UIColor lightGrayColor];
 }
 
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
-}
-
 
 - (IBAction)clickBingBtn:(UIButton *)sender {
     [SVProgressHUD showWithMaskType:SVProgressHUDMaskTypeClear];
@@ -116,11 +111,6 @@ static NSString * const XMGPlacerholderColorKeyPath = @"_placeholderLabel.textCo
     [self.navigationController popViewControllerAnimated:YES];
 }
 
-
-- (IBAction)cancelBtn:(UIButton *)sender {
-     [self dismissViewControllerAnimated:YES completion:nil];
-}
-
 - (IBAction)loginBtn:(UIButton *)sender {
     [SVProgressHUD showWithMaskType:SVProgressHUDMaskTypeClear];
     //发送请求来存储用户信息
@@ -175,14 +165,5 @@ static NSString * const XMGPlacerholderColorKeyPath = @"_placeholderLabel.textCo
 
 }
 
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
 
 @end
