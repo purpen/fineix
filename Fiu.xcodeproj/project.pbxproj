@@ -425,6 +425,11 @@
 		1FD10CBE1D647B2C005898EE /* THNSubHeadView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1FD10CBD1D647B2C005898EE /* THNSubHeadView.m */; };
 		1FD10CC21D64850D005898EE /* THNBingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1FD10CC01D64850D005898EE /* THNBingViewController.m */; };
 		1FD10CC31D64850D005898EE /* THNBingViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1FD10CC11D64850D005898EE /* THNBingViewController.xib */; };
+		1FD310701D65809D0079A21C /* THNSenceModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 1FD3106F1D65809D0079A21C /* THNSenceModel.m */; };
+		1FD310741D6583750079A21C /* THNSenceTopicViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1FD310721D6583750079A21C /* THNSenceTopicViewController.m */; };
+		1FD310751D6583750079A21C /* THNSenceTopicViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1FD310731D6583750079A21C /* THNSenceTopicViewController.xib */; };
+		1FD310791D658BC90079A21C /* THNSenecCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 1FD310771D658BC90079A21C /* THNSenecCollectionViewCell.m */; };
+		1FD3107A1D658BC90079A21C /* THNSenecCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1FD310781D658BC90079A21C /* THNSenecCollectionViewCell.xib */; };
 		1FD59C131D115FD50025A800 /* ProjectViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1FD59C111D115FD50025A800 /* ProjectViewController.m */; };
 		1FD59C141D115FD50025A800 /* ProjectViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1FD59C121D115FD50025A800 /* ProjectViewController.xib */; };
 		1FD59C181D11A8190025A800 /* ProjectViewCommentsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1FD59C161D11A8190025A800 /* ProjectViewCommentsViewController.m */; };
@@ -1359,6 +1364,14 @@
 		1FD10CBF1D64850D005898EE /* THNBingViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THNBingViewController.h; sourceTree = "<group>"; };
 		1FD10CC01D64850D005898EE /* THNBingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THNBingViewController.m; sourceTree = "<group>"; };
 		1FD10CC11D64850D005898EE /* THNBingViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = THNBingViewController.xib; sourceTree = "<group>"; };
+		1FD3106E1D65809D0079A21C /* THNSenceModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THNSenceModel.h; sourceTree = "<group>"; };
+		1FD3106F1D65809D0079A21C /* THNSenceModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THNSenceModel.m; sourceTree = "<group>"; };
+		1FD310711D6583750079A21C /* THNSenceTopicViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THNSenceTopicViewController.h; sourceTree = "<group>"; };
+		1FD310721D6583750079A21C /* THNSenceTopicViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THNSenceTopicViewController.m; sourceTree = "<group>"; };
+		1FD310731D6583750079A21C /* THNSenceTopicViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = THNSenceTopicViewController.xib; sourceTree = "<group>"; };
+		1FD310761D658BC90079A21C /* THNSenecCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THNSenecCollectionViewCell.h; sourceTree = "<group>"; };
+		1FD310771D658BC90079A21C /* THNSenecCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THNSenecCollectionViewCell.m; sourceTree = "<group>"; };
+		1FD310781D658BC90079A21C /* THNSenecCollectionViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = THNSenecCollectionViewCell.xib; sourceTree = "<group>"; };
 		1FD59C101D115FD50025A800 /* ProjectViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProjectViewController.h; sourceTree = "<group>"; };
 		1FD59C111D115FD50025A800 /* ProjectViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ProjectViewController.m; sourceTree = "<group>"; };
 		1FD59C121D115FD50025A800 /* ProjectViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ProjectViewController.xib; sourceTree = "<group>"; };
@@ -2840,6 +2853,9 @@
 				1F2A8DAD1CF40277005116C7 /* ShieldingViewController.m */,
 				1F2A8DAE1CF40277005116C7 /* SubscribeViewController.h */,
 				1F2A8DAF1CF40277005116C7 /* SubscribeViewController.m */,
+				1FD310711D6583750079A21C /* THNSenceTopicViewController.h */,
+				1FD310721D6583750079A21C /* THNSenceTopicViewController.m */,
+				1FD310731D6583750079A21C /* THNSenceTopicViewController.xib */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -2861,6 +2877,8 @@
 				1F2A8DBF1CF40277005116C7 /* FindSceneModel.m */,
 				1F2A8DC01CF40277005116C7 /* InvitationModel.h */,
 				1F2A8DC11CF40277005116C7 /* InvitationModel.m */,
+				1FD3106E1D65809D0079A21C /* THNSenceModel.h */,
+				1FD3106F1D65809D0079A21C /* THNSenceModel.m */,
 			);
 			path = model;
 			sourceTree = "<group>";
@@ -2914,6 +2932,9 @@
 				1FF36EAC1D50A7C500EB3C93 /* SearchPepoleTableViewCell.xib */,
 				1FD10CBC1D647B2C005898EE /* THNSubHeadView.h */,
 				1FD10CBD1D647B2C005898EE /* THNSubHeadView.m */,
+				1FD310761D658BC90079A21C /* THNSenecCollectionViewCell.h */,
+				1FD310771D658BC90079A21C /* THNSenecCollectionViewCell.m */,
+				1FD310781D658BC90079A21C /* THNSenecCollectionViewCell.xib */,
 			);
 			path = view;
 			sourceTree = "<group>";
@@ -4614,6 +4635,7 @@
 				1F2A90421CF40277005116C7 /* BindIngViewController.xib in Resources */,
 				1FA4BDF71D35F2200067A196 /* UMSocialSDKResourcesNew.bundle in Resources */,
 				D8A9AD091CD9CCA900A9FCFB /* Assets.xcassets in Resources */,
+				1FD3107A1D658BC90079A21C /* THNSenecCollectionViewCell.xib in Resources */,
 				1F35F0511CD2336E0000DB95 /* areas.plist in Resources */,
 				1F2A908C1CF40277005116C7 /* PaySuccessViewController.xib in Resources */,
 				1F2A905D1CF40277005116C7 /* MentionedViewController.xib in Resources */,
@@ -4652,6 +4674,7 @@
 				1FCDCC881D07F50D00C92E78 /* ServiceViewController.xib in Resources */,
 				1FD10C8B1D5DA0A0005898EE /* THNAgeViewController.xib in Resources */,
 				1FA4BDF11D35F2200067A196 /* UMSCommentInputControlleriPad.xib in Resources */,
+				1FD310751D6583750079A21C /* THNSenceTopicViewController.xib in Resources */,
 				1FCDCC8E1D08085000C92E78 /* InviteCCodeViewController.xib in Resources */,
 				1F2A90191CF40277005116C7 /* BonusViewController.xib in Resources */,
 				1F2A90201CF40277005116C7 /* InvalidBonusCell.xib in Resources */,
@@ -4772,6 +4795,7 @@
 				D847632B1D41CE3900C88379 /* MarkGoodsView.m in Sources */,
 				1F2A90031CF40277005116C7 /* FindFriendModel.m in Sources */,
 				D851746C1D5AD70E005F5722 /* THNSceneCommentTableViewCell.m in Sources */,
+				1FD310701D65809D0079A21C /* THNSenceModel.m in Sources */,
 				D89CFE0C1D052AF1002701B8 /* FBSceneInfoScrollView.m in Sources */,
 				D85174571D587917005F5722 /* THNMyCenterViewController.m in Sources */,
 				1F2A90001CF40277005116C7 /* AreaModel.m in Sources */,
@@ -5025,6 +5049,7 @@
 				D81281561CAA8532007CF08B /* NSString+FBMD5.m in Sources */,
 				1F2A8FFA1CF40277005116C7 /* QRCodeScanViewController.m in Sources */,
 				1F2A8FB31CF40277005116C7 /* BrandInfo.m in Sources */,
+				1FD310741D6583750079A21C /* THNSenceTopicViewController.m in Sources */,
 				1F2A8F871CF40277005116C7 /* HomeViewController.m in Sources */,
 				1F2A8F9E1CF40277005116C7 /* SceneListTableViewCell.m in Sources */,
 				1F2A8F901CF40277005116C7 /* HomeSceneListRow.m in Sources */,
@@ -5082,6 +5107,7 @@
 				1FD10C9C1D5DC8B8005898EE /* THNTopicView.m in Sources */,
 				1F2A8FAA1CF40277005116C7 /* FBGoodsCommentViewController.m in Sources */,
 				D8B855C21D3F6BA10008BD57 /* AddLocationView.m in Sources */,
+				1FD310791D658BC90079A21C /* THNSenecCollectionViewCell.m in Sources */,
 				D87B69BF1CC726BA00199EFE /* FBRollImages.m in Sources */,
 				1F2A8F991CF40277005116C7 /* SceneInfoData.m in Sources */,
 				1F2A8F8E1CF40277005116C7 /* HomeSceneListLocation.m in Sources */,

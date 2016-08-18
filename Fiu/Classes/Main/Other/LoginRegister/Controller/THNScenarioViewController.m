@@ -127,12 +127,17 @@ static NSString *getList = @"/category/getlist";
 }
 
 -(void)tipClick:(UIButton*)sender{
-    sender.selected = !sender.selected;
-    ((THNTopicView*)self.viewAry[[self.btnAry indexOfObject:sender]]).layerView.backgroundColor = sender.selected ? [UIColor colorWithHexString:@"#70510B" alpha:0.4] : [UIColor colorWithHexString:@"#525252" alpha:0.4];
+    
+    
     if (sender.selected) {
-        [self.idAry addObject:((THNTopicView*)self.viewAry[[self.btnAry indexOfObject:sender]]).model._id];
-    }else{
         [self.idAry removeObject:((THNTopicView*)self.viewAry[[self.btnAry indexOfObject:sender]]).model._id];
+        sender.selected = NO;
+        ((THNTopicView*)self.viewAry[[self.btnAry indexOfObject:sender]]).layerView.backgroundColor = sender.selected ? [UIColor colorWithHexString:@"#70510B" alpha:0.4] : [UIColor colorWithHexString:@"#525252" alpha:0.4];
+        
+    }else{
+        [self.idAry addObject:((THNTopicView*)self.viewAry[[self.btnAry indexOfObject:sender]]).model._id];
+        sender.selected = YES;
+        ((THNTopicView*)self.viewAry[[self.btnAry indexOfObject:sender]]).layerView.backgroundColor = sender.selected ? [UIColor colorWithHexString:@"#70510B" alpha:0.4] : [UIColor colorWithHexString:@"#525252" alpha:0.4];
     }
 }
 

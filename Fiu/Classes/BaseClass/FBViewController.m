@@ -25,7 +25,7 @@ static NSString *const URLUserIsLogin = @"/user/user_info";
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-
+    [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent];
     [self setSlideBackVC];
     
     [self.view addSubview:self.navView];
@@ -90,7 +90,6 @@ static NSString *const URLUserIsLogin = @"/user/user_info";
 
 #pragma mark - 弹出登录
 - (void)openUserLoginVC {
-    UIStoryboard *loginStory = [UIStoryboard storyboardWithName:@"LoginRegisterController" bundle:[NSBundle mainBundle]];
     THNLoginRegisterViewController * loginSignupVC = [[THNLoginRegisterViewController alloc] init];
     UINavigationController * navi = [[UINavigationController alloc] initWithRootViewController:loginSignupVC];
     [self presentViewController:navi animated:YES completion:nil];
@@ -160,7 +159,7 @@ static NSString *const URLUserIsLogin = @"/user/user_info";
 - (UIButton *)navBackBtn {
     if (!_navBackBtn) {
         _navBackBtn = [[UIButton alloc] initWithFrame:CGRectMake(0, 20, 44, 44)];
-        [_navBackBtn setImage:[UIImage imageNamed:@"icon_back"] forState:(UIControlStateNormal)];
+        [_navBackBtn setImage:[UIImage imageNamed:@"my_back"] forState:(UIControlStateNormal)];
         [_navBackBtn addTarget:self action:@selector(popViewController) forControlEvents:(UIControlEventTouchUpInside)];
     }
     return _navBackBtn;

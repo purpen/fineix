@@ -6,9 +6,9 @@
 //  Copyright © 2016年 taihuoniao. All rights reserved.
 //
 
-#import "THNViewController.h"
+#import "FBViewController.h"
 
-@interface MyFansViewController : THNViewController
+@interface MyFansViewController : FBViewController
 @property(nonatomic,strong) UITableView *mytableView;
 @property(nonatomic,copy) NSString *userId;
 @end

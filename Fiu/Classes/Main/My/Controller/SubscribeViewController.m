@@ -15,12 +15,16 @@
 #import "FBAPI.h"
 #import "FBRequest.h"
 #import "THNSubHeadView.h"
+#import "THNSenceModel.h"
+#import "THNSenecCollectionViewCell.h"
 
 @interface SubscribeViewController ()<FBNavigationBarItemsDelegate,UICollectionViewDelegate,UICollectionViewDataSource,UICollectionViewDelegateFlowLayout,FBRequestDelegate>
 @pro_strong NSMutableArray          *   allFiuSceneMarr;        //   情景列表
 @pro_strong NSMutableArray          *   allFiuSceneIdMarr;      //   情景Id列表
 @property (nonatomic, assign) NSInteger currentPageNumber;
 @property (nonatomic, assign) NSInteger totalPageNumber;
+/**  */
+@property (nonatomic, strong) THNSubHeadView *headView;
 @end
 
 static NSString *const URLAllFiuSceneList = @"/scene_scene/";
@@ -53,21 +57,35 @@ static NSString *const URLAllFiuSceneList = @"/scene_scene/";
     }];
 }
 
+-(THNSubHeadView *)headView{
+    if (!_headView) {
+        _headView = [[THNSubHeadView alloc] initWithFrame:CGRectMake(0, 64, SCREEN_WIDTH, 44)];
+        _headView.navi = self.navigationController;
+    }
+    return _headView;
+}
+
 //上拉下拉分页请求订单列表
 - (void)requestDataForOderListOperation
 {
     [SVProgressHUD show];
     UserInfoEntity *entity = [UserInfoEntity defaultUserInfoEntity];
-    self.allSceneListRequest = [FBAPI getWithUrlString:@"/favorite/get_new_list" requestDictionary:@{@"size":@"10", @"page":@(_currentPageNumber + 1),@"user_id":entity.userId,@"type":@13,@"event":@4} delegate:self];
+
+    self.allSceneListRequest = [FBAPI getWithUrlString:@"/scene_sight/getlist" requestDictionary:@{@"size":@"10", @"page":@(_currentPageNumber + 1),@"category_ids" : entity.interest_scene_cate} delegate:self];
     
     [self.allSceneListRequest startRequestSuccess:^(FBRequest *request, id result) {
         NSLog(@"情景  %@",result);
         NSArray * sceneArr = [[result valueForKey:@"data"] valueForKey:@"rows"];
         for (NSDictionary * sceneDic in sceneArr) {
-            FiuSceneInfoData * allFiuScene = [[FiuSceneInfoData alloc] initWithDictionary:sceneDic];
+            THNSenceModel * allFiuScene = [THNSenceModel mj_objectWithKeyValues:sceneDic];
+            NSLog(@"数组  %@",allFiuScene.title);
             [self.allFiuSceneMarr addObject:allFiuScene];
-            [self.allFiuSceneIdMarr addObject:[NSString stringWithFormat:@"%zi", allFiuScene.idField]];
+            [self.allFiuSceneIdMarr addObject:[NSString stringWithFormat:@"%zi", allFiuScene._id]];
         }
+        
+        [self.view addSubview:self.headView];
+        self.headView.num = self.allFiuSceneMarr.count;
+        
         [self.allSceneView reloadData];
         
         _currentPageNumber = [[[result valueForKey:@"data"] valueForKey:@"current_page"] integerValue];
@@ -119,8 +137,7 @@ static NSString *const URLAllFiuSceneList = @"/scene_scene/";
     [super viewDidLoad];
     self.view.backgroundColor = [UIColor colorWithHexString:@"#F7F7F7"];
     [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent];
-    THNSubHeadView *view = [[THNSubHeadView alloc] initWithFrame:CGRectMake(0, 64, SCREEN_WIDTH, 44)];
-    [self.view addSubview:view];
+    
     [self setAllSceneViewUI];
     
 }
@@ -140,7 +157,7 @@ static NSString *const URLAllFiuSceneList = @"/scene_scene/";
         flowLayout.minimumInteritemSpacing = 5.0;
         flowLayout.minimumLineSpacing = 5.0;
         
-        _allSceneView = [[UICollectionView alloc] initWithFrame:CGRectMake(0, 64 + 44, SCREEN_WIDTH, SCREEN_HEIGHT - 64) collectionViewLayout:flowLayout];
+        _allSceneView = [[UICollectionView alloc] initWithFrame:CGRectMake(0, 64 + 44, SCREEN_WIDTH, SCREEN_HEIGHT - 64 - 44) collectionViewLayout:flowLayout];
         
         
         _allSceneView.backgroundColor = [UIColor colorWithHexString:@"#F7F7F7"];
@@ -148,13 +165,17 @@ static NSString *const URLAllFiuSceneList = @"/scene_scene/";
         _allSceneView.dataSource = self;
         _allSceneView.showsVerticalScrollIndicator = NO;
         _allSceneView.showsHorizontalScrollIndicator = NO;
-        [_allSceneView registerClass:[AllSceneCollectionViewCell class] forCellWithReuseIdentifier:@"allSceneCollectionViewCellID"];
+        [_allSceneView registerNib:[UINib nibWithNibName:@"THNSenecCollectionViewCell" bundle:nil] forCellWithReuseIdentifier:@"allSceneCollectionViewCellID"];
     }
     return _allSceneView;
 }
 
+-(CGFloat)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout minimumLineSpacingForSectionAtIndex:(NSInteger)section{
+    return 15;
+}
+
 -(CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath{
-    return CGSizeMake((SCREEN_WIDTH - 15 * 3) * 0.5, 0.25 * SCREEN_HEIGHT);
+    return CGSizeMake((SCREEN_WIDTH - 15 * 3) * 0.5, 0.3 * SCREEN_HEIGHT);
 }
 
 #pragma mark  UICollectionViewDataSource
@@ -164,16 +185,11 @@ static NSString *const URLAllFiuSceneList = @"/scene_scene/";
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
     static NSString * collectionViewCellId = @"allSceneCollectionViewCellID";
-    AllSceneCollectionViewCell * cell = [collectionView dequeueReusableCellWithReuseIdentifier:collectionViewCellId forIndexPath:indexPath];
-    [cell setAllFiuSceneListData:self.allFiuSceneMarr[indexPath.row]];
+    THNSenecCollectionViewCell * cell = [collectionView dequeueReusableCellWithReuseIdentifier:collectionViewCellId forIndexPath:indexPath];
+    cell.model = self.allFiuSceneMarr[indexPath.row];
     return cell;
 }
 
-- (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
-    FiuSceneViewController * fiuSceneVC = [[FiuSceneViewController alloc] init];
-    fiuSceneVC.fiuSceneId = self.allFiuSceneIdMarr[indexPath.row];
-    [self.navigationController pushViewController:fiuSceneVC animated:YES];
-}
 
 #pragma mark - 设置Nav
 - (void)setNavigationViewUI {

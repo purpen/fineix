@@ -21,6 +21,8 @@
 @property (weak, nonatomic) IBOutlet UIView *toResendV;
 @property (weak, nonatomic) IBOutlet UILabel *backToTheTimeL;
 @property (weak, nonatomic) IBOutlet UITextField *setNewPwd;
+@property (weak, nonatomic) IBOutlet UIButton *sendBtn;
+@property (weak, nonatomic) IBOutlet UIButton *commitBtn;
 @end
 
 static NSString *const VerifyCodeURL = @"/auth/verify_code";//发送验证码接口
@@ -43,6 +45,12 @@ static NSString * const XMGPlacerholderColorKeyPath = @"_placeholderLabel.textCo
     [self.setNewPwd setValue:[UIColor colorWithHexString:@"#898989"] forKeyPath:XMGPlacerholderColorKeyPath];
     self.setNewPwd.tintColor = [UIColor whiteColor];
     _toResendV.hidden = YES;
+    _toResendV.layer.masksToBounds = YES;
+    _toResendV.layer.cornerRadius = 3;
+    _sendBtn.layer.cornerRadius = 3;
+    _sendBtn.layer.masksToBounds = YES;
+    self.commitBtn.layer.masksToBounds = YES;
+    self.commitBtn.layer.cornerRadius = 3;
 }
 - (IBAction)sendVerBtn:(UIButton *)sender {
     if ([_phoneTF.text checkTel]) {
