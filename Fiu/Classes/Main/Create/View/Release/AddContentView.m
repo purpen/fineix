@@ -10,6 +10,7 @@
 #import "FBEditShareInfoViewController.h"
 #import "TagFlowLayout.h"
 #import "ChooseTagsCollectionViewCell.h"
+#import "UILable+Frame.h"
 
 @interface AddContentView () {
     NSString *_titleStr;
@@ -47,11 +48,18 @@
         make.bottom.equalTo(_sceneImgView.mas_bottom).with.offset(-20);
     }];
     
-    [self addSubview:self.content];
-    [_content mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.size.mas_equalTo(CGSizeMake(SCREEN_WIDTH - 20, 88));
-        make.left.equalTo(self.mas_left).with.offset(10);
+    [self addSubview:self.contentRoll];
+    [_contentRoll mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.size.mas_equalTo(CGSizeMake(SCREEN_WIDTH - 30, 88));
+        make.left.equalTo(self.mas_left).with.offset(15);
         make.top.equalTo(_sceneImgView.mas_bottom).with.offset(0);
+    }];
+    
+    [self.contentRoll addSubview:self.content];
+    [_content mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.size.mas_equalTo(CGSizeMake(SCREEN_WIDTH - 30, 78));
+        make.left.equalTo(_contentRoll.mas_left).with.offset(0);
+        make.top.equalTo(_contentRoll.mas_top).with.offset(5);
     }];
     
     [self addSubview:self.suTitle];
@@ -100,13 +108,14 @@
         chooseTextVC.desText.text = self.content.text;
     }
     chooseTextVC.modalPresentationStyle = UIModalPresentationOverCurrentContext;
-    [self.vc presentViewController:chooseTextVC animated:YES completion:nil];
-    
-    chooseTextVC.getEdtiShareText = ^ (NSString * title, NSString * des, NSArray * tagS) {
-        [self thn_setSceneTitle:title];
-        self.content.text = des;
-        [self.content resignFirstResponder];
-    };
+    [self.vc presentViewController:chooseTextVC animated:YES completion:^{
+        chooseTextVC.getEdtiShareText = ^ (NSString *title, NSString *des, NSMutableArray *tagS) {
+            [self thn_setSceneTitle:title];
+            [self getContentWithTags:des];
+            [self.content resignFirstResponder];
+            self.userAddTags = tagS;
+        };
+    }];
 }
 
 - (void)thn_setSceneTitle:(NSString *)title {
@@ -188,19 +197,64 @@
 }
 
 #pragma mark - 描述
-- (UITextView *)content {
+- (UIScrollView *)contentRoll {
+    if (!_contentRoll) {
+        _contentRoll = [[UIScrollView alloc] init];
+        _contentRoll.showsVerticalScrollIndicator = NO;
+    }
+    return _contentRoll;
+}
+
+- (TTTAttributedLabel *)content {
     if (!_content) {
-        _content = [[UITextView alloc] init];
-        _content.font = [UIFont systemFontOfSize:12];
-        _content.text = NSLocalizedString(@"addDescription", nil);
-        _content.textColor = [UIColor colorWithHexString:@"#333333"];
-        _content.backgroundColor = [UIColor whiteColor];
+        _content = [[TTTAttributedLabel alloc] initWithFrame:CGRectMake(0, 0, 0, 0)];
+        _content.attributedText = [[NSAttributedString alloc] initWithString:NSLocalizedString(@"addDescription", nil)
+                                                                      attributes:@{(NSString *)kCTForegroundColorAttributeName:(__bridge id)[UIColor colorWithHexString:@"#333333"].CGColor,
+                                                                                   NSFontAttributeName:[UIFont systemFontOfSize:12]}];
+
+        _content.numberOfLines = 0;
         _content.delegate = self;
-        _content.editable = NO;
+        _content.exclusiveTouch = NO;
+        _content.enabledTextCheckingTypes = NSTextCheckingTypeLink;
+        _content.font = [UIFont systemFontOfSize:12];
+        NSDictionary *linkAttributes = @{(NSString *)kCTUnderlineStyleAttributeName:[NSNumber numberWithBool:NO],
+                                         (NSString *)kCTForegroundColorAttributeName:(__bridge id)[UIColor colorWithHexString:MAIN_COLOR].CGColor
+                                         };
+        _content.linkAttributes = linkAttributes;
+        NSDictionary *activelinkAttributes = @{(NSString *)kCTUnderlineStyleAttributeName:[NSNumber numberWithBool:NO],
+                                               (NSString *)kCTForegroundColorAttributeName:(__bridge id)[UIColor colorWithHexString:MAIN_COLOR].CGColor
+                                               };
+        _content.activeLinkAttributes = activelinkAttributes;
         _tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(goChooseText)];
         [_content addGestureRecognizer:_tap];
     }
     return _content;
+}
+
+//  检索描述内容中的标签
+- (void)getContentWithTags:(NSString *)content {
+    NSMutableParagraphStyle *paragraphStyle = [[NSMutableParagraphStyle alloc] init];
+    paragraphStyle.lineSpacing = 5.0f;
+    self.content.attributedText = [[NSAttributedString alloc] initWithString:content
+                                                                  attributes:@{(NSString *)kCTForegroundColorAttributeName:(__bridge id)[UIColor colorWithHexString:@"#666666"].CGColor,
+                                                                               NSFontAttributeName:[UIFont systemFontOfSize:12],
+                                                                               NSParagraphStyleAttributeName:paragraphStyle}];
+    
+    NSRegularExpression *regex = [NSRegularExpression regularExpressionWithPattern:@"\\#[^\\s]*" options:0 error:nil];
+    NSArray *arr = [regex matchesInString:content options:0 range:NSMakeRange(0, content.length)];
+    for (NSUInteger idx = 0; idx < arr.count; ++ idx) {
+        NSTextCheckingResult *result = arr[idx];
+        NSString *str = [content substringWithRange:result.range];
+        NSString *urlStr = [NSString stringWithFormat:@"scheme://tag=%@", str];
+        NSString *tagStr = [urlStr stringByAddingPercentEscapesUsingEncoding:(NSUTF8StringEncoding)];
+        [self.content addLinkToURL:[NSURL URLWithString:tagStr] withRange:result.range];
+    }
+    
+    CGSize size = [self.content boundingRectWithSize:CGSizeMake(SCREEN_WIDTH - 30, 0)];
+    [self.content mas_updateConstraints:^(MASConstraintMaker *make) {
+        make.height.equalTo(@(size.height * 1.5));
+    }];
+    self.contentRoll.contentSize = CGSizeMake(0, size.height *1.5);
 }
 
 @end

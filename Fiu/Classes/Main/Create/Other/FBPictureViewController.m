@@ -180,8 +180,9 @@
 
 - (void)sureButtonClick {
     if ([self.delegate respondsToSelector:@selector(thn_sureButtonAction)]) {
-        [self.delegate thn_sureButtonAction];
-        [self dismissViewControllerAnimated:YES completion:nil];
+        [self dismissViewControllerAnimated:YES completion:^{
+            [self.delegate thn_sureButtonAction];
+        }];
     }
 }
 

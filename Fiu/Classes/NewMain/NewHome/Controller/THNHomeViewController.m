@@ -298,6 +298,7 @@ static NSString *const twoCommentsCellId = @"TwoCommentsCellId";
             if (self.sceneListMarr.count) {
                 [cell thn_setSceneImageData:self.sceneListMarr[indexPath.section - 1]];
             }
+            cell.nav = self.navigationController;
             return cell;
             
         } else if (indexPath.row == 2) {

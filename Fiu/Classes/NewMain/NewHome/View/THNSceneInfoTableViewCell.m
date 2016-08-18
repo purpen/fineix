@@ -119,7 +119,7 @@ static NSString *const sceneTagsCellId = @"SceneTagsCellId";
                                         (NSString *)kCTForegroundColorAttributeName:(__bridge id)[UIColor colorWithHexString:MAIN_COLOR].CGColor
                                          };
         _content.linkAttributes = linkAttributes;
-        NSDictionary *activelinkAttributes = @{(NSString *)kCTUnderlineStyleAttributeName:[NSNumber numberWithBool:YES],
+        NSDictionary *activelinkAttributes = @{(NSString *)kCTUnderlineStyleAttributeName:[NSNumber numberWithBool:NO],
                                          (NSString *)kCTForegroundColorAttributeName:(__bridge id)[UIColor colorWithHexString:MAIN_COLOR].CGColor
                                          };
         _content.activeLinkAttributes = activelinkAttributes;

@@ -110,7 +110,6 @@ static NSString *const URLGetGoodsImg = @"/scene_product/view";
     self.getImgRequest = [FBAPI getWithUrlString:URLGetGoodsImg requestDictionary:@{@"id":goodsId} delegate:self];
     [self.getImgRequest startRequestSuccess:^(FBRequest *request, id result) {
         self.goodsModel = [[GoodsInfoData alloc] initWithDictionary:[result valueForKey:@"data"]];
-        NSLog(@"－－－－－－－－ %@", result);
         self.getImgBlock(
                          [self.goodsModel.pngAsset valueForKey:@"url"][0],
                          self.goodsModel.title,
@@ -154,14 +153,10 @@ static NSString *const URLGetGoodsImg = @"/scene_product/view";
 
 #pragma mark - 设置视图UI
 - (void)setUI {
-    
     [self.view addSubview:self.searchGoods];
-    
     [self.categoryMenuView updateMenuBtnState:0];
     [self.view addSubview:self.categoryMenuView];
-    
     [self.view addSubview:self.goodsListView];
-
 }
 
 #pragma mark - 搜索列表
@@ -173,7 +168,7 @@ static NSString *const URLGetGoodsImg = @"/scene_product/view";
         flowLayout.itemSize = CGSizeMake((SCREEN_WIDTH - 30)/2, ((SCREEN_WIDTH - 30)/2) * 1.33);
         flowLayout.sectionInset = UIEdgeInsetsMake(5, 10, 10, 10);
         
-        _searchListView = [[UICollectionView alloc] initWithFrame:CGRectMake(0, 94, SCREEN_WIDTH, SCREEN_HEIGHT - 94) collectionViewLayout:flowLayout];
+        _searchListView = [[UICollectionView alloc] initWithFrame:CGRectMake(0, 108, SCREEN_WIDTH, SCREEN_HEIGHT - 108) collectionViewLayout:flowLayout];
         _searchListView.delegate = self;
         _searchListView.dataSource = self;
         _searchListView.backgroundColor = [UIColor colorWithHexString:lineGrayColor];
@@ -203,7 +198,7 @@ static NSString *const URLGetGoodsImg = @"/scene_product/view";
         flowLayout.itemSize = CGSizeMake((SCREEN_WIDTH - 30)/2, ((SCREEN_WIDTH - 30)/2) * 1.33);
         flowLayout.sectionInset = UIEdgeInsetsMake(5, 10, 10, 10);
         
-        _goodsListView = [[UICollectionView alloc] initWithFrame:CGRectMake(0, 138, SCREEN_WIDTH, SCREEN_HEIGHT - 138) collectionViewLayout:flowLayout];
+        _goodsListView = [[UICollectionView alloc] initWithFrame:CGRectMake(0, 108, SCREEN_WIDTH, SCREEN_HEIGHT - 108) collectionViewLayout:flowLayout];
         _goodsListView.delegate = self;
         _goodsListView.dataSource = self;
         _goodsListView.backgroundColor = [UIColor colorWithHexString:lineGrayColor];
@@ -263,7 +258,7 @@ static NSString *const URLGetGoodsImg = @"/scene_product/view";
 #pragma mark - 添加搜索框视图
 - (FBSearchView *)searchGoods {
     if (!_searchGoods) {
-        _searchGoods = [[FBSearchView alloc] initWithFrame:CGRectMake(0, 45, SCREEN_WIDTH, 44)];
+        _searchGoods = [[FBSearchView alloc] initWithFrame:CGRectMake(0, 20, SCREEN_WIDTH, 44)];
         _searchGoods.searchInputBox.placeholder = NSLocalizedString(@"searchGoods", nil);
         _searchGoods.delegate = self;
     }
@@ -280,13 +275,15 @@ static NSString *const URLGetGoodsImg = @"/scene_product/view";
 
 #pragma mark - 取消搜索
 - (void)cancelSearch {
-    [self.searchListView removeFromSuperview];
+    [self dismissViewControllerAnimated:YES completion:^{
+        [self.searchListView removeFromSuperview];
+    }];
 }
 
 #pragma mark - 导航菜单视图
 - (FBMenuView *)categoryMenuView {
     if (!_categoryMenuView) {
-        _categoryMenuView = [[FBMenuView alloc] initWithFrame:CGRectMake(0, 88, SCREEN_WIDTH, 44)];
+        _categoryMenuView = [[FBMenuView alloc] initWithFrame:CGRectMake(0, 64, SCREEN_WIDTH, 44)];
         _categoryMenuView.delegate = self;
         _categoryMenuView.defaultColor = titleColor;
         _categoryMenuView.menuTitle = self.categoryTitle;
@@ -311,14 +308,9 @@ static NSString *const URLGetGoodsImg = @"/scene_product/view";
 
 #pragma mark - 设置导航视图
 - (void)setNavViewUI {
-    self.view.backgroundColor = [UIColor whiteColor];
-    [self addNavViewTitle:NSLocalizedString(@"marker", nil)];
-    [self addCancelButton:@"icon_cancel"];
-    [self.cancelBtn addTarget:self action:@selector(cancelBtnClick) forControlEvents:(UIControlEventTouchUpInside)];
-}
-
-- (void)cancelBtnClick {
-    [self dismissViewControllerAnimated:YES completion:nil];
+    self.view.backgroundColor = [UIColor blackColor];
+    [[UIApplication sharedApplication] setStatusBarHidden:NO withAnimation:(UIStatusBarAnimationSlide)];
+    self.navView.hidden = YES;
 }
 
 - (void)viewDidDisappear:(BOOL)animated {

@@ -11,12 +11,17 @@
 #import <SDWebImage/UIButton+WebCache.h>
 #import "THNMacro.h"
 #import "HomeSceneListRow.h"
+#import "UserGoodsTag.h"
 
 @interface THNSceneImageTableViewCell : UITableViewCell
 
+@pro_strong UINavigationController *nav;
 @pro_strong UIButton *sceneImage;
 @pro_strong UILabel *title;
 @pro_strong UILabel *suTitle;
+@pro_strong NSMutableArray *tagDataMarr;
+@pro_strong NSMutableArray *userTagMarr;
+@pro_strong NSMutableArray *goodsIds;
 
 - (void)thn_setSceneImageData:(HomeSceneListRow *)sceneModel;
 

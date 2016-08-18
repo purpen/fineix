@@ -15,15 +15,19 @@
 static NSString *const URLCategroy = @"/category/getlist";
 static NSString *const URLShareText = @"/search/getlist";
 static NSString *const URLListText = @"/scene_context/getlist";
+static NSString *const URLActionTags = @"/scene_sight/stick_active_tags";
 
 @interface FBEditShareInfoViewController () {
-    NSString * _categoryId;
+    NSString *_categoryId;
+    NSString *_actionTag;
+    NSString *_actionTagId;
 }
 
-@pro_strong NSMutableArray      *   categoryTitleMarr;
-@pro_strong NSMutableArray      *   categoryIdMarr;
-@pro_strong NSMutableArray      *   listMarr;
-@pro_strong NSMutableArray      *   shareTextList;
+@pro_strong NSMutableArray *categoryTitleMarr;
+@pro_strong NSMutableArray *categoryIdMarr;
+@pro_strong NSMutableArray *listMarr;
+@pro_strong NSMutableArray *shareTextList;
+@pro_strong NSMutableArray *userAddTagMarr;
 
 @end
 
@@ -34,8 +38,15 @@ static NSString *const URLListText = @"/scene_context/getlist";
     [self setNavViewUI];
 }
 
+- (void)viewWillDisappear:(BOOL)animated {
+    [super viewWillDisappear:animated];
+    [self.titleText resignFirstResponder];
+    [self.desText resignFirstResponder];
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
+    [self networkActionTagData];
     [self networkSceneContentCategory];
     _categoryId = @"0";
     self.listCurrentpageNum = 0;
@@ -53,9 +64,7 @@ static NSString *const URLListText = @"/scene_context/getlist";
 }
 
 - (void)thn_sureButtonAction {
-    [self dismissViewControllerAnimated:YES completion:^{
-        self.getEdtiShareText(self.titleText.text, self.desText.text, @[@"天气", @"真好"]);
-    }];
+    self.getEdtiShareText(self.titleText.text, self.desText.text, self.userAddTagMarr);
 }
 
 #pragma mark - 网络请求
@@ -76,6 +85,22 @@ static NSString *const URLListText = @"/scene_context/getlist";
 
     } failure:^(FBRequest *request, NSError *error) {
         [SVProgressHUD showErrorWithStatus:[error localizedDescription]];
+    }];
+}
+
+#pragma mark 活动标签
+- (void)networkActionTagData {
+    self.actionTagRequest = [FBAPI getWithUrlString:URLActionTags requestDictionary:@{@"type":@"1"} delegate:self];
+    [self.actionTagRequest startRequestSuccess:^(FBRequest *request, id result) {
+        NSArray *tagArr = [[result valueForKey:@"data"] valueForKey:@"items"][0];
+        if (tagArr.count) {
+            _actionTag = tagArr[0];
+            _actionTagId = tagArr[1];
+            [self.keyboardToolbar thn_setRightBarItemContent:_actionTag];
+        }
+    
+    } failure:^(FBRequest *request, NSError *error) {
+        NSLog(@"%@", error);
     }];
 }
 
@@ -213,25 +238,50 @@ static NSString *const URLListText = @"/scene_context/getlist";
     return _desText;
 }
 
+- (void)textViewDidChange:(UITextView *)textView {
+    if (textView == self.desText) {
+        NSString *desIdentify = [textView.text substringToIndex:textView.selectedRange.location];
+        NSString *isTag = [desIdentify substringFromIndex:desIdentify.length - 1];
+        if ([isTag isEqualToString:@"#"]) {
+            THNAddTagViewController * tagVC = [[THNAddTagViewController alloc] init];
+            [self presentViewController:tagVC animated:YES completion:^{
+                tagVC.getAddTagsDataBlock = ^(NSString *tags, NSString *tagsId) {
+                    self.actionTag = tagsId;
+                    NSMutableString *desText = [[NSMutableString alloc] initWithString:self.desText.text];
+                    [desText insertString:tags atIndex:self.desText.selectedRange.location];
+                    self.desText.text = desText;
+                    [self.userAddTagMarr addObject:tags];
+                };
+            }];
+        }
+    }
+}
+
 #pragma mark - 键盘工具栏
 - (FBKeyboradToolbar *)keyboardToolbar {
     if (!_keyboardToolbar) {
         _keyboardToolbar = [[FBKeyboradToolbar alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 44)];
         _keyboardToolbar.thn_delegate = self;
-        [_keyboardToolbar thn_setRightBarItemContent:@"FiuApp上线"];
     }
     return _keyboardToolbar;
 }
 
 - (void)thn_keyboardLeftBarItemAction {
-    THNAddTagViewController * tagVC = [[THNAddTagViewController alloc] init];
-    [self presentViewController:tagVC animated:YES completion:nil];
+    THNAddTagViewController *tagVC = [[THNAddTagViewController alloc] init];
+    [self presentViewController:tagVC animated:YES completion:^{
+        tagVC.getAddTagsDataBlock = ^(NSString *tags, NSString *tagsId) {
+            self.actionTag = tagsId;
+            NSMutableString *desText = [[NSMutableString alloc] initWithString:self.desText.text];
+            [desText insertString:[NSString stringWithFormat:@"#%@", tags] atIndex:self.desText.selectedRange.location];
+            self.desText.text = desText;
+            [self.userAddTagMarr addObject:tags];
+        };
+    }];
 }
 
 - (void)thn_keyboardRightBarItemAction:(NSString *)text {
     NSMutableString *desStr = [[NSMutableString alloc] initWithString:self.desText.text];
     [desStr appendString:text];
-//    [String1 appendFormat:[NSString stringWithFormat:@", I will be adding some character"]];
     self.desText.text = desStr;
 }
 
@@ -395,6 +445,13 @@ static NSString *const URLListText = @"/scene_context/getlist";
     }
 }
 
+- (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string {
+    if (string.length > 20) {
+        return NO;
+    }
+    return YES;
+}
+
 #pragma mark - 搜索文字
 - (BOOL)textFieldShouldReturn:(UITextField *)textField {
     if (textField == self.searchField) {
@@ -499,21 +556,14 @@ static NSString *const URLListText = @"/scene_context/getlist";
         //  frome #import "ReleaseViewController.h"
         [[NSNotificationCenter defaultCenter] postNotificationName:@"getSceneTags" object:shareInfoRow.tags];
         [self dismissViewControllerAnimated:YES completion:^{
-            self.getEdtiShareText(shareInfoRow.title , shareInfoRow.des, shareInfoRow.tags);
+            self.getEdtiShareText(shareInfoRow.title , shareInfoRow.des, [NSMutableArray arrayWithArray:shareInfoRow.tags]);
             [SVProgressHUD dismiss];
         }];
         
     } else if (tableView == self.listTable) {
-//        [SVProgressHUD show];
         ShareInfoRow *listInfoRow = self.listMarr[indexPath.row];
         self.desText.text = listInfoRow.des;
         self.titleText.text = listInfoRow.title;
-//        //  frome #import "ReleaseViewController.h"
-//        [[NSNotificationCenter defaultCenter] postNotificationName:@"getSceneTags" object:listInfoRow.tags];
-//        [self dismissViewControllerAnimated:YES completion:^{
-//            self.getEdtiShareText(listInfoRow.title , listInfoRow.des, listInfoRow.tags);
-//            [SVProgressHUD dismiss];
-//        }];
     }
 }
 
@@ -546,5 +596,11 @@ static NSString *const URLListText = @"/scene_context/getlist";
     return _categoryIdMarr;
 }
 
+- (NSMutableArray *)userAddTagMarr {
+    if (!_userAddTagMarr) {
+        _userAddTagMarr = [NSMutableArray array];
+    }
+    return _userAddTagMarr;
+}
 
 @end

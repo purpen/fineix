@@ -8,7 +8,6 @@
 
 #import "CameraView.h"
 #import <SVProgressHUD/SVProgressHUD.h>
-#import "FiltersViewController.h"
 #import "SceneAddViewController.h"
 
 @interface CameraView () {
