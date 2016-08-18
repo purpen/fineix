@@ -9,7 +9,7 @@
 #import "THNSenceTopicViewController.h"
 #import <MJExtension.h>
 #import "THNTopicsModel.h"
-#import "THNTopicView.h"
+#import "THNSenceTopicView.h"
 #import "UIView+FSExtension.h"
 #import "UIColor+Extension.h"
 #import "FBRequest.h"
@@ -72,7 +72,7 @@ static NSString *getList = @"/category/getlist";
             float x = 20 + ((i - 1) % 2) * (w + 10);
             float y = 175 + ((i - 1) / 2) * (h + 10);
             
-            THNTopicView *view = [THNTopicView viewFromXib];
+            THNSenceTopicView *view = [THNSenceTopicView viewFromXib];
             view.frame = CGRectMake(x, y,w , h);
             view.model = self.modelAry[i - 1];
             [self.view addSubview:view];
@@ -88,8 +88,8 @@ static NSString *getList = @"/category/getlist";
         for (int i = 0; i < self.modelAry.count; i ++) {
             THNTopicsModel *model = self.modelAry[i];
             if ([entity.interest_scene_cate rangeOfString:model._id].location != NSNotFound) {
-                ((THNTopicView*)self.viewAry[i]).tipBtn.selected = YES;
-                ((THNTopicView*)self.viewAry[i]).layerView.backgroundColor = [UIColor colorWithHexString:@"#70510B" alpha:0.4];
+                ((THNSenceTopicView*)self.viewAry[i]).tipBtn.selected = YES;
+                ((THNSenceTopicView*)self.viewAry[i]).layerView.backgroundColor = [UIColor colorWithHexString:@"#70510B" alpha:0.4];
             }
         }
         
@@ -141,7 +141,7 @@ static NSString *getList = @"/category/getlist";
             if (result[@"success"]) {
                 [self update];
                 sender.selected = NO;
-                ((THNTopicView*)self.viewAry[[self.btnAry indexOfObject:sender]]).layerView.backgroundColor = sender.selected ? [UIColor colorWithHexString:@"#70510B" alpha:0.4] : [UIColor colorWithHexString:@"#525252" alpha:0.4];
+                ((THNSenceTopicView*)self.viewAry[[self.btnAry indexOfObject:sender]]).layerView.backgroundColor = sender.selected ? [UIColor colorWithHexString:@"#70510B" alpha:0.4] : [UIColor colorWithHexString:@"#525252" alpha:0.4];
             }
         } failure:^(FBRequest *request, NSError *error) {
             [SVProgressHUD dismiss];
@@ -155,7 +155,7 @@ static NSString *getList = @"/category/getlist";
             if (result[@"success"]) {
                 [self update];
                 sender.selected = YES;
-                ((THNTopicView*)self.viewAry[[self.btnAry indexOfObject:sender]]).layerView.backgroundColor = sender.selected ? [UIColor colorWithHexString:@"#70510B" alpha:0.4] : [UIColor colorWithHexString:@"#525252" alpha:0.4];
+                ((THNSenceTopicView*)self.viewAry[[self.btnAry indexOfObject:sender]]).layerView.backgroundColor = sender.selected ? [UIColor colorWithHexString:@"#70510B" alpha:0.4] : [UIColor colorWithHexString:@"#525252" alpha:0.4];
             }
         } failure:^(FBRequest *request, NSError *error) {
             [SVProgressHUD dismiss];

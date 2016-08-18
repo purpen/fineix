@@ -18,5 +18,7 @@
 @property(nonatomic,copy) NSString *back_url;
 /**  */
 @property(nonatomic,copy) NSString *stick;
+/**  */
+@property(nonatomic,copy) NSString *sub_count;
 
 @end

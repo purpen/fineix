@@ -8,6 +8,12 @@
 
 #import <UIKit/UIKit.h>
 
+@class THNTopicsModel;
+
 @interface THNSenceTopicView : UIView
+
+@property (nonatomic, strong) THNTopicsModel *model;
+@property (weak, nonatomic) IBOutlet UIButton *tipBtn;
+@property (weak, nonatomic) IBOutlet UIView *layerView;
 
 @end
