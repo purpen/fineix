@@ -8,6 +8,7 @@
 
 #import "SearchView.h"
 #import "SearchTF.h"
+#import "UIColor+Extension.h"
 
 @interface SearchView ()
 
@@ -49,7 +50,7 @@
         _cancelBtn = [UIButton buttonWithType:UIButtonTypeCustom];
         _cancelBtn.frame = CGRectMake([UIScreen mainScreen].bounds.size.width - 15 - 35, 5, 35, 35);
         [_cancelBtn setTitle:@"取消" forState:UIControlStateNormal];
-        [_cancelBtn setTitleColor:[UIColor grayColor] forState:UIControlStateNormal];
+        [_cancelBtn setTitleColor:[UIColor colorWithHexString:@"#C7C7C7"] forState:UIControlStateNormal];
         _cancelBtn.titleLabel.font = [UIFont systemFontOfSize:14];
     }
     

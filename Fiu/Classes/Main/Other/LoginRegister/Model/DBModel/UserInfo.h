@@ -11,6 +11,8 @@
 
 @interface UserInfo : JKDBModel
 
+/**  */
+@property(nonatomic,copy) NSString *_id;
 @property (nonatomic, copy) NSString * userId;
 @property (nonatomic, copy) NSString * account;
 @property (nonatomic, copy) NSString * nickname;

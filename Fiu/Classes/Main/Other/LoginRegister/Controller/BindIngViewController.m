@@ -41,10 +41,10 @@ static NSString * const XMGPlacerholderColorKeyPath = @"_placeholderLabel.textCo
     self.phoneNumTF.delegate = self;
     self.pwdTF.delegate = self;
     
-    [self.phoneNumTF setValue:[UIColor lightGrayColor] forKeyPath:XMGPlacerholderColorKeyPath];
-    self.phoneNumTF.tintColor = [UIColor lightGrayColor];
-    [self.pwdTF setValue:[UIColor lightGrayColor] forKeyPath:XMGPlacerholderColorKeyPath];
-    self.pwdTF.tintColor = [UIColor lightGrayColor];
+    [self.phoneNumTF setValue:[UIColor colorWithHexString:@"#8B8B8B"] forKeyPath:XMGPlacerholderColorKeyPath];
+    self.phoneNumTF.tintColor = [UIColor whiteColor];
+    [self.pwdTF setValue:[UIColor colorWithHexString:@"#8B8B8B"] forKeyPath:XMGPlacerholderColorKeyPath];
+    self.pwdTF.tintColor = [UIColor whiteColor];
 }
 
 

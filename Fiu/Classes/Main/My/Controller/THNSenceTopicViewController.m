@@ -90,6 +90,7 @@ static NSString *getList = @"/category/getlist";
             if ([entity.interest_scene_cate rangeOfString:model._id].location != NSNotFound) {
                 ((THNSenceTopicView*)self.viewAry[i]).tipBtn.selected = YES;
                 ((THNSenceTopicView*)self.viewAry[i]).layerView.backgroundColor = [UIColor colorWithHexString:@"#70510B" alpha:0.4];
+                ((THNSenceTopicView*)self.viewAry[i]).textImagView.image = [UIImage imageNamed:@"l_topic_s"];
             }
         }
         
@@ -141,6 +142,7 @@ static NSString *getList = @"/category/getlist";
             if (result[@"success"]) {
                 [self update];
                 sender.selected = NO;
+                ((THNSenceTopicView*)self.viewAry[[self.btnAry indexOfObject:sender]]).textImagView.image = [UIImage imageNamed:@"l_topic_u"];
                 ((THNSenceTopicView*)self.viewAry[[self.btnAry indexOfObject:sender]]).layerView.backgroundColor = sender.selected ? [UIColor colorWithHexString:@"#70510B" alpha:0.4] : [UIColor colorWithHexString:@"#525252" alpha:0.4];
             }
         } failure:^(FBRequest *request, NSError *error) {
@@ -155,6 +157,7 @@ static NSString *getList = @"/category/getlist";
             if (result[@"success"]) {
                 [self update];
                 sender.selected = YES;
+                ((THNSenceTopicView*)self.viewAry[[self.btnAry indexOfObject:sender]]).textImagView.image = [UIImage imageNamed:@"l_topic_s"];
                 ((THNSenceTopicView*)self.viewAry[[self.btnAry indexOfObject:sender]]).layerView.backgroundColor = sender.selected ? [UIColor colorWithHexString:@"#70510B" alpha:0.4] : [UIColor colorWithHexString:@"#525252" alpha:0.4];
             }
         } failure:^(FBRequest *request, NSError *error) {

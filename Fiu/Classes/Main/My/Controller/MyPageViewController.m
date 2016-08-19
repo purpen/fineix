@@ -48,6 +48,8 @@
 @property(nonatomic,strong) TipNumberView *tipNumView2;
 @property(nonatomic,strong) BotView *botView;
 @property(nonatomic,strong) UIView *naviViewAl;
+/**  */
+@property (nonatomic, strong) CAGradientLayer *shadowLayer;
 @end
 
 @implementation MyPageViewController
@@ -135,19 +137,25 @@
     [self.view insertSubview:self.navView aboveSubview:self.myCollectionView];
     self.navView.backgroundColor = [UIColor clearColor];
     //  添加渐变层
-    CAGradientLayer * shadow = [CAGradientLayer layer];
-    shadow.startPoint = CGPointMake(0, 0);
-    shadow.opacity = 0.3;
-    shadow.endPoint = CGPointMake(0, 1);
-    shadow.colors = @[(__bridge id)[UIColor blackColor].CGColor,
-                      (__bridge id)[UIColor clearColor].CGColor];
-    shadow.locations = @[@0];
-    shadow.frame = CGRectMake(0, 0, SCREEN_WIDTH, 64);
-    [self.navView.layer insertSublayer:shadow below:self.logoImg.layer];
+    [self.navView.layer insertSublayer:self.shadowLayer below:self.logoImg.layer];
     
     //网络请求
     [self netGetData];
     self.tabBarController.tabBar.hidden = NO;
+}
+
+-(CAGradientLayer *)shadowLayer{
+    if (!_shadowLayer) {
+        _shadowLayer = [CAGradientLayer layer];
+        _shadowLayer.startPoint = CGPointMake(0, 0);
+        _shadowLayer.opacity = 0.3;
+        _shadowLayer.endPoint = CGPointMake(0, 1);
+        _shadowLayer.colors = @[(__bridge id)[UIColor blackColor].CGColor,
+                          (__bridge id)[UIColor clearColor].CGColor];
+        _shadowLayer.locations = @[@0];
+        _shadowLayer.frame = CGRectMake(0, 0, SCREEN_WIDTH, 64);
+    }
+    return _shadowLayer;
 }
 
 -(void)thn_rightBarItemSelected{
@@ -228,6 +236,11 @@
         [_myCollectionView registerClass:[MyPageBtnCollectionViewCell class] forCellWithReuseIdentifier:@"MyPageBtnCollectionViewCell"];
     }
     return _myCollectionView;
+}
+
+-(void)thn_leftBarItemSelected{
+    FindeFriendViewController *vc = [[FindeFriendViewController alloc] init];
+    [self.navigationController pushViewController:vc animated:YES];
 }
 
 -(NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section{

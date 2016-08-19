@@ -171,7 +171,7 @@ static NSString *sceneCollectionCellId = @"SceneCollectionViewCell";
 - (void)setNavigationViewUI {
     self.view.backgroundColor = [UIColor whiteColor];
     self.delegate = self;
-    self.navViewTitle.text = @"赞过的情景";
+    self.navViewTitle.text = @"赞过的情境";
 }
 
 

@@ -12,6 +12,8 @@
 #import "FiuSceneRow.h"
 #import "FindSceneModel.h"
 #import <SDWebImage/UIImageView+WebCache.h>
+#import <POP.h>
+#import "THNMacro.h"
 
 @interface FriendTableViewCell ()<UICollectionViewDelegate,UICollectionViewDataSource,UICollectionViewDelegateFlowLayout>
 
@@ -19,25 +21,11 @@
 
 @implementation FriendTableViewCell
 
-- (void)awakeFromNib {
-    [super awakeFromNib];
-    // Initialization code
-}
-
--(void)setUI{
-    self.headImageView.image = [UIImage imageNamed:@"user"];
-    self.nameLbael.text = @"boc 747";
-}
-
-- (void)setSelected:(BOOL)selected animated:(BOOL)animated {
-    [super setSelected:selected animated:animated];
-
-    // Configure the view for the selected state
-}
 
 -(instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier{
     if (self = [super initWithStyle:style reuseIdentifier:reuseIdentifier]) {
         self.selectionStyle = UITableViewCellSelectionStyleNone;
+        self.contentView.backgroundColor = [UIColor blackColor];
         
         
         [self.contentView addSubview:self.headImageView];
@@ -61,8 +49,8 @@
             make.top.mas_equalTo(_nameLbael.mas_bottom).with.offset(4/667.0*SCREEN_HEIGHT);
         }];
         
-        [self.contentView addSubview:self.focusBtn];
-        [_focusBtn mas_makeConstraints:^(MASConstraintMaker *make) {
+        [self.contentView addSubview:self.follow];
+        [_follow mas_makeConstraints:^(MASConstraintMaker *make) {
             make.size.mas_equalTo(CGSizeMake(72/667.0*SCREEN_HEIGHT, 26/667.0*SCREEN_HEIGHT));
             make.centerY.mas_equalTo(_headImageView.mas_centerY);
             make.right.mas_equalTo(self.mas_right).with.offset(-15/667.0*SCREEN_HEIGHT);
@@ -80,7 +68,7 @@
         [_levelLabel mas_makeConstraints:^(MASConstraintMaker *make) {
             make.top.mas_equalTo(_nameLbael.mas_bottom).with.offset(3);
             make.left.mas_equalTo(_headImageView.mas_right).with.offset(9/667.0*SCREEN_HEIGHT);
-            make.right.mas_equalTo(self.focusBtn.mas_left).with.offset(5);
+            make.right.mas_equalTo(self.follow.mas_left).with.offset(5);
             make.height.mas_equalTo(10);
         }];
         
@@ -137,6 +125,46 @@
     return _imageCollectionView;
 }
 
+- (UIButton *)follow {
+    if (!_follow) {
+        _follow = [[UIButton alloc] init];
+        _follow.layer.cornerRadius = 5.0f;
+        _follow.layer.borderColor = [UIColor colorWithHexString:@"#FFFFFF" alpha:0.6f].CGColor;
+        _follow.layer.borderWidth = 0.5f;
+        _follow.backgroundColor = [UIColor blackColor];
+        [_follow setTitle:NSLocalizedString(@"User_follow", nil) forState:(UIControlStateNormal)];
+        [_follow setTitle:NSLocalizedString(@"User_followDone", nil) forState:(UIControlStateSelected)];
+        _follow.titleLabel.font = [UIFont systemFontOfSize:12];
+        [_follow addTarget:self action:@selector(followClick:) forControlEvents:(UIControlEventTouchUpInside)];
+    }
+    return _follow;
+}
+
+- (void)followClick:(UIButton *)button {
+    if (button.selected == NO) {
+        button.selected = YES;
+        POPSpringAnimation *scaleAnimation = [POPSpringAnimation animationWithPropertyNamed:kPOPLayerScaleXY];
+        scaleAnimation.fromValue = [NSValue valueWithCGSize:CGSizeMake(0.5, 0.5)];
+        scaleAnimation.toValue = [NSValue valueWithCGSize:CGSizeMake(1.0, 1.0)];
+        scaleAnimation.springBounciness = 10.f;
+        scaleAnimation.springSpeed = 10.0f;
+        [button.layer pop_addAnimation:scaleAnimation forKey:@"scaleAnim"];
+        button.layer.borderColor = [UIColor colorWithHexString:MAIN_COLOR].CGColor;
+        button.backgroundColor = [UIColor colorWithHexString:MAIN_COLOR];
+        
+    } else if (button.selected == YES) {
+        button.selected = NO;
+        POPSpringAnimation *scaleAnimation = [POPSpringAnimation animationWithPropertyNamed:kPOPLayerScaleXY];
+        scaleAnimation.fromValue = [NSValue valueWithCGSize:CGSizeMake(0.5, 0.5)];
+        scaleAnimation.toValue = [NSValue valueWithCGSize:CGSizeMake(1.0, 1.0)];
+        scaleAnimation.springBounciness = 10.f;
+        scaleAnimation.springSpeed = 10.0f;
+        [button.layer pop_addAnimation:scaleAnimation forKey:@"scaleAnim"];
+        button.layer.borderColor = [UIColor colorWithHexString:@"#FFFFFF" alpha:0.6].CGColor;
+        button.backgroundColor = [UIColor colorWithHexString:BLACK_COLOR];
+    }
+}
+
 -(NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section{
     return 1;
 }
@@ -160,15 +188,6 @@
     return cell;
 }
 
--(UIButton *)focusBtn{
-    if (!_focusBtn) {
-        _focusBtn = [[UIButton alloc] init];
-        [_focusBtn setImage:[UIImage imageNamed:@"focusOn"] forState:UIControlStateNormal];
-        [_focusBtn setImage:[UIImage imageNamed:@"hasBeenFocusedOn"] forState:UIControlStateSelected];
-    }
-    return _focusBtn;
-}
-
 -(UIImageView *)idTagsImageView{
     if (!_idTagsImageView) {
         _idTagsImageView = [[UIImageView alloc] init];
@@ -184,6 +203,7 @@
         } else {
             _nameLbael.font = [UIFont systemFontOfSize:11];
         }
+        _nameLbael.textColor = [UIColor whiteColor];
     }
     return _nameLbael;
 }

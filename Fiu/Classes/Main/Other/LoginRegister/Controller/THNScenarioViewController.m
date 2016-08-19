@@ -137,6 +137,7 @@ static NSString *getList = @"/category/getlist";
     }else{
         [self.idAry addObject:((THNTopicView*)self.viewAry[[self.btnAry indexOfObject:sender]]).model._id];
         sender.selected = YES;
+        
         ((THNTopicView*)self.viewAry[[self.btnAry indexOfObject:sender]]).layerView.backgroundColor = sender.selected ? [UIColor colorWithHexString:@"#70510B" alpha:0.4] : [UIColor colorWithHexString:@"#525252" alpha:0.4];
     }
 }

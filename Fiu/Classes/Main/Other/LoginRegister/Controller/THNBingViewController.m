@@ -92,6 +92,8 @@ static NSString *const thirdRegisteredNotBinding = @"/auth/third_register_withou
 
 - (IBAction)bing:(id)sender {
     BindIngViewController *vc = [[BindIngViewController alloc] init];
+    vc.type = self.type;
+    vc.snsAccount = self.snsAccount;
     [self.navigationController pushViewController:vc animated:YES];
 }
 @end

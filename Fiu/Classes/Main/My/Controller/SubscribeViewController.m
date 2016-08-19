@@ -74,17 +74,22 @@ static NSString *const URLAllFiuSceneList = @"/scene_scene/";
     self.allSceneListRequest = [FBAPI getWithUrlString:@"/scene_sight/getlist" requestDictionary:@{@"size":@"10", @"page":@(_currentPageNumber + 1),@"category_ids" : entity.interest_scene_cate} delegate:self];
     
     [self.allSceneListRequest startRequestSuccess:^(FBRequest *request, id result) {
-        NSLog(@"情景  %@",result);
         NSArray * sceneArr = [[result valueForKey:@"data"] valueForKey:@"rows"];
         for (NSDictionary * sceneDic in sceneArr) {
             THNSenceModel * allFiuScene = [THNSenceModel mj_objectWithKeyValues:sceneDic];
-            NSLog(@"数组  %@",allFiuScene.title);
             [self.allFiuSceneMarr addObject:allFiuScene];
             [self.allFiuSceneIdMarr addObject:[NSString stringWithFormat:@"%zi", allFiuScene._id]];
         }
         
         [self.view addSubview:self.headView];
-        self.headView.num = self.allFiuSceneMarr.count;
+        UserInfoEntity *entity = [UserInfoEntity defaultUserInfoEntity];
+        FBRequest *request1 = [FBAPI postWithUrlString:@"/auth/user" requestDictionary:@{@"user_id":entity.userId} delegate:self];
+        [request1 startRequestSuccess:^(FBRequest *request, id result) {
+            NSArray *ary = [result objectForKey:@"data"][@"interest_scene_cate"];
+            self.headView.num = ary.count;
+        } failure:^(FBRequest *request, NSError *error) {
+            
+        }];
         
         [self.allSceneView reloadData];
         
