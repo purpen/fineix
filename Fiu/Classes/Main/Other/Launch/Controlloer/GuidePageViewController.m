@@ -121,21 +121,22 @@ static NSString *userActivationUrl = @"/gateway/record_fiu_user_active";
         _soundBtn.layer.masksToBounds = YES;
         _soundBtn.layer.cornerRadius = 14;
         _soundBtn.backgroundColor = [UIColor colorWithHexString:@"#231916" alpha:0.6];
-        [_soundBtn setImage:[UIImage imageNamed:@"guide_sound"] forState:UIControlStateNormal];
-        [_soundBtn addTarget:self action:@selector(soundClick) forControlEvents:UIControlEventTouchUpInside];
+        [_soundBtn setImage:[UIImage imageNamed:@"guide_unSound"] forState:UIControlStateNormal];
+        [_soundBtn setImage:[UIImage imageNamed:@"guide_sound"] forState:UIControlStateSelected];
+        [_soundBtn addTarget:self action:@selector(soundClick:) forControlEvents:UIControlEventTouchUpInside];
     }
     return _soundBtn;
 }
 
--(UIButton *)unSoundBtn{
-    if (!_unSoundBtn) {
-        _unSoundBtn = [UIButton buttonWithType:UIButtonTypeCustom];
-        _unSoundBtn.frame = CGRectMake(48, 19, 20, 20);
-        [_unSoundBtn setImage:[UIImage imageNamed:@"guide_unSound"] forState:UIControlStateNormal];
-        [_unSoundBtn addTarget:self action:@selector(unSoundClick) forControlEvents:UIControlEventTouchUpInside];
-    }
-    return _unSoundBtn;
-}
+//-(UIButton *)unSoundBtn{
+//    if (!_unSoundBtn) {
+//        _unSoundBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+//        _unSoundBtn.frame = CGRectMake(48, 19, 20, 20);
+//        [_unSoundBtn setImage:[UIImage imageNamed:@"guide_unSound"] forState:UIControlStateNormal];
+//        [_unSoundBtn addTarget:self action:@selector(unSoundClick) forControlEvents:UIControlEventTouchUpInside];
+//    }
+//    return _unSoundBtn;
+//}
 
 -(UIButton *)skipBtn{
     if (!_skipBtn) {
@@ -144,6 +145,8 @@ static NSString *userActivationUrl = @"/gateway/record_fiu_user_active";
         _skipBtn.backgroundColor = [UIColor colorWithHexString:@"#231916" alpha:0.6];
         [_skipBtn setTitle:@"跳过" forState:UIControlStateNormal];
         _skipBtn.titleLabel.font = [UIFont systemFontOfSize:13];
+        _skipBtn.layer.masksToBounds = YES;
+        _skipBtn.layer.cornerRadius = 2;
         [_skipBtn addTarget:self action:@selector(skipClick) forControlEvents:UIControlEventTouchUpInside];
     }
     return _skipBtn;
@@ -153,12 +156,13 @@ static NSString *userActivationUrl = @"/gateway/record_fiu_user_active";
     [self.moviePlayer stop];
 }
 
--(void)unSoundClick{
-    [[AVAudioSession sharedInstance] setCategory:AVAudioSessionCategoryAmbient error:nil];
-}
-
--(void)soundClick{
-    [[AVAudioSession sharedInstance] setCategory:AVAudioSessionCategoryPlayback error:nil];
+-(void)soundClick:(UIButton*)sender{
+    sender.selected = !sender.selected;
+    if (sender.selected) {
+        [[AVAudioSession sharedInstance] setCategory:AVAudioSessionCategoryAmbient error:nil];
+    }else{
+        [[AVAudioSession sharedInstance] setCategory:AVAudioSessionCategoryPlayback error:nil];
+    }
 }
 
 - (void)startRollImg {

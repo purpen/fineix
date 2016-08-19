@@ -171,7 +171,7 @@ static NSString *const URLUserIsLogin = @"/user/user_info";
     if (!_rightBtn) {
         _rightBtn = [[UIButton alloc] initWithFrame:CGRectMake(SCREEN_WIDTH - 44, 20, 44, 44)];
         [_rightBtn addTarget:self action:@selector(rightAction) forControlEvents:(UIControlEventTouchUpInside)];
-        [_rightBtn setTitleColor:[UIColor blackColor] forState:(UIControlStateNormal)];
+        [_rightBtn setTitleColor:[UIColor whiteColor] forState:(UIControlStateNormal)];
         _rightBtn.titleLabel.font = [UIFont systemFontOfSize:16];
 
     }
@@ -277,6 +277,7 @@ static NSString *const URLUserIsLogin = @"/user/user_info";
 - (void)addBarItemRightBarButton:(NSString *)title image:(NSString *)image isTransparent:(BOOL)transparent {
     [self.rightBtn setImage:[UIImage imageNamed:image] forState:(UIControlStateNormal)];
     [self.rightBtn setTitle:title forState:UIControlStateNormal];
+    
     if ([title isEqualToString:@"全部城市"]) {
         [self.rightBtn setTitleColor:[UIColor colorWithHexString:fineixColor] forState:UIControlStateNormal];
         self.rightBtn.imageEdgeInsets = UIEdgeInsetsMake(0, -42, 0, 0);

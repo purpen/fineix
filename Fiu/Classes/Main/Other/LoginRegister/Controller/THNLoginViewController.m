@@ -52,12 +52,12 @@ static NSString *const thirdRegister = @"/auth/third_sign";//第三方登录接�
     [self circle:self.seeView];
     [self circle:self.loginBtn];
     
-    [self.phoneTF setValue:[UIColor colorWithHexString:@"#898989"] forKeyPath:XMGPlacerholderColorKeyPath];
+    [self.phoneTF setValue:[UIColor colorWithHexString:@"#8B8B8B"] forKeyPath:XMGPlacerholderColorKeyPath];
     self.phoneTF.tintColor = [UIColor whiteColor];
     self.phoneTF.leftView = self.left;
     self.phoneTF.leftViewMode = UITextFieldViewModeAlways;
 
-    [self.pwdTF setValue:[UIColor colorWithHexString:@"#898989"] forKeyPath:XMGPlacerholderColorKeyPath];
+    [self.pwdTF setValue:[UIColor colorWithHexString:@"#8B8B8B"] forKeyPath:XMGPlacerholderColorKeyPath];
     self.pwdTF.tintColor = [UIColor whiteColor];
     self.pwdTF.leftView = self.left2;
     self.pwdTF.leftViewMode = UITextFieldViewModeAlways;

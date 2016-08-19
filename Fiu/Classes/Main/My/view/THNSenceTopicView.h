@@ -15,5 +15,6 @@
 @property (nonatomic, strong) THNTopicsModel *model;
 @property (weak, nonatomic) IBOutlet UIButton *tipBtn;
 @property (weak, nonatomic) IBOutlet UIView *layerView;
+@property (weak, nonatomic) IBOutlet UIImageView *textImagView;
 
 @end

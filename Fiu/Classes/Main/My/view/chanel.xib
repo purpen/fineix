@@ -123,19 +123,19 @@
                     </constraints>
                 </view>
                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="my_line" translatesAutoresizingMaskIntoConstraints="NO" id="TOW-Bo-Unq">
-                    <rect key="frame" x="123" y="0.0" width="3" height="60"/>
+                    <rect key="frame" x="123" y="10" width="3" height="40"/>
                 </imageView>
                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="my_line" translatesAutoresizingMaskIntoConstraints="NO" id="vdN-Wt-vTP">
-                    <rect key="frame" x="249" y="0.0" width="3" height="60"/>
+                    <rect key="frame" x="249" y="10" width="3" height="40"/>
                 </imageView>
             </subviews>
-            <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+            <color key="backgroundColor" red="0.13333333333333333" green="0.13333333333333333" blue="0.13333333333333333" alpha="1" colorSpace="calibratedRGB"/>
             <constraints>
                 <constraint firstItem="yXw-t8-ddm" firstAttribute="leading" secondItem="brx-eo-zDH" secondAttribute="trailing" constant="3" id="0g6-ze-oCs"/>
                 <constraint firstItem="brx-eo-zDH" firstAttribute="leading" secondItem="YLy-lk-LgI" secondAttribute="trailing" constant="5" id="0rJ-hS-eUB"/>
                 <constraint firstAttribute="bottom" secondItem="yXw-t8-ddm" secondAttribute="bottom" id="2Fd-eC-540"/>
                 <constraint firstItem="brx-eo-zDH" firstAttribute="top" secondItem="KOF-LZ-Daw" secondAttribute="top" id="2dl-Cz-VNe"/>
-                <constraint firstItem="TOW-Bo-Unq" firstAttribute="top" secondItem="KOF-LZ-Daw" secondAttribute="top" id="30G-lH-J2v"/>
+                <constraint firstItem="TOW-Bo-Unq" firstAttribute="top" secondItem="KOF-LZ-Daw" secondAttribute="top" constant="10" id="30G-lH-J2v"/>
                 <constraint firstItem="yXw-t8-ddm" firstAttribute="top" secondItem="KOF-LZ-Daw" secondAttribute="top" id="9kv-Ny-yt9"/>
                 <constraint firstItem="YLy-lk-LgI" firstAttribute="leading" secondItem="KOF-LZ-Daw" secondAttribute="leading" id="ATU-p2-UIS"/>
                 <constraint firstItem="vdN-Wt-vTP" firstAttribute="leading" secondItem="brx-eo-zDH" secondAttribute="trailing" id="JHU-Yc-4Zg"/>
@@ -143,15 +143,15 @@
                 <constraint firstItem="TOW-Bo-Unq" firstAttribute="leading" secondItem="YLy-lk-LgI" secondAttribute="trailing" id="MKp-2q-IUD"/>
                 <constraint firstItem="YLy-lk-LgI" firstAttribute="top" secondItem="KOF-LZ-Daw" secondAttribute="top" id="Q1w-0n-QUm"/>
                 <constraint firstAttribute="bottom" secondItem="YLy-lk-LgI" secondAttribute="bottom" id="Q8u-DV-1T2"/>
-                <constraint firstAttribute="bottom" secondItem="vdN-Wt-vTP" secondAttribute="bottom" id="QNV-S8-ZTF"/>
+                <constraint firstAttribute="bottom" secondItem="vdN-Wt-vTP" secondAttribute="bottom" constant="10" id="QNV-S8-ZTF"/>
                 <constraint firstItem="brx-eo-zDH" firstAttribute="leading" secondItem="TOW-Bo-Unq" secondAttribute="trailing" id="fUu-Gx-NO8"/>
                 <constraint firstItem="yXw-t8-ddm" firstAttribute="width" secondItem="YLy-lk-LgI" secondAttribute="width" id="gvQ-Z0-Fvb"/>
                 <constraint firstItem="brx-eo-zDH" firstAttribute="width" secondItem="YLy-lk-LgI" secondAttribute="width" id="hec-gF-f8D"/>
-                <constraint firstItem="vdN-Wt-vTP" firstAttribute="top" secondItem="KOF-LZ-Daw" secondAttribute="top" id="j5j-GH-xSM"/>
+                <constraint firstItem="vdN-Wt-vTP" firstAttribute="top" secondItem="KOF-LZ-Daw" secondAttribute="top" constant="10" id="j5j-GH-xSM"/>
                 <constraint firstItem="yXw-t8-ddm" firstAttribute="width" secondItem="brx-eo-zDH" secondAttribute="width" id="kBU-5B-Lo3"/>
                 <constraint firstAttribute="trailing" secondItem="yXw-t8-ddm" secondAttribute="trailing" id="lva-OI-Zce"/>
                 <constraint firstAttribute="bottom" secondItem="brx-eo-zDH" secondAttribute="bottom" id="omj-pY-uwT"/>
-                <constraint firstAttribute="bottom" secondItem="TOW-Bo-Unq" secondAttribute="bottom" id="qN3-yc-scp"/>
+                <constraint firstAttribute="bottom" secondItem="TOW-Bo-Unq" secondAttribute="bottom" constant="10" id="qN3-yc-scp"/>
                 <constraint firstItem="brx-eo-zDH" firstAttribute="leading" secondItem="YLy-lk-LgI" secondAttribute="trailing" constant="3" id="zCm-6N-gRy"/>
             </constraints>
             <nil key="simulatedStatusBarMetrics"/>

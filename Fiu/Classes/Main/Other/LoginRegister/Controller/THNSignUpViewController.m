@@ -52,7 +52,7 @@ static NSString *const thirdRegister = @"/auth/third_sign";//第三方登录接�
     [self.view addSubview:self.tFView];
     [self.tFView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.mas_equalTo(self.tipLabel.mas_bottom).offset(20);
-        make.centerX.mas_equalTo(self.view.mas_centerX);
+        make.centerX.mas_equalTo(self.view.mas_centerX).with.offset(-10 / 667.0 * [UIScreen mainScreen].bounds.size.height);
         make.height.mas_equalTo(44);
         make.width.mas_equalTo(200);
     }];
@@ -205,11 +205,12 @@ static NSString *const thirdRegister = @"/auth/third_sign";//第三方登录接�
 }
 
 -(void)sendClick{
-    
+    [SVProgressHUD showWithMaskType:SVProgressHUDMaskTypeClear];
     if ([self.tFView.textField.text checkTel]){
         FBRequest *request1 = [FBAPI postWithUrlString:@"/auth/check_account" requestDictionary:@{@"account":self.tFView.textField.text} delegate:self];
-        [SVProgressHUD showWithMaskType:SVProgressHUDMaskTypeClear];
+        
         [request1 startRequestSuccess:^(FBRequest *request, id result) {
+            [SVProgressHUD dismiss];
             if ([result objectForKey:@"success"]) {
                 //如果手机号正确，发送短信
                 NSDictionary *params = @{

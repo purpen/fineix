@@ -38,11 +38,11 @@ static NSString * const XMGPlacerholderColorKeyPath = @"_placeholderLabel.textCo
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    [self.phoneTF setValue:[UIColor colorWithHexString:@"#898989"] forKeyPath:XMGPlacerholderColorKeyPath];
+    [self.phoneTF setValue:[UIColor colorWithHexString:@"#8B8B8B"] forKeyPath:XMGPlacerholderColorKeyPath];
     self.phoneTF.tintColor = [UIColor whiteColor];
-    [self.vertCodeTF setValue:[UIColor colorWithHexString:@"#898989"] forKeyPath:XMGPlacerholderColorKeyPath];
+    [self.vertCodeTF setValue:[UIColor colorWithHexString:@"#8B8B8B"] forKeyPath:XMGPlacerholderColorKeyPath];
     self.vertCodeTF.tintColor = [UIColor whiteColor];
-    [self.setNewPwd setValue:[UIColor colorWithHexString:@"#898989"] forKeyPath:XMGPlacerholderColorKeyPath];
+    [self.setNewPwd setValue:[UIColor colorWithHexString:@"#8B8B8B"] forKeyPath:XMGPlacerholderColorKeyPath];
     self.setNewPwd.tintColor = [UIColor whiteColor];
     _toResendV.hidden = YES;
     _toResendV.layer.masksToBounds = YES;

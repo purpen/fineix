@@ -293,31 +293,8 @@ static NSString *sceneCellId = @"SceneCollectionViewCell";
             [self.myCollectionView reloadData];
             _m = [[[result objectForKey:@"data"] objectForKey:@"current_page"] intValue];
             _totalM = [[[result objectForKey:@"data"] objectForKey:@"total_page"] intValue];
-            BOOL isLastPage = (_m == _totalM);
-            if (_totalM == 0) {
-                self.myCollectionView.mj_footer.state = MJRefreshStateNoMoreData;
-                self.myCollectionView.mj_footer.hidden = YES;
-            }
-            if (!isLastPage && _totalM != 0) {
-                if (self.myCollectionView.mj_footer.state == MJRefreshStateNoMoreData) {
-                    [self.myCollectionView.mj_footer resetNoMoreData];
-                }
-            }
-            if (_m == _totalM == 1) {
-                self.myCollectionView.mj_footer.state = MJRefreshStateNoMoreData;
-                self.myCollectionView.mj_footer.hidden = YES;
-            }
-            
-            if ([self.myCollectionView.mj_header isRefreshing]) {
-                [self.myCollectionView.mj_header endRefreshing];
-            }
-            if ([self.myCollectionView.mj_footer isRefreshing]) {
-                if (isLastPage) {
-                    [self.myCollectionView.mj_footer endRefreshingWithNoMoreData];
-                    self.myCollectionView.mj_footer.hidden = YES;
-                }
-            }
-            [SVProgressHUD dismiss];
+            [self.myCollectionView.mj_footer endRefreshing];
+            self.myCollectionView.mj_footer.hidden = _m == _totalM;
         } failure:^(FBRequest *request, NSError *error) {
             [SVProgressHUD showInfoWithStatus:[error localizedDescription]];
         }];
