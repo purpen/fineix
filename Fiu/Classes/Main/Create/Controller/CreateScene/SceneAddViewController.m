@@ -11,7 +11,6 @@
 #import "MarkGoodsViewController.h"
 #import "AddUrlViewController.h"
 #import "FBFilters.h"
-#import "UserGoodsTag.h"
 #import "FBStickersContainer.h"
 
 static NSString *const URLDeleUserGoods = @"/scene_product/deleted";
@@ -233,7 +232,7 @@ static NSString *const URLUserAddGoods = @"/scene_product/add";
 - (void)addUserGoodsTagWithTitle:(NSString *)title withPrice:(NSString *)price withGoodsId:(NSString *)ids {
     _idx += 1;
     
-    UserGoodsTag * tag = [[UserGoodsTag alloc] init];
+    UserGoodsTag *tag = [[UserGoodsTag alloc] init];
     tag.isMove = YES;
     tag.tag = _idx;
     tag.index = _idx - 392;
@@ -242,7 +241,6 @@ static NSString *const URLUserAddGoods = @"/scene_product/add";
     [tag userTag_SetGoodsInfo:title];
     
     [self.filtersImageView addSubview:tag];
-    
     [self.tagBtnMarr addObject:tag];
     
     self.markGoodsView.transform = CGAffineTransformMakeScale(1, 1);
@@ -275,12 +273,13 @@ static NSString *const URLUserAddGoods = @"/scene_product/add";
     [self.stickersContainer removeObject:container];
 }
 
-#pragma mark 删除标签
-- (void)deleteTag {
-    [self delegateThisTagBtn:self.seleIndex];
-}
 
+/**
+ * 数组删除元素，控件的下标值不变，删除一个后，再删另一个，数组越界，导致崩溃
+ */
+#pragma mark 删除标签
 - (void)delegateThisTagBtn:(NSInteger)index {
+    NSLog(@"========== %zi",index);
     UserGoodsTag * userTag = [[UserGoodsTag alloc] init];
     userTag = self.tagBtnMarr[index];
     [self.tagBtnMarr removeObject:userTag];

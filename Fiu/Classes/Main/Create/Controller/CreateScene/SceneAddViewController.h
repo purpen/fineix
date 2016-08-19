@@ -12,10 +12,12 @@
 #import "ChangeAddUrlView.h"
 #import "FBFootView.h"
 #import "THNMarkGoodsView.h"
+#import "UserGoodsTag.h"
 
 @interface SceneAddViewController : FBPictureViewController <
     FBFootViewDelegate,
-    THNMarkGoodsViewDelegate
+    THNMarkGoodsViewDelegate,
+    FBUserGoodsTagDelegaet
 >
 
 @pro_strong NSArray             *locationArr;            //  照片位置
