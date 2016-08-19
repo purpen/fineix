@@ -55,9 +55,13 @@ static NSString *const themeCollectionCellID = @"ThemeCollectionCellID";
 }
 
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
-    return self.themeMarr.count + 1;
+    if (self.themeMarr.count == 0) {
+        return 0;
+    } else {
+        return self.themeMarr.count + 1;
+    }
+    return 0;
 }
-
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath {
     if (indexPath.row == self.themeMarr.count) {
         return CGSizeMake(70, 70);

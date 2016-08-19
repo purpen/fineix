@@ -291,7 +291,7 @@ static NSString *const twoCommentsCellId = @"TwoCommentsCellId";
                 [cell thn_setHomeSceneUserInfoData:self.sceneListMarr[indexPath.section - 1]];
             }
             return cell;
-            
+//            
         } else if (indexPath.row == 1) {
             THNSceneImageTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:sceneImgCellId];
             cell = [[THNSceneImageTableViewCell alloc] initWithStyle:(UITableViewCellStyleDefault) reuseIdentifier:sceneImgCellId];
