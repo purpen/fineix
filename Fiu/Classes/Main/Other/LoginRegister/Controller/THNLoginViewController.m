@@ -111,7 +111,6 @@ static NSString *const thirdRegister = @"/auth/third_sign";//第三方登录接�
 
 
 - (IBAction)login:(id)sender {
-    
     [SVProgressHUD showWithMaskType:SVProgressHUDMaskTypeClear];
     if (![self.phoneTF.text checkTel]) {
         //手机号错误提示
@@ -127,6 +126,7 @@ static NSString *const thirdRegister = @"/auth/third_sign";//第三方登录接�
                              @"from_to":@1
                              };
     FBRequest *request = [FBAPI postWithUrlString:LoginURL requestDictionary:params delegate:self];
+    
     [request startRequestSuccess:^(FBRequest *request, id result) {
         UserInfo *userInfo = [UserInfo mj_objectWithKeyValues:[result objectForKey:@"data"]];
         [userInfo saveOrUpdate];
@@ -144,9 +144,8 @@ static NSString *const thirdRegister = @"/auth/third_sign";//第三方登录接�
             [self dismissViewControllerAnimated:YES completion:nil];
         }
     } failure:^(FBRequest *request, NSError *error) {
-        [SVProgressHUD showErrorWithStatus:error.localizedDescription];
+        [SVProgressHUD dismiss];
     }];
-    
 }
 
 - (IBAction)forget:(id)sender {

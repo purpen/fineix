@@ -66,7 +66,6 @@ static NSString *sceneCollectionCellId = @"SceneCollectionViewCell";
 }
 
 
-//上拉下拉分页请求订单列表
 - (void)requestDataForOderListOperation
 {
     [SVProgressHUD show];
