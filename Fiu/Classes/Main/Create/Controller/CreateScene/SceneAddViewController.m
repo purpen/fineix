@@ -215,7 +215,7 @@ static NSString *const URLUserAddGoods = @"/scene_product/add";
         [self addMarkGoodsImg:imgUrl withImgW:imgW withImgH:imgH];
         [self.goodsIdData addObject:ids];
         NSString * pri = [NSString stringWithFormat:@"￥%@",price];
-        [self addUserGoodsTagWithTitle:title withPrice:pri withType:0 withGoodsId:ids];
+        [self addUserGoodsTagWithTitle:title withPrice:pri withGoodsId:ids];
         
         [self.goodsTitleData addObject:title];
         [self.goodsPriceData addObject:price];
@@ -230,14 +230,13 @@ static NSString *const URLUserAddGoods = @"/scene_product/add";
 }
 
 #pragma mark - 创建一个标签
-- (void)addUserGoodsTagWithTitle:(NSString *)title withPrice:(NSString *)price withType:(NSInteger)type withGoodsId:(NSString *)ids {
+- (void)addUserGoodsTagWithTitle:(NSString *)title withPrice:(NSString *)price withGoodsId:(NSString *)ids {
     _idx += 1;
     
     UserGoodsTag * tag = [[UserGoodsTag alloc] init];
     tag.isMove = YES;
     tag.tag = _idx;
     tag.index = _idx - 392;
-    tag.type = type;
     tag.goodsId = ids;
     tag.delegate = self;
     [tag userTag_SetGoodsInfo:title];
@@ -258,23 +257,6 @@ static NSString *const URLUserAddGoods = @"/scene_product/add";
     [self getNowAddGoodsInfoNum:self.tagBtnMarr.count];
 }
 
-#pragma mark 删除标签
-- (void)delegateThisTagBtn:(NSInteger)index {
-    UserGoodsTag * userTag = [[UserGoodsTag alloc] init];
-    userTag = self.tagBtnMarr[index];
-    [self.tagBtnMarr removeObject:userTag];
-    
-    [self getNowAddGoodsInfoNum:self.tagBtnMarr.count];
-    
-    if (userTag.type == 1) {
-        [self networkDeleteUserGoods:userTag.goodsId];
-    } else if (userTag.type == 0) {
-        [self.goodsIdData removeObject:userTag.goodsId];
-        [self.goodsTitleData removeObject:userTag.title.text];
-        [self.goodsPriceData removeObject:userTag.price.text];
-    }
-}
-
 #pragma mark - 标记一个产品图片
 - (void)addMarkGoodsImg:(NSString *)imgUrl withImgW:(CGFloat)imgW withImgH:(CGFloat)imgH {
     FBStickersContainer * sticker = [[FBStickersContainer alloc] initWithFrame:CGRectMake(100, 100, imgW/5, imgH/5)];
@@ -288,48 +270,26 @@ static NSString *const URLUserAddGoods = @"/scene_product/add";
     }
 }
 
-#pragma mark 删除标记的产品
+#pragma mark - 删除标记的产品
 - (void)didRemoveStickerContainer:(FBStickersContainer *)container {
     [self.stickersContainer removeObject:container];
 }
 
-#pragma mark - 编辑产品信息视图
-- (ChangeAddUrlView *)changeGoodsView {
-    if (!_changeGoodsView) {
-        _changeGoodsView = [[ChangeAddUrlView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT)];
-        [_changeGoodsView.sure addTarget:self action:@selector(sureChange) forControlEvents:(UIControlEventTouchUpInside)];
-        [_changeGoodsView.dele addTarget:self action:@selector(deleteTag) forControlEvents:(UIControlEventTouchUpInside)];
-    }
-    return _changeGoodsView;
-}
-
-#pragma mark - 修改标签
-- (void)sureChange {
-    if (_urlGoods == YES) {
-        [self.goodsTitleData removeObjectAtIndex:self.seleIndex];
-        [self.goodsPriceData removeObjectAtIndex:self.seleIndex];
-        
-        self.userGoodsTag.title.text = self.changeGoodsView.goodsTitle.text;
-        if ([self.changeGoodsView.goodsPrice.text containsString:@"￥"]) {
-            self.userGoodsTag.price.text = [NSString stringWithFormat:@"%@", self.changeGoodsView.goodsPrice.text];
-        } else {
-            self.userGoodsTag.price.text = [NSString stringWithFormat:@"￥%@", self.changeGoodsView.goodsPrice.text];
-        }
-        
-        [self.changeGoodsView removeFromSuperview];
-        
-        [self.userAddGoodsMarr[self.seleIndex] setObject:self.changeGoodsView.goodsTitle.text forKey:@"title"];
-        [self.userAddGoodsMarr[self.seleIndex] setObject:self.changeGoodsView.goodsPrice.text forKey:@"price"];
-        
-        [self.goodsTitleData addObject:self.userGoodsTag.title.text];
-        [self.goodsPriceData addObject:self.userGoodsTag.price.text];
-    }
-}
-
-#pragma mark - 删除标签
+#pragma mark 删除标签
 - (void)deleteTag {
     [self delegateThisTagBtn:self.seleIndex];
-    [self.changeGoodsView removeFromSuperview];
+}
+
+- (void)delegateThisTagBtn:(NSInteger)index {
+    UserGoodsTag * userTag = [[UserGoodsTag alloc] init];
+    userTag = self.tagBtnMarr[index];
+    [self.tagBtnMarr removeObject:userTag];
+    
+    [self getNowAddGoodsInfoNum:self.tagBtnMarr.count];
+    
+    [self.goodsIdData removeObject:userTag.goodsId];
+    [self.goodsTitleData removeObject:userTag.title.text];
+    [self.goodsPriceData removeObject:userTag.price.text];
 }
 
 #pragma mark - 处理图片的视图
@@ -353,12 +313,23 @@ static NSString *const URLUserAddGoods = @"/scene_product/add";
     }];
     [self.view addSubview:self.markGoodsView];
     
+    /**
+     *  用户自定义添加的产品
+     */
     __weak __typeof(self)weakSelf = self;
-    self.markGoodsView.addBrandInfoDoneBlock = ^(NSString *brand, NSString *goods) {
-        [weakSelf addUserGoodsTagWithTitle:[NSString stringWithFormat:@"%@ %@", brand, goods]
-                             withPrice:@""
-                              withType:2
-                           withGoodsId:@""];
+    weakSelf.markGoodsView.addBrandInfoDoneBlock = ^(NSString *brand, NSString *goods) {
+        weakSelf.addUserGoods = [FBAPI getWithUrlString:URLUserAddGoods requestDictionary:@{@"title":goods} delegate:self];
+        [weakSelf.addUserGoods startRequestSuccess:^(FBRequest *request, id result) {
+            NSString *userAddGoodsId = [NSString stringWithFormat:@"%zi", [[[result valueForKey:@"data"] valueForKey:@"id"] integerValue]];
+            [weakSelf addUserGoodsTagWithTitle:[NSString stringWithFormat:@"%@ %@", brand, goods]
+                                     withPrice:@""
+                                   withGoodsId:userAddGoodsId];
+            [weakSelf.goodsTitleData addObject:[NSString stringWithFormat:@"%@ %@", brand, goods]];
+            [weakSelf.goodsIdData addObject:userAddGoodsId];
+            
+        } failure:^(FBRequest *request, NSError *error) {
+            [SVProgressHUD showErrorWithStatus:[error localizedDescription]];
+        }];
     };
 }
 
@@ -398,7 +369,7 @@ static NSString *const URLUserAddGoods = @"/scene_product/add";
             releaseVC.goodsX = originX;
             releaseVC.goodsY = originY;
             releaseVC.goodsLoc = loc;
-//            NSLog(@"＝＝＝＝＝＝＝＝＝＝%@\n , %@\n , %@ \n , %@\n , %@\n", self.goodsTitleData, self.goodsIdData, originX, originY, loc);
+            NSLog(@"＝＝＝＝＝＝＝＝＝＝%@\n , %@\n , %@ \n , %@\n , %@\n", self.goodsTitleData, self.goodsIdData, originX, originY, loc);
             [self.navigationController pushViewController:releaseVC animated:YES];
         }
 }
@@ -408,7 +379,7 @@ static NSString *const URLUserAddGoods = @"/scene_product/add";
     if (count == 0) {
         [self.bottomBtn setTitle:NSLocalizedString(@"markGoodsBtnTitle", nil) forState:(UIControlStateNormal)];
         
-    } else if (count == 3) {
+    } else if (count >= 3) {
         [self mark_GoodsImageAndInfo];
         [self.bottomBtn setTitle:NSLocalizedString(@"markGoodsOver", nil) forState:(UIControlStateNormal)];
         

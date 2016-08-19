@@ -51,18 +51,15 @@ static NSString *const goodsCellId = @"GoodsCellId";
     
     self.brandRequest = [FBAPI getWithUrlString:URLBrandList requestDictionary:@{@"title":keyword, @"from_to":@"1", @"kind":@"1", @"size":@"100"} delegate:self];
     [self.brandRequest startRequestSuccess:^(FBRequest *request, id result) {
-        NSArray *brandArr = [[result valueForKey:@"data"] valueForKey:@"rows"];
-        for (NSDictionary *dic in brandArr) {
-            FiuBrandRow *model = [[FiuBrandRow alloc] initWithDictionary:dic];
-            [self.brandMarr addObject:model];
-            [self.brandIdMarr addObject:model.idx];
-            [self.brandTitleMarr addObject:model.title];
-        }
+        self.brandTitleMarr = [NSMutableArray arrayWithArray:[[[result valueForKey:@"data"] valueForKey:@"rows"] valueForKey:@"title"]];
+        self.brandIdMarr = [NSMutableArray arrayWithArray:[[[result valueForKey:@"data"] valueForKey:@"rows"] valueForKey:@"_id"]];
+        self.brandMarr = [NSMutableArray arrayWithArray:[[[result valueForKey:@"data"] valueForKey:@"rows"] valueForKey:@"cover_url"]];
         
-        if (self.brandMarr.count) {
+        if (self.brandTitleMarr.count) {
             self.brandList.hidden = NO;
             self.addGoodBtn.hidden = YES;
             [self.brandList reloadData];
+            
         } else {
             self.brandList.hidden = YES;
             [self.addGoodBtn setAddGoodsOrBrandInfo:1 withText:self.searchGoods.searchInputBox.text];
@@ -78,11 +75,15 @@ static NSString *const goodsCellId = @"GoodsCellId";
 - (void)networkBrandOfGoods:(NSString *)brandId {
     self.goodsRequest = [FBAPI getWithUrlString:URLGoodsList requestDictionary:@{@"brand_id":brandId, @"kind":@"1", @"size":@"1000"} delegate:self];
     [self.goodsRequest startRequestSuccess:^(FBRequest *request, id result) {
-        self.goodsMarr = [[[result valueForKey:@"data"] valueForKey:@"rows"] valueForKey:@"title"];
-        
+        self.goodsMarr = [NSMutableArray arrayWithArray:[[[result valueForKey:@"data"] valueForKey:@"rows"] valueForKey:@"title"]];
+        self.goodsIdMarr = [NSMutableArray arrayWithArray:[[[result valueForKey:@"data"] valueForKey:@"rows"] valueForKey:@"title"]];
         if (self.goodsMarr.count) {
             self.addGoodBtn.hidden = YES;
+            self.goodsList.hidden = NO;
             [self.goodsList reloadData];
+        } else {
+            self.addGoodBtn.hidden = NO;
+            self.goodsList.hidden = YES;
         }
         
     } failure:^(FBRequest *request, NSError *error) {
@@ -124,7 +125,7 @@ static NSString *const goodsCellId = @"GoodsCellId";
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     if (tableView == self.brandList) {
-        return self.brandMarr.count/2;
+        return self.brandTitleMarr.count;
     } else if (tableView == self.goodsList) {
         return self.goodsMarr.count;
     }
@@ -135,8 +136,8 @@ static NSString *const goodsCellId = @"GoodsCellId";
     if (tableView == self.brandList) {
         THNSearchBrandTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:brandCellId];
         cell = [[THNSearchBrandTableViewCell alloc] initWithStyle:(UITableViewCellStyleDefault) reuseIdentifier:brandCellId];
-        if (self.brandMarr.count) {
-            [cell setBrandData:self.brandMarr[indexPath.row]];
+        if (self.brandTitleMarr.count) {
+            [cell setBrandDataWithTitle:self.brandTitleMarr[indexPath.row] withImage:self.brandMarr[indexPath.row]];
         }
         return cell;
     
@@ -164,7 +165,7 @@ static NSString *const goodsCellId = @"GoodsCellId";
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     if (tableView == self.brandList) {
         _chooseBrandTitle = self.brandTitleMarr[indexPath.row];
-        [self setBrandName:self.brandTitleMarr[indexPath.row]];
+        [self setBrandName:_chooseBrandTitle type:1];
         [self networkBrandOfGoods:self.brandIdMarr[indexPath.row]];
         
     } else if (tableView == self.goodsList) {
@@ -179,7 +180,7 @@ static NSString *const goodsCellId = @"GoodsCellId";
 }
 
 #pragma mark - 搜索框固定品牌名称
-- (void)setBrandName:(NSString *)title {
+- (void)setBrandName:(NSString *)title type:(NSInteger)type {
     CGSize width = [title boundingRectWithSize:CGSizeMake(320, 0)
                                        options:(NSStringDrawingUsesFontLeading)
                                     attributes:@{NSFontAttributeName:[UIFont systemFontOfSize:12]}
@@ -197,6 +198,12 @@ static NSString *const goodsCellId = @"GoodsCellId";
     CGRect brandListFrame = CGRectMake(-SCREEN_WIDTH, 64, SCREEN_WIDTH, SCREEN_HEIGHT - 64);
     self.goodsList.frame = goodsListFrame;
     self.brandList.frame = brandListFrame;
+    
+    if (type == 1) {
+        [self.addGoodBtn setAddGoodsOrBrandInfo:2 withText:@""];
+    } else if (type == 2) {
+        [self.addGoodBtn setAddGoodsOrBrandInfo:1 withText:@""];
+    }
 }
 
 - (UIButton *)brandNameBtn {
@@ -224,25 +231,19 @@ static NSString *const goodsCellId = @"GoodsCellId";
 }
 
 - (void)searchKeyword:(UITextField *)textField {
-    if (self.brandNameBtn.titleLabel.text.length > 0) {
-        [self.addGoodBtn setAddGoodsOrBrandInfo:2 withText:self.searchGoods.searchInputBox.text];
-        self.addGoodBtn.hidden = NO;
+    if (self.brandNameBtn.titleLabel.text.length == 0 && ![textField.text isEqualToString:@""]) {
+        [self networkSearchBrand:textField.text];
         
     } else {
-        [self networkSearchBrand:textField.text];
+        self.addGoodBtn.hidden = NO;
+        self.goodsList.hidden = YES;
+        [self.addGoodBtn setAddGoodsOrBrandInfo:2 withText:textField.text];
     }
-}
-
-#pragma mark - 搜索产品
-- (void)beginSearch:(NSString *)searchKeyword {
-
 }
 
 #pragma mark - 取消搜索
 - (void)cancelSearch {
-    [self dismissViewControllerAnimated:YES completion:^{
-        
-    }];
+    [self dismissViewControllerAnimated:YES completion:nil];
 }
 
 #pragma mark - 没有搜索结果时自定义添加
@@ -257,7 +258,7 @@ static NSString *const goodsCellId = @"GoodsCellId";
 
 - (void)addUserGoodsInfo:(THNAddGoodsBtn *)button {
     if (self.brandNameBtn.titleLabel.text.length == 0) {
-        [self setBrandName:button.name.text];
+        [self setBrandName:button.name.text type:2];
         [button setAddGoodsOrBrandInfo:2 withText:@""];
         CGRect goodsListFrame = CGRectMake(0, 64, SCREEN_WIDTH, SCREEN_HEIGHT - 64);
         CGRect brandListFrame = CGRectMake(-SCREEN_WIDTH, 64, SCREEN_WIDTH, SCREEN_HEIGHT - 64);
@@ -298,6 +299,20 @@ static NSString *const goodsCellId = @"GoodsCellId";
         _brandTitleMarr = [NSMutableArray array];
     }
     return _brandTitleMarr;
+}
+
+- (NSMutableArray *)goodsMarr {
+    if (!_goodsMarr) {
+        _goodsMarr = [NSMutableArray array];
+    }
+    return _goodsMarr;
+}
+
+- (NSMutableArray *)goodsIdMarr {
+    if (!_goodsIdMarr) {
+        _goodsIdMarr = [NSMutableArray array];
+    }
+    return _goodsIdMarr;
 }
 
 @end

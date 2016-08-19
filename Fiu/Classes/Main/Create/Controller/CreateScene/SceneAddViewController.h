@@ -26,6 +26,7 @@
 @pro_strong NSString            *fSceneId;
 @pro_strong NSString            *fSceneTitle;
 @pro_strong ChangeAddUrlView    *changeGoodsView;        //  编辑产品
+@pro_strong FBRequest           *addUserGoods;
 @pro_strong FBRequest           *deleteUserGoods;
 @pro_assign NSInteger            seleIndex;
 @pro_strong FBFootView          *footView;               //  底部功能选择视图

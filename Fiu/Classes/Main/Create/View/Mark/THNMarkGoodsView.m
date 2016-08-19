@@ -201,10 +201,10 @@
             if (![self.brand.text isEqualToString:@""] || ![self.goods.text isEqualToString:@""]) {
                 self.addBrandInfoDoneBlock(self.brand.text, self.goods.text);
             }
-            self.brand.text = @"";
-            self.goods.text = @"";
             
         } completion:^(BOOL finished) {
+            self.brand.text = @"";
+            self.goods.text = @"";
             [self removeFromSuperview];
         }];
         
@@ -215,6 +215,8 @@
             self.alpha = 0;
             self.transform = CGAffineTransformMakeScale(0.9, 0.9);
         } completion:^(BOOL finished) {
+            self.brand.text = @"";
+            self.goods.text = @"";
             [self removeFromSuperview];
         }];
     }

@@ -26,7 +26,7 @@
     HomeSceneListComments *model = [[HomeSceneListComments alloc] initWithDictionary:commentModel];
     [self.headImage sd_setImageWithURL:[NSURL URLWithString:model.userAvatarUrl] forState:(UIControlStateNormal)];
     NSString *comment = [NSString stringWithFormat:@"%@: %@", model.userNickname, model.content];
-    [self getContentWithComment:comment];
+    [self getContentWithComment:comment withUserName:model.userNickname withUserId:[NSString stringWithFormat:@"%zi", model.userId]];
     CGSize size = [_comment boundingRectWithSize:CGSizeMake(SCREEN_WIDTH - 70, 0)];
     
     if (size.height < 35.0f) {
@@ -37,7 +37,7 @@
 }
 
 //  检索评论中的用户昵称
-- (void)getContentWithComment:(NSString *)content {
+- (void)getContentWithComment:(NSString *)content withUserName:(NSString *)userName withUserId:(NSString *)userId {
     NSMutableParagraphStyle *paragraphStyle = [[NSMutableParagraphStyle alloc] init];
     paragraphStyle.lineSpacing = 5.0f;
     
@@ -45,8 +45,7 @@
                                                                   attributes:@{(NSString *)kCTForegroundColorAttributeName:(__bridge id)[UIColor colorWithHexString:@"#666666"].CGColor,
                                                                                NSFontAttributeName:[UIFont systemFontOfSize:12],
                                                                                NSParagraphStyleAttributeName:paragraphStyle}];
-    NSString *userId = @"719877";
-    NSRange range = NSMakeRange(0, @"Fynn： ".length);
+    NSRange range = NSMakeRange(0, userName.length);
     NSString *urlStr = [NSString stringWithFormat:@"scheme://userId=%@", userId];
     NSString *userStr = [urlStr stringByAddingPercentEscapesUsingEncoding:(NSUTF8StringEncoding)];
     [self.comment addLinkToURL:[NSURL URLWithString:userStr] withRange:range];

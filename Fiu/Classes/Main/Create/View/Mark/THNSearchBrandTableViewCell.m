@@ -20,9 +20,9 @@
     return self;
 }
 
-- (void)setBrandData:(FiuBrandRow *)model {
-    [self.image downloadImage:model.coverUrl place:[UIImage imageNamed:@""]];
-    self.name.text = model.title;
+- (void)setBrandDataWithTitle:(NSString *)title withImage:(NSString *)image {
+    self.name.text = title;
+    [self.image downloadImage:image place:[UIImage imageNamed:@""]];
 }
 
 #pragma mark - setCellUI
