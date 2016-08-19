@@ -28,13 +28,6 @@
 @pro_strong UIView      *   posPoint;
 @pro_assign BOOL            isFlip;
 
-/**
- *  类型
- *  0:产品库产品
- *  1:添加链接产品
- */
-@pro_assign NSInteger       type;
-
 - (void)userTag_SetGoodsInfo:(NSString *)text;
 
 - (void)thn_setSceneImageUserGoodsTagLoc:(NSInteger)loc;

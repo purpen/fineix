@@ -16,6 +16,6 @@
 @pro_strong UILabel *name;
 @pro_strong UIButton *icon;
 
-- (void)setBrandData:(FiuBrandRow *)model;
+- (void)setBrandDataWithTitle:(NSString *)title withImage:(NSString *)image;
 
 @end
