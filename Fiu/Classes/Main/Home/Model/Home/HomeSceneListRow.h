@@ -23,6 +23,7 @@
 @property (nonatomic, strong) NSString * des;
 @property (nonatomic, assign) NSInteger fine;
 @property (nonatomic, assign) NSInteger isCheck;
+@property (nonatomic, assign) NSInteger isLove;
 @property (nonatomic, strong) HomeSceneListLocation * location;
 @property (nonatomic, assign) NSInteger loveCount;
 @property (nonatomic, strong) NSArray * product;

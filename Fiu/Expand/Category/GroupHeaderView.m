@@ -127,16 +127,16 @@
 
 - (void)moreFiuScene {
     if (self.openType == 0) {
-        AllSceneViewController * allSceneVC = [[AllSceneViewController alloc] init];
-        [self.nav pushViewController:allSceneVC animated:YES];
+//        AllSceneViewController * allSceneVC = [[AllSceneViewController alloc] init];
+//        [self.nav pushViewController:allSceneVC animated:YES];
         
     } else if (self.openType == 1) {
-        FiuPeopleListViewController * peopleListVC = [[FiuPeopleListViewController alloc] init];
-        [self.nav pushViewController:peopleListVC animated:YES];
+//        FiuPeopleListViewController * peopleListVC = [[FiuPeopleListViewController alloc] init];
+//        [self.nav pushViewController:peopleListVC animated:YES];
         
     } else if (self.openType == 2) {
-        FiuBrandListViewController * brandListVC = [[FiuBrandListViewController alloc] init];
-        [self.nav pushViewController:brandListVC animated:YES];
+//        FiuBrandListViewController * brandListVC = [[FiuBrandListViewController alloc] init];
+//        [self.nav pushViewController:brandListVC animated:YES];
         
     }
     

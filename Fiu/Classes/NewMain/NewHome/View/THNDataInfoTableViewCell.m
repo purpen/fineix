@@ -12,6 +12,7 @@
 @implementation THNDataInfoTableViewCell {
     NSString *_sceneId;
     NSString *_userId;
+    NSInteger _loveCount;
 }
 
 - (instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier {
@@ -20,6 +21,7 @@
         self.selectionStyle = UITableViewCellSelectionStyleNone;
         self.backgroundColor = [UIColor whiteColor];
         [self setCellUI];
+    
     }
     return self;
 }
@@ -27,6 +29,12 @@
 #pragma mark - setModel;
 - (void)thn_setSceneData:(HomeSceneListRow *)dataModel {
     [self.look setTitle:[NSString stringWithFormat:@"%zi", dataModel.viewCount] forState:(UIControlStateNormal)];
+    _loveCount = dataModel.loveCount;
+    if (dataModel.isLove == 1) {
+        self.like.selected = YES;
+    } else {
+        self.like.selected = NO;
+    }
     [self.like setTitle:[NSString stringWithFormat:@"%zi", dataModel.loveCount] forState:(UIControlStateNormal)];
     _sceneId = [NSString stringWithFormat:@"%zi", dataModel.idField];
     _userId = [NSString stringWithFormat:@"%zi", dataModel.userId];
@@ -149,6 +157,10 @@
         scaleAnimation.springSpeed = 10.0f;
         [button.layer pop_addAnimation:scaleAnimation forKey:@"scaleAnim"];
         
+        self.likeTheSceneBlock(_sceneId);
+        _loveCount += 1;
+        [self.like setTitle:[NSString stringWithFormat:@"%zi", _loveCount] forState:(UIControlStateNormal)];
+        
     } else if (button.selected == YES) {
         button.selected = NO;
         POPSpringAnimation *scaleAnimation = [POPSpringAnimation animationWithPropertyNamed:kPOPLayerScaleXY];
@@ -157,6 +169,10 @@
         scaleAnimation.springBounciness = 10.f;
         scaleAnimation.springSpeed = 10.0f;
         [button.layer pop_addAnimation:scaleAnimation forKey:@"scaleAnim"];
+        
+        self.cancelLikeTheSceneBlock(_sceneId);
+        _loveCount -= 1;
+        [self.like setTitle:[NSString stringWithFormat:@"%zi", _loveCount] forState:(UIControlStateNormal)];
     }
 }
 

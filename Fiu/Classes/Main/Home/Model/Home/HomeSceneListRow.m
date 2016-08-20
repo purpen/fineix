@@ -47,9 +47,12 @@
 		self.fine = [dictionary[@"fine"] integerValue];
 	}
 
-	if(![dictionary[@"is_check"] isKindOfClass:[NSNull class]]){
-		self.isCheck = [dictionary[@"is_check"] integerValue];
-	}
+    if(![dictionary[@"is_check"] isKindOfClass:[NSNull class]]){
+        self.isCheck = [dictionary[@"is_check"] integerValue];
+    }
+    if(![dictionary[@"is_love"] isKindOfClass:[NSNull class]]){
+        self.isLove = [dictionary[@"is_love"] integerValue];
+    }
 
 	if(![dictionary[@"location"] isKindOfClass:[NSNull class]]){
 		self.location = [[HomeSceneListLocation alloc] initWithDictionary:dictionary[@"location"]];

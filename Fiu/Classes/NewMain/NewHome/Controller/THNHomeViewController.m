@@ -25,6 +25,8 @@
 static NSString *const URLBannerSlide = @"/gateway/slide";
 static NSString *const URLSceneList = @"/scene_sight/";
 static NSString *const URLSubject = @"/scene_subject/getlist";
+static NSString *const URLLikeScene = @"/favorite/ajax_sight_love";
+static NSString *const URLCancelLike = @"/favorite/ajax_cancel_sight_love";
 
 static NSString *const themeCellId = @"ThemeCellId";
 static NSString *const userInfoCellId = @"UserInfoCellId";
@@ -73,6 +75,36 @@ static NSString *const twoCommentsCellId = @"TwoCommentsCellId";
             [self.rollList addObject:rollModel];
         }
         [self.homerollView setRollimageView:self.rollList];
+        
+    } failure:^(FBRequest *request, NSError *error) {
+        [SVProgressHUD showErrorWithStatus:[error localizedDescription]];
+    }];
+}
+
+#pragma mark 点赞
+- (void)thn_networkLikeSceneData:(NSString *)idx {
+    self.likeSceneRequest = [FBAPI getWithUrlString:URLLikeScene requestDictionary:@{@"id":idx} delegate:self];
+    [self.likeSceneRequest startRequestSuccess:^(FBRequest *request, id result) {
+//        if ([[result valueForKey:@"data"] valueForKey:@"love_count"]) {
+//            NSIndexPath *indexPath = [NSIndexPath indexPathForRow:2 inSection:1];
+//            NSArray *indexArray = [NSArray arrayWithObject:indexPath];
+//            [self.homeTable reloadRowsAtIndexPaths:indexArray withRowAnimation:UITableViewRowAnimationNone];
+//        }
+        
+    } failure:^(FBRequest *request, NSError *error) {
+        [SVProgressHUD showErrorWithStatus:[error localizedDescription]];
+    }];
+}
+
+#pragma mark 取消点赞
+- (void)thn_networkCancelLikeData:(NSString *)idx {
+    self.cancelLikeRequest = [FBAPI getWithUrlString:URLCancelLike requestDictionary:@{@"id":idx} delegate:self];
+    [self.cancelLikeRequest startRequestSuccess:^(FBRequest *request, id result) {
+//        if ([[result valueForKey:@"data"] valueForKey:@"love_count"]) {
+//            NSIndexPath *indexPath = [NSIndexPath indexPathForRow:2 inSection:1];
+//            NSArray *indexArray = [NSArray arrayWithObject:indexPath];
+//            [self.homeTable reloadRowsAtIndexPaths:indexArray withRowAnimation:UITableViewRowAnimationNone];
+//        }
         
     } failure:^(FBRequest *request, NSError *error) {
         [SVProgressHUD showErrorWithStatus:[error localizedDescription]];
@@ -291,7 +323,7 @@ static NSString *const twoCommentsCellId = @"TwoCommentsCellId";
                 [cell thn_setHomeSceneUserInfoData:self.sceneListMarr[indexPath.section - 1]];
             }
             return cell;
-//            
+
         } else if (indexPath.row == 1) {
             THNSceneImageTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:sceneImgCellId];
             cell = [[THNSceneImageTableViewCell alloc] initWithStyle:(UITableViewCellStyleDefault) reuseIdentifier:sceneImgCellId];
@@ -306,6 +338,14 @@ static NSString *const twoCommentsCellId = @"TwoCommentsCellId";
             cell = [[THNDataInfoTableViewCell alloc] initWithStyle:(UITableViewCellStyleDefault) reuseIdentifier:dataInfoCellId];
             if (self.sceneListMarr.count) {
                 [cell thn_setSceneData:self.sceneListMarr[indexPath.section - 1]];
+                __weak __typeof(self)weakSelf = self;
+                cell.likeTheSceneBlock = ^(NSString *idx) {
+                    [weakSelf thn_networkLikeSceneData:idx];
+                };
+                
+                cell.cancelLikeTheSceneBlock = ^(NSString *idx) {
+                    [weakSelf thn_networkCancelLikeData:idx];
+                };
             }
             cell.nav = self.navigationController;
             return cell;

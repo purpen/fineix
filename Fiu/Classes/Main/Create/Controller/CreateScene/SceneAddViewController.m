@@ -99,7 +99,7 @@ static NSString *const URLUserAddGoods = @"/scene_product/add";
     [self.view addSubview:self.filtersView];
     [_filtersView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.size.mas_equalTo(CGSizeMake(SCREEN_WIDTH, 120));
-        make.top.equalTo(self.view.mas_top).with.offset(SCREEN_WIDTH+90);
+        make.bottom.equalTo(self.view.mas_bottom).with.offset(-55);
         make.left.equalTo(self.view.mas_left).with.offset(SCREEN_WIDTH);
     }];
     
