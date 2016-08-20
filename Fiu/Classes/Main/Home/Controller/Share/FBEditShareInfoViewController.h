@@ -34,6 +34,7 @@ typedef void(^GetEditShareText)(NSString * title, NSString * des, NSMutableArray
 @pro_assign NSInteger               currentpageNum;
 @pro_assign NSInteger               totalPageNum;
 
+@pro_strong UIView *bgView;
 @pro_strong UITextField         *   titleText;
 @pro_strong UITextView          *   desText;
 @pro_strong UIImageView         *   bgImgView;

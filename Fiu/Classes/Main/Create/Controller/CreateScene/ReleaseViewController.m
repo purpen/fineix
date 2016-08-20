@@ -37,16 +37,16 @@ static NSString *const URLGetUserDesTags = @"/gateway/fetch_chinese_word";
 
 #pragma mark - 网络请求
 #pragma mark 获取用户填写描述的标签
-- (void)networkGetUserDesTags:(NSString *)title withDes:(NSString *)des {
-    self.getUserDesTagsRequest = [FBAPI postWithUrlString:URLGetUserDesTags requestDictionary:@{@"title":title, @"content":des} delegate:self];
-    [self.getUserDesTagsRequest startRequestSuccess:^(FBRequest *request, id result) {
-        NSArray * tagsArr = [[result valueForKey:@"data"] valueForKey:@"word"];
-        NSLog(@"－－－－ 用户的标签 %@", tagsArr);
-        
-    } failure:^(FBRequest *request, NSError *error) {
-        NSLog(@"%@", error);
-    }];
-}
+//- (void)networkGetUserDesTags:(NSString *)title withDes:(NSString *)des {
+//    self.getUserDesTagsRequest = [FBAPI postWithUrlString:URLGetUserDesTags requestDictionary:@{@"title":title, @"content":des} delegate:self];
+//    [self.getUserDesTagsRequest startRequestSuccess:^(FBRequest *request, id result) {
+//        NSArray * tagsArr = [[result valueForKey:@"data"] valueForKey:@"word"];
+//        NSLog(@"－－－－ 用户的标签 %@", tagsArr);
+//        
+//    } failure:^(FBRequest *request, NSError *error) {
+//        NSLog(@"%@", error);
+//    }];
+//}
 
 #pragma mark 发布场景
 - (void)networkNewSceneData {

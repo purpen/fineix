@@ -8,7 +8,6 @@
 
 #import "ClipImageViewController.h"
 #import "FBPictureCollectionViewCell.h"
-#import "FBLoadPhoto.h"
 #import "SceneAddViewController.h"
 
 @interface ClipImageViewController () {

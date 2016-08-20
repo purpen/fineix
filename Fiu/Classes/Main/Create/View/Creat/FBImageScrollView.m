@@ -139,7 +139,6 @@ static CGRect FBScaleRect(CGRect rect, CGFloat scale) {
 }
 
 #pragma mark - UIScrollViewDelegate
-
 - (UIView *)viewForZoomingInScrollView:(UIScrollView *)scrollView {
     return self.imageView;
 }

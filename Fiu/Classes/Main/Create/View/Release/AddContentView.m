@@ -82,8 +82,6 @@
     if (!_sceneImgView) {
         _sceneImgView = [[UIImageView alloc] init];
         _sceneImgView.image = self.bgImage;
-//        _sceneImgView.contentMode = UIViewContentModeScaleAspectFill;
-//        _sceneImgView.clipsToBounds = YES;
     }
     return _sceneImgView;
 }
@@ -103,10 +101,8 @@
 
 - (void)goChooseText {
     FBEditShareInfoViewController * chooseTextVC = [[FBEditShareInfoViewController alloc] init];
-    if (self.title.text.length > 0) {
-        chooseTextVC.titleText.text = [self.title.text stringByReplacingOccurrencesOfString:@" " withString:@""];
-        chooseTextVC.desText.text = self.content.text;
-    }
+    chooseTextVC.titleText.text = [self.title.text stringByReplacingOccurrencesOfString:@" " withString:@""];
+    chooseTextVC.desText.text = self.content.text;
     chooseTextVC.modalPresentationStyle = UIModalPresentationOverCurrentContext;
     [self.vc presentViewController:chooseTextVC animated:YES completion:^{
         chooseTextVC.getEdtiShareText = ^ (NSString *title, NSString *des, NSMutableArray *tagS) {
@@ -123,6 +119,7 @@
         self.title.hidden = YES;
         self.suTitle.hidden = YES;
         self.addText.hidden = NO;
+        self.title.text = title;
         
     } else if (title.length > 10) {
         self.title.hidden = NO;

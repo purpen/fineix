@@ -51,12 +51,14 @@ static NSString *const URLActionTags = @"/scene_sight/stick_active_tags";
     _categoryId = @"0";
     self.listCurrentpageNum = 0;
     [self networkContentList:_categoryId];
+    
+    self.view.backgroundColor = [UIColor colorWithHexString:@"#000000" alpha:0.0f];
+    [self.view addSubview:self.bgView];
     [self setEditInfoVcUI];
 }
 
 #pragma mark -  设置导航栏
 - (void)setNavViewUI {
-    self.view.backgroundColor = [UIColor colorWithHexString:@"#000000" alpha:0.8f];
     self.delegate = self;
     [self addNavViewTitle:NSLocalizedString(@"addSceneInfoVC", nil)];
     [self addCloseBtn:@"icon_cancel"];
@@ -182,9 +184,20 @@ static NSString *const URLActionTags = @"/scene_sight/stick_active_tags";
 
 #pragma mark - 设置界面UI
 - (void)setEditInfoVcUI {
-//    [self.view addSubview:self.bgImgView];
     [self.view addSubview:self.listView];
     [self.view addSubview:self.searchView];
+}
+
+- (UIView *)bgView {
+    if (!_bgView) {
+        _bgView = [[UIView alloc] initWithFrame:CGRectMake(0, 45, SCREEN_WIDTH, SCREEN_HEIGHT - 45)];
+        
+        UIBlurEffect *blurEffect = [UIBlurEffect effectWithStyle:(UIBlurEffectStyleDark)];
+        UIVisualEffectView *visualEffect = [[UIVisualEffectView alloc] initWithEffect:blurEffect];
+        visualEffect.frame = self.view.frame;
+        [_bgView addSubview:visualEffect];
+    }
+    return _bgView;
 }
 
 #pragma mark - 背景图片

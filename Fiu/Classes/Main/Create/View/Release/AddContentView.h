@@ -24,8 +24,8 @@ typedef void(^GetEditContentAndTags)(NSString * title, NSString * des, NSMutable
 @pro_strong UILabel             *   suTitle;
 @pro_strong UIButton            *   addText;          //    添加描述
 @pro_strong NSMutableArray      *   userAddTags;
-@pro_strong UIScrollView *contentRoll;
-@pro_strong TTTAttributedLabel *content;    //    场景描述内容
+@pro_strong UIScrollView        *   contentRoll;
+@pro_strong TTTAttributedLabel  *   content;          //    场景描述内容
 
 @pro_copy GetEditContentAndTags  getEditContentAndTags;
 
