@@ -9,9 +9,11 @@
 #import <UIKit/UIKit.h>
 #import "Fiu.h"
 
+@class UserGoodsTag;
+
 @protocol FBUserGoodsTagDelegaet <NSObject>
 @optional
-- (void)delegateThisTagBtn:(NSInteger)index;
+- (void)delegateThisTagBtn:(UserGoodsTag *)tag;
 
 @end
 

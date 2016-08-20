@@ -273,22 +273,15 @@ static NSString *const URLUserAddGoods = @"/scene_product/add";
     [self.stickersContainer removeObject:container];
 }
 
-
-/**
- * 数组删除元素，控件的下标值不变，删除一个后，再删另一个，数组越界，导致崩溃
- */
 #pragma mark 删除标签
-- (void)delegateThisTagBtn:(NSInteger)index {
-    NSLog(@"========== %zi",index);
-    UserGoodsTag * userTag = [[UserGoodsTag alloc] init];
-    userTag = self.tagBtnMarr[index];
-    [self.tagBtnMarr removeObject:userTag];
+- (void)delegateThisTagBtn:(UserGoodsTag *)tag {
+    [self.tagBtnMarr removeObject:tag];
     
     [self getNowAddGoodsInfoNum:self.tagBtnMarr.count];
     
-    [self.goodsIdData removeObject:userTag.goodsId];
-    [self.goodsTitleData removeObject:userTag.title.text];
-    [self.goodsPriceData removeObject:userTag.price.text];
+    [self.goodsIdData removeObject:tag.goodsId];
+    [self.goodsTitleData removeObject:tag.title.text];
+    [self.goodsPriceData removeObject:tag.price.text];
 }
 
 #pragma mark - 处理图片的视图

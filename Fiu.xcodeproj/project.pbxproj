@@ -42,7 +42,6 @@
 		1F2A8F481CF40277005116C7 /* CameraView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F2A8C121CF40276005116C7 /* CameraView.m */; };
 		1F2A8F4A1CF40277005116C7 /* FBFiltersCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F2A8C161CF40276005116C7 /* FBFiltersCollectionViewCell.m */; };
 		1F2A8F4B1CF40277005116C7 /* FBPictureCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F2A8C181CF40276005116C7 /* FBPictureCollectionViewCell.m */; };
-		1F2A8F4C1CF40277005116C7 /* FBPictureView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F2A8C1A1CF40276005116C7 /* FBPictureView.m */; };
 		1F2A8F4D1CF40277005116C7 /* FiltersView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F2A8C1C1CF40276005116C7 /* FiltersView.m */; };
 		1F2A8F4E1CF40277005116C7 /* PhotoAlbumsTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F2A8C1E1CF40276005116C7 /* PhotoAlbumsTableViewCell.m */; };
 		1F2A8F4F1CF40277005116C7 /* PhotoAlbumsView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F2A8C201CF40276005116C7 /* PhotoAlbumsView.m */; };
@@ -669,8 +668,6 @@
 		1F2A8C161CF40276005116C7 /* FBFiltersCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FBFiltersCollectionViewCell.m; sourceTree = "<group>"; };
 		1F2A8C171CF40276005116C7 /* FBPictureCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FBPictureCollectionViewCell.h; sourceTree = "<group>"; };
 		1F2A8C181CF40276005116C7 /* FBPictureCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FBPictureCollectionViewCell.m; sourceTree = "<group>"; };
-		1F2A8C191CF40276005116C7 /* FBPictureView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FBPictureView.h; sourceTree = "<group>"; };
-		1F2A8C1A1CF40276005116C7 /* FBPictureView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FBPictureView.m; sourceTree = "<group>"; };
 		1F2A8C1B1CF40276005116C7 /* FiltersView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FiltersView.h; sourceTree = "<group>"; };
 		1F2A8C1C1CF40276005116C7 /* FiltersView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FiltersView.m; sourceTree = "<group>"; };
 		1F2A8C1D1CF40276005116C7 /* PhotoAlbumsTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PhotoAlbumsTableViewCell.h; sourceTree = "<group>"; };
@@ -2006,8 +2003,6 @@
 				1F2A8C161CF40276005116C7 /* FBFiltersCollectionViewCell.m */,
 				1F2A8C171CF40276005116C7 /* FBPictureCollectionViewCell.h */,
 				1F2A8C181CF40276005116C7 /* FBPictureCollectionViewCell.m */,
-				1F2A8C191CF40276005116C7 /* FBPictureView.h */,
-				1F2A8C1A1CF40276005116C7 /* FBPictureView.m */,
 				1F2A8C1B1CF40276005116C7 /* FiltersView.h */,
 				1F2A8C1C1CF40276005116C7 /* FiltersView.m */,
 				1F2A8C1D1CF40276005116C7 /* PhotoAlbumsTableViewCell.h */,
@@ -5163,7 +5158,6 @@
 				1F2A906B1CF40277005116C7 /* NearChangViewController.m in Sources */,
 				1F2A8FCC1CF40277005116C7 /* OrderItems.m in Sources */,
 				1F2A90171CF40277005116C7 /* TipNumberView.m in Sources */,
-				1F2A8F4C1CF40277005116C7 /* FBPictureView.m in Sources */,
 				1F2A90131CF40277005116C7 /* MyQrCodeView.m in Sources */,
 				1F2A90401CF40277005116C7 /* CityTwoTableViewCell.m in Sources */,
 				1F6CA28D1D5C85A500DFB79E /* THNForgetViewController.m in Sources */,
@@ -5326,7 +5320,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 9.2;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
-				PROVISIONING_PROFILE = "68229318-888d-4d23-9586-1a46706c4314";
+				PROVISIONING_PROFILE = "38736fb6-f8a9-4075-b98f-85f06063d856";
 				SDKROOT = iphoneos;
 			};
 			name = Debug;
@@ -5364,7 +5358,7 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.2;
 				MTL_ENABLE_DEBUG_INFO = NO;
-				PROVISIONING_PROFILE = "68229318-888d-4d23-9586-1a46706c4314";
+				PROVISIONING_PROFILE = "38736fb6-f8a9-4075-b98f-85f06063d856";
 				SDKROOT = iphoneos;
 				VALIDATE_PRODUCT = YES;
 			};
@@ -5411,7 +5405,7 @@
 				OTHER_LIBTOOLFLAGS = "-all_load";
 				PRODUCT_BUNDLE_IDENTIFIER = com.THN.fineix;
 				PRODUCT_NAME = Fiu;
-				PROVISIONING_PROFILE = "68229318-888d-4d23-9586-1a46706c4314";
+				PROVISIONING_PROFILE = "38736fb6-f8a9-4075-b98f-85f06063d856";
 				RUN_CLANG_STATIC_ANALYZER = NO;
 				USER_HEADER_SEARCH_PATHS = "$(SRCROOT)";
 			};
@@ -5458,7 +5452,7 @@
 				OTHER_LIBTOOLFLAGS = "-all_load";
 				PRODUCT_BUNDLE_IDENTIFIER = com.THN.fineix;
 				PRODUCT_NAME = Fiu;
-				PROVISIONING_PROFILE = "68229318-888d-4d23-9586-1a46706c4314";
+				PROVISIONING_PROFILE = "38736fb6-f8a9-4075-b98f-85f06063d856";
 				RUN_CLANG_STATIC_ANALYZER = NO;
 				USER_HEADER_SEARCH_PATHS = "$(SRCROOT)";
 			};

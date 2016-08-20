@@ -270,7 +270,7 @@
 
 - (void)deleteTagAction:(UIButton *)button {
     if (self.delegate && [self.delegate respondsToSelector:@selector(delegateThisTagBtn:)]) {
-        [self.delegate delegateThisTagBtn:self.index];
+        [self.delegate delegateThisTagBtn:self];
     }
     [self removeFromSuperview];
 }
