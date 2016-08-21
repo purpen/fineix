@@ -35,6 +35,7 @@
 #import "ScenarioNonView.h"
 #import "ServiceViewController.h"
 #import "THNCollectionViewController.h"
+#import "THNProjectViewController.h"
 
 
 @interface MyPageViewController ()<THNNavigationBarItemsDelegate,UICollectionViewDelegate,UICollectionViewDataSource>
@@ -368,7 +369,10 @@
 
 
 -(void)aboutBtn:(UIButton*)sender{
-    AboutViewController *vc = [[AboutViewController alloc] init];
+//    AboutViewController *vc = [[AboutViewController alloc] init];
+//    [self.navigationController pushViewController:vc animated:YES];
+    
+    THNProjectViewController *vc = [[THNProjectViewController alloc] init];
     [self.navigationController pushViewController:vc animated:YES];
 }
 

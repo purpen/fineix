@@ -29,6 +29,8 @@
     return self;
 }
 
+
+
 -(UIView *)lineView{
     if (!_lineView) {
         _lineView = [[UIView alloc] initWithFrame:CGRectMake(0, 43.5,[UIScreen mainScreen].bounds.size.width, 0.5)];

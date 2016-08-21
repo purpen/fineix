@@ -111,9 +111,9 @@
 -(UICollectionView *)imageCollectionView{
     if (!_imageCollectionView) {
         UICollectionViewFlowLayout *layout = [[UICollectionViewFlowLayout alloc] init];
-        layout.itemSize = CGSizeMake((SCREEN_WIDTH-6)/3.0, 216/667.0*SCREEN_HEIGHT);
-        layout.sectionInset = UIEdgeInsetsMake(0, 0, 0, 5);
-        layout.minimumLineSpacing = 3;
+        layout.itemSize = CGSizeMake(SCREEN_WIDTH / 3.0, SCREEN_WIDTH / 3.0);
+        layout.sectionInset = UIEdgeInsetsMake(0, 0, 0, 0);
+        layout.minimumLineSpacing = 0;
         layout.scrollDirection = UICollectionViewScrollDirectionHorizontal;
         _imageCollectionView = [[UICollectionView alloc] initWithFrame:self.frame collectionViewLayout:layout];
         _imageCollectionView.backgroundColor = [UIColor whiteColor];
@@ -127,7 +127,7 @@
 
 - (UIButton *)follow {
     if (!_follow) {
-        _follow = [[UIButton alloc] init];
+        _follow = [UIButton buttonWithType:UIButtonTypeCustom];
         _follow.layer.cornerRadius = 5.0f;
         _follow.layer.borderColor = [UIColor colorWithHexString:@"#FFFFFF" alpha:0.6f].CGColor;
         _follow.layer.borderWidth = 0.5f;
@@ -135,35 +135,35 @@
         [_follow setTitle:NSLocalizedString(@"User_follow", nil) forState:(UIControlStateNormal)];
         [_follow setTitle:NSLocalizedString(@"User_followDone", nil) forState:(UIControlStateSelected)];
         _follow.titleLabel.font = [UIFont systemFontOfSize:12];
-        [_follow addTarget:self action:@selector(followClick:) forControlEvents:(UIControlEventTouchUpInside)];
+//        [_follow addTarget:self action:@selector(followClick:) forControlEvents:(UIControlEventTouchUpInside)];
     }
     return _follow;
 }
 
-- (void)followClick:(UIButton *)button {
-    if (button.selected == NO) {
-        button.selected = YES;
-        POPSpringAnimation *scaleAnimation = [POPSpringAnimation animationWithPropertyNamed:kPOPLayerScaleXY];
-        scaleAnimation.fromValue = [NSValue valueWithCGSize:CGSizeMake(0.5, 0.5)];
-        scaleAnimation.toValue = [NSValue valueWithCGSize:CGSizeMake(1.0, 1.0)];
-        scaleAnimation.springBounciness = 10.f;
-        scaleAnimation.springSpeed = 10.0f;
-        [button.layer pop_addAnimation:scaleAnimation forKey:@"scaleAnim"];
-        button.layer.borderColor = [UIColor colorWithHexString:MAIN_COLOR].CGColor;
-        button.backgroundColor = [UIColor colorWithHexString:MAIN_COLOR];
-        
-    } else if (button.selected == YES) {
-        button.selected = NO;
-        POPSpringAnimation *scaleAnimation = [POPSpringAnimation animationWithPropertyNamed:kPOPLayerScaleXY];
-        scaleAnimation.fromValue = [NSValue valueWithCGSize:CGSizeMake(0.5, 0.5)];
-        scaleAnimation.toValue = [NSValue valueWithCGSize:CGSizeMake(1.0, 1.0)];
-        scaleAnimation.springBounciness = 10.f;
-        scaleAnimation.springSpeed = 10.0f;
-        [button.layer pop_addAnimation:scaleAnimation forKey:@"scaleAnim"];
-        button.layer.borderColor = [UIColor colorWithHexString:@"#FFFFFF" alpha:0.6].CGColor;
-        button.backgroundColor = [UIColor colorWithHexString:BLACK_COLOR];
-    }
-}
+//- (void)followClick:(UIButton *)button {
+//    if (button.selected == NO) {
+//        button.selected = YES;
+//        POPSpringAnimation *scaleAnimation = [POPSpringAnimation animationWithPropertyNamed:kPOPLayerScaleXY];
+//        scaleAnimation.fromValue = [NSValue valueWithCGSize:CGSizeMake(0.5, 0.5)];
+//        scaleAnimation.toValue = [NSValue valueWithCGSize:CGSizeMake(1.0, 1.0)];
+//        scaleAnimation.springBounciness = 10.f;
+//        scaleAnimation.springSpeed = 10.0f;
+//        [button.layer pop_addAnimation:scaleAnimation forKey:@"scaleAnim"];
+//        button.layer.borderColor = [UIColor colorWithHexString:MAIN_COLOR].CGColor;
+//        button.backgroundColor = [UIColor colorWithHexString:MAIN_COLOR];
+//        
+//    } else if (button.selected == YES) {
+//        button.selected = NO;
+//        POPSpringAnimation *scaleAnimation = [POPSpringAnimation animationWithPropertyNamed:kPOPLayerScaleXY];
+//        scaleAnimation.fromValue = [NSValue valueWithCGSize:CGSizeMake(0.5, 0.5)];
+//        scaleAnimation.toValue = [NSValue valueWithCGSize:CGSizeMake(1.0, 1.0)];
+//        scaleAnimation.springBounciness = 10.f;
+//        scaleAnimation.springSpeed = 10.0f;
+//        [button.layer pop_addAnimation:scaleAnimation forKey:@"scaleAnim"];
+//        button.layer.borderColor = [UIColor colorWithHexString:@"#FFFFFF" alpha:0.6].CGColor;
+//        button.backgroundColor = [UIColor colorWithHexString:BLACK_COLOR];
+//    }
+//}
 
 -(NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section{
     return 1;
@@ -176,7 +176,6 @@
 -(UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath{
     static NSString *cellId = @"FiuSceneCollectionViewCell";
     FiuSceneCollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:cellId forIndexPath:indexPath];
-    //[cell setUI];
     FindSceneModel *model = self.sceneAry[indexPath.section];
     FiuSceneRow *model1 = [[FiuSceneRow alloc] init];
     

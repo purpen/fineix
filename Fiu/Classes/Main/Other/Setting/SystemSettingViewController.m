@@ -169,8 +169,12 @@ static NSString *const logOut = @"/auth/logout";
 
 
 - (IBAction)aboutBtn:(UIButton *)sender {
+    
     AboutViewController *vc = [[AboutViewController alloc] init];
     [self.navigationController pushViewController:vc animated:YES];
+    
+    
+    
 }
 
 

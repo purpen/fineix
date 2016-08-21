@@ -27,6 +27,7 @@
 #import "SearchTF.h"
 #import "UIView+FSExtension.h"
 #import "SearchPepoleTableViewCell.h"
+#import "THNMacro.h"
 
 static NSString *const ShareURlText = @"我在Fiu浮游™寻找同路人；希望和你一起用文字来记录内心情绪，用滤镜来表达情感色彩，用分享去变现原创价值；带你发现美学科技的力量和感性生活的温度！来吧，去Fiu一下 >>> http://m.taihuoniao.com/fiu";
 
@@ -45,6 +46,8 @@ static NSString *const ShareURlText = @"我在Fiu浮游™寻找同路人；希�
 @property (nonatomic, strong) UITableView *searchTableView;
 /**  */
 @property (nonatomic, strong) NSArray *findUserAry;
+/**  */
+@property (nonatomic, strong) UIView *topView;
 
 @end
 
@@ -57,9 +60,6 @@ static NSString *searchCellId = @"search";
     [super viewDidLoad];
     _userAry = [NSMutableArray array];
     _scenceAry = [NSMutableArray array];
-    //self.navigationController.navigationBarHidden = NO;
-    // Do any additional setup after loading the view.
-
     
     
     //设置导航
@@ -71,6 +71,16 @@ static NSString *searchCellId = @"search";
     [self.view addSubview:self.myTbaleView];
     //网络请求
     [self netGetData];
+    
+    [self.view addSubview:self.topView];
+}
+
+-(UIView *)topView{
+    if (!_topView) {
+        _topView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 20)];
+        _topView.backgroundColor = [UIColor blackColor];
+    }
+    return _topView;
 }
 
 -(void)netGetData{
@@ -143,7 +153,7 @@ static NSString *searchCellId = @"search";
     self.findUserAry = nil;
     self.searchView.searchTF.text = nil;
     [self.searchTableView reloadData];
-    [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent];
+//    [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent];
     self.searchView.backgroundColor = [UIColor whiteColor];
     [UIView animateWithDuration:0.25 animations:^{
         
@@ -184,10 +194,11 @@ static NSString *searchCellId = @"search";
 }
 
 -(BOOL)textFieldShouldBeginEditing:(UITextField *)textField{
-    [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleDefault];
+//    [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleDefault];
     self.searchView.backgroundColor = [UIColor blackColor];
     UIWindow *window = [[UIWindow alloc] initWithFrame:CGRectMake(0, 64, SCREEN_WIDTH, SCREEN_HEIGHT-64)];
     [UIView animateWithDuration:0.25 animations:^{
+        
         self.navView.y = -64;
         _myTbaleView.frame = CGRectMake(0, 20, SCREEN_WIDTH, SCREEN_HEIGHT);
         
@@ -288,12 +299,16 @@ static NSString *searchCellId = @"search";
             if (cell == nil) {
                 cell = [[FriendTableViewCell alloc] init];
             }
-            FindFriendModel *model = _userAry[indexPath.row];
-            cell.follow.tag = indexPath.row;
+            FindFriendModel *model = _userAry[indexPath.section];
+            cell.follow.tag = indexPath.section;
             if ([model.isLove isEqualToNumber:@0]) {
                 cell.follow.selected = NO;
+                cell.follow.layer.borderColor = [UIColor colorWithHexString:@"#FFFFFF" alpha:0.6].CGColor;
+                cell.follow.backgroundColor = [UIColor colorWithHexString:BLACK_COLOR];
             }else if ([model.isLove isEqualToNumber:@1]){
                 cell.follow.selected = YES;
+                cell.follow.layer.borderColor = [UIColor clearColor].CGColor;
+                cell.follow.backgroundColor = [UIColor colorWithHexString:@"#BE8914"];
             }
             [cell.headImageView sd_setImageWithURL:[NSURL URLWithString:model.avatarUrl]placeholderImage:[UIImage imageNamed:@"default_head"]];
             cell.nameLbael.text = model.nickName;
@@ -351,7 +366,8 @@ static NSString *searchCellId = @"search";
         [request startRequestSuccess:^(FBRequest *request, id result) {
             if ([result objectForKey:@"success"]) {
                 model.isLove = @1;
-                [self.myTbaleView reloadRowsAtIndexPaths:[NSArray arrayWithObjects:[NSIndexPath indexPathForRow:sender.tag inSection:1], nil] withRowAnimation:UITableViewRowAnimationNone];
+                
+                [self.myTbaleView reloadRowsAtIndexPaths:[NSArray arrayWithObjects:[NSIndexPath indexPathForRow:0 inSection:sender.tag], nil] withRowAnimation:UITableViewRowAnimationNone];
                 [SVProgressHUD showSuccessWithStatus:NSLocalizedString(@"Focus on success", nil)];
             }else{
                 [SVProgressHUD showErrorWithStatus:NSLocalizedString(@"Pay attention to fail", nil)];
@@ -376,7 +392,7 @@ static NSString *searchCellId = @"search";
             [SVProgressHUD showSuccessWithStatus:NSLocalizedString(@"Remove focus on success", nil)];
             model.isLove = @0;
             
-            [self.myTbaleView reloadRowsAtIndexPaths:[NSArray arrayWithObjects:[NSIndexPath indexPathForRow:sender.tag inSection:1], nil] withRowAnimation:UITableViewRowAnimationNone];
+            [self.myTbaleView reloadRowsAtIndexPaths:[NSArray arrayWithObjects:[NSIndexPath indexPathForRow:0 inSection:sender.tag], nil] withRowAnimation:UITableViewRowAnimationNone];
         }else{
             [SVProgressHUD showErrorWithStatus:NSLocalizedString(@"The operation failure", nil)];
         }
@@ -397,7 +413,7 @@ static NSString *searchCellId = @"search";
         if (indexPath.section == 0) {
             return 60/667.0*SCREEN_HEIGHT;
         }else{
-            return 542*0.5/667.0*SCREEN_HEIGHT;
+            return SCREEN_WIDTH / 3.0 + 40;
         }
     }
 }
