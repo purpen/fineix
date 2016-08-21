@@ -9,6 +9,7 @@
 #import <UIKit/UIKit.h>
 #import <pop/POP.h>
 #import "THNMacro.h"
+#import "HomeSceneListRow.h"
 
 @interface THNDiscoverSceneCollectionViewCell : UICollectionViewCell
 
@@ -20,6 +21,6 @@
 @pro_strong UILabel *title;
 @pro_strong UILabel *suTitle;
 
-- (void)thn_setSceneData:(NSString *)image;
+- (void)thn_setSceneUserInfoData:(HomeSceneListRow *)model;
 
 @end

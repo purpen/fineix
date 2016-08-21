@@ -18,8 +18,61 @@
     return self;
 }
 
-- (void)thn_setSceneData:(NSString *)image {
-    [self.image downloadImage:image place:[UIImage imageNamed:@""]];
+- (void)thn_setSceneUserInfoData:(HomeSceneListRow *)sceneModel {
+    [self.image downloadImage:sceneModel.coverUrl place:[UIImage imageNamed:@""]];
+    [self.userHeader downloadImage:sceneModel.user.avatarUrl place:[UIImage imageNamed:@""]];
+    self.userName.text = sceneModel.user.nickname;
+    if (sceneModel.isLove == 1) {
+        self.likeBtn.selected = YES;
+    } else {
+        self.likeBtn.selected = NO;
+    }
+    
+    if (sceneModel.title.length == 0) {
+        self.title.hidden = YES;
+        self.suTitle.hidden = YES;
+        
+    } else if (sceneModel.title.length > 10) {
+        self.title.hidden = NO;
+        self.suTitle.hidden = NO;
+        
+        NSString *titleStr = [NSString stringWithFormat:@"    %@  ", [sceneModel.title substringToIndex:10]];
+        self.title.text = titleStr;
+        
+        NSString *suTitleStr = [NSString stringWithFormat:@"    %@  ", [sceneModel.title substringFromIndex:10]];
+        self.suTitle.text = suTitleStr;
+        
+        [self.suTitle mas_updateConstraints:^(MASConstraintMaker *make) {
+            make.width.equalTo(@([self getTextSizeWidth:suTitleStr].width));
+        }];
+        
+        [self.title mas_updateConstraints:^(MASConstraintMaker *make) {
+            make.width.equalTo(@([self getTextSizeWidth:titleStr].width));
+            make.bottom.equalTo(self.mas_bottom).with.offset(-70);
+        }];
+        
+    } else if (sceneModel.title.length <= 10) {
+        self.suTitle.hidden = YES;
+        self.title.hidden = NO;
+        
+        NSString *titleStr = [NSString stringWithFormat:@"    %@  ", sceneModel.title];
+        self.title.text = titleStr;
+        [self.title mas_updateConstraints:^(MASConstraintMaker *make) {
+            make.width.equalTo(@([self getTextSizeWidth:titleStr].width));
+        }];
+    }
+}
+- (CGSize)getTextSizeWidth:(NSString *)text {
+    NSDictionary *attribute = @{NSFontAttributeName: [UIFont systemFontOfSize:12]};
+    
+    CGSize retSize = [text boundingRectWithSize:CGSizeMake(SCREEN_WIDTH, 0)
+                                        options:\
+                      NSStringDrawingTruncatesLastVisibleLine |
+                      NSStringDrawingUsesLineFragmentOrigin |
+                      NSStringDrawingUsesFontLeading
+                                     attributes:attribute
+                                        context:nil].size;
+    return retSize;
 }
 
 #pragma mark - setUI 
@@ -28,6 +81,20 @@
     [_image mas_makeConstraints:^(MASConstraintMaker *make) {
         make.size.mas_equalTo(CGSizeMake(self.bounds.size.width, self.bounds.size.width));
         make.top.left.right.equalTo(self).with.offset(0);
+    }];
+    
+    [self addSubview:self.suTitle];
+    [_suTitle mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.size.mas_equalTo(CGSizeMake(50, 25));
+        make.left.equalTo(self.mas_left).with.offset(0);
+        make.bottom.equalTo(self.mas_bottom).with.offset(-40);
+    }];
+    
+    [self addSubview:self.title];
+    [_title mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.size.mas_equalTo(CGSizeMake(50, 25));
+        make.left.equalTo(self.mas_left).with.offset(0);
+        make.bottom.equalTo(self.mas_bottom).with.offset(-40);
     }];
     
     [self addSubview:self.userInfo];
@@ -62,9 +129,29 @@
 - (UIImageView *)image {
     if (!_image) {
         _image = [[UIImageView alloc] init];
-        _image.backgroundColor = [UIColor orangeColor];
+        _image.backgroundColor = [UIColor colorWithHexString:@"#F8F8F8"];
     }
     return _image;
+}
+
+- (UILabel *)title {
+    if (!_title) {
+        _title = [[UILabel alloc] init];
+        _title.backgroundColor = [UIColor colorWithHexString:BLACK_COLOR alpha:0.8];
+        _title.textColor = [UIColor colorWithHexString:WHITE_COLOR];
+        _title.font = [UIFont systemFontOfSize:12];
+    }
+    return _title;
+}
+
+- (UILabel *)suTitle {
+    if (!_suTitle) {
+        _suTitle = [[UILabel alloc] init];
+        _suTitle.backgroundColor = [UIColor colorWithHexString:BLACK_COLOR alpha:0.8];
+        _suTitle.textColor = [UIColor colorWithHexString:WHITE_COLOR];
+        _suTitle.font = [UIFont systemFontOfSize:12];
+    }
+    return _suTitle;
 }
 
 - (UIView *)userInfo {
@@ -90,7 +177,6 @@
         _userName = [[UILabel alloc] init];
         _userName.textColor = [UIColor colorWithHexString:@"#FFFFFF" alpha:1];
         _userName.font = [UIFont systemFontOfSize:10];
-        _userName.text = @"Fynn的昵称";
     }
     return _userName;
 }

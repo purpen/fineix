@@ -457,8 +457,8 @@
 		D802D7791C821D41007AFA3D /* AssetsLibrary.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D802D7781C821D41007AFA3D /* AssetsLibrary.framework */; };
 		D8035F2F1CB77D0C001920F9 /* UIImage+Helper.m in Sources */ = {isa = PBXBuildFile; fileRef = D8035F2E1CB77D0C001920F9 /* UIImage+Helper.m */; };
 		D8035F3B1CB784B3001920F9 /* UILable+Frame.m in Sources */ = {isa = PBXBuildFile; fileRef = D8035F3A1CB784B3001920F9 /* UILable+Frame.m */; };
-		D80878CD1D69CA9800C1FFA0 /* THNDiscoverSceneTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D80878CC1D69CA9800C1FFA0 /* THNDiscoverSceneTableViewCell.m */; };
 		D80878D01D69CAD700C1FFA0 /* THNDiscoverSceneCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D80878CF1D69CAD700C1FFA0 /* THNDiscoverSceneCollectionViewCell.m */; };
+		D80878D31D69FAB400C1FFA0 /* THNCategoryCollectionReusableView.m in Sources */ = {isa = PBXBuildFile; fileRef = D80878D21D69FAB400C1FFA0 /* THNCategoryCollectionReusableView.m */; };
 		D80D415B1CAD1437005D72B1 /* FBNavigationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D80D41591CAD1437005D72B1 /* FBNavigationViewController.m */; };
 		D80D415E1CAD144D005D72B1 /* UIBarButtonItem+Helper.m in Sources */ = {isa = PBXBuildFile; fileRef = D80D415C1CAD144D005D72B1 /* UIBarButtonItem+Helper.m */; };
 		D81281131CAA8532007CF08B /* FBViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D812801C1CAA8532007CF08B /* FBViewController.m */; };
@@ -1427,10 +1427,10 @@
 		D8035F2E1CB77D0C001920F9 /* UIImage+Helper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+Helper.m"; sourceTree = "<group>"; };
 		D8035F391CB784B3001920F9 /* UILable+Frame.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UILable+Frame.h"; sourceTree = "<group>"; };
 		D8035F3A1CB784B3001920F9 /* UILable+Frame.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UILable+Frame.m"; sourceTree = "<group>"; };
-		D80878CB1D69CA9800C1FFA0 /* THNDiscoverSceneTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THNDiscoverSceneTableViewCell.h; sourceTree = "<group>"; };
-		D80878CC1D69CA9800C1FFA0 /* THNDiscoverSceneTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THNDiscoverSceneTableViewCell.m; sourceTree = "<group>"; };
 		D80878CE1D69CAD700C1FFA0 /* THNDiscoverSceneCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THNDiscoverSceneCollectionViewCell.h; sourceTree = "<group>"; };
 		D80878CF1D69CAD700C1FFA0 /* THNDiscoverSceneCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THNDiscoverSceneCollectionViewCell.m; sourceTree = "<group>"; };
+		D80878D11D69FAB400C1FFA0 /* THNCategoryCollectionReusableView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THNCategoryCollectionReusableView.h; sourceTree = "<group>"; };
+		D80878D21D69FAB400C1FFA0 /* THNCategoryCollectionReusableView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THNCategoryCollectionReusableView.m; sourceTree = "<group>"; };
 		D80D41591CAD1437005D72B1 /* FBNavigationViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FBNavigationViewController.m; sourceTree = "<group>"; };
 		D80D415A1CAD1437005D72B1 /* FBNavigationViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FBNavigationViewController.h; sourceTree = "<group>"; };
 		D80D415C1CAD144D005D72B1 /* UIBarButtonItem+Helper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIBarButtonItem+Helper.m"; sourceTree = "<group>"; };
@@ -4226,10 +4226,10 @@
 		D85174461D5878C8005F5722 /* View */ = {
 			isa = PBXGroup;
 			children = (
-				D80878CB1D69CA9800C1FFA0 /* THNDiscoverSceneTableViewCell.h */,
-				D80878CC1D69CA9800C1FFA0 /* THNDiscoverSceneTableViewCell.m */,
 				D80878CE1D69CAD700C1FFA0 /* THNDiscoverSceneCollectionViewCell.h */,
 				D80878CF1D69CAD700C1FFA0 /* THNDiscoverSceneCollectionViewCell.m */,
+				D80878D11D69FAB400C1FFA0 /* THNCategoryCollectionReusableView.h */,
+				D80878D21D69FAB400C1FFA0 /* THNCategoryCollectionReusableView.m */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -4949,6 +4949,7 @@
 				1F2A8F821CF40277005116C7 /* FiuSceneTableViewCell.m in Sources */,
 				1F2A8F711CF40277005116C7 /* FiuSceneInfoData.m in Sources */,
 				1F2A8F9B1CF40277005116C7 /* SceneInfoProduct.m in Sources */,
+				D80878D31D69FAB400C1FFA0 /* THNCategoryCollectionReusableView.m in Sources */,
 				1F2A8F521CF40277005116C7 /* FBStickersContainer.m in Sources */,
 				1FCDCC8D1D08085000C92E78 /* InviteCCodeViewController.m in Sources */,
 				1F2A8F761CF40277005116C7 /* RollImage.m in Sources */,
@@ -5207,7 +5208,6 @@
 				1F2A8F581CF40277005116C7 /* SelectHotFSceneTableViewCell.m in Sources */,
 				D87B69C01CC726BA00199EFE /* GroupHeaderView.m in Sources */,
 				1F2A8F381CF40277005116C7 /* SearchFSceneViewController.m in Sources */,
-				D80878CD1D69CA9800C1FFA0 /* THNDiscoverSceneTableViewCell.m in Sources */,
 				D86809031D622049002714B2 /* FBImageScrollView.m in Sources */,
 				1F2A8F831CF40277005116C7 /* FiuTagTableViewCell.m in Sources */,
 				D8BE89E11D33509400DE5029 /* BrandListModel.m in Sources */,
