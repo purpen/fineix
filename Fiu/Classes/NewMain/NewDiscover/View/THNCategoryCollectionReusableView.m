@@ -1,18 +1,18 @@
 //
-//  FBCategoryView.m
+//  THNCategoryCollectionReusableView.m
 //  Fiu
 //
-//  Created by FLYang on 16/8/11.
+//  Created by FLYang on 16/8/21.
 //  Copyright © 2016年 taihuoniao. All rights reserved.
 //
 
-#import "FBCategoryView.h"
+#import "THNCategoryCollectionReusableView.h"
 #import "MallMenuCollectionViewCell.h"
-#import "GoodsCategoryViewController.h"
+//#import "GoodsCategoryViewController.h"
 
 static NSString *const collectionViewCellId = @"CollectionViewCellId";
 
-@implementation FBCategoryView
+@implementation THNCategoryCollectionReusableView
 
 - (instancetype)initWithFrame:(CGRect)frame {
     self = [super initWithFrame:frame];
@@ -26,13 +26,34 @@ static NSString *const collectionViewCellId = @"CollectionViewCellId";
 - (void)setViewUI {
     [self addSubview:self.menuView];
     [_menuView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.size.mas_equalTo(CGSizeMake(SCREEN_WIDTH, 180));
         make.left.top.equalTo(self).with.offset(10);
-        make.right.bottom.equalTo(self).with.offset(-10);
     }];
+    
+    [self addSubview:self.headerView];
+    [_headerView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.size.mas_equalTo(CGSizeMake(SCREEN_WIDTH, 44));
+        make.left.bottom.equalTo(self).with.offset(0);
+    }];
+}
+    
+- (GroupHeaderView *)headerView {
+    if (!_headerView) {
+        _headerView = [[GroupHeaderView alloc] init];
+        [_headerView addGroupHeaderViewIcon:@"discover_newScene"
+                                      withTitle:NSLocalizedString(@"newScene", nil)
+                                   withSubtitle:@""
+                                  withRightMore:@""
+                                   withMoreType:0];
+    }
+    return _headerView;
 }
 
 #pragma mark -
 - (void)setCategoryData:(NSMutableArray *)category {
+    [self.categoryMarr removeAllObjects];
+    [self.categoryIdMarr removeAllObjects];
+    
     for (NSDictionary *categoryDict in category) {
         CategoryRow *model = [[CategoryRow alloc] initWithDictionary:categoryDict];
         [self.categoryMarr addObject:model];

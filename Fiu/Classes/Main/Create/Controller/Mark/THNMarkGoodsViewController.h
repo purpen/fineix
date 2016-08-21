@@ -8,14 +8,22 @@
 
 #import "FBPictureViewController.h"
 #import "FBSearchView.h"
-#import "FBMenuView.h"
+#import "THNAddGoodsBtn.h"
 #import <SVProgressHUD/SVProgressHUD.h>
+
+typedef void(^GetUserGoodsInfoBlock)(NSString *goodsTitle, NSString *goodsId);
 
 @interface THNMarkGoodsViewController : FBPictureViewController <
     FBSearchDelegate,
-    FBMenuViewDelegate
+    UITableViewDelegate,
+    UITableViewDataSource
 >
 
-@pro_strong FBSearchView *searchGoods;  //  搜索框
+@pro_strong FBSearchView *searchGoods;
+@pro_strong FBRequest *goodsRequest;
+@pro_strong THNAddGoodsBtn *addGoodBtn;
+@pro_strong UITableView *goodsList;
+
+@pro_copy GetUserGoodsInfoBlock getUserGoodsInfoBlock;
 
 @end

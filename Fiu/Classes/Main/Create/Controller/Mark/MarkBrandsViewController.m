@@ -76,7 +76,7 @@ static NSString *const goodsCellId = @"GoodsCellId";
     self.goodsRequest = [FBAPI getWithUrlString:URLGoodsList requestDictionary:@{@"brand_id":brandId, @"kind":@"1", @"size":@"1000"} delegate:self];
     [self.goodsRequest startRequestSuccess:^(FBRequest *request, id result) {
         self.goodsMarr = [NSMutableArray arrayWithArray:[[[result valueForKey:@"data"] valueForKey:@"rows"] valueForKey:@"title"]];
-        self.goodsIdMarr = [NSMutableArray arrayWithArray:[[[result valueForKey:@"data"] valueForKey:@"rows"] valueForKey:@"title"]];
+        self.goodsIdMarr = [NSMutableArray arrayWithArray:[[[result valueForKey:@"data"] valueForKey:@"rows"] valueForKey:@"oid"]];
         if (self.goodsMarr.count) {
             self.addGoodBtn.hidden = YES;
             self.goodsList.hidden = NO;
@@ -170,7 +170,7 @@ static NSString *const goodsCellId = @"GoodsCellId";
         
     } else if (tableView == self.goodsList) {
         [self dismissViewControllerAnimated:YES completion:^{
-            self.getBrandAndGoodsInfoBlock(_chooseBrandTitle, self.goodsMarr[indexPath.row]);
+            self.getBrandAndGoodsInfoBlock(_chooseBrandTitle, self.goodsMarr[indexPath.row], self.goodsIdMarr[indexPath.row]);
         }];
     }
 }
@@ -267,7 +267,7 @@ static NSString *const goodsCellId = @"GoodsCellId";
         
     } else {
         [self dismissViewControllerAnimated:YES completion:^{
-            self.getBrandAndGoodsInfoBlock(self.brandNameBtn.titleLabel.text, button.name.text);
+            self.getBrandAndGoodsInfoBlock(self.brandNameBtn.titleLabel.text, button.name.text, @"");
         }];
     }
 }

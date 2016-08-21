@@ -1,16 +1,18 @@
 //
-//  FBCategoryView.h
+//  THNCategoryCollectionReusableView.h
 //  Fiu
 //
-//  Created by FLYang on 16/8/11.
+//  Created by FLYang on 16/8/21.
 //  Copyright © 2016年 taihuoniao. All rights reserved.
 //
 
 #import <UIKit/UIKit.h>
 #import "THNMacro.h"
+#import "FBCategoryView.h"
 #import "CategoryRow.h"
+#import "GroupHeaderView.h"
 
-@interface FBCategoryView : UIView <UICollectionViewDelegate, UICollectionViewDataSource>
+@interface THNCategoryCollectionReusableView : UICollectionReusableView <UICollectionViewDelegate, UICollectionViewDataSource>
 
 @pro_strong UINavigationController *nav;
 @pro_strong UICollectionView *menuView;         //  菜单列表
@@ -19,6 +21,7 @@
 @pro_strong NSMutableArray *rowMarr;            //  分类model
 @pro_strong NSMutableArray *idMarr;             //  分类id
 @pro_strong NSMutableArray *categoryMarr;
+@pro_strong GroupHeaderView *headerView;
 
 - (void)setCategoryData:(NSMutableArray *)category;
 

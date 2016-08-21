@@ -184,7 +184,7 @@
 - (UILabel *)title {
     if (!_title) {
         _title = [[UILabel alloc] init];
-        _title.backgroundColor = [UIColor colorWithHexString:BLACK_COLOR];
+        _title.backgroundColor = [UIColor colorWithHexString:BLACK_COLOR alpha:0.8];
         _title.textColor = [UIColor colorWithHexString:WHITE_COLOR];
         _title.font = [UIFont systemFontOfSize:17];
     }
@@ -194,7 +194,7 @@
 - (UILabel *)suTitle {
     if (!_suTitle) {
         _suTitle = [[UILabel alloc] init];
-        _suTitle.backgroundColor = [UIColor colorWithHexString:BLACK_COLOR];
+        _suTitle.backgroundColor = [UIColor colorWithHexString:BLACK_COLOR alpha:0.8];
         _suTitle.textColor = [UIColor colorWithHexString:WHITE_COLOR];
         _suTitle.font = [UIFont systemFontOfSize:17];
     }

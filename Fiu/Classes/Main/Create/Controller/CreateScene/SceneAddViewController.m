@@ -309,19 +309,51 @@ static NSString *const URLUserAddGoods = @"/scene_product/add";
      *  用户自定义添加的产品
      */
     __weak __typeof(self)weakSelf = self;
-    weakSelf.markGoodsView.addBrandInfoDoneBlock = ^(NSString *brand, NSString *goods) {
-        weakSelf.addUserGoods = [FBAPI getWithUrlString:URLUserAddGoods requestDictionary:@{@"title":goods} delegate:self];
-        [weakSelf.addUserGoods startRequestSuccess:^(FBRequest *request, id result) {
-            NSString *userAddGoodsId = [NSString stringWithFormat:@"%zi", [[[result valueForKey:@"data"] valueForKey:@"id"] integerValue]];
-            [weakSelf addUserGoodsTagWithTitle:[NSString stringWithFormat:@"%@ %@", brand, goods]
+    weakSelf.markGoodsView.addBrandInfoDoneBlock = ^(NSString *brand, NSString *goods, NSString *goodsId) {
+        if (goodsId.length > 1) {
+            [weakSelf addUserGoodsTagWithTitle:[NSString stringWithFormat:@"%@", goods]
                                      withPrice:@""
-                                   withGoodsId:userAddGoodsId];
-            [weakSelf.goodsTitleData addObject:[NSString stringWithFormat:@"%@ %@", brand, goods]];
-            [weakSelf.goodsIdData addObject:userAddGoodsId];
+                                   withGoodsId:goodsId];
+            [weakSelf.goodsTitleData addObject:[NSString stringWithFormat:@"%@", goods]];
+            [weakSelf.goodsIdData addObject:goodsId];
             
-        } failure:^(FBRequest *request, NSError *error) {
-            [SVProgressHUD showErrorWithStatus:[error localizedDescription]];
-        }];
+        } else {
+            weakSelf.addUserGoods = [FBAPI getWithUrlString:URLUserAddGoods requestDictionary:@{@"title":goods} delegate:self];
+            [weakSelf.addUserGoods startRequestSuccess:^(FBRequest *request, id result) {
+                NSString *userAddGoodsId = [NSString stringWithFormat:@"%zi", [[[result valueForKey:@"data"] valueForKey:@"id"] integerValue]];
+                [weakSelf addUserGoodsTagWithTitle:[NSString stringWithFormat:@"%@ %@", brand, goods]
+                                         withPrice:@""
+                                       withGoodsId:userAddGoodsId];
+                [weakSelf.goodsTitleData addObject:[NSString stringWithFormat:@"%@ %@", brand, goods]];
+                [weakSelf.goodsIdData addObject:userAddGoodsId];
+                
+            } failure:^(FBRequest *request, NSError *error) {
+                [SVProgressHUD showErrorWithStatus:[error localizedDescription]];
+            }];
+        }
+    };
+    
+    weakSelf.markGoodsView.addGoodsInfoDoneBlock = ^(NSString *goods, NSString *idx) {
+        if (idx.length > 1) {
+            [weakSelf addUserGoodsTagWithTitle:[NSString stringWithFormat:@"%@", goods]
+                                     withPrice:@""
+                                   withGoodsId:idx];
+            [weakSelf.goodsTitleData addObject:[NSString stringWithFormat:@"%@", goods]];
+            [weakSelf.goodsIdData addObject:idx];
+        
+        } else {
+            weakSelf.addUserGoods = [FBAPI postWithUrlString:URLUserAddGoods requestDictionary:@{@"title":goods} delegate:self];
+            [weakSelf.addUserGoods startRequestSuccess:^(FBRequest *request, id result) {
+                NSString *goodsId = [NSString stringWithFormat:@"%zi", [[[result valueForKey:@"data"] valueForKey:@"id"] integerValue]];
+                [weakSelf addUserGoodsTagWithTitle:[NSString stringWithFormat:@"%@", goods]
+                                         withPrice:@""
+                                       withGoodsId:goodsId];
+                [weakSelf.goodsTitleData addObject:[NSString stringWithFormat:@"%@", goods]];
+                [weakSelf.goodsIdData addObject:goodsId];
+            } failure:^(FBRequest *request, NSError *error) {
+                [SVProgressHUD showErrorWithStatus:[error localizedDescription]];
+            }];
+        }
     };
 }
 
