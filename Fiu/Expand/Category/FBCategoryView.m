@@ -33,10 +33,11 @@ static NSString *const collectionViewCellId = @"CollectionViewCellId";
 
 #pragma mark -
 - (void)setCategoryData:(NSMutableArray *)category {
-    self.rowMarr = category;
-    self.titleMarr = [NSMutableArray arrayWithArray:[category valueForKey:@"title"]];
-    self.categoryIdMarr = [NSMutableArray arrayWithArray:[category valueForKey:@"tagId"]];
-    self.idMarr = [NSMutableArray arrayWithArray:[category valueForKey:@"idField"]];
+    for (NSDictionary *categoryDict in category) {
+        CategoryRow *model = [[CategoryRow alloc] initWithDictionary:categoryDict];
+        [self.categoryMarr addObject:model];
+        [self.categoryIdMarr addObject:[NSString stringWithFormat:@"%zi",model.idField]];
+    }
     [self.menuView reloadData];
 }
 
@@ -64,27 +65,35 @@ static NSString *const collectionViewCellId = @"CollectionViewCellId";
 
 #pragma mark  UICollectionViewDataSource
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
-//    return self.rowMarr.count;
-    return 10;
+    return self.categoryMarr.count;
 }
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
     MallMenuCollectionViewCell * cell = [collectionView dequeueReusableCellWithReuseIdentifier:collectionViewCellId forIndexPath:indexPath];
-//    [cell setCategoryData:self.rowMarr[indexPath.row]];
+    if (self.categoryMarr.count) {
+        [cell setCategoryData:self.categoryMarr[indexPath.row]];
+    }
     return cell;
 }
 
 #pragma mark UICollectionViewDelegate
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
-    [SVProgressHUD showSuccessWithStatus:@"打开分类"];
-//    GoodsCategoryViewController * goodsCategoryVC = [[GoodsCategoryViewController alloc] init];
-//    goodsCategoryVC.categoryTitleArr = self.titleMarr;
-//    goodsCategoryVC.categoryId = self.categoryIdMarr[indexPath.row];
-//    goodsCategoryVC.categoryIdMarr = self.categoryIdMarr;
-//    [goodsCategoryVC.categoryMenuView updateMenuBtnState:indexPath.row];
-//    [goodsCategoryVC showCategoryTag:indexPath.row];
-//    goodsCategoryVC.idMarr = self.idMarr;
-//    [self.nav pushViewController:goodsCategoryVC animated:YES];
+    [SVProgressHUD showSuccessWithStatus:[NSString stringWithFormat:@"打开分类id: %@", self.categoryIdMarr[indexPath.row]]];
+}
+
+#pragma mark - NSMutableArray
+- (NSMutableArray *)categoryMarr {
+    if (!_categoryMarr) {
+        _categoryMarr = [NSMutableArray array];
+    }
+    return _categoryMarr;
+}
+
+- (NSMutableArray *)categoryIdMarr {
+    if (!_categoryIdMarr) {
+        _categoryIdMarr = [NSMutableArray array];
+    }
+    return _categoryIdMarr;
 }
 
 @end

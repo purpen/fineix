@@ -184,7 +184,7 @@
 - (UILabel *)title {
     if (!_title) {
         _title = [[UILabel alloc] init];
-        _title.backgroundColor = [UIColor colorWithHexString:BLACK_COLOR];
+        _title.backgroundColor = [UIColor colorWithHexString:BLACK_COLOR alpha:0.8];
         _title.textColor = [UIColor colorWithHexString:WHITE_COLOR];
         _title.font = [UIFont systemFontOfSize:17];
     }
