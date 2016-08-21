@@ -10,6 +10,12 @@
 #import "MarkBrandsViewController.h"
 #import "THNMarkGoodsViewController.h"
 
+@interface THNMarkGoodsView () {
+    NSString *_goodsId;
+}
+
+@end
+
 @implementation THNMarkGoodsView
 
 - (instancetype)initWithFrame:(CGRect)frame {
@@ -133,9 +139,10 @@
     if (textField == self.brand) {
         MarkBrandsViewController *markBrandVC = [[MarkBrandsViewController alloc] init];
         [self.vc presentViewController:markBrandVC animated:YES completion:^{
-            markBrandVC.getBrandAndGoodsInfoBlock = ^ (NSString *brandTitle, NSString *goodsTitle) {
+            markBrandVC.getBrandAndGoodsInfoBlock = ^ (NSString *brandTitle, NSString *goodsTitle, NSString *goodsId) {
                 self.brand.text = brandTitle;
                 self.goods.text = goodsTitle;
+                _goodsId = goodsId;
             };
         }];
         
@@ -145,7 +152,13 @@
     
     } else if (textField == self.goods) {
         THNMarkGoodsViewController *markGoodVC = [[THNMarkGoodsViewController alloc] init];
-        [self.vc presentViewController:markGoodVC animated:YES completion:nil];
+        [self.vc presentViewController:markGoodVC animated:YES completion:^{
+            markGoodVC.getUserGoodsInfoBlock = ^(NSString *title, NSString *idx) {
+                self.brand.text = @"";
+                self.goods.text = title;
+                _goodsId = idx;
+            };
+        }];
         
         if ([self.delegate respondsToSelector:@selector(mark_AddGoods)]) {
             [self.delegate mark_AddGoods];
@@ -199,7 +212,7 @@
             self.alpha = 0;
             self.transform = CGAffineTransformMakeScale(0.9, 0.9);
             if (![self.brand.text isEqualToString:@""] || ![self.goods.text isEqualToString:@""]) {
-                self.addBrandInfoDoneBlock(self.brand.text, self.goods.text);
+                self.addBrandInfoDoneBlock(self.brand.text, self.goods.text, _goodsId);
             }
             
         } completion:^(BOOL finished) {
@@ -214,6 +227,9 @@
         [UIView animateWithDuration:0.3 animations:^{
             self.alpha = 0;
             self.transform = CGAffineTransformMakeScale(0.9, 0.9);
+            if (![self.goods.text isEqualToString:@""]) {
+                self.addGoodsInfoDoneBlock(self.goods.text, _goodsId);
+            }
         } completion:^(BOOL finished) {
             self.brand.text = @"";
             self.goods.text = @"";

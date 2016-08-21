@@ -8,14 +8,12 @@
 
 #import "FBPictureViewController.h"
 #import "FBSearchView.h"
-#import "FBMenuView.h"
 #import "THNAddGoodsBtn.h"
 #import <SVProgressHUD/SVProgressHUD.h>
 
-typedef void(^GetBrandAndGoodsInfoBlock)(NSString *brandTitle, NSString *goodsTitle);
+typedef void(^GetBrandAndGoodsInfoBlock)(NSString *brandTitle, NSString *goodsTitle, NSString *goodsId);
 @interface MarkBrandsViewController : FBPictureViewController <
     FBSearchDelegate,
-    FBMenuViewDelegate,
     UITableViewDelegate,
     UITableViewDataSource
 >
