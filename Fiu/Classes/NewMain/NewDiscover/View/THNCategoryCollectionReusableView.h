@@ -21,6 +21,7 @@
 @pro_strong NSMutableArray *rowMarr;            //  分类model
 @pro_strong NSMutableArray *idMarr;             //  分类id
 @pro_strong NSMutableArray *categoryMarr;
+@pro_strong NSMutableArray *categoryTitleMarr;
 @pro_strong GroupHeaderView *headerView;
 
 /**

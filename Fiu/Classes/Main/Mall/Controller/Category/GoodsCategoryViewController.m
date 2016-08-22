@@ -44,7 +44,6 @@ static NSString *const URLGoodsList = @"/scene_product/getlist";
     self.currentpageNum = 0;
     NSInteger index = [self.categoryIdMarr indexOfObject:self.categoryId];
     [self networkGoodsListData:self.idMarr[index] withTagIds:@""];
-
 }
 
 #pragma mark - 网络请求

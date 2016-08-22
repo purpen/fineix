@@ -26,8 +26,9 @@
 @pro_strong UIButton *rightBtn;     //  rightItem
 @pro_strong UIButton *logoImg;      //  Nav中间的Logo
 @pro_strong UIButton *qrBtn;        //  二维码扫描
-@pro_strong UIButton *searchBtn;       //  搜索
+@pro_strong UIButton *searchBtn;    //  搜索
 @pro_strong UITableView *baseTable; //  当前列表
+@pro_strong UIButton *subscribeBtn; //  订阅按钮
 
 /*
  *  在Nav上添加中间的Logo
@@ -59,6 +60,11 @@
  *  在Nav上添加rightItem
  */
 - (void)thn_addBarItemRightBarButton:(NSString *)title image:(NSString *)image;
+
+/**
+ *  订阅按钮
+ */
+- (void)thn_addSubscribeBtn;
 
 /**
  *  添加首次启动操作指示图

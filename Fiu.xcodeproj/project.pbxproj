@@ -488,6 +488,10 @@
 		D80878D31D69FAB400C1FFA0 /* THNCategoryCollectionReusableView.m in Sources */ = {isa = PBXBuildFile; fileRef = D80878D21D69FAB400C1FFA0 /* THNCategoryCollectionReusableView.m */; };
 		D80878D61D6AD18E00C1FFA0 /* THNMallNewGoodsCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D80878D51D6AD18E00C1FFA0 /* THNMallNewGoodsCollectionViewCell.m */; };
 		D80878D91D6AD4C800C1FFA0 /* NewGoodsCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D80878D81D6AD4C800C1FFA0 /* NewGoodsCollectionViewCell.m */; };
+		D80878DC1D6AE2C700C1FFA0 /* THNMallListCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D80878DB1D6AE2C700C1FFA0 /* THNMallListCollectionViewCell.m */; };
+		D80878E21D6AE3DF00C1FFA0 /* MallListGoodsCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D80878E11D6AE3DF00C1FFA0 /* MallListGoodsCollectionViewCell.m */; };
+		D80878E51D6B015100C1FFA0 /* THNCategoryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D80878E41D6B015100C1FFA0 /* THNCategoryViewController.m */; };
+		D80878E81D6B318F00C1FFA0 /* DiscoverCategoryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D80878E71D6B318F00C1FFA0 /* DiscoverCategoryViewController.m */; };
 		D80D415B1CAD1437005D72B1 /* FBNavigationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D80D41591CAD1437005D72B1 /* FBNavigationViewController.m */; };
 		D80D415E1CAD144D005D72B1 /* UIBarButtonItem+Helper.m in Sources */ = {isa = PBXBuildFile; fileRef = D80D415C1CAD144D005D72B1 /* UIBarButtonItem+Helper.m */; };
 		D81281131CAA8532007CF08B /* FBViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D812801C1CAA8532007CF08B /* FBViewController.m */; };
@@ -600,6 +604,7 @@
 		D8AC3E111D2DF9D900148522 /* FBTabBar.m in Sources */ = {isa = PBXBuildFile; fileRef = D8AC3E0C1D2DF9D900148522 /* FBTabBar.m */; };
 		D8AC3E121D2DF9D900148522 /* FBTabBarController.m in Sources */ = {isa = PBXBuildFile; fileRef = D8AC3E0E1D2DF9D900148522 /* FBTabBarController.m */; };
 		D8AC3E131D2DF9D900148522 /* UITabBar+badge.m in Sources */ = {isa = PBXBuildFile; fileRef = D8AC3E101D2DF9D900148522 /* UITabBar+badge.m */; };
+		D8ACF4431D6B46AE00DB79D8 /* FBSegmentView.m in Sources */ = {isa = PBXBuildFile; fileRef = D8ACF4421D6B46AE00DB79D8 /* FBSegmentView.m */; };
 		D8AEC7511CA8E3A000A868B6 /* libsqlite3.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 1F0EE6A41C9FA47B000631F0 /* libsqlite3.tbd */; };
 		D8AEC7521CA8E3AE00A868B6 /* libiconv.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 1F0EE6A21C9FA43C000631F0 /* libiconv.tbd */; };
 		D8AEC7531CA8E3BB00A868B6 /* libstdc++.6.0.9.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 280045201C805CD7005F5C2E /* libstdc++.6.0.9.tbd */; };
@@ -1506,6 +1511,14 @@
 		D80878D51D6AD18E00C1FFA0 /* THNMallNewGoodsCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THNMallNewGoodsCollectionViewCell.m; sourceTree = "<group>"; };
 		D80878D71D6AD4C800C1FFA0 /* NewGoodsCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NewGoodsCollectionViewCell.h; sourceTree = "<group>"; };
 		D80878D81D6AD4C800C1FFA0 /* NewGoodsCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NewGoodsCollectionViewCell.m; sourceTree = "<group>"; };
+		D80878DA1D6AE2C700C1FFA0 /* THNMallListCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THNMallListCollectionViewCell.h; sourceTree = "<group>"; };
+		D80878DB1D6AE2C700C1FFA0 /* THNMallListCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THNMallListCollectionViewCell.m; sourceTree = "<group>"; };
+		D80878E01D6AE3DF00C1FFA0 /* MallListGoodsCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MallListGoodsCollectionViewCell.h; sourceTree = "<group>"; };
+		D80878E11D6AE3DF00C1FFA0 /* MallListGoodsCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MallListGoodsCollectionViewCell.m; sourceTree = "<group>"; };
+		D80878E31D6B015100C1FFA0 /* THNCategoryViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THNCategoryViewController.h; sourceTree = "<group>"; };
+		D80878E41D6B015100C1FFA0 /* THNCategoryViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THNCategoryViewController.m; sourceTree = "<group>"; };
+		D80878E61D6B318F00C1FFA0 /* DiscoverCategoryViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DiscoverCategoryViewController.h; sourceTree = "<group>"; };
+		D80878E71D6B318F00C1FFA0 /* DiscoverCategoryViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DiscoverCategoryViewController.m; sourceTree = "<group>"; };
 		D80D41591CAD1437005D72B1 /* FBNavigationViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FBNavigationViewController.m; sourceTree = "<group>"; };
 		D80D415A1CAD1437005D72B1 /* FBNavigationViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FBNavigationViewController.h; sourceTree = "<group>"; };
 		D80D415C1CAD144D005D72B1 /* UIBarButtonItem+Helper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIBarButtonItem+Helper.m"; sourceTree = "<group>"; };
@@ -1709,6 +1722,8 @@
 		D8AC3E0E1D2DF9D900148522 /* FBTabBarController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FBTabBarController.m; sourceTree = "<group>"; };
 		D8AC3E0F1D2DF9D900148522 /* UITabBar+badge.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UITabBar+badge.h"; sourceTree = "<group>"; };
 		D8AC3E101D2DF9D900148522 /* UITabBar+badge.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UITabBar+badge.m"; sourceTree = "<group>"; };
+		D8ACF4411D6B46AE00DB79D8 /* FBSegmentView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FBSegmentView.h; sourceTree = "<group>"; };
+		D8ACF4421D6B46AE00DB79D8 /* FBSegmentView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FBSegmentView.m; sourceTree = "<group>"; };
 		D8B3555A1D2DFFDA000BA26D /* CategoryMenuView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CategoryMenuView.h; sourceTree = "<group>"; };
 		D8B3555B1D2DFFDA000BA26D /* CategoryMenuView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CategoryMenuView.m; sourceTree = "<group>"; };
 		D8B3555D1D2E002E000BA26D /* CategoryMenuCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CategoryMenuCollectionViewCell.h; sourceTree = "<group>"; };
@@ -4329,6 +4344,8 @@
 			children = (
 				D851744F1D5878F7005F5722 /* THNDiscoverViewController.h */,
 				D85174501D5878F7005F5722 /* THNDiscoverViewController.m */,
+				D80878E61D6B318F00C1FFA0 /* DiscoverCategoryViewController.h */,
+				D80878E71D6B318F00C1FFA0 /* DiscoverCategoryViewController.m */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -4366,6 +4383,8 @@
 			children = (
 				D85174521D587908005F5722 /* THNMallViewController.h */,
 				D85174531D587908005F5722 /* THNMallViewController.m */,
+				D80878E31D6B015100C1FFA0 /* THNCategoryViewController.h */,
+				D80878E41D6B015100C1FFA0 /* THNCategoryViewController.m */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -4384,6 +4403,10 @@
 				D80878D51D6AD18E00C1FFA0 /* THNMallNewGoodsCollectionViewCell.m */,
 				D80878D71D6AD4C800C1FFA0 /* NewGoodsCollectionViewCell.h */,
 				D80878D81D6AD4C800C1FFA0 /* NewGoodsCollectionViewCell.m */,
+				D80878DA1D6AE2C700C1FFA0 /* THNMallListCollectionViewCell.h */,
+				D80878DB1D6AE2C700C1FFA0 /* THNMallListCollectionViewCell.m */,
+				D80878E01D6AE3DF00C1FFA0 /* MallListGoodsCollectionViewCell.h */,
+				D80878E11D6AE3DF00C1FFA0 /* MallListGoodsCollectionViewCell.m */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -4560,6 +4583,8 @@
 		D87B69B91CC726BA00199EFE /* Category */ = {
 			isa = PBXGroup;
 			children = (
+				D8ACF4411D6B46AE00DB79D8 /* FBSegmentView.h */,
+				D8ACF4421D6B46AE00DB79D8 /* FBSegmentView.m */,
 				D8A9ADC71CD9E34600A9FCFB /* FBFootView.h */,
 				D8A9ADC81CD9E34600A9FCFB /* FBFootView.m */,
 				D87B69E01CC7274900199EFE /* FBMenuView.h */,
@@ -5017,6 +5042,7 @@
 				1F2A8FC01CF40277005116C7 /* CommentModelData.m in Sources */,
 				1F2A8F691CF40277005116C7 /* FiuPeopleCounter.m in Sources */,
 				1F2A8F4E1CF40277005116C7 /* PhotoAlbumsTableViewCell.m in Sources */,
+				D80878E21D6AE3DF00C1FFA0 /* MallListGoodsCollectionViewCell.m in Sources */,
 				1F6CA2661D5B324000DFB79E /* THNSignUpViewController.m in Sources */,
 				1FD10C991D5DC644005898EE /* THNTopicsModel.m in Sources */,
 				1FA53F421D69BDEF00EBE59B /* THNSalesViewController.m in Sources */,
@@ -5082,6 +5108,7 @@
 				1F2A8F5B1CF40277005116C7 /* LookAllTagBtnTableViewCell.m in Sources */,
 				D8F1C2B01D3A377900AE717F /* CatagoryFiuSceneModel.m in Sources */,
 				1F2A903F1CF40277005116C7 /* CityTableViewCell.m in Sources */,
+				D8ACF4431D6B46AE00DB79D8 /* FBSegmentView.m in Sources */,
 				D8B355621D2E2DF5000BA26D /* DownSceneInfoView.m in Sources */,
 				1FD10CC21D64850D005898EE /* THNBingViewController.m in Sources */,
 				1F2A907F1CF40277005116C7 /* ExpressInfoModel.m in Sources */,
@@ -5133,6 +5160,7 @@
 				D868091B1D6609ED002714B2 /* THNSearchGoodsTableViewCell.m in Sources */,
 				1F2A900E1CF40277005116C7 /* FriendCollectionViewCell.m in Sources */,
 				1F2A90791CF40277005116C7 /* ReturnViewController.m in Sources */,
+				D80878DC1D6AE2C700C1FFA0 /* THNMallListCollectionViewCell.m in Sources */,
 				D869BD6F1D6036A000432423 /* CommentReplyComment.m in Sources */,
 				1F772B5E1CF3FD910018AE40 /* AppDelegate.mm in Sources */,
 				1F2A90321CF40277005116C7 /* AXModel.m in Sources */,
@@ -5144,6 +5172,7 @@
 				1F2A8F7B1CF40277005116C7 /* HotTagsRow.m in Sources */,
 				1F2A8F6A1CF40277005116C7 /* FiuPeopleData.m in Sources */,
 				1F2A8FBE1CF40277005116C7 /* ChildTagsTag.m in Sources */,
+				D80878E51D6B015100C1FFA0 /* THNCategoryViewController.m in Sources */,
 				1F6CA2881D5C77BF00DFB79E /* THNLoginViewController.m in Sources */,
 				1F2A8F3C1CF40277005116C7 /* AddUrlViewController.m in Sources */,
 				D8707F081D37FA3200007835 /* FBGoodsInfoModelData.m in Sources */,
@@ -5309,6 +5338,7 @@
 				1F2A8F3E1CF40277005116C7 /* FindGoodsModelData.m in Sources */,
 				D8E3AEBA1CFC9B84006E5E8C /* LookSceneViewController.m in Sources */,
 				D8B7952D1CF48B2C0075D985 /* ShareStyleTitleBottomView.m in Sources */,
+				D80878E81D6B318F00C1FFA0 /* DiscoverCategoryViewController.m in Sources */,
 				1FF36EA61D5088FD00EB3C93 /* SearchTF.m in Sources */,
 				D89CFE0F1D070EAB002701B8 /* GoodsTagsTableViewCell.m in Sources */,
 				1F2A90381CF40277005116C7 /* GuidePageViewController.m in Sources */,

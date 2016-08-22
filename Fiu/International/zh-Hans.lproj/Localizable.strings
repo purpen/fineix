@@ -22,6 +22,11 @@
 //  发现
 "discoverSearch" = "搜索情境或用户";
 "newScene" = "最新情境";
+"Subscribe" = "＋订阅";
+
+//  分类
+"fineScene" = "精选";
+"newScene" = "最新";
 
 //  好货
 "mallSearch" = "搜索好货或品牌";

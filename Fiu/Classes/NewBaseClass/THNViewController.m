@@ -29,6 +29,7 @@
 - (void)thn_setNavViewUI {
     [self.view addSubview:self.navView];
     [self.navView addSubview:self.navViewTitle];
+    [self thn_addNavBackBtn];
 }
 
 #pragma mark - 初始化视图控件
@@ -41,11 +42,21 @@
     return _navView;
 }
 
+- (UILabel *)navViewTitle {
+    if (!_navViewTitle) {
+        _navViewTitle = [[UILabel alloc] initWithFrame:CGRectMake(60, 20, SCREEN_WIDTH - 120, 44)];
+        _navViewTitle.textColor = [UIColor whiteColor];
+        _navViewTitle.font = [UIFont systemFontOfSize:17];
+        _navViewTitle.textAlignment = NSTextAlignmentCenter;
+    }
+    return _navViewTitle;
+}
+
 #pragma mark pop返回按钮
 - (UIButton *)navBackBtn {
     if (!_navBackBtn) {
         _navBackBtn = [[UIButton alloc] initWithFrame:CGRectMake(0, 20, 44, 44)];
-        [_navBackBtn setImage:[UIImage imageNamed:@"icon_back"] forState:(UIControlStateNormal)];
+        [_navBackBtn setImage:[UIImage imageNamed:@"icon_back_white"] forState:(UIControlStateNormal)];
         [_navBackBtn addTarget:self action:@selector(popViewController) forControlEvents:(UIControlEventTouchUpInside)];
     }
     return _navBackBtn;
@@ -139,6 +150,21 @@
     [SVProgressHUD showSuccessWithStatus:@"去搜索"];
 }
 
+#pragma mark - 订阅
+- (UIButton *)subscribeBtn {
+    if (!_subscribeBtn) {
+        _subscribeBtn = [[UIButton alloc] initWithFrame:CGRectMake(SCREEN_WIDTH - 70, 30, 60, 24)];
+        _subscribeBtn.layer.cornerRadius = 4.0f;
+        _subscribeBtn.layer.borderWidth = 0.5f;
+        _subscribeBtn.layer.borderColor = [UIColor whiteColor].CGColor;
+        _subscribeBtn.layer.masksToBounds = YES;
+        [_subscribeBtn setTitle:NSLocalizedString(@"Subscribe", nil) forState:(UIControlStateNormal)];
+        [_subscribeBtn setTitleColor:[UIColor whiteColor] forState:(UIControlStateNormal)];
+        _subscribeBtn.titleLabel.font = [UIFont systemFontOfSize:12];
+    }
+    return _subscribeBtn;
+}
+
 #pragma mark - 加载控件
 - (void)thn_addNavLogoImage {
     [self.navView addSubview:self.logoImg];
@@ -146,6 +172,10 @@
 
 - (void)thn_addQRBtn {
     [self.navView addSubview:self.qrBtn];
+}
+
+- (void)thn_addSubscribeBtn {
+    [self.navView addSubview:self.subscribeBtn];
 }
 
 - (void)thn_addSearchBtnText:(NSString *)title type:(NSInteger)type {
@@ -196,7 +226,9 @@
 }
 
 - (void)thn_addNavBackBtn {
-    
+    if ([self.navigationController viewControllers].count > 1) {
+        [self.navView addSubview:self.navBackBtn];
+    }
 }
 
 - (void)thn_showMessage:(NSString *)message {

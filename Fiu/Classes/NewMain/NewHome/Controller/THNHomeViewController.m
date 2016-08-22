@@ -133,7 +133,7 @@ static NSString *const twoCommentsCellId = @"TwoCommentsCellId";
 
 #pragma mark 情景列表
 - (void)thn_networkSceneListData {
-    self.sceneListRequest = [FBAPI getWithUrlString:URLSceneList requestDictionary:@{@"page":@(self.currentpageNum + 1), @"size":@10, @"sort":@"2"} delegate:self];
+    self.sceneListRequest = [FBAPI getWithUrlString:URLSceneList requestDictionary:@{@"page":@(self.currentpageNum + 1), @"size":@10, @"sort":@"0"} delegate:self];
     [self.sceneListRequest startRequestSuccess:^(FBRequest *request, id result) {
         NSArray *sceneArr = [[result valueForKey:@"data"] valueForKey:@"rows"];
         for (NSDictionary * sceneDic in sceneArr) {
@@ -496,6 +496,7 @@ static NSString *const twoCommentsCellId = @"TwoCommentsCellId";
     self.view.backgroundColor = [UIColor whiteColor];
     self.delegate = self;
     self.baseTable = self.homeTable;
+    self.navViewTitle.hidden = YES;
     [self thn_addNavLogoImage];
     [self thn_addBarItemLeftBarButton:@"" image:@"shouye_search"];
     [self thn_addBarItemRightBarButton:@"" image:@"shouye_dingyue"];

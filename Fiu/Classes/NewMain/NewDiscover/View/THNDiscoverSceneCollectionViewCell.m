@@ -36,10 +36,10 @@
         self.title.hidden = NO;
         self.suTitle.hidden = NO;
         
-        NSString *titleStr = [NSString stringWithFormat:@"    %@  ", [sceneModel.title substringToIndex:10]];
+        NSString *titleStr = [NSString stringWithFormat:@"   %@  ", [sceneModel.title substringToIndex:10]];
         self.title.text = titleStr;
         
-        NSString *suTitleStr = [NSString stringWithFormat:@"    %@  ", [sceneModel.title substringFromIndex:10]];
+        NSString *suTitleStr = [NSString stringWithFormat:@"   %@  ", [sceneModel.title substringFromIndex:10]];
         self.suTitle.text = suTitleStr;
         
         [self.suTitle mas_updateConstraints:^(MASConstraintMaker *make) {
@@ -48,20 +48,22 @@
         
         [self.title mas_updateConstraints:^(MASConstraintMaker *make) {
             make.width.equalTo(@([self getTextSizeWidth:titleStr].width));
-            make.bottom.equalTo(self.mas_bottom).with.offset(-70);
+            make.bottom.equalTo(_image.mas_bottom).with.offset(-33);
         }];
         
     } else if (sceneModel.title.length <= 10) {
         self.suTitle.hidden = YES;
         self.title.hidden = NO;
         
-        NSString *titleStr = [NSString stringWithFormat:@"    %@  ", sceneModel.title];
+        NSString *titleStr = [NSString stringWithFormat:@"   %@  ", sceneModel.title];
         self.title.text = titleStr;
         [self.title mas_updateConstraints:^(MASConstraintMaker *make) {
             make.width.equalTo(@([self getTextSizeWidth:titleStr].width));
+            make.bottom.equalTo(_image.mas_bottom).with.offset(-5);
         }];
     }
 }
+
 - (CGSize)getTextSizeWidth:(NSString *)text {
     NSDictionary *attribute = @{NSFontAttributeName: [UIFont systemFontOfSize:12]};
     
@@ -87,20 +89,21 @@
     [_suTitle mas_makeConstraints:^(MASConstraintMaker *make) {
         make.size.mas_equalTo(CGSizeMake(50, 25));
         make.left.equalTo(self.mas_left).with.offset(0);
-        make.bottom.equalTo(self.mas_bottom).with.offset(-40);
+        make.bottom.equalTo(_image.mas_bottom).with.offset(-5);
     }];
     
     [self addSubview:self.title];
     [_title mas_makeConstraints:^(MASConstraintMaker *make) {
         make.size.mas_equalTo(CGSizeMake(50, 25));
         make.left.equalTo(self.mas_left).with.offset(0);
-        make.bottom.equalTo(self.mas_bottom).with.offset(-40);
+        make.bottom.equalTo(_image.mas_bottom).with.offset(-5);
     }];
     
     [self addSubview:self.userInfo];
     [_userInfo mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.size.mas_equalTo(CGSizeMake(self.bounds.size.width, 35));
+        make.width.equalTo(@(self.bounds.size.width));
         make.left.bottom.equalTo(self).with.offset(0);
+        make.top.equalTo(_image.mas_bottom).with.offset(0);
     }];
     
     [self addSubview:self.userHeader];
@@ -130,6 +133,8 @@
     if (!_image) {
         _image = [[UIImageView alloc] init];
         _image.backgroundColor = [UIColor colorWithHexString:@"#F8F8F8"];
+        _image.contentMode = UIViewContentModeScaleAspectFill;
+        _image.clipsToBounds = YES;
     }
     return _image;
 }

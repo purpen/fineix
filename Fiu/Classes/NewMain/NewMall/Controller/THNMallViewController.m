@@ -9,10 +9,12 @@
 #import "THNMallViewController.h"
 #import "THNCategoryCollectionReusableView.h"
 #import "THNMallNewGoodsCollectionViewCell.h"
+#import "THNMallListCollectionViewCell.h"
 #import "GoodsRow.h"
 
 static NSString *const URLMallList = @"/scene_product/getlist";
 static NSString *const URLCategory = @"/category/getlist";
+static NSString *const URLMallSubject = @"/scene_subject/getlist";
 
 static NSString *const DiscoverCellId = @"discoverCellId";
 static NSString *const MallListCellId = @"mallListCellId";
@@ -32,6 +34,7 @@ static NSString *const MallListHeaderCellViewId = @"mallListHeaderCellViewId";
 
     [self networkCategoryData];
     [self thn_networkNewGoodsListData];
+    [self thn_networkSubjectListData];
     [self thn_setMallViewUI];
 }
 
@@ -52,12 +55,31 @@ static NSString *const MallListHeaderCellViewId = @"mallListHeaderCellViewId";
     self.mallListRequest = [FBAPI getWithUrlString:URLMallList requestDictionary:@{@"page":@"1", @"size":@"8", @"sort":@"0", @"kind":@"1"} delegate:self];
     [self.mallListRequest startRequestSuccess:^(FBRequest *request, id result) {
         NSArray *goodsArr = [[result valueForKey:@"data"] valueForKey:@"rows"];
+        NSLog(@"＝＝＝＝＝＝＝＝＝＝＝＝ %@", goodsArr);
         for (NSDictionary * goodsDic in goodsArr) {
             GoodsRow *goodsModel = [[GoodsRow alloc] initWithDictionary:goodsDic];
             [self.goodsDataMarr addObject:goodsModel];
         }
     
         [self.mallList reloadData];
+        
+    } failure:^(FBRequest *request, NSError *error) {
+        [SVProgressHUD showErrorWithStatus:[error localizedDescription]];
+    }];
+}
+
+#pragma mark 商品专题列表
+- (void)thn_networkSubjectListData {
+    self.subjectRequest = [FBAPI getWithUrlString:URLMallSubject requestDictionary:@{@"page":@"1", @"size":@"8", @"sort":@"2", @"type":@"5"} delegate:self];
+    [self.subjectRequest startRequestSuccess:^(FBRequest *request, id result) {
+        NSLog(@"-------------------- %@", result);
+//        NSArray *goodsArr = [[result valueForKey:@"data"] valueForKey:@"rows"];
+//        for (NSDictionary * goodsDic in goodsArr) {
+//            GoodsRow *goodsModel = [[GoodsRow alloc] initWithDictionary:goodsDic];
+//            [self.goodsDataMarr addObject:goodsModel];
+//        }
+//        
+//        [self.mallList reloadData];
         
     } failure:^(FBRequest *request, NSError *error) {
         [SVProgressHUD showErrorWithStatus:[error localizedDescription]];
@@ -83,7 +105,7 @@ static NSString *const MallListHeaderCellViewId = @"mallListHeaderCellViewId";
         _mallList.delegate = self;
         _mallList.dataSource = self;
         _mallList.backgroundColor = [UIColor whiteColor];
-        [_mallList registerClass:[UICollectionViewCell class] forCellWithReuseIdentifier:MallListCellId];
+        [_mallList registerClass:[THNMallListCollectionViewCell class] forCellWithReuseIdentifier:MallListCellId];
         [_mallList registerClass:[THNMallNewGoodsCollectionViewCell class] forCellWithReuseIdentifier:NewGoodsListCellId];
         [_mallList registerClass:[THNCategoryCollectionReusableView class] forSupplementaryViewOfKind:UICollectionElementKindSectionHeader
               withReuseIdentifier:MallListHeaderCellViewId];
@@ -94,12 +116,12 @@ static NSString *const MallListHeaderCellViewId = @"mallListHeaderCellViewId";
 
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
 //    return self.mallListMarr.count;
-    return 10;
+    return 5;
 }
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
     if (indexPath.row == 0) {
-        THNMallNewGoodsCollectionViewCell * cell = [collectionView dequeueReusableCellWithReuseIdentifier:NewGoodsListCellId
+        THNMallNewGoodsCollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:NewGoodsListCellId
                                                                                 forIndexPath:indexPath];
         if (self.goodsDataMarr.count) {
             [cell setNewGoodsData:self.goodsDataMarr];
@@ -107,11 +129,17 @@ static NSString *const MallListHeaderCellViewId = @"mallListHeaderCellViewId";
         return cell;
         
     } else {
-        UICollectionViewCell * cell = [collectionView dequeueReusableCellWithReuseIdentifier:MallListCellId
+        THNMallListCollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:MallListCellId
                                                                                 forIndexPath:indexPath];
-        cell.backgroundColor = [UIColor colorWithHexString:@"#F8F8F8"];
         return cell;
     }
+}
+
+- (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath {
+    if (indexPath.row == 0) {
+        return CGSizeMake(SCREEN_WIDTH, 190);
+    } else
+        return CGSizeMake(SCREEN_WIDTH, 366);
 }
 
 - (UICollectionReusableView *)collectionView:(UICollectionView *)collectionView
@@ -124,6 +152,7 @@ static NSString *const MallListHeaderCellViewId = @"mallListHeaderCellViewId";
     if (self.categoryMarr.count) {
         [headerView setCategoryData:self.categoryMarr type:1];
     }
+    headerView.nav = self.navigationController;
     return headerView;
 }
 
@@ -137,6 +166,7 @@ static NSString *const MallListHeaderCellViewId = @"mallListHeaderCellViewId";
     self.view.backgroundColor = [UIColor whiteColor];
     [[UIApplication sharedApplication] setStatusBarHidden:NO];
     self.delegate = self;
+    self.navViewTitle.hidden = YES;
     [self thn_addSearchBtnText:NSLocalizedString(@"mallSearch", nil) type:2];
     [self thn_addBarItemLeftBarButton:@"" image:@"mall_saoma"];
     [self thn_addBarItemRightBarButton:@"" image:@"mall_car"];
