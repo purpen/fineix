@@ -31,8 +31,7 @@
     self.title.text = model.title;
     [self.peopleNum setTitle:[NSString stringWithFormat:@"%zi人参加", model.attendCount] forState:(UIControlStateNormal)];
     
-    NSArray *typeImageArr = @[@"icon_theme_paper", @"icon_theme_action", @"icon_theme_cuxiao", @"icon_theme_newgoods"];
-    self.typeImage.image = [UIImage imageNamed:typeImageArr[model.type - 1]];
+    self.typeImage.image = [UIImage imageNamed:[NSString stringWithFormat:@"icon_theme_%zi",model.type]];
 }
 
 #pragma mark - setUI

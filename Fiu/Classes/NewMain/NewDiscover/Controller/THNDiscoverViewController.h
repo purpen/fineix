@@ -25,5 +25,6 @@
 @pro_strong NSMutableArray *sceneIdMarr;
 @pro_strong NSMutableArray *userIdMarr;
 @pro_strong UICollectionView *sceneList;
+@pro_strong NSMutableArray *categoryMarr;
 
 @end

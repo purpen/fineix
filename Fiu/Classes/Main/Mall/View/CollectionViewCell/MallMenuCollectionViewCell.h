@@ -15,6 +15,7 @@
 
 @pro_strong UIImageView         *   menuImg;    //  导航图
 @pro_strong UILabel             *   menuTitle;  //  导航标题
+@pro_strong UILabel             *   botLine;
 
 - (void)setCategoryData:(CategoryRow *)model;
 

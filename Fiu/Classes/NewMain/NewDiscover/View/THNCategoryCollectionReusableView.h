@@ -23,6 +23,10 @@
 @pro_strong NSMutableArray *categoryMarr;
 @pro_strong GroupHeaderView *headerView;
 
-- (void)setCategoryData:(NSMutableArray *)category;
+/**
+ *  type
+ *  0:发现页   1:商品页
+ */
+- (void)setCategoryData:(NSMutableArray *)category type:(NSInteger)type;
 
 @end

@@ -20,8 +20,6 @@ static NSString *const SceneListHeaderCellViewId = @"sceneListHeaderViewId";
 
 @interface THNDiscoverViewController ()
 
-@pro_strong NSMutableArray *categoryMarr;
-
 @end
 
 @implementation THNDiscoverViewController
@@ -183,7 +181,7 @@ static NSString *const SceneListHeaderCellViewId = @"sceneListHeaderViewId";
                                                                                        withReuseIdentifier:SceneListHeaderCellViewId
                                                                                               forIndexPath:indexPath];
     if (self.categoryMarr.count) {
-        [headerView setCategoryData:self.categoryMarr];
+        [headerView setCategoryData:self.categoryMarr type:0];
     }
     return headerView;
 }
