@@ -9,6 +9,7 @@
 #import "THNCuXiaoDetalContentTableViewCell.h"
 #import "THNProductModel.h"
 #import <UIImageView+WebCache.h>
+#import "FBGoodsInfoViewController.h"
 
 @interface THNCuXiaoDetalContentTableViewCell ()
 
@@ -32,8 +33,14 @@
     self.summaryLabel.text = model.summary;
     [self.goodsImageView sd_setImageWithURL:[NSURL URLWithString:model.banner_url] placeholderImage:[UIImage imageNamed:@"Defaul_Bg_420"]];
     self.goodsTitleLabel.text = model.title;
-    self.marketPriceLabel.text = model.market_price;
-    self.salePriceLabel.text = model.sale_price;
+    self.marketPriceLabel.text = [NSString stringWithFormat:@"￥%@",model.market_price];
+    self.salePriceLabel.text = [NSString stringWithFormat:@"￥%@",model.sale_price];
+}
+
+- (IBAction)buy:(id)sender {
+    FBGoodsInfoViewController *vc = [[FBGoodsInfoViewController alloc] init];
+    vc.goodsID = self.model._id;
+    [self.navi pushViewController:vc animated:YES];
 }
 
 @end

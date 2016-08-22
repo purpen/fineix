@@ -70,6 +70,13 @@
                                 <action selector="comment:" destination="-1" eventType="touchUpInside" id="Sbk-QE-rVT"/>
                             </connections>
                         </button>
+                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="BLT-G9-XzI">
+                            <rect key="frame" x="0.0" y="0.0" width="375" height="1"/>
+                            <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.29999999999999999" colorSpace="calibratedRGB"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="1" id="1i0-60-fUW"/>
+                            </constraints>
+                        </view>
                     </subviews>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     <constraints>
@@ -77,14 +84,23 @@
                         <constraint firstAttribute="height" constant="50" id="MfO-FK-S4P"/>
                         <constraint firstItem="55D-1l-9wS" firstAttribute="centerY" secondItem="c3K-4o-R5Y" secondAttribute="centerY" id="VEy-QW-TWL"/>
                         <constraint firstItem="55D-1l-9wS" firstAttribute="leading" secondItem="c3K-4o-R5Y" secondAttribute="leading" constant="10" id="ef7-wN-MVA"/>
+                        <constraint firstAttribute="trailing" secondItem="BLT-G9-XzI" secondAttribute="trailing" id="gUF-c5-3dX"/>
                         <constraint firstAttribute="trailing" secondItem="a9p-oQ-5cM" secondAttribute="trailing" constant="10" id="jnO-SM-oet"/>
                         <constraint firstItem="feA-N6-CpA" firstAttribute="centerY" secondItem="c3K-4o-R5Y" secondAttribute="centerY" id="kcI-QG-tsj"/>
+                        <constraint firstItem="BLT-G9-XzI" firstAttribute="leading" secondItem="c3K-4o-R5Y" secondAttribute="leading" id="l1w-he-ChS"/>
+                        <constraint firstAttribute="bottom" secondItem="BLT-G9-XzI" secondAttribute="bottom" id="qyD-iq-EtA"/>
+                        <constraint firstItem="BLT-G9-XzI" firstAttribute="top" secondItem="c3K-4o-R5Y" secondAttribute="top" id="vKZ-N5-fo1"/>
                         <constraint firstItem="a9p-oQ-5cM" firstAttribute="leading" secondItem="feA-N6-CpA" secondAttribute="trailing" constant="25" id="z2c-43-fiQ"/>
                     </constraints>
+                    <variation key="default">
+                        <mask key="constraints">
+                            <exclude reference="qyD-iq-EtA"/>
+                        </mask>
+                    </variation>
                 </view>
                 <webView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="62W-BJ-E9M">
                     <rect key="frame" x="0.0" y="64" width="375" height="553"/>
-                    <color key="backgroundColor" red="0.36078431370000003" green="0.38823529410000002" blue="0.4039215686" alpha="1" colorSpace="deviceRGB"/>
+                    <color key="backgroundColor" red="0.36078431370000003" green="0.38823529410000002" blue="0.4039215686" alpha="0.10000000000000001" colorSpace="deviceRGB"/>
                 </webView>
             </subviews>
             <color key="backgroundColor" red="0.97254901960784312" green="0.97254901960784312" blue="0.97254901960784312" alpha="1" colorSpace="calibratedRGB"/>

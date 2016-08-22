@@ -12,7 +12,10 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="bBw-g0-FAY">
-                    <rect key="frame" x="0.0" y="0.0" width="343" height="294"/>
+                    <rect key="frame" x="0.0" y="0.0" width="343" height="211"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="211" id="6nb-9L-i37"/>
+                    </constraints>
                 </imageView>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9ZZ-vy-A58">
                     <rect key="frame" x="152" y="138" width="38" height="18"/>
@@ -20,20 +23,36 @@
                     <color key="textColor" white="1" alpha="0.90000000000000002" colorSpace="calibratedWhite"/>
                     <nil key="highlightedColor"/>
                 </label>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Zhz-b2-g6e">
+                    <rect key="frame" x="10" y="221" width="323" height="63"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="0.59999999999999998" colorSpace="calibratedRGB"/>
+                    <nil key="highlightedColor"/>
+                </label>
             </subviews>
-            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+            <color key="backgroundColor" red="0.97254901959999995" green="0.97254901959999995" blue="0.97254901959999995" alpha="1" colorSpace="calibratedRGB"/>
             <constraints>
+                <constraint firstAttribute="trailing" secondItem="Zhz-b2-g6e" secondAttribute="trailing" constant="10" id="G3f-NI-6vh"/>
+                <constraint firstItem="Zhz-b2-g6e" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="10" id="Kf7-51-die"/>
+                <constraint firstAttribute="bottom" secondItem="Zhz-b2-g6e" secondAttribute="bottom" constant="10" id="Mfm-SD-3aJ"/>
                 <constraint firstItem="bBw-g0-FAY" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="WHa-bW-Azh"/>
                 <constraint firstItem="9ZZ-vy-A58" firstAttribute="centerY" secondItem="iN0-l3-epB" secondAttribute="centerY" id="cFA-8t-qbX"/>
                 <constraint firstItem="9ZZ-vy-A58" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="gnl-uz-QJq"/>
                 <constraint firstItem="bBw-g0-FAY" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="ir4-pp-GsW"/>
+                <constraint firstItem="Zhz-b2-g6e" firstAttribute="top" secondItem="bBw-g0-FAY" secondAttribute="bottom" constant="10" id="mBF-B2-bNs"/>
                 <constraint firstAttribute="trailing" secondItem="bBw-g0-FAY" secondAttribute="trailing" id="pc7-GN-DH9"/>
                 <constraint firstAttribute="bottom" secondItem="bBw-g0-FAY" secondAttribute="bottom" id="uQp-qf-glX"/>
             </constraints>
             <nil key="simulatedStatusBarMetrics"/>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <variation key="default">
+                <mask key="constraints">
+                    <exclude reference="uQp-qf-glX"/>
+                </mask>
+            </variation>
             <connections>
                 <outlet property="bgImageView" destination="bBw-g0-FAY" id="ury-qI-KXi"/>
+                <outlet property="summaryLabel" destination="Zhz-b2-g6e" id="sel-fC-AlG"/>
                 <outlet property="textLabel" destination="9ZZ-vy-A58" id="zSf-eA-NDB"/>
             </connections>
             <point key="canvasLocation" x="128.5" y="598"/>
