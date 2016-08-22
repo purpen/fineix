@@ -27,7 +27,7 @@ static NSString *const collectionViewCellId = @"CollectionViewCellId";
     [self addSubview:self.menuView];
     [_menuView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.size.mas_equalTo(CGSizeMake(SCREEN_WIDTH, 180));
-        make.left.top.equalTo(self).with.offset(10);
+        make.left.top.equalTo(self).with.offset(0);
     }];
     
     [self addSubview:self.headerView];
@@ -40,17 +40,26 @@ static NSString *const collectionViewCellId = @"CollectionViewCellId";
 - (GroupHeaderView *)headerView {
     if (!_headerView) {
         _headerView = [[GroupHeaderView alloc] init];
-        [_headerView addGroupHeaderViewIcon:@"discover_newScene"
-                                      withTitle:NSLocalizedString(@"newScene", nil)
-                                   withSubtitle:@""
-                                  withRightMore:@""
-                                   withMoreType:0];
     }
     return _headerView;
 }
 
 #pragma mark -
-- (void)setCategoryData:(NSMutableArray *)category {
+- (void)setCategoryData:(NSMutableArray *)category type:(NSInteger)type {
+    if (type == 0) {
+        [self.headerView addGroupHeaderViewIcon:@"discover_newScene"
+                                  withTitle:NSLocalizedString(@"newScene", nil)
+                               withSubtitle:@""
+                              withRightMore:@""
+                               withMoreType:0];
+    } else if (type == 1) {
+        [self.headerView addGroupHeaderViewIcon:@"mall_newGoods"
+                                  withTitle:NSLocalizedString(@"newGoods", nil)
+                               withSubtitle:@""
+                              withRightMore:@""
+                               withMoreType:0];
+    }
+    
     [self.categoryMarr removeAllObjects];
     [self.categoryIdMarr removeAllObjects];
     
@@ -69,7 +78,7 @@ static NSString *const collectionViewCellId = @"CollectionViewCellId";
         flowLayout.itemSize = CGSizeMake((SCREEN_WIDTH - 70)/5, (SCREEN_WIDTH - 70)/5);
         flowLayout.minimumLineSpacing = 20.0f;
         flowLayout.minimumInteritemSpacing = 10.0f;
-        flowLayout.sectionInset = UIEdgeInsetsMake(5, 0, 0, 0);
+        flowLayout.sectionInset = UIEdgeInsetsMake(10, 15, 10, 15);
         [flowLayout setScrollDirection:(UICollectionViewScrollDirectionVertical)];
         
         _menuView = [[UICollectionView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 140) collectionViewLayout:flowLayout];

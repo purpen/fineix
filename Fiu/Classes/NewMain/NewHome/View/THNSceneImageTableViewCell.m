@@ -34,7 +34,9 @@
 - (void)thn_setSceneImageData:(HomeSceneListRow *)sceneModel {
      self.tagDataMarr = [NSMutableArray arrayWithArray:sceneModel.product];
      self.goodsIds = [NSMutableArray arrayWithArray:[sceneModel.product valueForKey:@"idField"]];
-    [self setUserTagBtn];
+    if (self.tagDataMarr.count) {
+        [self setUserTagBtn];
+    }
     
     [self.sceneImage sd_setImageWithURL:[NSURL URLWithString:sceneModel.coverUrl]
                                forState:(UIControlStateNormal)

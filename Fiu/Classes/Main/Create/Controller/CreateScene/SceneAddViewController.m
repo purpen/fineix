@@ -257,7 +257,7 @@ static NSString *const URLUserAddGoods = @"/scene_product/add";
 
 #pragma mark - 标记一个产品图片
 - (void)addMarkGoodsImg:(NSString *)imgUrl withImgW:(CGFloat)imgW withImgH:(CGFloat)imgH {
-    FBStickersContainer * sticker = [[FBStickersContainer alloc] initWithFrame:CGRectMake(100, 100, imgW/5, imgH/5)];
+    FBStickersContainer * sticker = [[FBStickersContainer alloc] initWithFrame:CGRectMake(100, 100, imgW/4, imgH/4)];
     [sticker setupSticker:imgUrl];
     sticker.delegate = self;
     [self.filtersImageView addSubview:sticker];
@@ -388,6 +388,7 @@ static NSString *const URLUserAddGoods = @"/scene_product/add";
     
             ReleaseViewController * releaseVC = [[ReleaseViewController alloc] init];
             releaseVC.bgImg = [self generateImage:self.filtersImageView];
+//            releaseVC.bgImg = self.filtersImageView.image;
             releaseVC.goodsTitle = self.goodsTitleData;
             releaseVC.goodsId = self.goodsIdData;
             releaseVC.goodsX = originX;
@@ -421,11 +422,12 @@ static NSString *const URLUserAddGoods = @"/scene_product/add";
     UIGraphicsBeginImageContextWithOptions(size, NO, [UIScreen mainScreen].scale);
     CGContextRef context = UIGraphicsGetCurrentContext();
     CGContextSaveGState(context);
-    CGAffineTransform flip = CGAffineTransformMakeScale(1.0, - 1.0);
+    CGAffineTransform flip = CGAffineTransformMakeScale(1.0, -1.0);
     CGAffineTransform flipThenShift = CGAffineTransformTranslate(flip, 0, -size.height);
     CGContextConcatCTM(context, flipThenShift);
     CGContextDrawImage(context, imageView.bounds, imageView.image.CGImage);
     CGContextRestoreGState(context);
+    
     for (FBStickersContainer * container in self.stickersContainer) {
         CGContextSaveGState(context);
         FBSticker * sticker = [container generateSticker];

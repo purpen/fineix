@@ -12,12 +12,17 @@
 
 @interface THNMallViewController : THNViewController <
     THNNavigationBarItemsDelegate,
-    UITableViewDelegate,
-    UITableViewDataSource
+    UICollectionViewDelegate,
+    UICollectionViewDataSource,
+    UICollectionViewDelegateFlowLayout
 >
 
-@pro_strong UITableView *mallTable;
-@pro_strong GroupHeaderView *headerView;
-@pro_strong FBCategoryView *categoryView;
+@pro_strong FBRequest *categoryRequest;
+@pro_strong FBRequest *mallListRequest;
+@pro_assign NSInteger currentpageNum;
+@pro_assign NSInteger totalPageNum;
+@pro_strong UICollectionView *mallList;
+@pro_strong NSMutableArray *categoryMarr;
+@pro_strong NSMutableArray *goodsDataMarr;
 
 @end

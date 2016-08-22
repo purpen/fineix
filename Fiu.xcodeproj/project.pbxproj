@@ -459,6 +459,8 @@
 		D8035F3B1CB784B3001920F9 /* UILable+Frame.m in Sources */ = {isa = PBXBuildFile; fileRef = D8035F3A1CB784B3001920F9 /* UILable+Frame.m */; };
 		D80878D01D69CAD700C1FFA0 /* THNDiscoverSceneCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D80878CF1D69CAD700C1FFA0 /* THNDiscoverSceneCollectionViewCell.m */; };
 		D80878D31D69FAB400C1FFA0 /* THNCategoryCollectionReusableView.m in Sources */ = {isa = PBXBuildFile; fileRef = D80878D21D69FAB400C1FFA0 /* THNCategoryCollectionReusableView.m */; };
+		D80878D61D6AD18E00C1FFA0 /* THNMallNewGoodsCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D80878D51D6AD18E00C1FFA0 /* THNMallNewGoodsCollectionViewCell.m */; };
+		D80878D91D6AD4C800C1FFA0 /* NewGoodsCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D80878D81D6AD4C800C1FFA0 /* NewGoodsCollectionViewCell.m */; };
 		D80D415B1CAD1437005D72B1 /* FBNavigationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D80D41591CAD1437005D72B1 /* FBNavigationViewController.m */; };
 		D80D415E1CAD144D005D72B1 /* UIBarButtonItem+Helper.m in Sources */ = {isa = PBXBuildFile; fileRef = D80D415C1CAD144D005D72B1 /* UIBarButtonItem+Helper.m */; };
 		D81281131CAA8532007CF08B /* FBViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D812801C1CAA8532007CF08B /* FBViewController.m */; };
@@ -1431,6 +1433,10 @@
 		D80878CF1D69CAD700C1FFA0 /* THNDiscoverSceneCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THNDiscoverSceneCollectionViewCell.m; sourceTree = "<group>"; };
 		D80878D11D69FAB400C1FFA0 /* THNCategoryCollectionReusableView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THNCategoryCollectionReusableView.h; sourceTree = "<group>"; };
 		D80878D21D69FAB400C1FFA0 /* THNCategoryCollectionReusableView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THNCategoryCollectionReusableView.m; sourceTree = "<group>"; };
+		D80878D41D6AD18E00C1FFA0 /* THNMallNewGoodsCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THNMallNewGoodsCollectionViewCell.h; sourceTree = "<group>"; };
+		D80878D51D6AD18E00C1FFA0 /* THNMallNewGoodsCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THNMallNewGoodsCollectionViewCell.m; sourceTree = "<group>"; };
+		D80878D71D6AD4C800C1FFA0 /* NewGoodsCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NewGoodsCollectionViewCell.h; sourceTree = "<group>"; };
+		D80878D81D6AD4C800C1FFA0 /* NewGoodsCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NewGoodsCollectionViewCell.m; sourceTree = "<group>"; };
 		D80D41591CAD1437005D72B1 /* FBNavigationViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FBNavigationViewController.m; sourceTree = "<group>"; };
 		D80D415A1CAD1437005D72B1 /* FBNavigationViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FBNavigationViewController.h; sourceTree = "<group>"; };
 		D80D415C1CAD144D005D72B1 /* UIBarButtonItem+Helper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIBarButtonItem+Helper.m"; sourceTree = "<group>"; };
@@ -4263,6 +4269,10 @@
 		D851744A1D5878C8005F5722 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				D80878D41D6AD18E00C1FFA0 /* THNMallNewGoodsCollectionViewCell.h */,
+				D80878D51D6AD18E00C1FFA0 /* THNMallNewGoodsCollectionViewCell.m */,
+				D80878D71D6AD4C800C1FFA0 /* NewGoodsCollectionViewCell.h */,
+				D80878D81D6AD4C800C1FFA0 /* NewGoodsCollectionViewCell.m */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -4812,6 +4822,7 @@
 				D81281581CAA8532007CF08B /* UIColor+Extension.m in Sources */,
 				1F2A8FA21CF40277005116C7 /* DataNumTableViewCell.m in Sources */,
 				D85174661D598D47005F5722 /* THNDataInfoTableViewCell.m in Sources */,
+				D80878D61D6AD18E00C1FFA0 /* THNMallNewGoodsCollectionViewCell.m in Sources */,
 				D85174631D598D36005F5722 /* THNSceneImageTableViewCell.m in Sources */,
 				1F2A8F6C1CF40277005116C7 /* FiuPeopleUser.m in Sources */,
 				D8E3AEBB1CFC9B84006E5E8C /* ReleaseViewController.m in Sources */,
@@ -5195,6 +5206,7 @@
 				1F2A900C1CF40277005116C7 /* FindeFriendTableViewCell.m in Sources */,
 				D8F1C2B31D3BED3F00AE717F /* EditChooseTagsViewController.m in Sources */,
 				1F2A90651CF40277005116C7 /* SystemNoticeModel.m in Sources */,
+				D80878D91D6AD4C800C1FFA0 /* NewGoodsCollectionViewCell.m in Sources */,
 				D8BE89DB1D33419000DE5029 /* FBBrandGoodsCollectionViewCell.m in Sources */,
 				1FF36EA01D4F401600EB3C93 /* JDPayModel.m in Sources */,
 				1F2A8FBF1CF40277005116C7 /* CommentModel.m in Sources */,
