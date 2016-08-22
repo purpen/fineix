@@ -16,5 +16,7 @@
 @property (nonatomic, strong) SearchTF *searchTF;
 /**  */
 @property (nonatomic, strong) UIButton *cancelBtn;
+/**  */
+@property (nonatomic, strong) UIView *topView;
 
 @end

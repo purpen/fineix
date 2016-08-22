@@ -120,7 +120,7 @@ static NSString *const twoCommentsCellId = @"TwoCommentsCellId";
             FBSubjectModelRow *subModel = [[FBSubjectModelRow alloc] initWithDictionary:subDic];
             [self.subjectMarr addObject:subModel];
         }
-        
+    
         if (self.sceneListMarr.count) {
             NSIndexSet *indexSet = [[NSIndexSet alloc] initWithIndex:0];
             [self.homeTable reloadSections:indexSet withRowAnimation:UITableViewRowAnimationAutomatic];
