@@ -12,6 +12,8 @@
 #import "UIView+FSExtension.h"
 #import <UIImageView+WebCache.h>
 #import "THNActiveRuleViewController.h"
+#import "THNAttendSenceViewController.h"
+#import "THNActiveResultViewController.h"
 
 @interface THNActiveDetalViewController ()<UIScrollViewDelegate>
 
@@ -187,16 +189,19 @@
 - (void)setupChildVces
 {
     
-    THNActiveRuleViewController *article = [[THNActiveRuleViewController alloc] init];
-    article.title = @"活动规则";
-    [self addChildViewController:article];
+    THNActiveRuleViewController *activeRule = [[THNActiveRuleViewController alloc] init];
+    activeRule.title = @"活动规则";
+    activeRule.id = self.id;
+    [self addChildViewController:activeRule];
     
-    UIViewController *activity = [[UIViewController alloc] init];
-    activity.title = @"参与的情境";
-    [self addChildViewController:activity];
+    THNAttendSenceViewController *attendSence = [[THNAttendSenceViewController alloc] init];
+    attendSence.title = @"参与的情境";
+    attendSence.id = self.id;
+    [self addChildViewController:attendSence];
     
     if (self.model.evt == 2) {
-        UIViewController *xinPin = [[UIViewController alloc] init];
+        THNActiveResultViewController *xinPin = [[THNActiveResultViewController alloc] init];
+        xinPin.id = self.id;
         xinPin.title = @"活动结果";
         [self addChildViewController:xinPin];
     }

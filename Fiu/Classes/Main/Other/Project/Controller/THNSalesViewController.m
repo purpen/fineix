@@ -16,6 +16,7 @@
 #import "THNCuXiaoCollectionViewCell.h"
 #import <MJRefresh.h>
 #import "SVProgressHUD.h"
+#import "THNCuXiaoDetalViewController.h"
 
 @interface THNSalesViewController ()<UICollectionViewDelegate,UICollectionViewDataSource>
 
@@ -175,6 +176,12 @@ static NSString *const cellId = @"THNCuXiaoCollectionViewCell";
 
 -(CGFloat)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout minimumInteritemSpacingForSectionAtIndex:(NSInteger)section{
     return 10;
+}
+
+-(void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath{
+    THNCuXiaoDetalViewController *vc = [[THNCuXiaoDetalViewController alloc] init];
+    vc.id = ((THNArticleModel*)self.modelAry[indexPath.row])._id;
+    [self.navigationController pushViewController:vc animated:YES];
 }
 
 @end

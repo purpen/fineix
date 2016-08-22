@@ -8,6 +8,8 @@
 
 #import <Foundation/Foundation.h>
 
+@class THNProductModel;
+
 @interface THNArticleDetalModel : NSObject
 
 /**  */
@@ -28,5 +30,8 @@
 @property(nonatomic,copy) NSString *user_id;
 /**  */
 @property(nonatomic,copy) NSString *cover_url;
+/**  */
+@property (nonatomic, strong) THNProductModel *product;
+
 
 @end

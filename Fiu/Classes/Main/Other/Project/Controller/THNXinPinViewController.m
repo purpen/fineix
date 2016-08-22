@@ -16,7 +16,7 @@
 #import "THNActivityCollectionViewCell.h"
 #import <MJRefresh.h>
 #import "SVProgressHUD.h"
-#import "THNArticleDetalViewController.h"
+#import "THNXinPinDetalViewController.h"
 
 @interface THNXinPinViewController ()<UICollectionViewDelegate,UICollectionViewDataSource>
 
@@ -67,10 +67,7 @@ static NSString *const cellId = @"THNActivityCollectionViewCell";
     NSDictionary *params = @{
                              @"page" : @(self.current_page),
                              @"size" : @8,
-                             @"stick" : @(-1),
-                             @"fine" : @1,
                              @"type" : @4,
-                             @"sort" : @2
                              };
     self.params = params;
     FBRequest *request = [FBAPI postWithUrlString:@"/scene_subject/getlist" requestDictionary:params delegate:self];
@@ -104,10 +101,7 @@ static NSString *const cellId = @"THNActivityCollectionViewCell";
     NSDictionary *params = @{
                              @"page" : @(++self.current_page),
                              @"size" : @8,
-                             @"stick" : @(-1),
-                             @"fine" : @1,
                              @"type" : @4,
-                             @"sort" : @2
                              };
     self.params = params;
     FBRequest *request = [FBAPI postWithUrlString:@"/scene_subject/getlist" requestDictionary:params delegate:self];
@@ -179,7 +173,7 @@ static NSString *const cellId = @"THNActivityCollectionViewCell";
 }
 
 -(void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath{
-    THNArticleDetalViewController *vc = [[THNArticleDetalViewController alloc] init];
+    THNXinPinDetalViewController *vc = [[THNXinPinDetalViewController alloc] init];
     vc.id = ((THNArticleModel*)self.modelAry[indexPath.row])._id;
     vc.title = @"新品详情";
     [self.navigationController pushViewController:vc animated:YES];

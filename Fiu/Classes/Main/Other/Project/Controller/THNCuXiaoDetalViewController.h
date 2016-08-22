@@ -1,14 +1,14 @@
 //
-//  THNActiveRuleViewController.h
+//  THNCuXiaoDetalViewController.h
 //  Fiu
 //
 //  Created by THN-Dong on 16/8/22.
 //  Copyright © 2016年 taihuoniao. All rights reserved.
 //
 
-#import <UIKit/UIKit.h>
+#import "FBViewController.h"
 
-@interface THNActiveRuleViewController : UIViewController
+@interface THNCuXiaoDetalViewController : FBViewController
 
 /**  */
 @property(nonatomic,copy) NSString *id;

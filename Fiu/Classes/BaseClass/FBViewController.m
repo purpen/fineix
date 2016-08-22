@@ -217,7 +217,7 @@ static NSString *const URLUserIsLogin = @"/user/user_info";
 - (UILabel *)navLine {
     if (!_navLine) {
         _navLine = [[UILabel alloc] initWithFrame:CGRectMake(0, 63, SCREEN_WIDTH, 1)];
-        _navLine.backgroundColor = [UIColor colorWithHexString:@"#F0F0F1"];
+        _navLine.backgroundColor = [UIColor blackColor];
     }
     return _navLine;
 }
