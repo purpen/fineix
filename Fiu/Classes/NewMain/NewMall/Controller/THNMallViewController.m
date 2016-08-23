@@ -10,9 +10,12 @@
 #import "THNCategoryCollectionReusableView.h"
 #import "THNMallNewGoodsCollectionViewCell.h"
 #import "THNMallListCollectionViewCell.h"
-#import "GoodsRow.h"
+#import "GoodsCarViewController.h"
+#import "QRCodeScanViewController.h"
+#import "THNMallGoodsModelItem.h"
+#import "THNMallSubjectModelRow.h"
 
-static NSString *const URLMallList = @"/scene_product/getlist";
+static NSString *const URLNewGoodsList = @"/scene_product/index_new";
 static NSString *const URLCategory = @"/category/getlist";
 static NSString *const URLMallSubject = @"/scene_subject/getlist";
 
@@ -44,6 +47,9 @@ static NSString *const MallListHeaderCellViewId = @"mallListHeaderCellViewId";
     self.categoryRequest = [FBAPI getWithUrlString:URLCategory requestDictionary:@{@"domain":@"10", @"page":@"1", @"size":@"10"} delegate:self];
     [self.categoryRequest startRequestSuccess:^(FBRequest *request, id result) {
         self.categoryMarr = [NSMutableArray arrayWithArray:[[result valueForKey:@"data"] valueForKey:@"rows"]];
+        if (self.categoryMarr.count) {
+            [self thn_networkNewGoodsListData];
+        }
         
     } failure:^(FBRequest *request, NSError *error) {
         NSLog(@"%@", error);
@@ -52,12 +58,11 @@ static NSString *const MallListHeaderCellViewId = @"mallListHeaderCellViewId";
 
 #pragma mark 最新商品列表
 - (void)thn_networkNewGoodsListData {
-    self.mallListRequest = [FBAPI getWithUrlString:URLMallList requestDictionary:@{@"page":@"1", @"size":@"8", @"sort":@"0", @"kind":@"1"} delegate:self];
+    self.mallListRequest = [FBAPI getWithUrlString:URLNewGoodsList requestDictionary:@{@"type":@"1"} delegate:self];
     [self.mallListRequest startRequestSuccess:^(FBRequest *request, id result) {
-        NSArray *goodsArr = [[result valueForKey:@"data"] valueForKey:@"rows"];
-        NSLog(@"＝＝＝＝＝＝＝＝＝＝＝＝ %@", goodsArr);
+        NSArray *goodsArr = [[result valueForKey:@"data"] valueForKey:@"items"];
         for (NSDictionary * goodsDic in goodsArr) {
-            GoodsRow *goodsModel = [[GoodsRow alloc] initWithDictionary:goodsDic];
+            THNMallGoodsModelItem *goodsModel = [[THNMallGoodsModelItem alloc] initWithDictionary:goodsDic];
             [self.goodsDataMarr addObject:goodsModel];
         }
     
@@ -70,16 +75,15 @@ static NSString *const MallListHeaderCellViewId = @"mallListHeaderCellViewId";
 
 #pragma mark 商品专题列表
 - (void)thn_networkSubjectListData {
-    self.subjectRequest = [FBAPI getWithUrlString:URLMallSubject requestDictionary:@{@"page":@"1", @"size":@"8", @"sort":@"2", @"type":@"5"} delegate:self];
+    self.subjectRequest = [FBAPI getWithUrlString:URLMallSubject requestDictionary:@{@"page":@"1", @"size":@"100", @"sort":@"2", @"type":@"5", @"fine":@"1"} delegate:self];
     [self.subjectRequest startRequestSuccess:^(FBRequest *request, id result) {
-        NSLog(@"-------------------- %@", result);
-//        NSArray *goodsArr = [[result valueForKey:@"data"] valueForKey:@"rows"];
-//        for (NSDictionary * goodsDic in goodsArr) {
-//            GoodsRow *goodsModel = [[GoodsRow alloc] initWithDictionary:goodsDic];
-//            [self.goodsDataMarr addObject:goodsModel];
-//        }
-//        
-//        [self.mallList reloadData];
+        NSArray *goodsArr = [[result valueForKey:@"data"] valueForKey:@"rows"];
+        for (NSDictionary * goodsDic in goodsArr) {
+            THNMallSubjectModelRow *goodsModel = [[THNMallSubjectModelRow alloc] initWithDictionary:goodsDic];
+            [self.subjectMarr addObject:goodsModel];
+        }
+        
+        [self.mallList reloadData];
         
     } failure:^(FBRequest *request, NSError *error) {
         [SVProgressHUD showErrorWithStatus:[error localizedDescription]];
@@ -115,8 +119,7 @@ static NSString *const MallListHeaderCellViewId = @"mallListHeaderCellViewId";
 }
 
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
-//    return self.mallListMarr.count;
-    return 5;
+    return self.subjectMarr.count + 1;
 }
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
@@ -131,6 +134,9 @@ static NSString *const MallListHeaderCellViewId = @"mallListHeaderCellViewId";
     } else {
         THNMallListCollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:MallListCellId
                                                                                 forIndexPath:indexPath];
+        if (self.subjectMarr.count) {
+            [cell setMallSubjectData:self.subjectMarr[indexPath.row-1]];
+        }
         return cell;
     }
 }
@@ -157,7 +163,9 @@ static NSString *const MallListHeaderCellViewId = @"mallListHeaderCellViewId";
 }
 
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
-//    [SVProgressHUD showSuccessWithStatus:[NSString stringWithFormat:@"打开情景：%@",self.sceneIdMarr[indexPath.row]]];
+    if (indexPath.row != 0) {
+        [SVProgressHUD showSuccessWithStatus:@"打开商品专题，查看全部"];
+    }
 }
 
 
@@ -173,15 +181,13 @@ static NSString *const MallListHeaderCellViewId = @"mallListHeaderCellViewId";
 }
 
 - (void)thn_leftBarItemSelected {
-    [SVProgressHUD showSuccessWithStatus:@"扫码"];
-    //    SearchViewController * searchVC = [[SearchViewController alloc] init];
-    //    [self.navigationController pushViewController:searchVC animated:YES];
+    QRCodeScanViewController * qrVC = [[QRCodeScanViewController alloc] init];
+    [self.navigationController pushViewController:qrVC animated:YES];
 }
 
 - (void)thn_rightBarItemSelected {
-    [SVProgressHUD showSuccessWithStatus:@"购物车"];
-    //    SceneSubscribeViewController * sceneSubVC = [[SceneSubscribeViewController alloc] init];
-    //    [self.navigationController pushViewController:sceneSubVC animated:YES];
+    GoodsCarViewController * goodsCarVC = [[GoodsCarViewController alloc] init];
+    [self.navigationController pushViewController:goodsCarVC animated:YES];
 }
 
 #pragma mark - NSMutableArray
@@ -190,6 +196,13 @@ static NSString *const MallListHeaderCellViewId = @"mallListHeaderCellViewId";
         _goodsDataMarr = [NSMutableArray array];
     }
     return _goodsDataMarr;
+}
+
+- (NSMutableArray *)subjectMarr {
+    if (!_subjectMarr) {
+        _subjectMarr = [NSMutableArray array];
+    }
+    return _subjectMarr;
 }
 
 @end

@@ -10,6 +10,7 @@
 #import "HomeSceneListRow.h"
 #import "THNCategoryCollectionReusableView.h"
 #import "THNDiscoverSceneCollectionViewCell.h"
+#import "FiuPeopleListViewController.h"
 
 static NSString *const URLSceneList = @"/scene_sight/";
 static NSString *const URLCategory = @"/category/getlist";
@@ -210,9 +211,8 @@ static NSString *const SceneListHeaderCellViewId = @"sceneListHeaderViewId";
 }
 
 - (void)thn_rightBarItemSelected {
-    [SVProgressHUD showSuccessWithStatus:@"排行榜"];
-//    SceneSubscribeViewController * sceneSubVC = [[SceneSubscribeViewController alloc] init];
-//    [self.navigationController pushViewController:sceneSubVC animated:YES];
+    FiuPeopleListViewController * peopleListVC = [[FiuPeopleListViewController alloc] init];
+    [self.navigationController pushViewController:peopleListVC animated:YES];
 }
 
 #pragma mark - NSMutableArray

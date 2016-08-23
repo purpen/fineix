@@ -7,6 +7,7 @@
 #import "THNMallGoodsModelItem.h"
 
 NSString *const kTHNMallGoodsModelItemIdField = @"_id";
+NSString *const kTHNMallGoodsModelItemSalePrice = @"sale_price";
 NSString *const kTHNMallGoodsModelItemBrandCoverUrl = @"brand_cover_url";
 NSString *const kTHNMallGoodsModelItemBrandId = @"brand_id";
 NSString *const kTHNMallGoodsModelItemCoverUrl = @"cover_url";
@@ -29,6 +30,10 @@ NSString *const kTHNMallGoodsModelItemTitle = @"title";
 	if(![dictionary[kTHNMallGoodsModelItemIdField] isKindOfClass:[NSNull class]]){
 		self.idField = [dictionary[kTHNMallGoodsModelItemIdField] integerValue];
 	}
+    
+    if(![dictionary[kTHNMallGoodsModelItemSalePrice] isKindOfClass:[NSNull class]]){
+        self.salePrice = [dictionary[kTHNMallGoodsModelItemSalePrice] integerValue];
+    }
 
 	if(![dictionary[kTHNMallGoodsModelItemBrandCoverUrl] isKindOfClass:[NSNull class]]){
 		self.brandCoverUrl = dictionary[kTHNMallGoodsModelItemBrandCoverUrl];

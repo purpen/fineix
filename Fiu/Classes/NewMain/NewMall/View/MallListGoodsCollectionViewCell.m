@@ -19,6 +19,13 @@
     return self;
 }
 
+- (void)setMallSubjectGoodsListData:(THNMallSubjectModelProduct *)model {
+    [self.image downloadImage:model.bannerUrl place:[UIImage imageNamed:@""]];
+    self.title.text = model.title;
+    self.price.text = [NSString stringWithFormat:@"¥%zi", model.salePrice];
+    
+}
+
 - (void)setGoodsListData:(GoodsRow *)model {
     [self.image downloadImage:model.coverUrl place:[UIImage imageNamed:@""]];
     self.title.text = model.title;
@@ -50,7 +57,7 @@
     [self addSubview:self.price];
     [_price mas_makeConstraints:^(MASConstraintMaker *make) {
         make.size.mas_equalTo(CGSizeMake(self.bounds.size.width, 15));
-        make.bottom.left.equalTo(_blackView).with.offset(-3);
+        make.bottom.equalTo(_blackView).with.offset(-3);
         make.centerX.equalTo(_blackView);
     }];
 }

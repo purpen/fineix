@@ -76,7 +76,7 @@ static NSString *const collectionViewCellId = @"CollectionViewCellId";
     for (NSDictionary *categoryDict in category) {
         CategoryRow *model = [[CategoryRow alloc] initWithDictionary:categoryDict];
         [self.categoryMarr addObject:model];
-        [self.categoryIdMarr addObject:[NSString stringWithFormat:@"%zi",model.idField]];
+        [self.categoryIdMarr addObject:[NSString stringWithFormat:@"%zi",model.tagId]];
         [self.categoryTitleMarr addObject:model.title];
     }
     [self.menuView reloadData];

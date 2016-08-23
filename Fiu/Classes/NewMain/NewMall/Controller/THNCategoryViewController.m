@@ -9,11 +9,15 @@
 #import "THNCategoryViewController.h"
 #import "MallListGoodsCollectionViewCell.h"
 #import "GoodsRow.h"
+#import "ChildTagsTag.h"
 
+static NSString *const URLChildTags = @"/category/fetch_child_tags";
 static NSString *const URLMallList = @"/scene_product/getlist";
 static NSString *const goodsListCellId = @"GoodsListCellId";
 
-@interface THNCategoryViewController ()
+@interface THNCategoryViewController () {
+    NSString *_tagId;
+}
 
 @end
 
@@ -28,27 +32,52 @@ static NSString *const goodsListCellId = @"GoodsListCellId";
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    [self thn_networkGoodsListData];
+    [self thn_networkCategoryData];
     [self setViewUI];
 }
 
-#pragma mark 情景列表
-- (void)thn_networkGoodsListData {
+#pragma mark - 网络请求
+#pragma mark 子分类
+- (void)thn_networkCategoryData {
+    self.childTagsRequest = [FBAPI getWithUrlString:URLChildTags requestDictionary:@{@"tag_id":self.categoryId} delegate:self];
+    [self.childTagsRequest startRequestSuccess:^(FBRequest *request, id result) {
+        NSArray * childTagsArr = [[result valueForKey:@"data"] valueForKey:@"tags"];
+        for (NSDictionary * childTagsDic in childTagsArr) {
+            ChildTagsTag * childTagsModel = [[ChildTagsTag alloc] initWithDictionary:childTagsDic];
+            [self.childTagsList addObject:childTagsModel.titleCn];
+            [self.childTagsId addObject:[NSString stringWithFormat:@"%zi", childTagsModel.idField]];
+        }
+        if (self.childTagsId.count) {
+            _tagId = self.childTagsId[0];
+            [self thn_networkGoodsListData:_tagId];
+        }
+        [self.menuView updateMenuButtonData];
+        [self.menuView updateMenuBtnState:0];
+        
+    } failure:^(FBRequest *request, NSError *error) {
+        [SVProgressHUD showErrorWithStatus:[error localizedDescription]];
+    }];
+}
+
+#pragma mark 商品列表
+- (void)thn_networkGoodsListData:(NSString *)tagId {
+    [SVProgressHUD show];
     self.goodsListRequest = [FBAPI getWithUrlString:URLMallList requestDictionary:@{@"page":@(self.currentpageNum + 1),
                                                                                     @"size":@10,
-                                                                            @"category_id":self.categoryId} delegate:self];
+                                                                            @"category_tag_ids":tagId} delegate:self];
     [self.goodsListRequest startRequestSuccess:^(FBRequest *request, id result) {
         NSArray *goodsArr = [[result valueForKey:@"data"] valueForKey:@"rows"];
-        NSLog(@"＝＝＝＝＝＝＝ %@", goodsArr);
         for (NSDictionary * goodsDic in goodsArr) {
             GoodsRow *goodsModel = [[GoodsRow alloc] initWithDictionary:goodsDic];
             [self.goodsListMarr addObject:goodsModel];
+            [self.goodsIdMarr addObject:[NSString stringWithFormat:@"%zi",goodsModel.idField]];
         }
         
         [self.goodsList reloadData];
         self.currentpageNum = [[[result valueForKey:@"data"] valueForKey:@"current_page"] integerValue];
         self.totalPageNum = [[[result valueForKey:@"data"] valueForKey:@"total_page"] integerValue];
         [self requestIsLastData:self.goodsList currentPage:self.currentpageNum withTotalPage:self.totalPageNum];
+        [SVProgressHUD dismiss];
         
     } failure:^(FBRequest *request, NSError *error) {
         [SVProgressHUD showErrorWithStatus:[error localizedDescription]];
@@ -95,7 +124,7 @@ static NSString *const goodsListCellId = @"GoodsListCellId";
 - (void)addMJRefresh:(UICollectionView *)collectionView {
     collectionView.mj_footer = [MJRefreshAutoNormalFooter footerWithRefreshingBlock:^{
         if (self.currentpageNum < self.totalPageNum) {
-            [self thn_networkGoodsListData];
+            [self thn_networkGoodsListData:_tagId];
         } else {
             [collectionView.mj_footer endRefreshing];
         }
@@ -105,9 +134,29 @@ static NSString *const goodsListCellId = @"GoodsListCellId";
 #pragma mark - setUI
 - (void)setViewUI {
     [self.view addSubview:self.goodsList];
+    [self.view addSubview:self.menuView];
 }
 
 #pragma mark - init
+- (FBMenuView *)menuView {
+    if (!_menuView) {
+        _menuView = [[FBMenuView alloc] initWithFrame:CGRectMake(0, 64, SCREEN_WIDTH, 44)];
+        _menuView.menuTitle = self.childTagsList;
+        _menuView.delegate = self;
+        _menuView.defaultColor = @"#666666";
+    }
+    return _menuView;
+}
+
+- (void)menuItemSelectedWithIndex:(NSInteger)index {
+    _tagId = self.childTagsId[index];
+    
+    [self.goodsIdMarr removeAllObjects];
+    [self.goodsListMarr removeAllObjects];
+    self.currentpageNum = 0;
+    [self thn_networkGoodsListData:_tagId];
+}
+
 - (UICollectionView *)goodsList {
     if (!_goodsList) {
         UICollectionViewFlowLayout *flowLayou = [[UICollectionViewFlowLayout alloc] init];
@@ -116,7 +165,7 @@ static NSString *const goodsListCellId = @"GoodsListCellId";
         flowLayou.sectionInset = UIEdgeInsetsMake(15, 15, 15, 15);
         flowLayou.scrollDirection = UICollectionViewScrollDirectionVertical;
         
-        _goodsList = [[UICollectionView alloc] initWithFrame:CGRectMake(0, 149, SCREEN_WIDTH, SCREEN_HEIGHT - 149)
+        _goodsList = [[UICollectionView alloc] initWithFrame:CGRectMake(0, 108, SCREEN_WIDTH, SCREEN_HEIGHT - 108)
                                         collectionViewLayout:flowLayou];
         _goodsList.showsVerticalScrollIndicator = NO;
         _goodsList.delegate = self;
@@ -142,7 +191,7 @@ static NSString *const goodsListCellId = @"GoodsListCellId";
 }
 
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
-    [SVProgressHUD showSuccessWithStatus:[NSString stringWithFormat:@"打开情景：%@",self.goodsIdMarr[indexPath.row]]];
+    [SVProgressHUD showSuccessWithStatus:[NSString stringWithFormat:@"查看商品详情：%@",self.goodsIdMarr[indexPath.row]]];
 }
 
 #pragma mark - 设置Nav
@@ -160,6 +209,27 @@ static NSString *const goodsListCellId = @"GoodsListCellId";
         _goodsListMarr = [NSMutableArray array];
     }
     return _goodsListMarr;
+}
+
+- (NSMutableArray *)goodsIdMarr {
+    if (!_goodsIdMarr) {
+        _goodsIdMarr = [NSMutableArray array];
+    }
+    return _goodsIdMarr;
+}
+
+- (NSMutableArray *)childTagsList {
+    if (!_childTagsList) {
+        _childTagsList = [NSMutableArray array];
+    }
+    return _childTagsList;
+}
+
+- (NSMutableArray *)childTagsId {
+    if (!_childTagsId) {
+        _childTagsId = [NSMutableArray array];
+    }
+    return _childTagsId;
 }
 
 @end

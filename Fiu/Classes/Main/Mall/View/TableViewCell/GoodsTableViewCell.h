@@ -9,6 +9,7 @@
 #import <UIKit/UIKit.h>
 #import "Fiu.h"
 #import "GoodsRow.h"
+#import "THNMallSubjectModelProduct.h"
 #import <SDWebImage/UIButton+WebCache.h>
 
 @interface GoodsTableViewCell : UITableViewCell <UIScrollViewDelegate, UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout>
@@ -24,5 +25,7 @@
 @pro_strong NSString            *       goodsId;
 
 - (void)setGoodsData:(GoodsRow *)model;
+
+- (void)setMallSubjectGoodsData:(THNMallSubjectModelProduct *)model;
 
 @end

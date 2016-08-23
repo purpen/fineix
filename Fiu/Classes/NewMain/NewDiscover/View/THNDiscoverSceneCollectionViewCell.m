@@ -40,6 +40,9 @@
         self.title.text = titleStr;
         
         NSString *suTitleStr = [NSString stringWithFormat:@"   %@  ", [sceneModel.title substringFromIndex:10]];
+        if (suTitleStr.length > 10) {
+            suTitleStr = [suTitleStr substringToIndex:13];
+        }
         self.suTitle.text = suTitleStr;
         
         [self.suTitle mas_updateConstraints:^(MASConstraintMaker *make) {

@@ -487,6 +487,11 @@ static NSString *const URLEditItemsNum = @"/shopping/edit_cart";
     [self.navView addSubview:self.editBtn];
 }
 
+- (void)viewWillDisappear:(BOOL)animated {
+    [super viewWillDisappear:animated];
+    [SVProgressHUD dismiss];
+}
+
 #pragma mark - 
 - (NSMutableArray *)carItemList {
     if (!_carItemList) {

@@ -85,6 +85,7 @@ static NSString *const twoCommentsCellId = @"TwoCommentsCellId";
 - (void)thn_networkLikeSceneData:(NSString *)idx {
     self.likeSceneRequest = [FBAPI getWithUrlString:URLLikeScene requestDictionary:@{@"id":idx} delegate:self];
     [self.likeSceneRequest startRequestSuccess:^(FBRequest *request, id result) {
+        NSLog(@"＝＝＝＝＝＝＝＝ 点赞%@", result);
 //        if ([[result valueForKey:@"data"] valueForKey:@"love_count"]) {
 //            NSIndexPath *indexPath = [NSIndexPath indexPathForRow:2 inSection:1];
 //            NSArray *indexArray = [NSArray arrayWithObject:indexPath];
@@ -100,6 +101,7 @@ static NSString *const twoCommentsCellId = @"TwoCommentsCellId";
 - (void)thn_networkCancelLikeData:(NSString *)idx {
     self.cancelLikeRequest = [FBAPI getWithUrlString:URLCancelLike requestDictionary:@{@"id":idx} delegate:self];
     [self.cancelLikeRequest startRequestSuccess:^(FBRequest *request, id result) {
+        NSLog(@"＝＝＝＝＝＝＝＝ 取消点赞%@", result);
 //        if ([[result valueForKey:@"data"] valueForKey:@"love_count"]) {
 //            NSIndexPath *indexPath = [NSIndexPath indexPathForRow:2 inSection:1];
 //            NSArray *indexArray = [NSArray arrayWithObject:indexPath];

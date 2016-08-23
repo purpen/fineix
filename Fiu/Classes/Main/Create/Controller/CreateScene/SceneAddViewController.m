@@ -257,7 +257,7 @@ static NSString *const URLUserAddGoods = @"/scene_product/add";
 
 #pragma mark - 标记一个产品图片
 - (void)addMarkGoodsImg:(NSString *)imgUrl withImgW:(CGFloat)imgW withImgH:(CGFloat)imgH {
-    FBStickersContainer * sticker = [[FBStickersContainer alloc] initWithFrame:CGRectMake(100, 100, imgW/4, imgH/4)];
+    FBStickersContainer * sticker = [[FBStickersContainer alloc] initWithFrame:CGRectMake(100, 100, imgW/3, imgH/3)];
     [sticker setupSticker:imgUrl];
     sticker.delegate = self;
     [self.filtersImageView addSubview:sticker];

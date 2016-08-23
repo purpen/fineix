@@ -8,6 +8,7 @@
 
 #import "THNMallListCollectionViewCell.h"
 #import "MallListGoodsCollectionViewCell.h"
+#import "UILable+Frame.h"
 
 static NSString *const MallListGoodsCellId = @"mallListGoodsCellId";
 
@@ -22,10 +23,35 @@ static NSString *const MallListGoodsCellId = @"mallListGoodsCellId";
     return self;
 }
 
+- (void)setMallSubjectData:(THNMallSubjectModelRow *)model {
+    self.title.text = model.title;
+    [self.title mas_updateConstraints:^(MASConstraintMaker *make) {
+        make.width.equalTo(@([self.title boundingRectWithSize:CGSizeMake(SCREEN_WIDTH, 30)].width + 10));
+    }];
+    
+    self.suTitle.text = model.shortTitle;
+    [self.suTitle mas_updateConstraints:^(MASConstraintMaker *make) {
+        make.width.equalTo(@([self.suTitle boundingRectWithSize:CGSizeMake(SCREEN_WIDTH, 30)].width + 10));
+    }];
+    
+    [self.banner downloadImage:model.coverUrl place:[UIImage imageNamed:@""]];
+    
+    self.goodsListMarr = [NSMutableArray arrayWithArray:model.products];
+    if (self.goodsListMarr.count) {
+        [self.goodsList reloadData];
+    }
+}
+
 #pragma mark - setViewUI
 - (void)setViewUI {
     [self addSubview:self.banner];
     [_banner mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.size.mas_equalTo(CGSizeMake(SCREEN_WIDTH, BANNER_HEIGHT));
+        make.left.top.equalTo(self).with.offset(0);
+    }];
+    
+    [self addSubview:self.bannerBg];
+    [_bannerBg mas_makeConstraints:^(MASConstraintMaker *make) {
         make.size.mas_equalTo(CGSizeMake(SCREEN_WIDTH, BANNER_HEIGHT));
         make.left.top.equalTo(self).with.offset(0);
     }];
@@ -40,7 +66,8 @@ static NSString *const MallListGoodsCellId = @"mallListGoodsCellId";
     [self addSubview:self.suTitle];
     [_suTitle mas_makeConstraints:^(MASConstraintMaker *make) {
         make.size.mas_equalTo(CGSizeMake(SCREEN_WIDTH, 30));
-        make.centerX.centerY.equalTo(_banner);
+        make.top.equalTo(_banner.mas_centerY).with.offset(0);
+        make.centerX.equalTo(_banner);
     }];
     
     [self addSubview:self.title];
@@ -50,11 +77,10 @@ static NSString *const MallListGoodsCellId = @"mallListGoodsCellId";
         make.bottom.equalTo(_suTitle.mas_top).with.offset(-3);
     }];
     
-    [self addSubview:self.lookAll];
-    [_lookAll mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.size.mas_equalTo(CGSizeMake(80, 25));
-        make.centerX.equalTo(_banner);
-        make.top.equalTo(_suTitle.mas_bottom).with.offset(5);
+    [self addSubview:self.botLine];
+    [_botLine mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.height.equalTo(@2);
+        make.left.right.bottom.equalTo(_title).with.offset(0);
     }];
     
     [self addSubview:self.goodsList];
@@ -69,10 +95,19 @@ static NSString *const MallListGoodsCellId = @"mallListGoodsCellId";
 - (UIImageView *)banner {
     if (!_banner) {
         _banner = [[UIImageView alloc] init];
-//        _banner.backgroundColor = [UIColor colorWithHexString:@"#F8F8F8"];
-        _banner.backgroundColor = [UIColor grayColor];
+        _banner.backgroundColor = [UIColor colorWithHexString:@"#F8F8F8"];
+        _banner.contentMode = UIViewContentModeScaleAspectFill;
+        _banner.clipsToBounds = YES;
     }
     return _banner;
+}
+
+- (UIView *)bannerBg {
+    if (!_bannerBg) {
+        _bannerBg = [[UIView alloc] init];
+        _bannerBg.backgroundColor = [UIColor colorWithHexString:@"#000000" alpha:.3];
+    }
+    return _bannerBg;
 }
 
 - (UIButton *)bannerBot {
@@ -89,7 +124,6 @@ static NSString *const MallListGoodsCellId = @"mallListGoodsCellId";
         _suTitle.textColor = [UIColor whiteColor];
         _suTitle.font = [UIFont systemFontOfSize:17];
         _suTitle.textAlignment = NSTextAlignmentCenter;
-        _suTitle.text = @"a date of youth";
     }
     return _suTitle;
 }
@@ -101,24 +135,16 @@ static NSString *const MallListGoodsCellId = @"mallListGoodsCellId";
         _title.backgroundColor = [UIColor colorWithHexString:BLACK_COLOR alpha:1];
         _title.font = [UIFont systemFontOfSize:17];
         _title.textAlignment = NSTextAlignmentCenter;
-        _title.text = @"一次骑行的约会";
     }
     return _title;
 }
 
-- (UIButton *)lookAll {
-    if (!_lookAll) {
-        _lookAll = [[UIButton alloc] init];
-        _lookAll.layer.borderWidth = 1.0f;
-        _lookAll.layer.borderColor = [UIColor whiteColor].CGColor;
-        _lookAll.layer.cornerRadius = 4.0f;
-        _lookAll.layer.masksToBounds = YES;
-        [_lookAll setTitleColor:[UIColor whiteColor] forState:(UIControlStateNormal)];
-        _lookAll.titleLabel.font = [UIFont systemFontOfSize:12];
-        [_lookAll setTitle:NSLocalizedString(@"lookAllData", nil) forState:(UIControlStateNormal)];
-        [_lookAll addTarget:self action:@selector(lookAllClick) forControlEvents:(UIControlEventTouchUpInside)];
+- (UILabel *)botLine {
+    if (!_botLine) {
+        _botLine = [[UILabel alloc] init];
+        _botLine.backgroundColor = [UIColor colorWithHexString:MAIN_COLOR];
     }
-    return _lookAll;
+    return _botLine;
 }
 
 - (void)lookAllClick {
@@ -144,16 +170,15 @@ static NSString *const MallListGoodsCellId = @"mallListGoodsCellId";
 }
 
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
-//    return self.goodsMarr.count;
-    return 5;
+    return self.goodsListMarr.count;
 }
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
     MallListGoodsCollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:MallListGoodsCellId
                                                                                  forIndexPath:indexPath];
-//    if (self.goodsMarr.count) {
-//        [cell setGoodsData:self.goodsMarr[indexPath.row]];
-//    }
+    if (self.goodsListMarr.count) {
+        [cell setMallSubjectGoodsListData:self.goodsListMarr[indexPath.row]];
+    }
     return cell;
 }
 
@@ -161,5 +186,11 @@ static NSString *const MallListGoodsCellId = @"mallListGoodsCellId";
     [SVProgressHUD showSuccessWithStatus:@"打开商品详情"];
 }
 
+- (NSMutableArray *)goodsListMarr {
+    if (!_goodsListMarr) {
+        _goodsListMarr = [NSMutableArray array];
+    }
+    return _goodsListMarr;
+}
 
 @end

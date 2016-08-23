@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import "THNMacro.h"
-#import "GoodsRow.h"
+#import "THNMallGoodsModelItem.h"
 
 @interface NewGoodsCollectionViewCell : UICollectionViewCell
 
@@ -18,6 +18,6 @@
 @pro_strong UILabel *name;
 @pro_strong UILabel *price;
 
-- (void)setGoodsData:(GoodsRow *)model;
+- (void)setGoodsData:(THNMallGoodsModelItem *)model;
 
 @end

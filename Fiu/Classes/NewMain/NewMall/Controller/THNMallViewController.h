@@ -25,5 +25,6 @@
 @pro_strong UICollectionView *mallList;
 @pro_strong NSMutableArray *categoryMarr;
 @pro_strong NSMutableArray *goodsDataMarr;
+@pro_strong NSMutableArray *subjectMarr;
 
 @end
