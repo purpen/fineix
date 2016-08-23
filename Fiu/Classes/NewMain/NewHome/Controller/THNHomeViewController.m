@@ -275,49 +275,6 @@ static NSString *const twoCommentsCellId = @"TwoCommentsCellId";
     [self thn_networkSubjectData];
 }
 
-#pragma mark - 初始化数据
-- (NSMutableArray *)rollList {
-    if (!_rollList) {
-        _rollList = [NSMutableArray array];
-    }
-    return _rollList;
-}
-
-- (NSMutableArray *)subjectMarr {
-    if (!_subjectMarr) {
-        _subjectMarr = [NSMutableArray array];
-    }
-    return _subjectMarr;
-}
-
-- (NSMutableArray *)sceneListMarr {
-    if (!_sceneListMarr) {
-        _sceneListMarr = [NSMutableArray array];
-    }
-    return _sceneListMarr;
-}
-
-- (NSMutableArray *)sceneIdMarr {
-    if (!_sceneIdMarr) {
-        _sceneIdMarr = [NSMutableArray array];
-    }
-    return _sceneIdMarr;
-}
-
-- (NSMutableArray *)userIdMarr {
-    if (!_userIdMarr) {
-        _userIdMarr = [NSMutableArray array];
-    }
-    return _userIdMarr;
-}
-
-- (NSMutableArray *)commentsMarr {
-    if (!_commentsMarr) {
-        _commentsMarr = [NSMutableArray array];
-    }
-    return _commentsMarr;
-}
-
 #pragma mark - 设置视图UI
 - (void)thn_setHomeViewUI {
     [self.view addSubview:self.homeTable];
@@ -600,6 +557,49 @@ static NSString *const twoCommentsCellId = @"TwoCommentsCellId";
         [USERDEFAULT setBool:YES forKey:@"homeLaunch"];
         [self thn_setMoreGuideImgForVC:@[@"guide_home",@"Guide_index",@"guide-fiu",@"guide-personal"]];
     }
+}
+
+#pragma mark - 初始化数据
+- (NSMutableArray *)rollList {
+    if (!_rollList) {
+        _rollList = [NSMutableArray array];
+    }
+    return _rollList;
+}
+
+- (NSMutableArray *)subjectMarr {
+    if (!_subjectMarr) {
+        _subjectMarr = [NSMutableArray array];
+    }
+    return _subjectMarr;
+}
+
+- (NSMutableArray *)sceneListMarr {
+    if (!_sceneListMarr) {
+        _sceneListMarr = [NSMutableArray array];
+    }
+    return _sceneListMarr;
+}
+
+- (NSMutableArray *)sceneIdMarr {
+    if (!_sceneIdMarr) {
+        _sceneIdMarr = [NSMutableArray array];
+    }
+    return _sceneIdMarr;
+}
+
+- (NSMutableArray *)userIdMarr {
+    if (!_userIdMarr) {
+        _userIdMarr = [NSMutableArray array];
+    }
+    return _userIdMarr;
+}
+
+- (NSMutableArray *)commentsMarr {
+    if (!_commentsMarr) {
+        _commentsMarr = [NSMutableArray array];
+    }
+    return _commentsMarr;
 }
 
 - (void)viewDidDisappear:(BOOL)animated {

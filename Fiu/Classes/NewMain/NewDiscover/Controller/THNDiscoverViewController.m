@@ -11,6 +11,7 @@
 #import "THNCategoryCollectionReusableView.h"
 #import "THNDiscoverSceneCollectionViewCell.h"
 #import "FiuPeopleListViewController.h"
+#import "THNSceneListViewController.h"
 
 static NSString *const URLSceneList = @"/scene_sight/";
 static NSString *const URLCategory = @"/category/getlist";
@@ -96,8 +97,8 @@ static NSString *const SceneListHeaderCellViewId = @"sceneListHeaderViewId";
             [self.sceneListMarr addObject:homeSceneModel];
             [self.sceneIdMarr addObject:[NSString stringWithFormat:@"%zi", homeSceneModel.idField]];
             [self.userIdMarr addObject:[NSString stringWithFormat:@"%zi", homeSceneModel.userId]];
-            NSLog(@"＝＝＝＝＝＝＝＝＝＝＝＝＝ %@", homeSceneModel.title);
         }
+        [self.commentsMarr addObjectsFromArray:[sceneArr valueForKey:@"comments"]];
 
         [self.sceneList reloadData];
         self.currentpageNum = [[[result valueForKey:@"data"] valueForKey:@"current_page"] integerValue];
@@ -229,7 +230,13 @@ static NSString *const SceneListHeaderCellViewId = @"sceneListHeaderViewId";
 }
 
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
-    [SVProgressHUD showSuccessWithStatus:[NSString stringWithFormat:@"打开情景：%@",self.sceneIdMarr[indexPath.row]]];
+//    [SVProgressHUD showSuccessWithStatus:[NSString stringWithFormat:@"打开情景：%@",self.sceneIdMarr[indexPath.row]]];
+    THNSceneListViewController *sceneListVC = [[THNSceneListViewController alloc] init];
+    sceneListVC.sceneListMarr = self.sceneListMarr;
+    sceneListVC.commentsMarr = self.commentsMarr;
+    sceneListVC.sceneIdMarr = self.sceneIdMarr;
+    sceneListVC.index = indexPath.row;
+    [self.navigationController pushViewController:sceneListVC animated:YES];
 }
 
 #pragma mark - 点赞
@@ -290,6 +297,13 @@ static NSString *const SceneListHeaderCellViewId = @"sceneListHeaderViewId";
         _userIdMarr = [NSMutableArray array];
     }
     return _userIdMarr;
+}
+
+- (NSMutableArray *)commentsMarr {
+    if (!_commentsMarr) {
+        _commentsMarr = [NSMutableArray array];
+    }
+    return _commentsMarr;
 }
 
 - (void)viewDidDisappear:(BOOL)animated {

@@ -15,7 +15,7 @@
 #import "THNMallGoodsModelItem.h"
 #import "THNMallSubjectModelRow.h"
 
-static NSString *const URLNewGoodsList = @"/scene_product/index_new";
+static NSString *const URLNewGoodsList = @"/product/index_new";
 static NSString *const URLCategory = @"/category/getlist";
 static NSString *const URLMallSubject = @"/scene_subject/getlist";
 
@@ -171,6 +171,7 @@ static NSString *const MallListHeaderCellViewId = @"mallListHeaderCellViewId";
 
 #pragma mark - 设置Nav
 - (void)thn_setNavigationViewUI {
+    
     self.view.backgroundColor = [UIColor whiteColor];
     [[UIApplication sharedApplication] setStatusBarHidden:NO];
     self.delegate = self;

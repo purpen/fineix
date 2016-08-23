@@ -438,7 +438,7 @@ static NSString *const URLUserAddGoods = @"/scene_product/add";
         CGContextDrawImage(context, CGRectMake(-sticker.size.width/2, -sticker.size.height/2, sticker.size.width, sticker.size.height), sticker.image.CGImage);
         CGContextRestoreGState(context);
     }
-    
+
     //  返回绘制的新图形
     UIImage * newImage = UIGraphicsGetImageFromCurrentImageContext();
     UIGraphicsEndImageContext();

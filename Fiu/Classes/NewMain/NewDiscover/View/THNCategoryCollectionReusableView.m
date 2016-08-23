@@ -58,7 +58,7 @@ static NSString *const collectionViewCellId = @"CollectionViewCellId";
     
     if (_type == 0) {
         [self.headerView addGroupHeaderViewIcon:@"discover_newScene"
-                                  withTitle:NSLocalizedString(@"newScene", nil)
+                                  withTitle:NSLocalizedString(@"disCoverNewScene", nil)
                                withSubtitle:@""
                               withRightMore:@""
                                withMoreType:0];
