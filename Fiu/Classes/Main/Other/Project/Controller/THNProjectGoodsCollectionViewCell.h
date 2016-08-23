@@ -8,11 +8,11 @@
 
 #import <UIKit/UIKit.h>
 
-@class THNProjectGoodsModel;
+@class THNCuXiaoProductModel;
 
 @interface THNProjectGoodsCollectionViewCell : UICollectionViewCell
 
 /**  */
-@property (nonatomic, strong) THNProjectGoodsModel *model;
+@property (nonatomic, strong) THNCuXiaoProductModel *model;
 
 @end

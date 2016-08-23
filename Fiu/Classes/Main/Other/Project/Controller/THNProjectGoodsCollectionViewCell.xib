@@ -17,7 +17,7 @@
                         <rect key="frame" x="0.0" y="218" width="223" height="35"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zto-bs-CyE">
-                                <rect key="frame" x="95" y="1" width="33" height="16"/>
+                                <rect key="frame" x="10" y="1" width="203" height="16"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="13"/>
                                 <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
@@ -32,6 +32,8 @@
                         <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
                             <constraint firstItem="6mw-f1-ekr" firstAttribute="top" secondItem="zto-bs-CyE" secondAttribute="bottom" id="0Pf-za-dlJ"/>
+                            <constraint firstAttribute="trailing" secondItem="zto-bs-CyE" secondAttribute="trailing" constant="10" id="cmt-ug-EOm"/>
+                            <constraint firstItem="zto-bs-CyE" firstAttribute="leading" secondItem="ctw-XC-1UY" secondAttribute="leading" constant="10" id="dEt-oN-bJb"/>
                             <constraint firstItem="6mw-f1-ekr" firstAttribute="top" secondItem="ctw-XC-1UY" secondAttribute="top" constant="3" id="msl-U4-6qF"/>
                             <constraint firstItem="zto-bs-CyE" firstAttribute="top" secondItem="ctw-XC-1UY" secondAttribute="top" constant="1" id="myV-ox-IYH"/>
                             <constraint firstItem="zto-bs-CyE" firstAttribute="centerX" secondItem="ctw-XC-1UY" secondAttribute="centerX" id="raq-xh-qNn"/>

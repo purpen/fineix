@@ -33,8 +33,6 @@
     [super viewDidLoad];
     
     self.navViewTitle.text = self.title;
-    self.delegate = self;
-    [self addBarItemRightBarButton:nil image:@"project_share_w" isTransparent:NO];
     
     [self requestUrl];
     
@@ -55,7 +53,7 @@
             self.model = [THNArticleDetalModel mj_objectWithKeyValues:result[@"data"]];
             [self.lookBtn setTitle:[NSString stringWithFormat:@"%@",self.model.view_count] forState:UIControlStateNormal];
             [self.commentBtn setTitle:[NSString stringWithFormat:@"%@",self.model.favorite_count] forState:UIControlStateNormal];
-            [self.shareBtn setTitle:[NSString stringWithFormat:@"%@",self.model.attend_count] forState:UIControlStateNormal];
+            [self.shareBtn setTitle:[NSString stringWithFormat:@"%@",self.model.share_count] forState:UIControlStateNormal];
         }
     } failure:nil];
 }
@@ -184,8 +182,16 @@
                                                     urlResource:imgUrl
                                             presentedController:self completion:^(UMSocialResponseEntity *response){
                                                 if (response.responseCode == UMSResponseCodeSuccess) {
+                                                    [self.shareVC dismissViewControllerAnimated:NO completion:nil];
                                                     [SVProgressHUD showSuccessWithStatus:@"让分享变成生产力，别让生活偷走远方的精彩"];
+                                                    FBRequest *request = [FBAPI postWithUrlString:@"/scene_subject/record_share_count" requestDictionary:@{
+                                                                                                                                                           @"id" : self.model._id
+                                                                                                                                                           } delegate:self];
+                                                    [request startRequestSuccess:^(FBRequest *request, id result) {
+                                                        [self.shareBtn setTitle:[NSString stringWithFormat:@"%ld",[self.model.share_count integerValue] + 1] forState:UIControlStateNormal];
+                                                    } failure:nil];
                                                 } else {
+                                                    [self.shareVC dismissViewControllerAnimated:NO completion:nil];
                                                     [SVProgressHUD showErrorWithStatus:@"分享失败"];
                                                 }
                                             }];
@@ -203,8 +209,16 @@
                                                     urlResource:imgUrl
                                             presentedController:self completion:^(UMSocialResponseEntity *response){
                                                 if (response.responseCode == UMSResponseCodeSuccess) {
+                                                    [self.shareVC dismissViewControllerAnimated:NO completion:nil];
                                                     [SVProgressHUD showSuccessWithStatus:@"让分享变成生产力，别让生活偷走远方的精彩"];
+                                                    FBRequest *request = [FBAPI postWithUrlString:@"/scene_subject/record_share_count" requestDictionary:@{
+                                                                                                                                                           @"id" : self.model._id
+                                                                                                                                                           } delegate:self];
+                                                    [request startRequestSuccess:^(FBRequest *request, id result) {
+                                                        [self.shareBtn setTitle:[NSString stringWithFormat:@"%ld",[self.model.share_count integerValue] + 1] forState:UIControlStateNormal];
+                                                    } failure:nil];
                                                 } else {
+                                                    [self.shareVC dismissViewControllerAnimated:NO completion:nil];
                                                     [SVProgressHUD showErrorWithStatus:@"分享失败"];
                                                 }
                                             }];
@@ -223,8 +237,16 @@
                                             presentedController:self
                                                      completion:^(UMSocialResponseEntity *response){
                                                          if (response.responseCode == UMSResponseCodeSuccess) {
+                                                             [self.shareVC dismissViewControllerAnimated:NO completion:nil];
                                                              [SVProgressHUD showSuccessWithStatus:@"让分享变成生产力，别让生活偷走远方的精彩"];
+                                                             FBRequest *request = [FBAPI postWithUrlString:@"/scene_subject/record_share_count" requestDictionary:@{
+                                                                                                                                                                    @"id" : self.model._id
+                                                                                                                                                                    } delegate:self];
+                                                             [request startRequestSuccess:^(FBRequest *request, id result) {
+                                                                 [self.shareBtn setTitle:[NSString stringWithFormat:@"%ld",[self.model.share_count integerValue] + 1] forState:UIControlStateNormal];
+                                                             } failure:nil];
                                                          } else {
+                                                             [self.shareVC dismissViewControllerAnimated:NO completion:nil];
                                                              [SVProgressHUD showErrorWithStatus:@"分享失败"];
                                                          }
                                                      }];
@@ -240,8 +262,16 @@
                                             presentedController:self
                                                      completion:^(UMSocialResponseEntity *shareResponse){
                                                          if (shareResponse.responseCode == UMSResponseCodeSuccess) {
+                                                             [self dismissViewControllerAnimated:NO completion:nil];
                                                              [SVProgressHUD showSuccessWithStatus:@"让分享变成生产力，别让生活偷走远方的精彩"];
+                                                             FBRequest *request = [FBAPI postWithUrlString:@"/scene_subject/record_share_count" requestDictionary:@{
+                                                                                                                                                                    @"id" : self.model._id
+                                                                                                                                                                    } delegate:self];
+                                                             [request startRequestSuccess:^(FBRequest *request, id result) {
+                                                                 [self.shareBtn setTitle:[NSString stringWithFormat:@"%ld",[self.model.share_count integerValue] + 1] forState:UIControlStateNormal];
+                                                             } failure:nil];
                                                          } else {
+                                                             [self dismissViewControllerAnimated:NO completion:nil];
                                                              [SVProgressHUD showErrorWithStatus:@"分享失败"];
                                                          }
                                                      }];

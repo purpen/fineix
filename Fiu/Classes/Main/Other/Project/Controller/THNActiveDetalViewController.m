@@ -34,6 +34,8 @@
 @property (weak, nonatomic) IBOutlet UILabel *titleLabel;
 @property (weak, nonatomic) IBOutlet UILabel *subTitleLabel;
 @property (weak, nonatomic) IBOutlet UIImageView *bgImageView;
+/**  */
+@property (nonatomic, strong) UIScrollView *mainContentView;
 
 @end
 
@@ -43,7 +45,9 @@
     [super viewDidLoad];
     self.navViewTitle.text = @"活动详情";
     
+    
     self.titleLabel.text = self.model.title;
+    self.subTitleLabel.text = self.model.short_title;
     [self.bgImageView sd_setImageWithURL:[NSURL URLWithString:self.model.cover_url] placeholderImage:[UIImage imageNamed:@"Defaul_Bg_420"]];
     // 初始化子控制器
     [self setupChildVces];

@@ -13,7 +13,7 @@
 #import <MJExtension.h>
 #import "Fiu.h"
 #import "UIView+FSExtension.h"
-#import "THNActivityCollectionViewCell.h"
+#import "THNXinPinCollectionViewCell.h"
 #import <MJRefresh.h>
 #import "SVProgressHUD.h"
 #import "THNXinPinDetalViewController.h"
@@ -33,7 +33,7 @@
 
 @end
 
-static NSString *const cellId = @"THNActivityCollectionViewCell";
+static NSString *const cellId = @"THNXinPinCollectionViewCell";
 
 @implementation THNXinPinViewController
 
@@ -146,13 +146,13 @@ static NSString *const cellId = @"THNActivityCollectionViewCell";
     if (!_contenView) {
         UICollectionViewFlowLayout *layout = [[UICollectionViewFlowLayout alloc] init];
         
-        _contenView = [[UICollectionView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, self.view.height) collectionViewLayout:layout];
+        _contenView = [[UICollectionView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT - 64 - 44) collectionViewLayout:layout];
         _contenView.backgroundColor = [UIColor colorWithHexString:@"#F8F8F8"];
         _contenView.showsVerticalScrollIndicator = NO;
         _contenView.delegate = self;
         _contenView.dataSource = self;
-        _contenView.contentInset = UIEdgeInsetsMake(10, 0, 0, 0);
-        [_contenView registerNib:[UINib nibWithNibName:@"THNActivityCollectionViewCell" bundle:nil] forCellWithReuseIdentifier:cellId];
+        _contenView.contentInset = UIEdgeInsetsMake(10, 0, 10, 0);
+        [_contenView registerNib:[UINib nibWithNibName:@"THNXinPinCollectionViewCell" bundle:nil] forCellWithReuseIdentifier:cellId];
     }
     return _contenView;
 }
@@ -163,7 +163,7 @@ static NSString *const cellId = @"THNActivityCollectionViewCell";
 }
 
 -(UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath{
-    THNActivityCollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:cellId forIndexPath:indexPath];
+    THNXinPinCollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:cellId forIndexPath:indexPath];
     cell.model = self.modelAry[indexPath.row];
     return cell;
 }

@@ -38,6 +38,10 @@
 @property (nonatomic, strong) NSArray * comments;
 @property (nonatomic, assign) NSInteger userId;
 @property (nonatomic, assign) NSInteger viewCount;
+/**  */
+@property(nonatomic,copy) NSString *_id;
+/**  */
+@property(nonatomic,copy) NSString *prize;
 
 -(instancetype)initWithDictionary:(NSDictionary *)dictionary;
 @end

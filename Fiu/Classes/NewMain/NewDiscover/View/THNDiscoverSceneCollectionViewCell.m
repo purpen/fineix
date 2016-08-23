@@ -7,6 +7,8 @@
 //
 
 #import "THNDiscoverSceneCollectionViewCell.h"
+#import "THNSenceModel.h"
+#import "UserInfo.h"
 
 @implementation THNDiscoverSceneCollectionViewCell
 
@@ -16,6 +18,53 @@
         [self setViewUI];
     }
     return self;
+}
+
+-(void)setModel:(THNSenceModel *)model{
+    _model = model;
+    [self.image downloadImage:model.cover_url place:[UIImage imageNamed:@"Defaul_Bg_420"]];
+    [self.userHeader downloadImage:model.user_info.avatar_url place:[UIImage imageNamed:@"default_head"]];
+    self.userName.text = model.user_info.nickname;
+    if ([model.is_love integerValue] == 1) {
+        self.likeBtn.selected = YES;
+    } else {
+        self.likeBtn.selected = NO;
+    }
+    
+    if (model.title.length == 0) {
+        self.title.hidden = YES;
+        self.suTitle.hidden = YES;
+        
+    } else if (model.title.length > 10) {
+        self.title.hidden = NO;
+        self.suTitle.hidden = NO;
+        
+        NSString *titleStr = [NSString stringWithFormat:@"    %@  ", [model.title substringToIndex:10]];
+        self.title.text = titleStr;
+        
+        NSString *suTitleStr = [NSString stringWithFormat:@"    %@  ", [model.title substringFromIndex:10]];
+        self.suTitle.text = suTitleStr;
+        
+        [self.suTitle mas_updateConstraints:^(MASConstraintMaker *make) {
+            make.width.equalTo(@([self getTextSizeWidth:suTitleStr].width));
+        }];
+        
+        [self.title mas_updateConstraints:^(MASConstraintMaker *make) {
+            make.width.equalTo(@([self getTextSizeWidth:titleStr].width));
+            make.bottom.equalTo(self.mas_bottom).with.offset(-70);
+        }];
+        
+    } else if (model.title.length <= 10) {
+        self.suTitle.hidden = YES;
+        self.title.hidden = NO;
+        
+        NSString *titleStr = [NSString stringWithFormat:@"    %@  ", model.title];
+        self.title.text = titleStr;
+        [self.title mas_updateConstraints:^(MASConstraintMaker *make) {
+            make.width.equalTo(@([self getTextSizeWidth:titleStr].width));
+        }];
+    }
+
 }
 
 - (void)thn_setSceneUserInfoData:(HomeSceneListRow *)sceneModel {

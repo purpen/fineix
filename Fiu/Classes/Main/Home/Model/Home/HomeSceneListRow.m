@@ -7,12 +7,19 @@
 
 
 #import "HomeSceneListRow.h"
+#import <MJExtension.h>
 
 @interface HomeSceneListRow ()
 @end
 @implementation HomeSceneListRow
 
-
++ (NSDictionary *)replacedKeyFromPropertyName
+{
+    return @{
+             @"createdAt" : @"created_at",
+             @"coverUrl" : @"cover_url"
+             };
+}
 
 
 /**

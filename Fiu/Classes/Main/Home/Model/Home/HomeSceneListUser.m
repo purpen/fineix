@@ -7,12 +7,18 @@
 
 
 #import "HomeSceneListUser.h"
+#import <MJExtension.h>
 
 @interface HomeSceneListUser ()
 @end
 @implementation HomeSceneListUser
 
-
++(NSDictionary *)mj_replacedKeyFromPropertyName{
+    return @{
+             @"avatarUrl" : @"avatar_url",
+             @"isExpert" : @"is_expert"
+             };
+}
 
 
 /**

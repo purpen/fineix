@@ -11,9 +11,10 @@
 #import <UIImageView+WebCache.h>
 #import "Fiu.h"
 #import "UIView+FSExtension.h"
-#import "THNProjectGoodsModel.h"
+#import "THNCuXiaoProductModel.h"
 #import <MJExtension.h>
 #import "THNProjectGoodsCollectionViewCell.h"
+#import "FBGoodsInfoViewController.h"
 
 @interface THNCuXiaoCollectionViewCell ()<UICollectionViewDelegate,UICollectionViewDataSource>
 
@@ -48,17 +49,20 @@ NSString *cellId = @"THNProjectGoodsCollectionViewCell";
     _model = model;
     [self.coverImageView sd_setImageWithURL:[NSURL URLWithString:model.cover_url] placeholderImage:[UIImage imageNamed:@"Defaul_Bg_420"]];
     self.titileLabel.text = model.title;
-    self.goodAry = [THNProjectGoodsModel mj_objectArrayWithKeyValuesArray:model.goodsAry];
+    self.goodAry = [THNCuXiaoProductModel mj_objectArrayWithKeyValuesArray:model.products];
     [self.contenView reloadData];
 }
 
 -(UICollectionView *)contenView{
     if (!_contenView) {
         UICollectionViewFlowLayout *layout = [[UICollectionViewFlowLayout alloc] init];
-        
+        layout.sectionInset = UIEdgeInsetsMake(3, 0, 0, 0);
+        layout.minimumInteritemSpacing = 5;
+        layout.minimumLineSpacing = 5;
         _contenView = [[UICollectionView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, self.bottomView.height) collectionViewLayout:layout];
         _contenView.backgroundColor = [UIColor whiteColor];
         _contenView.showsVerticalScrollIndicator = NO;
+        _contenView.scrollEnabled = YES;
         _contenView.delegate = self;
         _contenView.dataSource = self;
         [_contenView registerNib:[UINib nibWithNibName:@"THNProjectGoodsCollectionViewCell" bundle:nil] forCellWithReuseIdentifier:cellId];
@@ -77,12 +81,14 @@ NSString *cellId = @"THNProjectGoodsCollectionViewCell";
     return cell;
 }
 
--(CGFloat)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout minimumLineSpacingForSectionAtIndex:(NSInteger)section{
-    return 5;
+-(CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath{
+    return CGSizeMake((SCREEN_WIDTH - 5 * 3) / 3.5, 135);
 }
 
--(CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath{
-    return CGSizeMake(100, 135);
+-(void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath{
+    FBGoodsInfoViewController *vc = [[FBGoodsInfoViewController alloc] init];
+    vc.goodsID = ((THNCuXiaoProductModel*)self.goodAry[indexPath.row])._id;
+    [self.navi pushViewController:vc animated:YES];
 }
 
 @end

@@ -25,6 +25,10 @@
 @property (nonatomic, assign) NSInteger isExpert;
 @property (nonatomic, strong) NSObject * userId;
 @property (nonatomic, strong) NSString * userRank;
+/**  */
+@property(nonatomic,copy) NSString *_id;
+/**  */
+@property(nonatomic,copy) NSString *is_follow;
 
 
 -(instancetype)initWithDictionary:(NSDictionary *)dictionary;
