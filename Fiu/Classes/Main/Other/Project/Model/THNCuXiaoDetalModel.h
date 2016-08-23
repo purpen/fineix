@@ -6,7 +6,7 @@
 //  Copyright © 2016年 taihuoniao. All rights reserved.
 //
 
-#import <Foundation/Foundation.h>
+#import <UIKit/UIKit.h>
 
 @interface THNCuXiaoDetalModel : NSObject
 
@@ -24,5 +24,14 @@
 @property(nonatomic,copy) NSString *comment_count;
 /**  */
 @property(nonatomic,copy) NSString *share_count;
+/**  */
+@property(nonatomic,copy) NSString *summary;
+/**  */
+@property (nonatomic, assign) CGFloat viewHeight;
+/**  */
+@property(nonatomic,copy) NSString *share_view_url;
+/**  */
+@property(nonatomic,copy) NSString *share_desc;
+
 
 @end

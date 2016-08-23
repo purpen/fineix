@@ -16,7 +16,7 @@
         CGSize maxSize = CGSizeMake([UIScreen mainScreen].bounds.size.width - 2 * 10, MAXFLOAT);
         // 计算文字的高度
         CGFloat textH = [self.summary boundingRectWithSize:maxSize options:NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName : [UIFont systemFontOfSize:14]} context:nil].size.height;
-        _cellHeight = textH + 10 + 15 + 211 + 44;
+        _cellHeight = textH + 10 + 15 + 211 + 44 + 10 + 18 + 5;
     }
     return _cellHeight;
 }

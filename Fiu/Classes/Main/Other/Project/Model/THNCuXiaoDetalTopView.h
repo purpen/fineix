@@ -14,5 +14,6 @@
 
 /**  */
 @property (nonatomic, strong) THNCuXiaoDetalModel *model;
+@property (weak, nonatomic) IBOutlet UILabel *summaryLabel;
 
 @end

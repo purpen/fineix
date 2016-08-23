@@ -13,5 +13,8 @@
 
 /**  */
 @property (nonatomic, strong) THNProductModel *model;
+@property (weak, nonatomic) IBOutlet UILabel *numLabel;
+/**  */
+@property (nonatomic, strong) UINavigationController *navi;
 
 @end

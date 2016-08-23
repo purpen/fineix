@@ -67,7 +67,6 @@ static NSString *const cellId = @"THNCuXiaoCollectionViewCell";
     NSDictionary *params = @{
                              @"page" : @(self.current_page),
                              @"size" : @8,
-                             @"stick" : @(-1),
                              @"fine" : @1,
                              @"type" : @3,
                              @"sort" : @2
@@ -104,7 +103,6 @@ static NSString *const cellId = @"THNCuXiaoCollectionViewCell";
     NSDictionary *params = @{
                              @"page" : @(++self.current_page),
                              @"size" : @8,
-                             @"stick" : @(-1),
                              @"fine" : @1,
                              @"type" : @3,
                              @"sort" : @2
