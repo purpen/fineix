@@ -14,6 +14,7 @@
 #import "THNActiveRuleViewController.h"
 #import "THNAttendSenceViewController.h"
 #import "THNActiveResultViewController.h"
+#import "THNActiveTopView.h"
 
 @interface THNActiveDetalViewController ()<UIScrollViewDelegate>
 
@@ -31,9 +32,10 @@
 @property (nonatomic, strong) UIButton *selectedButton;
 /**  */
 @property (nonatomic, strong) UIView *lineView;
-@property (weak, nonatomic) IBOutlet UILabel *titleLabel;
-@property (weak, nonatomic) IBOutlet UILabel *subTitleLabel;
-@property (weak, nonatomic) IBOutlet UIImageView *bgImageView;
+/**  */
+@property (nonatomic, strong) UIScrollView *mainContentView;
+/**  */
+@property (nonatomic, strong) THNActiveTopView *activeTopView;
 
 @end
 
@@ -41,22 +43,44 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    [self.view addSubview:self.mainContentView];
+    
     self.navViewTitle.text = @"活动详情";
     
-    self.titleLabel.text = self.model.title;
-    [self.bgImageView sd_setImageWithURL:[NSURL URLWithString:self.model.cover_url] placeholderImage:[UIImage imageNamed:@"Defaul_Bg_420"]];
     // 初始化子控制器
     [self setupChildVces];
     // 设置顶部的标签栏
     [self setupTitlesView];
     // 底部的scrollView
     [self setupContentView];
-    [self.view addSubview:self.lineView];
+    [self.mainContentView addSubview:self.lineView];
+}
+
+-(UIScrollView *)mainContentView{
+    if (!_mainContentView) {
+        self.automaticallyAdjustsScrollViewInsets = NO;
+        _mainContentView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 64, SCREEN_WIDTH, SCREEN_HEIGHT - 64)];
+        _mainContentView.showsVerticalScrollIndicator = NO;
+        [_mainContentView addSubview:self.activeTopView];
+        _mainContentView.delegate = self;
+        _mainContentView.tag = 10;
+    }
+    return _mainContentView;
+}
+
+-(THNActiveTopView *)activeTopView{
+    if (!_activeTopView) {
+        _activeTopView = [THNActiveTopView viewFromXib];
+        _activeTopView.frame = CGRectMake(0, 0, SCREEN_WIDTH, 211);
+        _activeTopView.model = self.model;
+    }
+    return _activeTopView;
 }
 
 -(UIView *)lineView{
     if (!_lineView) {
-        _lineView = [[UIView alloc] initWithFrame:CGRectMake(0, 49.5 + 64 + 211, SCREEN_WIDTH, 0.5)];
+        _lineView = [[UIView alloc] initWithFrame:CGRectMake(0, 49.5 + 211, SCREEN_WIDTH, 0.5)];
         _lineView.backgroundColor = [UIColor colorWithHexString:@"#E2E2E2" alpha:0.5];
     }
     return _lineView;
@@ -71,11 +95,11 @@
     self.automaticallyAdjustsScrollViewInsets = NO;
     
     UIScrollView *contentView = [[UIScrollView alloc] init];
-    contentView.frame = CGRectMake(0, 64 + 211 + 50, SCREEN_WIDTH, SCREEN_HEIGHT - 64 - 211 - 50);
+    contentView.frame = CGRectMake(0, 211 + 50, SCREEN_WIDTH, SCREEN_HEIGHT - 64 - 211 - 50);
     contentView.delegate = self;
     contentView.pagingEnabled = YES;
     contentView.showsHorizontalScrollIndicator = NO;
-    [self.view insertSubview:contentView atIndex:0];
+    [self.mainContentView insertSubview:contentView atIndex:0];
     contentView.contentSize = CGSizeMake(contentView.width * self.childViewControllers.count, 0);
     self.contentView = contentView;
     
@@ -105,6 +129,9 @@
 #pragma mark - <UIScrollViewDelegate>
 - (void)scrollViewDidEndScrollingAnimation:(UIScrollView *)scrollView
 {
+    if (scrollView.tag == 10) {
+        return;
+    }
     // 当前的索引
     NSInteger index = scrollView.contentOffset.x / SCREEN_WIDTH;
     
@@ -115,10 +142,17 @@
     vc.view.height = scrollView.height; // 设置控制器view的height值为整个屏幕的高度(默认是比屏幕高度少个20)
     vc.view.width = SCREEN_WIDTH;
     [scrollView addSubview:vc.view];
+    self.mainContentView.contentSize = CGSizeMake(0, 0);
+    ((UIScrollView*)vc.view.subviews[0]).contentOffset = self.mainContentView.contentOffset;
 }
+
 
 - (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView
 {
+    
+    if (scrollView.tag == 10) {
+        return;
+    }
     [self scrollViewDidEndScrollingAnimation:scrollView];
     
     // 点击按钮
@@ -137,8 +171,8 @@
     titlesView.backgroundColor = [[UIColor whiteColor] colorWithAlphaComponent:1.0];
     titlesView.width = SCREEN_WIDTH;
     titlesView.height = 50;
-    titlesView.y = 64 + 211;
-    [self.view addSubview:titlesView];
+    titlesView.y = 211;
+    [self.mainContentView addSubview:titlesView];
     self.titlesView = titlesView;
     
     // 底部的红色指示器

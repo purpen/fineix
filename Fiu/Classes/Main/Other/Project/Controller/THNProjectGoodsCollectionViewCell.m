@@ -8,7 +8,7 @@
 
 #import "THNProjectGoodsCollectionViewCell.h"
 #import <UIImageView+WebCache.h>
-#import "THNProjectGoodsModel.h"
+#import "THNCuXiaoProductModel.h"
 
 @interface THNProjectGoodsCollectionViewCell ()
 
@@ -26,11 +26,11 @@
     // Initialization code
 }
 
--(void)setModel:(THNProjectGoodsModel *)model{
+-(void)setModel:(THNCuXiaoProductModel *)model{
     _model = model;
-    [self.goodImageView sd_setImageWithURL:[NSURL URLWithString:model.url] placeholderImage:[UIImage imageNamed:@"Defaul_Bg_500"]];
-    self.goodTitleLabel.text = model.goodTitle;
-    self.priceLabel.text = model.price;
+    [self.goodImageView sd_setImageWithURL:[NSURL URLWithString:model.banner_url] placeholderImage:[UIImage imageNamed:@"Defaul_Bg_500"]];
+    self.goodTitleLabel.text = model.title;
+    self.priceLabel.text = [NSString stringWithFormat:@"￥%@",model.sale_price];
 }
 
 @end

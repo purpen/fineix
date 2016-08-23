@@ -3,6 +3,7 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
+        <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
@@ -17,8 +18,12 @@
                         <constraint firstAttribute="height" constant="211" id="6nb-9L-i37"/>
                     </constraints>
                 </imageView>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="GN4-IX-Ghg">
+                    <rect key="frame" x="0.0" y="0.0" width="343" height="211"/>
+                    <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.20000000000000001" colorSpace="calibratedRGB"/>
+                </view>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9ZZ-vy-A58">
-                    <rect key="frame" x="152" y="138" width="38" height="18"/>
+                    <rect key="frame" x="85" y="97" width="172" height="18"/>
                     <fontDescription key="fontDescription" type="system" pointSize="15"/>
                     <color key="textColor" white="1" alpha="0.90000000000000002" colorSpace="calibratedWhite"/>
                     <nil key="highlightedColor"/>
@@ -32,15 +37,21 @@
             </subviews>
             <color key="backgroundColor" red="0.97254901959999995" green="0.97254901959999995" blue="0.97254901959999995" alpha="1" colorSpace="calibratedRGB"/>
             <constraints>
+                <constraint firstItem="9ZZ-vy-A58" firstAttribute="centerY" secondItem="bBw-g0-FAY" secondAttribute="centerY" id="4Gg-f2-Kra"/>
+                <constraint firstItem="GN4-IX-Ghg" firstAttribute="bottom" secondItem="bBw-g0-FAY" secondAttribute="bottom" id="4J1-aR-lmh"/>
                 <constraint firstAttribute="trailing" secondItem="Zhz-b2-g6e" secondAttribute="trailing" constant="10" id="G3f-NI-6vh"/>
                 <constraint firstItem="Zhz-b2-g6e" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="10" id="Kf7-51-die"/>
+                <constraint firstItem="GN4-IX-Ghg" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="L1m-YY-gPL"/>
+                <constraint firstItem="9ZZ-vy-A58" firstAttribute="width" secondItem="bBw-g0-FAY" secondAttribute="width" multiplier="0.5" id="MHp-0M-Yto"/>
                 <constraint firstAttribute="bottom" secondItem="Zhz-b2-g6e" secondAttribute="bottom" constant="10" id="Mfm-SD-3aJ"/>
                 <constraint firstItem="bBw-g0-FAY" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="WHa-bW-Azh"/>
                 <constraint firstItem="9ZZ-vy-A58" firstAttribute="centerY" secondItem="iN0-l3-epB" secondAttribute="centerY" id="cFA-8t-qbX"/>
                 <constraint firstItem="9ZZ-vy-A58" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="gnl-uz-QJq"/>
                 <constraint firstItem="bBw-g0-FAY" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="ir4-pp-GsW"/>
                 <constraint firstItem="Zhz-b2-g6e" firstAttribute="top" secondItem="bBw-g0-FAY" secondAttribute="bottom" constant="10" id="mBF-B2-bNs"/>
+                <constraint firstItem="GN4-IX-Ghg" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="oaX-dB-mh4"/>
                 <constraint firstAttribute="trailing" secondItem="bBw-g0-FAY" secondAttribute="trailing" id="pc7-GN-DH9"/>
+                <constraint firstAttribute="trailing" secondItem="GN4-IX-Ghg" secondAttribute="trailing" id="uCQ-jK-bKI"/>
                 <constraint firstAttribute="bottom" secondItem="bBw-g0-FAY" secondAttribute="bottom" id="uQp-qf-glX"/>
             </constraints>
             <nil key="simulatedStatusBarMetrics"/>
@@ -48,6 +59,7 @@
             <variation key="default">
                 <mask key="constraints">
                     <exclude reference="uQp-qf-glX"/>
+                    <exclude reference="cFA-8t-qbX"/>
                 </mask>
             </variation>
             <connections>

@@ -32,6 +32,7 @@
 @property(nonatomic,copy) NSString *cover_url;
 /**  */
 @property (nonatomic, strong) THNProductModel *product;
-
+/**  */
+@property(nonatomic,copy) NSString *share_count;
 
 @end

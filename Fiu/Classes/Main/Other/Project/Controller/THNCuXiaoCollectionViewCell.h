@@ -14,5 +14,7 @@
 
 /**  */
 @property (nonatomic, strong) THNArticleModel *model;
+/**  */
+@property (nonatomic, strong) UINavigationController *navi;
 
 @end

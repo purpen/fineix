@@ -10,7 +10,7 @@
 #import "UIView+FSExtension.h"
 #import "UIColor+Extension.h"
 #import "Fiu.h"
-#import "THNSenecCollectionViewCell.h"
+#import "THNDiscoverSceneCollectionViewCell.h"
 #import <MJRefresh.h>
 #import "UserInfoEntity.h"
 #import "THNSenceModel.h"
@@ -32,7 +32,7 @@
 
 @end
 
-static NSString * collectionViewCellId = @"allSceneCollectionViewCellID";
+static NSString * collectionViewCellId = @"THNDiscoverSceneCollectionViewCell";
 
 @implementation THNAttendSenceViewController
 
@@ -45,10 +45,9 @@ static NSString * collectionViewCellId = @"allSceneCollectionViewCellID";
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    [self.view insertSubview:self.myCollectionView atIndex:0];
     
-//    [self.view addSubview:self.myCollectionView];
-//    
-//    [self setUpRefresh];
+    [self setUpRefresh];
 }
 
 -(UICollectionView *)myCollectionView{
@@ -56,13 +55,12 @@ static NSString * collectionViewCellId = @"allSceneCollectionViewCellID";
         UICollectionViewFlowLayout * flowLayout = [[UICollectionViewFlowLayout alloc] init];
         flowLayout.sectionInset = UIEdgeInsetsMake(15, 15, 15, 15);
         _myCollectionView = [[UICollectionView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT - 64 - 211 - 50) collectionViewLayout:flowLayout];
-        
         _myCollectionView.backgroundColor = [UIColor colorWithHexString:@"#F7F7F7"];
         _myCollectionView.delegate = self;
         _myCollectionView.dataSource = self;
         _myCollectionView.showsVerticalScrollIndicator = NO;
         _myCollectionView.showsHorizontalScrollIndicator = NO;
-        [_myCollectionView registerNib:[UINib nibWithNibName:@"THNSenecCollectionViewCell" bundle:nil] forCellWithReuseIdentifier:collectionViewCellId];
+        [_myCollectionView registerClass:[THNDiscoverSceneCollectionViewCell class] forCellWithReuseIdentifier:collectionViewCellId];
     }
     return _myCollectionView;
 }
@@ -87,10 +85,11 @@ static NSString * collectionViewCellId = @"allSceneCollectionViewCellID";
                              @"subject_id" : self.id
                              };
     self.params = params;
+    NSLog(@"参与 %@",self.id);
     FBRequest *request = [FBAPI postWithUrlString:@"/scene_sight/getlist" requestDictionary:params delegate:self];
     [request startRequestSuccess:^(FBRequest *request, id result) {
         if (result[@"success"]) {
-            NSLog(@"文章 %@",result);
+            NSLog(@"参与的情境 %@",result);
             self.current_page = [result[@"data"][@"current_page"] integerValue];
             self.total_rows = [result[@"data"][@"total_rows"] integerValue];
             NSArray *rows = result[@"data"][@"rows"];
@@ -132,6 +131,7 @@ static NSString * collectionViewCellId = @"allSceneCollectionViewCellID";
     FBRequest *request = [FBAPI postWithUrlString:@"/scene_sight/getlist" requestDictionary:params delegate:self];
     [request startRequestSuccess:^(FBRequest *request, id result) {
         if (result[@"success"]) {
+            NSLog(@"参与的情境 %@",result);
             self.current_page = [result[@"data"][@"current_page"] integerValue];
             self.total_rows = [result[@"data"][@"total_rows"] integerValue];
             NSArray *rows = result[@"data"][@"rows"];
@@ -156,7 +156,7 @@ static NSString * collectionViewCellId = @"allSceneCollectionViewCellID";
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
     
-    THNSenecCollectionViewCell * cell = [collectionView dequeueReusableCellWithReuseIdentifier:collectionViewCellId forIndexPath:indexPath];
+    THNDiscoverSceneCollectionViewCell * cell = [collectionView dequeueReusableCellWithReuseIdentifier:collectionViewCellId forIndexPath:indexPath];
     cell.model = self.modelAry[indexPath.row];
     return cell;
 }

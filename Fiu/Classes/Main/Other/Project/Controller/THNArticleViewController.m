@@ -146,12 +146,12 @@ static NSString *const cellId = @"THNArticleCollectionViewCell";
     if (!_contenView) {
         UICollectionViewFlowLayout *layout = [[UICollectionViewFlowLayout alloc] init];
         
-        _contenView = [[UICollectionView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, self.view.height) collectionViewLayout:layout];
+        _contenView = [[UICollectionView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT - 64 - 44) collectionViewLayout:layout];
         _contenView.backgroundColor = [UIColor colorWithHexString:@"#F8F8F8"];
         _contenView.showsVerticalScrollIndicator = NO;
         _contenView.delegate = self;
         _contenView.dataSource = self;
-        _contenView.contentInset = UIEdgeInsetsMake(10, 0, 0, 0);
+        _contenView.contentInset = UIEdgeInsetsMake(10, 0, 10, 0);
         [_contenView registerNib:[UINib nibWithNibName:@"THNArticleCollectionViewCell" bundle:nil] forCellWithReuseIdentifier:cellId];
     }
     return _contenView;

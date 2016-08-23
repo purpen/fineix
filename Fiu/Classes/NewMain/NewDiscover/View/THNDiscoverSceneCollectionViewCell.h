@@ -11,6 +11,8 @@
 #import "THNMacro.h"
 #import "HomeSceneListRow.h"
 
+@class THNSenceModel;
+
 @interface THNDiscoverSceneCollectionViewCell : UICollectionViewCell
 
 @pro_strong UIImageView *image;
@@ -20,6 +22,8 @@
 @pro_strong UIButton *likeBtn;
 @pro_strong UILabel *title;
 @pro_strong UILabel *suTitle;
+/** 活动详情 参与情景 */
+@property (nonatomic, strong) THNSenceModel *model;
 
 - (void)thn_setSceneUserInfoData:(HomeSceneListRow *)model;
 

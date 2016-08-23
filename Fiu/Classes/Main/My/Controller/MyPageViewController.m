@@ -14,7 +14,7 @@
 #import "MyPageFocusOnViewController.h"
 #import "MyFansViewController.h"
 #import "MyPageBtnCollectionViewCell.h"
-#import "AllOderViewController.h"
+#import "MyOderInfoViewController.h"
 #import "MessageViewController.h"
 #import "CounterModel.h"
 #import "SubscribeViewController.h"
@@ -289,7 +289,7 @@
                 }else{
                     make.size.mas_equalTo(CGSizeMake(15, 15));
                 }
-                make.right.mas_equalTo(cell.btn1.mas_right).with.offset(9);
+                make.left.mas_equalTo(cell.btn1.mas_right).with.offset(-12);
                 make.top.mas_equalTo(cell.btn1.mas_top).with.offset(0/667.0*SCREEN_HEIGHT);
             }];
         }
@@ -308,7 +308,7 @@
                 }else{
                     make.size.mas_equalTo(CGSizeMake(15, 15));
                 }
-                make.right.mas_equalTo(cell.btn2.mas_right).with.offset(0);
+                make.left.mas_equalTo(cell.btn2.mas_right).with.offset(-12);
                 make.top.mas_equalTo(cell.btn2.mas_top).with.offset(0/667.0*SCREEN_HEIGHT);
             }];
         }
@@ -407,8 +407,9 @@
 //订单按钮
 -(void)orderBtn:(UIButton*)sender{
     //跳转到全部订单页
-    AllOderViewController *vc = [[AllOderViewController alloc] init];
+    MyOderInfoViewController *vc = [[MyOderInfoViewController alloc] init];
     vc.counterModel = _counterModel;
+    vc.type = @0;
     [self.navigationController pushViewController:vc animated:YES];
 }
 
