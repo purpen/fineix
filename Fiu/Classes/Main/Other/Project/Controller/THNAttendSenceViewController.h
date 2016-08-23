@@ -1,5 +1,5 @@
 //
-//  THNActiveRuleViewController.h
+//  THNAttendSenceViewController.h
 //  Fiu
 //
 //  Created by THN-Dong on 16/8/22.
@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-@interface THNActiveRuleViewController : UIViewController
+@interface THNAttendSenceViewController : UIViewController
 
 /**  */
 @property(nonatomic,copy) NSString *id;
