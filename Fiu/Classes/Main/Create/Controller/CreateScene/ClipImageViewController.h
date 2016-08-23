@@ -28,12 +28,12 @@
 @pro_strong FBImageScrollView *clipImageView;   //  裁剪图片视图
 @pro_strong UIView *dragView;
 @pro_strong UIImageView *gripView;
-@pro_strong FBFootView *footView;           //  底部功能选择视图
-@pro_strong CameraView *cameraView;         //  相机页面
+@pro_strong FBFootView *footView;               //  底部功能选择视图
+@pro_strong CameraView *cameraView;             //  相机页面
 @pro_strong UIView *pictureView;
-@pro_strong UICollectionView *photosView;   //  照片列表
-@pro_strong NSMutableArray *sortPhotosArr;  //  排序的相片
-@pro_strong NSMutableArray *photoAlbumArr;  //  全部的相薄
-@pro_strong PhotoAlbumsView *photoAlbumsView;    //  相薄页面
+@pro_strong UICollectionView *photosView;       //  照片列表
+@pro_strong NSMutableArray *sortPhotosArr;      //  排序的相片
+@pro_strong NSMutableArray *photoAlbumArr;      //  全部的相薄
+@pro_strong PhotoAlbumsView *photoAlbumsView;   //  相薄页面
 
 @end

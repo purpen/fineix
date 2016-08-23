@@ -123,11 +123,11 @@ static CGRect FBScaleRect(CGRect rect, CGFloat scale) {
     self.contentSize = imageSize;
     
     //to center
-    if (imageSize.width > imageSize.height) {
-        self.contentOffset = CGPointMake(imageSize.width/4, 0);
-    } else if (imageSize.width < imageSize.height) {
-        self.contentOffset = CGPointMake(0, imageSize.height/4);
-    }
+//    if (imageSize.width > imageSize.height) {
+//        self.contentOffset = CGPointMake(imageSize.width/4, 0);
+//    } else if (imageSize.width < imageSize.height) {
+//        self.contentOffset = CGPointMake(0, imageSize.height/4);
+//    }
     
     [self setMaxMinZoomScalesForCurrentBounds];
     self.zoomScale = self.minimumZoomScale;

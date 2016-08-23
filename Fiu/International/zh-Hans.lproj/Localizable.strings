@@ -19,13 +19,24 @@
 "User_follow" = "＋关注";
 "User_followDone" = "已关注";
 
+//  更多
+"editScene" = "编辑";
+"saveScene" = "收藏";
+"reportScene" = "举报";
+"favoriteDone" = "收藏成功";
+
 //  发现
 "discoverSearch" = "搜索情境或用户";
 "newScene" = "最新情境";
+"Subscribe" = "＋订阅";
+
+//  分类
+"fineScene" = "精选";
+"newScene" = "最新";
 
 //  好货
 "mallSearch" = "搜索好货或品牌";
-"newGoods" = "最新商品";
+"newGoods" = "最新推荐";
 
 //  创建情境
 "next" = "继续";
@@ -83,7 +94,7 @@
 "CityVcTitle" = "选择城市";
 "ReportVcTitle" = "举报";
 "SureOrderVc" = "确认订单";
-"FiuPeopleListVC" = "用户排行";
+"FiuPeopleListVC" = "排行榜";
 "FiuBrandListVC" = "品牌";
 "SeleBrandVC" = "自营品牌";
 "editTagsVC" = "编辑标签";

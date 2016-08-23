@@ -21,6 +21,10 @@
 @pro_strong FBRequest *sceneListRequest;
 @pro_strong FBRequest *likeSceneRequest;
 @pro_strong FBRequest *cancelLikeRequest;
+@pro_strong FBRequest *followRequest;
+@pro_strong FBRequest *cancelFollowRequest;
+@pro_strong FBRequest *viewCountRequest;
+@pro_strong FBRequest *favoriteRequest;
 
 @pro_strong FBRollImages *homerollView;
 @pro_strong UITableView *homeTable;

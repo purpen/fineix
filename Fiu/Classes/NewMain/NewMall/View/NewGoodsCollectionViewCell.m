@@ -19,10 +19,11 @@
     return self;
 }
 
-- (void)setGoodsData:(GoodsRow *)model {
+- (void)setGoodsData:(THNMallGoodsModelItem *)model {
     [self.image downloadImage:model.coverUrl place:[UIImage imageNamed:@""]];
     self.name.text = model.title;
-    self.price.text = [NSString stringWithFormat:@"¥%.0f", model.salePrice];
+    self.price.text = [NSString stringWithFormat:@"¥%zi", model.salePrice];
+    [self.brandImage downloadImage:model.brandCoverUrl place:[UIImage imageNamed:@""]];
 }
 
 #pragma mark - setViewUI

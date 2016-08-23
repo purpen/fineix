@@ -12,6 +12,7 @@
 #import "CatagoryFiuSceneModel.h"
 #import "THNAddTagViewController.h"
 
+static NSInteger const MAXTitle = 20;
 static NSString *const URLCategroy = @"/category/getlist";
 static NSString *const URLShareText = @"/search/getlist";
 static NSString *const URLListText = @"/scene_context/getlist";
@@ -233,8 +234,17 @@ static NSString *const URLActionTags = @"/scene_sight/stick_active_tags";
         _titleText.font = [UIFont systemFontOfSize:12];
         _titleText.clearButtonMode = UITextFieldViewModeAlways;
         _titleText.textColor = [UIColor colorWithHexString:@"#FFFFFF"];
+        [_titleText addTarget:self action:@selector(maxTitleText:) forControlEvents:(UIControlEventEditingChanged)];
     }
     return _titleText;
+}
+
+- (void)maxTitleText:(UITextField *)titleText {
+    if (titleText.text.length >= MAXTitle) {
+        [SVProgressHUD showInfoWithStatus:@"标题不能超过20字"];
+        titleText.text = [titleText.text substringToIndex:MAXTitle];
+        [titleText resignFirstResponder];
+    }
 }
 
 #pragma mark - 输入描述
@@ -249,6 +259,26 @@ static NSString *const URLActionTags = @"/scene_sight/stick_active_tags";
         _desText.textContainerInset = UIEdgeInsetsMake(5, 10, 5, 10);
     }
     return _desText;
+}
+
+- (BOOL)textViewShouldBeginEditing:(UITextView *)textView {
+    if (textView == self.desText) {
+        if ([textView.text isEqualToString:NSLocalizedString(@"addDescription", nil)]) {
+            textView.text = @"";
+        }
+        return YES;
+    }
+    return NO;
+}
+
+- (BOOL)textViewShouldEndEditing:(UITextView *)textView {
+    if (textView == self.desText) {
+        if ([textView.text isEqualToString:@""]) {
+            textView.text = NSLocalizedString(@"addDescription", nil);
+        }
+        return YES;
+    }
+    return NO;
 }
 
 - (void)textViewDidChange:(UITextView *)textView {
@@ -448,8 +478,8 @@ static NSString *const URLActionTags = @"/scene_sight/stick_active_tags";
 
 - (void)textFieldDidEndEditing:(UITextField *)textField {
     if (textField == self.titleText) {
-        if (textField.text.length > 20) {
-            [SVProgressHUD showInfoWithStatus:@"标题不能超过20字～"];
+        if (textField.text.length >= MAXTitle) {
+            [SVProgressHUD showInfoWithStatus:@"标题不能超过20字"];
         }
         
     } else {
@@ -459,13 +489,6 @@ static NSString *const URLActionTags = @"/scene_sight/stick_active_tags";
             self.cancelSearchBtn.alpha = 0;
         }];
     }
-}
-
-- (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string {
-    if (string.length > 20) {
-        return NO;
-    }
-    return YES;
 }
 
 #pragma mark - 搜索文字

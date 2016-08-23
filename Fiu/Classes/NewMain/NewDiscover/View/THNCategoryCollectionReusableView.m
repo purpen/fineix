@@ -8,9 +8,17 @@
 
 #import "THNCategoryCollectionReusableView.h"
 #import "MallMenuCollectionViewCell.h"
+#import "DiscoverCategoryViewController.h"
+#import "THNCategoryViewController.h"
 //#import "GoodsCategoryViewController.h"
 
 static NSString *const collectionViewCellId = @"CollectionViewCellId";
+
+@interface THNCategoryCollectionReusableView () {
+    NSInteger _type;
+}
+
+@end
 
 @implementation THNCategoryCollectionReusableView
 
@@ -46,13 +54,15 @@ static NSString *const collectionViewCellId = @"CollectionViewCellId";
 
 #pragma mark -
 - (void)setCategoryData:(NSMutableArray *)category type:(NSInteger)type {
-    if (type == 0) {
+    _type = type;
+    
+    if (_type == 0) {
         [self.headerView addGroupHeaderViewIcon:@"discover_newScene"
                                   withTitle:NSLocalizedString(@"newScene", nil)
                                withSubtitle:@""
                               withRightMore:@""
                                withMoreType:0];
-    } else if (type == 1) {
+    } else if (_type == 1) {
         [self.headerView addGroupHeaderViewIcon:@"mall_newGoods"
                                   withTitle:NSLocalizedString(@"newGoods", nil)
                                withSubtitle:@""
@@ -66,7 +76,8 @@ static NSString *const collectionViewCellId = @"CollectionViewCellId";
     for (NSDictionary *categoryDict in category) {
         CategoryRow *model = [[CategoryRow alloc] initWithDictionary:categoryDict];
         [self.categoryMarr addObject:model];
-        [self.categoryIdMarr addObject:[NSString stringWithFormat:@"%zi",model.idField]];
+        [self.categoryIdMarr addObject:[NSString stringWithFormat:@"%zi",model.tagId]];
+        [self.categoryTitleMarr addObject:model.title];
     }
     [self.menuView reloadData];
 }
@@ -108,7 +119,18 @@ static NSString *const collectionViewCellId = @"CollectionViewCellId";
 
 #pragma mark UICollectionViewDelegate
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
-    [SVProgressHUD showSuccessWithStatus:[NSString stringWithFormat:@"打开分类id: %@", self.categoryIdMarr[indexPath.row]]];
+    if (_type == 0) {
+        DiscoverCategoryViewController *categoryVC = [[DiscoverCategoryViewController alloc] init];
+        categoryVC.vcTitle = self.categoryTitleMarr[indexPath.row];
+        //    categoryVC.categoryId = self.categoryIdMarr[indexPath.row];
+        [self.nav pushViewController:categoryVC animated:YES];
+    
+    } else if (_type == 1) {
+        THNCategoryViewController *mallCategoryVC = [[THNCategoryViewController alloc] init];
+        mallCategoryVC.vcTitle = self.categoryTitleMarr[indexPath.row];
+        mallCategoryVC.categoryId = self.categoryIdMarr[indexPath.row];
+        [self.nav pushViewController:mallCategoryVC animated:YES];
+    }
 }
 
 #pragma mark - NSMutableArray
@@ -124,6 +146,13 @@ static NSString *const collectionViewCellId = @"CollectionViewCellId";
         _categoryIdMarr = [NSMutableArray array];
     }
     return _categoryIdMarr;
+}
+
+- (NSMutableArray *)categoryTitleMarr {
+    if (!_categoryTitleMarr) {
+        _categoryTitleMarr = [NSMutableArray array];
+    }
+    return _categoryTitleMarr;
 }
 
 @end

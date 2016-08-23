@@ -70,11 +70,7 @@
         [menuBtn setTitle:self.menuTitle[idx] forState:(UIControlStateNormal)];
         [menuBtn setTitleColor:[UIColor colorWithHexString:self.defaultColor] forState:(UIControlStateNormal)];
         [menuBtn setTitleColor:[UIColor colorWithHexString:fineixColor] forState:(UIControlStateSelected)];
-        if (IS_iOS9) {
-            menuBtn.titleLabel.font = [UIFont fontWithName:@"PingFangSC-Light" size:14];
-        } else {
-            menuBtn.titleLabel.font = [UIFont systemFontOfSize:14];
-        }
+        menuBtn.titleLabel.font = [UIFont systemFontOfSize:14];
         menuBtn.tag = menuBtnTag + idx;
         if (menuBtn.tag == menuBtnTag) {
             menuBtn.selected = YES;

@@ -8,6 +8,7 @@
 
 #import "THNDataInfoTableViewCell.h"
 #import "CommentNViewController.h"
+#import "FBAlertViewController.h"
 
 @implementation THNDataInfoTableViewCell {
     NSString *_sceneId;
@@ -101,7 +102,15 @@
 }
 
 - (void)moreClick:(UIButton *)button {
-    [SVProgressHUD showSuccessWithStatus:@"查看更多"];
+    FBAlertViewController * alertVC = [[FBAlertViewController alloc] init];
+    alertVC.modalPresentationStyle = UIModalPresentationOverFullScreen;
+    alertVC.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;
+    [alertVC initFBAlertVcStyle:NO];
+    alertVC.targetId = _sceneId;
+    alertVC.favoriteTheScene = ^(NSString *sceneId) {
+        [[NSNotificationCenter defaultCenter] postNotificationName:@"favoriteTheScene" object:sceneId];
+    };
+    [self.vc presentViewController:alertVC animated:YES completion:nil];
 }
 
 - (UIButton *)share {
@@ -157,7 +166,7 @@
         scaleAnimation.springSpeed = 10.0f;
         [button.layer pop_addAnimation:scaleAnimation forKey:@"scaleAnim"];
         
-        self.likeTheSceneBlock(_sceneId);
+        [[NSNotificationCenter defaultCenter] postNotificationName:@"likeTheScene" object:_sceneId];
         _loveCount += 1;
         [self.like setTitle:[NSString stringWithFormat:@"%zi", _loveCount] forState:(UIControlStateNormal)];
         
@@ -169,8 +178,8 @@
         scaleAnimation.springBounciness = 10.f;
         scaleAnimation.springSpeed = 10.0f;
         [button.layer pop_addAnimation:scaleAnimation forKey:@"scaleAnim"];
-        
-        self.cancelLikeTheSceneBlock(_sceneId);
+    
+        [[NSNotificationCenter defaultCenter] postNotificationName:@"cancelLikeTheScene" object:_sceneId];
         _loveCount -= 1;
         [self.like setTitle:[NSString stringWithFormat:@"%zi", _loveCount] forState:(UIControlStateNormal)];
     }

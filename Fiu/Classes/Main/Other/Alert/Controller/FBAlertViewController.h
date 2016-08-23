@@ -13,6 +13,7 @@
 typedef void(^OpenCommentVC)();
 typedef void(^DeleteScene)();
 typedef void(^EditDoneAndRefresh)();
+typedef void(^SureFavoriteTheScene)(NSString *sceneId);
 
 @interface FBAlertViewController : UIViewController
 
@@ -25,6 +26,7 @@ typedef void(^EditDoneAndRefresh)();
 @pro_copy OpenCommentVC         openCommentVc;
 @pro_copy DeleteScene           deleteScene;
 @pro_copy EditDoneAndRefresh    editDoneAndRefresh;
+@pro_copy SureFavoriteTheScene  favoriteTheScene;
 
 - (void)initFBAlertVcStyle:(BOOL)isUserSelf;
 

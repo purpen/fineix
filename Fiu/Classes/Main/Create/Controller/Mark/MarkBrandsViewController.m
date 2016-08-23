@@ -166,7 +166,9 @@ static NSString *const goodsCellId = @"GoodsCellId";
     if (tableView == self.brandList) {
         _chooseBrandTitle = self.brandTitleMarr[indexPath.row];
         [self setBrandName:_chooseBrandTitle type:1];
-        [self networkBrandOfGoods:self.brandIdMarr[indexPath.row]];
+        if (self.brandIdMarr.count) {
+            [self networkBrandOfGoods:self.brandIdMarr[indexPath.row]];
+        }
         
     } else if (tableView == self.goodsList) {
         [self dismissViewControllerAnimated:YES completion:^{

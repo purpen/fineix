@@ -19,10 +19,12 @@
 
 @pro_strong FBRequest *categoryRequest;
 @pro_strong FBRequest *mallListRequest;
+@pro_strong FBRequest *subjectRequest;
 @pro_assign NSInteger currentpageNum;
 @pro_assign NSInteger totalPageNum;
 @pro_strong UICollectionView *mallList;
 @pro_strong NSMutableArray *categoryMarr;
 @pro_strong NSMutableArray *goodsDataMarr;
+@pro_strong NSMutableArray *subjectMarr;
 
 @end
