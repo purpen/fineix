@@ -49,6 +49,7 @@ NSString *cellId = @"THNProjectGoodsCollectionViewCell";
     _model = model;
     [self.coverImageView sd_setImageWithURL:[NSURL URLWithString:model.cover_url] placeholderImage:[UIImage imageNamed:@"Defaul_Bg_420"]];
     self.titileLabel.text = model.title;
+    self.subTitleLabel.text = model.short_title;
     self.goodAry = [THNCuXiaoProductModel mj_objectArrayWithKeyValuesArray:model.products];
     [self.contenView reloadData];
 }
@@ -82,7 +83,7 @@ NSString *cellId = @"THNProjectGoodsCollectionViewCell";
 }
 
 -(CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath{
-    return CGSizeMake((SCREEN_WIDTH - 5 * 3) / 3.5, 135);
+    return CGSizeMake((SCREEN_WIDTH - 5 * 2) / 3, 135);
 }
 
 -(void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath{

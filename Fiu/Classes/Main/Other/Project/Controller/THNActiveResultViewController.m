@@ -55,7 +55,7 @@ static NSString *const twoCommentsCellId = @"TwoCommentsCellId";
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    [self.view addSubview:self.contentView];
+    [self.view insertSubview:self.contentView atIndex:0];
     [self setUpRefresh];
 }
 

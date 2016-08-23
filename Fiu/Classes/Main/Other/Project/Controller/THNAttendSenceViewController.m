@@ -45,8 +45,7 @@ static NSString * collectionViewCellId = @"THNDiscoverSceneCollectionViewCell";
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
-    [self.view addSubview:self.myCollectionView];
+    [self.view insertSubview:self.myCollectionView atIndex:0];
     
     [self setUpRefresh];
 }
@@ -56,7 +55,6 @@ static NSString * collectionViewCellId = @"THNDiscoverSceneCollectionViewCell";
         UICollectionViewFlowLayout * flowLayout = [[UICollectionViewFlowLayout alloc] init];
         flowLayout.sectionInset = UIEdgeInsetsMake(15, 15, 15, 15);
         _myCollectionView = [[UICollectionView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT - 64 - 211 - 50) collectionViewLayout:flowLayout];
-        
         _myCollectionView.backgroundColor = [UIColor colorWithHexString:@"#F7F7F7"];
         _myCollectionView.delegate = self;
         _myCollectionView.dataSource = self;

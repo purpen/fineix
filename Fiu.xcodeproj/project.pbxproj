@@ -442,6 +442,8 @@
 		1FBF2CCD1D6BFDE2003C1643 /* THNXinPinCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 1FBF2CCB1D6BFDE2003C1643 /* THNXinPinCollectionViewCell.m */; };
 		1FBF2CCE1D6BFDE2003C1643 /* THNXinPinCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1FBF2CCC1D6BFDE2003C1643 /* THNXinPinCollectionViewCell.xib */; };
 		1FBF2CD11D6C42D7003C1643 /* THNCuXiaoProductModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 1FBF2CD01D6C42D7003C1643 /* THNCuXiaoProductModel.m */; };
+		1FBF2CD41D6C91B0003C1643 /* THNActiveTopView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1FBF2CD31D6C91B0003C1643 /* THNActiveTopView.m */; };
+		1FBF2CD61D6C91CF003C1643 /* THNActiveTopView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1FBF2CD51D6C91CF003C1643 /* THNActiveTopView.xib */; };
 		1FC6782E1CDB33ED00535162 /* UIView+TYAlertView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1FC6782C1CDB33ED00535162 /* UIView+TYAlertView.m */; };
 		1FCDCC7A1D0515F700C92E78 /* ScenarioNonView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1FCDCC791D0515F700C92E78 /* ScenarioNonView.m */; };
 		1FCDCC7D1D0525A300C92E78 /* FocusNonView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1FCDCC7C1D0525A300C92E78 /* FocusNonView.m */; };
@@ -1454,6 +1456,9 @@
 		1FBF2CCC1D6BFDE2003C1643 /* THNXinPinCollectionViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = THNXinPinCollectionViewCell.xib; path = Fiu/Classes/Main/Other/Project/Model/THNXinPinCollectionViewCell.xib; sourceTree = SOURCE_ROOT; };
 		1FBF2CCF1D6C42D7003C1643 /* THNCuXiaoProductModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THNCuXiaoProductModel.h; sourceTree = "<group>"; };
 		1FBF2CD01D6C42D7003C1643 /* THNCuXiaoProductModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THNCuXiaoProductModel.m; sourceTree = "<group>"; };
+		1FBF2CD21D6C91B0003C1643 /* THNActiveTopView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = THNActiveTopView.h; path = Fiu/Classes/Main/Other/Project/Model/THNActiveTopView.h; sourceTree = SOURCE_ROOT; };
+		1FBF2CD31D6C91B0003C1643 /* THNActiveTopView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = THNActiveTopView.m; path = Fiu/Classes/Main/Other/Project/Model/THNActiveTopView.m; sourceTree = SOURCE_ROOT; };
+		1FBF2CD51D6C91CF003C1643 /* THNActiveTopView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = THNActiveTopView.xib; path = Fiu/Classes/Main/Other/Project/Model/THNActiveTopView.xib; sourceTree = SOURCE_ROOT; };
 		1FC6782C1CDB33ED00535162 /* UIView+TYAlertView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+TYAlertView.m"; sourceTree = "<group>"; };
 		1FC6782D1CDB33ED00535162 /* UIView+TYAutoLayout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+TYAutoLayout.h"; sourceTree = "<group>"; };
 		1FCDCC781D0515F700C92E78 /* ScenarioNonView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ScenarioNonView.h; sourceTree = "<group>"; };
@@ -4070,6 +4075,9 @@
 				1FBF2CCA1D6BFDE2003C1643 /* THNXinPinCollectionViewCell.h */,
 				1FBF2CCB1D6BFDE2003C1643 /* THNXinPinCollectionViewCell.m */,
 				1FBF2CCC1D6BFDE2003C1643 /* THNXinPinCollectionViewCell.xib */,
+				1FBF2CD21D6C91B0003C1643 /* THNActiveTopView.h */,
+				1FBF2CD31D6C91B0003C1643 /* THNActiveTopView.m */,
+				1FBF2CD51D6C91CF003C1643 /* THNActiveTopView.xib */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -4983,6 +4991,7 @@
 				1F6CA2721D5C468A00DFB79E /* THNInputCodeViewController.xib in Resources */,
 				1F296DDF1D6AE121001FC6A2 /* THNCuXiaoDetalViewController.xib in Resources */,
 				1FD10CAE1D62DE0E005898EE /* THNCollectionViewController.xib in Resources */,
+				1FBF2CD61D6C91CF003C1643 /* THNActiveTopView.xib in Resources */,
 				1FCDCC831D066D2700C92E78 /* SexSheetViewController.xib in Resources */,
 				1F2A90B01CF40277005116C7 /* OptionViewController.xib in Resources */,
 				1F2A901E1CF40277005116C7 /* BonusCell.xib in Resources */,
@@ -5189,6 +5198,7 @@
 				D8329DEF1CF611F800611025 /* ShareInfo.m in Sources */,
 				D8E3AEBC1CFC9B84006E5E8C /* SceneAddViewController.m in Sources */,
 				1F2A8F701CF40277005116C7 /* FiuSceneInfoCounter.m in Sources */,
+				1FBF2CD41D6C91B0003C1643 /* THNActiveTopView.m in Sources */,
 				D869BD671D6036A000432423 /* FBAlertViewController.m in Sources */,
 				1F2A8FFF1CF40277005116C7 /* AddreesModel.m in Sources */,
 				D85174301D54AC58005F5722 /* THNHomeViewController.m in Sources */,
@@ -5642,7 +5652,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 9.2;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
-				PROVISIONING_PROFILE = "38736fb6-f8a9-4075-b98f-85f06063d856";
+				PROVISIONING_PROFILE = "68229318-888d-4d23-9586-1a46706c4314";
 				SDKROOT = iphoneos;
 			};
 			name = Debug;
@@ -5680,7 +5690,7 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.2;
 				MTL_ENABLE_DEBUG_INFO = NO;
-				PROVISIONING_PROFILE = "38736fb6-f8a9-4075-b98f-85f06063d856";
+				PROVISIONING_PROFILE = "68229318-888d-4d23-9586-1a46706c4314";
 				SDKROOT = iphoneos;
 				VALIDATE_PRODUCT = YES;
 			};
@@ -5727,7 +5737,7 @@
 				OTHER_LIBTOOLFLAGS = "-all_load";
 				PRODUCT_BUNDLE_IDENTIFIER = com.THN.fineix;
 				PRODUCT_NAME = Fiu;
-				PROVISIONING_PROFILE = "38736fb6-f8a9-4075-b98f-85f06063d856";
+				PROVISIONING_PROFILE = "68229318-888d-4d23-9586-1a46706c4314";
 				RUN_CLANG_STATIC_ANALYZER = NO;
 				USER_HEADER_SEARCH_PATHS = "$(SRCROOT)";
 			};
@@ -5774,7 +5784,7 @@
 				OTHER_LIBTOOLFLAGS = "-all_load";
 				PRODUCT_BUNDLE_IDENTIFIER = com.THN.fineix;
 				PRODUCT_NAME = Fiu;
-				PROVISIONING_PROFILE = "38736fb6-f8a9-4075-b98f-85f06063d856";
+				PROVISIONING_PROFILE = "68229318-888d-4d23-9586-1a46706c4314";
 				RUN_CLANG_STATIC_ANALYZER = NO;
 				USER_HEADER_SEARCH_PATHS = "$(SRCROOT)";
 			};

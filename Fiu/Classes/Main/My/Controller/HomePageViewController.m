@@ -602,14 +602,12 @@ static NSString *sceneCellId = @"SceneCollectionViewCell";
 
 -(void)clickFocusBtn:(UIButton*)sender{
     if (sender.selected) {
-        MyFansActionSheetViewController *sheetVC = [[MyFansActionSheetViewController alloc] init];
-        [sheetVC setUIWithModel:_model];
-        sheetVC.modalPresentationStyle = UIModalPresentationOverCurrentContext;
-        sheetVC.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;
-        [self presentViewController:sheetVC animated:YES completion:nil];
-        sheetVC.stopBtn.tag = sender.tag;
-        [sheetVC.stopBtn addTarget:self action:@selector(clickStopBtn:) forControlEvents:UIControlEventTouchUpInside];
-        [sheetVC.cancelBtn addTarget:self action:@selector(clickCancelBtn:) forControlEvents:UIControlEventTouchUpInside];
+        _model.is_love = 0;
+        _fansN --;
+        [self.myCollectionView reloadItemsAtIndexPaths:[NSArray arrayWithObjects:[NSIndexPath indexPathForRow:0 inSection:0],[NSIndexPath indexPathForRow:0 inSection:1], nil]];
+        FBRequest *request = [FBAPI postWithUrlString:@"/follow/ajax_cancel_follow" requestDictionary:@{@"follow_id":self.userId} delegate:self];
+        request.flag = @"/follow/ajax_cancel_follow";
+        [request startRequest];
     }else{
         //请求数据
         FBRequest *request = [FBAPI postWithUrlString:@"/follow/ajax_follow" requestDictionary:@{@"follow_id":self.userId} delegate:self];

@@ -23,7 +23,7 @@
 
 -(void)setModel:(THNCuXiaoDetalModel *)model{
     _model = model;
-    [self.bgImageView sd_setImageWithURL:[NSURL URLWithString:model.cover_url] placeholderImage:[UIImage imageNamed:@"Defaul_Bg_420"]];
+    [self.bgImageView sd_setImageWithURL:[NSURL URLWithString:model.banner_url] placeholderImage:[UIImage imageNamed:@"Defaul_Bg_420"]];
     self.textLabel.text = model.title;
     self.summaryLabel.text = model.summary;
 }

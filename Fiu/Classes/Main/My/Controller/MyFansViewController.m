@@ -230,15 +230,25 @@
 -(void)clickFocusBtn:(UIButton*)sender{
     
     if (sender.selected) {
-        MyFansActionSheetViewController *sheetVC = [[MyFansActionSheetViewController alloc] init];
         UserInfo *model = _modelAry[sender.tag];
-        [sheetVC setUIWithModel:model];
-        sheetVC.modalPresentationStyle = UIModalPresentationOverCurrentContext;
-        sheetVC.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;
-        [self presentViewController:sheetVC animated:YES completion:nil];
-        sheetVC.stopBtn.tag = sender.tag;
-        [sheetVC.stopBtn addTarget:self action:@selector(clickStopBtn:) forControlEvents:UIControlEventTouchUpInside];
-        [sheetVC.cancelBtn addTarget:self action:@selector(clickCancelBtn:) forControlEvents:UIControlEventTouchUpInside];
+        UserInfoEntity *entity = [UserInfoEntity defaultUserInfoEntity];
+        if ([entity.userId isEqual:model.userId]) {
+            model.is_love = 1;
+        }else{
+            model.level = @0;
+        }
+        [self.mytableView reloadRowsAtIndexPaths:[NSArray arrayWithObjects:[NSIndexPath indexPathForRow:sender.tag inSection:0], nil] withRowAnimation:UITableViewRowAnimationNone];
+        FBRequest *request = [FBAPI postWithUrlString:@"/follow/ajax_cancel_follow" requestDictionary:@{@"follow_id":model.userId} delegate:self];
+        [request startRequestSuccess:^(FBRequest *request, id result) {
+            if ([result objectForKey:@"success"]) {
+                [SVProgressHUD showSuccessWithStatus:@"取消关注"];
+                //            FocusOnTableViewCell *cell = [self.mytableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:sender.tag inSection:0]];
+                
+            }else{
+                [SVProgressHUD showErrorWithStatus:@"连接失败"];
+            }
+        } failure:nil];
+
     }else{
         UserInfo *model = _modelAry[sender.tag];
         UserInfoEntity *entity = [UserInfoEntity defaultUserInfoEntity];
