@@ -56,6 +56,10 @@
         self.isExpert = [dictionary[@"is_expert"] integerValue];
     }
     
+    if(![dictionary[@"is_follow"] isKindOfClass:[NSNull class]]){
+        self.isFollow = [dictionary[@"is_follow"] integerValue];
+    }
+    
     if(![dictionary[@"label"] isKindOfClass:[NSNull class]]){
         self.userLable = dictionary[@"label"];
     }

@@ -8,6 +8,14 @@
 
 #import "THNDiscoverSceneCollectionViewCell.h"
 
+@interface THNDiscoverSceneCollectionViewCell () {
+    NSString *_sceneId;
+    NSString *_userId;
+    NSInteger _loveCount;
+}
+
+@end
+
 @implementation THNDiscoverSceneCollectionViewCell
 
 - (instancetype)initWithFrame:(CGRect)frame {
@@ -27,7 +35,10 @@
     } else {
         self.likeBtn.selected = NO;
     }
-    
+    _loveCount = sceneModel.loveCount;
+    _sceneId = [NSString stringWithFormat:@"%zi", sceneModel.idField];
+    _userId = [NSString stringWithFormat:@"%zi", sceneModel.userId];
+
     if (sceneModel.title.length == 0) {
         self.title.hidden = YES;
         self.suTitle.hidden = YES;
@@ -40,9 +51,6 @@
         self.title.text = titleStr;
         
         NSString *suTitleStr = [NSString stringWithFormat:@"   %@  ", [sceneModel.title substringFromIndex:10]];
-        if (suTitleStr.length > 10) {
-            suTitleStr = [suTitleStr substringToIndex:13];
-        }
         self.suTitle.text = suTitleStr;
         
         [self.suTitle mas_updateConstraints:^(MASConstraintMaker *make) {
@@ -209,6 +217,8 @@
         scaleAnimation.springSpeed = 10.0f;
         [button.layer pop_addAnimation:scaleAnimation forKey:@"scaleAnim"];
         
+        [[NSNotificationCenter defaultCenter] postNotificationName:@"findLikeTheScene" object:_sceneId];
+        
     } else if (button.selected == YES) {
         button.selected = NO;
         POPSpringAnimation *scaleAnimation = [POPSpringAnimation animationWithPropertyNamed:kPOPLayerScaleXY];
@@ -217,6 +227,8 @@
         scaleAnimation.springBounciness = 10.f;
         scaleAnimation.springSpeed = 10.0f;
         [button.layer pop_addAnimation:scaleAnimation forKey:@"scaleAnim"];
+        
+        [[NSNotificationCenter defaultCenter] postNotificationName:@"findCancelLikeTheScene" object:_sceneId];
     }
 }
 

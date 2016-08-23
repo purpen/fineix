@@ -8,6 +8,12 @@
 
 #import "THNUserInfoTableViewCell.h"
 
+@interface THNUserInfoTableViewCell () {
+    NSString *_userId;
+}
+
+@end
+
 @implementation THNUserInfoTableViewCell
 
 - (instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier {
@@ -37,6 +43,14 @@
     } else {
         self.certificate.hidden = YES;
     }
+    
+    if (userModel.user.isFollow == 0) {
+        self.follow.selected = NO;
+    } else if (userModel.user.isFollow == 1) {
+        self.follow.selected = YES;
+    }
+    
+    _userId = [NSString stringWithFormat:@"%zi", userModel.userId];
 }
 
 - (CGSize)getTextSizeWidth:(NSString *)text {
@@ -156,6 +170,8 @@
         button.layer.borderColor = [UIColor colorWithHexString:MAIN_COLOR].CGColor;
         button.backgroundColor = [UIColor colorWithHexString:MAIN_COLOR];
         
+        [[NSNotificationCenter defaultCenter] postNotificationName:@"followTheUser" object:_userId];
+        
     } else if (button.selected == YES) {
         button.selected = NO;
         POPSpringAnimation *scaleAnimation = [POPSpringAnimation animationWithPropertyNamed:kPOPLayerScaleXY];
@@ -166,6 +182,8 @@
         [button.layer pop_addAnimation:scaleAnimation forKey:@"scaleAnim"];
         button.layer.borderColor = [UIColor colorWithHexString:WHITE_COLOR alpha:0.6].CGColor;
         button.backgroundColor = [UIColor colorWithHexString:BLACK_COLOR];
+        
+        [[NSNotificationCenter defaultCenter] postNotificationName:@"cancelFollowTheUser" object:_userId];
     }
 }
 

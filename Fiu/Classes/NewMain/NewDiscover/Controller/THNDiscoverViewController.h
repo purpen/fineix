@@ -16,6 +16,8 @@
     UICollectionViewDataSource
 >
 
+@pro_strong FBRequest *likeSceneRequest;
+@pro_strong FBRequest *cancelLikeRequest;
 @pro_strong FBRequest *categoryRequest;
 @pro_strong FBRequest *sceneListRequest;
 @pro_assign NSInteger currentpageNum;
