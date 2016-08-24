@@ -34,5 +34,7 @@
 @property(nonatomic,copy) NSString *share_desc;
 /**  */
 @property(nonatomic,copy) NSString *banner_url;
+/**  */
+@property(nonatomic,copy) NSString *user_id;
 
 @end

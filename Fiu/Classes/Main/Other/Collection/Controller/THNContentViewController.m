@@ -8,7 +8,6 @@
 
 #import "THNContentViewController.h"
 #import "UIView+FSExtension.h"
-#import "SceneCollectionViewCell.h"
 #import "FBRefresh.h"
 #import "UserInfoEntity.h"
 #import "GoodsRow.h"
@@ -16,6 +15,7 @@
 #import "GoodsInfoViewController.h"
 #import "HomeSceneListRow.h"
 #import "SceneInfoViewController.h"
+#import "THNHomeSenceCollectionViewCell.h"
 
 @interface THNContentViewController ()<UICollectionViewDelegate,UICollectionViewDataSource>
 {
@@ -35,7 +35,7 @@
 
 @end
 
-static NSString *sceneCellId = @"SceneCollectionViewCell";
+static NSString *sceneCellId = @"THNHomeSenceCollectionViewCell";
 static NSString *goodsCellId = @"goods";
 static NSString *const URLFiuGoods = @"/favorite/get_new_list";
 
@@ -60,7 +60,7 @@ static NSString *const URLFiuGoods = @"/favorite/get_new_list";
         _contenView.showsVerticalScrollIndicator = NO;
         _contenView.delegate = self;
         _contenView.dataSource = self;
-        [_contenView registerClass:[SceneCollectionViewCell class] forCellWithReuseIdentifier:sceneCellId];
+        [_contenView registerNib:[UINib nibWithNibName:sceneCellId bundle:nil] forCellWithReuseIdentifier:sceneCellId];
         [_contenView registerNib:[UINib nibWithNibName:NSStringFromClass([THNGoodsCollectionViewCell class]) bundle:nil] forCellWithReuseIdentifier:goodsCellId];
     }
     return _contenView;
@@ -265,8 +265,8 @@ static NSString *const URLFiuGoods = @"/favorite/get_new_list";
         cell.model = self.goodsList[indexPath.row];
         return cell;
     }else if (self.type == CollectionTypeSence){
-        SceneCollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:sceneCellId forIndexPath:indexPath];
-        [cell setAllFiuSceneListData:_sceneListMarr[indexPath.row]];
+        THNHomeSenceCollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:sceneCellId forIndexPath:indexPath];
+        cell.model = _sceneListMarr[indexPath.row];
         return cell;
     }
     UICollectionViewCell *cell;

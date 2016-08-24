@@ -35,5 +35,9 @@
 @pro_strong NSMutableArray *sortPhotosArr;      //  排序的相片
 @pro_strong NSMutableArray *photoAlbumArr;      //  全部的相薄
 @pro_strong PhotoAlbumsView *photoAlbumsView;   //  相薄页面
+/** 活动ID */
+@property(nonatomic,copy) NSString *id;
+/** 活动标题 */
+@property(nonatomic,copy) NSString *activeTitle;
 
 @end

@@ -8,9 +8,13 @@
 
 #import <UIKit/UIKit.h>
 
+@class THNArticleModel;
+
 @interface THNActiveRuleViewController : UIViewController
 
 /**  */
 @property(nonatomic,copy) NSString *id;
+/**  */
+@property (nonatomic, strong) THNArticleModel *model;
 
 @end

@@ -49,9 +49,7 @@ static NSString *const cellId = @"THNCuXiaoDetalContentTableViewCell";
     return _topView;
 }
 
-- (void)viewDidLoad {
-    [super viewDidLoad];
-    
+-(void)viewWillAppear:(BOOL)animated{
     self.navViewTitle.text = @"促销详情";
     
     
@@ -75,6 +73,11 @@ static NSString *const cellId = @"THNCuXiaoDetalContentTableViewCell";
         }
     } failure:nil];
 
+}
+
+- (void)viewDidLoad {
+    [super viewDidLoad];
+    
 }
 
 -(ShareViewController *)shareVC{
@@ -180,10 +183,10 @@ static NSString *const cellId = @"THNCuXiaoDetalContentTableViewCell";
 
 
 - (IBAction)comment:(id)sender {
-//    ProjectViewCommentsViewController * commentVC = [[ProjectViewCommentsViewController alloc] init];
-//    commentVC.targetId = self.model._id;
-//    commentVC.sceneUserId = self.model.user_id;
-//    [self.navigationController pushViewController:commentVC animated:YES];
+    ProjectViewCommentsViewController * commentVC = [[ProjectViewCommentsViewController alloc] init];
+    commentVC.targetId = self.model._id;
+    commentVC.sceneUserId = self.model.user_id;
+    [self.navigationController pushViewController:commentVC animated:YES];
 }
 
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{

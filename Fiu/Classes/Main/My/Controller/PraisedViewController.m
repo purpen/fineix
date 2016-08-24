@@ -12,7 +12,7 @@
 #import "MJRefresh.h"
 #import "SceneInfoViewController.h"
 #import "UserInfoEntity.h"
-#import "SceneCollectionViewCell.h"
+#import "THNHomeSenceCollectionViewCell.h"
 
 @interface PraisedViewController ()<FBNavigationBarItemsDelegate,UICollectionViewDelegate,UICollectionViewDataSource>
 @pro_strong NSMutableArray      *   sceneListMarr;
@@ -24,7 +24,7 @@
 @end
 
 static NSString *const URLSceneList = @"/scene_sight/";
-static NSString *sceneCollectionCellId = @"SceneCollectionViewCell";
+static NSString *sceneCollectionCellId = @"THNHomeSenceCollectionViewCell";
 
 @implementation PraisedViewController
 
@@ -130,7 +130,7 @@ static NSString *sceneCollectionCellId = @"SceneCollectionViewCell";
         _myCollectionView.backgroundColor = [UIColor whiteColor];
         _myCollectionView.delegate = self;
         _myCollectionView.dataSource = self;
-        [_myCollectionView registerClass:[SceneCollectionViewCell class] forCellWithReuseIdentifier:sceneCollectionCellId];
+        [_myCollectionView registerNib:[UINib nibWithNibName:sceneCollectionCellId bundle:nil] forCellWithReuseIdentifier:sceneCollectionCellId];
     }
     return _myCollectionView;
 }
@@ -144,9 +144,9 @@ static NSString *sceneCollectionCellId = @"SceneCollectionViewCell";
 }
 
 -(UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath{
-    SceneCollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:sceneCollectionCellId forIndexPath:indexPath];
+    THNHomeSenceCollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:sceneCollectionCellId forIndexPath:indexPath];
     if (self.sceneListMarr.count) {
-        [cell setAllFiuSceneListData:self.sceneListMarr[indexPath.row]];
+        cell.model = self.sceneListMarr[indexPath.row];
     }
     return cell;
 }

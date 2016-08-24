@@ -57,6 +57,7 @@ NSString *cellId = @"THNProjectGoodsCollectionViewCell";
 -(UICollectionView *)contenView{
     if (!_contenView) {
         UICollectionViewFlowLayout *layout = [[UICollectionViewFlowLayout alloc] init];
+        layout.scrollDirection = UICollectionViewScrollDirectionHorizontal;
         layout.sectionInset = UIEdgeInsetsMake(3, 0, 0, 0);
         layout.minimumInteritemSpacing = 5;
         layout.minimumLineSpacing = 5;
@@ -66,6 +67,7 @@ NSString *cellId = @"THNProjectGoodsCollectionViewCell";
         _contenView.scrollEnabled = YES;
         _contenView.delegate = self;
         _contenView.dataSource = self;
+        _contenView.showsHorizontalScrollIndicator = NO;
         [_contenView registerNib:[UINib nibWithNibName:@"THNProjectGoodsCollectionViewCell" bundle:nil] forCellWithReuseIdentifier:cellId];
     }
     return _contenView;
@@ -83,7 +85,7 @@ NSString *cellId = @"THNProjectGoodsCollectionViewCell";
 }
 
 -(CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath{
-    return CGSizeMake((SCREEN_WIDTH - 5 * 2) / 3, 135);
+    return CGSizeMake((SCREEN_WIDTH - 5 * 2) / 3.5, 135);
 }
 
 -(void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath{

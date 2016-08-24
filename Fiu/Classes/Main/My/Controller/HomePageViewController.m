@@ -31,7 +31,7 @@
 #import "HomePageViewController.h"
 #import "UIImagePickerController+Flag.h"
 #import "ScenarioNonView.h"
-#import "SceneCollectionViewCell.h"
+#import "THNHomeSenceCollectionViewCell.h"
 #import "UIView+FSExtension.h"
 
 #define UserHeadTag 1
@@ -61,7 +61,7 @@
 @end
 
 static NSString *const IconURL = @"/my/add_head_pic";
-static NSString *sceneCellId = @"SceneCollectionViewCell";
+static NSString *sceneCellId = @"THNHomeSenceCollectionViewCell";
 
 @implementation HomePageViewController
 
@@ -401,7 +401,7 @@ static NSString *sceneCellId = @"SceneCollectionViewCell";
         [_myCollectionView registerClass:[UICollectionViewCell class] forCellWithReuseIdentifier:@"UICollectionViewCell"];
         [_myCollectionView registerClass:[AllSceneCollectionViewCell class] forCellWithReuseIdentifier:@"AllSceneCollectionViewCell"];
         [_myCollectionView registerClass:[UICollectionViewCell class] forCellWithReuseIdentifier:@"UICollectionViewCellScenarioNon"];
-        [_myCollectionView registerClass:[SceneCollectionViewCell class] forCellWithReuseIdentifier:sceneCellId];
+        [_myCollectionView registerNib:[UINib nibWithNibName:sceneCellId bundle:nil] forCellWithReuseIdentifier:sceneCellId];
     }
     return _myCollectionView;
 }
@@ -540,8 +540,8 @@ static NSString *sceneCellId = @"SceneCollectionViewCell";
                 return cell;
             }else{
                 //不是空的
-                SceneCollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:sceneCellId forIndexPath:indexPath];
-                [cell setAllFiuSceneListData:_sceneListMarr[indexPath.row]];
+                THNHomeSenceCollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:sceneCellId forIndexPath:indexPath];
+                cell.model = _sceneListMarr[indexPath.row];
                 cell.width = (SCREEN_WIDTH - 15 * 3) * 0.5;
                 cell.height = 0.25 * SCREEN_HEIGHT;
                 return cell;

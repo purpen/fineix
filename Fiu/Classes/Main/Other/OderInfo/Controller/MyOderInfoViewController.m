@@ -21,6 +21,7 @@
 #import "CommenttwoViewController.h"
 #import "FBPayTheWayViewController.h"
 #import "HMSegmentedControl.h"
+#import "CounterModel.h"
 
 @interface MyOderInfoViewController ()<FBNavigationBarItemsDelegate,UITableViewDelegate,UITableViewDataSource,FBRequestDelegate,OrderInfoCellDelegate>
 
@@ -30,10 +31,6 @@
 @property (nonatomic, assign) NSInteger currentPageNumber;
 @property (nonatomic, assign) NSInteger totalPageNumber;
 @property (nonatomic,strong) NSMutableArray *orderListAry;
-@property(nonatomic,strong) TipNumberView *order_wait_paymentTipView;
-@property(nonatomic,strong) TipNumberView *order_ready_goodsTipView;
-@property(nonatomic,strong) TipNumberView *order_sended_goodsTipView;
-@property(nonatomic,strong) TipNumberView *order_evaluateTipView;
 
 @end
 
@@ -42,54 +39,6 @@ static NSString *const OrderInfoCellIdentifier = @"orderInfoCell";
 
 @implementation MyOderInfoViewController
 
--(TipNumberView *)order_evaluateTipView{
-    if (!_order_evaluateTipView) {
-        _order_evaluateTipView = [TipNumberView getTipNumView];
-    }
-    return _order_evaluateTipView;
-}
-
--(TipNumberView *)order_ready_goodsTipView{
-    if (!_order_ready_goodsTipView) {
-        _order_ready_goodsTipView = [TipNumberView getTipNumView];
-    }
-    return _order_ready_goodsTipView;
-}
-
--(TipNumberView *)order_sended_goodsTipView{
-    if (!_order_sended_goodsTipView) {
-        _order_sended_goodsTipView = [TipNumberView getTipNumView];
-    }
-    return _order_sended_goodsTipView;
-}
-
--(TipNumberView *)order_wait_paymentTipView{
-    if (!_order_wait_paymentTipView) {
-        _order_wait_paymentTipView = [TipNumberView getTipNumView];
-    }
-    return _order_wait_paymentTipView;
-}
-
--(void)addTipViewWithNum:(NSInteger)num andTipView:(TipNumberView*)tipView andBtn:(UIButton*)btn{
-    if (num == 0) {
-        //不显示
-        [tipView removeFromSuperview];
-    }else{
-        //显示
-        tipView.tipNumLabel.text = [NSString stringWithFormat:@"%zi",num];
-        CGSize size = [tipView.tipNumLabel.text sizeWithAttributes:@{NSFontAttributeName: [UIFont systemFontOfSize:12]}];
-        [btn addSubview:tipView];
-        [tipView mas_makeConstraints:^(MASConstraintMaker *make) {
-            if ((size.width+9) > 15) {
-                make.size.mas_equalTo(CGSizeMake(size.width+9, 15));
-            }else{
-                make.size.mas_equalTo(CGSizeMake(15, 15));
-            }
-            make.right.mas_equalTo(btn.mas_right).with.offset(-7/667.0*SCREEN_HEIGHT);
-            make.top.mas_equalTo(btn.mas_top).with.offset(13/667.0*SCREEN_HEIGHT);
-        }];
-    }
-}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -130,7 +79,6 @@ static NSString *const OrderInfoCellIdentifier = @"orderInfoCell";
     }else if ([self.type isEqualToNumber:@4]){
         [segmentedControl setSelectedSegmentIndex:4];
     }
-    
     
     
     [self.myTableView registerNib:[UINib nibWithNibName:@"OrderInfoCell" bundle:nil] forCellReuseIdentifier:OrderInfoCellIdentifier];
@@ -235,7 +183,6 @@ static NSString *const OrderInfoCellIdentifier = @"orderInfoCell";
     
     [self requestDataForOderListOperationWith:self.type];
 }
-
 
 
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{

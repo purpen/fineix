@@ -13,6 +13,8 @@
 #import "UIView+FSExtension.h"
 #import "UIColor+Extension.h"
 #import <Masonry.h>
+#import "ClipImageViewController.h"
+#import "THNArticleModel.h"
 
 @interface THNActiveRuleViewController ()
 
@@ -26,6 +28,11 @@
 @end
 
 @implementation THNActiveRuleViewController
+
+-(void)viewWillAppear:(BOOL)animated{
+    [super viewWillAppear:animated];
+    [UIApplication sharedApplication].statusBarHidden = NO;
+}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -67,6 +74,12 @@
         _textLabel.numberOfLines = 0;
     }
     return _textLabel;
+}
+- (IBAction)attend:(id)sender {
+    ClipImageViewController *vc = [[ClipImageViewController alloc] init];
+    vc.id = self.model._id;
+    vc.activeTitle = self.model.title;
+    [self presentViewController:vc animated:YES completion:nil];
 }
 
 @end
