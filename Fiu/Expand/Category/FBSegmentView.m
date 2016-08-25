@@ -16,7 +16,6 @@ static NSInteger const menuBtnTag = 642;
     self = [super initWithFrame:frame];
     if (self) {
         self.backgroundColor = [UIColor whiteColor];
-        
     }
     return self;
 }

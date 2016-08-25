@@ -226,7 +226,7 @@ static NSString *const SceneListCellId = @"sceneListCellId";
 }
 
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
-    //    [SVProgressHUD showSuccessWithStatus:[NSString stringWithFormat:@"打开情景：%@",self.sceneIdMarr[indexPath.row]]];
+    [SVProgressHUD showSuccessWithStatus:[NSString stringWithFormat:@"打开情景详情：%@",self.sceneIdMarr[indexPath.row]]];
 //    THNSceneListViewController *sceneListVC = [[THNSceneListViewController alloc] init];
 //    sceneListVC.sceneListMarr = self.sceneListMarr;
 //    sceneListVC.commentsMarr = self.commentsMarr;

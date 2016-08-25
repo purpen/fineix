@@ -71,7 +71,7 @@ static NSString *const collectionViewCellId = @"CollectionViewCellId";
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
     MallMenuCollectionViewCell * cell = [collectionView dequeueReusableCellWithReuseIdentifier:collectionViewCellId forIndexPath:indexPath];
     if (self.categoryMarr.count) {
-        [cell setCategoryData:self.categoryMarr[indexPath.row]];
+        [cell setCategoryData:self.categoryMarr[indexPath.row] type:0];
     }
     return cell;
 }

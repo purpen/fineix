@@ -16,13 +16,14 @@
 @pro_strong UITableView     *   goodsTable;
 @pro_strong UIView          *   buyView;
 @pro_strong UIButton        *   buyingBtn;
-@pro_strong UIButton        *   addCarBtn;
+@pro_strong UIButton        *   likeBtn;
 @pro_strong UIWebView       *   goodsInfoWeb;
-@pro_strong UILabel         *   pullLab;
 
 @pro_strong NSString        *   goodsID;            //  商品id
 @pro_strong FBRequest       *   goodsInfoRequest;
 @pro_strong FBRequest       *   commentRequest;
 @pro_strong FBRequest       *   addCarRequest;
+@pro_strong FBRequest       *   collectRequest;
+@pro_strong FBRequest       *   cancelCollectRequest;
 
 @end

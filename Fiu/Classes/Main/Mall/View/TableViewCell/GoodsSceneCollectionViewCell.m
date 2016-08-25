@@ -32,11 +32,7 @@
     if (!_title) {
         _title = [[UILabel alloc] init];
         _title.textColor = [UIColor colorWithHexString:titleColor];
-        if (IS_iOS9) {
-            _title.font = [UIFont fontWithName:@"PingFangSC-Light" size:12];
-        } else {
-            _title.font = [UIFont systemFontOfSize:12];
-        }
+        _title.font = [UIFont systemFontOfSize:12];
         _title.textAlignment = NSTextAlignmentCenter;
     }
     return _title;
@@ -45,8 +41,8 @@
 - (void)setSelected:(BOOL)selected {
     if (selected) {
         self.title.textColor = [UIColor whiteColor];
-        self.backgroundColor = [UIColor colorWithHexString:fineixColor];
-        self.layer.borderColor = [UIColor colorWithHexString:fineixColor].CGColor;
+        self.backgroundColor = [UIColor colorWithHexString:@"#222222"];
+        self.layer.borderColor = [UIColor colorWithHexString:@"#222222"].CGColor;
     } else {
         self.layer.borderColor = [UIColor colorWithHexString:titleColor].CGColor;
         self.title.textColor = [UIColor colorWithHexString:titleColor];

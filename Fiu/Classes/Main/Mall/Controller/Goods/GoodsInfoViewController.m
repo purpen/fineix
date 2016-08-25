@@ -300,7 +300,7 @@ static NSString *const URlCancelCollect = @"/favorite/ajax_cancel_favorite";
         if (self.goodsInfo.brand.coverUrl.length) {
             InfoBrandTableViewCell * cell = [tableView dequeueReusableCellWithIdentifier:InfoBrandCellId];
             cell = [[InfoBrandTableViewCell alloc] initWithStyle:(UITableViewCellStyleDefault) reuseIdentifier:InfoBrandCellId];
-            [cell setGoodsBrandData:self.goodsInfo];
+//            [cell setGoodsBrandData:self.goodsInfo];
             return cell;
             
         } else {

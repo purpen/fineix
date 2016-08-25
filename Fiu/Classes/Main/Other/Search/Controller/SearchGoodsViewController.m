@@ -9,6 +9,7 @@
 #import "SearchGoodsViewController.h"
 #import "MallListGoodsCollectionViewCell.h"
 #import "GoodsRow.h"
+#import "FBGoodsInfoViewController.h"
 
 static NSString *const URLSearchList = @"/search/getlist";
 static NSString *const goodsListCellId = @"GoodsListCellId";
@@ -185,7 +186,9 @@ static NSString *const goodsListCellId = @"GoodsListCellId";
 }
 
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
-    [SVProgressHUD showSuccessWithStatus:[NSString stringWithFormat:@"查看商品详情：%@",self.goodsIdMarr[indexPath.row]]];
+    FBGoodsInfoViewController *goodsVC = [[FBGoodsInfoViewController alloc] init];
+    goodsVC.goodsID = self.goodsIdMarr[indexPath.row];
+    [self.navigationController pushViewController:goodsVC animated:YES];
 }
 
 #pragma mark - NSMutableArray

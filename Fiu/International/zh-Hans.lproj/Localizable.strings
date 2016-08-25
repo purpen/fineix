@@ -44,6 +44,13 @@
 "mallSearch" = "搜索好货或品牌";
 "newGoods" = "最新推荐";
 
+//  商品详情
+"goodsInfoShow" = "详情介绍";
+"goBuyGoods" = "去购买";
+"likeTheGoods" = "收藏";
+"likeDoneGoods" = "已收藏";
+"goodsStern" = "产品亮点";
+
 //  搜索
 "searchScene" = "情境";
 "searchUser" = "用户";

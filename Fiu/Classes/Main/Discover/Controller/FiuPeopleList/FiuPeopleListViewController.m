@@ -105,6 +105,7 @@ static NSString *const FiuPeople = @"/user/activity_user";
     self.navViewTitle.text = NSLocalizedString(@"FiuPeopleListVC", nil);
     self.delegate = self;
     [[UIApplication sharedApplication] setStatusBarHidden:NO withAnimation:(UIStatusBarAnimationSlide)];
+    [[UIApplication sharedApplication] setStatusBarStyle:(UIStatusBarStyleLightContent)];
 }
 
 - (NSMutableArray *)peopleList {

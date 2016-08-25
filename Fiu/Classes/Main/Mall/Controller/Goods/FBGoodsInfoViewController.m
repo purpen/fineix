@@ -10,22 +10,27 @@
 #import "GoodsCarViewController.h"
 #import "GoodsInfoData.h"
 #import "FBGoodsInfoModelData.h"
-#import "InfoTitleTableViewCell.h"
-#import "InfoRecommendTableViewCell.h"
-#import "FBGoodsColorTableViewCell.h"
-#import "FBGoodsCommentTableViewCell.h"
 #import "CommentModelRow.h"
 #import "GoodsRelationProducts.h"
 #import "FBGoodsCommentViewController.h"
 #import "FBBuyGoodsViewController.h"
 #import "FBSureOrderViewController.h"
+#import "GoodsBrandViewController.h"
+
+#import "InfoTitleTableViewCell.h"
+#import "GoodsDesTableViewCell.h"
+#import "InfoBrandTableViewCell.h"
 
 static NSString *const URLGoodsInfo = @"/product/view";
 static NSString *const URLGoodsCommet = @"/comment/getlist";
 static NSString *const URLAddCar = @"/shopping/add_cart";
+static NSString *const URlGoodsCollect = @"/favorite/ajax_favorite";
+static NSString *const URlCancelCollect = @"/favorite/ajax_cancel_favorite";
 
 @interface FBGoodsInfoViewController () {
     NSString * _goodsInfoUrl;
+    NSString *_goodsDes;
+    NSInteger _collect;
 }
 
 @pro_strong FBGoodsInfoModelData        *   goodsInfo;
@@ -57,7 +62,17 @@ static NSString *const URLAddCar = @"/shopping/add_cart";
     [SVProgressHUD show];
     self.goodsInfoRequest = [FBAPI getWithUrlString:URLGoodsInfo requestDictionary:@{@"id":self.goodsID} delegate:self];
     [self.goodsInfoRequest startRequestSuccess:^(FBRequest *request, id result) {
+        NSLog(@"＝＝＝＝＝ 商品详情：%@", result);
+        _goodsDes = [[result valueForKey:@"data"] valueForKey:@"advantage"];
         _goodsInfoUrl = [[result valueForKey:@"data"] valueForKey:@"content_view_url"];
+        _collect = [[[result valueForKey:@"data"] valueForKey:@"is_favorite"] integerValue];
+        
+        if (_collect == 0) {
+            self.likeBtn.selected = NO;
+        } else if (_collect == 1) {
+            self.likeBtn.selected = YES;
+        }
+        
         [self setThnGoodsInfoVcUI];
         self.goodsInfo = [[FBGoodsInfoModelData alloc] initWithDictionary:[result valueForKey:@"data"]];
         NSArray * goodsArr  = [[result valueForKey:@"data"] valueForKey:@"relation_products"];
@@ -87,7 +102,6 @@ static NSString *const URLAddCar = @"/shopping/add_cart";
             }
         }
         [self.goodsTable reloadData];
-        [self.goodsTable addSubview:self.pullLab];
         
     } failure:^(FBRequest *request, NSError *error) {
         [SVProgressHUD showErrorWithStatus:[error localizedDescription]];
@@ -106,6 +120,30 @@ static NSString *const URLAddCar = @"/shopping/add_cart";
     } failure:^(FBRequest *request, NSError *error) {
         [self showMessage:[error localizedDescription]];
     }];
+}
+
+#pragma mark 商品收藏
+- (void)networkCollectGoods:(UIButton *)button {
+    if (button.selected == NO) {
+        self.collectRequest = [FBAPI postWithUrlString:URlGoodsCollect requestDictionary:@{@"id":self.goodsID, @"type":@"10"} delegate:self];
+        [self.collectRequest startRequestSuccess:^(FBRequest *request, id result) {
+            button.selected = YES;
+            [SVProgressHUD showSuccessWithStatus:NSLocalizedString(@"collectSuccess", nil)];
+            
+        } failure:^(FBRequest *request, NSError *error) {
+            [SVProgressHUD showErrorWithStatus:[error localizedDescription]];
+        }];
+        
+    } else if (button.selected == YES) {
+        self.cancelCollectRequest = [FBAPI postWithUrlString:URlCancelCollect requestDictionary:@{@"id":self.goodsID, @"type":@"10"} delegate:self];
+        [self.cancelCollectRequest startRequestSuccess:^(FBRequest *request, id result) {
+            button.selected = NO;
+            [SVProgressHUD showSuccessWithStatus:NSLocalizedString(@"cancelCollect", nil)];
+            
+        } failure:^(FBRequest *request, NSError *error) {
+            [SVProgressHUD showErrorWithStatus:[error localizedDescription]];
+        }];
+    }
 }
 
 #pragma mark - 设置视图x
@@ -127,7 +165,7 @@ static NSString *const URLAddCar = @"/shopping/add_cart";
 #pragma mark - 商品详情
 - (UIWebView *)goodsInfoWeb {
     if (!_goodsInfoWeb) {
-        _goodsInfoWeb = [[UIWebView alloc] initWithFrame:CGRectMake(0, SCREEN_HEIGHT, SCREEN_WIDTH, SCREEN_HEIGHT - 108)];
+        _goodsInfoWeb = [[UIWebView alloc] initWithFrame:CGRectMake(SCREEN_WIDTH, 64, SCREEN_WIDTH, SCREEN_HEIGHT - 108)];
         _goodsInfoWeb.delegate = self;
         _goodsInfoWeb.scrollView.delegate = self;
         _goodsInfoWeb.scrollView.bounces = YES;
@@ -145,18 +183,6 @@ static NSString *const URLAddCar = @"/shopping/add_cart";
     [SVProgressHUD dismiss];
 }
 
-//  上拉提示
-- (UILabel *)pullLab {
-    if (!_pullLab) {
-        _pullLab = [[UILabel alloc] initWithFrame:CGRectMake(0, self.goodsTable.contentSize.height + 30, SCREEN_WIDTH, 20)];
-        _pullLab.text = NSLocalizedString(@"goodsPullLab", nil);
-        _pullLab.font = [UIFont systemFontOfSize:12];
-        _pullLab.textColor = [UIColor colorWithHexString:@"#555555"];
-        _pullLab.textAlignment = NSTextAlignmentCenter;
-    }
-    return _pullLab;
-}
-
 #pragma mark 产品详情的上拉&下拉加载
 - (void)scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate {
     decelerate = YES;
@@ -164,21 +190,7 @@ static NSString *const URLAddCar = @"/shopping/add_cart";
         CGPoint contentOffsetPoint = self.goodsTable.contentOffset;
         if (contentOffsetPoint.y >  self.goodsTable.contentSize.height - self.goodsTable.frame.size.height + 50) {
             
-            CGRect goodsTableRect = self.goodsTable.frame;
-            goodsTableRect.origin.y = -SCREEN_HEIGHT;
-            [UIView animateWithDuration:.3 animations:^{
-                self.goodsTable.frame = goodsTableRect;
-            }];
             
-            CGRect goodsInfoRect = self.goodsInfoWeb.frame;
-            goodsInfoRect.origin.y = 64;
-            [UIView animateWithDuration:.3 animations:^{
-                self.goodsInfoWeb.frame = goodsInfoRect;
-            }];
-            
-            //  加载商品的web详情
-            NSURLRequest *request =[NSURLRequest requestWithURL:[NSURL URLWithString:_goodsInfoUrl]];
-            [self.goodsInfoWeb loadRequest:request];
         }
         
     } else if (scrollView == self.goodsInfoWeb.scrollView) {
@@ -218,13 +230,13 @@ static NSString *const URLAddCar = @"/shopping/add_cart";
 }
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-    return 4;
+    return 3;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    if (section == 3) {
-        return self.goodsComment.count + 1;
-    }
+//    if (section == 3) {
+//        return self.goodsComment.count + 1;
+//    }
     return 1;
 }
 
@@ -239,44 +251,54 @@ static NSString *const URLAddCar = @"/shopping/add_cart";
         return cell;
         
     } else if (indexPath.section == 1) {
-        static NSString * thnGoodsColorTableViewCellId = @"FBGoodsColorTableViewCellId";
-        FBGoodsColorTableViewCell * cell = [tableView dequeueReusableCellWithIdentifier:thnGoodsColorTableViewCellId];
-        if (!cell) {
-            cell = [[FBGoodsColorTableViewCell alloc] initWithStyle:(UITableViewCellStyleDefault) reuseIdentifier:thnGoodsColorTableViewCellId];
-        }
-        cell.goodsColorLab.text = NSLocalizedString(@"GoodsColors", nil);
-        return cell;
-        
-    } else if (indexPath.section == 2) {
-        static NSString * thnInfoRecommendCellId = @"ThnInfoUseSceneCellId";
-        InfoRecommendTableViewCell * cell = [tableView dequeueReusableCellWithIdentifier:thnInfoRecommendCellId];
-        if (!cell) {
-            cell = [[InfoRecommendTableViewCell alloc] initWithStyle:(UITableViewCellStyleDefault) reuseIdentifier:thnInfoRecommendCellId];
-        }
-        cell.nav = self.navigationController;
-        [cell setRecommendGoodsData:self.recommendGoods withType:1];
-        return cell;
-    
-    } else if (indexPath.section == 3) {
-        if (indexPath.row == 0) {
-            static NSString * thnGoodsCommentCellId = @"ThnGoodsCommentCellId";
-            FBGoodsColorTableViewCell * cell = [tableView dequeueReusableCellWithIdentifier:thnGoodsCommentCellId];
-            if (!cell) {
-                cell = [[FBGoodsColorTableViewCell alloc] initWithStyle:(UITableViewCellStyleDefault) reuseIdentifier:thnGoodsCommentCellId];
-            }
-            cell.goodsColorLab.text = NSLocalizedString(@"GoodsComment", nil);
+        static NSString * goodsDesCellId = @"GoodsDesCellId";
+        if (_goodsDes.length) {
+            GoodsDesTableViewCell * cell = [tableView dequeueReusableCellWithIdentifier:goodsDesCellId];
+            cell = [[GoodsDesTableViewCell alloc] initWithStyle:(UITableViewCellStyleDefault) reuseIdentifier:goodsDesCellId];
+            [cell setGoodsDesText:_goodsDes];
             return cell;
             
         } else {
-            static NSString * thnGoodsCommentInfoCellId = @"ThnGoodsCommentInfoCellId";
-            FBGoodsCommentTableViewCell * cell = [tableView dequeueReusableCellWithIdentifier:thnGoodsCommentInfoCellId];
-            if (!cell) {
-                cell = [[FBGoodsCommentTableViewCell alloc] initWithStyle:(UITableViewCellStyleDefault) reuseIdentifier:thnGoodsCommentInfoCellId];
-            }
-            [cell setCommentModel:self.goodsComment[indexPath.row - 1]];
+            UITableViewCell * cell = [tableView dequeueReusableCellWithIdentifier:goodsDesCellId];
+            cell = [[UITableViewCell alloc] initWithStyle:(UITableViewCellStyleDefault) reuseIdentifier:goodsDesCellId];
+            return cell;
+        }
+        
+    } else if (indexPath.section == 2) {
+        static NSString * InfoBrandCellId = @"InfoBrandCellId";
+        if (self.goodsInfo.brand.coverUrl.length) {
+            InfoBrandTableViewCell * cell = [tableView dequeueReusableCellWithIdentifier:InfoBrandCellId];
+            cell = [[InfoBrandTableViewCell alloc] initWithStyle:(UITableViewCellStyleDefault) reuseIdentifier:InfoBrandCellId];
+            [cell setGoodsBrandData:self.goodsInfo];
+            return cell;
+            
+        } else {
+            UITableViewCell * cell = [tableView dequeueReusableCellWithIdentifier:InfoBrandCellId];
+            cell = [[UITableViewCell alloc] initWithStyle:(UITableViewCellStyleDefault) reuseIdentifier:InfoBrandCellId];
             return cell;
         }
     }
+    
+//    } else if (indexPath.section == 3) {
+//        if (indexPath.row == 0) {
+//            static NSString * thnGoodsCommentCellId = @"ThnGoodsCommentCellId";
+//            FBGoodsColorTableViewCell * cell = [tableView dequeueReusableCellWithIdentifier:thnGoodsCommentCellId];
+//            if (!cell) {
+//                cell = [[FBGoodsColorTableViewCell alloc] initWithStyle:(UITableViewCellStyleDefault) reuseIdentifier:thnGoodsCommentCellId];
+//            }
+//            cell.goodsColorLab.text = NSLocalizedString(@"GoodsComment", nil);
+//            return cell;
+//            
+//        } else {
+//            static NSString * thnGoodsCommentInfoCellId = @"ThnGoodsCommentInfoCellId";
+//            FBGoodsCommentTableViewCell * cell = [tableView dequeueReusableCellWithIdentifier:thnGoodsCommentInfoCellId];
+//            if (!cell) {
+//                cell = [[FBGoodsCommentTableViewCell alloc] initWithStyle:(UITableViewCellStyleDefault) reuseIdentifier:thnGoodsCommentInfoCellId];
+//            }
+//            [cell setCommentModel:self.goodsComment[indexPath.row - 1]];
+//            return cell;
+//        }
+//    }
 
     return nil;
 }
@@ -288,22 +310,32 @@ static NSString *const URLAddCar = @"/shopping/add_cart";
         return cell.cellHeight;
         
     } else if (indexPath.section == 1) {
-        return 44;
+        if (_goodsDes.length) {
+            GoodsDesTableViewCell * cell = [[GoodsDesTableViewCell alloc] init];
+            [cell getContentCellHeight:_goodsDes];
+            return  cell.cellHeight;
+        } else {
+            return 0.01;
+        }
         
     } else if (indexPath.section == 2) {
-        return 280;
-        
-    } else if (indexPath.section == 3) {
-        if (indexPath.row == 0) {
-            return 44;
+        if (self.goodsInfo.brand.coverUrl.length) {
+            return 70;
         } else {
-            if (self.goodsComment.count > 0) {
-                return 100;
-            } else if (self.goodsComment.count == 0) {
-                return 0.01;
-            }
+            return 0.01;
         }
     }
+//    else if (indexPath.section == 3) {
+//        if (indexPath.row == 0) {
+//            return 44;
+//        } else {
+//            if (self.goodsComment.count > 0) {
+//                return 100;
+//            } else if (self.goodsComment.count == 0) {
+//                return 0.01;
+//            }
+//        }
+//    }
     return 0;
 }
 
@@ -320,14 +352,38 @@ static NSString *const URLAddCar = @"/shopping/add_cart";
 
 #pragma mark 跳转
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    if (indexPath.section == 1) {
-        [self OpenGoodsBuyView];
-    
-    } else if (indexPath.section == 3) {
-        FBGoodsCommentViewController * thnCommentVC = [[FBGoodsCommentViewController alloc] init];
-        thnCommentVC.targetId = self.goodsID;
-        [self.navigationController pushViewController:thnCommentVC animated:YES];
+    if (indexPath.section == 0) {
+        [self openGoodsInfoWeb];
+    } else if (indexPath.section == 2) {
+        GoodsBrandViewController * goodsBrandVC = [[GoodsBrandViewController alloc] init];
+        goodsBrandVC.brandId = self.goodsInfo.brandId;
+        [self.navigationController pushViewController:goodsBrandVC animated:YES];
     }
+    
+//    else if (indexPath.section == 3) {
+//        FBGoodsCommentViewController * thnCommentVC = [[FBGoodsCommentViewController alloc] init];
+//        thnCommentVC.targetId = self.goodsID;
+//        [self.navigationController pushViewController:thnCommentVC animated:YES];
+//    }
+}
+
+#pragma mark - 打开商品详情web
+- (void)openGoodsInfoWeb {
+    CGRect goodsTableRect = self.goodsTable.frame;
+    goodsTableRect.origin.x = -SCREEN_WIDTH;
+    [UIView animateWithDuration:.3 animations:^{
+        self.goodsTable.frame = goodsTableRect;
+    }];
+    
+    CGRect goodsInfoRect = self.goodsInfoWeb.frame;
+    goodsInfoRect.origin.x = 0;
+    [UIView animateWithDuration:.3 animations:^{
+        self.goodsInfoWeb.frame = goodsInfoRect;
+    }];
+    
+    //  加载商品的web详情
+    NSURLRequest *request =[NSURLRequest requestWithURL:[NSURL URLWithString:_goodsInfoUrl]];
+    [self.goodsInfoWeb loadRequest:request];
 }
 
 #pragma mark - 打开商品购买视图
@@ -357,8 +413,9 @@ static NSString *const URLAddCar = @"/shopping/add_cart";
 - (UIView *)buyView {
     if (!_buyView) {
         _buyView = [[UIView alloc] initWithFrame:CGRectMake(0, SCREEN_HEIGHT - 44, SCREEN_WIDTH, 44)];
+        _buyView.backgroundColor = [UIColor whiteColor];
         [_buyView addSubview:self.buyingBtn];
-        [_buyView addSubview:self.addCarBtn];
+        [_buyView addSubview:self.likeBtn];
     }
     return _buyView;
 }
@@ -367,44 +424,43 @@ static NSString *const URLAddCar = @"/shopping/add_cart";
 - (UIButton *)buyingBtn {
     if (!_buyingBtn) {
         _buyingBtn = [[UIButton alloc] initWithFrame:CGRectMake(SCREEN_WIDTH/2, 0, SCREEN_WIDTH/2, 44)];
-        [_buyingBtn setTitle:NSLocalizedString(@"buyingBtn", nil) forState:(UIControlStateNormal)];
+        [_buyingBtn setTitle:NSLocalizedString(@"goBuyGoods", nil) forState:(UIControlStateNormal)];
         [_buyingBtn setTitleColor:[UIColor whiteColor] forState:(UIControlStateNormal)];
-        if (IS_iOS9) {
-            _buyingBtn.titleLabel.font = [UIFont fontWithName:@"PingFangSC-Light" size:14];
-        } else {
-            _buyingBtn.titleLabel.font = [UIFont systemFontOfSize:14];
-        }
-        _buyingBtn.backgroundColor = [UIColor colorWithHexString:@"#BE8914"];
+        _buyingBtn.titleLabel.font = [UIFont systemFontOfSize:14];
+        _buyingBtn.backgroundColor = [UIColor colorWithHexString:@"#222222"];
         [_buyingBtn addTarget:self action:@selector(OpenGoodsBuyView) forControlEvents:(UIControlEventTouchUpInside)];
     }
     return _buyingBtn;
 }
 
-#pragma mark 加入购物车
-- (UIButton *)addCarBtn {
-    if (!_addCarBtn) {
-        _addCarBtn = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH/2, 44)];
-        [_addCarBtn setTitle:NSLocalizedString(@"addCarBtn", nil) forState:(UIControlStateNormal)];
-        [_addCarBtn setTitleColor:[UIColor whiteColor] forState:(UIControlStateNormal)];
-        if (IS_iOS9) {
-            _addCarBtn.titleLabel.font = [UIFont fontWithName:@"PingFangSC-Light" size:14];
-        } else {
-            _addCarBtn.titleLabel.font = [UIFont systemFontOfSize:14];
-        }
-        _addCarBtn.backgroundColor = [UIColor colorWithHexString:@"DB9E18"];
-        [_addCarBtn addTarget:self action:@selector(OpenGoodsBuyView) forControlEvents:(UIControlEventTouchUpInside)];
+#pragma mark 收藏
+- (UIButton *)likeBtn {
+    if (!_likeBtn) {
+        _likeBtn = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH/2, 44)];
+        _likeBtn.backgroundColor = [UIColor whiteColor];
+        [_likeBtn setTitle:NSLocalizedString(@"likeTheGoods", nil) forState:(UIControlStateNormal)];
+        [_likeBtn setTitle:NSLocalizedString(@"likeTheGoods", nil) forState:(UIControlStateSelected)];
+        [_likeBtn setTitleColor:[UIColor colorWithHexString:@"#999999"] forState:(UIControlStateNormal)];
+        _likeBtn.titleLabel.font = [UIFont systemFontOfSize:10];
+        [_likeBtn setImage:[UIImage imageNamed:@"goods_star"] forState:(UIControlStateNormal)];
+        [_likeBtn setImage:[UIImage imageNamed:@"goods_star_seleted"] forState:(UIControlStateSelected)];
+        [_likeBtn setTitleEdgeInsets:(UIEdgeInsetsMake(30, -30, 0, 0))];
+        [_likeBtn setImageEdgeInsets:(UIEdgeInsetsMake(-10, 0, 0, 0))];
+        [_likeBtn addTarget:self action:@selector(networkCollectGoods:) forControlEvents:(UIControlEventTouchUpInside)];
     }
-    return _addCarBtn;
+    return _likeBtn;
 }
 
 #pragma mark - 设置Nav
 - (void)setNavigationViewUI {
     [[UIApplication sharedApplication] setStatusBarHidden:NO withAnimation:(UIStatusBarAnimationSlide)];
+    [[UIApplication sharedApplication] setStatusBarStyle:(UIStatusBarStyleLightContent)];
     self.navViewTitle.text = NSLocalizedString(@"GoodsInfoVcTitle", nil);
     self.view.backgroundColor = [UIColor whiteColor];
     [self addBarItemRightBarButton:@"" image:@"Nav_Car" isTransparent:NO];
     self.delegate = self;
     [self setNavGoodsCarNumLab];
+    self.view.clipsToBounds = YES;
 }
 
 - (void)rightBarItemSelected {

@@ -10,8 +10,9 @@
 #import "MallListGoodsCollectionViewCell.h"
 #import "GoodsRow.h"
 #import "ChildTagsTag.h"
+#import "FBGoodsInfoViewController.h"
 
-static NSString *const URLChildTags = @"/category/fetch_child_tags";
+static NSString *const URLChildTags = @"/category/fetch_tags";
 static NSString *const URLMallList = @"/product/getlist";
 static NSString *const goodsListCellId = @"GoodsListCellId";
 
@@ -31,7 +32,7 @@ static NSString *const goodsListCellId = @"GoodsListCellId";
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
+
     [self thn_networkCategoryData];
     [self setViewUI];
 }
@@ -39,20 +40,16 @@ static NSString *const goodsListCellId = @"GoodsListCellId";
 #pragma mark - 网络请求
 #pragma mark 子分类
 - (void)thn_networkCategoryData {
-    self.childTagsRequest = [FBAPI getWithUrlString:URLChildTags requestDictionary:@{@"tag_id":self.categoryId} delegate:self];
+    self.childTagsRequest = [FBAPI getWithUrlString:URLChildTags requestDictionary:@{@"id":self.categoryId} delegate:self];
     [self.childTagsRequest startRequestSuccess:^(FBRequest *request, id result) {
-        NSArray * childTagsArr = [[result valueForKey:@"data"] valueForKey:@"tags"];
-        for (NSDictionary * childTagsDic in childTagsArr) {
-            ChildTagsTag * childTagsModel = [[ChildTagsTag alloc] initWithDictionary:childTagsDic];
-            [self.childTagsList addObject:childTagsModel.titleCn];
-            [self.childTagsId addObject:[NSString stringWithFormat:@"%zi", childTagsModel.idField]];
-        }
+        self.childTagsId = [NSMutableArray arrayWithArray:[[result valueForKey:@"data"] valueForKey:@"tags"]];
         if (self.childTagsId.count) {
             _tagId = self.childTagsId[0];
             [self thn_networkGoodsListData:_tagId];
+            self.menuView.menuTitle = self.childTagsId;
+            [self.menuView updateMenuButtonData];
+            [self.menuView updateMenuBtnState:0];
         }
-        [self.menuView updateMenuButtonData];
-        [self.menuView updateMenuBtnState:0];
         
     } failure:^(FBRequest *request, NSError *error) {
         [SVProgressHUD showErrorWithStatus:[error localizedDescription]];
@@ -64,7 +61,7 @@ static NSString *const goodsListCellId = @"GoodsListCellId";
     [SVProgressHUD show];
     self.goodsListRequest = [FBAPI getWithUrlString:URLMallList requestDictionary:@{@"page":@(self.currentpageNum + 1),
                                                                                     @"size":@10,
-                                                                            @"category_tag_ids":tagId} delegate:self];
+                                                                            @"category_tags":tagId} delegate:self];
     [self.goodsListRequest startRequestSuccess:^(FBRequest *request, id result) {
         NSArray *goodsArr = [[result valueForKey:@"data"] valueForKey:@"rows"];
         for (NSDictionary * goodsDic in goodsArr) {
@@ -141,7 +138,6 @@ static NSString *const goodsListCellId = @"GoodsListCellId";
 - (FBMenuView *)menuView {
     if (!_menuView) {
         _menuView = [[FBMenuView alloc] initWithFrame:CGRectMake(0, 64, SCREEN_WIDTH, 44)];
-        _menuView.menuTitle = self.childTagsList;
         _menuView.delegate = self;
         _menuView.defaultColor = @"#666666";
     }
@@ -191,7 +187,9 @@ static NSString *const goodsListCellId = @"GoodsListCellId";
 }
 
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
-    [SVProgressHUD showSuccessWithStatus:[NSString stringWithFormat:@"查看商品详情：%@",self.goodsIdMarr[indexPath.row]]];
+    FBGoodsInfoViewController *goodsVC = [[FBGoodsInfoViewController alloc] init];
+    goodsVC.goodsID = self.goodsIdMarr[indexPath.row];
+    [self.navigationController pushViewController:goodsVC animated:YES];
 }
 
 #pragma mark - 设置Nav

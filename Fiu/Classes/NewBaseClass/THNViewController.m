@@ -9,10 +9,13 @@
 #import "THNViewController.h"
 #import "QRCodeScanViewController.h"
 #import "THNLoginRegisterViewController.h"
+#import "DiscoverSearchViewController.h"
+#import "MallSearchViewController.h"
 
 @implementation THNViewController {
     NSMutableArray *_guideImgMarr;
     UIButton       *_guideBtn;
+    NSInteger       _searchType;
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -173,7 +176,14 @@
 }
 
 - (void)searchBtnClick:(UIButton *)button {
-    [SVProgressHUD showSuccessWithStatus:@"去搜索"];
+    if (_searchType == 1) {
+        DiscoverSearchViewController *discoverVC = [[DiscoverSearchViewController alloc] init];
+        [self.navigationController pushViewController:discoverVC animated:YES];
+    } else if (_searchType == 2) {
+        
+        MallSearchViewController *mallVC = [[MallSearchViewController alloc] init];
+        [self.navigationController pushViewController:mallVC animated:YES];
+    }
 }
 
 #pragma mark - 订阅
@@ -205,6 +215,7 @@
 }
 
 - (void)thn_addSearchBtnText:(NSString *)title type:(NSInteger)type {
+    _searchType = type;
     [self.searchBtn setTitle:title forState:(UIControlStateNormal)];
     [self.navView addSubview:self.searchBtn];
     

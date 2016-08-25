@@ -110,13 +110,25 @@ static NSString *const URLGetGoodsImg = @"/product/view";
     self.getImgRequest = [FBAPI getWithUrlString:URLGetGoodsImg requestDictionary:@{@"id":goodsId} delegate:self];
     [self.getImgRequest startRequestSuccess:^(FBRequest *request, id result) {
         self.goodsModel = [[GoodsInfoData alloc] initWithDictionary:[result valueForKey:@"data"]];
+        NSString *imgUrl;
+        CGFloat height;
+        CGFloat width;
+        if (self.goodsModel.pngAsset.count) {
+            imgUrl = [self.goodsModel.pngAsset valueForKey:@"url"][0];
+            height = [[self.goodsModel.pngAsset valueForKey:@"height"][0] floatValue];
+            width = [[self.goodsModel.pngAsset valueForKey:@"width"][0] floatValue];
+        } else {
+            imgUrl = @"";
+            height = 0.0f;
+            width = 0.0f;
+        }
         self.getImgBlock(
-                         [self.goodsModel.pngAsset valueForKey:@"url"][0],
+                         imgUrl,
                          self.goodsModel.title,
                          [NSString stringWithFormat:@"%.2f",self.goodsModel.salePrice],
                          [NSString stringWithFormat:@"%zi",self.goodsModel.idField],
-                         [[self.goodsModel.pngAsset valueForKey:@"width"][0] floatValue],
-                         [[self.goodsModel.pngAsset valueForKey:@"height"][0] floatValue]
+                         width,
+                         height
                          );
         [self dismissViewControllerAnimated:YES completion:nil];
         [SVProgressHUD dismiss];

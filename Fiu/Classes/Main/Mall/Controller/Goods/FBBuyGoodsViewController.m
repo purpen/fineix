@@ -116,12 +116,8 @@
         _buyingBtn = [[UIButton alloc] initWithFrame:CGRectMake(SCREEN_WIDTH/2, 410 - 44, SCREEN_WIDTH/2, 44)];
         [_buyingBtn setTitle:NSLocalizedString(@"buyingBtn", nil) forState:(UIControlStateNormal)];
         [_buyingBtn setTitleColor:[UIColor whiteColor] forState:(UIControlStateNormal)];
-        if (IS_iOS9) {
-            _buyingBtn.titleLabel.font = [UIFont fontWithName:@"PingFangSC-Light" size:14];
-        } else {
-            _buyingBtn.titleLabel.font = [UIFont systemFontOfSize:14];
-        }
-        _buyingBtn.backgroundColor = [UIColor colorWithHexString:@"#BE8914"];
+        _buyingBtn.titleLabel.font = [UIFont systemFontOfSize:14];
+        _buyingBtn.backgroundColor = [UIColor colorWithHexString:@"#222222"];
         [_buyingBtn addTarget:self action:@selector(buyingBtnClick) forControlEvents:(UIControlEventTouchUpInside)];
     }
     return _buyingBtn;
@@ -159,12 +155,8 @@
         _addCarBtn = [[UIButton alloc] initWithFrame:CGRectMake(0, 410 - 44, SCREEN_WIDTH/2, 44)];
         [_addCarBtn setTitle:NSLocalizedString(@"addCarBtn", nil) forState:(UIControlStateNormal)];
         [_addCarBtn setTitleColor:[UIColor whiteColor] forState:(UIControlStateNormal)];
-        if (IS_iOS9) {
-            _addCarBtn.titleLabel.font = [UIFont fontWithName:@"PingFangSC-Light" size:14];
-        } else {
-            _addCarBtn.titleLabel.font = [UIFont systemFontOfSize:14];
-        }
-        _addCarBtn.backgroundColor = [UIColor colorWithHexString:@"DB9E18"];
+        _addCarBtn.titleLabel.font = [UIFont systemFontOfSize:14];
+        _addCarBtn.backgroundColor = [UIColor colorWithHexString:@"#666666"];
         [_addCarBtn addTarget:self action:@selector(addCarBtnClick) forControlEvents:(UIControlEventTouchUpInside)];
     }
     return _addCarBtn;
@@ -209,11 +201,7 @@
     if (!_goodsTitle) {
         _goodsTitle = [[UILabel alloc] initWithFrame:CGRectMake(105, 15, SCREEN_WIDTH - 120, 35)];
         _goodsTitle.textColor = [UIColor colorWithHexString:titleColor];
-        if (IS_iOS9) {
-            _goodsTitle.font = [UIFont fontWithName:@"PingFangSC-Light" size:14];
-        } else {
-            _goodsTitle.font = [UIFont systemFontOfSize:14];
-        }
+        _goodsTitle.font = [UIFont systemFontOfSize:14];
         _goodsTitle.numberOfLines = 2;
     }
     return _goodsTitle;
@@ -224,11 +212,7 @@
     if (!_goodsPrice) {
         _goodsPrice = [[UILabel alloc] initWithFrame:CGRectMake(105, 55, SCREEN_WIDTH - 115, 25)];
         _goodsPrice.textColor = [UIColor colorWithHexString:fineixColor];
-        if (IS_iOS9) {
-            _goodsPrice.font = [UIFont fontWithName:@"PingFangSC-Light" size:14];
-        } else {
-            _goodsPrice.font = [UIFont systemFontOfSize:14];
-        }
+        _goodsPrice.font = [UIFont systemFontOfSize:14];
         _goodsPrice.numberOfLines = 2;
     }
     return _goodsPrice;
@@ -238,12 +222,8 @@
 - (UILabel *)goodsChoose {
     if (!_goodsChoose) {
         _goodsChoose = [[UILabel alloc] initWithFrame:CGRectMake(105, 80, SCREEN_WIDTH - 120, 15)];
-        _goodsChoose.textColor = [UIColor colorWithHexString:titleColor];
-        if (IS_iOS9) {
-            _goodsChoose.font = [UIFont fontWithName:@"PingFangSC-Light" size:12];
-        } else {
-            _goodsChoose.font = [UIFont systemFontOfSize:12];
-        }
+        _goodsChoose.textColor = [UIColor colorWithHexString:@"#222222"];
+        _goodsChoose.font = [UIFont systemFontOfSize:12];
         _goodsChoose.text = @"";
         _goodsChoose.numberOfLines = 2;
     }
@@ -318,10 +298,10 @@
 }
 
 - (void)IsCanBuy {
-    self.addCarBtn.backgroundColor = [UIColor colorWithHexString:@"#DB9E18"];
+    self.addCarBtn.backgroundColor = [UIColor colorWithHexString:@"#666666"];
     self.addCarBtn.userInteractionEnabled = YES;
     
-    self.buyingBtn.backgroundColor = [UIColor colorWithHexString:@"#BE8914"];
+    self.buyingBtn.backgroundColor = [UIColor colorWithHexString:@"#222222"];
     self.buyingBtn.userInteractionEnabled = YES;
     
     self.subBtn.userInteractionEnabled = YES;

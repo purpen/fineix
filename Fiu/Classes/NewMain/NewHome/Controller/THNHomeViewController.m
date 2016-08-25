@@ -66,6 +66,7 @@ static NSString *const twoCommentsCellId = @"TwoCommentsCellId";
     [self thn_networkRollImageData];
     [self thn_networkSubjectData];
     [self thn_networkSceneListData];
+    
 }
 
 #pragma mark - 网络请求
@@ -192,6 +193,7 @@ static NSString *const twoCommentsCellId = @"TwoCommentsCellId";
         [self.commentsMarr addObjectsFromArray:[sceneArr valueForKey:@"comments"]];
         
         [self.homeTable reloadData];
+        
         self.currentpageNum = [[[result valueForKey:@"data"] valueForKey:@"current_page"] integerValue];
         self.totalPageNum = [[[result valueForKey:@"data"] valueForKey:@"total_page"] integerValue];
         [self requestIsLastData:self.homeTable currentPage:self.currentpageNum withTotalPage:self.totalPageNum];
@@ -329,6 +331,9 @@ static NSString *const twoCommentsCellId = @"TwoCommentsCellId";
             cell = [[THNUserInfoTableViewCell alloc] initWithStyle:(UITableViewCellStyleDefault) reuseIdentifier:userInfoCellId];
             if (self.sceneListMarr.count) {
                 [cell thn_setHomeSceneUserInfoData:self.sceneListMarr[indexPath.section - 1]];
+                if (indexPath.section == 6) {
+                    [cell thn_isShowHotUserList:YES];
+                }
             }
             return cell;
 
@@ -402,7 +407,11 @@ static NSString *const twoCommentsCellId = @"TwoCommentsCellId";
         
     } else {
         if (indexPath.row == 0) {
-            return 50;
+            if (indexPath.section == 6) {
+                return 280;
+            } else
+                return 50;
+            
         } else if (indexPath.row == 1) {
             return SCREEN_WIDTH;
         } else if (indexPath.row == 2) {

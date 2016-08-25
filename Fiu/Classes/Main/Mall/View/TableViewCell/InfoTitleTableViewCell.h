@@ -16,6 +16,7 @@
 
 @pro_strong UILabel         *       goodsTitle;     //  商品标题
 @pro_strong UILabel         *       goodsPrice;     //  商品价格
+@pro_strong UIButton        *       nextBtn;
 @pro_assign CGFloat                 cellHeight;
 
 - (void)setGoodsInfoData:(GoodsInfoData *)model;
