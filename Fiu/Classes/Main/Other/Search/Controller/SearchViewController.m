@@ -39,7 +39,11 @@ static NSString *const URLSearchList = @"/search/getlist";
     [super viewDidLoad];
     
     [self setSearchVcUI];
-    [self changeMenuBtnState:0];
+    [self changeMenuBtnState:self.index];
+    
+    if (self.keyword.length > 0) {
+        [self beginSearch:self.keyword];
+    }
 }
 
 #pragma mark - 设置视图UI 

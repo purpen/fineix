@@ -26,4 +26,15 @@
 @pro_strong NSArray *titleArr;          //  分类标题
 @pro_strong SearchMenuView *menuView;   //  分类导航
 
+/**
+ * index
+ *  0:情境 ／ 1:用户 ／ 2:产品 ／ 3:品牌 ／ 4:专题
+ */
+@pro_assign NSInteger index;
+/**
+ *  keyword
+ *  直接搜索传搜索关键字
+ */
+@pro_strong NSString *keyword;
+
 @end

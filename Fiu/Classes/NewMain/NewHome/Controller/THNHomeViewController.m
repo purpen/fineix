@@ -531,7 +531,8 @@ static NSString *const twoCommentsCellId = @"TwoCommentsCellId";
 }
 
 - (void)thn_leftBarItemSelected {
-    SearchViewController * searchVC = [[SearchViewController alloc] init];
+    SearchViewController *searchVC = [[SearchViewController alloc] init];
+    searchVC.index = 0;
     [self.navigationController pushViewController:searchVC animated:YES];
 }
 
