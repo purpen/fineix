@@ -366,7 +366,6 @@
 		1F35F03F1CD1DC580000DB95 /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1F35F03E1CD1DC580000DB95 /* MessageUI.framework */; };
 		1F35F0411CD1DC640000DB95 /* AddressBookUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1F35F0401CD1DC640000DB95 /* AddressBookUI.framework */; };
 		1F35F0511CD2336E0000DB95 /* areas.plist in Resources */ = {isa = PBXBuildFile; fileRef = 1F35F0501CD2336E0000DB95 /* areas.plist */; };
-		1F45A7041D2DF708009D7EE1 /* SceneCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F45A7031D2DF708009D7EE1 /* SceneCollectionViewCell.m */; };
 		1F45A7931D2F5263009D7EE1 /* MapAnnotionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F45A7911D2F5263009D7EE1 /* MapAnnotionViewController.m */; };
 		1F45A7941D2F5263009D7EE1 /* MapAnnotionViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1F45A7921D2F5263009D7EE1 /* MapAnnotionViewController.xib */; };
 		1F520A9B1CF8771600B6882A /* TalentView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F520A9A1CF8771600B6882A /* TalentView.m */; };
@@ -443,6 +442,9 @@
 		1FBF2CD11D6C42D7003C1643 /* THNCuXiaoProductModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 1FBF2CD01D6C42D7003C1643 /* THNCuXiaoProductModel.m */; };
 		1FBF2CD41D6C91B0003C1643 /* THNActiveTopView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1FBF2CD31D6C91B0003C1643 /* THNActiveTopView.m */; };
 		1FBF2CD61D6C91CF003C1643 /* THNActiveTopView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1FBF2CD51D6C91CF003C1643 /* THNActiveTopView.xib */; };
+		1FBF2CDF1D6D94AD003C1643 /* THNHomeSenceCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 1FBF2CDD1D6D94AD003C1643 /* THNHomeSenceCollectionViewCell.m */; };
+		1FBF2CE01D6D94AD003C1643 /* THNHomeSenceCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1FBF2CDE1D6D94AD003C1643 /* THNHomeSenceCollectionViewCell.xib */; };
+		1FBF2CE31D6D99E6003C1643 /* SceneCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 1FBF2CE21D6D99E6003C1643 /* SceneCollectionViewCell.m */; };
 		1FC6782E1CDB33ED00535162 /* UIView+TYAlertView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1FC6782C1CDB33ED00535162 /* UIView+TYAlertView.m */; };
 		1FCDCC7A1D0515F700C92E78 /* ScenarioNonView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1FCDCC791D0515F700C92E78 /* ScenarioNonView.m */; };
 		1FCDCC7D1D0525A300C92E78 /* FocusNonView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1FCDCC7C1D0525A300C92E78 /* FocusNonView.m */; };
@@ -1333,8 +1335,6 @@
 		1F35F03E1CD1DC580000DB95 /* MessageUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MessageUI.framework; path = System/Library/Frameworks/MessageUI.framework; sourceTree = SDKROOT; };
 		1F35F0401CD1DC640000DB95 /* AddressBookUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AddressBookUI.framework; path = System/Library/Frameworks/AddressBookUI.framework; sourceTree = SDKROOT; };
 		1F35F0501CD2336E0000DB95 /* areas.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = areas.plist; sourceTree = "<group>"; };
-		1F45A7021D2DF708009D7EE1 /* SceneCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SceneCollectionViewCell.h; sourceTree = "<group>"; };
-		1F45A7031D2DF708009D7EE1 /* SceneCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SceneCollectionViewCell.m; sourceTree = "<group>"; };
 		1F45A7901D2F5263009D7EE1 /* MapAnnotionViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MapAnnotionViewController.h; sourceTree = "<group>"; };
 		1F45A7911D2F5263009D7EE1 /* MapAnnotionViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MapAnnotionViewController.m; sourceTree = "<group>"; };
 		1F45A7921D2F5263009D7EE1 /* MapAnnotionViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MapAnnotionViewController.xib; sourceTree = "<group>"; };
@@ -1471,6 +1471,11 @@
 		1FBF2CD21D6C91B0003C1643 /* THNActiveTopView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = THNActiveTopView.h; path = Fiu/Classes/Main/Other/Project/Model/THNActiveTopView.h; sourceTree = SOURCE_ROOT; };
 		1FBF2CD31D6C91B0003C1643 /* THNActiveTopView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = THNActiveTopView.m; path = Fiu/Classes/Main/Other/Project/Model/THNActiveTopView.m; sourceTree = SOURCE_ROOT; };
 		1FBF2CD51D6C91CF003C1643 /* THNActiveTopView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = THNActiveTopView.xib; path = Fiu/Classes/Main/Other/Project/Model/THNActiveTopView.xib; sourceTree = SOURCE_ROOT; };
+		1FBF2CDC1D6D94AD003C1643 /* THNHomeSenceCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THNHomeSenceCollectionViewCell.h; sourceTree = "<group>"; };
+		1FBF2CDD1D6D94AD003C1643 /* THNHomeSenceCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THNHomeSenceCollectionViewCell.m; sourceTree = "<group>"; };
+		1FBF2CDE1D6D94AD003C1643 /* THNHomeSenceCollectionViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = THNHomeSenceCollectionViewCell.xib; sourceTree = "<group>"; };
+		1FBF2CE11D6D99E6003C1643 /* SceneCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SceneCollectionViewCell.h; sourceTree = "<group>"; };
+		1FBF2CE21D6D99E6003C1643 /* SceneCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SceneCollectionViewCell.m; sourceTree = "<group>"; };
 		1FC6782C1CDB33ED00535162 /* UIView+TYAlertView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+TYAlertView.m"; sourceTree = "<group>"; };
 		1FC6782D1CDB33ED00535162 /* UIView+TYAutoLayout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+TYAutoLayout.h"; sourceTree = "<group>"; };
 		1FCDCC781D0515F700C92E78 /* ScenarioNonView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ScenarioNonView.h; sourceTree = "<group>"; };
@@ -3116,6 +3121,8 @@
 		1F2A8DC31CF40277005116C7 /* view */ = {
 			isa = PBXGroup;
 			children = (
+				1FBF2CE11D6D99E6003C1643 /* SceneCollectionViewCell.h */,
+				1FBF2CE21D6D99E6003C1643 /* SceneCollectionViewCell.m */,
 				D86809221D662490002714B2 /* THNSenceTopicView.h */,
 				D86809231D662490002714B2 /* THNSenceTopicView.m */,
 				D86809241D662490002714B2 /* THNSenceTopicView.xib */,
@@ -3154,8 +3161,6 @@
 				1FCDCC791D0515F700C92E78 /* ScenarioNonView.m */,
 				1FCDCC7B1D0525A300C92E78 /* FocusNonView.h */,
 				1FCDCC7C1D0525A300C92E78 /* FocusNonView.m */,
-				1F45A7021D2DF708009D7EE1 /* SceneCollectionViewCell.h */,
-				1F45A7031D2DF708009D7EE1 /* SceneCollectionViewCell.m */,
 				1FF36EA11D507BA600EB3C93 /* SearchView.h */,
 				1FF36EA21D507BA600EB3C93 /* SearchView.m */,
 				1FF36EA41D5088FD00EB3C93 /* SearchTF.h */,
@@ -3168,6 +3173,9 @@
 				1FD310761D658BC90079A21C /* THNSenecCollectionViewCell.h */,
 				1FD310771D658BC90079A21C /* THNSenecCollectionViewCell.m */,
 				1FD310781D658BC90079A21C /* THNSenecCollectionViewCell.xib */,
+				1FBF2CDC1D6D94AD003C1643 /* THNHomeSenceCollectionViewCell.h */,
+				1FBF2CDD1D6D94AD003C1643 /* THNHomeSenceCollectionViewCell.m */,
+				1FBF2CDE1D6D94AD003C1643 /* THNHomeSenceCollectionViewCell.xib */,
 			);
 			path = view;
 			sourceTree = "<group>";
@@ -5079,6 +5087,7 @@
 				1F6CA2671D5B324000DFB79E /* THNSignUpViewController.xib in Resources */,
 				1FA53F341D69ADAF00EBE59B /* THNActivityViewController.xib in Resources */,
 				1F2A90AC1CF40277005116C7 /* ChanePwdViewController.xib in Resources */,
+				1FBF2CE01D6D94AD003C1643 /* THNHomeSenceCollectionViewCell.xib in Resources */,
 				1F1AF3B31CF58A6B00CAA525 /* IntegralViewController.xib in Resources */,
 				1FA53F5A1D69FA4F00EBE59B /* THNActiveDetalViewController.xib in Resources */,
 				1F2A90141CF40277005116C7 /* MyView.xib in Resources */,
@@ -5204,6 +5213,7 @@
 				1F2A90621CF40277005116C7 /* SystemInformsViewController.m in Sources */,
 				1F2A8F9A1CF40277005116C7 /* SceneInfoLocation.m in Sources */,
 				D8AC3E131D2DF9D900148522 /* UITabBar+badge.m in Sources */,
+				1FBF2CE31D6D99E6003C1643 /* SceneCollectionViewCell.m in Sources */,
 				1FD10CAD1D62DE0E005898EE /* THNCollectionViewController.m in Sources */,
 				1F2A8F411CF40277005116C7 /* MarkGoodsData.m in Sources */,
 				1F2A8F451CF40277005116C7 /* FBLoadPhoto.m in Sources */,
@@ -5249,7 +5259,6 @@
 				1F2A8F4A1CF40277005116C7 /* FBFiltersCollectionViewCell.m in Sources */,
 				1F2A905A1CF40277005116C7 /* CommentsViewController.m in Sources */,
 				1F2A8FA91CF40277005116C7 /* FBBuyGoodsViewController.m in Sources */,
-				1F45A7041D2DF708009D7EE1 /* SceneCollectionViewCell.m in Sources */,
 				1F2A90A41CF40277005116C7 /* SearchViewController.m in Sources */,
 				D80669751D6EE384007FD81E /* ThemeTableViewCell.m in Sources */,
 				D868090C1D6301C1002714B2 /* FBSubjectModelRow.m in Sources */,
@@ -5580,6 +5589,7 @@
 				1F2A8FAE1CF40277005116C7 /* FBSureOrderViewController.m in Sources */,
 				1F2A8F741CF40277005116C7 /* FiuSceneLocation.m in Sources */,
 				1FCDCC871D07F50D00C92E78 /* ServiceViewController.m in Sources */,
+				1FBF2CDF1D6D94AD003C1643 /* THNHomeSenceCollectionViewCell.m in Sources */,
 				1F2A90311CF40277005116C7 /* DirectMessagesViewController.m in Sources */,
 				D85174541D587908005F5722 /* THNMallViewController.m in Sources */,
 				D8F89E301D4B26860098F158 /* NoSubscribeView.m in Sources */,

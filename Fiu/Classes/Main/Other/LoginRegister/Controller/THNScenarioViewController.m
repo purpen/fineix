@@ -132,13 +132,13 @@ static NSString *getList = @"/category/getlist";
     if (sender.selected) {
         [self.idAry removeObject:((THNTopicView*)self.viewAry[[self.btnAry indexOfObject:sender]]).model._id];
         sender.selected = NO;
-        ((THNTopicView*)self.viewAry[[self.btnAry indexOfObject:sender]]).layerView.backgroundColor = sender.selected ? [UIColor colorWithHexString:@"#70510B" alpha:0.4] : [UIColor colorWithHexString:@"#525252" alpha:0.4];
+        ((THNTopicView*)self.viewAry[[self.btnAry indexOfObject:sender]]).layerView.backgroundColor = sender.selected ? [UIColor colorWithHexString:@"#A67203" alpha:0.65] : [UIColor colorWithHexString:@"#525252" alpha:0.4];
         
     }else{
         [self.idAry addObject:((THNTopicView*)self.viewAry[[self.btnAry indexOfObject:sender]]).model._id];
         sender.selected = YES;
         
-        ((THNTopicView*)self.viewAry[[self.btnAry indexOfObject:sender]]).layerView.backgroundColor = sender.selected ? [UIColor colorWithHexString:@"#70510B" alpha:0.4] : [UIColor colorWithHexString:@"#525252" alpha:0.4];
+        ((THNTopicView*)self.viewAry[[self.btnAry indexOfObject:sender]]).layerView.backgroundColor = sender.selected ? [UIColor colorWithHexString:@"#A67203" alpha:0.65] : [UIColor colorWithHexString:@"#525252" alpha:0.4];
     }
 }
 

@@ -35,6 +35,12 @@
     }
 }
 
+-(void)setModel:(FiuSceneRow *)model{
+    _model = model;
+    [self addSubview:self.sceneImage];
+    [self.sceneImage downloadImage:model.coverUrl place:[UIImage imageNamed:@"Defaul_Bg_500"]];
+}
+
 #pragma mark - 遮罩
 - (UIImageView *)bgImg {
     if (!_bgImg) {
@@ -67,7 +73,7 @@
         _sceneImage = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, self.frame.size.width, self.frame.size.height)];
         _sceneImage.contentMode = UIViewContentModeScaleAspectFill;
         _sceneImage.clipsToBounds  = YES;
-        _sceneImage.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"Defaul_Bg_180"]];
+        _sceneImage.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"Defaul_Bg_500"]];
         //  添加渐变层
         CAGradientLayer * shadow = [CAGradientLayer layer];
         shadow.startPoint = CGPointMake(0, 0);

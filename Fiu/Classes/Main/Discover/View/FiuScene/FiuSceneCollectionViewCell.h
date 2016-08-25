@@ -20,6 +20,9 @@
 @pro_strong UILabel                     *   locationLab;    //  地理位置
 @pro_strong UIImageView                 *   bgImg;          //  遮罩
 
+/**  */
+@property (nonatomic, strong) FiuSceneRow *model;
+
 - (void)setFiuSceneList:(FiuSceneRow *)model;
 
 @end

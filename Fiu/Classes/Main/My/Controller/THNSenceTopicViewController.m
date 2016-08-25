@@ -70,7 +70,7 @@ static NSString *getList = @"/category/getlist";
             float w = ([UIScreen mainScreen].bounds.size.width - 40 -10) * 0.5;
             float h = 0.092 * [UIScreen mainScreen].bounds.size.height;
             float x = 20 + ((i - 1) % 2) * (w + 10);
-            float y = 175 + ((i - 1) / 2) * (h + 10);
+            float y = 116 + ((i - 1) / 2) * (h + 10);
             
             THNSenceTopicView *view = [THNSenceTopicView viewFromXib];
             view.frame = CGRectMake(x, y,w , h);
@@ -89,7 +89,7 @@ static NSString *getList = @"/category/getlist";
             THNTopicsModel *model = self.modelAry[i];
             if ([entity.interest_scene_cate rangeOfString:model._id].location != NSNotFound) {
                 ((THNSenceTopicView*)self.viewAry[i]).tipBtn.selected = YES;
-                ((THNSenceTopicView*)self.viewAry[i]).layerView.backgroundColor = [UIColor colorWithHexString:@"#70510B" alpha:0.4];
+                ((THNSenceTopicView*)self.viewAry[i]).layerView.backgroundColor = [UIColor colorWithHexString:@"#A67203" alpha:0.65];
                 ((THNSenceTopicView*)self.viewAry[i]).textImagView.image = [UIImage imageNamed:@"l_topic_s"];
             }
         }
@@ -143,7 +143,7 @@ static NSString *getList = @"/category/getlist";
                 [self update];
                 sender.selected = NO;
                 ((THNSenceTopicView*)self.viewAry[[self.btnAry indexOfObject:sender]]).textImagView.image = [UIImage imageNamed:@"l_topic_u"];
-                ((THNSenceTopicView*)self.viewAry[[self.btnAry indexOfObject:sender]]).layerView.backgroundColor = sender.selected ? [UIColor colorWithHexString:@"#70510B" alpha:0.4] : [UIColor colorWithHexString:@"#525252" alpha:0.4];
+                ((THNSenceTopicView*)self.viewAry[[self.btnAry indexOfObject:sender]]).layerView.backgroundColor = sender.selected ? [UIColor colorWithHexString:@"#A67203" alpha:0.65] : [UIColor colorWithHexString:@"#525252" alpha:0.4];
             }
         } failure:^(FBRequest *request, NSError *error) {
             [SVProgressHUD dismiss];
@@ -158,7 +158,7 @@ static NSString *getList = @"/category/getlist";
                 [self update];
                 sender.selected = YES;
                 ((THNSenceTopicView*)self.viewAry[[self.btnAry indexOfObject:sender]]).textImagView.image = [UIImage imageNamed:@"l_topic_s"];
-                ((THNSenceTopicView*)self.viewAry[[self.btnAry indexOfObject:sender]]).layerView.backgroundColor = sender.selected ? [UIColor colorWithHexString:@"#70510B" alpha:0.4] : [UIColor colorWithHexString:@"#525252" alpha:0.4];
+                ((THNSenceTopicView*)self.viewAry[[self.btnAry indexOfObject:sender]]).layerView.backgroundColor = sender.selected ? [UIColor colorWithHexString:@"#A67203" alpha:0.65] : [UIColor colorWithHexString:@"#525252" alpha:0.4];
             }
         } failure:^(FBRequest *request, NSError *error) {
             [SVProgressHUD dismiss];

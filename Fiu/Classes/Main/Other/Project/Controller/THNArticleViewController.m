@@ -44,10 +44,14 @@ static NSString *const cellId = @"THNArticleCollectionViewCell";
     return _modelAry;
 }
 
+-(void)viewWillAppear:(BOOL)animated{
+    [self setUpRefresh];
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    [self setUpRefresh];
+    
     
     [self.view addSubview:self.contenView];
 }

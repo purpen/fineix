@@ -226,6 +226,7 @@
     THNActiveRuleViewController *activeRule = [[THNActiveRuleViewController alloc] init];
     activeRule.title = @"活动规则";
     activeRule.id = self.id;
+    activeRule.model = self.model;
     [self addChildViewController:activeRule];
     
     THNAttendSenceViewController *attendSence = [[THNAttendSenceViewController alloc] init];

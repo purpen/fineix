@@ -27,13 +27,17 @@
                                 </constraints>
                             </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nER-rk-dwK">
-                                <rect key="frame" x="33" y="10" width="33" height="16"/>
+                                <rect key="frame" x="33" y="10" width="252" height="16"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="13"/>
                                 <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="MPz-yp-Fep">
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="MPz-yp-Fep">
                                 <rect key="frame" x="295" y="7" width="15" height="22"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="22" id="AY7-K0-JrF"/>
+                                    <constraint firstAttribute="width" constant="15" id="JoW-Df-nfb"/>
+                                </constraints>
                                 <state key="normal" image="my_prasied"/>
                                 <state key="selected" image="my_prasied_y"/>
                                 <connections>
@@ -50,6 +54,7 @@
                             <constraint firstAttribute="height" constant="35" id="i3c-sI-ajf"/>
                             <constraint firstItem="nER-rk-dwK" firstAttribute="centerY" secondItem="EmC-MY-udN" secondAttribute="centerY" id="pO4-F0-rC1"/>
                             <constraint firstItem="nER-rk-dwK" firstAttribute="leading" secondItem="PGs-JN-7UZ" secondAttribute="trailing" constant="5" id="q5v-Wy-OuN"/>
+                            <constraint firstItem="nER-rk-dwK" firstAttribute="trailing" secondItem="MPz-yp-Fep" secondAttribute="leading" constant="-10" id="vzB-ys-mvi"/>
                         </constraints>
                     </view>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="right" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2ce-Dv-yJ3">

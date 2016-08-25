@@ -25,7 +25,7 @@
 -(instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier{
     if (self = [super initWithStyle:style reuseIdentifier:reuseIdentifier]) {
         self.selectionStyle = UITableViewCellSelectionStyleNone;
-        self.contentView.backgroundColor = [UIColor blackColor];
+        self.contentView.backgroundColor = [UIColor whiteColor];
         
         
         [self.contentView addSubview:self.headImageView];
@@ -128,12 +128,15 @@
 - (UIButton *)follow {
     if (!_follow) {
         _follow = [UIButton buttonWithType:UIButtonTypeCustom];
+        _follow.layer.masksToBounds = YES;
         _follow.layer.cornerRadius = 5.0f;
-        _follow.layer.borderColor = [UIColor colorWithHexString:@"#FFFFFF" alpha:0.6f].CGColor;
+        _follow.layer.borderColor = [UIColor blackColor].CGColor;
         _follow.layer.borderWidth = 0.5f;
-        _follow.backgroundColor = [UIColor blackColor];
+        _follow.backgroundColor = [UIColor whiteColor];
         [_follow setTitle:NSLocalizedString(@"User_follow", nil) forState:(UIControlStateNormal)];
         [_follow setTitle:NSLocalizedString(@"User_followDone", nil) forState:(UIControlStateSelected)];
+        [_follow setTitleColor:[UIColor colorWithWhite:0 alpha:0.7] forState:UIControlStateNormal];
+        [_follow setTitleColor:[UIColor whiteColor] forState:UIControlStateSelected];
         _follow.titleLabel.font = [UIFont systemFontOfSize:12];
 //        [_follow addTarget:self action:@selector(followClick:) forControlEvents:(UIControlEventTouchUpInside)];
     }
@@ -182,7 +185,8 @@
     model1.title = model.title;
     model1.coverUrl = model.cober;
     model1.address = model.address;
-    [cell setFiuSceneList:model1];
+    cell.model = model1;
+    cell.locationIcon.hidden = YES;
     
     return cell;
 }
@@ -202,7 +206,7 @@
         } else {
             _nameLbael.font = [UIFont systemFontOfSize:11];
         }
-        _nameLbael.textColor = [UIColor whiteColor];
+        _nameLbael.textColor = [UIColor colorWithWhite:0 alpha:0.6];
     }
     return _nameLbael;
 }

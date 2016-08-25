@@ -21,7 +21,7 @@
 }
 
 - (void)setAllFiuSceneListData:(FiuSceneInfoData *)model {
-    [self.sceneImage downloadImage:model.coverUrl place:[UIImage imageNamed:@""]];
+    [self.sceneImage downloadImage:model.coverUrl place:[UIImage imageNamed:@"Defaul_Bg_500"]];
     [self titleTextStyle:model.title];
     self.locationLab.text = model.address;
     [self setCollectionCellViewUI];
@@ -38,7 +38,7 @@
         _sceneImage = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, self.width, self.height)];
         _sceneImage.contentMode = UIViewContentModeScaleAspectFill;
         _sceneImage.clipsToBounds  = YES;
-        _sceneImage.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"Defaul_Bg_180"]];
+        _sceneImage.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"Defaul_Bg_500"]];
         //  添加渐变层
         CAGradientLayer * shadow = [CAGradientLayer layer];
         shadow.startPoint = CGPointMake(0, 0);

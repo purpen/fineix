@@ -61,10 +61,10 @@
                         <nil key="highlightedColor"/>
                     </label>
                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="project_people" translatesAutoresizingMaskIntoConstraints="NO" id="LH9-BH-nbB">
-                        <rect key="frame" x="165" y="144" width="6" height="10"/>
+                        <rect key="frame" x="165" y="156" width="6" height="10"/>
                     </imageView>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="已有1000人参与" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="b7F-ng-RIT">
-                        <rect key="frame" x="176" y="142" width="82" height="14"/>
+                        <rect key="frame" x="176" y="154" width="82" height="14"/>
                         <fontDescription key="fontDescription" type="system" pointSize="11"/>
                         <color key="textColor" white="1" alpha="0.80000000000000004" colorSpace="calibratedWhite"/>
                         <nil key="highlightedColor"/>
@@ -96,6 +96,7 @@
                 <constraint firstItem="vk4-yh-XA3" firstAttribute="top" secondItem="yhM-5c-wOO" secondAttribute="bottom" constant="10" id="OHH-gw-gsT"/>
                 <constraint firstItem="bXo-ii-e6x" firstAttribute="top" secondItem="DX7-Rh-VpD" secondAttribute="bottom" id="Pyi-EV-H7c"/>
                 <constraint firstItem="JUh-O3-VlL" firstAttribute="width" secondItem="AgI-4B-QRP" secondAttribute="width" id="U7H-0T-bOv"/>
+                <constraint firstItem="LH9-BH-nbB" firstAttribute="top" secondItem="vk4-yh-XA3" secondAttribute="bottom" constant="5" id="UHf-mS-Qaf"/>
                 <constraint firstItem="AgI-4B-QRP" firstAttribute="centerX" secondItem="gTV-IL-0wX" secondAttribute="centerX" id="Voo-o9-dgy"/>
                 <constraint firstItem="j7p-kX-oOP" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" id="XgR-2g-9EN"/>
                 <constraint firstItem="WRV-df-jxU" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" constant="13" id="cmJ-mG-btg"/>
@@ -124,6 +125,7 @@
                     <exclude reference="Nte-4E-UUy"/>
                     <exclude reference="8He-Mr-TgD"/>
                     <exclude reference="krq-xw-Vkt"/>
+                    <exclude reference="lYs-0C-f0Q"/>
                     <exclude reference="e5U-ZA-94G"/>
                 </mask>
             </variation>
