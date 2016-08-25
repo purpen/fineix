@@ -446,6 +446,7 @@
 		1FBF2CDF1D6D94AD003C1643 /* THNHomeSenceCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 1FBF2CDD1D6D94AD003C1643 /* THNHomeSenceCollectionViewCell.m */; };
 		1FBF2CE01D6D94AD003C1643 /* THNHomeSenceCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1FBF2CDE1D6D94AD003C1643 /* THNHomeSenceCollectionViewCell.xib */; };
 		1FBF2CE31D6D99E6003C1643 /* SceneCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 1FBF2CE21D6D99E6003C1643 /* SceneCollectionViewCell.m */; };
+		1FBF2CE51D6EDB93003C1643 /* My.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1FBF2CE41D6EDB93003C1643 /* My.storyboard */; };
 		1FC6782E1CDB33ED00535162 /* UIView+TYAlertView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1FC6782C1CDB33ED00535162 /* UIView+TYAlertView.m */; };
 		1FCDCC7A1D0515F700C92E78 /* ScenarioNonView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1FCDCC791D0515F700C92E78 /* ScenarioNonView.m */; };
 		1FCDCC7D1D0525A300C92E78 /* FocusNonView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1FCDCC7C1D0525A300C92E78 /* FocusNonView.m */; };
@@ -1465,6 +1466,7 @@
 		1FBF2CDE1D6D94AD003C1643 /* THNHomeSenceCollectionViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = THNHomeSenceCollectionViewCell.xib; sourceTree = "<group>"; };
 		1FBF2CE11D6D99E6003C1643 /* SceneCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SceneCollectionViewCell.h; sourceTree = "<group>"; };
 		1FBF2CE21D6D99E6003C1643 /* SceneCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SceneCollectionViewCell.m; sourceTree = "<group>"; };
+		1FBF2CE41D6EDB93003C1643 /* My.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = My.storyboard; sourceTree = "<group>"; };
 		1FC6782C1CDB33ED00535162 /* UIView+TYAlertView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+TYAlertView.m"; sourceTree = "<group>"; };
 		1FC6782D1CDB33ED00535162 /* UIView+TYAutoLayout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+TYAutoLayout.h"; sourceTree = "<group>"; };
 		1FCDCC781D0515F700C92E78 /* ScenarioNonView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ScenarioNonView.h; sourceTree = "<group>"; };
@@ -2999,6 +3001,7 @@
 		1F2A8D821CF40277005116C7 /* My */ = {
 			isa = PBXGroup;
 			children = (
+				1FBF2CE41D6EDB93003C1643 /* My.storyboard */,
 				1FCDCC7E1D066D0000C92E78 /* Other */,
 				1F2A8D831CF40277005116C7 /* Controller */,
 				1F2A8DB31CF40277005116C7 /* model */,
@@ -4928,6 +4931,7 @@
 				1FA4BDF61D35F2200067A196 /* UMSShareListController.xib in Resources */,
 				1F2A90281CF40277005116C7 /* Empty.xib in Resources */,
 				484C45261D6010E5009D6155 /* THNPeopleView.xib in Resources */,
+				1FBF2CE51D6EDB93003C1643 /* My.storyboard in Resources */,
 				1F223B1D1CD714F3007687F7 /* messages.plist in Resources */,
 				1F2A908A1CF40277005116C7 /* FBPayTheWayViewController.xib in Resources */,
 				1F27AE881CE06BB1005A434B /* AlipaySDK.bundle in Resources */,
