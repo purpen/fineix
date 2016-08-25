@@ -14,6 +14,13 @@
 #import "SVProgressHUD.h"
 #import "ProjectViewCommentsViewController.h"
 #import "ShareViewController.h"
+#import "FiuSceneViewController.h"
+#import "THNArticleDetalViewController.h"
+#import "THNActiveDetalViewController.h"
+#import "THNXinPinDetalViewController.h"
+#import "THNCuXiaoDetalViewController.h"
+#import "GoodsBrandViewController.h"
+#import "SearchViewController.h"
 
 @interface THNArticleDetalViewController ()<FBNavigationBarItemsDelegate,UIWebViewDelegate>
 
@@ -32,7 +39,6 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    self.navViewTitle.text = self.title;
     
     [self requestUrl];
     
@@ -66,6 +72,7 @@
         if (result[@"success"]) {
             NSLog(@"文章详情 %@",result);
             self.model = [THNArticleDetalModel mj_objectWithKeyValues:result[@"data"]];
+            self.navViewTitle.text = self.model.title;
             NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"%@",self.model.content_view_url]];
             //在网页上加载
             NSURLRequest *webRequest = [NSURLRequest requestWithURL:url];
@@ -92,62 +99,142 @@
     [SVProgressHUD showInfoWithStatus:error.localizedDescription];
 }
 
-//#pragma mark - 截取网页点击事件，获取url
-//- (BOOL)webView:(UIWebView *)webView shouldStartLoadWithRequest:(NSURLRequest *)request navigationType:(UIWebViewNavigationType)navigationType
-//{
-//    //判断是否是单击
-//    if (navigationType == UIWebViewNavigationTypeLinkClicked)
-//    {
-//        NSURL *url = [request URL];
-//        NSString *str = [url absoluteString];
-//        NSLog(@"str  %@",str);
-//        if([str rangeOfString:@"infoType"].location == NSNotFound){
-//            [SVProgressHUD showErrorWithStatus:@"参数不足"];
-//        }else if ([str rangeOfString:@"taihuoniao.com"].location != NSNotFound && [str rangeOfString:@"infoType"].location != NSNotFound){
-//            NSArray *oneAry = [str componentsSeparatedByString:@"?"];
-//            NSString *infoStr = oneAry[1];
-//            NSArray *twoAry = [infoStr componentsSeparatedByString:@"&"];
-//            NSString *infoType;
-//            if (((NSString*)twoAry[0]).length == 11) {
-//                infoType = [twoAry[0] substringWithRange:NSMakeRange(9, 2)];
-//            }else if(((NSString*)twoAry[0]).length == 10){
-//                infoType = [twoAry[0] substringWithRange:NSMakeRange(9, 1)];
-//            }
-//            NSArray *threeAry = [twoAry[1] componentsSeparatedByString:@"="];
-//            NSString *infoId = threeAry[1];
-//            if ([infoType isEqualToString:@"10"]) {
-//                //情景
-//                FiuSceneViewController * fiuSceneVC = [[FiuSceneViewController alloc] init];
-//                fiuSceneVC.fiuSceneId = infoId;
-//                [self.navigationController pushViewController:fiuSceneVC animated:YES];
-//            }else if ([infoType isEqualToString:@"11"]) {
-//                //场景
-//                SceneInfoViewController * sceneInfoVC = [[SceneInfoViewController alloc] init];
-//                sceneInfoVC.sceneId = infoId;
-//                [self.navigationController pushViewController:sceneInfoVC animated:YES];
-//            }else if ([infoType isEqualToString:@"12"]) {
-//                //产品
-//                GoodsInfoViewController * goodsInfoVC = [[GoodsInfoViewController alloc] init];
-//                goodsInfoVC.goodsID = infoId;
-//                [self.navigationController pushViewController:goodsInfoVC animated:YES];
-//            }else if ([infoType isEqualToString:@"13"]) {
-//                //用户
-//                HomePageViewController *homeOpage = [[HomePageViewController alloc] init];
-//                homeOpage.type = @2;
-//                homeOpage.userId = infoId;
-//                UserInfoEntity *entity = [UserInfoEntity defaultUserInfoEntity];
-//                if ([entity.userId isEqualToString:infoId]) {
-//                    homeOpage.isMySelf = YES;
-//                }else{
-//                    homeOpage.isMySelf = NO;
-//                }
-//                [self.navigationController pushViewController:homeOpage animated:YES];
-//            }
-//        }
-//        return NO;
-//    }
-//    return YES;
-//}
+#pragma mark - 截取网页点击事件，获取url
+- (BOOL)webView:(UIWebView *)webView shouldStartLoadWithRequest:(NSURLRequest *)request navigationType:(UIWebViewNavigationType)navigationType
+{
+    //判断是否是单击
+    if (navigationType == UIWebViewNavigationTypeLinkClicked)
+    {
+        NSURL *url = [request URL];
+        NSString *str = [url absoluteString];
+        NSLog(@"str  %@",str);
+        if([str rangeOfString:@"taihuoniao.com"].location == NSNotFound && [str rangeOfString:@"infoType"].location == NSNotFound){
+            //打开浏览器
+            [[UIApplication sharedApplication] openURL:[NSURL URLWithString:str]];
+        }else if ([str rangeOfString:@"taihuoniao.com"].location != NSNotFound && [str rangeOfString:@"infoType"].location != NSNotFound && [str rangeOfString:@"infoId"].location != NSNotFound){
+            NSArray *oneAry = [str componentsSeparatedByString:@"?"];
+            NSString *infoStr = oneAry[1];
+            NSArray *twoAry = [infoStr componentsSeparatedByString:@"&"];
+            NSString *infoType;
+            if (((NSString*)twoAry[0]).length == 11) {
+                infoType = [twoAry[0] substringWithRange:NSMakeRange(9, 2)];
+            }else if(((NSString*)twoAry[0]).length == 10){
+                infoType = [twoAry[0] substringWithRange:NSMakeRange(9, 1)];
+            }
+            NSInteger type = [infoType integerValue];
+            NSString *infoId;
+            NSArray *threeAry = [twoAry[1] componentsSeparatedByString:@"="];
+            NSString *inforTag;
+            if (type == 20) {
+                NSArray *fourAry = [threeAry[1] componentsSeparatedByString:@"&"];
+                infoId = fourAry[0];
+                NSArray *fiveAry = [fourAry[1] componentsSeparatedByString:@"="];
+                inforTag = fiveAry[1];
+            }else{
+                infoId = threeAry[1];
+            }
+            
+            
+            switch (type) {
+                case 1:
+                    //网址
+                    [[UIApplication sharedApplication] openURL:[NSURL URLWithString:str]];
+                    break;
+                case 11:{
+                    //情境
+                    FiuSceneViewController * fiuSceneVC = [[FiuSceneViewController alloc] init];
+                    fiuSceneVC.fiuSceneId = infoId;
+                    [self.navigationController pushViewController:fiuSceneVC animated:YES];
+                }
+                    break;
+                case 12:{
+                    //产品
+                    GoodsInfoViewController * goodsInfoVC = [[GoodsInfoViewController alloc] init];
+                    goodsInfoVC.goodsID = infoId;
+                    [self.navigationController pushViewController:goodsInfoVC animated:YES];
+                }
+                    break;
+                case 13:{
+                    //用户
+                    HomePageViewController *homeOpage = [[HomePageViewController alloc] init];
+                    homeOpage.type = @2;
+                    homeOpage.userId = infoId;
+                    UserInfoEntity *entity = [UserInfoEntity defaultUserInfoEntity];
+                    if ([entity.userId isEqualToString:infoId]) {
+                        homeOpage.isMySelf = YES;
+                    }else{
+                        homeOpage.isMySelf = NO;
+                    }
+                    [self.navigationController pushViewController:homeOpage animated:YES];
+                }  //用户
+                    break;
+                case 14:
+                    //专题
+                {
+                    FBRequest *request = [FBAPI postWithUrlString:@"/scene_subject/view" requestDictionary:@{
+                                                                                                             @"id" : infoId
+                                                                                                             } delegate:self];
+                    [request startRequestSuccess:^(FBRequest *request, id result) {
+                        if (result[@"success"]) {
+                            NSString *zhuanTiType = result[@"data"][@"type"];
+                            NSInteger zhuanType = [zhuanTiType integerValue];
+                            switch (zhuanType) {
+                                case 1:{
+                                    
+                                    THNActiveDetalViewController *vc = [[THNActiveDetalViewController alloc] init];
+                                    vc.id = infoId;
+                                    break;
+                                }
+                                   
+                                case 2:{
+                                    
+                                    THNActiveDetalViewController *vc = [[THNActiveDetalViewController alloc] init];
+                                    vc.id = infoId;
+                                    break;
+                                }
+                                case 3:{
+                                    
+                                    THNCuXiaoDetalViewController *vc = [[THNCuXiaoDetalViewController alloc] init];
+                                    vc.id = infoId;
+                                    break;
+                                }
+                                case 4:{
+                                    
+                                    THNXinPinDetalViewController *vc = [[THNXinPinDetalViewController alloc] init];
+                                    vc.id = infoId;
+                                    break;
+                                }
+                                default:
+                                    break;
+                            }
+                        }
+                    } failure:nil];
+                }
+                    break;
+                case 15:
+                    //品牌
+                {
+                    GoodsBrandViewController *vc = [[GoodsBrandViewController alloc] init];
+                    vc.brandId = infoId;
+                    [self.navigationController pushViewController:vc animated:YES];
+                }
+                    break;
+                case 20:
+                    //搜索
+                {
+                    SearchViewController *vc = [[SearchViewController alloc] init];
+                    [self.navigationController pushViewController:vc animated:YES];
+                }
+                    break;
+                    
+                default:
+                    break;
+            }
+        }
+        return NO;
+    }
+    return YES;
+}
 
 -(ShareViewController *)shareVC{
     if (!_shareVC) {

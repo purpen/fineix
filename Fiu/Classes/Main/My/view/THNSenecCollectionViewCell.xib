@@ -58,10 +58,11 @@
                         </constraints>
                     </view>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="right" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2ce-Dv-yJ3">
-                        <rect key="frame" x="0.0" y="242" width="0.0" height="0.0"/>
-                        <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                        <rect key="frame" x="0.0" y="200" width="0.0" height="21"/>
+                        <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.80000000000000004" colorSpace="calibratedRGB"/>
                         <constraints>
                             <constraint firstAttribute="width" constant="152" id="enU-ZI-lrM"/>
+                            <constraint firstAttribute="height" constant="21" id="tsI-EH-F63"/>
                         </constraints>
                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                         <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -73,8 +74,11 @@
                         </variation>
                     </label>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mne-i6-hCM">
-                        <rect key="frame" x="0.0" y="244" width="0.0" height="0.0"/>
-                        <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                        <rect key="frame" x="0.0" y="223" width="0.0" height="21"/>
+                        <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.80000000000000004" colorSpace="calibratedRGB"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="21" id="xrp-e8-uEm"/>
+                        </constraints>
                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                         <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <nil key="highlightedColor"/>

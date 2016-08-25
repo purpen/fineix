@@ -17,7 +17,7 @@
                         <rect key="frame" x="0.0" y="186" width="217" height="40"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Wp4-aA-9kF">
-                                <rect key="frame" x="92" y="2" width="33" height="16"/>
+                                <rect key="frame" x="15" y="2" width="187" height="16"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="13"/>
                                 <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
@@ -29,10 +29,12 @@
                                 <nil key="highlightedColor"/>
                             </label>
                         </subviews>
-                        <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                        <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.80000000000000004" colorSpace="calibratedRGB"/>
                         <constraints>
+                            <constraint firstAttribute="trailing" secondItem="Wp4-aA-9kF" secondAttribute="trailing" constant="15" id="0QF-Jv-yv2"/>
                             <constraint firstItem="pS1-Ix-q90" firstAttribute="centerX" secondItem="Is8-26-HAD" secondAttribute="centerX" id="VNm-BZ-MQc"/>
                             <constraint firstItem="pS1-Ix-q90" firstAttribute="top" secondItem="Wp4-aA-9kF" secondAttribute="bottom" constant="2" id="ao7-aR-slI"/>
+                            <constraint firstItem="Wp4-aA-9kF" firstAttribute="leading" secondItem="Is8-26-HAD" secondAttribute="leading" constant="15" id="eHB-Xn-ad1"/>
                             <constraint firstItem="Wp4-aA-9kF" firstAttribute="centerX" secondItem="Is8-26-HAD" secondAttribute="centerX" id="jyT-Oq-JKn"/>
                             <constraint firstItem="Wp4-aA-9kF" firstAttribute="top" secondItem="Is8-26-HAD" secondAttribute="top" constant="2" id="phZ-VL-QH9"/>
                             <constraint firstAttribute="height" constant="40" id="rB7-lW-2gE"/>

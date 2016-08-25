@@ -18,7 +18,7 @@
                     </imageView>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="right" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="chi-ge-6oB">
                         <rect key="frame" x="0.0" y="279" width="0.0" height="0.0"/>
-                        <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                        <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.80000000000000004" colorSpace="calibratedRGB"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="21" id="R5g-HT-qBe"/>
                             <constraint firstAttribute="width" constant="152" id="gr2-yJ-19C"/>
@@ -34,7 +34,7 @@
                     </label>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tTa-i0-cWK">
                         <rect key="frame" x="0.0" y="281" width="0.0" height="0.0"/>
-                        <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                        <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.80000000000000004" colorSpace="calibratedRGB"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="21" id="YIy-Pp-PwP"/>
                         </constraints>

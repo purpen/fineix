@@ -85,7 +85,7 @@
     
     if (title.length <= 13) {
        NSString *a = [title substringWithRange:NSMakeRange(0, title.length)];
-        self.tittleLabel.text = a;
+        self.titleTwoLabel.text = a;
     }else if (title.length > 13){
         NSString *a = [title substringWithRange:NSMakeRange(0, 12)];
         NSString *b = [NSString stringWithFormat:@"%@ ",a];

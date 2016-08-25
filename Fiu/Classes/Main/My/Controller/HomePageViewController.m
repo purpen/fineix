@@ -392,7 +392,7 @@ static NSString *sceneCellId = @"THNHomeSenceCollectionViewCell";
         
         layout.minimumInteritemSpacing = 1;
         _myCollectionView = [[UICollectionView alloc] initWithFrame:CGRectMake(0, -54, SCREEN_WIDTH, SCREEN_HEIGHT+54) collectionViewLayout:layout];
-        _myCollectionView.backgroundColor = [UIColor whiteColor];
+        _myCollectionView.backgroundColor = [UIColor colorWithHexString:@"#F8F8F8"];
         _myCollectionView.showsVerticalScrollIndicator = NO;
         _myCollectionView.delegate = self;
         _myCollectionView.dataSource = self;

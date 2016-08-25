@@ -23,10 +23,10 @@
                             <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.20000000000000001" colorSpace="calibratedRGB"/>
                         </view>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="FK8-tM-laq">
-                            <rect key="frame" x="129" y="93" width="58" height="26"/>
+                            <rect key="frame" x="124" y="93" width="68" height="26"/>
                             <subviews>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Acz-so-eSo">
-                                    <rect key="frame" x="10" y="4" width="38" height="18"/>
+                                    <rect key="frame" x="15" y="4" width="38" height="18"/>
                                     <constraints>
                                         <constraint firstAttribute="width" constant="50" id="fxL-Bn-7e6"/>
                                     </constraints>
@@ -40,7 +40,7 @@
                                     </variation>
                                 </label>
                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="iYQ-kl-N38">
-                                    <rect key="frame" x="0.0" y="24" width="58" height="2"/>
+                                    <rect key="frame" x="0.0" y="24" width="68" height="2"/>
                                     <color key="backgroundColor" red="0.58039215690000001" green="0.41960784309999999" blue="0.062745098040000002" alpha="1" colorSpace="calibratedRGB"/>
                                     <constraints>
                                         <constraint firstAttribute="height" constant="2" id="1wi-ws-qb7"/>
@@ -49,15 +49,20 @@
                             </subviews>
                             <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.80000000000000004" colorSpace="calibratedRGB"/>
                             <constraints>
-                                <constraint firstAttribute="trailing" secondItem="Acz-so-eSo" secondAttribute="trailing" constant="10" id="3o4-Uf-eG0"/>
+                                <constraint firstAttribute="trailing" secondItem="Acz-so-eSo" secondAttribute="trailing" constant="15" id="3o4-Uf-eG0"/>
                                 <constraint firstAttribute="bottom" secondItem="iYQ-kl-N38" secondAttribute="bottom" id="BP1-s3-qSd"/>
                                 <constraint firstAttribute="height" constant="26" id="MAb-Be-n3a"/>
                                 <constraint firstItem="Acz-so-eSo" firstAttribute="centerY" secondItem="FK8-tM-laq" secondAttribute="centerY" id="VE2-m6-mzc"/>
                                 <constraint firstAttribute="trailing" secondItem="iYQ-kl-N38" secondAttribute="trailing" id="Wy2-h2-dd7"/>
                                 <constraint firstItem="iYQ-kl-N38" firstAttribute="leading" secondItem="FK8-tM-laq" secondAttribute="leading" id="g6m-tY-uKa"/>
                                 <constraint firstItem="Acz-so-eSo" firstAttribute="centerX" secondItem="FK8-tM-laq" secondAttribute="centerX" id="mVb-Kq-9EU"/>
-                                <constraint firstItem="Acz-so-eSo" firstAttribute="leading" secondItem="FK8-tM-laq" secondAttribute="leading" constant="10" id="q10-3i-kQ8"/>
+                                <constraint firstItem="Acz-so-eSo" firstAttribute="leading" secondItem="FK8-tM-laq" secondAttribute="leading" constant="15" id="q10-3i-kQ8"/>
                             </constraints>
+                            <variation key="default">
+                                <mask key="constraints">
+                                    <exclude reference="mVb-Kq-9EU"/>
+                                </mask>
+                            </variation>
                         </view>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KHI-xJ-6tw">
                             <rect key="frame" x="79" y="124" width="158" height="17"/>

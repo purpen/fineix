@@ -55,7 +55,7 @@ static NSString *const URLFiuGoods = @"/favorite/get_new_list";
 -(UICollectionView *)contenView{
     if (!_contenView) {
         UICollectionViewFlowLayout *layout = [[UICollectionViewFlowLayout alloc] init];
-        _contenView = [[UICollectionView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, self.view.height) collectionViewLayout:layout];
+        _contenView = [[UICollectionView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT - 64 - 44) collectionViewLayout:layout];
         _contenView.backgroundColor = [UIColor colorWithHexString:@"#F7F7F7"];
         _contenView.showsVerticalScrollIndicator = NO;
         _contenView.delegate = self;
