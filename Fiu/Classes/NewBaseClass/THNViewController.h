@@ -30,6 +30,27 @@
 @pro_strong UITableView *baseTable; //  当前列表
 @pro_strong UIButton *subscribeBtn; //  订阅按钮
 
+/**
+ *  是否登录
+ */
+@pro_strong FBRequest   *   userLoginRequest;
+- (BOOL)isUserLogin;
+
+/**
+ *  获取当前登录用户id
+ */
+- (NSString *)getLoginUserID;
+
+/**
+ *  获取当前登录用户订阅主题
+ */
+- (NSString *)getLoginUserInterestSceneCate;
+
+/**
+ *  未登录弹出登录框
+ */
+- (void)openUserLoginVC;
+
 /*
  *  在Nav上添加中间的Logo
  */

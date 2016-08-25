@@ -41,6 +41,7 @@
 @property(nonatomic,copy) NSString *assets;
 /** 订阅的情境主题 */
 @property (nonatomic, copy) NSString *interest_scene_cate;
+@property(nonatomic,assign) NSInteger sceneCateCount;
 /** 小的头像 */
 @property(nonatomic,copy) NSString *avatar_url;
 

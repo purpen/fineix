@@ -44,7 +44,7 @@ static NSString *const MallListHeaderCellViewId = @"mallListHeaderCellViewId";
 #pragma mark - 网络请求
 #pragma mark 分类
 - (void)networkCategoryData {
-    self.categoryRequest = [FBAPI getWithUrlString:URLCategory requestDictionary:@{@"domain":@"10", @"page":@"1", @"size":@"10"} delegate:self];
+    self.categoryRequest = [FBAPI getWithUrlString:URLCategory requestDictionary:@{@"domain":@"1", @"page":@"1", @"size":@"10"} delegate:self];
     [self.categoryRequest startRequestSuccess:^(FBRequest *request, id result) {
         self.categoryMarr = [NSMutableArray arrayWithArray:[[result valueForKey:@"data"] valueForKey:@"rows"]];
         if (self.categoryMarr.count) {
@@ -129,6 +129,7 @@ static NSString *const MallListHeaderCellViewId = @"mallListHeaderCellViewId";
         if (self.goodsDataMarr.count) {
             [cell setNewGoodsData:self.goodsDataMarr];
         }
+        cell.nav = self.navigationController;
         return cell;
         
     } else {
@@ -137,6 +138,7 @@ static NSString *const MallListHeaderCellViewId = @"mallListHeaderCellViewId";
         if (self.subjectMarr.count) {
             [cell setMallSubjectData:self.subjectMarr[indexPath.row-1]];
         }
+        cell.nav = self.navigationController;
         return cell;
     }
 }

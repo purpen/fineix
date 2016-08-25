@@ -12,7 +12,7 @@
 #import "ChildTagsTag.h"
 
 static NSString *const URLChildTags = @"/category/fetch_child_tags";
-static NSString *const URLMallList = @"/scene_product/getlist";
+static NSString *const URLMallList = @"/product/getlist";
 static NSString *const goodsListCellId = @"GoodsListCellId";
 
 @interface THNCategoryViewController () {

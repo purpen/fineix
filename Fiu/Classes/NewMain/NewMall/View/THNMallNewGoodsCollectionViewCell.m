@@ -8,6 +8,7 @@
 
 #import "THNMallNewGoodsCollectionViewCell.h"
 #import "NewGoodsCollectionViewCell.h"
+#import "FBGoodsInfoViewController.h"
 
 static NSString *const GoodsCellId = @"goodsCellId";
 
@@ -24,6 +25,9 @@ static NSString *const GoodsCellId = @"goodsCellId";
 
 - (void)setNewGoodsData:(NSMutableArray *)data {
     self.goodsMarr = data;
+    for (THNMallGoodsModelItem *model in self.goodsMarr) {
+        [self.goodsIdMarr addObject:[NSString stringWithFormat:@"%zi",model.idField]];
+    }
     [self.goodList reloadData];
 }
 
@@ -59,7 +63,9 @@ static NSString *const GoodsCellId = @"goodsCellId";
 }
 
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
-    [SVProgressHUD showSuccessWithStatus:@"打开商品详情"];
+    FBGoodsInfoViewController *goodsVC = [[FBGoodsInfoViewController alloc] init];
+    goodsVC.goodsID = self.goodsIdMarr[indexPath.row];
+    [self.nav pushViewController:goodsVC animated:YES];
 }
 
 - (NSMutableArray *)goodsMarr {
@@ -68,5 +74,13 @@ static NSString *const GoodsCellId = @"goodsCellId";
     }
     return _goodsMarr;
 }
+
+- (NSMutableArray *)goodsIdMarr {
+    if (!_goodsIdMarr) {
+        _goodsIdMarr = [NSMutableArray array];
+    }
+    return _goodsIdMarr;
+}
+
 
 @end

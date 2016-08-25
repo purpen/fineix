@@ -15,6 +15,7 @@
 
 @interface THNSceneImageTableViewCell : UITableViewCell
 
+@pro_strong UIViewController *vc;
 @pro_strong UINavigationController *nav;
 @pro_strong UIButton *sceneImage;
 @pro_strong UILabel *title;

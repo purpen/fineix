@@ -69,8 +69,6 @@
 
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
     SearchViewController * searchVC = [[SearchViewController alloc] init];
-    searchVC.keyword = self.chooseTagMarr[indexPath.row];
-    searchVC.searchType = 2;
     [self.nav pushViewController:searchVC animated:YES];
 }
 

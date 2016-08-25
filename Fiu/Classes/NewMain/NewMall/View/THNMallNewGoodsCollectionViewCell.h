@@ -14,8 +14,10 @@
     UICollectionViewDataSource
 >
 
+@pro_strong UINavigationController *nav;
 @pro_strong UICollectionView *goodList;
 @pro_strong NSMutableArray *goodsMarr;
+@pro_strong NSMutableArray *goodsIdMarr;
 
 - (void)setNewGoodsData:(NSMutableArray *)data;
 

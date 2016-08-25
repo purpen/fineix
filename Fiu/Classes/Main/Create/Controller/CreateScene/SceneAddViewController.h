@@ -30,6 +30,7 @@
 @pro_strong ChangeAddUrlView    *changeGoodsView;        //  编辑产品
 @pro_strong FBRequest           *addUserGoods;
 @pro_strong FBRequest           *deleteUserGoods;
+@pro_strong FBRequest           *userAddRequest;
 @pro_assign NSInteger            seleIndex;
 @pro_strong FBFootView          *footView;               //  底部功能选择视图
 @pro_strong FiltersView         *filtersView;            //  滤镜视图

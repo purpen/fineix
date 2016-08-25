@@ -19,6 +19,11 @@
 "User_follow" = "＋关注";
 "User_followDone" = "已关注";
 
+//  订阅
+"SubscribeVC" = "订阅";
+"SubscribeDone" = "已订阅";
+"SubscribeScene" = "个主题情境";
+
 //  更多
 "editScene" = "编辑";
 "saveScene" = "收藏";
@@ -38,6 +43,13 @@
 //  好货
 "mallSearch" = "搜索好货或品牌";
 "newGoods" = "最新推荐";
+
+//  搜索
+"searchScene" = "情境";
+"searchUser" = "用户";
+"searchProduct" = "产品";
+"searchBrand" = "品牌";
+"searchTheme" = "主题";
 
 //  创建情境
 "next" = "继续";

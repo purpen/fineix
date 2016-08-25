@@ -10,10 +10,12 @@
 #import "GoodsInfoViewController.h"
 #import "UILable+Frame.h"
 #import "UIImage+Helper.h"
+#import "THNSceneImageViewController.h"
 
 @interface THNSceneImageTableViewCell () {
     NSString *_titleStr;
     NSString *_suTitleStr;
+    NSString *_image;
 }
 
 @end
@@ -38,6 +40,7 @@
         [self setUserTagBtn];
     }
     
+    _image = sceneModel.coverUrl;
     [self.sceneImage sd_setImageWithURL:[NSURL URLWithString:sceneModel.coverUrl]
                                forState:(UIControlStateNormal)
                        placeholderImage:[UIImage imageNamed:@""]];
@@ -176,11 +179,11 @@
 }
 
 - (void)sceneImageClick:(UIButton *)button {
-    [SVProgressHUD showSuccessWithStatus:@"全屏查看大图"];
-}
-
-- (void)goodsBtn:(UIButton *)button {
-    [SVProgressHUD showSuccessWithStatus:@"打开商品"];
+    THNSceneImageViewController *sceneImageVC = [[THNSceneImageViewController alloc] init];
+    sceneImageVC.modalPresentationStyle = UIModalPresentationOverFullScreen;
+    sceneImageVC.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;
+    sceneImageVC.image = _image;
+    [self.vc presentViewController:sceneImageVC animated:YES completion:nil];
 }
 
 - (UILabel *)title {

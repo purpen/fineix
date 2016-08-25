@@ -64,11 +64,7 @@
         _cancelBtn = [[UIButton alloc] init];
         [_cancelBtn setTitle:NSLocalizedString(@"cancel", nil) forState:(UIControlStateNormal)];
         [_cancelBtn setTitleColor:[UIColor colorWithHexString:@"#FFFFFF"] forState:(UIControlStateNormal)];
-        if (IS_iOS9) {
-            _cancelBtn.titleLabel.font = [UIFont fontWithName:@"PingFangSC-Light" size:14];
-        } else {
-            _cancelBtn.titleLabel.font = [UIFont systemFontOfSize:14];
-        }
+        _cancelBtn.titleLabel.font = [UIFont systemFontOfSize:14];
         [_cancelBtn addTarget:self action:@selector(canceleSearch) forControlEvents:(UIControlEventTouchUpInside)];
     }
     return _cancelBtn;
@@ -76,10 +72,10 @@
 
 //  收起键盘
 - (void)canceleSearch {
+    [_searchInputBox resignFirstResponder];
     if ([self.delegate respondsToSelector:@selector(cancelSearch)]) {
         [self.delegate cancelSearch];
     }
-    [_searchInputBox resignFirstResponder];
 }
 
 #pragma mark - UITextFieldDelegate

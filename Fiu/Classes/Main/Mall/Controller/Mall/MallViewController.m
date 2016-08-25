@@ -442,8 +442,6 @@ static NSString *const URLFiuBrand = @"/scene_brands/getlist";
 //  点击左边barItem
 - (void)leftBarItemSelected {
     SearchViewController * searchVC = [[SearchViewController alloc] init];
-    searchVC.searchType = 2;
-    searchVC.beginSearch = YES;
     [self.navigationController pushViewController:searchVC animated:YES];
 }
 

@@ -8,6 +8,7 @@
 
 #import "THNViewController.h"
 #import "QRCodeScanViewController.h"
+#import "THNLoginRegisterViewController.h"
 
 @implementation THNViewController {
     NSMutableArray *_guideImgMarr;
@@ -23,6 +24,31 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self thn_setNavViewUI];
+}
+
+#pragma mark - 获取用户登录信息
+- (BOOL)isUserLogin {
+    UserInfoEntity * entity = [UserInfoEntity defaultUserInfoEntity];
+    return entity.isLogin;
+}
+
+#pragma mark - 获取用户登录id
+- (NSString *)getLoginUserID {
+    UserInfoEntity * entity = [UserInfoEntity defaultUserInfoEntity];
+    return entity.userId;
+}
+
+#pragma mark - 获取登录用户订阅主题
+- (NSString *)getLoginUserInterestSceneCate {
+    UserInfoEntity * entity = [UserInfoEntity defaultUserInfoEntity];
+    return entity.interest_scene_cate;
+}
+
+#pragma mark - 弹出登录
+- (void)openUserLoginVC {
+    THNLoginRegisterViewController * loginSignupVC = [[THNLoginRegisterViewController alloc] init];
+    UINavigationController * navi = [[UINavigationController alloc] initWithRootViewController:loginSignupVC];
+    [self presentViewController:navi animated:YES completion:nil];
 }
 
 #pragma mark - 设置加载Nav视图

@@ -15,8 +15,8 @@
 
 static NSString *const URLSceneList = @"/scene_sight/";
 static NSString *const URLCategory = @"/category/getlist";
-static NSString *const URLLikeScene = @"/favorite/ajax_sight_love";
-static NSString *const URLCancelLike = @"/favorite/ajax_cancel_sight_love";
+static NSString *const URLLikeScene = @"/favorite/ajax_love";
+static NSString *const URLCancelLike = @"/favorite/ajax_cancel_love";
 
 static NSString *const DiscoverCellId = @"discoverCellId";
 static NSString *const SceneListCellId = @"sceneListCellId";
@@ -57,7 +57,7 @@ static NSString *const SceneListHeaderCellViewId = @"sceneListHeaderViewId";
 
 #pragma mark 点赞
 - (void)thn_networkLikeSceneData:(NSString *)idx {
-    self.likeSceneRequest = [FBAPI postWithUrlString:URLLikeScene requestDictionary:@{@"id":idx} delegate:self];
+    self.likeSceneRequest = [FBAPI postWithUrlString:URLLikeScene requestDictionary:@{@"id":idx, @"type":@"12"} delegate:self];
     [self.likeSceneRequest startRequestSuccess:^(FBRequest *request, id result) {
         if ([[result valueForKey:@"success"] isEqualToNumber:@1]) {
             NSInteger index = [self.sceneIdMarr indexOfObject:idx];
@@ -73,7 +73,7 @@ static NSString *const SceneListHeaderCellViewId = @"sceneListHeaderViewId";
 
 #pragma mark 取消点赞
 - (void)thn_networkCancelLikeData:(NSString *)idx {
-    self.cancelLikeRequest = [FBAPI postWithUrlString:URLCancelLike requestDictionary:@{@"id":idx} delegate:self];
+    self.cancelLikeRequest = [FBAPI postWithUrlString:URLCancelLike requestDictionary:@{@"id":idx, @"type":@"12"} delegate:self];
     [self.cancelLikeRequest startRequestSuccess:^(FBRequest *request, id result) {
         if ([[result valueForKey:@"success"] isEqualToNumber:@1]) {
             NSInteger index = [self.sceneIdMarr indexOfObject:idx];
@@ -235,6 +235,7 @@ static NSString *const SceneListHeaderCellViewId = @"sceneListHeaderViewId";
     sceneListVC.sceneListMarr = self.sceneListMarr;
     sceneListVC.commentsMarr = self.commentsMarr;
     sceneListVC.sceneIdMarr = self.sceneIdMarr;
+    sceneListVC.userIdMarr = self.userIdMarr;
     sceneListVC.index = indexPath.row;
     [self.navigationController pushViewController:sceneListVC animated:YES];
 }

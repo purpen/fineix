@@ -46,6 +46,9 @@
     if(![dictionary[@"des"] isKindOfClass:[NSNull class]]){
         self.des = dictionary[@"des"];
     }
+    if(![dictionary[@"content"] isKindOfClass:[NSNull class]]){
+        self.content = dictionary[@"content"];
+    }
     if(![dictionary[@"status"] isKindOfClass:[NSNull class]]){
         self.status = [dictionary[@"status"] integerValue];
     }

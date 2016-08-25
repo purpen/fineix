@@ -8,31 +8,41 @@
 
 #import "UserHeaderTableViewCell.h"
 
+@interface UserHeaderTableViewCell () {
+    NSString *_userId;
+}
+
+@end
+
 @implementation UserHeaderTableViewCell
 
 - (instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier {
     self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
     if (self) {
-        
+        self.selectionStyle = UITableViewCellSelectionStyleNone;
         [self setCellViewUI];
         
     }
     return self;
 }
 
-- (void)setUI {
-    [self.userHeader setBackgroundImage:[UIImage imageNamed:@"asdfsd"] forState:(UIControlStateNormal)];
-    
-    self.userName.text = @"哈哈哈";
-    
-    self.userProfile.text = @"人生真的是一场大设计啊";
+- (void)setUserListData:(UserModelRow *)model {
+    [self.userHeader sd_setImageWithURL:[NSURL URLWithString:model.avatarUrl] forState:(UIControlStateNormal)];
+    self.userName.text = model.nickname;
+    self.userProfile.text = model.summary;
+    _userId = model.userId;
+    if (model.isFollow == 0) {
+        self.concernBtn.selected = NO;
+    } else if (model.isFollow == 1) {
+        self.concernBtn.selected = YES;
+    }
 }
 
 #pragma mark - 
 - (void)setCellViewUI {
     [self addSubview:self.userHeader];
     [_userHeader mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.size.mas_equalTo(CGSizeMake(32.5, 32.5));
+        make.size.mas_equalTo(CGSizeMake(32, 32));
         make.centerY.equalTo(self);
         make.left.equalTo(self.mas_left).with.offset(15);
     }];
@@ -53,7 +63,7 @@
     
     [self addSubview:self.concernBtn];
     [_concernBtn mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.size.mas_equalTo(CGSizeMake(70, 26));
+        make.size.mas_equalTo(CGSizeMake(60, 24));
         make.centerY.equalTo(self);
         make.right.equalTo(self.mas_right).with.offset(-15);
     }];
@@ -71,7 +81,8 @@
 - (UIButton *)userHeader {
     if (!_userHeader) {
         _userHeader = [[UIButton alloc] init];
-        
+        _userHeader.layer.cornerRadius = 32/2;
+        _userHeader.layer.masksToBounds = YES;
     }
     return _userHeader;
 }
@@ -81,11 +92,7 @@
     if (!_userName) {
         _userName = [[UILabel alloc] init];
         _userName.textColor = [UIColor colorWithHexString:@"#888888"];
-        if (IS_iOS9) {
-            _userName.font = [UIFont fontWithName:@"PingFangSC-Light" size:12];
-        } else {
-            _userName.font = [UIFont systemFontOfSize:12];
-        }
+        _userName.font = [UIFont systemFontOfSize:12];
     }
     return _userName;
 }
@@ -95,11 +102,7 @@
     if (!_userProfile) {
         _userProfile = [[UILabel alloc] init];
         _userProfile.textColor = [UIColor colorWithHexString:titleColor];
-        if (IS_iOS9) {
-            _userProfile.font = [UIFont fontWithName:@"PingFangSC-Light" size:9];
-        } else {
-            _userProfile.font = [UIFont systemFontOfSize:9];
-        }
+        _userProfile.font = [UIFont systemFontOfSize:9];
     }
     return _userProfile;
 }
@@ -108,21 +111,46 @@
 - (UIButton *)concernBtn {
     if (!_concernBtn) {
         _concernBtn = [[UIButton alloc] init];
-        _concernBtn.layer.borderColor = [UIColor colorWithHexString:titleColor].CGColor;
-        _concernBtn.layer.borderWidth = 1;
-        _concernBtn.layer.cornerRadius = 3;
-        [_concernBtn setTitle:NSLocalizedString(@"concern", nil) forState:(UIControlStateNormal)];
-        [_concernBtn setTitle:NSLocalizedString(@"concernDone", nil) forState:(UIControlStateSelected)];
-        [_concernBtn setTitleColor:[UIColor colorWithHexString:titleColor] forState:(UIControlStateNormal)];
-        [_concernBtn setTitleColor:[UIColor whiteColor] forState:(UIControlStateSelected)];
-        [_concernBtn setBackgroundImage:[UIImage imageNamed:@"Button Background"] forState:(UIControlStateSelected)];
-        if (IS_iOS9) {
-            _concernBtn.titleLabel.font = [UIFont fontWithName:@"PingFangSC-Light" size:13];
-        } else {
-            _concernBtn.titleLabel.font = [UIFont systemFontOfSize:13];
-        }
+        _concernBtn.layer.borderColor = [UIColor colorWithHexString:@"#999999"].CGColor;
+        _concernBtn.layer.borderWidth = 0.5;
+        _concernBtn.layer.cornerRadius = 4;
+        [_concernBtn setTitle:NSLocalizedString(@"User_follow", nil) forState:(UIControlStateNormal)];
+        [_concernBtn setTitle:NSLocalizedString(@"User_followDone", nil) forState:(UIControlStateSelected)];
+        [_concernBtn setTitleColor:[UIColor colorWithHexString:@"#222222"] forState:(UIControlStateNormal)];
+        _concernBtn.titleLabel.font = [UIFont systemFontOfSize:12];
+        [_concernBtn addTarget:self action:@selector(concernBtnClick:) forControlEvents:(UIControlEventTouchUpInside)];
     }
     return _concernBtn;
+}
+
+- (void)concernBtnClick:(UIButton *)button {
+    if (button.selected == NO) {
+        button.selected = YES;
+        POPSpringAnimation *scaleAnimation = [POPSpringAnimation animationWithPropertyNamed:kPOPLayerScaleXY];
+        scaleAnimation.fromValue = [NSValue valueWithCGSize:CGSizeMake(0.5, 0.5)];
+        scaleAnimation.toValue = [NSValue valueWithCGSize:CGSizeMake(1.0, 1.0)];
+        scaleAnimation.springBounciness = 10.f;
+        scaleAnimation.springSpeed = 10.0f;
+        [button.layer pop_addAnimation:scaleAnimation forKey:@"scaleAnim"];
+        _concernBtn.layer.borderColor = [UIColor colorWithHexString:fineixColor].CGColor;
+        _concernBtn.backgroundColor = [UIColor colorWithHexString:fineixColor];
+        [_concernBtn setTitleColor:[UIColor whiteColor] forState:(UIControlStateSelected)];
+        
+        [[NSNotificationCenter defaultCenter] postNotificationName:@"searchFollowUser" object:_userId];
+ 
+    } else if (button.selected == YES) {
+        button.selected = NO;
+        POPSpringAnimation *scaleAnimation = [POPSpringAnimation animationWithPropertyNamed:kPOPLayerScaleXY];
+        scaleAnimation.fromValue = [NSValue valueWithCGSize:CGSizeMake(0.5, 0.5)];
+        scaleAnimation.toValue = [NSValue valueWithCGSize:CGSizeMake(1.0, 1.0)];
+        scaleAnimation.springBounciness = 10.f;
+        scaleAnimation.springSpeed = 10.0f;
+        [button.layer pop_addAnimation:scaleAnimation forKey:@"scaleAnim"];
+        _concernBtn.layer.borderColor = [UIColor colorWithHexString:@"#999999"].CGColor;
+        _concernBtn.backgroundColor = [UIColor whiteColor];
+        
+        [[NSNotificationCenter defaultCenter] postNotificationName:@"searchCancelFollowUser" object:_userId];
+    }
 }
 
 #pragma mark - 分割线

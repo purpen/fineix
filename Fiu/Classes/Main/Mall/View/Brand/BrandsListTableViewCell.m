@@ -24,6 +24,7 @@
 - (void)setBrandListData:(BrandListModel *)model {
     [self.brandImg downloadImage:model.coverUrl place:[UIImage imageNamed:@""]];
     self.brandName.text = model.title;
+    self.content.text = model.content;
 }
 
 #pragma mark - 
@@ -37,9 +38,18 @@
     
     [self addSubview:self.brandName];
     [_brandName mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.size.mas_equalTo(CGSizeMake(200, 15));
-        make.centerY.equalTo(_brandImg);
+        make.height.equalTo(@15);
+        make.bottom.equalTo(self.mas_centerY).with.offset(0);
         make.left.equalTo(_brandImg.mas_right).with.offset(15);
+        make.right.equalTo(self.mas_right).with.offset(-15);
+    }];
+    
+    [self addSubview:self.content];
+    [_content mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.height.equalTo(@15);
+        make.top.equalTo(_brandName.mas_bottom).with.offset(0);
+        make.left.equalTo(_brandImg.mas_right).with.offset(15);
+        make.right.equalTo(self.mas_right).with.offset(-15);
     }];
 }
 
@@ -60,14 +70,20 @@
 - (UILabel *)brandName {
     if (!_brandName) {
         _brandName = [[UILabel alloc] init];
-        if (IS_iOS9) {
-            _brandName.font = [UIFont fontWithName:@"PingFangSC-Light" size:14];
-        } else {
-            _brandName.font = [UIFont systemFontOfSize:14];
-        }
+        _brandName.font = [UIFont systemFontOfSize:12];
         _brandName.textColor = [UIColor colorWithHexString:@"#222222" alpha:1];
     }
     return _brandName;
+}
+
+#pragma mark - 品牌介绍
+- (UILabel *)content {
+    if (!_content) {
+        _content = [[UILabel alloc] init];
+        _content.font = [UIFont systemFontOfSize:10];
+        _content.textColor = [UIColor colorWithHexString:@"#666666" alpha:1];
+    }
+    return _content;
 }
 
 

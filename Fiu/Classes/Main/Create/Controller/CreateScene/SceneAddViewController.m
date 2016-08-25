@@ -13,6 +13,7 @@
 #import "FBFilters.h"
 #import "FBStickersContainer.h"
 
+static NSString *const URLUserAddTmap = @"/user_temp/add";
 static NSString *const URLDeleUserGoods = @"/scene_product/deleted";
 static NSString *const URLUserAddGoods = @"/scene_product/add";
 
@@ -32,6 +33,7 @@ static NSString *const URLUserAddGoods = @"/scene_product/add";
 @pro_strong NSMutableArray         *   goodsIdData;
 @pro_strong NSMutableArray         *   goodsTitleData;
 @pro_strong NSMutableArray         *   goodsPriceData;
+@pro_strong NSMutableArray         *   goodsTypeData;
 @pro_strong NSMutableArray         *   stickersContainer;
 
 @end
@@ -61,6 +63,16 @@ static NSString *const URLUserAddGoods = @"/scene_product/add";
 }
 
 #pragma mark - 网络请求
+#pragma mark 添加品牌
+- (void)thn_networkUserAddGoods:(NSString *)title type:(NSString *)type {
+    self.userAddRequest = [FBAPI postWithUrlString:URLUserAddTmap requestDictionary:@{@"title":title, @"type":type} delegate:self];
+    [self.userAddRequest startRequestSuccess:^(FBRequest *request, id result) {
+        NSLog(@"%@", result);
+    } failure:^(FBRequest *request, NSError *error) {
+        NSLog(@"%@", error);
+    }];
+}
+
 #pragma mark 删除标记的产品
 - (void)networkDeleteUserGoods:(NSString *)ids {
     self.deleteUserGoods = [FBAPI getWithUrlString:URLDeleUserGoods requestDictionary:@{@"id":ids} delegate:self];
@@ -222,7 +234,9 @@ static NSString *const URLUserAddGoods = @"/scene_product/add";
         NSMutableDictionary * tagDataDict = [NSMutableDictionary dictionary];
         [tagDataDict setObject:title forKey:@"title"];
         [tagDataDict setObject:price forKey:@"price"];
-        [tagDataDict setObject:imgUrl forKey:@"img"];
+        if (imgUrl.length > 0) {
+            [tagDataDict setObject:imgUrl forKey:@"img"];
+        }
         [self.userAddGoodsMarr addObject:tagDataDict];
     };
     
@@ -257,11 +271,13 @@ static NSString *const URLUserAddGoods = @"/scene_product/add";
 
 #pragma mark - 标记一个产品图片
 - (void)addMarkGoodsImg:(NSString *)imgUrl withImgW:(CGFloat)imgW withImgH:(CGFloat)imgH {
-    FBStickersContainer * sticker = [[FBStickersContainer alloc] initWithFrame:CGRectMake(100, 100, imgW/3, imgH/3)];
-    [sticker setupSticker:imgUrl];
-    sticker.delegate = self;
-    [self.filtersImageView addSubview:sticker];
-    [self.stickersContainer addObject:sticker];
+    if (imgUrl.length > 0) {
+        FBStickersContainer * sticker = [[FBStickersContainer alloc] initWithFrame:CGRectMake(100, 100, imgW/3, imgH/3)];
+        [sticker setupSticker:imgUrl];
+        sticker.delegate = self;
+        [self.filtersImageView addSubview:sticker];
+        [self.stickersContainer addObject:sticker];
+    }
     
     for (UserGoodsTag * userTag in self.tagBtnMarr) {
         [self.view bringSubviewToFront:userTag];
@@ -316,8 +332,11 @@ static NSString *const URLUserAddGoods = @"/scene_product/add";
                                    withGoodsId:goodsId];
             [weakSelf.goodsTitleData addObject:[NSString stringWithFormat:@"%@", goods]];
             [weakSelf.goodsIdData addObject:goodsId];
+            [weakSelf.goodsTypeData addObject:@"2"];
             
         } else {
+            [weakSelf thn_networkUserAddGoods:brand type:@"2"];
+            [weakSelf thn_networkUserAddGoods:goods type:@"1"];
             weakSelf.addUserGoods = [FBAPI getWithUrlString:URLUserAddGoods requestDictionary:@{@"title":goods} delegate:self];
             [weakSelf.addUserGoods startRequestSuccess:^(FBRequest *request, id result) {
                 NSString *userAddGoodsId = [NSString stringWithFormat:@"%zi", [[[result valueForKey:@"data"] valueForKey:@"id"] integerValue]];
@@ -326,6 +345,7 @@ static NSString *const URLUserAddGoods = @"/scene_product/add";
                                        withGoodsId:userAddGoodsId];
                 [weakSelf.goodsTitleData addObject:[NSString stringWithFormat:@"%@ %@", brand, goods]];
                 [weakSelf.goodsIdData addObject:userAddGoodsId];
+                [weakSelf.goodsTypeData addObject:@"1"];
                 
             } failure:^(FBRequest *request, NSError *error) {
                 [SVProgressHUD showErrorWithStatus:[error localizedDescription]];
@@ -340,8 +360,10 @@ static NSString *const URLUserAddGoods = @"/scene_product/add";
                                    withGoodsId:idx];
             [weakSelf.goodsTitleData addObject:[NSString stringWithFormat:@"%@", goods]];
             [weakSelf.goodsIdData addObject:idx];
+            [weakSelf.goodsTypeData addObject:@"2"];
         
         } else {
+            [weakSelf thn_networkUserAddGoods:goods type:@"1"];
             weakSelf.addUserGoods = [FBAPI postWithUrlString:URLUserAddGoods requestDictionary:@{@"title":goods} delegate:self];
             [weakSelf.addUserGoods startRequestSuccess:^(FBRequest *request, id result) {
                 NSString *goodsId = [NSString stringWithFormat:@"%zi", [[[result valueForKey:@"data"] valueForKey:@"id"] integerValue]];
@@ -350,6 +372,8 @@ static NSString *const URLUserAddGoods = @"/scene_product/add";
                                        withGoodsId:goodsId];
                 [weakSelf.goodsTitleData addObject:[NSString stringWithFormat:@"%@", goods]];
                 [weakSelf.goodsIdData addObject:goodsId];
+                [weakSelf.goodsTypeData addObject:@"1"];
+                
             } failure:^(FBRequest *request, NSError *error) {
                 [SVProgressHUD showErrorWithStatus:[error localizedDescription]];
             }];
@@ -389,6 +413,7 @@ static NSString *const URLUserAddGoods = @"/scene_product/add";
             ReleaseViewController * releaseVC = [[ReleaseViewController alloc] init];
             releaseVC.bgImg = [self generateImage:self.filtersImageView];
 //            releaseVC.bgImg = self.filtersImageView.image;
+            releaseVC.goodsType = self.goodsTypeData;
             releaseVC.goodsTitle = self.goodsTitleData;
             releaseVC.goodsId = self.goodsIdData;
             releaseVC.goodsX = originX;
@@ -487,6 +512,13 @@ static NSString *const URLUserAddGoods = @"/scene_product/add";
         _goodsPriceData = [NSMutableArray array];
     }
     return _goodsPriceData;
+}
+
+- (NSMutableArray *)goodsTypeData {
+    if (!_goodsTypeData) {
+        _goodsTypeData = [NSMutableArray array];
+    }
+    return _goodsTypeData;
 }
 
 - (NSMutableArray *)stickersContainer {

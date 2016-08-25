@@ -8,6 +8,7 @@
 
 NSString *const kTHNMallSubjectModelProductIdField = @"_id";
 NSString *const kTHNMallSubjectModelProductBannerUrl = @"banner_url";
+NSString *const kTHNMallSubjectModelProductCoverUrl = @"cover_url";
 NSString *const kTHNMallSubjectModelProductSummary = @"summary";
 NSString *const kTHNMallSubjectModelProductTitle = @"title";
 NSString *const kTHNMallGoodsModelItemSalePrice = @"sale_price";
@@ -34,7 +35,10 @@ NSString *const kTHNMallGoodsModelItemSalePrice = @"sale_price";
     }
 	if(![dictionary[kTHNMallSubjectModelProductBannerUrl] isKindOfClass:[NSNull class]]){
 		self.bannerUrl = dictionary[kTHNMallSubjectModelProductBannerUrl];
-	}	
+	}
+    if(![dictionary[kTHNMallSubjectModelProductCoverUrl] isKindOfClass:[NSNull class]]){
+        self.coverUrl = dictionary[kTHNMallSubjectModelProductCoverUrl];
+    }
 	if(![dictionary[kTHNMallSubjectModelProductSummary] isKindOfClass:[NSNull class]]){
 		self.summary = dictionary[kTHNMallSubjectModelProductSummary];
 	}	
