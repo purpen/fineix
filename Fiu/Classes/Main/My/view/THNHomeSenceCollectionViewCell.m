@@ -29,21 +29,28 @@
 -(void)setModel:(HomeSceneListRow *)model{
     _model = model;
     NSString *strUrl = [model.title stringByReplacingOccurrencesOfString:@" " withString:@""];
-    [self titleTextStyle:[NSString stringWithFormat:@"  %@ ",strUrl]];
+    [self titleTextStyle:strUrl];
     [self.bgImageView sd_setImageWithURL:[NSURL URLWithString:model.coverUrl] placeholderImage:[UIImage imageNamed:@"Defaul_Bg_500"]];
 }
 
 //  标题文字的样式
 - (void)titleTextStyle:(NSString *)title {
     
-    if (title.length <= 13) {
-        NSString *a = [title substringWithRange:NSMakeRange(0, title.length)];
+    if (title.length == 0) {
+        return;
+    }
+    
+    NSString *str = [NSString stringWithFormat:@"  %@ ",title];
+    
+    
+    if (str.length <= 13) {
+        NSString *a = [str substringWithRange:NSMakeRange(0, str.length)];
         self.titleLabel.text = a;
-    }else if (title.length > 13){
-        NSString *a = [title substringWithRange:NSMakeRange(0, 12)];
+    }else if (str.length > 13){
+        NSString *a = [str substringWithRange:NSMakeRange(0, 12)];
         NSString *b = [NSString stringWithFormat:@"%@ ",a];
         self.titleTwoLabel.text = b;
-        NSString *c = [title substringWithRange:NSMakeRange(12, title.length - 12)];
+        NSString *c = [str substringWithRange:NSMakeRange(12, str.length - 12)];
         NSString *d = [NSString stringWithFormat:@"  %@",c];
         self.titleLabel.text = d;
     }

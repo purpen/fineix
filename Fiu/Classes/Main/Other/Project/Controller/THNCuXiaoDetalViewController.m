@@ -197,7 +197,7 @@ static NSString *const cellId = @"THNCuXiaoDetalContentTableViewCell";
     THNCuXiaoDetalContentTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellId];
     self.modelAry = [THNProductModel mj_objectArrayWithKeyValuesArray:self.model.products];
     cell.model = self.modelAry[indexPat.row];
-    cell.numLabel.text = [NSString stringWithFormat:@"%ld.",(long)indexPat.row + 1];
+    cell.goodsTitleLabel.text = [NSString stringWithFormat:@"%ld.%@",(long)indexPat.row + 1,cell.model.title] ;
     cell.navi = self.navigationController;
     return cell;
 }

@@ -30,6 +30,9 @@
 @property (nonatomic, strong) UIButton *unSoundBtn;
 /**  */
 @property (nonatomic, strong) UIButton *skipBtn;
+/**  */
+@property (nonatomic, strong) UITapGestureRecognizer *clickTap;
+
 @end
 static NSString *userActivationUrl = @"/gateway/record_fiu_user_active";
 @implementation GuidePageViewController
@@ -37,6 +40,56 @@ static NSString *userActivationUrl = @"/gateway/record_fiu_user_active";
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     
+}
+
+-(UITapGestureRecognizer *)clickTap{
+    if (!_clickTap) {
+        _clickTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(dianJi)];
+    }
+    return _clickTap;
+}
+
+-(void)dianJi{
+    [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"UserHasGuideView"];
+    if ([_mainController isKindOfClass:[THNTabBarController class]]) {
+        
+        __block BOOL invitation;
+        FBRequest *request = [FBAPI postWithUrlString:@"/gateway/is_invited" requestDictionary:nil delegate:self];
+        [request startRequestSuccess:^(FBRequest *request, id result) {
+            NSDictionary *dict = [result objectForKey:@"data"];
+            NSNumber *code = [dict objectForKey:@"status"];
+            if ([code isEqual:@(1)]) {
+                //开启了邀请功能
+                invitation = YES;
+                BOOL codeFlag = [[NSUserDefaults standardUserDefaults] boolForKey:@"codeFlag"];
+                if (codeFlag) {
+                    THNTabBarController *tab = [[THNTabBarController alloc] init];
+                    [tab setSelectedIndex:0];
+                    [self presentViewController:tab animated:YES completion:nil];
+                }else{
+                    if (invitation) {
+                        InviteCCodeViewController *vc = [[InviteCCodeViewController alloc] init];
+                        vc.modalPresentationStyle = UIModalPresentationOverCurrentContext;
+                        vc.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;
+                        [self presentViewController:vc animated:YES completion:nil];
+                    }else{
+                        THNTabBarController *tab = [[THNTabBarController alloc] init];
+                        [tab setSelectedIndex:0];
+                        [self presentViewController:tab animated:YES completion:nil];
+                    }
+                }
+            }else if([code isEqual:@(0)]){
+                //没有开启邀请功能
+                THNTabBarController *tab = [[THNTabBarController alloc] init];
+                [tab setSelectedIndex:0];
+                [self presentViewController:tab animated:YES completion:nil];
+            }
+        } failure:^(FBRequest *request, NSError *error) {
+            
+        }];
+    }else{
+        [self dismissViewControllerAnimated:YES completion:nil];
+    }
 }
 
 -(instancetype)initWithPicArr:(NSArray *)picArr andRootVC:(UIViewController *)controller{
@@ -205,12 +258,13 @@ static NSString *userActivationUrl = @"/gateway/record_fiu_user_active";
         _guideImageView.frame = CGRectMake(i*SCREEN_WIDTH, 0, SCREEN_WIDTH, SCREEN_HEIGHT);
         [_guideScrollView addSubview:_guideImageView];
         if (i == _pictureArr.count - 1) {
-            [_guideImageView addSubview:self.enterBtn];
-            [_enterBtn mas_makeConstraints:^(MASConstraintMaker *make) {
-                make.size.mas_equalTo(CGSizeMake(100/667.0*SCREEN_HEIGHT, 40/667.0*SCREEN_HEIGHT));
-                make.centerX.mas_equalTo(_guideImageView.mas_centerX);
-                make.bottom.mas_equalTo(_guideImageView.mas_bottom).with.offset(-50/667.0*SCREEN_HEIGHT);
-            }];
+            [_guideImageView addGestureRecognizer:self.clickTap];
+//            [_guideImageView addSubview:self.enterBtn];
+//            [_enterBtn mas_makeConstraints:^(MASConstraintMaker *make) {
+//                make.size.mas_equalTo(CGSizeMake(100/667.0*SCREEN_HEIGHT, 40/667.0*SCREEN_HEIGHT));
+//                make.centerX.mas_equalTo(_guideImageView.mas_centerX);
+//                make.bottom.mas_equalTo(_guideImageView.mas_bottom).with.offset(-50/667.0*SCREEN_HEIGHT);
+//            }];
         }
     }
 }

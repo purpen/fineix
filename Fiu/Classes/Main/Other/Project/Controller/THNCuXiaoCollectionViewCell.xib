@@ -17,7 +17,7 @@
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="QeP-AU-E7t">
                         <rect key="frame" x="0.0" y="0.0" width="404" height="193"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="kJK-s7-Kc3">
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="kJK-s7-Kc3">
                                 <rect key="frame" x="0.0" y="0.0" width="404" height="193"/>
                             </imageView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ui0-ho-CMF">
@@ -25,14 +25,14 @@
                                 <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.20000000000000001" colorSpace="calibratedRGB"/>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Gme-mz-V2e">
-                                <rect key="frame" x="168" y="74" width="68" height="26"/>
+                                <rect key="frame" x="167" y="74" width="70" height="26"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8Vf-Fq-zzG">
-                                        <rect key="frame" x="15" y="4" width="38" height="18"/>
+                                        <rect key="frame" x="15" y="3" width="40" height="20"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="50" id="tOO-t1-M3I"/>
                                         </constraints>
-                                        <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                         <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <nil key="highlightedColor"/>
                                         <variation key="default">
@@ -42,7 +42,7 @@
                                         </variation>
                                     </label>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="4E0-Ww-WHz">
-                                        <rect key="frame" x="0.0" y="24" width="68" height="2"/>
+                                        <rect key="frame" x="0.0" y="24" width="70" height="2"/>
                                         <color key="backgroundColor" red="0.58039215690000001" green="0.41960784309999999" blue="0.062745098040000002" alpha="1" colorSpace="calibratedRGB"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="2" id="Rhj-n3-g3h"/>

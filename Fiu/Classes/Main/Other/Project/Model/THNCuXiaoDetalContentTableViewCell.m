@@ -14,11 +14,10 @@
 @interface THNCuXiaoDetalContentTableViewCell ()
 
 @property (weak, nonatomic) IBOutlet UILabel *summaryLabel;
-
 @property (weak, nonatomic) IBOutlet UIImageView *goodsImageView;
-@property (weak, nonatomic) IBOutlet UILabel *goodsTitleLabel;
 @property (weak, nonatomic) IBOutlet UILabel *marketPriceLabel;
 @property (weak, nonatomic) IBOutlet UILabel *salePriceLabel;
+@property (weak, nonatomic) IBOutlet UIButton *buyBtn;
 
 @end
 
@@ -26,13 +25,14 @@
 
 - (void)awakeFromNib {
     [super awakeFromNib];
+    self.buyBtn.layer.masksToBounds = YES;
+    self.buyBtn.layer.cornerRadius = 3;
 }
 
 -(void)setModel:(THNProductModel *)model{
     _model = model;
     self.summaryLabel.text = model.summary;
     [self.goodsImageView sd_setImageWithURL:[NSURL URLWithString:model.banner_url] placeholderImage:[UIImage imageNamed:@"Defaul_Bg_420"]];
-    self.goodsTitleLabel.text = model.title;
     self.marketPriceLabel.text = [NSString stringWithFormat:@"￥%@",model.market_price];
     self.salePriceLabel.text = [NSString stringWithFormat:@"￥%@",model.sale_price];
 }

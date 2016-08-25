@@ -34,7 +34,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.navViewTitle.text = @"精选专题";
+    self.navViewTitle.text = @"精选主题";
     
     // 初始化子控制器
     [self setupChildVces];

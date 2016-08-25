@@ -74,7 +74,7 @@
     _model = model;
     [self.bgImageView sd_setImageWithURL:[NSURL URLWithString:model.cover_url] placeholderImage:[UIImage imageNamed:@"my_senece_bg"]];
     NSString *strUrl = [model.title stringByReplacingOccurrencesOfString:@" " withString:@""];
-    [self titleTextStyle:[NSString stringWithFormat:@"  %@ ",strUrl]];
+    [self titleTextStyle:strUrl];
     [self.head sd_setImageWithURL:[NSURL URLWithString:model.user_info.avatar_url] placeholderImage:[UIImage imageNamed:@"Circle + User"]];
     self.prasiedBtn.selected = [model.is_love integerValue];
     self.nickNameLbael.text = model.user_info.nickname;
@@ -83,18 +83,24 @@
 //  标题文字的样式
 - (void)titleTextStyle:(NSString *)title {
     
-    if (title.length <= 13) {
-       NSString *a = [title substringWithRange:NSMakeRange(0, title.length)];
+    if (title.length == 0) {
+        return;
+    }
+    
+    NSString *str = [NSString stringWithFormat:@"  %@ ",title];
+    
+    
+    if (str.length <= 13) {
+        NSString *a = [str substringWithRange:NSMakeRange(0, str.length)];
         self.titleTwoLabel.text = a;
-    }else if (title.length > 13){
-        NSString *a = [title substringWithRange:NSMakeRange(0, 12)];
+    }else if (str.length > 13){
+        NSString *a = [str substringWithRange:NSMakeRange(0, 12)];
         NSString *b = [NSString stringWithFormat:@"%@ ",a];
         self.tittleLabel.text = b;
-        NSString *c = [title substringWithRange:NSMakeRange(12, title.length - 12)];
+        NSString *c = [str substringWithRange:NSMakeRange(12, str.length - 12)];
         NSString *d = [NSString stringWithFormat:@"  %@",c];
         self.titleTwoLabel.text = d;
     }
-
 }
 
 @end

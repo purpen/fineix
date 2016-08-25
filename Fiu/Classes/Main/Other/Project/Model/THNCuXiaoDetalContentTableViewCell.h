@@ -16,5 +16,6 @@
 @property (weak, nonatomic) IBOutlet UILabel *numLabel;
 /**  */
 @property (nonatomic, strong) UINavigationController *navi;
+@property (weak, nonatomic) IBOutlet UILabel *goodsTitleLabel;
 
 @end

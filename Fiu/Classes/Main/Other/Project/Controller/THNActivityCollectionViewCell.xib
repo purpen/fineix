@@ -14,23 +14,23 @@
             <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
                 <rect key="frame" x="0.0" y="0.0" width="395" height="270"/>
                 <subviews>
-                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="j7p-kX-oOP">
+                    <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="j7p-kX-oOP">
                         <rect key="frame" x="0.0" y="0.0" width="395" height="270"/>
                     </imageView>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="bXo-ii-e6x">
                         <rect key="frame" x="0.0" y="0.0" width="395" height="270"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="wkx-2H-Hje">
-                                <rect key="frame" x="164" y="92" width="68" height="26"/>
+                                <rect key="frame" x="163" y="92" width="70" height="26"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yhM-5c-wOO" userLabel="有人参加的主题">
-                                        <rect key="frame" x="15" y="4" width="38" height="18"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                        <rect key="frame" x="15" y="3" width="40" height="20"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                         <color key="textColor" white="1" alpha="0.90000000000000002" colorSpace="calibratedWhite"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Cjb-Z8-RcY">
-                                        <rect key="frame" x="0.0" y="25" width="68" height="1"/>
+                                        <rect key="frame" x="0.0" y="25" width="70" height="1"/>
                                         <color key="backgroundColor" red="0.74509803919999995" green="0.53725490200000003" blue="0.078431372550000003" alpha="1" colorSpace="calibratedRGB"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="1" id="8cL-Qj-mCc"/>
@@ -66,14 +66,8 @@
                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="project_time" translatesAutoresizingMaskIntoConstraints="NO" id="WRV-df-jxU">
                         <rect key="frame" x="15" y="13" width="11" height="11"/>
                     </imageView>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="活动时间：" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="DX7-Rh-VpD">
-                        <rect key="frame" x="31" y="11" width="60" height="15"/>
-                        <fontDescription key="fontDescription" type="system" pointSize="12"/>
-                        <color key="textColor" white="1" alpha="0.80000000000000004" colorSpace="calibratedWhite"/>
-                        <nil key="highlightedColor"/>
-                    </label>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="HRE-W6-csR">
-                        <rect key="frame" x="91" y="19" width="0.0" height="0.0"/>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="12321312" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="HRE-W6-csR">
+                        <rect key="frame" x="28" y="11" width="54" height="15"/>
                         <fontDescription key="fontDescription" type="system" pointSize="12"/>
                         <color key="textColor" white="1" alpha="0.80000000000000004" colorSpace="calibratedWhite"/>
                         <nil key="highlightedColor"/>
@@ -94,7 +88,7 @@
                         <nil key="highlightedColor"/>
                     </label>
                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="project_end" translatesAutoresizingMaskIntoConstraints="NO" id="LpY-cl-z5Q">
-                        <rect key="frame" x="345" y="0.0" width="50" height="50"/>
+                        <rect key="frame" x="335" y="0.0" width="60" height="60"/>
                     </imageView>
                 </subviews>
                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
@@ -112,26 +106,22 @@
                 <constraint firstAttribute="trailing" secondItem="bXo-ii-e6x" secondAttribute="trailing" id="Blx-fL-lc4"/>
                 <constraint firstItem="vk4-yh-XA3" firstAttribute="width" secondItem="j7p-kX-oOP" secondAttribute="width" multiplier="0.5" id="EYV-ad-kqN"/>
                 <constraint firstItem="vk4-yh-XA3" firstAttribute="top" secondItem="wkx-2H-Hje" secondAttribute="bottom" constant="5" id="FD6-bc-rWm"/>
+                <constraint firstItem="HRE-W6-csR" firstAttribute="centerY" secondItem="WRV-df-jxU" secondAttribute="centerY" id="JzQ-ai-AQE"/>
                 <constraint firstItem="wkx-2H-Hje" firstAttribute="width" relation="lessThanOrEqual" secondItem="j7p-kX-oOP" secondAttribute="width" multiplier="0.5" id="PI3-Rl-hbt"/>
-                <constraint firstItem="bXo-ii-e6x" firstAttribute="top" secondItem="DX7-Rh-VpD" secondAttribute="bottom" id="Pyi-EV-H7c"/>
                 <constraint firstItem="LH9-BH-nbB" firstAttribute="top" secondItem="vk4-yh-XA3" secondAttribute="bottom" constant="20" id="UHf-mS-Qaf"/>
                 <constraint firstItem="j7p-kX-oOP" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" id="XgR-2g-9EN"/>
                 <constraint firstItem="WRV-df-jxU" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" constant="13" id="cmJ-mG-btg"/>
                 <constraint firstItem="b7F-ng-RIT" firstAttribute="top" secondItem="LH9-BH-nbB" secondAttribute="top" id="e5U-ZA-94G"/>
                 <constraint firstItem="LH9-BH-nbB" firstAttribute="centerX" secondItem="gTV-IL-0wX" secondAttribute="centerX" constant="-40" id="hyb-c5-2r7"/>
-                <constraint firstItem="DX7-Rh-VpD" firstAttribute="leading" secondItem="WRV-df-jxU" secondAttribute="trailing" constant="5" id="lwK-wD-2ie"/>
+                <constraint firstItem="HRE-W6-csR" firstAttribute="leading" secondItem="WRV-df-jxU" secondAttribute="trailing" constant="2" id="ofZ-MO-b0a"/>
                 <constraint firstItem="LpY-cl-z5Q" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" id="pO9-vu-oKY"/>
                 <constraint firstItem="vk4-yh-XA3" firstAttribute="width" secondItem="wkx-2H-Hje" secondAttribute="width" id="pUu-vx-KNU"/>
-                <constraint firstItem="HRE-W6-csR" firstAttribute="leading" secondItem="DX7-Rh-VpD" secondAttribute="trailing" id="qlO-17-e9d"/>
-                <constraint firstItem="HRE-W6-csR" firstAttribute="centerY" secondItem="DX7-Rh-VpD" secondAttribute="centerY" id="xiz-zM-4g2"/>
-                <constraint firstItem="DX7-Rh-VpD" firstAttribute="centerY" secondItem="WRV-df-jxU" secondAttribute="centerY" id="xjY-fo-nfx"/>
                 <constraint firstItem="bXo-ii-e6x" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="yka-DC-grO"/>
                 <constraint firstItem="WRV-df-jxU" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" constant="15" id="ykl-Rt-aKi"/>
             </constraints>
             <size key="customSize" width="395" height="270"/>
             <variation key="default">
                 <mask key="constraints">
-                    <exclude reference="Pyi-EV-H7c"/>
                     <exclude reference="pUu-vx-KNU"/>
                     <exclude reference="e5U-ZA-94G"/>
                 </mask>
@@ -141,7 +131,6 @@
                 <outlet property="countLabel" destination="b7F-ng-RIT" id="rRY-Hr-1zm"/>
                 <outlet property="peopleImageView" destination="LH9-BH-nbB" id="2yd-yU-ZKR"/>
                 <outlet property="subTitleLabel" destination="vk4-yh-XA3" id="S6o-9Z-08G"/>
-                <outlet property="time" destination="DX7-Rh-VpD" id="MK4-kS-Orq"/>
                 <outlet property="timeImageView" destination="WRV-df-jxU" id="9uW-cy-9Nc"/>
                 <outlet property="timeLabel" destination="HRE-W6-csR" id="Jc9-sD-WI3"/>
                 <outlet property="tipImageView" destination="LpY-cl-z5Q" id="RzG-2Z-bFl"/>
@@ -151,7 +140,7 @@
         </collectionViewCell>
     </objects>
     <resources>
-        <image name="project_end" width="50" height="50"/>
+        <image name="project_end" width="60" height="60"/>
         <image name="project_people" width="6" height="10"/>
         <image name="project_time" width="11" height="11"/>
     </resources>
