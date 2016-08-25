@@ -14,32 +14,27 @@
 
 @interface SearchViewController : FBViewController <
     SearchMenuBtnSelectedDelegate,
-    FBSearchDelegate,
-    UITableViewDelegate,
-    UITableViewDataSource,
-    UICollectionViewDelegate,
-    UICollectionViewDataSource
+    FBSearchDelegate
 >
 
-@pro_strong FBRequest                       *   searchListRequest;
-@pro_assign NSInteger                           currentpageNum;
-@pro_assign NSInteger                           totalPageNum;
+@pro_strong FBRequest *searchListRequest;
+@pro_assign NSInteger currentpageNum;
+@pro_assign NSInteger totalPageNum;
 
-@pro_assign BOOL                                beginSearch;
-@pro_strong UIScrollView                    *   resultsView;            //  搜索结果视图
-@pro_strong FBSearchView                    *   searchView;             //  搜索框
-@pro_strong NSArray                         *   titleArr;               //  分类标题
-@pro_strong SearchMenuView                  *   menuView;               //  分类导航
-@pro_strong NSString                        *   keyword;                //  搜索关键词
-@pro_strong UITableView                     *   sceneTable;             //  场景
-@pro_strong UICollectionView                *   fSceneCollection;       //  情景
-@pro_strong UITableView                     *   goodsTable;             //  商品
-@pro_strong UILabel                         *   noneLab;
+@pro_strong UIScrollView *resultsView;  //  搜索结果视图
+@pro_strong FBSearchView *searchView;   //  搜索框
+@pro_strong NSArray *titleArr;          //  分类标题
+@pro_strong SearchMenuView *menuView;   //  分类导航
 
-/*
- *  搜索的类型
- *  0:情景 / 1:地盘 / 2:产品
+/**
+ * index
+ *  0:情境 ／ 1:用户 ／ 2:产品 ／ 3:品牌 ／ 4:专题
  */
-@pro_assign NSInteger                           searchType;
+@pro_assign NSInteger index;
+/**
+ *  keyword
+ *  直接搜索传搜索关键字
+ */
+@pro_strong NSString *keyword;
 
 @end

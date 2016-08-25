@@ -8,7 +8,7 @@
 
 #import "THNMarkGoodsViewController.h"
 
-static NSString *const URLGoodsList = @"/scene_product/getlist";
+static NSString *const URLGoodsList = @"/product/getlist";
 static NSString *const goodsCellId = @"GoodsCellId";
 
 @interface THNMarkGoodsViewController ()

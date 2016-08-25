@@ -8,7 +8,7 @@
 
 #import "THNHomeViewController.h"
 #import "SearchViewController.h"
-#import "SceneSubscribeViewController.h"
+#import "THNSubscribeViewController.h"
 #import "HomeThemeTableViewCell.h"
 #import "THNUserInfoTableViewCell.h"
 #import "THNSceneImageTableViewCell.h"
@@ -29,7 +29,6 @@ static NSString *const URLLikeScene = @"/favorite/ajax_love";
 static NSString *const URLCancelLike = @"/favorite/ajax_cancel_love";
 static NSString *const URLFollowUser = @"/follow/ajax_follow";
 static NSString *const URLCancelFollowUser = @"/follow/ajax_cancel_follow";
-static NSString *const URLViewCount = @"/scene_sight/record_view";
 static NSString *const URLFavorite = @"/favorite/ajax_favorite";
 
 static NSString *const themeCellId = @"ThemeCellId";
@@ -55,13 +54,14 @@ static NSString *const twoCommentsCellId = @"TwoCommentsCellId";
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
-    [[UIApplication sharedApplication] setStatusBarHidden:NO];
+    
+    [self thn_setNavigationViewUI];
+    
 }
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self thn_setFirstAppStart];
-    [self thn_setNavigationViewUI];
     [self thn_setHomeViewUI];
     [self thn_networkRollImageData];
     [self thn_networkSubjectData];
@@ -198,16 +198,6 @@ static NSString *const twoCommentsCellId = @"TwoCommentsCellId";
         
     } failure:^(FBRequest *request, NSError *error) {
         [SVProgressHUD showErrorWithStatus:[error localizedDescription]];
-    }];
-}
-
-#pragma mark - 记录浏览数量
-- (void)thn_setSceneListViewCount:(NSString *)sceneId {
-    self.viewCountRequest = [FBAPI postWithUrlString:URLViewCount requestDictionary:@{@"id":sceneId} delegate:self];
-    [self.viewCountRequest startRequestSuccess:^(FBRequest *request, id result) {
-        
-    } failure:^(FBRequest *request, NSError *error) {
-        NSLog(@"%@",error);
     }];
 }
 
@@ -348,6 +338,7 @@ static NSString *const twoCommentsCellId = @"TwoCommentsCellId";
             if (self.sceneListMarr.count) {
                 [cell thn_setSceneImageData:self.sceneListMarr[indexPath.section - 1]];
             }
+            cell.vc = self;
             cell.nav = self.navigationController;
             return cell;
             
@@ -453,7 +444,7 @@ static NSString *const twoCommentsCellId = @"TwoCommentsCellId";
                                       withTitle:NSLocalizedString(@"Home_Scene", nil)
                                    withSubtitle:@""
                                   withRightMore:@""
-                                   withMoreType:2];
+                                   withMoreType:0];
     }
     return self.headerView;
 }
@@ -530,6 +521,7 @@ static NSString *const twoCommentsCellId = @"TwoCommentsCellId";
 #pragma mark - 设置Nav
 - (void)thn_setNavigationViewUI {
     self.view.backgroundColor = [UIColor whiteColor];
+    [[UIApplication sharedApplication] setStatusBarHidden:NO withAnimation:(UIStatusBarAnimationFade)];
     self.delegate = self;
     self.baseTable = self.homeTable;
     self.navViewTitle.hidden = YES;
@@ -539,16 +531,18 @@ static NSString *const twoCommentsCellId = @"TwoCommentsCellId";
 }
 
 - (void)thn_leftBarItemSelected {
-    SearchViewController * searchVC = [[SearchViewController alloc] init];
-    searchVC.searchType = 0;
-    searchVC.beginSearch = YES;
+    SearchViewController *searchVC = [[SearchViewController alloc] init];
+    searchVC.index = 0;
     [self.navigationController pushViewController:searchVC animated:YES];
 }
 
 - (void)thn_rightBarItemSelected {
-    [SVProgressHUD showSuccessWithStatus:@"订阅列表"];
-//    SceneSubscribeViewController * sceneSubVC = [[SceneSubscribeViewController alloc] init];
-//    [self.navigationController pushViewController:sceneSubVC animated:YES];
+    if ([self isUserLogin]) {
+        THNSubscribeViewController * sceneSubVC = [[THNSubscribeViewController alloc] init];
+        [self.navigationController pushViewController:sceneSubVC animated:YES];
+    } else {
+        [self openUserLoginVC];
+    }
 }
 
 #pragma mark - 首次打开加载指示图

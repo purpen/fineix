@@ -66,9 +66,6 @@ static NSString *const sceneTagsCellId = @"SceneTagsCellId";
     NSString *tagUrl = [[url absoluteString] stringByReplacingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
     NSString *tag = [tagUrl substringFromIndex:14];
     SearchViewController * searchVC = [[SearchViewController alloc] init];
-    searchVC.searchType = 0;
-    searchVC.beginSearch = YES;
-    searchVC.keyword = tag;
     [self.nav pushViewController:searchVC animated:YES];
 }
 

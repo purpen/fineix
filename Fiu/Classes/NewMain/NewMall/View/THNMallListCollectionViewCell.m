@@ -9,6 +9,8 @@
 #import "THNMallListCollectionViewCell.h"
 #import "MallListGoodsCollectionViewCell.h"
 #import "UILable+Frame.h"
+#import "THNMallGoodsModelItem.h"
+#import "FBGoodsInfoViewController.h"
 
 static NSString *const MallListGoodsCellId = @"mallListGoodsCellId";
 
@@ -39,6 +41,9 @@ static NSString *const MallListGoodsCellId = @"mallListGoodsCellId";
     self.goodsListMarr = [NSMutableArray arrayWithArray:model.products];
     if (self.goodsListMarr.count) {
         [self.goodsList reloadData];
+        for (THNMallGoodsModelItem *model in self.goodsListMarr) {
+            [self.goodsIdMarr addObject:[NSString stringWithFormat:@"%zi",model.idField]];
+        }
     }
 }
 
@@ -183,7 +188,10 @@ static NSString *const MallListGoodsCellId = @"mallListGoodsCellId";
 }
 
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
-    [SVProgressHUD showSuccessWithStatus:@"打开商品详情"];
+    FBGoodsInfoViewController *goodsVC = [[FBGoodsInfoViewController alloc] init];
+    goodsVC.goodsID = self.goodsIdMarr[indexPath.row];
+    [self.nav pushViewController:goodsVC animated:YES];
+    
 }
 
 - (NSMutableArray *)goodsListMarr {
@@ -191,6 +199,13 @@ static NSString *const MallListGoodsCellId = @"mallListGoodsCellId";
         _goodsListMarr = [NSMutableArray array];
     }
     return _goodsListMarr;
+}
+
+- (NSMutableArray *)goodsIdMarr {
+    if (!_goodsIdMarr) {
+        _goodsIdMarr = [NSMutableArray array];
+    }
+    return _goodsIdMarr;
 }
 
 @end

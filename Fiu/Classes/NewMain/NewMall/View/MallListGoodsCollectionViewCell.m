@@ -20,7 +20,7 @@
 }
 
 - (void)setMallSubjectGoodsListData:(THNMallSubjectModelProduct *)model {
-    [self.image downloadImage:model.bannerUrl place:[UIImage imageNamed:@""]];
+    [self.image downloadImage:model.coverUrl place:[UIImage imageNamed:@""]];
     self.title.text = model.title;
     self.price.text = [NSString stringWithFormat:@"¥%zi", model.salePrice];
     

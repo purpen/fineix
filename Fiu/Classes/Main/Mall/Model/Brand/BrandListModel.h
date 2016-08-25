@@ -24,6 +24,7 @@
 @property (nonatomic, assign) NSInteger updatedOn;
 @property (nonatomic, assign) NSInteger usedCount;
 @property (nonatomic, strong) NSString * mark;
+@property (nonatomic, strong) NSString * content;
 
 -(instancetype)initWithDictionary:(NSDictionary *)dictionary;
 

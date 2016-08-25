@@ -26,6 +26,7 @@
 @pro_strong NSMutableArray      *   goodsX;                 //  商品坐标
 @pro_strong NSMutableArray      *   goodsY;                 //  商品坐标
 @pro_strong NSMutableArray      *   goodsLoc;               //  商品指向
+@pro_strong NSMutableArray      *   goodsType;               //  商品类型
 @pro_strong UIImage             *   bgImg;
 @pro_strong AddLocationView     *   addLocaiton;
 @pro_strong AddContentView      *   addContent;

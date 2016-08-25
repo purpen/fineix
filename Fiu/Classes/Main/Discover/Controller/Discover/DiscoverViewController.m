@@ -448,8 +448,6 @@ static NSString *const URLFiuPeople = @"/user/activity_user";
 //  点击左边barItem
 - (void)leftBarItemSelected {
     SearchViewController * searchVC = [[SearchViewController alloc] init];
-    searchVC.searchType = 1;
-    searchVC.beginSearch = YES;
     [self.navigationController pushViewController:searchVC animated:YES];
 }
 

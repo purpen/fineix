@@ -7,6 +7,7 @@
 @property (nonatomic, strong) NSString * summary;
 @property (nonatomic, strong) NSString * title;
 @property (nonatomic, assign) NSInteger salePrice;
+@property (nonatomic, strong) NSString * coverUrl;
 
 -(instancetype)initWithDictionary:(NSDictionary *)dictionary;
 @end

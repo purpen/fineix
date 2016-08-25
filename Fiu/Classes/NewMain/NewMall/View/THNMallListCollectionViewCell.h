@@ -15,6 +15,7 @@
     UICollectionViewDataSource
 >
 
+@pro_strong UINavigationController *nav;
 @pro_strong UIImageView *banner;
 @pro_strong UILabel *title;
 @pro_strong UILabel *suTitle;
@@ -23,6 +24,7 @@
 @pro_strong UIView *bannerBg;
 @pro_strong UICollectionView *goodsList;
 @pro_strong NSMutableArray *goodsListMarr;
+@pro_strong NSMutableArray *goodsIdMarr;
 
 - (void)setMallSubjectData:(THNMallSubjectModelRow *)model;
 

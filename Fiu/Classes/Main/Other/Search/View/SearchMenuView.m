@@ -57,7 +57,7 @@
 #pragma mark - 导航底部条
 - (UILabel *)menuBottomline {
     if (!_menuBottomline) {
-        _menuBottomline = [[UILabel alloc] initWithFrame:CGRectMake((SCREEN_WIDTH / 3 / 2) - 20, 41, 53, 3)];
+        _menuBottomline = [[UILabel alloc] initWithFrame:CGRectMake((SCREEN_WIDTH / 5 / 2), 41, 40, 3)];
         _menuBottomline.backgroundColor = [UIColor colorWithHexString:fineixColor alpha:1];
     }
     return _menuBottomline;
@@ -70,7 +70,7 @@
     self.selectedBtn = menuBtn;
     
     CGRect bottomLineRect = _menuBottomline.frame;
-    bottomLineRect.origin.x = ((SCREEN_WIDTH / 3) / 3.5) + ((SCREEN_WIDTH / 3) * index);
+    bottomLineRect.origin.x = ((SCREEN_WIDTH / 5) / 4.4) + ((SCREEN_WIDTH / 5) * index);
     [UIView animateWithDuration:.2 animations:^{
         _menuBottomline.frame = bottomLineRect;
     }];

@@ -14,9 +14,9 @@
 #import "GoodsInfoData.h"
 
 static NSString *const URLMarkGoods = @"/category/getlist";
-static NSString *const URLGoodsList = @"/scene_product/getlist";
+static NSString *const URLGoodsList = @"/product/getlist";
 static NSString *const URLSearchGoods = @"/search/getlist";
-static NSString *const URLGetGoodsImg = @"/scene_product/view";
+static NSString *const URLGetGoodsImg = @"/product/view";
 
 @interface MarkGoodsViewController ()
 
@@ -60,7 +60,7 @@ static NSString *const URLGetGoodsImg = @"/scene_product/view";
 #pragma mark 搜索商品
 - (void)networkSearchGoods:(NSString *)keyword {
     [SVProgressHUD show];
-    self.searchRequest = [FBAPI getWithUrlString:URLSearchGoods requestDictionary:@{@"t":@"10", @"q":keyword,@"evt":@"content", @"page":@(self.searchCurrentpageNum + 1), @"size":@"8"} delegate:self];
+    self.searchRequest = [FBAPI getWithUrlString:URLSearchGoods requestDictionary:@{@"t":@"3", @"q":keyword,@"evt":@"content", @"page":@(self.searchCurrentpageNum + 1), @"size":@"8"} delegate:self];
     [self.searchRequest startRequestSuccess:^(FBRequest *request, id result) {
         NSArray * goodsArr = [[result valueForKey:@"data"] valueForKey:@"rows"];
         for (NSDictionary * goodsDict in goodsArr) {
