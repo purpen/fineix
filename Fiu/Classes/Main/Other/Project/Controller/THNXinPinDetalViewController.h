@@ -11,6 +11,6 @@
 @interface THNXinPinDetalViewController : FBViewController
 
 /**  */
-@property(nonatomic,copy) NSString *id;
+@property(nonatomic,copy) NSString *xinPinDetalId;
 
 @end

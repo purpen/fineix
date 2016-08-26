@@ -178,7 +178,7 @@ static NSString *const cellId = @"THNArticleCollectionViewCell";
 
 -(void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath{
     THNArticleDetalViewController *vc = [[THNArticleDetalViewController alloc] init];
-    vc.id = ((THNArticleModel*)self.modelAry[indexPath.row])._id;
+    vc.articleDetalid = ((THNArticleModel*)self.modelAry[indexPath.row])._id;
     vc.title = @"文章详情";
     [self.navigationController pushViewController:vc animated:YES];
 }

@@ -13,7 +13,6 @@
 #import "ShareViewController.h"
 #import "FBGoodsInfoViewController.h"
 #import "FiuSceneViewController.h"
-#import "THNActiveDetalViewController.h"
 #import "THNCuXiaoDetalViewController.h"
 #import "GoodsBrandViewController.h"
 #import "SearchViewController.h"
@@ -46,7 +45,7 @@
 
 -(void)requestGetDataFromeNet{
     FBRequest *request = [FBAPI postWithUrlString:@"/scene_subject/view" requestDictionary:@{
-                                                                                             @"id" : self.id
+                                                                                             @"id" : self.xinPinDetalId
                                                                                              } delegate:self];
     [request startRequestSuccess:^(FBRequest *request, id result) {
         if (result[@"success"]) {
@@ -65,7 +64,7 @@
 
 -(void)requestUrl{
     FBRequest *request = [FBAPI postWithUrlString:@"/scene_subject/view" requestDictionary:@{
-                                                                                             @"id" : self.id
+                                                                                             @"id" : self.xinPinDetalId
                                                                                              } delegate:self];
     [request startRequestSuccess:^(FBRequest *request, id result) {
         if (result[@"success"]) {
@@ -179,28 +178,28 @@
                             NSInteger zhuanType = [zhuanTiType integerValue];
                             switch (zhuanType) {
                                 case 1:{
-                                    
-                                    THNActiveDetalViewController *vc = [[THNActiveDetalViewController alloc] init];
-                                    vc.id = infoId;
+//                                    
+//                                    THNActiveDetalViewController *vc = [[THNActiveDetalViewController alloc] init];
+//                                    vc.id = infoId;
                                     break;
                                 }
                                     
                                 case 2:{
                                     
-                                    THNActiveDetalViewController *vc = [[THNActiveDetalViewController alloc] init];
-                                    vc.id = infoId;
+//                                    THNActiveDetalViewController *vc = [[THNActiveDetalViewController alloc] init];
+//                                    vc.id = infoId;
                                     break;
                                 }
                                 case 3:{
                                     
                                     THNCuXiaoDetalViewController *vc = [[THNCuXiaoDetalViewController alloc] init];
-                                    vc.id = infoId;
+                                    vc.cuXiaoDetalId = infoId;
                                     break;
                                 }
                                 case 4:{
                                     
                                     THNXinPinDetalViewController *vc = [[THNXinPinDetalViewController alloc] init];
-                                    vc.id = infoId;
+                                    vc.xinPinDetalId = infoId;
                                     break;
                                 }
                                 default:

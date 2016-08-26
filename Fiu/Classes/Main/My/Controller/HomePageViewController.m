@@ -33,6 +33,7 @@
 #import "ScenarioNonView.h"
 #import "THNHomeSenceCollectionViewCell.h"
 #import "UIView+FSExtension.h"
+#import "THNSceneListViewController.h"
 
 #define UserHeadTag 1
 #define BgTag 2
@@ -590,6 +591,14 @@ static NSString *sceneCellId = @"THNHomeSenceCollectionViewCell";
             SceneInfoViewController * sceneInfoVC = [[SceneInfoViewController alloc] init];
             sceneInfoVC.sceneId = _sceneIdMarr[indexPath.row];
             [self.navigationController pushViewController:sceneInfoVC animated:YES];
+            
+//            THNSceneListViewController *sceneListVC = [[THNSceneListViewController alloc] init];
+//            sceneListVC.sceneListMarr = [NSArray arrayWithObject:_];
+//            sceneListVC.commentsMarr = self.commentsMarr;
+//            sceneListVC.sceneIdMarr = self.sceneIdMarr;
+//            sceneListVC.userIdMarr = self.userIdMarr;
+//            sceneListVC.index = indexPath.row;
+//            [self.navigationController pushViewController:sceneListVC animated:YES];
         }
     }
 }

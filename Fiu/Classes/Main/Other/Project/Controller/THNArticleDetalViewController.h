@@ -11,6 +11,6 @@
 @interface THNArticleDetalViewController : FBViewController
 
 /**  */
-@property(nonatomic,copy) NSString *id;
+@property(nonatomic,copy) NSString *articleDetalid;
 
 @end

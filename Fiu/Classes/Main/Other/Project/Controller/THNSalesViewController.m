@@ -170,7 +170,7 @@ static NSString *const cellId = @"THNCuXiaoCollectionViewCell";
 }
 
 -(CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath{
-    return CGSizeMake(SCREEN_WIDTH, 357);
+    return CGSizeMake(SCREEN_WIDTH, 211);
 }
 
 -(CGFloat)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout minimumInteritemSpacingForSectionAtIndex:(NSInteger)section{
@@ -179,7 +179,7 @@ static NSString *const cellId = @"THNCuXiaoCollectionViewCell";
 
 -(void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath{
     THNCuXiaoDetalViewController *vc = [[THNCuXiaoDetalViewController alloc] init];
-    vc.id = ((THNArticleModel*)self.modelAry[indexPath.row])._id;
+    vc.cuXiaoDetalId = ((THNArticleModel*)self.modelAry[indexPath.row])._id;
     [self.navigationController pushViewController:vc animated:YES];
 }
 

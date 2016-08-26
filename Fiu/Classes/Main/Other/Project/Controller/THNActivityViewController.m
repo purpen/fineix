@@ -16,7 +16,7 @@
 #import "THNActivityCollectionViewCell.h"
 #import <MJRefresh.h>
 #import "SVProgressHUD.h"
-#import "THNActiveDetalViewController.h"
+#import "THNActiveDetalTwoViewController.h"
 
 @interface THNActivityViewController ()<UICollectionViewDelegate,UICollectionViewDataSource>
 
@@ -177,8 +177,8 @@ static NSString *const cellId = @"THNActivityCollectionViewCell";
 }
 
 -(void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath{
-    THNActiveDetalViewController *vc = [[THNActiveDetalViewController alloc] init];
-    vc.id = ((THNArticleModel*)self.modelAry[indexPath.row])._id;
+    THNActiveDetalTwoViewController *vc = [[THNActiveDetalTwoViewController alloc] init];
+    vc.activeDetalId = ((THNArticleModel*)self.modelAry[indexPath.row])._id;
     vc.model = self.modelAry[indexPath.row];
     [self.navigationController pushViewController:vc animated:YES];
 }

@@ -11,6 +11,6 @@
 @interface THNCuXiaoDetalViewController : FBViewController
 
 /**  */
-@property(nonatomic,copy) NSString *id;
+@property(nonatomic,copy) NSString *cuXiaoDetalId;
 
 @end
