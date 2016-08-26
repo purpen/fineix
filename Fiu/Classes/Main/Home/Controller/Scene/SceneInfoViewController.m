@@ -590,7 +590,7 @@ static NSString *const URLDeleteScene = @"/scene_sight/delete";
 - (void)rightBarItemSelected {
     if ([_shareDataDict valueForKey:@"cover_url"]) {
         FBShareViewController * shareVC = [[FBShareViewController alloc] init];
-        shareVC.dataDict = _shareDataDict;
+//        shareVC.dataDict = _shareDataDict;
         shareVC.sceneId = self.sceneId;
         [self presentViewController:shareVC animated:YES completion:nil];
     }

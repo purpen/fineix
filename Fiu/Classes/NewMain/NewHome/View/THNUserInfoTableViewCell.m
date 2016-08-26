@@ -125,9 +125,6 @@ static NSString *const hotUserCellId = @"HotUserCellId";
     NSUInteger index = [self.hotUserIdMarr indexOfObject:[userId object]];
     [self.hotUserMarr removeObjectAtIndex:index];
     [self.hotUserIdMarr removeObjectAtIndex:index];
-//    NSIndexPath *indexPath = [NSIndexPath indexPathForItem:index inSection:0];
-//    [self.hotUserList deleteItemsAtIndexPaths:@[indexPath]];
-
     if (self.hotUserMarr.count) {
         [self.hotUserList reloadData];
     }

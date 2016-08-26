@@ -9,7 +9,12 @@
 #import "HomeThemeTableViewCell.h"
 #import "HomeThemeCollectionViewCell.h"
 #import "FBSubjectModelRow.h"
+
 #import "THNArticleDetalViewController.h"
+#import "THNActiveDetalTwoViewController.h"
+#import "THNXinPinDetalViewController.h"
+#import "THNCuXiaoDetalViewController.h"
+#import "THNProjectViewController.h"
 
 static NSString *const themeCollectionCellID = @"ThemeCollectionCellID";
 
@@ -113,24 +118,31 @@ static NSString *const themeCollectionCellID = @"ThemeCollectionCellID";
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
     if (indexPath.row == self.themeMarr.count) {
         [SVProgressHUD showSuccessWithStatus:@"查看更多主题"];
+        THNProjectViewController *projectVC = [[THNProjectViewController alloc] init];
+        [self.nav pushViewController:projectVC animated:YES];
         
     } else {
         _type = [self.themeTypeMarr[indexPath.row] integerValue];
         
         if (_type == 1) {
-//            THNArticleDetalViewController *articleVC = [[THNArticleDetalViewController alloc] init];
-//            
-//            [self.nav pushViewController:articleVC animated:YES];
-            [SVProgressHUD showSuccessWithStatus:@"文章"];
+            THNArticleDetalViewController *articleVC = [[THNArticleDetalViewController alloc] init];
+            articleVC.articleDetalid = self.themeIdMarr[indexPath.row];
+            [self.nav pushViewController:articleVC animated:YES];
             
         } else if (_type == 2) {
-            [SVProgressHUD showSuccessWithStatus:@"活动"];
+            THNActiveDetalTwoViewController *activity = [[THNActiveDetalTwoViewController alloc] init];
+            activity.activeDetalId = self.themeIdMarr[indexPath.row];
+            [self.nav pushViewController:activity animated:YES];
             
         } else if (_type == 3) {
-            [SVProgressHUD showSuccessWithStatus:@"促销"];
+            THNCuXiaoDetalViewController *cuXiao = [[THNCuXiaoDetalViewController alloc] init];
+            cuXiao.cuXiaoDetalId = self.themeIdMarr[indexPath.row];
+            [self.nav pushViewController:cuXiao animated:YES];
             
         } else if (_type == 4) {
-            [SVProgressHUD showSuccessWithStatus:@"新品"];
+            THNXinPinDetalViewController *xinPin = [[THNXinPinDetalViewController alloc] init];
+            xinPin.xinPinDetalId = self.themeIdMarr[indexPath.row];
+            [self.nav pushViewController:xinPin animated:YES];
             
         } else if (_type == 5) {
             [SVProgressHUD showSuccessWithStatus:@"好货"];

@@ -12,6 +12,7 @@
 #import "THNDiscoverSceneCollectionViewCell.h"
 #import "FiuPeopleListViewController.h"
 #import "THNSceneListViewController.h"
+#import "FindeFriendViewController.h"
 
 static NSString *const URLSceneList = @"/scene_sight/";
 static NSString *const URLCategory = @"/category/getlist";
@@ -261,9 +262,8 @@ static NSString *const SceneListHeaderCellViewId = @"sceneListHeaderViewId";
 }
 
 - (void)thn_leftBarItemSelected {
-    [SVProgressHUD showSuccessWithStatus:@"加好友"];
-//    SearchViewController * searchVC = [[SearchViewController alloc] init];
-//    [self.navigationController pushViewController:searchVC animated:YES];
+    FindeFriendViewController * searchVC = [[FindeFriendViewController alloc] init];
+    [self.navigationController pushViewController:searchVC animated:YES];
 }
 
 - (void)thn_rightBarItemSelected {

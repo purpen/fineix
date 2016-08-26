@@ -9,11 +9,13 @@
 #import "THNDataInfoTableViewCell.h"
 #import "CommentNViewController.h"
 #import "FBAlertViewController.h"
+#import "FBShareViewController.h"
 
 @implementation THNDataInfoTableViewCell {
     NSString *_sceneId;
     NSString *_userId;
     NSInteger _loveCount;
+    HomeSceneListRow *_sceneModel;
 }
 
 - (instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier {
@@ -29,6 +31,7 @@
 
 #pragma mark - setModel;
 - (void)thn_setSceneData:(HomeSceneListRow *)dataModel {
+    _sceneModel = dataModel;
     [self.look setTitle:[NSString stringWithFormat:@"%zi", dataModel.viewCount] forState:(UIControlStateNormal)];
     _loveCount = dataModel.loveCount;
     if (dataModel.isLove == 1) {
@@ -123,7 +126,10 @@
 }
 
 - (void)shareClick:(UIButton *)button {
-    [SVProgressHUD showSuccessWithStatus:@"分享"];
+    FBShareViewController * shareVC = [[FBShareViewController alloc] init];
+    shareVC.sceneModel = _sceneModel;
+    shareVC.sceneId = _sceneId;
+    [self.vc presentViewController:shareVC animated:YES completion:nil];
 }
 
 - (UIButton *)comments {

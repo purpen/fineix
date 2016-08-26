@@ -63,7 +63,7 @@ static NSString *const URlCancelCollect = @"/favorite/ajax_cancel_favorite";
     [SVProgressHUD show];
     self.goodsInfoRequest = [FBAPI getWithUrlString:URLGoodsInfo requestDictionary:@{@"id":self.goodsID} delegate:self];
     [self.goodsInfoRequest startRequestSuccess:^(FBRequest *request, id result) {
-        NSLog(@"＝＝＝＝＝ 商品详情：%@", result);
+        NSLog(@"＝＝＝＝＝ 商品详情：%@", self.goodsID);
         _goodsDes = [[result valueForKey:@"data"] valueForKey:@"advantage"];
         _goodsInfoUrl = [[result valueForKey:@"data"] valueForKey:@"content_view_url"];
         _collect = [[[result valueForKey:@"data"] valueForKey:@"is_favorite"] integerValue];
@@ -445,7 +445,7 @@ static NSString *const URlCancelCollect = @"/favorite/ajax_cancel_favorite";
         [_likeBtn setImage:[UIImage imageNamed:@"goods_star"] forState:(UIControlStateNormal)];
         [_likeBtn setImage:[UIImage imageNamed:@"goods_star_seleted"] forState:(UIControlStateSelected)];
         [_likeBtn setTitleEdgeInsets:(UIEdgeInsetsMake(30, -30, 0, 0))];
-        [_likeBtn setImageEdgeInsets:(UIEdgeInsetsMake(-10, 0, 0, 0))];
+        [_likeBtn setImageEdgeInsets:(UIEdgeInsetsMake(-10, 13.5, 0, 0))];
         [_likeBtn addTarget:self action:@selector(networkCollectGoods:) forControlEvents:(UIControlEventTouchUpInside)];
     }
     return _likeBtn;

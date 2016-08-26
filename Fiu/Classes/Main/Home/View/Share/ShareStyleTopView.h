@@ -8,6 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import "Fiu.h"
+#import "HomeSceneListRow.h"
 
 @interface ShareStyleTopView : UIView
 
@@ -29,7 +30,7 @@
 @pro_strong UIImageView         *   qrCode;         //  二维码
 @pro_strong UIButton            *   fiuLogo;        //  logo
 
-- (void)setShareSceneData:(NSDictionary *)model;
+- (void)setShareSceneData:(HomeSceneListRow *)sceneModel;
 - (void)changeWithSearchText:(NSString *)title withDes:(NSString *)des;
 
 @end

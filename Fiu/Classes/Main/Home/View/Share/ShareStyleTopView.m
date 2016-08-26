@@ -44,8 +44,8 @@ static CGFloat const userStarFont = 9.0f;
 }
 
 #pragma mark - 视图信息
-- (void)setShareSceneData:(NSDictionary *)model {
-    HomeSceneListRow * sceneModel = [[HomeSceneListRow alloc] initWithDictionary:model];
+- (void)setShareSceneData:(HomeSceneListRow *)sceneModel {
+//    HomeSceneListRow * sceneModel = [[HomeSceneListRow alloc] initWithDictionary:model];
     [self.sceneImg downloadImage:sceneModel.coverUrl place:[UIImage imageNamed:@""]];
     [self.userHeader downloadImage:sceneModel.user.avatarUrl place:[UIImage imageNamed:@""]];
     self.userName.text = sceneModel.user.nickname;

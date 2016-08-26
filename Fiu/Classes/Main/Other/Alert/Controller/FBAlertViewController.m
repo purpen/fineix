@@ -139,9 +139,9 @@ static NSInteger const fiuActionBtnTag = 696;
         }];
         
     } else if (button.tag == actionBtnTag + 1) {
-        FBShareViewController * shareVC = [[FBShareViewController alloc] init];
-        shareVC.dataDict = self.sceneData;
-        [self presentViewController:shareVC animated:YES completion:nil];
+//        FBShareViewController * shareVC = [[FBShareViewController alloc] init];
+//        shareVC.dataDict = self.sceneData;
+//        [self presentViewController:shareVC animated:YES completion:nil];
         
     } else if (button.tag == actionBtnTag + 2) {
         EditViewController * editVC = [[EditViewController alloc] init];

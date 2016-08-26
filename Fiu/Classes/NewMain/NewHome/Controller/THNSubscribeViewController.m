@@ -7,12 +7,12 @@
 //
 
 #import "THNSubscribeViewController.h"
-
 #import "THNDiscoverSceneCollectionViewCell.h"
 #import "HomeSceneListRow.h"
 #import "MJRefresh.h"
 #import "FBRefresh.h"
 #import "THNSceneListViewController.h"
+#import "THNSenceTopicViewController.h"
 
 static NSString *const URLSubCount = @"/auth/user";
 static NSString *const URLSceneList = @"/scene_sight/";
@@ -34,13 +34,13 @@ static NSString *const SceneListCellId = @"sceneListCellId";
     [super viewWillAppear:animated];
     
     [self thn_setNavigationViewUI];
+    [self thn_networkSubCountData];
 }
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     
     _categoryIds = [self getLoginUserInterestSceneCate];
-    [self thn_networkSubCountData];
     [self thn_setDiscoverViewUI];
     [self thn_networkSceneListData];
 }
@@ -192,8 +192,14 @@ static NSString *const SceneListCellId = @"sceneListCellId";
         [_lookAllSubscribe setTitleEdgeInsets:(UIEdgeInsetsMake(0, 15, 0, 0))];
         [_lookAllSubscribe setImage:[UIImage imageNamed:@"icon_Next"] forState:(UIControlStateNormal)];
         [_lookAllSubscribe setImageEdgeInsets:(UIEdgeInsetsMake(0, SCREEN_WIDTH - 25, 0, 0))];
+        [_lookAllSubscribe addTarget:self action:@selector(lookAllSubscribeClick:) forControlEvents:(UIControlEventTouchUpInside)];
     }
     return _lookAllSubscribe;
+}
+
+- (void)lookAllSubscribeClick:(UIButton *)button {
+    THNSenceTopicViewController *sceneTopicVC = [[THNSenceTopicViewController alloc] init];
+    [self.navigationController pushViewController:sceneTopicVC animated:YES];
 }
 
 - (UICollectionView *)sceneList {

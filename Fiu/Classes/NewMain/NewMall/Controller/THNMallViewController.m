@@ -181,6 +181,7 @@ static NSString *const MallListHeaderCellViewId = @"mallListHeaderCellViewId";
     [self thn_addSearchBtnText:NSLocalizedString(@"mallSearch", nil) type:2];
     [self thn_addBarItemLeftBarButton:@"" image:@"mall_saoma"];
     [self thn_addBarItemRightBarButton:@"" image:@"mall_car"];
+    [self setNavGoodsCarNumLab];
 }
 
 - (void)thn_leftBarItemSelected {

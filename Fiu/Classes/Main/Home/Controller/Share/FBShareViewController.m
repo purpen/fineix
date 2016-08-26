@@ -29,12 +29,16 @@ static NSString *const URLGiveExp = @"/user/send_exp";
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
+    
+    [[UIApplication sharedApplication] setStatusBarHidden:YES withAnimation:(UIStatusBarAnimationFade)];
 }
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.view.backgroundColor = [UIColor blackColor];
     [self setShareVcUI];
+    
+    NSLog(@"＝＝＝＝＝＝＝＝%@", _sceneModel.title);
 }
 
 - (FBPopupView *)sharePopView {
@@ -84,12 +88,12 @@ static NSString *const URLGiveExp = @"/user/send_exp";
 
 #pragma mark - 设置界面UI
 - (void)setShareVcUI {
+      [self.view addSubview:self.topView];
     [self.view addSubview:self.shareView];
     CGAffineTransform shareViewTrans = CGAffineTransformScale(self.shareView.transform, 0.76, 0.76);
     [self.shareView setTransform:shareViewTrans];
     self.shareView.center = CGPointMake(SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2.24);
     
-    [self.view addSubview:self.topView];
     
     [self.view addSubview:self.styleView];
     [self.styleView selectItemAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0]
@@ -101,7 +105,7 @@ static NSString *const URLGiveExp = @"/user/send_exp";
 - (UIView *)shareView {
     if (!_shareView) {
         _shareView = [[UIView alloc] initWithFrame:CGRectMake(0, 44, SCREEN_WIDTH, SCREEN_HEIGHT)];
-        [_shareView addSubview:self.shareBottomView];
+        [_shareView addSubview:self.shareTopView];
         
 //        UITapGestureRecognizer * tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(editShareInfo)];
 //        [_shareView addGestureRecognizer:tap];
@@ -130,39 +134,35 @@ static NSString *const URLGiveExp = @"/user/send_exp";
 - (ShareStyleTopView *)shareTopView {
     if (!_shareTopView) {
         _shareTopView = [[ShareStyleTopView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT)];
-        [_shareTopView setShareSceneData:self.dataDict];
-        _editBgImg = [self.dataDict valueForKey:@"cover_url"];
-        _editTitle = [self.dataDict valueForKey:@"title"];
-        _editDes = [self.dataDict valueForKey:@"des"];
-        _tags = [[self.dataDict valueForKey:@"tag_titles"] componentsJoinedByString:@","];
+        [_shareTopView setShareSceneData:self.sceneModel];
     }
     return _shareTopView;
 }
-
-- (ShareStyleBottomView *)shareBottomView {
-    if (!_shareBottomView) {
-        _shareBottomView = [[ShareStyleBottomView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT)];
-        [_shareBottomView setShareSceneData:self.dataDict];
-    }
-    return _shareBottomView;
-}
-
-- (ShareStyleTitleBottomView *)shareTitleBottomView {
-    if (!_shareTitleBottomView) {
-        _shareTitleBottomView = [[ShareStyleTitleBottomView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT)];
-        [_shareTitleBottomView setShareSceneData:self.dataDict];
-    }
-    return _shareTitleBottomView;
-}
-
-- (ShareStyleTitleTopView *)shareTitleTopView {
-    if (!_shareTitleTopView) {
-        _shareTitleTopView = [[ShareStyleTitleTopView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT)];
-        [_shareTitleTopView setShareSceneData:self.dataDict];
-    }
-    return _shareTitleTopView;
-}
-
+//
+//- (ShareStyleBottomView *)shareBottomView {
+//    if (!_shareBottomView) {
+//        _shareBottomView = [[ShareStyleBottomView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT)];
+//        [_shareBottomView setShareSceneData:self.dataDict];
+//    }
+//    return _shareBottomView;
+//}
+//
+//- (ShareStyleTitleBottomView *)shareTitleBottomView {
+//    if (!_shareTitleBottomView) {
+//        _shareTitleBottomView = [[ShareStyleTitleBottomView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT)];
+//        [_shareTitleBottomView setShareSceneData:self.dataDict];
+//    }
+//    return _shareTitleBottomView;
+//}
+//
+//- (ShareStyleTitleTopView *)shareTitleTopView {
+//    if (!_shareTitleTopView) {
+//        _shareTitleTopView = [[ShareStyleTitleTopView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT)];
+//        [_shareTitleTopView setShareSceneData:self.dataDict];
+//    }
+//    return _shareTitleTopView;
+//}
+//
 #pragma mark - 分享样式视图
 - (UICollectionView *)styleView {
     if (!_styleView) {
@@ -192,30 +192,30 @@ static NSString *const URLGiveExp = @"/user/send_exp";
 }
 
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
-    if (indexPath.row == 0) {
-        if (self.shareView.subviews.count > 0) {
-            [self.shareView.subviews makeObjectsPerformSelector:@selector(removeFromSuperview)];
-            [self.shareView addSubview:self.shareBottomView];
-        }
-        
-    } else if (indexPath.row == 1) {
-        if (self.shareView.subviews.count > 0) {
-            [self.shareView.subviews makeObjectsPerformSelector:@selector(removeFromSuperview)];
-            [self.shareView addSubview:self.shareTopView];
-        }
-        
-    } else if (indexPath.row == 2) {
-        if (self.shareView.subviews.count > 0) {
-            [self.shareView.subviews makeObjectsPerformSelector:@selector(removeFromSuperview)];
-            [self.shareView addSubview:self.shareTitleBottomView];
-        }
-        
-    } else if (indexPath.row == 3) {
-        if (self.shareView.subviews.count > 0) {
-            [self.shareView.subviews makeObjectsPerformSelector:@selector(removeFromSuperview)];
-            [self.shareView addSubview:self.shareTitleTopView];
-        }
-    }
+//    if (indexPath.row == 0) {
+//        if (self.shareView.subviews.count > 0) {
+//            [self.shareView.subviews makeObjectsPerformSelector:@selector(removeFromSuperview)];
+//            [self.shareView addSubview:self.shareBottomView];
+//        }
+//        
+//    } else if (indexPath.row == 1) {
+//        if (self.shareView.subviews.count > 0) {
+//            [self.shareView.subviews makeObjectsPerformSelector:@selector(removeFromSuperview)];
+//            [self.shareView addSubview:self.shareTopView];
+//        }
+//        
+//    } else if (indexPath.row == 2) {
+//        if (self.shareView.subviews.count > 0) {
+//            [self.shareView.subviews makeObjectsPerformSelector:@selector(removeFromSuperview)];
+//            [self.shareView addSubview:self.shareTitleBottomView];
+//        }
+//        
+//    } else if (indexPath.row == 3) {
+//        if (self.shareView.subviews.count > 0) {
+//            [self.shareView.subviews makeObjectsPerformSelector:@selector(removeFromSuperview)];
+//            [self.shareView addSubview:self.shareTitleTopView];
+//        }
+//    }
 }
 
 #pragma mark - 顶部视图

@@ -98,7 +98,9 @@ static NSString *const URLSendSceneComment = @"/comment/ajax_comment";
             self.writeComment.writeText.text = @"";
             [self.writeComment.writeText resignFirstResponder];
             [SVProgressHUD showSuccessWithStatus:@"评论成功"];
-            [self requestIsLastData:self.commentTabel currentPage:self.currentpageNum withTotalPage:self.totalPageNum];
+            
+            self.commentTabel.mj_footer.state = MJRefreshStateNoMoreData;
+            self.commentTabel.mj_footer.hidden = true;
             
         } failure:^(FBRequest *request, NSError *error) {
             [SVProgressHUD showErrorWithStatus:[error localizedDescription]];

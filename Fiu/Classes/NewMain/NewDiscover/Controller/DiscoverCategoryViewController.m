@@ -9,12 +9,17 @@
 #import "DiscoverCategoryViewController.h"
 #import "THNDiscoverSceneCollectionViewCell.h"
 #import "HomeSceneListRow.h"
+#import "THNSceneListViewController.h"
 
+static NSString *const URLSubCount = @"/auth/user";
+static NSString *const URLAddTheme = @"/my/add_interest_scene_id";
+static NSString *const URLRemTheme = @"/my/remove_interest_scene_id";
 static NSString *const SceneListCellId = @"sceneListCellId";
 static NSString *const URLSceneList = @"/scene_sight/";
 
 @interface DiscoverCategoryViewController () {
     NSString *_sort;
+    NSArray *_subscribeArr;
 }
 
 @end
@@ -25,21 +30,60 @@ static NSString *const URLSceneList = @"/scene_sight/";
     [super viewWillAppear:animated];
     
     [self thn_setNavigationViewUI];
+    [self thn_networkSubCountData];
 }
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     _sort = @"2";
     [self thn_networkSceneListData:_sort];
+
     [self setViewUI];
 }
 
 #pragma mark 情景列表
+#pragma mark 订阅主题数量
+- (void)thn_networkSubCountData {
+    self.subscribeCountRequest = [FBAPI getWithUrlString:URLSubCount requestDictionary:@{} delegate:self];
+    [self.subscribeCountRequest startRequestSuccess:^(FBRequest *request, id result) {
+        _subscribeArr = [[result valueForKey:@"data"] valueForKey:@"interest_scene_cate"];
+        NSMutableArray *subMarr = [NSMutableArray array];
+        for (NSNumber *idx in _subscribeArr) {
+            [subMarr addObject:[NSString stringWithFormat:@"%@", idx]];
+        }
+        
+        if ([subMarr containsObject:self.categoryId]) {
+            self.subscribeBtn.selected = YES;
+        } else {
+            self.subscribeBtn.selected = NO;
+        }
+
+    } failure:^(FBRequest *request, NSError *error) {
+        NSLog(@"%@",error);
+    }];
+}
+
+- (void)thn_AddOrRemThemeData:(NSInteger)type {
+    if (type == 1) {
+        self.suThemeRequest = [FBAPI postWithUrlString:URLAddTheme requestDictionary:@{@"id":self.categoryId} delegate:self];
+    } else if (type == 2) {
+        self.suThemeRequest = [FBAPI postWithUrlString:URLRemTheme requestDictionary:@{@"id":self.categoryId} delegate:self];
+    }
+    [self.suThemeRequest startRequestSuccess:^(FBRequest *request, id result) {
+        if (type == 1) {
+            [SVProgressHUD showSuccessWithStatus:NSLocalizedString(@"subscribeSuccess", nil)];
+        }
+        
+    } failure:^(FBRequest *request, NSError *error) {
+        NSLog(@"%@", error);
+    }];
+}
+
 - (void)thn_networkSceneListData:(NSString *)sort {
     self.sceneListRequest = [FBAPI getWithUrlString:URLSceneList requestDictionary:@{@"page":@(self.currentpageNum + 1),
                                                                                      @"size":@10,
-                                                                                     @"sort":sort
-//                                                                                     @"category_ids":self.categoryId
+                                                                                     @"sort":sort,
+                                                                                     @"category_ids":self.categoryId
                                                                                      } delegate:self];
     [self.sceneListRequest startRequestSuccess:^(FBRequest *request, id result) {
         NSArray *sceneArr = [[result valueForKey:@"data"] valueForKey:@"rows"];
@@ -49,6 +93,7 @@ static NSString *const URLSceneList = @"/scene_sight/";
             [self.sceneIdMarr addObject:[NSString stringWithFormat:@"%zi", homeSceneModel.idField]];
             [self.userIdMarr addObject:[NSString stringWithFormat:@"%zi", homeSceneModel.userId]];
         }
+         [self.commentsMarr addObjectsFromArray:[sceneArr valueForKey:@"comments"]];
         
         [self.sceneList reloadData];
         self.currentpageNum = [[[result valueForKey:@"data"] valueForKey:@"current_page"] integerValue];
@@ -148,7 +193,13 @@ static NSString *const URLSceneList = @"/scene_sight/";
 }
 
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
-    [SVProgressHUD showSuccessWithStatus:[NSString stringWithFormat:@"打开情景：%@",self.sceneIdMarr[indexPath.row]]];
+    THNSceneListViewController *sceneListVC = [[THNSceneListViewController alloc] init];
+    sceneListVC.sceneListMarr = self.sceneListMarr;
+    sceneListVC.commentsMarr = self.commentsMarr;
+    sceneListVC.sceneIdMarr = self.sceneIdMarr;
+    sceneListVC.userIdMarr = self.userIdMarr;
+    sceneListVC.index = indexPath.row;
+    [self.navigationController pushViewController:sceneListVC animated:YES];
 }
 
 
@@ -184,6 +235,36 @@ static NSString *const URLSceneList = @"/scene_sight/";
     self.navViewTitle.text = self.vcTitle;
     self.delegate = self;
     [self thn_addSubscribeBtn];
+    [self.subscribeBtn addTarget:self action:@selector(subscribeBtnClick:) forControlEvents:(UIControlEventTouchUpInside)];
+}
+
+- (void)subscribeBtnClick:(UIButton *)button {
+    if (button.selected == NO) {
+        button.selected = YES;
+        POPSpringAnimation *scaleAnimation = [POPSpringAnimation animationWithPropertyNamed:kPOPLayerScaleXY];
+        scaleAnimation.fromValue = [NSValue valueWithCGSize:CGSizeMake(0.5, 0.5)];
+        scaleAnimation.toValue = [NSValue valueWithCGSize:CGSizeMake(1.0, 1.0)];
+        scaleAnimation.springBounciness = 10.f;
+        scaleAnimation.springSpeed = 10.0f;
+        [button.layer pop_addAnimation:scaleAnimation forKey:@"scaleAnim"];
+        button.layer.borderColor = [UIColor colorWithHexString:MAIN_COLOR].CGColor;
+        button.backgroundColor = [UIColor colorWithHexString:MAIN_COLOR];
+        
+        [self thn_AddOrRemThemeData:1];
+        
+    } else if (button.selected == YES) {
+        button.selected = NO;
+        POPSpringAnimation *scaleAnimation = [POPSpringAnimation animationWithPropertyNamed:kPOPLayerScaleXY];
+        scaleAnimation.fromValue = [NSValue valueWithCGSize:CGSizeMake(0.5, 0.5)];
+        scaleAnimation.toValue = [NSValue valueWithCGSize:CGSizeMake(1.0, 1.0)];
+        scaleAnimation.springBounciness = 10.f;
+        scaleAnimation.springSpeed = 10.0f;
+        [button.layer pop_addAnimation:scaleAnimation forKey:@"scaleAnim"];
+        button.layer.borderColor = [UIColor colorWithHexString:WHITE_COLOR alpha:0.6].CGColor;
+        button.backgroundColor = [UIColor colorWithHexString:BLACK_COLOR];
+        
+        [self thn_AddOrRemThemeData:2];
+    }
 }
 
 #pragma mark - NSMutableArray
@@ -208,5 +289,11 @@ static NSString *const URLSceneList = @"/scene_sight/";
     return _userIdMarr;
 }
 
+- (NSMutableArray *)commentsMarr {
+    if (!_commentsMarr) {
+        _commentsMarr = [NSMutableArray array];
+    }
+    return _commentsMarr;
+}
 
 @end

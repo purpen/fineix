@@ -23,6 +23,7 @@
 "SubscribeVC" = "订阅";
 "SubscribeDone" = "已订阅";
 "SubscribeScene" = "个主题情境";
+"subscribeSuccess" = "订阅成功";
 
 //  更多
 "editScene" = "编辑";

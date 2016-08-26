@@ -316,7 +316,7 @@
 - (void)shareBtnClick {
     if ([_sceneData valueForKey:@"cover_url"]) {
         FBShareViewController * shareVC = [[FBShareViewController alloc] init];
-        shareVC.dataDict = _sceneData;
+//        shareVC.dataDict = _sceneData;
         [self.vc presentViewController:shareVC animated:YES completion:^{
             [_bgView removeFromSuperview];
         }];

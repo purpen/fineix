@@ -4495,6 +4495,8 @@
 				D851745C1D58B307005F5722 /* HomeThemeCollectionViewCell.m */,
 				D851745E1D598D1D005F5722 /* THNUserInfoTableViewCell.h */,
 				D851745F1D598D1D005F5722 /* THNUserInfoTableViewCell.m */,
+				D806698B1D6F5A65007FD81E /* THNHotUserCollectionViewCell.h */,
+				D806698C1D6F5A65007FD81E /* THNHotUserCollectionViewCell.m */,
 				D85174611D598D36005F5722 /* THNSceneImageTableViewCell.h */,
 				D85174621D598D36005F5722 /* THNSceneImageTableViewCell.m */,
 				D85174641D598D47005F5722 /* THNDataInfoTableViewCell.h */,
@@ -4505,8 +4507,6 @@
 				D851746E1D5AF586005F5722 /* THNSceneTagsCollectionViewCell.m */,
 				D851746A1D5AD70E005F5722 /* THNSceneCommentTableViewCell.h */,
 				D851746B1D5AD70E005F5722 /* THNSceneCommentTableViewCell.m */,
-				D806698B1D6F5A65007FD81E /* THNHotUserCollectionViewCell.h */,
-				D806698C1D6F5A65007FD81E /* THNHotUserCollectionViewCell.m */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -5680,8 +5680,6 @@
 				1F2A8FD21CF40277005116C7 /* BuyCarDefault.m in Sources */,
 				1FD10CBE1D647B2C005898EE /* THNSubHeadView.m in Sources */,
 				1F2A8F681CF40277005116C7 /* FiuPeople.m in Sources */,
-				1F296DD11D6A98FD001FC6A2 /* THNActiveResultViewController.m in Sources */,
-				1FA53F591D69FA4F00EBE59B /* THNActiveDetalViewController.m in Sources */,
 				D80669871D6F3F82007FD81E /* FBGoodsInfoModelBrand.m in Sources */,
 				1F6CA26D1D5C1A0600DFB79E /* THNTFView.m in Sources */,
 				1F2A91271CF42EC1005116C7 /* OrderInfoDetailViewController.m in Sources */,

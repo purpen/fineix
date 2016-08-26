@@ -14,7 +14,7 @@
 #import "ShareStyleTitleBottomView.h"
 #import "ShareStyleTitleTopView.h"
 #import "FBPopupView.h"
-
+#import "HomeSceneListRow.h"
 #import "UMSocial.h"
 #import "WXApi.h"
 #import "WeiboSDK.h"
@@ -29,7 +29,7 @@
 @pro_strong UIButton            *   closeBtn;
 @pro_strong UIButton            *   shareBtn;
 @pro_strong UICollectionView    *   styleView;
-@pro_strong NSDictionary        *   dataDict;
+@pro_strong HomeSceneListRow    *   sceneModel;
 @pro_strong NSString            *   sceneId;
 
 @pro_strong UIView                      *   shareView;

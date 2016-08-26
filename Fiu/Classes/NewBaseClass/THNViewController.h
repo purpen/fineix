@@ -30,6 +30,16 @@
 @pro_strong UITableView *baseTable; //  当前列表
 @pro_strong UIButton *subscribeBtn; //  订阅按钮
 
+
+/**
+ *  请求购物车数量
+ */
+@pro_strong FBRequest   *   goodsCarRequest;
+@pro_strong NSString    *   goodsCount;
+@pro_strong UILabel     *   countLab;
+- (void)getGoodsCarNumData;
+- (void)setNavGoodsCarNumLab;
+
 /**
  *  是否登录
  */
