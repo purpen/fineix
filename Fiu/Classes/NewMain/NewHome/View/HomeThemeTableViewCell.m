@@ -8,8 +8,16 @@
 
 #import "HomeThemeTableViewCell.h"
 #import "HomeThemeCollectionViewCell.h"
+#import "FBSubjectModelRow.h"
+#import "THNArticleDetalViewController.h"
 
 static NSString *const themeCollectionCellID = @"ThemeCollectionCellID";
+
+@interface HomeThemeTableViewCell () {
+    NSInteger _type;
+}
+
+@end
 
 @implementation HomeThemeTableViewCell
 
@@ -30,8 +38,26 @@ static NSString *const themeCollectionCellID = @"ThemeCollectionCellID";
     return _themeMarr;
 }
 
+- (NSMutableArray *)themeIdMarr {
+    if (!_themeIdMarr) {
+        _themeIdMarr = [NSMutableArray array];
+    }
+    return _themeIdMarr;
+}
+
+- (NSMutableArray *)themeTypeMarr {
+    if (!_themeTypeMarr) {
+        _themeTypeMarr = [NSMutableArray array];
+    }
+    return _themeTypeMarr;
+}
+
 - (void)setThemeModelArr:(NSMutableArray *)data {
     self.themeMarr = data;
+    for (FBSubjectModelRow *model in data) {
+        [self.themeTypeMarr addObject:[NSString stringWithFormat:@"%zi", model.type]];
+        [self.themeIdMarr addObject:[NSString stringWithFormat:@"%zi", model.idField]];
+    }
     [self.themeCollectionView reloadData];
 }
 
@@ -87,8 +113,29 @@ static NSString *const themeCollectionCellID = @"ThemeCollectionCellID";
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
     if (indexPath.row == self.themeMarr.count) {
         [SVProgressHUD showSuccessWithStatus:@"查看更多主题"];
+        
     } else {
-        [SVProgressHUD showSuccessWithStatus:@"打开主题页"];
+        _type = [self.themeTypeMarr[indexPath.row] integerValue];
+        
+        if (_type == 1) {
+//            THNArticleDetalViewController *articleVC = [[THNArticleDetalViewController alloc] init];
+//            
+//            [self.nav pushViewController:articleVC animated:YES];
+            [SVProgressHUD showSuccessWithStatus:@"文章"];
+            
+        } else if (_type == 2) {
+            [SVProgressHUD showSuccessWithStatus:@"活动"];
+            
+        } else if (_type == 3) {
+            [SVProgressHUD showSuccessWithStatus:@"促销"];
+            
+        } else if (_type == 4) {
+            [SVProgressHUD showSuccessWithStatus:@"新品"];
+            
+        } else if (_type == 5) {
+            [SVProgressHUD showSuccessWithStatus:@"好货"];
+            
+        }
     }
 }
 

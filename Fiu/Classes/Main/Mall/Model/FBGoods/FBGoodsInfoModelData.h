@@ -1,13 +1,7 @@
-//
-//	FBGoodsInfoModelData.h
-// on 14/7/2016
-//	Copyright © 2016. All rights reserved.
-//
-
-//	Model file Generated using JSONExport: https://github.com/Ahmed-Ali/JSONExport
-
 #import <UIKit/UIKit.h>
+#import "FBGoodsInfoModelBrand.h"
 #import "FBGoodsInfoModelRelationProduct.h"
+#import "FBGoodsInfoModelSku.h"
 
 @interface FBGoodsInfoModelData : NSObject
 
@@ -16,16 +10,16 @@
 @property (nonatomic, assign) NSInteger appAppointCount;
 @property (nonatomic, assign) NSInteger appSnatched;
 @property (nonatomic, assign) NSInteger appSnatchedCount;
-@property (nonatomic, assign) NSInteger appSnatchedEndTime;
+@property (nonatomic, assign) BOOL appSnatchedEndTime;
 @property (nonatomic, assign) NSInteger appSnatchedLimitCount;
 @property (nonatomic, assign) NSInteger appSnatchedPrice;
 @property (nonatomic, assign) NSInteger appSnatchedRestCount;
 @property (nonatomic, assign) NSInteger appSnatchedStat;
-@property (nonatomic, assign) NSInteger appSnatchedTime;
+@property (nonatomic, assign) BOOL appSnatchedTime;
 @property (nonatomic, assign) NSInteger appSnatchedTimeLag;
 @property (nonatomic, assign) NSInteger appSnatchedTotalCount;
 @property (nonatomic, strong) NSArray * asset;
-@property (nonatomic, strong) NSString * brand;
+@property (nonatomic, strong) FBGoodsInfoModelBrand * brand;
 @property (nonatomic, strong) NSString * brandId;
 @property (nonatomic, strong) NSObject * canSaled;
 @property (nonatomic, assign) NSInteger categoryId;
@@ -46,8 +40,9 @@
 @property (nonatomic, assign) NSInteger isTry;
 @property (nonatomic, assign) NSInteger loveCount;
 @property (nonatomic, assign) NSInteger marketPrice;
+@property (nonatomic, strong) NSArray * pngAsset;
 @property (nonatomic, strong) NSArray * relationProducts;
-@property (nonatomic, assign) CGFloat salePrice;
+@property (nonatomic, assign) NSInteger salePrice;
 @property (nonatomic, strong) NSString * shareDesc;
 @property (nonatomic, strong) NSString * shareViewUrl;
 @property (nonatomic, strong) NSString * shortTitle;

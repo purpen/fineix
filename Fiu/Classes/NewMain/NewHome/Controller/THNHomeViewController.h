@@ -24,6 +24,7 @@
 @pro_strong FBRequest *followRequest;
 @pro_strong FBRequest *cancelFollowRequest;
 @pro_strong FBRequest *favoriteRequest;
+@pro_strong FBRequest *hotUserRequest;
 
 @pro_strong FBRollImages *homerollView;
 @pro_strong UITableView *homeTable;
@@ -37,5 +38,6 @@
 @pro_strong NSMutableArray *sceneIdMarr;
 @pro_strong NSMutableArray *userIdMarr;
 @pro_strong NSMutableArray *commentsMarr;
+@pro_strong NSMutableArray *hotUserMarr;
 
 @end

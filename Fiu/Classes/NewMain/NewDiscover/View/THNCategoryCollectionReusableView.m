@@ -76,7 +76,7 @@ static NSString *const collectionViewCellId = @"CollectionViewCellId";
     for (NSDictionary *categoryDict in category) {
         CategoryRow *model = [[CategoryRow alloc] initWithDictionary:categoryDict];
         [self.categoryMarr addObject:model];
-        [self.categoryIdMarr addObject:[NSString stringWithFormat:@"%zi",model.tagId]];
+        [self.categoryIdMarr addObject:[NSString stringWithFormat:@"%zi",model.idField]];
         [self.categoryTitleMarr addObject:model.title];
     }
     [self.menuView reloadData];
@@ -112,7 +112,7 @@ static NSString *const collectionViewCellId = @"CollectionViewCellId";
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
     MallMenuCollectionViewCell * cell = [collectionView dequeueReusableCellWithReuseIdentifier:collectionViewCellId forIndexPath:indexPath];
     if (self.categoryMarr.count) {
-        [cell setCategoryData:self.categoryMarr[indexPath.row]];
+        [cell setCategoryData:self.categoryMarr[indexPath.row] type:_type];
     }
     return cell;
 }
@@ -122,7 +122,7 @@ static NSString *const collectionViewCellId = @"CollectionViewCellId";
     if (_type == 0) {
         DiscoverCategoryViewController *categoryVC = [[DiscoverCategoryViewController alloc] init];
         categoryVC.vcTitle = self.categoryTitleMarr[indexPath.row];
-        //    categoryVC.categoryId = self.categoryIdMarr[indexPath.row];
+        categoryVC.categoryId = self.categoryIdMarr[indexPath.row];
         [self.nav pushViewController:categoryVC animated:YES];
     
     } else if (_type == 1) {

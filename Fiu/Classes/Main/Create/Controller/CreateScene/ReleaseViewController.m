@@ -50,41 +50,76 @@ static NSString *const URLGetUserDesTags = @"/gateway/fetch_chinese_word";
 
 #pragma mark 发布场景
 - (void)networkNewSceneData {
-    NSString *title = [self.addContent.title.text stringByReplacingOccurrencesOfString:@" " withString:@""];
+    NSString *firTitle = [self.addContent.title.text stringByReplacingOccurrencesOfString:@" " withString:@""];
+    NSString *subTitle = [self.addContent.suTitle.text stringByReplacingOccurrencesOfString:@" " withString:@""];
+    if (subTitle.length == 0) {
+        subTitle = @"";
+    }
+    NSString *title = [NSString stringWithFormat:@"%@%@", firTitle, subTitle];
+    
     if ([self.addContent.content.text isEqualToString:NSLocalizedString(@"addDescription", nil)]) {
         self.addContent.content.text = @"";
     }
+    
     NSString *des = self.addContent.content.text;
     NSString *address = self.addLocaiton.locationLab.text;
     NSString *city = self.addLocaiton.cityLab.text;
     NSString *lng = self.addLocaiton.longitude;
     NSString *lat = self.addLocaiton.latitude;
     NSString *tags = [self.addContent.userAddTags componentsJoinedByString:@","];
-    NSLog(@"＝＝＝＝＝＝＝＝＝ %@ %@ %@ %@ %@ %@ %@", title, des, address, city, lng, lat, tags);
-    [SVProgressHUD showWithMaskType:SVProgressHUDMaskTypeBlack];
-    NSMutableArray * goodsMarr = [NSMutableArray array];
-    for (NSUInteger idx = 0; idx < self.goodsId.count; ++ idx) {
-        NSDictionary * goodsDict = @{@"id":self.goodsId[idx],
-                                  @"title":self.goodsTitle[idx],
-                                      @"x":self.goodsX[idx],
-                                      @"y":self.goodsY[idx],
-                                    @"loc":self.goodsLoc[idx],
-                                   @"type":self.goodsType[idx]};
-        [goodsMarr addObject:goodsDict];
-    }
-    NSData * jsonData = [NSJSONSerialization dataWithJSONObject:goodsMarr options:0 error:nil];
-    NSString * json = [[NSString alloc] initWithData:jsonData encoding:NSUTF8StringEncoding];
+    NSString * json;
     
+    [SVProgressHUD showWithMaskType:SVProgressHUDMaskTypeBlack];
+    if (self.goodsId.count) {
+        NSMutableArray * goodsMarr = [NSMutableArray array];
+        for (NSUInteger idx = 0; idx < self.goodsId.count; ++ idx) {
+            NSDictionary * goodsDict = @{@"id":self.goodsId[idx],
+                                         @"title":self.goodsTitle[idx],
+                                         @"x":self.goodsX[idx],
+                                         @"y":self.goodsY[idx],
+                                         @"loc":self.goodsLoc[idx],
+                                         @"type":self.goodsType[idx]};
+            [goodsMarr addObject:goodsDict];
+        }
+        NSData * jsonData = [NSJSONSerialization dataWithJSONObject:goodsMarr options:0 error:nil];
+        json = [[NSString alloc] initWithData:jsonData encoding:NSUTF8StringEncoding];
+    }
+    
+    if (lng.length == 0) {
+        lng = @"";
+    }
+    if (lat.length == 0) {
+        lat = @"";
+    }
+    if (address.length == 0) {
+        address = @"";
+    }
+    if (city.length == 0) {
+        city = @"";
+    }
+    if (tags.length == 0) {
+        tags = @"";
+    }
+    if (title.length == 0) {
+        title = @"";
+    }
+    if (des.length == 0) {
+        des = @"";
+    }
+    if (json.length == 0) {
+        json = @"";
+    }
+
     NSData * imageData = UIImageJPEGRepresentation(self.bgImg, 0.7);
     NSString * icon64Str = [imageData base64EncodedStringWithOptions:NSDataBase64Encoding64CharacterLineLength];
     NSDictionary * paramDict = @{
                                  @"tmp":icon64Str,
                                  @"title":title,
                                  @"des":des,
-                                 @"lng":self.addLocaiton.longitude,
-                                 @"lat":self.addLocaiton.latitude,
-                                 @"address":self.addLocaiton.locationLab.text,
-                                 @"city":self.addLocaiton.cityLab.text,
+                                 @"lng":lng,
+                                 @"lat":lat,
+                                 @"address":address,
+                                 @"city":city,
                                  @"products":json,
                                  @"tags":tags,
                                  };

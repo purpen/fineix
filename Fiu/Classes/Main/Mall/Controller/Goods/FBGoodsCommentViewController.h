@@ -20,4 +20,6 @@
 @pro_strong UITableView             *   commentTabel;   //  评论视图
 @pro_strong UILabel                 *   promptLab;
 
+- (void)networkSceneCommenstData:(NSString *)targetId;
+
 @end

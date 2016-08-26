@@ -1,12 +1,17 @@
 //
 //	FBGoodsInfoModel.m
-// on 14/7/2016
-//	Copyright © 2016. All rights reserved.
-//	Model file Generated using JSONExport: https://github.com/Ahmed-Ali/JSONExport
+//	Model file generated using JSONExport: https://github.com/Ahmed-Ali/JSONExport
 
 
 
 #import "FBGoodsInfoModel.h"
+
+NSString *const kFBGoodsInfoModelCurrentUserId = @"current_user_id";
+NSString *const kFBGoodsInfoModelData = @"data";
+NSString *const kFBGoodsInfoModelIsError = @"is_error";
+NSString *const kFBGoodsInfoModelMessage = @"message";
+NSString *const kFBGoodsInfoModelStatus = @"status";
+NSString *const kFBGoodsInfoModelSuccess = @"success";
 
 @interface FBGoodsInfoModel ()
 @end
@@ -22,26 +27,26 @@
 -(instancetype)initWithDictionary:(NSDictionary *)dictionary
 {
 	self = [super init];
-	if(![dictionary[@"current_user_id"] isKindOfClass:[NSNull class]]){
-		self.currentUserId = [dictionary[@"current_user_id"] integerValue];
+	if(![dictionary[kFBGoodsInfoModelCurrentUserId] isKindOfClass:[NSNull class]]){
+		self.currentUserId = [dictionary[kFBGoodsInfoModelCurrentUserId] integerValue];
 	}
 
-	if(![dictionary[@"data"] isKindOfClass:[NSNull class]]){
-		self.data = [[FBGoodsInfoModelData alloc] initWithDictionary:dictionary[@"data"]];
+	if(![dictionary[kFBGoodsInfoModelData] isKindOfClass:[NSNull class]]){
+		self.data = [[FBGoodsInfoModelData alloc] initWithDictionary:dictionary[kFBGoodsInfoModelData]];
 	}
 
-	if(![dictionary[@"is_error"] isKindOfClass:[NSNull class]]){
-		self.isError = [dictionary[@"is_error"] boolValue];
+	if(![dictionary[kFBGoodsInfoModelIsError] isKindOfClass:[NSNull class]]){
+		self.isError = [dictionary[kFBGoodsInfoModelIsError] boolValue];
 	}
 
-	if(![dictionary[@"message"] isKindOfClass:[NSNull class]]){
-		self.message = dictionary[@"message"];
+	if(![dictionary[kFBGoodsInfoModelMessage] isKindOfClass:[NSNull class]]){
+		self.message = dictionary[kFBGoodsInfoModelMessage];
 	}	
-	if(![dictionary[@"status"] isKindOfClass:[NSNull class]]){
-		self.status = dictionary[@"status"];
+	if(![dictionary[kFBGoodsInfoModelStatus] isKindOfClass:[NSNull class]]){
+		self.status = dictionary[kFBGoodsInfoModelStatus];
 	}	
-	if(![dictionary[@"success"] isKindOfClass:[NSNull class]]){
-		self.success = [dictionary[@"success"] boolValue];
+	if(![dictionary[kFBGoodsInfoModelSuccess] isKindOfClass:[NSNull class]]){
+		self.success = [dictionary[kFBGoodsInfoModelSuccess] boolValue];
 	}
 
 	return self;

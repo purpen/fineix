@@ -17,6 +17,10 @@
 @pro_strong UILabel             *   menuTitle;  //  导航标题
 @pro_strong UILabel             *   botLine;
 
-- (void)setCategoryData:(CategoryRow *)model;
+/**
+ * type
+ * 0:情境分类 ／ 1:好货分类
+ */
+- (void)setCategoryData:(CategoryRow *)model type:(NSInteger)type;
 
 @end

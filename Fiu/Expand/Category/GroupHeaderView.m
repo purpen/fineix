@@ -10,6 +10,7 @@
 #import "AllSceneViewController.h"
 #import "FiuPeopleListViewController.h"
 #import "FiuBrandListViewController.h"
+#import "THNProjectViewController.h"
 
 @implementation GroupHeaderView
 
@@ -76,9 +77,9 @@
     
     [self addSubview:self.moreBtn];
     [_moreBtn mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.size.mas_equalTo(CGSizeMake(40, 20));
+        make.size.mas_equalTo(CGSizeMake(200, 20));
         make.centerY.equalTo(_icon);
-        make.right.equalTo(self.mas_right).with.offset(0);
+        make.right.equalTo(self.mas_right).with.offset(-10);
     }];
 }
 
@@ -102,11 +103,7 @@
     if (!_subTitle) {
         _subTitle = [[UILabel alloc] init];
         _subTitle.textColor = [UIColor colorWithHexString:@"#666666"];
-        if (IS_iOS9) {
-            _subTitle.font = [UIFont fontWithName:@"PingFangSC-Light" size:11];
-        } else {
-            _subTitle.font = [UIFont systemFontOfSize:11];
-        }
+        _subTitle.font = [UIFont systemFontOfSize:11];
     }
     return _subTitle;
 }
@@ -115,31 +112,18 @@
     if (!_moreBtn) {
         _moreBtn = [[UIButton alloc] init];
         [_moreBtn setTitleColor:[UIColor colorWithHexString:@"#666666" alpha:1] forState:(UIControlStateNormal)];
-        if (IS_iOS9) {
-            _moreBtn.titleLabel.font = [UIFont fontWithName:@"PingFangSC-Light" size:12];
-        } else {
-            _moreBtn.titleLabel.font = [UIFont systemFontOfSize:12];
-        }
+        _moreBtn.titleLabel.font = [UIFont systemFontOfSize:12];
+        [_moreBtn setImageEdgeInsets:(UIEdgeInsetsMake(0, 180, 0, 0))];
         [_moreBtn addTarget:self action:@selector(moreFiuScene) forControlEvents:(UIControlEventTouchUpInside)];
     }
     return _moreBtn;
 }
 
 - (void)moreFiuScene {
-    if (self.openType == 0) {
-//        AllSceneViewController * allSceneVC = [[AllSceneViewController alloc] init];
-//        [self.nav pushViewController:allSceneVC animated:YES];
-        
-    } else if (self.openType == 1) {
-//        FiuPeopleListViewController * peopleListVC = [[FiuPeopleListViewController alloc] init];
-//        [self.nav pushViewController:peopleListVC animated:YES];
-        
-    } else if (self.openType == 2) {
-//        FiuBrandListViewController * brandListVC = [[FiuBrandListViewController alloc] init];
-//        [self.nav pushViewController:brandListVC animated:YES];
-        
+    if (self.openType == 1) {
+        THNProjectViewController *projectVC = [[THNProjectViewController alloc] init];
+        [self.nav pushViewController:projectVC animated:YES];
     }
-    
 }
 
 @end

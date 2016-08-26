@@ -18,8 +18,26 @@
     return self;
 }
 
-- (void)setCategoryData:(CategoryRow *)model {
-    [self.menuImg downloadImage:model.appCoverUrl place:[UIImage imageNamed:@""]];
+- (void)setCategoryData:(CategoryRow *)model type:(NSInteger)type {
+    if (type == 1) {
+        self.botLine.hidden = YES;
+        self.menuTitle.font = [UIFont systemFontOfSize:10];
+        [self.menuTitle mas_remakeConstraints:^(MASConstraintMaker *make) {
+            make.size.mas_equalTo(CGSizeMake(50, 15));
+            make.centerX.equalTo(self);
+            make.bottom.equalTo(self.mas_bottom).with.offset(-5);
+        }];
+        
+    } else if (type == 0) {
+        self.botLine.hidden = NO;
+        self.menuTitle.font = [UIFont systemFontOfSize:12];
+        [self.menuTitle mas_remakeConstraints:^(MASConstraintMaker *make) {
+            make.size.mas_equalTo(CGSizeMake(50, 15));
+            make.centerX.centerY.equalTo(self);
+        }];
+    }
+    
+    [self.menuImg downloadImage:model.backUrl place:[UIImage imageNamed:@""]];
     self.menuTitle.text = model.title;
 }
 
@@ -35,7 +53,7 @@
     [self addSubview:self.menuTitle];
     [_menuTitle mas_makeConstraints:^(MASConstraintMaker *make) {
         make.size.mas_equalTo(CGSizeMake(50, 15));
-        make.centerX.centerY.equalTo(_menuImg);
+        make.centerX.centerY.equalTo(self);
     }];
     
     [self addSubview:self.botLine];
@@ -52,7 +70,7 @@
         _menuImg = [[UIImageView alloc] init];
         _menuImg.layer.cornerRadius = 60/2;
         _menuImg.layer.masksToBounds = YES;
-        _menuImg.backgroundColor = [UIColor colorWithHexString:@"#F1F1F1"];
+        _menuImg.backgroundColor = [UIColor colorWithHexString:@"#000000"];
     }
     return _menuImg;
 }

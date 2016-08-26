@@ -230,6 +230,7 @@ static NSString *const URLUserAddGoods = @"/scene_product/add";
         
         [self.goodsTitleData addObject:title];
         [self.goodsPriceData addObject:price];
+        [self.goodsTypeData addObject:@"2"];
         
         NSMutableDictionary * tagDataDict = [NSMutableDictionary dictionary];
         [tagDataDict setObject:title forKey:@"title"];

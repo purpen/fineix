@@ -8,7 +8,7 @@
 
 //  控制器
 "TabBar_Creat" = "Fiu";
-"TabBar_Home" = "精选";
+"TabBar_Home" = "首页";
 "TabBar_Discover" = "发现";
 "TabBar_Mall" = "好货";
 "TabBar_MyCenter" = "个人";
@@ -43,6 +43,16 @@
 //  好货
 "mallSearch" = "搜索好货或品牌";
 "newGoods" = "最新推荐";
+
+//  商品详情
+"goodsInfoShow" = "详情介绍";
+"goBuyGoods" = "去购买";
+"likeTheGoods" = "收藏";
+"likeDoneGoods" = "已收藏";
+"goodsStern" = "产品亮点";
+"niceGoods" = "好货";
+"niceGoodsInfo" = "商品详情";
+"goodsComment" = "评价";
 
 //  搜索
 "searchScene" = "情境";

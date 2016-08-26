@@ -1,12 +1,48 @@
 //
 //	FBGoodsInfoModelRelationProduct.m
-// on 14/7/2016
-//	Copyright © 2016. All rights reserved.
-//	Model file Generated using JSONExport: https://github.com/Ahmed-Ali/JSONExport
+//	Model file generated using JSONExport: https://github.com/Ahmed-Ali/JSONExport
 
 
 
 #import "FBGoodsInfoModelRelationProduct.h"
+
+NSString *const kFBGoodsInfoModelRelationProductIdField = @"_id";
+NSString *const kFBGoodsInfoModelRelationProductAdvantage = @"advantage";
+NSString *const kFBGoodsInfoModelRelationProductAppAppointCount = @"app_appoint_count";
+NSString *const kFBGoodsInfoModelRelationProductAppSnatched = @"app_snatched";
+NSString *const kFBGoodsInfoModelRelationProductAppSnatchedCount = @"app_snatched_count";
+NSString *const kFBGoodsInfoModelRelationProductAppSnatchedEndTime = @"app_snatched_end_time";
+NSString *const kFBGoodsInfoModelRelationProductAppSnatchedLimitCount = @"app_snatched_limit_count";
+NSString *const kFBGoodsInfoModelRelationProductAppSnatchedPrice = @"app_snatched_price";
+NSString *const kFBGoodsInfoModelRelationProductAppSnatchedTime = @"app_snatched_time";
+NSString *const kFBGoodsInfoModelRelationProductAppSnatchedTotalCount = @"app_snatched_total_count";
+NSString *const kFBGoodsInfoModelRelationProductBrandId = @"brand_id";
+NSString *const kFBGoodsInfoModelRelationProductCategoryId = @"category_id";
+NSString *const kFBGoodsInfoModelRelationProductCategoryTags = @"category_tags";
+NSString *const kFBGoodsInfoModelRelationProductCommentCount = @"comment_count";
+NSString *const kFBGoodsInfoModelRelationProductCommentStar = @"comment_star";
+NSString *const kFBGoodsInfoModelRelationProductCoverId = @"cover_id";
+NSString *const kFBGoodsInfoModelRelationProductCoverUrl = @"cover_url";
+NSString *const kFBGoodsInfoModelRelationProductExtraInfo = @"extra_info";
+NSString *const kFBGoodsInfoModelRelationProductFavoriteCount = @"favorite_count";
+NSString *const kFBGoodsInfoModelRelationProductInventory = @"inventory";
+NSString *const kFBGoodsInfoModelRelationProductLoveCount = @"love_count";
+NSString *const kFBGoodsInfoModelRelationProductMarketPrice = @"market_price";
+NSString *const kFBGoodsInfoModelRelationProductSalePrice = @"sale_price";
+NSString *const kFBGoodsInfoModelRelationProductShortTitle = @"short_title";
+NSString *const kFBGoodsInfoModelRelationProductSnatched = @"snatched";
+NSString *const kFBGoodsInfoModelRelationProductSnatchedCount = @"snatched_count";
+NSString *const kFBGoodsInfoModelRelationProductSnatchedEndTime = @"snatched_end_time";
+NSString *const kFBGoodsInfoModelRelationProductSnatchedPrice = @"snatched_price";
+NSString *const kFBGoodsInfoModelRelationProductSnatchedTime = @"snatched_time";
+NSString *const kFBGoodsInfoModelRelationProductStage = @"stage";
+NSString *const kFBGoodsInfoModelRelationProductStick = @"stick";
+NSString *const kFBGoodsInfoModelRelationProductSummary = @"summary";
+NSString *const kFBGoodsInfoModelRelationProductTags = @"tags";
+NSString *const kFBGoodsInfoModelRelationProductTagsS = @"tags_s";
+NSString *const kFBGoodsInfoModelRelationProductTitle = @"title";
+NSString *const kFBGoodsInfoModelRelationProductViewCount = @"view_count";
+NSString *const kFBGoodsInfoModelRelationProductWapViewUrl = @"wap_view_url";
 
 @interface FBGoodsInfoModelRelationProduct ()
 @end
@@ -22,141 +58,141 @@
 -(instancetype)initWithDictionary:(NSDictionary *)dictionary
 {
 	self = [super init];
-	if(![dictionary[@"_id"] isKindOfClass:[NSNull class]]){
-		self.idField = [dictionary[@"_id"] integerValue];
+	if(![dictionary[kFBGoodsInfoModelRelationProductIdField] isKindOfClass:[NSNull class]]){
+		self.idField = [dictionary[kFBGoodsInfoModelRelationProductIdField] integerValue];
 	}
 
-	if(![dictionary[@"advantage"] isKindOfClass:[NSNull class]]){
-		self.advantage = dictionary[@"advantage"];
+	if(![dictionary[kFBGoodsInfoModelRelationProductAdvantage] isKindOfClass:[NSNull class]]){
+		self.advantage = dictionary[kFBGoodsInfoModelRelationProductAdvantage];
 	}	
-	if(![dictionary[@"app_appoint_count"] isKindOfClass:[NSNull class]]){
-		self.appAppointCount = [dictionary[@"app_appoint_count"] integerValue];
+	if(![dictionary[kFBGoodsInfoModelRelationProductAppAppointCount] isKindOfClass:[NSNull class]]){
+		self.appAppointCount = [dictionary[kFBGoodsInfoModelRelationProductAppAppointCount] integerValue];
 	}
 
-	if(![dictionary[@"app_snatched"] isKindOfClass:[NSNull class]]){
-		self.appSnatched = [dictionary[@"app_snatched"] integerValue];
+	if(![dictionary[kFBGoodsInfoModelRelationProductAppSnatched] isKindOfClass:[NSNull class]]){
+		self.appSnatched = [dictionary[kFBGoodsInfoModelRelationProductAppSnatched] integerValue];
 	}
 
-	if(![dictionary[@"app_snatched_count"] isKindOfClass:[NSNull class]]){
-		self.appSnatchedCount = [dictionary[@"app_snatched_count"] integerValue];
+	if(![dictionary[kFBGoodsInfoModelRelationProductAppSnatchedCount] isKindOfClass:[NSNull class]]){
+		self.appSnatchedCount = [dictionary[kFBGoodsInfoModelRelationProductAppSnatchedCount] integerValue];
 	}
 
-	if(![dictionary[@"app_snatched_end_time"] isKindOfClass:[NSNull class]]){
-		self.appSnatchedEndTime = [dictionary[@"app_snatched_end_time"] boolValue];
+	if(![dictionary[kFBGoodsInfoModelRelationProductAppSnatchedEndTime] isKindOfClass:[NSNull class]]){
+		self.appSnatchedEndTime = [dictionary[kFBGoodsInfoModelRelationProductAppSnatchedEndTime] boolValue];
 	}
 
-	if(![dictionary[@"app_snatched_limit_count"] isKindOfClass:[NSNull class]]){
-		self.appSnatchedLimitCount = [dictionary[@"app_snatched_limit_count"] integerValue];
+	if(![dictionary[kFBGoodsInfoModelRelationProductAppSnatchedLimitCount] isKindOfClass:[NSNull class]]){
+		self.appSnatchedLimitCount = [dictionary[kFBGoodsInfoModelRelationProductAppSnatchedLimitCount] integerValue];
 	}
 
-	if(![dictionary[@"app_snatched_price"] isKindOfClass:[NSNull class]]){
-		self.appSnatchedPrice = [dictionary[@"app_snatched_price"] integerValue];
+	if(![dictionary[kFBGoodsInfoModelRelationProductAppSnatchedPrice] isKindOfClass:[NSNull class]]){
+		self.appSnatchedPrice = [dictionary[kFBGoodsInfoModelRelationProductAppSnatchedPrice] integerValue];
 	}
 
-	if(![dictionary[@"app_snatched_time"] isKindOfClass:[NSNull class]]){
-		self.appSnatchedTime = [dictionary[@"app_snatched_time"] boolValue];
+	if(![dictionary[kFBGoodsInfoModelRelationProductAppSnatchedTime] isKindOfClass:[NSNull class]]){
+		self.appSnatchedTime = [dictionary[kFBGoodsInfoModelRelationProductAppSnatchedTime] boolValue];
 	}
 
-	if(![dictionary[@"app_snatched_total_count"] isKindOfClass:[NSNull class]]){
-		self.appSnatchedTotalCount = [dictionary[@"app_snatched_total_count"] integerValue];
+	if(![dictionary[kFBGoodsInfoModelRelationProductAppSnatchedTotalCount] isKindOfClass:[NSNull class]]){
+		self.appSnatchedTotalCount = [dictionary[kFBGoodsInfoModelRelationProductAppSnatchedTotalCount] integerValue];
 	}
 
-	if(![dictionary[@"brand_id"] isKindOfClass:[NSNull class]]){
-		self.brandId = dictionary[@"brand_id"];
+	if(![dictionary[kFBGoodsInfoModelRelationProductBrandId] isKindOfClass:[NSNull class]]){
+		self.brandId = dictionary[kFBGoodsInfoModelRelationProductBrandId];
 	}	
-	if(![dictionary[@"category_id"] isKindOfClass:[NSNull class]]){
-		self.categoryId = [dictionary[@"category_id"] integerValue];
+	if(![dictionary[kFBGoodsInfoModelRelationProductCategoryId] isKindOfClass:[NSNull class]]){
+		self.categoryId = [dictionary[kFBGoodsInfoModelRelationProductCategoryId] integerValue];
 	}
 
-	if(![dictionary[@"category_tags"] isKindOfClass:[NSNull class]]){
-		self.categoryTags = dictionary[@"category_tags"];
+	if(![dictionary[kFBGoodsInfoModelRelationProductCategoryTags] isKindOfClass:[NSNull class]]){
+		self.categoryTags = dictionary[kFBGoodsInfoModelRelationProductCategoryTags];
 	}	
-	if(![dictionary[@"comment_count"] isKindOfClass:[NSNull class]]){
-		self.commentCount = [dictionary[@"comment_count"] integerValue];
+	if(![dictionary[kFBGoodsInfoModelRelationProductCommentCount] isKindOfClass:[NSNull class]]){
+		self.commentCount = [dictionary[kFBGoodsInfoModelRelationProductCommentCount] integerValue];
 	}
 
-	if(![dictionary[@"comment_star"] isKindOfClass:[NSNull class]]){
-		self.commentStar = [dictionary[@"comment_star"] integerValue];
+	if(![dictionary[kFBGoodsInfoModelRelationProductCommentStar] isKindOfClass:[NSNull class]]){
+		self.commentStar = [dictionary[kFBGoodsInfoModelRelationProductCommentStar] integerValue];
 	}
 
-	if(![dictionary[@"cover_id"] isKindOfClass:[NSNull class]]){
-		self.coverId = dictionary[@"cover_id"];
+	if(![dictionary[kFBGoodsInfoModelRelationProductCoverId] isKindOfClass:[NSNull class]]){
+		self.coverId = dictionary[kFBGoodsInfoModelRelationProductCoverId];
 	}	
-	if(![dictionary[@"cover_url"] isKindOfClass:[NSNull class]]){
-		self.coverUrl = dictionary[@"cover_url"];
+	if(![dictionary[kFBGoodsInfoModelRelationProductCoverUrl] isKindOfClass:[NSNull class]]){
+		self.coverUrl = dictionary[kFBGoodsInfoModelRelationProductCoverUrl];
 	}	
-	if(![dictionary[@"extra_info"] isKindOfClass:[NSNull class]]){
-		self.extraInfo = dictionary[@"extra_info"];
+	if(![dictionary[kFBGoodsInfoModelRelationProductExtraInfo] isKindOfClass:[NSNull class]]){
+		self.extraInfo = dictionary[kFBGoodsInfoModelRelationProductExtraInfo];
 	}	
-	if(![dictionary[@"favorite_count"] isKindOfClass:[NSNull class]]){
-		self.favoriteCount = [dictionary[@"favorite_count"] integerValue];
+	if(![dictionary[kFBGoodsInfoModelRelationProductFavoriteCount] isKindOfClass:[NSNull class]]){
+		self.favoriteCount = [dictionary[kFBGoodsInfoModelRelationProductFavoriteCount] integerValue];
 	}
 
-	if(![dictionary[@"inventory"] isKindOfClass:[NSNull class]]){
-		self.inventory = [dictionary[@"inventory"] integerValue];
+	if(![dictionary[kFBGoodsInfoModelRelationProductInventory] isKindOfClass:[NSNull class]]){
+		self.inventory = [dictionary[kFBGoodsInfoModelRelationProductInventory] integerValue];
 	}
 
-	if(![dictionary[@"love_count"] isKindOfClass:[NSNull class]]){
-		self.loveCount = [dictionary[@"love_count"] integerValue];
+	if(![dictionary[kFBGoodsInfoModelRelationProductLoveCount] isKindOfClass:[NSNull class]]){
+		self.loveCount = [dictionary[kFBGoodsInfoModelRelationProductLoveCount] integerValue];
 	}
 
-	if(![dictionary[@"market_price"] isKindOfClass:[NSNull class]]){
-		self.marketPrice = [dictionary[@"market_price"] integerValue];
+	if(![dictionary[kFBGoodsInfoModelRelationProductMarketPrice] isKindOfClass:[NSNull class]]){
+		self.marketPrice = [dictionary[kFBGoodsInfoModelRelationProductMarketPrice] integerValue];
 	}
 
-	if(![dictionary[@"sale_price"] isKindOfClass:[NSNull class]]){
-		self.salePrice = [dictionary[@"sale_price"] integerValue];
+	if(![dictionary[kFBGoodsInfoModelRelationProductSalePrice] isKindOfClass:[NSNull class]]){
+		self.salePrice = [dictionary[kFBGoodsInfoModelRelationProductSalePrice] integerValue];
 	}
 
-	if(![dictionary[@"short_title"] isKindOfClass:[NSNull class]]){
-		self.shortTitle = dictionary[@"short_title"];
+	if(![dictionary[kFBGoodsInfoModelRelationProductShortTitle] isKindOfClass:[NSNull class]]){
+		self.shortTitle = dictionary[kFBGoodsInfoModelRelationProductShortTitle];
 	}	
-	if(![dictionary[@"snatched"] isKindOfClass:[NSNull class]]){
-		self.snatched = [dictionary[@"snatched"] integerValue];
+	if(![dictionary[kFBGoodsInfoModelRelationProductSnatched] isKindOfClass:[NSNull class]]){
+		self.snatched = [dictionary[kFBGoodsInfoModelRelationProductSnatched] integerValue];
 	}
 
-	if(![dictionary[@"snatched_count"] isKindOfClass:[NSNull class]]){
-		self.snatchedCount = [dictionary[@"snatched_count"] integerValue];
+	if(![dictionary[kFBGoodsInfoModelRelationProductSnatchedCount] isKindOfClass:[NSNull class]]){
+		self.snatchedCount = [dictionary[kFBGoodsInfoModelRelationProductSnatchedCount] integerValue];
 	}
 
-	if(![dictionary[@"snatched_end_time"] isKindOfClass:[NSNull class]]){
-		self.snatchedEndTime = [dictionary[@"snatched_end_time"] boolValue];
+	if(![dictionary[kFBGoodsInfoModelRelationProductSnatchedEndTime] isKindOfClass:[NSNull class]]){
+		self.snatchedEndTime = [dictionary[kFBGoodsInfoModelRelationProductSnatchedEndTime] boolValue];
 	}
 
-	if(![dictionary[@"snatched_price"] isKindOfClass:[NSNull class]]){
-		self.snatchedPrice = [dictionary[@"snatched_price"] integerValue];
+	if(![dictionary[kFBGoodsInfoModelRelationProductSnatchedPrice] isKindOfClass:[NSNull class]]){
+		self.snatchedPrice = [dictionary[kFBGoodsInfoModelRelationProductSnatchedPrice] integerValue];
 	}
 
-	if(![dictionary[@"snatched_time"] isKindOfClass:[NSNull class]]){
-		self.snatchedTime = [dictionary[@"snatched_time"] boolValue];
+	if(![dictionary[kFBGoodsInfoModelRelationProductSnatchedTime] isKindOfClass:[NSNull class]]){
+		self.snatchedTime = [dictionary[kFBGoodsInfoModelRelationProductSnatchedTime] boolValue];
 	}
 
-	if(![dictionary[@"stage"] isKindOfClass:[NSNull class]]){
-		self.stage = [dictionary[@"stage"] integerValue];
+	if(![dictionary[kFBGoodsInfoModelRelationProductStage] isKindOfClass:[NSNull class]]){
+		self.stage = [dictionary[kFBGoodsInfoModelRelationProductStage] integerValue];
 	}
 
-	if(![dictionary[@"stick"] isKindOfClass:[NSNull class]]){
-		self.stick = [dictionary[@"stick"] integerValue];
+	if(![dictionary[kFBGoodsInfoModelRelationProductStick] isKindOfClass:[NSNull class]]){
+		self.stick = [dictionary[kFBGoodsInfoModelRelationProductStick] integerValue];
 	}
 
-	if(![dictionary[@"summary"] isKindOfClass:[NSNull class]]){
-		self.summary = dictionary[@"summary"];
+	if(![dictionary[kFBGoodsInfoModelRelationProductSummary] isKindOfClass:[NSNull class]]){
+		self.summary = dictionary[kFBGoodsInfoModelRelationProductSummary];
 	}	
-	if(![dictionary[@"tags"] isKindOfClass:[NSNull class]]){
-		self.tags = dictionary[@"tags"];
+	if(![dictionary[kFBGoodsInfoModelRelationProductTags] isKindOfClass:[NSNull class]]){
+		self.tags = dictionary[kFBGoodsInfoModelRelationProductTags];
 	}	
-	if(![dictionary[@"tags_s"] isKindOfClass:[NSNull class]]){
-		self.tagsS = dictionary[@"tags_s"];
+	if(![dictionary[kFBGoodsInfoModelRelationProductTagsS] isKindOfClass:[NSNull class]]){
+		self.tagsS = dictionary[kFBGoodsInfoModelRelationProductTagsS];
 	}	
-	if(![dictionary[@"title"] isKindOfClass:[NSNull class]]){
-		self.title = dictionary[@"title"];
+	if(![dictionary[kFBGoodsInfoModelRelationProductTitle] isKindOfClass:[NSNull class]]){
+		self.title = dictionary[kFBGoodsInfoModelRelationProductTitle];
 	}	
-	if(![dictionary[@"view_count"] isKindOfClass:[NSNull class]]){
-		self.viewCount = [dictionary[@"view_count"] integerValue];
+	if(![dictionary[kFBGoodsInfoModelRelationProductViewCount] isKindOfClass:[NSNull class]]){
+		self.viewCount = [dictionary[kFBGoodsInfoModelRelationProductViewCount] integerValue];
 	}
 
-	if(![dictionary[@"wap_view_url"] isKindOfClass:[NSNull class]]){
-		self.wapViewUrl = dictionary[@"wap_view_url"];
+	if(![dictionary[kFBGoodsInfoModelRelationProductWapViewUrl] isKindOfClass:[NSNull class]]){
+		self.wapViewUrl = dictionary[kFBGoodsInfoModelRelationProductWapViewUrl];
 	}	
 	return self;
 }

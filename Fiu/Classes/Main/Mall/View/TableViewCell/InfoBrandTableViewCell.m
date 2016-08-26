@@ -13,15 +13,14 @@
 - (instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier {
     self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
     if (self) {
-        
         self.selectionStyle = UITableViewCellSelectionStyleNone;
+        self.backgroundColor = [UIColor whiteColor];
         [self setCellUI];
-        
     }
     return self;
 }
 
-- (void)setGoodsBrandData:(GoodsInfoData *)model {
+- (void)setGoodsBrandData:(FBGoodsInfoModelData *)model {
     [self.brandImg downloadImage:model.brand.coverUrl place:[UIImage imageNamed:@""]];
     self.brandTitle.text = model.brand.title;
 }
@@ -31,14 +30,14 @@
     [self addSubview:self.brandImg];
     [_brandImg mas_makeConstraints:^(MASConstraintMaker *make) {
         make.size.mas_equalTo(CGSizeMake(50, 50));
-        make.top.equalTo(self.mas_top).with.offset(5);
+        make.centerY.equalTo(self);
         make.left.equalTo(self.mas_left).with.offset(15);
     }];
     
     [self addSubview:self.brandTitle];
     [_brandTitle mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.size.mas_equalTo(CGSizeMake(200, 15));
-        make.centerY.equalTo(_brandImg);
+        make.size.mas_equalTo(CGSizeMake(200, 17));
+        make.centerY.equalTo(self);
         make.left.equalTo(_brandImg.mas_right).with.offset(10);
     }];
     
@@ -48,10 +47,6 @@
         make.centerY.equalTo(self);
         make.right.equalTo(self.mas_right).with.offset(-15);
     }];
-    
-    UILabel * botLine = [[UILabel alloc] initWithFrame:CGRectMake(0, 60, SCREEN_WIDTH, 5)];
-    botLine.backgroundColor = [UIColor colorWithHexString:cellBgColor];
-    [self addSubview:botLine];
 }
 
 #pragma mark - LOGO
@@ -72,11 +67,7 @@
     if (!_brandTitle) {
         _brandTitle = [[UILabel alloc] init];
         _brandTitle.textColor = [UIColor colorWithHexString:titleColor];
-        if (IS_iOS9) {
-            _brandTitle.font = [UIFont fontWithName:@"PingFangSC-Light" size:Font_GoodsTitle];
-        } else {
-            _brandTitle.font = [UIFont systemFontOfSize:Font_GoodsTitle];
-        }
+        _brandTitle.font = [UIFont systemFontOfSize:17];
     }
     return _brandTitle;
 }

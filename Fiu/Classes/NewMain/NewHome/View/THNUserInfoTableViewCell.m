@@ -7,6 +7,11 @@
 //
 
 #import "THNUserInfoTableViewCell.h"
+#import "THNHotUserCollectionViewCell.h"
+#import "HotUserListUser.h"
+#import "HomePageViewController.h"
+
+static NSString *const hotUserCellId = @"HotUserCellId";
 
 @interface THNUserInfoTableViewCell () {
     NSString *_userId;
@@ -21,6 +26,7 @@
     if (self) {
         self.selectionStyle = UITableViewCellSelectionStyleNone;
         self.backgroundColor = [UIColor colorWithHexString:BLACK_COLOR];
+        self.clipsToBounds = YES;
         [self setCellUI];
     }
     return self;
@@ -65,53 +71,136 @@
     return retSize;
 }
 
+- (void)thn_setHotUserListData:(NSMutableArray *)hotUserMarr {
+    [self.hotUserIdMarr removeAllObjects];
+    self.hotUserMarr = hotUserMarr;
+    for (HotUserListUser *model in hotUserMarr) {
+        [self.hotUserIdMarr addObject:[NSString stringWithFormat:@"%zi", model.idField]];
+    }
+    [self.hotUserList reloadData];
+}
+
+- (void)thn_isShowHotUserList:(BOOL)show {
+    if (show) {
+        [self addSubview:self.hotUserList];
+        [_hotUserList mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.size.mas_equalTo(CGSizeMake(SCREEN_WIDTH, 230));
+            make.left.equalTo(self.mas_left).with.offset(0);
+            make.top.equalTo(self.mas_top).with.offset(0);
+        }];
+    }
+}
+
 #pragma mark - setUI
 - (void)setCellUI {
-    [self addSubview:self.head];
-    [_head mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.size.mas_equalTo(CGSizeMake(30, 30));
-        make.left.equalTo(self.mas_left).with.offset(15);
-        make.centerY.equalTo(self);
-    }];
-    
-    [self addSubview:self.certificate];
-    [_certificate mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.size.mas_equalTo(CGSizeMake(10, 10));
-        make.right.equalTo(_head.mas_right).with.offset(2);
-        make.bottom.equalTo(_head.mas_bottom).with.offset(0);
-    }];
-    
-    [self addSubview:self.name];
-    [_name mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.size.mas_equalTo(CGSizeMake(200, 15));
-        make.top.equalTo(_head.mas_top).with.offset(0);
-        make.left.equalTo(_head.mas_right).with.offset(10);
-    }];
-    
-    [self addSubview:self.follow];
-    [_follow mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.size.mas_equalTo(CGSizeMake(60, 30));
-        make.right.equalTo(self.mas_right).with.offset(-15);
-        make.centerY.equalTo(self);
-    }];
-    
-    [self addSubview:self.time];
-    [_time mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.size.mas_equalTo(CGSizeMake(80, 12));
-        make.left.equalTo(_name.mas_left).with.offset(0);
-        make.bottom.equalTo(_head.mas_bottom).with.offset(0);
-    }];
-    
-    [self addSubview:self.address];
-    [_address mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.height.equalTo(@12);
-        make.left.equalTo(_time.mas_right).with.offset(5);
-        make.bottom.equalTo(_time.mas_bottom).with.offset(0);
-        make.right.equalTo(self.mas_right).with.offset(-90);
+    [self addSubview:self.bottomView];
+    [_bottomView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.size.mas_equalTo(CGSizeMake(SCREEN_WIDTH, 50));
+        make.left.equalTo(self.mas_left).with.offset(0);
+        make.bottom.equalTo(self.mas_bottom).with.offset(0);
     }];
 }
 
 #pragma mark - init
+- (UICollectionView *)hotUserList {
+    if (!_hotUserList) {
+        UICollectionViewFlowLayout *flowLayout = [[UICollectionViewFlowLayout alloc] init];
+        flowLayout.itemSize = CGSizeMake(140, 190);
+        flowLayout.sectionInset = UIEdgeInsetsMake(15, 10, 15, 10);
+        flowLayout.minimumLineSpacing = 5.0f;
+        flowLayout.scrollDirection = UICollectionViewScrollDirectionHorizontal;
+        
+        _hotUserList = [[UICollectionView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 230) collectionViewLayout:flowLayout];
+        _hotUserList.delegate = self;
+        _hotUserList.dataSource = self;
+        _hotUserList.backgroundColor = [UIColor colorWithHexString:@"#444444"];
+        _hotUserList.showsHorizontalScrollIndicator = NO;
+        [_hotUserList registerClass:[THNHotUserCollectionViewCell class] forCellWithReuseIdentifier:hotUserCellId];
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(closeTheUserInfo:) name:@"closeTheUserInfo" object:nil];
+    }
+    return _hotUserList;
+}
+
+- (void)closeTheUserInfo:(NSNotification *)userId {
+    NSUInteger index = [self.hotUserIdMarr indexOfObject:[userId object]];
+    [self.hotUserMarr removeObjectAtIndex:index];
+    [self.hotUserIdMarr removeObjectAtIndex:index];
+//    NSIndexPath *indexPath = [NSIndexPath indexPathForItem:index inSection:0];
+//    [self.hotUserList deleteItemsAtIndexPaths:@[indexPath]];
+
+    if (self.hotUserMarr.count) {
+        [self.hotUserList reloadData];
+    }
+    
+    if (self.hotUserMarr.count == 0) {
+        [[NSNotificationCenter defaultCenter] postNotificationName:@"deleteHotUserList" object:nil];
+    }
+}
+
+- (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
+    return self.hotUserMarr.count;
+}
+
+- (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
+    THNHotUserCollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:hotUserCellId
+                                                                                   forIndexPath:indexPath];
+    if (self.hotUserMarr.count) {
+        [cell setHotUserListData:self.hotUserMarr[indexPath.row]];
+    }
+    return cell;
+}
+
+- (UIView *)bottomView {
+    if (!_bottomView) {
+        _bottomView = [[UIView alloc] init];
+        _bottomView.backgroundColor = [UIColor colorWithHexString:BLACK_COLOR];
+        
+        [_bottomView addSubview:self.head];
+        [_head mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.size.mas_equalTo(CGSizeMake(30, 30));
+            make.left.equalTo(_bottomView.mas_left).with.offset(15);
+            make.centerY.equalTo(_bottomView);
+        }];
+        
+        [_bottomView addSubview:self.certificate];
+        [_certificate mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.size.mas_equalTo(CGSizeMake(10, 10));
+            make.right.equalTo(_head.mas_right).with.offset(2);
+            make.bottom.equalTo(_head.mas_bottom).with.offset(0);
+        }];
+        
+        [_bottomView addSubview:self.name];
+        [_name mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.size.mas_equalTo(CGSizeMake(200, 15));
+            make.top.equalTo(_head.mas_top).with.offset(0);
+            make.left.equalTo(_head.mas_right).with.offset(10);
+        }];
+        
+        [_bottomView addSubview:self.follow];
+        [_follow mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.size.mas_equalTo(CGSizeMake(60, 30));
+            make.right.equalTo(_bottomView.mas_right).with.offset(-15);
+            make.centerY.equalTo(_bottomView);
+        }];
+        
+        [_bottomView addSubview:self.time];
+        [_time mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.size.mas_equalTo(CGSizeMake(80, 12));
+            make.left.equalTo(_name.mas_left).with.offset(0);
+            make.bottom.equalTo(_head.mas_bottom).with.offset(0);
+        }];
+        
+        [_bottomView addSubview:self.address];
+        [_address mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.height.equalTo(@12);
+            make.left.equalTo(_time.mas_right).with.offset(5);
+            make.bottom.equalTo(_time.mas_bottom).with.offset(0);
+            make.right.equalTo(_bottomView.mas_right).with.offset(-90);
+        }];
+    }
+    return _bottomView;
+}
+
 - (UIButton *)head {
     if (!_head) {
         _head = [[UIButton alloc] init];
@@ -123,7 +212,10 @@
 }
 
 - (void)headClick:(UIButton *)button {
-    [SVProgressHUD showSuccessWithStatus:@"打开个人中心"];
+    HomePageViewController *userHomeVC = [[HomePageViewController alloc] init];
+    userHomeVC.userId = _userId;
+    userHomeVC.type = @2;
+    [self.nav pushViewController:userHomeVC animated:YES];
 }
 
 - (UIImageView *)certificate {
@@ -213,7 +305,24 @@
 }
 
 - (void)addressClick:(UIButton *)button {
-    [SVProgressHUD showSuccessWithStatus:@"打开情景地图"];
+//    [SVProgressHUD showSuccessWithStatus:@"打开情景地图"];
 }
 
+- (NSMutableArray *)hotUserMarr {
+    if (!_hotUserMarr) {
+        _hotUserMarr = [NSMutableArray array];
+    }
+    return _hotUserMarr;
+}
+
+- (NSMutableArray *)hotUserIdMarr {
+    if (!_hotUserIdMarr) {
+        _hotUserIdMarr = [NSMutableArray array];
+    }
+    return _hotUserIdMarr;
+}
+
+- (void)dealloc {
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:@"cancelFollowTheUser" object:nil];
+}
 @end

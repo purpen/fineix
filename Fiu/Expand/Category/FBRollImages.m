@@ -24,7 +24,7 @@
         
         [self addSubview:self.rollImageView];
         [_rollImageView mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.size.mas_equalTo(CGSizeMake(SCREEN_WIDTH, Banner_height));
+            make.size.mas_equalTo(CGSizeMake(SCREEN_WIDTH, SCREEN_WIDTH *0.56));
             make.top.equalTo(self.mas_top).with.offset(0);
             make.left.equalTo(self.mas_left).with.offset(0);
         }];

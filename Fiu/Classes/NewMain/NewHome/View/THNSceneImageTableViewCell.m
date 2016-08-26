@@ -140,7 +140,6 @@
     GoodsInfoViewController * goodsInfoVC = [[GoodsInfoViewController alloc] init];
     goodsInfoVC.goodsID = self.goodsIds[index];
     [self.nav pushViewController:goodsInfoVC animated:YES];
-    
 }
 
 #pragma mark - setUI

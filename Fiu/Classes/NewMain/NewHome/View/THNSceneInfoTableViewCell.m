@@ -39,7 +39,7 @@ static NSString *const sceneTagsCellId = @"SceneTagsCellId";
     } else {
         self.defaultCellHigh = 70;
     }
-    self.cellHigh = size.height*1.5;
+    self.cellHigh = size.height*1.3;
 }
 
 //  检索描述内容中的标签
@@ -66,6 +66,8 @@ static NSString *const sceneTagsCellId = @"SceneTagsCellId";
     NSString *tagUrl = [[url absoluteString] stringByReplacingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
     NSString *tag = [tagUrl substringFromIndex:14];
     SearchViewController * searchVC = [[SearchViewController alloc] init];
+    searchVC.index = 0;
+    searchVC.keyword = tag;
     [self.nav pushViewController:searchVC animated:YES];
 }
 

@@ -13,10 +13,9 @@
 - (instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier {
     self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
     if (self) {
-        
         self.selectionStyle = UITableViewCellSelectionStyleNone;
+        self.backgroundColor = [UIColor colorWithHexString:@"#F8F8F8"];
         [self setCellUI];
-        
     }
     return self;
 }
@@ -30,12 +29,17 @@
 - (void)getContentCellHeight:(NSString *)content {
     self.desContent.text = content;
     CGSize size = [self.desContent boundingRectWithSize:CGSizeMake(SCREEN_WIDTH - 30, 0)];
-    self.cellHeight = size.height + 68;
+    self.cellHeight = size.height + 40;
 }
 
 #pragma mark -
 - (void)setCellUI {
     [self addSubview:self.headerTitle];
+    [_headerTitle mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.size.mas_equalTo(CGSizeMake(SCREEN_WIDTH - 40, 30));
+        make.top.equalTo(self.mas_top).with.offset(0);
+        make.left.equalTo(self.mas_left).with.offset(15);
+    }];
     
     [self addSubview:self.desContent];
     [_desContent mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -43,14 +47,7 @@
         make.top.equalTo(self.headerTitle.mas_bottom).with.offset(0);
         make.left.equalTo(self.headerTitle.mas_left).with.offset(0);
     }];
-    
-    UILabel * botLine = [[UILabel alloc] init];
-    botLine.backgroundColor = [UIColor colorWithHexString:cellBgColor];
-    [self addSubview:botLine];
-    [botLine mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.size.mas_equalTo(CGSizeMake(SCREEN_WIDTH, 5));
-        make.left.bottom.equalTo(self).with.offset(0);
-    }];
+
 }
 
 //  内容文字的样式
@@ -72,14 +69,10 @@
 #pragma mark - 标题
 - (UILabel *)headerTitle {
     if (!_headerTitle) {
-        _headerTitle = [[UILabel alloc] initWithFrame:CGRectMake(15, 5, 200, 34)];
-        _headerTitle.text = NSLocalizedString(@"goodsDes", nil);
-        _headerTitle.textColor = [UIColor colorWithHexString:@"#333333"];
-        if (IS_iOS9) {
-            _headerTitle.font = [UIFont fontWithName:@"PingFangSC-Light" size:14];
-        } else {
-            _headerTitle.font = [UIFont systemFontOfSize:14];
-        }
+        _headerTitle = [[UILabel alloc] init];
+        _headerTitle.text = NSLocalizedString(@"goodsStern", nil);
+        _headerTitle.textColor = [UIColor colorWithHexString:@"#222222"];
+        _headerTitle.font = [UIFont systemFontOfSize:14];
     }
     return _headerTitle;
 }
@@ -88,12 +81,8 @@
 - (UILabel *)desContent {
     if (!_desContent) {
         _desContent = [[UILabel alloc] init];
-        if (IS_iOS9) {
-            _desContent.font = [UIFont fontWithName:@"PingFangSC-Light" size:12];
-        } else {
-            _desContent.font = [UIFont systemFontOfSize:12];
-        }
-        _desContent.textColor = [UIColor colorWithHexString:@"#555555"];
+        _desContent.font = [UIFont systemFontOfSize:12];
+        _desContent.textColor = [UIColor colorWithHexString:@"#222222"];
         _desContent.numberOfLines = 0;
     }
     return _desContent;
