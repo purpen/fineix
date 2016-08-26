@@ -63,11 +63,11 @@
                         </constraints>
                     </view>
                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="project_see" translatesAutoresizingMaskIntoConstraints="NO" id="h9t-f8-ada">
-                        <rect key="frame" x="183" y="143" width="13" height="9"/>
+                        <rect key="frame" x="168" y="142" width="13" height="9"/>
                     </imageView>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8dN-pC-ZWT">
-                        <rect key="frame" x="201" y="139" width="33" height="16"/>
-                        <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                        <rect key="frame" x="186" y="139" width="29" height="14"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="11"/>
                         <color key="textColor" red="0.8784313725490196" green="0.89411764705882346" blue="0.90196078431372551" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
@@ -76,7 +76,7 @@
             </view>
             <constraints>
                 <constraint firstAttribute="bottom" secondItem="mHl-Wg-Q6U" secondAttribute="bottom" id="A04-vv-78c"/>
-                <constraint firstItem="h9t-f8-ada" firstAttribute="centerX" secondItem="gTV-IL-0wX" secondAttribute="centerX" constant="-15" id="Jeo-RJ-YmW"/>
+                <constraint firstItem="h9t-f8-ada" firstAttribute="centerX" secondItem="gTV-IL-0wX" secondAttribute="centerX" constant="-30" id="Jeo-RJ-YmW"/>
                 <constraint firstItem="mHl-Wg-Q6U" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" id="KWC-59-JKM"/>
                 <constraint firstItem="8dN-pC-ZWT" firstAttribute="leading" secondItem="h9t-f8-ada" secondAttribute="trailing" constant="5" id="MRJ-3u-sxX"/>
                 <constraint firstAttribute="trailing" secondItem="mHl-Wg-Q6U" secondAttribute="trailing" id="NzO-yn-UPp"/>

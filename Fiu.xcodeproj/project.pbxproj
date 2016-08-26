@@ -22,10 +22,6 @@
 		1F27AE921CE06C70005A434B /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1F27AE911CE06C70005A434B /* CFNetwork.framework */; };
 		1F27AE941CE06C7E005A434B /* CoreMotion.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1F27AE931CE06C7E005A434B /* CoreMotion.framework */; };
 		1F27AE9C1CE0EACE005A434B /* mapapi.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 1F27AE9B1CE0EACE005A434B /* mapapi.bundle */; };
-		1F296DCC1D6A8D80001FC6A2 /* THNAttendSenceViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F296DCA1D6A8D80001FC6A2 /* THNAttendSenceViewController.m */; };
-		1F296DCD1D6A8D80001FC6A2 /* THNAttendSenceViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1F296DCB1D6A8D80001FC6A2 /* THNAttendSenceViewController.xib */; };
-		1F296DD11D6A98FD001FC6A2 /* THNActiveResultViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F296DCF1D6A98FD001FC6A2 /* THNActiveResultViewController.m */; };
-		1F296DD21D6A98FD001FC6A2 /* THNActiveResultViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1F296DD01D6A98FD001FC6A2 /* THNActiveResultViewController.xib */; };
 		1F296DD61D6AA876001FC6A2 /* THNXinPinDetalViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F296DD41D6AA876001FC6A2 /* THNXinPinDetalViewController.m */; };
 		1F296DD71D6AA876001FC6A2 /* THNXinPinDetalViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1F296DD51D6AA876001FC6A2 /* THNXinPinDetalViewController.xib */; };
 		1F296DDA1D6ADC36001FC6A2 /* THNProductModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F296DD91D6ADC36001FC6A2 /* THNProductModel.m */; };
@@ -432,11 +428,7 @@
 		1FA53F501D69C88E00EBE59B /* THNProjectGoodsModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 1FA53F4F1D69C88E00EBE59B /* THNProjectGoodsModel.m */; };
 		1FA53F541D69D11400EBE59B /* THNArticleDetalViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1FA53F521D69D11400EBE59B /* THNArticleDetalViewController.m */; };
 		1FA53F551D69D11400EBE59B /* THNArticleDetalViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1FA53F531D69D11400EBE59B /* THNArticleDetalViewController.xib */; };
-		1FA53F591D69FA4F00EBE59B /* THNActiveDetalViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1FA53F571D69FA4F00EBE59B /* THNActiveDetalViewController.m */; };
-		1FA53F5A1D69FA4F00EBE59B /* THNActiveDetalViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1FA53F581D69FA4F00EBE59B /* THNActiveDetalViewController.xib */; };
 		1FA53F5D1D6A034900EBE59B /* THNArticleDetalModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 1FA53F5C1D6A034900EBE59B /* THNArticleDetalModel.m */; };
-		1FA53F611D6A166A00EBE59B /* THNActiveRuleViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1FA53F5F1D6A166A00EBE59B /* THNActiveRuleViewController.m */; };
-		1FA53F621D6A166A00EBE59B /* THNActiveRuleViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1FA53F601D6A166A00EBE59B /* THNActiveRuleViewController.xib */; };
 		1FBF2CCD1D6BFDE2003C1643 /* THNXinPinCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 1FBF2CCB1D6BFDE2003C1643 /* THNXinPinCollectionViewCell.m */; };
 		1FBF2CCE1D6BFDE2003C1643 /* THNXinPinCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1FBF2CCC1D6BFDE2003C1643 /* THNXinPinCollectionViewCell.xib */; };
 		1FBF2CD11D6C42D7003C1643 /* THNCuXiaoProductModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 1FBF2CD01D6C42D7003C1643 /* THNCuXiaoProductModel.m */; };
@@ -446,6 +438,11 @@
 		1FBF2CE01D6D94AD003C1643 /* THNHomeSenceCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1FBF2CDE1D6D94AD003C1643 /* THNHomeSenceCollectionViewCell.xib */; };
 		1FBF2CE31D6D99E6003C1643 /* SceneCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 1FBF2CE21D6D99E6003C1643 /* SceneCollectionViewCell.m */; };
 		1FBF2CE51D6EDB93003C1643 /* My.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1FBF2CE41D6EDB93003C1643 /* My.storyboard */; };
+		1FBF2CE91D700590003C1643 /* THNActiveDetalTwoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1FBF2CE71D700590003C1643 /* THNActiveDetalTwoViewController.m */; };
+		1FBF2CEA1D700590003C1643 /* THNActiveDetalTwoViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1FBF2CE81D700590003C1643 /* THNActiveDetalTwoViewController.xib */; };
+		1FBF2CEE1D701EDE003C1643 /* THNActiveRuleCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 1FBF2CEC1D701EDE003C1643 /* THNActiveRuleCollectionViewCell.m */; };
+		1FBF2CEF1D701EDE003C1643 /* THNActiveRuleCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1FBF2CED1D701EDE003C1643 /* THNActiveRuleCollectionViewCell.xib */; };
+		1FBF2CF21D70229E003C1643 /* THNActiveRuleModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 1FBF2CF11D70229E003C1643 /* THNActiveRuleModel.m */; };
 		1FC6782E1CDB33ED00535162 /* UIView+TYAlertView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1FC6782C1CDB33ED00535162 /* UIView+TYAlertView.m */; };
 		1FCDCC7A1D0515F700C92E78 /* ScenarioNonView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1FCDCC791D0515F700C92E78 /* ScenarioNonView.m */; };
 		1FCDCC7D1D0525A300C92E78 /* FocusNonView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1FCDCC7C1D0525A300C92E78 /* FocusNonView.m */; };
@@ -707,12 +704,6 @@
 		1F27AE911CE06C70005A434B /* CFNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = System/Library/Frameworks/CFNetwork.framework; sourceTree = SDKROOT; };
 		1F27AE931CE06C7E005A434B /* CoreMotion.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMotion.framework; path = System/Library/Frameworks/CoreMotion.framework; sourceTree = SDKROOT; };
 		1F27AE9B1CE0EACE005A434B /* mapapi.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; name = mapapi.bundle; path = Vendors/BaiduMapSDK/BaiduMapAPI_Map.framework/Resources/mapapi.bundle; sourceTree = "<group>"; };
-		1F296DC91D6A8D80001FC6A2 /* THNAttendSenceViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THNAttendSenceViewController.h; sourceTree = "<group>"; };
-		1F296DCA1D6A8D80001FC6A2 /* THNAttendSenceViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THNAttendSenceViewController.m; sourceTree = "<group>"; };
-		1F296DCB1D6A8D80001FC6A2 /* THNAttendSenceViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = THNAttendSenceViewController.xib; sourceTree = "<group>"; };
-		1F296DCE1D6A98FD001FC6A2 /* THNActiveResultViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THNActiveResultViewController.h; sourceTree = "<group>"; };
-		1F296DCF1D6A98FD001FC6A2 /* THNActiveResultViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THNActiveResultViewController.m; sourceTree = "<group>"; };
-		1F296DD01D6A98FD001FC6A2 /* THNActiveResultViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = THNActiveResultViewController.xib; sourceTree = "<group>"; };
 		1F296DD31D6AA876001FC6A2 /* THNXinPinDetalViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THNXinPinDetalViewController.h; sourceTree = "<group>"; };
 		1F296DD41D6AA876001FC6A2 /* THNXinPinDetalViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THNXinPinDetalViewController.m; sourceTree = "<group>"; };
 		1F296DD51D6AA876001FC6A2 /* THNXinPinDetalViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = THNXinPinDetalViewController.xib; sourceTree = "<group>"; };
@@ -1456,14 +1447,8 @@
 		1FA53F511D69D11400EBE59B /* THNArticleDetalViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THNArticleDetalViewController.h; sourceTree = "<group>"; };
 		1FA53F521D69D11400EBE59B /* THNArticleDetalViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THNArticleDetalViewController.m; sourceTree = "<group>"; };
 		1FA53F531D69D11400EBE59B /* THNArticleDetalViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = THNArticleDetalViewController.xib; sourceTree = "<group>"; };
-		1FA53F561D69FA4F00EBE59B /* THNActiveDetalViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THNActiveDetalViewController.h; sourceTree = "<group>"; };
-		1FA53F571D69FA4F00EBE59B /* THNActiveDetalViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THNActiveDetalViewController.m; sourceTree = "<group>"; };
-		1FA53F581D69FA4F00EBE59B /* THNActiveDetalViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = THNActiveDetalViewController.xib; sourceTree = "<group>"; };
 		1FA53F5B1D6A034900EBE59B /* THNArticleDetalModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THNArticleDetalModel.h; sourceTree = "<group>"; };
 		1FA53F5C1D6A034900EBE59B /* THNArticleDetalModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THNArticleDetalModel.m; sourceTree = "<group>"; };
-		1FA53F5E1D6A166A00EBE59B /* THNActiveRuleViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THNActiveRuleViewController.h; sourceTree = "<group>"; };
-		1FA53F5F1D6A166A00EBE59B /* THNActiveRuleViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THNActiveRuleViewController.m; sourceTree = "<group>"; };
-		1FA53F601D6A166A00EBE59B /* THNActiveRuleViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = THNActiveRuleViewController.xib; sourceTree = "<group>"; };
 		1FBF2CCA1D6BFDE2003C1643 /* THNXinPinCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = THNXinPinCollectionViewCell.h; path = Fiu/Classes/Main/Other/Project/Model/THNXinPinCollectionViewCell.h; sourceTree = SOURCE_ROOT; };
 		1FBF2CCB1D6BFDE2003C1643 /* THNXinPinCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = THNXinPinCollectionViewCell.m; path = Fiu/Classes/Main/Other/Project/Model/THNXinPinCollectionViewCell.m; sourceTree = SOURCE_ROOT; };
 		1FBF2CCC1D6BFDE2003C1643 /* THNXinPinCollectionViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = THNXinPinCollectionViewCell.xib; path = Fiu/Classes/Main/Other/Project/Model/THNXinPinCollectionViewCell.xib; sourceTree = SOURCE_ROOT; };
@@ -1478,6 +1463,14 @@
 		1FBF2CE11D6D99E6003C1643 /* SceneCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SceneCollectionViewCell.h; sourceTree = "<group>"; };
 		1FBF2CE21D6D99E6003C1643 /* SceneCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SceneCollectionViewCell.m; sourceTree = "<group>"; };
 		1FBF2CE41D6EDB93003C1643 /* My.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = My.storyboard; sourceTree = "<group>"; };
+		1FBF2CE61D700590003C1643 /* THNActiveDetalTwoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THNActiveDetalTwoViewController.h; sourceTree = "<group>"; };
+		1FBF2CE71D700590003C1643 /* THNActiveDetalTwoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THNActiveDetalTwoViewController.m; sourceTree = "<group>"; };
+		1FBF2CE81D700590003C1643 /* THNActiveDetalTwoViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = THNActiveDetalTwoViewController.xib; sourceTree = "<group>"; };
+		1FBF2CEB1D701EDE003C1643 /* THNActiveRuleCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = THNActiveRuleCollectionViewCell.h; path = Fiu/Classes/Main/Other/Project/Controller/THNActiveRuleCollectionViewCell.h; sourceTree = SOURCE_ROOT; };
+		1FBF2CEC1D701EDE003C1643 /* THNActiveRuleCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = THNActiveRuleCollectionViewCell.m; path = Fiu/Classes/Main/Other/Project/Controller/THNActiveRuleCollectionViewCell.m; sourceTree = SOURCE_ROOT; };
+		1FBF2CED1D701EDE003C1643 /* THNActiveRuleCollectionViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = THNActiveRuleCollectionViewCell.xib; path = Fiu/Classes/Main/Other/Project/Controller/THNActiveRuleCollectionViewCell.xib; sourceTree = SOURCE_ROOT; };
+		1FBF2CF01D70229E003C1643 /* THNActiveRuleModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THNActiveRuleModel.h; sourceTree = "<group>"; };
+		1FBF2CF11D70229E003C1643 /* THNActiveRuleModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THNActiveRuleModel.m; sourceTree = "<group>"; };
 		1FC6782C1CDB33ED00535162 /* UIView+TYAlertView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+TYAlertView.m"; sourceTree = "<group>"; };
 		1FC6782D1CDB33ED00535162 /* UIView+TYAutoLayout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+TYAutoLayout.h"; sourceTree = "<group>"; };
 		1FCDCC781D0515F700C92E78 /* ScenarioNonView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ScenarioNonView.h; sourceTree = "<group>"; };
@@ -4071,24 +4064,15 @@
 				1FA53F511D69D11400EBE59B /* THNArticleDetalViewController.h */,
 				1FA53F521D69D11400EBE59B /* THNArticleDetalViewController.m */,
 				1FA53F531D69D11400EBE59B /* THNArticleDetalViewController.xib */,
-				1FA53F561D69FA4F00EBE59B /* THNActiveDetalViewController.h */,
-				1FA53F571D69FA4F00EBE59B /* THNActiveDetalViewController.m */,
-				1FA53F581D69FA4F00EBE59B /* THNActiveDetalViewController.xib */,
-				1FA53F5E1D6A166A00EBE59B /* THNActiveRuleViewController.h */,
-				1FA53F5F1D6A166A00EBE59B /* THNActiveRuleViewController.m */,
-				1FA53F601D6A166A00EBE59B /* THNActiveRuleViewController.xib */,
-				1F296DC91D6A8D80001FC6A2 /* THNAttendSenceViewController.h */,
-				1F296DCA1D6A8D80001FC6A2 /* THNAttendSenceViewController.m */,
-				1F296DCB1D6A8D80001FC6A2 /* THNAttendSenceViewController.xib */,
-				1F296DCE1D6A98FD001FC6A2 /* THNActiveResultViewController.h */,
-				1F296DCF1D6A98FD001FC6A2 /* THNActiveResultViewController.m */,
-				1F296DD01D6A98FD001FC6A2 /* THNActiveResultViewController.xib */,
 				1F296DD31D6AA876001FC6A2 /* THNXinPinDetalViewController.h */,
 				1F296DD41D6AA876001FC6A2 /* THNXinPinDetalViewController.m */,
 				1F296DD51D6AA876001FC6A2 /* THNXinPinDetalViewController.xib */,
 				1F296DDB1D6AE121001FC6A2 /* THNCuXiaoDetalViewController.h */,
 				1F296DDC1D6AE121001FC6A2 /* THNCuXiaoDetalViewController.m */,
 				1F296DDD1D6AE121001FC6A2 /* THNCuXiaoDetalViewController.xib */,
+				1FBF2CE61D700590003C1643 /* THNActiveDetalTwoViewController.h */,
+				1FBF2CE71D700590003C1643 /* THNActiveDetalTwoViewController.m */,
+				1FBF2CE81D700590003C1643 /* THNActiveDetalTwoViewController.xib */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -4110,6 +4094,8 @@
 				1F296DE11D6AEE86001FC6A2 /* THNCuXiaoDetalModel.m */,
 				1FBF2CCF1D6C42D7003C1643 /* THNCuXiaoProductModel.h */,
 				1FBF2CD01D6C42D7003C1643 /* THNCuXiaoProductModel.m */,
+				1FBF2CF01D70229E003C1643 /* THNActiveRuleModel.h */,
+				1FBF2CF11D70229E003C1643 /* THNActiveRuleModel.m */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -4141,6 +4127,9 @@
 				1FBF2CD21D6C91B0003C1643 /* THNActiveTopView.h */,
 				1FBF2CD31D6C91B0003C1643 /* THNActiveTopView.m */,
 				1FBF2CD51D6C91CF003C1643 /* THNActiveTopView.xib */,
+				1FBF2CEB1D701EDE003C1643 /* THNActiveRuleCollectionViewCell.h */,
+				1FBF2CEC1D701EDE003C1643 /* THNActiveRuleCollectionViewCell.m */,
+				1FBF2CED1D701EDE003C1643 /* THNActiveRuleCollectionViewCell.xib */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -5032,6 +5021,7 @@
 				1F69CE211CF70BFA00AE3271 /* OfficialCertificationViewController.xib in Resources */,
 				1FD10CC31D64850D005898EE /* THNBingViewController.xib in Resources */,
 				1FD10C9E1D5DC8D1005898EE /* THNTopicView.xib in Resources */,
+				1FBF2CEA1D700590003C1643 /* THNActiveDetalTwoViewController.xib in Resources */,
 				D812815B1CAA8532007CF08B /* Info.plist in Resources */,
 				1F2A900A1CF40277005116C7 /* chanel.xib in Resources */,
 				D86809261D662490002714B2 /* THNSenceTopicView.xib in Resources */,
@@ -5065,9 +5055,9 @@
 				1F2A903B1CF40277005116C7 /* FBLocationViewController.xib in Resources */,
 				1FA53F3E1D69BBFE00EBE59B /* THNXinPinViewController.xib in Resources */,
 				1F2A8FEE1CF40277005116C7 /* EditNickNameViewController.xib in Resources */,
+				1FBF2CEF1D701EDE003C1643 /* THNActiveRuleCollectionViewCell.xib in Resources */,
 				1F2A906A1CF40277005116C7 /* SystemInfoTableViewCell.xib in Resources */,
 				1F296DD71D6AA876001FC6A2 /* THNXinPinDetalViewController.xib in Resources */,
-				1F296DD21D6A98FD001FC6A2 /* THNActiveResultViewController.xib in Resources */,
 				1FA4BDFA1D35F2200067A196 /* WeiboSDK.bundle in Resources */,
 				1FA4BDF01D35F2200067A196 /* UMSCommentInputController.xib in Resources */,
 				1F6CA2721D5C468A00DFB79E /* THNInputCodeViewController.xib in Resources */,
@@ -5085,7 +5075,6 @@
 				1F296DE71D6AF6DE001FC6A2 /* THNCuXiaoDetalTopView.xib in Resources */,
 				1FD10CBB1D62FBF5005898EE /* THNGoodsCollectionViewCell.xib in Resources */,
 				1FA53F271D6983A500EBE59B /* THNArticleViewController.xib in Resources */,
-				1F296DCD1D6A8D80001FC6A2 /* THNAttendSenceViewController.xib in Resources */,
 				1F2A8FEC1CF40277005116C7 /* DatePickerViewController.xib in Resources */,
 				1FA4BDF41D35F2200067A196 /* UMSLoginViewController.xib in Resources */,
 				1F6CA2671D5B324000DFB79E /* THNSignUpViewController.xib in Resources */,
@@ -5093,11 +5082,9 @@
 				1F2A90AC1CF40277005116C7 /* ChanePwdViewController.xib in Resources */,
 				1FBF2CE01D6D94AD003C1643 /* THNHomeSenceCollectionViewCell.xib in Resources */,
 				1F1AF3B31CF58A6B00CAA525 /* IntegralViewController.xib in Resources */,
-				1FA53F5A1D69FA4F00EBE59B /* THNActiveDetalViewController.xib in Resources */,
 				1F2A90141CF40277005116C7 /* MyView.xib in Resources */,
 				1F27AE9C1CE0EACE005A434B /* mapapi.bundle in Resources */,
 				1F2A902D1CF40277005116C7 /* EditAddressViewController.xib in Resources */,
-				1FA53F621D6A166A00EBE59B /* THNActiveRuleViewController.xib in Resources */,
 				1FA53F551D69D11400EBE59B /* THNArticleDetalViewController.xib in Resources */,
 				1F2A90AA1CF40277005116C7 /* AboutViewController.xib in Resources */,
 				1F2A907A1CF40277005116C7 /* ReturnViewController.xib in Resources */,
@@ -5184,6 +5171,7 @@
 				D8E3AEBB1CFC9B84006E5E8C /* ReleaseViewController.m in Sources */,
 				1F2A90831CF40277005116C7 /* CommentView.m in Sources */,
 				D869BD6B1D6036A000432423 /* CommentNViewController.m in Sources */,
+				1FBF2CE91D700590003C1643 /* THNActiveDetalTwoViewController.m in Sources */,
 				1F6CA2711D5C468A00DFB79E /* THNInputCodeViewController.m in Sources */,
 				1F2A905C1CF40277005116C7 /* MentionedViewController.m in Sources */,
 				D868090B1D6301C1002714B2 /* FBSubjectModelData.m in Sources */,
@@ -5297,7 +5285,6 @@
 				1F2A8FAF1CF40277005116C7 /* GoodsInfoViewController.m in Sources */,
 				1F2A8FA31CF40277005116C7 /* LikePeopleTableViewCell.m in Sources */,
 				1F2A904E1CF40277005116C7 /* UserInfoEntity.m in Sources */,
-				1FA53F611D6A166A00EBE59B /* THNActiveRuleViewController.m in Sources */,
 				1F2A8FF71CF40277005116C7 /* MyPageViewController.m in Sources */,
 				D8B795271CF48AFB0075D985 /* ShareStyleBottomView.m in Sources */,
 				D8C690C01D13DFC70026EAB5 /* LMSpringboardView.m in Sources */,
@@ -5382,7 +5369,6 @@
 				D80878DC1D6AE2C700C1FFA0 /* THNMallListCollectionViewCell.m in Sources */,
 				D869BD6F1D6036A000432423 /* CommentReplyComment.m in Sources */,
 				1F772B5E1CF3FD910018AE40 /* AppDelegate.mm in Sources */,
-				1F296DCC1D6A8D80001FC6A2 /* THNAttendSenceViewController.m in Sources */,
 				1F2A90321CF40277005116C7 /* AXModel.m in Sources */,
 				D8B7952A1CF48B1D0075D985 /* ShareStyleTitleTopView.m in Sources */,
 				1FA53F211D6974A500EBE59B /* THNProjectViewController.m in Sources */,
@@ -5566,6 +5552,7 @@
 				1F2A8F5A1CF40277005116C7 /* ChooseTagsCollectionViewCell.m in Sources */,
 				1F2A8F3E1CF40277005116C7 /* FindGoodsModelData.m in Sources */,
 				D8E3AEBA1CFC9B84006E5E8C /* LookSceneViewController.m in Sources */,
+				1FBF2CEE1D701EDE003C1643 /* THNActiveRuleCollectionViewCell.m in Sources */,
 				D80669691D6ECCF4007FD81E /* UserModelRow.m in Sources */,
 				D8B7952D1CF48B2C0075D985 /* ShareStyleTitleBottomView.m in Sources */,
 				D80878E81D6B318F00C1FFA0 /* DiscoverCategoryViewController.m in Sources */,
@@ -5633,8 +5620,6 @@
 				1F2A8FD21CF40277005116C7 /* BuyCarDefault.m in Sources */,
 				1FD10CBE1D647B2C005898EE /* THNSubHeadView.m in Sources */,
 				1F2A8F681CF40277005116C7 /* FiuPeople.m in Sources */,
-				1F296DD11D6A98FD001FC6A2 /* THNActiveResultViewController.m in Sources */,
-				1FA53F591D69FA4F00EBE59B /* THNActiveDetalViewController.m in Sources */,
 				1F6CA26D1D5C1A0600DFB79E /* THNTFView.m in Sources */,
 				1F2A91271CF42EC1005116C7 /* OrderInfoDetailViewController.m in Sources */,
 				1F2A8F611CF40277005116C7 /* ChangeAddUrlView.m in Sources */,
@@ -5643,6 +5628,7 @@
 				1F2A8FF51CF40277005116C7 /* MyFansViewController.m in Sources */,
 				1F2A90681CF40277005116C7 /* SystemInfoMessageTableViewCell.m in Sources */,
 				1F520A9B1CF8771600B6882A /* TalentView.m in Sources */,
+				1FBF2CF21D70229E003C1643 /* THNActiveRuleModel.m in Sources */,
 				1F2A8FEB1CF40277005116C7 /* DatePickerViewController.m in Sources */,
 				1F2A8FDA1CF40277005116C7 /* GoodsImgCollectionViewCell.m in Sources */,
 				1F2A8F841CF40277005116C7 /* FiuUserInfoTableViewCell.m in Sources */,

@@ -56,7 +56,7 @@ static NSString *const cellId = @"THNCuXiaoDetalContentTableViewCell";
     [self.contenView registerNib:[UINib nibWithNibName:cellId bundle:nil] forCellReuseIdentifier:cellId];
     
     FBRequest *request = [FBAPI postWithUrlString:@"/scene_subject/view" requestDictionary:@{
-                                                                                             @"id" : self.id
+                                                                                             @"id" : self.cuXiaoDetalId
                                                                                              } delegate:self];
     [request startRequestSuccess:^(FBRequest *request, id result) {
         if (result[@"success"]) {

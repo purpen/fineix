@@ -178,7 +178,7 @@ static NSString *const cellId = @"THNXinPinCollectionViewCell";
 
 -(void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath{
     THNXinPinDetalViewController *vc = [[THNXinPinDetalViewController alloc] init];
-    vc.id = ((THNArticleModel*)self.modelAry[indexPath.row])._id;
+    vc.xinPinDetalId = ((THNArticleModel*)self.modelAry[indexPath.row])._id;
     vc.title = @"新品详情";
     [self.navigationController pushViewController:vc animated:YES];
 }
