@@ -67,7 +67,7 @@
                                 </variation>
                             </view>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4id-Sb-fw3">
-                                <rect key="frame" x="101" y="177" width="202" height="18"/>
+                                <rect key="frame" x="86" y="177" width="232" height="18"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <nil key="highlightedColor"/>
@@ -79,7 +79,7 @@
                             <constraint firstAttribute="trailing" secondItem="Gme-mz-V2e" secondAttribute="trailing" constant="111" id="0Wd-7u-ABN"/>
                             <constraint firstItem="Gme-mz-V2e" firstAttribute="leading" secondItem="QeP-AU-E7t" secondAttribute="leading" constant="111" id="5NX-Gc-Oki"/>
                             <constraint firstAttribute="trailing" secondItem="ui0-ho-CMF" secondAttribute="trailing" id="BWG-se-3At"/>
-                            <constraint firstItem="4id-Sb-fw3" firstAttribute="width" secondItem="kJK-s7-Kc3" secondAttribute="width" multiplier="0.5" id="KeD-P0-end"/>
+                            <constraint firstItem="4id-Sb-fw3" firstAttribute="width" secondItem="kJK-s7-Kc3" secondAttribute="width" multiplier="0.5" constant="30" id="KeD-P0-end"/>
                             <constraint firstItem="4id-Sb-fw3" firstAttribute="top" secondItem="Gme-mz-V2e" secondAttribute="bottom" constant="5" id="XZ8-A9-YBg"/>
                             <constraint firstItem="kJK-s7-Kc3" firstAttribute="top" secondItem="QeP-AU-E7t" secondAttribute="top" id="dyQ-ZO-BMT"/>
                             <constraint firstItem="kJK-s7-Kc3" firstAttribute="leading" secondItem="QeP-AU-E7t" secondAttribute="leading" id="fl2-hY-llX"/>

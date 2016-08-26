@@ -18,5 +18,7 @@
 @property(nonatomic,copy) NSString *title;
 /**  */
 @property(nonatomic,copy) NSString *_id;
+/**  */
+@property (nonatomic, assign) NSInteger evt;
 
 @end

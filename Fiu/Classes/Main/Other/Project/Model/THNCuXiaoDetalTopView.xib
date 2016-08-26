@@ -74,7 +74,7 @@
                     </variation>
                 </view>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QQD-W6-v15">
-                    <rect key="frame" x="85" y="114" width="172" height="18"/>
+                    <rect key="frame" x="70" y="114" width="202" height="18"/>
                     <fontDescription key="fontDescription" type="system" pointSize="15"/>
                     <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
                     <nil key="highlightedColor"/>
@@ -96,7 +96,7 @@
                 <constraint firstItem="1at-mN-iag" firstAttribute="width" relation="lessThanOrEqual" secondItem="bBw-g0-FAY" secondAttribute="width" multiplier="0.5" id="ck3-UB-bFi"/>
                 <constraint firstItem="1at-mN-iag" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="dRm-wD-6FE"/>
                 <constraint firstItem="bBw-g0-FAY" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="ir4-pp-GsW"/>
-                <constraint firstItem="QQD-W6-v15" firstAttribute="width" secondItem="bBw-g0-FAY" secondAttribute="width" multiplier="0.5" id="jBp-aG-JzT"/>
+                <constraint firstItem="QQD-W6-v15" firstAttribute="width" secondItem="bBw-g0-FAY" secondAttribute="width" multiplier="0.5" constant="30" id="jBp-aG-JzT"/>
                 <constraint firstItem="YrL-er-mK9" firstAttribute="centerY" secondItem="kld-Gs-K9x" secondAttribute="centerY" id="juP-yS-rXH"/>
                 <constraint firstItem="Zhz-b2-g6e" firstAttribute="top" secondItem="bBw-g0-FAY" secondAttribute="bottom" constant="10" id="mBF-B2-bNs"/>
                 <constraint firstItem="GN4-IX-Ghg" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="oaX-dB-mh4"/>

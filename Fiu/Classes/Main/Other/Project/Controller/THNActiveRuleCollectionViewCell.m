@@ -28,6 +28,7 @@
 -(void)setModel:(THNActiveRuleModel *)model{
     _model = model;
     self.textLabel.text = model.summary;
+    self.attendBtn.hidden = model.evt != 2;
 }
 
 @end

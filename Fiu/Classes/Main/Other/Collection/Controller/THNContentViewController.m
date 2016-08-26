@@ -16,6 +16,7 @@
 #import "HomeSceneListRow.h"
 #import "SceneInfoViewController.h"
 #import "THNHomeSenceCollectionViewCell.h"
+#import "THNSceneListViewController.h"
 
 @interface THNContentViewController ()<UICollectionViewDelegate,UICollectionViewDataSource>
 {
@@ -32,6 +33,10 @@
 @property (nonatomic, strong) NSMutableArray *goodsIdList;
 /**  */
 @property (nonatomic, assign) CGFloat page;
+/**  */
+@property (nonatomic, strong) NSMutableArray *commentsMarr;
+/**  */
+@property (nonatomic, strong) NSMutableArray *userIdMarr;
 
 @end
 
@@ -132,8 +137,9 @@ static NSString *const URLFiuGoods = @"/favorite/get_new_list";
                     homeSceneModel.title = sight[@"scene_title"];
                     [_sceneListMarr addObject:homeSceneModel];
                     [_sceneIdMarr addObject:[NSString stringWithFormat:@"%zi", homeSceneModel.idField]];
+                    [self.userIdMarr addObject:[NSString stringWithFormat:@"%zi", homeSceneModel.userId]];
                 }
-                
+                [self.commentsMarr addObjectsFromArray:[sceneArr valueForKey:@"comments"]];
                 [_contenView reloadData];
                 // 结束刷新
                 [self.contenView.mj_footer endRefreshing];
@@ -228,7 +234,9 @@ static NSString *const URLFiuGoods = @"/favorite/get_new_list";
                     homeSceneModel.title = sight[@"scene_title"];
                     [_sceneListMarr addObject:homeSceneModel];
                     [_sceneIdMarr addObject:[NSString stringWithFormat:@"%zi", homeSceneModel.idField]];
+                    [self.userIdMarr addObject:[NSString stringWithFormat:@"%zi", homeSceneModel.userId]];
                 }
+                [self.commentsMarr addObjectsFromArray:[sceneArr valueForKey:@"comments"]];
                 [_contenView reloadData];
                 // 结束刷新
                 [self.contenView.mj_header endRefreshing];
@@ -246,6 +254,20 @@ static NSString *const URLFiuGoods = @"/favorite/get_new_list";
         }
         
     } failure:nil];
+}
+
+-(NSMutableArray *)userIdMarr{
+    if (!_userIdMarr) {
+        _userIdMarr = [NSMutableArray array];
+    }
+    return _userIdMarr;
+}
+
+-(NSMutableArray *)commentsMarr{
+    if (!_commentsMarr) {
+        _commentsMarr = [NSMutableArray array];
+    }
+    return _commentsMarr;
 }
 
 -(NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section{
@@ -287,9 +309,11 @@ static NSString *const URLFiuGoods = @"/favorite/get_new_list";
         goodsInfoVC.isWant = YES;
         [self.navigationController pushViewController:goodsInfoVC animated:YES];
     }else{
-        SceneInfoViewController * sceneInfoVC = [[SceneInfoViewController alloc] init];
-        sceneInfoVC.sceneId = _sceneIdMarr[indexPath.row];
-        [self.navigationController pushViewController:sceneInfoVC animated:YES];
+        
+        THNSceneListViewController *sceneListVC = [[THNSceneListViewController alloc] init];
+        sceneListVC.sceneListId = [NSString stringWithFormat:@"%ld",(long)((HomeSceneListRow*)_sceneListMarr[indexPath.row]).idField];
+        sceneListVC.index = 0;
+        [self.navigationController pushViewController:sceneListVC animated:YES];
     }
 }
 
