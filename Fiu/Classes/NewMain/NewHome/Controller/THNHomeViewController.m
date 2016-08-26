@@ -20,6 +20,7 @@
 #import "HomeSceneListRow.h"
 #import "CommentRow.h"
 #import "FBSubjectModelRow.h"
+#import "HotUserListUser.h"
 #import "CommentNViewController.h"
 
 static NSString *const URLBannerSlide = @"/gateway/slide";
@@ -30,6 +31,7 @@ static NSString *const URLCancelLike = @"/favorite/ajax_cancel_love";
 static NSString *const URLFollowUser = @"/follow/ajax_follow";
 static NSString *const URLCancelFollowUser = @"/follow/ajax_cancel_follow";
 static NSString *const URLFavorite = @"/favorite/ajax_favorite";
+static NSString *const URLHotUserList = @"/user/find_user";
 
 static NSString *const themeCellId = @"ThemeCellId";
 static NSString *const userInfoCellId = @"UserInfoCellId";
@@ -46,6 +48,8 @@ static NSString *const twoCommentsCellId = @"TwoCommentsCellId";
     CGFloat _commentHigh;
     NSString *_sceneId;
     NSString *_userId;
+    NSInteger _index;
+    CGFloat _hotUserCellHeight;
 }
 
 @end
@@ -65,8 +69,8 @@ static NSString *const twoCommentsCellId = @"TwoCommentsCellId";
     [self thn_setHomeViewUI];
     [self thn_networkRollImageData];
     [self thn_networkSubjectData];
+    [self thn_networkHotUserListData];
     [self thn_networkSceneListData];
-    
 }
 
 #pragma mark - 网络请求
@@ -179,9 +183,29 @@ static NSString *const twoCommentsCellId = @"TwoCommentsCellId";
     }];
 }
 
+#pragma mark 热门用户推荐
+- (void)thn_networkHotUserListData {
+    self.hotUserRequest = [FBAPI getWithUrlString:URLHotUserList requestDictionary:@{@"page":@"1", @"edit_stick":@"1", @"sort":@"0"} delegate:self];
+    [self.hotUserRequest startRequestSuccess:^(FBRequest *request, id result) {
+        NSArray *userArr = [[result valueForKey:@"data"] valueForKey:@"users"];
+        for (NSDictionary *userDic in userArr) {
+            HotUserListUser *userModel = [[HotUserListUser alloc] initWithDictionary:userDic];
+            [self.hotUserMarr addObject:userModel];
+        }
+        
+        if (self.hotUserMarr.count && self.sceneListMarr.count) {
+            NSIndexPath *indexPath = [NSIndexPath indexPathForRow:0 inSection:_index];
+            [self.homeTable reloadRowsAtIndexPaths:@[indexPath] withRowAnimation:(UITableViewRowAnimationFade)];
+        }
+
+    } failure:^(FBRequest *request, NSError *error) {
+        NSLog(@"%@", error);
+    }];
+}
+
 #pragma mark 情景列表
 - (void)thn_networkSceneListData {
-    self.sceneListRequest = [FBAPI getWithUrlString:URLSceneList requestDictionary:@{@"page":@(self.currentpageNum + 1), @"size":@10, @"sort":@"0"} delegate:self];
+    self.sceneListRequest = [FBAPI getWithUrlString:URLSceneList requestDictionary:@{@"page":@(self.currentpageNum + 1), @"size":@"10", @"sort":@"2"} delegate:self];
     [self.sceneListRequest startRequestSuccess:^(FBRequest *request, id result) {
         NSArray *sceneArr = [[result valueForKey:@"data"] valueForKey:@"rows"];
         for (NSDictionary * sceneDic in sceneArr) {
@@ -191,6 +215,9 @@ static NSString *const twoCommentsCellId = @"TwoCommentsCellId";
             [self.userIdMarr addObject:[NSString stringWithFormat:@"%zi", homeSceneModel.userId]];
         }
         [self.commentsMarr addObjectsFromArray:[sceneArr valueForKey:@"comments"]];
+        
+        _index = 6;
+        _hotUserCellHeight = 280.0f;
         
         [self.homeTable reloadData];
         
@@ -274,7 +301,7 @@ static NSString *const twoCommentsCellId = @"TwoCommentsCellId";
 
 - (FBRollImages *)homerollView {
     if (!_homerollView) {
-        _homerollView = [[FBRollImages alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, BANNER_HEIGHT)];
+        _homerollView = [[FBRollImages alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_WIDTH *0.56)];
         _homerollView.navVC = self.navigationController;
     }
     return _homerollView;
@@ -297,6 +324,7 @@ static NSString *const twoCommentsCellId = @"TwoCommentsCellId";
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(followTheUser:) name:@"followTheUser" object:nil];
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(cancelFollowTheUser:) name:@"cancelFollowTheUser" object:nil];
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(favoriteTheScene:) name:@"favoriteTheScene" object:nil];
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(deleteHotUserList) name:@"deleteHotUserList" object:nil];
     }
     return _homeTable;
 }
@@ -331,10 +359,14 @@ static NSString *const twoCommentsCellId = @"TwoCommentsCellId";
             cell = [[THNUserInfoTableViewCell alloc] initWithStyle:(UITableViewCellStyleDefault) reuseIdentifier:userInfoCellId];
             if (self.sceneListMarr.count) {
                 [cell thn_setHomeSceneUserInfoData:self.sceneListMarr[indexPath.section - 1]];
-                if (indexPath.section == 6) {
-                    [cell thn_isShowHotUserList:YES];
+                if (indexPath.section == _index) {
+                    if (self.hotUserMarr.count) {
+                        [cell thn_setHotUserListData:self.hotUserMarr];
+                        [cell thn_isShowHotUserList:YES];
+                    }
                 }
             }
+            cell.nav = self.navigationController;
             return cell;
 
         } else if (indexPath.row == 1) {
@@ -407,8 +439,8 @@ static NSString *const twoCommentsCellId = @"TwoCommentsCellId";
         
     } else {
         if (indexPath.row == 0) {
-            if (indexPath.section == 6) {
-                return 280;
+            if (indexPath.section == _index) {
+                return _hotUserCellHeight;
             } else
                 return 50;
             
@@ -527,6 +559,13 @@ static NSString *const twoCommentsCellId = @"TwoCommentsCellId";
     [self thn_networkFavoriteData:[idx object]];
 }
 
+#pragma mark - 移除热门用户 
+- (void)deleteHotUserList {
+    _hotUserCellHeight = 50.0f;
+    NSIndexPath *indexPath = [NSIndexPath indexPathForRow:0 inSection:_index];
+    [self.homeTable reloadRowsAtIndexPaths:@[indexPath] withRowAnimation:(UITableViewRowAnimationFade)];
+}
+
 #pragma mark - 设置Nav
 - (void)thn_setNavigationViewUI {
     self.view.backgroundColor = [UIColor whiteColor];
@@ -605,6 +644,13 @@ static NSString *const twoCommentsCellId = @"TwoCommentsCellId";
     return _commentsMarr;
 }
 
+- (NSMutableArray *)hotUserMarr {
+    if (!_hotUserMarr) {
+        _hotUserMarr = [NSMutableArray array];
+    }
+    return _hotUserMarr;
+}
+
 - (void)viewDidDisappear:(BOOL)animated {
     [super viewDidDisappear:animated];
     [SVProgressHUD dismiss];
@@ -615,6 +661,8 @@ static NSString *const twoCommentsCellId = @"TwoCommentsCellId";
     [[NSNotificationCenter defaultCenter] removeObserver:self name:@"cancelLikeTheScene" object:nil];
     [[NSNotificationCenter defaultCenter] removeObserver:self name:@"followTheUser" object:nil];
     [[NSNotificationCenter defaultCenter] removeObserver:self name:@"cancelFollowTheUser" object:nil];
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:@"deleteHotUserList" object:nil];
+    
 }
 
 @end

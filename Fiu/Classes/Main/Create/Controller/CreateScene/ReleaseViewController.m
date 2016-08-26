@@ -50,10 +50,17 @@ static NSString *const URLGetUserDesTags = @"/gateway/fetch_chinese_word";
 
 #pragma mark 发布场景
 - (void)networkNewSceneData {
-    NSString *title = [self.addContent.title.text stringByReplacingOccurrencesOfString:@" " withString:@""];
+    NSString *firTitle = [self.addContent.title.text stringByReplacingOccurrencesOfString:@" " withString:@""];
+    NSString *subTitle = [self.addContent.suTitle.text stringByReplacingOccurrencesOfString:@" " withString:@""];
+    if (subTitle.length == 0) {
+        subTitle = @"";
+    }
+    NSString *title = [NSString stringWithFormat:@"%@%@", firTitle, subTitle];
+    
     if ([self.addContent.content.text isEqualToString:NSLocalizedString(@"addDescription", nil)]) {
         self.addContent.content.text = @"";
     }
+    
     NSString *des = self.addContent.content.text;
     NSString *address = self.addLocaiton.locationLab.text;
     NSString *city = self.addLocaiton.cityLab.text;
@@ -102,7 +109,7 @@ static NSString *const URLGetUserDesTags = @"/gateway/fetch_chinese_word";
     if (json.length == 0) {
         json = @"";
     }
-    
+
     NSData * imageData = UIImageJPEGRepresentation(self.bgImg, 0.7);
     NSString * icon64Str = [imageData base64EncodedStringWithOptions:NSDataBase64Encoding64CharacterLineLength];
     NSDictionary * paramDict = @{

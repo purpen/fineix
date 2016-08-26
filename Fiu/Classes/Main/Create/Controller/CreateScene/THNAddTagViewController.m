@@ -149,7 +149,9 @@ static NSString *const searchListCellID = @"SearchListCellID";
                          }
                      }];
 
-    [self networkSearchTag:textField.text];
+    if (![textField.text isEqualToString:@""]) {
+         [self networkSearchTag:textField.text];
+    }
 }
 
 #pragma mark - 完成输入标签返回

@@ -38,11 +38,7 @@ const static NSInteger btnTag = 100;
         [toolBtn setTitleColor:self.titleNormalColor forState:(UIControlStateNormal)];
         [toolBtn setTitleColor:self.titleSeletedColor forState:(UIControlStateSelected)];
         toolBtn.backgroundColor = self.btnBgColor;
-        if (IS_iOS9) {
-            toolBtn.titleLabel.font = [UIFont fontWithName:@"PingFangSC-Light" size:self.titleFontSize];
-        } else {
-            toolBtn.titleLabel.font = [UIFont systemFontOfSize:self.titleFontSize];
-        }
+        toolBtn.titleLabel.font = [UIFont systemFontOfSize:self.titleFontSize];
         toolBtn.tag = btnTag + idx;
         
         if (toolBtn.tag == btnTag) {

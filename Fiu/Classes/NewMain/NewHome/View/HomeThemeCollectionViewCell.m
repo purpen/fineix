@@ -29,9 +29,17 @@
     self.more.hidden = YES;
     [self.image downloadImage:model.coverUrl place:[UIImage imageNamed:@""]];
     self.title.text = model.title;
-    [self.peopleNum setTitle:[NSString stringWithFormat:@"%zi人参加", model.attendCount] forState:(UIControlStateNormal)];
+    if (model.type == 1) {
+        self.peopleNum.hidden = NO;
+        [self.peopleNum setTitle:[NSString stringWithFormat:@"%zi人阅读", model.attendCount] forState:(UIControlStateNormal)];
+    } else if (model.type == 2) {
+        self.peopleNum.hidden = NO;
+        [self.peopleNum setTitle:[NSString stringWithFormat:@"%zi人参加", model.attendCount] forState:(UIControlStateNormal)];
+    } else {
+        self.peopleNum.hidden = YES;
+    }
     
-    self.typeImage.image = [UIImage imageNamed:[NSString stringWithFormat:@"icon_theme_%zi",model.type]];
+    self.typeImage.image = [UIImage imageNamed:[NSString stringWithFormat:@"icon_theme_%zi",model.type - 1]];
 }
 
 #pragma mark - setUI

@@ -70,7 +70,7 @@
         _menuImg = [[UIImageView alloc] init];
         _menuImg.layer.cornerRadius = 60/2;
         _menuImg.layer.masksToBounds = YES;
-        _menuImg.backgroundColor = [UIColor colorWithHexString:@"#F1F1F1"];
+        _menuImg.backgroundColor = [UIColor colorWithHexString:@"#000000"];
     }
     return _menuImg;
 }

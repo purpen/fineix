@@ -18,6 +18,8 @@
 @pro_strong UINavigationController *nav;
 @pro_strong UICollectionView *themeCollectionView;
 @pro_strong NSMutableArray *themeMarr;
+@pro_strong NSMutableArray *themeIdMarr;
+@pro_strong NSMutableArray *themeTypeMarr;
 
 - (void)setThemeModelArr:(NSMutableArray *)data;
 

@@ -17,6 +17,7 @@
     UICollectionViewDataSource
 >
 
+@pro_strong UINavigationController *nav;
 @pro_strong UIView *bottomView;
 @pro_strong UIButton *head;
 @pro_strong UIImageView *certificate;
@@ -25,8 +26,13 @@
 @pro_strong UIButton *address;
 @pro_strong UIButton *follow;
 @pro_strong UICollectionView *hotUserList;
+@pro_strong NSMutableArray *hotUserMarr;
+@pro_strong NSMutableArray *hotUserIdMarr;
 
 - (void)thn_setHomeSceneUserInfoData:(HomeSceneListRow *)userModel;
+
+- (void)thn_setHotUserListData:(NSMutableArray *)hotUserMarr;
+
 
 /*
  *  是否显示推荐的热门用户

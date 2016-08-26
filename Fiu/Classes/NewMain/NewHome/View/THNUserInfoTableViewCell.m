@@ -8,6 +8,8 @@
 
 #import "THNUserInfoTableViewCell.h"
 #import "THNHotUserCollectionViewCell.h"
+#import "HotUserListUser.h"
+#import "HomePageViewController.h"
 
 static NSString *const hotUserCellId = @"HotUserCellId";
 
@@ -69,6 +71,15 @@ static NSString *const hotUserCellId = @"HotUserCellId";
     return retSize;
 }
 
+- (void)thn_setHotUserListData:(NSMutableArray *)hotUserMarr {
+    [self.hotUserIdMarr removeAllObjects];
+    self.hotUserMarr = hotUserMarr;
+    for (HotUserListUser *model in hotUserMarr) {
+        [self.hotUserIdMarr addObject:[NSString stringWithFormat:@"%zi", model.idField]];
+    }
+    [self.hotUserList reloadData];
+}
+
 - (void)thn_isShowHotUserList:(BOOL)show {
     if (show) {
         [self addSubview:self.hotUserList];
@@ -105,17 +116,37 @@ static NSString *const hotUserCellId = @"HotUserCellId";
         _hotUserList.backgroundColor = [UIColor colorWithHexString:@"#444444"];
         _hotUserList.showsHorizontalScrollIndicator = NO;
         [_hotUserList registerClass:[THNHotUserCollectionViewCell class] forCellWithReuseIdentifier:hotUserCellId];
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(closeTheUserInfo:) name:@"closeTheUserInfo" object:nil];
     }
     return _hotUserList;
 }
 
+- (void)closeTheUserInfo:(NSNotification *)userId {
+    NSUInteger index = [self.hotUserIdMarr indexOfObject:[userId object]];
+    [self.hotUserMarr removeObjectAtIndex:index];
+    [self.hotUserIdMarr removeObjectAtIndex:index];
+//    NSIndexPath *indexPath = [NSIndexPath indexPathForItem:index inSection:0];
+//    [self.hotUserList deleteItemsAtIndexPaths:@[indexPath]];
+
+    if (self.hotUserMarr.count) {
+        [self.hotUserList reloadData];
+    }
+    
+    if (self.hotUserMarr.count == 0) {
+        [[NSNotificationCenter defaultCenter] postNotificationName:@"deleteHotUserList" object:nil];
+    }
+}
+
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
-    return 10;
+    return self.hotUserMarr.count;
 }
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
     THNHotUserCollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:hotUserCellId
                                                                                    forIndexPath:indexPath];
+    if (self.hotUserMarr.count) {
+        [cell setHotUserListData:self.hotUserMarr[indexPath.row]];
+    }
     return cell;
 }
 
@@ -181,7 +212,10 @@ static NSString *const hotUserCellId = @"HotUserCellId";
 }
 
 - (void)headClick:(UIButton *)button {
-    [SVProgressHUD showSuccessWithStatus:@"打开个人中心"];
+    HomePageViewController *userHomeVC = [[HomePageViewController alloc] init];
+    userHomeVC.userId = _userId;
+    userHomeVC.type = @2;
+    [self.nav pushViewController:userHomeVC animated:YES];
 }
 
 - (UIImageView *)certificate {
@@ -271,7 +305,24 @@ static NSString *const hotUserCellId = @"HotUserCellId";
 }
 
 - (void)addressClick:(UIButton *)button {
-    [SVProgressHUD showSuccessWithStatus:@"打开情景地图"];
+//    [SVProgressHUD showSuccessWithStatus:@"打开情景地图"];
 }
 
+- (NSMutableArray *)hotUserMarr {
+    if (!_hotUserMarr) {
+        _hotUserMarr = [NSMutableArray array];
+    }
+    return _hotUserMarr;
+}
+
+- (NSMutableArray *)hotUserIdMarr {
+    if (!_hotUserIdMarr) {
+        _hotUserIdMarr = [NSMutableArray array];
+    }
+    return _hotUserIdMarr;
+}
+
+- (void)dealloc {
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:@"cancelFollowTheUser" object:nil];
+}
 @end

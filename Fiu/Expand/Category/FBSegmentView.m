@@ -21,8 +21,10 @@ static NSInteger const menuBtnTag = 642;
 }
 
 - (void)set_menuItemTitle:(NSArray *)titleArr {
+    self.title = titleArr;
+    
     for (NSUInteger idx = 0; idx < titleArr.count; ++ idx) {
-        UIButton *menuBtn = [[UIButton alloc] initWithFrame:CGRectMake((SCREEN_WIDTH/4 - 25) + (SCREEN_WIDTH/2 * idx), 0, 50, 44)];
+        UIButton *menuBtn = [[UIButton alloc] initWithFrame:CGRectMake(SCREEN_WIDTH/titleArr.count * idx, 0, SCREEN_WIDTH/titleArr.count, 44)];
         menuBtn.titleLabel.font = [UIFont systemFontOfSize:14];
         [menuBtn setTitleColor:[UIColor colorWithHexString:@"#666666"] forState:(UIControlStateNormal)];
         [menuBtn setTitleColor:[UIColor colorWithHexString:MAIN_COLOR] forState:(UIControlStateSelected)];
@@ -34,6 +36,7 @@ static NSInteger const menuBtnTag = 642;
         }
         [menuBtn addTarget:self action:@selector(menuBtnClick:) forControlEvents:(UIControlEventTouchUpInside)];
         [self addSubview:menuBtn];
+        [self.btnMarr addObject:menuBtn];
     }
 
 }
@@ -53,6 +56,14 @@ static NSInteger const menuBtnTag = 642;
     }];
 }
 
+#pragma mark - 更新导航栏的状态
+- (void)updateMenuBtnState:(NSInteger)index {
+    self.selectedBtn.selected = NO;
+    UIButton * btn = self.btnMarr[index];
+    btn.selected = YES;
+    self.selectedBtn = btn;
+}
+
 - (UILabel *)bottomLine {
     if (!_bottomLine) {
         _bottomLine = [[UILabel alloc] initWithFrame:CGRectMake((SCREEN_WIDTH/4 - 25), 42, 50, 2)];
@@ -65,6 +76,20 @@ static NSInteger const menuBtnTag = 642;
     if (show == YES) {
         [self addSubview:self.bottomLine];
     }
+}
+
+- (NSArray *)title {
+    if (!_title) {
+        _title = [NSArray array];
+    }
+    return _title;
+}
+
+- (NSMutableArray *)btnMarr {
+    if (!_btnMarr) {
+        _btnMarr = [NSMutableArray array];
+    }
+    return _btnMarr;
 }
 
 @end

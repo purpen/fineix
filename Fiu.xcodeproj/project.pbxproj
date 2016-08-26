@@ -445,6 +445,7 @@
 		1FBF2CDF1D6D94AD003C1643 /* THNHomeSenceCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 1FBF2CDD1D6D94AD003C1643 /* THNHomeSenceCollectionViewCell.m */; };
 		1FBF2CE01D6D94AD003C1643 /* THNHomeSenceCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1FBF2CDE1D6D94AD003C1643 /* THNHomeSenceCollectionViewCell.xib */; };
 		1FBF2CE31D6D99E6003C1643 /* SceneCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 1FBF2CE21D6D99E6003C1643 /* SceneCollectionViewCell.m */; };
+		1FBF2CE51D6EDB93003C1643 /* My.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1FBF2CE41D6EDB93003C1643 /* My.storyboard */; };
 		1FC6782E1CDB33ED00535162 /* UIView+TYAlertView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1FC6782C1CDB33ED00535162 /* UIView+TYAlertView.m */; };
 		1FCDCC7A1D0515F700C92E78 /* ScenarioNonView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1FCDCC791D0515F700C92E78 /* ScenarioNonView.m */; };
 		1FCDCC7D1D0525A300C92E78 /* FocusNonView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1FCDCC7C1D0525A300C92E78 /* FocusNonView.m */; };
@@ -519,6 +520,11 @@
 		D80669891D6F3F82007FD81E /* FBGoodsInfoModelRelationProduct.m in Sources */ = {isa = PBXBuildFile; fileRef = D80669831D6F3F82007FD81E /* FBGoodsInfoModelRelationProduct.m */; };
 		D806698A1D6F3F82007FD81E /* FBGoodsInfoModelSku.m in Sources */ = {isa = PBXBuildFile; fileRef = D80669851D6F3F82007FD81E /* FBGoodsInfoModelSku.m */; };
 		D806698D1D6F5A65007FD81E /* THNHotUserCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D806698C1D6F5A65007FD81E /* THNHotUserCollectionViewCell.m */; };
+		D80669981D7014C8007FD81E /* HotUserList.m in Sources */ = {isa = PBXBuildFile; fileRef = D806698F1D7014C8007FD81E /* HotUserList.m */; };
+		D80669991D7014C8007FD81E /* HotUserListCounter.m in Sources */ = {isa = PBXBuildFile; fileRef = D80669911D7014C8007FD81E /* HotUserListCounter.m */; };
+		D806699A1D7014C8007FD81E /* HotUserListData.m in Sources */ = {isa = PBXBuildFile; fileRef = D80669931D7014C8007FD81E /* HotUserListData.m */; };
+		D806699B1D7014C8007FD81E /* HotUserListIdentify.m in Sources */ = {isa = PBXBuildFile; fileRef = D80669951D7014C8007FD81E /* HotUserListIdentify.m */; };
+		D806699C1D7014C8007FD81E /* HotUserListUser.m in Sources */ = {isa = PBXBuildFile; fileRef = D80669971D7014C8007FD81E /* HotUserListUser.m */; };
 		D80878D01D69CAD700C1FFA0 /* THNDiscoverSceneCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D80878CF1D69CAD700C1FFA0 /* THNDiscoverSceneCollectionViewCell.m */; };
 		D80878D31D69FAB400C1FFA0 /* THNCategoryCollectionReusableView.m in Sources */ = {isa = PBXBuildFile; fileRef = D80878D21D69FAB400C1FFA0 /* THNCategoryCollectionReusableView.m */; };
 		D80878D61D6AD18E00C1FFA0 /* THNMallNewGoodsCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D80878D51D6AD18E00C1FFA0 /* THNMallNewGoodsCollectionViewCell.m */; };
@@ -1481,6 +1487,7 @@
 		1FBF2CDE1D6D94AD003C1643 /* THNHomeSenceCollectionViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = THNHomeSenceCollectionViewCell.xib; sourceTree = "<group>"; };
 		1FBF2CE11D6D99E6003C1643 /* SceneCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SceneCollectionViewCell.h; sourceTree = "<group>"; };
 		1FBF2CE21D6D99E6003C1643 /* SceneCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SceneCollectionViewCell.m; sourceTree = "<group>"; };
+		1FBF2CE41D6EDB93003C1643 /* My.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = My.storyboard; sourceTree = "<group>"; };
 		1FC6782C1CDB33ED00535162 /* UIView+TYAlertView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+TYAlertView.m"; sourceTree = "<group>"; };
 		1FC6782D1CDB33ED00535162 /* UIView+TYAutoLayout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+TYAutoLayout.h"; sourceTree = "<group>"; };
 		1FCDCC781D0515F700C92E78 /* ScenarioNonView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ScenarioNonView.h; sourceTree = "<group>"; };
@@ -1611,6 +1618,16 @@
 		D80669851D6F3F82007FD81E /* FBGoodsInfoModelSku.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FBGoodsInfoModelSku.m; sourceTree = "<group>"; };
 		D806698B1D6F5A65007FD81E /* THNHotUserCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THNHotUserCollectionViewCell.h; sourceTree = "<group>"; };
 		D806698C1D6F5A65007FD81E /* THNHotUserCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THNHotUserCollectionViewCell.m; sourceTree = "<group>"; };
+		D806698E1D7014C8007FD81E /* HotUserList.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HotUserList.h; sourceTree = "<group>"; };
+		D806698F1D7014C8007FD81E /* HotUserList.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HotUserList.m; sourceTree = "<group>"; };
+		D80669901D7014C8007FD81E /* HotUserListCounter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HotUserListCounter.h; sourceTree = "<group>"; };
+		D80669911D7014C8007FD81E /* HotUserListCounter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HotUserListCounter.m; sourceTree = "<group>"; };
+		D80669921D7014C8007FD81E /* HotUserListData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HotUserListData.h; sourceTree = "<group>"; };
+		D80669931D7014C8007FD81E /* HotUserListData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HotUserListData.m; sourceTree = "<group>"; };
+		D80669941D7014C8007FD81E /* HotUserListIdentify.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HotUserListIdentify.h; sourceTree = "<group>"; };
+		D80669951D7014C8007FD81E /* HotUserListIdentify.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HotUserListIdentify.m; sourceTree = "<group>"; };
+		D80669961D7014C8007FD81E /* HotUserListUser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HotUserListUser.h; sourceTree = "<group>"; };
+		D80669971D7014C8007FD81E /* HotUserListUser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HotUserListUser.m; sourceTree = "<group>"; };
 		D80878CE1D69CAD700C1FFA0 /* THNDiscoverSceneCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THNDiscoverSceneCollectionViewCell.h; sourceTree = "<group>"; };
 		D80878CF1D69CAD700C1FFA0 /* THNDiscoverSceneCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THNDiscoverSceneCollectionViewCell.m; sourceTree = "<group>"; };
 		D80878D11D69FAB400C1FFA0 /* THNCategoryCollectionReusableView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THNCategoryCollectionReusableView.h; sourceTree = "<group>"; };
@@ -3053,6 +3070,7 @@
 		1F2A8D821CF40277005116C7 /* My */ = {
 			isa = PBXGroup;
 			children = (
+				1FBF2CE41D6EDB93003C1643 /* My.storyboard */,
 				1FCDCC7E1D066D0000C92E78 /* Other */,
 				1F2A8D831CF40277005116C7 /* Controller */,
 				1F2A8DB31CF40277005116C7 /* model */,
@@ -4453,6 +4471,16 @@
 		D851742D1D54AC58005F5722 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				D806698E1D7014C8007FD81E /* HotUserList.h */,
+				D806698F1D7014C8007FD81E /* HotUserList.m */,
+				D80669901D7014C8007FD81E /* HotUserListCounter.h */,
+				D80669911D7014C8007FD81E /* HotUserListCounter.m */,
+				D80669921D7014C8007FD81E /* HotUserListData.h */,
+				D80669931D7014C8007FD81E /* HotUserListData.m */,
+				D80669941D7014C8007FD81E /* HotUserListIdentify.h */,
+				D80669951D7014C8007FD81E /* HotUserListIdentify.m */,
+				D80669961D7014C8007FD81E /* HotUserListUser.h */,
+				D80669971D7014C8007FD81E /* HotUserListUser.m */,
 				D80669611D6ECCF4007FD81E /* UserModel.h */,
 				D80669621D6ECCF4007FD81E /* UserModel.m */,
 				D80669631D6ECCF4007FD81E /* UserModelData.h */,
@@ -5018,6 +5046,7 @@
 				1FA4BDF61D35F2200067A196 /* UMSShareListController.xib in Resources */,
 				1F2A90281CF40277005116C7 /* Empty.xib in Resources */,
 				484C45261D6010E5009D6155 /* THNPeopleView.xib in Resources */,
+				1FBF2CE51D6EDB93003C1643 /* My.storyboard in Resources */,
 				1F223B1D1CD714F3007687F7 /* messages.plist in Resources */,
 				1F2A908A1CF40277005116C7 /* FBPayTheWayViewController.xib in Resources */,
 				1F27AE881CE06BB1005A434B /* AlipaySDK.bundle in Resources */,
@@ -5203,6 +5232,7 @@
 				1F2A8F6C1CF40277005116C7 /* FiuPeopleUser.m in Sources */,
 				1FA53F5D1D6A034900EBE59B /* THNArticleDetalModel.m in Sources */,
 				D8E3AEBB1CFC9B84006E5E8C /* ReleaseViewController.m in Sources */,
+				D80669981D7014C8007FD81E /* HotUserList.m in Sources */,
 				1F2A90831CF40277005116C7 /* CommentView.m in Sources */,
 				D869BD6B1D6036A000432423 /* CommentNViewController.m in Sources */,
 				1F6CA2711D5C468A00DFB79E /* THNInputCodeViewController.m in Sources */,
@@ -5431,6 +5461,7 @@
 				1F2A8F4F1CF40277005116C7 /* PhotoAlbumsView.m in Sources */,
 				1F2A8FD01CF40277005116C7 /* MallMenuCollectionViewCell.m in Sources */,
 				D81281541CAA8532007CF08B /* FBRequest.m in Sources */,
+				D80669991D7014C8007FD81E /* HotUserListCounter.m in Sources */,
 				1F2A907D1CF40277005116C7 /* TianMaoOrderViewController.m in Sources */,
 				D8A9ADC91CD9E34600A9FCFB /* FBFootView.m in Sources */,
 				1F2A903A1CF40277005116C7 /* FBLocationViewController.m in Sources */,
@@ -5468,6 +5499,7 @@
 				1F2A90251CF40277005116C7 /* IdentityTagModel.m in Sources */,
 				1F2A8F391CF40277005116C7 /* SelectAllFSceneViewController.m in Sources */,
 				D8329DF11CF611F800611025 /* ShareInfoRow.m in Sources */,
+				D806699C1D7014C8007FD81E /* HotUserListUser.m in Sources */,
 				1F2A8FC81CF40277005116C7 /* GoodsInfoData.m in Sources */,
 				1F2A8FAC1CF40277005116C7 /* FBOrderSendWayViewController.m in Sources */,
 				1F2A906F1CF40277005116C7 /* CommenttwoViewController.m in Sources */,
@@ -5617,6 +5649,7 @@
 				1F2A8F3F1CF40277005116C7 /* FindGoodsModelRow.m in Sources */,
 				D869BD701D6036A000432423 /* CommentRow.m in Sources */,
 				1FA204E51D378AAB00B89699 /* UIView+Size.m in Sources */,
+				D806699B1D7014C8007FD81E /* HotUserListIdentify.m in Sources */,
 				1F2A8FAE1CF40277005116C7 /* FBSureOrderViewController.m in Sources */,
 				1F2A8F741CF40277005116C7 /* FiuSceneLocation.m in Sources */,
 				1FCDCC871D07F50D00C92E78 /* ServiceViewController.m in Sources */,
@@ -5689,6 +5722,7 @@
 				1F2A8FFC1CF40277005116C7 /* SubscribeViewController.m in Sources */,
 				D8E3AEBF1D003F4D006E5E8C /* FBRefresh.m in Sources */,
 				D81281571CAA8532007CF08B /* NSString+Helper.m in Sources */,
+				D806699A1D7014C8007FD81E /* HotUserListData.m in Sources */,
 				1F2A90891CF40277005116C7 /* FBPayTheWayViewController.m in Sources */,
 				1F2A90A51CF40277005116C7 /* FBSearchView.m in Sources */,
 				D8ACF44C1D6BFE0300DB79D8 /* THNMallGoodsModelItem.m in Sources */,

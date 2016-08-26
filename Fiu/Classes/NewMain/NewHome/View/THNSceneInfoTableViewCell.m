@@ -39,7 +39,7 @@ static NSString *const sceneTagsCellId = @"SceneTagsCellId";
     } else {
         self.defaultCellHigh = 70;
     }
-    self.cellHigh = size.height*1.5;
+    self.cellHigh = size.height*1.3;
 }
 
 //  检索描述内容中的标签

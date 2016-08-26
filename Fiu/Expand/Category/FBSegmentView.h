@@ -20,9 +20,12 @@
 
 @pro_strong UIButton *selectedBtn;
 @pro_strong UILabel *bottomLine;
+@pro_strong NSArray *title;
+@pro_strong NSMutableArray *btnMarr;
 
 - (void)set_menuItemTitle:(NSArray *)titleArr;
 - (void)set_showBottomLine:(BOOL)show;
+- (void)updateMenuBtnState:(NSInteger)index;
 
 @pro_weak id <FBSegmentViewDelegate> delegate;
 

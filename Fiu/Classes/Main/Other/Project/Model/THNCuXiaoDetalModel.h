@@ -36,5 +36,11 @@
 @property(nonatomic,copy) NSString *banner_url;
 /**  */
 @property(nonatomic,copy) NSString *user_id;
+/**  */
+@property(nonatomic,copy) NSString *begin_time_at;
+/**  */
+@property(nonatomic,copy) NSString *end_time_at;
+/**  */
+@property(nonatomic,copy) NSString *short_title;
 
 @end

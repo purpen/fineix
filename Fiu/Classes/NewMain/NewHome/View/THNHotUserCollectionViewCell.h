@@ -7,7 +7,9 @@
 //
 
 #import <UIKit/UIKit.h>
+#import <pop/POP.h>
 #import "THNMacro.h"
+#import "HotUserListUser.h"
 
 @interface THNHotUserCollectionViewCell : UICollectionViewCell
 
@@ -16,5 +18,7 @@
 @pro_strong UILabel *name;
 @pro_strong UILabel *info;
 @pro_strong UIButton *follow;
+
+- (void)setHotUserListData:(HotUserListUser *)model;
 
 @end

@@ -31,6 +31,7 @@ static NSString *const URlCancelCollect = @"/favorite/ajax_cancel_favorite";
     NSString * _goodsInfoUrl;
     NSString *_goodsDes;
     NSInteger _collect;
+    FBGoodsCommentViewController *_goodsCommentVC;
 }
 
 @pro_strong FBGoodsInfoModelData        *   goodsInfo;
@@ -53,7 +54,7 @@ static NSString *const URlCancelCollect = @"/favorite/ajax_cancel_favorite";
     [super viewDidLoad];
     
     [self networkGoodsInfoData];
-    
+    [self setThnGoodsInfoVcUI];
 }
 
 #pragma mark - 网络请求
@@ -72,8 +73,7 @@ static NSString *const URlCancelCollect = @"/favorite/ajax_cancel_favorite";
         } else if (_collect == 1) {
             self.likeBtn.selected = YES;
         }
-        
-        [self setThnGoodsInfoVcUI];
+    
         self.goodsInfo = [[FBGoodsInfoModelData alloc] initWithDictionary:[result valueForKey:@"data"]];
         NSArray * goodsArr  = [[result valueForKey:@"data"] valueForKey:@"relation_products"];
         for (NSDictionary * goodsDict in goodsArr) {
@@ -148,15 +148,63 @@ static NSString *const URlCancelCollect = @"/favorite/ajax_cancel_favorite";
 
 #pragma mark - 设置视图x
 - (void)setThnGoodsInfoVcUI {
-    [self.view addSubview:self.goodsTable];
-    [self.view addSubview:self.goodsInfoWeb];
+    [self.view addSubview:self.menuView];
+    [self.view addSubview:self.goodsInfoRoll];
+    [self.goodsInfoRoll addSubview:self.goodsTable];
+    [self.goodsInfoRoll addSubview:self.goodsInfoWeb];
+
+    _goodsCommentVC = [[FBGoodsCommentViewController alloc] init];
+    [self addChildViewController:_goodsCommentVC];
+    [self.goodsInfoRoll addSubview:_goodsCommentVC.view];
+    
     [self.view addSubview:self.buyView];
+}
+
+- (UIScrollView *)goodsInfoRoll {
+    if (!_goodsInfoRoll) {
+        _goodsInfoRoll = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 108, SCREEN_WIDTH, SCREEN_HEIGHT - 152)];
+        _goodsInfoRoll.showsHorizontalScrollIndicator = NO;
+        _goodsInfoRoll.backgroundColor = [UIColor colorWithHexString:@"#F8F8F8"];
+        _goodsInfoRoll.contentSize = CGSizeMake(SCREEN_WIDTH * 3, 0);
+        _goodsInfoRoll.scrollEnabled = NO;
+        _goodsInfoRoll.pagingEnabled = YES;
+    }
+    return _goodsInfoRoll;
+}
+
+- (FBSegmentView *)menuView {
+    if (!_menuView) {
+        NSArray *menuTitle = @[NSLocalizedString(@"niceGoods", nil),
+                               NSLocalizedString(@"niceGoodsInfo", nil),
+                               NSLocalizedString(@"goodsComment", nil)];
+        _menuView = [[FBSegmentView alloc] initWithFrame:CGRectMake(0, 64, SCREEN_WIDTH, 44)];
+        _menuView.delegate = self;
+        [_menuView set_menuItemTitle:menuTitle];
+        [_menuView set_showBottomLine:NO];
+    }
+    return _menuView;
+}
+
+- (void)menuItemSelected:(NSInteger)index {
+    CGPoint rollPoint = self.goodsInfoRoll.contentOffset;
+    rollPoint.x = SCREEN_WIDTH * index;
+    [UIView animateWithDuration:.3 animations:^{
+        self.goodsInfoRoll.contentOffset = rollPoint;
+    }];
+    
+    if (index == 1) {
+        //  加载商品的web详情
+        NSURLRequest *request =[NSURLRequest requestWithURL:[NSURL URLWithString:_goodsInfoUrl]];
+        [self.goodsInfoWeb loadRequest:request];
+    } else if (index == 2) {
+        [_goodsCommentVC networkSceneCommenstData:self.goodsID];
+    }
 }
 
 #pragma mark - 轮播图
 - (FBRollImages *)rollImgView {
     if (!_rollImgView) {
-        _rollImgView = [[FBRollImages alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, Banner_height)];
+        _rollImgView = [[FBRollImages alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_WIDTH *0.56)];
         _rollImgView.navVC = self.navigationController;
     }
     return _rollImgView;
@@ -165,7 +213,7 @@ static NSString *const URlCancelCollect = @"/favorite/ajax_cancel_favorite";
 #pragma mark - 商品详情
 - (UIWebView *)goodsInfoWeb {
     if (!_goodsInfoWeb) {
-        _goodsInfoWeb = [[UIWebView alloc] initWithFrame:CGRectMake(SCREEN_WIDTH, 64, SCREEN_WIDTH, SCREEN_HEIGHT - 108)];
+        _goodsInfoWeb = [[UIWebView alloc] initWithFrame:CGRectMake(SCREEN_WIDTH, 0, SCREEN_WIDTH, SCREEN_HEIGHT - 152)];
         _goodsInfoWeb.delegate = self;
         _goodsInfoWeb.scrollView.delegate = self;
         _goodsInfoWeb.scrollView.bounces = YES;
@@ -183,41 +231,10 @@ static NSString *const URlCancelCollect = @"/favorite/ajax_cancel_favorite";
     [SVProgressHUD dismiss];
 }
 
-#pragma mark 产品详情的上拉&下拉加载
-- (void)scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate {
-    decelerate = YES;
-    if (scrollView == self.goodsTable) {
-        CGPoint contentOffsetPoint = self.goodsTable.contentOffset;
-        if (contentOffsetPoint.y >  self.goodsTable.contentSize.height - self.goodsTable.frame.size.height + 50) {
-            
-            
-        }
-        
-    } else if (scrollView == self.goodsInfoWeb.scrollView) {
-        CGPoint webContentOffset = self.goodsInfoWeb.scrollView.contentOffset;
-        if (webContentOffset.y < -50) {
-            
-            CGRect goodsTableRect = self.goodsTable.frame;
-            goodsTableRect.origin.y = 64;
-            [UIView animateWithDuration:.3 animations:^{
-                self.goodsTable.frame = goodsTableRect;
-            }];
-            
-            CGRect goodsInfoRect = self.goodsInfoWeb.frame;
-            goodsInfoRect.origin.y = SCREEN_HEIGHT;
-            [UIView animateWithDuration:.3 animations:^{
-                self.goodsInfoWeb.frame = goodsInfoRect;
-            }];
-            
-            [SVProgressHUD dismiss];
-        }
-    }
-}
-
 #pragma mark - 商品信息列表
 - (UITableView *)goodsTable {
     if (!_goodsTable) {
-        _goodsTable = [[UITableView alloc] initWithFrame:CGRectMake(0, 64, SCREEN_WIDTH, SCREEN_HEIGHT - 108) style:(UITableViewStyleGrouped)];
+        _goodsTable = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT - 152) style:(UITableViewStyleGrouped)];
         _goodsTable.delegate = self;
         _goodsTable.dataSource = self;
         _goodsTable.showsVerticalScrollIndicator = NO;
@@ -353,7 +370,9 @@ static NSString *const URlCancelCollect = @"/favorite/ajax_cancel_favorite";
 #pragma mark 跳转
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     if (indexPath.section == 0) {
-        [self openGoodsInfoWeb];
+        [self.menuView updateMenuBtnState:1];
+        [self menuItemSelected:1];
+        
     } else if (indexPath.section == 2) {
         GoodsBrandViewController * goodsBrandVC = [[GoodsBrandViewController alloc] init];
         goodsBrandVC.brandId = self.goodsInfo.brandId;
@@ -365,25 +384,6 @@ static NSString *const URlCancelCollect = @"/favorite/ajax_cancel_favorite";
 //        thnCommentVC.targetId = self.goodsID;
 //        [self.navigationController pushViewController:thnCommentVC animated:YES];
 //    }
-}
-
-#pragma mark - 打开商品详情web
-- (void)openGoodsInfoWeb {
-    CGRect goodsTableRect = self.goodsTable.frame;
-    goodsTableRect.origin.x = -SCREEN_WIDTH;
-    [UIView animateWithDuration:.3 animations:^{
-        self.goodsTable.frame = goodsTableRect;
-    }];
-    
-    CGRect goodsInfoRect = self.goodsInfoWeb.frame;
-    goodsInfoRect.origin.x = 0;
-    [UIView animateWithDuration:.3 animations:^{
-        self.goodsInfoWeb.frame = goodsInfoRect;
-    }];
-    
-    //  加载商品的web详情
-    NSURLRequest *request =[NSURLRequest requestWithURL:[NSURL URLWithString:_goodsInfoUrl]];
-    [self.goodsInfoWeb loadRequest:request];
 }
 
 #pragma mark - 打开商品购买视图
