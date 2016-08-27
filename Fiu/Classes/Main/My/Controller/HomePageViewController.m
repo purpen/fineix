@@ -59,6 +59,11 @@
 @property(nonatomic,strong) UILabel *titleLabel;
 /**  */
 @property (nonatomic, strong) ScenarioNonView *defaultView;
+/**  */
+@property (nonatomic, strong) NSMutableArray *commentsMarr;
+/**  */
+@property (nonatomic, strong) NSMutableArray *userIdMarr;
+
 @end
 
 static NSString *const IconURL = @"/my/add_head_pic";
@@ -68,6 +73,20 @@ static NSString *sceneCellId = @"THNHomeSenceCollectionViewCell";
 
 -(void)viewWillDisappear:(BOOL)animated{
    [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleDefault];
+}
+
+-(NSMutableArray *)userIdMarr{
+    if (!_userIdMarr) {
+        _userIdMarr = [NSMutableArray array];
+    }
+    return _userIdMarr;
+}
+
+-(NSMutableArray *)commentsMarr{
+    if (!_commentsMarr) {
+        _commentsMarr = [NSMutableArray array];
+    }
+    return _commentsMarr;
 }
 
 - (void)viewDidLoad {
@@ -227,7 +246,7 @@ static NSString *sceneCellId = @"THNHomeSenceCollectionViewCell";
     }
 }
 
-//上拉下拉分页请求订单列表
+
 - (void)requestDataForOderListOperation
 {
 //    self.myCollectionView.mj_footer.hidden = YES;
@@ -237,6 +256,7 @@ static NSString *sceneCellId = @"THNHomeSenceCollectionViewCell";
 //        [SVProgressHUD show];
         FBRequest *request = [FBAPI postWithUrlString:@"/scene_scene/" requestDictionary:@{@"page":@(_n+1),@"size":@6,@"sort":@0,@"user_id":self.userId} delegate:self];
         [request startRequestSuccess:^(FBRequest *request, id result) {
+            
             NSArray * fiuSceneArr = [[result valueForKey:@"data"] valueForKey:@"rows"];
             for (NSDictionary * fiuSceneDic in fiuSceneArr) {
                 FiuSceneRow * fiuSceneModel = [[FiuSceneRow alloc] initWithDictionary:fiuSceneDic];
@@ -290,7 +310,9 @@ static NSString *sceneCellId = @"THNHomeSenceCollectionViewCell";
                 HomeSceneListRow * homeSceneModel = [[HomeSceneListRow alloc] initWithDictionary:sceneDic];
                 [_sceneListMarr addObject:homeSceneModel];
                 [_sceneIdMarr addObject:[NSString stringWithFormat:@"%zi", homeSceneModel.idField]];
+                [self.userIdMarr addObject:[NSString stringWithFormat:@"%zi", homeSceneModel.userId]];
             }
+            [self.commentsMarr addObjectsFromArray:[sceneArr valueForKey:@"comments"]];
             [self.myCollectionView reloadData];
             _m = [[[result objectForKey:@"data"] objectForKey:@"current_page"] intValue];
             _totalM = [[[result objectForKey:@"data"] objectForKey:@"total_page"] intValue];
@@ -588,17 +610,14 @@ static NSString *sceneCellId = @"THNHomeSenceCollectionViewCell";
             if (_sceneListMarr.count == 0) {
                 return;
             }
-            SceneInfoViewController * sceneInfoVC = [[SceneInfoViewController alloc] init];
-            sceneInfoVC.sceneId = _sceneIdMarr[indexPath.row];
-            [self.navigationController pushViewController:sceneInfoVC animated:YES];
             
-//            THNSceneListViewController *sceneListVC = [[THNSceneListViewController alloc] init];
-//            sceneListVC.sceneListMarr = [NSArray arrayWithObject:_];
-//            sceneListVC.commentsMarr = self.commentsMarr;
-//            sceneListVC.sceneIdMarr = self.sceneIdMarr;
-//            sceneListVC.userIdMarr = self.userIdMarr;
-//            sceneListVC.index = indexPath.row;
-//            [self.navigationController pushViewController:sceneListVC animated:YES];
+            THNSceneListViewController *sceneListVC = [[THNSceneListViewController alloc] init];
+            [sceneListVC.sceneListMarr addObject:_sceneListMarr[indexPath.row]];
+            [sceneListVC.commentsMarr addObject:self.commentsMarr[indexPath.row]];
+            [sceneListVC.sceneIdMarr addObject:_sceneIdMarr[indexPath.row]];
+            [sceneListVC.userIdMarr addObject:self.userIdMarr[indexPath.row]];
+            sceneListVC.index = 0;
+            [self.navigationController pushViewController:sceneListVC animated:YES];
         }
     }
 }

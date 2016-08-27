@@ -421,6 +421,7 @@ static NSString * resultCellId = @"resultCellId";
                                                                                              } delegate:self];
     [request startRequestSuccess:^(FBRequest *request, id result) {
         if (result[@"success"]) {
+            NSLog(@"活动规则  %@",result);
             self.ruleModel = [THNActiveRuleModel mj_objectWithKeyValues:result[@"data"]];
             [self.contentView reloadData];
         }else{

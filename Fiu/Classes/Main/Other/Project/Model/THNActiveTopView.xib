@@ -65,9 +65,15 @@
                             </variation>
                         </view>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KHI-xJ-6tw">
-                            <rect key="frame" x="79" y="124" width="158" height="17"/>
+                            <rect key="frame" x="64" y="124" width="188" height="17"/>
                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
                             <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9Sm-Cc-4MX">
+                            <rect key="frame" x="143" y="156" width="31" height="15"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                            <color key="textColor" white="1" alpha="0.80000000000000004" colorSpace="calibratedWhite"/>
                             <nil key="highlightedColor"/>
                         </label>
                     </subviews>
@@ -78,9 +84,11 @@
                         <constraint firstItem="fdg-Il-9s0" firstAttribute="top" secondItem="INx-ze-Q2R" secondAttribute="top" id="4MC-bm-cXA"/>
                         <constraint firstAttribute="trailing" secondItem="FK8-tM-laq" secondAttribute="trailing" constant="111" id="4cb-ES-Qof"/>
                         <constraint firstAttribute="trailing" secondItem="fvH-yh-pVS" secondAttribute="trailing" id="5PH-Hb-g2q"/>
+                        <constraint firstItem="9Sm-Cc-4MX" firstAttribute="centerX" secondItem="INx-ze-Q2R" secondAttribute="centerX" id="6VL-pc-nSd"/>
                         <constraint firstAttribute="bottom" secondItem="fdg-Il-9s0" secondAttribute="bottom" id="C66-pT-jOH"/>
                         <constraint firstItem="fvH-yh-pVS" firstAttribute="leading" secondItem="INx-ze-Q2R" secondAttribute="leading" id="D2a-ni-Bg5"/>
                         <constraint firstItem="fvH-yh-pVS" firstAttribute="top" secondItem="INx-ze-Q2R" secondAttribute="top" id="FRQ-gH-Qvn"/>
+                        <constraint firstItem="9Sm-Cc-4MX" firstAttribute="top" secondItem="KHI-xJ-6tw" secondAttribute="bottom" constant="15" id="HYe-Cd-q4h"/>
                         <constraint firstAttribute="trailing" secondItem="fdg-Il-9s0" secondAttribute="trailing" id="Ieq-EW-Ewh"/>
                         <constraint firstAttribute="bottom" secondItem="fvH-yh-pVS" secondAttribute="bottom" id="Y7E-2W-wA8"/>
                         <constraint firstItem="FK8-tM-laq" firstAttribute="leading" secondItem="INx-ze-Q2R" secondAttribute="leading" constant="111" id="bJy-E3-UCf"/>
@@ -89,7 +97,7 @@
                         <constraint firstItem="FK8-tM-laq" firstAttribute="width" relation="lessThanOrEqual" secondItem="INx-ze-Q2R" secondAttribute="width" multiplier="0.5" id="kM1-c0-mKU"/>
                         <constraint firstItem="FK8-tM-laq" firstAttribute="centerY" secondItem="INx-ze-Q2R" secondAttribute="centerY" constant="-10" id="ka9-H6-HmO"/>
                         <constraint firstItem="FK8-tM-laq" firstAttribute="centerX" secondItem="INx-ze-Q2R" secondAttribute="centerX" id="omJ-Ed-uxr"/>
-                        <constraint firstItem="KHI-xJ-6tw" firstAttribute="width" secondItem="INx-ze-Q2R" secondAttribute="width" multiplier="0.5" id="wv2-be-KPf"/>
+                        <constraint firstItem="KHI-xJ-6tw" firstAttribute="width" secondItem="INx-ze-Q2R" secondAttribute="width" multiplier="0.5" constant="30" id="wv2-be-KPf"/>
                     </constraints>
                     <variation key="default">
                         <mask key="constraints">
@@ -112,6 +120,7 @@
             <connections>
                 <outlet property="bgImageView" destination="fdg-Il-9s0" id="vfX-lq-i49"/>
                 <outlet property="subTitleLabel" destination="KHI-xJ-6tw" id="38j-kw-raF"/>
+                <outlet property="timeLabel" destination="9Sm-Cc-4MX" id="jDg-jQ-An7"/>
                 <outlet property="titleLabel" destination="Acz-so-eSo" id="ua9-HL-Pbc"/>
             </connections>
             <point key="canvasLocation" x="406" y="433.5"/>

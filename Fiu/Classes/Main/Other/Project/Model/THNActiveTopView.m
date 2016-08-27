@@ -16,6 +16,7 @@
 
 @property (weak, nonatomic) IBOutlet UILabel *titleLabel;
 @property (weak, nonatomic) IBOutlet UILabel *subTitleLabel;
+@property (weak, nonatomic) IBOutlet UILabel *timeLabel;
 
 @end
 
@@ -26,6 +27,11 @@
     [self.bgImageView sd_setImageWithURL:[NSURL URLWithString:model.cover_url] placeholderImage:[UIImage imageNamed:@"Defaul_Bg_420"]];
     self.titleLabel.text = model.title;
     self.subTitleLabel.text = model.short_title;
+    if (model.evt == 2) {
+        self.timeLabel.text = @"已结束";
+    }else{
+        self.timeLabel.text = [NSString stringWithFormat:@"%@-%@",model.begin_time_at,model.end_time_at];
+    }
 }
 
 @end

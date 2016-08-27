@@ -31,4 +31,7 @@
 @pro_strong NSMutableArray *userIdMarr;
 @pro_strong NSMutableArray *commentsMarr;
 
+/**  */
+@property(nonatomic,copy) NSString *sceneListId;
+
 @end

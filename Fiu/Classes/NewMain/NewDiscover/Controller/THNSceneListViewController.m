@@ -56,6 +56,17 @@ static NSString *const twoCommentsCellId = @"TwoCommentsCellId";
     [super viewDidLoad];
     
     [self thn_setSceneViewUI];
+    
+    if (self.sceneListId.length != 0) {
+        FBRequest *request = [FBAPI postWithUrlString:@"/scene_sight/view" requestDictionary:@{
+                                                                                               @"id" : self.sceneListId
+                                                                                               } delegate:self];
+        [request startRequestSuccess:^(FBRequest *request, id result) {
+            if (result[@"success"]) {
+                NSLog(@"情境详情 %@",result);
+            }
+        } failure:nil];
+    }
 }
 
 #pragma mark - 网络请求
