@@ -37,8 +37,6 @@ static NSString *const URLGiveExp = @"/user/send_exp";
     [super viewDidLoad];
     self.view.backgroundColor = [UIColor blackColor];
     [self setShareVcUI];
-    
-    NSLog(@"＝＝＝＝＝＝＝＝%@", _sceneModel.title);
 }
 
 - (FBPopupView *)sharePopView {
@@ -106,30 +104,9 @@ static NSString *const URLGiveExp = @"/user/send_exp";
     if (!_shareView) {
         _shareView = [[UIView alloc] initWithFrame:CGRectMake(0, 44, SCREEN_WIDTH, SCREEN_HEIGHT)];
         [_shareView addSubview:self.shareTopView];
-        
-//        UITapGestureRecognizer * tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(editShareInfo)];
-//        [_shareView addGestureRecognizer:tap];
     }
     return _shareView;
 }
-
-//#pragma mark - 打开编辑场景语境的视图
-//- (void)editShareInfo {
-//    FBEditShareInfoViewController * editShareInfoVC = [[FBEditShareInfoViewController alloc] init];
-//    editShareInfoVC.bgImg = _editBgImg;
-//    editShareInfoVC.afterTitle = _editTitle;
-//    editShareInfoVC.afterDes = _editDes;
-//    editShareInfoVC.sceneTags = _tags;
-//    [self presentViewController:editShareInfoVC animated:YES completion:nil];
-//    
-//    editShareInfoVC.getEdtiShareText = ^ (NSString * title, NSString * des, NSString * oid) {
-//        [self.shareTopView changeWithSearchText:title withDes:des];
-//        [self.shareBottomView changeWithSearchText:title withDes:des];
-//        [self.shareTitleBottomView changeWithSearchText:title withDes:des];
-//        [self.shareTitleTopView changeWithSearchText:title withDes:des];
-//        _oid = oid;
-//    };
-//}
 
 - (ShareStyleTopView *)shareTopView {
     if (!_shareTopView) {
@@ -182,7 +159,7 @@ static NSString *const URLGiveExp = @"/user/send_exp";
 }
 
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
-    return 4;
+    return 1;
 }
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
@@ -222,7 +199,7 @@ static NSString *const URLGiveExp = @"/user/send_exp";
 - (UIView *)topView {
     if (!_topView) {
         _topView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 44)];
-        _topView.backgroundColor = [UIColor colorWithHexString:@"#222222" alpha:.3];
+        _topView.backgroundColor = [UIColor colorWithHexString:@"#222222" alpha:1];
         
         [_topView addSubview:self.closeBtn];
         [_topView addSubview:self.shareBtn];
@@ -250,11 +227,6 @@ static NSString *const URLGiveExp = @"/user/send_exp";
         _shareBtn = [[UIButton alloc] initWithFrame:CGRectMake(SCREEN_WIDTH - 44, 0, 44, 44)];
         [_shareBtn setTitleColor:[UIColor whiteColor] forState:(UIControlStateNormal)];
         [_shareBtn setImage:[UIImage imageNamed:@"Share_white"] forState:(UIControlStateNormal)];
-        if (IS_iOS9) {
-            _shareBtn.titleLabel.font = [UIFont fontWithName:@"PingFangSC-Light" size:16];
-        } else {
-            _shareBtn.titleLabel.font = [UIFont systemFontOfSize:16];
-        }
         [_shareBtn addTarget:self action:@selector(shareItemSelected) forControlEvents:(UIControlEventTouchUpInside)];
     }
     return _shareBtn;

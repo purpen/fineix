@@ -147,6 +147,13 @@ static NSString *const hotUserCellId = @"HotUserCellId";
     return cell;
 }
 
+- (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
+    HomePageViewController *userHomeVC = [[HomePageViewController alloc] init];
+    userHomeVC.userId = self.hotUserIdMarr[indexPath.row];
+    userHomeVC.type = @2;
+    [self.nav pushViewController:userHomeVC animated:YES];
+}
+
 - (UIView *)bottomView {
     if (!_bottomView) {
         _bottomView = [[UIView alloc] init];
