@@ -16,7 +16,7 @@
 #import "HomeSceneListRow.h"
 #import "SceneInfoViewController.h"
 #import "THNHomeSenceCollectionViewCell.h"
-#import "THNSceneListViewController.h"
+#import "THNSceneDetalViewController.h"
 
 @interface THNContentViewController ()<UICollectionViewDelegate,UICollectionViewDataSource>
 {
@@ -232,6 +232,7 @@ static NSString *const URLFiuGoods = @"/favorite/get_new_list";
                     HomeSceneListRow * homeSceneModel = [[HomeSceneListRow alloc] init];
                     homeSceneModel.coverUrl = sight[@"cover_url"];
                     homeSceneModel.title = sight[@"scene_title"];
+                    homeSceneModel._id = sight[@"_id"];
                     [_sceneListMarr addObject:homeSceneModel];
                     [_sceneIdMarr addObject:[NSString stringWithFormat:@"%zi", homeSceneModel.idField]];
                     [self.userIdMarr addObject:[NSString stringWithFormat:@"%zi", homeSceneModel.userId]];
@@ -310,9 +311,9 @@ static NSString *const URLFiuGoods = @"/favorite/get_new_list";
         [self.navigationController pushViewController:goodsInfoVC animated:YES];
     }else{
         
-        THNSceneListViewController *sceneListVC = [[THNSceneListViewController alloc] init];
-        sceneListVC.sceneListId = [NSString stringWithFormat:@"%ld",(long)((HomeSceneListRow*)_sceneListMarr[indexPath.row]).idField];
-        sceneListVC.index = 0;
+        THNSceneDetalViewController *sceneListVC = [[THNSceneDetalViewController alloc] init];
+        sceneListVC.sceneDetalId = ((HomeSceneListRow*)_sceneListMarr[indexPath.row])._id;
+        NSLog(@"情境ID %@",((HomeSceneListRow*)_sceneListMarr[indexPath.row])._id);
         [self.navigationController pushViewController:sceneListVC animated:YES];
     }
 }

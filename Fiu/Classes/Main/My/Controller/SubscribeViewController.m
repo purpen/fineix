@@ -17,6 +17,7 @@
 #import "THNSubHeadView.h"
 #import "THNSenceModel.h"
 #import "THNSenecCollectionViewCell.h"
+#import "THNSceneDetalViewController.h"
 
 @interface SubscribeViewController ()<FBNavigationBarItemsDelegate,UICollectionViewDelegate,UICollectionViewDataSource,UICollectionViewDelegateFlowLayout,FBRequestDelegate>
 @pro_strong NSMutableArray          *   allFiuSceneMarr;        //   情景列表
@@ -78,7 +79,7 @@ static NSString *const URLAllFiuSceneList = @"/scene_scene/";
         for (NSDictionary * sceneDic in sceneArr) {
             THNSenceModel * allFiuScene = [THNSenceModel mj_objectWithKeyValues:sceneDic];
             [self.allFiuSceneMarr addObject:allFiuScene];
-            [self.allFiuSceneIdMarr addObject:[NSString stringWithFormat:@"%zi", allFiuScene._id]];
+            [self.allFiuSceneIdMarr addObject:allFiuScene._id];
         }
         
         [self.view addSubview:self.headView];
@@ -195,6 +196,11 @@ static NSString *const URLAllFiuSceneList = @"/scene_scene/";
     return cell;
 }
 
+-(void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath{
+    THNSceneDetalViewController *vc = [[THNSceneDetalViewController alloc] init];
+    vc.sceneDetalId = self.allFiuSceneIdMarr[indexPath.row];
+    [self.navigationController pushViewController:vc animated:YES];
+}
 
 #pragma mark - 设置Nav
 - (void)setNavigationViewUI {
