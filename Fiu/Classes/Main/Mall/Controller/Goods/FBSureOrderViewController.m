@@ -104,8 +104,6 @@ static NSString *const URLCarGoPay = @"/shopping/checkout";
 
     self.carPayRequest = [FBAPI postWithUrlString:URLCarGoPay requestDictionary:@{@"array":json} delegate:self];
     [self.carPayRequest startRequestSuccess:^(FBRequest *request, id result) {
-
-        NSLog(@"购物车下单：%@", result);
         //  合计价格
         self.payPrice = [[result valueForKey:@"data"] valueForKey:@"pay_money"];
         self.sumPrice.text = [NSString stringWithFormat:@"￥%@", self.payPrice];

@@ -169,7 +169,7 @@ static CGFloat const userNameFont = 10.0f;
 
     [self addSubview:self.slogan];
     [_slogan mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.size.mas_equalTo(CGSizeMake(60, 15));
+        make.size.mas_equalTo(CGSizeMake(63, 15));
         make.top.equalTo(_describe.mas_bottom).with.offset(5);
         make.left.equalTo(_describe.mas_left).with.offset(0);
     }];

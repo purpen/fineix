@@ -63,7 +63,6 @@ static NSString *const URlCancelCollect = @"/favorite/ajax_cancel_favorite";
     [SVProgressHUD show];
     self.goodsInfoRequest = [FBAPI getWithUrlString:URLGoodsInfo requestDictionary:@{@"id":self.goodsID} delegate:self];
     [self.goodsInfoRequest startRequestSuccess:^(FBRequest *request, id result) {
-        NSLog(@"＝＝＝＝＝ 商品详情：%@", self.goodsID);
         _goodsDes = [[result valueForKey:@"data"] valueForKey:@"advantage"];
         _goodsInfoUrl = [[result valueForKey:@"data"] valueForKey:@"content_view_url"];
         _collect = [[[result valueForKey:@"data"] valueForKey:@"is_favorite"] integerValue];
@@ -457,7 +456,7 @@ static NSString *const URlCancelCollect = @"/favorite/ajax_cancel_favorite";
     [[UIApplication sharedApplication] setStatusBarStyle:(UIStatusBarStyleLightContent)];
     self.navViewTitle.text = NSLocalizedString(@"GoodsInfoVcTitle", nil);
     self.view.backgroundColor = [UIColor whiteColor];
-    [self addBarItemRightBarButton:@"" image:@"Nav_Car" isTransparent:NO];
+    [self addBarItemRightBarButton:@"" image:@"mall_car" isTransparent:NO];
     self.delegate = self;
     [self setNavGoodsCarNumLab];
     self.view.clipsToBounds = YES;

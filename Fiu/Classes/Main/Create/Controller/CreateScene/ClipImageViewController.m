@@ -76,6 +76,7 @@
 - (void)setNavItemAction:(BOOL)action {
     self.cancelBtn.hidden = action;
     self.nextBtn.hidden = action;
+    self.openPhotoAlbums.hidden = action;
 }
 
 - (void)setViewUI {
