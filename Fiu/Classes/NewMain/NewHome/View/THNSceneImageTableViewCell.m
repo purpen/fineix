@@ -7,7 +7,7 @@
 //
 
 #import "THNSceneImageTableViewCell.h"
-#import "GoodsInfoViewController.h"
+#import "FBGoodsInfoViewController.h"
 #import "UILable+Frame.h"
 #import "UIImage+Helper.h"
 #import "THNSceneImageViewController.h"
@@ -45,7 +45,7 @@
                                forState:(UIControlStateNormal)
                        placeholderImage:[UIImage imageNamed:@""]];
     
-    if (sceneModel.title.length == 0) {
+    if (sceneModel.title.length == 0 || [sceneModel.title isKindOfClass:[NSNull class]]) {
         self.title.hidden = YES;
         self.suTitle.hidden = YES;
 
@@ -137,7 +137,7 @@
 
 - (void)openGoodsInfo:(UITapGestureRecognizer *)tapGesture {
     NSInteger index = [self.userTagMarr indexOfObject:tapGesture.view];
-    GoodsInfoViewController * goodsInfoVC = [[GoodsInfoViewController alloc] init];
+    FBGoodsInfoViewController * goodsInfoVC = [[FBGoodsInfoViewController alloc] init];
     goodsInfoVC.goodsID = self.goodsIds[index];
     [self.nav pushViewController:goodsInfoVC animated:YES];
 }

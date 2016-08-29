@@ -153,7 +153,7 @@ static NSString *const MallListGoodsCellId = @"mallListGoodsCellId";
 }
 
 - (void)lookAllClick {
-    [SVProgressHUD showSuccessWithStatus:@"查看全部主题商品"];
+//    [SVProgressHUD showSuccessWithStatus:@"查看全部主题商品"];
 }
 
 - (UICollectionView *)goodsList {

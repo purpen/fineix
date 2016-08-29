@@ -42,9 +42,9 @@
         weakSelf.goodsSkus = [NSMutableArray arrayWithArray:model.skus];
         if (weakSelf.goodsSkus.count == 0) {
             NSDictionary * skuDict = @{@"mode":NSLocalizedString(@"Default", nil),
-                                       @"price":[NSString stringWithFormat:@"%.2f",[[model valueForKey:@"salePrice"] floatValue]],
-                                       @"quantity":[model valueForKey:@"inventory"],
-                                       @"targetId":[NSString stringWithFormat:@"%@", [model valueForKey:@"idField"]]};
+                                       @"price":[NSString stringWithFormat:@"%zi",[[model valueForKey:@"salePrice"] integerValue]],
+                                       @"quantity":[NSString stringWithFormat:@"%zi",[[model valueForKey:@"inventory"] integerValue]],
+                                       @"targetId":[NSString stringWithFormat:@"%zi", [[model valueForKey:@"idField"] integerValue]]};
             [weakSelf.goodsSkus addObject:skuDict];
         }
         [weakSelf setBuyGoodsData:model];
@@ -55,7 +55,7 @@
 - (void)setBuyGoodsData:(FBGoodsInfoModelData *)model {
     [self.goodsImg downloadImage:model.coverUrl place:[UIImage imageNamed:@""]];
     self.goodsTitle.text = model.title;
-    self.goodsPrice.text = [NSString stringWithFormat:@"￥%.2f", model.salePrice];
+    self.goodsPrice.text = [NSString stringWithFormat:@"￥%zi", model.salePrice];
     self.chooseNum.text = [NSString stringWithFormat:@"%zi", self.num];
     [self.goodsColorView reloadData];
    
@@ -85,11 +85,7 @@
         
         UILabel * colorLab = [[UILabel alloc] initWithFrame:CGRectMake(15, 120, SCREEN_WIDTH - 30, 20)];
         colorLab.text = @"颜色分类";
-        if (IS_iOS9) {
-            colorLab.font = [UIFont fontWithName:@"PingFangSC-Light" size:16];
-        } else {
-            colorLab.font = [UIFont systemFontOfSize:16];
-        }
+        colorLab.font = [UIFont systemFontOfSize:16];
         
         [_buyView addSubview:self.buyingBtn];
         [_buyView addSubview:self.addCarBtn];
@@ -273,14 +269,14 @@
     }
     self.num = 1;
     if ([[self.goodsSkus valueForKey:@"mode"][indexPath.row] isEqualToString:NSLocalizedString(@"Default", nil)]) {
-        self.skuId = [NSString stringWithFormat:@"%@", [self.goodsSkus valueForKey:@"targetId"][indexPath.row]];
+        self.skuId = [NSString stringWithFormat:@"%zi", [[self.goodsSkus valueForKey:@"productId"][indexPath.row] integerValue]];
     } else {
-        self.skuId = [NSString stringWithFormat:@"%@", [self.goodsSkus valueForKey:@"_id"][indexPath.row]];
+        self.skuId = [NSString stringWithFormat:@"%zi", [[self.goodsSkus valueForKey:@"idField"][indexPath.row] integerValue]];
     }
 }
 
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath {
-    CGFloat btnLength = [[[self.goodsSkus valueForKey:@"mode"] objectAtIndex:indexPath.row] boundingRectWithSize:CGSizeMake(320, 1000) options:(NSStringDrawingUsesLineFragmentOrigin) attributes:nil context:nil].size.width;
+    CGFloat btnLength = [[[self.goodsSkus valueForKey:@"mode"] objectAtIndex:indexPath.row] boundingRectWithSize:CGSizeMake(320, 0) options:(NSStringDrawingUsesLineFragmentOrigin) attributes:nil context:nil].size.width;
     return CGSizeMake(btnLength + 40, 30);
 }
 
@@ -316,22 +312,14 @@
         
         UILabel * chooseNumTitle = [[UILabel alloc] initWithFrame:CGRectMake(0, 10, SCREEN_WIDTH - 30, 20)];
         chooseNumTitle.text = @"数量";
-        if (IS_iOS9) {
-            chooseNumTitle.font = [UIFont fontWithName:@"PingFangSC-Light" size:16];
-        } else {
-            chooseNumTitle.font = [UIFont systemFontOfSize:16];
-        }
+        chooseNumTitle.font = [UIFont systemFontOfSize:16];
         
         UIButton * addBtn = [[UIButton alloc] initWithFrame:CGRectMake(110, 40, 30, 30)];
         addBtn.layer.borderColor = [UIColor colorWithHexString:titleColor alpha:.5].CGColor;
         addBtn.layer.borderWidth = 1.0f;
         [addBtn setTitleColor:[UIColor colorWithHexString:titleColor] forState:(UIControlStateNormal)];
         [addBtn setTitle:@"＋" forState:(UIControlStateNormal)];
-        if (IS_iOS9) {
-            addBtn.titleLabel.font = [UIFont fontWithName:@"PingFangSC-Light" size:14];
-        } else {
-            addBtn.titleLabel.font = [UIFont systemFontOfSize:14];
-        }
+        addBtn.titleLabel.font = [UIFont systemFontOfSize:14];
         [addBtn addTarget:self action:@selector(addChooseNum:) forControlEvents:(UIControlEventTouchUpInside)];
         self.addBtn = addBtn;
         
@@ -340,11 +328,7 @@
         subBtn.layer.borderWidth = 1.0f;
         [subBtn setTitleColor:[UIColor colorWithHexString:titleColor] forState:(UIControlStateNormal)];
         [subBtn setTitle:@"－" forState:(UIControlStateNormal)];
-        if (IS_iOS9) {
-            subBtn.titleLabel.font = [UIFont fontWithName:@"PingFangSC-Light" size:14];
-        } else {
-            subBtn.titleLabel.font = [UIFont systemFontOfSize:14];
-        }
+        subBtn.titleLabel.font = [UIFont systemFontOfSize:14];
         [subBtn addTarget:self action:@selector(subChooseNum:) forControlEvents:(UIControlEventTouchUpInside)];
         self.subBtn = subBtn;
         
@@ -410,11 +394,7 @@
         _chooseNum = [[UILabel alloc] initWithFrame:CGRectMake(30, 40, 80, 30)];
         _chooseNum.text = @"1";
         _chooseNum.textColor = [UIColor colorWithHexString:titleColor];
-        if (IS_iOS9) {
-            _chooseNum.font = [UIFont fontWithName:@"PingFangSC-Light" size:14];
-        } else {
-            _chooseNum.font = [UIFont systemFontOfSize:14];
-        }
+        _chooseNum.font = [UIFont systemFontOfSize:14];
         _chooseNum.textAlignment = NSTextAlignmentCenter;
         _chooseNum.layer.borderColor = [UIColor colorWithHexString:titleColor alpha:.5].CGColor;
         _chooseNum.layer.borderWidth = 0.5f;

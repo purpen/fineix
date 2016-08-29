@@ -25,8 +25,9 @@
         [self.menuTitle mas_remakeConstraints:^(MASConstraintMaker *make) {
             make.size.mas_equalTo(CGSizeMake(50, 15));
             make.centerX.equalTo(self);
-            make.bottom.equalTo(self.mas_bottom).with.offset(-5);
+            make.bottom.equalTo(self.mas_bottom).with.offset(-9);
         }];
+        [self.menuImg downloadImage:model.backUrl place:[UIImage imageNamed:@""]];
         
     } else if (type == 0) {
         self.botLine.hidden = NO;
@@ -35,9 +36,8 @@
             make.size.mas_equalTo(CGSizeMake(50, 15));
             make.centerX.centerY.equalTo(self);
         }];
+        [self.menuImg downloadImage:model.appCoverUrl place:[UIImage imageNamed:@""]];
     }
-    
-    [self.menuImg downloadImage:model.backUrl place:[UIImage imageNamed:@""]];
     self.menuTitle.text = model.title;
 }
 

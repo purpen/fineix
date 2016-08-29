@@ -26,5 +26,7 @@
 @pro_strong NSMutableArray *categoryMarr;
 @pro_strong NSMutableArray *goodsDataMarr;
 @pro_strong NSMutableArray *subjectMarr;
+@pro_strong NSMutableArray *subjectIdMarr;
+@pro_strong NSMutableArray *subjectTypeMarr;
 
 @end

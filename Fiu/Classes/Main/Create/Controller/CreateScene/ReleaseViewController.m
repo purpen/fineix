@@ -55,6 +55,9 @@ static NSString *const URLGetUserDesTags = @"/gateway/fetch_chinese_word";
     if (subTitle.length == 0) {
         subTitle = @"";
     }
+    if (firTitle.length == 0) {
+        firTitle = @"";
+    }
     NSString *title = [NSString stringWithFormat:@"%@%@", firTitle, subTitle];
     
     if ([self.addContent.content.text isEqualToString:NSLocalizedString(@"addDescription", nil)]) {

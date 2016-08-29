@@ -117,7 +117,6 @@ static NSString *const themeCollectionCellID = @"ThemeCollectionCellID";
 
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
     if (indexPath.row == self.themeMarr.count) {
-        [SVProgressHUD showSuccessWithStatus:@"查看更多主题"];
         THNProjectViewController *projectVC = [[THNProjectViewController alloc] init];
         [self.nav pushViewController:projectVC animated:YES];
         
@@ -145,7 +144,9 @@ static NSString *const themeCollectionCellID = @"ThemeCollectionCellID";
             [self.nav pushViewController:xinPin animated:YES];
             
         } else if (_type == 5) {
-            [SVProgressHUD showSuccessWithStatus:@"好货"];
+            THNCuXiaoDetalViewController *cuXiao = [[THNCuXiaoDetalViewController alloc] init];
+            cuXiao.cuXiaoDetalId = self.themeIdMarr[indexPath.row];
+            [self.nav pushViewController:cuXiao animated:YES];
             
         }
     }

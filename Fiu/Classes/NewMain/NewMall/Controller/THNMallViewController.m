@@ -15,6 +15,12 @@
 #import "THNMallGoodsModelItem.h"
 #import "THNMallSubjectModelRow.h"
 
+#import "THNArticleDetalViewController.h"
+#import "THNActiveDetalTwoViewController.h"
+#import "THNXinPinDetalViewController.h"
+#import "THNCuXiaoDetalViewController.h"
+#import "THNProjectViewController.h"
+
 static NSString *const URLNewGoodsList = @"/product/index_new";
 static NSString *const URLCategory = @"/category/getlist";
 static NSString *const URLMallSubject = @"/scene_subject/getlist";
@@ -23,6 +29,12 @@ static NSString *const DiscoverCellId = @"discoverCellId";
 static NSString *const MallListCellId = @"mallListCellId";
 static NSString *const NewGoodsListCellId = @"newGoodsListCellId";
 static NSString *const MallListHeaderCellViewId = @"mallListHeaderCellViewId";
+
+@interface THNMallViewController () {
+    NSInteger _type;
+}
+
+@end
 
 @implementation THNMallViewController
 
@@ -81,6 +93,8 @@ static NSString *const MallListHeaderCellViewId = @"mallListHeaderCellViewId";
         for (NSDictionary * goodsDic in goodsArr) {
             THNMallSubjectModelRow *goodsModel = [[THNMallSubjectModelRow alloc] initWithDictionary:goodsDic];
             [self.subjectMarr addObject:goodsModel];
+            [self.subjectTypeMarr addObject:[NSString stringWithFormat:@"%zi",goodsModel.type]];
+            [self.subjectIdMarr addObject:[NSString stringWithFormat:@"%zi",goodsModel.idField]];
         }
         
         [self.mallList reloadData];
@@ -166,7 +180,35 @@ static NSString *const MallListHeaderCellViewId = @"mallListHeaderCellViewId";
 
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
     if (indexPath.row != 0) {
-        [SVProgressHUD showSuccessWithStatus:@"打开商品专题，查看全部"];
+    
+        _type = [self.subjectTypeMarr[indexPath.row - 1] integerValue];
+
+        if (_type == 1) {
+            THNArticleDetalViewController *articleVC = [[THNArticleDetalViewController alloc] init];
+            articleVC.articleDetalid = self.subjectIdMarr[indexPath.row - 1];
+            [self.navigationController pushViewController:articleVC animated:YES];
+            
+        } else if (_type == 2) {
+            THNActiveDetalTwoViewController *activity = [[THNActiveDetalTwoViewController alloc] init];
+            activity.activeDetalId = self.subjectIdMarr[indexPath.row - 1];
+            [self.navigationController pushViewController:activity animated:YES];
+            
+        } else if (_type == 3) {
+            THNCuXiaoDetalViewController *cuXiao = [[THNCuXiaoDetalViewController alloc] init];
+            cuXiao.cuXiaoDetalId = self.subjectIdMarr[indexPath.row - 1];
+            [self.navigationController pushViewController:cuXiao animated:YES];
+            
+        } else if (_type == 4) {
+            THNXinPinDetalViewController *xinPin = [[THNXinPinDetalViewController alloc] init];
+            xinPin.xinPinDetalId = self.subjectIdMarr[indexPath.row - 1];
+            [self.navigationController pushViewController:xinPin animated:YES];
+            
+        } else if (_type == 5) {
+            THNCuXiaoDetalViewController *cuXiao = [[THNCuXiaoDetalViewController alloc] init];
+            cuXiao.cuXiaoDetalId = self.subjectIdMarr[indexPath.row - 1];
+            [self.navigationController pushViewController:cuXiao animated:YES];
+            
+        }
     }
 }
 
@@ -207,6 +249,20 @@ static NSString *const MallListHeaderCellViewId = @"mallListHeaderCellViewId";
         _subjectMarr = [NSMutableArray array];
     }
     return _subjectMarr;
+}
+
+- (NSMutableArray *)subjectIdMarr {
+    if (!_subjectIdMarr) {
+        _subjectIdMarr = [NSMutableArray array];
+    }
+    return _subjectIdMarr;
+}
+
+- (NSMutableArray *)subjectTypeMarr {
+    if (!_subjectTypeMarr) {
+        _subjectTypeMarr = [NSMutableArray array];
+    }
+    return _subjectTypeMarr;
 }
 
 @end
