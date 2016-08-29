@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		1F0EE6A71C9FA4E7000631F0 /* libstdc++.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 1F0EE6A61C9FA4E7000631F0 /* libstdc++.tbd */; };
 		1F0EE6A91C9FA4F6000631F0 /* libz.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 1F0EE6A81C9FA4F6000631F0 /* libz.tbd */; };
+		1F0FDDD11D73C49B0006A99D /* THNSceneDetalViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F0FDDCF1D73C49B0006A99D /* THNSceneDetalViewController.m */; };
 		1F1134AC1D17F5CB00DFFA74 /* Fiu.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = 1F1134AB1D17F5CB00DFFA74 /* Fiu.mp4 */; };
 		1F1AF3B21CF58A6B00CAA525 /* IntegralViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F1AF3B01CF58A6B00CAA525 /* IntegralViewController.m */; };
 		1F1AF3B31CF58A6B00CAA525 /* IntegralViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1F1AF3B11CF58A6B00CAA525 /* IntegralViewController.xib */; };
@@ -701,6 +702,8 @@
 		1F0EE6A41C9FA47B000631F0 /* libsqlite3.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libsqlite3.tbd; path = usr/lib/libsqlite3.tbd; sourceTree = SDKROOT; };
 		1F0EE6A61C9FA4E7000631F0 /* libstdc++.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = "libstdc++.tbd"; path = "usr/lib/libstdc++.tbd"; sourceTree = SDKROOT; };
 		1F0EE6A81C9FA4F6000631F0 /* libz.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libz.tbd; path = usr/lib/libz.tbd; sourceTree = SDKROOT; };
+		1F0FDDCE1D73C49B0006A99D /* THNSceneDetalViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THNSceneDetalViewController.h; sourceTree = "<group>"; };
+		1F0FDDCF1D73C49B0006A99D /* THNSceneDetalViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THNSceneDetalViewController.m; sourceTree = "<group>"; };
 		1F1134AB1D17F5CB00DFFA74 /* Fiu.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = Fiu.mp4; sourceTree = "<group>"; };
 		1F1AF3AF1CF58A6B00CAA525 /* IntegralViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IntegralViewController.h; sourceTree = "<group>"; };
 		1F1AF3B01CF58A6B00CAA525 /* IntegralViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IntegralViewController.m; sourceTree = "<group>"; };
@@ -3117,6 +3120,8 @@
 				1FD310711D6583750079A21C /* THNSenceTopicViewController.h */,
 				1FD310721D6583750079A21C /* THNSenceTopicViewController.m */,
 				1FD310731D6583750079A21C /* THNSenceTopicViewController.xib */,
+				1F0FDDCE1D73C49B0006A99D /* THNSceneDetalViewController.h */,
+				1F0FDDCF1D73C49B0006A99D /* THNSceneDetalViewController.m */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -5674,6 +5679,7 @@
 				1F2A8FC91CF40277005116C7 /* GoodsRelationProducts.m in Sources */,
 				D8B855BE1D3CCC3E0008BD57 /* FBTagView.m in Sources */,
 				1F2A8FD11CF40277005116C7 /* RecommendGoodsCollectionViewCell.m in Sources */,
+				1F0FDDD11D73C49B0006A99D /* THNSceneDetalViewController.m in Sources */,
 				1F2A8F421CF40277005116C7 /* MarkGoodsRow.m in Sources */,
 				1F2A8FCB1CF40277005116C7 /* CarGoodsModelItem.m in Sources */,
 				1F2A8FE11CF40277005116C7 /* InfoTitleTableViewCell.m in Sources */,
@@ -5796,7 +5802,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 9.2;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
-				PROVISIONING_PROFILE = "38736fb6-f8a9-4075-b98f-85f06063d856";
+				PROVISIONING_PROFILE = "68229318-888d-4d23-9586-1a46706c4314";
 				SDKROOT = iphoneos;
 			};
 			name = Debug;
@@ -5834,7 +5840,7 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.2;
 				MTL_ENABLE_DEBUG_INFO = NO;
-				PROVISIONING_PROFILE = "38736fb6-f8a9-4075-b98f-85f06063d856";
+				PROVISIONING_PROFILE = "68229318-888d-4d23-9586-1a46706c4314";
 				SDKROOT = iphoneos;
 				VALIDATE_PRODUCT = YES;
 			};
@@ -5881,7 +5887,7 @@
 				OTHER_LIBTOOLFLAGS = "-all_load";
 				PRODUCT_BUNDLE_IDENTIFIER = com.THN.fineix;
 				PRODUCT_NAME = Fiu;
-				PROVISIONING_PROFILE = "38736fb6-f8a9-4075-b98f-85f06063d856";
+				PROVISIONING_PROFILE = "68229318-888d-4d23-9586-1a46706c4314";
 				RUN_CLANG_STATIC_ANALYZER = NO;
 				USER_HEADER_SEARCH_PATHS = "$(SRCROOT)";
 			};
@@ -5928,7 +5934,7 @@
 				OTHER_LIBTOOLFLAGS = "-all_load";
 				PRODUCT_BUNDLE_IDENTIFIER = com.THN.fineix;
 				PRODUCT_NAME = Fiu;
-				PROVISIONING_PROFILE = "38736fb6-f8a9-4075-b98f-85f06063d856";
+				PROVISIONING_PROFILE = "68229318-888d-4d23-9586-1a46706c4314";
 				RUN_CLANG_STATIC_ANALYZER = NO;
 				USER_HEADER_SEARCH_PATHS = "$(SRCROOT)";
 			};
