@@ -44,6 +44,9 @@
 @property(nonatomic,assign) NSInteger sceneCateCount;
 /** 小的头像 */
 @property(nonatomic,copy) NSString *avatar_url;
+/**  */
+@property(nonatomic,copy) NSString *province_id;
+
 
 - (void)updateUserInfoEntity;
 

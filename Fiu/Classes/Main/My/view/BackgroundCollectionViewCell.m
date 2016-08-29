@@ -12,6 +12,13 @@
 #import <SDWebImage/UIImageView+WebCache.h>
 #import "TalentView.h"
 
+@interface BackgroundCollectionViewCell ()
+
+/**  */
+@property (nonatomic, strong) CAGradientLayer *topShadowLayer;
+
+@end
+
 @implementation BackgroundCollectionViewCell
 -(instancetype)initWithFrame:(CGRect)frame{
     if (self = [super initWithFrame:frame]) {
@@ -189,25 +196,31 @@
 //    return _idImageView;
 //}
 
+-(CAGradientLayer *)topShadowLayer{
+    if (!_topShadowLayer) {
+        _topShadowLayer = [CAGradientLayer layer];
+        _topShadowLayer.startPoint = CGPointMake(0, 0);
+        _topShadowLayer.opacity = 0.5;
+        _topShadowLayer.endPoint = CGPointMake(0, 1);
+        _topShadowLayer.colors = @[(__bridge id)[UIColor clearColor].CGColor,
+                          (__bridge id)[UIColor blackColor].CGColor];
+        _topShadowLayer.locations = @[@0];
+        _topShadowLayer.frame = CGRectMake(0, SCREEN_WIDTH - 150, SCREEN_WIDTH, 150);
+    }
+    return _topShadowLayer;
+}
+
 #pragma mark - 个人信息背景图
 -(UIImageView *)bgImageView{
     if (!_bgImageView) {
         _bgImageView = [[UIImageView alloc] init];
         _bgImageView.backgroundColor = [UIColor lightGrayColor];
-        //_bgImageView.contentMode = UIViewContentModeScaleToFill;
+        _bgImageView.contentMode = UIViewContentModeScaleAspectFill;
         _bgImageView.userInteractionEnabled = YES;
         _bgImageView.image = [UIImage imageNamed:@"headBg"];
     
         //  添加渐变层
-        CAGradientLayer * shadow = [CAGradientLayer layer];
-        shadow.startPoint = CGPointMake(0, 0);
-        shadow.opacity = 0.5;
-        shadow.endPoint = CGPointMake(0, 1);
-        shadow.colors = @[(__bridge id)[UIColor clearColor].CGColor,
-                          (__bridge id)[UIColor blackColor].CGColor];
-        shadow.locations = @[@0];
-        shadow.frame = CGRectMake(0, SCREEN_WIDTH - 150, SCREEN_WIDTH, 150);
-        [_bgImageView.layer addSublayer:shadow];
+        [_bgImageView.layer addSublayer:self.topShadowLayer];
         
         
         [_bgImageView addSubview:self.userView];

@@ -132,6 +132,7 @@ static NSString *sceneCellId = @"THNHomeSenceCollectionViewCell";
 //    //
     [self.view addSubview:self.myCollectionView];
     
+    
     //  添加渐变层
     CAGradientLayer * shadow = [CAGradientLayer layer];
     shadow.startPoint = CGPointMake(0, 2);
@@ -141,6 +142,30 @@ static NSString *sceneCellId = @"THNHomeSenceCollectionViewCell";
     shadow.locations = @[@(0.5f), @(2.5f)];
     shadow.frame = CGRectMake(0, 0, SCREEN_WIDTH, 64);
     [self.view.layer addSublayer:shadow];
+    
+    
+    _m = 0;
+    [_sceneIdMarr removeAllObjects];
+    [_sceneListMarr removeAllObjects];
+    [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent];
+    self.delegate = self;
+    [self.view addSubview:self.titleLabel];
+    [self addBarItemLeftBarButton:nil image:@"Fill 1" isTransparent:YES];
+    if (self.isMySelf) {
+        [self addBarItemRightBarButton:nil image:@"SET" isTransparent:YES];
+    }else{
+        //        [self addBarItemRightBarButton:nil image:@"more_filled" isTransparent:YES];
+    }
+    [[UIApplication sharedApplication] setStatusBarHidden:NO withAnimation:(UIStatusBarAnimationSlide)];
+    self.navigationController.navigationBarHidden = YES;
+    self.tabBarController.tabBar.hidden = YES;
+    //进行网络请求
+    [self netGetData];
+    
+    self.myCollectionView.mj_footer = [MJRefreshAutoNormalFooter footerWithRefreshingBlock:^{
+        [self loadMoreDataM];
+    }];
+    [self requestDataForOderListOperation];
 }
 
 
@@ -192,40 +217,28 @@ static NSString *sceneCellId = @"THNHomeSenceCollectionViewCell";
 
 -(void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
-    _m = 0;
-    [_sceneIdMarr removeAllObjects];
-    [_sceneListMarr removeAllObjects];
-    [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent];
-    self.delegate = self;
-    [self.view addSubview:self.titleLabel];
-    [self addBarItemLeftBarButton:nil image:@"Fill 1" isTransparent:YES];
-    if (self.isMySelf) {
-        [self addBarItemRightBarButton:nil image:@"SET" isTransparent:YES];
-    }else{
-//        [self addBarItemRightBarButton:nil image:@"more_filled" isTransparent:YES];
-    }
-    [[UIApplication sharedApplication] setStatusBarHidden:NO withAnimation:(UIStatusBarAnimationSlide)];
-    self.navigationController.navigationBarHidden = YES;
-    self.tabBarController.tabBar.hidden = YES;
-    //进行网络请求
-    [self netGetData];
-
-    self.myCollectionView.mj_footer = [MJRefreshAutoNormalFooter footerWithRefreshingBlock:^{
-        [self loadMoreDataM];
-    }];
-    [self requestDataForOderListOperation];
-    
-//    if ([self.type isEqualToNumber:@1]) {
-//        self.myCollectionView.mj_footer = [MJRefreshAutoNormalFooter footerWithRefreshingBlock:^{
-//            [self loadMoreData];
-//        }];
-//        [self requestDataForOderListOperation];
-//    }else if([self.type isEqualToNumber:@2]){
-//        self.myCollectionView.mj_footer = [MJRefreshAutoNormalFooter footerWithRefreshingBlock:^{
-//            [self loadMoreDataM];
-//        }];
-//        [self requestDataForOderListOperation];
+//    _m = 0;
+//    [_sceneIdMarr removeAllObjects];
+//    [_sceneListMarr removeAllObjects];
+//    [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent];
+//    self.delegate = self;
+//    [self.view addSubview:self.titleLabel];
+//    [self addBarItemLeftBarButton:nil image:@"Fill 1" isTransparent:YES];
+//    if (self.isMySelf) {
+//        [self addBarItemRightBarButton:nil image:@"SET" isTransparent:YES];
+//    }else{
+////        [self addBarItemRightBarButton:nil image:@"more_filled" isTransparent:YES];
 //    }
+//    [[UIApplication sharedApplication] setStatusBarHidden:NO withAnimation:(UIStatusBarAnimationSlide)];
+//    self.navigationController.navigationBarHidden = YES;
+//    self.tabBarController.tabBar.hidden = YES;
+//    //进行网络请求
+//    [self netGetData];
+//
+//    self.myCollectionView.mj_footer = [MJRefreshAutoNormalFooter footerWithRefreshingBlock:^{
+//        [self loadMoreDataM];
+//    }];
+//    [self requestDataForOderListOperation];
 }
 
 -(void)loadMoreDataM{
@@ -256,14 +269,13 @@ static NSString *sceneCellId = @"THNHomeSenceCollectionViewCell";
 //        [SVProgressHUD show];
         FBRequest *request = [FBAPI postWithUrlString:@"/scene_scene/" requestDictionary:@{@"page":@(_n+1),@"size":@6,@"sort":@0,@"user_id":self.userId} delegate:self];
         [request startRequestSuccess:^(FBRequest *request, id result) {
-            
             NSArray * fiuSceneArr = [[result valueForKey:@"data"] valueForKey:@"rows"];
             for (NSDictionary * fiuSceneDic in fiuSceneArr) {
                 FiuSceneRow * fiuSceneModel = [[FiuSceneRow alloc] initWithDictionary:fiuSceneDic];
                 [_fiuSceneList addObject:fiuSceneModel];
                 [_fiuSceneIdList addObject:[NSString stringWithFormat:@"%zi", fiuSceneModel.idField]];
             }
-            
+
             [self.myCollectionView reloadData];
             _n = [[[result objectForKey:@"data"] objectForKey:@"current_page"] intValue];
             _totalN = [[[result objectForKey:@"data"] objectForKey:@"total_page"] intValue];
@@ -630,12 +642,14 @@ static NSString *sceneCellId = @"THNHomeSenceCollectionViewCell";
 
 -(void)clickFocusBtn:(UIButton*)sender{
     if (sender.selected) {
-        _model.is_love = 0;
-        _fansN --;
-        [self.myCollectionView reloadItemsAtIndexPaths:[NSArray arrayWithObjects:[NSIndexPath indexPathForRow:0 inSection:0],[NSIndexPath indexPathForRow:0 inSection:1], nil]];
-        FBRequest *request = [FBAPI postWithUrlString:@"/follow/ajax_cancel_follow" requestDictionary:@{@"follow_id":self.userId} delegate:self];
-        request.flag = @"/follow/ajax_cancel_follow";
-        [request startRequest];
+        MyFansActionSheetViewController *sheetVC = [[MyFansActionSheetViewController alloc] init];
+        [sheetVC setUIWithModel:_model];
+        sheetVC.modalPresentationStyle = UIModalPresentationOverCurrentContext;
+        sheetVC.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;
+        [self presentViewController:sheetVC animated:YES completion:nil];
+        sheetVC.stopBtn.tag = sender.tag;
+        [sheetVC.stopBtn addTarget:self action:@selector(clickStopBtn:) forControlEvents:UIControlEventTouchUpInside];
+        [sheetVC.cancelBtn addTarget:self action:@selector(clickCancelBtn:) forControlEvents:UIControlEventTouchUpInside];
     }else{
         //请求数据
         FBRequest *request = [FBAPI postWithUrlString:@"/follow/ajax_follow" requestDictionary:@{@"follow_id":self.userId} delegate:self];
@@ -742,8 +756,6 @@ static NSString *sceneCellId = @"THNHomeSenceCollectionViewCell";
 -(void)requestSucess:(FBRequest *)request result:(id)result{
     if ([request.flag isEqualToString:@"/follow/ajax_follow"]){
         if (![[result objectForKey:@"success"] isEqualToNumber:@0]) {
-            NSLog(@"result  %@",result);
-            [SVProgressHUD showSuccessWithStatus:@"关注成功"];
             _model.is_love = 1;
             _fansN ++;
             [self.myCollectionView reloadItemsAtIndexPaths:[NSArray arrayWithObjects:[NSIndexPath indexPathForRow:0 inSection:0],[NSIndexPath indexPathForRow:0 inSection:1], nil]];
@@ -752,9 +764,8 @@ static NSString *sceneCellId = @"THNHomeSenceCollectionViewCell";
         }
     }else if ([request.flag isEqualToString:@"/follow/ajax_cancel_follow"]){
         if ([result objectForKey:@"success"]) {
-            [SVProgressHUD showSuccessWithStatus:@"取消关注"];
         }else{
-            [SVProgressHUD showErrorWithStatus:@"连接失败"];
+
         }
     }
     
@@ -765,8 +776,8 @@ static NSString *sceneCellId = @"THNHomeSenceCollectionViewCell";
             UserInfoEntity * userEntity = [UserInfoEntity defaultUserInfoEntity];
             userEntity.head_pic_url = fileUrl;
             [userEntity updateUserInfo];
-            [self.myCollectionView reloadSections:[NSIndexSet indexSetWithIndex:0]];
-            
+            BackgroundCollectionViewCell *cell = (BackgroundCollectionViewCell*)[self.myCollectionView cellForItemAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0]];
+            [cell.bgImageView sd_setImageWithURL:[NSURL URLWithString:userEntity.head_pic_url] placeholderImage:nil];
             [SVProgressHUD showSuccessWithStatus:message];
         } else {
             [SVProgressHUD showInfoWithStatus:message];
