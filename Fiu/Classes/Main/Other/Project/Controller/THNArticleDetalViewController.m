@@ -20,6 +20,8 @@
 #import "THNCuXiaoDetalViewController.h"
 #import "GoodsBrandViewController.h"
 #import "SearchViewController.h"
+#import "THNSceneDetalViewController.h"
+#import "THNActiveDetalTwoViewController.h"
 
 @interface THNArticleDetalViewController ()<FBNavigationBarItemsDelegate,UIWebViewDelegate>
 
@@ -45,6 +47,7 @@
 
 -(void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
+    [UIApplication sharedApplication].statusBarHidden = NO;
     [self requestGetDataFromeNet];
 }
 
@@ -141,8 +144,8 @@
                     break;
                 case 11:{
                     //情境
-                    FiuSceneViewController * fiuSceneVC = [[FiuSceneViewController alloc] init];
-                    fiuSceneVC.fiuSceneId = infoId;
+                    THNSceneDetalViewController * fiuSceneVC = [[THNSceneDetalViewController alloc] init];
+                    fiuSceneVC.sceneDetalId = infoId;
                     [self.navigationController pushViewController:fiuSceneVC animated:YES];
                 }
                     break;
@@ -180,27 +183,31 @@
                             switch (zhuanType) {
                                 case 1:{
                                     
-//                                    THNActiveDetalViewController *vc = [[THNActiveDetalViewController alloc] init];
-//                                    vc.id = infoId;
+                                    THNArticleDetalViewController *vc = [[THNArticleDetalViewController alloc] init];
+                                    vc.articleDetalid = infoId;
+                                    [self.navigationController pushViewController:vc animated:YES];
                                     break;
                                 }
                                    
                                 case 2:{
                                     
-//                                    THNActiveDetalViewController *vc = [[THNActiveDetalViewController alloc] init];
-//                                    vc.id = infoId;
+                                    THNActiveDetalTwoViewController *vc = [[THNActiveDetalTwoViewController alloc] init];
+                                    vc.activeDetalId = infoId;
+                                    [self.navigationController pushViewController:vc animated:YES];
                                     break;
                                 }
                                 case 3:{
                                     
                                     THNCuXiaoDetalViewController *vc = [[THNCuXiaoDetalViewController alloc] init];
                                     vc.cuXiaoDetalId = infoId;
+                                    [self.navigationController pushViewController:vc animated:YES];
                                     break;
                                 }
                                 case 4:{
                                     
                                     THNXinPinDetalViewController *vc = [[THNXinPinDetalViewController alloc] init];
                                     vc.xinPinDetalId = infoId;
+                                    [self.navigationController pushViewController:vc animated:YES];
                                     break;
                                 }
                                 default:
@@ -222,6 +229,30 @@
                     //搜索
                 {
                     SearchViewController *vc = [[SearchViewController alloc] init];
+                    vc.keyword = inforTag;
+                    NSInteger infoIdTeger = [infoId integerValue];
+                    switch (infoIdTeger) {
+                        case 3:
+                            vc.index = 2;
+                            break;
+                            
+                        case 9:
+                            vc.index = 0;
+                            break;
+                        case 12:
+                            vc.index = 4;
+                            break;
+                        case 13:
+                            vc.index = 3;
+                            break;
+                        case 14:
+                            vc.index = 1;
+                            break;
+                            
+                        default:
+                            break;
+                    }
+                    
                     [self.navigationController pushViewController:vc animated:YES];
                 }
                     break;

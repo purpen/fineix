@@ -15,6 +15,14 @@
 #import "THNProductModel.h"
 #import "ShareViewController.h"
 #import "ProjectViewCommentsViewController.h"
+#import "THNSceneDetalViewController.h"
+#import "GoodsInfoViewController.h"
+#import "HomePageViewController.h"
+#import "THNArticleDetalViewController.h"
+#import "THNActiveDetalTwoViewController.h"
+#import "THNXinPinDetalViewController.h"
+#import "GoodsBrandViewController.h"
+#import "SearchViewController.h"
 
 @interface THNCuXiaoDetalViewController ()<UITableViewDelegate,UITableViewDataSource>
 
@@ -50,7 +58,12 @@ static NSString *const cellId = @"THNCuXiaoDetalContentTableViewCell";
 }
 
 -(void)viewWillAppear:(BOOL)animated{
-    self.navViewTitle.text = @"促销详情";
+    if (self.vcType == 1) {
+        self.navViewTitle.text = @"促销详情";
+    }else if (self.vcType == 2){
+        self.navViewTitle.text = @"好货详情";
+    }
+    
     
     
     [self.contenView registerNib:[UINib nibWithNibName:cellId bundle:nil] forCellReuseIdentifier:cellId];
@@ -205,5 +218,149 @@ static NSString *const cellId = @"THNCuXiaoDetalContentTableViewCell";
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
     return ((THNProductModel*)self.modelAry[indexPath.row]).cellHeight;
 }
+
+#pragma mark - 截取网页点击事件，获取url
+- (BOOL)webView:(UIWebView *)webView shouldStartLoadWithRequest:(NSURLRequest *)request navigationType:(UIWebViewNavigationType)navigationType
+{
+    //判断是否是单击
+    if (navigationType == UIWebViewNavigationTypeLinkClicked)
+    {
+        NSURL *url = [request URL];
+        NSString *str = [url absoluteString];
+        NSLog(@"str  %@",str);
+        if([str rangeOfString:@"taihuoniao.com"].location == NSNotFound && [str rangeOfString:@"infoType"].location == NSNotFound){
+            //打开浏览器
+            [[UIApplication sharedApplication] openURL:[NSURL URLWithString:str]];
+        }else if ([str rangeOfString:@"taihuoniao.com"].location != NSNotFound && [str rangeOfString:@"infoType"].location != NSNotFound && [str rangeOfString:@"infoId"].location != NSNotFound){
+            NSArray *oneAry = [str componentsSeparatedByString:@"?"];
+            NSString *infoStr = oneAry[1];
+            NSArray *twoAry = [infoStr componentsSeparatedByString:@"&"];
+            NSString *infoType;
+            if (((NSString*)twoAry[0]).length == 11) {
+                infoType = [twoAry[0] substringWithRange:NSMakeRange(9, 2)];
+            }else if(((NSString*)twoAry[0]).length == 10){
+                infoType = [twoAry[0] substringWithRange:NSMakeRange(9, 1)];
+            }
+            NSInteger type = [infoType integerValue];
+            NSString *infoId;
+            NSArray *threeAry = [twoAry[1] componentsSeparatedByString:@"="];
+            NSString *inforTag;
+            if (type == 20) {
+                NSArray *fourAry = [threeAry[1] componentsSeparatedByString:@"&"];
+                infoId = fourAry[0];
+                NSArray *fiveAry = [fourAry[1] componentsSeparatedByString:@"="];
+                inforTag = fiveAry[1];
+            }else{
+                infoId = threeAry[1];
+            }
+            
+            
+            switch (type) {
+                case 1:
+                    //网址
+                    [[UIApplication sharedApplication] openURL:[NSURL URLWithString:str]];
+                    break;
+                case 11:{
+                    //情境
+                    THNSceneDetalViewController * fiuSceneVC = [[THNSceneDetalViewController alloc] init];
+                    fiuSceneVC.sceneDetalId = infoId;
+                    [self.navigationController pushViewController:fiuSceneVC animated:YES];
+                }
+                    break;
+                case 12:{
+                    //产品
+                    GoodsInfoViewController * goodsInfoVC = [[GoodsInfoViewController alloc] init];
+                    goodsInfoVC.goodsID = infoId;
+                    [self.navigationController pushViewController:goodsInfoVC animated:YES];
+                }
+                    break;
+                case 13:{
+                    //用户
+                    HomePageViewController *homeOpage = [[HomePageViewController alloc] init];
+                    homeOpage.type = @2;
+                    homeOpage.userId = infoId;
+                    UserInfoEntity *entity = [UserInfoEntity defaultUserInfoEntity];
+                    if ([entity.userId isEqualToString:infoId]) {
+                        homeOpage.isMySelf = YES;
+                    }else{
+                        homeOpage.isMySelf = NO;
+                    }
+                    [self.navigationController pushViewController:homeOpage animated:YES];
+                }  //用户
+                    break;
+                case 14:
+                    //专题
+                {
+                    FBRequest *request = [FBAPI postWithUrlString:@"/scene_subject/view" requestDictionary:@{
+                                                                                                             @"id" : infoId
+                                                                                                             } delegate:self];
+                    [request startRequestSuccess:^(FBRequest *request, id result) {
+                        if (result[@"success"]) {
+                            NSString *zhuanTiType = result[@"data"][@"type"];
+                            NSInteger zhuanType = [zhuanTiType integerValue];
+                            switch (zhuanType) {
+                                case 1:{
+                                    
+                                    THNArticleDetalViewController *vc = [[THNArticleDetalViewController alloc] init];
+                                    vc.articleDetalid = infoId;
+                                    [self.navigationController pushViewController:vc animated:YES];
+                                    break;
+                                }
+                                    
+                                case 2:{
+                                    
+                                    THNActiveDetalTwoViewController *vc = [[THNActiveDetalTwoViewController alloc] init];
+                                    vc.activeDetalId = infoId;
+                                    [self.navigationController pushViewController:vc animated:YES];
+                                    break;
+                                }
+                                case 3:{
+                                    
+                                    THNCuXiaoDetalViewController *vc = [[THNCuXiaoDetalViewController alloc] init];
+                                    vc.cuXiaoDetalId = infoId;
+                                    [self.navigationController pushViewController:vc animated:YES];
+                                    break;
+                                }
+                                case 4:{
+                                    
+                                    THNXinPinDetalViewController *vc = [[THNXinPinDetalViewController alloc] init];
+                                    vc.xinPinDetalId = infoId;
+                                    [self.navigationController pushViewController:vc animated:YES];
+                                    break;
+                                }
+                                default:
+                                    break;
+                            }
+                        }
+                    } failure:nil];
+                }
+                    break;
+                case 15:
+                    //品牌
+                {
+                    GoodsBrandViewController *vc = [[GoodsBrandViewController alloc] init];
+                    vc.brandId = infoId;
+                    [self.navigationController pushViewController:vc animated:YES];
+                }
+                    break;
+                case 20:
+                    //搜索
+                {
+                    SearchViewController *vc = [[SearchViewController alloc] init];
+                    vc.keyword = inforTag;
+                    vc.index = [infoId integerValue];
+                    [self.navigationController pushViewController:vc animated:YES];
+                }
+                    break;
+                    
+                default:
+                    break;
+            }
+        }
+        return NO;
+    }
+    return YES;
+}
+
 
 @end
