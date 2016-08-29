@@ -262,10 +262,10 @@
     FBRequest *request = [FBAPI postWithUrlString:@"/follow/ajax_cancel_follow" requestDictionary:@{@"follow_id":model.userId} delegate:self];
     [request startRequestSuccess:^(FBRequest *request, id result) {
         if ([result objectForKey:@"success"]) {
-            FocusOnTableViewCell *cell = [self.mytableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:sender.tag inSection:0]];
-            cell.focusOnBtn.backgroundColor = [UIColor whiteColor];
-            cell.focusOnBtn.layer.borderWidth = 1;
-            cell.focusOnBtn.layer.borderColor = [UIColor lightGrayColor].CGColor;
+//            FocusOnTableViewCell *cell = [self.mytableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:sender.tag inSection:0]];
+//            cell.focusOnBtn.backgroundColor = [UIColor whiteColor];
+//            cell.focusOnBtn.layer.borderWidth = 1;
+//            cell.focusOnBtn.layer.borderColor = [UIColor lightGrayColor].CGColor;
         }else{
         }
     } failure:nil];
