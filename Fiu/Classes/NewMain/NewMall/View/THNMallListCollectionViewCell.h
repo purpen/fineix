@@ -22,6 +22,7 @@
 @pro_strong UIButton *bannerBot;
 @pro_strong UILabel *botLine;
 @pro_strong UIView *bannerBg;
+@pro_strong UIImageView *typeImage;
 @pro_strong UICollectionView *goodsList;
 @pro_strong NSMutableArray *goodsListMarr;
 @pro_strong NSMutableArray *goodsIdMarr;

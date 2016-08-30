@@ -13,6 +13,8 @@
 #import "FBGoodsInfoModelData.h"
 #import "RollImageRow.h"
 
+typedef void(^GetProjectTypeBlock)(NSString *idx);
+
 @interface FBRollImages : UIView <SDCycleScrollViewDelegate>
 
 @pro_strong UINavigationController         *       navVC;
@@ -22,6 +24,7 @@
 @pro_strong NSMutableArray                 *       imgMarr;
 @pro_strong NSMutableArray                 *       targetIdMarr;
 @pro_strong NSMutableArray                 *       typeMarr;
+@pro_copy GetProjectTypeBlock getProjectType;
 
 - (void)setRollimageView:(NSMutableArray *)model;
 
