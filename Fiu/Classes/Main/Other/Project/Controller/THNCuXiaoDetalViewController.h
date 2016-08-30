@@ -12,5 +12,10 @@
 
 /**  */
 @property(nonatomic,copy) NSString *cuXiaoDetalId;
+/**
+ 1,促销详情  
+ 2,好货详情
+ */
+@property (nonatomic, assign) NSInteger vcType;
 
 @end

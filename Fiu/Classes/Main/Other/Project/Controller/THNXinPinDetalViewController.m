@@ -221,6 +221,30 @@
                     //搜索
                 {
                     SearchViewController *vc = [[SearchViewController alloc] init];
+                    vc.keyword = inforTag;
+                    NSInteger infoIdTeger = [infoId integerValue];
+                    switch (infoIdTeger) {
+                        case 3:
+                            vc.index = 2;
+                            break;
+                            
+                        case 9:
+                            vc.index = 0;
+                            break;
+                        case 12:
+                            vc.index = 4;
+                            break;
+                        case 13:
+                            vc.index = 3;
+                            break;
+                        case 14:
+                            vc.index = 1;
+                            break;
+                            
+                        default:
+                            break;
+                    }
+                    
                     [self.navigationController pushViewController:vc animated:YES];
                 }
                     break;

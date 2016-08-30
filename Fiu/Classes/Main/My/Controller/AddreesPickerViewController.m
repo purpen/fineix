@@ -12,11 +12,13 @@
 #import "FBRequest.h"
 #import "AddreesModel.h"
 #import "AreaModel.h"
+#import "UserInfoEntity.h"
 
 @interface AddreesPickerViewController ()<FBRequestDelegate,UIPickerViewDelegate,UIPickerViewDataSource>
 {
     NSMutableArray *_provincesAry;
     NSMutableArray *_cityAry;
+    BOOL _flag;
 }
 
 
@@ -74,6 +76,8 @@
 
 - (nullable NSString *)pickerView:(UIPickerView *)pickerView titleForRow:(NSInteger)row forComponent:(NSInteger)component
 {
+    
+    
     switch (component) {
         case 0:
         {
@@ -96,6 +100,8 @@
 
 - (void)pickerView:(UIPickerView *)pickerView didSelectRow:(NSInteger)row inComponent:(NSInteger)component
 {
+    
+    
     switch (component) {
         case 0:
         {
@@ -143,6 +149,8 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    self.addreesBtn.dataSource = self;
+    self.addreesBtn.delegate = self;
     // Do any additional setup after loading the view from its nib.
     self.view.backgroundColor = [UIColor colorWithHexString:@"#000000" alpha:0.3];
     _provincesAry = [NSMutableArray array];
@@ -164,14 +172,10 @@
         [_cityAry addObject:cityOfProAry];
     }
     
-    self.provinceId = 1;
-    self.cityId = 61;
-    self.provinceStr = @"北京市";
-    self.cityStr = @"东城区";
-    self.addreesBtn.dataSource = self;
-    self.addreesBtn.delegate = self;
-
+    [self.addreesBtn reloadAllComponents];
+    
 }
+
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];

@@ -18,4 +18,5 @@
 @property (nonatomic, copy) NSString  * provinceStr;
 @property (nonatomic, copy) NSString  * cityStr;
 
+
 @end

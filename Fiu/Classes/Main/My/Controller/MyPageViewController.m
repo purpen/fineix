@@ -133,7 +133,7 @@
     [super viewWillAppear:animated];
     self.delegate = self;
     [self thn_addNavLogoImage];
-    [self thn_addBarItemLeftBarButton:nil image:@"my_riLi"];
+//    [self thn_addBarItemLeftBarButton:nil image:@"my_riLi"];
     [self thn_addBarItemRightBarButton:nil image:@"my_set"];
     [self.view insertSubview:self.navView aboveSubview:self.myCollectionView];
     self.navView.backgroundColor = [UIColor clearColor];

@@ -18,6 +18,7 @@
 #import "THNSenceModel.h"
 #import "THNUserInfoTableViewCell.h"
 #import "THNSceneImageTableViewCell.h"
+#import "THNSceneDetalViewController.h"
 
 @interface THNActiveDetalTwoViewController ()<UICollectionViewDelegate,UICollectionViewDataSource>
 
@@ -317,6 +318,38 @@ static NSString * resultCellId = @"resultCellId";
         }
     }
     return _segmentedControl;
+}
+
+-(void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath{
+    NSInteger flag = [self.type integerValue];
+    if (indexPath.section == 2) {
+        switch (flag) {
+            case 0:
+                //活动规则网络请求
+            {
+            }
+                break;
+            case 1:
+                //参与的情境网络请求
+            {
+                THNSceneDetalViewController *vc = [[THNSceneDetalViewController alloc] init];
+                THNDiscoverSceneCollectionViewCell *cell = (THNDiscoverSceneCollectionViewCell*)[collectionView cellForItemAtIndexPath:indexPath];
+                vc.sceneDetalId = cell.model._id;
+                [self.navigationController pushViewController:vc animated:YES];
+            }
+                
+                break;
+            case 2:
+                //活动结果网络请求
+            {
+  
+            }
+                break;
+                
+            default:
+                break;
+        }
+    }
 }
 
 - (void)segmentedControlChangedValue:(HMSegmentedControl *)segmentedControl {

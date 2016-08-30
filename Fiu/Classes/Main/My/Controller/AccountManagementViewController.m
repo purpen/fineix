@@ -23,6 +23,7 @@
 #import "AddreesModel.h"
 #import "OfficialCertificationViewController.h"
 #import "SexSheetViewController.h"
+#import "AreaModel.h"
 
 
 @interface AccountManagementViewController ()<FBNavigationBarItemsDelegate,UIImagePickerControllerDelegate,UIActionSheetDelegate,UINavigationControllerDelegate,FBRequestDelegate>
@@ -89,7 +90,9 @@ static NSString *const UpdateInfoURL = @"/my/update_profile";
 
 -(void)clickBirthBtn:(UIButton*)sender{
     self.pickerVC.modalPresentationStyle = UIModalPresentationOverCurrentContext;
-    [self presentViewController:_pickerVC animated:NO completion:nil];
+    [self presentViewController:_pickerVC animated:NO completion:^{
+        
+    }];
     [_pickerVC.pickerBtn addTarget:self action:@selector(clickPickerBtn:) forControlEvents:UIControlEventTouchUpInside];
 }
 
@@ -124,13 +127,56 @@ static NSString *const UpdateInfoURL = @"/my/update_profile";
 -(AddreesPickerViewController *)addreesPickerVC{
     if (!_addreesPickerVC) {
         _addreesPickerVC = [[AddreesPickerViewController alloc] init];
+        UserInfoEntity *entity = [UserInfoEntity defaultUserInfoEntity];
+        if (entity.city.length != 0 && entity.prin.length != 0) {
+            _addreesPickerVC.provinceStr = entity.prin;
+            _addreesPickerVC.cityStr = entity.city;
+        }
+        _addreesPickerVC.provinceStr = @"北京";
+        _addreesPickerVC.cityStr = @"东城区";
     }
     return _addreesPickerVC;
 }
 
 -(void)clickAdreesBtn:(UIButton*)sender{
+//    UserInfoEntity *entity = [UserInfoEntity defaultUserInfoEntity];
+//    NSMutableArray *provincesAry = [NSMutableArray array];
+//    NSMutableArray *cityAry = [NSMutableArray array];
+//    NSString * filePath = [[NSBundle mainBundle] pathForResource:@"areas" ofType:@"plist"];
+//    NSArray * areaAry = [NSArray arrayWithContentsOfFile:filePath];
+//    for (NSDictionary * provinceDic in areaAry) {
+//        AreaModel * province = [[AreaModel alloc] initWithDictionary:provinceDic];
+//        [provincesAry addObject:province];
+//        NSArray * citiesAry = [provinceDic objectForKey:@"children"];
+//        NSMutableArray * cityOfProAry = [NSMutableArray array];
+//        for (NSDictionary * cityDic in citiesAry) {
+//            AreaModel * city = [[AreaModel alloc] initWithDictionary:cityDic];
+//            [cityOfProAry addObject:city];
+//        }
+//        [cityAry addObject:cityOfProAry];
+//    }
+//    
+//    NSInteger prinTeger = 1;
+//    NSInteger cityTeger = 1;
+//    for (int i = 0; i < provincesAry.count; i ++) {
+//        if ([entity.prin isEqualToString:((AreaModel*)provincesAry[i]).name]) {
+//            prinTeger = i + 1;
+//        }
+//    }
+//    for (int i = 0; i < cityAry.count; i ++) {
+//        for (int j = 0; j < ((NSArray*)cityAry[i]).count; j ++) {
+//            if ([entity.city isEqualToString:((AreaModel*)cityAry[i][j]).name]) {
+//                cityTeger = j + 1;
+//            }
+//        }
+//    }
+
     self.addreesPickerVC.modalPresentationStyle = UIModalPresentationOverCurrentContext;
-    [self presentViewController:_addreesPickerVC animated:NO completion:nil];
+   
+    [self presentViewController:_addreesPickerVC animated:NO completion:^{
+//        [self.addreesPickerVC.addreesBtn selectRow:cityTeger inComponent:prinTeger animated:YES];
+//        [self.addreesPickerVC pickerView:self.addreesPickerVC.addreesBtn didSelectRow:cityTeger inComponent:prinTeger];
+    }];
     [_addreesPickerVC.pickerBtn addTarget:self action:@selector(clickAddreesPickerBtn:) forControlEvents:UIControlEventTouchUpInside];
 }
 
@@ -187,7 +233,7 @@ static NSString *const UpdateInfoURL = @"/my/update_profile";
     }];
     _accountView.nickName.text = entity.nickname;
     if (entity.prin) {
-        _accountView.adress.text = [NSString stringWithFormat:@"%@%@",entity.prin,entity.city];
+        _accountView.adress.text = [NSString stringWithFormat:@"%@ %@",entity.prin,entity.city];
     }
     switch ([entity.sex intValue]) {
         case 0:
@@ -235,9 +281,10 @@ static NSString *const UpdateInfoURL = @"/my/update_profile";
     self.sexPickerVC.modalPresentationStyle = UIModalPresentationOverCurrentContext;
     UserInfoEntity *entity = [UserInfoEntity defaultUserInfoEntity];
     _sex = entity.sex;
-    NSLog(@"%zi",[entity.sex intValue]);
-    [self.sexPickerVC.sexPickerView selectRow:[_sex intValue] inComponent:0 animated:NO];
-    [self presentViewController:_sexPickerVC animated:NO completion:nil];
+    [self presentViewController:_sexPickerVC animated:NO completion:^{
+        [self.sexPickerVC.sexPickerView selectRow:[_sex intValue] inComponent:0 animated:NO];
+        self.sexPickerVC.sexNum = _sex;
+    }];
     [_sexPickerVC.backBtn addTarget:self action:@selector(clickSexPickerBtn:) forControlEvents:UIControlEventTouchUpInside];
 }
 
