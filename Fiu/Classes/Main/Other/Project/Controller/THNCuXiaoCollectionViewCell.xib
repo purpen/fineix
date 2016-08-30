@@ -90,7 +90,7 @@
                             <constraint firstAttribute="bottom" secondItem="kJK-s7-Kc3" secondAttribute="bottom" id="tXG-9E-9mp"/>
                             <constraint firstItem="Gme-mz-V2e" firstAttribute="centerY" secondItem="QeP-AU-E7t" secondAttribute="centerY" constant="-10" id="uo1-tN-twM"/>
                             <constraint firstItem="4id-Sb-fw3" firstAttribute="centerX" secondItem="QeP-AU-E7t" secondAttribute="centerX" id="xXN-EW-9LL"/>
-                            <constraint firstItem="Gme-mz-V2e" firstAttribute="width" relation="lessThanOrEqual" secondItem="kJK-s7-Kc3" secondAttribute="width" multiplier="0.7" id="y8j-bi-AMU"/>
+                            <constraint firstItem="Gme-mz-V2e" firstAttribute="width" relation="lessThanOrEqual" secondItem="kJK-s7-Kc3" secondAttribute="width" multiplier="0.9" id="y8j-bi-AMU"/>
                         </constraints>
                         <variation key="default">
                             <mask key="constraints">

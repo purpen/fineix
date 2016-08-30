@@ -132,8 +132,6 @@ static NSString *const UpdateInfoURL = @"/my/update_profile";
             _addreesPickerVC.provinceStr = entity.prin;
             _addreesPickerVC.cityStr = entity.city;
         }
-        _addreesPickerVC.provinceStr = @"北京";
-        _addreesPickerVC.cityStr = @"东城区";
     }
     return _addreesPickerVC;
 }

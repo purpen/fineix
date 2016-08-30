@@ -291,11 +291,11 @@
     
     
     [UMSocialData defaultData].extConfig.wechatSessionData.url = self.model.share_view_url;
-    [UMSocialData defaultData].extConfig.wechatSessionData.title = self.model.share_desc;
+    [UMSocialData defaultData].extConfig.wechatSessionData.title = self.model.title;
     UMSocialUrlResource * imgUrl = [[UMSocialUrlResource alloc] initWithSnsResourceType:(UMSocialUrlResourceTypeImage) url:self.model.cover_url];
     
     [[UMSocialDataService defaultDataService]  postSNSWithTypes:@[UMShareToWechatSession]
-                                                        content:self.model.share_desc
+                                                        content:self.model.summary
                                                           image:nil
                                                        location:nil
                                                     urlResource:imgUrl
@@ -318,11 +318,11 @@
 
 -(void)timelineShareBtnAction:(UIButton*)sender{
     [UMSocialData defaultData].extConfig.wechatTimelineData.url = self.model.share_view_url;
-    [UMSocialData defaultData].extConfig.wechatTimelineData.title = self.model.share_desc;
+    [UMSocialData defaultData].extConfig.wechatTimelineData.title = self.model.title;
     UMSocialUrlResource * imgUrl = [[UMSocialUrlResource alloc] initWithSnsResourceType:(UMSocialUrlResourceTypeImage) url:self.model.cover_url];
     
     [[UMSocialDataService defaultDataService]  postSNSWithTypes:@[UMShareToWechatTimeline]
-                                                        content:self.model.share_desc
+                                                        content:self.model.summary
                                                           image:nil
                                                        location:nil
                                                     urlResource:imgUrl
@@ -345,11 +345,11 @@
 
 -(void)qqShareBtnAction:(UIButton*)sender{
     [UMSocialData defaultData].extConfig.qqData.url = self.model.share_view_url;
-    [UMSocialData defaultData].extConfig.qqData.title = self.model.share_desc;
+    [UMSocialData defaultData].extConfig.qqData.title = self.model.title;
     UMSocialUrlResource * imgUrl = [[UMSocialUrlResource alloc] initWithSnsResourceType:UMSocialUrlResourceTypeImage url:self.model.cover_url];
     
     [[UMSocialDataService defaultDataService]  postSNSWithTypes:@[UMShareToQQ]
-                                                        content:self.model.share_desc
+                                                        content:self.model.summary
                                                           image:nil
                                                        location:nil
                                                     urlResource:imgUrl
@@ -374,7 +374,7 @@
 -(void)sinaShareBtnAction:(UIButton*)sender{
     UMSocialUrlResource *urlResource = [[UMSocialUrlResource alloc] initWithSnsResourceType:UMSocialUrlResourceTypeImage url:self.model.cover_url];
     [[UMSocialDataService defaultDataService]  postSNSWithTypes:@[UMShareToSina]
-                                                        content:[NSString stringWithFormat:@"%@，%@。%@", self.model.share_desc, self.model.share_desc, self.model.cover_url]
+                                                        content:[NSString stringWithFormat:@"%@，%@。%@", self.model.title, self.model.summary, self.model.cover_url]
                                                           image:nil
                                                        location:nil
                                                     urlResource:urlResource
