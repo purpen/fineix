@@ -36,5 +36,7 @@
 @property(nonatomic,copy) NSString *share_count;
 /**  */
 @property(nonatomic,copy) NSString *title;
+/**  */
+@property(nonatomic,copy) NSString *summary;
 
 @end

@@ -172,7 +172,10 @@
     }
     
     [self.addreesBtn reloadAllComponents];
-    
+    self.provinceStr = @"北京";
+    self.cityStr = @"东城区";
+    self.provinceId = 1;
+    self.cityId = 61;
 }
 
 

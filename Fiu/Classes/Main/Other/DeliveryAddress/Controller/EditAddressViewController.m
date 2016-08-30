@@ -91,6 +91,8 @@ static NSString *const DeleteAddressURL = @"/shopping/remove_address";
 
 -(void)clickAddreesPickerBtn:(UIButton*)sender{
     self.addressTF.hidden = YES;
+    self.prinLabel.text = self.addreesPickerVC.provinceStr;
+    self.cityLabel.text = self.addreesPickerVC.cityStr;
     self.provinceId = self.addreesPickerVC.provinceId;
     self.cityId = self.addreesPickerVC.cityId;
     [self.addreesPickerVC dismissViewControllerAnimated:NO completion:nil];
