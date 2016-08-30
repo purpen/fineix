@@ -10,26 +10,13 @@
 #import "FBRollImages.h"
 #import <SVProgressHUD/SVProgressHUD.h>
 
-@interface GoodsInfoViewController : FBViewController <FBNavigationBarItemsDelegate, UITableViewDelegate, UITableViewDataSource>
+@interface GoodsInfoViewController : FBViewController <
+    FBNavigationBarItemsDelegate,
+    UITableViewDelegate,
+    UITableViewDataSource
+>
 
-/*
- *  商品类型
- *
- */
-@pro_strong UIButton                *   gobuyBtn;           //  去购买
-@pro_strong UIButton                *   collectBtn;         //  收藏
-@pro_strong UITableView             *   goodsInfoTable;     //  商品详情
-@pro_strong FBRollImages            *   rollImgView;        //  轮播图
-@pro_strong NSString                *   goodsID;            //  商品id
-@pro_strong NSString                *   thnGoodsId;
-
-@pro_strong FBRequest               *   wantBuyRequest;
-@pro_strong FBRequest               *   goodsInfoRequest;
-@pro_strong FBRequest               *   reGoodsRequest;
-@pro_strong FBRequest               *   goodsSceneRequest;
-@pro_strong FBRequest               *   collectRequest;
-@pro_strong FBRequest               *   cancelCollectRequest;
-@pro_assign BOOL                        isWant;
-- (void)networkWantBuyData;
+@pro_strong NSString *goodsID;
+@pro_strong UITableView *goodsInfoTable;
 
 @end

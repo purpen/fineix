@@ -7,10 +7,8 @@
 //
 
 #import "SubscribeViewController.h"
-#import "AllSceneCollectionViewCell.h"
 #import "UserInfoEntity.h"
 #import <SVProgressHUD.h>
-#import "FiuSceneViewController.h"
 #import "FiuSceneRow.h"
 #import "FBAPI.h"
 #import "FBRequest.h"
@@ -18,6 +16,7 @@
 #import "THNSenceModel.h"
 #import "THNSenecCollectionViewCell.h"
 #import "THNSceneDetalViewController.h"
+#import <MJRefresh/MJRefresh.h>
 
 @interface SubscribeViewController ()<FBNavigationBarItemsDelegate,UICollectionViewDelegate,UICollectionViewDataSource,UICollectionViewDelegateFlowLayout,FBRequestDelegate>
 @pro_strong NSMutableArray          *   allFiuSceneMarr;        //   情景列表

@@ -16,6 +16,7 @@
     NSString *_titleStr;
     NSString *_suTitleStr;
     NSString *_image;
+    NSInteger _type;
 }
 
 @end
@@ -34,8 +35,9 @@
 
 #pragma mark - setModel
 - (void)thn_setSceneImageData:(HomeSceneListRow *)sceneModel {
-     self.tagDataMarr = [NSMutableArray arrayWithArray:sceneModel.product];
-     self.goodsIds = [NSMutableArray arrayWithArray:[sceneModel.product valueForKey:@"idField"]];
+    self.tagDataMarr = [NSMutableArray arrayWithArray:sceneModel.product];
+    self.goodsIds = [NSMutableArray arrayWithArray:[sceneModel.product valueForKey:@"idField"]];
+    self.goodsType = [NSMutableArray arrayWithArray:[sceneModel.product valueForKey:@"type"]];
     if (self.tagDataMarr.count) {
         [self setUserTagBtn];
     }
@@ -137,9 +139,16 @@
 
 - (void)openGoodsInfo:(UITapGestureRecognizer *)tapGesture {
     NSInteger index = [self.userTagMarr indexOfObject:tapGesture.view];
-    FBGoodsInfoViewController * goodsInfoVC = [[FBGoodsInfoViewController alloc] init];
-    goodsInfoVC.goodsID = self.goodsIds[index];
-    [self.nav pushViewController:goodsInfoVC animated:YES];
+    _type = [self.goodsType[index] integerValue];
+
+    if (_type == 2) {
+        FBGoodsInfoViewController * goodsInfoVC = [[FBGoodsInfoViewController alloc] init];
+        goodsInfoVC.goodsID = self.goodsIds[index];
+        [self.nav pushViewController:goodsInfoVC animated:YES];
+        
+    } else if (_type == 1) {
+        [SVProgressHUD showSuccessWithStatus:@"用户自建的商品"];
+    }
 }
 
 #pragma mark - setUI

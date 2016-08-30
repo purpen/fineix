@@ -12,10 +12,10 @@
 #import "SVProgressHUD.h"
 #import "ShareViewController.h"
 #import "FBGoodsInfoViewController.h"
-#import "FiuSceneViewController.h"
 #import "THNCuXiaoDetalViewController.h"
 #import "GoodsBrandViewController.h"
 #import "SearchViewController.h"
+#import "HomePageViewController.h"
 
 @interface THNXinPinDetalViewController ()<FBNavigationBarItemsDelegate,UIWebViewDelegate>
 
@@ -140,14 +140,14 @@
                     break;
                 case 11:{
                     //情境
-                    FiuSceneViewController * fiuSceneVC = [[FiuSceneViewController alloc] init];
-                    fiuSceneVC.fiuSceneId = infoId;
-                    [self.navigationController pushViewController:fiuSceneVC animated:YES];
+//                    FiuSceneViewController * fiuSceneVC = [[FiuSceneViewController alloc] init];
+//                    fiuSceneVC.fiuSceneId = infoId;
+//                    [self.navigationController pushViewController:fiuSceneVC animated:YES];
                 }
                     break;
                 case 12:{
                     //产品
-                    GoodsInfoViewController * goodsInfoVC = [[GoodsInfoViewController alloc] init];
+                    FBGoodsInfoViewController * goodsInfoVC = [[FBGoodsInfoViewController alloc] init];
                     goodsInfoVC.goodsID = infoId;
                     [self.navigationController pushViewController:goodsInfoVC animated:YES];
                 }

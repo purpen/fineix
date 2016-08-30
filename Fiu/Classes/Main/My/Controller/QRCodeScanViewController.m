@@ -15,8 +15,6 @@
 #import "SVProgressHUD.h"
 #import "HomePageViewController.h"
 #import "MyQrCodeViewController.h"
-#import "FiuSceneViewController.h"
-#import "SceneInfoViewController.h"
 #import "GoodsInfoViewController.h"
 #import "FBGoodsInfoViewController.h"
 #import "UserInfoEntity.h"
@@ -282,14 +280,10 @@
         NSString *infoId = threeAry[1];
         if ([infoType isEqualToString:@"10"]) {
             //地盘
-            FiuSceneViewController * fiuSceneVC = [[FiuSceneViewController alloc] init];
-            fiuSceneVC.fiuSceneId = infoId;
-            [self.navigationController pushViewController:fiuSceneVC animated:YES];
+            
         }else if ([infoType isEqualToString:@"11"]) {
             //情景
-            SceneInfoViewController * sceneInfoVC = [[SceneInfoViewController alloc] init];
-            sceneInfoVC.sceneId = infoId;
-            [self.navigationController pushViewController:sceneInfoVC animated:YES];
+            
         }else if ([infoType isEqualToString:@"12"]) {
             //情景商品
             GoodsInfoViewController * goodsInfoVC = [[GoodsInfoViewController alloc] init];

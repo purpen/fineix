@@ -31,7 +31,7 @@ static NSString *const SceneListHeaderCellViewId = @"sceneListHeaderViewId";
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
-    
+    [self thn_setFirstAppStart];
     [self thn_setNavigationViewUI];
 }
 
@@ -269,6 +269,14 @@ static NSString *const SceneListHeaderCellViewId = @"sceneListHeaderViewId";
 - (void)thn_rightBarItemSelected {
     FiuPeopleListViewController * peopleListVC = [[FiuPeopleListViewController alloc] init];
     [self.navigationController pushViewController:peopleListVC animated:YES];
+}
+
+#pragma mark - 首次打开加载指示图
+- (void)thn_setFirstAppStart {
+    if(![USERDEFAULT boolForKey:@"discoverLaunch"]){
+        [USERDEFAULT setBool:YES forKey:@"discoverLaunch"];
+        [self thn_setMoreGuideImgForVC:@[@"faxian_tianjia",@"faxian_paihangbang"]];
+    }
 }
 
 #pragma mark - NSMutableArray

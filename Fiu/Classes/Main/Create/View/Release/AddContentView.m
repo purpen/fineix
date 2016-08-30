@@ -8,8 +8,6 @@
 
 #import "AddContentView.h"
 #import "FBEditShareInfoViewController.h"
-#import "TagFlowLayout.h"
-#import "ChooseTagsCollectionViewCell.h"
 #import "UILable+Frame.h"
 
 @interface AddContentView () {
@@ -17,8 +15,6 @@
     NSString *_suTitleStr;
     UITapGestureRecognizer * _tap;
 }
-
-@pro_strong TagFlowLayout * chooseFlowLayout;
 
 @end
 

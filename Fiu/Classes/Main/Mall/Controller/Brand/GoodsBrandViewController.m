@@ -10,7 +10,6 @@
 #import "GoodsBrandTableViewCell.h"
 #import "BrandInfoData.h"
 #import "GoodsRow.h"
-#import "GoodsTableViewCell.h"
 #import "GoodsInfoViewController.h"
 
 static NSString *const URLBrandInfo = @"/scene_brands/view";
@@ -161,13 +160,7 @@ static NSString *const URLGoodslist = @"/scene_product/getlist";
         return cell;
     
     } else {
-        static NSString * brandGoodsCellId = @"BrandGoodsCellId";
-        GoodsTableViewCell * cell = [tableView dequeueReusableCellWithIdentifier:brandGoodsCellId];
-        cell = [[GoodsTableViewCell alloc] initWithStyle:(UITableViewCellStyleDefault) reuseIdentifier:brandGoodsCellId];
         
-        cell.nav = self.navigationController;
-        [cell setGoodsData:self.goodsList[indexPath.row]];
-        return cell;
     }
     return nil;
 }

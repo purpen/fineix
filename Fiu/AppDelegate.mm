@@ -8,7 +8,6 @@
 
 #import "AppDelegate.h"
 #import "THNTabBarController.h"
-#import "FBTabBarController.h"
 #import <BaiduMapAPI_Map/BMKMapComponent.h>
 #import <SVProgressHUD/SVProgressHUD.h>
 #import "Fiu.h"

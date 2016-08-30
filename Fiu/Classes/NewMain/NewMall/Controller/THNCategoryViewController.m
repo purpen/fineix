@@ -26,7 +26,7 @@ static NSString *const goodsListCellId = @"GoodsListCellId";
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
-    
+    [self getGoodsCarNumData];
     [self thn_setNavigationViewUI];
 }
 
@@ -199,6 +199,7 @@ static NSString *const goodsListCellId = @"GoodsListCellId";
     self.navViewTitle.text = self.vcTitle;
     self.delegate = self;
     [self thn_addBarItemRightBarButton:@"" image:@"mall_car"];
+    [self setNavGoodsCarNumLab];
 }
 
 #pragma mark - NSMutableArray

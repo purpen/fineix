@@ -54,7 +54,6 @@
 - (void)attributedLabel:(TTTAttributedLabel *)label didSelectLinkWithURL:(NSURL *)url {
     NSString *userUrl = [[url absoluteString] stringByReplacingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
     NSString *user = [userUrl substringFromIndex:16];
-    NSLog(@"＝＝＝＝＝＝＝＝＝＝＝＝＝ 用户iD:%@", user);
 }
 
 #pragma mark - setUI

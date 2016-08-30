@@ -7,10 +7,9 @@
 //
 
 #import "PraisedViewController.h"
-#import "SceneListTableViewCell.h"
 #import "SVProgressHUD.h"
 #import "MJRefresh.h"
-#import "SceneInfoViewController.h"
+#import "HomeSceneListRow.h"
 #import "UserInfoEntity.h"
 #import "THNHomeSenceCollectionViewCell.h"
 
@@ -156,9 +155,9 @@ static NSString *sceneCollectionCellId = @"THNHomeSenceCollectionViewCell";
 }
 
 -(void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath{
-    SceneInfoViewController * sceneInfoVC = [[SceneInfoViewController alloc] init];
-    sceneInfoVC.sceneId = self.sceneIdMarr[indexPath.row];
-    [self.navigationController pushViewController:sceneInfoVC animated:YES];
+//    SceneInfoViewController * sceneInfoVC = [[SceneInfoViewController alloc] init];
+//    sceneInfoVC.sceneId = self.sceneIdMarr[indexPath.row];
+//    [self.navigationController pushViewController:sceneInfoVC animated:YES];
 }
 
 

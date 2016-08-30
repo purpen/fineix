@@ -7,7 +7,6 @@
 //
 
 #import "GroupHeaderView.h"
-#import "AllSceneViewController.h"
 #import "FiuPeopleListViewController.h"
 #import "FiuBrandListViewController.h"
 #import "THNProjectViewController.h"

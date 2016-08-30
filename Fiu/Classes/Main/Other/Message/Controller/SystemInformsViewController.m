@@ -12,8 +12,6 @@
 #import "MJRefresh.h"
 #import "SystemNoticeModel.h"
 #import "NSObject+MJKeyValue.h"
-#import "FiuSceneViewController.h"
-#import "SceneInfoViewController.h"
 #import "GoodsInfoViewController.h"
 #import "TipNumberView.h"
 
@@ -169,14 +167,10 @@
         [[UIApplication sharedApplication] openURL:[NSURL URLWithString:model.url]];
     }else if ([model.evt isEqualToNumber:@1]){
         //情景
-        FiuSceneViewController * fiuSceneVC = [[FiuSceneViewController alloc] init];
-        fiuSceneVC.fiuSceneId = model.url;
-        [self.navigationController pushViewController:fiuSceneVC animated:YES];
+
     }else if ([model.evt isEqualToNumber:@2]){
         //场景
-        SceneInfoViewController * sceneInfoVC = [[SceneInfoViewController alloc] init];
-        sceneInfoVC.sceneId = model.url;
-        [self.navigationController pushViewController:sceneInfoVC animated:YES];
+        
     }else if ([model.evt isEqualToNumber:@3]){
         //产品
         GoodsInfoViewController * goodsInfoVC = [[GoodsInfoViewController alloc] init];

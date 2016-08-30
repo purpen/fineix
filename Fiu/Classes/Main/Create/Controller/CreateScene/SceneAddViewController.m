@@ -9,7 +9,6 @@
 #import "SceneAddViewController.h"
 #import "ReleaseViewController.h"
 #import "MarkGoodsViewController.h"
-#import "AddUrlViewController.h"
 #import "FBFilters.h"
 #import "FBStickersContainer.h"
 
@@ -169,14 +168,13 @@ static NSString *const URLUserAddGoods = @"/scene_product/add";
         _bottomBtn = [[UIButton alloc] init];
         [_bottomBtn setTitle:NSLocalizedString(@"markGoodsBtnTitle", nil) forState:(UIControlStateNormal)];
         [_bottomBtn setTitleColor:[UIColor colorWithHexString:@"#FFFFFF" alpha:1] forState:(UIControlStateNormal)];
-        if (IS_iOS9) {
-            _bottomBtn.titleLabel.font = [UIFont fontWithName:@"PingFangSC-Light" size:14];
-        } else {
-            _bottomBtn.titleLabel.font = [UIFont systemFontOfSize:14];
-        }
+        _bottomBtn.titleLabel.font = [UIFont systemFontOfSize:14];
         [_bottomBtn setImage:[UIImage imageNamed:@"ic_touch_app"] forState:(UIControlStateNormal)];
         _bottomBtn.backgroundColor = [UIColor colorWithHexString:@"#000000" alpha:0.6];
         [_bottomBtn setImageEdgeInsets:(UIEdgeInsetsMake(0, -10, 0, 0))];
+        
+        UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(showMarkGoodsView:)];
+        [_bottomBtn addGestureRecognizer:tap];
     }
     return _bottomBtn;
 }

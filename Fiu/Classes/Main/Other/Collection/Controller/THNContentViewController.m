@@ -12,9 +12,8 @@
 #import "UserInfoEntity.h"
 #import "GoodsRow.h"
 #import "THNGoodsCollectionViewCell.h"
-#import "GoodsInfoViewController.h"
+#import "FBGoodsInfoViewController.h"
 #import "HomeSceneListRow.h"
-#import "SceneInfoViewController.h"
 #import "THNHomeSenceCollectionViewCell.h"
 #import "THNSceneDetalViewController.h"
 
@@ -305,9 +304,8 @@ static NSString *const URLFiuGoods = @"/favorite/get_new_list";
 
 -(void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath{
     if (self.type == CollectionTypeGood) {
-        GoodsInfoViewController * goodsInfoVC = [[GoodsInfoViewController alloc] init];
+        FBGoodsInfoViewController * goodsInfoVC = [[FBGoodsInfoViewController alloc] init];
         goodsInfoVC.goodsID = self.goodsIdList[indexPath.row];
-        goodsInfoVC.isWant = YES;
         [self.navigationController pushViewController:goodsInfoVC animated:YES];
     }else{
         

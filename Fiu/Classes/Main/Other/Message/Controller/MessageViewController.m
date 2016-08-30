@@ -13,7 +13,6 @@
 #import "TipNumberView.h"
 #import "CounterModel.h"
 #import "SVProgressHUD.h"
-#import "MentionedViewController.h"
 #import "UserInfoEntity.h"
 #import "NSObject+MJKeyValue.h"
 
@@ -203,8 +202,8 @@
 }
 
 - (IBAction)remindBtn:(UIButton *)sender {
-    MentionedViewController *vc = [[MentionedViewController alloc] init];
-    [self.navigationController pushViewController:vc animated:YES];
+//    MentionedViewController *vc = [[MentionedViewController alloc] init];
+//    [self.navigationController pushViewController:vc animated:YES];
 }
 
 

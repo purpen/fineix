@@ -7,8 +7,6 @@
 //
 
 #import "ReleaseViewController.h"
-#import "HomeViewController.h"
-#import "LookSceneViewController.h"
 #import "IQKeyboardManager.h"
 
 static NSString *const URLReleaseScenen = @"/scene_sight/save";

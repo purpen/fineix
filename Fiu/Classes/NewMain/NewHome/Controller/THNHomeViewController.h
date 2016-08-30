@@ -38,6 +38,7 @@
 @pro_strong NSMutableArray *sceneIdMarr;
 @pro_strong NSMutableArray *userIdMarr;
 @pro_strong NSMutableArray *commentsMarr;
+@pro_strong NSMutableArray *commentsCountMarr;
 @pro_strong NSMutableArray *hotUserMarr;
 
 @end

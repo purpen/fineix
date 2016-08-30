@@ -7,10 +7,8 @@
 //
 
 #import "FBRollImages.h"
-#import "SceneInfoViewController.h"
-#import "FiuSceneViewController.h"
-#import "GoodsInfoViewController.h"
-#import "ProjectViewController.h"
+#import "FBGoodsInfoViewController.h"
+#import "THNProjectViewController.h"
 
 
 @implementation FBRollImages
@@ -72,23 +70,20 @@
         NSString * type = self.typeMarr[index];
         NSString * ids = self.targetIdMarr[index];
         if ([type isEqualToString:@"8"]) {
-            SceneInfoViewController * sceneInfoVC = [[SceneInfoViewController alloc] init];
-            sceneInfoVC.sceneId = ids;
-            [self.navVC pushViewController:sceneInfoVC animated:YES];
+
             
         } else if ([type isEqualToString:@"9"]) {
-            GoodsInfoViewController * goodsInfoVC = [[GoodsInfoViewController alloc] init];
+            FBGoodsInfoViewController * goodsInfoVC = [[FBGoodsInfoViewController alloc] init];
             goodsInfoVC.goodsID = ids;
             [self.navVC pushViewController:goodsInfoVC animated:YES];
             
         } else if ([type isEqualToString:@"10"]) {
-            FiuSceneViewController * fiuSceneVC = [[FiuSceneViewController alloc] init];
-            fiuSceneVC.fiuSceneId = ids;
-            [self.navVC pushViewController:fiuSceneVC animated:YES];
+            
         } else if ([type isEqualToString:@"11"]){
-            ProjectViewController *vc = [[ProjectViewController alloc] init];
-            vc.projectId = ids;
+            THNProjectViewController *vc = [[THNProjectViewController alloc] init];
+            
             [self.navVC pushViewController:vc animated:YES];
+            
         } else if ([type isEqualToString:@"1"]){
             BOOL isExsit = [[UIApplication sharedApplication] canOpenURL:[NSURL URLWithString:ids]];
             if (isExsit) {

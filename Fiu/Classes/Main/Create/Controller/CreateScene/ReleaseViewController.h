@@ -10,12 +10,9 @@
 #import "Fiu.h"
 #import <SVProgressHUD/SVProgressHUD.h>
 #import "AddLocationView.h"
-#import "AddCategoryView.h"
 #import "AddContentView.h"
-#import "ShowContentView.h"
-#import "AddTagsView.h"
 
-@interface ReleaseViewController : FBPictureViewController <ShowContentViewDelegate, AddTagsViewDelegate>
+@interface ReleaseViewController : FBPictureViewController
 
 @pro_strong FBRequest           *   releaseSceneRequest;
 @pro_strong FBRequest           *   releaseFiuSceneRequest;

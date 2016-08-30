@@ -15,10 +15,12 @@
 #import "THNDataInfoTableViewCell.h"
 #import "THNSceneInfoTableViewCell.h"
 #import "THNSceneCommentTableViewCell.h"
+#import "THNLookAllCommentTableViewCell.h"
 #import "MJRefresh.h"
 #import "FBRefresh.h"
 #import "HomeSceneListRow.h"
 #import "CommentRow.h"
+#import "RollImageRow.h"
 #import "FBSubjectModelRow.h"
 #import "HotUserListUser.h"
 #import "CommentNViewController.h"
@@ -40,6 +42,7 @@ static NSString *const dataInfoCellId = @"DataInfoCellId";
 static NSString *const sceneInfoCellId = @"SceneInfoCellId";
 static NSString *const commentsCellId = @"CommentsCellId";
 static NSString *const twoCommentsCellId = @"TwoCommentsCellId";
+static NSString *const allCommentsCellId = @"AllCommentsCellId";
 
 @interface THNHomeViewController () {
     NSIndexPath *_selectedIndexPath;
@@ -58,14 +61,14 @@ static NSString *const twoCommentsCellId = @"TwoCommentsCellId";
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
-    
+    [self thn_setFirstAppStart];
     [self thn_setNavigationViewUI];
     
 }
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    [self thn_setFirstAppStart];
+    
     [self thn_networkRollImageData];
     [self thn_networkSubjectData];
     [self thn_networkHotUserListData];
@@ -216,9 +219,9 @@ static NSString *const twoCommentsCellId = @"TwoCommentsCellId";
             [self.sceneListMarr addObject:homeSceneModel];
             [self.sceneIdMarr addObject:[NSString stringWithFormat:@"%zi", homeSceneModel.idField]];
             [self.userIdMarr addObject:[NSString stringWithFormat:@"%zi", homeSceneModel.userId]];
+            [self.commentsCountMarr addObject:[NSString stringWithFormat:@"%zi", homeSceneModel.commentCount]];
         }
         [self.commentsMarr addObjectsFromArray:[sceneArr valueForKey:@"comments"]];
-        
         _index = 6;
         _hotUserCellHeight = 280.0f;
         
@@ -342,7 +345,7 @@ static NSString *const twoCommentsCellId = @"TwoCommentsCellId";
     if (section == 0) {
         return 1;
     } else {
-        return 6;
+        return 7;
     }
     return 0;
 }
@@ -432,6 +435,18 @@ static NSString *const twoCommentsCellId = @"TwoCommentsCellId";
                 return cell;
             }
             
+        } else if (indexPath.row == 6) {
+            if ([self.commentsMarr[indexPath.section - 1] count] > 1) {
+                THNLookAllCommentTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:allCommentsCellId];
+                cell = [[THNLookAllCommentTableViewCell alloc] initWithStyle:(UITableViewCellStyleDefault) reuseIdentifier:allCommentsCellId];
+                [cell thn_setAllCommentCountData:[self.commentsCountMarr[indexPath.section - 1] integerValue]];
+                return cell;
+                
+            } else {
+                UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:twoCommentsCellId];
+                cell = [[UITableViewCell alloc] initWithStyle:(UITableViewCellStyleDefault) reuseIdentifier:twoCommentsCellId];
+                return cell;
+            }
         }
     }
     return nil;
@@ -467,6 +482,13 @@ static NSString *const twoCommentsCellId = @"TwoCommentsCellId";
         } else if (indexPath.row == 5) {
             if ([self.commentsMarr[indexPath.section -1] count] > 1) {
                 return _commentHigh;
+            } else {
+                return 0.01f;
+            }
+            
+        } else if (indexPath.row == 6) {
+            if ([self.commentsMarr[indexPath.section -1] count] > 1) {
+                return 35.0f;
             } else {
                 return 0.01f;
             }
@@ -531,7 +553,7 @@ static NSString *const twoCommentsCellId = @"TwoCommentsCellId";
                 [tableView reloadRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
             }
             
-        } else if (indexPath.row == 4 || indexPath.row == 5) {
+        } else if (indexPath.row == 4 || indexPath.row == 5 || indexPath.row == 6) {
             CommentNViewController * commentVC = [[CommentNViewController alloc] init];
             commentVC.targetId = self.sceneIdMarr[indexPath.section - 1];
             commentVC.sceneUserId = self.userIdMarr[indexPath.section - 1];
@@ -579,7 +601,7 @@ static NSString *const twoCommentsCellId = @"TwoCommentsCellId";
     self.navViewTitle.hidden = YES;
     [self thn_addNavLogoImage];
     [self thn_addBarItemLeftBarButton:@"" image:@"shouye_search"];
-    [self thn_addBarItemRightBarButton:@"" image:@"shouye_dingyue"];
+    [self thn_addBarItemRightBarButton:@"" image:@"icon_shouye_dingyue"];
 }
 
 - (void)thn_leftBarItemSelected {
@@ -599,9 +621,9 @@ static NSString *const twoCommentsCellId = @"TwoCommentsCellId";
 
 #pragma mark - 首次打开加载指示图
 - (void)thn_setFirstAppStart {
-    if(![USERDEFAULT boolForKey:@"homeLaunch"]){
-        [USERDEFAULT setBool:YES forKey:@"homeLaunch"];
-        [self thn_setMoreGuideImgForVC:@[@"guide_home",@"Guide_index",@"guide-fiu",@"guide-personal"]];
+    if(![USERDEFAULT boolForKey:@"HomeLaunch"]){
+        [USERDEFAULT setBool:YES forKey:@"HomeLaunch"];
+        [self thn_setMoreGuideImgForVC:@[@"shouye_sousuo",@"shouye_dingyue"]];
     }
 }
 
@@ -646,6 +668,13 @@ static NSString *const twoCommentsCellId = @"TwoCommentsCellId";
         _commentsMarr = [NSMutableArray array];
     }
     return _commentsMarr;
+}
+
+- (NSMutableArray *)commentsCountMarr {
+    if (!_commentsCountMarr) {
+        _commentsCountMarr = [NSMutableArray array];
+    }
+    return _commentsCountMarr;
 }
 
 - (NSMutableArray *)hotUserMarr {

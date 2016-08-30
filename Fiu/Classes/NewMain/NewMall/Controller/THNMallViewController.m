@@ -40,7 +40,8 @@ static NSString *const MallListHeaderCellViewId = @"mallListHeaderCellViewId";
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
-
+    [self thn_setFirstAppStart];
+    [self getGoodsCarNumData];
     [self thn_setNavigationViewUI];
 }
 
@@ -215,7 +216,6 @@ static NSString *const MallListHeaderCellViewId = @"mallListHeaderCellViewId";
 
 #pragma mark - 设置Nav
 - (void)thn_setNavigationViewUI {
-    
     self.view.backgroundColor = [UIColor whiteColor];
     [[UIApplication sharedApplication] setStatusBarHidden:NO];
     self.delegate = self;
@@ -234,6 +234,14 @@ static NSString *const MallListHeaderCellViewId = @"mallListHeaderCellViewId";
 - (void)thn_rightBarItemSelected {
     GoodsCarViewController * goodsCarVC = [[GoodsCarViewController alloc] init];
     [self.navigationController pushViewController:goodsCarVC animated:YES];
+}
+
+#pragma mark - 首次打开加载指示图
+- (void)thn_setFirstAppStart {
+    if(![USERDEFAULT boolForKey:@"MallGoodsLaunch"]){
+        [USERDEFAULT setBool:YES forKey:@"MallGoodsLaunch"];
+        [self thn_setMoreGuideImgForVC:@[@"haohuo_saoyisao",@"haohuo_gouwuche"]];
+    }
 }
 
 #pragma mark - NSMutableArray

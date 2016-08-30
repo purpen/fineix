@@ -9,7 +9,6 @@
 #import "FBPictureViewController.h"
 #import <pop/POP.h>
 #import "FiltersView.h"
-#import "ChangeAddUrlView.h"
 #import "FBFootView.h"
 #import "THNMarkGoodsView.h"
 #import "UserGoodsTag.h"
@@ -27,7 +26,6 @@
 @pro_strong NSString            *filterName;             //  选择的滤镜名字
 @pro_strong NSString            *fSceneId;
 @pro_strong NSString            *fSceneTitle;
-@pro_strong ChangeAddUrlView    *changeGoodsView;        //  编辑产品
 @pro_strong FBRequest           *addUserGoods;
 @pro_strong FBRequest           *deleteUserGoods;
 @pro_strong FBRequest           *userAddRequest;

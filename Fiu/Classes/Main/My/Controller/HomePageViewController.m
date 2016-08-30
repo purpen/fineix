@@ -12,18 +12,14 @@
 #import "MyFansViewController.h"
 #import "BackgroundCollectionViewCell.h"
 #import "OtherCollectionViewCell.h"
-#import "AllSceneCollectionViewCell.h"
 #import "ShieldingViewController.h"
 #import "Fiu.h"
 #import "AccountManagementViewController.h"
 #import "UserInfoEntity.h"
 #import "DirectMessagesViewController.h"
 #import <SVProgressHUD.h>
-#import "FiuSceneRow.h"
 #import "MJRefresh.h"
-#import "FiuSceneViewController.h"
 #import "HomeSceneListRow.h"
-#import "SceneInfoViewController.h"
 #import "MyFansActionSheetViewController.h"
 #import "UserInfo.h"
 #import <SDWebImage/UIImageView+WebCache.h>
@@ -252,54 +248,6 @@ static NSString *sceneCellId = @"THNHomeSenceCollectionViewCell";
 //    self.myCollectionView.mj_footer.hidden = YES;
     if ([self.type isEqualToNumber:@1]) {
         
-        //进行情景的网络请求
-//        [SVProgressHUD show];
-        FBRequest *request = [FBAPI postWithUrlString:@"/scene_scene/" requestDictionary:@{@"page":@(_n+1),@"size":@6,@"sort":@0,@"user_id":self.userId} delegate:self];
-        [request startRequestSuccess:^(FBRequest *request, id result) {
-            
-            NSArray * fiuSceneArr = [[result valueForKey:@"data"] valueForKey:@"rows"];
-            for (NSDictionary * fiuSceneDic in fiuSceneArr) {
-                FiuSceneRow * fiuSceneModel = [[FiuSceneRow alloc] initWithDictionary:fiuSceneDic];
-                [_fiuSceneList addObject:fiuSceneModel];
-                [_fiuSceneIdList addObject:[NSString stringWithFormat:@"%zi", fiuSceneModel.idField]];
-            }
-            
-            [self.myCollectionView reloadData];
-            _n = [[[result objectForKey:@"data"] objectForKey:@"current_page"] intValue];
-            _totalN = [[[result objectForKey:@"data"] objectForKey:@"total_page"] intValue];
-            
-            BOOL isLastPage = (_n == _totalN);
-            
-            if (!isLastPage && _totalN != 0) {
-                if (self.myCollectionView.mj_footer.state == MJRefreshStateNoMoreData) {
-                    [self.myCollectionView.mj_footer resetNoMoreData];
-                }
-            }
-            if (_n == _totalN == 1) {
-                self.myCollectionView.mj_footer.state = MJRefreshStateNoMoreData;
-                self.myCollectionView.mj_footer.hidden = YES;
-            }
-            
-            if ([self.myCollectionView.mj_header isRefreshing]) {
-                [self.myCollectionView.mj_header endRefreshing];
-            }
-            if ([self.myCollectionView.mj_footer isRefreshing]) {
-                if (isLastPage) {
-                    [self.myCollectionView.mj_footer endRefreshingWithNoMoreData];
-                    self.myCollectionView.mj_footer.hidden = YES;
-                }
-            }
-            
-            if (_totalN == 0) {
-                self.myCollectionView.mj_footer.state = MJRefreshStateNoMoreData;
-                self.myCollectionView.mj_footer.hidden = YES;
-            }
-            
-            [SVProgressHUD dismiss];
-        } failure:^(FBRequest *request, NSError *error) {
-            [SVProgressHUD showInfoWithStatus:[error localizedDescription]];
-        }];
-    }else{
         //进行场景的网络请求
 //        [SVProgressHUD show];
         FBRequest *request = [FBAPI postWithUrlString:@"/scene_sight/" requestDictionary:@{@"page":@(_m+1),@"size":@10,@"sort":@0,@"user_id":self.userId} delegate:self];
@@ -422,7 +370,6 @@ static NSString *sceneCellId = @"THNHomeSenceCollectionViewCell";
         [_myCollectionView registerClass:[BackgroundCollectionViewCell class] forCellWithReuseIdentifier:@"BackgroundCollectionViewCell"];
         [_myCollectionView registerClass:[OtherCollectionViewCell class] forCellWithReuseIdentifier:@"OtherCollectionViewCell"];
         [_myCollectionView registerClass:[UICollectionViewCell class] forCellWithReuseIdentifier:@"UICollectionViewCell"];
-        [_myCollectionView registerClass:[AllSceneCollectionViewCell class] forCellWithReuseIdentifier:@"AllSceneCollectionViewCell"];
         [_myCollectionView registerClass:[UICollectionViewCell class] forCellWithReuseIdentifier:@"UICollectionViewCellScenarioNon"];
         [_myCollectionView registerNib:[UINib nibWithNibName:sceneCellId bundle:nil] forCellWithReuseIdentifier:sceneCellId];
     }
@@ -587,11 +534,6 @@ static NSString *sceneCellId = @"THNHomeSenceCollectionViewCell";
                     make.top.mas_equalTo(cell.mas_top).with.offset(0);
                 }];
                 return cell;
-            }else{
-                //不是空的
-                AllSceneCollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"AllSceneCollectionViewCell" forIndexPath:indexPath];
-                [cell setAllFiuSceneListData:_fiuSceneList[indexPath.row]];
-                return cell;
             }
         }
     }
@@ -603,9 +545,7 @@ static NSString *sceneCellId = @"THNHomeSenceCollectionViewCell";
 -(void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath{
     if (indexPath.section == 2) {
         if ([self.type isEqualToNumber:@1]) {
-            FiuSceneViewController * fiuSceneVC = [[FiuSceneViewController alloc] init];
-            fiuSceneVC.fiuSceneId = _fiuSceneIdList[indexPath.row];
-            [self.navigationController pushViewController:fiuSceneVC animated:YES];
+            
         }else if([self.type isEqualToNumber:@2]){
             if (_sceneListMarr.count == 0) {
                 return;

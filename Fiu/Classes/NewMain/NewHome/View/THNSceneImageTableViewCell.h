@@ -23,6 +23,7 @@
 @pro_strong NSMutableArray *tagDataMarr;
 @pro_strong NSMutableArray *userTagMarr;
 @pro_strong NSMutableArray *goodsIds;
+@pro_strong NSMutableArray *goodsType;
 
 - (void)thn_setSceneImageData:(HomeSceneListRow *)sceneModel;
 

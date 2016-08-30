@@ -8,7 +8,6 @@
 
 #import "FBCategoryView.h"
 #import "MallMenuCollectionViewCell.h"
-#import "GoodsCategoryViewController.h"
 
 static NSString *const collectionViewCellId = @"CollectionViewCellId";
 

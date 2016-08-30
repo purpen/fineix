@@ -9,7 +9,6 @@
 #import "FBAlertViewController.h"
 #import "ReportViewController.h"
 #import "FBShareViewController.h"
-#import "EditViewController.h"
 
 static NSInteger const actionBtnTag = 686;
 static NSInteger const fiuActionBtnTag = 696;
@@ -74,16 +73,7 @@ static NSInteger const fiuActionBtnTag = 696;
 #pragma mark - 情景选项
 - (void)fiuActionBtnClick:(UIButton *)button {
     if (button.tag == fiuActionBtnTag) {
-        EditViewController * editVC = [[EditViewController alloc] init];
-        editVC.createType = self.type;
-        editVC.ids = self.targetId;
-        editVC.data = self.fiuSceneData;
-        editVC.editSceneDone = ^ {
-            [self dismissViewControllerAnimated:YES completion:^{
-                self.editDoneAndRefresh();
-            }];
-        };
-        [self presentViewController:editVC animated:YES completion:nil];
+        
         
     } else if (button.tag == fiuActionBtnTag + 1) {
         [self dismissViewControllerAnimated:YES completion:^{
@@ -144,17 +134,7 @@ static NSInteger const fiuActionBtnTag = 696;
 //        [self presentViewController:shareVC animated:YES completion:nil];
         
     } else if (button.tag == actionBtnTag + 2) {
-        EditViewController * editVC = [[EditViewController alloc] init];
-        editVC.createType = self.type;
-        editVC.ids = self.targetId;
-        editVC.data = self.sceneData;
-        [editVC.bgImgView downloadImage:[self.sceneData valueForKey:@"cover_url"] place:[UIImage imageNamed:@""]];
-        editVC.editSceneDone = ^ {
-            [self dismissViewControllerAnimated:YES completion:^{
-                self.editDoneAndRefresh();
-            }];
-        };
-        [self presentViewController:editVC animated:YES completion:nil];
+
         
     } else if (button.tag == actionBtnTag + 3) {
         [self dismissViewControllerAnimated:YES completion:^{

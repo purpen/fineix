@@ -12,7 +12,6 @@
 #import "UserInfo.h"
 #import "UserInfoEntity.h"
 #import "MJRefresh.h"
-#import "SceneInfoViewController.h"
 #import "HomePageViewController.h"
 #import "TipNumberView.h"
 
@@ -216,9 +215,7 @@
 }
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
-    SceneInfoViewController * sceneInfoVC = [[SceneInfoViewController alloc] init];
-    sceneInfoVC.sceneId = _sceneIdMarr[indexPath.row];
-    [self.navigationController pushViewController:sceneInfoVC animated:YES];
+    
 }
 
 - (void)didReceiveMemoryWarning {

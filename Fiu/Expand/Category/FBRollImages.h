@@ -10,8 +10,8 @@
 #import "SDCycleScrollView.h"
 #import "Fiu.h"
 #import "GoodsInfoData.h"
-#import "RollImageRow.h"
 #import "FBGoodsInfoModelData.h"
+#import "RollImageRow.h"
 
 @interface FBRollImages : UIView <SDCycleScrollViewDelegate>
 
