@@ -30,6 +30,7 @@
 #import "THNHomeSenceCollectionViewCell.h"
 #import "UIView+FSExtension.h"
 #import "THNSceneListViewController.h"
+#import "THNSceneDetalViewController.h"
 
 #define UserHeadTag 1
 #define BgTag 2
@@ -553,7 +554,6 @@ static NSString *sceneCellId = @"THNHomeSenceCollectionViewCell";
 }
 
 
-
 -(void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath{
     if (indexPath.section == 2) {
         if ([self.type isEqualToNumber:@1]) {
@@ -563,22 +563,18 @@ static NSString *sceneCellId = @"THNHomeSenceCollectionViewCell";
                 return;
             }
             
-            THNSceneListViewController *sceneListVC = [[THNSceneListViewController alloc] init];
-            [sceneListVC.sceneListMarr addObject:_sceneListMarr[indexPath.row]];
-            [sceneListVC.commentsMarr addObject:self.commentsMarr[indexPath.row]];
-            [sceneListVC.sceneIdMarr addObject:_sceneIdMarr[indexPath.row]];
-            [sceneListVC.userIdMarr addObject:self.userIdMarr[indexPath.row]];
-            sceneListVC.index = 0;
-            [self.navigationController pushViewController:sceneListVC animated:YES];
+            THNSceneDetalViewController *vc = [[THNSceneDetalViewController alloc] init];
+            vc.sceneDetalId = _sceneIdMarr[indexPath.row];
+            [self.navigationController pushViewController:vc animated:YES];
         }
     }
 }
 
 
-
 -(void)clickBackBtn:(UIButton*)sender{
     [self.navigationController popViewControllerAnimated:YES];
 }
+
 
 -(void)clickFocusBtn:(UIButton*)sender{
     if (sender.selected) {

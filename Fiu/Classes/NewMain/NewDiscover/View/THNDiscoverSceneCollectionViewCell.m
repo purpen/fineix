@@ -39,6 +39,8 @@
         self.likeBtn.selected = NO;
     }
     
+    _sceneId = model._id;
+    
     if (model.title.length == 0) {
         self.title.hidden = YES;
         self.suTitle.hidden = YES;

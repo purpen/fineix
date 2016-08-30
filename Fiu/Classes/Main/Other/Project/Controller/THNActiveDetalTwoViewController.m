@@ -19,6 +19,8 @@
 #import "THNUserInfoTableViewCell.h"
 #import "THNSceneImageTableViewCell.h"
 #import "THNSceneDetalViewController.h"
+#import <MJRefresh.h>
+#import "THNSceneImageViewController.h"
 
 @interface THNActiveDetalTwoViewController ()<UICollectionViewDelegate,UICollectionViewDataSource>
 
@@ -40,6 +42,20 @@
 @property (nonatomic, strong) THNUserInfoTableViewCell *top;
 /**  */
 @property (nonatomic, strong) THNSceneImageTableViewCell *scene;
+/**  */
+@property(nonatomic,assign) NSInteger current_page;
+/**  */
+@property(nonatomic,assign) NSInteger total_rows;
+@pro_strong FBRequest *likeSceneRequest;
+@pro_strong FBRequest *cancelLikeRequest;
+@pro_strong FBRequest *followRequest;
+@pro_strong FBRequest *cancelFollowRequest;
+/**  */
+@property (nonatomic, strong) NSMutableArray *sceneIdMarr;
+/**  */
+@property (nonatomic, strong) NSMutableArray *userIdMarr;
+/**  */
+@property (nonatomic, strong) NSMutableArray *resultUserIdAry;
 
 @end
 
@@ -48,15 +64,39 @@ static NSString *const secondCellId = @"secondCellId";
 static NSString *const ruleCellId = @"ruleCellId";
 static NSString * collectionViewCellId = @"THNDiscoverSceneCollectionViewCell";
 static NSString * resultCellId = @"resultCellId";
+static NSString *const URLCancelLike = @"/favorite/ajax_cancel_love";
+static NSString *const URLLikeScene = @"/favorite/ajax_love";
+static NSString *const URLFollowUser = @"/follow/ajax_follow";
+static NSString *const URLCancelFollowUser = @"/follow/ajax_cancel_follow";
 
 @implementation THNActiveDetalTwoViewController
 
+-(NSMutableArray *)userIdMarr{
+    if (!_userIdMarr) {
+        _userIdMarr = [NSMutableArray array];
+    }
+    return _userIdMarr;
+}
+
+-(NSMutableArray *)resultUserIdAry{
+    if (!_resultUserIdAry) {
+        _resultUserIdAry = [NSMutableArray array];
+    }
+    return _resultUserIdAry;
+}
 
 -(NSMutableArray *)resultsAry{
     if (!_resultsAry) {
         _resultsAry = [NSMutableArray array];
     }
     return _resultsAry;
+}
+
+-(NSMutableArray *)sceneIdMarr{
+    if (!_sceneIdMarr) {
+        _sceneIdMarr = [NSMutableArray array];
+    }
+    return _sceneIdMarr;
 }
 
 -(NSMutableArray *)senceModelAry{
@@ -89,13 +129,61 @@ static NSString * resultCellId = @"resultCellId";
     [UIApplication sharedApplication].statusBarHidden = NO;
 }
 
+- (void)dealloc {
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:@"findLikeTheScene" object:nil];
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:@"findCancelLikeTheScene" object:nil];
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:@"followTheUser" object:nil];
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:@"cancelFollowTheUser" object:nil];
+}
+
+#pragma mark - 点赞
+- (void)likeTheScene:(NSNotification *)idx {
+    [self thn_networkLikeSceneData:[idx object]];
+}
+
+- (void)cancelLikeTheScene:(NSNotification *)idx {
+    [self thn_networkCancelLikeData:[idx object]];
+}
+
+#pragma mark 点赞
+- (void)thn_networkLikeSceneData:(NSString *)idx {
+    self.likeSceneRequest = [FBAPI postWithUrlString:URLLikeScene requestDictionary:@{@"id":idx, @"type":@"12"} delegate:self];
+    [self.likeSceneRequest startRequestSuccess:^(FBRequest *request, id result) {
+        if ([[result valueForKey:@"success"] isEqualToNumber:@1]) {
+            NSInteger index = [self.sceneIdMarr indexOfObject:idx];
+            [self.senceModelAry[index] setValue:@1 forKey:@"is_love"];
+        }
+        
+    } failure:^(FBRequest *request, NSError *error) {
+        [SVProgressHUD showErrorWithStatus:[error localizedDescription]];
+    }];
+}
+
+#pragma mark 取消点赞
+- (void)thn_networkCancelLikeData:(NSString *)idx {
+    self.cancelLikeRequest = [FBAPI postWithUrlString:URLCancelLike requestDictionary:@{@"id":idx, @"type":@"12"} delegate:self];
+    [self.cancelLikeRequest startRequestSuccess:^(FBRequest *request, id result) {
+        if ([[result valueForKey:@"success"] isEqualToNumber:@1]) {
+            NSInteger index = [self.sceneIdMarr indexOfObject:idx];
+            [self.senceModelAry[index] setValue:@0 forKey:@"is_love"];
+        }
+        
+    } failure:^(FBRequest *request, NSError *error) {
+        [SVProgressHUD showErrorWithStatus:[error localizedDescription]];
+    }];
+}
+
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     
     self.navViewTitle.text = @"活动详情";
     self.type = @0;
-    [self.view addSubview:self.contentView];
     [self ruleRequest];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(likeTheScene:) name:@"findLikeTheScene" object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(cancelLikeTheScene:) name:@"findCancelLikeTheScene" object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(followTheUser:) name:@"followTheUser" object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(cancelFollowTheUser:) name:@"cancelFollowTheUser" object:nil];
 }
 
 -(NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView{
@@ -106,7 +194,6 @@ static NSString * resultCellId = @"resultCellId";
     if (!_activeTopView) {
         _activeTopView = [THNActiveTopView viewFromXib];
         _activeTopView.frame = CGRectMake(0, 0, SCREEN_WIDTH, 211);
-        _activeTopView.model = self.model;
     }
     return _activeTopView;
 }
@@ -248,6 +335,8 @@ static NSString * resultCellId = @"resultCellId";
                 //活动结果
             {
                 _scene = [[THNSceneImageTableViewCell alloc] init];
+                _scene.sceneImage.tag = indexPath.row;
+                [_scene.sceneImage addTarget:self action:@selector(sceneImageClick:) forControlEvents:UIControlEventTouchUpInside];
                 _top = [[THNUserInfoTableViewCell alloc] init];
                 UICollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:resultCellId forIndexPath:indexPath];
                 [cell.contentView addSubview:self.top];
@@ -264,6 +353,7 @@ static NSString * resultCellId = @"resultCellId";
                     make.right.mas_equalTo(cell.contentView.mas_right).offset(0);
                     make.top.mas_equalTo(self.top.mas_bottom).offset(0);
                 }];
+//                self.top.userModel = self.resultsAry[indexPath.row];
                 [self.top thn_setHomeSceneUserInfoData:self.resultsAry[indexPath.row]];
                 [self.scene thn_setSceneImageData:self.resultsAry[indexPath.row]];
                 return cell;
@@ -279,6 +369,14 @@ static NSString * resultCellId = @"resultCellId";
     return cell;
 }
 
+-(void)sceneImageClick:(UIButton*)sender{
+    THNSceneImageViewController *sceneImageVC = [[THNSceneImageViewController alloc] init];
+    sceneImageVC.modalPresentationStyle = UIModalPresentationOverFullScreen;
+    sceneImageVC.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;
+    HomeSceneListRow *model = self.resultsAry[sender.tag];
+    sceneImageVC.image = model.coverUrl;
+    [self presentViewController:sceneImageVC animated:YES completion:nil];
+}
 
 -(void)attend{
     ClipImageViewController *vc = [[ClipImageViewController alloc] init];
@@ -359,25 +457,22 @@ static NSString * resultCellId = @"resultCellId";
         case 0:
             //活动规则网络请求
         {
-            [self.senceModelAry removeAllObjects];
-            [self.resultsAry removeAllObjects];
+            
             [self ruleRequest];
         }
             break;
         case 1:
             //参与的情境网络请求
         {
-            [self.senceModelAry removeAllObjects];
-            [self.resultsAry removeAllObjects];
-            [self senceRequest];
+            self.contentView.mj_footer.hidden = NO;
+            [self setUpRefresh];
         }
             
             break;
         case 2:
             //活动结果网络请求
         {
-            [self.senceModelAry removeAllObjects];
-            [self.resultsAry removeAllObjects];
+            
             [self resultRequest];
         }
             break;
@@ -388,6 +483,7 @@ static NSString * resultCellId = @"resultCellId";
 }
 
 -(void)resultRequest{
+    
     [self.resultsAry removeAllObjects];
     NSDictionary *params = @{
                              @"id" : self.activeDetalId
@@ -399,10 +495,15 @@ static NSString * resultCellId = @"resultCellId";
             NSLog(@"活动结果 %@",result);
             NSArray *rows = result[@"data"][@"sights"];
             self.resultsAry = [HomeSceneListRow mj_objectArrayWithKeyValuesArray:rows];
+            for (HomeSceneListRow *model in self.resultsAry) {
+                [self.resultUserIdAry addObject:model.user._id];
+            }
+
             if (self.params != params) {
                 return;
             }
             [self.contentView reloadData];
+            self.contentView.mj_footer.hidden = YES;
         }else{
             if (self.params != params) return;
             
@@ -413,11 +514,53 @@ static NSString * resultCellId = @"resultCellId";
     } failure:nil];
 }
 
+-(void)setUpRefresh{
+    [self senceRequest];
+    
+    self.contentView.mj_footer = [MJRefreshAutoNormalFooter footerWithRefreshingTarget:self refreshingAction:@selector(loadMore)];
+}
+
+-(void)loadMore{
+    NSDictionary *params = @{
+                             @"page" : @(++self.current_page),
+                             @"size" : @8,
+                             @"subject_id" : self.activeDetalId
+                             };
+    self.params = params;
+    FBRequest *request = [FBAPI postWithUrlString:@"/scene_sight/getlist" requestDictionary:params delegate:self];
+    [request startRequestSuccess:^(FBRequest *request, id result) {
+        if (result[@"success"]) {
+            self.current_page = [result[@"data"][@"current_page"] integerValue];
+            self.total_rows = [result[@"data"][@"total_rows"] integerValue];
+            NSArray *rows = result[@"data"][@"rows"];
+            NSArray *ary = [THNSenceModel mj_objectArrayWithKeyValuesArray:rows];
+            [self.senceModelAry addObjectsFromArray:ary];
+            for (THNSenceModel *model in self.senceModelAry) {
+                [self.sceneIdMarr addObject:model._id];
+            }
+            if (self.params != params) {
+                return;
+            }
+            [self.contentView reloadData];
+            [self checkFooterState];
+        }else{
+            if (self.params != params) return;
+            
+            // 提醒
+            [SVProgressHUD showErrorWithStatus:@"加载用户数据失败"];
+            
+            // 让底部控件结束刷新
+            [self.contentView.mj_footer endRefreshing];
+        }
+    } failure:nil];
+}
+
+
 -(void)senceRequest{
-//    self.current_page = 1;
+    self.current_page = 1;
     [self.senceModelAry removeAllObjects];
     NSDictionary *params = @{
-                             @"page" : @(1),
+                             @"page" : @(self.current_page),
                              @"size" : @8,
                              @"subject_id" : self.activeDetalId
                              };
@@ -426,16 +569,19 @@ static NSString * resultCellId = @"resultCellId";
     [request startRequestSuccess:^(FBRequest *request, id result) {
         if (result[@"success"]) {
             NSLog(@"参与的情境 %@",result);
-//            self.current_page = [result[@"data"][@"current_page"] integerValue];
-//            self.total_rows = [result[@"data"][@"total_rows"] integerValue];
+            self.current_page = [result[@"data"][@"current_page"] integerValue];
+            self.total_rows = [result[@"data"][@"total_rows"] integerValue];
             NSArray *rows = result[@"data"][@"rows"];
             self.senceModelAry = [THNSenceModel mj_objectArrayWithKeyValuesArray:rows];
+            for (THNSenceModel *model in self.senceModelAry) {
+                [self.sceneIdMarr addObject:model._id];
+            }
             if (self.params != params) {
                 return;
             }
             [self.contentView reloadData];
 //            [self.myCollectionView.mj_header endRefreshing];
-//            [self checkFooterState];
+            [self checkFooterState];
         }else{
             if (self.params != params) return;
             
@@ -443,23 +589,80 @@ static NSString * resultCellId = @"resultCellId";
             [SVProgressHUD showErrorWithStatus:@"加载用户数据失败"];
             
             // 让底部控件结束刷新
-//            [self.myCollectionView.mj_footer endRefreshing];
+            [self.contentView.mj_footer endRefreshing];
         }
     } failure:nil];
 }
 
+-(void)checkFooterState{
+    self.contentView.mj_footer.hidden = self.senceModelAry.count == 0;
+    if (self.senceModelAry.count == self.total_rows) {
+        self.contentView.mj_footer.hidden = YES;
+    }else{
+        [self.contentView.mj_footer endRefreshing];
+    }
+}
+
 -(void)ruleRequest{
+    
     FBRequest *request = [FBAPI postWithUrlString:@"/scene_subject/view" requestDictionary:@{
                                                                                              @"id" : self.activeDetalId
                                                                                              } delegate:self];
     [request startRequestSuccess:^(FBRequest *request, id result) {
         if (result[@"success"]) {
             NSLog(@"活动规则  %@",result);
+            BOOL flag = NO;
             self.ruleModel = [THNActiveRuleModel mj_objectWithKeyValues:result[@"data"]];
+            self.model = [THNArticleModel mj_objectWithKeyValues:result[@"data"]];
+            [self.view addSubview:self.contentView];
+            if (flag == NO) {
+                self.activeTopView.model = self.model;
+                flag = YES;
+            }
             [self.contentView reloadData];
+            self.contentView.mj_footer.hidden = YES;
         }else{
         }
     } failure:nil];
 }
+
+#pragma mark - 关注
+- (void)followTheUser:(NSNotification *)idx {
+    [self thn_networkFollowSceneData:[idx object]];
+}
+
+- (void)cancelFollowTheUser:(NSNotification *)idx {
+    [self thn_networkCancelFollowData:[idx object]];
+}
+
+#pragma mark 关注
+- (void)thn_networkFollowSceneData:(NSString *)idx {
+    self.followRequest = [FBAPI postWithUrlString:URLFollowUser requestDictionary:@{@"follow_id":idx} delegate:self];
+    [self.followRequest startRequestSuccess:^(FBRequest *request, id result) {
+        if ([[result valueForKey:@"success"] isEqualToNumber:@1]) {
+            NSInteger index = [self.resultUserIdAry indexOfObject:idx];
+            [[self.resultsAry[index] valueForKey:@"user"] setValue:@"1" forKey:@"isFollow"];
+            [self.contentView reloadData];
+        }
+        
+    } failure:^(FBRequest *request, NSError *error) {
+        [SVProgressHUD showErrorWithStatus:[error localizedDescription]];
+    }];
+}
+
+#pragma mark 取消关注
+- (void)thn_networkCancelFollowData:(NSString *)idx {
+    self.cancelFollowRequest = [FBAPI postWithUrlString:URLCancelFollowUser requestDictionary:@{@"follow_id":idx} delegate:self];
+    [self.cancelFollowRequest startRequestSuccess:^(FBRequest *request, id result) {
+        if ([[result valueForKey:@"success"] isEqualToNumber:@1]) {
+            NSInteger index = [self.resultUserIdAry indexOfObject:idx];
+            [[self.resultsAry[index] valueForKey:@"user"] setValue:@"0" forKey:@"isFollow"];
+        }
+        
+    } failure:^(FBRequest *request, NSError *error) {
+        [SVProgressHUD showErrorWithStatus:[error localizedDescription]];
+    }];
+}
+
 
 @end

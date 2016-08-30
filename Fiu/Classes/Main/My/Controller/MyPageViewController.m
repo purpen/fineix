@@ -220,7 +220,7 @@
         [SVProgressHUD showErrorWithStatus:@"加载失败"];
     }];
 }
-
+ 
 
 -(UICollectionView *)myCollectionView{
     if (!_myCollectionView) {
@@ -340,7 +340,7 @@
 /**
  *  收藏按钮
  *
- *  @return <#return value description#>
+ *  @return 
  */
 #pragma mark - 收藏按钮
 -(void)collectionBtnbtn:(UIButton*)sender{
@@ -372,10 +372,7 @@
 
 
 -(void)aboutBtn:(UIButton*)sender{
-//    AboutViewController *vc = [[AboutViewController alloc] init];
-//    [self.navigationController pushViewController:vc animated:YES];
-    
-    THNProjectViewController *vc = [[THNProjectViewController alloc] init];
+    AboutViewController *vc = [[AboutViewController alloc] init];
     [self.navigationController pushViewController:vc animated:YES];
 }
 
