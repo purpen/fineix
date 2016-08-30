@@ -381,8 +381,8 @@ static NSString *const allCommentsCellId = @"AllCommentsCellId";
         _homeTable.separatorStyle = UITableViewCellSeparatorStyleNone;
         [self addMJRefresh:_homeTable];
         
-        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(likeTheScene:) name:@"likeTheScene" object:nil];
-        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(cancelLikeTheScene:) name:@"cancelLikeTheScene" object:nil];
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(likeTheScene:) name:@"homeLikeTheScene" object:nil];
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(cancelLikeTheScene:) name:@"homeCancelLikeTheScene" object:nil];
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(followTheUser:) name:@"followTheUser" object:nil];
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(cancelFollowTheUser:) name:@"cancelFollowTheUser" object:nil];
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(favoriteTheScene:) name:@"favoriteTheScene" object:nil];
@@ -445,7 +445,7 @@ static NSString *const allCommentsCellId = @"AllCommentsCellId";
             THNDataInfoTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:dataInfoCellId];
             cell = [[THNDataInfoTableViewCell alloc] initWithStyle:(UITableViewCellStyleDefault) reuseIdentifier:dataInfoCellId];
             if (self.sceneListMarr.count) {
-                [cell thn_setSceneData:self.sceneListMarr[indexPath.section - 1]];
+                [cell thn_setSceneData:self.sceneListMarr[indexPath.section - 1] type:1];
             }
             cell.vc = self;
             cell.nav = self.navigationController;
@@ -745,8 +745,8 @@ static NSString *const allCommentsCellId = @"AllCommentsCellId";
 }
 
 - (void)dealloc {
-    [[NSNotificationCenter defaultCenter] removeObserver:self name:@"likeTheScene" object:nil];
-    [[NSNotificationCenter defaultCenter] removeObserver:self name:@"cancelLikeTheScene" object:nil];
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:@"homeLikeTheScene" object:nil];
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:@"homeCancelLikeTheScene" object:nil];
     [[NSNotificationCenter defaultCenter] removeObserver:self name:@"followTheUser" object:nil];
     [[NSNotificationCenter defaultCenter] removeObserver:self name:@"cancelFollowTheUser" object:nil];
     [[NSNotificationCenter defaultCenter] removeObserver:self name:@"deleteHotUserList" object:nil];

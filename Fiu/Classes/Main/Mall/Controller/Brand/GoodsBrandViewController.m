@@ -189,7 +189,7 @@ static NSString *const URLGoodslist = @"/scene_product/getlist";
     [[UIApplication sharedApplication] setStatusBarStyle:(UIStatusBarStyleDefault)];
     self.view.backgroundColor = [UIColor whiteColor];
     self.delegate = self;
-    [self addBarItemLeftBarButton:@"" image:@"icon_back" isTransparent:YES];
+    [self addBarItemLeftBarButton:@"" image:@"icon_back_white" isTransparent:YES];
 }
 
 - (void)leftBarItemSelected {
@@ -209,12 +209,8 @@ static NSString *const URLGoodslist = @"/scene_product/getlist";
 - (UILabel *)titleLab {
     if (!_titleLab) {
         _titleLab = [[UILabel alloc] initWithFrame:CGRectMake(SCREEN_WIDTH/2 - 100, 20, 200, 44)];
-        if (IS_iOS9) {
-            _titleLab.font = [UIFont fontWithName:@"PingFangSC-Light" size:17];
-        } else {
-            _titleLab.font = [UIFont systemFontOfSize:17];
-        }
-        _titleLab.textColor = [UIColor blackColor];
+        _titleLab.font = [UIFont systemFontOfSize:17];
+        _titleLab.textColor = [UIColor whiteColor];
         _titleLab.textAlignment = NSTextAlignmentCenter;
     }
     return _titleLab;

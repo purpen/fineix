@@ -25,6 +25,10 @@
 /** 活动详情 参与情景 */
 @property (nonatomic, strong) THNSenceModel *model;
 
-- (void)thn_setSceneUserInfoData:(HomeSceneListRow *)model;
+/**
+ *  type
+ *  1:搜索情境列表／ 2:发现页 / 3:订阅 / 4:分类
+ */
+- (void)thn_setSceneUserInfoData:(HomeSceneListRow *)model type:(NSInteger)type;
 
 @end

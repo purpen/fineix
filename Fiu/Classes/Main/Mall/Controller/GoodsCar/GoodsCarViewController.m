@@ -412,12 +412,8 @@ static NSString *const URLEditItemsNum = @"/shopping/edit_cart";
         _editBtn = [[UIButton alloc] initWithFrame:CGRectMake(SCREEN_WIDTH - 44, 20, 44, 44)];
         [_editBtn setTitle:NSLocalizedString(@"Edit", nil) forState:(UIControlStateNormal)];
         [_editBtn setTitle:NSLocalizedString(@"Done", nil) forState:(UIControlStateSelected)];
-        [_editBtn setTitleColor:[UIColor blackColor] forState:(UIControlStateNormal)];
-        if (IS_iOS9) {
-            _editBtn.titleLabel.font = [UIFont fontWithName:@"PingFangSC-Light" size:17];
-        } else {
-            _editBtn.titleLabel.font = [UIFont systemFontOfSize:17];
-        }
+        [_editBtn setTitleColor:[UIColor whiteColor] forState:(UIControlStateNormal)];
+        _editBtn.titleLabel.font = [UIFont systemFontOfSize:17];
         _editBtn.selected = NO;
         [_editBtn addTarget:self action:@selector(beginEditCar:) forControlEvents:(UIControlEventTouchUpInside)];
     }

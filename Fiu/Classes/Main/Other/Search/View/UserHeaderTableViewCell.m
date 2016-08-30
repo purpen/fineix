@@ -26,11 +26,17 @@
     return self;
 }
 
-- (void)setUserListData:(UserModelRow *)model {
+- (void)setUserListData:(UserModelRow *)model nowUserId:(NSString *)userId {
     [self.userHeader sd_setImageWithURL:[NSURL URLWithString:model.avatarUrl] forState:(UIControlStateNormal)];
     self.userName.text = model.nickname;
     self.userProfile.text = model.summary;
     _userId = model.userId;
+    if ([_userId isEqualToString:userId]) {
+        self.concernBtn.hidden = YES;
+    } else {
+        self.concernBtn.hidden = NO;
+    }
+    
     if (model.isFollow == 0) {
         self.concernBtn.selected = NO;
     } else if (model.isFollow == 1) {

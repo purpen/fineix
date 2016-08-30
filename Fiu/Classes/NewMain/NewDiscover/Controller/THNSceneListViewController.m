@@ -244,8 +244,8 @@ static NSString *const twoCommentsCellId = @"TwoCommentsCellId";
         _sceneTable.separatorStyle = UITableViewCellSeparatorStyleNone;
 //        [self addMJRefresh:_sceneTable];
         
-        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(disLikeTheScene:) name:@"likeTheScene" object:nil];
-        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(disCancelLikeTheScene:) name:@"cancelLikeTheScene" object:nil];
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(disLikeTheScene:) name:@"listLikeTheScene" object:nil];
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(disCancelLikeTheScene:) name:@"listCancelLikeTheScene" object:nil];
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(disFollowTheUser:) name:@"followTheUser" object:nil];
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(disCancelFollowTheUser:) name:@"cancelFollowTheUser" object:nil];
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(disFavoriteTheScene:) name:@"favoriteTheScene" object:nil];
@@ -269,6 +269,7 @@ static NSString *const twoCommentsCellId = @"TwoCommentsCellId";
         if (self.sceneListMarr.count) {
             [cell thn_setHomeSceneUserInfoData:self.sceneListMarr[indexPath.section]];
         }
+        cell.nav = self.navigationController;
         return cell;
         
     } else if (indexPath.row == 1) {
@@ -285,7 +286,7 @@ static NSString *const twoCommentsCellId = @"TwoCommentsCellId";
         THNDataInfoTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:dataInfoCellId];
         cell = [[THNDataInfoTableViewCell alloc] initWithStyle:(UITableViewCellStyleDefault) reuseIdentifier:dataInfoCellId];
         if (self.sceneListMarr.count) {
-            [cell thn_setSceneData:self.sceneListMarr[indexPath.section]];
+            [cell thn_setSceneData:self.sceneListMarr[indexPath.section] type:2];
         }
         cell.vc = self;
         cell.nav = self.navigationController;
@@ -459,6 +460,15 @@ static NSString *const twoCommentsCellId = @"TwoCommentsCellId";
         _commentsMarr = [NSMutableArray array];
     }
     return _commentsMarr;
+}
+
+- (void)dealloc {
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:@"listLikeTheScene" object:nil];
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:@"listCancelLikeTheScene" object:nil];
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:@"followTheUser" object:nil];
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:@"cancelFollowTheUser" object:nil];
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:@"deleteHotUserList" object:nil];
+    
 }
 
 @end

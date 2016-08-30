@@ -20,6 +20,6 @@
 @pro_strong UIButton            *       concernBtn;         //  关注按钮
 @pro_strong UILabel             *       line;               //  分割线
 
-- (void)setUserListData:(UserModelRow *)model;
+- (void)setUserListData:(UserModelRow *)model nowUserId:(NSString *)userId;
 
 @end

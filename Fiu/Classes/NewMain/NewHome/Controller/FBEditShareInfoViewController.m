@@ -292,6 +292,9 @@ static NSString *const URLActionTags = @"/scene_sight/stick_active_tags";
                 [self presentViewController:tagVC animated:YES completion:^{
                     tagVC.getAddTagsDataBlock = ^(NSString *tags, NSString *tagsId) {
                         self.actionTag = tagsId;
+                        if ([self.desText.text isEqualToString:NSLocalizedString(@"addDescription", nil)]) {
+                            self.desText.text = @"";
+                        }
                         NSMutableString *desText = [[NSMutableString alloc] initWithString:self.desText.text];
                         [desText insertString:tags atIndex:self.desText.selectedRange.location];
                         self.desText.text = desText;
@@ -318,6 +321,9 @@ static NSString *const URLActionTags = @"/scene_sight/stick_active_tags";
     [self presentViewController:tagVC animated:YES completion:^{
         tagVC.getAddTagsDataBlock = ^(NSString *tags, NSString *tagsId) {
             self.actionTag = tagsId;
+            if ([self.desText.text isEqualToString:NSLocalizedString(@"addDescription", nil)]) {
+                self.desText.text = @"";
+            }
             NSMutableString *desText = [[NSMutableString alloc] initWithString:self.desText.text];
             [desText insertString:[NSString stringWithFormat:@"#%@", tags] atIndex:self.desText.selectedRange.location];
             self.desText.text = desText;

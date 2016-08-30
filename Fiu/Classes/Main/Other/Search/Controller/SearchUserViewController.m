@@ -9,6 +9,7 @@
 #import "SearchUserViewController.h"
 #import "UserModelRow.h"
 #import "UserHeaderTableViewCell.h"
+#import "HomePageViewController.h"
 
 static NSString *const URLSearchList = @"/search/getlist";
 static NSString *const URLFollowUser = @"/follow/ajax_follow";
@@ -192,13 +193,20 @@ static NSString *const userCellId = @"UserCellId";
     UserHeaderTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:userCellId];
     cell = [[UserHeaderTableViewCell alloc] initWithStyle:(UITableViewCellStyleDefault) reuseIdentifier:userCellId];
     if (self.userListMarr.count) {
-        [cell setUserListData:self.userListMarr[indexPath.row]];
+        [cell setUserListData:self.userListMarr[indexPath.row] nowUserId:[self getLoginUserID]];
     }
     return cell;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
     return 65;
+}
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    HomePageViewController *userHomeVC = [[HomePageViewController alloc] init];
+    userHomeVC.userId = self.userIdMarr[indexPath.row];
+    userHomeVC.type = @2;
+    [self.navigationController pushViewController:userHomeVC animated:YES];
 }
 
 #pragma mark - 关注

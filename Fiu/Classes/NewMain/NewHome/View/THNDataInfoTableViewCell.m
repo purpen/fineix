@@ -16,6 +16,7 @@
     NSString *_userId;
     NSInteger _loveCount;
     HomeSceneListRow *_sceneModel;
+    NSInteger _type;
 }
 
 - (instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier {
@@ -30,7 +31,8 @@
 }
 
 #pragma mark - setModel;
-- (void)thn_setSceneData:(HomeSceneListRow *)dataModel {
+- (void)thn_setSceneData:(HomeSceneListRow *)dataModel type:(NSInteger)type {
+    _type = type;
     _sceneModel = dataModel;
     [self.look setTitle:[NSString stringWithFormat:@"%zi", dataModel.viewCount] forState:(UIControlStateNormal)];
     _loveCount = dataModel.loveCount;
@@ -172,7 +174,13 @@
         scaleAnimation.springSpeed = 10.0f;
         [button.layer pop_addAnimation:scaleAnimation forKey:@"scaleAnim"];
         
-        [[NSNotificationCenter defaultCenter] postNotificationName:@"likeTheScene" object:_sceneId];
+        if (_type == 1) {
+            [[NSNotificationCenter defaultCenter] postNotificationName:@"homeLikeTheScene" object:_sceneId];
+        } else if (_type == 2) {
+            [[NSNotificationCenter defaultCenter] postNotificationName:@"listLikeTheScene" object:_sceneId];
+        } else if (_type == 3) {
+            [[NSNotificationCenter defaultCenter] postNotificationName:@"userLikeTheScene" object:_sceneId];
+        }
         _loveCount += 1;
         [self.like setTitle:[NSString stringWithFormat:@"%zi", _loveCount] forState:(UIControlStateNormal)];
         
@@ -185,7 +193,13 @@
         scaleAnimation.springSpeed = 10.0f;
         [button.layer pop_addAnimation:scaleAnimation forKey:@"scaleAnim"];
     
-        [[NSNotificationCenter defaultCenter] postNotificationName:@"cancelLikeTheScene" object:_sceneId];
+        if (_type == 1) {
+            [[NSNotificationCenter defaultCenter] postNotificationName:@"homeCancelLikeTheScene" object:_sceneId];
+        } else if (_type == 2) {
+            [[NSNotificationCenter defaultCenter] postNotificationName:@"listCancelLikeTheScene" object:_sceneId];
+        } else if (_type == 3) {
+            [[NSNotificationCenter defaultCenter] postNotificationName:@"userCancelLikeTheScene" object:_sceneId];
+        }
         _loveCount -= 1;
         [self.like setTitle:[NSString stringWithFormat:@"%zi", _loveCount] forState:(UIControlStateNormal)];
     }

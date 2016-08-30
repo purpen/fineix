@@ -129,7 +129,7 @@ static NSString *const twoCommentsCellId = @"TwoCommentsCellId";
         THNDataInfoTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:dataInfoCellId];
         cell = [[THNDataInfoTableViewCell alloc] initWithStyle:(UITableViewCellStyleDefault) reuseIdentifier:dataInfoCellId];
         if (self.model) {
-            [cell thn_setSceneData:self.model];
+            [cell thn_setSceneData:self.model type:3];
             cell.vc = self;
             cell.nav = self.navigationController;
         }

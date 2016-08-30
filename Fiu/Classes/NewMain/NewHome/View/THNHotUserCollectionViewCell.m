@@ -133,6 +133,8 @@
         [_follow setTitleColor:[UIColor colorWithHexString:@"#222222"] forState:(UIControlStateNormal)];
         _follow.titleLabel.font = [UIFont systemFontOfSize:12];
         [_follow addTarget:self action:@selector(followClick:) forControlEvents:(UIControlEventTouchUpInside)];
+        [_follow setImage:[UIImage imageNamed:@"icon_success_black"] forState:(UIControlStateSelected)];
+        [_follow setImageEdgeInsets:(UIEdgeInsetsMake(0, -6, 0, 0))];
     }
     return _follow;
 }

@@ -219,8 +219,8 @@ static NSString *const SceneListCellId = @"sceneListCellId";
         [_sceneList registerClass:[THNDiscoverSceneCollectionViewCell class] forCellWithReuseIdentifier:SceneListCellId];
         [self addMJRefresh:_sceneList];
         
-        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(likeTheScene:) name:@"findLikeTheScene" object:nil];
-        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(cancelLikeTheScene:) name:@"findCancelLikeTheScene" object:nil];
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(likeTheScene:) name:@"subFindLikeTheScene" object:nil];
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(cancelLikeTheScene:) name:@"subFindCancelLikeTheScene" object:nil];
     }
     return _sceneList;
 }
@@ -233,7 +233,7 @@ static NSString *const SceneListCellId = @"sceneListCellId";
     THNDiscoverSceneCollectionViewCell * cell = [collectionView dequeueReusableCellWithReuseIdentifier:SceneListCellId
                                                                                           forIndexPath:indexPath];
     if (self.sceneListMarr.count) {
-        [cell thn_setSceneUserInfoData:self.sceneListMarr[indexPath.row]];
+        [cell thn_setSceneUserInfoData:self.sceneListMarr[indexPath.row] type:3];
     }
     return cell;
 }
@@ -293,6 +293,11 @@ static NSString *const SceneListCellId = @"sceneListCellId";
         _commentsMarr = [NSMutableArray array];
     }
     return _commentsMarr;
+}
+
+- (void)dealloc {
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:@"subFindLikeTheScene" object:nil];
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:@"subFindCancelLikeTheScene" object:nil];
 }
 
 @end

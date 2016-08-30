@@ -16,6 +16,8 @@ static NSString *const URLAddTheme = @"/my/add_interest_scene_id";
 static NSString *const URLRemTheme = @"/my/remove_interest_scene_id";
 static NSString *const SceneListCellId = @"sceneListCellId";
 static NSString *const URLSceneList = @"/scene_sight/";
+static NSString *const URLLikeScene = @"/favorite/ajax_love";
+static NSString *const URLCancelLike = @"/favorite/ajax_cancel_love";
 
 @interface DiscoverCategoryViewController () {
     NSString *_sort;
@@ -36,12 +38,45 @@ static NSString *const URLSceneList = @"/scene_sight/";
 - (void)viewDidLoad {
     [super viewDidLoad];
     _sort = @"2";
+    self.currentpageNum = 0;
     [self thn_networkSceneListData:_sort];
 
     [self setViewUI];
 }
 
-#pragma mark 情景列表
+#pragma mark 网络请求
+#pragma mark 点赞
+- (void)thn_networkLikeSceneData:(NSString *)idx {
+    self.likeSceneRequest = [FBAPI postWithUrlString:URLLikeScene requestDictionary:@{@"id":idx, @"type":@"12"} delegate:self];
+    [self.likeSceneRequest startRequestSuccess:^(FBRequest *request, id result) {
+        if ([[result valueForKey:@"success"] isEqualToNumber:@1]) {
+            NSInteger index = [self.sceneIdMarr indexOfObject:idx];
+            NSString *loveCount = [NSString stringWithFormat:@"%zi", [[[result valueForKey:@"data"] valueForKey:@"love_count"] integerValue]];
+            [self.sceneListMarr[index] setValue:loveCount forKey:@"loveCount"];
+            [self.sceneListMarr[index] setValue:@"1" forKey:@"isLove"];
+        }
+        
+    } failure:^(FBRequest *request, NSError *error) {
+        [SVProgressHUD showErrorWithStatus:[error localizedDescription]];
+    }];
+}
+
+#pragma mark 取消点赞
+- (void)thn_networkCancelLikeData:(NSString *)idx {
+    self.cancelLikeRequest = [FBAPI postWithUrlString:URLCancelLike requestDictionary:@{@"id":idx, @"type":@"12"} delegate:self];
+    [self.cancelLikeRequest startRequestSuccess:^(FBRequest *request, id result) {
+        if ([[result valueForKey:@"success"] isEqualToNumber:@1]) {
+            NSInteger index = [self.sceneIdMarr indexOfObject:idx];
+            NSString *loveCount = [NSString stringWithFormat:@"%zi", [[[result valueForKey:@"data"] valueForKey:@"love_count"] integerValue]];
+            [self.sceneListMarr[index] setValue:loveCount forKey:@"loveCount"];
+            [self.sceneListMarr[index] setValue:@"0" forKey:@"isLove"];
+        }
+        
+    } failure:^(FBRequest *request, NSError *error) {
+        [SVProgressHUD showErrorWithStatus:[error localizedDescription]];
+    }];
+}
+
 #pragma mark 订阅主题数量
 - (void)thn_networkSubCountData {
     self.subscribeCountRequest = [FBAPI getWithUrlString:URLSubCount requestDictionary:@{} delegate:self];
@@ -81,7 +116,7 @@ static NSString *const URLSceneList = @"/scene_sight/";
 
 - (void)thn_networkSceneListData:(NSString *)sort {
     self.sceneListRequest = [FBAPI getWithUrlString:URLSceneList requestDictionary:@{@"page":@(self.currentpageNum + 1),
-                                                                                     @"size":@10,
+                                                                                     @"size":@"10",
                                                                                      @"sort":sort,
                                                                                      @"category_ids":self.categoryId
                                                                                      } delegate:self];
@@ -175,6 +210,10 @@ static NSString *const URLSceneList = @"/scene_sight/";
         _sceneList.backgroundColor = [UIColor colorWithHexString:@"#F8F8F8"];
         [_sceneList registerClass:[THNDiscoverSceneCollectionViewCell class] forCellWithReuseIdentifier:SceneListCellId];
         [self addMJRefresh:_sceneList];
+        
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(likeTheScene:) name:@"catFindLikeTheScene" object:nil];
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(cancelLikeTheScene:) name:@"catFindCancelLikeTheScene" object:nil];
+
     }
     return _sceneList;
 }
@@ -187,7 +226,7 @@ static NSString *const URLSceneList = @"/scene_sight/";
     THNDiscoverSceneCollectionViewCell * cell = [collectionView dequeueReusableCellWithReuseIdentifier:SceneListCellId
                                                                                           forIndexPath:indexPath];
     if (self.sceneListMarr.count) {
-        [cell thn_setSceneUserInfoData:self.sceneListMarr[indexPath.row]];
+        [cell thn_setSceneUserInfoData:self.sceneListMarr[indexPath.row] type:4];
     }
     return cell;
 }
@@ -202,6 +241,14 @@ static NSString *const URLSceneList = @"/scene_sight/";
     [self.navigationController pushViewController:sceneListVC animated:YES];
 }
 
+#pragma mark - 点赞
+- (void)likeTheScene:(NSNotification *)idx {
+    [self thn_networkLikeSceneData:[idx object]];
+}
+
+- (void)cancelLikeTheScene:(NSNotification *)idx {
+    [self thn_networkCancelLikeData:[idx object]];
+}
 
 - (FBSegmentView *)menuView {
     if (!_menuView) {
@@ -294,6 +341,11 @@ static NSString *const URLSceneList = @"/scene_sight/";
         _commentsMarr = [NSMutableArray array];
     }
     return _commentsMarr;
+}
+
+- (void)dealloc {
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:@"catFindLikeTheScene" object:nil];
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:@"catFindCancelLikeTheScene" object:nil];
 }
 
 @end

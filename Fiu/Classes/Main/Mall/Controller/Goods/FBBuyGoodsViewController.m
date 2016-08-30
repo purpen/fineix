@@ -188,6 +188,8 @@
 - (UIImageView *)goodsImg {
     if (!_goodsImg) {
         _goodsImg = [[UIImageView alloc] initWithFrame:CGRectMake(15, 15, 80, 80)];
+        _goodsImg.layer.borderWidth = 0.5f;
+        _goodsImg.layer.borderColor = [UIColor colorWithHexString:@"#999999" alpha:0.7].CGColor;
     }
     return _goodsImg;
 }
@@ -231,8 +233,6 @@
     if (!_goodsColorView) {
         UICollectionViewFlowLayout * flowLayout = [[UICollectionViewFlowLayout alloc] init];
         flowLayout.sectionInset = UIEdgeInsetsMake(10, 15, 10, 15);
-        flowLayout.minimumLineSpacing = 10.0f;
-        flowLayout.minimumInteritemSpacing = 5.0f;
         
         _goodsColorView = [[UICollectionView alloc] initWithFrame:CGRectMake(0, 140, SCREEN_WIDTH, 100) collectionViewLayout:flowLayout];
         _goodsColorView.dataSource = self;
@@ -278,6 +278,14 @@
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath {
     CGFloat btnLength = [[[self.goodsSkus valueForKey:@"mode"] objectAtIndex:indexPath.row] boundingRectWithSize:CGSizeMake(320, 0) options:(NSStringDrawingUsesLineFragmentOrigin) attributes:nil context:nil].size.width;
     return CGSizeMake(btnLength + 40, 30);
+}
+
+- (CGFloat)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout minimumLineSpacingForSectionAtIndex:(NSInteger)section {
+    return 5.0f;
+}
+
+- (CGFloat)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout minimumInteritemSpacingForSectionAtIndex:(NSInteger)section {
+    return 5.0f;
 }
 
 - (void)NotCanBuy {

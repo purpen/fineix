@@ -136,6 +136,7 @@ static NSString *const themeCollectionCellID = @"ThemeCollectionCellID";
         } else if (_type == 3) {
             THNCuXiaoDetalViewController *cuXiao = [[THNCuXiaoDetalViewController alloc] init];
             cuXiao.cuXiaoDetalId = self.themeIdMarr[indexPath.row];
+            cuXiao.vcType = 1;
             [self.nav pushViewController:cuXiao animated:YES];
             
         } else if (_type == 4) {
@@ -146,6 +147,7 @@ static NSString *const themeCollectionCellID = @"ThemeCollectionCellID";
         } else if (_type == 5) {
             THNCuXiaoDetalViewController *cuXiao = [[THNCuXiaoDetalViewController alloc] init];
             cuXiao.cuXiaoDetalId = self.themeIdMarr[indexPath.row];
+            cuXiao.vcType = 2;
             [self.nav pushViewController:cuXiao animated:YES];
             
         }

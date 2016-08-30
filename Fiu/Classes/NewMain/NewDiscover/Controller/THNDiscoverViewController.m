@@ -227,8 +227,8 @@ static NSString *const SceneListFooterCellViewId = @"sceneListFooterViewId";
         
         [self addMJRefresh:_sceneList];
         
-        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(likeTheScene:) name:@"findLikeTheScene" object:nil];
-        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(cancelLikeTheScene:) name:@"findCancelLikeTheScene" object:nil];
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(likeTheScene:) name:@"disFindLikeTheScene" object:nil];
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(cancelLikeTheScene:) name:@"disFindCancelLikeTheScene" object:nil];
     }
     return _sceneList;
 }
@@ -255,7 +255,7 @@ static NSString *const SceneListFooterCellViewId = @"sceneListFooterViewId";
         THNDiscoverSceneCollectionViewCell * cell = [collectionView dequeueReusableCellWithReuseIdentifier:SceneListCellId
                                                                                               forIndexPath:indexPath];
         if (self.sceneListMarr.count) {
-            [cell thn_setSceneUserInfoData:self.sceneListMarr[indexPath.row]];
+            [cell thn_setSceneUserInfoData:self.sceneListMarr[indexPath.row] type:2];
         }
         return cell;
         
@@ -263,7 +263,7 @@ static NSString *const SceneListFooterCellViewId = @"sceneListFooterViewId";
         THNDiscoverSceneCollectionViewCell * cell = [collectionView dequeueReusableCellWithReuseIdentifier:SceneListCellId
                                                                                               forIndexPath:indexPath];
         if (self.sceneListMarr.count) {
-            [cell thn_setSceneUserInfoData:self.sceneListMarr[indexPath.row + 10]];
+            [cell thn_setSceneUserInfoData:self.sceneListMarr[indexPath.row + 10] type:2];
         }
         return cell;
     
@@ -271,7 +271,7 @@ static NSString *const SceneListFooterCellViewId = @"sceneListFooterViewId";
         THNDiscoverSceneCollectionViewCell * cell = [collectionView dequeueReusableCellWithReuseIdentifier:SceneListCellId
                                                                                               forIndexPath:indexPath];
         if (self.sceneListMarr.count) {
-            [cell thn_setSceneUserInfoData:self.sceneListMarr[indexPath.row + 20]];
+            [cell thn_setSceneUserInfoData:self.sceneListMarr[indexPath.row + 20] type:2];
         }
         return cell;
     }
@@ -443,8 +443,8 @@ static NSString *const SceneListFooterCellViewId = @"sceneListFooterViewId";
 }
 
 - (void)dealloc {
-    [[NSNotificationCenter defaultCenter] removeObserver:self name:@"findLikeTheScene" object:nil];
-    [[NSNotificationCenter defaultCenter] removeObserver:self name:@"findCancelLikeTheScene" object:nil];
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:@"disFindLikeTheScene" object:nil];
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:@"disFindCancelLikeTheScene" object:nil];
 }
 
 @end

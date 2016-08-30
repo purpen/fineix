@@ -23,8 +23,8 @@
 
 @pro_strong UILabel *noneLab;
 @pro_strong UICollectionView *sceneList;
-@pro_strong NSMutableArray *sceneListMarr;
-@pro_strong NSMutableArray *sceneIdMarr;
+@pro_strong NSMutableArray *searchSceneListMarr;
+@pro_strong NSMutableArray *searchSceneIdMarr;
 
 - (void)searchAgain:(NSString *)keyword;
 

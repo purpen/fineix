@@ -44,8 +44,8 @@ static NSString *const SceneListCellId = @"sceneListCellId";
 
 #pragma mark - 网络请求
 - (void)searchAgain:(NSString *)keyword {
-    [self.sceneListMarr removeAllObjects];
-    [self.sceneIdMarr removeAllObjects];
+    [self.searchSceneListMarr removeAllObjects];
+    [self.searchSceneIdMarr removeAllObjects];
     self.currentpageNum = 0;
     [self networkSearchData:keyword];
 }
@@ -58,11 +58,11 @@ static NSString *const SceneListCellId = @"sceneListCellId";
         NSArray *sceneArr = [[result valueForKey:@"data"] valueForKey:@"rows"];
         for (NSDictionary * sceneDic in sceneArr) {
             HomeSceneListRow *homeSceneModel = [[HomeSceneListRow alloc] initWithDictionary:sceneDic];
-            [self.sceneListMarr addObject:homeSceneModel];
-            [self.sceneIdMarr addObject:[NSString stringWithFormat:@"%zi", homeSceneModel.idField]];
+            [self.searchSceneListMarr addObject:homeSceneModel];
+            [self.searchSceneIdMarr addObject:[NSString stringWithFormat:@"%zi", homeSceneModel.idField]];
         }
         
-        if (self.sceneListMarr.count) {
+        if (self.searchSceneListMarr.count) {
             self.noneLab.hidden = YES;
             self.sceneList.hidden = NO;
         } else {
@@ -134,10 +134,10 @@ static NSString *const SceneListCellId = @"sceneListCellId";
     self.likeSceneRequest = [FBAPI postWithUrlString:URLLikeScene requestDictionary:@{@"id":idx, @"type":@"12"} delegate:self];
     [self.likeSceneRequest startRequestSuccess:^(FBRequest *request, id result) {
         if ([[result valueForKey:@"success"] isEqualToNumber:@1]) {
-            NSInteger index = [self.sceneIdMarr indexOfObject:idx];
+            NSInteger index = [self.searchSceneIdMarr indexOfObject:idx];
             NSString *loveCount = [NSString stringWithFormat:@"%zi", [[[result valueForKey:@"data"] valueForKey:@"love_count"] integerValue]];
-            [self.sceneListMarr[index] setValue:loveCount forKey:@"loveCount"];
-            [self.sceneListMarr[index] setValue:@"1" forKey:@"isLove"];
+            [self.searchSceneListMarr[index] setValue:loveCount forKey:@"loveCount"];
+            [self.searchSceneListMarr[index] setValue:@"1" forKey:@"isLove"];
         }
         
     } failure:^(FBRequest *request, NSError *error) {
@@ -150,10 +150,10 @@ static NSString *const SceneListCellId = @"sceneListCellId";
     self.cancelLikeRequest = [FBAPI postWithUrlString:URLCancelLike requestDictionary:@{@"id":idx, @"type":@"12"} delegate:self];
     [self.cancelLikeRequest startRequestSuccess:^(FBRequest *request, id result) {
         if ([[result valueForKey:@"success"] isEqualToNumber:@1]) {
-            NSInteger index = [self.sceneIdMarr indexOfObject:idx];
+            NSInteger index = [self.searchSceneIdMarr indexOfObject:idx];
             NSString *loveCount = [NSString stringWithFormat:@"%zi", [[[result valueForKey:@"data"] valueForKey:@"love_count"] integerValue]];
-            [self.sceneListMarr[index] setValue:loveCount forKey:@"loveCount"];
-            [self.sceneListMarr[index] setValue:@"0" forKey:@"isLove"];
+            [self.searchSceneListMarr[index] setValue:loveCount forKey:@"loveCount"];
+            [self.searchSceneListMarr[index] setValue:@"0" forKey:@"isLove"];
         }
         
     } failure:^(FBRequest *request, NSError *error) {
@@ -197,8 +197,8 @@ static NSString *const SceneListCellId = @"sceneListCellId";
         [_sceneList registerClass:[THNDiscoverSceneCollectionViewCell class] forCellWithReuseIdentifier:SceneListCellId];
         [self addMJRefresh:_sceneList];
         
-        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(likeTheScene:) name:@"findLikeTheScene" object:nil];
-        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(cancelLikeTheScene:) name:@"findCancelLikeTheScene" object:nil];
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(likeTheScene:) name:@"searchFindLikeTheScene" object:nil];
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(cancelLikeTheScene:) name:@"searchFindCancelLikeTheScene" object:nil];
     }
     return _sceneList;
 }
@@ -213,41 +213,46 @@ static NSString *const SceneListCellId = @"sceneListCellId";
 }
 
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
-    return self.sceneListMarr.count;
+    return self.searchSceneListMarr.count;
 }
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
     THNDiscoverSceneCollectionViewCell * cell = [collectionView dequeueReusableCellWithReuseIdentifier:SceneListCellId
                                                                                           forIndexPath:indexPath];
-    if (self.sceneListMarr.count) {
-        [cell thn_setSceneUserInfoData:self.sceneListMarr[indexPath.row]];
+    if (self.searchSceneListMarr.count) {
+        [cell thn_setSceneUserInfoData:self.searchSceneListMarr[indexPath.row] type:1];
     }
     return cell;
 }
 
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
-    [SVProgressHUD showSuccessWithStatus:[NSString stringWithFormat:@"打开情景详情：%@",self.sceneIdMarr[indexPath.row]]];
+//    [SVProgressHUD showSuccessWithStatus:[NSString stringWithFormat:@"打开情景详情：%@",self.searchSceneIdMarr[indexPath.row]]];
 //    THNSceneListViewController *sceneListVC = [[THNSceneListViewController alloc] init];
-//    sceneListVC.sceneListMarr = self.sceneListMarr;
+//    sceneListVC.searchSceneListMarr = self.searchSceneListMarr;
 //    sceneListVC.commentsMarr = self.commentsMarr;
-//    sceneListVC.sceneIdMarr = self.sceneIdMarr;
+//    sceneListVC.searchSceneIdMarr = self.searchSceneIdMarr;
 //    sceneListVC.userIdMarr = self.userIdMarr;
 //    sceneListVC.index = indexPath.row;
 //    [self.navigationController pushViewController:sceneListVC animated:YES];
 }
 
-- (NSMutableArray *)sceneListMarr {
-    if (!_sceneListMarr) {
-        _sceneListMarr = [NSMutableArray array];
+- (NSMutableArray *)searchSceneListMarr {
+    if (!_searchSceneListMarr) {
+        _searchSceneListMarr = [NSMutableArray array];
     }
-    return _sceneListMarr;
+    return _searchSceneListMarr;
 }
 
-- (NSMutableArray *)sceneIdMarr {
-    if (!_sceneIdMarr) {
-        _sceneIdMarr = [NSMutableArray array];
+- (NSMutableArray *)searchSceneIdMarr {
+    if (!_searchSceneIdMarr) {
+        _searchSceneIdMarr = [NSMutableArray array];
     }
-    return _sceneIdMarr;
+    return _searchSceneIdMarr;
+}
+
+- (void)dealloc {
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:@"searchFindLikeTheScene" object:nil];
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:@"searchFindCancelLikeTheScene" object:nil];
 }
 
 @end

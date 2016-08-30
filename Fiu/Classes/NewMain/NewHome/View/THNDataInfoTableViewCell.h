@@ -21,6 +21,10 @@
 @pro_strong UIButton *share;
 @pro_strong UIButton *more;
 
-- (void)thn_setSceneData:(HomeSceneListRow *)dataModel;
+/**
+ * type
+ * 1:首页情境 ／ 2:情境展开列表 / 3:个人中心
+ */
+- (void)thn_setSceneData:(HomeSceneListRow *)dataModel type:(NSInteger)type;
 
 @end

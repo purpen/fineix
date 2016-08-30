@@ -212,7 +212,7 @@ static NSString *const hotUserCellId = @"HotUserCellId";
         
         [_bottomView addSubview:self.follow];
         [_follow mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.size.mas_equalTo(CGSizeMake(60, 30));
+            make.size.mas_equalTo(CGSizeMake(66, 26));
             make.right.equalTo(_bottomView.mas_right).with.offset(-15);
             make.centerY.equalTo(_bottomView);
         }];
@@ -280,6 +280,8 @@ static NSString *const hotUserCellId = @"HotUserCellId";
         [_follow setTitle:NSLocalizedString(@"User_followDone", nil) forState:(UIControlStateSelected)];
         _follow.titleLabel.font = [UIFont systemFontOfSize:12];
         [_follow addTarget:self action:@selector(followClick:) forControlEvents:(UIControlEventTouchUpInside)];
+        [_follow setImage:[UIImage imageNamed:@"icon_success"] forState:(UIControlStateSelected)];
+        [_follow setImageEdgeInsets:(UIEdgeInsetsMake(0, -6, 0, 0))];
     }
     return _follow;
 }

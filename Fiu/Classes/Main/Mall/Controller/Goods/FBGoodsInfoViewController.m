@@ -31,6 +31,7 @@ static NSString *const URlCancelCollect = @"/favorite/ajax_cancel_favorite";
     NSString * _goodsInfoUrl;
     NSString *_goodsDes;
     NSInteger _collect;
+    NSInteger _canBuy;
     FBGoodsCommentViewController *_goodsCommentVC;
 }
 
@@ -66,6 +67,19 @@ static NSString *const URlCancelCollect = @"/favorite/ajax_cancel_favorite";
         _goodsDes = [[result valueForKey:@"data"] valueForKey:@"advantage"];
         _goodsInfoUrl = [[result valueForKey:@"data"] valueForKey:@"content_view_url"];
         _collect = [[[result valueForKey:@"data"] valueForKey:@"is_favorite"] integerValue];
+        if (![[[result valueForKey:@"data"] valueForKey:@"stage"] isKindOfClass:[NSNull class]]) {
+            _canBuy = [[[result valueForKey:@"data"] valueForKey:@"stage"] integerValue];
+            
+            if (_canBuy == 9) {
+                self.menuView.hidden = NO;
+                self.buyView.hidden = NO;
+                
+            } else {
+                [self changeRollFrame];
+                self.menuView.hidden = YES;
+                self.buyView.hidden = YES;
+            }
+        }
         
         if (_collect == 0) {
             self.likeBtn.selected = NO;
@@ -157,6 +171,12 @@ static NSString *const URlCancelCollect = @"/favorite/ajax_cancel_favorite";
     [self.goodsInfoRoll addSubview:_goodsCommentVC.view];
     
     [self.view addSubview:self.buyView];
+}
+
+- (void)changeRollFrame {
+    CGRect rollRect = self.goodsInfoRoll.frame;
+    rollRect = CGRectMake(0, 64, SCREEN_WIDTH, SCREEN_HEIGHT - 64);
+    self.goodsInfoRoll.frame = rollRect;
 }
 
 - (UIScrollView *)goodsInfoRoll {

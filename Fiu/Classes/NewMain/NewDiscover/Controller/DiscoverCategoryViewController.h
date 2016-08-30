@@ -21,6 +21,8 @@
 @pro_strong FBSegmentView *menuView;
 
 @pro_strong NSString *categoryId;
+@pro_strong FBRequest *likeSceneRequest;
+@pro_strong FBRequest *cancelLikeRequest;
 @pro_strong FBRequest *subscribeCountRequest;
 @pro_strong FBRequest *suThemeRequest;
 @pro_strong FBRequest *sceneListRequest;
