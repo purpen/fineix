@@ -108,7 +108,7 @@
     for (NSInteger idx = 0; idx < self.tagDataMarr.count; ++ idx) {
         CGFloat btnX = [[self.tagDataMarr[idx] valueForKey:@"x"] floatValue];
         CGFloat btnY = [[self.tagDataMarr[idx] valueForKey:@"y"] floatValue];
-        NSString * title = [self.tagDataMarr[idx] valueForKey:@"title"];
+        NSString *title = [self.tagDataMarr[idx] valueForKey:@"title"];
         NSInteger loc = [[self.tagDataMarr[idx] valueForKey:@"loc"] integerValue];
         
         UserGoodsTag * userTag = [[UserGoodsTag alloc] init];
@@ -147,7 +147,7 @@
         [self.nav pushViewController:goodsInfoVC animated:YES];
         
     } else if (_type == 1) {
-        [SVProgressHUD showSuccessWithStatus:@"用户自建的商品"];
+//        [SVProgressHUD showSuccessWithStatus:@"用户自建的商品"];
     }
 }
 

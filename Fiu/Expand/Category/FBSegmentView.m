@@ -20,6 +20,17 @@ static NSInteger const menuBtnTag = 642;
     return self;
 }
 
+- (void)addViewBottomLine {
+    UILabel *botLine = [[UILabel alloc] init];
+    botLine.backgroundColor = [UIColor colorWithHexString:@"#666666" alpha:0.2];
+    [self addSubview:botLine];
+    [botLine mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.size.mas_equalTo(CGSizeMake(SCREEN_WIDTH, 1));
+        make.left.equalTo(self.mas_left).with.offset(0);
+        make.bottom.equalTo(self.mas_bottom).with.offset(0);
+    }];
+}
+
 - (void)set_menuItemTitle:(NSArray *)titleArr {
     self.title = titleArr;
     

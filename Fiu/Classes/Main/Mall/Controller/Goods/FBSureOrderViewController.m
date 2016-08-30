@@ -229,11 +229,7 @@ static NSString *const URLCarGoPay = @"/shopping/checkout";
         
         UILabel * summaryLab = [[UILabel alloc] initWithFrame:CGRectMake(10, 5, 50, 44)];
         summaryLab.text = NSLocalizedString(@"summaryText", nil);
-        if (IS_iOS9) {
-            summaryLab.font = [UIFont fontWithName:@"PingFangSC-Light" size:14];
-        } else {
-            summaryLab.font = [UIFont systemFontOfSize:14];
-        }
+        summaryLab.font = [UIFont systemFontOfSize:14];
         summaryLab.textColor = [UIColor colorWithHexString:titleColor];
         
         [_footerView addSubview:summaryLab];
@@ -415,13 +411,9 @@ static NSString *const URLCarGoPay = @"/shopping/checkout";
         _sureView.backgroundColor = [UIColor whiteColor];
         
         UIButton * sureBtn = [[UIButton alloc] initWithFrame:CGRectMake(SCREEN_WIDTH - 120, 0, 120, 44)];
-        sureBtn.backgroundColor = [UIColor colorWithHexString:fineixColor];
+        sureBtn.backgroundColor = [UIColor colorWithHexString:@"#000000"];
         [sureBtn setTitle:@"确认订单" forState:(UIControlStateNormal)];
-        if (IS_iOS9) {
-            sureBtn.titleLabel.font = [UIFont fontWithName:@"PingFangSC-Light" size:16];
-        } else {
-            sureBtn.titleLabel.font = [UIFont systemFontOfSize:16];
-        }
+        sureBtn.titleLabel.font = [UIFont systemFontOfSize:16];
         [sureBtn setTitleColor:[UIColor whiteColor] forState:(UIControlStateNormal)];
         [sureBtn addTarget:self action:@selector(sureOrederData) forControlEvents:(UIControlEventTouchUpInside)];
         [_sureView addSubview:sureBtn];
@@ -443,11 +435,7 @@ static NSString *const URLCarGoPay = @"/shopping/checkout";
         
         UILabel * sumLab = [[UILabel alloc] init];
         sumLab.textColor = [UIColor colorWithHexString:titleColor];
-        if (IS_iOS9) {
-            sumLab.font = [UIFont fontWithName:@"PingFangSC-Light" size:14];
-        } else {
-            sumLab.font = [UIFont systemFontOfSize:14];
-        }
+        sumLab.font = [UIFont systemFontOfSize:14];
         sumLab.text = NSLocalizedString(@"sumOrderPrice", nil);
         [_sureView addSubview:sumLab];
         [sumLab mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -463,11 +451,7 @@ static NSString *const URLCarGoPay = @"/shopping/checkout";
         
         self.bounsPriceLab = [[UILabel alloc] init];
         self.bounsPriceLab.textColor = [UIColor colorWithHexString:fineixColor];
-        if (IS_iOS9) {
-            self.bounsPriceLab.font = [UIFont fontWithName:@"PingFangSC-Light" size:14];
-        } else {
-            self.bounsPriceLab.font = [UIFont systemFontOfSize:14];
-        }
+        self.bounsPriceLab.font = [UIFont systemFontOfSize:14];
         [_sureView addSubview:self.bounsPriceLab];
         [self.bounsPriceLab mas_makeConstraints:^(MASConstraintMaker *make) {
             make.size.mas_equalTo(CGSizeMake(44, 44));
@@ -478,11 +462,7 @@ static NSString *const URLCarGoPay = @"/shopping/checkout";
         
         self.bounsLab = [[UILabel alloc] init];
         self.bounsLab.textColor = [UIColor whiteColor];
-        if (IS_iOS9) {
-            self.bounsLab.font = [UIFont fontWithName:@"PingFangSC-Light" size:14];
-        } else {
-            self.bounsLab.font = [UIFont systemFontOfSize:14];
-        }
+        self.bounsLab.font = [UIFont systemFontOfSize:14];
         self.bounsLab.text = NSLocalizedString(@"userBounsPrice", nil);
         [_sureView addSubview:self.bounsLab];
         [self.bounsLab mas_makeConstraints:^(MASConstraintMaker *make) {

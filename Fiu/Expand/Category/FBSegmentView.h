@@ -26,6 +26,7 @@
 - (void)set_menuItemTitle:(NSArray *)titleArr;
 - (void)set_showBottomLine:(BOOL)show;
 - (void)updateMenuBtnState:(NSInteger)index;
+- (void)addViewBottomLine;
 
 @pro_weak id <FBSegmentViewDelegate> delegate;
 

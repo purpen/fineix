@@ -200,6 +200,7 @@ static NSString *const URlCancelCollect = @"/favorite/ajax_cancel_favorite";
         _menuView.delegate = self;
         [_menuView set_menuItemTitle:menuTitle];
         [_menuView set_showBottomLine:NO];
+        [_menuView addViewBottomLine];
     }
     return _menuView;
 }
@@ -280,8 +281,9 @@ static NSString *const URlCancelCollect = @"/favorite/ajax_cancel_favorite";
     if (indexPath.section == 0) {
         static NSString * InfoTitleCellId = @"InfoTitleCellId";
         InfoTitleTableViewCell * cell = [tableView dequeueReusableCellWithIdentifier:InfoTitleCellId];
-        if (!cell) {
-            cell = [[InfoTitleTableViewCell alloc] initWithStyle:(UITableViewCellStyleDefault) reuseIdentifier:InfoTitleCellId];
+        cell = [[InfoTitleTableViewCell alloc] initWithStyle:(UITableViewCellStyleDefault) reuseIdentifier:InfoTitleCellId];
+        if (_canBuy != 9) {
+            cell.nextBtn.hidden = YES;
         }
         [cell setThnGoodsInfoData:self.goodsInfo];
         return cell;
@@ -389,8 +391,10 @@ static NSString *const URlCancelCollect = @"/favorite/ajax_cancel_favorite";
 #pragma mark 跳转
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     if (indexPath.section == 0) {
-        [self.menuView updateMenuBtnState:1];
-        [self menuItemSelected:1];
+        if (_canBuy == 9) {
+            [self.menuView updateMenuBtnState:1];
+            [self menuItemSelected:1];
+        }
         
     } else if (indexPath.section == 2) {
         GoodsBrandViewController * goodsBrandVC = [[GoodsBrandViewController alloc] init];

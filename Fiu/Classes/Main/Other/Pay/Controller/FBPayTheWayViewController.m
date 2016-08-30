@@ -177,14 +177,10 @@
 - (UIButton *)okPayBtn {
     if (!_okPayBtn) {
         _okPayBtn = [[UIButton alloc] init];
-        _okPayBtn.backgroundColor = [UIColor colorWithHexString:fineixColor alpha:1];
+        _okPayBtn.backgroundColor = [UIColor colorWithHexString:@"#000000" alpha:1];
         [_okPayBtn setTitle:@"立即支付" forState:(UIControlStateNormal)];
         [_okPayBtn setTitleColor:[UIColor whiteColor] forState:(UIControlStateNormal)];
-        if (IS_iOS9) {
-            _okPayBtn.titleLabel.font = [UIFont fontWithName:@"PingFangSC-Light" size:14];
-        } else {
-            _okPayBtn.titleLabel.font = [UIFont systemFontOfSize:14];
-        }
+        _okPayBtn.titleLabel.font = [UIFont systemFontOfSize:14];
         [_okPayBtn addTarget:self action:@selector(okPayClick) forControlEvents:(UIControlEventTouchUpInside)];
     }
     return _okPayBtn;

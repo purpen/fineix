@@ -42,7 +42,7 @@ static NSString *const URLGetGoodsImg = @"/product/view";
 #pragma mark - 网络请求
 #pragma mark 分类列表
 - (void)networkRequest {
-    self.markGoodsRequest = [FBAPI getWithUrlString:URLMarkGoods requestDictionary:@{@"domain":@"10"} delegate:self];
+    self.markGoodsRequest = [FBAPI getWithUrlString:URLMarkGoods requestDictionary:@{@"domain":@"1"} delegate:self];
     [self.markGoodsRequest startRequestSuccess:^(FBRequest *request, id result) {
         self.categoryTitle = [NSMutableArray arrayWithArray:[[[result valueForKey:@"data"] valueForKey:@"rows"] valueForKey:@"title"]];
         self.categoryId = [NSMutableArray arrayWithArray:[[[result valueForKey:@"data"] valueForKey:@"rows"] valueForKey:@"_id"]];
