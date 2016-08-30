@@ -113,7 +113,7 @@ static NSString *const allCommentsCellId = @"AllCommentsCellId";
         }
         
     } failure:^(FBRequest *request, NSError *error) {
-        [SVProgressHUD showErrorWithStatus:[error localizedDescription]];
+        NSLog(@"%@", error);
     }];
 }
 
@@ -129,7 +129,7 @@ static NSString *const allCommentsCellId = @"AllCommentsCellId";
         }
         
     } failure:^(FBRequest *request, NSError *error) {
-        [SVProgressHUD showErrorWithStatus:[error localizedDescription]];
+        NSLog(@"%@", error);
     }];
 }
 

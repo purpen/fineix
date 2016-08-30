@@ -244,11 +244,11 @@ static NSString *const twoCommentsCellId = @"TwoCommentsCellId";
         _sceneTable.separatorStyle = UITableViewCellSeparatorStyleNone;
 //        [self addMJRefresh:_sceneTable];
         
-        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(likeTheScene:) name:@"likeTheScene" object:nil];
-        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(cancelLikeTheScene:) name:@"cancelLikeTheScene" object:nil];
-        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(followTheUser:) name:@"followTheUser" object:nil];
-        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(cancelFollowTheUser:) name:@"cancelFollowTheUser" object:nil];
-        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(favoriteTheScene:) name:@"favoriteTheScene" object:nil];
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(disLikeTheScene:) name:@"likeTheScene" object:nil];
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(disCancelLikeTheScene:) name:@"cancelLikeTheScene" object:nil];
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(disFollowTheUser:) name:@"followTheUser" object:nil];
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(disCancelFollowTheUser:) name:@"cancelFollowTheUser" object:nil];
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(disFavoriteTheScene:) name:@"favoriteTheScene" object:nil];
     }
     return _sceneTable;
 }
@@ -402,25 +402,25 @@ static NSString *const twoCommentsCellId = @"TwoCommentsCellId";
 }
 
 #pragma mark - 点赞
-- (void)likeTheScene:(NSNotification *)idx {
+- (void)disLikeTheScene:(NSNotification *)idx {
     [self thn_networkLikeSceneData:[idx object]];
 }
 
-- (void)cancelLikeTheScene:(NSNotification *)idx {
+- (void)disCancelLikeTheScene:(NSNotification *)idx {
     [self thn_networkCancelLikeData:[idx object]];
 }
 
 #pragma mark - 关注
-- (void)followTheUser:(NSNotification *)idx {
+- (void)disFollowTheUser:(NSNotification *)idx {
     [self thn_networkFollowSceneData:[idx object]];
 }
 
-- (void)cancelFollowTheUser:(NSNotification *)idx {
+- (void)disCancelFollowTheUser:(NSNotification *)idx {
     [self thn_networkCancelFollowData:[idx object]];
 }
 
 #pragma mark - 收藏
-- (void)favoriteTheScene:(NSNotification *)idx {
+- (void)disFavoriteTheScene:(NSNotification *)idx {
     [self thn_networkFavoriteData:[idx object]];
 }
 
