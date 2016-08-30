@@ -67,9 +67,9 @@ static NSString *const cellId = @"THNCuXiaoCollectionViewCell";
     NSDictionary *params = @{
                              @"page" : @(self.current_page),
                              @"size" : @8,
-                             @"fine" : @1,
+                             @"fine" : @0,
                              @"type" : @3,
-                             @"sort" : @2
+                             @"sort" : @0
                              };
     self.params = params;
     FBRequest *request = [FBAPI postWithUrlString:@"/scene_subject/getlist" requestDictionary:params delegate:self];
@@ -103,9 +103,9 @@ static NSString *const cellId = @"THNCuXiaoCollectionViewCell";
     NSDictionary *params = @{
                              @"page" : @(++self.current_page),
                              @"size" : @8,
-                             @"fine" : @1,
+                             @"fine" : @0,
                              @"type" : @3,
-                             @"sort" : @2
+                             @"sort" : @0
                              };
     self.params = params;
     FBRequest *request = [FBAPI postWithUrlString:@"/scene_subject/getlist" requestDictionary:params delegate:self];
