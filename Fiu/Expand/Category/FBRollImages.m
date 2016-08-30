@@ -67,24 +67,22 @@
 
 - (void)cycleScrollView:(SDCycleScrollView *)cycleScrollView didSelectItemAtIndex:(NSInteger)index {
     if (self.typeMarr.count > 0) {
-        NSString * type = self.typeMarr[index];
+        NSInteger type = [self.typeMarr[index] integerValue];
         NSString * ids = self.targetIdMarr[index];
-        if ([type isEqualToString:@"8"]) {
 
-            
-        } else if ([type isEqualToString:@"9"]) {
+        if (type == 8) {
+
+        } else if (type == 9) {
             FBGoodsInfoViewController * goodsInfoVC = [[FBGoodsInfoViewController alloc] init];
             goodsInfoVC.goodsID = ids;
             [self.navVC pushViewController:goodsInfoVC animated:YES];
             
-        } else if ([type isEqualToString:@"10"]) {
+        } else if (type == 10) {
             
-        } else if ([type isEqualToString:@"11"]){
-            THNProjectViewController *vc = [[THNProjectViewController alloc] init];
+        } else if (type == 11){
+            self.getProjectType(ids);
             
-            [self.navVC pushViewController:vc animated:YES];
-            
-        } else if ([type isEqualToString:@"1"]){
+        } else if (type == 1){
             BOOL isExsit = [[UIApplication sharedApplication] canOpenURL:[NSURL URLWithString:ids]];
             if (isExsit) {
                 [[UIApplication sharedApplication] openURL:[NSURL URLWithString:ids]];

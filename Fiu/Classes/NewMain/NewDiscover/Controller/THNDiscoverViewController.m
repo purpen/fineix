@@ -8,7 +8,9 @@
 
 #import "THNDiscoverViewController.h"
 #import "HomeSceneListRow.h"
+#import "THNMallSubjectModelRow.h"
 #import "THNCategoryCollectionReusableView.h"
+#import "THNHotActionCollectionReusableView.h"
 #import "THNDiscoverSceneCollectionViewCell.h"
 #import "FiuPeopleListViewController.h"
 #import "THNSceneListViewController.h"
@@ -18,10 +20,12 @@ static NSString *const URLSceneList = @"/scene_sight/";
 static NSString *const URLCategory = @"/category/getlist";
 static NSString *const URLLikeScene = @"/favorite/ajax_love";
 static NSString *const URLCancelLike = @"/favorite/ajax_cancel_love";
+static NSString *const URLSubject = @"/scene_subject/getlist";
 
 static NSString *const DiscoverCellId = @"discoverCellId";
 static NSString *const SceneListCellId = @"sceneListCellId";
 static NSString *const SceneListHeaderCellViewId = @"sceneListHeaderViewId";
+static NSString *const SceneListFooterCellViewId = @"sceneListFooterViewId";
 
 @interface THNDiscoverViewController ()
 
@@ -42,6 +46,7 @@ static NSString *const SceneListHeaderCellViewId = @"sceneListHeaderViewId";
     [self networkCategoryData];
     self.currentpageNum = 0;
     [self thn_networkSceneListData];
+    [self thn_networkSubjectData];
 }
 
 #pragma mark - 网络请求
@@ -88,9 +93,30 @@ static NSString *const SceneListHeaderCellViewId = @"sceneListHeaderViewId";
     }];
 }
 
+#pragma mark 专题
+- (void)thn_networkSubjectData {
+    self.subjectRequest = [FBAPI getWithUrlString:URLSubject requestDictionary:@{@"page":@"1",
+                                                                                 @"size":@"2",
+                                                                                 @"fine":@"1",
+                                                                                 @"sort":@"0",
+                                                                                 @"type":@"1,2"} delegate:self];
+    [self.subjectRequest startRequestSuccess:^(FBRequest *request, id result) {
+        NSArray *subArr = [[result valueForKey:@"data"] valueForKey:@"rows"];
+        for (NSDictionary * subjectDic in subArr) {
+            THNMallSubjectModelRow *subjectModel = [[THNMallSubjectModelRow alloc] initWithDictionary:subjectDic];
+            [self.subjectMarr addObject:subjectModel];
+            [self.subjectTypeMarr addObject:[NSString stringWithFormat:@"%zi",subjectModel.type]];
+            [self.subjectIdMarr addObject:[NSString stringWithFormat:@"%zi",subjectModel.idField]];
+        }
+        
+    } failure:^(FBRequest *request, NSError *error) {
+        [SVProgressHUD showErrorWithStatus:[error localizedDescription]];
+    }];
+}
+
 #pragma mark 情景列表
 - (void)thn_networkSceneListData {
-    self.sceneListRequest = [FBAPI getWithUrlString:URLSceneList requestDictionary:@{@"page":@(self.currentpageNum + 1), @"size":@"10", @"sort":@"0"} delegate:self];
+    self.sceneListRequest = [FBAPI getWithUrlString:URLSceneList requestDictionary:@{@"page":@(self.currentpageNum + 1), @"size":@"30", @"sort":@"0"} delegate:self];
     [self.sceneListRequest startRequestSuccess:^(FBRequest *request, id result) {
         NSArray *sceneArr = [[result valueForKey:@"data"] valueForKey:@"rows"];
         for (NSDictionary * sceneDic in sceneArr) {
@@ -182,7 +208,7 @@ static NSString *const SceneListHeaderCellViewId = @"sceneListHeaderViewId";
         flowLayou.itemSize = CGSizeMake((SCREEN_WIDTH - 45)/2, ((SCREEN_WIDTH - 45)/2)*1.21);
         flowLayou.minimumLineSpacing = 15.0f;
         flowLayou.sectionInset = UIEdgeInsetsMake(0, 15, 0, 15);
-        flowLayou.headerReferenceSize = CGSizeMake(SCREEN_WIDTH, 224);
+
         flowLayou.scrollDirection = UICollectionViewScrollDirectionVertical;
         
         _sceneList = [[UICollectionView alloc] initWithFrame:CGRectMake(0, 64, SCREEN_WIDTH, SCREEN_HEIGHT - 113)
@@ -192,8 +218,13 @@ static NSString *const SceneListHeaderCellViewId = @"sceneListHeaderViewId";
         _sceneList.dataSource = self;
         _sceneList.backgroundColor = [UIColor colorWithHexString:@"#F8F8F8"];
         [_sceneList registerClass:[THNDiscoverSceneCollectionViewCell class] forCellWithReuseIdentifier:SceneListCellId];
+        
         [_sceneList registerClass:[THNCategoryCollectionReusableView class] forSupplementaryViewOfKind:UICollectionElementKindSectionHeader
               withReuseIdentifier:SceneListHeaderCellViewId];
+        
+        [_sceneList registerClass:[THNHotActionCollectionReusableView class] forSupplementaryViewOfKind:UICollectionElementKindSectionFooter
+              withReuseIdentifier:SceneListFooterCellViewId];
+        
         [self addMJRefresh:_sceneList];
         
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(likeTheScene:) name:@"findLikeTheScene" object:nil];
@@ -202,36 +233,106 @@ static NSString *const SceneListHeaderCellViewId = @"sceneListHeaderViewId";
     return _sceneList;
 }
 
+- (NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView {
+    return 3;
+}
+
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
-    return self.sceneListMarr.count;
+    if (section == 0) {
+        return 10;
+    } else if (section == 1) {
+        return 10;
+    } else if (section == 2) {
+        if (self.sceneListMarr.count) {
+            return self.sceneListMarr.count - 20;
+        }
+    }
+    return 1;
 }
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
-    THNDiscoverSceneCollectionViewCell * cell = [collectionView dequeueReusableCellWithReuseIdentifier:SceneListCellId
-                                                                                          forIndexPath:indexPath];
-    if (self.sceneListMarr.count) {
-        [cell thn_setSceneUserInfoData:self.sceneListMarr[indexPath.row]];
+    if (indexPath.section == 0) {
+        THNDiscoverSceneCollectionViewCell * cell = [collectionView dequeueReusableCellWithReuseIdentifier:SceneListCellId
+                                                                                              forIndexPath:indexPath];
+        if (self.sceneListMarr.count) {
+            [cell thn_setSceneUserInfoData:self.sceneListMarr[indexPath.row]];
+        }
+        return cell;
+        
+    } else if (indexPath.section == 1) {
+        THNDiscoverSceneCollectionViewCell * cell = [collectionView dequeueReusableCellWithReuseIdentifier:SceneListCellId
+                                                                                              forIndexPath:indexPath];
+        if (self.sceneListMarr.count) {
+            [cell thn_setSceneUserInfoData:self.sceneListMarr[indexPath.row + 10]];
+        }
+        return cell;
+    
+    } else {
+        THNDiscoverSceneCollectionViewCell * cell = [collectionView dequeueReusableCellWithReuseIdentifier:SceneListCellId
+                                                                                              forIndexPath:indexPath];
+        if (self.sceneListMarr.count) {
+            [cell thn_setSceneUserInfoData:self.sceneListMarr[indexPath.row + 20]];
+        }
+        return cell;
     }
-    return cell;
+    return nil;
+
 }
 
 - (UICollectionReusableView *)collectionView:(UICollectionView *)collectionView
            viewForSupplementaryElementOfKind:(NSString *)kind
                                  atIndexPath:(NSIndexPath *)indexPath {
     
-    THNCategoryCollectionReusableView *headerView = [collectionView dequeueReusableSupplementaryViewOfKind:UICollectionElementKindSectionHeader
-                                                                                       withReuseIdentifier:SceneListHeaderCellViewId
-                                                                                              forIndexPath:indexPath];
-    if (self.categoryMarr.count) {
-        [headerView setCategoryData:self.categoryMarr type:0];
+    if (kind == UICollectionElementKindSectionHeader) {
+        if (indexPath.section == 0) {
+            THNCategoryCollectionReusableView *headerView = [collectionView dequeueReusableSupplementaryViewOfKind:UICollectionElementKindSectionHeader
+                                                                                               withReuseIdentifier:SceneListHeaderCellViewId
+                                                                                                      forIndexPath:indexPath];
+            if (self.categoryMarr.count) {
+                [headerView setCategoryData:self.categoryMarr type:0];
+            }
+            headerView.nav = self.navigationController;
+            
+            return headerView;
+        }
+        
+    } else {
+        if (indexPath.section == 0 || indexPath.section == 1) {
+            THNHotActionCollectionReusableView *footerView = [collectionView dequeueReusableSupplementaryViewOfKind:UICollectionElementKindSectionFooter
+                                                                                                withReuseIdentifier:SceneListFooterCellViewId
+                                                                                                       forIndexPath:indexPath];
+            
+            if (self.subjectMarr.count) {
+                if (indexPath.section == 0) {
+                    [footerView thn_setSubjectModel:self.subjectMarr[0]];
+                } else if (indexPath.section == 1) {
+                    [footerView thn_setSubjectModel:self.subjectMarr[1]];
+                }
+            }
+            footerView.nav = self.navigationController;
+            
+            return footerView;
+        }
     }
-    headerView.nav = self.navigationController;
     
-    return headerView;
+    return nil;
+}
+
+- (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout referenceSizeForFooterInSection:(NSInteger)section {
+    if (section == 0 || section == 1) {
+        return CGSizeMake(SCREEN_WIDTH, SCREEN_WIDTH *0.56 + 30);
+    } else
+        return CGSizeMake(SCREEN_WIDTH, 0);
+}
+
+- (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout referenceSizeForHeaderInSection:(NSInteger)section {
+    if (section == 0) {
+        return CGSizeMake(SCREEN_WIDTH, 224);
+    } else
+        return CGSizeMake(SCREEN_WIDTH, 0);
 }
 
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
-//    [SVProgressHUD showSuccessWithStatus:[NSString stringWithFormat:@"打开情景：%@",self.sceneIdMarr[indexPath.row]]];
     THNSceneListViewController *sceneListVC = [[THNSceneListViewController alloc] init];
     sceneListVC.sceneListMarr = self.sceneListMarr;
     sceneListVC.commentsMarr = self.commentsMarr;
@@ -313,6 +414,27 @@ static NSString *const SceneListHeaderCellViewId = @"sceneListHeaderViewId";
         _commentsMarr = [NSMutableArray array];
     }
     return _commentsMarr;
+}
+
+- (NSMutableArray *)subjectMarr {
+    if (!_subjectMarr) {
+        _subjectMarr = [NSMutableArray array];
+    }
+    return _subjectMarr;
+}
+
+- (NSMutableArray *)subjectIdMarr {
+    if (!_subjectIdMarr) {
+        _subjectIdMarr = [NSMutableArray array];
+    }
+    return _subjectIdMarr;
+}
+
+- (NSMutableArray *)subjectTypeMarr {
+    if (!_subjectTypeMarr) {
+        _subjectTypeMarr = [NSMutableArray array];
+    }
+    return _subjectTypeMarr;
 }
 
 - (void)viewDidDisappear:(BOOL)animated {

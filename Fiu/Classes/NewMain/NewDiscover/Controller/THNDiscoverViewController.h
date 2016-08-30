@@ -13,13 +13,15 @@
 @interface THNDiscoverViewController : THNViewController <
     THNNavigationBarItemsDelegate,
     UICollectionViewDelegate,
-    UICollectionViewDataSource
+    UICollectionViewDataSource,
+    UICollectionViewDelegateFlowLayout
 >
 
 @pro_strong FBRequest *likeSceneRequest;
 @pro_strong FBRequest *cancelLikeRequest;
 @pro_strong FBRequest *categoryRequest;
 @pro_strong FBRequest *sceneListRequest;
+@pro_strong FBRequest *subjectRequest;
 @pro_assign NSInteger currentpageNum;
 @pro_assign NSInteger totalPageNum;
 
@@ -29,5 +31,8 @@
 @pro_strong NSMutableArray *userIdMarr;
 @pro_strong NSMutableArray *categoryMarr;
 @pro_strong NSMutableArray *commentsMarr;
+@pro_strong NSMutableArray *subjectMarr;
+@pro_strong NSMutableArray *subjectIdMarr;
+@pro_strong NSMutableArray *subjectTypeMarr;
 
 @end

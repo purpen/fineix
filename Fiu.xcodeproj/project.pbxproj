@@ -603,6 +603,7 @@
 		D8E8FFC01D75388D00DDC3E0 /* FiuSceneInfoUserInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = D8E8FFB51D75388D00DDC3E0 /* FiuSceneInfoUserInfo.m */; };
 		D8E8FFC11D75388D00DDC3E0 /* FiuSceneLocation.m in Sources */ = {isa = PBXBuildFile; fileRef = D8E8FFB71D75388D00DDC3E0 /* FiuSceneLocation.m */; };
 		D8E8FFC21D75388D00DDC3E0 /* FiuSceneRow.m in Sources */ = {isa = PBXBuildFile; fileRef = D8E8FFB91D75388D00DDC3E0 /* FiuSceneRow.m */; };
+		D8E8FFC51D756D3600DDC3E0 /* THNHotActionCollectionReusableView.m in Sources */ = {isa = PBXBuildFile; fileRef = D8E8FFC41D756D3600DDC3E0 /* THNHotActionCollectionReusableView.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -1665,6 +1666,8 @@
 		D8E8FFB71D75388D00DDC3E0 /* FiuSceneLocation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FiuSceneLocation.m; sourceTree = "<group>"; };
 		D8E8FFB81D75388D00DDC3E0 /* FiuSceneRow.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FiuSceneRow.h; sourceTree = "<group>"; };
 		D8E8FFB91D75388D00DDC3E0 /* FiuSceneRow.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FiuSceneRow.m; sourceTree = "<group>"; };
+		D8E8FFC31D756D3600DDC3E0 /* THNHotActionCollectionReusableView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THNHotActionCollectionReusableView.h; sourceTree = "<group>"; };
+		D8E8FFC41D756D3600DDC3E0 /* THNHotActionCollectionReusableView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THNHotActionCollectionReusableView.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -3605,16 +3608,16 @@
 		D851742A1D54AC58005F5722 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
-				D8C095091D752E9500908491 /* FBEditShareInfoViewController.h */,
-				D8C0950A1D752E9500908491 /* FBEditShareInfoViewController.m */,
-				D8C0950B1D752E9500908491 /* FBShareViewController.h */,
-				D8C0950C1D752E9500908491 /* FBShareViewController.m */,
 				D851742B1D54AC58005F5722 /* THNHomeViewController.h */,
 				D851742C1D54AC58005F5722 /* THNHomeViewController.m */,
 				D8ACF45C1D6D7BCC00DB79D8 /* THNSubscribeViewController.h */,
 				D8ACF45D1D6D7BCC00DB79D8 /* THNSubscribeViewController.m */,
 				D8ACF45F1D6DA2BD00DB79D8 /* THNSceneImageViewController.h */,
 				D8ACF4601D6DA2BD00DB79D8 /* THNSceneImageViewController.m */,
+				D8C095091D752E9500908491 /* FBEditShareInfoViewController.h */,
+				D8C0950A1D752E9500908491 /* FBEditShareInfoViewController.m */,
+				D8C0950B1D752E9500908491 /* FBShareViewController.h */,
+				D8C0950C1D752E9500908491 /* FBShareViewController.m */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -3745,8 +3748,6 @@
 		D85174441D5878C8005F5722 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
-				D8C095001D752DEC00908491 /* FiuPeopleListViewController.h */,
-				D8C095011D752DEC00908491 /* FiuPeopleListViewController.m */,
 				D851744F1D5878F7005F5722 /* THNDiscoverViewController.h */,
 				D85174501D5878F7005F5722 /* THNDiscoverViewController.m */,
 				D80878E61D6B318F00C1FFA0 /* DiscoverCategoryViewController.h */,
@@ -3755,6 +3756,8 @@
 				D8ACF45A1D6C9B3000DB79D8 /* THNSceneListViewController.m */,
 				D80669761D6EF8FA007FD81E /* DiscoverSearchViewController.h */,
 				D80669771D6EF8FA007FD81E /* DiscoverSearchViewController.m */,
+				D8C095001D752DEC00908491 /* FiuPeopleListViewController.h */,
+				D8C095011D752DEC00908491 /* FiuPeopleListViewController.m */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -3791,6 +3794,8 @@
 				D80878CF1D69CAD700C1FFA0 /* THNDiscoverSceneCollectionViewCell.m */,
 				D80878D11D69FAB400C1FFA0 /* THNCategoryCollectionReusableView.h */,
 				D80878D21D69FAB400C1FFA0 /* THNCategoryCollectionReusableView.m */,
+				D8E8FFC31D756D3600DDC3E0 /* THNHotActionCollectionReusableView.h */,
+				D8E8FFC41D756D3600DDC3E0 /* THNHotActionCollectionReusableView.m */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -4535,6 +4540,7 @@
 				D869BD6F1D6036A000432423 /* CommentReplyComment.m in Sources */,
 				1F772B5E1CF3FD910018AE40 /* AppDelegate.mm in Sources */,
 				1F2A90321CF40277005116C7 /* AXModel.m in Sources */,
+				D8E8FFC51D756D3600DDC3E0 /* THNHotActionCollectionReusableView.m in Sources */,
 				1FA53F211D6974A500EBE59B /* THNProjectViewController.m in Sources */,
 				1F2A904F1CF40277005116C7 /* RecommendedScenarioModel.m in Sources */,
 				D812815A1CAA8532007CF08B /* fineix.xcdatamodeld in Sources */,

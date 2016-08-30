@@ -88,7 +88,11 @@ static NSString *const MallListHeaderCellViewId = @"mallListHeaderCellViewId";
 
 #pragma mark 商品专题列表
 - (void)thn_networkSubjectListData {
-    self.subjectRequest = [FBAPI getWithUrlString:URLMallSubject requestDictionary:@{@"page":@"1", @"size":@"100", @"sort":@"2", @"type":@"5", @"fine":@"1"} delegate:self];
+    self.subjectRequest = [FBAPI getWithUrlString:URLMallSubject requestDictionary:@{@"page":@"1",
+                                                                                     @"size":@"100",
+                                                                                     @"sort":@"2",
+                                                                                     @"type":@"5",
+                                                                                     @"fine":@"1"} delegate:self];
     [self.subjectRequest startRequestSuccess:^(FBRequest *request, id result) {
         NSArray *goodsArr = [[result valueForKey:@"data"] valueForKey:@"rows"];
         for (NSDictionary * goodsDic in goodsArr) {
@@ -197,6 +201,7 @@ static NSString *const MallListHeaderCellViewId = @"mallListHeaderCellViewId";
         } else if (_type == 3) {
             THNCuXiaoDetalViewController *cuXiao = [[THNCuXiaoDetalViewController alloc] init];
             cuXiao.cuXiaoDetalId = self.subjectIdMarr[indexPath.row - 1];
+            cuXiao.vcType = 1;
             [self.navigationController pushViewController:cuXiao animated:YES];
             
         } else if (_type == 4) {
@@ -207,6 +212,7 @@ static NSString *const MallListHeaderCellViewId = @"mallListHeaderCellViewId";
         } else if (_type == 5) {
             THNCuXiaoDetalViewController *cuXiao = [[THNCuXiaoDetalViewController alloc] init];
             cuXiao.cuXiaoDetalId = self.subjectIdMarr[indexPath.row - 1];
+            cuXiao.vcType = 2;
             [self.navigationController pushViewController:cuXiao animated:YES];
             
         }

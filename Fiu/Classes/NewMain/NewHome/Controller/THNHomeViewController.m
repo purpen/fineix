@@ -23,11 +23,19 @@
 #import "RollImageRow.h"
 #import "FBSubjectModelRow.h"
 #import "HotUserListUser.h"
+#import "THNArticleModel.h"
 #import "CommentNViewController.h"
+
+#import "THNArticleDetalViewController.h"
+#import "THNActiveDetalTwoViewController.h"
+#import "THNXinPinDetalViewController.h"
+#import "THNCuXiaoDetalViewController.h"
+#import "THNProjectViewController.h"
 
 static NSString *const URLBannerSlide = @"/gateway/slide";
 static NSString *const URLSceneList = @"/scene_sight/";
 static NSString *const URLSubject = @"/scene_subject/getlist";
+static NSString *const URLSubjectView = @"/scene_subject/view";
 static NSString *const URLLikeScene = @"/favorite/ajax_love";
 static NSString *const URLCancelLike = @"/favorite/ajax_cancel_love";
 static NSString *const URLFollowUser = @"/follow/ajax_follow";
@@ -53,6 +61,7 @@ static NSString *const allCommentsCellId = @"AllCommentsCellId";
     NSString *_userId;
     NSInteger _index;
     CGFloat _hotUserCellHeight;
+    NSInteger _subjectType;
 }
 
 @end
@@ -78,7 +87,7 @@ static NSString *const allCommentsCellId = @"AllCommentsCellId";
 #pragma mark - 网络请求
 #pragma mark 轮播图
 - (void)thn_networkRollImageData {
-    self.rollImgRequest = [FBAPI getWithUrlString:URLBannerSlide requestDictionary:@{@"name":@"app_fiu_product_index_slide", @"size":@"5"} delegate:self];
+    self.rollImgRequest = [FBAPI getWithUrlString:URLBannerSlide requestDictionary:@{@"name":@"app_fiu_sight_index_slide", @"size":@"5"} delegate:self];
     [self.rollImgRequest startRequestSuccess:^(FBRequest *request, id result) {
         NSArray *rollArr = [[result valueForKey:@"data"] valueForKey:@"rows"];
         for (NSDictionary * rollDic in rollArr) {
@@ -165,7 +174,7 @@ static NSString *const allCommentsCellId = @"AllCommentsCellId";
     }];
 }
 
-#pragma mark 主题
+#pragma mark 专题
 - (void)thn_networkSubjectData {
     self.subjectRequest = [FBAPI getWithUrlString:URLSubject requestDictionary:@{@"page":@"1", @"size":@"4", @"fine":@"1"} delegate:self];
     [self.subjectRequest startRequestSuccess:^(FBRequest *request, id result) {
@@ -182,6 +191,47 @@ static NSString *const allCommentsCellId = @"AllCommentsCellId";
     
     } failure:^(FBRequest *request, NSError *error) {
         [SVProgressHUD showErrorWithStatus:[error localizedDescription]];
+    }];
+}
+
+#pragma mark 专题详情
+- (void)thn_networkSubjectInfoData:(NSString *)idx {
+    self.subjectInfoRequest = [FBAPI getWithUrlString:URLSubjectView requestDictionary:@{@"id":idx} delegate:self];
+    [self.subjectInfoRequest startRequestSuccess:^(FBRequest *request, id result) {
+
+        if (![[[result valueForKey:@"data"] valueForKey:@"type"] isKindOfClass:[NSNull class]]) {
+            _subjectType = [[[result valueForKey:@"data"] valueForKey:@"type"] integerValue];
+            if (_subjectType == 1) {
+                THNArticleDetalViewController *articleVC = [[THNArticleDetalViewController alloc] init];
+                articleVC.articleDetalid = idx;
+                [self.navigationController pushViewController:articleVC animated:YES];
+                
+            } else if (_subjectType == 2) {
+                THNActiveDetalTwoViewController *activity = [[THNActiveDetalTwoViewController alloc] init];
+                activity.activeDetalId = idx;
+                [self.navigationController pushViewController:activity animated:YES];
+                
+            } else if (_subjectType == 3) {
+                THNCuXiaoDetalViewController *cuXiao = [[THNCuXiaoDetalViewController alloc] init];
+                cuXiao.cuXiaoDetalId = idx;
+                cuXiao.vcType = 1;
+                [self.navigationController pushViewController:cuXiao animated:YES];
+                
+            } else if (_subjectType == 4) {
+                THNXinPinDetalViewController *xinPin = [[THNXinPinDetalViewController alloc] init];
+                xinPin.xinPinDetalId = idx;
+                [self.navigationController pushViewController:xinPin animated:YES];
+                
+            } else if (_subjectType == 5) {
+                THNCuXiaoDetalViewController *cuXiao = [[THNCuXiaoDetalViewController alloc] init];
+                cuXiao.cuXiaoDetalId = idx;
+                cuXiao.vcType = 2;
+                [self.navigationController pushViewController:cuXiao animated:YES];
+            }
+        }
+        
+    } failure:^(FBRequest *request, NSError *error) {
+        NSLog(@"%@",error);
     }];
 }
 
@@ -310,6 +360,11 @@ static NSString *const allCommentsCellId = @"AllCommentsCellId";
     if (!_homerollView) {
         _homerollView = [[FBRollImages alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_WIDTH *0.56)];
         _homerollView.navVC = self.navigationController;
+        
+        __weak __typeof(self)weakSelf = self;
+        _homerollView.getProjectType = ^ (NSString *idx) {
+            [weakSelf thn_networkSubjectInfoData:idx];
+        };
     }
     return _homerollView;
 }

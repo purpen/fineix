@@ -18,6 +18,7 @@
 
 @pro_strong FBRequest *rollImgRequest;
 @pro_strong FBRequest *subjectRequest;
+@pro_strong FBRequest *subjectInfoRequest;
 @pro_strong FBRequest *sceneListRequest;
 @pro_strong FBRequest *likeSceneRequest;
 @pro_strong FBRequest *cancelLikeRequest;
