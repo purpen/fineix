@@ -91,10 +91,6 @@ static NSString *const DeleteAddressURL = @"/shopping/remove_address";
 
 -(void)clickAddreesPickerBtn:(UIButton*)sender{
     self.addressTF.hidden = YES;
-    //拿到ID名称 更新列表，更新服务器上的 然后消失
-    //self.addressTF.text = [NSString stringWithFormat:@"%@ %@",self.addreesPickerVC.provinceStr,self.addreesPickerVC.cityStr];
-    self.prinLabel.text = self.addreesPickerVC.provinceStr;
-    self.cityLabel.text = self.addreesPickerVC.cityStr;
     self.provinceId = self.addreesPickerVC.provinceId;
     self.cityId = self.addreesPickerVC.cityId;
     [self.addreesPickerVC dismissViewControllerAnimated:NO completion:nil];

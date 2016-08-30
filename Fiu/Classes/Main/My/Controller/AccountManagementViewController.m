@@ -159,14 +159,14 @@ static NSString *const UpdateInfoURL = @"/my/update_profile";
 //    NSInteger prinTeger = 1;
 //    NSInteger cityTeger = 1;
 //    for (int i = 0; i < provincesAry.count; i ++) {
-//        if ([entity.prin isEqualToString:((AreaModel*)provincesAry[i]).name]) {
-//            prinTeger = i + 1;
+//        if ([((AreaModel*)provincesAry[i]).name rangeOfString:entity.prin].location != NSNotFound) {
+//            prinTeger = i;
 //        }
 //    }
 //    for (int i = 0; i < cityAry.count; i ++) {
 //        for (int j = 0; j < ((NSArray*)cityAry[i]).count; j ++) {
-//            if ([entity.city isEqualToString:((AreaModel*)cityAry[i][j]).name]) {
-//                cityTeger = j + 1;
+//            if ([((AreaModel*)cityAry[i][j]).name rangeOfString:entity.city].location != NSNotFound) {
+//                cityTeger = j;
 //            }
 //        }
 //    }
@@ -174,8 +174,10 @@ static NSString *const UpdateInfoURL = @"/my/update_profile";
     self.addreesPickerVC.modalPresentationStyle = UIModalPresentationOverCurrentContext;
    
     [self presentViewController:_addreesPickerVC animated:NO completion:^{
-//        [self.addreesPickerVC.addreesBtn selectRow:cityTeger inComponent:prinTeger animated:YES];
-//        [self.addreesPickerVC pickerView:self.addreesPickerVC.addreesBtn didSelectRow:cityTeger inComponent:prinTeger];
+//        [self.addreesPickerVC.addreesBtn selectRow:0 inComponent:0 animated:YES];
+//        AreaModel * city = cityAry[1];
+//        self.addreesPickerVC.cityId = city.idField;
+//        self.addreesPickerVC.cityStr = city.name;
     }];
     [_addreesPickerVC.pickerBtn addTarget:self action:@selector(clickAddreesPickerBtn:) forControlEvents:UIControlEventTouchUpInside];
 }
@@ -210,8 +212,6 @@ static NSString *const UpdateInfoURL = @"/my/update_profile";
 
 
 -(void)clickAddreesPickerBtn:(UIButton*)sender{
-    //拿到ID名称 更新列表，更新服务器上的 然后消失
-    self.accountView.adress.text = [NSString stringWithFormat:@"%@ %@",self.addreesPickerVC.provinceStr,self.addreesPickerVC.cityStr];
     FBRequest *request = [FBAPI postWithUrlString:@"/my/update_profile" requestDictionary:@{@"province_id":@(self.addreesPickerVC.provinceId),@"district_id":@(self.addreesPickerVC.cityId)} delegate:self];
     request.flag = @"UpdateInfoURL";
     [request startRequest];
@@ -386,6 +386,7 @@ static NSString *const UpdateInfoURL = @"/my/update_profile";
             userEntity.city = areasAry[1];
         }
         [userEntity updateUserInfo];
+        _accountView.adress.text = [NSString stringWithFormat:@"%@ %@",userEntity.prin,userEntity.city];
         request = nil;
     }
 

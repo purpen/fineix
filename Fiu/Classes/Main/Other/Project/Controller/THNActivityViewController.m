@@ -67,9 +67,9 @@ static NSString *const cellId = @"THNActivityCollectionViewCell";
     NSDictionary *params = @{
                              @"page" : @(self.current_page),
                              @"size" : @8,
-                             @"fine" : @1,
+                             @"fine" : @0,
                              @"type" : @2,
-                             @"sort" : @2
+                             @"sort" : @0
                              };
     self.params = params;
     FBRequest *request = [FBAPI postWithUrlString:@"/scene_subject/getlist" requestDictionary:params delegate:self];
@@ -103,9 +103,9 @@ static NSString *const cellId = @"THNActivityCollectionViewCell";
     NSDictionary *params = @{
                              @"page" : @(++self.current_page),
                              @"size" : @8,
-                             @"fine" : @1,
+                             @"fine" : @0,
                              @"type" : @2,
-                             @"sort" : @2
+                             @"sort" : @0
                              };
     self.params = params;
     FBRequest *request = [FBAPI postWithUrlString:@"/scene_subject/getlist" requestDictionary:params delegate:self];
@@ -179,7 +179,7 @@ static NSString *const cellId = @"THNActivityCollectionViewCell";
 -(void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath{
     THNActiveDetalTwoViewController *vc = [[THNActiveDetalTwoViewController alloc] init];
     vc.activeDetalId = ((THNArticleModel*)self.modelAry[indexPath.row])._id;
-    vc.model = self.modelAry[indexPath.row];
+//    vc.model = self.modelAry[indexPath.row];
     [self.navigationController pushViewController:vc animated:YES];
 }
 

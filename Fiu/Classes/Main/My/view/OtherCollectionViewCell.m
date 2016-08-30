@@ -59,7 +59,7 @@
         [_userView addSubview:self.userLevelLabel];
         [_userLevelLabel mas_makeConstraints:^(MASConstraintMaker *make) {
             make.width.mas_offset(SCREEN_WIDTH-60);
-            make.centerX.mas_equalTo(_userView.mas_centerX).with.offset(-10/667.0*SCREEN_HEIGHT);
+            make.centerX.mas_equalTo(_userView.mas_centerX).with.offset(0);
             make.bottom.mas_equalTo(_userView.mas_bottom).with.offset(-49/667.0*SCREEN_HEIGHT);
         }];
         
@@ -67,7 +67,7 @@
         [_userView addSubview:self.idTagsLabel];
         [_idTagsLabel mas_makeConstraints:^(MASConstraintMaker *make) {
             make.bottom.mas_equalTo(_userLevelLabel.mas_top).with.offset(-5/667.0*SCREEN_HEIGHT);
-            make.right.mas_equalTo(_userView.mas_centerX).with.offset(-2/667.0*SCREEN_HEIGHT);
+            make.centerX.mas_equalTo(_userView.mas_centerX).with.offset(0);
         }];
         
 //        [_userView addSubview:self.idImageView];
@@ -151,9 +151,9 @@
 //    NSArray *tagsAry = [NSArray arrayWithObjects:@"大拿",@"行家",@"行摄家",@"艺术范",@"手艺人",@"人来疯",@"赎回自由身",@"职业buyer", nil];
     if ([(NSNumber*)model.is_expert isEqualToNumber:@1]) {
         self.talentView.hidden = NO;
-        self.userProfile.hidden = NO;
-        self.userProfile.text = model.expert_info;
-        self.idTagsLabel.text = [NSString stringWithFormat:@"%@ |",model.expert_label];
+//        self.userProfile.hidden = NO;
+//        self.userProfile.text = model.expert_info;
+        self.idTagsLabel.text = [NSString stringWithFormat:@"%@ | %@",model.expert_label,model.expert_info];
 //        self.idImageView.hidden = NO; 
 //        int n = (int)[tagsAry indexOfObject:model.expert_label];
 //        self.idImageView.image = [UIImage imageNamed:[NSString stringWithFormat:@"tags%d",n+1]];
@@ -163,7 +163,7 @@
 //        }];
     }else {
         self.talentView.hidden = YES;
-        self.userProfile.hidden = YES;
+//        self.userProfile.hidden = YES;
 //        self.idImageView.hidden = YES;
 //        [self layoutIfNeeded];
 //        [self.headView mas_updateConstraints:^(MASConstraintMaker *make) {

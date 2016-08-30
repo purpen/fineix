@@ -32,6 +32,33 @@ static NSString *const hotUserCellId = @"HotUserCellId";
     return self;
 }
 
+-(void)setModel:(HomeSceneListRow *)userModel{
+    _userModel = userModel;
+    [self.head sd_setImageWithURL:[NSURL URLWithString:userModel.user.avatarUrl]
+                         forState:(UIControlStateNormal)
+                 placeholderImage:[UIImage imageNamed:@""]];
+    self.name.text = userModel.user.nickname;
+    [self.time setTitle:userModel.createdAt forState:(UIControlStateNormal)];
+    NSString *timeStr = [NSString stringWithFormat:@"      %@",userModel.createdAt];
+    [self.time mas_updateConstraints:^(MASConstraintMaker *make) {
+        make.width.equalTo(@([self getTextSizeWidth:timeStr].width));
+    }];
+    [self.address setTitle:userModel.address forState:(UIControlStateNormal)];
+    if (userModel.user.isExpert == 1) {
+        self.certificate.hidden = NO;
+    } else {
+        self.certificate.hidden = YES;
+    }
+    
+    if (userModel.user.isFollow == 0) {
+        self.follow.selected = NO;
+    } else if (userModel.user.isFollow == 1) {
+        self.follow.selected = YES;
+    }
+    
+    _userId = userModel.user._id;
+}
+
 #pragma mark - setModel 
 - (void)thn_setHomeSceneUserInfoData:(HomeSceneListRow *)userModel {
     [self.head sd_setImageWithURL:[NSURL URLWithString:userModel.user.avatarUrl]
@@ -57,6 +84,9 @@ static NSString *const hotUserCellId = @"HotUserCellId";
     }
     
     _userId = [NSString stringWithFormat:@"%zi", userModel.userId];
+    if ([_userId isEqualToString:@"0"]) {
+        _userId = userModel.user._id;
+    }
 }
 
 - (CGSize)getTextSizeWidth:(NSString *)text {

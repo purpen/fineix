@@ -29,6 +29,9 @@
 @pro_strong NSMutableArray *hotUserMarr;
 @pro_strong NSMutableArray *hotUserIdMarr;
 
+/**  */
+@property (nonatomic, strong) HomeSceneListRow *userModel;
+
 - (void)thn_setHomeSceneUserInfoData:(HomeSceneListRow *)userModel;
 
 - (void)thn_setHotUserListData:(NSMutableArray *)hotUserMarr;
