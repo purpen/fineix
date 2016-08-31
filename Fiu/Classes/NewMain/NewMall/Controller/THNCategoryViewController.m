@@ -60,7 +60,7 @@ static NSString *const goodsListCellId = @"GoodsListCellId";
 - (void)thn_networkGoodsListData:(NSString *)tagId {
     [SVProgressHUD show];
     self.goodsListRequest = [FBAPI getWithUrlString:URLMallList requestDictionary:@{@"page":@(self.currentpageNum + 1),
-                                                                                    @"size":@"category_id",
+                                                                                    @"size":@"10",
                                                                             @"category_id":self.categoryId} delegate:self];
     [self.goodsListRequest startRequestSuccess:^(FBRequest *request, id result) {
         NSArray *goodsArr = [[result valueForKey:@"data"] valueForKey:@"rows"];
