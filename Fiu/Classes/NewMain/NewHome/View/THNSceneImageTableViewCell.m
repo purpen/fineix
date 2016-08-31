@@ -11,12 +11,15 @@
 #import "UILable+Frame.h"
 #import "UIImage+Helper.h"
 #import "THNSceneImageViewController.h"
+#import "THNUserAddGoodsViewController.h"
 
 @interface THNSceneImageTableViewCell () {
     NSString *_titleStr;
     NSString *_suTitleStr;
     NSString *_image;
     NSInteger _type;
+    NSString *_goodsTitle;
+    NSString *_brandTitle;
 }
 
 @end
@@ -111,6 +114,7 @@
         CGFloat btnY = [[self.tagDataMarr[idx] valueForKey:@"y"] floatValue];
         NSString *title = [self.tagDataMarr[idx] valueForKey:@"title"];
         NSInteger loc = [[self.tagDataMarr[idx] valueForKey:@"loc"] integerValue];
+        _goodsTitle = [self.tagDataMarr[idx] valueForKey:@"title"];
         
         UserGoodsTag * userTag = [[UserGoodsTag alloc] init];
         userTag.dele.hidden = YES;
@@ -143,12 +147,14 @@
     _type = [self.goodsType[index] integerValue];
 
     if (_type == 2) {
-        FBGoodsInfoViewController * goodsInfoVC = [[FBGoodsInfoViewController alloc] init];
+        FBGoodsInfoViewController *goodsInfoVC = [[FBGoodsInfoViewController alloc] init];
         goodsInfoVC.goodsID = self.goodsIds[index];
         [self.nav pushViewController:goodsInfoVC animated:YES];
         
     } else if (_type == 1) {
-//        [SVProgressHUD showSuccessWithStatus:@"用户自建的商品"];
+        THNUserAddGoodsViewController *userGoodsVC = [[THNUserAddGoodsViewController alloc] init];
+        userGoodsVC.goodsTitle = _goodsTitle;
+        [self.nav pushViewController:userGoodsVC animated:YES];
     }
 }
 

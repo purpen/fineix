@@ -605,6 +605,8 @@
 		D8E8FFC21D75388D00DDC3E0 /* FiuSceneRow.m in Sources */ = {isa = PBXBuildFile; fileRef = D8E8FFB91D75388D00DDC3E0 /* FiuSceneRow.m */; };
 		D8E8FFC51D756D3600DDC3E0 /* THNHotActionCollectionReusableView.m in Sources */ = {isa = PBXBuildFile; fileRef = D8E8FFC41D756D3600DDC3E0 /* THNHotActionCollectionReusableView.m */; };
 		D8E8FFC81D76D01B00DDC3E0 /* TagFlowLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = D8E8FFC71D76D01B00DDC3E0 /* TagFlowLayout.m */; };
+		D8E8FFCB1D77393400DDC3E0 /* THNUserAddGoodsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D8E8FFCA1D77393400DDC3E0 /* THNUserAddGoodsViewController.m */; };
+		D8E8FFCE1D773F6E00DDC3E0 /* THNUserAddGoodsTitleTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D8E8FFCD1D773F6E00DDC3E0 /* THNUserAddGoodsTitleTableViewCell.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -1671,6 +1673,10 @@
 		D8E8FFC41D756D3600DDC3E0 /* THNHotActionCollectionReusableView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THNHotActionCollectionReusableView.m; sourceTree = "<group>"; };
 		D8E8FFC61D76D01B00DDC3E0 /* TagFlowLayout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TagFlowLayout.h; sourceTree = "<group>"; };
 		D8E8FFC71D76D01B00DDC3E0 /* TagFlowLayout.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TagFlowLayout.m; sourceTree = "<group>"; };
+		D8E8FFC91D77393400DDC3E0 /* THNUserAddGoodsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THNUserAddGoodsViewController.h; sourceTree = "<group>"; };
+		D8E8FFCA1D77393400DDC3E0 /* THNUserAddGoodsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THNUserAddGoodsViewController.m; sourceTree = "<group>"; };
+		D8E8FFCC1D773F6E00DDC3E0 /* THNUserAddGoodsTitleTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THNUserAddGoodsTitleTableViewCell.h; sourceTree = "<group>"; };
+		D8E8FFCD1D773F6E00DDC3E0 /* THNUserAddGoodsTitleTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THNUserAddGoodsTitleTableViewCell.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -3822,6 +3828,8 @@
 				D80878E41D6B015100C1FFA0 /* THNCategoryViewController.m */,
 				D80669791D6F0206007FD81E /* MallSearchViewController.h */,
 				D806697A1D6F0206007FD81E /* MallSearchViewController.m */,
+				D8E8FFC91D77393400DDC3E0 /* THNUserAddGoodsViewController.h */,
+				D8E8FFCA1D77393400DDC3E0 /* THNUserAddGoodsViewController.m */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -3860,6 +3868,8 @@
 				D80878DB1D6AE2C700C1FFA0 /* THNMallListCollectionViewCell.m */,
 				D80878E01D6AE3DF00C1FFA0 /* MallListGoodsCollectionViewCell.h */,
 				D80878E11D6AE3DF00C1FFA0 /* MallListGoodsCollectionViewCell.m */,
+				D8E8FFCC1D773F6E00DDC3E0 /* THNUserAddGoodsTitleTableViewCell.h */,
+				D8E8FFCD1D773F6E00DDC3E0 /* THNUserAddGoodsTitleTableViewCell.m */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -4373,6 +4383,7 @@
 				1FA53F501D69C88E00EBE59B /* THNProjectGoodsModel.m in Sources */,
 				D85174631D598D36005F5722 /* THNSceneImageTableViewCell.m in Sources */,
 				1FA53F5D1D6A034900EBE59B /* THNArticleDetalModel.m in Sources */,
+				D8E8FFCB1D77393400DDC3E0 /* THNUserAddGoodsViewController.m in Sources */,
 				D8E3AEBB1CFC9B84006E5E8C /* ReleaseViewController.m in Sources */,
 				D80669981D7014C8007FD81E /* HotUserList.m in Sources */,
 				D8C0951F1D7533FD00908491 /* ShareInfo.m in Sources */,
@@ -4766,6 +4777,7 @@
 				1F2A8F3D1CF40277005116C7 /* FindGoodsModel.m in Sources */,
 				D869BD691D6036A000432423 /* QrShareSheetViewController.m in Sources */,
 				D8035F2F1CB77D0C001920F9 /* UIImage+Helper.m in Sources */,
+				D8E8FFCE1D773F6E00DDC3E0 /* THNUserAddGoodsTitleTableViewCell.m in Sources */,
 				D8BE89E41D3377B000DE5029 /* SeleBrandViewController.m in Sources */,
 				D8035F3B1CB784B3001920F9 /* UILable+Frame.m in Sources */,
 				1F2A8FE01CF40277005116C7 /* InfoRecommendTableViewCell.m in Sources */,
@@ -4866,7 +4878,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 9.2;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
-				PROVISIONING_PROFILE = "68229318-888d-4d23-9586-1a46706c4314";
+				PROVISIONING_PROFILE = "38736fb6-f8a9-4075-b98f-85f06063d856";
 				SDKROOT = iphoneos;
 			};
 			name = Debug;
@@ -4904,7 +4916,7 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.2;
 				MTL_ENABLE_DEBUG_INFO = NO;
-				PROVISIONING_PROFILE = "68229318-888d-4d23-9586-1a46706c4314";
+				PROVISIONING_PROFILE = "38736fb6-f8a9-4075-b98f-85f06063d856";
 				SDKROOT = iphoneos;
 				VALIDATE_PRODUCT = YES;
 			};
@@ -4951,7 +4963,7 @@
 				OTHER_LIBTOOLFLAGS = "-all_load";
 				PRODUCT_BUNDLE_IDENTIFIER = com.THN.fineix;
 				PRODUCT_NAME = Fiu;
-				PROVISIONING_PROFILE = "68229318-888d-4d23-9586-1a46706c4314";
+				PROVISIONING_PROFILE = "38736fb6-f8a9-4075-b98f-85f06063d856";
 				RUN_CLANG_STATIC_ANALYZER = NO;
 				USER_HEADER_SEARCH_PATHS = "$(SRCROOT)";
 			};
@@ -4998,7 +5010,7 @@
 				OTHER_LIBTOOLFLAGS = "-all_load";
 				PRODUCT_BUNDLE_IDENTIFIER = com.THN.fineix;
 				PRODUCT_NAME = Fiu;
-				PROVISIONING_PROFILE = "68229318-888d-4d23-9586-1a46706c4314";
+				PROVISIONING_PROFILE = "38736fb6-f8a9-4075-b98f-85f06063d856";
 				RUN_CLANG_STATIC_ANALYZER = NO;
 				USER_HEADER_SEARCH_PATHS = "$(SRCROOT)";
 			};
