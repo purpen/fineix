@@ -8,6 +8,7 @@
 
 #import "SearchSceneViewController.h"
 #import "THNDiscoverSceneCollectionViewCell.h"
+#import "THNSceneDetalViewController.h"
 
 static NSString *const URLSearchList = @"/search/getlist";
 static NSString *const URLLikeScene = @"/favorite/ajax_love";
@@ -226,14 +227,9 @@ static NSString *const SceneListCellId = @"sceneListCellId";
 }
 
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
-//    [SVProgressHUD showSuccessWithStatus:[NSString stringWithFormat:@"打开情景详情：%@",self.searchSceneIdMarr[indexPath.row]]];
-//    THNSceneListViewController *sceneListVC = [[THNSceneListViewController alloc] init];
-//    sceneListVC.searchSceneListMarr = self.searchSceneListMarr;
-//    sceneListVC.commentsMarr = self.commentsMarr;
-//    sceneListVC.searchSceneIdMarr = self.searchSceneIdMarr;
-//    sceneListVC.userIdMarr = self.userIdMarr;
-//    sceneListVC.index = indexPath.row;
-//    [self.navigationController pushViewController:sceneListVC animated:YES];
+    THNSceneDetalViewController *sceneDataVC = [[THNSceneDetalViewController alloc] init];
+    sceneDataVC.sceneDetalId = self.searchSceneIdMarr[indexPath.row];
+    [self.navigationController pushViewController:sceneDataVC animated:YES];
 }
 
 - (NSMutableArray *)searchSceneListMarr {
