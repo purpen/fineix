@@ -130,7 +130,7 @@ static NSString *searchCellId = @"search";
     if (!_myTbaleView) {
         _myTbaleView = [[UITableView alloc] initWithFrame:CGRectMake(0, 64, SCREEN_WIDTH, SCREEN_HEIGHT-64) style:UITableViewStyleGrouped];
         
-        SearchView *searchView = [[SearchView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 44)];
+        SearchView *searchView = [[SearchView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 50)];
         searchView.searchTF.delegate = self;
         [searchView.cancelBtn addTarget:self action:@selector(cancelBtn:) forControlEvents:UIControlEventTouchUpInside];
         searchView.cancelBtn.hidden = YES;
@@ -292,6 +292,9 @@ static NSString *searchCellId = @"search";
             }
             InvitationModel *model = self.aryOne[indexPath.row];
             [cell setUIWithModel:model];
+            if (indexPath.row == 2) {
+                cell.lineView.hidden = YES;
+            }
             return cell;
         }else{
             static NSString *cellId = @"cellTwo";

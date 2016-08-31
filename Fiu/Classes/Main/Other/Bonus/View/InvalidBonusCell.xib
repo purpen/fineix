@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="10116" systemVersion="15C50" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="10117" systemVersion="15C50" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
@@ -17,9 +17,6 @@
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ORE-tc-kvI" userLabel="MainView">
                         <rect key="frame" x="10" y="5" width="335" height="111"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="bonus_bg_invalid" translatesAutoresizingMaskIntoConstraints="NO" id="MwX-is-Mqs" userLabel="Background">
-                                <rect key="frame" x="0.0" y="0.0" width="335" height="111"/>
-                            </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="太火鸟红包" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="i6E-nb-OKZ">
                                 <rect key="frame" x="15" y="10" width="80" height="20"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="16"/>
@@ -58,6 +55,9 @@
                             </label>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="bonus_invalid" translatesAutoresizingMaskIntoConstraints="NO" id="YYZ-cA-pgd" userLabel="Invalid">
                                 <rect key="frame" x="135" y="13" width="76" height="76"/>
+                            </imageView>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="bouns_guoQi" translatesAutoresizingMaskIntoConstraints="NO" id="MwX-is-Mqs" userLabel="Background">
+                                <rect key="frame" x="0.0" y="0.0" width="335" height="111"/>
                             </imageView>
                         </subviews>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
@@ -102,7 +102,7 @@
         </tableViewCell>
     </objects>
     <resources>
-        <image name="bonus_bg_invalid" width="355" height="122"/>
         <image name="bonus_invalid" width="76" height="76"/>
+        <image name="bouns_guoQi" width="355" height="121"/>
     </resources>
 </document>

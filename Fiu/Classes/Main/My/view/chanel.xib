@@ -162,12 +162,15 @@
                 </mask>
             </variation>
             <connections>
+                <outlet property="fansBtn" destination="31d-up-XGn" id="Ybc-G9-koK"/>
                 <outlet property="fansNumLabel" destination="Jhy-Rg-cRH" id="vye-LC-NaO"/>
                 <outlet property="fansView" destination="yXw-t8-ddm" id="X2X-09-pqk"/>
                 <outlet property="fieldNumLabel" destination="DLy-1i-g2K" id="s0H-LB-AOL"/>
                 <outlet property="fieldView" destination="YLy-lk-LgI" id="CoZ-Xv-9C2"/>
+                <outlet property="focusBtn" destination="HVZ-Wg-izz" id="sGl-gg-mrK"/>
                 <outlet property="focusNumLabel" destination="jqM-xS-AQI" id="oyw-Bg-DZx"/>
                 <outlet property="focusView" destination="brx-eo-zDH" id="8b7-lg-NWo"/>
+                <outlet property="scenceBtn" destination="i90-bm-7zr" id="MeR-T7-wN3"/>
             </connections>
             <point key="canvasLocation" x="352" y="757"/>
         </view>

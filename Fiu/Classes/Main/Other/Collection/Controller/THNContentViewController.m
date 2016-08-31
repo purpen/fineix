@@ -195,6 +195,7 @@ static NSString *const URLFiuGoods = @"/favorite/get_new_list";
         if (self.params != params) return;
         if (self.type == CollectionTypeGood) {
             if (result[@"success"]) {
+                NSLog(@"产品  %@",result);
                 [self.goodsList removeAllObjects];
                 [self.goodsIdList removeAllObjects];
                 NSArray * goodsArr = [[result valueForKey:@"data"] valueForKey:@"rows"];
@@ -222,7 +223,7 @@ static NSString *const URLFiuGoods = @"/favorite/get_new_list";
             }
         }else{
             if (result[@"success"]) {
-                NSLog(@"result %@",result);
+                NSLog(@"情境 %@",result);
                 [_sceneListMarr removeAllObjects];
                 [_sceneIdMarr removeAllObjects];
                 NSArray *sceneArr = [[result valueForKey:@"data"] valueForKey:@"rows"];
