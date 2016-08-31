@@ -19,6 +19,7 @@
 #import "FBSubjectModelRow.h"
 #import "CommentNViewController.h"
 #import "HomeSceneListRow.h"
+#import "FBAlertViewController.h"
 
 @interface THNSceneDetalViewController ()<UITableViewDelegate,UITableViewDataSource>
 {
@@ -36,6 +37,7 @@
 @pro_strong FBRequest *sceneListRequest;
 @pro_strong FBRequest *likeSceneRequest;
 @pro_strong FBRequest *cancelLikeRequest;
+@pro_strong FBRequest *cancelFavoriteRequest;
 @pro_strong FBRequest *followRequest;
 @pro_strong FBRequest *cancelFollowRequest;
 @pro_strong FBRequest *viewCountRequest;
@@ -56,6 +58,8 @@ static NSString *const dataInfoCellId = @"DataInfoCellId";
 static NSString *const sceneInfoCellId = @"SceneInfoCellId";
 static NSString *const commentsCellId = @"CommentsCellId";
 static NSString *const twoCommentsCellId = @"TwoCommentsCellId";
+static NSString *const URLCancelFavorite = @"/favorite/ajax_cancel_favorite";
+
 
 @implementation THNSceneDetalViewController
 
@@ -170,6 +174,7 @@ static NSString *const twoCommentsCellId = @"TwoCommentsCellId";
             cell.nav = self.navigationController;
         }
         [cell.like addTarget:self action:@selector(commentsClick:) forControlEvents:UIControlEventTouchUpInside];
+        [cell.more addTarget:self action:@selector(moreClick) forControlEvents:UIControlEventTouchUpInside];
         return cell;
         
     } else if (indexPath.row == 3) {
@@ -289,10 +294,7 @@ static NSString *const twoCommentsCellId = @"TwoCommentsCellId";
 //    [self thn_networkCancelFollowData:[idx object]];
 //}
 
-#pragma mark - 收藏
-- (void)favoriteTheScene:(NSNotification *)idx {
-    [self thn_networkFavoriteData:[idx object]];
-}
+
 
 -(void)commentsClick:(UIButton*)sender{
     if (sender.selected) {
@@ -325,37 +327,42 @@ static NSString *const twoCommentsCellId = @"TwoCommentsCellId";
     }
 }
 
-//#pragma mark 点赞
-//- (void)thn_networkLikeSceneData:(NSString *)idx {
-//}
-//
-//#pragma mark 取消点赞
-//- (void)thn_networkCancelLikeData:(NSString *)idx {
-//}
-//
-//#pragma mark 关注
-//- (void)thn_networkFollowSceneData:(NSString *)idx {
-//}
-//
-//#pragma mark 取消关注
-//- (void)thn_networkCancelFollowData:(NSString *)idx {
-//    self.cancelFollowRequest = [FBAPI postWithUrlString:URLCancelFollowUser requestDictionary:@{@"follow_id":idx} delegate:self];
-//    [self.cancelFollowRequest startRequestSuccess:^(FBRequest *request, id result) {
-//        if ([[result valueForKey:@"success"] isEqualToNumber:@1]) {
-//            [[self.model valueForKey:@"user"] setValue:@"0" forKey:@"isFollow"];
-//        }
-//        
-//    } failure:^(FBRequest *request, NSError *error) {
-//        [SVProgressHUD showErrorWithStatus:[error localizedDescription]];
-//    }];
-//}
+-(void)moreClick{
+    FBAlertViewController * alertVC = [[FBAlertViewController alloc] init];
+    alertVC.modalPresentationStyle = UIModalPresentationOverFullScreen;
+    alertVC.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;
+    [alertVC initFBAlertVcStyle:NO isFavorite:self.model.isFavorite];
+    alertVC.targetId = [NSString stringWithFormat:@"%ld",(long)self.model.idField];
+    alertVC.favoriteTheScene = ^(NSString *sceneId) {
+        self.model.isFavorite = 1;
+        [self thn_networkFavoriteData];
+    };
+    alertVC.cancelFavoriteTheScene = ^(NSString *sceneId) {
+        self.model.isFavorite = 0;
+        [self thn_networkCancelFavoriteData];
+    };
+    [self presentViewController:alertVC animated:YES completion:nil];
+}
 
 #pragma mark 收藏情境
-- (void)thn_networkFavoriteData:(NSString *)idx {
-    self.favoriteRequest = [FBAPI postWithUrlString:URLFavorite requestDictionary:@{@"id":idx, @"type":@"12"} delegate:self];
+- (void)thn_networkFavoriteData{
+    self.favoriteRequest = [FBAPI postWithUrlString:URLFavorite requestDictionary:@{@"id":@(self.model.idField), @"type":@"12"} delegate:self];
     [self.favoriteRequest startRequestSuccess:^(FBRequest *request, id result) {
         if ([[result valueForKey:@"success"] isEqualToNumber:@1]) {
             [SVProgressHUD showSuccessWithStatus:NSLocalizedString(@"favoriteDone", nil)];
+        }
+        
+    } failure:^(FBRequest *request, NSError *error) {
+        [SVProgressHUD showErrorWithStatus:[error localizedDescription]];
+    }];
+}
+
+#pragma mark 取消收藏
+- (void)thn_networkCancelFavoriteData {
+    self.cancelFavoriteRequest = [FBAPI postWithUrlString:URLCancelFavorite requestDictionary:@{@"id":@(self.model.idField), @"type":@"12"} delegate:self];
+    [self.cancelFavoriteRequest startRequestSuccess:^(FBRequest *request, id result) {
+        if ([[result valueForKey:@"success"] isEqualToNumber:@1]) {
+            [SVProgressHUD showSuccessWithStatus:NSLocalizedString(@"cancelSaveScene", nil)];
         }
         
     } failure:^(FBRequest *request, NSError *error) {
