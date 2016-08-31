@@ -74,8 +74,9 @@ static NSString *const twoCommentsCellId = @"TwoCommentsCellId";
                                                                                            } delegate:self];
     [request startRequestSuccess:^(FBRequest *request, id result) {
         if (result[@"success"]) {
-            NSLog(@"情境详情 %@",result);
+            NSLog(@"情境详情 %@",result); 
             self.model = [[HomeSceneListRow alloc] initWithDictionary:[result valueForKey:@"data"]];
+//            NSLog(@" 12312  %@",self.model.user.)
             self.comments = [result valueForKey:@"data"][@"comments"];
             [self.sceneTable reloadData];
         }else{
@@ -95,13 +96,26 @@ static NSString *const twoCommentsCellId = @"TwoCommentsCellId";
         _sceneTable.separatorStyle = UITableViewCellSeparatorStyleNone;
         //        [self addMJRefresh:_sceneTable];
         
-        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(likeTheScene:) name:@"likeTheScene" object:nil];
-        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(cancelLikeTheScene:) name:@"cancelLikeTheScene" object:nil];
-        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(followTheUser:) name:@"followTheUser" object:nil];
-        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(cancelFollowTheUser:) name:@"cancelFollowTheUser" object:nil];
-        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(favoriteTheScene:) name:@"favoriteTheScene" object:nil];
+//        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(likeTheScene:) name:@"likeTheScene" object:nil];
+//        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(cancelLikeTheScene:) name:@"cancelLikeTheScene" object:nil];
+//        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(followTheUser:) name:@"followTheUser" object:nil];
+//        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(cancelFollowTheUser:) name:@"cancelFollowTheUser" object:nil];
+//        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(favoriteTheScene:) name:@"favoriteTheScene" object:nil];
     }
     return _sceneTable;
+}
+
+-(void)followClick:(UIButton*)sender{
+    self.followRequest = [FBAPI postWithUrlString:URLFollowUser requestDictionary:@{@"follow_id":self.model.user.userId} delegate:self];
+    [self.followRequest startRequestSuccess:^(FBRequest *request, id result) {
+        if ([[result valueForKey:@"success"] isEqualToNumber:@1]) {
+            NSLog(@" 12312321 %@",result);
+            self.model.user.isFollow = 1;
+        }
+        
+    } failure:^(FBRequest *request, NSError *error) {
+        [SVProgressHUD showErrorWithStatus:[error localizedDescription]];
+    }];
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
@@ -113,6 +127,8 @@ static NSString *const twoCommentsCellId = @"TwoCommentsCellId";
         THNUserInfoTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:userInfoCellId];
         cell = [[THNUserInfoTableViewCell alloc] initWithStyle:(UITableViewCellStyleDefault) reuseIdentifier:userInfoCellId];
         [cell thn_setHomeSceneUserInfoData:self.model userId:[self getLoginUserID]];
+        cell.follow.tag = indexPath.row;
+        [cell.follow addTarget:self action:@selector(followClick:) forControlEvents:UIControlEventTouchUpInside];
         return cell;
         
     } else if (indexPath.row == 1) {
@@ -133,6 +149,7 @@ static NSString *const twoCommentsCellId = @"TwoCommentsCellId";
             cell.vc = self;
             cell.nav = self.navigationController;
         }
+        [cell.comments addTarget:self action:@selector(commentsClick) forControlEvents:UIControlEventTouchUpInside];
         return cell;
         
     } else if (indexPath.row == 3) {
@@ -257,19 +274,22 @@ static NSString *const twoCommentsCellId = @"TwoCommentsCellId";
     [self thn_networkFavoriteData:[idx object]];
 }
 
-#pragma mark 点赞
-- (void)thn_networkLikeSceneData:(NSString *)idx {
-    self.likeSceneRequest = [FBAPI postWithUrlString:URLLikeScene requestDictionary:@{@"id":idx, @"type":@"12"} delegate:self];
+-(void)commentsClick{
+    self.likeSceneRequest = [FBAPI postWithUrlString:URLLikeScene requestDictionary:@{@"id":@(self.model.idField), @"type":@"12"} delegate:self];
     [self.likeSceneRequest startRequestSuccess:^(FBRequest *request, id result) {
         if ([[result valueForKey:@"success"] isEqualToNumber:@1]) {
             NSString *loveCount = [NSString stringWithFormat:@"%zi", [[[result valueForKey:@"data"] valueForKey:@"love_count"] integerValue]];
-            [self.model setValue:loveCount forKey:@"loveCount"];
-            [self.model setValue:@"1" forKey:@"isLove"];
+            self.model.loveCount = [loveCount integerValue];
+            self.model.isLove = 1;
         }
         
     } failure:^(FBRequest *request, NSError *error) {
         [SVProgressHUD showErrorWithStatus:[error localizedDescription]];
     }];
+}
+
+#pragma mark 点赞
+- (void)thn_networkLikeSceneData:(NSString *)idx {
 }
 
 #pragma mark 取消点赞
@@ -289,15 +309,6 @@ static NSString *const twoCommentsCellId = @"TwoCommentsCellId";
 
 #pragma mark 关注
 - (void)thn_networkFollowSceneData:(NSString *)idx {
-    self.followRequest = [FBAPI postWithUrlString:URLFollowUser requestDictionary:@{@"follow_id":idx} delegate:self];
-    [self.followRequest startRequestSuccess:^(FBRequest *request, id result) {
-        if ([[result valueForKey:@"success"] isEqualToNumber:@1]) {
-            [[self.model valueForKey:@"user"] setValue:@"1" forKey:@"isFollow"];
-        }
-        
-    } failure:^(FBRequest *request, NSError *error) {
-        [SVProgressHUD showErrorWithStatus:[error localizedDescription]];
-    }];
 }
 
 #pragma mark 取消关注

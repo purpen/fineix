@@ -563,13 +563,11 @@ static NSString *sceneCellId = @"THNHomeSenceCollectionViewCell";
         if ([self.type isEqualToNumber:@1]) {
             
         }else if([self.type isEqualToNumber:@2]){
-            if (_sceneListMarr.count == 0) {
-                return;
+            if (_sceneListMarr.count) {
+                THNSceneDetalViewController *vc = [[THNSceneDetalViewController alloc] init];
+                vc.sceneDetalId = _sceneIdMarr[indexPath.row];
+                [self.navigationController pushViewController:vc animated:YES];
             }
-            
-            THNSceneDetalViewController *vc = [[THNSceneDetalViewController alloc] init];
-            vc.sceneDetalId = _sceneIdMarr[indexPath.row];
-            [self.navigationController pushViewController:vc animated:YES];
         }
     }
 }

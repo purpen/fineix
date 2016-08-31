@@ -47,6 +47,7 @@
                                forState:(UIControlStateNormal)
                        placeholderImage:[UIImage imageNamed:@""]];
     
+
     if (sceneModel.title.length == 0 || [sceneModel.title isKindOfClass:[NSNull class]]) {
         self.title.hidden = YES;
         self.suTitle.hidden = YES;
