@@ -9,7 +9,7 @@
 #import "FBViewController.h"
 
 typedef enum {
-    CollectionTypeGood = 10,
+    CollectionTypeGood = 1,
     CollectionTypeSence = 12
 } CollectionType;
 

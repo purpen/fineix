@@ -33,7 +33,7 @@
 
 -(UIView *)lineView{
     if (!_lineView) {
-        _lineView = [[UIView alloc] initWithFrame:CGRectMake(0, 49.5,[UIScreen mainScreen].bounds.size.width, 0.5)];
+        _lineView = [[UIView alloc] initWithFrame:CGRectMake(2, 49.5,[UIScreen mainScreen].bounds.size.width - 4, 0.5)];
         _lineView.backgroundColor = [UIColor grayColor];
         _lineView.alpha = 0.5;
     }

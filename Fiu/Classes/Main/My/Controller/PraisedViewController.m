@@ -12,12 +12,16 @@
 #import "HomeSceneListRow.h"
 #import "UserInfoEntity.h"
 #import "THNHomeSenceCollectionViewCell.h"
+#import "THNSenecCollectionViewCell.h"
+#import "THNSceneDetalViewController.h"
+#import "THNSenceModel.h"
 
 @interface PraisedViewController ()<FBNavigationBarItemsDelegate,UICollectionViewDelegate,UICollectionViewDataSource>
 @pro_strong NSMutableArray      *   sceneListMarr;
 @pro_strong NSMutableArray      *   sceneIdMarr;
 @property (nonatomic, assign) NSInteger currentPageNumber;
 @property (nonatomic, assign) NSInteger totalPageNumber;
+
 /** 主体部分 */
 @property (nonatomic, strong) UICollectionView *myCollectionView;
 @end
@@ -76,9 +80,9 @@ static NSString *sceneCollectionCellId = @"THNHomeSenceCollectionViewCell";
         NSArray * sceneArr = [[result valueForKey:@"data"] valueForKey:@"rows"];
     
         for (NSDictionary * sceneDic in sceneArr) {
-            HomeSceneListRow * homeSceneModel = [[HomeSceneListRow alloc] initWithDictionary:sceneDic];
+            THNSenceModel * homeSceneModel = [THNSenceModel mj_objectWithKeyValues:sceneDic];
             [self.sceneListMarr addObject:homeSceneModel];
-            [self.sceneIdMarr addObject:[NSString stringWithFormat:@"%zi", homeSceneModel.idField]];
+            [self.sceneIdMarr addObject:[NSString stringWithFormat:@"%@", homeSceneModel._id]];
             NSLog(@"啊啦拉  %@",homeSceneModel.title);
         }
         [self.myCollectionView reloadData];
@@ -130,7 +134,7 @@ static NSString *sceneCollectionCellId = @"THNHomeSenceCollectionViewCell";
         _myCollectionView.backgroundColor = [UIColor whiteColor];
         _myCollectionView.delegate = self;
         _myCollectionView.dataSource = self;
-        [_myCollectionView registerNib:[UINib nibWithNibName:sceneCollectionCellId bundle:nil] forCellWithReuseIdentifier:sceneCollectionCellId];
+        [_myCollectionView registerNib:[UINib nibWithNibName:@"THNSenecCollectionViewCell" bundle:nil] forCellWithReuseIdentifier:@"allSceneCollectionViewCellID"];
     }
     return _myCollectionView;
 }
@@ -144,10 +148,9 @@ static NSString *sceneCollectionCellId = @"THNHomeSenceCollectionViewCell";
 }
 
 -(UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath{
-    THNHomeSenceCollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:sceneCollectionCellId forIndexPath:indexPath];
-    if (self.sceneListMarr.count) {
-        cell.model = self.sceneListMarr[indexPath.row];
-    }
+    static NSString * collectionViewCellId = @"allSceneCollectionViewCellID";
+    THNSenecCollectionViewCell * cell = [collectionView dequeueReusableCellWithReuseIdentifier:collectionViewCellId forIndexPath:indexPath];
+    cell.model = self.sceneListMarr[indexPath.row];
     return cell;
 }
 
@@ -156,9 +159,9 @@ static NSString *sceneCollectionCellId = @"THNHomeSenceCollectionViewCell";
 }
 
 -(void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath{
-//    SceneInfoViewController * sceneInfoVC = [[SceneInfoViewController alloc] init];
-//    sceneInfoVC.sceneId = self.sceneIdMarr[indexPath.row];
-//    [self.navigationController pushViewController:sceneInfoVC animated:YES];
+    THNSceneDetalViewController *vc = [[THNSceneDetalViewController alloc] init];
+    vc.sceneDetalId = self.sceneIdMarr[indexPath.row];
+    [self.navigationController pushViewController:vc animated:YES];
 }
 
 

@@ -103,7 +103,7 @@
         [_talentView mas_makeConstraints:^(MASConstraintMaker *make) {
             make.right.mas_equalTo(_headView.mas_right).with.offset(-3/667.0*SCREEN_HEIGHT);
             make.bottom.mas_equalTo(_headView.mas_bottom).with.offset(-3/667.0*SCREEN_HEIGHT);
-            make.size.mas_equalTo(CGSizeMake(17/667.0*SCREEN_HEIGHT, 17/667.0*SCREEN_HEIGHT));
+            make.size.mas_equalTo(CGSizeMake(19/667.0*SCREEN_HEIGHT, 19/667.0*SCREEN_HEIGHT));
         }];
     }
     return _userView;

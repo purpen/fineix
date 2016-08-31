@@ -285,10 +285,10 @@
             [cell.btn1 addSubview:self.tipNumView1];
             [self.tipNumView1 mas_makeConstraints:^(MASConstraintMaker *make) {
                 if ((size.width+9) > 15) {
-                    make.size.mas_equalTo(CGSizeMake(size.width+9, 15));
+                    make.size.mas_equalTo(CGSizeMake(size.width+11, 17));
                     make.right.mas_equalTo(cell.btn1.mas_right).with.offset(5);
                 }else{
-                    make.size.mas_equalTo(CGSizeMake(15, 15));
+                    make.size.mas_equalTo(CGSizeMake(17, 17));
                     make.right.mas_equalTo(cell.btn1.mas_right).with.offset(2);
                 }
                 make.top.mas_equalTo(cell.btn1.mas_top).with.offset(0/667.0*SCREEN_HEIGHT);
@@ -305,10 +305,10 @@
             [cell.btn2 addSubview:self.tipNumView2];
             [self.tipNumView2 mas_makeConstraints:^(MASConstraintMaker *make) {
                 if ((size.width+9) > 15) {
-                    make.size.mas_equalTo(CGSizeMake(size.width+9, 15));
+                    make.size.mas_equalTo(CGSizeMake(size.width+11, 17));
                     make.right.mas_equalTo(cell.btn2.mas_right).with.offset(5);
                 }else{
-                    make.size.mas_equalTo(CGSizeMake(15, 15));
+                    make.size.mas_equalTo(CGSizeMake(17, 17));
                     make.right.mas_equalTo(cell.btn2.mas_right).with.offset(2);
                 }
                 

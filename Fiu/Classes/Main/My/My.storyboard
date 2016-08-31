@@ -120,9 +120,9 @@
                                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" relation="lessThanOrEqual" constant="250" id="Oeg-jx-oOn"/>
-                                                        <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="60" id="RZW-nV-rbQ"/>
+                                                        <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="30" id="RZW-nV-rbQ"/>
                                                     </constraints>
-                                                    <inset key="contentEdgeInsets" minX="15" minY="0.0" maxX="15" maxY="0.0"/>
+                                                    <inset key="contentEdgeInsets" minX="15" minY="2" maxX="15" maxY="0.0"/>
                                                     <state key="normal" title="Button" backgroundImage="paoPao">
                                                         <color key="titleColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                                                     </state>
@@ -131,7 +131,7 @@
                                                     <rect key="frame" x="221" y="30" width="84" height="27"/>
                                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                                     <constraints>
-                                                        <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="60" id="L5O-a7-4yC"/>
+                                                        <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="30" id="L5O-a7-4yC"/>
                                                         <constraint firstAttribute="width" relation="lessThanOrEqual" constant="250" id="mhk-Bl-D2P"/>
                                                     </constraints>
                                                     <inset key="contentEdgeInsets" minX="15" minY="0.0" maxX="15" maxY="0.0"/>

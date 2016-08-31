@@ -19,6 +19,7 @@
 @end
 
 static NSString *const ChangePwdURL = @"/my/modify_password";
+static NSString * const FSPlacerholderColorKeyPath = @"_placeholderLabel.textColor";
 
 @implementation ChanePwdViewController
 
@@ -34,6 +35,8 @@ static NSString *const ChangePwdURL = @"/my/modify_password";
     self.oldPwdView.layer.cornerRadius = 2;
     self.submitBtn.layer.masksToBounds = YES;
     self.submitBtn.layer.cornerRadius = 2;
+    [self.oldPwdTF setValue:self.oldPwdTF.textColor forKeyPath:FSPlacerholderColorKeyPath];
+    [self.pwdTF setValue:self.pwdTF.textColor forKeyPath:FSPlacerholderColorKeyPath];
 }
 
 

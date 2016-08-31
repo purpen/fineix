@@ -16,6 +16,8 @@
 #import "HomeSceneListRow.h"
 #import "THNHomeSenceCollectionViewCell.h"
 #import "THNSceneDetalViewController.h"
+#import "THNSenceModel.h"
+#import "THNSenecCollectionViewCell.h"
 
 @interface THNContentViewController ()<UICollectionViewDelegate,UICollectionViewDataSource>
 {
@@ -66,6 +68,7 @@ static NSString *const URLFiuGoods = @"/favorite/get_new_list";
         _contenView.dataSource = self;
         [_contenView registerNib:[UINib nibWithNibName:sceneCellId bundle:nil] forCellWithReuseIdentifier:sceneCellId];
         [_contenView registerNib:[UINib nibWithNibName:NSStringFromClass([THNGoodsCollectionViewCell class]) bundle:nil] forCellWithReuseIdentifier:goodsCellId];
+        [_contenView registerNib:[UINib nibWithNibName:@"THNSenecCollectionViewCell" bundle:nil] forCellWithReuseIdentifier:@"allSceneCollectionViewCellID"];
     }
     return _contenView;
 }
@@ -131,12 +134,10 @@ static NSString *const URLFiuGoods = @"/favorite/get_new_list";
                 NSArray *sceneArr = [[result valueForKey:@"data"] valueForKey:@"rows"];
                 for (NSDictionary * sceneDic in sceneArr) {
                     NSDictionary *sight = sceneDic[@"sight"];
-                    HomeSceneListRow * homeSceneModel = [[HomeSceneListRow alloc] init];
-                    homeSceneModel.coverUrl = sight[@"cover_url"];
-                    homeSceneModel.title = sight[@"scene_title"];
+                    THNSenceModel * homeSceneModel = [THNSenceModel mj_objectWithKeyValues:sight];;
                     [_sceneListMarr addObject:homeSceneModel];
-                    [_sceneIdMarr addObject:[NSString stringWithFormat:@"%zi", homeSceneModel.idField]];
-                    [self.userIdMarr addObject:[NSString stringWithFormat:@"%zi", homeSceneModel.userId]];
+                    [_sceneIdMarr addObject:[NSString stringWithFormat:@"%@", homeSceneModel._id]];
+//                    [self.userIdMarr addObject:[NSString stringWithFormat:@"%zi", homeSceneModel.userId]];
                 }
                 [self.commentsMarr addObjectsFromArray:[sceneArr valueForKey:@"comments"]];
                 [_contenView reloadData];
@@ -200,8 +201,8 @@ static NSString *const URLFiuGoods = @"/favorite/get_new_list";
                 [self.goodsIdList removeAllObjects];
                 NSArray * goodsArr = [[result valueForKey:@"data"] valueForKey:@"rows"];
                 for (NSDictionary * goodsDic in goodsArr) {
-                    if (![goodsDic[@"scene_product"] isKindOfClass:[NSNull class]]) {
-                        NSDictionary *productDict = goodsDic[@"scene_product"];
+                    if (![goodsDic[@"product"] isKindOfClass:[NSNull class]]) {
+                        NSDictionary *productDict = goodsDic[@"product"];
                         GoodsRow * goodsModel = [[GoodsRow alloc] initWithDictionary:productDict];
                         [self.goodsList addObject:goodsModel];
                         [self.goodsIdList addObject:[NSString stringWithFormat:@"%zi", goodsModel.idField]];
@@ -229,13 +230,10 @@ static NSString *const URLFiuGoods = @"/favorite/get_new_list";
                 NSArray *sceneArr = [[result valueForKey:@"data"] valueForKey:@"rows"];
                 for (NSDictionary * sceneDic in sceneArr) {
                     NSDictionary *sight = sceneDic[@"sight"];
-                    HomeSceneListRow * homeSceneModel = [[HomeSceneListRow alloc] init];
-                    homeSceneModel.coverUrl = sight[@"cover_url"];
-                    homeSceneModel.title = sight[@"scene_title"];
-                    homeSceneModel._id = sight[@"_id"];
+                    THNSenceModel * homeSceneModel = [THNSenceModel mj_objectWithKeyValues:sight];;
                     [_sceneListMarr addObject:homeSceneModel];
-                    [_sceneIdMarr addObject:[NSString stringWithFormat:@"%zi", homeSceneModel.idField]];
-                    [self.userIdMarr addObject:[NSString stringWithFormat:@"%zi", homeSceneModel.userId]];
+                    [_sceneIdMarr addObject:[NSString stringWithFormat:@"%@", homeSceneModel._id]];
+//                    [self.userIdMarr addObject:[NSString stringWithFormat:@"%zi", homeSceneModel.userId]];
                 }
                 [self.commentsMarr addObjectsFromArray:[sceneArr valueForKey:@"comments"]];
                 [_contenView reloadData];
@@ -288,9 +286,11 @@ static NSString *const URLFiuGoods = @"/favorite/get_new_list";
         cell.model = self.goodsList[indexPath.row];
         return cell;
     }else if (self.type == CollectionTypeSence){
-        THNHomeSenceCollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:sceneCellId forIndexPath:indexPath];
+        static NSString * collectionViewCellId = @"allSceneCollectionViewCellID";
+        THNSenecCollectionViewCell * cell = [collectionView dequeueReusableCellWithReuseIdentifier:collectionViewCellId forIndexPath:indexPath];
         cell.model = _sceneListMarr[indexPath.row];
         return cell;
+
     }
     UICollectionViewCell *cell;
     return cell;
@@ -311,7 +311,7 @@ static NSString *const URLFiuGoods = @"/favorite/get_new_list";
     }else{
         
         THNSceneDetalViewController *sceneListVC = [[THNSceneDetalViewController alloc] init];
-        sceneListVC.sceneDetalId = ((HomeSceneListRow*)_sceneListMarr[indexPath.row])._id;
+        sceneListVC.sceneDetalId = _sceneIdMarr[indexPath.row];
         NSLog(@"情境ID %@",((HomeSceneListRow*)_sceneListMarr[indexPath.row])._id);
         [self.navigationController pushViewController:sceneListVC animated:YES];
     }

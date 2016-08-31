@@ -180,6 +180,7 @@ static NSString *const cellId = @"THNCuXiaoCollectionViewCell";
 -(void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath{
     THNCuXiaoDetalViewController *vc = [[THNCuXiaoDetalViewController alloc] init];
     vc.cuXiaoDetalId = ((THNArticleModel*)self.modelAry[indexPath.row])._id;
+    vc.vcType = 1;
     [self.navigationController pushViewController:vc animated:YES];
 }
 

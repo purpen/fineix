@@ -26,12 +26,12 @@
 -(instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier{
     if (self = [super initWithStyle:style reuseIdentifier:reuseIdentifier]) {
         self.selectionStyle = UITableViewCellSelectionStyleNone;
-        self.contentView.backgroundColor = [UIColor whiteColor];
+        self.contentView.backgroundColor = [UIColor blackColor];
         
         
         [self.contentView addSubview:self.headImageView];
         [_headImageView mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.size.mas_equalTo(CGSizeMake(32/667.0*SCREEN_HEIGHT, 32/667.0*SCREEN_HEIGHT));
+            make.size.mas_equalTo(CGSizeMake(32, 32));
             make.top.mas_equalTo(self.mas_top).with.offset(12);
             make.left.mas_equalTo(self.mas_left).with.offset(15/667.0*SCREEN_HEIGHT);
         }];
@@ -61,7 +61,7 @@
         [_imageCollectionView mas_makeConstraints:^(MASConstraintMaker *make) {
             make.left.mas_equalTo(self.mas_left).with.offset(0);
             make.bottom.mas_equalTo(self.mas_bottom).with.offset(0);
-            make.top.mas_equalTo(_headImageView.mas_bottom).with.offset(11/667.0*SCREEN_HEIGHT);
+            make.top.mas_equalTo(_headImageView.mas_bottom).with.offset(11);
             make.right.mas_equalTo(self.mas_right).with.offset(0);
         }];
         
@@ -90,7 +90,7 @@
         } else {
             _levelLabel.font = [UIFont systemFontOfSize:9];
         }
-        _levelLabel.textColor = [UIColor lightGrayColor];
+        _levelLabel.textColor = [UIColor colorWithWhite:1 alpha:0.4];
     }
     return _levelLabel;
 }
@@ -131,12 +131,11 @@
         _follow = [UIButton buttonWithType:UIButtonTypeCustom];
         _follow.layer.masksToBounds = YES;
         _follow.layer.cornerRadius = 5.0f;
-        _follow.layer.borderColor = [UIColor blackColor].CGColor;
+        _follow.layer.borderColor = [UIColor whiteColor].CGColor;
         _follow.layer.borderWidth = 0.5f;
-        _follow.backgroundColor = [UIColor whiteColor];
         [_follow setTitle:NSLocalizedString(@"User_follow", nil) forState:(UIControlStateNormal)];
         [_follow setTitle:NSLocalizedString(@"User_followDone", nil) forState:(UIControlStateSelected)];
-        [_follow setTitleColor:[UIColor colorWithWhite:0 alpha:0.7] forState:UIControlStateNormal];
+        [_follow setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
         [_follow setTitleColor:[UIColor whiteColor] forState:UIControlStateSelected];
         _follow.titleLabel.font = [UIFont systemFontOfSize:12];
 //        [_follow addTarget:self action:@selector(followClick:) forControlEvents:(UIControlEventTouchUpInside)];
@@ -207,7 +206,7 @@
         } else {
             _nameLbael.font = [UIFont systemFontOfSize:11];
         }
-        _nameLbael.textColor = [UIColor colorWithWhite:0 alpha:0.6];
+        _nameLbael.textColor = [UIColor colorWithWhite:1 alpha:1];
     }
     return _nameLbael;
 }

@@ -47,7 +47,7 @@
         [_userLevelLabel mas_makeConstraints:^(MASConstraintMaker *make) {
             make.width.mas_offset(SCREEN_WIDTH-60);
             make.centerX.mas_equalTo(_userView.mas_centerX).with.offset(0);
-            make.bottom.mas_equalTo(_userView.mas_bottom).with.offset(-49/667.0*SCREEN_HEIGHT);
+            make.bottom.mas_equalTo(_userView.mas_bottom).with.offset(-20/667.0*SCREEN_HEIGHT);
         }];
         
         [_userView addSubview:self.idTagsLabel];
@@ -93,7 +93,7 @@
         [_talentView mas_makeConstraints:^(MASConstraintMaker *make) {
             make.right.mas_equalTo(_headView.mas_right).with.offset(-3/667.0*SCREEN_HEIGHT);
             make.bottom.mas_equalTo(_headView.mas_bottom).with.offset(-3/667.0*SCREEN_HEIGHT);
-            make.size.mas_equalTo(CGSizeMake(17/667.0*SCREEN_HEIGHT, 17/667.0*SCREEN_HEIGHT));
+            make.size.mas_equalTo(CGSizeMake(19/667.0*SCREEN_HEIGHT, 19/667.0*SCREEN_HEIGHT));
         }];
     }
     return _userView;

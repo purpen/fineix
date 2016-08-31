@@ -311,8 +311,8 @@ static NSString *searchCellId = @"search";
             cell.follow.tag = indexPath.section;
             if ([model.isLove isEqualToNumber:@0]) {
                 cell.follow.selected = NO;
-                cell.follow.layer.borderColor = [UIColor blackColor].CGColor;
-                cell.follow.backgroundColor = [UIColor whiteColor];
+                cell.follow.layer.borderColor = [UIColor whiteColor].CGColor;
+                cell.follow.backgroundColor = [UIColor blackColor];
             }else if ([model.isLove isEqualToNumber:@1]){
                 cell.follow.selected = YES;
                 cell.follow.layer.borderColor = [UIColor clearColor].CGColor;
@@ -357,21 +357,17 @@ static NSString *searchCellId = @"search";
 -(void)clickFocusBtn:(UIButton*)sender{
      FindFriendModel *model = _userAry[sender.tag];
     if (sender.selected) {
-        FindFriendModel *model = _userAry[sender.tag];
-        FBRequest *request = [FBAPI postWithUrlString:@"/follow/ajax_cancel_follow" requestDictionary:@{@"follow_id":model.userid} delegate:self];
-        [request startRequestSuccess:^(FBRequest *request, id result) {
-            if ([result objectForKey:@"success"]) {
-                [SVProgressHUD showSuccessWithStatus:NSLocalizedString(@"Remove focus on success", nil)];
-                model.isLove = @0;
-                
-                [self.myTbaleView reloadRowsAtIndexPaths:[NSArray arrayWithObjects:[NSIndexPath indexPathForRow:0 inSection:sender.tag], nil] withRowAnimation:UITableViewRowAnimationNone];
-            }else{
-                [SVProgressHUD showErrorWithStatus:NSLocalizedString(@"The operation failure", nil)];
-            }
-        } failure:^(FBRequest *request, NSError *error) {
-            
-        }];
-    }else{
+        
+        MyFansActionSheetViewController *sheetVC = [[MyFansActionSheetViewController alloc] init];
+        sheetVC.findFriendModel = model;
+        sheetVC.modalPresentationStyle = UIModalPresentationOverCurrentContext;
+        sheetVC.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;
+        [self presentViewController:sheetVC animated:YES completion:nil];
+        sheetVC.stopBtn.tag = sender.tag;
+        [sheetVC.stopBtn addTarget:self action:@selector(clickStopBtn:) forControlEvents:UIControlEventTouchUpInside];
+        [sheetVC.cancelBtn addTarget:self action:@selector(clickCancelBtn) forControlEvents:UIControlEventTouchUpInside];
+        
+        }else{
         
         //请求数据
         FBRequest *request = [FBAPI postWithUrlString:@"/follow/ajax_follow" requestDictionary:@{@"follow_id":model.userid} delegate:self];
@@ -390,6 +386,27 @@ static NSString *searchCellId = @"search";
     }
 }
 
+-(void)clickCancelBtn{
+    [self dismissViewControllerAnimated:NO completion:nil];
+}
+
+-(void)clickStopBtn:(UIButton*)sender{
+    [self dismissViewControllerAnimated:YES completion:nil];
+    FindFriendModel *model = _userAry[sender.tag];
+    FBRequest *request = [FBAPI postWithUrlString:@"/follow/ajax_cancel_follow" requestDictionary:@{@"follow_id":model.userid} delegate:self];
+    [request startRequestSuccess:^(FBRequest *request, id result) {
+        if ([result objectForKey:@"success"]) {
+            model.isLove = @0;
+            
+            [self.myTbaleView reloadRowsAtIndexPaths:[NSArray arrayWithObjects:[NSIndexPath indexPathForRow:0 inSection:sender.tag], nil] withRowAnimation:UITableViewRowAnimationNone];
+        }else{
+            [SVProgressHUD showErrorWithStatus:NSLocalizedString(@"The operation failure", nil)];
+        }
+    } failure:^(FBRequest *request, NSError *error) {
+        
+    }];
+}
+
 -(void)viewDidDisappear:(BOOL)animated{
     [super viewDidDisappear:animated];
     [SVProgressHUD dismiss];
@@ -403,7 +420,7 @@ static NSString *searchCellId = @"search";
         if (indexPath.section == 0) {
             return 60/667.0*SCREEN_HEIGHT;
         }else{
-            return SCREEN_WIDTH / 3.0 + 40;
+            return SCREEN_WIDTH / 3.0 + 55;
         }
     }
 }

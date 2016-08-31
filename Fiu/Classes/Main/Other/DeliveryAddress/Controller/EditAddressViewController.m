@@ -68,7 +68,7 @@ static NSString * const FSPlacerholderColorKeyPath = @"_placeholderLabel.textCol
         self.addressSwicth.on = self.deliveryAddress.isDefault;
         self.detailsAddressTF.text = self.deliveryAddress.address;
     } else {
-        self.navViewTitle.text = @"新增收货地址";
+        self.navViewTitle.text = @"新建收货地址";
         [self addBarItemRightBarButton:@"" image:nil isTransparent:NO];
         self.addressTF.hidden = NO;
     }

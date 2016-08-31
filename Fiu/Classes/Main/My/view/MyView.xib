@@ -33,7 +33,7 @@
                         <color key="titleColor" red="0.40000000000000002" green="0.40000000000000002" blue="0.40000000000000002" alpha="1" colorSpace="calibratedRGB"/>
                     </state>
                 </button>
-                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="entr" translatesAutoresizingMaskIntoConstraints="NO" id="aZ5-1w-NGn">
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="go" translatesAutoresizingMaskIntoConstraints="NO" id="aZ5-1w-NGn">
                     <rect key="frame" x="348" y="15" width="8" height="15"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="18" id="Czz-c9-9hk"/>
@@ -46,7 +46,7 @@
                         </mask>
                     </variation>
                 </imageView>
-                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="entr" translatesAutoresizingMaskIntoConstraints="NO" id="NPK-PA-FrA">
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="go" translatesAutoresizingMaskIntoConstraints="NO" id="NPK-PA-FrA">
                     <rect key="frame" x="348" y="60" width="8" height="15"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="18" id="W3d-iy-UYn"/>
@@ -59,9 +59,9 @@
                         </mask>
                     </variation>
                 </imageView>
-                <view alpha="0.5" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="uOq-dU-7lu">
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="uOq-dU-7lu">
                     <rect key="frame" x="0.0" y="0.0" width="375" height="1"/>
-                    <color key="backgroundColor" red="0.40000000000000002" green="0.40000000000000002" blue="0.40000000000000002" alpha="1" colorSpace="calibratedRGB"/>
+                    <color key="backgroundColor" white="0.0" alpha="0.20000000000000001" colorSpace="calibratedWhite"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="0.5" id="FhO-Ja-4bj"/>
                         <constraint firstAttribute="height" relation="lessThanOrEqual" constant="1" id="vHZ-3h-bKj"/>
@@ -72,9 +72,9 @@
                         </mask>
                     </variation>
                 </view>
-                <view alpha="0.5" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="xlq-6S-we2">
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="xlq-6S-we2">
                     <rect key="frame" x="0.0" y="44" width="375" height="1"/>
-                    <color key="backgroundColor" red="0.40000000000000002" green="0.40000000000000002" blue="0.40000000000000002" alpha="1" colorSpace="calibratedRGB"/>
+                    <color key="backgroundColor" white="0.0" alpha="0.20000000000000001" colorSpace="calibratedWhite"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="0.5" id="68B-bi-bti"/>
                     </constraints>
@@ -119,7 +119,7 @@
                 <outlet property="aboutBtn" destination="THd-hN-eB1" id="2Gl-4s-GFQ"/>
                 <outlet property="optionBtn" destination="gMb-fM-xLY" id="Tnb-Us-hmV"/>
             </connections>
-            <point key="canvasLocation" x="365.5" y="1277.5"/>
+            <point key="canvasLocation" x="297.5" y="1328.5"/>
         </view>
         <view contentMode="scaleToFill" id="igV-1N-mkw" customClass="TipNumberView">
             <rect key="frame" x="0.0" y="0.0" width="20" height="20"/>
@@ -144,7 +144,7 @@
             <connections>
                 <outlet property="tipNumLabel" destination="D4h-OM-oV1" id="wWP-V3-M9u"/>
             </connections>
-            <point key="canvasLocation" x="336.5" y="1560.5"/>
+            <point key="canvasLocation" x="317" y="1553"/>
         </view>
         <view contentMode="scaleToFill" id="w17-i4-D6K" customClass="AccountView">
             <rect key="frame" x="0.0" y="0.0" width="375" height="603"/>
@@ -763,7 +763,6 @@
     </objects>
     <resources>
         <image name="FocusNon" width="60" height="60"/>
-        <image name="entr" width="8" height="15"/>
         <image name="go" width="8" height="15"/>
         <image name="qrCode" width="24" height="24"/>
         <image name="scenarioNon" width="60" height="60"/>

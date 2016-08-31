@@ -286,6 +286,9 @@ static NSString *const URLUserIsLogin = @"/user/user_info";
     if ([title isEqualToString:@"保存"]) {
         self.rightBtn.titleEdgeInsets = UIEdgeInsetsMake(0, -20, 0, 0);
     }
+    if ([title isEqualToString:@"删除"]) {
+        self.rightBtn.titleEdgeInsets = UIEdgeInsetsMake(0, -20, 0, 0);
+    }
     if (transparent == NO) {
         self.navView.hidden = NO;
         [self.navView addSubview:self.rightBtn];

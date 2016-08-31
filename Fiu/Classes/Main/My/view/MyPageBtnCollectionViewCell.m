@@ -277,7 +277,7 @@
 -(UILabel *)label8{
     if (!_label8) {
         _label8 = [[UILabel alloc] init];
-        _label8.text = @"礼券";
+        _label8.text = @"红包";
         _label8.textAlignment = NSTextAlignmentCenter;
         if (IS_iOS9) {
             _label8.font = [UIFont fontWithName:@"PingFangSC-Light" size:13];

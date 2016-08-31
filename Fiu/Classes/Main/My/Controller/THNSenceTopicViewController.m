@@ -126,6 +126,8 @@ static NSString *getList = @"/category/getlist";
         userInfo.is_expert = [result objectForKey:@"data"][@"identify"][@"is_expert"];
         [userInfo saveOrUpdate];
         [userInfo updateUserInfoEntity];
+        UserInfoEntity *entity = [UserInfoEntity defaultUserInfoEntity];
+        entity.isLogin = YES;
     } failure:^(FBRequest *request, NSError *error) {
         
     }];

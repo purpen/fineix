@@ -12,6 +12,7 @@
 #import "UserInfoEntity.h"
 #import "IdentityTagModel.h"
 #import "TagsCollectionViewCell.h"
+#import "UIView+FSExtension.h"
 
 #define ITEMS_COLLECTIONVIEW_TAG 7
 #define SELECTED_COLLECTIONVIEW_TAG 8
@@ -27,6 +28,7 @@
 @property (nonatomic,strong) NSMutableArray *modelAry;
 @property(nonatomic ,strong) NSMutableArray *selectedModelAry;
 @property(nonatomic,copy) NSString *label;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *itemsHeghitConstent;
 @end
 
 static NSString *const UpdateInfoURL = @"/my/update_profile";
@@ -51,6 +53,22 @@ static NSString *const UpdateInfoURL = @"/my/update_profile";
         [self.modelAry addObject:model];
     }
     [self.itemsView addSubview:self.itemsCollectionView];
+    switch ((int)SCREEN_HEIGHT) {
+        case 736:
+            self.itemsHeghitConstent.constant = 130;
+            break;
+        case 667:
+            self.itemsHeghitConstent.constant = 160;
+            break;
+        case 568:
+            self.itemsHeghitConstent.constant = 180;
+            break;
+            
+        default:
+            break;
+    }
+    
+    [self.view layoutIfNeeded];
     [self.selectedView addSubview:self.selectedCollectionView];
     self.selectedCollectionView.hidden = YES;
     self.deletAllBtn.hidden = YES;
@@ -92,10 +110,23 @@ static NSString *const UpdateInfoURL = @"/my/update_profile";
     if (!_itemsCollectionView) {
         UICollectionViewFlowLayout *layOut = [[UICollectionViewFlowLayout alloc] init];
         layOut.minimumLineSpacing = 5;
-        layOut.minimumInteritemSpacing = 2;
-        layOut.sectionInset = UIEdgeInsetsMake(0, 3, 0, 3);
+        layOut.minimumInteritemSpacing = 0;
+        layOut.sectionInset = UIEdgeInsetsMake(0, 5, 0, 5);
         [layOut setScrollDirection:UICollectionViewScrollDirectionVertical];
-        _itemsCollectionView = [[UICollectionView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, self.itemsView.frame.size.height) collectionViewLayout:layOut];
+        switch ((int)SCREEN_HEIGHT) {
+            case 736:
+                _itemsCollectionView = [[UICollectionView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 130) collectionViewLayout:layOut];
+                break;
+            case 667:
+                _itemsCollectionView = [[UICollectionView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 160) collectionViewLayout:layOut];
+                break;
+            case 568:
+                _itemsCollectionView = [[UICollectionView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 180) collectionViewLayout:layOut];
+                break;
+                
+            default:
+                break;
+        }
         _itemsCollectionView.showsVerticalScrollIndicator = NO;
         _itemsCollectionView.backgroundColor = [UIColor whiteColor];
         _itemsCollectionView.tag = ITEMS_COLLECTIONVIEW_TAG;

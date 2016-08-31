@@ -156,6 +156,7 @@ static NSString *sceneCellId = @"THNHomeSenceCollectionViewCell";
     [[UIApplication sharedApplication] setStatusBarHidden:NO withAnimation:(UIStatusBarAnimationSlide)];
     self.navigationController.navigationBarHidden = YES;
     self.tabBarController.tabBar.hidden = YES;
+    
     //进行网络请求
     [self netGetData];
     
@@ -214,6 +215,7 @@ static NSString *sceneCellId = @"THNHomeSenceCollectionViewCell";
 
 -(void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
+    
 //    _m = 0;
 //    [_sceneIdMarr removeAllObjects];
 //    [_sceneListMarr removeAllObjects];
@@ -239,12 +241,7 @@ static NSString *sceneCellId = @"THNHomeSenceCollectionViewCell";
 }
 
 -(void)loadMoreDataM{
-    if (_m < _totalM) {
-        [self requestDataForOderListOperation];
-    } else {
-        [self.myCollectionView.mj_footer endRefreshing];
-        self.myCollectionView.mj_footer.hidden = YES;
-    }
+    [self requestDataForOderListOperation];
 }
 
 -(void)loadMoreData{
@@ -273,19 +270,26 @@ static NSString *sceneCellId = @"THNHomeSenceCollectionViewCell";
                 [_sceneIdMarr addObject:[NSString stringWithFormat:@"%zi", homeSceneModel.idField]];
                 [self.userIdMarr addObject:[NSString stringWithFormat:@"%zi", homeSceneModel.userId]];
             }
+            _m = [result[@"data"][@"current_page"] intValue];
+            _totalM = [result[@"data"][@"total_rows"] intValue];
             [self.commentsMarr addObjectsFromArray:[sceneArr valueForKey:@"comments"]];
             [self.myCollectionView reloadData];
-            _m = [[[result objectForKey:@"data"] objectForKey:@"current_page"] intValue];
-            _totalM = [[[result objectForKey:@"data"] objectForKey:@"total_page"] intValue];
             [self.myCollectionView.mj_footer endRefreshing];
-            self.myCollectionView.mj_footer.hidden = _m == _totalM;
+            [self checkFooterState];
         } failure:^(FBRequest *request, NSError *error) {
             [SVProgressHUD showInfoWithStatus:[error localizedDescription]];
         }];
     }
 }
 
-
+-(void)checkFooterState{
+    self.myCollectionView.mj_footer.hidden = _sceneListMarr.count == 0;
+    if (_sceneListMarr.count == _totalM) {
+        self.myCollectionView.mj_footer.hidden = YES;
+    }else{
+        [self.myCollectionView.mj_footer endRefreshing];
+    }
+}
 
 -(void)netGetData{
     FBRequest *request = [FBAPI postWithUrlString:@"/user/user_info" requestDictionary:@{@"user_id":self.userId} delegate:self];
