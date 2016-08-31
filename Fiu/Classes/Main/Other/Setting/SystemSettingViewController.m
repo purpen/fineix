@@ -263,7 +263,7 @@ static NSString *const logOut = @"/auth/logout";
 }
 
 -(void)viewDidDisappear:(BOOL)animated{
-    [self.navigationController popViewControllerAnimated:YES];
+    
 }
 
 -(void)resetNotificationState{

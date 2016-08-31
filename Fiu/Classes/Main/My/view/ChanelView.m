@@ -19,7 +19,11 @@
 */
 
 +(instancetype)getChanelView{
-    return [[NSBundle mainBundle] loadNibNamed:@"chanel" owner:nil options:nil][0];
+    ChanelView *view = [[NSBundle mainBundle] loadNibNamed:@"chanel" owner:nil options:nil][0];
+    view.focusBtn.enabled = NO;
+    view.fansBtn.enabled = NO;
+    view.scenceBtn.enabled = NO;
+    return view;
 }
 
 @end

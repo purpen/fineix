@@ -81,6 +81,8 @@
 }
 
 
+
+
 - (void)requestDataForOderListOperation
 {
     
@@ -177,6 +179,7 @@
 -(void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
     //self.navigationController.navigationBarHidden = NO;
+    [UIApplication sharedApplication].statusBarStyle = UIStatusBarStyleLightContent;
 }
 
 -(void)leftBarItemSelected{

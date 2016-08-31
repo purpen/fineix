@@ -25,10 +25,9 @@ static NSString *const ChangePwdURL = @"/my/modify_password";
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
-    self.delegate = self;
+//    self.delegate = self;
     self.navViewTitle.text = @"修改密码";
     
-    //
     self.pwdView.layer.masksToBounds = YES;
     self.pwdView.layer.cornerRadius = 2;
     self.oldPwdView.layer.masksToBounds = YES;
@@ -55,7 +54,7 @@ static NSString *const ChangePwdURL = @"/my/modify_password";
         if ([[result objectForKey:@"success"] isEqualToNumber:@1]) {
             
             [SVProgressHUD showSuccessWithStatus:message];
-            [self.navigationController popViewControllerAnimated:YES];
+//            [self.navigationController popViewControllerAnimated:YES];
         } else {
             [SVProgressHUD showInfoWithStatus:message];
         }

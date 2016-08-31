@@ -79,6 +79,7 @@ static NSString *sceneCollectionCellId = @"THNHomeSenceCollectionViewCell";
             HomeSceneListRow * homeSceneModel = [[HomeSceneListRow alloc] initWithDictionary:sceneDic];
             [self.sceneListMarr addObject:homeSceneModel];
             [self.sceneIdMarr addObject:[NSString stringWithFormat:@"%zi", homeSceneModel.idField]];
+            NSLog(@"啊啦拉  %@",homeSceneModel.title);
         }
         [self.myCollectionView reloadData];
         _currentPageNumber = [[[result valueForKey:@"data"] valueForKey:@"current_page"] integerValue];

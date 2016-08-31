@@ -35,7 +35,7 @@ static NSString *const BonusCellIdentifier = @"bonusCell";
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
     self.delegate = self;
-    self.navViewTitle.text = @"我的红包";
+    self.navViewTitle.text = @"我的礼券";
     self.bonusTableView.delegate = self;
     self.bonusTableView.dataSource = self;
     

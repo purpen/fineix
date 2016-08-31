@@ -352,7 +352,7 @@
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="y9Z-5F-6o0">
                             <rect key="frame" x="11" y="7" width="352" height="30"/>
                             <connections>
-                                <action selector="changePwd:" destination="-1" eventType="touchUpInside" id="g5l-Ec-TMV"/>
+                                <action selector="changePwd:" destination="-1" eventType="touchUpInside" id="Gvk-gy-Z9z"/>
                             </connections>
                         </button>
                     </subviews>

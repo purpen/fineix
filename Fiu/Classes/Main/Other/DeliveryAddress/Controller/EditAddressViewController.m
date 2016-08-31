@@ -40,12 +40,19 @@
 
 static NSString *const EditAddressURL = @"/shopping/ajax_address";
 static NSString *const DeleteAddressURL = @"/shopping/remove_address";
+static NSString * const FSPlacerholderColorKeyPath = @"_placeholderLabel.textColor";
 
 @implementation EditAddressViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.delegate = self;
+    
+    [self changePlaceHolderColor:self.nameTF];
+    [self changePlaceHolderColor:self.phoneNumTF];
+    [self changePlaceHolderColor:self.addressTF];
+    [self changePlaceHolderColor:self.detailsAddressTF];
+    [self changePlaceHolderColor:self.zipTF];
     
     // Do any additional setup after loading the view from its nib.
     if (self.deliveryAddress) {
@@ -69,6 +76,10 @@ static NSString *const DeleteAddressURL = @"/shopping/remove_address";
     self.cityId = self.deliveryAddress.city;
     //通知
     //[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyBoardWillChangeFrame:) name:UIKeyboardWillChangeFrameNotification object:nil];
+}
+
+-(void)changePlaceHolderColor:(UITextField*)tf{
+    [tf setValue:tf.textColor forKeyPath:FSPlacerholderColorKeyPath];
 }
 
 -(BOOL)textFieldShouldReturn:(UITextField *)textField{

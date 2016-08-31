@@ -260,7 +260,7 @@ static NSString *sceneCellId = @"THNHomeSenceCollectionViewCell";
 - (void)requestDataForOderListOperation
 {
 //    self.myCollectionView.mj_footer.hidden = YES;
-    if ([self.type isEqualToNumber:@1]) {
+    if ([self.type isEqualToNumber:@2]) {
         //进行场景的网络请求
 //        [SVProgressHUD show];
         FBRequest *request = [FBAPI postWithUrlString:@"/scene_sight/" requestDictionary:@{@"page":@(_m+1),@"size":@10,@"sort":@0,@"user_id":self.userId} delegate:self];

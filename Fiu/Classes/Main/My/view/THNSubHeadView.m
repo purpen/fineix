@@ -35,7 +35,7 @@
         [_haveBtn setImage:[UIImage imageNamed:@"go"] forState:UIControlStateNormal];
         
         _haveBtn.contentEdgeInsets = UIEdgeInsetsMake(0, -100 / 667.0 * SCREEN_HEIGHT, 0, 0);
-        _haveBtn.titleEdgeInsets = UIEdgeInsetsMake(0, -142 / 667.0 * SCREEN_HEIGHT, 0, 0);
+        _haveBtn.titleEdgeInsets = UIEdgeInsetsMake(0, -147 / 667.0 * SCREEN_HEIGHT, 0, 0);
         _haveBtn.imageEdgeInsets = UIEdgeInsetsMake(0, [UIScreen mainScreen].bounds.size.width + 60 / 667.0 * SCREEN_HEIGHT, 0, 0);
         [_haveBtn setTitleColor:[UIColor colorWithHexString:@"#222222"] forState:UIControlStateNormal];
         _haveBtn.titleLabel.font = [UIFont systemFontOfSize:13];
