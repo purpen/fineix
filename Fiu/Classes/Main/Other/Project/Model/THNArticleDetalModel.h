@@ -38,5 +38,7 @@
 @property(nonatomic,copy) NSString *title;
 /**  */
 @property(nonatomic,copy) NSString *summary;
+/**  */
+@property(nonatomic,copy) NSString *comment_count;
 
 @end

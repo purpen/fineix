@@ -139,7 +139,7 @@
             switch (type) {
                 case 1:
                     //网址
-                    [[UIApplication sharedApplication] openURL:[NSURL URLWithString:str]];
+                    [[UIApplication sharedApplication] openURL:[NSURL URLWithString:infoId]];
                     break;
                 case 11:{
                     //情境

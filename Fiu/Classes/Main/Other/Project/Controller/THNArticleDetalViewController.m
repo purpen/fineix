@@ -62,7 +62,7 @@
             NSLog(@"文章详情 %@",result);
             self.model = [THNArticleDetalModel mj_objectWithKeyValues:result[@"data"]];
             [self.lookBtn setTitle:[NSString stringWithFormat:@"%@",self.model.view_count] forState:UIControlStateNormal];
-            [self.commentBtn setTitle:[NSString stringWithFormat:@"%@",self.model.favorite_count] forState:UIControlStateNormal];
+            [self.commentBtn setTitle:[NSString stringWithFormat:@"%@",self.model.comment_count] forState:UIControlStateNormal];
             [self.shareBtn setTitle:[NSString stringWithFormat:@"%@",self.model.share_count] forState:UIControlStateNormal];
         }
     } failure:nil];
@@ -142,7 +142,7 @@
             switch (type) {
                 case 1:
                     //网址
-                    [[UIApplication sharedApplication] openURL:[NSURL URLWithString:str]];
+                    [[UIApplication sharedApplication] openURL:[NSURL URLWithString:infoId]];
                     break;
                 case 11:{
                     //情境
