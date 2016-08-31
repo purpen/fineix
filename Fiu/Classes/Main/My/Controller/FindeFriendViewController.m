@@ -164,8 +164,10 @@ static NSString *searchCellId = @"search";
         _myTbaleView.frame = CGRectMake(0, 64, SCREEN_WIDTH, SCREEN_HEIGHT-64);
         CGRect frame = self.searchView.searchTF.frame;
         frame.size.width = SCREEN_WIDTH - 15 * 2;
+        frame.size.height = 35;
         self.searchView.searchTF.frame = frame;
         self.searchView.cancelBtn.hidden = YES;
+        self.searchView.searchTF.backgroundColor = [UIColor whiteColor];
         self.navView.y = 0;
     } completion:^(BOOL finished) {
         
@@ -205,10 +207,12 @@ static NSString *searchCellId = @"search";
         
         CGRect frame = self.searchView.searchTF.frame;
         frame.size.width = SCREEN_WIDTH - 15 - 15 - 10 - 35;
+        frame.size.height = 30;
         self.searchView.searchTF.frame = frame;
+        self.searchView.searchTF.backgroundColor = [UIColor colorWithHexString:@"#f1f1f1"];
         
         self.searchView.cancelBtn.hidden = NO;
-        
+        self.searchView.cancelBtn.centerY = self.searchView.searchTF.centerY;
         window.hidden = NO;
         self.window = window;
         
@@ -302,6 +306,7 @@ static NSString *searchCellId = @"search";
             if (cell == nil) {
                 cell = [[FriendTableViewCell alloc] init];
             }
+            cell.navi = self.navigationController;
             FindFriendModel *model = _userAry[indexPath.section];
             cell.follow.tag = indexPath.section;
             if ([model.isLove isEqualToNumber:@0]) {

@@ -93,7 +93,7 @@
     if (str.length <= 13) {
         NSString *a = [str substringWithRange:NSMakeRange(0, str.length)];
         self.titleTwoLabel.text = a;
-        self.titleTwoLabel.text = @"";
+        self.tittleLabel.text = @"";
     }else if (str.length > 13){
         NSString *a = [str substringWithRange:NSMakeRange(0, 12)];
         NSString *b = [NSString stringWithFormat:@"%@ ",a];
