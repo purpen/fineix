@@ -25,6 +25,7 @@
 @pro_strong FBRequest *followRequest;
 @pro_strong FBRequest *cancelFollowRequest;
 @pro_strong FBRequest *favoriteRequest;
+@pro_strong FBRequest *cancelFavoriteRequest;
 @pro_strong FBRequest *hotUserRequest;
 
 @pro_strong FBRollImages *homerollView;

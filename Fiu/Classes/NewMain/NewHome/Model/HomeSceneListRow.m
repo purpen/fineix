@@ -60,6 +60,9 @@
     if(![dictionary[@"is_love"] isKindOfClass:[NSNull class]]){
         self.isLove = [dictionary[@"is_love"] integerValue];
     }
+    if(![dictionary[@"is_favorite"] isKindOfClass:[NSNull class]]){
+        self.isFavorite = [dictionary[@"is_favorite"] integerValue];
+    }
 
 	if(![dictionary[@"location"] isKindOfClass:[NSNull class]]){
 		self.location = [[HomeSceneListLocation alloc] initWithDictionary:dictionary[@"location"]];

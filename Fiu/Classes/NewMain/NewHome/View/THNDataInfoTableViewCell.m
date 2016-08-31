@@ -17,6 +17,7 @@
     NSInteger _loveCount;
     HomeSceneListRow *_sceneModel;
     NSInteger _type;
+    NSInteger _isFavorite;
 }
 
 - (instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier {
@@ -32,6 +33,7 @@
 
 #pragma mark - setModel;
 - (void)thn_setSceneData:(HomeSceneListRow *)dataModel type:(NSInteger)type {
+    _isFavorite = dataModel.isFavorite;
     _type = type;
     _sceneModel = dataModel;
     [self.look setTitle:[NSString stringWithFormat:@"%zi", dataModel.viewCount] forState:(UIControlStateNormal)];
@@ -110,10 +112,15 @@
     FBAlertViewController * alertVC = [[FBAlertViewController alloc] init];
     alertVC.modalPresentationStyle = UIModalPresentationOverFullScreen;
     alertVC.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;
-    [alertVC initFBAlertVcStyle:NO];
+    [alertVC initFBAlertVcStyle:NO isFavorite:_isFavorite];
     alertVC.targetId = _sceneId;
     alertVC.favoriteTheScene = ^(NSString *sceneId) {
+        _isFavorite = 1;
         [[NSNotificationCenter defaultCenter] postNotificationName:@"favoriteTheScene" object:sceneId];
+    };
+    alertVC.cancelFavoriteTheScene = ^(NSString *sceneId) {
+        _isFavorite = 0;
+        [[NSNotificationCenter defaultCenter] postNotificationName:@"cancelFavoriteTheScene" object:sceneId];
     };
     [self.vc presentViewController:alertVC animated:YES completion:nil];
 }
