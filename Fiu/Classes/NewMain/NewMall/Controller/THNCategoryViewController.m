@@ -33,35 +33,35 @@ static NSString *const goodsListCellId = @"GoodsListCellId";
 - (void)viewDidLoad {
     [super viewDidLoad];
 
-    [self thn_networkCategoryData];
+    [self thn_networkGoodsListData:@""];
     [self setViewUI];
 }
 
 #pragma mark - 网络请求
-#pragma mark 子分类
-- (void)thn_networkCategoryData {
-    self.childTagsRequest = [FBAPI getWithUrlString:URLChildTags requestDictionary:@{@"id":self.categoryId} delegate:self];
-    [self.childTagsRequest startRequestSuccess:^(FBRequest *request, id result) {
-        self.childTagsId = [NSMutableArray arrayWithArray:[[result valueForKey:@"data"] valueForKey:@"tags"]];
-        if (self.childTagsId.count) {
-            _tagId = self.childTagsId[0];
-            [self thn_networkGoodsListData:_tagId];
-            self.menuView.menuTitle = self.childTagsId;
-            [self.menuView updateMenuButtonData];
-            [self.menuView updateMenuBtnState:0];
-        }
-        
-    } failure:^(FBRequest *request, NSError *error) {
-        [SVProgressHUD showErrorWithStatus:[error localizedDescription]];
-    }];
-}
+//#pragma mark 子分类
+//- (void)thn_networkCategoryData {
+//    self.childTagsRequest = [FBAPI getWithUrlString:URLChildTags requestDictionary:@{@"id":self.categoryId} delegate:self];
+//    [self.childTagsRequest startRequestSuccess:^(FBRequest *request, id result) {
+//        self.childTagsId = [NSMutableArray arrayWithArray:[[result valueForKey:@"data"] valueForKey:@"tags"]];
+//        if (self.childTagsId.count) {
+//            _tagId = self.childTagsId[0];
+//            [self thn_networkGoodsListData:_tagId];
+//            self.menuView.menuTitle = self.childTagsId;
+//            [self.menuView updateMenuButtonData];
+//            [self.menuView updateMenuBtnState:0];
+//        }
+//        
+//    } failure:^(FBRequest *request, NSError *error) {
+//        [SVProgressHUD showErrorWithStatus:[error localizedDescription]];
+//    }];
+//}
 
 #pragma mark 商品列表
 - (void)thn_networkGoodsListData:(NSString *)tagId {
     [SVProgressHUD show];
     self.goodsListRequest = [FBAPI getWithUrlString:URLMallList requestDictionary:@{@"page":@(self.currentpageNum + 1),
-                                                                                    @"size":@10,
-                                                                            @"category_tags":tagId} delegate:self];
+                                                                                    @"size":@"category_id",
+                                                                            @"category_id":self.categoryId} delegate:self];
     [self.goodsListRequest startRequestSuccess:^(FBRequest *request, id result) {
         NSArray *goodsArr = [[result valueForKey:@"data"] valueForKey:@"rows"];
         for (NSDictionary * goodsDic in goodsArr) {
@@ -131,27 +131,27 @@ static NSString *const goodsListCellId = @"GoodsListCellId";
 #pragma mark - setUI
 - (void)setViewUI {
     [self.view addSubview:self.goodsList];
-    [self.view addSubview:self.menuView];
+//    [self.view addSubview:self.menuView];
 }
 
 #pragma mark - init
-- (FBMenuView *)menuView {
-    if (!_menuView) {
-        _menuView = [[FBMenuView alloc] initWithFrame:CGRectMake(0, 64, SCREEN_WIDTH, 44)];
-        _menuView.delegate = self;
-        _menuView.defaultColor = @"#666666";
-    }
-    return _menuView;
-}
-
-- (void)menuItemSelectedWithIndex:(NSInteger)index {
-    _tagId = self.childTagsId[index];
-    
-    [self.goodsIdMarr removeAllObjects];
-    [self.goodsListMarr removeAllObjects];
-    self.currentpageNum = 0;
-    [self thn_networkGoodsListData:_tagId];
-}
+//- (FBMenuView *)menuView {
+//    if (!_menuView) {
+//        _menuView = [[FBMenuView alloc] initWithFrame:CGRectMake(0, 64, SCREEN_WIDTH, 44)];
+//        _menuView.delegate = self;
+//        _menuView.defaultColor = @"#666666";
+//    }
+//    return _menuView;
+//}
+//
+//- (void)menuItemSelectedWithIndex:(NSInteger)index {
+//    _tagId = self.childTagsId[index];
+//    
+//    [self.goodsIdMarr removeAllObjects];
+//    [self.goodsListMarr removeAllObjects];
+//    self.currentpageNum = 0;
+//    [self thn_networkGoodsListData:_tagId];
+//}
 
 - (UICollectionView *)goodsList {
     if (!_goodsList) {
@@ -161,7 +161,7 @@ static NSString *const goodsListCellId = @"GoodsListCellId";
         flowLayou.sectionInset = UIEdgeInsetsMake(15, 15, 15, 15);
         flowLayou.scrollDirection = UICollectionViewScrollDirectionVertical;
         
-        _goodsList = [[UICollectionView alloc] initWithFrame:CGRectMake(0, 108, SCREEN_WIDTH, SCREEN_HEIGHT - 108)
+        _goodsList = [[UICollectionView alloc] initWithFrame:CGRectMake(0, 64, SCREEN_WIDTH, SCREEN_HEIGHT - 64)
                                         collectionViewLayout:flowLayou];
         _goodsList.showsVerticalScrollIndicator = NO;
         _goodsList.delegate = self;
