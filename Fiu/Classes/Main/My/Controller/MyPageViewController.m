@@ -131,6 +131,7 @@
 
 -(void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
+    [self.myCollectionView scrollToItemAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0] atScrollPosition:UICollectionViewScrollPositionTop animated:YES];
     self.delegate = self;
     [self thn_addNavLogoImage];
 //    [self thn_addBarItemLeftBarButton:nil image:@"my_riLi"];
