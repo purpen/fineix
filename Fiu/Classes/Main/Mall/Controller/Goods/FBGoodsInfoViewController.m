@@ -138,7 +138,7 @@ static NSString *const URlCancelCollect = @"/favorite/ajax_cancel_favorite";
 #pragma mark 商品收藏
 - (void)networkCollectGoods:(UIButton *)button {
     if (button.selected == NO) {
-        self.collectRequest = [FBAPI postWithUrlString:URlGoodsCollect requestDictionary:@{@"id":self.goodsID, @"type":@"10"} delegate:self];
+        self.collectRequest = [FBAPI postWithUrlString:URlGoodsCollect requestDictionary:@{@"id":self.goodsID, @"type":@"1"} delegate:self];
         [self.collectRequest startRequestSuccess:^(FBRequest *request, id result) {
             button.selected = YES;
             [SVProgressHUD showSuccessWithStatus:NSLocalizedString(@"collectSuccess", nil)];
@@ -148,7 +148,7 @@ static NSString *const URlCancelCollect = @"/favorite/ajax_cancel_favorite";
         }];
         
     } else if (button.selected == YES) {
-        self.cancelCollectRequest = [FBAPI postWithUrlString:URlCancelCollect requestDictionary:@{@"id":self.goodsID, @"type":@"10"} delegate:self];
+        self.cancelCollectRequest = [FBAPI postWithUrlString:URlCancelCollect requestDictionary:@{@"id":self.goodsID, @"type":@"1"} delegate:self];
         [self.cancelCollectRequest startRequestSuccess:^(FBRequest *request, id result) {
             button.selected = NO;
             [SVProgressHUD showSuccessWithStatus:NSLocalizedString(@"cancelCollect", nil)];

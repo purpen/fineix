@@ -31,7 +31,7 @@
     self.title.text = model.title;
     if (model.type == 1) {
         self.peopleNum.hidden = NO;
-        [self.peopleNum setTitle:[NSString stringWithFormat:@"%zi人阅读", model.attendCount] forState:(UIControlStateNormal)];
+        [self.peopleNum setTitle:[NSString stringWithFormat:@"%zi人阅读", model.viewCount] forState:(UIControlStateNormal)];
     } else if (model.type == 2) {
         self.peopleNum.hidden = NO;
         [self.peopleNum setTitle:[NSString stringWithFormat:@"%zi人参加", model.attendCount] forState:(UIControlStateNormal)];
