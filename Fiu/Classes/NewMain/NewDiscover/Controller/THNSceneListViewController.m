@@ -267,7 +267,7 @@ static NSString *const twoCommentsCellId = @"TwoCommentsCellId";
         THNUserInfoTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:userInfoCellId];
         cell = [[THNUserInfoTableViewCell alloc] initWithStyle:(UITableViewCellStyleDefault) reuseIdentifier:userInfoCellId];
         if (self.sceneListMarr.count) {
-            [cell thn_setHomeSceneUserInfoData:self.sceneListMarr[indexPath.section]];
+            [cell thn_setHomeSceneUserInfoData:self.sceneListMarr[indexPath.section] userId:[self getLoginUserID]];
         }
         cell.nav = self.navigationController;
         return cell;

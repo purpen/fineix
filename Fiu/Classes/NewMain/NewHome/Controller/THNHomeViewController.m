@@ -176,7 +176,7 @@ static NSString *const allCommentsCellId = @"AllCommentsCellId";
 
 #pragma mark 专题
 - (void)thn_networkSubjectData {
-    self.subjectRequest = [FBAPI getWithUrlString:URLSubject requestDictionary:@{@"page":@"1", @"size":@"4", @"fine":@"1"} delegate:self];
+    self.subjectRequest = [FBAPI getWithUrlString:URLSubject requestDictionary:@{@"page":@"1", @"size":@"4", @"fine":@"1", @"sort":@"2"} delegate:self];
     [self.subjectRequest startRequestSuccess:^(FBRequest *request, id result) {
         NSArray *subArr = [[result valueForKey:@"data"] valueForKey:@"rows"];
         for (NSDictionary *subDic in subArr) {
@@ -420,7 +420,7 @@ static NSString *const allCommentsCellId = @"AllCommentsCellId";
             THNUserInfoTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:userInfoCellId];
             cell = [[THNUserInfoTableViewCell alloc] initWithStyle:(UITableViewCellStyleDefault) reuseIdentifier:userInfoCellId];
             if (self.sceneListMarr.count) {
-                [cell thn_setHomeSceneUserInfoData:self.sceneListMarr[indexPath.section - 1]];
+                [cell thn_setHomeSceneUserInfoData:self.sceneListMarr[indexPath.section - 1] userId:[self getLoginUserID]];
                 if (indexPath.section == _index) {
                     if (self.hotUserMarr.count) {
                         [cell thn_setHotUserListData:self.hotUserMarr];

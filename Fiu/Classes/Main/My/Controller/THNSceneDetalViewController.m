@@ -112,7 +112,7 @@ static NSString *const twoCommentsCellId = @"TwoCommentsCellId";
     if (indexPath.row == 0) {
         THNUserInfoTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:userInfoCellId];
         cell = [[THNUserInfoTableViewCell alloc] initWithStyle:(UITableViewCellStyleDefault) reuseIdentifier:userInfoCellId];
-        [cell thn_setHomeSceneUserInfoData:self.model];
+        [cell thn_setHomeSceneUserInfoData:self.model userId:[self getLoginUserID]];
         return cell;
         
     } else if (indexPath.row == 1) {

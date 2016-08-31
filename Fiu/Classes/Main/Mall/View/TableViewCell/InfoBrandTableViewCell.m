@@ -27,15 +27,6 @@
 
 #pragma mark -
 - (void)setCellUI {
-    UILabel *botLine = [[UILabel alloc] init];
-    botLine.backgroundColor = [UIColor colorWithHexString:@"#666666" alpha:0.2];
-    [self addSubview:botLine];
-    [botLine mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.size.mas_equalTo(CGSizeMake(SCREEN_WIDTH, 1));
-        make.left.equalTo(self.mas_left).with.offset(0);
-        make.top.equalTo(self.mas_top).with.offset(0);
-    }];
-    
     [self addSubview:self.brandImg];
     [_brandImg mas_makeConstraints:^(MASConstraintMaker *make) {
         make.size.mas_equalTo(CGSizeMake(50, 50));
@@ -55,6 +46,15 @@
         make.size.mas_equalTo(CGSizeMake(8, 15.5));
         make.centerY.equalTo(self);
         make.right.equalTo(self.mas_right).with.offset(-15);
+    }];
+    
+    UILabel *botLine = [[UILabel alloc] init];
+    botLine.backgroundColor = [UIColor colorWithHexString:@"#666666" alpha:0.2];
+    [self addSubview:botLine];
+    [botLine mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.size.mas_equalTo(CGSizeMake(SCREEN_WIDTH, 1));
+        make.left.equalTo(self.mas_left).with.offset(0);
+        make.bottom.equalTo(self.mas_bottom).with.offset(0);
     }];
 }
 
