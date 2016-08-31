@@ -346,6 +346,7 @@ static NSString *const allCommentsCellId = @"AllCommentsCellId";
     [self.sceneIdMarr removeAllObjects];
     [self.commentsMarr removeAllObjects];
     [self.subjectMarr removeAllObjects];
+    [self.commentsCountMarr removeAllObjects];
     [self thn_networkSceneListData];
     [self thn_networkRollImageData];
     [self thn_networkSubjectData];

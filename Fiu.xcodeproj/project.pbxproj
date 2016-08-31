@@ -604,6 +604,7 @@
 		D8E8FFC11D75388D00DDC3E0 /* FiuSceneLocation.m in Sources */ = {isa = PBXBuildFile; fileRef = D8E8FFB71D75388D00DDC3E0 /* FiuSceneLocation.m */; };
 		D8E8FFC21D75388D00DDC3E0 /* FiuSceneRow.m in Sources */ = {isa = PBXBuildFile; fileRef = D8E8FFB91D75388D00DDC3E0 /* FiuSceneRow.m */; };
 		D8E8FFC51D756D3600DDC3E0 /* THNHotActionCollectionReusableView.m in Sources */ = {isa = PBXBuildFile; fileRef = D8E8FFC41D756D3600DDC3E0 /* THNHotActionCollectionReusableView.m */; };
+		D8E8FFC81D76D01B00DDC3E0 /* TagFlowLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = D8E8FFC71D76D01B00DDC3E0 /* TagFlowLayout.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -1668,6 +1669,8 @@
 		D8E8FFB91D75388D00DDC3E0 /* FiuSceneRow.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FiuSceneRow.m; sourceTree = "<group>"; };
 		D8E8FFC31D756D3600DDC3E0 /* THNHotActionCollectionReusableView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THNHotActionCollectionReusableView.h; sourceTree = "<group>"; };
 		D8E8FFC41D756D3600DDC3E0 /* THNHotActionCollectionReusableView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THNHotActionCollectionReusableView.m; sourceTree = "<group>"; };
+		D8E8FFC61D76D01B00DDC3E0 /* TagFlowLayout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TagFlowLayout.h; sourceTree = "<group>"; };
+		D8E8FFC71D76D01B00DDC3E0 /* TagFlowLayout.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TagFlowLayout.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -3847,6 +3850,8 @@
 		D851744A1D5878C8005F5722 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				D8E8FFC61D76D01B00DDC3E0 /* TagFlowLayout.h */,
+				D8E8FFC71D76D01B00DDC3E0 /* TagFlowLayout.m */,
 				D80878D41D6AD18E00C1FFA0 /* THNMallNewGoodsCollectionViewCell.h */,
 				D80878D51D6AD18E00C1FFA0 /* THNMallNewGoodsCollectionViewCell.m */,
 				D80878D71D6AD4C800C1FFA0 /* NewGoodsCollectionViewCell.h */,
@@ -4521,6 +4526,7 @@
 				D8C095021D752DEC00908491 /* FiuPeopleListViewController.m in Sources */,
 				1F2A90AF1CF40277005116C7 /* OptionViewController.m in Sources */,
 				1F2A8FFB1CF40277005116C7 /* ShieldingViewController.m in Sources */,
+				D8E8FFC81D76D01B00DDC3E0 /* TagFlowLayout.m in Sources */,
 				1F2A8FAD1CF40277005116C7 /* FBOrderTimeViewController.m in Sources */,
 				D85174371D5871C5005F5722 /* THNNavigationController.m in Sources */,
 				1FF36EAD1D50A7C500EB3C93 /* SearchPepoleTableViewCell.m in Sources */,

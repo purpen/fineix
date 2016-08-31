@@ -36,7 +36,7 @@
     
     [self addSubview:self.brandTitle];
     [_brandTitle mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.size.mas_equalTo(CGSizeMake(200, 17));
+        make.size.mas_equalTo(CGSizeMake(200, 20));
         make.centerY.equalTo(self);
         make.left.equalTo(_brandImg.mas_right).with.offset(10);
     }];
