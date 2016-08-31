@@ -43,6 +43,7 @@ static NSString *const URLSearchList = @"/search/getlist";
     
     if (self.keyword.length > 0) {
         [self beginSearch:self.keyword];
+        self.searchView.searchInputBox.text = self.keyword;
     }
 }
 

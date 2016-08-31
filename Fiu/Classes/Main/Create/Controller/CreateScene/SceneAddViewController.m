@@ -412,6 +412,7 @@ static NSString *const URLUserAddGoods = @"/scene_product/add";
             ReleaseViewController * releaseVC = [[ReleaseViewController alloc] init];
             releaseVC.bgImg = [self generateImage:self.filtersImageView];
 //            releaseVC.bgImg = self.filtersImageView.image;
+            releaseVC.actionId = self.actionId;
             releaseVC.goodsType = self.goodsTypeData;
             releaseVC.goodsTitle = self.goodsTitleData;
             releaseVC.goodsId = self.goodsIdData;

@@ -10,6 +10,7 @@
 #import "GoodsSceneCollectionViewCell.h"
 #import "THNLoginRegisterViewController.h"
 #import "FBGoodsInfoViewController.h"
+#import "TagFlowLayout.h"
 
 @interface FBBuyGoodsViewController ()
 
@@ -90,7 +91,7 @@
         [_buyView addSubview:self.buyingBtn];
         [_buyView addSubview:self.addCarBtn];
         [_buyView addSubview:self.goodsImg];
-        [_buyView addSubview:self.goodsTitle];
+//        [_buyView addSubview:self.goodsTitle];
         [_buyView addSubview:self.goodsPrice];
         [_buyView addSubview:self.goodsChoose];
         [_buyView addSubview:lineLab];
@@ -231,21 +232,20 @@
 #pragma mark - 颜色分类
 - (UICollectionView *)goodsColorView {
     if (!_goodsColorView) {
-        UICollectionViewFlowLayout * flowLayout = [[UICollectionViewFlowLayout alloc] init];
+        TagFlowLayout * flowLayout = [[TagFlowLayout alloc] init];
         flowLayout.sectionInset = UIEdgeInsetsMake(10, 15, 10, 15);
+        flowLayout.minimumLineSpacing = 10.0f;
+        flowLayout.minimumInteritemSpacing = 10.0f;
         
         _goodsColorView = [[UICollectionView alloc] initWithFrame:CGRectMake(0, 140, SCREEN_WIDTH, 100) collectionViewLayout:flowLayout];
         _goodsColorView.dataSource = self;
         _goodsColorView.delegate = self;
         _goodsColorView.showsVerticalScrollIndicator = NO;
-        _goodsColorView.showsHorizontalScrollIndicator = NO;
         _goodsColorView.backgroundColor = [UIColor whiteColor];
         [_goodsColorView registerClass:[GoodsSceneCollectionViewCell class] forCellWithReuseIdentifier:@"goodsColorViewCell"];
-        
     }
     return _goodsColorView;
 }
-
 
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
     return self.goodsSkus.count;
@@ -261,6 +261,7 @@
     self.goodsChoose.text = [NSString stringWithFormat:@"已选：%@", [self.goodsSkus valueForKey:@"mode"][indexPath.row]];
     self.goodsPrice.text = [NSString stringWithFormat:@"￥%@", [self.goodsSkus valueForKey:@"price"][indexPath.row]];
     self.quantity = [[self.goodsSkus valueForKey:@"quantity"][indexPath.row] integerValue];
+    
     if (self.quantity == 0) {
         [self NotCanBuy];
     } else {
@@ -269,7 +270,7 @@
     }
     self.num = 1;
     if ([[self.goodsSkus valueForKey:@"mode"][indexPath.row] isEqualToString:NSLocalizedString(@"Default", nil)]) {
-        self.skuId = [NSString stringWithFormat:@"%zi", [[self.goodsSkus valueForKey:@"productId"][indexPath.row] integerValue]];
+        self.skuId = [NSString stringWithFormat:@"%zi", [[self.goodsSkus valueForKey:@"targetId"][indexPath.row] integerValue]];
     } else {
         self.skuId = [NSString stringWithFormat:@"%zi", [[self.goodsSkus valueForKey:@"idField"][indexPath.row] integerValue]];
     }
@@ -278,14 +279,6 @@
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath {
     CGFloat btnLength = [[[self.goodsSkus valueForKey:@"mode"] objectAtIndex:indexPath.row] boundingRectWithSize:CGSizeMake(320, 0) options:(NSStringDrawingUsesLineFragmentOrigin) attributes:nil context:nil].size.width;
     return CGSizeMake(btnLength + 40, 30);
-}
-
-- (CGFloat)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout minimumLineSpacingForSectionAtIndex:(NSInteger)section {
-    return 5.0f;
-}
-
-- (CGFloat)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout minimumInteritemSpacingForSectionAtIndex:(NSInteger)section {
-    return 5.0f;
 }
 
 - (void)NotCanBuy {

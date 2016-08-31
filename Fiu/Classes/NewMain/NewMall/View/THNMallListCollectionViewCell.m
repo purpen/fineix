@@ -72,7 +72,7 @@ static NSString *const MallListGoodsCellId = @"mallListGoodsCellId";
     [self addSubview:self.suTitle];
     [_suTitle mas_makeConstraints:^(MASConstraintMaker *make) {
         make.size.mas_equalTo(CGSizeMake(SCREEN_WIDTH, 30));
-        make.top.equalTo(_banner.mas_centerY).with.offset(0);
+        make.top.equalTo(_banner.mas_centerY).with.offset(5);
         make.centerX.equalTo(_banner);
     }];
     
@@ -80,7 +80,7 @@ static NSString *const MallListGoodsCellId = @"mallListGoodsCellId";
     [_title mas_makeConstraints:^(MASConstraintMaker *make) {
         make.size.mas_equalTo(CGSizeMake(150, 30));
         make.centerX.equalTo(_banner);
-        make.bottom.equalTo(_suTitle.mas_top).with.offset(-3);
+        make.bottom.equalTo(_suTitle.mas_top).with.offset(0);
     }];
     
     [self addSubview:self.botLine];
@@ -134,7 +134,7 @@ static NSString *const MallListGoodsCellId = @"mallListGoodsCellId";
     if (!_suTitle) {
         _suTitle = [[UILabel alloc] init];
         _suTitle.textColor = [UIColor whiteColor];
-        _suTitle.font = [UIFont systemFontOfSize:17];
+        _suTitle.font = [UIFont systemFontOfSize:14];
         _suTitle.textAlignment = NSTextAlignmentCenter;
     }
     return _suTitle;

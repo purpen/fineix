@@ -34,7 +34,7 @@ static NSString *const URLGoodslist = @"/scene_product/getlist";
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self networkBrandInfoData];
-    [self networkBrandGoodsList];
+//    [self networkBrandGoodsList];
     [self.view addSubview:self.goodsBrandTable];
 }
 

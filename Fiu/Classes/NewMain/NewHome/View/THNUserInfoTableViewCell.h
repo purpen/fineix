@@ -32,7 +32,7 @@
 /**  */
 @property (nonatomic, strong) HomeSceneListRow *userModel;
 
-- (void)thn_setHomeSceneUserInfoData:(HomeSceneListRow *)userModel;
+- (void)thn_setHomeSceneUserInfoData:(HomeSceneListRow *)userModel userId:(NSString *)userID;
 
 - (void)thn_setHotUserListData:(NSMutableArray *)hotUserMarr;
 

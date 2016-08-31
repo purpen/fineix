@@ -41,6 +41,7 @@ static NSString *const URLCancelLike = @"/favorite/ajax_cancel_love";
 static NSString *const URLFollowUser = @"/follow/ajax_follow";
 static NSString *const URLCancelFollowUser = @"/follow/ajax_cancel_follow";
 static NSString *const URLFavorite = @"/favorite/ajax_favorite";
+static NSString *const URLCancelFavorite = @"/favorite/ajax_cancel_favorite";
 static NSString *const URLHotUserList = @"/user/find_user";
 
 static NSString *const themeCellId = @"ThemeCellId";
@@ -167,6 +168,23 @@ static NSString *const allCommentsCellId = @"AllCommentsCellId";
     [self.favoriteRequest startRequestSuccess:^(FBRequest *request, id result) {
         if ([[result valueForKey:@"success"] isEqualToNumber:@1]) {
             [SVProgressHUD showSuccessWithStatus:NSLocalizedString(@"favoriteDone", nil)];
+            NSInteger index = [self.sceneIdMarr indexOfObject:idx];
+            [self.sceneListMarr[index] setValue:@"1" forKey:@"isFavorite"];
+        }
+        
+    } failure:^(FBRequest *request, NSError *error) {
+        [SVProgressHUD showErrorWithStatus:[error localizedDescription]];
+    }];
+}
+
+#pragma mark 取消收藏
+- (void)thn_networkCancelFavoriteData:(NSString *)idx {
+    self.cancelFavoriteRequest = [FBAPI postWithUrlString:URLCancelFavorite requestDictionary:@{@"id":idx, @"type":@"12"} delegate:self];
+    [self.cancelFavoriteRequest startRequestSuccess:^(FBRequest *request, id result) {
+        if ([[result valueForKey:@"success"] isEqualToNumber:@1]) {
+            [SVProgressHUD showSuccessWithStatus:NSLocalizedString(@"cancelSaveScene", nil)];
+            NSInteger index = [self.sceneIdMarr indexOfObject:idx];
+            [self.sceneListMarr[index] setValue:@"0" forKey:@"isFavorite"];
         }
         
     } failure:^(FBRequest *request, NSError *error) {
@@ -176,7 +194,7 @@ static NSString *const allCommentsCellId = @"AllCommentsCellId";
 
 #pragma mark 专题
 - (void)thn_networkSubjectData {
-    self.subjectRequest = [FBAPI getWithUrlString:URLSubject requestDictionary:@{@"page":@"1", @"size":@"4", @"fine":@"1"} delegate:self];
+    self.subjectRequest = [FBAPI getWithUrlString:URLSubject requestDictionary:@{@"page":@"1", @"size":@"4", @"fine":@"1", @"sort":@"2"} delegate:self];
     [self.subjectRequest startRequestSuccess:^(FBRequest *request, id result) {
         NSArray *subArr = [[result valueForKey:@"data"] valueForKey:@"rows"];
         for (NSDictionary *subDic in subArr) {
@@ -346,6 +364,7 @@ static NSString *const allCommentsCellId = @"AllCommentsCellId";
     [self.sceneIdMarr removeAllObjects];
     [self.commentsMarr removeAllObjects];
     [self.subjectMarr removeAllObjects];
+    [self.commentsCountMarr removeAllObjects];
     [self thn_networkSceneListData];
     [self thn_networkRollImageData];
     [self thn_networkSubjectData];
@@ -386,6 +405,7 @@ static NSString *const allCommentsCellId = @"AllCommentsCellId";
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(followTheUser:) name:@"followTheUser" object:nil];
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(cancelFollowTheUser:) name:@"cancelFollowTheUser" object:nil];
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(favoriteTheScene:) name:@"favoriteTheScene" object:nil];
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(cancelFavoriteTheScene:) name:@"cancelFavoriteTheScene" object:nil];
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(deleteHotUserList) name:@"deleteHotUserList" object:nil];
     }
     return _homeTable;
@@ -420,7 +440,7 @@ static NSString *const allCommentsCellId = @"AllCommentsCellId";
             THNUserInfoTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:userInfoCellId];
             cell = [[THNUserInfoTableViewCell alloc] initWithStyle:(UITableViewCellStyleDefault) reuseIdentifier:userInfoCellId];
             if (self.sceneListMarr.count) {
-                [cell thn_setHomeSceneUserInfoData:self.sceneListMarr[indexPath.section - 1]];
+                [cell thn_setHomeSceneUserInfoData:self.sceneListMarr[indexPath.section - 1] userId:[self getLoginUserID]];
                 if (indexPath.section == _index) {
                     if (self.hotUserMarr.count) {
                         [cell thn_setHotUserListData:self.hotUserMarr];
@@ -640,7 +660,11 @@ static NSString *const allCommentsCellId = @"AllCommentsCellId";
     [self thn_networkFavoriteData:[idx object]];
 }
 
-#pragma mark - 移除热门用户 
+- (void)cancelFavoriteTheScene:(NSNotification *)idx {
+    [self thn_networkCancelFavoriteData:[idx object]];
+}
+
+#pragma mark - 移除热门用户
 - (void)deleteHotUserList {
     _hotUserCellHeight = 50.0f;
     NSIndexPath *indexPath = [NSIndexPath indexPathForRow:0 inSection:_index];
@@ -750,6 +774,8 @@ static NSString *const allCommentsCellId = @"AllCommentsCellId";
     [[NSNotificationCenter defaultCenter] removeObserver:self name:@"followTheUser" object:nil];
     [[NSNotificationCenter defaultCenter] removeObserver:self name:@"cancelFollowTheUser" object:nil];
     [[NSNotificationCenter defaultCenter] removeObserver:self name:@"deleteHotUserList" object:nil];
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:@"favoriteTheScene" object:nil];
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:@"cancelFavoriteTheScene" object:nil];
     
 }
 

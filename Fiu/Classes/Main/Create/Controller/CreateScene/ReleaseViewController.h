@@ -28,4 +28,6 @@
 @pro_strong AddLocationView     *   addLocaiton;
 @pro_strong AddContentView      *   addContent;
 
+@pro_strong NSString *actionId;
+
 @end

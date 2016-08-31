@@ -13,6 +13,7 @@
 #import "FBRefresh.h"
 #import "THNSceneListViewController.h"
 #import "THNSenceTopicViewController.h"
+#import "THNSceneDetalViewController.h"
 
 static NSString *const URLSubCount = @"/auth/user";
 static NSString *const URLSceneList = @"/scene_sight/";
@@ -239,14 +240,17 @@ static NSString *const SceneListCellId = @"sceneListCellId";
 }
 
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
-    //    [SVProgressHUD showSuccessWithStatus:[NSString stringWithFormat:@"打开情景：%@",self.sceneIdMarr[indexPath.row]]];
-    THNSceneListViewController *sceneListVC = [[THNSceneListViewController alloc] init];
-    sceneListVC.sceneListMarr = self.sceneListMarr;
-    sceneListVC.commentsMarr = self.commentsMarr;
-    sceneListVC.sceneIdMarr = self.sceneIdMarr;
-    sceneListVC.userIdMarr = self.userIdMarr;
-    sceneListVC.index = indexPath.row;
-    [self.navigationController pushViewController:sceneListVC animated:YES];
+//    THNSceneListViewController *sceneListVC = [[THNSceneListViewController alloc] init];
+//    sceneListVC.sceneListMarr = self.sceneListMarr;
+//    sceneListVC.commentsMarr = self.commentsMarr;
+//    sceneListVC.sceneIdMarr = self.sceneIdMarr;
+//    sceneListVC.userIdMarr = self.userIdMarr;
+//    sceneListVC.index = indexPath.row;
+//    [self.navigationController pushViewController:sceneListVC animated:YES];
+    
+    THNSceneDetalViewController *sceneDataVC = [[THNSceneDetalViewController alloc] init];
+    sceneDataVC.sceneDetalId = self.sceneIdMarr[indexPath.row];
+    [self.navigationController pushViewController:sceneDataVC animated:YES];
 }
 
 #pragma mark - 点赞

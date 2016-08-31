@@ -338,7 +338,13 @@ static NSString *const SceneListFooterCellViewId = @"sceneListFooterViewId";
     sceneListVC.commentsMarr = self.commentsMarr;
     sceneListVC.sceneIdMarr = self.sceneIdMarr;
     sceneListVC.userIdMarr = self.userIdMarr;
-    sceneListVC.index = indexPath.row;
+    if (indexPath.section == 0) {
+        sceneListVC.index = indexPath.row;
+    } else if (indexPath.section == 1) {
+        sceneListVC.index = indexPath.row +10;
+    } else if (indexPath.section == 2) {
+        sceneListVC.index = indexPath.row +20;
+    }
     [self.navigationController pushViewController:sceneListVC animated:YES];
 }
 

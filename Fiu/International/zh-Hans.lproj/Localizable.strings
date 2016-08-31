@@ -28,6 +28,7 @@
 //  更多
 "editScene" = "编辑";
 "saveScene" = "收藏";
+"cancelSaveScene" = "取消收藏";
 "reportScene" = "举报";
 "favoriteDone" = "收藏成功";
 

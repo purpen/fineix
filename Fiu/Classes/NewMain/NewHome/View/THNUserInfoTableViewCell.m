@@ -60,7 +60,7 @@ static NSString *const hotUserCellId = @"HotUserCellId";
 }
 
 #pragma mark - setModel 
-- (void)thn_setHomeSceneUserInfoData:(HomeSceneListRow *)userModel {
+- (void)thn_setHomeSceneUserInfoData:(HomeSceneListRow *)userModel userId:(NSString *)userID {
     [self.head sd_setImageWithURL:[NSURL URLWithString:userModel.user.avatarUrl]
                          forState:(UIControlStateNormal)
                  placeholderImage:[UIImage imageNamed:@""]];
@@ -86,6 +86,12 @@ static NSString *const hotUserCellId = @"HotUserCellId";
     _userId = [NSString stringWithFormat:@"%zi", userModel.userId];
     if ([_userId isEqualToString:@"0"]) {
         _userId = userModel.user._id;
+    }
+    
+    if ([_userId isEqualToString:userID]) {
+        self.follow.hidden = YES;
+    } else {
+        self.follow.hidden = NO;
     }
 }
 

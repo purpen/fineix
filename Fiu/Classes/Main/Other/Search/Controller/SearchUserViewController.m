@@ -233,4 +233,9 @@ static NSString *const userCellId = @"UserCellId";
     return _userIdMarr;
 }
 
+- (void)dealloc {
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:@"searchFollowUser" object:nil];
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:@"searchCancelFollowUser" object:nil];
+}
+
 @end

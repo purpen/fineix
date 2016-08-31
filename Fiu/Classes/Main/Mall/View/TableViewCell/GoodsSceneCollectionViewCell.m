@@ -20,9 +20,7 @@
         
         [self addSubview:self.title];
         [_title mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.height.mas_equalTo(@29);
-            make.centerX.equalTo(self);
-            make.centerY.equalTo(self);
+            make.left.right.bottom.top.equalTo(self).with.offset(0);
         }];
     }
     return self;

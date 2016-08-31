@@ -110,7 +110,7 @@ static NSString *const URLGetUserDesTags = @"/gateway/fetch_chinese_word";
     if (json.length == 0) {
         json = @"";
     }
-
+    
     NSData * imageData = UIImageJPEGRepresentation(self.bgImg, 0.7);
     NSString * icon64Str = [imageData base64EncodedStringWithOptions:NSDataBase64Encoding64CharacterLineLength];
     NSDictionary * paramDict = @{
@@ -123,6 +123,7 @@ static NSString *const URLGetUserDesTags = @"/gateway/fetch_chinese_word";
                                  @"city":city,
                                  @"products":json,
                                  @"tags":tags,
+                                 @"subject_ids":self.actionId
                                  };
     
     self.releaseSceneRequest = [FBAPI postWithUrlString:URLReleaseScenen requestDictionary:paramDict delegate:self];
@@ -184,6 +185,10 @@ static NSString *const URLGetUserDesTags = @"/gateway/fetch_chinese_word";
     [self addCancelDoneButton];
     [self addDoneButton];
     [self.doneBtn addTarget:self action:@selector(releaseScene) forControlEvents:(UIControlEventTouchUpInside)];
+    
+    if (self.actionId.length == 0) {
+        self.actionId = @"";
+    }
 }
 
 #pragma mark - 确认发布场景

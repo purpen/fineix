@@ -13,7 +13,9 @@
 static NSInteger const actionBtnTag = 686;
 static NSInteger const fiuActionBtnTag = 696;
 
-@interface FBAlertViewController ()
+@interface FBAlertViewController () {
+    NSInteger _isFavorite;
+}
 
 @end
 
@@ -57,11 +59,7 @@ static NSInteger const fiuActionBtnTag = 696;
     for (NSUInteger idx = 0; idx < alertTitle.count; ++ idx) {
         UIButton * actionBtn = [[UIButton alloc] initWithFrame:CGRectMake(0, 45 * idx, SCREEN_WIDTH, 44)];
         actionBtn.tag = fiuActionBtnTag + idx;
-        if (IS_iOS9) {
-            actionBtn.titleLabel.font = [UIFont fontWithName:@"PingFangSC-Light" size:16];
-        } else {
-            actionBtn.titleLabel.font = [UIFont systemFontOfSize:16];
-        }
+        actionBtn.titleLabel.font = [UIFont systemFontOfSize:16];
         actionBtn.backgroundColor = [UIColor whiteColor];
         [actionBtn setTitleColor:[UIColor blackColor] forState:(UIControlStateNormal)];
         [actionBtn setTitle:alertTitle[idx] forState:(UIControlStateNormal)];
@@ -86,13 +84,18 @@ static NSInteger const fiuActionBtnTag = 696;
 }
 
 #pragma mark - 场景中的“更多”选项
-- (void)initFBAlertVcStyle:(BOOL)isUserSelf {
+- (void)initFBAlertVcStyle:(BOOL)isUserSelf isFavorite:(NSInteger)favorite {
     NSArray * alertTitle = [NSArray array];
+    _isFavorite = favorite;
     
     if (isUserSelf == YES) {
         alertTitle = @[NSLocalizedString(@"CommentVcTitle", nil), NSLocalizedString(@"ShareBtn", nil), NSLocalizedString(@"Edit", nil), NSLocalizedString(@"Delete", nil), NSLocalizedString(@"cancel", nil)];
     } else {
-        alertTitle = @[NSLocalizedString(@"saveScene", nil), NSLocalizedString(@"reportScene", nil), NSLocalizedString(@"cancel", nil)];
+        if (favorite == 0) {
+            alertTitle = @[NSLocalizedString(@"saveScene", nil), NSLocalizedString(@"reportScene", nil), NSLocalizedString(@"cancel", nil)];
+        } else if (favorite == 1) {
+            alertTitle = @[NSLocalizedString(@"cancelSaveScene", nil), NSLocalizedString(@"reportScene", nil), NSLocalizedString(@"cancel", nil)];
+        }
         self.alertView.frame = CGRectMake(0, SCREEN_HEIGHT - 132, SCREEN_WIDTH, 132);
     }
     
@@ -105,7 +108,7 @@ static NSInteger const fiuActionBtnTag = 696;
         if ([actionBtn.titleLabel.text isEqualToString:NSLocalizedString(@"reportScene", nil)]) {
             [actionBtn setTitleColor:[UIColor colorWithHexString:@"#E30B0B"] forState:(UIControlStateNormal)];
             
-        } else if ([actionBtn.titleLabel.text isEqualToString:NSLocalizedString(@"saveScene", nil)]) {
+        } else if ([actionBtn.titleLabel.text isEqualToString:NSLocalizedString(@"saveScene", nil)] || [actionBtn.titleLabel.text isEqualToString:NSLocalizedString(@"cancelSaveScene", nil)] ) {
             [actionBtn setTitleColor:[UIColor colorWithHexString:@"#0B78F7"] forState:(UIControlStateNormal)];
             
         } else
@@ -149,9 +152,16 @@ static NSInteger const fiuActionBtnTag = 696;
 //  访客查看场景详情时
 - (void)visitorsActionBtnClick:(UIButton *)button {
     if (button.tag == actionBtnTag) {
-        [self dismissViewControllerAnimated:YES completion:^{
-            self.favoriteTheScene(self.targetId);
-        }];
+        if (_isFavorite == 0) {
+            [self dismissViewControllerAnimated:YES completion:^{
+                self.favoriteTheScene(self.targetId);
+            }];
+            
+        } else if (_isFavorite == 1) {
+            [self dismissViewControllerAnimated:YES completion:^{
+                self.cancelFavoriteTheScene(self.targetId);
+            }];
+        }
         
     } else if (button.tag == actionBtnTag + 1) {
         ReportViewController * reportVC = [[ReportViewController alloc] init];

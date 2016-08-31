@@ -36,8 +36,8 @@
 @pro_strong NSMutableArray *photoAlbumArr;      //  全部的相薄
 @pro_strong PhotoAlbumsView *photoAlbumsView;   //  相薄页面
 /** 活动ID */
-@property(nonatomic,copy) NSString *id;
+@pro_strong NSString *actionId;
 /** 活动标题 */
-@property(nonatomic,copy) NSString *activeTitle;
+@pro_strong NSString *activeTitle;
 
 @end
