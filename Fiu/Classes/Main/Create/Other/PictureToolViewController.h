@@ -11,4 +11,9 @@
 
 @interface PictureToolViewController : UINavigationController
 
+/** 活动ID */
+@pro_strong NSString *actionId;
+/** 活动标题 */
+@pro_strong NSString *activeTitle;
+
 @end

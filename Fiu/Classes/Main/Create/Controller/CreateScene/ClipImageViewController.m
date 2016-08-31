@@ -67,9 +67,10 @@
 }
 
 #pragma mark - 点击“继续”
-- (void)nextButtonClick:(UIImage *)image {
-    SceneAddViewController * addVC = [[SceneAddViewController alloc] init];
+- (void)nextButtonClick:(UIButton *)button {
+    SceneAddViewController *addVC = [[SceneAddViewController alloc] init];
     addVC.filtersImg = self.clipImageView.capture;
+    addVC.actionId = self.actionId;
     [self.navigationController pushViewController:addVC animated:YES];
 }
 

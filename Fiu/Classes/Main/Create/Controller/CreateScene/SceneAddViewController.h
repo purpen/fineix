@@ -38,5 +38,6 @@
  *  标题／价格／坐标
  */
 @pro_strong NSMutableArray      *   popData;
+@pro_strong NSString *actionId;
 
 @end

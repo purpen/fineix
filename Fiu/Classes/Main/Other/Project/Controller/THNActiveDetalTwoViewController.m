@@ -13,7 +13,7 @@
 #import "THNArticleModel.h"
 #import "THNActiveRuleCollectionViewCell.h"
 #import "THNActiveRuleModel.h"
-#import "ClipImageViewController.h"
+#import "PictureToolViewController.h"
 #import "THNDiscoverSceneCollectionViewCell.h"
 #import "THNSenceModel.h"
 #import "THNUserInfoTableViewCell.h"
@@ -379,10 +379,10 @@ static NSString *const URLCancelFollowUser = @"/follow/ajax_cancel_follow";
 }
 
 -(void)attend{
-    ClipImageViewController *vc = [[ClipImageViewController alloc] init];
-    vc.id = self.model._id;
-    vc.activeTitle = self.model.title;
-    [self presentViewController:vc animated:YES completion:nil];
+    PictureToolViewController * pictureToolVC = [[PictureToolViewController alloc] init];
+    pictureToolVC.actionId = self.model._id;
+    pictureToolVC.activeTitle = self.model.title;
+    [self presentViewController:pictureToolVC animated:YES completion:nil];
 }
 
 -(HMSegmentedControl *)segmentedControl{
