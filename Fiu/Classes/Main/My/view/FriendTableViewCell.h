@@ -18,6 +18,7 @@
 @property(nonatomic,strong) UIButton *follow;
 @property(nonatomic,strong) UICollectionView *imageCollectionView;
 @property(nonatomic,strong) NSArray *sceneAry;
-
+/**  */
+@property (nonatomic, strong) UINavigationController *navi;
 
 @end

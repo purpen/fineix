@@ -14,6 +14,7 @@
 #import <SDWebImage/UIImageView+WebCache.h>
 #import <POP.h>
 #import "THNMacro.h"
+#import "THNSceneDetalViewController.h"
 
 @interface FriendTableViewCell ()<UICollectionViewDelegate,UICollectionViewDataSource,UICollectionViewDelegateFlowLayout>
 
@@ -218,6 +219,13 @@
         _headImageView.layer.cornerRadius = 16/667.0*SCREEN_HEIGHT;
     }
     return _headImageView;
+}
+
+-(void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath{
+    THNSceneDetalViewController *vc = [[THNSceneDetalViewController alloc] init];
+    FindSceneModel *model = self.sceneAry[indexPath.section];
+    vc.sceneDetalId = [NSString stringWithFormat:@"%@",model.id];
+    [self.navi pushViewController:vc animated:YES];
 }
 
 @end
