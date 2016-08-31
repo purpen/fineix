@@ -112,15 +112,30 @@ static NSString *const twoCommentsCellId = @"TwoCommentsCellId";
 }
 
 -(void)followClick:(UIButton*)sender{
-    self.followRequest = [FBAPI postWithUrlString:URLFollowUser requestDictionary:@{@"follow_id":self.model.user.userId} delegate:self];
-    [self.followRequest startRequestSuccess:^(FBRequest *request, id result) {
-        if ([[result valueForKey:@"success"] isEqualToNumber:@1]) {
-            self.model.user.isFollow = 1;
-        }
+    
+    if (sender.selected) {
         
-    } failure:^(FBRequest *request, NSError *error) {
-        [SVProgressHUD showErrorWithStatus:[error localizedDescription]];
-    }];
+        self.followRequest = [FBAPI postWithUrlString:URLFollowUser requestDictionary:@{@"follow_id":self.model.user.userId} delegate:self];
+        [self.followRequest startRequestSuccess:^(FBRequest *request, id result) {
+            if ([[result valueForKey:@"success"] isEqualToNumber:@1]) {
+                self.model.user.isFollow = 1;
+            }
+            
+        } failure:^(FBRequest *request, NSError *error) {
+            [SVProgressHUD showErrorWithStatus:[error localizedDescription]];
+        }];
+        
+    }else{
+        self.cancelFollowRequest = [FBAPI postWithUrlString:URLCancelFollowUser requestDictionary:@{@"follow_id":self.model.user.userId} delegate:self];
+        [self.cancelFollowRequest startRequestSuccess:^(FBRequest *request, id result) {
+            if ([[result valueForKey:@"success"] isEqualToNumber:@1]) {
+                self.model.user.isFollow = 1;
+            }
+            
+        } failure:^(FBRequest *request, NSError *error) {
+            [SVProgressHUD showErrorWithStatus:[error localizedDescription]];
+        }];
+    }
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
@@ -154,7 +169,7 @@ static NSString *const twoCommentsCellId = @"TwoCommentsCellId";
             cell.vc = self;
             cell.nav = self.navigationController;
         }
-        [cell.comments addTarget:self action:@selector(commentsClick) forControlEvents:UIControlEventTouchUpInside];
+        [cell.like addTarget:self action:@selector(commentsClick:) forControlEvents:UIControlEventTouchUpInside];
         return cell;
         
     } else if (indexPath.row == 3) {
@@ -256,78 +271,84 @@ static NSString *const twoCommentsCellId = @"TwoCommentsCellId";
     }
 }
 
-#pragma mark - 点赞
-- (void)likeTheScene:(NSNotification *)idx {
-    [self thn_networkLikeSceneData:[idx object]];
-}
-
-- (void)cancelLikeTheScene:(NSNotification *)idx {
-    [self thn_networkCancelLikeData:[idx object]];
-}
-
-#pragma mark - 关注
-- (void)followTheUser:(NSNotification *)idx {
-    [self thn_networkFollowSceneData:[idx object]];
-}
-
-- (void)cancelFollowTheUser:(NSNotification *)idx {
-    [self thn_networkCancelFollowData:[idx object]];
-}
+//#pragma mark - 点赞
+//- (void)likeTheScene:(NSNotification *)idx {
+//    [self thn_networkLikeSceneData:[idx object]];
+//}
+//
+//- (void)cancelLikeTheScene:(NSNotification *)idx {
+//    [self thn_networkCancelLikeData:[idx object]];
+//}
+//
+//#pragma mark - 关注
+//- (void)followTheUser:(NSNotification *)idx {
+//    [self thn_networkFollowSceneData:[idx object]];
+//}
+//
+//- (void)cancelFollowTheUser:(NSNotification *)idx {
+//    [self thn_networkCancelFollowData:[idx object]];
+//}
 
 #pragma mark - 收藏
 - (void)favoriteTheScene:(NSNotification *)idx {
     [self thn_networkFavoriteData:[idx object]];
 }
 
--(void)commentsClick{
-    self.likeSceneRequest = [FBAPI postWithUrlString:URLLikeScene requestDictionary:@{@"id":@(self.model.idField), @"type":@"12"} delegate:self];
-    [self.likeSceneRequest startRequestSuccess:^(FBRequest *request, id result) {
-        if ([[result valueForKey:@"success"] isEqualToNumber:@1]) {
-            NSString *loveCount = [NSString stringWithFormat:@"%zi", [[[result valueForKey:@"data"] valueForKey:@"love_count"] integerValue]];
-            self.model.loveCount = [loveCount integerValue];
-            self.model.isLove = 1;
-        }
+-(void)commentsClick:(UIButton*)sender{
+    if (sender.selected) {
+        self.likeSceneRequest = [FBAPI postWithUrlString:URLLikeScene requestDictionary:@{@"id":@(self.model.idField), @"type":@"12"} delegate:self];
+        [self.likeSceneRequest startRequestSuccess:^(FBRequest *request, id result) {
+            if ([[result valueForKey:@"success"] isEqualToNumber:@1]) {
+                NSString *loveCount = [NSString stringWithFormat:@"%zi", [[[result valueForKey:@"data"] valueForKey:@"love_count"] integerValue]];
+                self.model.loveCount = [loveCount integerValue];
+                self.model.isLove = 1;
+            }
+            
+        } failure:^(FBRequest *request, NSError *error) {
+            [SVProgressHUD showErrorWithStatus:[error localizedDescription]];
+        }];
+
+    }else{
         
-    } failure:^(FBRequest *request, NSError *error) {
-        [SVProgressHUD showErrorWithStatus:[error localizedDescription]];
-    }];
-}
-
-#pragma mark 点赞
-- (void)thn_networkLikeSceneData:(NSString *)idx {
-}
-
-#pragma mark 取消点赞
-- (void)thn_networkCancelLikeData:(NSString *)idx {
-    self.cancelLikeRequest = [FBAPI postWithUrlString:URLCancelLike requestDictionary:@{@"id":idx, @"type":@"12"} delegate:self];
-    [self.cancelLikeRequest startRequestSuccess:^(FBRequest *request, id result) {
-        if ([[result valueForKey:@"success"] isEqualToNumber:@1]) {
-            NSString *loveCount = [NSString stringWithFormat:@"%zi", [[[result valueForKey:@"data"] valueForKey:@"love_count"] integerValue]];
-            [self.model setValue:loveCount forKey:@"loveCount"];
-            [self.model setValue:@"0" forKey:@"isLove"];
-        }
+        self.cancelLikeRequest = [FBAPI postWithUrlString:URLCancelLike requestDictionary:@{@"id":@(self.model.idField), @"type":@"12"} delegate:self];
+        [self.cancelLikeRequest startRequestSuccess:^(FBRequest *request, id result) {
+            if ([[result valueForKey:@"success"] isEqualToNumber:@1]) {
+                NSString *loveCount = [NSString stringWithFormat:@"%zi", [[[result valueForKey:@"data"] valueForKey:@"love_count"] integerValue]];
+                self.model.loveCount = [loveCount integerValue];
+                self.model.isLove = 0;
+            }
+            
+        } failure:^(FBRequest *request, NSError *error) {
+            [SVProgressHUD showErrorWithStatus:[error localizedDescription]];
+        }];
         
-    } failure:^(FBRequest *request, NSError *error) {
-        [SVProgressHUD showErrorWithStatus:[error localizedDescription]];
-    }];
+    }
 }
 
-#pragma mark 关注
-- (void)thn_networkFollowSceneData:(NSString *)idx {
-}
-
-#pragma mark 取消关注
-- (void)thn_networkCancelFollowData:(NSString *)idx {
-    self.cancelFollowRequest = [FBAPI postWithUrlString:URLCancelFollowUser requestDictionary:@{@"follow_id":idx} delegate:self];
-    [self.cancelFollowRequest startRequestSuccess:^(FBRequest *request, id result) {
-        if ([[result valueForKey:@"success"] isEqualToNumber:@1]) {
-            [[self.model valueForKey:@"user"] setValue:@"0" forKey:@"isFollow"];
-        }
-        
-    } failure:^(FBRequest *request, NSError *error) {
-        [SVProgressHUD showErrorWithStatus:[error localizedDescription]];
-    }];
-}
+//#pragma mark 点赞
+//- (void)thn_networkLikeSceneData:(NSString *)idx {
+//}
+//
+//#pragma mark 取消点赞
+//- (void)thn_networkCancelLikeData:(NSString *)idx {
+//}
+//
+//#pragma mark 关注
+//- (void)thn_networkFollowSceneData:(NSString *)idx {
+//}
+//
+//#pragma mark 取消关注
+//- (void)thn_networkCancelFollowData:(NSString *)idx {
+//    self.cancelFollowRequest = [FBAPI postWithUrlString:URLCancelFollowUser requestDictionary:@{@"follow_id":idx} delegate:self];
+//    [self.cancelFollowRequest startRequestSuccess:^(FBRequest *request, id result) {
+//        if ([[result valueForKey:@"success"] isEqualToNumber:@1]) {
+//            [[self.model valueForKey:@"user"] setValue:@"0" forKey:@"isFollow"];
+//        }
+//        
+//    } failure:^(FBRequest *request, NSError *error) {
+//        [SVProgressHUD showErrorWithStatus:[error localizedDescription]];
+//    }];
+//}
 
 #pragma mark 收藏情境
 - (void)thn_networkFavoriteData:(NSString *)idx {
