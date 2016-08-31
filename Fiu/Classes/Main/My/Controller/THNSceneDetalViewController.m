@@ -60,6 +60,12 @@ static NSString *const twoCommentsCellId = @"TwoCommentsCellId";
 @implementation THNSceneDetalViewController
 
 
+-(void)viewWillAppear:(BOOL)animated{
+    [super viewWillAppear:animated];
+    [UIApplication sharedApplication].statusBarHidden = NO;
+    [UIApplication sharedApplication].statusBarStyle = UIStatusBarStyleLightContent;
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     
@@ -109,7 +115,6 @@ static NSString *const twoCommentsCellId = @"TwoCommentsCellId";
     self.followRequest = [FBAPI postWithUrlString:URLFollowUser requestDictionary:@{@"follow_id":self.model.user.userId} delegate:self];
     [self.followRequest startRequestSuccess:^(FBRequest *request, id result) {
         if ([[result valueForKey:@"success"] isEqualToNumber:@1]) {
-            NSLog(@" 12312321 %@",result);
             self.model.user.isFollow = 1;
         }
         
