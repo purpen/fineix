@@ -57,9 +57,9 @@
             NSString *flag = self.model.product.is_favorite;
             NSInteger a = [flag integerValue];
             if (a == 0) {
-                self.buyBtn.selected = NO;
+                self.collectBtn.selected = NO;
             }else{
-                self.buyBtn.selected = YES;
+                self.collectBtn.selected = YES;
             }
         }
     } failure:nil];
@@ -129,7 +129,7 @@
             if (type == 20) {
                 NSArray *fourAry = [threeAry[1] componentsSeparatedByString:@"&"];
                 infoId = fourAry[0];
-                NSArray *fiveAry = [fourAry[1] componentsSeparatedByString:@"="];
+                NSArray *fiveAry = [twoAry[2] componentsSeparatedByString:@"="];
                 inforTag = fiveAry[1];
             }else{
                 infoId = threeAry[1];
