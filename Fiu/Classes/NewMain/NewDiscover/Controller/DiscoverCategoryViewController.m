@@ -10,6 +10,7 @@
 #import "THNDiscoverSceneCollectionViewCell.h"
 #import "HomeSceneListRow.h"
 #import "THNSceneListViewController.h"
+#import "THNSceneDetalViewController.h"
 
 static NSString *const URLSubCount = @"/auth/user";
 static NSString *const URLAddTheme = @"/my/add_interest_scene_id";
@@ -232,13 +233,17 @@ static NSString *const URLCancelLike = @"/favorite/ajax_cancel_love";
 }
 
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
-    THNSceneListViewController *sceneListVC = [[THNSceneListViewController alloc] init];
-    sceneListVC.sceneListMarr = self.sceneListMarr;
-    sceneListVC.commentsMarr = self.commentsMarr;
-    sceneListVC.sceneIdMarr = self.sceneIdMarr;
-    sceneListVC.userIdMarr = self.userIdMarr;
-    sceneListVC.index = indexPath.row;
-    [self.navigationController pushViewController:sceneListVC animated:YES];
+//    THNSceneListViewController *sceneListVC = [[THNSceneListViewController alloc] init];
+//    sceneListVC.sceneListMarr = self.sceneListMarr;
+//    sceneListVC.commentsMarr = self.commentsMarr;
+//    sceneListVC.sceneIdMarr = self.sceneIdMarr;
+//    sceneListVC.userIdMarr = self.userIdMarr;
+//    sceneListVC.index = indexPath.row;
+//    [self.navigationController pushViewController:sceneListVC animated:YES];
+//    
+    THNSceneDetalViewController *sceneDataVC = [[THNSceneDetalViewController alloc] init];
+    sceneDataVC.sceneDetalId = self.sceneIdMarr[indexPath.row];
+    [self.navigationController pushViewController:sceneDataVC animated:YES];
 }
 
 #pragma mark - 点赞
