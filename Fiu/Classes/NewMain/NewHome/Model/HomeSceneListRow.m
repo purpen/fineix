@@ -33,9 +33,12 @@
 		self.idField = [dictionary[@"_id"] integerValue];
 	}
 
-	if(![dictionary[@"address"] isKindOfClass:[NSNull class]]){
-		self.address = dictionary[@"address"];
-	}	
+    if(![dictionary[@"address"] isKindOfClass:[NSNull class]]){
+        self.address = dictionary[@"address"];
+    }
+    if(![dictionary[@"city"] isKindOfClass:[NSNull class]]){
+        self.city = dictionary[@"city"];
+    }
 	if(![dictionary[@"comment_count"] isKindOfClass:[NSNull class]]){
 		self.commentCount = [dictionary[@"comment_count"] integerValue];
 	}
