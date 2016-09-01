@@ -64,6 +64,7 @@ static NSString *const URlCancelCollect = @"/favorite/ajax_cancel_favorite";
     [SVProgressHUD show];
     self.goodsInfoRequest = [FBAPI getWithUrlString:URLGoodsInfo requestDictionary:@{@"id":self.goodsID} delegate:self];
     [self.goodsInfoRequest startRequestSuccess:^(FBRequest *request, id result) {
+        
         _goodsDes = [[result valueForKey:@"data"] valueForKey:@"advantage"];
         _goodsInfoUrl = [[result valueForKey:@"data"] valueForKey:@"content_view_url"];
         _collect = [[[result valueForKey:@"data"] valueForKey:@"is_favorite"] integerValue];

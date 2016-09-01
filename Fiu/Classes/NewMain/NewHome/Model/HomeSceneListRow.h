@@ -16,6 +16,7 @@
 
 @property (nonatomic, assign) NSInteger idField;
 @property (nonatomic, strong) NSString * address;
+@property (nonatomic, strong) NSString * city;
 @property (nonatomic, assign) NSInteger commentCount;
 @property (nonatomic, strong) NSString * coverUrl;
 @property (nonatomic, strong) NSString * createdAt;
