@@ -300,7 +300,7 @@ static NSString *const URLFiuGoods = @"/favorite/get_new_list";
     if (self.type == CollectionTypeGood) {
         return CGSizeMake((SCREEN_WIDTH - 15 * 3) * 0.5, 0.31 * SCREEN_HEIGHT);
     }
-    return CGSizeMake((SCREEN_WIDTH - 15 * 3) * 0.5, 0.25 * SCREEN_HEIGHT);
+    return CGSizeMake((SCREEN_WIDTH - 15 * 3) * 0.5, 0.25 * SCREEN_HEIGHT + 35);
 }
 
 -(void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath{
