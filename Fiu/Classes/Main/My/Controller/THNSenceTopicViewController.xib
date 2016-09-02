@@ -33,12 +33,12 @@
                             </connections>
                         </button>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="情境主题" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0cc-P4-tHP">
-                            <rect key="frame" x="158" y="41" width="60" height="18"/>
+                            <rect key="frame" x="154" y="40" width="68" height="21"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="21" id="8RO-3S-suD"/>
                                 <constraint firstAttribute="width" constant="338" id="9cO-DM-Lxv"/>
                             </constraints>
-                            <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
                             <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             <nil key="highlightedColor"/>
                             <variation key="default">

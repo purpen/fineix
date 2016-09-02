@@ -70,7 +70,9 @@ static NSString *const URLAllFiuSceneList = @"/scene_scene/";
 {
     [SVProgressHUD show];
     UserInfoEntity *entity = [UserInfoEntity defaultUserInfoEntity];
-
+    if (entity.interest_scene_cate.length == 0) {
+        entity.interest_scene_cate = @"null";
+    }
     self.allSceneListRequest = [FBAPI getWithUrlString:@"/scene_sight/getlist" requestDictionary:@{@"size":@"10", @"page":@(_currentPageNumber + 1),@"category_ids" : entity.interest_scene_cate} delegate:self];
     
     [self.allSceneListRequest startRequestSuccess:^(FBRequest *request, id result) {
