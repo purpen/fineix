@@ -29,7 +29,7 @@
     _userId = [NSString stringWithFormat:@"%zi", model.idField];
     [self.header downloadImage:model.mediumAvatarUrl place:[UIImage imageNamed:@""]];
     self.name.text = model.nickname;
-    self.info.text = model.summary;
+    
     
     if (model.isFollow == 0) {
         self.follow.selected = NO;
@@ -38,6 +38,14 @@
     } else if (model.isFollow == 1) {
         self.follow.selected = YES;
         self.follow.backgroundColor = [UIColor colorWithHexString:MAIN_COLOR];
+    }
+    
+    if (model.identify.isExpert == 1) {
+        self.certificate.hidden = NO;
+        self.info.text = model.expertLabel;
+    } else {
+        self.certificate.hidden = YES;
+        self.info.text = model.summary;
     }
 }
 
@@ -54,6 +62,13 @@
         make.size.mas_equalTo(CGSizeMake(60, 60));
         make.top.equalTo(self.mas_top).with.offset(25);
         make.centerX.equalTo(self);
+    }];
+    
+    [self addSubview:self.certificate];
+    [_certificate mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.size.mas_equalTo(CGSizeMake(15, 15));
+        make.right.equalTo(_header.mas_right).with.offset(0);
+        make.bottom.equalTo(_header.mas_bottom).with.offset(0);
     }];
     
     [self addSubview:self.name];
@@ -99,9 +114,19 @@
         _header = [[UIImageView alloc] init];
         _header.layer.cornerRadius = 60/2;
         _header.layer.masksToBounds = YES;
+        _header.layer.borderWidth = 0.5f;
+        _header.layer.borderColor = [UIColor colorWithHexString:@"#CCCCCC"].CGColor;
         _header.backgroundColor = [UIColor colorWithHexString:@"#F8F8F8"];
     }
     return _header;
+}
+
+- (UIImageView *)certificate {
+    if (!_certificate) {
+        _certificate = [[UIImageView alloc] init];
+        _certificate.image = [UIImage imageNamed:@"user_jiaV"];
+    }
+    return _certificate;
 }
 
 - (UILabel *)name {
@@ -158,7 +183,7 @@
         button.layer.borderColor = [UIColor colorWithHexString:MAIN_COLOR].CGColor;
         button.backgroundColor = [UIColor colorWithHexString:MAIN_COLOR];
         
-//        [[NSNotificationCenter defaultCenter] postNotificationName:@"followTheUser" object:_userId];
+        self.followHotUserBlock(_userId);
         
     } else if (button.selected == YES) {
         button.selected = NO;
@@ -172,7 +197,7 @@
         button.layer.borderColor = [UIColor colorWithHexString:@"#979797" alpha:1].CGColor;
         button.backgroundColor = [UIColor colorWithHexString:WHITE_COLOR];
         
-//        [[NSNotificationCenter defaultCenter] postNotificationName:@"cancelFollowTheUser" object:_userId];
+        self.cancelFollowHotUserBlock(_userId);
     }
 }
 

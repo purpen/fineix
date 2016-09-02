@@ -84,21 +84,14 @@ static NSString *const allCommentsCellId = @"AllCommentsCellId";
     
     _hotUserListIndex = 5;
     _hotUserCellHeight = 230.0f;
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(reloadHotUserListData:) name:@"reloadHotUserListData" object:nil];
+    
+    [self thn_registerNSNotification];
     
     [self thn_networkRollImageData];
     [self thn_networkSubjectData];
     [self thn_networkHotUserListData];
     [self thn_networkSceneListData];
     
-}
-
-- (void)reloadHotUserListData:(NSNotification *)reload {
-    NSLog(@"＝＝＝＝＝＝－－－－－ 刷新热门用户列表页");
-    _hotUserCellHeight = 0.0f;
-    
-    NSIndexSet *hotUserIndexSet = [NSIndexSet indexSetWithIndex:_hotUserListIndex];
-    [self.homeTable reloadSections:hotUserIndexSet withRowAnimation:(UITableViewRowAnimationFade)];
 }
 
 #pragma mark - 网络请求
@@ -157,8 +150,9 @@ static NSString *const allCommentsCellId = @"AllCommentsCellId";
     self.followRequest = [FBAPI postWithUrlString:URLFollowUser requestDictionary:@{@"follow_id":idx} delegate:self];
     [self.followRequest startRequestSuccess:^(FBRequest *request, id result) {
         if ([[result valueForKey:@"success"] isEqualToNumber:@1]) {
-            NSInteger index = [self.userIdMarr indexOfObject:idx];
-            [[self.sceneListMarr valueForKey:@"user"][index] setValue:@"1" forKey:@"isFollow"];
+            NSLog(@"已关注");
+//            NSInteger index = [self.userIdMarr indexOfObject:idx];
+//            [[self.sceneListMarr valueForKey:@"user"][index] setValue:@"1" forKey:@"isFollow"];
         }
         
     } failure:^(FBRequest *request, NSError *error) {
@@ -171,8 +165,9 @@ static NSString *const allCommentsCellId = @"AllCommentsCellId";
     self.cancelFollowRequest = [FBAPI postWithUrlString:URLCancelFollowUser requestDictionary:@{@"follow_id":idx} delegate:self];
     [self.cancelFollowRequest startRequestSuccess:^(FBRequest *request, id result) {
         if ([[result valueForKey:@"success"] isEqualToNumber:@1]) {
-            NSInteger index = [self.userIdMarr indexOfObject:idx];
-            [[self.sceneListMarr valueForKey:@"user"][index] setValue:@"0" forKey:@"isFollow"];
+            NSLog(@"取消关注");
+//            NSInteger index = [self.userIdMarr indexOfObject:idx];
+//            [[self.sceneListMarr valueForKey:@"user"][index] setValue:@"0" forKey:@"isFollow"];
         }
         
     } failure:^(FBRequest *request, NSError *error) {
@@ -279,7 +274,8 @@ static NSString *const allCommentsCellId = @"AllCommentsCellId";
 - (void)thn_networkHotUserListData {
     NSDictionary *requestDic = @{@"page":@"1",
                                  @"edit_stick":@"1",
-                                 @"sort":@"1"};
+                                 @"sort":@"1",
+                                 @"type":@"1"};
     self.hotUserRequest = [FBAPI getWithUrlString:URLHotUserList requestDictionary:requestDic delegate:self];
     [self.hotUserRequest startRequestSuccess:^(FBRequest *request, id result) {
         NSArray *userArr = [[result valueForKey:@"data"] valueForKey:@"users"];
@@ -419,6 +415,7 @@ static NSString *const allCommentsCellId = @"AllCommentsCellId";
     if (!_hotUserList) {
         THNHotUserFlowLayout *flowLayout = [[THNHotUserFlowLayout alloc] init];
         _hotUserList = [[THNHotUserView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, _hotUserCellHeight) collectionViewLayout:flowLayout];
+        _hotUserList.nav = self.navigationController;
     }
     return _hotUserList;
 }
@@ -434,13 +431,6 @@ static NSString *const allCommentsCellId = @"AllCommentsCellId";
         _homeTable.backgroundColor = [UIColor colorWithHexString:WHITE_COLOR];
         _homeTable.separatorStyle = UITableViewCellSeparatorStyleNone;
         [self addMJRefresh:_homeTable];
-        
-        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(likeTheScene:) name:@"homeLikeTheScene" object:nil];
-        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(cancelLikeTheScene:) name:@"homeCancelLikeTheScene" object:nil];
-        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(followTheUser:) name:@"followTheUser" object:nil];
-        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(cancelFollowTheUser:) name:@"cancelFollowTheUser" object:nil];
-        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(favoriteTheScene:) name:@"favoriteTheScene" object:nil];
-        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(cancelFavoriteTheScene:) name:@"cancelFavoriteTheScene" object:nil];
     }
     return _homeTable;
 }
@@ -673,33 +663,6 @@ static NSString *const allCommentsCellId = @"AllCommentsCellId";
     }
 }
 
-#pragma mark - 点赞
-- (void)likeTheScene:(NSNotification *)idx {
-    [self thn_networkLikeSceneData:[idx object]];
-}
-
-- (void)cancelLikeTheScene:(NSNotification *)idx {
-    [self thn_networkCancelLikeData:[idx object]];
-}
-
-#pragma mark - 关注
-- (void)followTheUser:(NSNotification *)idx {
-    [self thn_networkFollowSceneData:[idx object]];
-}
-
-- (void)cancelFollowTheUser:(NSNotification *)idx {
-    [self thn_networkCancelFollowData:[idx object]];
-}
-
-#pragma mark - 收藏
-- (void)favoriteTheScene:(NSNotification *)idx {
-    [self thn_networkFavoriteData:[idx object]];
-}
-
-- (void)cancelFavoriteTheScene:(NSNotification *)idx {
-    [self thn_networkCancelFavoriteData:[idx object]];
-}
-
 #pragma mark - 设置Nav
 - (void)thn_setNavigationViewUI {
     self.view.backgroundColor = [UIColor whiteColor];
@@ -797,6 +760,65 @@ static NSString *const allCommentsCellId = @"AllCommentsCellId";
     [SVProgressHUD dismiss];
 }
 
+#pragma mark - 注册观察者接收消息通知
+- (void)thn_registerNSNotification {
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(likeTheScene:) name:@"homeLikeTheScene" object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(cancelLikeTheScene:) name:@"homeCancelLikeTheScene" object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(followTheUser:) name:@"followTheUser" object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(cancelFollowTheUser:) name:@"cancelFollowTheUser" object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(favoriteTheScene:) name:@"favoriteTheScene" object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(cancelFavoriteTheScene:) name:@"cancelFavoriteTheScene" object:nil];
+    
+    //
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(reloadHotUserListData:) name:@"reloadHotUserListData" object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(followHotUserAction:) name:@"followHotUser" object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(cancelFollowHotUserAction:) name:@"cancelFollowHotUser" object:nil];
+}
+
+//  删除全部热门用户
+- (void)reloadHotUserListData:(NSNotification *)reload {
+    _hotUserCellHeight = 0.0f;
+    NSIndexSet *hotUserIndexSet = [NSIndexSet indexSetWithIndex:_hotUserListIndex];
+    [self.homeTable reloadSections:hotUserIndexSet withRowAnimation:(UITableViewRowAnimationFade)];
+}
+
+//  关注热门用户
+- (void)followHotUserAction:(NSNotification *)userId {
+    [self thn_networkFollowSceneData:[userId object]];
+}
+
+//  取消关注热门用户
+- (void)cancelFollowHotUserAction:(NSNotification *)userId {
+    [self thn_networkCancelFollowData:[userId object]];
+}
+
+#pragma mark - 点赞
+- (void)likeTheScene:(NSNotification *)idx {
+    [self thn_networkLikeSceneData:[idx object]];
+}
+
+- (void)cancelLikeTheScene:(NSNotification *)idx {
+    [self thn_networkCancelLikeData:[idx object]];
+}
+
+#pragma mark - 关注
+- (void)followTheUser:(NSNotification *)idx {
+    [self thn_networkFollowSceneData:[idx object]];
+}
+
+- (void)cancelFollowTheUser:(NSNotification *)idx {
+    [self thn_networkCancelFollowData:[idx object]];
+}
+
+#pragma mark - 收藏
+- (void)favoriteTheScene:(NSNotification *)idx {
+    [self thn_networkFavoriteData:[idx object]];
+}
+
+- (void)cancelFavoriteTheScene:(NSNotification *)idx {
+    [self thn_networkCancelFavoriteData:[idx object]];
+}
+
 - (void)dealloc {
     [[NSNotificationCenter defaultCenter] removeObserver:self name:@"homeLikeTheScene" object:nil];
     [[NSNotificationCenter defaultCenter] removeObserver:self name:@"homeCancelLikeTheScene" object:nil];
@@ -807,6 +829,8 @@ static NSString *const allCommentsCellId = @"AllCommentsCellId";
     
     //
     [[NSNotificationCenter defaultCenter] removeObserver:self name:@"reloadHotUserListData" object:nil];
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:@"followHotUser" object:nil];
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:@"cancelFollowHotUser" object:nil];
 }
 
 @end

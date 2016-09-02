@@ -44,6 +44,14 @@ static NSString *const hotUserCellId = @"HotUserCellId";
         cell.colseTheHotUserBlock = ^(NSString *userId) {
             [weakSelf removeTheHotUserInfo:userId];
         };
+        
+        cell.followHotUserBlock = ^(NSString *userId) {
+            [weakSelf changeHotUserFollow:userId];
+        };
+        
+        cell.cancelFollowHotUserBlock = ^(NSString *userId) {
+            [weakSelf changeHotUserCancelFollow:userId];
+        };
     }
     return cell;
 }
@@ -66,6 +74,20 @@ static NSString *const hotUserCellId = @"HotUserCellId";
         self.backgroundColor = [UIColor whiteColor];
         [[NSNotificationCenter defaultCenter] postNotificationName:@"reloadHotUserListData" object:nil];
     }
+}
+
+- (void)changeHotUserFollow:(NSString *)userId {
+    _index = [self.hotUserIdMarr indexOfObject:userId];
+    [self.hotUserMarr[_index] setValue:@"1" forKey:@"isFollow"];
+    
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"followHotUser" object:userId];
+}
+
+- (void)changeHotUserCancelFollow:(NSString *)userId {
+    _index = [self.hotUserIdMarr indexOfObject:userId];
+    [self.hotUserMarr[_index] setValue:@"0" forKey:@"isFollow"];
+    
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"cancelFollowHotUser" object:userId];
 }
 
 - (void)thn_setHotUserListData:(NSMutableArray *)hotUserMarr {
