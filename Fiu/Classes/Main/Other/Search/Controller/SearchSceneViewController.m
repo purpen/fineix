@@ -197,20 +197,8 @@ static NSString *const SceneListCellId = @"sceneListCellId";
         _sceneList.backgroundColor = [UIColor colorWithHexString:@"#F8F8F8"];
         [_sceneList registerClass:[THNDiscoverSceneCollectionViewCell class] forCellWithReuseIdentifier:SceneListCellId];
         [self addMJRefresh:_sceneList];
-        
-        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(likeTheScene:) name:@"searchFindLikeTheScene" object:nil];
-        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(cancelLikeTheScene:) name:@"searchFindCancelLikeTheScene" object:nil];
     }
     return _sceneList;
-}
-
-#pragma mark - 点赞
-- (void)likeTheScene:(NSNotification *)idx {
-    [self thn_networkLikeSceneData:[idx object]];
-}
-
-- (void)cancelLikeTheScene:(NSNotification *)idx {
-    [self thn_networkCancelLikeData:[idx object]];
 }
 
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
@@ -218,10 +206,22 @@ static NSString *const SceneListCellId = @"sceneListCellId";
 }
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
+    
+    __weak __typeof(self)weakSelf = self;
+    
     THNDiscoverSceneCollectionViewCell * cell = [collectionView dequeueReusableCellWithReuseIdentifier:SceneListCellId
                                                                                           forIndexPath:indexPath];
     if (self.searchSceneListMarr.count) {
         [cell thn_setSceneUserInfoData:self.searchSceneListMarr[indexPath.row]];
+        
+        cell.beginLikeTheSceneBlock = ^(NSString *idx) {
+            [weakSelf thn_networkLikeSceneData:idx];
+        };
+        
+        cell.cancelLikeTheSceneBlock = ^(NSString *idx) {
+            [weakSelf thn_networkCancelLikeData:idx];
+        };
+
     }
     return cell;
 }
@@ -246,9 +246,5 @@ static NSString *const SceneListCellId = @"sceneListCellId";
     return _searchSceneIdMarr;
 }
 
-- (void)dealloc {
-    [[NSNotificationCenter defaultCenter] removeObserver:self name:@"searchFindLikeTheScene" object:nil];
-    [[NSNotificationCenter defaultCenter] removeObserver:self name:@"searchFindCancelLikeTheScene" object:nil];
-}
 
 @end
