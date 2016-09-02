@@ -255,7 +255,7 @@ static NSString *const SceneListFooterCellViewId = @"sceneListFooterViewId";
         THNDiscoverSceneCollectionViewCell * cell = [collectionView dequeueReusableCellWithReuseIdentifier:SceneListCellId
                                                                                               forIndexPath:indexPath];
         if (self.sceneListMarr.count) {
-            [cell thn_setSceneUserInfoData:self.sceneListMarr[indexPath.row]];
+            [cell thn_setSceneUserInfoData:self.sceneListMarr[indexPath.row] isLogin:[self isUserLogin]];
             cell.beginLikeTheSceneBlock = ^(NSString *idx) {
                 [weakSelf thn_networkLikeSceneData:idx];
             };
@@ -264,13 +264,14 @@ static NSString *const SceneListFooterCellViewId = @"sceneListFooterViewId";
                 [weakSelf thn_networkCancelLikeData:idx];
             };
         }
+        cell.vc = self;
         return cell;
         
     } else if (indexPath.section == 1) {
         THNDiscoverSceneCollectionViewCell * cell = [collectionView dequeueReusableCellWithReuseIdentifier:SceneListCellId
                                                                                               forIndexPath:indexPath];
         if (self.sceneListMarr.count) {
-            [cell thn_setSceneUserInfoData:self.sceneListMarr[indexPath.row + 10]];
+            [cell thn_setSceneUserInfoData:self.sceneListMarr[indexPath.row + 10] isLogin:[self isUserLogin]];
             cell.beginLikeTheSceneBlock = ^(NSString *idx) {
                 [weakSelf thn_networkLikeSceneData:idx];
             };
@@ -279,13 +280,14 @@ static NSString *const SceneListFooterCellViewId = @"sceneListFooterViewId";
                 [weakSelf thn_networkCancelLikeData:idx];
             };
         }
+        cell.vc = self;
         return cell;
     
     } else {
         THNDiscoverSceneCollectionViewCell * cell = [collectionView dequeueReusableCellWithReuseIdentifier:SceneListCellId
                                                                                               forIndexPath:indexPath];
         if (self.sceneListMarr.count) {
-            [cell thn_setSceneUserInfoData:self.sceneListMarr[indexPath.row + 20]];
+            [cell thn_setSceneUserInfoData:self.sceneListMarr[indexPath.row + 20] isLogin:[self isUserLogin]];
             cell.beginLikeTheSceneBlock = ^(NSString *idx) {
                 [weakSelf thn_networkLikeSceneData:idx];
             };
@@ -294,6 +296,7 @@ static NSString *const SceneListFooterCellViewId = @"sceneListFooterViewId";
                 [weakSelf thn_networkCancelLikeData:idx];
             };
         }
+        cell.vc = self;
         return cell;
     }
     return nil;

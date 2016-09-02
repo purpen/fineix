@@ -354,7 +354,7 @@ static NSString *const URLCancelFollowUser = @"/follow/ajax_cancel_follow";
                     make.top.mas_equalTo(self.top.mas_bottom).offset(0);
                 }];
 //                self.top.userModel = self.resultsAry[indexPath.row];
-                [self.top thn_setHomeSceneUserInfoData:self.resultsAry[indexPath.row] userId:[self getLoginUserID]];
+                [self.top thn_setHomeSceneUserInfoData:self.resultsAry[indexPath.row] userId:[self getLoginUserID] isLogin:[self isUserLogin]];
                 [self.scene thn_setSceneImageData:self.resultsAry[indexPath.row]];
                 return cell;
             }

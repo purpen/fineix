@@ -150,7 +150,7 @@ static NSString *const URLCancelFavorite = @"/favorite/ajax_cancel_favorite";
     if (indexPath.row == 0) {
         THNUserInfoTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:userInfoCellId];
         cell = [[THNUserInfoTableViewCell alloc] initWithStyle:(UITableViewCellStyleDefault) reuseIdentifier:userInfoCellId];
-        [cell thn_setHomeSceneUserInfoData:self.model userId:[self getLoginUserID]];
+        [cell thn_setHomeSceneUserInfoData:self.model userId:[self getLoginUserID] isLogin:[self isUserLogin]];
         cell.follow.tag = indexPath.row;
         [cell.follow addTarget:self action:@selector(followClick:) forControlEvents:UIControlEventTouchUpInside];
         return cell;
@@ -169,7 +169,7 @@ static NSString *const URLCancelFavorite = @"/favorite/ajax_cancel_favorite";
         THNDataInfoTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:dataInfoCellId];
         cell = [[THNDataInfoTableViewCell alloc] initWithStyle:(UITableViewCellStyleDefault) reuseIdentifier:dataInfoCellId];
         if (self.model) {
-            [cell thn_setSceneData:self.model];
+            [cell thn_setSceneData:self.model isLogin:[self isUserLogin]];
             cell.vc = self;
             cell.nav = self.navigationController;
         }

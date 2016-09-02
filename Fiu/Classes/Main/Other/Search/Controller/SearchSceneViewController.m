@@ -212,7 +212,7 @@ static NSString *const SceneListCellId = @"sceneListCellId";
     THNDiscoverSceneCollectionViewCell * cell = [collectionView dequeueReusableCellWithReuseIdentifier:SceneListCellId
                                                                                           forIndexPath:indexPath];
     if (self.searchSceneListMarr.count) {
-        [cell thn_setSceneUserInfoData:self.searchSceneListMarr[indexPath.row]];
+        [cell thn_setSceneUserInfoData:self.searchSceneListMarr[indexPath.row] isLogin:[self isUserLogin]];
         
         cell.beginLikeTheSceneBlock = ^(NSString *idx) {
             [weakSelf thn_networkLikeSceneData:idx];
@@ -223,6 +223,7 @@ static NSString *const SceneListCellId = @"sceneListCellId";
         };
 
     }
+    cell.vc = self;
     return cell;
 }
 

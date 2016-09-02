@@ -47,7 +47,7 @@ static NSString *const SceneListCellId = @"sceneListCellId";
 }
 
 #pragma mark - 网络请求
-#pragma mark 订阅主题数量
+//  订阅主题数量
 - (void)thn_networkSubCountData {
     self.subscribeCountRequest = [FBAPI getWithUrlString:URLSubCount requestDictionary:@{} delegate:self];
     [self.subscribeCountRequest startRequestSuccess:^(FBRequest *request, id result) {
@@ -58,7 +58,7 @@ static NSString *const SceneListCellId = @"sceneListCellId";
     }];
 }
 
-#pragma mark 点赞
+//  点赞
 - (void)thn_networkLikeSceneData:(NSString *)idx {
     self.likeSceneRequest = [FBAPI postWithUrlString:URLLikeScene requestDictionary:@{@"id":idx} delegate:self];
     [self.likeSceneRequest startRequestSuccess:^(FBRequest *request, id result) {
@@ -74,7 +74,7 @@ static NSString *const SceneListCellId = @"sceneListCellId";
     }];
 }
 
-#pragma mark 取消点赞
+//  取消点赞
 - (void)thn_networkCancelLikeData:(NSString *)idx {
     self.cancelLikeRequest = [FBAPI postWithUrlString:URLCancelLike requestDictionary:@{@"id":idx} delegate:self];
     [self.cancelLikeRequest startRequestSuccess:^(FBRequest *request, id result) {
@@ -90,7 +90,7 @@ static NSString *const SceneListCellId = @"sceneListCellId";
     }];
 }
 
-#pragma mark 情景列表
+//  情景列表
 - (void)thn_networkSceneListData {
     self.sceneListRequest = [FBAPI getWithUrlString:URLSceneList requestDictionary:@{@"page":@(self.currentpageNum + 1),
                                                                                      @"size":@"10",
@@ -219,9 +219,7 @@ static NSString *const SceneListCellId = @"sceneListCellId";
         _sceneList.backgroundColor = [UIColor colorWithHexString:@"#F8F8F8"];
         [_sceneList registerClass:[THNDiscoverSceneCollectionViewCell class] forCellWithReuseIdentifier:SceneListCellId];
         [self addMJRefresh:_sceneList];
-        
-        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(likeTheScene:) name:@"subFindLikeTheScene" object:nil];
-        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(cancelLikeTheScene:) name:@"subFindCancelLikeTheScene" object:nil];
+
     }
     return _sceneList;
 }
@@ -231,35 +229,30 @@ static NSString *const SceneListCellId = @"sceneListCellId";
 }
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
+    
+    __weak __typeof(self)weakSelf = self;
+    
     THNDiscoverSceneCollectionViewCell * cell = [collectionView dequeueReusableCellWithReuseIdentifier:SceneListCellId
                                                                                           forIndexPath:indexPath];
     if (self.sceneListMarr.count) {
-        [cell thn_setSceneUserInfoData:self.sceneListMarr[indexPath.row]];
+        [cell thn_setSceneUserInfoData:self.sceneListMarr[indexPath.row] isLogin:[self isUserLogin]];
+        
+        cell.beginLikeTheSceneBlock = ^(NSString *idx) {
+            [weakSelf thn_networkLikeSceneData:idx];
+        };
+        
+        cell.cancelLikeTheSceneBlock = ^(NSString *idx) {
+            [weakSelf thn_networkCancelLikeData:idx];
+        };
     }
+    cell.vc = self;
     return cell;
 }
 
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
-//    THNSceneListViewController *sceneListVC = [[THNSceneListViewController alloc] init];
-//    sceneListVC.sceneListMarr = self.sceneListMarr;
-//    sceneListVC.commentsMarr = self.commentsMarr;
-//    sceneListVC.sceneIdMarr = self.sceneIdMarr;
-//    sceneListVC.userIdMarr = self.userIdMarr;
-//    sceneListVC.index = indexPath.row;
-//    [self.navigationController pushViewController:sceneListVC animated:YES];
-    
     THNSceneDetalViewController *sceneDataVC = [[THNSceneDetalViewController alloc] init];
     sceneDataVC.sceneDetalId = self.sceneIdMarr[indexPath.row];
     [self.navigationController pushViewController:sceneDataVC animated:YES];
-}
-
-#pragma mark - 点赞
-- (void)likeTheScene:(NSNotification *)idx {
-    [self thn_networkLikeSceneData:[idx object]];
-}
-
-- (void)cancelLikeTheScene:(NSNotification *)idx {
-    [self thn_networkCancelLikeData:[idx object]];
 }
 
 #pragma mark - 设置Nav
@@ -297,11 +290,6 @@ static NSString *const SceneListCellId = @"sceneListCellId";
         _commentsMarr = [NSMutableArray array];
     }
     return _commentsMarr;
-}
-
-- (void)dealloc {
-    [[NSNotificationCenter defaultCenter] removeObserver:self name:@"subFindLikeTheScene" object:nil];
-    [[NSNotificationCenter defaultCenter] removeObserver:self name:@"subFindCancelLikeTheScene" object:nil];
 }
 
 @end

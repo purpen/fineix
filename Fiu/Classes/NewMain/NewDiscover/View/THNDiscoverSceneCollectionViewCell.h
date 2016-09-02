@@ -18,6 +18,7 @@ typedef void(^CancelLikeTheSceneBlock)(NSString *idx);
 
 @interface THNDiscoverSceneCollectionViewCell : UICollectionViewCell
 
+@pro_strong UIViewController *vc;
 @pro_strong UIImageView *image;
 @pro_strong UIView *userInfo;
 @pro_strong UIImageView *userHeader;
@@ -39,6 +40,6 @@ typedef void(^CancelLikeTheSceneBlock)(NSString *idx);
  */
 @pro_copy CancelLikeTheSceneBlock cancelLikeTheSceneBlock;
 
-- (void)thn_setSceneUserInfoData:(HomeSceneListRow *)model;
+- (void)thn_setSceneUserInfoData:(HomeSceneListRow *)model isLogin:(BOOL)login;
 
 @end

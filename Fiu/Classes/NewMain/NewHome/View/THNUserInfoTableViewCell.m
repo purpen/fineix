@@ -10,11 +10,13 @@
 #import "THNHotUserCollectionViewCell.h"
 #import "HotUserListUser.h"
 #import "HomePageViewController.h"
+#import "THNLoginRegisterViewController.h"
 
 static NSString *const hotUserCellId = @"HotUserCellId";
 
 @interface THNUserInfoTableViewCell () {
     NSString *_userId;
+    BOOL _isLogin;
 }
 
 @end
@@ -60,7 +62,8 @@ static NSString *const hotUserCellId = @"HotUserCellId";
 }
 
 #pragma mark - setModel
-- (void)thn_setHomeSceneUserInfoData:(HomeSceneListRow *)userModel userId:(NSString *)userID {
+- (void)thn_setHomeSceneUserInfoData:(HomeSceneListRow *)userModel userId:(NSString *)userID isLogin:(BOOL)login {
+    _isLogin = login;
     self.name.text = userModel.user.nickname;
     [self.head sd_setImageWithURL:[NSURL URLWithString:userModel.user.avatarUrl]
                          forState:(UIControlStateNormal)
@@ -229,31 +232,38 @@ static NSString *const hotUserCellId = @"HotUserCellId";
 }
 
 - (void)followClick:(UIButton *)button {
-    if (button.selected == NO) {
-        button.selected = YES;
-        POPSpringAnimation *scaleAnimation = [POPSpringAnimation animationWithPropertyNamed:kPOPLayerScaleXY];
-        scaleAnimation.fromValue = [NSValue valueWithCGSize:CGSizeMake(0.5, 0.5)];
-        scaleAnimation.toValue = [NSValue valueWithCGSize:CGSizeMake(1.0, 1.0)];
-        scaleAnimation.springBounciness = 10.f;
-        scaleAnimation.springSpeed = 10.0f;
-        [button.layer pop_addAnimation:scaleAnimation forKey:@"scaleAnim"];
-        button.layer.borderColor = [UIColor colorWithHexString:MAIN_COLOR].CGColor;
-        button.backgroundColor = [UIColor colorWithHexString:MAIN_COLOR];
+    if (_isLogin) {
+        if (button.selected == NO) {
+            button.selected = YES;
+            POPSpringAnimation *scaleAnimation = [POPSpringAnimation animationWithPropertyNamed:kPOPLayerScaleXY];
+            scaleAnimation.fromValue = [NSValue valueWithCGSize:CGSizeMake(0.5, 0.5)];
+            scaleAnimation.toValue = [NSValue valueWithCGSize:CGSizeMake(1.0, 1.0)];
+            scaleAnimation.springBounciness = 10.f;
+            scaleAnimation.springSpeed = 10.0f;
+            [button.layer pop_addAnimation:scaleAnimation forKey:@"scaleAnim"];
+            button.layer.borderColor = [UIColor colorWithHexString:MAIN_COLOR].CGColor;
+            button.backgroundColor = [UIColor colorWithHexString:MAIN_COLOR];
+            
+            self.beginFollowTheUserBlock(_userId);
+            
+        } else if (button.selected == YES) {
+            button.selected = NO;
+            POPSpringAnimation *scaleAnimation = [POPSpringAnimation animationWithPropertyNamed:kPOPLayerScaleXY];
+            scaleAnimation.fromValue = [NSValue valueWithCGSize:CGSizeMake(0.5, 0.5)];
+            scaleAnimation.toValue = [NSValue valueWithCGSize:CGSizeMake(1.0, 1.0)];
+            scaleAnimation.springBounciness = 10.f;
+            scaleAnimation.springSpeed = 10.0f;
+            [button.layer pop_addAnimation:scaleAnimation forKey:@"scaleAnim"];
+            button.layer.borderColor = [UIColor colorWithHexString:WHITE_COLOR alpha:0.6].CGColor;
+            button.backgroundColor = [UIColor colorWithHexString:BLACK_COLOR];
+            
+            self.cancelFollowTheUserBlock(_userId);
+        }
         
-        self.beginFollowTheUserBlock(_userId);
-        
-    } else if (button.selected == YES) {
-        button.selected = NO;
-        POPSpringAnimation *scaleAnimation = [POPSpringAnimation animationWithPropertyNamed:kPOPLayerScaleXY];
-        scaleAnimation.fromValue = [NSValue valueWithCGSize:CGSizeMake(0.5, 0.5)];
-        scaleAnimation.toValue = [NSValue valueWithCGSize:CGSizeMake(1.0, 1.0)];
-        scaleAnimation.springBounciness = 10.f;
-        scaleAnimation.springSpeed = 10.0f;
-        [button.layer pop_addAnimation:scaleAnimation forKey:@"scaleAnim"];
-        button.layer.borderColor = [UIColor colorWithHexString:WHITE_COLOR alpha:0.6].CGColor;
-        button.backgroundColor = [UIColor colorWithHexString:BLACK_COLOR];
-        
-        self.cancelFollowTheUserBlock(_userId);
+    } else {
+        THNLoginRegisterViewController * loginSignupVC = [[THNLoginRegisterViewController alloc] init];
+        UINavigationController * navi = [[UINavigationController alloc] initWithRootViewController:loginSignupVC];
+        [self.vc presentViewController:navi animated:YES completion:nil];
     }
 }
 

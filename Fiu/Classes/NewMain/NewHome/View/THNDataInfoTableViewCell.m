@@ -10,6 +10,7 @@
 #import "CommentNViewController.h"
 #import "FBAlertViewController.h"
 #import "FBShareViewController.h"
+#import "THNLoginRegisterViewController.h"
 
 @implementation THNDataInfoTableViewCell {
     NSString *_sceneId;
@@ -17,6 +18,7 @@
     NSInteger _loveCount;
     HomeSceneListRow *_sceneModel;
     NSInteger _isFavorite;
+    BOOL _isLogin;
 }
 
 - (instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier {
@@ -25,13 +27,13 @@
         self.selectionStyle = UITableViewCellSelectionStyleNone;
         self.backgroundColor = [UIColor whiteColor];
         [self setCellUI];
-    
     }
     return self;
 }
 
 #pragma mark - setModel;
-- (void)thn_setSceneData:(HomeSceneListRow *)dataModel {
+- (void)thn_setSceneData:(HomeSceneListRow *)dataModel isLogin:(BOOL)login {
+    _isLogin = login;
     _isFavorite = dataModel.isFavorite;
     _sceneModel = dataModel;
     [self.look setTitle:[NSString stringWithFormat:@"%zi", dataModel.viewCount] forState:(UIControlStateNormal)];
@@ -171,33 +173,40 @@
 }
 
 - (void)likeClick:(UIButton *)button {
-    if (button.selected == NO) {
-        button.selected = YES;
-        POPSpringAnimation *scaleAnimation = [POPSpringAnimation animationWithPropertyNamed:kPOPLayerScaleXY];
-        scaleAnimation.fromValue = [NSValue valueWithCGSize:CGSizeMake(1.3, 1.3)];
-        scaleAnimation.toValue = [NSValue valueWithCGSize:CGSizeMake(1.0, 1.0)];
-        scaleAnimation.springBounciness = 10.f;
-        scaleAnimation.springSpeed = 10.0f;
-        [button.layer pop_addAnimation:scaleAnimation forKey:@"scaleAnim"];
-
-        _loveCount += 1;
-        [self.like setTitle:[NSString stringWithFormat:@"%zi", _loveCount] forState:(UIControlStateNormal)];
+    if (_isLogin) {
+        if (button.selected == NO) {
+            button.selected = YES;
+            POPSpringAnimation *scaleAnimation = [POPSpringAnimation animationWithPropertyNamed:kPOPLayerScaleXY];
+            scaleAnimation.fromValue = [NSValue valueWithCGSize:CGSizeMake(1.3, 1.3)];
+            scaleAnimation.toValue = [NSValue valueWithCGSize:CGSizeMake(1.0, 1.0)];
+            scaleAnimation.springBounciness = 10.f;
+            scaleAnimation.springSpeed = 10.0f;
+            [button.layer pop_addAnimation:scaleAnimation forKey:@"scaleAnim"];
+            
+            _loveCount += 1;
+            [self.like setTitle:[NSString stringWithFormat:@"%zi", _loveCount] forState:(UIControlStateNormal)];
+            
+            self.beginLikeTheSceneBlock(_sceneId);
+            
+        } else if (button.selected == YES) {
+            button.selected = NO;
+            POPSpringAnimation *scaleAnimation = [POPSpringAnimation animationWithPropertyNamed:kPOPLayerScaleXY];
+            scaleAnimation.fromValue = [NSValue valueWithCGSize:CGSizeMake(1.3, 1.3)];
+            scaleAnimation.toValue = [NSValue valueWithCGSize:CGSizeMake(1.0, 1.0)];
+            scaleAnimation.springBounciness = 10.f;
+            scaleAnimation.springSpeed = 10.0f;
+            [button.layer pop_addAnimation:scaleAnimation forKey:@"scaleAnim"];
+            
+            _loveCount -= 1;
+            [self.like setTitle:[NSString stringWithFormat:@"%zi", _loveCount] forState:(UIControlStateNormal)];
+            
+            self.cancelLikeTheSceneBlock(_sceneId);
+        }
         
-        self.beginLikeTheSceneBlock(_sceneId);
-        
-    } else if (button.selected == YES) {
-        button.selected = NO;
-        POPSpringAnimation *scaleAnimation = [POPSpringAnimation animationWithPropertyNamed:kPOPLayerScaleXY];
-        scaleAnimation.fromValue = [NSValue valueWithCGSize:CGSizeMake(1.3, 1.3)];
-        scaleAnimation.toValue = [NSValue valueWithCGSize:CGSizeMake(1.0, 1.0)];
-        scaleAnimation.springBounciness = 10.f;
-        scaleAnimation.springSpeed = 10.0f;
-        [button.layer pop_addAnimation:scaleAnimation forKey:@"scaleAnim"];
-        
-        _loveCount -= 1;
-        [self.like setTitle:[NSString stringWithFormat:@"%zi", _loveCount] forState:(UIControlStateNormal)];
-        
-        self.cancelLikeTheSceneBlock(_sceneId);
+    } else {
+        THNLoginRegisterViewController * loginSignupVC = [[THNLoginRegisterViewController alloc] init];
+        UINavigationController * navi = [[UINavigationController alloc] initWithRootViewController:loginSignupVC];
+        [self.vc presentViewController:navi animated:YES completion:nil];
     }
 }
 
