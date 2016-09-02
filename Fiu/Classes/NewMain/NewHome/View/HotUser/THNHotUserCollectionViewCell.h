@@ -11,6 +11,8 @@
 #import "THNMacro.h"
 #import "HotUserListUser.h"
 
+typedef void(^ColseTheHotUserBlock)(NSString *userId);
+
 @interface THNHotUserCollectionViewCell : UICollectionViewCell
 
 @pro_strong UIButton *close;
@@ -18,6 +20,7 @@
 @pro_strong UILabel *name;
 @pro_strong UILabel *info;
 @pro_strong UIButton *follow;
+@pro_copy ColseTheHotUserBlock colseTheHotUserBlock;
 
 - (void)setHotUserListData:(HotUserListUser *)model;
 

@@ -30,10 +30,14 @@
     [self.header downloadImage:model.mediumAvatarUrl place:[UIImage imageNamed:@""]];
     self.name.text = model.nickname;
     self.info.text = model.summary;
+    
     if (model.isFollow == 0) {
         self.follow.selected = NO;
+        self.follow.backgroundColor = [UIColor whiteColor];
+        
     } else if (model.isFollow == 1) {
         self.follow.selected = YES;
+        self.follow.backgroundColor = [UIColor colorWithHexString:MAIN_COLOR];
     }
 }
 
@@ -87,7 +91,7 @@
 }
 
 - (void)closeBtnClick {
-    [[NSNotificationCenter defaultCenter] postNotificationName:@"closeTheUserInfo" object:_userId];
+    self.colseTheHotUserBlock(_userId);
 }
 
 - (UIImageView *)header {
@@ -128,13 +132,15 @@
         _follow.layer.borderColor = [UIColor colorWithHexString:@"#979797" alpha:1].CGColor;
         _follow.layer.borderWidth = 0.5f;
         _follow.backgroundColor = [UIColor whiteColor];
+        _follow.titleLabel.font = [UIFont systemFontOfSize:12];
         [_follow setTitle:NSLocalizedString(@"User_follow", nil) forState:(UIControlStateNormal)];
         [_follow setTitle:NSLocalizedString(@"User_followDone", nil) forState:(UIControlStateSelected)];
         [_follow setTitleColor:[UIColor colorWithHexString:@"#222222"] forState:(UIControlStateNormal)];
-        _follow.titleLabel.font = [UIFont systemFontOfSize:12];
-        [_follow addTarget:self action:@selector(followClick:) forControlEvents:(UIControlEventTouchUpInside)];
-        [_follow setImage:[UIImage imageNamed:@"icon_success_black"] forState:(UIControlStateSelected)];
+        [_follow setTitleColor:[UIColor colorWithHexString:@"#FFFFFF"] forState:(UIControlStateSelected)];
+        [_follow setImage:[UIImage imageNamed:@"icon_success"] forState:(UIControlStateSelected)];
         [_follow setImageEdgeInsets:(UIEdgeInsetsMake(0, -6, 0, 0))];
+        
+        [_follow addTarget:self action:@selector(followClick:) forControlEvents:(UIControlEventTouchUpInside)];
     }
     return _follow;
 }
@@ -148,7 +154,7 @@
         scaleAnimation.springBounciness = 10.f;
         scaleAnimation.springSpeed = 10.0f;
         [button.layer pop_addAnimation:scaleAnimation forKey:@"scaleAnim"];
-        [button setTitleColor:[UIColor colorWithHexString:WHITE_COLOR] forState:(UIControlStateNormal)];
+        
         button.layer.borderColor = [UIColor colorWithHexString:MAIN_COLOR].CGColor;
         button.backgroundColor = [UIColor colorWithHexString:MAIN_COLOR];
         
@@ -162,7 +168,7 @@
         scaleAnimation.springBounciness = 10.f;
         scaleAnimation.springSpeed = 10.0f;
         [button.layer pop_addAnimation:scaleAnimation forKey:@"scaleAnim"];
-        [button setTitleColor:[UIColor colorWithHexString:@"#222222"] forState:(UIControlStateNormal)];
+        
         button.layer.borderColor = [UIColor colorWithHexString:@"#979797" alpha:1].CGColor;
         button.backgroundColor = [UIColor colorWithHexString:WHITE_COLOR];
         

@@ -9,6 +9,7 @@
 #import "THNViewController.h"
 #import "FBRollImages.h"
 #import "GroupHeaderView.h"
+#import "THNHotUserView.h"
 
 @interface THNHomeViewController : THNViewController <
     THNNavigationBarItemsDelegate,
@@ -42,5 +43,8 @@
 @pro_strong NSMutableArray *commentsMarr;
 @pro_strong NSMutableArray *commentsCountMarr;
 @pro_strong NSMutableArray *hotUserMarr;
+
+//
+@pro_strong THNHotUserView *hotUserList;
 
 @end

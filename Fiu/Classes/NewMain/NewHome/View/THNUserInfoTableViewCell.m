@@ -59,18 +59,20 @@ static NSString *const hotUserCellId = @"HotUserCellId";
     _userId = userModel.user._id;
 }
 
-#pragma mark - setModel 
+#pragma mark - setModel
 - (void)thn_setHomeSceneUserInfoData:(HomeSceneListRow *)userModel userId:(NSString *)userID {
+    self.name.text = userModel.user.nickname;
     [self.head sd_setImageWithURL:[NSURL URLWithString:userModel.user.avatarUrl]
                          forState:(UIControlStateNormal)
                  placeholderImage:[UIImage imageNamed:@""]];
-    self.name.text = userModel.user.nickname;
-    [self.time setTitle:userModel.createdAt forState:(UIControlStateNormal)];
+    [self.address setTitle:[NSString stringWithFormat:@"%@ %@", userModel.city, userModel.address]
+                  forState:(UIControlStateNormal)];
+    [self.time setTitle:userModel.createdAt
+               forState:(UIControlStateNormal)];
     NSString *timeStr = [NSString stringWithFormat:@"      %@",userModel.createdAt];
     [self.time mas_updateConstraints:^(MASConstraintMaker *make) {
         make.width.equalTo(@([self getTextSizeWidth:timeStr].width));
     }];
-    [self.address setTitle:[NSString stringWithFormat:@"%@ %@", userModel.city, userModel.address] forState:(UIControlStateNormal)];
     
     if (userModel.address.length == 0) {
         self.address.hidden = YES;
@@ -114,26 +116,6 @@ static NSString *const hotUserCellId = @"HotUserCellId";
     return retSize;
 }
 
-- (void)thn_setHotUserListData:(NSMutableArray *)hotUserMarr {
-    [self.hotUserIdMarr removeAllObjects];
-    self.hotUserMarr = hotUserMarr;
-    for (HotUserListUser *model in hotUserMarr) {
-        [self.hotUserIdMarr addObject:[NSString stringWithFormat:@"%zi", model.idField]];
-    }
-    [self.hotUserList reloadData];
-}
-
-- (void)thn_isShowHotUserList:(BOOL)show {
-    if (show) {
-        [self addSubview:self.hotUserList];
-        [_hotUserList mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.size.mas_equalTo(CGSizeMake(SCREEN_WIDTH, 230));
-            make.left.equalTo(self.mas_left).with.offset(0);
-            make.top.equalTo(self.mas_top).with.offset(0);
-        }];
-    }
-}
-
 #pragma mark - setUI
 - (void)setCellUI {
     [self addSubview:self.bottomView];
@@ -142,59 +124,6 @@ static NSString *const hotUserCellId = @"HotUserCellId";
         make.left.equalTo(self.mas_left).with.offset(0);
         make.bottom.equalTo(self.mas_bottom).with.offset(0);
     }];
-}
-
-#pragma mark - init
-- (UICollectionView *)hotUserList {
-    if (!_hotUserList) {
-        UICollectionViewFlowLayout *flowLayout = [[UICollectionViewFlowLayout alloc] init];
-        flowLayout.itemSize = CGSizeMake(140, 190);
-        flowLayout.sectionInset = UIEdgeInsetsMake(15, 10, 15, 10);
-        flowLayout.minimumLineSpacing = 5.0f;
-        flowLayout.scrollDirection = UICollectionViewScrollDirectionHorizontal;
-        
-        _hotUserList = [[UICollectionView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 230) collectionViewLayout:flowLayout];
-        _hotUserList.delegate = self;
-        _hotUserList.dataSource = self;
-        _hotUserList.backgroundColor = [UIColor colorWithHexString:@"#444444"];
-        _hotUserList.showsHorizontalScrollIndicator = NO;
-        [_hotUserList registerClass:[THNHotUserCollectionViewCell class] forCellWithReuseIdentifier:hotUserCellId];
-        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(closeTheUserInfo:) name:@"closeTheUserInfo" object:nil];
-    }
-    return _hotUserList;
-}
-
-- (void)closeTheUserInfo:(NSNotification *)userId {
-    NSUInteger index = [self.hotUserIdMarr indexOfObject:[userId object]];
-    [self.hotUserMarr removeObjectAtIndex:index];
-    [self.hotUserIdMarr removeObjectAtIndex:index];
-    if (self.hotUserMarr.count) {
-        [self.hotUserList reloadData];
-    }
-    
-    if (self.hotUserMarr.count == 0) {
-        [[NSNotificationCenter defaultCenter] postNotificationName:@"deleteHotUserList" object:nil];
-    }
-}
-
-- (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
-    return self.hotUserMarr.count;
-}
-
-- (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
-    THNHotUserCollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:hotUserCellId
-                                                                                   forIndexPath:indexPath];
-    if (self.hotUserMarr.count) {
-        [cell setHotUserListData:self.hotUserMarr[indexPath.row]];
-    }
-    return cell;
-}
-
-- (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
-    HomePageViewController *userHomeVC = [[HomePageViewController alloc] init];
-    userHomeVC.userId = self.hotUserIdMarr[indexPath.row];
-    userHomeVC.type = @2;
-    [self.nav pushViewController:userHomeVC animated:YES];
 }
 
 - (UIView *)bottomView {
@@ -357,21 +286,4 @@ static NSString *const hotUserCellId = @"HotUserCellId";
 //    [SVProgressHUD showSuccessWithStatus:@"打开情景地图"];
 }
 
-- (NSMutableArray *)hotUserMarr {
-    if (!_hotUserMarr) {
-        _hotUserMarr = [NSMutableArray array];
-    }
-    return _hotUserMarr;
-}
-
-- (NSMutableArray *)hotUserIdMarr {
-    if (!_hotUserIdMarr) {
-        _hotUserIdMarr = [NSMutableArray array];
-    }
-    return _hotUserIdMarr;
-}
-
-- (void)dealloc {
-    [[NSNotificationCenter defaultCenter] removeObserver:self name:@"cancelFollowTheUser" object:nil];
-}
 @end

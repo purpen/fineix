@@ -54,6 +54,7 @@
 - (void)attributedLabel:(TTTAttributedLabel *)label didSelectLinkWithURL:(NSURL *)url {
     NSString *userUrl = [[url absoluteString] stringByReplacingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
     NSString *user = [userUrl substringFromIndex:16];
+#pragma unused(user)
 }
 
 #pragma mark - setUI
@@ -74,10 +75,10 @@
     
     [self addSubview:self.comment];
     [_comment mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.equalTo(_graybackView).with.offset(40);
-        make.right.equalTo(_graybackView).with.offset(-10);
-        make.top.equalTo(_graybackView).with.offset(5);
-        make.bottom.equalTo(_graybackView).with.offset(0);
+        make.left.equalTo(_graybackView.mas_left).with.offset(40);
+        make.right.equalTo(_graybackView.mas_right).with.offset(-10);
+        make.top.equalTo(_graybackView.mas_top).with.offset(5);
+        make.bottom.equalTo(_graybackView.mas_bottom).with.offset(0);
     }];
 }
 
