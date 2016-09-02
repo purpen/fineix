@@ -18,6 +18,7 @@ typedef void(^CancelFollowTheUserBlock)(NSString *userId);
 @interface THNUserInfoTableViewCell : UITableViewCell
 
 @pro_strong UINavigationController *nav;
+@pro_strong UIViewController *vc;
 @pro_strong UIView *bottomView;
 @pro_strong UIButton *head;
 @pro_strong UIImageView *certificate;
@@ -39,6 +40,6 @@ typedef void(^CancelFollowTheUserBlock)(NSString *userId);
 /**  */
 @property (nonatomic, strong) HomeSceneListRow *userModel;
 
-- (void)thn_setHomeSceneUserInfoData:(HomeSceneListRow *)userModel userId:(NSString *)userID;
+- (void)thn_setHomeSceneUserInfoData:(HomeSceneListRow *)userModel userId:(NSString *)userID isLogin:(BOOL)login;
 
 @end

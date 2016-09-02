@@ -26,7 +26,7 @@ typedef void(^CancelFavoriteTheSceneBlock)(NSString *idx);
 @pro_strong UIButton *share;
 @pro_strong UIButton *more;
 
-- (void)thn_setSceneData:(HomeSceneListRow *)dataModel;
+- (void)thn_setSceneData:(HomeSceneListRow *)dataModel isLogin:(BOOL)login;
 
 /**
  *  点赞

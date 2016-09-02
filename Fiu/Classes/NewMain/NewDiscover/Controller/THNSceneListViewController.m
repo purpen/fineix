@@ -184,7 +184,7 @@ static NSString *const twoCommentsCellId = @"TwoCommentsCellId";
         THNUserInfoTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:userInfoCellId];
         cell = [[THNUserInfoTableViewCell alloc] initWithStyle:(UITableViewCellStyleDefault) reuseIdentifier:userInfoCellId];
         if (self.sceneListMarr.count) {
-            [cell thn_setHomeSceneUserInfoData:self.sceneListMarr[indexPath.section] userId:[self getLoginUserID]];
+            [cell thn_setHomeSceneUserInfoData:self.sceneListMarr[indexPath.section] userId:[self getLoginUserID] isLogin:[self isUserLogin]];
             
             cell.beginFollowTheUserBlock = ^(NSString *userId) {
                 [weakSelf beginFollowUser:userId];
@@ -211,7 +211,7 @@ static NSString *const twoCommentsCellId = @"TwoCommentsCellId";
         THNDataInfoTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:dataInfoCellId];
         cell = [[THNDataInfoTableViewCell alloc] initWithStyle:(UITableViewCellStyleDefault) reuseIdentifier:dataInfoCellId];
         if (self.sceneListMarr.count) {
-            [cell thn_setSceneData:self.sceneListMarr[indexPath.section]];
+            [cell thn_setSceneData:self.sceneListMarr[indexPath.section] isLogin:[self isUserLogin]];
             
             cell.beginLikeTheSceneBlock = ^(NSString *idx) {
                 [weakSelf thn_networkLikeSceneData:idx];

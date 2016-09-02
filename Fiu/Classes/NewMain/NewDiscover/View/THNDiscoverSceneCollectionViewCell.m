@@ -9,11 +9,13 @@
 #import "THNDiscoverSceneCollectionViewCell.h"
 #import "THNSenceModel.h"
 #import "UserInfo.h"
+#import "THNLoginRegisterViewController.h"
 
 @interface THNDiscoverSceneCollectionViewCell () {
     NSString *_sceneId;
     NSString *_userId;
     NSInteger _loveCount;
+    BOOL _isLogin;
 }
 
 @end
@@ -77,7 +79,8 @@
 
 }
 
-- (void)thn_setSceneUserInfoData:(HomeSceneListRow *)sceneModel {
+- (void)thn_setSceneUserInfoData:(HomeSceneListRow *)sceneModel isLogin:(BOOL)login {
+    _isLogin = login;
     [self.image downloadImage:sceneModel.coverUrl place:[UIImage imageNamed:@""]];
     [self.userHeader downloadImage:sceneModel.user.avatarUrl place:[UIImage imageNamed:@""]];
     self.userName.text = sceneModel.user.nickname;
@@ -259,27 +262,34 @@
 }
 
 - (void)likeClick:(UIButton *)button {
-    if (button.selected == NO) {
-        button.selected = YES;
-        POPSpringAnimation *scaleAnimation = [POPSpringAnimation animationWithPropertyNamed:kPOPLayerScaleXY];
-        scaleAnimation.fromValue = [NSValue valueWithCGSize:CGSizeMake(1.1, 1.1)];
-        scaleAnimation.toValue = [NSValue valueWithCGSize:CGSizeMake(1.0, 1.0)];
-        scaleAnimation.springBounciness = 10.f;
-        scaleAnimation.springSpeed = 10.0f;
-        [button.layer pop_addAnimation:scaleAnimation forKey:@"scaleAnim"];
+    if (_isLogin) {
+        if (button.selected == NO) {
+            button.selected = YES;
+            POPSpringAnimation *scaleAnimation = [POPSpringAnimation animationWithPropertyNamed:kPOPLayerScaleXY];
+            scaleAnimation.fromValue = [NSValue valueWithCGSize:CGSizeMake(1.1, 1.1)];
+            scaleAnimation.toValue = [NSValue valueWithCGSize:CGSizeMake(1.0, 1.0)];
+            scaleAnimation.springBounciness = 10.f;
+            scaleAnimation.springSpeed = 10.0f;
+            [button.layer pop_addAnimation:scaleAnimation forKey:@"scaleAnim"];
+            
+            self.beginLikeTheSceneBlock(_sceneId);
+            
+        } else if (button.selected == YES) {
+            button.selected = NO;
+            POPSpringAnimation *scaleAnimation = [POPSpringAnimation animationWithPropertyNamed:kPOPLayerScaleXY];
+            scaleAnimation.fromValue = [NSValue valueWithCGSize:CGSizeMake(1.1, 1.1)];
+            scaleAnimation.toValue = [NSValue valueWithCGSize:CGSizeMake(1.0, 1.0)];
+            scaleAnimation.springBounciness = 10.f;
+            scaleAnimation.springSpeed = 10.0f;
+            [button.layer pop_addAnimation:scaleAnimation forKey:@"scaleAnim"];
+            
+            self.cancelLikeTheSceneBlock(_sceneId);
+        }
         
-        self.beginLikeTheSceneBlock(_sceneId);
-        
-    } else if (button.selected == YES) {
-        button.selected = NO;
-        POPSpringAnimation *scaleAnimation = [POPSpringAnimation animationWithPropertyNamed:kPOPLayerScaleXY];
-        scaleAnimation.fromValue = [NSValue valueWithCGSize:CGSizeMake(1.1, 1.1)];
-        scaleAnimation.toValue = [NSValue valueWithCGSize:CGSizeMake(1.0, 1.0)];
-        scaleAnimation.springBounciness = 10.f;
-        scaleAnimation.springSpeed = 10.0f;
-        [button.layer pop_addAnimation:scaleAnimation forKey:@"scaleAnim"];
-    
-        self.cancelLikeTheSceneBlock(_sceneId);
+    } else {
+        THNLoginRegisterViewController * loginSignupVC = [[THNLoginRegisterViewController alloc] init];
+        UINavigationController * navi = [[UINavigationController alloc] initWithRootViewController:loginSignupVC];
+        [self.vc presentViewController:navi animated:YES completion:nil];
     }
 }
 

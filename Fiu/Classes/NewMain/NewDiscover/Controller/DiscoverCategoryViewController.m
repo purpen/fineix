@@ -226,7 +226,7 @@ static NSString *const URLCancelLike = @"/favorite/ajax_cancel_love";
     THNDiscoverSceneCollectionViewCell * cell = [collectionView dequeueReusableCellWithReuseIdentifier:SceneListCellId
                                                                                           forIndexPath:indexPath];
     if (self.sceneListMarr.count) {
-        [cell thn_setSceneUserInfoData:self.sceneListMarr[indexPath.row]];
+        [cell thn_setSceneUserInfoData:self.sceneListMarr[indexPath.row] isLogin:[self isUserLogin]];
         
         cell.beginLikeTheSceneBlock = ^(NSString *idx) {
             [weakSelf thn_networkLikeSceneData:idx];
@@ -236,6 +236,7 @@ static NSString *const URLCancelLike = @"/favorite/ajax_cancel_love";
             [weakSelf thn_networkCancelLikeData:idx];
         };
     }
+    cell.vc = self;
     return cell;
 }
 
