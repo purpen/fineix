@@ -415,7 +415,7 @@ static BOOL                           _canSendMessage      = YES;
                                                
                                                success(weakSelf, responseObject);
                                            } else {
-//                                               [SVProgressHUD showInfoWithStatus:responseObject[@"message"]];
+                                               [SVProgressHUD showInfoWithStatus:responseObject[@"message"]];
                                            }
                                        }
                                        failure:^(AFHTTPRequestOperation *operation, NSError *error) {
@@ -442,7 +442,7 @@ static BOOL                           _canSendMessage      = YES;
                                                 
                                                 success(weakSelf, responseObject);
                                             } else {
-//                                                [SVProgressHUD showInfoWithStatus:responseObject[@"message"]];
+                                                [SVProgressHUD showInfoWithStatus:responseObject[@"message"]];
                                             }
                                         }
                                         failure:^(AFHTTPRequestOperation *operation, NSError *error) {
@@ -478,7 +478,7 @@ static BOOL                           _canSendMessage      = YES;
                                                     
                                                     success(weakSelf, responseObject);
                                                 } else {
-//                                                    [SVProgressHUD showInfoWithStatus:responseObject[@"message"]];
+                                                    [SVProgressHUD showInfoWithStatus:responseObject[@"message"]];
                                                 }
                                             }
                                             failure:^(AFHTTPRequestOperation *operation, NSError *error) {
@@ -507,7 +507,7 @@ static BOOL                           _canSendMessage      = YES;
                                                     
                                                     success(weakSelf, responseObject);
                                                 } else {
-//                                                    [SVProgressHUD showInfoWithStatus:responseObject[@"message"]];
+                                                    [SVProgressHUD showInfoWithStatus:responseObject[@"message"]];
                                                 }
                                             }
                                             failure:^(AFHTTPRequestOperation *operation, NSError *error) {

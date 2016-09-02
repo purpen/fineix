@@ -396,8 +396,8 @@ static NSString *const twoCommentsCellId = @"TwoCommentsCellId";
         
     } else if (indexPath.row == 4 || indexPath.row == 5) {
         CommentNViewController * commentVC = [[CommentNViewController alloc] init];
-//        commentVC.targetId = self.sceneIdMarr[indexPath.section];
-//        commentVC.sceneUserId = self.userIdMarr[indexPath.section];
+        commentVC.targetId = self.sceneIdMarr[indexPath.section];
+        commentVC.sceneUserId = self.userIdMarr[indexPath.section];
         [self.navigationController pushViewController:commentVC animated:YES];
     }
 }
