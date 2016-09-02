@@ -202,7 +202,7 @@ static NSString *userActivationUrl = @"/gateway/record_fiu_user_active";
     if (!_moviePlayer) {
         NSString * audioPath = [[NSBundle mainBundle] pathForResource:@"Fiu" ofType:@"mp4"];
         NSURL * playUrl = [NSURL fileURLWithPath:audioPath];
-        _moviePlayer=[[MPMoviePlayerController alloc]initWithContentURL:playUrl];
+        _moviePlayer = [[MPMoviePlayerController alloc]initWithContentURL:playUrl];
         _moviePlayer.view.frame=self.view.bounds;
         _moviePlayer.view.autoresizingMask=UIViewAutoresizingFlexibleWidth|UIViewAutoresizingFlexibleHeight;
         _moviePlayer.controlStyle = MPMovieControlStyleNone;
@@ -210,6 +210,11 @@ static NSString *userActivationUrl = @"/gateway/record_fiu_user_active";
         [_moviePlayer.view addSubview:self.soundBtn];
         [_moviePlayer.view addSubview:self.unSoundBtn];
         [_moviePlayer.view addSubview:self.skipBtn];
+        if ([MPMusicPlayerController applicationMusicPlayer].volume != 0) {
+            self.soundBtn.selected = NO;
+        }else{
+            self.soundBtn.selected = YES;
+        }
         
         [self.view addSubview:_moviePlayer.view];
         [[AVAudioSession sharedInstance] setCategory:AVAudioSessionCategoryPlayback error:nil];
@@ -280,9 +285,10 @@ static NSString *userActivationUrl = @"/gateway/record_fiu_user_active";
 -(void)soundClick:(UIButton*)sender{
     sender.selected = !sender.selected;
     if (sender.selected) {
-        [[AVAudioSession sharedInstance] setCategory:AVAudioSessionCategoryAmbient error:nil];
+//        [[AVAudioSession sharedInstance] setCategory:AVAudioSessionCategoryAmbient error:nil];
+        [[MPMusicPlayerController applicationMusicPlayer] setVolume:0];
     }else{
-        [[AVAudioSession sharedInstance] setCategory:AVAudioSessionCategoryPlayback error:nil];
+        [[MPMusicPlayerController applicationMusicPlayer] setVolume:0.5];
     }
 }
 
