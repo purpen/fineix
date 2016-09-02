@@ -65,7 +65,6 @@
     [request startRequestSuccess:^(FBRequest *request, id result) {
         
         NSArray *users = result[@"data"][@"users"];
-        
         self.modelAry = [THNFocusUserModel mj_objectArrayWithKeyValuesArray:users];
         int n = self.modelAry.count % 6;
         int m = n > 0 ? 1 : 0;

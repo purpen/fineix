@@ -227,8 +227,9 @@
                 case 20:
                     //搜索
                 {
+                    NSString *keyWord = [inforTag stringByReplacingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
                     SearchViewController *vc = [[SearchViewController alloc] init];
-                    vc.keyword = inforTag;
+                    vc.keyword = keyWord;
                     NSInteger infoIdTeger = [infoId integerValue];
                     switch (infoIdTeger) {
                         case 3:

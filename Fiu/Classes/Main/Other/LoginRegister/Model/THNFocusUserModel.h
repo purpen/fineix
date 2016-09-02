@@ -18,9 +18,8 @@
 @property(nonatomic,copy) NSString *nickname;
 /**认证标签  */
 @property(nonatomic,copy) NSString *expert_label;
-/** 认证信息 */
-@property(nonatomic,copy) NSString *expert_info;
-
+/**  */
+@property(nonatomic,copy) NSString *label;
 
 
 @end

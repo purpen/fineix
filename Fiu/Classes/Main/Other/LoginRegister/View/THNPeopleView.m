@@ -42,7 +42,11 @@
     _model = model;
     [self.headImageView sd_setImageWithURL:[NSURL URLWithString:model.medium_avatar_url] placeholderImage:[UIImage imageNamed:@"Circle + User"]];
     self.nickNameLabel.text = model.nickname;
-    self.profielLabel.text = [NSString stringWithFormat:@"%@ %@",model.expert_label,model.expert_info];
+    if (model.expert_label.length == 0) {
+        self.profielLabel.text = [NSString stringWithFormat:@"%@",model.expert_label];
+    }else{
+        self.profielLabel.text = [NSString stringWithFormat:@"%@",model.label];
+    }
     
     [self fucos:self.fucosBtn];
 }

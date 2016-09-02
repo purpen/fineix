@@ -60,6 +60,8 @@
 @property (nonatomic, strong) NSMutableArray *commentsMarr;
 /**  */
 @property (nonatomic, strong) NSMutableArray *userIdMarr;
+/**  */
+@property (nonatomic, assign) NSInteger modelAryCount;
 
 @end
 

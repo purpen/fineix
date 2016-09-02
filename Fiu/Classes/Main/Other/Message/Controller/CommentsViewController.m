@@ -15,6 +15,7 @@
 #import "HomePageViewController.h"
 #import "TipNumberView.h"
 #import "THNSceneDetalViewController.h"
+#import "CommentNViewController.h"
 
 @interface CommentsViewController ()<FBNavigationBarItemsDelegate,UITableViewDataSource,UITableViewDelegate>
 {
@@ -228,7 +229,11 @@
 }
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
-    
+    UserInfo *model = _modelAry[indexPath.row];
+    CommentNViewController * commentVC = [[CommentNViewController alloc] init];
+    commentVC.targetId = _sceneIdMarr[indexPath.row];
+    commentVC.sceneUserId = model.userId;
+    [self.navigationController pushViewController:commentVC animated:YES];
 }
 
 - (void)didReceiveMemoryWarning {
