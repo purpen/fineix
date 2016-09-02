@@ -16,7 +16,6 @@
     NSString *_userId;
     NSInteger _loveCount;
     HomeSceneListRow *_sceneModel;
-    NSInteger _type;
     NSInteger _isFavorite;
 }
 
@@ -32,9 +31,8 @@
 }
 
 #pragma mark - setModel;
-- (void)thn_setSceneData:(HomeSceneListRow *)dataModel type:(NSInteger)type {
+- (void)thn_setSceneData:(HomeSceneListRow *)dataModel {
     _isFavorite = dataModel.isFavorite;
-    _type = type;
     _sceneModel = dataModel;
     [self.look setTitle:[NSString stringWithFormat:@"%zi", dataModel.viewCount] forState:(UIControlStateNormal)];
     _loveCount = dataModel.loveCount;
@@ -109,6 +107,7 @@
 }
 
 - (void)moreClick:(UIButton *)button {
+    __weak __typeof(self)weakSelf = self;
     FBAlertViewController * alertVC = [[FBAlertViewController alloc] init];
     alertVC.modalPresentationStyle = UIModalPresentationOverFullScreen;
     alertVC.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;
@@ -116,11 +115,11 @@
     alertVC.targetId = _sceneId;
     alertVC.favoriteTheScene = ^(NSString *sceneId) {
         _isFavorite = 1;
-        [[NSNotificationCenter defaultCenter] postNotificationName:@"favoriteTheScene" object:sceneId];
+        weakSelf.beginFavoriteTheSceneBlock(sceneId);
     };
     alertVC.cancelFavoriteTheScene = ^(NSString *sceneId) {
         _isFavorite = 0;
-        [[NSNotificationCenter defaultCenter] postNotificationName:@"cancelFavoriteTheScene" object:sceneId];
+        weakSelf.cancelFavoriteTheSceneBlock(sceneId);
     };
     [self.vc presentViewController:alertVC animated:YES completion:nil];
 }
@@ -180,16 +179,11 @@
         scaleAnimation.springBounciness = 10.f;
         scaleAnimation.springSpeed = 10.0f;
         [button.layer pop_addAnimation:scaleAnimation forKey:@"scaleAnim"];
-        
-        if (_type == 1) {
-            [[NSNotificationCenter defaultCenter] postNotificationName:@"homeLikeTheScene" object:_sceneId];
-        } else if (_type == 2) {
-            [[NSNotificationCenter defaultCenter] postNotificationName:@"listLikeTheScene" object:_sceneId];
-        } else if (_type == 3) {
-            [[NSNotificationCenter defaultCenter] postNotificationName:@"userLikeTheScene" object:_sceneId];
-        }
+
         _loveCount += 1;
         [self.like setTitle:[NSString stringWithFormat:@"%zi", _loveCount] forState:(UIControlStateNormal)];
+        
+        self.beginLikeTheSceneBlock(_sceneId);
         
     } else if (button.selected == YES) {
         button.selected = NO;
@@ -199,16 +193,11 @@
         scaleAnimation.springBounciness = 10.f;
         scaleAnimation.springSpeed = 10.0f;
         [button.layer pop_addAnimation:scaleAnimation forKey:@"scaleAnim"];
-    
-        if (_type == 1) {
-            [[NSNotificationCenter defaultCenter] postNotificationName:@"homeCancelLikeTheScene" object:_sceneId];
-        } else if (_type == 2) {
-            [[NSNotificationCenter defaultCenter] postNotificationName:@"listCancelLikeTheScene" object:_sceneId];
-        } else if (_type == 3) {
-            [[NSNotificationCenter defaultCenter] postNotificationName:@"userCancelLikeTheScene" object:_sceneId];
-        }
+        
         _loveCount -= 1;
         [self.like setTitle:[NSString stringWithFormat:@"%zi", _loveCount] forState:(UIControlStateNormal)];
+        
+        self.cancelLikeTheSceneBlock(_sceneId);
     }
 }
 

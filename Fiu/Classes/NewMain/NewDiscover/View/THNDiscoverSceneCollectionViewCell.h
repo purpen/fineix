@@ -13,6 +13,9 @@
 
 @class THNSenceModel;
 
+typedef void(^BeginLikeTheSceneBlock)(NSString *idx);
+typedef void(^CancelLikeTheSceneBlock)(NSString *idx);
+
 @interface THNDiscoverSceneCollectionViewCell : UICollectionViewCell
 
 @pro_strong UIImageView *image;
@@ -25,10 +28,17 @@
 /** 活动详情 参与情景 */
 @property (nonatomic, strong) THNSenceModel *model;
 
+
 /**
- *  type
- *  1:搜索情境列表／ 2:发现页 / 3:订阅 / 4:分类
+ *  点赞
  */
-- (void)thn_setSceneUserInfoData:(HomeSceneListRow *)model type:(NSInteger)type;
+@pro_copy BeginLikeTheSceneBlock beginLikeTheSceneBlock;
+
+/**
+ *  取消点赞
+ */
+@pro_copy CancelLikeTheSceneBlock cancelLikeTheSceneBlock;
+
+- (void)thn_setSceneUserInfoData:(HomeSceneListRow *)model;
 
 @end

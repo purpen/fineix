@@ -46,7 +46,7 @@ static NSString *const URLCancelLike = @"/favorite/ajax_cancel_love";
 }
 
 #pragma mark 网络请求
-#pragma mark 点赞
+//  点赞
 - (void)thn_networkLikeSceneData:(NSString *)idx {
     self.likeSceneRequest = [FBAPI postWithUrlString:URLLikeScene requestDictionary:@{@"id":idx, @"type":@"12"} delegate:self];
     [self.likeSceneRequest startRequestSuccess:^(FBRequest *request, id result) {
@@ -62,7 +62,7 @@ static NSString *const URLCancelLike = @"/favorite/ajax_cancel_love";
     }];
 }
 
-#pragma mark 取消点赞
+//  取消点赞
 - (void)thn_networkCancelLikeData:(NSString *)idx {
     self.cancelLikeRequest = [FBAPI postWithUrlString:URLCancelLike requestDictionary:@{@"id":idx, @"type":@"12"} delegate:self];
     [self.cancelLikeRequest startRequestSuccess:^(FBRequest *request, id result) {
@@ -211,10 +211,6 @@ static NSString *const URLCancelLike = @"/favorite/ajax_cancel_love";
         _sceneList.backgroundColor = [UIColor colorWithHexString:@"#F8F8F8"];
         [_sceneList registerClass:[THNDiscoverSceneCollectionViewCell class] forCellWithReuseIdentifier:SceneListCellId];
         [self addMJRefresh:_sceneList];
-        
-        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(likeTheScene:) name:@"catFindLikeTheScene" object:nil];
-        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(cancelLikeTheScene:) name:@"catFindCancelLikeTheScene" object:nil];
-
     }
     return _sceneList;
 }
@@ -224,23 +220,26 @@ static NSString *const URLCancelLike = @"/favorite/ajax_cancel_love";
 }
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
+    
+    __weak __typeof(self)weakSelf = self;
+    
     THNDiscoverSceneCollectionViewCell * cell = [collectionView dequeueReusableCellWithReuseIdentifier:SceneListCellId
                                                                                           forIndexPath:indexPath];
     if (self.sceneListMarr.count) {
-        [cell thn_setSceneUserInfoData:self.sceneListMarr[indexPath.row] type:4];
+        [cell thn_setSceneUserInfoData:self.sceneListMarr[indexPath.row]];
+        
+        cell.beginLikeTheSceneBlock = ^(NSString *idx) {
+            [weakSelf thn_networkLikeSceneData:idx];
+        };
+        
+        cell.cancelLikeTheSceneBlock = ^(NSString *idx) {
+            [weakSelf thn_networkCancelLikeData:idx];
+        };
     }
     return cell;
 }
 
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
-//    THNSceneListViewController *sceneListVC = [[THNSceneListViewController alloc] init];
-//    sceneListVC.sceneListMarr = self.sceneListMarr;
-//    sceneListVC.commentsMarr = self.commentsMarr;
-//    sceneListVC.sceneIdMarr = self.sceneIdMarr;
-//    sceneListVC.userIdMarr = self.userIdMarr;
-//    sceneListVC.index = indexPath.row;
-//    [self.navigationController pushViewController:sceneListVC animated:YES];
-//    
     THNSceneDetalViewController *sceneDataVC = [[THNSceneDetalViewController alloc] init];
     sceneDataVC.sceneDetalId = self.sceneIdMarr[indexPath.row];
     [self.navigationController pushViewController:sceneDataVC animated:YES];
@@ -348,9 +347,5 @@ static NSString *const URLCancelLike = @"/favorite/ajax_cancel_love";
     return _commentsMarr;
 }
 
-- (void)dealloc {
-    [[NSNotificationCenter defaultCenter] removeObserver:self name:@"catFindLikeTheScene" object:nil];
-    [[NSNotificationCenter defaultCenter] removeObserver:self name:@"catFindCancelLikeTheScene" object:nil];
-}
 
 @end

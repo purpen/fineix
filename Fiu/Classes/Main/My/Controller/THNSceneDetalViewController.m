@@ -169,7 +169,7 @@ static NSString *const URLCancelFavorite = @"/favorite/ajax_cancel_favorite";
         THNDataInfoTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:dataInfoCellId];
         cell = [[THNDataInfoTableViewCell alloc] initWithStyle:(UITableViewCellStyleDefault) reuseIdentifier:dataInfoCellId];
         if (self.model) {
-            [cell thn_setSceneData:self.model type:3];
+            [cell thn_setSceneData:self.model];
             cell.vc = self;
             cell.nav = self.navigationController;
         }

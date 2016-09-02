@@ -14,15 +14,12 @@
     UITableViewDataSource
 >
 
-@pro_strong FBRequest *sceneListRequest;
 @pro_strong FBRequest *likeSceneRequest;
 @pro_strong FBRequest *cancelLikeRequest;
 @pro_strong FBRequest *followRequest;
 @pro_strong FBRequest *cancelFollowRequest;
-@pro_strong FBRequest *viewCountRequest;
 @pro_strong FBRequest *favoriteRequest;
-@pro_assign NSInteger currentpageNum;
-@pro_assign NSInteger totalPageNum;
+@pro_strong FBRequest *cancelFavoriteRequest;
 
 @pro_strong UITableView *sceneTable;
 @pro_assign NSInteger index;
@@ -30,8 +27,5 @@
 @pro_strong NSMutableArray *sceneIdMarr;
 @pro_strong NSMutableArray *userIdMarr;
 @pro_strong NSMutableArray *commentsMarr;
-
-/**  */
-@property(nonatomic,copy) NSString *sceneListId;
 
 @end

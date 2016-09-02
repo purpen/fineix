@@ -14,7 +14,6 @@
     NSString *_sceneId;
     NSString *_userId;
     NSInteger _loveCount;
-    NSInteger _type;
 }
 
 @end
@@ -78,9 +77,7 @@
 
 }
 
-- (void)thn_setSceneUserInfoData:(HomeSceneListRow *)sceneModel type:(NSInteger)type {
-    _type = type;
-    
+- (void)thn_setSceneUserInfoData:(HomeSceneListRow *)sceneModel {
     [self.image downloadImage:sceneModel.coverUrl place:[UIImage imageNamed:@""]];
     [self.userHeader downloadImage:sceneModel.user.avatarUrl place:[UIImage imageNamed:@""]];
     self.userName.text = sceneModel.user.nickname;
@@ -271,15 +268,7 @@
         scaleAnimation.springSpeed = 10.0f;
         [button.layer pop_addAnimation:scaleAnimation forKey:@"scaleAnim"];
         
-        if (_type == 1) {
-            [[NSNotificationCenter defaultCenter] postNotificationName:@"searchFindLikeTheScene" object:_sceneId];
-        } else if (_type == 2) {
-            [[NSNotificationCenter defaultCenter] postNotificationName:@"disFindLikeTheScene" object:_sceneId];
-        } else if (_type == 3) {
-            [[NSNotificationCenter defaultCenter] postNotificationName:@"subFindLikeTheScene" object:_sceneId];
-        } else if (_type == 4) {
-            [[NSNotificationCenter defaultCenter] postNotificationName:@"catFindLikeTheScene" object:_sceneId];
-        }
+        self.beginLikeTheSceneBlock(_sceneId);
         
     } else if (button.selected == YES) {
         button.selected = NO;
@@ -290,15 +279,7 @@
         scaleAnimation.springSpeed = 10.0f;
         [button.layer pop_addAnimation:scaleAnimation forKey:@"scaleAnim"];
     
-        if (_type == 1) {
-            [[NSNotificationCenter defaultCenter] postNotificationName:@"searchFindCancelLikeTheScene" object:_sceneId];
-        } else if (_type == 2) {
-            [[NSNotificationCenter defaultCenter] postNotificationName:@"disFindCancelLikeTheScene" object:_sceneId];
-        } else if (_type == 3) {
-            [[NSNotificationCenter defaultCenter] postNotificationName:@"subFindCancelLikeTheScene" object:_sceneId];
-        } else if (_type == 4) {
-            [[NSNotificationCenter defaultCenter] postNotificationName:@"catFindCancelLikeTheScene" object:_sceneId];
-        }
+        self.cancelLikeTheSceneBlock(_sceneId);
     }
 }
 

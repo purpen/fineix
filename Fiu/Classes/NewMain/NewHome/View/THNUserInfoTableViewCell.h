@@ -12,6 +12,9 @@
 #import "THNMacro.h"
 #import "HomeSceneListRow.h"
 
+typedef void(^BeginFollowTheUserBlock)(NSString *userId);
+typedef void(^CancelFollowTheUserBlock)(NSString *userId);
+
 @interface THNUserInfoTableViewCell : UITableViewCell
 
 @pro_strong UINavigationController *nav;
@@ -22,6 +25,16 @@
 @pro_strong UIButton *time;
 @pro_strong UIButton *address;
 @pro_strong UIButton *follow;
+
+/**
+ *  关注用户
+ */
+@pro_copy BeginFollowTheUserBlock beginFollowTheUserBlock;
+
+/**
+ *  取消关注用户
+ */
+@pro_copy CancelFollowTheUserBlock cancelFollowTheUserBlock;
 
 /**  */
 @property (nonatomic, strong) HomeSceneListRow *userModel;

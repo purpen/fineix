@@ -234,7 +234,7 @@ static NSString *const SceneListCellId = @"sceneListCellId";
     THNDiscoverSceneCollectionViewCell * cell = [collectionView dequeueReusableCellWithReuseIdentifier:SceneListCellId
                                                                                           forIndexPath:indexPath];
     if (self.sceneListMarr.count) {
-        [cell thn_setSceneUserInfoData:self.sceneListMarr[indexPath.row] type:3];
+        [cell thn_setSceneUserInfoData:self.sceneListMarr[indexPath.row]];
     }
     return cell;
 }

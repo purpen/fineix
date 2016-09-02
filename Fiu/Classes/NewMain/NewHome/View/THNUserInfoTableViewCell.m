@@ -240,7 +240,7 @@ static NSString *const hotUserCellId = @"HotUserCellId";
         button.layer.borderColor = [UIColor colorWithHexString:MAIN_COLOR].CGColor;
         button.backgroundColor = [UIColor colorWithHexString:MAIN_COLOR];
         
-        [[NSNotificationCenter defaultCenter] postNotificationName:@"followTheUser" object:_userId];
+        self.beginFollowTheUserBlock(_userId);
         
     } else if (button.selected == YES) {
         button.selected = NO;
@@ -253,7 +253,7 @@ static NSString *const hotUserCellId = @"HotUserCellId";
         button.layer.borderColor = [UIColor colorWithHexString:WHITE_COLOR alpha:0.6].CGColor;
         button.backgroundColor = [UIColor colorWithHexString:BLACK_COLOR];
         
-        [[NSNotificationCenter defaultCenter] postNotificationName:@"cancelFollowTheUser" object:_userId];
+        self.cancelFollowTheUserBlock(_userId);
     }
 }
 
