@@ -16,7 +16,10 @@
     FBSegmentViewDelegate,
     UITableViewDelegate,
     UITableViewDataSource,
-    UIWebViewDelegate
+    UIWebViewDelegate,
+    UICollectionViewDelegate,
+    UICollectionViewDataSource,
+    UICollectionViewDelegateFlowLayout
 >
 
 @pro_strong UIScrollView    *   goodsInfoRoll;
@@ -34,5 +37,14 @@
 @pro_strong FBRequest       *   addCarRequest;
 @pro_strong FBRequest       *   collectRequest;
 @pro_strong FBRequest       *   cancelCollectRequest;
+@pro_strong FBRequest *likeSceneRequest;
+@pro_strong FBRequest *cancelLikeRequest;
+@pro_strong FBRequest *sceneRequest;
+@pro_assign NSInteger currentpageNum;
+@pro_assign NSInteger totalPageNum;
+
+@pro_strong UICollectionView *sceneList;
+@pro_strong NSMutableArray *sceneListMarr;
+@pro_strong NSMutableArray *sceneIdMarr;
 
 @end

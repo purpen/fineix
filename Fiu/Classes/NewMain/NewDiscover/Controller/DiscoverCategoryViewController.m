@@ -246,15 +246,6 @@ static NSString *const URLCancelLike = @"/favorite/ajax_cancel_love";
     [self.navigationController pushViewController:sceneDataVC animated:YES];
 }
 
-#pragma mark - 点赞
-- (void)likeTheScene:(NSNotification *)idx {
-    [self thn_networkLikeSceneData:[idx object]];
-}
-
-- (void)cancelLikeTheScene:(NSNotification *)idx {
-    [self thn_networkCancelLikeData:[idx object]];
-}
-
 - (FBSegmentView *)menuView {
     if (!_menuView) {
         NSArray *titleArr = @[NSLocalizedString(@"fineScene", nil), NSLocalizedString(@"newScene", nil)];

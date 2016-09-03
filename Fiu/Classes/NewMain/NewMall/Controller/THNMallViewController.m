@@ -60,9 +60,6 @@ static NSString *const MallListHeaderCellViewId = @"mallListHeaderCellViewId";
     self.categoryRequest = [FBAPI getWithUrlString:URLCategory requestDictionary:@{@"domain":@"1", @"page":@"1", @"size":@"10"} delegate:self];
     [self.categoryRequest startRequestSuccess:^(FBRequest *request, id result) {
         self.categoryMarr = [NSMutableArray arrayWithArray:[[result valueForKey:@"data"] valueForKey:@"rows"]];
-        if (self.categoryMarr.count) {
-            [self thn_networkNewGoodsListData];
-        }
         
     } failure:^(FBRequest *request, NSError *error) {
         NSLog(@"%@", error);
@@ -88,11 +85,12 @@ static NSString *const MallListHeaderCellViewId = @"mallListHeaderCellViewId";
 
 #pragma mark 商品专题列表
 - (void)thn_networkSubjectListData {
-    self.subjectRequest = [FBAPI getWithUrlString:URLMallSubject requestDictionary:@{@"page":@"1",
-                                                                                     @"size":@"100",
-                                                                                     @"sort":@"2",
-                                                                                     @"type":@"5",
-                                                                                     @"fine":@"1"} delegate:self];
+    NSDictionary *requestDic = @{@"page":@"1",
+                                 @"size":@"100",
+                                 @"sort":@"2",
+                                 @"type":@"5",
+                                 @"fine":@"1"};
+    self.subjectRequest = [FBAPI getWithUrlString:URLMallSubject requestDictionary:requestDic delegate:self];
     [self.subjectRequest startRequestSuccess:^(FBRequest *request, id result) {
         NSArray *goodsArr = [[result valueForKey:@"data"] valueForKey:@"rows"];
         for (NSDictionary * goodsDic in goodsArr) {
@@ -132,7 +130,6 @@ static NSString *const MallListHeaderCellViewId = @"mallListHeaderCellViewId";
         [_mallList registerClass:[THNMallNewGoodsCollectionViewCell class] forCellWithReuseIdentifier:NewGoodsListCellId];
         [_mallList registerClass:[THNCategoryCollectionReusableView class] forSupplementaryViewOfKind:UICollectionElementKindSectionHeader
               withReuseIdentifier:MallListHeaderCellViewId];
-//        [self addMJRefresh:_mallList];
     }
     return _mallList;
 }
@@ -155,7 +152,7 @@ static NSString *const MallListHeaderCellViewId = @"mallListHeaderCellViewId";
         THNMallListCollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:MallListCellId
                                                                                 forIndexPath:indexPath];
         if (self.subjectMarr.count) {
-            [cell setMallSubjectData:self.subjectMarr[indexPath.row-1]];
+            [cell setMallSubjectData:self.subjectMarr[indexPath.row - 1]];
         }
         cell.nav = self.navigationController;
         return cell;

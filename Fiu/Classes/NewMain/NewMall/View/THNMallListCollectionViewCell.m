@@ -26,6 +26,7 @@ static NSString *const MallListGoodsCellId = @"mallListGoodsCellId";
 }
 
 - (void)setMallSubjectData:(THNMallSubjectModelRow *)model {
+    [self.goodsIdMarr removeAllObjects];
     self.title.text = model.title;
     [self.title mas_updateConstraints:^(MASConstraintMaker *make) {
         make.width.equalTo(@([self.title boundingRectWithSize:CGSizeMake(SCREEN_WIDTH, 30)].width + 10));
@@ -37,8 +38,7 @@ static NSString *const MallListGoodsCellId = @"mallListGoodsCellId";
     }];
     
     [self.banner downloadImage:model.coverUrl place:[UIImage imageNamed:@""]];
-    self.typeImage.image = [UIImage imageNamed:[NSString stringWithFormat:@"icon_theme_big_%zi",model.type - 1]];
-    
+
     self.goodsListMarr = [NSMutableArray arrayWithArray:model.products];
     if (self.goodsListMarr.count) {
         [self.goodsList reloadData];
@@ -87,12 +87,6 @@ static NSString *const MallListGoodsCellId = @"mallListGoodsCellId";
     [_botLine mas_makeConstraints:^(MASConstraintMaker *make) {
         make.height.equalTo(@2);
         make.left.right.bottom.equalTo(_title).with.offset(0);
-    }];
-    
-    [self addSubview:self.typeImage];
-    [_typeImage mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.size.mas_equalTo(CGSizeMake(50, 50));
-        make.right.top.equalTo(_banner).with.offset(0);
     }];
     
     [self addSubview:self.goodsList];
@@ -157,17 +151,6 @@ static NSString *const MallListGoodsCellId = @"mallListGoodsCellId";
         _botLine.backgroundColor = [UIColor colorWithHexString:MAIN_COLOR];
     }
     return _botLine;
-}
-
-- (UIImageView *)typeImage {
-    if (!_typeImage) {
-        _typeImage = [[UIImageView alloc] init];
-    }
-    return _typeImage;
-}
-
-- (void)lookAllClick {
-//    [SVProgressHUD showSuccessWithStatus:@"查看全部主题商品"];
 }
 
 - (UICollectionView *)goodsList {

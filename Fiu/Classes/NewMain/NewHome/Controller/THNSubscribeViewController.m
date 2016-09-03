@@ -92,6 +92,10 @@ static NSString *const SceneListCellId = @"sceneListCellId";
 
 //  情景列表
 - (void)thn_networkSceneListData {
+    UserInfoEntity * entity = [UserInfoEntity defaultUserInfoEntity];
+    if (entity.interest_scene_cate.length == 0) {
+        entity.interest_scene_cate = @"nulll";
+    }
     self.sceneListRequest = [FBAPI getWithUrlString:URLSceneList requestDictionary:@{@"page":@(self.currentpageNum + 1),
                                                                                      @"size":@"10",
                                                                                      @"category_ids":_categoryIds,

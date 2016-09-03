@@ -16,7 +16,8 @@
 #import "FBBuyGoodsViewController.h"
 #import "FBSureOrderViewController.h"
 #import "GoodsBrandViewController.h"
-
+#import "THNSceneDetalViewController.h"
+#import "THNDiscoverSceneCollectionViewCell.h"
 #import "InfoTitleTableViewCell.h"
 #import "GoodsDesTableViewCell.h"
 #import "InfoBrandTableViewCell.h"
@@ -26,12 +27,18 @@ static NSString *const URLGoodsCommet = @"/comment/getlist";
 static NSString *const URLAddCar = @"/shopping/add_cart";
 static NSString *const URlGoodsCollect = @"/favorite/ajax_favorite";
 static NSString *const URlCancelCollect = @"/favorite/ajax_cancel_favorite";
+static NSString *const URLSceneList = @"/sight_and_product/getlist";
+static NSString *const URLLikeScene = @"/favorite/ajax_love";
+static NSString *const URLCancelLike = @"/favorite/ajax_cancel_love";
+
+static NSString *const SceneListCellId = @"SceneListCellId";
 
 @interface FBGoodsInfoViewController () {
     NSString * _goodsInfoUrl;
     NSString *_goodsDes;
     NSInteger _collect;
     NSInteger _canBuy;
+    CGFloat _sceneListHeight;
     FBGoodsCommentViewController *_goodsCommentVC;
 }
 
@@ -54,6 +61,7 @@ static NSString *const URlCancelCollect = @"/favorite/ajax_cancel_favorite";
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    [self thn_networkSceneListData];
     [self networkGoodsInfoData];
     [self setThnGoodsInfoVcUI];
 }
@@ -160,6 +168,69 @@ static NSString *const URlCancelCollect = @"/favorite/ajax_cancel_favorite";
     }
 }
 
+#pragma mark 情景列表
+- (void)thn_networkSceneListData {
+    NSDictionary *requestDic = @{@"page":@(self.currentpageNum + 1),
+                                 @"size":@"30",
+                                 @"sort":@"0",
+                                 @"product_id":self.goodsID};
+    self.sceneRequest = [FBAPI getWithUrlString:URLSceneList requestDictionary:requestDic delegate:self];
+    [self.sceneRequest startRequestSuccess:^(FBRequest *request, id result) {
+        NSArray *sceneArr = [[result valueForKey:@"data"] valueForKey:@"rows"];
+        for (NSDictionary * sceneDic in sceneArr) {
+            HomeSceneListRow *homeSceneModel = [[HomeSceneListRow alloc] initWithDictionary:[sceneDic valueForKey:@"sight"]];
+            [self.sceneListMarr addObject:homeSceneModel];
+            [self.sceneIdMarr addObject:[NSString stringWithFormat:@"%zi", homeSceneModel.idField]];
+        }
+        
+        NSInteger count;
+        if (self.sceneListMarr.count%2 != 0) {
+            count = (self.sceneListMarr.count +1)/2;
+        } else {
+            count = self.sceneListMarr.count/2;
+        }
+
+        _sceneListHeight = ((SCREEN_WIDTH - 45)/2)*1.5 * count;
+        self.goodsTable.tableFooterView = self.sceneList;
+       [self.sceneList reloadData];
+        
+    } failure:^(FBRequest *request, NSError *error) {
+        [SVProgressHUD showErrorWithStatus:[error localizedDescription]];
+    }];
+}
+
+//  点赞
+- (void)thn_networkLikeSceneData:(NSString *)idx {
+    self.likeSceneRequest = [FBAPI postWithUrlString:URLLikeScene requestDictionary:@{@"id":idx, @"type":@"12"} delegate:self];
+    [self.likeSceneRequest startRequestSuccess:^(FBRequest *request, id result) {
+        if ([[result valueForKey:@"success"] isEqualToNumber:@1]) {
+            NSInteger index = [self.sceneIdMarr indexOfObject:idx];
+            NSString *loveCount = [NSString stringWithFormat:@"%zi", [[[result valueForKey:@"data"] valueForKey:@"love_count"] integerValue]];
+            [self.sceneListMarr[index] setValue:loveCount forKey:@"loveCount"];
+            [self.sceneListMarr[index] setValue:@"1" forKey:@"isLove"];
+        }
+        
+    } failure:^(FBRequest *request, NSError *error) {
+        [SVProgressHUD showErrorWithStatus:[error localizedDescription]];
+    }];
+}
+
+//  取消点赞
+- (void)thn_networkCancelLikeData:(NSString *)idx {
+    self.cancelLikeRequest = [FBAPI postWithUrlString:URLCancelLike requestDictionary:@{@"id":idx, @"type":@"12"} delegate:self];
+    [self.cancelLikeRequest startRequestSuccess:^(FBRequest *request, id result) {
+        if ([[result valueForKey:@"success"] isEqualToNumber:@1]) {
+            NSInteger index = [self.sceneIdMarr indexOfObject:idx];
+            NSString *loveCount = [NSString stringWithFormat:@"%zi", [[[result valueForKey:@"data"] valueForKey:@"love_count"] integerValue]];
+            [self.sceneListMarr[index] setValue:loveCount forKey:@"loveCount"];
+            [self.sceneListMarr[index] setValue:@"0" forKey:@"isLove"];
+        }
+        
+    } failure:^(FBRequest *request, NSError *error) {
+        [SVProgressHUD showErrorWithStatus:[error localizedDescription]];
+    }];
+}
+
 #pragma mark - 设置视图x
 - (void)setThnGoodsInfoVcUI {
     [self.view addSubview:self.menuView];
@@ -253,6 +324,56 @@ static NSString *const URlCancelCollect = @"/favorite/ajax_cancel_favorite";
 }
 
 #pragma mark - 商品信息列表
+- (UICollectionView *)sceneList {
+    if (!_sceneList) {
+        UICollectionViewFlowLayout *flowLayou = [[UICollectionViewFlowLayout alloc] init];
+        flowLayou.itemSize = CGSizeMake((SCREEN_WIDTH - 45)/2, ((SCREEN_WIDTH - 45)/2)*1.21);
+        flowLayou.minimumLineSpacing = 15.0f;
+        flowLayou.sectionInset = UIEdgeInsetsMake(15, 15, 15, 15);
+        flowLayou.scrollDirection = UICollectionViewScrollDirectionVertical;
+        
+        _sceneList = [[UICollectionView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, _sceneListHeight)
+                                        collectionViewLayout:flowLayou];
+        _sceneList.showsVerticalScrollIndicator = NO;
+        _sceneList.delegate = self;
+        _sceneList.dataSource = self;
+        _sceneList.backgroundColor = [UIColor colorWithHexString:@"#F8F8F8"];
+        [_sceneList registerClass:[THNDiscoverSceneCollectionViewCell class] forCellWithReuseIdentifier:SceneListCellId];
+    }
+    return _sceneList;
+}
+
+- (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
+    return self.sceneListMarr.count;
+}
+
+- (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
+    
+    __weak __typeof(self)weakSelf = self;
+    
+    THNDiscoverSceneCollectionViewCell * cell = [collectionView dequeueReusableCellWithReuseIdentifier:SceneListCellId
+                                                                                          forIndexPath:indexPath];
+    if (self.sceneListMarr.count) {
+        [cell thn_setSceneUserInfoData:self.sceneListMarr[indexPath.row] isLogin:[self isUserLogin]];
+        
+        cell.beginLikeTheSceneBlock = ^(NSString *idx) {
+            [weakSelf thn_networkLikeSceneData:idx];
+        };
+        
+        cell.cancelLikeTheSceneBlock = ^(NSString *idx) {
+            [weakSelf thn_networkCancelLikeData:idx];
+        };
+    }
+    cell.vc = self;
+    return cell;
+}
+
+- (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
+    THNSceneDetalViewController *sceneDataVC = [[THNSceneDetalViewController alloc] init];
+    sceneDataVC.sceneDetalId = self.sceneIdMarr[indexPath.row];
+    [self.navigationController pushViewController:sceneDataVC animated:YES];
+}
+
 - (UITableView *)goodsTable {
     if (!_goodsTable) {
         _goodsTable = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT - 152) style:(UITableViewStyleGrouped)];
@@ -263,6 +384,7 @@ static NSString *const URlCancelCollect = @"/favorite/ajax_cancel_favorite";
         _goodsTable.separatorStyle = UITableViewCellSeparatorStyleNone;
         _goodsTable.backgroundColor = [UIColor colorWithHexString:grayLineColor];
         _goodsTable.tableHeaderView = self.rollImgView;
+
     }
     return _goodsTable;
 }
@@ -272,9 +394,6 @@ static NSString *const URlCancelCollect = @"/favorite/ajax_cancel_favorite";
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-//    if (section == 3) {
-//        return self.goodsComment.count + 1;
-//    }
     return 1;
 }
 
@@ -317,28 +436,6 @@ static NSString *const URlCancelCollect = @"/favorite/ajax_cancel_favorite";
             return cell;
         }
     }
-    
-//    } else if (indexPath.section == 3) {
-//        if (indexPath.row == 0) {
-//            static NSString * thnGoodsCommentCellId = @"ThnGoodsCommentCellId";
-//            FBGoodsColorTableViewCell * cell = [tableView dequeueReusableCellWithIdentifier:thnGoodsCommentCellId];
-//            if (!cell) {
-//                cell = [[FBGoodsColorTableViewCell alloc] initWithStyle:(UITableViewCellStyleDefault) reuseIdentifier:thnGoodsCommentCellId];
-//            }
-//            cell.goodsColorLab.text = NSLocalizedString(@"GoodsComment", nil);
-//            return cell;
-//            
-//        } else {
-//            static NSString * thnGoodsCommentInfoCellId = @"ThnGoodsCommentInfoCellId";
-//            FBGoodsCommentTableViewCell * cell = [tableView dequeueReusableCellWithIdentifier:thnGoodsCommentInfoCellId];
-//            if (!cell) {
-//                cell = [[FBGoodsCommentTableViewCell alloc] initWithStyle:(UITableViewCellStyleDefault) reuseIdentifier:thnGoodsCommentInfoCellId];
-//            }
-//            [cell setCommentModel:self.goodsComment[indexPath.row - 1]];
-//            return cell;
-//        }
-//    }
-
     return nil;
 }
 
@@ -364,17 +461,6 @@ static NSString *const URlCancelCollect = @"/favorite/ajax_cancel_favorite";
             return 0.01;
         }
     }
-//    else if (indexPath.section == 3) {
-//        if (indexPath.row == 0) {
-//            return 44;
-//        } else {
-//            if (self.goodsComment.count > 0) {
-//                return 100;
-//            } else if (self.goodsComment.count == 0) {
-//                return 0.01;
-//            }
-//        }
-//    }
     return 0;
 }
 
@@ -402,12 +488,6 @@ static NSString *const URlCancelCollect = @"/favorite/ajax_cancel_favorite";
         goodsBrandVC.brandId = self.goodsInfo.brandId;
         [self.navigationController pushViewController:goodsBrandVC animated:YES];
     }
-    
-//    else if (indexPath.section == 3) {
-//        FBGoodsCommentViewController * thnCommentVC = [[FBGoodsCommentViewController alloc] init];
-//        thnCommentVC.targetId = self.goodsID;
-//        [self.navigationController pushViewController:thnCommentVC animated:YES];
-//    }
 }
 
 #pragma mark - 打开商品购买视图
@@ -510,6 +590,20 @@ static NSString *const URlCancelCollect = @"/favorite/ajax_cancel_favorite";
         _goodsComment = [NSMutableArray array];
     }
     return _goodsComment;
+}
+
+- (NSMutableArray *)sceneListMarr {
+    if (!_sceneListMarr) {
+        _sceneListMarr = [NSMutableArray array];
+    }
+    return _sceneListMarr;
+}
+
+- (NSMutableArray *)sceneIdMarr {
+    if (!_sceneIdMarr) {
+        _sceneIdMarr = [NSMutableArray array];
+    }
+    return _sceneIdMarr;
 }
 
 @end

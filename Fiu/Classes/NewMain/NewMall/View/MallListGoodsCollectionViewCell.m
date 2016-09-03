@@ -24,6 +24,8 @@
     self.title.text = model.title;
     self.price.text = [NSString stringWithFormat:@"¥%zi", model.salePrice];
     
+//    NSLog(@"＝＝＝＝＝＝     %@ ----- %@ =====  %zi", model.coverUrl, model.title, model.idField);
+    
 }
 
 - (void)setGoodsListData:(GoodsRow *)model {
