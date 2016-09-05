@@ -391,9 +391,11 @@ static NSString *const allCommentsCellId = @"AllCommentsCellId";
     [self.commentsMarr removeAllObjects];
     [self.subjectMarr removeAllObjects];
     [self.commentsCountMarr removeAllObjects];
+    [self.hotUserMarr removeAllObjects];
     [self thn_networkSceneListData];
     [self thn_networkRollImageData];
     [self thn_networkSubjectData];
+    [self thn_networkHotUserListData];
 }
 
 #pragma mark - 设置视图UI

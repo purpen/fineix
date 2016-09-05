@@ -77,7 +77,8 @@
 - (UIImageView *)sceneImgView {
     if (!_sceneImgView) {
         _sceneImgView = [[UIImageView alloc] init];
-        _sceneImgView.image = self.bgImage;
+        _sceneImgView.contentMode = UIViewContentModeScaleAspectFill;
+        _sceneImgView.clipsToBounds = YES;
     }
     return _sceneImgView;
 }

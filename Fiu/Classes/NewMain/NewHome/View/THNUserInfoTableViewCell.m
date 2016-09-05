@@ -45,7 +45,8 @@ static NSString *const hotUserCellId = @"HotUserCellId";
     [self.time mas_updateConstraints:^(MASConstraintMaker *make) {
         make.width.equalTo(@([self getTextSizeWidth:timeStr].width));
     }];
-    [self.address setTitle:userModel.address forState:(UIControlStateNormal)];
+    [self.address setTitle:[NSString stringWithFormat:@"%@ %@", userModel.city, userModel.address]
+                                             forState:(UIControlStateNormal)];
     if (userModel.user.isExpert == 1) {
         self.certificate.hidden = NO;
     } else {

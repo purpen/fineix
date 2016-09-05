@@ -37,7 +37,7 @@ static NSString *const goodsCellId = @"GoodsCellId";
     self.goodsRequest = [FBAPI getWithUrlString:URLGoodsList requestDictionary:@{@"title":title, @"kind":@"1", @"size":@"1000"} delegate:self];
     [self.goodsRequest startRequestSuccess:^(FBRequest *request, id result) {
         self.goodsMarr = [NSMutableArray arrayWithArray:[[[result valueForKey:@"data"] valueForKey:@"rows"] valueForKey:@"title"]];
-        self.goodsIdMarr = [NSMutableArray arrayWithArray:[[[result valueForKey:@"data"] valueForKey:@"rows"] valueForKey:@"oid"]];
+        self.goodsIdMarr = [NSMutableArray arrayWithArray:[[[result valueForKey:@"data"] valueForKey:@"rows"] valueForKey:@"_id"]];
         if (self.goodsMarr.count) {
             self.addGoodBtn.hidden = YES;
             self.goodsList.hidden = NO;

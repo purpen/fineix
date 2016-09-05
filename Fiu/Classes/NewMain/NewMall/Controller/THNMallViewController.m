@@ -77,6 +77,7 @@ static NSString *const MallListHeaderCellViewId = @"mallListHeaderCellViewId";
         }
     
         [self.mallList reloadData];
+        [self requestIsLastData:self.mallList];
         
     } failure:^(FBRequest *request, NSError *error) {
         [SVProgressHUD showErrorWithStatus:[error localizedDescription]];
@@ -101,15 +102,42 @@ static NSString *const MallListHeaderCellViewId = @"mallListHeaderCellViewId";
         }
         
         [self.mallList reloadData];
+        [self requestIsLastData:self.mallList];
         
     } failure:^(FBRequest *request, NSError *error) {
         [SVProgressHUD showErrorWithStatus:[error localizedDescription]];
     }];
 }
 
+- (void)requestIsLastData:(UICollectionView *)collectionView {
+    if ([collectionView.mj_header isRefreshing]) {
+        [collectionView.mj_header endRefreshing];
+    }
+}
+
 #pragma mark - 设置视图UI
 - (void)thn_setMallViewUI {
     [self.view addSubview:self.mallList];
+}
+
+#pragma mark - 上拉加载 & 下拉刷新
+- (void)addMJRefresh:(UICollectionView *)collectionView {
+    FBRefresh * header = [FBRefresh headerWithRefreshingBlock:^{
+        [self loadNewData];
+    }];
+    collectionView.mj_header = header;
+}
+
+- (void)loadNewData {
+    self.currentpageNum = 0;
+    [self.goodsDataMarr removeAllObjects];
+    [self.subjectMarr removeAllObjects];
+    [self.subjectIdMarr removeAllObjects];
+    [self.subjectTypeMarr removeAllObjects];
+    [self.categoryMarr removeAllObjects];
+    [self networkCategoryData];
+    [self thn_networkNewGoodsListData];
+    [self thn_networkSubjectListData];
 }
 
 #pragma mark - init
@@ -130,6 +158,7 @@ static NSString *const MallListHeaderCellViewId = @"mallListHeaderCellViewId";
         [_mallList registerClass:[THNMallNewGoodsCollectionViewCell class] forCellWithReuseIdentifier:NewGoodsListCellId];
         [_mallList registerClass:[THNCategoryCollectionReusableView class] forSupplementaryViewOfKind:UICollectionElementKindSectionHeader
               withReuseIdentifier:MallListHeaderCellViewId];
+        [self addMJRefresh:_mallList];
     }
     return _mallList;
 }

@@ -30,7 +30,6 @@
 - (instancetype)initWithFrame:(CGRect)frame {
     self = [super initWithFrame:frame];
     if (self) {
-//        self.backgroundColor = [UIColor orangeColor];
         [self setupBasicParam];
     }
     return self;

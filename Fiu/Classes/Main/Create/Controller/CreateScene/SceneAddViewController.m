@@ -411,7 +411,6 @@ static NSString *const URLUserAddGoods = @"/scene_product/add";
     
             ReleaseViewController * releaseVC = [[ReleaseViewController alloc] init];
             releaseVC.bgImg = [self generateImage:self.filtersImageView];
-//            releaseVC.bgImg = self.filtersImageView.image;
             releaseVC.actionId = self.actionId;
             releaseVC.goodsType = self.goodsTypeData;
             releaseVC.goodsTitle = self.goodsTitleData;
@@ -452,7 +451,8 @@ static NSString *const URLUserAddGoods = @"/scene_product/add";
     CGContextConcatCTM(context, flipThenShift);
     CGContextDrawImage(context, imageView.bounds, imageView.image.CGImage);
     CGContextRestoreGState(context);
-    
+
+    [imageView.image drawInRect:imageView.bounds];
     for (FBStickersContainer * container in self.stickersContainer) {
         CGContextSaveGState(context);
         FBSticker * sticker = [container generateSticker];
@@ -463,9 +463,8 @@ static NSString *const URLUserAddGoods = @"/scene_product/add";
         CGContextDrawImage(context, CGRectMake(-sticker.size.width/2, -sticker.size.height/2, sticker.size.width, sticker.size.height), sticker.image.CGImage);
         CGContextRestoreGState(context);
     }
-
-    //  返回绘制的新图形
-    UIImage * newImage = UIGraphicsGetImageFromCurrentImageContext();
+    
+    UIImage *newImage = UIGraphicsGetImageFromCurrentImageContext();
     UIGraphicsEndImageContext();
     
     return newImage;

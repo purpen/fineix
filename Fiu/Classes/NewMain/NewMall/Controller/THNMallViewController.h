@@ -9,6 +9,8 @@
 #import "THNViewController.h"
 #import "GroupHeaderView.h"
 #import "FBCategoryView.h"
+#import "MJRefresh.h"
+#import "FBRefresh.h"
 
 @interface THNMallViewController : THNViewController <
     THNNavigationBarItemsDelegate,

@@ -19,7 +19,6 @@ typedef void(^GetEditContentAndTags)(NSString * title, NSString * des, NSMutable
 
 @pro_strong UIViewController    *   vc;
 @pro_strong UIImageView         *   sceneImgView;
-@pro_strong UIImage             *   bgImage;
 @pro_strong UILabel             *   title;            //    场景标题
 @pro_strong UILabel             *   suTitle;
 @pro_strong UIButton            *   addText;          //    添加描述
