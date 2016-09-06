@@ -316,7 +316,6 @@ static NSString *const SceneListFooterCellViewId = @"sceneListFooterViewId";
                 [headerView setCategoryData:self.categoryMarr type:0];
             }
             headerView.nav = self.navigationController;
-            
             return headerView;
         }
         
@@ -334,7 +333,7 @@ static NSString *const SceneListFooterCellViewId = @"sceneListFooterViewId";
                 }
             }
             footerView.nav = self.navigationController;
-            
+            footerView.bannerBot.hidden = YES;
             return footerView;
         }
     }

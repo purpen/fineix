@@ -56,7 +56,7 @@ static NSString *const goodsListCellId = @"GoodsListCellId";
     self.searchListRequest = [FBAPI getWithUrlString:URLSearchList requestDictionary:@{@"evt":@"content",
                                                                                        @"size":@"8",
                                                                                        @"page":@(self.currentpageNum + 1),
-                                                                                       @"t":@"3",
+                                                                                       @"t":@"7",
                                                                                        @"q":keyword} delegate:self];
     [self.searchListRequest startRequestSuccess:^(FBRequest *request, id result) {
         NSArray *goodsArr = [[result valueForKey:@"data"] valueForKey:@"rows"];

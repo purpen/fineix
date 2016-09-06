@@ -61,7 +61,7 @@ static NSString *const goodsListCellId = @"GoodsListCellId";
     [SVProgressHUD show];
     self.goodsListRequest = [FBAPI getWithUrlString:URLMallList requestDictionary:@{@"page":@(self.currentpageNum + 1),
                                                                                     @"size":@"10",
-                                                                            @"category_id":self.categoryId} delegate:self];
+                                                                             @"category_id":self.categoryId} delegate:self];
     [self.goodsListRequest startRequestSuccess:^(FBRequest *request, id result) {
         NSArray *goodsArr = [[result valueForKey:@"data"] valueForKey:@"rows"];
         for (NSDictionary * goodsDic in goodsArr) {

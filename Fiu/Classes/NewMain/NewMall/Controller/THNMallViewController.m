@@ -89,8 +89,7 @@ static NSString *const MallListHeaderCellViewId = @"mallListHeaderCellViewId";
     NSDictionary *requestDic = @{@"page":@"1",
                                  @"size":@"100",
                                  @"sort":@"2",
-                                 @"type":@"5",
-                                 @"fine":@"1"};
+                                 @"type":@"5"};
     self.subjectRequest = [FBAPI getWithUrlString:URLMallSubject requestDictionary:requestDic delegate:self];
     [self.subjectRequest startRequestSuccess:^(FBRequest *request, id result) {
         NSArray *goodsArr = [[result valueForKey:@"data"] valueForKey:@"rows"];
