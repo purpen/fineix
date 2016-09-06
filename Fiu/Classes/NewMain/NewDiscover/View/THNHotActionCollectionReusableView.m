@@ -34,8 +34,6 @@
 }
 
 - (void)openSubjectView:(UITapGestureRecognizer *)tap {
-    [SVProgressHUD showSuccessWithStatus:@"打开专题详情"];
-    
     if (_type == 1) {
         THNArticleDetalViewController *articleVC = [[THNArticleDetalViewController alloc] init];
         articleVC.articleDetalid = [NSString stringWithFormat:@"%zi", _idx];
@@ -77,8 +75,7 @@
     
     [self addSubview:self.bannerBg];
     [_bannerBg mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.size.mas_equalTo(CGSizeMake(SCREEN_WIDTH, BANNER_HEIGHT));
-        make.left.top.equalTo(self).with.offset(0);
+        make.centerX.centerY.equalTo(_bannerImage);
     }];
     
     [self addSubview:self.bannerBot];
