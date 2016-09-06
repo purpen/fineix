@@ -73,7 +73,7 @@ static NSString *sceneCollectionCellId = @"THNHomeSenceCollectionViewCell";
 {
     [SVProgressHUD show];
     UserInfoEntity *entity = [UserInfoEntity defaultUserInfoEntity];
-    NSDictionary *  requestParams = @{@"size":@"10", @"page":@(_currentPageNumber + 1),@"user_id":entity.userId,@"type":@"12",@"event":@"love"};
+    NSDictionary *  requestParams = @{@"size":@"10", @"page":@(_currentPageNumber + 1),@"user_id":entity.userId,@"type":@"12",@"event":@"2"};
     self.sceneListRequest = [FBAPI getWithUrlString:@"/favorite/get_new_list" requestDictionary:requestParams delegate:self];
     [self.sceneListRequest startRequestSuccess:^(FBRequest *request, id result) {
         NSLog(@"赞过的情境  %@",result);

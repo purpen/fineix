@@ -15,5 +15,6 @@
 /**  */
 @property (nonatomic, strong) THNActiveRuleModel *model;
 @property (weak, nonatomic) IBOutlet UIButton *attendBtn;
+@property (weak, nonatomic) IBOutlet UIWebView *contentWebView;
 
 @end

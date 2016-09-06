@@ -173,7 +173,9 @@
             [SVProgressHUD dismiss];
         }
         [self updateIdentify];
-    } failure:nil];
+    } failure:^(FBRequest *request, NSError *error) {
+        [self dismissViewControllerAnimated:YES completion:nil];
+    }];
 
 }
 
@@ -184,7 +186,7 @@
     [request startRequestSuccess:^(FBRequest *request, id result) {
         [self dismissViewControllerAnimated:YES completion:nil];
     } failure:^(FBRequest *request, NSError *error) {
-        
+        [self dismissViewControllerAnimated:YES completion:nil];
     }];
 }
 

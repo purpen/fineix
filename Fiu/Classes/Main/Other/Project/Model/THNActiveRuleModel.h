@@ -20,5 +20,7 @@
 @property(nonatomic,copy) NSString *_id;
 /**  */
 @property (nonatomic, assign) NSInteger evt;
+/**  */
+@property(nonatomic,copy) NSString *content_view_url;
 
 @end

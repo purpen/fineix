@@ -22,8 +22,11 @@
 #import <MJRefresh.h>
 #import "THNSceneImageViewController.h"
 
-@interface THNActiveDetalTwoViewController ()<UICollectionViewDelegate,UICollectionViewDataSource>
+@interface THNActiveDetalTwoViewController ()<UICollectionViewDelegate,UICollectionViewDataSource,UIWebViewDelegate>
 
+{
+    UICollectionViewFlowLayout * _flowLayout;
+}
 /**  */
 @property (nonatomic, strong) UICollectionView *contentView;
 /**  */
@@ -56,6 +59,10 @@
 @property (nonatomic, strong) NSMutableArray *userIdMarr;
 /**  */
 @property (nonatomic, strong) NSMutableArray *resultUserIdAry;
+/**  */
+@property (nonatomic, assign) CGFloat webViewHeghit;
+/**  */
+@property (nonatomic, assign) int webViewLoads;
 
 @end
 
@@ -108,8 +115,8 @@ static NSString *const URLCancelFollowUser = @"/follow/ajax_cancel_follow";
 
 -(UICollectionView *)contentView{
     if (!_contentView) {
-        UICollectionViewFlowLayout * flowLayout = [[UICollectionViewFlowLayout alloc] init];
-        _contentView = [[UICollectionView alloc] initWithFrame:CGRectMake(0, 64, SCREEN_WIDTH, SCREEN_HEIGHT - 64) collectionViewLayout:flowLayout];
+        _flowLayout = [[UICollectionViewFlowLayout alloc] init];
+        _contentView = [[UICollectionView alloc] initWithFrame:CGRectMake(0, 64, SCREEN_WIDTH, SCREEN_HEIGHT - 64) collectionViewLayout:_flowLayout];
         _contentView.backgroundColor = [UIColor colorWithHexString:@"#F7F7F7"];
         _contentView.delegate = self;
         _contentView.dataSource = self;
@@ -130,47 +137,7 @@ static NSString *const URLCancelFollowUser = @"/follow/ajax_cancel_follow";
 }
 
 - (void)dealloc {
-    [[NSNotificationCenter defaultCenter] removeObserver:self name:@"findLikeTheScene" object:nil];
-    [[NSNotificationCenter defaultCenter] removeObserver:self name:@"findCancelLikeTheScene" object:nil];
-    [[NSNotificationCenter defaultCenter] removeObserver:self name:@"followTheUser" object:nil];
-    [[NSNotificationCenter defaultCenter] removeObserver:self name:@"cancelFollowTheUser" object:nil];
-}
 
-#pragma mark - 点赞
-- (void)likeTheScene:(NSNotification *)idx {
-    [self thn_networkLikeSceneData:[idx object]];
-}
-
-- (void)cancelLikeTheScene:(NSNotification *)idx {
-    [self thn_networkCancelLikeData:[idx object]];
-}
-
-#pragma mark 点赞
-- (void)thn_networkLikeSceneData:(NSString *)idx {
-    self.likeSceneRequest = [FBAPI postWithUrlString:URLLikeScene requestDictionary:@{@"id":idx, @"type":@"12"} delegate:self];
-    [self.likeSceneRequest startRequestSuccess:^(FBRequest *request, id result) {
-        if ([[result valueForKey:@"success"] isEqualToNumber:@1]) {
-            NSInteger index = [self.sceneIdMarr indexOfObject:idx];
-            [self.senceModelAry[index] setValue:@1 forKey:@"is_love"];
-        }
-        
-    } failure:^(FBRequest *request, NSError *error) {
-        [SVProgressHUD showErrorWithStatus:[error localizedDescription]];
-    }];
-}
-
-#pragma mark 取消点赞
-- (void)thn_networkCancelLikeData:(NSString *)idx {
-    self.cancelLikeRequest = [FBAPI postWithUrlString:URLCancelLike requestDictionary:@{@"id":idx, @"type":@"12"} delegate:self];
-    [self.cancelLikeRequest startRequestSuccess:^(FBRequest *request, id result) {
-        if ([[result valueForKey:@"success"] isEqualToNumber:@1]) {
-            NSInteger index = [self.sceneIdMarr indexOfObject:idx];
-            [self.senceModelAry[index] setValue:@0 forKey:@"is_love"];
-        }
-        
-    } failure:^(FBRequest *request, NSError *error) {
-        [SVProgressHUD showErrorWithStatus:[error localizedDescription]];
-    }];
 }
 
 
@@ -180,10 +147,6 @@ static NSString *const URLCancelFollowUser = @"/follow/ajax_cancel_follow";
     self.navViewTitle.text = @"活动详情";
     self.type = @0;
     [self ruleRequest];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(likeTheScene:) name:@"findLikeTheScene" object:nil];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(cancelLikeTheScene:) name:@"findCancelLikeTheScene" object:nil];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(followTheUser:) name:@"followTheUser" object:nil];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(cancelFollowTheUser:) name:@"cancelFollowTheUser" object:nil];
 }
 
 -(NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView{
@@ -273,16 +236,7 @@ static NSString *const URLCancelFollowUser = @"/follow/ajax_cancel_follow";
             case 0:
                 //活动规则
             {
-                // 文字的最大尺寸
-                CGSize maxSize = CGSizeMake([UIScreen mainScreen].bounds.size.width - 2 * 10, MAXFLOAT);
-                // 计算文字的高度
-                CGFloat textH = [self.ruleModel.summary boundingRectWithSize:maxSize options:NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName : [UIFont systemFontOfSize:14]} context:nil].size.height;
-                return CGSizeMake(SCREEN_WIDTH, textH + 50);
-//                if (textH + 20 + 44 + 211 + 44 + 64 <= SCREEN_HEIGHT) {
-//                    return CGSizeMake(SCREEN_WIDTH, SCREEN_HEIGHT - 64 - 211 - 44);
-//                }else{
-//                    return CGSizeMake(SCREEN_WIDTH, textH + 20 + 44);
-//                }
+                return CGSizeMake(SCREEN_WIDTH, self.webViewHeghit + 50);
             }
                 break;
             case 1:
@@ -302,8 +256,8 @@ static NSString *const URLCancelFollowUser = @"/follow/ajax_cancel_follow";
 }
 
 
-
 -(UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath{
+    __weak __typeof(self)weakSelf = self;
     if (indexPath.section == 0) {
         UICollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:topCellId forIndexPath:indexPath];
         [cell.contentView addSubview:self.activeTopView];
@@ -320,6 +274,15 @@ static NSString *const URLCancelFollowUser = @"/follow/ajax_cancel_follow";
             {
                 THNActiveRuleCollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:ruleCellId forIndexPath:indexPath];
                 cell.model = self.ruleModel;
+                if (self.webViewLoads == 1) {
+                    cell.contentWebView.delegate = nil;
+                }else{
+                    cell.contentWebView.delegate = self;
+                }
+                
+                NSURL *url = [NSURL URLWithString:self.ruleModel.content_view_url];
+                NSURLRequest *request = [NSURLRequest requestWithURL:url];
+                [cell.contentWebView loadRequest:request];
                 [cell.attendBtn addTarget:self action:@selector(attend) forControlEvents:UIControlEventTouchUpInside];
                 return cell;
                 break;
@@ -329,6 +292,14 @@ static NSString *const URLCancelFollowUser = @"/follow/ajax_cancel_follow";
             {
                 THNDiscoverSceneCollectionViewCell * cell = [collectionView dequeueReusableCellWithReuseIdentifier:collectionViewCellId forIndexPath:indexPath];
                 cell.model = self.senceModelAry[indexPath.row];
+                cell.beginLikeTheSceneBlock = ^(NSString *idx) {
+                    [weakSelf thn_networkLikeSceneData:idx];
+                };
+                
+                cell.cancelLikeTheSceneBlock = ^(NSString *idx) {
+                    [weakSelf thn_networkCancelLikeData:idx];
+                };
+                
                 return cell;
             }
                 break;
@@ -336,9 +307,17 @@ static NSString *const URLCancelFollowUser = @"/follow/ajax_cancel_follow";
                 //活动结果
             {
                 _scene = [[THNSceneImageTableViewCell alloc] init];
+                
                 _scene.sceneImage.tag = indexPath.row;
                 [_scene.sceneImage addTarget:self action:@selector(sceneImageClick:) forControlEvents:UIControlEventTouchUpInside];
                 _top = [[THNUserInfoTableViewCell alloc] init];
+                _top.beginFollowTheUserBlock = ^(NSString *userId) {
+                    [weakSelf beginFollowUser:userId];
+                };
+                
+                _top.cancelFollowTheUserBlock = ^(NSString *userId) {
+                    [weakSelf cancelFollowUser:userId];
+                };
                 UICollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:resultCellId forIndexPath:indexPath];
                 [cell.contentView addSubview:self.top];
                 [self.top mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -369,6 +348,75 @@ static NSString *const URLCancelFollowUser = @"/follow/ajax_cancel_follow";
     UICollectionViewCell *cell;
     return cell;
 }
+
+//  点赞
+- (void)thn_networkLikeSceneData:(NSString *)idx {
+    self.likeSceneRequest = [FBAPI postWithUrlString:URLLikeScene requestDictionary:@{@"id":idx, @"type":@"12"} delegate:self];
+    [self.likeSceneRequest startRequestSuccess:^(FBRequest *request, id result) {
+        if ([[result valueForKey:@"success"] isEqualToNumber:@1]) {
+            NSInteger index = [self.sceneIdMarr indexOfObject:idx];
+            [self.senceModelAry[index] setValue:@(1) forKey:@"is_love"];
+        }
+        
+    } failure:^(FBRequest *request, NSError *error) {
+        NSLog(@"%@", error);
+    }];
+}
+
+//  取消点赞
+- (void)thn_networkCancelLikeData:(NSString *)idx {
+    self.cancelLikeRequest = [FBAPI postWithUrlString:URLCancelLike requestDictionary:@{@"id":idx, @"type":@"12"} delegate:self];
+    [self.cancelLikeRequest startRequestSuccess:^(FBRequest *request, id result) {
+        if ([[result valueForKey:@"success"] isEqualToNumber:@1]) {
+            NSInteger index = [self.sceneIdMarr indexOfObject:idx];
+            [self.senceModelAry[index] setValue:@(0) forKey:@"is_love"];
+        }
+        
+    } failure:^(FBRequest *request, NSError *error) {
+        NSLog(@"%@", error);
+    }];
+}
+
+//  关注用户
+- (void)beginFollowUser:(NSString *)userId {
+    NSInteger index = [self.userIdMarr indexOfObject:userId];
+    [[self.resultsAry valueForKey:@"user"][index] setValue:@"1" forKey:@"isFollow"];
+    [self thn_networkBeginFollowUserData:userId];
+}
+
+//  取消关注用户
+- (void)cancelFollowUser:(NSString *)userId {
+    NSInteger index = [self.userIdMarr indexOfObject:userId];
+    [[self.resultsAry valueForKey:@"user"][index] setValue:@"0" forKey:@"isFollow"];
+    [self thn_networkCancelFollowUserData:userId];
+}
+
+//  关注
+- (void)thn_networkBeginFollowUserData:(NSString *)idx {
+    self.followRequest = [FBAPI postWithUrlString:URLFollowUser requestDictionary:@{@"follow_id":idx} delegate:self];
+    [self.followRequest startRequestSuccess:^(FBRequest *request, id result) {
+        if ([[result valueForKey:@"success"] isEqualToNumber:@1]) {
+            
+        }
+        
+    } failure:^(FBRequest *request, NSError *error) {
+        [SVProgressHUD showErrorWithStatus:[error localizedDescription]];
+    }];
+}
+
+//  取消关注
+- (void)thn_networkCancelFollowUserData:(NSString *)idx {
+    self.cancelFollowRequest = [FBAPI postWithUrlString:URLCancelFollowUser requestDictionary:@{@"follow_id":idx} delegate:self];
+    [self.cancelFollowRequest startRequestSuccess:^(FBRequest *request, id result) {
+        if ([[result valueForKey:@"success"] isEqualToNumber:@1]) {
+            
+        }
+        
+    } failure:^(FBRequest *request, NSError *error) {
+        [SVProgressHUD showErrorWithStatus:[error localizedDescription]];
+    }];
+}
+
 
 -(void)sceneImageClick:(UIButton*)sender{
     THNSceneImageViewController *sceneImageVC = [[THNSceneImageViewController alloc] init];
@@ -424,12 +472,12 @@ static NSString *const URLCancelFollowUser = @"/follow/ajax_cancel_follow";
     if (indexPath.section == 2) {
         switch (flag) {
             case 0:
-                //活动规则网络请求
+                //活动规则
             {
             }
                 break;
             case 1:
-                //参与的情境网络请求
+                //参与的情境
             {
                 THNSceneDetalViewController *vc = [[THNSceneDetalViewController alloc] init];
                 THNDiscoverSceneCollectionViewCell *cell = (THNDiscoverSceneCollectionViewCell*)[collectionView cellForItemAtIndexPath:indexPath];
@@ -439,7 +487,7 @@ static NSString *const URLCancelFollowUser = @"/follow/ajax_cancel_follow";
                 
                 break;
             case 2:
-                //活动结果网络请求
+                //活动结果
             {
   
             }
@@ -627,43 +675,21 @@ static NSString *const URLCancelFollowUser = @"/follow/ajax_cancel_follow";
     } failure:nil];
 }
 
-#pragma mark - 关注
-- (void)followTheUser:(NSNotification *)idx {
-    [self thn_networkFollowSceneData:[idx object]];
+
+-(void)webViewDidStartLoad:(UIWebView *)webView{
+    [SVProgressHUD show];
 }
 
-- (void)cancelFollowTheUser:(NSNotification *)idx {
-    [self thn_networkCancelFollowData:[idx object]];
+-(void)webViewDidFinishLoad:(UIWebView *)webView{
+    [SVProgressHUD dismiss];
+    self.webViewHeghit = [[webView stringByEvaluatingJavaScriptFromString:@"document.height"] floatValue];
+    NSLog(@"网页高度 %f",self.webViewHeghit);
+    self.webViewLoads = 1;
+    [self.contentView reloadData];
 }
 
-#pragma mark 关注
-- (void)thn_networkFollowSceneData:(NSString *)idx {
-    self.followRequest = [FBAPI postWithUrlString:URLFollowUser requestDictionary:@{@"follow_id":idx} delegate:self];
-    [self.followRequest startRequestSuccess:^(FBRequest *request, id result) {
-        if ([[result valueForKey:@"success"] isEqualToNumber:@1]) {
-            NSInteger index = [self.resultUserIdAry indexOfObject:idx];
-            [[self.resultsAry[index] valueForKey:@"user"] setValue:@"1" forKey:@"isFollow"];
-            [self.contentView reloadData];
-        }
-        
-    } failure:^(FBRequest *request, NSError *error) {
-        [SVProgressHUD showErrorWithStatus:[error localizedDescription]];
-    }];
+-(void)webView:(UIWebView *)webView didFailLoadWithError:(NSError *)error{
+    [SVProgressHUD showInfoWithStatus:error.localizedDescription];
 }
-
-#pragma mark 取消关注
-- (void)thn_networkCancelFollowData:(NSString *)idx {
-    self.cancelFollowRequest = [FBAPI postWithUrlString:URLCancelFollowUser requestDictionary:@{@"follow_id":idx} delegate:self];
-    [self.cancelFollowRequest startRequestSuccess:^(FBRequest *request, id result) {
-        if ([[result valueForKey:@"success"] isEqualToNumber:@1]) {
-            NSInteger index = [self.resultUserIdAry indexOfObject:idx];
-            [[self.resultsAry[index] valueForKey:@"user"] setValue:@"0" forKey:@"isFollow"];
-        }
-        
-    } failure:^(FBRequest *request, NSError *error) {
-        [SVProgressHUD showErrorWithStatus:[error localizedDescription]];
-    }];
-}
-
 
 @end
