@@ -13,7 +13,7 @@
 #import "FBStickersContainer.h"
 
 static NSString *const URLUserAddTmap = @"/user_temp/add";
-static NSString *const URLDeleUserGoods = @"/scene_product/deleted";
+static NSString *const URLDeleUserGoods = @"/user_temp/deleted";
 static NSString *const URLUserAddGoods = @"/user_temp/add";
 
 @interface SceneAddViewController () <FBFootViewDelegate, FBUserGoodsTagDelegaet, FBStickerContainerDelegate> {
