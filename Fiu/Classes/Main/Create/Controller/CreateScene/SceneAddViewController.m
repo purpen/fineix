@@ -14,7 +14,7 @@
 
 static NSString *const URLUserAddTmap = @"/user_temp/add";
 static NSString *const URLDeleUserGoods = @"/scene_product/deleted";
-static NSString *const URLUserAddGoods = @"/scene_product/add";
+static NSString *const URLUserAddGoods = @"/user_temp/add";
 
 @interface SceneAddViewController () <FBFootViewDelegate, FBUserGoodsTagDelegaet, FBStickerContainerDelegate> {
     UserGoodsTag    * goodsTag;
