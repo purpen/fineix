@@ -15,7 +15,7 @@
 #import "FBGoodsCommentViewController.h"
 #import "FBBuyGoodsViewController.h"
 #import "FBSureOrderViewController.h"
-#import "GoodsBrandViewController.h"
+#import "THNBrandInfoViewController.h"
 #import "THNSceneDetalViewController.h"
 #import "THNDiscoverSceneCollectionViewCell.h"
 #import "InfoTitleTableViewCell.h"
@@ -484,7 +484,7 @@ static NSString *const SceneListCellId = @"SceneListCellId";
         }
         
     } else if (indexPath.section == 2) {
-        GoodsBrandViewController * goodsBrandVC = [[GoodsBrandViewController alloc] init];
+        THNBrandInfoViewController * goodsBrandVC = [[THNBrandInfoViewController alloc] init];
         goodsBrandVC.brandId = self.goodsInfo.brandId;
         [self.navigationController pushViewController:goodsBrandVC animated:YES];
     }

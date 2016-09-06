@@ -22,6 +22,7 @@
 
 @pro_strong FBRequest           *   shareTextNumRequest;
 @pro_strong FBRequest           *   sendExpRequest;
+@pro_strong FBRequest           *   sceneInfoRequest;
 @pro_strong UIView              *   topView;
 @pro_strong UIButton            *   closeBtn;
 @pro_strong UIButton            *   shareBtn;

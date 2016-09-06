@@ -208,7 +208,6 @@ static NSString *const SceneListFooterCellViewId = @"sceneListFooterViewId";
         flowLayou.itemSize = CGSizeMake((SCREEN_WIDTH - 45)/2, ((SCREEN_WIDTH - 45)/2)*1.21);
         flowLayou.minimumLineSpacing = 15.0f;
         flowLayou.sectionInset = UIEdgeInsetsMake(0, 15, 0, 15);
-
         flowLayou.scrollDirection = UICollectionViewScrollDirectionVertical;
         
         _sceneList = [[UICollectionView alloc] initWithFrame:CGRectMake(0, 64, SCREEN_WIDTH, SCREEN_HEIGHT - 113)

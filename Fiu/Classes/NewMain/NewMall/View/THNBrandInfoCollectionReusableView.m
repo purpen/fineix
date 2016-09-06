@@ -1,23 +1,20 @@
 //
-//  GoodsBrandTableViewCell.m
+//  THNBrandInfoCollectionReusableView.m
 //  Fiu
 //
-//  Created by FLYang on 16/4/25.
+//  Created by FLYang on 16/9/6.
 //  Copyright © 2016年 taihuoniao. All rights reserved.
 //
 
-#import "GoodsBrandTableViewCell.h"
+#import "THNBrandInfoCollectionReusableView.h"
 
-@implementation GoodsBrandTableViewCell
+@implementation THNBrandInfoCollectionReusableView
 
-- (instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier {
-    self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
+- (instancetype)initWithFrame:(CGRect)frame {
+    self = [super initWithFrame:frame];
     if (self) {
-        
         self.backgroundColor = [UIColor colorWithHexString:@"#F7F7F7"];
-        self.selectionStyle = UITableViewCellSelectionStyleNone;
         [self setCellViewUI];
-        
     }
     return self;
 }
@@ -47,14 +44,6 @@
     }];
 }
 
-#pragma mark - 获取高度
-//  计算内容高度
-- (void)getContentCellHeight:(NSString *)content {
-    self.brandIntroduce.text = content;
-    CGSize size = [self.brandIntroduce boundingRectWithSize:CGSizeMake(SCREEN_WIDTH - 30, 0)];
-    self.cellHeight = size.height + 260;
-}
-
 #pragma mark -
 - (void)setCellViewUI {
     [self addSubview:self.brandBgImg];
@@ -70,12 +59,19 @@
         make.bottom.equalTo(self.brandBgImg.mas_bottom).with.offset(20);
         make.centerX.equalTo(self);
     }];
-
+    
     [self addSubview:self.brandIntroduce];
     [_brandIntroduce mas_makeConstraints:^(MASConstraintMaker *make) {
         make.size.mas_equalTo(CGSizeMake(SCREEN_WIDTH - 30, 100));
         make.top.equalTo(self.brandBgImg.mas_bottom).with.offset(25);
         make.left.equalTo(self.mas_left).with.offset(15);
+    }];
+    
+    [self addSubview:self.menuView];
+    [_menuView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.size.mas_equalTo(CGSizeMake(SCREEN_WIDTH, 44));
+        make.bottom.equalTo(self.mas_bottom).with.offset(0);
+        make.left.equalTo(self.mas_left).with.offset(0);
     }];
 }
 
@@ -114,5 +110,15 @@
     return _brandIntroduce;
 }
 
+#pragma mark - 切换菜单
+- (FBSegmentView *)menuView {
+    if (!_menuView) {
+        NSArray *titleArr = @[NSLocalizedString(@"brandGoodsList", nil), NSLocalizedString(@"brandSceneList", nil)];
+        _menuView = [[FBSegmentView alloc] initWithFrame:CGRectMake(0, 230, SCREEN_WIDTH, 44)];
+        [_menuView set_menuItemTitle:titleArr];
+        [_menuView set_showBottomLine:YES];
+    }
+    return _menuView;
+}
 
 @end

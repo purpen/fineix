@@ -13,7 +13,7 @@ static NSString *const URLReleaseScenen = @"/scene_sight/save";
 static NSString *const URLReleaseFiuScenen = @"/scene_scene/save";
 
 @interface ReleaseViewController () {
-
+    
 }
 
 @end
@@ -117,7 +117,10 @@ static NSString *const URLReleaseFiuScenen = @"/scene_scene/save";
     
     [self.releaseSceneRequest startRequestSuccess:^(FBRequest *request, id result) {
         if ([[result valueForKey:@"success"] isEqualToNumber:@1]) {
-            [self dismissViewControllerAnimated:YES completion:nil];
+            self.sharePopView.sceneId = [NSString stringWithFormat:@"%zi", [[[result valueForKey:@"data"] valueForKey:@"id"] integerValue]];
+            [self dismissViewControllerAnimated:YES completion:^{
+                [self showShareView];
+            }];
         }
         [SVProgressHUD dismiss];
         
@@ -161,6 +164,20 @@ static NSString *const URLReleaseFiuScenen = @"/scene_scene/save";
         _addLocaiton.vc = self;
     }
     return _addLocaiton;
+}
+
+#pragma mark - 发布完成，提示分享
+- (FBPopupView *)sharePopView {
+    if (!_sharePopView) {
+        _sharePopView = [[FBPopupView alloc] init];
+    }
+    return _sharePopView;
+}
+
+- (void)showShareView {
+    UIWindow * window = [UIApplication sharedApplication].keyWindow;
+    [self.sharePopView showPopupViewOnWindowStyleOne:NSLocalizedString(@"releaseSceneDone", nil)];
+    [window addSubview:self.sharePopView];
 }
 
 #pragma mark -  设置导航栏

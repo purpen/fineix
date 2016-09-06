@@ -56,6 +56,10 @@
 "niceGoodsInfo" = "好货详情";
 "goodsComment" = "评价";
 
+//  品牌
+"brandGoodsList" = "产品列表";
+"brandSceneList" = "情境";
+
 //  搜索
 "searchScene" = "情境";
 "searchUser" = "用户";
@@ -150,7 +154,7 @@
 "cancelCollect" = "取消收藏";
 "SceneOfFiu" = "此地盘下的情境";
 "chooseFScene" = "请选择一个情境";
-"releaseSceneDone" = "您的情境发布成功，品味又升级啦. 分享给好友即可获得积分奖励～";
+"releaseSceneDone" = "您的情境发布成功，品味又升级啦. 分享给好友即可获得积分奖励(＾ｰ^)ノ";
 "shareDone" = "分享成功!";
 "shareDoneContent" = "恭喜您获得积分奖励！";
 "slognText" = "｜ 你在发现 谁在惊呼？";

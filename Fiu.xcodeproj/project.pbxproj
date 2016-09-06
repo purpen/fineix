@@ -486,6 +486,8 @@
 		D85174691D598D60005F5722 /* THNSceneInfoTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D85174681D598D60005F5722 /* THNSceneInfoTableViewCell.m */; };
 		D851746C1D5AD70E005F5722 /* THNSceneCommentTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D851746B1D5AD70E005F5722 /* THNSceneCommentTableViewCell.m */; };
 		D851746F1D5AF586005F5722 /* THNSceneTagsCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D851746E1D5AF586005F5722 /* THNSceneTagsCollectionViewCell.m */; };
+		D861BC6E1D7E977700A26022 /* THNBrandInfoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D861BC6D1D7E977700A26022 /* THNBrandInfoViewController.m */; };
+		D861BC711D7E995600A26022 /* THNBrandInfoCollectionReusableView.m in Sources */ = {isa = PBXBuildFile; fileRef = D861BC701D7E995600A26022 /* THNBrandInfoCollectionReusableView.m */; };
 		D86809031D622049002714B2 /* FBImageScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = D86809021D622049002714B2 /* FBImageScrollView.m */; };
 		D868090A1D6301C1002714B2 /* FBSubjectModel.m in Sources */ = {isa = PBXBuildFile; fileRef = D86809051D6301C1002714B2 /* FBSubjectModel.m */; };
 		D868090B1D6301C1002714B2 /* FBSubjectModelData.m in Sources */ = {isa = PBXBuildFile; fileRef = D86809071D6301C1002714B2 /* FBSubjectModelData.m */; };
@@ -1454,6 +1456,10 @@
 		D851746B1D5AD70E005F5722 /* THNSceneCommentTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THNSceneCommentTableViewCell.m; sourceTree = "<group>"; };
 		D851746D1D5AF586005F5722 /* THNSceneTagsCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THNSceneTagsCollectionViewCell.h; sourceTree = "<group>"; };
 		D851746E1D5AF586005F5722 /* THNSceneTagsCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THNSceneTagsCollectionViewCell.m; sourceTree = "<group>"; };
+		D861BC6C1D7E977700A26022 /* THNBrandInfoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THNBrandInfoViewController.h; sourceTree = "<group>"; };
+		D861BC6D1D7E977700A26022 /* THNBrandInfoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THNBrandInfoViewController.m; sourceTree = "<group>"; };
+		D861BC6F1D7E995600A26022 /* THNBrandInfoCollectionReusableView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THNBrandInfoCollectionReusableView.h; sourceTree = "<group>"; };
+		D861BC701D7E995600A26022 /* THNBrandInfoCollectionReusableView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THNBrandInfoCollectionReusableView.m; sourceTree = "<group>"; };
 		D86809011D622049002714B2 /* FBImageScrollView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FBImageScrollView.h; sourceTree = "<group>"; };
 		D86809021D622049002714B2 /* FBImageScrollView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FBImageScrollView.m; sourceTree = "<group>"; };
 		D86809041D6301C1002714B2 /* FBSubjectModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FBSubjectModel.h; sourceTree = "<group>"; };
@@ -3829,6 +3835,8 @@
 			children = (
 				D85174521D587908005F5722 /* THNMallViewController.h */,
 				D85174531D587908005F5722 /* THNMallViewController.m */,
+				D861BC6C1D7E977700A26022 /* THNBrandInfoViewController.h */,
+				D861BC6D1D7E977700A26022 /* THNBrandInfoViewController.m */,
 				D80878E31D6B015100C1FFA0 /* THNCategoryViewController.h */,
 				D80878E41D6B015100C1FFA0 /* THNCategoryViewController.m */,
 				D80669791D6F0206007FD81E /* MallSearchViewController.h */,
@@ -3863,6 +3871,8 @@
 		D851744A1D5878C8005F5722 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				D861BC6F1D7E995600A26022 /* THNBrandInfoCollectionReusableView.h */,
+				D861BC701D7E995600A26022 /* THNBrandInfoCollectionReusableView.m */,
 				D8E8FFC61D76D01B00DDC3E0 /* TagFlowLayout.h */,
 				D8E8FFC71D76D01B00DDC3E0 /* TagFlowLayout.m */,
 				D80878D41D6AD18E00C1FFA0 /* THNMallNewGoodsCollectionViewCell.h */,
@@ -4472,6 +4482,7 @@
 				D80669751D6EE384007FD81E /* ThemeTableViewCell.m in Sources */,
 				D868090C1D6301C1002714B2 /* FBSubjectModelRow.m in Sources */,
 				1F6CA27F1D5C54D700DFB79E /* THNTFCodeView.m in Sources */,
+				D861BC711D7E995600A26022 /* THNBrandInfoCollectionReusableView.m in Sources */,
 				1FCDCC821D066D2700C92E78 /* SexSheetViewController.m in Sources */,
 				D869BD711D6036A000432423 /* CommentUser.m in Sources */,
 				D8C095121D752EC600908491 /* ShareStyleTopView.m in Sources */,
@@ -4491,6 +4502,7 @@
 				D86809121D6433B0002714B2 /* MarkBrandsViewController.m in Sources */,
 				1F2A90291CF40277005116C7 /* TagsCollectionViewCell.m in Sources */,
 				D88F47EE1D5C5BD300C83A0C /* FBCategoryView.m in Sources */,
+				D861BC6E1D7E977700A26022 /* THNBrandInfoViewController.m in Sources */,
 				D8A9AE401CE304FF00A9FCFB /* NSTimer+Addition.m in Sources */,
 				D8E3AEBC1CFC9B84006E5E8C /* SceneAddViewController.m in Sources */,
 				1FBF2CD41D6C91B0003C1643 /* THNActiveTopView.m in Sources */,

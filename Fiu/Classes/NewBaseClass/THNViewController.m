@@ -95,6 +95,7 @@ static NSString *const URLGoodsCarNum = @"/shopping/fetch_cart_count";
 #pragma mark - 设置加载Nav视图
 - (void)thn_setNavViewUI {
     [self.view addSubview:self.navView];
+    [self.navView bringSubviewToFront:self.view];
     [self.navView addSubview:self.navViewTitle];
     [self thn_addNavBackBtn];
 }

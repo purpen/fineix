@@ -12,6 +12,7 @@
 
 static NSString *const URLShareTextNum = @"/scene_sight/add_share_context_num";
 static NSString *const URLGiveExp = @"/user/send_exp";
+static NSString *const URLSceneInfo = @"/scene_sight/view";
 
 @interface FBShareViewController () {
     NSString * _editBgImg;
@@ -84,9 +85,21 @@ static NSString *const URLGiveExp = @"/user/send_exp";
     return image;
 }
 
+#pragma mark - 获取情境详情
+- (void)thn_getSceneInfoData:(NSString *)sceneId {
+    self.sceneInfoRequest = [FBAPI getWithUrlString:URLSceneInfo requestDictionary:@{@"id":sceneId} delegate:self];
+    [self.sceneInfoRequest startRequestSuccess:^(FBRequest *request, id result) {
+        HomeSceneListRow *sceneModel = [[HomeSceneListRow alloc] initWithDictionary:[result valueForKey:@"data"]];
+        [self.shareTopView setShareSceneData:sceneModel];
+        
+    } failure:^(FBRequest *request, NSError *error) {
+        NSLog(@"%@", error);
+    }];
+}
+
 #pragma mark - 设置界面UI
 - (void)setShareVcUI {
-      [self.view addSubview:self.topView];
+    [self.view addSubview:self.topView];
     [self.view addSubview:self.shareView];
     CGAffineTransform shareViewTrans = CGAffineTransformScale(self.shareView.transform, 0.76, 0.76);
     [self.shareView setTransform:shareViewTrans];
@@ -97,6 +110,12 @@ static NSString *const URLGiveExp = @"/user/send_exp";
     [self.styleView selectItemAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0]
                                    animated:YES
                              scrollPosition:(UICollectionViewScrollPositionNone)];
+    
+    if (self.sceneModel.idField > 0) {
+        [self.shareTopView setShareSceneData:self.sceneModel];
+    } else {
+        [self thn_getSceneInfoData:self.sceneId];
+    }
 }
 
 #pragma mark - 分享场景信息视图
@@ -111,7 +130,6 @@ static NSString *const URLGiveExp = @"/user/send_exp";
 - (ShareStyleTopView *)shareTopView {
     if (!_shareTopView) {
         _shareTopView = [[ShareStyleTopView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT)];
-        [_shareTopView setShareSceneData:self.sceneModel];
     }
     return _shareTopView;
 }
