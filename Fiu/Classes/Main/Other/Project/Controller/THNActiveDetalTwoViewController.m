@@ -1,4 +1,4 @@
-//
+////
 //  THNActiveDetalTwoViewController.m
 //  Fiu
 //
@@ -379,15 +379,15 @@ static NSString *const URLCancelFollowUser = @"/follow/ajax_cancel_follow";
 
 //  关注用户
 - (void)beginFollowUser:(NSString *)userId {
-    NSInteger index = [self.userIdMarr indexOfObject:userId];
-    [[self.resultsAry valueForKey:@"user"][index] setValue:@"1" forKey:@"isFollow"];
+    NSInteger index = [self.resultUserIdAry indexOfObject:userId];
+    [[self.resultsAry[index] valueForKey:@"user"] setValue:@"1" forKey:@"isFollow"];
     [self thn_networkBeginFollowUserData:userId];
 }
 
 //  取消关注用户
 - (void)cancelFollowUser:(NSString *)userId {
-    NSInteger index = [self.userIdMarr indexOfObject:userId];
-    [[self.resultsAry valueForKey:@"user"][index] setValue:@"0" forKey:@"isFollow"];
+    NSInteger index = [self.resultUserIdAry indexOfObject:userId];
+    [[self.resultsAry[index] valueForKey:@"user"] setValue:@"0" forKey:@"isFollow"];
     [self thn_networkCancelFollowUserData:userId];
 }
 
