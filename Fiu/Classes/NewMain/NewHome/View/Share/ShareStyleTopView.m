@@ -25,7 +25,6 @@ static CGFloat const userNameFont = 10.0f;
     self = [super initWithFrame:frame];
     if (self) {
         self.backgroundColor = [UIColor whiteColor];
-        [self setViewUI];
     }
     return self;
 }
@@ -41,6 +40,8 @@ static CGFloat const userNameFont = 10.0f;
 
 #pragma mark - 视图信息
 - (void)setShareSceneData:(HomeSceneListRow *)sceneModel {
+    [self setViewUI];
+    
     [self.sceneImg downloadImage:sceneModel.coverUrl place:[UIImage imageNamed:@""]];
     
     if (sceneModel.title.length == 0) {
@@ -85,7 +86,12 @@ static CGFloat const userNameFont = 10.0f;
     [self.time mas_updateConstraints:^(MASConstraintMaker *make) {
         make.width.equalTo(@([self getTextSizeWidth:timeStr fontSize:17].width));
     }];
-    [self.address setTitle:sceneModel.address forState:(UIControlStateNormal)];
+    
+    if (sceneModel.address.length == 0) {
+        self.address.hidden = YES;
+    } else {
+        [self.address setTitle:sceneModel.address forState:(UIControlStateNormal)];
+    }
     
     if (sceneModel.user.isExpert == 1) {
         self.userVimg.hidden = NO;
@@ -94,11 +100,6 @@ static CGFloat const userNameFont = 10.0f;
     }
     
     [self changeContentLabStyle:sceneModel.des];
-    
-//    _titleText = sceneModel.title;
-//    [self titleTextStyle:sceneModel.title withBgColor:[UIColor colorWithPatternImage:[UIImage imageNamed:@"titleBg"]]];
-
-//    self.fiuSlogan.text = NSLocalizedString(@"slognText", nil);
 }
 
 - (CGSize)getTextSizeWidth:(NSString *)text fontSize:(CGFloat)fontSize {
@@ -359,6 +360,10 @@ static CGFloat const userNameFont = 10.0f;
 }
 
 - (void)changeContentLabStyle:(NSString *)str {
+    if (str.length == 0) {
+        self.slogan.hidden = YES;
+    }
+    
     CGFloat desHeigth = [self getTextSizeWidth:str fontSize:12].height;
     
     if (desHeigth <= 40) {
