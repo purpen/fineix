@@ -277,11 +277,12 @@ static NSString *const URLCancelFollowUser = @"/follow/ajax_cancel_follow";
                 CGSize maxSize = CGSizeMake([UIScreen mainScreen].bounds.size.width - 2 * 10, MAXFLOAT);
                 // 计算文字的高度
                 CGFloat textH = [self.ruleModel.summary boundingRectWithSize:maxSize options:NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName : [UIFont systemFontOfSize:14]} context:nil].size.height;
-                if (textH + 20 + 44 + 211 + 44 + 64 <= SCREEN_HEIGHT) {
-                    return CGSizeMake(SCREEN_WIDTH, SCREEN_HEIGHT - 64 - 211 - 44);
-                }else{
-                    return CGSizeMake(SCREEN_WIDTH, textH + 20 + 44);
-                }
+                return CGSizeMake(SCREEN_WIDTH, textH + 50);
+//                if (textH + 20 + 44 + 211 + 44 + 64 <= SCREEN_HEIGHT) {
+//                    return CGSizeMake(SCREEN_WIDTH, SCREEN_HEIGHT - 64 - 211 - 44);
+//                }else{
+//                    return CGSizeMake(SCREEN_WIDTH, textH + 20 + 44);
+//                }
             }
                 break;
             case 1:

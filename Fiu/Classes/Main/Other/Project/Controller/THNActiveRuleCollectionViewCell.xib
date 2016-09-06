@@ -14,7 +14,7 @@
                 <rect key="frame" x="0.0" y="0.0" width="333" height="240"/>
                 <subviews>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9a6-so-m4f">
-                        <rect key="frame" x="10" y="10" width="313" height="17"/>
+                        <rect key="frame" x="10" y="10" width="313" height="176"/>
                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                         <color key="textColor" red="0.40392156862745099" green="0.40392156862745099" blue="0.40392156862745099" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
@@ -32,6 +32,7 @@
                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
             </view>
             <constraints>
+                <constraint firstItem="9a6-so-m4f" firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="LD1-Mr-t3l" secondAttribute="top" constant="-10" id="1IF-wU-J9w"/>
                 <constraint firstItem="9a6-so-m4f" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" constant="10" id="EEh-Pn-j6y"/>
                 <constraint firstAttribute="bottom" secondItem="LD1-Mr-t3l" secondAttribute="bottom" id="Mg2-7J-4Ct"/>
                 <constraint firstItem="LD1-Mr-t3l" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="Ug4-Rb-Lam"/>
