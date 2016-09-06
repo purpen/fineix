@@ -56,6 +56,10 @@
 "niceGoodsInfo" = "好货详情";
 "goodsComment" = "评价";
 
+//  品牌
+"brandGoodsList" = "产品列表";
+"brandSceneList" = "情境";
+
 //  搜索
 "searchScene" = "情境";
 "searchUser" = "用户";

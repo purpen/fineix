@@ -37,8 +37,8 @@ static NSString *const SceneListCellId = @"SceneListCellId";
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self networkBrandInfoData];
-//    [self networkBrandGoodsList];
-//    [self thn_networkSceneListData];
+    [self networkBrandGoodsList];
+    [self thn_networkSceneListData];
     [self.view addSubview:self.goodsBrandTable];
 }
 
@@ -66,7 +66,6 @@ static NSString *const SceneListCellId = @"SceneListCellId";
                                  @"brand_id":self.brandId};
     self.sceneRequest = [FBAPI getWithUrlString:URLSceneList requestDictionary:requestDic delegate:self];
     [self.sceneRequest startRequestSuccess:^(FBRequest *request, id result) {
-        NSLog(@"＝＝＝＝＝＝ %@", result);
         NSArray *sceneArr = [[result valueForKey:@"data"] valueForKey:@"rows"];
         for (NSDictionary * sceneDic in sceneArr) {
             HomeSceneListRow *homeSceneModel = [[HomeSceneListRow alloc] initWithDictionary:[sceneDic valueForKey:@"sight"]];

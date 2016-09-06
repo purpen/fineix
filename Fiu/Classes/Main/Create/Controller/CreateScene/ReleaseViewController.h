@@ -11,6 +11,7 @@
 #import <SVProgressHUD/SVProgressHUD.h>
 #import "AddLocationView.h"
 #import "AddContentView.h"
+#import "FBPopupView.h"
 
 @interface ReleaseViewController : FBPictureViewController
 
@@ -27,6 +28,7 @@
 @pro_strong UIImage             *   bgImg;
 @pro_strong AddLocationView     *   addLocaiton;
 @pro_strong AddContentView      *   addContent;
+@pro_strong FBPopupView         *   sharePopView;
 
 @pro_strong NSString *actionId;
 

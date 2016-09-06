@@ -163,6 +163,14 @@ static NSString *const URLReleaseFiuScenen = @"/scene_scene/save";
     return _addLocaiton;
 }
 
+#pragma mark - 发布完成，提示分享
+- (FBPopupView *)sharePopView {
+    if (!_sharePopView) {
+        _sharePopView = [[FBPopupView alloc] init];
+    }
+    return _sharePopView;
+}
+
 #pragma mark -  设置导航栏
 - (void)setNavViewUI {
     self.view.backgroundColor = [UIColor colorWithHexString:@"#F8F8F8"];
