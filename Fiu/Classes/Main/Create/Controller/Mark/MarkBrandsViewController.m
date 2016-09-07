@@ -10,15 +10,17 @@
 #import "THNSearchBrandTableViewCell.h"
 #import "THNSearchGoodsTableViewCell.h"
 #import "FiuBrandRow.h"
+#import "GoodsRow.h"
 
-static NSString *const URLBrandList = @"/scene_brands/getlist";
-static NSString *const URLGoodsList = @"/scene_product/getlist";
+static NSString *const URLBrandList = @"/search/getlist";
+static NSString *const URLGoodsList = @"/product/getlist";
 
 static NSString *const brandCellId = @"BrandCellId";
 static NSString *const goodsCellId = @"GoodsCellId";
 
 @interface MarkBrandsViewController () {
     NSString *_chooseBrandTitle;
+    NSString *_chooseBrandId;
 }
 
 @pro_strong NSMutableArray *brandMarr;
@@ -49,12 +51,11 @@ static NSString *const goodsCellId = @"GoodsCellId";
     [self.brandMarr removeAllObjects];
     [self.brandIdMarr removeAllObjects];
     
-    self.brandRequest = [FBAPI getWithUrlString:URLBrandList requestDictionary:@{@"title":keyword, @"from_to":@"1", @"kind":@"1", @"size":@"100"} delegate:self];
+    self.brandRequest = [FBAPI getWithUrlString:URLBrandList requestDictionary:@{@"q":keyword, @"t":@"13", @"evt":@"content", @"size":@"1000"} delegate:self];
     [self.brandRequest startRequestSuccess:^(FBRequest *request, id result) {
         self.brandTitleMarr = [NSMutableArray arrayWithArray:[[[result valueForKey:@"data"] valueForKey:@"rows"] valueForKey:@"title"]];
         self.brandIdMarr = [NSMutableArray arrayWithArray:[[[result valueForKey:@"data"] valueForKey:@"rows"] valueForKey:@"_id"]];
         self.brandMarr = [NSMutableArray arrayWithArray:[[[result valueForKey:@"data"] valueForKey:@"rows"] valueForKey:@"cover_url"]];
-        
         if (self.brandTitleMarr.count) {
             self.brandList.hidden = NO;
             self.addGoodBtn.hidden = YES;
@@ -76,7 +77,7 @@ static NSString *const goodsCellId = @"GoodsCellId";
     self.goodsRequest = [FBAPI getWithUrlString:URLGoodsList requestDictionary:@{@"brand_id":brandId, @"size":@"1000"} delegate:self];
     [self.goodsRequest startRequestSuccess:^(FBRequest *request, id result) {
         self.goodsMarr = [NSMutableArray arrayWithArray:[[[result valueForKey:@"data"] valueForKey:@"rows"] valueForKey:@"title"]];
-        self.goodsIdMarr = [NSMutableArray arrayWithArray:[[[result valueForKey:@"data"] valueForKey:@"rows"] valueForKey:@"oid"]];
+        self.goodsIdMarr = [NSMutableArray arrayWithArray:[[[result valueForKey:@"data"] valueForKey:@"rows"] valueForKey:@"_id"]];
         if (self.goodsMarr.count) {
             self.addGoodBtn.hidden = YES;
             self.goodsList.hidden = NO;
@@ -165,6 +166,7 @@ static NSString *const goodsCellId = @"GoodsCellId";
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     if (tableView == self.brandList) {
         _chooseBrandTitle = self.brandTitleMarr[indexPath.row];
+        _chooseBrandId = self.brandIdMarr[indexPath.row];
         [self setBrandName:_chooseBrandTitle type:1];
         if (self.brandIdMarr.count) {
             [self networkBrandOfGoods:self.brandIdMarr[indexPath.row]];
@@ -172,7 +174,10 @@ static NSString *const goodsCellId = @"GoodsCellId";
         
     } else if (tableView == self.goodsList) {
         [self dismissViewControllerAnimated:YES completion:^{
-            self.getBrandAndGoodsInfoBlock(_chooseBrandTitle, self.goodsMarr[indexPath.row], self.goodsIdMarr[indexPath.row]);
+            self.getBrandAndGoodsInfoBlock(_chooseBrandTitle,
+                                           _chooseBrandId,
+                                           self.goodsMarr[indexPath.row],
+                                           [NSString stringWithFormat:@"%zi", [self.goodsIdMarr[indexPath.row] integerValue]]);
         }];
     }
 }
@@ -269,7 +274,7 @@ static NSString *const goodsCellId = @"GoodsCellId";
         
     } else {
         [self dismissViewControllerAnimated:YES completion:^{
-            self.getBrandAndGoodsInfoBlock(self.brandNameBtn.titleLabel.text, button.name.text, @"");
+            self.getBrandAndGoodsInfoBlock(self.brandNameBtn.titleLabel.text, _chooseBrandId, button.name.text, @"");
         }];
     }
 }

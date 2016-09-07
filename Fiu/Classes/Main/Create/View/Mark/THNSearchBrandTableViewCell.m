@@ -22,7 +22,9 @@
 
 - (void)setBrandDataWithTitle:(NSString *)title withImage:(NSString *)image {
     self.name.text = title;
-    [self.image downloadImage:image place:[UIImage imageNamed:@""]];
+    if (image.length) {
+        [self.image downloadImage:image place:[UIImage imageNamed:@""]];
+    }
 }
 
 #pragma mark - setCellUI

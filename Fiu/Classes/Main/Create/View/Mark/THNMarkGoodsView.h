@@ -10,7 +10,7 @@
 #import "THNMacro.h"
 #import "FBFootView.h"
 
-typedef void(^AddBrandInfoDoneBlock)(NSString *brand, NSString *goods, NSString *goodsId);
+typedef void(^AddBrandInfoDoneBlock)(NSString *brand, NSString *brandId, NSString *goods, NSString *goodsId);
 typedef void(^AddGoodsInfoDoneBlock)(NSString *goods, NSString *goodsId);
 
 @protocol THNMarkGoodsViewDelegate <NSObject>

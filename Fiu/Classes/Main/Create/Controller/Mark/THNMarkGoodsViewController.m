@@ -91,7 +91,8 @@ static NSString *const goodsCellId = @"GoodsCellId";
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     [self dismissViewControllerAnimated:YES completion:^{
-        self.getUserGoodsInfoBlock(self.goodsMarr[indexPath.row], [NSString stringWithFormat:@"%zi", [self.goodsIdMarr[indexPath.row] integerValue]]);
+        self.getUserGoodsInfoBlock(self.goodsMarr[indexPath.row],
+                                   [NSString stringWithFormat:@"%zi", [self.goodsIdMarr[indexPath.row] integerValue]]);
     }];
 }
 
@@ -129,7 +130,7 @@ static NSString *const goodsCellId = @"GoodsCellId";
 }
 
 - (void)addUserGoodsInfo:(THNAddGoodsBtn *)button {
-    if (self.searchGoods.searchInputBox.text.length > 0) {
+    if (![self.searchGoods.searchInputBox.text isEqualToString:@""]) {
         [self dismissViewControllerAnimated:YES completion:^{
             self.getUserGoodsInfoBlock(self.searchGoods.searchInputBox.text, @"");
         }];

@@ -11,7 +11,7 @@
 #import "THNAddGoodsBtn.h"
 #import <SVProgressHUD/SVProgressHUD.h>
 
-typedef void(^GetBrandAndGoodsInfoBlock)(NSString *brandTitle, NSString *goodsTitle, NSString *goodsId);
+typedef void(^GetBrandAndGoodsInfoBlock)(NSString *brandTitle, NSString *brandId, NSString *goodsTitle, NSString *goodsId);
 @interface MarkBrandsViewController : FBPictureViewController <
     FBSearchDelegate,
     UITableViewDelegate,

@@ -27,6 +27,7 @@
 @pro_strong NSString            *fSceneId;
 @pro_strong NSString            *fSceneTitle;
 @pro_strong FBRequest           *addUserGoods;
+@pro_strong FBRequest           *addUserBrand;
 @pro_strong FBRequest           *deleteUserGoods;
 @pro_strong FBRequest           *userAddRequest;
 @pro_assign NSInteger            seleIndex;

@@ -12,6 +12,7 @@
 
 @interface THNMarkGoodsView () {
     NSString *_goodsId;
+    NSString *_brandId;
 }
 
 @end
@@ -139,10 +140,11 @@
     if (textField == self.brand) {
         MarkBrandsViewController *markBrandVC = [[MarkBrandsViewController alloc] init];
         [self.vc presentViewController:markBrandVC animated:YES completion:^{
-            markBrandVC.getBrandAndGoodsInfoBlock = ^ (NSString *brandTitle, NSString *goodsTitle, NSString *goodsId) {
+            markBrandVC.getBrandAndGoodsInfoBlock = ^ (NSString *brandTitle, NSString *brandId, NSString *goodsTitle, NSString *goodsId) {
                 self.brand.text = brandTitle;
                 self.goods.text = goodsTitle;
                 _goodsId = goodsId;
+                _brandId = brandId;
             };
         }];
         
@@ -211,8 +213,11 @@
         [UIView animateWithDuration:0.3 animations:^{
             self.alpha = 0;
             self.transform = CGAffineTransformMakeScale(0.9, 0.9);
-            if (![self.brand.text isEqualToString:@""] || ![self.goods.text isEqualToString:@""]) {
-                self.addBrandInfoDoneBlock(self.brand.text, self.goods.text, _goodsId);
+            if (![self.brand.text isEqualToString:@""] && ![self.goods.text isEqualToString:@""]) {
+                self.addBrandInfoDoneBlock(self.brand.text, _brandId, self.goods.text, _goodsId);
+                
+            } else if ([self.brand.text isEqualToString:@""] && ![self.goods.text isEqualToString:@""]) {
+                self.addGoodsInfoDoneBlock(self.goods.text, _goodsId);
             }
             
         } completion:^(BOOL finished) {
@@ -227,9 +232,7 @@
         [UIView animateWithDuration:0.3 animations:^{
             self.alpha = 0;
             self.transform = CGAffineTransformMakeScale(0.9, 0.9);
-            if (![self.goods.text isEqualToString:@""]) {
-                self.addGoodsInfoDoneBlock(self.goods.text, _goodsId);
-            }
+            
         } completion:^(BOOL finished) {
             self.brand.text = @"";
             self.goods.text = @"";
