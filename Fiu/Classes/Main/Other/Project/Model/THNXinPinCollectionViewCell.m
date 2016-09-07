@@ -14,6 +14,7 @@
 
 @property (weak, nonatomic) IBOutlet UIImageView *bgImageView;
 @property (weak, nonatomic) IBOutlet UILabel *titleLabel;
+@property (weak, nonatomic) IBOutlet UILabel *countLabel;
 
 
 @end
@@ -29,6 +30,7 @@
     _model = model;
     [self.bgImageView sd_setImageWithURL:[NSURL URLWithString:model.cover_url] placeholderImage:[UIImage imageNamed:@"Defaul_Bg_420"]];
     self.titleLabel.text = model.title;
+    self.countLabel.text = [NSString stringWithFormat:@"%@人浏览",model.view_count];
 }
 
 

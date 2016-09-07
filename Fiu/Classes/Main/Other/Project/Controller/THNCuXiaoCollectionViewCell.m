@@ -26,6 +26,7 @@
 @property (weak, nonatomic) IBOutlet UIView *bottomView;
 /**  */
 @property (nonatomic, strong) UICollectionView *contenView;
+@property (weak, nonatomic) IBOutlet UILabel *countLabel;
 
 @end
 
@@ -51,6 +52,7 @@ NSString *cellId = @"THNProjectGoodsCollectionViewCell";
     self.titileLabel.text = model.title;
     self.subTitleLabel.text = model.short_title;
     self.goodAry = [THNCuXiaoProductModel mj_objectArrayWithKeyValuesArray:model.products];
+    self.countLabel.text = [NSString stringWithFormat:@"%@人浏览",model.view_count];
     [self.contenView reloadData];
 }
 

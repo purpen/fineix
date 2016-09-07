@@ -83,10 +83,10 @@
                         <nil key="highlightedColor"/>
                     </label>
                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="project_people" translatesAutoresizingMaskIntoConstraints="NO" id="LH9-BH-nbB">
-                        <rect key="frame" x="155" y="160" width="6" height="10"/>
+                        <rect key="frame" x="156" y="160" width="6" height="10"/>
                     </imageView>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="已有1000人参与" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="b7F-ng-RIT">
-                        <rect key="frame" x="166" y="158" width="82" height="14"/>
+                        <rect key="frame" x="167" y="158" width="82" height="14"/>
                         <fontDescription key="fontDescription" type="system" pointSize="11"/>
                         <color key="textColor" white="1" alpha="0.80000000000000004" colorSpace="calibratedWhite"/>
                         <nil key="highlightedColor"/>
@@ -111,6 +111,7 @@
                 <constraint firstAttribute="trailing" secondItem="bXo-ii-e6x" secondAttribute="trailing" id="Blx-fL-lc4"/>
                 <constraint firstItem="vk4-yh-XA3" firstAttribute="width" secondItem="j7p-kX-oOP" secondAttribute="width" multiplier="0.5" constant="30" id="EYV-ad-kqN"/>
                 <constraint firstItem="vk4-yh-XA3" firstAttribute="top" secondItem="wkx-2H-Hje" secondAttribute="bottom" constant="5" id="FD6-bc-rWm"/>
+                <constraint firstItem="b7F-ng-RIT" firstAttribute="centerX" secondItem="vk4-yh-XA3" secondAttribute="centerX" constant="10" id="FSf-yG-Csc"/>
                 <constraint firstItem="HRE-W6-csR" firstAttribute="centerY" secondItem="WRV-df-jxU" secondAttribute="centerY" id="JzQ-ai-AQE"/>
                 <constraint firstItem="wkx-2H-Hje" firstAttribute="width" relation="lessThanOrEqual" secondItem="j7p-kX-oOP" secondAttribute="width" multiplier="0.9" id="PI3-Rl-hbt"/>
                 <constraint firstItem="wHT-83-Qit" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="SVO-W9-7hZ"/>
@@ -133,6 +134,7 @@
                 <mask key="constraints">
                     <exclude reference="tCd-sz-X5w"/>
                     <exclude reference="pUu-vx-KNU"/>
+                    <exclude reference="hyb-c5-2r7"/>
                     <exclude reference="e5U-ZA-94G"/>
                 </mask>
             </variation>
