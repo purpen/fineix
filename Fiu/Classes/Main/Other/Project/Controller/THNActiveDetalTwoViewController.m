@@ -438,8 +438,10 @@ static NSString *const URLCancelFollowUser = @"/follow/ajax_cancel_follow";
     if (!_segmentedControl) {
         if (self.model.evt == 2) {
             _segmentedControl = [[HMSegmentedControl alloc] initWithSectionTitles:@[@"活动规则", @"参与的情境", @"活动结果"]];
-        }else{
+        }else if (self.model.evt == 1) {
             _segmentedControl = [[HMSegmentedControl alloc] initWithSectionTitles:@[@"活动规则", @"参与的情境"]];
+        }else if (self.model.evt == 0) {
+            _segmentedControl = [[HMSegmentedControl alloc] initWithSectionTitles:@[@"活动规则"]];
         }
         _segmentedControl.frame = CGRectMake(0, 0, SCREEN_WIDTH, 44);
         _segmentedControl.segmentEdgeInset = UIEdgeInsetsMake(5, 5, 5, 5);
