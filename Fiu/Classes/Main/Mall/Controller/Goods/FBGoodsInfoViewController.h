@@ -12,6 +12,7 @@
 #import "FBSegmentView.h"
 
 @interface FBGoodsInfoViewController : FBViewController <
+    FBRequestDelegate,
     FBNavigationBarItemsDelegate,
     FBSegmentViewDelegate,
     UITableViewDelegate,

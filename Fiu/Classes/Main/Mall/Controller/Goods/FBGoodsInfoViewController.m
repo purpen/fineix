@@ -43,7 +43,6 @@ static NSString *const SceneListCellId = @"SceneListCellId";
 }
 
 @pro_strong FBGoodsInfoModelData        *   goodsInfo;
-@pro_strong NSMutableArray              *   recommendGoods;
 @pro_strong NSMutableArray              *   goodsComment;
 
 @end
@@ -60,10 +59,9 @@ static NSString *const SceneListCellId = @"SceneListCellId";
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
+    [self setThnGoodsInfoVcUI];
     [self thn_networkSceneListData];
     [self networkGoodsInfoData];
-    [self setThnGoodsInfoVcUI];
 }
 
 #pragma mark - 网络请求
@@ -72,7 +70,6 @@ static NSString *const SceneListCellId = @"SceneListCellId";
     [SVProgressHUD show];
     self.goodsInfoRequest = [FBAPI getWithUrlString:URLGoodsInfo requestDictionary:@{@"id":self.goodsID} delegate:self];
     [self.goodsInfoRequest startRequestSuccess:^(FBRequest *request, id result) {
-        
         _goodsDes = [[result valueForKey:@"data"] valueForKey:@"advantage"];
         _goodsInfoUrl = [[result valueForKey:@"data"] valueForKey:@"content_view_url"];
         _collect = [[[result valueForKey:@"data"] valueForKey:@"is_favorite"] integerValue];
@@ -97,11 +94,6 @@ static NSString *const SceneListCellId = @"SceneListCellId";
         }
     
         self.goodsInfo = [[FBGoodsInfoModelData alloc] initWithDictionary:[result valueForKey:@"data"]];
-        NSArray * goodsArr  = [[result valueForKey:@"data"] valueForKey:@"relation_products"];
-        for (NSDictionary * goodsDict in goodsArr) {
-            GoodsRelationProducts * goodsModel = [[GoodsRelationProducts alloc] initWithDictionary:goodsDict];
-            [self.recommendGoods addObject:goodsModel];
-        }
         [self.rollImgView setThnGoodsRollImgData:self.goodsInfo];
         [self.goodsTable reloadData];
         [self networkGoodsCommentData];
@@ -578,13 +570,6 @@ static NSString *const SceneListCellId = @"SceneListCellId";
 }
 
 #pragma mark -
-- (NSMutableArray *)recommendGoods {
-    if (!_recommendGoods) {
-        _recommendGoods = [NSMutableArray array];
-    }
-    return _recommendGoods;
-}
-
 - (NSMutableArray *)goodsComment {
     if (!_goodsComment) {
         _goodsComment = [NSMutableArray array];

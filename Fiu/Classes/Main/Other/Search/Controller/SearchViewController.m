@@ -44,6 +44,8 @@ static NSString *const URLSearchList = @"/search/getlist";
     if (self.keyword.length > 0) {
         [self beginSearch:self.keyword];
         self.searchView.searchInputBox.text = self.keyword;
+    } else {
+        [self.searchView.searchInputBox becomeFirstResponder];
     }
 }
 
@@ -119,11 +121,19 @@ static NSString *const URLSearchList = @"/search/getlist";
     [self.navigationController popViewControllerAnimated:YES];
 }
 
+- (void)clearSearchKeyword {
+    self.evtType = @"";
+}
+
 #pragma mark - 搜索
 - (void)beginSearch:(NSString *)searchKeyword {
     switch (_searchType) {
         case 0:
-            [_sceneVC searchAgain:searchKeyword];
+            if ([self.evtType isEqualToString:@"tag"]) {
+                [_sceneVC searchAgain:searchKeyword withType:self.evtType];
+            } else {
+                [_sceneVC searchAgain:searchKeyword withType:@"content"];
+            }
             break;
             
         case 1:
@@ -165,6 +175,37 @@ static NSString *const URLSearchList = @"/search/getlist";
 //  改变搜索视图位置
 - (void)changeMenuBtnState:(NSInteger)index {
     _searchType = index;
+    NSString *searchKeyword = self.searchView.searchInputBox.text;
+    if (searchKeyword.length) {
+        switch (_searchType) {
+            case 0:
+                if ([self.evtType isEqualToString:@"tag"]) {
+                    [_sceneVC searchAgain:searchKeyword withType:self.evtType];
+                } else {
+                    [_sceneVC searchAgain:searchKeyword withType:@"content"];
+                }
+                break;
+                
+            case 1:
+                [_userVC searchAgain:searchKeyword];
+                break;
+                
+            case 2:
+                [_goodsVC searchAgain:searchKeyword];
+                break;
+                
+            case 3:
+                [_brandVC searchAgain:searchKeyword];
+                break;
+                
+            case 4:
+                [_themeVC searchAgain:searchKeyword];
+                break;
+                
+            default:
+                break;
+        }
+    }
     
     CGPoint rollPoint = self.resultsView.contentOffset;
     rollPoint.x = SCREEN_WIDTH * index;

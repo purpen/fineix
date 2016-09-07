@@ -22,6 +22,8 @@
 @pro_strong FBRequest *brandRequest;
 @pro_strong FBRequest *brandGoodsRequest;
 @pro_strong FBRequest *sceneRequest;
+@pro_strong FBRequest *likeSceneRequest;
+@pro_strong FBRequest *cancelLikeRequest;
 @pro_assign NSInteger currentpageNum;
 @pro_assign NSInteger totalPageNum;
 @pro_strong NSMutableArray *goodsListMarr;

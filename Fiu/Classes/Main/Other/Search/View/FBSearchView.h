@@ -14,6 +14,7 @@
 @optional
 - (void)beginSearch:(NSString *)searchKeyword;
 - (void)cancelSearch;
+- (void)clearSearchKeyword;
 
 @end
 

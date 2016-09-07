@@ -18,6 +18,7 @@ static NSString *const SceneListCellId = @"sceneListCellId";
 
 @interface SearchSceneViewController () {
     NSString *_keyword;
+    NSString *_evtType;
 }
 
 @end
@@ -44,17 +45,18 @@ static NSString *const SceneListCellId = @"sceneListCellId";
 }
 
 #pragma mark - 网络请求
-- (void)searchAgain:(NSString *)keyword {
+- (void)searchAgain:(NSString *)keyword withType:(NSString *)evtType {
     [self.searchSceneListMarr removeAllObjects];
     [self.searchSceneIdMarr removeAllObjects];
     self.currentpageNum = 0;
-    [self networkSearchData:keyword];
+    _evtType = evtType;
+    [self networkSearchData:keyword withType:evtType];
 }
 
-- (void)networkSearchData:(NSString *)keyword {
+- (void)networkSearchData:(NSString *)keyword withType:(NSString *)evtType {
     _keyword = keyword;
     [SVProgressHUD show];
-    self.searchListRequest = [FBAPI getWithUrlString:URLSearchList requestDictionary:@{@"evt":@"content", @"size":@"8", @"page":@(self.currentpageNum + 1), @"t":@"9" , @"q":keyword} delegate:self];
+    self.searchListRequest = [FBAPI getWithUrlString:URLSearchList requestDictionary:@{@"evt":evtType, @"size":@"8", @"page":@(self.currentpageNum + 1), @"t":@"9" , @"q":keyword} delegate:self];
     [self.searchListRequest startRequestSuccess:^(FBRequest *request, id result) {
         NSArray *sceneArr = [[result valueForKey:@"data"] valueForKey:@"rows"];
         for (NSDictionary * sceneDic in sceneArr) {
@@ -123,7 +125,7 @@ static NSString *const SceneListCellId = @"sceneListCellId";
 - (void)addMJRefresh:(UICollectionView *)collectionView {
     collectionView.mj_footer = [MJRefreshAutoNormalFooter footerWithRefreshingBlock:^{
         if (self.currentpageNum < self.totalPageNum) {
-            [self networkSearchData:_keyword];
+            [self networkSearchData:_keyword withType:_evtType];
         } else {
             [collectionView.mj_footer endRefreshing];
         }

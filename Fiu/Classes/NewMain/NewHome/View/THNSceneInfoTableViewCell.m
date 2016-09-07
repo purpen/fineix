@@ -68,6 +68,7 @@ static NSString *const sceneTagsCellId = @"SceneTagsCellId";
     SearchViewController * searchVC = [[SearchViewController alloc] init];
     searchVC.index = 0;
     searchVC.keyword = tag;
+    searchVC.evtType = @"tag";
     [self.nav pushViewController:searchVC animated:YES];
 }
 

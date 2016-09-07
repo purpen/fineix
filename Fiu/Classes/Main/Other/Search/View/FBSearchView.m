@@ -54,8 +54,18 @@
         _searchInputBox.font = [UIFont systemFontOfSize:14];
         _searchInputBox.returnKeyType = UIReturnKeySearch;
         _searchInputBox.delegate = self;
+        
+        [_searchInputBox addTarget:self action:@selector(clearText:) forControlEvents:(UIControlEventEditingChanged)];
     }
     return _searchInputBox;
+}
+
+- (void)clearText:(UITextField *)textFile {
+    if ([textFile.text isEqualToString:@""]) {
+        if ([self.delegate respondsToSelector:@selector(clearSearchKeyword)]) {
+            [self.delegate clearSearchKeyword];
+        }
+    }
 }
 
 #pragma mark - 取消按钮

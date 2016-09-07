@@ -98,7 +98,15 @@
 
 - (void)goChooseText {
     FBEditShareInfoViewController * chooseTextVC = [[FBEditShareInfoViewController alloc] init];
-    chooseTextVC.titleText.text = [self.title.text stringByReplacingOccurrencesOfString:@" " withString:@""];
+    NSString *title = [self.title.text stringByReplacingOccurrencesOfString:@" " withString:@""];
+    NSString *suTitle = [self.suTitle.text stringByReplacingOccurrencesOfString:@" " withString:@""];;
+    if (title.length == 0) {
+        title = @"";
+    }
+    if (suTitle.length == 0) {
+        suTitle = @"";
+    }
+    chooseTextVC.titleText.text = [NSString stringWithFormat:@"%@%@", title, suTitle];
     chooseTextVC.desText.text = self.content.text;
     chooseTextVC.modalPresentationStyle = UIModalPresentationOverCurrentContext;
     [self.vc presentViewController:chooseTextVC animated:YES completion:^{
@@ -112,6 +120,7 @@
 }
 
 - (void)thn_setSceneTitle:(NSString *)title {
+    self.suTitle.text = @"";
     if (title.length == 0) {
         self.title.hidden = YES;
         self.suTitle.hidden = YES;
@@ -148,6 +157,7 @@
         self.title.text = str;
         [self.title mas_updateConstraints:^(MASConstraintMaker *make) {
             make.width.equalTo(@([self getTitleSizeWidth:str].width));
+            make.bottom.equalTo(_sceneImgView.mas_bottom).with.offset(-20);
         }];
         
         [self layoutIfNeeded];
@@ -195,6 +205,8 @@
     if (!_contentRoll) {
         _contentRoll = [[UIScrollView alloc] init];
         _contentRoll.showsVerticalScrollIndicator = NO;
+        UITapGestureRecognizer *openTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(goChooseText)];
+        [_contentRoll addGestureRecognizer:openTap];
     }
     return _contentRoll;
 }

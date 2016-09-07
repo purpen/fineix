@@ -99,6 +99,21 @@
 
 - (void)menuItemSelected:(NSInteger)index {
     _searchType = index;
+    NSString *searchKeyword = self.searchView.searchInputBox.text;
+    if (searchKeyword.length) {
+        switch (_searchType) {
+            case 0:
+                [_goodsVC searchAgain:searchKeyword];
+                break;
+                
+            case 1:
+                [_brandVC searchAgain:searchKeyword];
+                break;
+                
+            default:
+                break;
+        }
+    }
     
     CGPoint rollPoint = self.resultsView.contentOffset;
     rollPoint.x = SCREEN_WIDTH * index;

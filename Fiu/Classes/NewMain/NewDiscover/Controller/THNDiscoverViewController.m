@@ -193,6 +193,7 @@ static NSString *const SceneListFooterCellViewId = @"sceneListFooterViewId";
     self.currentpageNum = 0;
     [self.sceneListMarr removeAllObjects];
     [self.sceneIdMarr removeAllObjects];
+    [self.commentsMarr removeAllObjects];
     [self thn_networkSceneListData];
 }
 

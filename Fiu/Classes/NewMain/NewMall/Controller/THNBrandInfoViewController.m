@@ -13,10 +13,13 @@
 #import "BrandInfoData.h"
 #import "GoodsRow.h"
 #import "FBGoodsInfoViewController.h"
+#import "THNSceneDetalViewController.h"
 
 static NSString *const URLBrandInfo = @"/scene_brands/view";
-static NSString *const URLGoodslist = @"/scene_product/getlist";
+static NSString *const URLGoodslist = @"/product/getlist";
 static NSString *const URLSceneList = @"/sight_and_product/getlist";
+static NSString *const URLLikeScene = @"/favorite/ajax_love";
+static NSString *const URLCancelLike = @"/favorite/ajax_cancel_love";
 
 static NSString *const MallListCellId = @"mallListCellId";
 static NSString *const brandCollectionCellId = @"brandCollectionCellId";
@@ -51,11 +54,44 @@ static NSString *const brandInfoHeader = @"BrandInfoHeader";
     [self.view addSubview:self.brandCollection];
     [self.view sendSubviewToBack:self.brandCollection];
     
+    self.currentpageNum = 0;
     [self networkBrandInfoData];
     [self networkBrandGoodsList];
 }
 
 #pragma mark - 网络请求
+#pragma mark 点赞
+- (void)thn_networkLikeSceneData:(NSString *)idx {
+    self.likeSceneRequest = [FBAPI postWithUrlString:URLLikeScene requestDictionary:@{@"id":idx, @"type":@"12"} delegate:self];
+    [self.likeSceneRequest startRequestSuccess:^(FBRequest *request, id result) {
+        if ([[result valueForKey:@"success"] isEqualToNumber:@1]) {
+            NSInteger index = [self.sceneIdMarr indexOfObject:idx];
+            NSString *loveCount = [NSString stringWithFormat:@"%zi", [[[result valueForKey:@"data"] valueForKey:@"love_count"] integerValue]];
+            [self.sceneListMarr[index] setValue:loveCount forKey:@"loveCount"];
+            [self.sceneListMarr[index] setValue:@"1" forKey:@"isLove"];
+        }
+        
+    } failure:^(FBRequest *request, NSError *error) {
+        [SVProgressHUD showErrorWithStatus:[error localizedDescription]];
+    }];
+}
+
+#pragma mark 取消点赞
+- (void)thn_networkCancelLikeData:(NSString *)idx {
+    self.cancelLikeRequest = [FBAPI postWithUrlString:URLCancelLike requestDictionary:@{@"id":idx, @"type":@"12"} delegate:self];
+    [self.cancelLikeRequest startRequestSuccess:^(FBRequest *request, id result) {
+        if ([[result valueForKey:@"success"] isEqualToNumber:@1]) {
+            NSInteger index = [self.sceneIdMarr indexOfObject:idx];
+            NSString *loveCount = [NSString stringWithFormat:@"%zi", [[[result valueForKey:@"data"] valueForKey:@"love_count"] integerValue]];
+            [self.sceneListMarr[index] setValue:loveCount forKey:@"loveCount"];
+            [self.sceneListMarr[index] setValue:@"0" forKey:@"isLove"];
+        }
+        
+    } failure:^(FBRequest *request, NSError *error) {
+        [SVProgressHUD showErrorWithStatus:[error localizedDescription]];
+    }];
+}
+
 #pragma mark 品牌详情
 - (void)networkBrandInfoData {
     self.brandRequest = [FBAPI getWithUrlString:URLBrandInfo requestDictionary:@{@"id":self.brandId} delegate:self];
@@ -97,13 +133,13 @@ static NSString *const brandInfoHeader = @"BrandInfoHeader";
 #pragma mark 品牌商品
 - (void)networkBrandGoodsList {
     [SVProgressHUD show];
-    self.brandGoodsRequest = [FBAPI getWithUrlString:URLGoodslist requestDictionary:@{@"size":@"8", @"page":@(self.currentpageNum + 1), @"brand_id":self.brandId} delegate:self];
+    self.brandGoodsRequest = [FBAPI getWithUrlString:URLGoodslist requestDictionary:@{@"stage":@"9,16", @"size":@"8", @"page":@(self.currentpageNum + 1), @"brand_id":self.brandId} delegate:self];
     [self.brandGoodsRequest startRequestSuccess:^(FBRequest *request, id result) {
         NSArray * goodsArr = [[result valueForKey:@"data"] valueForKey:@"rows"];
         for (NSDictionary * goodsDic in goodsArr) {
             GoodsRow * goodsModel = [[GoodsRow alloc] initWithDictionary:goodsDic];
             [self.goodsListMarr addObject:goodsModel];
-            [self.goodsIdMarr addObject:goodsModel.oid];
+            [self.goodsIdMarr addObject:[NSString stringWithFormat:@"%zi", goodsModel.idField]];
         }
         
         self.currentpageNum = [[[result valueForKey:@"data"] valueForKey:@"current_page"] integerValue];
@@ -205,20 +241,19 @@ static NSString *const brandInfoHeader = @"BrandInfoHeader";
         return cell;
         
     } else if (_showType == 2) {
-        //    __weak __typeof(self)weakSelf = self;
+        __weak __typeof(self)weakSelf = self;
         
         THNDiscoverSceneCollectionViewCell * cell = [collectionView dequeueReusableCellWithReuseIdentifier:brandCollectionCellId
                                                                                               forIndexPath:indexPath];
         if (self.sceneListMarr.count) {
             [cell thn_setSceneUserInfoData:self.sceneListMarr[indexPath.row] isLogin:[self isUserLogin]];
+            cell.beginLikeTheSceneBlock = ^(NSString *idx) {
+                [weakSelf thn_networkLikeSceneData:idx];
+            };
             
-            //        cell.beginLikeTheSceneBlock = ^(NSString *idx) {
-            //            [weakSelf thn_networkLikeSceneData:idx];
-            //        };
-            //
-            //        cell.cancelLikeTheSceneBlock = ^(NSString *idx) {
-            //            [weakSelf thn_networkCancelLikeData:idx];
-            //        };
+            cell.cancelLikeTheSceneBlock = ^(NSString *idx) {
+                [weakSelf thn_networkCancelLikeData:idx];
+            };
         }
         cell.vc = self;
         return cell;
@@ -248,7 +283,9 @@ static NSString *const brandInfoHeader = @"BrandInfoHeader";
         [self.navigationController pushViewController:goodsVC animated:YES];
     
     } else if (_showType == 2) {
-        NSLog(@"打开情境详情");
+        THNSceneDetalViewController *sceneDataVC = [[THNSceneDetalViewController alloc] init];
+        sceneDataVC.sceneDetalId = self.sceneIdMarr[indexPath.row];
+        [self.navigationController pushViewController:sceneDataVC animated:YES];
     }
 }
 
@@ -271,6 +308,18 @@ static NSString *const brandInfoHeader = @"BrandInfoHeader";
         if (self.sceneListMarr.count == 0) {
             self.currentpageNum = 0;
             [self thn_networkSceneListData];
+            
+        } else {
+            [self.brandCollection reloadData];
+        }
+        
+    } else if (index == 0) {
+        if (self.goodsListMarr.count == 0) {
+            self.currentpageNum = 0;
+            [self networkBrandGoodsList];
+        
+        } else {
+            [self.brandCollection reloadData];
         }
     }
 }

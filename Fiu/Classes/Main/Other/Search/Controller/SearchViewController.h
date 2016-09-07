@@ -25,10 +25,17 @@
  *  0:情境 ／ 1:用户 ／ 2:产品 ／ 3:品牌 ／ 4:专题
  */
 @pro_assign NSInteger index;
+
 /**
  *  keyword
  *  直接搜索传搜索关键字
  */
 @pro_strong NSString *keyword;
+
+/**
+ *  evtType
+ *  直接搜索的类型
+ */
+@pro_strong NSString *evtType;
 
 @end

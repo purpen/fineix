@@ -26,6 +26,6 @@
 @pro_strong NSMutableArray *searchSceneListMarr;
 @pro_strong NSMutableArray *searchSceneIdMarr;
 
-- (void)searchAgain:(NSString *)keyword;
+- (void)searchAgain:(NSString *)keyword withType:(NSString *)evtType;
 
 @end

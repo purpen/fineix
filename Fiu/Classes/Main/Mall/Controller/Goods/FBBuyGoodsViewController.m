@@ -59,7 +59,37 @@
     self.goodsPrice.text = [NSString stringWithFormat:@"￥%zi", model.salePrice];
     self.chooseNum.text = [NSString stringWithFormat:@"%zi", self.num];
     [self.goodsColorView reloadData];
-   
+    
+    
+    /**
+     *  没有颜色分类，默认选中第一个
+     */
+    if (self.goodsSkus.count == 1) {
+        [self chooseDefaultColor];
+    }
+}
+
+- (void)chooseDefaultColor {
+    [self.goodsColorView selectItemAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0]
+                                      animated:YES
+                                scrollPosition:(UICollectionViewScrollPositionNone)];
+    
+    self.goodsChoose.text = [NSString stringWithFormat:@"已选：%@", [self.goodsSkus valueForKey:@"mode"][0]];
+    self.goodsPrice.text = [NSString stringWithFormat:@"￥%@", [self.goodsSkus valueForKey:@"price"][0]];
+    self.quantity = [[self.goodsSkus valueForKey:@"quantity"][0] integerValue];
+    
+    if (self.quantity == 0) {
+        [self NotCanBuy];
+    } else {
+        [self IsCanBuy];
+        self.chooseNum.text = @"1";
+    }
+    self.num = 1;
+    if ([[self.goodsSkus valueForKey:@"mode"][0] isEqualToString:NSLocalizedString(@"Default", nil)]) {
+        self.skuId = [NSString stringWithFormat:@"%zi", [[self.goodsSkus valueForKey:@"targetId"][0] integerValue]];
+    } else {
+        self.skuId = [NSString stringWithFormat:@"%zi", [[self.goodsSkus valueForKey:@"idField"][0] integerValue]];
+    }
 }
 
 #pragma mark - 取消购买

@@ -9,6 +9,7 @@
 #import "SearchBrandViewController.h"
 #import "BrandListModel.h"
 #import "BrandsListTableViewCell.h"
+#import "THNBrandInfoViewController.h"
 
 static NSString *const URLSearchList = @"/search/getlist";
 static NSString *const brandCellId = @"BrandCellId";
@@ -172,7 +173,9 @@ static NSString *const brandCellId = @"BrandCellId";
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    [SVProgressHUD showSuccessWithStatus:[NSString stringWithFormat:@"查看品牌详情%@",self.brandIdMarr[indexPath.row]]];
+    THNBrandInfoViewController * goodsBrandVC = [[THNBrandInfoViewController alloc] init];
+    goodsBrandVC.brandId = self.brandIdMarr[indexPath.row];
+    [self.navigationController pushViewController:goodsBrandVC animated:YES];
 }
 
 #pragma mark -

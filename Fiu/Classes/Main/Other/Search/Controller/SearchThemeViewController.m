@@ -10,11 +10,19 @@
 #import "ThemeModelRow.h"
 #import "ThemeTableViewCell.h"
 
+#import "THNArticleDetalViewController.h"
+#import "THNActiveDetalTwoViewController.h"
+#import "THNXinPinDetalViewController.h"
+#import "THNCuXiaoDetalViewController.h"
+#import "THNProjectViewController.h"
+
+static NSString *const URLSubjectView = @"/scene_subject/view";
 static NSString *const URLSearchList = @"/search/getlist";
 static NSString *const themeCellId = @"ThemeCellId";
 
 @interface SearchThemeViewController () {
     NSString *_keyword;
+    NSInteger _subjectType;
 }
 
 @end
@@ -42,6 +50,48 @@ static NSString *const themeCellId = @"ThemeCellId";
     self.currentpageNum = 0;
     [self networkSearchData:keyword];
 }
+
+//  专题详情
+- (void)thn_networkSubjectInfoData:(NSString *)idx {
+    self.subjectInfoRequest = [FBAPI getWithUrlString:URLSubjectView requestDictionary:@{@"id":idx} delegate:self];
+    [self.subjectInfoRequest startRequestSuccess:^(FBRequest *request, id result) {
+        
+        if (![[[result valueForKey:@"data"] valueForKey:@"type"] isKindOfClass:[NSNull class]]) {
+            _subjectType = [[[result valueForKey:@"data"] valueForKey:@"type"] integerValue];
+            if (_subjectType == 1) {
+                THNArticleDetalViewController *articleVC = [[THNArticleDetalViewController alloc] init];
+                articleVC.articleDetalid = idx;
+                [self.navigationController pushViewController:articleVC animated:YES];
+                
+            } else if (_subjectType == 2) {
+                THNActiveDetalTwoViewController *activity = [[THNActiveDetalTwoViewController alloc] init];
+                activity.activeDetalId = idx;
+                [self.navigationController pushViewController:activity animated:YES];
+                
+            } else if (_subjectType == 3) {
+                THNCuXiaoDetalViewController *cuXiao = [[THNCuXiaoDetalViewController alloc] init];
+                cuXiao.cuXiaoDetalId = idx;
+                cuXiao.vcType = 1;
+                [self.navigationController pushViewController:cuXiao animated:YES];
+                
+            } else if (_subjectType == 4) {
+                THNXinPinDetalViewController *xinPin = [[THNXinPinDetalViewController alloc] init];
+                xinPin.xinPinDetalId = idx;
+                [self.navigationController pushViewController:xinPin animated:YES];
+                
+            } else if (_subjectType == 5) {
+                THNCuXiaoDetalViewController *cuXiao = [[THNCuXiaoDetalViewController alloc] init];
+                cuXiao.cuXiaoDetalId = idx;
+                cuXiao.vcType = 2;
+                [self.navigationController pushViewController:cuXiao animated:YES];
+            }
+        }
+        
+    } failure:^(FBRequest *request, NSError *error) {
+        NSLog(@"%@",error);
+    }];
+}
+
 
 - (void)networkSearchData:(NSString *)keyword {
     _keyword = keyword;
@@ -171,7 +221,7 @@ static NSString *const themeCellId = @"ThemeCellId";
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    [SVProgressHUD showSuccessWithStatus:[NSString stringWithFormat:@"查看专题详情%@",self.themeIdMarr[indexPath.row]]];
+    [self thn_networkSubjectInfoData:self.themeIdMarr[indexPath.row]];
 }
 
 #pragma mark -

@@ -243,7 +243,6 @@ static NSString *const URLActionTags = @"/scene_sight/stick_active_tags";
     if (titleText.text.length >= MAXTitle) {
         [SVProgressHUD showInfoWithStatus:@"标题不能超过20字"];
         titleText.text = [titleText.text substringToIndex:MAXTitle];
-        [titleText resignFirstResponder];
     }
 }
 

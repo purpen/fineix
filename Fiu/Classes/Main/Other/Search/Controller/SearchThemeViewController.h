@@ -16,6 +16,7 @@
 >
 
 @pro_assign NSInteger index;
+@pro_strong FBRequest *subjectInfoRequest;
 @pro_strong FBRequest *searchListRequest;
 @pro_assign NSInteger currentpageNum;
 @pro_assign NSInteger totalPageNum;

@@ -74,7 +74,7 @@
 - (void)beginSearch:(NSString *)searchKeyword {
     switch (_searchType) {
         case 0:
-            [_sceneVC searchAgain:searchKeyword];
+            [_sceneVC searchAgain:searchKeyword withType:@"content"];
             break;
             
         case 1:
@@ -99,6 +99,21 @@
 
 - (void)menuItemSelected:(NSInteger)index {
     _searchType = index;
+    NSString *searchKeyword = self.searchView.searchInputBox.text;
+    if (searchKeyword.length) {
+        switch (_searchType) {
+            case 0:
+                [_sceneVC searchAgain:searchKeyword withType:@"content"];
+                break;
+                
+            case 1:
+                [_userVC searchAgain:searchKeyword];
+                break;
+                
+            default:
+                break;
+        }
+    }
     
     CGPoint rollPoint = self.resultsView.contentOffset;
     rollPoint.x = SCREEN_WIDTH * index;
