@@ -1,4 +1,4 @@
-//
+////
 //  THNActiveDetalTwoViewController.m
 //  Fiu
 //
@@ -379,15 +379,15 @@ static NSString *const URLCancelFollowUser = @"/follow/ajax_cancel_follow";
 
 //  关注用户
 - (void)beginFollowUser:(NSString *)userId {
-    NSInteger index = [self.userIdMarr indexOfObject:userId];
-    [[self.resultsAry valueForKey:@"user"][index] setValue:@"1" forKey:@"isFollow"];
+    NSInteger index = [self.resultUserIdAry indexOfObject:userId];
+    [[self.resultsAry[index] valueForKey:@"user"] setValue:@"1" forKey:@"isFollow"];
     [self thn_networkBeginFollowUserData:userId];
 }
 
 //  取消关注用户
 - (void)cancelFollowUser:(NSString *)userId {
-    NSInteger index = [self.userIdMarr indexOfObject:userId];
-    [[self.resultsAry valueForKey:@"user"][index] setValue:@"0" forKey:@"isFollow"];
+    NSInteger index = [self.resultUserIdAry indexOfObject:userId];
+    [[self.resultsAry[index] valueForKey:@"user"] setValue:@"0" forKey:@"isFollow"];
     [self thn_networkCancelFollowUserData:userId];
 }
 
@@ -438,8 +438,10 @@ static NSString *const URLCancelFollowUser = @"/follow/ajax_cancel_follow";
     if (!_segmentedControl) {
         if (self.model.evt == 2) {
             _segmentedControl = [[HMSegmentedControl alloc] initWithSectionTitles:@[@"活动规则", @"参与的情境", @"活动结果"]];
-        }else{
+        }else if (self.model.evt == 1) {
             _segmentedControl = [[HMSegmentedControl alloc] initWithSectionTitles:@[@"活动规则", @"参与的情境"]];
+        }else if (self.model.evt == 0) {
+            _segmentedControl = [[HMSegmentedControl alloc] initWithSectionTitles:@[@"活动规则"]];
         }
         _segmentedControl.frame = CGRectMake(0, 0, SCREEN_WIDTH, 44);
         _segmentedControl.segmentEdgeInset = UIEdgeInsetsMake(5, 5, 5, 5);

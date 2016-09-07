@@ -161,6 +161,9 @@
         }
         [str appendString:@","];
     }
+    if (str.length == 0) {
+        [self dismissViewControllerAnimated:YES completion:nil];
+    }
     //开始传送数据
     NSDictionary *params = @{
                              @"follow_ids":str

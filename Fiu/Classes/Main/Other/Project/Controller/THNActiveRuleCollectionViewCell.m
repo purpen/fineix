@@ -24,7 +24,15 @@
 
 -(void)setModel:(THNActiveRuleModel *)model{
     _model = model;
-    self.attendBtn.hidden = model.evt == 2;
+    if (model.evt == 2) {
+        self.attendBtn.userInteractionEnabled = NO;
+        self.attendBtn.backgroundColor = [UIColor lightGrayColor];
+    }else if (model.evt == 1) {
+        [self.attendBtn setTitle:@"参与活动" forState:UIControlStateNormal];
+    }else if (model.evt == 0) {
+        [self.attendBtn setTitle:@"即将开始" forState:UIControlStateNormal];
+        self.attendBtn.userInteractionEnabled = NO;
+    }
 }
 
 @end

@@ -66,8 +66,8 @@
                                     </mask>
                                 </variation>
                             </view>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Label" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4id-Sb-fw3">
-                                <rect key="frame" x="86" y="177" width="232" height="18"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4id-Sb-fw3">
+                                <rect key="frame" x="86" y="177" width="232" height="16"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="13"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <nil key="highlightedColor"/>
@@ -99,17 +99,37 @@
                             </mask>
                         </variation>
                     </view>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sg9-Oa-Wzd">
+                        <rect key="frame" x="193" y="200" width="29" height="14"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="11"/>
+                        <color key="textColor" red="0.87843137250000003" green="0.89411764709999997" blue="0.90196078430000004" alpha="1" colorSpace="calibratedRGB"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="project_see" translatesAutoresizingMaskIntoConstraints="NO" id="s3y-Il-yFj">
+                        <rect key="frame" x="175" y="203" width="13" height="9"/>
+                    </imageView>
                 </subviews>
                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
             </view>
             <constraints>
+                <constraint firstItem="sg9-Oa-Wzd" firstAttribute="leading" secondItem="s3y-Il-yFj" secondAttribute="trailing" constant="5" id="4PM-kT-d4e"/>
                 <constraint firstItem="QeP-AU-E7t" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="7EW-aS-cXZ"/>
+                <constraint firstItem="sg9-Oa-Wzd" firstAttribute="centerX" secondItem="4id-Sb-fw3" secondAttribute="centerX" constant="5" id="9cE-8T-Vqv"/>
                 <constraint firstAttribute="trailing" secondItem="QeP-AU-E7t" secondAttribute="trailing" id="OGg-5C-6zp"/>
+                <constraint firstItem="s3y-Il-yFj" firstAttribute="top" secondItem="4id-Sb-fw3" secondAttribute="bottom" constant="10" id="PCs-x0-10N"/>
+                <constraint firstItem="s3y-Il-yFj" firstAttribute="top" secondItem="Gme-mz-V2e" secondAttribute="bottom" constant="10" id="UQY-Cr-erN"/>
                 <constraint firstItem="QeP-AU-E7t" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" id="a0V-TP-MXS"/>
                 <constraint firstAttribute="bottom" secondItem="QeP-AU-E7t" secondAttribute="bottom" id="fwp-m3-z31"/>
+                <constraint firstItem="sg9-Oa-Wzd" firstAttribute="centerY" secondItem="s3y-Il-yFj" secondAttribute="centerY" id="tP2-Z8-tLe"/>
             </constraints>
             <size key="customSize" width="404" height="338"/>
+            <variation key="default">
+                <mask key="constraints">
+                    <exclude reference="UQY-Cr-erN"/>
+                </mask>
+            </variation>
             <connections>
+                <outlet property="countLabel" destination="sg9-Oa-Wzd" id="7Ws-fj-osI"/>
                 <outlet property="coverImageView" destination="kJK-s7-Kc3" id="lIW-S3-FsG"/>
                 <outlet property="subTitleLabel" destination="4id-Sb-fw3" id="Ip7-JR-jKA"/>
                 <outlet property="titileLabel" destination="8Vf-Fq-zzG" id="uEL-RL-Ro9"/>
@@ -117,4 +137,7 @@
             <point key="canvasLocation" x="268" y="528"/>
         </collectionViewCell>
     </objects>
+    <resources>
+        <image name="project_see" width="13" height="9"/>
+    </resources>
 </document>

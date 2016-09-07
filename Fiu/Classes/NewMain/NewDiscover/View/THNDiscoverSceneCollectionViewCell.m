@@ -10,6 +10,7 @@
 #import "THNSenceModel.h"
 #import "UserInfo.h"
 #import "THNLoginRegisterViewController.h"
+#import "UserInfoEntity.h"
 
 @interface THNDiscoverSceneCollectionViewCell () {
     NSString *_sceneId;
@@ -32,6 +33,8 @@
 
 -(void)setModel:(THNSenceModel *)model {
     _model = model;
+    UserInfoEntity *entity = [UserInfoEntity defaultUserInfoEntity];
+    _isLogin = entity.isLogin;
     [self.image downloadImage:model.cover_url place:[UIImage imageNamed:@"Defaul_Bg_420"]];
     [self.userHeader downloadImage:model.user_info.avatar_url place:[UIImage imageNamed:@"default_head"]];
     self.userName.text = model.user_info.nickname;

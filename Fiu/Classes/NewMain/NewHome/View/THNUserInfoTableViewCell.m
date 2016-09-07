@@ -11,6 +11,7 @@
 #import "HotUserListUser.h"
 #import "HomePageViewController.h"
 #import "THNLoginRegisterViewController.h"
+#import "UserInfoEntity.h"
 
 static NSString *const hotUserCellId = @"HotUserCellId";
 
@@ -36,6 +37,8 @@ static NSString *const hotUserCellId = @"HotUserCellId";
 
 -(void)setModel:(HomeSceneListRow *)userModel{
     _userModel = userModel;
+    UserInfoEntity *entity = [UserInfoEntity defaultUserInfoEntity];
+    _isLogin = entity.isLogin;
     [self.head sd_setImageWithURL:[NSURL URLWithString:userModel.user.avatarUrl]
                          forState:(UIControlStateNormal)
                  placeholderImage:[UIImage imageNamed:@""]];

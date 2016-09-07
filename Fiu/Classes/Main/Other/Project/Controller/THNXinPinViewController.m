@@ -75,7 +75,7 @@ static NSString *const cellId = @"THNXinPinCollectionViewCell";
     FBRequest *request = [FBAPI postWithUrlString:@"/scene_subject/getlist" requestDictionary:params delegate:self];
     [request startRequestSuccess:^(FBRequest *request, id result) {
         if (result[@"success"]) {
-            NSLog(@"活动 %@",result);
+            NSLog(@"新品 %@",result);
             self.current_page = [result[@"data"][@"current_page"] integerValue];
             self.total_rows = [result[@"data"][@"total_rows"] integerValue];
             NSArray *rows = result[@"data"][@"rows"];
