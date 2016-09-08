@@ -23,7 +23,6 @@
 #import "InfoBrandTableViewCell.h"
 
 static NSString *const URLGoodsInfo = @"/product/view";
-static NSString *const URLGoodsCommet = @"/comment/getlist";
 static NSString *const URLAddCar = @"/shopping/add_cart";
 static NSString *const URlGoodsCollect = @"/favorite/ajax_favorite";
 static NSString *const URlCancelCollect = @"/favorite/ajax_cancel_favorite";
@@ -96,30 +95,23 @@ static NSString *const SceneListCellId = @"SceneListCellId";
         self.goodsInfo = [[FBGoodsInfoModelData alloc] initWithDictionary:[result valueForKey:@"data"]];
         [self.rollImgView setThnGoodsRollImgData:self.goodsInfo];
         [self.goodsTable reloadData];
-        [self networkGoodsCommentData];
         [SVProgressHUD dismiss];
-        
-    } failure:^(FBRequest *request, NSError *error) {
-        [SVProgressHUD showErrorWithStatus:[error localizedDescription]];
-    }];
-}
-
-#pragma mark 商品的评价
-- (void)networkGoodsCommentData {
-    self.commentRequest = [FBAPI getWithUrlString:URLGoodsCommet requestDictionary:@{@"type":@"4", @"page":@"1", @"size":@"3", @"target_id":self.goodsID} delegate:self];
-    [self.commentRequest startRequestSuccess:^(FBRequest *request, id result) {
-        NSArray * commentArr = [[result valueForKey:@"data"] valueForKey:@"rows"];
-        if (commentArr.count > 0) {
-            for (NSDictionary * commentDict in commentArr) {
-                CommentModelRow * model = [[CommentModelRow alloc] initWithDictionary:commentDict];
-                [self.goodsComment addObject:model];
-            }
+        if (self.goodsInfo.idField != 0) {
+            self.menuView.hidden = NO;
+            self.goodsInfoRoll.hidden = NO;
+            self.buyView.hidden = NO;
         }
-        [self.goodsTable reloadData];
         
     } failure:^(FBRequest *request, NSError *error) {
         [SVProgressHUD showErrorWithStatus:[error localizedDescription]];
     }];
+    
+   
+    if (self.goodsInfo.idField == 0) {
+        self.menuView.hidden = YES;
+        self.goodsInfoRoll.hidden = YES;
+        self.buyView.hidden = YES;
+    }
 }
 
 #pragma mark 加入购物车
@@ -574,13 +566,6 @@ static NSString *const SceneListCellId = @"SceneListCellId";
 }
 
 #pragma mark -
-- (NSMutableArray *)goodsComment {
-    if (!_goodsComment) {
-        _goodsComment = [NSMutableArray array];
-    }
-    return _goodsComment;
-}
-
 - (NSMutableArray *)sceneListMarr {
     if (!_sceneListMarr) {
         _sceneListMarr = [NSMutableArray array];

@@ -14,7 +14,7 @@
 /**
  *  用于测试网络是否可以连接的基准URL地址
  */
-static NSString *reachabeBaseURL               = @"http://baidu.com/";
+static NSString *reachabeBaseURL               = @"https://baidu.com/";
 
 /**
  *  提供给外部监听用,监测网络状态变化

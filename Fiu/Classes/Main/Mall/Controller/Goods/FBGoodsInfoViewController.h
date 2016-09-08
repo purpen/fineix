@@ -34,7 +34,6 @@
 
 @pro_strong NSString        *   goodsID;            //  商品id
 @pro_strong FBRequest       *   goodsInfoRequest;
-@pro_strong FBRequest       *   commentRequest;
 @pro_strong FBRequest       *   addCarRequest;
 @pro_strong FBRequest       *   collectRequest;
 @pro_strong FBRequest       *   cancelCollectRequest;

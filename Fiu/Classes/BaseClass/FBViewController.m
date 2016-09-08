@@ -9,6 +9,7 @@
 #import "FBViewController.h"
 #import "THNLoginRegisterViewController.h"
 #import "QRCodeScanViewController.h"
+#import "FBConfig.h"
 
 static NSString *const URLGoodsCarNum = @"/shopping/fetch_cart_count";
 static NSString *const URLUserIsLogin = @"/user/user_info";
@@ -32,7 +33,6 @@ static NSString *const URLUserIsLogin = @"/user/user_info";
     [self addNavBackBtn];
     
     [self getGoodsCarNumData];
-    self.formalUrl = @"http://m.taihuoniao.com/app/api";
 }
 
 #pragma mark - 获取购物车数量
