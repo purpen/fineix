@@ -63,6 +63,8 @@
 @property (nonatomic, assign) CGFloat webViewHeghit;
 /**  */
 @property (nonatomic, assign) int webViewLoads;
+/**  */
+@property (nonatomic, strong) UIButton *attendBtn;
 
 @end
 
@@ -283,7 +285,7 @@ static NSString *const URLCancelFollowUser = @"/follow/ajax_cancel_follow";
                 NSURL *url = [NSURL URLWithString:self.ruleModel.content_view_url];
                 NSURLRequest *request = [NSURLRequest requestWithURL:url];
                 [cell.contentWebView loadRequest:request];
-                [cell.attendBtn addTarget:self action:@selector(attend) forControlEvents:UIControlEventTouchUpInside];
+                
                 return cell;
                 break;
             }
@@ -553,6 +555,7 @@ static NSString *const URLCancelFollowUser = @"/follow/ajax_cancel_follow";
             if (self.params != params) {
                 return;
             }
+            [self.attendBtn removeFromSuperview];
             [self.contentView reloadData];
             self.contentView.mj_footer.hidden = YES;
         }else{
@@ -630,8 +633,8 @@ static NSString *const URLCancelFollowUser = @"/follow/ajax_cancel_follow";
             if (self.params != params) {
                 return;
             }
+            [self.attendBtn removeFromSuperview];
             [self.contentView reloadData];
-//            [self.myCollectionView.mj_header endRefreshing];
             [self checkFooterState];
         }else{
             if (self.params != params) return;
@@ -654,6 +657,29 @@ static NSString *const URLCancelFollowUser = @"/follow/ajax_cancel_follow";
     }
 }
 
+-(UIButton *)attendBtn{
+    if (!_attendBtn) {
+        _attendBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+        _attendBtn.frame = CGRectMake(0, SCREEN_HEIGHT - 44, SCREEN_WIDTH, 44);
+        _attendBtn.backgroundColor = [UIColor colorWithHexString:@"#be8914"];
+        _attendBtn.titleLabel.font = [UIFont systemFontOfSize:15];
+        [_attendBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+        if (self.model.evt == 2) {
+            _attendBtn.userInteractionEnabled = NO;
+            _attendBtn.backgroundColor = [UIColor lightGrayColor];
+        }else if (self.model.evt == 1) {
+            [_attendBtn setTitle:@"参与活动" forState:UIControlStateNormal];
+        }else if (self.model.evt == 0) {
+            [_attendBtn setTitle:@"即将开始" forState:UIControlStateNormal];
+            _attendBtn.userInteractionEnabled = NO;
+        }
+        
+        [_attendBtn addTarget:self action:@selector(attend) forControlEvents:UIControlEventTouchUpInside];
+
+    }
+    return _attendBtn;
+}
+
 -(void)ruleRequest{
     
     FBRequest *request = [FBAPI postWithUrlString:@"/scene_subject/view" requestDictionary:@{
@@ -666,6 +692,7 @@ static NSString *const URLCancelFollowUser = @"/follow/ajax_cancel_follow";
             self.ruleModel = [THNActiveRuleModel mj_objectWithKeyValues:result[@"data"]];
             self.model = [THNArticleModel mj_objectWithKeyValues:result[@"data"]];
             [self.view addSubview:self.contentView];
+            [self.view addSubview:self.attendBtn];
             if (flag == NO) {
                 self.activeTopView.model = self.model;
                 flag = YES;

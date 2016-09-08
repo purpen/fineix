@@ -13,15 +13,6 @@
             <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
                 <rect key="frame" x="0.0" y="0.0" width="333" height="240"/>
                 <subviews>
-                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="LD1-Mr-t3l">
-                        <rect key="frame" x="0.0" y="196" width="333" height="44"/>
-                        <color key="backgroundColor" red="0.74509803919999995" green="0.53725490200000003" blue="0.078431372550000003" alpha="1" colorSpace="calibratedRGB"/>
-                        <constraints>
-                            <constraint firstAttribute="height" constant="44" id="KTf-eS-yoP"/>
-                        </constraints>
-                        <fontDescription key="fontDescription" type="system" pointSize="15"/>
-                        <state key="normal" title="参加活动"/>
-                    </button>
                     <webView userInteractionEnabled="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="R7b-u3-u65">
                         <rect key="frame" x="0.0" y="0.0" width="333" height="196"/>
                         <color key="backgroundColor" red="0.36078431370000003" green="0.38823529410000002" blue="0.4039215686" alpha="1" colorSpace="deviceRGB"/>
@@ -30,17 +21,13 @@
                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
             </view>
             <constraints>
+                <constraint firstAttribute="bottom" secondItem="R7b-u3-u65" secondAttribute="bottom" constant="44" id="6N9-qB-tNT"/>
                 <constraint firstAttribute="trailing" secondItem="R7b-u3-u65" secondAttribute="trailing" id="CkK-IT-Sw8"/>
                 <constraint firstItem="R7b-u3-u65" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="FQN-Sb-CAM"/>
                 <constraint firstItem="R7b-u3-u65" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" id="HUr-7i-RWc"/>
-                <constraint firstAttribute="bottom" secondItem="LD1-Mr-t3l" secondAttribute="bottom" id="Mg2-7J-4Ct"/>
-                <constraint firstItem="LD1-Mr-t3l" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="Ug4-Rb-Lam"/>
-                <constraint firstAttribute="trailing" secondItem="LD1-Mr-t3l" secondAttribute="trailing" id="atS-bD-5cD"/>
-                <constraint firstItem="LD1-Mr-t3l" firstAttribute="top" secondItem="R7b-u3-u65" secondAttribute="bottom" id="cdt-X1-039"/>
             </constraints>
             <size key="customSize" width="333" height="240"/>
             <connections>
-                <outlet property="attendBtn" destination="LD1-Mr-t3l" id="3gn-dM-ooM"/>
                 <outlet property="contentWebView" destination="R7b-u3-u65" id="IUW-Ys-c7f"/>
             </connections>
             <point key="canvasLocation" x="403.5" y="540"/>

@@ -163,6 +163,7 @@
     }
     if (str.length == 0) {
         [self dismissViewControllerAnimated:YES completion:nil];
+        return;
     }
     //开始传送数据
     NSDictionary *params = @{
