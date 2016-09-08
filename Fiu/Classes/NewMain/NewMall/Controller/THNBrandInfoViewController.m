@@ -120,10 +120,10 @@ static NSString *const brandInfoHeader = @"BrandInfoHeader";
             [self.sceneListMarr addObject:homeSceneModel];
             [self.sceneIdMarr addObject:[NSString stringWithFormat:@"%zi", homeSceneModel.idField]];
         }
+        [self.brandCollection reloadData];
         self.currentpageNum = [[[result valueForKey:@"data"] valueForKey:@"current_page"] integerValue];
         self.totalPageNum = [[[result valueForKey:@"data"] valueForKey:@"total_page"] integerValue];
         [self requestIsLastData:self.brandCollection currentPage:self.currentpageNum withTotalPage:self.totalPageNum];
-        [self.brandCollection reloadData];
         
     } failure:^(FBRequest *request, NSError *error) {
         [SVProgressHUD showErrorWithStatus:[error localizedDescription]];
@@ -141,11 +141,11 @@ static NSString *const brandInfoHeader = @"BrandInfoHeader";
             [self.goodsListMarr addObject:goodsModel];
             [self.goodsIdMarr addObject:[NSString stringWithFormat:@"%zi", goodsModel.idField]];
         }
-        
+    
+        [self.brandCollection reloadData];
         self.currentpageNum = [[[result valueForKey:@"data"] valueForKey:@"current_page"] integerValue];
         self.totalPageNum = [[[result valueForKey:@"data"] valueForKey:@"total_page"] integerValue];
         [self requestIsLastData:self.brandCollection currentPage:self.currentpageNum withTotalPage:self.totalPageNum];
-        [self.brandCollection reloadData];
         [SVProgressHUD dismiss];
         
     } failure:^(FBRequest *request, NSError *error) {

@@ -21,7 +21,9 @@
 }
 
 - (void)setGoodsBrandData:(FBGoodsInfoModelData *)model {
-    [self.brandImg downloadImage:model.brand.coverUrl place:[UIImage imageNamed:@""]];
+    if (model.coverUrl.length) {
+        [self.brandImg downloadImage:model.brand.coverUrl place:[UIImage imageNamed:@""]];
+    }
     self.brandTitle.text = model.brand.title;
 }
 
@@ -67,6 +69,7 @@
         _brandImg.layer.cornerRadius = 25;
         _brandImg.layer.borderWidth = 1.0f;
         _brandImg.layer.borderColor = [UIColor colorWithHexString:@"#F1F1F1" alpha:1].CGColor;
+        _brandImg.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"Defaul_Bg_50"]];
     }
     return _brandImg;
 }

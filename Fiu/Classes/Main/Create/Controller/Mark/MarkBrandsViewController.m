@@ -74,7 +74,7 @@ static NSString *const goodsCellId = @"GoodsCellId";
 
 #pragma mark 产品
 - (void)networkBrandOfGoods:(NSString *)brandId {
-    self.goodsRequest = [FBAPI getWithUrlString:URLGoodsList requestDictionary:@{@"brand_id":brandId, @"size":@"1000"} delegate:self];
+    self.goodsRequest = [FBAPI getWithUrlString:URLGoodsList requestDictionary:@{@"brand_id":brandId, @"size":@"1000", @"stage":@"9,16"} delegate:self];
     [self.goodsRequest startRequestSuccess:^(FBRequest *request, id result) {
         self.goodsMarr = [NSMutableArray arrayWithArray:[[[result valueForKey:@"data"] valueForKey:@"rows"] valueForKey:@"title"]];
         self.goodsIdMarr = [NSMutableArray arrayWithArray:[[[result valueForKey:@"data"] valueForKey:@"rows"] valueForKey:@"_id"]];

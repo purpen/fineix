@@ -23,14 +23,14 @@
 - (void)setBrandDataWithTitle:(NSString *)title withImage:(NSString *)image {
     self.name.text = title;
     if (image.length) {
-        [self.image downloadImage:image place:[UIImage imageNamed:@""]];
+        [self.brandImg downloadImage:image place:[UIImage imageNamed:@""]];
     }
 }
 
 #pragma mark - setCellUI
 - (void)setCellUI {
-    [self addSubview:self.image];
-    [_image mas_makeConstraints:^(MASConstraintMaker *make) {
+    [self addSubview:self.brandImg];
+    [_brandImg mas_makeConstraints:^(MASConstraintMaker *make) {
         make.size.mas_equalTo(CGSizeMake(50, 50));
         make.left.equalTo(self.mas_left).with.offset(15);
         make.centerY.equalTo(self);
@@ -39,8 +39,8 @@
     [self addSubview:self.name];
     [_name mas_makeConstraints:^(MASConstraintMaker *make) {
         make.size.mas_equalTo(CGSizeMake(200, 50));
-        make.left.equalTo(_image.mas_right).with.offset(10);
-        make.centerY.equalTo(_image);
+        make.left.equalTo(_brandImg.mas_right).with.offset(10);
+        make.centerY.equalTo(_brandImg);
     }];
     
     [self addSubview:self.icon];
@@ -52,16 +52,16 @@
 }
 
 #pragma mark - init
-- (UIImageView *)image {
-    if (!_image) {
-        _image = [[UIImageView alloc] init];
-        _image.layer.cornerRadius = 50/2;
-        _image.layer.masksToBounds = YES;
-        _image.layer.borderColor = [UIColor colorWithHexString:@"#D8D8D8" alpha:1].CGColor;
-        _image.layer.borderWidth = 0.5f;
-        _image.backgroundColor = [UIColor whiteColor];
+- (UIImageView *)brandImg {
+    if (!_brandImg) {
+        _brandImg = [[UIImageView alloc] init];
+        _brandImg.layer.cornerRadius = 50/2;
+        _brandImg.layer.masksToBounds = YES;
+        _brandImg.layer.borderColor = [UIColor colorWithHexString:@"#D8D8D8" alpha:1].CGColor;
+        _brandImg.layer.borderWidth = 0.5f;
+        _brandImg.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"Defaul_Bg_50"]];
     }
-    return _image;
+    return _brandImg;
 }
 
 - (UILabel *)name {
