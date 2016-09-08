@@ -21,9 +21,7 @@
 }
 
 - (void)setGoodsBrandData:(FBGoodsInfoModelData *)model {
-    if (model.coverUrl.length) {
-        [self.brandImg downloadImage:model.brand.coverUrl place:[UIImage imageNamed:@""]];
-    }
+    [self.brandImg downloadImage:model.brand.coverUrl place:[UIImage imageNamed:@""]];
     self.brandTitle.text = model.brand.title;
 }
 

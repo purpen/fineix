@@ -241,6 +241,10 @@ static NSString *const SceneListCellId = @"SceneListCellId";
     CGRect rollRect = self.goodsInfoRoll.frame;
     rollRect = CGRectMake(0, 64, SCREEN_WIDTH, SCREEN_HEIGHT - 64);
     self.goodsInfoRoll.frame = rollRect;
+    
+    CGRect goodsTableRect = self.goodsTable.frame;
+    goodsTableRect = CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT - 64);
+    self.goodsTable.frame = goodsTableRect;
 }
 
 - (UIScrollView *)goodsInfoRoll {
@@ -315,7 +319,7 @@ static NSString *const SceneListCellId = @"SceneListCellId";
     [SVProgressHUD dismiss];
 }
 
-#pragma mark - 商品信息列表
+#pragma mark 情景列表
 - (UICollectionView *)sceneList {
     if (!_sceneList) {
         UICollectionViewFlowLayout *flowLayou = [[UICollectionViewFlowLayout alloc] init];
