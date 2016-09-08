@@ -84,6 +84,8 @@
 - (void)titleTextStyle:(NSString *)title {
     
     if (title.length == 0) {
+        self.titleTwoLabel.text = @"";
+        self.tittleLabel.text = @"";
         return;
     }
     
