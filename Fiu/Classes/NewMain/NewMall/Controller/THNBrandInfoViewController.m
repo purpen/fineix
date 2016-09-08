@@ -110,7 +110,6 @@ static NSString *const brandInfoHeader = @"BrandInfoHeader";
 - (void)thn_networkSceneListData {
     NSDictionary *requestDic = @{@"page":@(self.currentpageNum + 1),
                                  @"size":@"30",
-                                 @"sort":@"0",
                                  @"brand_id":self.brandId};
     self.sceneRequest = [FBAPI getWithUrlString:URLSceneList requestDictionary:requestDic delegate:self];
     [self.sceneRequest startRequestSuccess:^(FBRequest *request, id result) {

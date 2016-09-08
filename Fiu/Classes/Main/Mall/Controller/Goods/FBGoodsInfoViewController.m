@@ -99,7 +99,9 @@ static NSString *const SceneListCellId = @"SceneListCellId";
         if (self.goodsInfo.idField != 0) {
             self.menuView.hidden = NO;
             self.goodsInfoRoll.hidden = NO;
-            self.buyView.hidden = NO;
+            if (_canBuy == 9) {
+                self.buyView.hidden = NO;
+            }
         }
         
     } failure:^(FBRequest *request, NSError *error) {

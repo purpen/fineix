@@ -23,15 +23,17 @@
     [self.image downloadImage:model.coverUrl place:[UIImage imageNamed:@""]];
     self.title.text = model.title;
     self.price.text = [NSString stringWithFormat:@"¥%zi", model.salePrice];
-    
-//    NSLog(@"＝＝＝＝＝＝     %@ ----- %@ =====  %zi", model.coverUrl, model.title, model.idField);
-    
 }
 
 - (void)setGoodsListData:(GoodsRow *)model {
     [self.image downloadImage:model.coverUrl place:[UIImage imageNamed:@""]];
     self.title.text = model.title;
     self.price.text = [NSString stringWithFormat:@"¥%.0f", model.salePrice];
+    if (model.state == 9) {
+        self.price.hidden = NO;
+    } else {
+        self.price.hidden = YES;
+    }
 }
 
 #pragma mark - setViewUI

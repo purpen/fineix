@@ -38,6 +38,7 @@
 @property (nonatomic, assign) CGFloat  salePrice;
 @property (nonatomic, strong) NSString * shortTitle;
 @property (nonatomic, assign) NSInteger state;
+@property (nonatomic, assign) NSInteger stage;
 @property (nonatomic, assign) NSInteger stick;
 @property (nonatomic, strong) NSString * summary;
 @property (nonatomic, strong) NSArray * tags;
