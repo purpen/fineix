@@ -12,7 +12,7 @@
 
 @interface THNSearchBrandTableViewCell : UITableViewCell
 
-@pro_strong UIImageView *image;
+@pro_strong UIImageView *brandImg;
 @pro_strong UILabel *name;
 @pro_strong UIButton *icon;
 

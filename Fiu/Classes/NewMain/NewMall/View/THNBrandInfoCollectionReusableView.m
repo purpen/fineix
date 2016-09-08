@@ -24,7 +24,9 @@
     UIView * bgView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 210)];
     bgView.backgroundColor = [UIColor colorWithHexString:@"#555555" alpha:.2];
     [_brandBgImg addSubview:bgView];
-    [self.brandImg downloadImage:model.coverUrl place:[UIImage imageNamed:@""]];
+    if (model.coverUrl.length) {
+        [self.brandImg downloadImage:model.coverUrl place:[UIImage imageNamed:@""]];
+    }
     [self changeContentLabStyle:self.brandIntroduce withText:[NSString stringWithFormat:@"%@", model.des]];
 }
 
@@ -95,6 +97,7 @@
         _brandImg.layer.masksToBounds = YES;
         _brandImg.layer.borderColor = [UIColor colorWithHexString:titleColor alpha:.5].CGColor;
         _brandImg.layer.borderWidth = 1.0f;
+        _brandImg.backgroundColor = [UIColor colorWithHexString:@"#F8F8F8"];
     }
     return _brandImg;
 }

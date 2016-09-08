@@ -416,7 +416,7 @@ static NSString *const SceneListCellId = @"SceneListCellId";
         
     } else if (indexPath.section == 2) {
         static NSString * InfoBrandCellId = @"InfoBrandCellId";
-        if (self.goodsInfo.brand.coverUrl.length) {
+        if (self.goodsInfo.brand.title.length) {
             InfoBrandTableViewCell * cell = [tableView dequeueReusableCellWithIdentifier:InfoBrandCellId];
             cell = [[InfoBrandTableViewCell alloc] initWithStyle:(UITableViewCellStyleDefault) reuseIdentifier:InfoBrandCellId];
             [cell setGoodsBrandData:self.goodsInfo];
@@ -447,7 +447,7 @@ static NSString *const SceneListCellId = @"SceneListCellId";
         }
         
     } else if (indexPath.section == 2) {
-        if (self.goodsInfo.brand.coverUrl.length) {
+        if (self.goodsInfo.brand.title.length) {
             return 70;
         } else {
             return 0.01;
