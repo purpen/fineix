@@ -37,6 +37,8 @@
 - (void)titleTextStyle:(NSString *)title {
     
     if (title.length == 0) {
+        self.titleLabel.text = @"";
+        self.titleTwoLabel.text = @"";
         return;
     }
     
