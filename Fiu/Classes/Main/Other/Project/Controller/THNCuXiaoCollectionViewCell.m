@@ -27,6 +27,8 @@
 /**  */
 @property (nonatomic, strong) UICollectionView *contenView;
 @property (weak, nonatomic) IBOutlet UILabel *countLabel;
+@property (weak, nonatomic) IBOutlet UIImageView *endTipImageView;
+@property (weak, nonatomic) IBOutlet UILabel *timeLabel;
 
 @end
 
@@ -53,6 +55,8 @@ NSString *cellId = @"THNProjectGoodsCollectionViewCell";
     self.subTitleLabel.text = model.short_title;
     self.goodAry = [THNCuXiaoProductModel mj_objectArrayWithKeyValuesArray:model.products];
     self.countLabel.text = [NSString stringWithFormat:@"%@人浏览",model.view_count];
+    self.timeLabel.text = [NSString stringWithFormat:@"%@-%@",model.begin_time_at,model.end_time_at];
+    self.endTipImageView.hidden = model.evt != 2;
     [self.contenView reloadData];
 }
 

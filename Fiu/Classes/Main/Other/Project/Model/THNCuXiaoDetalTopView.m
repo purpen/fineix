@@ -12,7 +12,7 @@
 
 @interface THNCuXiaoDetalTopView ()
 
-@property (weak, nonatomic) IBOutlet UIImageView *bgImageView;
+
 
 @property (weak, nonatomic) IBOutlet UILabel *textLabel;
 @property (weak, nonatomic) IBOutlet UILabel *timeLabel;

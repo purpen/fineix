@@ -53,6 +53,8 @@
         [self requestDataForOderList];
     }];
     
+    [self.mytableView.mj_header beginRefreshing];
+    
     //上拉加载更多
     self.mytableView.mj_footer = [MJRefreshAutoNormalFooter footerWithRefreshingBlock:^{
         if (_currentPageNumber < _totalPageNumber) {
@@ -75,7 +77,6 @@
 {
     _currentPageNumber = 0;
     [_modelAry removeAllObjects];
-    [SVProgressHUD showWithMaskType:SVProgressHUDMaskTypeClear];
     
     [self requestDataForOderListOperation];
 }
@@ -86,8 +87,7 @@
 - (void)requestDataForOderListOperation
 {
     
-    [SVProgressHUD show];
-    FBRequest *request = [FBAPI postWithUrlString:@"/follow" requestDictionary:@{@"page":@(_currentPageNumber+1),@"size":@15,@"user_id":self.userId,@"find_type":@2} delegate:self];
+    FBRequest *request = [FBAPI postWithUrlString:@"/follow" requestDictionary:@{@"page":@(_currentPageNumber+1),@"size":@30,@"user_id":self.userId,@"find_type":@2} delegate:self];
     [request startRequestSuccess:^(FBRequest *request, id result) {
         NSLog(@"粉丝 %@",result);
         NSDictionary *dataDict = [result objectForKey:@"data"];
@@ -150,7 +150,6 @@
                 [self.mytableView.mj_footer endRefreshing];
             }
         }
-        [SVProgressHUD dismiss];
     } failure:^(FBRequest *request, NSError *error) {
         [SVProgressHUD showInfoWithStatus:[error localizedDescription]];
     }];
@@ -208,7 +207,10 @@
         cell = [[FocusOnTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellId];
     }
     
-    UserInfo *model = [_modelAry objectAtIndex:indexPath.row];
+    UserInfo *model;
+    if (_modelAry.count != 0) {
+        model = [_modelAry objectAtIndex:indexPath.row];
+    }
     
     [cell.focusOnBtn addTarget:self action:@selector(clickFocusBtn:) forControlEvents:UIControlEventTouchUpInside];
     cell.focusOnBtn.tag = indexPath.row;

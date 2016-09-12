@@ -52,7 +52,8 @@ static NSString *const cellId = @"THNCuXiaoDetalContentTableViewCell";
         CGSize maxSize = CGSizeMake([UIScreen mainScreen].bounds.size.width - 2 * 10, MAXFLOAT);
         // 计算文字的高度
         CGFloat textH = [self.model.summary boundingRectWithSize:maxSize options:NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName : [UIFont systemFontOfSize:14]} context:nil].size.height;
-        _topView.height = 211 + textH + 10 + 20;
+        _topView.height = 211 + textH + 10 + 10;
+        
     }
     return _topView;
 }

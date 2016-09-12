@@ -171,6 +171,6 @@
         </tableViewCell>
     </objects>
     <resources>
-        <image name="project_goodsCard" width="24" height="19"/>
+        <image name="project_goodsCard" width="16" height="12"/>
     </resources>
 </document>

@@ -116,7 +116,11 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    
+}
+
+-(void)viewDidDisappear:(BOOL)animated{
+    [super viewDidDisappear:animated];
+    [SVProgressHUD dismiss];
 }
 
 -(void)fucos:(UIButton*)sender{
