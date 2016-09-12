@@ -104,13 +104,6 @@ static NSString *const URLCancelFavorite = @"/favorite/ajax_cancel_favorite";
         _sceneTable.showsVerticalScrollIndicator = NO;
         _sceneTable.backgroundColor = [UIColor colorWithHexString:@"#FFFFFF"];
         _sceneTable.separatorStyle = UITableViewCellSeparatorStyleNone;
-        //        [self addMJRefresh:_sceneTable];
-        
-//        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(likeTheScene:) name:@"likeTheScene" object:nil];
-//        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(cancelLikeTheScene:) name:@"cancelLikeTheScene" object:nil];
-//        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(followTheUser:) name:@"followTheUser" object:nil];
-//        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(cancelFollowTheUser:) name:@"cancelFollowTheUser" object:nil];
-//        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(favoriteTheScene:) name:@"favoriteTheScene" object:nil];
     }
     return _sceneTable;
 }
@@ -389,8 +382,8 @@ static NSString *const URLCancelFavorite = @"/favorite/ajax_cancel_favorite";
         
     } else if (indexPath.row == 4 || indexPath.row == 5) {
         CommentNViewController * commentVC = [[CommentNViewController alloc] init];
-        //        commentVC.targetId = self.sceneIdMarr[indexPath.section];
-        //        commentVC.sceneUserId = self.userIdMarr[indexPath.section];
+        commentVC.targetId = self.sceneDetalId;
+        commentVC.sceneUserId = [NSString stringWithFormat:@"%ld",(long)self.model.userId];
         [self.navigationController pushViewController:commentVC animated:YES];
     }
 }

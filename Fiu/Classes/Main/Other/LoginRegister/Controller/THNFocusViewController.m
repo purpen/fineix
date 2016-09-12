@@ -166,7 +166,7 @@
         [str appendString:@","];
     }
     if (str.length == 0) {
-        [self dismissViewControllerAnimated:YES completion:nil];
+        [self updateIdentify];
         return;
     }
     //开始传送数据
