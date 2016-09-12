@@ -523,6 +523,7 @@
 		D87B69E11CC7274900199EFE /* FBMenuView.m in Sources */ = {isa = PBXBuildFile; fileRef = D87B69DF1CC7274900199EFE /* FBMenuView.m */; };
 		D88F47EE1D5C5BD300C83A0C /* FBCategoryView.m in Sources */ = {isa = PBXBuildFile; fileRef = D88F47ED1D5C5BD300C83A0C /* FBCategoryView.m */; };
 		D8932E461D17FE8100428FC7 /* Launch Screen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D8932E451D17FE8100428FC7 /* Launch Screen.storyboard */; };
+		D89478D91D867D9A00200ACD /* THNSceneImageScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = D89478D81D867D9A00200ACD /* THNSceneImageScrollView.m */; };
 		D89CFE031D041819002701B8 /* GoodsDesTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D89CFE021D041819002701B8 /* GoodsDesTableViewCell.m */; };
 		D8A9AD091CD9CCA900A9FCFB /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D8A9AD081CD9CCA900A9FCFB /* Assets.xcassets */; };
 		D8A9ADC91CD9E34600A9FCFB /* FBFootView.m in Sources */ = {isa = PBXBuildFile; fileRef = D8A9ADC81CD9E34600A9FCFB /* FBFootView.m */; };
@@ -1526,6 +1527,8 @@
 		D88F47EC1D5C5BD300C83A0C /* FBCategoryView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FBCategoryView.h; sourceTree = "<group>"; };
 		D88F47ED1D5C5BD300C83A0C /* FBCategoryView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FBCategoryView.m; sourceTree = "<group>"; };
 		D8932E451D17FE8100428FC7 /* Launch Screen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = "Launch Screen.storyboard"; sourceTree = "<group>"; };
+		D89478D71D867D9A00200ACD /* THNSceneImageScrollView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THNSceneImageScrollView.h; sourceTree = "<group>"; };
+		D89478D81D867D9A00200ACD /* THNSceneImageScrollView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THNSceneImageScrollView.m; sourceTree = "<group>"; };
 		D89CFE011D041819002701B8 /* GoodsDesTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GoodsDesTableViewCell.h; sourceTree = "<group>"; };
 		D89CFE021D041819002701B8 /* GoodsDesTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GoodsDesTableViewCell.m; sourceTree = "<group>"; };
 		D8A9AD081CD9CCA900A9FCFB /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -3709,6 +3712,7 @@
 		D851742E1D54AC58005F5722 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				D89478D61D867D7900200ACD /* SceneImage */,
 				D8E800681D794E7A00DDC3E0 /* HotUser */,
 				D8C0950F1D752EC600908491 /* Share */,
 				D85174581D58B250005F5722 /* HomeThemeTableViewCell.h */,
@@ -4084,6 +4088,16 @@
 			);
 			path = DataBase;
 			sourceTree = "<group>";
+		};
+		D89478D61D867D7900200ACD /* SceneImage */ = {
+			isa = PBXGroup;
+			children = (
+				D89478D71D867D9A00200ACD /* THNSceneImageScrollView.h */,
+				D89478D81D867D9A00200ACD /* THNSceneImageScrollView.m */,
+			);
+			name = SceneImage;
+			path = Fiu/Classes/NewMain/NewHome/View/SceneImage;
+			sourceTree = SOURCE_ROOT;
 		};
 		D8AC3E0A1D2DF9D900148522 /* TabBar */ = {
 			isa = PBXGroup;
@@ -4664,6 +4678,7 @@
 				1F2A8FF61CF40277005116C7 /* MyPageFocusOnViewController.m in Sources */,
 				D8C094E11D752D2200908491 /* RollImageRow.m in Sources */,
 				1F2A8FC51CF40277005116C7 /* GoodsData.m in Sources */,
+				D89478D91D867D9A00200ACD /* THNSceneImageScrollView.m in Sources */,
 				D851745D1D58B307005F5722 /* HomeThemeCollectionViewCell.m in Sources */,
 				1F2A90411CF40277005116C7 /* BindIngViewController.m in Sources */,
 				1F2A903C1CF40277005116C7 /* FBMapLocatinViewController.m in Sources */,

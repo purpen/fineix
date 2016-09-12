@@ -69,7 +69,7 @@
     if (self.typeMarr.count > 0) {
         NSInteger type = [self.typeMarr[index] integerValue];
         NSString * ids = self.targetIdMarr[index];
-
+        
         if (type == 8) {
 
         } else if (type == 9) {
@@ -89,6 +89,9 @@
             }
 
         }
+        
+    } else {
+        NSLog(@"商品打开大图");
     }
 }
 

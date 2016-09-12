@@ -23,9 +23,9 @@
         self.botLine.hidden = YES;
         self.menuTitle.font = [UIFont systemFontOfSize:10];
         [self.menuTitle mas_remakeConstraints:^(MASConstraintMaker *make) {
-            make.size.mas_equalTo(CGSizeMake(50, 15));
+            make.size.mas_equalTo(CGSizeMake(SCREEN_WIDTH *0.13, 15));
             make.centerX.equalTo(self);
-            make.bottom.equalTo(self.mas_bottom).with.offset(-9);
+            make.bottom.equalTo(self.mas_bottom).with.offset(-7);
         }];
         [self.menuImg downloadImage:model.backUrl place:[UIImage imageNamed:@""]];
         
@@ -45,14 +45,14 @@
 - (void)setCellViewUI {
     [self addSubview:self.menuImg];
     [_menuImg mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.size.mas_equalTo(CGSizeMake(60, 60));
+        make.size.mas_equalTo(CGSizeMake(SCREEN_WIDTH *0.16, SCREEN_WIDTH *0.16));
         make.centerX.equalTo(self);
         make.centerY.equalTo(self);
     }];
     
     [self addSubview:self.menuTitle];
     [_menuTitle mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.size.mas_equalTo(CGSizeMake(50, 15));
+        make.size.mas_equalTo(CGSizeMake(SCREEN_WIDTH *0.13, 15));
         make.centerX.centerY.equalTo(self);
     }];
     

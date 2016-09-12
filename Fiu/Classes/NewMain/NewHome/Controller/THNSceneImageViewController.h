@@ -7,10 +7,11 @@
 //
 
 #import "THNViewController.h"
+#import "THNSceneImageScrollView.h"
 
 @interface THNSceneImageViewController : THNViewController
 
-@pro_strong NSString *image;
-@pro_strong UIImageView *imageView;
+@pro_strong NSString *imageUrl;
+@pro_strong THNSceneImageScrollView *imageView;
 
 @end

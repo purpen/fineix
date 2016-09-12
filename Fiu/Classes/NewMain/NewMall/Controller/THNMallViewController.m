@@ -144,7 +144,7 @@ static NSString *const MallListHeaderCellViewId = @"mallListHeaderCellViewId";
     if (!_mallList) {
         UICollectionViewFlowLayout *flowLayou = [[UICollectionViewFlowLayout alloc] init];
         flowLayou.itemSize = CGSizeMake(SCREEN_WIDTH, 190);
-        flowLayou.headerReferenceSize = CGSizeMake(SCREEN_WIDTH, 224);
+        flowLayou.headerReferenceSize = CGSizeMake(SCREEN_WIDTH, SCREEN_WIDTH * 0.4 + 64);
         flowLayou.scrollDirection = UICollectionViewScrollDirectionVertical;
         
         _mallList = [[UICollectionView alloc] initWithFrame:CGRectMake(0, 64, SCREEN_WIDTH, SCREEN_HEIGHT - 113)
@@ -189,7 +189,7 @@ static NSString *const MallListHeaderCellViewId = @"mallListHeaderCellViewId";
 
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath {
     if (indexPath.row == 0) {
-        return CGSizeMake(SCREEN_WIDTH, 190);
+        return CGSizeMake(SCREEN_WIDTH, 195);
     } else
         return CGSizeMake(SCREEN_WIDTH, 366);
 }

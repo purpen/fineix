@@ -187,7 +187,7 @@
     THNSceneImageViewController *sceneImageVC = [[THNSceneImageViewController alloc] init];
     sceneImageVC.modalPresentationStyle = UIModalPresentationOverFullScreen;
     sceneImageVC.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;
-    sceneImageVC.image = _image;
+    sceneImageVC.imageUrl = _image;
     [self.vc presentViewController:sceneImageVC animated:YES completion:nil];
 }
 

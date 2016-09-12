@@ -66,6 +66,8 @@ static NSString *const allCommentsCellId = @"AllCommentsCellId";
     NSInteger _hotUserListIndex;
     CGFloat _hotUserCellHeight;
     NSInteger _subjectType;
+    BOOL _rollDown;                  //  是否下拉
+    CGFloat _lastContentOffset;      //  滚动的偏移量
 }
 
 @end
@@ -722,6 +724,54 @@ static NSString *const allCommentsCellId = @"AllCommentsCellId";
         [self.navigationController pushViewController:sceneSubVC animated:YES];
     } else {
         [self openUserLoginVC];
+    }
+}
+
+#pragma mark - 判断上／下滑状态，显示/隐藏Nav/tabBar
+- (void)scrollViewWillBeginDragging:(UIScrollView *)scrollView {
+    if (scrollView == self.homeTable) {
+        _lastContentOffset = scrollView.contentOffset.y;
+    }
+}
+
+- (void)scrollViewWillBeginDecelerating:(UIScrollView *)scrollView {
+    if (scrollView == self.homeTable) {
+        if (_lastContentOffset < scrollView.contentOffset.y) {
+            _rollDown = YES;
+        }else{
+            _rollDown = NO;
+        }
+    }
+}
+
+- (void)scrollViewDidScroll:(UIScrollView *)scrollView {
+    if (scrollView == self.homeTable) {
+        CGRect tabBarRect = self.tabBarController.tabBar.frame;
+        CGRect tableRect = self.homeTable.frame;
+        if (_rollDown == YES) {
+            tabBarRect = CGRectMake(0, SCREEN_HEIGHT + 20, SCREEN_WIDTH, 49);
+            tableRect = CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT);
+            [UIView animateWithDuration:.4 animations:^{
+                self.tabBarController.tabBar.frame = tabBarRect;
+                self.homeTable.frame = tableRect;
+                self.navView.alpha = 0;
+                self.leftBtn.alpha = 0;
+                self.rightBtn.alpha = 0;
+                [[UIApplication sharedApplication] setStatusBarHidden:YES withAnimation:(UIStatusBarAnimationSlide)];
+            }];
+            
+        } else if (_rollDown == NO) {
+            tabBarRect = CGRectMake(0, SCREEN_HEIGHT - 49, SCREEN_WIDTH, 49);
+            tableRect = CGRectMake(0, 64, SCREEN_WIDTH, SCREEN_HEIGHT - 108);
+            [UIView animateWithDuration:.4 animations:^{
+                self.tabBarController.tabBar.frame = tabBarRect;
+                self.homeTable.frame = tableRect;
+                self.navView.alpha = 1;
+                self.leftBtn.alpha = 1;
+                self.rightBtn.alpha = 1;
+                [[UIApplication sharedApplication] setStatusBarHidden:NO withAnimation:(UIStatusBarAnimationSlide)];
+            }];
+        }
     }
 }
 
