@@ -10,11 +10,13 @@
 #import "GoodsBrandTableViewCell.h"
 #import "BrandInfoData.h"
 #import "GoodsRow.h"
-#import "GoodsTableViewCell.h"
 #import "GoodsInfoViewController.h"
+#import "THNDiscoverSceneCollectionViewCell.h"
 
 static NSString *const URLBrandInfo = @"/scene_brands/view";
 static NSString *const URLGoodslist = @"/scene_product/getlist";
+static NSString *const URLSceneList = @"/sight_and_product/getlist";
+static NSString *const SceneListCellId = @"SceneListCellId";
 
 @interface GoodsBrandViewController ()
 
@@ -36,6 +38,7 @@ static NSString *const URLGoodslist = @"/scene_product/getlist";
     [super viewDidLoad];
     [self networkBrandInfoData];
     [self networkBrandGoodsList];
+    [self thn_networkSceneListData];
     [self.view addSubview:self.goodsBrandTable];
 }
 
@@ -49,6 +52,29 @@ static NSString *const URLGoodslist = @"/scene_product/getlist";
         self.titleLab.text = self.title;
         [self.view addSubview:self.titleLab];
         [self.goodsBrandTable reloadData];
+        
+    } failure:^(FBRequest *request, NSError *error) {
+        [SVProgressHUD showErrorWithStatus:[error localizedDescription]];
+    }];
+}
+
+#pragma mark 情景列表
+- (void)thn_networkSceneListData {
+    NSDictionary *requestDic = @{@"page":@(self.currentpageNum + 1),
+                                 @"size":@"30",
+                                 @"sort":@"0",
+                                 @"brand_id":self.brandId};
+    self.sceneRequest = [FBAPI getWithUrlString:URLSceneList requestDictionary:requestDic delegate:self];
+    [self.sceneRequest startRequestSuccess:^(FBRequest *request, id result) {
+        NSArray *sceneArr = [[result valueForKey:@"data"] valueForKey:@"rows"];
+        for (NSDictionary * sceneDic in sceneArr) {
+            HomeSceneListRow *homeSceneModel = [[HomeSceneListRow alloc] initWithDictionary:[sceneDic valueForKey:@"sight"]];
+            [self.sceneListMarr addObject:homeSceneModel];
+            [self.sceneIdMarr addObject:[NSString stringWithFormat:@"%zi", homeSceneModel.idField]];
+        }
+        
+        self.goodsBrandTable.tableFooterView = self.sceneList;
+        [self.sceneList reloadData];
         
     } failure:^(FBRequest *request, NSError *error) {
         [SVProgressHUD showErrorWithStatus:[error localizedDescription]];
@@ -124,6 +150,57 @@ static NSString *const URLGoodslist = @"/scene_product/getlist";
 }
 
 #pragma mark - 品牌视图
+#pragma mark - 商品信息列表
+- (UICollectionView *)sceneList {
+    if (!_sceneList) {
+        UICollectionViewFlowLayout *flowLayou = [[UICollectionViewFlowLayout alloc] init];
+        flowLayou.itemSize = CGSizeMake((SCREEN_WIDTH - 45)/2, ((SCREEN_WIDTH - 45)/2)*1.21);
+        flowLayou.minimumLineSpacing = 15.0f;
+        flowLayou.sectionInset = UIEdgeInsetsMake(15, 15, 15, 15);
+        flowLayou.scrollDirection = UICollectionViewScrollDirectionVertical;
+        
+        _sceneList = [[UICollectionView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT)
+                                        collectionViewLayout:flowLayou];
+        _sceneList.showsVerticalScrollIndicator = NO;
+        _sceneList.delegate = self;
+        _sceneList.dataSource = self;
+        _sceneList.backgroundColor = [UIColor colorWithHexString:@"#F8F8F8"];
+        [_sceneList registerClass:[THNDiscoverSceneCollectionViewCell class] forCellWithReuseIdentifier:SceneListCellId];
+    }
+    return _sceneList;
+}
+
+- (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
+    return self.sceneListMarr.count;
+}
+
+- (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
+    
+//    __weak __typeof(self)weakSelf = self;
+    
+    THNDiscoverSceneCollectionViewCell * cell = [collectionView dequeueReusableCellWithReuseIdentifier:SceneListCellId
+                                                                                          forIndexPath:indexPath];
+    if (self.sceneListMarr.count) {
+        [cell thn_setSceneUserInfoData:self.sceneListMarr[indexPath.row] isLogin:[self isUserLogin]];
+        
+//        cell.beginLikeTheSceneBlock = ^(NSString *idx) {
+//            [weakSelf thn_networkLikeSceneData:idx];
+//        };
+//        
+//        cell.cancelLikeTheSceneBlock = ^(NSString *idx) {
+//            [weakSelf thn_networkCancelLikeData:idx];
+//        };
+    }
+    cell.vc = self;
+    return cell;
+}
+
+- (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
+//    THNSceneDetalViewController *sceneDataVC = [[THNSceneDetalViewController alloc] init];
+//    sceneDataVC.sceneDetalId = self.sceneIdMarr[indexPath.row];
+//    [self.navigationController pushViewController:sceneDataVC animated:YES];
+}
+
 - (UITableView *)goodsBrandTable {
     if (!_goodsBrandTable) {
         _goodsBrandTable = [[UITableView alloc] initWithFrame:CGRectMake(0, -40, SCREEN_WIDTH, SCREEN_HEIGHT + 40) style:(UITableViewStyleGrouped)];
@@ -161,13 +238,7 @@ static NSString *const URLGoodslist = @"/scene_product/getlist";
         return cell;
     
     } else {
-        static NSString * brandGoodsCellId = @"BrandGoodsCellId";
-        GoodsTableViewCell * cell = [tableView dequeueReusableCellWithIdentifier:brandGoodsCellId];
-        cell = [[GoodsTableViewCell alloc] initWithStyle:(UITableViewCellStyleDefault) reuseIdentifier:brandGoodsCellId];
         
-        cell.nav = self.navigationController;
-        [cell setGoodsData:self.goodsList[indexPath.row]];
-        return cell;
     }
     return nil;
 }
@@ -193,10 +264,10 @@ static NSString *const URLGoodslist = @"/scene_product/getlist";
 #pragma mark - 设置Nav
 - (void)setNavigationViewUI {
     [[UIApplication sharedApplication] setStatusBarHidden:NO withAnimation:(UIStatusBarAnimationSlide)];
-    [[UIApplication sharedApplication] setStatusBarStyle:(UIStatusBarStyleDefault)];
+    [[UIApplication sharedApplication] setStatusBarStyle:(UIStatusBarStyleLightContent)];
     self.view.backgroundColor = [UIColor whiteColor];
     self.delegate = self;
-    [self addBarItemLeftBarButton:@"" image:@"icon_back" isTransparent:YES];
+    [self addBarItemLeftBarButton:@"" image:@"icon_back_white" isTransparent:YES];
 }
 
 - (void)leftBarItemSelected {
@@ -216,12 +287,8 @@ static NSString *const URLGoodslist = @"/scene_product/getlist";
 - (UILabel *)titleLab {
     if (!_titleLab) {
         _titleLab = [[UILabel alloc] initWithFrame:CGRectMake(SCREEN_WIDTH/2 - 100, 20, 200, 44)];
-        if (IS_iOS9) {
-            _titleLab.font = [UIFont fontWithName:@"PingFangSC-Light" size:17];
-        } else {
-            _titleLab.font = [UIFont systemFontOfSize:17];
-        }
-        _titleLab.textColor = [UIColor blackColor];
+        _titleLab.font = [UIFont systemFontOfSize:17];
+        _titleLab.textColor = [UIColor whiteColor];
         _titleLab.textAlignment = NSTextAlignmentCenter;
     }
     return _titleLab;
@@ -242,5 +309,18 @@ static NSString *const URLGoodslist = @"/scene_product/getlist";
     return _goodsIdList;
 }
 
+- (NSMutableArray *)sceneListMarr {
+    if (!_sceneListMarr) {
+        _sceneListMarr = [NSMutableArray array];
+    }
+    return _sceneListMarr;
+}
+
+- (NSMutableArray *)sceneIdMarr {
+    if (!_sceneIdMarr) {
+        _sceneIdMarr = [NSMutableArray array];
+    }
+    return _sceneIdMarr;
+}
 
 @end

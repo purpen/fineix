@@ -19,6 +19,8 @@
 #import "WeiboSDK.h"
 #import <TencentOpenAPI/QQApiInterface.h>
 #import "UIView+Size.h"
+#import "UserInfo.h"
+#import <MJExtension.h>
 
 static NSString *const ShareURlText = @"我在Fiu浮游™寻找同路人；希望和你一起用文字来记录内心情绪，用滤镜来表达情感色彩，用分享去变现原创价值；带你发现美学科技的力量和感性生活的温度！来吧，去Fiu一下 >>> http://m.taihuoniao.com/fiu";
 
@@ -210,6 +212,7 @@ static NSString *const ShareURL = @"http://m.taihuoniao.com/guide/app_about";
 
 
 -(void)cancelBtn:(UIButton*)sender{
+    [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent];
     [self dismissViewControllerAnimated:NO completion:nil];
 }
 

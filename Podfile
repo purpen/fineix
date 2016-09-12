@@ -1,4 +1,4 @@
-platform :ios, '7.0'
+platform :ios, '8.0'
 inhibit_all_warnings!
 
 target "Fiu" do
@@ -9,10 +9,12 @@ target "Fiu" do
  pod 'Masonry', '~> 0.6.3'
  pod 'SDCycleScrollView','~> 1.3'
  pod 'SVProgressHUD', '~> 1.1.3'
- pod 'MJExtension', '~> 3.0.7'
+ pod 'MJExtension'
  pod 'TYAlertController', '~> 1.1.3'
  pod 'IQKeyboardManager'
  pod 'HMSegmentedControl'
  pod 'HTHorizontalSelectionList'
  pod 'ZYCornerRadius'
+ pod 'pop', '~> 1.0'
+ pod 'TTTAttributedLabel'
 end

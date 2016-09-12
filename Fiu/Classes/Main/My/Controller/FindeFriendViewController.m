@@ -27,6 +27,7 @@
 #import "SearchTF.h"
 #import "UIView+FSExtension.h"
 #import "SearchPepoleTableViewCell.h"
+#import "THNMacro.h"
 
 static NSString *const ShareURlText = @"我在Fiu浮游™寻找同路人；希望和你一起用文字来记录内心情绪，用滤镜来表达情感色彩，用分享去变现原创价值；带你发现美学科技的力量和感性生活的温度！来吧，去Fiu一下 >>> http://m.taihuoniao.com/fiu";
 
@@ -43,10 +44,15 @@ static NSString *const ShareURlText = @"我在Fiu浮游™寻找同路人；希�
 
 /**  */
 @property (nonatomic, strong) UITableView *searchTableView;
+/**  */
+@property (nonatomic, strong) NSArray *findUserAry;
+/**  */
+@property (nonatomic, strong) UIView *topView;
 
 @end
 
 static NSString *const ShareURL = @"http://m.taihuoniao.com/guide/app_about";
+static NSString *searchCellId = @"search";
 
 @implementation FindeFriendViewController
 
@@ -54,9 +60,6 @@ static NSString *const ShareURL = @"http://m.taihuoniao.com/guide/app_about";
     [super viewDidLoad];
     _userAry = [NSMutableArray array];
     _scenceAry = [NSMutableArray array];
-    //self.navigationController.navigationBarHidden = NO;
-    // Do any additional setup after loading the view.
-
     
     
     //设置导航
@@ -68,14 +71,22 @@ static NSString *const ShareURL = @"http://m.taihuoniao.com/guide/app_about";
     [self.view addSubview:self.myTbaleView];
     //网络请求
     [self netGetData];
+    
+    [self.view addSubview:self.topView];
+}
+
+-(UIView *)topView{
+    if (!_topView) {
+        _topView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 20)];
+        _topView.backgroundColor = [UIColor blackColor];
+    }
+    return _topView;
 }
 
 -(void)netGetData{
     [SVProgressHUD show];
     FBRequest *request = [FBAPI postWithUrlString:@"/user/find_user" requestDictionary:@{@"page":@1,@"size":@15,@"type":@1,@"sight_count":@5,@"sort":@0} delegate:self];
     [request startRequestSuccess:^(FBRequest *request, id result) {
-        
-        
         NSDictionary *dataDict = [result objectForKey:@"data"];
         NSArray *rowsAry = [dataDict objectForKey:@"users"];
         for (NSDictionary *rowsDict in rowsAry) {
@@ -118,7 +129,7 @@ static NSString *const ShareURL = @"http://m.taihuoniao.com/guide/app_about";
     if (!_myTbaleView) {
         _myTbaleView = [[UITableView alloc] initWithFrame:CGRectMake(0, 64, SCREEN_WIDTH, SCREEN_HEIGHT-64) style:UITableViewStyleGrouped];
         
-        SearchView *searchView = [[SearchView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 44)];
+        SearchView *searchView = [[SearchView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 50)];
         searchView.searchTF.delegate = self;
         [searchView.cancelBtn addTarget:self action:@selector(cancelBtn:) forControlEvents:UIControlEventTouchUpInside];
         searchView.cancelBtn.hidden = YES;
@@ -132,11 +143,17 @@ static NSString *const ShareURL = @"http://m.taihuoniao.com/guide/app_about";
         _myTbaleView.dataSource = self;
         _myTbaleView.showsVerticalScrollIndicator = NO;
         _myTbaleView.separatorStyle = UITableViewCellSeparatorStyleNone;
+        _myTbaleView.backgroundColor = [UIColor colorWithHexString:@"#F7F7F7"];
     }
     return _myTbaleView;
 }
 
 -(void)cancelBtn:(UIButton*)sender{
+    self.findUserAry = nil;
+    self.searchView.searchTF.text = nil;
+    [self.searchTableView reloadData];
+//    [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent];
+    self.searchView.backgroundColor = [UIColor whiteColor];
     [UIView animateWithDuration:0.25 animations:^{
         
         [self.view endEditing:YES];
@@ -146,8 +163,10 @@ static NSString *const ShareURL = @"http://m.taihuoniao.com/guide/app_about";
         _myTbaleView.frame = CGRectMake(0, 64, SCREEN_WIDTH, SCREEN_HEIGHT-64);
         CGRect frame = self.searchView.searchTF.frame;
         frame.size.width = SCREEN_WIDTH - 15 * 2;
+        frame.size.height = 35;
         self.searchView.searchTF.frame = frame;
         self.searchView.cancelBtn.hidden = YES;
+        self.searchView.searchTF.backgroundColor = [UIColor whiteColor];
         self.navView.y = 0;
     } completion:^(BOOL finished) {
         
@@ -156,25 +175,43 @@ static NSString *const ShareURL = @"http://m.taihuoniao.com/guide/app_about";
 }
 
 
+-(UITableView *)searchTableView{
+    if (!_searchTableView) {
+        _searchTableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT-64) style:UITableViewStylePlain];
+        _searchTableView.separatorStyle = UITableViewCellSeparatorStyleNone;
+        _searchTableView.delegate = self;
+        _searchTableView.dataSource = self;
+        _searchTableView.tag = 10;
+        [_searchTableView registerNib:[UINib nibWithNibName:@"SearchPepoleTableViewCell" bundle:nil] forCellReuseIdentifier:searchCellId];
+        _searchTableView.backgroundColor = [UIColor colorWithHexString:@"#F7F7F7"];
+//        UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapSearchTableview)];
+//        [_searchTableView addGestureRecognizer:tap];
+    }
+    return _searchTableView;
+}
+
+-(void)tapSearchTableview{
+    [self.view endEditing:YES];
+}
+
 -(BOOL)textFieldShouldBeginEditing:(UITextField *)textField{
+//    [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleDefault];
+    self.searchView.backgroundColor = [UIColor blackColor];
     UIWindow *window = [[UIWindow alloc] initWithFrame:CGRectMake(0, 64, SCREEN_WIDTH, SCREEN_HEIGHT-64)];
-    UITableView *tableView = [[UITableView alloc] init];
-    tableView.frame = window.bounds;
-    tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
-    self.searchTableView = tableView;
-    self.searchTableView.delegate = self;
-    self.searchTableView.tag = 10;
     [UIView animateWithDuration:0.25 animations:^{
+        
         self.navView.y = -64;
         _myTbaleView.frame = CGRectMake(0, 20, SCREEN_WIDTH, SCREEN_HEIGHT);
         
         
         CGRect frame = self.searchView.searchTF.frame;
         frame.size.width = SCREEN_WIDTH - 15 - 15 - 10 - 35;
+        frame.size.height = 30;
         self.searchView.searchTF.frame = frame;
+        self.searchView.searchTF.backgroundColor = [UIColor colorWithHexString:@"#f1f1f1"];
         
         self.searchView.cancelBtn.hidden = NO;
-        
+        self.searchView.cancelBtn.centerY = self.searchView.searchTF.centerY;
         window.hidden = NO;
         self.window = window;
         
@@ -190,6 +227,26 @@ static NSString *const ShareURL = @"http://m.taihuoniao.com/guide/app_about";
     BOOL flag = [textField resignFirstResponder];
     self.searchView.searchTF.view.frame = CGRectMake(0, 0, 15 + 16, 35);
     self.searchView.searchTF.searchIcon.frame = CGRectMake(15, 9.5, 16, 16);
+    
+    
+    if (textField.text.length) {
+        [SVProgressHUD showWithMaskType:SVProgressHUDMaskTypeClear];
+        FBRequest *request = [FBAPI postWithUrlString:@"/search/getlist" requestDictionary:@{
+                                                                                             @"q" : textField.text,
+                                                                                             @"t" : @14
+                                                                                             } delegate:self];
+        [request startRequestSuccess:^(FBRequest *request, id result) {
+            [SVProgressHUD dismiss];
+            NSLog(@"用户  %@",result);
+            NSArray *rows = result[@"data"][@"rows"];
+            self.findUserAry = [UserInfo mj_objectArrayWithKeyValuesArray:rows];
+            [self.searchTableView reloadData];
+        } failure:^(FBRequest *request, NSError *error) {
+            [SVProgressHUD dismiss];
+        }];
+
+    }
+    
     return flag;
 }
 
@@ -197,18 +254,18 @@ static NSString *const ShareURL = @"http://m.taihuoniao.com/guide/app_about";
     if (tableView.tag == 10) {
         return 1;
     }else{
-        return 2;
+        return _userAry.count;
     }
 }
 
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
     if (tableView.tag == 10) {
-        return 10;
+        return self.findUserAry.count;
     }else{
         if (section == 0) {
             return 3;
         }else{
-            return _userAry.count;
+            return 1;
         }
     }
 }
@@ -225,11 +282,9 @@ static NSString *const ShareURL = @"http://m.taihuoniao.com/guide/app_about";
 
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     if (tableView.tag == 10) {
-        static NSString *cellId = @"search";
-        SearchPepoleTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellId];
-        if (cell == nil) {
-            cell = [[SearchPepoleTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellId];
-        }
+        
+        SearchPepoleTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:searchCellId];
+        cell.model = self.findUserAry[indexPath.row];
         return cell;
     }else{
         if (indexPath.section == 0) {
@@ -240,6 +295,9 @@ static NSString *const ShareURL = @"http://m.taihuoniao.com/guide/app_about";
             }
             InvitationModel *model = self.aryOne[indexPath.row];
             [cell setUIWithModel:model];
+            if (indexPath.row == 2) {
+                cell.lineView.hidden = YES;
+            }
             return cell;
         }else{
             static NSString *cellId = @"cellTwo";
@@ -247,12 +305,17 @@ static NSString *const ShareURL = @"http://m.taihuoniao.com/guide/app_about";
             if (cell == nil) {
                 cell = [[FriendTableViewCell alloc] init];
             }
-            FindFriendModel *model = _userAry[indexPath.row];
-            cell.focusBtn.tag = indexPath.row;
+            cell.navi = self.navigationController;
+            FindFriendModel *model = _userAry[indexPath.section];
+            cell.follow.tag = indexPath.section;
             if ([model.isLove isEqualToNumber:@0]) {
-                cell.focusBtn.selected = NO;
+                cell.follow.selected = NO;
+                cell.follow.layer.borderColor = [UIColor whiteColor].CGColor;
+                cell.follow.backgroundColor = [UIColor blackColor];
             }else if ([model.isLove isEqualToNumber:@1]){
-                cell.focusBtn.selected = YES;
+                cell.follow.selected = YES;
+                cell.follow.layer.borderColor = [UIColor clearColor].CGColor;
+                cell.follow.backgroundColor = [UIColor colorWithHexString:@"#BE8914"];
             }
             [cell.headImageView sd_setImageWithURL:[NSURL URLWithString:model.avatarUrl]placeholderImage:[UIImage imageNamed:@"default_head"]];
             cell.nameLbael.text = model.nickName;
@@ -283,7 +346,7 @@ static NSString *const ShareURL = @"http://m.taihuoniao.com/guide/app_about";
             //            cell.deressLabel.text = [NSString stringWithFormat:@"%@ %@",model.address.firstObject,model.address.lastObject];
             //        }
             cell.sceneAry = model.scene;
-            [cell.focusBtn addTarget:self action:@selector(clickFocusBtn:) forControlEvents:UIControlEventTouchUpInside];
+            [cell.follow addTarget:self action:@selector(clickFocusBtn:) forControlEvents:UIControlEventTouchUpInside];
             return cell;
         }
     }
@@ -293,24 +356,25 @@ static NSString *const ShareURL = @"http://m.taihuoniao.com/guide/app_about";
 -(void)clickFocusBtn:(UIButton*)sender{
      FindFriendModel *model = _userAry[sender.tag];
     if (sender.selected) {
-        MyFansActionSheetViewController *sheetVC = [[MyFansActionSheetViewController alloc] init];
         
-        [sheetVC.headImageView sd_setImageWithURL:[NSURL URLWithString:model.avatarUrl]];
-        sheetVC.sheetLabel.text = [NSString stringWithFormat:@"%@ %@",NSLocalizedString(@"Stop caring about", nil),model.nickName];
+        MyFansActionSheetViewController *sheetVC = [[MyFansActionSheetViewController alloc] init];
+        sheetVC.findFriendModel = model;
         sheetVC.modalPresentationStyle = UIModalPresentationOverCurrentContext;
         sheetVC.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;
         [self presentViewController:sheetVC animated:YES completion:nil];
         sheetVC.stopBtn.tag = sender.tag;
         [sheetVC.stopBtn addTarget:self action:@selector(clickStopBtn:) forControlEvents:UIControlEventTouchUpInside];
-        [sheetVC.cancelBtn addTarget:self action:@selector(clickCancelBtn:) forControlEvents:UIControlEventTouchUpInside];
-    }else{
+        [sheetVC.cancelBtn addTarget:self action:@selector(clickCancelBtn) forControlEvents:UIControlEventTouchUpInside];
+        
+        }else{
         
         //请求数据
         FBRequest *request = [FBAPI postWithUrlString:@"/follow/ajax_follow" requestDictionary:@{@"follow_id":model.userid} delegate:self];
         [request startRequestSuccess:^(FBRequest *request, id result) {
             if ([result objectForKey:@"success"]) {
                 model.isLove = @1;
-                [self.myTbaleView reloadRowsAtIndexPaths:[NSArray arrayWithObjects:[NSIndexPath indexPathForRow:sender.tag inSection:1], nil] withRowAnimation:UITableViewRowAnimationNone];
+                
+                [self.myTbaleView reloadRowsAtIndexPaths:[NSArray arrayWithObjects:[NSIndexPath indexPathForRow:0 inSection:sender.tag], nil] withRowAnimation:UITableViewRowAnimationNone];
                 [SVProgressHUD showSuccessWithStatus:NSLocalizedString(@"Focus on success", nil)];
             }else{
                 [SVProgressHUD showErrorWithStatus:NSLocalizedString(@"Pay attention to fail", nil)];
@@ -321,9 +385,8 @@ static NSString *const ShareURL = @"http://m.taihuoniao.com/guide/app_about";
     }
 }
 
--(void)viewDidDisappear:(BOOL)animated{
-    [super viewDidDisappear:animated];
-    [SVProgressHUD dismiss];
+-(void)clickCancelBtn{
+    [self dismissViewControllerAnimated:NO completion:nil];
 }
 
 -(void)clickStopBtn:(UIButton*)sender{
@@ -332,10 +395,9 @@ static NSString *const ShareURL = @"http://m.taihuoniao.com/guide/app_about";
     FBRequest *request = [FBAPI postWithUrlString:@"/follow/ajax_cancel_follow" requestDictionary:@{@"follow_id":model.userid} delegate:self];
     [request startRequestSuccess:^(FBRequest *request, id result) {
         if ([result objectForKey:@"success"]) {
-            [SVProgressHUD showSuccessWithStatus:NSLocalizedString(@"Remove focus on success", nil)];
             model.isLove = @0;
             
-            [self.myTbaleView reloadRowsAtIndexPaths:[NSArray arrayWithObjects:[NSIndexPath indexPathForRow:sender.tag inSection:1], nil] withRowAnimation:UITableViewRowAnimationNone];
+            [self.myTbaleView reloadRowsAtIndexPaths:[NSArray arrayWithObjects:[NSIndexPath indexPathForRow:0 inSection:sender.tag], nil] withRowAnimation:UITableViewRowAnimationNone];
         }else{
             [SVProgressHUD showErrorWithStatus:NSLocalizedString(@"The operation failure", nil)];
         }
@@ -344,24 +406,31 @@ static NSString *const ShareURL = @"http://m.taihuoniao.com/guide/app_about";
     }];
 }
 
--(void)clickCancelBtn:(UIButton*)sender{
-    [self dismissViewControllerAnimated:NO completion:nil];
+-(void)viewDidDisappear:(BOOL)animated{
+    [super viewDidDisappear:animated];
+    [SVProgressHUD dismiss];
 }
 
 
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
     if (tableView.tag == 10) {
-        return 44;
+        return 60;
     }else{
         if (indexPath.section == 0) {
             return 60/667.0*SCREEN_HEIGHT;
         }else{
-            return 542*0.5/667.0*SCREEN_HEIGHT;
+            return SCREEN_WIDTH / 3.0 + 55;
         }
     }
 }
 
+-(void)viewWillAppear:(BOOL)animated{
+    [super viewWillAppear:animated];
+    [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent];
+}
+
 -(CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{
+    
     if (section == 0) {
         return 0.01;
     }
@@ -373,43 +442,72 @@ static NSString *const ShareURL = @"http://m.taihuoniao.com/guide/app_about";
 }
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
-    UMSocialConfig *h = [[UMSocialConfig alloc] init];
-    h.hiddenStatusTip = YES;
-    if (indexPath.section == 0) {
-        if (indexPath.row == 0) {
-            //微信
-            [[UMSocialDataService defaultDataService]  postSNSWithTypes:@[UMShareToWechatSession] content:ShareURlText image:nil location:nil urlResource:nil presentedController:self completion:^(UMSocialResponseEntity *response){
-                if (response.responseCode == UMSResponseCodeSuccess) {
-                    [SVProgressHUD showSuccessWithStatus:@"让分享变成生产力，别让生活偷走远方的精彩"];
-                }
-            }];
+    
+    if (tableView.tag == 10) {
+        UserInfo *model = self.findUserAry[indexPath.row];
+        NSString *id = model._id;
+        self.findUserAry = nil;
+        self.searchView.searchTF.text = nil;
+        [self.searchTableView reloadData];
+        [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent];
+        self.searchView.backgroundColor = [UIColor whiteColor];
+        [UIView animateWithDuration:0.000001 animations:^{
             
-        }else if (indexPath.row == 1){
-            //weibo
-            MyQrCodeViewController *vc = [[MyQrCodeViewController alloc] init];
-            [[UMSocialDataService defaultDataService]  postSNSWithTypes:@[UMShareToSina] content:ShareURlText image:vc.qrCodeView.qrCodeImageView.image location:nil urlResource:nil presentedController:self completion:^(UMSocialResponseEntity *response){
-                if (response.responseCode == UMSResponseCodeSuccess) {
-                    [SVProgressHUD showSuccessWithStatus:@"让分享变成生产力，别让生活偷走远方的精彩"];
-                }
-            }];
-        }else if (indexPath.row == 2){
-            //通讯录
-//            LBAddressBookViewController *vc = [[LBAddressBookViewController alloc] init];
-//            [self.navigationController pushViewController:vc animated:YES];
-            [[UMSocialDataService defaultDataService]  postSNSWithTypes:@[UMShareToSms] content:ShareURlText image:nil location:nil urlResource:nil presentedController:self completion:^(UMSocialResponseEntity *shareResponse){
-                if (shareResponse.responseCode == UMSResponseCodeSuccess) {
-                    [SVProgressHUD showSuccessWithStatus:@"让分享变成生产力，别让生活偷走远方的精彩"];
-                }
-            }];
+            [self.view endEditing:YES];
+            self.searchView.searchTF.view.frame = CGRectMake(0, 0, [UIScreen mainScreen].bounds.size.width * 0.5 - 40, 35);
+            self.searchView.searchTF.searchIcon.frame = CGRectMake([UIScreen mainScreen].bounds.size.width * 0.5 - 40 -16, 9.5, 16, 16);
+            self.window.hidden = YES;
+            _myTbaleView.frame = CGRectMake(0, 64, SCREEN_WIDTH, SCREEN_HEIGHT-64);
+            CGRect frame = self.searchView.searchTF.frame;
+            frame.size.width = SCREEN_WIDTH - 15 * 2;
+            self.searchView.searchTF.frame = frame;
+            self.searchView.cancelBtn.hidden = YES;
+            self.navView.y = 0;
+        } completion:^(BOOL finished) {
+            HomePageViewController *vc = [[HomePageViewController alloc] init];
+            vc.type = @2;
+            vc.isMySelf = NO;
+            vc.userId = id;
+            [self.navigationController pushViewController:vc animated:YES];
+        }];
+    }else{
+        UMSocialConfig *h = [[UMSocialConfig alloc] init];
+        h.hiddenStatusTip = YES;
+        if (indexPath.section == 0) {
+            if (indexPath.row == 0) {
+                //微信
+                [[UMSocialDataService defaultDataService]  postSNSWithTypes:@[UMShareToWechatSession] content:ShareURlText image:nil location:nil urlResource:nil presentedController:self completion:^(UMSocialResponseEntity *response){
+                    if (response.responseCode == UMSResponseCodeSuccess) {
+                        [SVProgressHUD showSuccessWithStatus:@"让分享变成生产力，别让生活偷走远方的精彩"];
+                    }
+                }];
+                
+            }else if (indexPath.row == 1){
+                //weibo
+                MyQrCodeViewController *vc = [[MyQrCodeViewController alloc] init];
+                [[UMSocialDataService defaultDataService]  postSNSWithTypes:@[UMShareToSina] content:ShareURlText image:vc.qrCodeView.qrCodeImageView.image location:nil urlResource:nil presentedController:self completion:^(UMSocialResponseEntity *response){
+                    if (response.responseCode == UMSResponseCodeSuccess) {
+                        [SVProgressHUD showSuccessWithStatus:@"让分享变成生产力，别让生活偷走远方的精彩"];
+                    }
+                }];
+            }else if (indexPath.row == 2){
+                //通讯录
+                //            LBAddressBookViewController *vc = [[LBAddressBookViewController alloc] init];
+                //            [self.navigationController pushViewController:vc animated:YES];
+                [[UMSocialDataService defaultDataService]  postSNSWithTypes:@[UMShareToSms] content:ShareURlText image:nil location:nil urlResource:nil presentedController:self completion:^(UMSocialResponseEntity *shareResponse){
+                    if (shareResponse.responseCode == UMSResponseCodeSuccess) {
+                        [SVProgressHUD showSuccessWithStatus:@"让分享变成生产力，别让生活偷走远方的精彩"];
+                    }
+                }];
+            }
+        }else{
+            FindFriendModel *model = _userAry[indexPath.section];
+            HomePageViewController *vc = [[HomePageViewController alloc] init];
+            vc.type = @2;
+            vc.isMySelf = NO;
+            vc.userId = [NSString stringWithFormat:@"%@",model.userid];
+            [self.navigationController pushViewController:vc animated:YES];
         }
-    }
-    if (indexPath.section == 1) {
-        FindFriendModel *model = _userAry[indexPath.row];
-        HomePageViewController *vc = [[HomePageViewController alloc] init];
-        vc.type = @2;
-        vc.isMySelf = NO;
-        vc.userId = [NSString stringWithFormat:@"%@",model.userid];
-        [self.navigationController pushViewController:vc animated:YES];
     }
 }
 

@@ -7,24 +7,27 @@
 //
 
 #import "PraisedViewController.h"
-#import "SceneListTableViewCell.h"
 #import "SVProgressHUD.h"
 #import "MJRefresh.h"
-#import "SceneInfoViewController.h"
+#import "HomeSceneListRow.h"
 #import "UserInfoEntity.h"
-#import "SceneCollectionViewCell.h"
+#import "THNHomeSenceCollectionViewCell.h"
+#import "THNSenecCollectionViewCell.h"
+#import "THNSceneDetalViewController.h"
+#import "THNSenceModel.h"
 
 @interface PraisedViewController ()<FBNavigationBarItemsDelegate,UICollectionViewDelegate,UICollectionViewDataSource>
 @pro_strong NSMutableArray      *   sceneListMarr;
 @pro_strong NSMutableArray      *   sceneIdMarr;
 @property (nonatomic, assign) NSInteger currentPageNumber;
 @property (nonatomic, assign) NSInteger totalPageNumber;
+
 /** 主体部分 */
 @property (nonatomic, strong) UICollectionView *myCollectionView;
 @end
 
 static NSString *const URLSceneList = @"/scene_sight/";
-static NSString *sceneCollectionCellId = @"SceneCollectionViewCell";
+static NSString *sceneCollectionCellId = @"THNHomeSenceCollectionViewCell";
 
 @implementation PraisedViewController
 
@@ -66,21 +69,22 @@ static NSString *sceneCollectionCellId = @"SceneCollectionViewCell";
 }
 
 
-//上拉下拉分页请求订单列表
 - (void)requestDataForOderListOperation
 {
     [SVProgressHUD show];
     UserInfoEntity *entity = [UserInfoEntity defaultUserInfoEntity];
-    NSDictionary *  requestParams = @{@"size":@"10", @"page":@(_currentPageNumber + 1),@"user_id":entity.userId,@"type":@"sight",@"event":@"love"};
-    self.sceneListRequest = [FBAPI getWithUrlString:@"/favorite" requestDictionary:requestParams delegate:self];
+    NSDictionary *  requestParams = @{@"size":@"10", @"page":@(_currentPageNumber + 1),@"user_id":entity.userId,@"type":@"12",@"event":@"2"};
+    self.sceneListRequest = [FBAPI getWithUrlString:@"/favorite/get_new_list" requestDictionary:requestParams delegate:self];
     [self.sceneListRequest startRequestSuccess:^(FBRequest *request, id result) {
-        
+        NSLog(@"赞过的情境  %@",result);
         NSArray * sceneArr = [[result valueForKey:@"data"] valueForKey:@"rows"];
-    
+        
         for (NSDictionary * sceneDic in sceneArr) {
-            HomeSceneListRow * homeSceneModel = [[HomeSceneListRow alloc] initWithDictionary:sceneDic];
+            NSDictionary * sightDict = sceneDic[@"sight"];
+            THNSenceModel * homeSceneModel = [THNSenceModel mj_objectWithKeyValues:sightDict];
             [self.sceneListMarr addObject:homeSceneModel];
-            [self.sceneIdMarr addObject:[NSString stringWithFormat:@"%zi", homeSceneModel.idField]];
+            [self.sceneIdMarr addObject:[NSString stringWithFormat:@"%@", homeSceneModel._id]];
+            NSLog(@"啊啦拉  %@",homeSceneModel.title);
         }
         [self.myCollectionView reloadData];
         _currentPageNumber = [[[result valueForKey:@"data"] valueForKey:@"current_page"] integerValue];
@@ -131,7 +135,7 @@ static NSString *sceneCollectionCellId = @"SceneCollectionViewCell";
         _myCollectionView.backgroundColor = [UIColor whiteColor];
         _myCollectionView.delegate = self;
         _myCollectionView.dataSource = self;
-        [_myCollectionView registerClass:[SceneCollectionViewCell class] forCellWithReuseIdentifier:sceneCollectionCellId];
+        [_myCollectionView registerNib:[UINib nibWithNibName:@"THNSenecCollectionViewCell" bundle:nil] forCellWithReuseIdentifier:@"allSceneCollectionViewCellID"];
     }
     return _myCollectionView;
 }
@@ -140,37 +144,37 @@ static NSString *sceneCollectionCellId = @"SceneCollectionViewCell";
     return self.sceneListMarr.count;
 }
 
+-(UIEdgeInsets)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout insetForSectionAtIndex:(NSInteger)section{
+    return UIEdgeInsetsMake(15, 15, 1, 15);
+}
+
 -(UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath{
-    SceneCollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:sceneCollectionCellId forIndexPath:indexPath];
-    if (self.sceneListMarr.count) {
-        [cell setAllFiuSceneListData:self.sceneListMarr[indexPath.row]];
-    }
+    static NSString * collectionViewCellId = @"allSceneCollectionViewCellID";
+    THNSenecCollectionViewCell * cell = [collectionView dequeueReusableCellWithReuseIdentifier:collectionViewCellId forIndexPath:indexPath];
+    cell.model = self.sceneListMarr[indexPath.row];
     return cell;
 }
 
 -(CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath{
-    return CGSizeMake((SCREEN_WIDTH-15)/2, 320/667.0*SCREEN_HEIGHT);
+    return CGSizeMake((SCREEN_WIDTH - 15 * 3) * 0.5, 0.25 * SCREEN_HEIGHT + 35);
 }
 
 -(void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath{
-    SceneInfoViewController * sceneInfoVC = [[SceneInfoViewController alloc] init];
-    sceneInfoVC.sceneId = self.sceneIdMarr[indexPath.row];
-    [self.navigationController pushViewController:sceneInfoVC animated:YES];
+    THNSceneDetalViewController *vc = [[THNSceneDetalViewController alloc] init];
+    vc.sceneDetalId = self.sceneIdMarr[indexPath.row];
+    [self.navigationController pushViewController:vc animated:YES];
 }
 
--(UIEdgeInsets)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout insetForSectionAtIndex:(NSInteger)section{
-    return UIEdgeInsetsMake(0, 5, 0, 5);
-}
 
 -(CGFloat)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout minimumLineSpacingForSectionAtIndex:(NSInteger)section{
-    return 2.5;
+    return 15;
 }
 
 #pragma mark - 设置Nav
 - (void)setNavigationViewUI {
     self.view.backgroundColor = [UIColor whiteColor];
     self.delegate = self;
-    self.navViewTitle.text = @"赞过的情景";
+    self.navViewTitle.text = @"赞过的情境";
 }
 
 

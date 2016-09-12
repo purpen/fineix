@@ -177,14 +177,10 @@
 - (UIButton *)okPayBtn {
     if (!_okPayBtn) {
         _okPayBtn = [[UIButton alloc] init];
-        _okPayBtn.backgroundColor = [UIColor colorWithHexString:fineixColor alpha:1];
+        _okPayBtn.backgroundColor = [UIColor colorWithHexString:@"#000000" alpha:1];
         [_okPayBtn setTitle:@"立即支付" forState:(UIControlStateNormal)];
         [_okPayBtn setTitleColor:[UIColor whiteColor] forState:(UIControlStateNormal)];
-        if (IS_iOS9) {
-            _okPayBtn.titleLabel.font = [UIFont fontWithName:@"PingFangSC-Light" size:14];
-        } else {
-            _okPayBtn.titleLabel.font = [UIFont systemFontOfSize:14];
-        }
+        _okPayBtn.titleLabel.font = [UIFont systemFontOfSize:14];
         [_okPayBtn addTarget:self action:@selector(okPayClick) forControlEvents:(UIControlEventTouchUpInside)];
     }
     return _okPayBtn;
@@ -340,7 +336,7 @@
 
 
 -(void)leftBarItemSelected{
-    TYAlertView * alertView = [TYAlertView alertViewWithTitle:@"放弃当前付款?" message:nil];
+    TYAlertView * alertView = [TYAlertView alertViewWithTitle:@"确认离开支付?" message:@"订单提交成功，如未支付，该订单会在72小时内自动关闭，请尽快付款。"];
     TYAlertAction * cancel = [TYAlertAction actionWithTitle:@"取消" style:TYAlertActionStyleCancle handler:nil];
     TYAlertAction * ok = [TYAlertAction actionWithTitle:@"确定" style:TYAlertActionStyleDefault handler:^(TYAlertAction *action) {
         

@@ -11,6 +11,14 @@
 #import <SDWebImage/UIImageView+WebCache.h>
 #import "UserInfo.h"
 #import "TipNumberView.h"
+#import "THNSceneDetalViewController.h"
+
+@interface CommentsTableViewCell ()
+
+/**  */
+@property (nonatomic, strong) UITapGestureRecognizer *iconTap;
+
+@end
 
 @implementation CommentsTableViewCell
 
@@ -46,6 +54,13 @@
         
         [self.contentView addSubview:self.iconImageView];
         [_iconImageView mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.size.mas_equalTo(CGSizeMake(45, 45));
+            make.right.mas_equalTo(self.mas_right).with.offset(-15/667.0*SCREEN_HEIGHT);
+            make.centerY.mas_equalTo(self.mas_centerY);
+        }];
+        
+        [self.contentView addSubview:self.iconBtn];
+        [_iconBtn mas_makeConstraints:^(MASConstraintMaker *make) {
             make.size.mas_equalTo(CGSizeMake(45, 45));
             make.right.mas_equalTo(self.mas_right).with.offset(-15/667.0*SCREEN_HEIGHT);
             make.centerY.mas_equalTo(self.mas_centerY);
@@ -113,6 +128,13 @@
         _headBtn = [[UIButton alloc] init];
     }
     return _headBtn;
+}
+
+-(UIButton *)iconBtn{
+    if (!_iconBtn) {
+        _iconBtn = [[UIButton alloc] init];
+    }
+    return _iconBtn;
 }
 
 -(UIButton *)focusBtn{
@@ -188,8 +210,22 @@
 -(UIImageView *)iconImageView{
     if (!_iconImageView) {
         _iconImageView = [[UIImageView alloc] init];
+        [_iconImageView addGestureRecognizer:self.iconTap];
     }
     return _iconImageView;
+}
+
+-(UITapGestureRecognizer *)iconTap{
+    if (!_iconTap) {
+        _iconTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(iconTapClick)];
+    }
+    return _iconTap;
+}
+
+-(void)iconTapClick{
+    THNSceneDetalViewController *vc = [[THNSceneDetalViewController alloc] init];
+    vc.sceneDetalId = self.scenceId;
+    [self.navi pushViewController:vc animated:YES];
 }
 
 -(UILabel *)titleLbael{

@@ -22,6 +22,12 @@
 @property(nonatomic,strong) UIButton *focusBtn;
 @property(nonatomic,strong) UIButton *headBtn;
 @property (nonatomic,strong) TipNumberView *alertTipviewNum;
+/**  */
+@property (nonatomic, strong) UINavigationController *navi;
+/**  */
+@property(nonatomic,copy) NSString *scenceId;
+/**  */
+@property (nonatomic, strong) UIButton *iconBtn;
 
 -(void)setUIWithModel:(UserInfo*)model;
 

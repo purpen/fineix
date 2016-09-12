@@ -7,9 +7,9 @@
 //
 
 #import "FBViewController.h"
-#import "FBLoginRegisterViewController.h"
+#import "THNLoginRegisterViewController.h"
 #import "QRCodeScanViewController.h"
-#import "HomeViewController.h"
+#import "FBConfig.h"
 
 static NSString *const URLGoodsCarNum = @"/shopping/fetch_cart_count";
 static NSString *const URLUserIsLogin = @"/user/user_info";
@@ -25,7 +25,7 @@ static NSString *const URLUserIsLogin = @"/user/user_info";
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-
+    [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent];
     [self setSlideBackVC];
     
     [self.view addSubview:self.navView];
@@ -33,7 +33,6 @@ static NSString *const URLUserIsLogin = @"/user/user_info";
     [self addNavBackBtn];
     
     [self getGoodsCarNumData];
-    self.formalUrl = @"http://m.taihuoniao.com/app/api";
 }
 
 #pragma mark - 获取购物车数量
@@ -61,11 +60,7 @@ static NSString *const URLUserIsLogin = @"/user/user_info";
         _countLab.backgroundColor = [UIColor colorWithHexString:fineixColor];
         _countLab.textColor = [UIColor whiteColor];
         _countLab.textAlignment = NSTextAlignmentCenter;
-        if (IS_iOS9) {
-            _countLab.font = [UIFont fontWithName:@"PingFangSC-Light" size:9];
-        } else {
-            _countLab.font = [UIFont systemFontOfSize:9];
-        }
+        _countLab.font = [UIFont systemFontOfSize:9];
     }
     return _countLab;
 }
@@ -90,8 +85,7 @@ static NSString *const URLUserIsLogin = @"/user/user_info";
 
 #pragma mark - 弹出登录
 - (void)openUserLoginVC {
-    UIStoryboard *loginStory = [UIStoryboard storyboardWithName:@"LoginRegisterController" bundle:[NSBundle mainBundle]];
-    FBLoginRegisterViewController * loginSignupVC = [loginStory instantiateViewControllerWithIdentifier:@"FBLoginRegisterViewController"];
+    THNLoginRegisterViewController * loginSignupVC = [[THNLoginRegisterViewController alloc] init];
     UINavigationController * navi = [[UINavigationController alloc] initWithRootViewController:loginSignupVC];
     [self presentViewController:navi animated:YES completion:nil];
 }
@@ -131,7 +125,7 @@ static NSString *const URLUserIsLogin = @"/user/user_info";
 - (UIView *)navView {
     if (!_navView) {
         _navView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 64)];
-        _navView.backgroundColor = [UIColor whiteColor];
+        _navView.backgroundColor = [UIColor blackColor];
         
         [_navView addSubview:self.navViewTitle];
 
@@ -145,12 +139,8 @@ static NSString *const URLUserIsLogin = @"/user/user_info";
 - (UILabel *)navViewTitle {
     if (!_navViewTitle) {
         _navViewTitle = [[UILabel alloc] initWithFrame:CGRectMake(44, 20, SCREEN_WIDTH - 88, 44)];
-        _navViewTitle.textColor = [UIColor blackColor];
-        if (IS_iOS9) {
-            _navViewTitle.font = [UIFont fontWithName:@"PingFangSC-Light" size:17];
-        } else {
-            _navViewTitle.font = [UIFont systemFontOfSize:17];
-        }
+        _navViewTitle.textColor = [UIColor whiteColor];
+        _navViewTitle.font = [UIFont systemFontOfSize:17];
         _navViewTitle.textAlignment = NSTextAlignmentCenter;
     }
     return _navViewTitle;
@@ -160,7 +150,7 @@ static NSString *const URLUserIsLogin = @"/user/user_info";
 - (UIButton *)navBackBtn {
     if (!_navBackBtn) {
         _navBackBtn = [[UIButton alloc] initWithFrame:CGRectMake(0, 20, 44, 44)];
-        [_navBackBtn setImage:[UIImage imageNamed:@"icon_back"] forState:(UIControlStateNormal)];
+        [_navBackBtn setImage:[UIImage imageNamed:@"icon_back_white"] forState:(UIControlStateNormal)];
         [_navBackBtn addTarget:self action:@selector(popViewController) forControlEvents:(UIControlEventTouchUpInside)];
     }
     return _navBackBtn;
@@ -180,12 +170,9 @@ static NSString *const URLUserIsLogin = @"/user/user_info";
     if (!_rightBtn) {
         _rightBtn = [[UIButton alloc] initWithFrame:CGRectMake(SCREEN_WIDTH - 44, 20, 44, 44)];
         [_rightBtn addTarget:self action:@selector(rightAction) forControlEvents:(UIControlEventTouchUpInside)];
-        [_rightBtn setTitleColor:[UIColor blackColor] forState:(UIControlStateNormal)];
-        if (IS_iOS9) {
-            _rightBtn.titleLabel.font = [UIFont fontWithName:@"PingFangSC-Light" size:16];
-        } else {
-            _rightBtn.titleLabel.font = [UIFont systemFontOfSize:16];
-        }
+        [_rightBtn setTitleColor:[UIColor whiteColor] forState:(UIControlStateNormal)];
+        _rightBtn.titleLabel.font = [UIFont systemFontOfSize:16];
+
     }
     return _rightBtn;
 }
@@ -229,7 +216,7 @@ static NSString *const URLUserIsLogin = @"/user/user_info";
 - (UILabel *)navLine {
     if (!_navLine) {
         _navLine = [[UILabel alloc] initWithFrame:CGRectMake(0, 63, SCREEN_WIDTH, 1)];
-        _navLine.backgroundColor = [UIColor colorWithHexString:@"#F0F0F1"];
+        _navLine.backgroundColor = [UIColor blackColor];
     }
     return _navLine;
 }
@@ -289,17 +276,17 @@ static NSString *const URLUserIsLogin = @"/user/user_info";
 - (void)addBarItemRightBarButton:(NSString *)title image:(NSString *)image isTransparent:(BOOL)transparent {
     [self.rightBtn setImage:[UIImage imageNamed:image] forState:(UIControlStateNormal)];
     [self.rightBtn setTitle:title forState:UIControlStateNormal];
+    
     if ([title isEqualToString:@"全部城市"]) {
         [self.rightBtn setTitleColor:[UIColor colorWithHexString:fineixColor] forState:UIControlStateNormal];
         self.rightBtn.imageEdgeInsets = UIEdgeInsetsMake(0, -42, 0, 0);
         self.rightBtn.titleEdgeInsets = UIEdgeInsetsMake(0, -37, 0, 0);
-        if (IS_iOS9) {
-            self.rightBtn.titleLabel.font = [UIFont fontWithName:@"PingFangSC-Light" size:12];
-        } else {
-            self.rightBtn.titleLabel.font = [UIFont systemFontOfSize:12];
-        }
+        self.rightBtn.titleLabel.font = [UIFont systemFontOfSize:12];
     }
     if ([title isEqualToString:@"保存"]) {
+        self.rightBtn.titleEdgeInsets = UIEdgeInsetsMake(0, -20, 0, 0);
+    }
+    if ([title isEqualToString:@"删除"]) {
         self.rightBtn.titleEdgeInsets = UIEdgeInsetsMake(0, -20, 0, 0);
     }
     if (transparent == NO) {

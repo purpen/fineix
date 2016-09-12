@@ -12,18 +12,14 @@
 #import "MyFansViewController.h"
 #import "BackgroundCollectionViewCell.h"
 #import "OtherCollectionViewCell.h"
-#import "AllSceneCollectionViewCell.h"
 #import "ShieldingViewController.h"
 #import "Fiu.h"
 #import "AccountManagementViewController.h"
 #import "UserInfoEntity.h"
 #import "DirectMessagesViewController.h"
 #import <SVProgressHUD.h>
-#import "FiuSceneRow.h"
 #import "MJRefresh.h"
-#import "FiuSceneViewController.h"
 #import "HomeSceneListRow.h"
-#import "SceneInfoViewController.h"
 #import "MyFansActionSheetViewController.h"
 #import "UserInfo.h"
 #import <SDWebImage/UIImageView+WebCache.h>
@@ -31,7 +27,10 @@
 #import "HomePageViewController.h"
 #import "UIImagePickerController+Flag.h"
 #import "ScenarioNonView.h"
-#import "SceneCollectionViewCell.h"
+#import "THNHomeSenceCollectionViewCell.h"
+#import "UIView+FSExtension.h"
+#import "THNSceneListViewController.h"
+#import "THNSceneDetalViewController.h"
 
 #define UserHeadTag 1
 #define BgTag 2
@@ -57,15 +56,36 @@
 @property(nonatomic,strong) UILabel *titleLabel;
 /**  */
 @property (nonatomic, strong) ScenarioNonView *defaultView;
+/**  */
+@property (nonatomic, strong) NSMutableArray *commentsMarr;
+/**  */
+@property (nonatomic, strong) NSMutableArray *userIdMarr;
+/**  */
+@property (nonatomic, assign) NSInteger modelAryCount;
+
 @end
 
 static NSString *const IconURL = @"/my/add_head_pic";
-static NSString *sceneCellId = @"SceneCollectionViewCell";
+static NSString *sceneCellId = @"THNHomeSenceCollectionViewCell";
 
 @implementation HomePageViewController
 
 -(void)viewWillDisappear:(BOOL)animated{
    [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleDefault];
+}
+
+-(NSMutableArray *)userIdMarr{
+    if (!_userIdMarr) {
+        _userIdMarr = [NSMutableArray array];
+    }
+    return _userIdMarr;
+}
+
+-(NSMutableArray *)commentsMarr{
+    if (!_commentsMarr) {
+        _commentsMarr = [NSMutableArray array];
+    }
+    return _commentsMarr;
 }
 
 - (void)viewDidLoad {
@@ -111,6 +131,7 @@ static NSString *sceneCellId = @"SceneCollectionViewCell";
 //    //
     [self.view addSubview:self.myCollectionView];
     
+    
     //  添加渐变层
     CAGradientLayer * shadow = [CAGradientLayer layer];
     shadow.startPoint = CGPointMake(0, 2);
@@ -120,6 +141,31 @@ static NSString *sceneCellId = @"SceneCollectionViewCell";
     shadow.locations = @[@(0.5f), @(2.5f)];
     shadow.frame = CGRectMake(0, 0, SCREEN_WIDTH, 64);
     [self.view.layer addSublayer:shadow];
+    
+    
+    _m = 0;
+    [_sceneIdMarr removeAllObjects];
+    [_sceneListMarr removeAllObjects];
+    [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent];
+    self.delegate = self;
+    [self.view addSubview:self.titleLabel];
+    [self addBarItemLeftBarButton:nil image:@"Fill 1" isTransparent:YES];
+    if (self.isMySelf) {
+        [self addBarItemRightBarButton:nil image:@"SET" isTransparent:YES];
+    }else{
+        //        [self addBarItemRightBarButton:nil image:@"more_filled" isTransparent:YES];
+    }
+    [[UIApplication sharedApplication] setStatusBarHidden:NO withAnimation:(UIStatusBarAnimationSlide)];
+    self.navigationController.navigationBarHidden = YES;
+    self.tabBarController.tabBar.hidden = YES;
+    
+    //进行网络请求
+    [self netGetData];
+    
+    self.myCollectionView.mj_footer = [MJRefreshAutoNormalFooter footerWithRefreshingBlock:^{
+        [self loadMoreDataM];
+    }];
+    [self requestDataForOderListOperation];
 }
 
 
@@ -171,49 +217,33 @@ static NSString *sceneCellId = @"SceneCollectionViewCell";
 
 -(void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
-    _m = 0;
-    [_sceneIdMarr removeAllObjects];
-    [_sceneListMarr removeAllObjects];
-    [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent];
-    self.delegate = self;
-    [self.view addSubview:self.titleLabel];
-    [self addBarItemLeftBarButton:nil image:@"Fill 1" isTransparent:YES];
-    if (self.isMySelf) {
-        [self addBarItemRightBarButton:nil image:@"SET" isTransparent:YES];
-    }else{
-//        [self addBarItemRightBarButton:nil image:@"more_filled" isTransparent:YES];
-    }
-    [[UIApplication sharedApplication] setStatusBarHidden:NO withAnimation:(UIStatusBarAnimationSlide)];
-    self.navigationController.navigationBarHidden = YES;
-    self.tabBarController.tabBar.hidden = YES;
-    //进行网络请求
-    [self netGetData];
-
-    self.myCollectionView.mj_footer = [MJRefreshAutoNormalFooter footerWithRefreshingBlock:^{
-        [self loadMoreDataM];
-    }];
-    [self requestDataForOderListOperation];
     
-//    if ([self.type isEqualToNumber:@1]) {
-//        self.myCollectionView.mj_footer = [MJRefreshAutoNormalFooter footerWithRefreshingBlock:^{
-//            [self loadMoreData];
-//        }];
-//        [self requestDataForOderListOperation];
-//    }else if([self.type isEqualToNumber:@2]){
-//        self.myCollectionView.mj_footer = [MJRefreshAutoNormalFooter footerWithRefreshingBlock:^{
-//            [self loadMoreDataM];
-//        }];
-//        [self requestDataForOderListOperation];
+//    _m = 0;
+//    [_sceneIdMarr removeAllObjects];
+//    [_sceneListMarr removeAllObjects];
+//    [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent];
+//    self.delegate = self;
+//    [self.view addSubview:self.titleLabel];
+//    [self addBarItemLeftBarButton:nil image:@"Fill 1" isTransparent:YES];
+//    if (self.isMySelf) {
+//        [self addBarItemRightBarButton:nil image:@"SET" isTransparent:YES];
+//    }else{
+////        [self addBarItemRightBarButton:nil image:@"more_filled" isTransparent:YES];
 //    }
+//    [[UIApplication sharedApplication] setStatusBarHidden:NO withAnimation:(UIStatusBarAnimationSlide)];
+//    self.navigationController.navigationBarHidden = YES;
+//    self.tabBarController.tabBar.hidden = YES;
+//    //进行网络请求
+//    [self netGetData];
+//
+//    self.myCollectionView.mj_footer = [MJRefreshAutoNormalFooter footerWithRefreshingBlock:^{
+//        [self loadMoreDataM];
+//    }];
+//    [self requestDataForOderListOperation];
 }
 
 -(void)loadMoreDataM{
-    if (_m < _totalM) {
-        [self requestDataForOderListOperation];
-    } else {
-        [self.myCollectionView.mj_footer endRefreshing];
-        self.myCollectionView.mj_footer.hidden = YES;
-    }
+    [self requestDataForOderListOperation];
 }
 
 -(void)loadMoreData{
@@ -225,59 +255,11 @@ static NSString *sceneCellId = @"SceneCollectionViewCell";
     }
 }
 
-//上拉下拉分页请求订单列表
+
 - (void)requestDataForOderListOperation
 {
 //    self.myCollectionView.mj_footer.hidden = YES;
-    if ([self.type isEqualToNumber:@1]) {
-        
-        //进行情景的网络请求
-//        [SVProgressHUD show];
-        FBRequest *request = [FBAPI postWithUrlString:@"/scene_scene/" requestDictionary:@{@"page":@(_n+1),@"size":@6,@"sort":@0,@"user_id":self.userId} delegate:self];
-        [request startRequestSuccess:^(FBRequest *request, id result) {
-            NSArray * fiuSceneArr = [[result valueForKey:@"data"] valueForKey:@"rows"];
-            for (NSDictionary * fiuSceneDic in fiuSceneArr) {
-                FiuSceneRow * fiuSceneModel = [[FiuSceneRow alloc] initWithDictionary:fiuSceneDic];
-                [_fiuSceneList addObject:fiuSceneModel];
-                [_fiuSceneIdList addObject:[NSString stringWithFormat:@"%zi", fiuSceneModel.idField]];
-            }
-            
-            [self.myCollectionView reloadData];
-            _n = [[[result objectForKey:@"data"] objectForKey:@"current_page"] intValue];
-            _totalN = [[[result objectForKey:@"data"] objectForKey:@"total_page"] intValue];
-            
-            BOOL isLastPage = (_n == _totalN);
-            
-            if (!isLastPage && _totalN != 0) {
-                if (self.myCollectionView.mj_footer.state == MJRefreshStateNoMoreData) {
-                    [self.myCollectionView.mj_footer resetNoMoreData];
-                }
-            }
-            if (_n == _totalN == 1) {
-                self.myCollectionView.mj_footer.state = MJRefreshStateNoMoreData;
-                self.myCollectionView.mj_footer.hidden = YES;
-            }
-            
-            if ([self.myCollectionView.mj_header isRefreshing]) {
-                [self.myCollectionView.mj_header endRefreshing];
-            }
-            if ([self.myCollectionView.mj_footer isRefreshing]) {
-                if (isLastPage) {
-                    [self.myCollectionView.mj_footer endRefreshingWithNoMoreData];
-                    self.myCollectionView.mj_footer.hidden = YES;
-                }
-            }
-            
-            if (_totalN == 0) {
-                self.myCollectionView.mj_footer.state = MJRefreshStateNoMoreData;
-                self.myCollectionView.mj_footer.hidden = YES;
-            }
-            
-            [SVProgressHUD dismiss];
-        } failure:^(FBRequest *request, NSError *error) {
-            [SVProgressHUD showInfoWithStatus:[error localizedDescription]];
-        }];
-    }else{
+    if ([self.type isEqualToNumber:@2]) {
         //进行场景的网络请求
 //        [SVProgressHUD show];
         FBRequest *request = [FBAPI postWithUrlString:@"/scene_sight/" requestDictionary:@{@"page":@(_m+1),@"size":@10,@"sort":@0,@"user_id":self.userId} delegate:self];
@@ -288,47 +270,32 @@ static NSString *sceneCellId = @"SceneCollectionViewCell";
                 HomeSceneListRow * homeSceneModel = [[HomeSceneListRow alloc] initWithDictionary:sceneDic];
                 [_sceneListMarr addObject:homeSceneModel];
                 [_sceneIdMarr addObject:[NSString stringWithFormat:@"%zi", homeSceneModel.idField]];
+                [self.userIdMarr addObject:[NSString stringWithFormat:@"%zi", homeSceneModel.userId]];
             }
+            _m = [result[@"data"][@"current_page"] intValue];
+            _totalM = [result[@"data"][@"total_rows"] intValue];
+            [self.commentsMarr addObjectsFromArray:[sceneArr valueForKey:@"comments"]];
             [self.myCollectionView reloadData];
-            _m = [[[result objectForKey:@"data"] objectForKey:@"current_page"] intValue];
-            _totalM = [[[result objectForKey:@"data"] objectForKey:@"total_page"] intValue];
-            BOOL isLastPage = (_m == _totalM);
-            if (_totalM == 0) {
-                self.myCollectionView.mj_footer.state = MJRefreshStateNoMoreData;
-                self.myCollectionView.mj_footer.hidden = YES;
-            }
-            if (!isLastPage && _totalM != 0) {
-                if (self.myCollectionView.mj_footer.state == MJRefreshStateNoMoreData) {
-                    [self.myCollectionView.mj_footer resetNoMoreData];
-                }
-            }
-            if (_m == _totalM == 1) {
-                self.myCollectionView.mj_footer.state = MJRefreshStateNoMoreData;
-                self.myCollectionView.mj_footer.hidden = YES;
-            }
-            
-            if ([self.myCollectionView.mj_header isRefreshing]) {
-                [self.myCollectionView.mj_header endRefreshing];
-            }
-            if ([self.myCollectionView.mj_footer isRefreshing]) {
-                if (isLastPage) {
-                    [self.myCollectionView.mj_footer endRefreshingWithNoMoreData];
-                    self.myCollectionView.mj_footer.hidden = YES;
-                }
-            }
-            [SVProgressHUD dismiss];
+            [self.myCollectionView.mj_footer endRefreshing];
+            [self checkFooterState];
         } failure:^(FBRequest *request, NSError *error) {
             [SVProgressHUD showInfoWithStatus:[error localizedDescription]];
         }];
     }
 }
 
-
+-(void)checkFooterState{
+    self.myCollectionView.mj_footer.hidden = _sceneListMarr.count == 0;
+    if (_sceneListMarr.count == _totalM) {
+        self.myCollectionView.mj_footer.hidden = YES;
+    }else{
+        [self.myCollectionView.mj_footer endRefreshing];
+    }
+}
 
 -(void)netGetData{
     FBRequest *request = [FBAPI postWithUrlString:@"/user/user_info" requestDictionary:@{@"user_id":self.userId} delegate:self];
     [request startRequestSuccess:^(FBRequest *request, id result) {
-//        NSLog(@" hhhhhhhh   %@",result); 
         NSDictionary *dataDict = result[@"data"];
         _chanelV.scenarioNumLabel.text = [NSString stringWithFormat:@"%@",dataDict[@"scene_count"]];
         _chanelV.fieldNumLabel.text = [NSString stringWithFormat:@"%@",dataDict[@"sight_count"]];
@@ -415,16 +382,15 @@ static NSString *sceneCellId = @"SceneCollectionViewCell";
         
         layout.minimumInteritemSpacing = 1;
         _myCollectionView = [[UICollectionView alloc] initWithFrame:CGRectMake(0, -54, SCREEN_WIDTH, SCREEN_HEIGHT+54) collectionViewLayout:layout];
-        _myCollectionView.backgroundColor = [UIColor whiteColor];
+        _myCollectionView.backgroundColor = [UIColor colorWithHexString:@"#F8F8F8"];
         _myCollectionView.showsVerticalScrollIndicator = NO;
         _myCollectionView.delegate = self;
         _myCollectionView.dataSource = self;
         [_myCollectionView registerClass:[BackgroundCollectionViewCell class] forCellWithReuseIdentifier:@"BackgroundCollectionViewCell"];
         [_myCollectionView registerClass:[OtherCollectionViewCell class] forCellWithReuseIdentifier:@"OtherCollectionViewCell"];
         [_myCollectionView registerClass:[UICollectionViewCell class] forCellWithReuseIdentifier:@"UICollectionViewCell"];
-        [_myCollectionView registerClass:[AllSceneCollectionViewCell class] forCellWithReuseIdentifier:@"AllSceneCollectionViewCell"];
         [_myCollectionView registerClass:[UICollectionViewCell class] forCellWithReuseIdentifier:@"UICollectionViewCellScenarioNon"];
-        [_myCollectionView registerClass:[SceneCollectionViewCell class] forCellWithReuseIdentifier:sceneCellId];
+        [_myCollectionView registerNib:[UINib nibWithNibName:sceneCellId bundle:nil] forCellWithReuseIdentifier:sceneCellId];
     }
     return _myCollectionView;
 }
@@ -463,9 +429,9 @@ static NSString *sceneCellId = @"SceneCollectionViewCell";
         if (section == 0) {
             return UIEdgeInsetsMake(0, 0, 0, 0);
         }else if(section == 1){
-            return UIEdgeInsetsMake(3, 5, 0, 5);
+            return UIEdgeInsetsMake(0, 5, 0, 5);
         }else if (section == 2){
-            return UIEdgeInsetsMake(5, 5, 0, 5);
+            return UIEdgeInsetsMake(15, 15, 1, 15);
         }
     }
     return UIEdgeInsetsMake(0, 0, 0, 0);
@@ -563,8 +529,10 @@ static NSString *sceneCellId = @"SceneCollectionViewCell";
                 return cell;
             }else{
                 //不是空的
-                SceneCollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:sceneCellId forIndexPath:indexPath];
-                [cell setAllFiuSceneListData:_sceneListMarr[indexPath.row]];
+                THNHomeSenceCollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:sceneCellId forIndexPath:indexPath];
+                cell.model = _sceneListMarr[indexPath.row];
+                cell.width = (SCREEN_WIDTH - 15 * 3) * 0.5;
+                cell.height = 0.25 * SCREEN_HEIGHT;
                 return cell;
             }
         }else if([self.type isEqualToNumber:@1]){
@@ -585,11 +553,6 @@ static NSString *sceneCellId = @"SceneCollectionViewCell";
                     make.top.mas_equalTo(cell.mas_top).with.offset(0);
                 }];
                 return cell;
-            }else{
-                //不是空的
-                AllSceneCollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"AllSceneCollectionViewCell" forIndexPath:indexPath];
-                [cell setAllFiuSceneListData:_fiuSceneList[indexPath.row]];
-                return cell;
             }
         }
     }
@@ -597,29 +560,25 @@ static NSString *sceneCellId = @"SceneCollectionViewCell";
 }
 
 
-
 -(void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath{
     if (indexPath.section == 2) {
         if ([self.type isEqualToNumber:@1]) {
-            FiuSceneViewController * fiuSceneVC = [[FiuSceneViewController alloc] init];
-            fiuSceneVC.fiuSceneId = _fiuSceneIdList[indexPath.row];
-            [self.navigationController pushViewController:fiuSceneVC animated:YES];
+            
         }else if([self.type isEqualToNumber:@2]){
-            if (_sceneListMarr.count == 0) {
-                return;
+            if (_sceneListMarr.count) {
+                THNSceneDetalViewController *vc = [[THNSceneDetalViewController alloc] init];
+                vc.sceneDetalId = _sceneIdMarr[indexPath.row];
+                [self.navigationController pushViewController:vc animated:YES];
             }
-            SceneInfoViewController * sceneInfoVC = [[SceneInfoViewController alloc] init];
-            sceneInfoVC.sceneId = _sceneIdMarr[indexPath.row];
-            [self.navigationController pushViewController:sceneInfoVC animated:YES];
         }
     }
 }
 
 
-
 -(void)clickBackBtn:(UIButton*)sender{
     [self.navigationController popViewControllerAnimated:YES];
 }
+
 
 -(void)clickFocusBtn:(UIButton*)sender{
     if (sender.selected) {
@@ -653,7 +612,7 @@ static NSString *sceneCellId = @"SceneCollectionViewCell";
 
 
 -(void)clickMyTap:(UITapGestureRecognizer*)gesture{
-    UIAlertController *alertC = [UIAlertController alertControllerWithTitle:@"更换背景图" message:nil preferredStyle:UIAlertControllerStyleActionSheet];
+    UIAlertController *alertC = [UIAlertController alertControllerWithTitle:@"更换个人主页封面" message:nil preferredStyle:UIAlertControllerStyleActionSheet];
     //判断是否支持相机。模拟器没有相机
     if ([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera]) {
         UIAlertAction *cameraAction = [UIAlertAction actionWithTitle:@"拍照" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
@@ -737,8 +696,6 @@ static NSString *sceneCellId = @"SceneCollectionViewCell";
 -(void)requestSucess:(FBRequest *)request result:(id)result{
     if ([request.flag isEqualToString:@"/follow/ajax_follow"]){
         if (![[result objectForKey:@"success"] isEqualToNumber:@0]) {
-            NSLog(@"result  %@",result);
-            [SVProgressHUD showSuccessWithStatus:@"关注成功"];
             _model.is_love = 1;
             _fansN ++;
             [self.myCollectionView reloadItemsAtIndexPaths:[NSArray arrayWithObjects:[NSIndexPath indexPathForRow:0 inSection:0],[NSIndexPath indexPathForRow:0 inSection:1], nil]];
@@ -747,9 +704,8 @@ static NSString *sceneCellId = @"SceneCollectionViewCell";
         }
     }else if ([request.flag isEqualToString:@"/follow/ajax_cancel_follow"]){
         if ([result objectForKey:@"success"]) {
-            [SVProgressHUD showSuccessWithStatus:@"取消关注"];
         }else{
-            [SVProgressHUD showErrorWithStatus:@"连接失败"];
+
         }
     }
     
@@ -760,8 +716,8 @@ static NSString *sceneCellId = @"SceneCollectionViewCell";
             UserInfoEntity * userEntity = [UserInfoEntity defaultUserInfoEntity];
             userEntity.head_pic_url = fileUrl;
             [userEntity updateUserInfo];
-            [self.myCollectionView reloadSections:[NSIndexSet indexSetWithIndex:0]];
-            
+            BackgroundCollectionViewCell *cell = (BackgroundCollectionViewCell*)[self.myCollectionView cellForItemAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0]];
+            [cell.bgImageView sd_setImageWithURL:[NSURL URLWithString:userEntity.head_pic_url] placeholderImage:nil];
             [SVProgressHUD showSuccessWithStatus:message];
         } else {
             [SVProgressHUD showInfoWithStatus:message];
@@ -804,13 +760,13 @@ static NSString *sceneCellId = @"SceneCollectionViewCell";
 }
 
 -(CGFloat)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout minimumLineSpacingForSectionAtIndex:(NSInteger)section{
-    return 2.5;
+    return 15;
 }
 
 -(CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath{
     if (indexPath.section == 0) {
         if (indexPath.row == 0) {
-            return CGSizeMake(SCREEN_WIDTH, SCREEN_WIDTH);
+            return CGSizeMake(SCREEN_WIDTH, SCREEN_WIDTH - 20);
         }
     }
     if (indexPath.section == 1) {
@@ -821,7 +777,7 @@ static NSString *sceneCellId = @"SceneCollectionViewCell";
             if (_sceneListMarr.count == 0) {
                 return CGSizeMake(SCREEN_WIDTH, 320/667.0*SCREEN_HEIGHT);
             }else{
-                return CGSizeMake((SCREEN_WIDTH-15)/2, 320/667.0*SCREEN_HEIGHT);
+                return CGSizeMake((SCREEN_WIDTH - 15 * 3) * 0.5, 0.25 * SCREEN_HEIGHT);
             }
         }else if ([self.type isEqualToNumber:@1]){
             return CGSizeMake((SCREEN_WIDTH-15)/2, 320/667.0*SCREEN_HEIGHT);

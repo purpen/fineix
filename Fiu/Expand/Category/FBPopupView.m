@@ -8,6 +8,7 @@
 
 #import "FBPopupView.h"
 #import "FBShareViewController.h"
+#import <pop/POP.h>
 
 @interface FBPopupView () {
     UIWindow        *   _popWindow;
@@ -225,9 +226,8 @@
 }
 
 #pragma mark - 发布情景成功提示框
-- (void)showPopupViewOnWindowStyleOne:(NSString *)text withSceneData:(NSDictionary *)data {
+- (void)showPopupViewOnWindowStyleOne:(NSString *)text {
     _text = text;
-    _sceneData = data;
     [self setAlertStyleOneUI];
 }
 
@@ -239,6 +239,13 @@
         make.centerY.equalTo(_bgView);
         make.centerX.equalTo(_bgView);
     }];
+    
+    POPSpringAnimation *scaleAnimation = [POPSpringAnimation animationWithPropertyNamed:kPOPLayerScaleXY];
+    scaleAnimation.fromValue = [NSValue valueWithCGSize:CGSizeMake(0.4, 0.4)];
+    scaleAnimation.toValue = [NSValue valueWithCGSize:CGSizeMake(1.0, 1.0)];
+    scaleAnimation.springBounciness = 10.f;
+    scaleAnimation.springSpeed = 7.0f;
+    [_popView.layer pop_addAnimation:scaleAnimation forKey:@"scaleAnim"];
 }
 
 - (UIView *)getPopView {
@@ -301,11 +308,7 @@
     UIButton * shareBtn = [[UIButton alloc] init];
     shareBtn.backgroundColor = [UIColor colorWithHexString:fineixColor];
     [shareBtn setTitle:NSLocalizedString(@"ShareBtn", nil) forState:(UIControlStateNormal)];
-    if (IS_iOS9) {
-        shareBtn.titleLabel.font = [UIFont fontWithName:@"PingFangSC-Light" size:16];
-    } else {
-        shareBtn.titleLabel.font = [UIFont systemFontOfSize:16];
-    }
+    shareBtn.titleLabel.font = [UIFont systemFontOfSize:16];
     [shareBtn setTitleColor:[UIColor whiteColor] forState:(UIControlStateNormal)];
     shareBtn.layer.cornerRadius = 3;
     [shareBtn addTarget:self action:@selector(shareBtnClick) forControlEvents:(UIControlEventTouchUpInside)];
@@ -314,23 +317,19 @@
 }
 
 - (void)shareBtnClick {
-    if ([_sceneData valueForKey:@"cover_url"]) {
-        FBShareViewController * shareVC = [[FBShareViewController alloc] init];
-        shareVC.dataDict = _sceneData;
-        [self.vc presentViewController:shareVC animated:YES completion:^{
-            [_bgView removeFromSuperview];
-        }];
-    }
+    [_bgView removeFromSuperview];
+    FBShareViewController *shareVC = [[FBShareViewController alloc] init];
+    shareVC.sceneId = self.sceneId;
+    shareVC.sceneModel = nil;
+    UIApplication *app = [UIApplication sharedApplication];
+    [app.keyWindow.rootViewController presentViewController:shareVC animated:YES completion:nil];
+    
 }
 
 - (UILabel *)getShareText {
     UILabel * shareText = [[UILabel alloc] init];
     shareText.textColor = [UIColor colorWithHexString:@"#222222"];
-    if (IS_iOS9) {
-        shareText.font = [UIFont fontWithName:@"PingFangSC-Light" size:14];
-    } else {
-        shareText.font = [UIFont systemFontOfSize:14];
-    }
+    shareText.font = [UIFont systemFontOfSize:14];
     shareText.textAlignment = NSTextAlignmentCenter;
     shareText.numberOfLines = 0;
     

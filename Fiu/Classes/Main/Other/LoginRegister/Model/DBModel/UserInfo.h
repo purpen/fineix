@@ -11,6 +11,8 @@
 
 @interface UserInfo : JKDBModel
 
+/**  */
+@property(nonatomic,copy) NSString *_id;
 @property (nonatomic, copy) NSString * userId;
 @property (nonatomic, copy) NSString * account;
 @property (nonatomic, copy) NSString * nickname;
@@ -33,6 +35,18 @@
 @property(nonatomic,copy) NSString *is_expert;
 @property(nonatomic,copy) NSString *expert_label;
 @property(nonatomic,copy) NSString *expert_info;
+/** 年龄段 */
+@property(nonatomic,copy) NSString *age_group;
+/** 资产 */
+@property(nonatomic,copy) NSString *assets;
+/** 订阅的情境主题 */
+@property (nonatomic, copy) NSString *interest_scene_cate;
+@property(nonatomic,assign) NSInteger sceneCateCount;
+/** 小的头像 */
+@property(nonatomic,copy) NSString *avatar_url;
+/**  */
+@property(nonatomic,copy) NSString *province_id;
+
 
 - (void)updateUserInfoEntity;
 

@@ -8,6 +8,8 @@
 
 #import "UserGoodsTag.h"
 #import "NSTimer+Addition.h"
+#import "UIImage+Helper.h"
+#import "UILable+Frame.h"
 
 @interface UserGoodsTag () {
     NSTimer *   timerAnimation;
@@ -22,21 +24,71 @@
 
 @implementation UserGoodsTag
 
-- (instancetype)initWithFrame:(CGRect)frame {
-    self = [super initWithFrame:frame];
+- (instancetype)init {
+    self = [super init];
     if (self) {
         self.userInteractionEnabled = YES;
+        self.isFlip = NO;
         timerAnimation = [NSTimer scheduledTimerWithTimeInterval:3
                                                           target:self
                                                         selector:@selector(animationTimerDidFired)
                                                         userInfo:nil
                                                          repeats:YES];
-        
-        [self setImage:[UIImage imageNamed:@"user_goodsTag_left"] forState:(UIControlStateHighlighted)];
-        [self setImage:[UIImage imageNamed:@"user_goodsTag_left"] forState:(UIControlStateNormal)];
+    
+        UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(flipTheBackgroundPosition:)];
+        [self addGestureRecognizer:tap];
         [self setUI];
     }
     return self;
+}
+
+- (void)thn_setSceneImageUserGoodsTagLoc:(NSInteger)loc {
+    if (loc == 1) {
+        [self.bgBtn setBackgroundImage:[UIImage resizedImage:@"mark_TagImage" xPos:0.2 yPos:0.5] forState:(UIControlStateNormal)];
+        [viewTapDot mas_remakeConstraints:^(MASConstraintMaker *make) {
+            make.size.mas_equalTo(CGSizeMake(6, 6));
+            make.top.equalTo(_bgBtn.mas_bottom).with.offset(0);
+            make.right.equalTo(_bgBtn.mas_right).with.offset(-18);
+        }];
+        
+    } else if (loc == 2) {
+        [self.bgBtn setBackgroundImage:[UIImage resizedImage:@"mark_TagImage" xPos:0.8 yPos:0.5] forState:(UIControlStateNormal)];
+        [viewTapDot mas_remakeConstraints:^(MASConstraintMaker *make) {
+            make.size.mas_equalTo(CGSizeMake(6, 6));
+            make.top.equalTo(_bgBtn.mas_bottom).with.offset(0);
+            make.left.equalTo(_bgBtn.mas_left).with.offset(19);
+        }];
+    }
+}
+
+- (void)flipTheBackgroundPosition:(UITapGestureRecognizer *)tap {
+    if (self.isFlip == NO) {
+        self.isFlip = YES;
+        [UIView animateWithDuration:.3 animations:^{
+            [self.bgBtn setBackgroundImage:[UIImage resizedImage:@"mark_TagImage" xPos:0.8 yPos:0.5] forState:(UIControlStateNormal)];
+            [viewTapDot mas_remakeConstraints:^(MASConstraintMaker *make) {
+                make.size.mas_equalTo(CGSizeMake(6, 6));
+                make.top.equalTo(_bgBtn.mas_bottom).with.offset(0);
+                make.left.equalTo(_bgBtn.mas_left).with.offset(19);
+            }];
+            
+            [self layoutIfNeeded];
+        }];
+        
+    } else if (self.isFlip == YES){
+        self.isFlip = NO;
+        [UIView animateWithDuration:.3 animations:^{
+            [self.bgBtn setBackgroundImage:[UIImage resizedImage:@"mark_TagImage" xPos:0.2 yPos:0.5] forState:(UIControlStateNormal)];
+            [viewTapDot mas_remakeConstraints:^(MASConstraintMaker *make) {
+                make.size.mas_equalTo(CGSizeMake(6, 6));
+                make.top.equalTo(_bgBtn.mas_bottom).with.offset(0);
+                make.right.equalTo(_bgBtn.mas_right).with.offset(-18);
+            }];
+            
+            [self layoutIfNeeded];
+        }];
+    }
+    
 }
 
 - (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
@@ -59,12 +111,12 @@
         
         //  限制用户不可将视图托出屏幕
         float halfx = CGRectGetMidX(self.bounds);
-        _translateCenter.x = MAX(halfx, _translateCenter.x);
-        _translateCenter.x = MIN(self.superview.bounds.size.width - halfx, _translateCenter.x);
+        _translateCenter.x = MAX(halfx + 10, _translateCenter.x);
+        _translateCenter.x = MIN(self.superview.bounds.size.width - halfx - 10, _translateCenter.x);
         
         float halfy = CGRectGetMidY(self.bounds);
-        _translateCenter.y = MAX(halfy + 50, _translateCenter.y);
-        _translateCenter.y = MIN(self.superview.bounds.size.height - halfy - 50, _translateCenter.y);
+        _translateCenter.y = MAX(halfy + 10, _translateCenter.y);
+        _translateCenter.y = MIN(self.superview.bounds.size.height - halfy - 10, _translateCenter.y);
         
         //移动view
         self.center = _translateCenter;
@@ -73,35 +125,55 @@
     }
 }
 
+- (void)userTag_SetGoodsInfo:(NSString *)text {
+    self.title.text = text;
+    CGFloat width = [self.title boundingRectWithSize:CGSizeMake(320, 0)].width;
+    if (width*1.3 > SCREEN_WIDTH/2) {
+        width = SCREEN_WIDTH/2;
+    } else {
+        width = [self.title boundingRectWithSize:CGSizeMake(320, 0)].width * 1.3;
+    }
+    
+    int tagX = (arc4random() % 4) * 30;
+    int tagY = ((arc4random() % 2) + 10) * 20;
+    self.frame = CGRectMake(tagX, tagY, width + 25, 32);
+
+    [self.bgBtn setBackgroundImage:[UIImage resizedImage:@"mark_TagImage" xPos:0.2 yPos:0.5] forState:(UIControlStateNormal)];
+}
+
 #pragma mark - 设置视图
 - (void)setUI {
-    [self addSubview:self.title];
-    [_title mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.size.mas_equalTo(CGSizeMake(105, 23));
-        make.centerY.equalTo(self);
-        make.left.equalTo(self.mas_left).with.offset(4);
+    [self addSubview:self.bgBtn];
+    [_bgBtn mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.right.bottom.equalTo(self).with.offset(0);
+        make.left.equalTo(self.mas_left).with.offset(25);
     }];
     
-    [self addSubview:self.price];
-    [_price mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.size.mas_equalTo(CGSizeMake(55, 23));
-        make.centerY.equalTo(self);
-        make.left.equalTo(self.title.mas_right).with.offset(7);
+    [self.bgBtn addSubview:self.title];
+    [_title mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.bottom.right.equalTo(_bgBtn).with.offset(-5);
+        make.left.equalTo(_bgBtn.mas_left).with.offset(5);
+        make.top.equalTo(_bgBtn.mas_top).with.offset(0);
     }];
     
     [self addSubview:self.dele];
     [_dele mas_makeConstraints:^(MASConstraintMaker *make) {
         make.size.mas_equalTo(CGSizeMake(22, 22));
-        make.top.equalTo(self.mas_top).with.offset(-10);
-        make.right.equalTo(self.mas_right).with.offset(0);
+        make.top.equalTo(self.mas_top).with.offset(2);
+        make.left.equalTo(self.mas_left).with.offset(0);
     }];
     
     viewTapDot = [self getViewTapDot];
+    self.posPoint = viewTapDot;
     [self addSubview:viewTapDot];
     [viewTapDot mas_makeConstraints:^(MASConstraintMaker *make) {
         make.size.mas_equalTo(CGSizeMake(6, 6));
-        make.centerY.equalTo(self);
-        make.left.equalTo(self.mas_left).with.offset(100);
+        make.top.equalTo(_bgBtn.mas_bottom).with.offset(0);
+        if (self.isFlip == NO) {
+            make.right.equalTo(_bgBtn.mas_right).with.offset(-18);
+        } else {
+            make.left.equalTo(_bgBtn.mas_left).with.offset(19);
+        }
     }];
     
     viewSpread = [self getViewSpread];
@@ -123,16 +195,20 @@
     [timerAnimation resumeTimer];
 }
 
+- (UIButton *)bgBtn {
+    if (!_bgBtn) {
+        _bgBtn = [[UIButton alloc] init];
+        _bgBtn.userInteractionEnabled = NO;
+    }
+    return _bgBtn;
+}
+
 #pragma mark - 标题
 - (UILabel *)title {
     if (!_title) {
         _title = [[UILabel alloc] init];
-        _title.textColor = [UIColor colorWithHexString:fineixColor];
-        if (IS_iOS9) {
-            _title.font = [UIFont fontWithName:@"PingFangSC-Light" size:12];
-        } else {
-            _title.font = [UIFont systemFontOfSize:12];
-        }
+        _title.textColor = [UIColor colorWithHexString:@"#FFFFFF"];
+        _title.font = [UIFont systemFontOfSize:12];
         _title.textAlignment = NSTextAlignmentCenter;
     }
     return _title;
@@ -194,7 +270,7 @@
 
 - (void)deleteTagAction:(UIButton *)button {
     if (self.delegate && [self.delegate respondsToSelector:@selector(delegateThisTagBtn:)]) {
-        [self.delegate delegateThisTagBtn:self.index];
+        [self.delegate delegateThisTagBtn:self];
     }
     [self removeFromSuperview];
 }

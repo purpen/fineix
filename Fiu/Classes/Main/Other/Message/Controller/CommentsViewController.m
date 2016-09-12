@@ -12,9 +12,10 @@
 #import "UserInfo.h"
 #import "UserInfoEntity.h"
 #import "MJRefresh.h"
-#import "SceneInfoViewController.h"
 #import "HomePageViewController.h"
 #import "TipNumberView.h"
+#import "THNSceneDetalViewController.h"
+#import "CommentNViewController.h"
 
 @interface CommentsViewController ()<FBNavigationBarItemsDelegate,UITableViewDataSource,UITableViewDelegate>
 {
@@ -81,6 +82,7 @@
     [request startRequestSuccess:^(FBRequest *request, id result) {
         NSDictionary *dataDict = [result objectForKey:@"data"];
         NSArray *rowsAry = [dataDict objectForKey:@"rows"];
+        NSLog(@"评论  %@",result);
         for (NSDictionary *rowsDict in rowsAry) {
             NSDictionary *usersDict = [rowsDict objectForKey:@"user"];
             UserInfo *model = [[UserInfo alloc] init];
@@ -161,6 +163,7 @@
 -(void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
     [[UIApplication sharedApplication] setStatusBarHidden:NO withAnimation:UIStatusBarAnimationSlide];
+    [UIApplication sharedApplication].statusBarStyle = UIStatusBarStyleLightContent;
 }
 
 
@@ -185,6 +188,8 @@
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     static NSString *cellId = @"cellOne";
     CommentsTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellId];
+    cell.navi = self.navigationController;
+    cell.scenceId = _sceneIdMarr[indexPath.row];
     if (cell == nil) {
         cell = [[CommentsTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellId];
     }
@@ -200,11 +205,19 @@
         cell.focusBtn.hidden = YES;
         cell.timeLabelTwo.hidden = YES;
         cell.headBtn.tag = indexPath.row;
+        cell.iconBtn.tag = indexPath.row;
         [cell.headBtn addTarget:self action:@selector(headBtn:) forControlEvents:UIControlEventTouchUpInside];
+        [cell.iconBtn addTarget:self action:@selector(iconBtnClick:) forControlEvents:UIControlEventTouchUpInside];
     }
     
-    
     return cell;
+}
+
+-(void)iconBtnClick:(UIButton*)sender{
+    THNSceneDetalViewController *vc = [[THNSceneDetalViewController alloc] init];
+    NSLog(@"id  %@",_sceneIdMarr[sender.tag]);
+    vc.sceneDetalId = _sceneIdMarr[sender.tag];
+    [self.navigationController pushViewController:vc animated:YES];
 }
 
 -(void)headBtn:(UIButton*)sender{
@@ -216,9 +229,11 @@
 }
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
-    SceneInfoViewController * sceneInfoVC = [[SceneInfoViewController alloc] init];
-    sceneInfoVC.sceneId = _sceneIdMarr[indexPath.row];
-    [self.navigationController pushViewController:sceneInfoVC animated:YES];
+    UserInfo *model = _modelAry[indexPath.row];
+    CommentNViewController * commentVC = [[CommentNViewController alloc] init];
+    commentVC.targetId = _sceneIdMarr[indexPath.row];
+    commentVC.sceneUserId = model.userId;
+    [self.navigationController pushViewController:commentVC animated:YES];
 }
 
 - (void)didReceiveMemoryWarning {

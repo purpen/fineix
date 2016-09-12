@@ -118,9 +118,13 @@
 	if(![dictionary[@"short_title"] isKindOfClass:[NSNull class]]){
 		self.shortTitle = dictionary[@"short_title"];
 	}	
-	if(![dictionary[@"state"] isKindOfClass:[NSNull class]]){
-		self.state = [dictionary[@"state"] integerValue];
-	}
+    if(![dictionary[@"state"] isKindOfClass:[NSNull class]]){
+        self.state = [dictionary[@"state"] integerValue];
+    }
+    
+    if(![dictionary[@"stage"] isKindOfClass:[NSNull class]]){
+        self.stage = [dictionary[@"stage"] integerValue];
+    }
 
 	if(![dictionary[@"stick"] isKindOfClass:[NSNull class]]){
 		self.stick = [dictionary[@"stick"] integerValue];

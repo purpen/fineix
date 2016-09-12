@@ -23,6 +23,7 @@
 #import "AddreesModel.h"
 #import "OfficialCertificationViewController.h"
 #import "SexSheetViewController.h"
+#import "AreaModel.h"
 
 
 @interface AccountManagementViewController ()<FBNavigationBarItemsDelegate,UIImagePickerControllerDelegate,UIActionSheetDelegate,UINavigationControllerDelegate,FBRequestDelegate>
@@ -89,7 +90,9 @@ static NSString *const UpdateInfoURL = @"/my/update_profile";
 
 -(void)clickBirthBtn:(UIButton*)sender{
     self.pickerVC.modalPresentationStyle = UIModalPresentationOverCurrentContext;
-    [self presentViewController:_pickerVC animated:NO completion:nil];
+    [self presentViewController:_pickerVC animated:NO completion:^{
+        
+    }];
     [_pickerVC.pickerBtn addTarget:self action:@selector(clickPickerBtn:) forControlEvents:UIControlEventTouchUpInside];
 }
 
@@ -124,13 +127,56 @@ static NSString *const UpdateInfoURL = @"/my/update_profile";
 -(AddreesPickerViewController *)addreesPickerVC{
     if (!_addreesPickerVC) {
         _addreesPickerVC = [[AddreesPickerViewController alloc] init];
+        UserInfoEntity *entity = [UserInfoEntity defaultUserInfoEntity];
+        if (entity.city.length != 0 && entity.prin.length != 0) {
+            _addreesPickerVC.provinceStr = entity.prin;
+            _addreesPickerVC.cityStr = entity.city;
+        }
     }
     return _addreesPickerVC;
 }
 
 -(void)clickAdreesBtn:(UIButton*)sender{
+//    UserInfoEntity *entity = [UserInfoEntity defaultUserInfoEntity];
+//    NSMutableArray *provincesAry = [NSMutableArray array];
+//    NSMutableArray *cityAry = [NSMutableArray array];
+//    NSString * filePath = [[NSBundle mainBundle] pathForResource:@"areas" ofType:@"plist"];
+//    NSArray * areaAry = [NSArray arrayWithContentsOfFile:filePath];
+//    for (NSDictionary * provinceDic in areaAry) {
+//        AreaModel * province = [[AreaModel alloc] initWithDictionary:provinceDic];
+//        [provincesAry addObject:province];
+//        NSArray * citiesAry = [provinceDic objectForKey:@"children"];
+//        NSMutableArray * cityOfProAry = [NSMutableArray array];
+//        for (NSDictionary * cityDic in citiesAry) {
+//            AreaModel * city = [[AreaModel alloc] initWithDictionary:cityDic];
+//            [cityOfProAry addObject:city];
+//        }
+//        [cityAry addObject:cityOfProAry];
+//    }
+//    
+//    NSInteger prinTeger = 1;
+//    NSInteger cityTeger = 1;
+//    for (int i = 0; i < provincesAry.count; i ++) {
+//        if ([((AreaModel*)provincesAry[i]).name rangeOfString:entity.prin].location != NSNotFound) {
+//            prinTeger = i;
+//        }
+//    }
+//    for (int i = 0; i < cityAry.count; i ++) {
+//        for (int j = 0; j < ((NSArray*)cityAry[i]).count; j ++) {
+//            if ([((AreaModel*)cityAry[i][j]).name rangeOfString:entity.city].location != NSNotFound) {
+//                cityTeger = j;
+//            }
+//        }
+//    }
+
     self.addreesPickerVC.modalPresentationStyle = UIModalPresentationOverCurrentContext;
-    [self presentViewController:_addreesPickerVC animated:NO completion:nil];
+   
+    [self presentViewController:_addreesPickerVC animated:NO completion:^{
+//        [self.addreesPickerVC.addreesBtn selectRow:0 inComponent:0 animated:YES];
+//        AreaModel * city = cityAry[1];
+//        self.addreesPickerVC.cityId = city.idField;
+//        self.addreesPickerVC.cityStr = city.name;
+    }];
     [_addreesPickerVC.pickerBtn addTarget:self action:@selector(clickAddreesPickerBtn:) forControlEvents:UIControlEventTouchUpInside];
 }
 
@@ -164,8 +210,6 @@ static NSString *const UpdateInfoURL = @"/my/update_profile";
 
 
 -(void)clickAddreesPickerBtn:(UIButton*)sender{
-    //拿到ID名称 更新列表，更新服务器上的 然后消失
-    self.accountView.adress.text = [NSString stringWithFormat:@"%@ %@",self.addreesPickerVC.provinceStr,self.addreesPickerVC.cityStr];
     FBRequest *request = [FBAPI postWithUrlString:@"/my/update_profile" requestDictionary:@{@"province_id":@(self.addreesPickerVC.provinceId),@"district_id":@(self.addreesPickerVC.cityId)} delegate:self];
     request.flag = @"UpdateInfoURL";
     [request startRequest];
@@ -187,7 +231,7 @@ static NSString *const UpdateInfoURL = @"/my/update_profile";
     }];
     _accountView.nickName.text = entity.nickname;
     if (entity.prin) {
-        _accountView.adress.text = [NSString stringWithFormat:@"%@%@",entity.prin,entity.city];
+        _accountView.adress.text = [NSString stringWithFormat:@"%@ %@",entity.prin,entity.city];
     }
     switch ([entity.sex intValue]) {
         case 0:
@@ -235,9 +279,10 @@ static NSString *const UpdateInfoURL = @"/my/update_profile";
     self.sexPickerVC.modalPresentationStyle = UIModalPresentationOverCurrentContext;
     UserInfoEntity *entity = [UserInfoEntity defaultUserInfoEntity];
     _sex = entity.sex;
-    NSLog(@"%zi",[entity.sex intValue]);
-    [self.sexPickerVC.sexPickerView selectRow:[_sex intValue] inComponent:0 animated:NO];
-    [self presentViewController:_sexPickerVC animated:NO completion:nil];
+    [self presentViewController:_sexPickerVC animated:NO completion:^{
+        [self.sexPickerVC.sexPickerView selectRow:[_sex intValue] inComponent:0 animated:NO];
+        self.sexPickerVC.sexNum = _sex;
+    }];
     [_sexPickerVC.backBtn addTarget:self action:@selector(clickSexPickerBtn:) forControlEvents:UIControlEventTouchUpInside];
 }
 
@@ -339,6 +384,7 @@ static NSString *const UpdateInfoURL = @"/my/update_profile";
             userEntity.city = areasAry[1];
         }
         [userEntity updateUserInfo];
+        _accountView.adress.text = [NSString stringWithFormat:@"%@ %@",userEntity.prin,userEntity.city];
         request = nil;
     }
 

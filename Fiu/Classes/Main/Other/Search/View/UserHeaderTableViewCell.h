@@ -8,15 +8,18 @@
 
 #import <UIKit/UIKit.h>
 #import "Fiu.h"
+#import "UserModelRow.h"
+#import <pop/POP.h>
+#import <SDWebImage/UIButton+WebCache.h>
 
 @interface UserHeaderTableViewCell : UITableViewCell
 
-@pro_strong UIButton            *       userHeader;      //  用户头像
+@pro_strong UIButton            *       userHeader;         //  用户头像
 @pro_strong UILabel             *       userName;           //  用户昵称
 @pro_strong UILabel             *       userProfile;        //  用户简介
 @pro_strong UIButton            *       concernBtn;         //  关注按钮
 @pro_strong UILabel             *       line;               //  分割线
 
-- (void)setUI;
+- (void)setUserListData:(UserModelRow *)model nowUserId:(NSString *)userId;
 
 @end

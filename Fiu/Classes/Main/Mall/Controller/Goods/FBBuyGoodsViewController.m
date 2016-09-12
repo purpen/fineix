@@ -8,8 +8,9 @@
 
 #import "FBBuyGoodsViewController.h"
 #import "GoodsSceneCollectionViewCell.h"
-#import "FBLoginRegisterViewController.h"
+#import "THNLoginRegisterViewController.h"
 #import "FBGoodsInfoViewController.h"
+#import "TagFlowLayout.h"
 
 @interface FBBuyGoodsViewController ()
 
@@ -42,9 +43,9 @@
         weakSelf.goodsSkus = [NSMutableArray arrayWithArray:model.skus];
         if (weakSelf.goodsSkus.count == 0) {
             NSDictionary * skuDict = @{@"mode":NSLocalizedString(@"Default", nil),
-                                       @"price":[NSString stringWithFormat:@"%.2f",[[model valueForKey:@"salePrice"] floatValue]],
-                                       @"quantity":[model valueForKey:@"inventory"],
-                                       @"targetId":[NSString stringWithFormat:@"%@", [model valueForKey:@"idField"]]};
+                                       @"price":[NSString stringWithFormat:@"%zi",[[model valueForKey:@"salePrice"] integerValue]],
+                                       @"quantity":[NSString stringWithFormat:@"%zi",[[model valueForKey:@"inventory"] integerValue]],
+                                       @"targetId":[NSString stringWithFormat:@"%zi", [[model valueForKey:@"idField"] integerValue]]};
             [weakSelf.goodsSkus addObject:skuDict];
         }
         [weakSelf setBuyGoodsData:model];
@@ -55,10 +56,40 @@
 - (void)setBuyGoodsData:(FBGoodsInfoModelData *)model {
     [self.goodsImg downloadImage:model.coverUrl place:[UIImage imageNamed:@""]];
     self.goodsTitle.text = model.title;
-    self.goodsPrice.text = [NSString stringWithFormat:@"￥%.2f", model.salePrice];
+    self.goodsPrice.text = [NSString stringWithFormat:@"￥%zi", model.salePrice];
     self.chooseNum.text = [NSString stringWithFormat:@"%zi", self.num];
     [self.goodsColorView reloadData];
-   
+    
+    
+    /**
+     *  没有颜色分类，默认选中第一个
+     */
+    if (self.goodsSkus.count == 1) {
+        [self chooseDefaultColor];
+    }
+}
+
+- (void)chooseDefaultColor {
+    [self.goodsColorView selectItemAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0]
+                                      animated:YES
+                                scrollPosition:(UICollectionViewScrollPositionNone)];
+    
+    self.goodsChoose.text = [NSString stringWithFormat:@"已选：%@", [self.goodsSkus valueForKey:@"mode"][0]];
+    self.goodsPrice.text = [NSString stringWithFormat:@"￥%@", [self.goodsSkus valueForKey:@"price"][0]];
+    self.quantity = [[self.goodsSkus valueForKey:@"quantity"][0] integerValue];
+    
+    if (self.quantity == 0) {
+        [self NotCanBuy];
+    } else {
+        [self IsCanBuy];
+        self.chooseNum.text = @"1";
+    }
+    self.num = 1;
+    if ([[self.goodsSkus valueForKey:@"mode"][0] isEqualToString:NSLocalizedString(@"Default", nil)]) {
+        self.skuId = [NSString stringWithFormat:@"%zi", [[self.goodsSkus valueForKey:@"targetId"][0] integerValue]];
+    } else {
+        self.skuId = [NSString stringWithFormat:@"%zi", [[self.goodsSkus valueForKey:@"idField"][0] integerValue]];
+    }
 }
 
 #pragma mark - 取消购买
@@ -85,16 +116,12 @@
         
         UILabel * colorLab = [[UILabel alloc] initWithFrame:CGRectMake(15, 120, SCREEN_WIDTH - 30, 20)];
         colorLab.text = @"颜色分类";
-        if (IS_iOS9) {
-            colorLab.font = [UIFont fontWithName:@"PingFangSC-Light" size:16];
-        } else {
-            colorLab.font = [UIFont systemFontOfSize:16];
-        }
+        colorLab.font = [UIFont systemFontOfSize:16];
         
         [_buyView addSubview:self.buyingBtn];
         [_buyView addSubview:self.addCarBtn];
         [_buyView addSubview:self.goodsImg];
-        [_buyView addSubview:self.goodsTitle];
+//        [_buyView addSubview:self.goodsTitle];
         [_buyView addSubview:self.goodsPrice];
         [_buyView addSubview:self.goodsChoose];
         [_buyView addSubview:lineLab];
@@ -116,12 +143,8 @@
         _buyingBtn = [[UIButton alloc] initWithFrame:CGRectMake(SCREEN_WIDTH/2, 410 - 44, SCREEN_WIDTH/2, 44)];
         [_buyingBtn setTitle:NSLocalizedString(@"buyingBtn", nil) forState:(UIControlStateNormal)];
         [_buyingBtn setTitleColor:[UIColor whiteColor] forState:(UIControlStateNormal)];
-        if (IS_iOS9) {
-            _buyingBtn.titleLabel.font = [UIFont fontWithName:@"PingFangSC-Light" size:14];
-        } else {
-            _buyingBtn.titleLabel.font = [UIFont systemFontOfSize:14];
-        }
-        _buyingBtn.backgroundColor = [UIColor colorWithHexString:@"#BE8914"];
+        _buyingBtn.titleLabel.font = [UIFont systemFontOfSize:14];
+        _buyingBtn.backgroundColor = [UIColor colorWithHexString:@"#222222"];
         [_buyingBtn addTarget:self action:@selector(buyingBtnClick) forControlEvents:(UIControlEventTouchUpInside)];
     }
     return _buyingBtn;
@@ -159,12 +182,8 @@
         _addCarBtn = [[UIButton alloc] initWithFrame:CGRectMake(0, 410 - 44, SCREEN_WIDTH/2, 44)];
         [_addCarBtn setTitle:NSLocalizedString(@"addCarBtn", nil) forState:(UIControlStateNormal)];
         [_addCarBtn setTitleColor:[UIColor whiteColor] forState:(UIControlStateNormal)];
-        if (IS_iOS9) {
-            _addCarBtn.titleLabel.font = [UIFont fontWithName:@"PingFangSC-Light" size:14];
-        } else {
-            _addCarBtn.titleLabel.font = [UIFont systemFontOfSize:14];
-        }
-        _addCarBtn.backgroundColor = [UIColor colorWithHexString:@"DB9E18"];
+        _addCarBtn.titleLabel.font = [UIFont systemFontOfSize:14];
+        _addCarBtn.backgroundColor = [UIColor colorWithHexString:@"#666666"];
         [_addCarBtn addTarget:self action:@selector(addCarBtnClick) forControlEvents:(UIControlEventTouchUpInside)];
     }
     return _addCarBtn;
@@ -200,6 +219,8 @@
 - (UIImageView *)goodsImg {
     if (!_goodsImg) {
         _goodsImg = [[UIImageView alloc] initWithFrame:CGRectMake(15, 15, 80, 80)];
+        _goodsImg.layer.borderWidth = 0.5f;
+        _goodsImg.layer.borderColor = [UIColor colorWithHexString:@"#999999" alpha:0.7].CGColor;
     }
     return _goodsImg;
 }
@@ -209,11 +230,7 @@
     if (!_goodsTitle) {
         _goodsTitle = [[UILabel alloc] initWithFrame:CGRectMake(105, 15, SCREEN_WIDTH - 120, 35)];
         _goodsTitle.textColor = [UIColor colorWithHexString:titleColor];
-        if (IS_iOS9) {
-            _goodsTitle.font = [UIFont fontWithName:@"PingFangSC-Light" size:14];
-        } else {
-            _goodsTitle.font = [UIFont systemFontOfSize:14];
-        }
+        _goodsTitle.font = [UIFont systemFontOfSize:14];
         _goodsTitle.numberOfLines = 2;
     }
     return _goodsTitle;
@@ -224,11 +241,7 @@
     if (!_goodsPrice) {
         _goodsPrice = [[UILabel alloc] initWithFrame:CGRectMake(105, 55, SCREEN_WIDTH - 115, 25)];
         _goodsPrice.textColor = [UIColor colorWithHexString:fineixColor];
-        if (IS_iOS9) {
-            _goodsPrice.font = [UIFont fontWithName:@"PingFangSC-Light" size:14];
-        } else {
-            _goodsPrice.font = [UIFont systemFontOfSize:14];
-        }
+        _goodsPrice.font = [UIFont systemFontOfSize:14];
         _goodsPrice.numberOfLines = 2;
     }
     return _goodsPrice;
@@ -238,12 +251,8 @@
 - (UILabel *)goodsChoose {
     if (!_goodsChoose) {
         _goodsChoose = [[UILabel alloc] initWithFrame:CGRectMake(105, 80, SCREEN_WIDTH - 120, 15)];
-        _goodsChoose.textColor = [UIColor colorWithHexString:titleColor];
-        if (IS_iOS9) {
-            _goodsChoose.font = [UIFont fontWithName:@"PingFangSC-Light" size:12];
-        } else {
-            _goodsChoose.font = [UIFont systemFontOfSize:12];
-        }
+        _goodsChoose.textColor = [UIColor colorWithHexString:@"#222222"];
+        _goodsChoose.font = [UIFont systemFontOfSize:12];
         _goodsChoose.text = @"";
         _goodsChoose.numberOfLines = 2;
     }
@@ -253,23 +262,20 @@
 #pragma mark - 颜色分类
 - (UICollectionView *)goodsColorView {
     if (!_goodsColorView) {
-        UICollectionViewFlowLayout * flowLayout = [[UICollectionViewFlowLayout alloc] init];
+        TagFlowLayout * flowLayout = [[TagFlowLayout alloc] init];
         flowLayout.sectionInset = UIEdgeInsetsMake(10, 15, 10, 15);
         flowLayout.minimumLineSpacing = 10.0f;
-        flowLayout.minimumInteritemSpacing = 5.0f;
+        flowLayout.minimumInteritemSpacing = 10.0f;
         
         _goodsColorView = [[UICollectionView alloc] initWithFrame:CGRectMake(0, 140, SCREEN_WIDTH, 100) collectionViewLayout:flowLayout];
         _goodsColorView.dataSource = self;
         _goodsColorView.delegate = self;
         _goodsColorView.showsVerticalScrollIndicator = NO;
-        _goodsColorView.showsHorizontalScrollIndicator = NO;
         _goodsColorView.backgroundColor = [UIColor whiteColor];
         [_goodsColorView registerClass:[GoodsSceneCollectionViewCell class] forCellWithReuseIdentifier:@"goodsColorViewCell"];
-        
     }
     return _goodsColorView;
 }
-
 
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
     return self.goodsSkus.count;
@@ -285,6 +291,7 @@
     self.goodsChoose.text = [NSString stringWithFormat:@"已选：%@", [self.goodsSkus valueForKey:@"mode"][indexPath.row]];
     self.goodsPrice.text = [NSString stringWithFormat:@"￥%@", [self.goodsSkus valueForKey:@"price"][indexPath.row]];
     self.quantity = [[self.goodsSkus valueForKey:@"quantity"][indexPath.row] integerValue];
+    
     if (self.quantity == 0) {
         [self NotCanBuy];
     } else {
@@ -293,14 +300,14 @@
     }
     self.num = 1;
     if ([[self.goodsSkus valueForKey:@"mode"][indexPath.row] isEqualToString:NSLocalizedString(@"Default", nil)]) {
-        self.skuId = [NSString stringWithFormat:@"%@", [self.goodsSkus valueForKey:@"targetId"][indexPath.row]];
+        self.skuId = [NSString stringWithFormat:@"%zi", [[self.goodsSkus valueForKey:@"targetId"][indexPath.row] integerValue]];
     } else {
-        self.skuId = [NSString stringWithFormat:@"%@", [self.goodsSkus valueForKey:@"_id"][indexPath.row]];
+        self.skuId = [NSString stringWithFormat:@"%zi", [[self.goodsSkus valueForKey:@"idField"][indexPath.row] integerValue]];
     }
 }
 
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath {
-    CGFloat btnLength = [[[self.goodsSkus valueForKey:@"mode"] objectAtIndex:indexPath.row] boundingRectWithSize:CGSizeMake(320, 1000) options:(NSStringDrawingUsesLineFragmentOrigin) attributes:nil context:nil].size.width;
+    CGFloat btnLength = [[[self.goodsSkus valueForKey:@"mode"] objectAtIndex:indexPath.row] boundingRectWithSize:CGSizeMake(320, 0) options:(NSStringDrawingUsesLineFragmentOrigin) attributes:nil context:nil].size.width;
     return CGSizeMake(btnLength + 40, 30);
 }
 
@@ -318,10 +325,10 @@
 }
 
 - (void)IsCanBuy {
-    self.addCarBtn.backgroundColor = [UIColor colorWithHexString:@"#DB9E18"];
+    self.addCarBtn.backgroundColor = [UIColor colorWithHexString:@"#666666"];
     self.addCarBtn.userInteractionEnabled = YES;
     
-    self.buyingBtn.backgroundColor = [UIColor colorWithHexString:@"#BE8914"];
+    self.buyingBtn.backgroundColor = [UIColor colorWithHexString:@"#222222"];
     self.buyingBtn.userInteractionEnabled = YES;
     
     self.subBtn.userInteractionEnabled = YES;
@@ -336,22 +343,14 @@
         
         UILabel * chooseNumTitle = [[UILabel alloc] initWithFrame:CGRectMake(0, 10, SCREEN_WIDTH - 30, 20)];
         chooseNumTitle.text = @"数量";
-        if (IS_iOS9) {
-            chooseNumTitle.font = [UIFont fontWithName:@"PingFangSC-Light" size:16];
-        } else {
-            chooseNumTitle.font = [UIFont systemFontOfSize:16];
-        }
+        chooseNumTitle.font = [UIFont systemFontOfSize:16];
         
         UIButton * addBtn = [[UIButton alloc] initWithFrame:CGRectMake(110, 40, 30, 30)];
         addBtn.layer.borderColor = [UIColor colorWithHexString:titleColor alpha:.5].CGColor;
         addBtn.layer.borderWidth = 1.0f;
         [addBtn setTitleColor:[UIColor colorWithHexString:titleColor] forState:(UIControlStateNormal)];
         [addBtn setTitle:@"＋" forState:(UIControlStateNormal)];
-        if (IS_iOS9) {
-            addBtn.titleLabel.font = [UIFont fontWithName:@"PingFangSC-Light" size:14];
-        } else {
-            addBtn.titleLabel.font = [UIFont systemFontOfSize:14];
-        }
+        addBtn.titleLabel.font = [UIFont systemFontOfSize:14];
         [addBtn addTarget:self action:@selector(addChooseNum:) forControlEvents:(UIControlEventTouchUpInside)];
         self.addBtn = addBtn;
         
@@ -360,11 +359,7 @@
         subBtn.layer.borderWidth = 1.0f;
         [subBtn setTitleColor:[UIColor colorWithHexString:titleColor] forState:(UIControlStateNormal)];
         [subBtn setTitle:@"－" forState:(UIControlStateNormal)];
-        if (IS_iOS9) {
-            subBtn.titleLabel.font = [UIFont fontWithName:@"PingFangSC-Light" size:14];
-        } else {
-            subBtn.titleLabel.font = [UIFont systemFontOfSize:14];
-        }
+        subBtn.titleLabel.font = [UIFont systemFontOfSize:14];
         [subBtn addTarget:self action:@selector(subChooseNum:) forControlEvents:(UIControlEventTouchUpInside)];
         self.subBtn = subBtn;
         
@@ -430,11 +425,7 @@
         _chooseNum = [[UILabel alloc] initWithFrame:CGRectMake(30, 40, 80, 30)];
         _chooseNum.text = @"1";
         _chooseNum.textColor = [UIColor colorWithHexString:titleColor];
-        if (IS_iOS9) {
-            _chooseNum.font = [UIFont fontWithName:@"PingFangSC-Light" size:14];
-        } else {
-            _chooseNum.font = [UIFont systemFontOfSize:14];
-        }
+        _chooseNum.font = [UIFont systemFontOfSize:14];
         _chooseNum.textAlignment = NSTextAlignmentCenter;
         _chooseNum.layer.borderColor = [UIColor colorWithHexString:titleColor alpha:.5].CGColor;
         _chooseNum.layer.borderWidth = 0.5f;

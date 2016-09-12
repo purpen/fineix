@@ -12,6 +12,9 @@
 #import "FiuSceneRow.h"
 #import "FindSceneModel.h"
 #import <SDWebImage/UIImageView+WebCache.h>
+#import <POP.h>
+#import "THNMacro.h"
+#import "THNSceneDetalViewController.h"
 
 @interface FriendTableViewCell ()<UICollectionViewDelegate,UICollectionViewDataSource,UICollectionViewDelegateFlowLayout>
 
@@ -19,30 +22,16 @@
 
 @implementation FriendTableViewCell
 
-- (void)awakeFromNib {
-    [super awakeFromNib];
-    // Initialization code
-}
-
--(void)setUI{
-    self.headImageView.image = [UIImage imageNamed:@"user"];
-    self.nameLbael.text = @"boc 747";
-}
-
-- (void)setSelected:(BOOL)selected animated:(BOOL)animated {
-    [super setSelected:selected animated:animated];
-
-    // Configure the view for the selected state
-}
 
 -(instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier{
     if (self = [super initWithStyle:style reuseIdentifier:reuseIdentifier]) {
         self.selectionStyle = UITableViewCellSelectionStyleNone;
+        self.contentView.backgroundColor = [UIColor blackColor];
         
         
         [self.contentView addSubview:self.headImageView];
         [_headImageView mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.size.mas_equalTo(CGSizeMake(32/667.0*SCREEN_HEIGHT, 32/667.0*SCREEN_HEIGHT));
+            make.size.mas_equalTo(CGSizeMake(32, 32));
             make.top.mas_equalTo(self.mas_top).with.offset(12);
             make.left.mas_equalTo(self.mas_left).with.offset(15/667.0*SCREEN_HEIGHT);
         }];
@@ -61,8 +50,8 @@
             make.top.mas_equalTo(_nameLbael.mas_bottom).with.offset(4/667.0*SCREEN_HEIGHT);
         }];
         
-        [self.contentView addSubview:self.focusBtn];
-        [_focusBtn mas_makeConstraints:^(MASConstraintMaker *make) {
+        [self.contentView addSubview:self.follow];
+        [_follow mas_makeConstraints:^(MASConstraintMaker *make) {
             make.size.mas_equalTo(CGSizeMake(72/667.0*SCREEN_HEIGHT, 26/667.0*SCREEN_HEIGHT));
             make.centerY.mas_equalTo(_headImageView.mas_centerY);
             make.right.mas_equalTo(self.mas_right).with.offset(-15/667.0*SCREEN_HEIGHT);
@@ -72,7 +61,7 @@
         [_imageCollectionView mas_makeConstraints:^(MASConstraintMaker *make) {
             make.left.mas_equalTo(self.mas_left).with.offset(0);
             make.bottom.mas_equalTo(self.mas_bottom).with.offset(0);
-            make.top.mas_equalTo(_headImageView.mas_bottom).with.offset(11/667.0*SCREEN_HEIGHT);
+            make.top.mas_equalTo(_headImageView.mas_bottom).with.offset(11);
             make.right.mas_equalTo(self.mas_right).with.offset(0);
         }];
         
@@ -80,7 +69,7 @@
         [_levelLabel mas_makeConstraints:^(MASConstraintMaker *make) {
             make.top.mas_equalTo(_nameLbael.mas_bottom).with.offset(3);
             make.left.mas_equalTo(_headImageView.mas_right).with.offset(9/667.0*SCREEN_HEIGHT);
-            make.right.mas_equalTo(self.focusBtn.mas_left).with.offset(5);
+            make.right.mas_equalTo(self.follow.mas_left).with.offset(5);
             make.height.mas_equalTo(10);
         }];
         
@@ -101,7 +90,7 @@
         } else {
             _levelLabel.font = [UIFont systemFontOfSize:9];
         }
-        _levelLabel.textColor = [UIColor lightGrayColor];
+        _levelLabel.textColor = [UIColor colorWithWhite:1 alpha:0.4];
     }
     return _levelLabel;
 }
@@ -123,9 +112,9 @@
 -(UICollectionView *)imageCollectionView{
     if (!_imageCollectionView) {
         UICollectionViewFlowLayout *layout = [[UICollectionViewFlowLayout alloc] init];
-        layout.itemSize = CGSizeMake((SCREEN_WIDTH-6)/3.0, 216/667.0*SCREEN_HEIGHT);
-        layout.sectionInset = UIEdgeInsetsMake(0, 0, 0, 5);
-        layout.minimumLineSpacing = 3;
+        layout.itemSize = CGSizeMake(SCREEN_WIDTH / 3.0, SCREEN_WIDTH / 3.0);
+        layout.sectionInset = UIEdgeInsetsMake(0, 0, 0, 0);
+        layout.minimumLineSpacing = 0;
         layout.scrollDirection = UICollectionViewScrollDirectionHorizontal;
         _imageCollectionView = [[UICollectionView alloc] initWithFrame:self.frame collectionViewLayout:layout];
         _imageCollectionView.backgroundColor = [UIColor whiteColor];
@@ -136,6 +125,48 @@
     }
     return _imageCollectionView;
 }
+
+- (UIButton *)follow {
+    if (!_follow) {
+        _follow = [UIButton buttonWithType:UIButtonTypeCustom];
+        _follow.layer.masksToBounds = YES;
+        _follow.layer.cornerRadius = 5.0f;
+        _follow.layer.borderColor = [UIColor whiteColor].CGColor;
+        _follow.layer.borderWidth = 0.5f;
+        [_follow setTitle:NSLocalizedString(@"User_follow", nil) forState:(UIControlStateNormal)];
+        [_follow setTitle:NSLocalizedString(@"User_followDone", nil) forState:(UIControlStateSelected)];
+        [_follow setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+        [_follow setTitleColor:[UIColor whiteColor] forState:UIControlStateSelected];
+        _follow.titleLabel.font = [UIFont systemFontOfSize:12];
+//        [_follow addTarget:self action:@selector(followClick:) forControlEvents:(UIControlEventTouchUpInside)];
+    }
+    return _follow;
+}
+
+//- (void)followClick:(UIButton *)button {
+//    if (button.selected == NO) {
+//        button.selected = YES;
+//        POPSpringAnimation *scaleAnimation = [POPSpringAnimation animationWithPropertyNamed:kPOPLayerScaleXY];
+//        scaleAnimation.fromValue = [NSValue valueWithCGSize:CGSizeMake(0.5, 0.5)];
+//        scaleAnimation.toValue = [NSValue valueWithCGSize:CGSizeMake(1.0, 1.0)];
+//        scaleAnimation.springBounciness = 10.f;
+//        scaleAnimation.springSpeed = 10.0f;
+//        [button.layer pop_addAnimation:scaleAnimation forKey:@"scaleAnim"];
+//        button.layer.borderColor = [UIColor colorWithHexString:MAIN_COLOR].CGColor;
+//        button.backgroundColor = [UIColor colorWithHexString:MAIN_COLOR];
+//        
+//    } else if (button.selected == YES) {
+//        button.selected = NO;
+//        POPSpringAnimation *scaleAnimation = [POPSpringAnimation animationWithPropertyNamed:kPOPLayerScaleXY];
+//        scaleAnimation.fromValue = [NSValue valueWithCGSize:CGSizeMake(0.5, 0.5)];
+//        scaleAnimation.toValue = [NSValue valueWithCGSize:CGSizeMake(1.0, 1.0)];
+//        scaleAnimation.springBounciness = 10.f;
+//        scaleAnimation.springSpeed = 10.0f;
+//        [button.layer pop_addAnimation:scaleAnimation forKey:@"scaleAnim"];
+//        button.layer.borderColor = [UIColor colorWithHexString:@"#FFFFFF" alpha:0.6].CGColor;
+//        button.backgroundColor = [UIColor colorWithHexString:BLACK_COLOR];
+//    }
+//}
 
 -(NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section{
     return 1;
@@ -148,25 +179,16 @@
 -(UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath{
     static NSString *cellId = @"FiuSceneCollectionViewCell";
     FiuSceneCollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:cellId forIndexPath:indexPath];
-    //[cell setUI];
     FindSceneModel *model = self.sceneAry[indexPath.section];
     FiuSceneRow *model1 = [[FiuSceneRow alloc] init];
     
     model1.title = model.title;
     model1.coverUrl = model.cober;
     model1.address = model.address;
-    [cell setFiuSceneList:model1];
+    cell.model = model1;
+    cell.locationIcon.hidden = YES;
     
     return cell;
-}
-
--(UIButton *)focusBtn{
-    if (!_focusBtn) {
-        _focusBtn = [[UIButton alloc] init];
-        [_focusBtn setImage:[UIImage imageNamed:@"focusOn"] forState:UIControlStateNormal];
-        [_focusBtn setImage:[UIImage imageNamed:@"hasBeenFocusedOn"] forState:UIControlStateSelected];
-    }
-    return _focusBtn;
 }
 
 -(UIImageView *)idTagsImageView{
@@ -184,6 +206,7 @@
         } else {
             _nameLbael.font = [UIFont systemFontOfSize:11];
         }
+        _nameLbael.textColor = [UIColor colorWithWhite:1 alpha:1];
     }
     return _nameLbael;
 }
@@ -195,6 +218,13 @@
         _headImageView.layer.cornerRadius = 16/667.0*SCREEN_HEIGHT;
     }
     return _headImageView;
+}
+
+-(void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath{
+    THNSceneDetalViewController *vc = [[THNSceneDetalViewController alloc] init];
+    FindSceneModel *model = self.sceneAry[indexPath.section];
+    vc.sceneDetalId = [NSString stringWithFormat:@"%@",model.id];
+    [self.navi pushViewController:vc animated:YES];
 }
 
 @end

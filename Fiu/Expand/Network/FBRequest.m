@@ -444,6 +444,8 @@ static BOOL                           _canSendMessage      = YES;
                                             } else {
                                                 [SVProgressHUD showInfoWithStatus:responseObject[@"message"]];
                                             }
+                                            
+//                                            success(weakSelf, responseObject);
                                         }
                                         failure:^(AFHTTPRequestOperation *operation, NSError *error) {
                                             weakSelf.isRunning = NO;

@@ -22,10 +22,13 @@
 -(instancetype)initWithDictionary:(NSDictionary *)dictionary
 {
 	self = [super init];
-	if(![dictionary[@"_id"] isKindOfClass:[NSNull class]]){
-		self.idField = [[FiuBrandId alloc] initWithDictionary:dictionary[@"_id"]];
-	}
-
+//	if(![dictionary[@"_id"] isKindOfClass:[NSNull class]]){
+//		self.idField = [[FiuBrandId alloc] initWithDictionary:dictionary[@"_id"]];
+//	}
+    if(![dictionary[@"_id"] isKindOfClass:[NSNull class]]){
+        self.idx = dictionary[@"_id"];
+    }
+    
 	if(![dictionary[@"brands_size_type"] isKindOfClass:[NSNull class]]){
 		self.brandsSizeType = [dictionary[@"brands_size_type"] integerValue];
 	}

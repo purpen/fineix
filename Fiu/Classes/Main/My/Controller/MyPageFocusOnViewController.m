@@ -49,6 +49,8 @@
         [self requestDataForOderList];
     }];
     
+    [self.mytableView.mj_header beginRefreshing];
+    
     //上拉加载更多
     self.mytableView.mj_footer = [MJRefreshAutoNormalFooter footerWithRefreshingBlock:^{
         if (_currentPageNumber < _totalPageNumber) {
@@ -67,7 +69,6 @@
 {
     _currentPageNumber = 0;
     [_modelAry removeAllObjects];
-    [SVProgressHUD showWithMaskType:SVProgressHUDMaskTypeClear];
     
     [self requestDataForOderListOperation];
 }
@@ -76,7 +77,7 @@
 - (void)requestDataForOderListOperation
 {
     
-    FBRequest *request = [FBAPI postWithUrlString:@"/follow" requestDictionary:@{@"page":@(_currentPageNumber+1),@"size":@15,@"user_id":self.userId,@"find_type":@1} delegate:self];
+    FBRequest *request = [FBAPI postWithUrlString:@"/follow" requestDictionary:@{@"page":@(_currentPageNumber+1),@"size":@30,@"user_id":self.userId,@"find_type":@1} delegate:self];
     [request startRequestSuccess:^(FBRequest *request, id result) {
         NSDictionary *dataDict = [result objectForKey:@"data"];
         NSArray *rowsAry = [dataDict objectForKey:@"rows"];
@@ -144,7 +145,6 @@
                 [self.mytableView.mj_footer endRefreshing];
             }
         }
-        [SVProgressHUD dismiss];
     } failure:^(FBRequest *request, NSError *error) {
         [SVProgressHUD showInfoWithStatus:[error localizedDescription]];
     }];
@@ -164,21 +164,14 @@
 -(void)requestSucess:(FBRequest *)request result:(id)result{
    if ([request.flag isEqualToString:@"/follow/ajax_follow"]){
         if ([result objectForKey:@"success"]) {
-            [SVProgressHUD showSuccessWithStatus:@"关注成功"];
         }else{
-            [SVProgressHUD showErrorWithStatus:@"关注失败"];
-        }
-    }else if ([request.flag isEqualToString:@"/follow/ajax_cancel_follow"]){
-        if ([result objectForKey:@"success"]) {
-            [SVProgressHUD showSuccessWithStatus:@"取消关注"];
-        }else{
-            [SVProgressHUD showErrorWithStatus:@"连接失败"];
         }
     }
 }
 
 -(void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
+    [UIApplication sharedApplication].statusBarStyle = UIStatusBarStyleLightContent;
     //self.navigationController.navigationBarHidden = NO;
     //进行网络请求
     [self requestDataForOderList];
@@ -191,6 +184,7 @@
 -(UITableView *)mytableView{
     if (!_mytableView) {
         _mytableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 64, SCREEN_WIDTH, SCREEN_HEIGHT-64) style:UITableViewStylePlain];
+        _mytableView.backgroundColor = [UIColor colorWithHexString:@"#F7F7F7"];
         self.mytableView.delegate = self;
         self.mytableView.dataSource = self;
         self.mytableView.separatorStyle = UITableViewCellSeparatorStyleNone;
@@ -250,7 +244,6 @@
         //请求数据
         FBRequest *request = [FBAPI postWithUrlString:@"/follow/ajax_follow" requestDictionary:@{@"follow_id":model.userId} delegate:self];
         [request startRequestSuccess:^(FBRequest *request, id result) {
-            [SVProgressHUD showSuccessWithStatus:@"关注成功"];
             model.is_love = 1;
             [self.mytableView reloadRowsAtIndexPaths:[NSArray arrayWithObjects:[NSIndexPath indexPathForRow:sender.tag inSection:0], nil] withRowAnimation:UITableViewRowAnimationNone];
         } failure:^(FBRequest *request, NSError *error) {
@@ -265,8 +258,15 @@
     model.is_love = 0;
     [self.mytableView reloadRowsAtIndexPaths:[NSArray arrayWithObjects:[NSIndexPath indexPathForRow:sender.tag inSection:0], nil] withRowAnimation:UITableViewRowAnimationNone];
     FBRequest *request = [FBAPI postWithUrlString:@"/follow/ajax_cancel_follow" requestDictionary:@{@"follow_id":model.userId} delegate:self];
-    request.flag = @"/follow/ajax_cancel_follow";
-    [request startRequest];
+    [request startRequestSuccess:^(FBRequest *request, id result) {
+        if ([result objectForKey:@"success"]) {
+//            FocusOnTableViewCell *cell = [self.mytableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:sender.tag inSection:0]];
+//            cell.focusOnBtn.backgroundColor = [UIColor whiteColor];
+//            cell.focusOnBtn.layer.borderWidth = 1;
+//            cell.focusOnBtn.layer.borderColor = [UIColor lightGrayColor].CGColor;
+        }else{
+        }
+    } failure:nil];
 }
 
 -(void)clickCancelBtn:(UIButton*)sender{

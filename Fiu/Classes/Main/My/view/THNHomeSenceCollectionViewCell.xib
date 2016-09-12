@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="10117" systemVersion="15C50" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="B5T-vE-p2a" customClass="THNHomeSenceCollectionViewCell">
+            <rect key="frame" x="0.0" y="0.0" width="315" height="289"/>
+            <autoresizingMask key="autoresizingMask"/>
+            <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                <rect key="frame" x="0.0" y="0.0" width="315" height="289"/>
+                <subviews>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="aiP-It-8vX">
+                        <rect key="frame" x="0.0" y="0.0" width="315" height="289"/>
+                    </imageView>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="right" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="chi-ge-6oB">
+                        <rect key="frame" x="0.0" y="279" width="0.0" height="0.0"/>
+                        <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.80000000000000004" colorSpace="calibratedRGB"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="21" id="R5g-HT-qBe"/>
+                            <constraint firstAttribute="width" constant="152" id="gr2-yJ-19C"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                        <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <nil key="highlightedColor"/>
+                        <variation key="default">
+                            <mask key="constraints">
+                                <exclude reference="gr2-yJ-19C"/>
+                            </mask>
+                        </variation>
+                    </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tTa-i0-cWK">
+                        <rect key="frame" x="0.0" y="281" width="0.0" height="0.0"/>
+                        <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.80000000000000004" colorSpace="calibratedRGB"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="21" id="YIy-Pp-PwP"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                        <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                </subviews>
+                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+            </view>
+            <constraints>
+                <constraint firstItem="tTa-i0-cWK" firstAttribute="leading" secondItem="B5T-vE-p2a" secondAttribute="leading" id="0bo-Zf-HHk"/>
+                <constraint firstItem="chi-ge-6oB" firstAttribute="leading" secondItem="B5T-vE-p2a" secondAttribute="leading" id="6tc-eB-Gk1"/>
+                <constraint firstAttribute="trailing" secondItem="aiP-It-8vX" secondAttribute="trailing" id="UeH-hO-huE"/>
+                <constraint firstItem="aiP-It-8vX" firstAttribute="leading" secondItem="B5T-vE-p2a" secondAttribute="leading" id="kBN-b2-WN9"/>
+                <constraint firstItem="aiP-It-8vX" firstAttribute="top" secondItem="B5T-vE-p2a" secondAttribute="top" id="luX-vh-euS"/>
+                <constraint firstAttribute="bottom" secondItem="tTa-i0-cWK" secondAttribute="bottom" constant="8" id="mBV-zU-sC9"/>
+                <constraint firstAttribute="bottom" secondItem="aiP-It-8vX" secondAttribute="bottom" id="qHp-nM-YOr"/>
+                <constraint firstItem="tTa-i0-cWK" firstAttribute="top" secondItem="chi-ge-6oB" secondAttribute="bottom" constant="2" id="sPd-HF-JTH"/>
+            </constraints>
+            <size key="customSize" width="315" height="289"/>
+            <connections>
+                <outlet property="bgImageView" destination="aiP-It-8vX" id="cgh-Pz-d1R"/>
+                <outlet property="titleLabel" destination="tTa-i0-cWK" id="3os-cV-5mg"/>
+                <outlet property="titleTwoLabel" destination="chi-ge-6oB" id="tro-M5-O72"/>
+            </connections>
+            <point key="canvasLocation" x="273.5" y="340.5"/>
+        </collectionViewCell>
+    </objects>
+</document>

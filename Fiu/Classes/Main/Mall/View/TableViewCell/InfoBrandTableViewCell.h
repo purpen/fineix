@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import "Fiu.h"
-#import "GoodsInfoData.h"
+#import "FBGoodsInfoModelData.h"
 
 @interface InfoBrandTableViewCell : UITableViewCell
 
@@ -16,6 +16,6 @@
 @pro_strong UILabel                 *   brandTitle;     //  品牌名称
 @pro_strong UIImageView             *   nextIcon;       //  指示图标
 
-- (void)setGoodsBrandData:(GoodsInfoData *)model;
+- (void)setGoodsBrandData:(FBGoodsInfoModelData *)model;
 
 @end

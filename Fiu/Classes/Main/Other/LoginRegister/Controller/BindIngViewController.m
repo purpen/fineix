@@ -18,8 +18,7 @@
 #import "WXApi.h"
 #import "WeiboSDK.h"
 #import <TencentOpenAPI/QQApiInterface.h>
-#import "ImprovViewController.h"
-#import "SubscribeInterestedCollectionViewController.h"
+#import "THNInformationViewController.h"
 
 @interface BindIngViewController ()<UITextFieldDelegate>
 
@@ -30,6 +29,7 @@
 @end
 NSString *thirdRegistrationBindingMobilePhone = @"/auth/third_register_with_phone";
 static NSString *const thirdRegisteredNotBinding = @"/auth/third_register_without_phone";//第三方快捷注册(不绑定手机号)接口
+static NSString * const XMGPlacerholderColorKeyPath = @"_placeholderLabel.textColor";
 @implementation BindIngViewController
 
 - (void)viewDidLoad {
@@ -41,15 +41,15 @@ static NSString *const thirdRegisteredNotBinding = @"/auth/third_register_withou
     self.phoneNumTF.delegate = self;
     self.pwdTF.delegate = self;
     
-}
-
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
+    [self.phoneNumTF setValue:[UIColor colorWithHexString:@"#8B8B8B"] forKeyPath:XMGPlacerholderColorKeyPath];
+    self.phoneNumTF.tintColor = [UIColor whiteColor];
+    [self.pwdTF setValue:[UIColor colorWithHexString:@"#8B8B8B"] forKeyPath:XMGPlacerholderColorKeyPath];
+    self.pwdTF.tintColor = [UIColor whiteColor];
 }
 
 
 - (IBAction)clickBingBtn:(UIButton *)sender {
+    [SVProgressHUD showWithMaskType:SVProgressHUDMaskTypeClear];
     //判断手机号格式
     if ([self.phoneNumTF.text checkTel]) {
         //如果手机号格式正确判断密码格式
@@ -89,7 +89,7 @@ static NSString *const thirdRegisteredNotBinding = @"/auth/third_register_withou
                 if ([[identifyDict objectForKey:@"is_scene_subscribe"] isEqualToNumber:@0]) {
                     //跳转到推荐界面
 //                    SubscribeInterestedCollectionViewController *subscribeVC = [[SubscribeInterestedCollectionViewController alloc] init];
-                    ImprovViewController *vc = [[ImprovViewController alloc] init];
+                    THNInformationViewController *vc = [[THNInformationViewController alloc] init];
                     [self.navigationController pushViewController:vc animated:YES];
                 }else{
                     [self dismissViewControllerAnimated:YES completion:nil];
@@ -111,12 +111,8 @@ static NSString *const thirdRegisteredNotBinding = @"/auth/third_register_withou
     [self.navigationController popViewControllerAnimated:YES];
 }
 
-
-- (IBAction)cancelBtn:(UIButton *)sender {
-     [self dismissViewControllerAnimated:YES completion:nil];
-}
-
 - (IBAction)loginBtn:(UIButton *)sender {
+    [SVProgressHUD showWithMaskType:SVProgressHUDMaskTypeClear];
     //发送请求来存储用户信息
     NSDictionary *params;
     if ([self.type isEqualToNumber:@1]) {
@@ -155,10 +151,13 @@ static NSString *const thirdRegisteredNotBinding = @"/auth/third_register_withou
         UserInfoEntity *entity = [UserInfoEntity defaultUserInfoEntity];
         entity.isLogin = YES;
         [SVProgressHUD showSuccessWithStatus:NSLocalizedString(@"registeredSuccessfully", nil)];
-        //跳转到推荐界面
-//        SubscribeInterestedCollectionViewController *subscribeVC = [[SubscribeInterestedCollectionViewController alloc] init];
-        ImprovViewController *vc = [[ImprovViewController alloc] init];
-        [self.navigationController pushViewController:vc animated:YES];
+        NSString *str = dataDic[@"identify"][@"is_scene_subscribe"];
+        if ([str integerValue] == 0) {
+            THNInformationViewController *vc = [[THNInformationViewController alloc] init];
+            [self.navigationController pushViewController:vc animated:YES];
+        }else{
+            [self dismissViewControllerAnimated:YES completion:nil];
+        } 
     } failure:^(FBRequest *request, NSError *error) {
         //如果请求失败提示失败信息
         [SVProgressHUD showErrorWithStatus:error.localizedDescription];
@@ -166,14 +165,5 @@ static NSString *const thirdRegisteredNotBinding = @"/auth/third_register_withou
 
 }
 
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
 
 @end

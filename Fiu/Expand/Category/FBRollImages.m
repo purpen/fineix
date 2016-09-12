@@ -7,10 +7,8 @@
 //
 
 #import "FBRollImages.h"
-#import "SceneInfoViewController.h"
-#import "FiuSceneViewController.h"
-#import "GoodsInfoViewController.h"
-#import "ProjectViewController.h"
+#import "FBGoodsInfoViewController.h"
+#import "THNProjectViewController.h"
 
 
 @implementation FBRollImages
@@ -24,7 +22,7 @@
         
         [self addSubview:self.rollImageView];
         [_rollImageView mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.size.mas_equalTo(CGSizeMake(SCREEN_WIDTH, Banner_height));
+            make.size.mas_equalTo(CGSizeMake(SCREEN_WIDTH, SCREEN_WIDTH *0.56));
             make.top.equalTo(self.mas_top).with.offset(0);
             make.left.equalTo(self.mas_left).with.offset(0);
         }];
@@ -69,33 +67,31 @@
 
 - (void)cycleScrollView:(SDCycleScrollView *)cycleScrollView didSelectItemAtIndex:(NSInteger)index {
     if (self.typeMarr.count > 0) {
-        NSString * type = self.typeMarr[index];
+        NSInteger type = [self.typeMarr[index] integerValue];
         NSString * ids = self.targetIdMarr[index];
-        if ([type isEqualToString:@"8"]) {
-            SceneInfoViewController * sceneInfoVC = [[SceneInfoViewController alloc] init];
-            sceneInfoVC.sceneId = ids;
-            [self.navVC pushViewController:sceneInfoVC animated:YES];
-            
-        } else if ([type isEqualToString:@"9"]) {
-            GoodsInfoViewController * goodsInfoVC = [[GoodsInfoViewController alloc] init];
+        
+        if (type == 8) {
+
+        } else if (type == 9) {
+            FBGoodsInfoViewController * goodsInfoVC = [[FBGoodsInfoViewController alloc] init];
             goodsInfoVC.goodsID = ids;
             [self.navVC pushViewController:goodsInfoVC animated:YES];
             
-        } else if ([type isEqualToString:@"10"]) {
-            FiuSceneViewController * fiuSceneVC = [[FiuSceneViewController alloc] init];
-            fiuSceneVC.fiuSceneId = ids;
-            [self.navVC pushViewController:fiuSceneVC animated:YES];
-        } else if ([type isEqualToString:@"11"]){
-            ProjectViewController *vc = [[ProjectViewController alloc] init];
-            vc.projectId = ids;
-            [self.navVC pushViewController:vc animated:YES];
-        } else if ([type isEqualToString:@"1"]){
+        } else if (type == 10) {
+            
+        } else if (type == 11){
+            self.getProjectType(ids);
+            
+        } else if (type == 1){
             BOOL isExsit = [[UIApplication sharedApplication] canOpenURL:[NSURL URLWithString:ids]];
             if (isExsit) {
                 [[UIApplication sharedApplication] openURL:[NSURL URLWithString:ids]];
             }
 
         }
+        
+    } else {
+        NSLog(@"商品打开大图");
     }
 }
 

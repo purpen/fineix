@@ -40,12 +40,19 @@
 
 static NSString *const EditAddressURL = @"/shopping/ajax_address";
 static NSString *const DeleteAddressURL = @"/shopping/remove_address";
+static NSString * const FSPlacerholderColorKeyPath = @"_placeholderLabel.textColor";
 
 @implementation EditAddressViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.delegate = self;
+    
+    [self changePlaceHolderColor:self.nameTF];
+    [self changePlaceHolderColor:self.phoneNumTF];
+    [self changePlaceHolderColor:self.addressTF];
+    [self changePlaceHolderColor:self.detailsAddressTF];
+    [self changePlaceHolderColor:self.zipTF];
     
     // Do any additional setup after loading the view from its nib.
     if (self.deliveryAddress) {
@@ -61,7 +68,7 @@ static NSString *const DeleteAddressURL = @"/shopping/remove_address";
         self.addressSwicth.on = self.deliveryAddress.isDefault;
         self.detailsAddressTF.text = self.deliveryAddress.address;
     } else {
-        self.navViewTitle.text = @"新增收货地址";
+        self.navViewTitle.text = @"新建收货地址";
         [self addBarItemRightBarButton:@"" image:nil isTransparent:NO];
         self.addressTF.hidden = NO;
     }
@@ -69,6 +76,10 @@ static NSString *const DeleteAddressURL = @"/shopping/remove_address";
     self.cityId = self.deliveryAddress.city;
     //通知
     //[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyBoardWillChangeFrame:) name:UIKeyboardWillChangeFrameNotification object:nil];
+}
+
+-(void)changePlaceHolderColor:(UITextField*)tf{
+    [tf setValue:tf.textColor forKeyPath:FSPlacerholderColorKeyPath];
 }
 
 -(BOOL)textFieldShouldReturn:(UITextField *)textField{
@@ -91,8 +102,6 @@ static NSString *const DeleteAddressURL = @"/shopping/remove_address";
 
 -(void)clickAddreesPickerBtn:(UIButton*)sender{
     self.addressTF.hidden = YES;
-    //拿到ID名称 更新列表，更新服务器上的 然后消失
-    //self.addressTF.text = [NSString stringWithFormat:@"%@ %@",self.addreesPickerVC.provinceStr,self.addreesPickerVC.cityStr];
     self.prinLabel.text = self.addreesPickerVC.provinceStr;
     self.cityLabel.text = self.addreesPickerVC.cityStr;
     self.provinceId = self.addreesPickerVC.provinceId;

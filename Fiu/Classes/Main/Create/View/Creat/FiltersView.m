@@ -60,7 +60,7 @@
         flowLayout.sectionInset = UIEdgeInsetsMake(0, 7.5, 0, 7.5);
         flowLayout.minimumInteritemSpacing = 2.0;
         flowLayout.minimumLineSpacing = 2.0;
-        flowLayout.scrollDirection = UICollectionViewScrollDirectionHorizontal; //  设置横向滑动
+        flowLayout.scrollDirection = UICollectionViewScrollDirectionHorizontal;
         
         _filtersCollectionView = [[UICollectionView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 120) collectionViewLayout:flowLayout];
         _filtersCollectionView.backgroundColor = [UIColor colorWithHexString:@"#000000" alpha:.7];

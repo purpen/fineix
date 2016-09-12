@@ -27,7 +27,6 @@
     UIView * bgView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 210)];
     bgView.backgroundColor = [UIColor colorWithHexString:@"#555555" alpha:.2];
     [_brandBgImg addSubview:bgView];
-    
     [self.brandImg downloadImage:model.coverUrl place:[UIImage imageNamed:@""]];
     [self changeContentLabStyle:self.brandIntroduce withText:[NSString stringWithFormat:@"%@", model.des]];
 }
@@ -109,11 +108,7 @@
     if (!_brandIntroduce) {
         _brandIntroduce = [[UILabel alloc] init];
         _brandIntroduce.textColor = [UIColor colorWithHexString:@"#555555"];
-        if (IS_iOS9) {
-            _brandIntroduce.font = [UIFont fontWithName:@"PingFangSC-Light" size:Font_Tag];
-        } else {
-            _brandIntroduce.font = [UIFont systemFontOfSize:Font_Tag];
-        }
+        _brandIntroduce.font = [UIFont systemFontOfSize:12];
         _brandIntroduce.numberOfLines = 0;
     }
     return _brandIntroduce;

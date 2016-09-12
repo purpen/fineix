@@ -7,9 +7,9 @@
 //
 
 #import "GroupHeaderView.h"
-#import "AllSceneViewController.h"
 #import "FiuPeopleListViewController.h"
 #import "FiuBrandListViewController.h"
+#import "THNProjectViewController.h"
 
 @implementation GroupHeaderView
 
@@ -18,7 +18,6 @@
     if (self) {
         
         self.backgroundColor = [UIColor colorWithHexString:@"#FFFFFF" alpha:1];
-        
         [self setUI];
         
     }
@@ -36,11 +35,17 @@
     self.headerTitle.text = title;
     self.subTitle.text = subTitle;
     if (more.length > 0) {
-        self.moreBtn.hidden = NO;
         [self.moreBtn setTitle:more forState:(UIControlStateNormal)];
     } else {
-        self.moreBtn.hidden = YES;
+        [self.moreBtn setImage:[UIImage imageNamed:@"icon_Next"] forState:(UIControlStateNormal)];
     }
+    
+    if (openType == 0) {
+        self.moreBtn.hidden = YES;
+    } else {
+        self.moreBtn.hidden = NO;
+    }
+    
     CGFloat titleLength = [title boundingRectWithSize:CGSizeMake(320, 1000) options:(NSStringDrawingUsesLineFragmentOrigin) attributes:nil context:nil].size.width;
     [_headerTitle mas_updateConstraints:^(MASConstraintMaker *make) {
         make.size.mas_equalTo(CGSizeMake(titleLength * 1.3, 15));
@@ -51,14 +56,14 @@
     [self addSubview:self.icon];
     [_icon mas_makeConstraints:^(MASConstraintMaker *make) {
         make.size.mas_equalTo(CGSizeMake(17.5, 18));
-        make.centerY.equalTo(self);
+        make.centerY.equalTo(self.mas_centerY).with.offset(3);
         make.left.equalTo(self.mas_left).with.offset(15);
     }];
     
     [self addSubview:self.headerTitle];
     [_headerTitle mas_makeConstraints:^(MASConstraintMaker *make) {
         make.size.mas_equalTo(CGSizeMake(65, 15));
-        make.centerY.equalTo(self);
+        make.centerY.equalTo(_icon);
         make.left.equalTo(self.icon.mas_right).with.offset(7);
     }];
     
@@ -70,10 +75,9 @@
     }];
     
     [self addSubview:self.moreBtn];
-    _moreBtn.hidden = YES;
     [_moreBtn mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.size.mas_equalTo(CGSizeMake(50, 44));
-        make.centerY.equalTo(self);
+        make.size.mas_equalTo(CGSizeMake(200, 20));
+        make.centerY.equalTo(_icon);
         make.right.equalTo(self.mas_right).with.offset(-10);
     }];
 }
@@ -88,7 +92,7 @@
 - (UILabel *)headerTitle {
     if (!_headerTitle) {
         _headerTitle = [[UILabel alloc] init];
-        _headerTitle.textColor = [UIColor colorWithHexString:@"#222222" alpha:1];
+        _headerTitle.textColor = [UIColor colorWithHexString:@"#000000"];
         _headerTitle.font = [UIFont systemFontOfSize:14];
     }
     return _headerTitle;
@@ -97,12 +101,8 @@
 - (UILabel *)subTitle {
     if (!_subTitle) {
         _subTitle = [[UILabel alloc] init];
-        _subTitle.textColor = [UIColor colorWithHexString:@"#666666" alpha:1];
-        if (IS_iOS9) {
-            _subTitle.font = [UIFont fontWithName:@"PingFangSC-Light" size:11];
-        } else {
-            _subTitle.font = [UIFont systemFontOfSize:11];
-        }
+        _subTitle.textColor = [UIColor colorWithHexString:@"#666666"];
+        _subTitle.font = [UIFont systemFontOfSize:11];
     }
     return _subTitle;
 }
@@ -110,34 +110,19 @@
 - (UIButton *)moreBtn {
     if (!_moreBtn) {
         _moreBtn = [[UIButton alloc] init];
-        [_moreBtn setTitle:NSLocalizedString(@"lookAll", nil) forState:(UIControlStateNormal)];
         [_moreBtn setTitleColor:[UIColor colorWithHexString:@"#666666" alpha:1] forState:(UIControlStateNormal)];
-        if (IS_iOS9) {
-            _moreBtn.titleLabel.font = [UIFont fontWithName:@"PingFangSC-Light" size:12];
-        } else {
-            _moreBtn.titleLabel.font = [UIFont systemFontOfSize:12];
-        }
+        _moreBtn.titleLabel.font = [UIFont systemFontOfSize:12];
+        [_moreBtn setImageEdgeInsets:(UIEdgeInsetsMake(0, 180, 0, 0))];
         [_moreBtn addTarget:self action:@selector(moreFiuScene) forControlEvents:(UIControlEventTouchUpInside)];
     }
     return _moreBtn;
 }
 
 - (void)moreFiuScene {
-    
-    if (self.openType == 0) {
-        AllSceneViewController * allSceneVC = [[AllSceneViewController alloc] init];
-        [self.nav pushViewController:allSceneVC animated:YES];
-        
-    } else if (self.openType == 1) {
-        FiuPeopleListViewController * peopleListVC = [[FiuPeopleListViewController alloc] init];
-        [self.nav pushViewController:peopleListVC animated:YES];
-        
-    } else if (self.openType == 2) {
-        FiuBrandListViewController * brandListVC = [[FiuBrandListViewController alloc] init];
-        [self.nav pushViewController:brandListVC animated:YES];
-        
+    if (self.openType == 1) {
+        THNProjectViewController *projectVC = [[THNProjectViewController alloc] init];
+        [self.nav pushViewController:projectVC animated:YES];
     }
-    
 }
 
 @end

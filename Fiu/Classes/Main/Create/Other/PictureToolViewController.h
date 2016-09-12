@@ -11,13 +11,9 @@
 
 @interface PictureToolViewController : UINavigationController
 
-/*
- *  创建的类型
- *  @param  scene   场景
- *  @param  fScene  情景
- */
-@pro_strong NSString            *   createType;
-@pro_strong NSString            *   fSceneId;
-@pro_strong NSString            *   fSceneTitle;
+/** 活动ID */
+@pro_strong NSString *actionId;
+/** 活动标题 */
+@pro_strong NSString *activeTitle;
 
 @end

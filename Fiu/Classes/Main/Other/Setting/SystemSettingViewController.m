@@ -26,6 +26,7 @@
 #import "WeiboSDK.h"
 #import <TencentOpenAPI/QQApiInterface.h>
 #import "UITabBar+badge.h"
+#import "ServiceViewController.h"
 
 static NSString *const ShareURlText = @"我在Fiu浮游™寻找同路人；希望和你一起用文字来记录内心情绪，用滤镜来表达情感色彩，用分享去变现原创价值；带你发现美学科技的力量和感性生活的温度！来吧，去Fiu一下 >>> http://m.taihuoniao.com/fiu";
 
@@ -34,6 +35,7 @@ static NSString *const ShareURlText = @"我在Fiu浮游™寻找同路人；希�
 @property (weak, nonatomic) IBOutlet UILabel *pushStateLabel;
 @property (weak, nonatomic) IBOutlet UIButton *backBtn;
 @property (weak, nonatomic) IBOutlet UILabel *memoryLabel;
+@property (weak, nonatomic) IBOutlet UIView *quitBtn;
 
 @end
 static NSString *const ShareURL = @"http://m.taihuoniao.com/guide/app_about";
@@ -42,6 +44,8 @@ static NSString *const logOut = @"/auth/logout";
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    self.quitBtn.layer.masksToBounds = YES;
+    self.quitBtn.layer.cornerRadius = 3;
     self.view.backgroundColor = [UIColor colorWithHexString:grayLineColor];
     // Do any additional setup after loading the view from its nib
     //设置导航
@@ -65,6 +69,10 @@ static NSString *const logOut = @"/auth/logout";
     self.memoryLabel.text = [NSString stringWithFormat:@"%.1fM", [self folderSizeAtPath:cachesPath]];
 }
 
+- (IBAction)service:(id)sender {
+    ServiceViewController *vc = [[ServiceViewController alloc] init];
+    [self.navigationController pushViewController:vc animated:YES];
+}
 
 -(void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
@@ -161,8 +169,12 @@ static NSString *const logOut = @"/auth/logout";
 
 
 - (IBAction)aboutBtn:(UIButton *)sender {
+    
     AboutViewController *vc = [[AboutViewController alloc] init];
     [self.navigationController pushViewController:vc animated:YES];
+    
+    
+    
 }
 
 
@@ -245,9 +257,13 @@ static NSString *const logOut = @"/auth/logout";
         //回到首页
         //圆点消失
         [self.tabBarController.tabBar hideBadgeWithIndex:4];
+        
         [self.tabBarController setSelectedIndex:0];
+        
+        [self.navigationController popViewControllerAnimated:YES];
     }
 }
+
 
 -(void)resetNotificationState{
     UIUserNotificationSettings *setting = [[UIApplication sharedApplication] currentUserNotificationSettings];
@@ -258,19 +274,7 @@ static NSString *const logOut = @"/auth/logout";
     }
 }
 
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
-}
 
-/*
-#pragma mark - Navigation
 
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
 
 @end

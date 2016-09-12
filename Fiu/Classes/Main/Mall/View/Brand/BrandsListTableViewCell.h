@@ -14,6 +14,7 @@
 
 @pro_strong UIImageView     *   brandImg;
 @pro_strong UILabel         *   brandName;
+@pro_strong UILabel         *   content;
 
 - (void)setBrandListData:(BrandListModel *)model;
 

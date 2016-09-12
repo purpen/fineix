@@ -74,6 +74,8 @@
 - (UIImageView *)goodsImg {
     if (!_goodsImg) {
         _goodsImg = [[UIImageView alloc] init];
+        _goodsImg.contentMode = UIViewContentModeScaleAspectFill;
+        _goodsImg.clipsToBounds = YES;
     }
     return _goodsImg;
 }

@@ -10,8 +10,10 @@
 #import "SDCycleScrollView.h"
 #import "Fiu.h"
 #import "GoodsInfoData.h"
-#import "RollImageRow.h"
 #import "FBGoodsInfoModelData.h"
+#import "RollImageRow.h"
+
+typedef void(^GetProjectTypeBlock)(NSString *idx);
 
 @interface FBRollImages : UIView <SDCycleScrollViewDelegate>
 
@@ -22,6 +24,7 @@
 @pro_strong NSMutableArray                 *       imgMarr;
 @pro_strong NSMutableArray                 *       targetIdMarr;
 @pro_strong NSMutableArray                 *       typeMarr;
+@pro_copy GetProjectTypeBlock getProjectType;
 
 - (void)setRollimageView:(NSMutableArray *)model;
 

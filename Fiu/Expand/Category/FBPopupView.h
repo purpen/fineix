@@ -8,12 +8,14 @@
 
 #import <UIKit/UIKit.h>
 #import "Fiu.h"
+#import "HomeSceneListRow.h"
 
 @interface FBPopupView : UIView
 
 @pro_strong UIViewController    *   vc;
+@pro_strong NSString            *   sceneId;
 
-- (void)showPopupViewOnWindowStyleOne:(NSString *)text withSceneData:(NSDictionary *)data;
+- (void)showPopupViewOnWindowStyleOne:(NSString *)text;
 
 - (void)showPopupViewOnWindowStyleTwo:(NSString *)text withAddJifen:(NSInteger)num;
 

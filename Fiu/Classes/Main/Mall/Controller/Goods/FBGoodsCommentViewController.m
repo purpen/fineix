@@ -13,7 +13,9 @@
 
 static NSString *const URLComment = @"/comment/getlist";
 
-@interface FBGoodsCommentViewController ()
+@interface FBGoodsCommentViewController () {
+    NSString *_idx;
+}
 
 @pro_strong NSMutableArray      *   commentListMarr;    //  评论列表
 
@@ -33,15 +35,14 @@ static NSString *const URLComment = @"/comment/getlist";
     [self.view addSubview:self.commentTabel];
     
     self.currentpageNum = 0;
-    [self networkSceneCommenstData];
-    
 }
 
 #pragma mark - 网络请求
 #pragma mark 请求评论
-- (void)networkSceneCommenstData {
+- (void)networkSceneCommenstData:(NSString *)targetId {
+    _idx = targetId;
     [SVProgressHUD show];
-    self.commentRequest = [FBAPI getWithUrlString:URLComment requestDictionary:@{@"target_id":self.targetId, @"page":@(self.currentpageNum + 1), @"type":@"4", @"size":@"20", @"sort":@"1"} delegate:self];
+    self.commentRequest = [FBAPI getWithUrlString:URLComment requestDictionary:@{@"target_id":targetId, @"page":@(self.currentpageNum + 1), @"type":@"4", @"size":@"20", @"sort":@"1"} delegate:self];
     [self.commentRequest startRequestSuccess:^(FBRequest *request, id result) {
         NSArray * sceneArr = [[result valueForKey:@"data"] valueForKey:@"rows"];
         for (NSDictionary * sceneDic in sceneArr) {
@@ -94,12 +95,12 @@ static NSString *const URLComment = @"/comment/getlist";
     table.mj_header = [MJRefreshNormalHeader headerWithRefreshingBlock:^{
         self.currentpageNum = 0;
         [self.commentListMarr removeAllObjects];
-        [self networkSceneCommenstData];
+        [self networkSceneCommenstData:_idx];
     }];
     
     table.mj_footer = [MJRefreshAutoNormalFooter footerWithRefreshingBlock:^{
         if (self.currentpageNum < self.totalPageNum) {
-            [self networkSceneCommenstData];
+            [self networkSceneCommenstData:_idx];
         } else {
             table.mj_footer.state = MJRefreshStateNoMoreData;
         }
@@ -125,7 +126,7 @@ static NSString *const URLComment = @"/comment/getlist";
 #pragma mark 评论列表
 - (UITableView *)commentTabel {
     if (!_commentTabel) {
-        _commentTabel = [[UITableView alloc] initWithFrame:CGRectMake(0, 64, SCREEN_WIDTH, SCREEN_HEIGHT - 64) style:(UITableViewStylePlain)];
+        _commentTabel = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT - 152) style:(UITableViewStylePlain)];
         _commentTabel.delegate = self;
         _commentTabel.dataSource = self;
         _commentTabel.showsVerticalScrollIndicator = NO;
@@ -154,8 +155,10 @@ static NSString *const URLComment = @"/comment/getlist";
 #pragma mark - 设置Nav
 - (void)setNavigationViewUI {
     self.view.backgroundColor = [UIColor whiteColor];
-    self.navViewTitle.text = NSLocalizedString(@"CommentVcTitle", nil);
+//    self.navViewTitle.text = NSLocalizedString(@"CommentVcTitle", nil);
+    self.navView.hidden = YES;
     [[UIApplication sharedApplication] setStatusBarHidden:NO withAnimation:(UIStatusBarAnimationSlide)];
+    self.view.frame = CGRectMake(SCREEN_WIDTH * 2, 0, SCREEN_WIDTH, SCREEN_HEIGHT - 152);
 }
 
 - (void)viewWillDisappear:(BOOL)animated {

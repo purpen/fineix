@@ -7,13 +7,11 @@
 //
 
 #import "PictureToolViewController.h"
-#import "CreateViewController.h"
-#import "CropImageViewController.h"
-#import "FiltersViewController.h"
 #import "ReleaseViewController.h"
+#import "ClipImageViewController.h"
 
 @interface PictureToolViewController () {
-    CreateViewController        * _createVC;
+    ClipImageViewController *_clipImageVC;
 }
 
 @end
@@ -23,13 +21,10 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.navigationBar.hidden = YES;
-    
-    _createVC = [[CreateViewController alloc] init];
-    _createVC.createType = self.createType;
-    _createVC.fSceneId = self.fSceneId;
-    _createVC.fSceneTitle = self.fSceneTitle;
-    [self addChildViewController:_createVC];
-    
+    _clipImageVC = [[ClipImageViewController alloc] init];
+    _clipImageVC.actionId = self.actionId;
+    _clipImageVC.activeTitle = self.activeTitle;
+    [self addChildViewController:_clipImageVC];
 }
 
 

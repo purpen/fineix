@@ -33,23 +33,35 @@
                         <color key="titleColor" red="0.40000000000000002" green="0.40000000000000002" blue="0.40000000000000002" alpha="1" colorSpace="calibratedRGB"/>
                     </state>
                 </button>
-                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="entr" translatesAutoresizingMaskIntoConstraints="NO" id="aZ5-1w-NGn">
-                    <rect key="frame" x="348" y="13" width="8" height="18"/>
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="go" translatesAutoresizingMaskIntoConstraints="NO" id="aZ5-1w-NGn">
+                    <rect key="frame" x="348" y="15" width="8" height="15"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="18" id="Czz-c9-9hk"/>
                         <constraint firstAttribute="width" constant="8" id="u3q-2T-TWM"/>
                     </constraints>
+                    <variation key="default">
+                        <mask key="constraints">
+                            <exclude reference="Czz-c9-9hk"/>
+                            <exclude reference="u3q-2T-TWM"/>
+                        </mask>
+                    </variation>
                 </imageView>
-                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="entr" translatesAutoresizingMaskIntoConstraints="NO" id="NPK-PA-FrA">
-                    <rect key="frame" x="348" y="58" width="8" height="18"/>
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="go" translatesAutoresizingMaskIntoConstraints="NO" id="NPK-PA-FrA">
+                    <rect key="frame" x="348" y="60" width="8" height="15"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="18" id="W3d-iy-UYn"/>
                         <constraint firstAttribute="width" constant="8" id="hMn-TN-UEs"/>
                     </constraints>
+                    <variation key="default">
+                        <mask key="constraints">
+                            <exclude reference="W3d-iy-UYn"/>
+                            <exclude reference="hMn-TN-UEs"/>
+                        </mask>
+                    </variation>
                 </imageView>
-                <view alpha="0.5" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="uOq-dU-7lu">
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="uOq-dU-7lu">
                     <rect key="frame" x="0.0" y="0.0" width="375" height="1"/>
-                    <color key="backgroundColor" red="0.40000000000000002" green="0.40000000000000002" blue="0.40000000000000002" alpha="1" colorSpace="calibratedRGB"/>
+                    <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.10000000000000001" colorSpace="calibratedRGB"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="0.5" id="FhO-Ja-4bj"/>
                         <constraint firstAttribute="height" relation="lessThanOrEqual" constant="1" id="vHZ-3h-bKj"/>
@@ -60,9 +72,9 @@
                         </mask>
                     </variation>
                 </view>
-                <view alpha="0.5" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="xlq-6S-we2">
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="xlq-6S-we2">
                     <rect key="frame" x="0.0" y="44" width="375" height="1"/>
-                    <color key="backgroundColor" red="0.40000000000000002" green="0.40000000000000002" blue="0.40000000000000002" alpha="1" colorSpace="calibratedRGB"/>
+                    <color key="backgroundColor" white="0.0" alpha="0.10000000000000001" colorSpace="calibratedWhite"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="0.5" id="68B-bi-bti"/>
                     </constraints>
@@ -77,6 +89,7 @@
                 <constraint firstItem="xlq-6S-we2" firstAttribute="leading" secondItem="SvM-GO-RC8" secondAttribute="leading" id="4b1-hh-xBe"/>
                 <constraint firstItem="NPK-PA-FrA" firstAttribute="top" secondItem="THd-hN-eB1" secondAttribute="bottom" constant="14" id="89n-Dg-Gp9"/>
                 <constraint firstItem="gMb-fM-xLY" firstAttribute="leading" secondItem="SvM-GO-RC8" secondAttribute="leading" id="AcD-dT-td7"/>
+                <constraint firstItem="aZ5-1w-NGn" firstAttribute="centerY" secondItem="THd-hN-eB1" secondAttribute="centerY" id="FkO-tr-SqF"/>
                 <constraint firstAttribute="trailing" secondItem="gMb-fM-xLY" secondAttribute="trailing" id="M5z-0u-nlm"/>
                 <constraint firstAttribute="trailing" secondItem="uOq-dU-7lu" secondAttribute="trailing" id="MhV-6H-d7v"/>
                 <constraint firstAttribute="trailing" secondItem="aZ5-1w-NGn" secondAttribute="trailing" constant="19" id="P5a-SJ-y4P"/>
@@ -84,8 +97,10 @@
                 <constraint firstItem="xlq-6S-we2" firstAttribute="top" secondItem="THd-hN-eB1" secondAttribute="bottom" id="XFr-2k-N4b"/>
                 <constraint firstItem="uOq-dU-7lu" firstAttribute="leading" secondItem="SvM-GO-RC8" secondAttribute="leading" id="aUm-ZK-NOM"/>
                 <constraint firstItem="uOq-dU-7lu" firstAttribute="top" secondItem="SvM-GO-RC8" secondAttribute="top" id="fLY-C1-6Yd"/>
+                <constraint firstItem="aZ5-1w-NGn" firstAttribute="centerY" secondItem="SvM-GO-RC8" secondAttribute="centerY" id="ftx-5X-xSa"/>
                 <constraint firstAttribute="trailing" secondItem="NPK-PA-FrA" secondAttribute="trailing" constant="19" id="gcK-QL-UXz"/>
                 <constraint firstItem="gMb-fM-xLY" firstAttribute="top" secondItem="THd-hN-eB1" secondAttribute="bottom" constant="1" id="giA-EG-hSv"/>
+                <constraint firstItem="NPK-PA-FrA" firstAttribute="centerY" secondItem="gMb-fM-xLY" secondAttribute="centerY" id="khP-FX-s70"/>
                 <constraint firstItem="THd-hN-eB1" firstAttribute="top" secondItem="SvM-GO-RC8" secondAttribute="top" id="lfq-8W-LhT"/>
                 <constraint firstItem="THd-hN-eB1" firstAttribute="leading" secondItem="SvM-GO-RC8" secondAttribute="leading" id="zhb-DU-Q3u"/>
             </constraints>
@@ -93,15 +108,18 @@
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <variation key="default">
                 <mask key="constraints">
+                    <exclude reference="2bK-ff-5bE"/>
+                    <exclude reference="ftx-5X-xSa"/>
                     <exclude reference="1J9-9p-6qz"/>
                     <exclude reference="2wk-hl-7Sv"/>
+                    <exclude reference="89n-Dg-Gp9"/>
                 </mask>
             </variation>
             <connections>
                 <outlet property="aboutBtn" destination="THd-hN-eB1" id="2Gl-4s-GFQ"/>
                 <outlet property="optionBtn" destination="gMb-fM-xLY" id="Tnb-Us-hmV"/>
             </connections>
-            <point key="canvasLocation" x="365.5" y="1277.5"/>
+            <point key="canvasLocation" x="297.5" y="1328.5"/>
         </view>
         <view contentMode="scaleToFill" id="igV-1N-mkw" customClass="TipNumberView">
             <rect key="frame" x="0.0" y="0.0" width="20" height="20"/>
@@ -126,7 +144,7 @@
             <connections>
                 <outlet property="tipNumLabel" destination="D4h-OM-oV1" id="wWP-V3-M9u"/>
             </connections>
-            <point key="canvasLocation" x="336.5" y="1560.5"/>
+            <point key="canvasLocation" x="317" y="1553"/>
         </view>
         <view contentMode="scaleToFill" id="w17-i4-D6K" customClass="AccountView">
             <rect key="frame" x="0.0" y="0.0" width="375" height="603"/>
@@ -745,10 +763,9 @@
     </objects>
     <resources>
         <image name="FocusNon" width="60" height="60"/>
-        <image name="entr" width="8" height="15"/>
         <image name="go" width="8" height="15"/>
         <image name="qrCode" width="24" height="24"/>
         <image name="scenarioNon" width="60" height="60"/>
-        <image name="talent" width="17" height="17"/>
+        <image name="talent" width="15" height="15"/>
     </resources>
 </document>

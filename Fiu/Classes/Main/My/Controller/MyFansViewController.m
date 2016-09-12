@@ -53,6 +53,8 @@
         [self requestDataForOderList];
     }];
     
+    [self.mytableView.mj_header beginRefreshing];
+    
     //上拉加载更多
     self.mytableView.mj_footer = [MJRefreshAutoNormalFooter footerWithRefreshingBlock:^{
         if (_currentPageNumber < _totalPageNumber) {
@@ -75,19 +77,19 @@
 {
     _currentPageNumber = 0;
     [_modelAry removeAllObjects];
-    [SVProgressHUD showWithMaskType:SVProgressHUDMaskTypeClear];
     
     [self requestDataForOderListOperation];
 }
 
 
+
+
 - (void)requestDataForOderListOperation
 {
     
-    [SVProgressHUD show];
-    FBRequest *request = [FBAPI postWithUrlString:@"/follow" requestDictionary:@{@"page":@(_currentPageNumber+1),@"size":@15,@"user_id":self.userId,@"find_type":@2} delegate:self];
+    FBRequest *request = [FBAPI postWithUrlString:@"/follow" requestDictionary:@{@"page":@(_currentPageNumber+1),@"size":@30,@"user_id":self.userId,@"find_type":@2} delegate:self];
     [request startRequestSuccess:^(FBRequest *request, id result) {
-        NSLog(@"result %@",result);
+        NSLog(@"粉丝 %@",result);
         NSDictionary *dataDict = [result objectForKey:@"data"];
         NSArray *rowsAry = [dataDict objectForKey:@"rows"];
         for (NSDictionary *rowsDict in rowsAry) {
@@ -148,7 +150,6 @@
                 [self.mytableView.mj_footer endRefreshing];
             }
         }
-        [SVProgressHUD dismiss];
     } failure:^(FBRequest *request, NSError *error) {
         [SVProgressHUD showInfoWithStatus:[error localizedDescription]];
     }];
@@ -177,6 +178,7 @@
 -(void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
     //self.navigationController.navigationBarHidden = NO;
+    [UIApplication sharedApplication].statusBarStyle = UIStatusBarStyleLightContent;
 }
 
 -(void)leftBarItemSelected{
@@ -186,6 +188,7 @@
 -(UITableView *)mytableView{
     if (!_mytableView) {
         _mytableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 64, SCREEN_WIDTH, SCREEN_HEIGHT-64) style:UITableViewStylePlain];
+        _mytableView.backgroundColor = [UIColor colorWithHexString:@"#F7F7F7"];
         self.mytableView.delegate = self;
         self.mytableView.dataSource = self;
         self.mytableView.separatorStyle = UITableViewCellSeparatorStyleNone;
@@ -204,7 +207,10 @@
         cell = [[FocusOnTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellId];
     }
     
-    UserInfo *model = [_modelAry objectAtIndex:indexPath.row];
+    UserInfo *model;
+    if (_modelAry.count != 0) {
+        model = [_modelAry objectAtIndex:indexPath.row];
+    }
     
     [cell.focusOnBtn addTarget:self action:@selector(clickFocusBtn:) forControlEvents:UIControlEventTouchUpInside];
     cell.focusOnBtn.tag = indexPath.row;
@@ -251,7 +257,6 @@
             }
             [self.mytableView reloadRowsAtIndexPaths:[NSArray arrayWithObjects:[NSIndexPath indexPathForRow:sender.tag inSection:0], nil] withRowAnimation:UITableViewRowAnimationNone];
 
-            [SVProgressHUD showSuccessWithStatus:@"关注成功"];
         } failure:^(FBRequest *request, NSError *error) {
             [SVProgressHUD showErrorWithStatus:error.localizedDescription];
         }];
@@ -269,8 +274,12 @@
     }
     [self.mytableView reloadRowsAtIndexPaths:[NSArray arrayWithObjects:[NSIndexPath indexPathForRow:sender.tag inSection:0], nil] withRowAnimation:UITableViewRowAnimationNone];
     FBRequest *request = [FBAPI postWithUrlString:@"/follow/ajax_cancel_follow" requestDictionary:@{@"follow_id":model.userId} delegate:self];
-    request.flag = @"/follow/ajax_cancel_follow";
-    [request startRequest];
+    [request startRequestSuccess:^(FBRequest *request, id result) {
+        if ([result objectForKey:@"success"]) {
+            
+        }else{
+        }
+    } failure:nil];
 }
 
 -(void)clickCancelBtn:(UIButton*)sender{

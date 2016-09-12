@@ -20,9 +20,7 @@
         
         [self addSubview:self.title];
         [_title mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.height.mas_equalTo(@29);
-            make.centerX.equalTo(self);
-            make.centerY.equalTo(self);
+            make.left.right.bottom.top.equalTo(self).with.offset(0);
         }];
     }
     return self;
@@ -32,11 +30,7 @@
     if (!_title) {
         _title = [[UILabel alloc] init];
         _title.textColor = [UIColor colorWithHexString:titleColor];
-        if (IS_iOS9) {
-            _title.font = [UIFont fontWithName:@"PingFangSC-Light" size:12];
-        } else {
-            _title.font = [UIFont systemFontOfSize:12];
-        }
+        _title.font = [UIFont systemFontOfSize:12];
         _title.textAlignment = NSTextAlignmentCenter;
     }
     return _title;
@@ -45,8 +39,8 @@
 - (void)setSelected:(BOOL)selected {
     if (selected) {
         self.title.textColor = [UIColor whiteColor];
-        self.backgroundColor = [UIColor colorWithHexString:fineixColor];
-        self.layer.borderColor = [UIColor colorWithHexString:fineixColor].CGColor;
+        self.backgroundColor = [UIColor colorWithHexString:@"#222222"];
+        self.layer.borderColor = [UIColor colorWithHexString:@"#222222"].CGColor;
     } else {
         self.layer.borderColor = [UIColor colorWithHexString:titleColor].CGColor;
         self.title.textColor = [UIColor colorWithHexString:titleColor];

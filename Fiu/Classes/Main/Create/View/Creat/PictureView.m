@@ -1,5 +1,5 @@
 //
-//  PictureView.m
+//  photosView.m
 //  fineix
 //
 //  Created by FLYang on 16/3/11.
@@ -16,14 +16,20 @@
 - (instancetype)initWithFrame:(CGRect)frame {
     self = [super initWithFrame:frame];
     if (self) {
+        
+//        [self addSubview:self.createView];
+        //  相册列表
+        [self addSubview:self.photosView];
+        [_photosView mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.bottom.top.left.right.equalTo(self).with.offset(0);
+        }];
+        
         [self loadAllPhotos];
         
-        [self addSubview:self.createView];
+//        [self addSubview:self.recoveryFrameBtn];
+//        self.recoveryFrameBtn.hidden = YES;
         
-        [self addSubview:self.recoveryFrameBtn];
-        self.recoveryFrameBtn.hidden = YES;
-        
-        [self pictureViewZoom];
+//        [self photosViewZoom];
     }
     
     return self;
@@ -36,17 +42,16 @@
         _createView.backgroundColor = [UIColor blackColor];
         
         //  相册列表
-        [_createView addSubview:self.pictureView];
-        [_pictureView mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.size.mas_equalTo(CGSizeMake(SCREEN_WIDTH, 200));
-            make.bottom.equalTo(self.createView.mas_bottom).with.offset(0);
-            make.centerX.equalTo(_createView);
+        [_createView addSubview:self.photosView];
+        [_photosView mas_makeConstraints:^(MASConstraintMaker *make) {
+//            make.size.mas_equalTo(CGSizeMake(SCREEN_WIDTH, 200));
+            make.bottom.top.left.right.equalTo(self.createView).with.offset(0);
         }];
         
         //  显示的照片
-        [_createView addSubview:self.photoImgView];
+//        [_createView addSubview:self.photoImgView];
         [_photoImgView mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.bottom.equalTo(self.pictureView.mas_top).with.offset(-2);
+            make.bottom.equalTo(self.photosView.mas_top).with.offset(-2);
             make.top.equalTo(_createView.mas_top).with.offset(0);
             make.left.equalTo(_createView.mas_left).with.offset(0);
             make.right.equalTo(_createView.mas_right).with.offset(0);
@@ -54,7 +59,6 @@
         
         //  相册列表
         [_createView addSubview:self.photoAlbumsView];
-        
     }
     return _createView;
 }
@@ -70,17 +74,14 @@
             while (id object = [enumerator nextObject]) {
                 [self.sortPhotosArr addObject:object];
             }
-            
-            [self.pictureView reloadData];
-            
-            [self.pictureView selectItemAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0]
+            [self.photosView reloadData];
+            [self.photosView selectItemAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0]
                                            animated:YES
                                      scrollPosition:(UICollectionViewScrollPositionNone)];
             
             if (photos.count) {
                 [self showFirstPhoto];
             }
-            
             self.photoAlbumArr = [photoAlbums copy];
             [[NSNotificationCenter defaultCenter] postNotificationName:@"photoAlbums" object:self.photoAlbumArr];
             
@@ -110,36 +111,36 @@
 }
 
 #pragma mark - 相册的列表视图
-- (UICollectionView *)pictureView {
-    if (!_pictureView) {
+- (UICollectionView *)photosView {
+    if (!_photosView) {
         UICollectionViewFlowLayout * flowLayout = [[UICollectionViewFlowLayout alloc] init];
         flowLayout.itemSize = CGSizeMake((SCREEN_WIDTH - 6) / 4, (SCREEN_WIDTH - 6) / 4);
         flowLayout.sectionInset = UIEdgeInsetsMake(0, 0, 0, 0);
         flowLayout.minimumInteritemSpacing = 2.0;
         flowLayout.minimumLineSpacing = 2.0;
         
-        _pictureView = [[UICollectionView alloc] initWithFrame:CGRectMake(0, 0, 0, 0) collectionViewLayout:flowLayout];
-        _pictureView.delegate = self;
-        _pictureView.dataSource = self;
-        _pictureView.backgroundColor = [UIColor blackColor];
-        _pictureView.showsHorizontalScrollIndicator = NO;
-        _pictureView.showsVerticalScrollIndicator = NO;
-        [_pictureView registerClass:[FBPictureCollectionViewCell class] forCellWithReuseIdentifier:@"FBPictureCollectionViewCell"];
+        _photosView = [[UICollectionView alloc] initWithFrame:CGRectMake(0, 0, 0, 0) collectionViewLayout:flowLayout];
+        _photosView.delegate = self;
+        _photosView.dataSource = self;
+        _photosView.backgroundColor = [UIColor blackColor];
+        _photosView.showsHorizontalScrollIndicator = NO;
+        _photosView.showsVerticalScrollIndicator = NO;
+        [_photosView registerClass:[FBPictureCollectionViewCell class] forCellWithReuseIdentifier:@"FBPictureCollectionViewCell"];
     }
-    return _pictureView;
+    return _photosView;
 }
 
 #pragma mark  UICollectionViewDataSource(相册列表)
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
-    return self.sortPhotosArr.count;
+    return 10;
 }
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
     static NSString * collectionViewCellIdentifier = @"FBPictureCollectionViewCell";
     FBPictureCollectionViewCell * cell = [collectionView dequeueReusableCellWithReuseIdentifier:collectionViewCellIdentifier forIndexPath:indexPath];
-    FBPhoto * photo = [self.sortPhotosArr objectAtIndex:indexPath.row];
-//    cell.imageView.image = photo.originalImage;
-    cell.imageView.image = photo.thumbnailImage;
+//    FBPhoto * photo = [self.sortPhotosArr objectAtIndex:indexPath.row];
+//    cell.imageView.image = photo.thumbnailImage;
+    cell.backgroundColor = [UIColor redColor];
     return cell;
 }
 
@@ -149,7 +150,7 @@
     self.photoImgView.image = photo.originalImage;
     [self getPhotoLocation:photo.asset.defaultRepresentation.metadata];
     
-    if (self.pictureView.frame.size.height > 200) {
+    if (self.photosView.frame.size.height > 200) {
         //  显示画布的frame
         CGRect photoViewRect = self.photoImgView.frame;
         photoViewRect = CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT - 305);
@@ -159,10 +160,10 @@
         }];
         
         //  显示照片列表的frame
-        CGRect pictureViewRect = self.pictureView.frame;
-        pictureViewRect = CGRectMake(0, self.photoImgView.bounds.size.height + 2, SCREEN_WIDTH, 200);
+        CGRect photosViewRect = self.photosView.frame;
+        photosViewRect = CGRectMake(0, self.photoImgView.bounds.size.height + 2, SCREEN_WIDTH, 200);
         [UIView animateWithDuration:.5 animations:^{
-            self.pictureView.frame = pictureViewRect;
+            self.photosView.frame = photosViewRect;
         }];
         
         self.navView.hidden = NO;
@@ -180,19 +181,19 @@
 
 
 #pragma mark - 上滑拉伸显示全部相片列表
-- (void)pictureViewZoom{
-    UIPanGestureRecognizer * pan = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(pictureViewZoom:)];
+- (void)photosViewZoom{
+    UIPanGestureRecognizer * pan = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(photosViewZoom:)];
     pan.delegate = self;
-    [self.pictureView addGestureRecognizer:pan];
+    [self.photosView addGestureRecognizer:pan];
 }
 
 #pragma mark 相片列表上滑展示全部相片
-- (void)pictureViewZoom:(UIPanGestureRecognizer *)pan {
+- (void)photosViewZoom:(UIPanGestureRecognizer *)pan {
     if (pan.state == UIGestureRecognizerStateChanged) {
         //  上滑的距离
-        CGFloat panfloat = [pan translationInView:self.pictureView].y;
+        CGFloat panfloat = [pan translationInView:self.photosView].y;
         //  相册列表的frame
-        CGRect pictureViewRect = self.pictureView.frame;
+        CGRect photosViewRect = self.photosView.frame;
         //  显示画布的frame
         CGRect photoViewRect = self.photoImgView.frame;
         
@@ -207,26 +208,26 @@
                 }
             }];
             
-            pictureViewRect = CGRectMake(0, 0, SCREEN_WIDTH, self.createView.bounds.size.height);
+            photosViewRect = CGRectMake(0, 0, SCREEN_WIDTH, self.createView.bounds.size.height);
             [UIView animateWithDuration:.5 animations:^{
-                self.pictureView.frame = pictureViewRect;
+                self.photosView.frame = photosViewRect;
             }];
             
         }
         
         //  照片列表的偏移量
-        CGFloat pictureViewFloat = self.pictureView.contentOffset.y;
+        CGFloat photosViewFloat = self.photosView.contentOffset.y;
         
-        if (pictureViewFloat < -50) {
+        if (photosViewFloat < -50) {
             photoViewRect = CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT - 305);
             [UIView animateWithDuration:.5 animations:^{
                 self.photoImgView.frame = photoViewRect;
                 self.recoveryFrameBtn.hidden = YES;
             }];
             
-            pictureViewRect = CGRectMake(0, self.photoImgView.bounds.size.height + 2, SCREEN_WIDTH, 200);
+            photosViewRect = CGRectMake(0, self.photoImgView.bounds.size.height + 2, SCREEN_WIDTH, 200);
             [UIView animateWithDuration:.5 animations:^{
-                self.pictureView.frame = pictureViewRect;
+                self.photosView.frame = photosViewRect;
             }];
             
             self.navView.hidden = NO;
@@ -236,7 +237,7 @@
 
 #pragma mark UIGestureRecognizerDelegate
 - (BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldRecognizeSimultaneouslyWithGestureRecognizer:(UIGestureRecognizer *)otherGestureRecognizer {
-    if ([otherGestureRecognizer.view isKindOfClass:self.pictureView]) {
+    if ([otherGestureRecognizer.view isKindOfClass:self.photosView]) {
         return NO;
     }
     return YES;
@@ -264,7 +265,7 @@
     if (!_photoAlbumsView) {
         _photoAlbumsView = [[PhotoAlbumsView alloc] initWithFrame:CGRectMake(0, SCREEN_HEIGHT, SCREEN_WIDTH, SCREEN_HEIGHT-50)];
         self.sortPhotosArr = _photoAlbumsView.photosMarr;
-        _photoAlbumsView.collectionView = self.pictureView;
+        _photoAlbumsView.collectionView = self.photosView;
         _photoAlbumsView.showImageView = self.photoImgView;
     }
     return _photoAlbumsView;

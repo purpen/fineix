@@ -10,7 +10,13 @@
 #import <SVProgressHUD/SVProgressHUD.h>
 #import <MJRefresh/MJRefresh.h>
 
-@interface GoodsBrandViewController : FBViewController <FBNavigationBarItemsDelegate, UITableViewDelegate, UITableViewDataSource>
+@interface GoodsBrandViewController : FBViewController <
+    FBNavigationBarItemsDelegate,
+    UITableViewDelegate,
+    UITableViewDataSource,
+    UICollectionViewDelegate,
+    UICollectionViewDataSource
+>
 
 @pro_strong UITableView             *   goodsBrandTable;
 @pro_strong FBRequest               *   brandRequest;
@@ -21,5 +27,10 @@
 @pro_strong NSString                *   brandId;
 @pro_strong UILabel                 *   titleLab;
 @pro_strong NSString                *   brandBgImg;
+
+@pro_strong FBRequest *sceneRequest;
+@pro_strong UICollectionView *sceneList;
+@pro_strong NSMutableArray *sceneListMarr;
+@pro_strong NSMutableArray *sceneIdMarr;
 
 @end

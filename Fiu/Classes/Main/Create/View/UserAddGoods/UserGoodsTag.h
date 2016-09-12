@@ -9,9 +9,11 @@
 #import <UIKit/UIKit.h>
 #import "Fiu.h"
 
+@class UserGoodsTag;
+
 @protocol FBUserGoodsTagDelegaet <NSObject>
 @optional
-- (void)delegateThisTagBtn:(NSInteger)index;
+- (void)delegateThisTagBtn:(UserGoodsTag *)tag;
 
 @end
 
@@ -19,16 +21,17 @@
 
 @pro_weak id <FBUserGoodsTagDelegaet> delegate;
 @pro_assign NSInteger       index;
+@pro_strong UIButton    *   bgBtn;
 @pro_strong UIButton    *   dele;
 @pro_strong UILabel     *   title;
 @pro_strong UILabel     *   price;
 @pro_assign BOOL            isMove;
 @pro_strong NSString    *   goodsId;
-/**
- *  类型
- *  0:产品库产品
- *  1:添加链接产品
- */
-@pro_assign NSInteger       type;
+@pro_strong UIView      *   posPoint;
+@pro_assign BOOL            isFlip;
+
+- (void)userTag_SetGoodsInfo:(NSString *)text;
+
+- (void)thn_setSceneImageUserGoodsTagLoc:(NSInteger)loc;
 
 @end

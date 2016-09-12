@@ -15,10 +15,10 @@
 @property(nonatomic,strong) UIImageView *idTagsImageView;
 @property(nonatomic,strong) UILabel *levelLabel;
 @property(nonatomic,strong) UILabel *userLevelLabel;
-@property(nonatomic,strong) UIButton *focusBtn;
+@property(nonatomic,strong) UIButton *follow;
 @property(nonatomic,strong) UICollectionView *imageCollectionView;
 @property(nonatomic,strong) NSArray *sceneAry;
-
--(void)setUI;
+/**  */
+@property (nonatomic, strong) UINavigationController *navi;
 
 @end

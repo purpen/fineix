@@ -10,26 +10,38 @@
 #import "GoodsCarViewController.h"
 #import "GoodsInfoData.h"
 #import "FBGoodsInfoModelData.h"
-#import "InfoTitleTableViewCell.h"
-#import "InfoRecommendTableViewCell.h"
-#import "FBGoodsColorTableViewCell.h"
-#import "FBGoodsCommentTableViewCell.h"
 #import "CommentModelRow.h"
 #import "GoodsRelationProducts.h"
 #import "FBGoodsCommentViewController.h"
 #import "FBBuyGoodsViewController.h"
 #import "FBSureOrderViewController.h"
+#import "THNBrandInfoViewController.h"
+#import "THNSceneDetalViewController.h"
+#import "THNDiscoverSceneCollectionViewCell.h"
+#import "InfoTitleTableViewCell.h"
+#import "GoodsDesTableViewCell.h"
+#import "InfoBrandTableViewCell.h"
 
 static NSString *const URLGoodsInfo = @"/product/view";
-static NSString *const URLGoodsCommet = @"/comment/getlist";
 static NSString *const URLAddCar = @"/shopping/add_cart";
+static NSString *const URlGoodsCollect = @"/favorite/ajax_favorite";
+static NSString *const URlCancelCollect = @"/favorite/ajax_cancel_favorite";
+static NSString *const URLSceneList = @"/sight_and_product/getlist";
+static NSString *const URLLikeScene = @"/favorite/ajax_love";
+static NSString *const URLCancelLike = @"/favorite/ajax_cancel_love";
+
+static NSString *const SceneListCellId = @"SceneListCellId";
 
 @interface FBGoodsInfoViewController () {
     NSString * _goodsInfoUrl;
+    NSString *_goodsDes;
+    NSInteger _collect;
+    NSInteger _canBuy;
+    CGFloat _sceneListHeight;
+    FBGoodsCommentViewController *_goodsCommentVC;
 }
 
 @pro_strong FBGoodsInfoModelData        *   goodsInfo;
-@pro_strong NSMutableArray              *   recommendGoods;
 @pro_strong NSMutableArray              *   goodsComment;
 
 @end
@@ -46,9 +58,9 @@ static NSString *const URLAddCar = @"/shopping/add_cart";
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
+    [self setThnGoodsInfoVcUI];
+    [self thn_networkSceneListData];
     [self networkGoodsInfoData];
-    
 }
 
 #pragma mark - 网络请求
@@ -57,41 +69,51 @@ static NSString *const URLAddCar = @"/shopping/add_cart";
     [SVProgressHUD show];
     self.goodsInfoRequest = [FBAPI getWithUrlString:URLGoodsInfo requestDictionary:@{@"id":self.goodsID} delegate:self];
     [self.goodsInfoRequest startRequestSuccess:^(FBRequest *request, id result) {
+        _goodsDes = [[result valueForKey:@"data"] valueForKey:@"advantage"];
         _goodsInfoUrl = [[result valueForKey:@"data"] valueForKey:@"content_view_url"];
-        [self setThnGoodsInfoVcUI];
-        self.goodsInfo = [[FBGoodsInfoModelData alloc] initWithDictionary:[result valueForKey:@"data"]];
-        NSArray * goodsArr  = [[result valueForKey:@"data"] valueForKey:@"relation_products"];
-        for (NSDictionary * goodsDict in goodsArr) {
-            GoodsRelationProducts * goodsModel = [[GoodsRelationProducts alloc] initWithDictionary:goodsDict];
-            [self.recommendGoods addObject:goodsModel];
-        }
-        [self.rollImgView setThnGoodsRollImgData:self.goodsInfo];
-        [self.goodsTable reloadData];
-        [self networkGoodsCommentData];
-        [SVProgressHUD dismiss];
-        
-    } failure:^(FBRequest *request, NSError *error) {
-        [SVProgressHUD showErrorWithStatus:[error localizedDescription]];
-    }];
-}
-
-#pragma mark 商品的评价
-- (void)networkGoodsCommentData {
-    self.commentRequest = [FBAPI getWithUrlString:URLGoodsCommet requestDictionary:@{@"type":@"4", @"page":@"1", @"size":@"3", @"target_id":self.goodsID} delegate:self];
-    [self.commentRequest startRequestSuccess:^(FBRequest *request, id result) {
-        NSArray * commentArr = [[result valueForKey:@"data"] valueForKey:@"rows"];
-        if (commentArr.count > 0) {
-            for (NSDictionary * commentDict in commentArr) {
-                CommentModelRow * model = [[CommentModelRow alloc] initWithDictionary:commentDict];
-                [self.goodsComment addObject:model];
+        _collect = [[[result valueForKey:@"data"] valueForKey:@"is_favorite"] integerValue];
+        if (![[[result valueForKey:@"data"] valueForKey:@"stage"] isKindOfClass:[NSNull class]]) {
+            _canBuy = [[[result valueForKey:@"data"] valueForKey:@"stage"] integerValue];
+            
+            if (_canBuy == 9) {
+                self.menuView.hidden = NO;
+                self.buyView.hidden = NO;
+                
+            } else {
+                [self changeRollFrame];
+                self.menuView.hidden = YES;
+                self.buyView.hidden = YES;
             }
         }
+        
+        if (_collect == 0) {
+            self.likeBtn.selected = NO;
+        } else if (_collect == 1) {
+            self.likeBtn.selected = YES;
+        }
+    
+        self.goodsInfo = [[FBGoodsInfoModelData alloc] initWithDictionary:[result valueForKey:@"data"]];
+        [self.rollImgView setThnGoodsRollImgData:self.goodsInfo];
         [self.goodsTable reloadData];
-        [self.goodsTable addSubview:self.pullLab];
+        [SVProgressHUD dismiss];
+        if (self.goodsInfo.idField != 0) {
+            self.menuView.hidden = NO;
+            self.goodsInfoRoll.hidden = NO;
+            if (_canBuy == 9) {
+                self.buyView.hidden = NO;
+            }
+        }
         
     } failure:^(FBRequest *request, NSError *error) {
         [SVProgressHUD showErrorWithStatus:[error localizedDescription]];
     }];
+    
+   
+    if (self.goodsInfo.idField == 0) {
+        self.menuView.hidden = YES;
+        self.goodsInfoRoll.hidden = YES;
+        self.buyView.hidden = YES;
+    }
 }
 
 #pragma mark 加入购物车
@@ -108,17 +130,163 @@ static NSString *const URLAddCar = @"/shopping/add_cart";
     }];
 }
 
+#pragma mark 商品收藏
+- (void)networkCollectGoods:(UIButton *)button {
+    if (button.selected == NO) {
+        self.collectRequest = [FBAPI postWithUrlString:URlGoodsCollect requestDictionary:@{@"id":self.goodsID, @"type":@"1"} delegate:self];
+        [self.collectRequest startRequestSuccess:^(FBRequest *request, id result) {
+            button.selected = YES;
+            [SVProgressHUD showSuccessWithStatus:NSLocalizedString(@"collectSuccess", nil)];
+            
+        } failure:^(FBRequest *request, NSError *error) {
+            [SVProgressHUD showErrorWithStatus:[error localizedDescription]];
+        }];
+        
+    } else if (button.selected == YES) {
+        self.cancelCollectRequest = [FBAPI postWithUrlString:URlCancelCollect requestDictionary:@{@"id":self.goodsID, @"type":@"1"} delegate:self];
+        [self.cancelCollectRequest startRequestSuccess:^(FBRequest *request, id result) {
+            button.selected = NO;
+            [SVProgressHUD showSuccessWithStatus:NSLocalizedString(@"cancelCollect", nil)];
+            
+        } failure:^(FBRequest *request, NSError *error) {
+            [SVProgressHUD showErrorWithStatus:[error localizedDescription]];
+        }];
+    }
+}
+
+#pragma mark 情景列表
+- (void)thn_networkSceneListData {
+    NSDictionary *requestDic = @{@"page":@(self.currentpageNum + 1),
+                                 @"size":@"30",
+                                 @"sort":@"0",
+                                 @"product_id":self.goodsID};
+    self.sceneRequest = [FBAPI getWithUrlString:URLSceneList requestDictionary:requestDic delegate:self];
+    [self.sceneRequest startRequestSuccess:^(FBRequest *request, id result) {
+        NSArray *sceneArr = [[result valueForKey:@"data"] valueForKey:@"rows"];
+        for (NSDictionary * sceneDic in sceneArr) {
+            HomeSceneListRow *homeSceneModel = [[HomeSceneListRow alloc] initWithDictionary:[sceneDic valueForKey:@"sight"]];
+            [self.sceneListMarr addObject:homeSceneModel];
+            [self.sceneIdMarr addObject:[NSString stringWithFormat:@"%zi", homeSceneModel.idField]];
+        }
+        
+        NSInteger count;
+        if (self.sceneListMarr.count%2 != 0) {
+            count = (self.sceneListMarr.count +1)/2;
+        } else {
+            count = self.sceneListMarr.count/2;
+        }
+
+        _sceneListHeight = ((SCREEN_WIDTH - 45)/2)*1.5 * count;
+        self.goodsTable.tableFooterView = self.sceneList;
+       [self.sceneList reloadData];
+        
+    } failure:^(FBRequest *request, NSError *error) {
+        [SVProgressHUD showErrorWithStatus:[error localizedDescription]];
+    }];
+}
+
+//  点赞
+- (void)thn_networkLikeSceneData:(NSString *)idx {
+    self.likeSceneRequest = [FBAPI postWithUrlString:URLLikeScene requestDictionary:@{@"id":idx, @"type":@"12"} delegate:self];
+    [self.likeSceneRequest startRequestSuccess:^(FBRequest *request, id result) {
+        if ([[result valueForKey:@"success"] isEqualToNumber:@1]) {
+            NSInteger index = [self.sceneIdMarr indexOfObject:idx];
+            NSString *loveCount = [NSString stringWithFormat:@"%zi", [[[result valueForKey:@"data"] valueForKey:@"love_count"] integerValue]];
+            [self.sceneListMarr[index] setValue:loveCount forKey:@"loveCount"];
+            [self.sceneListMarr[index] setValue:@"1" forKey:@"isLove"];
+        }
+        
+    } failure:^(FBRequest *request, NSError *error) {
+        [SVProgressHUD showErrorWithStatus:[error localizedDescription]];
+    }];
+}
+
+//  取消点赞
+- (void)thn_networkCancelLikeData:(NSString *)idx {
+    self.cancelLikeRequest = [FBAPI postWithUrlString:URLCancelLike requestDictionary:@{@"id":idx, @"type":@"12"} delegate:self];
+    [self.cancelLikeRequest startRequestSuccess:^(FBRequest *request, id result) {
+        if ([[result valueForKey:@"success"] isEqualToNumber:@1]) {
+            NSInteger index = [self.sceneIdMarr indexOfObject:idx];
+            NSString *loveCount = [NSString stringWithFormat:@"%zi", [[[result valueForKey:@"data"] valueForKey:@"love_count"] integerValue]];
+            [self.sceneListMarr[index] setValue:loveCount forKey:@"loveCount"];
+            [self.sceneListMarr[index] setValue:@"0" forKey:@"isLove"];
+        }
+        
+    } failure:^(FBRequest *request, NSError *error) {
+        [SVProgressHUD showErrorWithStatus:[error localizedDescription]];
+    }];
+}
+
 #pragma mark - 设置视图x
 - (void)setThnGoodsInfoVcUI {
-    [self.view addSubview:self.goodsTable];
-    [self.view addSubview:self.goodsInfoWeb];
+    [self.view addSubview:self.menuView];
+    [self.view addSubview:self.goodsInfoRoll];
+    [self.goodsInfoRoll addSubview:self.goodsTable];
+    [self.goodsInfoRoll addSubview:self.goodsInfoWeb];
+
+    _goodsCommentVC = [[FBGoodsCommentViewController alloc] init];
+    [self addChildViewController:_goodsCommentVC];
+    [self.goodsInfoRoll addSubview:_goodsCommentVC.view];
+    
     [self.view addSubview:self.buyView];
+}
+
+- (void)changeRollFrame {
+    CGRect rollRect = self.goodsInfoRoll.frame;
+    rollRect = CGRectMake(0, 64, SCREEN_WIDTH, SCREEN_HEIGHT - 64);
+    self.goodsInfoRoll.frame = rollRect;
+    
+    CGRect goodsTableRect = self.goodsTable.frame;
+    goodsTableRect = CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT - 64);
+    self.goodsTable.frame = goodsTableRect;
+}
+
+- (UIScrollView *)goodsInfoRoll {
+    if (!_goodsInfoRoll) {
+        _goodsInfoRoll = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 108, SCREEN_WIDTH, SCREEN_HEIGHT - 152)];
+        _goodsInfoRoll.showsHorizontalScrollIndicator = NO;
+        _goodsInfoRoll.backgroundColor = [UIColor colorWithHexString:@"#F8F8F8"];
+        _goodsInfoRoll.contentSize = CGSizeMake(SCREEN_WIDTH * 3, 0);
+        _goodsInfoRoll.scrollEnabled = NO;
+        _goodsInfoRoll.pagingEnabled = YES;
+    }
+    return _goodsInfoRoll;
+}
+
+- (FBSegmentView *)menuView {
+    if (!_menuView) {
+        NSArray *menuTitle = @[NSLocalizedString(@"niceGoods", nil),
+                               NSLocalizedString(@"niceGoodsInfo", nil),
+                               NSLocalizedString(@"goodsComment", nil)];
+        _menuView = [[FBSegmentView alloc] initWithFrame:CGRectMake(0, 64, SCREEN_WIDTH, 44)];
+        _menuView.delegate = self;
+        [_menuView set_menuItemTitle:menuTitle];
+        [_menuView set_showBottomLine:NO];
+        [_menuView addViewBottomLine];
+    }
+    return _menuView;
+}
+
+- (void)menuItemSelected:(NSInteger)index {
+    CGPoint rollPoint = self.goodsInfoRoll.contentOffset;
+    rollPoint.x = SCREEN_WIDTH * index;
+    [UIView animateWithDuration:.3 animations:^{
+        self.goodsInfoRoll.contentOffset = rollPoint;
+    }];
+    
+    if (index == 1) {
+        //  加载商品的web详情
+        NSURLRequest *request =[NSURLRequest requestWithURL:[NSURL URLWithString:_goodsInfoUrl]];
+        [self.goodsInfoWeb loadRequest:request];
+    } else if (index == 2) {
+        [_goodsCommentVC networkSceneCommenstData:self.goodsID];
+    }
 }
 
 #pragma mark - 轮播图
 - (FBRollImages *)rollImgView {
     if (!_rollImgView) {
-        _rollImgView = [[FBRollImages alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, Banner_height)];
+        _rollImgView = [[FBRollImages alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_WIDTH *0.56)];
         _rollImgView.navVC = self.navigationController;
     }
     return _rollImgView;
@@ -127,7 +295,7 @@ static NSString *const URLAddCar = @"/shopping/add_cart";
 #pragma mark - 商品详情
 - (UIWebView *)goodsInfoWeb {
     if (!_goodsInfoWeb) {
-        _goodsInfoWeb = [[UIWebView alloc] initWithFrame:CGRectMake(0, SCREEN_HEIGHT, SCREEN_WIDTH, SCREEN_HEIGHT - 108)];
+        _goodsInfoWeb = [[UIWebView alloc] initWithFrame:CGRectMake(SCREEN_WIDTH, 0, SCREEN_WIDTH, SCREEN_HEIGHT - 152)];
         _goodsInfoWeb.delegate = self;
         _goodsInfoWeb.scrollView.delegate = self;
         _goodsInfoWeb.scrollView.bounces = YES;
@@ -145,67 +313,60 @@ static NSString *const URLAddCar = @"/shopping/add_cart";
     [SVProgressHUD dismiss];
 }
 
-//  上拉提示
-- (UILabel *)pullLab {
-    if (!_pullLab) {
-        _pullLab = [[UILabel alloc] initWithFrame:CGRectMake(0, self.goodsTable.contentSize.height + 30, SCREEN_WIDTH, 20)];
-        _pullLab.text = NSLocalizedString(@"goodsPullLab", nil);
-        _pullLab.font = [UIFont systemFontOfSize:12];
-        _pullLab.textColor = [UIColor colorWithHexString:@"#555555"];
-        _pullLab.textAlignment = NSTextAlignmentCenter;
-    }
-    return _pullLab;
-}
-
-#pragma mark 产品详情的上拉&下拉加载
-- (void)scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate {
-    decelerate = YES;
-    if (scrollView == self.goodsTable) {
-        CGPoint contentOffsetPoint = self.goodsTable.contentOffset;
-        if (contentOffsetPoint.y >  self.goodsTable.contentSize.height - self.goodsTable.frame.size.height + 50) {
-            
-            CGRect goodsTableRect = self.goodsTable.frame;
-            goodsTableRect.origin.y = -SCREEN_HEIGHT;
-            [UIView animateWithDuration:.3 animations:^{
-                self.goodsTable.frame = goodsTableRect;
-            }];
-            
-            CGRect goodsInfoRect = self.goodsInfoWeb.frame;
-            goodsInfoRect.origin.y = 64;
-            [UIView animateWithDuration:.3 animations:^{
-                self.goodsInfoWeb.frame = goodsInfoRect;
-            }];
-            
-            //  加载商品的web详情
-            NSURLRequest *request =[NSURLRequest requestWithURL:[NSURL URLWithString:_goodsInfoUrl]];
-            [self.goodsInfoWeb loadRequest:request];
-        }
+#pragma mark 情景列表
+- (UICollectionView *)sceneList {
+    if (!_sceneList) {
+        UICollectionViewFlowLayout *flowLayou = [[UICollectionViewFlowLayout alloc] init];
+        flowLayou.itemSize = CGSizeMake((SCREEN_WIDTH - 45)/2, ((SCREEN_WIDTH - 45)/2)*1.21);
+        flowLayou.minimumLineSpacing = 15.0f;
+        flowLayou.sectionInset = UIEdgeInsetsMake(15, 15, 15, 15);
+        flowLayou.scrollDirection = UICollectionViewScrollDirectionVertical;
         
-    } else if (scrollView == self.goodsInfoWeb.scrollView) {
-        CGPoint webContentOffset = self.goodsInfoWeb.scrollView.contentOffset;
-        if (webContentOffset.y < -50) {
-            
-            CGRect goodsTableRect = self.goodsTable.frame;
-            goodsTableRect.origin.y = 64;
-            [UIView animateWithDuration:.3 animations:^{
-                self.goodsTable.frame = goodsTableRect;
-            }];
-            
-            CGRect goodsInfoRect = self.goodsInfoWeb.frame;
-            goodsInfoRect.origin.y = SCREEN_HEIGHT;
-            [UIView animateWithDuration:.3 animations:^{
-                self.goodsInfoWeb.frame = goodsInfoRect;
-            }];
-            
-            [SVProgressHUD dismiss];
-        }
+        _sceneList = [[UICollectionView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, _sceneListHeight)
+                                        collectionViewLayout:flowLayou];
+        _sceneList.showsVerticalScrollIndicator = NO;
+        _sceneList.delegate = self;
+        _sceneList.dataSource = self;
+        _sceneList.backgroundColor = [UIColor colorWithHexString:@"#F8F8F8"];
+        [_sceneList registerClass:[THNDiscoverSceneCollectionViewCell class] forCellWithReuseIdentifier:SceneListCellId];
     }
+    return _sceneList;
 }
 
-#pragma mark - 商品信息列表
+- (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
+    return self.sceneListMarr.count;
+}
+
+- (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
+    
+    __weak __typeof(self)weakSelf = self;
+    
+    THNDiscoverSceneCollectionViewCell * cell = [collectionView dequeueReusableCellWithReuseIdentifier:SceneListCellId
+                                                                                          forIndexPath:indexPath];
+    if (self.sceneListMarr.count) {
+        [cell thn_setSceneUserInfoData:self.sceneListMarr[indexPath.row] isLogin:[self isUserLogin]];
+        
+        cell.beginLikeTheSceneBlock = ^(NSString *idx) {
+            [weakSelf thn_networkLikeSceneData:idx];
+        };
+        
+        cell.cancelLikeTheSceneBlock = ^(NSString *idx) {
+            [weakSelf thn_networkCancelLikeData:idx];
+        };
+    }
+    cell.vc = self;
+    return cell;
+}
+
+- (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
+    THNSceneDetalViewController *sceneDataVC = [[THNSceneDetalViewController alloc] init];
+    sceneDataVC.sceneDetalId = self.sceneIdMarr[indexPath.row];
+    [self.navigationController pushViewController:sceneDataVC animated:YES];
+}
+
 - (UITableView *)goodsTable {
     if (!_goodsTable) {
-        _goodsTable = [[UITableView alloc] initWithFrame:CGRectMake(0, 64, SCREEN_WIDTH, SCREEN_HEIGHT - 108) style:(UITableViewStyleGrouped)];
+        _goodsTable = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT - 152) style:(UITableViewStyleGrouped)];
         _goodsTable.delegate = self;
         _goodsTable.dataSource = self;
         _goodsTable.showsVerticalScrollIndicator = NO;
@@ -213,18 +374,16 @@ static NSString *const URLAddCar = @"/shopping/add_cart";
         _goodsTable.separatorStyle = UITableViewCellSeparatorStyleNone;
         _goodsTable.backgroundColor = [UIColor colorWithHexString:grayLineColor];
         _goodsTable.tableHeaderView = self.rollImgView;
+
     }
     return _goodsTable;
 }
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-    return 4;
+    return 3;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    if (section == 3) {
-        return self.goodsComment.count + 1;
-    }
     return 1;
 }
 
@@ -232,52 +391,41 @@ static NSString *const URLAddCar = @"/shopping/add_cart";
     if (indexPath.section == 0) {
         static NSString * InfoTitleCellId = @"InfoTitleCellId";
         InfoTitleTableViewCell * cell = [tableView dequeueReusableCellWithIdentifier:InfoTitleCellId];
-        if (!cell) {
-            cell = [[InfoTitleTableViewCell alloc] initWithStyle:(UITableViewCellStyleDefault) reuseIdentifier:InfoTitleCellId];
+        cell = [[InfoTitleTableViewCell alloc] initWithStyle:(UITableViewCellStyleDefault) reuseIdentifier:InfoTitleCellId];
+        if (_canBuy != 9) {
+            cell.nextBtn.hidden = YES;
         }
         [cell setThnGoodsInfoData:self.goodsInfo];
         return cell;
         
     } else if (indexPath.section == 1) {
-        static NSString * thnGoodsColorTableViewCellId = @"FBGoodsColorTableViewCellId";
-        FBGoodsColorTableViewCell * cell = [tableView dequeueReusableCellWithIdentifier:thnGoodsColorTableViewCellId];
-        if (!cell) {
-            cell = [[FBGoodsColorTableViewCell alloc] initWithStyle:(UITableViewCellStyleDefault) reuseIdentifier:thnGoodsColorTableViewCellId];
-        }
-        cell.goodsColorLab.text = NSLocalizedString(@"GoodsColors", nil);
-        return cell;
-        
-    } else if (indexPath.section == 2) {
-        static NSString * thnInfoRecommendCellId = @"ThnInfoUseSceneCellId";
-        InfoRecommendTableViewCell * cell = [tableView dequeueReusableCellWithIdentifier:thnInfoRecommendCellId];
-        if (!cell) {
-            cell = [[InfoRecommendTableViewCell alloc] initWithStyle:(UITableViewCellStyleDefault) reuseIdentifier:thnInfoRecommendCellId];
-        }
-        cell.nav = self.navigationController;
-        [cell setRecommendGoodsData:self.recommendGoods withType:1];
-        return cell;
-    
-    } else if (indexPath.section == 3) {
-        if (indexPath.row == 0) {
-            static NSString * thnGoodsCommentCellId = @"ThnGoodsCommentCellId";
-            FBGoodsColorTableViewCell * cell = [tableView dequeueReusableCellWithIdentifier:thnGoodsCommentCellId];
-            if (!cell) {
-                cell = [[FBGoodsColorTableViewCell alloc] initWithStyle:(UITableViewCellStyleDefault) reuseIdentifier:thnGoodsCommentCellId];
-            }
-            cell.goodsColorLab.text = NSLocalizedString(@"GoodsComment", nil);
+        static NSString * goodsDesCellId = @"GoodsDesCellId";
+        if (_goodsDes.length) {
+            GoodsDesTableViewCell * cell = [tableView dequeueReusableCellWithIdentifier:goodsDesCellId];
+            cell = [[GoodsDesTableViewCell alloc] initWithStyle:(UITableViewCellStyleDefault) reuseIdentifier:goodsDesCellId];
+            [cell setGoodsDesText:_goodsDes];
             return cell;
             
         } else {
-            static NSString * thnGoodsCommentInfoCellId = @"ThnGoodsCommentInfoCellId";
-            FBGoodsCommentTableViewCell * cell = [tableView dequeueReusableCellWithIdentifier:thnGoodsCommentInfoCellId];
-            if (!cell) {
-                cell = [[FBGoodsCommentTableViewCell alloc] initWithStyle:(UITableViewCellStyleDefault) reuseIdentifier:thnGoodsCommentInfoCellId];
-            }
-            [cell setCommentModel:self.goodsComment[indexPath.row - 1]];
+            UITableViewCell * cell = [tableView dequeueReusableCellWithIdentifier:goodsDesCellId];
+            cell = [[UITableViewCell alloc] initWithStyle:(UITableViewCellStyleDefault) reuseIdentifier:goodsDesCellId];
+            return cell;
+        }
+        
+    } else if (indexPath.section == 2) {
+        static NSString * InfoBrandCellId = @"InfoBrandCellId";
+        if (self.goodsInfo.brand.title.length) {
+            InfoBrandTableViewCell * cell = [tableView dequeueReusableCellWithIdentifier:InfoBrandCellId];
+            cell = [[InfoBrandTableViewCell alloc] initWithStyle:(UITableViewCellStyleDefault) reuseIdentifier:InfoBrandCellId];
+            [cell setGoodsBrandData:self.goodsInfo];
+            return cell;
+            
+        } else {
+            UITableViewCell * cell = [tableView dequeueReusableCellWithIdentifier:InfoBrandCellId];
+            cell = [[UITableViewCell alloc] initWithStyle:(UITableViewCellStyleDefault) reuseIdentifier:InfoBrandCellId];
             return cell;
         }
     }
-
     return nil;
 }
 
@@ -288,20 +436,19 @@ static NSString *const URLAddCar = @"/shopping/add_cart";
         return cell.cellHeight;
         
     } else if (indexPath.section == 1) {
-        return 44;
+        if (_goodsDes.length) {
+            GoodsDesTableViewCell * cell = [[GoodsDesTableViewCell alloc] init];
+            [cell getContentCellHeight:_goodsDes];
+            return  cell.cellHeight;
+        } else {
+            return 0.01;
+        }
         
     } else if (indexPath.section == 2) {
-        return 280;
-        
-    } else if (indexPath.section == 3) {
-        if (indexPath.row == 0) {
-            return 44;
+        if (self.goodsInfo.brand.title.length) {
+            return 70;
         } else {
-            if (self.goodsComment.count > 0) {
-                return 100;
-            } else if (self.goodsComment.count == 0) {
-                return 0.01;
-            }
+            return 0.01;
         }
     }
     return 0;
@@ -320,13 +467,16 @@ static NSString *const URLAddCar = @"/shopping/add_cart";
 
 #pragma mark 跳转
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    if (indexPath.section == 1) {
-        [self OpenGoodsBuyView];
-    
-    } else if (indexPath.section == 3) {
-        FBGoodsCommentViewController * thnCommentVC = [[FBGoodsCommentViewController alloc] init];
-        thnCommentVC.targetId = self.goodsID;
-        [self.navigationController pushViewController:thnCommentVC animated:YES];
+    if (indexPath.section == 0) {
+        if (_canBuy == 9) {
+            [self.menuView updateMenuBtnState:1];
+            [self menuItemSelected:1];
+        }
+        
+    } else if (indexPath.section == 2) {
+        THNBrandInfoViewController * goodsBrandVC = [[THNBrandInfoViewController alloc] init];
+        goodsBrandVC.brandId = self.goodsInfo.brandId;
+        [self.navigationController pushViewController:goodsBrandVC animated:YES];
     }
 }
 
@@ -357,8 +507,9 @@ static NSString *const URLAddCar = @"/shopping/add_cart";
 - (UIView *)buyView {
     if (!_buyView) {
         _buyView = [[UIView alloc] initWithFrame:CGRectMake(0, SCREEN_HEIGHT - 44, SCREEN_WIDTH, 44)];
+        _buyView.backgroundColor = [UIColor whiteColor];
         [_buyView addSubview:self.buyingBtn];
-        [_buyView addSubview:self.addCarBtn];
+        [_buyView addSubview:self.likeBtn];
     }
     return _buyView;
 }
@@ -367,44 +518,43 @@ static NSString *const URLAddCar = @"/shopping/add_cart";
 - (UIButton *)buyingBtn {
     if (!_buyingBtn) {
         _buyingBtn = [[UIButton alloc] initWithFrame:CGRectMake(SCREEN_WIDTH/2, 0, SCREEN_WIDTH/2, 44)];
-        [_buyingBtn setTitle:NSLocalizedString(@"buyingBtn", nil) forState:(UIControlStateNormal)];
+        [_buyingBtn setTitle:NSLocalizedString(@"goBuyGoods", nil) forState:(UIControlStateNormal)];
         [_buyingBtn setTitleColor:[UIColor whiteColor] forState:(UIControlStateNormal)];
-        if (IS_iOS9) {
-            _buyingBtn.titleLabel.font = [UIFont fontWithName:@"PingFangSC-Light" size:14];
-        } else {
-            _buyingBtn.titleLabel.font = [UIFont systemFontOfSize:14];
-        }
-        _buyingBtn.backgroundColor = [UIColor colorWithHexString:@"#BE8914"];
+        _buyingBtn.titleLabel.font = [UIFont systemFontOfSize:14];
+        _buyingBtn.backgroundColor = [UIColor colorWithHexString:@"#222222"];
         [_buyingBtn addTarget:self action:@selector(OpenGoodsBuyView) forControlEvents:(UIControlEventTouchUpInside)];
     }
     return _buyingBtn;
 }
 
-#pragma mark 加入购物车
-- (UIButton *)addCarBtn {
-    if (!_addCarBtn) {
-        _addCarBtn = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH/2, 44)];
-        [_addCarBtn setTitle:NSLocalizedString(@"addCarBtn", nil) forState:(UIControlStateNormal)];
-        [_addCarBtn setTitleColor:[UIColor whiteColor] forState:(UIControlStateNormal)];
-        if (IS_iOS9) {
-            _addCarBtn.titleLabel.font = [UIFont fontWithName:@"PingFangSC-Light" size:14];
-        } else {
-            _addCarBtn.titleLabel.font = [UIFont systemFontOfSize:14];
-        }
-        _addCarBtn.backgroundColor = [UIColor colorWithHexString:@"DB9E18"];
-        [_addCarBtn addTarget:self action:@selector(OpenGoodsBuyView) forControlEvents:(UIControlEventTouchUpInside)];
+#pragma mark 收藏
+- (UIButton *)likeBtn {
+    if (!_likeBtn) {
+        _likeBtn = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH/2, 44)];
+        _likeBtn.backgroundColor = [UIColor whiteColor];
+        [_likeBtn setTitle:NSLocalizedString(@"likeTheGoods", nil) forState:(UIControlStateNormal)];
+        [_likeBtn setTitle:NSLocalizedString(@"likeTheGoods", nil) forState:(UIControlStateSelected)];
+        [_likeBtn setTitleColor:[UIColor colorWithHexString:@"#999999"] forState:(UIControlStateNormal)];
+        _likeBtn.titleLabel.font = [UIFont systemFontOfSize:10];
+        [_likeBtn setImage:[UIImage imageNamed:@"goods_star"] forState:(UIControlStateNormal)];
+        [_likeBtn setImage:[UIImage imageNamed:@"goods_star_seleted"] forState:(UIControlStateSelected)];
+        [_likeBtn setTitleEdgeInsets:(UIEdgeInsetsMake(30, -30, 0, 0))];
+        [_likeBtn setImageEdgeInsets:(UIEdgeInsetsMake(-10, 13.5, 0, 0))];
+        [_likeBtn addTarget:self action:@selector(networkCollectGoods:) forControlEvents:(UIControlEventTouchUpInside)];
     }
-    return _addCarBtn;
+    return _likeBtn;
 }
 
 #pragma mark - 设置Nav
 - (void)setNavigationViewUI {
     [[UIApplication sharedApplication] setStatusBarHidden:NO withAnimation:(UIStatusBarAnimationSlide)];
+    [[UIApplication sharedApplication] setStatusBarStyle:(UIStatusBarStyleLightContent)];
     self.navViewTitle.text = NSLocalizedString(@"GoodsInfoVcTitle", nil);
     self.view.backgroundColor = [UIColor whiteColor];
-    [self addBarItemRightBarButton:@"" image:@"Nav_Car" isTransparent:NO];
+    [self addBarItemRightBarButton:@"" image:@"mall_car" isTransparent:NO];
     self.delegate = self;
     [self setNavGoodsCarNumLab];
+    self.view.clipsToBounds = YES;
 }
 
 - (void)rightBarItemSelected {
@@ -418,18 +568,18 @@ static NSString *const URLAddCar = @"/shopping/add_cart";
 }
 
 #pragma mark -
-- (NSMutableArray *)recommendGoods {
-    if (!_recommendGoods) {
-        _recommendGoods = [NSMutableArray array];
+- (NSMutableArray *)sceneListMarr {
+    if (!_sceneListMarr) {
+        _sceneListMarr = [NSMutableArray array];
     }
-    return _recommendGoods;
+    return _sceneListMarr;
 }
 
-- (NSMutableArray *)goodsComment {
-    if (!_goodsComment) {
-        _goodsComment = [NSMutableArray array];
+- (NSMutableArray *)sceneIdMarr {
+    if (!_sceneIdMarr) {
+        _sceneIdMarr = [NSMutableArray array];
     }
-    return _goodsComment;
+    return _sceneIdMarr;
 }
 
 @end

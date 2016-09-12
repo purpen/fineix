@@ -92,6 +92,11 @@ NSString *const feedbackUrl = @"/gateway/feedback";//意见反馈接口
     }
 }
 
+-(BOOL)textFieldShouldReturn:(UITextField *)textField{
+    [self.view endEditing:YES];
+    return YES;
+}
+
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.

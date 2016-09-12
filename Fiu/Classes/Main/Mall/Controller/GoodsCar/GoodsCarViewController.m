@@ -375,12 +375,8 @@ static NSString *const URLEditItemsNum = @"/shopping/edit_cart";
         [_goPayBtn setTitle:NSLocalizedString(@"GoPay", nil) forState:(UIControlStateNormal)];
         [_goPayBtn setTitle:NSLocalizedString(@"Delete", nil) forState:(UIControlStateSelected)];
         [_goPayBtn setTitleColor:[UIColor whiteColor] forState:(UIControlStateNormal)];
-        if (IS_iOS9) {
-            _goPayBtn.titleLabel.font = [UIFont fontWithName:@"PingFangSC-Light" size:16];
-        } else {
-            _goPayBtn.titleLabel.font = [UIFont systemFontOfSize:16];
-        }
-        _goPayBtn.backgroundColor = [UIColor colorWithHexString:fineixColor];
+        _goPayBtn.titleLabel.font = [UIFont systemFontOfSize:16];
+        _goPayBtn.backgroundColor = [UIColor colorWithHexString:@"#000000"];
         [_goPayBtn addTarget:self action:@selector(goPayBtnClick:) forControlEvents:(UIControlEventTouchUpInside)];
     }
     return _goPayBtn;
@@ -416,12 +412,8 @@ static NSString *const URLEditItemsNum = @"/shopping/edit_cart";
         _editBtn = [[UIButton alloc] initWithFrame:CGRectMake(SCREEN_WIDTH - 44, 20, 44, 44)];
         [_editBtn setTitle:NSLocalizedString(@"Edit", nil) forState:(UIControlStateNormal)];
         [_editBtn setTitle:NSLocalizedString(@"Done", nil) forState:(UIControlStateSelected)];
-        [_editBtn setTitleColor:[UIColor blackColor] forState:(UIControlStateNormal)];
-        if (IS_iOS9) {
-            _editBtn.titleLabel.font = [UIFont fontWithName:@"PingFangSC-Light" size:17];
-        } else {
-            _editBtn.titleLabel.font = [UIFont systemFontOfSize:17];
-        }
+        [_editBtn setTitleColor:[UIColor whiteColor] forState:(UIControlStateNormal)];
+        _editBtn.titleLabel.font = [UIFont systemFontOfSize:17];
         _editBtn.selected = NO;
         [_editBtn addTarget:self action:@selector(beginEditCar:) forControlEvents:(UIControlEventTouchUpInside)];
     }
@@ -485,6 +477,11 @@ static NSString *const URLEditItemsNum = @"/shopping/edit_cart";
     self.navViewTitle.text = NSLocalizedString(@"GoodsCarVcTitle", nil);
     self.view.backgroundColor = [UIColor whiteColor];
     [self.navView addSubview:self.editBtn];
+}
+
+- (void)viewWillDisappear:(BOOL)animated {
+    [super viewWillDisappear:animated];
+    [SVProgressHUD dismiss];
 }
 
 #pragma mark - 

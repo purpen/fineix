@@ -14,17 +14,16 @@
 - (instancetype)initWithFrame:(CGRect)frame {
     self = [super initWithFrame:frame];
     if (self) {
-        UILabel * topLineLab = [[UILabel alloc] initWithFrame:CGRectMake(15, 0, SCREEN_WIDTH - 15, 1)];
-        topLineLab.backgroundColor = [UIColor colorWithHexString:@"#FFFFFF" alpha:0.3];
-        [self addSubview:topLineLab];
-        
+        self.backgroundColor = [UIColor whiteColor];
         [self addSubview:self.addLocation];
         [self addSubview:self.locationView];
         [self addSubview:self.clearBtn];
         
-        UILabel * lineLab = [[UILabel alloc] initWithFrame:CGRectMake(15, 43, SCREEN_WIDTH - 15, 1)];
-        lineLab.backgroundColor = [UIColor colorWithHexString:@"#FFFFFF" alpha:0.2];
-        [self addSubview:lineLab];
+        for (NSUInteger idx = 0; idx < 2; ++ idx) {
+            UILabel * lineLab = [[UILabel alloc] initWithFrame:CGRectMake(0, 43 * idx, SCREEN_WIDTH, 1)];
+            lineLab.backgroundColor = [UIColor colorWithHexString:@"#E2E2E2" alpha:0.5f];
+            [self addSubview:lineLab];
+        }
     }
     return self;
 }
@@ -60,12 +59,8 @@
 - (UILabel *)locationLab {
     if (!_locationLab) {
         _locationLab = [[UILabel alloc] initWithFrame:CGRectMake(35, 3, SCREEN_WIDTH - 80, 20)];
-        _locationLab.textColor = [UIColor colorWithHexString:@"#FFFFFF" alpha:1];
-        if (IS_iOS9) {
-            _locationLab.font = [UIFont fontWithName:@"PingFangSC-Light" size:12];
-        } else {
-            _locationLab.font = [UIFont systemFontOfSize:12];
-        }
+        _locationLab.textColor = [UIColor colorWithHexString:@"#333333"];
+        _locationLab.font = [UIFont systemFontOfSize:12];
     }
     return _locationLab;
 }
@@ -74,12 +69,8 @@
 - (UILabel *)cityLab {
     if (!_cityLab) {
         _cityLab = [[UILabel alloc] initWithFrame:CGRectMake(35, 20, SCREEN_WIDTH - 80, 20)];
-        _cityLab.textColor = [UIColor colorWithHexString:@"#CCCCCC" alpha:1];
-        if (IS_iOS9) {
-            _cityLab.font = [UIFont fontWithName:@"PingFangSC-Light" size:10];
-        } else {
-            _cityLab.font = [UIFont systemFontOfSize:12];
-        }
+        _cityLab.textColor = [UIColor colorWithHexString:@"#666666" alpha:1];
+        _cityLab.font = [UIFont systemFontOfSize:12];
     }
     return _cityLab;
 }
@@ -108,13 +99,8 @@
     if (!_addLocation) {
         _addLocation = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 44)];
         [_addLocation setTitle:NSLocalizedString(@"addLocation", nil) forState:(UIControlStateNormal)];
-        
-        if (IS_iOS9) {
-            _addLocation.titleLabel.font = [UIFont fontWithName:@"PingFangSC-Light" size:12];
-        } else {
-            _addLocation.titleLabel.font = [UIFont systemFontOfSize:12];
-        }
-        [_addLocation setTitleColor:[UIColor colorWithHexString:@"#FFFFFF" alpha:0.8] forState:(UIControlStateNormal)];
+        _addLocation.titleLabel.font = [UIFont systemFontOfSize:12];
+        [_addLocation setTitleColor:[UIColor colorWithHexString:@"#333333"] forState:(UIControlStateNormal)];
         _addLocation.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
         [_addLocation setImage:[UIImage imageNamed:@"icon_addLocation"] forState:(UIControlStateNormal)];
         [_addLocation setImageEdgeInsets:(UIEdgeInsetsMake(0, 15, 0, 0))];

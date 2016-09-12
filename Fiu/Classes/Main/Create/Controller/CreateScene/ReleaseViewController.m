@@ -7,17 +7,13 @@
 //
 
 #import "ReleaseViewController.h"
-#import "CreateViewController.h"
-#import "HomeViewController.h"
-#import "LookSceneViewController.h"
 #import "IQKeyboardManager.h"
 
 static NSString *const URLReleaseScenen = @"/scene_sight/save";
 static NSString *const URLReleaseFiuScenen = @"/scene_scene/save";
-static NSString *const URLGetUserDesTags = @"/gateway/fetch_chinese_word";
 
 @interface ReleaseViewController () {
-
+    
 }
 
 @end
@@ -27,24 +23,7 @@ static NSString *const URLGetUserDesTags = @"/gateway/fetch_chinese_word";
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     
-    IQKeyboardManager *manager = [IQKeyboardManager sharedManager];
-    manager.enable = NO;
-    
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(getFSceneId:) name:@"selectFiuSceneId" object:nil];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(getFSceneTitle:) name:@"selectFiuSceneTitle" object:nil];
-
     [self setNavViewUI];
-}
-
-- (void)getFSceneId:(NSNotification *)fsceneId {
-    self.fSceneId = [fsceneId object];
-}
-
-- (void)getFSceneTitle:(NSNotification *)fsceneTitle {
-    self.fSceneTitle = [fsceneTitle object];
-    if (self.fSceneTitle.length > 0) {
-        [self.addCategory getChooseFScene:self.fSceneTitle];
-    }
 }
 
 - (void)viewDidLoad {
@@ -54,314 +33,171 @@ static NSString *const URLGetUserDesTags = @"/gateway/fetch_chinese_word";
 }
 
 #pragma mark - 网络请求
-#pragma mark 获取用户填写描述的标签
-- (void)networkGetUserDesTags:(NSString *)title withDes:(NSString *)des {
-    self.getUserDesTagsRequest = [FBAPI postWithUrlString:URLGetUserDesTags requestDictionary:@{@"title":title, @"content":des} delegate:self];
-    [self.getUserDesTagsRequest startRequestSuccess:^(FBRequest *request, id result) {
-        NSArray * tagsArr = [[result valueForKey:@"data"] valueForKey:@"word"];
-        NSMutableArray * tagsMarr = [NSMutableArray array];
-        if (tagsArr.count > 10) {
-            for (NSUInteger idx = 0; idx < 10; ++ idx) {
-                [tagsMarr addObject:tagsArr[idx]];
-            }
-        } else {
-            tagsMarr = [NSMutableArray arrayWithArray:tagsArr];
-        }
-        
-        if (self.addContent.chooseTagMarr.count > 0) {
-            [self.addContent getUserEditTags:self.addContent.chooseTagMarr];
-            
-        } else {
-            if (tagsMarr.count > 0) {
-                [self.addContent getUserEditTags:tagsMarr];
-            }
-        }
-        
-    } failure:^(FBRequest *request, NSError *error) {
-        NSLog(@"%@", error);
-    }];
-}
-
 #pragma mark 发布场景
 - (void)networkNewSceneData {
-//    NSString * title = [self.showContent.titleText.text stringByReplacingOccurrencesOfString:@" " withString:@""];
-//    NSString * des = [self.showContent.desText.text stringByReplacingOccurrencesOfString:@" " withString:@""];
-    NSString * title = self.showContent.titleText.text;
-    NSString * des = self.showContent.desText.text;
-    NSString * tags =  [self.showContent.chooseTagMarr componentsJoinedByString:@","];
-
-    if ([title isEqualToString:@""]) {
-        [self showMessage:@"您还没有添加情景标题哦"];
-    } else if ([des isEqualToString:NSLocalizedString(@"addDescription", nil)] || [des isEqualToString:@""]) {
-        [self showMessage:@"您还没有写情景描述呢"];
-    } else if ([self.addLocaiton.longitude length] <= 0 || [self.addLocaiton.locationLab.text isEqualToString:@""]) {
-        [self showMessage:@"定位标记了吗？"];
-    } else if (tags.length <= 0) {
-        [self showMessage:@"请选择几个标签"];
-    } else if (self.fSceneId.length <= 0) {
-        [self showMessage:@"您的情景还没有分类哦"];
-    } else if (title.length > 20) {
-        [self showMessage:@"标题在20字以内哦"];
-    } else {
-        [SVProgressHUD showWithMaskType:SVProgressHUDMaskTypeBlack];
+    NSString *firTitle = [self.addContent.title.text stringByReplacingOccurrencesOfString:@" " withString:@""];
+    NSString *subTitle = [self.addContent.suTitle.text stringByReplacingOccurrencesOfString:@" " withString:@""];
+    if (subTitle.length == 0) {
+        subTitle = @"";
+    }
+    if (firTitle.length == 0) {
+        firTitle = @"";
+    }
+    NSString *title = [NSString stringWithFormat:@"%@%@", firTitle, subTitle];
+    
+    if ([self.addContent.content.text isEqualToString:NSLocalizedString(@"addDescription", nil)]) {
+        self.addContent.content.text = @"";
+    }
+    
+    NSString *des = self.addContent.content.text;
+    NSString *address = self.addLocaiton.locationLab.text;
+    NSString *city = self.addLocaiton.cityLab.text;
+    NSString *lng = self.addLocaiton.longitude;
+    NSString *lat = self.addLocaiton.latitude;
+    NSString *tags = [self.addContent.userAddTags componentsJoinedByString:@","];
+    NSString * json;
+    
+    [SVProgressHUD showWithMaskType:SVProgressHUDMaskTypeBlack];
+    if (self.goodsId.count) {
         NSMutableArray * goodsMarr = [NSMutableArray array];
         for (NSUInteger idx = 0; idx < self.goodsId.count; ++ idx) {
-            NSDictionary *  goodsDict = @{@"id":self.goodsId[idx],
-                                          @"price":self.goodsPrice[idx],
-                                          @"title":self.goodsTitle[idx],
-                                          @"x":self.goodsX[idx],
-                                          @"y":self.goodsY[idx]};
+            NSDictionary * goodsDict = @{@"id":self.goodsId[idx],
+                                         @"title":self.goodsTitle[idx],
+                                         @"x":self.goodsX[idx],
+                                         @"y":self.goodsY[idx],
+                                         @"loc":self.goodsLoc[idx],
+                                         @"type":self.goodsType[idx]};
             [goodsMarr addObject:goodsDict];
         }
         NSData * jsonData = [NSJSONSerialization dataWithJSONObject:goodsMarr options:0 error:nil];
-        NSString * json = [[NSString alloc] initWithData:jsonData encoding:NSUTF8StringEncoding];
-        
-        NSData * imageData = UIImageJPEGRepresentation(self.bgImg, 0.7);
-        NSString * icon64Str = [imageData base64EncodedStringWithOptions:NSDataBase64Encoding64CharacterLineLength];
-        NSDictionary * paramDict = @{
-                                     @"tmp":icon64Str,
-                                     @"title":title,
-                                     @"des":des,
-                                     @"lng":self.addLocaiton.longitude,
-                                     @"lat":self.addLocaiton.latitude,
-                                     @"address":self.addLocaiton.locationLab.text,
-                                     @"city":self.addLocaiton.cityLab.text,
-                                     @"products":json,
-                                     @"tags":tags,
-                                     @"scene_id":self.fSceneId
-                                     };
-        
-        self.releaseSceneRequest = [FBAPI postWithUrlString:URLReleaseScenen requestDictionary:paramDict delegate:self];
-        
-        [self.releaseSceneRequest startRequestSuccess:^(FBRequest *request, id result) {
-            NSString * sceneId = [NSString stringWithFormat:@"%@",[[result valueForKey:@"data"] valueForKey:@"id"]];
-            LookSceneViewController * sceneInfoVC = [[LookSceneViewController alloc] init];
-            sceneInfoVC.sceneId = sceneId;
-            [self.navigationController pushViewController:sceneInfoVC animated:YES];
-            [SVProgressHUD dismiss];
-
-        } failure:^(FBRequest *request, NSError *error) {
-            NSLog(@"%@", error);
-            [SVProgressHUD showErrorWithStatus:[error localizedDescription]];
-        }];
+        json = [[NSString alloc] initWithData:jsonData encoding:NSUTF8StringEncoding];
     }
+    
+    if (lng.length == 0) {
+        lng = @"";
+    }
+    if (lat.length == 0) {
+        lat = @"";
+    }
+    if (address.length == 0) {
+        address = @"";
+    }
+    if (city.length == 0) {
+        city = @"";
+    }
+    if (tags.length == 0) {
+        tags = @"";
+    }
+    if (title.length == 0) {
+        title = @"";
+    }
+    if (des.length == 0) {
+        des = @"";
+    }
+    if (json.length == 0) {
+        json = @"";
+    }
+    
+    NSData * imageData = UIImageJPEGRepresentation(self.bgImg, 0.7);
+    NSString * icon64Str = [imageData base64EncodedStringWithOptions:NSDataBase64Encoding64CharacterLineLength];
+    NSDictionary * paramDict = @{
+                                 @"tmp":icon64Str,
+                                 @"title":title,
+                                 @"des":des,
+                                 @"lng":lng,
+                                 @"lat":lat,
+                                 @"address":address,
+                                 @"city":city,
+                                 @"products":json,
+                                 @"tags":tags,
+                                 @"subject_ids":self.actionId
+                                 };
+    
+    self.releaseSceneRequest = [FBAPI postWithUrlString:URLReleaseScenen requestDictionary:paramDict delegate:self];
+    
+    [self.releaseSceneRequest startRequestSuccess:^(FBRequest *request, id result) {
+        if ([[result valueForKey:@"success"] isEqualToNumber:@1]) {
+            self.sharePopView.sceneId = [NSString stringWithFormat:@"%zi", [[[result valueForKey:@"data"] valueForKey:@"id"] integerValue]];
+            [self dismissViewControllerAnimated:YES completion:^{
+                [self showShareView];
+            }];
+        }
+        [SVProgressHUD dismiss];
+        
+    } failure:^(FBRequest *request, NSError *error) {
+        NSLog(@"%@", error);
+        [SVProgressHUD showErrorWithStatus:[error localizedDescription]];
+    }];
 }
 
 #pragma mark - 设置视图UI
 - (void)setReleaseViewUI {
-    [self.view addSubview:self.bgImgView];
-    [self.view bringSubviewToFront:self.navView];
-    
-    [self.view addSubview:self.topView];
-    [_topView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.size.mas_equalTo(CGSizeMake(SCREEN_WIDTH, 88));
-        make.left.equalTo(self.view.mas_left).with.offset(0);
-        make.bottom.equalTo(self.view.mas_bottom).with.offset(-20);
-    }];
-    
-    [self.view addSubview:self.addContentBtn];
-    [_addContentBtn mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.size.mas_equalTo(CGSizeMake(SCREEN_WIDTH - 30, 30));
-        make.left.equalTo(self.view.mas_left).with.offset(15);
-        make.bottom.equalTo(_topView.mas_top).with.offset(-8);
-    }];
-    
     [self.view addSubview:self.addContent];
-    
-    [self.view addSubview:self.addTagsView];
-}
-
-#pragma mark - 情景背景图片
-- (UIImageView *)bgImgView {
-    if (!_bgImgView) {
-        _bgImgView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT)];
-        _bgImgView.image = self.bgImg;
-        _bgImgView.contentMode = UIViewContentModeScaleAspectFill;
-        _bgImgView.clipsToBounds = YES;
-        
-        //  添加渐变层
-        CAGradientLayer * shadow = [CAGradientLayer layer];
-        shadow.startPoint = CGPointMake(0, 0);
-        shadow.endPoint = CGPointMake(0, 1);
-        shadow.colors = @[(__bridge id)[UIColor clearColor].CGColor,
-                          (__bridge id)[UIColor blackColor].CGColor];
-        shadow.locations = @[@(0.5f), @(1.5f)];
-        shadow.frame = _bgImgView.bounds;
-        [_bgImgView.layer addSublayer:shadow];
-        
-        CAGradientLayer * topShadow = [CAGradientLayer layer];
-        topShadow.startPoint = CGPointMake(0, 1);
-        topShadow.endPoint = CGPointMake(0, 0);
-        topShadow.colors = @[(__bridge id)[UIColor clearColor].CGColor,
-                          (__bridge id)[UIColor blackColor].CGColor];
-        topShadow.locations = @[@(0.5f), @(1.5f)];
-        topShadow.frame = _bgImgView.bounds;
-        [_bgImgView.layer addSublayer:topShadow];
-    }
-    return _bgImgView;
-}
-
-- (UIView *)topView {
-    if (!_topView) {
-        _topView = [[UIView alloc] init];
-        
-        [_topView addSubview:self.addLocaiton];
-        [_topView addSubview:self.addCategory];
-    }
-    return _topView;
-}
-
-#pragma mark - 添加地点
-- (AddLocationView *)addLocaiton {
-    if (!_addLocaiton) {
-        _addLocaiton = [[AddLocationView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 44)];
-        _addLocaiton.vc = self;
-    }
-    return _addLocaiton;
-}
-
-#pragma mark - 添加分类
-- (AddCategoryView *)addCategory {
-    if (!_addCategory) {
-        _addCategory = [[AddCategoryView alloc] initWithFrame:CGRectMake(0, 44, SCREEN_WIDTH, 44)];
-        _addCategory.vc = self;
-    }
-    return _addCategory;
-}
-
-#pragma mark - 添加内容按钮
-- (UIButton *)addContentBtn {
-    if (!_addContentBtn) {
-        _addContentBtn = [[UIButton alloc] init];
-        [_addContentBtn setTitle:NSLocalizedString(@"addContent", nil) forState:(UIControlStateNormal)];
-        if (IS_iOS9) {
-            _addContentBtn.titleLabel.font = [UIFont fontWithName:@"PingFangSC-Light" size:21];
-        } else {
-            _addContentBtn.titleLabel.font = [UIFont systemFontOfSize:21];
-        }
-        [_addContentBtn setTitleColor:[UIColor colorWithHexString:@"#FFFFFF" alpha:1] forState:(UIControlStateNormal)];
-        _addContentBtn.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
-        [_addContentBtn addTarget:self action:@selector(addContentBtnClick) forControlEvents:(UIControlEventTouchUpInside)];
-        
-        NSMutableAttributedString * titleText = [[NSMutableAttributedString alloc] initWithString:_addContentBtn.titleLabel.text];
-        NSMutableParagraphStyle * paragraphStyle = [[NSMutableParagraphStyle alloc] init];
-        paragraphStyle.alignment = NSTextAlignmentJustified;
-        
-        NSDictionary * textDict = @{
-                                    NSBackgroundColorAttributeName:[UIColor colorWithPatternImage:[UIImage imageNamed:@"addTitleBtnBg"]] ,
-                                    NSParagraphStyleAttributeName :paragraphStyle
-                                    };
-        [titleText addAttributes:textDict range:NSMakeRange(0, titleText.length)];
-        _addContentBtn.titleLabel.attributedText = titleText;
-    }
-    return _addContentBtn;
-}
-
-#pragma mark - 改变视图位置，弹出内容输入框
-- (void)addContentBtnClick {
-    [UIView animateWithDuration:.3 animations:^{
-        self.addContent.alpha = 1;
-        [self.addContent.title becomeFirstResponder];
+    [_addContent mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.size.mas_equalTo(CGSizeMake(SCREEN_WIDTH, SCREEN_WIDTH+88));
+        make.left.equalTo(self.view.mas_left).with.offset(0);
+        make.top.equalTo(self.view.mas_top).with.offset(45);
     }];
     
-    __weak __typeof(self)weakSelf = self;
-    self.addContent.getEditContentAndTags = ^ (NSString * title, NSString * des, NSMutableArray * tags){
-        if (title.length > 0) {
-            weakSelf.addContentBtn.hidden = YES;
-            [weakSelf.view addSubview:weakSelf.showContent];
-            [weakSelf.showContent mas_makeConstraints:^(MASConstraintMaker *make) {
-                make.width.equalTo(@(SCREEN_WIDTH));
-                make.left.equalTo(weakSelf.view.mas_left).with.offset(0);
-                make.bottom.equalTo(weakSelf.topView.mas_top).with.offset(0);
-                make.top.equalTo(weakSelf.view.mas_top).with.offset(100);
-            }];
-            [weakSelf.showContent setEditContentData:title withDes:des withTags:tags];
-        
-        } else {
-            weakSelf.addContentBtn.hidden = NO;
-        }
-    };
+    [self.view addSubview:self.addLocaiton];
+    [_addLocaiton mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.size.mas_equalTo(CGSizeMake(SCREEN_WIDTH, 44));
+        make.top.equalTo(_addContent.mas_bottom).with.offset(0);
+        make.left.equalTo(self.view.mas_left).with.offset(0);
+    }];
 }
 
 #pragma mark - 添加内容视图
 - (AddContentView *)addContent {
     if (!_addContent) {
-        _addContent = [[AddContentView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT)];
+        _addContent = [[AddContentView alloc] init];
         _addContent.vc = self;
-        _addContent.bgImage = self.bgImg;
-        _addContent.alpha = 0;
+        _addContent.sceneImgView.image = self.bgImg;
     }
     return _addContent;
 }
 
-#pragma mark - 显示内容视图
-- (ShowContentView *)showContent {
-    if (!_showContent) {
-        _showContent = [[ShowContentView alloc] init];
-        _showContent.delegate = self;
+#pragma mark - 添加地点
+- (AddLocationView *)addLocaiton {
+    if (!_addLocaiton) {
+        _addLocaiton = [[AddLocationView alloc] init];
+        _addLocaiton.vc = self;
     }
-    return _showContent;
+    return _addLocaiton;
 }
 
-- (void)EditContentData {
-    [UIView animateWithDuration:.3 animations:^{
-        self.addContent.alpha = 1;
-        [self.addContent.title becomeFirstResponder];
-    }];
-}
-
-
-#pragma mark - 添加标签
-- (void)BeginAddTag {
-    [self.addTagsView setDefaultTags:self.showContent.chooseTagMarr];
-    
-    [UIView animateWithDuration:0.3 animations:^{
-        self.addTagsView.alpha = 1;
-        self.showContent.alpha = 0;
-    }];
-}
-
-- (AddTagsView *)addTagsView {
-    if (!_addTagsView) {
-        _addTagsView = [[AddTagsView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT)];
-        _addTagsView.bgImage = self.bgImg;
-        _addTagsView.alpha = 0;
-        _addTagsView.delegate = self;
+#pragma mark - 发布完成，提示分享
+- (FBPopupView *)sharePopView {
+    if (!_sharePopView) {
+        _sharePopView = [[FBPopupView alloc] init];
     }
-    return _addTagsView;
+    return _sharePopView;
 }
 
-- (void)addTagsDone {
-    [self.showContent setAddTags:self.addTagsView.chooseTagMarr];
-    
-    [UIView animateWithDuration:0.3 animations:^{
-        self.showContent.alpha = 1;
-    }];
+- (void)showShareView {
+    UIWindow * window = [UIApplication sharedApplication].keyWindow;
+    [self.sharePopView showPopupViewOnWindowStyleOne:NSLocalizedString(@"releaseSceneDone", nil)];
+    [window addSubview:self.sharePopView];
 }
 
 #pragma mark -  设置导航栏
 - (void)setNavViewUI {
-    self.view.backgroundColor = [UIColor whiteColor];
-    self.navView.backgroundColor = [UIColor colorWithHexString:@"#FFFFFF" alpha:0];
-    if ([self.createType isEqualToString:@"scene"]) {
-        [self addNavViewTitle:NSLocalizedString(@"releaseVcTitle", nil)];
-    }
+    self.view.backgroundColor = [UIColor colorWithHexString:@"#F8F8F8"];
+    [self addNavViewTitle:NSLocalizedString(@"releaseVcTitle", nil)];
     self.navTitle.textColor = [UIColor whiteColor];
-    [self.cancelDoneBtn setImage:[UIImage imageNamed:@"icon_cancel"] forState:(UIControlStateNormal)];
+    [self.cancelDoneBtn setImage:[UIImage imageNamed:@"icon_back_white"] forState:(UIControlStateNormal)];
     [self addCancelDoneButton];
     [self addDoneButton];
     [self.doneBtn addTarget:self action:@selector(releaseScene) forControlEvents:(UIControlEventTouchUpInside)];
+    
+    if (self.actionId.length == 0) {
+        self.actionId = @"";
+    }
 }
 
 #pragma mark - 确认发布场景
 - (void)releaseScene {
     [self networkNewSceneData];
-}
-
-- (void)dealloc {
-    [[NSNotificationCenter defaultCenter] removeObserver:self name:@"a" object:nil];
-    [[NSNotificationCenter defaultCenter] removeObserver:self name:@"selectFiuSceneId" object:nil];
-    [[NSNotificationCenter defaultCenter] removeObserver:self name:@"selectFiuSceneTitle" object:nil];
 }
 
 @end

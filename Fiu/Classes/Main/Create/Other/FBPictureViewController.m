@@ -35,8 +35,22 @@
 }
 
 //  打开相薄
-- (void)addOpenPhotoAlbumsButton {
+- (void)addOpenPhotoAlbumsButton:(NSString *)title {
+    [self.openPhotoAlbums setTitle:title forState:(UIControlStateNormal)];
     [self.navView addSubview:self.openPhotoAlbums];
+}
+
+- (void)getPhotoAlbumsTitleSize:(NSString *)title {
+    NSDictionary *attribute = @{NSFontAttributeName: [UIFont systemFontOfSize:17]};
+    CGFloat titleW = [title boundingRectWithSize:CGSizeMake(320, 0)
+                                         options:\
+                      NSStringDrawingTruncatesLastVisibleLine |
+                      NSStringDrawingUsesLineFragmentOrigin |
+                      NSStringDrawingUsesFontLeading
+                                      attributes:attribute
+                                         context:nil].size.width;
+    
+    [_openPhotoAlbums setImageEdgeInsets:(UIEdgeInsetsMake(0, (titleW+20)*2, 0, 0))];
 }
 
 //  取消创建按钮
@@ -62,8 +76,14 @@
 }
 
 //  关闭按钮
-- (void)addCloseBtn {
+- (void)addCloseBtn:(NSString *)image {
+    [self.closeBtn setImage:[UIImage imageNamed:image] forState:(UIControlStateNormal)];
     [self.navView addSubview:self.closeBtn];
+}
+
+//  确定
+- (void)addSureButton {
+    [self.navView addSubview:self.sureButton];
 }
 
 //  取消发布
@@ -79,8 +99,8 @@
 #pragma mark - 顶部导航
 - (UIView *)navView {
     if (!_navView) {
-        _navView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 50)];
-        _navView.backgroundColor = [UIColor colorWithHexString:pictureNavColor alpha:1];
+        _navView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 45)];
+        _navView.backgroundColor = [UIColor colorWithHexString:@"#000000" alpha:1];
     }
     return _navView;
 }
@@ -88,7 +108,7 @@
 #pragma mark - 页面的标题
 - (UILabel *)navTitle {
     if (!_navTitle) {
-        _navTitle = [[UILabel alloc] initWithFrame:CGRectMake(50, 0, (SCREEN_WIDTH - 100), 50)];
+        _navTitle = [[UILabel alloc] initWithFrame:CGRectMake(50, 0, SCREEN_WIDTH-100, 45)];
         _navTitle.font = [UIFont systemFontOfSize:Font_ControllerTitle];
         _navTitle.textColor = [UIColor whiteColor];
         _navTitle.textAlignment = NSTextAlignmentCenter;
@@ -99,7 +119,7 @@
 #pragma mark - Nav跟内容的分割线
 - (UILabel *)line {
     if (!_line) {
-        _line = [[UILabel alloc] initWithFrame:CGRectMake(0, 49, SCREEN_WIDTH, 1)];
+        _line = [[UILabel alloc] initWithFrame:CGRectMake(0, 44, SCREEN_WIDTH, 1)];
         _line.backgroundColor = [UIColor colorWithHexString:lineGrayColor alpha:1];
     }
     return _line;
@@ -108,7 +128,7 @@
 #pragma mark - 继续下一步的执行事件
 - (UIButton *)nextBtn {
     if (!_nextBtn) {
-        _nextBtn = [[UIButton alloc] initWithFrame:CGRectMake((SCREEN_WIDTH - 60), 0, 50, 50)];
+        _nextBtn = [[UIButton alloc] initWithFrame:CGRectMake(SCREEN_WIDTH - 50, 0, 45, 45)];
         [_nextBtn setTitle:NSLocalizedString(@"next", nil) forState:(UIControlStateNormal)];
         [_nextBtn setTitleColor:[UIColor whiteColor] forState:(UIControlStateNormal)];
         if (IS_iOS9) {
@@ -123,7 +143,7 @@
 #pragma mark - 返回上一步的执行事件 
 - (UIButton *)backBtn {
     if (!_backBtn) {
-        _backBtn = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 50, 50)];
+        _backBtn = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 45, 45)];
         [_backBtn addTarget:self action:@selector(backBtnClick) forControlEvents:(UIControlEventTouchUpInside)];
     }
     return _backBtn;
@@ -136,8 +156,7 @@
 #pragma mark - 关闭
 - (UIButton *)closeBtn {
     if (!_closeBtn) {
-        _closeBtn = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 50, 50)];
-        [_closeBtn setImage:[UIImage imageNamed:@"icon_cancel_black"] forState:(UIControlStateNormal)];
+        _closeBtn = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 45, 45)];
         [_closeBtn addTarget:self action:@selector(closeBtnClick) forControlEvents:(UIControlEventTouchUpInside)];
     }
     return _closeBtn;
@@ -147,10 +166,30 @@
     [self dismissViewControllerAnimated:YES completion:nil];
 }
 
+#pragma mark - 确定
+- (UIButton *)sureButton {
+    if (!_sureButton) {
+        _sureButton = [[UIButton alloc] initWithFrame:CGRectMake(SCREEN_WIDTH - 50, 0, 45, 45)];
+        [_sureButton addTarget:self action:@selector(sureButtonClick) forControlEvents:(UIControlEventTouchUpInside)];
+        [_sureButton setTitle:NSLocalizedString(@"sure", nil) forState:(UIControlStateNormal)];
+        [_sureButton setTitleColor:[UIColor whiteColor] forState:(UIControlStateNormal)];
+        _sureButton.titleLabel.font = [UIFont systemFontOfSize:Font_ControllerTitle];
+    }
+    return _sureButton;
+}
+
+- (void)sureButtonClick {
+    if ([self.delegate respondsToSelector:@selector(thn_sureButtonAction)]) {
+        [self dismissViewControllerAnimated:YES completion:^{
+            [self.delegate thn_sureButtonAction];
+        }];
+    }
+}
+
 #pragma mark - 设置取消创建场景按钮
 - (UIButton *)cancelBtn {
     if (!_cancelBtn) {
-        _cancelBtn = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 50, 50)];
+        _cancelBtn = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 45, 45)];
         [self.cancelBtn addTarget:self action:@selector(cancelBtnClick) forControlEvents:(UIControlEventTouchUpInside)];
     }
     return _cancelBtn;
@@ -163,14 +202,10 @@
 #pragma mark - 设置发布场景景按钮
 - (UIButton *)doneBtn {
     if (!_doneBtn) {
-        _doneBtn = [[UIButton alloc] initWithFrame:CGRectMake((SCREEN_WIDTH - 60), 0, 50, 50)];
+        _doneBtn = [[UIButton alloc] initWithFrame:CGRectMake(SCREEN_WIDTH - 50, 0, 45, 45)];
         [_doneBtn setTitle:NSLocalizedString(@"release", nil) forState:(UIControlStateNormal)];
         [_doneBtn setTitleColor:[UIColor colorWithHexString:fineixColor alpha:1] forState:(UIControlStateNormal)];
-        if (IS_iOS9) {
-            _doneBtn.titleLabel.font = [UIFont fontWithName:@"PingFangSC-Light" size:Font_ControllerTitle];
-        } else {
-            _doneBtn.titleLabel.font = [UIFont systemFontOfSize:Font_ControllerTitle];
-        }
+        _doneBtn.titleLabel.font = [UIFont systemFontOfSize:Font_ControllerTitle];
     }
     return _doneBtn;
 }
@@ -178,7 +213,7 @@
 #pragma mark - 取消发布按钮
 - (UIButton *)cancelDoneBtn {
     if (!_cancelDoneBtn) {
-        _cancelDoneBtn = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 50, 50)];
+        _cancelDoneBtn = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 45, 45)];
         [_cancelDoneBtn setImage:[UIImage imageNamed:@"icon_back"] forState:(UIControlStateNormal)];
         [_cancelDoneBtn addTarget:self action:@selector(cancelDoneBtnClick) forControlEvents:(UIControlEventTouchUpInside)];
     }
@@ -229,11 +264,13 @@
 #pragma mark - 打开相薄
 - (UIButton *)openPhotoAlbums {
     if (!_openPhotoAlbums) {
-        _openPhotoAlbums = [[UIButton alloc] initWithFrame:CGRectMake(SCREEN_WIDTH/2 - 50, 0, 110, 50)];
+        _openPhotoAlbums = [[UIButton alloc] initWithFrame:CGRectMake(50, 0, SCREEN_WIDTH - 100, 45)];
+        [_openPhotoAlbums setTitleColor:[UIColor whiteColor] forState:(UIControlStateNormal)];
         [_openPhotoAlbums setImage:[UIImage imageNamed:@"icon_down"] forState:(UIControlStateNormal)];
         [_openPhotoAlbums setImage:[UIImage imageNamed:@"icon_upward"] forState:(UIControlStateSelected)];
-        [_openPhotoAlbums setImageEdgeInsets:(UIEdgeInsetsMake(0, 90, 0, 0))];
+        _openPhotoAlbums.titleLabel.font = [UIFont systemFontOfSize:17];
         _openPhotoAlbums.selected = NO;
+        _openPhotoAlbums.clipsToBounds = YES;
     }
     return _openPhotoAlbums;
 }

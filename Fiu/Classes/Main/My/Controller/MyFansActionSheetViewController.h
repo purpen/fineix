@@ -9,6 +9,7 @@
 #import <UIKit/UIKit.h>
 
 @class UserInfo;
+@class FindFriendModel;
 
 @interface MyFansActionSheetViewController : UIViewController
 
@@ -21,5 +22,8 @@
 @property(nonatomic,strong) UIButton *otherBtn;
 
 -(void)setUIWithModel:(UserInfo*)model;
+
+/**  */
+@property (nonatomic, strong) FindFriendModel *findFriendModel;
 
 @end

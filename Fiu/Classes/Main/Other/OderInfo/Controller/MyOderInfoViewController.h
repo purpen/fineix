@@ -8,8 +8,11 @@
 
 #import "FBViewController.h"
 
+@class CounterModel;
+
 @interface MyOderInfoViewController : FBViewController
 
 @property(nonatomic,strong) NSNumber *type;
+@property(nonatomic,strong) CounterModel *counterModel;
 
 @end

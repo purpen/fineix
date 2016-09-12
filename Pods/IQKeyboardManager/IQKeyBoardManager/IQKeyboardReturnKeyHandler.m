@@ -1,7 +1,7 @@
 //
 //  IQKeyboardReturnKeyHandler.m
 // https://github.com/hackiftekhar/IQKeyboardManager
-// Copyright (c) 2013-15 Iftekhar Qurashi.
+// Copyright (c) 2013-16 Iftekhar Qurashi.
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -30,10 +30,7 @@
 
 #import <UIKit/UITextField.h>
 #import <UIKit/UITextView.h>
-#import <UIKit/UITableView.h>
 #import <UIKit/UIViewController.h>
-
-#import <UIKit/UICollectionView.h>
 
 NSString *const kIQTextField                =   @"kIQTextField";
 NSString *const kIQTextFieldDelegate        =   @"kIQTextFieldDelegate";
@@ -76,7 +73,7 @@ NSString *const kIQTextFieldReturnKeyType   =   @"kIQTextFieldReturnKeyType";
 -(NSDictionary*)textFieldCachedInfo:(UITextField*)textField
 {
     for (NSDictionary *infoDict in textFieldInfoCache)
-        if ([infoDict objectForKey:kIQTextField] == textField)  return infoDict;
+        if (infoDict[kIQTextField] == textField)  return infoDict;
     
     return nil;
 }
@@ -102,8 +99,8 @@ NSString *const kIQTextFieldReturnKeyType   =   @"kIQTextFieldReturnKeyType";
     
     if (dict)
     {
-        textField.keyboardType = [[dict objectForKey:kIQTextFieldReturnKeyType] integerValue];
-        textField.delegate = [dict objectForKey:kIQTextFieldDelegate];
+        textField.keyboardType = [dict[kIQTextFieldReturnKeyType] integerValue];
+        textField.delegate = dict[kIQTextFieldDelegate];
         [textFieldInfoCache removeObject:dict];
     }
 }
@@ -112,10 +109,10 @@ NSString *const kIQTextFieldReturnKeyType   =   @"kIQTextFieldReturnKeyType";
 {
     NSMutableDictionary *dictInfo = [[NSMutableDictionary alloc] init];
     
-    [dictInfo setObject:textField forKey:kIQTextField];
-    [dictInfo setObject:[NSNumber numberWithInteger:textField.returnKeyType] forKey:kIQTextFieldReturnKeyType];
+    dictInfo[kIQTextField] = textField;
+    dictInfo[kIQTextFieldReturnKeyType] = @(textField.returnKeyType);
     
-    if (textField.delegate) [dictInfo setObject:textField.delegate forKey:kIQTextFieldDelegate];
+    if (textField.delegate) dictInfo[kIQTextFieldDelegate] = textField.delegate;
 
     [textField setDelegate:self];
 
@@ -124,16 +121,23 @@ NSString *const kIQTextFieldReturnKeyType   =   @"kIQTextFieldReturnKeyType";
 
 -(void)updateReturnKeyTypeOnTextField:(UIView*)textField
 {
-    UIView *tableView = [textField superviewOfClassType:[UITableView class]];
+    UIView *superConsideredView;
     
-    if (tableView == nil)   tableView = [textField superviewOfClassType:[UICollectionView class]];
+    //If find any consider responderView in it's upper hierarchy then will get deepResponderView. (Bug ID: #347)
+    for (Class consideredClass in [[IQKeyboardManager sharedManager] toolbarPreviousNextAllowedClasses])
+    {
+        superConsideredView = [textField superviewOfClassType:consideredClass];
+        
+        if (superConsideredView != nil)
+            break;
+    }
 
     NSArray *textFields = nil;
 
     //If there is a tableView in view's hierarchy, then fetching all it's subview that responds. No sorting for tableView, it's by subView position.
-    if (tableView)  //     //   (Enhancement ID: #22)
+    if (superConsideredView)  //     //   (Enhancement ID: #22)
     {
-        textFields = [tableView deepResponderViews];
+        textFields = [superConsideredView deepResponderViews];
     }
     //Otherwise fetching all the siblings
     else
@@ -166,15 +170,23 @@ NSString *const kIQTextFieldReturnKeyType   =   @"kIQTextFieldReturnKeyType";
 
 -(void)goToNextResponderOrResign:(UIView*)textField
 {
-    UIView *tableView = [textField superviewOfClassType:[UITableView class]];
-    if (tableView == nil)   tableView = [textField superviewOfClassType:[UICollectionView class]];
+    UIView *superConsideredView;
+    
+    //If find any consider responderView in it's upper hierarchy then will get deepResponderView. (Bug ID: #347)
+    for (Class consideredClass in [[IQKeyboardManager sharedManager] toolbarPreviousNextAllowedClasses])
+    {
+        superConsideredView = [textField superviewOfClassType:consideredClass];
+        
+        if (superConsideredView != nil)
+            break;
+    }
     
     NSArray *textFields = nil;
     
     //If there is a tableView in view's hierarchy, then fetching all it's subview that responds. No sorting for tableView, it's by subView position.
-    if (tableView)  //     //   (Enhancement ID: #22)
+    if (superConsideredView)  //     //   (Enhancement ID: #22)
     {
-        textFields = [tableView deepResponderViews];
+        textFields = [superConsideredView deepResponderViews];
     }
     //Otherwise fetching all the siblings
     else
@@ -203,7 +215,7 @@ NSString *const kIQTextFieldReturnKeyType   =   @"kIQTextFieldReturnKeyType";
     NSUInteger index = [textFields indexOfObject:textField];
     
     //If it is not last textField. then it's next object becomeFirstResponder.
-    (index != NSNotFound && index < textFields.count-1) ?   [[textFields objectAtIndex:index+1] becomeFirstResponder]  :   [textField resignFirstResponder];
+    (index != NSNotFound && index < textFields.count-1) ?   [textFields[index+1] becomeFirstResponder]  :   [textField resignFirstResponder];
 }
 
 #pragma mark - TextField delegate
@@ -327,8 +339,6 @@ NSString *const kIQTextFieldReturnKeyType   =   @"kIQTextFieldReturnKeyType";
         [self.delegate textViewDidChangeSelection:textView];
 }
 
-#ifdef NSFoundationVersionNumber_iOS_6_1
-
 - (BOOL)textView:(UITextView *)textView shouldInteractWithURL:(NSURL *)URL inRange:(NSRange)characterRange
 {
     if ([self.delegate respondsToSelector:@selector(textView:shouldInteractWithURL:inRange:)])
@@ -345,15 +355,13 @@ NSString *const kIQTextFieldReturnKeyType   =   @"kIQTextFieldReturnKeyType";
         return YES;
 }
 
-#endif
-
 -(void)dealloc
 {
     for (NSDictionary *dict in textFieldInfoCache)
     {
-        UITextField *textField  = [dict objectForKey:kIQTextField];
-        textField.keyboardType  = [[dict objectForKey:kIQTextFieldReturnKeyType] integerValue];
-        textField.delegate      = [dict objectForKey:kIQTextFieldDelegate];
+        UITextField *textField  = dict[kIQTextField];
+        textField.keyboardType  = [dict[kIQTextFieldReturnKeyType] integerValue];
+        textField.delegate      = dict[kIQTextFieldDelegate];
     }
 
     [textFieldInfoCache removeAllObjects];

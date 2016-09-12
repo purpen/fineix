@@ -48,6 +48,10 @@
     userInfo.expert_label = self.expert_label;
     userInfo.expert_info = self.expert_info;
     
+    userInfo.age_group = self.age_group;
+    userInfo.assets = self.assets;
+    userInfo.interest_scene_cate = self.interest_scene_cate;
+    
     dispatch_async(dispatch_get_global_queue(0, 0), ^{
         [userInfo saveOrUpdate];
     });
@@ -75,6 +79,9 @@
     self.is_expert = @"0";
     self.expert_label = @"";
     self.expert_info = @"";
+    self.age_group = @"";
+    self.assets = @"";
+    self.interest_scene_cate = nil;
 }
 
 @end

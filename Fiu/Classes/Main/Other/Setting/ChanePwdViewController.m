@@ -19,22 +19,24 @@
 @end
 
 static NSString *const ChangePwdURL = @"/my/modify_password";
+static NSString * const FSPlacerholderColorKeyPath = @"_placeholderLabel.textColor";
 
 @implementation ChanePwdViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
-    self.delegate = self;
+//    self.delegate = self;
     self.navViewTitle.text = @"修改密码";
     
-    //
     self.pwdView.layer.masksToBounds = YES;
     self.pwdView.layer.cornerRadius = 2;
     self.oldPwdView.layer.masksToBounds = YES;
     self.oldPwdView.layer.cornerRadius = 2;
     self.submitBtn.layer.masksToBounds = YES;
     self.submitBtn.layer.cornerRadius = 2;
+    [self.oldPwdTF setValue:self.oldPwdTF.textColor forKeyPath:FSPlacerholderColorKeyPath];
+    [self.pwdTF setValue:self.pwdTF.textColor forKeyPath:FSPlacerholderColorKeyPath];
 }
 
 
@@ -55,7 +57,7 @@ static NSString *const ChangePwdURL = @"/my/modify_password";
         if ([[result objectForKey:@"success"] isEqualToNumber:@1]) {
             
             [SVProgressHUD showSuccessWithStatus:message];
-            [self.navigationController popViewControllerAnimated:YES];
+//            [self.navigationController popViewControllerAnimated:YES];
         } else {
             [SVProgressHUD showInfoWithStatus:message];
         }

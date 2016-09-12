@@ -7,7 +7,7 @@
 //
 
 #import "InviteCCodeViewController.h"
-#import "FBTabBarController.h"
+#import "THNTabBarController.h"
 #import "AppDelegate.h"
 #import "CounterModel.h"
 #import "UITabBar+badge.h"
@@ -51,19 +51,11 @@
                                                                                                          } delegate:self];
         [request startRequestSuccess:^(FBRequest *request, id result) {
             
-            FBRequest *backRequst = [FBAPI postWithUrlString:@"/gateway/del_invite_code" requestDictionary:@{
-                                                                                                             @"code":self.inviteCodeTF.text
-                                                                                                             } delegate:self];
-            
-            [backRequst startRequestSuccess:^(FBRequest *request, id result) {
-                [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"codeFlag"];
-                [[NSUserDefaults standardUserDefaults] synchronize];
-                FBTabBarController *tab = [[FBTabBarController alloc] init];
-                [tab setSelectedIndex:0];
-                [self presentViewController:tab animated:YES completion:nil];
-            } failure:^(FBRequest *request, NSError *error) {
-                
-            }];
+            [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"codeFlag"];
+            [[NSUserDefaults standardUserDefaults] synchronize];
+            THNTabBarController *tab = [[THNTabBarController alloc] init];
+            [tab setSelectedIndex:0];
+            [self presentViewController:tab animated:YES completion:nil];
             
             } failure:^(FBRequest *request, NSError *error) {
             [SVProgressHUD showErrorWithStatus:error.localizedDescription];

@@ -14,7 +14,7 @@
 #import "MyPageFocusOnViewController.h"
 #import "MyFansViewController.h"
 #import "MyPageBtnCollectionViewCell.h"
-#import "AllOderViewController.h"
+#import "MyOderInfoViewController.h"
 #import "MessageViewController.h"
 #import "CounterModel.h"
 #import "SubscribeViewController.h"
@@ -34,10 +34,11 @@
 #import "UITabBar+badge.h"
 #import "ScenarioNonView.h"
 #import "ServiceViewController.h"
-#import "CollectionViewController.h"
+#import "THNCollectionViewController.h"
+#import "THNProjectViewController.h"
 
 
-@interface MyPageViewController ()<FBNavigationBarItemsDelegate,UICollectionViewDelegate,UICollectionViewDataSource>
+@interface MyPageViewController ()<THNNavigationBarItemsDelegate,UICollectionViewDelegate,UICollectionViewDataSource>
 {
     ChanelView *_chanelV;
     CounterModel *_counterModel;
@@ -48,12 +49,15 @@
 @property(nonatomic,strong) TipNumberView *tipNumView2;
 @property(nonatomic,strong) BotView *botView;
 @property(nonatomic,strong) UIView *naviViewAl;
+/**  */
+@property (nonatomic, strong) CAGradientLayer *shadowLayer;
 @end
 
 @implementation MyPageViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent];
     //
     _chanelV = [ChanelView getChanelView];
     //情景
@@ -82,8 +86,6 @@
     [_chanelV.fansView addGestureRecognizer:scenarioTap3];
     [self.view addSubview:self.myCollectionView];
 }
-
-
 
 -(void)signleTap:(UITapGestureRecognizer*)sender{
     //跳转到我的主页的情景的界面
@@ -129,19 +131,46 @@
 
 -(void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
-    [[UIApplication sharedApplication] setStatusBarHidden:NO withAnimation:(UIStatusBarAnimationSlide)];
+    [self.myCollectionView scrollToItemAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0] atScrollPosition:UICollectionViewScrollPositionTop animated:YES];
     self.delegate = self;
-    [self addNavLogoImgisTransparent:YES];
-    [self addBarItemLeftBarButton:@"" image:@"Page 1" isTransparent:YES];
+    [self thn_addNavLogoImage];
+//    [self thn_addBarItemLeftBarButton:nil image:@"my_riLi"];
+    [self thn_addBarItemRightBarButton:nil image:@"my_set"];
+    [self.view insertSubview:self.navView aboveSubview:self.myCollectionView];
+    self.navView.backgroundColor = [UIColor clearColor];
+    //  添加渐变层
+    [self.navView.layer insertSublayer:self.shadowLayer below:self.logoImg.layer];
+    
     //网络请求
     [self netGetData];
     self.tabBarController.tabBar.hidden = NO;
 }
 
+-(CAGradientLayer *)shadowLayer{
+    if (!_shadowLayer) {
+        _shadowLayer = [CAGradientLayer layer];
+        _shadowLayer.startPoint = CGPointMake(0, 0);
+        _shadowLayer.opacity = 0.3;
+        _shadowLayer.endPoint = CGPointMake(0, 1);
+        _shadowLayer.colors = @[(__bridge id)[UIColor blackColor].CGColor,
+                          (__bridge id)[UIColor clearColor].CGColor];
+        _shadowLayer.locations = @[@0];
+        _shadowLayer.frame = CGRectMake(0, 0, SCREEN_WIDTH, 64);
+    }
+    return _shadowLayer;
+}
+
+-(void)thn_rightBarItemSelected{
+    SystemSettingViewController *vc = [[SystemSettingViewController alloc] init];
+    [self.navigationController pushViewController:vc animated:YES];
+}
+
+
 -(void)netGetData{
     UserInfoEntity *entity = [UserInfoEntity defaultUserInfoEntity];
     FBRequest *request = [FBAPI postWithUrlString:@"/auth/user" requestDictionary:@{@"user_id":entity.userId} delegate:self];
     [request startRequestSuccess:^(FBRequest *request, id result) {
+        
         NSDictionary *dataDict = result[@"data"];
         _chanelV.scenarioNumLabel.text = [NSString stringWithFormat:@"%@",dataDict[@"scene_count"]];
         _chanelV.fieldNumLabel.text = [NSString stringWithFormat:@"%@",dataDict[@"sight_count"]];
@@ -149,6 +178,18 @@
         _chanelV.fansNumLabel.text = [NSString stringWithFormat:@"%@",dataDict[@"fans_count"]];
         
         UserInfo *userInfo = [UserInfo mj_objectWithKeyValues:[result objectForKey:@"data"]];
+        NSArray *ary = [result objectForKey:@"data"][@"interest_scene_cate"];
+        NSLog(@"用户  %@",result);
+        NSMutableString *str = [NSMutableString string];
+        for (int i = 0; i < ary.count; i ++) {
+            [str appendString:[NSString stringWithFormat:@"%@",ary[i]]];
+            if (i == ary.count - 1) {
+                break;
+            }
+            [str appendString:@","];
+        }
+        userInfo.interest_scene_cate = str;
+        
         userInfo.head_pic_url = [result objectForKey:@"data"][@"head_pic_url"];
         NSArray *areasAry = [NSArray arrayWithArray:dataDict[@"areas"]];
         if (areasAry.count) {
@@ -180,7 +221,7 @@
         [SVProgressHUD showErrorWithStatus:@"加载失败"];
     }];
 }
-
+ 
 
 -(UICollectionView *)myCollectionView{
     if (!_myCollectionView) {
@@ -199,6 +240,11 @@
     return _myCollectionView;
 }
 
+-(void)thn_leftBarItemSelected{
+    FindeFriendViewController *vc = [[FindeFriendViewController alloc] init];
+    [self.navigationController pushViewController:vc animated:YES];
+}
+
 -(NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section{
 
     return 1;
@@ -208,7 +254,7 @@
     if (section == 0) {
         return UIEdgeInsetsMake(0, 0, 0, 0);
     }else{
-        return UIEdgeInsetsMake(3, 5, 0, 5);
+        return UIEdgeInsetsMake(0, 5, 0, 5);
     }
 }
 
@@ -240,11 +286,12 @@
             [cell.btn1 addSubview:self.tipNumView1];
             [self.tipNumView1 mas_makeConstraints:^(MASConstraintMaker *make) {
                 if ((size.width+9) > 15) {
-                    make.size.mas_equalTo(CGSizeMake(size.width+9, 15));
+                    make.size.mas_equalTo(CGSizeMake(size.width+11, 17));
+                    make.right.mas_equalTo(cell.btn1.mas_right).with.offset(5);
                 }else{
-                    make.size.mas_equalTo(CGSizeMake(15, 15));
+                    make.size.mas_equalTo(CGSizeMake(17, 17));
+                    make.right.mas_equalTo(cell.btn1.mas_right).with.offset(2);
                 }
-                make.right.mas_equalTo(cell.btn1.mas_right).with.offset(0);
                 make.top.mas_equalTo(cell.btn1.mas_top).with.offset(0/667.0*SCREEN_HEIGHT);
             }];
         }
@@ -259,24 +306,24 @@
             [cell.btn2 addSubview:self.tipNumView2];
             [self.tipNumView2 mas_makeConstraints:^(MASConstraintMaker *make) {
                 if ((size.width+9) > 15) {
-                    make.size.mas_equalTo(CGSizeMake(size.width+9, 15));
+                    make.size.mas_equalTo(CGSizeMake(size.width+11, 17));
+                    make.right.mas_equalTo(cell.btn2.mas_right).with.offset(5);
                 }else{
-                    make.size.mas_equalTo(CGSizeMake(15, 15));
+                    make.size.mas_equalTo(CGSizeMake(17, 17));
+                    make.right.mas_equalTo(cell.btn2.mas_right).with.offset(2);
                 }
-                make.right.mas_equalTo(cell.btn2.mas_right).with.offset(0);
+                
                 make.top.mas_equalTo(cell.btn2.mas_top).with.offset(0/667.0*SCREEN_HEIGHT);
             }];
         }
         [cell.btn1 addTarget:self action:@selector(orderBtn:) forControlEvents:UIControlEventTouchUpInside];
         [cell.btn2 addTarget:self action:@selector(messageBtn:) forControlEvents:UIControlEventTouchUpInside];
         [cell.btn3 addTarget:self action:@selector(subscribeBtn:) forControlEvents:UIControlEventTouchUpInside];
-        [cell.btn4 addTarget:self action:@selector(praiseBtn:) forControlEvents:UIControlEventTouchUpInside];
-        [cell.btn5 addTarget:self action:@selector(collectionBtnbtn:) forControlEvents:UIControlEventTouchUpInside];
-        [cell.btn6 addTarget:self action:@selector(integralBtn:) forControlEvents:UIControlEventTouchUpInside];
-        [cell.btn7 addTarget:self action:@selector(giftBtn:) forControlEvents:UIControlEventTouchUpInside];
-        [cell.btn8 addTarget:self action:@selector(shippingAddressBtn:) forControlEvents:UIControlEventTouchUpInside];
-        [cell.btn9 addTarget:self action:@selector(serviceBtn:) forControlEvents:UIControlEventTouchUpInside];
-        [cell.btn10 addTarget:self action:@selector(collectionBtn:) forControlEvents:UIControlEventTouchUpInside];
+        [cell.btn4 addTarget:self action:@selector(collectionBtnbtn:) forControlEvents:UIControlEventTouchUpInside];
+        [cell.btn6 addTarget:self action:@selector(praiseBtn:) forControlEvents:UIControlEventTouchUpInside];
+        [cell.btn7 addTarget:self action:@selector(integralBtn:) forControlEvents:UIControlEventTouchUpInside];
+        [cell.btn8 addTarget:self action:@selector(giftBtn:) forControlEvents:UIControlEventTouchUpInside];
+        [cell.btn9 addTarget:self action:@selector(shippingAddressBtn:) forControlEvents:UIControlEventTouchUpInside];
         return cell;
     }
     else if(indexPath.section == 3){
@@ -294,11 +341,11 @@
 /**
  *  收藏按钮
  *
- *  @return <#return value description#>
+ *  @return 
  */
 #pragma mark - 收藏按钮
 -(void)collectionBtnbtn:(UIButton*)sender{
-    CollectionViewController *vc = [[CollectionViewController alloc] init];
+    THNCollectionViewController *vc = [[THNCollectionViewController alloc] init];
     [self.navigationController pushViewController:vc animated:YES];
 }
 
@@ -331,8 +378,8 @@
 }
 
 -(void)leftBarItemSelected{
-    FindeFriendViewController *vc = [[FindeFriendViewController alloc] init];
-    [self.navigationController pushViewController:vc animated:YES];
+//    FindeFriendViewController *vc = [[FindeFriendViewController alloc] init];
+//    [self.navigationController pushViewController:vc animated:YES];
 }
 
 -(void)optionBtn:(UIButton*)sender{
@@ -343,14 +390,14 @@
 -(CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath{
     if (indexPath.section == 0) {
         if (indexPath.row == 0) {
-            return CGSizeMake(SCREEN_WIDTH, SCREEN_WIDTH);
+            return CGSizeMake(SCREEN_WIDTH, SCREEN_WIDTH - 20);
         }
     }
     if (indexPath.section == 1) {
         return CGSizeMake(SCREEN_WIDTH, 60/667.0*SCREEN_HEIGHT);
     }
     if (indexPath.section == 2) {
-        return CGSizeMake(SCREEN_WIDTH, 388*0.5/667.0*SCREEN_HEIGHT);
+        return CGSizeMake(SCREEN_WIDTH, 368*0.5/667.0*SCREEN_HEIGHT);
     }
     if (indexPath.section == 3) {
         return CGSizeMake(SCREEN_HEIGHT, 200);
@@ -361,8 +408,9 @@
 //订单按钮
 -(void)orderBtn:(UIButton*)sender{
     //跳转到全部订单页
-    AllOderViewController *vc = [[AllOderViewController alloc] init];
+    MyOderInfoViewController *vc = [[MyOderInfoViewController alloc] init];
     vc.counterModel = _counterModel;
+    vc.type = @0;
     [self.navigationController pushViewController:vc animated:YES];
 }
 

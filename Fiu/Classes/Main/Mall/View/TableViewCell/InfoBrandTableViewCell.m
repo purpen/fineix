@@ -13,15 +13,14 @@
 - (instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier {
     self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
     if (self) {
-        
         self.selectionStyle = UITableViewCellSelectionStyleNone;
+        self.backgroundColor = [UIColor whiteColor];
         [self setCellUI];
-        
     }
     return self;
 }
 
-- (void)setGoodsBrandData:(GoodsInfoData *)model {
+- (void)setGoodsBrandData:(FBGoodsInfoModelData *)model {
     [self.brandImg downloadImage:model.brand.coverUrl place:[UIImage imageNamed:@""]];
     self.brandTitle.text = model.brand.title;
 }
@@ -31,14 +30,14 @@
     [self addSubview:self.brandImg];
     [_brandImg mas_makeConstraints:^(MASConstraintMaker *make) {
         make.size.mas_equalTo(CGSizeMake(50, 50));
-        make.top.equalTo(self.mas_top).with.offset(5);
+        make.centerY.equalTo(self);
         make.left.equalTo(self.mas_left).with.offset(15);
     }];
     
     [self addSubview:self.brandTitle];
     [_brandTitle mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.size.mas_equalTo(CGSizeMake(200, 15));
-        make.centerY.equalTo(_brandImg);
+        make.size.mas_equalTo(CGSizeMake(200, 20));
+        make.centerY.equalTo(self);
         make.left.equalTo(_brandImg.mas_right).with.offset(10);
     }];
     
@@ -49,9 +48,14 @@
         make.right.equalTo(self.mas_right).with.offset(-15);
     }];
     
-    UILabel * botLine = [[UILabel alloc] initWithFrame:CGRectMake(0, 60, SCREEN_WIDTH, 5)];
-    botLine.backgroundColor = [UIColor colorWithHexString:cellBgColor];
+    UILabel *botLine = [[UILabel alloc] init];
+    botLine.backgroundColor = [UIColor colorWithHexString:@"#666666" alpha:0.2];
     [self addSubview:botLine];
+    [botLine mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.size.mas_equalTo(CGSizeMake(SCREEN_WIDTH, 1));
+        make.left.equalTo(self.mas_left).with.offset(0);
+        make.bottom.equalTo(self.mas_bottom).with.offset(0);
+    }];
 }
 
 #pragma mark - LOGO
@@ -63,6 +67,7 @@
         _brandImg.layer.cornerRadius = 25;
         _brandImg.layer.borderWidth = 1.0f;
         _brandImg.layer.borderColor = [UIColor colorWithHexString:@"#F1F1F1" alpha:1].CGColor;
+        _brandImg.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"Defaul_Bg_50"]];
     }
     return _brandImg;
 }
@@ -72,11 +77,7 @@
     if (!_brandTitle) {
         _brandTitle = [[UILabel alloc] init];
         _brandTitle.textColor = [UIColor colorWithHexString:titleColor];
-        if (IS_iOS9) {
-            _brandTitle.font = [UIFont fontWithName:@"PingFangSC-Light" size:Font_GoodsTitle];
-        } else {
-            _brandTitle.font = [UIFont systemFontOfSize:Font_GoodsTitle];
-        }
+        _brandTitle.font = [UIFont systemFontOfSize:17];
     }
     return _brandTitle;
 }

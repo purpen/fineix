@@ -20,6 +20,8 @@
 @property (nonatomic, strong) NSMutableArray * addressAry;
 @property (nonatomic,strong) UIView *lineView;
 @property (weak, nonatomic) IBOutlet UIButton *addAddressBtn;
+@property (weak, nonatomic) IBOutlet UIImageView *bgImageView;
+@property (weak, nonatomic) IBOutlet UILabel *tipLabel;
 @end
 
 static NSString *const AddressURL = @"/shopping/address";
@@ -100,6 +102,13 @@ static NSString *const DeliveryAddressCellIdentifier = @"deliveryAddressCell";
                 [self.addressAry addObject:address];
             }
             [self.addressTableView reloadData];
+            if (self.addressAry.count == 0) {
+                self.bgImageView.hidden = NO;
+                self.tipLabel.hidden = NO;
+            }else{
+                self.bgImageView.hidden = YES;
+                self.tipLabel.hidden = YES;
+            }
             [SVProgressHUD dismiss];
         } else {
             [SVProgressHUD showInfoWithStatus:message];
@@ -107,6 +116,15 @@ static NSString *const DeliveryAddressCellIdentifier = @"deliveryAddressCell";
     }
     if ([request.flag isEqualToString:DeleteAddressURL]) {
         if ([[result objectForKey:@"success"] isEqualToNumber:@1]) {
+            int a = (int)self.addressAry.count;
+            a--;
+            if (a == 0) {
+                self.bgImageView.hidden = NO;
+                self.tipLabel.hidden = NO;
+            }else{
+                self.bgImageView.hidden = YES;
+                self.tipLabel.hidden = YES;
+            }
             [SVProgressHUD showSuccessWithStatus:@"删除成功"];
         } else {
             [SVProgressHUD showInfoWithStatus:message];

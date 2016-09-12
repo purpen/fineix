@@ -59,7 +59,7 @@
         [_userView addSubview:self.userLevelLabel];
         [_userLevelLabel mas_makeConstraints:^(MASConstraintMaker *make) {
             make.width.mas_offset(SCREEN_WIDTH-60);
-            make.centerX.mas_equalTo(_userView.mas_centerX).with.offset(-10/667.0*SCREEN_HEIGHT);
+            make.centerX.mas_equalTo(_userView.mas_centerX).with.offset(0);
             make.bottom.mas_equalTo(_userView.mas_bottom).with.offset(-49/667.0*SCREEN_HEIGHT);
         }];
         
@@ -67,7 +67,7 @@
         [_userView addSubview:self.idTagsLabel];
         [_idTagsLabel mas_makeConstraints:^(MASConstraintMaker *make) {
             make.bottom.mas_equalTo(_userLevelLabel.mas_top).with.offset(-5/667.0*SCREEN_HEIGHT);
-            make.right.mas_equalTo(_userView.mas_centerX).with.offset(-2/667.0*SCREEN_HEIGHT);
+            make.centerX.mas_equalTo(_userView.mas_centerX).with.offset(0);
         }];
         
 //        [_userView addSubview:self.idImageView];
@@ -103,7 +103,7 @@
         [_talentView mas_makeConstraints:^(MASConstraintMaker *make) {
             make.right.mas_equalTo(_headView.mas_right).with.offset(-3/667.0*SCREEN_HEIGHT);
             make.bottom.mas_equalTo(_headView.mas_bottom).with.offset(-3/667.0*SCREEN_HEIGHT);
-            make.size.mas_equalTo(CGSizeMake(17/667.0*SCREEN_HEIGHT, 17/667.0*SCREEN_HEIGHT));
+            make.size.mas_equalTo(CGSizeMake(19/667.0*SCREEN_HEIGHT, 19/667.0*SCREEN_HEIGHT));
         }];
     }
     return _userView;
@@ -151,9 +151,9 @@
 //    NSArray *tagsAry = [NSArray arrayWithObjects:@"大拿",@"行家",@"行摄家",@"艺术范",@"手艺人",@"人来疯",@"赎回自由身",@"职业buyer", nil];
     if ([(NSNumber*)model.is_expert isEqualToNumber:@1]) {
         self.talentView.hidden = NO;
-        self.userProfile.hidden = NO;
-        self.userProfile.text = model.expert_info;
-        self.idTagsLabel.text = [NSString stringWithFormat:@"%@ |",model.expert_label];
+//        self.userProfile.hidden = NO;
+//        self.userProfile.text = model.expert_info;
+        self.idTagsLabel.text = [NSString stringWithFormat:@"%@ | %@",model.expert_label,model.expert_info];
 //        self.idImageView.hidden = NO; 
 //        int n = (int)[tagsAry indexOfObject:model.expert_label];
 //        self.idImageView.image = [UIImage imageNamed:[NSString stringWithFormat:@"tags%d",n+1]];
@@ -163,7 +163,7 @@
 //        }];
     }else {
         self.talentView.hidden = YES;
-        self.userProfile.hidden = YES;
+//        self.userProfile.hidden = YES;
 //        self.idImageView.hidden = YES;
 //        [self layoutIfNeeded];
 //        [self.headView mas_updateConstraints:^(MASConstraintMaker *make) {
@@ -195,12 +195,13 @@
     
         //  添加渐变层
         CAGradientLayer * shadow = [CAGradientLayer layer];
-        shadow.frame = CGRectMake(0, 0, SCREEN_WIDTH, 64);
-        shadow.opacity = 0;
         shadow.startPoint = CGPointMake(0, 0);
+        shadow.opacity = 0.5;
         shadow.endPoint = CGPointMake(0, 1);
-        shadow.colors = @[(id)[UIColor clearColor].CGColor,(id)[UIColor blackColor].CGColor];
-        shadow.locations = @[@0.1,@0.4,@0.8,@1];
+        shadow.colors = @[(__bridge id)[UIColor clearColor].CGColor,
+                          (__bridge id)[UIColor blackColor].CGColor];
+        shadow.locations = @[@0];
+        shadow.frame = CGRectMake(0, SCREEN_WIDTH - 150, SCREEN_WIDTH, 150);
         [_bgImageView.layer addSublayer:shadow];
         
         [_bgImageView addSubview:self.userView];
@@ -239,8 +240,18 @@
 -(UIButton *)focusOnBtn{
     if (!_focusOnBtn) {
         _focusOnBtn = [[UIButton alloc] init];
-        [_focusOnBtn setImage:[UIImage imageNamed:@"hfocusBtn"] forState:UIControlStateNormal];
-        [_focusOnBtn setImage:[UIImage imageNamed:@"hasBeenFocusedOn"] forState:UIControlStateSelected];
+        [_focusOnBtn setImage:[UIImage imageNamed:@"my_fucos_w"] forState:UIControlStateNormal];
+        [_focusOnBtn setImage:[UIImage imageNamed:@"l_fucos_r"] forState:UIControlStateSelected];
+        _focusOnBtn.titleEdgeInsets = UIEdgeInsetsMake(0, 2, 0, 0);
+        _focusOnBtn.imageEdgeInsets = UIEdgeInsetsMake(0, -2, 0, 0);
+        [_focusOnBtn setTitle:@"关注" forState:UIControlStateNormal];
+        [_focusOnBtn setTitle:@"已关注" forState:UIControlStateSelected];
+        _focusOnBtn.layer.masksToBounds = YES;
+        _focusOnBtn.layer.cornerRadius = 3;
+        _focusOnBtn.titleLabel.font = [UIFont systemFontOfSize:13];
+        _focusOnBtn.backgroundColor = [UIColor colorWithHexString:@"#BE8914"];
+        [_focusOnBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+        [_focusOnBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateSelected];
     }
     return _focusOnBtn;
 }
@@ -248,7 +259,14 @@
 -(UIButton *)directMessages{
     if (!_directMessages) {
         _directMessages = [[UIButton alloc] init];
-        [_directMessages setImage:[UIImage imageNamed:@"directMessages"] forState:UIControlStateNormal];
+        [_directMessages setImage:[UIImage imageNamed:@"my_edit"] forState:UIControlStateNormal];
+        _directMessages.layer.masksToBounds = YES;
+        _directMessages.layer.cornerRadius = 3;
+        [_directMessages setTitle:@"私信" forState:UIControlStateNormal];
+        _directMessages.titleLabel.font = [UIFont systemFontOfSize:13];
+        _directMessages.titleEdgeInsets = UIEdgeInsetsMake(0, 2, 0, 0);
+        _directMessages.imageEdgeInsets = UIEdgeInsetsMake(0, -2, 0, 0);
+        _directMessages.backgroundColor = [UIColor blackColor];
     }
     return _directMessages;
 }

@@ -10,6 +10,7 @@
 #import "Fiu.h"
 #import "UserInfo.h"
 #import <SDWebImage/UIImageView+WebCache.h>
+#import "FindFriendModel.h"
 
 @interface MyFansActionSheetViewController ()
 
@@ -40,6 +41,12 @@
 
 -(void)clickOtherBtn:(UIButton*)sender{
     [self dismissViewControllerAnimated:NO completion:nil];
+}
+
+-(void)setFindFriendModel:(FindFriendModel *)findFriendModel{
+    _findFriendModel = findFriendModel;
+    [self.headImageView sd_setImageWithURL:[NSURL URLWithString:findFriendModel.avatarUrl]];
+    self.sheetLabel.text = [NSString stringWithFormat:@"停止关注 %@",findFriendModel.nickName];
 }
 
 -(void)setUIWithModel:(UserInfo *)model{

@@ -21,6 +21,7 @@
 #import "CommenttwoViewController.h"
 #import "FBPayTheWayViewController.h"
 #import "HMSegmentedControl.h"
+#import "CounterModel.h"
 
 @interface MyOderInfoViewController ()<FBNavigationBarItemsDelegate,UITableViewDelegate,UITableViewDataSource,FBRequestDelegate,OrderInfoCellDelegate>
 
@@ -30,12 +31,14 @@
 @property (nonatomic, assign) NSInteger currentPageNumber;
 @property (nonatomic, assign) NSInteger totalPageNumber;
 @property (nonatomic,strong) NSMutableArray *orderListAry;
+
 @end
 
 static NSString *const OrderListURL = @"/shopping/orders";
 static NSString *const OrderInfoCellIdentifier = @"orderInfoCell";
 
 @implementation MyOderInfoViewController
+
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -76,7 +79,6 @@ static NSString *const OrderInfoCellIdentifier = @"orderInfoCell";
     }else if ([self.type isEqualToNumber:@4]){
         [segmentedControl setSelectedSegmentIndex:4];
     }
-    
     
     
     [self.myTableView registerNib:[UINib nibWithNibName:@"OrderInfoCell" bundle:nil] forCellReuseIdentifier:OrderInfoCellIdentifier];
@@ -181,7 +183,6 @@ static NSString *const OrderInfoCellIdentifier = @"orderInfoCell";
     
     [self requestDataForOderListOperationWith:self.type];
 }
-
 
 
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{

@@ -21,7 +21,6 @@
 
 - (IBAction)creatBtnClick:(id)sender {
     PictureToolViewController * pictureToolVC = [[PictureToolViewController alloc] init];
-    pictureToolVC.createType = @"scene";
     [[UIApplication sharedApplication].keyWindow.rootViewController presentViewController:pictureToolVC animated:YES completion:nil];
 }
 
