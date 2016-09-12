@@ -189,7 +189,7 @@ static NSString *const MallListHeaderCellViewId = @"mallListHeaderCellViewId";
 
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath {
     if (indexPath.row == 0) {
-        return CGSizeMake(SCREEN_WIDTH, 190);
+        return CGSizeMake(SCREEN_WIDTH, 195);
     } else
         return CGSizeMake(SCREEN_WIDTH, 366);
 }

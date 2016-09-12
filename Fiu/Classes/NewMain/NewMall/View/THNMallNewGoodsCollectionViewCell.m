@@ -17,7 +17,7 @@ static NSString *const GoodsCellId = @"goodsCellId";
 - (instancetype)initWithFrame:(CGRect)frame {
     self = [super initWithFrame:frame];
     if (self) {
-        self.backgroundColor = [UIColor whiteColor];
+        self.backgroundColor = [UIColor colorWithHexString:@"#F8F8F8"];
         [self addSubview:self.goodList];
     }
     return self;
@@ -39,8 +39,8 @@ static NSString *const GoodsCellId = @"goodsCellId";
         flowLayout.sectionInset = UIEdgeInsetsMake(0, 15, 0, 15);
         flowLayout.scrollDirection = UICollectionViewScrollDirectionHorizontal;
         
-        _goodList = [[UICollectionView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 185) collectionViewLayout:flowLayout];
-        _goodList.backgroundColor = [UIColor whiteColor];
+        _goodList = [[UICollectionView alloc] initWithFrame:CGRectMake(0, 10, SCREEN_WIDTH, 185) collectionViewLayout:flowLayout];
+        _goodList.backgroundColor = [UIColor colorWithHexString:@"#F8F8F8"];
         _goodList.delegate = self;
         _goodList.dataSource = self;
         _goodList.showsHorizontalScrollIndicator = NO;
