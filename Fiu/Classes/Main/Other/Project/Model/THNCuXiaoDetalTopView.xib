@@ -12,16 +12,12 @@
             <rect key="frame" x="0.0" y="0.0" width="343" height="294"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="bBw-g0-FAY">
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="bBw-g0-FAY">
                     <rect key="frame" x="0.0" y="0.0" width="343" height="211"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="211" id="6nb-9L-i37"/>
                     </constraints>
                 </imageView>
-                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="GN4-IX-Ghg">
-                    <rect key="frame" x="0.0" y="0.0" width="343" height="211"/>
-                    <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.20000000000000001" colorSpace="calibratedRGB"/>
-                </view>
                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="project_time" translatesAutoresizingMaskIntoConstraints="NO" id="kld-Gs-K9x">
                     <rect key="frame" x="163" y="130" width="11" height="11"/>
                 </imageView>
@@ -32,7 +28,7 @@
                     <nil key="highlightedColor"/>
                 </label>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Zhz-b2-g6e">
-                    <rect key="frame" x="10" y="221" width="323" height="63"/>
+                    <rect key="frame" x="10" y="267" width="323" height="17"/>
                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="0.59999999999999998" colorSpace="calibratedRGB"/>
                     <nil key="highlightedColor"/>
@@ -79,6 +75,10 @@
                     <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
                     <nil key="highlightedColor"/>
                 </label>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="GN4-IX-Ghg">
+                    <rect key="frame" x="0.0" y="0.0" width="343" height="211"/>
+                    <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.20000000000000001" colorSpace="calibratedRGB"/>
+                </view>
             </subviews>
             <color key="backgroundColor" red="0.97254901959999995" green="0.97254901959999995" blue="0.97254901959999995" alpha="1" colorSpace="calibratedRGB"/>
             <constraints>
@@ -119,6 +119,7 @@
                     <exclude reference="Fm7-fJ-gDr"/>
                     <exclude reference="QXJ-EK-d4S"/>
                     <exclude reference="u7s-AR-n8O"/>
+                    <exclude reference="mBF-B2-bNs"/>
                     <exclude reference="juP-yS-rXH"/>
                 </mask>
             </variation>

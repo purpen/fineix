@@ -15,5 +15,6 @@
 /**  */
 @property (nonatomic, strong) THNCuXiaoDetalModel *model;
 @property (weak, nonatomic) IBOutlet UILabel *summaryLabel;
+@property (weak, nonatomic) IBOutlet UIImageView *bgImageView;
 
 @end
