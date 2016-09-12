@@ -29,7 +29,7 @@
     [self.image downloadImage:model.coverUrl place:[UIImage imageNamed:@""]];
     self.title.text = model.title;
     self.price.text = [NSString stringWithFormat:@"¥%.0f", model.salePrice];
-    if (model.state == 9) {
+    if (model.stage == 9) {
         self.price.hidden = NO;
     } else {
         self.price.hidden = YES;

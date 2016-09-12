@@ -144,7 +144,7 @@ static NSString *const MallListHeaderCellViewId = @"mallListHeaderCellViewId";
     if (!_mallList) {
         UICollectionViewFlowLayout *flowLayou = [[UICollectionViewFlowLayout alloc] init];
         flowLayou.itemSize = CGSizeMake(SCREEN_WIDTH, 190);
-        flowLayou.headerReferenceSize = CGSizeMake(SCREEN_WIDTH, 224);
+        flowLayou.headerReferenceSize = CGSizeMake(SCREEN_WIDTH, SCREEN_WIDTH * 0.4 + 64);
         flowLayou.scrollDirection = UICollectionViewScrollDirectionVertical;
         
         _mallList = [[UICollectionView alloc] initWithFrame:CGRectMake(0, 64, SCREEN_WIDTH, SCREEN_HEIGHT - 113)

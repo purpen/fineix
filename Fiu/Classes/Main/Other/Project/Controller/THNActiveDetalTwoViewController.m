@@ -425,7 +425,7 @@ static NSString *const URLCancelFollowUser = @"/follow/ajax_cancel_follow";
     sceneImageVC.modalPresentationStyle = UIModalPresentationOverFullScreen;
     sceneImageVC.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;
     HomeSceneListRow *model = self.resultsAry[sender.tag];
-    sceneImageVC.image = model.coverUrl;
+    sceneImageVC.imageUrl = model.coverUrl;
     [self presentViewController:sceneImageVC animated:YES completion:nil];
 }
 

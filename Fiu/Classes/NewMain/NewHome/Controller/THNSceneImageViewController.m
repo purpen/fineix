@@ -31,13 +31,7 @@
     UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(dismissVC:)];
     [self.view addGestureRecognizer:tap];
     
-    [self.imageView downloadImage:self.image place:[UIImage imageNamed:@""]];
-    
     [self.view addSubview:self.imageView];
-    [_imageView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.size.mas_equalTo(CGSizeMake(SCREEN_WIDTH, SCREEN_WIDTH));
-        make.centerY.centerX.equalTo(self.view);
-    }];
 }
 
 - (void)dismissVC:(UITapGestureRecognizer *)tap {
@@ -45,18 +39,17 @@
 }
 
 #pragma mark - 情境大图
-- (UIImageView *)imageView {
+- (THNSceneImageScrollView *)imageView {
     if (!_imageView) {
-        _imageView = [[UIImageView alloc] init];
-        _imageView.contentMode = UIViewContentModeScaleAspectFill;
+        _imageView = [[THNSceneImageScrollView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT)];
         _imageView.clipsToBounds = YES;
+        [_imageView displayImage:self.imageUrl];
     }
     return _imageView;
 }
 
 - (void)viewWillDisappear:(BOOL)animated {
     [super viewWillDisappear:animated];
-    
     [[UIApplication sharedApplication] setStatusBarHidden:NO withAnimation:(UIStatusBarAnimationFade)];
 }
 

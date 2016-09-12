@@ -318,7 +318,7 @@ static NSString *const SceneListFooterCellViewId = @"sceneListFooterViewId";
             headerView.nav = self.navigationController;
             return headerView;
         }
-        
+    
     } else {
         if (indexPath.section == 0 || indexPath.section == 1) {
             THNHotActionCollectionReusableView *footerView = [collectionView dequeueReusableSupplementaryViewOfKind:UICollectionElementKindSectionFooter
@@ -350,7 +350,7 @@ static NSString *const SceneListFooterCellViewId = @"sceneListFooterViewId";
 
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout referenceSizeForHeaderInSection:(NSInteger)section {
     if (section == 0) {
-        return CGSizeMake(SCREEN_WIDTH, 224);
+        return CGSizeMake(SCREEN_WIDTH, SCREEN_WIDTH *0.4 + 64);
     } else
         return CGSizeMake(SCREEN_WIDTH, 0);
 }

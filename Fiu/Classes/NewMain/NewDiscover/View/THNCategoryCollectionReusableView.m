@@ -34,7 +34,7 @@ static NSString *const collectionViewCellId = @"CollectionViewCellId";
 - (void)setViewUI {
     [self addSubview:self.menuView];
     [_menuView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.size.mas_equalTo(CGSizeMake(SCREEN_WIDTH, 180));
+        make.size.mas_equalTo(CGSizeMake(SCREEN_WIDTH, SCREEN_WIDTH *0.45));
         make.left.top.equalTo(self).with.offset(0);
     }];
     
@@ -92,7 +92,7 @@ static NSString *const collectionViewCellId = @"CollectionViewCellId";
         flowLayout.sectionInset = UIEdgeInsetsMake(10, 15, 10, 15);
         [flowLayout setScrollDirection:(UICollectionViewScrollDirectionVertical)];
         
-        _menuView = [[UICollectionView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 140) collectionViewLayout:flowLayout];
+        _menuView = [[UICollectionView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_WIDTH *0.45) collectionViewLayout:flowLayout];
         _menuView.delegate = self;
         _menuView.dataSource = self;
         _menuView.scrollEnabled = NO;
