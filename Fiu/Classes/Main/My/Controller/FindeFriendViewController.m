@@ -76,7 +76,6 @@ static NSString *const ShareURL = @"http://m.taihuoniao.com/guide/app_about";
     [request startRequestSuccess:^(FBRequest *request, id result) {
         
         
-        NSLog( @" reslut   %@",result);
         NSDictionary *dataDict = [result objectForKey:@"data"];
         NSArray *rowsAry = [dataDict objectForKey:@"users"];
         for (NSDictionary *rowsDict in rowsAry) {
