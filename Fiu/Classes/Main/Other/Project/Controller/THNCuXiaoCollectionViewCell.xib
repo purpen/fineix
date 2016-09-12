@@ -99,6 +99,18 @@
                             </mask>
                         </variation>
                     </view>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="project_end" translatesAutoresizingMaskIntoConstraints="NO" id="moe-Kg-ldr">
+                        <rect key="frame" x="344" y="0.0" width="60" height="60"/>
+                    </imageView>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="project_time" translatesAutoresizingMaskIntoConstraints="NO" id="5mE-Fr-8KO">
+                        <rect key="frame" x="15" y="13" width="11" height="11"/>
+                    </imageView>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="12321312" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bGs-o5-beM">
+                        <rect key="frame" x="28" y="11" width="54" height="15"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                        <color key="textColor" white="1" alpha="0.80000000000000004" colorSpace="calibratedWhite"/>
+                        <nil key="highlightedColor"/>
+                    </label>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sg9-Oa-Wzd">
                         <rect key="frame" x="193" y="200" width="29" height="14"/>
                         <fontDescription key="fontDescription" type="system" pointSize="11"/>
@@ -112,14 +124,20 @@
                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
             </view>
             <constraints>
+                <constraint firstItem="moe-Kg-ldr" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" id="4BM-gl-px9"/>
                 <constraint firstItem="sg9-Oa-Wzd" firstAttribute="leading" secondItem="s3y-Il-yFj" secondAttribute="trailing" constant="5" id="4PM-kT-d4e"/>
                 <constraint firstItem="QeP-AU-E7t" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="7EW-aS-cXZ"/>
                 <constraint firstItem="sg9-Oa-Wzd" firstAttribute="centerX" secondItem="4id-Sb-fw3" secondAttribute="centerX" constant="5" id="9cE-8T-Vqv"/>
+                <constraint firstItem="bGs-o5-beM" firstAttribute="leading" secondItem="5mE-Fr-8KO" secondAttribute="trailing" constant="2" id="A0M-rR-VBI"/>
                 <constraint firstAttribute="trailing" secondItem="QeP-AU-E7t" secondAttribute="trailing" id="OGg-5C-6zp"/>
                 <constraint firstItem="s3y-Il-yFj" firstAttribute="top" secondItem="4id-Sb-fw3" secondAttribute="bottom" constant="10" id="PCs-x0-10N"/>
+                <constraint firstAttribute="trailing" secondItem="moe-Kg-ldr" secondAttribute="trailing" id="Rs4-ME-LXM"/>
                 <constraint firstItem="s3y-Il-yFj" firstAttribute="top" secondItem="Gme-mz-V2e" secondAttribute="bottom" constant="10" id="UQY-Cr-erN"/>
                 <constraint firstItem="QeP-AU-E7t" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" id="a0V-TP-MXS"/>
+                <constraint firstItem="bGs-o5-beM" firstAttribute="centerY" secondItem="5mE-Fr-8KO" secondAttribute="centerY" id="cg9-uG-Yr0"/>
+                <constraint firstItem="5mE-Fr-8KO" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" constant="15" id="da4-a1-nqt"/>
                 <constraint firstAttribute="bottom" secondItem="QeP-AU-E7t" secondAttribute="bottom" id="fwp-m3-z31"/>
+                <constraint firstItem="5mE-Fr-8KO" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" constant="13" id="hA9-Bm-Mja"/>
                 <constraint firstItem="sg9-Oa-Wzd" firstAttribute="centerY" secondItem="s3y-Il-yFj" secondAttribute="centerY" id="tP2-Z8-tLe"/>
             </constraints>
             <size key="customSize" width="404" height="338"/>
@@ -131,13 +149,17 @@
             <connections>
                 <outlet property="countLabel" destination="sg9-Oa-Wzd" id="7Ws-fj-osI"/>
                 <outlet property="coverImageView" destination="kJK-s7-Kc3" id="lIW-S3-FsG"/>
+                <outlet property="endTipImageView" destination="moe-Kg-ldr" id="PC7-AH-s8E"/>
                 <outlet property="subTitleLabel" destination="4id-Sb-fw3" id="Ip7-JR-jKA"/>
+                <outlet property="timeLabel" destination="bGs-o5-beM" id="AZD-S1-qXi"/>
                 <outlet property="titileLabel" destination="8Vf-Fq-zzG" id="uEL-RL-Ro9"/>
             </connections>
             <point key="canvasLocation" x="268" y="528"/>
         </collectionViewCell>
     </objects>
     <resources>
+        <image name="project_end" width="60" height="60"/>
         <image name="project_see" width="13" height="9"/>
+        <image name="project_time" width="11" height="11"/>
     </resources>
 </document>

@@ -259,12 +259,11 @@ static NSString *const logOut = @"/auth/logout";
         [self.tabBarController.tabBar hideBadgeWithIndex:4];
         
         [self.tabBarController setSelectedIndex:0];
+        
+        [self.navigationController popViewControllerAnimated:YES];
     }
 }
 
--(void)viewDidDisappear:(BOOL)animated{
-    
-}
 
 -(void)resetNotificationState{
     UIUserNotificationSettings *setting = [[UIApplication sharedApplication] currentUserNotificationSettings];
@@ -275,10 +274,7 @@ static NSString *const logOut = @"/auth/logout";
     }
 }
 
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
-}
+
 
 
 @end
