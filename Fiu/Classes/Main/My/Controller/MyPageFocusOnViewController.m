@@ -49,6 +49,8 @@
         [self requestDataForOderList];
     }];
     
+    [self.mytableView.mj_header beginRefreshing];
+    
     //上拉加载更多
     self.mytableView.mj_footer = [MJRefreshAutoNormalFooter footerWithRefreshingBlock:^{
         if (_currentPageNumber < _totalPageNumber) {
@@ -67,7 +69,6 @@
 {
     _currentPageNumber = 0;
     [_modelAry removeAllObjects];
-    [SVProgressHUD showWithMaskType:SVProgressHUDMaskTypeClear];
     
     [self requestDataForOderListOperation];
 }
@@ -76,7 +77,7 @@
 - (void)requestDataForOderListOperation
 {
     
-    FBRequest *request = [FBAPI postWithUrlString:@"/follow" requestDictionary:@{@"page":@(_currentPageNumber+1),@"size":@15,@"user_id":self.userId,@"find_type":@1} delegate:self];
+    FBRequest *request = [FBAPI postWithUrlString:@"/follow" requestDictionary:@{@"page":@(_currentPageNumber+1),@"size":@30,@"user_id":self.userId,@"find_type":@1} delegate:self];
     [request startRequestSuccess:^(FBRequest *request, id result) {
         NSDictionary *dataDict = [result objectForKey:@"data"];
         NSArray *rowsAry = [dataDict objectForKey:@"rows"];
@@ -144,7 +145,6 @@
                 [self.mytableView.mj_footer endRefreshing];
             }
         }
-        [SVProgressHUD dismiss];
     } failure:^(FBRequest *request, NSError *error) {
         [SVProgressHUD showInfoWithStatus:[error localizedDescription]];
     }];
@@ -164,9 +164,7 @@
 -(void)requestSucess:(FBRequest *)request result:(id)result{
    if ([request.flag isEqualToString:@"/follow/ajax_follow"]){
         if ([result objectForKey:@"success"]) {
-            [SVProgressHUD showSuccessWithStatus:@"关注成功"];
         }else{
-            [SVProgressHUD showErrorWithStatus:@"关注失败"];
         }
     }
 }
