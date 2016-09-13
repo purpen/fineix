@@ -66,6 +66,17 @@
                         <constraint firstItem="4RM-SX-5fY" firstAttribute="centerX" secondItem="fRa-4B-zfG" secondAttribute="centerX" id="qd5-Nb-jy1"/>
                     </constraints>
                 </view>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="V0i-Ec-TDm">
+                    <rect key="frame" x="0.0" y="10" width="40" height="40"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="40" id="6m0-LU-soM"/>
+                        <constraint firstAttribute="height" constant="40" id="jrS-m0-jRy"/>
+                    </constraints>
+                    <state key="normal" image="l_back"/>
+                    <connections>
+                        <action selector="back:" destination="-1" eventType="touchUpInside" id="Lt5-E0-pcu"/>
+                    </connections>
+                </button>
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
             <constraints>
@@ -74,6 +85,8 @@
                 <constraint firstItem="axw-nP-MNk" firstAttribute="leading" secondItem="gpG-9X-Puh" secondAttribute="leading" id="9y9-HH-Jjq"/>
                 <constraint firstAttribute="trailing" secondItem="VEC-Cp-FVS" secondAttribute="trailing" constant="33" id="BE2-RD-d6f"/>
                 <constraint firstAttribute="bottom" secondItem="axw-nP-MNk" secondAttribute="bottom" id="FiS-QT-F0v"/>
+                <constraint firstItem="V0i-Ec-TDm" firstAttribute="leading" secondItem="gpG-9X-Puh" secondAttribute="leading" id="Fp1-qp-Sqp"/>
+                <constraint firstItem="V0i-Ec-TDm" firstAttribute="top" secondItem="gpG-9X-Puh" secondAttribute="top" constant="10" id="K1M-0N-loL"/>
                 <constraint firstAttribute="bottom" secondItem="VEC-Cp-FVS" secondAttribute="bottom" constant="50" id="Kd6-My-AC7"/>
                 <constraint firstItem="fRa-4B-zfG" firstAttribute="leading" secondItem="gpG-9X-Puh" secondAttribute="leading" id="NlJ-yp-CwC"/>
                 <constraint firstAttribute="trailing" secondItem="fRa-4B-zfG" secondAttribute="trailing" id="jwO-47-AJn"/>
@@ -91,6 +104,7 @@
     </objects>
     <resources>
         <image name="background_login" width="375" height="667"/>
+        <image name="l_back" width="10" height="18"/>
         <image name="l_next" width="10" height="18"/>
         <image name="logo_small_n" width="53" height="29"/>
     </resources>

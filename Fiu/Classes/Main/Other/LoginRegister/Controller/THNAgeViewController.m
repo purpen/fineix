@@ -116,6 +116,10 @@ static NSString *updatInfo = @"/my/update_profile";
     self.age_group = self.contrastAry[self.ageBtnAry.count - 1 - [self.ageBtnAry indexOfObject:sender]];
 }
 
+- (IBAction)back:(id)sender {
+    [self.navigationController popViewControllerAnimated:YES];
+}
+
 -(void)labelClick:(UIButton*)sender{
     for (UIButton *btn  in self.labelBtnAry) {
         btn.selected = NO;

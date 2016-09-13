@@ -119,7 +119,7 @@ static NSString *const thirdRegister = @"/auth/third_sign";//第三方登录接�
     FBRequest *request = [FBAPI postWithUrlString:thirdRegister requestDictionary:params delegate:self];
     [request startRequestSuccess:^(FBRequest *request, id result) {
         [SVProgressHUD dismiss];
-        
+        NSLog(@"新浪登录  %@",result);
         //如果请求成功
         NSDictionary *dataDic = [result objectForKey:@"data"];
         if ([[dataDic objectForKey:@"has_user"] isEqualToNumber:@1]){
@@ -131,7 +131,7 @@ static NSString *const thirdRegister = @"/auth/third_sign";//第三方登录接�
             UserInfoEntity *entity = [UserInfoEntity defaultUserInfoEntity];
             entity.isLogin = YES;
             NSString *str = dataDic[@"user"][@"identify"][@"is_scene_subscribe"];
-            NSLog(@"新浪登录  %d",[str intValue]);
+            
             if ([str intValue] == 0){
                 //完善个人信息
                 THNInformationViewController *vc = [[THNInformationViewController alloc] init];

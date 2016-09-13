@@ -15,7 +15,7 @@
 #import "UserInfoEntity.h"
 #import "UIColor+Extension.h"
 
-@interface THNForgetViewController ()
+@interface THNForgetViewController () <UITextFieldDelegate>
 @property (weak, nonatomic) IBOutlet UITextField *phoneTF;
 @property (weak, nonatomic) IBOutlet UITextField *vertCodeTF;
 @property (weak, nonatomic) IBOutlet UIView *toResendV;
@@ -35,9 +35,13 @@ static NSString * const XMGPlacerholderColorKeyPath = @"_placeholderLabel.textCo
     [self.navigationController popViewControllerAnimated:YES];
 }
 
+-(BOOL)textFieldShouldReturn:(UITextField *)textField{
+    return [textField resignFirstResponder];
+}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    self.setNewPwd.delegate = self;
     [self.phoneTF setValue:[UIColor colorWithHexString:@"#8B8B8B"] forKeyPath:XMGPlacerholderColorKeyPath];
     self.phoneTF.tintColor = [UIColor whiteColor];
     [self.vertCodeTF setValue:[UIColor colorWithHexString:@"#8B8B8B"] forKeyPath:XMGPlacerholderColorKeyPath];

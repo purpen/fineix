@@ -38,7 +38,9 @@
 @property (nonatomic, strong) UISwipeGestureRecognizer *rightSwipeGestureRecognizer;
 
 @end
+
 static NSString *userActivationUrl = @"/gateway/record_fiu_user_active";
+
 @implementation GuidePageViewController
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -75,6 +77,12 @@ static NSString *userActivationUrl = @"/gateway/record_fiu_user_active";
 }
 
 -(void)dianJi{
+    
+    FBRequest *request = [FBAPI postWithUrlString:userActivationUrl requestDictionary:nil delegate:self];
+    request.flag = userActivationUrl;
+    request.delegate = self;
+    [request startRequest];
+    
     [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"UserHasGuideView"];
     if ([_mainController isKindOfClass:[THNTabBarController class]]) {
         
@@ -118,12 +126,21 @@ static NSString *userActivationUrl = @"/gateway/record_fiu_user_active";
 }
 
 -(void)leftSwipeGesture{
+    
+//    NSString *adId = [[[ASIdentifierManager sharedManager] advertisingIdentifier] UUIDString];
+    FBRequest *request = [FBAPI postWithUrlString:userActivationUrl requestDictionary:nil delegate:self];
+    request.flag = userActivationUrl;
+    request.delegate = self;
+    [request startRequest];
+    
     [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"UserHasGuideView"];
     if ([_mainController isKindOfClass:[THNTabBarController class]]) {
         
         __block BOOL invitation;
         FBRequest *request = [FBAPI postWithUrlString:@"/gateway/is_invited" requestDictionary:nil delegate:self];
         [request startRequestSuccess:^(FBRequest *request, id result) {
+            
+            
             NSDictionary *dict = [result objectForKey:@"data"];
             NSNumber *code = [dict objectForKey:@"status"];
             if ([code isEqual:@(1)]) {
@@ -180,24 +197,11 @@ static NSString *userActivationUrl = @"/gateway/record_fiu_user_active";
         [self.moviePlayer play];
         //添加通知
         [self addNotification];
-//        NSString *adId = [[[ASIdentifierManager sharedManager] advertisingIdentifier] UUIDString];
-//        FBRequest *request = [FBAPI postWithUrlString:userActivationUrl requestDictionary:@{
-//                                                                                        @"idfa":adId
-//                                                                                            } delegate:self];
-//        request.flag = userActivationUrl;
-//        request.delegate = self;
-//        [request startRequest];
+        
     }else if (self.flag == welcomePage){
         [self startRollImg];
     }
     
-    //设置scrollview
-//    [self setScrollView];
-    //设置ImageView
-//    [self setImageView];
-
-    //设置页码控制器
-//    [self setPageController];
 }
 
 /**
@@ -217,11 +221,8 @@ static NSString *userActivationUrl = @"/gateway/record_fiu_user_active";
         [_moviePlayer.view addSubview:self.soundBtn];
         [_moviePlayer.view addSubview:self.unSoundBtn];
         [_moviePlayer.view addSubview:self.skipBtn];
-        if ([MPMusicPlayerController applicationMusicPlayer].volume != 0) {
-            self.soundBtn.selected = NO;
-        }else{
-            self.soundBtn.selected = YES;
-        }
+        [[MPMusicPlayerController applicationMusicPlayer] setVolume:0];
+        self.soundBtn.selected = YES;
         
         [self.view addSubview:_moviePlayer.view];
         [[AVAudioSession sharedInstance] setCategory:AVAudioSessionCategoryPlayback error:nil];

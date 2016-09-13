@@ -143,6 +143,9 @@
     if ([model.is_expert integerValue] == 1) {
         self.summaryLabel.text = str;
         self.talentView.hidden = NO;
+    }else{
+        self.summaryLabel.text = @"";
+        self.talentView.hidden = YES;
     }
 }
 

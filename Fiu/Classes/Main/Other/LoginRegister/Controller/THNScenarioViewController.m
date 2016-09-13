@@ -125,6 +125,9 @@ static NSString *getList = @"/category/getlist";
         [self.idAry addObject:((THNTopicView*)self.viewAry[[self.btnAry indexOfObject:btn]]).model._id];
     }
 }
+- (IBAction)back:(id)sender {
+    [self.navigationController popViewControllerAnimated:YES];
+}
 
 -(void)tipClick:(UIButton*)sender{
     
@@ -153,20 +156,26 @@ static NSString *getList = @"/category/getlist";
         }
         [str appendString:@","];
     }
-    //开始传送数据
-    NSDictionary *params = @{
-                             @"interest_scene_cate":str
-                             };
-    FBRequest *request = [FBAPI postWithUrlString:@"/my/update_profile" requestDictionary:params delegate:self];
-    [request startRequestSuccess:^(FBRequest *request, id result) {
-        if ([[result objectForKey:@"success"] isEqualToNumber:@1]) {
-            THNFocusViewController *vc = [[THNFocusViewController alloc] init];
-            [self.navigationController pushViewController:vc animated:YES];
-        } else {
-        }
-    } failure:^(FBRequest *request, NSError *error) {
-        
-    }];
+    
+    if (str.length == 0) {
+        THNFocusViewController *vc = [[THNFocusViewController alloc] init];
+        [self.navigationController pushViewController:vc animated:YES];
+    }else{
+        //开始传送数据
+        NSDictionary *params = @{
+                                 @"interest_scene_cate":str
+                                 };
+        FBRequest *request = [FBAPI postWithUrlString:@"/my/update_profile" requestDictionary:params delegate:self];
+        [request startRequestSuccess:^(FBRequest *request, id result) {
+            if ([[result objectForKey:@"success"] isEqualToNumber:@1]) {
+                THNFocusViewController *vc = [[THNFocusViewController alloc] init];
+                [self.navigationController pushViewController:vc animated:YES];
+            } else {
+            }
+        } failure:^(FBRequest *request, NSError *error) {
+            
+        }];
+    }
     
 }
 

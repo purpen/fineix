@@ -51,15 +51,28 @@
                         <constraint firstItem="bDe-Gp-82b" firstAttribute="centerX" secondItem="hpf-c0-LDM" secondAttribute="centerX" id="xXP-BE-kfT"/>
                     </constraints>
                 </view>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="IJO-dT-m3E">
+                    <rect key="frame" x="0.0" y="10" width="40" height="40"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="40" id="P3Y-Go-HbF"/>
+                        <constraint firstAttribute="width" constant="40" id="wRZ-Fh-r4a"/>
+                    </constraints>
+                    <state key="normal" image="l_back"/>
+                    <connections>
+                        <action selector="back:" destination="-1" eventType="touchUpInside" id="7y3-Ng-ewf"/>
+                    </connections>
+                </button>
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
             <constraints>
+                <constraint firstItem="IJO-dT-m3E" firstAttribute="leading" secondItem="dwq-7C-4WE" secondAttribute="leading" id="2c5-wR-L4r"/>
                 <constraint firstItem="hpf-c0-LDM" firstAttribute="top" secondItem="dwq-7C-4WE" secondAttribute="top" constant="45" id="3Ct-lw-kxg"/>
                 <constraint firstAttribute="trailing" secondItem="hpf-c0-LDM" secondAttribute="trailing" id="7hX-W7-fK3"/>
                 <constraint firstItem="hpf-c0-LDM" firstAttribute="leading" secondItem="dwq-7C-4WE" secondAttribute="leading" id="TOo-iS-mWc"/>
                 <constraint firstItem="rxD-aR-0cQ" firstAttribute="top" secondItem="dwq-7C-4WE" secondAttribute="top" id="fan-4K-78q"/>
                 <constraint firstItem="hpf-c0-LDM" firstAttribute="top" secondItem="dwq-7C-4WE" secondAttribute="top" constant="43" id="k8d-HJ-6N7"/>
                 <constraint firstItem="rxD-aR-0cQ" firstAttribute="leading" secondItem="dwq-7C-4WE" secondAttribute="leading" id="kXK-3p-DXC"/>
+                <constraint firstItem="IJO-dT-m3E" firstAttribute="top" secondItem="dwq-7C-4WE" secondAttribute="top" constant="10" id="rrh-Wp-AZ8"/>
                 <constraint firstAttribute="trailing" secondItem="rxD-aR-0cQ" secondAttribute="trailing" id="ujI-Ac-ibo"/>
                 <constraint firstAttribute="bottom" secondItem="rxD-aR-0cQ" secondAttribute="bottom" id="z55-FK-Wit"/>
             </constraints>
@@ -74,6 +87,7 @@
     </objects>
     <resources>
         <image name="background_login" width="375" height="667"/>
+        <image name="l_back" width="10" height="18"/>
         <image name="logo_small_n" width="53" height="29"/>
     </resources>
 </document>

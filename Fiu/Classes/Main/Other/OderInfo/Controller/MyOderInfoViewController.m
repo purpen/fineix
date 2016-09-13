@@ -31,6 +31,10 @@
 @property (nonatomic, assign) NSInteger currentPageNumber;
 @property (nonatomic, assign) NSInteger totalPageNumber;
 @property (nonatomic,strong) NSMutableArray *orderListAry;
+@property(nonatomic,strong) TipNumberView *tipNumView2;
+@property(nonatomic,strong) TipNumberView *tipNumView3;
+@property(nonatomic,strong) TipNumberView *tipNumView4;
+@property(nonatomic,strong) TipNumberView *tipNumView5;
 
 @end
 
@@ -49,7 +53,7 @@ static NSString *const OrderInfoCellIdentifier = @"orderInfoCell";
     //tableView每个row的高度
     self.myTableView.rowHeight = 222;
 
-    HMSegmentedControl *segmentedControl = [[HMSegmentedControl alloc] initWithSectionTitles:@[@"全部", @"待付款", @"待发货", @"待收货", @"待评价"]];
+    HMSegmentedControl *segmentedControl = [[HMSegmentedControl alloc] initWithSectionTitles:@[@"全部", @"待付款", @"待发货", @"待收货", @"待评价",@"退货/售后"]];
 
     segmentedControl.frame = CGRectMake(0, 64, SCREEN_WIDTH, 44);//
     segmentedControl.segmentEdgeInset = UIEdgeInsetsMake(5, 5, 5, 5);
@@ -78,6 +82,8 @@ static NSString *const OrderInfoCellIdentifier = @"orderInfoCell";
         [segmentedControl setSelectedSegmentIndex:3];
     }else if ([self.type isEqualToNumber:@4]){
         [segmentedControl setSelectedSegmentIndex:4];
+    }else if ([self.type isEqualToNumber:@5]){
+        [segmentedControl setSelectedSegmentIndex:5];
     }
     
     
@@ -85,6 +91,90 @@ static NSString *const OrderInfoCellIdentifier = @"orderInfoCell";
     _myTableView.estimatedRowHeight = 212.f;
     _myTableView.rowHeight = UITableViewAutomaticDimension;
     
+    
+    //待付款
+    if ([_counterModel.order_wait_payment intValue] == 0) {
+        //不显示
+        [self.tipNumView2 removeFromSuperview];
+    }else{
+        //显示
+        
+        self.tipNumView2.tipNumLabel.text = [NSString stringWithFormat:@"%@",_counterModel.order_wait_payment];
+        CGSize size = [self.tipNumView2.tipNumLabel.text sizeWithAttributes:@{NSFontAttributeName: [UIFont systemFontOfSize:12]}];
+        [segmentedControl addSubview:self.tipNumView2];
+        [self.tipNumView2 mas_makeConstraints:^(MASConstraintMaker *make) {
+            if ((size.width+9) > 15) {
+                make.size.mas_equalTo(CGSizeMake(size.width+9, 14));
+            }else{
+                make.size.mas_equalTo(CGSizeMake(14, 14));
+            }
+            make.left.mas_equalTo(segmentedControl.mas_left).with.offset((SCREEN_WIDTH / 5) * 2 - 25 / 667.0 * SCREEN_HEIGHT);
+            make.top.mas_equalTo(segmentedControl.mas_top).with.offset(7/667.0*SCREEN_HEIGHT);
+        }];
+    }
+    
+    //待发货
+    if ([_counterModel.order_ready_goods intValue] == 0) {
+        //不显示
+        [self.tipNumView3 removeFromSuperview];
+    }else{
+        //显示
+        
+        self.tipNumView3.tipNumLabel.text = [NSString stringWithFormat:@"%@",_counterModel.order_ready_goods];
+        CGSize size = [self.tipNumView3.tipNumLabel.text sizeWithAttributes:@{NSFontAttributeName: [UIFont systemFontOfSize:12]}];
+        [segmentedControl addSubview:self.tipNumView3];
+        [self.tipNumView3 mas_makeConstraints:^(MASConstraintMaker *make) {
+            if ((size.width+9) > 15) {
+                make.size.mas_equalTo(CGSizeMake(size.width+9, 14));
+            }else{
+                make.size.mas_equalTo(CGSizeMake(14, 14));
+            }
+            make.left.mas_equalTo(segmentedControl.mas_left).with.offset((SCREEN_WIDTH / 5) * 3 - 25 / 667.0 * SCREEN_HEIGHT);
+            make.top.mas_equalTo(segmentedControl.mas_top).with.offset(7/667.0*SCREEN_HEIGHT);
+        }];
+    }
+    
+    //待收货
+    if ([_counterModel.order_sended_goods intValue] == 0) {
+        //不显示
+        [self.tipNumView4 removeFromSuperview];
+    }else{
+        //显示
+        
+        self.tipNumView4.tipNumLabel.text = [NSString stringWithFormat:@"%@",_counterModel.order_sended_goods];
+        CGSize size = [self.tipNumView4.tipNumLabel.text sizeWithAttributes:@{NSFontAttributeName: [UIFont systemFontOfSize:12]}];
+        [segmentedControl addSubview:self.tipNumView4];
+        [self.tipNumView4 mas_makeConstraints:^(MASConstraintMaker *make) {
+            if ((size.width+9) > 15) {
+                make.size.mas_equalTo(CGSizeMake(size.width+9, 14));
+            }else{
+                make.size.mas_equalTo(CGSizeMake(14, 14));
+            }
+            make.left.mas_equalTo(segmentedControl.mas_left).with.offset((SCREEN_WIDTH / 5) * 4 - 25 / 667.0 * SCREEN_HEIGHT);
+            make.top.mas_equalTo(segmentedControl.mas_top).with.offset(7/667.0*SCREEN_HEIGHT);
+        }];
+    }
+    
+    //待评价
+    if ([_counterModel.order_evaluate intValue] == 0) {
+        //不显示
+        [self.tipNumView5 removeFromSuperview];
+    }else{
+        //显示
+        
+        self.tipNumView5.tipNumLabel.text = [NSString stringWithFormat:@"%@",_counterModel.order_evaluate];
+        CGSize size = [self.tipNumView5.tipNumLabel.text sizeWithAttributes:@{NSFontAttributeName: [UIFont systemFontOfSize:12]}];
+        [segmentedControl addSubview:self.tipNumView5];
+        [self.tipNumView5 mas_makeConstraints:^(MASConstraintMaker *make) {
+            if ((size.width+9) > 15) {
+                make.size.mas_equalTo(CGSizeMake(size.width+9, 14));
+            }else{
+                make.size.mas_equalTo(CGSizeMake(14, 14));
+            }
+            make.left.mas_equalTo(segmentedControl.mas_left).with.offset((SCREEN_WIDTH / 5) * 5 - 25 / 667.0 * SCREEN_HEIGHT);
+            make.top.mas_equalTo(segmentedControl.mas_top).with.offset(7/667.0*SCREEN_HEIGHT);
+        }];
+    }
     
     
     // 下拉刷新
@@ -105,6 +195,43 @@ static NSString *const OrderInfoCellIdentifier = @"orderInfoCell";
 
 }
 
+
+-(TipNumberView *)tipNumView2{
+    if (!_tipNumView2) {
+        _tipNumView2 = [TipNumberView getTipNumView];
+        _tipNumView2.layer.masksToBounds = YES;
+        _tipNumView2.layer.cornerRadius = 14 * 0.5;
+    }
+    return _tipNumView2;
+}
+
+-(TipNumberView *)tipNumView3{
+    if (!_tipNumView3) {
+        _tipNumView3 = [TipNumberView getTipNumView];
+        _tipNumView3.layer.masksToBounds = YES;
+        _tipNumView3.layer.cornerRadius = 14 * 0.5;
+    }
+    return _tipNumView3;
+}
+
+-(TipNumberView *)tipNumView4{
+    if (!_tipNumView4) {
+        _tipNumView4 = [TipNumberView getTipNumView];
+        _tipNumView4.layer.masksToBounds = YES;
+        _tipNumView4.layer.cornerRadius = 14 * 0.5;
+    }
+    return _tipNumView4;
+}
+
+-(TipNumberView *)tipNumView5{
+    if (!_tipNumView5) {
+        _tipNumView5 = [TipNumberView getTipNumView];
+        _tipNumView5.layer.masksToBounds = YES;
+        _tipNumView5.layer.cornerRadius = 14 * 0.5;
+    }
+    return _tipNumView5;
+}
+
 -(void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
     [self requestDataForOderList];
@@ -112,7 +239,10 @@ static NSString *const OrderInfoCellIdentifier = @"orderInfoCell";
 
 //请求不同状态订单列表
 - (void)segmentedControlChangedValue:(HMSegmentedControl *)segmentedControl {
-    self.type = [NSNumber numberWithInteger:segmentedControl.selectedSegmentIndex ];
+    self.type = [NSNumber numberWithInteger:segmentedControl.selectedSegmentIndex];
+    if (segmentedControl.selectedSegmentIndex == 5) {
+        self.type = [NSNumber numberWithInteger:8];
+    }
     [self.orderListAry removeAllObjects];
     [self requestDataForOderList];
 }

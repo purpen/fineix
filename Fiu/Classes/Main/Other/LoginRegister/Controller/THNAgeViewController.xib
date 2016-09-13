@@ -43,15 +43,28 @@
                         <action selector="next:" destination="-1" eventType="touchUpInside" id="hoe-6i-kDq"/>
                     </connections>
                 </button>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vbK-4Q-hVD">
+                    <rect key="frame" x="0.0" y="10" width="40" height="40"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="40" id="3DQ-Vy-QvZ"/>
+                        <constraint firstAttribute="height" constant="40" id="ZtV-4l-aog"/>
+                    </constraints>
+                    <state key="normal" image="l_back"/>
+                    <connections>
+                        <action selector="back:" destination="-1" eventType="touchUpInside" id="XCE-iP-Iit"/>
+                    </connections>
+                </button>
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
             <constraints>
                 <constraint firstItem="PTg-Ok-8hp" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="AFy-JJ-4KV"/>
                 <constraint firstAttribute="bottom" secondItem="AYm-5o-bwj" secondAttribute="bottom" constant="50" id="EcL-yy-Q3b"/>
                 <constraint firstItem="NNX-5w-hQ1" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="H5d-Yz-Vqh"/>
+                <constraint firstItem="vbK-4Q-hVD" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="JKX-EC-hNU"/>
                 <constraint firstItem="PTg-Ok-8hp" firstAttribute="top" secondItem="KhY-d7-8Zi" secondAttribute="bottom" constant="13" id="L9Z-g1-DuG"/>
                 <constraint firstAttribute="bottom" secondItem="NNX-5w-hQ1" secondAttribute="bottom" id="RfB-p7-EYD"/>
                 <constraint firstItem="KhY-d7-8Zi" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="60" id="WW6-1Y-8J6"/>
+                <constraint firstItem="vbK-4Q-hVD" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="10" id="ZCb-G4-Voq"/>
                 <constraint firstItem="KhY-d7-8Zi" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="cUj-zL-sLh"/>
                 <constraint firstItem="NNX-5w-hQ1" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="mZu-iA-CTf"/>
                 <constraint firstAttribute="trailing" secondItem="NNX-5w-hQ1" secondAttribute="trailing" id="p2O-pF-T2K"/>
@@ -63,6 +76,7 @@
     </objects>
     <resources>
         <image name="background_login" width="375" height="667"/>
+        <image name="l_back" width="10" height="18"/>
         <image name="l_next" width="10" height="18"/>
         <image name="logo_small_n" width="53" height="29"/>
     </resources>

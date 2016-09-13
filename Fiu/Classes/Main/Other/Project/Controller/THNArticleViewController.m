@@ -63,6 +63,7 @@ static NSString *const cellId = @"THNArticleCollectionViewCell";
 }
 
 -(void)loadNew{
+    [self.contenView.mj_footer endRefreshing];
     self.current_page = 1;
     NSDictionary *params = @{
                              @"page" : @(self.current_page),
@@ -93,13 +94,14 @@ static NSString *const cellId = @"THNArticleCollectionViewCell";
             [SVProgressHUD showErrorWithStatus:@"加载用户数据失败"];
             
             // 让底部控件结束刷新
-            [self.contenView.mj_footer endRefreshing];
+            [self.contenView.mj_header endRefreshing];
         }
     } failure:nil];
 
 }
 
 -(void)loadMore{
+    [self.contenView.mj_header endRefreshing];
     NSDictionary *params = @{
                              @"page" : @(++self.current_page),
                              @"size" : @8,

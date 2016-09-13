@@ -10,6 +10,7 @@
 #import  <SVProgressHUD.h>
 
 @interface AboutViewController ()<FBNavigationBarItemsDelegate,UIWebViewDelegate>
+
 @property (weak, nonatomic) IBOutlet UIWebView *aboutWebView;
 
 @end
@@ -21,12 +22,9 @@
     // Do any additional setup after loading the view from its nib.
     self.delegate = self;
     self.view.backgroundColor = [UIColor whiteColor];
-    //self.navigationController.navigationBarHidden = NO;
     self.navViewTitle.text = @"关于Fiu";
-//    [self addBarItemLeftBarButton:nil image:@"icon_back"];
-    
     //地址
-    NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"%@/view/about",self.formalUrl]];
+    NSURL *url = [NSURL URLWithString:@"http://m.taihuoniao.com/app/api/view/about"];
     //在网页上加载
     NSURLRequest *request = [NSURLRequest requestWithURL:url];
     [self.aboutWebView loadRequest:request];

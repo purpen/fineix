@@ -20,49 +20,32 @@
 
 
 @interface MyFansViewController ()<FBNavigationBarItemsDelegate,UITableViewDelegate,UITableViewDataSource,FBRequestDelegate>
-{
-    NSMutableArray *_modelAry;
-    int _page;
-    int _totalePage;
-}
 
 @property(nonatomic,strong) FocusNonView *scenarioNonView;
-@property (nonatomic, assign) NSInteger currentPageNumber;
-@property (nonatomic, assign) NSInteger totalPageNumber;
+/**  */
+@property (nonatomic, strong) NSMutableArray *modelAry;
+/**  */
+@property(nonatomic,assign) NSInteger current_page;
+/**  */
+@property (nonatomic, strong) NSDictionary *params;
+/**  */
+@property(nonatomic,assign) NSInteger total_rows;
+
 @end
 
 @implementation MyFansViewController
 
+-(NSMutableArray *)modelAry{
+    if (!_modelAry) {
+        _modelAry = [NSMutableArray array];
+    }
+    return _modelAry;
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view.
-    _page = 1;
-    _modelAry = [NSMutableArray array];
-    //设置导航条
     self.navViewTitle.text = @"粉丝";
-//    [self addBarItemLeftBarButton:nil image:@"icon_back"];
-    self.delegate = self;
-    
-    //进行网络请求
-    [self requestDataForOderList];
-    
-    // 下拉刷新
-    self.mytableView.mj_header = [MJRefreshNormalHeader headerWithRefreshingBlock:^{
-        _currentPageNumber = 0;
-        [_modelAry removeAllObjects];
-        [self requestDataForOderList];
-    }];
-    
-    [self.mytableView.mj_header beginRefreshing];
-    
-    //上拉加载更多
-    self.mytableView.mj_footer = [MJRefreshAutoNormalFooter footerWithRefreshingBlock:^{
-        if (_currentPageNumber < _totalPageNumber) {
-            [self requestDataForOderListOperation];
-        } else {
-            [self.mytableView.mj_footer endRefreshing];
-        }
-    }];
+    [self setUpRefresh];
     [self.view addSubview:self.mytableView];
 }
 
@@ -72,24 +55,25 @@
 //    printf("%d",N);
 //}
 
-#pragma mark - Network
-- (void)requestDataForOderList
-{
-    _currentPageNumber = 0;
-    [_modelAry removeAllObjects];
+-(void)setUpRefresh{
+    self.mytableView.mj_header = [MJRefreshNormalHeader headerWithRefreshingTarget:self refreshingAction:@selector(loadNew)];
+    // 自动改变透明度
+    self.mytableView.mj_header.automaticallyChangeAlpha = YES;
+    [self.mytableView.mj_header beginRefreshing];
     
-    [self requestDataForOderListOperation];
+    self.mytableView.mj_footer = [MJRefreshAutoNormalFooter footerWithRefreshingTarget:self refreshingAction:@selector(loadMore)];
 }
 
 
-
-
-- (void)requestDataForOderListOperation
-{
-    
-    FBRequest *request = [FBAPI postWithUrlString:@"/follow" requestDictionary:@{@"page":@(_currentPageNumber+1),@"size":@30,@"user_id":self.userId,@"find_type":@2} delegate:self];
+-(void)loadNew{
+    [self.mytableView.mj_footer endRefreshing];
+    [self.modelAry removeAllObjects];
+    self.current_page = 1;
+    NSDictionary *params = @{@"page":@(self.current_page),@"size":@30,@"user_id":self.userId,@"find_type":@2};
+    self.params = params;
+    FBRequest *request = [FBAPI postWithUrlString:@"/follow" requestDictionary:params delegate:self];
     [request startRequestSuccess:^(FBRequest *request, id result) {
-        NSLog(@"粉丝 %@",result);
+        NSLog(@"粉丝列表  %@",result);
         NSDictionary *dataDict = [result objectForKey:@"data"];
         NSArray *rowsAry = [dataDict objectForKey:@"rows"];
         for (NSDictionary *rowsDict in rowsAry) {
@@ -126,35 +110,71 @@
         }
         [self.mytableView reloadData];
         
-        _currentPageNumber = [[[result valueForKey:@"data"] valueForKey:@"current_page"] intValue];
-        _totalPageNumber = [[[result valueForKey:@"data"] valueForKey:@"total_page"] intValue];
+        self.current_page = [result[@"data"][@"current_page"] integerValue];
+        self.total_rows = [result[@"data"][@"total_rows"] integerValue];
+        if (self.params != params) {
+            return;
+        }
+        [self.mytableView.mj_header endRefreshing];
+        [self checkFooterState];
         
-        BOOL isLastPage = (_currentPageNumber == _totalPageNumber);
-        
-        if (!isLastPage) {
-            if (self.mytableView.mj_footer.state == MJRefreshStateNoMoreData) {
-                [self.mytableView.mj_footer resetNoMoreData];
-            }
-        }
-        if (_currentPageNumber == _totalPageNumber == 1) {
-            self.mytableView.mj_footer.state = MJRefreshStateNoMoreData;
-            self.mytableView.mj_footer.hidden = true;
-        }
-        if ([self.mytableView.mj_header isRefreshing]) {
-            [self.mytableView.mj_header endRefreshing];
-        }
-        if ([self.mytableView.mj_footer isRefreshing]) {
-            if (isLastPage) {
-                [self.mytableView.mj_footer endRefreshingWithNoMoreData];
-            } else  {
-                [self.mytableView.mj_footer endRefreshing];
-            }
-        }
     } failure:^(FBRequest *request, NSError *error) {
-        [SVProgressHUD showInfoWithStatus:[error localizedDescription]];
+        [SVProgressHUD showErrorWithStatus:@"加载用户数据失败"];
+        [self.mytableView.mj_footer endRefreshing];
+    }];
+    
+}
+
+-(void)loadMore{
+    [self.mytableView.mj_header endRefreshing];
+    NSDictionary *params = @{@"page":@(++self.current_page),@"size":@30,@"user_id":self.userId,@"find_type":@1};
+    self.params = params;
+    FBRequest *request = [FBAPI postWithUrlString:@"/follow" requestDictionary:params delegate:self];
+    [request startRequestSuccess:^(FBRequest *request, id result) {
+        
+        NSDictionary *dataDict = [result objectForKey:@"data"];
+        NSArray *rowsAry = [dataDict objectForKey:@"rows"];
+        for (NSDictionary *rowsDict in rowsAry) {
+            NSDictionary *followsDict = [rowsDict objectForKey:@"follows"];
+            UserInfo *model = [[UserInfo alloc] init];
+            
+            model.userId = followsDict[@"user_id"];
+            model.summary = followsDict[@"summary"];
+            model.nickname = followsDict[@"nickname"];
+            model.mediumAvatarUrl = followsDict[@"avatar_url"];
+            model.is_love = [rowsDict[@"type"] integerValue];
+            model.level = followsDict[@"is_love"];
+            model.expert_info = followsDict[@"expert_info"];
+            model.expert_label = followsDict[@"expert_label"];
+            model.is_expert = followsDict[@"is_expert"];
+            //8888888888888888888888
+            [_modelAry addObject:model];
+        }
+        
+        [self.mytableView reloadData];
+        
+        self.current_page = [result[@"data"][@"current_page"] integerValue];
+        self.total_rows = [result[@"data"][@"total_rows"] integerValue];
+        if (self.params != params) {
+            return;
+        }
+        [self checkFooterState];
+        
+    } failure:^(FBRequest *request, NSError *error) {
+        [SVProgressHUD showErrorWithStatus:@"加载用户数据失败"];
+        [self.mytableView.mj_footer endRefreshing];
     }];
 }
 
+
+-(void)checkFooterState{
+    self.mytableView.mj_footer.hidden = self.modelAry.count == 0;
+    if (self.modelAry.count == self.total_rows) {
+        self.mytableView.mj_footer.hidden = YES;
+    }else{
+        [self.mytableView.mj_footer endRefreshing];
+    }
+}
 
 
 -(FocusNonView *)scenarioNonView{
@@ -177,7 +197,6 @@
 
 -(void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
-    //self.navigationController.navigationBarHidden = NO;
     [UIApplication sharedApplication].statusBarStyle = UIStatusBarStyleLightContent;
 }
 
@@ -189,9 +208,10 @@
     if (!_mytableView) {
         _mytableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 64, SCREEN_WIDTH, SCREEN_HEIGHT-64) style:UITableViewStylePlain];
         _mytableView.backgroundColor = [UIColor colorWithHexString:@"#F7F7F7"];
-        self.mytableView.delegate = self;
-        self.mytableView.dataSource = self;
-        self.mytableView.separatorStyle = UITableViewCellSeparatorStyleNone;
+        _mytableView.delegate = self;
+        _mytableView.dataSource = self;
+        _mytableView.separatorStyle = UITableViewCellSeparatorStyleNone;
+//        _mytableView.contentInset = UIEdgeInsetsMake(0, 0, 0, 10);
     }
     return _mytableView;
 }

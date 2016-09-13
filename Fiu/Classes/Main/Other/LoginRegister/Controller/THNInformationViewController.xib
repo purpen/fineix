@@ -108,7 +108,7 @@
                     </constraints>
                     <color key="textColor" red="0.58039215690000001" green="0.41960784309999999" blue="0.062745098040000002" alpha="1" colorSpace="calibratedRGB"/>
                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                    <textInputTraits key="textInputTraits" keyboardAppearance="alert"/>
+                    <textInputTraits key="textInputTraits" keyboardAppearance="alert" returnKeyType="done"/>
                 </textField>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Aqp-Qm-jWz">
                     <rect key="frame" x="143" y="227" width="90" height="90"/>

@@ -62,6 +62,8 @@
 @property (nonatomic, strong) NSMutableArray *userIdMarr;
 /**  */
 @property (nonatomic, assign) NSInteger modelAryCount;
+/**  */
+@property (nonatomic, strong) CAGradientLayer * shadow;
 
 @end
 
@@ -133,14 +135,7 @@ static NSString *sceneCellId = @"THNHomeSenceCollectionViewCell";
     
     
     //  添加渐变层
-    CAGradientLayer * shadow = [CAGradientLayer layer];
-    shadow.startPoint = CGPointMake(0, 2);
-    shadow.endPoint = CGPointMake(0, 0);
-    shadow.colors = @[(__bridge id)[UIColor clearColor].CGColor,
-                      (__bridge id)[UIColor blackColor].CGColor];
-    shadow.locations = @[@(0.5f), @(2.5f)];
-    shadow.frame = CGRectMake(0, 0, SCREEN_WIDTH, 64);
-    [self.view.layer addSublayer:shadow];
+    [self.view.layer addSublayer:self.shadow];
     
     
     _m = 0;
@@ -168,6 +163,18 @@ static NSString *sceneCellId = @"THNHomeSenceCollectionViewCell";
     [self requestDataForOderListOperation];
 }
 
+-(CAGradientLayer *)shadow{
+    if (!_shadow) {
+        _shadow = [CAGradientLayer layer];
+        _shadow.startPoint = CGPointMake(0, 2);
+        _shadow.endPoint = CGPointMake(0, 0);
+        _shadow.colors = @[(__bridge id)[UIColor clearColor].CGColor,
+                          (__bridge id)[UIColor blackColor].CGColor];
+        _shadow.locations = @[@(0.5f), @(2.5f)];
+        _shadow.frame = CGRectMake(0, 0, SCREEN_WIDTH, 64);
+    }
+    return _shadow;
+}
 
 -(UILabel *)tipLabel{
     if (!_tipLabel) {
@@ -722,6 +729,25 @@ static NSString *sceneCellId = @"THNHomeSenceCollectionViewCell";
         } else {
             [SVProgressHUD showInfoWithStatus:message];
         }
+    }
+
+}
+
+-(void)scrollViewDidScroll:(UIScrollView *)scrollView{
+    
+    int currentPostion = scrollView.contentOffset.y;
+    if (currentPostion < 100) {
+        self.shadow.startPoint = CGPointMake(0, 2);
+        self.shadow.endPoint = CGPointMake(0, 0);
+        self.shadow.colors = @[(__bridge id)[UIColor clearColor].CGColor,
+                           (__bridge id)[UIColor blackColor].CGColor];
+    }
+    else if (currentPostion > 100)
+    {
+        self.shadow.startPoint = CGPointMake(0.5, 0);
+        self.shadow.endPoint = CGPointMake(0.5, 1);
+        self.shadow.colors = @[(__bridge id)[UIColor colorWithWhite:0 alpha:0.8].CGColor,
+                           (__bridge id)[UIColor clearColor].CGColor];
     }
 
 }

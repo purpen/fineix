@@ -17,7 +17,7 @@
 #import <SVProgressHUD.h>
 #import "THNAgeViewController.h"
 
-@interface THNInformationViewController ()<UIImagePickerControllerDelegate,UINavigationControllerDelegate>
+@interface THNInformationViewController ()<UIImagePickerControllerDelegate,UINavigationControllerDelegate,UITextFieldDelegate>
 /**  */
 @property (nonatomic, strong) NSNumber *sexNum;
 @property (weak, nonatomic) IBOutlet UIButton *headBtn;
@@ -50,7 +50,14 @@ static NSString *const modifyUserInformation = @"/my/update_profile";
     
     self.headImage.layer.masksToBounds = YES;
     self.headImage.layer.cornerRadius = 45;
+    self.nameTF.delegate = self;
 }
+
+-(BOOL)textFieldShouldReturn:(UITextField *)textField{
+    return [textField resignFirstResponder];
+}
+
+
 - (IBAction)head:(id)sender {
     UIAlertController *alertC = [UIAlertController alertControllerWithTitle:@"更换头像" message:nil preferredStyle:UIAlertControllerStyleActionSheet];
     //判断是否支持相机。模拟器没有相机
