@@ -37,6 +37,7 @@
 
 - (void)setupBasicParam {
     self.userInteractionEnabled = YES;
+    
     //  删除
     _deleteControl = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 22, 22)];
     [_deleteControl setBackgroundImage:[UIImage imageNamed:@"stickers_delete"] forState:UIControlStateNormal];
@@ -155,13 +156,13 @@
     _translateCenter = CGPointMake(self.center.x + dx, self.center.y + dy);
     
     //  限制用户不可将视图托出屏幕
-    float halfx = CGRectGetMidX(self.bounds);
-    _translateCenter.x = MAX(halfx - 50, _translateCenter.x);
-    _translateCenter.x = MIN(self.superview.bounds.size.width - halfx + 50, _translateCenter.x);
-    
-    float halfy = CGRectGetMidY(self.bounds);
-    _translateCenter.y = MAX(halfy, _translateCenter.y);
-    _translateCenter.y = MIN(self.superview.bounds.size.height - halfy, _translateCenter.y);
+//    float halfx = CGRectGetMidX(self.bounds);
+//    _translateCenter.x = MAX(halfx, _translateCenter.x);
+//    _translateCenter.x = MIN(self.superview.bounds.size.width - halfx, _translateCenter.x);
+//    
+//    float halfy = CGRectGetMidY(self.bounds);
+//    _translateCenter.y = MAX(halfy, _translateCenter.y);
+//    _translateCenter.y = MIN(self.superview.bounds.size.height - halfy, _translateCenter.y);
     
     //移动view
     self.center = _translateCenter;
@@ -173,10 +174,15 @@
     _stickerView.layer.borderWidth = 0.7f;
 }
 
-- (FBSticker *)generateSticker {
+- (FBSticker *)generateSticker:(NSString *)filterName {
     FBSticker * sticker = [FBSticker new];
     sticker.rotateAngle = _diffAngle;
-    sticker.image = _stickerView.image;
+    if (filterName.length) {
+        UIImage *showFilterImage = [[FBFilters alloc] initWithImage:_stickerView.image filterName:filterName].filterImg;
+        sticker.image = showFilterImage;
+    } else {
+        sticker.image = _stickerView.image;
+    }
     sticker.translateCenter = _translateCenter;
     sticker.size = _stickerView.frame.size;
     sticker.containerSize = self.bounds.size;

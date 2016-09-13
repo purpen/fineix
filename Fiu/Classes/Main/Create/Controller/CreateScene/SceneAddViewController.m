@@ -23,6 +23,7 @@ static NSString *const URLUserAddBrand = @"/scene_brands/submit";
     NSString        * _imgUrl;
     NSInteger         _idx;
     BOOL              _urlGoods;
+    NSString        * _filterName;
 }
 
 @pro_strong UserGoodsTag           *   userGoodsTag;
@@ -149,6 +150,7 @@ static NSString *const URLUserAddBrand = @"/scene_brands/submit";
         _footView.titleSeletedColor = [UIColor colorWithHexString:fineixColor alpha:1];
         [_footView addFootViewButton];
         _footView.delegate = self;
+        _footView.clipsToBounds = YES;
     }
     return _footView;
 }
@@ -218,7 +220,8 @@ static NSString *const URLUserAddBrand = @"/scene_brands/submit";
 
 #pragma mark 改变滤镜
 - (void)changeFilter:(NSNotification *)filterName {
-    UIImage * showFilterImage = [[FBFilters alloc] initWithImage:self.filtersImg filterName:[filterName object]].filterImg;
+    _filterName = [filterName object];
+    UIImage *showFilterImage = [[FBFilters alloc] initWithImage:self.filtersImg filterName:_filterName].filterImg;
     self.filtersImageView.image = showFilterImage;
 }
 
@@ -323,6 +326,7 @@ static NSString *const URLUserAddBrand = @"/scene_brands/submit";
     if (!_filtersImageView) {
         _filtersImageView = [[UIImageView alloc] init];
         _filtersImageView.userInteractionEnabled = YES;
+        _filtersImageView.clipsToBounds = YES;
         
         UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(showMarkGoodsView:)];
         [_filtersImageView addGestureRecognizer:tap];
@@ -381,6 +385,7 @@ static NSString *const URLUserAddBrand = @"/scene_brands/submit";
 #pragma mark - 设置顶部导航栏
 - (void)setNavViewUI {
     self.view.backgroundColor = [UIColor blackColor];
+    self.view.clipsToBounds = YES;
     [[UIApplication sharedApplication] setStatusBarHidden:YES withAnimation:(UIStatusBarAnimationSlide)];
     [self addNavViewTitle:NSLocalizedString(@"marker", nil)];
     [self addBackButton:@"icon_back_white"];
@@ -453,7 +458,7 @@ static NSString *const URLUserAddBrand = @"/scene_brands/submit";
     [imageView.image drawInRect:imageView.bounds];
     for (FBStickersContainer * container in self.stickersContainer) {
         CGContextSaveGState(context);
-        FBSticker * sticker = [container generateSticker];
+        FBSticker * sticker = [container generateSticker:_filterName];
         CGAffineTransform translateToCenter = CGAffineTransformMakeTranslation(sticker.translateCenter.x, sticker.translateCenter.y - (sticker.translateCenter.y / 8));
         CGAffineTransform rotateAfterTranslate = CGAffineTransformRotate(translateToCenter, sticker.rotateAngle);
         CGContextConcatCTM(context, rotateAfterTranslate);

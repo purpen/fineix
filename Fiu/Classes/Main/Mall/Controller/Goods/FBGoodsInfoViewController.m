@@ -77,21 +77,17 @@ static NSString *const SceneListCellId = @"SceneListCellId";
             
             if (_canBuy == 9) {
                 self.menuView.hidden = NO;
-                self.buyView.hidden = NO;
+                self.goodsBuyView.hidden = NO;
                 
             } else {
                 [self changeRollFrame];
                 self.menuView.hidden = YES;
-                self.buyView.hidden = YES;
+                self.goodsBuyView.hidden = YES;
             }
         }
         
-        if (_collect == 0) {
-            self.likeBtn.selected = NO;
-        } else if (_collect == 1) {
-            self.likeBtn.selected = YES;
-        }
-    
+        [self.goodsBuyView isCollectTheGoods:_collect];
+        
         self.goodsInfo = [[FBGoodsInfoModelData alloc] initWithDictionary:[result valueForKey:@"data"]];
         [self.rollImgView setThnGoodsRollImgData:self.goodsInfo];
         [self.goodsTable reloadData];
@@ -100,7 +96,7 @@ static NSString *const SceneListCellId = @"SceneListCellId";
             self.menuView.hidden = NO;
             self.goodsInfoRoll.hidden = NO;
             if (_canBuy == 9) {
-                self.buyView.hidden = NO;
+                self.goodsBuyView.hidden = NO;
             }
         }
         
@@ -112,7 +108,7 @@ static NSString *const SceneListCellId = @"SceneListCellId";
     if (self.goodsInfo.idField == 0) {
         self.menuView.hidden = YES;
         self.goodsInfoRoll.hidden = YES;
-        self.buyView.hidden = YES;
+        self.goodsBuyView.hidden = YES;
     }
 }
 
@@ -131,21 +127,19 @@ static NSString *const SceneListCellId = @"SceneListCellId";
 }
 
 #pragma mark 商品收藏
-- (void)networkCollectGoods:(UIButton *)button {
-    if (button.selected == NO) {
+- (void)networkCollectGoods:(BOOL)selected {
+    if (selected == NO) {
         self.collectRequest = [FBAPI postWithUrlString:URlGoodsCollect requestDictionary:@{@"id":self.goodsID, @"type":@"1"} delegate:self];
         [self.collectRequest startRequestSuccess:^(FBRequest *request, id result) {
-            button.selected = YES;
             [SVProgressHUD showSuccessWithStatus:NSLocalizedString(@"collectSuccess", nil)];
             
         } failure:^(FBRequest *request, NSError *error) {
             [SVProgressHUD showErrorWithStatus:[error localizedDescription]];
         }];
         
-    } else if (button.selected == YES) {
+    } else if (selected == YES) {
         self.cancelCollectRequest = [FBAPI postWithUrlString:URlCancelCollect requestDictionary:@{@"id":self.goodsID, @"type":@"1"} delegate:self];
         [self.cancelCollectRequest startRequestSuccess:^(FBRequest *request, id result) {
-            button.selected = NO;
             [SVProgressHUD showSuccessWithStatus:NSLocalizedString(@"cancelCollect", nil)];
             
         } failure:^(FBRequest *request, NSError *error) {
@@ -228,7 +222,7 @@ static NSString *const SceneListCellId = @"SceneListCellId";
     [self addChildViewController:_goodsCommentVC];
     [self.goodsInfoRoll addSubview:_goodsCommentVC.view];
     
-    [self.view addSubview:self.buyView];
+    [self.view addSubview:self.goodsBuyView];
 }
 
 - (void)changeRollFrame {
@@ -481,6 +475,40 @@ static NSString *const SceneListCellId = @"SceneListCellId";
     }
 }
 
+#pragma mark - 底部功能栏
+- (THNGoodsBuyView *)goodsBuyView {
+    if (!_goodsBuyView) {
+        _goodsBuyView = [[THNGoodsBuyView alloc] initWithFrame:CGRectMake(0, SCREEN_HEIGHT - 44, SCREEN_WIDTH, 44)];
+        _goodsBuyView.delegate = self;
+    }
+    return _goodsBuyView;
+}
+
+- (void)selectedGoodsBuyViewBtnIndex:(NSInteger)index selectedState:(BOOL)selected {
+    switch (index) {
+        case 0:
+            [self networkCollectGoods:selected];
+            NSLog(@"收藏商品");
+            break;
+            
+        case 1:
+            NSLog(@"分享商品");
+            break;
+            
+        case 2:
+            NSLog(@"加入购物车");
+            [self OpenGoodsBuyView];
+            break;
+            
+        case 3:
+            NSLog(@"立即购买");
+            break;
+            
+        default:
+            break;
+    }
+}
+
 #pragma mark - 打开商品购买视图
 - (void)OpenGoodsBuyView {
     FBBuyGoodsViewController * buyVC = [[FBBuyGoodsViewController alloc] init];
@@ -502,48 +530,6 @@ static NSString *const SceneListCellId = @"SceneListCellId";
     [self presentViewController:buyVC animated:YES completion:^{
         buyVC.getGoodsModel(self.goodsInfo);
     }];
-}
-
-#pragma mark - 立即购买／加入购物车视图
-- (UIView *)buyView {
-    if (!_buyView) {
-        _buyView = [[UIView alloc] initWithFrame:CGRectMake(0, SCREEN_HEIGHT - 44, SCREEN_WIDTH, 44)];
-        _buyView.backgroundColor = [UIColor whiteColor];
-        [_buyView addSubview:self.buyingBtn];
-        [_buyView addSubview:self.likeBtn];
-    }
-    return _buyView;
-}
-
-#pragma mark 立即购买
-- (UIButton *)buyingBtn {
-    if (!_buyingBtn) {
-        _buyingBtn = [[UIButton alloc] initWithFrame:CGRectMake(SCREEN_WIDTH/2, 0, SCREEN_WIDTH/2, 44)];
-        [_buyingBtn setTitle:NSLocalizedString(@"goBuyGoods", nil) forState:(UIControlStateNormal)];
-        [_buyingBtn setTitleColor:[UIColor whiteColor] forState:(UIControlStateNormal)];
-        _buyingBtn.titleLabel.font = [UIFont systemFontOfSize:14];
-        _buyingBtn.backgroundColor = [UIColor colorWithHexString:@"#222222"];
-        [_buyingBtn addTarget:self action:@selector(OpenGoodsBuyView) forControlEvents:(UIControlEventTouchUpInside)];
-    }
-    return _buyingBtn;
-}
-
-#pragma mark 收藏
-- (UIButton *)likeBtn {
-    if (!_likeBtn) {
-        _likeBtn = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH/2, 44)];
-        _likeBtn.backgroundColor = [UIColor whiteColor];
-        [_likeBtn setTitle:NSLocalizedString(@"likeTheGoods", nil) forState:(UIControlStateNormal)];
-        [_likeBtn setTitle:NSLocalizedString(@"likeTheGoods", nil) forState:(UIControlStateSelected)];
-        [_likeBtn setTitleColor:[UIColor colorWithHexString:@"#999999"] forState:(UIControlStateNormal)];
-        _likeBtn.titleLabel.font = [UIFont systemFontOfSize:10];
-        [_likeBtn setImage:[UIImage imageNamed:@"goods_star"] forState:(UIControlStateNormal)];
-        [_likeBtn setImage:[UIImage imageNamed:@"goods_star_seleted"] forState:(UIControlStateSelected)];
-        [_likeBtn setTitleEdgeInsets:(UIEdgeInsetsMake(30, -30, 0, 0))];
-        [_likeBtn setImageEdgeInsets:(UIEdgeInsetsMake(-10, 13.5, 0, 0))];
-        [_likeBtn addTarget:self action:@selector(networkCollectGoods:) forControlEvents:(UIControlEventTouchUpInside)];
-    }
-    return _likeBtn;
 }
 
 #pragma mark - 设置Nav

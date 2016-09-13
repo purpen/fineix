@@ -68,7 +68,7 @@
 - (UIImageView *)menuImg {
     if (!_menuImg) {
         _menuImg = [[UIImageView alloc] init];
-        _menuImg.layer.cornerRadius = 60/2;
+        _menuImg.layer.cornerRadius = SCREEN_WIDTH *0.16/2;
         _menuImg.layer.masksToBounds = YES;
         _menuImg.backgroundColor = [UIColor colorWithHexString:@"#000000"];
     }

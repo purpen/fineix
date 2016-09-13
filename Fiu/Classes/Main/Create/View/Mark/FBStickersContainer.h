@@ -9,6 +9,7 @@
 #import <UIKit/UIKit.h>
 #import "Fiu.h"
 #import "FBSticker.h"
+#import "FBFilters.h"
 
 @class FBStickersContainer;
 
@@ -27,6 +28,6 @@
 
 - (void)recoveryFromSticker:(FBSticker *)sticker;
 
-- (FBSticker *)generateSticker;
+- (FBSticker *)generateSticker:(NSString *)filterName;
 
 @end

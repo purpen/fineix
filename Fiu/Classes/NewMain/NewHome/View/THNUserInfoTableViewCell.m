@@ -28,7 +28,7 @@ static NSString *const hotUserCellId = @"HotUserCellId";
     self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
     if (self) {
         self.selectionStyle = UITableViewCellSelectionStyleNone;
-        self.backgroundColor = [UIColor colorWithHexString:BLACK_COLOR];
+        self.backgroundColor = [UIColor colorWithHexString:@"#222222"];
         self.clipsToBounds = YES;
         [self setCellUI];
     }
@@ -136,7 +136,7 @@ static NSString *const hotUserCellId = @"HotUserCellId";
 - (UIView *)bottomView {
     if (!_bottomView) {
         _bottomView = [[UIView alloc] init];
-        _bottomView.backgroundColor = [UIColor colorWithHexString:BLACK_COLOR];
+        _bottomView.backgroundColor = [UIColor colorWithHexString:@"#222222"];
         
         [_bottomView addSubview:self.head];
         [_head mas_makeConstraints:^(MASConstraintMaker *make) {

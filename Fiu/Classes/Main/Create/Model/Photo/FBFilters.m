@@ -10,7 +10,7 @@
 
 @interface FBFilters ()
 
-@property (nonatomic, strong, readwrite) UIImage         *   filterImg;
+@property (nonatomic, strong, readwrite) UIImage *filterImg;
 
 @end
 
@@ -19,25 +19,25 @@
 - (instancetype)initWithImage:(UIImage *)image filterName:(NSString *)name {
     self = [super init];
     if (self) {
-        //  转换image格式
-        CIImage * ciImg = [[CIImage alloc] initWithImage:image];
+        //  转换格式
+        CIImage *ciImg = [[CIImage alloc] initWithCGImage:image.CGImage];
         
         //  创建滤镜
-        CIFilter * filter = [CIFilter filterWithName:name
-                                       keysAndValues:kCIInputImageKey,ciImg ,nil];
+        CIFilter *filter = [CIFilter filterWithName:name
+                                      keysAndValues:kCIInputImageKey,ciImg ,nil];
         
         [filter setDefaults];
         
         //  绘制内容
-        CIContext * context = [CIContext contextWithOptions:nil];
+        CIContext *context = [CIContext contextWithOptions:nil];
         
         //  渲染输出
-        CIImage * outFilterImg = [filter outputImage];
+        CIImage *outFilterImg = filter.outputImage;
         
         //  CGImage句柄
-        CGImageRef cgImg = [context createCGImage:outFilterImg fromRect:[outFilterImg extent]];
+        CGImageRef cgImg = [context createCGImage:outFilterImg fromRect:outFilterImg.extent];
         
-        _filterImg = [UIImage imageWithCGImage:cgImg];
+        _filterImg = [UIImage imageWithCGImage:cgImg scale:image.scale orientation:image.imageOrientation];
         
         // 释放CGImage句柄
         CGImageRelease(cgImg);

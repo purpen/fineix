@@ -56,7 +56,6 @@
     CGRect visibleRect = [self _calcVisibleRectForCropArea];
     CGAffineTransform rectTransform = [self _orientationTransformedRectOfImage:self.imageView.image];
     visibleRect = CGRectApplyAffineTransform(visibleRect, rectTransform);
-    
     CGImageRef ref = CGImageCreateWithImageInRect([self.imageView.image CGImage], visibleRect);
     UIImage* cropped = [[UIImage alloc] initWithCGImage:ref scale:self.imageView.image.scale orientation:self.imageView.image.imageOrientation] ;
     CGImageRelease(ref);
