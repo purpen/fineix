@@ -288,6 +288,7 @@ static NSString *const SceneListCellId = @"SceneListCellId";
     if (!_rollImgView) {
         _rollImgView = [[FBRollImages alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_WIDTH *0.56)];
         _rollImgView.navVC = self.navigationController;
+        _rollImgView.vc = self;
     }
     return _rollImgView;
 }

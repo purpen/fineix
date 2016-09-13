@@ -52,10 +52,7 @@
     self.imageView.frame = frameToCenter;
 }
 
-- (void)displayImage:(NSString *)imageUrl {
-    
-    UIImage *image = [UIImage imageWithData:[NSData dataWithContentsOfURL:[NSURL URLWithString:imageUrl]]];
-    
+- (void)displayImage:(UIImage *)image {
     [self.imageView removeFromSuperview];
     self.imageView = nil;
     

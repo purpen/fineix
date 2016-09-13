@@ -9,7 +9,13 @@
 #import "FBRollImages.h"
 #import "FBGoodsInfoViewController.h"
 #import "THNProjectViewController.h"
+#import "THNSceneImageViewController.h"
 
+@interface FBRollImages () {
+    
+}
+
+@end
 
 @implementation FBRollImages
 
@@ -50,6 +56,11 @@
 }
 
 - (void)setThnGoodsRollImgData:(FBGoodsInfoModelData *)model {
+    for (NSString *imageStr in model.asset) {
+        NSURL *imageUrl = [NSURL URLWithString:imageStr];
+        IDMPhoto *photo = [IDMPhoto photoWithURL:imageUrl];
+        [self.goodsImageMarr addObject:photo];
+    }
     self.rollImageView.imageURLStringsGroup = model.asset;
 }
 
@@ -91,8 +102,20 @@
         }
         
     } else {
-        NSLog(@"商品打开大图");
+        IDMPhotoBrowser *imageBrowser = [[IDMPhotoBrowser alloc] initWithPhotos:self.goodsImageMarr animatedFromView:self];
+        imageBrowser.doneButtonImage = [UIImage imageNamed:@"icon_cancel"];
+        imageBrowser.displayArrowButton = NO;
+        imageBrowser.displayActionButton = NO;
+        imageBrowser.usePopAnimation = YES;
+        [self.vc presentViewController:imageBrowser animated:YES completion:nil];
     }
+}
+
+- (NSMutableArray *)goodsImageMarr {
+    if (!_goodsImageMarr) {
+        _goodsImageMarr = [NSMutableArray array];
+    }
+    return _goodsImageMarr;
 }
 
 @end

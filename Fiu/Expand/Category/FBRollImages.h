@@ -17,6 +17,7 @@ typedef void(^GetProjectTypeBlock)(NSString *idx);
 
 @interface FBRollImages : UIView <SDCycleScrollViewDelegate>
 
+@pro_strong UIViewController               *       vc;
 @pro_strong UINavigationController         *       navVC;
 @pro_strong NSArray                        *       imgArr;
 @pro_strong SDCycleScrollView              *       rollImageView;
@@ -24,6 +25,8 @@ typedef void(^GetProjectTypeBlock)(NSString *idx);
 @pro_strong NSMutableArray                 *       imgMarr;
 @pro_strong NSMutableArray                 *       targetIdMarr;
 @pro_strong NSMutableArray                 *       typeMarr;
+@pro_strong NSMutableArray                 *       goodsImageMarr;
+
 @pro_copy GetProjectTypeBlock getProjectType;
 
 - (void)setRollimageView:(NSMutableArray *)model;

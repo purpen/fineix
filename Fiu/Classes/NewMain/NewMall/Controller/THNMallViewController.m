@@ -32,6 +32,9 @@ static NSString *const MallListHeaderCellViewId = @"mallListHeaderCellViewId";
 
 @interface THNMallViewController () {
     NSInteger _type;
+    BOOL _rollDown;                  //  是否下拉
+    CGFloat _lastContentOffset;      //  滚动的偏移量
+    BOOL _goTop;
 }
 
 @end
@@ -60,6 +63,7 @@ static NSString *const MallListHeaderCellViewId = @"mallListHeaderCellViewId";
     self.categoryRequest = [FBAPI getWithUrlString:URLCategory requestDictionary:@{@"domain":@"1", @"page":@"1", @"size":@"10"} delegate:self];
     [self.categoryRequest startRequestSuccess:^(FBRequest *request, id result) {
         self.categoryMarr = [NSMutableArray arrayWithArray:[[result valueForKey:@"data"] valueForKey:@"rows"]];
+        [self.topCategoryView setCategoryData:self.categoryMarr withType:2];
         
     } failure:^(FBRequest *request, NSError *error) {
         NSLog(@"%@", error);
@@ -116,7 +120,19 @@ static NSString *const MallListHeaderCellViewId = @"mallListHeaderCellViewId";
 
 #pragma mark - 设置视图UI
 - (void)thn_setMallViewUI {
+    _goTop = NO;
     [self.view addSubview:self.mallList];
+    [self.view addSubview:self.topCategoryView];
+    [self.view addSubview:self.goTopBtn];
+}
+
+#pragma mark - 滚动后的顶部分类视图
+- (CategoryMenuView *)topCategoryView {
+    if (!_topCategoryView) {
+        _topCategoryView = [[CategoryMenuView alloc] initWithFrame:CGRectMake(0, -60, SCREEN_WIDTH, 60)];
+        _topCategoryView.nav = self.navigationController;
+    }
+    return _topCategoryView;
 }
 
 #pragma mark - 上拉加载 & 下拉刷新
@@ -244,6 +260,115 @@ static NSString *const MallListHeaderCellViewId = @"mallListHeaderCellViewId";
     }
 }
 
+#pragma mark - 判断上／下滑状态，显示/隐藏Nav/tabBar
+- (void)scrollViewWillBeginDragging:(UIScrollView *)scrollView {
+    if (scrollView == self.mallList) {
+        _lastContentOffset = scrollView.contentOffset.y;
+    }
+}
+
+- (void)scrollViewWillBeginDecelerating:(UIScrollView *)scrollView {
+    if (scrollView == self.mallList) {
+        if (_lastContentOffset < scrollView.contentOffset.y) {
+            _rollDown = YES;
+        } else {
+            _rollDown = NO;
+        }
+    }
+}
+
+- (void)scrollViewDidScroll:(UIScrollView *)scrollView {
+    if (scrollView == self.mallList) {
+        CGRect tabBarRect = self.tabBarController.tabBar.frame;
+        CGRect tableRect = self.mallList.frame;
+        CGRect topCategoryRect = self.topCategoryView.frame;
+        CGRect goTopBtnRect = self.goTopBtn.frame;
+        
+        if (_rollDown == YES && self.subjectMarr.count > 2) {
+            tabBarRect = CGRectMake(0, SCREEN_HEIGHT + 20, SCREEN_WIDTH, 49);
+            tableRect = CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT);
+            topCategoryRect = CGRectMake(0, 0, SCREEN_WIDTH, 60);
+            goTopBtnRect = CGRectMake(SCREEN_WIDTH - 55, SCREEN_HEIGHT - 100, 40, 40);
+            [UIView animateWithDuration:.3 animations:^{
+                self.tabBarController.tabBar.frame = tabBarRect;
+                self.mallList.frame = tableRect;
+                self.navView.alpha = 0;
+                self.leftBtn.alpha = 0;
+                self.rightBtn.alpha = 0;
+                self.topCategoryView.frame = topCategoryRect;
+                self.goTopBtn.frame = goTopBtnRect;
+                [[UIApplication sharedApplication] setStatusBarHidden:YES withAnimation:(UIStatusBarAnimationSlide)];
+            }];
+            
+        } else if (_rollDown == NO) {
+            tabBarRect = CGRectMake(0, SCREEN_HEIGHT - 49, SCREEN_WIDTH, 49);
+            tableRect = CGRectMake(0, 64, SCREEN_WIDTH, SCREEN_HEIGHT - 113);
+            topCategoryRect = CGRectMake(0, -60, SCREEN_WIDTH, 60);
+            [UIView animateWithDuration:.3 animations:^{
+                self.topCategoryView.frame = topCategoryRect;
+                self.mallList.frame = tableRect;
+                self.navView.alpha = 1;
+                self.leftBtn.alpha = 1;
+                self.rightBtn.alpha = 1;
+                self.tabBarController.tabBar.frame = tabBarRect;
+                [[UIApplication sharedApplication] setStatusBarHidden:NO withAnimation:(UIStatusBarAnimationSlide)];
+            }];
+        }
+        
+        //  隐藏“返回顶部”按钮
+        if (scrollView.contentOffset.y < SCREEN_HEIGHT) {
+            goTopBtnRect = CGRectMake(SCREEN_WIDTH, SCREEN_HEIGHT - 100, 40, 40);
+            [UIView animateWithDuration:.3 animations:^{
+                self.goTopBtn.frame = goTopBtnRect;
+            }];
+        }
+        
+        if (_goTop) {
+            //  滚动到顶恢复视图
+            if (scrollView.contentOffset.y == 0) {
+                tabBarRect = CGRectMake(0, SCREEN_HEIGHT - 49, SCREEN_WIDTH, 49);
+                tableRect = CGRectMake(0, 64, SCREEN_WIDTH, SCREEN_HEIGHT - 113);
+                topCategoryRect = CGRectMake(0, -60, SCREEN_WIDTH, 60);
+                
+                [UIView animateWithDuration:.2
+                                      delay:0
+                     usingSpringWithDamping:10.0f
+                      initialSpringVelocity:5.0f
+                                    options:(UIViewAnimationOptionCurveEaseInOut) animations:^{
+                                        self.topCategoryView.frame = topCategoryRect;
+                                        self.mallList.frame = tableRect;
+                                        self.navView.alpha = 1;
+                                        self.leftBtn.alpha = 1;
+                                        self.rightBtn.alpha = 1;
+                                        self.tabBarController.tabBar.frame = tabBarRect;
+                                        [[UIApplication sharedApplication] setStatusBarHidden:NO withAnimation:(UIStatusBarAnimationSlide)];
+                                    }
+                                 completion:^(BOOL finished) {
+                                     _goTop = NO;
+                                 }
+                 ];
+            }
+        }
+        
+    }
+}
+
+#pragma mark - 返回顶部按钮
+- (UIButton *)goTopBtn {
+    if (!_goTopBtn) {
+        _goTopBtn = [[UIButton alloc] initWithFrame:CGRectMake(SCREEN_WIDTH, SCREEN_HEIGHT - 100, 40, 40)];
+        [_goTopBtn setImage:[UIImage imageNamed:@"top_icon"] forState:(UIControlStateNormal)];
+        _goTopBtn.layer.cornerRadius = 40/2;
+        _goTopBtn.layer.masksToBounds = YES;
+        [_goTopBtn addTarget:self action:@selector(goTopBtnClick:) forControlEvents:(UIControlEventTouchUpInside)];
+    }
+    return _goTopBtn;
+}
+
+- (void)goTopBtnClick:(UIButton *)button {
+    _goTop = YES;
+    [self.mallList scrollRectToVisible:CGRectMake(0, 0, 1, 1) animated:YES];
+}
 
 #pragma mark - 设置Nav
 - (void)thn_setNavigationViewUI {

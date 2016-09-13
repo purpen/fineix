@@ -205,7 +205,10 @@ static NSString *const URLSceneInfo = @"/scene_sight/view";
 
 - (void)shareItemSelected {
     //  保存图片到本地
-    UIImageWriteToSavedPhotosAlbum([self shareImage], self, nil, nil);
+    UIImageWriteToSavedPhotosAlbum([self shareImage],
+                                   self,
+                                   @selector(image:didFinishSavingWithError:contextInfo:),
+                                   nil);
     
     if (_oid.length > 0) {
         [self networkShareTextNumData:_oid];
@@ -219,6 +222,14 @@ static NSString *const URLSceneInfo = @"/scene_sight/view";
     [self.shareVC.friendBtn addTarget:self action:@selector(timelineShareBtnAction) forControlEvents:(UIControlEventTouchUpInside)];
     [self.shareVC.weiBoBtn addTarget:self action:@selector(sinaShareBtnAction) forControlEvents:(UIControlEventTouchUpInside)];
     [self.shareVC.qqBtn addTarget:self action:@selector(qqShareBtnAction) forControlEvents:(UIControlEventTouchUpInside)];
+}
+
+- (void)image:(UIImage *)image didFinishSavingWithError:(NSError *)error contextInfo:(void *)contextInfo {
+    if (error != NULL){
+//        [SVProgressHUD showErrorWithStatus:@"保存失败"];
+    } else {
+//        [SVProgressHUD showSuccessWithStatus:@"保存成功"];
+    }
 }
 
 -(void)afterShare{

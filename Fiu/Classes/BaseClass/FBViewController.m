@@ -126,11 +126,8 @@ static NSString *const URLUserIsLogin = @"/user/user_info";
     if (!_navView) {
         _navView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 64)];
         _navView.backgroundColor = [UIColor blackColor];
-        
         [_navView addSubview:self.navViewTitle];
-
         [_navView addSubview:self.navLine];
-        
     }
     return _navView;
 }

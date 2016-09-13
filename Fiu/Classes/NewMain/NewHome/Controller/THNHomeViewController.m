@@ -751,7 +751,7 @@ static NSString *const allCommentsCellId = @"AllCommentsCellId";
         if (_rollDown == YES) {
             tabBarRect = CGRectMake(0, SCREEN_HEIGHT + 20, SCREEN_WIDTH, 49);
             tableRect = CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT);
-            [UIView animateWithDuration:.4 animations:^{
+            [UIView animateWithDuration:.3 animations:^{
                 self.tabBarController.tabBar.frame = tabBarRect;
                 self.homeTable.frame = tableRect;
                 self.navView.alpha = 0;
@@ -763,7 +763,7 @@ static NSString *const allCommentsCellId = @"AllCommentsCellId";
         } else if (_rollDown == NO) {
             tabBarRect = CGRectMake(0, SCREEN_HEIGHT - 49, SCREEN_WIDTH, 49);
             tableRect = CGRectMake(0, 64, SCREEN_WIDTH, SCREEN_HEIGHT - 108);
-            [UIView animateWithDuration:.4 animations:^{
+            [UIView animateWithDuration:.3 animations:^{
                 self.tabBarController.tabBar.frame = tabBarRect;
                 self.homeTable.frame = tableRect;
                 self.navView.alpha = 1;

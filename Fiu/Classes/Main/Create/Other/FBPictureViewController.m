@@ -131,11 +131,7 @@
         _nextBtn = [[UIButton alloc] initWithFrame:CGRectMake(SCREEN_WIDTH - 50, 0, 45, 45)];
         [_nextBtn setTitle:NSLocalizedString(@"next", nil) forState:(UIControlStateNormal)];
         [_nextBtn setTitleColor:[UIColor whiteColor] forState:(UIControlStateNormal)];
-        if (IS_iOS9) {
-            _nextBtn.titleLabel.font = [UIFont fontWithName:@"PingFangSC-Light" size:Font_ControllerTitle];
-        } else {
-            _nextBtn.titleLabel.font = [UIFont systemFontOfSize:Font_ControllerTitle];
-        }
+        _nextBtn.titleLabel.font = [UIFont systemFontOfSize:Font_ControllerTitle];
     }
     return _nextBtn;
 }

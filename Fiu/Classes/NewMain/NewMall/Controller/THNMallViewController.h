@@ -8,7 +8,7 @@
 
 #import "THNViewController.h"
 #import "GroupHeaderView.h"
-#import "FBCategoryView.h"
+#import "CategoryMenuView.h"
 #import "MJRefresh.h"
 #import "FBRefresh.h"
 
@@ -30,5 +30,8 @@
 @pro_strong NSMutableArray *subjectMarr;
 @pro_strong NSMutableArray *subjectIdMarr;
 @pro_strong NSMutableArray *subjectTypeMarr;
+
+@pro_strong CategoryMenuView *topCategoryView;
+@pro_strong UIButton *goTopBtn;
 
 @end

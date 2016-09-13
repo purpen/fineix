@@ -43,7 +43,15 @@
     } else {
         self.like.selected = NO;
     }
-    [self.like setTitle:[NSString stringWithFormat:@"%zi", dataModel.loveCount] forState:(UIControlStateNormal)];
+    NSString *likeNum = [NSString stringWithFormat:@"%zi", dataModel.loveCount];
+    [self.like setTitle:likeNum forState:(UIControlStateNormal)];
+    
+    CGFloat likeBtnWidth = [likeNum boundingRectWithSize:CGSizeMake(320, 10) options:(NSStringDrawingUsesDeviceMetrics) attributes:nil context:nil].size.width + 30;
+    
+    [self.like mas_updateConstraints:^(MASConstraintMaker *make) {
+        make.width.equalTo(@(likeBtnWidth));
+    }];
+    
     _sceneId = [NSString stringWithFormat:@"%zi", dataModel.idField];
     _userId = [NSString stringWithFormat:@"%zi", dataModel.userId];
 }
@@ -80,7 +88,7 @@
     
     [self addSubview:self.like];
     [_like mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.size.mas_equalTo(CGSizeMake(50, 44));
+        make.size.mas_equalTo(CGSizeMake(40, 44));
         make.right.equalTo(_comments.mas_left).with.offset(0);
         make.centerY.equalTo(self);
     }];

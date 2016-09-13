@@ -9,6 +9,7 @@
 #import "THNViewController.h"
 #import "MJRefresh.h"
 #import "FBRefresh.h"
+#import "CategoryMenuView.h"
 
 @interface THNDiscoverViewController : THNViewController <
     THNNavigationBarItemsDelegate,
@@ -34,5 +35,7 @@
 @pro_strong NSMutableArray *subjectMarr;
 @pro_strong NSMutableArray *subjectIdMarr;
 @pro_strong NSMutableArray *subjectTypeMarr;
+
+@pro_strong CategoryMenuView *topCategoryView;
 
 @end

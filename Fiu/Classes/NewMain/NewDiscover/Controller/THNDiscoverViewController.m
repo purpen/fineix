@@ -58,6 +58,7 @@ static NSString *const SceneListFooterCellViewId = @"sceneListFooterViewId";
     self.categoryRequest = [FBAPI getWithUrlString:URLCategory requestDictionary:@{@"domain":@"13", @"page":@"1", @"size":@"10"} delegate:self];
     [self.categoryRequest startRequestSuccess:^(FBRequest *request, id result) {
         self.categoryMarr = [NSMutableArray arrayWithArray:[[result valueForKey:@"data"] valueForKey:@"rows"]];
+        [self.topCategoryView setCategoryData:self.categoryMarr withType:1];
         
     } failure:^(FBRequest *request, NSError *error) {
         NSLog(@"%@", error);
@@ -203,6 +204,16 @@ static NSString *const SceneListFooterCellViewId = @"sceneListFooterViewId";
 #pragma mark - 设置视图UI
 - (void)thn_setDiscoverViewUI {
     [self.view addSubview:self.sceneList];
+    [self.view addSubview:self.topCategoryView];
+}
+
+#pragma mark - 滚动后的顶部分类视图
+- (CategoryMenuView *)topCategoryView {
+    if (!_topCategoryView) {
+        _topCategoryView = [[CategoryMenuView alloc] initWithFrame:CGRectMake(0, -60, SCREEN_WIDTH, 60)];
+        _topCategoryView.nav = self.navigationController;
+    }
+    return _topCategoryView;
 }
 
 #pragma mark - init
@@ -404,27 +415,32 @@ static NSString *const SceneListFooterCellViewId = @"sceneListFooterViewId";
     if (scrollView == self.sceneList) {
         CGRect tabBarRect = self.tabBarController.tabBar.frame;
         CGRect tableRect = self.sceneList.frame;
+        CGRect topCategoryRect = self.topCategoryView.frame;
         if (_rollDown == YES) {
             tabBarRect = CGRectMake(0, SCREEN_HEIGHT + 20, SCREEN_WIDTH, 49);
             tableRect = CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT);
-            [UIView animateWithDuration:.4 animations:^{
+            topCategoryRect = CGRectMake(0, 0, SCREEN_WIDTH, 60);
+            [UIView animateWithDuration:.3 animations:^{
                 self.tabBarController.tabBar.frame = tabBarRect;
                 self.sceneList.frame = tableRect;
                 self.navView.alpha = 0;
                 self.leftBtn.alpha = 0;
                 self.rightBtn.alpha = 0;
+                self.topCategoryView.frame = topCategoryRect;
                 [[UIApplication sharedApplication] setStatusBarHidden:YES withAnimation:(UIStatusBarAnimationSlide)];
             }];
             
         } else if (_rollDown == NO) {
             tabBarRect = CGRectMake(0, SCREEN_HEIGHT - 49, SCREEN_WIDTH, 49);
             tableRect = CGRectMake(0, 64, SCREEN_WIDTH, SCREEN_HEIGHT - 113);
-            [UIView animateWithDuration:.4 animations:^{
-                self.tabBarController.tabBar.frame = tabBarRect;
+            topCategoryRect = CGRectMake(0, -60, SCREEN_WIDTH, 60);
+            [UIView animateWithDuration:.3 animations:^{
+                self.topCategoryView.frame = topCategoryRect;
                 self.sceneList.frame = tableRect;
                 self.navView.alpha = 1;
                 self.leftBtn.alpha = 1;
                 self.rightBtn.alpha = 1;
+                self.tabBarController.tabBar.frame = tabBarRect;
                 [[UIApplication sharedApplication] setStatusBarHidden:NO withAnimation:(UIStatusBarAnimationSlide)];
             }];
         }

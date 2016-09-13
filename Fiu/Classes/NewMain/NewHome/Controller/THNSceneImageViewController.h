@@ -8,6 +8,7 @@
 
 #import "THNViewController.h"
 #import "THNSceneImageScrollView.h"
+#import "UIView+TYAlertView.h"
 
 @interface THNSceneImageViewController : THNViewController
 

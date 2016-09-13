@@ -13,6 +13,6 @@
     UIScrollViewDelegate
 >
 
-- (void)displayImage:(NSString *)imageUrl;
+- (void)displayImage:(UIImage *)image;
 
 @end

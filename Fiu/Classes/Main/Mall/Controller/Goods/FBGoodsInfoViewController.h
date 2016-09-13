@@ -8,6 +8,7 @@
 
 #import "FBViewController.h"
 #import "FBRollImages.h"
+#import "IDMPhotoBrowser.h"
 #import <SVProgressHUD/SVProgressHUD.h>
 #import "FBSegmentView.h"
 
