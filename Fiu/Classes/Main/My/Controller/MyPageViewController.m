@@ -409,7 +409,6 @@
 -(void)orderBtn:(UIButton*)sender{
     //跳转到全部订单页
     MyOderInfoViewController *vc = [[MyOderInfoViewController alloc] init];
-    vc.counterModel = _counterModel;
     vc.type = @0;
     [self.navigationController pushViewController:vc animated:YES];
 }

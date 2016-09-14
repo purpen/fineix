@@ -311,8 +311,9 @@
                 PaySuccessViewController * paySuccessVC = [[PaySuccessViewController alloc] initWithNibName:@"PaySuccessViewController" bundle:nil];
                 paySuccessVC.orderInfo = weakSelf.orderInfo;
                 paySuccessVC.paymentWay = paymentWay;
-                [weakSelf.navigationController pushViewController:paySuccessVC animated:YES];
                 
+
+                [weakSelf.navigationController pushViewController:paySuccessVC animated:YES];
                 [SVProgressHUD showSuccessWithStatus:@"您的订单已经支付成功"];
             } else {
                 [SVProgressHUD showErrorWithStatus:@"您的订单尚未支付成功，请刷新重试或者点这里重新下单"];
