@@ -77,7 +77,7 @@
 - (UIView *)blackView {
     if (!_blackView) {
         _blackView = [[UIView alloc] init];
-        _blackView.backgroundColor = [UIColor blackColor];
+        _blackView.backgroundColor = [UIColor colorWithHexString:@"#222222"];
     }
     return _blackView;
 }

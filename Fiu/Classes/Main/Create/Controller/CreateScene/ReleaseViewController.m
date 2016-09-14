@@ -175,6 +175,7 @@ static NSString *const URLReleaseFiuScenen = @"/scene_scene/save";
 }
 
 - (void)showShareView {
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"refreshSceneList" object:nil];
     UIWindow * window = [UIApplication sharedApplication].keyWindow;
     [self.sharePopView showPopupViewOnWindowStyleOne:NSLocalizedString(@"releaseSceneDone", nil)];
     [window addSubview:self.sharePopView];
