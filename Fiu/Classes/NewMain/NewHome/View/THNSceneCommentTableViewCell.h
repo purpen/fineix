@@ -18,7 +18,7 @@
 
 @pro_strong UINavigationController *nav;
 @pro_strong UIView *graybackView;
-@pro_strong UIButton *headImage;
+@pro_strong UIImageView *headImage;
 @pro_strong TTTAttributedLabel *comment;
 @pro_assign CGFloat cellHigh;
 
