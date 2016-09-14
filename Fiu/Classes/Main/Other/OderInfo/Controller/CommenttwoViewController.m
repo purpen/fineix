@@ -13,7 +13,7 @@
 #import <SDWebImage/UIImageView+WebCache.h>
 #import "SVProgressHUD.h"
 
-@interface CommenttwoViewController ()<FBNavigationBarItemsDelegate,CommentViewDelegate>
+@interface CommenttwoViewController ()<FBNavigationBarItemsDelegate,CommentViewDelegate,UITextViewDelegate>
 
 @property (weak, nonatomic) IBOutlet UIView *mainView;
 @property (weak, nonatomic) IBOutlet UIScrollView *mainScrollView;
@@ -24,6 +24,10 @@
 @end
 
 @implementation CommenttwoViewController
+
+-(BOOL)textViewShouldEndEditing:(UITextView *)textView{
+    return [textView resignFirstResponder];
+}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -62,6 +66,7 @@
         for (NSInteger i = 0; i < count; i++) {
             ProductInfoModel * productInfo = productAry[i];
             CommentView * commentView = self.commentViewAry[i];
+            commentView.contentTextView.delegate = self;
             
             NSMutableDictionary * productDic = [NSMutableDictionary dictionary];
             productDic[@"target_id"] = [NSNumber numberWithInteger:productInfo.productId];

@@ -36,6 +36,8 @@
 @property(nonatomic,strong) TipNumberView *tipNumView3;
 @property(nonatomic,strong) TipNumberView *tipNumView4;
 @property(nonatomic,strong) TipNumberView *tipNumView5;
+/**  */
+@property (nonatomic, strong) SGTopTitleView *segmentedControl;
 
 @end
 
@@ -44,6 +46,130 @@ static NSString *const OrderInfoCellIdentifier = @"orderInfoCell";
 
 @implementation MyOderInfoViewController
 
+-(SGTopTitleView *)segmentedControl{
+
+    if (!_segmentedControl) {
+        _segmentedControl = [[SGTopTitleView alloc] initWithFrame:CGRectMake(0, 64, SCREEN_WIDTH, 44)];
+        _segmentedControl.scrollTitleArr = @[@"全部", @"待付款", @"待发货", @"待收货", @"待评价",@"退货/售后"];
+        _segmentedControl.backgroundColor = [UIColor whiteColor];
+        _segmentedControl.delegate_SG = self;
+    }
+    return _segmentedControl;
+}
+
+-(void)viewWillAppear:(BOOL)animated{
+    [super viewWillAppear:animated];
+    
+    [self requestDataForOderList];
+    
+    UserInfoEntity *entity = [UserInfoEntity defaultUserInfoEntity];
+    FBRequest *request = [FBAPI postWithUrlString:@"/auth/user" requestDictionary:@{@"user_id":entity.userId} delegate:self];
+    [request startRequestSuccess:^(FBRequest *request, id result) {
+        
+        NSDictionary *dataDict = result[@"data"];
+        
+        NSDictionary *counterDict = [dataDict objectForKey:@"counter"];
+        _counterModel = [CounterModel mj_objectWithKeyValues:counterDict];
+
+        [self.view addSubview:self.segmentedControl];
+        
+        
+        [self.myTableView registerNib:[UINib nibWithNibName:@"OrderInfoCell" bundle:nil] forCellReuseIdentifier:OrderInfoCellIdentifier];
+        _myTableView.estimatedRowHeight = 212.f;
+        _myTableView.rowHeight = UITableViewAutomaticDimension;
+        
+        
+        //待付款
+        if ([_counterModel.order_wait_payment intValue] == 0) {
+            //不显示
+            [self.tipNumView2 removeFromSuperview];
+        }else{
+            //显示
+            UILabel *label = self.segmentedControl.allTitleLabel[1];
+            self.tipNumView2.tipNumLabel.text = [NSString stringWithFormat:@"%@",_counterModel.order_wait_payment];
+            CGSize size = [self.tipNumView2.tipNumLabel.text sizeWithAttributes:@{NSFontAttributeName: [UIFont systemFontOfSize:12]}];
+            [label addSubview:self.tipNumView2];
+            [self.tipNumView2 mas_makeConstraints:^(MASConstraintMaker *make) {
+                if ((size.width+9) > 15) {
+                    make.size.mas_equalTo(CGSizeMake(size.width+9, 14));
+                }else{
+                    make.size.mas_equalTo(CGSizeMake(14, 14));
+                }
+                make.right.mas_equalTo(label.mas_right).with.offset(-10);
+                make.top.mas_equalTo(label.mas_top).with.offset(5);
+            }];
+        }
+        
+        //待发货
+        if ([_counterModel.order_ready_goods intValue] == 0) {
+            //不显示
+            [self.tipNumView3 removeFromSuperview];
+        }else{
+            //显示
+            UILabel *label = self.segmentedControl.allTitleLabel[2];
+            self.tipNumView3.tipNumLabel.text = [NSString stringWithFormat:@"%@",_counterModel.order_ready_goods];
+            CGSize size = [self.tipNumView3.tipNumLabel.text sizeWithAttributes:@{NSFontAttributeName: [UIFont systemFontOfSize:12]}];
+            [label addSubview:self.tipNumView3];
+            self.tipNumView3.frame = CGRectMake(0, 0, 14, 14);
+            [self.tipNumView3 mas_makeConstraints:^(MASConstraintMaker *make) {
+                if ((size.width+9) > 15) {
+                    make.size.mas_equalTo(CGSizeMake(size.width+9, 14));
+                }else{
+                    make.size.mas_equalTo(CGSizeMake(14, 14));
+                }
+                make.right.mas_equalTo(label.mas_right).with.offset(-10);
+                make.top.mas_equalTo(label.mas_top).with.offset(5);
+            }];
+        }
+        
+        //待收货
+        if ([_counterModel.order_sended_goods intValue] == 0) {
+            //不显示
+            [self.tipNumView4 removeFromSuperview];
+        }else{
+            //显示
+            UILabel *label = self.segmentedControl.allTitleLabel[3];
+            self.tipNumView4.tipNumLabel.text = [NSString stringWithFormat:@"%@",_counterModel.order_sended_goods];
+            CGSize size = [self.tipNumView4.tipNumLabel.text sizeWithAttributes:@{NSFontAttributeName: [UIFont systemFontOfSize:12]}];
+            [label addSubview:self.tipNumView4];
+            [self.tipNumView4 mas_makeConstraints:^(MASConstraintMaker *make) {
+                if ((size.width+9) > 15) {
+                    make.size.mas_equalTo(CGSizeMake(size.width+9, 14));
+                }else{
+                    make.size.mas_equalTo(CGSizeMake(14, 14));
+                }
+                make.right.mas_equalTo(label.mas_right).with.offset(-10);
+                make.top.mas_equalTo(label.mas_top).with.offset(5);
+            }];
+        }
+        
+        //待评价
+        if ([_counterModel.order_evaluate intValue] == 0) {
+            //不显示
+            [self.tipNumView5 removeFromSuperview];
+        }else{
+            //显示
+            UILabel *label = self.segmentedControl.allTitleLabel[4];
+            self.tipNumView5.tipNumLabel.text = [NSString stringWithFormat:@"%@",_counterModel.order_evaluate];
+            CGSize size = [self.tipNumView5.tipNumLabel.text sizeWithAttributes:@{NSFontAttributeName: [UIFont systemFontOfSize:12]}];
+            [label addSubview:self.tipNumView5];
+            [self.tipNumView5 mas_makeConstraints:^(MASConstraintMaker *make) {
+                if ((size.width+9) > 15) {
+                    make.size.mas_equalTo(CGSizeMake(size.width+9, 14));
+                }else{
+                    make.size.mas_equalTo(CGSizeMake(14, 14));
+                }
+                make.right.mas_equalTo(label.mas_right).with.offset(-10);
+                make.top.mas_equalTo(label.mas_top).with.offset(5);
+            }];
+        }
+
+        
+        
+    } failure:^(FBRequest *request, NSError *error) {
+        [SVProgressHUD showErrorWithStatus:@"加载失败"];
+    }];
+}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -53,123 +179,6 @@ static NSString *const OrderInfoCellIdentifier = @"orderInfoCell";
     self.myTableView.dataSource = self;
     //tableView每个row的高度
     self.myTableView.rowHeight = 222;
-
-    SGTopTitleView *segmentedControl = [[SGTopTitleView alloc] initWithFrame:CGRectMake(0, 64, SCREEN_WIDTH, 44)];
-    segmentedControl.scrollTitleArr = @[@"全部", @"待付款", @"待发货", @"待收货", @"待评价",@"退货/售后"];
-    segmentedControl.delegate_SG = self;
-    [self.view addSubview:segmentedControl];
-    segmentedControl.backgroundColor = [UIColor whiteColor];
-    
-//    HMSegmentedControl *segmentedControl = [[HMSegmentedControl alloc] initWithSectionTitles:@[@"全部", @"待付款", @"待发货", @"待收货", @"待评价",@"退货/售后"]];
-//    segmentedControl.frame = CGRectMake(0, 64, SCREEN_WIDTH, 44);//
-//    segmentedControl.segmentEdgeInset = UIEdgeInsetsMake(5, 5, 5, 5);
-//    segmentedControl.selectionStyle = HMSegmentedControlSelectionStyleTextWidthStripe;
-//    segmentedControl.selectionIndicatorLocation = HMSegmentedControlSelectionIndicatorLocationDown;
-//    segmentedControl.selectionIndicatorHeight = 2.0f;
-//    segmentedControl.selectionIndicatorColor = [UIColor colorWithHexString:fineixColor];
-//    [segmentedControl setTitleFormatter:^NSAttributedString *(HMSegmentedControl *segmentedControl, NSString *title, NSUInteger index, BOOL selected) {
-//        if (selected) {
-//            NSAttributedString *seletedTitle = [[NSAttributedString alloc] initWithString:title attributes:@{NSForegroundColorAttributeName: [UIColor colorWithHexString:fineixColor], NSFontAttributeName: [UIFont systemFontOfSize:14]}];
-//            return seletedTitle;
-//        }
-//        NSAttributedString *attString = [[NSAttributedString alloc] initWithString:title attributes:@{NSForegroundColorAttributeName: [UIColor colorWithHexString:@"#222222"], NSFontAttributeName: [UIFont systemFontOfSize:14]}];
-//        return attString;
-//    }];
-//    [segmentedControl addTarget:self action:@selector(segmentedControlChangedValue:) forControlEvents:UIControlEventValueChanged];
-//    [self.view addSubview:segmentedControl];
-
-    
-    
-    [self.myTableView registerNib:[UINib nibWithNibName:@"OrderInfoCell" bundle:nil] forCellReuseIdentifier:OrderInfoCellIdentifier];
-    _myTableView.estimatedRowHeight = 212.f;
-    _myTableView.rowHeight = UITableViewAutomaticDimension;
-    
-    
-    //待付款
-    if ([_counterModel.order_wait_payment intValue] == 0) {
-        //不显示
-        [self.tipNumView2 removeFromSuperview];
-    }else{
-        //显示
-        UILabel *label = segmentedControl.allTitleLabel[1];
-        self.tipNumView2.tipNumLabel.text = [NSString stringWithFormat:@"%@",_counterModel.order_wait_payment];
-        CGSize size = [self.tipNumView2.tipNumLabel.text sizeWithAttributes:@{NSFontAttributeName: [UIFont systemFontOfSize:12]}];
-        [label addSubview:self.tipNumView2];
-        [self.tipNumView2 mas_makeConstraints:^(MASConstraintMaker *make) {
-            if ((size.width+9) > 15) {
-                make.size.mas_equalTo(CGSizeMake(size.width+9, 14));
-            }else{
-                make.size.mas_equalTo(CGSizeMake(14, 14));
-            }
-            make.right.mas_equalTo(label.mas_right).with.offset(-10);
-            make.top.mas_equalTo(label.mas_top).with.offset(5);
-        }];
-    }
-    
-    //待发货
-    if ([_counterModel.order_ready_goods intValue] == 0) {
-        //不显示
-        [self.tipNumView3 removeFromSuperview];
-    }else{
-        //显示
-        UILabel *label = segmentedControl.allTitleLabel[2];
-        self.tipNumView3.tipNumLabel.text = [NSString stringWithFormat:@"%@",_counterModel.order_ready_goods];
-        CGSize size = [self.tipNumView3.tipNumLabel.text sizeWithAttributes:@{NSFontAttributeName: [UIFont systemFontOfSize:12]}];
-        [label addSubview:self.tipNumView3];
-        self.tipNumView3.frame = CGRectMake(0, 0, 14, 14);
-        [self.tipNumView3 mas_makeConstraints:^(MASConstraintMaker *make) {
-            if ((size.width+9) > 15) {
-                make.size.mas_equalTo(CGSizeMake(size.width+9, 14));
-            }else{
-                make.size.mas_equalTo(CGSizeMake(14, 14));
-            }
-            make.right.mas_equalTo(label.mas_right).with.offset(-10);
-            make.top.mas_equalTo(label.mas_top).with.offset(5);
-        }];
-    }
-    
-    //待收货
-    if ([_counterModel.order_sended_goods intValue] == 0) {
-        //不显示
-        [self.tipNumView4 removeFromSuperview];
-    }else{
-        //显示
-        UILabel *label = segmentedControl.allTitleLabel[3];
-        self.tipNumView4.tipNumLabel.text = [NSString stringWithFormat:@"%@",_counterModel.order_sended_goods];
-        CGSize size = [self.tipNumView4.tipNumLabel.text sizeWithAttributes:@{NSFontAttributeName: [UIFont systemFontOfSize:12]}];
-        [label addSubview:self.tipNumView4];
-        [self.tipNumView4 mas_makeConstraints:^(MASConstraintMaker *make) {
-            if ((size.width+9) > 15) {
-                make.size.mas_equalTo(CGSizeMake(size.width+9, 14));
-            }else{
-                make.size.mas_equalTo(CGSizeMake(14, 14));
-            }
-            make.right.mas_equalTo(label.mas_right).with.offset(-10);
-            make.top.mas_equalTo(label.mas_top).with.offset(5);
-        }];
-    }
-    
-    //待评价
-    if ([_counterModel.order_evaluate intValue] == 0) {
-        //不显示
-        [self.tipNumView5 removeFromSuperview];
-    }else{
-        //显示
-        UILabel *label = segmentedControl.allTitleLabel[4];
-        self.tipNumView5.tipNumLabel.text = [NSString stringWithFormat:@"%@",_counterModel.order_evaluate];
-        CGSize size = [self.tipNumView5.tipNumLabel.text sizeWithAttributes:@{NSFontAttributeName: [UIFont systemFontOfSize:12]}];
-        [label addSubview:self.tipNumView5];
-        [self.tipNumView5 mas_makeConstraints:^(MASConstraintMaker *make) {
-            if ((size.width+9) > 15) {
-                make.size.mas_equalTo(CGSizeMake(size.width+9, 14));
-            }else{
-                make.size.mas_equalTo(CGSizeMake(14, 14));
-            }
-            make.right.mas_equalTo(label.mas_right).with.offset(-10);
-            make.top.mas_equalTo(label.mas_top).with.offset(5);
-        }];
-    }
-    
     
     // 下拉刷新
     _myTableView.mj_header = [MJRefreshNormalHeader headerWithRefreshingBlock:^{
@@ -236,10 +245,6 @@ static NSString *const OrderInfoCellIdentifier = @"orderInfoCell";
     return _tipNumView5;
 }
 
--(void)viewWillAppear:(BOOL)animated{
-    [super viewWillAppear:animated];
-    [self requestDataForOderList];
-}
 
 //请求不同状态订单列表
 - (void)segmentedControlChangedValue:(HMSegmentedControl *)segmentedControl {
@@ -390,6 +395,7 @@ static NSString *const OrderInfoCellIdentifier = @"orderInfoCell";
         case OrderInfoStateWaitReceive://确认收货
         {
             [self confirmReceiptWithCell:orderInfoCell];
+            
         }
             break;
         case OrderInfoStateWaitComment://去评价
@@ -435,6 +441,7 @@ static NSString *const OrderInfoCellIdentifier = @"orderInfoCell";
         [request startRequestSuccess:^(FBRequest *request, id result) {
             [self operationActionWithCell:cell];
             [SVProgressHUD showSuccessWithStatus:@"删除成功"];
+
         } failure:^(FBRequest *request, NSError *error) {
             [SVProgressHUD showInfoWithStatus:[error localizedDescription]];
         }];
@@ -454,6 +461,13 @@ static NSString *const OrderInfoCellIdentifier = @"orderInfoCell";
         [request startRequestSuccess:^(FBRequest *request, id result) {
             [self operationActionWithCell:cell];
             [SVProgressHUD showSuccessWithStatus:@"取消成功"];
+            int n = [self.tipNumView2.tipNumLabel.text intValue];
+            n --;
+            if (n == 0) {
+                [self.tipNumView2 removeFromSuperview];
+            }else{
+                self.tipNumView2.tipNumLabel.text = [NSString stringWithFormat:@"%d",n];
+            }
         } failure:^(FBRequest *request, NSError *error) {
             [SVProgressHUD showInfoWithStatus:[error localizedDescription]];
         }];
@@ -474,6 +488,14 @@ static NSString *const OrderInfoCellIdentifier = @"orderInfoCell";
         [request startRequestSuccess:^(FBRequest *request, id result) {
             [self operationActionWithCell:cell];
             [SVProgressHUD showSuccessWithStatus:@"确认收货成功"];
+            int n = [self.tipNumView4.tipNumLabel.text intValue];
+            n --;
+            if (n == 0) {
+                [self.tipNumView4 removeFromSuperview];
+            }else{
+                self.tipNumView4.tipNumLabel.text = [NSString stringWithFormat:@"%d",n];
+            }
+            
         } failure:^(FBRequest *request, NSError *error) {
             [SVProgressHUD showInfoWithStatus:[error localizedDescription]];
         }];
@@ -492,14 +514,5 @@ static NSString *const OrderInfoCellIdentifier = @"orderInfoCell";
 }
 
 
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
 
 @end

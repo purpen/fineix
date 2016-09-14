@@ -34,5 +34,7 @@
 @property (nonatomic, strong) NSArray *products;
 /**  */
 @property(nonatomic,copy) NSString *short_title;
+/**  */
+@property(nonatomic,copy) NSString *banner_url;
 
 @end

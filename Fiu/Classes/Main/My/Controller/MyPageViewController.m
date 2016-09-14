@@ -179,7 +179,6 @@
         
         UserInfo *userInfo = [UserInfo mj_objectWithKeyValues:[result objectForKey:@"data"]];
         NSArray *ary = [result objectForKey:@"data"][@"interest_scene_cate"];
-        NSLog(@"用户  %@",result);
         NSMutableString *str = [NSMutableString string];
         for (int i = 0; i < ary.count; i ++) {
             [str appendString:[NSString stringWithFormat:@"%@",ary[i]]];
@@ -409,7 +408,6 @@
 -(void)orderBtn:(UIButton*)sender{
     //跳转到全部订单页
     MyOderInfoViewController *vc = [[MyOderInfoViewController alloc] init];
-    vc.counterModel = _counterModel;
     vc.type = @0;
     [self.navigationController pushViewController:vc animated:YES];
 }

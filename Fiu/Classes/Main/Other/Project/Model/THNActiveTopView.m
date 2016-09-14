@@ -24,7 +24,7 @@
 
 -(void)setModel:(THNArticleModel *)model{
     _model = model;
-    [self.bgImageView sd_setImageWithURL:[NSURL URLWithString:model.cover_url] placeholderImage:[UIImage imageNamed:@"Defaul_Bg_420"]];
+    [self.bgImageView sd_setImageWithURL:[NSURL URLWithString:model.banner_url] placeholderImage:[UIImage imageNamed:@"Defaul_Bg_420"]];
     self.titleLabel.text = model.title;
     self.subTitleLabel.text = model.short_title;
     if (model.evt == 2) {

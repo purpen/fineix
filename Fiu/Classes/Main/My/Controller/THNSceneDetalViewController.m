@@ -42,6 +42,7 @@
 @pro_strong FBRequest *cancelFollowRequest;
 @pro_strong FBRequest *viewCountRequest;
 @pro_strong FBRequest *favoriteRequest;
+@pro_strong FBRequest *deleteRequest;
 
 @end
 
@@ -59,7 +60,7 @@ static NSString *const sceneInfoCellId = @"SceneInfoCellId";
 static NSString *const commentsCellId = @"CommentsCellId";
 static NSString *const twoCommentsCellId = @"TwoCommentsCellId";
 static NSString *const URLCancelFavorite = @"/favorite/ajax_cancel_favorite";
-
+static NSString *const URLDeleteScene = @"/scene_sight/delete";
 
 @implementation THNSceneDetalViewController
 
@@ -187,6 +188,9 @@ static NSString *const URLCancelFavorite = @"/favorite/ajax_cancel_favorite";
             cell.cancelFavoriteTheSceneBlock = ^(NSString *idx) {
                 [weakSelf thn_networkCancelFavoriteData:idx];
             };
+            cell.deleteTheSceneBlock = ^(NSString *idx) {
+                [weakSelf thn_networkDeleteScene:idx];
+            };
         }
         [cell.like addTarget:self action:@selector(commentsClick:) forControlEvents:UIControlEventTouchUpInside];
         [cell.more addTarget:self action:@selector(moreClick) forControlEvents:UIControlEventTouchUpInside];
@@ -234,6 +238,20 @@ static NSString *const URLCancelFavorite = @"/favorite/ajax_cancel_favorite";
     
     return nil;
 }
+
+//  删除情境
+- (void)thn_networkDeleteScene:(NSString *)idx {
+    self.deleteRequest = [FBAPI postWithUrlString:URLDeleteScene requestDictionary:@{@"id":idx} delegate:self];
+    [self.deleteRequest startRequestSuccess:^(FBRequest *request, id result) {
+        if ([[result valueForKey:@"success"] isEqualToNumber:@1]) {
+            [self.navigationController popViewControllerAnimated:YES];
+        }
+        
+    } failure:^(FBRequest *request, NSError *error) {
+        [SVProgressHUD showErrorWithStatus:[error localizedDescription]];
+    }];
+}
+
 
 //  收藏
 - (void)thn_networkFavoriteData:(NSString *)idx {
