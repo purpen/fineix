@@ -41,12 +41,17 @@ static NSString *const SceneListFooterCellViewId = @"sceneListFooterViewId";
     [self thn_setFirstAppStart];
     [self thn_setNavigationViewUI];
     
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(refreshSceneList) name:@"refreshSceneList" object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(deleteTheScene:) name:@"deleteScene" object:nil];
 }
 
 #pragma mark - 移除情境
 - (void)deleteTheScene:(NSNotification *)idx {
     [self.sceneList reloadData];
+}
+
+- (void)refreshSceneList {
+    [self.sceneList.mj_header beginRefreshing];
 }
 
 - (void)viewDidLoad {
@@ -205,6 +210,7 @@ static NSString *const SceneListFooterCellViewId = @"sceneListFooterViewId";
     [self.sceneListMarr removeAllObjects];
     [self.sceneIdMarr removeAllObjects];
     [self.commentsMarr removeAllObjects];
+    [self.userIdMarr removeAllObjects];
     [self thn_networkSceneListData];
 }
 
@@ -547,6 +553,7 @@ static NSString *const SceneListFooterCellViewId = @"sceneListFooterViewId";
 
 - (void)dealloc {
     [[NSNotificationCenter defaultCenter] removeObserver:self name:@"deleteScene" object:nil];
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:@"refreshSceneList" object:nil];
 }
 
 @end

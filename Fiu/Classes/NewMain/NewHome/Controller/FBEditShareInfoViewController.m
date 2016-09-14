@@ -109,6 +109,7 @@ static NSString *const URLActionTags = @"/scene_sight/stick_active_tags";
 
 #pragma mark 语境列表
 - (void)networkContentList:(NSString *)categoryId {
+    [SVProgressHUD show];
     self.listRequest = [FBAPI getWithUrlString:URLListText requestDictionary:@{@"category_id":categoryId, @"size":@"10", @"sort":@"1", @"page":@(self.listCurrentpageNum + 1)} delegate:self];
     [self.listRequest startRequestSuccess:^(FBRequest *request, id result) {
         NSArray * listArr = [[result valueForKey:@"data"] valueForKey:@"rows"];
@@ -120,6 +121,7 @@ static NSString *const URLActionTags = @"/scene_sight/stick_active_tags";
         self.listCurrentpageNum = [[[result valueForKey:@"data"] valueForKey:@"current_page"] integerValue];
         self.listTotalPageNum = [[[result valueForKey:@"data"] valueForKey:@"total_page"] integerValue];
         [self requestIsLastData:self.listTable currentPage:self.listCurrentpageNum withTotalPage:self.listTotalPageNum];
+        [SVProgressHUD dismiss];
         
     } failure:^(FBRequest *request, NSError *error) {
         [SVProgressHUD showErrorWithStatus:[error localizedDescription]];
@@ -242,7 +244,7 @@ static NSString *const URLActionTags = @"/scene_sight/stick_active_tags";
 - (void)maxTitleText:(UITextField *)titleText {
     if (titleText.text.length >= MAXTitle) {
         [SVProgressHUD showInfoWithStatus:@"标题不能超过20字"];
-        titleText.text = [titleText.text substringToIndex:MAXTitle];
+//        titleText.text = [titleText.text substringToIndex:MAXTitle];
     }
 }
 
