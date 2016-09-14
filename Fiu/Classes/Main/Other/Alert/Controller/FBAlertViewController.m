@@ -11,7 +11,6 @@
 #import "FBShareViewController.h"
 
 static NSInteger const actionBtnTag = 686;
-static NSInteger const fiuActionBtnTag = 696;
 
 @interface FBAlertViewController () {
     NSInteger _isFavorite;
@@ -25,16 +24,14 @@ static NSInteger const fiuActionBtnTag = 696;
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.view.backgroundColor = [UIColor colorWithHexString:@"#000000" alpha:.3];
-    
     [self.view addSubview:self.closeBtn];
-    
     [self.view addSubview:self.alertView];
 }
 
 #pragma mark -
 - (UIView *)alertView {
     if (!_alertView) {
-        _alertView = [[UIView alloc] initWithFrame:CGRectMake(0, SCREEN_HEIGHT - 222, SCREEN_WIDTH, 222)];
+        _alertView = [[UIView alloc] initWithFrame:CGRectMake(0, SCREEN_HEIGHT - 132, SCREEN_WIDTH, 132)];
         _alertView.backgroundColor = [UIColor colorWithHexString:lineGrayColor];
     }
     return _alertView;
@@ -42,7 +39,7 @@ static NSInteger const fiuActionBtnTag = 696;
 
 - (UIButton *)closeBtn {
     if (!_closeBtn) {
-        _closeBtn = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT - 100)];
+        _closeBtn = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT - 132)];
         [_closeBtn addTarget:self action:@selector(closeBtnClick) forControlEvents:(UIControlEventTouchUpInside)];
     }
     return _closeBtn;
@@ -52,51 +49,20 @@ static NSInteger const fiuActionBtnTag = 696;
     [self dismissViewControllerAnimated:YES completion:nil];
 }
 
-#pragma mark - 情景中的“更多”选项
-- (void)initFiuSceneAlertStyle {
-    self.alertView.frame = CGRectMake(0, SCREEN_HEIGHT - 135, SCREEN_WIDTH, 135);
-    NSArray * alertTitle = @[NSLocalizedString(@"Edit", nil), NSLocalizedString(@"Delete", nil), NSLocalizedString(@"cancel", nil)];
-    for (NSUInteger idx = 0; idx < alertTitle.count; ++ idx) {
-        UIButton * actionBtn = [[UIButton alloc] initWithFrame:CGRectMake(0, 45 * idx, SCREEN_WIDTH, 44)];
-        actionBtn.tag = fiuActionBtnTag + idx;
-        actionBtn.titleLabel.font = [UIFont systemFontOfSize:16];
-        actionBtn.backgroundColor = [UIColor whiteColor];
-        [actionBtn setTitleColor:[UIColor blackColor] forState:(UIControlStateNormal)];
-        [actionBtn setTitle:alertTitle[idx] forState:(UIControlStateNormal)];
-        [actionBtn addTarget:self action:@selector(fiuActionBtnClick:) forControlEvents:(UIControlEventTouchUpInside)];
-        [self.alertView addSubview:actionBtn];
-    }
-}
-
-#pragma mark - 情景选项
-- (void)fiuActionBtnClick:(UIButton *)button {
-    if (button.tag == fiuActionBtnTag) {
-        
-        
-    } else if (button.tag == fiuActionBtnTag + 1) {
-        [self dismissViewControllerAnimated:YES completion:^{
-            self.deleteScene();
-        }];
-        
-    } else if (button.tag == fiuActionBtnTag + 2) {
-        [self dismissViewControllerAnimated:YES completion:nil];
-    }
-}
-
-#pragma mark - 场景中的“更多”选项
+#pragma mark - 情境中的“更多”选项
 - (void)initFBAlertVcStyle:(BOOL)isUserSelf isFavorite:(NSInteger)favorite {
     NSArray * alertTitle = [NSArray array];
     _isFavorite = favorite;
     
     if (isUserSelf == YES) {
-        alertTitle = @[NSLocalizedString(@"CommentVcTitle", nil), NSLocalizedString(@"ShareBtn", nil), NSLocalizedString(@"Edit", nil), NSLocalizedString(@"Delete", nil), NSLocalizedString(@"cancel", nil)];
+        alertTitle = @[NSLocalizedString(@"ShareBtn", nil), NSLocalizedString(@"Delete", nil), NSLocalizedString(@"cancel", nil)];
+        
     } else {
         if (favorite == 0) {
             alertTitle = @[NSLocalizedString(@"saveScene", nil), NSLocalizedString(@"reportScene", nil), NSLocalizedString(@"cancel", nil)];
         } else if (favorite == 1) {
             alertTitle = @[NSLocalizedString(@"cancelSaveScene", nil), NSLocalizedString(@"reportScene", nil), NSLocalizedString(@"cancel", nil)];
         }
-        self.alertView.frame = CGRectMake(0, SCREEN_HEIGHT - 132, SCREEN_WIDTH, 132);
     }
     
     for (NSUInteger idx = 0; idx < alertTitle.count; ++ idx) {
@@ -107,12 +73,11 @@ static NSInteger const fiuActionBtnTag = 696;
         [actionBtn setTitle:alertTitle[idx] forState:(UIControlStateNormal)];
         if ([actionBtn.titleLabel.text isEqualToString:NSLocalizedString(@"reportScene", nil)]) {
             [actionBtn setTitleColor:[UIColor colorWithHexString:@"#E30B0B"] forState:(UIControlStateNormal)];
-            
         } else if ([actionBtn.titleLabel.text isEqualToString:NSLocalizedString(@"saveScene", nil)] || [actionBtn.titleLabel.text isEqualToString:NSLocalizedString(@"cancelSaveScene", nil)] ) {
             [actionBtn setTitleColor:[UIColor colorWithHexString:@"#0B78F7"] forState:(UIControlStateNormal)];
-            
-        } else
+        } else {
             [actionBtn setTitleColor:[UIColor blackColor] forState:(UIControlStateNormal)];
+        }
         
         if (isUserSelf == YES) {
             [actionBtn addTarget:self action:@selector(userActionBtnClick:) forControlEvents:(UIControlEventTouchUpInside)];
@@ -124,32 +89,26 @@ static NSInteger const fiuActionBtnTag = 696;
     }
 }
 
-//  用户自己创建的场景，可编辑
+//  用户自己创建的情境，可编辑／删除
 - (void)userActionBtnClick:(UIButton *)button {
     if (button.tag == actionBtnTag) {
-        [self dismissViewControllerAnimated:YES completion:^{
-            self.openCommentVc();
-        }];
+        FBShareViewController * shareVC = [[FBShareViewController alloc] init];
+        shareVC.sceneModel = self.sceneModel;
+        shareVC.sceneId = self.targetId;
+        [self presentViewController:shareVC animated:YES completion:nil];
         
     } else if (button.tag == actionBtnTag + 1) {
-//        FBShareViewController * shareVC = [[FBShareViewController alloc] init];
-//        shareVC.dataDict = self.sceneData;
-//        [self presentViewController:shareVC animated:YES completion:nil];
-        
-    } else if (button.tag == actionBtnTag + 2) {
-
-        
-    } else if (button.tag == actionBtnTag + 3) {
         [self dismissViewControllerAnimated:YES completion:^{
-            self.deleteScene();
+            self.deleteScene(self.targetId);
         }];
         
-    } else if (button.tag == actionBtnTag + 4) {
+    } else if (button.tag == actionBtnTag + 2) {
         [self dismissViewControllerAnimated:YES completion:nil];
+        
     }
 }
 
-//  访客查看场景详情时
+//  访客查看情境详情时
 - (void)visitorsActionBtnClick:(UIButton *)button {
     if (button.tag == actionBtnTag) {
         if (_isFavorite == 0) {

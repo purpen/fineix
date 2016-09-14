@@ -20,6 +20,7 @@
 @pro_strong FBRequest *cancelFollowRequest;
 @pro_strong FBRequest *favoriteRequest;
 @pro_strong FBRequest *cancelFavoriteRequest;
+@pro_strong FBRequest *deleteRequest;
 
 @pro_strong UITableView *sceneTable;
 @pro_assign NSInteger index;

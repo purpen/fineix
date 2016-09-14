@@ -46,6 +46,7 @@ static NSString *const URLCancelFollowUser = @"/follow/ajax_cancel_follow";
 static NSString *const URLFavorite = @"/favorite/ajax_favorite";
 static NSString *const URLCancelFavorite = @"/favorite/ajax_cancel_favorite";
 static NSString *const URLHotUserList = @"/user/find_user";
+static NSString *const URLDeleteScene = @"/scene_sight/delete";
 
 static NSString *const themeCellId = @"ThemeCellId";
 static NSString *const userInfoCellId = @"UserInfoCellId";
@@ -291,11 +292,30 @@ static NSString *const allCommentsCellId = @"AllCommentsCellId";
         
         if (self.hotUserMarr.count && self.sceneListMarr.count) {
             NSIndexPath *indexPath = [NSIndexPath indexPathForRow:0 inSection:_hotUserListIndex];
-            [self.homeTable reloadRowsAtIndexPaths:@[indexPath] withRowAnimation:(UITableViewRowAnimationFade)];
+            [self.homeTable reloadRowsAtIndexPaths:@[indexPath] withRowAnimation:(UITableViewRowAnimationBottom)];
         }
 
     } failure:^(FBRequest *request, NSError *error) {
         NSLog(@"%@", error);
+    }];
+}
+
+//  删除情境
+- (void)thn_networkDeleteScene:(NSString *)idx {
+    self.deleteRequest = [FBAPI postWithUrlString:URLDeleteScene requestDictionary:@{@"id":idx} delegate:self];
+    [self.deleteRequest startRequestSuccess:^(FBRequest *request, id result) {
+        if ([[result valueForKey:@"success"] isEqualToNumber:@1]) {
+            NSInteger index = [self.sceneIdMarr indexOfObject:idx];
+            [self.sceneListMarr removeObjectAtIndex:index];
+            [self.sceneIdMarr removeObjectAtIndex:index];
+            [self.userIdMarr removeObjectAtIndex:index];
+            [self.commentsCountMarr removeObjectAtIndex:index];
+            [self.commentsMarr removeObjectAtIndex:index];
+            [self.homeTable deleteSections:[NSIndexSet indexSetWithIndex:index + 1] withRowAnimation:(UITableViewRowAnimationFade)];
+        }
+        
+    } failure:^(FBRequest *request, NSError *error) {
+        [SVProgressHUD showErrorWithStatus:[error localizedDescription]];
     }];
 }
 
@@ -504,7 +524,9 @@ static NSString *const allCommentsCellId = @"AllCommentsCellId";
             THNDataInfoTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:dataInfoCellId];
             cell = [[THNDataInfoTableViewCell alloc] initWithStyle:(UITableViewCellStyleDefault) reuseIdentifier:dataInfoCellId];
             if (self.sceneListMarr.count) {
-                [cell thn_setSceneData:self.sceneListMarr[indexPath.section - 1] isLogin:[self isUserLogin]];
+                [cell thn_setSceneData:self.sceneListMarr[indexPath.section - 1]
+                               isLogin:[self isUserLogin]
+                            isUserSelf:[self isLoginUserSelf:self.userIdMarr[indexPath.section - 1]]];
                 
                 cell.beginLikeTheSceneBlock = ^(NSString *idx) {
                     [weakSelf thn_networkLikeSceneData:idx];
@@ -520,6 +542,10 @@ static NSString *const allCommentsCellId = @"AllCommentsCellId";
                 
                 cell.cancelFavoriteTheSceneBlock = ^(NSString *idx) {
                     [weakSelf thn_networkCancelFavoriteData:idx];
+                };
+                
+                cell.deleteTheSceneBlock = ^(NSString *idx) {
+                    [weakSelf thn_networkDeleteScene:idx];
                 };
             }
             cell.vc = self;

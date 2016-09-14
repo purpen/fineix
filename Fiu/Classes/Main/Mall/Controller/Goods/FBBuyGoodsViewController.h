@@ -28,8 +28,6 @@ typedef void(^AddGoodsCarBlock)(NSDictionary * addCarGoodsData);
 @pro_strong UILabel             *   goodsChoose;
 @pro_strong UIView              *   chooseNumView;
 @pro_strong UILabel             *   chooseNum;
-@pro_strong UIButton            *   buyingBtn;
-@pro_strong UIButton            *   addCarBtn;
 @pro_strong UICollectionView    *   goodsColorView;
 @pro_strong NSMutableArray      *   goodsSkus;
 @pro_assign NSInteger               num;
@@ -41,5 +39,13 @@ typedef void(^AddGoodsCarBlock)(NSDictionary * addCarGoodsData);
 @pro_strong GetGoodsInfoModelBlock  getGoodsModel;
 @pro_strong BuyingGoodsBlock        buyingGoodsBlock;
 @pro_strong AddGoodsCarBlock        addGoodsCarBlock;
+
+/**
+ * buyState
+ * 1:加入购物车／2:立即购买
+ */
+@pro_assign NSInteger buyState;
+@pro_strong UIButton *sureBtn;
+@pro_strong UIButton *closeBtn;
 
 @end

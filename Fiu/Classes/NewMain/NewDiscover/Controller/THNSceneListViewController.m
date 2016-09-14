@@ -25,6 +25,7 @@ static NSString *const URLFollowUser = @"/follow/ajax_follow";
 static NSString *const URLCancelFollowUser = @"/follow/ajax_cancel_follow";
 static NSString *const URLFavorite = @"/favorite/ajax_favorite";
 static NSString *const URLCancelFavorite = @"/favorite/ajax_cancel_favorite";
+static NSString *const URLDeleteScene = @"/scene_sight/delete";
 
 static NSString *const userInfoCellId = @"UserInfoCellId";
 static NSString *const sceneImgCellId = @"SceneImgCellId";
@@ -147,6 +148,27 @@ static NSString *const twoCommentsCellId = @"TwoCommentsCellId";
     }];
 }
 
+//  删除情境
+- (void)thn_networkDeleteScene:(NSString *)idx {
+    [SVProgressHUD show];
+    self.deleteRequest = [FBAPI postWithUrlString:URLDeleteScene requestDictionary:@{@"id":idx} delegate:self];
+    [self.deleteRequest startRequestSuccess:^(FBRequest *request, id result) {
+        if ([[result valueForKey:@"success"] isEqualToNumber:@1]) {
+            NSInteger index = [self.sceneIdMarr indexOfObject:idx];
+            [self.sceneListMarr removeObjectAtIndex:index];
+            [self.sceneIdMarr removeObjectAtIndex:index];
+            [self.userIdMarr removeObjectAtIndex:index];
+            [self.commentsMarr removeObjectAtIndex:index];
+            [self.sceneTable deleteSections:[NSIndexSet indexSetWithIndex:index] withRowAnimation:(UITableViewRowAnimationBottom)];
+            [[NSNotificationCenter defaultCenter] postNotificationName:@"deleteScene" object:[NSString stringWithFormat:@"%zi", index]];
+            [SVProgressHUD dismiss];
+        }
+        
+    } failure:^(FBRequest *request, NSError *error) {
+        [SVProgressHUD showErrorWithStatus:[error localizedDescription]];
+    }];
+}
+
 #pragma mark - 设置视图UI
 - (void)thn_setSceneViewUI {
     [self.view addSubview:self.sceneTable];
@@ -211,7 +233,9 @@ static NSString *const twoCommentsCellId = @"TwoCommentsCellId";
         THNDataInfoTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:dataInfoCellId];
         cell = [[THNDataInfoTableViewCell alloc] initWithStyle:(UITableViewCellStyleDefault) reuseIdentifier:dataInfoCellId];
         if (self.sceneListMarr.count) {
-            [cell thn_setSceneData:self.sceneListMarr[indexPath.section] isLogin:[self isUserLogin]];
+            [cell thn_setSceneData:self.sceneListMarr[indexPath.section]
+                           isLogin:[self isUserLogin]
+                        isUserSelf:[self isLoginUserSelf:self.userIdMarr[indexPath.section]]];
             
             cell.beginLikeTheSceneBlock = ^(NSString *idx) {
                 [weakSelf thn_networkLikeSceneData:idx];
@@ -227,6 +251,10 @@ static NSString *const twoCommentsCellId = @"TwoCommentsCellId";
             
             cell.cancelFavoriteTheSceneBlock = ^(NSString *idx) {
                 [weakSelf thn_networkCancelFavoriteData:idx];
+            };
+            
+            cell.deleteTheSceneBlock = ^(NSString *idx) {
+                [weakSelf thn_networkDeleteScene:idx];
             };
         }
         cell.vc = self;

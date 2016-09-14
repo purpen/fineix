@@ -83,6 +83,15 @@ static NSString *const URLUserIsLogin = @"/user/user_info";
     return entity.userId;
 }
 
+#pragma mark - 是否用户本人
+- (BOOL)isLoginUserSelf:(NSString *)userId {
+    UserInfoEntity * entity = [UserInfoEntity defaultUserInfoEntity];
+    if ([userId isEqualToString:entity.userId])
+        return YES;
+    else
+        return NO;
+}
+
 #pragma mark - 弹出登录
 - (void)openUserLoginVC {
     THNLoginRegisterViewController * loginSignupVC = [[THNLoginRegisterViewController alloc] init];

@@ -40,6 +40,13 @@ static NSString *const SceneListFooterCellViewId = @"sceneListFooterViewId";
     [super viewWillAppear:animated];
     [self thn_setFirstAppStart];
     [self thn_setNavigationViewUI];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(deleteTheScene:) name:@"deleteScene" object:nil];
+}
+
+#pragma mark - 移除情境
+- (void)deleteTheScene:(NSNotification *)idx {
+    [self.sceneList reloadData];
 }
 
 - (void)viewDidLoad {
@@ -539,7 +546,7 @@ static NSString *const SceneListFooterCellViewId = @"sceneListFooterViewId";
 }
 
 - (void)dealloc {
-    
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:@"deleteScene" object:nil];
 }
 
 @end

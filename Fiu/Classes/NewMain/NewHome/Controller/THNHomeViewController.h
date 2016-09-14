@@ -28,6 +28,7 @@
 @pro_strong FBRequest *favoriteRequest;
 @pro_strong FBRequest *cancelFavoriteRequest;
 @pro_strong FBRequest *hotUserRequest;
+@pro_strong FBRequest *deleteRequest;
 
 @pro_strong FBRollImages *homerollView;
 @pro_strong UITableView *homeTable;

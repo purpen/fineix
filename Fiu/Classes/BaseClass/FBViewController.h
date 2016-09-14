@@ -51,6 +51,11 @@
 - (NSString *)getLoginUserID;
 
 /**
+ *  是否是用户本人
+ */
+- (BOOL)isLoginUserSelf:(NSString *)userId;
+
+/**
  *  未登录弹出登录框
  */
 - (void)openUserLoginVC;

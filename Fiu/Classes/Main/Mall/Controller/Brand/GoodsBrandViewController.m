@@ -10,7 +10,7 @@
 #import "GoodsBrandTableViewCell.h"
 #import "BrandInfoData.h"
 #import "GoodsRow.h"
-#import "GoodsInfoViewController.h"
+#import "FBGoodsInfoViewController.h"
 #import "THNDiscoverSceneCollectionViewCell.h"
 
 static NSString *const URLBrandInfo = @"/scene_brands/view";
@@ -256,7 +256,7 @@ static NSString *const SceneListCellId = @"SceneListCellId";
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     if (indexPath.section == 1) {
-        GoodsInfoViewController * goodsInfoVC = [[GoodsInfoViewController alloc] init];
+        FBGoodsInfoViewController * goodsInfoVC = [[FBGoodsInfoViewController alloc] init];
         goodsInfoVC.goodsID = self.goodsIdList[indexPath.row];
         [self.navigationController pushViewController:goodsInfoVC animated:YES];
     }

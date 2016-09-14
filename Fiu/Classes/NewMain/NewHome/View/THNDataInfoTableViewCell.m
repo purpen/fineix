@@ -19,6 +19,7 @@
     HomeSceneListRow *_sceneModel;
     NSInteger _isFavorite;
     BOOL _isLogin;
+    BOOL _isUserSelf;
 }
 
 - (instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier {
@@ -32,8 +33,9 @@
 }
 
 #pragma mark - setModel;
-- (void)thn_setSceneData:(HomeSceneListRow *)dataModel isLogin:(BOOL)login {
+- (void)thn_setSceneData:(HomeSceneListRow *)dataModel isLogin:(BOOL)login isUserSelf:(BOOL)userSelf {
     _isLogin = login;
+    _isUserSelf = userSelf;
     _isFavorite = dataModel.isFavorite;
     _sceneModel = dataModel;
     [self.look setTitle:[NSString stringWithFormat:@"%zi", dataModel.viewCount] forState:(UIControlStateNormal)];
@@ -121,16 +123,24 @@
     FBAlertViewController * alertVC = [[FBAlertViewController alloc] init];
     alertVC.modalPresentationStyle = UIModalPresentationOverFullScreen;
     alertVC.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;
-    [alertVC initFBAlertVcStyle:NO isFavorite:_isFavorite];
+    [alertVC initFBAlertVcStyle:_isUserSelf isFavorite:_isFavorite];
     alertVC.targetId = _sceneId;
+    alertVC.sceneModel = _sceneModel;
+    
     alertVC.favoriteTheScene = ^(NSString *sceneId) {
         _isFavorite = 1;
         weakSelf.beginFavoriteTheSceneBlock(sceneId);
     };
+    
     alertVC.cancelFavoriteTheScene = ^(NSString *sceneId) {
         _isFavorite = 0;
         weakSelf.cancelFavoriteTheSceneBlock(sceneId);
     };
+    
+    alertVC.deleteScene = ^ (NSString *sceneId) {
+        weakSelf.deleteTheSceneBlock(sceneId);
+    };
+    
     [self.vc presentViewController:alertVC animated:YES completion:nil];
 }
 

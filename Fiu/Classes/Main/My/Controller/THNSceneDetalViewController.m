@@ -84,9 +84,7 @@ static NSString *const URLCancelFavorite = @"/favorite/ajax_cancel_favorite";
                                                                                            } delegate:self];
     [request startRequestSuccess:^(FBRequest *request, id result) {
         if (result[@"success"]) {
-            NSLog(@"情境详情 %@",result); 
             self.model = [[HomeSceneListRow alloc] initWithDictionary:[result valueForKey:@"data"]];
-//            NSLog(@" 12312  %@",self.model.user.)
             self.comments = [result valueForKey:@"data"][@"comments"];
             [self.sceneTable reloadData];
         }else{
@@ -169,7 +167,9 @@ static NSString *const URLCancelFavorite = @"/favorite/ajax_cancel_favorite";
         THNDataInfoTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:dataInfoCellId];
         cell = [[THNDataInfoTableViewCell alloc] initWithStyle:(UITableViewCellStyleDefault) reuseIdentifier:dataInfoCellId];
         if (self.model) {
-            [cell thn_setSceneData:self.model isLogin:[self isUserLogin]];
+            [cell thn_setSceneData:self.model
+                           isLogin:[self isUserLogin]
+                        isUserSelf:[self isLoginUserSelf:[NSString stringWithFormat:@"%zi", self.model.userId]]];
             cell.vc = self;
             cell.nav = self.navigationController;
             cell.beginLikeTheSceneBlock = ^(NSString *idx) {
