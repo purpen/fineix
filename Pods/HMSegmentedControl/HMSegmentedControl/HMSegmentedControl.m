@@ -10,8 +10,7 @@
 #import <QuartzCore/QuartzCore.h>
 #import <math.h>
 
-@interface HMScrollView : UIScrollView
-@end
+
 
 @interface HMSegmentedControl ()
 
@@ -20,7 +19,7 @@
 @property (nonatomic, strong) CALayer *selectionIndicatorArrowLayer;
 @property (nonatomic, readwrite) CGFloat segmentWidth;
 @property (nonatomic, readwrite) NSArray *segmentWidthsArray;
-@property (nonatomic, strong) HMScrollView *scrollView;
+
 
 @end
 
@@ -122,6 +121,7 @@
     self.segmentWidth = 0.0f;
     [self commonInit];
 }
+
 
 - (void)commonInit {
     self.scrollView = [[HMScrollView alloc] init];

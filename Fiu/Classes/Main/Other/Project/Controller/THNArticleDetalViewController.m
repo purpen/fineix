@@ -288,9 +288,6 @@
 }
 
 -(void)wechatShareBtnAction:(UIButton*)sender{
-    
-    
-    
     [UMSocialData defaultData].extConfig.wechatSessionData.url = self.model.share_view_url;
     [UMSocialData defaultData].extConfig.wechatSessionData.title = self.model.title;
     UMSocialUrlResource * imgUrl = [[UMSocialUrlResource alloc] initWithSnsResourceType:(UMSocialUrlResourceTypeImage) url:self.model.cover_url];
@@ -375,7 +372,7 @@
 -(void)sinaShareBtnAction:(UIButton*)sender{
     UMSocialUrlResource *urlResource = [[UMSocialUrlResource alloc] initWithSnsResourceType:UMSocialUrlResourceTypeImage url:self.model.cover_url];
     [[UMSocialDataService defaultDataService]  postSNSWithTypes:@[UMShareToSina]
-                                                        content:[NSString stringWithFormat:@"%@，%@。%@", self.model.title, self.model.summary, self.model.cover_url]
+                                                        content:[NSString stringWithFormat:@"%@", self.model.title]
                                                           image:nil
                                                        location:nil
                                                     urlResource:urlResource
