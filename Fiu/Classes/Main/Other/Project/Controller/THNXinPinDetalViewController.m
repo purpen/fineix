@@ -366,7 +366,7 @@
 -(void)sinaShareBtnAction:(UIButton*)sender{
     UMSocialUrlResource *urlResource = [[UMSocialUrlResource alloc] initWithSnsResourceType:UMSocialUrlResourceTypeImage url:self.model.cover_url];
     [[UMSocialDataService defaultDataService]  postSNSWithTypes:@[UMShareToSina]
-                                                        content:[NSString stringWithFormat:@"%@，%@。%@", self.model.title, self.model.summary, self.model.cover_url]
+                                                        content:[NSString stringWithFormat:@"%@", self.model.title]
                                                           image:nil
                                                        location:nil
                                                     urlResource:urlResource

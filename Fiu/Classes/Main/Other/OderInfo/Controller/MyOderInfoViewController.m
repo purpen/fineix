@@ -22,8 +22,9 @@
 #import "FBPayTheWayViewController.h"
 #import "HMSegmentedControl.h"
 #import "CounterModel.h"
+#import "SGTopTitleView.h"
 
-@interface MyOderInfoViewController ()<FBNavigationBarItemsDelegate,UITableViewDelegate,UITableViewDataSource,FBRequestDelegate,OrderInfoCellDelegate>
+@interface MyOderInfoViewController ()<FBNavigationBarItemsDelegate,UITableViewDelegate,UITableViewDataSource,FBRequestDelegate,OrderInfoCellDelegate,SGTopTitleViewDelegate>
 
 @property (weak, nonatomic) IBOutlet UITableView *myTableView;
 
@@ -53,38 +54,30 @@ static NSString *const OrderInfoCellIdentifier = @"orderInfoCell";
     //tableView每个row的高度
     self.myTableView.rowHeight = 222;
 
-    HMSegmentedControl *segmentedControl = [[HMSegmentedControl alloc] initWithSectionTitles:@[@"全部", @"待付款", @"待发货", @"待收货", @"待评价",@"退货/售后"]];
-
-    segmentedControl.frame = CGRectMake(0, 64, SCREEN_WIDTH, 44);//
-    segmentedControl.segmentEdgeInset = UIEdgeInsetsMake(5, 5, 5, 5);
-    segmentedControl.selectionStyle = HMSegmentedControlSelectionStyleTextWidthStripe;
-    segmentedControl.selectionIndicatorLocation = HMSegmentedControlSelectionIndicatorLocationDown;
-    segmentedControl.selectionIndicatorHeight = 2.0f;
-    segmentedControl.selectionIndicatorColor = [UIColor colorWithHexString:fineixColor];
-    [segmentedControl setTitleFormatter:^NSAttributedString *(HMSegmentedControl *segmentedControl, NSString *title, NSUInteger index, BOOL selected) {
-        if (selected) {
-            NSAttributedString *seletedTitle = [[NSAttributedString alloc] initWithString:title attributes:@{NSForegroundColorAttributeName: [UIColor colorWithHexString:fineixColor], NSFontAttributeName: [UIFont systemFontOfSize:14]}];
-            return seletedTitle;
-        }
-        NSAttributedString *attString = [[NSAttributedString alloc] initWithString:title attributes:@{NSForegroundColorAttributeName: [UIColor colorWithHexString:@"#222222"], NSFontAttributeName: [UIFont systemFontOfSize:14]}];
-        return attString;
-    }];
-    [segmentedControl addTarget:self action:@selector(segmentedControlChangedValue:) forControlEvents:UIControlEventValueChanged];
+    SGTopTitleView *segmentedControl = [[SGTopTitleView alloc] initWithFrame:CGRectMake(0, 64, SCREEN_WIDTH, 44)];
+    segmentedControl.scrollTitleArr = @[@"全部", @"待付款", @"待发货", @"待收货", @"待评价",@"退货/售后"];
+    segmentedControl.delegate_SG = self;
     [self.view addSubview:segmentedControl];
+    segmentedControl.backgroundColor = [UIColor whiteColor];
+    
+//    HMSegmentedControl *segmentedControl = [[HMSegmentedControl alloc] initWithSectionTitles:@[@"全部", @"待付款", @"待发货", @"待收货", @"待评价",@"退货/售后"]];
+//    segmentedControl.frame = CGRectMake(0, 64, SCREEN_WIDTH, 44);//
+//    segmentedControl.segmentEdgeInset = UIEdgeInsetsMake(5, 5, 5, 5);
+//    segmentedControl.selectionStyle = HMSegmentedControlSelectionStyleTextWidthStripe;
+//    segmentedControl.selectionIndicatorLocation = HMSegmentedControlSelectionIndicatorLocationDown;
+//    segmentedControl.selectionIndicatorHeight = 2.0f;
+//    segmentedControl.selectionIndicatorColor = [UIColor colorWithHexString:fineixColor];
+//    [segmentedControl setTitleFormatter:^NSAttributedString *(HMSegmentedControl *segmentedControl, NSString *title, NSUInteger index, BOOL selected) {
+//        if (selected) {
+//            NSAttributedString *seletedTitle = [[NSAttributedString alloc] initWithString:title attributes:@{NSForegroundColorAttributeName: [UIColor colorWithHexString:fineixColor], NSFontAttributeName: [UIFont systemFontOfSize:14]}];
+//            return seletedTitle;
+//        }
+//        NSAttributedString *attString = [[NSAttributedString alloc] initWithString:title attributes:@{NSForegroundColorAttributeName: [UIColor colorWithHexString:@"#222222"], NSFontAttributeName: [UIFont systemFontOfSize:14]}];
+//        return attString;
+//    }];
+//    [segmentedControl addTarget:self action:@selector(segmentedControlChangedValue:) forControlEvents:UIControlEventValueChanged];
+//    [self.view addSubview:segmentedControl];
 
-    if ([self.type isEqualToNumber:@0]) {
-       [segmentedControl setSelectedSegmentIndex:0];
-    }else if ([self.type isEqualToNumber:@1]){
-        [segmentedControl setSelectedSegmentIndex:1];
-    }else if ([self.type isEqualToNumber:@2]){
-        [segmentedControl setSelectedSegmentIndex:2];
-    }else if ([self.type isEqualToNumber:@3]){
-        [segmentedControl setSelectedSegmentIndex:3];
-    }else if ([self.type isEqualToNumber:@4]){
-        [segmentedControl setSelectedSegmentIndex:4];
-    }else if ([self.type isEqualToNumber:@5]){
-        [segmentedControl setSelectedSegmentIndex:5];
-    }
     
     
     [self.myTableView registerNib:[UINib nibWithNibName:@"OrderInfoCell" bundle:nil] forCellReuseIdentifier:OrderInfoCellIdentifier];
@@ -98,18 +91,18 @@ static NSString *const OrderInfoCellIdentifier = @"orderInfoCell";
         [self.tipNumView2 removeFromSuperview];
     }else{
         //显示
-        
+        UILabel *label = segmentedControl.allTitleLabel[1];
         self.tipNumView2.tipNumLabel.text = [NSString stringWithFormat:@"%@",_counterModel.order_wait_payment];
         CGSize size = [self.tipNumView2.tipNumLabel.text sizeWithAttributes:@{NSFontAttributeName: [UIFont systemFontOfSize:12]}];
-        [segmentedControl addSubview:self.tipNumView2];
+        [label addSubview:self.tipNumView2];
         [self.tipNumView2 mas_makeConstraints:^(MASConstraintMaker *make) {
             if ((size.width+9) > 15) {
                 make.size.mas_equalTo(CGSizeMake(size.width+9, 14));
             }else{
                 make.size.mas_equalTo(CGSizeMake(14, 14));
             }
-            make.left.mas_equalTo(segmentedControl.mas_left).with.offset((SCREEN_WIDTH / 5) * 2 - 25 / 667.0 * SCREEN_HEIGHT);
-            make.top.mas_equalTo(segmentedControl.mas_top).with.offset(7/667.0*SCREEN_HEIGHT);
+            make.right.mas_equalTo(label.mas_right).with.offset(-10);
+            make.top.mas_equalTo(label.mas_top).with.offset(5);
         }];
     }
     
@@ -119,18 +112,19 @@ static NSString *const OrderInfoCellIdentifier = @"orderInfoCell";
         [self.tipNumView3 removeFromSuperview];
     }else{
         //显示
-        
+        UILabel *label = segmentedControl.allTitleLabel[2];
         self.tipNumView3.tipNumLabel.text = [NSString stringWithFormat:@"%@",_counterModel.order_ready_goods];
         CGSize size = [self.tipNumView3.tipNumLabel.text sizeWithAttributes:@{NSFontAttributeName: [UIFont systemFontOfSize:12]}];
-        [segmentedControl addSubview:self.tipNumView3];
+        [label addSubview:self.tipNumView3];
+        self.tipNumView3.frame = CGRectMake(0, 0, 14, 14);
         [self.tipNumView3 mas_makeConstraints:^(MASConstraintMaker *make) {
             if ((size.width+9) > 15) {
                 make.size.mas_equalTo(CGSizeMake(size.width+9, 14));
             }else{
                 make.size.mas_equalTo(CGSizeMake(14, 14));
             }
-            make.left.mas_equalTo(segmentedControl.mas_left).with.offset((SCREEN_WIDTH / 5) * 3 - 25 / 667.0 * SCREEN_HEIGHT);
-            make.top.mas_equalTo(segmentedControl.mas_top).with.offset(7/667.0*SCREEN_HEIGHT);
+            make.right.mas_equalTo(label.mas_right).with.offset(-10);
+            make.top.mas_equalTo(label.mas_top).with.offset(5);
         }];
     }
     
@@ -140,18 +134,18 @@ static NSString *const OrderInfoCellIdentifier = @"orderInfoCell";
         [self.tipNumView4 removeFromSuperview];
     }else{
         //显示
-        
+        UILabel *label = segmentedControl.allTitleLabel[3];
         self.tipNumView4.tipNumLabel.text = [NSString stringWithFormat:@"%@",_counterModel.order_sended_goods];
         CGSize size = [self.tipNumView4.tipNumLabel.text sizeWithAttributes:@{NSFontAttributeName: [UIFont systemFontOfSize:12]}];
-        [segmentedControl addSubview:self.tipNumView4];
+        [label addSubview:self.tipNumView4];
         [self.tipNumView4 mas_makeConstraints:^(MASConstraintMaker *make) {
             if ((size.width+9) > 15) {
                 make.size.mas_equalTo(CGSizeMake(size.width+9, 14));
             }else{
                 make.size.mas_equalTo(CGSizeMake(14, 14));
             }
-            make.left.mas_equalTo(segmentedControl.mas_left).with.offset((SCREEN_WIDTH / 5) * 4 - 25 / 667.0 * SCREEN_HEIGHT);
-            make.top.mas_equalTo(segmentedControl.mas_top).with.offset(7/667.0*SCREEN_HEIGHT);
+            make.right.mas_equalTo(label.mas_right).with.offset(-10);
+            make.top.mas_equalTo(label.mas_top).with.offset(5);
         }];
     }
     
@@ -161,18 +155,18 @@ static NSString *const OrderInfoCellIdentifier = @"orderInfoCell";
         [self.tipNumView5 removeFromSuperview];
     }else{
         //显示
-        
+        UILabel *label = segmentedControl.allTitleLabel[4];
         self.tipNumView5.tipNumLabel.text = [NSString stringWithFormat:@"%@",_counterModel.order_evaluate];
         CGSize size = [self.tipNumView5.tipNumLabel.text sizeWithAttributes:@{NSFontAttributeName: [UIFont systemFontOfSize:12]}];
-        [segmentedControl addSubview:self.tipNumView5];
+        [label addSubview:self.tipNumView5];
         [self.tipNumView5 mas_makeConstraints:^(MASConstraintMaker *make) {
             if ((size.width+9) > 15) {
                 make.size.mas_equalTo(CGSizeMake(size.width+9, 14));
             }else{
                 make.size.mas_equalTo(CGSizeMake(14, 14));
             }
-            make.left.mas_equalTo(segmentedControl.mas_left).with.offset((SCREEN_WIDTH / 5) * 5 - 25 / 667.0 * SCREEN_HEIGHT);
-            make.top.mas_equalTo(segmentedControl.mas_top).with.offset(7/667.0*SCREEN_HEIGHT);
+            make.right.mas_equalTo(label.mas_right).with.offset(-10);
+            make.top.mas_equalTo(label.mas_top).with.offset(5);
         }];
     }
     
@@ -193,6 +187,16 @@ static NSString *const OrderInfoCellIdentifier = @"orderInfoCell";
         }
     }];
 
+}
+
+#pragma mark - - - SGTopScrollMenu代理方法
+- (void)SGTopTitleView:(SGTopTitleView *)topTitleView didSelectTitleAtIndex:(NSInteger)index {
+    self.type = [NSNumber numberWithInteger:index];
+    if (index == 5) {
+        self.type = [NSNumber numberWithInteger:8];
+    }
+    [self.orderListAry removeAllObjects];
+    [self requestDataForOderList];
 }
 
 

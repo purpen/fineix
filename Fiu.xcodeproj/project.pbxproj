@@ -397,6 +397,8 @@
 		1FA4BDFD1D35F2200067A196 /* TencentOpenApi_IOS_Bundle.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 1FA4BDE41D35F2200067A196 /* TencentOpenApi_IOS_Bundle.bundle */; };
 		1FA4BDFE1D35F2200067A196 /* libSocialWechat.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 1FA4BDE71D35F2200067A196 /* libSocialWechat.a */; };
 		1FA4BDFF1D35F2200067A196 /* libWeChatSDK.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 1FA4BDE81D35F2200067A196 /* libWeChatSDK.a */; };
+		1FC53B921D89222200B0B666 /* SGTopTitleView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1FC53B8F1D89222200B0B666 /* SGTopTitleView.m */; };
+		1FC53B931D89222200B0B666 /* UIView+SGExtension.m in Sources */ = {isa = PBXBuildFile; fileRef = 1FC53B911D89222200B0B666 /* UIView+SGExtension.m */; };
 		1FC6782E1CDB33ED00535162 /* UIView+TYAlertView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1FC6782C1CDB33ED00535162 /* UIView+TYAlertView.m */; };
 		1FCDCC871D07F50D00C92E78 /* ServiceViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1FCDCC851D07F50D00C92E78 /* ServiceViewController.m */; };
 		1FCDCC881D07F50D00C92E78 /* ServiceViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1FCDCC861D07F50D00C92E78 /* ServiceViewController.xib */; };
@@ -1299,6 +1301,10 @@
 		1FA4BDEA1D35F2200067A196 /* WechatAuthSDK.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WechatAuthSDK.h; sourceTree = "<group>"; };
 		1FA4BDEB1D35F2200067A196 /* WXApi.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WXApi.h; sourceTree = "<group>"; };
 		1FA4BDEC1D35F2200067A196 /* WXApiObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WXApiObject.h; sourceTree = "<group>"; };
+		1FC53B8E1D89222200B0B666 /* SGTopTitleView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SGTopTitleView.h; sourceTree = "<group>"; };
+		1FC53B8F1D89222200B0B666 /* SGTopTitleView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SGTopTitleView.m; sourceTree = "<group>"; };
+		1FC53B901D89222200B0B666 /* UIView+SGExtension.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+SGExtension.h"; sourceTree = "<group>"; };
+		1FC53B911D89222200B0B666 /* UIView+SGExtension.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+SGExtension.m"; sourceTree = "<group>"; };
 		1FC6782C1CDB33ED00535162 /* UIView+TYAlertView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+TYAlertView.m"; sourceTree = "<group>"; };
 		1FC6782D1CDB33ED00535162 /* UIView+TYAutoLayout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+TYAutoLayout.h"; sourceTree = "<group>"; };
 		1FCDCC841D07F50D00C92E78 /* ServiceViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ServiceViewController.h; sourceTree = "<group>"; };
@@ -3390,6 +3396,17 @@
 			path = Wechat;
 			sourceTree = "<group>";
 		};
+		1FC53B8D1D89222200B0B666 /* SGTopTitleView */ = {
+			isa = PBXGroup;
+			children = (
+				1FC53B8E1D89222200B0B666 /* SGTopTitleView.h */,
+				1FC53B8F1D89222200B0B666 /* SGTopTitleView.m */,
+				1FC53B901D89222200B0B666 /* UIView+SGExtension.h */,
+				1FC53B911D89222200B0B666 /* UIView+SGExtension.m */,
+			);
+			path = SGTopTitleView;
+			sourceTree = "<group>";
+		};
 		1FCDCC891D08082900C92E78 /* InviteCode */ = {
 			isa = PBXGroup;
 			children = (
@@ -3581,6 +3598,7 @@
 		D81280CB1CAA8532007CF08B /* Vendors */ = {
 			isa = PBXGroup;
 			children = (
+				1FC53B8D1D89222200B0B666 /* SGTopTitleView */,
 				D84763391D427FCA00C88379 /* UMMobClick.framework */,
 				1FA4BDB51D35F2200067A196 /* UMSocial_Sdk_5.2.1 */,
 				1FA4BDD01D35F2200067A196 /* UMSocial_Sdk_Extra_Frameworks */,
@@ -4769,6 +4787,7 @@
 				1F2AFC751D88170B00DA6035 /* SubscribeViewController.m in Sources */,
 				D854E7F41D880748009A13F1 /* THNGoodsBuyView.m in Sources */,
 				1FC6782E1CDB33ED00535162 /* UIView+TYAlertView.m in Sources */,
+				1FC53B921D89222200B0B666 /* SGTopTitleView.m in Sources */,
 				1F2A8FAB1CF40277005116C7 /* FBGoodsInfoViewController.m in Sources */,
 				D8ACF4671D6EBA8A00DB79D8 /* SearchUserViewController.m in Sources */,
 				1F2A90181CF40277005116C7 /* BonusViewController.m in Sources */,
@@ -4776,6 +4795,7 @@
 				D869BD701D6036A000432423 /* CommentRow.m in Sources */,
 				1FA204E51D378AAB00B89699 /* UIView+Size.m in Sources */,
 				1F2AFD0E1D8817CC00DA6035 /* THNXinPinDetalViewController.m in Sources */,
+				1FC53B931D89222200B0B666 /* UIView+SGExtension.m in Sources */,
 				1F2AFC721D88170B00DA6035 /* PraisedViewController.m in Sources */,
 				D806699B1D7014C8007FD81E /* HotUserListIdentify.m in Sources */,
 				1F2AFD861D88186C00DA6035 /* THNSignUpViewController.m in Sources */,
@@ -4937,7 +4957,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 9.2;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
-				PROVISIONING_PROFILE = "38736fb6-f8a9-4075-b98f-85f06063d856";
+				PROVISIONING_PROFILE = "68229318-888d-4d23-9586-1a46706c4314";
 				SDKROOT = iphoneos;
 			};
 			name = Debug;
@@ -4975,7 +4995,7 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.2;
 				MTL_ENABLE_DEBUG_INFO = NO;
-				PROVISIONING_PROFILE = "38736fb6-f8a9-4075-b98f-85f06063d856";
+				PROVISIONING_PROFILE = "68229318-888d-4d23-9586-1a46706c4314";
 				SDKROOT = iphoneos;
 				VALIDATE_PRODUCT = YES;
 			};
@@ -5022,7 +5042,7 @@
 				OTHER_LIBTOOLFLAGS = "-all_load";
 				PRODUCT_BUNDLE_IDENTIFIER = com.THN.fineix;
 				PRODUCT_NAME = Fiu;
-				PROVISIONING_PROFILE = "38736fb6-f8a9-4075-b98f-85f06063d856";
+				PROVISIONING_PROFILE = "68229318-888d-4d23-9586-1a46706c4314";
 				RUN_CLANG_STATIC_ANALYZER = NO;
 				USER_HEADER_SEARCH_PATHS = "$(SRCROOT)";
 			};
@@ -5069,7 +5089,7 @@
 				OTHER_LIBTOOLFLAGS = "-all_load";
 				PRODUCT_BUNDLE_IDENTIFIER = com.THN.fineix;
 				PRODUCT_NAME = Fiu;
-				PROVISIONING_PROFILE = "38736fb6-f8a9-4075-b98f-85f06063d856";
+				PROVISIONING_PROFILE = "68229318-888d-4d23-9586-1a46706c4314";
 				RUN_CLANG_STATIC_ANALYZER = NO;
 				USER_HEADER_SEARCH_PATHS = "$(SRCROOT)";
 			};
