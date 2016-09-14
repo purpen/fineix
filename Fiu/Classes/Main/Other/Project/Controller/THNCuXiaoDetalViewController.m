@@ -66,7 +66,6 @@ static NSString *const cellId = @"THNCuXiaoDetalContentTableViewCell";
     }
     
     
-    
     [self.contenView registerNib:[UINib nibWithNibName:cellId bundle:nil] forCellReuseIdentifier:cellId];
     
     FBRequest *request = [FBAPI postWithUrlString:@"/scene_subject/view" requestDictionary:@{
@@ -113,9 +112,6 @@ static NSString *const cellId = @"THNCuXiaoDetalContentTableViewCell";
 }
 
 -(void)wechatShareBtnAction:(UIButton*)sender{
-    
-    
-    
     [UMSocialData defaultData].extConfig.wechatSessionData.url = self.model.share_view_url;
     [UMSocialData defaultData].extConfig.wechatSessionData.title = self.model.title;
     UMSocialUrlResource * imgUrl = [[UMSocialUrlResource alloc] initWithSnsResourceType:(UMSocialUrlResourceTypeImage) url:self.model.cover_url];
@@ -175,7 +171,7 @@ static NSString *const cellId = @"THNCuXiaoDetalContentTableViewCell";
     UMSocialUrlResource * imgUrl = [[UMSocialUrlResource alloc] initWithSnsResourceType:UMSocialUrlResourceTypeImage url:self.model.cover_url];
     
     [[UMSocialDataService defaultDataService]  postSNSWithTypes:@[UMShareToQQ]
-                                                        content:self.model.summary
+                                                        content:@"你好"
                                                           image:nil
                                                        location:nil
                                                     urlResource:imgUrl
