@@ -20,6 +20,8 @@
 #import "CommentNViewController.h"
 #import "HomeSceneListRow.h"
 #import "FBAlertViewController.h"
+#import "UserInfoEntity.h"
+#import "THNLoginRegisterViewController.h"
 
 @interface THNSceneDetalViewController ()<UITableViewDelegate,UITableViewDataSource>
 {
@@ -109,29 +111,37 @@ static NSString *const URLDeleteScene = @"/scene_sight/delete";
 
 -(void)followClick:(UIButton*)sender{
     
-    if (sender.selected) {
-        
-        self.followRequest = [FBAPI postWithUrlString:URLFollowUser requestDictionary:@{@"follow_id":self.model.user.userId} delegate:self];
-        [self.followRequest startRequestSuccess:^(FBRequest *request, id result) {
-            if ([[result valueForKey:@"success"] isEqualToNumber:@1]) {
-                self.model.user.isFollow = 1;
-            }
-            
-        } failure:^(FBRequest *request, NSError *error) {
-            [SVProgressHUD showErrorWithStatus:[error localizedDescription]];
-        }];
-        
+    UserInfoEntity *entity = [UserInfoEntity defaultUserInfoEntity];
+    if (entity.isLogin == NO) {
+        THNLoginRegisterViewController *vc = [[THNLoginRegisterViewController alloc] init];
+        [self presentViewController:vc animated:YES completion:nil];
     }else{
-        self.cancelFollowRequest = [FBAPI postWithUrlString:URLCancelFollowUser requestDictionary:@{@"follow_id":self.model.user.userId} delegate:self];
-        [self.cancelFollowRequest startRequestSuccess:^(FBRequest *request, id result) {
-            if ([[result valueForKey:@"success"] isEqualToNumber:@1]) {
-                self.model.user.isFollow = 1;
-            }
+        if (sender.selected) {
             
-        } failure:^(FBRequest *request, NSError *error) {
-            [SVProgressHUD showErrorWithStatus:[error localizedDescription]];
-        }];
+            self.followRequest = [FBAPI postWithUrlString:URLFollowUser requestDictionary:@{@"follow_id":self.model.user.userId} delegate:self];
+            [self.followRequest startRequestSuccess:^(FBRequest *request, id result) {
+                if ([[result valueForKey:@"success"] isEqualToNumber:@1]) {
+                    self.model.user.isFollow = 1;
+                }
+                
+            } failure:^(FBRequest *request, NSError *error) {
+                [SVProgressHUD showErrorWithStatus:[error localizedDescription]];
+            }];
+            
+        }else{
+            self.cancelFollowRequest = [FBAPI postWithUrlString:URLCancelFollowUser requestDictionary:@{@"follow_id":self.model.user.userId} delegate:self];
+            [self.cancelFollowRequest startRequestSuccess:^(FBRequest *request, id result) {
+                if ([[result valueForKey:@"success"] isEqualToNumber:@1]) {
+                    self.model.user.isFollow = 1;
+                }
+                
+            } failure:^(FBRequest *request, NSError *error) {
+                [SVProgressHUD showErrorWithStatus:[error localizedDescription]];
+            }];
+        }
+
     }
+    
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
@@ -255,16 +265,22 @@ static NSString *const URLDeleteScene = @"/scene_sight/delete";
 
 //  收藏
 - (void)thn_networkFavoriteData:(NSString *)idx {
-    self.favoriteRequest = [FBAPI postWithUrlString:URLFavorite requestDictionary:@{@"id":idx, @"type":@"12"} delegate:self];
-    [self.favoriteRequest startRequestSuccess:^(FBRequest *request, id result) {
-        if ([[result valueForKey:@"success"] isEqualToNumber:@1]) {
-            [SVProgressHUD showSuccessWithStatus:NSLocalizedString(@"favoriteDone", nil)];
-            [self.model setValue:@"1" forKey:@"isFavorite"];
-        }
-        
-    } failure:^(FBRequest *request, NSError *error) {
-        [SVProgressHUD showErrorWithStatus:[error localizedDescription]];
-    }];
+    UserInfoEntity *entity = [UserInfoEntity defaultUserInfoEntity];
+    if (entity.isLogin == NO) {
+        THNLoginRegisterViewController *vc = [[THNLoginRegisterViewController alloc] init];
+        [self presentViewController:vc animated:YES completion:nil];
+    }else{
+        self.favoriteRequest = [FBAPI postWithUrlString:URLFavorite requestDictionary:@{@"id":idx, @"type":@"12"} delegate:self];
+        [self.favoriteRequest startRequestSuccess:^(FBRequest *request, id result) {
+            if ([[result valueForKey:@"success"] isEqualToNumber:@1]) {
+                [SVProgressHUD showSuccessWithStatus:NSLocalizedString(@"favoriteDone", nil)];
+                [self.model setValue:@"1" forKey:@"isFavorite"];
+            }
+            
+        } failure:^(FBRequest *request, NSError *error) {
+            [SVProgressHUD showErrorWithStatus:[error localizedDescription]];
+        }];
+    }
 }
 
 //  取消收藏
@@ -284,17 +300,26 @@ static NSString *const URLDeleteScene = @"/scene_sight/delete";
 
 //  点赞
 - (void)thn_networkLikeSceneData:(NSString *)idx {
-    self.likeSceneRequest = [FBAPI postWithUrlString:URLLikeScene requestDictionary:@{@"id":idx, @"type":@"12"} delegate:self];
-    [self.likeSceneRequest startRequestSuccess:^(FBRequest *request, id result) {
-        if ([[result valueForKey:@"success"] isEqualToNumber:@1]) {
-            NSString *loveCount = [NSString stringWithFormat:@"%zi", [[[result valueForKey:@"data"] valueForKey:@"love_count"] integerValue]];
-            [self.model setValue:loveCount forKey:@"loveCount"];
-            [self.model setValue:@"1" forKey:@"isLove"];
-        }
-        
-    } failure:^(FBRequest *request, NSError *error) {
-        NSLog(@"%@", error);
-    }];
+    
+    UserInfoEntity *entity = [UserInfoEntity defaultUserInfoEntity];
+    if (entity.isLogin == NO) {
+        THNLoginRegisterViewController *vc = [[THNLoginRegisterViewController alloc] init];
+        [self presentViewController:vc animated:YES completion:nil];
+    }else{
+        self.likeSceneRequest = [FBAPI postWithUrlString:URLLikeScene requestDictionary:@{@"id":idx, @"type":@"12"} delegate:self];
+        [self.likeSceneRequest startRequestSuccess:^(FBRequest *request, id result) {
+            if ([[result valueForKey:@"success"] isEqualToNumber:@1]) {
+                NSString *loveCount = [NSString stringWithFormat:@"%zi", [[[result valueForKey:@"data"] valueForKey:@"love_count"] integerValue]];
+                [self.model setValue:loveCount forKey:@"loveCount"];
+                [self.model setValue:@"1" forKey:@"isLove"];
+            }
+            
+        } failure:^(FBRequest *request, NSError *error) {
+            NSLog(@"%@", error);
+        }];
+
+    }
+    
 }
 
 //  取消点赞
@@ -320,15 +345,21 @@ static NSString *const URLDeleteScene = @"/scene_sight/delete";
 
 //  关注
 - (void)thn_networkBeginFollowUserData:(NSString *)idx {
-    self.followRequest = [FBAPI postWithUrlString:URLFollowUser requestDictionary:@{@"follow_id":idx} delegate:self];
-    [self.followRequest startRequestSuccess:^(FBRequest *request, id result) {
-        if ([[result valueForKey:@"success"] isEqualToNumber:@1]) {
+    UserInfoEntity *entity = [UserInfoEntity defaultUserInfoEntity];
+    if (entity.isLogin == NO) {
+        THNLoginRegisterViewController *vc = [[THNLoginRegisterViewController alloc] init];
+        [self presentViewController:vc animated:YES completion:nil];
+    }else{
+        self.followRequest = [FBAPI postWithUrlString:URLFollowUser requestDictionary:@{@"follow_id":idx} delegate:self];
+        [self.followRequest startRequestSuccess:^(FBRequest *request, id result) {
+            if ([[result valueForKey:@"success"] isEqualToNumber:@1]) {
+                
+            }
             
-        }
-        
-    } failure:^(FBRequest *request, NSError *error) {
-        [SVProgressHUD showErrorWithStatus:[error localizedDescription]];
-    }];
+        } failure:^(FBRequest *request, NSError *error) {
+            [SVProgressHUD showErrorWithStatus:[error localizedDescription]];
+        }];
+    }
 }
 
 //  取消关注用户
@@ -476,15 +507,21 @@ static NSString *const URLDeleteScene = @"/scene_sight/delete";
 
 #pragma mark 收藏情境
 - (void)thn_networkFavoriteData{
-    self.favoriteRequest = [FBAPI postWithUrlString:URLFavorite requestDictionary:@{@"id":@(self.model.idField), @"type":@"12"} delegate:self];
-    [self.favoriteRequest startRequestSuccess:^(FBRequest *request, id result) {
-        if ([[result valueForKey:@"success"] isEqualToNumber:@1]) {
-            [SVProgressHUD showSuccessWithStatus:NSLocalizedString(@"favoriteDone", nil)];
-        }
-        
-    } failure:^(FBRequest *request, NSError *error) {
-        [SVProgressHUD showErrorWithStatus:[error localizedDescription]];
-    }];
+    UserInfoEntity *entity = [UserInfoEntity defaultUserInfoEntity];
+    if (entity.isLogin == NO) {
+        THNLoginRegisterViewController *vc = [[THNLoginRegisterViewController alloc] init];
+        [self presentViewController:vc animated:YES completion:nil];
+    }else{
+        self.favoriteRequest = [FBAPI postWithUrlString:URLFavorite requestDictionary:@{@"id":@(self.model.idField), @"type":@"12"} delegate:self];
+        [self.favoriteRequest startRequestSuccess:^(FBRequest *request, id result) {
+            if ([[result valueForKey:@"success"] isEqualToNumber:@1]) {
+                [SVProgressHUD showSuccessWithStatus:NSLocalizedString(@"favoriteDone", nil)];
+            }
+            
+        } failure:^(FBRequest *request, NSError *error) {
+            [SVProgressHUD showErrorWithStatus:[error localizedDescription]];
+        }];
+    }
 }
 
 #pragma mark 取消收藏
