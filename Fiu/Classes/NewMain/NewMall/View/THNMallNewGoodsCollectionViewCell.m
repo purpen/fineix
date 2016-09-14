@@ -24,6 +24,8 @@ static NSString *const GoodsCellId = @"goodsCellId";
 }
 
 - (void)setNewGoodsData:(NSMutableArray *)data {
+    [self.goodsIdMarr removeAllObjects];
+    
     self.goodsMarr = data;
     for (THNMallGoodsModelItem *model in self.goodsMarr) {
         [self.goodsIdMarr addObject:[NSString stringWithFormat:@"%zi",model.idField]];

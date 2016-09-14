@@ -16,7 +16,7 @@
 #import "ShareViewController.h"
 #import "ProjectViewCommentsViewController.h"
 #import "THNSceneDetalViewController.h"
-#import "GoodsInfoViewController.h"
+#import "FBGoodsInfoViewController.h"
 #import "HomePageViewController.h"
 #import "THNArticleDetalViewController.h"
 #import "THNActiveDetalTwoViewController.h"
@@ -298,7 +298,7 @@ static NSString *const cellId = @"THNCuXiaoDetalContentTableViewCell";
                     break;
                 case 12:{
                     //产品
-                    GoodsInfoViewController * goodsInfoVC = [[GoodsInfoViewController alloc] init];
+                    FBGoodsInfoViewController * goodsInfoVC = [[FBGoodsInfoViewController alloc] init];
                     goodsInfoVC.goodsID = infoId;
                     [self.navigationController pushViewController:goodsInfoVC animated:YES];
                 }

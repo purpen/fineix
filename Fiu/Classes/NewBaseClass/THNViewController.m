@@ -79,6 +79,15 @@ static NSString *const URLGoodsCarNum = @"/shopping/fetch_cart_count";
     return entity.userId;
 }
 
+#pragma mark - 是否用户本人
+- (BOOL)isLoginUserSelf:(NSString *)userId {
+    UserInfoEntity * entity = [UserInfoEntity defaultUserInfoEntity];
+    if ([userId isEqualToString:entity.userId])
+        return YES;
+    else
+        return NO;
+}
+
 #pragma mark - 获取登录用户订阅主题
 - (NSString *)getLoginUserInterestSceneCate {
     UserInfoEntity * entity = [UserInfoEntity defaultUserInfoEntity];

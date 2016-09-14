@@ -12,8 +12,8 @@
 #import "MJRefresh.h"
 #import "SystemNoticeModel.h"
 #import "NSObject+MJKeyValue.h"
-#import "GoodsInfoViewController.h"
 #import "TipNumberView.h"
+#import "FBGoodsInfoViewController.h"
 
 @interface SystemInformsViewController ()<FBNavigationBarItemsDelegate,UITableViewDelegate,UITableViewDataSource>
 @property (weak, nonatomic) IBOutlet UITableView *myTbaleView;
@@ -173,7 +173,7 @@
         
     }else if ([model.evt isEqualToNumber:@3]){
         //产品
-        GoodsInfoViewController * goodsInfoVC = [[GoodsInfoViewController alloc] init];
+        FBGoodsInfoViewController * goodsInfoVC = [[FBGoodsInfoViewController alloc] init];
         goodsInfoVC.goodsID = model.url;
         [self.navigationController pushViewController:goodsInfoVC animated:YES];
     }

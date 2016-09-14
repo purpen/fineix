@@ -36,4 +36,6 @@
  */
 - (void)isCollectTheGoods:(NSInteger)collect;
 
+- (void)changeCollectBtnState:(BOOL)selected;
+
 @end

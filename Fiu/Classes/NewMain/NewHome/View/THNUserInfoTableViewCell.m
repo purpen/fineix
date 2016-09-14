@@ -224,7 +224,7 @@ static NSString *const hotUserCellId = @"HotUserCellId";
         _follow.layer.cornerRadius = 5.0f;
         _follow.layer.borderColor = [UIColor colorWithHexString:WHITE_COLOR alpha:0.6f].CGColor;
         _follow.layer.borderWidth = 0.5f;
-        _follow.backgroundColor = [UIColor blackColor];
+        _follow.backgroundColor = [UIColor colorWithHexString:@"#222222"];
         [_follow setTitle:NSLocalizedString(@"User_follow", nil) forState:(UIControlStateNormal)];
         [_follow setTitle:NSLocalizedString(@"User_followDone", nil) forState:(UIControlStateSelected)];
         _follow.titleLabel.font = [UIFont systemFontOfSize:12];

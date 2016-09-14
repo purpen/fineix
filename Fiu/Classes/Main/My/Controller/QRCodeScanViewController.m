@@ -15,7 +15,7 @@
 #import "SVProgressHUD.h"
 #import "HomePageViewController.h"
 #import "MyQrCodeViewController.h"
-#import "GoodsInfoViewController.h"
+#import "FBGoodsInfoViewController.h"
 #import "FBGoodsInfoViewController.h"
 #import "UserInfoEntity.h"
 
@@ -286,7 +286,7 @@
             
         }else if ([infoType isEqualToString:@"12"]) {
             //情景商品
-            GoodsInfoViewController * goodsInfoVC = [[GoodsInfoViewController alloc] init];
+            FBGoodsInfoViewController * goodsInfoVC = [[FBGoodsInfoViewController alloc] init];
             goodsInfoVC.goodsID = infoId;
             [self.navigationController pushViewController:goodsInfoVC animated:YES];
         }else if ([infoType isEqualToString:@"1"]) {

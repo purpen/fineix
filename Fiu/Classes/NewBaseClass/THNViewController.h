@@ -52,6 +52,11 @@
 - (NSString *)getLoginUserID;
 
 /**
+ *  是否是用户本人
+ */
+- (BOOL)isLoginUserSelf:(NSString *)userId;
+
+/**
  *  获取当前登录用户订阅主题
  */
 - (NSString *)getLoginUserInterestSceneCate;

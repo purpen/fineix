@@ -17,7 +17,6 @@
 #import "CommenttwoViewController.h"
 #import "RefundmentViewController.h"
 #import "FBPayTheWayViewController.h"
-#import "GoodsInfoViewController.h"
 #import "FBGoodsInfoViewController.h"
 
 @interface OrderInfoDetailViewController ()<ProductInfoViewDelegate,FBNavigationBarItemsDelegate>

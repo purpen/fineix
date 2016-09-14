@@ -21,6 +21,7 @@
 #import "InfoTitleTableViewCell.h"
 #import "GoodsDesTableViewCell.h"
 #import "InfoBrandTableViewCell.h"
+#import "ShareViewController.h"
 
 static NSString *const URLGoodsInfo = @"/product/view";
 static NSString *const URLAddCar = @"/shopping/add_cart";
@@ -29,8 +30,9 @@ static NSString *const URlCancelCollect = @"/favorite/ajax_cancel_favorite";
 static NSString *const URLSceneList = @"/sight_and_product/getlist";
 static NSString *const URLLikeScene = @"/favorite/ajax_love";
 static NSString *const URLCancelLike = @"/favorite/ajax_cancel_love";
-
 static NSString *const SceneListCellId = @"SceneListCellId";
+
+static NSString *const ShareURlText = @"我在Fiu浮游™寻找同路人；希望和你一起用文字来记录内心情绪，用滤镜来表达情感色彩，用分享去变现原创价值；带你发现美学科技的力量和感性生活的温度！来吧，去Fiu一下 >>> http://m.taihuoniao.com/fiu";
 
 @interface FBGoodsInfoViewController () {
     NSString * _goodsInfoUrl;
@@ -39,6 +41,7 @@ static NSString *const SceneListCellId = @"SceneListCellId";
     NSInteger _canBuy;
     CGFloat _sceneListHeight;
     FBGoodsCommentViewController *_goodsCommentVC;
+    ShareViewController *_shareVC;
 }
 
 @pro_strong FBGoodsInfoModelData        *   goodsInfo;
@@ -118,7 +121,7 @@ static NSString *const SceneListCellId = @"SceneListCellId";
     [self.addCarRequest startRequestSuccess:^(FBRequest *request, id result) {
         if ([[result valueForKey:@"success"] isEqualToNumber:@1]) {
             [self getGoodsCarNumData];
-            [self showMessage:@"加入购物车成功"];
+            [self showMessage:@"已加入到购物车"];
         }
         
     } failure:^(FBRequest *request, NSError *error) {
@@ -132,6 +135,7 @@ static NSString *const SceneListCellId = @"SceneListCellId";
         self.collectRequest = [FBAPI postWithUrlString:URlGoodsCollect requestDictionary:@{@"id":self.goodsID, @"type":@"1"} delegate:self];
         [self.collectRequest startRequestSuccess:^(FBRequest *request, id result) {
             [SVProgressHUD showSuccessWithStatus:NSLocalizedString(@"collectSuccess", nil)];
+            [self.goodsBuyView changeCollectBtnState:YES];
             
         } failure:^(FBRequest *request, NSError *error) {
             [SVProgressHUD showErrorWithStatus:[error localizedDescription]];
@@ -141,6 +145,7 @@ static NSString *const SceneListCellId = @"SceneListCellId";
         self.cancelCollectRequest = [FBAPI postWithUrlString:URlCancelCollect requestDictionary:@{@"id":self.goodsID, @"type":@"1"} delegate:self];
         [self.cancelCollectRequest startRequestSuccess:^(FBRequest *request, id result) {
             [SVProgressHUD showSuccessWithStatus:NSLocalizedString(@"cancelCollect", nil)];
+            [self.goodsBuyView changeCollectBtnState:NO];
             
         } failure:^(FBRequest *request, NSError *error) {
             [SVProgressHUD showErrorWithStatus:[error localizedDescription]];
@@ -488,20 +493,26 @@ static NSString *const SceneListCellId = @"SceneListCellId";
     switch (index) {
         case 0:
             [self networkCollectGoods:selected];
-            NSLog(@"收藏商品");
             break;
             
         case 1:
-            NSLog(@"分享商品");
+            [self showSharView];
             break;
             
         case 2:
-            NSLog(@"加入购物车");
-            [self OpenGoodsBuyView];
+            if ([self isUserLogin]) {
+                [self OpenGoodsBuyView:1];
+            } else {
+                [self openUserLoginVC];
+            }
             break;
             
         case 3:
-            NSLog(@"立即购买");
+            if ([self isUserLogin]) {
+                [self OpenGoodsBuyView:2];
+            } else {
+                [self openUserLoginVC];
+            }
             break;
             
         default:
@@ -509,11 +520,116 @@ static NSString *const SceneListCellId = @"SceneListCellId";
     }
 }
 
+#pragma mark - 分享商品
+- (void)showSharView {
+    _shareVC = [[ShareViewController alloc] init];
+    _shareVC.modalPresentationStyle = UIModalPresentationOverCurrentContext;
+    _shareVC.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;
+    [self presentViewController:_shareVC animated:YES completion:nil];
+    [_shareVC.wechatBtn addTarget:self action:@selector(wechatShareBtnAction:) forControlEvents:(UIControlEventTouchUpInside)];
+    [_shareVC.friendBtn addTarget:self action:@selector(timelineShareBtnAction:) forControlEvents:(UIControlEventTouchUpInside)];
+    [_shareVC.weiBoBtn addTarget:self action:@selector(sinaShareBtnAction:) forControlEvents:(UIControlEventTouchUpInside)];
+    [_shareVC.qqBtn addTarget:self action:@selector(qqShareBtnAction:) forControlEvents:(UIControlEventTouchUpInside)];
+}
+
+-(void)wechatShareBtnAction:(UIButton*)sender {
+    [UMSocialData defaultData].extConfig.wechatSessionData.url = self.goodsInfo.shareViewUrl;
+    [UMSocialData defaultData].extConfig.wechatSessionData.title = self.goodsInfo.title;
+    UMSocialUrlResource *imgUrl = [[UMSocialUrlResource alloc] initWithSnsResourceType:(UMSocialUrlResourceTypeImage) url:self.goodsInfo.coverUrl];
+    
+    [[UMSocialDataService defaultDataService]  postSNSWithTypes:@[UMShareToWechatSession]
+                                                        content:self.goodsInfo.advantage
+                                                          image:nil
+                                                       location:nil
+                                                    urlResource:imgUrl
+                                            presentedController:self completion:^(UMSocialResponseEntity *response){
+                                                if (response.responseCode == UMSResponseCodeSuccess) {
+                                                    [_shareVC dismissViewControllerAnimated:NO completion:^{
+                                                        [SVProgressHUD showSuccessWithStatus:@"让分享变成生产力，别让生活偷走远方的精彩"];
+                                                    }];
+                                                } else {
+                                                    [_shareVC dismissViewControllerAnimated:NO completion:^{
+                                                        [SVProgressHUD showErrorWithStatus:@"分享失败了:-("];
+                                                    }];
+                                                }
+                                            }];
+}
+
+-(void)timelineShareBtnAction:(UIButton*)sender {
+    [UMSocialData defaultData].extConfig.wechatTimelineData.url = self.goodsInfo.shareViewUrl;
+    [UMSocialData defaultData].extConfig.wechatTimelineData.title = self.goodsInfo.title;
+    UMSocialUrlResource *imgUrl = [[UMSocialUrlResource alloc] initWithSnsResourceType:(UMSocialUrlResourceTypeImage) url:self.goodsInfo.coverUrl];
+    
+    [[UMSocialDataService defaultDataService]  postSNSWithTypes:@[UMShareToWechatTimeline]
+                                                        content:self.goodsInfo.advantage
+                                                          image:nil
+                                                       location:nil
+                                                    urlResource:imgUrl
+                                            presentedController:self completion:^(UMSocialResponseEntity *response){
+                                                if (response.responseCode == UMSResponseCodeSuccess) {
+                                                    [_shareVC dismissViewControllerAnimated:NO completion:^{
+                                                        [SVProgressHUD showSuccessWithStatus:@"让分享变成生产力，别让生活偷走远方的精彩"];
+                                                    }];
+                                                } else {
+                                                    [_shareVC dismissViewControllerAnimated:NO completion:^{
+                                                        [SVProgressHUD showErrorWithStatus:@"分享失败了:-("];
+                                                    }];
+                                                }
+                                            }];
+}
+
+-(void)qqShareBtnAction:(UIButton*)sender {
+    [UMSocialData defaultData].extConfig.qqData.url = self.goodsInfo.shareViewUrl;
+    [UMSocialData defaultData].extConfig.qqData.title = self.goodsInfo.title;
+    UMSocialUrlResource *imgUrl = [[UMSocialUrlResource alloc] initWithSnsResourceType:UMSocialUrlResourceTypeImage url:self.goodsInfo.coverUrl];
+    
+    [[UMSocialDataService defaultDataService]  postSNSWithTypes:@[UMShareToQQ]
+                                                        content:self.goodsInfo.advantage
+                                                          image:nil
+                                                       location:nil
+                                                    urlResource:imgUrl
+                                            presentedController:self
+                                                     completion:^(UMSocialResponseEntity *response){
+                                                         if (response.responseCode == UMSResponseCodeSuccess) {
+                                                             [_shareVC dismissViewControllerAnimated:NO completion:^{
+                                                                 [SVProgressHUD showSuccessWithStatus:@"让分享变成生产力，别让生活偷走远方的精彩"];
+                                                             }];
+                                                         } else {
+                                                             [_shareVC dismissViewControllerAnimated:NO completion:^{
+                                                                 [SVProgressHUD showErrorWithStatus:@"分享失败了:-("];
+                                                             }];
+                                                         }
+                                                     }];
+}
+
+-(void)sinaShareBtnAction:(UIButton*)sender {
+    UMSocialUrlResource *urlResource = [[UMSocialUrlResource alloc] initWithSnsResourceType:UMSocialUrlResourceTypeImage url:self.goodsInfo.coverUrl];
+    [[UMSocialDataService defaultDataService]  postSNSWithTypes:@[UMShareToSina]
+                                                        content:[NSString stringWithFormat:@"%@，%@。%@", self.goodsInfo.title, self.goodsInfo.advantage, self.goodsInfo.coverUrl]
+                                                          image:nil
+                                                       location:nil
+                                                    urlResource:urlResource
+                                            presentedController:self
+                                                     completion:^(UMSocialResponseEntity *shareResponse){
+                                                         if (shareResponse.responseCode == UMSResponseCodeSuccess) {
+                                                             [_shareVC dismissViewControllerAnimated:NO completion:^{
+                                                                 [SVProgressHUD showSuccessWithStatus:@"让分享变成生产力，别让生活偷走远方的精彩"];
+                                                             }];
+                                                         } else {
+                                                             [_shareVC dismissViewControllerAnimated:NO completion:^{
+                                                                 [SVProgressHUD showErrorWithStatus:@"分享失败了:-("];
+                                                             }];
+                                                         }
+                                                     }];
+}
+
 #pragma mark - 打开商品购买视图
-- (void)OpenGoodsBuyView {
+- (void)OpenGoodsBuyView:(NSInteger)buyState {
     FBBuyGoodsViewController * buyVC = [[FBBuyGoodsViewController alloc] init];
     buyVC.modalPresentationStyle = UIModalPresentationOverCurrentContext;
     buyVC.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;
+    buyVC.buyState = buyState;
+    
     //  立即购买
     buyVC.buyingGoodsBlock = ^(NSDictionary * dict) {
         FBSureOrderViewController * sureOrderVC = [[FBSureOrderViewController alloc] init];

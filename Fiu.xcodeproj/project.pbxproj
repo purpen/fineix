@@ -54,7 +54,6 @@
 		1F2A8FAC1CF40277005116C7 /* FBOrderSendWayViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F2A8D031CF40276005116C7 /* FBOrderSendWayViewController.m */; };
 		1F2A8FAD1CF40277005116C7 /* FBOrderTimeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F2A8D051CF40276005116C7 /* FBOrderTimeViewController.m */; };
 		1F2A8FAE1CF40277005116C7 /* FBSureOrderViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F2A8D071CF40276005116C7 /* FBSureOrderViewController.m */; };
-		1F2A8FAF1CF40277005116C7 /* GoodsInfoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F2A8D091CF40276005116C7 /* GoodsInfoViewController.m */; };
 		1F2A8FB01CF40277005116C7 /* ThnGoodsCommentViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F2A8D0B1CF40276005116C7 /* ThnGoodsCommentViewController.m */; };
 		1F2A8FB11CF40277005116C7 /* GoodsCarViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F2A8D0E1CF40276005116C7 /* GoodsCarViewController.m */; };
 		1F2A8FB31CF40277005116C7 /* BrandInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F2A8D151CF40276005116C7 /* BrandInfo.m */; };
@@ -701,8 +700,6 @@
 		1F2A8D051CF40276005116C7 /* FBOrderTimeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FBOrderTimeViewController.m; sourceTree = "<group>"; };
 		1F2A8D061CF40276005116C7 /* FBSureOrderViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FBSureOrderViewController.h; sourceTree = "<group>"; };
 		1F2A8D071CF40276005116C7 /* FBSureOrderViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FBSureOrderViewController.m; sourceTree = "<group>"; };
-		1F2A8D081CF40276005116C7 /* GoodsInfoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GoodsInfoViewController.h; sourceTree = "<group>"; };
-		1F2A8D091CF40276005116C7 /* GoodsInfoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GoodsInfoViewController.m; sourceTree = "<group>"; };
 		1F2A8D0A1CF40276005116C7 /* ThnGoodsCommentViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ThnGoodsCommentViewController.h; sourceTree = "<group>"; };
 		1F2A8D0B1CF40276005116C7 /* ThnGoodsCommentViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ThnGoodsCommentViewController.m; sourceTree = "<group>"; };
 		1F2A8D0D1CF40276005116C7 /* GoodsCarViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GoodsCarViewController.h; sourceTree = "<group>"; };
@@ -2067,8 +2064,6 @@
 				1F2A8D051CF40276005116C7 /* FBOrderTimeViewController.m */,
 				1F2A8D061CF40276005116C7 /* FBSureOrderViewController.h */,
 				1F2A8D071CF40276005116C7 /* FBSureOrderViewController.m */,
-				1F2A8D081CF40276005116C7 /* GoodsInfoViewController.h */,
-				1F2A8D091CF40276005116C7 /* GoodsInfoViewController.m */,
 				1F2A8D0A1CF40276005116C7 /* ThnGoodsCommentViewController.h */,
 				1F2A8D0B1CF40276005116C7 /* ThnGoodsCommentViewController.m */,
 			);
@@ -4577,7 +4572,6 @@
 				1F2A8F4D1CF40277005116C7 /* FiltersView.m in Sources */,
 				D89CFE031D041819002701B8 /* GoodsDesTableViewCell.m in Sources */,
 				1F2AFC7B1D88170B00DA6035 /* CounterModel.m in Sources */,
-				1F2A8FAF1CF40277005116C7 /* GoodsInfoViewController.m in Sources */,
 				1F2AFC701D88170B00DA6035 /* MyPageViewController.m in Sources */,
 				D8C094E01D752D2200908491 /* RollImageData.m in Sources */,
 				1F2AFD801D88186C00DA6035 /* THNLoginViewController.m in Sources */,

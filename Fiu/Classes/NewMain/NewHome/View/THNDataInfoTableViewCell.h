@@ -15,6 +15,7 @@ typedef void(^BeginLikeTheSceneBlock)(NSString *idx);
 typedef void(^CancelLikeTheSceneBlock)(NSString *idx);
 typedef void(^BeginFavoriteTheSceneBlock)(NSString *idx);
 typedef void(^CancelFavoriteTheSceneBlock)(NSString *idx);
+typedef void(^DeleteTheSceneBlock)(NSString *idx);
 
 @interface THNDataInfoTableViewCell : UITableViewCell
 
@@ -26,7 +27,7 @@ typedef void(^CancelFavoriteTheSceneBlock)(NSString *idx);
 @pro_strong UIButton *share;
 @pro_strong UIButton *more;
 
-- (void)thn_setSceneData:(HomeSceneListRow *)dataModel isLogin:(BOOL)login;
+- (void)thn_setSceneData:(HomeSceneListRow *)dataModel isLogin:(BOOL)login isUserSelf:(BOOL)userSelf;
 
 /**
  *  点赞
@@ -47,6 +48,11 @@ typedef void(^CancelFavoriteTheSceneBlock)(NSString *idx);
  *  取消收藏
  */
 @pro_copy CancelFavoriteTheSceneBlock cancelFavoriteTheSceneBlock;
+
+/**
+ *  删除情境
+ */
+@pro_copy CancelFavoriteTheSceneBlock deleteTheSceneBlock;
 
 
 @end

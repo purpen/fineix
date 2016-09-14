@@ -36,6 +36,10 @@ static const NSInteger GoodsBuyViewBtnTag = 833;
     }
 }
 
+- (void)changeCollectBtnState:(BOOL)selected {
+    self.collect.selected = selected;
+}
+
 - (void)setViewUI {
     [self addSubview:self.collect];
     [_collect mas_makeConstraints:^(MASConstraintMaker *make) {

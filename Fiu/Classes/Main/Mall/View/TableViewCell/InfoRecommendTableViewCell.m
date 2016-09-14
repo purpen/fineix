@@ -8,7 +8,7 @@
 
 #import "InfoRecommendTableViewCell.h"
 #import "RecommendGoodsCollectionViewCell.h"
-#import "GoodsInfoViewController.h"
+#import "FBGoodsInfoViewController.h"
 #import "FBGoodsInfoViewController.h"
 
 @implementation InfoRecommendTableViewCell
@@ -109,7 +109,7 @@
 #pragma mark UICollectionViewDelegate
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
     if (self.type == 0) {
-        GoodsInfoViewController * goodsInfoVC = [[GoodsInfoViewController alloc] init];
+        FBGoodsInfoViewController * goodsInfoVC = [[FBGoodsInfoViewController alloc] init];
         goodsInfoVC.goodsID = [NSString stringWithFormat:@"%@", self.goodsIds[indexPath.row]];
         [self.nav pushViewController:goodsInfoVC animated:YES];
     
