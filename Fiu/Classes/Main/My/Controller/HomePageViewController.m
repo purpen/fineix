@@ -64,6 +64,8 @@
 @property (nonatomic, assign) NSInteger modelAryCount;
 /**  */
 @property (nonatomic, strong) CAGradientLayer * shadow;
+/**  */
+@property (nonatomic, assign) int flagCount;
 
 @end
 
@@ -138,29 +140,29 @@ static NSString *sceneCellId = @"THNHomeSenceCollectionViewCell";
     [self.view.layer addSublayer:self.shadow];
     
     
-    _m = 0;
-    [_sceneIdMarr removeAllObjects];
-    [_sceneListMarr removeAllObjects];
-    [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent];
-    self.delegate = self;
-    [self.view addSubview:self.titleLabel];
-    [self addBarItemLeftBarButton:nil image:@"Fill 1" isTransparent:YES];
-    if (self.isMySelf) {
-        [self addBarItemRightBarButton:nil image:@"SET" isTransparent:YES];
-    }else{
-        //        [self addBarItemRightBarButton:nil image:@"more_filled" isTransparent:YES];
-    }
-    [[UIApplication sharedApplication] setStatusBarHidden:NO withAnimation:(UIStatusBarAnimationSlide)];
-    self.navigationController.navigationBarHidden = YES;
-    self.tabBarController.tabBar.hidden = YES;
-    
-    //进行网络请求
-    [self netGetData];
-    
-    self.myCollectionView.mj_footer = [MJRefreshAutoNormalFooter footerWithRefreshingBlock:^{
-        [self loadMoreDataM];
-    }];
-    [self requestDataForOderListOperation];
+//    _m = 0;
+//    [_sceneIdMarr removeAllObjects];
+//    [_sceneListMarr removeAllObjects];
+//    [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent];
+//    self.delegate = self;
+//    [self.view addSubview:self.titleLabel];
+//    [self addBarItemLeftBarButton:nil image:@"Fill 1" isTransparent:YES];
+//    if (self.isMySelf) {
+//        [self addBarItemRightBarButton:nil image:@"SET" isTransparent:YES];
+//    }else{
+//        //        [self addBarItemRightBarButton:nil image:@"more_filled" isTransparent:YES];
+//    }
+//    [[UIApplication sharedApplication] setStatusBarHidden:NO withAnimation:(UIStatusBarAnimationSlide)];
+//    self.navigationController.navigationBarHidden = YES;
+//    self.tabBarController.tabBar.hidden = YES;
+//    
+//    //进行网络请求
+//    [self netGetData];
+//    
+//    self.myCollectionView.mj_footer = [MJRefreshAutoNormalFooter footerWithRefreshingBlock:^{
+//        [self loadMoreDataM];
+//    }];
+//    [self requestDataForOderListOperation];
 }
 
 -(CAGradientLayer *)shadow{
@@ -225,28 +227,28 @@ static NSString *sceneCellId = @"THNHomeSenceCollectionViewCell";
 -(void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
     
-//    _m = 0;
-//    [_sceneIdMarr removeAllObjects];
-//    [_sceneListMarr removeAllObjects];
-//    [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent];
-//    self.delegate = self;
-//    [self.view addSubview:self.titleLabel];
-//    [self addBarItemLeftBarButton:nil image:@"Fill 1" isTransparent:YES];
-//    if (self.isMySelf) {
-//        [self addBarItemRightBarButton:nil image:@"SET" isTransparent:YES];
-//    }else{
-////        [self addBarItemRightBarButton:nil image:@"more_filled" isTransparent:YES];
-//    }
-//    [[UIApplication sharedApplication] setStatusBarHidden:NO withAnimation:(UIStatusBarAnimationSlide)];
-//    self.navigationController.navigationBarHidden = YES;
-//    self.tabBarController.tabBar.hidden = YES;
-//    //进行网络请求
-//    [self netGetData];
-//
-//    self.myCollectionView.mj_footer = [MJRefreshAutoNormalFooter footerWithRefreshingBlock:^{
-//        [self loadMoreDataM];
-//    }];
-//    [self requestDataForOderListOperation];
+    _m = 0;
+    [_sceneIdMarr removeAllObjects];
+    [_sceneListMarr removeAllObjects];
+    [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent];
+    self.delegate = self;
+    [self.view addSubview:self.titleLabel];
+    [self addBarItemLeftBarButton:nil image:@"Fill 1" isTransparent:YES];
+    if (self.isMySelf) {
+        [self addBarItemRightBarButton:nil image:@"SET" isTransparent:YES];
+    }else{
+//        [self addBarItemRightBarButton:nil image:@"more_filled" isTransparent:YES];
+    }
+    [[UIApplication sharedApplication] setStatusBarHidden:NO withAnimation:(UIStatusBarAnimationSlide)];
+    self.navigationController.navigationBarHidden = YES;
+    self.tabBarController.tabBar.hidden = YES;
+    //进行网络请求
+    [self netGetData];
+
+    self.myCollectionView.mj_footer = [MJRefreshAutoNormalFooter footerWithRefreshingBlock:^{
+        [self loadMoreDataM];
+    }];
+    [self requestDataForOderListOperation];
 }
 
 -(void)loadMoreDataM{
