@@ -26,7 +26,7 @@
         // null object
         return TRUE;
     }else if([self isEqualToString:@"(null)"]){
-        
+    
         return TRUE;
     }else{
         //  使用whitespaceAndNewlineCharacterSet删除周围的空白字符串

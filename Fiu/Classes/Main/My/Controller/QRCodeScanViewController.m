@@ -18,6 +18,7 @@
 #import "FBGoodsInfoViewController.h"
 #import "FBGoodsInfoViewController.h"
 #import "UserInfoEntity.h"
+#import "THNSceneDetalViewController.h"
 
 @interface QRCodeScanViewController ()<FBNavigationBarItemsDelegate,UIAlertViewDelegate,AVCaptureMetadataOutputObjectsDelegate>
 
@@ -283,12 +284,11 @@
             
         }else if ([infoType isEqualToString:@"11"]) {
             //情景
-            
+            THNSceneDetalViewController *vc = [[THNSceneDetalViewController alloc] init];
+            vc.sceneDetalId = infoId;
+            [self.navigationController pushViewController:vc animated:YES];
         }else if ([infoType isEqualToString:@"12"]) {
             //情景商品
-            FBGoodsInfoViewController * goodsInfoVC = [[FBGoodsInfoViewController alloc] init];
-            goodsInfoVC.goodsID = infoId;
-            [self.navigationController pushViewController:goodsInfoVC animated:YES];
         }else if ([infoType isEqualToString:@"1"]) {
             //自营商品
             FBGoodsInfoViewController * fbGoodsInfoVC = [[FBGoodsInfoViewController alloc] init];
