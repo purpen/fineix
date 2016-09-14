@@ -45,7 +45,17 @@ static NSString *const modifyUserInformation = @"/my/update_profile";
     self.sexNum = @1;
     
     UserInfoEntity *entity = [UserInfoEntity defaultUserInfoEntity];
-    [self.headImage sd_setImageWithURL:[NSURL URLWithString:entity.mediumAvatarUrl] placeholderImage:[UIImage imageNamed:@"default_head"]];
+    FBRequest *request = [FBAPI postWithUrlString:@"/auth/user" requestDictionary:@{@"user_id":entity.userId} delegate:self];
+    [request startRequestSuccess:^(FBRequest *request, id result) {
+        
+        NSDictionary *dataDict = result[@"data"];
+        [self.headImage sd_setImageWithURL:[NSURL URLWithString:dataDict[@"medium_avatar_url"]] placeholderImage:[UIImage imageNamed:@"default_head"]];
+    } failure:^(FBRequest *request, NSError *error) {
+        [SVProgressHUD showErrorWithStatus:@"加载失败"];
+    }];
+
+    
+    
     self.nameTF.text = entity.nickname;
     
     self.headImage.layer.masksToBounds = YES;
