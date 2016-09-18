@@ -238,6 +238,9 @@ static NSString *const URLCancelFollowUser = @"/follow/ajax_cancel_follow";
             case 0:
                 //活动规则
             {
+                if ([[[UIDevice currentDevice] systemVersion] floatValue] >= 10.0) {
+                    return CGSizeMake(SCREEN_WIDTH, 3000 + 50);
+                }
                 return CGSizeMake(SCREEN_WIDTH, self.webViewHeghit + 50);
             }
                 break;
@@ -703,7 +706,6 @@ static NSString *const URLCancelFollowUser = @"/follow/ajax_cancel_follow";
         }
     } failure:nil];
 }
-
 
 -(void)webViewDidStartLoad:(UIWebView *)webView{
     [SVProgressHUD show];

@@ -79,7 +79,7 @@ static NSString *const userCellId = @"UserCellId";
 - (void)networkSearchData:(NSString *)keyword {
     _keyword = keyword;
     [SVProgressHUD show];
-    self.searchListRequest = [FBAPI getWithUrlString:URLSearchList requestDictionary:@{@"evt":@"content", @"size":@"8", @"page":@(self.currentpageNum + 1), @"t":@"14" , @"q":keyword} delegate:self];
+    self.searchListRequest = [FBAPI getWithUrlString:URLSearchList requestDictionary:@{@"evt":@"content", @"size":@"50", @"page":@(self.currentpageNum + 1), @"t":@"14" , @"q":keyword} delegate:self];
     [self.searchListRequest startRequestSuccess:^(FBRequest *request, id result) {
         NSArray *userArr = [[result valueForKey:@"data"] valueForKey:@"rows"];
         for (NSDictionary * userDic in userArr) {
