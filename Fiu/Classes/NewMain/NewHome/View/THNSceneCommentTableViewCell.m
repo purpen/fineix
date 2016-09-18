@@ -24,7 +24,7 @@
 #pragma mark - setModel
 - (void)thn_setScenecommentData:(NSDictionary *)commentModel {
     HomeSceneListComments *model = [[HomeSceneListComments alloc] initWithDictionary:commentModel];
-    [self.headImage sd_setImageWithURL:[NSURL URLWithString:model.userAvatarUrl] forState:(UIControlStateNormal)];
+    [self.headImage downloadImage:model.userAvatarUrl place:[UIImage imageNamed:@""]];
     NSString *comment = [NSString stringWithFormat:@"%@: %@", model.userNickname, model.content];
     [self getContentWithComment:comment withUserName:model.userNickname withUserId:[NSString stringWithFormat:@"%zi", model.userId]];
     CGSize size = [_comment boundingRectWithSize:CGSizeMake(SCREEN_WIDTH - 70, 0)];
@@ -91,12 +91,13 @@
     return _graybackView;
 }
 
-- (UIButton *)headImage {
+- (UIImageView *)headImage {
     if (!_headImage) {
-        _headImage = [[UIButton alloc] init];
+        _headImage = [[UIImageView alloc] init];
         _headImage.backgroundColor = [UIColor colorWithHexString:@"#FFFFFF"];
         _headImage.layer.cornerRadius = 24/2;
         _headImage.layer.masksToBounds = YES;
+        _headImage.contentMode = UIViewContentModeScaleAspectFill;
     }
     return _headImage;
 }

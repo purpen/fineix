@@ -17,7 +17,7 @@
 
 @pro_strong UIViewController *vc;
 @pro_strong UINavigationController *nav;
-@pro_strong UIButton *sceneImage;
+@pro_strong UIImageView *sceneImage;
 @pro_strong UILabel *title;
 @pro_strong UILabel *suTitle;
 @pro_strong NSMutableArray *tagDataMarr;

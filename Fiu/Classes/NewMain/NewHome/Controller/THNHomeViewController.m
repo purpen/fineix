@@ -310,7 +310,7 @@ static NSString *const allCommentsCellId = @"AllCommentsCellId";
             [self.sceneIdMarr removeObjectAtIndex:index];
             [self.userIdMarr removeObjectAtIndex:index];
             [self.commentsCountMarr removeObjectAtIndex:index];
-            [self.commentsMarr removeObjectAtIndex:index];
+            [                                       self.commentsMarr removeObjectAtIndex:index];
             [self.homeTable deleteSections:[NSIndexSet indexSetWithIndex:index + 1] withRowAnimation:(UITableViewRowAnimationFade)];
         }
         

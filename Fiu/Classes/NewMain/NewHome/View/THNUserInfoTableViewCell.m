@@ -259,7 +259,7 @@ static NSString *const hotUserCellId = @"HotUserCellId";
             scaleAnimation.springSpeed = 10.0f;
             [button.layer pop_addAnimation:scaleAnimation forKey:@"scaleAnim"];
             button.layer.borderColor = [UIColor colorWithHexString:WHITE_COLOR alpha:0.6].CGColor;
-            button.backgroundColor = [UIColor colorWithHexString:BLACK_COLOR];
+            button.backgroundColor = [UIColor colorWithHexString:@"#222222"];
             
             self.cancelFollowTheUserBlock(_userId);
         }

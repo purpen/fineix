@@ -44,10 +44,7 @@
     }
     
     _image = sceneModel.coverUrl;
-    [self.sceneImage sd_setImageWithURL:[NSURL URLWithString:sceneModel.coverUrl]
-                               forState:(UIControlStateNormal)
-                       placeholderImage:[UIImage imageNamed:@""]];
-    
+    [self.sceneImage downloadImage:sceneModel.coverUrl place:[UIImage imageNamed:@""]];
 
     if (sceneModel.title.length == 0 || [sceneModel.title isKindOfClass:[NSNull class]]) {
         self.title.hidden = YES;
@@ -153,8 +150,7 @@
     [self addSubview:self.sceneImage];
     [_sceneImage mas_makeConstraints:^(MASConstraintMaker *make) {
         make.size.mas_equalTo(CGSizeMake(SCREEN_WIDTH, SCREEN_WIDTH));
-        make.centerX.equalTo(self);
-        make.centerY.equalTo(self);
+        make.top.left.equalTo(self).with.offset(0);
     }];
     
     [self addSubview:self.suTitle];
@@ -173,17 +169,19 @@
 }
 
 #pragma mark - init
-- (UIButton *)sceneImage {
+- (UIImageView *)sceneImage {
     if (!_sceneImage) {
-        _sceneImage = [[UIButton alloc] init];
-        _sceneImage.imageView.contentMode = UIViewContentModeScaleAspectFill;
-        _sceneImage.imageView.clipsToBounds = YES;
-        [_sceneImage addTarget:self action:@selector(sceneImageClick:) forControlEvents:(UIControlEventTouchUpInside)];
+        _sceneImage = [[UIImageView alloc] init];
+        _sceneImage.contentMode = UIViewContentModeScaleAspectFill;
+        _sceneImage.clipsToBounds = YES;
+        _sceneImage.userInteractionEnabled = YES;
+        UITapGestureRecognizer *sceneTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(sceneImageClick:)];
+        [_sceneImage addGestureRecognizer:sceneTap];
     }
     return _sceneImage;
 }
 
-- (void)sceneImageClick:(UIButton *)button {
+- (void)sceneImageClick:(UITapGestureRecognizer *)tap {
     THNSceneImageViewController *sceneImageVC = [[THNSceneImageViewController alloc] init];
     sceneImageVC.modalPresentationStyle = UIModalPresentationOverFullScreen;
     sceneImageVC.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;

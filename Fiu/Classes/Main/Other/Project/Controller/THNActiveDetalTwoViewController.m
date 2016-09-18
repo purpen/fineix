@@ -309,9 +309,9 @@ static NSString *const URLCancelFollowUser = @"/follow/ajax_cancel_follow";
                 //活动结果
             {
                 _scene = [[THNSceneImageTableViewCell alloc] init];
-                
+                _scene.vc = self;
                 _scene.sceneImage.tag = indexPath.row;
-                [_scene.sceneImage addTarget:self action:@selector(sceneImageClick:) forControlEvents:UIControlEventTouchUpInside];
+//                [_scene.sceneImage addTarget:self action:@selector(sceneImageClick:) forControlEvents:UIControlEventTouchUpInside];
                 _top = [[THNUserInfoTableViewCell alloc] init];
                 _top.beginFollowTheUserBlock = ^(NSString *userId) {
                     [weakSelf beginFollowUser:userId];
@@ -419,15 +419,15 @@ static NSString *const URLCancelFollowUser = @"/follow/ajax_cancel_follow";
     }];
 }
 
-
--(void)sceneImageClick:(UIButton*)sender{
-    THNSceneImageViewController *sceneImageVC = [[THNSceneImageViewController alloc] init];
-    sceneImageVC.modalPresentationStyle = UIModalPresentationOverFullScreen;
-    sceneImageVC.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;
-    HomeSceneListRow *model = self.resultsAry[sender.tag];
-    sceneImageVC.imageUrl = model.coverUrl;
-    [self presentViewController:sceneImageVC animated:YES completion:nil];
-}
+//
+//-(void)sceneImageClick:(UIButton*)sender{
+//    THNSceneImageViewController *sceneImageVC = [[THNSceneImageViewController alloc] init];
+//    sceneImageVC.modalPresentationStyle = UIModalPresentationOverFullScreen;
+//    sceneImageVC.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;
+//    HomeSceneListRow *model = self.resultsAry[sender.tag];
+//    sceneImageVC.imageUrl = model.coverUrl;
+//    [self presentViewController:sceneImageVC animated:YES completion:nil];
+//}
 
 -(void)attend{
     PictureToolViewController * pictureToolVC = [[PictureToolViewController alloc] init];
