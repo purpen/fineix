@@ -47,5 +47,6 @@
 
 //
 @pro_strong THNHotUserView *hotUserList;
+@pro_strong UIView *hotUserView;
 
 @end

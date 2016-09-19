@@ -94,7 +94,7 @@ static NSString *const allCommentsCellId = @"AllCommentsCellId";
 #pragma mark - 设置"发现用户"的位置和高度
 - (void)setHotUserListData {
     _hotUserListIndex = 5;
-    _hotUserCellHeight = 230.0f;
+    _hotUserCellHeight = 245.0f;
 }
 
 #pragma mark - 网络请求
@@ -440,10 +440,19 @@ static NSString *const allCommentsCellId = @"AllCommentsCellId";
 }
 
 #pragma mark - 首页推荐的热门用户列表
+- (UIView *)hotUserView {
+    if (!_hotUserView) {
+        _hotUserView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, _hotUserCellHeight)];
+        _hotUserView.backgroundColor = [UIColor whiteColor];
+        [_hotUserView addSubview:self.hotUserList];
+    }
+    return _hotUserView;
+}
+
 - (THNHotUserView *)hotUserList {
     if (!_hotUserList) {
         THNHotUserFlowLayout *flowLayout = [[THNHotUserFlowLayout alloc] init];
-        _hotUserList = [[THNHotUserView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, _hotUserCellHeight) collectionViewLayout:flowLayout];
+        _hotUserList = [[THNHotUserView alloc] initWithFrame:CGRectMake(0, 15, SCREEN_WIDTH, _hotUserCellHeight - 15) collectionViewLayout:flowLayout];
         _hotUserList.nav = self.navigationController;
     }
     return _hotUserList;
@@ -672,8 +681,8 @@ static NSString *const allCommentsCellId = @"AllCommentsCellId";
     if (section == _hotUserListIndex) {
         if (self.hotUserMarr.count) {
             [self.hotUserList thn_setHotUserListData:self.hotUserMarr];
+            return self.hotUserView;
         }
-        return self.hotUserList;
     }
     return nil;
 }
@@ -689,8 +698,12 @@ static NSString *const allCommentsCellId = @"AllCommentsCellId";
 - (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section {
     if (section == 0) {
         return 0.01;
-    } else if (section == 5) {
-        return _hotUserCellHeight;
+    } else if (section == _hotUserListIndex) {
+        if (self.hotUserMarr.count) {
+            return _hotUserCellHeight;
+        } else {
+            return 15.0f;
+        }
     } else {
         return 15;
     }
@@ -723,33 +736,6 @@ static NSString *const allCommentsCellId = @"AllCommentsCellId";
             commentVC.sceneUserId = self.userIdMarr[indexPath.section - 1];
             [self.navigationController pushViewController:commentVC animated:YES];
         }
-    }
-}
-
-#pragma mark - 设置Nav
-- (void)thn_setNavigationViewUI {
-    self.view.backgroundColor = [UIColor whiteColor];
-    [[UIApplication sharedApplication] setStatusBarHidden:NO withAnimation:(UIStatusBarAnimationFade)];
-    self.delegate = self;
-    self.baseTable = self.homeTable;
-    self.navViewTitle.hidden = YES;
-    [self thn_addNavLogoImage];
-    [self thn_addBarItemLeftBarButton:@"" image:@"shouye_search"];
-    [self thn_addBarItemRightBarButton:@"" image:@"icon_shouye_dingyue"];
-}
-
-- (void)thn_leftBarItemSelected {
-    SearchViewController *searchVC = [[SearchViewController alloc] init];
-    searchVC.index = 0;
-    [self.navigationController pushViewController:searchVC animated:YES];
-}
-
-- (void)thn_rightBarItemSelected {
-    if ([self isUserLogin]) {
-        THNSubscribeViewController * sceneSubVC = [[THNSubscribeViewController alloc] init];
-        [self.navigationController pushViewController:sceneSubVC animated:YES];
-    } else {
-        [self openUserLoginVC];
     }
 }
 
@@ -801,6 +787,33 @@ static NSString *const allCommentsCellId = @"AllCommentsCellId";
     }
 }
 
+#pragma mark - 设置Nav
+- (void)thn_setNavigationViewUI {
+    self.view.backgroundColor = [UIColor whiteColor];
+    [[UIApplication sharedApplication] setStatusBarHidden:NO withAnimation:(UIStatusBarAnimationFade)];
+    self.delegate = self;
+    self.baseTable = self.homeTable;
+    self.navViewTitle.hidden = YES;
+    [self thn_addNavLogoImage];
+    [self thn_addBarItemLeftBarButton:@"" image:@"shouye_search"];
+    [self thn_addBarItemRightBarButton:@"" image:@"icon_shouye_dingyue"];
+}
+
+- (void)thn_leftBarItemSelected {
+    SearchViewController *searchVC = [[SearchViewController alloc] init];
+    searchVC.index = 0;
+    [self.navigationController pushViewController:searchVC animated:YES];
+}
+
+- (void)thn_rightBarItemSelected {
+    if ([self isUserLogin]) {
+        THNSubscribeViewController * sceneSubVC = [[THNSubscribeViewController alloc] init];
+        [self.navigationController pushViewController:sceneSubVC animated:YES];
+    } else {
+        [self openUserLoginVC];
+    }
+}
+
 #pragma mark - 首次打开加载指示图
 - (void)thn_setFirstAppStart {
     if(![USERDEFAULT boolForKey:@"HomeLaunch"]){
@@ -818,7 +831,7 @@ static NSString *const allCommentsCellId = @"AllCommentsCellId";
 
 //  删除全部热门用户
 - (void)reloadHotUserListData:(NSNotification *)reload {
-    _hotUserCellHeight = 0.0f;
+    _hotUserCellHeight = 15.0f;
     NSIndexSet *hotUserIndexSet = [NSIndexSet indexSetWithIndex:_hotUserListIndex];
     [self.homeTable reloadSections:hotUserIndexSet withRowAnimation:(UITableViewRowAnimationFade)];
 }
