@@ -494,8 +494,8 @@ static NSString *const URLCancelFollowUser = @"/follow/ajax_cancel_follow";
                 //参与的情境
             {
                 THNSceneDetalViewController *vc = [[THNSceneDetalViewController alloc] init];
-                THNDiscoverSceneCollectionViewCell *cell = (THNDiscoverSceneCollectionViewCell*)[collectionView cellForItemAtIndexPath:indexPath];
-                vc.sceneDetalId = cell.model._id;
+                NSString *idStr = self.sceneIdMarr[indexPath.row];
+                vc.sceneDetalId = idStr;
                 [self.navigationController pushViewController:vc animated:YES];
             }
                 
