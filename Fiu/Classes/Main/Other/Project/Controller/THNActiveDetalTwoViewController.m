@@ -239,9 +239,9 @@ static NSString *const URLCancelFollowUser = @"/follow/ajax_cancel_follow";
             case 0:
                 //活动规则
             {
-                if ([[[UIDevice currentDevice] systemVersion] floatValue] >= 10.0) {
-                    return CGSizeMake(SCREEN_WIDTH, 3000 + 50);
-                }
+//                if ([[[UIDevice currentDevice] systemVersion] floatValue] >= 10.0) {
+//                    return CGSizeMake(SCREEN_WIDTH, 2700 + 50);
+//                }
                 return CGSizeMake(SCREEN_WIDTH, self.webViewHeghit + 50);
             }
                 break;
@@ -729,7 +729,7 @@ static NSString *const URLCancelFollowUser = @"/follow/ajax_cancel_follow";
 
 -(void)webViewDidFinishLoad:(UIWebView *)webView{
     [SVProgressHUD dismiss];
-    self.webViewHeghit = [[webView stringByEvaluatingJavaScriptFromString:@"document.height"] floatValue];
+    self.webViewHeghit = [[webView stringByEvaluatingJavaScriptFromString:@"document.body.scrollHeight"] floatValue];
     NSLog(@"网页高度 %f",self.webViewHeghit);
     self.webViewLoads = 1;
     [self.contentView reloadData];
