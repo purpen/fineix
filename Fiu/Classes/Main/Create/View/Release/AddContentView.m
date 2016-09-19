@@ -120,6 +120,9 @@
 }
 
 - (void)thn_setSceneTitle:(NSString *)title {
+    if (title.length > 20) {
+        title = [title substringToIndex:20];
+    }
     self.suTitle.text = @"";
     if (title.length == 0) {
         self.title.hidden = YES;
@@ -149,7 +152,7 @@
         
         [self layoutIfNeeded];
         
-    } else if (title.length < 10) {
+    } else if (title.length <= 10) {
         self.title.hidden = NO;
         self.suTitle.hidden = YES;
         self.addText.hidden = YES;
@@ -185,6 +188,9 @@
         _title.textColor = [UIColor colorWithHexString:WHITE_COLOR];
         _title.font = [UIFont systemFontOfSize:17];
         _title.hidden = YES;
+        _title.userInteractionEnabled = YES;
+        UITapGestureRecognizer *titleTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(goChooseText)];
+        [_title addGestureRecognizer:titleTap];
     }
     return _title;
 }
@@ -196,6 +202,9 @@
         _suTitle.textColor = [UIColor colorWithHexString:WHITE_COLOR];
         _suTitle.font = [UIFont systemFontOfSize:17];
         _suTitle.hidden = YES;
+        _suTitle.userInteractionEnabled = YES;
+        UITapGestureRecognizer *titleTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(goChooseText)];
+        [_suTitle addGestureRecognizer:titleTap];
     }
     return _suTitle;
 }

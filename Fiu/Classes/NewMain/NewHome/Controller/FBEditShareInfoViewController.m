@@ -588,8 +588,6 @@ static NSString *const URLActionTags = @"/scene_sight/stick_active_tags";
     if (tableView == self.shareTextTable) {
         [SVProgressHUD show];
         ShareInfoRow * shareInfoRow = self.shareTextList[indexPath.row];
-        //  frome #import "ReleaseViewController.h"
-        [[NSNotificationCenter defaultCenter] postNotificationName:@"getSceneTags" object:shareInfoRow.tags];
         [self dismissViewControllerAnimated:YES completion:^{
             self.getEdtiShareText(shareInfoRow.title , shareInfoRow.des, [NSMutableArray arrayWithArray:shareInfoRow.tags]);
             [SVProgressHUD dismiss];

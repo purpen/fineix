@@ -89,11 +89,12 @@ static NSString *const ShareURlText = @"我在Fiu浮游™寻找同路人；希�
 
 #pragma mark - 获取情境详情
 - (void)thn_getSceneInfoData:(NSString *)sceneId {
+    [SVProgressHUD show];
     self.sceneInfoRequest = [FBAPI getWithUrlString:URLSceneInfo requestDictionary:@{@"id":sceneId} delegate:self];
     [self.sceneInfoRequest startRequestSuccess:^(FBRequest *request, id result) {
         HomeSceneListRow *sceneModel = [[HomeSceneListRow alloc] initWithDictionary:[result valueForKey:@"data"]];
         [self.shareTopView setShareSceneData:sceneModel];
-        
+        [SVProgressHUD dismiss];
     } failure:^(FBRequest *request, NSError *error) {
         NSLog(@"%@", error);
     }];

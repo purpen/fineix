@@ -459,7 +459,7 @@ static NSString *const URLUserAddBrand = @"/scene_brands/submit";
     for (FBStickersContainer * container in self.stickersContainer) {
         CGContextSaveGState(context);
         FBSticker * sticker = [container generateSticker:_filterName];
-        CGAffineTransform translateToCenter = CGAffineTransformMakeTranslation(sticker.translateCenter.x, sticker.translateCenter.y - (sticker.translateCenter.y / 8));
+        CGAffineTransform translateToCenter = CGAffineTransformMakeTranslation(sticker.translateCenter.x, sticker.translateCenter.y);
         CGAffineTransform rotateAfterTranslate = CGAffineTransformRotate(translateToCenter, sticker.rotateAngle);
         CGContextConcatCTM(context, rotateAfterTranslate);
         CGContextScaleCTM(context, 1.0, -1.0);

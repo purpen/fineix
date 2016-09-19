@@ -39,7 +39,7 @@ static NSString *const sceneTagsCellId = @"SceneTagsCellId";
     } else {
         self.defaultCellHigh = 70;
     }
-    self.cellHigh = size.height*1.3;
+    self.cellHigh = size.height*1.5;
 }
 
 //  检索描述内容中的标签
@@ -123,6 +123,7 @@ static NSString *const sceneTagsCellId = @"SceneTagsCellId";
                                          (NSString *)kCTForegroundColorAttributeName:(__bridge id)[UIColor colorWithHexString:MAIN_COLOR].CGColor
                                          };
         _content.activeLinkAttributes = activelinkAttributes;
+        _content.adjustsFontSizeToFitWidth = YES;
     }
     return _content;
 }

@@ -29,7 +29,6 @@ typedef void(^CancelLikeTheSceneBlock)(NSString *idx);
 /** 活动详情 参与情景 */
 @property (nonatomic, strong) THNSenceModel *model;
 
-
 /**
  *  点赞
  */
