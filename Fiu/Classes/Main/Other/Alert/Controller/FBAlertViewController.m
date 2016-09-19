@@ -9,6 +9,7 @@
 #import "FBAlertViewController.h"
 #import "ReportViewController.h"
 #import "FBShareViewController.h"
+#import "UIView+TYAlertView.h"
 
 static NSInteger const actionBtnTag = 686;
 
@@ -99,7 +100,17 @@ static NSInteger const actionBtnTag = 686;
         
     } else if (button.tag == actionBtnTag + 1) {
         [self dismissViewControllerAnimated:YES completion:^{
-            self.deleteScene(self.targetId);
+            TYAlertView *cancelAlertView = [TYAlertView alertViewWithTitle:@"情境删除后不可恢复" message:@""];
+            cancelAlertView.layer.cornerRadius = 10;
+            cancelAlertView.buttonDefaultBgColor = [UIColor colorWithHexString:fineixColor];
+            cancelAlertView.buttonCancleBgColor = [UIColor colorWithHexString:@"#999999"];
+            [cancelAlertView addAction:[TYAlertAction actionWithTitle:@"取消" style:(TYAlertActionStyleCancle) handler:^(TYAlertAction *action) {
+                
+            }]];
+            [cancelAlertView addAction:[TYAlertAction actionWithTitle:@"确定删除" style:(TYAlertActionStyleDefault) handler:^(TYAlertAction *action) {
+                self.deleteScene(self.targetId);
+            }]];
+            [cancelAlertView showInWindowWithBackgoundTapDismissEnable:YES];
         }];
         
     } else if (button.tag == actionBtnTag + 2) {

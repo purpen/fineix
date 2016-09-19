@@ -21,8 +21,8 @@
 
 //  订阅
 "SubscribeVC" = "Subscribe";
-"SubscribeDone" = "Subscribed";
-"SubscribeScene" = "themes";
+"SubscribeDone" = "Subscribed ";
+"SubscribeScene" = " themes";
 "subscribeSuccess" = "Success";
 
 //  更多

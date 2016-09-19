@@ -135,8 +135,6 @@
 }
 
 - (BOOL)textFieldShouldBeginEditing:(UITextField *)textField {
-    [textField resignFirstResponder];
-    
     if (textField == self.brand) {
         MarkBrandsViewController *markBrandVC = [[MarkBrandsViewController alloc] init];
         [self.vc presentViewController:markBrandVC animated:YES completion:^{
@@ -146,6 +144,7 @@
                 _goodsId = goodsId;
                 _brandId = brandId;
             };
+            [textField resignFirstResponder];
         }];
         
         if ([self.delegate respondsToSelector:@selector(mark_AddBands)]) {
@@ -160,6 +159,7 @@
                 self.goods.text = title;
                 _goodsId = idx;
             };
+            [textField resignFirstResponder];
         }];
         
         if ([self.delegate respondsToSelector:@selector(mark_AddGoods)]) {
