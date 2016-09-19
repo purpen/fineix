@@ -4247,7 +4247,7 @@
 				TargetAttributes = {
 					800507331C7A9CDD005AF0BE = {
 						CreatedOnToolsVersion = 7.2.1;
-						DevelopmentTeam = QNKEA2Q4R9;
+						DevelopmentTeam = 7ET6PJMCHV;
 						SystemCapabilities = {
 							com.apple.BackgroundModes = {
 								enabled = 1;
@@ -4975,7 +4975,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 9.2;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
-				PROVISIONING_PROFILE = "68229318-888d-4d23-9586-1a46706c4314";
+				PROVISIONING_PROFILE = "38736fb6-f8a9-4075-b98f-85f06063d856";
 				SDKROOT = iphoneos;
 			};
 			name = Debug;
@@ -5013,7 +5013,7 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.2;
 				MTL_ENABLE_DEBUG_INFO = NO;
-				PROVISIONING_PROFILE = "68229318-888d-4d23-9586-1a46706c4314";
+				PROVISIONING_PROFILE = "38736fb6-f8a9-4075-b98f-85f06063d856";
 				SDKROOT = iphoneos;
 				VALIDATE_PRODUCT = YES;
 			};
@@ -5022,60 +5022,6 @@
 		8005074F1C7A9CDD005AF0BE /* Debug */ = {
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = CDFDA58CBF04D1AABBF70FFD /* Pods-Fiu.debug.xcconfig */;
-			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
-				CLANG_CXX_LANGUAGE_STANDARD = "c++0x";
-				CODE_SIGN_ENTITLEMENTS = Fiu/Fiu.entitlements;
-				CODE_SIGN_IDENTITY = "iPhone Developer: Xiaoyi Tian (65JXH7V6N9)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Xiaoyi Tian (65JXH7V6N9)";
-				ENABLE_BITCODE = NO;
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(inherited)",
-					"$(PROJECT_DIR)/fineix/Vendors/BaiduMapSDK",
-					"$(PROJECT_DIR)/fineix/Vendors/UMSocial_Sdk_Extra_Frameworks/TencentOpenAPI",
-					"$(PROJECT_DIR)/Fiu/Vendors/BaiduMapSDK",
-					"$(PROJECT_DIR)/Fiu/Vendors/UMSocial_Sdk_Extra_Frameworks/TencentOpenAPI",
-					"$(PROJECT_DIR)/Fiu/Vendors/AliPay",
-					"$(PROJECT_DIR)/Fiu/Vendors",
-					"$(PROJECT_DIR)/Fiu/Vendors/Umeng",
-					"$(PROJECT_DIR)/Fiu/Vendors/Umeng/UMSocial_Sdk_Extra_Frameworks/TencentOpenAPI",
-				);
-				GCC_INPUT_FILETYPE = sourcecode.cpp.objcpp;
-				GCC_PREFIX_HEADER = "";
-				INFOPLIST_FILE = Fiu/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				LIBRARY_SEARCH_PATHS = (
-					"$(inherited)",
-					"$(PROJECT_DIR)/fineix/Vendors/UMSocial_Sdk_5.0.1",
-					"$(PROJECT_DIR)/fineix/Vendors/UMSocial_Sdk_Extra_Frameworks/SinaSSO",
-					"$(PROJECT_DIR)/fineix/Vendors/UMSocial_Sdk_Extra_Frameworks/TencentOpenAPI",
-					"$(PROJECT_DIR)/fineix/Vendors/UMSocial_Sdk_Extra_Frameworks/Wechat",
-					"$(PROJECT_DIR)/Fiu/Vendors/UMSocial_Sdk_5.0.1",
-					"$(PROJECT_DIR)/Fiu/Vendors/UMSocial_Sdk_Extra_Frameworks/SinaSSO",
-					"$(PROJECT_DIR)/Fiu/Vendors/UMSocial_Sdk_Extra_Frameworks/TencentOpenAPI",
-					"$(PROJECT_DIR)/Fiu/Vendors/UMSocial_Sdk_Extra_Frameworks/Wechat",
-					"$(PROJECT_DIR)/Fiu/Vendors/UMSocial_Sdk_5.2",
-					"$(PROJECT_DIR)/Fiu/Vendors/UMSocial_Sdk_Extra_Frameworks/OpenSDK1.7",
-					"$(PROJECT_DIR)/Fiu/Vendors/UMSocial_Sdk_5.2.1",
-					"$(PROJECT_DIR)/Fiu/Vendors/Umeng/UMSocial_Sdk_5.2.1",
-					"$(PROJECT_DIR)/Fiu/Vendors/Umeng/UMSocial_Sdk_Extra_Frameworks/SinaSSO",
-					"$(PROJECT_DIR)/Fiu/Vendors/Umeng/UMSocial_Sdk_Extra_Frameworks/TencentOpenAPI",
-					"$(PROJECT_DIR)/Fiu/Vendors/Umeng/UMSocial_Sdk_Extra_Frameworks/Wechat",
-				);
-				OTHER_LIBTOOLFLAGS = "-all_load";
-				PRODUCT_BUNDLE_IDENTIFIER = com.THN.fineix;
-				PRODUCT_NAME = Fiu;
-				PROVISIONING_PROFILE = "68229318-888d-4d23-9586-1a46706c4314";
-				RUN_CLANG_STATIC_ANALYZER = NO;
-				USER_HEADER_SEARCH_PATHS = "$(SRCROOT)";
-			};
-			name = Debug;
-		};
-		800507501C7A9CDD005AF0BE /* Release */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = C47EFC95D2619288EFC17844 /* Pods-Fiu.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
@@ -5122,8 +5068,64 @@
 				OTHER_LIBTOOLFLAGS = "-all_load";
 				PRODUCT_BUNDLE_IDENTIFIER = com.THN.fineix;
 				PRODUCT_NAME = Fiu;
-				PROVISIONING_PROFILE = "68229318-888d-4d23-9586-1a46706c4314";
+				PROVISIONING_PROFILE = "38736fb6-f8a9-4075-b98f-85f06063d856";
 				PROVISIONING_PROFILE_SPECIFIER = FineixDev;
+				RUN_CLANG_STATIC_ANALYZER = NO;
+				USER_HEADER_SEARCH_PATHS = "$(SRCROOT)";
+			};
+			name = Debug;
+		};
+		800507501C7A9CDD005AF0BE /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = C47EFC95D2619288EFC17844 /* Pods-Fiu.release.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CLANG_CXX_LANGUAGE_STANDARD = "c++0x";
+				CODE_SIGN_ENTITLEMENTS = Fiu/Fiu.entitlements;
+				CODE_SIGN_IDENTITY = "iPhone Distribution: TaiHuoniao(SHENZHEN) Science and Technology Company Limited (7ET6PJMCHV)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: TaiHuoniao(SHENZHEN) Science and Technology Company Limited (7ET6PJMCHV)";
+				DEVELOPMENT_TEAM = 7ET6PJMCHV;
+				ENABLE_BITCODE = NO;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/fineix/Vendors/BaiduMapSDK",
+					"$(PROJECT_DIR)/fineix/Vendors/UMSocial_Sdk_Extra_Frameworks/TencentOpenAPI",
+					"$(PROJECT_DIR)/Fiu/Vendors/BaiduMapSDK",
+					"$(PROJECT_DIR)/Fiu/Vendors/UMSocial_Sdk_Extra_Frameworks/TencentOpenAPI",
+					"$(PROJECT_DIR)/Fiu/Vendors/AliPay",
+					"$(PROJECT_DIR)/Fiu/Vendors",
+					"$(PROJECT_DIR)/Fiu/Vendors/Umeng",
+					"$(PROJECT_DIR)/Fiu/Vendors/Umeng/UMSocial_Sdk_Extra_Frameworks/TencentOpenAPI",
+				);
+				GCC_INPUT_FILETYPE = sourcecode.cpp.objcpp;
+				GCC_PREFIX_HEADER = "";
+				INFOPLIST_FILE = Fiu/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/fineix/Vendors/UMSocial_Sdk_5.0.1",
+					"$(PROJECT_DIR)/fineix/Vendors/UMSocial_Sdk_Extra_Frameworks/SinaSSO",
+					"$(PROJECT_DIR)/fineix/Vendors/UMSocial_Sdk_Extra_Frameworks/TencentOpenAPI",
+					"$(PROJECT_DIR)/fineix/Vendors/UMSocial_Sdk_Extra_Frameworks/Wechat",
+					"$(PROJECT_DIR)/Fiu/Vendors/UMSocial_Sdk_5.0.1",
+					"$(PROJECT_DIR)/Fiu/Vendors/UMSocial_Sdk_Extra_Frameworks/SinaSSO",
+					"$(PROJECT_DIR)/Fiu/Vendors/UMSocial_Sdk_Extra_Frameworks/TencentOpenAPI",
+					"$(PROJECT_DIR)/Fiu/Vendors/UMSocial_Sdk_Extra_Frameworks/Wechat",
+					"$(PROJECT_DIR)/Fiu/Vendors/UMSocial_Sdk_5.2",
+					"$(PROJECT_DIR)/Fiu/Vendors/UMSocial_Sdk_Extra_Frameworks/OpenSDK1.7",
+					"$(PROJECT_DIR)/Fiu/Vendors/UMSocial_Sdk_5.2.1",
+					"$(PROJECT_DIR)/Fiu/Vendors/Umeng/UMSocial_Sdk_5.2.1",
+					"$(PROJECT_DIR)/Fiu/Vendors/Umeng/UMSocial_Sdk_Extra_Frameworks/SinaSSO",
+					"$(PROJECT_DIR)/Fiu/Vendors/Umeng/UMSocial_Sdk_Extra_Frameworks/TencentOpenAPI",
+					"$(PROJECT_DIR)/Fiu/Vendors/Umeng/UMSocial_Sdk_Extra_Frameworks/Wechat",
+				);
+				OTHER_LIBTOOLFLAGS = "-all_load";
+				PRODUCT_BUNDLE_IDENTIFIER = com.THN.fineix;
+				PRODUCT_NAME = Fiu;
+				PROVISIONING_PROFILE = "e1aa23a3-874d-4343-9037-7fe48231b2a1";
+				PROVISIONING_PROFILE_SPECIFIER = FiuDis;
 				RUN_CLANG_STATIC_ANALYZER = NO;
 				USER_HEADER_SEARCH_PATHS = "$(SRCROOT)";
 			};
