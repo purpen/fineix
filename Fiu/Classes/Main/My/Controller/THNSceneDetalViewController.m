@@ -158,7 +158,7 @@ static NSString *const URLDeleteScene = @"/scene_sight/delete";
         cell.beginFollowTheUserBlock = ^(NSString *userId) {
             [weakSelf beginFollowUser:userId];
         };
-        
+        cell.nav = self.navigationController;
         cell.cancelFollowTheUserBlock = ^(NSString *userId) {
             [weakSelf cancelFollowUser:userId];
         };
@@ -436,25 +436,6 @@ static NSString *const URLDeleteScene = @"/scene_sight/delete";
         [self.navigationController pushViewController:commentVC animated:YES];
     }
 }
-
-//#pragma mark - 点赞
-//- (void)likeTheScene:(NSNotification *)idx {
-//    [self thn_networkLikeSceneData:[idx object]];
-//}
-//
-//- (void)cancelLikeTheScene:(NSNotification *)idx {
-//    [self thn_networkCancelLikeData:[idx object]];
-//}
-//
-//#pragma mark - 关注
-//- (void)followTheUser:(NSNotification *)idx {
-//    [self thn_networkFollowSceneData:[idx object]];
-//}
-//
-//- (void)cancelFollowTheUser:(NSNotification *)idx {
-//    [self thn_networkCancelFollowData:[idx object]];
-//}
-
 
 
 -(void)commentsClick:(UIButton*)sender{

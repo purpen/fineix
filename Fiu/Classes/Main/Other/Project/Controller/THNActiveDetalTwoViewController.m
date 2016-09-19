@@ -364,7 +364,7 @@ static NSString *const URLCancelFollowUser = @"/follow/ajax_cancel_follow";
         }
         
     } failure:^(FBRequest *request, NSError *error) {
-        NSLog(@"%@", error);
+
     }];
 }
 
@@ -670,6 +670,7 @@ static NSString *const URLCancelFollowUser = @"/follow/ajax_cancel_follow";
         if (self.model.evt == 2) {
             _attendBtn.userInteractionEnabled = NO;
             _attendBtn.backgroundColor = [UIColor lightGrayColor];
+            [_attendBtn setTitle:@"活动结束" forState:UIControlStateNormal];
         }else if (self.model.evt == 1) {
             [_attendBtn setTitle:@"参与活动" forState:UIControlStateNormal];
         }else if (self.model.evt == 0) {
