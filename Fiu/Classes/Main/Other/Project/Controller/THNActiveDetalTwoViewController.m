@@ -730,7 +730,7 @@ static NSString *const URLCancelFollowUser = @"/follow/ajax_cancel_follow";
 -(void)webViewDidFinishLoad:(UIWebView *)webView{
     [SVProgressHUD dismiss];
     self.webViewHeghit = [[webView stringByEvaluatingJavaScriptFromString:@"document.body.scrollHeight"] floatValue];
-    NSLog(@"网页高度 %f",self.webViewHeghit);
+//    NSLog(@"网页高度 %f",self.webViewHeghit);
     self.webViewLoads = 1;
     [self.contentView reloadData];
 }

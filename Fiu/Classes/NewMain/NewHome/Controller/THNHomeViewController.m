@@ -727,7 +727,7 @@ static NSString *const allCommentsCellId = @"AllCommentsCellId";
                 } else {
                     _selectedIndexPath = indexPath;
                 }
-                [tableView reloadRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
+                [tableView reloadRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationBottom];
             }
             
         } else if (indexPath.row == 4 || indexPath.row == 5 || indexPath.row == 6) {
