@@ -21,6 +21,7 @@
 #import "THNSceneDetalViewController.h"
 #import <MJRefresh.h>
 #import "THNSceneImageViewController.h"
+#import "HomeSceneListRow.h"
 
 @interface THNActiveDetalTwoViewController ()<UICollectionViewDelegate,UICollectionViewDataSource,UIWebViewDelegate>
 
@@ -296,7 +297,9 @@ static NSString *const URLCancelFollowUser = @"/follow/ajax_cancel_follow";
                 //参与的情境
             {
                 THNDiscoverSceneCollectionViewCell * cell = [collectionView dequeueReusableCellWithReuseIdentifier:collectionViewCellId forIndexPath:indexPath];
-                cell.model = self.senceModelAry[indexPath.row];
+                UserInfoEntity *entity = [UserInfoEntity defaultUserInfoEntity];
+                HomeSceneListRow *model = self.senceModelAry[indexPath.row];
+                [cell thn_setSceneUserInfoData:model isLogin:entity.isLogin];
                 cell.beginLikeTheSceneBlock = ^(NSString *idx) {
                     [weakSelf thn_networkLikeSceneData:idx];
                 };
@@ -360,7 +363,9 @@ static NSString *const URLCancelFollowUser = @"/follow/ajax_cancel_follow";
     [self.likeSceneRequest startRequestSuccess:^(FBRequest *request, id result) {
         if ([[result valueForKey:@"success"] isEqualToNumber:@1]) {
             NSInteger index = [self.sceneIdMarr indexOfObject:idx];
-            [self.senceModelAry[index] setValue:@(1) forKey:@"is_love"];
+            NSString *loveCount = [NSString stringWithFormat:@"%zi", [[[result valueForKey:@"data"] valueForKey:@"love_count"] integerValue]];
+            [self.senceModelAry[index] setValue:loveCount forKey:@"loveCount"];
+            [self.senceModelAry[index] setValue:@"1" forKey:@"isLove"];
         }
         
     } failure:^(FBRequest *request, NSError *error) {
@@ -374,7 +379,9 @@ static NSString *const URLCancelFollowUser = @"/follow/ajax_cancel_follow";
     [self.cancelLikeRequest startRequestSuccess:^(FBRequest *request, id result) {
         if ([[result valueForKey:@"success"] isEqualToNumber:@1]) {
             NSInteger index = [self.sceneIdMarr indexOfObject:idx];
-            [self.senceModelAry[index] setValue:@(0) forKey:@"is_love"];
+            NSString *loveCount = [NSString stringWithFormat:@"%zi", [[[result valueForKey:@"data"] valueForKey:@"love_count"] integerValue]];
+            [self.senceModelAry[index] setValue:loveCount forKey:@"loveCount"];
+            [self.senceModelAry[index] setValue:@"0" forKey:@"isLove"];
         }
         
     } failure:^(FBRequest *request, NSError *error) {
@@ -590,10 +597,14 @@ static NSString *const URLCancelFollowUser = @"/follow/ajax_cancel_follow";
             self.current_page = [result[@"data"][@"current_page"] integerValue];
             self.total_rows = [result[@"data"][@"total_rows"] integerValue];
             NSArray *rows = result[@"data"][@"rows"];
-            NSArray *ary = [THNSenceModel mj_objectArrayWithKeyValuesArray:rows];
-            [self.senceModelAry addObjectsFromArray:ary];
-            for (THNSenceModel *model in self.senceModelAry) {
-                [self.sceneIdMarr addObject:model._id];
+            for (NSDictionary *dict in rows) {
+                HomeSceneListRow *model = [[HomeSceneListRow alloc] initWithDictionary:dict];
+                [self.senceModelAry addObject:model];
+            }
+            [self.sceneIdMarr removeAllObjects];
+            for (HomeSceneListRow *model in self.senceModelAry) {
+                NSString *idStr = [NSString stringWithFormat:@"%ld",model.idField];
+                [self.sceneIdMarr addObject:idStr];
             }
             if (self.params != params) {
                 return;
@@ -629,9 +640,13 @@ static NSString *const URLCancelFollowUser = @"/follow/ajax_cancel_follow";
             self.current_page = [result[@"data"][@"current_page"] integerValue];
             self.total_rows = [result[@"data"][@"total_rows"] integerValue];
             NSArray *rows = result[@"data"][@"rows"];
-            self.senceModelAry = [THNSenceModel mj_objectArrayWithKeyValuesArray:rows];
-            for (THNSenceModel *model in self.senceModelAry) {
-                [self.sceneIdMarr addObject:model._id];
+            for (NSDictionary *dict in rows) {
+                HomeSceneListRow *homesceneList = [[HomeSceneListRow alloc] initWithDictionary:dict];
+                [self.senceModelAry addObject:homesceneList];
+            }
+            for (HomeSceneListRow *model in self.senceModelAry) {
+                NSString *idStr = [NSString stringWithFormat:@"%ld",model.idField];
+                [self.sceneIdMarr addObject:idStr];
             }
             if (self.params != params) {
                 return;
