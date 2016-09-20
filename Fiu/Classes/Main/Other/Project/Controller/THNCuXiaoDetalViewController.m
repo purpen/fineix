@@ -53,7 +53,9 @@ static NSString *const cellId = @"THNCuXiaoDetalContentTableViewCell";
         // 计算文字的高度
         CGFloat textH = [self.model.summary boundingRectWithSize:maxSize options:NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName : [UIFont systemFontOfSize:14]} context:nil].size.height;
         _topView.height = 211 + textH + 10 + 10;
-        
+        if (self.vcType == 2) {
+            _topView.timeLabel.hidden = YES;
+        }
     }
     return _topView;
 }
