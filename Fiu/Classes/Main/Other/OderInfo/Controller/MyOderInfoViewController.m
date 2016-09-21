@@ -59,7 +59,8 @@ static NSString *const OrderInfoCellIdentifier = @"orderInfoCell";
 
 -(void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
-    
+    [self.view addSubview:self.segmentedControl];
+    [self.myTableView.mj_header beginRefreshing];
     [self requestDataForOderList];
     
     UserInfoEntity *entity = [UserInfoEntity defaultUserInfoEntity];
@@ -70,8 +71,6 @@ static NSString *const OrderInfoCellIdentifier = @"orderInfoCell";
         
         NSDictionary *counterDict = [dataDict objectForKey:@"counter"];
         _counterModel = [CounterModel mj_objectWithKeyValues:counterDict];
-
-        [self.view addSubview:self.segmentedControl];
         
         
         [self.myTableView registerNib:[UINib nibWithNibName:@"OrderInfoCell" bundle:nil] forCellReuseIdentifier:OrderInfoCellIdentifier];
@@ -184,12 +183,14 @@ static NSString *const OrderInfoCellIdentifier = @"orderInfoCell";
     _myTableView.mj_header = [MJRefreshNormalHeader headerWithRefreshingBlock:^{
         _currentPageNumber = 0;
         [self.orderListAry removeAllObjects];
+        [self.myTableView.mj_footer endRefreshing];
         [self requestDataForOderListOperationWith:self.type];
     }];
     
     //上拉加载更多
     _myTableView.mj_footer = [MJRefreshAutoNormalFooter footerWithRefreshingBlock:^{
         if (_currentPageNumber < _totalPageNumber) {
+            [self.myTableView.mj_header endRefreshing];
             [self requestDataForOderListOperationWith:self.type];
         } else {
             [self.myTableView.mj_footer endRefreshing];
@@ -318,8 +319,7 @@ static NSString *const OrderInfoCellIdentifier = @"orderInfoCell";
 {
     _currentPageNumber = 0;
     [self.orderListAry removeAllObjects];
-    [SVProgressHUD showWithMaskType:SVProgressHUDMaskTypeClear];
-    
+    [self.myTableView.mj_header beginRefreshing];
     [self requestDataForOderListOperationWith:self.type];
 }
 
