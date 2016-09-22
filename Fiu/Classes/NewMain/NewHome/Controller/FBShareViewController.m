@@ -180,7 +180,7 @@ static NSString *const ShareURlText = @"我在Fiu浮游™寻找同路人；希�
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
     ShareStyleCollectionViewCell * cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"shareStyleCollectionViewCellId" forIndexPath:indexPath];
-    cell.styleImg.image = [UIImage imageNamed:[NSString stringWithFormat:@"Share_Style_000"]];
+    cell.styleImg.image = [UIImage imageNamed:[NSString stringWithFormat:@"Share_Style_00%zi", indexPath.row]];
     return cell;
 }
 

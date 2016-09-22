@@ -161,7 +161,7 @@ static NSString *const hotUserCellId = @"HotUserCellId";
         
         [_bottomView addSubview:self.follow];
         [_follow mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.size.mas_equalTo(CGSizeMake(66, 26));
+            make.size.mas_equalTo(CGSizeMake(70, 26));
             make.right.equalTo(_bottomView.mas_right).with.offset(-15);
             make.centerY.equalTo(_bottomView);
         }];

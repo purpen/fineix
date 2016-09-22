@@ -23,60 +23,58 @@
 - (void)setShareSceneData:(HomeSceneListRow *)sceneModel {
     [self setViewUI];
     
-    //    self.tagDataMarr = [NSMutableArray arrayWithArray:sceneModel.product];
-    //    if (self.tagDataMarr.count) {
-    //        [self setUserTagBtn];
-    //    }
-    //
-    //    [self.sceneImg downloadImage:sceneModel.coverUrl place:[UIImage imageNamed:@""]];
-    //    if (sceneModel.title.length == 0) {
-    //        self.title.hidden = YES;
-    //        self.suTitle.hidden = YES;
-    //
-    //    } else if (sceneModel.title.length > 10) {
-    //        self.title.hidden = NO;
-    //        self.suTitle.hidden = NO;
-    //
-    //        NSString *titleStr = [NSString stringWithFormat:@"     %@  ", [sceneModel.title substringToIndex:10]];
-    //        self.title.text = titleStr;
-    //
-    //        NSString *suTitleStr = [NSString stringWithFormat:@"     %@  ", [sceneModel.title substringFromIndex:10]];
-    //        self.suTitle.text = suTitleStr;
-    //
-    //        [self.suTitle mas_updateConstraints:^(MASConstraintMaker *make) {
-    //            make.width.equalTo(@([self getTextSizeWidth:suTitleStr fontSize:17].width));
-    //        }];
-    //
-    //        [self.title mas_updateConstraints:^(MASConstraintMaker *make) {
-    //            make.width.equalTo(@([self getTextSizeWidth:titleStr fontSize:17].width));
-    //            make.bottom.equalTo(_sceneImg.mas_bottom).with.offset(-48);
-    //        }];
-    //
-    //    } else if (sceneModel.title.length <= 10) {
-    //        self.suTitle.hidden = YES;
-    //        self.title.hidden = NO;
-    //
-    //        NSString *titleStr = [NSString stringWithFormat:@"     %@  ", sceneModel.title];
-    //        self.title.text = titleStr;
-    //        [self.title mas_updateConstraints:^(MASConstraintMaker *make) {
-    //            make.width.equalTo(@([self getTextSizeWidth:titleStr fontSize:17].width));
-    //        }];
-    //    }
-    //
-    //    [self.userName setTitle:sceneModel.user.nickname forState:(UIControlStateNormal)];
-    //    [self.time setTitle:sceneModel.createdAt forState:(UIControlStateNormal)];
-    //    NSString *timeStr = [NSString stringWithFormat:@"     %@", sceneModel.createdAt];
-    //    [self.time mas_updateConstraints:^(MASConstraintMaker *make) {
-    //        make.width.equalTo(@([self getTextSizeWidth:timeStr fontSize:12].width));
-    //    }];
-    //
-    //    if (sceneModel.address.length == 0) {
-    //        self.address.hidden = YES;
-    //    } else {
-    //        [self.address setTitle:sceneModel.address forState:(UIControlStateNormal)];
-    //    }
-    //
-    //    [self changeContentLabStyle:sceneModel.des];
+    self.tagDataMarr = [NSMutableArray arrayWithArray:sceneModel.product];
+    if (self.tagDataMarr.count) {
+        [self setUserTagBtn];
+    }
+    
+    [self.sceneImg downloadImage:sceneModel.coverUrl place:[UIImage imageNamed:@""]];
+    
+    if (sceneModel.title.length == 0) {
+        self.title.hidden = YES;
+        self.suTitle.hidden = YES;
+        
+    } else if (sceneModel.title.length > 10) {
+        self.title.hidden = NO;
+        self.suTitle.hidden = NO;
+        
+        NSString *titleStr = [NSString stringWithFormat:@"%@  ", [sceneModel.title substringToIndex:10]];
+        self.title.text = titleStr;
+        
+        NSString *suTitleStr = [NSString stringWithFormat:@"%@  ", [sceneModel.title substringFromIndex:10]];
+        self.suTitle.text = suTitleStr;
+        
+        [self.suTitle mas_updateConstraints:^(MASConstraintMaker *make) {
+            make.width.equalTo(@([self getTextSizeWidth:suTitleStr fontSize:17].width));
+        }];
+        
+        [self.title mas_updateConstraints:^(MASConstraintMaker *make) {
+            make.width.equalTo(@([self getTextSizeWidth:titleStr fontSize:17].width));
+            make.top.equalTo(_sceneImg.mas_bottom).with.offset(0);
+        }];
+        
+        [self.describe mas_remakeConstraints:^(MASConstraintMaker *make) {
+            make.width.equalTo(@(SCREEN_WIDTH - 80));
+            make.centerX.equalTo(self);
+            make.top.equalTo(_suTitle.mas_bottom).with.offset(0);
+            make.bottom.equalTo(_userView.mas_top).with.offset(0);
+        }];
+        
+    } else if (sceneModel.title.length <= 10) {
+        self.suTitle.hidden = YES;
+        self.title.hidden = NO;
+        
+        NSString *titleStr = [NSString stringWithFormat:@"%@  ", sceneModel.title];
+        self.title.text = titleStr;
+        [self.title mas_updateConstraints:^(MASConstraintMaker *make) {
+            make.width.equalTo(@([self getTextSizeWidth:titleStr fontSize:17].width));
+        }];
+    }
+    
+    [self.userName setTitle:[NSString stringWithFormat:@" %@", sceneModel.user.nickname] forState:(UIControlStateNormal)];
+    [self thn_getTextChangeFrame:sceneModel.createdAt withAddress:sceneModel.address];
+    
+    [self changeContentLabStyle:sceneModel.des];
 }
 
 - (CGSize)getTextSizeWidth:(NSString *)text fontSize:(CGFloat)fontSize {
@@ -90,6 +88,37 @@
                                      attributes:attribute
                                         context:nil].size;
     return retSize;
+}
+
+- (void)thn_getTextChangeFrame:(NSString *)time withAddress:(NSString *)address {
+    [self.time setTitle:[NSString stringWithFormat:@" %@", time] forState:(UIControlStateNormal)];
+    NSString *timeStr = [NSString stringWithFormat:@"     %@", time];
+    NSString *addressStr = [NSString stringWithFormat:@"   %@", address];
+    CGFloat timeWidth = [self getTextSizeWidth:timeStr fontSize:12].width;
+    CGFloat addressWidth = [self getTextSizeWidth:addressStr fontSize:12].width;
+    
+    [self.time mas_updateConstraints:^(MASConstraintMaker *make) {
+        make.width.equalTo(@(timeWidth));
+    }];
+    
+    if (address.length == 0) {
+        self.address.hidden = YES;
+        [self.time mas_remakeConstraints:^(MASConstraintMaker *make) {
+            make.width.equalTo(@(timeWidth));
+            make.height.equalTo(@(12));
+            make.top.equalTo(_userName.mas_bottom).with.offset(3);
+            make.centerX.equalTo(self);
+        }];
+    } else {
+        [self.address setTitle:[NSString stringWithFormat:@" %@", address] forState:(UIControlStateNormal)];
+        [self.address mas_updateConstraints:^(MASConstraintMaker *make) {
+            make.width.equalTo(@(addressWidth));
+        }];
+        
+        [self.timeView mas_updateConstraints:^(MASConstraintMaker *make) {
+            make.width.equalTo(@(timeWidth + addressWidth));
+        }];
+    }
 }
 
 #pragma mark - 创建用户添加商品按钮
@@ -119,12 +148,12 @@
         }
         
         if (loc == 1) {
-            userTag.frame = CGRectMake((btnX*SCREEN_WIDTH) - ((width+25)-18), btnY*SCREEN_WIDTH-32+50, width+25, 32);
+            userTag.frame = CGRectMake((btnX*(SCREEN_WIDTH *0.893)) - ((width+25)-18), btnY*(SCREEN_WIDTH *0.893)-32, width+25, 32);
         } else if (loc == 2) {
-            userTag.frame = CGRectMake(btnX*SCREEN_WIDTH-44, btnY*SCREEN_WIDTH-32+50, width+25, 32);
+            userTag.frame = CGRectMake(btnX*(SCREEN_WIDTH *0.893)-44, btnY*(SCREEN_WIDTH *0.893)-32, width+25, 32);
         }
         [userTag thn_setSceneImageUserGoodsTagLoc:loc];
-        [self addSubview:userTag];
+        [self.sceneImg addSubview:userTag];
         [userTag sendSubviewToBack:self.title];
     }
 }
@@ -137,54 +166,49 @@
         make.centerX.centerY.equalTo(self);
     }];
     
-    //    [self addSubview:self.sceneImg];
-    //    [_sceneImg mas_makeConstraints:^(MASConstraintMaker *make) {
-    //        make.left.equalTo(self.mas_left).with.offset(0);
-    //        make.top.equalTo(self.mas_top).with.offset(50);
-    //        make.size.mas_equalTo(CGSizeMake(SCREEN_WIDTH, SCREEN_WIDTH +2));
-    //    }];
-    //
-    //    [self addSubview:self.suTitle];
-    //    [_suTitle mas_makeConstraints:^(MASConstraintMaker *make) {
-    //        make.size.mas_equalTo(CGSizeMake(50, 25));
-    //        make.left.equalTo(_sceneImg.mas_left).with.offset(0);
-    //        make.bottom.equalTo(_sceneImg.mas_bottom).with.offset(-20);
-    //    }];
-    //
-    //    [self addSubview:self.title];
-    //    [_title mas_makeConstraints:^(MASConstraintMaker *make) {
-    //        make.size.mas_equalTo(CGSizeMake(50, 25));
-    //        make.left.equalTo(_sceneImg.mas_left).with.offset(0);
-    //        make.bottom.equalTo(_sceneImg.mas_bottom).with.offset(-20);
-    //    }];
-    //
-    //    [self addSubview:self.contentline];
-    //    [_contentline mas_makeConstraints:^(MASConstraintMaker *make) {
-    //        make.size.mas_equalTo(CGSizeMake(SCREEN_WIDTH - 44, 0.5));
-    //        make.left.equalTo(self.mas_left).with.offset(22);
-    //        make.top.equalTo(_sceneImg.mas_bottom).with.offset(40);
-    //    }];
-    //
-    //    [self addSubview:self.userView];
-    //    [_userView mas_makeConstraints:^(MASConstraintMaker *make) {
-    //        make.size.mas_equalTo(CGSizeMake(SCREEN_WIDTH - 44, 30));
-    //        make.top.equalTo(_contentline.mas_bottom).with.offset(40);
-    //        make.left.equalTo(self.mas_left).with.offset(22);
-    //    }];
-    //
-    //    [self addSubview:self.sendText];
-    //    [_sendText mas_makeConstraints:^(MASConstraintMaker *make) {
-    //        make.size.mas_equalTo(CGSizeMake(200, 15));
-    //        make.left.equalTo(self.mas_left).with.offset(80);
-    //        make.bottom.equalTo(self.mas_bottom).with.offset(-25);
-    //    }];
-    //
-    //    [self addSubview:self.describe];
-    //    [_describe mas_makeConstraints:^(MASConstraintMaker *make) {
-    //        make.size.mas_equalTo(CGSizeMake(SCREEN_WIDTH - 44, 40));
-    //        make.top.equalTo(_sceneImg.mas_bottom).with.offset(0);
-    //        make.left.equalTo(self.mas_left).with.offset(22);
-    //    }];
+    [self addSubview:self.sceneImg];
+    [_sceneImg mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.size.mas_equalTo(CGSizeMake(SCREEN_WIDTH *0.894, SCREEN_WIDTH *0.894));
+        make.top.equalTo(self.mas_top).with.offset(SCREEN_WIDTH *0.19);
+        make.centerX.equalTo(self.mas_centerX).with.offset(-2);
+    }];
+    
+    [self addSubview:self.suTitle];
+    [_suTitle mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.size.mas_equalTo(CGSizeMake(50, 25));
+        make.centerX.equalTo(self);
+        make.top.equalTo(_sceneImg.mas_bottom).with.offset(30);
+    }];
+    
+    [self addSubview:self.title];
+    [_title mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.size.mas_equalTo(CGSizeMake(50, 25));
+        make.centerX.equalTo(self);
+        make.top.equalTo(_sceneImg.mas_bottom).with.offset(30);
+    }];
+    
+    [self addSubview:self.userView];
+    [_userView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.size.mas_equalTo(CGSizeMake(SCREEN_WIDTH - 44, 30));
+        make.bottom.equalTo(self.mas_bottom).with.offset(-SCREEN_WIDTH *0.33);
+        make.centerX.equalTo(self);
+    }];
+    
+    [self addSubview:self.sendText];
+    [_sendText mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.size.mas_equalTo(CGSizeMake(200, 15));
+        make.centerX.equalTo(self);
+        make.bottom.equalTo(self.mas_bottom).with.offset(-SCREEN_WIDTH*0.066);
+    }];
+    
+    [self addSubview:self.describe];
+    [_describe mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.width.equalTo(@(SCREEN_WIDTH - 80));
+        make.centerX.equalTo(self);
+        make.top.equalTo(_title.mas_bottom).with.offset(0);
+        make.bottom.equalTo(_userView.mas_top).with.offset(0);
+    }];
+
 }
 
 #pragma mark - 样式背景
@@ -206,22 +230,14 @@
         [_userName mas_makeConstraints:^(MASConstraintMaker *make) {
             make.size.mas_equalTo(CGSizeMake(150, 14));
             make.top.equalTo(_userView.mas_top).with.offset(0);
-            make.left.equalTo(_userView.mas_left).with.offset(1);
+            make.centerX.equalTo(_userView);
         }];
         
-        [_userView addSubview:self.time];
-        [_time mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.size.mas_equalTo(CGSizeMake(70, 12));
-            make.left.equalTo(_userView.mas_left).with.offset(0);
+        [_userView addSubview:self.timeView];
+        [_timeView mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.size.mas_equalTo(CGSizeMake(SCREEN_WIDTH - 80, 12));
             make.top.equalTo(_userName.mas_bottom).with.offset(3);
-        }];
-        
-        [_userView addSubview:self.address];
-        [_address mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.height.equalTo(@12);
-            make.left.equalTo(_time.mas_right).with.offset(5);
-            make.bottom.equalTo(_time.mas_bottom).with.offset(0);
-            make.right.equalTo(_userView.mas_right).with.offset(-20);
+            make.centerX.equalTo(_userView);
         }];
     }
     return _userView;
@@ -230,9 +246,10 @@
 #pragma mark - 内容
 - (UIImageView *)sceneImg {
     if (!_sceneImg) {
-        _sceneImg = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_WIDTH)];
+        _sceneImg = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH *0.894, SCREEN_WIDTH *0.894)];
         _sceneImg.contentMode = UIViewContentModeScaleAspectFill;
-        _sceneImg.clipsToBounds = YES;
+        _sceneImg.layer.cornerRadius = SCREEN_WIDTH *0.894/2;
+        _sceneImg.layer.masksToBounds = YES;
     }
     return _sceneImg;
 }
@@ -244,9 +261,30 @@
         [_userName setTitleEdgeInsets:(UIEdgeInsetsMake(0, 5, 0, 0))];
         _userName.titleLabel.font = [UIFont systemFontOfSize:10];
         [_userName setTitleColor:[UIColor colorWithHexString:@"#999999"] forState:(UIControlStateNormal)];
-        _userName.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
+        _userName.contentHorizontalAlignment = UIControlContentHorizontalAlignmentCenter;
     }
     return _userName;
+}
+
+- (UIView *)timeView {
+    if (!_timeView) {
+        _timeView = [[UIView alloc] init];
+        
+        [_timeView addSubview:self.time];
+        [_time mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.size.mas_equalTo(CGSizeMake(70, 12));
+            make.left.equalTo(_timeView.mas_left).with.offset(5);
+            make.top.equalTo(_timeView.mas_top).with.offset(0);
+        }];
+        
+        [_timeView addSubview:self.address];
+        [_address mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.size.mas_equalTo(CGSizeMake(70, 12));
+            make.left.equalTo(_time.mas_right).with.offset(5);
+            make.bottom.equalTo(_time.mas_bottom).with.offset(0);
+        }];
+    }
+    return _timeView;
 }
 
 - (UIButton *)time {
@@ -272,12 +310,14 @@
     }
     return _address;
 }
+
 - (UILabel *)title {
     if (!_title) {
         _title = [[UILabel alloc] init];
-        _title.backgroundColor = [UIColor colorWithHexString:@"#000000" alpha:0.8];
+        _title.backgroundColor = [UIColor colorWithHexString:@"#000000" alpha:1];
         _title.textColor = [UIColor colorWithHexString:@"#FFFFFF"];
         _title.font = [UIFont systemFontOfSize:17];
+        _title.textAlignment = NSTextAlignmentCenter;
     }
     return _title;
 }
@@ -285,19 +325,12 @@
 - (UILabel *)suTitle {
     if (!_suTitle) {
         _suTitle = [[UILabel alloc] init];
-        _suTitle.backgroundColor = [UIColor colorWithHexString:@"#000000" alpha:0.8];
+        _suTitle.backgroundColor = [UIColor colorWithHexString:@"#000000" alpha:1];
         _suTitle.textColor = [UIColor colorWithHexString:@"#FFFFFF"];
         _suTitle.font = [UIFont systemFontOfSize:17];
+        _suTitle.textAlignment = NSTextAlignmentCenter;
     }
     return _suTitle;
-}
-
-- (UILabel *)contentline {
-    if (!_contentline) {
-        _contentline = [[UILabel alloc] init];
-        _contentline.backgroundColor = [UIColor colorWithHexString:@"#E1E1E1"];
-    }
-    return _contentline;
 }
 
 - (UIButton *)describeIcon {
@@ -320,19 +353,19 @@
 
 - (void)changeContentLabStyle:(NSString *)str {
     CGFloat desHeigth = [self getTextSizeWidth:str fontSize:12].height;
-    if (desHeigth >= 20) {
+    if (desHeigth >= 20 && str.length >= 55) {
         [self addSubview:self.describeIcon];
         [_describeIcon mas_makeConstraints:^(MASConstraintMaker *make) {
             make.size.mas_equalTo(CGSizeMake(9, 9));
             make.right.equalTo(_describe.mas_right).with.offset(0);
-            make.bottom.equalTo(_describe.mas_bottom).with.offset(-8);
+            make.top.equalTo(_describe.mas_centerY).with.offset(3);
         }];
     }
     
     NSMutableAttributedString * contentText = [[NSMutableAttributedString alloc] initWithString:str];
     NSMutableParagraphStyle * paragraphStyle = [[NSMutableParagraphStyle alloc] init];
     paragraphStyle.lineSpacing = 3.0f;
-    paragraphStyle.alignment = NSTextAlignmentJustified;
+    paragraphStyle.alignment = NSTextAlignmentCenter;
     NSDictionary * textDict = @{NSParagraphStyleAttributeName:paragraphStyle};
     [contentText addAttributes:textDict range:NSMakeRange(0, contentText.length)];
     self.describe.attributedText = contentText;
@@ -345,6 +378,7 @@
         _sendText.textColor = [UIColor colorWithHexString:fineixColor];
         _sendText.font = [UIFont systemFontOfSize:9];
         _sendText.text = NSLocalizedString(@"newSendRed", nil);
+        _sendText.textAlignment = NSTextAlignmentCenter;
     }
     return _sendText;
 }
