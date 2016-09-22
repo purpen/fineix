@@ -68,7 +68,7 @@
         }];
     }
     
-    [self.userName setTitle:[NSString stringWithFormat:@" %@", sceneModel.user.nickname] forState:(UIControlStateNormal)];
+    [self.userName setTitle:[NSString stringWithFormat:@"%@", sceneModel.user.nickname] forState:(UIControlStateNormal)];
     [self thn_getTextChangeFrame:sceneModel.createdAt withAddress:sceneModel.address];
     
     [self changeContentLabStyle:sceneModel.des];
@@ -89,7 +89,7 @@
 
 
 - (void)thn_getTextChangeFrame:(NSString *)time withAddress:(NSString *)address {
-    [self.time setTitle:[NSString stringWithFormat:@" %@", time] forState:(UIControlStateNormal)];
+    [self.time setTitle:[NSString stringWithFormat:@"%@", time] forState:(UIControlStateNormal)];
     NSString *timeStr = [NSString stringWithFormat:@"     %@", time];
     NSString *addressStr = [NSString stringWithFormat:@"   %@", address];
     CGFloat timeWidth = [self getTextSizeWidth:timeStr fontSize:12].width;
@@ -108,7 +108,7 @@
             make.centerX.equalTo(self);
         }];
     } else {
-        [self.address setTitle:[NSString stringWithFormat:@" %@", address] forState:(UIControlStateNormal)];
+        [self.address setTitle:[NSString stringWithFormat:@"%@", address] forState:(UIControlStateNormal)];
         [self.address mas_updateConstraints:^(MASConstraintMaker *make) {
             make.width.equalTo(@(addressWidth));
         }];
@@ -233,7 +233,7 @@
         [_userView addSubview:self.timeView];
         [_timeView mas_makeConstraints:^(MASConstraintMaker *make) {
             make.size.mas_equalTo(CGSizeMake(SCREEN_WIDTH - 80, 12));
-            make.top.equalTo(_userName.mas_bottom).with.offset(3);
+            make.top.equalTo(_userName.mas_bottom).with.offset(5);
             make.centerX.equalTo(_userView);
         }];
     }

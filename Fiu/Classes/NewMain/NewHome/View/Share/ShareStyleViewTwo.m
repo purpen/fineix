@@ -71,8 +71,8 @@
         }];
     }
     
-    [self.userName setTitle:[NSString stringWithFormat:@"  %@", sceneModel.user.nickname] forState:(UIControlStateNormal)];
-    [self.time setTitle:[NSString stringWithFormat:@"  %@", sceneModel.createdAt] forState:(UIControlStateNormal)];
+    [self.userName setTitle:[NSString stringWithFormat:@" %@", sceneModel.user.nickname] forState:(UIControlStateNormal)];
+    [self.time setTitle:[NSString stringWithFormat:@" %@", sceneModel.createdAt] forState:(UIControlStateNormal)];
     NSString *timeStr = [NSString stringWithFormat:@"     %@", sceneModel.createdAt];
     [self.time mas_updateConstraints:^(MASConstraintMaker *make) {
         make.width.equalTo(@([self getTextSizeWidth:timeStr fontSize:12].width));
@@ -81,7 +81,7 @@
     if (sceneModel.address.length == 0) {
         self.address.hidden = YES;
     } else {
-        [self.address setTitle:[NSString stringWithFormat:@"  %@", sceneModel.address] forState:(UIControlStateNormal)];
+        [self.address setTitle:[NSString stringWithFormat:@" %@", sceneModel.address] forState:(UIControlStateNormal)];
     }
     
     [self changeContentLabStyle:sceneModel.des];
@@ -217,7 +217,7 @@
         [_time mas_makeConstraints:^(MASConstraintMaker *make) {
             make.size.mas_equalTo(CGSizeMake(70, 12));
             make.right.equalTo(_userView.mas_right).with.offset(0);
-            make.top.equalTo(_userName.mas_bottom).with.offset(3);
+            make.top.equalTo(_userName.mas_bottom).with.offset(5);
         }];
         
         [_userView addSubview:self.address];
