@@ -38,6 +38,7 @@ static NSString *const remindTableCellId = @"RemindTableCellId";
     self.remindRequest = [FBAPI getWithUrlString:URLRemind requestDictionary:@{@"page":@"1", @"size":@"100000"} delegate:self];
     [self.remindRequest startRequestSuccess:^(FBRequest *request, id result) {
         NSArray *dataArr = [[result valueForKey:@"data"] valueForKey:@"rows"];
+        NSLog(@"＝＝＝＝＝ %@", dataArr);
         for (NSDictionary *dataDic in dataArr) {
             THNRemindModelRow *model = [[THNRemindModelRow alloc] initWithDictionary:dataDic];
             [self.remindMarr addObject:model];

@@ -1,11 +1,12 @@
 #import <UIKit/UIKit.h>
-#import "THNRemindModelSUser.h"
-#import "THNRemindModelTarget.h"
-#import "THNRemindModelSUser.h"
+#import "THNRemindModelReviceUser.h"
+#import "THNRemindModelReviceUser.h"
+#import "THNRemindModelTargetObj.h"
 
 @interface THNRemindModelRow : NSObject
 
 @property (nonatomic, strong) NSString * idField;
+@property (nonatomic, strong) NSObject * commentTargetObj;
 @property (nonatomic, strong) NSObject * commentTypeStr;
 @property (nonatomic, strong) NSObject * content;
 @property (nonatomic, strong) NSString * createdAt;
@@ -18,11 +19,11 @@
 @property (nonatomic, strong) NSString * parentRelatedId;
 @property (nonatomic, assign) NSInteger readed;
 @property (nonatomic, assign) NSInteger relatedId;
-@property (nonatomic, strong) THNRemindModelSUser * sUser;
+@property (nonatomic, strong) THNRemindModelReviceUser * reviceUser;
 @property (nonatomic, assign) NSInteger sUserId;
-@property (nonatomic, strong) THNRemindModelTarget * target;
+@property (nonatomic, strong) THNRemindModelReviceUser * sendUser;
+@property (nonatomic, strong) THNRemindModelTargetObj * targetObj;
 @property (nonatomic, assign) NSInteger updatedOn;
-@property (nonatomic, strong) THNRemindModelSUser * user;
 @property (nonatomic, assign) NSInteger userId;
 
 -(instancetype)initWithDictionary:(NSDictionary *)dictionary;
