@@ -239,9 +239,6 @@ static NSString *const URLCancelFollowUser = @"/follow/ajax_cancel_follow";
             case 0:
                 //活动规则
             {
-//                if ([[[UIDevice currentDevice] systemVersion] floatValue] >= 10.0) {
-//                    return CGSizeMake(SCREEN_WIDTH, 2700 + 50);
-//                }
                 return CGSizeMake(SCREEN_WIDTH, self.webViewHeghit + 50);
             }
                 break;
@@ -568,7 +565,7 @@ static NSString *const URLCancelFollowUser = @"/follow/ajax_cancel_follow";
             [self.attendBtn removeFromSuperview];
             [self.contentView reloadData];
             self.contentView.mj_footer.hidden = YES;
-        }else{
+        } else {
             if (self.params != params) return;
             
             // 提醒
@@ -611,7 +608,7 @@ static NSString *const URLCancelFollowUser = @"/follow/ajax_cancel_follow";
             }
             [self.contentView reloadData];
             [self checkFooterState];
-        }else{
+        } else {
             if (self.params != params) return;
             
             // 提醒
@@ -686,9 +683,9 @@ static NSString *const URLCancelFollowUser = @"/follow/ajax_cancel_follow";
             _attendBtn.userInteractionEnabled = NO;
             _attendBtn.backgroundColor = [UIColor lightGrayColor];
             [_attendBtn setTitle:@"活动结束" forState:UIControlStateNormal];
-        }else if (self.model.evt == 1) {
+        } else if (self.model.evt == 1) {
             [_attendBtn setTitle:@"参与活动" forState:UIControlStateNormal];
-        }else if (self.model.evt == 0) {
+        } else if (self.model.evt == 0) {
             [_attendBtn setTitle:@"即将开始" forState:UIControlStateNormal];
             _attendBtn.userInteractionEnabled = NO;
         }
@@ -718,7 +715,7 @@ static NSString *const URLCancelFollowUser = @"/follow/ajax_cancel_follow";
             }
             [self.contentView reloadData];
             self.contentView.mj_footer.hidden = YES;
-        }else{
+        } else {
         }
     } failure:nil];
 }

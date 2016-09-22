@@ -217,7 +217,14 @@
     THNSceneDetalViewController *vc = [[THNSceneDetalViewController alloc] init];
     NSLog(@"id  %@",_sceneIdMarr[sender.tag]);
     vc.sceneDetalId = _sceneIdMarr[sender.tag];
-    [self.navigationController pushViewController:vc animated:YES];
+    
+    
+    FBRequest *request = [FBAPI postWithUrlString:@"/scene_sight/view" requestDictionary:@{
+                                                                                           @"id" : _sceneIdMarr[sender.tag]
+                                                                                           } delegate:self];
+    [request startRequestSuccess:^(FBRequest *request, id result) {
+        [self.navigationController pushViewController:vc animated:YES];
+    } failure:nil];
 }
 
 -(void)headBtn:(UIButton*)sender{
