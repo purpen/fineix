@@ -17,11 +17,12 @@
 #import "UserInfoEntity.h"
 #import "FocusNonView.h"
 #import "UserInfoEntity.h"
-
+#import "TipNumberView.h"
 
 @interface MyFansViewController ()<FBNavigationBarItemsDelegate,UITableViewDelegate,UITableViewDataSource,FBRequestDelegate>
 
 @property(nonatomic,strong) FocusNonView *scenarioNonView;
+
 /**  */
 @property (nonatomic, strong) NSMutableArray *modelAry;
 /**  */
@@ -48,6 +49,7 @@
     [self setUpRefresh];
     [self.view addSubview:self.mytableView];
 }
+
 
 //void printN(int N){
 //    if (!N) return;
@@ -211,7 +213,6 @@
         _mytableView.delegate = self;
         _mytableView.dataSource = self;
         _mytableView.separatorStyle = UITableViewCellSeparatorStyleNone;
-//        _mytableView.contentInset = UIEdgeInsetsMake(0, 0, 0, 10);
     }
     return _mytableView;
 }
@@ -230,6 +231,11 @@
     UserInfo *model;
     if (_modelAry.count != 0) {
         model = [_modelAry objectAtIndex:indexPath.row];
+        if (indexPath.row < self.num) {
+            cell.alertTipviewNum.hidden = NO;
+        }else{
+            cell.alertTipviewNum.hidden = YES;
+        }
     }
     
     [cell.focusOnBtn addTarget:self action:@selector(clickFocusBtn:) forControlEvents:UIControlEventTouchUpInside];

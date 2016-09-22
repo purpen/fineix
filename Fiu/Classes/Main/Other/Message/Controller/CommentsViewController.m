@@ -45,8 +45,6 @@
     self.myTbaleView.dataSource = self;
     
     self.myTbaleView.rowHeight = 65;
-    //进行网络请求
-    [self requestDataForOderList];
     
     // 下拉刷新
     self.myTbaleView.mj_header = [MJRefreshNormalHeader headerWithRefreshingBlock:^{
@@ -54,6 +52,8 @@
         [_modelAry removeAllObjects];
         [self requestDataForOderList];
     }];
+    
+    [self.myTbaleView.mj_header beginRefreshing];
     
     //上拉加载更多
     self.myTbaleView.mj_footer = [MJRefreshAutoNormalFooter footerWithRefreshingBlock:^{
@@ -70,7 +70,6 @@
 {
     _currentPageNumber = 0;
     [_modelAry removeAllObjects];
-    [SVProgressHUD showWithMaskType:SVProgressHUDMaskTypeClear];
     
     [self requestDataForOderListOperation];
 }

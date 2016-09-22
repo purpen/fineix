@@ -27,7 +27,6 @@
 -(void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
     [[UIApplication sharedApplication] setStatusBarHidden:NO withAnimation:(UIStatusBarAnimationSlide)];
-    [self requestDataForOderList];
 }
 
 - (void)viewDidLoad {
@@ -52,6 +51,7 @@
         [self.noticeAry removeAllObjects];
         [self requestDataForOderListOperation];
     }];
+    [self.myTbaleView.mj_header beginRefreshing];
     
     //上拉加载更多
     self.myTbaleView.mj_footer = [MJRefreshAutoNormalFooter footerWithRefreshingBlock:^{
@@ -67,7 +67,6 @@
 {
     _currentPageNumber = 0;
     [self.noticeAry removeAllObjects];
-    [SVProgressHUD showWithMaskType:SVProgressHUDMaskTypeClear];
     
     [self requestDataForOderListOperation];
 }

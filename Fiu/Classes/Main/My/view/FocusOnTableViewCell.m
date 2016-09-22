@@ -12,12 +12,22 @@
 #import <SDWebImage/UIImageView+WebCache.h>
 #import "UserInfoEntity.h"
 #import "TalentView.h"
+#import "TipNumberView.h"
 
 @implementation FocusOnTableViewCell
 
 - (void)awakeFromNib {
     [super awakeFromNib];
     
+}
+
+-(TipNumberView *)alertTipviewNum{
+    if (!_alertTipviewNum) {
+        _alertTipviewNum = [TipNumberView getTipNumView];
+        _alertTipviewNum.layer.masksToBounds = YES;
+        _alertTipviewNum.layer.cornerRadius = 5*0.5/667.0*SCREEN_HEIGHT;
+    }
+    return _alertTipviewNum;
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
@@ -57,7 +67,7 @@
         [_nickNameLabel mas_makeConstraints:^(MASConstraintMaker *make) {
             make.left.mas_equalTo(_headImageView.mas_right).with.offset(9/667.0*SCREEN_HEIGHT);
             make.top.mas_equalTo(self.mas_top).with.offset(13/667.0*SCREEN_HEIGHT);
-            make.right.mas_equalTo(_focusOnBtn.mas_left).with.offset(-10);
+            make.right.mas_lessThanOrEqualTo(200);
         }];
         
         [self.contentView addSubview:self.summaryLabel];
@@ -75,6 +85,15 @@
             make.left.mas_equalTo(self.nickNameLabel.mas_left).with.offset(0);
             make.right.mas_equalTo(self.mas_right).offset(0);
         }];
+        
+        [self.contentView addSubview:self.alertTipviewNum];
+        self.alertTipviewNum.tipNumLabel.text = @"";
+        [self.alertTipviewNum mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.size.mas_equalTo(CGSizeMake(5/667.0*SCREEN_HEIGHT, 5/667.0*SCREEN_HEIGHT));
+            make.left.mas_equalTo(self.nickNameLabel.mas_right).with.offset(5);
+            make.centerY.mas_equalTo(self.nickNameLabel.mas_centerY);
+        }];
+        
     }
     return self;
 }

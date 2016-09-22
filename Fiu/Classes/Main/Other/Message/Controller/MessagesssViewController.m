@@ -48,6 +48,8 @@
         [self requestDataForOderList];
     }];
     
+    [self.myTbaleView.mj_header beginRefreshing];
+    
     //上拉加载更多
     self.myTbaleView.mj_footer = [MJRefreshAutoNormalFooter footerWithRefreshingBlock:^{
         if (_currentPageNumber < _totalPageNumber) {
@@ -61,8 +63,6 @@
 
 -(void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
-    //进行网络请求
-    [self requestDataForOderList];
 }
 
 #pragma mark - Network
@@ -70,7 +70,6 @@
 {
     _currentPageNumber = 0;
     [_modelAry removeAllObjects];
-    [SVProgressHUD showWithMaskType:SVProgressHUDMaskTypeClear];
     
     [self requestDataForOderListOperation];
 }
