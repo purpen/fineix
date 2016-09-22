@@ -15,15 +15,12 @@
 @property (weak, nonatomic) IBOutlet UILabel *codeLbl;
 @property (weak, nonatomic) IBOutlet UILabel *minimumLbl;
 @property (weak, nonatomic) IBOutlet UILabel *overdueLbl;
-
+@property (weak, nonatomic) IBOutlet UILabel *limitLabel;
 
 @end
 
 @implementation BonusCell
 
-- (void)awakeFromNib {
-    // Initialization code
-}
 
 - (void)setBonus:(BonusModel *)bonus
 {
@@ -38,12 +35,15 @@
         self.minimumLbl.text = [NSString stringWithFormat:@"最低使用限额:%.0f", [bonus.minAmount floatValue]];
     }
     self.overdueLbl.text = bonus.expiredLabel;
+    
+    if (bonus.product_id == 0) {
+        self.limitLabel.hidden = YES;
+    } else {
+        self.limitLabel.hidden = NO;
+        self.limitLabel.text = [NSString stringWithFormat:@"(限购%@使用)",bonus.product_name];
+    }
+    
 }
 
-- (void)setSelected:(BOOL)selected animated:(BOOL)animated {
-    [super setSelected:selected animated:animated];
-
-    // Configure the view for the selected state
-}
 
 @end
