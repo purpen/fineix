@@ -36,7 +36,7 @@
 #import "ServiceViewController.h"
 #import "THNCollectionViewController.h"
 #import "THNProjectViewController.h"
-
+#import "THNMessageViewController.h"
 
 @interface MyPageViewController ()<THNNavigationBarItemsDelegate,UICollectionViewDelegate,UICollectionViewDataSource>
 {
@@ -414,9 +414,13 @@
 
 //消息按钮
 -(void)messageBtn:(UIButton*)sender{
-    MessageViewController *vc = [[MessageViewController alloc] init];
-    vc.countModel = _counterModel;
-    [self.navigationController pushViewController:vc animated:YES];
+//    MessageViewController *vc = [[MessageViewController alloc] init];
+//    vc.countModel = _counterModel;
+//    [self.navigationController pushViewController:vc animated:YES];
+
+    //  Fynn
+    THNMessageViewController *messageVC = [[THNMessageViewController alloc] init];
+    [self.navigationController pushViewController:messageVC animated:YES];
 }
 //订阅按钮
 -(void)subscribeBtn:(UIButton*)sender{

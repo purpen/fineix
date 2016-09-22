@@ -34,10 +34,10 @@ static NSString *const sceneTagsCellId = @"SceneTagsCellId";
     [self getContentWithTags:contentModel.des];
     
     CGSize size = [_content boundingRectWithSize:CGSizeMake(SCREEN_WIDTH - 50, 0)];
-    if (size.height*2 < 70) {
-        self.defaultCellHigh = size.height*2;
+    if (size.height*1.5 <= 65) {
+        self.defaultCellHigh = size.height*1.5 + 10;
     } else {
-        self.defaultCellHigh = 70;
+        self.defaultCellHigh = 65;
     }
     self.cellHigh = size.height*1.5;
 }
@@ -46,6 +46,7 @@ static NSString *const sceneTagsCellId = @"SceneTagsCellId";
 - (void)getContentWithTags:(NSString *)content {
     NSMutableParagraphStyle *paragraphStyle = [[NSMutableParagraphStyle alloc] init];
     paragraphStyle.lineSpacing = 5.0f;
+    paragraphStyle.alignment = NSTextAlignmentJustified;
     self.content.attributedText = [[NSAttributedString alloc] initWithString:content
                                                                   attributes:@{(NSString *)kCTForegroundColorAttributeName:(__bridge id)[UIColor colorWithHexString:@"#666666"].CGColor,
                                                                                NSFontAttributeName:[UIFont systemFontOfSize:12],
@@ -60,6 +61,7 @@ static NSString *const sceneTagsCellId = @"SceneTagsCellId";
         NSString *tagStr = [urlStr stringByAddingPercentEscapesUsingEncoding:(NSUTF8StringEncoding)];
         [self.content addLinkToURL:[NSURL URLWithString:tagStr] withRange:result.range];
     }
+    self.content.adjustsFontSizeToFitWidth = YES;
 }
 
 - (void)attributedLabel:(TTTAttributedLabel *)label didSelectLinkWithURL:(NSURL *)url {
@@ -87,7 +89,7 @@ static NSString *const sceneTagsCellId = @"SceneTagsCellId";
         make.left.equalTo(_graybackView.mas_left).with.offset(10);
         make.right.equalTo(_graybackView.mas_right).with.offset(-10);
         make.top.equalTo(_graybackView.mas_top).with.offset(5);
-        make.bottom.equalTo(_graybackView.mas_bottom).with.offset(-5);
+        make.bottom.equalTo(_graybackView.mas_bottom).with.offset(0);
     }];
     
 //    [self addSubview:self.moreIcon];
@@ -110,7 +112,6 @@ static NSString *const sceneTagsCellId = @"SceneTagsCellId";
 - (TTTAttributedLabel *)content {
     if (!_content) {
         _content = [[TTTAttributedLabel alloc] initWithFrame:CGRectMake(0, 0, 0, 0)];
-        _content.textColor = [UIColor colorWithHexString:@"#666666"];
         _content.numberOfLines = 0;
         _content.delegate = self;
         _content.enabledTextCheckingTypes = NSTextCheckingTypeLink;
@@ -123,6 +124,10 @@ static NSString *const sceneTagsCellId = @"SceneTagsCellId";
                                          (NSString *)kCTForegroundColorAttributeName:(__bridge id)[UIColor colorWithHexString:MAIN_COLOR].CGColor
                                          };
         _content.activeLinkAttributes = activelinkAttributes;
+        NSDictionary *inactiveLinkAttributes = @{(NSString *)kCTUnderlineStyleAttributeName:[NSNumber numberWithBool:NO],
+                                               (NSString *)kCTForegroundColorAttributeName:(__bridge id)[UIColor colorWithHexString:@"#666666"].CGColor
+                                               };
+        _content.inactiveLinkAttributes = inactiveLinkAttributes;
         _content.adjustsFontSizeToFitWidth = YES;
     }
     return _content;
@@ -142,7 +147,8 @@ static NSString *const sceneTagsCellId = @"SceneTagsCellId";
                                              options:\
                       NSStringDrawingTruncatesLastVisibleLine |
                       NSStringDrawingUsesLineFragmentOrigin |
-                      NSStringDrawingUsesFontLeading
+                      NSStringDrawingUsesFontLeading |
+                      NSStringDrawingUsesDeviceMetrics
                                           attributes:attribute
                                              context:nil].size;
     return textSize;

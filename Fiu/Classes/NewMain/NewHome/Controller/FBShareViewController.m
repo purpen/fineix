@@ -79,14 +79,6 @@ static NSString *const ShareURlText = @"我在Fiu浮游™寻找同路人；希�
     }];
 }
 
-- (UIImage *)shareImage {
-    UIGraphicsBeginImageContextWithOptions(self.shareView.bounds.size, NO, [UIScreen mainScreen].scale);
-    [self.shareView.layer renderInContext:UIGraphicsGetCurrentContext()];
-    UIImage * image = UIGraphicsGetImageFromCurrentImageContext();
-    UIGraphicsEndImageContext();
-    return image;
-}
-
 #pragma mark - 获取情境详情
 - (void)thn_getSceneInfoData:(NSString *)sceneId {
     [SVProgressHUD show];
@@ -94,6 +86,9 @@ static NSString *const ShareURlText = @"我在Fiu浮游™寻找同路人；希�
     [self.sceneInfoRequest startRequestSuccess:^(FBRequest *request, id result) {
         HomeSceneListRow *sceneModel = [[HomeSceneListRow alloc] initWithDictionary:[result valueForKey:@"data"]];
         [self.shareTopView setShareSceneData:sceneModel];
+        [self.styleOneView setShareSceneData:sceneModel];
+        [self.styleTwoView setShareSceneData:sceneModel];
+        [self.styleThreeView setShareSceneData:sceneModel];
         [SVProgressHUD dismiss];
     } failure:^(FBRequest *request, NSError *error) {
         NSLog(@"%@", error);
@@ -116,6 +111,9 @@ static NSString *const ShareURlText = @"我在Fiu浮游™寻找同路人；希�
     
     if (self.sceneModel.idField > 0) {
         [self.shareTopView setShareSceneData:self.sceneModel];
+        [self.styleOneView setShareSceneData:self.sceneModel];
+        [self.styleTwoView setShareSceneData:self.sceneModel];
+        [self.styleThreeView setShareSceneData:self.sceneModel];
     } else {
         [self thn_getSceneInfoData:self.sceneId];
     }
@@ -137,6 +135,27 @@ static NSString *const ShareURlText = @"我在Fiu浮游™寻找同路人；希�
     return _shareTopView;
 }
 
+- (ShareStyleViewOne *)styleOneView {
+    if (!_styleOneView) {
+        _styleOneView = [[ShareStyleViewOne alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT)];
+    }
+    return _styleOneView;
+}
+
+- (ShareStyleViewTwo *)styleTwoView {
+    if (!_styleTwoView) {
+        _styleTwoView = [[ShareStyleViewTwo alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT)];
+    }
+    return _styleTwoView;
+}
+
+- (ShareStyleViewThree *)styleThreeView {
+    if (!_styleThreeView) {
+        _styleThreeView = [[ShareStyleViewThree alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT)];
+    }
+    return _styleThreeView;
+}
+
 #pragma mark - 分享样式视图
 - (UICollectionView *)styleView {
     if (!_styleView) {
@@ -156,17 +175,47 @@ static NSString *const ShareURlText = @"我在Fiu浮游™寻找同路人；希�
 }
 
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
-    return 1;
+    return 4;
 }
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
     ShareStyleCollectionViewCell * cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"shareStyleCollectionViewCellId" forIndexPath:indexPath];
-    cell.styleImg.image = [UIImage imageNamed:[NSString stringWithFormat:@"Share_Style_%zi", indexPath.row]];
+    cell.styleImg.image = [UIImage imageNamed:[NSString stringWithFormat:@"Share_Style_000"]];
     return cell;
 }
 
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
+    [self thn_changeShareStyle:indexPath.row];
+}
 
+#pragma mark - 切换分享样式
+- (void)thn_changeShareStyle:(NSInteger)index {
+    switch (index) {
+        case 0:
+            [self thn_removeAndReplaceLastStyleView:self.shareTopView];
+            break;
+        case 1:
+            [self thn_removeAndReplaceLastStyleView:self.styleOneView];
+            break;
+        case 2:
+            [self thn_removeAndReplaceLastStyleView:self.styleTwoView];
+            break;
+        case 3:
+            [self thn_removeAndReplaceLastStyleView:self.styleThreeView];
+            break;
+            
+        default:
+            break;
+    }
+}
+
+- (void)thn_removeAndReplaceLastStyleView:(UIView *)style {
+    if (self.shareView.subviews.count > 0) {
+        [UIView animateWithDuration:.3 animations:^{
+            [self.shareView.subviews makeObjectsPerformSelector:@selector(removeFromSuperview)];
+            [self.shareView addSubview:style];
+        }];
+    }
 }
 
 #pragma mark - 顶部视图
@@ -233,6 +282,14 @@ static NSString *const ShareURlText = @"我在Fiu浮游™寻找同路人；希�
     } else {
 //        [SVProgressHUD showSuccessWithStatus:@"保存成功"];
     }
+}
+
+- (UIImage *)shareImage {
+    UIGraphicsBeginImageContextWithOptions(CGSizeMake(SCREEN_WIDTH, SCREEN_HEIGHT), NO, [UIScreen mainScreen].scale);
+    [self.shareView.layer renderInContext:UIGraphicsGetCurrentContext()];
+    UIImage *image = UIGraphicsGetImageFromCurrentImageContext();
+    UIGraphicsEndImageContext();
+    return image;
 }
 
 -(void)afterShare{

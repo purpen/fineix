@@ -57,14 +57,14 @@
     [_title mas_makeConstraints:^(MASConstraintMaker *make) {
         make.height.equalTo(@12);
         make.left.right.equalTo(self).with.offset(0);
-        make.top.equalTo(self.mas_top).with.offset(20);
+        make.top.equalTo(self.mas_top).with.offset(25);
     }];
     
     [self addSubview:self.peopleNum];
     [_peopleNum mas_makeConstraints:^(MASConstraintMaker *make) {
         make.height.equalTo(@12);
         make.left.right.equalTo(self).with.offset(0);
-        make.top.equalTo(_title.mas_bottom).with.offset(8);
+        make.top.equalTo(_title.mas_bottom).with.offset(5);
     }];
     
     [self addSubview:self.typeImage];

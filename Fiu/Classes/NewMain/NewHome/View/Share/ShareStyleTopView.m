@@ -7,17 +7,7 @@
 //
 
 #import "ShareStyleTopView.h"
-#import "HomeSceneListRow.h"
 #import "UILable+Frame.h"
-
-static CGFloat const desFont = 9.0f;
-static CGFloat const userNameFont = 10.0f;
-
-@interface ShareStyleTopView () {
-    NSString    *   _titleText;
-}
-
-@end
 
 @implementation ShareStyleTopView
 
@@ -25,25 +15,21 @@ static CGFloat const userNameFont = 10.0f;
     self = [super initWithFrame:frame];
     if (self) {
         self.backgroundColor = [UIColor whiteColor];
+        self.clipsToBounds = YES;
     }
     return self;
-}
-
-- (void)changeWithSearchText:(NSString *)title withDes:(NSString *)des {
-    _titleText = title;
-    [self.title mas_updateConstraints:^(MASConstraintMaker *make) {
-        make.size.mas_equalTo(CGSizeMake(SCREEN_WIDTH * 0.7, 56));
-    }];
-
-    [self changeContentLabStyle:des];
 }
 
 #pragma mark - 视图信息
 - (void)setShareSceneData:(HomeSceneListRow *)sceneModel {
     [self setViewUI];
     
-    [self.sceneImg downloadImage:sceneModel.coverUrl place:[UIImage imageNamed:@""]];
+    self.tagDataMarr = [NSMutableArray arrayWithArray:sceneModel.product];
+    if (self.tagDataMarr.count) {
+        [self setUserTagBtn];
+    }
     
+    [self.sceneImg downloadImage:sceneModel.coverUrl place:[UIImage imageNamed:@""]];
     if (sceneModel.title.length == 0) {
         self.title.hidden = YES;
         self.suTitle.hidden = YES;
@@ -52,10 +38,10 @@ static CGFloat const userNameFont = 10.0f;
         self.title.hidden = NO;
         self.suTitle.hidden = NO;
         
-        NSString *titleStr = [NSString stringWithFormat:@"    %@  ", [sceneModel.title substringToIndex:10]];
+        NSString *titleStr = [NSString stringWithFormat:@"     %@  ", [sceneModel.title substringToIndex:10]];
         self.title.text = titleStr;
         
-        NSString *suTitleStr = [NSString stringWithFormat:@"    %@  ", [sceneModel.title substringFromIndex:10]];
+        NSString *suTitleStr = [NSString stringWithFormat:@"     %@  ", [sceneModel.title substringFromIndex:10]];
         self.suTitle.text = suTitleStr;
         
         [self.suTitle mas_updateConstraints:^(MASConstraintMaker *make) {
@@ -71,32 +57,24 @@ static CGFloat const userNameFont = 10.0f;
         self.suTitle.hidden = YES;
         self.title.hidden = NO;
         
-        NSString *titleStr = [NSString stringWithFormat:@"    %@  ", sceneModel.title];
+        NSString *titleStr = [NSString stringWithFormat:@"     %@  ", sceneModel.title];
         self.title.text = titleStr;
         [self.title mas_updateConstraints:^(MASConstraintMaker *make) {
             make.width.equalTo(@([self getTextSizeWidth:titleStr fontSize:17].width));
         }];
     }
 
-    
-    [self.userHeader downloadImage:sceneModel.user.avatarUrl place:[UIImage imageNamed:@""]];
-    self.userName.text = sceneModel.user.nickname;
+    [self.userName setTitle:sceneModel.user.nickname forState:(UIControlStateNormal)];
     [self.time setTitle:sceneModel.createdAt forState:(UIControlStateNormal)];
-    NSString *timeStr = [NSString stringWithFormat:@"    %@", sceneModel.createdAt];
+    NSString *timeStr = [NSString stringWithFormat:@"     %@", sceneModel.createdAt];
     [self.time mas_updateConstraints:^(MASConstraintMaker *make) {
-        make.width.equalTo(@([self getTextSizeWidth:timeStr fontSize:17].width));
+        make.width.equalTo(@([self getTextSizeWidth:timeStr fontSize:12].width));
     }];
     
     if (sceneModel.address.length == 0) {
         self.address.hidden = YES;
     } else {
         [self.address setTitle:sceneModel.address forState:(UIControlStateNormal)];
-    }
-    
-    if (sceneModel.user.isExpert == 1) {
-        self.userVimg.hidden = NO;
-    } else {
-        self.userVimg.hidden = YES;
     }
     
     [self changeContentLabStyle:sceneModel.des];
@@ -115,22 +93,58 @@ static CGFloat const userNameFont = 10.0f;
     return retSize;
 }
 
+#pragma mark - 创建用户添加商品按钮
+- (void)setUserTagBtn {
+    for (UIView * view in self.subviews) {
+        if ([view isKindOfClass:[UserGoodsTag class]]) {
+            [view removeFromSuperview];
+        }
+    }
+    
+    for (NSInteger idx = 0; idx < self.tagDataMarr.count; ++ idx) {
+        CGFloat btnX = [[self.tagDataMarr[idx] valueForKey:@"x"] floatValue];
+        CGFloat btnY = [[self.tagDataMarr[idx] valueForKey:@"y"] floatValue];
+        NSString *title = [self.tagDataMarr[idx] valueForKey:@"title"];
+        NSInteger loc = [[self.tagDataMarr[idx] valueForKey:@"loc"] integerValue];
+        
+        UserGoodsTag * userTag = [[UserGoodsTag alloc] init];
+        userTag.userInteractionEnabled = NO;
+        userTag.dele.hidden = YES;
+        userTag.title.text = title;
+        userTag.isMove = NO;
+        CGFloat width = [userTag.title boundingRectWithSize:CGSizeMake(320, 0)].width;
+        if (width*1.3 > SCREEN_WIDTH/2) {
+            width = SCREEN_WIDTH/2;
+        } else {
+            width = [userTag.title boundingRectWithSize:CGSizeMake(320, 0)].width * 1.3;
+        }
+        
+        if (loc == 1) {
+            userTag.frame = CGRectMake((btnX*SCREEN_WIDTH) - ((width+25)-18), btnY*SCREEN_WIDTH-32+(SCREEN_WIDTH *0.133), width+25, 32);
+        } else if (loc == 2) {
+            userTag.frame = CGRectMake(btnX*SCREEN_WIDTH-44, btnY*SCREEN_WIDTH-32+(SCREEN_WIDTH *0.133), width+25, 32);
+        }
+        [userTag thn_setSceneImageUserGoodsTagLoc:loc];
+        [self addSubview:userTag];
+        [userTag sendSubviewToBack:self.title];
+    }
+}
+
 #pragma mark - 视图UI
 - (void)setViewUI {
-    [self addSubview:self.fiuLogo];
-    [_fiuLogo mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.equalTo(self.mas_left).with.offset(0);
-        make.top.equalTo(self.mas_top).with.offset(0);
-        make.size.mas_equalTo(CGSizeMake(SCREEN_WIDTH, 60));
+    [self addSubview:self.styleImage];
+    [_styleImage mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.size.mas_equalTo(CGSizeMake(SCREEN_WIDTH, SCREEN_HEIGHT));
+        make.centerX.centerY.equalTo(self);
     }];
     
     [self addSubview:self.sceneImg];
     [_sceneImg mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.equalTo(self.mas_left).with.offset(0);
-        make.top.equalTo(_fiuLogo.mas_bottom).with.offset(0);
+        make.top.equalTo(self.mas_top).with.offset(SCREEN_WIDTH *0.133);
         make.size.mas_equalTo(CGSizeMake(SCREEN_WIDTH, SCREEN_WIDTH));
     }];
-    
+
     [self addSubview:self.suTitle];
     [_suTitle mas_makeConstraints:^(MASConstraintMaker *make) {
         make.size.mas_equalTo(CGSizeMake(50, 25));
@@ -145,49 +159,44 @@ static CGFloat const userNameFont = 10.0f;
         make.bottom.equalTo(_sceneImg.mas_bottom).with.offset(-20);
     }];
     
+    [self addSubview:self.contentline];
+    [_contentline mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.size.mas_equalTo(CGSizeMake(SCREEN_WIDTH - 44, 0.5));
+        make.left.equalTo(self.mas_left).with.offset(22);
+        make.top.equalTo(_sceneImg.mas_bottom).with.offset(SCREEN_WIDTH *0.125);
+    }];
+
     [self addSubview:self.userView];
     [_userView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.size.mas_equalTo(CGSizeMake(SCREEN_WIDTH - 30, 50));
+        make.size.mas_equalTo(CGSizeMake(SCREEN_WIDTH - 44, 30));
+        make.top.equalTo(_contentline.mas_bottom).with.offset(SCREEN_WIDTH *0.12);
+        make.left.equalTo(self.mas_left).with.offset(22);
+    }];
+    
+    [self addSubview:self.sendText];
+    [_sendText mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.size.mas_equalTo(CGSizeMake(200, 15));
+        make.left.equalTo(self.mas_left).with.offset(SCREEN_WIDTH *0.21);
+        make.bottom.equalTo(self.mas_bottom).with.offset(-SCREEN_WIDTH *0.072);
+    }];
+    
+    [self addSubview:self.describe];
+    [_describe mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.width.equalTo(@(SCREEN_WIDTH - 44));
+        make.bottom.equalTo(_contentline.mas_top).with.offset(0);
         make.top.equalTo(_sceneImg.mas_bottom).with.offset(0);
-        make.left.equalTo(self.mas_left).with.offset(15);
+        make.left.equalTo(self.mas_left).with.offset(22);
     }];
-    
-    [self addSubview:self.grayView];
-    [_grayView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(_userView.mas_bottom).with.offset(0);
-        make.bottom.equalTo(self.mas_bottom).with.offset(0);
-        make.left.equalTo(self.mas_left).with.offset(15);
-        make.right.equalTo(self.mas_right).with.offset(-15);
-    }];
-    
-    [self addSubview:self.describeView];
-    [_describeView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.height.equalTo(@50);
-        make.top.left.equalTo(_grayView).with.offset(10);
-        make.right.equalTo(_grayView.mas_right).with.offset(-10);
-    }];
+}
 
-
-    [self addSubview:self.slogan];
-    [_slogan mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.size.mas_equalTo(CGSizeMake(63, 15));
-        make.top.equalTo(_describe.mas_bottom).with.offset(5);
-        make.left.equalTo(_describe.mas_left).with.offset(0);
-    }];
-    
-    [self addSubview:self.fiuSlogan];
-    [_fiuSlogan mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.size.mas_equalTo(CGSizeMake(90, 15));
-        make.left.equalTo(_grayView.mas_left).with.offset(10);
-        make.bottom.equalTo(_grayView.mas_bottom).with.offset(-5);
-    }];
-    
-    [self addSubview:self.qrCode];
-    [_qrCode mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.size.mas_equalTo(CGSizeMake(50, 50));
-        make.bottom.equalTo(_grayView.mas_bottom).with.offset(-10);
-        make.right.equalTo(_grayView.mas_right).with.offset(-10);
-    }];
+#pragma mark - 样式背景
+- (UIImageView *)styleImage {
+    if (!_styleImage) {
+        _styleImage = [[UIImageView alloc] init];
+        _styleImage.image = [UIImage imageNamed:@"share_style_0"];
+        _styleImage.contentMode = UIViewContentModeCenter;
+    }
+    return _styleImage;
 }
 
 #pragma mark - 用户信息
@@ -195,32 +204,18 @@ static CGFloat const userNameFont = 10.0f;
     if (!_userView) {
         _userView = [[UIView alloc] init];
         
-        [_userView addSubview:self.userHeader];
-        [_userHeader mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.size.mas_equalTo(CGSizeMake(30, 30));
-            make.centerY.equalTo(_userView);
-            make.left.equalTo(_userView.mas_left).with.offset(0);
-        }];
-        
-        [_userView addSubview:self.userVimg];
-        [_userVimg mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.size.mas_equalTo(CGSizeMake(10, 10));
-            make.bottom.equalTo(_userHeader.mas_bottom).with.offset(0);
-            make.left.equalTo(_userHeader.mas_right).with.offset(-9);
-        }];
-        
         [_userView addSubview:self.userName];
         [_userName mas_makeConstraints:^(MASConstraintMaker *make) {
             make.size.mas_equalTo(CGSizeMake(150, 14));
-            make.top.equalTo(_userHeader.mas_top).with.offset(0);
-            make.left.equalTo(_userHeader.mas_right).with.offset(6);
+            make.top.equalTo(_userView.mas_top).with.offset(0);
+            make.left.equalTo(_userView.mas_left).with.offset(1);
         }];
         
         [_userView addSubview:self.time];
         [_time mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.size.mas_equalTo(CGSizeMake(80, 12));
-            make.left.equalTo(_userName.mas_left).with.offset(0);
-            make.bottom.equalTo(_userHeader.mas_bottom).with.offset(0);
+            make.size.mas_equalTo(CGSizeMake(70, 12));
+            make.left.equalTo(_userView.mas_left).with.offset(0);
+            make.top.equalTo(_userName.mas_bottom).with.offset(3);
         }];
         
         [_userView addSubview:self.address];
@@ -230,26 +225,11 @@ static CGFloat const userNameFont = 10.0f;
             make.bottom.equalTo(_time.mas_bottom).with.offset(0);
             make.right.equalTo(_userView.mas_right).with.offset(-20);
         }];
-        
     }
     return _userView;
 }
 
 #pragma mark - 内容
-- (UIView *)describeView {
-    if (!_describeView) {
-        _describeView = [[UIView alloc] init];
-        
-        [_describeView addSubview:self.describe];
-        [_describe mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.top.equalTo(_describeView.mas_top).with.offset(0);
-            make.left.right.equalTo(_describeView).with.offset(0);
-            make.height.mas_equalTo(@40);
-        }];
-    }
-    return _describeView;
-}
-
 - (UIImageView *)sceneImg {
     if (!_sceneImg) {
         _sceneImg = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_WIDTH)];
@@ -259,33 +239,14 @@ static CGFloat const userNameFont = 10.0f;
     return _sceneImg;
 }
 
-#pragma mark - 加V标志
-- (UIImageView *)userVimg {
-    if (!_userVimg) {
-        _userVimg = [[UIImageView alloc] init];
-        _userVimg.image = [UIImage imageNamed:@"talent"];
-        _userVimg.contentMode = UIViewContentModeScaleToFill;
-        _userVimg.hidden = YES;
-    }
-    return _userVimg;
-}
-
-- (UIImageView *)userHeader {
-    if (!_userHeader) {
-        _userHeader = [[UIImageView alloc] init];
-        _userHeader.layer.cornerRadius = 30/2;
-        _userHeader.layer.masksToBounds = YES;
-        _userHeader.layer.borderColor = [UIColor colorWithHexString:@"#555555"].CGColor;
-        _userHeader.layer.borderWidth = 0.5f;
-    }
-    return _userHeader;
-}
-
-- (UILabel *)userName {
+- (UIButton *)userName {
     if (!_userName) {
-        _userName = [[UILabel alloc] init];
-        _userName.textColor = [UIColor colorWithHexString:@"#222222" alpha:1];
-        _userName.font = [UIFont systemFontOfSize:userNameFont];
+        _userName = [[UIButton alloc] init];
+        [_userName setImage:[UIImage imageNamed:@"icon_user_gray"] forState:(UIControlStateNormal)];
+        [_userName setTitleEdgeInsets:(UIEdgeInsetsMake(0, 5, 0, 0))];
+        _userName.titleLabel.font = [UIFont systemFontOfSize:10];
+        [_userName setTitleColor:[UIColor colorWithHexString:@"#999999"] forState:(UIControlStateNormal)];
+        _userName.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
     }
     return _userName;
 }
@@ -333,12 +294,12 @@ static CGFloat const userNameFont = 10.0f;
     return _suTitle;
 }
 
-- (UIImageView *)grayView {
-    if (!_grayView) {
-        _grayView = [[UIImageView alloc] init];
-        _grayView.backgroundColor = [UIColor colorWithHexString:@"#D8D8D8"];
+- (UILabel *)contentline {
+    if (!_contentline) {
+        _contentline = [[UILabel alloc] init];
+        _contentline.backgroundColor = [UIColor colorWithHexString:@"#E1E1E1"];
     }
-    return _grayView;
+    return _contentline;
 }
 
 - (UIButton *)describeIcon {
@@ -353,77 +314,41 @@ static CGFloat const userNameFont = 10.0f;
     if (!_describe) {
         _describe = [[UILabel alloc] init];
         _describe.textColor = [UIColor colorWithHexString:@"#666666" alpha:1];
-        _describe.font = [UIFont systemFontOfSize:desFont];
-        _describe.numberOfLines = 3;
+        _describe.font = [UIFont systemFontOfSize:10];
+        _describe.numberOfLines = 2;
     }
     return _describe;
 }
 
 - (void)changeContentLabStyle:(NSString *)str {
-    if (str.length == 0) {
-        self.slogan.hidden = YES;
-    }
-    
     CGFloat desHeigth = [self getTextSizeWidth:str fontSize:12].height;
-    
-    if (desHeigth <= 40) {
-        [self.describe mas_updateConstraints:^(MASConstraintMaker *make) {
-            make.height.equalTo(@(desHeigth));
-        }];
-        
-    } else if (desHeigth > 40) {
-        [self.describe mas_updateConstraints:^(MASConstraintMaker *make) {
-            make.height.equalTo(@40);
-        }];
-        
-        [_describeView addSubview:self.describeIcon];
+    if (desHeigth >= 20) {
+        [self addSubview:self.describeIcon];
         [_describeIcon mas_makeConstraints:^(MASConstraintMaker *make) {
             make.size.mas_equalTo(CGSizeMake(9, 9));
-            make.bottom.equalTo(_describe.mas_bottom).with.offset(-1);
             make.right.equalTo(_describe.mas_right).with.offset(0);
+            make.bottom.equalTo(_describe.mas_bottom).with.offset(-SCREEN_WIDTH *0.032);
         }];
     }
     
     NSMutableAttributedString * contentText = [[NSMutableAttributedString alloc] initWithString:str];
     NSMutableParagraphStyle * paragraphStyle = [[NSMutableParagraphStyle alloc] init];
     paragraphStyle.lineSpacing = 3.0f;
-    NSDictionary * textDict = @{NSParagraphStyleAttributeName :paragraphStyle};
+    paragraphStyle.alignment = NSTextAlignmentJustified;
+    NSDictionary * textDict = @{NSParagraphStyleAttributeName:paragraphStyle};
     [contentText addAttributes:textDict range:NSMakeRange(0, contentText.length)];
     self.describe.attributedText = contentText;
 }
 
-#pragma mark - Fiu
-- (UIImageView *)qrCode {
-    if (!_qrCode) {
-        _qrCode = [[UIImageView alloc] init];
-        _qrCode.image = [UIImage imageNamed:@"Share_QR_code"];
+#pragma mark - 注册送红包
+- (UILabel *)sendText {
+    if (!_sendText) {
+        _sendText = [[UILabel alloc] init];
+        _sendText.textColor = [UIColor colorWithHexString:fineixColor];
+        _sendText.font = [UIFont systemFontOfSize:9];
+        _sendText.text = NSLocalizedString(@"newSendRed", nil);
     }
-    return _qrCode;
-}
-
-- (UIButton *)fiuLogo {
-    if (!_fiuLogo) {
-        _fiuLogo = [[UIButton alloc] init];
-        [_fiuLogo setImage:[UIImage imageNamed:@"icon_logo_white"] forState:(UIControlStateNormal)];
-        _fiuLogo.backgroundColor = [UIColor blackColor];
-    }
-    return _fiuLogo;
-}
-
-- (UIButton *)slogan {
-    if (!_slogan) {
-        _slogan = [[UIButton alloc] init];
-        [_slogan setImage:[UIImage imageNamed:@"icon_slogan"] forState:(UIControlStateNormal)];
-    }
-    return _slogan;
-}
-
-- (UIButton *)fiuSlogan {
-    if (!_fiuSlogan) {
-        _fiuSlogan = [[UIButton alloc] init];
-        [_fiuSlogan setImage:[UIImage imageNamed:@"icon_shareSlogn"] forState:(UIControlStateNormal)];
-    }
-    return _fiuSlogan;
+    return _sendText;
 }
 
 @end

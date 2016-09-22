@@ -10,6 +10,7 @@
 #import "SystemInformsViewController.h"
 #import "CommentsViewController.h"
 #import "MessagesssViewController.h"
+#import "THNRemindViewController.h"
 #import "TipNumberView.h"
 #import "CounterModel.h"
 #import "SVProgressHUD.h"
@@ -40,7 +41,6 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     _page = 1;
-    // Do any additional setup after loading the view from its nib.
     self.delegate = self;
     self.navViewTitle.text = @"消息";
 }
@@ -121,7 +121,6 @@
             }];
         }
         
-        
         if ([self.countModel.fiu_comment_count intValue] == 0) {
             [self.fiu_comment_countTipviewNum removeFromSuperview];
         }else{
@@ -138,9 +137,7 @@
                 make.centerY.mas_equalTo(self.commentView.mas_centerY);
             }];
         }
-        
-        
-        
+
         if ([self.countModel.message_count intValue] == 0) {
             [self.message_countTipviewNum removeFromSuperview];
         }else{
@@ -157,9 +154,6 @@
                 make.centerY.mas_equalTo(self.messageView.mas_centerY);
             }];
         }
-        
-        
-        
         
         if ([self.countModel.alert_count intValue] == 0) {
             [self.alert_countTipviewNum removeFromSuperview];
@@ -181,7 +175,7 @@
         [SVProgressHUD dismiss];
         
     } failure:^(FBRequest *request, NSError *error) {
-        [SVProgressHUD showErrorWithStatus:@"加载失败"];
+        [SVProgressHUD showErrorWithStatus:[error localizedDescription]];
     }];
 }
 
@@ -202,8 +196,8 @@
 }
 
 - (IBAction)remindBtn:(UIButton *)sender {
-//    MentionedViewController *vc = [[MentionedViewController alloc] init];
-//    [self.navigationController pushViewController:vc animated:YES];
+    THNRemindViewController *remindVC = [[THNRemindViewController alloc] init];
+    [self.navigationController pushViewController:remindVC animated:YES];
 }
 
 

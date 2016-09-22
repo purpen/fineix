@@ -69,7 +69,7 @@
 - (UIImageView *)image {
     if (!_image) {
         _image = [[UIImageView alloc] init];
-        _image.backgroundColor = [UIColor colorWithHexString:@"#F8F8F8"];
+        _image.backgroundColor = [UIColor whiteColor];
     }
     return _image;
 }

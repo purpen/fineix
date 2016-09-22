@@ -28,7 +28,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-
+    
     [self thn_setTabBarController];
 }
 

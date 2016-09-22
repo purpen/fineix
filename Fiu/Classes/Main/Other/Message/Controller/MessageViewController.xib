@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="10117" systemVersion="15C50" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="11201" systemVersion="15G1004" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11161"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="MessageViewController">
@@ -21,38 +22,34 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="vHl-fU-CjN">
-                    <rect key="frame" x="0.0" y="68" width="375" height="44"/>
                     <subviews>
                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="icon_system informs" translatesAutoresizingMaskIntoConstraints="NO" id="PyG-N0-2mP">
-                            <rect key="frame" x="15" y="13" width="20" height="18"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="18" id="Fgw-zf-IsN"/>
                                 <constraint firstAttribute="width" constant="20" id="KzH-9f-hJv"/>
                             </constraints>
                         </imageView>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jmK-eV-aUW">
-                            <rect key="frame" x="45" y="7" width="271" height="30"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="30" id="AN2-Ns-reY"/>
                                 <constraint firstAttribute="width" constant="271" id="szu-RT-TCc"/>
                             </constraints>
                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
                             <state key="normal" title="系统通知">
-                                <color key="titleColor" red="0.40000000000000002" green="0.40000000000000002" blue="0.40000000000000002" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="titleColor" red="0.40000000000000002" green="0.40000000000000002" blue="0.40000000000000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             </state>
                             <connections>
                                 <action selector="systemSendBtn:" destination="-1" eventType="touchUpInside" id="gsW-qI-vAT"/>
                             </connections>
                         </button>
                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="entr" translatesAutoresizingMaskIntoConstraints="NO" id="DlD-Vm-5o8">
-                            <rect key="frame" x="351" y="15" width="9" height="15"/>
                             <constraints>
                                 <constraint firstAttribute="width" constant="9" id="6yI-SX-TdT"/>
                                 <constraint firstAttribute="height" constant="15" id="GtH-QD-GS7"/>
                             </constraints>
                         </imageView>
                     </subviews>
-                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     <constraints>
                         <constraint firstItem="PyG-N0-2mP" firstAttribute="leading" secondItem="vHl-fU-CjN" secondAttribute="leading" constant="15" id="Hlj-5R-lZY"/>
                         <constraint firstItem="DlD-Vm-5o8" firstAttribute="centerY" secondItem="vHl-fU-CjN" secondAttribute="centerY" id="Hu6-oI-e1p"/>
@@ -70,38 +67,34 @@
                     </variation>
                 </view>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="wjc-0e-vb2">
-                    <rect key="frame" x="0.0" y="113" width="375" height="44"/>
                     <subviews>
                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="icon_comment" translatesAutoresizingMaskIntoConstraints="NO" id="0IT-kq-WQq">
-                            <rect key="frame" x="15" y="13" width="20" height="18"/>
                             <constraints>
                                 <constraint firstAttribute="width" constant="20" id="dJb-vv-nqc"/>
                                 <constraint firstAttribute="height" constant="18" id="uul-G7-SsL"/>
                             </constraints>
                         </imageView>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="FkF-15-wZu">
-                            <rect key="frame" x="45" y="7" width="271" height="30"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="30" id="KMa-Nt-MmW"/>
                                 <constraint firstAttribute="width" constant="271" id="QHq-Zk-qkZ"/>
                             </constraints>
                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
                             <state key="normal" title="评论">
-                                <color key="titleColor" red="0.40000000000000002" green="0.40000000000000002" blue="0.40000000000000002" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="titleColor" red="0.40000000000000002" green="0.40000000000000002" blue="0.40000000000000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             </state>
                             <connections>
                                 <action selector="commentsBtn:" destination="-1" eventType="touchUpInside" id="2uW-nU-3zP"/>
                             </connections>
                         </button>
                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="entr" translatesAutoresizingMaskIntoConstraints="NO" id="dyn-zo-HgA">
-                            <rect key="frame" x="351" y="15" width="9" height="15"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="15" id="qaa-wo-YMu"/>
                                 <constraint firstAttribute="width" constant="9" id="rLK-oP-i8X"/>
                             </constraints>
                         </imageView>
                     </subviews>
-                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="44" id="Ud2-io-WSZ"/>
                         <constraint firstItem="FkF-15-wZu" firstAttribute="leading" secondItem="0IT-kq-WQq" secondAttribute="trailing" constant="10" id="VdV-Z4-Fxd"/>
@@ -119,38 +112,34 @@
                     </variation>
                 </view>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="NzV-At-ahF">
-                    <rect key="frame" x="0.0" y="158" width="375" height="44"/>
                     <subviews>
                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="icon_personal message" translatesAutoresizingMaskIntoConstraints="NO" id="XqL-dd-cpK">
-                            <rect key="frame" x="15" y="15" width="20" height="15"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="15" id="IS0-8g-09n"/>
                                 <constraint firstAttribute="width" constant="20" id="cMk-8S-D2o"/>
                             </constraints>
                         </imageView>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Yus-H9-kaI">
-                            <rect key="frame" x="45" y="7" width="271" height="30"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="30" id="0mU-Jj-Csh"/>
                                 <constraint firstAttribute="width" constant="271" id="pGW-Cn-BNv"/>
                             </constraints>
                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
                             <state key="normal" title="私信">
-                                <color key="titleColor" red="0.40000000000000002" green="0.40000000000000002" blue="0.40000000000000002" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="titleColor" red="0.40000000000000002" green="0.40000000000000002" blue="0.40000000000000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             </state>
                             <connections>
                                 <action selector="directMessagesBtn:" destination="-1" eventType="touchUpInside" id="ko4-sa-rkh"/>
                             </connections>
                         </button>
                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="entr" translatesAutoresizingMaskIntoConstraints="NO" id="Gam-Zy-wq4">
-                            <rect key="frame" x="351" y="15" width="9" height="15"/>
                             <constraints>
                                 <constraint firstAttribute="width" constant="9" id="93M-yv-Och"/>
                                 <constraint firstAttribute="height" constant="15" id="fMM-Ub-00z"/>
                             </constraints>
                         </imageView>
                     </subviews>
-                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     <constraints>
                         <constraint firstAttribute="trailing" secondItem="Gam-Zy-wq4" secondAttribute="trailing" constant="15" id="8Tz-VO-Vgg"/>
                         <constraint firstAttribute="width" secondItem="NzV-At-ahF" secondAttribute="height" multiplier="375:44" id="9W7-4l-vbI"/>
@@ -167,39 +156,35 @@
                         </mask>
                     </variation>
                 </view>
-                <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="fUP-O6-Mdo">
-                    <rect key="frame" x="0.0" y="203" width="375" height="44"/>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="fUP-O6-Mdo">
                     <subviews>
                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="remind" translatesAutoresizingMaskIntoConstraints="NO" id="0ba-7a-UPl">
-                            <rect key="frame" x="15" y="12" width="20" height="20"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="20" id="elW-o1-iG0"/>
                                 <constraint firstAttribute="width" constant="20" id="qsC-lR-hEj"/>
                             </constraints>
                         </imageView>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="nSI-vf-T2O">
-                            <rect key="frame" x="45" y="7" width="271" height="30"/>
                             <constraints>
                                 <constraint firstAttribute="width" constant="271" id="lFI-oi-yF7"/>
                                 <constraint firstAttribute="height" constant="30" id="ol5-kF-mfK"/>
                             </constraints>
                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
                             <state key="normal" title="提醒">
-                                <color key="titleColor" red="0.40000000000000002" green="0.40000000000000002" blue="0.40000000000000002" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="titleColor" red="0.40000000000000002" green="0.40000000000000002" blue="0.40000000000000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             </state>
                             <connections>
                                 <action selector="remindBtn:" destination="-1" eventType="touchUpInside" id="THn-4g-ahJ"/>
                             </connections>
                         </button>
                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="entr" translatesAutoresizingMaskIntoConstraints="NO" id="bUc-N6-ov3">
-                            <rect key="frame" x="351" y="15" width="9" height="15"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="15" id="f9U-g3-pxp"/>
                                 <constraint firstAttribute="width" constant="9" id="pzv-4X-qDf"/>
                             </constraints>
                         </imageView>
                     </subviews>
-                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     <constraints>
                         <constraint firstItem="bUc-N6-ov3" firstAttribute="centerY" secondItem="fUP-O6-Mdo" secondAttribute="centerY" id="4zx-eZ-Khq"/>
                         <constraint firstAttribute="trailing" secondItem="bUc-N6-ov3" secondAttribute="trailing" constant="15" id="8Gv-OO-dmk"/>
@@ -217,7 +202,7 @@
                     </variation>
                 </view>
             </subviews>
-            <color key="backgroundColor" red="0.96862745098039216" green="0.96862745098039216" blue="0.96862745098039216" alpha="1" colorSpace="calibratedRGB"/>
+            <color key="backgroundColor" red="0.96862745098039216" green="0.96862745098039216" blue="0.96862745098039216" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
                 <constraint firstItem="vHl-fU-CjN" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="7cN-XB-YoT"/>
                 <constraint firstItem="wjc-0e-vb2" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="9gk-9B-mzL"/>
@@ -235,7 +220,6 @@
                 <constraint firstItem="fUP-O6-Mdo" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="thL-lz-cpe"/>
                 <constraint firstAttribute="trailing" secondItem="NzV-At-ahF" secondAttribute="trailing" id="u4x-SS-aLr"/>
             </constraints>
-            <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
         </view>
     </objects>
     <resources>

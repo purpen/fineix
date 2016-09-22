@@ -475,6 +475,22 @@
 		D81281651CAA8532007CF08B /* BaiduMapAPI_Utils.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D81280D31CAA8532007CF08B /* BaiduMapAPI_Utils.framework */; };
 		D81281661CAA8532007CF08B /* JKDBHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = D81280D61CAA8532007CF08B /* JKDBHelper.m */; };
 		D81281671CAA8532007CF08B /* JKDBModel.m in Sources */ = {isa = PBXBuildFile; fileRef = D81280D81CAA8532007CF08B /* JKDBModel.m */; };
+		D81317E81D92237E007CE71C /* THNMessageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D81317E51D92237E007CE71C /* THNMessageViewController.m */; };
+		D81317FF1D9228BA007CE71C /* THNUserModel.m in Sources */ = {isa = PBXBuildFile; fileRef = D81317F81D9228BA007CE71C /* THNUserModel.m */; };
+		D81318001D9228BA007CE71C /* THNUserModelCounter.m in Sources */ = {isa = PBXBuildFile; fileRef = D81317FA1D9228BA007CE71C /* THNUserModelCounter.m */; };
+		D81318011D9228BA007CE71C /* THNUserModelData.m in Sources */ = {isa = PBXBuildFile; fileRef = D81317FC1D9228BA007CE71C /* THNUserModelData.m */; };
+		D81318021D9228BA007CE71C /* THNUserModelIdentify.m in Sources */ = {isa = PBXBuildFile; fileRef = D81317FE1D9228BA007CE71C /* THNUserModelIdentify.m */; };
+		D81318051D9230DC007CE71C /* THNMessageTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D81318041D9230DC007CE71C /* THNMessageTableViewCell.m */; };
+		D81318081D923A8C007CE71C /* THNRemindViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D81318071D923A8C007CE71C /* THNRemindViewController.m */; };
+		D813180B1D9266BE007CE71C /* THNRemindTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D813180A1D9266BE007CE71C /* THNRemindTableViewCell.m */; };
+		D81318161D926D74007CE71C /* THNRemindModel.m in Sources */ = {isa = PBXBuildFile; fileRef = D813180D1D926D74007CE71C /* THNRemindModel.m */; };
+		D81318171D926D74007CE71C /* THNRemindModelData.m in Sources */ = {isa = PBXBuildFile; fileRef = D813180F1D926D74007CE71C /* THNRemindModelData.m */; };
+		D81318181D926D74007CE71C /* THNRemindModelRow.m in Sources */ = {isa = PBXBuildFile; fileRef = D81318111D926D74007CE71C /* THNRemindModelRow.m */; };
+		D81318191D926D74007CE71C /* THNRemindModelSUser.m in Sources */ = {isa = PBXBuildFile; fileRef = D81318131D926D74007CE71C /* THNRemindModelSUser.m */; };
+		D813181A1D926D74007CE71C /* THNRemindModelTarget.m in Sources */ = {isa = PBXBuildFile; fileRef = D81318151D926D74007CE71C /* THNRemindModelTarget.m */; };
+		D813181D1D928DD4007CE71C /* ShareStyleViewOne.m in Sources */ = {isa = PBXBuildFile; fileRef = D813181C1D928DD4007CE71C /* ShareStyleViewOne.m */; };
+		D81318201D928DE3007CE71C /* ShareStyleViewTwo.m in Sources */ = {isa = PBXBuildFile; fileRef = D813181F1D928DE3007CE71C /* ShareStyleViewTwo.m */; };
+		D81318231D928DF4007CE71C /* ShareStyleViewThree.m in Sources */ = {isa = PBXBuildFile; fileRef = D81318221D928DF4007CE71C /* ShareStyleViewThree.m */; };
 		D81EA4011D2A52DD0032FAAB /* FiuBrandListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D81EA4001D2A52DD0032FAAB /* FiuBrandListViewController.m */; };
 		D83A64321C8E7765003DB8BB /* Photos.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D83A64311C8E7765003DB8BB /* Photos.framework */; };
 		D83A64331C8E7E93003DB8BB /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D802D7891C844101007AFA3D /* AVFoundation.framework */; };
@@ -1442,6 +1458,38 @@
 		D81280D61CAA8532007CF08B /* JKDBHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JKDBHelper.m; sourceTree = "<group>"; };
 		D81280D71CAA8532007CF08B /* JKDBModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JKDBModel.h; sourceTree = "<group>"; };
 		D81280D81CAA8532007CF08B /* JKDBModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JKDBModel.m; sourceTree = "<group>"; };
+		D81317E41D92237E007CE71C /* THNMessageViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THNMessageViewController.h; sourceTree = "<group>"; };
+		D81317E51D92237E007CE71C /* THNMessageViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THNMessageViewController.m; sourceTree = "<group>"; };
+		D81317F71D9228BA007CE71C /* THNUserModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THNUserModel.h; sourceTree = "<group>"; };
+		D81317F81D9228BA007CE71C /* THNUserModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THNUserModel.m; sourceTree = "<group>"; };
+		D81317F91D9228BA007CE71C /* THNUserModelCounter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THNUserModelCounter.h; sourceTree = "<group>"; };
+		D81317FA1D9228BA007CE71C /* THNUserModelCounter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THNUserModelCounter.m; sourceTree = "<group>"; };
+		D81317FB1D9228BA007CE71C /* THNUserModelData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THNUserModelData.h; sourceTree = "<group>"; };
+		D81317FC1D9228BA007CE71C /* THNUserModelData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THNUserModelData.m; sourceTree = "<group>"; };
+		D81317FD1D9228BA007CE71C /* THNUserModelIdentify.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THNUserModelIdentify.h; sourceTree = "<group>"; };
+		D81317FE1D9228BA007CE71C /* THNUserModelIdentify.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THNUserModelIdentify.m; sourceTree = "<group>"; };
+		D81318031D9230DC007CE71C /* THNMessageTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THNMessageTableViewCell.h; sourceTree = "<group>"; };
+		D81318041D9230DC007CE71C /* THNMessageTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THNMessageTableViewCell.m; sourceTree = "<group>"; };
+		D81318061D923A8C007CE71C /* THNRemindViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THNRemindViewController.h; sourceTree = "<group>"; };
+		D81318071D923A8C007CE71C /* THNRemindViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THNRemindViewController.m; sourceTree = "<group>"; };
+		D81318091D9266BE007CE71C /* THNRemindTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THNRemindTableViewCell.h; sourceTree = "<group>"; };
+		D813180A1D9266BE007CE71C /* THNRemindTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THNRemindTableViewCell.m; sourceTree = "<group>"; };
+		D813180C1D926D74007CE71C /* THNRemindModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THNRemindModel.h; sourceTree = "<group>"; };
+		D813180D1D926D74007CE71C /* THNRemindModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THNRemindModel.m; sourceTree = "<group>"; };
+		D813180E1D926D74007CE71C /* THNRemindModelData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THNRemindModelData.h; sourceTree = "<group>"; };
+		D813180F1D926D74007CE71C /* THNRemindModelData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THNRemindModelData.m; sourceTree = "<group>"; };
+		D81318101D926D74007CE71C /* THNRemindModelRow.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THNRemindModelRow.h; sourceTree = "<group>"; };
+		D81318111D926D74007CE71C /* THNRemindModelRow.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THNRemindModelRow.m; sourceTree = "<group>"; };
+		D81318121D926D74007CE71C /* THNRemindModelSUser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THNRemindModelSUser.h; sourceTree = "<group>"; };
+		D81318131D926D74007CE71C /* THNRemindModelSUser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THNRemindModelSUser.m; sourceTree = "<group>"; };
+		D81318141D926D74007CE71C /* THNRemindModelTarget.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THNRemindModelTarget.h; sourceTree = "<group>"; };
+		D81318151D926D74007CE71C /* THNRemindModelTarget.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THNRemindModelTarget.m; sourceTree = "<group>"; };
+		D813181B1D928DD4007CE71C /* ShareStyleViewOne.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShareStyleViewOne.h; sourceTree = "<group>"; };
+		D813181C1D928DD4007CE71C /* ShareStyleViewOne.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ShareStyleViewOne.m; sourceTree = "<group>"; };
+		D813181E1D928DE3007CE71C /* ShareStyleViewTwo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShareStyleViewTwo.h; sourceTree = "<group>"; };
+		D813181F1D928DE3007CE71C /* ShareStyleViewTwo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ShareStyleViewTwo.m; sourceTree = "<group>"; };
+		D81318211D928DF4007CE71C /* ShareStyleViewThree.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShareStyleViewThree.h; sourceTree = "<group>"; };
+		D81318221D928DF4007CE71C /* ShareStyleViewThree.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ShareStyleViewThree.m; sourceTree = "<group>"; };
 		D81EA3FF1D2A52DD0032FAAB /* FiuBrandListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FiuBrandListViewController.h; sourceTree = "<group>"; };
 		D81EA4001D2A52DD0032FAAB /* FiuBrandListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FiuBrandListViewController.m; sourceTree = "<group>"; };
 		D82562401D8FC4E400C3C2A7 /* Fiu.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Fiu.entitlements; sourceTree = "<group>"; };
@@ -3644,6 +3692,87 @@
 			path = DBModel;
 			sourceTree = "<group>";
 		};
+		D81317DE1D922173007CE71C /* NewOther */ = {
+			isa = PBXGroup;
+			children = (
+				D81317E91D92289D007CE71C /* PublicModel */,
+				D81317DF1D922199007CE71C /* NewMessage */,
+			);
+			path = NewOther;
+			sourceTree = "<group>";
+		};
+		D81317DF1D922199007CE71C /* NewMessage */ = {
+			isa = PBXGroup;
+			children = (
+				D81317E31D92237E007CE71C /* Controller */,
+				D81317E61D92237E007CE71C /* Model */,
+				D81317E71D92237E007CE71C /* View */,
+			);
+			path = NewMessage;
+			sourceTree = "<group>";
+		};
+		D81317E31D92237E007CE71C /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				D81317E41D92237E007CE71C /* THNMessageViewController.h */,
+				D81317E51D92237E007CE71C /* THNMessageViewController.m */,
+				D81318061D923A8C007CE71C /* THNRemindViewController.h */,
+				D81318071D923A8C007CE71C /* THNRemindViewController.m */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		D81317E61D92237E007CE71C /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				D813180C1D926D74007CE71C /* THNRemindModel.h */,
+				D813180D1D926D74007CE71C /* THNRemindModel.m */,
+				D813180E1D926D74007CE71C /* THNRemindModelData.h */,
+				D813180F1D926D74007CE71C /* THNRemindModelData.m */,
+				D81318101D926D74007CE71C /* THNRemindModelRow.h */,
+				D81318111D926D74007CE71C /* THNRemindModelRow.m */,
+				D81318121D926D74007CE71C /* THNRemindModelSUser.h */,
+				D81318131D926D74007CE71C /* THNRemindModelSUser.m */,
+				D81318141D926D74007CE71C /* THNRemindModelTarget.h */,
+				D81318151D926D74007CE71C /* THNRemindModelTarget.m */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		D81317E71D92237E007CE71C /* View */ = {
+			isa = PBXGroup;
+			children = (
+				D81318031D9230DC007CE71C /* THNMessageTableViewCell.h */,
+				D81318041D9230DC007CE71C /* THNMessageTableViewCell.m */,
+				D81318091D9266BE007CE71C /* THNRemindTableViewCell.h */,
+				D813180A1D9266BE007CE71C /* THNRemindTableViewCell.m */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		D81317E91D92289D007CE71C /* PublicModel */ = {
+			isa = PBXGroup;
+			children = (
+				D81317F61D9228BA007CE71C /* UserInfo */,
+			);
+			path = PublicModel;
+			sourceTree = "<group>";
+		};
+		D81317F61D9228BA007CE71C /* UserInfo */ = {
+			isa = PBXGroup;
+			children = (
+				D81317F71D9228BA007CE71C /* THNUserModel.h */,
+				D81317F81D9228BA007CE71C /* THNUserModel.m */,
+				D81317FB1D9228BA007CE71C /* THNUserModelData.h */,
+				D81317FC1D9228BA007CE71C /* THNUserModelData.m */,
+				D81317FD1D9228BA007CE71C /* THNUserModelIdentify.h */,
+				D81317FE1D9228BA007CE71C /* THNUserModelIdentify.m */,
+				D81317F91D9228BA007CE71C /* THNUserModelCounter.h */,
+				D81317FA1D9228BA007CE71C /* THNUserModelCounter.m */,
+			);
+			path = UserInfo;
+			sourceTree = "<group>";
+		};
 		D81EA3FB1D2A529A0032FAAB /* FiuBrandList */ = {
 			isa = PBXGroup;
 			children = (
@@ -3663,6 +3792,7 @@
 				D85174421D5878C8005F5722 /* NewCreate */,
 				D85174471D5878C8005F5722 /* NewMall */,
 				D851744B1D5878C8005F5722 /* NewMyCenter */,
+				D81317DE1D922173007CE71C /* NewOther */,
 			);
 			path = NewMain;
 			sourceTree = "<group>";
@@ -4171,6 +4301,12 @@
 				D8C095141D752F0B00908491 /* ShareStyleCollectionViewCell.m */,
 				D8C095101D752EC600908491 /* ShareStyleTopView.h */,
 				D8C095111D752EC600908491 /* ShareStyleTopView.m */,
+				D813181B1D928DD4007CE71C /* ShareStyleViewOne.h */,
+				D813181C1D928DD4007CE71C /* ShareStyleViewOne.m */,
+				D813181E1D928DE3007CE71C /* ShareStyleViewTwo.h */,
+				D813181F1D928DE3007CE71C /* ShareStyleViewTwo.m */,
+				D81318211D928DF4007CE71C /* ShareStyleViewThree.h */,
+				D81318221D928DF4007CE71C /* ShareStyleViewThree.m */,
 			);
 			path = Share;
 			sourceTree = "<group>";
@@ -4480,6 +4616,7 @@
 				D868090B1D6301C1002714B2 /* FBSubjectModelData.m in Sources */,
 				1F2A8FCA1CF40277005116C7 /* GoodsRow.m in Sources */,
 				1F2AFC961D88170B00DA6035 /* FriendCollectionViewCell.m in Sources */,
+				D81318081D923A8C007CE71C /* THNRemindViewController.m in Sources */,
 				1F2A8FC31CF40277005116C7 /* CommentModelUser.m in Sources */,
 				1F2AFDC71D8818A400DA6035 /* AllOderViewController.m in Sources */,
 				1FD10CB21D62E89D005898EE /* THNContentViewController.m in Sources */,
@@ -4536,6 +4673,7 @@
 				1F2A8F4E1CF40277005116C7 /* PhotoAlbumsTableViewCell.m in Sources */,
 				D80878E21D6AE3DF00C1FFA0 /* MallListGoodsCollectionViewCell.m in Sources */,
 				1F2AFC9E1D88170B00DA6035 /* ScenarioNonView.m in Sources */,
+				D813181D1D928DD4007CE71C /* ShareStyleViewOne.m in Sources */,
 				D8ACF4611D6DA2BD00DB79D8 /* THNSceneImageViewController.m in Sources */,
 				1F2AFD121D8817CC00DA6035 /* ProjectModel.m in Sources */,
 				1F2A8F4A1CF40277005116C7 /* FBFiltersCollectionViewCell.m in Sources */,
@@ -4554,6 +4692,7 @@
 				D8C095121D752EC600908491 /* ShareStyleTopView.m in Sources */,
 				1F2A90661CF40277005116C7 /* CommentsTableViewCell.m in Sources */,
 				D8C095181D7533D000908491 /* CatagoryFiuSceneModel.m in Sources */,
+				D81318021D9228BA007CE71C /* THNUserModelIdentify.m in Sources */,
 				1F2AFCA81D88170B00DA6035 /* THNSenecCollectionViewCell.m in Sources */,
 				1F2AFD8D1D88186C00DA6035 /* THNFocusUserModel.m in Sources */,
 				1F2AFC801D88170B00DA6035 /* FiuSceneData.m in Sources */,
@@ -4583,6 +4722,7 @@
 				D89CFE031D041819002701B8 /* GoodsDesTableViewCell.m in Sources */,
 				1F2AFC7B1D88170B00DA6035 /* CounterModel.m in Sources */,
 				1F2AFC701D88170B00DA6035 /* MyPageViewController.m in Sources */,
+				D81318171D926D74007CE71C /* THNRemindModelData.m in Sources */,
 				D8C094E01D752D2200908491 /* RollImageData.m in Sources */,
 				1F2AFD801D88186C00DA6035 /* THNLoginViewController.m in Sources */,
 				1F2AFDF01D8818EB00DA6035 /* AboutViewController.m in Sources */,
@@ -4599,6 +4739,7 @@
 				1F2AFC9B1D88170B00DA6035 /* MyQrCodeView.m in Sources */,
 				1F2AFC941D88170B00DA6035 /* FocusNonView.m in Sources */,
 				1F2AFCFA1D8817CC00DA6035 /* THNActiveRuleCollectionViewCell.m in Sources */,
+				D813181A1D926D74007CE71C /* THNRemindModelTarget.m in Sources */,
 				1F2AFCA61D88170B00DA6035 /* THNSenceTopicView.m in Sources */,
 				D86809211D662382002714B2 /* THNAddGoodsBtn.m in Sources */,
 				1F2A903F1CF40277005116C7 /* CityTableViewCell.m in Sources */,
@@ -4619,9 +4760,11 @@
 				1F2AFC6F1D88170B00DA6035 /* MyPageFocusOnViewController.m in Sources */,
 				1F2A906C1CF40277005116C7 /* NearQingViewController.m in Sources */,
 				1F2A902F1CF40277005116C7 /* DeliveryAddressCell.m in Sources */,
+				D813180B1D9266BE007CE71C /* THNRemindTableViewCell.m in Sources */,
 				1F2A901C1CF40277005116C7 /* BonusModel.m in Sources */,
 				D8ACF4571D6C1F9400DB79D8 /* THNMallSubjectModelProduct.m in Sources */,
 				1FF36E9A1D4F192400EB3C93 /* JDPayViewController.m in Sources */,
+				D81318161D926D74007CE71C /* THNRemindModel.m in Sources */,
 				D81EA4011D2A52DD0032FAAB /* FiuBrandListViewController.m in Sources */,
 				1F2AFD001D8817CC00DA6035 /* THNArticleDetalViewController.m in Sources */,
 				1F2AFD881D88186C00DA6035 /* NSNumber+UserModel.m in Sources */,
@@ -4682,6 +4825,7 @@
 				D8BE89D81D33401C00DE5029 /* FBBrandGoodsView.m in Sources */,
 				1F2A8FA71CF40277005116C7 /* GoodsBrandViewController.m in Sources */,
 				D8BE89DE1D334ADD00DE5029 /* BrandsListTableViewCell.m in Sources */,
+				D81317FF1D9228BA007CE71C /* THNUserModel.m in Sources */,
 				D851746F1D5AF586005F5722 /* THNSceneTagsCollectionViewCell.m in Sources */,
 				1F2AFD041D8817CC00DA6035 /* THNCuXiaoCollectionViewCell.m in Sources */,
 				1F2A8FC41CF40277005116C7 /* Goods.m in Sources */,
@@ -4693,6 +4837,7 @@
 				1F2AFC631D88170B00DA6035 /* ChangeSumaryViewController.m in Sources */,
 				1F2A90A01CF40277005116C7 /* SubscribePeopleViewController.m in Sources */,
 				1F2A90251CF40277005116C7 /* IdentityTagModel.m in Sources */,
+				D81317E81D92237E007CE71C /* THNMessageViewController.m in Sources */,
 				D806699C1D7014C8007FD81E /* HotUserListUser.m in Sources */,
 				1F2A8FC81CF40277005116C7 /* GoodsInfoData.m in Sources */,
 				D8C094FD1D752D5A00908491 /* HomeSceneListProduct.m in Sources */,
@@ -4700,11 +4845,13 @@
 				1F2A8FAC1CF40277005116C7 /* FBOrderSendWayViewController.m in Sources */,
 				D8C095051D752E2D00908491 /* FiuPeopleListTableViewCell.m in Sources */,
 				1F2AFD911D88186C00DA6035 /* THNPeopleView.m in Sources */,
+				D81318201D928DE3007CE71C /* ShareStyleViewTwo.m in Sources */,
 				1F2AFC921D88170B00DA6035 /* FindeFriendTableViewCell.m in Sources */,
 				1F2A902A1CF40277005116C7 /* DeliveryAddressViewController.m in Sources */,
 				1F2A90641CF40277005116C7 /* DirectMessageModel.m in Sources */,
 				1F2A8FB71CF40277005116C7 /* FiuBrandId.m in Sources */,
 				1F2A90231CF40277005116C7 /* TheOfficialCertificationViewController.m in Sources */,
+				D81318231D928DF4007CE71C /* ShareStyleViewThree.m in Sources */,
 				1F2A8F4B1CF40277005116C7 /* FBPictureCollectionViewCell.m in Sources */,
 				D869BD741D6036A000432423 /* ReportViewController.m in Sources */,
 				1F2AFDCD1D8818A400DA6035 /* MyOderInfoViewController.m in Sources */,
@@ -4716,6 +4863,7 @@
 				1F2A8FBD1CF40277005116C7 /* ChildTagsData.m in Sources */,
 				1F2A903E1CF40277005116C7 /* CityModel.m in Sources */,
 				1F2AFDD51D8818A400DA6035 /* TaoBaoOrderViewController.m in Sources */,
+				D81318001D9228BA007CE71C /* THNUserModelCounter.m in Sources */,
 				D8C094E11D752D2200908491 /* RollImageRow.m in Sources */,
 				1F2A8FC51CF40277005116C7 /* GoodsData.m in Sources */,
 				1F2AFD931D88186C00DA6035 /* THNTFCodeView.m in Sources */,
@@ -4733,6 +4881,7 @@
 				D8ACF45B1D6C9B3000DB79D8 /* THNSceneListViewController.m in Sources */,
 				1F2A8FDE1CF40277005116C7 /* InfoBrandTableViewCell.m in Sources */,
 				1F2AFC6A1D88170B00DA6035 /* HomePageViewController.m in Sources */,
+				D81318051D9230DC007CE71C /* THNMessageTableViewCell.m in Sources */,
 				1F2AFC821D88170B00DA6035 /* FiuSceneInfoCounter.m in Sources */,
 				D8C095201D7533FD00908491 /* ShareInfoData.m in Sources */,
 				D8ACF4701D6EBAAE00DB79D8 /* SearchThemeViewController.m in Sources */,
@@ -4748,6 +4897,7 @@
 				1F2AFC911D88170B00DA6035 /* ChanelView.m in Sources */,
 				D8C094FF1D752D5A00908491 /* HomeSceneListUser.m in Sources */,
 				1F2AFDF41D8818EB00DA6035 /* OptionViewController.m in Sources */,
+				D81318191D926D74007CE71C /* THNRemindModelSUser.m in Sources */,
 				1F2A901A1CF40277005116C7 /* HistoryBonusViewController.m in Sources */,
 				1F2A90A81CF40277005116C7 /* UserHeaderTableViewCell.m in Sources */,
 				D869BD6C1D6036A000432423 /* Comment.m in Sources */,
@@ -4829,6 +4979,7 @@
 				D85174601D598D1D005F5722 /* THNUserInfoTableViewCell.m in Sources */,
 				1F2AFC8E1D88170B00DA6035 /* BackgroundCollectionViewCell.m in Sources */,
 				1F2A90691CF40277005116C7 /* SystemInfoTableViewCell.m in Sources */,
+				D81318011D9228BA007CE71C /* THNUserModelData.m in Sources */,
 				1F2A90651CF40277005116C7 /* SystemNoticeModel.m in Sources */,
 				D80878D91D6AD4C800C1FFA0 /* NewGoodsCollectionViewCell.m in Sources */,
 				D8BE89DB1D33419000DE5029 /* FBBrandGoodsCollectionViewCell.m in Sources */,
@@ -4846,6 +4997,7 @@
 				1F2A905E1CF40277005116C7 /* MessagesssViewController.m in Sources */,
 				D8ACF4551D6C1F9400DB79D8 /* THNMallSubjectModel.m in Sources */,
 				D8C094E31D752D2200908491 /* SceneInfoCounter.m in Sources */,
+				D81318181D926D74007CE71C /* THNRemindModelRow.m in Sources */,
 				D87B69C01CC726BA00199EFE /* GroupHeaderView.m in Sources */,
 				D86809031D622049002714B2 /* FBImageScrollView.m in Sources */,
 				D8BE89E11D33509400DE5029 /* BrandListModel.m in Sources */,

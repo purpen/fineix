@@ -67,6 +67,13 @@
 "searchBrand" = "品牌";
 "searchTheme" = "主题";
 
+//  消息
+"Mes_SystemNotification" = "系统通知";
+"Mes_Comment" = "评论";
+"Mes_Chat" = "私信";
+"Mes_Remind" = "提醒";
+"Mes_Fans" = "粉丝";
+
 //  创建情境
 "next" = "继续";
 "album" = "相册";
@@ -130,6 +137,8 @@
 "likePeopleVC" = "赞的人";
 "suPeopleVC" = "订阅的人";
 "addSceneInfoVC" = "添加语境";
+"remindVC" = "提醒";
+"MessageVC" = "消息";
 
 //  提示信息
 "netError" = "网络连接错误";
@@ -290,6 +299,7 @@
 "NoGoods" = "购物车又空啦，回“好货”入点新货吧";
 "NoScene" = "在这里上传图片、选一段文字，即刻开启你的圈地之路吧";
 "loadingState" = "发现美好内容，极速加载中";
+"newSendRed" = "扫码注册送大礼包!!!";
 
 //性别
 "secret" = "保密";
