@@ -19,6 +19,7 @@
 #import "THNInformationViewController.h"
 #import "THNLoginViewController.h"
 #import "THNBingViewController.h"
+#import "THNRedEnvelopeView.h"
 
 @interface THNLoginRegisterViewController ()<FBRequestDelegate>
 @property (weak, nonatomic) IBOutlet UIButton *loginBtn;
@@ -119,7 +120,6 @@ static NSString *const thirdRegister = @"/auth/third_sign";//第三方登录接�
     FBRequest *request = [FBAPI postWithUrlString:thirdRegister requestDictionary:params delegate:self];
     [request startRequestSuccess:^(FBRequest *request, id result) {
         [SVProgressHUD dismiss];
-        NSLog(@"新浪登录  %@",result);
         //如果请求成功
         NSDictionary *dataDic = [result objectForKey:@"data"];
         if ([[dataDic objectForKey:@"has_user"] isEqualToNumber:@1]){
@@ -137,7 +137,12 @@ static NSString *const thirdRegister = @"/auth/third_sign";//第三方登录接�
                 THNInformationViewController *vc = [[THNInformationViewController alloc] init];
                 [self.navigationController pushViewController:vc animated:YES];
             }else{
-                [self dismissViewControllerAnimated:YES completion:nil];
+                [self dismissViewControllerAnimated:YES completion:^{
+                    if (entity.is_bonus == 1) {
+                        THNRedEnvelopeView *alartView = [[THNRedEnvelopeView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT)];
+                        [alartView thn_showRedEnvelopeViewOnWindowWithText:NSLocalizedString(@"SendOldRed", nil)];
+                    }
+                }];
             }
         }else{
             

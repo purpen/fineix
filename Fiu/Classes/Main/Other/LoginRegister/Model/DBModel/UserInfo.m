@@ -43,6 +43,7 @@
     entity.age_group = userInfo.age_group;
     entity.assets = userInfo.assets;
     entity.interest_scene_cate = userInfo.interest_scene_cate;
+    entity.is_bonus = userInfo.is_bonus;
 }
 
 @end

@@ -46,6 +46,11 @@
 @property(nonatomic,copy) NSString *avatar_url;
 /**  */
 @property(nonatomic,copy) NSString *province_id;
+/**
+ * is_bonus 是否送红包
+ * 0:否／ 1:是
+ */
+@property (nonatomic, assign) NSInteger is_bonus;
 
 
 - (void)updateUserInfoEntity;

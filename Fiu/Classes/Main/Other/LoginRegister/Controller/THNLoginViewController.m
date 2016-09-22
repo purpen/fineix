@@ -21,6 +21,7 @@
 #import "WeiboSDK.h"
 #import <TencentOpenAPI/QQApiInterface.h>
 #import "THNBingViewController.h"
+#import "THNRedEnvelopeView.h"
 
 @interface THNLoginViewController ()
 @property (weak, nonatomic) IBOutlet UITextField *phoneTF;
@@ -142,7 +143,12 @@ static NSString *const thirdRegister = @"/auth/third_sign";//第三方登录接�
             THNInformationViewController *vc = [[THNInformationViewController alloc] init];
             [self.navigationController pushViewController:vc animated:YES];
         }else{
-            [self dismissViewControllerAnimated:YES completion:nil];
+            [self dismissViewControllerAnimated:YES completion:^{
+                if (entity.is_bonus == 1) {
+                    THNRedEnvelopeView *alartView = [[THNRedEnvelopeView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT)];
+                    [alartView thn_showRedEnvelopeViewOnWindowWithText:NSLocalizedString(@"SendOldRed", nil)];
+                }
+            }];
         }
     } failure:^(FBRequest *request, NSError *error) {
         [SVProgressHUD dismiss];
@@ -202,7 +208,12 @@ static NSString *const thirdRegister = @"/auth/third_sign";//第三方登录接�
                 THNInformationViewController *vc = [[THNInformationViewController alloc] init];
                 [self.navigationController pushViewController:vc animated:YES];
             }else{
-                [self dismissViewControllerAnimated:YES completion:nil];
+                [self dismissViewControllerAnimated:YES completion:^{
+                    if (entity.is_bonus == 1) {
+                        THNRedEnvelopeView *alartView = [[THNRedEnvelopeView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT)];
+                        [alartView thn_showRedEnvelopeViewOnWindowWithText:NSLocalizedString(@"SendOldRed", nil)];
+                    }
+                }];
             }
         }else{
             

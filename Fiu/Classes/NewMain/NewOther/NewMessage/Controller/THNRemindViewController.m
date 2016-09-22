@@ -9,6 +9,8 @@
 #import "THNRemindViewController.h"
 #import "THNRemindTableViewCell.h"
 #import "THNRemindModelRow.h"
+#import "CommentNViewController.h"
+#import "THNSceneDetalViewController.h"
 
 static NSString *const URLRemind = @"/remind/getlist";
 static NSString *const remindTableCellId = @"RemindTableCellId";
@@ -38,10 +40,12 @@ static NSString *const remindTableCellId = @"RemindTableCellId";
     self.remindRequest = [FBAPI getWithUrlString:URLRemind requestDictionary:@{@"page":@"1", @"size":@"100000"} delegate:self];
     [self.remindRequest startRequestSuccess:^(FBRequest *request, id result) {
         NSArray *dataArr = [[result valueForKey:@"data"] valueForKey:@"rows"];
-        NSLog(@"＝＝＝＝＝ %@", dataArr);
         for (NSDictionary *dataDic in dataArr) {
             THNRemindModelRow *model = [[THNRemindModelRow alloc] initWithDictionary:dataDic];
             [self.remindMarr addObject:model];
+            [self.remindTypeMarr addObject:[NSString stringWithFormat:@"%zi", model.kind]];
+            [self.remindIdMarr addObject:[NSString stringWithFormat:@"%zi", model.targetObj.idField]];
+            [self.sceneUserIdMarr addObject:[NSString stringWithFormat:@"%zi", model.userId]];
         }
         [self.remindTable reloadData];
         
@@ -83,6 +87,20 @@ static NSString *const remindTableCellId = @"RemindTableCellId";
     return 70;
 }
 
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    NSInteger openType = [self.remindTypeMarr[indexPath.row] integerValue];
+    if (openType == 3) {
+        CommentNViewController * commentVC = [[CommentNViewController alloc] init];
+        commentVC.targetId = self.remindIdMarr[indexPath.row];
+        commentVC.sceneUserId = self.sceneUserIdMarr[indexPath.row];
+        [self.navigationController pushViewController:commentVC animated:YES];
+    } else {
+        THNSceneDetalViewController *sceneVC = [[THNSceneDetalViewController alloc] init];
+        sceneVC.sceneDetalId = self.remindIdMarr[indexPath.row];
+        [self.navigationController pushViewController:sceneVC animated:YES];
+    }
+}
+
 #pragma mark - 设置Nav
 - (void)thn_setNavigationViewUI {
     self.view.backgroundColor = [UIColor whiteColor];
@@ -97,6 +115,27 @@ static NSString *const remindTableCellId = @"RemindTableCellId";
         _remindMarr = [NSMutableArray array];
     }
     return _remindMarr;
+}
+
+- (NSMutableArray *)remindTypeMarr {
+    if (!_remindTypeMarr) {
+        _remindTypeMarr = [NSMutableArray array];
+    }
+    return _remindTypeMarr;
+}
+
+- (NSMutableArray *)remindIdMarr {
+    if (!_remindIdMarr) {
+        _remindIdMarr = [NSMutableArray array];
+    }
+    return _remindIdMarr;
+}
+
+- (NSMutableArray *)sceneUserIdMarr {
+    if (!_sceneUserIdMarr) {
+        _sceneUserIdMarr = [NSMutableArray array];
+    }
+    return _sceneUserIdMarr;
 }
 
 @end

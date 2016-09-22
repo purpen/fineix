@@ -16,6 +16,7 @@
 #import <Masonry.h>
 #import "THNPeopleView.h"
 #import <SVProgressHUD.h>
+#import "THNRedEnvelopeView.h"
 
 @interface THNFocusViewController ()<UIScrollViewDelegate>
 /**  */

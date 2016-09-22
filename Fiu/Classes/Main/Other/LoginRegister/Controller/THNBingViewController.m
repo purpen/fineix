@@ -20,6 +20,7 @@
 #import <TencentOpenAPI/QQApiInterface.h>
 #import "THNInformationViewController.h"
 #import "BindIngViewController.h"
+#import "THNRedEnvelopeView.h"
 
 @interface THNBingViewController ()
 
@@ -82,7 +83,12 @@ static NSString *const thirdRegisteredNotBinding = @"/auth/third_register_withou
             THNInformationViewController *vc = [[THNInformationViewController alloc] init];
             [self.navigationController pushViewController:vc animated:YES];
         }else{
-            [self dismissViewControllerAnimated:YES completion:nil];
+            [self dismissViewControllerAnimated:YES completion:^{
+                if (entity.is_bonus == 1) {
+                    THNRedEnvelopeView *alartView = [[THNRedEnvelopeView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT)];
+                    [alartView thn_showRedEnvelopeViewOnWindowWithText:NSLocalizedString(@"SendOldRed", nil)];
+                }
+            }];
         }
     } failure:^(FBRequest *request, NSError *error) {
         //如果请求失败提示失败信息

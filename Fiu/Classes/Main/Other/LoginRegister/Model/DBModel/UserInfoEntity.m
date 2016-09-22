@@ -52,6 +52,7 @@
     userInfo.assets = self.assets;
     userInfo.interest_scene_cate = self.interest_scene_cate;
     
+    userInfo.is_bonus = self.is_bonus;
     dispatch_async(dispatch_get_global_queue(0, 0), ^{
         [userInfo saveOrUpdate];
     });
@@ -75,6 +76,7 @@
     self.follow_count = @"";
     self.head_pic_url = @"";
     self.is_love = 0;
+    self.is_bonus = 0;
     self.isLogin = NO;
     self.is_expert = @"0";
     self.expert_label = @"";

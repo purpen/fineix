@@ -24,7 +24,11 @@
     [self.headerImg downloadImage:model.sendUser.avatarUrl place:[UIImage imageNamed:@""]];
     self.content.text = [NSString stringWithFormat:@"%@ %@ %@", model.sendUser.nickname, model.info, model.kindStr];
     self.time.text = model.createdAt;
-    [self.sceneImg downloadImage:model.targetObj.coverUrl place:[UIImage imageNamed:@""]];
+    if (model.kind == 3) {
+        [self.sceneImg downloadImage:model.commentTargetObj.coverUrl place:[UIImage imageNamed:@""]];
+    } else {
+        [self.sceneImg downloadImage:model.targetObj.coverUrl place:[UIImage imageNamed:@""]];
+    }
 }
 
 - (void)setCellUI {
@@ -66,7 +70,7 @@
         _headerImg.clipsToBounds = YES;
         _headerImg.layer.cornerRadius = 50/2;
         _headerImg.layer.masksToBounds = YES;
-        _headerImg.layer.borderColor = [UIColor colorWithHexString:@"#F8F8F8"].CGColor;
+        _headerImg.layer.borderColor = [UIColor colorWithHexString:@"#999999"].CGColor;
         _headerImg.layer.borderWidth = 0.5f;
         _headerImg.backgroundColor = [UIColor colorWithHexString:@"#F8F8F8"];
     }

@@ -499,6 +499,7 @@
 		D840F0931D93B57700CE9FB7 /* THNRemindModelRow.m in Sources */ = {isa = PBXBuildFile; fileRef = D840F08D1D93B57700CE9FB7 /* THNRemindModelRow.m */; };
 		D840F0941D93B57700CE9FB7 /* THNRemindModelTargetObj.m in Sources */ = {isa = PBXBuildFile; fileRef = D840F08F1D93B57700CE9FB7 /* THNRemindModelTargetObj.m */; };
 		D840F0971D93B87100CE9FB7 /* THNRedEnvelopeView.m in Sources */ = {isa = PBXBuildFile; fileRef = D840F0961D93B87100CE9FB7 /* THNRedEnvelopeView.m */; };
+		D840F09A1D93BBC100CE9FB7 /* THNRemindModelCommentObj.m in Sources */ = {isa = PBXBuildFile; fileRef = D840F0991D93BBC100CE9FB7 /* THNRemindModelCommentObj.m */; };
 		D84763381D427F7500C88379 /* AppDelegate+UMAnalytics.m in Sources */ = {isa = PBXBuildFile; fileRef = D84763371D427F7500C88379 /* AppDelegate+UMAnalytics.m */; };
 		D85174301D54AC58005F5722 /* THNHomeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D851742C1D54AC58005F5722 /* THNHomeViewController.m */; };
 		D85174371D5871C5005F5722 /* THNNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = D85174361D5871C5005F5722 /* THNNavigationController.m */; };
@@ -1501,6 +1502,8 @@
 		D840F08F1D93B57700CE9FB7 /* THNRemindModelTargetObj.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THNRemindModelTargetObj.m; sourceTree = "<group>"; };
 		D840F0951D93B87100CE9FB7 /* THNRedEnvelopeView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THNRedEnvelopeView.h; sourceTree = "<group>"; };
 		D840F0961D93B87100CE9FB7 /* THNRedEnvelopeView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THNRedEnvelopeView.m; sourceTree = "<group>"; };
+		D840F0981D93BBC100CE9FB7 /* THNRemindModelCommentObj.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THNRemindModelCommentObj.h; sourceTree = "<group>"; };
+		D840F0991D93BBC100CE9FB7 /* THNRemindModelCommentObj.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THNRemindModelCommentObj.m; sourceTree = "<group>"; };
 		D84763321D427E0100C88379 /* AdSupport.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AdSupport.framework; path = System/Library/Frameworks/AdSupport.framework; sourceTree = SDKROOT; };
 		D84763331D427E0100C88379 /* iAd.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = iAd.framework; path = System/Library/Frameworks/iAd.framework; sourceTree = SDKROOT; };
 		D84763361D427F7500C88379 /* AppDelegate+UMAnalytics.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "AppDelegate+UMAnalytics.h"; sourceTree = "<group>"; };
@@ -3738,6 +3741,8 @@
 				D840F08B1D93B57700CE9FB7 /* THNRemindModelReviceUser.m */,
 				D840F08E1D93B57700CE9FB7 /* THNRemindModelTargetObj.h */,
 				D840F08F1D93B57700CE9FB7 /* THNRemindModelTargetObj.m */,
+				D840F0981D93BBC100CE9FB7 /* THNRemindModelCommentObj.h */,
+				D840F0991D93BBC100CE9FB7 /* THNRemindModelCommentObj.m */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -4952,6 +4957,7 @@
 				1F2AFC7F1D88170B00DA6035 /* FiuScene.m in Sources */,
 				D869BD751D6036A000432423 /* ShareViewController.m in Sources */,
 				1F2A906B1CF40277005116C7 /* NearChangViewController.m in Sources */,
+				D840F09A1D93BBC100CE9FB7 /* THNRemindModelCommentObj.m in Sources */,
 				1F2AFC891D88170B00DA6035 /* THNSenceModel.m in Sources */,
 				1F2A8FCC1CF40277005116C7 /* OrderItems.m in Sources */,
 				1F2A90401CF40277005116C7 /* CityTwoTableViewCell.m in Sources */,

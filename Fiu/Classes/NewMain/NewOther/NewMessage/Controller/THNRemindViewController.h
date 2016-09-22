@@ -16,5 +16,8 @@
 @pro_strong FBRequest *remindRequest;
 @pro_strong UITableView *remindTable;
 @pro_strong NSMutableArray *remindMarr;
+@pro_strong NSMutableArray *remindTypeMarr;
+@pro_strong NSMutableArray *remindIdMarr;
+@pro_strong NSMutableArray *sceneUserIdMarr;
 
 @end

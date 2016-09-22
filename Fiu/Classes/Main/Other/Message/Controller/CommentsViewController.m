@@ -81,7 +81,7 @@
     [request startRequestSuccess:^(FBRequest *request, id result) {
         NSDictionary *dataDict = [result objectForKey:@"data"];
         NSArray *rowsAry = [dataDict objectForKey:@"rows"];
-        NSLog(@"评论  %@",result);
+        
         for (NSDictionary *rowsDict in rowsAry) {
             NSDictionary *usersDict = [rowsDict objectForKey:@"user"];
             UserInfo *model = [[UserInfo alloc] init];

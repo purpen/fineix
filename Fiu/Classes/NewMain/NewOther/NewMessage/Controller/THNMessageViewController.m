@@ -120,6 +120,7 @@ static NSString *const messageTableCellId = @"MessageTableCellId";
     } else if (indexPath.row == 4) {
         MyFansViewController *fansVC = [[MyFansViewController alloc] init];
         fansVC.userId = [self getLoginUserID];
+        fansVC.num = _userMessageModel.fansCount;
         [self.navigationController pushViewController:fansVC animated:YES];
     }
 }

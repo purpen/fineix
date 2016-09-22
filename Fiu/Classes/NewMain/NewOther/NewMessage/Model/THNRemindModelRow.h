@@ -2,11 +2,12 @@
 #import "THNRemindModelReviceUser.h"
 #import "THNRemindModelReviceUser.h"
 #import "THNRemindModelTargetObj.h"
+#import "THNRemindModelCommentObj.h"
 
 @interface THNRemindModelRow : NSObject
 
 @property (nonatomic, strong) NSString * idField;
-@property (nonatomic, strong) NSObject * commentTargetObj;
+@property (nonatomic, strong) THNRemindModelCommentObj * commentTargetObj;
 @property (nonatomic, strong) NSObject * commentTypeStr;
 @property (nonatomic, strong) NSObject * content;
 @property (nonatomic, strong) NSString * createdAt;
