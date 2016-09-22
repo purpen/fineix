@@ -9,6 +9,7 @@
 #import <UIKit/UIKit.h>
 @class UserInfo;
 @class TalentView;
+@class TipNumberView;
 
 @interface FocusOnTableViewCell : UITableViewCell
 
@@ -19,6 +20,7 @@
 @property(nonatomic,strong) UIView *lineView;
 /** v */
 @property (nonatomic, strong) TalentView *talentView;
+@property (nonatomic,strong) TipNumberView *alertTipviewNum;
 
 -(void)setUIWithModel:(UserInfo*)model andType:(NSNumber*)type;
 

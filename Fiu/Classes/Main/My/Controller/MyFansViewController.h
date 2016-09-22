@@ -9,6 +9,10 @@
 #import "FBViewController.h"
 
 @interface MyFansViewController : FBViewController
+
 @property(nonatomic,strong) UITableView *mytableView;
 @property(nonatomic,copy) NSString *userId;
+/**有几条新通知  */
+@property (nonatomic, assign) NSInteger num;
+
 @end
