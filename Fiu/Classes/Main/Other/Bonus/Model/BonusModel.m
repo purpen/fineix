@@ -29,6 +29,14 @@
     if(![dictionary[@"min_amount"] isKindOfClass:[NSNull class]]){
         self.minAmount = dictionary[@"min_amount"];
     }
+    
+    if(![dictionary[@"product_id"] isKindOfClass:[NSNull class]]){
+        self.product_id = [dictionary[@"product_id"] integerValue];
+    }
+    
+    if(![dictionary[@"product_name"] isKindOfClass:[NSNull class]]){
+        self.product_name = dictionary[@"product_name"];
+    }
 
     return self;
 }
