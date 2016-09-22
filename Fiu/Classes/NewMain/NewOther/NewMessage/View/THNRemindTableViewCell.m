@@ -21,9 +21,10 @@
 }
 
 - (void)thn_setRemindData:(THNRemindModelRow *)model {
-    [self.headerImg downloadImage:model.sUser.avatarUrl place:[UIImage imageNamed:@""]];
-    self.content.text = [NSString stringWithFormat:@"%@%@%@", model.sUser.nickname, model.info, model.kindStr];
+    [self.headerImg downloadImage:model.sendUser.avatarUrl place:[UIImage imageNamed:@""]];
+    self.content.text = [NSString stringWithFormat:@"%@ %@ %@", model.sendUser.nickname, model.info, model.kindStr];
     self.time.text = model.createdAt;
+    [self.sceneImg downloadImage:model.targetObj.coverUrl place:[UIImage imageNamed:@""]];
 }
 
 - (void)setCellUI {
@@ -65,7 +66,9 @@
         _headerImg.clipsToBounds = YES;
         _headerImg.layer.cornerRadius = 50/2;
         _headerImg.layer.masksToBounds = YES;
-        _headerImg.backgroundColor = [UIColor orangeColor];
+        _headerImg.layer.borderColor = [UIColor colorWithHexString:@"#F8F8F8"].CGColor;
+        _headerImg.layer.borderWidth = 0.5f;
+        _headerImg.backgroundColor = [UIColor colorWithHexString:@"#F8F8F8"];
     }
     return _headerImg;
 }
@@ -75,7 +78,6 @@
         _content = [[UILabel alloc] init];
         _content.textColor = [UIColor colorWithHexString:@"#666666"];
         _content.font = [UIFont systemFontOfSize:12];
-        _content.text = @"Fynn收藏了你的情境";
     }
     return _content;
 }
@@ -85,7 +87,6 @@
         _time = [[UILabel alloc] init];
         _time.textColor = [UIColor colorWithHexString:@"#999999"];
         _time.font = [UIFont systemFontOfSize:11];
-        _time.text = @"2016-05-11";
     }
     return _time;
 }
@@ -95,7 +96,7 @@
         _sceneImg = [[UIImageView alloc] init];
         _sceneImg.contentMode = UIViewContentModeScaleAspectFill;
         _sceneImg.clipsToBounds = YES;
-        _sceneImg.backgroundColor = [UIColor orangeColor];
+        _headerImg.backgroundColor = [UIColor colorWithHexString:@"#F8F8F8"];
     }
     return _sceneImg;
 }

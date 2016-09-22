@@ -1,6 +1,6 @@
 #import <UIKit/UIKit.h>
 
-@interface THNRemindModelSUser : NSObject
+@interface THNRemindModelReviceUser : NSObject
 
 @property (nonatomic, assign) NSInteger idField;
 @property (nonatomic, strong) NSString * avatarUrl;

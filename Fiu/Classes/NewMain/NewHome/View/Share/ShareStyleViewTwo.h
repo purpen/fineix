@@ -23,7 +23,6 @@
 @pro_strong UILabel *suTitle;
 @pro_strong UIButton *time;
 @pro_strong UIButton *address;
-@pro_strong UILabel *contentline;
 @pro_strong UILabel *sendText;
 @pro_strong NSMutableArray *tagDataMarr;
 

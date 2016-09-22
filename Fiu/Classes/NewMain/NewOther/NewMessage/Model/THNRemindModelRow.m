@@ -7,6 +7,7 @@
 #import "THNRemindModelRow.h"
 
 NSString *const kTHNRemindModelRowIdField = @"_id";
+NSString *const kTHNRemindModelRowCommentTargetObj = @"comment_target_obj";
 NSString *const kTHNRemindModelRowCommentTypeStr = @"comment_type_str";
 NSString *const kTHNRemindModelRowContent = @"content";
 NSString *const kTHNRemindModelRowCreatedAt = @"created_at";
@@ -19,11 +20,11 @@ NSString *const kTHNRemindModelRowKindStr = @"kind_str";
 NSString *const kTHNRemindModelRowParentRelatedId = @"parent_related_id";
 NSString *const kTHNRemindModelRowReaded = @"readed";
 NSString *const kTHNRemindModelRowRelatedId = @"related_id";
-NSString *const kTHNRemindModelRowSUser = @"s_user";
+NSString *const kTHNRemindModelRowReviceUser = @"revice_user";
 NSString *const kTHNRemindModelRowSUserId = @"s_user_id";
-NSString *const kTHNRemindModelRowTarget = @"target";
+NSString *const kTHNRemindModelRowSendUser = @"send_user";
+NSString *const kTHNRemindModelRowTargetObj = @"target_obj";
 NSString *const kTHNRemindModelRowUpdatedOn = @"updated_on";
-NSString *const kTHNRemindModelRowUser = @"user";
 NSString *const kTHNRemindModelRowUserId = @"user_id";
 
 @interface THNRemindModelRow ()
@@ -42,6 +43,9 @@ NSString *const kTHNRemindModelRowUserId = @"user_id";
 	self = [super init];
 	if(![dictionary[kTHNRemindModelRowIdField] isKindOfClass:[NSNull class]]){
 		self.idField = dictionary[kTHNRemindModelRowIdField];
+	}	
+	if(![dictionary[kTHNRemindModelRowCommentTargetObj] isKindOfClass:[NSNull class]]){
+		self.commentTargetObj = dictionary[kTHNRemindModelRowCommentTargetObj];
 	}	
 	if(![dictionary[kTHNRemindModelRowCommentTypeStr] isKindOfClass:[NSNull class]]){
 		self.commentTypeStr = dictionary[kTHNRemindModelRowCommentTypeStr];
@@ -85,24 +89,24 @@ NSString *const kTHNRemindModelRowUserId = @"user_id";
 		self.relatedId = [dictionary[kTHNRemindModelRowRelatedId] integerValue];
 	}
 
-	if(![dictionary[kTHNRemindModelRowSUser] isKindOfClass:[NSNull class]]){
-		self.sUser = [[THNRemindModelSUser alloc] initWithDictionary:dictionary[kTHNRemindModelRowSUser]];
+	if(![dictionary[kTHNRemindModelRowReviceUser] isKindOfClass:[NSNull class]]){
+		self.reviceUser = [[THNRemindModelReviceUser alloc] initWithDictionary:dictionary[kTHNRemindModelRowReviceUser]];
 	}
 
 	if(![dictionary[kTHNRemindModelRowSUserId] isKindOfClass:[NSNull class]]){
 		self.sUserId = [dictionary[kTHNRemindModelRowSUserId] integerValue];
 	}
 
-	if(![dictionary[kTHNRemindModelRowTarget] isKindOfClass:[NSNull class]]){
-		self.target = [[THNRemindModelTarget alloc] initWithDictionary:dictionary[kTHNRemindModelRowTarget]];
+	if(![dictionary[kTHNRemindModelRowSendUser] isKindOfClass:[NSNull class]]){
+		self.sendUser = [[THNRemindModelReviceUser alloc] initWithDictionary:dictionary[kTHNRemindModelRowSendUser]];
+	}
+
+	if(![dictionary[kTHNRemindModelRowTargetObj] isKindOfClass:[NSNull class]]){
+		self.targetObj = [[THNRemindModelTargetObj alloc] initWithDictionary:dictionary[kTHNRemindModelRowTargetObj]];
 	}
 
 	if(![dictionary[kTHNRemindModelRowUpdatedOn] isKindOfClass:[NSNull class]]){
 		self.updatedOn = [dictionary[kTHNRemindModelRowUpdatedOn] integerValue];
-	}
-
-	if(![dictionary[kTHNRemindModelRowUser] isKindOfClass:[NSNull class]]){
-		self.user = [[THNRemindModelSUser alloc] initWithDictionary:dictionary[kTHNRemindModelRowUser]];
 	}
 
 	if(![dictionary[kTHNRemindModelRowUserId] isKindOfClass:[NSNull class]]){

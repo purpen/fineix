@@ -64,8 +64,8 @@
         }];
     }
 
-    [self.userName setTitle:sceneModel.user.nickname forState:(UIControlStateNormal)];
-    [self.time setTitle:sceneModel.createdAt forState:(UIControlStateNormal)];
+    [self.userName setTitle:[NSString stringWithFormat:@" %@", sceneModel.user.nickname] forState:(UIControlStateNormal)];
+    [self.time setTitle:[NSString stringWithFormat:@" %@", sceneModel.createdAt] forState:(UIControlStateNormal)];
     NSString *timeStr = [NSString stringWithFormat:@"     %@", sceneModel.createdAt];
     [self.time mas_updateConstraints:^(MASConstraintMaker *make) {
         make.width.equalTo(@([self getTextSizeWidth:timeStr fontSize:12].width));
@@ -74,7 +74,7 @@
     if (sceneModel.address.length == 0) {
         self.address.hidden = YES;
     } else {
-        [self.address setTitle:sceneModel.address forState:(UIControlStateNormal)];
+        [self.address setTitle:[NSString stringWithFormat:@" %@", sceneModel.address] forState:(UIControlStateNormal)];
     }
     
     [self changeContentLabStyle:sceneModel.des];
@@ -141,7 +141,7 @@
     [self addSubview:self.sceneImg];
     [_sceneImg mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.equalTo(self.mas_left).with.offset(0);
-        make.top.equalTo(self.mas_top).with.offset(SCREEN_WIDTH *0.133);
+        make.top.equalTo(self.mas_top).with.offset(SCREEN_WIDTH *0.14);
         make.size.mas_equalTo(CGSizeMake(SCREEN_WIDTH, SCREEN_WIDTH));
     }];
 
@@ -223,7 +223,7 @@
             make.height.equalTo(@12);
             make.left.equalTo(_time.mas_right).with.offset(5);
             make.bottom.equalTo(_time.mas_bottom).with.offset(0);
-            make.right.equalTo(_userView.mas_right).with.offset(-20);
+            make.right.equalTo(_userView.mas_right).with.offset(0);
         }];
     }
     return _userView;
@@ -277,7 +277,7 @@
 - (UILabel *)title {
     if (!_title) {
         _title = [[UILabel alloc] init];
-        _title.backgroundColor = [UIColor colorWithHexString:@"#000000" alpha:0.8];
+        _title.backgroundColor = [UIColor colorWithHexString:@"#000000" alpha:1];
         _title.textColor = [UIColor colorWithHexString:@"#FFFFFF"];
         _title.font = [UIFont systemFontOfSize:17];
     }
@@ -287,7 +287,7 @@
 - (UILabel *)suTitle {
     if (!_suTitle) {
         _suTitle = [[UILabel alloc] init];
-        _suTitle.backgroundColor = [UIColor colorWithHexString:@"#000000" alpha:0.8];
+        _suTitle.backgroundColor = [UIColor colorWithHexString:@"#000000" alpha:1];
         _suTitle.textColor = [UIColor colorWithHexString:@"#FFFFFF"];
         _suTitle.font = [UIFont systemFontOfSize:17];
     }
@@ -322,12 +322,12 @@
 
 - (void)changeContentLabStyle:(NSString *)str {
     CGFloat desHeigth = [self getTextSizeWidth:str fontSize:12].height;
-    if (desHeigth >= 20) {
+    if (desHeigth >= 20 && str.length >= 55) {
         [self addSubview:self.describeIcon];
         [_describeIcon mas_makeConstraints:^(MASConstraintMaker *make) {
             make.size.mas_equalTo(CGSizeMake(9, 9));
             make.right.equalTo(_describe.mas_right).with.offset(0);
-            make.bottom.equalTo(_describe.mas_bottom).with.offset(-SCREEN_WIDTH *0.032);
+            make.top.equalTo(_describe.mas_centerY).with.offset(3);
         }];
     }
     

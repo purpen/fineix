@@ -21,6 +21,7 @@
 @pro_strong UIButton *describeIcon;     //  描述尾部
 @pro_strong UILabel *title;
 @pro_strong UILabel *suTitle;
+@pro_strong UIView *timeView;
 @pro_strong UIButton *time;
 @pro_strong UIButton *address;
 @pro_strong UILabel *sendText;

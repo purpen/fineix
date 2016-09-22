@@ -67,25 +67,8 @@
         }];
     }
     
-    [self.userName setTitle:sceneModel.user.nickname forState:(UIControlStateNormal)];
-    [self.time setTitle:sceneModel.createdAt forState:(UIControlStateNormal)];
-    NSString *timeStr = [NSString stringWithFormat:@"     %@", sceneModel.createdAt];
-    [self.time mas_updateConstraints:^(MASConstraintMaker *make) {
-        make.width.equalTo(@([self getTextSizeWidth:timeStr fontSize:12].width));
-    }];
-
-    if (sceneModel.address.length == 0) {
-        self.address.hidden = YES;
-        [self.time mas_remakeConstraints:^(MASConstraintMaker *make) {
-            make.width.equalTo(@([self getTextSizeWidth:timeStr fontSize:12].width));
-            make.height.equalTo(@(12));
-            make.top.equalTo(_userName.mas_bottom).with.offset(3);
-            make.centerX.equalTo(self);
-        }];
-        
-    } else {
-        [self.address setTitle:sceneModel.address forState:(UIControlStateNormal)];
-    }
+    [self.userName setTitle:[NSString stringWithFormat:@" %@", sceneModel.user.nickname] forState:(UIControlStateNormal)];
+    [self thn_getTextChangeFrame:sceneModel.createdAt withAddress:sceneModel.address];
     
     [self changeContentLabStyle:sceneModel.des];
 }
@@ -101,6 +84,38 @@
                                      attributes:attribute
                                         context:nil].size;
     return retSize;
+}
+
+
+- (void)thn_getTextChangeFrame:(NSString *)time withAddress:(NSString *)address {
+    [self.time setTitle:[NSString stringWithFormat:@" %@", time] forState:(UIControlStateNormal)];
+    NSString *timeStr = [NSString stringWithFormat:@"     %@", time];
+    NSString *addressStr = [NSString stringWithFormat:@"   %@", address];
+    CGFloat timeWidth = [self getTextSizeWidth:timeStr fontSize:12].width;
+    CGFloat addressWidth = [self getTextSizeWidth:addressStr fontSize:12].width;
+    
+    [self.time mas_updateConstraints:^(MASConstraintMaker *make) {
+        make.width.equalTo(@(timeWidth));
+    }];
+    
+    if (address.length == 0) {
+        self.address.hidden = YES;
+        [self.time mas_remakeConstraints:^(MASConstraintMaker *make) {
+            make.width.equalTo(@(timeWidth));
+            make.height.equalTo(@(12));
+            make.top.equalTo(_userName.mas_bottom).with.offset(3);
+            make.centerX.equalTo(self);
+        }];
+    } else {
+        [self.address setTitle:[NSString stringWithFormat:@" %@", address] forState:(UIControlStateNormal)];
+        [self.address mas_updateConstraints:^(MASConstraintMaker *make) {
+            make.width.equalTo(@(addressWidth));
+        }];
+        
+        [self.timeView mas_updateConstraints:^(MASConstraintMaker *make) {
+            make.width.equalTo(@(timeWidth + addressWidth));
+        }];
+    }
 }
 
 #pragma mark - 创建用户添加商品按钮
@@ -214,19 +229,11 @@
             make.centerX.equalTo(_userView);
         }];
         
-        [_userView addSubview:self.time];
-        [_time mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.size.mas_equalTo(CGSizeMake(70, 12));
-            make.right.equalTo(_userView.mas_centerX).with.offset(0);
+        [_userView addSubview:self.timeView];
+        [_timeView mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.size.mas_equalTo(CGSizeMake(SCREEN_WIDTH - 80, 12));
             make.top.equalTo(_userName.mas_bottom).with.offset(3);
-        }];
-        
-        [_userView addSubview:self.address];
-        [_address mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.height.equalTo(@12);
-            make.left.equalTo(_time.mas_right).with.offset(0);
-            make.bottom.equalTo(_time.mas_bottom).with.offset(0);
-            make.right.equalTo(_userView.mas_right).with.offset(-20);
+            make.centerX.equalTo(_userView);
         }];
     }
     return _userView;
@@ -252,6 +259,27 @@
         _userName.contentHorizontalAlignment = UIControlContentHorizontalAlignmentCenter;
     }
     return _userName;
+}
+
+- (UIView *)timeView {
+    if (!_timeView) {
+        _timeView = [[UIView alloc] init];
+        
+        [_timeView addSubview:self.time];
+        [_time mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.size.mas_equalTo(CGSizeMake(70, 12));
+            make.left.equalTo(_timeView.mas_left).with.offset(5);
+            make.top.equalTo(_timeView.mas_top).with.offset(0);
+        }];
+        
+        [_timeView addSubview:self.address];
+        [_address mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.size.mas_equalTo(CGSizeMake(70, 12));
+            make.left.equalTo(_time.mas_right).with.offset(5);
+            make.bottom.equalTo(_time.mas_bottom).with.offset(0);
+        }];
+    }
+    return _timeView;
 }
 
 - (UIButton *)time {
@@ -280,7 +308,7 @@
 - (UILabel *)title {
     if (!_title) {
         _title = [[UILabel alloc] init];
-        _title.backgroundColor = [UIColor colorWithHexString:@"#000000" alpha:0.8];
+        _title.backgroundColor = [UIColor colorWithHexString:@"#000000" alpha:1];
         _title.textColor = [UIColor colorWithHexString:@"#FFFFFF"];
         _title.font = [UIFont systemFontOfSize:17];
         _title.textAlignment = NSTextAlignmentCenter;
@@ -291,7 +319,7 @@
 - (UILabel *)suTitle {
     if (!_suTitle) {
         _suTitle = [[UILabel alloc] init];
-        _suTitle.backgroundColor = [UIColor colorWithHexString:@"#000000" alpha:0.8];
+        _suTitle.backgroundColor = [UIColor colorWithHexString:@"#000000" alpha:1];
         _suTitle.textColor = [UIColor colorWithHexString:@"#FFFFFF"];
         _suTitle.font = [UIFont systemFontOfSize:17];
         _suTitle.textAlignment = NSTextAlignmentCenter;
@@ -319,12 +347,12 @@
 
 - (void)changeContentLabStyle:(NSString *)str {
     CGFloat desHeigth = [self getTextSizeWidth:str fontSize:12].height;
-    if (desHeigth >= 20) {
+    if (desHeigth >= 20 && str.length >= 55) {
         [self addSubview:self.describeIcon];
         [_describeIcon mas_makeConstraints:^(MASConstraintMaker *make) {
             make.size.mas_equalTo(CGSizeMake(9, 9));
             make.right.equalTo(_describe.mas_right).with.offset(0);
-            make.bottom.equalTo(_describe.mas_bottom).with.offset(-SCREEN_WIDTH *0.044);
+            make.top.equalTo(_describe.mas_centerY).with.offset(3);
         }];
     }
     
