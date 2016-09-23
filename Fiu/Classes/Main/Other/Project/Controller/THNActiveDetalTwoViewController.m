@@ -543,7 +543,7 @@ static NSString *const URLCancelFollowUser = @"/follow/ajax_cancel_follow";
 }
 
 -(void)resultRequest{
-    
+    [SVProgressHUD showWithMaskType:SVProgressHUDMaskTypeClear];
     [self.resultsAry removeAllObjects];
     NSDictionary *params = @{
                              @"id" : self.activeDetalId
@@ -564,7 +564,7 @@ static NSString *const URLCancelFollowUser = @"/follow/ajax_cancel_follow";
             }
             [self.attendBtn removeFromSuperview];
             [self.contentView reloadData];
-            self.contentView.mj_footer.hidden = YES;
+            [SVProgressHUD dismiss];
         } else {
             if (self.params != params) return;
             
@@ -582,6 +582,7 @@ static NSString *const URLCancelFollowUser = @"/follow/ajax_cancel_follow";
 }
 
 -(void)loadMore{
+    [self.sceneIdMarr removeAllObjects];
     NSDictionary *params = @{
                              @"page" : @(++self.current_page),
                              @"size" : @8,
@@ -622,8 +623,10 @@ static NSString *const URLCancelFollowUser = @"/follow/ajax_cancel_follow";
 
 
 -(void)senceRequest{
+    [SVProgressHUD showWithMaskType:SVProgressHUDMaskTypeClear];
     self.current_page = 1;
     [self.senceModelAry removeAllObjects];
+    [self.sceneIdMarr removeAllObjects];
     NSDictionary *params = @{
                              @"page" : @(self.current_page),
                              @"size" : @8,
@@ -651,6 +654,7 @@ static NSString *const URLCancelFollowUser = @"/follow/ajax_cancel_follow";
             [self.attendBtn removeFromSuperview];
             [self.contentView reloadData];
             [self checkFooterState];
+            [SVProgressHUD dismiss];
         }else{
             if (self.params != params) return;
             
@@ -697,7 +701,7 @@ static NSString *const URLCancelFollowUser = @"/follow/ajax_cancel_follow";
 }
 
 -(void)ruleRequest{
-    
+    [SVProgressHUD showWithMaskType:SVProgressHUDMaskTypeClear];
     FBRequest *request = [FBAPI postWithUrlString:@"/scene_subject/view" requestDictionary:@{
                                                                                              @"id" : self.activeDetalId
                                                                                              } delegate:self];
@@ -714,10 +718,14 @@ static NSString *const URLCancelFollowUser = @"/follow/ajax_cancel_follow";
                 flag = YES;
             }
             [self.contentView reloadData];
-            self.contentView.mj_footer.hidden = YES;
+            [SVProgressHUD dismiss];
         } else {
         }
-    } failure:nil];
+    } failure:^(FBRequest *request, NSError *error) {
+        // 提醒
+        [SVProgressHUD showErrorWithStatus:@"加载用户数据失败"];
+        
+    }];
 }
 
 -(void)webViewDidStartLoad:(UIWebView *)webView{
