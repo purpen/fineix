@@ -68,7 +68,7 @@ static NSString *getList = @"/category/getlist";
         for (int i = 1; i <= self.modelAry.count; i ++) {
             
             float w = ([UIScreen mainScreen].bounds.size.width - 40 -10) * 0.5;
-            float h = 0.092 * [UIScreen mainScreen].bounds.size.height;
+            float h = 0.097 * [UIScreen mainScreen].bounds.size.height;
             float x = 20 + ((i - 1) % 2) * (w + 10);
             float y = 116 + ((i - 1) / 2) * (h + 10);
             
