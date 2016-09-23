@@ -29,7 +29,7 @@
 
 - (void)thn_setRemindData:(THNRemindModelRow *)model {
     [self.headerImg downloadImage:model.sendUser.avatarUrl place:[UIImage imageNamed:@""]];
-    self.content.text = [NSString stringWithFormat:@"%@ %@%@:\n%@", model.sendUser.nickname, model.info, model.kindStr, model.targetObj.content];
+    self.content.text = [NSString stringWithFormat:@"%@ %@%@\n%@", model.sendUser.nickname, model.info, model.kindStr, model.targetObj.content];
     self.time.text = model.createdAt;
     if (model.kind == 3) {
         [self.sceneImg downloadImage:model.commentTargetObj.coverUrl place:[UIImage imageNamed:@""]];
@@ -37,6 +37,9 @@
         [self.sceneImg downloadImage:model.targetObj.coverUrl place:[UIImage imageNamed:@""]];
     }
     _userID = [NSString stringWithFormat:@"%zi", model.sUserId];
+    if (model.readed == 1) {
+        self.tips.hidden = YES;
+    }
 }
 
 - (void)setCellUI {
@@ -68,6 +71,13 @@
         make.right.equalTo(_sceneImg.mas_left).with.offset(-10);
         make.bottom.equalTo(self.mas_bottom).with.offset(-5);
         make.left.equalTo(_headerImg.mas_right).with.offset(10);
+    }];
+    
+    [self addSubview:self.tips];
+    [_tips mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.size.mas_equalTo(CGSizeMake(6, 6));
+        make.right.equalTo(_sceneImg.mas_left).with.offset(-10);
+        make.top.equalTo(_content.mas_top).with.offset(0);
     }];
 }
 
@@ -125,4 +135,13 @@
     return _sceneImg;
 }
 
+- (UILabel *)tips {
+    if (!_tips) {
+        _tips = [[UILabel alloc] init];
+        _tips.backgroundColor = [UIColor colorWithHexString:fineixColor];
+        _tips.layer.cornerRadius = 6/2;
+        _tips.layer.masksToBounds = YES;
+    }
+    return _tips;
+}
 @end

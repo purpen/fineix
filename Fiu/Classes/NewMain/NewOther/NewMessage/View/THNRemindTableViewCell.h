@@ -17,6 +17,7 @@
 @pro_strong UILabel *content;
 @pro_strong UILabel *time;
 @pro_strong UIImageView *sceneImg;
+@pro_strong UILabel *tips;
 
 - (void)thn_setRemindData:(THNRemindModelRow *)model;
 
