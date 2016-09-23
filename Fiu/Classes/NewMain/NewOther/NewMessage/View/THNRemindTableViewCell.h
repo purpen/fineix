@@ -12,6 +12,7 @@
 
 @interface THNRemindTableViewCell : UITableViewCell
 
+@pro_strong UINavigationController *nav;
 @pro_strong UIImageView *headerImg;
 @pro_strong UILabel *content;
 @pro_strong UILabel *time;

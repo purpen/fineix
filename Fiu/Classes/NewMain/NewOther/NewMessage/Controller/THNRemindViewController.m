@@ -37,6 +37,7 @@ static NSString *const remindTableCellId = @"RemindTableCellId";
 
 #pragma mark - 网络请求
 - (void)thn_networkReminData {
+    [SVProgressHUD show];
     self.remindRequest = [FBAPI getWithUrlString:URLRemind requestDictionary:@{@"page":@"1", @"size":@"100000"} delegate:self];
     [self.remindRequest startRequestSuccess:^(FBRequest *request, id result) {
         NSArray *dataArr = [[result valueForKey:@"data"] valueForKey:@"rows"];
@@ -44,10 +45,15 @@ static NSString *const remindTableCellId = @"RemindTableCellId";
             THNRemindModelRow *model = [[THNRemindModelRow alloc] initWithDictionary:dataDic];
             [self.remindMarr addObject:model];
             [self.remindTypeMarr addObject:[NSString stringWithFormat:@"%zi", model.kind]];
-            [self.remindIdMarr addObject:[NSString stringWithFormat:@"%zi", model.targetObj.idField]];
+            if (model.kind == 3) {
+                [self.remindIdMarr addObject:[NSString stringWithFormat:@"%zi", model.commentTargetObj.idField]];
+            } else {
+                [self.remindIdMarr addObject:[NSString stringWithFormat:@"%zi", model.targetObj.idField]];
+            }
             [self.sceneUserIdMarr addObject:[NSString stringWithFormat:@"%zi", model.userId]];
         }
         [self.remindTable reloadData];
+        [SVProgressHUD dismiss];
         
     } failure:^(FBRequest *request, NSError *error) {
         [SVProgressHUD showErrorWithStatus:[error localizedDescription]];
@@ -79,6 +85,7 @@ static NSString *const remindTableCellId = @"RemindTableCellId";
     cell = [[THNRemindTableViewCell alloc] initWithStyle:(UITableViewCellStyleDefault) reuseIdentifier:remindTableCellId];
     if (self.remindMarr.count) {
         [cell thn_setRemindData:self.remindMarr[indexPath.row]];
+        cell.nav = self.navigationController;
     }
     return cell;
 }
@@ -103,7 +110,7 @@ static NSString *const remindTableCellId = @"RemindTableCellId";
 
 #pragma mark - 设置Nav
 - (void)thn_setNavigationViewUI {
-    self.view.backgroundColor = [UIColor whiteColor];
+    self.view.backgroundColor = [UIColor colorWithHexString:@"#F8F8F8"];
     [[UIApplication sharedApplication] setStatusBarHidden:NO withAnimation:(UIStatusBarAnimationFade)];
     self.baseTable = self.remindTable;
     self.navViewTitle.text = NSLocalizedString(@"remindVC", nil);

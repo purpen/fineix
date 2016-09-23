@@ -82,16 +82,16 @@ static NSString *const URLDeleteScene = @"/scene_sight/delete";
     self.view.backgroundColor = [UIColor colorWithHexString:@"#F8F8F8"];
     [self.view addSubview:self.sceneTable];
     
+    [SVProgressHUD show];
     FBRequest *request = [FBAPI postWithUrlString:@"/scene_sight/view" requestDictionary:@{
                                                                                            @"id" : self.sceneDetalId
                                                                                            } delegate:self];
     [request startRequestSuccess:^(FBRequest *request, id result) {
-        if (result[@"success"]) {
+        if ([result[@"success"] isEqualToNumber:@1]) {
             self.model = [[HomeSceneListRow alloc] initWithDictionary:[result valueForKey:@"data"]];
             self.comments = [result valueForKey:@"data"][@"comments"];
             [self.sceneTable reloadData];
-        }else{
-            
+            [SVProgressHUD dismiss];
         }
     } failure:nil];
 }
