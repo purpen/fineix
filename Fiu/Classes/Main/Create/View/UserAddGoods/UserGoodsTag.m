@@ -128,10 +128,10 @@
 - (void)userTag_SetGoodsInfo:(NSString *)text {
     self.title.text = text;
     CGFloat width = [self.title boundingRectWithSize:CGSizeMake(320, 0)].width;
-    if (width*1.3 > SCREEN_WIDTH/2) {
+    if (width*1.5 > SCREEN_WIDTH/2) {
         width = SCREEN_WIDTH/2;
     } else {
-        width = [self.title boundingRectWithSize:CGSizeMake(320, 0)].width * 1.3;
+        width = [self.title boundingRectWithSize:CGSizeMake(320, 0)].width * 1.5;
     }
     
     int tagX = (arc4random() % 4) * 30;
