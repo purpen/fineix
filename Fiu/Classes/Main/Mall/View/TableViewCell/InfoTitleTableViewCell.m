@@ -37,7 +37,7 @@
         make.width.equalTo(@(priceWidth *1.5));
     }];
     
-    if (model.salePrice == model.marketPrice) {
+    if (model.marketPrice == model.salePrice) {
         self.goodsOldPrice.hidden = YES;
     }
 }

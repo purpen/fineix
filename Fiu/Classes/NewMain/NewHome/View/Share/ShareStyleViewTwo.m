@@ -185,7 +185,7 @@
     
     [self addSubview:self.describe];
     [_describe mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.size.mas_equalTo(CGSizeMake(SCREEN_WIDTH - 44, SCREEN_WIDTH *0.13));
+        make.size.mas_equalTo(CGSizeMake(SCREEN_WIDTH - 44, SCREEN_WIDTH *0.12));
         make.top.equalTo(_title.mas_bottom).with.offset(0);
         make.right.equalTo(self.mas_right).with.offset(-SCREEN_WIDTH *0.053);
     }];
@@ -195,7 +195,11 @@
 - (UIImageView *)styleImage {
     if (!_styleImage) {
         _styleImage = [[UIImageView alloc] init];
-        _styleImage.image = [UIImage imageNamed:@"share_style_2"];
+        if (IS_PHONE5) {
+            _styleImage.image = [UIImage imageNamed:@"5_share_style_2"];
+        } else {
+            _styleImage.image = [UIImage imageNamed:@"share_style_2"];
+        }
         _styleImage.contentMode = UIViewContentModeCenter;
     }
     return _styleImage;

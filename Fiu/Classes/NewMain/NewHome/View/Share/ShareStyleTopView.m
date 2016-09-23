@@ -193,7 +193,11 @@
 - (UIImageView *)styleImage {
     if (!_styleImage) {
         _styleImage = [[UIImageView alloc] init];
-        _styleImage.image = [UIImage imageNamed:@"share_style_0"];
+        if (IS_PHONE5) {
+            _styleImage.image = [UIImage imageNamed:@"5_share_style_0"];
+        } else {
+            _styleImage.image = [UIImage imageNamed:@"share_style_0"];
+        }
         _styleImage.contentMode = UIViewContentModeCenter;
     }
     return _styleImage;
@@ -297,7 +301,7 @@
 - (UILabel *)contentline {
     if (!_contentline) {
         _contentline = [[UILabel alloc] init];
-        _contentline.backgroundColor = [UIColor colorWithHexString:@"#E1E1E1"];
+        _contentline.backgroundColor = [UIColor colorWithHexString:@"#E1E1E1" alpha:0];
     }
     return _contentline;
 }

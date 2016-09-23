@@ -32,6 +32,13 @@
 "reportScene" = "Report";
 "favoriteDone" = "Success";
 
+//  消息
+"Mes_SystemNotification" = "System Notification";
+"Mes_Comment" = "Comment";
+"Mes_Chat" = "Chat";
+"Mes_Remind" = "Remind";
+"Mes_Fans" = "Fans";
+
 //  发现
 "discoverSearch" = "Search scene or user";
 "disCoverNewScene" = "New Scene";

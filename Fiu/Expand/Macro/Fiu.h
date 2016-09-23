@@ -31,9 +31,9 @@
 #define Banner_height   211
 
 #define IS_iOS9              [[[UIDevice currentDevice] systemVersion] floatValue] >= 9.0
-#define IS_PHONE5            [[UIScreen mainScreen] bounds].size.width >= 320
-#define IS_PHONE6P           [[UIScreen mainScreen] bounds].size.width >= 414
-#define IS_PHONE6            [[UIScreen mainScreen] bounds].size.width >= 375
+#define IS_PHONE5            [[UIScreen mainScreen] bounds].size.width == 320
+#define IS_PHONE6P           [[UIScreen mainScreen] bounds].size.width == 414
+#define IS_PHONE6            [[UIScreen mainScreen] bounds].size.width == 375
 
 #undef 颜色
 #define fineixColor             @"#BE8914"

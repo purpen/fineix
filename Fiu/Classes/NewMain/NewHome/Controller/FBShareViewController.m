@@ -99,7 +99,7 @@ static NSString *const ShareURlText = @"我在Fiu浮游™寻找同路人；希�
 - (void)setShareVcUI {
     [self.view addSubview:self.topView];
     [self.view addSubview:self.shareView];
-    CGAffineTransform shareViewTrans = CGAffineTransformScale(self.shareView.transform, 0.76, 0.76);
+    CGAffineTransform shareViewTrans = CGAffineTransformScale(self.shareView.transform, 0.7, 0.7);
     [self.shareView setTransform:shareViewTrans];
     self.shareView.center = CGPointMake(SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2.24);
     
@@ -161,15 +161,15 @@ static NSString *const ShareURlText = @"我在Fiu浮游™寻找同路人；希�
     if (!_styleView) {
         UICollectionViewFlowLayout * flowLayout = [[UICollectionViewFlowLayout alloc] init];
         flowLayout.scrollDirection = UICollectionViewScrollDirectionHorizontal;
-        flowLayout.itemSize = CGSizeMake((SCREEN_WIDTH - 70)/4, SCREEN_HEIGHT *0.835);
+        flowLayout.itemSize = CGSizeMake((SCREEN_WIDTH - 70)/4, SCREEN_HEIGHT *0.165);
         flowLayout.sectionInset = UIEdgeInsetsMake(0, 20, 0, 20);
         
-        _styleView = [[UICollectionView alloc] initWithFrame:CGRectMake(0, SCREEN_HEIGHT *0.835, SCREEN_WIDTH, SCREEN_HEIGHT *0.835) collectionViewLayout:flowLayout];
+        _styleView = [[UICollectionView alloc] initWithFrame:CGRectMake(0, SCREEN_HEIGHT *0.835, SCREEN_WIDTH, SCREEN_HEIGHT *0.165) collectionViewLayout:flowLayout];
         _styleView.showsHorizontalScrollIndicator = NO;
         _styleView.delegate = self;
         _styleView.dataSource = self;
         [_styleView registerClass:[ShareStyleCollectionViewCell class] forCellWithReuseIdentifier:@"shareStyleCollectionViewCellId"];
-        _styleView.backgroundColor = [UIColor colorWithHexString:@"#000000" alpha:.3];
+        _styleView.backgroundColor = [UIColor colorWithHexString:@"#F5F5F5" alpha:.3];
     }
     return _styleView;
 }

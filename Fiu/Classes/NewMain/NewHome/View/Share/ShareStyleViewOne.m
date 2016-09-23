@@ -188,7 +188,7 @@
     [self addSubview:self.userView];
     [_userView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.size.mas_equalTo(CGSizeMake(SCREEN_WIDTH - 44, 30));
-        make.top.equalTo(_sceneImg.mas_bottom).with.offset(30);
+        make.bottom.equalTo(self.mas_bottom).with.offset(-SCREEN_WIDTH *0.28);
         make.centerX.equalTo(self);
     }];
 
@@ -212,7 +212,11 @@
 - (UIImageView *)styleImage {
     if (!_styleImage) {
         _styleImage = [[UIImageView alloc] init];
-        _styleImage.image = [UIImage imageNamed:@"share_style_1"];
+        if (IS_PHONE5) {
+            _styleImage.image = [UIImage imageNamed:@"5_share_style_1"];
+        } else {
+            _styleImage.image = [UIImage imageNamed:@"share_style_1"];
+        }
         _styleImage.contentMode = UIViewContentModeCenter;
     }
     return _styleImage;

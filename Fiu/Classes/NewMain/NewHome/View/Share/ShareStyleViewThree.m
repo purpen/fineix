@@ -216,7 +216,11 @@
 - (UIImageView *)styleImage {
     if (!_styleImage) {
         _styleImage = [[UIImageView alloc] init];
-        _styleImage.image = [UIImage imageNamed:@"share_style_3"];
+        if (IS_PHONE5) {
+            _styleImage.image = [UIImage imageNamed:@"5_share_style_3"];
+        } else {
+            _styleImage.image = [UIImage imageNamed:@"share_style_3"];
+        }
         _styleImage.contentMode = UIViewContentModeCenter;
     }
     return _styleImage;

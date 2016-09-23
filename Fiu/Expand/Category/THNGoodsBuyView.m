@@ -88,7 +88,11 @@ static const NSInteger GoodsBuyViewBtnTag = 833;
         [_collect setTitleColor:[UIColor colorWithHexString:@"#999999"] forState:(UIControlStateNormal)];
         [_collect setImage:[UIImage imageNamed:@"goods_star"] forState:(UIControlStateNormal)];
         [_collect setImage:[UIImage imageNamed:@"goods_star_seleted"] forState:(UIControlStateSelected)];
-        [_collect setTitleEdgeInsets:(UIEdgeInsetsMake(30, -29, 0, 0))];
+        if (IS_PHONE5) {
+            [_collect setTitleEdgeInsets:(UIEdgeInsetsMake(30, -17, 0, 0))];
+        } else {
+            [_collect setTitleEdgeInsets:(UIEdgeInsetsMake(30, -29, 0, 0))];
+        }
         [_collect setImageEdgeInsets:(UIEdgeInsetsMake(-10, 13.5, 0, 0))];
         _collect.tag = GoodsBuyViewBtnTag;
         [_collect addTarget:self action:@selector(goodsBuyViewBtnClick:) forControlEvents:(UIControlEventTouchUpInside)];
