@@ -77,7 +77,7 @@ static NSString *updatInfo = @"/my/update_profile";
         
         float w = 50;
         float h = 30;
-        int x = self.view.center.x - w * 0.5;
+        int x = [UIScreen mainScreen].bounds.size.width * 0.5 - w * 0.5;
         int y = 165 + i * h;
         
         THNAgeBtn *btn = [[THNAgeBtn alloc] initWithFrame:CGRectMake(x, y, w, h)];
@@ -92,7 +92,7 @@ static NSString *updatInfo = @"/my/update_profile";
         
         float w = 50;
         float h = 33;
-        int x = self.view.center.x - w * 0.5;
+        int x = [UIScreen mainScreen].bounds.size.width * 0.5 - w * 0.5;
         int y = 333 + i * h;
         
         THNAgeBtn *btn = [[THNAgeBtn alloc] initWithFrame:CGRectMake(x, y, w, h)];

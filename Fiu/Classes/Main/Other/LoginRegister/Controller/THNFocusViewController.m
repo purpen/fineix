@@ -74,7 +74,7 @@
         int n = self.modelAry.count % 6;
         int m = n > 0 ? 1 : 0;
         self.page = self.modelAry.count / 6 + m;
-        self.contentScrollView.frame = CGRectMake(0, 160 / 667.0 * [UIScreen mainScreen].bounds.size.height, [UIScreen mainScreen].bounds.size.width, 0.53 * [UIScreen mainScreen].bounds.size.height);
+        self.contentScrollView.frame = CGRectMake(0, 160 , [UIScreen mainScreen].bounds.size.width, 0.53 * [UIScreen mainScreen].bounds.size.height);
         self.contentScrollView.contentSize = CGSizeMake([UIScreen mainScreen].bounds.size.width * self.page, 0);
         
         

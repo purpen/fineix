@@ -23,7 +23,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nI9-6B-sTd" userLabel="限购说明">
-                                <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="11"/>
                                 <color key="textColor" red="0.74509803919999995" green="0.53725490200000003" blue="0.078431372550000003" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
@@ -62,7 +62,6 @@
                             <constraint firstItem="sbY-Ia-S56" firstAttribute="leading" secondItem="3bz-6w-GfP" secondAttribute="leading" id="B89-fn-tZQ"/>
                             <constraint firstAttribute="trailing" secondItem="HUO-rd-Var" secondAttribute="trailing" constant="15" id="Bv6-GM-KJn"/>
                             <constraint firstAttribute="trailing" secondItem="VfL-UU-7x5" secondAttribute="trailing" id="DhW-Aj-cuZ"/>
-                            <constraint firstItem="nI9-6B-sTd" firstAttribute="bottom" secondItem="KbM-ko-2vD" secondAttribute="bottom" id="Ezc-ji-WMI"/>
                             <constraint firstItem="j0o-FN-7wW" firstAttribute="baseline" secondItem="HUO-rd-Var" secondAttribute="baseline" id="GHG-vv-8eq"/>
                             <constraint firstItem="KbM-ko-2vD" firstAttribute="top" secondItem="01F-td-RDR" secondAttribute="top" constant="10" id="HBK-xR-0oh"/>
                             <constraint firstItem="sbY-Ia-S56" firstAttribute="centerY" secondItem="3bz-6w-GfP" secondAttribute="centerY" id="J0X-vg-mZi"/>
@@ -71,13 +70,14 @@
                             <constraint firstItem="sbY-Ia-S56" firstAttribute="trailing" secondItem="3bz-6w-GfP" secondAttribute="leading" constant="-5" id="OhH-gq-7FB"/>
                             <constraint firstAttribute="bottom" secondItem="3bz-6w-GfP" secondAttribute="bottom" constant="20" id="OlA-3i-MAP"/>
                             <constraint firstItem="Czg-Aw-0gu" firstAttribute="leading" secondItem="KbM-ko-2vD" secondAttribute="leading" id="SLE-gy-mvr"/>
-                            <constraint firstItem="nI9-6B-sTd" firstAttribute="leading" secondItem="KbM-ko-2vD" secondAttribute="trailing" constant="8" id="SLH-gp-0nS"/>
                             <constraint firstItem="VfL-UU-7x5" firstAttribute="leading" secondItem="01F-td-RDR" secondAttribute="leading" id="Z7c-4Q-UQE"/>
-                            <constraint firstItem="Czg-Aw-0gu" firstAttribute="top" secondItem="KbM-ko-2vD" secondAttribute="bottom" constant="5" id="bZ9-iJ-3wv"/>
+                            <constraint firstItem="KbM-ko-2vD" firstAttribute="bottom" secondItem="Czg-Aw-0gu" secondAttribute="top" constant="-5" id="bZ9-iJ-3wv"/>
+                            <constraint firstItem="nI9-6B-sTd" firstAttribute="leading" secondItem="KbM-ko-2vD" secondAttribute="leading" id="bfH-ws-ybF"/>
                             <constraint firstItem="RHd-9N-gWA" firstAttribute="top" secondItem="01F-td-RDR" secondAttribute="top" id="blc-rO-VXy"/>
                             <constraint firstItem="RHd-9N-gWA" firstAttribute="leading" secondItem="01F-td-RDR" secondAttribute="leading" id="cIh-Fh-QU2"/>
                             <constraint firstItem="3bz-6w-GfP" firstAttribute="top" secondItem="sbY-Ia-S56" secondAttribute="bottom" constant="5" id="eln-10-CuX"/>
                             <constraint firstItem="HUO-rd-Var" firstAttribute="top" secondItem="01F-td-RDR" secondAttribute="top" constant="10" id="jTB-gZ-8SH"/>
+                            <constraint firstItem="nI9-6B-sTd" firstAttribute="top" secondItem="Czg-Aw-0gu" secondAttribute="bottom" constant="5" id="pCe-KF-Rkn"/>
                             <constraint firstAttribute="bottom" secondItem="VfL-UU-7x5" secondAttribute="bottom" id="q5J-nF-6Y3"/>
                             <constraint firstItem="HUO-rd-Var" firstAttribute="leading" secondItem="j0o-FN-7wW" secondAttribute="trailing" id="qwk-JQ-KBF"/>
                             <constraint firstItem="KbM-ko-2vD" firstAttribute="leading" secondItem="01F-td-RDR" secondAttribute="leading" constant="15" id="wCT-QV-jDB"/>

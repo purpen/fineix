@@ -94,6 +94,8 @@
             make.centerY.mas_equalTo(self.nickNameLabel.mas_centerY);
         }];
         
+        self.alertTipviewNum.hidden = YES;
+        
     }
     return self;
 }
@@ -116,6 +118,7 @@
 }
 
 -(void)setUIWithModel:(UserInfo *)model andType:(NSNumber *)type{
+    
     UserInfoEntity *entity = [UserInfoEntity defaultUserInfoEntity];
     if ([type isEqualToNumber:@1]) {
         if ([entity.userId intValue] == [model.userId intValue]) {
