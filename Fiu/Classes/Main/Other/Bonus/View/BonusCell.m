@@ -36,7 +36,7 @@
     }
     self.overdueLbl.text = bonus.expiredLabel;
     
-    if (bonus.product_id == 0) {
+    if (bonus.product_id == 1) {
         self.limitLabel.hidden = YES;
     } else {
         self.limitLabel.hidden = NO;
