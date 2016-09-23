@@ -29,7 +29,7 @@
 
 - (void)thn_setRemindData:(THNRemindModelRow *)model {
     [self.headerImg downloadImage:model.sendUser.avatarUrl place:[UIImage imageNamed:@""]];
-    self.content.text = [NSString stringWithFormat:@"%@ %@%@:\n\n%@", model.sendUser.nickname, model.info, model.kindStr, model.targetObj.content];
+    self.content.text = [NSString stringWithFormat:@"%@ %@%@:\n%@", model.sendUser.nickname, model.info, model.kindStr, model.targetObj.content];
     self.time.text = model.createdAt;
     if (model.kind == 3) {
         [self.sceneImg downloadImage:model.commentTargetObj.coverUrl place:[UIImage imageNamed:@""]];
@@ -59,15 +59,15 @@
         make.left.equalTo(_headerImg.mas_right).with.offset(10);
         make.right.equalTo(_sceneImg.mas_left).with.offset(-50);
         make.top.equalTo(_headerImg.mas_top).with.offset(0);
-        make.bottom.equalTo(self.mas_bottom).with.offset(-10);
+        make.height.equalTo(@35);
     }];
     
     [self addSubview:self.time];
     [_time mas_makeConstraints:^(MASConstraintMaker *make) {
         make.height.equalTo(@15);
-        make.width.equalTo(@40);
         make.right.equalTo(_sceneImg.mas_left).with.offset(-10);
-        make.top.equalTo(_content.mas_top).with.offset(0);
+        make.bottom.equalTo(self.mas_bottom).with.offset(-5);
+        make.left.equalTo(_headerImg.mas_right).with.offset(10);
     }];
 }
 
@@ -111,7 +111,6 @@
         _time = [[UILabel alloc] init];
         _time.textColor = [UIColor colorWithHexString:@"#999999"];
         _time.font = [UIFont systemFontOfSize:11];
-        _time.textAlignment = NSTextAlignmentRight;
     }
     return _time;
 }
