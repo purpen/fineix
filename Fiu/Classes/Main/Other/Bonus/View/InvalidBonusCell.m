@@ -21,10 +21,6 @@
 
 @implementation InvalidBonusCell
 
-- (void)awakeFromNib {
-    // Initialization code
-}
-
 - (void)setBonus:(BonusModel *)bonus
 {
     if (_bonus != bonus) {
