@@ -36,7 +36,7 @@
     }
     self.overdueLbl.text = bonus.expiredLabel;
     
-    if (bonus.product_id == 1) {
+    if (bonus.product_id == 0 || [[NSString stringWithFormat:@"%ld",bonus.product_id] isKindOfClass:[NSNull class]]) {
         self.limitLabel.hidden = YES;
     } else {
         self.limitLabel.hidden = NO;
