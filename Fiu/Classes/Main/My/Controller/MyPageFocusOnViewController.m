@@ -17,6 +17,7 @@
 #import "MyFansActionSheetViewController.h"
 #import "UserInfoEntity.h"
 #import "FocusNonView.h"
+#import "TipNumberView.h"
 
 @interface MyPageFocusOnViewController ()<FBNavigationBarItemsDelegate,UITableViewDelegate,UITableViewDataSource,FBRequestDelegate>
 
@@ -232,6 +233,7 @@
     }else{
         [cell setUIWithModel:[_modelAry objectAtIndex:indexPath.row] andType:@0];
     }
+    cell.alertTipviewNum.hidden = YES;
     return cell;
 }
 
