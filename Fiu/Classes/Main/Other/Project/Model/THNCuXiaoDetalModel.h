@@ -42,5 +42,7 @@
 @property(nonatomic,copy) NSString *end_time_at;
 /**  */
 @property(nonatomic,copy) NSString *short_title;
+/**  */
+@property (nonatomic, assign) NSInteger evt;
 
 @end

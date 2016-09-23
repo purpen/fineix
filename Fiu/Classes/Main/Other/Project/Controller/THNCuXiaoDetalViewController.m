@@ -75,7 +75,6 @@ static NSString *const cellId = @"THNCuXiaoDetalContentTableViewCell";
                                                                                              } delegate:self];
     [request startRequestSuccess:^(FBRequest *request, id result) {
         if (result[@"success"]) {
-            NSLog(@"促销详情 %@",result);
             self.model = [THNCuXiaoDetalModel mj_objectWithKeyValues:result[@"data"]];
             
             self.topView.model = self.model;

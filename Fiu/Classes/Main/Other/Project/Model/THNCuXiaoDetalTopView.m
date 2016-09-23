@@ -27,7 +27,11 @@
     [self.bgImageView sd_setImageWithURL:[NSURL URLWithString:model.banner_url] placeholderImage:[UIImage imageNamed:@"Defaul_Bg_420"]];
     self.textLabel.text = model.title;
     self.summaryLabel.text = model.summary;
-    self.timeLabel.text = [NSString stringWithFormat:@"%@-%@",model.begin_time_at,model.end_time_at];
+    if (model.evt == 2) {
+        self.timeLabel.text = @"已结束";
+    } else {
+        self.timeLabel.text = [NSString stringWithFormat:@"%@-%@",model.begin_time_at,model.end_time_at];
+    }
     self.subTitleLabel.text = model.short_title;
 }
 
