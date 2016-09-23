@@ -14,5 +14,10 @@
 @property(nonatomic,copy) NSString *userId;
 /**有几条新通知  */
 @property (nonatomic, assign) NSInteger num;
+/**
+ *  是否清除提醒
+ *  0:不清除／1:清除
+ */
+@property (nonatomic, strong) NSString *cleanRemind;
 
 @end

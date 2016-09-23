@@ -121,6 +121,7 @@ static NSString *const messageTableCellId = @"MessageTableCellId";
         MyFansViewController *fansVC = [[MyFansViewController alloc] init];
         fansVC.userId = [self getLoginUserID];
         fansVC.num = _userMessageModel.fansCount;
+        fansVC.cleanRemind = @"1";
         [self.navigationController pushViewController:fansVC animated:YES];
     }
 }

@@ -71,7 +71,7 @@
     [self.mytableView.mj_footer endRefreshing];
     [self.modelAry removeAllObjects];
     self.current_page = 1;
-    NSDictionary *params = @{@"page":@(self.current_page),@"size":@30,@"user_id":self.userId,@"find_type":@2};
+    NSDictionary *params = @{@"page":@(self.current_page),@"size":@30,@"user_id":self.userId,@"find_type":@2, @"clean_remind":self.cleanRemind};
     self.params = params;
     FBRequest *request = [FBAPI postWithUrlString:@"/follow" requestDictionary:params delegate:self];
     [request startRequestSuccess:^(FBRequest *request, id result) {
