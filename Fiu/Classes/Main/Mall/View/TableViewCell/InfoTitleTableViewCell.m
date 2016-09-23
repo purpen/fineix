@@ -13,11 +13,9 @@
 - (instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier {
     self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
     if (self) {
-        
         self.selectionStyle = UITableViewCellSelectionStyleNone;
         self.backgroundColor = [UIColor whiteColor];
         [self setCellUI];
-        
     }
     return self;
 }
@@ -28,7 +26,20 @@
     [self.goodsTitle mas_updateConstraints:^(MASConstraintMaker *make) {
         make.height.equalTo(@(size.height+5));
     }];
-    self.goodsPrice.text = [NSString stringWithFormat:@"¥ %zi", model.salePrice];
+
+    NSString *salePrice = [NSString stringWithFormat:@"¥ %zi", model.salePrice];
+    NSAttributedString *oldPrice = [[NSAttributedString alloc] initWithString:[NSString stringWithFormat:@"¥ %zi",  model.marketPrice]
+                                                                   attributes:@{NSStrikethroughStyleAttributeName:@1}];
+    self.goodsPrice.text = salePrice;
+    self.goodsOldPrice.attributedText = oldPrice;
+    CGFloat priceWidth = [salePrice boundingRectWithSize:CGSizeMake(320, 17) options:(NSStringDrawingUsesDeviceMetrics) attributes:nil context:nil].size.width;
+    [self.goodsPrice mas_updateConstraints:^(MASConstraintMaker *make) {
+        make.width.equalTo(@(priceWidth *1.5));
+    }];
+    
+    if (model.salePrice == model.marketPrice) {
+        self.goodsOldPrice.hidden = YES;
+    }
 }
 
 - (void)setGoodsInfoData:(GoodsInfoData *)model {
@@ -80,6 +91,14 @@
         make.right.equalTo(self.mas_right).with.offset(-15);
     }];
     
+    [self addSubview:self.goodsOldPrice];
+    [_goodsOldPrice mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.height.equalTo(@17);
+        make.bottom.equalTo(self.mas_bottom).with.offset(-10);
+        make.left.equalTo(_goodsPrice.mas_right).with.offset(3);
+        make.right.equalTo(_nextBtn.mas_left).with.offset(-10);
+    }];
+    
     UILabel *botLine = [[UILabel alloc] init];
     botLine.backgroundColor = [UIColor colorWithHexString:@"#666666" alpha:0.2];
     [self addSubview:botLine];
@@ -109,6 +128,16 @@
         _goodsPrice.font = [UIFont systemFontOfSize:Font_GoodsPrice];
     }
     return _goodsPrice;
+}
+
+#pragma mark - 原价
+- (UILabel *)goodsOldPrice {
+    if (!_goodsOldPrice) {
+        _goodsOldPrice = [[UILabel alloc] init];
+        _goodsOldPrice.textColor = [UIColor colorWithHexString:@"#999999"];
+        _goodsOldPrice.font = [UIFont systemFontOfSize:14];
+    }
+    return _goodsOldPrice;
 }
 
 - (UIButton *)nextBtn {

@@ -16,6 +16,7 @@
 
 @pro_strong UILabel         *       goodsTitle;     //  商品标题
 @pro_strong UILabel         *       goodsPrice;     //  商品价格
+@pro_strong UILabel         *       goodsOldPrice;  //  商品原价价
 @pro_strong UIButton        *       nextBtn;
 @pro_assign CGFloat                 cellHeight;
 
