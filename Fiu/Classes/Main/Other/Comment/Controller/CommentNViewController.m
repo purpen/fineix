@@ -51,7 +51,6 @@ static NSString *const URLSendSceneComment = @"/comment/ajax_comment";
     [SVProgressHUD show];
     self.sceneCommentRequest = [FBAPI getWithUrlString:URLSceneComment requestDictionary:@{@"target_id":self.targetId, @"page":@(self.currentpageNum + 1), @"type":@"12", @"size":@"20", @"sort":@"1"} delegate:self];
     [self.sceneCommentRequest startRequestSuccess:^(FBRequest *request, id result) {
-        
         NSArray * sceneArr = [[result valueForKey:@"data"] valueForKey:@"rows"];
         for (NSDictionary * sceneDic in sceneArr) {
             CommentRow * commentModel = [[CommentRow alloc] initWithDictionary:sceneDic];

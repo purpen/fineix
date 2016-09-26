@@ -26,20 +26,25 @@
     [self.goodsTitle mas_updateConstraints:^(MASConstraintMaker *make) {
         make.height.equalTo(@(size.height+5));
     }];
-
-    NSString *salePrice = [NSString stringWithFormat:@"¥ %zi", model.salePrice];
-    NSAttributedString *oldPrice = [[NSAttributedString alloc] initWithString:[NSString stringWithFormat:@"¥ %zi",  model.marketPrice]
-                                                                   attributes:@{NSStrikethroughStyleAttributeName:@1}];
-    self.goodsPrice.text = salePrice;
-    self.goodsOldPrice.attributedText = oldPrice;
-    CGFloat priceWidth = [salePrice boundingRectWithSize:CGSizeMake(320, 17) options:(NSStringDrawingUsesDeviceMetrics) attributes:nil context:nil].size.width;
-    [self.goodsPrice mas_updateConstraints:^(MASConstraintMaker *make) {
-        make.width.equalTo(@(priceWidth *1.5));
-    }];
+    
+    if (model.stage == 16) {
+        self.goodsPrice.text = @"此产品为用户标记，暂不可销售";
+    } else {
+        NSString *salePrice = [NSString stringWithFormat:@"¥ %zi", model.salePrice];
+        NSAttributedString *oldPrice = [[NSAttributedString alloc] initWithString:[NSString stringWithFormat:@"¥ %zi",  model.marketPrice]
+                                                                       attributes:@{NSStrikethroughStyleAttributeName:@1}];
+        self.goodsPrice.text = salePrice;
+        self.goodsOldPrice.attributedText = oldPrice;
+        CGFloat priceWidth = [salePrice boundingRectWithSize:CGSizeMake(320, 17) options:(NSStringDrawingUsesDeviceMetrics) attributes:nil context:nil].size.width;
+        [self.goodsPrice mas_updateConstraints:^(MASConstraintMaker *make) {
+            make.width.equalTo(@(priceWidth *1.5));
+        }];
+    }
     
     if (model.marketPrice == model.salePrice) {
         self.goodsOldPrice.hidden = YES;
     }
+    
 }
 
 - (void)setGoodsInfoData:(GoodsInfoData *)model {
@@ -48,6 +53,8 @@
     [self.goodsTitle mas_updateConstraints:^(MASConstraintMaker *make) {
         make.height.equalTo(@(size.height+5));
     }];
+    
+    
     self.goodsPrice.text = [NSString stringWithFormat:@"¥ %.2f", model.salePrice];
     
     UILabel * botLine = [[UILabel alloc] init];
