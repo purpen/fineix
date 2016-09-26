@@ -117,6 +117,7 @@
         if (self.params != params) {
             return;
         }
+        NSLog(@"总数 %ld",self.total_rows);
         [self.mytableView.mj_header endRefreshing];
         [self checkFooterState];
         
@@ -160,6 +161,7 @@
         if (self.params != params) {
             return;
         }
+        NSLog(@"总数 %ld",self.total_rows);
         [self checkFooterState];
         
     } failure:^(FBRequest *request, NSError *error) {
