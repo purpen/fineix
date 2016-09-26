@@ -28,7 +28,12 @@
     }];
     
     if (model.stage == 16) {
-        self.goodsPrice.text = @"此产品为用户标记，暂不可销售";
+        self.goodsPrice.font = [UIFont systemFontOfSize:11];
+        self.goodsPrice.text = @"此产品为用户标记，暂未销售。浮游正在努力上架产品中ing...";
+        [self.goodsPrice mas_updateConstraints:^(MASConstraintMaker *make) {
+            make.right.equalTo(self.mas_right).with.offset(-15);
+        }];
+        
     } else {
         NSString *salePrice = [NSString stringWithFormat:@"¥ %zi", model.salePrice];
         NSAttributedString *oldPrice = [[NSAttributedString alloc] initWithString:[NSString stringWithFormat:@"¥ %zi",  model.marketPrice]
@@ -44,7 +49,6 @@
     if (model.marketPrice == model.salePrice) {
         self.goodsOldPrice.hidden = YES;
     }
-    
 }
 
 - (void)setGoodsInfoData:(GoodsInfoData *)model {

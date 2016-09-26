@@ -383,19 +383,21 @@ static NSString *const SceneListFooterCellViewId = @"sceneListFooterViewId";
 }
 
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
-    THNSceneListViewController *sceneListVC = [[THNSceneListViewController alloc] init];
-    sceneListVC.sceneListMarr = self.sceneListMarr;
-    sceneListVC.commentsMarr = self.commentsMarr;
-    sceneListVC.sceneIdMarr = self.sceneIdMarr;
-    sceneListVC.userIdMarr = self.userIdMarr;
-    if (indexPath.section == 0) {
-        sceneListVC.index = indexPath.row;
-    } else if (indexPath.section == 1) {
-        sceneListVC.index = indexPath.row +10;
-    } else if (indexPath.section == 2) {
-        sceneListVC.index = indexPath.row +20;
+    if (self.sceneListMarr.count && self.commentsMarr.count && self.sceneIdMarr.count && self.userIdMarr.count) {
+        THNSceneListViewController *sceneListVC = [[THNSceneListViewController alloc] init];
+        sceneListVC.sceneListMarr = self.sceneListMarr;
+        sceneListVC.commentsMarr = self.commentsMarr;
+        sceneListVC.sceneIdMarr = self.sceneIdMarr;
+        sceneListVC.userIdMarr = self.userIdMarr;
+        if (indexPath.section == 0) {
+            sceneListVC.index = indexPath.row;
+        } else if (indexPath.section == 1) {
+            sceneListVC.index = indexPath.row +10;
+        } else if (indexPath.section == 2) {
+            sceneListVC.index = indexPath.row +20;
+        }
+        [self.navigationController pushViewController:sceneListVC animated:YES];
     }
-    [self.navigationController pushViewController:sceneListVC animated:YES];
 }
 
 #pragma mark - 点赞

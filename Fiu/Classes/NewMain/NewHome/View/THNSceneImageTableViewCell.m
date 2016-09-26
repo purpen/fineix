@@ -107,7 +107,7 @@
     for (NSInteger idx = 0; idx < self.tagDataMarr.count; ++ idx) {
         CGFloat btnX = [[self.tagDataMarr[idx] valueForKey:@"x"] floatValue];
         CGFloat btnY = [[self.tagDataMarr[idx] valueForKey:@"y"] floatValue];
-        NSString *title = [self.tagDataMarr[idx] valueForKey:@"title"];
+        NSString *title = [NSString stringWithFormat:@"%@  ", [self.tagDataMarr[idx] valueForKey:@"title"]];
         NSInteger loc = [[self.tagDataMarr[idx] valueForKey:@"loc"] integerValue];
         _goodsTitle = [self.tagDataMarr[idx] valueForKey:@"title"];
         

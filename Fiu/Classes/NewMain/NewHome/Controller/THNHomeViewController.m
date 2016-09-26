@@ -709,14 +709,14 @@ static NSString *const allCommentsCellId = @"AllCommentsCellId";
     }
 }
 
--(void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath {
-    if (indexPath.section != 0) {
-        cell.layer.transform = CATransform3DMakeScale(1, 1, 1);
-        [UIView animateWithDuration:0.5 animations:^{
-            cell.layer.transform = CATransform3DMakeScale(1, 1, 1);
-        }];
-    }
-}
+//-(void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath {
+//    if (indexPath.section != 0) {
+//        cell.layer.transform = CATransform3DMakeScale(1, 1, 1);
+//        [UIView animateWithDuration:0.5 animations:^{
+//            cell.layer.transform = CATransform3DMakeScale(1, 1, 1);
+//        }];
+//    }
+//}
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     if (indexPath.section != 0) {

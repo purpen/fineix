@@ -14,7 +14,7 @@
 #import "THNDiscoverSceneCollectionViewCell.h"
 
 static NSString *const URLBrandInfo = @"/scene_brands/view";
-static NSString *const URLGoodslist = @"/scene_product/getlist";
+static NSString *const URLGoodslist = @"/product/getlist";
 static NSString *const URLSceneList = @"/sight_and_product/getlist";
 static NSString *const SceneListCellId = @"SceneListCellId";
 
@@ -84,7 +84,7 @@ static NSString *const SceneListCellId = @"SceneListCellId";
 #pragma mark 品牌商品
 - (void)networkBrandGoodsList  {
     [SVProgressHUD show];
-    self.brandGoodsRequest = [FBAPI getWithUrlString:URLGoodslist requestDictionary:@{@"size":@"8", @"page":@(self.currentpageNum + 1), @"brand_id":self.brandId} delegate:self];
+    self.brandGoodsRequest = [FBAPI getWithUrlString:URLGoodslist requestDictionary:@{@"size":@"8", @"page":@(self.currentpageNum + 1), @"brand_id":self.brandId, @"stage":@"9"} delegate:self];
     [self.brandGoodsRequest startRequestSuccess:^(FBRequest *request, id result) {
         NSArray * goodsArr = [[result valueForKey:@"data"] valueForKey:@"rows"];
         for (NSDictionary * goodsDic in goodsArr) {

@@ -394,6 +394,7 @@ static NSString *sceneCellId = @"THNHomeSenceCollectionViewCell";
 -(void)signleTap3:(UITapGestureRecognizer*)sender{
     MyFansViewController *view = [[MyFansViewController alloc] init];
     view.userId = self.userId;
+    view.cleanRemind = @"0";
     [self.navigationController pushViewController:view animated:YES];
 }
 
