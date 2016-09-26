@@ -120,6 +120,7 @@
     MyFansViewController *view = [[MyFansViewController alloc] init];
     UserInfoEntity *entity = [UserInfoEntity defaultUserInfoEntity];
     view.userId = entity.userId;
+    view.cleanRemind = @"0";
     [self.navigationController pushViewController:view animated:YES];
 }
 
