@@ -18,6 +18,7 @@ static NSString *const hotUserCellId = @"HotUserCellId";
 @interface THNUserInfoTableViewCell () {
     NSString *_userId;
     BOOL _isLogin;
+    BOOL _isUserSelf;
 }
 
 @end
@@ -106,8 +107,10 @@ static NSString *const hotUserCellId = @"HotUserCellId";
     
     if ([_userId isEqualToString:userID]) {
         self.follow.hidden = YES;
+        _isUserSelf = YES;
     } else {
         self.follow.hidden = NO;
+        _isUserSelf = NO;
     }
 }
 
@@ -195,10 +198,13 @@ static NSString *const hotUserCellId = @"HotUserCellId";
 }
 
 - (void)headClick:(UIButton *)button {
-    HomePageViewController *userHomeVC = [[HomePageViewController alloc] init];
-    userHomeVC.userId = _userId;
-    userHomeVC.type = @2;
-    [self.nav pushViewController:userHomeVC animated:YES];
+    if (_userId.length) {
+        HomePageViewController *userHomeVC = [[HomePageViewController alloc] init];
+        userHomeVC.userId = _userId;
+        userHomeVC.type = @2;
+        userHomeVC.isMySelf = _isUserSelf;
+        [self.nav pushViewController:userHomeVC animated:YES];
+    }
 }
 
 - (UIImageView *)certificate {
