@@ -212,7 +212,7 @@ static NSString *sceneCellId = @"THNHomeSenceCollectionViewCell";
     if (self.isMySelf) {
         [self addBarItemRightBarButton:nil image:@"SET" isTransparent:YES];
     }else{
-        [self addBarItemRightBarButton:nil image:@"more_filled" isTransparent:YES];
+        //[self addBarItemRightBarButton:nil image:@"more_filled" isTransparent:YES];
     }
     [[UIApplication sharedApplication] setStatusBarHidden:NO withAnimation:(UIStatusBarAnimationSlide)];
     self.navigationController.navigationBarHidden = YES;
