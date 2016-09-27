@@ -16,6 +16,7 @@ typedef void(^CancelLikeTheSceneBlock)(NSString *idx);
 typedef void(^BeginFavoriteTheSceneBlock)(NSString *idx);
 typedef void(^CancelFavoriteTheSceneBlock)(NSString *idx);
 typedef void(^DeleteTheSceneBlock)(NSString *idx);
+typedef void(^RefreshData)();
 
 @interface THNDataInfoTableViewCell : UITableViewCell
 
@@ -53,6 +54,11 @@ typedef void(^DeleteTheSceneBlock)(NSString *idx);
  *  删除情境
  */
 @pro_copy CancelFavoriteTheSceneBlock deleteTheSceneBlock;
+
+/**
+ *  刷新数据 
+ */
+@pro_copy RefreshData refreshData;
 
 
 @end

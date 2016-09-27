@@ -61,6 +61,9 @@ static NSString *const cellId = @"THNCuXiaoDetalContentTableViewCell";
 }
 
 -(void)viewWillAppear:(BOOL)animated{
+    [[UIApplication sharedApplication] setStatusBarHidden:NO withAnimation:(UIStatusBarAnimationFade)];
+    [[UIApplication sharedApplication] setStatusBarStyle:(UIStatusBarStyleLightContent) animated:YES];
+    
     if (self.vcType == 1) {
         self.navViewTitle.text = @"促销详情";
     }else if (self.vcType == 2){

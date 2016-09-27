@@ -10,6 +10,7 @@
 #import "ReportViewController.h"
 #import "FBShareViewController.h"
 #import "UIView+TYAlertView.h"
+#import "ReleaseViewController.h"
 
 static NSInteger const actionBtnTag = 686;
 
@@ -21,6 +22,17 @@ static NSInteger const actionBtnTag = 686;
 
 @implementation FBAlertViewController
 
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(thn_editSceneSuccess) name:@"editSceneDone" object:nil];
+}
+
+#pragma mark - 编辑成功
+- (void)thn_editSceneSuccess {
+//    self.editDoneAndRefresh();
+    [SVProgressHUD showSuccessWithStatus:@"编辑成功"];
+}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -56,7 +68,7 @@ static NSInteger const actionBtnTag = 686;
     _isFavorite = favorite;
     
     if (isUserSelf == YES) {
-        alertTitle = @[NSLocalizedString(@"ShareBtn", nil), NSLocalizedString(@"Delete", nil), NSLocalizedString(@"cancel", nil)];
+        alertTitle = @[NSLocalizedString(@"Edit", nil), NSLocalizedString(@"Delete", nil), NSLocalizedString(@"cancel", nil)];
         
     } else {
         if (favorite == 0) {
@@ -93,10 +105,11 @@ static NSInteger const actionBtnTag = 686;
 //  用户自己创建的情境，可编辑／删除
 - (void)userActionBtnClick:(UIButton *)button {
     if (button.tag == actionBtnTag) {
-        FBShareViewController * shareVC = [[FBShareViewController alloc] init];
-        shareVC.sceneModel = self.sceneModel;
-        shareVC.sceneId = self.targetId;
-        [self presentViewController:shareVC animated:YES completion:nil];
+        if (self.targetId.length) {
+            ReleaseViewController *editVC = [[ReleaseViewController alloc] init];
+            [editVC thn_releaseTheSceneType:1 withSceneId:self.targetId withSceneData:self.sceneModel];
+            [self presentViewController:editVC animated:YES completion:nil];
+        }
         
     } else if (button.tag == actionBtnTag + 1) {
         [self dismissViewControllerAnimated:YES completion:^{
@@ -141,6 +154,10 @@ static NSInteger const actionBtnTag = 686;
     } else if (button.tag == actionBtnTag + 2) {
         [self dismissViewControllerAnimated:YES completion:nil];
     }
+}
+
+- (void)dealloc {
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:@"editSceneDone" object:nil];
 }
 
 @end

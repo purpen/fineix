@@ -60,7 +60,7 @@
     [self addSubview:self.content];
     [_content mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.equalTo(_headerImg.mas_right).with.offset(10);
-        make.right.equalTo(_sceneImg.mas_left).with.offset(-50);
+        make.right.equalTo(_sceneImg.mas_left).with.offset(-10);
         make.top.equalTo(_headerImg.mas_top).with.offset(0);
         make.height.equalTo(@35);
     }];

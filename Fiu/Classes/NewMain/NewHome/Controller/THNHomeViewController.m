@@ -410,6 +410,7 @@ static NSString *const allCommentsCellId = @"AllCommentsCellId";
     [self.rollList removeAllObjects];
     [self.sceneListMarr removeAllObjects];
     [self.sceneIdMarr removeAllObjects];
+    [self.userIdMarr removeAllObjects];
     [self.commentsMarr removeAllObjects];
     [self.subjectMarr removeAllObjects];
     [self.commentsCountMarr removeAllObjects];
@@ -556,6 +557,10 @@ static NSString *const allCommentsCellId = @"AllCommentsCellId";
                 cell.deleteTheSceneBlock = ^(NSString *idx) {
                     [weakSelf thn_networkDeleteScene:idx];
                 };
+                
+//                cell.refreshData = ^ () {
+//                    [weakSelf.homeTable.mj_header beginRefreshing];
+//                };
             }
             cell.vc = self;
             cell.nav = self.navigationController;

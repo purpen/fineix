@@ -464,8 +464,8 @@ static NSString *const SceneListFooterCellViewId = @"sceneListFooterViewId";
 
 #pragma mark - 设置Nav
 - (void)thn_setNavigationViewUI {
+    [[UIApplication sharedApplication] setStatusBarHidden:NO withAnimation:(UIStatusBarAnimationFade)];
     self.view.backgroundColor = [UIColor colorWithHexString:@"#F8F8F8"];
-    [[UIApplication sharedApplication] setStatusBarHidden:NO];
     self.delegate = self;
     self.navViewTitle.hidden = YES;
     [self thn_addSearchBtnText:NSLocalizedString(@"discoverSearch", nil) type:1];
