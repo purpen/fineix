@@ -165,10 +165,10 @@ static NSString *const goodsCellId = @"GoodsCellId";
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     if (tableView == self.brandList) {
-        _chooseBrandTitle = self.brandTitleMarr[indexPath.row];
-        _chooseBrandId = self.brandIdMarr[indexPath.row];
-        [self setBrandName:_chooseBrandTitle type:1];
         if (self.brandIdMarr.count) {
+            _chooseBrandTitle = self.brandTitleMarr[indexPath.row];
+            _chooseBrandId = self.brandIdMarr[indexPath.row];
+            [self setBrandName:_chooseBrandTitle type:1];
             [self networkBrandOfGoods:self.brandIdMarr[indexPath.row]];
         }
         
