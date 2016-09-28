@@ -19,9 +19,7 @@
 @pro_strong FBRequest *checkRequest;    //  屏蔽
 
 @pro_strong NSString *sceneId;
-@pro_strong NSString *imageUrl;
 @pro_strong THNSceneImageScrollView *imageView;
-
 
 /**
  加载情境原图

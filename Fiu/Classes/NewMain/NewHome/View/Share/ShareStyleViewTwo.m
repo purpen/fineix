@@ -258,7 +258,7 @@
         _userName = [[UIButton alloc] init];
         [_userName setImage:[UIImage imageNamed:@"icon_user_gray"] forState:(UIControlStateNormal)];
         _userName.titleLabel.font = [UIFont systemFontOfSize:10];
-        [_userName setTitleColor:[UIColor colorWithHexString:@"#999999"] forState:(UIControlStateNormal)];
+        [_userName setTitleColor:[UIColor colorWithHexString:@"#222222"] forState:(UIControlStateNormal)];
         _userName.contentHorizontalAlignment = UIControlContentHorizontalAlignmentRight;
     }
     return _userName;
@@ -269,7 +269,7 @@
         _time = [[UIButton alloc] init];
         [_time setImage:[UIImage imageNamed:@"icon_time"] forState:(UIControlStateNormal)];
         _time.titleLabel.font = [UIFont systemFontOfSize:10];
-        [_time setTitleColor:[UIColor colorWithHexString:@"#999999"] forState:(UIControlStateNormal)];
+        [_time setTitleColor:[UIColor colorWithHexString:@"#222222"] forState:(UIControlStateNormal)];
         _time.contentHorizontalAlignment = UIControlContentHorizontalAlignmentRight;
     }
     return _time;
@@ -280,7 +280,7 @@
         _address = [[UIButton alloc] init];
         [_address setImage:[UIImage imageNamed:@"icon_location"] forState:(UIControlStateNormal)];
         _address.titleLabel.font = [UIFont systemFontOfSize:10];
-        [_address setTitleColor:[UIColor colorWithHexString:@"#999999"] forState:(UIControlStateNormal)];
+        [_address setTitleColor:[UIColor colorWithHexString:@"#222222"] forState:(UIControlStateNormal)];
         _address.contentHorizontalAlignment = UIControlContentHorizontalAlignmentRight;
     }
     return _address;
@@ -316,7 +316,7 @@
 - (UILabel *)describe {
     if (!_describe) {
         _describe = [[UILabel alloc] init];
-        _describe.textColor = [UIColor colorWithHexString:@"#666666" alpha:1];
+        _describe.textColor = [UIColor colorWithHexString:@"#222222" alpha:1];
         _describe.font = [UIFont systemFontOfSize:10];
         _describe.numberOfLines = 2;
     }

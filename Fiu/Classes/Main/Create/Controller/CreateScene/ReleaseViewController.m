@@ -118,7 +118,7 @@ static NSString *const URLReleaseFiuScenen = @"/scene_scene/save";
     if (sceneId.length) {
         img64Str = @"";
     } else {
-        NSData * imageData = UIImageJPEGRepresentation(self.bgImg, 0.7);
+        NSData * imageData = UIImageJPEGRepresentation(self.bgImg, 1);
         img64Str = [imageData base64EncodedStringWithOptions:NSDataBase64Encoding64CharacterLineLength];
     }
 

@@ -134,8 +134,6 @@ static NSString *const URLSceneCheck = @"/user/do_check";
 }
 
 - (void)thn_setLookSceneImage:(NSString *)image {
-//    _sceneImage = [UIImage sd_imageWithData:[NSData dataWithContentsOfURL:[NSURL URLWithString:image]]];
-//    [self.imageView displayImage:_sceneImage]
     [self.imageView networkDisplayImage:image];
 }
 
