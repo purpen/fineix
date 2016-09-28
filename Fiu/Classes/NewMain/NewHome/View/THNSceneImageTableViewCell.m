@@ -19,6 +19,10 @@
     NSString *_image;
     NSString *_goodsTitle;
     NSString *_brandTitle;
+    NSString *_sceneId;
+    NSInteger _isFine;
+    NSInteger _isStick;
+    NSInteger _isCheck;
 }
 
 @end
@@ -43,6 +47,10 @@
         [self setUserTagBtn];
     }
     
+    _sceneId = [NSString stringWithFormat:@"%zi", sceneModel.idField];
+    _isFine = sceneModel.fine;
+    _isStick = sceneModel.stick;
+    _isCheck = sceneModel.isCheck;
     _image = sceneModel.coverUrl;
     [self.sceneImage downloadImage:sceneModel.coverUrl place:[UIImage imageNamed:@""]];
 
@@ -185,7 +193,9 @@
     THNSceneImageViewController *sceneImageVC = [[THNSceneImageViewController alloc] init];
     sceneImageVC.modalPresentationStyle = UIModalPresentationOverFullScreen;
     sceneImageVC.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;
-    sceneImageVC.imageUrl = _image;
+    sceneImageVC.sceneId = _sceneId;
+    [sceneImageVC thn_setLookSceneImage:_image];
+    [sceneImageVC thn_getSceneState:_isFine stick:_isStick check:_isCheck];
     [self.vc presentViewController:sceneImageVC animated:YES completion:nil];
 }
 

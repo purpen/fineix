@@ -53,9 +53,12 @@
 	if(![dictionary[@"des"] isKindOfClass:[NSNull class]]){
 		self.des = dictionary[@"des"];
 	}	
-	if(![dictionary[@"fine"] isKindOfClass:[NSNull class]]){
-		self.fine = [dictionary[@"fine"] integerValue];
-	}
+    if(![dictionary[@"fine"] isKindOfClass:[NSNull class]]){
+        self.fine = [dictionary[@"fine"] integerValue];
+    }
+    if(![dictionary[@"stick"] isKindOfClass:[NSNull class]]){
+        self.stick = [dictionary[@"stick"] integerValue];
+    }
 
     if(![dictionary[@"is_check"] isKindOfClass:[NSNull class]]){
         self.isCheck = [dictionary[@"is_check"] integerValue];

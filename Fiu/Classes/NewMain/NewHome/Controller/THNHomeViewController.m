@@ -726,7 +726,7 @@ static NSString *const allCommentsCellId = @"AllCommentsCellId";
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     if (indexPath.section != 0) {
         if (indexPath.row == 3) {
-            if (_contentHigh > 70.0f) {
+            if (_contentHigh > 65.0f) {
                 if (_selectedIndexPath && _selectedIndexPath.section == indexPath.section) {
                     _selectedIndexPath = nil;
                 } else {
