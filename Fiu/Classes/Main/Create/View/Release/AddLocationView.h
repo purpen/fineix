@@ -21,6 +21,15 @@
 @pro_strong NSString            *   latitude;           //  纬度
 @pro_strong NSString            *   longitude;          //  经度
 
-- (void)setEditSceneLocationData:(NSString *)latitude withLng:(NSString *)longitude;
+
+/**
+ 编辑情境改变地点
+
+ @param latitude  纬度
+ @param longitude 经度
+ @param city      城市
+ @param address   地址
+ */
+- (void)setEditSceneLocationLat:(NSString *)latitude lng:(NSString *)longitude city:(NSString *)city address:(NSString *)address;
 
 @end

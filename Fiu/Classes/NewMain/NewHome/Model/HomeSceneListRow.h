@@ -23,6 +23,7 @@
 @property (nonatomic, assign) NSInteger createdOn;
 @property (nonatomic, strong) NSString * des;
 @property (nonatomic, assign) NSInteger fine;
+@property (nonatomic, assign) NSInteger stick;
 @property (nonatomic, assign) NSInteger isCheck;
 @property (nonatomic, assign) NSInteger isLove;
 @property (nonatomic, assign) NSInteger isFavorite;

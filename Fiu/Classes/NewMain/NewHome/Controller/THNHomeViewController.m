@@ -411,6 +411,7 @@ static NSString *const allCommentsCellId = @"AllCommentsCellId";
     [self.rollList removeAllObjects];
     [self.sceneListMarr removeAllObjects];
     [self.sceneIdMarr removeAllObjects];
+    [self.userIdMarr removeAllObjects];
     [self.commentsMarr removeAllObjects];
     [self.subjectMarr removeAllObjects];
     [self.commentsCountMarr removeAllObjects];
@@ -557,6 +558,10 @@ static NSString *const allCommentsCellId = @"AllCommentsCellId";
                 cell.deleteTheSceneBlock = ^(NSString *idx) {
                     [weakSelf thn_networkDeleteScene:idx];
                 };
+                
+//                cell.refreshData = ^ () {
+//                    [weakSelf.homeTable.mj_header beginRefreshing];
+//                };
             }
             cell.vc = self;
             cell.nav = self.navigationController;
@@ -722,7 +727,7 @@ static NSString *const allCommentsCellId = @"AllCommentsCellId";
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     if (indexPath.section != 0) {
         if (indexPath.row == 3) {
-            if (_contentHigh > 70.0f) {
+            if (_contentHigh > 65.0f) {
                 if (_selectedIndexPath && _selectedIndexPath.section == indexPath.section) {
                     _selectedIndexPath = nil;
                 } else {

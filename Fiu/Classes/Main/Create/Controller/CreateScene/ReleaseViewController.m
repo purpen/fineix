@@ -13,7 +13,7 @@ static NSString *const URLReleaseScenen = @"/scene_sight/save";
 static NSString *const URLReleaseFiuScenen = @"/scene_scene/save";
 
 @interface ReleaseViewController () {
-    
+    NSString *_sceneId;
 }
 
 @end
@@ -23,7 +23,6 @@ static NSString *const URLReleaseFiuScenen = @"/scene_scene/save";
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     
-    [self setNavViewUI];
 }
 
 - (void)viewDidLoad {
@@ -32,9 +31,24 @@ static NSString *const URLReleaseFiuScenen = @"/scene_scene/save";
     [self setReleaseViewUI];
 }
 
+- (void)thn_releaseTheSceneType:(NSInteger)type withSceneId:(NSString *)sceneId withSceneData:(HomeSceneListRow *)model {
+    [self setNavViewUiType:type];
+    if (type == 1) {
+        _sceneId = sceneId;
+        
+        [self.addContent.sceneImgView downloadImage:model.coverUrl place:[UIImage imageNamed:@""]];
+        [self.addContent thn_setSceneTitle:model.title];
+        [self.addContent getContentWithTags:model.des];
+        [self.addLocaiton setEditSceneLocationLat:[NSString stringWithFormat:@"%f", [model.location.coordinates[1] floatValue]]
+                                              lng:[NSString stringWithFormat:@"%f", [model.location.coordinates[0] floatValue]]
+                                             city:model.city
+                                          address:model.address];
+    }
+}
+
 #pragma mark - 网络请求
-#pragma mark 发布场景
-- (void)networkNewSceneData {
+#pragma mark 发布情境
+- (void)networkNewSceneData:(NSString *)sceneId {
     NSString *firTitle = [self.addContent.title.text stringByReplacingOccurrencesOfString:@" " withString:@""];
     NSString *subTitle = [self.addContent.suTitle.text stringByReplacingOccurrencesOfString:@" " withString:@""];
     if (subTitle.length == 0) {
@@ -56,6 +70,7 @@ static NSString *const URLReleaseFiuScenen = @"/scene_scene/save";
     NSString *lat = self.addLocaiton.latitude;
     NSString *tags = [self.addContent.userAddTags componentsJoinedByString:@","];
     NSString * json;
+    NSString * img64Str;
     
     [SVProgressHUD showWithMaskType:SVProgressHUDMaskTypeBlack];
     if (self.goodsId.count) {
@@ -97,11 +112,19 @@ static NSString *const URLReleaseFiuScenen = @"/scene_scene/save";
     if (json.length == 0) {
         json = @"";
     }
-    
-    NSData * imageData = UIImageJPEGRepresentation(self.bgImg, 0.7);
-    NSString * icon64Str = [imageData base64EncodedStringWithOptions:NSDataBase64Encoding64CharacterLineLength];
+    if (self.actionId.length == 0) {
+        self.actionId = @"";
+    }
+    if (sceneId.length) {
+        img64Str = @"";
+    } else {
+        NSData * imageData = UIImageJPEGRepresentation(self.bgImg, 1);
+        img64Str = [imageData base64EncodedStringWithOptions:NSDataBase64Encoding64CharacterLineLength];
+    }
+
     NSDictionary * paramDict = @{
-                                 @"tmp":icon64Str,
+                                 @"id":sceneId,
+                                 @"tmp":img64Str,
                                  @"title":title,
                                  @"des":des,
                                  @"lng":lng,
@@ -117,15 +140,22 @@ static NSString *const URLReleaseFiuScenen = @"/scene_scene/save";
     
     [self.releaseSceneRequest startRequestSuccess:^(FBRequest *request, id result) {
         if ([[result valueForKey:@"success"] isEqualToNumber:@1]) {
-            self.sharePopView.sceneId = [NSString stringWithFormat:@"%zi", [[[result valueForKey:@"data"] valueForKey:@"id"] integerValue]];
-            [self dismissViewControllerAnimated:YES completion:^{
-                [self showShareView];
-            }];
+            if (sceneId.length) {
+//                [[NSNotificationCenter defaultCenter] postNotificationName:@"editSceneDone" object:sceneId];
+                [self dismissViewControllerAnimated:YES completion:^{
+                    [SVProgressHUD showSuccessWithStatus:@"编辑成功"];
+                }];
+                
+            } else {
+                self.sharePopView.sceneId = [NSString stringWithFormat:@"%zi", [[[result valueForKey:@"data"] valueForKey:@"id"] integerValue]];
+                [self dismissViewControllerAnimated:YES completion:^{
+                    [self showShareView];
+                }];
+            }
         }
         [SVProgressHUD dismiss];
         
     } failure:^(FBRequest *request, NSError *error) {
-        NSLog(@"%@", error);
         [SVProgressHUD showErrorWithStatus:[error localizedDescription]];
     }];
 }
@@ -182,23 +212,46 @@ static NSString *const URLReleaseFiuScenen = @"/scene_scene/save";
 }
 
 #pragma mark -  设置导航栏
-- (void)setNavViewUI {
+/**
+ 设置视图样式
+ 
+ @param releaseType 发布类型：0:创建新情境／1:编辑情境
+ */
+- (void)setNavViewUiType:(NSInteger)releaseType {
+    [[UIApplication sharedApplication] setStatusBarHidden:YES withAnimation:(UIStatusBarAnimationFade)];
     self.view.backgroundColor = [UIColor colorWithHexString:@"#F8F8F8"];
-    [self addNavViewTitle:NSLocalizedString(@"releaseVcTitle", nil)];
     self.navTitle.textColor = [UIColor whiteColor];
-    [self.cancelDoneBtn setImage:[UIImage imageNamed:@"icon_back_white"] forState:(UIControlStateNormal)];
-    [self addCancelDoneButton];
-    [self addDoneButton];
-    [self.doneBtn addTarget:self action:@selector(releaseScene) forControlEvents:(UIControlEventTouchUpInside)];
     
-    if (self.actionId.length == 0) {
-        self.actionId = @"";
+    if (releaseType == 0) {
+        [self addNavViewTitle:NSLocalizedString(@"releaseVcTitle", nil)];
+        [self.cancelDoneBtn setImage:[UIImage imageNamed:@"icon_back_white"] forState:(UIControlStateNormal)];
+        [self addCancelDoneButton];
+        [self addDoneButton];
+        [self.doneBtn addTarget:self action:@selector(releaseScene) forControlEvents:(UIControlEventTouchUpInside)];
+        //  发情境参与活动id
+        if (self.actionId.length == 0) {
+            self.actionId = @"";
+        }
+        
+    } else if (releaseType == 1) {
+        [self addNavViewTitle:NSLocalizedString(@"editScene", nil)];
+        [self addCloseBtn:@"icon_cancel"];
+        [self addDoneButton];
+        [self.doneBtn setTitle:NSLocalizedString(@"sure", nil) forState:(UIControlStateNormal)];
+        [self.doneBtn addTarget:self action:@selector(editScene) forControlEvents:(UIControlEventTouchUpInside)];
     }
 }
 
-#pragma mark - 确认发布场景
+#pragma mark 发布新情境
 - (void)releaseScene {
-    [self networkNewSceneData];
+    [self networkNewSceneData:@""];
+}
+
+#pragma mark 编辑情境
+- (void)editScene {
+    if (_sceneId.length) {
+        [self networkNewSceneData:_sceneId];
+    }
 }
 
 @end

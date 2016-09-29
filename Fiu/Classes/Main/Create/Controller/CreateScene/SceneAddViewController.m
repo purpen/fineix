@@ -421,6 +421,7 @@ static NSString *const URLUserAddBrand = @"/scene_brands/submit";
             releaseVC.goodsX = originX;
             releaseVC.goodsY = originY;
             releaseVC.goodsLoc = loc;
+            [releaseVC thn_releaseTheSceneType:0 withSceneId:nil withSceneData:nil];
             [self.navigationController pushViewController:releaseVC animated:YES];
         }
 }

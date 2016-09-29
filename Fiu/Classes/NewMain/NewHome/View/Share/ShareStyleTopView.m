@@ -249,7 +249,7 @@
         [_userName setImage:[UIImage imageNamed:@"icon_user_gray"] forState:(UIControlStateNormal)];
         [_userName setTitleEdgeInsets:(UIEdgeInsetsMake(0, 5, 0, 0))];
         _userName.titleLabel.font = [UIFont systemFontOfSize:10];
-        [_userName setTitleColor:[UIColor colorWithHexString:@"#999999"] forState:(UIControlStateNormal)];
+        [_userName setTitleColor:[UIColor colorWithHexString:@"#222222"] forState:(UIControlStateNormal)];
         _userName.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
     }
     return _userName;
@@ -261,7 +261,7 @@
         [_time setImage:[UIImage imageNamed:@"icon_time"] forState:(UIControlStateNormal)];
         [_time setTitleEdgeInsets:(UIEdgeInsetsMake(0, 5, 0, 0))];
         _time.titleLabel.font = [UIFont systemFontOfSize:10];
-        [_time setTitleColor:[UIColor colorWithHexString:@"#999999"] forState:(UIControlStateNormal)];
+        [_time setTitleColor:[UIColor colorWithHexString:@"#222222"] forState:(UIControlStateNormal)];
         _time.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
     }
     return _time;
@@ -273,7 +273,7 @@
         [_address setImage:[UIImage imageNamed:@"icon_location"] forState:(UIControlStateNormal)];
         [_address setTitleEdgeInsets:(UIEdgeInsetsMake(0, 5, 0, 0))];
         _address.titleLabel.font = [UIFont systemFontOfSize:10];
-        [_address setTitleColor:[UIColor colorWithHexString:@"#999999"] forState:(UIControlStateNormal)];
+        [_address setTitleColor:[UIColor colorWithHexString:@"#222222"] forState:(UIControlStateNormal)];
         _address.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
     }
     return _address;
@@ -317,7 +317,7 @@
 - (UILabel *)describe {
     if (!_describe) {
         _describe = [[UILabel alloc] init];
-        _describe.textColor = [UIColor colorWithHexString:@"#666666" alpha:1];
+        _describe.textColor = [UIColor colorWithHexString:@"#222222" alpha:1];
         _describe.font = [UIFont systemFontOfSize:10];
         _describe.numberOfLines = 2;
     }

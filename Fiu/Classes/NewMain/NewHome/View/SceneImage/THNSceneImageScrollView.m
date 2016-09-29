@@ -69,6 +69,23 @@
     [self configureForImageSize:self.imageView.bounds.size];
 }
 
+- (void)networkDisplayImage:(NSString *)imageUrl {
+    [self.imageView removeFromSuperview];
+    self.imageView = nil;
+    self.zoomScale = 1.0;
+    
+    self.imageView = [[UIImageView alloc] init];
+    [self.imageView downloadImage:imageUrl place:[UIImage imageNamed:@""]];
+    self.imageView.clipsToBounds = NO;
+    [self addSubview:self.imageView];
+    
+    CGRect frame = self.imageView.frame;
+    frame.size.height = self.bounds.size.width;
+    frame.size.width = self.bounds.size.width;
+    self.imageView.frame = frame;
+    [self configureForImageSize:self.imageView.bounds.size];
+}
+
 - (void)configureForImageSize:(CGSize)imageSize {
     _imageSize = imageSize;
     self.contentSize = imageSize;

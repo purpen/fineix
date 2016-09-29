@@ -28,4 +28,7 @@ typedef void(^GetEditContentAndTags)(NSString * title, NSString * des, NSMutable
 
 @pro_copy GetEditContentAndTags  getEditContentAndTags;
 
+- (void)thn_setSceneTitle:(NSString *)title;
+- (void)getContentWithTags:(NSString *)content;
+
 @end

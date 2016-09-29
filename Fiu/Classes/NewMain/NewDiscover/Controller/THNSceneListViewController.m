@@ -388,7 +388,7 @@ static NSString *const twoCommentsCellId = @"TwoCommentsCellId";
 #pragma mark - 设置Nav
 - (void)thn_setNavigationViewUI {
     self.view.backgroundColor = [UIColor colorWithHexString:@"#F8F8F8"];
-    [[UIApplication sharedApplication] setStatusBarHidden:NO];
+    [[UIApplication sharedApplication] setStatusBarHidden:NO withAnimation:(UIStatusBarAnimationFade)];
     self.navViewTitle.text = NSLocalizedString(@"SceneListVC", nil);
     self.delegate = self;
 }

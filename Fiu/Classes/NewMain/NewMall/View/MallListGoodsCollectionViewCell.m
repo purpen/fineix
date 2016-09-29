@@ -70,7 +70,7 @@
 - (UIImageView *)image {
     if (!_image) {
         _image = [[UIImageView alloc] init];
-        _image.backgroundColor = [UIColor whiteColor];
+        _image.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"default_goods_170"]];
         _image.contentMode = UIViewContentModeScaleAspectFill;
         _image.clipsToBounds = YES;
     }

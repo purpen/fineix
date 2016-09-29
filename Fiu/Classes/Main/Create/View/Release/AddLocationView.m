@@ -28,9 +28,17 @@
     return self;
 }
 
-- (void)setEditSceneLocationData:(NSString *)latitude withLng:(NSString *)longitude {
-    self.latitude = latitude;
-    self.longitude = longitude;
+- (void)setEditSceneLocationLat:(NSString *)latitude lng:(NSString *)longitude city:(NSString *)city address:(NSString *)address {
+    if (latitude.length) {
+        self.latitude = latitude;
+        self.longitude = longitude;
+        self.cityLab.text = city;
+        self.locationLab.text = address;
+        
+        self.locationView.hidden = NO;
+        self.addLocation.hidden = YES;
+        self.clearBtn.hidden = NO;
+    }
 }
 
 #pragma mark - 显示位置信息视图

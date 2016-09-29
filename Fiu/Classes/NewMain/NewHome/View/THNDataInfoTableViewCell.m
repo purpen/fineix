@@ -11,6 +11,7 @@
 #import "FBAlertViewController.h"
 #import "FBShareViewController.h"
 #import "THNLoginRegisterViewController.h"
+#import "ReleaseViewController.h"
 
 @implementation THNDataInfoTableViewCell {
     NSString *_sceneId;
@@ -140,6 +141,10 @@
     alertVC.deleteScene = ^ (NSString *sceneId) {
         weakSelf.deleteTheSceneBlock(sceneId);
     };
+    
+//    alertVC.editDoneAndRefresh = ^ () {
+//        weakSelf.refreshData();
+//    };
     
     [self.vc presentViewController:alertVC animated:YES completion:nil];
 }
