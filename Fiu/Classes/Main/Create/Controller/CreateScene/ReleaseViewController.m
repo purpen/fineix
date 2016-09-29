@@ -141,8 +141,10 @@ static NSString *const URLReleaseFiuScenen = @"/scene_scene/save";
     [self.releaseSceneRequest startRequestSuccess:^(FBRequest *request, id result) {
         if ([[result valueForKey:@"success"] isEqualToNumber:@1]) {
             if (sceneId.length) {
-                [[NSNotificationCenter defaultCenter] postNotificationName:@"editSceneDone" object:sceneId];
-                [self dismissViewControllerAnimated:YES completion:nil];
+//                [[NSNotificationCenter defaultCenter] postNotificationName:@"editSceneDone" object:sceneId];
+                [self dismissViewControllerAnimated:YES completion:^{
+                    [SVProgressHUD showSuccessWithStatus:@"编辑成功"];
+                }];
                 
             } else {
                 self.sharePopView.sceneId = [NSString stringWithFormat:@"%zi", [[[result valueForKey:@"data"] valueForKey:@"id"] integerValue]];

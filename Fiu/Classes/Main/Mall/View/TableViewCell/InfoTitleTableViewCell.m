@@ -27,14 +27,7 @@
         make.height.equalTo(@(size.height+5));
     }];
     
-    if (model.stage == 16) {
-        self.goodsPrice.font = [UIFont systemFontOfSize:11];
-        self.goodsPrice.text = @"此产品为用户标记，暂未销售。浮游正在努力上架产品中ing...";
-        [self.goodsPrice mas_updateConstraints:^(MASConstraintMaker *make) {
-            make.right.equalTo(self.mas_right).with.offset(-15);
-        }];
-        
-    } else {
+    if (model.stage == 9) {
         NSString *salePrice = [NSString stringWithFormat:@"¥ %zi", model.salePrice];
         NSAttributedString *oldPrice = [[NSAttributedString alloc] initWithString:[NSString stringWithFormat:@"¥ %zi",  model.marketPrice]
                                                                        attributes:@{NSStrikethroughStyleAttributeName:@1}];
@@ -43,6 +36,13 @@
         CGFloat priceWidth = [salePrice boundingRectWithSize:CGSizeMake(320, 17) options:(NSStringDrawingUsesDeviceMetrics) attributes:nil context:nil].size.width;
         [self.goodsPrice mas_updateConstraints:^(MASConstraintMaker *make) {
             make.width.equalTo(@(priceWidth *1.5));
+        }];
+        
+    } else {
+        self.goodsPrice.font = [UIFont systemFontOfSize:11];
+        self.goodsPrice.text = @"此产品为用户标记，暂未销售。浮游正在努力上架产品中ing...";
+        [self.goodsPrice mas_updateConstraints:^(MASConstraintMaker *make) {
+            make.right.equalTo(self.mas_right).with.offset(-15);
         }];
     }
     

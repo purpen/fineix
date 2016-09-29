@@ -25,13 +25,14 @@ static NSInteger const actionBtnTag = 686;
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(thn_editSceneSuccess) name:@"editSceneDone" object:nil];
+    [[UIApplication sharedApplication] setStatusBarHidden:NO withAnimation:(UIStatusBarAnimationFade)];
+//    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(thn_editSceneSuccess) name:@"editSceneDone" object:nil];
 }
 
 #pragma mark - 编辑成功
 - (void)thn_editSceneSuccess {
 //    self.editDoneAndRefresh();
-    [SVProgressHUD showSuccessWithStatus:@"编辑成功"];
+//    [SVProgressHUD showSuccessWithStatus:@"编辑成功"];
 }
 
 - (void)viewDidLoad {
@@ -157,7 +158,7 @@ static NSInteger const actionBtnTag = 686;
 }
 
 - (void)dealloc {
-    [[NSNotificationCenter defaultCenter] removeObserver:self name:@"editSceneDone" object:nil];
+//    [[NSNotificationCenter defaultCenter] removeObserver:self name:@"editSceneDone" object:nil];
 }
 
 @end

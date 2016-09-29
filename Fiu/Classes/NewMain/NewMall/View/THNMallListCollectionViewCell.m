@@ -179,6 +179,7 @@ static NSString *const MallListGoodsCellId = @"mallListGoodsCellId";
     MallListGoodsCollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:MallListGoodsCellId
                                                                                  forIndexPath:indexPath];
     if (self.goodsListMarr.count) {
+        cell.image.backgroundColor = [UIColor whiteColor];
         [cell setMallSubjectGoodsListData:self.goodsListMarr[indexPath.row]];
     }
     return cell;
