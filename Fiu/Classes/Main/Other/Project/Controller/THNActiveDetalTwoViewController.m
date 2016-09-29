@@ -22,6 +22,7 @@
 #import <MJRefresh.h>
 #import "THNSceneImageViewController.h"
 #import "HomeSceneListRow.h"
+#import "THNResoltCollectionViewCell.h"
 
 @interface THNActiveDetalTwoViewController ()<UICollectionViewDelegate,UICollectionViewDataSource,UIWebViewDelegate>
 
@@ -66,6 +67,8 @@
 @property (nonatomic, assign) int webViewLoads;
 /**  */
 @property (nonatomic, strong) UIButton *attendBtn;
+/**  */
+@property (nonatomic, strong) UILabel *priceLabel;
 
 @end
 
@@ -119,6 +122,7 @@ static NSString *const URLCancelFollowUser = @"/follow/ajax_cancel_follow";
 -(UICollectionView *)contentView{
     if (!_contentView) {
         _flowLayout = [[UICollectionViewFlowLayout alloc] init];
+        _flowLayout.headerReferenceSize = CGSizeMake(SCREEN_WIDTH, 30);
         _contentView = [[UICollectionView alloc] initWithFrame:CGRectMake(0, 64, SCREEN_WIDTH, SCREEN_HEIGHT - 64) collectionViewLayout:_flowLayout];
         _contentView.backgroundColor = [UIColor colorWithHexString:@"#F7F7F7"];
         _contentView.delegate = self;
@@ -129,7 +133,7 @@ static NSString *const URLCancelFollowUser = @"/follow/ajax_cancel_follow";
         [_contentView registerClass:[UICollectionViewCell class] forCellWithReuseIdentifier:secondCellId];
         [_contentView registerNib:[UINib nibWithNibName:@"THNActiveRuleCollectionViewCell" bundle:nil] forCellWithReuseIdentifier:ruleCellId];
         [_contentView registerClass:[THNDiscoverSceneCollectionViewCell class] forCellWithReuseIdentifier:collectionViewCellId];
-        [_contentView registerClass:[UICollectionViewCell class] forCellWithReuseIdentifier:resultCellId];
+        [_contentView registerNib:[UINib nibWithNibName:@"THNResoltCollectionViewCell" bundle:nil] forCellWithReuseIdentifier:resultCellId];
     }
     return _contentView;
 }
@@ -153,7 +157,7 @@ static NSString *const URLCancelFollowUser = @"/follow/ajax_cancel_follow";
 }
 
 -(NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView{
-    return 3;
+    return 2 + self.resultsAry.count;
 }
 
 -(THNActiveTopView *)activeTopView{
@@ -179,7 +183,12 @@ static NSString *const URLCancelFollowUser = @"/follow/ajax_cancel_follow";
                 break;
             case 2:
                 //活动结果
-                return self.resultsAry.count;
+            {
+                NSDictionary *dict = self.resultsAry[section];
+                NSArray *ary = dict[@"data"];
+                return ary.count;
+             }
+                
                 break;
                 
             default:
@@ -187,6 +196,29 @@ static NSString *const URLCancelFollowUser = @"/follow/ajax_cancel_follow";
         }
     }
     return 1;
+}
+
+- (UICollectionReusableView *)collectionView:(UICollectionView *)collectionView viewForSupplementaryElementOfKind:(NSString *)kind atIndexPath:(NSIndexPath *)indexPath{
+    
+    if (indexPath.section > 2) {
+        UICollectionReusableView *reusableview = nil;
+        
+        if (kind == UICollectionElementKindSectionHeader){
+            
+            UICollectionReusableView *headerView = [collectionView dequeueReusableSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:@"cell" forIndexPath:indexPath];
+            headerView.backgroundColor = [UIColor redColor];
+            
+            reusableview = headerView;
+            
+        }
+        
+        return reusableview;
+    }
+    
+    
+    UICollectionReusableView *reusableview = nil;
+    return reusableview;
+    
 }
 
 - (UIEdgeInsets)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout insetForSectionAtIndex:(NSInteger)section{
@@ -269,7 +301,7 @@ static NSString *const URLCancelFollowUser = @"/follow/ajax_cancel_follow";
         UICollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:secondCellId forIndexPath:indexPath];
         [cell.contentView addSubview:self.segmentedControl];
         return cell;
-    }else if (indexPath.section == 2){
+    }else {
         NSInteger flag = [self.type integerValue];
         switch (flag) {
             case 0:
@@ -314,7 +346,6 @@ static NSString *const URLCancelFollowUser = @"/follow/ajax_cancel_follow";
                 _scene = [[THNSceneImageTableViewCell alloc] init];
                 _scene.vc = self;
                 _scene.sceneImage.tag = indexPath.row;
-//                [_scene.sceneImage addTarget:self action:@selector(sceneImageClick:) forControlEvents:UIControlEventTouchUpInside];
                 _top = [[THNUserInfoTableViewCell alloc] init];
                 _top.beginFollowTheUserBlock = ^(NSString *userId) {
                     [weakSelf beginFollowUser:userId];
@@ -323,7 +354,9 @@ static NSString *const URLCancelFollowUser = @"/follow/ajax_cancel_follow";
                 _top.cancelFollowTheUserBlock = ^(NSString *userId) {
                     [weakSelf cancelFollowUser:userId];
                 };
-                UICollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:resultCellId forIndexPath:indexPath];
+                
+                THNResoltCollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:resultCellId forIndexPath:indexPath];
+                
                 [cell.contentView addSubview:self.top];
                 [self.top mas_makeConstraints:^(MASConstraintMaker *make) {
                     make.height.mas_equalTo(50);
@@ -331,6 +364,7 @@ static NSString *const URLCancelFollowUser = @"/follow/ajax_cancel_follow";
                     make.right.mas_equalTo(cell.contentView.mas_right).offset(0);
                     make.top.mas_equalTo(cell.contentView.mas_top).offset(0);
                 }];
+                
                 [cell.contentView addSubview:self.scene];
                 [self.scene mas_makeConstraints:^(MASConstraintMaker *make) {
                     make.height.mas_equalTo(SCREEN_WIDTH);
@@ -338,8 +372,10 @@ static NSString *const URLCancelFollowUser = @"/follow/ajax_cancel_follow";
                     make.right.mas_equalTo(cell.contentView.mas_right).offset(0);
                     make.top.mas_equalTo(self.top.mas_bottom).offset(0);
                 }];
-//                self.top.userModel = self.resultsAry[indexPath.row];
-                [self.top thn_setHomeSceneUserInfoData:self.resultsAry[indexPath.row] userId:[self getLoginUserID] isLogin:[self isUserLogin]];
+                
+                NSDictionary *dict = self.resultsAry[indexPath.section];
+                NSArray *ary = dict[@"data"];
+                [self.top thn_setHomeSceneUserInfoData:ary[indexPath.row] userId:[self getLoginUserID] isLogin:[self isUserLogin]];
                 [self.scene thn_setSceneImageData:self.resultsAry[indexPath.row]];
                 return cell;
             }
@@ -353,6 +389,9 @@ static NSString *const URLCancelFollowUser = @"/follow/ajax_cancel_follow";
     UICollectionViewCell *cell;
     return cell;
 }
+
+
+
 
 //  点赞
 - (void)thn_networkLikeSceneData:(NSString *)idx {
@@ -426,15 +465,6 @@ static NSString *const URLCancelFollowUser = @"/follow/ajax_cancel_follow";
     }];
 }
 
-//
-//-(void)sceneImageClick:(UIButton*)sender{
-//    THNSceneImageViewController *sceneImageVC = [[THNSceneImageViewController alloc] init];
-//    sceneImageVC.modalPresentationStyle = UIModalPresentationOverFullScreen;
-//    sceneImageVC.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;
-//    HomeSceneListRow *model = self.resultsAry[sender.tag];
-//    sceneImageVC.imageUrl = model.coverUrl;
-//    [self presentViewController:sceneImageVC animated:YES completion:nil];
-//}
 
 -(void)attend{
     PictureToolViewController * pictureToolVC = [[PictureToolViewController alloc] init];
@@ -553,8 +583,22 @@ static NSString *const URLCancelFollowUser = @"/follow/ajax_cancel_follow";
     [request startRequestSuccess:^(FBRequest *request, id result) {
         if (result[@"success"]) {
             NSLog(@"活动结果 %@",result);
-            NSArray *rows = result[@"data"][@"sights"];
-            self.resultsAry = [HomeSceneListRow mj_objectArrayWithKeyValuesArray:rows];
+            NSArray *rows = result[@"data"][@"prize_sights"];
+            for (NSDictionary *dict in rows) {
+                NSArray *dataAry = dict[@"data"];
+                NSString *str = dict[@"prize"];
+                NSMutableArray *ary = [NSMutableArray array];
+                for (NSDictionary *dataAryDict in dataAry) {
+                    HomeSceneListRow *row = [[HomeSceneListRow alloc] initWithDictionary:dataAryDict];
+                    [ary addObject:row];
+                }
+                NSDictionary *rowsDict = @{
+                                           @"prize" : str,
+                                           @"data" : ary
+                                           };
+                [self.resultsAry addObject:rowsDict];
+            }
+            
             for (HomeSceneListRow *model in self.resultsAry) {
                 [self.resultUserIdAry addObject:model.user._id];
             }

@@ -377,6 +377,8 @@
 		1F69CE211CF70BFA00AE3271 /* OfficialCertificationViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1F69CE1F1CF70BFA00AE3271 /* OfficialCertificationViewController.xib */; };
 		1F6CA25D1D5B0FA600DFB79E /* MediaPlayer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1F6CA25C1D5B0FA600DFB79E /* MediaPlayer.framework */; };
 		1F772B5E1CF3FD910018AE40 /* AppDelegate.mm in Sources */ = {isa = PBXBuildFile; fileRef = 1F772B5D1CF3FD910018AE40 /* AppDelegate.mm */; };
+		1F9309901D9D1E8800832D90 /* THNResoltCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F93098E1D9D1E8800832D90 /* THNResoltCollectionViewCell.m */; };
+		1F9309911D9D1E8800832D90 /* THNResoltCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1F93098F1D9D1E8800832D90 /* THNResoltCollectionViewCell.xib */; };
 		1FA204E51D378AAB00B89699 /* UIView+Size.m in Sources */ = {isa = PBXBuildFile; fileRef = 1FA204E41D378AAB00B89699 /* UIView+Size.m */; };
 		1FC53B921D89222200B0B666 /* SGTopTitleView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1FC53B8F1D89222200B0B666 /* SGTopTitleView.m */; };
 		1FC53B931D89222200B0B666 /* UIView+SGExtension.m in Sources */ = {isa = PBXBuildFile; fileRef = 1FC53B911D89222200B0B666 /* UIView+SGExtension.m */; };
@@ -1269,6 +1271,9 @@
 		1F69CE1F1CF70BFA00AE3271 /* OfficialCertificationViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = OfficialCertificationViewController.xib; sourceTree = "<group>"; };
 		1F6CA25C1D5B0FA600DFB79E /* MediaPlayer.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MediaPlayer.framework; path = System/Library/Frameworks/MediaPlayer.framework; sourceTree = SDKROOT; };
 		1F772B5D1CF3FD910018AE40 /* AppDelegate.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = AppDelegate.mm; sourceTree = "<group>"; };
+		1F93098D1D9D1E8800832D90 /* THNResoltCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THNResoltCollectionViewCell.h; sourceTree = "<group>"; };
+		1F93098E1D9D1E8800832D90 /* THNResoltCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THNResoltCollectionViewCell.m; sourceTree = "<group>"; };
+		1F93098F1D9D1E8800832D90 /* THNResoltCollectionViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = THNResoltCollectionViewCell.xib; sourceTree = "<group>"; };
 		1FA204E31D378AAB00B89699 /* UIView+Size.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+Size.h"; sourceTree = "<group>"; };
 		1FA204E41D378AAB00B89699 /* UIView+Size.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+Size.m"; sourceTree = "<group>"; };
 		1FC53B8E1D89222200B0B666 /* SGTopTitleView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SGTopTitleView.h; sourceTree = "<group>"; };
@@ -3017,6 +3022,7 @@
 		1F2AFCAC1D8817CC00DA6035 /* Project */ = {
 			isa = PBXGroup;
 			children = (
+				1F93098C1D9D1E5D00832D90 /* view */,
 				1F2AFCAD1D8817CC00DA6035 /* Controller */,
 				1F2AFCD71D8817CC00DA6035 /* Model */,
 			);
@@ -3349,6 +3355,16 @@
 			name = Resource;
 			path = Fiu/Resource;
 			sourceTree = SOURCE_ROOT;
+		};
+		1F93098C1D9D1E5D00832D90 /* view */ = {
+			isa = PBXGroup;
+			children = (
+				1F93098D1D9D1E8800832D90 /* THNResoltCollectionViewCell.h */,
+				1F93098E1D9D1E8800832D90 /* THNResoltCollectionViewCell.m */,
+				1F93098F1D9D1E8800832D90 /* THNResoltCollectionViewCell.xib */,
+			);
+			path = view;
+			sourceTree = "<group>";
 		};
 		1FC53B8D1D89222200B0B666 /* SGTopTitleView */ = {
 			isa = PBXGroup;
@@ -4439,6 +4455,7 @@
 				1F2AFDDE1D8818A400DA6035 /* CommentView.xib in Resources */,
 				1F2AFCA71D88170B00DA6035 /* THNSenceTopicView.xib in Resources */,
 				1F2A90281CF40277005116C7 /* Empty.xib in Resources */,
+				1F9309911D9D1E8800832D90 /* THNResoltCollectionViewCell.xib in Resources */,
 				1F2AFCFD1D8817CC00DA6035 /* THNActivityCollectionViewCell.xib in Resources */,
 				1F223B1D1CD714F3007687F7 /* messages.plist in Resources */,
 				1F2AFCFB1D8817CC00DA6035 /* THNActiveRuleCollectionViewCell.xib in Resources */,
@@ -4810,6 +4827,7 @@
 				D8E8FFC51D756D3600DDC3E0 /* THNHotActionCollectionReusableView.m in Sources */,
 				D812815A1CAA8532007CF08B /* fineix.xcdatamodeld in Sources */,
 				D8ACF4581D6C1F9400DB79D8 /* THNMallSubjectModelRow.m in Sources */,
+				1F9309901D9D1E8800832D90 /* THNResoltCollectionViewCell.m in Sources */,
 				1F2A8FBE1CF40277005116C7 /* ChildTagsTag.m in Sources */,
 				D8C094F91D752D5A00908491 /* HomeSceneListComments.m in Sources */,
 				D840F0941D93B57700CE9FB7 /* THNRemindModelTargetObj.m in Sources */,
