@@ -414,6 +414,7 @@ static NSString *const URLCancelFollowUser = @"/follow/ajax_cancel_follow";
             NSString *loveCount = [NSString stringWithFormat:@"%zi", [[[result valueForKey:@"data"] valueForKey:@"love_count"] integerValue]];
             [self.senceModelAry[index] setValue:loveCount forKey:@"loveCount"];
             [self.senceModelAry[index] setValue:@"1" forKey:@"isLove"];
+            [self.contentView reloadData];
         }
         
     } failure:^(FBRequest *request, NSError *error) {
@@ -430,6 +431,7 @@ static NSString *const URLCancelFollowUser = @"/follow/ajax_cancel_follow";
             NSString *loveCount = [NSString stringWithFormat:@"%zi", [[[result valueForKey:@"data"] valueForKey:@"love_count"] integerValue]];
             [self.senceModelAry[index] setValue:loveCount forKey:@"loveCount"];
             [self.senceModelAry[index] setValue:@"0" forKey:@"isLove"];
+            [self.contentView reloadData];
         }
         
     } failure:^(FBRequest *request, NSError *error) {
@@ -466,7 +468,7 @@ static NSString *const URLCancelFollowUser = @"/follow/ajax_cancel_follow";
                 [[row valueForKey:@"user"] setValue:@"0" forKey:@"is_follow"];
                 [self thn_networkCancelFollowUserData:userId];
                 
-                [self.contentView reloadData]; 
+                [self.contentView reloadData];
                 
             }
         }
