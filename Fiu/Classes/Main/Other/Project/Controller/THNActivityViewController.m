@@ -179,7 +179,7 @@ static NSString *const cellId = @"THNActivityCollectionViewCell";
 -(void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath{
     THNActiveDetalTwoViewController *vc = [[THNActiveDetalTwoViewController alloc] init];
     vc.activeDetalId = ((THNArticleModel*)self.modelAry[indexPath.row])._id;
-//    vc.model = self.modelAry[indexPath.row];
+    vc.type = @0;
     [self.navigationController pushViewController:vc animated:YES];
 }
 

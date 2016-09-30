@@ -23,6 +23,7 @@
 #import "THNSceneImageViewController.h"
 #import "HomeSceneListRow.h"
 #import "THNResoltCollectionViewCell.h"
+#import "RecipeCollectionHeaderView.h"
 
 @interface THNActiveDetalTwoViewController ()<UICollectionViewDelegate,UICollectionViewDataSource,UIWebViewDelegate>
 
@@ -125,8 +126,7 @@ static NSString *const URLCancelFollowUser = @"/follow/ajax_cancel_follow";
         _flowLayout.headerReferenceSize = CGSizeMake(SCREEN_WIDTH, 30);
         _contentView = [[UICollectionView alloc] initWithFrame:CGRectMake(0, 64, SCREEN_WIDTH, SCREEN_HEIGHT - 64) collectionViewLayout:_flowLayout];
         _contentView.backgroundColor = [UIColor colorWithHexString:@"#F7F7F7"];
-        _contentView.delegate = self;
-        _contentView.dataSource = self;
+        
         _contentView.showsVerticalScrollIndicator = NO;
         _contentView.showsHorizontalScrollIndicator = NO;
         [_contentView registerClass:[UICollectionViewCell class] forCellWithReuseIdentifier:topCellId];
@@ -134,6 +134,10 @@ static NSString *const URLCancelFollowUser = @"/follow/ajax_cancel_follow";
         [_contentView registerNib:[UINib nibWithNibName:@"THNActiveRuleCollectionViewCell" bundle:nil] forCellWithReuseIdentifier:ruleCellId];
         [_contentView registerClass:[THNDiscoverSceneCollectionViewCell class] forCellWithReuseIdentifier:collectionViewCellId];
         [_contentView registerNib:[UINib nibWithNibName:@"THNResoltCollectionViewCell" bundle:nil] forCellWithReuseIdentifier:resultCellId];
+        [_contentView registerNib:[UINib nibWithNibName:@"RecipeCollectionHeaderView" bundle:nil] forSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:@"RecipeCollectionHeaderView"];
+        //[_contentView registerClass:[RecipeCollectionHeaderView class] forSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:@"RecipeCollectionHeaderView"];
+        _contentView.delegate = self;
+        _contentView.dataSource = self;
     }
     return _contentView;
 }
@@ -141,6 +145,7 @@ static NSString *const URLCancelFollowUser = @"/follow/ajax_cancel_follow";
 -(void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
     [UIApplication sharedApplication].statusBarHidden = NO;
+    [UIApplication sharedApplication].statusBarStyle = UIStatusBarStyleLightContent;
 }
 
 - (void)dealloc {
@@ -157,7 +162,28 @@ static NSString *const URLCancelFollowUser = @"/follow/ajax_cancel_follow";
 }
 
 -(NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView{
-    return 2 + self.resultsAry.count;
+    NSInteger flag = [self.type integerValue];
+    switch (flag) {
+        case 0:
+            //活动规则
+            return 3;
+            break;
+        case 1:
+            //参与的情境
+            return 3;
+            break;
+        case 2:
+            //活动结果
+        {
+            return 2 + self.resultsAry.count;
+        }
+            
+            break;
+            
+        default:
+            break;
+    }
+    return 0;
 }
 
 -(THNActiveTopView *)activeTopView{
@@ -170,102 +196,82 @@ static NSString *const URLCancelFollowUser = @"/follow/ajax_cancel_follow";
 
 
 -(NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section{
-    if (section == 2) {
-        NSInteger flag = [self.type integerValue];
-        switch (flag) {
-            case 0:
-                //活动规则
-                return 1;
-                break;
-            case 1:
-                //参与的情境
-                return self.senceModelAry.count;
-                break;
-            case 2:
-                //活动结果
-            {
-                NSDictionary *dict = self.resultsAry[section];
+    NSInteger flag = [self.type integerValue];
+    switch (flag) {
+        case 0:
+            //活动规则
+            return 1;
+            break;
+        case 1:
+            //参与的情境
+        {
+            if (section == 2) {
+               return self.senceModelAry.count;
+            }
+            return 1;
+        }
+            break;
+        case 2:
+            //活动结果
+        {
+            if (section >= 2) {
+                NSDictionary *dict = self.resultsAry[section - 2];
                 NSArray *ary = dict[@"data"];
                 return ary.count;
-             }
-                
-                break;
-                
-            default:
-                break;
+            }
+            return 1;
         }
+            break;
+            
+        default:
+            break;
     }
     return 1;
 }
 
-- (UICollectionReusableView *)collectionView:(UICollectionView *)collectionView viewForSupplementaryElementOfKind:(NSString *)kind atIndexPath:(NSIndexPath *)indexPath{
-    
-    if (indexPath.section > 2) {
-        UICollectionReusableView *reusableview = nil;
-        
-        if (kind == UICollectionElementKindSectionHeader){
-            
-            UICollectionReusableView *headerView = [collectionView dequeueReusableSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:@"cell" forIndexPath:indexPath];
-            headerView.backgroundColor = [UIColor redColor];
-            
-            reusableview = headerView;
-            
-        }
-        
-        return reusableview;
-    }
-    
-    
-    UICollectionReusableView *reusableview = nil;
-    return reusableview;
-    
-}
 
 - (UIEdgeInsets)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout insetForSectionAtIndex:(NSInteger)section{
-    if (section == 2) {
-        NSInteger flag = [self.type integerValue];
-        switch (flag) {
-            case 1:
-                //参与的情境
-                return UIEdgeInsetsMake(15, 15, 15, 15);
-                break;
-            case 2:
-                //活动结果
-                return UIEdgeInsetsMake(15, 0, 15, 0);
-                break;
-            default:
-                break;
+    NSInteger flag = [self.type integerValue];
+    switch (flag) {
+        case 0:
+        {
+            return UIEdgeInsetsMake(0, 0, 0, 0);
         }
+            break;
+            
+        case 1:
+            //参与的情境
+        {
+            if (section == 2) {
+               return UIEdgeInsetsMake(15, 15, 15, 15);
+            }
+            return UIEdgeInsetsMake(0, 0, 0, 0);
+        }
+            break;
+        case 2:
+            //活动结果
+        {
+            if (section >= 2) {
+                return UIEdgeInsetsMake(0, 0,15, 0);
+            }
+            return UIEdgeInsetsMake(0, 0, 0, 0);
+        }
+            
+            break;
+        default:
+            break;
     }
     return UIEdgeInsetsMake(0, 0, 0, 0);
 }
 
--(CGFloat)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout minimumLineSpacingForSectionAtIndex:(NSInteger)section{
-    if (section == 2) {
-        NSInteger flag = [self.type integerValue];
-        switch (flag) {
-            case 1:
-                //参与的情境
-                return 15;
-                break;
-            case 2:
-                //活动结果
-                return 15;
-                break;
-                
-            default:
-                break;
-        }
-    }
-    return 0;
-}
+
 
 -(CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath{
     if (indexPath.section == 0) {
         return CGSizeMake(SCREEN_WIDTH, 211);
     }else if (indexPath.section == 1){
         return CGSizeMake(SCREEN_WIDTH, 44);
-    }else if (indexPath.section == 2){
+    }else {
         NSInteger flag = [self.type integerValue];
         switch (flag) {
             case 0:
@@ -345,8 +351,11 @@ static NSString *const URLCancelFollowUser = @"/follow/ajax_cancel_follow";
             {
                 _scene = [[THNSceneImageTableViewCell alloc] init];
                 _scene.vc = self;
+                _scene.nav = self.navigationController;
                 _scene.sceneImage.tag = indexPath.row;
                 _top = [[THNUserInfoTableViewCell alloc] init];
+                _top.vc = self;
+                _top.nav = self.navigationController;
                 _top.beginFollowTheUserBlock = ^(NSString *userId) {
                     [weakSelf beginFollowUser:userId];
                 };
@@ -373,10 +382,13 @@ static NSString *const URLCancelFollowUser = @"/follow/ajax_cancel_follow";
                     make.top.mas_equalTo(self.top.mas_bottom).offset(0);
                 }];
                 
-                NSDictionary *dict = self.resultsAry[indexPath.section];
+                NSDictionary *dict = self.resultsAry[indexPath.section - 2];
                 NSArray *ary = dict[@"data"];
+                NSString *str = dict[@"prize"];
+                cell.prizeStr = str;
                 [self.top thn_setHomeSceneUserInfoData:ary[indexPath.row] userId:[self getLoginUserID] isLogin:[self isUserLogin]];
-                [self.scene thn_setSceneImageData:self.resultsAry[indexPath.row]];
+                [self.scene thn_setSceneImageData:ary[indexPath.row]];
+                
                 return cell;
             }
                 break;
@@ -421,22 +433,44 @@ static NSString *const URLCancelFollowUser = @"/follow/ajax_cancel_follow";
         }
         
     } failure:^(FBRequest *request, NSError *error) {
-        NSLog(@"%@", error);
     }];
 }
 
 //  关注用户
 - (void)beginFollowUser:(NSString *)userId {
-    NSInteger index = [self.resultUserIdAry indexOfObject:userId];
-    [[self.resultsAry[index] valueForKey:@"user"] setValue:@"1" forKey:@"isFollow"];
-    [self thn_networkBeginFollowUserData:userId];
+    int i;
+    for (i = 0; i < self.resultsAry.count; i ++) {
+        NSDictionary *dict = self.resultsAry[i];
+        NSArray *ary = dict[@"data"];
+        for (int j = 0; j < ary.count; j ++) {
+            HomeSceneListRow *row = ary[j];
+            if ([row.user._id isEqualToString:userId]) {
+                [[row valueForKey:@"user"] setValue:@"1" forKey:@"is_follow"];
+                [self thn_networkBeginFollowUserData:userId];
+                
+                [self.contentView reloadData];
+            }
+        }
+    }
 }
 
 //  取消关注用户
 - (void)cancelFollowUser:(NSString *)userId {
-    NSInteger index = [self.resultUserIdAry indexOfObject:userId];
-    [[self.resultsAry[index] valueForKey:@"user"] setValue:@"0" forKey:@"isFollow"];
-    [self thn_networkCancelFollowUserData:userId];
+    int i;
+    for (i = 0; i < self.resultsAry.count; i ++) {
+        NSDictionary *dict = self.resultsAry[i];
+        NSArray *ary = dict[@"data"];
+        for (int j = 0; j < ary.count; j ++) {
+            HomeSceneListRow *row = ary[j];
+            if ([row.user._id isEqualToString:userId]) {
+                [[row valueForKey:@"user"] setValue:@"0" forKey:@"is_follow"];
+                [self thn_networkCancelFollowUserData:userId];
+                
+                [self.contentView reloadData]; 
+                
+            }
+        }
+    }
 }
 
 //  关注
@@ -507,6 +541,62 @@ static NSString *const URLCancelFollowUser = @"/follow/ajax_cancel_follow";
     }
     return _segmentedControl;
 }
+
+-(CGSize)collectionView:(UICollectionView*)collectionView layout:(UICollectionViewLayout*)collectionViewLayout referenceSizeForHeaderInSection:(NSInteger)section
+
+{
+    NSInteger flag = [self.type integerValue];
+    switch (flag) {
+        case 0:
+            //活动规则
+        {
+        }
+            break;
+        case 1:
+            //参与的情境
+        {
+            
+        }
+            
+            break;
+        case 2:
+            //活动结果
+        {
+            if (section >= 2) {
+                
+                CGSize size = {SCREEN_WIDTH, 50};
+                return size;
+            }
+
+        }
+            break;
+            
+        default:
+            break;
+    }
+
+    
+    CGSize size = {320, 0};
+    
+    return size;
+    
+}
+
+-(UICollectionReusableView *)collectionView:(UICollectionView *)collectionView viewForSupplementaryElementOfKind:(NSString *)kind atIndexPath:(NSIndexPath *)indexPath{
+    
+    if([kind isEqualToString:UICollectionElementKindSectionHeader]){
+        RecipeCollectionHeaderView *headView = [collectionView dequeueReusableSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:@"RecipeCollectionHeaderView" forIndexPath:indexPath];
+        NSDictionary *dict = self.resultsAry[indexPath.section -2];
+        NSString *str = dict[@"prize"];
+        headView.prizeLabel.text = str;
+        headView.backgroundColor = [UIColor clearColor];
+        return headView;
+    }
+    return nil;
+    
+}
+
+
 
 -(void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath{
     NSInteger flag = [self.type integerValue];
@@ -587,10 +677,13 @@ static NSString *const URLCancelFollowUser = @"/follow/ajax_cancel_follow";
             for (NSDictionary *dict in rows) {
                 NSArray *dataAry = dict[@"data"];
                 NSString *str = dict[@"prize"];
+                //NSLog(@"等级1  %@",dataAry[0]);
                 NSMutableArray *ary = [NSMutableArray array];
-                for (NSDictionary *dataAryDict in dataAry) {
-                    HomeSceneListRow *row = [[HomeSceneListRow alloc] initWithDictionary:dataAryDict];
-                    [ary addObject:row];
+                ary = [HomeSceneListRow mj_objectArrayWithKeyValuesArray:dataAry];
+                for (HomeSceneListRow *row in ary) {
+                    
+                    [self.resultUserIdAry addObject:row.user._id];
+                    
                 }
                 NSDictionary *rowsDict = @{
                                            @"prize" : str,
@@ -599,9 +692,6 @@ static NSString *const URLCancelFollowUser = @"/follow/ajax_cancel_follow";
                 [self.resultsAry addObject:rowsDict];
             }
             
-            for (HomeSceneListRow *model in self.resultsAry) {
-                [self.resultUserIdAry addObject:model.user._id];
-            }
 
             if (self.params != params) {
                 return;

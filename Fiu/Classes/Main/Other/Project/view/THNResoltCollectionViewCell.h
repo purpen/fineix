@@ -11,6 +11,7 @@
 @interface THNResoltCollectionViewCell : UICollectionViewCell
 
 @property (weak, nonatomic) IBOutlet UILabel *prizeLabel;
-
+/**  */
+@property(nonatomic,copy) NSString *prizeStr;
 
 @end

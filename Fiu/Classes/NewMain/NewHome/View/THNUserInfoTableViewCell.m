@@ -100,6 +100,12 @@ static NSString *const hotUserCellId = @"HotUserCellId";
         self.follow.selected = YES;
     }
     
+    if (userModel.user.is_follow == 0) {
+        self.follow.selected = NO;
+    } else if (userModel.user.is_follow == 1) {
+        self.follow.selected = YES;
+    }
+    
     _userId = [NSString stringWithFormat:@"%zi", userModel.userId];
     if ([_userId isEqualToString:@"0"]) {
         _userId = userModel.user._id;

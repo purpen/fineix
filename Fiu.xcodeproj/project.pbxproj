@@ -380,6 +380,8 @@
 		1F9309901D9D1E8800832D90 /* THNResoltCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F93098E1D9D1E8800832D90 /* THNResoltCollectionViewCell.m */; };
 		1F9309911D9D1E8800832D90 /* THNResoltCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1F93098F1D9D1E8800832D90 /* THNResoltCollectionViewCell.xib */; };
 		1FA204E51D378AAB00B89699 /* UIView+Size.m in Sources */ = {isa = PBXBuildFile; fileRef = 1FA204E41D378AAB00B89699 /* UIView+Size.m */; };
+		1FBA9EA81D9E07C800D7FDA6 /* RecipeCollectionHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1FBA9EA61D9E07C800D7FDA6 /* RecipeCollectionHeaderView.m */; };
+		1FBA9EA91D9E07C800D7FDA6 /* RecipeCollectionHeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1FBA9EA71D9E07C800D7FDA6 /* RecipeCollectionHeaderView.xib */; };
 		1FC53B921D89222200B0B666 /* SGTopTitleView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1FC53B8F1D89222200B0B666 /* SGTopTitleView.m */; };
 		1FC53B931D89222200B0B666 /* UIView+SGExtension.m in Sources */ = {isa = PBXBuildFile; fileRef = 1FC53B911D89222200B0B666 /* UIView+SGExtension.m */; };
 		1FC53BCE1D8938C600B0B666 /* UMMobClick.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1FC53B951D8938C500B0B666 /* UMMobClick.framework */; };
@@ -1276,6 +1278,9 @@
 		1F93098F1D9D1E8800832D90 /* THNResoltCollectionViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = THNResoltCollectionViewCell.xib; sourceTree = "<group>"; };
 		1FA204E31D378AAB00B89699 /* UIView+Size.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+Size.h"; sourceTree = "<group>"; };
 		1FA204E41D378AAB00B89699 /* UIView+Size.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+Size.m"; sourceTree = "<group>"; };
+		1FBA9EA51D9E07C800D7FDA6 /* RecipeCollectionHeaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RecipeCollectionHeaderView.h; sourceTree = "<group>"; };
+		1FBA9EA61D9E07C800D7FDA6 /* RecipeCollectionHeaderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RecipeCollectionHeaderView.m; sourceTree = "<group>"; };
+		1FBA9EA71D9E07C800D7FDA6 /* RecipeCollectionHeaderView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RecipeCollectionHeaderView.xib; sourceTree = "<group>"; };
 		1FC53B8E1D89222200B0B666 /* SGTopTitleView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SGTopTitleView.h; sourceTree = "<group>"; };
 		1FC53B8F1D89222200B0B666 /* SGTopTitleView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SGTopTitleView.m; sourceTree = "<group>"; };
 		1FC53B901D89222200B0B666 /* UIView+SGExtension.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+SGExtension.h"; sourceTree = "<group>"; };
@@ -3362,6 +3367,9 @@
 				1F93098D1D9D1E8800832D90 /* THNResoltCollectionViewCell.h */,
 				1F93098E1D9D1E8800832D90 /* THNResoltCollectionViewCell.m */,
 				1F93098F1D9D1E8800832D90 /* THNResoltCollectionViewCell.xib */,
+				1FBA9EA51D9E07C800D7FDA6 /* RecipeCollectionHeaderView.h */,
+				1FBA9EA61D9E07C800D7FDA6 /* RecipeCollectionHeaderView.m */,
+				1FBA9EA71D9E07C800D7FDA6 /* RecipeCollectionHeaderView.xib */,
 			);
 			path = view;
 			sourceTree = "<group>";
@@ -4451,6 +4459,7 @@
 				1F2A90A31CF40277005116C7 /* SubscribePeopleTableViewCell.xib in Resources */,
 				D8932E461D17FE8100428FC7 /* Launch Screen.storyboard in Resources */,
 				1FC53BDC1D8938C600B0B666 /* WeiboSDK.bundle in Resources */,
+				1FBA9EA91D9E07C800D7FDA6 /* RecipeCollectionHeaderView.xib in Resources */,
 				1F2AFC6C1D88170B00DA6035 /* ModifyGenderViewController.xib in Resources */,
 				1F2AFDDE1D8818A400DA6035 /* CommentView.xib in Resources */,
 				1F2AFCA71D88170B00DA6035 /* THNSenceTopicView.xib in Resources */,
@@ -4771,6 +4780,7 @@
 				1F2A903F1CF40277005116C7 /* CityTableViewCell.m in Sources */,
 				D8ACF4431D6B46AE00DB79D8 /* FBSegmentView.m in Sources */,
 				1F2AFC841D88170B00DA6035 /* FiuSceneInfoLocation.m in Sources */,
+				1FBA9EA81D9E07C800D7FDA6 /* RecipeCollectionHeaderView.m in Sources */,
 				D840F0911D93B57700CE9FB7 /* THNRemindModelData.m in Sources */,
 				D80669861D6F3F82007FD81E /* FBGoodsInfoModel.m in Sources */,
 				D80878D31D69FAB400C1FFA0 /* THNCategoryCollectionReusableView.m in Sources */,

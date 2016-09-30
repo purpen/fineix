@@ -27,6 +27,7 @@ typedef void(^CancelFollowTheUserBlock)(NSString *userId);
 @pro_strong UIButton *address;
 @pro_strong UIButton *follow;
 
+
 /**
  *  关注用户
  */
