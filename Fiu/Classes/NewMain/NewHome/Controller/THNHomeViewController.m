@@ -331,6 +331,7 @@ static NSString *const allCommentsCellId = @"AllCommentsCellId";
         if (![self.view.subviews containsObject:self.homeTable]) {
             [self thn_setHomeViewUI];
         }
+        NSLog(@"情境列表  %@",result);
         NSArray *sceneArr = [[result valueForKey:@"data"] valueForKey:@"rows"];
         for (NSDictionary * sceneDic in sceneArr) {
             HomeSceneListRow *homeSceneModel = [[HomeSceneListRow alloc] initWithDictionary:sceneDic];

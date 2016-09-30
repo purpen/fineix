@@ -29,7 +29,7 @@
 /**  */
 @property(nonatomic,copy) NSString *_id;
 /**  */
-@property(nonatomic,copy) NSString *is_follow;
+@property(nonatomic,assign) NSInteger is_follow;
 
 
 -(instancetype)initWithDictionary:(NSDictionary *)dictionary;
