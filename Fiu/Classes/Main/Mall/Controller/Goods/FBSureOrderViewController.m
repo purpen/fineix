@@ -420,11 +420,7 @@ static NSString *const URLCarGoPay = @"/shopping/checkout";
         
         self.sumPrice = [[UILabel alloc] init];
         self.sumPrice.textColor = [UIColor colorWithHexString:fineixColor];
-        if (IS_iOS9) {
-            self.sumPrice.font = [UIFont fontWithName:@"PingFangSC-Light" size:14];
-        } else {
-            self.sumPrice.font = [UIFont systemFontOfSize:14];
-        }
+        self.sumPrice.font = [UIFont systemFontOfSize:14];
         [_sureView addSubview:self.sumPrice];
         [self.sumPrice mas_makeConstraints:^(MASConstraintMaker *make) {
             make.height.mas_equalTo(@44);
@@ -477,22 +473,28 @@ static NSString *const URLCarGoPay = @"/shopping/checkout";
 }
 
 - (void)sureOrederData {
-    _fromSite = @"7";
-    _paymentMethod = @"a";
-    _summary = self.summaryText.text;
-    
-    NSDictionary * orderDict = @{
-                                 @"from_site":_fromSite,
-                                 @"rrid":_rrid,
-                                 @"addbook_id":_addbookId,
-                                 @"is_nowbuy":_isNowbuy,
-                                 @"summary":_summary,
-                                 @"payment_method":_paymentMethod,
-                                 @"transfer_time":_transferTime,
-                                 @"bonus_code":[NSString stringWithFormat:@"%@",_bonusCode]
-                                 };
-    
-    [self networkSureOrder:orderDict];
+    if (_addbookId.length) {
+        _fromSite = @"7";
+        _paymentMethod = @"a";
+        _summary = self.summaryText.text;
+        
+        NSDictionary * orderDict = @{
+                                     @"from_site":_fromSite,
+                                     @"rrid":_rrid,
+                                     @"addbook_id":_addbookId,
+                                     @"is_nowbuy":_isNowbuy,
+                                     @"summary":_summary,
+                                     @"payment_method":_paymentMethod,
+                                     @"transfer_time":_transferTime,
+                                     @"bonus_code":[NSString stringWithFormat:@"%@",_bonusCode]
+                                     };
+        
+        [self networkSureOrder:orderDict];
+   
+    } else {
+        [SVProgressHUD showInfoWithStatus:@"请填写一个收货地址"];
+    }
+   
 }
 
 #pragma mark - 设置Nav
