@@ -274,11 +274,7 @@ static NSString *const URLEditItemsNum = @"/shopping/edit_cart";
         
         UILabel * sumPrice = [[UILabel alloc] init];
         sumPrice.textColor = [UIColor colorWithHexString:fineixColor];
-        if (IS_iOS9) {
-            sumPrice.font = [UIFont fontWithName:@"PingFangSC-Light" size:14];
-        } else {
-            sumPrice.font = [UIFont systemFontOfSize:14];
-        }
+        sumPrice.font = [UIFont systemFontOfSize:14];
         self.sumPrice = sumPrice;
         [_bottomView addSubview:sumPrice];
         [sumPrice mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -290,11 +286,7 @@ static NSString *const URLEditItemsNum = @"/shopping/edit_cart";
         
         UILabel * sumLab = [[UILabel alloc] init];
         sumLab.textColor = [UIColor colorWithHexString:titleColor];
-        if (IS_iOS9) {
-            sumLab.font = [UIFont fontWithName:@"PingFangSC-Light" size:14];
-        } else {
-            sumLab.font = [UIFont systemFontOfSize:14];
-        }
+        sumLab.font = [UIFont systemFontOfSize:14];
         sumLab.text = NSLocalizedString(@"sumOrderPrice", nil);
         self.sumLab = sumLab;
         [_bottomView addSubview:sumLab];
@@ -323,11 +315,7 @@ static NSString *const URLEditItemsNum = @"/shopping/edit_cart";
         [_chooseAllBtn setImage:[UIImage imageNamed:@"Check_red"] forState:(UIControlStateSelected)];
         [_chooseAllBtn setTitle:NSLocalizedString(@"CheckAll", nil) forState:(UIControlStateNormal)];
         [_chooseAllBtn setTitleEdgeInsets:(UIEdgeInsetsMake(0, 15, 0, 0))];
-        if (IS_iOS9) {
-            _chooseAllBtn.titleLabel.font = [UIFont fontWithName:@"PingFangSC-Light" size:14];
-        } else {
-            _chooseAllBtn.titleLabel.font = [UIFont systemFontOfSize:14];
-        }
+        _chooseAllBtn.titleLabel.font = [UIFont systemFontOfSize:14];
         [_chooseAllBtn setTitleColor:[UIColor colorWithHexString:titleColor] forState:(UIControlStateNormal)];
         _chooseAllBtn.selected = NO;
         [_chooseAllBtn addTarget:self action:@selector(chooseAllBtnClick:) forControlEvents:(UIControlEventTouchUpInside)];
@@ -475,7 +463,7 @@ static NSString *const URLEditItemsNum = @"/shopping/edit_cart";
 - (void)setNavigationViewUI {
     [[UIApplication sharedApplication] setStatusBarHidden:NO withAnimation:(UIStatusBarAnimationSlide)];
     self.navViewTitle.text = NSLocalizedString(@"GoodsCarVcTitle", nil);
-    self.view.backgroundColor = [UIColor whiteColor];
+    self.view.backgroundColor = [UIColor colorWithHexString:grayLineColor];
     [self.navView addSubview:self.editBtn];
 }
 
