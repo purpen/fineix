@@ -141,6 +141,8 @@
         [userTag addGestureRecognizer:tapGesture];
         
         [self addSubview:userTag];
+        [self bringSubviewToFront:self.title];
+        
         [self.userTagMarr addObject:userTag];
     }
 }

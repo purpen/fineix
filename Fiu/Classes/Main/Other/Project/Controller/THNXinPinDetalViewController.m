@@ -13,7 +13,7 @@
 #import "ShareViewController.h"
 #import "FBGoodsInfoViewController.h"
 #import "THNCuXiaoDetalViewController.h"
-#import "GoodsBrandViewController.h"
+#import "THNBrandInfoViewController.h"
 #import "SearchViewController.h"
 #import "HomePageViewController.h"
 #import "THNArticleDetalViewController.h"
@@ -219,7 +219,7 @@
                 case 15:
                     //品牌
                 {
-                    GoodsBrandViewController *vc = [[GoodsBrandViewController alloc] init];
+                    THNBrandInfoViewController *vc = [[THNBrandInfoViewController alloc] init];
                     vc.brandId = infoId;
                     [self.navigationController pushViewController:vc animated:YES];
                 }

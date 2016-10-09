@@ -91,8 +91,7 @@ static NSString *const MallListGoodsCellId = @"mallListGoodsCellId";
     
     [self addSubview:self.goodsList];
     [_goodsList mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.size.mas_equalTo(CGSizeMake(SCREEN_WIDTH, 155));
-        make.left.equalTo(self.mas_left).with.offset(0);
+        make.left.right.bottom.equalTo(self).with.offset(0);
         make.top.equalTo(_banner.mas_bottom).with.offset(0);
     }];
 }
@@ -162,7 +161,7 @@ static NSString *const MallListGoodsCellId = @"mallListGoodsCellId";
         flowLayout.scrollDirection = UICollectionViewScrollDirectionHorizontal;
         
         _goodsList = [[UICollectionView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 185) collectionViewLayout:flowLayout];
-        _goodsList.backgroundColor = [UIColor whiteColor];
+        _goodsList.backgroundColor = [UIColor colorWithHexString:@"#F8F8F8"];
         _goodsList.delegate = self;
         _goodsList.dataSource = self;
         _goodsList.showsHorizontalScrollIndicator = NO;
@@ -186,10 +185,11 @@ static NSString *const MallListGoodsCellId = @"mallListGoodsCellId";
 }
 
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
-    FBGoodsInfoViewController *goodsVC = [[FBGoodsInfoViewController alloc] init];
-    goodsVC.goodsID = self.goodsIdMarr[indexPath.row];
-    [self.nav pushViewController:goodsVC animated:YES];
-    
+    if (self.goodsIdMarr[indexPath.row]) {
+        FBGoodsInfoViewController *goodsVC = [[FBGoodsInfoViewController alloc] init];
+        goodsVC.goodsID = self.goodsIdMarr[indexPath.row];
+        [self.nav pushViewController:goodsVC animated:YES];
+    }
 }
 
 - (NSMutableArray *)goodsListMarr {
