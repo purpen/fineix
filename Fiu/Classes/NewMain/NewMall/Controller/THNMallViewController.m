@@ -159,7 +159,6 @@ static NSString *const MallListHeaderCellViewId = @"mallListHeaderCellViewId";
 - (UICollectionView *)mallList {
     if (!_mallList) {
         UICollectionViewFlowLayout *flowLayou = [[UICollectionViewFlowLayout alloc] init];
-        flowLayou.itemSize = CGSizeMake(SCREEN_WIDTH, 190);
         flowLayou.headerReferenceSize = CGSizeMake(SCREEN_WIDTH, SCREEN_WIDTH * 0.4 + 64);
         flowLayou.scrollDirection = UICollectionViewScrollDirectionVertical;
         
@@ -168,7 +167,7 @@ static NSString *const MallListHeaderCellViewId = @"mallListHeaderCellViewId";
         _mallList.showsVerticalScrollIndicator = NO;
         _mallList.delegate = self;
         _mallList.dataSource = self;
-        _mallList.backgroundColor = [UIColor whiteColor];
+        _mallList.backgroundColor = [UIColor colorWithHexString:@"#F8F8F8"];
         [_mallList registerClass:[THNMallListCollectionViewCell class] forCellWithReuseIdentifier:MallListCellId];
         [_mallList registerClass:[THNMallNewGoodsCollectionViewCell class] forCellWithReuseIdentifier:NewGoodsListCellId];
         [_mallList registerClass:[THNCategoryCollectionReusableView class] forSupplementaryViewOfKind:UICollectionElementKindSectionHeader
