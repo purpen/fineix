@@ -114,7 +114,9 @@
             make.top.mas_equalTo(self.pagrControl.mas_bottom).offset(20);
             make.centerX.mas_equalTo(self.view.mas_centerX);
         }];
-    } failure:nil];
+    } failure:^(FBRequest *request, NSError *error) {
+        [SVProgressHUD showErrorWithStatus:@"数据加载错误"];
+    }];
 
 }
 
