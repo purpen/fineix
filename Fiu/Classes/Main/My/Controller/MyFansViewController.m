@@ -130,7 +130,7 @@
 
 -(void)loadMore{
     [self.mytableView.mj_header endRefreshing];
-    NSDictionary *params = @{@"page":@(++self.current_page),@"size":@30,@"user_id":self.userId,@"find_type":@1};
+    NSDictionary *params = @{@"page":@(++self.current_page),@"size":@30,@"user_id":self.userId,@"find_type":@2};
     self.params = params;
     FBRequest *request = [FBAPI postWithUrlString:@"/follow" requestDictionary:params delegate:self];
     [request startRequestSuccess:^(FBRequest *request, id result) {
