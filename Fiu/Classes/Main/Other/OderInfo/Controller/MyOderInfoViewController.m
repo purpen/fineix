@@ -253,7 +253,6 @@ static NSString *const OrderInfoCellIdentifier = @"orderInfoCell";
     if (segmentedControl.selectedSegmentIndex == 5) {
         self.type = [NSNumber numberWithInteger:8];
     }
-    [self.orderListAry removeAllObjects];
     [self requestDataForOderList];
 }
 
@@ -264,7 +263,6 @@ static NSString *const OrderInfoCellIdentifier = @"orderInfoCell";
     
     FBRequest * request = [FBAPI postWithUrlString:OrderListURL requestDictionary:params delegate:self];
     [request startRequestSuccess:^(FBRequest *request, id result) {
-        
         NSDictionary * dataDic = [result objectForKey:@"data"];
         NSArray * rowsAry = [dataDic objectForKey:@"rows"];
         
