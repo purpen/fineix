@@ -83,8 +83,12 @@ static NSString *const URLDeleteScene = @"/scene_sight/delete";
     [self.view addSubview:self.sceneTable];
     
     [SVProgressHUD show];
+    FBAPI *api = [[FBAPI alloc] init];
+    NSString *uuid = [api uuid];
     FBRequest *request = [FBAPI postWithUrlString:@"/scene_sight/view" requestDictionary:@{
-                                                                                           @"id" : self.sceneDetalId
+                                                                                           @"id" : self.sceneDetalId,
+                                                                                           @"uuid" : uuid,
+                                                                                           @"app_type" : @2
                                                                                            } delegate:self];
     [request startRequestSuccess:^(FBRequest *request, id result) {
         if ([result[@"success"] isEqualToNumber:@1]) {
