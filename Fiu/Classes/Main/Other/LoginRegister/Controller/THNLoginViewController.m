@@ -129,7 +129,6 @@ static NSString *const thirdRegister = @"/auth/third_sign";//第三方登录接�
     FBRequest *request = [FBAPI postWithUrlString:LoginURL requestDictionary:params delegate:self];
     
     [request startRequestSuccess:^(FBRequest *request, id result) {
-        NSLog(@"手机号登录   %@",result);
         UserInfo *userInfo = [UserInfo mj_objectWithKeyValues:[result objectForKey:@"data"]];
         [userInfo saveOrUpdate];
         [userInfo updateUserInfoEntity];

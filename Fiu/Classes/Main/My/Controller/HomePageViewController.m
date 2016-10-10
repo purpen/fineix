@@ -238,7 +238,8 @@ static NSString *sceneCellId = @"THNHomeSenceCollectionViewCell";
                              @"page" : @(++self.current_page),
                              @"size" : @8,
                              @"user_id":self.userId,
-                             @"sort" : @0
+                             @"sort" : @0,
+                             @"show_all" : @1
                              };
     self.params = params;
     FBRequest *request = [FBAPI postWithUrlString:@"/scene_sight/" requestDictionary:params delegate:self];
@@ -283,7 +284,8 @@ static NSString *sceneCellId = @"THNHomeSenceCollectionViewCell";
                              @"page" : @(self.current_page),
                              @"size" : @8,
                              @"user_id":self.userId,
-                             @"sort" : @0
+                             @"sort" : @0,
+                             @"show_all" : @1
                              };
     self.params = params;
     FBRequest *request = [FBAPI postWithUrlString:@"/scene_sight/" requestDictionary:params delegate:self];
@@ -291,7 +293,6 @@ static NSString *sceneCellId = @"THNHomeSenceCollectionViewCell";
         self.current_page = [result[@"data"][@"current_page"] integerValue];
         self.total_rows = [result[@"data"][@"total_rows"] integerValue];
         NSArray *sceneArr = [[result valueForKey:@"data"] valueForKey:@"rows"];
-        NSLog(@"sceneArr  %@",sceneArr);
         for (NSDictionary * sceneDic in sceneArr) {
             HomeSceneListRow * homeSceneModel = [[HomeSceneListRow alloc] initWithDictionary:sceneDic];
             [_sceneListMarr addObject:homeSceneModel];
@@ -330,7 +331,9 @@ static NSString *sceneCellId = @"THNHomeSenceCollectionViewCell";
 -(void)netGetData{
     FBRequest *request = [FBAPI postWithUrlString:@"/user/user_info" requestDictionary:@{@"user_id":self.userId} delegate:self];
     [request startRequestSuccess:^(FBRequest *request, id result) {
+        
         NSDictionary *dataDict = result[@"data"];
+        NSLog(@"情境个数 %@", [NSString stringWithFormat:@"%@",dataDict[@"sight_count"]]);
         _chanelV.scenarioNumLabel.text = [NSString stringWithFormat:@"%@",dataDict[@"scene_count"]];
         _chanelV.fieldNumLabel.text = [NSString stringWithFormat:@"%@",dataDict[@"sight_count"]];
         _chanelV.focusNumLabel.text = [NSString stringWithFormat:@"%@",dataDict[@"follow_count"]];
@@ -588,9 +591,20 @@ static NSString *sceneCellId = @"THNHomeSenceCollectionViewCell";
             
         }else if([self.type isEqualToNumber:@2]){
             if (_sceneListMarr.count) {
-                THNSceneDetalViewController *vc = [[THNSceneDetalViewController alloc] init];
-                vc.sceneDetalId = _sceneIdMarr[indexPath.row];
-                [self.navigationController pushViewController:vc animated:YES];
+                FBAPI *api = [[FBAPI alloc] init];
+                NSString *uuid = [api uuid];
+                FBRequest *request = [FBAPI postWithUrlString:@"/scene_sight/view" requestDictionary:@{
+                                                                                                       @"id" : _sceneIdMarr[indexPath.row],
+                                                                                                       @"uuid" : uuid,
+                                                                                                       @"app_type" : @2
+                                                                                                       } delegate:self];
+                [request startRequestSuccess:^(FBRequest *request, id result) {
+                    if ([result[@"success"] isEqualToNumber:@1]) {
+                        THNSceneDetalViewController *vc = [[THNSceneDetalViewController alloc] init];
+                        vc.sceneDetalId = _sceneIdMarr[indexPath.row];
+                        [self.navigationController pushViewController:vc animated:YES];
+                    }
+                } failure:nil];
             }
         }
     }
