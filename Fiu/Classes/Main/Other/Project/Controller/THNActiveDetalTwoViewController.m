@@ -24,6 +24,7 @@
 #import "HomeSceneListRow.h"
 #import "THNResoltCollectionViewCell.h"
 #import "RecipeCollectionHeaderView.h"
+#import "THNSceneDetalViewController.h"
 
 @interface THNActiveDetalTwoViewController ()<UICollectionViewDelegate,UICollectionViewDataSource,UIWebViewDelegate>
 
@@ -70,6 +71,8 @@
 @property (nonatomic, strong) UIButton *attendBtn;
 /**  */
 @property (nonatomic, strong) UILabel *priceLabel;
+/**  */
+@property (nonatomic, strong) UIButton *scenceClickBtn;
 
 @end
 
@@ -382,6 +385,19 @@ static NSString *const URLCancelFollowUser = @"/follow/ajax_cancel_follow";
                     make.top.mas_equalTo(self.top.mas_bottom).offset(0);
                 }];
                 
+                _scenceClickBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+                [_scenceClickBtn addTarget:self action:@selector(scenceClick:) forControlEvents:UIControlEventTouchUpInside];
+                _scenceClickBtn.tag = indexPath.row * 1000 + indexPath.section;
+                [cell addSubview:self.scenceClickBtn];
+                self.scene.sceneImage.userInteractionEnabled = NO;
+                [_scenceClickBtn mas_makeConstraints:^(MASConstraintMaker *make) {
+                    make.bottom.mas_equalTo(cell.contentView.mas_bottom).offset(0);
+                    make.left.mas_equalTo(cell.contentView.mas_left).offset(0);
+                    make.right.mas_equalTo(cell.contentView.mas_right).offset(0);
+                    make.top.mas_equalTo(cell.contentView.mas_top).offset(44);
+                }];
+                
+                
                 NSDictionary *dict = self.resultsAry[indexPath.section - 2];
                 NSArray *ary = dict[@"data"];
                 NSString *str = dict[@"prize"];
@@ -403,6 +419,17 @@ static NSString *const URLCancelFollowUser = @"/follow/ajax_cancel_follow";
 }
 
 
+-(void)scenceClick:(UIButton*)sender{
+    NSInteger row = sender.tag / 1000;
+    NSInteger section = sender.tag - row * 1000;
+    //跳转到情境详情
+    THNSceneDetalViewController *vc = [[THNSceneDetalViewController alloc] init];
+    NSDictionary *dict = self.resultsAry[section - 2];
+    NSArray *ary = dict[@"data"];
+    HomeSceneListRow *model = ary[row];
+    vc.sceneDetalId = model._id;
+    [self.navigationController pushViewController:vc animated:YES];
+}
 
 
 //  点赞
@@ -622,7 +649,7 @@ static NSString *const URLCancelFollowUser = @"/follow/ajax_cancel_follow";
             case 2:
                 //活动结果
             {
-  
+                
             }
                 break;
                 
