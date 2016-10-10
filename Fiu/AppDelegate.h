@@ -31,15 +31,9 @@
 @property (readonly, strong, nonatomic) NSManagedObjectModel *managedObjectModel;
 @property (readonly, strong, nonatomic) NSPersistentStoreCoordinator *persistentStoreCoordinator;
 
-
 @property (nonatomic, weak) id<NotificationDelege> notiDelegate;
 @property (nonatomic, weak) id<WXApiDelegate> wxDelegate;
 @property (nonatomic, weak) id<AlipayDelegate> aliDelegate;
-
-- (void)saveContext;
-- (NSURL *)applicationDocumentsDirectory;
-
-
 
 @end
 

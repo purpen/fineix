@@ -91,6 +91,18 @@ static NSString *const allCommentsCellId = @"AllCommentsCellId";
     [self thn_netWorkGroup];
 }
 
+- (void)viewDidAppear:(BOOL)animated {
+    [super viewDidAppear:animated];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(thn_OpenPushData:) name:@"thnUserInfoNotification" object:nil];
+}
+
+- (void)thn_OpenPushData:(NSNotification *)notification {
+    NSDictionary *dict = [notification userInfo];
+    NSString *type = [[dict valueForKey:@"data"] valueForKey:@"type"];
+    NSLog(@"-============ %@", type);
+}
+
 #pragma mark - 设置"发现用户"的位置和高度
 - (void)setHotUserListData {
     _hotUserListIndex = 5;

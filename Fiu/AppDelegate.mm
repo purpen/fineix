@@ -8,29 +8,35 @@
 
 #import "AppDelegate.h"
 #import "THNTabBarController.h"
-#import <BaiduMapAPI_Map/BMKMapComponent.h>
-#import <SVProgressHUD/SVProgressHUD.h>
 #import "Fiu.h"
-#import "UMSocial.h"
-#import "UMSocialWechatHandler.h"
-#import "UMSocialQQHandler.h"
-#import "UMSocialSinaSSOHandler.h"
 #import "UserInfo.h"
 #import "UserInfoEntity.h"
 #import "FBRequest.h"
 #import "FBAPI.h"
 #import "GuidePageViewController.h"
 #import "HomePageViewController.h"
-#import "WXApi.h"
-#import <AlipaySDK/AlipaySDK.h>
 #import "THNLoginRegisterViewController.h"
+
+#import <UserNotifications/UserNotifications.h>
+#import <BaiduMapAPI_Map/BMKMapComponent.h>
+#import <SVProgressHUD/SVProgressHUD.h>
+#import <AlipaySDK/AlipaySDK.h>
+#import "UMessage.h"
+#import "UMSocial.h"
+#import "UMSocialWechatHandler.h"
+#import "UMSocialQQHandler.h"
+#import "UMSocialSinaSSOHandler.h"
+#import "WXApi.h"
 #import "CounterModel.h"
 #import "UITabBar+badge.h"
 #import "IQKeyboardManager.h"
 #import "InviteCCodeViewController.h"
 #import "AppDelegate+UMAnalytics.h"
 
-@interface AppDelegate ()<WXApiDelegate>
+@interface AppDelegate () <
+    WXApiDelegate,
+    UNUserNotificationCenterDelegate
+>
 {
     BMKMapManager *_mapManager;
     float _la;
@@ -40,16 +46,16 @@
 
 @end
 
-NSString *const UMSocialAppKey = @"5791f41b67e58e8de5002568";
-NSString *const SinaAppKey = @"1342896218";
-NSString *const SinaAppSecret = @"ed4fe8faa35c5b006ad7a87d76e60583";
-
-NSString *const WechatAppID = @"wxdf5f6f5907a238e8";
-NSString *const WechatAppSecret = @"227f6fe4c54ad3e51eed975815167b0b";
-
-NSString *const QQAppID = @"1105329592";  // 1105228778
-NSString *const QQAppKey = @"CaKcLeg32YeVF7b9";    // SFUAKQBkqY8AjWGh
-NSString *const determineLogin = @"/auth/check_login";
+static NSString *const UMSocialAppKey        = @"5791f41b67e58e8de5002568";
+static NSString *const SinaAppKey            = @"1342896218";
+static NSString *const SinaAppSecret         = @"ed4fe8faa35c5b006ad7a87d76e60583";
+static NSString *const WechatAppID           = @"wxdf5f6f5907a238e8";
+static NSString *const WechatAppSecret       = @"227f6fe4c54ad3e51eed975815167b0b";
+static NSString *const QQAppID               = @"1105329592";
+static NSString *const QQAppKey              = @"CaKcLeg32YeVF7b9";
+static NSString *const determineLogin        = @"/auth/check_login";
+static NSString *const UMMessageAppKey       = @"5791f41b67e58e8de5002568";
+static NSString *const UMMessageMasterSecret = @"6s7pzrgvimmxfpzyc3qvyefgaaoibyiu";
 
 @implementation AppDelegate
 
@@ -58,104 +64,142 @@ NSString *const determineLogin = @"/auth/check_login";
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     self.window.backgroundColor = [UIColor whiteColor];
     [self.window makeKeyAndVisible];
-    
-    //首先统一设置为未登录-----------------------------------------------
-    UserInfoEntity *entity = [UserInfoEntity defaultUserInfoEntity];
-    entity.isLogin = NO;
-    //发送网络请求查看登录状态
-    FBRequest *request = [FBAPI postWithUrlString:determineLogin requestDictionary:nil delegate:self];
-    [request startRequestSuccess:^(FBRequest *request, id result) {
-        NSDictionary *dataDic = [result objectForKey:@"data"];
-        if ([[dataDic objectForKey:@"is_login"] boolValue]) {
-            //已经登录的获取用户信息，更改登录状态
-            [[[UserInfo findAll] lastObject] updateUserInfoEntity];
-            entity.isLogin = YES;
-        }
-    } failure:^(FBRequest *request, NSError *error) {
-        NSLog(@"%@",error);
-    }];
-//--------------------------------------------------------
-    
-    //设置引导图片
-    [self guide];
-    //---------------------------------------
-    
-    //  设置SVP颜色---------------------------------------
-    [SVProgressHUD setBackgroundColor:[UIColor whiteColor]];
-    [SVProgressHUD setForegroundColor:[UIColor colorWithHexString:fineixColor alpha:1]];
-    //---------------------------------------------------
-    
-    //设置百度地图代理---------------------------------
-    [self bmkMap];
-    //------------------------------------------
-    
-    //model属性名与字典key名映射----------------------------
-    [UserInfo mj_setupReplacedKeyFromPropertyName:^NSDictionary *{
-        return @{
-                 @"userId" : @"_id",
-                 @"firstLogin" : @"first_login",
-                 @"mediumAvatarUrl" : @"medium_avatar_url",
-                 @"trueNickname": @"true_nickname",
-                 @"level": @"rank_id",
-                 @"levelDesc": @"rank_title",
-                 @"birdCoin": @"bird_coin",
-                 //                 @"": @"",
-                 };
-    }];
-    //---------------------------------------------------
-   
-    //设置友盟社会化组件appkey--------------------------------------------------
-    [UMSocialData setAppKey:UMSocialAppKey];
-    //注册友盟统计
-    [self RegistrUMAnalyticsWithAppkey:UMSocialAppKey];
-    //设置微信AppId、appSecret，分享url
-    [UMSocialWechatHandler setWXAppId:WechatAppID appSecret:WechatAppSecret url:@"http://www.taihuoniao.com"];
-    
-    //设置手机QQ 的AppId，Appkey，和分享URL
-    [UMSocialQQHandler setQQWithAppId:QQAppID appKey:QQAppKey url:@"http://www.taihuoniao.com"];
-    
-    //打开新浪微博的SSO开关，设置新浪微博回调地址，这里必须要和你在新浪微博后台设置的回调地址一致。若在新浪后台设置我们的回调地址，“http://sns.whalecloud.com/sina2/callback”，这里可以传nil
-    [UMSocialSinaSSOHandler openNewSinaSSOWithAppKey:SinaAppKey secret:SinaAppSecret RedirectURL:@"http://www.taihuoniao.com"];
-    
-    // 由于苹果审核政策需求，建议大家对未安装客户端平台进行隐藏，在设置QQ、微信AppID之后调用下面的方法
-    [UMSocialConfig hiddenNotInstallPlatforms:@[UMShareToQQ, UMShareToWechatSession, UMShareToWechatTimeline, UMShareToSina]];
-    UMSocialConfig * h = [[UMSocialConfig alloc] init];
-    h.hiddenStatusTip = YES;
-    h.hiddenLoadingHUD = YES;
-    //---------------------------------------------------------------------
-    
-    //微信支付注册appId-------------------------
-    [WXApi registerApp:WechatAppID];
-    //----------------------------------------
-    
-    //设置推送---------------------------------------------------
-    //创建UIUserNotificationSettings，并设置消息的显示类类型
+    //  设置推送 创建UIUserNotificationSettings，并设置消息的显示类类型
     UIUserNotificationSettings *notiSettings = [UIUserNotificationSettings settingsForTypes:(UIUserNotificationTypeBadge | UIUserNotificationTypeAlert | UIUserNotificationTypeSound) categories:nil];
     
     [application registerUserNotificationSettings:notiSettings];
-    //------------------------------------------------------
+
+    [self thn_setAppFirstLaunching];
+
+    [self thn_setFirstGuideView];
     
-    //  键盘事件
-    IQKeyboardManager *manager = [IQKeyboardManager sharedManager];
-    manager.enable = YES;
-    manager.shouldResignOnTouchOutside = YES;
-    manager.enableAutoToolbar = NO;
+    [self thn_setThirdExpand];
+
+    [self thn_setBaiDuMapDelegate];
+    
+    [self thn_setUserInfoModelMapping];
+    
+    [self thn_setUmengService];
+    
+    [self thn_setRegisterWeChatPay];
+
+    [self thn_setUmengPush:launchOptions];
     
     return YES;
 }
 
-
--(void)application:(UIApplication *)application didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken{
+#pragma mark - 推送设置
+- (void)thn_setUmengPush:(NSDictionary *)launchOptions {
+    [UMessage startWithAppkey:UMMessageAppKey launchOptions:launchOptions];
+    [UMessage registerForRemoteNotifications];
     
+    //iOS10必须加下面这段代码。
+    UNUserNotificationCenter *center = [UNUserNotificationCenter currentNotificationCenter];
+    center.delegate = self;
+    UNAuthorizationOptions types10 = UNAuthorizationOptionBadge | UNAuthorizationOptionAlert | UNAuthorizationOptionSound;
+    [center requestAuthorizationWithOptions:types10
+                          completionHandler:^(BOOL granted, NSError * _Nullable error) {
+        if (granted) {
+            //点击允许
+            //这里可以添加一些自己的逻辑
+        } else {
+            //点击不允许
+            //这里可以添加一些自己的逻辑
+        }
+    }];
+    
+    //  打开日志，方便调试
+    [UMessage setLogEnabled:YES];
 }
 
+//  iOS10以下使用这个方法接收通知
+- (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo
+{
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"thnUserInfoNotification" object:self userInfo:userInfo];
+    //  关闭友盟自带的弹出框
+    [UMessage setAutoAlert:NO];
+    [UMessage didReceiveRemoteNotification:userInfo];
+}
 
-#pragma mark -  引导图的设置
--(void)guide{
+//  iOS10新增：处理前台收到通知的代理方法
+- (void)userNotificationCenter:(UNUserNotificationCenter *)center willPresentNotification:(UNNotification *)notification withCompletionHandler:(void (^)(UNNotificationPresentationOptions))completionHandler {
+    NSDictionary * userInfo = notification.request.content.userInfo;
+    if([notification.request.trigger isKindOfClass:[UNPushNotificationTrigger class]]) {
+        //应用处于前台时的远程推送接受
+        //    [[NSNotificationCenter defaultCenter] postNotificationName:@"userInfoNotification" object:self userInfo:userInfo];
+        //必须加这句代码
+        [UMessage didReceiveRemoteNotification:userInfo];
+        
+    } else {
+        //应用处于前台时的本地推送接受
+    }
+}
+
+//  iOS10新增：处理后台点击通知的代理方法
+- (void)userNotificationCenter:(UNUserNotificationCenter *)center didReceiveNotificationResponse:(UNNotificationResponse *)response withCompletionHandler:(void (^)())completionHandler {
+    NSDictionary * userInfo = response.notification.request.content.userInfo;
+    if([response.notification.request.trigger isKindOfClass:[UNPushNotificationTrigger class]]) {
+        //应用处于后台时的远程推送接受
+        //    [[NSNotificationCenter defaultCenter] postNotificationName:@"userInfoNotification" object:self userInfo:userInfo];
+        //必须加这句代码
+        [UMessage didReceiveRemoteNotification:userInfo];
+        
+    } else {
+        //应用处于后台时的本地推送接受
+    }
+}
+
+#pragma mark - 第三方库设置
+- (void)thn_setThirdExpand {
+    //  SVP颜色设置
+    [SVProgressHUD setBackgroundColor:[UIColor whiteColor]];
+    [SVProgressHUD setForegroundColor:[UIColor colorWithHexString:fineixColor alpha:1]];
     
-    //    使用的时候用key+版本号替换UserHasGuideView
-    //    这样容易控制每个版本都可以显示引导图
-    
+    //  键盘弹起模式
+    IQKeyboardManager *manager = [IQKeyboardManager sharedManager];
+    manager.enable = YES;
+    manager.shouldResignOnTouchOutside = YES;
+    manager.enableAutoToolbar = NO;
+}
+
+#pragma mark - 获取用户启动时的登录状态
+- (void)thn_setAppFirstLaunching {
+    //  首先统一设置为未登录
+    UserInfoEntity *entity = [UserInfoEntity defaultUserInfoEntity];
+    entity.isLogin = NO;
+    //  发送网络请求查看登录状态
+    FBRequest *request = [FBAPI postWithUrlString:determineLogin requestDictionary:nil delegate:self];
+    [request startRequestSuccess:^(FBRequest *request, id result) {
+        NSDictionary *dataDic = [result objectForKey:@"data"];
+        if ([[dataDic objectForKey:@"is_login"] boolValue]) {
+            //  已经登录的获取用户信息，更改登录状态
+            [[[UserInfo findAll] lastObject] updateUserInfoEntity];
+            entity.isLogin = YES;
+            
+            //  绑定Umeng Alias
+            if (entity.userId.length) {
+                [UMessage setAlias:entity.userId type:@"user_Id" response:^(id  _Nonnull responseObject, NSError * _Nonnull error) {
+                    if (responseObject) {
+                        NSLog(@"绑定成功 %@", entity.userId);
+                    } else {
+                        NSLog(@"-- %@ --", [error localizedDescription]);
+                    }
+                }];
+            }
+
+        } else {
+            NSLog(@"绑定成功 %zi", entity.isLogin);
+        }
+        
+    } failure:^(FBRequest *request, NSError *error) {
+        NSLog(@"%@",error);
+    }];
+}
+
+#pragma mark - 引导图的设置
+- (void)thn_setFirstGuideView {
+    //  使用的时候用key+版本号替换UserHasGuideView
+    //  这样容易控制每个版本都可以显示引导图
     __block BOOL invitation = [[NSUserDefaults standardUserDefaults] boolForKey:@"invitation"];;
     FBRequest *request = [FBAPI postWithUrlString:@"/gateway/is_invited" requestDictionary:nil delegate:self];
     [request startRequestSuccess:^(FBRequest *request, id result) {
@@ -175,12 +219,11 @@ NSString *const determineLogin = @"/auth/check_login";
         
     }];
     
-    
     [self lanch:invitation];
     
 }
 
--(void)lanch:(BOOL)flag{
+- (void)lanch:(BOOL)flag {
     NSArray *arr = [NSArray arrayWithObjects:@"Guide_one",@"Guide_two",@"Guide_three",@"Guide_four", nil];
     BOOL codeFlag = [[NSUserDefaults standardUserDefaults] boolForKey:@"codeFlag"];
     BOOL userIsFirstInstalled = [[NSUserDefaults standardUserDefaults] boolForKey:@"UserHasGuideView"];
@@ -194,6 +237,7 @@ NSString *const determineLogin = @"/auth/check_login";
         [[NSUserDefaults standardUserDefaults] setObject:version forKey:@"version"];
         [[NSUserDefaults standardUserDefaults] synchronize];
     }
+    
     if (userIsFirstInstalled && codeFlag) {
         THNTabBarController * tabBarC = [[THNTabBarController alloc] init];
         self.window.rootViewController = tabBarC;
@@ -206,19 +250,25 @@ NSString *const determineLogin = @"/auth/check_login";
             //判断小圆点是否消失
             if (![_counterModel.message_total_count isEqual:@0]) {
                 [tabBarC.tabBar showBadgeWithIndex:4];
-            }else{
+            
+            } else{
                 [tabBarC.tabBar hideBadgeWithIndex:4];
             }
+        
         } failure:^(FBRequest *request, NSError *error) {
+        
         }];
-    }else if(!userIsFirstInstalled){
+        
+    } else if(!userIsFirstInstalled){
         GuidePageViewController *vc = [[GuidePageViewController alloc] initWithPicArr:arr andRootVC:[[THNTabBarController alloc] init]];
         vc.flag = shouYe;
         self.window.rootViewController = vc;
-    }else if (userIsFirstInstalled && !codeFlag){
+    
+    } else if (userIsFirstInstalled && !codeFlag){
         if (flag) {
             self.window.rootViewController = [[InviteCCodeViewController alloc] init];
-        }else{
+        
+        } else{
             THNTabBarController * tabBarC = [[THNTabBarController alloc] init];
             self.window.rootViewController = tabBarC;
             UserInfoEntity *entity = [UserInfoEntity defaultUserInfoEntity];
@@ -230,17 +280,60 @@ NSString *const determineLogin = @"/auth/check_login";
                 //判断小圆点是否消失
                 if (![_counterModel.message_total_count isEqual:@0]) {
                     [tabBarC.tabBar showBadgeWithIndex:4];
-                }else{
+                
+                } else{
                     [tabBarC.tabBar hideBadgeWithIndex:4];
                 }
+            
             } failure:^(FBRequest *request, NSError *error) {
+            
             }];
         }
     }
 }
 
-#pragma mark -注册百度地图代理
--(void)bmkMap{
+#pragma mark - model属性名与字典key名映射
+- (void)thn_setUserInfoModelMapping {
+    [UserInfo mj_setupReplacedKeyFromPropertyName:^NSDictionary *{
+        return @{
+                 @"userId" : @"_id",
+                 @"firstLogin" : @"first_login",
+                 @"mediumAvatarUrl" : @"medium_avatar_url",
+                 @"trueNickname": @"true_nickname",
+                 @"level": @"rank_id",
+                 @"levelDesc": @"rank_title",
+                 @"birdCoin": @"bird_coin",
+                 //                 @"": @"",
+                 };
+    }];
+}
+
+#pragma mark - 友盟的相关配置
+- (void)thn_setUmengService {
+    //  设置友盟社会化组件appkey
+    [UMSocialData setAppKey:UMSocialAppKey];
+    
+    //  注册友盟统计
+    [self RegistrUMAnalyticsWithAppkey:UMSocialAppKey];
+    
+    //  设置微信AppId、appSecret，分享url
+    [UMSocialWechatHandler setWXAppId:WechatAppID appSecret:WechatAppSecret url:@"http://www.taihuoniao.com"];
+    
+    //  设置手机QQ 的AppId，Appkey，和分享URL
+    [UMSocialQQHandler setQQWithAppId:QQAppID appKey:QQAppKey url:@"http://www.taihuoniao.com"];
+    
+    //  打开新浪微博的SSO开关，设置新浪微博回调地址
+    [UMSocialSinaSSOHandler openNewSinaSSOWithAppKey:SinaAppKey secret:SinaAppSecret RedirectURL:@"http://www.taihuoniao.com"];
+    
+    // 未安装客户端平台进行隐藏，在设置QQ、微信AppID之后调用下面的方法
+    [UMSocialConfig hiddenNotInstallPlatforms:@[UMShareToQQ, UMShareToWechatSession, UMShareToWechatTimeline, UMShareToSina]];
+    UMSocialConfig *isHidden = [[UMSocialConfig alloc] init];
+    isHidden.hiddenStatusTip = YES;
+    isHidden.hiddenLoadingHUD = YES;
+}
+
+#pragma mark - 注册百度地图代理
+- (void)thn_setBaiDuMapDelegate {
     _mapManager = [[BMKMapManager alloc] init];
     BOOL ret = [_mapManager start:@"7MLakRE70YBXUoMSSNXA9GYXutwS3Wi0" generalDelegate:nil];
     if (!ret) {
@@ -248,6 +341,24 @@ NSString *const determineLogin = @"/auth/check_login";
     }
 }
 
+#pragma mark - 微信支付注册appId
+- (void)thn_setRegisterWeChatPay {
+    [WXApi registerApp:WechatAppID];
+}
+
+-(void)application:(UIApplication *)application didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken{
+    //  获取device token
+//    NSString *deviceTokenStr = [NSString stringWithFormat:@"%@",deviceToken];
+//    
+//    deviceTokenStr = [[deviceTokenStr substringWithRange:NSMakeRange(0, 72)] substringWithRange:NSMakeRange(1, 71)];
+//    deviceTokenStr = [deviceTokenStr stringByReplacingOccurrencesOfString:@" " withString:@""];
+//    
+//    NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
+//    [userDefaults setObject:deviceTokenStr forKey:@"deviceToken"];
+//    userDefaults = nil;
+//    
+//    NSLog(@"Token：%@", deviceTokenStr);
+}
 
 -(BOOL)application:(UIApplication *)application handleOpenURL:(NSURL *)url{
     if ([UMSocialSnsService handleOpenURL:url]) {
@@ -307,8 +418,6 @@ NSString *const determineLogin = @"/auth/check_login";
     return YES;
 }
 
-
-
 -(void)onReq:(BaseReq*)req
 {
     if (self.wxDelegate && [self.wxDelegate respondsToSelector:@selector(onReq:)]) {
@@ -323,7 +432,6 @@ NSString *const determineLogin = @"/auth/check_login";
     }
 }
 
-
 - (void)applicationWillResignActive:(UIApplication *)application {
     
 }
@@ -337,107 +445,25 @@ NSString *const determineLogin = @"/auth/check_login";
 }
 
 - (void)applicationWillEnterForeground:(UIApplication *)application {
-    // Called as part of the transition from the background to the inactive state; here you can undo many of the changes made on entering the background.
-    
     //回到前台时刷新通知状态
     if (_notiDelegate && [_notiDelegate respondsToSelector:@selector(resetNotificationState)]) {
         [_notiDelegate resetNotificationState];
     }
     
-//    //登录状态查询及本地用户信息获取
+    //登录状态查询及本地用户信息获取
     UserInfoEntity * userEntity = [UserInfoEntity defaultUserInfoEntity];
     FBRequest * request = [FBAPI postWithUrlString:@"/auth/check_login" requestDictionary:nil delegate:self];
     [request startRequestSuccess:^(FBRequest *request, id result) {
         NSDictionary * dataDic = [result objectForKey:@"data"];
         userEntity.isLogin = [[dataDic objectForKey:@"is_login"] boolValue];
     } failure:^(FBRequest *request, NSError *error) {
-//        [SVProgressHUD showInfoWithStatus:[error localizedDescription]];
+
     }];
 }
 
 - (void)applicationWillTerminate:(UIApplication *)application {
-    
-    [self saveContext];
+
 }
 
-#pragma mark - Core Data stack
-
-@synthesize managedObjectContext = _managedObjectContext;
-@synthesize managedObjectModel = _managedObjectModel;
-@synthesize persistentStoreCoordinator = _persistentStoreCoordinator;
-
-- (NSURL *)applicationDocumentsDirectory {
-    // The directory the application uses to store the Core Data store file. This code uses a directory named "com.taihuoniao.fineix" in the application's documents directory.
-    return [[[NSFileManager defaultManager] URLsForDirectory:NSDocumentDirectory inDomains:NSUserDomainMask] lastObject];
-}
-
-- (NSManagedObjectModel *)managedObjectModel {
-    // The managed object model for the application. It is a fatal error for the application not to be able to find and load its model.
-    if (_managedObjectModel != nil) {
-        return _managedObjectModel;
-    }
-    NSURL *modelURL = [[NSBundle mainBundle] URLForResource:@"fineix" withExtension:@"momd"];
-    _managedObjectModel = [[NSManagedObjectModel alloc] initWithContentsOfURL:modelURL];
-    return _managedObjectModel;
-}
-
-- (NSPersistentStoreCoordinator *)persistentStoreCoordinator {
-    // The persistent store coordinator for the application. This implementation creates and returns a coordinator, having added the store for the application to it.
-    if (_persistentStoreCoordinator != nil) {
-        return _persistentStoreCoordinator;
-    }
-    
-    // Create the coordinator and store
-    
-    _persistentStoreCoordinator = [[NSPersistentStoreCoordinator alloc] initWithManagedObjectModel:[self managedObjectModel]];
-    NSURL *storeURL = [[self applicationDocumentsDirectory] URLByAppendingPathComponent:@"fineix.sqlite"];
-    NSError *error = nil;
-    NSString *failureReason = @"There was an error creating or loading the application's saved data.";
-    if (![_persistentStoreCoordinator addPersistentStoreWithType:NSSQLiteStoreType configuration:nil URL:storeURL options:nil error:&error]) {
-        // Report any error we got.
-        NSMutableDictionary *dict = [NSMutableDictionary dictionary];
-        dict[NSLocalizedDescriptionKey] = @"Failed to initialize the application's saved data";
-        dict[NSLocalizedFailureReasonErrorKey] = failureReason;
-        dict[NSUnderlyingErrorKey] = error;
-        error = [NSError errorWithDomain:@"YOUR_ERROR_DOMAIN" code:9999 userInfo:dict];
-        // Replace this with code to handle the error appropriately.
-        // abort() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.
-        NSLog(@"Unresolved error %@, %@", error, [error userInfo]);
-        abort();
-    }
-    
-    return _persistentStoreCoordinator;
-}
-
-
-- (NSManagedObjectContext *)managedObjectContext {
-    // Returns the managed object context for the application (which is already bound to the persistent store coordinator for the application.)
-    if (_managedObjectContext != nil) {
-        return _managedObjectContext;
-    }
-    
-    NSPersistentStoreCoordinator *coordinator = [self persistentStoreCoordinator];
-    if (!coordinator) {
-        return nil;
-    }
-    _managedObjectContext = [[NSManagedObjectContext alloc] initWithConcurrencyType:NSMainQueueConcurrencyType];
-    [_managedObjectContext setPersistentStoreCoordinator:coordinator];
-    return _managedObjectContext;
-}
-
-#pragma mark - Core Data Saving support
-
-- (void)saveContext {
-    NSManagedObjectContext *managedObjectContext = self.managedObjectContext;
-    if (managedObjectContext != nil) {
-        NSError *error = nil;
-        if ([managedObjectContext hasChanges] && ![managedObjectContext save:&error]) {
-            // Replace this implementation with code to handle the error appropriately.
-            // abort() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.
-            NSLog(@"Unresolved error %@, %@", error, [error userInfo]);
-            abort();
-        }
-    }
-}
 
 @end
