@@ -100,6 +100,7 @@ static NSString *const hotUserCellId = @"HotUserCellId";
         self.follow.selected = YES;
     }
     
+    //用于解决关注判断失效的问题
     if (!self.follow.selected) {
         if (userModel.user.is_follow == 0) {
             self.follow.selected = NO;
