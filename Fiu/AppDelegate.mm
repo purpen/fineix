@@ -60,7 +60,7 @@ NSString *const determineLogin = @"/auth/check_login";
     [self.window makeKeyAndVisible];
     
     //首先统一设置为未登录-----------------------------------------------
-    /*UserInfoEntity *entity = [UserInfoEntity defaultUserInfoEntity];
+    UserInfoEntity *entity = [UserInfoEntity defaultUserInfoEntity];
     entity.isLogin = NO;
     //发送网络请求查看登录状态
     FBRequest *request = [FBAPI postWithUrlString:determineLogin requestDictionary:nil delegate:self];
@@ -73,7 +73,7 @@ NSString *const determineLogin = @"/auth/check_login";
         }
     } failure:^(FBRequest *request, NSError *error) {
         NSLog(@"%@",error);
-    }];*/
+    }];
 //--------------------------------------------------------
     
     //设置引导图片
@@ -345,14 +345,14 @@ NSString *const determineLogin = @"/auth/check_login";
     }
     
 //    //登录状态查询及本地用户信息获取
-    /*UserInfoEntity * userEntity = [UserInfoEntity defaultUserInfoEntity];
+    UserInfoEntity * userEntity = [UserInfoEntity defaultUserInfoEntity];
     FBRequest * request = [FBAPI postWithUrlString:@"/auth/check_login" requestDictionary:nil delegate:self];
     [request startRequestSuccess:^(FBRequest *request, id result) {
         NSDictionary * dataDic = [result objectForKey:@"data"];
         userEntity.isLogin = [[dataDic objectForKey:@"is_login"] boolValue];
     } failure:^(FBRequest *request, NSError *error) {
 //        [SVProgressHUD showInfoWithStatus:[error localizedDescription]];
-    }];*/
+    }];
 }
 
 - (void)applicationWillTerminate:(UIApplication *)application {
