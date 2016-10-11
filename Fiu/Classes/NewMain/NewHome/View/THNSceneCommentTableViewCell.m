@@ -27,12 +27,20 @@
     [self.headImage downloadImage:model.userAvatarUrl place:[UIImage imageNamed:@""]];
     NSString *comment = [NSString stringWithFormat:@"%@: %@", model.userNickname, model.content];
     [self getContentWithComment:comment withUserName:model.userNickname withUserId:[NSString stringWithFormat:@"%zi", model.userId]];
-    CGSize size = [_comment boundingRectWithSize:CGSizeMake(SCREEN_WIDTH - 70, 0)];
     
-    if (size.height < 35.0f) {
-        self.cellHigh = 35.0f;
+    CGFloat commentHeight = [comment boundingRectWithSize:CGSizeMake(320, 0)
+                                                 options:\
+                            NSStringDrawingTruncatesLastVisibleLine |
+                            NSStringDrawingUsesLineFragmentOrigin |
+                            NSStringDrawingUsesFontLeading |
+                            NSStringDrawingUsesDeviceMetrics
+                                              attributes:nil
+                                                 context:nil].size.height;
+    
+    if (commentHeight < 35.0f) {
+        self.cellHigh = commentHeight + 18.0f;
     } else {
-        self.cellHigh = size.height;
+        self.cellHigh = commentHeight * 1.5;
     }
 }
 
@@ -51,6 +59,7 @@
     [self.comment addLinkToURL:[NSURL URLWithString:userStr] withRange:range];
 }
 
+//  点击昵称获取用户id跳转个人主页
 - (void)attributedLabel:(TTTAttributedLabel *)label didSelectLinkWithURL:(NSURL *)url {
     NSString *userUrl = [[url absoluteString] stringByReplacingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
     NSString *user = [userUrl substringFromIndex:16];
@@ -63,7 +72,8 @@
     [_graybackView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.equalTo(self.mas_left).with.offset(15);
         make.right.equalTo(self.mas_right).with.offset(-15);
-        make.top.bottom.equalTo(self).with.offset(0);
+        make.top.equalTo(self.mas_top).with.offset(-1);
+        make.bottom.equalTo(self.mas_bottom).with.offset(1);
     }];
     
     [self addSubview:self.headImage];
@@ -78,7 +88,7 @@
         make.left.equalTo(_graybackView.mas_left).with.offset(40);
         make.right.equalTo(_graybackView.mas_right).with.offset(-10);
         make.top.equalTo(_graybackView.mas_top).with.offset(5);
-        make.bottom.equalTo(_graybackView.mas_bottom).with.offset(0);
+        make.bottom.equalTo(_graybackView.mas_bottom).with.offset(-5);
     }];
 }
 
@@ -119,7 +129,6 @@
                                                (NSString *)kCTForegroundColorAttributeName:(__bridge id)[UIColor colorWithHexString:BLACK_COLOR].CGColor
                                                };
         _comment.activeLinkAttributes = activelinkAttributes;
-//        _comment.backgroundColor = [UIColor orangeColor];
     }
     return _comment;
 }

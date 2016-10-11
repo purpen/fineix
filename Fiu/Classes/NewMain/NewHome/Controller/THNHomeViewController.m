@@ -335,7 +335,7 @@ static NSString *const allCommentsCellId = @"AllCommentsCellId";
 - (void)thn_networkSceneListData {
     [SVProgressHUD show];
     NSDictionary *requestDic = @{@"page":@(self.currentpageNum + 1),
-                                 @"size":@"10",
+                                 @"size":@"15",
                                  @"sort":@"2",
                                  @"fine":@"1"};
     self.sceneListRequest = [FBAPI getWithUrlString:URLSceneList requestDictionary:requestDic delegate:self];
@@ -666,7 +666,7 @@ static NSString *const allCommentsCellId = @"AllCommentsCellId";
             
         } else if (indexPath.row == 6) {
             if ([self.commentsMarr[indexPath.section -1] count] > 1) {
-                return 35.0f;
+                return 25.0f;
             } else {
                 return 0.01f;
             }
