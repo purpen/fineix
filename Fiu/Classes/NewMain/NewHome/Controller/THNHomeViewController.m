@@ -91,6 +91,18 @@ static NSString *const allCommentsCellId = @"AllCommentsCellId";
     [self thn_netWorkGroup];
 }
 
+- (void)viewDidAppear:(BOOL)animated {
+    [super viewDidAppear:animated];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(thn_OpenPushData:) name:@"thnUserInfoNotification" object:nil];
+}
+
+- (void)thn_OpenPushData:(NSNotification *)notification {
+    NSDictionary *dict = [notification userInfo];
+    NSString *type = [[dict valueForKey:@"data"] valueForKey:@"type"];
+    NSLog(@"-============ %@", type);
+}
+
 #pragma mark - 设置"发现用户"的位置和高度
 - (void)setHotUserListData {
     _hotUserListIndex = 5;
@@ -323,7 +335,7 @@ static NSString *const allCommentsCellId = @"AllCommentsCellId";
 - (void)thn_networkSceneListData {
     [SVProgressHUD show];
     NSDictionary *requestDic = @{@"page":@(self.currentpageNum + 1),
-                                 @"size":@"10",
+                                 @"size":@"15",
                                  @"sort":@"2",
                                  @"fine":@"1"};
     self.sceneListRequest = [FBAPI getWithUrlString:URLSceneList requestDictionary:requestDic delegate:self];
@@ -654,7 +666,7 @@ static NSString *const allCommentsCellId = @"AllCommentsCellId";
             
         } else if (indexPath.row == 6) {
             if ([self.commentsMarr[indexPath.section -1] count] > 1) {
-                return 35.0f;
+                return 25.0f;
             } else {
                 return 0.01f;
             }

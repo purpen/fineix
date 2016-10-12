@@ -458,6 +458,8 @@
 		D80878E81D6B318F00C1FFA0 /* DiscoverCategoryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D80878E71D6B318F00C1FFA0 /* DiscoverCategoryViewController.m */; };
 		D80D415B1CAD1437005D72B1 /* FBNavigationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D80D41591CAD1437005D72B1 /* FBNavigationViewController.m */; };
 		D80D415E1CAD144D005D72B1 /* UIBarButtonItem+Helper.m in Sources */ = {isa = PBXBuildFile; fileRef = D80D415C1CAD144D005D72B1 /* UIBarButtonItem+Helper.m */; };
+		D80FB1451DAB2FCA0060C561 /* libUMessage_Sdk_1.4.0.a in Frameworks */ = {isa = PBXBuildFile; fileRef = D80FB1431DAB2FCA0060C561 /* libUMessage_Sdk_1.4.0.a */; };
+		D80FB1471DAB30190060C561 /* UserNotifications.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D80FB1461DAB30190060C561 /* UserNotifications.framework */; };
 		D81281131CAA8532007CF08B /* FBViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D812801C1CAA8532007CF08B /* FBViewController.m */; };
 		D81281531CAA8532007CF08B /* FBAPI.m in Sources */ = {isa = PBXBuildFile; fileRef = D81280B21CAA8532007CF08B /* FBAPI.m */; };
 		D81281541CAA8532007CF08B /* FBRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = D81280B41CAA8532007CF08B /* FBRequest.m */; };
@@ -1435,6 +1437,9 @@
 		D80D415A1CAD1437005D72B1 /* FBNavigationViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FBNavigationViewController.h; sourceTree = "<group>"; };
 		D80D415C1CAD144D005D72B1 /* UIBarButtonItem+Helper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIBarButtonItem+Helper.m"; sourceTree = "<group>"; };
 		D80D415D1CAD144D005D72B1 /* UIBarButtonItem+Helper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIBarButtonItem+Helper.h"; sourceTree = "<group>"; };
+		D80FB1431DAB2FCA0060C561 /* libUMessage_Sdk_1.4.0.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libUMessage_Sdk_1.4.0.a; sourceTree = "<group>"; };
+		D80FB1441DAB2FCA0060C561 /* UMessage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UMessage.h; sourceTree = "<group>"; };
+		D80FB1461DAB30190060C561 /* UserNotifications.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UserNotifications.framework; path = System/Library/Frameworks/UserNotifications.framework; sourceTree = SDKROOT; };
 		D81280141CAA8532007CF08B /* AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		D812801B1CAA8532007CF08B /* FBViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FBViewController.h; sourceTree = "<group>"; };
 		D812801C1CAA8532007CF08B /* FBViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FBViewController.m; sourceTree = "<group>"; };
@@ -1776,6 +1781,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D80FB1471DAB30190060C561 /* UserNotifications.framework in Frameworks */,
 				1FC53BDD1D8938C600B0B666 /* libSocialQQ.a in Frameworks */,
 				1F6CA25D1D5B0FA600DFB79E /* MediaPlayer.framework in Frameworks */,
 				D8AC3E011D2CFFEC00148522 /* libz.1.2.5.tbd in Frameworks */,
@@ -1784,6 +1790,7 @@
 				D8AC3DFB1D2CFFA000148522 /* CoreData.framework in Frameworks */,
 				1FC53BE01D8938C600B0B666 /* libSocialWechat.a in Frameworks */,
 				1F27AE891CE06BB1005A434B /* AlipaySDK.framework in Frameworks */,
+				D80FB1451DAB2FCA0060C561 /* libUMessage_Sdk_1.4.0.a in Frameworks */,
 				1F27AE941CE06C7E005A434B /* CoreMotion.framework in Frameworks */,
 				1F27AE921CE06C70005A434B /* CFNetwork.framework in Frameworks */,
 				D83A64351C8E7EAD003DB8BB /* Foundation.framework in Frameworks */,
@@ -3388,6 +3395,7 @@
 		1FC53B941D8938C500B0B666 /* Umeng */ = {
 			isa = PBXGroup;
 			children = (
+				D80FB1421DAB2FCA0060C561 /* UMessage_Sdk_1.4.0 */,
 				1FC53B951D8938C500B0B666 /* UMMobClick.framework */,
 				1FC53B961D8938C500B0B666 /* UMSocial_Sdk_5.2.1 */,
 				1FC53BB11D8938C500B0B666 /* UMSocial_Sdk_Extra_Frameworks */,
@@ -3509,6 +3517,7 @@
 		4121957EDE4D4049941B2B88 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				D80FB1461DAB30190060C561 /* UserNotifications.framework */,
 				1F6CA25C1D5B0FA600DFB79E /* MediaPlayer.framework */,
 				D84763321D427E0100C88379 /* AdSupport.framework */,
 				D84763331D427E0100C88379 /* iAd.framework */,
@@ -3566,6 +3575,15 @@
 				800507341C7A9CDD005AF0BE /* Fiu.app */,
 			);
 			name = Products;
+			sourceTree = "<group>";
+		};
+		D80FB1421DAB2FCA0060C561 /* UMessage_Sdk_1.4.0 */ = {
+			isa = PBXGroup;
+			children = (
+				D80FB1431DAB2FCA0060C561 /* libUMessage_Sdk_1.4.0.a */,
+				D80FB1441DAB2FCA0060C561 /* UMessage.h */,
+			);
+			path = UMessage_Sdk_1.4.0;
 			sourceTree = "<group>";
 		};
 		D81280131CAA8532007CF08B /* Fiu */ = {
@@ -5164,7 +5182,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				PROVISIONING_PROFILE = "38736fb6-f8a9-4075-b98f-85f06063d856";
@@ -5203,7 +5221,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				PROVISIONING_PROFILE = "38736fb6-f8a9-4075-b98f-85f06063d856";
 				SDKROOT = iphoneos;
@@ -5256,6 +5274,7 @@
 					"$(PROJECT_DIR)/Fiu/Vendors/Umeng/UMSocial_Sdk_Extra_Frameworks/SinaSSO",
 					"$(PROJECT_DIR)/Fiu/Vendors/Umeng/UMSocial_Sdk_Extra_Frameworks/TencentOpenAPI",
 					"$(PROJECT_DIR)/Fiu/Vendors/Umeng/UMSocial_Sdk_Extra_Frameworks/Wechat",
+					"$(PROJECT_DIR)/Fiu/Vendors/Umeng/UMessage_Sdk_1.4.0",
 				);
 				OTHER_LIBTOOLFLAGS = "-all_load";
 				PRODUCT_BUNDLE_IDENTIFIER = com.THN.fineix;
@@ -5312,6 +5331,7 @@
 					"$(PROJECT_DIR)/Fiu/Vendors/Umeng/UMSocial_Sdk_Extra_Frameworks/SinaSSO",
 					"$(PROJECT_DIR)/Fiu/Vendors/Umeng/UMSocial_Sdk_Extra_Frameworks/TencentOpenAPI",
 					"$(PROJECT_DIR)/Fiu/Vendors/Umeng/UMSocial_Sdk_Extra_Frameworks/Wechat",
+					"$(PROJECT_DIR)/Fiu/Vendors/Umeng/UMessage_Sdk_1.4.0",
 				);
 				OTHER_LIBTOOLFLAGS = "-all_load";
 				PRODUCT_BUNDLE_IDENTIFIER = com.THN.fineix;

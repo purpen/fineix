@@ -157,7 +157,7 @@ static NSString *const MallListGoodsCellId = @"mallListGoodsCellId";
         UICollectionViewFlowLayout *flowLayout = [[UICollectionViewFlowLayout alloc] init];
         flowLayout.itemSize = CGSizeMake(100, 135);
         flowLayout.minimumLineSpacing = 10.0f;
-        flowLayout.sectionInset = UIEdgeInsetsMake(5, 15, 0, 15);
+        flowLayout.sectionInset = UIEdgeInsetsMake(10, 15, 0, 15);
         flowLayout.scrollDirection = UICollectionViewScrollDirectionHorizontal;
         
         _goodsList = [[UICollectionView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 185) collectionViewLayout:flowLayout];
