@@ -15,7 +15,9 @@
 #import "THNProjectViewController.h"
 #import "SearchViewController.h"
 #import "THNSubscribeViewController.h"
-
+#import "FBGoodsInfoViewController.h"
+#import "THNSceneDetalViewController.h"
+#import "HomePageViewController.h"
 #import "HomeThemeTableViewCell.h"
 #import "THNUserInfoTableViewCell.h"
 #import "THNSceneImageTableViewCell.h"
@@ -78,6 +80,7 @@ static NSString *const allCommentsCellId = @"AllCommentsCellId";
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     
+    [self thn_setReceiveUmengNotice];
     [self thn_setFirstAppStart];
     [self thn_setNavigationViewUI];
     
@@ -91,22 +94,63 @@ static NSString *const allCommentsCellId = @"AllCommentsCellId";
     [self thn_netWorkGroup];
 }
 
-- (void)viewDidAppear:(BOOL)animated {
-    [super viewDidAppear:animated];
-    
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(thn_OpenPushData:) name:@"thnUserInfoNotification" object:nil];
+#pragma mark - 推送通知
+- (void)thn_setReceiveUmengNotice {
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(thn_openPushData:) name:@"thnUserInfoNotification" object:nil];
 }
 
-- (void)thn_OpenPushData:(NSNotification *)notification {
+#pragma mark 打开接收推送消息
+- (void)thn_openPushData:(NSNotification *)notification {
     NSDictionary *dict = [notification userInfo];
-    NSString *type = [[dict valueForKey:@"data"] valueForKey:@"type"];
-    NSLog(@"-============ %@", type);
+    NSInteger type = [[dict valueForKey:@"type"] integerValue];
+    NSString *targetId = [dict valueForKey:@"target_id"];
+
+    if (type > 0 && targetId.length > 0) {
+        [self thn_openViewControllerWithType:type targetId:targetId];
+    }
 }
 
-#pragma mark - 设置"发现用户"的位置和高度
-- (void)setHotUserListData {
-    _hotUserListIndex = 5;
-    _hotUserCellHeight = 245.0f;
+#pragma mark 接收推送消息类型跳转指定页面
+- (void)thn_openViewControllerWithType:(NSInteger)type targetId:(NSString *)targetId {
+    switch (type) {
+        case 1:
+            [self thn_openGoodsInfoVC:targetId];
+            break;
+        case 2:
+            [self thn_networkSubjectInfoData:targetId];
+            break;
+        case 11:
+            [self thn_openSceneInfoVC:targetId];
+            break;
+        case 13:
+            [self thn_openUserHomeInfoVC:targetId];
+            break;
+        default:
+            break;
+    }
+}
+
+//  打开商品详情
+- (void)thn_openGoodsInfoVC:(NSString *)targetId {
+    FBGoodsInfoViewController *goodsInfoVC = [[FBGoodsInfoViewController alloc] init];
+    goodsInfoVC.goodsID = targetId;
+    [self.navigationController pushViewController:goodsInfoVC animated:YES];
+}
+
+//  打开情境详情
+- (void)thn_openSceneInfoVC:(NSString *)targetId {
+    THNSceneDetalViewController *sceneInfoVC = [[THNSceneDetalViewController alloc] init];
+    sceneInfoVC.sceneDetalId = targetId;
+    [self.navigationController pushViewController:sceneInfoVC animated:YES];
+}
+
+//  打开个人主页
+- (void)thn_openUserHomeInfoVC:(NSString *)targetId {
+    HomePageViewController *userHomeVC = [[HomePageViewController alloc] init];
+    userHomeVC.userId = targetId;
+    userHomeVC.type = @2;
+    userHomeVC.isMySelf = [targetId isEqualToString:[self getLoginUserID]];
+    [self.navigationController pushViewController:userHomeVC animated:YES];
 }
 
 #pragma mark - 网络请求
@@ -331,7 +375,7 @@ static NSString *const allCommentsCellId = @"AllCommentsCellId";
     }];
 }
 
-//  情景列表
+//  情境列表
 - (void)thn_networkSceneListData {
     [SVProgressHUD show];
     NSDictionary *requestDic = @{@"page":@(self.currentpageNum + 1),
@@ -436,6 +480,12 @@ static NSString *const allCommentsCellId = @"AllCommentsCellId";
 #pragma mark - 设置视图UI
 - (void)thn_setHomeViewUI {
     [self.view addSubview:self.homeTable];
+}
+
+#pragma mark - 设置"发现用户"的位置和高度
+- (void)setHotUserListData {
+    _hotUserListIndex = 5;
+    _hotUserCellHeight = 245.0f;
 }
 
 #pragma mark - 初始化轮播图&点击跳转事件
@@ -886,6 +936,8 @@ static NSString *const allCommentsCellId = @"AllCommentsCellId";
 - (void)viewDidDisappear:(BOOL)animated {
     [super viewDidDisappear:animated];
     [SVProgressHUD dismiss];
+    
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:@"thnUserInfoNotification" object:nil];
 }
 
 #pragma mark - 初始化数组

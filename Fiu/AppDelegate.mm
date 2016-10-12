@@ -33,6 +33,14 @@
 #import "InviteCCodeViewController.h"
 #import "AppDelegate+UMAnalytics.h"
 
+#import "FBGoodsInfoViewController.h"
+#import "THNSceneDetalViewController.h"
+#import "THNArticleDetalViewController.h"
+#import "THNActiveDetalTwoViewController.h"
+#import "THNXinPinDetalViewController.h"
+#import "THNCuXiaoDetalViewController.h"
+#import "THNProjectViewController.h"
+
 @interface AppDelegate () <
     WXApiDelegate,
     UNUserNotificationCenterDelegate
@@ -42,6 +50,7 @@
     float _la;
     float _lo;
     CounterModel *_counterModel;
+    NSInteger _subjectType;
 }
 
 @end
@@ -56,6 +65,7 @@ static NSString *const QQAppKey              = @"CaKcLeg32YeVF7b9";
 static NSString *const determineLogin        = @"/auth/check_login";
 static NSString *const UMMessageAppKey       = @"5791f41b67e58e8de5002568";
 static NSString *const UMMessageMasterSecret = @"6s7pzrgvimmxfpzyc3qvyefgaaoibyiu";
+static NSString *const URLSubjectView = @"/scene_subject/view";
 
 @implementation AppDelegate
 
@@ -68,7 +78,7 @@ static NSString *const UMMessageMasterSecret = @"6s7pzrgvimmxfpzyc3qvyefgaaoibyi
     UIUserNotificationSettings *notiSettings = [UIUserNotificationSettings settingsForTypes:(UIUserNotificationTypeBadge | UIUserNotificationTypeAlert | UIUserNotificationTypeSound) categories:nil];
     
     [application registerUserNotificationSettings:notiSettings];
-
+    
     [self thn_setAppFirstLaunching];
 
     [self thn_setFirstGuideView];
@@ -92,7 +102,7 @@ static NSString *const UMMessageMasterSecret = @"6s7pzrgvimmxfpzyc3qvyefgaaoibyi
 - (void)thn_setUmengPush:(NSDictionary *)launchOptions {
     [UMessage startWithAppkey:UMMessageAppKey launchOptions:launchOptions];
     [UMessage registerForRemoteNotifications];
-    
+
     //iOS10必须加下面这段代码。
     UNUserNotificationCenter *center = [UNUserNotificationCenter currentNotificationCenter];
     center.delegate = self;
@@ -110,14 +120,24 @@ static NSString *const UMMessageMasterSecret = @"6s7pzrgvimmxfpzyc3qvyefgaaoibyi
     
     //  打开日志，方便调试
     [UMessage setLogEnabled:YES];
+    
+    //  应用未启动时
+    NSDictionary *userInfo = [launchOptions objectForKey:UIApplicationLaunchOptionsRemoteNotificationKey];
+    if (userInfo != nil) {
+        [self thn_getNotice:userInfo];
+        [UMessage sendClickReportForRemoteNotification:userInfo];
+    } else {
+        //  未接收到通知
+    }
 }
 
 //  iOS10以下使用这个方法接收通知
-- (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo
-{
-    [[NSNotificationCenter defaultCenter] postNotificationName:@"thnUserInfoNotification" object:self userInfo:userInfo];
-    //  关闭友盟自带的弹出框
-    [UMessage setAutoAlert:NO];
+- (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo {
+    if (userInfo) {
+        [[NSNotificationCenter defaultCenter] postNotificationName:@"thnUserInfoNotification" object:self userInfo:userInfo];
+        //  关闭友盟自带的弹出框
+        [UMessage setAutoAlert:NO];
+    }
     [UMessage didReceiveRemoteNotification:userInfo];
 }
 
@@ -125,8 +145,11 @@ static NSString *const UMMessageMasterSecret = @"6s7pzrgvimmxfpzyc3qvyefgaaoibyi
 - (void)userNotificationCenter:(UNUserNotificationCenter *)center willPresentNotification:(UNNotification *)notification withCompletionHandler:(void (^)(UNNotificationPresentationOptions))completionHandler {
     NSDictionary * userInfo = notification.request.content.userInfo;
     if([notification.request.trigger isKindOfClass:[UNPushNotificationTrigger class]]) {
-        //应用处于前台时的远程推送接受
-        //    [[NSNotificationCenter defaultCenter] postNotificationName:@"userInfoNotification" object:self userInfo:userInfo];
+        if (userInfo) {
+            //应用处于前台时的远程推送接受
+//            [[NSNotificationCenter defaultCenter] postNotificationName:@"thnUserInfoNotification" object:self userInfo:userInfo];
+            [UMessage setAutoAlert:NO];
+        }
         //必须加这句代码
         [UMessage didReceiveRemoteNotification:userInfo];
         
@@ -139,8 +162,10 @@ static NSString *const UMMessageMasterSecret = @"6s7pzrgvimmxfpzyc3qvyefgaaoibyi
 - (void)userNotificationCenter:(UNUserNotificationCenter *)center didReceiveNotificationResponse:(UNNotificationResponse *)response withCompletionHandler:(void (^)())completionHandler {
     NSDictionary * userInfo = response.notification.request.content.userInfo;
     if([response.notification.request.trigger isKindOfClass:[UNPushNotificationTrigger class]]) {
-        //应用处于后台时的远程推送接受
-        //    [[NSNotificationCenter defaultCenter] postNotificationName:@"userInfoNotification" object:self userInfo:userInfo];
+        if (userInfo) {
+            //应用处于后台时的远程推送接受
+            [[NSNotificationCenter defaultCenter] postNotificationName:@"thnUserInfoNotification" object:self userInfo:userInfo];
+        }
         //必须加这句代码
         [UMessage didReceiveRemoteNotification:userInfo];
         
@@ -349,15 +374,11 @@ static NSString *const UMMessageMasterSecret = @"6s7pzrgvimmxfpzyc3qvyefgaaoibyi
 -(void)application:(UIApplication *)application didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken{
     //  获取device token
 //    NSString *deviceTokenStr = [NSString stringWithFormat:@"%@",deviceToken];
-//    
 //    deviceTokenStr = [[deviceTokenStr substringWithRange:NSMakeRange(0, 72)] substringWithRange:NSMakeRange(1, 71)];
 //    deviceTokenStr = [deviceTokenStr stringByReplacingOccurrencesOfString:@" " withString:@""];
-//    
-//    NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
-//    [userDefaults setObject:deviceTokenStr forKey:@"deviceToken"];
-//    userDefaults = nil;
-//    
 //    NSLog(@"Token：%@", deviceTokenStr);
+    
+    [UMessage registerDeviceToken:deviceToken];
 }
 
 -(BOOL)application:(UIApplication *)application handleOpenURL:(NSURL *)url{
@@ -465,5 +486,97 @@ static NSString *const UMMessageMasterSecret = @"6s7pzrgvimmxfpzyc3qvyefgaaoibyi
 
 }
 
+#pragma mark - 应用未启动状态查看通知消息
+- (void)thn_getNotice:(NSDictionary *)userInfo {
+    NSInteger type = [[userInfo valueForKey:@"type"] integerValue];
+    NSString *targetId = [userInfo valueForKey:@"target_id"];
+    
+    if (type > 0 && targetId.length > 0) {
+        [self thn_openViewControllerWithType:type targetId:targetId];
+    }
+}
+#pragma mark 接收推送消息类型跳转指定页面
+- (void)thn_openViewControllerWithType:(NSInteger)type targetId:(NSString *)targetId {
+    switch (type) {
+        case 1:
+            [self thn_openGoodsInfoVC:targetId];
+            break;
+        case 2:
+            [self thn_networkSubjectInfoData:targetId];
+            break;
+        case 11:
+            [self thn_openSceneInfoVC:targetId];
+            break;
+        case 13:
+            [self thn_openUserHomeInfoVC:targetId];
+            break;
+        default:
+            break;
+    }
+}
+
+//  打开商品详情
+- (void)thn_openGoodsInfoVC:(NSString *)targetId {
+    FBGoodsInfoViewController *goodsInfoVC = [[FBGoodsInfoViewController alloc] init];
+    goodsInfoVC.goodsID = targetId;
+    [self.window.rootViewController.childViewControllers[0] pushViewController:goodsInfoVC animated:YES];
+}
+
+//  打开情境详情
+- (void)thn_openSceneInfoVC:(NSString *)targetId {
+    THNSceneDetalViewController *sceneInfoVC = [[THNSceneDetalViewController alloc] init];
+    sceneInfoVC.sceneDetalId = targetId;
+    [self.window.rootViewController.childViewControllers[0] pushViewController:sceneInfoVC animated:YES];
+}
+
+//  打开个人主页
+- (void)thn_openUserHomeInfoVC:(NSString *)targetId {
+    HomePageViewController *userHomeVC = [[HomePageViewController alloc] init];
+    userHomeVC.userId = targetId;
+    userHomeVC.type = @2;
+    //    userHomeVC.isMySelf = [targetId isEqualToString:[self getLoginUserID]];
+    [self.window.rootViewController.childViewControllers[0] pushViewController:userHomeVC animated:YES];
+}
+
+//  打开专题
+- (void)thn_networkSubjectInfoData:(NSString *)idx {
+    self.subjectInfoRequest = [FBAPI getWithUrlString:URLSubjectView requestDictionary:@{@"id":idx} delegate:self];
+    [self.subjectInfoRequest startRequestSuccess:^(FBRequest *request, id result) {
+        
+        if (![[[result valueForKey:@"data"] valueForKey:@"type"] isKindOfClass:[NSNull class]]) {
+            _subjectType = [[[result valueForKey:@"data"] valueForKey:@"type"] integerValue];
+            if (_subjectType == 1) {
+                THNArticleDetalViewController *articleVC = [[THNArticleDetalViewController alloc] init];
+                articleVC.articleDetalid = idx;
+                [self.self.window.rootViewController.childViewControllers[0] pushViewController:articleVC animated:YES];
+                
+            } else if (_subjectType == 2) {
+                THNActiveDetalTwoViewController *activity = [[THNActiveDetalTwoViewController alloc] init];
+                activity.activeDetalId = idx;
+                [self.self.window.rootViewController.childViewControllers[0] pushViewController:activity animated:YES];
+                
+            } else if (_subjectType == 3) {
+                THNCuXiaoDetalViewController *cuXiao = [[THNCuXiaoDetalViewController alloc] init];
+                cuXiao.cuXiaoDetalId = idx;
+                cuXiao.vcType = 1;
+                [self.self.window.rootViewController.childViewControllers[0] pushViewController:cuXiao animated:YES];
+                
+            } else if (_subjectType == 4) {
+                THNXinPinDetalViewController *xinPin = [[THNXinPinDetalViewController alloc] init];
+                xinPin.xinPinDetalId = idx;
+                [self.self.window.rootViewController.childViewControllers[0] pushViewController:xinPin animated:YES];
+                
+            } else if (_subjectType == 5) {
+                THNCuXiaoDetalViewController *cuXiao = [[THNCuXiaoDetalViewController alloc] init];
+                cuXiao.cuXiaoDetalId = idx;
+                cuXiao.vcType = 2;
+                [self.self.window.rootViewController.childViewControllers[0] pushViewController:cuXiao animated:YES];
+            }
+        }
+        
+    } failure:^(FBRequest *request, NSError *error) {
+        NSLog(@"%@",error);
+    }];
+}
 
 @end
