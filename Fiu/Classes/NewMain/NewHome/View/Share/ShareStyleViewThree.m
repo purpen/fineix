@@ -8,6 +8,7 @@
 
 #import "ShareStyleViewThree.h"
 #import "UILable+Frame.h"
+#import "NSString+TimeDate.h"
 
 @implementation ShareStyleViewThree
 
@@ -73,7 +74,7 @@
     }
     
     [self.userName setTitle:[NSString stringWithFormat:@"%@", sceneModel.user.nickname] forState:(UIControlStateNormal)];
-    [self thn_getTextChangeFrame:sceneModel.createdAt withAddress:sceneModel.address];
+    [self thn_getTextChangeFrame:sceneModel.createdOn withAddress:sceneModel.address];
     
     [self changeContentLabStyle:sceneModel.des];
 }
@@ -91,11 +92,13 @@
     return retSize;
 }
 
-- (void)thn_getTextChangeFrame:(NSString *)time withAddress:(NSString *)address {
-    [self.time setTitle:[NSString stringWithFormat:@"%@", time] forState:(UIControlStateNormal)];
-    NSString *timeStr = [NSString stringWithFormat:@"     %@", time];
+- (void)thn_getTextChangeFrame:(NSInteger)time withAddress:(NSString *)address {
+   
+    NSString *timeStr = [NSString getTimesTamp:time];
+    [self.time setTitle:timeStr forState:(UIControlStateNormal)];
+    CGFloat timeWidth = [self getTextSizeWidth:timeStr fontSize:12].width *1.1;
+    
     NSString *addressStr = [NSString stringWithFormat:@"   %@", address];
-    CGFloat timeWidth = [self getTextSizeWidth:timeStr fontSize:12].width;
     CGFloat addressWidth = [self getTextSizeWidth:addressStr fontSize:12].width;
     
     [self.time mas_updateConstraints:^(MASConstraintMaker *make) {

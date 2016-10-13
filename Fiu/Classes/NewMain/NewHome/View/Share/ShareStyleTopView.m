@@ -8,6 +8,7 @@
 
 #import "ShareStyleTopView.h"
 #import "UILable+Frame.h"
+#import "NSString+TimeDate.h"
 
 @implementation ShareStyleTopView
 
@@ -23,7 +24,7 @@
 #pragma mark - 视图信息
 - (void)setShareSceneData:(HomeSceneListRow *)sceneModel {
     [self setViewUI];
-    
+
     self.tagDataMarr = [NSMutableArray arrayWithArray:sceneModel.product];
     if (self.tagDataMarr.count) {
         [self setUserTagBtn];
@@ -65,10 +66,10 @@
     }
 
     [self.userName setTitle:[NSString stringWithFormat:@"%@", sceneModel.user.nickname] forState:(UIControlStateNormal)];
-    [self.time setTitle:[NSString stringWithFormat:@"%@", sceneModel.createdAt] forState:(UIControlStateNormal)];
-    NSString *timeStr = [NSString stringWithFormat:@"     %@", sceneModel.createdAt];
+    
+    [self.time setTitle:[NSString getTimesTamp:sceneModel.createdOn] forState:(UIControlStateNormal)];
     [self.time mas_updateConstraints:^(MASConstraintMaker *make) {
-        make.width.equalTo(@([self getTextSizeWidth:timeStr fontSize:12].width));
+        make.width.equalTo(@([self getTextSizeWidth:[NSString getTimesTamp:sceneModel.createdOn] fontSize:12].width *1.1));
     }];
     
     if (sceneModel.address.length == 0) {

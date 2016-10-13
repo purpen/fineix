@@ -460,6 +460,7 @@
 		D80D415E1CAD144D005D72B1 /* UIBarButtonItem+Helper.m in Sources */ = {isa = PBXBuildFile; fileRef = D80D415C1CAD144D005D72B1 /* UIBarButtonItem+Helper.m */; };
 		D80FB1451DAB2FCA0060C561 /* libUMessage_Sdk_1.4.0.a in Frameworks */ = {isa = PBXBuildFile; fileRef = D80FB1431DAB2FCA0060C561 /* libUMessage_Sdk_1.4.0.a */; };
 		D80FB1471DAB30190060C561 /* UserNotifications.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D80FB1461DAB30190060C561 /* UserNotifications.framework */; };
+		D80FB14A1DAF89BA0060C561 /* NSString+TimeDate.m in Sources */ = {isa = PBXBuildFile; fileRef = D80FB1491DAF89BA0060C561 /* NSString+TimeDate.m */; };
 		D81281131CAA8532007CF08B /* FBViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D812801C1CAA8532007CF08B /* FBViewController.m */; };
 		D81281531CAA8532007CF08B /* FBAPI.m in Sources */ = {isa = PBXBuildFile; fileRef = D81280B21CAA8532007CF08B /* FBAPI.m */; };
 		D81281541CAA8532007CF08B /* FBRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = D81280B41CAA8532007CF08B /* FBRequest.m */; };
@@ -1440,6 +1441,8 @@
 		D80FB1431DAB2FCA0060C561 /* libUMessage_Sdk_1.4.0.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libUMessage_Sdk_1.4.0.a; sourceTree = "<group>"; };
 		D80FB1441DAB2FCA0060C561 /* UMessage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UMessage.h; sourceTree = "<group>"; };
 		D80FB1461DAB30190060C561 /* UserNotifications.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UserNotifications.framework; path = System/Library/Frameworks/UserNotifications.framework; sourceTree = SDKROOT; };
+		D80FB1481DAF89BA0060C561 /* NSString+TimeDate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+TimeDate.h"; sourceTree = "<group>"; };
+		D80FB1491DAF89BA0060C561 /* NSString+TimeDate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+TimeDate.m"; sourceTree = "<group>"; };
 		D81280141CAA8532007CF08B /* AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		D812801B1CAA8532007CF08B /* FBViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FBViewController.h; sourceTree = "<group>"; };
 		D812801C1CAA8532007CF08B /* FBViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FBViewController.m; sourceTree = "<group>"; };
@@ -3678,6 +3681,8 @@
 				D80D415C1CAD144D005D72B1 /* UIBarButtonItem+Helper.m */,
 				D81280B81CAA8532007CF08B /* NSString+FBMD5.h */,
 				D81280B91CAA8532007CF08B /* NSString+FBMD5.m */,
+				D80FB1481DAF89BA0060C561 /* NSString+TimeDate.h */,
+				D80FB1491DAF89BA0060C561 /* NSString+TimeDate.m */,
 				D81280BA1CAA8532007CF08B /* NSString+Helper.h */,
 				D81280BB1CAA8532007CF08B /* NSString+Helper.m */,
 				D81280BC1CAA8532007CF08B /* UIColor+Extension.h */,
@@ -4684,6 +4689,7 @@
 				D869BD7C1D6044F700432423 /* THNAddTagViewController.m in Sources */,
 				1FF36EA91D5099AA00EB3C93 /* UIView+FSExtension.m in Sources */,
 				D8ACF45E1D6D7BCC00DB79D8 /* THNSubscribeViewController.m in Sources */,
+				D80FB14A1DAF89BA0060C561 /* NSString+TimeDate.m in Sources */,
 				D869BD6E1D6036A000432423 /* CommentId.m in Sources */,
 				1F2A90621CF40277005116C7 /* SystemInformsViewController.m in Sources */,
 				D806697B1D6F0206007FD81E /* MallSearchViewController.m in Sources */,

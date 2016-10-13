@@ -8,6 +8,7 @@
 
 #import "ShareStyleViewTwo.h"
 #import "UILable+Frame.h"
+#import "NSString+TimeDate.h"
 
 @implementation ShareStyleViewTwo
 
@@ -72,10 +73,10 @@
     }
     
     [self.userName setTitle:[NSString stringWithFormat:@" %@", sceneModel.user.nickname] forState:(UIControlStateNormal)];
-    [self.time setTitle:[NSString stringWithFormat:@" %@", sceneModel.createdAt] forState:(UIControlStateNormal)];
-    NSString *timeStr = [NSString stringWithFormat:@"     %@", sceneModel.createdAt];
+    NSString *timeStr = [NSString getTimesTamp:sceneModel.createdOn];
+    [self.time setTitle:[NSString stringWithFormat:@"    %@", timeStr] forState:(UIControlStateNormal)];
     [self.time mas_updateConstraints:^(MASConstraintMaker *make) {
-        make.width.equalTo(@([self getTextSizeWidth:timeStr fontSize:12].width));
+        make.width.equalTo(@([self getTextSizeWidth:timeStr fontSize:12].width *1.2));
     }];
     
     if (sceneModel.address.length == 0) {
