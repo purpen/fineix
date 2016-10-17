@@ -18,12 +18,14 @@
 #import "THNLoginRegisterViewController.h"
 #import "PictureToolViewController.h"
 #import "THNLoginRegisterViewController.h"
+#import "THNMessageViewController.h"
 
 @implementation THNTabBarController {
     THNNavigationController * _homeNav;
     THNNavigationController * _discoverNav;
     THNNavigationController * _mallNav;
     THNNavigationController * _myNav;
+    UIWindow *_window;
 }
 
 - (void)viewDidLoad {
@@ -46,6 +48,7 @@
         }];
         
         if (entity.isLogin) {
+            [self thn_clearTabBarItemBadge];
             return YES;
         } else {
             THNLoginRegisterViewController *vc = [[THNLoginRegisterViewController alloc] init];
@@ -134,6 +137,47 @@
                        itemTitle:NSLocalizedString(@"TabBar_MyCenter", nil)];
     
     self.viewControllers = @[_homeNav, _discoverNav, _mallNav, _myNav];
+}
+
+#pragma mark - 显示消息角标
+- (void)thn_showTabBarItemBadgeWithItem:(UITabBarItem *)item value:(NSString *)value {
+    if ([value integerValue] == 0) {
+//        item.badgeValue = nil;
+        
+    } else {
+        [self.badgeBtn thn_showBadgeValue:value];
+        CGFloat valueWidth = [value boundingRectWithSize:CGSizeMake(320, 0) options:(NSStringDrawingUsesLineFragmentOrigin) attributes:nil context:nil].size.width;
+        _window = [UIApplication sharedApplication].keyWindow;
+        [_window addSubview:self.badgeBtn];
+        [_badgeBtn mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.size.mas_equalTo(CGSizeMake(35 + valueWidth, 35));
+            make.right.equalTo(_window.mas_right).with.offset(-SCREEN_WIDTH*0.05);
+            make.bottom.equalTo(_window.mas_bottom).with.offset(-47);
+        }];
+//        item.badgeValue = value;
+    }
+    item.badgeColor = [UIColor colorWithHexString:MAIN_COLOR];
+}
+
+#pragma mark - 清除消息角标
+- (void)thn_clearTabBarItemBadge {
+    UITabBarItem *myTabBarItem = [self.tabBar.items objectAtIndex:3];
+    myTabBarItem.badgeValue = nil;
+}
+
+#pragma mark - 消息气泡
+- (FBTabBarItemBadgeBtn *)badgeBtn {
+    if (!_badgeBtn) {
+        _badgeBtn = [[FBTabBarItemBadgeBtn alloc] init];
+        [_badgeBtn addTarget:self action:@selector(openMessVC:) forControlEvents:(UIControlEventTouchUpInside)];
+    }
+    return _badgeBtn;
+}
+
+- (void)openMessVC:(FBTabBarItemBadgeBtn *)button {
+//    THNMessageViewController *messVC = [[THNMessageViewController alloc] init];
+//    [self.childViewControllers[3] pushViewController:messVC animated:YES];
+    
 }
 
 #pragma mark “创建情景”的按钮事件

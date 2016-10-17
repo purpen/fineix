@@ -203,7 +203,7 @@ static NSString *const URLSubjectView = @"/scene_subject/view";
             
             //  绑定Umeng Alias
             if (entity.userId.length) {
-                [UMessage setAlias:entity.userId type:@"user_Id" response:^(id  _Nonnull responseObject, NSError * _Nonnull error) {
+                [UMessage setAlias:entity.userId type:@"user_id" response:^(id  _Nonnull responseObject, NSError * _Nonnull error) {
                     if (responseObject) {
                         NSLog(@"绑定成功 %@", entity.userId);
                     } else {
@@ -266,19 +266,16 @@ static NSString *const URLSubjectView = @"/scene_subject/view";
     if (userIsFirstInstalled && codeFlag) {
         THNTabBarController * tabBarC = [[THNTabBarController alloc] init];
         self.window.rootViewController = tabBarC;
+        
         UserInfoEntity *entity = [UserInfoEntity defaultUserInfoEntity];
         FBRequest *request = [FBAPI postWithUrlString:@"/auth/user" requestDictionary:@{@"user_id":entity.userId} delegate:self];
         [request startRequestSuccess:^(FBRequest *request, id result) {
             NSDictionary *dataDict = result[@"data"];
             NSDictionary *counterDict = [dataDict objectForKey:@"counter"];
             _counterModel = [CounterModel mj_objectWithKeyValues:counterDict];
-            //判断小圆点是否消失
-            if (![_counterModel.message_total_count isEqual:@0]) {
-                [tabBarC.tabBar showBadgeWithIndex:4];
             
-            } else{
-                [tabBarC.tabBar hideBadgeWithIndex:4];
-            }
+            [tabBarC thn_showTabBarItemBadgeWithItem:[tabBarC.tabBar.items objectAtIndex:3]
+                                               value:[NSString stringWithFormat:@"%@", _counterModel.message_total_count]];
         
         } failure:^(FBRequest *request, NSError *error) {
         
@@ -302,13 +299,9 @@ static NSString *const URLSubjectView = @"/scene_subject/view";
                 NSDictionary *dataDict = result[@"data"];
                 NSDictionary *counterDict = [dataDict objectForKey:@"counter"];
                 _counterModel = [CounterModel mj_objectWithKeyValues:counterDict];
-                //判断小圆点是否消失
-                if (![_counterModel.message_total_count isEqual:@0]) {
-                    [tabBarC.tabBar showBadgeWithIndex:4];
-                
-                } else{
-                    [tabBarC.tabBar hideBadgeWithIndex:4];
-                }
+
+                [tabBarC thn_showTabBarItemBadgeWithItem:[tabBarC.tabBar.items objectAtIndex:3]
+                                                   value:[NSString stringWithFormat:@"%@", _counterModel.message_total_count]];
             
             } failure:^(FBRequest *request, NSError *error) {
             
@@ -548,29 +541,29 @@ static NSString *const URLSubjectView = @"/scene_subject/view";
             if (_subjectType == 1) {
                 THNArticleDetalViewController *articleVC = [[THNArticleDetalViewController alloc] init];
                 articleVC.articleDetalid = idx;
-                [self.self.window.rootViewController.childViewControllers[0] pushViewController:articleVC animated:YES];
+                [self.window.rootViewController.childViewControllers[0] pushViewController:articleVC animated:YES];
                 
             } else if (_subjectType == 2) {
                 THNActiveDetalTwoViewController *activity = [[THNActiveDetalTwoViewController alloc] init];
                 activity.activeDetalId = idx;
-                [self.self.window.rootViewController.childViewControllers[0] pushViewController:activity animated:YES];
+                [self.window.rootViewController.childViewControllers[0] pushViewController:activity animated:YES];
                 
             } else if (_subjectType == 3) {
                 THNCuXiaoDetalViewController *cuXiao = [[THNCuXiaoDetalViewController alloc] init];
                 cuXiao.cuXiaoDetalId = idx;
                 cuXiao.vcType = 1;
-                [self.self.window.rootViewController.childViewControllers[0] pushViewController:cuXiao animated:YES];
+                [self.window.rootViewController.childViewControllers[0] pushViewController:cuXiao animated:YES];
                 
             } else if (_subjectType == 4) {
                 THNXinPinDetalViewController *xinPin = [[THNXinPinDetalViewController alloc] init];
                 xinPin.xinPinDetalId = idx;
-                [self.self.window.rootViewController.childViewControllers[0] pushViewController:xinPin animated:YES];
+                [self.window.rootViewController.childViewControllers[0] pushViewController:xinPin animated:YES];
                 
             } else if (_subjectType == 5) {
                 THNCuXiaoDetalViewController *cuXiao = [[THNCuXiaoDetalViewController alloc] init];
                 cuXiao.cuXiaoDetalId = idx;
                 cuXiao.vcType = 2;
-                [self.self.window.rootViewController.childViewControllers[0] pushViewController:cuXiao animated:YES];
+                [self.window.rootViewController.childViewControllers[0] pushViewController:cuXiao animated:YES];
             }
         }
         

@@ -461,6 +461,7 @@
 		D80FB1451DAB2FCA0060C561 /* libUMessage_Sdk_1.4.0.a in Frameworks */ = {isa = PBXBuildFile; fileRef = D80FB1431DAB2FCA0060C561 /* libUMessage_Sdk_1.4.0.a */; };
 		D80FB1471DAB30190060C561 /* UserNotifications.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D80FB1461DAB30190060C561 /* UserNotifications.framework */; };
 		D80FB14A1DAF89BA0060C561 /* NSString+TimeDate.m in Sources */ = {isa = PBXBuildFile; fileRef = D80FB1491DAF89BA0060C561 /* NSString+TimeDate.m */; };
+		D80FB14D1DB0C5620060C561 /* FBTabBarItemBadgeBtn.m in Sources */ = {isa = PBXBuildFile; fileRef = D80FB14C1DB0C5620060C561 /* FBTabBarItemBadgeBtn.m */; };
 		D81281131CAA8532007CF08B /* FBViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D812801C1CAA8532007CF08B /* FBViewController.m */; };
 		D81281531CAA8532007CF08B /* FBAPI.m in Sources */ = {isa = PBXBuildFile; fileRef = D81280B21CAA8532007CF08B /* FBAPI.m */; };
 		D81281541CAA8532007CF08B /* FBRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = D81280B41CAA8532007CF08B /* FBRequest.m */; };
@@ -1443,6 +1444,8 @@
 		D80FB1461DAB30190060C561 /* UserNotifications.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UserNotifications.framework; path = System/Library/Frameworks/UserNotifications.framework; sourceTree = SDKROOT; };
 		D80FB1481DAF89BA0060C561 /* NSString+TimeDate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+TimeDate.h"; sourceTree = "<group>"; };
 		D80FB1491DAF89BA0060C561 /* NSString+TimeDate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+TimeDate.m"; sourceTree = "<group>"; };
+		D80FB14B1DB0C5620060C561 /* FBTabBarItemBadgeBtn.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FBTabBarItemBadgeBtn.h; sourceTree = "<group>"; };
+		D80FB14C1DB0C5620060C561 /* FBTabBarItemBadgeBtn.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FBTabBarItemBadgeBtn.m; sourceTree = "<group>"; };
 		D81280141CAA8532007CF08B /* AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		D812801B1CAA8532007CF08B /* FBViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FBViewController.h; sourceTree = "<group>"; };
 		D812801C1CAA8532007CF08B /* FBViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FBViewController.m; sourceTree = "<group>"; };
@@ -4319,6 +4322,8 @@
 				D854E7F31D880748009A13F1 /* THNGoodsBuyView.m */,
 				D840F0951D93B87100CE9FB7 /* THNRedEnvelopeView.h */,
 				D840F0961D93B87100CE9FB7 /* THNRedEnvelopeView.m */,
+				D80FB14B1DB0C5620060C561 /* FBTabBarItemBadgeBtn.h */,
+				D80FB14C1DB0C5620060C561 /* FBTabBarItemBadgeBtn.m */,
 			);
 			path = Category;
 			sourceTree = "<group>";
@@ -4852,6 +4857,7 @@
 				D85174691D598D60005F5722 /* THNSceneInfoTableViewCell.m in Sources */,
 				1F2A908B1CF40277005116C7 /* PaySuccessViewController.m in Sources */,
 				D868091B1D6609ED002714B2 /* THNSearchGoodsTableViewCell.m in Sources */,
+				D80FB14D1DB0C5620060C561 /* FBTabBarItemBadgeBtn.m in Sources */,
 				D80878DC1D6AE2C700C1FFA0 /* THNMallListCollectionViewCell.m in Sources */,
 				1F2AFD781D88186C00DA6035 /* THNForgetViewController.m in Sources */,
 				D869BD6F1D6036A000432423 /* CommentReplyComment.m in Sources */,

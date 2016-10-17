@@ -108,7 +108,7 @@
             [view removeFromSuperview];
         }
     }
-    
+
     for (NSInteger idx = 0; idx < self.tagDataMarr.count; ++ idx) {
         CGFloat btnX = [[self.tagDataMarr[idx] valueForKey:@"x"] floatValue];
         CGFloat btnY = [[self.tagDataMarr[idx] valueForKey:@"y"] floatValue];
