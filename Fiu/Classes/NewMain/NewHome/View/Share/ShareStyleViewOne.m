@@ -94,7 +94,10 @@
     CGFloat addressWidth = [self getTextSizeWidth:addressStr fontSize:12].width;
     
     [self.time setTitle:[NSString getTimesTamp:time] forState:(UIControlStateNormal)];
-    CGFloat timeWidth = [self getTextSizeWidth:[NSString getTimesTamp:time] fontSize:12].width *1.1;
+    CGFloat timeWidth = [self getTextSizeWidth:[NSString getTimesTamp:time] fontSize:12].width *1.2;
+    [self.time mas_updateConstraints:^(MASConstraintMaker *make) {
+        make.width.equalTo(@(timeWidth));
+    }];
     
     if (address.length == 0) {
         self.address.hidden = YES;
@@ -104,6 +107,7 @@
             make.top.equalTo(_userName.mas_bottom).with.offset(3);
             make.centerX.equalTo(self);
         }];
+        
     } else {
         [self.address setTitle:[NSString stringWithFormat:@"%@", address] forState:(UIControlStateNormal)];
         [self.address mas_updateConstraints:^(MASConstraintMaker *make) {
@@ -111,7 +115,7 @@
         }];
     
         [self.timeView mas_updateConstraints:^(MASConstraintMaker *make) {
-            make.width.equalTo(@(timeWidth + addressWidth));
+            make.width.equalTo(@(timeWidth + (addressWidth *1.3)));
         }];
     }
 }

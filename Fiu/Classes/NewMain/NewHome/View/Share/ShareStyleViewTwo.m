@@ -272,6 +272,7 @@
         _time.titleLabel.font = [UIFont systemFontOfSize:10];
         [_time setTitleColor:[UIColor colorWithHexString:@"#222222"] forState:(UIControlStateNormal)];
         _time.contentHorizontalAlignment = UIControlContentHorizontalAlignmentRight;
+        [_time setImageEdgeInsets:(UIEdgeInsetsMake(0, 4, 0, 0))];
     }
     return _time;
 }

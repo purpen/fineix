@@ -155,8 +155,8 @@
             make.bottom.equalTo(_window.mas_bottom).with.offset(-47);
         }];
 //        item.badgeValue = value;
+//        item.badgeColor = [UIColor colorWithHexString:MAIN_COLOR];
     }
-    item.badgeColor = [UIColor colorWithHexString:MAIN_COLOR];
 }
 
 #pragma mark - 清除消息角标
