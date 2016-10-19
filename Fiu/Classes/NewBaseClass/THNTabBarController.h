@@ -17,11 +17,11 @@
  显示消息的角标
  
  @param item 位置
- @param value 数量
+ @param likeValue 点赞数量
+ @param fansValue 粉丝数量
  
  */
-- (void)thn_showTabBarItemBadgeWithItem:(UITabBarItem *)item value:(NSString *)value;
-
+- (void)thn_showTabBarItemBadgeWithItem:(UITabBarItem *)item likeValue:(NSString *)likeValue fansValue:(NSString *)fansValue;
 
 /**
  清楚消息角标

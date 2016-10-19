@@ -15,6 +15,8 @@
 - (instancetype)initWithFrame:(CGRect)frame {
     self = [super initWithFrame:frame];
     if (self) {
+        self.layer.borderColor = [UIColor colorWithHexString:@"#EEEEEE"].CGColor;
+        self.layer.borderWidth = 1.0f;
         self.backgroundColor = [UIColor whiteColor];
         self.clipsToBounds = YES;
     }

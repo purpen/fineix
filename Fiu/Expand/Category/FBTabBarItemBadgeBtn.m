@@ -27,8 +27,50 @@
     return self;
 }
 
-- (void)thn_showBadgeValue:(NSString *)value {
-    self.likeNum.text = value;
+- (void)thn_showBadgeLikeValue:(NSString *)likeValue fansValue:(NSString *)fansValue {
+    NSInteger likeCount = [likeValue integerValue];
+    NSInteger fansCount = [fansValue integerValue];
+    
+    CGFloat likeValueWidth;
+    if (likeCount == 0) {
+        self.likeIcon.hidden = YES;
+        self.likeNum.hidden = YES;
+        [_likeIcon mas_remakeConstraints:^(MASConstraintMaker *make) {
+            
+        }];
+        
+        [_fansIcon mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.size.mas_equalTo(CGSizeMake(14, 13));
+            make.left.equalTo(self.mas_left).with.offset(7);
+            make.centerY.equalTo(self.mas_centerY).with.offset(-2);
+        }];
+        
+    } else {
+        self.likeNum.text = likeValue;
+        likeValueWidth = [likeValue boundingRectWithSize:CGSizeMake(320, 0) options:(NSStringDrawingUsesLineFragmentOrigin) attributes:nil context:nil].size.width;
+        [_likeNum mas_remakeConstraints:^(MASConstraintMaker *make) {
+            make.size.mas_equalTo(CGSizeMake((likeValueWidth +6), 17));
+            make.left.equalTo(_likeIcon.mas_right).with.offset(2);
+            make.centerY.equalTo(self.mas_centerY).with.offset(-2);
+        }];
+    }
+    
+    if (fansCount == 0) {
+        self.fansIcon.hidden = YES;
+        self.fansNum.hidden = YES;
+        [_fansIcon mas_remakeConstraints:^(MASConstraintMaker *make) {
+            
+        }];
+        [_likeNum mas_remakeConstraints:^(MASConstraintMaker *make) {
+            make.height.equalTo(@17);
+            make.left.equalTo(_likeIcon.mas_right).with.offset(2);
+            make.right.equalTo(self.mas_right).with.offset(-5);
+            make.centerY.equalTo(self.mas_centerY).with.offset(-2);
+        }];
+    } else {
+        self.fansNum.text = fansValue;
+    }
+    
 }
 
 - (void)thn_setViewUI {
@@ -46,15 +88,25 @@
     
     [self addSubview:self.likeNum];
     [_likeNum mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.height.equalTo(@17);
+        make.size.mas_equalTo(CGSizeMake(14, 17));
         make.left.equalTo(_likeIcon.mas_right).with.offset(2);
-        make.right.equalTo(self.mas_right).with.offset(-5);
         make.centerY.equalTo(self.mas_centerY).with.offset(-2);
     }];
     
-//    [self addSubview:self.fansIcon];
+    [self addSubview:self.fansIcon];
+    [_fansIcon mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.size.mas_equalTo(CGSizeMake(14, 13));
+        make.left.equalTo(_likeNum.mas_right).with.offset(5);
+        make.centerY.equalTo(self.mas_centerY).with.offset(-2);
+    }];
     
-//    [self addSubview:self.fansNum];
+    [self addSubview:self.fansNum];
+    [_fansNum mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.height.equalTo(@17);
+        make.left.equalTo(_fansIcon.mas_right).with.offset(2);
+        make.right.equalTo(self.mas_right).with.offset(-5);
+        make.centerY.equalTo(self.mas_centerY).with.offset(-2);
+    }];
 }
 
 - (UIImageView *)backImage {
@@ -94,6 +146,9 @@
 - (UILabel *)fansNum {
     if (!_fansNum) {
         _fansNum = [[UILabel alloc] init];
+        _fansNum.textColor = [UIColor whiteColor];
+        _fansNum.font = [UIFont systemFontOfSize:12];
+        _fansNum.textAlignment = NSTextAlignmentCenter;
     }
     return _fansNum;
 }

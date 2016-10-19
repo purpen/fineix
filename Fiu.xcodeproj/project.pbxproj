@@ -630,6 +630,7 @@
 		D8C095201D7533FD00908491 /* ShareInfoData.m in Sources */ = {isa = PBXBuildFile; fileRef = D8C0951C1D7533FD00908491 /* ShareInfoData.m */; };
 		D8C095211D7533FD00908491 /* ShareInfoRow.m in Sources */ = {isa = PBXBuildFile; fileRef = D8C0951E1D7533FD00908491 /* ShareInfoRow.m */; };
 		D8C095241D75344000908491 /* ShareSearchTextTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D8C095231D75344000908491 /* ShareSearchTextTableViewCell.m */; };
+		D8DD22581DB756C0007D80CE /* THNChooseCityViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D8DD22571DB756C0007D80CE /* THNChooseCityViewController.m */; };
 		D8DDEE101D338D760020FF66 /* FBPopupView.m in Sources */ = {isa = PBXBuildFile; fileRef = D8DDEE0F1D338D760020FF66 /* FBPopupView.m */; };
 		D8E3AEB61CFC9B84006E5E8C /* ClipImageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D8E3AEA91CFC9B84006E5E8C /* ClipImageViewController.m */; };
 		D8E3AEBB1CFC9B84006E5E8C /* ReleaseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D8E3AEB31CFC9B84006E5E8C /* ReleaseViewController.m */; };
@@ -1756,6 +1757,8 @@
 		D8C0951E1D7533FD00908491 /* ShareInfoRow.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ShareInfoRow.m; sourceTree = "<group>"; };
 		D8C095221D75344000908491 /* ShareSearchTextTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShareSearchTextTableViewCell.h; sourceTree = "<group>"; };
 		D8C095231D75344000908491 /* ShareSearchTextTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ShareSearchTextTableViewCell.m; sourceTree = "<group>"; };
+		D8DD22561DB756C0007D80CE /* THNChooseCityViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THNChooseCityViewController.h; sourceTree = "<group>"; };
+		D8DD22571DB756C0007D80CE /* THNChooseCityViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THNChooseCityViewController.m; sourceTree = "<group>"; };
 		D8DDEE0E1D338D760020FF66 /* FBPopupView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FBPopupView.h; sourceTree = "<group>"; };
 		D8DDEE0F1D338D760020FF66 /* FBPopupView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FBPopupView.m; sourceTree = "<group>"; };
 		D8E3AEA81CFC9B84006E5E8C /* ClipImageViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ClipImageViewController.h; sourceTree = "<group>"; };
@@ -2507,6 +2510,8 @@
 				1F2A8E0F1CF40277005116C7 /* EditAddressViewController.h */,
 				1F2A8E101CF40277005116C7 /* EditAddressViewController.m */,
 				1F2A8E111CF40277005116C7 /* EditAddressViewController.xib */,
+				D8DD22561DB756C0007D80CE /* THNChooseCityViewController.h */,
+				D8DD22571DB756C0007D80CE /* THNChooseCityViewController.m */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -4905,6 +4910,7 @@
 				1F2A90A21CF40277005116C7 /* SubscribePeopleTableViewCell.m in Sources */,
 				1F2A901D1CF40277005116C7 /* BonusCell.m in Sources */,
 				1F2AFC631D88170B00DA6035 /* ChangeSumaryViewController.m in Sources */,
+				D8DD22581DB756C0007D80CE /* THNChooseCityViewController.m in Sources */,
 				1F2A90A01CF40277005116C7 /* SubscribePeopleViewController.m in Sources */,
 				1F2A90251CF40277005116C7 /* IdentityTagModel.m in Sources */,
 				D81317E81D92237E007CE71C /* THNMessageViewController.m in Sources */,

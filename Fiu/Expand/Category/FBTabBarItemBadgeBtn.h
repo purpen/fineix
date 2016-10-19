@@ -40,8 +40,9 @@
 /**
  显示消息气泡
 
- @param value 数量
+ @param likeValue 点赞数量
+ @param fansValue 粉丝数量
  */
-- (void)thn_showBadgeValue:(NSString *)value;
+- (void)thn_showBadgeLikeValue:(NSString *)likeValue fansValue:(NSString *)fansValue;
 
 @end

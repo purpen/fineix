@@ -274,8 +274,9 @@ static NSString *const URLSubjectView = @"/scene_subject/view";
             NSDictionary *counterDict = [dataDict objectForKey:@"counter"];
             _counterModel = [CounterModel mj_objectWithKeyValues:counterDict];
             
-//            [tabBarC thn_showTabBarItemBadgeWithItem:[tabBarC.tabBar.items objectAtIndex:3]
-//                                               value:[NSString stringWithFormat:@"%@", _counterModel.message_total_count]];
+            [tabBarC thn_showTabBarItemBadgeWithItem:[tabBarC.tabBar.items objectAtIndex:3]
+                                           likeValue:[NSString stringWithFormat:@"%@", _counterModel.fiu_alert_count]
+                                           fansValue:[NSString stringWithFormat:@"%@", _counterModel.fans_count]];
         
         } failure:^(FBRequest *request, NSError *error) {
         
@@ -300,8 +301,9 @@ static NSString *const URLSubjectView = @"/scene_subject/view";
                 NSDictionary *counterDict = [dataDict objectForKey:@"counter"];
                 _counterModel = [CounterModel mj_objectWithKeyValues:counterDict];
 
-//                [tabBarC thn_showTabBarItemBadgeWithItem:[tabBarC.tabBar.items objectAtIndex:3]
-//                                                   value:[NSString stringWithFormat:@"%@", _counterModel.message_total_count]];
+                [tabBarC thn_showTabBarItemBadgeWithItem:[tabBarC.tabBar.items objectAtIndex:3]
+                                               likeValue:[NSString stringWithFormat:@"%@", _counterModel.fiu_alert_count]
+                                               fansValue:[NSString stringWithFormat:@"%@", _counterModel.fans_count]];
             
             } failure:^(FBRequest *request, NSError *error) {
             

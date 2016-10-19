@@ -10,7 +10,8 @@
 
 @interface THNMessageViewController : THNViewController <
     UITableViewDataSource,
-    UITableViewDelegate
+    UITableViewDelegate,
+    THNNavigationBarItemsDelegate
 >
 
 @pro_strong FBRequest *userMessageRequest;

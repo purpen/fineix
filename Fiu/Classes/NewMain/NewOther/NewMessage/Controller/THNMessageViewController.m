@@ -129,8 +129,16 @@ static NSString *const messageTableCellId = @"MessageTableCellId";
 #pragma mark - 设置Nav
 - (void)thn_setNavigationViewUI {
     self.view.backgroundColor = [UIColor whiteColor];
-    [[UIApplication sharedApplication] setStatusBarHidden:NO withAnimation:(UIStatusBarAnimationFade)];
+    [UIApplication sharedApplication].statusBarHidden = NO;
     self.navViewTitle.text = NSLocalizedString(@"MessageVC", nil);
+    self.delegate = self;
+    if ([self.navigationController viewControllers].count == 1) {
+        [self thn_addBarItemRightBarButton:@"" image:@"icon_cancel"];
+    }
+}
+
+- (void)thn_rightBarItemSelected {
+    [self dismissViewControllerAnimated:YES completion:nil];
 }
 
 @end

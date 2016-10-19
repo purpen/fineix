@@ -79,7 +79,7 @@ static NSString * const FSPlacerholderColorKeyPath = @"_placeholderLabel.textCol
 }
 
 -(void)changePlaceHolderColor:(UITextField*)tf{
-    [tf setValue:tf.textColor forKeyPath:FSPlacerholderColorKeyPath];
+    [tf setValue:[UIColor colorWithHexString:@"999999"] forKeyPath:FSPlacerholderColorKeyPath];
 }
 
 -(BOOL)textFieldShouldReturn:(UITextField *)textField{
@@ -98,7 +98,6 @@ static NSString * const FSPlacerholderColorKeyPath = @"_placeholderLabel.textCol
     [self presentViewController:_addreesPickerVC animated:NO completion:nil];
     [_addreesPickerVC.pickerBtn addTarget:self action:@selector(clickAddreesPickerBtn:) forControlEvents:UIControlEventTouchUpInside];
 }
-
 
 -(void)clickAddreesPickerBtn:(UIButton*)sender{
     self.addressTF.hidden = YES;
@@ -144,10 +143,10 @@ static NSString * const FSPlacerholderColorKeyPath = @"_placeholderLabel.textCol
         return;
     }
     
-    if (self.zipTF.text.length == 0) {
-        [SVProgressHUD showInfoWithStatus:@"请填写邮编"];
-        return;
-    }
+//    if (self.zipTF.text.length == 0) {
+//        [SVProgressHUD showInfoWithStatus:@"请填写邮编"];
+//        return;
+//    }
     
     if (self.prinLabel.text.length == 0 || self.cityLabel.text.length == 0) {
         [SVProgressHUD showInfoWithStatus:@"请选择所在地区"];
@@ -168,7 +167,8 @@ static NSString * const FSPlacerholderColorKeyPath = @"_placeholderLabel.textCol
         [SVProgressHUD showInfoWithStatus:@"内地手机号码为11位数字"];
         return;
     }
-    if (self.zipTF.text.length != 6) {
+    
+    if (self.zipTF.text.length > 6) {
         [SVProgressHUD showInfoWithStatus:@"邮编为6位数字"];
         return;
     }
@@ -183,6 +183,9 @@ static NSString * const FSPlacerholderColorKeyPath = @"_placeholderLabel.textCol
     NSString * idStr = self.deliveryAddress.idField;
     if (self.deliveryAddress.idField == nil) {
         idStr = @"";
+    }
+    if (self.zipTF.text.length == 0) {
+        self.zipTF.text = @"";
     }
     NSDictionary * params = @{@"id": idStr, @"name": self.nameTF.text, @"phone": self.phoneNumTF.text, @"province": [NSNumber numberWithInteger:self.provinceId], @"city": [NSNumber numberWithInteger:self.cityId], @"address": self.detailsAddressTF.text, @"zip": self.zipTF.text, @"is_default": [NSNumber numberWithBool:self.addressSwicth.on]};
     FBRequest * request = [FBAPI postWithUrlString:EditAddressURL requestDictionary:params delegate:self];

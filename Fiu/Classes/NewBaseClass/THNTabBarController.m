@@ -19,18 +19,20 @@
 #import "PictureToolViewController.h"
 #import "THNLoginRegisterViewController.h"
 #import "THNMessageViewController.h"
+#import "UITabBar+badge.h"
 
 @implementation THNTabBarController {
-    THNNavigationController * _homeNav;
-    THNNavigationController * _discoverNav;
-    THNNavigationController * _mallNav;
-    THNNavigationController * _myNav;
+    THNNavigationController *_homeNav;
+    THNNavigationController *_discoverNav;
+    THNNavigationController *_mallNav;
+    THNNavigationController *_myNav;
+    THNNavigationController *_messNav;
     UIWindow *_window;
 }
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
+
     [self thn_setTabBarController];
 }
 
@@ -140,29 +142,55 @@
 }
 
 #pragma mark - 显示消息角标
-- (void)thn_showTabBarItemBadgeWithItem:(UITabBarItem *)item value:(NSString *)value {
-    if ([value integerValue] == 0) {
-//        item.badgeValue = nil;
+- (void)thn_showTabBarItemBadgeWithItem:(UITabBarItem *)item likeValue:(NSString *)likeValue fansValue:(NSString *)fansValue {
+    NSInteger likeCount = [likeValue integerValue];
+    NSInteger fansCount = [fansValue integerValue];
+
+    if (likeCount > 0 || fansCount > 0) {
+        [self.tabBar showBadgeWithIndex:4];
+        [self.badgeBtn thn_showBadgeLikeValue:likeValue fansValue:fansValue];
         
-    } else {
-        [self.badgeBtn thn_showBadgeValue:value];
-        CGFloat valueWidth = [value boundingRectWithSize:CGSizeMake(320, 0) options:(NSStringDrawingUsesLineFragmentOrigin) attributes:nil context:nil].size.width;
+        CGFloat likeValueWidth;
+        CGFloat fansValueWidth;
+        if (likeCount == 0) {
+            likeValueWidth = 0.0f;
+        } else {
+            likeValueWidth = [likeValue boundingRectWithSize:CGSizeMake(320, 0) options:(NSStringDrawingUsesLineFragmentOrigin) attributes:nil context:nil].size.width;
+        }
+        
+        if (fansCount == 0) {
+            fansValueWidth = 0.0f;
+        } else {
+            fansValueWidth = [fansValue boundingRectWithSize:CGSizeMake(320, 0) options:(NSStringDrawingUsesLineFragmentOrigin) attributes:nil context:nil].size.width;
+        }
+        
         _window = [UIApplication sharedApplication].keyWindow;
         [_window addSubview:self.badgeBtn];
         [_badgeBtn mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.size.mas_equalTo(CGSizeMake(35 + valueWidth, 35));
+            if (likeCount > 0 && fansCount > 0) {
+                make.size.mas_equalTo(CGSizeMake(60 + likeValueWidth + fansValueWidth, 35));
+            } else {
+                make.size.mas_equalTo(CGSizeMake(35 + likeValueWidth + fansValueWidth, 35));
+            }
             make.right.equalTo(_window.mas_right).with.offset(-SCREEN_WIDTH*0.05);
             make.bottom.equalTo(_window.mas_bottom).with.offset(-47);
         }];
-//        item.badgeValue = value;
-//        item.badgeColor = [UIColor colorWithHexString:MAIN_COLOR];
+        
+        [UIView animateWithDuration:5 animations:^{
+            self.badgeBtn.alpha = 0;
+        } completion:^(BOOL finished) {
+            [self.badgeBtn removeFromSuperview];
+        }];
     }
 }
 
 #pragma mark - 清除消息角标
 - (void)thn_clearTabBarItemBadge {
-    UITabBarItem *myTabBarItem = [self.tabBar.items objectAtIndex:3];
-    myTabBarItem.badgeValue = nil;
+    [UIView animateWithDuration:.3 animations:^{
+        self.badgeBtn.alpha = 0;
+    } completion:^(BOOL finished) {
+         [self.badgeBtn removeFromSuperview];
+    }];
 }
 
 #pragma mark - 消息气泡
@@ -175,9 +203,10 @@
 }
 
 - (void)openMessVC:(FBTabBarItemBadgeBtn *)button {
-//    THNMessageViewController *messVC = [[THNMessageViewController alloc] init];
-//    [self.childViewControllers[3] pushViewController:messVC animated:YES];
-    
+    [self.badgeBtn removeFromSuperview];
+    THNMessageViewController *messVC = [[THNMessageViewController alloc] init];
+    _messNav = [[THNNavigationController alloc] initWithRootViewController:messVC];
+    [self.childViewControllers[0] presentViewController:_messNav animated:YES completion:nil];
 }
 
 #pragma mark “创建情景”的按钮事件
