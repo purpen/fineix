@@ -10,10 +10,11 @@
 #import "THNMacro.h"
 #import "GoodsRow.h"
 #import "THNMallSubjectModelProduct.h"
+#import <SDWebImage/UIImageView+WebCache.h>
 
 @interface MallListGoodsCollectionViewCell : UICollectionViewCell
 
-@pro_strong UIImageView *image;
+@pro_strong UIImageView *goodsImageView;
 @pro_strong UIView *blackView;
 @pro_strong UILabel *title;
 @pro_strong UILabel *price;

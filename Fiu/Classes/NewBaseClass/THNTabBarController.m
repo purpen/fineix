@@ -172,11 +172,15 @@
             } else {
                 make.size.mas_equalTo(CGSizeMake(35 + likeValueWidth + fansValueWidth, 35));
             }
-            make.right.equalTo(_window.mas_right).with.offset(-SCREEN_WIDTH*0.05);
-            make.bottom.equalTo(_window.mas_bottom).with.offset(-47);
+            if (IS_PHONE5) {
+                make.right.equalTo(_window.mas_right).with.offset(-SCREEN_WIDTH*0.04);
+            } else {
+                make.right.equalTo(_window.mas_right).with.offset(-SCREEN_WIDTH*0.05);
+            }
+            make.bottom.equalTo(_window.mas_bottom).with.offset(-52);
         }];
         
-        [UIView animateWithDuration:5 animations:^{
+        [UIView animateWithDuration:10 animations:^{
             self.badgeBtn.alpha = 0;
         } completion:^(BOOL finished) {
             [self.badgeBtn removeFromSuperview];
@@ -197,11 +201,12 @@
 - (FBTabBarItemBadgeBtn *)badgeBtn {
     if (!_badgeBtn) {
         _badgeBtn = [[FBTabBarItemBadgeBtn alloc] init];
-        [_badgeBtn addTarget:self action:@selector(openMessVC:) forControlEvents:(UIControlEventTouchUpInside)];
+//        [_badgeBtn addTarget:self action:@selector(openMessVC:) forControlEvents:(UIControlEventTouchUpInside)];
     }
     return _badgeBtn;
 }
 
+//  消息气泡点击跳转消息列表
 - (void)openMessVC:(FBTabBarItemBadgeBtn *)button {
     [self.badgeBtn removeFromSuperview];
     THNMessageViewController *messVC = [[THNMessageViewController alloc] init];

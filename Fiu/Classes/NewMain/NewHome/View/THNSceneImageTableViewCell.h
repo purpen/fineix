@@ -9,6 +9,7 @@
 #import <UIKit/UIKit.h>
 #import <pop/POP.h>
 #import <SDWebImage/UIButton+WebCache.h>
+#import <SDWebImage/UIImageView+WebCache.h>
 #import "THNMacro.h"
 #import "HomeSceneListRow.h"
 #import "UserGoodsTag.h"

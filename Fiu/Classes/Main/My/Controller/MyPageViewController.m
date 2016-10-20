@@ -87,15 +87,15 @@
     [self.view addSubview:self.myCollectionView];
 }
 
--(void)signleTap:(UITapGestureRecognizer*)sender{
-    //跳转到我的主页的情景的界面
-    UserInfoEntity *entity = [UserInfoEntity defaultUserInfoEntity];
-    HomePageViewController *myHomeVC = [[HomePageViewController alloc] init];
-    myHomeVC.userId = entity.userId;
-    myHomeVC.type = @1;
-    myHomeVC.isMySelf = YES;
-    [self.navigationController pushViewController:myHomeVC animated:YES];
-}
+//-(void)signleTap:(UITapGestureRecognizer*)sender{
+//    //跳转到我的主页的情景的界面
+//    UserInfoEntity *entity = [UserInfoEntity defaultUserInfoEntity];
+//    HomePageViewController *myHomeVC = [[HomePageViewController alloc] init];
+//    myHomeVC.userId = entity.userId;
+//    myHomeVC.type = @1;
+//    myHomeVC.isMySelf = YES;
+//    [self.navigationController pushViewController:myHomeVC animated:YES];
+//}
 
 -(void)signleTap1:(UITapGestureRecognizer*)sender{
     //跳转到我的主页的情景的界面

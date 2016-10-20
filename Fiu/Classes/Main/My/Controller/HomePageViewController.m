@@ -110,12 +110,12 @@ static NSString *sceneCellId = @"THNHomeSenceCollectionViewCell";
     //
     _chanelV = [ChanelView getChanelView];
     //情景
-    _chanelV.scenarioView.userInteractionEnabled = YES;
-    _scenarioTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(signleTap:)];
-    _scenarioTap.numberOfTapsRequired = 1;
-    _scenarioTap.numberOfTouchesRequired = 1;
-    [_chanelV.scenarioView addGestureRecognizer:_scenarioTap];
-    //场景
+//    _chanelV.scenarioView.userInteractionEnabled = YES;
+//    _scenarioTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(signleTap:)];
+//    _scenarioTap.numberOfTapsRequired = 1;
+//    _scenarioTap.numberOfTouchesRequired = 1;
+//    [_chanelV.scenarioView addGestureRecognizer:_scenarioTap];
+    //情境
     _chanelV.fieldView.userInteractionEnabled = YES;
     UITapGestureRecognizer *scenarioTap1 = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(signleTap1:)];
     scenarioTap1.numberOfTapsRequired = 1;

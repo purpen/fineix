@@ -204,7 +204,9 @@ static NSString *const twoCommentsCellId = @"TwoCommentsCellId";
     
     if (indexPath.row == 0) {
         THNUserInfoTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:userInfoCellId];
-        cell = [[THNUserInfoTableViewCell alloc] initWithStyle:(UITableViewCellStyleDefault) reuseIdentifier:userInfoCellId];
+        if (!cell) {
+            cell = [[THNUserInfoTableViewCell alloc] initWithStyle:(UITableViewCellStyleDefault) reuseIdentifier:userInfoCellId];
+        }
         if (self.sceneListMarr.count) {
             [cell thn_setHomeSceneUserInfoData:self.sceneListMarr[indexPath.section] userId:[self getLoginUserID] isLogin:[self isUserLogin]];
             
@@ -221,7 +223,9 @@ static NSString *const twoCommentsCellId = @"TwoCommentsCellId";
         
     } else if (indexPath.row == 1) {
         THNSceneImageTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:sceneImgCellId];
-        cell = [[THNSceneImageTableViewCell alloc] initWithStyle:(UITableViewCellStyleDefault) reuseIdentifier:sceneImgCellId];
+        if (!cell) {
+            cell = [[THNSceneImageTableViewCell alloc] initWithStyle:(UITableViewCellStyleDefault) reuseIdentifier:sceneImgCellId];
+        }
         if (self.sceneListMarr.count) {
             [cell thn_setSceneImageData:self.sceneListMarr[indexPath.section]];
         }
@@ -231,7 +235,10 @@ static NSString *const twoCommentsCellId = @"TwoCommentsCellId";
         
     } else if (indexPath.row == 2) {
         THNDataInfoTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:dataInfoCellId];
-        cell = [[THNDataInfoTableViewCell alloc] initWithStyle:(UITableViewCellStyleDefault) reuseIdentifier:dataInfoCellId];
+        if (!cell) {
+            cell = [[THNDataInfoTableViewCell alloc] initWithStyle:(UITableViewCellStyleDefault) reuseIdentifier:dataInfoCellId];
+
+        }
         if (self.sceneListMarr.count) {
             [cell thn_setSceneData:self.sceneListMarr[indexPath.section]
                            isLogin:[self isUserLogin]
@@ -263,7 +270,9 @@ static NSString *const twoCommentsCellId = @"TwoCommentsCellId";
         
     } else if (indexPath.row == 3) {
         THNSceneInfoTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:sceneInfoCellId];
-        cell = [[THNSceneInfoTableViewCell alloc] initWithStyle:(UITableViewCellStyleDefault) reuseIdentifier:sceneInfoCellId];
+        if (!cell) {
+            cell = [[THNSceneInfoTableViewCell alloc] initWithStyle:(UITableViewCellStyleDefault) reuseIdentifier:sceneInfoCellId];
+        }
         if (self.sceneListMarr.count) {
             if (self.sceneListMarr.count) {
                 [cell thn_setSceneContentData:self.sceneListMarr[indexPath.section]];

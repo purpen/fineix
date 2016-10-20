@@ -326,8 +326,8 @@ static NSString *const SceneListFooterCellViewId = @"sceneListFooterViewId";
         cell.vc = self;
         return cell;
     }
+    
     return nil;
-
 }
 
 - (UICollectionReusableView *)collectionView:(UICollectionView *)collectionView

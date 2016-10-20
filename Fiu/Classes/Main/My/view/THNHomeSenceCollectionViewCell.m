@@ -30,7 +30,12 @@
     _model = model;
     NSString *strUrl = [model.title stringByReplacingOccurrencesOfString:@" " withString:@""];
     [self titleTextStyle:strUrl];
-    [self.bgImageView sd_setImageWithURL:[NSURL URLWithString:model.coverUrl] placeholderImage:[UIImage imageNamed:@"Defaul_Bg_500"]];
+    self.bgImageView.alpha = 0.0f;
+    [self.bgImageView sd_setImageWithURL:[NSURL URLWithString:model.coverUrl] placeholderImage:[UIImage imageNamed:@""] completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
+        [UIView animateWithDuration:.5 animations:^{
+            self.bgImageView.alpha = 1.0f;
+        }];
+    }];
 }
 
 //  标题文字的样式
