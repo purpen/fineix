@@ -164,27 +164,29 @@
             fansValueWidth = [fansValue boundingRectWithSize:CGSizeMake(320, 0) options:(NSStringDrawingUsesLineFragmentOrigin) attributes:nil context:nil].size.width;
         }
         
-        _window = [UIApplication sharedApplication].keyWindow;
-        [_window addSubview:self.badgeBtn];
-        [_badgeBtn mas_makeConstraints:^(MASConstraintMaker *make) {
-            if (likeCount > 0 && fansCount > 0) {
-                make.size.mas_equalTo(CGSizeMake(60 + likeValueWidth + fansValueWidth, 35));
-            } else {
-                make.size.mas_equalTo(CGSizeMake(35 + likeValueWidth + fansValueWidth, 35));
-            }
-            if (IS_PHONE5) {
-                make.right.equalTo(_window.mas_right).with.offset(-SCREEN_WIDTH*0.04);
-            } else {
-                make.right.equalTo(_window.mas_right).with.offset(-SCREEN_WIDTH*0.05);
-            }
-            make.bottom.equalTo(_window.mas_bottom).with.offset(-52);
-        }];
-        
-        [UIView animateWithDuration:10 animations:^{
-            self.badgeBtn.alpha = 0;
-        } completion:^(BOOL finished) {
-            [self.badgeBtn removeFromSuperview];
-        }];
+        if (self.childViewControllers[0].childViewControllers.count == 1) {
+            _window = [UIApplication sharedApplication].keyWindow;
+            [_window addSubview:self.badgeBtn];
+            [_badgeBtn mas_makeConstraints:^(MASConstraintMaker *make) {
+                if (likeCount > 0 && fansCount > 0) {
+                    make.size.mas_equalTo(CGSizeMake(60 + likeValueWidth + fansValueWidth, 35));
+                } else {
+                    make.size.mas_equalTo(CGSizeMake(35 + likeValueWidth + fansValueWidth, 35));
+                }
+                if (IS_PHONE5) {
+                    make.right.equalTo(_window.mas_right).with.offset(-SCREEN_WIDTH*0.04);
+                } else {
+                    make.right.equalTo(_window.mas_right).with.offset(-SCREEN_WIDTH*0.05);
+                }
+                make.bottom.equalTo(_window.mas_bottom).with.offset(-52);
+            }];
+            
+            [UIView animateWithDuration:10 animations:^{
+                self.badgeBtn.alpha = 0;
+            } completion:^(BOOL finished) {
+                [self.badgeBtn removeFromSuperview];
+            }];
+        }
     }
 }
 
