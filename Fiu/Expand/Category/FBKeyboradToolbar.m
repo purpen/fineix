@@ -30,10 +30,10 @@
 
 - (UIButton *)leftBarItem {
     if (!_leftBarItem) {
-        _leftBarItem = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 44, 44)];
-        [_leftBarItem setTitle:@"#" forState:(UIControlStateNormal)];
+        _leftBarItem = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 70, 44)];
+        [_leftBarItem setTitle:NSLocalizedString(@"addSceneTags", nil) forState:(UIControlStateNormal)];
         [_leftBarItem setTitleColor:[UIColor colorWithHexString:@"#666666"] forState:(UIControlStateNormal)];
-        _leftBarItem.titleLabel.font = [UIFont systemFontOfSize:14];
+        _leftBarItem.titleLabel.font = [UIFont systemFontOfSize:12];
         [_leftBarItem addTarget:self action:@selector(leftBarItemClick) forControlEvents:(UIControlEventTouchUpInside)];
     }
     return _leftBarItem;

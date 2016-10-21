@@ -389,6 +389,8 @@ static NSString *const SceneListFooterCellViewId = @"sceneListFooterViewId";
         sceneListVC.commentsMarr = self.commentsMarr;
         sceneListVC.sceneIdMarr = self.sceneIdMarr;
         sceneListVC.userIdMarr = self.userIdMarr;
+        sceneListVC.currentpageNum = self.currentpageNum;
+        sceneListVC.totalPageNum = self.totalPageNum;
         if (indexPath.section == 0) {
             sceneListVC.index = indexPath.row;
         } else if (indexPath.section == 1) {

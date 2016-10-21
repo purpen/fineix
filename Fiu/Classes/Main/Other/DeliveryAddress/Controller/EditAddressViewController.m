@@ -13,6 +13,7 @@
 #import "SVProgressHUD.h"
 #import "NSString+Helper.h"
 #import "AddreesPickerViewController.h"
+#import "THNChooseCityViewController.h"
 
 @interface EditAddressViewController ()<FBNavigationBarItemsDelegate,UITextFieldDelegate>
 
@@ -94,9 +95,14 @@ static NSString * const FSPlacerholderColorKeyPath = @"_placeholderLabel.textCol
 - (IBAction)clickAddressBtn:(UIButton *)sender {
     [self.view endEditing:true];
     //弹出选择视图
-    self.addreesPickerVC.modalPresentationStyle = UIModalPresentationOverCurrentContext;
-    [self presentViewController:_addreesPickerVC animated:NO completion:nil];
-    [_addreesPickerVC.pickerBtn addTarget:self action:@selector(clickAddreesPickerBtn:) forControlEvents:UIControlEventTouchUpInside];
+//    self.addreesPickerVC.modalPresentationStyle = UIModalPresentationOverCurrentContext;
+//    [self presentViewController:_addreesPickerVC animated:NO completion:nil];
+//    [_addreesPickerVC.pickerBtn addTarget:self action:@selector(clickAddreesPickerBtn:) forControlEvents:UIControlEventTouchUpInside];
+    
+    THNChooseCityViewController *chooseCityVC = [[THNChooseCityViewController alloc] init];
+    chooseCityVC.modalPresentationStyle = UIModalPresentationOverCurrentContext;
+    chooseCityVC.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;
+    [self presentViewController:chooseCityVC animated:YES completion:nil];
 }
 
 -(void)clickAddreesPickerBtn:(UIButton*)sender{

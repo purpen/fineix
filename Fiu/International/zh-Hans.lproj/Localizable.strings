@@ -95,6 +95,7 @@
 "cancel" = "取消";
 "sure" = "确定";
 "chooseCategoryVC" = "选择地盘分类";
+"addSceneTags" = "＃添加标签";
 
 //  标记产品
 "chooseGoodsImage" = "选择产品添加到当前图片中";
@@ -173,6 +174,7 @@
 "WriteAddTag" = "请输入标签";
 "NoSubscribe" = "“点击订阅地盘，自由收看大千世界”";
 "goodsPullLab" = "继续上拉查看商品详情";
+"pleastChooseCity" = "请选择地区";
 
 //  搜索框提示
 "searchLocation" = "搜索地点";
