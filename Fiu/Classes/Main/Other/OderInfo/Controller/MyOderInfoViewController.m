@@ -263,6 +263,7 @@ static NSString *const OrderInfoCellIdentifier = @"orderInfoCell";
     
     FBRequest * request = [FBAPI postWithUrlString:OrderListURL requestDictionary:params delegate:self];
     [request startRequestSuccess:^(FBRequest *request, id result) {
+        [self.orderListAry removeAllObjects];
         NSDictionary * dataDic = [result objectForKey:@"data"];
         NSArray * rowsAry = [dataDic objectForKey:@"rows"];
         
