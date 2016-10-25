@@ -8,12 +8,15 @@
 
 #import "ShareStyleViewTwo.h"
 #import "UILable+Frame.h"
+#import "NSString+TimeDate.h"
 
 @implementation ShareStyleViewTwo
 
 - (instancetype)initWithFrame:(CGRect)frame {
     self = [super initWithFrame:frame];
     if (self) {
+        self.layer.borderColor = [UIColor colorWithHexString:@"#EEEEEE"].CGColor;
+        self.layer.borderWidth = 1.0f;
         self.backgroundColor = [UIColor whiteColor];
         self.clipsToBounds = YES;
     }
@@ -72,10 +75,10 @@
     }
     
     [self.userName setTitle:[NSString stringWithFormat:@" %@", sceneModel.user.nickname] forState:(UIControlStateNormal)];
-    [self.time setTitle:[NSString stringWithFormat:@" %@", sceneModel.createdAt] forState:(UIControlStateNormal)];
-    NSString *timeStr = [NSString stringWithFormat:@"     %@", sceneModel.createdAt];
+    NSString *timeStr = [NSString getTimesTamp:sceneModel.createdOn];
+    [self.time setTitle:[NSString stringWithFormat:@"    %@", timeStr] forState:(UIControlStateNormal)];
     [self.time mas_updateConstraints:^(MASConstraintMaker *make) {
-        make.width.equalTo(@([self getTextSizeWidth:timeStr fontSize:12].width));
+        make.width.equalTo(@([self getTextSizeWidth:timeStr fontSize:12].width *1.2));
     }];
     
     if (sceneModel.address.length == 0) {
@@ -107,7 +110,7 @@
             [view removeFromSuperview];
         }
     }
-    
+
     for (NSInteger idx = 0; idx < self.tagDataMarr.count; ++ idx) {
         CGFloat btnX = [[self.tagDataMarr[idx] valueForKey:@"x"] floatValue];
         CGFloat btnY = [[self.tagDataMarr[idx] valueForKey:@"y"] floatValue];
@@ -271,6 +274,7 @@
         _time.titleLabel.font = [UIFont systemFontOfSize:10];
         [_time setTitleColor:[UIColor colorWithHexString:@"#222222"] forState:(UIControlStateNormal)];
         _time.contentHorizontalAlignment = UIControlContentHorizontalAlignmentRight;
+        [_time setImageEdgeInsets:(UIEdgeInsetsMake(0, 4, 0, 0))];
     }
     return _time;
 }

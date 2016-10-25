@@ -9,6 +9,7 @@
 #import <UIKit/UIKit.h>
 #import "THNMacro.h"
 #import "THNMallSubjectModelRow.h"
+#import <SDWebImage/UIImageView+WebCache.h>
 
 @interface THNMallListCollectionViewCell : UICollectionViewCell <
     UICollectionViewDelegate,

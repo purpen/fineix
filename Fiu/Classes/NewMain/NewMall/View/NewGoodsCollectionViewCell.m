@@ -20,7 +20,14 @@
 }
 
 - (void)setGoodsData:(THNMallGoodsModelItem *)model {
-    [self.image downloadImage:model.coverUrl place:[UIImage imageNamed:@""]];
+    self.goodsImageView.alpha = 0.0f;
+    
+    [self.goodsImageView sd_setImageWithURL:[NSURL URLWithString:model.coverUrl] placeholderImage:[UIImage imageNamed:@""] completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
+        [UIView animateWithDuration:.5 animations:^{
+            self.goodsImageView.alpha = 1.0f;
+        }];
+    }];
+    
     self.name.text = model.title;
     self.price.text = [NSString stringWithFormat:@"¥%zi", model.salePrice];
     [self.brandImage downloadImage:model.brandCoverUrl place:[UIImage imageNamed:@""]];
@@ -28,8 +35,8 @@
 
 #pragma mark - setViewUI
 - (void)setViewUI {
-    [self addSubview:self.image];
-    [_image mas_makeConstraints:^(MASConstraintMaker *make) {
+    [self addSubview:self.goodsImageView];
+    [_goodsImageView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.size.mas_equalTo(CGSizeMake(self.bounds.size.width, self.bounds.size.width));
         make.left.top.equalTo(self).with.offset(0);
     }];
@@ -38,7 +45,7 @@
     [_blackView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.width.equalTo(@(self.bounds.size.width));
         make.left.bottom.equalTo(self).with.offset(0);
-        make.top.equalTo(_image.mas_bottom).with.offset(0);
+        make.top.equalTo(_goodsImageView.mas_bottom).with.offset(0);
     }];
     
     [self addSubview:self.brandImage];
@@ -66,12 +73,12 @@
 }
 
 #pragma mark - init
-- (UIImageView *)image {
-    if (!_image) {
-        _image = [[UIImageView alloc] init];
-        _image.backgroundColor = [UIColor whiteColor];
+- (UIImageView *)goodsImageView {
+    if (!_goodsImageView) {
+        _goodsImageView = [[UIImageView alloc] init];
+        _goodsImageView.backgroundColor = [UIColor whiteColor];
     }
-    return _image;
+    return _goodsImageView;
 }
 
 - (UIView *)blackView {

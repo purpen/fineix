@@ -6,7 +6,7 @@
 #import "UITabBar+badge.h"
 #import "Fiu.h"
 #define tabBarItemNum 5
-#define Constant 1000
+static NSInteger const Constant = 1000;
 
 @implementation UITabBar (badge)
 

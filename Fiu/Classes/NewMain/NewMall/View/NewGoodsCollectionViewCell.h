@@ -9,10 +9,11 @@
 #import <UIKit/UIKit.h>
 #import "THNMacro.h"
 #import "THNMallGoodsModelItem.h"
+#import <SDWebImage/UIImageView+WebCache.h>
 
 @interface NewGoodsCollectionViewCell : UICollectionViewCell
 
-@pro_strong UIImageView *image;
+@pro_strong UIImageView *goodsImageView;
 @pro_strong UIView *blackView;
 @pro_strong UIImageView *brandImage;
 @pro_strong UILabel *name;

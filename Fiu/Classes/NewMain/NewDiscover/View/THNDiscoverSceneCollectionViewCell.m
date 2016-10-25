@@ -32,8 +32,16 @@
 }
 
 - (void)thn_setSceneUserInfoData:(HomeSceneListRow *)sceneModel isLogin:(BOOL)login {
+    self.sceneImageView.alpha = 0.0f;
+    
     _isLogin = login;
-    [self.image downloadImage:sceneModel.coverUrl place:[UIImage imageNamed:@""]];
+
+    [self.sceneImageView sd_setImageWithURL:[NSURL URLWithString:sceneModel.coverUrl] placeholderImage:[UIImage imageNamed:@""] completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
+        [UIView animateWithDuration:.5 animations:^{
+            self.sceneImageView.alpha = 1.0f;
+        }];
+    }];
+    
     [self.userHeader downloadImage:sceneModel.user.avatarUrl place:[UIImage imageNamed:@""]];
     self.userName.text = sceneModel.user.nickname;
     if (sceneModel.isLove == 1) {
@@ -65,7 +73,7 @@
         
         [self.title mas_updateConstraints:^(MASConstraintMaker *make) {
             make.width.equalTo(@([self getTextSizeWidth:titleStr].width));
-            make.bottom.equalTo(_image.mas_bottom).with.offset(-33);
+            make.bottom.equalTo(_sceneImageView.mas_bottom).with.offset(-33);
         }];
         
     } else if (sceneModel.title.length <= 10) {
@@ -76,7 +84,7 @@
         self.title.text = titleStr;
         [self.title mas_updateConstraints:^(MASConstraintMaker *make) {
             make.width.equalTo(@([self getTextSizeWidth:titleStr].width));
-            make.bottom.equalTo(_image.mas_bottom).with.offset(-5);
+            make.bottom.equalTo(_sceneImageView.mas_bottom).with.offset(-5);
         }];
     }
 }
@@ -96,31 +104,31 @@
 
 #pragma mark - setUI 
 - (void)setViewUI {
-    [self addSubview:self.image];
-    [_image mas_makeConstraints:^(MASConstraintMaker *make) {
+    [self addSubview:self.sceneImageView];
+    [_sceneImageView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.size.mas_equalTo(CGSizeMake(self.bounds.size.width, self.bounds.size.width));
         make.top.left.right.equalTo(self).with.offset(0);
     }];
     
     [self addSubview:self.suTitle];
     [_suTitle mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.size.mas_equalTo(CGSizeMake(50, 25));
+        make.size.mas_equalTo(CGSizeMake(0, 25));
         make.left.equalTo(self.mas_left).with.offset(0);
-        make.bottom.equalTo(_image.mas_bottom).with.offset(-5);
+        make.bottom.equalTo(_sceneImageView.mas_bottom).with.offset(-5);
     }];
     
     [self addSubview:self.title];
     [_title mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.size.mas_equalTo(CGSizeMake(50, 25));
+        make.size.mas_equalTo(CGSizeMake(0, 25));
         make.left.equalTo(self.mas_left).with.offset(0);
-        make.bottom.equalTo(_image.mas_bottom).with.offset(-5);
+        make.bottom.equalTo(_sceneImageView.mas_bottom).with.offset(-5);
     }];
     
     [self addSubview:self.userInfo];
     [_userInfo mas_makeConstraints:^(MASConstraintMaker *make) {
         make.width.equalTo(@(self.bounds.size.width));
         make.left.bottom.equalTo(self).with.offset(0);
-        make.top.equalTo(_image.mas_bottom).with.offset(0);
+        make.top.equalTo(_sceneImageView.mas_bottom).with.offset(0);
     }];
     
     [self addSubview:self.userHeader];
@@ -146,14 +154,14 @@
 }
 
 #pragma mark - init
-- (UIImageView *)image {
-    if (!_image) {
-        _image = [[UIImageView alloc] init];
-        _image.backgroundColor = [UIColor colorWithHexString:@"#F8F8F8"];
-        _image.contentMode = UIViewContentModeScaleAspectFill;
-        _image.clipsToBounds = YES;
+- (UIImageView *)sceneImageView {
+    if (!_sceneImageView) {
+        _sceneImageView = [[UIImageView alloc] init];
+        _sceneImageView.backgroundColor = [UIColor colorWithHexString:@"#F8F8F8"];
+        _sceneImageView.contentMode = UIViewContentModeScaleAspectFill;
+        _sceneImageView.clipsToBounds = YES;
     }
-    return _image;
+    return _sceneImageView;
 }
 
 - (UILabel *)title {

@@ -30,7 +30,7 @@
 @property (readonly, strong, nonatomic) NSManagedObjectContext *managedObjectContext;
 @property (readonly, strong, nonatomic) NSManagedObjectModel *managedObjectModel;
 @property (readonly, strong, nonatomic) NSPersistentStoreCoordinator *persistentStoreCoordinator;
-
+@property (nonatomic, strong) FBRequest *subjectInfoRequest;
 @property (nonatomic, weak) id<NotificationDelege> notiDelegate;
 @property (nonatomic, weak) id<WXApiDelegate> wxDelegate;
 @property (nonatomic, weak) id<AlipayDelegate> aliDelegate;

@@ -21,6 +21,9 @@
 @pro_strong FBRequest *favoriteRequest;
 @pro_strong FBRequest *cancelFavoriteRequest;
 @pro_strong FBRequest *deleteRequest;
+@pro_strong FBRequest *sceneListRequest;
+@pro_assign NSInteger currentpageNum;
+@pro_assign NSInteger totalPageNum;
 
 @pro_strong UITableView *sceneTable;
 @pro_assign NSInteger index;

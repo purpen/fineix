@@ -10,6 +10,7 @@
 #import "FBRollImages.h"
 #import "GroupHeaderView.h"
 #import "THNHotUserView.h"
+#import "FBTabBarItemBadgeBtn.h"
 
 @interface THNHomeViewController : THNViewController <
     THNNavigationBarItemsDelegate,

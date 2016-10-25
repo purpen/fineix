@@ -318,7 +318,32 @@ static NSString *const URLGoodsCarNum = @"/shopping/fetch_cart_count";
 }
 
 - (void)thn_showMessage:(NSString *)message {
+    UIWindow * window = [UIApplication sharedApplication].keyWindow;
+    UIView *showview =  [[UIView alloc]init];
+    showview.backgroundColor = [UIColor blackColor];
+    showview.alpha = 1.0f;
+    showview.layer.cornerRadius = 5.0f;
+    showview.layer.masksToBounds = YES;
+    [window addSubview:showview];
+    [showview mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.size.mas_equalTo(CGSizeMake(200,44));
+        make.bottom.equalTo(window.mas_bottom).with.offset(-100);
+        make.centerX.equalTo(window);
+    }];
     
+    UILabel *label = [[UILabel alloc]initWithFrame:CGRectMake(0, 0 , 200, 44)];
+    label.text = message;
+    label.textColor = [UIColor whiteColor];
+    label.textAlignment = NSTextAlignmentCenter;
+    label.backgroundColor = [UIColor clearColor];
+    label.font = [UIFont systemFontOfSize:14];
+    [showview addSubview:label];
+    
+    [UIView animateWithDuration:2.0 animations:^{
+        showview.alpha = 0;
+    } completion:^(BOOL finished) {
+        [showview removeFromSuperview];
+    }];
 }
 
 @end

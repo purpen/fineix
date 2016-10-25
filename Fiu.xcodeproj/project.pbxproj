@@ -460,6 +460,8 @@
 		D80D415E1CAD144D005D72B1 /* UIBarButtonItem+Helper.m in Sources */ = {isa = PBXBuildFile; fileRef = D80D415C1CAD144D005D72B1 /* UIBarButtonItem+Helper.m */; };
 		D80FB1451DAB2FCA0060C561 /* libUMessage_Sdk_1.4.0.a in Frameworks */ = {isa = PBXBuildFile; fileRef = D80FB1431DAB2FCA0060C561 /* libUMessage_Sdk_1.4.0.a */; };
 		D80FB1471DAB30190060C561 /* UserNotifications.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D80FB1461DAB30190060C561 /* UserNotifications.framework */; };
+		D80FB14A1DAF89BA0060C561 /* NSString+TimeDate.m in Sources */ = {isa = PBXBuildFile; fileRef = D80FB1491DAF89BA0060C561 /* NSString+TimeDate.m */; };
+		D80FB14D1DB0C5620060C561 /* FBTabBarItemBadgeBtn.m in Sources */ = {isa = PBXBuildFile; fileRef = D80FB14C1DB0C5620060C561 /* FBTabBarItemBadgeBtn.m */; };
 		D81281131CAA8532007CF08B /* FBViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D812801C1CAA8532007CF08B /* FBViewController.m */; };
 		D81281531CAA8532007CF08B /* FBAPI.m in Sources */ = {isa = PBXBuildFile; fileRef = D81280B21CAA8532007CF08B /* FBAPI.m */; };
 		D81281541CAA8532007CF08B /* FBRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = D81280B41CAA8532007CF08B /* FBRequest.m */; };
@@ -628,6 +630,11 @@
 		D8C095201D7533FD00908491 /* ShareInfoData.m in Sources */ = {isa = PBXBuildFile; fileRef = D8C0951C1D7533FD00908491 /* ShareInfoData.m */; };
 		D8C095211D7533FD00908491 /* ShareInfoRow.m in Sources */ = {isa = PBXBuildFile; fileRef = D8C0951E1D7533FD00908491 /* ShareInfoRow.m */; };
 		D8C095241D75344000908491 /* ShareSearchTextTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D8C095231D75344000908491 /* ShareSearchTextTableViewCell.m */; };
+		D8DD22581DB756C0007D80CE /* THNChooseCityViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D8DD22571DB756C0007D80CE /* THNChooseCityViewController.m */; };
+		D8DD225B1DBA1809007D80CE /* THNProvinceModel.m in Sources */ = {isa = PBXBuildFile; fileRef = D8DD225A1DBA1809007D80CE /* THNProvinceModel.m */; };
+		D8DD225E1DBA1814007D80CE /* THNCityModel.m in Sources */ = {isa = PBXBuildFile; fileRef = D8DD225D1DBA1814007D80CE /* THNCityModel.m */; };
+		D8DD22611DBA1824007D80CE /* THNCountyModel.m in Sources */ = {isa = PBXBuildFile; fileRef = D8DD22601DBA1824007D80CE /* THNCountyModel.m */; };
+		D8DD22641DBA182E007D80CE /* THNStreetModel.m in Sources */ = {isa = PBXBuildFile; fileRef = D8DD22631DBA182E007D80CE /* THNStreetModel.m */; };
 		D8DDEE101D338D760020FF66 /* FBPopupView.m in Sources */ = {isa = PBXBuildFile; fileRef = D8DDEE0F1D338D760020FF66 /* FBPopupView.m */; };
 		D8E3AEB61CFC9B84006E5E8C /* ClipImageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D8E3AEA91CFC9B84006E5E8C /* ClipImageViewController.m */; };
 		D8E3AEBB1CFC9B84006E5E8C /* ReleaseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D8E3AEB31CFC9B84006E5E8C /* ReleaseViewController.m */; };
@@ -1440,6 +1447,10 @@
 		D80FB1431DAB2FCA0060C561 /* libUMessage_Sdk_1.4.0.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libUMessage_Sdk_1.4.0.a; sourceTree = "<group>"; };
 		D80FB1441DAB2FCA0060C561 /* UMessage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UMessage.h; sourceTree = "<group>"; };
 		D80FB1461DAB30190060C561 /* UserNotifications.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UserNotifications.framework; path = System/Library/Frameworks/UserNotifications.framework; sourceTree = SDKROOT; };
+		D80FB1481DAF89BA0060C561 /* NSString+TimeDate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+TimeDate.h"; sourceTree = "<group>"; };
+		D80FB1491DAF89BA0060C561 /* NSString+TimeDate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+TimeDate.m"; sourceTree = "<group>"; };
+		D80FB14B1DB0C5620060C561 /* FBTabBarItemBadgeBtn.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FBTabBarItemBadgeBtn.h; sourceTree = "<group>"; };
+		D80FB14C1DB0C5620060C561 /* FBTabBarItemBadgeBtn.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FBTabBarItemBadgeBtn.m; sourceTree = "<group>"; };
 		D81280141CAA8532007CF08B /* AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		D812801B1CAA8532007CF08B /* FBViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FBViewController.h; sourceTree = "<group>"; };
 		D812801C1CAA8532007CF08B /* FBViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FBViewController.m; sourceTree = "<group>"; };
@@ -1750,6 +1761,16 @@
 		D8C0951E1D7533FD00908491 /* ShareInfoRow.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ShareInfoRow.m; sourceTree = "<group>"; };
 		D8C095221D75344000908491 /* ShareSearchTextTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShareSearchTextTableViewCell.h; sourceTree = "<group>"; };
 		D8C095231D75344000908491 /* ShareSearchTextTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ShareSearchTextTableViewCell.m; sourceTree = "<group>"; };
+		D8DD22561DB756C0007D80CE /* THNChooseCityViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THNChooseCityViewController.h; sourceTree = "<group>"; };
+		D8DD22571DB756C0007D80CE /* THNChooseCityViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THNChooseCityViewController.m; sourceTree = "<group>"; };
+		D8DD22591DBA1809007D80CE /* THNProvinceModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THNProvinceModel.h; sourceTree = "<group>"; };
+		D8DD225A1DBA1809007D80CE /* THNProvinceModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THNProvinceModel.m; sourceTree = "<group>"; };
+		D8DD225C1DBA1814007D80CE /* THNCityModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THNCityModel.h; sourceTree = "<group>"; };
+		D8DD225D1DBA1814007D80CE /* THNCityModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THNCityModel.m; sourceTree = "<group>"; };
+		D8DD225F1DBA1824007D80CE /* THNCountyModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THNCountyModel.h; sourceTree = "<group>"; };
+		D8DD22601DBA1824007D80CE /* THNCountyModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THNCountyModel.m; sourceTree = "<group>"; };
+		D8DD22621DBA182E007D80CE /* THNStreetModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THNStreetModel.h; sourceTree = "<group>"; };
+		D8DD22631DBA182E007D80CE /* THNStreetModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THNStreetModel.m; sourceTree = "<group>"; };
 		D8DDEE0E1D338D760020FF66 /* FBPopupView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FBPopupView.h; sourceTree = "<group>"; };
 		D8DDEE0F1D338D760020FF66 /* FBPopupView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FBPopupView.m; sourceTree = "<group>"; };
 		D8E3AEA81CFC9B84006E5E8C /* ClipImageViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ClipImageViewController.h; sourceTree = "<group>"; };
@@ -2501,6 +2522,8 @@
 				1F2A8E0F1CF40277005116C7 /* EditAddressViewController.h */,
 				1F2A8E101CF40277005116C7 /* EditAddressViewController.m */,
 				1F2A8E111CF40277005116C7 /* EditAddressViewController.xib */,
+				D8DD22561DB756C0007D80CE /* THNChooseCityViewController.h */,
+				D8DD22571DB756C0007D80CE /* THNChooseCityViewController.m */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -2510,6 +2533,14 @@
 			children = (
 				1F2A8E131CF40277005116C7 /* DeliveryAddressModel.h */,
 				1F2A8E141CF40277005116C7 /* DeliveryAddressModel.m */,
+				D8DD22591DBA1809007D80CE /* THNProvinceModel.h */,
+				D8DD225A1DBA1809007D80CE /* THNProvinceModel.m */,
+				D8DD225C1DBA1814007D80CE /* THNCityModel.h */,
+				D8DD225D1DBA1814007D80CE /* THNCityModel.m */,
+				D8DD225F1DBA1824007D80CE /* THNCountyModel.h */,
+				D8DD22601DBA1824007D80CE /* THNCountyModel.m */,
+				D8DD22621DBA182E007D80CE /* THNStreetModel.h */,
+				D8DD22631DBA182E007D80CE /* THNStreetModel.m */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -3678,6 +3709,8 @@
 				D80D415C1CAD144D005D72B1 /* UIBarButtonItem+Helper.m */,
 				D81280B81CAA8532007CF08B /* NSString+FBMD5.h */,
 				D81280B91CAA8532007CF08B /* NSString+FBMD5.m */,
+				D80FB1481DAF89BA0060C561 /* NSString+TimeDate.h */,
+				D80FB1491DAF89BA0060C561 /* NSString+TimeDate.m */,
 				D81280BA1CAA8532007CF08B /* NSString+Helper.h */,
 				D81280BB1CAA8532007CF08B /* NSString+Helper.m */,
 				D81280BC1CAA8532007CF08B /* UIColor+Extension.h */,
@@ -4314,6 +4347,8 @@
 				D854E7F31D880748009A13F1 /* THNGoodsBuyView.m */,
 				D840F0951D93B87100CE9FB7 /* THNRedEnvelopeView.h */,
 				D840F0961D93B87100CE9FB7 /* THNRedEnvelopeView.m */,
+				D80FB14B1DB0C5620060C561 /* FBTabBarItemBadgeBtn.h */,
+				D80FB14C1DB0C5620060C561 /* FBTabBarItemBadgeBtn.m */,
 			);
 			path = Category;
 			sourceTree = "<group>";
@@ -4684,6 +4719,8 @@
 				D869BD7C1D6044F700432423 /* THNAddTagViewController.m in Sources */,
 				1FF36EA91D5099AA00EB3C93 /* UIView+FSExtension.m in Sources */,
 				D8ACF45E1D6D7BCC00DB79D8 /* THNSubscribeViewController.m in Sources */,
+				D8DD22611DBA1824007D80CE /* THNCountyModel.m in Sources */,
+				D80FB14A1DAF89BA0060C561 /* NSString+TimeDate.m in Sources */,
 				D869BD6E1D6036A000432423 /* CommentId.m in Sources */,
 				1F2A90621CF40277005116C7 /* SystemInformsViewController.m in Sources */,
 				D806697B1D6F0206007FD81E /* MallSearchViewController.m in Sources */,
@@ -4846,6 +4883,7 @@
 				D85174691D598D60005F5722 /* THNSceneInfoTableViewCell.m in Sources */,
 				1F2A908B1CF40277005116C7 /* PaySuccessViewController.m in Sources */,
 				D868091B1D6609ED002714B2 /* THNSearchGoodsTableViewCell.m in Sources */,
+				D80FB14D1DB0C5620060C561 /* FBTabBarItemBadgeBtn.m in Sources */,
 				D80878DC1D6AE2C700C1FFA0 /* THNMallListCollectionViewCell.m in Sources */,
 				1F2AFD781D88186C00DA6035 /* THNForgetViewController.m in Sources */,
 				D869BD6F1D6036A000432423 /* CommentReplyComment.m in Sources */,
@@ -4893,6 +4931,7 @@
 				1F2A90A21CF40277005116C7 /* SubscribePeopleTableViewCell.m in Sources */,
 				1F2A901D1CF40277005116C7 /* BonusCell.m in Sources */,
 				1F2AFC631D88170B00DA6035 /* ChangeSumaryViewController.m in Sources */,
+				D8DD22581DB756C0007D80CE /* THNChooseCityViewController.m in Sources */,
 				1F2A90A01CF40277005116C7 /* SubscribePeopleViewController.m in Sources */,
 				1F2A90251CF40277005116C7 /* IdentityTagModel.m in Sources */,
 				D81317E81D92237E007CE71C /* THNMessageViewController.m in Sources */,
@@ -5074,12 +5113,14 @@
 				1F2AFD201D8817CC00DA6035 /* THNProductModel.m in Sources */,
 				D8C095211D7533FD00908491 /* ShareInfoRow.m in Sources */,
 				1F2A8FDA1CF40277005116C7 /* GoodsImgCollectionViewCell.m in Sources */,
+				D8DD225B1DBA1809007D80CE /* THNProvinceModel.m in Sources */,
 				1F2AFD191D8817CC00DA6035 /* THNArticleModel.m in Sources */,
 				1F2A8F3D1CF40277005116C7 /* FindGoodsModel.m in Sources */,
 				D869BD691D6036A000432423 /* QrShareSheetViewController.m in Sources */,
 				D8035F2F1CB77D0C001920F9 /* UIImage+Helper.m in Sources */,
 				D8E8FFCE1D773F6E00DDC3E0 /* THNUserAddGoodsTitleTableViewCell.m in Sources */,
 				D8BE89E41D3377B000DE5029 /* SeleBrandViewController.m in Sources */,
+				D8DD22641DBA182E007D80CE /* THNStreetModel.m in Sources */,
 				D87088711D87A50400083506 /* CategoryMenuCollectionViewCell.m in Sources */,
 				D8035F3B1CB784B3001920F9 /* UILable+Frame.m in Sources */,
 				1F2AFDDA1D8818A400DA6035 /* MyOderModel.m in Sources */,
@@ -5107,6 +5148,7 @@
 				1F2A8FBC1CF40277005116C7 /* ChildTags.m in Sources */,
 				1F2AFDF61D8818EB00DA6035 /* SystemSettingViewController.m in Sources */,
 				1F2A8F531CF40277005116C7 /* MarkGoodsCollectionViewCell.m in Sources */,
+				D8DD225E1DBA1814007D80CE /* THNCityModel.m in Sources */,
 				1F2A8F441CF40277005116C7 /* FBPhoto.m in Sources */,
 				D869BD681D6036A000432423 /* FBSheetViewController.m in Sources */,
 			);

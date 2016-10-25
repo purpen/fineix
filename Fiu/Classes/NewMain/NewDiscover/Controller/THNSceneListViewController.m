@@ -19,6 +19,7 @@
 #import "FBSubjectModelRow.h"
 #import "CommentNViewController.h"
 
+static NSString *const URLSceneList = @"/scene_sight/";
 static NSString *const URLLikeScene = @"/favorite/ajax_love";
 static NSString *const URLCancelLike = @"/favorite/ajax_cancel_love";
 static NSString *const URLFollowUser = @"/follow/ajax_follow";
@@ -169,6 +170,69 @@ static NSString *const twoCommentsCellId = @"TwoCommentsCellId";
     }];
 }
 
+//  情境列表
+- (void)thn_networkSceneListData {
+    NSLog(@"========= 当前页：%zi -- 总页：%zi", self.currentpageNum, self.totalPageNum);
+    NSDictionary *requestDict = @{@"page":@(self.currentpageNum + 1), @"size":@"30", @"sort":@"0"};
+    self.sceneListRequest = [FBAPI getWithUrlString:URLSceneList requestDictionary:requestDict delegate:self];
+    [self.sceneListRequest startRequestSuccess:^(FBRequest *request, id result) {
+        NSArray *sceneArr = [[result valueForKey:@"data"] valueForKey:@"rows"];
+        for (NSDictionary * sceneDic in sceneArr) {
+            HomeSceneListRow *homeSceneModel = [[HomeSceneListRow alloc] initWithDictionary:sceneDic];
+            [self.sceneListMarr addObject:homeSceneModel];
+            [self.sceneIdMarr addObject:[NSString stringWithFormat:@"%zi", homeSceneModel.idField]];
+            [self.userIdMarr addObject:[NSString stringWithFormat:@"%zi", homeSceneModel.userId]];
+        }
+        [self.commentsMarr addObjectsFromArray:[sceneArr valueForKey:@"comments"]];
+        [self.sceneTable reloadData];
+
+        self.currentpageNum = [[[result valueForKey:@"data"] valueForKey:@"current_page"] integerValue];
+        self.totalPageNum = [[[result valueForKey:@"data"] valueForKey:@"total_page"] integerValue];
+        [self requestIsLastData:self.sceneTable currentPage:self.currentpageNum withTotalPage:self.totalPageNum];
+
+    } failure:^(FBRequest *request, NSError *error) {
+        [SVProgressHUD showErrorWithStatus:[error localizedDescription]];
+    }];
+}
+
+- (void)requestIsLastData:(UITableView *)table currentPage:(NSInteger )current withTotalPage:(NSInteger)total {
+    if (total == 0) {
+        table.mj_footer.state = MJRefreshStateNoMoreData;
+        table.mj_footer.hidden = true;
+    }
+    
+    BOOL isLastPage = (current == total);
+    
+    if (!isLastPage) {
+        if (table.mj_footer.state == MJRefreshStateNoMoreData) {
+            [table.mj_footer resetNoMoreData];
+        }
+    }
+    if (current == total == 1) {
+        table.mj_footer.state = MJRefreshStateNoMoreData;
+        table.mj_footer.hidden = true;
+    }
+
+    if ([table.mj_footer isRefreshing]) {
+        if (isLastPage) {
+            [table.mj_footer endRefreshingWithNoMoreData];
+        } else  {
+            [table.mj_footer endRefreshing];
+        }
+    }
+}
+
+#pragma mark - 上拉加载
+- (void)addMJRefresh:(UITableView *)table {
+    table.mj_footer = [MJRefreshAutoNormalFooter footerWithRefreshingBlock:^{
+        if (self.currentpageNum < self.totalPageNum) {
+            [self thn_networkSceneListData];
+        } else {
+            [table.mj_footer endRefreshing];
+        }
+    }];
+}
+
 #pragma mark - 设置视图UI
 - (void)thn_setSceneViewUI {
     [self.view addSubview:self.sceneTable];
@@ -185,6 +249,7 @@ static NSString *const twoCommentsCellId = @"TwoCommentsCellId";
         _sceneTable.showsVerticalScrollIndicator = NO;
         _sceneTable.backgroundColor = [UIColor colorWithHexString:@"#FFFFFF"];
         _sceneTable.separatorStyle = UITableViewCellSeparatorStyleNone;
+        [self addMJRefresh:_sceneTable];
     }
     return _sceneTable;
 }
@@ -204,7 +269,9 @@ static NSString *const twoCommentsCellId = @"TwoCommentsCellId";
     
     if (indexPath.row == 0) {
         THNUserInfoTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:userInfoCellId];
-        cell = [[THNUserInfoTableViewCell alloc] initWithStyle:(UITableViewCellStyleDefault) reuseIdentifier:userInfoCellId];
+        if (!cell) {
+            cell = [[THNUserInfoTableViewCell alloc] initWithStyle:(UITableViewCellStyleDefault) reuseIdentifier:userInfoCellId];
+        }
         if (self.sceneListMarr.count) {
             [cell thn_setHomeSceneUserInfoData:self.sceneListMarr[indexPath.section] userId:[self getLoginUserID] isLogin:[self isUserLogin]];
             
@@ -221,7 +288,9 @@ static NSString *const twoCommentsCellId = @"TwoCommentsCellId";
         
     } else if (indexPath.row == 1) {
         THNSceneImageTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:sceneImgCellId];
-        cell = [[THNSceneImageTableViewCell alloc] initWithStyle:(UITableViewCellStyleDefault) reuseIdentifier:sceneImgCellId];
+        if (!cell) {
+            cell = [[THNSceneImageTableViewCell alloc] initWithStyle:(UITableViewCellStyleDefault) reuseIdentifier:sceneImgCellId];
+        }
         if (self.sceneListMarr.count) {
             [cell thn_setSceneImageData:self.sceneListMarr[indexPath.section]];
         }
@@ -231,7 +300,10 @@ static NSString *const twoCommentsCellId = @"TwoCommentsCellId";
         
     } else if (indexPath.row == 2) {
         THNDataInfoTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:dataInfoCellId];
-        cell = [[THNDataInfoTableViewCell alloc] initWithStyle:(UITableViewCellStyleDefault) reuseIdentifier:dataInfoCellId];
+        if (!cell) {
+            cell = [[THNDataInfoTableViewCell alloc] initWithStyle:(UITableViewCellStyleDefault) reuseIdentifier:dataInfoCellId];
+
+        }
         if (self.sceneListMarr.count) {
             [cell thn_setSceneData:self.sceneListMarr[indexPath.section]
                            isLogin:[self isUserLogin]
@@ -263,7 +335,9 @@ static NSString *const twoCommentsCellId = @"TwoCommentsCellId";
         
     } else if (indexPath.row == 3) {
         THNSceneInfoTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:sceneInfoCellId];
-        cell = [[THNSceneInfoTableViewCell alloc] initWithStyle:(UITableViewCellStyleDefault) reuseIdentifier:sceneInfoCellId];
+        if (!cell) {
+            cell = [[THNSceneInfoTableViewCell alloc] initWithStyle:(UITableViewCellStyleDefault) reuseIdentifier:sceneInfoCellId];
+        }
         if (self.sceneListMarr.count) {
             if (self.sceneListMarr.count) {
                 [cell thn_setSceneContentData:self.sceneListMarr[indexPath.section]];

@@ -98,7 +98,6 @@
             if (isExsit) {
                 [[UIApplication sharedApplication] openURL:[NSURL URLWithString:ids]];
             }
-
         }
         
     } else {

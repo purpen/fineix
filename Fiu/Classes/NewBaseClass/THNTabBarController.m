@@ -18,17 +18,21 @@
 #import "THNLoginRegisterViewController.h"
 #import "PictureToolViewController.h"
 #import "THNLoginRegisterViewController.h"
+#import "THNMessageViewController.h"
+#import "UITabBar+badge.h"
 
 @implementation THNTabBarController {
-    THNNavigationController * _homeNav;
-    THNNavigationController * _discoverNav;
-    THNNavigationController * _mallNav;
-    THNNavigationController * _myNav;
+    THNNavigationController *_homeNav;
+    THNNavigationController *_discoverNav;
+    THNNavigationController *_mallNav;
+    THNNavigationController *_myNav;
+    THNNavigationController *_messNav;
+    UIWindow *_window;
 }
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
+
     [self thn_setTabBarController];
 }
 
@@ -46,6 +50,7 @@
         }];
         
         if (entity.isLogin) {
+            [self thn_clearTabBarItemBadge];
             return YES;
         } else {
             THNLoginRegisterViewController *vc = [[THNLoginRegisterViewController alloc] init];
@@ -134,6 +139,81 @@
                        itemTitle:NSLocalizedString(@"TabBar_MyCenter", nil)];
     
     self.viewControllers = @[_homeNav, _discoverNav, _mallNav, _myNav];
+}
+
+#pragma mark - 显示消息角标
+- (void)thn_showTabBarItemBadgeWithItem:(UITabBarItem *)item likeValue:(NSString *)likeValue fansValue:(NSString *)fansValue {
+    NSInteger likeCount = [likeValue integerValue];
+    NSInteger fansCount = [fansValue integerValue];
+
+    if (likeCount > 0 || fansCount > 0) {
+        [self.tabBar showBadgeWithIndex:4];
+        [self.badgeBtn thn_showBadgeLikeValue:likeValue fansValue:fansValue];
+        
+        CGFloat likeValueWidth;
+        CGFloat fansValueWidth;
+        if (likeCount == 0) {
+            likeValueWidth = 0.0f;
+        } else {
+            likeValueWidth = [likeValue boundingRectWithSize:CGSizeMake(320, 0) options:(NSStringDrawingUsesLineFragmentOrigin) attributes:nil context:nil].size.width;
+        }
+        
+        if (fansCount == 0) {
+            fansValueWidth = 0.0f;
+        } else {
+            fansValueWidth = [fansValue boundingRectWithSize:CGSizeMake(320, 0) options:(NSStringDrawingUsesLineFragmentOrigin) attributes:nil context:nil].size.width;
+        }
+        
+        if (self.childViewControllers[0].childViewControllers.count == 1) {
+            UIView *homeView = self.childViewControllers[0].view;
+            [homeView addSubview:self.badgeBtn];
+            [_badgeBtn mas_makeConstraints:^(MASConstraintMaker *make) {
+                if (likeCount > 0 && fansCount > 0) {
+                    make.size.mas_equalTo(CGSizeMake(60 + likeValueWidth + fansValueWidth, 35));
+                } else {
+                    make.size.mas_equalTo(CGSizeMake(35 + likeValueWidth + fansValueWidth, 35));
+                }
+                if (IS_PHONE5) {
+                    make.right.equalTo(homeView.mas_right).with.offset(-SCREEN_WIDTH*0.04);
+                } else {
+                    make.right.equalTo(homeView.mas_right).with.offset(-SCREEN_WIDTH*0.05);
+                }
+                make.bottom.equalTo(homeView.mas_bottom).with.offset(-52);
+            }];
+            
+            [UIView animateWithDuration:10 animations:^{
+                self.badgeBtn.alpha = 0;
+            } completion:^(BOOL finished) {
+                [self.badgeBtn removeFromSuperview];
+            }];
+        }
+    }
+}
+
+#pragma mark - 清除消息角标
+- (void)thn_clearTabBarItemBadge {
+    [UIView animateWithDuration:.3 animations:^{
+        self.badgeBtn.alpha = 0;
+    } completion:^(BOOL finished) {
+         [self.badgeBtn removeFromSuperview];
+    }];
+}
+
+#pragma mark - 消息气泡
+- (FBTabBarItemBadgeBtn *)badgeBtn {
+    if (!_badgeBtn) {
+        _badgeBtn = [[FBTabBarItemBadgeBtn alloc] init];
+//        [_badgeBtn addTarget:self action:@selector(openMessVC:) forControlEvents:(UIControlEventTouchUpInside)];
+    }
+    return _badgeBtn;
+}
+
+//  消息气泡点击跳转消息列表
+- (void)openMessVC:(FBTabBarItemBadgeBtn *)button {
+    [self.badgeBtn removeFromSuperview];
+    THNMessageViewController *messVC = [[THNMessageViewController alloc] init];
+    _messNav = [[THNNavigationController alloc] initWithRootViewController:messVC];
+    [self.childViewControllers[0] presentViewController:_messNav animated:YES completion:nil];
 }
 
 #pragma mark “创建情景”的按钮事件

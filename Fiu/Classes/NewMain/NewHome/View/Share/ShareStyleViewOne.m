@@ -8,12 +8,15 @@
 
 #import "ShareStyleViewOne.h"
 #import "UILable+Frame.h"
+#import "NSString+TimeDate.h"
 
 @implementation ShareStyleViewOne
 
 - (instancetype)initWithFrame:(CGRect)frame {
     self = [super initWithFrame:frame];
     if (self) {
+        self.layer.borderColor = [UIColor colorWithHexString:@"#EEEEEE"].CGColor;
+        self.layer.borderWidth = 1.0f;
         self.backgroundColor = [UIColor whiteColor];
         self.clipsToBounds = YES;
     }
@@ -69,7 +72,7 @@
     }
     
     [self.userName setTitle:[NSString stringWithFormat:@"%@", sceneModel.user.nickname] forState:(UIControlStateNormal)];
-    [self thn_getTextChangeFrame:sceneModel.createdAt withAddress:sceneModel.address];
+    [self thn_getTextChangeFrame:sceneModel.createdOn withAddress:sceneModel.address];
     
     [self changeContentLabStyle:sceneModel.des];
 }
@@ -88,13 +91,12 @@
 }
 
 
-- (void)thn_getTextChangeFrame:(NSString *)time withAddress:(NSString *)address {
-    [self.time setTitle:[NSString stringWithFormat:@"%@", time] forState:(UIControlStateNormal)];
-    NSString *timeStr = [NSString stringWithFormat:@"     %@", time];
+- (void)thn_getTextChangeFrame:(NSInteger)time withAddress:(NSString *)address {
     NSString *addressStr = [NSString stringWithFormat:@"   %@", address];
-    CGFloat timeWidth = [self getTextSizeWidth:timeStr fontSize:12].width;
     CGFloat addressWidth = [self getTextSizeWidth:addressStr fontSize:12].width;
     
+    [self.time setTitle:[NSString getTimesTamp:time] forState:(UIControlStateNormal)];
+    CGFloat timeWidth = [self getTextSizeWidth:[NSString getTimesTamp:time] fontSize:12].width *1.2;
     [self.time mas_updateConstraints:^(MASConstraintMaker *make) {
         make.width.equalTo(@(timeWidth));
     }];
@@ -107,14 +109,15 @@
             make.top.equalTo(_userName.mas_bottom).with.offset(3);
             make.centerX.equalTo(self);
         }];
+        
     } else {
         [self.address setTitle:[NSString stringWithFormat:@"%@", address] forState:(UIControlStateNormal)];
         [self.address mas_updateConstraints:^(MASConstraintMaker *make) {
             make.width.equalTo(@(addressWidth));
         }];
-        
+    
         [self.timeView mas_updateConstraints:^(MASConstraintMaker *make) {
-            make.width.equalTo(@(timeWidth + addressWidth));
+            make.width.equalTo(@(timeWidth + (addressWidth *1.3)));
         }];
     }
 }
@@ -279,9 +282,10 @@
         
         [_timeView addSubview:self.address];
         [_address mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.size.mas_equalTo(CGSizeMake(70, 12));
+            make.height.equalTo(@12);
             make.left.equalTo(_time.mas_right).with.offset(5);
             make.bottom.equalTo(_time.mas_bottom).with.offset(0);
+            make.right.equalTo(_timeView.mas_right).with.offset(-2);
         }];
     }
     return _timeView;
