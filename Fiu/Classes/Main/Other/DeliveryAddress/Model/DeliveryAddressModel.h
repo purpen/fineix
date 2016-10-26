@@ -12,16 +12,18 @@
 
 @property (nonatomic, strong) NSString * idField;
 @property (nonatomic, strong) NSString * address;
-@property (nonatomic, strong) NSObject * area;
-@property (nonatomic, assign) NSInteger city;
+@property (nonatomic, assign) NSInteger provinceId;
+@property (nonatomic, strong) NSString * provinceName;
+@property (nonatomic, assign) NSInteger cityId;
 @property (nonatomic, strong) NSString * cityName;
+@property (nonatomic, assign) NSInteger countyId;
+@property (nonatomic, strong) NSString * countyName;
+@property (nonatomic, assign) NSInteger townId;
+@property (nonatomic, strong) NSString * townName;
 @property (nonatomic, assign) NSInteger isDefault;
 @property (nonatomic, strong) NSString * name;
 @property (nonatomic, strong) NSString * phone;
-@property (nonatomic, assign) NSInteger province;
-@property (nonatomic, strong) NSString * provinceName;
 @property (nonatomic, assign) NSInteger hasDefault;
-//@property (nonatomic, assign) NSInteger userId;
 @property (nonatomic, strong) NSString * zip;
 
 

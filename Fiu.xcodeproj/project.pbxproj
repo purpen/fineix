@@ -632,9 +632,6 @@
 		D8C095241D75344000908491 /* ShareSearchTextTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D8C095231D75344000908491 /* ShareSearchTextTableViewCell.m */; };
 		D8DD22581DB756C0007D80CE /* THNChooseCityViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D8DD22571DB756C0007D80CE /* THNChooseCityViewController.m */; };
 		D8DD225B1DBA1809007D80CE /* THNProvinceModel.m in Sources */ = {isa = PBXBuildFile; fileRef = D8DD225A1DBA1809007D80CE /* THNProvinceModel.m */; };
-		D8DD225E1DBA1814007D80CE /* THNCityModel.m in Sources */ = {isa = PBXBuildFile; fileRef = D8DD225D1DBA1814007D80CE /* THNCityModel.m */; };
-		D8DD22611DBA1824007D80CE /* THNCountyModel.m in Sources */ = {isa = PBXBuildFile; fileRef = D8DD22601DBA1824007D80CE /* THNCountyModel.m */; };
-		D8DD22641DBA182E007D80CE /* THNStreetModel.m in Sources */ = {isa = PBXBuildFile; fileRef = D8DD22631DBA182E007D80CE /* THNStreetModel.m */; };
 		D8DDEE101D338D760020FF66 /* FBPopupView.m in Sources */ = {isa = PBXBuildFile; fileRef = D8DDEE0F1D338D760020FF66 /* FBPopupView.m */; };
 		D8E3AEB61CFC9B84006E5E8C /* ClipImageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D8E3AEA91CFC9B84006E5E8C /* ClipImageViewController.m */; };
 		D8E3AEBB1CFC9B84006E5E8C /* ReleaseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D8E3AEB31CFC9B84006E5E8C /* ReleaseViewController.m */; };
@@ -1765,12 +1762,6 @@
 		D8DD22571DB756C0007D80CE /* THNChooseCityViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THNChooseCityViewController.m; sourceTree = "<group>"; };
 		D8DD22591DBA1809007D80CE /* THNProvinceModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THNProvinceModel.h; sourceTree = "<group>"; };
 		D8DD225A1DBA1809007D80CE /* THNProvinceModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THNProvinceModel.m; sourceTree = "<group>"; };
-		D8DD225C1DBA1814007D80CE /* THNCityModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THNCityModel.h; sourceTree = "<group>"; };
-		D8DD225D1DBA1814007D80CE /* THNCityModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THNCityModel.m; sourceTree = "<group>"; };
-		D8DD225F1DBA1824007D80CE /* THNCountyModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THNCountyModel.h; sourceTree = "<group>"; };
-		D8DD22601DBA1824007D80CE /* THNCountyModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THNCountyModel.m; sourceTree = "<group>"; };
-		D8DD22621DBA182E007D80CE /* THNStreetModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THNStreetModel.h; sourceTree = "<group>"; };
-		D8DD22631DBA182E007D80CE /* THNStreetModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THNStreetModel.m; sourceTree = "<group>"; };
 		D8DDEE0E1D338D760020FF66 /* FBPopupView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FBPopupView.h; sourceTree = "<group>"; };
 		D8DDEE0F1D338D760020FF66 /* FBPopupView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FBPopupView.m; sourceTree = "<group>"; };
 		D8E3AEA81CFC9B84006E5E8C /* ClipImageViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ClipImageViewController.h; sourceTree = "<group>"; };
@@ -2535,12 +2526,6 @@
 				1F2A8E141CF40277005116C7 /* DeliveryAddressModel.m */,
 				D8DD22591DBA1809007D80CE /* THNProvinceModel.h */,
 				D8DD225A1DBA1809007D80CE /* THNProvinceModel.m */,
-				D8DD225C1DBA1814007D80CE /* THNCityModel.h */,
-				D8DD225D1DBA1814007D80CE /* THNCityModel.m */,
-				D8DD225F1DBA1824007D80CE /* THNCountyModel.h */,
-				D8DD22601DBA1824007D80CE /* THNCountyModel.m */,
-				D8DD22621DBA182E007D80CE /* THNStreetModel.h */,
-				D8DD22631DBA182E007D80CE /* THNStreetModel.m */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -4719,7 +4704,6 @@
 				D869BD7C1D6044F700432423 /* THNAddTagViewController.m in Sources */,
 				1FF36EA91D5099AA00EB3C93 /* UIView+FSExtension.m in Sources */,
 				D8ACF45E1D6D7BCC00DB79D8 /* THNSubscribeViewController.m in Sources */,
-				D8DD22611DBA1824007D80CE /* THNCountyModel.m in Sources */,
 				D80FB14A1DAF89BA0060C561 /* NSString+TimeDate.m in Sources */,
 				D869BD6E1D6036A000432423 /* CommentId.m in Sources */,
 				1F2A90621CF40277005116C7 /* SystemInformsViewController.m in Sources */,
@@ -5120,7 +5104,6 @@
 				D8035F2F1CB77D0C001920F9 /* UIImage+Helper.m in Sources */,
 				D8E8FFCE1D773F6E00DDC3E0 /* THNUserAddGoodsTitleTableViewCell.m in Sources */,
 				D8BE89E41D3377B000DE5029 /* SeleBrandViewController.m in Sources */,
-				D8DD22641DBA182E007D80CE /* THNStreetModel.m in Sources */,
 				D87088711D87A50400083506 /* CategoryMenuCollectionViewCell.m in Sources */,
 				D8035F3B1CB784B3001920F9 /* UILable+Frame.m in Sources */,
 				1F2AFDDA1D8818A400DA6035 /* MyOderModel.m in Sources */,
@@ -5148,7 +5131,6 @@
 				1F2A8FBC1CF40277005116C7 /* ChildTags.m in Sources */,
 				1F2AFDF61D8818EB00DA6035 /* SystemSettingViewController.m in Sources */,
 				1F2A8F531CF40277005116C7 /* MarkGoodsCollectionViewCell.m in Sources */,
-				D8DD225E1DBA1814007D80CE /* THNCityModel.m in Sources */,
 				1F2A8F441CF40277005116C7 /* FBPhoto.m in Sources */,
 				D869BD681D6036A000432423 /* FBSheetViewController.m in Sources */,
 			);

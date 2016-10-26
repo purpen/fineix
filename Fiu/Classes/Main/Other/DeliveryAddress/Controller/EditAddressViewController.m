@@ -15,32 +15,29 @@
 #import "AddreesPickerViewController.h"
 #import "THNChooseCityViewController.h"
 
-@interface EditAddressViewController ()<FBNavigationBarItemsDelegate,UITextFieldDelegate>
+@interface EditAddressViewController ()<FBNavigationBarItemsDelegate,UITextFieldDelegate> {
+    NSString *_provinceId;
+    NSString *_cityId;
+    NSString *_countyId;
+    NSString *_townId;
+}
 
 @property (weak, nonatomic) IBOutlet UITextField *nameTF;
 @property (weak, nonatomic) IBOutlet UITextField *zipTF;
 @property (weak, nonatomic) IBOutlet UITextField *detailsAddressTF;
-@property (weak, nonatomic) IBOutlet UISwitch *addressSwicth;
 @property (weak, nonatomic) IBOutlet UITextField *phoneNumTF;
-@property (weak, nonatomic) IBOutlet UILabel *prinLabel;
-@property (weak, nonatomic) IBOutlet UILabel *cityLabel;
 @property (weak, nonatomic) IBOutlet UITextField *addressTF;
+@property (weak, nonatomic) IBOutlet UISwitch *addressSwicth;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *bottomSpaceing;
 
 @property (nonatomic, strong) NSMutableArray * provinceAry;
 @property (nonatomic, strong) NSMutableArray * cityAry;
-@property (nonatomic, assign) NSInteger provinceId;
-@property (nonatomic, assign) NSInteger cityId;
-@property (nonatomic, copy) NSString  * provinceStr;
-@property (nonatomic, copy) NSString  * cityStr;
-
 @property (nonatomic, assign) NSInteger provinceRow;
-@property(nonatomic,strong) AddreesPickerViewController *addreesPickerVC;
-@property (weak, nonatomic) IBOutlet NSLayoutConstraint *bottomSpaceing;
 
 @end
 
-static NSString *const EditAddressURL = @"/shopping/ajax_address";
-static NSString *const DeleteAddressURL = @"/shopping/remove_address";
+static NSString *const EditAddressURL = @"/delivery_address/save";
+static NSString *const DeleteAddressURL = @"/delivery_address/deleted";
 static NSString * const FSPlacerholderColorKeyPath = @"_placeholderLabel.textColor";
 
 @implementation EditAddressViewController
@@ -55,17 +52,14 @@ static NSString * const FSPlacerholderColorKeyPath = @"_placeholderLabel.textCol
     [self changePlaceHolderColor:self.detailsAddressTF];
     [self changePlaceHolderColor:self.zipTF];
     
-    // Do any additional setup after loading the view from its nib.
     if (self.deliveryAddress) {
         self.navViewTitle.text = @"编辑收货地址";
         [self addBarItemRightBarButton:@"删除" image:nil isTransparent:NO];
         self.nameTF.text = self.deliveryAddress.name;
         self.phoneNumTF.text = self.deliveryAddress.phone;
         self.zipTF.text = self.deliveryAddress.zip;
-        self.addressTF.hidden = YES;
-        self.prinLabel.text = self.deliveryAddress.provinceName;
-        self.cityLabel.text = self.deliveryAddress.cityName;
-        self.addressTF.text = self.deliveryAddress.address;
+        self.addressTF.hidden = NO;
+        self.addressTF.text = [NSString stringWithFormat:@"%@ %@ %@ %@", self.deliveryAddress.provinceName, self.deliveryAddress.cityName, self.deliveryAddress.countyName, self.deliveryAddress.townName];
         self.addressSwicth.on = self.deliveryAddress.isDefault;
         self.detailsAddressTF.text = self.deliveryAddress.address;
     } else {
@@ -73,10 +67,10 @@ static NSString * const FSPlacerholderColorKeyPath = @"_placeholderLabel.textCol
         [self addBarItemRightBarButton:@"" image:nil isTransparent:NO];
         self.addressTF.hidden = NO;
     }
-    self.provinceId = self.deliveryAddress.province;
-    self.cityId = self.deliveryAddress.city;
-    //通知
-    //[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyBoardWillChangeFrame:) name:UIKeyboardWillChangeFrameNotification object:nil];
+    _provinceId = [NSString stringWithFormat:@"%zi", self.deliveryAddress.provinceId];
+    _cityId = [NSString stringWithFormat:@"%zi", self.deliveryAddress.cityId];
+    _countyId = [NSString stringWithFormat:@"%zi", self.deliveryAddress.countyId];
+    _townId = [NSString stringWithFormat:@"%zi", self.deliveryAddress.townId];
 }
 
 -(void)changePlaceHolderColor:(UITextField*)tf{
@@ -94,31 +88,23 @@ static NSString * const FSPlacerholderColorKeyPath = @"_placeholderLabel.textCol
 
 - (IBAction)clickAddressBtn:(UIButton *)sender {
     [self.view endEditing:true];
-    //弹出选择视图
-//    self.addreesPickerVC.modalPresentationStyle = UIModalPresentationOverCurrentContext;
-//    [self presentViewController:_addreesPickerVC animated:NO completion:nil];
-//    [_addreesPickerVC.pickerBtn addTarget:self action:@selector(clickAddreesPickerBtn:) forControlEvents:UIControlEventTouchUpInside];
     
+    __weak __typeof(self)weakSelf = self;
     THNChooseCityViewController *chooseCityVC = [[THNChooseCityViewController alloc] init];
     chooseCityVC.modalPresentationStyle = UIModalPresentationOverCurrentContext;
     chooseCityVC.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;
+    chooseCityVC.getChooseAddressId = ^(NSString *provinceId, NSString *cityId, NSString *countyId, NSString *streetId) {
+        NSLog(@"== %@ == %@ == %@ == %@", provinceId, cityId, countyId, streetId);
+        _provinceId = provinceId;
+        _cityId = cityId;
+        _countyId = countyId;
+        _townId = streetId;
+    };
+    chooseCityVC.getChooseAddressName = ^(NSString *provinceName, NSString *cityName, NSString *countyName, NSString *streetName) {
+        NSLog(@"== %@ == %@ == %@ == %@", provinceName, cityName, countyName, streetName);
+        weakSelf.addressTF.text = [NSString stringWithFormat:@"%@ %@ %@ %@", provinceName, cityName, countyName, streetName];
+    };
     [self presentViewController:chooseCityVC animated:YES completion:nil];
-}
-
--(void)clickAddreesPickerBtn:(UIButton*)sender{
-    self.addressTF.hidden = YES;
-    self.prinLabel.text = self.addreesPickerVC.provinceStr;
-    self.cityLabel.text = self.addreesPickerVC.cityStr;
-    self.provinceId = self.addreesPickerVC.provinceId;
-    self.cityId = self.addreesPickerVC.cityId;
-    [self.addreesPickerVC dismissViewControllerAnimated:NO completion:nil];
-}
-
--(AddreesPickerViewController *)addreesPickerVC{
-    if (!_addreesPickerVC) {
-        _addreesPickerVC = [[AddreesPickerViewController alloc] init];
-    }
-    return _addreesPickerVC;
 }
 
 -(void)rightBarItemSelected{
@@ -149,12 +135,7 @@ static NSString * const FSPlacerholderColorKeyPath = @"_placeholderLabel.textCol
         return;
     }
     
-//    if (self.zipTF.text.length == 0) {
-//        [SVProgressHUD showInfoWithStatus:@"请填写邮编"];
-//        return;
-//    }
-    
-    if (self.prinLabel.text.length == 0 || self.cityLabel.text.length == 0) {
+    if (self.addressTF.text.length == 0) {
         [SVProgressHUD showInfoWithStatus:@"请选择所在地区"];
         return;
     }
@@ -193,7 +174,16 @@ static NSString * const FSPlacerholderColorKeyPath = @"_placeholderLabel.textCol
     if (self.zipTF.text.length == 0) {
         self.zipTF.text = @"";
     }
-    NSDictionary * params = @{@"id": idStr, @"name": self.nameTF.text, @"phone": self.phoneNumTF.text, @"province": [NSNumber numberWithInteger:self.provinceId], @"city": [NSNumber numberWithInteger:self.cityId], @"address": self.detailsAddressTF.text, @"zip": self.zipTF.text, @"is_default": [NSNumber numberWithBool:self.addressSwicth.on]};
+    NSDictionary * params = @{@"id": idStr,
+                              @"name": self.nameTF.text,
+                              @"phone": self.phoneNumTF.text,
+                              @"province_id": _provinceId,
+                              @"city_id": _cityId,
+                              @"county_id": _countyId,
+                              @"town_id": _townId,
+                              @"address": self.detailsAddressTF.text,
+                              @"zip": self.zipTF.text,
+                              @"is_default": [NSNumber numberWithBool:self.addressSwicth.on]};
     FBRequest * request = [FBAPI postWithUrlString:EditAddressURL requestDictionary:params delegate:self];
     request.flag = EditAddressURL;
     [request startRequest];
@@ -233,20 +223,5 @@ static NSString * const FSPlacerholderColorKeyPath = @"_placeholderLabel.textCol
     [SVProgressHUD dismiss];
 }
 
-
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
-}
-
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
 
 @end

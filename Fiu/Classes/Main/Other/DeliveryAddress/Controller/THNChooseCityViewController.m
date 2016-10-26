@@ -50,7 +50,12 @@ static NSString *const addressCell = @"addressCellCellId";
 }
 
 #pragma mark 获取城市
-- (void)thn_networkGetCityData:(NSString *)province_id {
+- (void)thn_networkGetCityData:(NSInteger)index {
+    NSString *province_id = self.provinceIdMarr[index];
+    [self.addressIdMarr addObject:province_id];
+    NSString *province_name = self.provinceMarr[index];
+    [self.addressNameMarr addObject:province_name];
+    
     self.cityRequest = [FBAPI getWithUrlString:URLChinaCity requestDictionary:@{@"pid":province_id, @"layer":@"2"} delegate:self];
     [self.cityRequest startRequestSuccess:^(FBRequest *request, id result) {
         
@@ -62,7 +67,12 @@ static NSString *const addressCell = @"addressCellCellId";
 }
 
 #pragma mark 获取地区
-- (void)thn_networkGetCountyData:(NSString *)city_id {
+- (void)thn_networkGetCountyData:(NSInteger)index {
+    NSString *city_id = self.cityIdMarr[index];
+    [self.addressIdMarr addObject:city_id];
+    NSString *city_name = self.cityMarr[index];
+    [self.addressNameMarr addObject:city_name];
+    
     self.countyRequest = [FBAPI getWithUrlString:URLChinaCity requestDictionary:@{@"pid":city_id, @"layer":@"3"} delegate:self];
     [self.countyRequest startRequestSuccess:^(FBRequest *request, id result) {
         
@@ -74,10 +84,14 @@ static NSString *const addressCell = @"addressCellCellId";
 }
 
 #pragma mark 获取街道
-- (void)thn_networkGetStreetData:(NSString *)street_id {
-    self.streetRequest = [FBAPI getWithUrlString:URLChinaCity requestDictionary:@{@"pid":street_id, @"layer":@"4"} delegate:self];
+- (void)thn_networkGetStreetData:(NSInteger)index {
+    NSString *county_id = self.countyIdMarr[index];
+    [self.addressIdMarr addObject:county_id];
+    NSString *county_name = self.countyMarr[index];
+    [self.addressNameMarr addObject:county_name];
+    
+    self.streetRequest = [FBAPI getWithUrlString:URLChinaCity requestDictionary:@{@"pid":county_id, @"layer":@"4"} delegate:self];
     [self.streetRequest startRequestSuccess:^(FBRequest *request, id result) {
-        
         [self thn_getNetworkDataResult:result city:self.streetMarr cityId:self.streetIdMarr];
         
     } failure:^(FBRequest *request, NSError *error) {
@@ -85,6 +99,25 @@ static NSString *const addressCell = @"addressCellCellId";
     }];
 }
 
+#pragma mark 街道获取完成
+- (void)thn_networkGetAddressIdDone:(NSInteger)index {
+    NSString *street_id = self.streetIdMarr[index];
+    [self.addressIdMarr addObject:street_id];
+    NSString *street_name = self.streetMarr[index];
+    [self.addressNameMarr addObject:street_name];
+    
+    [self dismissViewControllerAnimated:YES completion:^{
+        self.getChooseAddressId(self.addressIdMarr[0],
+                                self.addressIdMarr[1],
+                                self.addressIdMarr[2],
+                                self.addressIdMarr[3]);
+        
+        self.getChooseAddressName(self.addressNameMarr[0],
+                                  self.addressNameMarr[1],
+                                  self.addressNameMarr[2],
+                                  self.addressNameMarr[3]);
+    }];
+}
 
 /**
  保存地址数据
@@ -94,15 +127,36 @@ static NSString *const addressCell = @"addressCellCellId";
  @param cityId 地址id
  */
 - (void)thn_getNetworkDataResult:(id)result city:(NSMutableArray *)city cityId:(NSMutableArray *)cityId {
-    _nowSelectType += 1;
-    NSArray *modelArr = [[result valueForKey:@"data"] valueForKey:@"rows"];
-    for (NSDictionary *modelDict in modelArr) {
-        THNProvinceModel *model = [[THNProvinceModel alloc] initWithDictionary:modelDict];
-        [city addObject:model.cityName];
-        [cityId addObject:model.oid];
-        NSLog(@"========= %zi - %@ - %@", _nowSelectType, model.cityName, model.oid);
+    if (city.count) {
+        [city removeAllObjects];
+        [cityId removeAllObjects];
     }
-    [self.chooseCityTable reloadData];
+    _nowSelectType += 1;
+    if (_nowSelectType > 1) {
+        self.backButton.hidden = NO;
+    }
+    NSArray *modelArr = [[result valueForKey:@"data"] valueForKey:@"rows"];
+    if (modelArr.count == 0) {
+        [self dismissViewControllerAnimated:YES completion:^{
+            self.getChooseAddressId(self.addressIdMarr[0],
+                                    self.addressIdMarr[1],
+                                    self.addressIdMarr[2],
+                                    @"0");
+            
+            self.getChooseAddressName(self.addressNameMarr[0],
+                                      self.addressNameMarr[1],
+                                      self.addressNameMarr[2],
+                                      @"");
+        }];
+        
+    } else {
+        for (NSDictionary *modelDict in modelArr) {
+            THNProvinceModel *model = [[THNProvinceModel alloc] initWithDictionary:modelDict];
+            [city addObject:model.cityName];
+            [cityId addObject:model.oid];
+        }
+        [self.chooseCityTable reloadData];
+    }
 }
 
 #pragma mark - 设置视图
@@ -129,8 +183,22 @@ static NSString *const addressCell = @"addressCellCellId";
     if (!_backButton) {
         _backButton = [[UIButton alloc] initWithFrame:CGRectMake(10, 10, 20, 20)];
         [_backButton setImage:[UIImage imageNamed:@"icon_back_black"] forState:(UIControlStateNormal)];
+        [_backButton addTarget:self action:@selector(backButtonClick:) forControlEvents:(UIControlEventTouchUpInside)];
+        _backButton.hidden = YES;
     }
     return _backButton;
+}
+
+- (void)backButtonClick:(UIButton *)button {
+    _nowSelectType -= 1;
+    [self.addressIdMarr removeLastObject];
+    [self.addressNameMarr removeLastObject];
+    if (_nowSelectType <= 1) {
+        self.backButton.hidden = YES;
+        [self.addressIdMarr removeAllObjects];
+        [self.addressNameMarr removeAllObjects];
+    }
+    [self.chooseCityTable reloadData];
 }
 
 - (UILabel *)textLable {
@@ -210,16 +278,16 @@ static NSString *const addressCell = @"addressCellCellId";
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     switch (_nowSelectType) {
         case 1:
-            [self thn_networkGetCityData:self.provinceIdMarr[indexPath.row]];
+            [self thn_networkGetCityData:indexPath.row];
             break;
         case 2:
-            [self thn_networkGetCountyData:self.cityIdMarr[indexPath.row]];
+            [self thn_networkGetCountyData:indexPath.row];
             break;
         case 3:
-            [self thn_networkGetStreetData:self.countyIdMarr[indexPath.row]];
+            [self thn_networkGetStreetData:indexPath.row];
             break;
         case 4:
-            NSLog(@"===== 确定地址");
+            [self thn_networkGetAddressIdDone:indexPath.row];
             break;
             
         default:
@@ -284,9 +352,27 @@ static NSString *const addressCell = @"addressCellCellId";
     return _streetIdMarr;
 }
 
+- (NSMutableArray *)addressIdMarr {
+    if (!_addressIdMarr) {
+        _addressIdMarr = [NSMutableArray array];
+    }
+    return _addressIdMarr;
+}
+
+- (NSMutableArray *)addressNameMarr {
+    if (!_addressNameMarr) {
+        _addressNameMarr = [NSMutableArray array];
+    }
+    return _addressNameMarr;
+}
+
 #pragma mark - 触摸消失
 - (void)touchesEnded:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event {
-    [self dismissViewControllerAnimated:YES completion:nil];
+    UITouch *touch = [touches anyObject];
+    if (![touch.view isEqual:self.promptView]) {
+        [self dismissViewControllerAnimated:YES completion:nil];
+    }
+    
 }
 
 @end

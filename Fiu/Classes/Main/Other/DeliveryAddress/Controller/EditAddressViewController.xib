@@ -12,11 +12,9 @@
                 <outlet property="addressSwicth" destination="rq5-8U-t8k" id="bSq-z4-Nnx"/>
                 <outlet property="addressTF" destination="R69-qX-zaB" id="RIQ-tL-q6U"/>
                 <outlet property="bottomSpaceing" destination="FBB-fn-NMw" id="O4A-8j-A9J"/>
-                <outlet property="cityLabel" destination="sW5-Pq-9gR" id="bdS-hu-Ty8"/>
                 <outlet property="detailsAddressTF" destination="sKw-19-qwl" id="sw9-vd-3jt"/>
                 <outlet property="nameTF" destination="fN3-Ce-8OU" id="zP0-b5-sD0"/>
                 <outlet property="phoneNumTF" destination="t2r-Gd-ve5" id="C4k-QM-bg2"/>
-                <outlet property="prinLabel" destination="rEH-1t-yx9" id="VnT-qd-hFa"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
                 <outlet property="zipTF" destination="0yy-Kh-Ocv" id="7Nc-De-14T"/>
             </connections>
@@ -161,16 +159,6 @@
                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                     <textInputTraits key="textInputTraits"/>
                                 </textField>
-                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rEH-1t-yx9">
-                                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                    <nil key="highlightedColor"/>
-                                </label>
-                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sW5-Pq-9gR">
-                                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                    <nil key="highlightedColor"/>
-                                </label>
                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4WG-zG-ZcI">
                                     <connections>
                                         <action selector="clickAddressBtn:" destination="-1" eventType="touchUpInside" id="cEs-F5-Uql"/>
@@ -182,26 +170,18 @@
                             <constraints>
                                 <constraint firstAttribute="trailing" secondItem="R69-qX-zaB" secondAttribute="trailing" constant="20" id="1Ee-sv-uvB"/>
                                 <constraint firstAttribute="height" constant="44" id="2P1-pe-OVb"/>
-                                <constraint firstAttribute="bottom" secondItem="rEH-1t-yx9" secondAttribute="bottom" id="4r4-cp-liR"/>
                                 <constraint firstItem="4WG-zG-ZcI" firstAttribute="leading" secondItem="L5q-LQ-Wkh" secondAttribute="leading" id="8B5-ri-T3B"/>
                                 <constraint firstItem="R69-qX-zaB" firstAttribute="top" secondItem="L5q-LQ-Wkh" secondAttribute="top" id="DqW-Wj-6lv"/>
-                                <constraint firstItem="sW5-Pq-9gR" firstAttribute="top" secondItem="L5q-LQ-Wkh" secondAttribute="top" id="Dwt-Nr-k3f"/>
                                 <constraint firstItem="4WG-zG-ZcI" firstAttribute="top" secondItem="L5q-LQ-Wkh" secondAttribute="top" id="E0W-SX-Q4R"/>
-                                <constraint firstItem="4WG-zG-ZcI" firstAttribute="leading" secondItem="rEH-1t-yx9" secondAttribute="trailing" id="RSe-4h-7dR"/>
                                 <constraint firstItem="R69-qX-zaB" firstAttribute="leading" secondItem="L5q-LQ-Wkh" secondAttribute="leading" constant="20" id="TCb-Yn-TrN"/>
-                                <constraint firstItem="sW5-Pq-9gR" firstAttribute="leading" secondItem="rEH-1t-yx9" secondAttribute="trailing" constant="5" id="Vh1-iU-o6z"/>
-                                <constraint firstAttribute="bottom" secondItem="sW5-Pq-9gR" secondAttribute="bottom" id="fM4-Ul-jXv"/>
                                 <constraint firstAttribute="bottom" secondItem="4WG-zG-ZcI" secondAttribute="bottom" id="ffW-DA-f4I"/>
                                 <constraint firstAttribute="width" secondItem="L5q-LQ-Wkh" secondAttribute="height" multiplier="355:44" id="jVx-Sc-huq"/>
-                                <constraint firstItem="rEH-1t-yx9" firstAttribute="leading" secondItem="L5q-LQ-Wkh" secondAttribute="leading" constant="20" id="ldI-mh-ent"/>
                                 <constraint firstAttribute="bottom" secondItem="R69-qX-zaB" secondAttribute="bottom" id="q8f-pK-XZs"/>
-                                <constraint firstItem="rEH-1t-yx9" firstAttribute="top" secondItem="L5q-LQ-Wkh" secondAttribute="top" id="xue-aK-BiS"/>
                                 <constraint firstAttribute="trailing" secondItem="4WG-zG-ZcI" secondAttribute="trailing" id="yC8-Kw-KUS"/>
                             </constraints>
                             <variation key="default">
                                 <mask key="constraints">
                                     <exclude reference="2P1-pe-OVb"/>
-                                    <exclude reference="RSe-4h-7dR"/>
                                 </mask>
                             </variation>
                         </view>

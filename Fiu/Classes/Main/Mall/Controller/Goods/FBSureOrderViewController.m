@@ -21,7 +21,7 @@
 #import "PaySuccessViewController.h"
 
 static NSString *const URLBuying = @"/shopping/now_buy";
-static NSString *const URLUserAddress = @"/shopping/default_address";
+static NSString *const URLUserAddress = @"/delivery_address/defaulted";
 static NSString *const URLSureOrder = @"/shopping/confirm";
 static NSString *const URLCarGoPay = @"/shopping/checkout";
 
@@ -242,11 +242,7 @@ static NSString *const URLCarGoPay = @"/shopping/checkout";
     if (!_summaryText) {
         _summaryText = [[UITextField alloc] initWithFrame:CGRectMake(60, 5, SCREEN_WIDTH - 70, 44)];
         _summaryText.placeholder = NSLocalizedString(@"writeSummary", nil);
-        if (IS_iOS9) {
-            _summaryText.font = [UIFont fontWithName:@"PingFangSC-Light" size:14];
-        } else {
-            _summaryText.font = [UIFont systemFontOfSize:14];
-        }
+        _summaryText.font = [UIFont systemFontOfSize:14];
     }
     return _summaryText;
 }

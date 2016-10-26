@@ -24,8 +24,8 @@
 @property (weak, nonatomic) IBOutlet UILabel *tipLabel;
 @end
 
-static NSString *const AddressURL = @"/shopping/address";
-static NSString *const DeleteAddressURL = @"/shopping/remove_address";
+static NSString *const AddressURL = @"/delivery_address/get_list";
+static NSString *const DeleteAddressURL = @"/delivery_address/deleted";
 static NSString *const DeliveryAddressCellIdentifier = @"deliveryAddressCell";
 
 @implementation DeliveryAddressViewController
@@ -37,7 +37,7 @@ static NSString *const DeliveryAddressCellIdentifier = @"deliveryAddressCell";
     self.addressTableView.delegate = self;
     self.addressTableView.dataSource = self;
     self.addressTableView.rowHeight = 120;
-    // Do any additional setup after loading the view from its nib.
+    
     [self.addressTableView registerNib:[UINib nibWithNibName:@"DeliveryAddressCell" bundle:nil] forCellReuseIdentifier:DeliveryAddressCellIdentifier];
     
     [self.addAddressBtn addSubview:self.lineView];
@@ -70,7 +70,7 @@ static NSString *const DeliveryAddressCellIdentifier = @"deliveryAddressCell";
 //请求收货地址信息
 - (void)requestDataForAddress
 {
-    NSDictionary * params = @{@"page": @1, @"size": @50};
+    NSDictionary * params = @{@"page": @1, @"size": @1000};
     FBRequest * request = [FBAPI postWithUrlString:AddressURL requestDictionary:params delegate:self];
     request.flag = AddressURL;
     [request startRequest];
@@ -238,8 +238,6 @@ static NSString *const DeliveryAddressCellIdentifier = @"deliveryAddressCell";
     }
 }
 
-
-
 - (UITableViewCellEditingStyle)tableView:(UITableView *)tableView editingStyleForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     return UITableViewCellEditingStyleDelete;
@@ -249,21 +247,5 @@ static NSString *const DeliveryAddressCellIdentifier = @"deliveryAddressCell";
 {
     return @"删除";
 }
-
-
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
-}
-
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
 
 @end
