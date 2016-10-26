@@ -150,7 +150,7 @@ static NSString *const OrderDetailURL = @"/shopping/detail";
     }
     
     self.nameLbl.text = [NSString stringWithFormat:@"收货人：%@", self.expressInfo.name];
-    self.areaLbl.text = [NSString stringWithFormat:@"%@ %@", self.expressInfo.province, self.expressInfo.city];
+    self.areaLbl.text = [NSString stringWithFormat:@"%@ %@ %@ %@", self.expressInfo.provinceName, self.expressInfo.cityName, self.expressInfo.countyName, self.expressInfo.townName];
     self.addressLbl.text = self.expressInfo.address;
     self.phoneLbl.text = self.expressInfo.phone;
     
