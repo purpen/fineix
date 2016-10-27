@@ -30,5 +30,6 @@ typedef void(^GetEditContentAndTags)(NSString * title, NSString * des, NSMutable
 
 - (void)thn_setSceneTitle:(NSString *)title;
 - (void)getContentWithTags:(NSString *)content;
+- (void)thn_getActionDataTitle:(NSString *)title;
 
 @end

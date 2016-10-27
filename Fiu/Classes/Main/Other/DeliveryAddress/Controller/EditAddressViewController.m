@@ -94,14 +94,12 @@ static NSString * const FSPlacerholderColorKeyPath = @"_placeholderLabel.textCol
     chooseCityVC.modalPresentationStyle = UIModalPresentationOverCurrentContext;
     chooseCityVC.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;
     chooseCityVC.getChooseAddressId = ^(NSString *provinceId, NSString *cityId, NSString *countyId, NSString *streetId) {
-        NSLog(@"== %@ == %@ == %@ == %@", provinceId, cityId, countyId, streetId);
         _provinceId = provinceId;
         _cityId = cityId;
         _countyId = countyId;
         _townId = streetId;
     };
     chooseCityVC.getChooseAddressName = ^(NSString *provinceName, NSString *cityName, NSString *countyName, NSString *streetName) {
-        NSLog(@"== %@ == %@ == %@ == %@", provinceName, cityName, countyName, streetName);
         weakSelf.addressTF.text = [NSString stringWithFormat:@"%@ %@ %@ %@", provinceName, cityName, countyName, streetName];
     };
     [self presentViewController:chooseCityVC animated:YES completion:nil];

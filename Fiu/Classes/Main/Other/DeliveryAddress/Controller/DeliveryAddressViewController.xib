@@ -34,9 +34,9 @@
                 <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="none" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="Mhm-8V-DBp">
                     <color key="backgroundColor" red="0.96862745098039216" green="0.96862745098039216" blue="0.96862745098039216" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                 </tableView>
-                <imageView hidden="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="none_car" translatesAutoresizingMaskIntoConstraints="NO" id="Ygg-Xg-Pu9"/>
-                <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="你还没有收货地址" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zaa-B7-5XP">
-                    <frame key="frameInset" minX="128" minY="330" width="120" height="18"/>
+                <imageView hidden="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="icon_add_address" translatesAutoresizingMaskIntoConstraints="NO" id="Ygg-Xg-Pu9"/>
+                <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="完善收货地址，您的好货才能快速送达哦～" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zaa-B7-5XP">
+                    <frame key="frameInset" minX="43" minY="330" width="291" height="18"/>
                     <fontDescription key="fontDescription" type="system" pointSize="15"/>
                     <color key="textColor" red="0.62745098039215685" green="0.62745098039215685" blue="0.62745098039215685" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     <nil key="highlightedColor"/>
@@ -56,9 +56,10 @@
                 <constraint firstItem="Ygg-Xg-Pu9" firstAttribute="centerY" secondItem="i5M-Pr-FkT" secondAttribute="centerY" constant="-50" id="ud3-an-AnT"/>
                 <constraint firstAttribute="trailing" secondItem="rpd-8R-x4p" secondAttribute="trailing" id="utS-C3-Dad"/>
             </constraints>
+            <point key="canvasLocation" x="34.5" y="88.5"/>
         </view>
     </objects>
     <resources>
-        <image name="none_car" width="72" height="72"/>
+        <image name="icon_add_address" width="72" height="72"/>
     </resources>
 </document>

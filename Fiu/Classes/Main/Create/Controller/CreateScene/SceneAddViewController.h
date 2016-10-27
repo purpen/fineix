@@ -39,6 +39,10 @@
  *  标题／价格／坐标
  */
 @pro_strong NSMutableArray      *   popData;
+
+/** 活动ID */
 @pro_strong NSString *actionId;
+/** 活动标题 */
+@pro_strong NSString *activeTitle;
 
 @end

@@ -13,68 +13,71 @@
 - (instancetype)initWithFrame:(CGRect)frame {
     self = [super initWithFrame:frame];
     if (self) {
-        
         self.backgroundColor = [UIColor colorWithHexString:grayLineColor];
-        
-        [self addSubview:self.goHomeBtn];
-        [_goHomeBtn mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.size.mas_equalTo(CGSizeMake(150, 44));
-            make.centerY.equalTo(self);
-            make.centerX.equalTo(self);
-        }];
-        
-        [self addSubview:self.promptLab];
-        [_promptLab mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.size.mas_equalTo(CGSizeMake(SCREEN_WIDTH, 13));
-            make.bottom.equalTo(_goHomeBtn.mas_top).with.offset(-20);
-            make.centerX.equalTo(self);
-        }];
-        
-        [self addSubview:self.carImg];
-        [_carImg mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.size.mas_equalTo(CGSizeMake(72.5, 72.5));
-            make.bottom.equalTo(_promptLab.mas_top).with.offset(-20);
-            make.centerX.equalTo(self);
-        }];
-    
+        [self setViewUI];
     }
     return self;
 }
 
-- (UIImageView *)carImg {
-    if (!_carImg) {
-        _carImg = [[UIImageView alloc] init];
-        _carImg.image = [UIImage imageNamed:@"shopcarbig"];
-        _carImg.layer.masksToBounds = YES;
-        _carImg.layer.cornerRadius = 72.5 /2;
-        
+- (void)thn_setDefaultViewImage:(NSString *)imageName promptText:(NSString *)promptText showButton:(BOOL)isShowButton {
+    self.defaultImg.image = [UIImage imageNamed:imageName];
+    self.promptLab.text = promptText;
+    self.defaultBtn.hidden = isShowButton;
+}
+
+- (void)setViewUI {
+    [self addSubview:self.defaultBtn];
+    [_defaultBtn mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.size.mas_equalTo(CGSizeMake(150, 44));
+        make.centerY.equalTo(self);
+        make.centerX.equalTo(self);
+    }];
+    
+    [self addSubview:self.promptLab];
+    [_promptLab mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.size.mas_equalTo(CGSizeMake(SCREEN_WIDTH, 13));
+        make.bottom.equalTo(_defaultBtn.mas_top).with.offset(-20);
+        make.centerX.equalTo(self);
+    }];
+    
+    [self addSubview:self.defaultImg];
+    [_defaultImg mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.size.mas_equalTo(CGSizeMake(72.5, 72.5));
+        make.bottom.equalTo(_promptLab.mas_top).with.offset(-20);
+        make.centerX.equalTo(self);
+    }];
+}
+
+- (UIImageView *)defaultImg {
+    if (!_defaultImg) {
+        _defaultImg = [[UIImageView alloc] init];
+        _defaultImg.layer.masksToBounds = YES;
+        _defaultImg.layer.cornerRadius = 72.5 /2;
     }
-    return _carImg;
+    return _defaultImg;
 }
 
 - (UILabel *)promptLab {
     if (!_promptLab) {
         _promptLab = [[UILabel alloc] init];
-        _promptLab.text = NSLocalizedString(@"NoGoods", nil);
         _promptLab.textColor = [UIColor colorWithHexString:titleColor];
         _promptLab.font = [UIFont systemFontOfSize:12];
         _promptLab.textAlignment = NSTextAlignmentCenter;
-        
     }
     return _promptLab;
 }
 
-- (UIButton *)goHomeBtn {
-    if (!_goHomeBtn) {
-        _goHomeBtn = [[UIButton alloc] init];
-        _goHomeBtn.backgroundColor = [UIColor colorWithHexString:@"#000000"];
-        [_goHomeBtn setTitle:NSLocalizedString(@"goLookGoods", nil) forState:(UIControlStateNormal)];
-        [_goHomeBtn setTitleColor:[UIColor whiteColor] forState:(UIControlStateNormal)];
-        _goHomeBtn.titleLabel.font = [UIFont systemFontOfSize:16];
-        _goHomeBtn.layer.cornerRadius = 4;
-        [_goHomeBtn addTarget:self action:@selector(goHomeBtnClick) forControlEvents:(UIControlEventTouchUpInside)];
+- (UIButton *)defaultBtn {
+    if (!_defaultBtn) {
+        _defaultBtn = [[UIButton alloc] init];
+        _defaultBtn.backgroundColor = [UIColor colorWithHexString:@"#000000"];
+        [_defaultBtn setTitle:NSLocalizedString(@"goLookGoods", nil) forState:(UIControlStateNormal)];
+        [_defaultBtn setTitleColor:[UIColor whiteColor] forState:(UIControlStateNormal)];
+        _defaultBtn.titleLabel.font = [UIFont systemFontOfSize:16];
+        _defaultBtn.layer.cornerRadius = 4;
+        [_defaultBtn addTarget:self action:@selector(goHomeBtnClick) forControlEvents:(UIControlEventTouchUpInside)];
     }
-    return _goHomeBtn;
+    return _defaultBtn;
 }
 
 - (void)goHomeBtnClick {

@@ -24,6 +24,7 @@
     if (content.length == 0) {
         self.rightBarItem.hidden = YES;
     } else {
+        self.rightBarItem.hidden = NO;
         [self.rightBarItem setTitle:[NSString stringWithFormat:@"#%@ ", content] forState:(UIControlStateNormal)];
     }
 }
@@ -49,7 +50,7 @@
     if (!_rightBarItem) {
         _rightBarItem = [[UIButton alloc] initWithFrame:CGRectMake(SCREEN_WIDTH - 210, 0, 200, 44)];
         [_rightBarItem setTitleColor:[UIColor colorWithHexString:@"#666666"] forState:(UIControlStateNormal)];
-        _rightBarItem.titleLabel.font = [UIFont systemFontOfSize:14];
+        _rightBarItem.titleLabel.font = [UIFont systemFontOfSize:12];
         _rightBarItem.contentHorizontalAlignment = UIControlContentHorizontalAlignmentRight;
         [_rightBarItem addTarget:self action:@selector(rightBarItemClick:) forControlEvents:(UIControlEventTouchUpInside)];
     }
@@ -59,6 +60,7 @@
 - (void)rightBarItemClick:(UIButton *)button {
     if ([self.thn_delegate respondsToSelector:@selector(thn_keyboardRightBarItemAction:)]) {
         [self.thn_delegate thn_keyboardRightBarItemAction:button.titleLabel.text];
+        button.hidden = YES;
     }
 }
 

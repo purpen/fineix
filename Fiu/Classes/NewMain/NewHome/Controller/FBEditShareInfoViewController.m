@@ -47,7 +47,13 @@ static NSString *const URLActionTags = @"/scene_sight/stick_active_tags";
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-//    [self networkActionTagData];
+    
+    if (self.actionTitle.length == 0) {
+        [self networkActionTagData];
+    } else if (self.actionTitle.length > 0 && [self.desText.text isEqualToString:NSLocalizedString(@"addDescription", nil)]) {
+        self.desText.text = [NSString stringWithFormat:@"#%@ ", self.actionTitle];
+    }
+    
     [self networkSceneContentCategory];
     _categoryId = @"0";
     self.listCurrentpageNum = 0;
@@ -313,7 +319,6 @@ static NSString *const URLActionTags = @"/scene_sight/stick_active_tags";
     if (!_keyboardToolbar) {
         _keyboardToolbar = [[FBKeyboradToolbar alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 44)];
         _keyboardToolbar.thn_delegate = self;
-        _keyboardToolbar.rightBarItem.hidden = YES;
     }
     return _keyboardToolbar;
 }

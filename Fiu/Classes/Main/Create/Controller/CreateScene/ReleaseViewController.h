@@ -31,7 +31,10 @@
 @pro_strong AddLocationView     *   addLocaiton;
 @pro_strong AddContentView      *   addContent;
 @pro_strong FBPopupView         *   sharePopView;
+/** 活动ID */
 @pro_strong NSString *actionId;
+/** 活动标题 */
+@pro_strong NSString *activeTitle;
 
 /**
  发布／编辑情境

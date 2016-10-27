@@ -13,6 +13,7 @@
 @interface AddContentView () {
     NSString *_titleStr;
     NSString *_suTitleStr;
+    NSString *_actionTitle;
     UITapGestureRecognizer * _tap;
 }
 
@@ -27,6 +28,10 @@
         [self setViewUI];
     }
     return self;
+}
+
+- (void)thn_getActionDataTitle:(NSString *)title {
+    _actionTitle = title;
 }
 
 #pragma mark - 
@@ -97,7 +102,7 @@
 }
 
 - (void)goChooseText {
-    FBEditShareInfoViewController * chooseTextVC = [[FBEditShareInfoViewController alloc] init];
+    FBEditShareInfoViewController *chooseTextVC = [[FBEditShareInfoViewController alloc] init];
     NSString *title = [self.title.text stringByReplacingOccurrencesOfString:@" " withString:@""];
     NSString *suTitle = [self.suTitle.text stringByReplacingOccurrencesOfString:@" " withString:@""];;
     if (title.length == 0) {
@@ -108,6 +113,7 @@
     }
     chooseTextVC.titleText.text = [NSString stringWithFormat:@"%@%@", title, suTitle];
     chooseTextVC.desText.text = self.content.text;
+    chooseTextVC.actionTitle = _actionTitle;
     chooseTextVC.modalPresentationStyle = UIModalPresentationOverCurrentContext;
     [self.vc presentViewController:chooseTextVC animated:YES completion:^{
         chooseTextVC.getEdtiShareText = ^ (NSString *title, NSString *des, NSMutableArray *tagS) {

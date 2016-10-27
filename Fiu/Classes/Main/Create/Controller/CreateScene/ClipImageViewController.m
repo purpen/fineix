@@ -71,6 +71,7 @@
     SceneAddViewController *addVC = [[SceneAddViewController alloc] init];
     addVC.filtersImg = self.clipImageView.capture;
     addVC.actionId = self.actionId;
+    addVC.activeTitle = self.activeTitle;
     [self.navigationController pushViewController:addVC animated:YES];
 }
 

@@ -141,7 +141,6 @@ static NSString *const URLReleaseFiuScenen = @"/scene_scene/save";
     [self.releaseSceneRequest startRequestSuccess:^(FBRequest *request, id result) {
         if ([[result valueForKey:@"success"] isEqualToNumber:@1]) {
             if (sceneId.length) {
-//                [[NSNotificationCenter defaultCenter] postNotificationName:@"editSceneDone" object:sceneId];
                 [self dismissViewControllerAnimated:YES completion:^{
                     [SVProgressHUD showSuccessWithStatus:@"编辑成功"];
                 }];
@@ -183,6 +182,9 @@ static NSString *const URLReleaseFiuScenen = @"/scene_scene/save";
         _addContent = [[AddContentView alloc] init];
         _addContent.vc = self;
         _addContent.sceneImgView.image = self.bgImg;
+        if (self.actionId.length) {
+            [_addContent thn_getActionDataTitle:self.activeTitle];
+        }
     }
     return _addContent;
 }

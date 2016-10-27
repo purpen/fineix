@@ -40,6 +40,4 @@
 #define kLocalKeyUUID         @"FB__UUID__"
 
 #define WEAKSELF  __weak __typeof(self)weakSelf = self;
-
-
 #endif /* FBConfig_h */

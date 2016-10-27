@@ -32,6 +32,7 @@ static NSString *const DeliveryAddressCellIdentifier = @"deliveryAddressCell";
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
     self.delegate = self;
     self.navViewTitle.text = @"收货地址";
     self.addressTableView.delegate = self;
@@ -57,7 +58,6 @@ static NSString *const DeliveryAddressCellIdentifier = @"deliveryAddressCell";
     }
     return _lineView;
 }
-
 
 - (void)viewWillAppear:(BOOL)animated
 {
@@ -103,6 +103,8 @@ static NSString *const DeliveryAddressCellIdentifier = @"deliveryAddressCell";
             }
             [self.addressTableView reloadData];
             if (self.addressAry.count == 0) {
+                [self thn_setFirstAppStart];
+                
                 self.bgImageView.hidden = NO;
                 self.tipLabel.hidden = NO;
             }else{
@@ -246,6 +248,19 @@ static NSString *const DeliveryAddressCellIdentifier = @"deliveryAddressCell";
 - (NSString *)tableView:(UITableView *)tableView titleForDeleteConfirmationButtonForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     return @"删除";
+}
+
+#pragma mark - 首次打开加载提示
+- (void)thn_setFirstAppStart {
+    if(![USERDEFAULT boolForKey:@"UserNewAddress"]){
+        [USERDEFAULT setBool:YES forKey:@"UserNewAddress"];
+        TYAlertView * alertView = [TYAlertView alertViewWithTitle:@"收货地址更新" message:@"为了保证您的好货快速送达，快来添加更精准的收货地址吧～"];
+        TYAlertAction * confirm = [TYAlertAction actionWithTitle:@"确定" style:TYAlertActionStyleDefault handler:^(TYAlertAction * action) {
+
+        }];
+        [alertView addAction:confirm];
+        [alertView showInWindowWithBackgoundTapDismissEnable:YES];
+    }
 }
 
 @end

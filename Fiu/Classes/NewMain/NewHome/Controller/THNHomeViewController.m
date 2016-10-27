@@ -39,7 +39,7 @@
 
 static NSString *const URLBannerSlide = @"/gateway/slide";
 static NSString *const URLSceneList = @"/scene_sight/";
-static NSString *const URLSubject = @"/scene_subject/getlist";
+static NSString *const URLSubject = @"/scene_subject/index_subject_stick";
 static NSString *const URLSubjectView = @"/scene_subject/view";
 static NSString *const URLLikeScene = @"/favorite/ajax_love";
 static NSString *const URLCancelLike = @"/favorite/ajax_cancel_love";

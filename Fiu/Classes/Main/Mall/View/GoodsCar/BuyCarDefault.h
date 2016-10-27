@@ -11,10 +11,18 @@
 
 @interface BuyCarDefault : UIView
 
-@pro_strong UINavigationController      *   nav;
+@pro_strong UINavigationController *nav;
+@pro_strong UIImageView *defaultImg;
+@pro_strong UILabel *promptLab;
+@pro_strong UIButton *defaultBtn;
 
-@pro_strong UIImageView           *       carImg;
-@pro_strong UILabel               *       promptLab;
-@pro_strong UIButton              *       goHomeBtn;
+/**
+ 设置默认提示视图
+
+ @param imageName  提示图片
+ @param promptText 提示文字
+ @param isShowButton 显示按钮
+ */
+- (void)thn_setDefaultViewImage:(NSString *)imageName promptText:(NSString *)promptText showButton:(BOOL)isShowButton;
 
 @end

@@ -54,5 +54,6 @@ typedef void(^GetEditShareText)(NSString * title, NSString * des, NSMutableArray
 @pro_strong UITableView         *   shareTextTable;
 @pro_strong UIButton            *   cancelSearchBtn;
 @pro_strong GetEditShareText        getEdtiShareText;
+@pro_strong NSString            *   actionTitle;
 
 @end

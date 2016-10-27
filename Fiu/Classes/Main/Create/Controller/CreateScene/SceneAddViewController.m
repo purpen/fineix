@@ -413,8 +413,9 @@ static NSString *const URLUserAddBrand = @"/scene_brands/submit";
             }
     
             ReleaseViewController * releaseVC = [[ReleaseViewController alloc] init];
-            releaseVC.bgImg = [self generateImage:self.filtersImageView];
             releaseVC.actionId = self.actionId;
+            releaseVC.activeTitle = self.activeTitle;
+            releaseVC.bgImg = [self generateImage:self.filtersImageView];
             releaseVC.goodsType = self.goodsTypeData;
             releaseVC.goodsTitle = self.goodsTitleData;
             releaseVC.goodsId = self.goodsIdData;

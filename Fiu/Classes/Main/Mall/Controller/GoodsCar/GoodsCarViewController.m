@@ -260,6 +260,7 @@ static NSString *const URLEditItemsNum = @"/shopping/edit_cart";
     if (!_defaultCarView) {
         _defaultCarView = [[BuyCarDefault alloc] initWithFrame:CGRectMake(0, 64, SCREEN_WIDTH, SCREEN_HEIGHT - 64)];
         _defaultCarView.nav = self.navigationController;
+        [_defaultCarView thn_setDefaultViewImage:@"shopcarbig" promptText:NSLocalizedString(@"NoGoods", nil) showButton:NO];
     }
     return _defaultCarView;
 }
