@@ -29,8 +29,19 @@
         self.selectionStyle = UITableViewCellSelectionStyleNone;
         self.backgroundColor = [UIColor whiteColor];
         [self setCellUI];
+        
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(refreshSceneListData:) name:@"refreshSceneData" object:nil];
     }
     return self;
+}
+
+#pragma mark - 刷新用户状态
+- (void)refreshSceneListData:(NSNotification *)notification {
+    if (_isLogin == YES) {
+        _isLogin = NO;
+    } else if (_isLogin == NO) {
+        _isLogin = YES;
+    }
 }
 
 #pragma mark - setModel;
@@ -231,6 +242,10 @@
         UINavigationController * navi = [[UINavigationController alloc] initWithRootViewController:loginSignupVC];
         [self.vc presentViewController:navi animated:YES completion:nil];
     }
+}
+
+- (void)dealloc {
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:@"refreshSceneData" object:nil];
 }
 
 @end

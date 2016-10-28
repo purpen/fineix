@@ -147,6 +147,8 @@ static NSString *const thirdRegister = @"/auth/third_sign";//第三方登录接�
                     THNRedEnvelopeView *alartView = [[THNRedEnvelopeView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT)];
                     [alartView thn_showRedEnvelopeViewOnWindowWithText:NSLocalizedString(@"SendOldRed", nil)];
                 }
+                
+                [[NSNotificationCenter defaultCenter] postNotificationName:@"refreshSceneData" object:nil];
             }];
         }
     } failure:^(FBRequest *request, NSError *error) {
@@ -212,6 +214,7 @@ static NSString *const thirdRegister = @"/auth/third_sign";//第三方登录接�
                         THNRedEnvelopeView *alartView = [[THNRedEnvelopeView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT)];
                         [alartView thn_showRedEnvelopeViewOnWindowWithText:NSLocalizedString(@"SendOldRed", nil)];
                     }
+                    [[NSNotificationCenter defaultCenter] postNotificationName:@"refreshSceneData" object:nil];
                 }];
             }
         }else{

@@ -92,6 +92,7 @@ static NSString *const allCommentsCellId = @"AllCommentsCellId";
     [self setHotUserListData];
     [self thn_registerNSNotification];
     [self thn_netWorkGroup];
+
 }
 
 #pragma mark - 推送通知

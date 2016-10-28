@@ -253,6 +253,7 @@ static NSString *const logOut = @"/auth/logout";
         entity.isLogin = NO;
         [entity clear];
         [UserInfo clearTable];
+        [[NSNotificationCenter defaultCenter] postNotificationName:@"refreshSceneData" object:nil];
         [SVProgressHUD showSuccessWithStatus:@"登出成功"];
         //回到首页
         //圆点消失

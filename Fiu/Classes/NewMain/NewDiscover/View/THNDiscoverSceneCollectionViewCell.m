@@ -27,8 +27,19 @@
     self = [super initWithFrame:frame];
     if (self) {
         [self setViewUI];
+        
+         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(refreshSceneListData:) name:@"refreshSceneData" object:nil];
     }
     return self;
+}
+
+#pragma mark - 刷新用户状态
+- (void)refreshSceneListData:(NSNotification *)notification {
+    if (_isLogin == YES) {
+        _isLogin = NO;
+    } else if (_isLogin == NO) {
+        _isLogin = YES;
+    }
 }
 
 - (void)thn_setSceneUserInfoData:(HomeSceneListRow *)sceneModel isLogin:(BOOL)login {
@@ -252,5 +263,10 @@
         [self.vc presentViewController:navi animated:YES completion:nil];
     }
 }
+
+- (void)dealloc {
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:@"refreshSceneData" object:nil];
+}
+
 
 @end

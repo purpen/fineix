@@ -199,6 +199,7 @@
                                                                                                   @"type":@1
                                                                                                   } delegate:self];
     [request startRequestSuccess:^(FBRequest *request, id result) {
+        [[NSNotificationCenter defaultCenter] postNotificationName:@"refreshSceneData" object:nil];
         [self dismissViewControllerAnimated:YES completion:nil];
     } failure:^(FBRequest *request, NSError *error) {
         [self dismissViewControllerAnimated:YES completion:nil];

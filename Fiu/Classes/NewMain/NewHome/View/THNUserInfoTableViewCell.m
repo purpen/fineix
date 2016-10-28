@@ -32,8 +32,19 @@ static NSString *const hotUserCellId = @"HotUserCellId";
         self.backgroundColor = [UIColor colorWithHexString:@"#222222"];
         self.clipsToBounds = YES;
         [self setCellUI];
+        
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(refreshSceneListData:) name:@"refreshSceneData" object:nil];
     }
     return self;
+}
+
+#pragma mark - 刷新用户状态
+- (void)refreshSceneListData:(NSNotification *)notification {
+    if (_isLogin == YES) {
+        _isLogin = NO;
+    } else if (_isLogin == NO) {
+        _isLogin = YES;
+    }
 }
 
 -(void)setModel:(HomeSceneListRow *)userModel{
@@ -313,6 +324,10 @@ static NSString *const hotUserCellId = @"HotUserCellId";
 
 - (void)addressClick:(UIButton *)button {
 //    [SVProgressHUD showSuccessWithStatus:@"打开情景地图"];
+}
+
+- (void)dealloc {
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:@"refreshSceneData" object:nil];
 }
 
 @end

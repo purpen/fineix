@@ -254,7 +254,7 @@ static NSString *const DeliveryAddressCellIdentifier = @"deliveryAddressCell";
 - (void)thn_setFirstAppStart {
     if(![USERDEFAULT boolForKey:@"UserNewAddress"]){
         [USERDEFAULT setBool:YES forKey:@"UserNewAddress"];
-        TYAlertView * alertView = [TYAlertView alertViewWithTitle:@"收货地址更新" message:@"为了保证您的好货快速送达，快来添加更精准的收货地址吧～"];
+        TYAlertView * alertView = [TYAlertView alertViewWithTitle:@"收货地址更新" message:@"地址管理优化啦，快来填写一个新地址试试吧。"];
         TYAlertAction * confirm = [TYAlertAction actionWithTitle:@"确定" style:TYAlertActionStyleDefault handler:^(TYAlertAction * action) {
 
         }];
