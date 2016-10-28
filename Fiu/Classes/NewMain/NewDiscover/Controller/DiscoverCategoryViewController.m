@@ -11,6 +11,7 @@
 #import "HomeSceneListRow.h"
 #import "THNSceneListViewController.h"
 #import "THNSceneDetalViewController.h"
+#import "THNLoginRegisterViewController.h"
 
 static NSString *const URLSubCount = @"/auth/user";
 static NSString *const URLAddTheme = @"/my/add_interest_scene_id";
@@ -282,31 +283,38 @@ static NSString *const URLCancelLike = @"/favorite/ajax_cancel_love";
 }
 
 - (void)subscribeBtnClick:(UIButton *)button {
-    if (button.selected == NO) {
-        button.selected = YES;
-        POPSpringAnimation *scaleAnimation = [POPSpringAnimation animationWithPropertyNamed:kPOPLayerScaleXY];
-        scaleAnimation.fromValue = [NSValue valueWithCGSize:CGSizeMake(0.5, 0.5)];
-        scaleAnimation.toValue = [NSValue valueWithCGSize:CGSizeMake(1.0, 1.0)];
-        scaleAnimation.springBounciness = 10.f;
-        scaleAnimation.springSpeed = 10.0f;
-        [button.layer pop_addAnimation:scaleAnimation forKey:@"scaleAnim"];
-        button.layer.borderColor = [UIColor colorWithHexString:MAIN_COLOR].CGColor;
-        button.backgroundColor = [UIColor colorWithHexString:MAIN_COLOR];
-        
-        [self thn_AddOrRemThemeData:1];
-        
-    } else if (button.selected == YES) {
-        button.selected = NO;
-        POPSpringAnimation *scaleAnimation = [POPSpringAnimation animationWithPropertyNamed:kPOPLayerScaleXY];
-        scaleAnimation.fromValue = [NSValue valueWithCGSize:CGSizeMake(0.5, 0.5)];
-        scaleAnimation.toValue = [NSValue valueWithCGSize:CGSizeMake(1.0, 1.0)];
-        scaleAnimation.springBounciness = 10.f;
-        scaleAnimation.springSpeed = 10.0f;
-        [button.layer pop_addAnimation:scaleAnimation forKey:@"scaleAnim"];
-        button.layer.borderColor = [UIColor colorWithHexString:WHITE_COLOR alpha:0.6].CGColor;
-        button.backgroundColor = [UIColor colorWithHexString:BLACK_COLOR];
-        
-        [self thn_AddOrRemThemeData:2];
+    if ([self isUserLogin]) {
+        if (button.selected == NO) {
+            button.selected = YES;
+            POPSpringAnimation *scaleAnimation = [POPSpringAnimation animationWithPropertyNamed:kPOPLayerScaleXY];
+            scaleAnimation.fromValue = [NSValue valueWithCGSize:CGSizeMake(0.5, 0.5)];
+            scaleAnimation.toValue = [NSValue valueWithCGSize:CGSizeMake(1.0, 1.0)];
+            scaleAnimation.springBounciness = 10.f;
+            scaleAnimation.springSpeed = 10.0f;
+            [button.layer pop_addAnimation:scaleAnimation forKey:@"scaleAnim"];
+            button.layer.borderColor = [UIColor colorWithHexString:MAIN_COLOR].CGColor;
+            button.backgroundColor = [UIColor colorWithHexString:MAIN_COLOR];
+            
+            [self thn_AddOrRemThemeData:1];
+            
+        } else if (button.selected == YES) {
+            button.selected = NO;
+            POPSpringAnimation *scaleAnimation = [POPSpringAnimation animationWithPropertyNamed:kPOPLayerScaleXY];
+            scaleAnimation.fromValue = [NSValue valueWithCGSize:CGSizeMake(0.5, 0.5)];
+            scaleAnimation.toValue = [NSValue valueWithCGSize:CGSizeMake(1.0, 1.0)];
+            scaleAnimation.springBounciness = 10.f;
+            scaleAnimation.springSpeed = 10.0f;
+            [button.layer pop_addAnimation:scaleAnimation forKey:@"scaleAnim"];
+            button.layer.borderColor = [UIColor colorWithHexString:WHITE_COLOR alpha:0.6].CGColor;
+            button.backgroundColor = [UIColor colorWithHexString:BLACK_COLOR];
+            
+            [self thn_AddOrRemThemeData:2];
+        }
+    
+    } else {
+        THNLoginRegisterViewController * loginSignupVC = [[THNLoginRegisterViewController alloc] init];
+        UINavigationController * navi = [[UINavigationController alloc] initWithRootViewController:loginSignupVC];
+        [self presentViewController:navi animated:YES completion:nil];
     }
 }
 

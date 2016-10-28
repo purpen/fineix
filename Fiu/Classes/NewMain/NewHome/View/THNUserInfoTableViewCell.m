@@ -271,8 +271,8 @@ static NSString *const hotUserCellId = @"HotUserCellId";
             scaleAnimation.springBounciness = 10.f;
             scaleAnimation.springSpeed = 10.0f;
             [button.layer pop_addAnimation:scaleAnimation forKey:@"scaleAnim"];
-            button.layer.borderColor = [UIColor colorWithHexString:MAIN_COLOR].CGColor;
-            button.backgroundColor = [UIColor colorWithHexString:MAIN_COLOR];
+//            button.layer.borderColor = [UIColor colorWithHexString:MAIN_COLOR].CGColor;
+//            button.backgroundColor = [UIColor colorWithHexString:MAIN_COLOR];
             
             self.beginFollowTheUserBlock(_userId);
             
@@ -284,8 +284,8 @@ static NSString *const hotUserCellId = @"HotUserCellId";
             scaleAnimation.springBounciness = 10.f;
             scaleAnimation.springSpeed = 10.0f;
             [button.layer pop_addAnimation:scaleAnimation forKey:@"scaleAnim"];
-            button.layer.borderColor = [UIColor colorWithHexString:WHITE_COLOR alpha:0.6].CGColor;
-            button.backgroundColor = [UIColor colorWithHexString:@"#222222"];
+//            button.layer.borderColor = [UIColor colorWithHexString:WHITE_COLOR alpha:0.6].CGColor;
+//            button.backgroundColor = [UIColor colorWithHexString:@"#222222"];
             
             self.cancelFollowTheUserBlock(_userId);
         }
