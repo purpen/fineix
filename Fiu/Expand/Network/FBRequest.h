@@ -264,13 +264,13 @@ typedef enum : NSUInteger {
  *
  *  @return 网络操作句柄
  */
-+ (AFHTTPRequestOperation *)GET:(NSString *)URLString
++ (NSURLSessionDataTask *)GET:(NSString *)URLString
                      parameters:(id)parameters
                 timeoutInterval:(NSNumber *)timeInterval
                     requestType:(AFNetworkingRequestType)requestType
                    responseType:(AFNetworkingResponseType)responseType
-                        success:(void (^)(AFHTTPRequestOperation *operation, id responseObject))success
-                        failure:(void (^)(AFHTTPRequestOperation *operation, NSError *error))failure;
+                        success:(void (^)(NSURLSessionTask *operation, id responseObject))success
+                        failure:(void (^)(NSURLSessionTask *operation, NSError *error))failure;
 
 
 /**
@@ -286,13 +286,13 @@ typedef enum : NSUInteger {
  *
  *  @return 网络操作句柄
  */
-+ (AFHTTPRequestOperation *)POST:(NSString *)URLString
++ (NSURLSessionDataTask *)POST:(NSString *)URLString
                       parameters:(id)parameters
                  timeoutInterval:(NSNumber *)timeInterval
                      requestType:(AFNetworkingRequestType)requestType
                     responseType:(AFNetworkingResponseType)responseType
-                         success:(void (^)(AFHTTPRequestOperation *operation, id responseObject))success
-                         failure:(void (^)(AFHTTPRequestOperation *operation, NSError *error))failure;
+                         success:(void (^)(NSURLSessionTask *operation, id responseObject))success
+                         failure:(void (^)(NSURLSessionTask *operation, NSError *error))failure;
 
 
 /**
@@ -309,14 +309,14 @@ typedef enum : NSUInteger {
  *
  *  @return 网络操作句柄
  */
-+ (AFHTTPRequestOperation *)UploadDataWithUrlString:(NSString *)URLString
++ (NSURLSessionDataTask *)UploadDataWithUrlString:(NSString *)URLString
                                          parameters:(id)parameters
                                     timeoutInterval:(NSNumber *)timeInterval
                                         requestType:(AFNetworkingRequestType)requestType
                                        responseType:(AFNetworkingResponseType)responseType
                           constructingBodyWithBlock:(void (^)(id <AFMultipartFormData> formData))block
-                                            success:(void (^)(AFHTTPRequestOperation *operation, id responseObject))success
-                                            failure:(void (^)(AFHTTPRequestOperation *operation, NSError *error))failure;
+                                            success:(void (^)(NSURLSessionTask *operation, id responseObject))success
+                                            failure:(void (^)(NSURLSessionTask *operation, NSError *error))failure;
 
 @end
 

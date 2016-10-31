@@ -92,14 +92,27 @@ static NSString * const JDPayUrl = @"/shopping/payed";
     
     
     //通过AFN提交参数
-    AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager  manager];
+    AFHTTPSessionManager *manager = [AFHTTPSessionManager  manager];
     manager.responseSerializer.acceptableContentTypes = [NSSet setWithObjects:@"text/html",@"text/javascript",nil];
     manager.responseSerializer = [AFHTTPResponseSerializer serializer];
-    [manager POST:self.model.url parameters:formDic success:^(AFHTTPRequestOperation *operation,id responseObject) {
+    
+//    [manager POST:self.model.url parameters:formDic success:^(AFHTTPRequestOperation *operation,id responseObject) {
+//        NSString *htmlstring = [[NSString alloc] initWithData:responseObject encoding:NSUTF8StringEncoding];
+//        //将第二次请求出来的html字符串加载到webview
+//        [self.jdPayWenView loadHTMLString:htmlstring baseURL:[NSURL URLWithString:self.model.url]];
+//    } failure:^(AFHTTPRequestOperation *operation,NSError *error) {
+//    }];
+    
+    [manager POST:self.model.url parameters:formDic progress:^(NSProgress * _Nonnull uploadProgress) {
+        
+    } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+        
         NSString *htmlstring = [[NSString alloc] initWithData:responseObject encoding:NSUTF8StringEncoding];
         //将第二次请求出来的html字符串加载到webview
         [self.jdPayWenView loadHTMLString:htmlstring baseURL:[NSURL URLWithString:self.model.url]];
-    } failure:^(AFHTTPRequestOperation *operation,NSError *error) {
+        
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        
     }];
 }
 

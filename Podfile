@@ -2,7 +2,7 @@ platform :ios, '8.0'
 inhibit_all_warnings!
 
 target "Fiu" do
- pod "AFNetworking", "~> 2.0"
+ pod "AFNetworking", "~> 3.0"
  pod 'SDWebImage', '~> 3.7.1'
  pod 'FMDB', '~> 2.4'
  pod 'MJRefresh', '~> 3.0.2'

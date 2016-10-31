@@ -24,17 +24,17 @@ typedef enum : NSUInteger {
 /**
  *  网络状态的监测 + 是否可以发送通知消息
  */
-static AFHTTPRequestOperationManager *_managerReachability = nil;
+static AFHTTPSessionManager          *_managerReachability = nil;
 static BOOL                           _canSendMessage      = YES;
 
 @interface FBRequest()
 
 #pragma mark - Private Instance
-@property (nonatomic, strong) AFHTTPRequestOperationManager *manager;
-@property (nonatomic, strong) AFHTTPRequestOperation        *httpOperation;
-@property (nonatomic)         ECancelType                    cancelType;
+@property (nonatomic, strong) AFHTTPSessionManager        *manager;
+@property (nonatomic, strong) NSURLSessionDataTask        *httpOperation;
+@property (nonatomic)         ECancelType                 cancelType;
 
-@property (nonatomic)         BOOL                           isRunning;
+@property (nonatomic)         BOOL                        isRunning;
 
 #pragma mark -  Private Method
 
@@ -89,7 +89,7 @@ static BOOL                           _canSendMessage      = YES;
 // 初始化网络监测
 + (void)networkReachability {
     NSURL *baseURL  = [NSURL URLWithString:reachabeBaseURL];
-    _managerReachability = [[AFHTTPRequestOperationManager alloc] initWithBaseURL:baseURL];
+    _managerReachability = [[AFHTTPSessionManager alloc] initWithBaseURL:baseURL];
     
     NSOperationQueue *operationQueue = _managerReachability.operationQueue;
     [_managerReachability.reachabilityManager setReachabilityStatusChangeBlock:^(AFNetworkReachabilityStatus status){
@@ -165,7 +165,7 @@ static BOOL                           _canSendMessage      = YES;
 }
 
 - (void)defaultConfig {
-    self.manager   = [AFHTTPRequestOperationManager manager];
+    self.manager   = [AFHTTPSessionManager manager];
     self.isRunning = NO;
 }
 
@@ -227,7 +227,10 @@ static BOOL                           _canSendMessage      = YES;
         
         self.httpOperation = [self.manager GET:self.urlString
                                     parameters:[weakSelf transformRequestDictionary]
-                                       success:^(AFHTTPRequestOperation *operation, id responseObject) {
+//                                      progress:^(NSProgress * _Nonnull downloadProgress) {
+//
+//                                       }
+                                       success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
                                            
                                            weakSelf.isRunning = NO;
                                            
@@ -236,7 +239,7 @@ static BOOL                           _canSendMessage      = YES;
                                            }
                                            
                                        }
-                                       failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+                                       failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
                                            
                                            weakSelf.isRunning = NO;
                                            
@@ -252,21 +255,26 @@ static BOOL                           _canSendMessage      = YES;
                                            }
                                            
                                        }];
+        
     } else if (self.RequestMethod == POST_METHOD) {
         
         __weak FBRequest *weakSelf = self;
+
         self.httpOperation = [self.manager POST:self.urlString
                                      parameters:[weakSelf transformRequestDictionary]
-                                        success:^(AFHTTPRequestOperation *operation, id responseObject) {
+//                                       progress:^(NSProgress * _Nonnull uploadProgress) {
+//        
+//                                        }
+                                        success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
                                             
                                             weakSelf.isRunning = NO;
                                             
-//                                            if (weakSelf.delegate && [weakSelf.delegate respondsToSelector:@selector(requestSucess:result:)]) {
-                                                [_delegate requestSucess:weakSelf result:[weakSelf transformRequestData:responseObject]];
-//                                            }
-                              
+                                            // if (weakSelf.delegate && [weakSelf.delegate respondsToSelector:@selector(requestSucess:result:)]) {
+                                            [_delegate requestSucess:weakSelf result:[weakSelf transformRequestData:responseObject]];
+                                            //  }
+                                            
                                         }
-                                        failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+                                        failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
                                             
                                             weakSelf.isRunning = NO;
                                             
@@ -291,21 +299,22 @@ static BOOL                           _canSendMessage      = YES;
             
             self.httpOperation = [self.manager POST:self.urlString
                                          parameters:[weakSelf transformRequestDictionary]
-                          constructingBodyWithBlock:^(id<AFMultipartFormData> formData) {
-                              
+                          constructingBodyWithBlock:^(id<AFMultipartFormData>  _Nonnull formData) {
+                          
                               weakSelf.constructingBodyBlock(formData);
                               
                           }
-                                            success:^(AFHTTPRequestOperation *operation, id responseObject) {
-                                                
+//                                           progress:^(NSProgress * _Nonnull uploadProgress) {
+//                
+//                                           }
+                                            success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
                                                 weakSelf.isRunning = NO;
-                                                
-//                                                if (weakSelf.delegate && [weakSelf.delegate respondsToSelector:@selector(requestSucess:result:)]) {
-                                                    [_delegate requestSucess:weakSelf result:[weakSelf transformRequestData:responseObject]];
-//                                                }
+                                                //  if (weakSelf.delegate && [weakSelf.delegate respondsToSelector:@selector(requestSucess:result:)]) {
+                                                [_delegate requestSucess:weakSelf result:[weakSelf transformRequestData:responseObject]];
+                                                // }
                                             }
-                                            failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-                                                
+                                            failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+
                                                 weakSelf.isRunning = NO;
                                                 
                                                 if (self.cancelType == USER_CANCEL) {
@@ -318,26 +327,29 @@ static BOOL                           _canSendMessage      = YES;
                                                         [weakSelf.delegate requestFailed:weakSelf error:error];
                                                     }
                                                 }
-                                                
+
                                             }];
+            
         } else {
             
             __weak FBRequest *weakSelf = self;
             
             self.httpOperation = [self.manager POST:self.urlString
                                          parameters:[weakSelf transformRequestDictionary]
-                          constructingBodyWithBlock:nil
-                                            success:^(AFHTTPRequestOperation *operation, id responseObject) {
-                                                
+                          constructingBodyWithBlock:nil progress:^(NSProgress * _Nonnull uploadProgress) {
+                
+                          }
+                                            success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+                
                                                 weakSelf.isRunning = NO;
                                                 
                                                 if (weakSelf.delegate && [weakSelf.delegate respondsToSelector:@selector(requestSucess:result:)]) {
                                                     [weakSelf.delegate requestSucess:weakSelf result:[weakSelf transformRequestData:responseObject]];
                                                 }
-                                                
+                
                                             }
-                                            failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-                                                
+                                            failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+                
                                                 weakSelf.isRunning = NO;
                                                 
                                                 if (self.cancelType == USER_CANCEL) {
@@ -350,6 +362,7 @@ static BOOL                           _canSendMessage      = YES;
                                                         [weakSelf.delegate requestFailed:weakSelf error:error];
                                                     }
                                                 }
+
                                             }];
         }
     }
@@ -408,7 +421,11 @@ static BOOL                           _canSendMessage      = YES;
         
         self.httpOperation = [self.manager GET:self.urlString
                                     parameters:[weakSelf transformRequestDictionary]
-                                       success:^(AFHTTPRequestOperation *operation, id responseObject) {
+//                                      progress:^(NSProgress * _Nonnull downloadProgress) {
+//            
+//        }
+                                       success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+                                       
                                            weakSelf.isRunning = NO;
                                            
                                            if ([[responseObject objectForKey:@"success"] isEqualToNumber:@1]) {
@@ -418,7 +435,8 @@ static BOOL                           _canSendMessage      = YES;
                                                [SVProgressHUD showInfoWithStatus:responseObject[@"message"]];
                                            }
                                        }
-                                       failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+                                       failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+                                      
                                            weakSelf.isRunning = NO;
                                            
                                            if (self.cancelType == USER_CANCEL) {
@@ -429,13 +447,20 @@ static BOOL                           _canSendMessage      = YES;
                                            } else {
                                                failure(weakSelf, error);
                                            }
+                                       
                                        }];
+        
     } else if (self.RequestMethod == POST_METHOD) {
         
         __weak FBRequest *weakSelf = self;
+
         self.httpOperation = [self.manager POST:self.urlString
                                      parameters:[weakSelf transformRequestDictionary]
-                                        success:^(AFHTTPRequestOperation *operation, id responseObject) {
+//                                       progress:^(NSProgress * _Nonnull uploadProgress) {
+//                                           
+//        }
+                                        success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+                                            
                                             weakSelf.isRunning = NO;
                                             
                                             if ([[responseObject objectForKey:@"success"] isEqualToNumber:@1]) {
@@ -445,9 +470,10 @@ static BOOL                           _canSendMessage      = YES;
                                                 [SVProgressHUD showInfoWithStatus:responseObject[@"message"]];
                                             }
                                             
-//                                            success(weakSelf, responseObject);
-                                        }
-                                        failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+                                            //                                            success(weakSelf, responseObject);
+
+                                        } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+                                        
                                             weakSelf.isRunning = NO;
                                             
                                             if (self.cancelType == USER_CANCEL) {
@@ -458,6 +484,7 @@ static BOOL                           _canSendMessage      = YES;
                                             } else {
                                                 failure(weakSelf, error);
                                             }
+                                        
                                         }];
         
     } else if (self.RequestMethod == UPLOAD_DATA) {
@@ -468,12 +495,16 @@ static BOOL                           _canSendMessage      = YES;
             
             self.httpOperation = [self.manager POST:self.urlString
                                          parameters:[weakSelf transformRequestDictionary]
-                          constructingBodyWithBlock:^(id<AFMultipartFormData> formData) {
+                          constructingBodyWithBlock:^(id<AFMultipartFormData>  _Nonnull formData) {
+                
+                    weakSelf.constructingBodyBlock(formData);
                               
-                              weakSelf.constructingBodyBlock(formData);
-                              
-                          }
-                                            success:^(AFHTTPRequestOperation *operation, id responseObject) {
+            }
+//                                           progress:^(NSProgress * _Nonnull uploadProgress) {
+//                
+//                                            }
+                                            success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+                
                                                 weakSelf.isRunning = NO;
                                                 
                                                 if ([[responseObject objectForKey:@"success"] isEqualToNumber:@1]) {
@@ -482,8 +513,10 @@ static BOOL                           _canSendMessage      = YES;
                                                 } else {
                                                     [SVProgressHUD showInfoWithStatus:responseObject[@"message"]];
                                                 }
+
                                             }
-                                            failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+                                            failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+                                            
                                                 weakSelf.isRunning = NO;
                                                 
                                                 if (self.cancelType == USER_CANCEL) {
@@ -494,7 +527,9 @@ static BOOL                           _canSendMessage      = YES;
                                                 } else {
                                                     failure(weakSelf, error);
                                                 }
+                                            
                                             }];
+            
         } else {
             
             __weak FBRequest *weakSelf = self;
@@ -502,7 +537,11 @@ static BOOL                           _canSendMessage      = YES;
             self.httpOperation = [self.manager POST:self.urlString
                                          parameters:[weakSelf transformRequestDictionary]
                           constructingBodyWithBlock:nil
-                                            success:^(AFHTTPRequestOperation *operation, id responseObject) {
+//                                           progress:^(NSProgress * _Nonnull uploadProgress) {
+//                
+//            }
+                                            success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+
                                                 weakSelf.isRunning = NO;
                                                 
                                                 if ([[responseObject objectForKey:@"success"] isEqualToNumber:@1]) {
@@ -511,8 +550,9 @@ static BOOL                           _canSendMessage      = YES;
                                                 } else {
                                                     [SVProgressHUD showInfoWithStatus:responseObject[@"message"]];
                                                 }
-                                            }
-                                            failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+
+                                            } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+                                                
                                                 weakSelf.isRunning = NO;
                                                 
                                                 if (self.cancelType == USER_CANCEL) {
@@ -523,6 +563,7 @@ static BOOL                           _canSendMessage      = YES;
                                                 } else {
                                                     failure(weakSelf, error);
                                                 }
+            
                                             }];
         }
     }
@@ -597,15 +638,15 @@ static BOOL                           _canSendMessage      = YES;
     return request;
 }
 
-+ (AFHTTPRequestOperation *)GET:(NSString *)URLString
++ (NSURLSessionDataTask *)GET:(NSString *)URLString
                      parameters:(id)parameters
                 timeoutInterval:(NSNumber *)timeInterval
                     requestType:(AFNetworkingRequestType)requestType
                    responseType:(AFNetworkingResponseType)responseType
-                        success:(void (^)(AFHTTPRequestOperation *, id))success
-                        failure:(void (^)(AFHTTPRequestOperation *, NSError *))failure {
+                        success:(void (^)(NSURLSessionTask *, id))success
+                        failure:(void (^)(NSURLSessionTask *, NSError *))failure {
     
-    AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
+    AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
     
     // 设置请求类型
     manager.requestSerializer = [FBRequest requestSerializerWith:requestType];
@@ -622,31 +663,37 @@ static BOOL                           _canSendMessage      = YES;
         manager.requestSerializer.timeoutInterval = timeInterval.floatValue;
         [manager.requestSerializer didChangeValueForKey:@"timeoutInterval"];
     }
-    
-    AFHTTPRequestOperation *httpOperation = [manager GET:URLString
-                                              parameters:parameters
-                                                 success:^(AFHTTPRequestOperation *operation, id responseObject) {
-                                                     if (success) {
-                                                         success(operation, responseObject);
-                                                     }
-                                                 }
-                                                 failure:^(AFHTTPRequestOperation *operation, NSError *error){
-                                                     if (failure) {
-                                                         failure(operation, error);
-                                                     }
-                                                 }];
+
+    NSURLSessionDataTask *httpOperation = [manager GET:URLString
+                                            parameters:parameters
+                                              progress:^(NSProgress * _Nonnull downloadProgress) {
+        
+   
+                                              } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+                                                  
+                                                  if (success) {
+                                                      success(task, responseObject);
+                                                  }
+
+                                              } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+                                                  
+                                                  if (failure) {
+                                                      failure(task, error);
+                                                  }
+   
+                                              }];
     return httpOperation;
 }
 
-+ (AFHTTPRequestOperation *)POST:(NSString *)URLString
++ (NSURLSessionDataTask *)POST:(NSString *)URLString
                       parameters:(id)parameters
                  timeoutInterval:(NSNumber *)timeInterval
                      requestType:(AFNetworkingRequestType)requestType
                     responseType:(AFNetworkingResponseType)responseType
-                         success:(void (^)(AFHTTPRequestOperation *, id))success
-                         failure:(void (^)(AFHTTPRequestOperation *, NSError *))failure {
+                         success:(void (^)(NSURLSessionTask *, id))success
+                         failure:(void (^)(NSURLSessionTask *, NSError *))failure {
     
-    AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
+    AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
     
     manager.requestSerializer = [FBRequest requestSerializerWith:requestType];
     
@@ -661,44 +708,45 @@ static BOOL                           _canSendMessage      = YES;
         [manager.requestSerializer didChangeValueForKey:@"timeoutInterval"];
     }
     
-    AFHTTPRequestOperation *httpOperation = [manager
-                                             POST:URLString
+    NSURLSessionDataTask *httpOperation = [manager POST:URLString
                                              parameters:parameters
-                                             success:^(AFHTTPRequestOperation *operation, id responseObject){
-                                                 if (success) {
-                                                     success(operation, responseObject);
-                                                 }
-                                             }
-                                             failure:^(AFHTTPRequestOperation *operation, NSError *error){
-                                                 if (failure) {
-                                                     failure(operation, error);
-                                                 }
-                                             }];
+                                               progress:^(NSProgress * _Nonnull uploadProgress) {
+        
+   
+                                               } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+                                                   
+                                                   if (success) {
+                                                       success(task, responseObject);
+                                                   }
+    
+                                               } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+                                                   
+                                                   if (failure) {
+                                                       failure(task, error);
+                                                   }
+                                                   
+                                               }];
     return httpOperation;
 }
 
-+ (AFHTTPRequestOperation *)UploadDataWithUrlString:(NSString *)URLString
++ (NSURLSessionDataTask *)UploadDataWithUrlString:(NSString *)URLString
                                          parameters:(id)parameters
                                     timeoutInterval:(NSNumber *)timeInterval
                                         requestType:(AFNetworkingRequestType)requestType
                                        responseType:(AFNetworkingResponseType)responseType
                           constructingBodyWithBlock:(void (^)(id<AFMultipartFormData>))block
-                                            success:(void (^)(AFHTTPRequestOperation *, id))success
-                                            failure:(void (^)(AFHTTPRequestOperation *, NSError *))failure {
-    AFHTTPRequestOperationManager *manager            = [AFHTTPRequestOperationManager manager];
-    
+                                            success:(void (^)(NSURLSessionTask *, id))success
+                                            failure:(void (^)(NSURLSessionTask *, NSError *))failure {
+    AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
     
     // 设置请求类型
-    manager.requestSerializer                         = [FBRequest requestSerializerWith:requestType];
-    
+    manager.requestSerializer = [FBRequest requestSerializerWith:requestType];
     
     // 设置回复类型
-    manager.responseSerializer                        = [FBRequest responseSerializerWith:responseType];
-    
+    manager.responseSerializer = [FBRequest responseSerializerWith:responseType];
     
     // 设置回复内容信息
     manager.responseSerializer.acceptableContentTypes = [manager.responseSerializer.acceptableContentTypes setByAddingObject:@"text/html"];
-    
     
     // 设置超时时间
     if (timeInterval) {
@@ -706,22 +754,32 @@ static BOOL                           _canSendMessage      = YES;
         manager.requestSerializer.timeoutInterval = timeInterval.floatValue;
         [manager.requestSerializer didChangeValueForKey:@"timeoutInterval"];
     }
+
+    NSURLSessionDataTask *httpOperation = [manager POST:URLString
+                                             parameters:parameters
+                              constructingBodyWithBlock:^(id<AFMultipartFormData>  _Nonnull formData) {
     
-    AFHTTPRequestOperation *httpOperation = [manager POST:URLString
-                                               parameters:parameters
-                                constructingBodyWithBlock:^(id<AFMultipartFormData> formData){
-                                    if (block) {
-                                        block(formData);
-                                    }
-                                } success:^(AFHTTPRequestOperation *operation, id responseObject){
-                                    if (success) {
-                                        success(operation, responseObject);
-                                    }
-                                } failure:^(AFHTTPRequestOperation *operation, NSError *error){
-                                    if (failure) {
-                                        failure(operation, error);
-                                    }
-                                }];
+                                  if (block) {
+                                      block(formData);
+                                  }
+                                  
+                              } progress:^(NSProgress * _Nonnull uploadProgress) {
+        
+    
+                              } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+        
+                                  if (success) {
+                                      success(task, responseObject);
+                                  }
+                                  
+                              } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+       
+                                  if (failure) {
+                                      failure(task, error);
+                                  }
+   
+                              }];
+    
     return httpOperation;
 }
 
