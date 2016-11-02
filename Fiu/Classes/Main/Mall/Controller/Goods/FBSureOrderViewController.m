@@ -75,7 +75,7 @@ static NSString *const URLCarGoPay = @"/shopping/checkout";
     [self.buyingRequest startRequestSuccess:^(FBRequest *request, id result) {
         //  合计价格
         self.payPrice = [[result valueForKey:@"data"] valueForKey:@"pay_money"];
-        self.sumPrice.text = [NSString stringWithFormat:@"￥%@", self.payPrice];
+        self.sumPrice.text = [NSString stringWithFormat:@"￥%.2f", [self.payPrice floatValue]];
         
         _rid = [[[result valueForKey:@"data"] valueForKey:@"order_info"] valueForKey:@"rid"];
         _rrid = [[[result valueForKey:@"data"] valueForKey:@"order_info"] valueForKey:@"_id"];

@@ -15,6 +15,7 @@
 @pro_strong UIImageView *defaultImg;
 @pro_strong UILabel *promptLab;
 @pro_strong UIButton *defaultBtn;
+@pro_strong UIView *whiteView;
 
 /**
  设置默认提示视图

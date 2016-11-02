@@ -11,6 +11,7 @@
 #import "GroupHeaderView.h"
 #import "THNHotUserView.h"
 #import "FBTabBarItemBadgeBtn.h"
+#import "BuyCarDefault.h"
 
 @interface THNHomeViewController : THNViewController <
     THNNavigationBarItemsDelegate,
@@ -46,8 +47,8 @@
 @pro_strong NSMutableArray *commentsCountMarr;
 @pro_strong NSMutableArray *hotUserMarr;
 
-//
 @pro_strong THNHotUserView *hotUserList;
 @pro_strong UIView *hotUserView;
+@pro_strong BuyCarDefault *defaultHomeView;
 
 @end

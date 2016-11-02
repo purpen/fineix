@@ -103,9 +103,7 @@ static NSString * const JDPayUrl = @"/shopping/payed";
 //    } failure:^(AFHTTPRequestOperation *operation,NSError *error) {
 //    }];
     
-    [manager POST:self.model.url parameters:formDic progress:^(NSProgress * _Nonnull uploadProgress) {
-        
-    } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+    [manager POST:self.model.url parameters:formDic success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
         
         NSString *htmlstring = [[NSString alloc] initWithData:responseObject encoding:NSUTF8StringEncoding];
         //将第二次请求出来的html字符串加载到webview

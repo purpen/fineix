@@ -58,7 +58,7 @@
 "brandSceneList" = "情境";
 
 //  商品详情
-"goodsInfoShow" = "Info";
+"goodsInfoShow" = "商品详情";
 "goBuyGoods" = "Buy";
 "likeTheGoods" = "Favorite";
 "likeDoneGoods" = "Subscribe";
@@ -301,6 +301,8 @@
 "loadingState" = "发现美好内容，极速加载中";
 "newSendRed" = "扫码注册送大礼包!!!";
 "SendOldRed" = "hi~你收到了200元红包，快去个人中心看看吧";
+"noNetworking" = "网络出了问题！";
+"reloadData" = "重新加载";
 
 //性别
 "secret" = "保密";

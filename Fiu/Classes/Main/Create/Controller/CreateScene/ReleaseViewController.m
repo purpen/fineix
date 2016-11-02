@@ -69,10 +69,9 @@ static NSString *const URLReleaseFiuScenen = @"/scene_scene/save";
     NSString *lng = self.addLocaiton.longitude;
     NSString *lat = self.addLocaiton.latitude;
     NSString *tags = [self.addContent.userAddTags componentsJoinedByString:@","];
-    NSString * json;
-    NSString * img64Str;
+    NSString *json;
+    NSString *img64Str;
     
-    [SVProgressHUD showWithMaskType:SVProgressHUDMaskTypeBlack];
     if (self.goodsId.count) {
         NSMutableArray * goodsMarr = [NSMutableArray array];
         for (NSUInteger idx = 0; idx < self.goodsId.count; ++ idx) {
@@ -112,6 +111,9 @@ static NSString *const URLReleaseFiuScenen = @"/scene_scene/save";
     if (json.length == 0) {
         json = @"";
     }
+    if (self.addContent.actionId.length > 0) {
+         self.actionId = self.addContent.actionId;
+    }
     if (self.actionId.length == 0) {
         self.actionId = @"";
     }
@@ -137,7 +139,7 @@ static NSString *const URLReleaseFiuScenen = @"/scene_scene/save";
                                  };
     
     self.releaseSceneRequest = [FBAPI postWithUrlString:URLReleaseScenen requestDictionary:paramDict delegate:self];
-    
+    [SVProgressHUD showWithMaskType:SVProgressHUDMaskTypeBlack];
     [self.releaseSceneRequest startRequestSuccess:^(FBRequest *request, id result) {
         if ([[result valueForKey:@"success"] isEqualToNumber:@1]) {
             if (sceneId.length) {

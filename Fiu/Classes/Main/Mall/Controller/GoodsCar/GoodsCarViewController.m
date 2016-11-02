@@ -41,6 +41,8 @@ static NSString *const URLEditItemsNum = @"/shopping/edit_cart";
     
     [self networkGoodsCarList];
     
+    self.chooseAllBtn.selected = NO;
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"cacelAll" object:nil];
 }
 
 - (void)viewDidLoad {
@@ -259,10 +261,15 @@ static NSString *const URLEditItemsNum = @"/shopping/edit_cart";
 - (BuyCarDefault *)defaultCarView {
     if (!_defaultCarView) {
         _defaultCarView = [[BuyCarDefault alloc] initWithFrame:CGRectMake(0, 64, SCREEN_WIDTH, SCREEN_HEIGHT - 64)];
-        _defaultCarView.nav = self.navigationController;
+        [_defaultCarView.defaultBtn setTitle:NSLocalizedString(@"goLookGoods", nil) forState:(UIControlStateNormal)];
+        [_defaultCarView.defaultBtn addTarget:self action:@selector(goHomeBtnClick) forControlEvents:(UIControlEventTouchUpInside)];
         [_defaultCarView thn_setDefaultViewImage:@"shopcarbig" promptText:NSLocalizedString(@"NoGoods", nil) showButton:NO];
     }
     return _defaultCarView;
+}
+
+- (void)goHomeBtnClick {
+    [self.navigationController popViewControllerAnimated:YES];
 }
 
 #pragma mark - 底部视图

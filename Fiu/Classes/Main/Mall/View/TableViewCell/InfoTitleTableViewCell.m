@@ -104,10 +104,9 @@
     
     [self addSubview:self.goodsOldPrice];
     [_goodsOldPrice mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.height.equalTo(@17);
+        make.size.mas_equalTo(CGSizeMake(70 , 17));
         make.bottom.equalTo(self.mas_bottom).with.offset(-10);
         make.left.equalTo(_goodsPrice.mas_right).with.offset(3);
-        make.right.equalTo(_nextBtn.mas_left).with.offset(-10);
     }];
     
     UILabel *botLine = [[UILabel alloc] init];

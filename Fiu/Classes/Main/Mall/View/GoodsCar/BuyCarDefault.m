@@ -26,6 +26,13 @@
 }
 
 - (void)setViewUI {
+    [self addSubview:self.whiteView];
+    [_whiteView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.size.mas_equalTo(CGSizeMake(SCREEN_WIDTH*0.7, SCREEN_WIDTH*0.7));
+        make.centerX.equalTo(self);
+        make.top.equalTo(self.mas_centerY).with.offset(-(SCREEN_WIDTH/2));
+    }];
+    
     [self addSubview:self.defaultBtn];
     [_defaultBtn mas_makeConstraints:^(MASConstraintMaker *make) {
         make.size.mas_equalTo(CGSizeMake(150, 44));
@@ -51,8 +58,7 @@
 - (UIImageView *)defaultImg {
     if (!_defaultImg) {
         _defaultImg = [[UIImageView alloc] init];
-        _defaultImg.layer.masksToBounds = YES;
-        _defaultImg.layer.cornerRadius = 72.5 /2;
+        _defaultImg.contentMode = UIViewContentModeScaleAspectFit;
     }
     return _defaultImg;
 }
@@ -71,18 +77,21 @@
     if (!_defaultBtn) {
         _defaultBtn = [[UIButton alloc] init];
         _defaultBtn.backgroundColor = [UIColor colorWithHexString:@"#000000"];
-        [_defaultBtn setTitle:NSLocalizedString(@"goLookGoods", nil) forState:(UIControlStateNormal)];
         [_defaultBtn setTitleColor:[UIColor whiteColor] forState:(UIControlStateNormal)];
         _defaultBtn.titleLabel.font = [UIFont systemFontOfSize:16];
         _defaultBtn.layer.cornerRadius = 4;
-        [_defaultBtn addTarget:self action:@selector(goHomeBtnClick) forControlEvents:(UIControlEventTouchUpInside)];
     }
     return _defaultBtn;
 }
 
-- (void)goHomeBtnClick {
-    [self.nav popViewControllerAnimated:YES];
+- (UIView *)whiteView {
+    if (!_whiteView) {
+        _whiteView = [[UIView alloc] init];
+        _whiteView.backgroundColor = [UIColor whiteColor];
+        _whiteView.layer.cornerRadius = 10.0f;
+        _whiteView.layer.masksToBounds = YES;
+    }
+    return _whiteView;
 }
-
 
 @end

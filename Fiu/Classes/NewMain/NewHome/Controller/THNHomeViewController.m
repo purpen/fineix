@@ -385,6 +385,7 @@ static NSString *const allCommentsCellId = @"AllCommentsCellId";
                                  @"fine":@"1"};
     self.sceneListRequest = [FBAPI getWithUrlString:URLSceneList requestDictionary:requestDic delegate:self];
     [self.sceneListRequest startRequestSuccess:^(FBRequest *request, id result) {
+        [self.defaultHomeView removeFromSuperview];
         if (![self.view.subviews containsObject:self.homeTable]) {
             [self thn_setHomeViewUI];
         }
@@ -406,6 +407,10 @@ static NSString *const allCommentsCellId = @"AllCommentsCellId";
         
     } failure:^(FBRequest *request, NSError *error) {
         [SVProgressHUD showErrorWithStatus:[error localizedDescription]];
+        if (error.code == -1009) {
+            UIWindow *window = [UIApplication sharedApplication].keyWindow;
+            [window addSubview:self.defaultHomeView];
+        }
     }];
 }
 
@@ -481,6 +486,22 @@ static NSString *const allCommentsCellId = @"AllCommentsCellId";
 #pragma mark - 设置视图UI
 - (void)thn_setHomeViewUI {
     [self.view addSubview:self.homeTable];
+}
+
+#pragma mark - 无网络时的提示背景
+- (BuyCarDefault *)defaultHomeView {
+    if (!_defaultHomeView) {
+        _defaultHomeView = [[BuyCarDefault alloc] initWithFrame:CGRectMake(0, 64, SCREEN_WIDTH, SCREEN_HEIGHT - 64)];
+        _defaultHomeView.backgroundColor = [UIColor colorWithHexString:@"#FFFFFF" alpha:0];
+        [_defaultHomeView.defaultBtn setTitle:NSLocalizedString(@"reloadData", nil) forState:(UIControlStateNormal)];
+        [_defaultHomeView.defaultBtn addTarget:self action:@selector(reloadDataClick) forControlEvents:(UIControlEventTouchUpInside)];
+        [_defaultHomeView thn_setDefaultViewImage:@"icon_no_network" promptText:NSLocalizedString(@"noNetworking", nil) showButton:NO];
+    }
+    return _defaultHomeView;
+}
+
+- (void)reloadDataClick {
+    [self loadNewData];
 }
 
 #pragma mark - 设置"发现用户"的位置和高度

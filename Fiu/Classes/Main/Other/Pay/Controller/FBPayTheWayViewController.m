@@ -340,35 +340,10 @@
     TYAlertView * alertView = [TYAlertView alertViewWithTitle:@"确认离开支付?" message:@"订单提交成功，如未支付，该订单会在72小时内自动关闭，请尽快付款。"];
     TYAlertAction * cancel = [TYAlertAction actionWithTitle:@"取消" style:TYAlertActionStyleCancle handler:nil];
     TYAlertAction * ok = [TYAlertAction actionWithTitle:@"确定" style:TYAlertActionStyleDefault handler:^(TYAlertAction *action) {
-        
-        
-        for (UIViewController *vc in self.navigationController.childViewControllers) {
-            if ([NSStringFromClass([vc class]) isEqualToString:NSStringFromClass([GoodsCarViewController class])]) {
-                [self.navigationController popToViewController:vc animated:YES];
-            }
-        }
-        [self.navigationController popToViewController:self.navigationController.childViewControllers[2] animated:YES];
-//        [self.navigationController popViewControllerAnimated:YES];
+        [self.navigationController popViewControllerAnimated:YES];
     }];
     [alertView addAction:cancel];
     [alertView addAction:ok];
     [alertView showInWindowWithBackgoundTapDismissEnable:YES];
 }
-
-
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
-}
-
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
-
 @end

@@ -14,6 +14,7 @@
 #import "FBKeyboradToolbar.h"
 
 typedef void(^GetEditShareText)(NSString * title, NSString * des, NSMutableArray * tagsArr);
+typedef void(^GetActionId)(NSString *actionId);
 
 @interface FBEditShareInfoViewController : FBPictureViewController <
     UITableViewDelegate,
@@ -53,7 +54,8 @@ typedef void(^GetEditShareText)(NSString * title, NSString * des, NSMutableArray
 @pro_strong UITextField         *   searchField;
 @pro_strong UITableView         *   shareTextTable;
 @pro_strong UIButton            *   cancelSearchBtn;
-@pro_strong GetEditShareText        getEdtiShareText;
+@pro_copy GetEditShareText          getEdtiShareText;
+@pro_copy GetActionId               getActionId;
 @pro_strong NSString            *   actionTitle;
 
 @end

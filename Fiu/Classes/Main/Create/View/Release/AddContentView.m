@@ -122,6 +122,10 @@
             [self.content resignFirstResponder];
             self.userAddTags = tagS;
         };
+        
+        chooseTextVC.getActionId = ^ (NSString *actionId) {
+            self.actionId = actionId;
+        };
     }];
 }
 

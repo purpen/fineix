@@ -73,6 +73,11 @@ static NSString *const URLActionTags = @"/scene_sight/stick_active_tags";
 }
 
 - (void)thn_sureButtonAction {
+    if ([self.desText.text containsString:[NSString stringWithFormat:@"#%@",_actionTag]]) {
+        self.getActionId(_actionTagId);
+    } else {
+        self.getActionId(@"");
+    }
     self.getEdtiShareText(self.titleText.text, self.desText.text, self.userAddTagMarr);
 }
 
