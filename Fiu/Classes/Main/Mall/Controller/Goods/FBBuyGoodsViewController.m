@@ -231,7 +231,7 @@
 #pragma mark  商品标题
 - (UILabel *)goodsTitle {
     if (!_goodsTitle) {
-        _goodsTitle = [[UILabel alloc] initWithFrame:CGRectMake(105, 15, SCREEN_WIDTH - 120, 35)];
+        _goodsTitle = [[UILabel alloc] initWithFrame:CGRectMake(105, 15, SCREEN_WIDTH - 140, 35)];
         _goodsTitle.textColor = [UIColor colorWithHexString:titleColor];
         _goodsTitle.font = [UIFont systemFontOfSize:14];
         _goodsTitle.numberOfLines = 2;

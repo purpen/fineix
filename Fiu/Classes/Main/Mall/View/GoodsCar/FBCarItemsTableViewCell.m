@@ -39,12 +39,18 @@
     
     if ([model.skuMode length] == 0) {
         self.goodsColor.text = [NSString stringWithFormat:@"颜色/分类: %@", @"默认"];
-    } else
+    } else {
         self.goodsColor.text = [NSString stringWithFormat:@"颜色/分类: %@", model.skuMode];
+    }
+    
+    if (model.vopId > 0) {
+        self.JDGoodsLab.hidden = NO;
+    } else {
+        self.JDGoodsLab.hidden = YES;
+    }
     
     self.goodsNum.text = [NSString stringWithFormat:@"数量 * %zi", model.n];
     self.goodsPrice.text = [NSString stringWithFormat:@"¥%.2f", model.price];
-    
 }
 
 #pragma mark -
@@ -88,7 +94,13 @@
         make.size.mas_equalTo(CGSizeMake(100, 15));
         make.bottom.equalTo(_goodsImg.mas_bottom).with.offset(0);
         make.left.equalTo(_goodsImg.mas_right).with.offset(15);
-        
+    }];
+    
+    [self addSubview:self.JDGoodsLab];
+    [_JDGoodsLab mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.size.mas_equalTo(CGSizeMake(60, 20));
+        make.right.equalTo(self.mas_right).with.offset(-10);
+        make.centerY.equalTo(_goodsPrice);
     }];
 }
 
@@ -113,6 +125,19 @@
     }
 }
 
+- (UILabel *)JDGoodsLab {
+    if (!_JDGoodsLab) {
+        _JDGoodsLab = [[UILabel alloc] init];
+        _JDGoodsLab.font = [UIFont systemFontOfSize:10];
+        _JDGoodsLab.text = @"京东配货";
+        _JDGoodsLab.textAlignment = NSTextAlignmentCenter;
+        _JDGoodsLab.textColor = [UIColor colorWithHexString:@"#999999" alpha:1];
+        _JDGoodsLab.layer.borderWidth = 0.5f;
+        _JDGoodsLab.layer.borderColor = [UIColor colorWithHexString:@"#999999" alpha:1].CGColor;
+    }
+    return _JDGoodsLab;
+}
+
 - (UIImageView *)goodsImg {
     if (!_goodsImg) {
         _goodsImg = [[UIImageView alloc] init];
@@ -128,11 +153,7 @@
     if (!_goodsTitle) {
         _goodsTitle = [[UILabel alloc] init];
         _goodsTitle.numberOfLines = 2;
-        if (IS_iOS9) {
-            _goodsTitle.font = [UIFont fontWithName:@"PingFangSC-Light" size:12];
-        } else {
-            _goodsTitle.font = [UIFont systemFontOfSize:12];
-        }
+        _goodsTitle.font = [UIFont systemFontOfSize:12];
         _goodsTitle.textAlignment = NSTextAlignmentLeft;
         _goodsTitle.textColor = [UIColor blackColor];
         
@@ -143,11 +164,7 @@
 - (UILabel *)goodsColor {
     if (!_goodsColor) {
         _goodsColor = [[UILabel alloc] init];
-        if (IS_iOS9) {
-            _goodsColor.font = [UIFont fontWithName:@"PingFangSC-Light" size:10];
-        } else {
-            _goodsColor.font = [UIFont systemFontOfSize:10];
-        }
+        _goodsColor.font = [UIFont systemFontOfSize:10];
         _goodsColor.textColor = [UIColor colorWithHexString:titleColor];
         _goodsColor.textAlignment = NSTextAlignmentLeft;
         _goodsColor.numberOfLines = 1;
@@ -159,11 +176,7 @@
 - (UILabel *)goodsNum {
     if (!_goodsNum) {
         _goodsNum = [[UILabel alloc] init];
-        if (IS_iOS9) {
-            _goodsNum.font = [UIFont fontWithName:@"PingFangSC-Light" size:10];
-        } else {
-            _goodsNum.font = [UIFont systemFontOfSize:10];
-        }
+        _goodsNum.font = [UIFont systemFontOfSize:10];
         _goodsNum.textColor = [UIColor colorWithHexString:titleColor];
         _goodsNum.textAlignment = NSTextAlignmentLeft;
         
@@ -174,11 +187,7 @@
 - (UILabel *)goodsPrice {
     if (!_goodsPrice) {
         _goodsPrice = [[UILabel alloc] init];
-        if (IS_iOS9) {
-            _goodsPrice.font = [UIFont fontWithName:@"PingFangSC-Light" size:13];
-        } else {
-            _goodsPrice.font = [UIFont systemFontOfSize:13];
-        }
+        _goodsPrice.font = [UIFont systemFontOfSize:13];
         _goodsPrice.textColor = [UIColor colorWithHexString:fineixColor];
         _goodsPrice.textAlignment = NSTextAlignmentLeft;
     }

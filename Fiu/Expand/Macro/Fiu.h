@@ -81,6 +81,8 @@
 #define Font_UserProfile        9
 
 #undef  创建属性
+//  retain
+#define pro_retain      property (nonatomic, retain)
 //  strong
 #define pro_strong      property (nonatomic, strong)
 //  weak

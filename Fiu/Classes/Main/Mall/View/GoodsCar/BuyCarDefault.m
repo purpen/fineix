@@ -13,7 +13,7 @@
 - (instancetype)initWithFrame:(CGRect)frame {
     self = [super initWithFrame:frame];
     if (self) {
-        self.backgroundColor = [UIColor colorWithHexString:grayLineColor];
+        self.backgroundColor = [UIColor colorWithHexString:@"#FFFFFF"];
         [self setViewUI];
     }
     return self;

@@ -19,6 +19,7 @@
 @property (nonatomic, assign) CGFloat totalPrice;
 @property (nonatomic, assign) NSInteger type;
 @property (nonatomic, assign) NSInteger productId;
+@property (nonatomic, assign) NSInteger vopId;
 
 -(instancetype)initWithDictionary:(NSDictionary *)dictionary;
 

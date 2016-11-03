@@ -16,7 +16,7 @@
  *  0:购物车 ／ 1:立即购买
  */
 @pro_assign NSInteger           type;
-
+@pro_strong id                  result;
 @pro_strong NSDictionary    *   orderDict;
 @pro_strong NSMutableArray  *   carGoodsMarr;
 @pro_strong FBRequest       *   buyingRequest;

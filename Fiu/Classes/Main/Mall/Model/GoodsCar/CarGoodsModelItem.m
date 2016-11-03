@@ -35,6 +35,9 @@
     if(![dictionary[@"target_id"] isKindOfClass:[NSNull class]]){
         self.targetId = [dictionary[@"target_id"] integerValue];
     }
+    if(![dictionary[@"vop_id"] isKindOfClass:[NSNull class]]){
+        self.vopId = [dictionary[@"vop_id"] integerValue];
+    }
     
     if(![dictionary[@"title"] isKindOfClass:[NSNull class]]){
         self.title = dictionary[@"title"];

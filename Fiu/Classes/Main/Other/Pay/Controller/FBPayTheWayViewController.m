@@ -324,7 +324,6 @@
     });
 }
 
-
 #pragma mark - AlipayDelegate
 - (void)standbyCallbackWithResultDic:(NSDictionary *)resultDic
 {
@@ -334,7 +333,6 @@
         [SVProgressHUD showErrorWithStatus:@"您的订单尚未支付成功，请刷新重试或者点这里重新下单"];
     }
 }
-
 
 -(void)leftBarItemSelected{
     TYAlertView * alertView = [TYAlertView alertViewWithTitle:@"确认离开支付?" message:@"订单提交成功，如未支付，该订单会在72小时内自动关闭，请尽快付款。"];

@@ -61,7 +61,7 @@ static NSString *const URLCarGoPay = @"/shopping/checkout";
     if (self.type == 1) {
         [self networkBuyingOrderData];
     } else if (self.type == 0) {
-        [self networkCarGoPayData:self.carGoodsMarr];
+        [self networkCarGoPayData:self.result];
     }
     
     [self setOrderVcUI];
@@ -97,34 +97,23 @@ static NSString *const URLCarGoPay = @"/shopping/checkout";
 }
 
 #pragma mark 购物车下单
-- (void)networkCarGoPayData:(NSMutableArray *)itemData {
-    [SVProgressHUD show];
-    NSData * jsonData = [NSJSONSerialization dataWithJSONObject:itemData options:0 error:nil];
-    NSString * json = [[NSString alloc] initWithData:jsonData encoding:NSUTF8StringEncoding];
-
-    self.carPayRequest = [FBAPI postWithUrlString:URLCarGoPay requestDictionary:@{@"array":json} delegate:self];
-    [self.carPayRequest startRequestSuccess:^(FBRequest *request, id result) {
-        //  合计价格
-        self.payPrice = [[result valueForKey:@"data"] valueForKey:@"pay_money"];
-        self.sumPrice.text = [NSString stringWithFormat:@"￥%@", self.payPrice];
-        
-        _rid = [[[result valueForKey:@"data"] valueForKey:@"order_info"] valueForKey:@"rid"];
-        _rrid = [[[result valueForKey:@"data"] valueForKey:@"order_info"] valueForKey:@"_id"];
-        _isNowbuy = [[result valueForKey:@"data"] valueForKey:@"is_nowbuy"];
-        _transferTime = @"a";
-        _bonusCode = @"";
-        
-        NSArray * items = [[[[result valueForKey:@"data"] valueForKey:@"order_info"] valueForKey:@"dict"] valueForKey:@"items"];
-        for (NSDictionary * itemDict in items) {
-            OrderItems * itemModel = [[OrderItems alloc] initWithDictionary:itemDict];
-            [self.goodsItems addObject:itemModel];
-        }
-        [self.orderTable reloadData];
-        [SVProgressHUD dismiss];
-        
-    } failure:^(FBRequest *request, NSError *error) {
-        [SVProgressHUD showErrorWithStatus:[error localizedDescription]];
-    }];
+- (void)networkCarGoPayData:(id)result {
+    //  合计价格
+    self.payPrice = [[result valueForKey:@"data"] valueForKey:@"pay_money"];
+    self.sumPrice.text = [NSString stringWithFormat:@"￥%@", self.payPrice];
+    
+    _rid = [[[result valueForKey:@"data"] valueForKey:@"order_info"] valueForKey:@"rid"];
+    _rrid = [[[result valueForKey:@"data"] valueForKey:@"order_info"] valueForKey:@"_id"];
+    _isNowbuy = [[result valueForKey:@"data"] valueForKey:@"is_nowbuy"];
+    _transferTime = @"a";
+    _bonusCode = @"";
+    
+    NSArray * items = [[[[result valueForKey:@"data"] valueForKey:@"order_info"] valueForKey:@"dict"] valueForKey:@"items"];
+    for (NSDictionary * itemDict in items) {
+        OrderItems * itemModel = [[OrderItems alloc] initWithDictionary:itemDict];
+        [self.goodsItems addObject:itemModel];
+    }
+    [self.orderTable reloadData];
 }
 
 #pragma mark 默认收货地址

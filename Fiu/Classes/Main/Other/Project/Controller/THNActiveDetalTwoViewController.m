@@ -335,9 +335,9 @@ static NSString *const URLCancelFollowUser = @"/follow/ajax_cancel_follow";
                 //参与的情境
             {
                 THNDiscoverSceneCollectionViewCell * cell = [collectionView dequeueReusableCellWithReuseIdentifier:collectionViewCellId forIndexPath:indexPath];
-                UserInfoEntity *entity = [UserInfoEntity defaultUserInfoEntity];
                 HomeSceneListRow *model = self.senceModelAry[indexPath.row];
-                [cell thn_setSceneUserInfoData:model isLogin:entity.isLogin];
+                [cell thn_setSceneUserInfoData:model isLogin:[self isUserLogin]];
+                cell.vc = self;
                 cell.beginLikeTheSceneBlock = ^(NSString *idx) {
                     [weakSelf thn_networkLikeSceneData:idx];
                 };
@@ -431,7 +431,6 @@ static NSString *const URLCancelFollowUser = @"/follow/ajax_cancel_follow";
     [self.navigationController pushViewController:vc animated:YES];
 }
 
-
 //  点赞
 - (void)thn_networkLikeSceneData:(NSString *)idx {
     self.likeSceneRequest = [FBAPI postWithUrlString:URLLikeScene requestDictionary:@{@"id":idx, @"type":@"12"} delegate:self];
@@ -441,7 +440,6 @@ static NSString *const URLCancelFollowUser = @"/follow/ajax_cancel_follow";
             NSString *loveCount = [NSString stringWithFormat:@"%zi", [[[result valueForKey:@"data"] valueForKey:@"love_count"] integerValue]];
             [self.senceModelAry[index] setValue:loveCount forKey:@"loveCount"];
             [self.senceModelAry[index] setValue:@"1" forKey:@"isLove"];
-            [self.contentView reloadData];
         }
         
     } failure:^(FBRequest *request, NSError *error) {
@@ -458,7 +456,6 @@ static NSString *const URLCancelFollowUser = @"/follow/ajax_cancel_follow";
             NSString *loveCount = [NSString stringWithFormat:@"%zi", [[[result valueForKey:@"data"] valueForKey:@"love_count"] integerValue]];
             [self.senceModelAry[index] setValue:loveCount forKey:@"loveCount"];
             [self.senceModelAry[index] setValue:@"0" forKey:@"isLove"];
-            [self.contentView reloadData];
         }
         
     } failure:^(FBRequest *request, NSError *error) {

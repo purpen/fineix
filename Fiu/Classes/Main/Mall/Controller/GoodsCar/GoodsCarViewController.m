@@ -18,17 +18,11 @@ static NSString *const URLGoodsCar = @"/shopping/fetch_cart";
 static NSString *const URLCarGoodsStock = @"/shopping/fetch_cart_product_count";
 static NSString *const URLDeleteCarItem = @"/shopping/remove_cart";
 static NSString *const URLEditItemsNum = @"/shopping/edit_cart";
+static NSString *const URLCarGoPay = @"/shopping/checkout";
 
 @interface GoodsCarViewController () {
     BOOL    _isEdit;
 }
-
-@pro_strong NSMutableArray      *   carItemList;
-@pro_strong NSMutableArray      *   stockList;
-@pro_strong NSMutableArray      *   goodsIdList;
-@pro_strong NSMutableArray      *   chooseItems;
-@pro_strong NSMutableArray      *   priceMarr;
-@pro_strong NSMutableArray      *   carGoodsCount;
 
 @end
 
@@ -58,7 +52,7 @@ static NSString *const URLEditItemsNum = @"/shopping/edit_cart";
     [self clearMarr];
     self.goodsCarRequest = [FBAPI getWithUrlString:URLGoodsCar requestDictionary:nil delegate:self];
     [self.goodsCarRequest startRequestSuccess:^(FBRequest *request, id result) {
-        //  合计价格s
+        //  合计价格
         self.payPrice = 0.0f;
         self.sumPrice.text = [NSString stringWithFormat:@"￥%.2f", self.payPrice];
         
@@ -71,15 +65,24 @@ static NSString *const URLEditItemsNum = @"/shopping/edit_cart";
         } else {
             self.bottomView.hidden = NO;
             self.editBtn.hidden = NO;
+            
             for (NSDictionary * carItemDict in carItems) {
                 CarGoodsModelItem * carModel = [[CarGoodsModelItem alloc] initWithDictionary:carItemDict];
                 [self.carItemList addObject:carModel];
                 [self.goodsIdList addObject:[NSString stringWithFormat:@"%zi", carModel.productId]];
+                
+                //  是否有京东的商品,给出提示
+                if (carModel.vopId > 0) {
+                    self.carItemTabel.tableHeaderView = self.haveJDGoodsLab;
+                }
             }
+            
+            [self getCarItemMarrSort:self.carItemList];
             
             for (NSInteger idx = 0; idx < self.carItemList.count; ++ idx) {
                  [self.carGoodsCount addObject:[NSString stringWithFormat:@"%zi", [[self.carItemList valueForKey:@"n"][idx] integerValue]]];
             }
+            
             self.priceMarr = [NSMutableArray arrayWithArray:[self.carItemList valueForKey:@"price"]];
         }
         [self.carItemTabel reloadData];
@@ -135,6 +138,44 @@ static NSString *const URLEditItemsNum = @"/shopping/edit_cart";
     }];
 }
 
+#pragma mark 购物车结算
+- (void)networkCarGoPayData:(NSMutableArray *)itemData {
+    [SVProgressHUD show];
+    NSData * jsonData = [NSJSONSerialization dataWithJSONObject:itemData options:0 error:nil];
+    NSString * json = [[NSString alloc] initWithData:jsonData encoding:NSUTF8StringEncoding];
+    
+    self.carPayRequest = [FBAPI postWithUrlString:URLCarGoPay requestDictionary:@{@"array":json} delegate:self];
+    [self.carPayRequest startRequestSuccess:^(FBRequest *request, id result) {
+        if ([[result valueForKey:@"success"] integerValue] == 1) {
+            FBSureOrderViewController * sureOrderVC = [[FBSureOrderViewController alloc] init];
+            sureOrderVC.result = result;
+            sureOrderVC.type = 0;
+            [self.navigationController pushViewController:sureOrderVC animated:YES];
+        }
+        
+    } failure:^(FBRequest *request, NSError *error) {
+        [SVProgressHUD showErrorWithStatus:[error localizedDescription]];
+    }];
+}
+
+- (void)getCarItemMarrSort:(NSMutableArray *)carItem {
+    if (carItem.count > 1) {
+        NSMutableArray *JDGoodsMarr = [NSMutableArray array];
+        
+        for (NSUInteger idx = 0; idx < carItem.count; ++ idx) {
+            CarGoodsModelItem *model = carItem[idx];
+            if (model.vopId > 0) {
+                [JDGoodsMarr addObject:model];
+                [carItem removeObject:model];
+            }
+        }
+        
+        if (JDGoodsMarr.count > 0) {
+            [carItem addObjectsFromArray:JDGoodsMarr];
+        }
+    }
+}
+
 #pragma mark - 设置视图
 - (void)setGoodsCarVcUI {
     [self.view addSubview:self.carItemTable];
@@ -164,7 +205,7 @@ static NSString *const URLEditItemsNum = @"/shopping/edit_cart";
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     if (_isEdit == YES) {
-         static NSString * editCarItemsTableViewCellId = @"EditCarItemsTableViewCellId";
+        static NSString * editCarItemsTableViewCellId = @"EditCarItemsTableViewCellId";
         FBEditCarItemTableViewCell * cell = [tableView dequeueReusableCellWithIdentifier:editCarItemsTableViewCellId];
         if (!cell) {
             cell = [[FBEditCarItemTableViewCell alloc] initWithStyle:(UITableViewCellStyleDefault) reuseIdentifier:editCarItemsTableViewCellId];
@@ -255,6 +296,18 @@ static NSString *const URLEditItemsNum = @"/shopping/edit_cart";
         goodsInfoVC.goodsID = self.goodsIdList[indexPath.section];
         [self.navigationController pushViewController:goodsInfoVC animated:YES];
     }
+}
+
+#pragma mark - 有京东商品时的提示
+- (UILabel *)haveJDGoodsLab {
+    if (!_haveJDGoodsLab) {
+        _haveJDGoodsLab = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 35)];
+        _haveJDGoodsLab.font = [UIFont systemFontOfSize:12];
+        _haveJDGoodsLab.textAlignment = NSTextAlignmentCenter;
+        _haveJDGoodsLab.textColor = [UIColor colorWithHexString:@"#999999" alpha:1];
+        _haveJDGoodsLab.text = @"由京东配货的商品需要单独结算";
+    }
+    return _haveJDGoodsLab;
 }
 
 #pragma mark - 没有商品的购物车背景
@@ -385,11 +438,8 @@ static NSString *const URLEditItemsNum = @"/shopping/edit_cart";
     } else {
         if (button.selected == NO) {
             //  结算
-            FBSureOrderViewController * sureOrderVC = [[FBSureOrderViewController alloc] init];
-            sureOrderVC.carGoodsMarr = self.chooseItems;
-            sureOrderVC.type = 0;
-            [self.navigationController pushViewController:sureOrderVC animated:YES];
-            
+            [self networkCarGoPayData:self.chooseItems];
+
         } else {
             //  删除
             TYAlertView * cancelAlertView = [TYAlertView alertViewWithTitle:@"删除商品" message:@"确定将这个商品删除？"];
@@ -471,7 +521,7 @@ static NSString *const URLEditItemsNum = @"/shopping/edit_cart";
 - (void)setNavigationViewUI {
     [[UIApplication sharedApplication] setStatusBarHidden:NO withAnimation:(UIStatusBarAnimationSlide)];
     self.navViewTitle.text = NSLocalizedString(@"GoodsCarVcTitle", nil);
-    self.view.backgroundColor = [UIColor colorWithHexString:grayLineColor];
+    self.view.backgroundColor = [UIColor colorWithHexString:@"#FFFFFF"];
     [self.navView addSubview:self.editBtn];
 }
 
