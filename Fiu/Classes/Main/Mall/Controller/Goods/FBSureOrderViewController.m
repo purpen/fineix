@@ -403,9 +403,6 @@ static NSString *const URLCarGoPay = @"/shopping/checkout";
         [sureBtn addTarget:self action:@selector(sureOrederData) forControlEvents:(UIControlEventTouchUpInside)];
         [_sureView addSubview:sureBtn];
         
-        self.sumPrice = [[UILabel alloc] init];
-        self.sumPrice.textColor = [UIColor colorWithHexString:fineixColor];
-        self.sumPrice.font = [UIFont systemFontOfSize:14];
         [_sureView addSubview:self.sumPrice];
         [self.sumPrice mas_makeConstraints:^(MASConstraintMaker *make) {
             make.height.mas_equalTo(@44);
@@ -430,9 +427,6 @@ static NSString *const URLCarGoPay = @"/shopping/checkout";
         lineLab.backgroundColor = [UIColor colorWithHexString:grayLineColor];
         [_sureView addSubview:lineLab];
         
-        self.bounsPriceLab = [[UILabel alloc] init];
-        self.bounsPriceLab.textColor = [UIColor colorWithHexString:fineixColor];
-        self.bounsPriceLab.font = [UIFont systemFontOfSize:14];
         [_sureView addSubview:self.bounsPriceLab];
         [self.bounsPriceLab mas_makeConstraints:^(MASConstraintMaker *make) {
             make.size.mas_equalTo(CGSizeMake(44, 44));
@@ -441,10 +435,6 @@ static NSString *const URLCarGoPay = @"/shopping/checkout";
             make.right.equalTo(sumLab.mas_left).with.offset(0);
         }];
         
-        self.bounsLab = [[UILabel alloc] init];
-        self.bounsLab.textColor = [UIColor whiteColor];
-        self.bounsLab.font = [UIFont systemFontOfSize:14];
-        self.bounsLab.text = NSLocalizedString(@"userBounsPrice", nil);
         [_sureView addSubview:self.bounsLab];
         [self.bounsLab mas_makeConstraints:^(MASConstraintMaker *make) {
             make.size.mas_equalTo(CGSizeMake(44, 44));
@@ -455,6 +445,34 @@ static NSString *const URLCarGoPay = @"/shopping/checkout";
         
     }
     return _sureView;
+}
+
+- (UILabel *)sumPrice {
+    if (!_sumPrice) {
+        _sumPrice = [[UILabel alloc] init];
+        _sumPrice.textColor = [UIColor colorWithHexString:fineixColor];
+        _sumPrice.font = [UIFont systemFontOfSize:14];
+    }
+    return _sumPrice;
+}
+
+- (UILabel *)bounsLab {
+    if (!_bounsLab) {
+        _bounsLab = [[UILabel alloc] init];
+        _bounsLab.textColor = [UIColor whiteColor];
+        _bounsLab.font = [UIFont systemFontOfSize:14];
+        _bounsLab.text = NSLocalizedString(@"userBounsPrice", nil);
+    }
+    return _bounsLab;
+}
+
+- (UILabel *)bounsPriceLab {
+    if (!_bounsPriceLab) {
+        _bounsPriceLab = [[UILabel alloc] init];
+        _bounsPriceLab.textColor = [UIColor colorWithHexString:fineixColor];
+        _bounsPriceLab.font = [UIFont systemFontOfSize:14];
+    }
+    return _bounsPriceLab;
 }
 
 - (void)sureOrederData {

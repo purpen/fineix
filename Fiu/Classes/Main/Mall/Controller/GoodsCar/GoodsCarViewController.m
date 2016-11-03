@@ -161,17 +161,20 @@ static NSString *const URLCarGoPay = @"/shopping/checkout";
 - (void)getCarItemMarrSort:(NSMutableArray *)carItem {
     if (carItem.count > 1) {
         NSMutableArray *JDGoodsMarr = [NSMutableArray array];
-        
+        NSMutableArray *JDGoodsIdMarr = [NSMutableArray array];
         for (NSUInteger idx = 0; idx < carItem.count; ++ idx) {
             CarGoodsModelItem *model = carItem[idx];
             if (model.vopId > 0) {
                 [JDGoodsMarr addObject:model];
+                [JDGoodsIdMarr addObject:[NSString stringWithFormat:@"%zi", model.productId]];
                 [carItem removeObject:model];
+                [self.goodsIdList removeObject:[NSString stringWithFormat:@"%zi", model.productId]];
             }
         }
         
         if (JDGoodsMarr.count > 0) {
             [carItem addObjectsFromArray:JDGoodsMarr];
+            [self.goodsIdList addObjectsFromArray:JDGoodsIdMarr];
         }
     }
 }
