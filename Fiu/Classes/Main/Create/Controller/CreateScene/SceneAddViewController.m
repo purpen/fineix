@@ -349,10 +349,10 @@ static NSString *const URLUserAddBrand = @"/scene_brands/submit";
      */
     weakSelf.markGoodsView.addBrandInfoDoneBlock = ^(NSString *brand, NSString *brandId, NSString *goods, NSString *goodsId) {
         if (goodsId.length > 1 && brandId.length > 1) {
-            [weakSelf addUserGoodsTagWithTitle:[NSString stringWithFormat:@"%@", goods]
+            [weakSelf addUserGoodsTagWithTitle:[NSString stringWithFormat:@"%@ %@", brand, goods]
                                      withPrice:@""
                                    withGoodsId:goodsId];
-            [weakSelf.goodsTitleData addObject:[NSString stringWithFormat:@"%@", goods]];
+            [weakSelf.goodsTitleData addObject:[NSString stringWithFormat:@"%@ %@", brand, goods]];
             [weakSelf.goodsIdData addObject:goodsId];
             [weakSelf.goodsTypeData addObject:@"2"];
             

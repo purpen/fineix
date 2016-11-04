@@ -41,7 +41,6 @@ static NSString *const URLCarGoPay = @"/shopping/checkout";
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
     [self setGoodsCarVcUI];
 }
 

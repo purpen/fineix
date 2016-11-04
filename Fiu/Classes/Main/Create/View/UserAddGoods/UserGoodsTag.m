@@ -131,7 +131,7 @@
     if (width*1.5 > SCREEN_WIDTH/2) {
         width = SCREEN_WIDTH/2;
     } else {
-        width = [self.title boundingRectWithSize:CGSizeMake(320, 0)].width * 1.5;
+        width = [self.title boundingRectWithSize:CGSizeMake(320, 0)].width * 1.3;
     }
     
     int tagX = (arc4random() % 4) * 30;
