@@ -47,6 +47,7 @@
 @property(nonatomic,strong) UITapGestureRecognizer *myTap;
 @property(nonatomic,strong) TipNumberView *tipNumView1;
 @property(nonatomic,strong) TipNumberView *tipNumView2;
+@property(nonatomic,strong) TipNumberView *tipNumView3;
 @property(nonatomic,strong) BotView *botView;
 @property(nonatomic,strong) UIView *naviViewAl;
 /**  */
@@ -61,11 +62,12 @@
     //
     _chanelV = [ChanelView getChanelView];
     //情景
-    _chanelV.scenarioView.userInteractionEnabled = YES;
-    UITapGestureRecognizer *scenarioTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(signleTap:)];
-    scenarioTap.numberOfTapsRequired = 1;
-    scenarioTap.numberOfTouchesRequired = 1;
-    [_chanelV.scenarioView addGestureRecognizer:scenarioTap];
+//    _chanelV.scenarioView.userInteractionEnabled = YES;
+//    UITapGestureRecognizer *scenarioTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(signleTap:)];
+//    scenarioTap.numberOfTapsRequired = 1;
+//    scenarioTap.numberOfTouchesRequired = 1;
+//    [_chanelV.scenarioView addGestureRecognizer:scenarioTap];
+    
     //场景
     _chanelV.fieldView.userInteractionEnabled = YES;
     UITapGestureRecognizer *scenarioTap1 = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(signleTap1:)];
@@ -171,7 +173,6 @@
     UserInfoEntity *entity = [UserInfoEntity defaultUserInfoEntity];
     FBRequest *request = [FBAPI postWithUrlString:@"/auth/user" requestDictionary:@{@"user_id":entity.userId} delegate:self];
     [request startRequestSuccess:^(FBRequest *request, id result) {
-        
         NSDictionary *dataDict = result[@"data"];
         _chanelV.scenarioNumLabel.text = [NSString stringWithFormat:@"%@",dataDict[@"scene_count"]];
         _chanelV.fieldNumLabel.text = [NSString stringWithFormat:@"%@",dataDict[@"sight_count"]];
@@ -316,6 +317,28 @@
                 make.top.mas_equalTo(cell.btn2.mas_top).with.offset(0/667.0*SCREEN_HEIGHT);
             }];
         }
+
+        if ([_counterModel.fiu_bonus_count intValue] == 0) {
+            //不显示
+            [self.tipNumView3 removeFromSuperview];
+        }else{
+            //显示
+            self.tipNumView3.tipNumLabel.text = [NSString stringWithFormat:@"%@",_counterModel.fiu_bonus_count];
+            CGSize size = [self.tipNumView3.tipNumLabel.text sizeWithAttributes:@{NSFontAttributeName: [UIFont systemFontOfSize:12]}];
+            [cell.btn8 addSubview:self.tipNumView3];
+            [self.tipNumView3 mas_makeConstraints:^(MASConstraintMaker *make) {
+                if ((size.width+9) > 15) {
+                    make.size.mas_equalTo(CGSizeMake(size.width+11, 17));
+                    make.right.mas_equalTo(cell.btn8.mas_right).with.offset(5);
+                }else{
+                    make.size.mas_equalTo(CGSizeMake(17, 17));
+                    make.right.mas_equalTo(cell.btn8.mas_right).with.offset(2);
+                }
+                
+                make.top.mas_equalTo(cell.btn8.mas_top).with.offset(0/667.0*SCREEN_HEIGHT);
+            }];
+        }
+        
         [cell.btn1 addTarget:self action:@selector(orderBtn:) forControlEvents:UIControlEventTouchUpInside];
         [cell.btn2 addTarget:self action:@selector(messageBtn:) forControlEvents:UIControlEventTouchUpInside];
         [cell.btn3 addTarget:self action:@selector(subscribeBtn:) forControlEvents:UIControlEventTouchUpInside];
@@ -371,6 +394,12 @@
     return _tipNumView2;
 }
 
+-(TipNumberView *)tipNumView3{
+    if (!_tipNumView3) {
+        _tipNumView3 = [TipNumberView getTipNumView];
+    }
+    return _tipNumView3;
+}
 
 -(void)aboutBtn:(UIButton*)sender{
     AboutViewController *vc = [[AboutViewController alloc] init];

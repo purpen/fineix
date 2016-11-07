@@ -24,5 +24,6 @@
 @property(nonatomic,strong) NSNumber *subscription_count;
 @property(nonatomic,strong) NSNumber *alert_count;
 @property(nonatomic,strong) NSNumber *fiu_alert_count;
+@property(nonatomic,strong) NSNumber *fiu_bonus_count;
 
 @end
