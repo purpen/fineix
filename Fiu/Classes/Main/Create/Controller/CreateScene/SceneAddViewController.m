@@ -17,24 +17,15 @@ static NSString *const URLUserAddGoods = @"/product/submit";
 static NSString *const URLUserAddBrand = @"/scene_brands/submit";
 
 @interface SceneAddViewController () <FBFootViewDelegate, FBUserGoodsTagDelegaet, FBStickerContainerDelegate> {
-    UserGoodsTag    * goodsTag;
-    NSString        * _title;
-    NSString        * _price;
-    NSString        * _imgUrl;
-    NSInteger         _idx;
-    BOOL              _urlGoods;
-    NSString        * _filterName;
+    UserGoodsTag    *goodsTag;
+    NSString        *_title;
+    NSString        *_price;
+    NSString        *_imgUrl;
+    NSInteger        _idx;
+    BOOL             _urlGoods;
+    NSString        *_filterName;
+    NSArray         *_footTitleArr;
 }
-
-@pro_strong UserGoodsTag           *   userGoodsTag;
-@pro_strong NSMutableDictionary    *   userAddGoodsDict;
-@pro_strong NSMutableArray         *   tagBtnMarr;
-@pro_strong NSMutableArray         *   userAddGoodsMarr;
-@pro_strong NSMutableArray         *   goodsIdData;
-@pro_strong NSMutableArray         *   goodsTitleData;
-@pro_strong NSMutableArray         *   goodsPriceData;
-@pro_strong NSMutableArray         *   goodsTypeData;
-@pro_strong NSMutableArray         *   stickersContainer;
 
 @end
 
@@ -52,6 +43,15 @@ static NSString *const URLUserAddBrand = @"/scene_brands/submit";
     [self setFiltersControllerUI];
     
     _idx = 391;
+}
+
+- (NSArray *)footTitleArr {
+    if (!_footTitleArr) {
+        _footTitleArr = [NSArray arrayWithObjects:NSLocalizedString(@"marker", nil),
+                                                  NSLocalizedString(@"filter", nil),
+                                                  NSLocalizedString(@"adjustment", nil), nil];
+    }
+    return _footTitleArr;
 }
 
 #pragma mark - 应用第一次打开，加载操作指示图
@@ -106,18 +106,12 @@ static NSString *const URLUserAddBrand = @"/scene_brands/submit";
 #pragma mark - 设置视图UI
 - (void)setFiltersControllerUI {
     self.filtersImageView.image = self.filtersImg;
+    
     [self.view addSubview:self.filtersImageView];
     [_filtersImageView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.size.mas_equalTo(CGSizeMake(SCREEN_WIDTH, SCREEN_WIDTH));
         make.top.equalTo(self.view.mas_top).with.offset(45);
         make.centerX.equalTo(self.view);
-    }];
-    
-    [self.view addSubview:self.bottomBtn];
-    [_bottomBtn mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.size.mas_equalTo(CGSizeMake(SCREEN_WIDTH, SCREEN_HEIGHT-(SCREEN_WIDTH+90)));
-        make.bottom.equalTo(self.view.mas_bottom).with.offset(-45);
-        make.left.equalTo(self.view.mas_left).with.offset(0);
     }];
     
     [self.view addSubview:self.footView];
@@ -127,11 +121,12 @@ static NSString *const URLUserAddBrand = @"/scene_brands/submit";
         make.centerX.equalTo(self.view);
     }];
     
-    [self.view addSubview:self.filtersView];
-    [_filtersView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.size.mas_equalTo(CGSizeMake(SCREEN_WIDTH, 120));
-        make.bottom.equalTo(self.view.mas_bottom).with.offset(-55);
-        make.left.equalTo(self.view.mas_left).with.offset(SCREEN_WIDTH);
+    [self.view addSubview:self.functionView];
+    [_functionView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.width.equalTo(@(SCREEN_WIDTH));
+        make.top.equalTo(_filtersImageView.mas_bottom).with.offset(0);
+        make.bottom.equalTo(_footView.mas_top).with.offset(0);
+        make.left.equalTo(self.view.mas_left).with.offset(0);
     }];
     
     [self setNotification];
@@ -140,10 +135,9 @@ static NSString *const URLUserAddBrand = @"/scene_brands/submit";
 #pragma mark - 底部选项工具栏
 - (FBFootView *)footView {
     if (!_footView) {
-        NSArray * arr = [NSArray arrayWithObjects:NSLocalizedString(@"marker", nil), NSLocalizedString(@"filter", nil), nil];
         _footView = [[FBFootView alloc] init];
         _footView.backgroundColor = [UIColor colorWithHexString:@"#222222"];
-        _footView.titleArr = arr;
+        _footView.titleArr = self.footTitleArr;
         _footView.titleFontSize = Font_ControllerTitle;
         _footView.btnBgColor = [UIColor colorWithHexString:@"#222222"];
         _footView.titleNormalColor = [UIColor whiteColor];
@@ -157,36 +151,31 @@ static NSString *const URLUserAddBrand = @"/scene_brands/submit";
 
 #pragma mark 底部选项的点击事件
 - (void)buttonDidSeletedWithIndex:(NSInteger)index {
-    if (index == 1) {
-        [self showFiltersViewFrame:0];
-    } else if (index == 0) {
-        [self showFiltersViewFrame:1];
+    [UIView animateWithDuration:0 animations:^{
+        self.functionView.contentOffset = CGPointMake(SCREEN_WIDTH * index, 0);
+    }];
+}
+
+#pragma mark - 底部功能视图
+- (UIScrollView *)functionView {
+    if (!_functionView) {
+        _functionView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, SCREEN_WIDTH, SCREEN_WIDTH, SCREEN_HEIGHT -(SCREEN_WIDTH +45))];
+        _functionView.contentSize = CGSizeMake(SCREEN_WIDTH * self.footTitleArr.count, 0);
+        _functionView.pagingEnabled = YES;
+        _functionView.showsHorizontalScrollIndicator = NO;
+        _functionView.scrollEnabled = NO;
+        
+        [_functionView addSubview:self.bottomBtn];
+        [_functionView addSubview:self.filtersView];
+        [_functionView addSubview:self.adjustView];
     }
+    return _functionView;
 }
 
-- (void)showFiltersViewFrame:(NSInteger)index {
-    [UIView animateWithDuration:0.5f
-                          delay:0
-         usingSpringWithDamping:10.0f
-          initialSpringVelocity:5.0f
-                        options:(UIViewAnimationOptionOverrideInheritedDuration)
-                     animations:^{
-        [self.filtersView mas_updateConstraints:^(MASConstraintMaker *make) {
-            make.left.equalTo(self.view.mas_left).with.offset(SCREEN_WIDTH * index);
-        }];
-        [self.bottomBtn mas_updateConstraints:^(MASConstraintMaker *make) {
-            make.left.equalTo(self.view.mas_left).with.offset(SCREEN_WIDTH * (index-1));
-        }];
-                         
-        [self.view layoutIfNeeded];
-                         
-    } completion:nil];
-}
-
-#pragma mark - 标记视图
+#pragma mark - 标记商品按钮
 - (UIButton *)bottomBtn {
     if (!_bottomBtn) {
-        _bottomBtn = [[UIButton alloc] init];
+        _bottomBtn = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT-(SCREEN_WIDTH+90))];
         [_bottomBtn setTitle:NSLocalizedString(@"markGoodsBtnTitle", nil) forState:(UIControlStateNormal)];
         [_bottomBtn setTitleColor:[UIColor colorWithHexString:@"#FFFFFF" alpha:1] forState:(UIControlStateNormal)];
         _bottomBtn.titleLabel.font = [UIFont systemFontOfSize:14];
@@ -200,10 +189,18 @@ static NSString *const URLUserAddBrand = @"/scene_brands/submit";
     return _bottomBtn;
 }
 
+#pragma mark - 调整视图
+- (THNAdjustView *)adjustView {
+    if (!_adjustView) {
+        _adjustView = [[THNAdjustView alloc] initWithFrame:CGRectMake(SCREEN_WIDTH *2, SCREEN_HEIGHT-SCREEN_WIDTH-210, SCREEN_WIDTH, 120)];
+    }
+    return _adjustView;
+}
+
 #pragma mark - 滤镜视图
 - (FiltersView *)filtersView {
     if (!_filtersView) {
-        _filtersView = [[FiltersView alloc] init];
+        _filtersView = [[FiltersView alloc] initWithFrame:CGRectMake(SCREEN_WIDTH, SCREEN_HEIGHT-SCREEN_WIDTH-210, SCREEN_WIDTH, 120)];
     }
     return _filtersView;
 }
@@ -224,7 +221,6 @@ static NSString *const URLUserAddBrand = @"/scene_brands/submit";
     UIImage *showFilterImage = [[FBFilters alloc] initWithImage:self.filtersImg filterName:_filterName].filterImg;
     self.filtersImageView.image = showFilterImage;
 }
-
 
 #pragma mark - 标记产品信息视图
 - (THNMarkGoodsView *)markGoodsView {

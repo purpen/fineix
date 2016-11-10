@@ -23,6 +23,7 @@ static NSString *const addressCell = @"addressCellCellId";
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     
+    [self thn_networkGetProvinceData];
     self.navView.hidden = YES;
     self.view.backgroundColor = [UIColor colorWithHexString:@"#000000" alpha:0.3];
 }
@@ -32,8 +33,6 @@ static NSString *const addressCell = @"addressCellCellId";
     
     _nowSelectType = 0;
     [self thn_setViewUI];
-    
-    [self thn_networkGetProvinceData];
 }
 
 #pragma mark - 请求地址网络数据

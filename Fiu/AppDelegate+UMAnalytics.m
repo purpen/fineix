@@ -26,6 +26,7 @@
     [MobClick profileSignInWithPUID:[[FBAPI new] uuid]];
     NSString *version = [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleShortVersionString"];
     [MobClick setAppVersion:version];
+//    [MobClick setLogEnabled:YES];
     
 }
 @end

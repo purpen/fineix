@@ -82,6 +82,7 @@
 "marker" = "Mark";
 "addText" = "  Add the title  ";
 "filter" = "Filter";
+"adjustment" = "调整";
 "addTitleText" =  "添加20字以内的标题";
 "addDescription" = "说说你现在的想法";
 "addFiuSceneDes" = "请添加140字以内的地盘描述";
@@ -96,6 +97,16 @@
 "sure" = "OK";
 "chooseCategoryVC" = "选择地盘分类";
 "addSceneTags" = "＃添加标签";
+
+//  调整图片
+"adjust00" = "亮度";
+"adjust01" = "对比度";
+"adjust02" = "饱和度";
+"adjust03" = "锐度";
+"adjust04" = "色温";
+"adjust05" = "暗角";
+"adjust06" = "高光";
+"adjust07" = "阴影";
 
 //  标记产品
 "chooseGoodsImage" = "选择产品添加到当前图片中";

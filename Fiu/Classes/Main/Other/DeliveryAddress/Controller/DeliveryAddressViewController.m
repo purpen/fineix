@@ -74,7 +74,7 @@ static NSString *const DeliveryAddressCellIdentifier = @"deliveryAddressCell";
     FBRequest * request = [FBAPI postWithUrlString:AddressURL requestDictionary:params delegate:self];
     request.flag = AddressURL;
     [request startRequest];
-    [SVProgressHUD showWithMaskType:SVProgressHUDMaskTypeClear];
+    [SVProgressHUD show];
 }
 
 - (void)requestRemoveAddressWithId:(NSString *)idField
@@ -83,7 +83,7 @@ static NSString *const DeliveryAddressCellIdentifier = @"deliveryAddressCell";
     FBRequest * request = [FBAPI postWithUrlString:DeleteAddressURL requestDictionary:params delegate:self];
     request.flag = DeleteAddressURL;
     [request startRequest];
-    [SVProgressHUD showWithMaskType:SVProgressHUDMaskTypeClear];
+    [SVProgressHUD show];
 }
 
 #pragma mark - FBRequest Delegate

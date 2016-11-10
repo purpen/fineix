@@ -644,6 +644,8 @@
 		D8E8FFC81D76D01B00DDC3E0 /* TagFlowLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = D8E8FFC71D76D01B00DDC3E0 /* TagFlowLayout.m */; };
 		D8E8FFCB1D77393400DDC3E0 /* THNUserAddGoodsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D8E8FFCA1D77393400DDC3E0 /* THNUserAddGoodsViewController.m */; };
 		D8E8FFCE1D773F6E00DDC3E0 /* THNUserAddGoodsTitleTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D8E8FFCD1D773F6E00DDC3E0 /* THNUserAddGoodsTitleTableViewCell.m */; };
+		D8F80B8E1DD30F2700C086FA /* THNAdjustView.m in Sources */ = {isa = PBXBuildFile; fileRef = D8F80B8D1DD30F2700C086FA /* THNAdjustView.m */; };
+		D8F80B911DD3103500C086FA /* THNAdjustCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D8F80B901DD3103500C086FA /* THNAdjustCollectionViewCell.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -1786,6 +1788,10 @@
 		D8E8FFCA1D77393400DDC3E0 /* THNUserAddGoodsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THNUserAddGoodsViewController.m; sourceTree = "<group>"; };
 		D8E8FFCC1D773F6E00DDC3E0 /* THNUserAddGoodsTitleTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THNUserAddGoodsTitleTableViewCell.h; sourceTree = "<group>"; };
 		D8E8FFCD1D773F6E00DDC3E0 /* THNUserAddGoodsTitleTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THNUserAddGoodsTitleTableViewCell.m; sourceTree = "<group>"; };
+		D8F80B8C1DD30F2700C086FA /* THNAdjustView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THNAdjustView.h; sourceTree = "<group>"; };
+		D8F80B8D1DD30F2700C086FA /* THNAdjustView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THNAdjustView.m; sourceTree = "<group>"; };
+		D8F80B8F1DD3103500C086FA /* THNAdjustCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THNAdjustCollectionViewCell.h; sourceTree = "<group>"; };
+		D8F80B901DD3103500C086FA /* THNAdjustCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THNAdjustCollectionViewCell.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -2049,6 +2055,10 @@
 				1F2A8C221CF40276005116C7 /* PictureView.m */,
 				D86809011D622049002714B2 /* FBImageScrollView.h */,
 				D86809021D622049002714B2 /* FBImageScrollView.m */,
+				D8F80B8C1DD30F2700C086FA /* THNAdjustView.h */,
+				D8F80B8D1DD30F2700C086FA /* THNAdjustView.m */,
+				D8F80B8F1DD3103500C086FA /* THNAdjustCollectionViewCell.h */,
+				D8F80B901DD3103500C086FA /* THNAdjustCollectionViewCell.m */,
 			);
 			path = Creat;
 			sourceTree = "<group>";
@@ -4680,6 +4690,7 @@
 				D85174661D598D47005F5722 /* THNDataInfoTableViewCell.m in Sources */,
 				D80878D61D6AD18E00C1FFA0 /* THNMallNewGoodsCollectionViewCell.m in Sources */,
 				D85174631D598D36005F5722 /* THNSceneImageTableViewCell.m in Sources */,
+				D8F80B8E1DD30F2700C086FA /* THNAdjustView.m in Sources */,
 				1F2AFD281D88182200DA6035 /* GuidePageViewController.m in Sources */,
 				1F2AFD8C1D88186C00DA6035 /* RecommendedScenarioModel.m in Sources */,
 				D8E8FFCB1D77393400DDC3E0 /* THNUserAddGoodsViewController.m in Sources */,
@@ -4704,6 +4715,7 @@
 				D869BD7C1D6044F700432423 /* THNAddTagViewController.m in Sources */,
 				1FF36EA91D5099AA00EB3C93 /* UIView+FSExtension.m in Sources */,
 				D8ACF45E1D6D7BCC00DB79D8 /* THNSubscribeViewController.m in Sources */,
+				D8F80B911DD3103500C086FA /* THNAdjustCollectionViewCell.m in Sources */,
 				D80FB14A1DAF89BA0060C561 /* NSString+TimeDate.m in Sources */,
 				D869BD6E1D6036A000432423 /* CommentId.m in Sources */,
 				1F2A90621CF40277005116C7 /* SystemInformsViewController.m in Sources */,

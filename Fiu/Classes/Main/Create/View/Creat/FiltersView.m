@@ -15,6 +15,7 @@
 - (instancetype)initWithFrame:(CGRect)frame {
     self = [super initWithFrame:frame];
     if (self) {
+        
         self.filtersTitle = [NSArray arrayWithObjects:
                              NSLocalizedString(@"FiltersName", nil),
                              NSLocalizedString(@"FiltersNameA", nil),
@@ -63,12 +64,11 @@
         flowLayout.scrollDirection = UICollectionViewScrollDirectionHorizontal;
         
         _filtersCollectionView = [[UICollectionView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 120) collectionViewLayout:flowLayout];
-        _filtersCollectionView.backgroundColor = [UIColor colorWithHexString:@"#000000" alpha:.7];
         _filtersCollectionView.showsHorizontalScrollIndicator = NO;
         _filtersCollectionView.showsVerticalScrollIndicator = NO;
         _filtersCollectionView.delegate = self;
         _filtersCollectionView.dataSource = self;
-
+        _filtersCollectionView.backgroundColor = [UIColor colorWithHexString:@"#222222" alpha:0.8];
         [_filtersCollectionView registerClass:[FBFiltersCollectionViewCell class] forCellWithReuseIdentifier:@"FBFiltersCollectionViewCell"];
     }
     return _filtersCollectionView;
