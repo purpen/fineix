@@ -13,11 +13,13 @@
 #import "FBFootView.h"
 #import "THNMarkGoodsView.h"
 #import "UserGoodsTag.h"
+#import "FSImageFilterManager.h"
 
 @interface SceneAddViewController : FBPictureViewController <
     FBFootViewDelegate,
     THNMarkGoodsViewDelegate,
-    FBUserGoodsTagDelegaet
+    FBUserGoodsTagDelegaet,
+    FiltersViewDelegate
 >
 
 @pro_strong NSArray             *locationArr;            //  照片位置
@@ -38,6 +40,7 @@
 @pro_strong UIButton            *bottomBtn;
 @pro_strong THNMarkGoodsView    *markGoodsView;
 @pro_strong NSArray             *footTitleArr;
+@pro_strong FSImageFilterManager *filterManager;
 
 ///
 @pro_strong UserGoodsTag           *userGoodsTag;

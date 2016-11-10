@@ -128,8 +128,6 @@ static NSString *const URLUserAddBrand = @"/scene_brands/submit";
         make.bottom.equalTo(_footView.mas_top).with.offset(0);
         make.left.equalTo(self.view.mas_left).with.offset(0);
     }];
-    
-    [self setNotification];
 }
 
 #pragma mark - 底部选项工具栏
@@ -201,24 +199,23 @@ static NSString *const URLUserAddBrand = @"/scene_brands/submit";
 - (FiltersView *)filtersView {
     if (!_filtersView) {
         _filtersView = [[FiltersView alloc] initWithFrame:CGRectMake(SCREEN_WIDTH, SCREEN_HEIGHT-SCREEN_WIDTH-210, SCREEN_WIDTH, 120)];
+        [_filtersView thn_getNeedEditSceneImage:self.filtersImg];
+        _filtersView.delegate = self;
     }
     return _filtersView;
 }
 
-#pragma mark 接收消息通知
-- (void)setNotification {
-    //  from "FiltersView.m"
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(changeFilter:) name:@"fitlerName" object:nil];
-}
-
-- (void)dealloc {
-    [[NSNotificationCenter defaultCenter] removeObserver:self name:@"fitlerName" object:nil];
+- (FSImageFilterManager *)filterManager {
+    if (!_filterManager) {
+        _filterManager = [[FSImageFilterManager alloc] init];
+    }
+    return _filterManager;
 }
 
 #pragma mark 改变滤镜
-- (void)changeFilter:(NSNotification *)filterName {
-    _filterName = [filterName object];
-    UIImage *showFilterImage = [[FBFilters alloc] initWithImage:self.filtersImg filterName:_filterName].filterImg;
+- (void)thn_chooseFilterWithName:(NSString *)filterName {
+    _filterName = filterName;
+    UIImage *showFilterImage = [self.filterManager randerImageWithIndex:_filterName WithImage:self.filtersImg];
     self.filtersImageView.image = showFilterImage;
 }
 

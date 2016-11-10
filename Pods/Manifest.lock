@@ -18,6 +18,7 @@ PODS:
   - FMDB (2.6.2):
     - FMDB/standard (= 2.6.2)
   - FMDB/standard (2.6.2)
+  - GPUImage (0.1.7)
   - HMSegmentedControl (1.5.2)
   - HTHorizontalSelectionList (0.6.4):
     - M13BadgeView (~> 1.0.4)
@@ -45,6 +46,7 @@ DEPENDENCIES:
   - AFNetworking (~> 3.0)
   - DACircularProgress
   - FMDB (~> 2.4)
+  - GPUImage (~> 0.1.7)
   - HMSegmentedControl
   - HTHorizontalSelectionList
   - IDMPhotoBrowser
@@ -64,6 +66,7 @@ SPEC CHECKSUMS:
   AFNetworking: a0075feb321559dc78d9d85b55d11caa19eabb93
   DACircularProgress: 4dd437c0fc3da5161cb289e07ac449493d41db71
   FMDB: 854a0341b4726e53276f2a8996f06f1b80f9259a
+  GPUImage: 733a5f0fab92df9de1c37ba9df520a833ccb406d
   HMSegmentedControl: 83b9686022d2176fb6457d2bdb61e5d6393fed7d
   HTHorizontalSelectionList: d815950549e9599a1ca1b38d16a4450704272dfd
   IDMPhotoBrowser: 52ac15203a73da002a7501ac7c6651a4cd761b4e
@@ -80,6 +83,6 @@ SPEC CHECKSUMS:
   TYAlertController: 849283e546e297d4c33708d81d12605901adbba7
   ZYCornerRadius: 86f76224de123e39e48c33cecdada2424dccb0a0
 
-PODFILE CHECKSUM: 8fb234a3877b65daa736cc5adbb0b8ea8fb60179
+PODFILE CHECKSUM: dd662177414a0da21301b0e6ee8a56c343523000
 
 COCOAPODS: 1.0.0.beta.4

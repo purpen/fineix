@@ -19,6 +19,11 @@
 			<key>isShown</key>
 			<false/>
 		</dict>
+		<key>GPUImage.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
 		<key>HMSegmentedControl.xcscheme</key>
 		<dict>
 			<key>isShown</key>
@@ -112,7 +117,7 @@
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>0E2E648A8E9FBC81203A8E3961434557</key>
+		<key>1AA1B4B80A26456A31F6A0E770B4ACED</key>
 		<dict>
 			<key>primary</key>
 			<true/>
@@ -132,7 +137,7 @@
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>381EF19BBC609FEDB4C085F41A427A53</key>
+		<key>424478446BCDEC159CFC5E99C6EA6D65</key>
 		<dict>
 			<key>primary</key>
 			<true/>
@@ -147,12 +152,12 @@
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>6D413C91D5E1AE372637C35034ACD520</key>
+		<key>6610362E50A6DE8BACCA1F2885CD9157</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>7A6C8146D3DBC5F75701D8E1C383EEC3</key>
+		<key>7C8EAF116CB8E977C032FDF7C3FFDEFA</key>
 		<dict>
 			<key>primary</key>
 			<true/>
@@ -177,22 +182,27 @@
 			<key>primary</key>
 			<true/>
 		</dict>
+		<key>9EAE705E686D52A995A8A7A089D51CDE</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
 		<key>9F12FB4A63E20F601CFB2E64A65B57C1</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
+		<key>A9F79312122D234368F7D0855FF0D5FC</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>ABEA89EA7D91A000CAC8266E31AF75FE</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
 		<key>ACAE27A34969E14A7DA9829402D7B9A0</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>BAC1478635305EDFFF1BB0303AC5BAE1</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>E5E65F48F84086C937C6EE587097B907</key>
 		<dict>
 			<key>primary</key>
 			<true/>

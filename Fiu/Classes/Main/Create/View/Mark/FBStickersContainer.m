@@ -174,11 +174,18 @@
     _stickerView.layer.borderWidth = 0.7f;
 }
 
+- (FSImageFilterManager *)filterManager {
+    if (!_filterManager) {
+        _filterManager = [[FSImageFilterManager alloc] init];
+    }
+    return _filterManager;
+}
+
 - (FBSticker *)generateSticker:(NSString *)filterName {
     FBSticker * sticker = [FBSticker new];
     sticker.rotateAngle = _diffAngle;
     if (filterName.length) {
-        UIImage *showFilterImage = [[FBFilters alloc] initWithImage:_stickerView.image filterName:filterName].filterImg;
+        UIImage *showFilterImage = [self.filterManager randerImageWithIndex:filterName WithImage:_stickerView.image];
         sticker.image = showFilterImage;
     } else {
         sticker.image = _stickerView.image;

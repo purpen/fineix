@@ -34,7 +34,10 @@ static NSString *const URLCancelLike = @"/favorite/ajax_cancel_love";
     [super viewWillAppear:animated];
     
     [self thn_setNavigationViewUI];
-    [self thn_networkSubCountData];
+    
+    if ([self isUserLogin]) {
+        [self thn_networkSubCountData];
+    }
 }
 
 - (void)viewDidLoad {

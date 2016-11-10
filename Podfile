@@ -19,4 +19,5 @@ target "Fiu" do
  pod 'TTTAttributedLabel'
  pod 'IDMPhotoBrowser'
  pod 'DACircularProgress'
+ pod 'GPUImage', '~> 0.1.7'
 end

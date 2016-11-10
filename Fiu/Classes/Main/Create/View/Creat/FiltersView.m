@@ -10,13 +10,15 @@
 #import "FBFiltersCollectionViewCell.h"
 #import "FBFilters.h"
 
-@implementation FiltersView
+@implementation FiltersView {
+    UIImage *_sceneImage;
+}
 
 - (instancetype)initWithFrame:(CGRect)frame {
     self = [super initWithFrame:frame];
     if (self) {
         
-        self.filtersTitle = [NSArray arrayWithObjects:
+        self.filtersTitle = @[
                              NSLocalizedString(@"FiltersName", nil),
                              NSLocalizedString(@"FiltersNameA", nil),
                              NSLocalizedString(@"FiltersNameB", nil),
@@ -28,29 +30,38 @@
                              NSLocalizedString(@"FiltersNameH", nil),
                              NSLocalizedString(@"FiltersNameI", nil),
                              NSLocalizedString(@"FiltersNameJ", nil),
-                             NSLocalizedString(@"FiltersNameK", nil),
-                             nil];
+                             NSLocalizedString(@"FiltersNameK", nil)
+                             ];
         
         self.filters = @[
-                         @"CIColorCrossPolynomial",
-                         @"CIPhotoEffectFade",
-                         @"CIPhotoEffectNoir",
-                         @"CIPhotoEffectTransfer",
-                         @"CIColorMonochrome",
-                         @"CIPhotoEffectInstant",
-                         @"CIMaximumComponent",
-                         @"CIPhotoEffectChrome",
-                         @"CISepiaTone",
-                         @"CIMinimumComponent",
-                         @"CIPhotoEffectProcess",
-                         @"CIFalseColor"
+                         @"original",
+                         @"FS1977Filter",
+                         @"FSAmaroFilter",
+                         @"FSHudsonFilter",
+                         @"FSInkwellFilter",
+                         @"FSLomofiFilter",
+                         @"FSLordKelvinFilter",
+                         @"FSNashvilleFilter",
+                         @"FSSierraFilter",
+                         @"FSValenciaFilter",
+                         @"FSWaldenFilter",
+                         @"FSXproIIFilter"
                          ];
-        
-        
         
         [self addSubview:self.filtersCollectionView];
     }
     return self;
+}
+
+- (void)thn_getNeedEditSceneImage:(UIImage *)sceneImage {
+    _sceneImage = sceneImage;
+}
+
+- (FSImageFilterManager *)filterManager {
+    if (!_filterManager) {
+        _filterManager = [[FSImageFilterManager alloc] init];
+    }
+    return _filterManager;
 }
 
 #pragma mark - 滤镜菜单
@@ -82,14 +93,14 @@
     static NSString * filtersCellID = @"FBFiltersCollectionViewCell";
     FBFiltersCollectionViewCell * cell = [collectionView dequeueReusableCellWithReuseIdentifier:filtersCellID forIndexPath:indexPath];
     cell.filtersTitle.text = self.filtersTitle[indexPath.row];
-    cell.filtersImageView.image = [UIImage imageNamed:[NSString stringWithFormat:@"filters_%zi", indexPath.row]];
-    
+    cell.filtersImageView.image = [self.filterManager randerImageWithIndex:self.filters[indexPath.row] WithImage:_sceneImage];
     return cell;
 }
 
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
-    // to "FiltersViewController.h"
-    [[NSNotificationCenter defaultCenter] postNotificationName:@"fitlerName" object:self.filters[indexPath.row]];
+    if (self.delegate && [self.delegate respondsToSelector:@selector(thn_chooseFilterWithName:)]) {
+        [self.delegate thn_chooseFilterWithName:self.filters[indexPath.row]];
+    }
 }
 
 @end
