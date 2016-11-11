@@ -10,6 +10,8 @@
 
 @interface FBImageScrollView : UIScrollView
 
+@property (strong, nonatomic) UIImageView *imageView;
+
 - (void)displayImage:(UIImage *)image;
 
 - (UIImage *)capture;

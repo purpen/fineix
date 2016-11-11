@@ -14,4 +14,6 @@
 @pro_strong UIImageView         *   filtersImageView;       //  滤镜缩略图
 @pro_strong UILabel             *   filtersTitle;           //  滤镜名称
 
+//- (void)thn_getFilterImage:(UIImage *)image;
+
 @end

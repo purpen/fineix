@@ -23,6 +23,7 @@
 @pro_strong NSArray             *   filtersTitle;               //  滤镜标题
 @pro_strong NSArray             *   filters;                    //  滤镜
 @pro_strong FSImageFilterManager*   filterManager;
+@pro_strong NSMutableArray      *   filterImageMarr;
 
 @pro_weak id <FiltersViewDelegate> delegate;
 

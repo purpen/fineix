@@ -27,6 +27,14 @@
     return self;
 }
 
+//- (void)thn_getFilterImage:(UIImage *)image {
+//    self.filtersImageView.alpha = 0.0f;
+//    self.filtersImageView.image = image;
+//    [UIView animateWithDuration:.5 animations:^{
+//        self.filtersImageView.alpha = 1.0f;
+//    }];
+//}
+
 #pragma mark - 滤镜图
 - (UIImageView *)filtersImageView {
     if (!_filtersImageView) {

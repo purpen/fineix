@@ -12,7 +12,6 @@
 @interface FBImageScrollView () <UIScrollViewDelegate> {
     CGSize _imageSize;
 }
-@property (strong, nonatomic) UIImageView *imageView;
 
 @end
 
@@ -35,7 +34,6 @@
 
 - (void)layoutSubviews {
     [super layoutSubviews];
-    
     CGSize boundsSize = self.bounds.size;
     CGRect frameToCenter = self.imageView.frame;
     
@@ -56,15 +54,15 @@
     CGRect visibleRect = [self _calcVisibleRectForCropArea];
     CGAffineTransform rectTransform = [self _orientationTransformedRectOfImage:self.imageView.image];
     visibleRect = CGRectApplyAffineTransform(visibleRect, rectTransform);
-    CGImageRef ref = CGImageCreateWithImageInRect([self.imageView.image CGImage], visibleRect);
-    UIImage* cropped = [[UIImage alloc] initWithCGImage:ref scale:self.imageView.image.scale orientation:self.imageView.image.imageOrientation] ;
+    CGImageRef ref = CGImageCreateWithImageInRect(self.imageView.image.CGImage, visibleRect);
+    UIImage* cropped = [[UIImage alloc] initWithCGImage:ref scale:1 orientation:self.imageView.image.imageOrientation] ;
     CGImageRelease(ref);
     ref = NULL;
     return cropped;
 }
 
 static CGRect FBScaleRect(CGRect rect, CGFloat scale) {
-    return CGRectMake(rect.origin.x * scale, rect.origin.y * scale, rect.size.width * scale, rect.size.height * scale);
+    return CGRectMake(rect.origin.x * scale, rect.origin.y * scale, rect.size.width * scale, rect.size.width * scale);
 }
 
 - (CGRect)_calcVisibleRectForCropArea {

@@ -16,8 +16,6 @@
 - (instancetype)initWithFrame:(CGRect)frame {
     self = [super initWithFrame:frame];
     if (self) {
-        
-//        [self addSubview:self.createView];
         //  相册列表
         [self addSubview:self.photosView];
         [_photosView mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -25,11 +23,6 @@
         }];
         
         [self loadAllPhotos];
-        
-//        [self addSubview:self.recoveryFrameBtn];
-//        self.recoveryFrameBtn.hidden = YES;
-        
-//        [self photosViewZoom];
     }
     
     return self;
@@ -44,12 +37,10 @@
         //  相册列表
         [_createView addSubview:self.photosView];
         [_photosView mas_makeConstraints:^(MASConstraintMaker *make) {
-//            make.size.mas_equalTo(CGSizeMake(SCREEN_WIDTH, 200));
             make.bottom.top.left.right.equalTo(self.createView).with.offset(0);
         }];
         
         //  显示的照片
-//        [_createView addSubview:self.photoImgView];
         [_photoImgView mas_makeConstraints:^(MASConstraintMaker *make) {
             make.bottom.equalTo(self.photosView.mas_top).with.offset(-2);
             make.top.equalTo(_createView.mas_top).with.offset(0);
@@ -138,8 +129,6 @@
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
     static NSString * collectionViewCellIdentifier = @"FBPictureCollectionViewCell";
     FBPictureCollectionViewCell * cell = [collectionView dequeueReusableCellWithReuseIdentifier:collectionViewCellIdentifier forIndexPath:indexPath];
-//    FBPhoto * photo = [self.sortPhotosArr objectAtIndex:indexPath.row];
-//    cell.imageView.image = photo.thumbnailImage;
     cell.backgroundColor = [UIColor redColor];
     return cell;
 }

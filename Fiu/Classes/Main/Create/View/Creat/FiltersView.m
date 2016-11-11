@@ -10,9 +10,7 @@
 #import "FBFiltersCollectionViewCell.h"
 #import "FBFilters.h"
 
-@implementation FiltersView {
-    UIImage *_sceneImage;
-}
+@implementation FiltersView
 
 - (instancetype)initWithFrame:(CGRect)frame {
     self = [super initWithFrame:frame];
@@ -54,14 +52,24 @@
 }
 
 - (void)thn_getNeedEditSceneImage:(UIImage *)sceneImage {
-    _sceneImage = sceneImage;
+    dispatch_async(dispatch_get_global_queue(0, 0), ^{
+        for (NSUInteger idx = 0; idx < self.filters.count; ++ idx) {
+            FSImageFilterManager *filterManager = [[FSImageFilterManager alloc] init];
+            UIImage *filterImage = [filterManager randerImageWithIndex:self.filters[idx] WithImage:sceneImage];
+            [self.filterImageMarr addObject:filterImage];
+        }
+        
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [self.filtersCollectionView reloadData];
+        });
+    });
 }
 
-- (FSImageFilterManager *)filterManager {
-    if (!_filterManager) {
-        _filterManager = [[FSImageFilterManager alloc] init];
+- (NSMutableArray *)filterImageMarr {
+    if (!_filterImageMarr) {
+        _filterImageMarr = [NSMutableArray array];
     }
-    return _filterManager;
+    return _filterImageMarr;
 }
 
 #pragma mark - 滤镜菜单
@@ -93,8 +101,17 @@
     static NSString * filtersCellID = @"FBFiltersCollectionViewCell";
     FBFiltersCollectionViewCell * cell = [collectionView dequeueReusableCellWithReuseIdentifier:filtersCellID forIndexPath:indexPath];
     cell.filtersTitle.text = self.filtersTitle[indexPath.row];
-    cell.filtersImageView.image = [self.filterManager randerImageWithIndex:self.filters[indexPath.row] WithImage:_sceneImage];
+    if (self.filterImageMarr.count == self.filters.count) {
+        cell.filtersImageView.image = self.filterImageMarr[indexPath.row];
+    }
     return cell;
+}
+
+- (void)collectionView:(UICollectionView *)collectionView willDisplayCell:(UICollectionViewCell *)cell forItemAtIndexPath:(NSIndexPath *)indexPath {
+    cell.alpha = 0.0f;
+    [UIView animateWithDuration:.2 animations:^{
+        cell.alpha = 1.0f;
+    }];
 }
 
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
