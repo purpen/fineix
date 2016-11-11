@@ -10,7 +10,6 @@
 #import "Fiu.h"
 #import "FBSticker.h"
 #import "FBFilters.h"
-#import "FSImageFilterManager.h"
 
 @class FBStickersContainer;
 
@@ -23,13 +22,12 @@
 
 @interface FBStickersContainer : UIView
 
-@pro_strong FSImageFilterManager *filterManager;
 @pro_weak id <FBStickerContainerDelegate> delegate;
 
 - (void)setupSticker:(NSString *)stickerUrl;
 
 - (void)recoveryFromSticker:(FBSticker *)sticker;
 
-- (FBSticker *)generateSticker:(NSString *)filterName;
+- (FBSticker *)generateSticker;
 
 @end

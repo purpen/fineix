@@ -24,7 +24,7 @@
 
 @pro_strong NSArray             *locationArr;            //  照片位置
 @pro_strong UIImageView         *filtersImageView;       //  需要处理的图片视图
-@pro_strong UIImage             *filtersImg;             //  需要处理的图片
+@pro_strong UIImage             *filtersImg;             //  需要处理的原始图片
 @pro_strong NSString            *filterName;             //  选择的滤镜名字
 @pro_strong NSString            *fSceneId;
 @pro_strong NSString            *fSceneTitle;

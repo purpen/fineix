@@ -43,14 +43,14 @@
 }
 
 - (void)thn_setSceneUserInfoData:(HomeSceneListRow *)sceneModel isLogin:(BOOL)login {
-    self.sceneImageView.alpha = 0.0f;
-    
     _isLogin = login;
 
-    [self.sceneImageView sd_setImageWithURL:[NSURL URLWithString:sceneModel.coverUrl] placeholderImage:[UIImage imageNamed:@""] completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
-        [UIView animateWithDuration:.5 animations:^{
-            self.sceneImageView.alpha = 1.0f;
-        }];
+    [self.sceneImageView sd_setImageWithURL:[NSURL URLWithString:sceneModel.coverUrl]
+                           placeholderImage:[UIImage imageNamed:@""]
+                                  completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
+                                      if (cacheType == SDImageCacheTypeDisk) {
+                                          [self thn_showLoadImageAnimate:YES];
+                                      };
     }];
     
     [self.userHeader downloadImage:sceneModel.user.avatarUrl place:[UIImage imageNamed:@""]];
@@ -96,6 +96,15 @@
         [self.title mas_updateConstraints:^(MASConstraintMaker *make) {
             make.width.equalTo(@([self getTextSizeWidth:titleStr].width));
             make.bottom.equalTo(_sceneImageView.mas_bottom).with.offset(-5);
+        }];
+    }
+}
+
+- (void)thn_showLoadImageAnimate:(BOOL)show {
+    if (show) {
+        self.sceneImageView.alpha = 0.0f;
+        [UIView animateWithDuration:.5 animations:^{
+            self.sceneImageView.alpha = 1.0f;
         }];
     }
 }

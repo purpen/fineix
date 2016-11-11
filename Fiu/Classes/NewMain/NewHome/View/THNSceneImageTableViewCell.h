@@ -28,4 +28,12 @@
 
 - (void)thn_setSceneImageData:(HomeSceneListRow *)sceneModel;
 
+
+/**
+ 图片加载显示动画
+
+ @param show 是否加载动画
+ */
+- (void)thn_showLoadImageAnimate:(BOOL)show;
+
 @end

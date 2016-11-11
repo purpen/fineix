@@ -440,6 +440,7 @@ static NSString *const URLUserAddBrand = @"/scene_brands/submit";
 
 #pragma mark - 合成图片
 - (UIImage *)generateImage:(UIImageView *)imageView {
+    imageView.image = self.filtersImg;
     CGSize size = imageView.frame.size;
     UIGraphicsBeginImageContextWithOptions(size, NO, [UIScreen mainScreen].scale);
     CGContextRef context = UIGraphicsGetCurrentContext();
@@ -453,7 +454,7 @@ static NSString *const URLUserAddBrand = @"/scene_brands/submit";
     [imageView.image drawInRect:imageView.bounds];
     for (FBStickersContainer * container in self.stickersContainer) {
         CGContextSaveGState(context);
-        FBSticker * sticker = [container generateSticker:_filterName];
+        FBSticker * sticker = [container generateSticker];
         CGAffineTransform translateToCenter = CGAffineTransformMakeTranslation(sticker.translateCenter.x, sticker.translateCenter.y);
         CGAffineTransform rotateAfterTranslate = CGAffineTransformRotate(translateToCenter, sticker.rotateAngle);
         CGContextConcatCTM(context, rotateAfterTranslate);
@@ -465,6 +466,7 @@ static NSString *const URLUserAddBrand = @"/scene_brands/submit";
     UIImage *newImage = UIGraphicsGetImageFromCurrentImageContext();
     UIGraphicsEndImageContext();
     
+    newImage = [self.filterManager randerImageWithIndex:_filterName WithImage:newImage];
     return newImage;
 }
 

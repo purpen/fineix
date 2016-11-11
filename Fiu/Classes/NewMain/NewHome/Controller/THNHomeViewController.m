@@ -92,7 +92,6 @@ static NSString *const allCommentsCellId = @"AllCommentsCellId";
     [self setHotUserListData];
     [self thn_registerNSNotification];
     [self thn_netWorkGroup];
-
 }
 
 #pragma mark - 推送通知
@@ -649,10 +648,6 @@ static NSString *const allCommentsCellId = @"AllCommentsCellId";
                 cell.deleteTheSceneBlock = ^(NSString *idx) {
                     [weakSelf thn_networkDeleteScene:idx];
                 };
-                
-//                cell.refreshData = ^ () {
-//                    [weakSelf.homeTable.mj_header beginRefreshing];
-//                };
             }
             cell.vc = self;
             cell.nav = self.navigationController;
@@ -816,6 +811,7 @@ static NSString *const allCommentsCellId = @"AllCommentsCellId";
 //        [UIView animateWithDuration:0.5 animations:^{
 //            cell.layer.transform = CATransform3DMakeScale(1, 1, 1);
 //        }];
+//
 //    }
 //}
 

@@ -41,8 +41,6 @@
 
 #pragma mark - setModel
 - (void)thn_setSceneImageData:(HomeSceneListRow *)sceneModel {
-    self.sceneImage.alpha = 0.0f;
-    
     self.tagDataMarr = [NSMutableArray arrayWithArray:sceneModel.product];
     self.goodsIds = [NSMutableArray arrayWithArray:[sceneModel.product valueForKey:@"idField"]];
     if (self.tagDataMarr.count) {
@@ -55,11 +53,13 @@
     _isCheck = sceneModel.isCheck;
     _image = sceneModel.coverUrl;
 
-    [self.sceneImage sd_setImageWithURL:[NSURL URLWithString:sceneModel.coverUrl] placeholderImage:[UIImage imageNamed:@""] completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
-        [UIView animateWithDuration:.5 animations:^{
-            self.sceneImage.alpha = 1.0f;
-        }];
-    }];
+    [self.sceneImage sd_setImageWithURL:[NSURL URLWithString:sceneModel.coverUrl]
+                       placeholderImage:[UIImage imageNamed:@""]
+                              completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
+                                  if (cacheType == SDImageCacheTypeDisk) {
+                                      [self thn_showLoadImageAnimate:YES];
+                                  }
+                              }];
 
     if (sceneModel.title.length == 0 || [sceneModel.title isKindOfClass:[NSNull class]]) {
         self.title.hidden = YES;
@@ -95,6 +95,15 @@
         }];
     }
     
+}
+
+- (void)thn_showLoadImageAnimate:(BOOL)show {
+    if (show) {
+        self.sceneImage.alpha = 0.0f;
+        [UIView animateWithDuration:0.5 animations:^{
+            self.sceneImage.alpha = 1.0f;
+        }];
+    }
 }
 
 - (CGSize)getTextSizeWidth:(NSString *)text {
