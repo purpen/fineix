@@ -48,9 +48,9 @@
     [self.sceneImageView sd_setImageWithURL:[NSURL URLWithString:sceneModel.coverUrl]
                            placeholderImage:[UIImage imageNamed:@""]
                                   completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
-                                      if (cacheType == SDImageCacheTypeDisk) {
+//                                      if (cacheType == SDImageCacheTypeDisk) {
                                           [self thn_showLoadImageAnimate:YES];
-                                      };
+//                                      };
     }];
     
     [self.userHeader downloadImage:sceneModel.user.avatarUrl place:[UIImage imageNamed:@""]];

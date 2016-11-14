@@ -56,9 +56,7 @@
     [self.sceneImage sd_setImageWithURL:[NSURL URLWithString:sceneModel.coverUrl]
                        placeholderImage:[UIImage imageNamed:@""]
                               completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
-                                  if (cacheType == SDImageCacheTypeDisk) {
-                                      [self thn_showLoadImageAnimate:YES];
-                                  }
+                                  [self thn_showLoadImageAnimate:YES];
                               }];
 
     if (sceneModel.title.length == 0 || [sceneModel.title isKindOfClass:[NSNull class]]) {

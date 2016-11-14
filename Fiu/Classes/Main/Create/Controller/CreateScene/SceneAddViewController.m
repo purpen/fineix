@@ -47,9 +47,10 @@ static NSString *const URLUserAddBrand = @"/scene_brands/submit";
 
 - (NSArray *)footTitleArr {
     if (!_footTitleArr) {
-        _footTitleArr = [NSArray arrayWithObjects:NSLocalizedString(@"marker", nil),
-                                                  NSLocalizedString(@"filter", nil),
-                                                  NSLocalizedString(@"adjustment", nil), nil];
+        _footTitleArr = @[NSLocalizedString(@"marker", nil),
+                          NSLocalizedString(@"filter", nil),
+                          NSLocalizedString(@"adjustment", nil)
+                          ];
     }
     return _footTitleArr;
 }
