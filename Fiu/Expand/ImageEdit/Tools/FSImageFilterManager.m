@@ -15,6 +15,8 @@
 #import "GPUImageSaturationFilter.h"
 #import "GPUImageSharpenFilter.h"
 #import "GPUImageWhiteBalanceFilter.h"
+#import "GPUImageHighlightShadowFilter.h"
+
 //FSFiveInputFilter
 //FSRiseFilter
 
@@ -30,10 +32,13 @@
 @property (nonatomic,strong)GPUImageSaturationFilter * SaturationFilter;
 
 //锐度
-@property (nonatomic,strong)GPUImageSharpenFilter    *SharpenFilter;
+@property (nonatomic,strong)GPUImageSharpenFilter    * SharpenFilter;
 
 //色温
 @property (nonatomic,strong)GPUImageWhiteBalanceFilter * WhiteBalanceFilter;
+
+//提高阴影
+@property (nonatomic,strong)GPUImageHighlightShadowFilter * highLightShadowFilter;
 
 @end
 
@@ -68,7 +73,6 @@
     [pic addTarget:filter];
     
     [pic processImage];
-    
     
     return [filter imageFromCurrentFramebuffer];
 }

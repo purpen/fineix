@@ -86,7 +86,7 @@
         _filtersCollectionView.showsVerticalScrollIndicator = NO;
         _filtersCollectionView.delegate = self;
         _filtersCollectionView.dataSource = self;
-        _filtersCollectionView.backgroundColor = [UIColor colorWithHexString:@"#222222" alpha:0.8];
+        _filtersCollectionView.backgroundColor = [UIColor colorWithHexString:@"#222222" alpha:1];
         [_filtersCollectionView registerClass:[FBFiltersCollectionViewCell class] forCellWithReuseIdentifier:@"FBFiltersCollectionViewCell"];
     }
     return _filtersCollectionView;

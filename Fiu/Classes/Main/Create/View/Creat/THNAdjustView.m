@@ -45,7 +45,7 @@ static NSString *const adjustCellId = @"AdjustCellId";
         _adjustView.delegate = self;
         _adjustView.dataSource = self;
         _adjustView.showsHorizontalScrollIndicator = NO;
-        _adjustView.backgroundColor = [UIColor colorWithHexString:@"#222222" alpha:0.8];
+        _adjustView.backgroundColor = [UIColor colorWithHexString:@"#222222" alpha:1];
         [_adjustView registerClass:[THNAdjustCollectionViewCell class] forCellWithReuseIdentifier:adjustCellId];
     }
     return _adjustView;
@@ -65,7 +65,9 @@ static NSString *const adjustCellId = @"AdjustCellId";
 }
 
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
-    [SVProgressHUD showSuccessWithStatus:[NSString stringWithFormat:@"调整：%@", self.titleArr[indexPath.row]]];
+    if (self.delegate && [self.delegate respondsToSelector:@selector(thn_adjustFilterValue:)]) {
+        [self.delegate thn_adjustFilterValue:self.titleArr[indexPath.row]];
+    }
 }
 
 

@@ -631,6 +631,7 @@
 		D8AC3DFF1D2CFFD600148522 /* libstdc++.6.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = D8AC3DFE1D2CFFD600148522 /* libstdc++.6.tbd */; };
 		D8AC3E011D2CFFEC00148522 /* libz.1.2.5.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = D8AC3E001D2CFFEC00148522 /* libz.1.2.5.tbd */; };
 		D8AC3E131D2DF9D900148522 /* UITabBar+badge.m in Sources */ = {isa = PBXBuildFile; fileRef = D8AC3E101D2DF9D900148522 /* UITabBar+badge.m */; };
+		D8ACA2221DD9B35F00A5CDA7 /* THNFilterValueView.m in Sources */ = {isa = PBXBuildFile; fileRef = D8ACA2211DD9B35F00A5CDA7 /* THNFilterValueView.m */; };
 		D8ACF4431D6B46AE00DB79D8 /* FBSegmentView.m in Sources */ = {isa = PBXBuildFile; fileRef = D8ACF4421D6B46AE00DB79D8 /* FBSegmentView.m */; };
 		D8ACF44A1D6BFE0300DB79D8 /* THNMallGoodsModel.m in Sources */ = {isa = PBXBuildFile; fileRef = D8ACF4451D6BFE0300DB79D8 /* THNMallGoodsModel.m */; };
 		D8ACF44B1D6BFE0300DB79D8 /* THNMallGoodsModelData.m in Sources */ = {isa = PBXBuildFile; fileRef = D8ACF4471D6BFE0300DB79D8 /* THNMallGoodsModelData.m */; };
@@ -1788,6 +1789,8 @@
 		D8AC3E001D2CFFEC00148522 /* libz.1.2.5.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libz.1.2.5.tbd; path = usr/lib/libz.1.2.5.tbd; sourceTree = SDKROOT; };
 		D8AC3E0F1D2DF9D900148522 /* UITabBar+badge.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UITabBar+badge.h"; sourceTree = "<group>"; };
 		D8AC3E101D2DF9D900148522 /* UITabBar+badge.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UITabBar+badge.m"; sourceTree = "<group>"; };
+		D8ACA2201DD9B35F00A5CDA7 /* THNFilterValueView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THNFilterValueView.h; sourceTree = "<group>"; };
+		D8ACA2211DD9B35F00A5CDA7 /* THNFilterValueView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THNFilterValueView.m; sourceTree = "<group>"; };
 		D8ACF4411D6B46AE00DB79D8 /* FBSegmentView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FBSegmentView.h; sourceTree = "<group>"; };
 		D8ACF4421D6B46AE00DB79D8 /* FBSegmentView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FBSegmentView.m; sourceTree = "<group>"; };
 		D8ACF4441D6BFE0300DB79D8 /* THNMallGoodsModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THNMallGoodsModel.h; sourceTree = "<group>"; };
@@ -2195,6 +2198,8 @@
 				D8F80B8D1DD30F2700C086FA /* THNAdjustView.m */,
 				D8F80B8F1DD3103500C086FA /* THNAdjustCollectionViewCell.h */,
 				D8F80B901DD3103500C086FA /* THNAdjustCollectionViewCell.m */,
+				D8ACA2201DD9B35F00A5CDA7 /* THNFilterValueView.h */,
+				D8ACA2211DD9B35F00A5CDA7 /* THNFilterValueView.m */,
 			);
 			path = Creat;
 			sourceTree = "<group>";
@@ -5430,6 +5435,7 @@
 				1F2AFC861D88170B00DA6035 /* FiuSceneLocation.m in Sources */,
 				1F2AFC991D88170B00DA6035 /* MyPageBtnCollectionViewCell.m in Sources */,
 				D8DDEE101D338D760020FF66 /* FBPopupView.m in Sources */,
+				D8ACA2221DD9B35F00A5CDA7 /* THNFilterValueView.m in Sources */,
 				1F2A8FD61CF40277005116C7 /* FBOrderOtherTableViewCell.m in Sources */,
 				1F2AFCFE1D8817CC00DA6035 /* THNActivityViewController.m in Sources */,
 				D8ACF44A1D6BFE0300DB79D8 /* THNMallGoodsModel.m in Sources */,

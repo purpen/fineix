@@ -129,6 +129,8 @@ static NSString *const URLUserAddBrand = @"/scene_brands/submit";
         make.bottom.equalTo(_footView.mas_top).with.offset(0);
         make.left.equalTo(self.view.mas_left).with.offset(0);
     }];
+    
+    [self.view addSubview:self.filterValueView];
 }
 
 #pragma mark - 底部选项工具栏
@@ -138,7 +140,7 @@ static NSString *const URLUserAddBrand = @"/scene_brands/submit";
         _footView.backgroundColor = [UIColor colorWithHexString:@"#222222"];
         _footView.titleArr = self.footTitleArr;
         _footView.titleFontSize = Font_ControllerTitle;
-        _footView.btnBgColor = [UIColor colorWithHexString:@"#222222"];
+        _footView.btnBgColor = [UIColor colorWithHexString:@"#25272A"];
         _footView.titleNormalColor = [UIColor whiteColor];
         _footView.titleSeletedColor = [UIColor colorWithHexString:fineixColor alpha:1];
         [_footView addFootViewButton];
@@ -192,8 +194,23 @@ static NSString *const URLUserAddBrand = @"/scene_brands/submit";
 - (THNAdjustView *)adjustView {
     if (!_adjustView) {
         _adjustView = [[THNAdjustView alloc] initWithFrame:CGRectMake(SCREEN_WIDTH *2, SCREEN_HEIGHT-SCREEN_WIDTH-210, SCREEN_WIDTH, 120)];
+        _adjustView.delegate = self;
     }
     return _adjustView;
+}
+
+- (void)thn_adjustFilterValue:(NSString *)value {
+    self.filterValueView.hidden = NO;
+    self.filterValueView.valueTitle.text = value;
+}
+
+#pragma mark - 调整参数值
+- (THNFilterValueView *)filterValueView {
+    if (!_filterValueView) {
+        _filterValueView = [[THNFilterValueView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT)];
+        _filterValueView.hidden = YES;
+    }
+    return _filterValueView;
 }
 
 #pragma mark - 滤镜视图
@@ -441,7 +458,6 @@ static NSString *const URLUserAddBrand = @"/scene_brands/submit";
 
 #pragma mark - 合成图片
 - (UIImage *)generateImage:(UIImageView *)imageView {
-    imageView.image = self.filtersImg;
     CGSize size = imageView.frame.size;
     UIGraphicsBeginImageContextWithOptions(size, NO, [UIScreen mainScreen].scale);
     CGContextRef context = UIGraphicsGetCurrentContext();
@@ -463,11 +479,10 @@ static NSString *const URLUserAddBrand = @"/scene_brands/submit";
         CGContextDrawImage(context, CGRectMake(-sticker.size.width/2, -sticker.size.height/2, sticker.size.width, sticker.size.height), sticker.image.CGImage);
         CGContextRestoreGState(context);
     }
-    
+
     UIImage *newImage = UIGraphicsGetImageFromCurrentImageContext();
     UIGraphicsEndImageContext();
     
-    newImage = [self.filterManager randerImageWithIndex:_filterName WithImage:newImage];
     return newImage;
 }
 

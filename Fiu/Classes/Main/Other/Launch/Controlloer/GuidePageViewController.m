@@ -12,7 +12,6 @@
 #import "THNTabBarController.h"
 #import "InviteCCodeViewController.h"
 #import <MediaPlayer/MediaPlayer.h>
-//#import <AdSupport/AdSupport.h>
 
 @interface GuidePageViewController ()<UIScrollViewDelegate,FBRequestDelegate>
 {
@@ -126,8 +125,6 @@ static NSString *userActivationUrl = @"/gateway/record_fiu_user_active";
 }
 
 -(void)leftSwipeGesture{
-    
-//    NSString *adId = [[[ASIdentifierManager sharedManager] advertisingIdentifier] UUIDString];
     FBRequest *request = [FBAPI postWithUrlString:userActivationUrl requestDictionary:nil delegate:self];
     request.flag = userActivationUrl;
     request.delegate = self;
@@ -293,7 +290,6 @@ static NSString *userActivationUrl = @"/gateway/record_fiu_user_active";
 -(void)soundClick:(UIButton*)sender{
     sender.selected = !sender.selected;
     if (sender.selected) {
-//        [[AVAudioSession sharedInstance] setCategory:AVAudioSessionCategoryAmbient error:nil];
         [[MPMusicPlayerController applicationMusicPlayer] setVolume:0];
     }else{
         [[MPMusicPlayerController applicationMusicPlayer] setVolume:0.5];
