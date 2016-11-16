@@ -125,6 +125,7 @@ static NSString *userActivationUrl = @"/gateway/record_fiu_user_active";
 }
 
 -(void)leftSwipeGesture{
+    
     FBRequest *request = [FBAPI postWithUrlString:userActivationUrl requestDictionary:nil delegate:self];
     request.flag = userActivationUrl;
     request.delegate = self;

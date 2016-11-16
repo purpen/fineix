@@ -45,9 +45,9 @@ typedef NS_ENUM(NSInteger,FSImageParamType) {
 - (UIImage *)randerImageWithIndex:(NSString *)filterName WithImage:(UIImage *)image;
 
 /**
- 调整亮度
+ 调整参数
 
- @param progressValue 亮度值调整
+ @param progressValue 参数值调整
 
  @return 渲染完图片
  */

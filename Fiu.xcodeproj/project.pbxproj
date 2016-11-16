@@ -495,6 +495,7 @@
 		D81318201D928DE3007CE71C /* ShareStyleViewTwo.m in Sources */ = {isa = PBXBuildFile; fileRef = D813181F1D928DE3007CE71C /* ShareStyleViewTwo.m */; };
 		D81318231D928DF4007CE71C /* ShareStyleViewThree.m in Sources */ = {isa = PBXBuildFile; fileRef = D81318221D928DF4007CE71C /* ShareStyleViewThree.m */; };
 		D81EA4011D2A52DD0032FAAB /* FiuBrandListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D81EA4001D2A52DD0032FAAB /* FiuBrandListViewController.m */; };
+		D8375A681DDC49370099F385 /* FSFliterImage.m in Sources */ = {isa = PBXBuildFile; fileRef = D8375A671DDC49370099F385 /* FSFliterImage.m */; };
 		D83A64321C8E7765003DB8BB /* Photos.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D83A64311C8E7765003DB8BB /* Photos.framework */; };
 		D83A64331C8E7E93003DB8BB /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D802D7891C844101007AFA3D /* AVFoundation.framework */; };
 		D83A64351C8E7EAD003DB8BB /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D83A64341C8E7EAD003DB8BB /* Foundation.framework */; };
@@ -1570,6 +1571,8 @@
 		D81EA3FF1D2A52DD0032FAAB /* FiuBrandListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FiuBrandListViewController.h; sourceTree = "<group>"; };
 		D81EA4001D2A52DD0032FAAB /* FiuBrandListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FiuBrandListViewController.m; sourceTree = "<group>"; };
 		D82562401D8FC4E400C3C2A7 /* Fiu.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Fiu.entitlements; sourceTree = "<group>"; };
+		D8375A661DDC49370099F385 /* FSFliterImage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FSFliterImage.h; sourceTree = "<group>"; };
+		D8375A671DDC49370099F385 /* FSFliterImage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FSFliterImage.m; sourceTree = "<group>"; };
 		D83A64311C8E7765003DB8BB /* Photos.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Photos.framework; path = System/Library/Frameworks/Photos.framework; sourceTree = SDKROOT; };
 		D83A64341C8E7EAD003DB8BB /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		D83A64361C8E7EBD003DB8BB /* CoreVideo.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreVideo.framework; path = System/Library/Frameworks/CoreVideo.framework; sourceTree = SDKROOT; };
@@ -4453,6 +4456,8 @@
 				D86E54401DD444220075ED88 /* FSFilter */,
 				D86E548D1DD444230075ED88 /* FSImageFilterManager.h */,
 				D86E548E1DD444230075ED88 /* FSImageFilterManager.m */,
+				D8375A661DDC49370099F385 /* FSFliterImage.h */,
+				D8375A671DDC49370099F385 /* FSFliterImage.m */,
 			);
 			path = Tools;
 			sourceTree = "<group>";
@@ -5111,6 +5116,7 @@
 				D85174301D54AC58005F5722 /* THNHomeViewController.m in Sources */,
 				D86E54C51DD444230075ED88 /* FSXproIIFilter.m in Sources */,
 				1F2A8F4D1CF40277005116C7 /* FiltersView.m in Sources */,
+				D8375A681DDC49370099F385 /* FSFliterImage.m in Sources */,
 				D89CFE031D041819002701B8 /* GoodsDesTableViewCell.m in Sources */,
 				1F2AFC7B1D88170B00DA6035 /* CounterModel.m in Sources */,
 				1F2AFC701D88170B00DA6035 /* MyPageViewController.m in Sources */,
@@ -5612,6 +5618,7 @@
 					"$(PROJECT_DIR)/Fiu/Vendors/Umeng",
 					"$(PROJECT_DIR)/Fiu/Vendors/Umeng/UMSocial_Sdk_Extra_Frameworks/TencentOpenAPI",
 				);
+				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_INPUT_FILETYPE = sourcecode.cpp.objcpp;
 				GCC_PREFIX_HEADER = "";
 				INFOPLIST_FILE = Fiu/Info.plist;
@@ -5669,6 +5676,7 @@
 					"$(PROJECT_DIR)/Fiu/Vendors/Umeng",
 					"$(PROJECT_DIR)/Fiu/Vendors/Umeng/UMSocial_Sdk_Extra_Frameworks/TencentOpenAPI",
 				);
+				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_INPUT_FILETYPE = sourcecode.cpp.objcpp;
 				GCC_PREFIX_HEADER = "";
 				INFOPLIST_FILE = Fiu/Info.plist;

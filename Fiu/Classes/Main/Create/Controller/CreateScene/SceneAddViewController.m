@@ -15,6 +15,7 @@
 static NSString *const URLDeleUserGoods = @"/product/deleted";
 static NSString *const URLUserAddGoods = @"/product/submit";
 static NSString *const URLUserAddBrand = @"/scene_brands/submit";
+static NSString *const DefaultFilter = @"original";
 
 @interface SceneAddViewController () <FBFootViewDelegate, FBUserGoodsTagDelegaet, FBStickerContainerDelegate> {
     UserGoodsTag    *goodsTag;
@@ -25,6 +26,7 @@ static NSString *const URLUserAddBrand = @"/scene_brands/submit";
     BOOL             _urlGoods;
     NSString        *_filterName;
     NSArray         *_footTitleArr;
+    FSImageParamType _editFilterType; //  记录调整参数的类型（亮度／曝光度...）
 }
 
 @end
@@ -199,18 +201,34 @@ static NSString *const URLUserAddBrand = @"/scene_brands/submit";
     return _adjustView;
 }
 
-- (void)thn_adjustFilterValue:(NSString *)value {
+- (void)thn_adjustFilterValue:(NSString *)value index:(NSInteger)index {
     self.filterValueView.hidden = NO;
     self.filterValueView.valueTitle.text = value;
+    [self.filterValueView thn_setSliderWithType:index filterImage:self.editFilterImage];
+    _editFilterType = (FSImageParamType)index;
 }
 
 #pragma mark - 调整参数值
+- (FSFliterImage *)editFilterImage {
+    if (!_editFilterImage) {
+        _editFilterImage = [[FSFliterImage alloc] init];
+    }
+    return _editFilterImage;
+}
+
 - (THNFilterValueView *)filterValueView {
     if (!_filterValueView) {
         _filterValueView = [[THNFilterValueView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT)];
         _filterValueView.hidden = YES;
+        _filterValueView.delegate = self;
     }
     return _filterValueView;
+}
+
+- (void)thn_changeImageFilterValue:(CGFloat)value {
+    self.filtersImageView.image = [self.filterManager randerImageWithProgress:value
+                                                                    WithImage:self.editFilterImage.image
+                                                           WithImageParamType:_editFilterType];
 }
 
 #pragma mark - 滤镜视图
@@ -234,7 +252,7 @@ static NSString *const URLUserAddBrand = @"/scene_brands/submit";
 - (void)thn_chooseFilterWithName:(NSString *)filterName {
     _filterName = filterName;
     UIImage *showFilterImage = [self.filterManager randerImageWithIndex:_filterName WithImage:self.filtersImg];
-    self.filtersImageView.image = showFilterImage;
+    self.filtersImageView.image = self.editFilterImage.image = showFilterImage;
 }
 
 #pragma mark - 标记产品信息视图
@@ -467,11 +485,12 @@ static NSString *const URLUserAddBrand = @"/scene_brands/submit";
     CGContextConcatCTM(context, flipThenShift);
     CGContextDrawImage(context, imageView.bounds, imageView.image.CGImage);
     CGContextRestoreGState(context);
-
     [imageView.image drawInRect:imageView.bounds];
+    
+    //  合成标记的商品图
     for (FBStickersContainer * container in self.stickersContainer) {
         CGContextSaveGState(context);
-        FBSticker * sticker = [container generateSticker];
+        FBSticker *sticker = [container generateSticker];
         CGAffineTransform translateToCenter = CGAffineTransformMakeTranslation(sticker.translateCenter.x, sticker.translateCenter.y);
         CGAffineTransform rotateAfterTranslate = CGAffineTransformRotate(translateToCenter, sticker.rotateAngle);
         CGContextConcatCTM(context, rotateAfterTranslate);
@@ -482,7 +501,7 @@ static NSString *const URLUserAddBrand = @"/scene_brands/submit";
 
     UIImage *newImage = UIGraphicsGetImageFromCurrentImageContext();
     UIGraphicsEndImageContext();
-    
+
     return newImage;
 }
 

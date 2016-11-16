@@ -65,8 +65,8 @@ static NSString *const adjustCellId = @"AdjustCellId";
 }
 
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
-    if (self.delegate && [self.delegate respondsToSelector:@selector(thn_adjustFilterValue:)]) {
-        [self.delegate thn_adjustFilterValue:self.titleArr[indexPath.row]];
+    if (self.delegate && [self.delegate respondsToSelector:@selector(thn_adjustFilterValue:index:)]) {
+        [self.delegate thn_adjustFilterValue:self.titleArr[indexPath.row] index:indexPath.row];
     }
 }
 

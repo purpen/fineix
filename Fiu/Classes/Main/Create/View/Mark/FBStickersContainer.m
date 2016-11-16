@@ -175,7 +175,7 @@
 }
 
 - (FBSticker *)generateSticker {
-    FBSticker * sticker = [FBSticker new];
+    FBSticker *sticker = [FBSticker new];
     sticker.rotateAngle = _diffAngle;
     sticker.image = _stickerView.image;
     sticker.translateCenter = _translateCenter;

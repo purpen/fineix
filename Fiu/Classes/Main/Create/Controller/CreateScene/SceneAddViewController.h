@@ -14,6 +14,7 @@
 #import "THNMarkGoodsView.h"
 #import "UserGoodsTag.h"
 #import "FSImageFilterManager.h"
+#import "FSFliterImage.h"
 #import "THNFilterValueView.h"
 
 @interface SceneAddViewController : FBPictureViewController <
@@ -21,7 +22,8 @@
     THNMarkGoodsViewDelegate,
     FBUserGoodsTagDelegaet,
     FiltersViewDelegate,
-    THNAdjustFilterValueDelegate
+    THNAdjustFilterValueDelegate,
+    ChangeFilterValueDelegate
 >
 
 @pro_strong NSArray             *locationArr;            //  照片位置
@@ -44,6 +46,7 @@
 @pro_strong NSArray             *footTitleArr;
 @pro_strong FSImageFilterManager *filterManager;
 @pro_strong THNFilterValueView  *filterValueView;
+@pro_strong FSFliterImage       *editFilterImage;
 
 ///
 @pro_strong UserGoodsTag           *userGoodsTag;

@@ -12,7 +12,7 @@
 @protocol THNAdjustFilterValueDelegate <NSObject>
 
 @optional
-- (void)thn_adjustFilterValue:(NSString *)value;
+- (void)thn_adjustFilterValue:(NSString *)value index:(NSInteger)index;
 
 @end
 

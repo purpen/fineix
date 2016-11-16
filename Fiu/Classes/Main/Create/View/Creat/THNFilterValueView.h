@@ -8,6 +8,14 @@
 
 #import <UIKit/UIKit.h>
 #import "THNMacro.h"
+#import "FSFliterImage.h"
+
+@protocol ChangeFilterValueDelegate <NSObject>
+
+@optional
+- (void)thn_changeImageFilterValue:(CGFloat)value;
+
+@end
 
 @interface THNFilterValueView : UIView
 
@@ -16,5 +24,8 @@
 @pro_strong UIButton *sureBtn;      //  确定
 @pro_strong UISlider *valueSlider;  //  数值调整
 @pro_strong UIView *sliderBack;
+@pro_weak id <ChangeFilterValueDelegate> delegate;
+
+- (void)thn_setSliderWithType:(NSInteger)type filterImage:(FSFliterImage *)filterImage;
 
 @end
