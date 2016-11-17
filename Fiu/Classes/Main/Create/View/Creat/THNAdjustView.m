@@ -27,10 +27,11 @@ static NSString *const adjustCellId = @"AdjustCellId";
                       NSLocalizedString(@"adjust01", nil),
                       NSLocalizedString(@"adjust02", nil),
                       NSLocalizedString(@"adjust03", nil),
-                      NSLocalizedString(@"adjust04", nil),
-                      NSLocalizedString(@"adjust05", nil),
-                      NSLocalizedString(@"adjust06", nil),
-                      NSLocalizedString(@"adjust07", nil)];
+                      NSLocalizedString(@"adjust04", nil)
+//                      NSLocalizedString(@"adjust05", nil),
+//                      NSLocalizedString(@"adjust06", nil),
+//                      NSLocalizedString(@"adjust07", nil)
+                      ];
     }
     return _titleArr;
 }

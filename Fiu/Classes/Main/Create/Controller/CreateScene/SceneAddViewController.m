@@ -108,7 +108,7 @@ static NSString *const DefaultFilter = @"original";
 
 #pragma mark - 设置视图UI
 - (void)setFiltersControllerUI {
-    self.filtersImageView.image = self.filtersImg;
+    self.filtersImageView.image = self.editFilterImage.image = self.filtersImg;
     
     [self.view addSubview:self.filtersImageView];
     [_filtersImageView mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -225,10 +225,22 @@ static NSString *const DefaultFilter = @"original";
     return _filterValueView;
 }
 
+//  调整中
 - (void)thn_changeImageFilterValue:(CGFloat)value {
     self.filtersImageView.image = [self.filterManager randerImageWithProgress:value
                                                                     WithImage:self.editFilterImage.image
                                                            WithImageParamType:_editFilterType];
+}
+
+//  取消调整
+- (void)thn_cancelChangeFilterValue {
+    self.filtersImageView.image = self.editFilterImage.image;
+}
+
+//  完成调整
+- (void)thn_sureChangeFilterValue:(CGFloat)value {
+    [self.editFilterImage updataParamsWithIndex:_editFilterType WithValue:value];
+    self.editFilterImage.image = self.filtersImg;
 }
 
 #pragma mark - 滤镜视图
@@ -498,7 +510,6 @@ static NSString *const DefaultFilter = @"original";
         CGContextDrawImage(context, CGRectMake(-sticker.size.width/2, -sticker.size.height/2, sticker.size.width, sticker.size.height), sticker.image.CGImage);
         CGContextRestoreGState(context);
     }
-
     UIImage *newImage = UIGraphicsGetImageFromCurrentImageContext();
     UIGraphicsEndImageContext();
 
