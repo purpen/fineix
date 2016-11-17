@@ -22,11 +22,12 @@
 
 //  获取原始图
 - (UIImage *)originalImage {
-    UIImage * oriImg = [UIImage imageWithCGImage:self.asset.defaultRepresentation.fullResolutionImage
-                                           scale:self.asset.defaultRepresentation.scale
-                                     orientation:(UIImageOrientation)self.asset.defaultRepresentation.orientation];
-    
-    return [self fixOrientation:oriImg];
+//    UIImage * oriImg = [UIImage imageWithCGImage:self.asset.defaultRepresentation.fullScreenImage
+//                                           scale:self.asset.defaultRepresentation.scale
+//                                     orientation:(UIImageOrientation)self.asset.defaultRepresentation.orientation];
+    UIImage *oriImg = [UIImage imageWithCGImage:self.asset.defaultRepresentation.fullScreenImage];
+//    return [self fixOrientation:oriImg];
+    return oriImg;
 }
 
 - (UIImage *)fixOrientation:(UIImage *)srcImg {
