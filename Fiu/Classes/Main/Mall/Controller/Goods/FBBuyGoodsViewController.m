@@ -178,7 +178,7 @@
                 type = @"2";
             }
             targetId = self.skuId;
-            NSDictionary * orderDict = @{@"target_id":targetId, @"type":type, @"n":num};
+            NSDictionary * orderDict = @{@"target_id":targetId, @"type":type, @"n":num, @"referral_code":[self thn_getGoodsReferralCode]};
             [self dismissViewControllerAnimated:YES completion:^{
                 self.buyingGoodsBlock(orderDict); 
             }];

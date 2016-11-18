@@ -6,11 +6,11 @@
 //  Copyright © 2016年 taihuoniao. All rights reserved.
 //
 
-#import "FBViewController.h"
+#import "THNViewController.h"
 #import "SearchMenuView.h"
 #import "FBSearchView.h"
 
-@interface SearchViewController : FBViewController <
+@interface SearchViewController : THNViewController <
     SearchMenuBtnSelectedDelegate,
     FBSearchDelegate
 >

@@ -1,8 +1,12 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="10117" systemVersion="15C50" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="11542" systemVersion="16B2555" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11524"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="THNArticleDetalViewController">
@@ -32,7 +36,7 @@
                             <inset key="titleEdgeInsets" minX="2" minY="-5" maxX="0.0" maxY="0.0"/>
                             <inset key="imageEdgeInsets" minX="-2" minY="5" maxX="0.0" maxY="0.0"/>
                             <state key="normal" image="project_look">
-                                <color key="titleColor" red="0.51764705882352935" green="0.51764705882352935" blue="0.51764705882352935" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="titleColor" red="0.51764705882352935" green="0.51764705882352935" blue="0.51764705882352935" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             </state>
                             <connections>
                                 <action selector="look:" destination="-1" eventType="touchUpInside" id="8yZ-UP-3pM"/>
@@ -48,7 +52,7 @@
                             <inset key="titleEdgeInsets" minX="2" minY="-5" maxX="0.0" maxY="0.0"/>
                             <inset key="imageEdgeInsets" minX="-2" minY="5" maxX="0.0" maxY="0.0"/>
                             <state key="normal" image="project_share">
-                                <color key="titleColor" red="0.51764705879999995" green="0.51764705879999995" blue="0.51764705879999995" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="titleColor" red="0.51764705879999995" green="0.51764705879999995" blue="0.51764705879999995" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             </state>
                             <connections>
                                 <action selector="share:" destination="-1" eventType="touchUpInside" id="euR-BA-ufU"/>
@@ -64,7 +68,7 @@
                             <inset key="titleEdgeInsets" minX="2" minY="-5" maxX="0.0" maxY="0.0"/>
                             <inset key="imageEdgeInsets" minX="-2" minY="5" maxX="0.0" maxY="0.0"/>
                             <state key="normal" image="project_coment">
-                                <color key="titleColor" red="0.51764705879999995" green="0.51764705879999995" blue="0.51764705879999995" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="titleColor" red="0.51764705879999995" green="0.51764705879999995" blue="0.51764705879999995" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             </state>
                             <connections>
                                 <action selector="comment:" destination="-1" eventType="touchUpInside" id="Sbk-QE-rVT"/>
@@ -72,13 +76,13 @@
                         </button>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="BLT-G9-XzI">
                             <rect key="frame" x="0.0" y="0.0" width="375" height="1"/>
-                            <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.10000000000000001" colorSpace="calibratedRGB"/>
+                            <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.10000000000000001" colorSpace="custom" customColorSpace="sRGB"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="1" id="1i0-60-fUW"/>
                             </constraints>
                         </view>
                     </subviews>
-                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     <constraints>
                         <constraint firstItem="a9p-oQ-5cM" firstAttribute="centerY" secondItem="c3K-4o-R5Y" secondAttribute="centerY" id="6eB-9K-qDm"/>
                         <constraint firstAttribute="height" constant="50" id="MfO-FK-S4P"/>
@@ -100,10 +104,10 @@
                 </view>
                 <webView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="62W-BJ-E9M">
                     <rect key="frame" x="0.0" y="64" width="375" height="553"/>
-                    <color key="backgroundColor" red="0.36078431370000003" green="0.38823529410000002" blue="0.4039215686" alpha="0.10000000000000001" colorSpace="deviceRGB"/>
+                    <color key="backgroundColor" red="0.28958413004875183" green="0.31462949514389038" blue="0.32950475811958313" alpha="0.10000000000000001" colorSpace="custom" customColorSpace="sRGB"/>
                 </webView>
             </subviews>
-            <color key="backgroundColor" red="0.97254901960784312" green="0.97254901960784312" blue="0.97254901960784312" alpha="1" colorSpace="calibratedRGB"/>
+            <color key="backgroundColor" red="0.97254901960784312" green="0.97254901960784312" blue="0.97254901960784312" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
                 <constraint firstAttribute="trailing" secondItem="c3K-4o-R5Y" secondAttribute="trailing" id="Dg7-nm-3Sw"/>
                 <constraint firstItem="c3K-4o-R5Y" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="EWz-Tn-ppn"/>
@@ -113,7 +117,6 @@
                 <constraint firstItem="62W-BJ-E9M" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="64" id="naO-o9-B6C"/>
                 <constraint firstItem="c3K-4o-R5Y" firstAttribute="top" secondItem="62W-BJ-E9M" secondAttribute="bottom" id="o3F-3J-orj"/>
             </constraints>
-            <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
         </view>
     </objects>
     <resources>

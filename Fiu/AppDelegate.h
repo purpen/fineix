@@ -13,6 +13,7 @@
 
 @protocol AlipayDelegate <NSObject>
 
+@optional
 - (void)standbyCallbackWithResultDic:(NSDictionary *)resultDic;
 
 @end

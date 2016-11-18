@@ -6,11 +6,11 @@
 //  Copyright © 2016年 taihuoniao. All rights reserved.
 //
 
-#import "FBViewController.h"
+#import "THNViewController.h"
 
 @class THNArticleModel;
 
-@interface THNActiveDetalTwoViewController : FBViewController
+@interface THNActiveDetalTwoViewController : THNViewController
 
 /**  */
 @property (nonatomic, strong) THNArticleModel *model;

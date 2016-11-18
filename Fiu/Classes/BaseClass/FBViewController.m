@@ -13,6 +13,7 @@
 
 static NSString *const URLGoodsCarNum = @"/shopping/fetch_cart_count";
 static NSString *const URLUserIsLogin = @"/user/user_info";
+static NSInteger const saveTime = 30 * 24 * 60;
 
 @interface FBViewController () {
     NSMutableArray * _guideImgMarr;
@@ -26,13 +27,32 @@ static NSString *const URLUserIsLogin = @"/user/user_info";
 - (void)viewDidLoad {
     [super viewDidLoad];
     [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent];
-    [self setSlideBackVC];
-    
+//    [self setSlideBackVC];
     [self.view addSubview:self.navView];
-    
     [self addNavBackBtn];
-    
     [self getGoodsCarNumData];
+}
+
+#pragma mark 是否有商品推广
+- (NSString *)thn_getGoodsReferralCode {
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    NSString *referralCode = [defaults objectForKey:ReferralCode];
+    NSInteger getTime = [[defaults objectForKey:ReferralCodeTime] integerValue];
+    
+    //  获取推广码间隔，30天清空推广码
+    if (getTime > 0) {
+        NSInteger nowTime = [[NSString stringWithFormat:@"%ld", (long)[[NSDate date] timeIntervalSince1970]] integerValue];
+        NSInteger subTime = (nowTime - getTime)/60;
+        if (subTime == saveTime) {
+            [defaults setObject:@"" forKey:ReferralCode];
+            [defaults setObject:@"" forKey:ReferralCodeTime];
+        }
+    }
+    
+    if (referralCode.length > 0) {
+        return referralCode;
+    } else
+        return @"";
 }
 
 #pragma mark - 获取购物车数量

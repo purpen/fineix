@@ -387,8 +387,13 @@ static NSString *const MallListHeaderCellViewId = @"mallListHeaderCellViewId";
 }
 
 - (void)thn_rightBarItemSelected {
-    GoodsCarViewController * goodsCarVC = [[GoodsCarViewController alloc] init];
-    [self.navigationController pushViewController:goodsCarVC animated:YES];
+    if ([self isUserLogin]) {
+        GoodsCarViewController * goodsCarVC = [[GoodsCarViewController alloc] init];
+        [self.navigationController pushViewController:goodsCarVC animated:YES];
+        
+    } else {
+        [self openUserLoginVC];
+    }
 }
 
 #pragma mark - 首次打开加载指示图

@@ -158,7 +158,6 @@ static NSString *const URLCancelFollowUser = @"/follow/ajax_cancel_follow";
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
     self.navViewTitle.text = @"活动详情";
     self.type = @0;
     [self ruleRequest];
@@ -527,10 +526,14 @@ static NSString *const URLCancelFollowUser = @"/follow/ajax_cancel_follow";
 
 
 -(void)attend{
-    PictureToolViewController * pictureToolVC = [[PictureToolViewController alloc] init];
-    pictureToolVC.actionId = self.model._id;
-    pictureToolVC.activeTitle = self.model.title;
-    [self presentViewController:pictureToolVC animated:YES completion:nil];
+    if ([self isUserLogin]) {
+        PictureToolViewController * pictureToolVC = [[PictureToolViewController alloc] init];
+        pictureToolVC.actionId = self.model._id;
+        pictureToolVC.activeTitle = self.model.title;
+        [self presentViewController:pictureToolVC animated:YES completion:nil];
+    } else {
+        [self openUserLoginVC];
+    }
 }
 
 -(HMSegmentedControl *)segmentedControl{

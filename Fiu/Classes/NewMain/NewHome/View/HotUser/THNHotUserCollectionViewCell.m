@@ -7,6 +7,7 @@
 //
 
 #import "THNHotUserCollectionViewCell.h"
+#import "UserInfoEntity.h"
 
 @interface THNHotUserCollectionViewCell () {
     NSString *_userId;
@@ -171,34 +172,45 @@
 }
 
 - (void)followClick:(UIButton *)button {
-    if (button.selected == NO) {
-        button.selected = YES;
-        POPSpringAnimation *scaleAnimation = [POPSpringAnimation animationWithPropertyNamed:kPOPLayerScaleXY];
-        scaleAnimation.fromValue = [NSValue valueWithCGSize:CGSizeMake(0.5, 0.5)];
-        scaleAnimation.toValue = [NSValue valueWithCGSize:CGSizeMake(1.0, 1.0)];
-        scaleAnimation.springBounciness = 10.f;
-        scaleAnimation.springSpeed = 10.0f;
-        [button.layer pop_addAnimation:scaleAnimation forKey:@"scaleAnim"];
-        
-        button.layer.borderColor = [UIColor colorWithHexString:MAIN_COLOR].CGColor;
-        button.backgroundColor = [UIColor colorWithHexString:MAIN_COLOR];
-        
-        self.followHotUserBlock(_userId);
-        
-    } else if (button.selected == YES) {
-        button.selected = NO;
-        POPSpringAnimation *scaleAnimation = [POPSpringAnimation animationWithPropertyNamed:kPOPLayerScaleXY];
-        scaleAnimation.fromValue = [NSValue valueWithCGSize:CGSizeMake(0.5, 0.5)];
-        scaleAnimation.toValue = [NSValue valueWithCGSize:CGSizeMake(1.0, 1.0)];
-        scaleAnimation.springBounciness = 10.f;
-        scaleAnimation.springSpeed = 10.0f;
-        [button.layer pop_addAnimation:scaleAnimation forKey:@"scaleAnim"];
-        
-        button.layer.borderColor = [UIColor colorWithHexString:@"#979797" alpha:1].CGColor;
-        button.backgroundColor = [UIColor colorWithHexString:WHITE_COLOR];
-        
-        self.cancelFollowHotUserBlock(_userId);
+    if ([self isUserLogin]) {
+        if (button.selected == NO) {
+            button.selected = YES;
+            POPSpringAnimation *scaleAnimation = [POPSpringAnimation animationWithPropertyNamed:kPOPLayerScaleXY];
+            scaleAnimation.fromValue = [NSValue valueWithCGSize:CGSizeMake(0.5, 0.5)];
+            scaleAnimation.toValue = [NSValue valueWithCGSize:CGSizeMake(1.0, 1.0)];
+            scaleAnimation.springBounciness = 10.f;
+            scaleAnimation.springSpeed = 10.0f;
+            [button.layer pop_addAnimation:scaleAnimation forKey:@"scaleAnim"];
+            
+            button.layer.borderColor = [UIColor colorWithHexString:MAIN_COLOR].CGColor;
+            button.backgroundColor = [UIColor colorWithHexString:MAIN_COLOR];
+            
+            self.followHotUserBlock(_userId);
+            
+        } else if (button.selected == YES) {
+            button.selected = NO;
+            POPSpringAnimation *scaleAnimation = [POPSpringAnimation animationWithPropertyNamed:kPOPLayerScaleXY];
+            scaleAnimation.fromValue = [NSValue valueWithCGSize:CGSizeMake(0.5, 0.5)];
+            scaleAnimation.toValue = [NSValue valueWithCGSize:CGSizeMake(1.0, 1.0)];
+            scaleAnimation.springBounciness = 10.f;
+            scaleAnimation.springSpeed = 10.0f;
+            [button.layer pop_addAnimation:scaleAnimation forKey:@"scaleAnim"];
+            
+            button.layer.borderColor = [UIColor colorWithHexString:@"#979797" alpha:1].CGColor;
+            button.backgroundColor = [UIColor colorWithHexString:WHITE_COLOR];
+            
+            self.cancelFollowHotUserBlock(_userId);
+        }
+    
+    } else {
+        [SVProgressHUD showInfoWithStatus:@"请先登录"];
     }
+}
+
+#pragma mark - 获取用户登录信息
+- (BOOL)isUserLogin {
+    UserInfoEntity * entity = [UserInfoEntity defaultUserInfoEntity];
+    return entity.isLogin;
 }
 
 @end

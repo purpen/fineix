@@ -322,8 +322,7 @@ static NSString *const URLSubjectView = @"/scene_subject/view";
                  @"trueNickname": @"true_nickname",
                  @"level": @"rank_id",
                  @"levelDesc": @"rank_title",
-                 @"birdCoin": @"bird_coin",
-                 //                 @"": @"",
+                 @"birdCoin": @"bird_coin"
                  };
     }];
 }

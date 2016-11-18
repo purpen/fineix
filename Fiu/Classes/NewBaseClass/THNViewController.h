@@ -41,6 +41,13 @@
 - (void)setNavGoodsCarNumLab;
 
 /**
+ 获取商品推广码
+
+ @return 推广码
+ */
+- (NSString *)thn_getGoodsReferralCode;
+
+/**
  *  是否登录
  */
 @pro_strong FBRequest   *   userLoginRequest;

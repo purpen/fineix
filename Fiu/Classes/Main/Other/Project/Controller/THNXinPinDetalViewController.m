@@ -20,7 +20,7 @@
 #import "THNSceneDetalViewController.h"
 #import "THNActiveDetalTwoViewController.h"
 
-@interface THNXinPinDetalViewController ()<FBNavigationBarItemsDelegate,UIWebViewDelegate>
+@interface THNXinPinDetalViewController ()<THNNavigationBarItemsDelegate,UIWebViewDelegate>
 
 @property (weak, nonatomic) IBOutlet UIWebView *contenWebView;
 @property (weak, nonatomic) IBOutlet UIButton *buyBtn;
@@ -37,7 +37,7 @@
     [super viewDidLoad];
     
     self.delegate = self;
-    [self addBarItemRightBarButton:nil image:@"project_share_w" isTransparent:NO];
+    [self thn_addBarItemRightBarButton:nil image:@"project_share_w"];
     [self requestUrl];
 }
 

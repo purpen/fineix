@@ -11,8 +11,10 @@
 #import "THNLoginRegisterViewController.h"
 #import "DiscoverSearchViewController.h"
 #import "MallSearchViewController.h"
+#import "GuidePageViewController.h"
 
 static NSString *const URLGoodsCarNum = @"/shopping/fetch_cart_count";
+static NSInteger const saveTime = 30 * 24 * 60;
 
 @implementation THNViewController {
     NSMutableArray *_guideImgMarr;
@@ -28,7 +30,31 @@ static NSString *const URLGoodsCarNum = @"/shopping/fetch_cart_count";
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    [self setSlideBackVC];
     [self thn_setNavViewUI];
+}
+
+#pragma mark 是否有商品推广
+- (NSString *)thn_getGoodsReferralCode {
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    NSString *referralCode = [defaults objectForKey:ReferralCode];
+    NSInteger getTime = [[defaults objectForKey:ReferralCodeTime] integerValue];
+    
+    //  获取推广码间隔，30天清空推广码
+    if (getTime > 0) {
+        NSInteger nowTime = [[NSString stringWithFormat:@"%ld", (long)[[NSDate date] timeIntervalSince1970]] integerValue];
+        NSInteger subTime = (nowTime - getTime)/60;
+        if (subTime == saveTime) {
+            [defaults setObject:@"" forKey:ReferralCode];
+            [defaults setObject:@"" forKey:ReferralCodeTime];
+        }
+    }
+    
+    if (referralCode.length > 0) {
+        return referralCode;
+    } else
+        return @"";
 }
 
 #pragma mark - 获取购物车数量
@@ -344,6 +370,14 @@ static NSString *const URLGoodsCarNum = @"/shopping/fetch_cart_count";
     } completion:^(BOOL finished) {
         [showview removeFromSuperview];
     }];
+}
+
+#pragma mark - 开启侧滑返回
+- (void)setSlideBackVC {
+    self.navigationController.interactivePopGestureRecognizer.delegate = (id)self;
+    if ([self.navigationController respondsToSelector:@selector(interactivePopGestureRecognizer)]) {
+        self.navigationController.interactivePopGestureRecognizer.enabled = YES;
+    }
 }
 
 @end

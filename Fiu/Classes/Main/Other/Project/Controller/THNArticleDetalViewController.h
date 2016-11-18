@@ -6,9 +6,9 @@
 //  Copyright © 2016年 taihuoniao. All rights reserved.
 //
 
-#import "FBViewController.h"
+#import "THNViewController.h"
 
-@interface THNArticleDetalViewController : FBViewController
+@interface THNArticleDetalViewController : THNViewController
 
 /**  */
 @property(nonatomic,copy) NSString *articleDetalid;

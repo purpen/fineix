@@ -50,8 +50,8 @@ static NSString *const DefaultFilter = @"original";
 - (NSArray *)footTitleArr {
     if (!_footTitleArr) {
         _footTitleArr = @[NSLocalizedString(@"marker", nil),
-                          NSLocalizedString(@"filter", nil),
-                          NSLocalizedString(@"adjustment", nil)
+                          NSLocalizedString(@"filter", nil)
+//                          NSLocalizedString(@"adjustment", nil)
                           ];
     }
     return _footTitleArr;

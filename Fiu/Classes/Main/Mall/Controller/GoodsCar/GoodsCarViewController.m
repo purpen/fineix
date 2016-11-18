@@ -143,7 +143,7 @@ static NSString *const URLCarGoPay = @"/shopping/checkout";
     NSData * jsonData = [NSJSONSerialization dataWithJSONObject:itemData options:0 error:nil];
     NSString * json = [[NSString alloc] initWithData:jsonData encoding:NSUTF8StringEncoding];
     
-    self.carPayRequest = [FBAPI postWithUrlString:URLCarGoPay requestDictionary:@{@"array":json} delegate:self];
+    self.carPayRequest = [FBAPI postWithUrlString:URLCarGoPay requestDictionary:@{@"array":json, @"referral_code":[self thn_getGoodsReferralCode]} delegate:self];
     [self.carPayRequest startRequestSuccess:^(FBRequest *request, id result) {
         if ([[result valueForKey:@"success"] integerValue] == 1) {
             FBSureOrderViewController * sureOrderVC = [[FBSureOrderViewController alloc] init];

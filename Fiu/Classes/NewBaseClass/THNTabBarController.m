@@ -32,7 +32,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-
+    
     [self thn_setTabBarController];
 }
 
@@ -209,12 +209,12 @@
 }
 
 //  消息气泡点击跳转消息列表
-- (void)openMessVC:(FBTabBarItemBadgeBtn *)button {
-    [self.badgeBtn removeFromSuperview];
-    THNMessageViewController *messVC = [[THNMessageViewController alloc] init];
-    _messNav = [[THNNavigationController alloc] initWithRootViewController:messVC];
-    [self.childViewControllers[0] presentViewController:_messNav animated:YES completion:nil];
-}
+//- (void)openMessVC:(FBTabBarItemBadgeBtn *)button {
+//    [self.badgeBtn removeFromSuperview];
+//    THNMessageViewController *messVC = [[THNMessageViewController alloc] init];
+//    _messNav = [[THNNavigationController alloc] initWithRootViewController:messVC];
+//    [self.childViewControllers[0] presentViewController:_messNav animated:YES completion:nil];
+//}
 
 #pragma mark “创建情景”的按钮事件
 - (void)createBtnClick {

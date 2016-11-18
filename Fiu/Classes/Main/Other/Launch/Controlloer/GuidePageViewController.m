@@ -12,6 +12,7 @@
 #import "THNTabBarController.h"
 #import "InviteCCodeViewController.h"
 #import <MediaPlayer/MediaPlayer.h>
+#import "AppDelegate.h"
 
 @interface GuidePageViewController ()<UIScrollViewDelegate,FBRequestDelegate>
 {
@@ -76,7 +77,6 @@ static NSString *userActivationUrl = @"/gateway/record_fiu_user_active";
 }
 
 -(void)dianJi{
-    
     FBRequest *request = [FBAPI postWithUrlString:userActivationUrl requestDictionary:nil delegate:self];
     request.flag = userActivationUrl;
     request.delegate = self;
@@ -125,7 +125,6 @@ static NSString *userActivationUrl = @"/gateway/record_fiu_user_active";
 }
 
 -(void)leftSwipeGesture{
-    
     FBRequest *request = [FBAPI postWithUrlString:userActivationUrl requestDictionary:nil delegate:self];
     request.flag = userActivationUrl;
     request.delegate = self;
@@ -414,8 +413,6 @@ static NSString *userActivationUrl = @"/gateway/record_fiu_user_active";
     }else{
         [self dismissViewControllerAnimated:YES completion:nil];
     }
-    
-    
 }
 
 //UIScrollViewDelegate
@@ -429,11 +426,9 @@ static NSString *userActivationUrl = @"/gateway/record_fiu_user_active";
     else{
        _guidePageController.hidden = NO;
     }
-    
 }
 
 - (void)dealloc {
-    
     //移除所有通知监控
     [[NSNotificationCenter defaultCenter] removeObserver:self];
 }

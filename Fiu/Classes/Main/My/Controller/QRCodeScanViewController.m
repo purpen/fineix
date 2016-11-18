@@ -20,6 +20,8 @@
 #import "UserInfoEntity.h"
 #import "THNSceneDetalViewController.h"
 
+static NSString *const referral_code = @"referral_code=";
+
 @interface QRCodeScanViewController ()<FBNavigationBarItemsDelegate,UIAlertViewDelegate,AVCaptureMetadataOutputObjectsDelegate>
 
 {
@@ -253,8 +255,6 @@
     id resultObj = [NSJSONSerialization JSONObjectWithData:jsonData options:NSJSONReadingMutableContainers error:&err];
     //判断是不是自己的二维码
     if ([resultStr rangeOfString:@"taihuoniao.com"].location == NSNotFound || [resultStr rangeOfString:@"infoType"].location == NSNotFound) {
-        
-        
         NSRange range = [resultStr rangeOfString:@"^http://([\\w-]+\\.)+[\\w-]+(/[\\w-./?%&=]*)?$" options:NSRegularExpressionSearch];
         if (range.location != NSNotFound) {
             UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"是否打开以下网址" message:resultStr delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"确定", nil];
@@ -262,12 +262,14 @@
             [alertView show];
             [_session stopRunning];
             return;
-        }else{
+        } else{
             [SVProgressHUD showErrorWithStatus:resultObj];
         }
-    }else if([resultStr rangeOfString:@"infoType"].location == NSNotFound){
+        
+    } else if([resultStr rangeOfString:@"infoType"].location == NSNotFound){
         [SVProgressHUD showErrorWithStatus:@"参数不足"];
-    }else if ([resultStr rangeOfString:@"taihuoniao.com"].location != NSNotFound && [resultStr rangeOfString:@"infoType"].location != NSNotFound){
+    
+    } else if ([resultStr rangeOfString:@"taihuoniao.com"].location != NSNotFound && [resultStr rangeOfString:@"infoType"].location != NSNotFound){
         NSArray *oneAry = [resultStr componentsSeparatedByString:@"?"];
         NSString *infoStr = oneAry[1];
         NSArray *twoAry = [infoStr componentsSeparatedByString:@"&"];
@@ -279,22 +281,23 @@
         }
         NSArray *threeAry = [twoAry[1] componentsSeparatedByString:@"="];
         NSString *infoId = threeAry[1];
-        if ([infoType isEqualToString:@"10"]) {
-            //地盘
-            
-        }else if ([infoType isEqualToString:@"11"]) {
+        
+        if ([infoType isEqualToString:@"11"]) {
             //情景
             THNSceneDetalViewController *vc = [[THNSceneDetalViewController alloc] init];
             vc.sceneDetalId = infoId;
             [self.navigationController pushViewController:vc animated:YES];
-        }else if ([infoType isEqualToString:@"12"]) {
-            //情景商品
-        }else if ([infoType isEqualToString:@"1"]) {
+       
+        } else if ([infoType isEqualToString:@"1"]) {
+            if ([resultStr containsString:referral_code]) {
+                [self thn_getGoodsReferralCodeWithResult:resultStr];
+            }
             //自营商品
             FBGoodsInfoViewController * fbGoodsInfoVC = [[FBGoodsInfoViewController alloc] init];
             fbGoodsInfoVC.goodsID = infoId;
             [self.navigationController pushViewController:fbGoodsInfoVC animated:YES];
-        }else if ([infoType isEqualToString:@"13"]) {
+       
+        } else if ([infoType isEqualToString:@"13"]) {
             //用户
             HomePageViewController *homeOpage = [[HomePageViewController alloc] init];
             homeOpage.type = @2;
@@ -310,19 +313,22 @@
     }
 }
 
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
+- (void)thn_getGoodsReferralCodeWithResult:(NSString *)result {
+    NSUInteger index = [result rangeOfString:referral_code].location;
+    NSString *subCodeStr = [result substringFromIndex:index];
+    //  获取商品推广码
+    NSString *referralCode = [subCodeStr substringFromIndex:referral_code.length];
+    if ([referralCode containsString:@"&"]) {
+        referralCode = [referralCode substringToIndex:[referralCode rangeOfString:@"&"].location];
+    }
+    //  获取当前时间
+    NSString *getTime = [NSString stringWithFormat:@"%ld", (long)[[NSDate date] timeIntervalSince1970]];
+    
+    //  保存到本地
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    [defaults setObject:referralCode forKey:ReferralCode];
+    [defaults setObject:getTime forKey:ReferralCodeTime];
+    [defaults synchronize];
 }
-
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
 
 @end

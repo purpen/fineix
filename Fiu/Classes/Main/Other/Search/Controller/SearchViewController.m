@@ -228,7 +228,6 @@ static NSString *const URLSearchList = @"/search/getlist";
     [[UIApplication sharedApplication] setStatusBarStyle:(UIStatusBarStyleLightContent)];
     self.view.backgroundColor = [UIColor colorWithHexString:@"#F8F8F8"];
     [self.navView addSubview:self.searchView];
-    self.navLine.hidden = YES;
 }
 
 - (void)viewWillDisappear:(BOOL)animated {

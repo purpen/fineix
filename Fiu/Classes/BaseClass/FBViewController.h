@@ -23,6 +23,14 @@
 
 @interface FBViewController : UIViewController
 
+
+/**
+ 获取商品推广码
+ 
+ @return 推广码
+ */
+- (NSString *)thn_getGoodsReferralCode;
+
 /**
  *  请求购物车数量
  */

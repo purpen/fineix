@@ -6,9 +6,9 @@
 //  Copyright © 2016年 taihuoniao. All rights reserved.
 //
 
-#import "FBViewController.h"
+#import "THNViewController.h"
 
-@interface THNCuXiaoDetalViewController : FBViewController
+@interface THNCuXiaoDetalViewController : THNViewController
 
 /**  */
 @property(nonatomic,copy) NSString *cuXiaoDetalId;

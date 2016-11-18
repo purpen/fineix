@@ -94,4 +94,8 @@
 //  readonly
 #define pro_strong_readonly    property (nonatomic, strong, readonly)
 
+#undef 商品推广码的key
+#define ReferralCode     @"ReferralCode"
+#define ReferralCodeTime @"ReferralCodeTime"
+
 #endif /* Fineix_h */

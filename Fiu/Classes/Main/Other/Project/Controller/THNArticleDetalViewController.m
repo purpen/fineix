@@ -41,22 +41,18 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    
     [self requestUrl];
-    
+    [self requestGetDataFromeNet];
 }
 
 -(void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
     [UIApplication sharedApplication].statusBarHidden = NO;
     [UIApplication sharedApplication].statusBarStyle = UIStatusBarStyleLightContent;
-    [self requestGetDataFromeNet];
 }
 
 -(void)requestGetDataFromeNet{
-    FBRequest *request = [FBAPI postWithUrlString:@"/scene_subject/view" requestDictionary:@{
-                                                                                             @"id" : self.articleDetalid
-                                                                                             } delegate:self];
+    FBRequest *request = [FBAPI postWithUrlString:@"/scene_subject/view" requestDictionary:@{@"id":self.articleDetalid} delegate:self];
     [request startRequestSuccess:^(FBRequest *request, id result) {
         if (result[@"success"]) {
             NSLog(@"文章详情 %@",result);

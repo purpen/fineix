@@ -70,6 +70,7 @@ static NSString *const ShareURlText = @"我在Fiu浮游™寻找同路人；希�
 #pragma mark 商品详情
 - (void)networkGoodsInfoData {
     [SVProgressHUD show];
+    NSLog(@"商品推广码： ===== %@", [self thn_getGoodsReferralCode]);
     self.goodsInfoRequest = [FBAPI getWithUrlString:URLGoodsInfo requestDictionary:@{@"id":self.goodsID} delegate:self];
     [self.goodsInfoRequest startRequestSuccess:^(FBRequest *request, id result) {
         _goodsDes = [[result valueForKey:@"data"] valueForKey:@"advantage"];
