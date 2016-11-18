@@ -20,7 +20,7 @@ typedef void(^CancelFollowTheUserBlock)(NSString *userId);
 @pro_strong UINavigationController *nav;
 @pro_strong UIViewController *vc;
 @pro_strong UIView *bottomView;
-@pro_strong UIButton *head;
+@pro_strong UIImageView *head;
 @pro_strong UIImageView *certificate;
 @pro_strong UILabel *name;
 @pro_strong UIButton *time;

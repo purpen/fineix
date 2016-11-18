@@ -22,14 +22,12 @@
 
 //  获取原始图
 - (UIImage *)originalImage {
-//    UIImage * oriImg = [UIImage imageWithCGImage:self.asset.defaultRepresentation.fullScreenImage
-//                                           scale:self.asset.defaultRepresentation.scale
-//                                     orientation:(UIImageOrientation)self.asset.defaultRepresentation.orientation];
     UIImage *oriImg = [UIImage imageWithCGImage:self.asset.defaultRepresentation.fullScreenImage];
 //    return [self fixOrientation:oriImg];
     return oriImg;
 }
 
+//  图片旋转问题
 - (UIImage *)fixOrientation:(UIImage *)srcImg {
     if (srcImg.imageOrientation == UIImageOrientationUp) return srcImg;
     CGAffineTransform transform = CGAffineTransformIdentity;

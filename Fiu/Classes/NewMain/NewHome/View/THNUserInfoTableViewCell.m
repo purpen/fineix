@@ -51,9 +51,7 @@ static NSString *const hotUserCellId = @"HotUserCellId";
     _userModel = userModel;
     UserInfoEntity *entity = [UserInfoEntity defaultUserInfoEntity];
     _isLogin = entity.isLogin;
-    [self.head sd_setImageWithURL:[NSURL URLWithString:userModel.user.avatarUrl]
-                         forState:(UIControlStateNormal)
-                 placeholderImage:[UIImage imageNamed:@""]];
+    [self.head downloadImage:userModel.user.avatarUrl place:[UIImage imageNamed:@""]];
     self.name.text = userModel.user.nickname;
     [self.time setTitle:userModel.createdAt forState:(UIControlStateNormal)];
     NSString *timeStr = [NSString stringWithFormat:@"      %@",userModel.createdAt];
@@ -81,9 +79,7 @@ static NSString *const hotUserCellId = @"HotUserCellId";
 - (void)thn_setHomeSceneUserInfoData:(HomeSceneListRow *)userModel userId:(NSString *)userID isLogin:(BOOL)login {
     _isLogin = login;
     self.name.text = userModel.user.nickname;
-    [self.head sd_setImageWithURL:[NSURL URLWithString:userModel.user.avatarUrl]
-                         forState:(UIControlStateNormal)
-                 placeholderImage:[UIImage imageNamed:@""]];
+    [self.head downloadImage:userModel.user.avatarUrl place:[UIImage imageNamed:@""]];
     [self.address setTitle:[NSString stringWithFormat:@"%@ %@", userModel.city, userModel.address]
                   forState:(UIControlStateNormal)];
     [self.time setTitle:userModel.createdAt
@@ -207,17 +203,20 @@ static NSString *const hotUserCellId = @"HotUserCellId";
     return _bottomView;
 }
 
-- (UIButton *)head {
+- (UIImageView *)head {
     if (!_head) {
-        _head = [[UIButton alloc] init];
+        _head = [[UIImageView alloc] init];
         _head.layer.cornerRadius = 30/2;
         _head.layer.masksToBounds = YES;
-        [_head addTarget:self action:@selector(headClick:) forControlEvents:(UIControlEventTouchUpInside)];
+        _head.contentMode = UIViewContentModeScaleAspectFill;
+        _head.userInteractionEnabled = YES;
+        UITapGestureRecognizer *headTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(headClick:)];
+        [_head addGestureRecognizer:headTap];
     }
     return _head;
 }
 
-- (void)headClick:(UIButton *)button {
+- (void)headClick:(UITapGestureRecognizer *)tap {
     if (_userId.length) {
         HomePageViewController *userHomeVC = [[HomePageViewController alloc] init];
         userHomeVC.userId = _userId;
@@ -271,8 +270,6 @@ static NSString *const hotUserCellId = @"HotUserCellId";
             scaleAnimation.springBounciness = 10.f;
             scaleAnimation.springSpeed = 10.0f;
             [button.layer pop_addAnimation:scaleAnimation forKey:@"scaleAnim"];
-//            button.layer.borderColor = [UIColor colorWithHexString:MAIN_COLOR].CGColor;
-//            button.backgroundColor = [UIColor colorWithHexString:MAIN_COLOR];
             
             self.beginFollowTheUserBlock(_userId);
             
@@ -284,8 +281,6 @@ static NSString *const hotUserCellId = @"HotUserCellId";
             scaleAnimation.springBounciness = 10.f;
             scaleAnimation.springSpeed = 10.0f;
             [button.layer pop_addAnimation:scaleAnimation forKey:@"scaleAnim"];
-//            button.layer.borderColor = [UIColor colorWithHexString:WHITE_COLOR alpha:0.6].CGColor;
-//            button.backgroundColor = [UIColor colorWithHexString:@"#222222"];
             
             self.cancelFollowTheUserBlock(_userId);
         }
