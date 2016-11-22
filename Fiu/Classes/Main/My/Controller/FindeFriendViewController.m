@@ -22,7 +22,6 @@
 #import "HomePageViewController.h"
 #import "MyQrCodeViewController.h"
 #import "MyQrCodeView.h"
-#import "UMSocial.h"
 #import "SearchView.h"
 #import "SearchTF.h"
 #import "UIView+FSExtension.h"

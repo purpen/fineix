@@ -65,7 +65,8 @@ static NSString *const QQAppKey              = @"CaKcLeg32YeVF7b9";
 static NSString *const determineLogin        = @"/auth/check_login";
 static NSString *const UMMessageAppKey       = @"5791f41b67e58e8de5002568";
 static NSString *const UMMessageMasterSecret = @"6s7pzrgvimmxfpzyc3qvyefgaaoibyiu";
-static NSString *const URLSubjectView = @"/scene_subject/view";
+static NSString *const URLSubjectView        = @"/scene_subject/view";
+static NSString *const ShareURL              = @"http://m.taihuoniao.com/fiu";
 
 @implementation AppDelegate
 
