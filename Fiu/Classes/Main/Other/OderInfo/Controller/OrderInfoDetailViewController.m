@@ -288,6 +288,9 @@ static NSString *const OrderDetailURL = @"/shopping/detail";
 - (void)deleteOrderWithCell:(OrderInfoCell *)cell
 {
     TYAlertView * alertView = [TYAlertView alertViewWithTitle:@"确认删除订单？" message:nil];
+    alertView.layer.cornerRadius = 10;
+    alertView.buttonDefaultBgColor = [UIColor colorWithHexString:MAIN_COLOR];
+    alertView.buttonCancleBgColor = [UIColor colorWithHexString:@"#999999"];
     TYAlertAction * cancel = [TYAlertAction actionWithTitle:@"取消" style:TYAlertActionStyleCancle handler:nil];
     TYAlertAction * confirm = [TYAlertAction actionWithTitle:@"确定" style:TYAlertActionStyleDefault handler:^(TYAlertAction * action) {
         FBRequest * request = [FBAPI postWithUrlString:@"/my/delete_order" requestDictionary:@{@"rid": cell.orderInfo.rid} delegate:self];
@@ -344,6 +347,9 @@ static NSString *const OrderDetailURL = @"/shopping/detail";
 - (void)cancleOrderWithCell:(OrderInfoCell *)cell
 {
     TYAlertView * alertView = [TYAlertView alertViewWithTitle:@"确认取消订单？" message:nil];
+    alertView.layer.cornerRadius = 10;
+    alertView.buttonDefaultBgColor = [UIColor colorWithHexString:MAIN_COLOR];
+    alertView.buttonCancleBgColor = [UIColor colorWithHexString:@"#999999"];
     TYAlertAction * cancel = [TYAlertAction actionWithTitle:@"取消" style:TYAlertActionStyleCancle handler:nil];
     TYAlertAction * confirm = [TYAlertAction actionWithTitle:@"确定" style:TYAlertActionStyleDefault handler:^(TYAlertAction * action) {
         FBRequest * request = [FBAPI postWithUrlString:@"/my/cancel_order" requestDictionary:@{@"rid": cell.orderInfo.rid} delegate:self];
@@ -366,6 +372,9 @@ static NSString *const OrderDetailURL = @"/shopping/detail";
 
 - (IBAction)serviceBtnAction:(UIButton *)sender {
     TYAlertView * alertView = [TYAlertView alertViewWithTitle:@"拨打 400-879-8751" message:nil];
+    alertView.layer.cornerRadius = 10;
+    alertView.buttonDefaultBgColor = [UIColor colorWithHexString:MAIN_COLOR];
+    alertView.buttonCancleBgColor = [UIColor colorWithHexString:@"#999999"];
     TYAlertAction * cancel = [TYAlertAction actionWithTitle:@"取消" style:TYAlertActionStyleCancle handler:nil];
     TYAlertAction * confirm = [TYAlertAction actionWithTitle:@"确定" style:TYAlertActionStyleDefault handler:^(TYAlertAction * action) {
         [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"tel://400-879-8751"]];

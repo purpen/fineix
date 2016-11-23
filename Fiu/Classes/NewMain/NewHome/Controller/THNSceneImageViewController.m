@@ -175,6 +175,9 @@ static NSString *const URLSceneCheck = @"/user/do_check";
     if (_isEditor == 1) {
         __weak __typeof(self)weakSelf = self;
         TYAlertView *alertView = [TYAlertView alertViewWithTitle:nil message:nil];
+        alertView.layer.cornerRadius = 10;
+        alertView.buttonDefaultBgColor = [UIColor colorWithHexString:MAIN_COLOR];
+        alertView.buttonCancleBgColor = [UIColor colorWithHexString:@"#999999"];
         [alertView addAction:[TYAlertAction actionWithTitle:_sceneCheck style:TYAlertActionStyleDestructive handler:^(TYAlertAction *action) {
             [weakSelf thn_networkCheckScene:_isCheck];
         }]];
@@ -200,6 +203,9 @@ static NSString *const URLSceneCheck = @"/user/do_check";
         
     } else {
         TYAlertView *alertView = [TYAlertView alertViewWithTitle:nil message:nil];
+        alertView.layer.cornerRadius = 10;
+        alertView.buttonDefaultBgColor = [UIColor colorWithHexString:MAIN_COLOR];
+        alertView.buttonCancleBgColor = [UIColor colorWithHexString:@"#999999"];
         [alertView addAction:[TYAlertAction actionWithTitle:@"取消" style:TYAlertActionStyleCancle handler:^(TYAlertAction *action) {
             
         }]];

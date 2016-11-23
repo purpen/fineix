@@ -60,50 +60,45 @@
 
 
 - (IBAction)weChatBtn:(UIButton *)sender {
-    [[UMSocialDataService defaultDataService]  postSNSWithTypes:@[UMShareToWechatSession] content:self.content image:self.image location:nil urlResource:nil presentedController:self completion:^(UMSocialResponseEntity *response){
-        if (response.responseCode == UMSResponseCodeSuccess) {
-            if ([self.shareDelegate respondsToSelector:@selector(afterShare)]) {
-                [self.shareDelegate afterShare];
-            }
-        }
-    }];
+//    [[UMSocialDataService defaultDataService]  postSNSWithTypes:@[UMShareToWechatSession] content:self.content image:self.image location:nil urlResource:nil presentedController:self completion:^(UMSocialResponseEntity *response){
+//        if (response.responseCode == UMSResponseCodeSuccess) {
+//            if ([self.shareDelegate respondsToSelector:@selector(afterShare)]) {
+//                [self.shareDelegate afterShare];
+//            }
+//        }
+//    }];
 }
 
 - (IBAction)timeLineBtn:(UIButton *)sender {
-    [[UMSocialDataService defaultDataService]  postSNSWithTypes:@[UMShareToWechatTimeline] content:self.content image:self.image location:nil urlResource:nil presentedController:self completion:^(UMSocialResponseEntity *response){
-        if (response.responseCode == UMSResponseCodeSuccess) {
-            if ([self.shareDelegate respondsToSelector:@selector(afterShare)]) {
-                [self.shareDelegate afterShare];
-            }
-        }
-    }];
+//    [[UMSocialDataService defaultDataService]  postSNSWithTypes:@[UMShareToWechatTimeline] content:self.content image:self.image location:nil urlResource:nil presentedController:self completion:^(UMSocialResponseEntity *response){
+//        if (response.responseCode == UMSResponseCodeSuccess) {
+//            if ([self.shareDelegate respondsToSelector:@selector(afterShare)]) {
+//                [self.shareDelegate afterShare];
+//            }
+//        }
+//    }];
 }
 - (IBAction)sinaBtn:(UIButton *)sender {
-    [[UMSocialDataService defaultDataService]  postSNSWithTypes:@[UMShareToSina] content:self.content image:self.image location:nil urlResource:nil presentedController:self completion:^(UMSocialResponseEntity *response){
-        if (response.responseCode == UMSResponseCodeSuccess) {
-            if ([self.shareDelegate respondsToSelector:@selector(afterShare)]) {
-                [self.shareDelegate afterShare];
-            }
-        }
-    }];
+//    [[UMSocialDataService defaultDataService]  postSNSWithTypes:@[UMShareToSina] content:self.content image:self.image location:nil urlResource:nil presentedController:self completion:^(UMSocialResponseEntity *response){
+//        if (response.responseCode == UMSResponseCodeSuccess) {
+//            if ([self.shareDelegate respondsToSelector:@selector(afterShare)]) {
+//                [self.shareDelegate afterShare];
+//            }
+//        }
+//    }];
 }
 - (IBAction)qqBtn:(UIButton *)sender {
-    [[UMSocialDataService defaultDataService]  postSNSWithTypes:@[UMShareToQQ] content:self.content image:self.image location:nil urlResource:nil presentedController:self completion:^(UMSocialResponseEntity *response){
-        if (response.responseCode == UMSResponseCodeSuccess) {
-            if ([self.shareDelegate respondsToSelector:@selector(afterShare)]) {
-                [self.shareDelegate afterShare];
-            }
-        }
-    }];
+//    [[UMSocialDataService defaultDataService]  postSNSWithTypes:@[UMShareToQQ] content:self.content image:self.image location:nil urlResource:nil presentedController:self completion:^(UMSocialResponseEntity *response){
+//        if (response.responseCode == UMSResponseCodeSuccess) {
+//            if ([self.shareDelegate respondsToSelector:@selector(afterShare)]) {
+//                [self.shareDelegate afterShare];
+//            }
+//        }
+//    }];
 }
 
 - (void)cancelBtnClick {
     [self dismissViewControllerAnimated:YES completion:nil];
-}
-
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
 }
 
 

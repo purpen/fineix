@@ -267,7 +267,7 @@
 }
 
 
--(void)rightBarItemSelected{
+-(void)thn_rightBarItemSelected {
     self.shareVC.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;
     self.shareVC.modalPresentationStyle = UIModalPresentationOverCurrentContext;
     [self presentViewController:_shareVC animated:YES completion:nil];
