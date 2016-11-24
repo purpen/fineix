@@ -1,0 +1,63 @@
+//
+//  THNHasSubOrdersTableViewCell.m
+//  Fiu
+//
+//  Created by FLYang on 2016/11/24.
+//  Copyright © 2016年 taihuoniao. All rights reserved.
+//
+
+#import "THNHasSubOrdersTableViewCell.h"
+
+static NSString *const promptText = @"    您购买的商品将由以下订单分开进行派送";
+
+@implementation THNHasSubOrdersTableViewCell
+
+- (instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier {
+    self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
+    if (self) {
+        [self set_cellViewUI];
+    }
+    return self;
+}
+
+- (void)set_cellViewUI {
+    self.selectionStyle = UITableViewCellSelectionStyleNone;
+    self.backgroundColor = [UIColor whiteColor];
+    
+    [self addSubview:self.number];
+    [_number mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.size.mas_equalTo(CGSizeMake(SCREEN_WIDTH, 44));
+        make.left.equalTo(self.mas_left).with.offset(0);
+        make.top.equalTo(self.mas_top).with.offset(0);
+    }];
+    
+    [self addSubview:self.prompt];
+    [_prompt mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.size.mas_equalTo(CGSizeMake(SCREEN_WIDTH, 40));
+        make.left.equalTo(self.mas_left).with.offset(0);
+        make.top.equalTo(_number.mas_bottom).with.offset(0);
+    }];
+}
+
+- (UILabel *)number {
+    if (!_number) {
+        _number = [[UILabel alloc] init];
+        _number.font = [UIFont systemFontOfSize:14];
+        _number.textColor = [UIColor colorWithHexString:@"#666666"];
+        _number.text = @"    订单号：1243546326743";
+    }
+    return _number;
+}
+
+- (UILabel *)prompt {
+    if (!_prompt) {
+        _prompt = [[UILabel alloc] init];
+        _prompt.font = [UIFont systemFontOfSize:12];
+        _prompt.textColor = [UIColor colorWithHexString:@"#999999"];
+        _prompt.backgroundColor = [UIColor colorWithHexString:@"#F7F7F7"];
+        _prompt.text = promptText;
+    }
+    return _prompt;
+}
+
+@end

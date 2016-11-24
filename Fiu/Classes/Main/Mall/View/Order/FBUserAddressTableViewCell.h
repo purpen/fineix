@@ -12,15 +12,16 @@
 
 @interface FBUserAddressTableViewCell : UITableViewCell
 
-@pro_strong UIImageView           *       addressIcon;
-@pro_strong UILabel               *       userName;
-@pro_strong UILabel               *       cityName;
-@pro_strong UILabel               *       addressLab;
-@pro_strong UILabel               *       phoneNum;
-@pro_strong UIImageView           *       openIcon;
-@pro_strong UIImageView           *       addIcon;
-@pro_strong UILabel               *       addLab;
+@pro_strong UIImageView           *addressIcon;
+@pro_strong UILabel               *userName;
+@pro_strong UILabel               *cityName;
+@pro_strong UILabel               *addressLab;
+@pro_strong UILabel               *phoneNum;
+@pro_strong UIImageView           *openIcon;
+@pro_strong UIImageView           *addIcon;
+@pro_strong UILabel               *addLab;
 
 - (void)setAddressModel:(DeliveryAddressModel *)addressModel;
+- (void)thn_setOrderAddressModel:(DeliveryAddressModel *)model;
 
 @end

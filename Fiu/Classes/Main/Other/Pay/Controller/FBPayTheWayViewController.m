@@ -336,6 +336,9 @@
 
 -(void)leftBarItemSelected{
     TYAlertView * alertView = [TYAlertView alertViewWithTitle:@"确认离开支付?" message:@"订单提交成功，如未支付，该订单会在72小时内自动关闭，请尽快付款。"];
+    alertView.layer.cornerRadius = 10;
+    alertView.buttonDefaultBgColor = [UIColor colorWithHexString:fineixColor];
+    alertView.buttonCancleBgColor = [UIColor colorWithHexString:@"#999999"];
     TYAlertAction * cancel = [TYAlertAction actionWithTitle:@"取消" style:TYAlertActionStyleCancle handler:nil];
     TYAlertAction * ok = [TYAlertAction actionWithTitle:@"确定" style:TYAlertActionStyleDefault handler:^(TYAlertAction *action) {
         [self.navigationController popViewControllerAnimated:YES];

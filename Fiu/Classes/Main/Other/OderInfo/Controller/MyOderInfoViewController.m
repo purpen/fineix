@@ -24,6 +24,8 @@
 #import "CounterModel.h"
 #import "SGTopTitleView.h"
 
+#import "THNOrderInfoViewController.h"
+
 @interface MyOderInfoViewController ()<FBNavigationBarItemsDelegate,UITableViewDelegate,UITableViewDataSource,FBRequestDelegate,OrderInfoCellDelegate,SGTopTitleViewDelegate>
 
 @property (weak, nonatomic) IBOutlet UITableView *myTableView;
@@ -50,7 +52,7 @@ static NSString *const OrderInfoCellIdentifier = @"orderInfoCell";
 
     if (!_segmentedControl) {
         _segmentedControl = [[SGTopTitleView alloc] initWithFrame:CGRectMake(0, 64, SCREEN_WIDTH, 44)];
-        _segmentedControl.scrollTitleArr = @[@"全部", @"待付款", @"待发货", @"待收货", @"待评价",@"退货/售后"];
+        _segmentedControl.scrollTitleArr = @[@"全部", @"待付款", @"待发货", @"待收货", @"待评价", @"退货/售后"];
         _segmentedControl.backgroundColor = [UIColor whiteColor];
         _segmentedControl.delegate_SG = self;
     }
@@ -66,12 +68,10 @@ static NSString *const OrderInfoCellIdentifier = @"orderInfoCell";
     UserInfoEntity *entity = [UserInfoEntity defaultUserInfoEntity];
     FBRequest *request = [FBAPI postWithUrlString:@"/auth/user" requestDictionary:@{@"user_id":entity.userId} delegate:self];
     [request startRequestSuccess:^(FBRequest *request, id result) {
-        
+
         NSDictionary *dataDict = result[@"data"];
-        
         NSDictionary *counterDict = [dataDict objectForKey:@"counter"];
         _counterModel = [CounterModel mj_objectWithKeyValues:counterDict];
-        
         
         [self.myTableView registerNib:[UINib nibWithNibName:@"OrderInfoCell" bundle:nil] forCellReuseIdentifier:OrderInfoCellIdentifier];
         _myTableView.estimatedRowHeight = 212.f;
@@ -263,6 +263,7 @@ static NSString *const OrderInfoCellIdentifier = @"orderInfoCell";
     
     FBRequest * request = [FBAPI postWithUrlString:OrderListURL requestDictionary:params delegate:self];
     [request startRequestSuccess:^(FBRequest *request, id result) {
+//        NSLog(@"订单列表：===== %@", result);
         [self.orderListAry removeAllObjects];
         NSDictionary * dataDic = [result objectForKey:@"data"];
         NSArray * rowsAry = [dataDic objectForKey:@"rows"];
@@ -338,20 +339,17 @@ static NSString *const OrderInfoCellIdentifier = @"orderInfoCell";
     return orderInfoCell;
 }
 
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
-}
-
-
 #pragma mark - OrderInfoCellDelegate
-- (void)tapProductViewWithOrderInfoCell:(OrderInfoCell *)orderInfoCell
+- (void)tapProductViewWithOrderInfoCell:(OrderInfoCell *)orderInfoCell orderId:(NSString *)orderId
 {
-    OrderInfoDetailViewController * orderInfoDetailVC = [[OrderInfoDetailViewController alloc] initWithNibName:@"OrderInfoDetailViewController" bundle:nil];
-    orderInfoDetailVC.orderInfoCell = orderInfoCell;
-    orderInfoDetailVC.delegate = self;
-    [self.navigationController pushViewController:orderInfoDetailVC animated:YES];
+//    OrderInfoDetailViewController * orderInfoDetailVC = [[OrderInfoDetailViewController alloc] initWithNibName:@"OrderInfoDetailViewController" bundle:nil];
+//    orderInfoDetailVC.orderInfoCell = orderInfoCell;
+//    orderInfoDetailVC.delegate = self;
+//    [self.navigationController pushViewController:orderInfoDetailVC animated:YES];
     //订单详情
+    THNOrderInfoViewController *orderInfoVC = [[THNOrderInfoViewController alloc] init];
+    orderInfoVC.orderId = orderId;
+    [self.navigationController pushViewController:orderInfoVC animated:YES];
 }
 
 - (void)operation1stBtnAction:(UIButton *)button withOrderInfoCell:(OrderInfoCell *)orderInfoCell

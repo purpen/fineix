@@ -25,12 +25,32 @@
         self.skuName = dictionary[@"sku_name"];
     }
     
+    if(![dictionary[@"refund_label"] isKindOfClass:[NSNull class]]){
+        self.refundLabel= dictionary[@"refund_label"];
+    }
+    
     if(![dictionary[@"price"] isKindOfClass:[NSNull class]]){
         self.price = dictionary[@"price"];
     }
     
     if(![dictionary[@"product_id"] isKindOfClass:[NSNull class]]){
         self.productId = [dictionary[@"product_id"] integerValue];
+    }
+    
+    if(![dictionary[@"refund_status"] isKindOfClass:[NSNull class]]){
+        self.refundStatus = [dictionary[@"refund_status"] integerValue];
+    }
+    
+    if(![dictionary[@"refund_type"] isKindOfClass:[NSNull class]]){
+        self.refundType = [dictionary[@"refund_type"] integerValue];
+    }
+    
+    if(![dictionary[@"refund_button"] isKindOfClass:[NSNull class]]){
+        self.refundButton = [dictionary[@"refund_button"] integerValue];
+    }
+    
+    if(![dictionary[@"vop_id"] isKindOfClass:[NSNull class]]){
+        self.vopId = [dictionary[@"vop_id"] integerValue];
     }
     
     if(![dictionary[@"quantity"] isKindOfClass:[NSNull class]]){

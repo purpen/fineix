@@ -13,7 +13,9 @@
 #import "Fiu.h"
 #import "ProductInfoView.h"
 
-@interface OrderInfoCell ()<ProductInfoViewDelegate>
+@interface OrderInfoCell ()<ProductInfoViewDelegate> {
+    NSString *_orderId;
+}
 
 @property (weak, nonatomic) IBOutlet UILabel *dateLbl;
 @property (weak, nonatomic) IBOutlet UILabel *stateLbl;
@@ -35,10 +37,7 @@
 
 - (void)awakeFromNib {
     [super awakeFromNib];
-    // Initialization code
     
-//    CGColorSpaceRef colorSpaceRef = CGColorSpaceCreateDeviceRGB();
-//    CGColorRef color = CGColorCreate(colorSpaceRef, (CGFloat[]){190 / 255, 137 / 255, 20 / 255, 1});
     self.operation1stBtn.layer.cornerRadius = 2;
     self.operation1stBtn.layer.masksToBounds = YES;
     self.operation1stBtn.layer.borderWidth = 0.5;
@@ -62,6 +61,7 @@
     if (_orderInfo != orderInfo) {
         _orderInfo = orderInfo;
     }
+    _orderId = orderInfo.rid;
     self.dateLbl.text = orderInfo.createdAt;
     self.stateLbl.text = orderInfo.statusLabel;
     self.totalAmountLbl.text = [NSString stringWithFormat:@"共 %ld 件商品", orderInfo.itemsCount];
@@ -75,7 +75,6 @@
         for (ProductInfoModel * productInfo in orderInfo.productInfos) {
             NSInteger i = [orderInfo.productInfos indexOfObject:productInfo];
             ProductInfoView * productInfoView = [[[NSBundle mainBundle] loadNibNamed:@"ProductInfoView" owner:self options:nil] firstObject];
-//            productInfoView.delegate = self;
             productInfoView.userInteractionEnabled = false;//
             [self.productView addSubview:productInfoView];
             __weak __typeof(self)weakSelf = self;
@@ -155,8 +154,8 @@
 
 - (void)tapProductViewGestureAction:(UITapGestureRecognizer *)tap
 {
-    if ([self.delegate respondsToSelector:@selector(tapProductViewWithOrderInfoCell:)]) {
-        [self.delegate tapProductViewWithOrderInfoCell:self];
+    if ([self.delegate respondsToSelector:@selector(tapProductViewWithOrderInfoCell:orderId:)]) {
+        [self.delegate tapProductViewWithOrderInfoCell:self orderId:_orderId];
     }
 }
 

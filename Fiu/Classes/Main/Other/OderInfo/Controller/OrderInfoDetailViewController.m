@@ -50,8 +50,6 @@ static NSString *const OrderDetailURL = @"/shopping/detail";
     [super viewDidLoad];
     self.delegate = self;
     self.navViewTitle.text = @"订单详情";
-//    CGColorSpaceRef colorSpaceRef = CGColorSpaceCreateDeviceRGB();
-//    CGColorRef color = CGColorCreate(colorSpaceRef, (CGFloat[]){190 / 255, 137 / 255, 20 / 255, 1});
     self.operation1stBtn.layer.cornerRadius = 2;
     self.operation1stBtn.layer.masksToBounds = YES;
     self.operation1stBtn.layer.borderWidth = 0.5;
@@ -85,7 +83,7 @@ static NSString *const OrderDetailURL = @"/shopping/detail";
     NSString * message = result[@"message"];
     if ([request.flag isEqualToString:OrderDetailURL]) {
         if ([[result objectForKey:@"success"] isEqualToNumber:@1]) {
-            
+            NSLog(@"订单详情：------------ %@", result);
             NSDictionary * dataDic = [result objectForKey:@"data"];
             self.orderInfo = [[OrderInfoModel alloc] initWithDictionary:dataDic];
             self.productInfoAry = self.orderInfo.productInfos;
@@ -98,7 +96,6 @@ static NSString *const OrderDetailURL = @"/shopping/detail";
     }
     request = nil;
 }
-
 
 - (void)configureUI
 {
@@ -141,7 +138,6 @@ static NSString *const OrderDetailURL = @"/shopping/detail";
         case OrderInfoStateWaitComment:
         {
             [self.operation1stBtn setTitle:@"发表评价" forState:UIControlStateNormal];
-//            [self.operation2ndBtn setTitle:@"删除订单" forState:UIControlStateNormal];
             self.operation2ndBtn.hidden = YES;
         }
             break;
@@ -202,8 +198,6 @@ static NSString *const OrderDetailURL = @"/shopping/detail";
         [self.navigationController popViewControllerAnimated:YES];
     }
 }
-
-
 
 - (void)requestFailed:(FBRequest *)request error:(NSError *)error
 {
@@ -391,20 +385,5 @@ static NSString *const OrderDetailURL = @"/shopping/detail";
     goodsInfoVC.goodsID = [NSString stringWithFormat:@"%ld",productInfo.productId];
     [self.navigationController pushViewController:goodsInfoVC animated:YES];
 }
-
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
-}
-
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
 
 @end
