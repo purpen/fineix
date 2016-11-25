@@ -30,6 +30,7 @@
 @property (weak, nonatomic) IBOutlet UILabel *realPay;
 @property (weak, nonatomic) IBOutlet UILabel *allLabel;
 @property (weak, nonatomic) IBOutlet UIView *bottomView;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *bottomView_heightSpace;
 
 - (IBAction)operation1stBtnAction:(UIButton *)sender;
 - (IBAction)operation2ndBtnAction:(UIButton *)sender;
@@ -88,6 +89,10 @@
         }];
         [productInfoView thn_setProductData:model.product];
 
+        //隐藏操作view
+        self.bottomView_heightSpace.constant = 0;
+        [self layoutIfNeeded];
+        
     }
 }
 
