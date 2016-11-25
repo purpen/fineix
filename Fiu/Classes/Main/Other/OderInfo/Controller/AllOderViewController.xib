@@ -1,9 +1,13 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="10117" systemVersion="15C50" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="11542" systemVersion="16A323" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11524"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="AllOderViewController">
@@ -33,7 +37,7 @@
                                 <constraint firstAttribute="height" constant="21" id="yl4-ci-ZSN"/>
                             </constraints>
                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                            <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                            <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             <nil key="highlightedColor"/>
                         </label>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="查看全部" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qAW-WX-se0">
@@ -43,7 +47,7 @@
                                 <constraint firstAttribute="height" constant="21" id="lvA-rx-XnU"/>
                             </constraints>
                             <fontDescription key="fontDescription" type="system" pointSize="10"/>
-                            <color key="textColor" red="0.40000000000000002" green="0.40000000000000002" blue="0.40000000000000002" alpha="1" colorSpace="calibratedRGB"/>
+                            <color key="textColor" red="0.40000000000000002" green="0.40000000000000002" blue="0.40000000000000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             <nil key="highlightedColor"/>
                         </label>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="O0c-NY-sYP">
@@ -53,7 +57,7 @@
                             </connections>
                         </button>
                     </subviews>
-                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     <constraints>
                         <constraint firstItem="O0c-NY-sYP" firstAttribute="top" secondItem="TFT-wk-yzO" secondAttribute="top" id="18z-y5-719"/>
                         <constraint firstAttribute="height" constant="44" id="1G9-n0-mwz"/>
@@ -84,14 +88,14 @@
                                     <rect key="frame" x="0.0" y="0.0" width="75" height="60"/>
                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                     <state key="normal" title="待付款">
-                                        <color key="titleColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                        <color key="titleColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                     </state>
                                     <connections>
                                         <action selector="paymentBtn:" destination="-1" eventType="touchUpInside" id="j91-6t-VVf"/>
                                     </connections>
                                 </button>
                             </subviews>
-                            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                            <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             <constraints>
                                 <constraint firstItem="myN-hL-ETm" firstAttribute="leading" secondItem="PdX-wS-Dr5" secondAttribute="leading" id="DMi-k7-VLA"/>
                                 <constraint firstAttribute="bottom" secondItem="myN-hL-ETm" secondAttribute="bottom" id="NfF-wi-fmq"/>
@@ -106,14 +110,14 @@
                                     <rect key="frame" x="0.0" y="0.0" width="75" height="60"/>
                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                     <state key="normal" title="待发货">
-                                        <color key="titleColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                        <color key="titleColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                     </state>
                                     <connections>
                                         <action selector="deliveryBtn:" destination="-1" eventType="touchUpInside" id="ctu-19-jq4"/>
                                     </connections>
                                 </button>
                             </subviews>
-                            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                            <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             <constraints>
                                 <constraint firstAttribute="bottom" secondItem="535-Mc-XJf" secondAttribute="bottom" id="8q1-xE-5ph"/>
                                 <constraint firstItem="535-Mc-XJf" firstAttribute="leading" secondItem="dfe-q2-OaB" secondAttribute="leading" id="Lqy-oe-Iq6"/>
@@ -128,14 +132,14 @@
                                     <rect key="frame" x="0.0" y="0.0" width="75" height="60"/>
                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                     <state key="normal" title="待收货">
-                                        <color key="titleColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                        <color key="titleColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                     </state>
                                     <connections>
                                         <action selector="goodsBtn:" destination="-1" eventType="touchUpInside" id="oD4-0u-R7h"/>
                                     </connections>
                                 </button>
                             </subviews>
-                            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                            <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             <constraints>
                                 <constraint firstAttribute="trailing" secondItem="Cmj-oN-lqe" secondAttribute="trailing" id="N1C-Vb-cdU"/>
                                 <constraint firstItem="Cmj-oN-lqe" firstAttribute="top" secondItem="qrf-JL-Th8" secondAttribute="top" id="Q4B-oQ-S3C"/>
@@ -150,14 +154,14 @@
                                     <rect key="frame" x="0.0" y="0.0" width="75" height="60"/>
                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                     <state key="normal" title="待评价">
-                                        <color key="titleColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                        <color key="titleColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                     </state>
                                     <connections>
                                         <action selector="evaluationBtn:" destination="-1" eventType="touchUpInside" id="Utq-CQ-Scm"/>
                                     </connections>
                                 </button>
                             </subviews>
-                            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                            <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             <constraints>
                                 <constraint firstAttribute="bottom" secondItem="aYp-Dw-QST" secondAttribute="bottom" id="3ic-oZ-lrJ"/>
                                 <constraint firstItem="aYp-Dw-QST" firstAttribute="top" secondItem="O6J-pr-hfo" secondAttribute="top" id="Qy7-n1-v7H"/>
@@ -172,14 +176,14 @@
                                     <rect key="frame" x="0.0" y="0.0" width="75" height="60"/>
                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                     <state key="normal" title="退换货">
-                                        <color key="titleColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                        <color key="titleColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                     </state>
                                     <connections>
                                         <action selector="returnGoodsBtn:" destination="-1" eventType="touchUpInside" id="oac-jQ-ikD"/>
                                     </connections>
                                 </button>
                             </subviews>
-                            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                            <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             <constraints>
                                 <constraint firstAttribute="trailing" secondItem="cho-Gl-TlE" secondAttribute="trailing" id="GOZ-cg-SVI"/>
                                 <constraint firstItem="cho-Gl-TlE" firstAttribute="top" secondItem="2O8-OU-wiC" secondAttribute="top" id="Yq8-Hm-HUk"/>
@@ -188,7 +192,7 @@
                             </constraints>
                         </view>
                     </subviews>
-                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     <constraints>
                         <constraint firstItem="O6J-pr-hfo" firstAttribute="leading" secondItem="qrf-JL-Th8" secondAttribute="trailing" id="0YB-VN-AG1"/>
                         <constraint firstItem="qrf-JL-Th8" firstAttribute="width" secondItem="PdX-wS-Dr5" secondAttribute="width" id="3AM-Tm-3ks"/>
@@ -224,7 +228,7 @@
                     </variation>
                 </view>
             </subviews>
-            <color key="backgroundColor" red="0.96862745098039216" green="0.96862745098039216" blue="0.96862745098039216" alpha="1" colorSpace="calibratedRGB"/>
+            <color key="backgroundColor" red="0.96862745098039216" green="0.96862745098039216" blue="0.96862745098039216" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
                 <constraint firstAttribute="trailing" secondItem="TFT-wk-yzO" secondAttribute="trailing" id="BHQ-te-cq9"/>
                 <constraint firstAttribute="trailing" secondItem="lFy-BH-hYI" secondAttribute="trailing" id="JaA-up-9jf"/>
@@ -233,7 +237,6 @@
                 <constraint firstItem="lFy-BH-hYI" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="eSk-7H-0TL"/>
                 <constraint firstItem="TFT-wk-yzO" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="mZd-eJ-Xdi"/>
             </constraints>
-            <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
             <point key="canvasLocation" x="380.5" y="394.5"/>
         </view>
     </objects>

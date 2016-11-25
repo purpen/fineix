@@ -180,7 +180,7 @@ static NSString *const OrderInfoCellIdentifier  = @"orderInfoCell";
     self.myTableView.delegate = self;
     self.myTableView.dataSource = self;
     //tableView每个row的高度
-    self.myTableView.rowHeight = 222;
+//    self.myTableView.rowHeight = 222;
     
     // 下拉刷新
     _myTableView.mj_header = [MJRefreshNormalHeader headerWithRefreshingBlock:^{
@@ -345,6 +345,10 @@ static NSString *const OrderInfoCellIdentifier  = @"orderInfoCell";
         [self requestDataForOderListOperationWith:type withURL:OrderListURL];
     }
 }
+
+//-(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
+//    return 222;
+//}
 
 
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
