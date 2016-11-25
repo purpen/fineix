@@ -13,6 +13,7 @@
 
 @interface THNGoodsInfoTableViewCell : UITableViewCell
 
+@property (nonatomic, strong) UINavigationController *nav;
 @property (nonatomic, strong) UIImageView   *goodsImg;      //  商品图片
 @property (nonatomic, strong) UILabel       *goodsTitle;    //  商品标题
 @property (nonatomic, strong) UILabel       *goodsColor;    //  商品颜色
@@ -22,7 +23,7 @@
 @property (nonatomic, strong) UIButton      *refundBtn;     //  退款按钮
 @property (nonatomic, strong) UILabel       *refundState;   //  退款状态
 
-- (void)thn_setGoodsInfoData:(ProductInfoModel *)model;
+- (void)thn_setGoodsInfoData:(ProductInfoModel *)model withRid:(NSString *)rid;
 
 //  子订单
 //- (void)thn_setSubOrderGoodsInfoData:(SubOrderModel *)model;

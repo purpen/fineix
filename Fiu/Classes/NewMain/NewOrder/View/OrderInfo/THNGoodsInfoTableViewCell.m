@@ -7,6 +7,15 @@
 //
 
 #import "THNGoodsInfoTableViewCell.h"
+#import "THNApplyRefundViewController.h"
+
+@interface THNGoodsInfoTableViewCell () {
+    NSString *_skuId;
+    NSString *_rid;
+    NSInteger _refundType;
+}
+
+@end
 
 @implementation THNGoodsInfoTableViewCell
 
@@ -18,7 +27,10 @@
     return self;
 }
 
-- (void)thn_setGoodsInfoData:(ProductInfoModel *)model {
+- (void)thn_setGoodsInfoData:(ProductInfoModel *)model withRid:(NSString *)rid {
+    _skuId = [NSString stringWithFormat:@"%zi", model.sku];
+    _rid = rid;
+    
     [self.goodsImg downloadImage:model.coverUrl place:[UIImage imageNamed:@""]];
     self.goodsTitle.text = model.name;
     self.goodsNum.text = [NSString stringWithFormat:@"数量 * %zi", model.quantity];
@@ -47,11 +59,13 @@
             break;
             
         case 1:
+            _refundType = 1;
             self.refundState.hidden = YES;
             [self.refundBtn setTitle:@"退款" forState:(UIControlStateNormal)];
             break;
             
         case 2:
+            _refundType = 2;
             self.refundState.hidden = YES;
             [self.refundBtn setTitle:@"退货／款" forState:(UIControlStateNormal)];
             break;
@@ -150,7 +164,11 @@
 
 #pragma mark - 点击进行退款
 - (void)refundBtnClick:(UIButton *)button {
-    [SVProgressHUD showInfoWithStatus:@"点击进行退款"];
+    THNApplyRefundViewController *applyRefundVC = [[THNApplyRefundViewController alloc] init];
+    applyRefundVC.type = _refundType;
+    applyRefundVC.skuId = _skuId;
+    applyRefundVC.orderId = _rid;
+    [self.nav pushViewController:applyRefundVC animated:YES];
 }
 
 - (UILabel *)JDGoodsLab {

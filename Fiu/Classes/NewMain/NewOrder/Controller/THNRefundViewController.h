@@ -11,5 +11,6 @@
 @interface THNRefundViewController : THNViewController
 
 @property (nonatomic, strong) NSString *orderId;
+@property (nonatomic, strong) FBRequest *refundRequest;
 
 @end

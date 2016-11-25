@@ -37,6 +37,7 @@ static NSString *const PhoneNumber = @"拨打 400-879-8751";
 @interface THNOrderInfoViewController () {
     BOOL            _isHasSubOrder;         //  是否有子订单
     THNOrderState   _orderState;            //  订单状态
+    NSString       *_orderId;
 }
 
 @end
@@ -79,10 +80,10 @@ static NSString *const PhoneNumber = @"拨打 400-879-8751";
     [SVProgressHUD show];
     self.orderRequest = [FBAPI getWithUrlString:URLOrderInfo requestDictionary:@{@"rid":orderId} delegate:nil];
     [self.orderRequest startRequestSuccess:^(FBRequest *request, id result) {
-        NSLog(@"订单详情：==== %@", result);
         NSDictionary *data = [result valueForKey:@"data"];
         self.addressModel = [[DeliveryAddressModel alloc] initWithDictionary:[data valueForKey:@"express_info"]];
         self.orderModel = [[OrderInfoModel alloc] initWithDictionary:data];
+        _orderId = self.orderModel.rid;
         
         [self thn_getOrderInfoData:data];
     
@@ -117,7 +118,6 @@ static NSString *const PhoneNumber = @"拨打 400-879-8751";
             [self.subOrderGoodsMarr addObject:model.productInfos];
             [self.orderDataMarr addObject:model];
         }
-        
         //  子订单中商品数量
         for (NSArray *goodsArr in self.subOrderGoodsMarr) {
             [self.subGoodsNumMarr addObject:[NSString stringWithFormat:@"%zi", goodsArr.count]];
@@ -348,14 +348,15 @@ static NSString *const PhoneNumber = @"拨打 400-879-8751";
         } else {
             THNGoodsInfoTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:goodsCellId];
             cell = [[THNGoodsInfoTableViewCell alloc] initWithStyle:(UITableViewCellStyleDefault) reuseIdentifier:goodsCellId];
+            cell.nav = self.navigationController;
             if (_isHasSubOrder) {
                 if (self.subOrderGoodsMarr.count) {
-                    [cell thn_setGoodsInfoData:self.subOrderGoodsMarr[indexPath.section - 2][indexPath.row - 1]];
+                    [cell thn_setGoodsInfoData:self.subOrderGoodsMarr[indexPath.section - 2][indexPath.row - 1] withRid:_orderId];
                 }
                 
             } else {
                 if (self.orderDataMarr.count) {
-                    [cell thn_setGoodsInfoData:self.orderDataMarr[indexPath.row - 1]];
+                    [cell thn_setGoodsInfoData:self.orderDataMarr[indexPath.row - 1] withRid:_orderId];
                 }
             }
             return cell;
