@@ -10,6 +10,7 @@
 #import "OrderInfoModel.h"
 #import "ProductInfoModel.h"
 #import "DeliveryAddressModel.h"
+#import "SubOrderModel.h"
 #import "THNOrderOperationView.h"
 #import "UIView+TYAlertView.h"
 
@@ -24,6 +25,9 @@
 @property (nonatomic, strong) DeliveryAddressModel  *addressModel;
 @property (nonatomic, strong) OrderInfoModel        *orderModel;
 @property (nonatomic, strong) NSMutableArray        *orderDataMarr;
+@property (nonatomic, strong) NSMutableArray        *subOrderMarr;
+@property (nonatomic, strong) NSMutableArray        *subOrderGoodsMarr;
+@property (nonatomic, strong) NSMutableArray        *subGoodsNumMarr;
 @property (nonatomic, strong) NSString              *orderId;
 @property (nonatomic, strong) UITableView           *orderInfoTable;
 @property (nonatomic, strong) THNOrderOperationView *bottomView;

@@ -15,6 +15,7 @@
 
 @interface OrderInfoCell ()<ProductInfoViewDelegate> {
     NSString *_orderId;
+    NSInteger _type;    //  1:正常订单 && 2:退款订单
 }
 
 @property (weak, nonatomic) IBOutlet UILabel *dateLbl;
@@ -27,6 +28,8 @@
 @property (weak, nonatomic) IBOutlet UIButton *operation2ndBtn;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *productViewHeight;
 @property (weak, nonatomic) IBOutlet UILabel *realPay;
+@property (weak, nonatomic) IBOutlet UILabel *allLabel;
+@property (weak, nonatomic) IBOutlet UIView *bottomView;
 
 - (IBAction)operation1stBtnAction:(UIButton *)sender;
 - (IBAction)operation2ndBtnAction:(UIButton *)sender;
@@ -56,11 +59,51 @@
     
 }
 
+#pragma mark - 退款商品列表
+- (void)thn_setRefundGoodsListData:(RefundGoodsModel *)model {
+    _type = 2;
+    if (model) {
+        _orderId = model.rid;
+        
+        self.dateLbl.text = [NSString stringWithFormat:@"退款编号：%@", model.idField];
+        self.stateLbl.text = model.stageLabel;
+        self.realPay.text = [NSString stringWithFormat:@"退款金额：￥%.2f", model.refundPrice];
+        self.totalAmountLbl.hidden = YES;
+        self.freightLabel.hidden = YES;
+        self.totalPriceLbl.hidden = YES;
+        self.allLabel.hidden = YES;
+        self.bottomView.hidden = YES;
+        
+        [self.productView.subviews makeObjectsPerformSelector:@selector(removeFromSuperview)];
+        self.productViewHeight.constant = 95;
+        ProductInfoView * productInfoView = [[[NSBundle mainBundle] loadNibNamed:@"ProductInfoView" owner:self options:nil] firstObject];
+        productInfoView.userInteractionEnabled = false;//
+        [self.productView addSubview:productInfoView];
+        __weak __typeof(self)weakSelf = self;
+        [productInfoView mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.height.mas_equalTo(95);
+            make.top.equalTo(weakSelf.productView.mas_top).with.offset(0);
+            make.left.equalTo(weakSelf.productView.mas_left).with.offset(0);
+            make.right.equalTo(weakSelf.productView.mas_right).with.offset(-0);
+        }];
+        [productInfoView thn_setProductData:model.product];
+
+    }
+}
+
 - (void)setOrderInfo:(OrderInfoModel *)orderInfo
 {
+    _type = 1;
     if (_orderInfo != orderInfo) {
         _orderInfo = orderInfo;
     }
+    
+    self.totalAmountLbl.hidden = NO;
+    self.freightLabel.hidden = NO;
+    self.totalPriceLbl.hidden = NO;
+    self.allLabel.hidden = NO;
+    self.bottomView.hidden = NO;
+    
     _orderId = orderInfo.rid;
     self.dateLbl.text = orderInfo.createdAt;
     self.stateLbl.text = orderInfo.statusLabel;
@@ -130,7 +173,6 @@
         case OrderInfoStateWaitComment:
         {
             [self.operation1stBtn setTitle:@"发表评价" forState:UIControlStateNormal];
-//            [self.operation2ndBtn setTitle:@"删除订单" forState:UIControlStateNormal];
             self.operation1stBtn.hidden = NO;
             self.operation2ndBtn.hidden = YES;
         }
@@ -154,8 +196,8 @@
 
 - (void)tapProductViewGestureAction:(UITapGestureRecognizer *)tap
 {
-    if ([self.delegate respondsToSelector:@selector(tapProductViewWithOrderInfoCell:orderId:)]) {
-        [self.delegate tapProductViewWithOrderInfoCell:self orderId:_orderId];
+    if ([self.delegate respondsToSelector:@selector(tapProductViewWithOrderInfoCell:orderId:type:)]) {
+        [self.delegate tapProductViewWithOrderInfoCell:self orderId:_orderId type:_type];
     }
 }
 

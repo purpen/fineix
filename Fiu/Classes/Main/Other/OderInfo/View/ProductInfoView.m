@@ -24,13 +24,19 @@
 
 @implementation ProductInfoView
 
-/*
-// Only override drawRect: if you perform custom drawing.
-// An empty implementation adversely affects performance during animation.
-- (void)drawRect:(CGRect)rect {
-    // Drawing code
+- (void)thn_setProductData:(ProductModel *)model {
+    if (model) {
+        [self.coverImgView sd_setImageWithURL:[NSURL URLWithString:model.coverUrl] placeholderImage:[UIImage imageNamed:@"placeholder"]];
+        self.nameLbl.text = model.title;
+        if (model.skuName.length > 0) {
+            self.typeLbl.text = [NSString stringWithFormat:@"颜色%@类型：%@，数量*%zi",@"/",model.skuName,model.quantity];
+        }else{
+            self.typeLbl.text = [NSString stringWithFormat:@"数量*%zi",model.quantity];
+        }
+        
+        self.priceLbl.text = [NSString stringWithFormat:@"￥%.2f", model.salePrice];
+    }
 }
-*/
 
 - (void)setProductInfo:(ProductInfoModel *)productInfo
 {

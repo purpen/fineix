@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "ProductModel.h"
 
 @class ProductInfoModel;
 @class ProductInfoView;
@@ -22,5 +23,7 @@
 
 @property (nonatomic, strong) ProductInfoModel * productInfo;
 @property (nonatomic, weak) id<ProductInfoViewDelegate> delegate;
+
+- (void)thn_setProductData:(ProductModel *)model;
 
 @end

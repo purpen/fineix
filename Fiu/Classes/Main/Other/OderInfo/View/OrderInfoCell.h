@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "RefundGoodsModel.h"
 
 @class OrderInfoCell;
 @protocol OrderInfoCellDelegate <NSObject>
@@ -14,7 +15,7 @@
 @optional
 - (void)operation1stBtnAction:(UIButton *)button withOrderInfoCell:(OrderInfoCell *)orderInfoCell;
 - (void)operation2ndBtnAction:(UIButton *)button withOrderInfoCell:(OrderInfoCell *)orderInfoCell;
-- (void)tapProductViewWithOrderInfoCell:(OrderInfoCell *)orderInfoCell orderId:(NSString *)orderId;
+- (void)tapProductViewWithOrderInfoCell:(OrderInfoCell *)orderInfoCell orderId:(NSString *)orderId type:(NSInteger)type;
 
 @end
 
@@ -23,5 +24,7 @@
 
 @property (nonatomic, strong) OrderInfoModel * orderInfo;
 @property (nonatomic, weak) id<OrderInfoCellDelegate> delegate;
+
+- (void)thn_setRefundGoodsListData:(RefundGoodsModel *)model;
 
 @end

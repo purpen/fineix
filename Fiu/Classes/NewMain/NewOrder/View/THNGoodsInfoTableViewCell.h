@@ -9,6 +9,7 @@
 #import <UIKit/UIKit.h>
 #import "THNMacro.h"
 #import "ProductInfoModel.h"
+#import "SubOrderModel.h"
 
 @interface THNGoodsInfoTableViewCell : UITableViewCell
 
@@ -22,5 +23,8 @@
 @property (nonatomic, strong) UILabel       *refundState;   //  退款状态
 
 - (void)thn_setGoodsInfoData:(ProductInfoModel *)model;
+
+//  子订单
+//- (void)thn_setSubOrderGoodsInfoData:(SubOrderModel *)model;
 
 @end

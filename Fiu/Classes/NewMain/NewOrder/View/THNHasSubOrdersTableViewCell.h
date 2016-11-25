@@ -8,10 +8,14 @@
 
 #import <UIKit/UIKit.h>
 #import "THNMacro.h"
+#import "OrderInfoModel.h"
 
 @interface THNHasSubOrdersTableViewCell : UITableViewCell
 
-@property (nonatomic, strong) UILabel *number;  //  订单编号
-@property (nonatomic, strong) UILabel *prompt;  //  拆单提示
+@property (nonatomic, strong) UILabel *number;      //  订单编号
+@property (nonatomic, strong) UILabel *prompt;      //  拆单提示
+@property (nonatomic, strong) UILabel *stateLab;    //  状态提示
+
+- (void)thn_getOrderStateAndNumber:(OrderInfoModel *)model;
 
 @end

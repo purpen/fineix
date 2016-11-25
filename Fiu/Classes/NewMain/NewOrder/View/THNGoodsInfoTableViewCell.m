@@ -143,8 +143,14 @@
         [_refundBtn setTitleColor:[UIColor colorWithHexString:@"#666666"] forState:(UIControlStateNormal)];
         _refundBtn.layer.borderColor = [UIColor colorWithHexString:@"#666666"].CGColor;
         _refundBtn.layer.borderWidth = 0.5f;
+        [_refundBtn addTarget:self action:@selector(refundBtnClick:) forControlEvents:(UIControlEventTouchUpInside)];
     }
     return _refundBtn;
+}
+
+#pragma mark - 点击进行退款
+- (void)refundBtnClick:(UIButton *)button {
+    [SVProgressHUD showInfoWithStatus:@"点击进行退款"];
 }
 
 - (UILabel *)JDGoodsLab {

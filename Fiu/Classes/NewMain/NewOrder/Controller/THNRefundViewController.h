@@ -10,4 +10,6 @@
 
 @interface THNRefundViewController : THNViewController
 
+@property (nonatomic, strong) NSString *orderId;
+
 @end

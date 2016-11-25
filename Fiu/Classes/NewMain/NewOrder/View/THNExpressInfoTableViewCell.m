@@ -19,8 +19,27 @@
 }
 
 - (void)thn_setOrederExpressData:(OrderInfoModel *)model {
-    self.expressCompany.text = [NSString stringWithFormat:@"承运来源：%@", model.express_company];
-    self.expressNum.text = [NSString stringWithFormat:@"快递编号：%@", model.expressNo];
+    if (model.expressNo.length == 0) {
+        self.expressCompany.hidden = YES;
+        self.expressNum.hidden = YES;
+        self.noExpressInfo.hidden = NO;
+        
+    } else {
+        self.expressCompany.text = [NSString stringWithFormat:@"承运来源：%@", model.express_company];
+        self.expressNum.text = [NSString stringWithFormat:@"快递编号：%@", model.expressNo];
+    }
+}
+
+- (void)thn_setSubOrederExpressData:(SubOrderModel *)model {
+    if (model.expressNo.length == 0) {
+        self.expressCompany.hidden = YES;
+        self.expressNum.hidden = YES;
+        self.noExpressInfo.hidden = NO;
+        
+    } else {
+        self.expressCompany.text = [NSString stringWithFormat:@"承运来源：%@", model.expressCompany];
+        self.expressNum.text = [NSString stringWithFormat:@"快递编号：%@", model.expressNo];
+    }
 }
 
 - (void)set_cellViewUI {
@@ -44,6 +63,11 @@
         make.right.equalTo(self.mas_right).with.offset(-15);
         make.bottom.equalTo(self.mas_bottom).with.offset(0);
     }];
+    
+    [self addSubview:self.noExpressInfo];
+    [_noExpressInfo mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.left.right.bottom.equalTo(self).with.offset(0);
+    }];
 }
 
 - (UILabel *)expressCompany {
@@ -63,6 +87,18 @@
         _expressNum.textAlignment = NSTextAlignmentRight;
     }
     return _expressNum;
+}
+
+- (UILabel *)noExpressInfo {
+    if (!_noExpressInfo) {
+        _noExpressInfo = [[UILabel alloc] init];
+        _noExpressInfo.font = [UIFont systemFontOfSize:12];
+        _noExpressInfo.textColor = [UIColor colorWithHexString:@"#999999"];
+        _noExpressInfo.textAlignment = NSTextAlignmentCenter;
+        _noExpressInfo.text = @"暂时没有物流信息";
+        _noExpressInfo.hidden = YES;
+    }
+    return _noExpressInfo;
 }
 
 @end

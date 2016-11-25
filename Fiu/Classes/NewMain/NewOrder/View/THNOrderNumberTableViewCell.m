@@ -19,8 +19,13 @@
 }
 
 - (void)thn_setOrederNumberData:(OrderInfoModel *)model {
-    self.number.text = [NSString stringWithFormat:@"订单号：%@", model.expressNo];
+    self.number.text = [NSString stringWithFormat:@"订单号：%@", model.rid];
     self.state.text = model.statusLabel;
+}
+
+- (void)thn_setSubOrderNumberData:(SubOrderModel *)model {
+    self.number.text = [NSString stringWithFormat:@"订单号：%@", model.rid];
+    self.state.hidden = YES;
 }
 
 - (void)set_cellViewUI {

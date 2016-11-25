@@ -533,7 +533,6 @@
 		D857ABF31DE436D700F924E8 /* THNShareView.m in Sources */ = {isa = PBXBuildFile; fileRef = D857ABEF1DE436D700F924E8 /* THNShareView.m */; };
 		D857ABF61DE5706C00F924E8 /* THNSalesReturnViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D857ABF51DE5706C00F924E8 /* THNSalesReturnViewController.m */; };
 		D857ABFD1DE6845B00F924E8 /* THNOrderInfoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D857ABFC1DE6845B00F924E8 /* THNOrderInfoViewController.m */; };
-		D857AC001DE685A100F924E8 /* THNOrderInfoTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D857ABFF1DE685A100F924E8 /* THNOrderInfoTableViewCell.m */; };
 		D857AC031DE68B4900F924E8 /* THNHasSubOrdersTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D857AC021DE68B4900F924E8 /* THNHasSubOrdersTableViewCell.m */; };
 		D857AC061DE6B68A00F924E8 /* THNPaymentTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D857AC051DE6B68A00F924E8 /* THNPaymentTableViewCell.m */; };
 		D857AC091DE6B93500F924E8 /* THNServiceTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D857AC081DE6B93500F924E8 /* THNServiceTableViewCell.m */; };
@@ -542,6 +541,9 @@
 		D857AC151DE6DD7200F924E8 /* THNGoodsInfoTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D857AC141DE6DD7200F924E8 /* THNGoodsInfoTableViewCell.m */; };
 		D857AC181DE6ED5000F924E8 /* THNOrderNumberTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D857AC171DE6ED5000F924E8 /* THNOrderNumberTableViewCell.m */; };
 		D857AC1B1DE6ED6900F924E8 /* THNExpressInfoTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D857AC1A1DE6ED6900F924E8 /* THNExpressInfoTableViewCell.m */; };
+		D857AC1E1DE7E6EE00F924E8 /* SubOrderModel.m in Sources */ = {isa = PBXBuildFile; fileRef = D857AC1D1DE7E6EE00F924E8 /* SubOrderModel.m */; };
+		D857AC211DE81CB200F924E8 /* RefundGoodsModel.m in Sources */ = {isa = PBXBuildFile; fileRef = D857AC201DE81CB200F924E8 /* RefundGoodsModel.m */; };
+		D857AC241DE8218700F924E8 /* ProductModel.m in Sources */ = {isa = PBXBuildFile; fileRef = D857AC231DE8218700F924E8 /* ProductModel.m */; };
 		D861BC6E1D7E977700A26022 /* THNBrandInfoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D861BC6D1D7E977700A26022 /* THNBrandInfoViewController.m */; };
 		D861BC711D7E995600A26022 /* THNBrandInfoCollectionReusableView.m in Sources */ = {isa = PBXBuildFile; fileRef = D861BC701D7E995600A26022 /* THNBrandInfoCollectionReusableView.m */; };
 		D86809031D622049002714B2 /* FBImageScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = D86809021D622049002714B2 /* FBImageScrollView.m */; };
@@ -1658,8 +1660,6 @@
 		D857ABF51DE5706C00F924E8 /* THNSalesReturnViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THNSalesReturnViewController.m; sourceTree = "<group>"; };
 		D857ABFB1DE6845B00F924E8 /* THNOrderInfoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THNOrderInfoViewController.h; sourceTree = "<group>"; };
 		D857ABFC1DE6845B00F924E8 /* THNOrderInfoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THNOrderInfoViewController.m; sourceTree = "<group>"; };
-		D857ABFE1DE685A100F924E8 /* THNOrderInfoTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THNOrderInfoTableViewCell.h; sourceTree = "<group>"; };
-		D857ABFF1DE685A100F924E8 /* THNOrderInfoTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THNOrderInfoTableViewCell.m; sourceTree = "<group>"; };
 		D857AC011DE68B4900F924E8 /* THNHasSubOrdersTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THNHasSubOrdersTableViewCell.h; sourceTree = "<group>"; };
 		D857AC021DE68B4900F924E8 /* THNHasSubOrdersTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THNHasSubOrdersTableViewCell.m; sourceTree = "<group>"; };
 		D857AC041DE6B68A00F924E8 /* THNPaymentTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THNPaymentTableViewCell.h; sourceTree = "<group>"; };
@@ -1676,6 +1676,12 @@
 		D857AC171DE6ED5000F924E8 /* THNOrderNumberTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THNOrderNumberTableViewCell.m; sourceTree = "<group>"; };
 		D857AC191DE6ED6900F924E8 /* THNExpressInfoTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THNExpressInfoTableViewCell.h; sourceTree = "<group>"; };
 		D857AC1A1DE6ED6900F924E8 /* THNExpressInfoTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THNExpressInfoTableViewCell.m; sourceTree = "<group>"; };
+		D857AC1C1DE7E6EE00F924E8 /* SubOrderModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SubOrderModel.h; sourceTree = "<group>"; };
+		D857AC1D1DE7E6EE00F924E8 /* SubOrderModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SubOrderModel.m; sourceTree = "<group>"; };
+		D857AC1F1DE81CB200F924E8 /* RefundGoodsModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RefundGoodsModel.h; sourceTree = "<group>"; };
+		D857AC201DE81CB200F924E8 /* RefundGoodsModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RefundGoodsModel.m; sourceTree = "<group>"; };
+		D857AC221DE8218700F924E8 /* ProductModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProductModel.h; sourceTree = "<group>"; };
+		D857AC231DE8218700F924E8 /* ProductModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ProductModel.m; sourceTree = "<group>"; };
 		D861BC6C1D7E977700A26022 /* THNBrandInfoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THNBrandInfoViewController.h; sourceTree = "<group>"; };
 		D861BC6D1D7E977700A26022 /* THNBrandInfoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THNBrandInfoViewController.m; sourceTree = "<group>"; };
 		D861BC6F1D7E995600A26022 /* THNBrandInfoCollectionReusableView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THNBrandInfoCollectionReusableView.h; sourceTree = "<group>"; };
@@ -4416,6 +4422,12 @@
 		D857ABF91DE6844600F924E8 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				D857AC1C1DE7E6EE00F924E8 /* SubOrderModel.h */,
+				D857AC1D1DE7E6EE00F924E8 /* SubOrderModel.m */,
+				D857AC1F1DE81CB200F924E8 /* RefundGoodsModel.h */,
+				D857AC201DE81CB200F924E8 /* RefundGoodsModel.m */,
+				D857AC221DE8218700F924E8 /* ProductModel.h */,
+				D857AC231DE8218700F924E8 /* ProductModel.m */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -4429,8 +4441,6 @@
 				D857AC141DE6DD7200F924E8 /* THNGoodsInfoTableViewCell.m */,
 				D857AC191DE6ED6900F924E8 /* THNExpressInfoTableViewCell.h */,
 				D857AC1A1DE6ED6900F924E8 /* THNExpressInfoTableViewCell.m */,
-				D857ABFE1DE685A100F924E8 /* THNOrderInfoTableViewCell.h */,
-				D857ABFF1DE685A100F924E8 /* THNOrderInfoTableViewCell.m */,
 				D857AC011DE68B4900F924E8 /* THNHasSubOrdersTableViewCell.h */,
 				D857AC021DE68B4900F924E8 /* THNHasSubOrdersTableViewCell.m */,
 				D857AC041DE6B68A00F924E8 /* THNPaymentTableViewCell.h */,
@@ -5118,6 +5128,7 @@
 				D80669981D7014C8007FD81E /* HotUserList.m in Sources */,
 				D8C0951F1D7533FD00908491 /* ShareInfo.m in Sources */,
 				D869BD6B1D6036A000432423 /* CommentNViewController.m in Sources */,
+				D857AC1E1DE7E6EE00F924E8 /* SubOrderModel.m in Sources */,
 				D86E54C01DD444230075ED88 /* FSNashvilleFilter.m in Sources */,
 				D868090B1D6301C1002714B2 /* FBSubjectModelData.m in Sources */,
 				1F2A8FCA1CF40277005116C7 /* GoodsRow.m in Sources */,
@@ -5281,7 +5292,6 @@
 				1F2A90601CF40277005116C7 /* MessageViewController.m in Sources */,
 				D869BD6D1D6036A000432423 /* CommentData.m in Sources */,
 				1F2AFC6F1D88170B00DA6035 /* MyPageFocusOnViewController.m in Sources */,
-				D857AC001DE685A100F924E8 /* THNOrderInfoTableViewCell.m in Sources */,
 				1F2A906C1CF40277005116C7 /* NearQingViewController.m in Sources */,
 				1F2A902F1CF40277005116C7 /* DeliveryAddressCell.m in Sources */,
 				D813180B1D9266BE007CE71C /* THNRemindTableViewCell.m in Sources */,
@@ -5328,6 +5338,7 @@
 				D812815A1CAA8532007CF08B /* fineix.xcdatamodeld in Sources */,
 				D8ACF4581D6C1F9400DB79D8 /* THNMallSubjectModelRow.m in Sources */,
 				1F9309901D9D1E8800832D90 /* THNResoltCollectionViewCell.m in Sources */,
+				D857AC241DE8218700F924E8 /* ProductModel.m in Sources */,
 				1F2A8FBE1CF40277005116C7 /* ChildTagsTag.m in Sources */,
 				D8C094F91D752D5A00908491 /* HomeSceneListComments.m in Sources */,
 				D840F0941D93B57700CE9FB7 /* THNRemindModelTargetObj.m in Sources */,
@@ -5345,6 +5356,7 @@
 				1F2A8F4F1CF40277005116C7 /* PhotoAlbumsView.m in Sources */,
 				1F2A8FD01CF40277005116C7 /* MallMenuCollectionViewCell.m in Sources */,
 				D81281541CAA8532007CF08B /* FBRequest.m in Sources */,
+				D857AC211DE81CB200F924E8 /* RefundGoodsModel.m in Sources */,
 				D80669991D7014C8007FD81E /* HotUserListCounter.m in Sources */,
 				1F2AFC731D88170B00DA6035 /* QRCodeScanViewController.m in Sources */,
 				D8A9ADC91CD9E34600A9FCFB /* FBFootView.m in Sources */,

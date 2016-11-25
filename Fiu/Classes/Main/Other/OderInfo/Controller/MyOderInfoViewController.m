@@ -16,7 +16,6 @@
 #import "TYAlertView.h"
 #import "UIView+TYAlertView.h"
 #import "TipNumberView.h"
-#import "OrderInfoDetailViewController.h"
 #import "RefundmentViewController.h"
 #import "CommenttwoViewController.h"
 #import "FBPayTheWayViewController.h"
@@ -25,6 +24,13 @@
 #import "SGTopTitleView.h"
 
 #import "THNOrderInfoViewController.h"
+#import "THNRefundViewController.h"
+#import "RefundGoodsModel.h"
+
+static NSString *const OrderListURL             = @"/shopping/orders";
+static NSString *const URLRefundList            = @"/shopping/refund_list";
+
+static NSString *const OrderInfoCellIdentifier  = @"orderInfoCell";
 
 @interface MyOderInfoViewController ()<FBNavigationBarItemsDelegate,UITableViewDelegate,UITableViewDataSource,FBRequestDelegate,OrderInfoCellDelegate,SGTopTitleViewDelegate>
 
@@ -42,9 +48,6 @@
 @property (nonatomic, strong) SGTopTitleView *segmentedControl;
 
 @end
-
-static NSString *const OrderListURL = @"/shopping/orders";
-static NSString *const OrderInfoCellIdentifier = @"orderInfoCell";
 
 @implementation MyOderInfoViewController
 
@@ -184,14 +187,14 @@ static NSString *const OrderInfoCellIdentifier = @"orderInfoCell";
         _currentPageNumber = 0;
         [self.orderListAry removeAllObjects];
         [self.myTableView.mj_footer endRefreshing];
-        [self requestDataForOderListOperationWith:self.type];
+        [self thn_networkOrderListData:self.type];
     }];
     
     //上拉加载更多
     _myTableView.mj_footer = [MJRefreshAutoNormalFooter footerWithRefreshingBlock:^{
         if (_currentPageNumber < _totalPageNumber) {
             [self.myTableView.mj_header endRefreshing];
-            [self requestDataForOderListOperationWith:self.type];
+            [self thn_networkOrderListData:self.type];
         } else {
             [self.myTableView.mj_footer endRefreshing];
         }
@@ -257,20 +260,32 @@ static NSString *const OrderInfoCellIdentifier = @"orderInfoCell";
 }
 
 //上拉下拉分页请求订单列表
-- (void)requestDataForOderListOperationWith:(NSNumber *)type
+- (void)requestDataForOderListOperationWith:(NSNumber *)type withURL:(NSString *)URL
 {
-    NSDictionary * params = @{@"page": [NSNumber numberWithInteger:(_currentPageNumber + 1)], @"size": @10, @"status": type};
+    NSMutableDictionary *params = [NSMutableDictionary dictionary];
+    [params setObject:@(_currentPageNumber + 1) forKey:@"page"];
+    [params setObject:@10 forKey:@"size"];
     
-    FBRequest * request = [FBAPI postWithUrlString:OrderListURL requestDictionary:params delegate:self];
+    if (![type isEqualToNumber:@8]) {
+        [params setObject:type forKey:@"status"];
+    }
+    
+    FBRequest * request = [FBAPI postWithUrlString:URL requestDictionary:params delegate:self];
     [request startRequestSuccess:^(FBRequest *request, id result) {
-//        NSLog(@"订单列表：===== %@", result);
+        NSLog(@"============ 订单列表:%@", result);
         [self.orderListAry removeAllObjects];
         NSDictionary * dataDic = [result objectForKey:@"data"];
         NSArray * rowsAry = [dataDic objectForKey:@"rows"];
         
         for (NSDictionary * orderInfoDic in rowsAry) {
-            OrderInfoModel * orderInfo = [[OrderInfoModel alloc] initWithDictionary:orderInfoDic];
-            [self.orderListAry addObject:orderInfo];
+            if ([type isEqualToNumber:@8]) {
+                RefundGoodsModel *model = [[RefundGoodsModel alloc] initWithDictionary:orderInfoDic];
+                [self.orderListAry addObject:model];
+                
+            } else {
+                OrderInfoModel * orderInfo = [[OrderInfoModel alloc] initWithDictionary:orderInfoDic];
+                [self.orderListAry addObject:orderInfo];
+            }
         }
         [self.myTableView reloadData];
         
@@ -320,7 +335,15 @@ static NSString *const OrderInfoCellIdentifier = @"orderInfoCell";
     _currentPageNumber = 0;
     [self.orderListAry removeAllObjects];
     [self.myTableView.mj_header beginRefreshing];
-    [self requestDataForOderListOperationWith:self.type];
+    [self thn_networkOrderListData:self.type];
+}
+
+- (void)thn_networkOrderListData:(NSNumber *)type {
+    if ([type isEqualToNumber:@8]) {
+        [self requestDataForOderListOperationWith:type withURL:URLRefundList];
+    } else {
+        [self requestDataForOderListOperationWith:type withURL:OrderListURL];
+    }
 }
 
 
@@ -334,22 +357,29 @@ static NSString *const OrderInfoCellIdentifier = @"orderInfoCell";
         orderInfoCell.delegate = self;
     }
     if (self.orderListAry.count) {
-        orderInfoCell.orderInfo = self.orderListAry[indexPath.row];
+        if ([self.type isEqualToNumber:@8]) {
+            [orderInfoCell thn_setRefundGoodsListData:self.orderListAry[indexPath.row]];
+        } else {
+            orderInfoCell.orderInfo = self.orderListAry[indexPath.row];
+        }
     }
     return orderInfoCell;
 }
 
 #pragma mark - OrderInfoCellDelegate
-- (void)tapProductViewWithOrderInfoCell:(OrderInfoCell *)orderInfoCell orderId:(NSString *)orderId
+- (void)tapProductViewWithOrderInfoCell:(OrderInfoCell *)orderInfoCell orderId:(NSString *)orderId type:(NSInteger)type
 {
-//    OrderInfoDetailViewController * orderInfoDetailVC = [[OrderInfoDetailViewController alloc] initWithNibName:@"OrderInfoDetailViewController" bundle:nil];
-//    orderInfoDetailVC.orderInfoCell = orderInfoCell;
-//    orderInfoDetailVC.delegate = self;
-//    [self.navigationController pushViewController:orderInfoDetailVC animated:YES];
-    //订单详情
-    THNOrderInfoViewController *orderInfoVC = [[THNOrderInfoViewController alloc] init];
-    orderInfoVC.orderId = orderId;
-    [self.navigationController pushViewController:orderInfoVC animated:YES];
+    if (type == 1) {
+        //  订单详情(Fynn)
+        THNOrderInfoViewController *orderInfoVC = [[THNOrderInfoViewController alloc] init];
+        orderInfoVC.orderId = orderId;
+        [self.navigationController pushViewController:orderInfoVC animated:YES];
+    
+    } else if (type == 2) {
+        THNRefundViewController *refundVC = [[THNRefundViewController alloc] init];
+        refundVC.orderId = orderId;
+        [self.navigationController pushViewController:refundVC animated:YES];
+    }
 }
 
 - (void)operation1stBtnAction:(UIButton *)button withOrderInfoCell:(OrderInfoCell *)orderInfoCell
@@ -372,11 +402,6 @@ static NSString *const OrderInfoCellIdentifier = @"orderInfoCell";
             break;
         case OrderInfoStateWaitDelivery://待发货
         {
-//            RefundmentViewController * refundmentVC = [[RefundmentViewController alloc] initWithNibName:@"RefundmentViewController" bundle:nil];
-//            refundmentVC.orderInfoCell = orderInfoCell;
-//            refundmentVC.delegate = self;
-//            [self.navigationController pushViewController:refundmentVC animated:YES];
-//            NSLog(@"申请退款");
             FBRequest *request = [FBAPI postWithUrlString:@"/shopping/alert_send_goods" requestDictionary:@{
                                                                                                             @"rid":orderInfoCell.orderInfo.rid
                                                                                                                 } delegate:self];

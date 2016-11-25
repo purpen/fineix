@@ -20,14 +20,19 @@ static NSString *const promptText = @"    您购买的商品将由以下订单�
     return self;
 }
 
+- (void)thn_getOrderStateAndNumber:(OrderInfoModel *)model {
+    self.number.text = [NSString stringWithFormat:@"订单号：%@", model.rid];
+    self.stateLab.text = model.statusLabel;
+}
+
 - (void)set_cellViewUI {
     self.selectionStyle = UITableViewCellSelectionStyleNone;
     self.backgroundColor = [UIColor whiteColor];
     
     [self addSubview:self.number];
     [_number mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.size.mas_equalTo(CGSizeMake(SCREEN_WIDTH, 44));
-        make.left.equalTo(self.mas_left).with.offset(0);
+        make.size.mas_equalTo(CGSizeMake(SCREEN_WIDTH - 100, 44));
+        make.left.equalTo(self.mas_left).with.offset(15);
         make.top.equalTo(self.mas_top).with.offset(0);
     }];
     
@@ -37,6 +42,13 @@ static NSString *const promptText = @"    您购买的商品将由以下订单�
         make.left.equalTo(self.mas_left).with.offset(0);
         make.top.equalTo(_number.mas_bottom).with.offset(0);
     }];
+    
+    [self addSubview:self.stateLab];
+    [_stateLab mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.size.mas_equalTo(CGSizeMake(80, 44));
+        make.right.equalTo(self.mas_right).with.offset(-15);
+        make.top.equalTo(self.mas_top).with.offset(0);
+    }];
 }
 
 - (UILabel *)number {
@@ -44,7 +56,6 @@ static NSString *const promptText = @"    您购买的商品将由以下订单�
         _number = [[UILabel alloc] init];
         _number.font = [UIFont systemFontOfSize:14];
         _number.textColor = [UIColor colorWithHexString:@"#666666"];
-        _number.text = @"    订单号：1243546326743";
     }
     return _number;
 }
@@ -58,6 +69,16 @@ static NSString *const promptText = @"    您购买的商品将由以下订单�
         _prompt.text = promptText;
     }
     return _prompt;
+}
+
+- (UILabel *)stateLab {
+    if (!_stateLab) {
+        _stateLab = [[UILabel alloc] init];
+        _stateLab.font = [UIFont systemFontOfSize:14];
+        _stateLab.textColor = [UIColor colorWithHexString:MAIN_COLOR];
+        _stateLab.textAlignment = NSTextAlignmentRight;
+    }
+    return _stateLab;
 }
 
 @end
