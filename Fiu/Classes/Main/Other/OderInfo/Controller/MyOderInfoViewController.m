@@ -24,7 +24,7 @@
 #import "SGTopTitleView.h"
 
 #import "THNOrderInfoViewController.h"
-#import "THNRefundViewController.h"
+#import "THNRefundInfoViewController.h"
 #import "RefundGoodsModel.h"
 
 static NSString *const OrderListURL             = @"/shopping/orders";
@@ -272,7 +272,6 @@ static NSString *const OrderInfoCellIdentifier  = @"orderInfoCell";
     
     FBRequest * request = [FBAPI postWithUrlString:URL requestDictionary:params delegate:self];
     [request startRequestSuccess:^(FBRequest *request, id result) {
-        NSLog(@"============ 订单列表:%@", result);
         [self.orderListAry removeAllObjects];
         NSDictionary * dataDic = [result objectForKey:@"data"];
         NSArray * rowsAry = [dataDic objectForKey:@"rows"];
@@ -380,8 +379,8 @@ static NSString *const OrderInfoCellIdentifier  = @"orderInfoCell";
         [self.navigationController pushViewController:orderInfoVC animated:YES];
     
     } else if (type == 2) {
-        THNRefundViewController *refundVC = [[THNRefundViewController alloc] init];
-        refundVC.orderId = orderId;
+        THNRefundInfoViewController *refundVC = [[THNRefundInfoViewController alloc] init];
+        refundVC.refundId = orderId;
         [self.navigationController pushViewController:refundVC animated:YES];
     }
 }

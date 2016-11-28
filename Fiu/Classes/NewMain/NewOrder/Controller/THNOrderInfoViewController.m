@@ -15,7 +15,6 @@
 #import "THNExpressInfoTableViewCell.h"
 #import "THNHasSubOrdersTableViewCell.h"
 #import "FBPayTheWayViewController.h"
-#import "THNRefundViewController.h"
 
 static NSString *const addressCellId        = @"FBUserAddressTableViewCellId";
 static NSString *const hasSubOrderCellId    = @"THNHasSubOrdersTableViewCellId";
@@ -97,7 +96,10 @@ static NSString *const PhoneNumber = @"拨打 400-879-8751";
 
 #pragma mark - 获取订单信息
 - (void)thn_getOrderInfoData:(NSDictionary *)data {
-    NSArray *subOrderArr = [data valueForKey:@"sub_orders"];
+    NSArray *subOrderArr = [NSArray array];
+    if (![[data valueForKey:@"sub_orders"] isKindOfClass:[NSNull class]]) {
+        subOrderArr = [data valueForKey:@"sub_orders"];
+    }
     if (![subOrderArr isKindOfClass:[NSNull class]] && subOrderArr.count == 0) {
         _isHasSubOrder = NO;
         //  获取订单商品列表

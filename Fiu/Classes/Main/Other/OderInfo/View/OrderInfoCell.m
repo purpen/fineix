@@ -64,7 +64,7 @@
 - (void)thn_setRefundGoodsListData:(RefundGoodsModel *)model {
     _type = 2;
     if (model) {
-        _orderId = model.rid;
+        _orderId = model.idField;
         
         self.dateLbl.text = [NSString stringWithFormat:@"退款编号：%@", model.idField];
         self.stateLbl.text = model.stageLabel;
@@ -135,6 +135,10 @@
             productInfoView.productInfo = productInfo;
         }
     }
+    
+    //隐藏操作view
+    self.bottomView_heightSpace.constant = 40;
+    [self layoutIfNeeded];
     
     switch (orderInfo.status) {
         case OrderInfoStateExpired:

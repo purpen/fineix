@@ -8,6 +8,7 @@
 
 #import "THNGoodsInfoTableViewCell.h"
 #import "THNApplyRefundViewController.h"
+#import "FBGoodsInfoViewController.h"
 
 @interface THNGoodsInfoTableViewCell () {
     NSString *_skuId;
@@ -22,9 +23,17 @@
 - (instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier {
     self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
     if (self) {
+        UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(lookGoodsInfo:)];
+        [self addGestureRecognizer:tap];
         [self thn_setCellUI];
     }
     return self;
+}
+
+- (void)lookGoodsInfo:(UITapGestureRecognizer *)tap {
+    FBGoodsInfoViewController *goodsInfoVC = [[FBGoodsInfoViewController alloc] init];
+    goodsInfoVC.goodsID = _skuId;
+    [self.nav pushViewController:goodsInfoVC animated:YES];
 }
 
 - (void)thn_setGoodsInfoData:(ProductInfoModel *)model withRid:(NSString *)rid {
@@ -34,7 +43,7 @@
     [self.goodsImg downloadImage:model.coverUrl place:[UIImage imageNamed:@""]];
     self.goodsTitle.text = model.name;
     self.goodsNum.text = [NSString stringWithFormat:@"数量 * %zi", model.quantity];
-    self.goodsPrice.text = [NSString stringWithFormat:@"¥%.2f", [model.price floatValue]];
+    self.goodsPrice.text = [NSString stringWithFormat:@"¥%.2f", [model.salePrice floatValue]];
     self.refundState.text = model.refundLabel;
      [self thn_setRrfundButtonTitleWithType:model.refundButton];
     
