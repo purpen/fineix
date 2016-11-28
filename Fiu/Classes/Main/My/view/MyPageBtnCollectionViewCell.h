@@ -32,5 +32,9 @@
 @property(nonatomic,strong) UILabel *label8;
 @property(nonatomic,strong) UILabel *label9;
 @property(nonatomic,strong) UILabel *label10;
+/** 退款售后按钮 */
+@property (nonatomic, strong) UIButton *refundBtn;
+/**  */
+@property (nonatomic, strong) UILabel *refundLabel;
 
 @end
