@@ -129,6 +129,19 @@
             make.top.mas_equalTo(self.btn9.mas_bottom).with.offset(8/667.*SCREEN_HEIGHT);
         }];
         
+        [self.contentView addSubview:self.refundBtn];
+        [_refundBtn mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.size.mas_equalTo(CGSizeMake(50/667.0*SCREEN_HEIGHT, 40/667.0*SCREEN_HEIGHT));
+            make.left.mas_equalTo(self.mas_left).with.offset(30/667.0*SCREEN_HEIGHT);
+            make.top.mas_equalTo(self.btn6.mas_bottom).with.offset(42/667.0*SCREEN_HEIGHT);
+        }];
+        [self.contentView addSubview:self.refundLabel];
+        [_refundLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.size.mas_equalTo(CGSizeMake(60, 15));
+            make.centerX.mas_equalTo(self.refundBtn.mas_centerX);
+            make.top.mas_equalTo(self.refundBtn.mas_bottom).with.offset(8/667.*SCREEN_HEIGHT);
+        }];
+        
     }
     return self;
 }
@@ -309,6 +322,28 @@
         _label9.textColor = [UIColor darkGrayColor];
     }
     return _label9;
+}
+
+-(UIButton *)refundBtn{
+    if (!_refundBtn) {
+        _refundBtn = [[UIButton alloc] init];
+        [_refundBtn setImage:[UIImage imageNamed:@"my_ refund"] forState:UIControlStateNormal];
+    }
+    return _refundBtn;
+}
+-(UILabel *)refundLabel{
+    if (!_refundLabel) {
+        _refundLabel = [[UILabel alloc] init];
+        _refundLabel.text = @"退款售后";
+        _refundLabel.textAlignment = NSTextAlignmentCenter;
+        if (IS_iOS9) {
+            _refundLabel.font = [UIFont fontWithName:@"PingFangSC-Light" size:13];
+        } else {
+            _refundLabel.font = [UIFont systemFontOfSize:13];
+        }
+        _refundLabel.textColor = [UIColor darkGrayColor];
+    }
+    return _refundLabel;
 }
 
 

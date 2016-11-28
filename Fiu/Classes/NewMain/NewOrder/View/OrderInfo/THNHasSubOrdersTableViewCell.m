@@ -8,7 +8,7 @@
 
 #import "THNHasSubOrdersTableViewCell.h"
 
-static NSString *const promptText = @"    您购买的商品将由以下订单分开进行派送";
+static NSString *const promptText = @"    您订单中的商品在不同库房，故拆分为以下订单分开配送。";
 
 @implementation THNHasSubOrdersTableViewCell
 

@@ -61,12 +61,6 @@
     [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent];
     //
     _chanelV = [ChanelView getChanelView];
-    //情景
-//    _chanelV.scenarioView.userInteractionEnabled = YES;
-//    UITapGestureRecognizer *scenarioTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(signleTap:)];
-//    scenarioTap.numberOfTapsRequired = 1;
-//    scenarioTap.numberOfTouchesRequired = 1;
-//    [_chanelV.scenarioView addGestureRecognizer:scenarioTap];
     
     //场景
     _chanelV.fieldView.userInteractionEnabled = YES;
@@ -88,16 +82,6 @@
     [_chanelV.fansView addGestureRecognizer:scenarioTap3];
     [self.view addSubview:self.myCollectionView];
 }
-
-//-(void)signleTap:(UITapGestureRecognizer*)sender{
-//    //跳转到我的主页的情景的界面
-//    UserInfoEntity *entity = [UserInfoEntity defaultUserInfoEntity];
-//    HomePageViewController *myHomeVC = [[HomePageViewController alloc] init];
-//    myHomeVC.userId = entity.userId;
-//    myHomeVC.type = @1;
-//    myHomeVC.isMySelf = YES;
-//    [self.navigationController pushViewController:myHomeVC animated:YES];
-//}
 
 -(void)signleTap1:(UITapGestureRecognizer*)sender{
     //跳转到我的主页的情景的界面
@@ -347,6 +331,7 @@
         [cell.btn7 addTarget:self action:@selector(integralBtn:) forControlEvents:UIControlEventTouchUpInside];
         [cell.btn8 addTarget:self action:@selector(giftBtn:) forControlEvents:UIControlEventTouchUpInside];
         [cell.btn9 addTarget:self action:@selector(shippingAddressBtn:) forControlEvents:UIControlEventTouchUpInside];
+        [cell.refundBtn addTarget:self action:@selector(refundAction) forControlEvents:UIControlEventTouchUpInside];
         return cell;
     }
     else if(indexPath.section == 3){
@@ -358,6 +343,11 @@
         return cell;
     }
     return nil;
+    
+}
+
+#pragma mark - 退款售后
+-(void)refundAction{
     
 }
 
@@ -406,11 +396,6 @@
     [self.navigationController pushViewController:vc animated:YES];
 }
 
--(void)leftBarItemSelected{
-//    FindeFriendViewController *vc = [[FindeFriendViewController alloc] init];
-//    [self.navigationController pushViewController:vc animated:YES];
-}
-
 -(void)optionBtn:(UIButton*)sender{
     OptionViewController *vc = [[OptionViewController alloc] init];
     [self.navigationController pushViewController:vc animated:YES];
@@ -426,7 +411,7 @@
         return CGSizeMake(SCREEN_WIDTH, 60/667.0*SCREEN_HEIGHT);
     }
     if (indexPath.section == 2) {
-        return CGSizeMake(SCREEN_WIDTH, 368*0.5/667.0*SCREEN_HEIGHT);
+        return CGSizeMake(SCREEN_WIDTH, 257/667.0*SCREEN_HEIGHT);
     }
     if (indexPath.section == 3) {
         return CGSizeMake(SCREEN_HEIGHT, 200);
