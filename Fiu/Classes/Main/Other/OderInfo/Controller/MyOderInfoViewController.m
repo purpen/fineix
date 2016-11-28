@@ -55,7 +55,8 @@ static NSString *const OrderInfoCellIdentifier  = @"orderInfoCell";
 
     if (!_segmentedControl) {
         _segmentedControl = [[SGTopTitleView alloc] initWithFrame:CGRectMake(0, 64, SCREEN_WIDTH, 44)];
-        _segmentedControl.scrollTitleArr = @[@"全部", @"待付款", @"待发货", @"待收货", @"待评价", @"退货/售后"];
+//        _segmentedControl.scrollTitleArr = @[@"全部", @"待付款", @"待发货", @"待收货", @"待评价", @"退货/售后"];
+        _segmentedControl.staticTitleArr = @[@"全部", @"待付款", @"待发货", @"待收货", @"待评价"];
         _segmentedControl.backgroundColor = [UIColor whiteColor];
         _segmentedControl.delegate_SG = self;
     }
