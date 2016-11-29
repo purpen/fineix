@@ -14,7 +14,7 @@
 @property (nonatomic, assign) NSInteger quantity;
 @property (nonatomic, assign) CGFloat salePrice;
 @property (nonatomic, strong) NSString *skuName;
-@property (nonatomic, strong) NSString * title;
+@property (nonatomic, strong) NSString *title;
 
 -(instancetype)initWithDictionary:(NSDictionary *)dictionary;
 

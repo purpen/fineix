@@ -54,6 +54,10 @@ static NSString *const Comment      = @"发表评价";
         case OrderWaitComment:
             [self set_mainButtonTitle:Comment subButtonTitle:nil];
             break;
+            
+        case OrderWaitDone:
+            [self set_mainButtonTitle:Delete subButtonTitle:nil];
+            break;
         
         default:
             break;

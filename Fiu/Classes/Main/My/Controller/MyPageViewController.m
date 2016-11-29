@@ -37,6 +37,7 @@
 #import "THNCollectionViewController.h"
 #import "THNProjectViewController.h"
 #import "THNMessageViewController.h"
+#import "THNRefundListViewController.h"
 
 @interface MyPageViewController ()<THNNavigationBarItemsDelegate,UICollectionViewDelegate,UICollectionViewDataSource>
 {
@@ -348,7 +349,8 @@
 
 #pragma mark - 退款售后
 -(void)refundAction{
-    
+    THNRefundListViewController *refundListVC = [[THNRefundListViewController alloc] init];
+    [self.navigationController pushViewController:refundListVC animated:YES];
 }
 
 /**

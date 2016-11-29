@@ -33,8 +33,8 @@
     [super viewDidLoad];
     self.delegate = self;
     self.navViewTitle.text = @"发表评价";
-    // Do any additional setup after loading the view from its nib.
-    NSArray * productAry = self.orderInfoCell.orderInfo.productInfos;
+    
+    NSArray * productAry = self.orderInfoModel.productInfos;
     NSInteger count = productAry.count;
     self.commentViewAry = [NSMutableArray array];
     if (count > 0) {
@@ -57,9 +57,11 @@
             [self.commentViewAry addObject:commentView];
         }
     }
+
 }
+
 - (IBAction)commitBtnAction:(UIButton *)sender {
-    NSArray * productAry = self.orderInfoCell.orderInfo.productInfos;
+    NSArray * productAry = self.orderInfoModel.productInfos;
     NSInteger count = productAry.count;
     self.commentInfoAry = [NSMutableArray array];
     if (count > 0) {
@@ -80,14 +82,18 @@
     
     NSData * jsonData = [NSJSONSerialization dataWithJSONObject:self.commentInfoAry options:0 error:nil];
     NSString * jsonString = [[NSString alloc] initWithData:jsonData encoding:NSUTF8StringEncoding];
+
+
     
-    FBRequest * request = [FBAPI postWithUrlString:@"/product/ajax_comment" requestDictionary:@{@"rid": self.orderInfoCell.orderInfo.rid, @"array": jsonString} delegate:self];
+    FBRequest * request = [FBAPI postWithUrlString:@"/product/ajax_comment" requestDictionary:@{@"rid": self.orderInfoModel.rid, @"array": jsonString} delegate:self];
     [SVProgressHUD showWithMaskType:SVProgressHUDMaskTypeClear];
     [request startRequestSuccess:^(FBRequest *request, id result) {
-        if ([self.delegate1 respondsToSelector:@selector(operationActionWithCell:)]) {
-            [self.delegate1 operationActionWithCell:self.orderInfoCell];
-        }
+
+        //  to THNOrderInfoVC
+        [[NSNotificationCenter defaultCenter] postNotificationName:@"commentDone" object:nil];
+        
         [self.navigationController popViewControllerAnimated:YES];
+        
         [SVProgressHUD showSuccessWithStatus:@"评价成功"];
     } failure:^(FBRequest *request, NSError *error) {
         [SVProgressHUD showInfoWithStatus:[error localizedDescription]];
@@ -116,20 +122,5 @@
     }
 }
 
-
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
-}
-
-/*
- #pragma mark - Navigation
- 
- // In a storyboard-based application, you will often want to do a little preparation before navigation
- - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
- // Get the new view controller using [segue destinationViewController].
- // Pass the selected object to the new view controller.
- }
- */
 
 @end

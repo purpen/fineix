@@ -244,7 +244,7 @@ static NSString *const OrderDetailURL = @"/shopping/detail";
         case OrderInfoStateWaitComment://去评价
         {
             CommenttwoViewController * commentVC = [[CommenttwoViewController alloc] initWithNibName:@"CommenttwoViewController" bundle:nil];
-            commentVC.orderInfoCell = self.orderInfoCell;
+            commentVC.orderInfoModel = self.orderInfoCell.orderInfo;
             commentVC.delegate = self;
             [self.navigationController pushViewController:commentVC animated:YES];
         }

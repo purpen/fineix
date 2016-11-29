@@ -23,20 +23,16 @@
 - (instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier {
     self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
     if (self) {
-        UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(lookGoodsInfo:)];
-        [self addGestureRecognizer:tap];
         [self thn_setCellUI];
     }
     return self;
 }
 
-- (void)lookGoodsInfo:(UITapGestureRecognizer *)tap {
-    FBGoodsInfoViewController *goodsInfoVC = [[FBGoodsInfoViewController alloc] init];
-    goodsInfoVC.goodsID = _skuId;
-    [self.nav pushViewController:goodsInfoVC animated:YES];
-}
-
-- (void)thn_setGoodsInfoData:(ProductInfoModel *)model withRid:(NSString *)rid {
+- (void)thn_setGoodsInfoData:(ProductInfoModel *)model withRid:(NSString *)rid type:(NSInteger)type {
+    if (type == 1) {
+        UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(lookGoodsInfo:)];
+        [self addGestureRecognizer:tap];
+    }
     _skuId = [NSString stringWithFormat:@"%zi", model.sku];
     _rid = rid;
     
@@ -59,6 +55,12 @@
         self.JDGoodsLab.hidden = YES;
     }
     
+}
+
+- (void)lookGoodsInfo:(UITapGestureRecognizer *)tap {
+    FBGoodsInfoViewController *goodsInfoVC = [[FBGoodsInfoViewController alloc] init];
+    goodsInfoVC.goodsID = _skuId;
+    [self.nav pushViewController:goodsInfoVC animated:YES];
 }
 
 - (void)thn_setRrfundButtonTitleWithType:(NSInteger)type {

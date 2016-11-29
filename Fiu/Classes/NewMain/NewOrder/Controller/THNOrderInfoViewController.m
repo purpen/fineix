@@ -15,6 +15,7 @@
 #import "THNExpressInfoTableViewCell.h"
 #import "THNHasSubOrdersTableViewCell.h"
 #import "FBPayTheWayViewController.h"
+#import "CommenttwoViewController.h"
 
 static NSString *const addressCellId        = @"FBUserAddressTableViewCellId";
 static NSString *const hasSubOrderCellId    = @"THNHasSubOrdersTableViewCellId";
@@ -47,6 +48,23 @@ static NSString *const PhoneNumber = @"拨打 400-879-8751";
     [super viewWillAppear:animated];
     
     [self thn_setNavigationViewUI];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(commentDone:) name:@"commentDone" object:nil];
+}
+
+- (void)commentDone:(NSNotification *)notification {
+    [self.subOrderMarr removeAllObjects];
+    [self.orderDataMarr removeAllObjects];
+    [self.subOrderGoodsMarr removeAllObjects];
+    [self.subGoodsNumMarr removeAllObjects];
+    
+    if (self.orderId) {
+        [self get_networkWithOrderInfoData:self.orderId];
+    }
+}
+
+- (void)dealloc {
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:@"commentDone" object:nil];
 }
 
 - (void)viewDidLoad {
@@ -80,13 +98,9 @@ static NSString *const PhoneNumber = @"拨打 400-879-8751";
     self.orderRequest = [FBAPI getWithUrlString:URLOrderInfo requestDictionary:@{@"rid":orderId} delegate:nil];
     [self.orderRequest startRequestSuccess:^(FBRequest *request, id result) {
         NSDictionary *data = [result valueForKey:@"data"];
-        self.addressModel = [[DeliveryAddressModel alloc] initWithDictionary:[data valueForKey:@"express_info"]];
-        self.orderModel = [[OrderInfoModel alloc] initWithDictionary:data];
-        _orderId = self.orderModel.rid;
         
         [self thn_getOrderInfoData:data];
     
-        [self.orderInfoTable reloadData];
         [SVProgressHUD dismiss];
         
     } failure:^(FBRequest *request, NSError *error) {
@@ -96,6 +110,10 @@ static NSString *const PhoneNumber = @"拨打 400-879-8751";
 
 #pragma mark - 获取订单信息
 - (void)thn_getOrderInfoData:(NSDictionary *)data {
+    self.addressModel = [[DeliveryAddressModel alloc] initWithDictionary:[data valueForKey:@"express_info"]];
+    self.orderModel = [[OrderInfoModel alloc] initWithDictionary:data];
+    _orderId = self.orderModel.rid;
+    
     NSArray *subOrderArr = [NSArray array];
     if (![[data valueForKey:@"sub_orders"] isKindOfClass:[NSNull class]]) {
         subOrderArr = [data valueForKey:@"sub_orders"];
@@ -127,6 +145,8 @@ static NSString *const PhoneNumber = @"拨打 400-879-8751";
     }
     
     [self thn_getOrderState:data];
+    
+    [self.orderInfoTable reloadData];
 }
 
 #pragma mark 订单状态
@@ -163,8 +183,7 @@ static NSString *const PhoneNumber = @"拨打 400-879-8751";
 - (void)thn_mainButtonSelected:(THNOrderState)state {
     switch (state) {
         case OrderCancel:
-            [self post_networkOperationOrderWithState:URLdeleteOrder];
-            [self.navigationController popViewControllerAnimated:YES];
+            [self thn_goToDelete];
             break;
             
         case OrderWaitPay:
@@ -172,13 +191,21 @@ static NSString *const PhoneNumber = @"拨打 400-879-8751";
             break;
             
         case OrderWaitTakeDelivery:
-            [self post_networkOperationOrderWithState:URLSureOrder];
+            [self set_showAlertViewWithTitle:@"请确认您已收到货物" actionType:3];
             break;
             
         case OrderWaitDeliver:
             [self post_networkOperationOrderWithState:URLRemind];
             break;
             
+        case OrderWaitComment:
+            [self thn_goToComment];
+            break;
+        
+        case OrderWaitDone:
+            [self thn_goToDelete];
+            break;
+        
         default:
             break;
     }
@@ -204,14 +231,15 @@ static NSString *const PhoneNumber = @"拨打 400-879-8751";
 
 //  去评价
 - (void)thn_goToComment {
-
+    CommenttwoViewController *commentVC = [[CommenttwoViewController alloc] initWithNibName:@"CommenttwoViewController" bundle:nil];
+    commentVC.orderInfoModel = self.orderModel;
+    [self.navigationController pushViewController:commentVC animated:YES];
 }
 
-//  申请退款
-- (void)thn_goToRefund {
-//    THNRefundViewController *refundVC = [[THNRefundViewController alloc] init];
-//
-//    [self.navigationController pushViewController:refundVC animated:YES];
+//  删除订单
+- (void)thn_goToDelete {
+    [self post_networkOperationOrderWithState:URLdeleteOrder];
+    [self.navigationController popViewControllerAnimated:YES];
 }
 
 #pragma mark - 详情列表视图
@@ -353,12 +381,12 @@ static NSString *const PhoneNumber = @"拨打 400-879-8751";
             cell.nav = self.navigationController;
             if (_isHasSubOrder) {
                 if (self.subOrderGoodsMarr.count) {
-                    [cell thn_setGoodsInfoData:self.subOrderGoodsMarr[indexPath.section - 2][indexPath.row - 1] withRid:_orderId];
+                    [cell thn_setGoodsInfoData:self.subOrderGoodsMarr[indexPath.section - 2][indexPath.row - 1] withRid:_orderId type:1];
                 }
                 
             } else {
                 if (self.orderDataMarr.count) {
-                    [cell thn_setGoodsInfoData:self.orderDataMarr[indexPath.row - 1] withRid:_orderId];
+                    [cell thn_setGoodsInfoData:self.orderDataMarr[indexPath.row - 1] withRid:_orderId type:1];
                 }
             }
             return cell;
@@ -394,6 +422,9 @@ static NSString *const PhoneNumber = @"拨打 400-879-8751";
         } else if (type == 2) {
             [self.navigationController popViewControllerAnimated:YES];
             [self post_networkOperationOrderWithState:URLCancel];
+        } else if (type == 3) {
+            [self.navigationController popViewControllerAnimated:YES];
+            [self post_networkOperationOrderWithState:URLSureOrder];
         }
     }];
     [alertView addAction:cancel];

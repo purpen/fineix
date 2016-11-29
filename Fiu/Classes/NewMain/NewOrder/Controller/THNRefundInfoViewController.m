@@ -37,7 +37,7 @@ static NSString *const URLRefundInfo     = @"/shopping/refund_view";
     [SVProgressHUD show];
     self.refundRequest = [FBAPI postWithUrlString:URLRefundInfo requestDictionary:@{@"id":self.refundId} delegate:nil];
     [self.refundRequest startRequestSuccess:^(FBRequest *request, id result) {
-        NSLog(@"========= 退款详情：%@", result);
+        NSLog(@"退款详情  %@", result);
         NSDictionary *data = [result valueForKey:@"data"];
         self.productModel = [[ProductInfoModel alloc] initWithDictionary:[data valueForKey:@"product"]];
         
@@ -95,7 +95,7 @@ static NSString *const URLRefundInfo     = @"/shopping/refund_view";
         THNGoodsInfoTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:GoodsInfoCellId];
         cell = [[THNGoodsInfoTableViewCell alloc] initWithStyle:(UITableViewCellStyleDefault) reuseIdentifier:GoodsInfoCellId];
         if (self.productModel) {
-            [cell thn_setGoodsInfoData:self.productModel withRid:@""];
+            [cell thn_setGoodsInfoData:self.productModel withRid:@"" type:1];
         }
         return cell;
         

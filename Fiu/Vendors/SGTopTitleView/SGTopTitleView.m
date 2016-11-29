@@ -13,7 +13,7 @@
 #import "UIView+SGExtension.h"
 #import "UIColor+Extension.h"
 
-#define labelFontOfSize [UIFont systemFontOfSize:17]
+#define labelFontOfSize [UIFont systemFontOfSize:14]
 #define SG_screenWidth [UIScreen mainScreen].bounds.size.width
 
 @interface SGTopTitleView ()

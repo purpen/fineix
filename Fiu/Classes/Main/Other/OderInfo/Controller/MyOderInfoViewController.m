@@ -427,8 +427,7 @@ static NSString *const OrderInfoCellIdentifier  = @"orderInfoCell";
         case OrderInfoStateWaitComment://去评价
         {
             CommenttwoViewController * commentVC = [[CommenttwoViewController alloc] initWithNibName:@"CommenttwoViewController" bundle:nil];
-            commentVC.orderInfoCell = orderInfoCell;
-            commentVC.delegate = self;
+            commentVC.orderInfoModel = orderInfoCell.orderInfo;
             [self.navigationController pushViewController:commentVC animated:YES];
         }
             break;

@@ -42,6 +42,15 @@
     if(![dictionary[@"order_rid"] isKindOfClass:[NSNull class]]){
         self.rid = dictionary[@"order_rid"];
     }
+    
+    if(![dictionary[@"type"] isKindOfClass:[NSNull class]]){
+        self.type = [dictionary[@"type"] integerValue];
+    }
+    
+    if(![dictionary[@"product_id"] isKindOfClass:[NSNull class]]){
+        self.productId = dictionary[@"product_id"];
+    }
+    
     if(![dictionary[@"quantity"] isKindOfClass:[NSNull class]]){
         self.quantity = [dictionary[@"quantity"] floatValue];
     }

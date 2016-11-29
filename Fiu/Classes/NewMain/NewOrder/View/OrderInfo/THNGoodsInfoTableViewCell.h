@@ -23,7 +23,12 @@
 @property (nonatomic, strong) UIButton      *refundBtn;     //  退款按钮
 @property (nonatomic, strong) UILabel       *refundState;   //  退款状态
 
-- (void)thn_setGoodsInfoData:(ProductInfoModel *)model withRid:(NSString *)rid;
+/**
+ type类型
+ 1:普通订单
+ 2:退款订单
+*/
+- (void)thn_setGoodsInfoData:(ProductInfoModel *)model withRid:(NSString *)rid type:(NSInteger)type;
 
 //  子订单
 //- (void)thn_setSubOrderGoodsInfoData:(SubOrderModel *)model;

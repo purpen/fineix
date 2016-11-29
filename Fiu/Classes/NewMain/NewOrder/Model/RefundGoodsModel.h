@@ -23,6 +23,8 @@
 @property (nonatomic, assign) NSInteger stage;
 @property (nonatomic, strong) NSString *stageLabel;
 @property (nonatomic, strong) ProductModel *product;
+@property (nonatomic, strong) NSString *productId;
+@property (nonatomic, assign) NSInteger type;
 
 -(instancetype)initWithDictionary:(NSDictionary *)dictionary;
 

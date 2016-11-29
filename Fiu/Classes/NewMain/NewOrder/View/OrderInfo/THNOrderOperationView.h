@@ -15,6 +15,7 @@ typedef NS_ENUM(NSInteger, THNOrderState) {
     OrderWaitDeliver         = 10, //  待发货
     OrderWaitTakeDelivery    = 15, //  待收货
     OrderWaitComment         = 16, //  待评价
+    OrderWaitDone            = 20, //  已完成
 };
 
 @protocol THNOrderOperationViewDelegate <NSObject>
