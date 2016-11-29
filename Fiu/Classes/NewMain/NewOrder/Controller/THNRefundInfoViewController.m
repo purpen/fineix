@@ -14,7 +14,12 @@ static NSString *const GoodsInfoCellId   = @"THNGoodsInfoTableViewCellId";
 static NSString *const DefaultTextCellId = @"THNDefaultTextTableViewCellId";
 static NSString *const URLRefundInfo     = @"/shopping/refund_view";
 
-@interface THNRefundInfoViewController ()
+@interface THNRefundInfoViewController () {
+    /**
+     *  0:申请中 ／ 1: 已完成
+     */
+    NSInteger _refundState;
+}
 
 @end
 
@@ -45,7 +50,12 @@ static NSString *const URLRefundInfo     = @"/shopping/refund_view";
         NSString *reason = [data valueForKey:@"reason_label"];
         NSString *content = [data valueForKey:@"content"];
         NSString *idNum = [data valueForKey:@"_id"];
-        NSString *time = [data valueForKey:@"created_at"];
+        NSString *time = [data valueForKey:@"refund_at"];
+        _refundState = 0;
+        if (time.length == 0) {
+            time = [data valueForKey:@"created_at"];
+            _refundState = 1;
+        }
         RefundStage stage = (RefundStage)[[data valueForKey:@"stage"] integerValue];
         NSString *summary;
         if (![[data valueForKey:@"summary"] isKindOfClass:[NSNull class]]) {
@@ -102,7 +112,7 @@ static NSString *const URLRefundInfo     = @"/shopping/refund_view";
     } else {
         THNDefaultTextTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:DefaultTextCellId];
         cell = [[THNDefaultTextTableViewCell alloc] initWithStyle:(UITableViewCellStyleDefault) reuseIdentifier:DefaultTextCellId];
-        [cell thn_setExplainText:indexPath.row - 1 data:_dataArr[indexPath.row - 1]];
+        [cell thn_setExplainText:indexPath.row - 1 data:_dataArr[indexPath.row - 1] type:_refundState];
         return cell;
     }
     

@@ -44,7 +44,7 @@ static NSString *const URLApplyRefund   = @"/shopping/apply_product_refund";
         [self thn_setViewUI];
         
         [self thn_setApplyData:self.orderId forKey:@"rid"];
-        [self thn_setApplyData:[data valueForKey:@"product_id"] forKey:@"sku_id"];
+        [self thn_setApplyData:[data valueForKey:@"sku_id"] forKey:@"sku_id"];
         [self thn_setApplyData:[data valueForKey:@"refund_price"] forKey:@"refund_price"];
         [self thn_setApplyData:[NSString stringWithFormat:@"%zi", self.type] forKey:@"refund_type"];
         

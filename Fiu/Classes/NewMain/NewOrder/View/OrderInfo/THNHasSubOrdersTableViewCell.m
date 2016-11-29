@@ -38,7 +38,7 @@ static NSString *const promptText = @"    您订单中的商品在不同库房�
     
     [self addSubview:self.prompt];
     [_prompt mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.size.mas_equalTo(CGSizeMake(SCREEN_WIDTH - 15, 40));
+        make.size.mas_equalTo(CGSizeMake(SCREEN_WIDTH, 40));
         make.left.equalTo(self.mas_left).with.offset(0);
         make.top.equalTo(_number.mas_bottom).with.offset(0);
     }];

@@ -19,14 +19,18 @@
 - (instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier {
     self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
     if (self) {
-        _explainArr = @[@"退款金额", @"退款原因", @"退款说明", @"退款编号", @"退款时间"];
         [self set_cellViewUI];
     }
     return self;
 }
 
 
-- (void)thn_setExplainText:(NSInteger)index data:(NSString *)data {
+- (void)thn_setExplainText:(NSInteger)index data:(NSString *)data type:(NSInteger)type {
+    if (type == 0) {
+        _explainArr = @[@"退款金额", @"退款原因", @"退款说明", @"退款编号", @"退款时间"];
+    } else if (type == 1) {
+        _explainArr = @[@"退款金额", @"退款原因", @"退款说明", @"退款编号", @"申请时间"];
+    }
     data = [NSString stringWithFormat:@"%@", data];
     self.explain.text = _explainArr[index];
     self.dataLab.text = data;

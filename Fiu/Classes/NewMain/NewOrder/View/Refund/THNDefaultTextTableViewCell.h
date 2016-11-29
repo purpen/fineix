@@ -14,6 +14,6 @@
 @property (nonatomic, strong) UILabel *explain;
 @property (nonatomic, strong) UILabel *dataLab;
 
-- (void)thn_setExplainText:(NSInteger)index data:(NSString *)data;
+- (void)thn_setExplainText:(NSInteger)index data:(NSString *)data type:(NSInteger)type;
 
 @end

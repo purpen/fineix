@@ -44,7 +44,6 @@ static NSString *const RefundGoodsCellId  = @"THNGoodsInfoTableViewCellId";
     [SVProgressHUD show];
     self.refundRequest = [FBAPI postWithUrlString:URLRefundList requestDictionary:@{@"page":@(self.currentpageNum + 1), @"size":@"10"} delegate:nil];
     [self.refundRequest startRequestSuccess:^(FBRequest *request, id result) {
-        NSLog(@"====== %@", result);
         NSArray *dataArr = [[result valueForKey:@"data"] valueForKey:@"rows"];
         for (NSDictionary *dict in dataArr) {
             RefundGoodsModel *model = [[RefundGoodsModel alloc] initWithDictionary:dict];
