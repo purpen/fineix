@@ -33,5 +33,6 @@
 @pro_strong NSString        *   sendTime;
 @pro_strong UIView          *   footerView;
 @pro_strong UITextField     *   summaryText;
+@pro_strong UILabel         *   coinLab;
 
 @end

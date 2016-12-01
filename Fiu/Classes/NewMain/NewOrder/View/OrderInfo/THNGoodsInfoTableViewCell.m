@@ -12,6 +12,7 @@
 
 @interface THNGoodsInfoTableViewCell () {
     NSString *_skuId;
+    NSString *_goodsId;
     NSString *_rid;
     NSInteger _refundType;
 }
@@ -35,6 +36,7 @@
     }
     _skuId = [NSString stringWithFormat:@"%zi", model.sku];
     _rid = rid;
+    _goodsId = model.productId;
     
     [self.goodsImg downloadImage:model.coverUrl place:[UIImage imageNamed:@""]];
     self.goodsTitle.text = model.name;
@@ -59,7 +61,7 @@
 
 - (void)lookGoodsInfo:(UITapGestureRecognizer *)tap {
     FBGoodsInfoViewController *goodsInfoVC = [[FBGoodsInfoViewController alloc] init];
-    goodsInfoVC.goodsID = _skuId;
+    goodsInfoVC.goodsID = _goodsId;
     [self.nav pushViewController:goodsInfoVC animated:YES];
 }
 

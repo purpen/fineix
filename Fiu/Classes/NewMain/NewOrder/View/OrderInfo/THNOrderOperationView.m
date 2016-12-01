@@ -35,6 +35,7 @@ static NSString *const Comment      = @"发表评价";
 - (void)set_orderStateForOperationButton:(THNOrderState)state {
     _orderState = state;
     switch (state) {
+        case OrderExpired:
         case OrderCancel:
             [self set_mainButtonTitle:Delete subButtonTitle:nil];
             break;
@@ -86,14 +87,14 @@ static NSString *const Comment      = @"发表评价";
     
     [self addSubview:self.mainBtn];
     [_mainBtn mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.size.mas_equalTo(CGSizeMake(75, 25));
+        make.size.mas_equalTo(CGSizeMake(75, 28));
         make.right.equalTo(self.mas_right).with.offset(-15);
         make.centerY.equalTo(self);
     }];
     
     [self addSubview:self.subBtn];
     [_subBtn mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.size.mas_equalTo(CGSizeMake(75, 25));
+        make.size.mas_equalTo(CGSizeMake(75, 28));
         make.right.equalTo(_mainBtn.mas_left).with.offset(-10);
         make.centerY.equalTo(self);
     }];
@@ -105,6 +106,8 @@ static NSString *const Comment      = @"发表评价";
         _mainBtn = [[UIButton alloc] init];
         _mainBtn.layer.borderColor = [UIColor colorWithHexString:@"#222222"].CGColor;
         _mainBtn.layer.borderWidth = 0.5f;
+        _mainBtn.layer.cornerRadius = 2.0f;
+        _mainBtn.layer.masksToBounds = YES;
         _mainBtn.titleLabel.font = [UIFont systemFontOfSize:13];
         [_mainBtn setTitleColor:[UIColor colorWithHexString:@"#222222"] forState:(UIControlStateNormal)];
         _mainBtn.hidden = YES;
@@ -124,6 +127,8 @@ static NSString *const Comment      = @"发表评价";
         _subBtn = [[UIButton alloc] init];
         _subBtn.layer.borderColor = [UIColor colorWithHexString:@"#222222"].CGColor;
         _subBtn.layer.borderWidth = 0.5f;
+        _subBtn.layer.cornerRadius = 2.0f;
+        _subBtn.layer.masksToBounds = YES;
         _subBtn.titleLabel.font = [UIFont systemFontOfSize:13];
         [_subBtn setTitleColor:[UIColor colorWithHexString:@"#000000"] forState:(UIControlStateNormal)];
         [_subBtn addTarget:self action:@selector(subBtnClick:) forControlEvents:(UIControlEventTouchUpInside)];

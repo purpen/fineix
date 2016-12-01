@@ -15,7 +15,7 @@
 @property (nonatomic, strong) NSString * skuName;       //sku名称
 @property (nonatomic, strong) NSString * refundLabel;   //sku名称
 @property (nonatomic, strong) NSNumber *price;          //价格
-@property (nonatomic, assign) NSInteger productId;      //产品ID
+@property (nonatomic, assign) NSString *productId;      //产品ID
 @property (nonatomic, assign) NSInteger quantity;       //数量
 @property (nonatomic, assign) NSInteger refundStatus;   //退货状态
 @property (nonatomic, assign) NSInteger refundType;     //退货类型

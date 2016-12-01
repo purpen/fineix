@@ -24,6 +24,7 @@ NSString *const kFBGoodsInfoModelSkuStatus = @"status";
 NSString *const kFBGoodsInfoModelSkuSummary = @"summary";
 NSString *const kFBGoodsInfoModelSkuSyncCount = @"sync_count";
 NSString *const kFBGoodsInfoModelSkuUpdatedOn = @"updated_on";
+NSString *const kFBGoodsInfoModelSkuCovreUrl = @"cover_url";
 
 @interface FBGoodsInfoModelSku ()
 @end
@@ -61,9 +62,12 @@ NSString *const kFBGoodsInfoModelSkuUpdatedOn = @"updated_on";
 	if(![dictionary[kFBGoodsInfoModelSkuMode] isKindOfClass:[NSNull class]]){
 		self.mode = dictionary[kFBGoodsInfoModelSkuMode];
 	}	
-	if(![dictionary[kFBGoodsInfoModelSkuName] isKindOfClass:[NSNull class]]){
-		self.name = dictionary[kFBGoodsInfoModelSkuName];
-	}	
+    if(![dictionary[kFBGoodsInfoModelSkuName] isKindOfClass:[NSNull class]]){
+        self.name = dictionary[kFBGoodsInfoModelSkuName];
+    }
+    if(![dictionary[kFBGoodsInfoModelSkuCovreUrl] isKindOfClass:[NSNull class]]){
+        self.coverUrl = dictionary[kFBGoodsInfoModelSkuCovreUrl];
+    }
 	if(![dictionary[kFBGoodsInfoModelSkuPrice] isKindOfClass:[NSNull class]]){
 		self.price = [dictionary[kFBGoodsInfoModelSkuPrice] integerValue];
 	}

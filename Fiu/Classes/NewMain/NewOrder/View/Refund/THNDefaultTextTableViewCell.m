@@ -24,7 +24,6 @@
     return self;
 }
 
-
 - (void)thn_setExplainText:(NSInteger)index data:(NSString *)data type:(NSInteger)type {
     if (type == 0) {
         _explainArr = @[@"退款金额", @"退款原因", @"退款说明", @"退款编号", @"退款时间"];

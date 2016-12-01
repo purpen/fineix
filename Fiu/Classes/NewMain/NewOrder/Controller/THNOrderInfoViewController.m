@@ -113,7 +113,7 @@ static NSString *const PhoneNumber = @"拨打 400-879-8751";
     self.addressModel = [[DeliveryAddressModel alloc] initWithDictionary:[data valueForKey:@"express_info"]];
     self.orderModel = [[OrderInfoModel alloc] initWithDictionary:data];
     _orderId = self.orderModel.rid;
-    
+    NSLog(@"========== 订单信息：%@", data);
     NSArray *subOrderArr = [NSArray array];
     if (![[data valueForKey:@"sub_orders"] isKindOfClass:[NSNull class]]) {
         subOrderArr = [data valueForKey:@"sub_orders"];
@@ -182,8 +182,9 @@ static NSString *const PhoneNumber = @"拨打 400-879-8751";
 
 - (void)thn_mainButtonSelected:(THNOrderState)state {
     switch (state) {
+        case OrderExpired:
         case OrderCancel:
-            [self thn_goToDelete];
+            [self set_showAlertViewWithTitle:@"确定删除此订单吗？" actionType:4];
             break;
             
         case OrderWaitPay:
@@ -425,6 +426,8 @@ static NSString *const PhoneNumber = @"拨打 400-879-8751";
         } else if (type == 3) {
             [self.navigationController popViewControllerAnimated:YES];
             [self post_networkOperationOrderWithState:URLSureOrder];
+        } else if (type == 4) {
+            [self thn_goToDelete];
         }
     }];
     [alertView addAction:cancel];

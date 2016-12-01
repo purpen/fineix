@@ -444,12 +444,14 @@ static NSString *const URLCarGoPay = @"/shopping/checkout";
 
         } else {
             //  删除
-            TYAlertView * cancelAlertView = [TYAlertView alertViewWithTitle:@"删除商品" message:@"确定将这个商品删除？"];
-            [cancelAlertView addAction:[TYAlertAction actionWithTitle:NSLocalizedString(@"cancel", nil) style:(TYAlertActionStyleCancle) handler:nil]];
-            [cancelAlertView addAction:[TYAlertAction actionWithTitle:NSLocalizedString(@"sure", nil) style:(TYAlertActionStyleDefault) handler:^(TYAlertAction *action) {
+            TYAlertView *alertView = [TYAlertView alertViewWithTitle:@"删除商品" message:@"确定将这个商品删除？"];
+            alertView.layer.cornerRadius = 10;
+            alertView.buttonDefaultBgColor = [UIColor colorWithHexString:MAIN_COLOR];
+            [alertView addAction:[TYAlertAction actionWithTitle:NSLocalizedString(@"cancel", nil) style:(TYAlertActionStyleCancle) handler:nil]];
+            [alertView addAction:[TYAlertAction actionWithTitle:NSLocalizedString(@"sure", nil) style:(TYAlertActionStyleDefault) handler:^(TYAlertAction *action) {
                 [self networkDeleteCarItemData:self.chooseItems];
             }]];
-            [cancelAlertView showInWindowWithBackgoundTapDismissEnable:YES];
+            [alertView showInWindowWithBackgoundTapDismissEnable:YES];
         }
     }
 }

@@ -34,7 +34,7 @@
     }
     
     if(![dictionary[@"product_id"] isKindOfClass:[NSNull class]]){
-        self.productId = [dictionary[@"product_id"] integerValue];
+        self.productId = dictionary[@"product_id"];
     }
     
     if(![dictionary[@"refund_status"] isKindOfClass:[NSNull class]]){

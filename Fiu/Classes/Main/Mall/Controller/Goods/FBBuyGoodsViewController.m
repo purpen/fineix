@@ -12,7 +12,9 @@
 #import "FBGoodsInfoViewController.h"
 #import "TagFlowLayout.h"
 
-@interface FBBuyGoodsViewController ()
+@interface FBBuyGoodsViewController () {
+    NSString *_goodsDefaultImage;
+}
 
 @end
 
@@ -39,33 +41,55 @@
         [UIView animateWithDuration:.3 animations:^{
             weakSelf.buyView.frame = buyViewRect;
         }];
-
-        weakSelf.goodsSkus = [NSMutableArray arrayWithArray:model.skus];
-        if (weakSelf.goodsSkus.count == 0) {
+        
+        [weakSelf setBuyGoodsData:model];
+        
+        if (model.skus.count == 0) {
             NSDictionary * skuDict = @{@"mode":NSLocalizedString(@"Default", nil),
                                        @"price":[NSString stringWithFormat:@"%zi",[[model valueForKey:@"salePrice"] integerValue]],
                                        @"quantity":[NSString stringWithFormat:@"%zi",[[model valueForKey:@"inventory"] integerValue]],
                                        @"targetId":[NSString stringWithFormat:@"%zi", [[model valueForKey:@"idField"] integerValue]]};
             [weakSelf.goodsSkus addObject:skuDict];
+            
+        } else {
+            weakSelf.goodsSkus = [NSMutableArray arrayWithArray:model.skus];
         }
-        [weakSelf setBuyGoodsData:model];
+        
+        [weakSelf thn_getGoodsSkuImage:weakSelf.goodsSkus];
+        /**
+         *  没有颜色分类，默认选中第一个
+         */
+        if (weakSelf.goodsSkus.count == 1) {
+            [weakSelf chooseDefaultColor];
+        }
     };
 }
 
 #pragma mark - 设置购买信息
 - (void)setBuyGoodsData:(FBGoodsInfoModelData *)model {
-    [self.goodsImg downloadImage:model.coverUrl place:[UIImage imageNamed:@""]];
+    _goodsDefaultImage = model.coverUrl;
+    
+    [self thn_setGoodsImage:model.coverUrl];
     self.goodsTitle.text = model.title;
     self.goodsPrice.text = [NSString stringWithFormat:@"￥%zi", model.salePrice];
     self.chooseNum.text = [NSString stringWithFormat:@"%zi", self.num];
     [self.goodsColorView reloadData];
-    
-    
-    /**
-     *  没有颜色分类，默认选中第一个
-     */
-    if (self.goodsSkus.count == 1) {
-        [self chooseDefaultColor];
+}
+
+//  设置商品图片
+- (void)thn_setGoodsImage:(NSString *)goodsImage {
+     [self.goodsImg downloadImage:goodsImage place:[UIImage imageNamed:@""]];
+}
+
+#pragma mark - 保存每个SKU的图片
+- (void)thn_getGoodsSkuImage:(NSMutableArray *)skus {
+    if (skus.count > 1) {
+        for (FBGoodsInfoModelSku *skuModel in skus) {
+            if (skuModel.coverUrl.length == 0) {
+                skuModel.coverUrl = _goodsDefaultImage;
+            }
+            [self.goodsSkusImage addObject:skuModel.coverUrl];
+        }
     }
 }
 
@@ -307,6 +331,10 @@
     } else {
         self.skuId = [NSString stringWithFormat:@"%zi", [[self.goodsSkus valueForKey:@"idField"][indexPath.row] integerValue]];
     }
+    
+    if (self.goodsSkusImage.count) {
+         [self thn_setGoodsImage:self.goodsSkusImage[indexPath.row]];
+    }
 }
 
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath {
@@ -430,5 +458,19 @@
     return _chooseNum;
 }
 
+#pragma mark -
+- (NSMutableArray *)goodsSkus {
+    if (!_goodsSkus) {
+        _goodsSkus = [NSMutableArray array];
+    }
+    return _goodsSkus;
+}
+
+- (NSMutableArray *)goodsSkusImage {
+    if (!_goodsSkusImage) {
+        _goodsSkusImage = [NSMutableArray array];
+    }
+    return _goodsSkusImage;
+}
 
 @end

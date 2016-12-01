@@ -71,7 +71,7 @@
             commentView.contentTextView.delegate = self;
             
             NSMutableDictionary * productDic = [NSMutableDictionary dictionary];
-            productDic[@"target_id"] = [NSNumber numberWithInteger:productInfo.productId];
+            productDic[@"target_id"] = productInfo.productId;
             productDic[@"sku_id"] = [NSNumber numberWithInteger:productInfo.sku];
             productDic[@"content"] = commentView.contentTextView.text;
             productDic[@"star"] = [NSNumber numberWithInteger:commentView.starInt];

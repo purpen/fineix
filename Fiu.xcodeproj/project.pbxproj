@@ -2362,18 +2362,18 @@
 		1F2A8CFB1CF40276005116C7 /* Goods */ = {
 			isa = PBXGroup;
 			children = (
-				1F2A8CFC1CF40276005116C7 /* FBBuyGoodsViewController.h */,
-				1F2A8CFD1CF40276005116C7 /* FBBuyGoodsViewController.m */,
-				1F2A8CFE1CF40276005116C7 /* FBGoodsCommentViewController.h */,
-				1F2A8CFF1CF40276005116C7 /* FBGoodsCommentViewController.m */,
 				1F2A8D001CF40276005116C7 /* FBGoodsInfoViewController.h */,
 				1F2A8D011CF40276005116C7 /* FBGoodsInfoViewController.m */,
+				1F2A8CFC1CF40276005116C7 /* FBBuyGoodsViewController.h */,
+				1F2A8CFD1CF40276005116C7 /* FBBuyGoodsViewController.m */,
+				1F2A8D061CF40276005116C7 /* FBSureOrderViewController.h */,
+				1F2A8D071CF40276005116C7 /* FBSureOrderViewController.m */,
 				1F2A8D021CF40276005116C7 /* FBOrderSendWayViewController.h */,
 				1F2A8D031CF40276005116C7 /* FBOrderSendWayViewController.m */,
 				1F2A8D041CF40276005116C7 /* FBOrderTimeViewController.h */,
 				1F2A8D051CF40276005116C7 /* FBOrderTimeViewController.m */,
-				1F2A8D061CF40276005116C7 /* FBSureOrderViewController.h */,
-				1F2A8D071CF40276005116C7 /* FBSureOrderViewController.m */,
+				1F2A8CFE1CF40276005116C7 /* FBGoodsCommentViewController.h */,
+				1F2A8CFF1CF40276005116C7 /* FBGoodsCommentViewController.m */,
 				1F2A8D0A1CF40276005116C7 /* ThnGoodsCommentViewController.h */,
 				1F2A8D0B1CF40276005116C7 /* ThnGoodsCommentViewController.m */,
 			);

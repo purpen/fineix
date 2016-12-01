@@ -19,6 +19,12 @@
 }
 
 - (void)setAddressModel:(DeliveryAddressModel *)addressModel {
+    if (addressModel.countyName.length == 0) {
+        addressModel.countyName = @"";
+    }
+    if (addressModel.townName.length == 0) {
+        addressModel.townName = @"";
+    }
     self.userName.text = [NSString stringWithFormat:@"收货人：%@", addressModel.name];
     self.cityName.text = [NSString stringWithFormat:@"%@ %@ %@ %@", addressModel.provinceName ,addressModel.cityName ,addressModel.countyName ,addressModel.townName];
     self.addressLab.text = addressModel.address;
@@ -27,6 +33,12 @@
 
 - (void)thn_setOrderAddressModel:(DeliveryAddressModel *)model {
     if (model) {
+        if (model.countyName.length == 0) {
+            model.countyName = @"";
+        }
+        if (model.townName.length == 0) {
+            model.townName = @"";
+        }
         self.userName.text = [NSString stringWithFormat:@"收货人：%@", model.name];
         self.cityName.text = [NSString stringWithFormat:@"%@ %@ %@ %@", model.provinceName ,model.cityName ,model.countyName ,model.townName];
         self.addressLab.text = model.address;

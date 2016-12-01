@@ -19,22 +19,23 @@ typedef void(^AddGoodsCarBlock)(NSDictionary * addCarGoodsData);
     UICollectionViewDataSource,
     UICollectionViewDelegateFlowLayout>
 
-@pro_strong FBGoodsInfoModelData       *   goodsInfo;
-@pro_strong UIView              *   buyView;
-@pro_strong UIButton            *   cancelBtn;
-@pro_strong UIImageView         *   goodsImg;
-@pro_strong UILabel             *   goodsTitle;
-@pro_strong UILabel             *   goodsPrice;
-@pro_strong UILabel             *   goodsChoose;
-@pro_strong UIView              *   chooseNumView;
-@pro_strong UILabel             *   chooseNum;
-@pro_strong UICollectionView    *   goodsColorView;
-@pro_strong NSMutableArray      *   goodsSkus;
-@pro_assign NSInteger               num;
-@pro_assign NSInteger               quantity;
-@pro_strong UIButton            *   addBtn;
-@pro_strong UIButton            *   subBtn;
-@pro_strong NSString            *   skuId;
+@pro_strong FBGoodsInfoModelData    *goodsInfo;
+@pro_strong UIView                  *buyView;
+@pro_strong UIButton                *cancelBtn;
+@pro_strong UIImageView             *goodsImg;
+@pro_strong UILabel                 *goodsTitle;
+@pro_strong UILabel                 *goodsPrice;
+@pro_strong UILabel                 *goodsChoose;
+@pro_strong UIView                  *chooseNumView;
+@pro_strong UILabel                 *chooseNum;
+@pro_strong UICollectionView        *goodsColorView;
+@pro_strong NSMutableArray          *goodsSkus;
+@pro_strong NSMutableArray          *goodsSkusImage;
+@pro_strong UIButton                *addBtn;
+@pro_strong UIButton                *subBtn;
+@pro_strong NSString                *skuId;
+@pro_assign NSInteger                num;
+@pro_assign NSInteger                quantity;
 
 @pro_strong GetGoodsInfoModelBlock  getGoodsModel;
 @pro_strong BuyingGoodsBlock        buyingGoodsBlock;

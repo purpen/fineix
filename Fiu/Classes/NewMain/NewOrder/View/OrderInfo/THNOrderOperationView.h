@@ -10,6 +10,7 @@
 #import "THNMacro.h"
 
 typedef NS_ENUM(NSInteger, THNOrderState) {
+    OrderExpired             = -1,  //  已取消
     OrderCancel              = 0,  //  已取消
     OrderWaitPay             = 1,  //  待付款
     OrderWaitDeliver         = 10, //  待发货

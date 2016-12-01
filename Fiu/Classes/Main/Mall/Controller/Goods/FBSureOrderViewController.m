@@ -37,6 +37,8 @@ static NSString *const URLCarGoPay = @"/shopping/checkout";
     NSString * _fromSite;
     NSInteger  _bounsPrice;
     BOOL       _isUserBouns;
+    NSInteger  _kind;       //  =5: 随机立减
+    CGFloat    _coinMoney;  //  立减的金额
 }
 
 @pro_strong NSMutableArray          *   goodsItems;
@@ -73,21 +75,31 @@ static NSString *const URLCarGoPay = @"/shopping/checkout";
     [SVProgressHUD show];
     self.buyingRequest = [FBAPI postWithUrlString:URLBuying requestDictionary:self.orderDict delegate:self];
     [self.buyingRequest startRequestSuccess:^(FBRequest *request, id result) {
+        NSDictionary *dict = [result valueForKey:@"data"];
         //  合计价格
-        self.payPrice = [[result valueForKey:@"data"] valueForKey:@"pay_money"];
+        self.payPrice = dict[@"pay_money"];
         self.sumPrice.text = [NSString stringWithFormat:@"￥%.2f", [self.payPrice floatValue]];
         
-        _rid = [[[result valueForKey:@"data"] valueForKey:@"order_info"] valueForKey:@"rid"];
-        _rrid = [[[result valueForKey:@"data"] valueForKey:@"order_info"] valueForKey:@"_id"];
-        _isNowbuy = [[result valueForKey:@"data"] valueForKey:@"is_nowbuy"];
+        //  随机立减
+        _kind = [dict[@"order_info"][@"kind"] integerValue];
+        if (_kind == 5) {
+            _coinMoney = [dict[@"order_info"][@"dict"][@"coin_money"] floatValue];
+            self.coinLab.text = [NSString stringWithFormat:@"   这里提示随机立减金额: %.2f", _coinMoney];
+        }
+        _rid = dict[@"order_info"][@"rid"];
+        _rrid = dict[@"order_info"][@"_id"];
+        _isNowbuy = dict[@"is_nowbuy"];
         _transferTime = @"a";
         _bonusCode = @"";
         
-        NSArray * items = [[[[result valueForKey:@"data"] valueForKey:@"order_info"] valueForKey:@"dict"] valueForKey:@"items"];
+        NSArray *items = dict[@"order_info"][@"dict"][@"items"];
         for (NSDictionary * itemDict in items) {
             OrderItems * itemModel = [[OrderItems alloc] initWithDictionary:itemDict];
             [self.goodsItems addObject:itemModel];
         }
+        
+        NSLog(@"=========== 是否立减：%zi --- 立减金额：%.2f", _kind, _coinMoney);
+        
         [self.orderTable reloadData];
         [SVProgressHUD dismiss];
         
@@ -98,17 +110,27 @@ static NSString *const URLCarGoPay = @"/shopping/checkout";
 
 #pragma mark 购物车下单
 - (void)networkCarGoPayData:(id)result {
+    NSDictionary *dict = [result valueForKey:@"data"];
     //  合计价格
-    self.payPrice = [[result valueForKey:@"data"] valueForKey:@"pay_money"];
-    self.sumPrice.text = [NSString stringWithFormat:@"￥%@", self.payPrice];
+    self.payPrice = dict[@"pay_money"];
+    self.sumPrice.text = [NSString stringWithFormat:@"￥%.2f", [self.payPrice floatValue]];
     
-    _rid = [[[result valueForKey:@"data"] valueForKey:@"order_info"] valueForKey:@"rid"];
-    _rrid = [[[result valueForKey:@"data"] valueForKey:@"order_info"] valueForKey:@"_id"];
-    _isNowbuy = [[result valueForKey:@"data"] valueForKey:@"is_nowbuy"];
+    //  随机立减
+    _kind = [dict[@"order_info"][@"kind"] integerValue];
+    if (_kind == 5) {
+        _coinMoney = [dict[@"order_info"][@"dict"][@"coin_money"] floatValue];
+        self.coinLab.text = [NSString stringWithFormat:@"   这里提示随机立减金额: %.2f", _coinMoney];
+    }
+    
+    NSLog(@"=========== 是否立减：%zi --- 立减金额：%.2f", _kind, _coinMoney);
+    
+    _rid = dict[@"order_info"][@"rid"];
+    _rrid = dict[@"order_info"][@"_id"];
+    _isNowbuy = dict[@"is_nowbuy"];
     _transferTime = @"a";
     _bonusCode = @"";
     
-    NSArray * items = [[[[result valueForKey:@"data"] valueForKey:@"order_info"] valueForKey:@"dict"] valueForKey:@"items"];
+    NSArray *items = dict[@"order_info"][@"dict"][@"items"];
     for (NSDictionary * itemDict in items) {
         OrderItems * itemModel = [[OrderItems alloc] initWithDictionary:itemDict];
         [self.goodsItems addObject:itemModel];
@@ -209,7 +231,7 @@ static NSString *const URLCarGoPay = @"/shopping/checkout";
 #pragma mark - 备注视图
 - (UIView *)footerView {
     if (!_footerView) {
-        _footerView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 49)];
+        _footerView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 93)];
         _footerView.backgroundColor = [UIColor whiteColor];
         
         UILabel * lineLab = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 5)];
@@ -223,6 +245,7 @@ static NSString *const URLCarGoPay = @"/shopping/checkout";
         
         [_footerView addSubview:summaryLab];
         [_footerView addSubview:self.summaryText];
+        [_footerView addSubview:self.coinLab];
     }
     return _footerView;
 }
@@ -234,6 +257,17 @@ static NSString *const URLCarGoPay = @"/shopping/checkout";
         _summaryText.font = [UIFont systemFontOfSize:14];
     }
     return _summaryText;
+}
+
+#pragma mark - 立减金额提示
+- (UILabel *)coinLab {
+    if (!_coinLab) {
+        _coinLab = [[UILabel alloc] initWithFrame:CGRectMake(0, 49, SCREEN_WIDTH, 44)];
+        _coinLab.backgroundColor = [UIColor colorWithHexString:grayLineColor];
+        _coinLab.font = [UIFont systemFontOfSize:14];
+        _coinLab.textColor = [UIColor colorWithHexString:fineixColor];
+    }
+    return _coinLab;
 }
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
@@ -307,11 +341,7 @@ static NSString *const URLCarGoPay = @"/shopping/checkout";
         cell.titleLab.text = NSLocalizedString(@"OrderBonus", nil);
         if (_isUserBouns == YES) {
             cell.textLab.text = [NSString stringWithFormat:@"%@%zi", NSLocalizedString(@"userBouns", nil), _bounsPrice];
-            if (IS_iOS9) {
-                cell.textLab.font = [UIFont fontWithName:@"PingFangSC-Light" size:13];
-            } else {
-                cell.textLab.font = [UIFont systemFontOfSize:13];
-            }
+            cell.textLab.font = [UIFont systemFontOfSize:13];
             cell.textLab.textColor = [UIColor colorWithHexString:fineixColor];
         }
         return cell;
@@ -346,13 +376,7 @@ static NSString *const URLCarGoPay = @"/shopping/checkout";
         };
         [self.navigationController pushViewController:deliveryAddressVC animated:YES];
     
-    }
-//    else if (indexPath.section == 2) {
-//        FBOrderSendWayViewController * sendWayVC = [[FBOrderSendWayViewController alloc] init];
-//        [self.navigationController pushViewController:sendWayVC animated:YES];
-//    
-//    }
-    else if (indexPath.section == 3) {
+    } else if (indexPath.section == 3) {
         FBOrderTimeViewController * timeWayVC = [[FBOrderTimeViewController alloc] init];
         timeWayVC.getSendTimeBlock = ^(NSString * time, NSString * type) {
             _transferTime = type;

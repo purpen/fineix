@@ -20,6 +20,7 @@
 @property (nonatomic, strong) NSString * summary;
 @property (nonatomic, assign) NSInteger syncCount;
 @property (nonatomic, assign) NSInteger updatedOn;
+@property (nonatomic, strong) NSString *coverUrl;
 
 -(instancetype)initWithDictionary:(NSDictionary *)dictionary;
 @end
