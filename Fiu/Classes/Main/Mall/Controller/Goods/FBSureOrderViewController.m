@@ -39,6 +39,7 @@ static NSString *const URLCarGoPay = @"/shopping/checkout";
     BOOL       _isUserBouns;
     NSInteger  _kind;       //  =5: 随机立减
     CGFloat    _coinMoney;  //  立减的金额
+    NSString   *_freight;   //  运费
 }
 
 @pro_strong NSMutableArray          *   goodsItems;
@@ -84,8 +85,14 @@ static NSString *const URLCarGoPay = @"/shopping/checkout";
         _kind = [dict[@"order_info"][@"kind"] integerValue];
         if (_kind == 5) {
             _coinMoney = [dict[@"order_info"][@"dict"][@"coin_money"] floatValue];
-            self.coinLab.text = [NSString stringWithFormat:@"   这里提示随机立减金额: %.2f", _coinMoney];
+            self.coinLab.text = [NSString stringWithFormat:@"   下单随机立减: ￥%.2f", _coinMoney];
+            self.bounsPriceLab.text = [NSString stringWithFormat:@"￥%.2f", _coinMoney];
+        } else {
+            _coinMoney = 0;
+            self.bounsPriceLab.text = @"￥0.00";
         }
+        
+        _freight = [NSString stringWithFormat:@"￥%.2f", [dict[@"order_info"][@"dict"][@"freight"] floatValue]];
         _rid = dict[@"order_info"][@"rid"];
         _rrid = dict[@"order_info"][@"_id"];
         _isNowbuy = dict[@"is_nowbuy"];
@@ -97,8 +104,6 @@ static NSString *const URLCarGoPay = @"/shopping/checkout";
             OrderItems * itemModel = [[OrderItems alloc] initWithDictionary:itemDict];
             [self.goodsItems addObject:itemModel];
         }
-        
-        NSLog(@"=========== 是否立减：%zi --- 立减金额：%.2f", _kind, _coinMoney);
         
         [self.orderTable reloadData];
         [SVProgressHUD dismiss];
@@ -119,11 +124,14 @@ static NSString *const URLCarGoPay = @"/shopping/checkout";
     _kind = [dict[@"order_info"][@"kind"] integerValue];
     if (_kind == 5) {
         _coinMoney = [dict[@"order_info"][@"dict"][@"coin_money"] floatValue];
-        self.coinLab.text = [NSString stringWithFormat:@"   这里提示随机立减金额: %.2f", _coinMoney];
+        self.coinLab.text = [NSString stringWithFormat:@"   下单随机立减: ￥%.2f", _coinMoney];
+        self.bounsPriceLab.text = [NSString stringWithFormat:@"￥%.2f", _coinMoney];
+    } else {
+        _coinMoney = 0;
+        self.bounsPriceLab.text = @"￥0.00";
     }
     
-    NSLog(@"=========== 是否立减：%zi --- 立减金额：%.2f", _kind, _coinMoney);
-    
+    _freight = [NSString stringWithFormat:@"￥%.2f", [dict[@"order_info"][@"dict"][@"freight"] floatValue]];
     _rid = dict[@"order_info"][@"rid"];
     _rrid = dict[@"order_info"][@"_id"];
     _isNowbuy = dict[@"is_nowbuy"];
@@ -196,7 +204,7 @@ static NSString *const URLCarGoPay = @"/shopping/checkout";
                 
                 [SVProgressHUD showSuccessWithStatus:@"支付成功!"];
             } else {
-                [SVProgressHUD showErrorWithStatus:@"支付未成功!"];
+                [SVProgressHUD showErrorWithStatus:@"支付失败!"];
             }
         } failure:^(FBRequest *request, NSError *error) {
             [SVProgressHUD showInfoWithStatus:[error localizedDescription]];
@@ -264,7 +272,7 @@ static NSString *const URLCarGoPay = @"/shopping/checkout";
     if (!_coinLab) {
         _coinLab = [[UILabel alloc] initWithFrame:CGRectMake(0, 49, SCREEN_WIDTH, 44)];
         _coinLab.backgroundColor = [UIColor colorWithHexString:grayLineColor];
-        _coinLab.font = [UIFont systemFontOfSize:14];
+        _coinLab.font = [UIFont systemFontOfSize:13];
         _coinLab.textColor = [UIColor colorWithHexString:fineixColor];
     }
     return _coinLab;
@@ -318,10 +326,9 @@ static NSString *const URLCarGoPay = @"/shopping/checkout";
         if (!cell) {
             cell = [[FBOrderOtherTableViewCell alloc] initWithStyle:(UITableViewCellStyleDefault) reuseIdentifier:orderDistributionTableViewCellID];
         }
-        cell.seletedIcon.hidden = YES;
-        cell.titleLab.text = [NSString stringWithFormat:@"%@：", NSLocalizedString(@"OrderDistributionWay", nil)];
-        cell.textLab.text = NSLocalizedString(@"freeSend", nil);
+        [cell thn_setFreightMoney:_freight];
         return cell;
+        
     } else if (indexPath.section == 3) {
         static NSString * orderTimeTableViewCellID = @"OrderTimeTableViewCellID";
         FBOrderOtherTableViewCell * cell = [tableView dequeueReusableCellWithIdentifier:orderTimeTableViewCellID];
@@ -401,14 +408,18 @@ static NSString *const URLCarGoPay = @"/shopping/checkout";
     _isUserBouns = YES;
     [self.orderTable reloadData];
     
-    self.bounsLab.textColor = [UIColor colorWithHexString:titleColor];
-    self.bounsPriceLab.text = [NSString stringWithFormat:@"￥%zi", _bounsPrice];
+    NSString *boundsStr = [NSString stringWithFormat:@"￥%.2f", _bounsPrice + _coinMoney];
+    CGFloat boundsLabW = [boundsStr boundingRectWithSize:CGSizeMake(320, 0) options:(NSStringDrawingUsesLineFragmentOrigin) attributes:nil context:nil].size.width;
+    [self.bounsPriceLab mas_updateConstraints:^(MASConstraintMaker *make) {
+        make.width.equalTo(@(boundsLabW *1.3));
+    }];
+    self.bounsPriceLab.text = boundsStr;
     
-    NSInteger userBounsPrice = [self.payPrice integerValue] - _bounsPrice;
+    CGFloat userBounsPrice = [self.payPrice integerValue] - _bounsPrice;
     if (userBounsPrice <= 0) {
-        self.sumPrice.text = [NSString stringWithFormat:@"￥0"];
+        self.sumPrice.text = [NSString stringWithFormat:@"￥0.00"];
     } else if (userBounsPrice > 0) {
-        self.sumPrice.text = [NSString stringWithFormat:@"￥%zi", userBounsPrice];
+        self.sumPrice.text = [NSString stringWithFormat:@"￥%.2f", userBounsPrice];
     }
     
 }
@@ -439,12 +450,13 @@ static NSString *const URLCarGoPay = @"/shopping/checkout";
         sumLab.textColor = [UIColor colorWithHexString:titleColor];
         sumLab.font = [UIFont systemFontOfSize:14];
         sumLab.text = NSLocalizedString(@"sumOrderPrice", nil);
+        sumLab.textAlignment = NSTextAlignmentRight;
         [_sureView addSubview:sumLab];
         [sumLab mas_makeConstraints:^(MASConstraintMaker *make) {
             make.size.mas_equalTo(CGSizeMake(44, 44));
             make.top.equalTo(_sureView.mas_top).with.offset(0);
             make.bottom.equalTo(_sureView.mas_bottom).with.offset(0);
-            make.right.equalTo(self.sumPrice.mas_left).with.offset(5);
+            make.right.equalTo(_sumPrice.mas_left).with.offset(0);
         }];
         
         UILabel * lineLab = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 1)];
@@ -453,10 +465,10 @@ static NSString *const URLCarGoPay = @"/shopping/checkout";
         
         [_sureView addSubview:self.bounsPriceLab];
         [self.bounsPriceLab mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.size.mas_equalTo(CGSizeMake(44, 44));
+            make.size.mas_equalTo(CGSizeMake(50, 44));
             make.top.equalTo(_sureView.mas_top).with.offset(0);
             make.bottom.equalTo(_sureView.mas_bottom).with.offset(0);
-            make.right.equalTo(sumLab.mas_left).with.offset(0);
+            make.right.equalTo(sumLab.mas_left).with.offset(-2);
         }];
         
         [_sureView addSubview:self.bounsLab];
@@ -464,9 +476,8 @@ static NSString *const URLCarGoPay = @"/shopping/checkout";
             make.size.mas_equalTo(CGSizeMake(44, 44));
             make.top.equalTo(_sureView.mas_top).with.offset(0);
             make.bottom.equalTo(_sureView.mas_bottom).with.offset(0);
-            make.right.equalTo(self.bounsPriceLab.mas_left).with.offset(5);
+            make.right.equalTo(_bounsPriceLab.mas_left).with.offset(0);
         }];
-        
     }
     return _sureView;
 }
@@ -483,9 +494,10 @@ static NSString *const URLCarGoPay = @"/shopping/checkout";
 - (UILabel *)bounsLab {
     if (!_bounsLab) {
         _bounsLab = [[UILabel alloc] init];
-        _bounsLab.textColor = [UIColor whiteColor];
+        _bounsLab.textColor = [UIColor colorWithHexString:titleColor];
         _bounsLab.font = [UIFont systemFontOfSize:14];
         _bounsLab.text = NSLocalizedString(@"userBounsPrice", nil);
+        _bounsLab.textAlignment = NSTextAlignmentRight;
     }
     return _bounsLab;
 }

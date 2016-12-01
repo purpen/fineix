@@ -29,13 +29,20 @@
     
     if (model.stage == 9) {
         NSString *salePrice = [NSString stringWithFormat:@"¥ %zi", model.salePrice];
-        NSAttributedString *oldPrice = [[NSAttributedString alloc] initWithString:[NSString stringWithFormat:@"¥ %zi",  model.marketPrice]
+        NSString *oldPrice = [NSString stringWithFormat:@"¥ %zi",  model.marketPrice];
+        NSAttributedString *oldAttPrice = [[NSAttributedString alloc] initWithString:oldPrice
                                                                        attributes:@{NSStrikethroughStyleAttributeName:@1}];
         self.goodsPrice.text = salePrice;
-        self.goodsOldPrice.attributedText = oldPrice;
+        self.goodsOldPrice.attributedText = oldAttPrice;
         CGFloat priceWidth = [salePrice boundingRectWithSize:CGSizeMake(320, 17) options:(NSStringDrawingUsesDeviceMetrics) attributes:nil context:nil].size.width;
+        CGFloat oldPriceWidth = [oldPrice boundingRectWithSize:CGSizeMake(320, 17) options:(NSStringDrawingUsesDeviceMetrics) attributes:nil context:nil].size.width;
+        
         [self.goodsPrice mas_updateConstraints:^(MASConstraintMaker *make) {
             make.width.equalTo(@(priceWidth *1.5));
+        }];
+        
+        [self.goodsOldPrice mas_updateConstraints:^(MASConstraintMaker *make) {
+            make.width.equalTo(@(oldPriceWidth *1.5));
         }];
         
     } else {
@@ -47,7 +54,13 @@
     }
     
     if (model.marketPrice == model.salePrice) {
-        self.goodsOldPrice.hidden = YES;
+        [self.goodsOldPrice mas_updateConstraints:^(MASConstraintMaker *make) {
+            make.width.equalTo(@0);
+        }];
+    }
+    
+    if (model.orderReduce == 1) {
+        self.activityLab.hidden = NO;
     }
 }
 
@@ -57,7 +70,6 @@
     [self.goodsTitle mas_updateConstraints:^(MASConstraintMaker *make) {
         make.height.equalTo(@(size.height+5));
     }];
-    
     
     self.goodsPrice.text = [NSString stringWithFormat:@"¥ %.2f", model.salePrice];
     
@@ -109,6 +121,13 @@
         make.left.equalTo(_goodsPrice.mas_right).with.offset(3);
     }];
     
+    [self addSubview:self.activityLab];
+    [_activityLab mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.size.mas_equalTo(CGSizeMake(66 , 18));
+        make.centerY.equalTo(_goodsOldPrice);
+        make.left.equalTo(_goodsOldPrice.mas_right).with.offset(3);
+    }];
+    
     UILabel *botLine = [[UILabel alloc] init];
     botLine.backgroundColor = [UIColor colorWithHexString:@"#666666" alpha:0.2];
     [self addSubview:botLine];
@@ -148,6 +167,22 @@
         _goodsOldPrice.font = [UIFont systemFontOfSize:14];
     }
     return _goodsOldPrice;
+}
+
+#pragma mark - 活动
+- (UILabel *)activityLab {
+    if (!_activityLab) {
+        _activityLab = [[UILabel alloc] init];
+        _activityLab.layer.cornerRadius = 3.0f;
+        _activityLab.layer.borderWidth = 0.5f;
+        _activityLab.layer.borderColor = [UIColor colorWithHexString:fineixColor].CGColor;
+        _activityLab.font = [UIFont systemFontOfSize:14];
+        _activityLab.textAlignment = NSTextAlignmentCenter;
+        _activityLab.textColor = [UIColor colorWithHexString:fineixColor];
+        _activityLab.text = @"随机立减";
+        _activityLab.hidden = YES;
+    }
+    return _activityLab;
 }
 
 - (UIButton *)nextBtn {

@@ -6,6 +6,7 @@
 @interface FBGoodsInfoModelData : NSObject
 
 @property (nonatomic, assign) NSInteger idField;
+@property (nonatomic, assign) NSInteger orderReduce;
 @property (nonatomic, strong) NSString * advantage;
 @property (nonatomic, assign) NSInteger appAppointCount;
 @property (nonatomic, assign) NSInteger appSnatched;

@@ -40,6 +40,11 @@
     return self;
 }
 
+- (void)thn_setFreightMoney:(NSString *)price {
+    self.seletedIcon.hidden = YES;
+    self.titleLab.text = @"运      费：";
+    self.textLab.text = price;
+}
 
 - (UILabel *)titleLab {
     if (!_titleLab) {

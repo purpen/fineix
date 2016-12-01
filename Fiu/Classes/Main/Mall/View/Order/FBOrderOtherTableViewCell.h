@@ -15,4 +15,6 @@
 @pro_strong UILabel         *   textLab;
 @pro_strong UIImageView     *   seletedIcon;
 
+- (void)thn_setFreightMoney:(NSString *)price;
+
 @end

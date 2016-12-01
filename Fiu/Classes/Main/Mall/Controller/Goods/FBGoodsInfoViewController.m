@@ -72,11 +72,13 @@ static NSString *const ShareURlText = @"我在Fiu浮游™寻找同路人；希�
     [SVProgressHUD show];
     self.goodsInfoRequest = [FBAPI getWithUrlString:URLGoodsInfo requestDictionary:@{@"id":self.goodsID} delegate:self];
     [self.goodsInfoRequest startRequestSuccess:^(FBRequest *request, id result) {
-        _goodsDes = [[result valueForKey:@"data"] valueForKey:@"advantage"];
-        _goodsInfoUrl = [[result valueForKey:@"data"] valueForKey:@"content_view_url"];
-        _collect = [[[result valueForKey:@"data"] valueForKey:@"is_favorite"] integerValue];
-        if (![[[result valueForKey:@"data"] valueForKey:@"stage"] isKindOfClass:[NSNull class]]) {
-            _canBuy = [[[result valueForKey:@"data"] valueForKey:@"stage"] integerValue];
+        
+        NSDictionary *goodsDict = [result valueForKey:@"data"];
+        _goodsDes = goodsDict[@"advantage"];
+        _goodsInfoUrl = goodsDict[@"content_view_url"];
+        _collect = [goodsDict[@"is_favorite"] integerValue];
+        if (![goodsDict[@"stage"] isKindOfClass:[NSNull class]]) {
+            _canBuy = [goodsDict[@"stage"] integerValue];
             
             if (_canBuy == 9) {
                 self.menuView.hidden = NO;
@@ -91,7 +93,7 @@ static NSString *const ShareURlText = @"我在Fiu浮游™寻找同路人；希�
         
         [self.goodsBuyView isCollectTheGoods:_collect];
         
-        self.goodsInfo = [[FBGoodsInfoModelData alloc] initWithDictionary:[result valueForKey:@"data"]];
+        self.goodsInfo = [[FBGoodsInfoModelData alloc] initWithDictionary:goodsDict];
         [self.rollImgView setThnGoodsRollImgData:self.goodsInfo];
         [self.goodsTable reloadData];
         [SVProgressHUD dismiss];

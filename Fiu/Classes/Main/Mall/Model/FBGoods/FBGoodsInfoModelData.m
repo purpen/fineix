@@ -80,6 +80,10 @@ NSString *const kFBGoodsInfoModelDataWapViewUrl = @"wap_view_url";
 	if(![dictionary[kFBGoodsInfoModelDataIdField] isKindOfClass:[NSNull class]]){
 		self.idField = [dictionary[kFBGoodsInfoModelDataIdField] integerValue];
 	}
+    
+    if (![dictionary[@"active_summary"] isKindOfClass:[NSNull class]]) {
+        self.orderReduce = [dictionary[@"active_summary"][@"order_reduce"] integerValue];
+    }
 
 	if(![dictionary[kFBGoodsInfoModelDataAdvantage] isKindOfClass:[NSNull class]]){
 		self.advantage = dictionary[kFBGoodsInfoModelDataAdvantage];

@@ -216,14 +216,14 @@
 "freeSend" = "免费配送";
 "summaryText" = "备注：";
 "writeSummary" = "请输入备注";
-"sumOrderPrice" = "合计：";
+"sumOrderPrice" = "合计:";
 "Default" = "默认";
 "Edit" = "编辑";
 "Done" = "完成";
 "CheckAll" = "全选";
 "GoPay" = "去结算";
 "Delete" = "删除";
-"userBounsPrice" = "节省：";
+"userBounsPrice" = "节省:";
 "ShareBtn" = "分享";
 "Collect" = "收藏";
 "CollectDone" = "已收藏";
