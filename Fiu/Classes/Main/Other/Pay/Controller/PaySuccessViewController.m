@@ -9,12 +9,8 @@
 #import "PaySuccessViewController.h"
 #import "BonusViewController.h"
 #import "UMSocial.h"
-#import "OrderInfoDetailViewController.h"
-//#import "PaySuccessWithShareView.h"
-
-
+#import "THNOrderInfoViewController.h"
 #import "UIView+TYAlertView.h"
-
 #import "OrderInfoModel.h"
 #define shareReqFlag  @"shareflge"
 #define bounsReqFlag  @"bounsflge"
@@ -105,10 +101,9 @@
 */
 
 - (IBAction)orderDetailBtnAction:(id)sender {
-    OrderInfoDetailViewController * orderDetailVC = [[OrderInfoDetailViewController alloc] initWithNibName:@"OrderInfoDetailViewController" bundle:nil];
-    orderDetailVC.orderInfo = self.orderInfo;
-    orderDetailVC.isFromPayment = YES;
-    [self.navigationController pushViewController:orderDetailVC animated:YES];
+    THNOrderInfoViewController *orderInfoVC = [[THNOrderInfoViewController alloc] init];
+    orderInfoVC.orderId = self.orderInfo.rid;
+    [self.navigationController pushViewController:orderInfoVC animated:YES];
 }
 
 

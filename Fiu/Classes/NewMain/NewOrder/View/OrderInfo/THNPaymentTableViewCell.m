@@ -19,9 +19,10 @@
 }
 
 - (void)thn_setOrderPaymentData:(OrderInfoModel *)model {
-    self.freight.text = [NSString stringWithFormat:@"￥%.2f", [model.freight floatValue]];
     self.payWay.text = model.paymentMethod;
+    self.freight.text = [NSString stringWithFormat:@"￥%.2f", [model.freight floatValue]];
     self.goodsPrice.text = [NSString stringWithFormat:@"￥%.2f", [model.totalMoney floatValue]];
+    self.priPrice.text = [NSString stringWithFormat:@"￥%.2f", [model.discountMoney floatValue]];
     self.payPrice.text = [NSString stringWithFormat:@"￥%.2f", [model.payMoney floatValue]];
 }
 
@@ -30,32 +31,39 @@
     self.backgroundColor = [UIColor whiteColor];
     [self set_cellLeftViewUI];
     
-    [self addSubview:self.freight];
-    [_freight mas_makeConstraints:^(MASConstraintMaker *make) {
+    [self addSubview:self.payWay];
+    [_payWay mas_makeConstraints:^(MASConstraintMaker *make) {
         make.size.mas_equalTo(CGSizeMake(150, 35));
         make.right.equalTo(self.mas_right).with.offset(-15);
         make.top.equalTo(self.mas_top).with.offset(0);
     }];
     
-    [self addSubview:self.payWay];
-    [_payWay mas_makeConstraints:^(MASConstraintMaker *make) {
+    [self addSubview:self.freight];
+    [_freight mas_makeConstraints:^(MASConstraintMaker *make) {
         make.size.mas_equalTo(CGSizeMake(150, 35));
         make.right.equalTo(self.mas_right).with.offset(-15);
-        make.top.equalTo(_freight.mas_bottom).with.offset(0);
+        make.top.equalTo(_payWay.mas_bottom).with.offset(0);
     }];
     
     [self addSubview:self.goodsPrice];
     [_goodsPrice mas_makeConstraints:^(MASConstraintMaker *make) {
         make.size.mas_equalTo(CGSizeMake(150, 35));
         make.right.equalTo(self.mas_right).with.offset(-15);
-        make.top.equalTo(_payWay.mas_bottom).with.offset(0);
+        make.top.equalTo(_freight.mas_bottom).with.offset(0);
+    }];
+    
+    [self addSubview:self.priPrice];
+    [_priPrice mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.size.mas_equalTo(CGSizeMake(150, 35));
+        make.right.equalTo(self.mas_right).with.offset(-15);
+        make.top.equalTo(_goodsPrice.mas_bottom).with.offset(0);
     }];
     
     [self addSubview:self.payPrice];
     [_payPrice mas_makeConstraints:^(MASConstraintMaker *make) {
         make.size.mas_equalTo(CGSizeMake(150, 35));
         make.right.equalTo(self.mas_right).with.offset(-15);
-        make.top.equalTo(_goodsPrice.mas_bottom).with.offset(0);
+        make.top.equalTo(_priPrice.mas_bottom).with.offset(0);
     }];
 }
 
@@ -89,6 +97,16 @@
     return _goodsPrice;
 }
 
+- (UILabel *)priPrice {
+    if (!_priPrice) {
+        _priPrice = [[UILabel alloc] init];
+        _priPrice.textColor = [UIColor colorWithHexString:@"#666666"];
+        _priPrice.font = [UIFont systemFontOfSize:14];
+        _priPrice.textAlignment = NSTextAlignmentRight;
+    }
+    return _priPrice;
+}
+
 - (UILabel *)payPrice {
     if (!_payPrice) {
         _payPrice = [[UILabel alloc] init];
@@ -100,12 +118,18 @@
 }
 
 - (void)set_cellLeftViewUI {
-    NSArray *titleArr = @[@"运费：", @"支付方式：", @"商品总额：", @"实付金额："];
+    NSArray *titleArr = @[@"支付方式:", @"运      费:", @"商品总额:", @"优惠总额:", @"实付金额:"];
     for (NSUInteger idx = 0; idx < titleArr.count; ++ idx) {
         UILabel *titleLab = [[UILabel alloc] initWithFrame:CGRectMake(15, 35 *idx, 80, 35)];
         titleLab.textColor = [UIColor colorWithHexString:@"#666666"];
         titleLab.font = [UIFont systemFontOfSize:14];
         titleLab.text = titleArr[idx];
+        if (IS_iOS9) {
+            titleLab.font = [UIFont fontWithName:@"PingFangSC-Light" size:14];
+        } else {
+            titleLab.font = [UIFont systemFontOfSize:14];
+        }
+        titleLab.textAlignment = NSTextAlignmentLeft;
         [self addSubview:titleLab];
     }
 }

@@ -15,6 +15,7 @@
 @property (nonatomic, strong) UILabel *freight;     //  运费
 @property (nonatomic, strong) UILabel *payWay;      //  支付方式
 @property (nonatomic, strong) UILabel *goodsPrice;  //  商品总价
+@property (nonatomic, strong) UILabel *priPrice;    //  优惠总额
 @property (nonatomic, strong) UILabel *payPrice;    //  支付总额
 
 - (void)thn_setOrderPaymentData:(OrderInfoModel *)model;

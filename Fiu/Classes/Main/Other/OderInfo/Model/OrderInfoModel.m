@@ -111,6 +111,10 @@
         self.payMoney = dictionary[@"pay_money"];
     }
     
+    if(![dictionary[@"discount_money"] isKindOfClass:[NSNull class]]){
+        self.discountMoney = dictionary[@"discount_money"];
+    }
+    
     if(![dictionary[@"trade_site_name"] isKindOfClass:[NSNull class]]){
         self.paymentMethod = dictionary[@"trade_site_name"];
     }

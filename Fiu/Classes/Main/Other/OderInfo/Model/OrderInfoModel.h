@@ -48,6 +48,7 @@ typedef NS_ENUM(NSInteger, OrderInfoState) {
 @property (nonatomic, assign) NSInteger isPresaled;             //是否是预售订单
 @property (nonatomic, strong) NSArray * productInfos;             //产品列表
 @property (nonatomic, assign) NSInteger itemsCount;             //产品总数量
+@property (nonatomic, strong) NSString *discountMoney;          //  优惠总额
 @property (nonatomic, strong) NSNumber *payMoney;                 //实际支付金额
 @property (nonatomic, strong) NSString * paymentMethod;         //支付方式
 @property (nonatomic, strong) NSString * rid;                   //订单唯一编号

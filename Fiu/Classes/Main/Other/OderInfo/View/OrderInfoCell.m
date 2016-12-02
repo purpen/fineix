@@ -114,7 +114,7 @@
     self.stateLbl.text = orderInfo.statusLabel;
     self.totalAmountLbl.text = [NSString stringWithFormat:@"共 %ld 件商品", orderInfo.itemsCount];
     self.totalPriceLbl.text = [NSString stringWithFormat:@"￥%.2f", [orderInfo.totalMoney floatValue]];
-    self.freightLabel.text = [NSString stringWithFormat:@"优惠:￥%.2f", [orderInfo.totalMoney floatValue]-[orderInfo.payMoney floatValue]];
+    self.freightLabel.text = [NSString stringWithFormat:@"优惠:￥%.2f", [orderInfo.discountMoney floatValue]];
     //支付价格
     self.realPay.text = [NSString stringWithFormat:@"实付:￥%.2f", [orderInfo.payMoney floatValue]];
     [self.productView.subviews makeObjectsPerformSelector:@selector(removeFromSuperview)];

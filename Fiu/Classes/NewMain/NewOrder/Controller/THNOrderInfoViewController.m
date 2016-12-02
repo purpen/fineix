@@ -280,7 +280,7 @@ static NSString *const PhoneNumber = @"拨打 400-879-8751";
         }
         
     } else if (indexPath.section == self.subOrderMarr.count +2) {  // 支付信息
-        return 140;
+        return 175;
         
     } else if (indexPath.section == self.subOrderMarr.count +3) {  // 联系客服
         return 44;
