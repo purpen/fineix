@@ -76,7 +76,7 @@ static NSString *const PhoneNumber = @"拨打 400-879-8751";
 #pragma mark - 设置界面视图
 - (void)set_viewUI {
     [self.view addSubview:self.orderInfoTable];
-    if (self.orderId) {
+    if (self.orderId.length) {
         [self get_networkWithOrderInfoData:self.orderId];
     }
 }
@@ -113,7 +113,7 @@ static NSString *const PhoneNumber = @"拨打 400-879-8751";
     self.addressModel = [[DeliveryAddressModel alloc] initWithDictionary:[data valueForKey:@"express_info"]];
     self.orderModel = [[OrderInfoModel alloc] initWithDictionary:data];
     _orderId = self.orderModel.rid;
-    NSLog(@"========== 订单信息：%@", data);
+    
     NSArray *subOrderArr = [NSArray array];
     if (![[data valueForKey:@"sub_orders"] isKindOfClass:[NSNull class]]) {
         subOrderArr = [data valueForKey:@"sub_orders"];
@@ -364,9 +364,10 @@ static NSString *const PhoneNumber = @"拨打 400-879-8751";
         } else if (indexPath.row == [self thn_getOrderGoodsNum:indexPath.section] + 1) {
             THNExpressInfoTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:expressCellId];
             cell = [[THNExpressInfoTableViewCell alloc] initWithStyle:(UITableViewCellStyleDefault) reuseIdentifier:expressCellId];
+            cell.nav = self.navigationController;
             if (_isHasSubOrder) {
                 if (self.orderDataMarr.count) {
-                    [cell thn_setSubOrederExpressData:self.orderDataMarr[indexPath.section - 2]];
+                    [cell thn_setSubOrederExpressData:self.orderDataMarr[indexPath.section - 2] withRid:_orderId];
                 }
                 
             } else {

@@ -575,6 +575,8 @@
 		D869BD761D6036A000432423 /* ShareViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D869BD661D6036A000432423 /* ShareViewController.xib */; };
 		D869BD791D6039C300432423 /* FBKeyboradToolbar.m in Sources */ = {isa = PBXBuildFile; fileRef = D869BD781D6039C300432423 /* FBKeyboradToolbar.m */; };
 		D869BD7C1D6044F700432423 /* THNAddTagViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D869BD7B1D6044F700432423 /* THNAddTagViewController.m */; };
+		D869DB4F1DF7A98000793038 /* THNLogisticsInfoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D869DB4E1DF7A98000793038 /* THNLogisticsInfoViewController.m */; };
+		D869DB521DF7E49200793038 /* THNLogisticTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D869DB511DF7E49200793038 /* THNLogisticTableViewCell.m */; };
 		D86E548F1DD444230075ED88 /* FS1977Filter.m in Sources */ = {isa = PBXBuildFile; fileRef = D86E54421DD444220075ED88 /* FS1977Filter.m */; };
 		D86E54901DD444230075ED88 /* FSAmaroFilter.m in Sources */ = {isa = PBXBuildFile; fileRef = D86E54441DD444220075ED88 /* FSAmaroFilter.m */; };
 		D86E54911DD444230075ED88 /* 1977blowout.png in Resources */ = {isa = PBXBuildFile; fileRef = D86E54461DD444220075ED88 /* 1977blowout.png */; };
@@ -1749,6 +1751,10 @@
 		D869BD781D6039C300432423 /* FBKeyboradToolbar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FBKeyboradToolbar.m; sourceTree = "<group>"; };
 		D869BD7A1D6044F700432423 /* THNAddTagViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THNAddTagViewController.h; sourceTree = "<group>"; };
 		D869BD7B1D6044F700432423 /* THNAddTagViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THNAddTagViewController.m; sourceTree = "<group>"; };
+		D869DB4D1DF7A98000793038 /* THNLogisticsInfoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THNLogisticsInfoViewController.h; sourceTree = "<group>"; };
+		D869DB4E1DF7A98000793038 /* THNLogisticsInfoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THNLogisticsInfoViewController.m; sourceTree = "<group>"; };
+		D869DB501DF7E49200793038 /* THNLogisticTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THNLogisticTableViewCell.h; sourceTree = "<group>"; };
+		D869DB511DF7E49200793038 /* THNLogisticTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THNLogisticTableViewCell.m; sourceTree = "<group>"; };
 		D86E54411DD444220075ED88 /* FS1977Filter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FS1977Filter.h; sourceTree = "<group>"; };
 		D86E54421DD444220075ED88 /* FS1977Filter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FS1977Filter.m; sourceTree = "<group>"; };
 		D86E54431DD444220075ED88 /* FSAmaroFilter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FSAmaroFilter.h; sourceTree = "<group>"; };
@@ -4440,6 +4446,8 @@
 				D870351D1DEBD815001FBBF1 /* THNRefundInfoViewController.m */,
 				D87035251DEC14DE001FBBF1 /* THNRefundListViewController.h */,
 				D87035261DEC14DE001FBBF1 /* THNRefundListViewController.m */,
+				D869DB4D1DF7A98000793038 /* THNLogisticsInfoViewController.h */,
+				D869DB4E1DF7A98000793038 /* THNLogisticsInfoViewController.m */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -4483,6 +4491,8 @@
 				D857AC341DE836F000F924E8 /* THNPaymentTableViewCell.m */,
 				D857AC351DE836F000F924E8 /* THNServiceTableViewCell.h */,
 				D857AC361DE836F000F924E8 /* THNServiceTableViewCell.m */,
+				D869DB501DF7E49200793038 /* THNLogisticTableViewCell.h */,
+				D869DB511DF7E49200793038 /* THNLogisticTableViewCell.m */,
 			);
 			path = OrderInfo;
 			sourceTree = "<group>";
@@ -5436,6 +5446,7 @@
 				1F2A90A01CF40277005116C7 /* SubscribePeopleViewController.m in Sources */,
 				1F2A90251CF40277005116C7 /* IdentityTagModel.m in Sources */,
 				D81317E81D92237E007CE71C /* THNMessageViewController.m in Sources */,
+				D869DB521DF7E49200793038 /* THNLogisticTableViewCell.m in Sources */,
 				D806699C1D7014C8007FD81E /* HotUserListUser.m in Sources */,
 				1F2A8FC81CF40277005116C7 /* GoodsInfoData.m in Sources */,
 				D8C094FD1D752D5A00908491 /* HomeSceneListProduct.m in Sources */,
@@ -5507,6 +5518,7 @@
 				1F2AFC7A1D88170B00DA6035 /* AreaModel.m in Sources */,
 				D86E54C11DD444230075ED88 /* FSRiseFilter.m in Sources */,
 				D84763381D427F7500C88379 /* AppDelegate+UMAnalytics.m in Sources */,
+				D869DB4F1DF7A98000793038 /* THNLogisticsInfoViewController.m in Sources */,
 				1F2A8FB81CF40277005116C7 /* FiuBrandRow.m in Sources */,
 				1F2AFC811D88170B00DA6035 /* FiuSceneInfo.m in Sources */,
 				1F2AFDCB1D8818A400DA6035 /* JDOrderViewController.m in Sources */,

@@ -62,6 +62,11 @@
     if(![dictionary[@"express_no"] isKindOfClass:[NSNull class]]){
         self.expressNo = dictionary[@"express_no"];
     }
+    
+    if(![dictionary[@"express_caty"] isKindOfClass:[NSNull class]]){
+        self.expressCaty = dictionary[@"express_caty"];
+    }
+    
     if(![dictionary[@"freight"] isKindOfClass:[NSNull class]]){
         self.freight = dictionary[@"freight"];
     }

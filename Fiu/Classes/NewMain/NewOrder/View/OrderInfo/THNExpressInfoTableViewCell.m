@@ -7,6 +7,16 @@
 //
 
 #import "THNExpressInfoTableViewCell.h"
+#import "THNLogisticsInfoViewController.h"
+
+@interface THNExpressInfoTableViewCell () {
+    NSString *_rid;
+    NSString *_expressCaty;
+    NSString *_expressNo;
+    NSString *_expressCom;
+}
+
+@end
 
 @implementation THNExpressInfoTableViewCell
 
@@ -18,6 +28,20 @@
     return self;
 }
 
+- (void)thn_setViewTapAction {
+    UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(openLogisticsInfoVC:)];
+    [self addGestureRecognizer:tap];
+}
+
+- (void)openLogisticsInfoVC:(UITapGestureRecognizer *)tap {
+    THNLogisticsInfoViewController *logisticsInfoVC = [[THNLogisticsInfoViewController alloc] init];
+    logisticsInfoVC.rid = _rid;
+    logisticsInfoVC.expressCaty = _expressCaty;
+    logisticsInfoVC.expressNo = _expressNo;
+    logisticsInfoVC.expressCom = _expressCom;
+    [self.nav pushViewController:logisticsInfoVC animated:YES];
+}
+
 - (void)thn_setOrederExpressData:(OrderInfoModel *)model {
     if (model.expressNo.length == 0) {
         self.expressCompany.hidden = YES;
@@ -25,20 +49,32 @@
         self.noExpressInfo.hidden = NO;
         
     } else {
+        [self thn_setViewTapAction];
+        
         self.expressCompany.text = [NSString stringWithFormat:@"承运来源：%@", model.express_company];
         self.expressNum.text = [NSString stringWithFormat:@"快递编号：%@", model.expressNo];
+        _rid = model.rid;
+        _expressNo = model.expressNo;
+        _expressCaty = model.expressCaty;
+        _expressCom = model.express_company;
     }
 }
 
-- (void)thn_setSubOrederExpressData:(SubOrderModel *)model {
+- (void)thn_setSubOrederExpressData:(SubOrderModel *)model withRid:(NSString *)rid {
     if (model.expressNo.length == 0) {
         self.expressCompany.hidden = YES;
         self.expressNum.hidden = YES;
         self.noExpressInfo.hidden = NO;
         
     } else {
+        [self thn_setViewTapAction];
+        
         self.expressCompany.text = [NSString stringWithFormat:@"承运来源：%@", model.expressCompany];
         self.expressNum.text = [NSString stringWithFormat:@"快递编号：%@", model.expressNo];
+        _rid = rid;
+        _expressNo = model.expressNo;
+        _expressCaty = model.expressCaty;
+        _expressCom = model.expressCompany;
     }
 }
 
