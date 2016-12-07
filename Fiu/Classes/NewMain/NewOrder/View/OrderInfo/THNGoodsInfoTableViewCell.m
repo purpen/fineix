@@ -170,6 +170,8 @@
         [_refundBtn setTitleColor:[UIColor colorWithHexString:@"#666666"] forState:(UIControlStateNormal)];
         _refundBtn.layer.borderColor = [UIColor colorWithHexString:@"#666666"].CGColor;
         _refundBtn.layer.borderWidth = 0.5f;
+        _refundBtn.layer.cornerRadius = 2.0f;
+        _refundBtn.layer.masksToBounds = YES;
         [_refundBtn addTarget:self action:@selector(refundBtnClick:) forControlEvents:(UIControlEventTouchUpInside)];
     }
     return _refundBtn;

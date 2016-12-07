@@ -44,7 +44,6 @@ static NSString *const URLLogistic = @"/shopping/logistic_tracking";
     NSDictionary *dict = @{@"rid":self.rid, @"express_no":self.expressNo, @"express_caty":self.expressCaty};
     self.logisticRequest = [FBAPI postWithUrlString:URLLogistic requestDictionary:dict delegate:nil];
     [self.logisticRequest startRequestSuccess:^(FBRequest *request, id result) {
-        NSLog(@"%@", result);
         [self thn_getLogisticData:result];
         
     } failure:^(FBRequest *request, NSError *error) {

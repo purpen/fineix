@@ -17,6 +17,7 @@
 @property (nonatomic, strong) UILabel *expressCompany;  //  快递公司
 @property (nonatomic, strong) UILabel *expressNum;      //  快递编号
 @property (nonatomic, strong) UILabel *noExpressInfo;   //  没有物流
+@property (nonatomic, strong) UIButton *lookExpress;    //  查看物流
 
 - (void)thn_setOrederExpressData:(OrderInfoModel *)model;
 

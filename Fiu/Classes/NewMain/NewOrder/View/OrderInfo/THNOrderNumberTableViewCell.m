@@ -24,6 +24,7 @@
 }
 
 - (void)thn_setSubOrderNumberData:(SubOrderModel *)model {
+    self.number.font = [UIFont systemFontOfSize:13];
     self.number.text = [NSString stringWithFormat:@"订单号：%@", model.rid];
     self.state.hidden = YES;
 }
