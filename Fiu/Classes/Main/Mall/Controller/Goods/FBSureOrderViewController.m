@@ -24,6 +24,7 @@ static NSString *const URLBuying = @"/shopping/now_buy";
 static NSString *const URLUserAddress = @"/delivery_address/defaulted";
 static NSString *const URLSureOrder = @"/shopping/confirm";
 static NSString *const URLCarGoPay = @"/shopping/checkout";
+static NSString *const URLFreight = @"/shopping/fetch_freight";
 
 @interface FBSureOrderViewController ()<BounsDelegate> {
     NSString * _rid;
@@ -159,6 +160,34 @@ static NSString *const URLCarGoPay = @"/shopping/checkout";
     } failure:^(FBRequest *request, NSError *error) {
         NSLog(@"%@", error);
     }];
+}
+
+#pragma mark 修改地址重新获取运费
+- (void)post_networkGetFreight:(NSString *)addressId {
+    [SVProgressHUD show];
+    self.freightRequest = [FBAPI postWithUrlString:URLFreight requestDictionary:@{@"addbook_id":addressId, @"rid":_rid} delegate:nil];
+    [self.freightRequest startRequestSuccess:^(FBRequest *request, id result) {
+        [self thn_changeOrderPrice:result];
+        
+    } failure:^(FBRequest *request, NSError *error) {
+        NSLog(@"%@", [error localizedDescription]);
+    }];
+}
+
+//  重新计算订单价格
+- (void)thn_changeOrderPrice:(id)result {
+    [SVProgressHUD dismiss];
+    
+    CGFloat newfreightPrice = [[[result valueForKey:@"data"] valueForKey:@"freight"] floatValue];  //  获取新的运费
+    CGFloat sumPrice = [[self.sumPrice.text substringFromIndex:1] floatValue];  //  当前总金额
+    CGFloat oldFreightPrice = [[_freight substringFromIndex:1] floatValue];     //  上次保存的运费
+    
+    if (oldFreightPrice != newfreightPrice) {
+        CGFloat nowPrice = sumPrice - oldFreightPrice;
+        self.sumPrice.text = [NSString stringWithFormat:@"￥%.2f", nowPrice + newfreightPrice];
+        _freight = [NSString stringWithFormat:@"￥%.2f", newfreightPrice];
+        [self.orderTable reloadSections:[NSIndexSet indexSetWithIndex:2] withRowAnimation:(UITableViewRowAnimationFade)];
+    }
 }
 
 #pragma mark 立即下单
@@ -378,6 +407,9 @@ static NSString *const URLCarGoPay = @"/shopping/checkout";
         deliveryAddressVC.selectedAddressBlock = ^(DeliveryAddressModel *deliveryAddress) {
             self.userAddress = deliveryAddress;
             _addbookId = [deliveryAddress valueForKey:@"idField"];
+            if (_addbookId.length && _rid.length) {
+                [self post_networkGetFreight:_addbookId];
+            }
             [self.orderTable reloadData];
         };
         [self.navigationController pushViewController:deliveryAddressVC animated:YES];

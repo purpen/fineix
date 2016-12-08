@@ -23,6 +23,7 @@
 @pro_strong FBRequest       *   addressRequest;
 @pro_strong FBRequest       *   orderRrquest;
 @pro_strong FBRequest       *   carPayRequest;
+@pro_strong FBRequest       *   freightRequest;
 
 @pro_strong UITableView     *   orderTable;
 @pro_strong UIView          *   sureView;

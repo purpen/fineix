@@ -48,7 +48,7 @@
             NSDictionary * skuDict = @{@"mode":NSLocalizedString(@"Default", nil),
                                        @"price":[NSString stringWithFormat:@"%zi",[[model valueForKey:@"salePrice"] integerValue]],
                                        @"quantity":[NSString stringWithFormat:@"%zi",[[model valueForKey:@"inventory"] integerValue]],
-                                       @"targetId":[NSString stringWithFormat:@"%zi", [[model valueForKey:@"idField"] integerValue]]};
+                                       @"idField":[NSString stringWithFormat:@"%zi", [[model valueForKey:@"idField"] integerValue]]};
             [weakSelf.goodsSkus addObject:skuDict];
             
         } else {
@@ -56,9 +56,8 @@
         }
         
         [weakSelf thn_getGoodsSkuImage:weakSelf.goodsSkus];
-        /**
-         *  没有颜色分类，默认选中第一个
-         */
+        
+        //  没有颜色分类，默认选中第一个
         if (weakSelf.goodsSkus.count == 1) {
             [weakSelf chooseDefaultColor];
         }
@@ -108,9 +107,11 @@
         [self IsCanBuy];
         self.chooseNum.text = @"1";
     }
+    
     self.num = 1;
+
     if ([[self.goodsSkus valueForKey:@"mode"][0] isEqualToString:NSLocalizedString(@"Default", nil)]) {
-        self.skuId = [NSString stringWithFormat:@"%zi", [[self.goodsSkus valueForKey:@"targetId"][0] integerValue]];
+        self.skuId = [NSString stringWithFormat:@"%zi", [[self.goodsSkus valueForKey:@"idField"][0] integerValue]];
     } else {
         self.skuId = [NSString stringWithFormat:@"%zi", [[self.goodsSkus valueForKey:@"idField"][0] integerValue]];
     }
@@ -327,7 +328,7 @@
     }
     self.num = 1;
     if ([[self.goodsSkus valueForKey:@"mode"][indexPath.row] isEqualToString:NSLocalizedString(@"Default", nil)]) {
-        self.skuId = [NSString stringWithFormat:@"%zi", [[self.goodsSkus valueForKey:@"targetId"][indexPath.row] integerValue]];
+        self.skuId = [NSString stringWithFormat:@"%zi", [[self.goodsSkus valueForKey:@"idField"][indexPath.row] integerValue]];
     } else {
         self.skuId = [NSString stringWithFormat:@"%zi", [[self.goodsSkus valueForKey:@"idField"][indexPath.row] integerValue]];
     }

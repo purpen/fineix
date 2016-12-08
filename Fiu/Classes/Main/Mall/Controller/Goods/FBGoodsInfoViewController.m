@@ -72,7 +72,6 @@ static NSString *const ShareURlText = @"我在Fiu浮游™寻找同路人；希�
     [SVProgressHUD show];
     self.goodsInfoRequest = [FBAPI getWithUrlString:URLGoodsInfo requestDictionary:@{@"id":self.goodsID} delegate:self];
     [self.goodsInfoRequest startRequestSuccess:^(FBRequest *request, id result) {
-        
         NSDictionary *goodsDict = [result valueForKey:@"data"];
         _goodsDes = goodsDict[@"advantage"];
         _goodsInfoUrl = goodsDict[@"content_view_url"];
