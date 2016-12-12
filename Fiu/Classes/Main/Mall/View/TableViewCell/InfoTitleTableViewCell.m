@@ -45,22 +45,23 @@
             make.width.equalTo(@(oldPriceWidth *1.5));
         }];
         
+        if (model.orderReduce == 1) {
+            self.activityLab.hidden = NO;
+        }
+        
     } else {
         self.goodsPrice.font = [UIFont systemFontOfSize:11];
         self.goodsPrice.text = @"此产品为用户标记，暂未销售。浮游正在努力上架产品中ing...";
         [self.goodsPrice mas_updateConstraints:^(MASConstraintMaker *make) {
             make.right.equalTo(self.mas_right).with.offset(-15);
         }];
+        self.activityLab.hidden = YES;
     }
     
     if (model.marketPrice == model.salePrice) {
         [self.goodsOldPrice mas_updateConstraints:^(MASConstraintMaker *make) {
             make.width.equalTo(@0);
         }];
-    }
-    
-    if (model.orderReduce == 1) {
-        self.activityLab.hidden = NO;
     }
 }
 
