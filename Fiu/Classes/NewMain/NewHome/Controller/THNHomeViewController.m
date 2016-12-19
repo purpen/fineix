@@ -164,7 +164,8 @@ static NSString *const allCommentsCellId = @"AllCommentsCellId";
 //  轮播图
 - (void)thn_networkRollImageData {
     NSDictionary *requestDic = @{@"name":@"app_fiu_sight_index_slide",
-                                 @"size":@"5"};
+                                 @"size":@"5",
+                                 @"use_cache":@"1"};
     self.rollImgRequest = [FBAPI getWithUrlString:URLBannerSlide requestDictionary:requestDic delegate:self];
     [self.rollImgRequest startRequestSuccess:^(FBRequest *request, id result) {
         NSArray *rollArr = [[result valueForKey:@"data"] valueForKey:@"rows"];
@@ -272,7 +273,8 @@ static NSString *const allCommentsCellId = @"AllCommentsCellId";
     NSDictionary *requestDic = @{@"page":@"1",
                                  @"size":@"4",
                                  @"fine":@"1",
-                                 @"sort":@"2"};
+                                 @"sort":@"2",
+                                 @"use_cache":@"1"};
     self.subjectRequest = [FBAPI getWithUrlString:URLSubject requestDictionary:requestDic delegate:self];
     [self.subjectRequest startRequestSuccess:^(FBRequest *request, id result) {
         NSArray *subArr = [[result valueForKey:@"data"] valueForKey:@"rows"];
@@ -337,7 +339,8 @@ static NSString *const allCommentsCellId = @"AllCommentsCellId";
     NSDictionary *requestDic = @{@"page":@"1",
                                  @"edit_stick":@"1",
                                  @"sort":@"1",
-                                 @"type":@"1"};
+                                 @"type":@"1",
+                                 @"use_cache":@"1"};
     self.hotUserRequest = [FBAPI getWithUrlString:URLHotUserList requestDictionary:requestDic delegate:self];
     [self.hotUserRequest startRequestSuccess:^(FBRequest *request, id result) {
         NSArray *userArr = [[result valueForKey:@"data"] valueForKey:@"users"];
@@ -381,7 +384,8 @@ static NSString *const allCommentsCellId = @"AllCommentsCellId";
     NSDictionary *requestDic = @{@"page":@(self.currentpageNum + 1),
                                  @"size":@"15",
                                  @"sort":@"2",
-                                 @"fine":@"1"};
+                                 @"fine":@"1",
+                                 @"use_cache":@"1"};
     self.sceneListRequest = [FBAPI getWithUrlString:URLSceneList requestDictionary:requestDic delegate:self];
     [self.sceneListRequest startRequestSuccess:^(FBRequest *request, id result) {
         [self.defaultHomeView removeFromSuperview];

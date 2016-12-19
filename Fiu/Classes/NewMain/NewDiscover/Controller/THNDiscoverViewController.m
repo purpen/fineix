@@ -67,7 +67,7 @@ static NSString *const SceneListFooterCellViewId = @"sceneListFooterViewId";
 #pragma mark - 网络请求
 #pragma mark 分类
 - (void)networkCategoryData {
-    self.categoryRequest = [FBAPI getWithUrlString:URLCategory requestDictionary:@{@"domain":@"13", @"page":@"1", @"size":@"10"} delegate:self];
+    self.categoryRequest = [FBAPI getWithUrlString:URLCategory requestDictionary:@{@"domain":@"13", @"page":@"1", @"size":@"10", @"use_cache":@"1"} delegate:self];
     [self.categoryRequest startRequestSuccess:^(FBRequest *request, id result) {
         self.categoryMarr = [NSMutableArray arrayWithArray:[[result valueForKey:@"data"] valueForKey:@"rows"]];
         [self.topCategoryView setCategoryData:self.categoryMarr withType:1];
@@ -115,7 +115,8 @@ static NSString *const SceneListFooterCellViewId = @"sceneListFooterViewId";
                                                                                  @"size":@"2",
                                                                                  @"fine":@"1",
                                                                                  @"sort":@"0",
-                                                                                 @"type":@"1,2"} delegate:self];
+                                                                                 @"type":@"1,2",
+                                                                                 @"use_cache":@"1"} delegate:self];
     [self.subjectRequest startRequestSuccess:^(FBRequest *request, id result) {
         NSArray *subArr = [[result valueForKey:@"data"] valueForKey:@"rows"];
         for (NSDictionary * subjectDic in subArr) {

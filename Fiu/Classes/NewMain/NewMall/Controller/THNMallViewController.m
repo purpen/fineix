@@ -60,7 +60,7 @@ static NSString *const MallListHeaderCellViewId = @"mallListHeaderCellViewId";
 #pragma mark - 网络请求
 #pragma mark 分类
 - (void)networkCategoryData {
-    self.categoryRequest = [FBAPI getWithUrlString:URLCategory requestDictionary:@{@"domain":@"1", @"page":@"1", @"size":@"10"} delegate:self];
+    self.categoryRequest = [FBAPI getWithUrlString:URLCategory requestDictionary:@{@"domain":@"1", @"page":@"1", @"size":@"10", @"use_cache":@"1"} delegate:self];
     [self.categoryRequest startRequestSuccess:^(FBRequest *request, id result) {
         self.categoryMarr = [NSMutableArray arrayWithArray:[[result valueForKey:@"data"] valueForKey:@"rows"]];
         [self.topCategoryView setCategoryData:self.categoryMarr withType:2];
@@ -72,7 +72,7 @@ static NSString *const MallListHeaderCellViewId = @"mallListHeaderCellViewId";
 
 #pragma mark 最新商品列表
 - (void)thn_networkNewGoodsListData {
-    self.mallListRequest = [FBAPI getWithUrlString:URLNewGoodsList requestDictionary:@{@"type":@"1"} delegate:self];
+    self.mallListRequest = [FBAPI getWithUrlString:URLNewGoodsList requestDictionary:@{@"type":@"1", @"use_cache":@"1"} delegate:self];
     [self.mallListRequest startRequestSuccess:^(FBRequest *request, id result) {
         NSArray *goodsArr = [[result valueForKey:@"data"] valueForKey:@"items"];
         for (NSDictionary * goodsDic in goodsArr) {
@@ -93,7 +93,8 @@ static NSString *const MallListHeaderCellViewId = @"mallListHeaderCellViewId";
     NSDictionary *requestDic = @{@"page":@"1",
                                  @"size":@"100",
                                  @"sort":@"2",
-                                 @"type":@"5"};
+                                 @"type":@"5",
+                                 @"use_cache":@"1"};
     self.subjectRequest = [FBAPI getWithUrlString:URLMallSubject requestDictionary:requestDic delegate:self];
     [self.subjectRequest startRequestSuccess:^(FBRequest *request, id result) {
         NSArray *goodsArr = [[result valueForKey:@"data"] valueForKey:@"rows"];
