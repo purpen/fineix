@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "FSImageFilterManager.h"
 
 @interface FSFliterImage : NSObject
 /**
@@ -34,9 +35,12 @@
  */
 @property (nonatomic) CGFloat  colorTemperatureValue;
 
-@property (nonatomic , copy) UIImage * image;
+@property (nonatomic , copy) UIImage *image;
+
+@property (nonatomic, strong) FSImageFilterManager *filterManager;
 
 - (void)updataParamsWithIndex:(NSInteger)type WithValue:(CGFloat)value;
 
+- (void)setImageDefaultValue;
 
 @end

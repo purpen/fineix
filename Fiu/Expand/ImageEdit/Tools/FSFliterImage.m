@@ -71,8 +71,26 @@
     return _colorTemperatureValue;
 }
 
-- (void)updataParamsWithIndex:(NSInteger)type WithValue:(CGFloat)value{
+- (FSImageFilterManager *)filterManager {
+    if (!_filterManager) {
+        _filterManager = [[FSImageFilterManager alloc] init];
+    }
+    return _filterManager;
+}
 
+- (void)setImageDefaultValue {
+    self.lightValue = 0;
+    self.contrastValue = 0;
+    self.sharpnessValue = 0;
+    self.staurationValue = 0;
+    self.colorTemperatureValue = 0;
+}
+
+- (void)updataParamsWithIndex:(NSInteger)type WithValue:(CGFloat)value {
+    self.image = [self.filterManager randerImageWithProgress:value
+                                                   WithImage:self.image
+                                          WithImageParamType:(FSImageParamType)type];
+    
     switch (type) {
         case 0:
         {

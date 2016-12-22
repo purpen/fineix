@@ -27,6 +27,7 @@ static NSString *const DefaultFilter = @"original";
     NSString        *_filterName;
     NSArray         *_footTitleArr;
     FSImageParamType _editFilterType; //  记录调整参数的类型（亮度／曝光度...）
+    NSInteger        _chooseIndex;
 }
 
 @end
@@ -206,6 +207,7 @@ static NSString *const DefaultFilter = @"original";
     self.filterValueView.valueTitle.text = value;
     [self.filterValueView thn_setSliderWithType:index filterImage:self.editFilterImage];
     _editFilterType = (FSImageParamType)index;
+    _chooseIndex = index;
 }
 
 #pragma mark - 调整参数值
@@ -239,8 +241,8 @@ static NSString *const DefaultFilter = @"original";
 
 //  完成调整
 - (void)thn_sureChangeFilterValue:(CGFloat)value {
-    [self.editFilterImage updataParamsWithIndex:_editFilterType WithValue:value];
-    self.editFilterImage.image = self.filtersImg;
+    [self.editFilterImage updataParamsWithIndex:_chooseIndex WithValue:value];
+//    self.editFilterImage.image = self.filtersImg;
 }
 
 #pragma mark - 滤镜视图
@@ -265,6 +267,7 @@ static NSString *const DefaultFilter = @"original";
     _filterName = filterName;
     UIImage *showFilterImage = [self.filterManager randerImageWithIndex:_filterName WithImage:self.filtersImg];
     self.filtersImageView.image = self.editFilterImage.image = showFilterImage;
+    [self.editFilterImage setImageDefaultValue];
 }
 
 #pragma mark - 标记产品信息视图
