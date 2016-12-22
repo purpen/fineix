@@ -31,13 +31,11 @@
 - (void)thn_setOrederExpressData:(OrderInfoModel *)model {
     if (model.expressNo.length == 0) {
         self.expressCompany.hidden = YES;
-//        self.expressNum.hidden = YES;
         self.lookExpress.hidden = YES;
         self.noExpressInfo.hidden = NO;
         
     } else {
         self.expressCompany.text = [NSString stringWithFormat:@"%@ (%@)", model.express_company, model.expressNo];
-//        self.expressNum.text = [NSString stringWithFormat:@"快递编号：%@", model.expressNo];
         _rid = model.rid;
         _expressNo = model.expressNo;
         _expressCaty = model.expressCaty;
@@ -48,13 +46,11 @@
 - (void)thn_setSubOrederExpressData:(SubOrderModel *)model withRid:(NSString *)rid {
     if (model.expressNo.length == 0) {
         self.expressCompany.hidden = YES;
-//        self.expressNum.hidden = YES;
         self.lookExpress.hidden = YES;
         self.noExpressInfo.hidden = NO;
         
     } else {
         self.expressCompany.text = [NSString stringWithFormat:@"%@ (%@)", model.expressCompany, model.expressNo];
-//        self.expressNum.text = [NSString stringWithFormat:@"快递编号：%@", model.expressNo];
         _rid = rid;
         _expressNo = model.expressNo;
         _expressCaty = model.expressCaty;
@@ -77,13 +73,6 @@
         make.top.bottom.equalTo(self).with.offset(0);
     }];
     
-//    [self addSubview:self.expressNum];
-//    [_expressNum mas_makeConstraints:^(MASConstraintMaker *make) {
-//        make.size.mas_equalTo(CGSizeMake(200, 44));
-//        make.right.equalTo(self.mas_right).with.offset(-15);
-//        make.bottom.equalTo(self.mas_bottom).with.offset(0);
-//    }];
-//    
     [self addSubview:self.noExpressInfo];
     [_noExpressInfo mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.left.right.bottom.equalTo(self).with.offset(0);

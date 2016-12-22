@@ -14,6 +14,7 @@
 #import "THNOrderNumberTableViewCell.h"
 #import "THNExpressInfoTableViewCell.h"
 #import "THNHasSubOrdersTableViewCell.h"
+#import "THNRemarkTableViewCell.h"
 #import "FBPayTheWayViewController.h"
 #import "CommenttwoViewController.h"
 
@@ -25,6 +26,7 @@ static NSString *const serviceCellId        = @"THNServiceTableViewCellId";
 static NSString *const goodsCellId          = @"THNGoodsInfoTableViewCellId";
 static NSString *const numberCellId         = @"THNOrderNumberTableViewCellId";
 static NSString *const expressCellId        = @"THNExpressInfoTableViewCellId";
+static NSString *const remarkCellId         = @"THNRemarkTableViewCellId";
 
 static NSString *const URLOrderInfo     = @"/shopping/detail";          //  订单详情
 static NSString *const URLSureOrder     = @"/shopping/take_delivery";   //  确认收货
@@ -97,6 +99,7 @@ static NSString *const PhoneNumber = @"拨打 400-879-8751";
     [SVProgressHUD show];
     self.orderRequest = [FBAPI getWithUrlString:URLOrderInfo requestDictionary:@{@"rid":orderId} delegate:nil];
     [self.orderRequest startRequestSuccess:^(FBRequest *request, id result) {
+        NSLog(@"订单详情==== %@", result);
         NSDictionary *data = [result valueForKey:@"data"];
         
         [self thn_getOrderInfoData:data];
@@ -257,11 +260,11 @@ static NSString *const PhoneNumber = @"拨打 400-879-8751";
 }
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-    return 4 + self.subOrderMarr.count;
+    return 5 + self.subOrderMarr.count;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    if (section != 0 && section != 1 && section != self.subOrderMarr.count+2 && section != self.subOrderMarr.count+3) {
+    if (section != 0 && section != 1 && section != self.subOrderMarr.count+2 && section != self.subOrderMarr.count+3 && section != self.subOrderMarr.count+4) {
         return 2 + [self thn_getOrderGoodsNum:section];
     }
     
@@ -279,10 +282,18 @@ static NSString *const PhoneNumber = @"拨打 400-879-8751";
             return 0.01;
         }
         
-    } else if (indexPath.section == self.subOrderMarr.count +2) {  // 支付信息
+    } else if (indexPath.section == self.subOrderMarr.count +2) {
+        if (self.orderModel.summary.length == 0) {
+            return 0.01;
+        } else {
+            THNRemarkTableViewCell *cell = [[THNRemarkTableViewCell alloc] init];
+            return  [cell thn_getRemarkContentHeight:self.orderModel.summary];
+        }
+        
+    } else if (indexPath.section == self.subOrderMarr.count +3) {  // 支付信息
         return 175;
         
-    } else if (indexPath.section == self.subOrderMarr.count +3) {  // 联系客服
+    } else if (indexPath.section == self.subOrderMarr.count +4) {  // 联系客服
         return 44;
         
     } else {    // 商品列表
@@ -305,6 +316,12 @@ static NSString *const PhoneNumber = @"拨打 400-879-8751";
 - (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section {
     if (section == 1) {
         return 0.01;
+    } else if (section == 2) {
+        if (self.orderModel.summary.length == 0) {
+            return 0.01;
+        } else {
+            return 10;
+        }
     }
     
     return 10;
@@ -332,7 +349,15 @@ static NSString *const PhoneNumber = @"拨打 400-879-8751";
             return cell;
         }
     
-    } else if (indexPath.section == self.subOrderMarr.count+2) {    // 支付信息
+    }else if (indexPath.section == self.subOrderMarr.count+2) {    // 备注信息
+        THNRemarkTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:remarkCellId];
+        cell = [[THNRemarkTableViewCell alloc] initWithStyle:(UITableViewCellStyleDefault) reuseIdentifier:remarkCellId];
+        if (self.orderModel) {
+            [cell thn_setRemarkContentData:self.orderModel];
+        }
+        return cell;
+        
+    } else if (indexPath.section == self.subOrderMarr.count+3) {    // 支付信息
         THNPaymentTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:paymentCellId];
         cell = [[THNPaymentTableViewCell alloc] initWithStyle:(UITableViewCellStyleDefault) reuseIdentifier:paymentCellId];
         if (self.orderModel) {
@@ -340,7 +365,7 @@ static NSString *const PhoneNumber = @"拨打 400-879-8751";
         }
         return cell;
         
-    } else if (indexPath.section == self.subOrderMarr.count+3) {    // 联系客服
+    } else if (indexPath.section == self.subOrderMarr.count+4) {    // 联系客服
         THNServiceTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:serviceCellId];
         cell = [[THNServiceTableViewCell alloc] initWithStyle:(UITableViewCellStyleDefault) reuseIdentifier:serviceCellId];
         return cell;
@@ -401,7 +426,7 @@ static NSString *const PhoneNumber = @"拨打 400-879-8751";
 
 #pragma mark - 点击操作
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    if (indexPath.section == self.subOrderMarr.count +3) {
+    if (indexPath.section == self.subOrderMarr.count +4) {
         [self set_showAlertViewWithTitle:PhoneNumber actionType:1];
     }
 }

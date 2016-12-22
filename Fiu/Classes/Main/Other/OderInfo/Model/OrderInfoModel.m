@@ -144,6 +144,10 @@
         self.totalMoney = dictionary[@"total_money"];
     }
     
+    if(![dictionary[@"summary"] isKindOfClass:[NSNull class]]){
+        self.summary = dictionary[@"summary"];
+    }
+    
     if(![dictionary[@"user_id"] isKindOfClass:[NSNull class]]){
         self.userId = [dictionary[@"user_id"] integerValue];
     }
