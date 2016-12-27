@@ -11,11 +11,10 @@
 
 // API ROOT URL
 //#define kDomainBaseUrl @"http://m.taihuoniao.com/app/api"           //生产环境
-#define kDomainBaseUrl @"http://api.taihuoniao.com"             //  上线正式环境
+#define kDomainBaseUrl @"https://api.taihuoniao.com"             //  上线正式环境
 //#define kDomainBaseUrl @"http://t.taihuoniao.com/app/api"     //  开发环境
 
 #define kAppDebug 1
-
 #define KAppType              @"2"
 #define kChannel              @"appstore"
 

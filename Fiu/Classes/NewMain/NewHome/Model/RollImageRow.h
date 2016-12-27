@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-@interface RollImageRow : NSObject
+@interface RollImageRow : NSObject <NSCoding>
 
 @property (nonatomic, assign) NSInteger idField;
 @property (nonatomic, strong) NSString * coverId;
@@ -25,4 +25,5 @@
 @property (nonatomic, strong) NSString * webUrl;
 
 -(instancetype)initWithDictionary:(NSDictionary *)dictionary;
+
 @end

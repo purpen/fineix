@@ -162,8 +162,6 @@ static NSString *const thirdRegister = @"/auth/third_sign";//第三方登录接�
 
 - (IBAction)sinaClick:(id)sender {
     //微博登录
-    
-    
     UMSocialSnsPlatform *snsPlatform = [UMSocialSnsPlatformManager getSocialPlatformWithName:UMShareToSina];
     snsPlatform.loginClickHandler(self,[UMSocialControllerService defaultControllerService],YES,^(UMSocialResponseEntity *response){
         [SVProgressHUD showWithMaskType:SVProgressHUDMaskTypeClear];

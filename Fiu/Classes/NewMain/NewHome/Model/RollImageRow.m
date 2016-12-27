@@ -12,9 +12,6 @@
 @end
 @implementation RollImageRow
 
-
-
-
 /**
  * Instantiate the instance using the passed dictionary values to set the properties values
  */
@@ -69,4 +66,31 @@
 	}	
 	return self;
 }
+
+- (void)encodeWithCoder:(NSCoder *)aCoder {
+    [aCoder encodeObject:self.webUrl forKey:@"webUrl"];
+    [aCoder encodeObject:self.type forKey:@"type"];
+    [aCoder encodeObject:self.title forKey:@"title"];
+    [aCoder encodeInteger:self.idField forKey:@"id"];
+    [aCoder encodeObject:self.coverId forKey:@"coverId"];
+    [aCoder encodeObject:self.coverUrl forKey:@"coverUrl"];
+    [aCoder encodeInteger:self.kind forKey:@"kind"];
+    [aCoder encodeInteger:self.state forKey:@"state"];
+    
+}
+
+- (instancetype)initWithCoder:(NSCoder *)aDecoder {
+    if (self = [super init]) {
+        self.webUrl = [aDecoder decodeObjectForKey:@"webUrl"];
+        self.type = [aDecoder decodeObjectForKey:@"type"];
+        self.title = [aDecoder decodeObjectForKey:@"title"];
+        self.idField = [aDecoder decodeIntegerForKey:@"idField"];
+        self.coverId = [aDecoder decodeObjectForKey:@"coverId"];
+        self.coverUrl = [aDecoder decodeObjectForKey:@"coverUrl"];
+        self.kind = [aDecoder decodeIntegerForKey:@"kind"];
+        self.state = [aDecoder decodeIntegerForKey:@"state"];
+    }
+    return self;
+}
+
 @end

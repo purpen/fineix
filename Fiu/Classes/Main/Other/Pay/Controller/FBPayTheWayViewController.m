@@ -42,8 +42,6 @@
     appDelegate.aliDelegate = self;
     
     [self loadingPayWayView];
-
-    // Do any additional setup after loading the view from its nib.
 }
 
 - (void)loadingPayWayView {

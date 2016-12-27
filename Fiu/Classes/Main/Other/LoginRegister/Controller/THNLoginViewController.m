@@ -38,7 +38,7 @@
 @property (weak, nonatomic) IBOutlet UIButton *qqBtn;
 @end
 
-NSString *const LoginURL = @"/auth/login";//登录接口
+static NSString *const LoginURL = @"/auth/login";//登录接口
 static NSString * const XMGPlacerholderColorKeyPath = @"_placeholderLabel.textColor";
 static NSString *const thirdRegister = @"/auth/third_sign";//第三方登录接口
 

@@ -59,6 +59,9 @@ static NSString *const commentsCellId = @"CommentsCellId";
 static NSString *const twoCommentsCellId = @"TwoCommentsCellId";
 static NSString *const allCommentsCellId = @"AllCommentsCellId";
 
+//  归档地址
+static NSString *const homeDataPath = [NSHomeDirectory() stringByAppendingPathComponent:@"homeData.archiver"];
+
 @interface THNHomeViewController () {
     NSIndexPath *_selectedIndexPath;
     CGFloat _contentHigh;
@@ -92,6 +95,7 @@ static NSString *const allCommentsCellId = @"AllCommentsCellId";
     [self setHotUserListData];
     [self thn_registerNSNotification];
     [self thn_netWorkGroup];
+    
 }
 
 #pragma mark - 推送通知
@@ -153,6 +157,29 @@ static NSString *const allCommentsCellId = @"AllCommentsCellId";
     [self.navigationController pushViewController:userHomeVC animated:YES];
 }
 
+#pragma mark - 归档缓存请求到的数据
+//- (void)thn_cacheData {
+//    NSMutableData *data = [[NSMutableData alloc] init];
+//    NSKeyedArchiver *archiver = [[NSKeyedArchiver alloc] initForWritingWithMutableData:data];
+//    [archiver encodeObject:self.rollList forKey:@"rollList"];
+//    [archiver finishEncoding];
+//    [data writeToFile:homeDataPath atomically:YES];
+//    NSLog(@"缓存轮播图数据");
+//}
+
+#pragma mark - 取本地缓存的数据
+//- (NSMutableArray *)thn_gettingCacheData {
+//    NSMutableData *data = [[NSMutableData alloc] initWithContentsOfFile:homeDataPath];
+//    NSKeyedUnarchiver *unarchiver = [[NSKeyedUnarchiver alloc] initForReadingWithData:data];
+//    if (![unarchiver containsValueForKey:@"rollList"]) {
+//        NSLog(@"还没有缓存");
+//    }
+//    NSMutableArray *rollList = [unarchiver decodeObjectForKey:@"rollList"];
+//    [unarchiver finishDecoding];
+//    NSLog(@"取出缓存的轮播图数据：===== %@", rollList);
+//    return rollList;
+//}
+
 #pragma mark - 网络请求
 - (void)thn_netWorkGroup {
     [self thn_networkRollImageData];
@@ -170,7 +197,7 @@ static NSString *const allCommentsCellId = @"AllCommentsCellId";
     [self.rollImgRequest startRequestSuccess:^(FBRequest *request, id result) {
         NSArray *rollArr = [[result valueForKey:@"data"] valueForKey:@"rows"];
         for (NSDictionary * rollDic in rollArr) {
-            RollImageRow * rollModel = [[RollImageRow alloc] initWithDictionary:rollDic];
+            RollImageRow *rollModel = [[RollImageRow alloc] initWithDictionary:rollDic];
             [self.rollList addObject:rollModel];
         }
         [self.homerollView setRollimageView:self.rollList];
@@ -518,7 +545,6 @@ static NSString *const allCommentsCellId = @"AllCommentsCellId";
     if (!_homerollView) {
         _homerollView = [[FBRollImages alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_WIDTH *0.56)];
         _homerollView.navVC = self.navigationController;
-        
         __weak __typeof(self)weakSelf = self;
         _homerollView.getProjectType = ^ (NSString *idx) {
             [weakSelf thn_networkSubjectInfoData:idx];
