@@ -7,9 +7,9 @@
 //
 
 #import <UIKit/UIKit.h>
-@class UMSocialAccountEntity;
+#import <UMSocialCore/UMSocialCore.h>
 
 @interface THNBingViewController : UIViewController
-@property(nonatomic ,strong) UMSocialAccountEntity *snsAccount;
+@property(nonatomic ,strong) UMSocialUserInfoResponse *snsAccount;
 @property(nonatomic, strong) NSNumber *type;
 @end

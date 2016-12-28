@@ -228,9 +228,6 @@
                     payReq.package = @"Sign=WXPay";
                     payReq.nonceStr= [dataDic objectForKey:@"nonce_str"];
                     payReq.timeStamp= [[dataDic objectForKey:@"time_stamp"] intValue];
-                    //之前签名是本地生成
-                    //                    WXSignParams * signParam = [[WXSignParams alloc] initWithDictionary:dataDic];
-                    //                    payReq.sign= [signParam sign];
                     payReq.sign = [dataDic objectForKey:@"new_sign"];
                     [WXApi sendReq:payReq];
                     [SVProgressHUD dismiss];
@@ -336,8 +333,8 @@
     TYAlertView * alertView = [TYAlertView alertViewWithTitle:@"确认离开支付?" message:@"订单提交成功，如未支付，该订单会在72小时内自动关闭，请尽快付款。"];
     alertView.layer.cornerRadius = 10;
     alertView.buttonDefaultBgColor = [UIColor colorWithHexString:fineixColor];
-    alertView.buttonCancleBgColor = [UIColor colorWithHexString:@"#999999"];
-    TYAlertAction * cancel = [TYAlertAction actionWithTitle:@"取消" style:TYAlertActionStyleCancle handler:nil];
+    alertView.buttonCancelBgColor = [UIColor colorWithHexString:@"#999999"];
+    TYAlertAction * cancel = [TYAlertAction actionWithTitle:@"取消" style:TYAlertActionStyleCancel handler:nil];
     TYAlertAction * ok = [TYAlertAction actionWithTitle:@"确定" style:TYAlertActionStyleDefault handler:^(TYAlertAction *action) {
         [self.navigationController popViewControllerAnimated:YES];
     }];

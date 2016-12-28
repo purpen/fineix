@@ -258,7 +258,7 @@ static NSString *const OrderDetailURL = @"/shopping/detail";
 - (void)confirmReceiptWithCell:(OrderInfoCell *)cell
 {
     TYAlertView * alertView = [TYAlertView alertViewWithTitle:@"确认收货？" message:nil];
-    TYAlertAction * cancel = [TYAlertAction actionWithTitle:@"取消" style:TYAlertActionStyleCancle handler:nil];
+    TYAlertAction * cancel = [TYAlertAction actionWithTitle:@"取消" style:TYAlertActionStyleCancel handler:nil];
     TYAlertAction * confirm = [TYAlertAction actionWithTitle:@"确定" style:TYAlertActionStyleDefault handler:^(TYAlertAction * action) {
         FBRequest * request = [FBAPI postWithUrlString:@"/shopping/take_delivery" requestDictionary:@{@"rid": cell.orderInfo.rid} delegate:self];
         [SVProgressHUD showWithMaskType:SVProgressHUDMaskTypeClear];
@@ -284,8 +284,8 @@ static NSString *const OrderDetailURL = @"/shopping/detail";
     TYAlertView * alertView = [TYAlertView alertViewWithTitle:@"确认删除订单？" message:nil];
     alertView.layer.cornerRadius = 10;
     alertView.buttonDefaultBgColor = [UIColor colorWithHexString:MAIN_COLOR];
-    alertView.buttonCancleBgColor = [UIColor colorWithHexString:@"#999999"];
-    TYAlertAction * cancel = [TYAlertAction actionWithTitle:@"取消" style:TYAlertActionStyleCancle handler:nil];
+    alertView.buttonCancelBgColor = [UIColor colorWithHexString:@"#999999"];
+    TYAlertAction * cancel = [TYAlertAction actionWithTitle:@"取消" style:TYAlertActionStyleCancel handler:nil];
     TYAlertAction * confirm = [TYAlertAction actionWithTitle:@"确定" style:TYAlertActionStyleDefault handler:^(TYAlertAction * action) {
         FBRequest * request = [FBAPI postWithUrlString:@"/my/delete_order" requestDictionary:@{@"rid": cell.orderInfo.rid} delegate:self];
         [SVProgressHUD showWithMaskType:SVProgressHUDMaskTypeClear];
@@ -343,8 +343,8 @@ static NSString *const OrderDetailURL = @"/shopping/detail";
     TYAlertView * alertView = [TYAlertView alertViewWithTitle:@"确认取消订单？" message:nil];
     alertView.layer.cornerRadius = 10;
     alertView.buttonDefaultBgColor = [UIColor colorWithHexString:MAIN_COLOR];
-    alertView.buttonCancleBgColor = [UIColor colorWithHexString:@"#999999"];
-    TYAlertAction * cancel = [TYAlertAction actionWithTitle:@"取消" style:TYAlertActionStyleCancle handler:nil];
+    alertView.buttonCancelBgColor = [UIColor colorWithHexString:@"#999999"];
+    TYAlertAction * cancel = [TYAlertAction actionWithTitle:@"取消" style:TYAlertActionStyleCancel handler:nil];
     TYAlertAction * confirm = [TYAlertAction actionWithTitle:@"确定" style:TYAlertActionStyleDefault handler:^(TYAlertAction * action) {
         FBRequest * request = [FBAPI postWithUrlString:@"/my/cancel_order" requestDictionary:@{@"rid": cell.orderInfo.rid} delegate:self];
         [SVProgressHUD showWithMaskType:SVProgressHUDMaskTypeClear];
@@ -368,8 +368,8 @@ static NSString *const OrderDetailURL = @"/shopping/detail";
     TYAlertView * alertView = [TYAlertView alertViewWithTitle:@"拨打 400-879-8751" message:nil];
     alertView.layer.cornerRadius = 10;
     alertView.buttonDefaultBgColor = [UIColor colorWithHexString:MAIN_COLOR];
-    alertView.buttonCancleBgColor = [UIColor colorWithHexString:@"#999999"];
-    TYAlertAction * cancel = [TYAlertAction actionWithTitle:@"取消" style:TYAlertActionStyleCancle handler:nil];
+    alertView.buttonCancelBgColor = [UIColor colorWithHexString:@"#999999"];
+    TYAlertAction * cancel = [TYAlertAction actionWithTitle:@"取消" style:TYAlertActionStyleCancel handler:nil];
     TYAlertAction * confirm = [TYAlertAction actionWithTitle:@"确定" style:TYAlertActionStyleDefault handler:^(TYAlertAction * action) {
         [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"tel://400-879-8751"]];
     }];
@@ -382,7 +382,7 @@ static NSString *const OrderDetailURL = @"/shopping/detail";
 - (void)tapProductInfoView:(ProductInfoView *)productInfoView withProductInfo:(ProductInfoModel *)productInfo
 {
     FBGoodsInfoViewController * goodsInfoVC = [[FBGoodsInfoViewController alloc] init];
-    goodsInfoVC.goodsID = [NSString stringWithFormat:@"%ld",productInfo.productId];
+    goodsInfoVC.goodsID = [NSString stringWithFormat:@"%@",productInfo.productId];
     [self.navigationController pushViewController:goodsInfoVC animated:YES];
 }
 

@@ -7,7 +7,7 @@
 //
 
 #import "AppDelegate+UMAnalytics.h"
-#import "UMMobClick/MobClick.h"
+#import <UMMobClick/MobClick.h>
 #import "FBAPI.h"
 
 @implementation AppDelegate (UMAnalytics)
@@ -21,7 +21,7 @@
     //    [MobClick setEncryptEnabled:YES];
     
     //crash统计
-    [MobClick setCrashReportEnabled:NO];
+    [MobClick setCrashReportEnabled:YES];
     
     NSString *version = [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleShortVersionString"];
     [MobClick setAppVersion:version];

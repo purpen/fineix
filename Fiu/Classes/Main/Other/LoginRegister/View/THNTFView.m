@@ -25,7 +25,6 @@ static NSString * const XMGPlacerholderColorKeyPath = @"_placeholderLabel.textCo
         [self addSubview:textField];
         self.textField = textField;
         self.textField.tag=20;
-//        [self.textField becomeFirstResponder];
     }
     return self;
 }

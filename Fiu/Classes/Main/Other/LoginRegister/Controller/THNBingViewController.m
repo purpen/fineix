@@ -14,7 +14,7 @@
 #import "FBAPI.h"
 #import "UserInfo.h"
 #import "UserInfoEntity.h"
-#import "UMSocial.h"
+#import <UMSocialCore/UMSocialCore.h>
 #import "WXApi.h"
 #import "WeiboSDK.h"
 #import <TencentOpenAPI/QQApiInterface.h>
@@ -46,11 +46,11 @@ static NSString *const thirdRegisteredNotBinding = @"/auth/third_register_withou
         //如果是微信需要snsAccount.unionId
         params = @{
                    @"third_source":self.type,
-                   @"oid":self.snsAccount.usid,
-                   @"union_id":self.snsAccount.unionId,
+                   @"oid":self.snsAccount.uid,
+                   @"union_id":self.snsAccount.openid,
                    @"access_token":self.snsAccount.accessToken,
-                   @"nickname":self.snsAccount.userName,
-                   @"avatar_url":self.snsAccount.iconURL,
+                   @"nickname":self.snsAccount.name,
+                   @"avatar_url":self.snsAccount.iconurl,
                    @"from_to":@1
                    };
         
@@ -59,11 +59,11 @@ static NSString *const thirdRegisteredNotBinding = @"/auth/third_register_withou
     else{
         params = @{
                    @"third_source":self.type,
-                   @"oid":self.snsAccount.usid,
+                   @"oid":self.snsAccount.uid,
                    //@"union_id":snsAccount.unionId,
                    @"access_token":self.snsAccount.accessToken,
-                   @"nickname":self.snsAccount.userName,
-                   @"avatar_url":self.snsAccount.iconURL,
+                   @"nickname":self.snsAccount.name,
+                   @"avatar_url":self.snsAccount.iconurl,
                    @"from_to":@1
                    };
         

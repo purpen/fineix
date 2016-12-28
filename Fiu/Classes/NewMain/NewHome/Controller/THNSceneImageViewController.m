@@ -177,7 +177,7 @@ static NSString *const URLSceneCheck = @"/user/do_check";
         TYAlertView *alertView = [TYAlertView alertViewWithTitle:nil message:nil];
         alertView.layer.cornerRadius = 10;
         alertView.buttonDefaultBgColor = [UIColor colorWithHexString:MAIN_COLOR];
-        alertView.buttonCancleBgColor = [UIColor colorWithHexString:@"#999999"];
+        alertView.buttonCancelBgColor = [UIColor colorWithHexString:@"#999999"];
         [alertView addAction:[TYAlertAction actionWithTitle:_sceneCheck style:TYAlertActionStyleDestructive handler:^(TYAlertAction *action) {
             [weakSelf thn_networkCheckScene:_isCheck];
         }]];
@@ -193,7 +193,7 @@ static NSString *const URLSceneCheck = @"/user/do_check";
                                            @selector(image:didFinishSavingWithError:contextInfo:),
                                            nil);
         }]];
-        [alertView addAction:[TYAlertAction actionWithTitle:@"取消" style:TYAlertActionStyleCancle handler:^(TYAlertAction *action) {
+        [alertView addAction:[TYAlertAction actionWithTitle:@"取消" style:TYAlertActionStyleCancel handler:^(TYAlertAction *action) {
 
         }]];
         
@@ -205,8 +205,8 @@ static NSString *const URLSceneCheck = @"/user/do_check";
         TYAlertView *alertView = [TYAlertView alertViewWithTitle:nil message:nil];
         alertView.layer.cornerRadius = 10;
         alertView.buttonDefaultBgColor = [UIColor colorWithHexString:MAIN_COLOR];
-        alertView.buttonCancleBgColor = [UIColor colorWithHexString:@"#999999"];
-        [alertView addAction:[TYAlertAction actionWithTitle:@"取消" style:TYAlertActionStyleCancle handler:^(TYAlertAction *action) {
+        alertView.buttonCancelBgColor = [UIColor colorWithHexString:@"#999999"];
+        [alertView addAction:[TYAlertAction actionWithTitle:@"取消" style:TYAlertActionStyleCancel handler:^(TYAlertAction *action) {
             
         }]];
         [alertView addAction:[TYAlertAction actionWithTitle:@"保存图片" style:TYAlertActionStyleDefault handler:^(TYAlertAction *action) {

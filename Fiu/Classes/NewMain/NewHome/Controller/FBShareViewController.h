@@ -11,18 +11,15 @@
 #import "ShareViewController.h"
 #import "FBPopupView.h"
 #import "HomeSceneListRow.h"
-#import "UMSocial.h"
-#import "WXApi.h"
-#import "WeiboSDK.h"
-#import <TencentOpenAPI/QQApiInterface.h>
 #import <SVProgressHUD/SVProgressHUD.h>
+#import <UMSocialCore/UMSocialCore.h>
 
 #import "ShareStyleTopView.h"
 #import "ShareStyleViewOne.h"
 #import "ShareStyleViewTwo.h"
 #import "ShareStyleViewThree.h"
 
-@interface FBShareViewController : UIViewController <UICollectionViewDelegate, UICollectionViewDataSource, UMSocialUIDelegate>
+@interface FBShareViewController : UIViewController <UICollectionViewDelegate, UICollectionViewDataSource>
 
 @pro_strong FBRequest           *   shareTextNumRequest;
 @pro_strong FBRequest           *   sendExpRequest;

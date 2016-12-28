@@ -17,21 +17,18 @@
 #import "HomePageViewController.h"
 #import "THNLoginRegisterViewController.h"
 
+#import <SVProgressHUD/SVProgressHUD.h>
 #import <UserNotifications/UserNotifications.h>
 #import <BaiduMapAPI_Map/BMKMapComponent.h>
-#import <SVProgressHUD/SVProgressHUD.h>
 #import <AlipaySDK/AlipaySDK.h>
-#import "UMessage.h"
-#import "UMSocial.h"
-#import "UMSocialWechatHandler.h"
-#import "UMSocialQQHandler.h"
-#import "UMSocialSinaSSOHandler.h"
 #import "WXApi.h"
+#import "UMessage.h"
 #import "CounterModel.h"
 #import "UITabBar+badge.h"
 #import "IQKeyboardManager.h"
 #import "InviteCCodeViewController.h"
 #import "AppDelegate+UMAnalytics.h"
+#import <UMSocialCore/UMSocialCore.h>
 
 #import "FBGoodsInfoViewController.h"
 #import "THNSceneDetalViewController.h"
@@ -67,6 +64,7 @@ static NSString *const UMMessageAppKey       = @"5791f41b67e58e8de5002568";
 static NSString *const UMMessageMasterSecret = @"6s7pzrgvimmxfpzyc3qvyefgaaoibyiu";
 static NSString *const URLSubjectView        = @"/scene_subject/view";
 static NSString *const ShareURL              = @"http://m.taihuoniao.com/fiu";
+static NSString *const RedirectURL           = @"http://www.taihuoniao.com";
 
 @implementation AppDelegate
 
@@ -148,7 +146,6 @@ static NSString *const ShareURL              = @"http://m.taihuoniao.com/fiu";
     if([notification.request.trigger isKindOfClass:[UNPushNotificationTrigger class]]) {
         if (userInfo) {
             //应用处于前台时的远程推送接受
-//            [[NSNotificationCenter defaultCenter] postNotificationName:@"thnUserInfoNotification" object:self userInfo:userInfo];
             [UMessage setAutoAlert:NO];
         }
         //必须加这句代码
@@ -330,26 +327,26 @@ static NSString *const ShareURL              = @"http://m.taihuoniao.com/fiu";
 
 #pragma mark - 友盟的相关配置
 - (void)thn_setUmengService {
-    //  设置友盟社会化组件appkey
-    [UMSocialData setAppKey:UMSocialAppKey];
-    
     //  注册友盟统计
     [self RegistrUMAnalyticsWithAppkey:UMSocialAppKey];
     
+    //设置友盟appkey
+    [[UMSocialManager defaultManager] setUmSocialAppkey:UMSocialAppKey];
+    
+    // 获取友盟social版本号
+    //NSLog(@"UMeng social version: %@", [UMSocialGlobal umSocialSDKVersion]);
+    
     //  设置微信AppId、appSecret，分享url
-    [UMSocialWechatHandler setWXAppId:WechatAppID appSecret:WechatAppSecret url:@"http://www.taihuoniao.com"];
+    [[UMSocialManager defaultManager] setPlaform:(UMSocialPlatformType_WechatSession) appKey:WechatAppID appSecret:WechatAppSecret redirectURL:RedirectURL];
     
     //  设置手机QQ 的AppId，Appkey，和分享URL
-    [UMSocialQQHandler setQQWithAppId:QQAppID appKey:QQAppKey url:@"http://www.taihuoniao.com"];
+    [[UMSocialManager defaultManager] setPlaform:(UMSocialPlatformType_QQ) appKey:QQAppID appSecret:nil redirectURL:RedirectURL];
     
     //  打开新浪微博的SSO开关，设置新浪微博回调地址
-    [UMSocialSinaSSOHandler openNewSinaSSOWithAppKey:SinaAppKey secret:SinaAppSecret RedirectURL:@"http://www.taihuoniao.com"];
+    [[UMSocialManager defaultManager] setPlaform:(UMSocialPlatformType_Sina) appKey:SinaAppKey appSecret:SinaAppSecret redirectURL:RedirectURL];
     
-    // 未安装客户端平台进行隐藏，在设置QQ、微信AppID之后调用下面的方法
-    [UMSocialConfig hiddenNotInstallPlatforms:@[UMShareToQQ, UMShareToWechatSession, UMShareToWechatTimeline, UMShareToSina]];
-    UMSocialConfig *isHidden = [[UMSocialConfig alloc] init];
-    isHidden.hiddenStatusTip = YES;
-    isHidden.hiddenLoadingHUD = YES;
+    //打开调试日志
+    [[UMSocialManager defaultManager] openLog:YES];
 }
 
 #pragma mark - 注册百度地图代理
@@ -367,7 +364,7 @@ static NSString *const ShareURL              = @"http://m.taihuoniao.com/fiu";
 }
 
 -(void)application:(UIApplication *)application didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken{
-    //  获取device token
+//    获取device token
 //    NSString *deviceTokenStr = [NSString stringWithFormat:@"%@",deviceToken];
 //    deviceTokenStr = [[deviceTokenStr substringWithRange:NSMakeRange(0, 72)] substringWithRange:NSMakeRange(1, 71)];
 //    deviceTokenStr = [deviceTokenStr stringByReplacingOccurrencesOfString:@" " withString:@""];
@@ -377,61 +374,44 @@ static NSString *const ShareURL              = @"http://m.taihuoniao.com/fiu";
 }
 
 -(BOOL)application:(UIApplication *)application handleOpenURL:(NSURL *)url{
-    if ([UMSocialSnsService handleOpenURL:url]) {
-        return YES;
+    BOOL result = [[UMSocialManager defaultManager] handleOpenURL:url];
+    if (!result) {
+        // 其他如支付等SDK的回调
+        if ([WXApi handleOpenURL:url delegate:self]) {
+            return YES;
+        }
+        
+        //如果极简开发包不可用，会跳转支付宝钱包进行支付，需要将支付宝钱包的支付结果回传给开发包
+        if ([url.host isEqualToString:@"safepay"]) {
+            [[AlipaySDK defaultService] processOrderWithPaymentResult:url standbyCallback:^(NSDictionary *resultDic) {
+                //【由于在跳转支付宝客户端支付的过程中，商户app在后台很可能被系统kill了，所以pay接口的callback就会失效，请商户对standbyCallback返回的回调结果进行处理,就是在这个方法里面处理跟callback一样的逻辑】
+                if (_aliDelegate && [_aliDelegate respondsToSelector:@selector(standbyCallbackWithResultDic:)]) {
+                    [_aliDelegate standbyCallbackWithResultDic:resultDic];
+                }
+            }];
+        }
     }
-    if ([WXApi handleOpenURL:url delegate:self]) {
-        return YES;
-    }
-    
-    //如果极简开发包不可用，会跳转支付宝钱包进行支付，需要将支付宝钱包的支付结果回传给开发包
-    if ([url.host isEqualToString:@"safepay"]) {
-        [[AlipaySDK defaultService] processOrderWithPaymentResult:url standbyCallback:^(NSDictionary *resultDic) {
-            //【由于在跳转支付宝客户端支付的过程中，商户app在后台很可能被系统kill了，所以pay接口的callback就会失效，请商户对standbyCallback返回的回调结果进行处理,就是在这个方法里面处理跟callback一样的逻辑】
-            if (_aliDelegate && [_aliDelegate respondsToSelector:@selector(standbyCallbackWithResultDic:)]) {
-                [_aliDelegate standbyCallbackWithResultDic:resultDic];
-            }
-        }];
-    }
-    return YES;
-}
-
--(BOOL)application:(UIApplication *)app openURL:(NSURL *)url options:(NSDictionary<NSString *,id> *)options{
-    [UMSocialSnsService handleOpenURL:url];
-    if ([url.host isEqualToString:@"pay"]) {
-        [WXApi handleOpenURL:url delegate:self];
-    }
-    //如果极简开发包不可用，会跳转支付宝钱包进行支付，需要将支付宝钱包的支付结果回传给开发包
-    if ([url.host isEqualToString:@"safepay"]) {
-        [[AlipaySDK defaultService] processOrderWithPaymentResult:url standbyCallback:^(NSDictionary *resultDic) {
-            //【由于在跳转支付宝客户端支付的过程中，商户app在后台很可能被系统kill了，所以pay接口的callback就会失效，请商户对standbyCallback返回的回调结果进行处理,就是在这个方法里面处理跟callback一样的逻辑】
-            if (_aliDelegate && [_aliDelegate respondsToSelector:@selector(standbyCallbackWithResultDic:)]) {
-                [_aliDelegate standbyCallbackWithResultDic:resultDic];
-            }
-        }];
-    }
-    return YES;
+    return result;
 }
 
 -(BOOL)application:(UIApplication *)application openURL:(NSURL *)url sourceApplication:(NSString *)sourceApplication annotation:(id)annotation{
-    if ([UMSocialSnsService handleOpenURL:url]) {
-        return YES;
+    BOOL result = [[UMSocialManager defaultManager] handleOpenURL:url];
+    if (!result) {
+        if ([WXApi handleOpenURL:url delegate:self]) {
+            return YES;
+        }
+        
+        //如果极简开发包不可用，会跳转支付宝钱包进行支付，需要将支付宝钱包的支付结果回传给开发包
+        if ([url.host isEqualToString:@"safepay"]) {
+            [[AlipaySDK defaultService] processOrderWithPaymentResult:url standbyCallback:^(NSDictionary *resultDic) {
+                //【由于在跳转支付宝客户端支付的过程中，商户app在后台很可能被系统kill了，所以pay接口的callback就会失效，请商户对standbyCallback返回的回调结果进行处理,就是在这个方法里面处理跟callback一样的逻辑】
+                if (_aliDelegate && [_aliDelegate respondsToSelector:@selector(standbyCallbackWithResultDic:)]) {
+                    [_aliDelegate standbyCallbackWithResultDic:resultDic];
+                }
+            }];
+        }
     }
-    if ([WXApi handleOpenURL:url delegate:self]) {
-        return YES;
-    }
-    
-    //如果极简开发包不可用，会跳转支付宝钱包进行支付，需要将支付宝钱包的支付结果回传给开发包
-    if ([url.host isEqualToString:@"safepay"]) {
-        [[AlipaySDK defaultService] processOrderWithPaymentResult:url standbyCallback:^(NSDictionary *resultDic) {
-            //【由于在跳转支付宝客户端支付的过程中，商户app在后台很可能被系统kill了，所以pay接口的callback就会失效，请商户对standbyCallback返回的回调结果进行处理,就是在这个方法里面处理跟callback一样的逻辑】
-            if (_aliDelegate && [_aliDelegate respondsToSelector:@selector(standbyCallbackWithResultDic:)]) {
-                [_aliDelegate standbyCallbackWithResultDic:resultDic];
-            }
-        }];
-    }
-    
-    return YES;
+    return result;
 }
 
 -(void)onReq:(BaseReq*)req
@@ -450,10 +430,6 @@ static NSString *const ShareURL              = @"http://m.taihuoniao.com/fiu";
 
 - (void)applicationWillResignActive:(UIApplication *)application {
     
-}
-
-- (void)applicationDidBecomeActive:(UIApplication *)application {
-    [UMSocialSnsService  applicationDidBecomeActive];
 }
 
 - (void)applicationDidEnterBackground:(UIApplication *)application {

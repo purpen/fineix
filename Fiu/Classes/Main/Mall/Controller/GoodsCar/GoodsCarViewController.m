@@ -447,7 +447,7 @@ static NSString *const URLCarGoPay = @"/shopping/checkout";
             TYAlertView *alertView = [TYAlertView alertViewWithTitle:@"删除商品" message:@"确定将这个商品删除？"];
             alertView.layer.cornerRadius = 10;
             alertView.buttonDefaultBgColor = [UIColor colorWithHexString:MAIN_COLOR];
-            [alertView addAction:[TYAlertAction actionWithTitle:NSLocalizedString(@"cancel", nil) style:(TYAlertActionStyleCancle) handler:nil]];
+            [alertView addAction:[TYAlertAction actionWithTitle:NSLocalizedString(@"cancel", nil) style:(TYAlertActionStyleCancel) handler:nil]];
             [alertView addAction:[TYAlertAction actionWithTitle:NSLocalizedString(@"sure", nil) style:(TYAlertActionStyleDefault) handler:^(TYAlertAction *action) {
                 [self networkDeleteCarItemData:self.chooseItems];
             }]];

@@ -12,20 +12,14 @@
 @interface UIImageView (CornerRadius)
 
 
-+ (UIImageView *)zy_cornerRadiusAdvance:(CGFloat)cornerRadius rectCornerType:(UIRectCorner)rectCornerType;
-
 - (instancetype)initWithCornerRadiusAdvance:(CGFloat)cornerRadius rectCornerType:(UIRectCorner)rectCornerType;
 
 - (void)zy_cornerRadiusAdvance:(CGFloat)cornerRadius rectCornerType:(UIRectCorner)rectCornerType;
-
-+ (UIImageView *)zy_roundingRectImageView;
 
 - (instancetype)initWithRoundingRectImageView;
 
 - (void)zy_cornerRadiusRoundingRect;
 
-- (void)zy_cornerRadiusWithImage:(UIImage *)image cornerRadius:(CGFloat)cornerRadius rectCornerType:(UIRectCorner)rectCornerType;
-
-- (void)zy_cornerRadiusWithImage:(UIImage *)image cornerRadius:(CGFloat)cornerRadius rectCornerType:(UIRectCorner)rectCornerType backgroundColor:(UIColor *)backgroundColor;
+- (void)zy_attachBorderWidth:(CGFloat)width color:(UIColor *)color;
 
 @end

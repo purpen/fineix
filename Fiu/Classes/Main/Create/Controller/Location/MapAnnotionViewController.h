@@ -26,6 +26,6 @@
 @property(nonatomic,strong) NSMutableArray *cityAry;
 
 
-@property (nonatomic, weak) id<MapannotionDelegate> delegate;
+@property (nonatomic, weak) id<MapannotionDelegate> map_delegate;
 
 @end

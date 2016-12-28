@@ -19,5 +19,11 @@ target "Fiu" do
  pod 'TTTAttributedLabel'
  pod 'IDMPhotoBrowser'
  pod 'DACircularProgress'
- pod 'GPUImage', '~> 0.1.7'
+ pod 'GPUImage', '~> 0.1.7' 
+ pod ‘UMengUShare/Social/Sina'
+ pod ‘UMengUShare/Social/WeChat'
+ pod ‘UMengUShare/Social/QQ'
+ pod ‘UMengUShare/Social/AlipayShare'
+ pod ‘UMengUShare/Social/SMS'
+ pod 'UMengAnalytics-NO-IDFA'
 end

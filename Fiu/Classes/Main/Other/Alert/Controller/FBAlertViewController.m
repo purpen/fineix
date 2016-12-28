@@ -117,8 +117,8 @@ static NSInteger const actionBtnTag = 686;
             TYAlertView *cancelAlertView = [TYAlertView alertViewWithTitle:@"情境删除后不可恢复" message:@""];
             cancelAlertView.layer.cornerRadius = 10;
             cancelAlertView.buttonDefaultBgColor = [UIColor colorWithHexString:fineixColor];
-            cancelAlertView.buttonCancleBgColor = [UIColor colorWithHexString:@"#999999"];
-            [cancelAlertView addAction:[TYAlertAction actionWithTitle:@"取消" style:(TYAlertActionStyleCancle) handler:^(TYAlertAction *action) {
+            cancelAlertView.buttonCancelBgColor = [UIColor colorWithHexString:@"#999999"];
+            [cancelAlertView addAction:[TYAlertAction actionWithTitle:@"取消" style:(TYAlertActionStyleCancel) handler:^(TYAlertAction *action) {
                 
             }]];
             [cancelAlertView addAction:[TYAlertAction actionWithTitle:@"确定删除" style:(TYAlertActionStyleDefault) handler:^(TYAlertAction *action) {

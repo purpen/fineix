@@ -22,6 +22,7 @@
 #import "GoodsDesTableViewCell.h"
 #import "InfoBrandTableViewCell.h"
 #import "ShareViewController.h"
+#import <UMSocialCore/UMSocialCore.h>
 
 static NSString *const URLGoodsInfo = @"/product/view";
 static NSString *const URLAddCar = @"/shopping/add_cart";
@@ -533,96 +534,45 @@ static NSString *const ShareURlText = @"我在Fiu浮游™寻找同路人；希�
     [_shareVC.qqBtn addTarget:self action:@selector(qqShareBtnAction:) forControlEvents:(UIControlEventTouchUpInside)];
 }
 
--(void)wechatShareBtnAction:(UIButton*)sender {
-    [UMSocialData defaultData].extConfig.wechatSessionData.url = self.goodsInfo.shareViewUrl;
-    [UMSocialData defaultData].extConfig.wechatSessionData.title = self.goodsInfo.title;
-    UMSocialUrlResource *imgUrl = [[UMSocialUrlResource alloc] initWithSnsResourceType:(UMSocialUrlResourceTypeImage) url:self.goodsInfo.coverUrl];
-    
-    [[UMSocialDataService defaultDataService]  postSNSWithTypes:@[UMShareToWechatSession]
-                                                        content:self.goodsInfo.advantage
-                                                          image:nil
-                                                       location:nil
-                                                    urlResource:imgUrl
-                                            presentedController:self completion:^(UMSocialResponseEntity *response){
-                                                if (response.responseCode == UMSResponseCodeSuccess) {
-                                                    [_shareVC dismissViewControllerAnimated:NO completion:^{
-                                                        [SVProgressHUD showSuccessWithStatus:@"让分享变成生产力，别让生活偷走远方的精彩"];
-                                                    }];
-                                                } else {
-                                                    [_shareVC dismissViewControllerAnimated:NO completion:^{
-                                                        [SVProgressHUD showErrorWithStatus:@"分享失败了:-("];
-                                                    }];
-                                                }
-                                            }];
+- (void)shareTextToPlatformType:(UMSocialPlatformType)platformType {
+    //创建分享消息对象
+    UMSocialMessageObject *messageObject = [UMSocialMessageObject messageObject];
+    //创建网页内容对象
+    UMShareWebpageObject *shareObject = [UMShareWebpageObject shareObjectWithTitle:self.goodsInfo.title descr:self.goodsInfo.advantage thumImage:self.goodsInfo.coverUrl];
+    //设置网页地址
+    shareObject.webpageUrl = self.goodsInfo.shareViewUrl;
+    //分享消息对象设置分享内容对象
+    messageObject.shareObject = shareObject;
+    //调用分享接口
+    //调用分享接口
+    [[UMSocialManager defaultManager] shareToPlatform:platformType messageObject:messageObject currentViewController:self completion:^(id data, NSError *error) {
+        if (error) {
+            [_shareVC dismissViewControllerAnimated:NO completion:nil];
+            [SVProgressHUD showErrorWithStatus:@"分享失败"];
+            
+        } else {
+            [_shareVC dismissViewControllerAnimated:NO completion:nil];
+            [SVProgressHUD showSuccessWithStatus:@"让分享变成生产力，别让生活偷走远方的精彩"];
+        }
+    }];
 }
 
--(void)timelineShareBtnAction:(UIButton*)sender {
-    [UMSocialData defaultData].extConfig.wechatTimelineData.url = self.goodsInfo.shareViewUrl;
-    [UMSocialData defaultData].extConfig.wechatTimelineData.title = self.goodsInfo.title;
-    UMSocialUrlResource *imgUrl = [[UMSocialUrlResource alloc] initWithSnsResourceType:(UMSocialUrlResourceTypeImage) url:self.goodsInfo.coverUrl];
-    
-    [[UMSocialDataService defaultDataService]  postSNSWithTypes:@[UMShareToWechatTimeline]
-                                                        content:self.goodsInfo.advantage
-                                                          image:nil
-                                                       location:nil
-                                                    urlResource:imgUrl
-                                            presentedController:self completion:^(UMSocialResponseEntity *response){
-                                                if (response.responseCode == UMSResponseCodeSuccess) {
-                                                    [_shareVC dismissViewControllerAnimated:NO completion:^{
-                                                        [SVProgressHUD showSuccessWithStatus:@"让分享变成生产力，别让生活偷走远方的精彩"];
-                                                    }];
-                                                } else {
-                                                    [_shareVC dismissViewControllerAnimated:NO completion:^{
-                                                        [SVProgressHUD showErrorWithStatus:@"分享失败了:-("];
-                                                    }];
-                                                }
-                                            }];
+-(void)wechatShareBtnAction:(UIButton*)sender{
+    [self shareTextToPlatformType:(UMSocialPlatformType_WechatSession)];
 }
 
--(void)qqShareBtnAction:(UIButton*)sender {
-    [UMSocialData defaultData].extConfig.qqData.url = self.goodsInfo.shareViewUrl;
-    [UMSocialData defaultData].extConfig.qqData.title = self.goodsInfo.title;
-    UMSocialUrlResource *imgUrl = [[UMSocialUrlResource alloc] initWithSnsResourceType:UMSocialUrlResourceTypeImage url:self.goodsInfo.coverUrl];
-    
-    [[UMSocialDataService defaultDataService]  postSNSWithTypes:@[UMShareToQQ]
-                                                        content:self.goodsInfo.advantage
-                                                          image:nil
-                                                       location:nil
-                                                    urlResource:imgUrl
-                                            presentedController:self
-                                                     completion:^(UMSocialResponseEntity *response){
-                                                         if (response.responseCode == UMSResponseCodeSuccess) {
-                                                             [_shareVC dismissViewControllerAnimated:NO completion:^{
-                                                                 [SVProgressHUD showSuccessWithStatus:@"让分享变成生产力，别让生活偷走远方的精彩"];
-                                                             }];
-                                                         } else {
-                                                             [_shareVC dismissViewControllerAnimated:NO completion:^{
-                                                                 [SVProgressHUD showErrorWithStatus:@"分享失败了:-("];
-                                                             }];
-                                                         }
-                                                     }];
+-(void)timelineShareBtnAction:(UIButton*)sender{
+    [self shareTextToPlatformType:(UMSocialPlatformType_WechatTimeLine)];
 }
 
--(void)sinaShareBtnAction:(UIButton*)sender {
-    UMSocialUrlResource *urlResource = [[UMSocialUrlResource alloc] initWithSnsResourceType:UMSocialUrlResourceTypeImage url:self.goodsInfo.coverUrl];
-    [[UMSocialDataService defaultDataService]  postSNSWithTypes:@[UMShareToSina]
-                                                        content:[NSString stringWithFormat:@"%@，%@。%@", self.goodsInfo.title, self.goodsInfo.advantage, self.goodsInfo.coverUrl]
-                                                          image:nil
-                                                       location:nil
-                                                    urlResource:urlResource
-                                            presentedController:self
-                                                     completion:^(UMSocialResponseEntity *shareResponse){
-                                                         if (shareResponse.responseCode == UMSResponseCodeSuccess) {
-                                                             [_shareVC dismissViewControllerAnimated:NO completion:^{
-                                                                 [SVProgressHUD showSuccessWithStatus:@"让分享变成生产力，别让生活偷走远方的精彩"];
-                                                             }];
-                                                         } else {
-                                                             [_shareVC dismissViewControllerAnimated:NO completion:^{
-                                                                 [SVProgressHUD showErrorWithStatus:@"分享失败了:-("];
-                                                             }];
-                                                         }
-                                                     }];
+-(void)qqShareBtnAction:(UIButton*)sender{
+    [self shareTextToPlatformType:(UMSocialPlatformType_QQ)];
 }
+
+-(void)sinaShareBtnAction:(UIButton*)sender{
+    [self shareTextToPlatformType:(UMSocialPlatformType_Sina)];
+}
+
 
 #pragma mark - 打开商品购买视图
 - (void)OpenGoodsBuyView:(NSInteger)buyState {

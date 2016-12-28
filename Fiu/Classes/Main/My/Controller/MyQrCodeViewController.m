@@ -14,7 +14,7 @@
 #import "SVProgressHUD.h"
 #import "QRCodeScanViewController.h"
 #import "UserInfoEntity.h"
-#import "UMSocial.h"
+#import <UMSocialCore/UMSocialCore.h>
 #import "WXApi.h"
 #import "WeiboSDK.h"
 #import <TencentOpenAPI/QQApiInterface.h>
@@ -167,49 +167,42 @@ static NSString *const ShareURL = @"http://m.taihuoniao.com/guide/app_about";
     }
 }
 
--(void)wechatShareBtnAction:(UIButton*)sender{
-    UMSocialConfig *h = [[UMSocialConfig alloc] init];
-    h.hiddenStatusTip = YES;
-    [UMSocialData defaultData].extConfig.wxMessageType = UMSocialWXMessageTypeImage;
-    [[UMSocialDataService defaultDataService]  postSNSWithTypes:@[UMShareToWechatSession] content:@"" image:_viewImage location:nil urlResource:nil presentedController:self completion:^(UMSocialResponseEntity *response){
-        if (response.responseCode == UMSResponseCodeSuccess) {
+- (void)shareTextToPlatformType:(UMSocialPlatformType)platformType {
+    //创建分享消息对象
+    UMSocialMessageObject *messageObject = [UMSocialMessageObject messageObject];
+    //创建网页内容对象
+    UMShareWebpageObject *shareObject = [UMShareWebpageObject shareObjectWithTitle:nil descr:ShareURlText thumImage:_viewImage];
+    //设置网页地址
+    shareObject.webpageUrl = nil;
+    //分享消息对象设置分享内容对象
+    messageObject.shareObject = shareObject;
+    //调用分享接口
+    //调用分享接口
+    [[UMSocialManager defaultManager] shareToPlatform:platformType messageObject:messageObject currentViewController:self completion:^(id data, NSError *error) {
+        if (error) {
+            [SVProgressHUD showErrorWithStatus:@"分享失败"];
+            
+        } else {
             [SVProgressHUD showSuccessWithStatus:@"让分享变成生产力，别让生活偷走远方的精彩"];
         }
     }];
+}
+
+-(void)wechatShareBtnAction:(UIButton*)sender{
+    [self shareTextToPlatformType:(UMSocialPlatformType_WechatSession)];
 }
 
 -(void)timelineShareBtnAction:(UIButton*)sender{
-    UMSocialConfig *h = [[UMSocialConfig alloc] init];
-    h.hiddenStatusTip = YES;
-    [UMSocialData defaultData].extConfig.wxMessageType = UMSocialWXMessageTypeImage;
-    [[UMSocialDataService defaultDataService]  postSNSWithTypes:@[UMShareToWechatTimeline] content:@"" image:_viewImage location:nil urlResource:nil presentedController:self completion:^(UMSocialResponseEntity *response){
-        if (response.responseCode == UMSResponseCodeSuccess) {
-            [SVProgressHUD showSuccessWithStatus:@"让分享变成生产力，别让生活偷走远方的精彩"];
-        }
-    }];
+    [self shareTextToPlatformType:(UMSocialPlatformType_WechatTimeLine)];
 }
 
 -(void)qqShareBtnAction:(UIButton*)sender{
-    UMSocialConfig *h = [[UMSocialConfig alloc] init];
-    h.hiddenStatusTip = YES;
-    [UMSocialData defaultData].extConfig.qqData.qqMessageType = UMSocialQQMessageTypeImage;
-    [[UMSocialDataService defaultDataService]  postSNSWithTypes:@[UMShareToQQ] content:@"" image:_viewImage location:nil urlResource:nil presentedController:self completion:^(UMSocialResponseEntity *response){
-        if (response.responseCode == UMSResponseCodeSuccess) {
-            [SVProgressHUD showSuccessWithStatus:@"让分享变成生产力，别让生活偷走远方的精彩"];
-        }
-    }];
+    [self shareTextToPlatformType:(UMSocialPlatformType_QQ)];
 }
 
 -(void)sinaShareBtnAction:(UIButton*)sender{
-    UMSocialConfig *h = [[UMSocialConfig alloc] init];
-    h.hiddenStatusTip = YES;
-    [[UMSocialDataService defaultDataService]  postSNSWithTypes:@[UMShareToSina] content:ShareURlText image:_viewImage location:nil urlResource:nil presentedController:self completion:^(UMSocialResponseEntity *shareResponse){
-        if (shareResponse.responseCode == UMSResponseCodeSuccess) {
-            [SVProgressHUD showSuccessWithStatus:@"让分享变成生产力，别让生活偷走远方的精彩"];
-        }
-    }];
+    [self shareTextToPlatformType:(UMSocialPlatformType_Sina)];
 }
-
 
 -(void)cancelBtn:(UIButton*)sender{
     [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent];

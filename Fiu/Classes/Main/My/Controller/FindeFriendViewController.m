@@ -11,7 +11,6 @@
 #import "FriendTableViewCell.h"
 #import "InvitationModel.h"
 #import "QRCodeScanViewController.h"
-#import "UMSocial.h"
 #import "SVProgressHUD.h"
 #import "FBAPI.h"
 #import "FBRequest.h"
@@ -27,6 +26,7 @@
 #import "UIView+FSExtension.h"
 #import "SearchPepoleTableViewCell.h"
 #import "THNMacro.h"
+#import <UMSocialCore/UMSocialCore.h>
 
 static NSString *const ShareURlText = @"我在Fiu浮游™寻找同路人；希望和你一起用文字来记录内心情绪，用滤镜来表达情感色彩，用分享去变现原创价值；带你发现美学科技的力量和感性生活的温度！来吧，去Fiu一下 >>> http://m.taihuoniao.com/fiu";
 
@@ -471,31 +471,35 @@ static NSString *searchCellId = @"search";
             [self.navigationController pushViewController:vc animated:YES];
         }];
     }else{
-        UMSocialConfig *h = [[UMSocialConfig alloc] init];
-        h.hiddenStatusTip = YES;
         if (indexPath.section == 0) {
+            UMSocialMessageObject *messageObject = [UMSocialMessageObject messageObject];
+            messageObject.text = ShareURlText;
+            
             if (indexPath.row == 0) {
                 //微信
-                [[UMSocialDataService defaultDataService]  postSNSWithTypes:@[UMShareToWechatSession] content:ShareURlText image:nil location:nil urlResource:nil presentedController:self completion:^(UMSocialResponseEntity *response){
-                    if (response.responseCode == UMSResponseCodeSuccess) {
+                [[UMSocialManager defaultManager] shareToPlatform:(UMSocialPlatformType_WechatSession) messageObject:messageObject currentViewController:self completion:^(id result, NSError *error) {
+                    if (error) {
+                        NSLog(@"************Share fail with error %@*********",error);
+                    }else{
                         [SVProgressHUD showSuccessWithStatus:@"让分享变成生产力，别让生活偷走远方的精彩"];
                     }
                 }];
                 
             }else if (indexPath.row == 1){
-                //weibo
-                MyQrCodeViewController *vc = [[MyQrCodeViewController alloc] init];
-                [[UMSocialDataService defaultDataService]  postSNSWithTypes:@[UMShareToSina] content:ShareURlText image:vc.qrCodeView.qrCodeImageView.image location:nil urlResource:nil presentedController:self completion:^(UMSocialResponseEntity *response){
-                    if (response.responseCode == UMSResponseCodeSuccess) {
+                //w微博
+                [[UMSocialManager defaultManager] shareToPlatform:(UMSocialPlatformType_Sina) messageObject:messageObject currentViewController:self completion:^(id result, NSError *error) {
+                    if (error) {
+                        NSLog(@"************Share fail with error %@*********",error);
+                    }else{
                         [SVProgressHUD showSuccessWithStatus:@"让分享变成生产力，别让生活偷走远方的精彩"];
                     }
                 }];
             }else if (indexPath.row == 2){
                 //通讯录
-                //            LBAddressBookViewController *vc = [[LBAddressBookViewController alloc] init];
-                //            [self.navigationController pushViewController:vc animated:YES];
-                [[UMSocialDataService defaultDataService]  postSNSWithTypes:@[UMShareToSms] content:ShareURlText image:nil location:nil urlResource:nil presentedController:self completion:^(UMSocialResponseEntity *shareResponse){
-                    if (shareResponse.responseCode == UMSResponseCodeSuccess) {
+                [[UMSocialManager defaultManager] shareToPlatform:(UMSocialPlatformType_Sms) messageObject:messageObject currentViewController:self completion:^(id result, NSError *error) {
+                    if (error) {
+                        NSLog(@"************Share fail with error %@*********",error);
+                    }else{
                         [SVProgressHUD showSuccessWithStatus:@"让分享变成生产力，别让生活偷走远方的精彩"];
                     }
                 }];

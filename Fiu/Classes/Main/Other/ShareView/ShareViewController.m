@@ -8,8 +8,7 @@
 
 #import "ShareViewController.h"
 #import "Fiu.h"
-#import "WXApi.h"
-#import "UMSocial.h"
+#import <UMSocialCore/UMSocialCore.h>
 #import "WXApi.h"
 #import <TencentOpenAPI/QQApiInterface.h>
 #import "WeiboSDK.h"

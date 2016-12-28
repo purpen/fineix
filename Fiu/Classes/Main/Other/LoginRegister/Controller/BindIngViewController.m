@@ -14,10 +14,6 @@
 #import "FBAPI.h"
 #import "UserInfo.h"
 #import "UserInfoEntity.h"
-#import "UMSocial.h"
-#import "WXApi.h"
-#import "WeiboSDK.h"
-#import <TencentOpenAPI/QQApiInterface.h>
 #import "THNInformationViewController.h"
 
 @interface BindIngViewController ()<UITextFieldDelegate>
@@ -61,13 +57,13 @@ static NSString * const XMGPlacerholderColorKeyPath = @"_placeholderLabel.textCo
         else{
             //创建传输参数
             //根据是否是微信登录来确定参数里的unionID
-            if (self.snsAccount.unionId == nil) {
-                self.snsAccount.unionId = @"";
+            if (self.snsAccount.uid == nil) {
+                self.snsAccount.uid = @"";
             }
             NSDictionary *params = @{
                                      @"third_source":self.type,
-                                     @"oid":self.snsAccount.usid,
-                                     @"union_id":self.snsAccount.unionId,
+                                     @"oid":self.snsAccount.openid,
+                                     @"union_id":self.snsAccount.uid,
                                      @"access_token":self.snsAccount.accessToken,
                                      @"account":self.phoneNumTF.text,
                                      @"password":self.pwdTF.text,
@@ -119,11 +115,11 @@ static NSString * const XMGPlacerholderColorKeyPath = @"_placeholderLabel.textCo
         //如果是微信需要snsAccount.unionId
         params = @{
                    @"third_source":self.type,
-                   @"oid":self.snsAccount.usid,
-                   @"union_id":self.snsAccount.unionId,
+                   @"oid":self.snsAccount.openid,
+                   @"union_id":self.snsAccount.uid,
                    @"access_token":self.snsAccount.accessToken,
-                   @"nickname":self.snsAccount.userName,
-                   @"avatar_url":self.snsAccount.iconURL,
+                   @"nickname":self.snsAccount.name,
+                   @"avatar_url":self.snsAccount.iconurl,
                    @"from_to":@1
                    };
         
@@ -132,11 +128,11 @@ static NSString * const XMGPlacerholderColorKeyPath = @"_placeholderLabel.textCo
     else{
         params = @{
                    @"third_source":self.type,
-                   @"oid":self.snsAccount.usid,
+                   @"oid":self.snsAccount.openid,
                    //@"union_id":snsAccount.unionId,
                    @"access_token":self.snsAccount.accessToken,
-                   @"nickname":self.snsAccount.userName,
-                   @"avatar_url":self.snsAccount.iconURL,
+                   @"nickname":self.snsAccount.name,
+                   @"avatar_url":self.snsAccount.iconurl,
                    @"from_to":@1
                    };
         

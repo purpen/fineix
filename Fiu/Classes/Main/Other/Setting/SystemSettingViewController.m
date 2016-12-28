@@ -17,7 +17,6 @@
 #import "UserInfo.h"
 #import "OptionViewController.h"
 #import "AboutViewController.h"
-#import "UMSocial.h"
 #import "Fiu.h"
 #import "ChanePwdViewController.h"
 #import "MyQrCodeViewController.h"
@@ -27,10 +26,11 @@
 #import <TencentOpenAPI/QQApiInterface.h>
 #import "UITabBar+badge.h"
 #import "ServiceViewController.h"
+#import <UMSocialCore/UMSocialCore.h>
 
 static NSString *const ShareURlText = @"我在Fiu浮游™寻找同路人；希望和你一起用文字来记录内心情绪，用滤镜来表达情感色彩，用分享去变现原创价值；带你发现美学科技的力量和感性生活的温度！来吧，去Fiu一下 >>> http://m.taihuoniao.com/fiu";
 
-@interface SystemSettingViewController ()<FBNavigationBarItemsDelegate,NotificationDelege,FBRequestDelegate,UMSocialUIDelegate,ShareViewControllerDelegate>
+@interface SystemSettingViewController ()<FBNavigationBarItemsDelegate,NotificationDelege,FBRequestDelegate,ShareViewControllerDelegate>
 
 @property (weak, nonatomic) IBOutlet UILabel *pushStateLabel;
 @property (weak, nonatomic) IBOutlet UIButton *backBtn;

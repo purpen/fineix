@@ -8,7 +8,7 @@
 
 #import "THNLoginRegisterViewController.h"
 #import "THNSignUpViewController.h"
-#import "UMSocial.h"
+#import <UMSocialCore/UMSocialCore.h>
 #import "WXApi.h"
 #import "WeiboSDK.h"
 #import <TencentOpenAPI/QQApiInterface.h>
@@ -20,15 +20,17 @@
 #import "THNLoginViewController.h"
 #import "THNBingViewController.h"
 #import "THNRedEnvelopeView.h"
+#import <UMSocialCore/UMSocialCore.h>
+#import "UIView+TYAlertView.h"
 
 @interface THNLoginRegisterViewController ()<FBRequestDelegate>
 @property (weak, nonatomic) IBOutlet UIButton *loginBtn;
 @property (weak, nonatomic) IBOutlet UIButton *signUpBtn;
 @property (weak, nonatomic) IBOutlet UIButton *thirdTipBtn;
-@property (weak, nonatomic) IBOutlet UIButton *wechatBtn;
 @property (weak, nonatomic) IBOutlet UIButton *sinaBtn;
 @property (weak, nonatomic) IBOutlet UIButton *qqBtn;
 @property (weak, nonatomic) IBOutlet UIView *thirdView;
+@property (weak, nonatomic) IBOutlet UIButton *wechatBtn;
 
 @end
 
@@ -44,8 +46,6 @@ static NSString *const thirdRegister = @"/auth/third_sign";//第三方登录接�
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.navigationController.navigationBarHidden = YES;
-    self.navView.hidden = YES;
-    
     
     self.loginBtn.layer.masksToBounds = YES;
     self.loginBtn.layer.cornerRadius = 3;
@@ -88,29 +88,43 @@ static NSString *const thirdRegister = @"/auth/third_sign";//第三方登录接�
     [self.navigationController pushViewController:vc animated:YES];
 }
 
-- (IBAction)weixinClick:(id)sender {
+- (IBAction)wechat:(id)sender {
     //微信登录
-    UMSocialSnsPlatform *snsPlatform = [UMSocialSnsPlatformManager getSocialPlatformWithName:UMShareToWechatSession];
-    snsPlatform.loginClickHandler(self,[UMSocialControllerService defaultControllerService],YES,^(UMSocialResponseEntity *response){
-        [SVProgressHUD showWithMaskType:SVProgressHUDMaskTypeClear];
-        if (response.responseCode == UMSResponseCodeSuccess) {
-            //如果微信登录成功，取到用户信息
-            UMSocialAccountEntity *snsAccount = [[UMSocialAccountManager socialAccountDictionary] valueForKey:UMShareToWechatSession];
-            [self afterTheSuccessOfTheThirdPartyToRegisterToGetUserInformation:snsAccount type:@1];
-        }else {
-            [SVProgressHUD showErrorWithStatus:response.message];//错误原因
+//    [self thn_chooseUmengLogin:(UMSocialPlatformType_WechatSession) type:@1];
+    NSLog(@"微信登录");
+}
+
+- (IBAction)sina:(id)sender {
+    //微博登录
+    [self thn_chooseUmengLogin:(UMSocialPlatformType_Sina) type:@2];
+}
+
+- (IBAction)qq:(id)sender {
+    //QQ登录
+    [self thn_chooseUmengLogin:(UMSocialPlatformType_QQ) type:@3];
+}
+
+#pragma mark - 选择第三方的类型
+- (void)thn_chooseUmengLogin:(UMSocialPlatformType)platformType type:(NSNumber *)type {
+    [[UMSocialManager defaultManager] getUserInfoWithPlatform:platformType currentViewController:self completion:^(id result, NSError *error) {
+        UMSocialUserInfoResponse *resp = result;
+        if (error) {
+            [SVProgressHUD showErrorWithStatus:[error localizedDescription]];//错误原因
+        } else {
+            [self afterTheSuccessOfTheThirdPartyToRegisterToGetUserInformation:resp type:type];
         }
-    });
+    }];
 }
 
 #pragma mark -第三方登录成功后取到用户信息
--(void)afterTheSuccessOfTheThirdPartyToRegisterToGetUserInformation:(UMSocialAccountEntity *)snsAccount type:(NSNumber *)type{
+-(void)afterTheSuccessOfTheThirdPartyToRegisterToGetUserInformation:(UMSocialUserInfoResponse *)snsAccount type:(NSNumber *)type{
     NSString *oid;
     if ([type isEqualToNumber:@1]) {
-        oid = snsAccount.unionId;
-    }else{
-        oid = snsAccount.usid;
+        oid = snsAccount.uid;
+    } else {
+        oid = snsAccount.openid;
     }
+
     NSDictionary *params = @{
                              @"oid":oid,
                              @"access_token":snsAccount.accessToken,
@@ -119,8 +133,8 @@ static NSString *const thirdRegister = @"/auth/third_sign";//第三方登录接�
                              };
     FBRequest *request = [FBAPI postWithUrlString:thirdRegister requestDictionary:params delegate:self];
     [request startRequestSuccess:^(FBRequest *request, id result) {
-        [SVProgressHUD dismiss];
         //如果请求成功
+        [SVProgressHUD dismiss];
         NSDictionary *dataDic = [result objectForKey:@"data"];
         if ([[dataDic objectForKey:@"has_user"] isEqualToNumber:@1]){
             //用户存在，更新当前用户的信息
@@ -131,8 +145,7 @@ static NSString *const thirdRegister = @"/auth/third_sign";//第三方登录接�
             UserInfoEntity *entity = [UserInfoEntity defaultUserInfoEntity];
             entity.isLogin = YES;
             NSString *str = dataDic[@"user"][@"identify"][@"is_scene_subscribe"];
-            
-            if ([str intValue] == 0){
+            if ([str integerValue] == 0){
                 //完善个人信息
                 THNInformationViewController *vc = [[THNInformationViewController alloc] init];
                 [self.navigationController pushViewController:vc animated:YES];
@@ -142,7 +155,6 @@ static NSString *const thirdRegister = @"/auth/third_sign";//第三方登录接�
                         THNRedEnvelopeView *alartView = [[THNRedEnvelopeView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT)];
                         [alartView thn_showRedEnvelopeViewOnWindowWithText:NSLocalizedString(@"SendOldRed", nil)];
                     }
-                    
                     [[NSNotificationCenter defaultCenter] postNotificationName:@"refreshSceneData" object:nil];
                 }];
             }
@@ -160,49 +172,6 @@ static NSString *const thirdRegister = @"/auth/third_sign";//第三方登录接�
     }];
 }
 
-- (IBAction)sinaClick:(id)sender {
-    //微博登录
-    UMSocialSnsPlatform *snsPlatform = [UMSocialSnsPlatformManager getSocialPlatformWithName:UMShareToSina];
-    snsPlatform.loginClickHandler(self,[UMSocialControllerService defaultControllerService],YES,^(UMSocialResponseEntity *response){
-        [SVProgressHUD showWithMaskType:SVProgressHUDMaskTypeClear];
-        
-        if (response.responseCode == UMSResponseCodeSuccess) {
-            //如果微博登录成功，取到用户信息
-            UMSocialAccountEntity *snsAccount = [[UMSocialAccountManager socialAccountDictionary] valueForKey:UMShareToSina];
-            
-            [self afterTheSuccessOfTheThirdPartyToRegisterToGetUserInformation:snsAccount type:@2];
-            
-            //得到的数据在回调Block对象形参respone的data属性
-            //                        [[UMSocialDataService defaultDataService] requestSnsInformation:UMShareToWechatSession completion:^(UMSocialResponseEntity *response){
-            //                            NSLog(@"SnsInformation is %@", response.data);
-            //                        }];
-        } else {//如果微博登录失败，提示错误信息
-            [SVProgressHUD showErrorWithStatus:response.message];//错误原因
-        }
-    });
-}
-
-- (IBAction)qqClick:(id)sender {
-    //QQ登录
-    UMSocialSnsPlatform *snsPlatform = [UMSocialSnsPlatformManager getSocialPlatformWithName:UMShareToQQ];
-    snsPlatform.loginClickHandler(self,[UMSocialControllerService defaultControllerService],YES,^(UMSocialResponseEntity *response){
-        
-        [SVProgressHUD showWithMaskType:SVProgressHUDMaskTypeClear];
-        if (response.responseCode == UMSResponseCodeSuccess) {
-            //如果QQ登录成功，取到用户信息
-            UMSocialAccountEntity *snsAccount = [[UMSocialAccountManager socialAccountDictionary] valueForKey:UMShareToQQ];
-            
-            [self afterTheSuccessOfTheThirdPartyToRegisterToGetUserInformation:snsAccount type:@3];
-            
-            //得到的数据在回调Block对象形参respone的data属性
-            //                        [[UMSocialDataService defaultDataService] requestSnsInformation:UMShareToWechatSession completion:^(UMSocialResponseEntity *response){
-            //                            NSLog(@"SnsInformation is %@", response.data);
-            //                        }];
-        } else {//如果QQ登录失败，提示错误信息
-            [SVProgressHUD showErrorWithStatus:response.message];//错误原因
-        }
-    });
-}
 
 -(void)viewDidDisappear:(BOOL)animated{
     [super viewDidDisappear:animated];

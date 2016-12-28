@@ -8,14 +8,13 @@
 
 #import "PaySuccessViewController.h"
 #import "BonusViewController.h"
-#import "UMSocial.h"
 #import "THNOrderInfoViewController.h"
 #import "UIView+TYAlertView.h"
 #import "OrderInfoModel.h"
 #define shareReqFlag  @"shareflge"
 #define bounsReqFlag  @"bounsflge"
 ;
-@interface PaySuccessViewController ()<UMSocialUIDelegate,FBNavigationBarItemsDelegate>
+@interface PaySuccessViewController ()<FBNavigationBarItemsDelegate>
 
 @property (weak, nonatomic) IBOutlet UILabel *orderIdLbl;
 @property (weak, nonatomic) IBOutlet UILabel *paymentWayLbl;

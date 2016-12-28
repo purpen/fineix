@@ -296,36 +296,52 @@ static NSString *const ShareURlText = @"我在Fiu浮游™寻找同路人；希�
     [self networkGiveExp];
 }
 
+- (UMSocialMessageObject *)shareMessageObject {
+    //创建分享消息对象
+    UMSocialMessageObject *messageObject = [UMSocialMessageObject messageObject];
+    //创建图片内容对象
+    UMShareImageObject *shareObject = [[UMShareImageObject alloc] init];
+    shareObject.shareImage = [self shareImage];
+    //分享消息对象设置分享内容对象
+    messageObject.shareObject = shareObject;
+    return messageObject;
+}
+
 -(void)wechatShareBtnAction {
-    [UMSocialData defaultData].extConfig.wxMessageType = UMSocialWXMessageTypeImage;
-    [[UMSocialDataService defaultDataService]  postSNSWithTypes:@[UMShareToWechatSession] content:@"" image:[self shareImage] location:nil urlResource:nil presentedController:self completion:^(UMSocialResponseEntity *response){
-        if (response.responseCode == UMSResponseCodeSuccess) {
+    [[UMSocialManager defaultManager] shareToPlatform:(UMSocialPlatformType_WechatSession) messageObject:[self shareMessageObject] currentViewController:self completion:^(id result, NSError *error) {
+        if (error) {
+            NSLog(@"************Share fail with error %@*********",error);
+        }else{
             [self networkGiveExp];
         }
     }];
 }
 
 -(void)timelineShareBtnAction {
-    [UMSocialData defaultData].extConfig.wxMessageType = UMSocialWXMessageTypeImage;
-    [[UMSocialDataService defaultDataService]  postSNSWithTypes:@[UMShareToWechatTimeline] content:@"" image:[self shareImage] location:nil urlResource:nil presentedController:self completion:^(UMSocialResponseEntity *response){
-        if (response.responseCode == UMSResponseCodeSuccess) {
+    [[UMSocialManager defaultManager] shareToPlatform:(UMSocialPlatformType_WechatTimeLine) messageObject:[self shareMessageObject] currentViewController:self completion:^(id result, NSError *error) {
+        if (error) {
+            NSLog(@"************Share fail with error %@*********",error);
+        }else{
             [self networkGiveExp];
         }
     }];
 }
 
 -(void)qqShareBtnAction {
-    [UMSocialData defaultData].extConfig.qqData.qqMessageType = UMSocialQQMessageTypeImage;
-    [[UMSocialDataService defaultDataService]  postSNSWithTypes:@[UMShareToQQ] content:@"" image:[self shareImage] location:nil urlResource:nil presentedController:self completion:^(UMSocialResponseEntity *response){
-        if (response.responseCode == UMSResponseCodeSuccess) {
+    [[UMSocialManager defaultManager] shareToPlatform:(UMSocialPlatformType_QQ) messageObject:[self shareMessageObject] currentViewController:self completion:^(id result, NSError *error) {
+        if (error) {
+            NSLog(@"************Share fail with error %@*********",error);
+        }else{
             [self networkGiveExp];
         }
     }];
 }
 
 -(void)sinaShareBtnAction {
-    [[UMSocialDataService defaultDataService]  postSNSWithTypes:@[UMShareToSina] content:ShareURlText image:[self shareImage] location:nil urlResource:nil presentedController:self completion:^(UMSocialResponseEntity *shareResponse){
-        if (shareResponse.responseCode == UMSResponseCodeSuccess) {
+    [[UMSocialManager defaultManager] shareToPlatform:(UMSocialPlatformType_Sina) messageObject:[self shareMessageObject] currentViewController:self completion:^(id result, NSError *error) {
+        if (error) {
+            NSLog(@"************Share fail with error %@*********",error);
+        }else{
             [self networkGiveExp];
         }
     }];

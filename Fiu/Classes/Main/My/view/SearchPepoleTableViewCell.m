@@ -17,6 +17,7 @@
 @implementation SearchPepoleTableViewCell
 
 -(void)awakeFromNib{
+    [super awakeFromNib];
     self.headBtn.layer.masksToBounds = YES;
     self.headBtn.layer.cornerRadius = 35 * 0.5;
 }

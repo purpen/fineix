@@ -23,6 +23,7 @@
 @implementation ChatTableViewCell
 
 - (void)awakeFromNib {
+    [super awakeFromNib];
     self.myTextBtn.titleLabel.numberOfLines = 0;
     self.otherTextBtn.titleLabel.numberOfLines = 0;
 }

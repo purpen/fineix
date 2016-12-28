@@ -220,8 +220,8 @@
     TYAlertView *cancelAlertView = [TYAlertView alertViewWithTitle:@"是否返回上一步？" message:@""];
     cancelAlertView.layer.cornerRadius = 10;
     cancelAlertView.buttonDefaultBgColor = [UIColor colorWithHexString:fineixColor];
-    cancelAlertView.buttonCancleBgColor = [UIColor colorWithHexString:@"#999999"];
-    [cancelAlertView addAction:[TYAlertAction actionWithTitle:@"取消创建" style:(TYAlertActionStyleCancle) handler:^(TYAlertAction *action) {
+    cancelAlertView.buttonCancelBgColor = [UIColor colorWithHexString:@"#999999"];
+    [cancelAlertView addAction:[TYAlertAction actionWithTitle:@"取消创建" style:(TYAlertActionStyleCancel) handler:^(TYAlertAction *action) {
         [self dismissViewControllerAnimated:YES completion:nil];
     }]];
     [cancelAlertView addAction:[TYAlertAction actionWithTitle:@"确定" style:(TYAlertActionStyleDefault) handler:^(TYAlertAction *action) {

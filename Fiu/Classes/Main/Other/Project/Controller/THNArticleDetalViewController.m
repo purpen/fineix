@@ -23,6 +23,7 @@
 #import "HomePageViewController.h"
 #import "THNSceneDetalViewController.h"
 #import "THNActiveDetalTwoViewController.h"
+#import <UMSocialCore/UMSocialCore.h>
 
 @interface THNArticleDetalViewController ()<FBNavigationBarItemsDelegate,UIWebViewDelegate>
 
@@ -283,111 +284,48 @@
     [_shareVC.weiBoBtn addTarget:self action:@selector(sinaShareBtnAction:) forControlEvents:UIControlEventTouchUpInside];
 }
 
+- (void)shareTextToPlatformType:(UMSocialPlatformType)platformType {
+    //创建分享消息对象
+    UMSocialMessageObject *messageObject = [UMSocialMessageObject messageObject];
+    //创建网页内容对象
+    UMShareWebpageObject *shareObject = [UMShareWebpageObject shareObjectWithTitle:self.model.title descr:self.model.summary thumImage:self.model.cover_url];
+    //设置网页地址
+    shareObject.webpageUrl = self.model.share_view_url;
+    //分享消息对象设置分享内容对象
+    messageObject.shareObject = shareObject;
+    //调用分享接口
+    //调用分享接口
+    [[UMSocialManager defaultManager] shareToPlatform:platformType messageObject:messageObject currentViewController:self completion:^(id data, NSError *error) {
+        if (error) {
+            [self.shareVC dismissViewControllerAnimated:NO completion:nil];
+            [SVProgressHUD showErrorWithStatus:@"分享失败"];
+            
+        } else {
+            [self.shareVC dismissViewControllerAnimated:NO completion:nil];
+            [SVProgressHUD showSuccessWithStatus:@"让分享变成生产力，别让生活偷走远方的精彩"];
+            FBRequest *request = [FBAPI postWithUrlString:@"/scene_subject/record_share_count" requestDictionary:@{@"id" : self.model._id} delegate:self];
+            [request startRequestSuccess:^(FBRequest *request, id result) {
+                [self.shareBtn setTitle:[NSString stringWithFormat:@"%ld",[self.model.share_count integerValue] + 1] forState:UIControlStateNormal];
+            } failure:nil];
+            
+        }
+    }];
+}
+
 -(void)wechatShareBtnAction:(UIButton*)sender{
-    [UMSocialData defaultData].extConfig.wechatSessionData.url = self.model.share_view_url;
-    [UMSocialData defaultData].extConfig.wechatSessionData.title = self.model.title;
-    UMSocialUrlResource * imgUrl = [[UMSocialUrlResource alloc] initWithSnsResourceType:(UMSocialUrlResourceTypeImage) url:self.model.cover_url];
-    
-    [[UMSocialDataService defaultDataService]  postSNSWithTypes:@[UMShareToWechatSession]
-                                                        content:self.model.summary
-                                                          image:nil
-                                                       location:nil
-                                                    urlResource:imgUrl
-                                            presentedController:self completion:^(UMSocialResponseEntity *response){
-                                                if (response.responseCode == UMSResponseCodeSuccess) {
-                                                    [self.shareVC dismissViewControllerAnimated:NO completion:nil];
-                                                    [SVProgressHUD showSuccessWithStatus:@"让分享变成生产力，别让生活偷走远方的精彩"];
-                                                    FBRequest *request = [FBAPI postWithUrlString:@"/scene_subject/record_share_count" requestDictionary:@{
-                                                                                                                                                           @"id" : self.model._id
-                                                                                                                                                           } delegate:self];
-                                                    [request startRequestSuccess:^(FBRequest *request, id result) {
-                                                        [self.shareBtn setTitle:[NSString stringWithFormat:@"%ld",[self.model.share_count integerValue] + 1] forState:UIControlStateNormal];
-                                                    } failure:nil];
-                                                } else {
-                                                    [self.shareVC dismissViewControllerAnimated:NO completion:nil];
-                                                    [SVProgressHUD showErrorWithStatus:@"分享失败"];
-                                                }
-                                            }];
+    [self shareTextToPlatformType:(UMSocialPlatformType_WechatSession)];
 }
 
 -(void)timelineShareBtnAction:(UIButton*)sender{
-    [UMSocialData defaultData].extConfig.wechatTimelineData.url = self.model.share_view_url;
-    [UMSocialData defaultData].extConfig.wechatTimelineData.title = self.model.title;
-    UMSocialUrlResource * imgUrl = [[UMSocialUrlResource alloc] initWithSnsResourceType:(UMSocialUrlResourceTypeImage) url:self.model.cover_url];
-    
-    [[UMSocialDataService defaultDataService]  postSNSWithTypes:@[UMShareToWechatTimeline]
-                                                        content:self.model.summary
-                                                          image:nil
-                                                       location:nil
-                                                    urlResource:imgUrl
-                                            presentedController:self completion:^(UMSocialResponseEntity *response){
-                                                if (response.responseCode == UMSResponseCodeSuccess) {
-                                                    [self.shareVC dismissViewControllerAnimated:NO completion:nil];
-                                                    [SVProgressHUD showSuccessWithStatus:@"让分享变成生产力，别让生活偷走远方的精彩"];
-                                                    FBRequest *request = [FBAPI postWithUrlString:@"/scene_subject/record_share_count" requestDictionary:@{
-                                                                                                                                                           @"id" : self.model._id
-                                                                                                                                                           } delegate:self];
-                                                    [request startRequestSuccess:^(FBRequest *request, id result) {
-                                                        [self.shareBtn setTitle:[NSString stringWithFormat:@"%ld",[self.model.share_count integerValue] + 1] forState:UIControlStateNormal];
-                                                    } failure:nil];
-                                                } else {
-                                                    [self.shareVC dismissViewControllerAnimated:NO completion:nil];
-                                                    [SVProgressHUD showErrorWithStatus:@"分享失败"];
-                                                }
-                                            }];
+    [self shareTextToPlatformType:(UMSocialPlatformType_WechatTimeLine)];
 }
 
 -(void)qqShareBtnAction:(UIButton*)sender{
-    [UMSocialData defaultData].extConfig.qqData.url = self.model.share_view_url;
-    [UMSocialData defaultData].extConfig.qqData.title = self.model.title;
-    UMSocialUrlResource * imgUrl = [[UMSocialUrlResource alloc] initWithSnsResourceType:UMSocialUrlResourceTypeImage url:self.model.cover_url];
-    
-    [[UMSocialDataService defaultDataService]  postSNSWithTypes:@[UMShareToQQ]
-                                                        content:self.model.summary
-                                                          image:nil
-                                                       location:nil
-                                                    urlResource:imgUrl
-                                            presentedController:self
-                                                     completion:^(UMSocialResponseEntity *response){
-                                                         if (response.responseCode == UMSResponseCodeSuccess) {
-                                                             [self.shareVC dismissViewControllerAnimated:NO completion:nil];
-                                                             [SVProgressHUD showSuccessWithStatus:@"让分享变成生产力，别让生活偷走远方的精彩"];
-                                                             FBRequest *request = [FBAPI postWithUrlString:@"/scene_subject/record_share_count" requestDictionary:@{
-                                                                                                                                                                    @"id" : self.model._id
-                                                                                                                                                                    } delegate:self];
-                                                             [request startRequestSuccess:^(FBRequest *request, id result) {
-                                                                 [self.shareBtn setTitle:[NSString stringWithFormat:@"%ld",[self.model.share_count integerValue] + 1] forState:UIControlStateNormal];
-                                                             } failure:nil];
-                                                         } else {
-                                                             [self.shareVC dismissViewControllerAnimated:NO completion:nil];
-                                                             [SVProgressHUD showErrorWithStatus:@"分享失败"];
-                                                         }
-                                                     }];
+    [self shareTextToPlatformType:(UMSocialPlatformType_QQ)];
 }
 
 -(void)sinaShareBtnAction:(UIButton*)sender{
-    UMSocialUrlResource *urlResource = [[UMSocialUrlResource alloc] initWithSnsResourceType:UMSocialUrlResourceTypeImage url:self.model.cover_url];
-    [[UMSocialDataService defaultDataService]  postSNSWithTypes:@[UMShareToSina]
-                                                        content:[NSString stringWithFormat:@"%@", self.model.title]
-                                                          image:nil
-                                                       location:nil
-                                                    urlResource:urlResource
-                                            presentedController:self
-                                                     completion:^(UMSocialResponseEntity *shareResponse){
-                                                         if (shareResponse.responseCode == UMSResponseCodeSuccess) {
-                                                             [self dismissViewControllerAnimated:NO completion:nil];
-                                                             [SVProgressHUD showSuccessWithStatus:@"让分享变成生产力，别让生活偷走远方的精彩"];
-                                                             FBRequest *request = [FBAPI postWithUrlString:@"/scene_subject/record_share_count" requestDictionary:@{
-                                                                                                                                                                    @"id" : self.model._id
-                                                                                                                                                                    } delegate:self];
-                                                             [request startRequestSuccess:^(FBRequest *request, id result) {
-                                                                 [self.shareBtn setTitle:[NSString stringWithFormat:@"%ld",[self.model.share_count integerValue] + 1] forState:UIControlStateNormal];
-                                                             } failure:nil];
-                                                         } else {
-                                                             [self dismissViewControllerAnimated:NO completion:nil];
-                                                             [SVProgressHUD showErrorWithStatus:@"分享失败"];
-                                                         }
-                                                     }];
+    [self shareTextToPlatformType:(UMSocialPlatformType_Sina)];
 }
 
 -(void)cancleBtnAction:(UIButton*)sender{

@@ -7,7 +7,6 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "UMSocial.h"
 #import "WXApi.h"
 #import "WeiboSDK.h"
 #import <TencentOpenAPI/QQApiInterface.h>

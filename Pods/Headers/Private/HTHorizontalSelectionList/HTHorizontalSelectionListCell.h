@@ -1,1 +1,1 @@
-../../../HTHorizontalSelectionList/HTHorizontalSelectionList/Source/Cells/HTHorizontalSelectionListCell.h
+../../../HTHorizontalSelectionList/Source/Cells/HTHorizontalSelectionListCell.h

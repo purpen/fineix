@@ -461,8 +461,8 @@ static NSString *const OrderInfoCellIdentifier  = @"orderInfoCell";
     TYAlertView * alertView = [TYAlertView alertViewWithTitle:@"确认删除订单？" message:nil];
     alertView.layer.cornerRadius = 10;
     alertView.buttonDefaultBgColor = [UIColor colorWithHexString:fineixColor];
-    alertView.buttonCancleBgColor = [UIColor colorWithHexString:@"#999999"];
-    TYAlertAction * cancel = [TYAlertAction actionWithTitle:@"取消" style:TYAlertActionStyleCancle handler:nil];
+    alertView.buttonCancelBgColor = [UIColor colorWithHexString:@"#999999"];
+    TYAlertAction * cancel = [TYAlertAction actionWithTitle:@"取消" style:TYAlertActionStyleCancel handler:nil];
     TYAlertAction * confirm = [TYAlertAction actionWithTitle:@"确定" style:TYAlertActionStyleDefault handler:^(TYAlertAction * action) {
         FBRequest * request = [FBAPI postWithUrlString:@"/my/delete_order" requestDictionary:@{@"rid": cell.orderInfo.rid} delegate:self];
         [SVProgressHUD showWithMaskType:SVProgressHUDMaskTypeClear];
@@ -484,8 +484,8 @@ static NSString *const OrderInfoCellIdentifier  = @"orderInfoCell";
     TYAlertView * alertView = [TYAlertView alertViewWithTitle:@"确认取消订单？" message:nil];
     alertView.layer.cornerRadius = 10;
     alertView.buttonDefaultBgColor = [UIColor colorWithHexString:fineixColor];
-    alertView.buttonCancleBgColor = [UIColor colorWithHexString:@"#999999"];
-    TYAlertAction * cancel = [TYAlertAction actionWithTitle:@"取消" style:TYAlertActionStyleCancle handler:nil];
+    alertView.buttonCancelBgColor = [UIColor colorWithHexString:@"#999999"];
+    TYAlertAction * cancel = [TYAlertAction actionWithTitle:@"取消" style:TYAlertActionStyleCancel handler:nil];
     TYAlertAction * confirm = [TYAlertAction actionWithTitle:@"确定" style:TYAlertActionStyleDefault handler:^(TYAlertAction * action) {
         FBRequest * request = [FBAPI postWithUrlString:@"/my/cancel_order" requestDictionary:@{@"rid": cell.orderInfo.rid} delegate:self];
         [SVProgressHUD showWithMaskType:SVProgressHUDMaskTypeClear];
@@ -514,8 +514,8 @@ static NSString *const OrderInfoCellIdentifier  = @"orderInfoCell";
     TYAlertView * alertView = [TYAlertView alertViewWithTitle:@"确认收货？" message:nil];
     alertView.layer.cornerRadius = 10;
     alertView.buttonDefaultBgColor = [UIColor colorWithHexString:fineixColor];
-    alertView.buttonCancleBgColor = [UIColor colorWithHexString:@"#999999"];
-    TYAlertAction * cancel = [TYAlertAction actionWithTitle:@"取消" style:TYAlertActionStyleCancle handler:nil];
+    alertView.buttonCancelBgColor = [UIColor colorWithHexString:@"#999999"];
+    TYAlertAction * cancel = [TYAlertAction actionWithTitle:@"取消" style:TYAlertActionStyleCancel handler:nil];
     TYAlertAction * confirm = [TYAlertAction actionWithTitle:@"确定" style:TYAlertActionStyleDefault handler:^(TYAlertAction * action) {
         FBRequest * request = [FBAPI postWithUrlString:@"/shopping/take_delivery" requestDictionary:@{@"rid": cell.orderInfo.rid} delegate:self];
         [SVProgressHUD showWithMaskType:SVProgressHUDMaskTypeClear];

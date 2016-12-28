@@ -6,8 +6,8 @@
 //  Copyright © 2016年 taihuoniao. All rights reserved.
 //
 
-#import "THNViewController.h"
+#import <UIKit/UIKit.h>
 
-@interface THNLoginRegisterViewController : THNViewController
+@interface THNLoginRegisterViewController : UIViewController
 
 @end

@@ -108,7 +108,7 @@ static NSString * const FSPlacerholderColorKeyPath = @"_placeholderLabel.textCol
 -(void)rightBarItemSelected{
     TYAlertView * alertView = [TYAlertView alertViewWithTitle:@"确定删除地址？" message:nil];
     WEAKSELF
-    TYAlertAction * cancel = [TYAlertAction actionWithTitle:@"取消" style:TYAlertActionStyleCancle handler:nil];
+    TYAlertAction * cancel = [TYAlertAction actionWithTitle:@"取消" style:TYAlertActionStyleCancel handler:nil];
     TYAlertAction * confirm = [TYAlertAction actionWithTitle:@"确定" style:TYAlertActionStyleDefault handler:^(TYAlertAction * action) {
         NSDictionary * params = @{@"id": self.deliveryAddress.idField};
         FBRequest * request = [FBAPI postWithUrlString:DeleteAddressURL requestDictionary:params delegate:weakSelf];

@@ -27,6 +27,7 @@
 @implementation THNPeopleView
 
 -(void)awakeFromNib{
+    [super awakeFromNib];
     self.headImageView.layer.masksToBounds = YES;
     self.headImageView.layer.cornerRadius = 25;
     

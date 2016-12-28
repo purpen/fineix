@@ -441,8 +441,8 @@ static NSString *const PhoneNumber = @"拨打 400-879-8751";
     TYAlertView *alertView = [TYAlertView alertViewWithTitle:title message:nil];
     alertView.layer.cornerRadius = 10;
     alertView.buttonDefaultBgColor = [UIColor colorWithHexString:MAIN_COLOR];
-    alertView.buttonCancleBgColor = [UIColor colorWithHexString:@"#999999"];
-    TYAlertAction * cancel = [TYAlertAction actionWithTitle:@"取消" style:TYAlertActionStyleCancle handler:nil];
+    alertView.buttonCancelBgColor = [UIColor colorWithHexString:@"#999999"];
+    TYAlertAction * cancel = [TYAlertAction actionWithTitle:@"取消" style:TYAlertActionStyleCancel handler:nil];
     TYAlertAction * confirm = [TYAlertAction actionWithTitle:@"确定" style:TYAlertActionStyleDefault handler:^(TYAlertAction * action) {
         if (type == 1) {
             [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"tel://400-879-8751"]];

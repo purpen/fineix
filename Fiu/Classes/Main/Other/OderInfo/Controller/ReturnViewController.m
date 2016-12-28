@@ -150,7 +150,7 @@ static NSString *const OrderListURL = @"/shopping/orders";
 - (void)deleteOrderWithCell:(OrderInfoCell *)cell
 {
     TYAlertView * alertView = [TYAlertView alertViewWithTitle:@"确认删除订单？" message:nil];
-    TYAlertAction * cancel = [TYAlertAction actionWithTitle:@"取消" style:TYAlertActionStyleCancle handler:nil];
+    TYAlertAction * cancel = [TYAlertAction actionWithTitle:@"取消" style:TYAlertActionStyleCancel handler:nil];
     TYAlertAction * confirm = [TYAlertAction actionWithTitle:@"确定" style:TYAlertActionStyleDefault handler:^(TYAlertAction * action) {
         FBRequest * request = [FBAPI postWithUrlString:@"/my/delete_order" requestDictionary:@{@"rid": cell.orderInfo.rid} delegate:self];
         [SVProgressHUD showWithMaskType:SVProgressHUDMaskTypeClear];
