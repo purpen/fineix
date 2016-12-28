@@ -287,8 +287,6 @@
     
 }
 
-
-
 //请求订单状态以核实支付是否完成
 - (void)checkOrderInfoForPayStatusWithPaymentWay:(NSString *)paymentWay
 {

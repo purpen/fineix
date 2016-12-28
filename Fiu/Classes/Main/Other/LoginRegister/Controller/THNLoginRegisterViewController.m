@@ -108,7 +108,7 @@ static NSString *const thirdRegister = @"/auth/third_sign";//第三方登录接�
     [[UMSocialManager defaultManager] getUserInfoWithPlatform:platformType currentViewController:self completion:^(id result, NSError *error) {
         UMSocialUserInfoResponse *resp = result;
         if (error) {
-            [SVProgressHUD showErrorWithStatus:[error localizedDescription]];//错误原因
+            [SVProgressHUD showErrorWithStatus:@"登录失败"];//错误原因
         } else {
             [self afterTheSuccessOfTheThirdPartyToRegisterToGetUserInformation:resp type:type];
         }
@@ -118,15 +118,8 @@ static NSString *const thirdRegister = @"/auth/third_sign";//第三方登录接�
 #pragma mark -第三方登录成功后取到用户信息
 -(void)afterTheSuccessOfTheThirdPartyToRegisterToGetUserInformation:(UMSocialUserInfoResponse *)snsAccount type:(NSNumber *)type{
     [SVProgressHUD showWithMaskType:SVProgressHUDMaskTypeClear];
-    NSString *oid;
-    if ([type isEqualToNumber:@1]) {
-        oid = snsAccount.uid;
-    } else {
-        oid = snsAccount.openid;
-    }
-
     NSDictionary *params = @{
-                             @"oid":oid,
+                             @"oid":snsAccount.uid,
                              @"access_token":snsAccount.accessToken,
                              @"type":type,
                              @"from_to":@1
