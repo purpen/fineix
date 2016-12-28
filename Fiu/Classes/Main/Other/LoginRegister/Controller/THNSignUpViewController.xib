@@ -35,22 +35,21 @@
                             <rect key="frame" x="20" y="54" width="128.5" height="28"/>
                             <state key="normal" image="l_weiChat"/>
                             <connections>
-                                <action selector="wechat:" destination="-1" eventType="touchUpInside" id="aQw-aN-11D"/>
-                                <action selector="weichat:" destination="-1" eventType="touchUpInside" id="den-sd-uGA"/>
+                                <action selector="wechat:" destination="-1" eventType="touchUpInside" id="0AX-Ox-5hf"/>
                             </connections>
                         </button>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0j1-Bc-Ssa">
                             <rect key="frame" x="148.5" y="55" width="78" height="27"/>
                             <state key="normal" image="l_sina"/>
                             <connections>
-                                <action selector="sina:" destination="-1" eventType="touchUpInside" id="Euu-2p-cd7"/>
+                                <action selector="sina:" destination="-1" eventType="touchUpInside" id="gM6-kQ-MNL"/>
                             </connections>
                         </button>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Pab-FO-M2k">
                             <rect key="frame" x="226.5" y="52" width="128.5" height="30"/>
                             <state key="normal" image="l_qq"/>
                             <connections>
-                                <action selector="qq:" destination="-1" eventType="touchUpInside" id="TbR-Qe-ZYy"/>
+                                <action selector="qq:" destination="-1" eventType="touchUpInside" id="Nxf-rq-mOc"/>
                             </connections>
                         </button>
                         <button opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" adjustsImageWhenHighlighted="NO" adjustsImageWhenDisabled="NO" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bjf-Yb-NI5">

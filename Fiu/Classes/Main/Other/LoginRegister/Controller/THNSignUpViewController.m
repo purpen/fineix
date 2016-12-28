@@ -124,6 +124,7 @@ static NSString *const thirdRegister = @"/auth/third_sign";//第三方登录接�
 
 #pragma mark -第三方登录成功后取到用户信息
 -(void)afterTheSuccessOfTheThirdPartyToRegisterToGetUserInformation:(UMSocialUserInfoResponse *)snsAccount type:(NSNumber *)type{
+    [SVProgressHUD showWithMaskType:SVProgressHUDMaskTypeClear];
     NSString *oid;
     if ([type isEqualToNumber:@1]) {
         oid = snsAccount.uid;

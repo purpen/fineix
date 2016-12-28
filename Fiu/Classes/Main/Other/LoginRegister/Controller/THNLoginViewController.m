@@ -163,8 +163,7 @@ static NSString *const thirdRegister = @"/auth/third_sign";//第三方登录接�
 
 - (IBAction)wechat:(id)sender {
     //微信登录
-//    [self thn_chooseUmengLogin:(UMSocialPlatformType_WechatSession) type:@1];
-    NSLog(@"微信登录");
+    [self thn_chooseUmengLogin:(UMSocialPlatformType_WechatSession) type:@1];
 }
 
 - (IBAction)sina:(id)sender {
