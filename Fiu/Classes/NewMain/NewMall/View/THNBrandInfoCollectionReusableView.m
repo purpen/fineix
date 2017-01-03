@@ -21,9 +21,6 @@
 
 - (void)setBrandInfoData:(BrandInfoData *)model {
     [self.brandBgImg downloadImage:model.bannerUrl place:[UIImage imageNamed:@""]];
-    UIView * bgView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 210)];
-    bgView.backgroundColor = [UIColor colorWithHexString:@"#555555" alpha:.2];
-    [_brandBgImg addSubview:bgView];
     if (model.coverUrl.length) {
         [self.brandImg downloadImage:model.coverUrl place:[UIImage imageNamed:@""]];
     }
@@ -84,6 +81,9 @@
         _brandBgImg.contentMode = UIViewContentModeScaleAspectFill;
         _brandBgImg.clipsToBounds = YES;
         _brandBgImg.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"Defaul_Bg_420"]];
+        UIView * bgView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 210)];
+        bgView.backgroundColor = [UIColor colorWithHexString:@"#555555" alpha:.2];
+        [_brandBgImg addSubview:bgView];
     }
     return _brandBgImg;
 }
