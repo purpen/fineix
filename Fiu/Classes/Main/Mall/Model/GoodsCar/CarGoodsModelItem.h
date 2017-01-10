@@ -20,6 +20,7 @@
 @property (nonatomic, assign) NSInteger type;
 @property (nonatomic, assign) NSInteger productId;
 @property (nonatomic, assign) NSInteger vopId;
+@property (nonatomic, strong) NSString *referralCode;
 
 -(instancetype)initWithDictionary:(NSDictionary *)dictionary;
 

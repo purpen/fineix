@@ -42,6 +42,11 @@
     if(![dictionary[@"title"] isKindOfClass:[NSNull class]]){
         self.title = dictionary[@"title"];
     }
+    
+    if(![dictionary[@"referral_code"] isKindOfClass:[NSNull class]]){
+        self.referralCode = dictionary[@"referral_code"];
+    }
+    
     if(![dictionary[@"total_price"] isKindOfClass:[NSNull class]]){
         self.totalPrice = [dictionary[@"total_price"] floatValue];
     }

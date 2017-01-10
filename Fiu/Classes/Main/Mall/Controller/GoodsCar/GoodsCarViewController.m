@@ -272,7 +272,11 @@ static NSString *const URLCarGoPay = @"/shopping/checkout";
     NSString * type = [NSString stringWithFormat:@"%@", [self.carItemList valueForKey:@"type"][indexPath.section]];
     NSString * targetId = [self.carItemList valueForKey:@"targetId"][indexPath.section];
     NSString * n = [NSString stringWithFormat:@"%@", [self.carItemList valueForKey:@"n"][indexPath.section]];
-    NSDictionary * chooseDict = @{@"type":type, @"target_id":targetId, @"n":n};
+    NSString * referralCode = [self.carItemList valueForKey:@"referralCode"][indexPath.section];
+    if (referralCode.length == 0) {
+        referralCode = @"";
+    }
+    NSDictionary * chooseDict = @{@"type":type, @"target_id":targetId, @"n":n, @"referral_code":referralCode};
     CGFloat payMoney = [self.priceMarr[indexPath.section] floatValue];
     
     if (button.selected == YES) {
@@ -398,7 +402,11 @@ static NSString *const URLCarGoPay = @"/shopping/checkout";
             NSString * type = [NSString stringWithFormat:@"%@", [self.carItemList valueForKey:@"type"][idx]];
             NSString * targetId = [self.carItemList valueForKey:@"targetId"][idx];
             NSString * n = [NSString stringWithFormat:@"%@", [self.carItemList valueForKey:@"n"][idx]];
-            NSDictionary * chooseDict = @{@"type":type, @"target_id":targetId, @"n":n};
+            NSString * referralCode = [self.carItemList valueForKey:@"referralCode"][idx];
+            if (referralCode.length == 0) {
+                referralCode = @"";
+            }
+            NSDictionary * chooseDict = @{@"type":type, @"target_id":targetId, @"n":n, @"referral_code":referralCode};
             [self.chooseItems addObject:chooseDict];
             
             //  合计价格
