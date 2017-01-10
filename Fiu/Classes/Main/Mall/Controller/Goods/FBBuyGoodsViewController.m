@@ -195,13 +195,8 @@
     if ([self isUserLogin]) {
         if (self.skuId.length > 0) {
             NSString * num = [NSString stringWithFormat:@"%zi", self.num];
-            NSString * type;
+            NSString * type = @"2";
             NSString * targetId;
-            if ([[self.goodsSkus valueForKey:@"mode"][0] isEqualToString:NSLocalizedString(@"Default", nil)]) {
-                type = @"1";
-            } else {
-                type = @"2";
-            }
             targetId = self.skuId;
             NSDictionary * orderDict = @{@"target_id":targetId, @"type":type, @"n":num, @"referral_code":[self thn_getGoodsReferralCode]};
             [self dismissViewControllerAnimated:YES completion:^{
@@ -221,13 +216,8 @@
     if ([self isUserLogin]) {
         if (self.skuId.length > 0) {
             NSString * num = [NSString stringWithFormat:@"%zi", self.num];
-            NSString * type;
+            NSString * type = @"2";
             NSString * targetId;
-            if ([[self.goodsSkus valueForKey:@"mode"][0] isEqualToString:NSLocalizedString(@"Default", nil)]) {
-                type = @"1";
-            } else {
-                type = @"2";
-            }
             targetId = self.skuId;
             NSDictionary *orderDict = @{@"target_id":targetId, @"type":type, @"n":num, @"referral_code":[self thn_getGoodsReferralCode]};
             [self dismissViewControllerAnimated:YES completion:^{

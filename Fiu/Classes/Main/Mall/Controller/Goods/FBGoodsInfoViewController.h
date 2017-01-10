@@ -33,6 +33,7 @@
 @pro_strong FBSegmentView   *   menuView;
 
 @pro_strong NSString        *   goodsID;            //  商品id
+@pro_strong FBRequest       *   buyingRequest;
 @pro_strong FBRequest       *   goodsInfoRequest;
 @pro_strong FBRequest       *   addCarRequest;
 @pro_strong FBRequest       *   collectRequest;

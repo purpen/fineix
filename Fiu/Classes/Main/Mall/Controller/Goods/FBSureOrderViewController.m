@@ -60,6 +60,8 @@ static NSString *const URLFreight = @"/shopping/fetch_freight";
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    [SVProgressHUD show];
+    
     [self networkUserAddress];
     
     if (self.type == 1) {
@@ -74,9 +76,11 @@ static NSString *const URLFreight = @"/shopping/fetch_freight";
 #pragma mark - 网络请求
 #pragma mark 立即购买
 - (void)networkBuyingOrderData {
-    [SVProgressHUD show];
     self.buyingRequest = [FBAPI postWithUrlString:URLBuying requestDictionary:self.orderDict delegate:self];
     [self.buyingRequest startRequestSuccess:^(FBRequest *request, id result) {
+        if ([[result valueForKey:@"success"] integerValue] == 1) {
+            [self.view addSubview:self.sureView];
+        }
         NSDictionary *dict = [result valueForKey:@"data"];
         //  合计价格
         self.payPrice = dict[@"pay_money"];
@@ -116,6 +120,9 @@ static NSString *const URLFreight = @"/shopping/fetch_freight";
 
 #pragma mark 购物车下单
 - (void)networkCarGoPayData:(id)result {
+    if ([[result valueForKey:@"success"] integerValue] == 1) {
+        [self.view addSubview:self.sureView];
+    }
     NSDictionary *dict = [result valueForKey:@"data"];
     //  合计价格
     self.payPrice = dict[@"pay_money"];
@@ -200,7 +207,7 @@ static NSString *const URLFreight = @"/shopping/fetch_freight";
         if ([[result objectForKey:@"success"] isEqualToNumber:@1]) {
             if ([self.orderInfo.payMoney isEqual:@0]) {
                 [self checkOrderInfoForPayStatusWithPaymentWay:nil];
-            }else{
+            } else {
                 FBPayTheWayViewController * payWayVC = [[FBPayTheWayViewController alloc] init];
                 payWayVC.orderInfo = self.orderInfo;
                 [self.navigationController pushViewController:payWayVC animated:YES];
@@ -246,7 +253,6 @@ static NSString *const URLFreight = @"/shopping/fetch_freight";
     self.sendTime = NSLocalizedString(@"anySendTime", nil);
     _isUserBouns = NO;
     [self.view addSubview:self.orderTable];
-    [self.view addSubview:self.sureView];
 }
 
 #pragma makr - 订单视图

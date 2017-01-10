@@ -31,6 +31,7 @@ static NSString *const URlCancelCollect = @"/favorite/ajax_cancel_favorite";
 static NSString *const URLSceneList = @"/sight_and_product/getlist";
 static NSString *const URLLikeScene = @"/favorite/ajax_love";
 static NSString *const URLCancelLike = @"/favorite/ajax_cancel_love";
+static NSString *const URLBuying = @"/shopping/now_buy";
 static NSString *const SceneListCellId = @"SceneListCellId";
 
 static NSString *const ShareURlText = @"我在Fiu浮游™寻找同路人；希望和你一起用文字来记录内心情绪，用滤镜来表达情感色彩，用分享去变现原创价值；带你发现美学科技的力量和感性生活的温度！来吧，去Fiu一下 >>> http://m.taihuoniao.com/fiu";
@@ -130,6 +131,26 @@ static NSString *const ShareURlText = @"我在Fiu浮游™寻找同路人；希�
         [self showMessage:[error localizedDescription]];
     }];
 }
+
+#pragma mark 立即购买
+- (void)networkBuyingOrderData:(NSDictionary *)orderDict {
+    [SVProgressHUD show];
+    self.buyingRequest = [FBAPI postWithUrlString:URLBuying requestDictionary:orderDict delegate:self];
+    [self.buyingRequest startRequestSuccess:^(FBRequest *request, id result) {
+        if ([[result valueForKey:@"success"] integerValue] == 1) {
+            FBSureOrderViewController * sureOrderVC = [[FBSureOrderViewController alloc] init];
+            sureOrderVC.orderDict = orderDict;
+            sureOrderVC.type = 1;
+            [self.navigationController pushViewController:sureOrderVC animated:YES];
+        }
+
+        [SVProgressHUD dismiss];
+        
+    } failure:^(FBRequest *request, NSError *error) {
+        [SVProgressHUD showErrorWithStatus:[error localizedDescription]];
+    }];
+}
+
 
 #pragma mark 商品收藏
 - (void)networkCollectGoods:(BOOL)selected {
@@ -583,10 +604,7 @@ static NSString *const ShareURlText = @"我在Fiu浮游™寻找同路人；希�
     
     //  立即购买
     buyVC.buyingGoodsBlock = ^(NSDictionary * dict) {
-        FBSureOrderViewController * sureOrderVC = [[FBSureOrderViewController alloc] init];
-        sureOrderVC.orderDict = dict;
-        sureOrderVC.type = 1;
-        [self.navigationController pushViewController:sureOrderVC animated:YES];
+        [self networkBuyingOrderData:dict];
     };
     
     //  加入购物车
