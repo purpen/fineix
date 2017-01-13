@@ -380,7 +380,6 @@
 		1FA204E51D378AAB00B89699 /* UIView+Size.m in Sources */ = {isa = PBXBuildFile; fileRef = 1FA204E41D378AAB00B89699 /* UIView+Size.m */; };
 		1FBA9EA81D9E07C800D7FDA6 /* RecipeCollectionHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1FBA9EA61D9E07C800D7FDA6 /* RecipeCollectionHeaderView.m */; };
 		1FBA9EA91D9E07C800D7FDA6 /* RecipeCollectionHeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1FBA9EA71D9E07C800D7FDA6 /* RecipeCollectionHeaderView.xib */; };
-		1FC6782E1CDB33ED00535162 /* UIView+TYAlertView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1FC6782C1CDB33ED00535162 /* UIView+TYAlertView.m */; };
 		1FCDCC871D07F50D00C92E78 /* ServiceViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1FCDCC851D07F50D00C92E78 /* ServiceViewController.m */; };
 		1FCDCC881D07F50D00C92E78 /* ServiceViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1FCDCC861D07F50D00C92E78 /* ServiceViewController.xib */; };
 		1FCDCC8D1D08085000C92E78 /* InviteCCodeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1FCDCC8B1D08085000C92E78 /* InviteCCodeViewController.m */; };
@@ -460,6 +459,7 @@
 		D81318201D928DE3007CE71C /* ShareStyleViewTwo.m in Sources */ = {isa = PBXBuildFile; fileRef = D813181F1D928DE3007CE71C /* ShareStyleViewTwo.m */; };
 		D81318231D928DF4007CE71C /* ShareStyleViewThree.m in Sources */ = {isa = PBXBuildFile; fileRef = D81318221D928DF4007CE71C /* ShareStyleViewThree.m */; };
 		D81EA4011D2A52DD0032FAAB /* FiuBrandListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D81EA4001D2A52DD0032FAAB /* FiuBrandListViewController.m */; };
+		D83625BA1E28C7C5005F2BB9 /* THNAllianceViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D83625B91E28C7C5005F2BB9 /* THNAllianceViewController.m */; };
 		D8375A681DDC49370099F385 /* FSFliterImage.m in Sources */ = {isa = PBXBuildFile; fileRef = D8375A671DDC49370099F385 /* FSFliterImage.m */; };
 		D83A64321C8E7765003DB8BB /* Photos.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D83A64311C8E7765003DB8BB /* Photos.framework */; };
 		D83A64331C8E7E93003DB8BB /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D802D7891C844101007AFA3D /* AVFoundation.framework */; };
@@ -1354,8 +1354,6 @@
 		1FBA9EA51D9E07C800D7FDA6 /* RecipeCollectionHeaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RecipeCollectionHeaderView.h; sourceTree = "<group>"; };
 		1FBA9EA61D9E07C800D7FDA6 /* RecipeCollectionHeaderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RecipeCollectionHeaderView.m; sourceTree = "<group>"; };
 		1FBA9EA71D9E07C800D7FDA6 /* RecipeCollectionHeaderView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RecipeCollectionHeaderView.xib; sourceTree = "<group>"; };
-		1FC6782C1CDB33ED00535162 /* UIView+TYAlertView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+TYAlertView.m"; sourceTree = "<group>"; };
-		1FC6782D1CDB33ED00535162 /* UIView+TYAutoLayout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+TYAutoLayout.h"; sourceTree = "<group>"; };
 		1FCDCC841D07F50D00C92E78 /* ServiceViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ServiceViewController.h; sourceTree = "<group>"; };
 		1FCDCC851D07F50D00C92E78 /* ServiceViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ServiceViewController.m; sourceTree = "<group>"; };
 		1FCDCC861D07F50D00C92E78 /* ServiceViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ServiceViewController.xib; sourceTree = "<group>"; };
@@ -1509,6 +1507,8 @@
 		D81EA3FF1D2A52DD0032FAAB /* FiuBrandListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FiuBrandListViewController.h; sourceTree = "<group>"; };
 		D81EA4001D2A52DD0032FAAB /* FiuBrandListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FiuBrandListViewController.m; sourceTree = "<group>"; };
 		D82562401D8FC4E400C3C2A7 /* Fiu.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Fiu.entitlements; sourceTree = "<group>"; };
+		D83625B81E28C7C5005F2BB9 /* THNAllianceViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THNAllianceViewController.h; sourceTree = "<group>"; };
+		D83625B91E28C7C5005F2BB9 /* THNAllianceViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THNAllianceViewController.m; sourceTree = "<group>"; };
 		D8375A661DDC49370099F385 /* FSFliterImage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FSFliterImage.h; sourceTree = "<group>"; };
 		D8375A671DDC49370099F385 /* FSFliterImage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FSFliterImage.m; sourceTree = "<group>"; };
 		D83A64311C8E7765003DB8BB /* Photos.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Photos.framework; path = System/Library/Frameworks/Photos.framework; sourceTree = SDKROOT; };
@@ -3706,8 +3706,6 @@
 			children = (
 				1FF36EA71D5099AA00EB3C93 /* UIView+FSExtension.h */,
 				1FF36EA81D5099AA00EB3C93 /* UIView+FSExtension.m */,
-				1FC6782C1CDB33ED00535162 /* UIView+TYAlertView.m */,
-				1FC6782D1CDB33ED00535162 /* UIView+TYAutoLayout.h */,
 				D8035F2D1CB77D0C001920F9 /* UIImage+Helper.h */,
 				D8035F2E1CB77D0C001920F9 /* UIImage+Helper.m */,
 				D80D415D1CAD144D005D72B1 /* UIBarButtonItem+Helper.h */,
@@ -3836,6 +3834,39 @@
 			path = FiuBrandList;
 			sourceTree = "<group>";
 		};
+		D83625B11E28C773005F2BB9 /* NewAlliance */ = {
+			isa = PBXGroup;
+			children = (
+				D83625B21E28C773005F2BB9 /* Controller */,
+				D83625B31E28C773005F2BB9 /* Model */,
+				D83625B41E28C773005F2BB9 /* View */,
+			);
+			path = NewAlliance;
+			sourceTree = "<group>";
+		};
+		D83625B21E28C773005F2BB9 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				D83625B81E28C7C5005F2BB9 /* THNAllianceViewController.h */,
+				D83625B91E28C7C5005F2BB9 /* THNAllianceViewController.m */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		D83625B31E28C773005F2BB9 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		D83625B41E28C773005F2BB9 /* View */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
 		D8482D061E136231000B511C /* Vendors */ = {
 			isa = PBXGroup;
 			children = (
@@ -3911,6 +3942,7 @@
 				D85174471D5878C8005F5722 /* NewMall */,
 				D851744B1D5878C8005F5722 /* NewMyCenter */,
 				D857ABF71DE6844600F924E8 /* NewOrder */,
+				D83625B11E28C773005F2BB9 /* NewAlliance */,
 				D81317DE1D922173007CE71C /* NewOther */,
 			);
 			path = NewMain;
@@ -5295,6 +5327,7 @@
 				D86E54BB1DD444230075ED88 /* FSFiveInputFilter.m in Sources */,
 				D8ACF46D1D6EBAA500DB79D8 /* SearchBrandViewController.m in Sources */,
 				1F2A8FB31CF40277005116C7 /* BrandInfo.m in Sources */,
+				D83625BA1E28C7C5005F2BB9 /* THNAllianceViewController.m in Sources */,
 				D8ACF45B1D6C9B3000DB79D8 /* THNSceneListViewController.m in Sources */,
 				1F2A8FDE1CF40277005116C7 /* InfoBrandTableViewCell.m in Sources */,
 				1F2AFC6A1D88170B00DA6035 /* HomePageViewController.m in Sources */,
@@ -5379,7 +5412,6 @@
 				1F2AFC751D88170B00DA6035 /* SubscribeViewController.m in Sources */,
 				D8482D2B1E136232000B511C /* UIView+SGExtension.m in Sources */,
 				D854E7F41D880748009A13F1 /* THNGoodsBuyView.m in Sources */,
-				1FC6782E1CDB33ED00535162 /* UIView+TYAlertView.m in Sources */,
 				1F2A8FAB1CF40277005116C7 /* FBGoodsInfoViewController.m in Sources */,
 				D8ACF4671D6EBA8A00DB79D8 /* SearchUserViewController.m in Sources */,
 				D857AC381DE836F000F924E8 /* THNExpressInfoTableViewCell.m in Sources */,
