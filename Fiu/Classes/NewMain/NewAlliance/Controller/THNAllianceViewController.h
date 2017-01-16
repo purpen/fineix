@@ -8,6 +8,11 @@
 
 #import "THNViewController.h"
 
-@interface THNAllianceViewController : THNViewController
+@interface THNAllianceViewController : THNViewController <
+    UITableViewDelegate,
+    UITableViewDataSource
+>
+
+@property (nonatomic, strong) UITableView *alianceTable;
 
 @end

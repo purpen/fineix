@@ -14,12 +14,15 @@
 #import "THNMallViewController.h"
 #import "THNMallViewController.h"
 #import "MyPageViewController.h"
+#import "THNAllianceViewController.h"
+
 #import "UserInfoEntity.h"
 #import "THNLoginRegisterViewController.h"
 #import "PictureToolViewController.h"
 #import "THNLoginRegisterViewController.h"
 #import "THNMessageViewController.h"
 #import "UITabBar+badge.h"
+
 
 @implementation THNTabBarController {
     THNNavigationController *_homeNav;
@@ -114,7 +117,7 @@
     THNHomeViewController *homeVC = [[THNHomeViewController alloc] init];
     THNDiscoverViewController *discoverVC = [[THNDiscoverViewController alloc] init];
     THNMallViewController *mallVC = [[THNMallViewController alloc] init];
-    MyPageViewController *myVC = [[MyPageViewController alloc] init];
+    THNAllianceViewController *myVC = [[THNAllianceViewController alloc] init];
     
     _homeNav = [[THNNavigationController alloc] initWithRootViewController:homeVC];
     _discoverNav = [[THNNavigationController alloc] initWithRootViewController:discoverVC];

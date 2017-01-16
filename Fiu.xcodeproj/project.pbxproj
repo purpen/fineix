@@ -525,6 +525,13 @@
 		D857AC3D1DE836F000F924E8 /* THNPaymentTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D857AC341DE836F000F924E8 /* THNPaymentTableViewCell.m */; };
 		D857AC3E1DE836F000F924E8 /* THNServiceTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D857AC361DE836F000F924E8 /* THNServiceTableViewCell.m */; };
 		D857AC411DE8373500F924E8 /* THNApplyRefundView.m in Sources */ = {isa = PBXBuildFile; fileRef = D857AC401DE8373500F924E8 /* THNApplyRefundView.m */; };
+		D857C4541E2C73B000569B3D /* THNAlianceTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D857C4531E2C73B000569B3D /* THNAlianceTableViewCell.m */; };
+		D857C4571E2CA05600569B3D /* THNAlianceHeaderTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D857C4561E2CA05600569B3D /* THNAlianceHeaderTableViewCell.m */; };
+		D857C45A1E2CADB900569B3D /* THNWithdrawViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D857C4591E2CADB900569B3D /* THNWithdrawViewController.m */; };
+		D857C45D1E2CAF7700569B3D /* THNWithdrawRecordViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D857C45C1E2CAF7700569B3D /* THNWithdrawRecordViewController.m */; };
+		D857C4601E2CAFAA00569B3D /* THNSettlementRecordViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D857C45F1E2CAFAA00569B3D /* THNSettlementRecordViewController.m */; };
+		D857C4631E2CB06200569B3D /* THNTradingRecordViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D857C4621E2CB06200569B3D /* THNTradingRecordViewController.m */; };
+		D857C4661E2CB0BB00569B3D /* THNWithdrawRecordTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D857C4651E2CB0BB00569B3D /* THNWithdrawRecordTableViewCell.m */; };
 		D861BC6E1D7E977700A26022 /* THNBrandInfoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D861BC6D1D7E977700A26022 /* THNBrandInfoViewController.m */; };
 		D861BC711D7E995600A26022 /* THNBrandInfoCollectionReusableView.m in Sources */ = {isa = PBXBuildFile; fileRef = D861BC701D7E995600A26022 /* THNBrandInfoCollectionReusableView.m */; };
 		D86809031D622049002714B2 /* FBImageScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = D86809021D622049002714B2 /* FBImageScrollView.m */; };
@@ -1626,6 +1633,20 @@
 		D857AC361DE836F000F924E8 /* THNServiceTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THNServiceTableViewCell.m; sourceTree = "<group>"; };
 		D857AC3F1DE8373500F924E8 /* THNApplyRefundView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THNApplyRefundView.h; sourceTree = "<group>"; };
 		D857AC401DE8373500F924E8 /* THNApplyRefundView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THNApplyRefundView.m; sourceTree = "<group>"; };
+		D857C4521E2C73B000569B3D /* THNAlianceTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THNAlianceTableViewCell.h; sourceTree = "<group>"; };
+		D857C4531E2C73B000569B3D /* THNAlianceTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THNAlianceTableViewCell.m; sourceTree = "<group>"; };
+		D857C4551E2CA05600569B3D /* THNAlianceHeaderTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THNAlianceHeaderTableViewCell.h; sourceTree = "<group>"; };
+		D857C4561E2CA05600569B3D /* THNAlianceHeaderTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THNAlianceHeaderTableViewCell.m; sourceTree = "<group>"; };
+		D857C4581E2CADB900569B3D /* THNWithdrawViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THNWithdrawViewController.h; sourceTree = "<group>"; };
+		D857C4591E2CADB900569B3D /* THNWithdrawViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THNWithdrawViewController.m; sourceTree = "<group>"; };
+		D857C45B1E2CAF7600569B3D /* THNWithdrawRecordViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THNWithdrawRecordViewController.h; sourceTree = "<group>"; };
+		D857C45C1E2CAF7700569B3D /* THNWithdrawRecordViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THNWithdrawRecordViewController.m; sourceTree = "<group>"; };
+		D857C45E1E2CAFAA00569B3D /* THNSettlementRecordViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THNSettlementRecordViewController.h; sourceTree = "<group>"; };
+		D857C45F1E2CAFAA00569B3D /* THNSettlementRecordViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THNSettlementRecordViewController.m; sourceTree = "<group>"; };
+		D857C4611E2CB06200569B3D /* THNTradingRecordViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THNTradingRecordViewController.h; sourceTree = "<group>"; };
+		D857C4621E2CB06200569B3D /* THNTradingRecordViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THNTradingRecordViewController.m; sourceTree = "<group>"; };
+		D857C4641E2CB0BB00569B3D /* THNWithdrawRecordTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THNWithdrawRecordTableViewCell.h; sourceTree = "<group>"; };
+		D857C4651E2CB0BB00569B3D /* THNWithdrawRecordTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THNWithdrawRecordTableViewCell.m; sourceTree = "<group>"; };
 		D861BC6C1D7E977700A26022 /* THNBrandInfoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THNBrandInfoViewController.h; sourceTree = "<group>"; };
 		D861BC6D1D7E977700A26022 /* THNBrandInfoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THNBrandInfoViewController.m; sourceTree = "<group>"; };
 		D861BC6F1D7E995600A26022 /* THNBrandInfoCollectionReusableView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THNBrandInfoCollectionReusableView.h; sourceTree = "<group>"; };
@@ -3849,6 +3870,14 @@
 			children = (
 				D83625B81E28C7C5005F2BB9 /* THNAllianceViewController.h */,
 				D83625B91E28C7C5005F2BB9 /* THNAllianceViewController.m */,
+				D857C4581E2CADB900569B3D /* THNWithdrawViewController.h */,
+				D857C4591E2CADB900569B3D /* THNWithdrawViewController.m */,
+				D857C45B1E2CAF7600569B3D /* THNWithdrawRecordViewController.h */,
+				D857C45C1E2CAF7700569B3D /* THNWithdrawRecordViewController.m */,
+				D857C45E1E2CAFAA00569B3D /* THNSettlementRecordViewController.h */,
+				D857C45F1E2CAFAA00569B3D /* THNSettlementRecordViewController.m */,
+				D857C4611E2CB06200569B3D /* THNTradingRecordViewController.h */,
+				D857C4621E2CB06200569B3D /* THNTradingRecordViewController.m */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -3863,6 +3892,12 @@
 		D83625B41E28C773005F2BB9 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				D857C4521E2C73B000569B3D /* THNAlianceTableViewCell.h */,
+				D857C4531E2C73B000569B3D /* THNAlianceTableViewCell.m */,
+				D857C4551E2CA05600569B3D /* THNAlianceHeaderTableViewCell.h */,
+				D857C4561E2CA05600569B3D /* THNAlianceHeaderTableViewCell.m */,
+				D857C4641E2CB0BB00569B3D /* THNWithdrawRecordTableViewCell.h */,
+				D857C4651E2CB0BB00569B3D /* THNWithdrawRecordTableViewCell.m */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -5014,6 +5049,7 @@
 				D85174661D598D47005F5722 /* THNDataInfoTableViewCell.m in Sources */,
 				D857AC271DE8326100F924E8 /* THNApplyRefundViewController.m in Sources */,
 				D80878D61D6AD18E00C1FFA0 /* THNMallNewGoodsCollectionViewCell.m in Sources */,
+				D857C45D1E2CAF7700569B3D /* THNWithdrawRecordViewController.m in Sources */,
 				D85174631D598D36005F5722 /* THNSceneImageTableViewCell.m in Sources */,
 				D8F80B8E1DD30F2700C086FA /* THNAdjustView.m in Sources */,
 				1F2AFD281D88182200DA6035 /* GuidePageViewController.m in Sources */,
@@ -5021,6 +5057,7 @@
 				D8E8FFCB1D77393400DDC3E0 /* THNUserAddGoodsViewController.m in Sources */,
 				D8E3AEBB1CFC9B84006E5E8C /* ReleaseViewController.m in Sources */,
 				D80669981D7014C8007FD81E /* HotUserList.m in Sources */,
+				D857C4631E2CB06200569B3D /* THNTradingRecordViewController.m in Sources */,
 				D8C0951F1D7533FD00908491 /* ShareInfo.m in Sources */,
 				D869BD6B1D6036A000432423 /* CommentNViewController.m in Sources */,
 				D857AC1E1DE7E6EE00F924E8 /* SubOrderModel.m in Sources */,
@@ -5173,6 +5210,7 @@
 				1F2AFC841D88170B00DA6035 /* FiuSceneInfoLocation.m in Sources */,
 				D86E54BF1DD444230075ED88 /* FSLordKelvinFilter.m in Sources */,
 				1FBA9EA81D9E07C800D7FDA6 /* RecipeCollectionHeaderView.m in Sources */,
+				D857C45A1E2CADB900569B3D /* THNWithdrawViewController.m in Sources */,
 				D840F0911D93B57700CE9FB7 /* THNRemindModelData.m in Sources */,
 				D80669861D6F3F82007FD81E /* FBGoodsInfoModel.m in Sources */,
 				D80878D31D69FAB400C1FFA0 /* THNCategoryCollectionReusableView.m in Sources */,
@@ -5272,6 +5310,7 @@
 				1F2AFD041D8817CC00DA6035 /* THNCuXiaoCollectionViewCell.m in Sources */,
 				1F2A8FC41CF40277005116C7 /* Goods.m in Sources */,
 				1F2A90211CF40277005116C7 /* IdentityTagsViewController.m in Sources */,
+				D857C4541E2C73B000569B3D /* THNAlianceTableViewCell.m in Sources */,
 				1F1AF3B21CF58A6B00CAA525 /* IntegralViewController.m in Sources */,
 				1F2A8FCD1CF40277005116C7 /* GoodsBrandTableViewCell.m in Sources */,
 				1F2A90A21CF40277005116C7 /* SubscribePeopleTableViewCell.m in Sources */,
@@ -5324,9 +5363,11 @@
 				1F2AFC951D88170B00DA6035 /* FocusOnTableViewCell.m in Sources */,
 				1F2AFD8E1D88186C00DA6035 /* THNTopicsModel.m in Sources */,
 				D8C094E71D752D2200908491 /* SceneInfoUserInfo.m in Sources */,
+				D857C4571E2CA05600569B3D /* THNAlianceHeaderTableViewCell.m in Sources */,
 				D86E54BB1DD444230075ED88 /* FSFiveInputFilter.m in Sources */,
 				D8ACF46D1D6EBAA500DB79D8 /* SearchBrandViewController.m in Sources */,
 				1F2A8FB31CF40277005116C7 /* BrandInfo.m in Sources */,
+				D857C4601E2CAFAA00569B3D /* THNSettlementRecordViewController.m in Sources */,
 				D83625BA1E28C7C5005F2BB9 /* THNAllianceViewController.m in Sources */,
 				D8ACF45B1D6C9B3000DB79D8 /* THNSceneListViewController.m in Sources */,
 				1F2A8FDE1CF40277005116C7 /* InfoBrandTableViewCell.m in Sources */,
@@ -5460,6 +5501,7 @@
 				1F2A8FD11CF40277005116C7 /* RecommendGoodsCollectionViewCell.m in Sources */,
 				1F2AFD101D8817CC00DA6035 /* THNXinPinViewController.m in Sources */,
 				1F2A8F421CF40277005116C7 /* MarkGoodsRow.m in Sources */,
+				D857C4661E2CB0BB00569B3D /* THNWithdrawRecordTableViewCell.m in Sources */,
 				1F2A8FCB1CF40277005116C7 /* CarGoodsModelItem.m in Sources */,
 				1F2A8FE11CF40277005116C7 /* InfoTitleTableViewCell.m in Sources */,
 				1F2AFC7C1D88170B00DA6035 /* FindeFirendTwoModel.m in Sources */,

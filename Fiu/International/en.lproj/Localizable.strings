@@ -149,6 +149,7 @@
 "likePeopleVC" = "赞的人";
 "suPeopleVC" = "订阅的人";
 "addSceneInfoVC" = "添加语境";
+"AlianceVCTitle" = "我的分成";
 
 //  提示信息
 "netError" = "网络连接错误";
