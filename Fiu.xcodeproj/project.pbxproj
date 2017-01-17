@@ -538,6 +538,7 @@
 		D857C4721E2CC53900569B3D /* THNSettlementInfoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D857C4711E2CC53900569B3D /* THNSettlementInfoViewController.m */; };
 		D857C4761E2DB50D00569B3D /* THNRecordStateTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D857C4751E2DB50D00569B3D /* THNRecordStateTableViewCell.m */; };
 		D857C4791E2DB51A00569B3D /* THNRecordInfoTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D857C4781E2DB51A00569B3D /* THNRecordInfoTableViewCell.m */; };
+		D857C47C1E2DF37F00569B3D /* THNWithdrawView.m in Sources */ = {isa = PBXBuildFile; fileRef = D857C47B1E2DF37F00569B3D /* THNWithdrawView.m */; };
 		D861BC6E1D7E977700A26022 /* THNBrandInfoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D861BC6D1D7E977700A26022 /* THNBrandInfoViewController.m */; };
 		D861BC711D7E995600A26022 /* THNBrandInfoCollectionReusableView.m in Sources */ = {isa = PBXBuildFile; fileRef = D861BC701D7E995600A26022 /* THNBrandInfoCollectionReusableView.m */; };
 		D86809031D622049002714B2 /* FBImageScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = D86809021D622049002714B2 /* FBImageScrollView.m */; };
@@ -1665,6 +1666,8 @@
 		D857C4751E2DB50D00569B3D /* THNRecordStateTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THNRecordStateTableViewCell.m; sourceTree = "<group>"; };
 		D857C4771E2DB51A00569B3D /* THNRecordInfoTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THNRecordInfoTableViewCell.h; sourceTree = "<group>"; };
 		D857C4781E2DB51A00569B3D /* THNRecordInfoTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THNRecordInfoTableViewCell.m; sourceTree = "<group>"; };
+		D857C47A1E2DF37F00569B3D /* THNWithdrawView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THNWithdrawView.h; sourceTree = "<group>"; };
+		D857C47B1E2DF37F00569B3D /* THNWithdrawView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THNWithdrawView.m; sourceTree = "<group>"; };
 		D861BC6C1D7E977700A26022 /* THNBrandInfoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THNBrandInfoViewController.h; sourceTree = "<group>"; };
 		D861BC6D1D7E977700A26022 /* THNBrandInfoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THNBrandInfoViewController.m; sourceTree = "<group>"; };
 		D861BC6F1D7E995600A26022 /* THNBrandInfoCollectionReusableView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THNBrandInfoCollectionReusableView.h; sourceTree = "<group>"; };
@@ -3925,6 +3928,8 @@
 				D857C4681E2CBC8F00569B3D /* THNSettlementRecordTableViewCell.m */,
 				D857C46A1E2CC07400569B3D /* THNRecordHintView.h */,
 				D857C46B1E2CC07400569B3D /* THNRecordHintView.m */,
+				D857C47A1E2DF37F00569B3D /* THNWithdrawView.h */,
+				D857C47B1E2DF37F00569B3D /* THNWithdrawView.m */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -5514,6 +5519,7 @@
 				1F2AFD7A1D88186C00DA6035 /* THNInformationViewController.m in Sources */,
 				1FCDCC871D07F50D00C92E78 /* ServiceViewController.m in Sources */,
 				1F2A90311CF40277005116C7 /* DirectMessagesViewController.m in Sources */,
+				D857C47C1E2DF37F00569B3D /* THNWithdrawView.m in Sources */,
 				1F2AFC741D88170B00DA6035 /* ShieldingViewController.m in Sources */,
 				D85174541D587908005F5722 /* THNMallViewController.m in Sources */,
 				1F2A8FC61CF40277005116C7 /* GoodsInfo.m in Sources */,

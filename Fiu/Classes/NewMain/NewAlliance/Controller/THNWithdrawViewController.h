@@ -7,7 +7,11 @@
 //
 
 #import "THNViewController.h"
+#import "THNWithdrawView.h"
 
 @interface THNWithdrawViewController : THNViewController
+
+@property (nonatomic, strong) THNWithdrawView *withdrawView;
+@property (nonatomic, strong) UIButton *sureButton;
 
 @end
