@@ -536,6 +536,8 @@
 		D857C46C1E2CC07400569B3D /* THNRecordHintView.m in Sources */ = {isa = PBXBuildFile; fileRef = D857C46B1E2CC07400569B3D /* THNRecordHintView.m */; };
 		D857C46F1E2CC52A00569B3D /* THNTradingInfoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D857C46E1E2CC52A00569B3D /* THNTradingInfoViewController.m */; };
 		D857C4721E2CC53900569B3D /* THNSettlementInfoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D857C4711E2CC53900569B3D /* THNSettlementInfoViewController.m */; };
+		D857C4761E2DB50D00569B3D /* THNRecordStateTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D857C4751E2DB50D00569B3D /* THNRecordStateTableViewCell.m */; };
+		D857C4791E2DB51A00569B3D /* THNRecordInfoTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D857C4781E2DB51A00569B3D /* THNRecordInfoTableViewCell.m */; };
 		D861BC6E1D7E977700A26022 /* THNBrandInfoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D861BC6D1D7E977700A26022 /* THNBrandInfoViewController.m */; };
 		D861BC711D7E995600A26022 /* THNBrandInfoCollectionReusableView.m in Sources */ = {isa = PBXBuildFile; fileRef = D861BC701D7E995600A26022 /* THNBrandInfoCollectionReusableView.m */; };
 		D86809031D622049002714B2 /* FBImageScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = D86809021D622049002714B2 /* FBImageScrollView.m */; };
@@ -1659,6 +1661,10 @@
 		D857C46E1E2CC52A00569B3D /* THNTradingInfoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THNTradingInfoViewController.m; sourceTree = "<group>"; };
 		D857C4701E2CC53900569B3D /* THNSettlementInfoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THNSettlementInfoViewController.h; sourceTree = "<group>"; };
 		D857C4711E2CC53900569B3D /* THNSettlementInfoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THNSettlementInfoViewController.m; sourceTree = "<group>"; };
+		D857C4741E2DB50D00569B3D /* THNRecordStateTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THNRecordStateTableViewCell.h; sourceTree = "<group>"; };
+		D857C4751E2DB50D00569B3D /* THNRecordStateTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THNRecordStateTableViewCell.m; sourceTree = "<group>"; };
+		D857C4771E2DB51A00569B3D /* THNRecordInfoTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THNRecordInfoTableViewCell.h; sourceTree = "<group>"; };
+		D857C4781E2DB51A00569B3D /* THNRecordInfoTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THNRecordInfoTableViewCell.m; sourceTree = "<group>"; };
 		D861BC6C1D7E977700A26022 /* THNBrandInfoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THNBrandInfoViewController.h; sourceTree = "<group>"; };
 		D861BC6D1D7E977700A26022 /* THNBrandInfoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THNBrandInfoViewController.m; sourceTree = "<group>"; };
 		D861BC6F1D7E995600A26022 /* THNBrandInfoCollectionReusableView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THNBrandInfoCollectionReusableView.h; sourceTree = "<group>"; };
@@ -3908,6 +3914,7 @@
 		D83625B41E28C773005F2BB9 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				D857C4731E2DB4F000569B3D /* RecordCell */,
 				D857C4521E2C73B000569B3D /* THNAlianceTableViewCell.h */,
 				D857C4531E2C73B000569B3D /* THNAlianceTableViewCell.m */,
 				D857C4551E2CA05600569B3D /* THNAlianceHeaderTableViewCell.h */,
@@ -4414,6 +4421,17 @@
 				D870352F1DEC1B17001FBBF1 /* THNRefundTimeTableViewCell.m */,
 			);
 			path = Refund;
+			sourceTree = "<group>";
+		};
+		D857C4731E2DB4F000569B3D /* RecordCell */ = {
+			isa = PBXGroup;
+			children = (
+				D857C4741E2DB50D00569B3D /* THNRecordStateTableViewCell.h */,
+				D857C4751E2DB50D00569B3D /* THNRecordStateTableViewCell.m */,
+				D857C4771E2DB51A00569B3D /* THNRecordInfoTableViewCell.h */,
+				D857C4781E2DB51A00569B3D /* THNRecordInfoTableViewCell.m */,
+			);
+			path = RecordCell;
 			sourceTree = "<group>";
 		};
 		D869BD3E1D6036A000432423 /* Alert */ = {
@@ -5226,6 +5244,7 @@
 				1F2AFCFA1D8817CC00DA6035 /* THNActiveRuleCollectionViewCell.m in Sources */,
 				D8482D291E136232000B511C /* JKDBModel.m in Sources */,
 				1F2AFCA61D88170B00DA6035 /* THNSenceTopicView.m in Sources */,
+				D857C4791E2DB51A00569B3D /* THNRecordInfoTableViewCell.m in Sources */,
 				D86809211D662382002714B2 /* THNAddGoodsBtn.m in Sources */,
 				1F2A903F1CF40277005116C7 /* CityTableViewCell.m in Sources */,
 				D8ACF4431D6B46AE00DB79D8 /* FBSegmentView.m in Sources */,
@@ -5575,6 +5594,7 @@
 				1F2AFC6B1D88170B00DA6035 /* ModifyGenderViewController.m in Sources */,
 				1F2A8FD81CF40277005116C7 /* FBGoodsColorTableViewCell.m in Sources */,
 				1F2A8FBC1CF40277005116C7 /* ChildTags.m in Sources */,
+				D857C4761E2DB50D00569B3D /* THNRecordStateTableViewCell.m in Sources */,
 				1F2AFDF61D8818EB00DA6035 /* SystemSettingViewController.m in Sources */,
 				1F2A8F531CF40277005116C7 /* MarkGoodsCollectionViewCell.m in Sources */,
 				1F2A8F441CF40277005116C7 /* FBPhoto.m in Sources */,

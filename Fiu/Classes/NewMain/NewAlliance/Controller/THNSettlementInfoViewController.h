@@ -8,6 +8,11 @@
 
 #import "THNViewController.h"
 
-@interface THNSettlementInfoViewController : THNViewController
+@interface THNSettlementInfoViewController : THNViewController <
+    UITableViewDelegate,
+    UITableViewDataSource
+>
+
+@property (nonatomic, strong) UITableView *infoTable;
 
 @end

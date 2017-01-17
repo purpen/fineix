@@ -8,6 +8,11 @@
 
 #import "THNViewController.h"
 
-@interface THNTradingInfoViewController : THNViewController
+@interface THNTradingInfoViewController : THNViewController <
+    UITableViewDelegate,
+    UITableViewDataSource
+>
+
+@property (nonatomic, strong) UITableView *infoTable;
 
 @end

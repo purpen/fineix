@@ -50,6 +50,7 @@ static NSString *const recordCellId = @"THNSettlementRecordTableViewCellId";
         _recordTable.dataSource = self;
         _recordTable.backgroundColor = [UIColor colorWithHexString:@"#F8F8F8"];
         _recordTable.tableFooterView = [UIView new];
+        _recordTable.bounces = NO;
         if ([_recordTable respondsToSelector:@selector(setSeparatorInset:)]) {
             [_recordTable setSeparatorInset:(UIEdgeInsetsZero)];
         }
@@ -75,8 +76,8 @@ static NSString *const recordCellId = @"THNSettlementRecordTableViewCellId";
 }
 
 - (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath {
-    if ([_recordTable respondsToSelector:@selector(setSeparatorInset:)]) {
-        [_recordTable setSeparatorInset:(UIEdgeInsetsZero)];
+    if ([tableView respondsToSelector:@selector(setSeparatorInset:)]) {
+        [tableView setSeparatorInset:(UIEdgeInsetsZero)];
     }
 }
 
