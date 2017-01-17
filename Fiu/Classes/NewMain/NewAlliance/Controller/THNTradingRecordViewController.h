@@ -7,7 +7,14 @@
 //
 
 #import "THNViewController.h"
+#import "THNRecordHintView.h"
 
-@interface THNTradingRecordViewController : THNViewController
+@interface THNTradingRecordViewController : THNViewController <
+    UITableViewDelegate,
+    UITableViewDataSource
+>
+
+@property (nonatomic, strong) THNRecordHintView *recordHintView;
+@property (nonatomic, strong) UITableView *recordTable;
 
 @end

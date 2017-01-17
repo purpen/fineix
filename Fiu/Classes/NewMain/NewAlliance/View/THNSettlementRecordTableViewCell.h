@@ -1,5 +1,5 @@
 //
-//  THNWithdrawRecordTableViewCell.h
+//  THNSettlementRecordTableViewCell.h
 //  Fiu
 //
 //  Created by FLYang on 2017/1/16.
@@ -9,17 +9,12 @@
 #import <UIKit/UIKit.h>
 #import "THNMacro.h"
 
-@interface THNWithdrawRecordTableViewCell : UITableViewCell
+@interface THNSettlementRecordTableViewCell : UITableViewCell
 
-@property (nonatomic, strong) UILabel *stateLable;
 @property (nonatomic, strong) UILabel *timeLable;
+@property (nonatomic, strong) UILabel *numLable;
 @property (nonatomic, strong) UILabel *moneyLable;
 @property (nonatomic, strong) UIImageView *icon;
 
-- (void)thn_setWithdrawRecordData:(NSInteger)data;
-
-- (void)thn_setTradingRecordData:(NSInteger)data;
-
-- (void)thn_showTotalMoney;
-
+- (void)thn_setSettlementRecordData:(NSInteger)data;
 @end

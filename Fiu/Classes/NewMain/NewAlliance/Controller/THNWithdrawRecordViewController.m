@@ -9,7 +9,7 @@
 #import "THNWithdrawRecordViewController.h"
 #import "THNWithdrawRecordTableViewCell.h"
 
-static NSString *const withdrawRecordCellId = @"THNWithdrawRecordTableViewCellId";
+static NSString *const recordCellId = @"THNWithdrawRecordTableViewCellId";
 
 @interface THNWithdrawRecordViewController ()
 
@@ -40,6 +40,9 @@ static NSString *const withdrawRecordCellId = @"THNWithdrawRecordTableViewCellId
         _recordTable.dataSource = self;
         _recordTable.backgroundColor = [UIColor colorWithHexString:@"#F8F8F8"];
         _recordTable.tableFooterView = [UIView new];
+        if ([_recordTable respondsToSelector:@selector(setSeparatorInset:)]) {
+            [_recordTable setSeparatorInset:(UIEdgeInsetsZero)];
+        }
     }
     return _recordTable;
 }
@@ -56,9 +59,9 @@ static NSString *const withdrawRecordCellId = @"THNWithdrawRecordTableViewCellId
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    THNWithdrawRecordTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:withdrawRecordCellId];
+    THNWithdrawRecordTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:recordCellId];
     if (!cell) {
-        cell = [[THNWithdrawRecordTableViewCell alloc] initWithStyle:(UITableViewCellStyleDefault) reuseIdentifier:withdrawRecordCellId];
+        cell = [[THNWithdrawRecordTableViewCell alloc] initWithStyle:(UITableViewCellStyleDefault) reuseIdentifier:recordCellId];
         if (indexPath.section == 0) {
             [cell thn_showTotalMoney];
             
@@ -79,6 +82,12 @@ static NSString *const withdrawRecordCellId = @"THNWithdrawRecordTableViewCellId
 
 - (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section {
     return 10.0f;
+}
+
+- (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath {
+    if ([_recordTable respondsToSelector:@selector(setSeparatorInset:)]) {
+        [_recordTable setSeparatorInset:(UIEdgeInsetsZero)];
+    }
 }
 
 #pragma mark - 设置Nav
