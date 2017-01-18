@@ -22,83 +22,174 @@
 
 - (void)thn_showAllianceData:(THNAllinaceData *)model {
     if (model) {
-        self.moneyLable.text = [NSString stringWithFormat:@"%.2f", model.totalBalanceAmount];
-//        self.oldMoneyLable.text = [NSString stringWithFormat:@"＋%.2f", ]
+        self.withdrawMoney.text = [NSString stringWithFormat:@"￥%.2f", model.waitCashAmount];
+        self.totalMoney.text = [NSString stringWithFormat:@"￥%.2f", model.totalBalanceAmount];
+        self.oldMoney.text = [NSString stringWithFormat:@"￥%.2f", model.totalCashAmount];
     }
 }
 
 - (void)setCellViewUI {
-    [self addSubview:self.moneyLable];
-    [_moneyLable mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.height.mas_equalTo(@40);
-        make.left.right.equalTo(self).with.offset(0);
-//        make.centerY.equalTo(self.mas_centerY).with.offset(-10);
-        make.centerY.equalTo(self.mas_centerY);
+    [self addSubview:self.withdrawMoney];
+    [_withdrawMoney mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.height.mas_equalTo(@35);
+        make.left.equalTo(self.mas_left).with.offset(15);
+        make.right.equalTo(self.mas_right).with.offset(-15);
+        make.bottom.equalTo(self.mas_centerY).with.offset(0);
     }];
     
-    [self addSubview:self.hintLable];
-    [_hintLable mas_makeConstraints:^(MASConstraintMaker *make) {
+    [self addSubview:self.withdrawMoneyHint];
+    [_withdrawMoneyHint mas_makeConstraints:^(MASConstraintMaker *make) {
         make.height.mas_equalTo(@12);
-        make.left.right.equalTo(self).with.offset(0);
-        make.bottom.equalTo(_moneyLable.mas_top).with.offset(-10);
+        make.left.equalTo(self.mas_left).with.offset(15);
+        make.right.equalTo(self.mas_right).with.offset(-15);
+        make.bottom.equalTo(_withdrawMoney.mas_top).with.offset(-10);
     }];
     
-//    [self addSubview:self.oldHintLable];
-//    [_oldHintLable mas_makeConstraints:^(MASConstraintMaker *make) {
-//        make.height.mas_equalTo(@12);
-//        make.left.right.equalTo(self).with.offset(0);
-//        make.top.equalTo(_moneyLable.mas_bottom).with.offset(10);
-//    }];
-//    
-//    [self addSubview:self.oldMoneyLable];
-//    [_oldMoneyLable mas_makeConstraints:^(MASConstraintMaker *make) {
-//        make.height.mas_equalTo(@12);
-//        make.left.right.equalTo(self).with.offset(0);
-//        make.top.equalTo(_oldHintLable.mas_bottom).with.offset(10);
-//    }];
+    [self addSubview:self.totalMoneyHint];
+    [_totalMoneyHint mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.size.mas_offset(CGSizeMake(SCREEN_WIDTH/2, 13));
+        make.left.equalTo(self.mas_left).with.offset(0);
+        make.bottom.equalTo(self.mas_bottom).with.offset(-10);
+    }];
     
+    [self addSubview:self.totalMoney];
+    [_totalMoney mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.size.mas_offset(CGSizeMake(SCREEN_WIDTH/2, 15));
+        make.left.equalTo(self.mas_left).with.offset(0);
+        make.bottom.equalTo(_totalMoneyHint.mas_top).with.offset(-5);
+    }];
+    
+    [self addSubview:self.oldMoneyHint];
+    [_oldMoneyHint mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.size.mas_offset(CGSizeMake(SCREEN_WIDTH/2, 13));
+        make.right.equalTo(self.mas_right).with.offset(0);
+        make.bottom.equalTo(self.mas_bottom).with.offset(-10);
+    }];
+    
+    [self addSubview:self.oldMoney];
+    [_oldMoney mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.size.mas_offset(CGSizeMake(SCREEN_WIDTH/2, 15));
+        make.right.equalTo(self.mas_right).with.offset(0);
+        make.bottom.equalTo(_oldMoneyHint.mas_top).with.offset(-5);
+    }];
+    
+    [self addSubview:self.icon];
+    [_icon mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.size.mas_equalTo(CGSizeMake(7, 13));
+        make.right.equalTo(self.mas_right).with.offset(-15);
+        make.top.equalTo(_withdrawMoney.mas_top).with.offset(5);
+    }];
+    
+    [self addSubview:self.withdrawLabel];
+    [_withdrawLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.size.mas_offset(CGSizeMake(25, 13));
+        make.right.equalTo(_icon.mas_left).with.offset(-5);
+        make.centerY.equalTo(_icon);
+    }];
+    
+    UILabel *line = [[UILabel alloc] init];
+    line.backgroundColor = [UIColor colorWithHexString:@"E6E6E6"];
+    [self addSubview:line];
+    [line mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.size.mas_equalTo(CGSizeMake(SCREEN_WIDTH, 1));
+        make.left.equalTo(self.mas_left).with.offset(0);
+        make.bottom.equalTo(_totalMoney.mas_top).with.offset(-10);
+    }];
+    
+    UILabel *verLine = [[UILabel alloc] init];
+    verLine.backgroundColor = [UIColor colorWithHexString:@"E6E6E6"];
+    [self addSubview:verLine];
+    [verLine mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.size.mas_equalTo(CGSizeMake(1, 30));
+        make.centerX.equalTo(self);
+        make.bottom.equalTo(self.mas_bottom).with.offset(-10);
+    }];
 }
 
-- (UILabel *)hintLable {
-    if (!_hintLable) {
-        _hintLable = [[UILabel alloc] init];
-        _hintLable.font = [UIFont systemFontOfSize:11];
-        _hintLable.textColor = [UIColor colorWithHexString:@"#888888"];
-        _hintLable.textAlignment = NSTextAlignmentCenter;
-        _hintLable.text = @"我的分成（元）";
+- (UILabel *)withdrawMoneyHint {
+    if (!_withdrawMoneyHint) {
+        _withdrawMoneyHint = [[UILabel alloc] init];
+        _withdrawMoneyHint.font = [UIFont systemFontOfSize:11];
+        _withdrawMoneyHint.textColor = [UIColor colorWithHexString:@"#888888"];
+        _withdrawMoneyHint.textAlignment = NSTextAlignmentCenter;
+        _withdrawMoneyHint.text = @"可提现金额";
     }
-    return _hintLable;
+    return _withdrawMoneyHint;
 }
 
-- (UILabel *)moneyLable {
-    if (!_moneyLable) {
-        _moneyLable = [[UILabel alloc] init];
-        _moneyLable.font = [UIFont systemFontOfSize:34];
-        _moneyLable.textColor = [UIColor colorWithHexString:MAIN_COLOR];
-        _moneyLable.textAlignment = NSTextAlignmentCenter;
+- (UILabel *)withdrawMoney {
+    if (!_withdrawMoney) {
+        _withdrawMoney = [[UILabel alloc] init];
+        _withdrawMoney.font = [UIFont systemFontOfSize:34];
+        _withdrawMoney.textColor = [UIColor colorWithHexString:MAIN_COLOR];
+        _withdrawMoney.textAlignment = NSTextAlignmentCenter;
     }
-    return _moneyLable;
+    return _withdrawMoney;
 }
 
-- (UILabel *)oldHintLable {
-    if (!_oldHintLable) {
-        _oldHintLable = [[UILabel alloc] init];
-        _oldHintLable.font = [UIFont systemFontOfSize:11];
-        _oldHintLable.textColor = [UIColor colorWithHexString:@"#888888"];
-        _oldHintLable.textAlignment = NSTextAlignmentCenter;
-        _oldHintLable.text = @"昨日收益（元）";
+
+- (UILabel *)totalMoney {
+    if (!_totalMoney) {
+        _totalMoney = [[UILabel alloc] init];
+        _totalMoney.textColor = [UIColor colorWithHexString:@"#222222"];
+        _totalMoney.font = [UIFont systemFontOfSize:14];
+        _totalMoney.textAlignment = NSTextAlignmentCenter;
     }
-    return _oldHintLable;
+    return _totalMoney;
 }
 
-- (UILabel *)oldMoneyLable {
-    if (!_oldMoneyLable) {
-        _oldMoneyLable = [[UILabel alloc] init];
-        _oldMoneyLable.font = [UIFont systemFontOfSize:11];
-        _oldMoneyLable.textColor = [UIColor colorWithHexString:@"#222222"];
-        _oldMoneyLable.textAlignment = NSTextAlignmentCenter;
+- (UILabel *)totalMoneyHint {
+    if (!_totalMoneyHint) {
+        _totalMoneyHint = [[UILabel alloc] init];
+        _totalMoneyHint.textColor = [UIColor colorWithHexString:@"#888888"];
+        _totalMoneyHint.font = [UIFont systemFontOfSize:12];
+        _totalMoneyHint.textAlignment = NSTextAlignmentCenter;
+        _totalMoneyHint.text = @"我的收益";
     }
-    return _oldMoneyLable;
+    return _totalMoneyHint;
 }
+
+- (UILabel *)oldMoney {
+    if (!_oldMoney) {
+        _oldMoney = [[UILabel alloc] init];
+        _oldMoney.textColor = [UIColor colorWithHexString:@"#222222"];
+        _oldMoney.font = [UIFont systemFontOfSize:14];
+        _oldMoney.textAlignment = NSTextAlignmentCenter;
+    }
+    return _oldMoney;
+}
+
+- (UILabel *)oldMoneyHint {
+    if (!_oldMoneyHint) {
+        _oldMoneyHint = [[UILabel alloc] init];
+        _oldMoneyHint.textColor = [UIColor colorWithHexString:@"#888888"];
+        _oldMoneyHint.font = [UIFont systemFontOfSize:12];
+        _oldMoneyHint.textAlignment = NSTextAlignmentCenter;
+        _oldMoneyHint.text = @"已提现金额";
+    }
+    return _oldMoneyHint;
+}
+
+- (UILabel *)withdrawLabel {
+    if (!_withdrawLabel) {
+        _withdrawLabel = [[UILabel alloc] init];
+        _withdrawLabel.textColor = [UIColor colorWithHexString:@"#666666"];
+        _withdrawLabel.font = [UIFont systemFontOfSize:12];
+        _withdrawLabel.textAlignment = NSTextAlignmentRight;
+        _withdrawLabel.text = @"提现";
+    }
+    return _withdrawLabel;
+}
+
+- (UIImageView *)icon {
+    if (!_icon) {
+        _icon = [[UIImageView alloc] init];
+        _icon.image = [UIImage imageNamed:@"icon_Next"];
+        _icon.contentMode = UIViewContentModeScaleAspectFit;
+    }
+    return _icon;
+}
+
+
 
 @end

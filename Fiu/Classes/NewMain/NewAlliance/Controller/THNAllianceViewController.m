@@ -73,11 +73,11 @@ static NSString *const headerCellId = @"THNAlianceHeaderTableViewCellId";
 }
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-    return 4;
+    return 3;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    if (section == 2) {
+    if (section == 1) {
         return 2;
     }
     return 1;
@@ -93,8 +93,6 @@ static NSString *const headerCellId = @"THNAlianceHeaderTableViewCellId";
     THNAlianceTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:alianceCellId];
     cell = [[THNAlianceTableViewCell alloc] initWithStyle:(UITableViewCellStyleDefault) reuseIdentifier:alianceCellId];
     if (indexPath.section == 1) {
-        [cell thn_setShowAlianceWithdrawData:self.dataModel];
-    } else if (indexPath.section == 2) {
         [cell thn_setShowRecordCellData:indexPath.row];
     }
     return cell;
@@ -103,8 +101,6 @@ static NSString *const headerCellId = @"THNAlianceHeaderTableViewCellId";
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
     if (indexPath.section == 0) {
         return 150;
-    } else if (indexPath.section == 1) {
-        return 75;
     }
     return 44;
 }
@@ -114,12 +110,12 @@ static NSString *const headerCellId = @"THNAlianceHeaderTableViewCellId";
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    if (indexPath.section == 1) {
+    if (indexPath.section == 0) {
         THNWithdrawViewController *withdrawVC = [[THNWithdrawViewController alloc] init];
         
         [self.navigationController pushViewController:withdrawVC animated:YES];
         
-    } else if (indexPath.section == 2) {
+    } else if (indexPath.section == 1) {
         if (indexPath.row == 0) {
             THNTradingRecordViewController *tRecordVC = [[THNTradingRecordViewController alloc] init];
             [self.navigationController pushViewController:tRecordVC animated:YES];
@@ -129,7 +125,7 @@ static NSString *const headerCellId = @"THNAlianceHeaderTableViewCellId";
             [self.navigationController pushViewController:sRecordVC animated:YES];
         }
         
-    } else if (indexPath.section == 3) {
+    } else if (indexPath.section == 2) {
         THNWithdrawRecordViewController *wRecordVC = [[THNWithdrawRecordViewController alloc] init];
         [self.navigationController pushViewController:wRecordVC animated:YES];
     }
