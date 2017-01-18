@@ -8,17 +8,19 @@
 
 #import <UIKit/UIKit.h>
 #import "THNMacro.h"
+#import "THNTradingInfoData.h"
+#import "THNSettlementInfoRow.h"
 
 @interface THNRecordInfoTableViewCell : UITableViewCell
 
 /**
  交易记录
  */
-- (void)thn_setTradingRecordInfoData;
+- (void)thn_setTradingRecordInfoData:(THNTradingInfoData *)model;
 
 /**
  结算记录
  */
-- (void)thn_setSettlementRecordInfoData;
+- (void)thn_setSettlementRecordInfoData:(THNSettlementInfoRow *)model;
 
 @end

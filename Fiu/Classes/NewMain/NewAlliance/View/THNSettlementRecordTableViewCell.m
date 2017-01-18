@@ -20,16 +20,16 @@
     return self;
 }
 
-- (void)thn_setSettlementRecordData:(NSInteger)data {
-    self.timeLable.text = @"2017-01-12";
-    self.numLable.text = [NSString stringWithFormat:@"%zi", data];
-    self.moneyLable.text = @"180.00";
+- (void)thn_setSettlementRecordData:(THNBalanceRow *)model {
+    self.timeLable.text = model.createdAt;
+    self.numLable.text = [NSString stringWithFormat:@"%zi", model.balanceCount];
+    self.moneyLable.text = [NSString stringWithFormat:@"￥%.2f", model.amount];
 }
 
 - (void)setCellViewUI {
     [self addSubview:self.timeLable];
     [_timeLable mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.size.mas_equalTo(CGSizeMake(100, 15));
+        make.size.mas_equalTo(CGSizeMake(130, 15));
         make.left.equalTo(self.mas_left).with.offset(15);
         make.centerY.equalTo(self);
     }];

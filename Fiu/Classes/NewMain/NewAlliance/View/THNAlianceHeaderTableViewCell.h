@@ -8,6 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import "THNMacro.h"
+#import "THNAllinaceData.h"
 
 @interface THNAlianceHeaderTableViewCell : UITableViewCell
 
@@ -15,5 +16,7 @@
 @property (nonatomic, strong) UILabel *moneyLable;
 @property (nonatomic, strong) UILabel *oldHintLable;
 @property (nonatomic, strong) UILabel *oldMoneyLable;
+
+- (void)thn_showAllianceData:(THNAllinaceData *)model;
 
 @end

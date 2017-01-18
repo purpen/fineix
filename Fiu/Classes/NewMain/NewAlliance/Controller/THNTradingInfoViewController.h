@@ -7,12 +7,16 @@
 //
 
 #import "THNViewController.h"
+#import "THNTradingInfoData.h"
 
 @interface THNTradingInfoViewController : THNViewController <
     UITableViewDelegate,
     UITableViewDataSource
 >
 
+@property (nonatomic, strong) NSString *recordId;
+@property (nonatomic, strong) FBRequest *infoRequest;
+@property (nonatomic, strong) THNTradingInfoData *dataModel;
 @property (nonatomic, strong) UITableView *infoTable;
 
 @end

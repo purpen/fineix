@@ -9,7 +9,9 @@
 #import "THNSettlementRecordViewController.h"
 #import "THNSettlementInfoViewController.h"
 #import "THNSettlementRecordTableViewCell.h"
+#import "THNBalanceRow.h"
 
+static NSString *const URLbalance = @"/balance_record/getlist";
 static NSString *const recordCellId = @"THNSettlementRecordTableViewCellId";
 
 @interface THNSettlementRecordViewController ()
@@ -27,9 +29,35 @@ static NSString *const recordCellId = @"THNSettlementRecordTableViewCellId";
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    [self thn_networkBalanceRecordListData];
     [self setViewUI];
 }
 
+#pragma mark - 请求结算列表数据
+- (void)thn_networkBalanceRecordListData {
+    [SVProgressHUD show];
+    self.balanceRequest = [FBAPI postWithUrlString:URLbalance requestDictionary:@{@"page":@"1", @"size":@"10000", @"sort":@"0"} delegate:self];
+    [self.balanceRequest startRequestSuccess:^(FBRequest *request, id result) {
+        NSDictionary *dict = [result valueForKey:@"data"];
+        NSArray *dataArr = dict[@"rows"];
+        for (NSDictionary *modelDict in dataArr) {
+            THNBalanceRow *model = [[THNBalanceRow alloc] initWithDictionary:modelDict];
+            [self.dataMarr addObject:model];
+            [self.idMarr addObject:model.idField];
+        }
+    
+        if (self.dataMarr.count > 0) {
+            [self.recordTable reloadData];
+        }
+        
+        [SVProgressHUD dismiss];
+        
+    } failure:^(FBRequest *request, NSError *error) {
+        NSLog(@"-- %@", [error localizedDescription]);
+    }];
+}
+
+#pragma mark - 设置UI
 - (void)setViewUI {
     [self.view addSubview:self.recordHintView];
     [self.view addSubview:self.recordTable];
@@ -59,14 +87,16 @@ static NSString *const recordCellId = @"THNSettlementRecordTableViewCellId";
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return 10;
+    return self.dataMarr.count;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     THNSettlementRecordTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:recordCellId];
     if (!cell) {
         cell = [[THNSettlementRecordTableViewCell alloc] initWithStyle:(UITableViewCellStyleDefault) reuseIdentifier:recordCellId];
-        [cell thn_setSettlementRecordData:indexPath.row];
+        if (self.dataMarr.count) {
+            [cell thn_setSettlementRecordData:self.dataMarr[indexPath.row]];
+        }
     }
     return cell;
 }
@@ -81,8 +111,10 @@ static NSString *const recordCellId = @"THNSettlementRecordTableViewCellId";
     }
 }
 
+#pragma makr - 查看详情
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     THNSettlementInfoViewController *settlementInfoVC = [[THNSettlementInfoViewController alloc] init];
+    settlementInfoVC.recordId = self.idMarr[indexPath.row];
     [self.navigationController pushViewController:settlementInfoVC animated:YES];
 }
 
@@ -91,6 +123,20 @@ static NSString *const recordCellId = @"THNSettlementRecordTableViewCellId";
     self.view.backgroundColor = [UIColor whiteColor];
     [[UIApplication sharedApplication] setStatusBarHidden:NO];
     self.navViewTitle.text = @"结算记录";
+}
+
+- (NSMutableArray *)dataMarr {
+    if (!_dataMarr) {
+        _dataMarr = [NSMutableArray array];
+    }
+    return _dataMarr;
+}
+
+- (NSMutableArray *)idMarr {
+    if (!_idMarr) {
+        _idMarr = [NSMutableArray array];
+    }
+    return _idMarr;
 }
 
 @end

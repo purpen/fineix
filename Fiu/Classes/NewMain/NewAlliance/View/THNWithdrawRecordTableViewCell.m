@@ -7,6 +7,7 @@
 //
 
 #import "THNWithdrawRecordTableViewCell.h"
+#import "NSString+TimeDate.h"
 
 @implementation THNWithdrawRecordTableViewCell
 
@@ -21,14 +22,19 @@
 }
 
 #pragma mark - 提现记录
-- (void)thn_setWithdrawRecordData:(NSInteger)data {
-    NSArray *stateArr = @[@"提现成功", @"提现审核", @"审核失败"];
-    if (data == 2) {
-        self.stateLable.textColor = [UIColor redColor];
+- (void)thn_setWithdrawRecordData:(THNWithdrawRow *)model {
+    if (model) {
+        if (model.status == 5) {
+            model.status = 3;
+        }
+        NSArray *stateArr = @[@"提现失败", @"提现申请中", @"提现审核中", @"提现成功"];
+        if (model.status == 0) {
+            self.stateLable.textColor = [UIColor redColor];
+        }
+        self.stateLable.text = stateArr[model.status];
+        self.moneyLable.text = [NSString stringWithFormat:@"- ￥%.2f", model.amount];
+        self.timeLable.text = [NSString getTimesTamp:model.createdOn];
     }
-    self.stateLable.text = stateArr[data];
-    self.moneyLable.text = @"-180.09";
-    self.timeLable.text = @"2016-12-12 16:02";
 }
 
 - (void)thn_showTotalMoney {
@@ -37,18 +43,16 @@
         make.centerY.equalTo(self);
     }];
     
-    self.moneyLable.text = @"390.12";
+    self.moneyLable.text = @"￥390.12";
     self.moneyLable.textColor = [UIColor colorWithHexString:MAIN_COLOR];
     self.moneyLable.font = [UIFont systemFontOfSize:17];
 }
 
 #pragma mark - 交易记录
-- (void)thn_setTradingRecordData:(NSInteger)data {
-    NSArray *moneyArr = @[@"10.6", @"11.2", @"1.09"];
-    NSArray *stateArr = @[@"已结算", @"待结算", @"已关闭"];
-    self.stateLable.text = moneyArr[data];
-    self.moneyLable.text = stateArr[data];
-    self.timeLable.text = @"2016-12-12 16:02";
+- (void)thn_setTradingRecordData:(THNTradingRow *)model {
+    self.stateLable.text = [NSString stringWithFormat:@"￥%.2f", model.totalPrice];
+    self.moneyLable.text = model.statusLabel;
+    self.timeLable.text = model.createdAt;
     [self showNextIcon];
 }
 
@@ -92,7 +96,7 @@
 - (UILabel *)stateLable {
     if (!_stateLable) {
         _stateLable = [[UILabel alloc] init];
-        _stateLable.font = [UIFont systemFontOfSize:14];
+        _stateLable.font = [UIFont boldSystemFontOfSize:14];
         _stateLable.textColor = [UIColor colorWithHexString:@"#222222"];
     }
     return _stateLable;

@@ -7,7 +7,7 @@
 //
 
 #import "UIColor+Extension.h"
-#define DEFAULT_VOID_COLOR [UIColor whiteColor]
+#define DEFAULT_VOID_COLOR [UIColor blackColor]
 
 @implementation UIColor (Extension)
 

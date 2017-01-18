@@ -13,6 +13,9 @@
     UITableViewDataSource
 >
 
+@property (nonatomic, strong) NSString *recordId;
+@property (nonatomic, strong) FBRequest *infoRequest;
+@property (nonatomic, strong) NSMutableArray *dataMarr;
 @property (nonatomic, strong) UITableView *infoTable;
 
 @end

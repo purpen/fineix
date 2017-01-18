@@ -8,15 +8,17 @@
 
 #import <UIKit/UIKit.h>
 #import "THNMacro.h"
+#import "THNAllinaceData.h"
 
 @interface THNAlianceTableViewCell : UITableViewCell
 
 @property (nonatomic, strong) UILabel *leftLable;
 @property (nonatomic, strong) UIImageView *icon;
 @property (nonatomic, strong) UILabel *moneyLable;
+@property (nonatomic, strong) UILabel *oldMoneyLable;
 @property (nonatomic, strong) UIImageView *moneyIcon;
 
-- (void)thn_setShowAlianceWithdrawData:(NSString *)data;
+- (void)thn_setShowAlianceWithdrawData:(THNAllinaceData *)model;
 
 - (void)thn_setShowRecordCellData:(NSInteger)index;
 

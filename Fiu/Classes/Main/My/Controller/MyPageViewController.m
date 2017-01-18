@@ -38,6 +38,7 @@
 #import "THNProjectViewController.h"
 #import "THNMessageViewController.h"
 #import "THNRefundListViewController.h"
+#import "THNAllianceViewController.h"
 
 @interface MyPageViewController ()<THNNavigationBarItemsDelegate,UICollectionViewDelegate,UICollectionViewDataSource>
 {
@@ -333,6 +334,7 @@
         [cell.btn8 addTarget:self action:@selector(giftBtn:) forControlEvents:UIControlEventTouchUpInside];
         [cell.btn9 addTarget:self action:@selector(shippingAddressBtn:) forControlEvents:UIControlEventTouchUpInside];
         [cell.refundBtn addTarget:self action:@selector(refundAction) forControlEvents:UIControlEventTouchUpInside];
+        [cell.allianceBtn addTarget:self action:@selector(allianceAction:) forControlEvents:UIControlEventTouchUpInside];
         return cell;
     }
     else if(indexPath.section == 3){
@@ -484,9 +486,13 @@
 //账户管理按钮
 -(void)accountManagementBtn:(UIButton*)sender{
     
-    
 }
 
+//分成管理
+- (void)allianceAction:(UIButton *)button {
+    THNAllianceViewController *allianceVC = [[THNAllianceViewController alloc] init];
+    [self.navigationController pushViewController:allianceVC animated:YES];
+}
 
 
 -(UITapGestureRecognizer *)myTap{

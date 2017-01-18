@@ -31,7 +31,7 @@
     CGFloat width = [maxMoney boundingRectWithSize:CGSizeMake(SCREEN_WIDTH, 20)
                                            options:(NSStringDrawingUsesDeviceMetrics)
                                         attributes:nil
-                                           context:nil].size.width *1.2;
+                                           context:nil].size.width *1.22;
     [self.maxMoneyLabel mas_updateConstraints:^(MASConstraintMaker *make) {
         make.width.mas_equalTo(@(width));
     }];
@@ -95,7 +95,7 @@
         _moneyTextField.font = [UIFont systemFontOfSize:18];
         _moneyTextField.textColor = [UIColor colorWithHexString:@"#222222"];
         _moneyTextField.delegate = self;
-        _moneyTextField.keyboardType = UIKeyboardTypeNumberPad;
+        _moneyTextField.keyboardType = UIKeyboardTypeDecimalPad;
         _moneyTextField.placeholder = @"100元";
         [_moneyTextField addTarget:self action:@selector(setRefreshMoney:) forControlEvents:(UIControlEventEditingChanged)];
     }
@@ -145,6 +145,7 @@
         _errorLabel.font = [UIFont systemFontOfSize:11];
         _errorLabel.textColor = [UIColor colorWithHexString:@"#F76260"];
         _errorLabel.text = @"* 每次提现金额不得少于100元";
+        _errorLabel.hidden = YES;
     }
     return _errorLabel;
 }
@@ -184,6 +185,10 @@
     } else {
         [[NSNotificationCenter defaultCenter] postNotificationName:@"canNotWithdrawalMoney" object:nil];
         self.errorLabel.hidden = NO;
+    }
+    
+    if ([self.moneyTextField.text isEqualToString:@""]) {
+        self.errorLabel.hidden = YES;
     }
 }
 

@@ -8,6 +8,8 @@
 
 #import <UIKit/UIKit.h>
 #import "THNMacro.h"
+#import "THNTradingInfoData.h"
+#import "THNSettlementInfoRow.h"
 
 @interface THNRecordStateTableViewCell : UITableViewCell
 
@@ -17,12 +19,12 @@
 /**
  交易记录
  */
-- (void)thn_setTradingRecordInfoDataTop;
-- (void)thn_setTradingRecordInfoDataBottom;
+- (void)thn_setTradingRecordInfoDataTop:(THNTradingInfoData *)model;
+- (void)thn_setTradingRecordInfoDataBottom:(THNTradingInfoData *)model;
 
 /**
  结算记录
  */
-- (void)thn_setSettlementRecordInfoData;
+- (void)thn_setSettlementRecordInfoData:(THNSettlementInfoRow *)model;
 
 @end

@@ -8,6 +8,8 @@
 
 #import <UIKit/UIKit.h>
 #import "THNMacro.h"
+#import "THNTradingRow.h"
+#import "THNWithdrawRow.h"
 
 @interface THNWithdrawRecordTableViewCell : UITableViewCell
 
@@ -16,9 +18,9 @@
 @property (nonatomic, strong) UILabel *moneyLable;
 @property (nonatomic, strong) UIImageView *icon;
 
-- (void)thn_setWithdrawRecordData:(NSInteger)data;
+- (void)thn_setWithdrawRecordData:(THNWithdrawRow *)model;
 
-- (void)thn_setTradingRecordData:(NSInteger)data;
+- (void)thn_setTradingRecordData:(THNTradingRow *)model;
 
 - (void)thn_showTotalMoney;
 

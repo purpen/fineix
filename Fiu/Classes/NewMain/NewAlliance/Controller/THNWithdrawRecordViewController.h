@@ -13,6 +13,8 @@
     UITableViewDataSource
 >
 
+@property (nonatomic, strong) FBRequest *withdrawRequest;
+@property (nonatomic, strong) NSMutableArray *dataMarr;
 @property (nonatomic, strong) UITableView *recordTable;
 
 @end

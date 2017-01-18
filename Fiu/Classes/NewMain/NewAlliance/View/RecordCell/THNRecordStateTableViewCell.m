@@ -21,21 +21,23 @@
 }
 
 #pragma mark - 交易明细
-- (void)thn_setTradingRecordInfoDataTop {
-    self.leftLable.text = @"2016-12-09";
-    self.rightLable.text = @"已支付";
+- (void)thn_setTradingRecordInfoDataTop:(THNTradingInfoData *)model {
+    if (model) {
+        self.leftLable.text = model.createdAt;
+        self.rightLable.text = model.statusLabel;
+    }
 }
 
-- (void)thn_setTradingRecordInfoDataBottom {
+- (void)thn_setTradingRecordInfoDataBottom:(THNTradingInfoData *)model {
     self.leftLable.text = @"分成收益";
-    self.rightLable.text = @"5.80";
+    self.rightLable.text = [NSString stringWithFormat:@"￥%.2f", model.totalPrice];
 }
 
 #pragma mark - 结算明细
-- (void)thn_setSettlementRecordInfoData {
+- (void)thn_setSettlementRecordInfoData:(THNSettlementInfoRow *)model {
     self.leftLable.text = @"已结算收益";
     self.rightLable.textColor = [UIColor colorWithHexString:MAIN_COLOR];
-    self.rightLable.text = @"＋5.08";
+    self.rightLable.text = [NSString stringWithFormat:@"＋￥%.2f", model.amount];
 }
 
 - (void)setCellViewUI {
@@ -67,7 +69,7 @@
     if (!_rightLable) {
         _rightLable = [[UILabel alloc] init];
         _rightLable.textColor = [UIColor colorWithHexString:@"#222222"];
-        _rightLable.font = [UIFont systemFontOfSize:14];
+        _rightLable.font = [UIFont boldSystemFontOfSize:14];
         _rightLable.textAlignment = NSTextAlignmentRight;
     }
     return _rightLable;

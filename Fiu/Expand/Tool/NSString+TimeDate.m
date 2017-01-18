@@ -12,7 +12,7 @@
 
 + (NSString *)getTimesTamp:(NSInteger)time {
     NSDateFormatter *timeData = [[NSDateFormatter alloc] init];
-    [timeData setDateFormat:@"yyyy-MM-dd"];
+    [timeData setDateFormat:@"yyyy-MM-dd HH:mm:ss"];
     NSString *timeStr = [timeData stringFromDate:[NSDate dateWithTimeIntervalSince1970:time]];
     return timeStr;
 }

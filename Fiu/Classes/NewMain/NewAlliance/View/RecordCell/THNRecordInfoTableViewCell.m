@@ -20,21 +20,34 @@
 }
 
 #pragma mark - 交易详情
-- (void)thn_setTradingRecordInfoData {
+- (void)thn_setTradingRecordInfoData:(THNTradingInfoData *)model {
     NSArray *textArr = @[@"产品", @"单价", @"佣金", @"收益比率", @"数量"];
     [self setTradingInfoText:textArr];
-    
-    NSArray *dataArr = @[@"云马电动车", @"￥2000.00", @"￥29.20", @"4％", @"2"];
-    [self setTradingInfoData:dataArr];
+
+    if (model) {
+        NSString *unitPrice = [NSString stringWithFormat:@"%.2f", model.unitPrice];
+        NSString *totlaPrice = [NSString stringWithFormat:@"%.2f", model.totalPrice];
+        NSString *percent = [NSString stringWithFormat:@"%.2f％", model.commisionPercent *100];
+        NSString *number = [NSString stringWithFormat:@"%zi", model.quantity];
+        NSArray *dataArr = @[model.product.title, unitPrice, totlaPrice, percent, number];
+        [self setTradingInfoData:dataArr];
+    }
 }
 
 #pragma mark - 结算详情
-- (void)thn_setSettlementRecordInfoData {
+- (void)thn_setSettlementRecordInfoData:(THNSettlementInfoRow *)model {
     NSArray *textArr = @[@"产品", @"单价", @"佣金", @"收益比率", @"数量", @"时间"];
     [self setTradingInfoText:textArr];
     
-    NSArray *dataArr = @[@"云马电动车", @"￥2000.00", @"￥29.20", @"4％", @"2", @"2017-01-16"];
-    [self setTradingInfoData:dataArr];
+    if (model) {
+        NSString *unitPrice = [NSString stringWithFormat:@"%.2f", model.balance.unitPrice];
+        NSString *totlaPrice = [NSString stringWithFormat:@"%.2f", model.balance.totalPrice];
+        NSString *percent = [NSString stringWithFormat:@"%.2f％", model.balance.commisionPercent *100];
+        NSString *number = [NSString stringWithFormat:@"%zi", model.balance.quantity];
+        NSString *time = model.createdAt;
+        NSArray *dataArr = @[model.balance.product.title, unitPrice, totlaPrice, percent, number, time];
+        [self setTradingInfoData:dataArr];
+    }
 }
 
 - (void)setTradingInfoText:(NSArray *)textArr {
@@ -61,7 +74,7 @@
         textLabel.text = data[idx];
         [self addSubview:textLabel];
         [textLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.size.mas_equalTo(CGSizeMake(80, 35));
+            make.size.mas_equalTo(CGSizeMake(240, 35));
             make.right.mas_equalTo(-15);
             make.top.mas_equalTo(30 *idx);
         }];

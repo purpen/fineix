@@ -8,6 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import "THNMacro.h"
+#import "THNBalanceRow.h"
 
 @interface THNSettlementRecordTableViewCell : UITableViewCell
 
@@ -16,5 +17,5 @@
 @property (nonatomic, strong) UILabel *moneyLable;
 @property (nonatomic, strong) UIImageView *icon;
 
-- (void)thn_setSettlementRecordData:(NSInteger)data;
+- (void)thn_setSettlementRecordData:(THNBalanceRow *)model;
 @end

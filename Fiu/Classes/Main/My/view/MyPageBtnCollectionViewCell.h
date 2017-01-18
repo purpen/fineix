@@ -16,7 +16,7 @@
 @property(nonatomic,strong) UIButton *btn3;
 @property(nonatomic,strong) UIButton *btn4;
 /** 收藏按钮 */
-@property (nonatomic, strong) UIButton *btn5;
+@property(nonatomic,strong) UIButton *btn5;
 @property(nonatomic,strong) UIButton *btn6;
 @property(nonatomic,strong) UIButton *btn7;
 @property(nonatomic,strong) UIButton *btn8;
@@ -36,5 +36,10 @@
 @property (nonatomic, strong) UIButton *refundBtn;
 /**  */
 @property (nonatomic, strong) UILabel *refundLabel;
+
+/** 分成按钮 */
+@property (nonatomic, strong) UIButton *allianceBtn;
+/**  */
+@property (nonatomic, strong) UILabel *allianceLabel;
 
 @end

@@ -9,7 +9,9 @@
 #import "THNTradingRecordViewController.h"
 #import "THNTradingInfoViewController.h"
 #import "THNWithdrawRecordTableViewCell.h"
+#import "THNTradingRow.h"
 
+static NSString *const URLTrading = @"/balance/getlist";
 static NSString *const recordCellId = @"THNWithdrawRecordTableViewCellId";
 
 @interface THNTradingRecordViewController ()
@@ -27,9 +29,35 @@ static NSString *const recordCellId = @"THNWithdrawRecordTableViewCellId";
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    [self thn_networkTradingRecordListData];
     [self setViewUI];
 }
 
+#pragma mark - 请求交易列表数据
+- (void)thn_networkTradingRecordListData {
+    [SVProgressHUD show];
+    self.tradingRequest = [FBAPI postWithUrlString:URLTrading requestDictionary:@{@"page":@"1", @"size":@"10000", @"sort":@"0"} delegate:self];
+    [self.tradingRequest startRequestSuccess:^(FBRequest *request, id result) {
+        NSDictionary *dict = [result valueForKey:@"data"];
+        NSArray *dataArr = dict[@"rows"];
+        for (NSDictionary *modelDict in dataArr) {
+            THNTradingRow *model = [[THNTradingRow alloc] initWithDictionary:modelDict];
+            [self.dataMarr addObject:model];
+            [self.idMarr addObject:model.idField];
+        }
+        
+        if (self.dataMarr.count > 0) {
+            [self.recordTable reloadData];
+        }
+        
+        [SVProgressHUD dismiss];
+        
+    } failure:^(FBRequest *request, NSError *error) {
+        NSLog(@"-- %@", [error localizedDescription]);
+    }];
+}
+
+#pragma mark - 设置UI
 - (void)setViewUI {
     [self.view addSubview:self.recordHintView];
     [self.view addSubview:self.recordTable];
@@ -59,14 +87,16 @@ static NSString *const recordCellId = @"THNWithdrawRecordTableViewCellId";
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return 3;
+    return self.dataMarr.count;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     THNWithdrawRecordTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:recordCellId];
     if (!cell) {
         cell = [[THNWithdrawRecordTableViewCell alloc] initWithStyle:(UITableViewCellStyleDefault) reuseIdentifier:recordCellId];
-        [cell thn_setTradingRecordData:indexPath.row];
+        if (self.dataMarr.count) {
+            [cell thn_setTradingRecordData:self.dataMarr[indexPath.row]];
+        }
     }
     return cell;
 }
@@ -83,6 +113,7 @@ static NSString *const recordCellId = @"THNWithdrawRecordTableViewCellId";
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     THNTradingInfoViewController *tradingInfoVC = [[THNTradingInfoViewController alloc] init];
+    tradingInfoVC.recordId = self.idMarr[indexPath.row];
     [self.navigationController pushViewController:tradingInfoVC animated:YES];
 }
 
@@ -91,6 +122,20 @@ static NSString *const recordCellId = @"THNWithdrawRecordTableViewCellId";
     self.view.backgroundColor = [UIColor whiteColor];
     [[UIApplication sharedApplication] setStatusBarHidden:NO];
     self.navViewTitle.text = @"交易记录";
+}
+
+- (NSMutableArray *)dataMarr {
+    if (!_dataMarr) {
+        _dataMarr = [NSMutableArray array];
+    }
+    return _dataMarr;
+}
+
+- (NSMutableArray *)idMarr {
+    if (!_idMarr) {
+        _idMarr = [NSMutableArray array];
+    }
+    return _idMarr;
 }
 
 @end

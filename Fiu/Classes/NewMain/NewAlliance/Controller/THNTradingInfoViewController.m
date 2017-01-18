@@ -10,6 +10,7 @@
 #import "THNRecordStateTableViewCell.h"
 #import "THNRecordInfoTableViewCell.h"
 
+static NSString *const URLTradingInfo = @"/balance/view";
 static NSString *const infoCellId = @"THNRecordInfoTableViewCellId";
 static NSString *const stateCellId = @"THNRecordStateTableViewCellId";
 
@@ -28,9 +29,29 @@ static NSString *const stateCellId = @"THNRecordStateTableViewCellId";
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    if (self.recordId.length) {
+        [self thn_networkTradingRecordInfoData];
+    }
     [self setViewUI];
 }
 
+#pragma mark - 请求交易详情数据
+- (void)thn_networkTradingRecordInfoData {
+    [SVProgressHUD show];
+    self.infoRequest = [FBAPI postWithUrlString:URLTradingInfo requestDictionary:@{@"id":self.recordId} delegate:self];
+    [self.infoRequest startRequestSuccess:^(FBRequest *request, id result) {
+        NSDictionary *dict = [result valueForKey:@"data"];
+        self.dataModel = [[THNTradingInfoData alloc] initWithDictionary:dict];
+        [self.infoTable reloadData];
+
+        [SVProgressHUD dismiss];
+        
+    } failure:^(FBRequest *request, NSError *error) {
+        [SVProgressHUD showErrorWithStatus:[error localizedDescription]];
+    }];
+}
+
+#pragma mark - 设置UI
 - (void)setViewUI {
     [self.view addSubview:self.infoTable];
 }
@@ -51,7 +72,7 @@ static NSString *const stateCellId = @"THNRecordStateTableViewCellId";
 }
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-    return 2;
+    return 1;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
@@ -61,21 +82,17 @@ static NSString *const stateCellId = @"THNRecordStateTableViewCellId";
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     if (indexPath.row == 1) {
         THNRecordInfoTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:infoCellId];
-        if (!cell) {
-            cell = [[THNRecordInfoTableViewCell alloc] initWithStyle:(UITableViewCellStyleDefault) reuseIdentifier:infoCellId];
-            [cell thn_setTradingRecordInfoData];
-        }
+        cell = [[THNRecordInfoTableViewCell alloc] initWithStyle:(UITableViewCellStyleDefault) reuseIdentifier:infoCellId];
+        [cell thn_setTradingRecordInfoData:self.dataModel];
         return cell;
     
     } else {
         THNRecordStateTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:stateCellId];
-        if (!cell) {
-            cell = [[THNRecordStateTableViewCell alloc] initWithStyle:(UITableViewCellStyleDefault) reuseIdentifier:stateCellId];
-            if (indexPath.row == 0) {
-                [cell thn_setTradingRecordInfoDataTop];
-            } else if (indexPath.row == 2) {
-                [cell thn_setTradingRecordInfoDataBottom];
-            }
+        cell = [[THNRecordStateTableViewCell alloc] initWithStyle:(UITableViewCellStyleDefault) reuseIdentifier:stateCellId];
+        if (indexPath.row == 0) {
+            [cell thn_setTradingRecordInfoDataTop:self.dataModel];
+        } else if (indexPath.row == 2) {
+            [cell thn_setTradingRecordInfoDataBottom:self.dataModel];
         }
         return cell;
     }

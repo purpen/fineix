@@ -20,12 +20,20 @@
     return self;
 }
 
+- (void)thn_showAllianceData:(THNAllinaceData *)model {
+    if (model) {
+        self.moneyLable.text = [NSString stringWithFormat:@"%.2f", model.totalBalanceAmount];
+//        self.oldMoneyLable.text = [NSString stringWithFormat:@"＋%.2f", ]
+    }
+}
+
 - (void)setCellViewUI {
     [self addSubview:self.moneyLable];
     [_moneyLable mas_makeConstraints:^(MASConstraintMaker *make) {
         make.height.mas_equalTo(@40);
         make.left.right.equalTo(self).with.offset(0);
-        make.centerY.equalTo(self.mas_centerY).with.offset(-10);
+//        make.centerY.equalTo(self.mas_centerY).with.offset(-10);
+        make.centerY.equalTo(self.mas_centerY);
     }];
     
     [self addSubview:self.hintLable];
@@ -35,19 +43,19 @@
         make.bottom.equalTo(_moneyLable.mas_top).with.offset(-10);
     }];
     
-    [self addSubview:self.oldHintLable];
-    [_oldHintLable mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.height.mas_equalTo(@12);
-        make.left.right.equalTo(self).with.offset(0);
-        make.top.equalTo(_moneyLable.mas_bottom).with.offset(10);
-    }];
-    
-    [self addSubview:self.oldMoneyLable];
-    [_oldMoneyLable mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.height.mas_equalTo(@12);
-        make.left.right.equalTo(self).with.offset(0);
-        make.top.equalTo(_oldHintLable.mas_bottom).with.offset(10);
-    }];
+//    [self addSubview:self.oldHintLable];
+//    [_oldHintLable mas_makeConstraints:^(MASConstraintMaker *make) {
+//        make.height.mas_equalTo(@12);
+//        make.left.right.equalTo(self).with.offset(0);
+//        make.top.equalTo(_moneyLable.mas_bottom).with.offset(10);
+//    }];
+//    
+//    [self addSubview:self.oldMoneyLable];
+//    [_oldMoneyLable mas_makeConstraints:^(MASConstraintMaker *make) {
+//        make.height.mas_equalTo(@12);
+//        make.left.right.equalTo(self).with.offset(0);
+//        make.top.equalTo(_oldHintLable.mas_bottom).with.offset(10);
+//    }];
     
 }
 
@@ -68,7 +76,6 @@
         _moneyLable.font = [UIFont systemFontOfSize:34];
         _moneyLable.textColor = [UIColor colorWithHexString:MAIN_COLOR];
         _moneyLable.textAlignment = NSTextAlignmentCenter;
-        _moneyLable.text = @"1953032.32";
     }
     return _moneyLable;
 }
@@ -90,7 +97,6 @@
         _oldMoneyLable.font = [UIFont systemFontOfSize:11];
         _oldMoneyLable.textColor = [UIColor colorWithHexString:@"#222222"];
         _oldMoneyLable.textAlignment = NSTextAlignmentCenter;
-        _oldMoneyLable.text = @"＋1.00";
     }
     return _oldMoneyLable;
 }

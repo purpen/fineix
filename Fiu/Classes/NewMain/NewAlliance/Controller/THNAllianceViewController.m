@@ -12,13 +12,15 @@
 #import "THNTradingRecordViewController.h"
 #import "THNWithdrawRecordViewController.h"
 #import "THNSettlementRecordViewController.h"
-
 #import "THNAlianceHeaderTableViewCell.h"
 
+static NSString *const URLAliance = @"/alliance/view";
 static NSString *const alianceCellId = @"THNAlianceTableViewCellId";
 static NSString *const headerCellId = @"THNAlianceHeaderTableViewCellId";
 
-@interface THNAllianceViewController ()
+@interface THNAllianceViewController () {
+    
+}
 
 @end
 
@@ -28,6 +30,7 @@ static NSString *const headerCellId = @"THNAlianceHeaderTableViewCellId";
     [super viewWillAppear:animated];
     
     [self thn_setNavigationViewUI];
+    [self thn_networkAllinaceListData];
 }
 
 - (void)viewDidLoad {
@@ -36,6 +39,23 @@ static NSString *const headerCellId = @"THNAlianceHeaderTableViewCellId";
     [self setViewUI];
 }
 
+#pragma mark - 请求账户数据
+- (void)thn_networkAllinaceListData {
+    [SVProgressHUD show];
+    self.alianceRequest = [FBAPI postWithUrlString:URLAliance requestDictionary:@{} delegate:self];
+    [self.alianceRequest startRequestSuccess:^(FBRequest *request, id result) {
+        NSLog(@"=====%@", result);
+        NSDictionary *dict = [result valueForKey:@"data"];
+        self.dataModel = [[THNAllinaceData alloc] initWithDictionary:dict];
+        [self.alianceTable reloadData];
+        [SVProgressHUD dismiss];
+        
+    } failure:^(FBRequest *request, NSError *error) {
+        NSLog(@"-- %@", [error localizedDescription]);
+    }];
+}
+
+#pragma mark - 设置UI
 - (void)setViewUI {
     [self.view addSubview:self.alianceTable];
 }
@@ -67,12 +87,13 @@ static NSString *const headerCellId = @"THNAlianceHeaderTableViewCellId";
     if (indexPath.section == 0) {
         THNAlianceHeaderTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:headerCellId];
         cell = [[THNAlianceHeaderTableViewCell alloc] initWithStyle:(UITableViewCellStyleDefault) reuseIdentifier:headerCellId];
+        [cell thn_showAllianceData:self.dataModel];
         return cell;
     }
     THNAlianceTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:alianceCellId];
     cell = [[THNAlianceTableViewCell alloc] initWithStyle:(UITableViewCellStyleDefault) reuseIdentifier:alianceCellId];
     if (indexPath.section == 1) {
-        [cell thn_setShowAlianceWithdrawData:@"223.12"];
+        [cell thn_setShowAlianceWithdrawData:self.dataModel];
     } else if (indexPath.section == 2) {
         [cell thn_setShowRecordCellData:indexPath.row];
     }
@@ -83,7 +104,7 @@ static NSString *const headerCellId = @"THNAlianceHeaderTableViewCellId";
     if (indexPath.section == 0) {
         return 150;
     } else if (indexPath.section == 1) {
-        return 60;
+        return 75;
     }
     return 44;
 }
@@ -95,6 +116,7 @@ static NSString *const headerCellId = @"THNAlianceHeaderTableViewCellId";
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     if (indexPath.section == 1) {
         THNWithdrawViewController *withdrawVC = [[THNWithdrawViewController alloc] init];
+        
         [self.navigationController pushViewController:withdrawVC animated:YES];
         
     } else if (indexPath.section == 2) {

@@ -142,6 +142,19 @@
             make.top.mas_equalTo(self.refundBtn.mas_bottom).with.offset(8/667.*SCREEN_HEIGHT);
         }];
         
+        [self.contentView addSubview:self.allianceBtn];
+        [_allianceBtn mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.size.mas_equalTo(CGSizeMake(50/667.0*SCREEN_HEIGHT, 40/667.0*SCREEN_HEIGHT));
+            make.left.mas_equalTo(_refundBtn.mas_right).with.offset(39/667.0*SCREEN_HEIGHT);
+            make.top.mas_equalTo(self.btn6.mas_bottom).with.offset(42/667.0*SCREEN_HEIGHT);
+        }];
+        [self.contentView addSubview:self.allianceLabel];
+        [_allianceLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.size.mas_equalTo(CGSizeMake(60, 15));
+            make.centerX.mas_equalTo(self.allianceBtn.mas_centerX);
+            make.top.mas_equalTo(self.allianceBtn.mas_bottom).with.offset(8/667.*SCREEN_HEIGHT);
+        }];
+        
     }
     return self;
 }
@@ -344,6 +357,28 @@
         _refundLabel.textColor = [UIColor darkGrayColor];
     }
     return _refundLabel;
+}
+
+-(UIButton *)allianceBtn{
+    if (!_allianceBtn) {
+        _allianceBtn = [[UIButton alloc] init];
+        [_allianceBtn setImage:[UIImage imageNamed:@"my_ refund"] forState:UIControlStateNormal];
+    }
+    return _allianceBtn;
+}
+-(UILabel *)allianceLabel{
+    if (!_allianceLabel) {
+        _allianceLabel = [[UILabel alloc] init];
+        _allianceLabel.text = @"分成管理";
+        _allianceLabel.textAlignment = NSTextAlignmentCenter;
+        if (IS_iOS9) {
+            _allianceLabel.font = [UIFont fontWithName:@"PingFangSC-Light" size:13];
+        } else {
+            _allianceLabel.font = [UIFont systemFontOfSize:13];
+        }
+        _allianceLabel.textColor = [UIColor darkGrayColor];
+    }
+    return _allianceLabel;
 }
 
 

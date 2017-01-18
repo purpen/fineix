@@ -14,7 +14,6 @@
 #import "THNMallViewController.h"
 #import "THNMallViewController.h"
 #import "MyPageViewController.h"
-#import "THNAllianceViewController.h"
 
 #import "UserInfoEntity.h"
 #import "THNLoginRegisterViewController.h"
@@ -117,7 +116,7 @@
     THNHomeViewController *homeVC = [[THNHomeViewController alloc] init];
     THNDiscoverViewController *discoverVC = [[THNDiscoverViewController alloc] init];
     THNMallViewController *mallVC = [[THNMallViewController alloc] init];
-    THNAllianceViewController *myVC = [[THNAllianceViewController alloc] init];
+    MyPageViewController *myVC = [[MyPageViewController alloc] init];
     
     _homeNav = [[THNNavigationController alloc] initWithRootViewController:homeVC];
     _discoverNav = [[THNNavigationController alloc] initWithRootViewController:discoverVC];
