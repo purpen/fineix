@@ -26,5 +26,6 @@
  结算记录
  */
 - (void)thn_setSettlementRecordInfoData:(THNSettlementInfoRow *)model;
+- (void)thn_setSettlementRecordInfoDataBottom:(THNSettlementInfoRow *)model;
 
 @end

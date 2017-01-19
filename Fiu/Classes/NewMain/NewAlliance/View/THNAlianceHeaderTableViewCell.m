@@ -80,13 +80,6 @@
         make.top.equalTo(_withdrawMoney.mas_top).with.offset(5);
     }];
     
-    [self addSubview:self.withdrawLabel];
-    [_withdrawLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.size.mas_offset(CGSizeMake(25, 13));
-        make.right.equalTo(_icon.mas_left).with.offset(-5);
-        make.centerY.equalTo(_icon);
-    }];
-    
     UILabel *line = [[UILabel alloc] init];
     line.backgroundColor = [UIColor colorWithHexString:@"E6E6E6"];
     [self addSubview:line];
@@ -170,21 +163,10 @@
     return _oldMoneyHint;
 }
 
-- (UILabel *)withdrawLabel {
-    if (!_withdrawLabel) {
-        _withdrawLabel = [[UILabel alloc] init];
-        _withdrawLabel.textColor = [UIColor colorWithHexString:@"#666666"];
-        _withdrawLabel.font = [UIFont systemFontOfSize:12];
-        _withdrawLabel.textAlignment = NSTextAlignmentRight;
-        _withdrawLabel.text = @"提现";
-    }
-    return _withdrawLabel;
-}
-
 - (UIImageView *)icon {
     if (!_icon) {
         _icon = [[UIImageView alloc] init];
-        _icon.image = [UIImage imageNamed:@"icon_Next"];
+        _icon.image = [UIImage imageNamed:@"thn_icon_back"];
         _icon.contentMode = UIViewContentModeScaleAspectFit;
     }
     return _icon;

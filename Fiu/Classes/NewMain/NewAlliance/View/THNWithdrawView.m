@@ -48,15 +48,16 @@
     
     [self addSubview:self.rmbLabel];
     [_rmbLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.size.mas_equalTo(CGSizeMake(15, 20));
+        make.size.mas_equalTo(CGSizeMake(30, 40));
         make.left.equalTo(self.mas_left).with.offset(12);
         make.top.equalTo(_hintLabel.mas_bottom).with.offset(15);
     }];
     
     [self addSubview:self.moneyTextField];
     [_moneyTextField mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.size.mas_equalTo(CGSizeMake(150, 20));
+        make.height.mas_equalTo(@40);
         make.left.equalTo(_rmbLabel.mas_right).with.offset(5);
+        make.right.equalTo(self.mas_right).with.offset(-15);
         make.centerY.equalTo(_rmbLabel);
     }];
     
@@ -64,21 +65,14 @@
     [_errorLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.size.mas_equalTo(CGSizeMake(200, 12));
         make.left.equalTo(self.mas_left).with.offset(15);
-        make.top.equalTo(_rmbLabel.mas_bottom).with.offset(10);
-    }];
-    
-    [self addSubview:self.lineLabel];
-    [_lineLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.size.mas_equalTo(CGSizeMake(SCREEN_WIDTH - 30, 1));
-        make.left.equalTo(self.mas_left).with.offset(15);
-        make.top.equalTo(_rmbLabel.mas_bottom).with.offset(30);
+        make.top.equalTo(_moneyTextField.mas_bottom).with.offset(10);
     }];
     
     [self addSubview:self.maxMoneyLabel];
     [_maxMoneyLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.size.mas_equalTo(CGSizeMake(100, 15));
         make.left.equalTo(self.mas_left).with.offset(15);
-        make.top.equalTo(_lineLabel.mas_bottom).with.offset(10);
+        make.bottom.equalTo(self.mas_bottom).with.offset(-10);
     }];
     
     [self addSubview:self.allMoneyBtn];
@@ -87,12 +81,19 @@
         make.left.equalTo(_maxMoneyLabel.mas_right).with.offset(10);
         make.bottom.equalTo(_maxMoneyLabel.mas_bottom).with.offset(0);
     }];
+    
+    [self addSubview:self.lineLabel];
+    [_lineLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.size.mas_equalTo(CGSizeMake(SCREEN_WIDTH - 30, 1));
+        make.left.equalTo(self.mas_left).with.offset(15);
+        make.bottom.equalTo(_maxMoneyLabel.mas_top).with.offset(-10);
+    }];
 }
 
 - (UITextField *)moneyTextField {
     if (!_moneyTextField) {
         _moneyTextField = [[UITextField alloc] init];
-        _moneyTextField.font = [UIFont systemFontOfSize:18];
+        _moneyTextField.font = [UIFont systemFontOfSize:34];
         _moneyTextField.textColor = [UIColor colorWithHexString:@"#222222"];
         _moneyTextField.delegate = self;
         _moneyTextField.keyboardType = UIKeyboardTypeDecimalPad;
@@ -124,7 +125,7 @@
 - (UILabel *)rmbLabel {
     if (!_rmbLabel) {
         _rmbLabel = [[UILabel alloc] init];
-        _rmbLabel.font = [UIFont systemFontOfSize:18];
+        _rmbLabel.font = [UIFont systemFontOfSize:34];
         _rmbLabel.textColor = [UIColor colorWithHexString:@"#222222"];
         _rmbLabel.text = @"￥";
     }

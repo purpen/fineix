@@ -67,6 +67,14 @@ static NSString *const stateCellId = @"THNRecordStateTableViewCellId";
     [self.view addSubview:self.infoTable];
 }
 
+- (THNRecordTableHeaderView *)headerView {
+    if (!_headerView) {
+        _headerView = [[THNRecordTableHeaderView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 40)];
+        [_headerView thn_setSettlementMoney:self.money];
+    }
+    return _headerView;
+}
+
 - (UITableView *)infoTable {
     if (!_infoTable) {
         _infoTable = [[UITableView alloc] initWithFrame:CGRectMake(0, 64, SCREEN_WIDTH, SCREEN_HEIGHT -64) style:(UITableViewStyleGrouped)];
@@ -74,6 +82,7 @@ static NSString *const stateCellId = @"THNRecordStateTableViewCellId";
         _infoTable.dataSource = self;
         _infoTable.backgroundColor = [UIColor colorWithHexString:@"#F8F8F8"];
         _infoTable.tableFooterView = [UIView new];
+        _infoTable.tableHeaderView = self.headerView;
         if ([_infoTable respondsToSelector:@selector(setSeparatorInset:)]) {
             [_infoTable setSeparatorInset:(UIEdgeInsetsZero)];
         }
@@ -86,23 +95,23 @@ static NSString *const stateCellId = @"THNRecordStateTableViewCellId";
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return 2;
+    return 3;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    if (indexPath.row == 0) {
-        THNRecordStateTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:stateCellId];
-        if (!cell) {
-            cell = [[THNRecordStateTableViewCell alloc] initWithStyle:(UITableViewCellStyleDefault) reuseIdentifier:stateCellId];
-            [cell thn_setSettlementRecordInfoData:self.dataMarr[indexPath.section]];
-        }
+    if (indexPath.row == 1) {
+        THNRecordInfoTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:infoCellId];
+        cell = [[THNRecordInfoTableViewCell alloc] initWithStyle:(UITableViewCellStyleDefault) reuseIdentifier:infoCellId];
+        [cell thn_setSettlementRecordInfoData:self.dataMarr[indexPath.section]];
         return cell;
         
-    } else if (indexPath.row == 1) {
-        THNRecordInfoTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:infoCellId];
-        if (!cell) {
-            cell = [[THNRecordInfoTableViewCell alloc] initWithStyle:(UITableViewCellStyleDefault) reuseIdentifier:infoCellId];
+    } else {
+        THNRecordStateTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:stateCellId];
+        cell = [[THNRecordStateTableViewCell alloc] initWithStyle:(UITableViewCellStyleDefault) reuseIdentifier:stateCellId];
+        if (indexPath.row == 0) {
             [cell thn_setSettlementRecordInfoData:self.dataMarr[indexPath.section]];
+        } else if (indexPath.row == 2) {
+            [cell thn_setSettlementRecordInfoDataBottom:self.dataMarr[indexPath.section]];
         }
         return cell;
     }
@@ -112,7 +121,7 @@ static NSString *const stateCellId = @"THNRecordStateTableViewCellId";
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
     if (indexPath.row == 1) {
-        return 190.0f;
+        return 160.0f;
     }
     return 35.0f;
 }

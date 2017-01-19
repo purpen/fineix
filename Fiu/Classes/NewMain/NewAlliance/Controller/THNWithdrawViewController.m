@@ -95,7 +95,7 @@ static NSString *const URLApply = @"/withdraw_cash/apply_cash";
 
 - (THNWithdrawView *)withdrawView {
     if (!_withdrawView) {
-        _withdrawView = [[THNWithdrawView alloc] initWithFrame:CGRectMake(0, 64, SCREEN_WIDTH, 135)];
+        _withdrawView = [[THNWithdrawView alloc] initWithFrame:CGRectMake(0, 64, SCREEN_WIDTH, 150)];
         [_withdrawView thn_setCanWithdrawMoneyData:self.dataModel.waitCashAmount];
     }
     return _withdrawView;

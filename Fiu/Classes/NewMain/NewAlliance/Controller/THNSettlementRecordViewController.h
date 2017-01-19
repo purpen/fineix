@@ -17,6 +17,7 @@
 @property (nonatomic, strong) FBRequest *balanceRequest;
 @property (nonatomic, strong) NSMutableArray *dataMarr;
 @property (nonatomic, strong) NSMutableArray *idMarr;
+@property (nonatomic, strong) NSMutableArray *moneyMarr;
 @property (nonatomic, strong) THNRecordHintView *recordHintView;
 @property (nonatomic, strong) UITableView *recordTable;
 

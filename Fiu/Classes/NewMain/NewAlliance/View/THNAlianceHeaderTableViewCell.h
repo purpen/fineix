@@ -30,7 +30,6 @@
 @property (nonatomic, strong) UILabel *oldMoney;
 @property (nonatomic, strong) UILabel *oldMoneyHint;
 
-@property (nonatomic, strong) UILabel *withdrawLabel;
 @property (nonatomic, strong) UIImageView *icon;
 
 - (void)thn_showAllianceData:(THNAllinaceData *)model;

@@ -41,10 +41,9 @@ static NSString *const headerCellId = @"THNAlianceHeaderTableViewCellId";
 
 #pragma mark - 请求账户数据
 - (void)thn_networkAllinaceListData {
-    [SVProgressHUD show];
+    [SVProgressHUD showWithMaskType:SVProgressHUDMaskTypeBlack];
     self.alianceRequest = [FBAPI postWithUrlString:URLAliance requestDictionary:@{} delegate:self];
     [self.alianceRequest startRequestSuccess:^(FBRequest *request, id result) {
-        NSLog(@"=====%@", result);
         NSDictionary *dict = [result valueForKey:@"data"];
         self.dataModel = [[THNAllinaceData alloc] initWithDictionary:dict];
         [self.alianceTable reloadData];

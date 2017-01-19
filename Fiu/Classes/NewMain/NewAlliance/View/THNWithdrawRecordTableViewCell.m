@@ -48,7 +48,7 @@
 #pragma mark - 交易记录
 - (void)thn_setTradingRecordData:(THNTradingRow *)model {
     self.stateLable.text = [NSString stringWithFormat:@"￥%.2f", model.totalPrice];
-    self.stateLable.font = [UIFont boldSystemFontOfSize:14];
+    self.stateLable.font = [UIFont boldSystemFontOfSize:16];
     self.moneyLable.text = model.statusLabel;
     self.timeLable.text = model.createdAt;
     [self showNextIcon];
@@ -58,7 +58,7 @@
 - (void)setCellViewUI {
     [self addSubview:self.stateLable];
     [_stateLable mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.size.mas_equalTo(CGSizeMake(100, 15));
+        make.size.mas_equalTo(CGSizeMake(100, 16));
         make.left.equalTo(self.mas_left).with.offset(15);
         make.top.equalTo(self.mas_top).with.offset(10);
     }];
@@ -122,7 +122,7 @@
 - (UIImageView *)icon {
     if (!_icon) {
         _icon = [[UIImageView alloc] init];
-        _icon.image = [UIImage imageNamed:@"icon_Next"];
+        _icon.image = [UIImage imageNamed:@"thn_icon_back"];
         _icon.contentMode = UIViewContentModeScaleAspectFit;
     }
     return _icon;

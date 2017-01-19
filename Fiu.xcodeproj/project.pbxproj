@@ -560,6 +560,7 @@
 		D857C4BE1E2F632500569B3D /* THNWithdraw.m in Sources */ = {isa = PBXBuildFile; fileRef = D857C4B91E2F632500569B3D /* THNWithdraw.m */; };
 		D857C4BF1E2F632500569B3D /* THNWithdrawData.m in Sources */ = {isa = PBXBuildFile; fileRef = D857C4BB1E2F632500569B3D /* THNWithdrawData.m */; };
 		D857C4C01E2F632500569B3D /* THNWithdrawRow.m in Sources */ = {isa = PBXBuildFile; fileRef = D857C4BD1E2F632500569B3D /* THNWithdrawRow.m */; };
+		D857C4C61E3067AE00569B3D /* THNRecordTableHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = D857C4C51E3067AE00569B3D /* THNRecordTableHeaderView.m */; };
 		D861BC6E1D7E977700A26022 /* THNBrandInfoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D861BC6D1D7E977700A26022 /* THNBrandInfoViewController.m */; };
 		D861BC711D7E995600A26022 /* THNBrandInfoCollectionReusableView.m in Sources */ = {isa = PBXBuildFile; fileRef = D861BC701D7E995600A26022 /* THNBrandInfoCollectionReusableView.m */; };
 		D86809031D622049002714B2 /* FBImageScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = D86809021D622049002714B2 /* FBImageScrollView.m */; };
@@ -1731,6 +1732,8 @@
 		D857C4BB1E2F632500569B3D /* THNWithdrawData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THNWithdrawData.m; sourceTree = "<group>"; };
 		D857C4BC1E2F632500569B3D /* THNWithdrawRow.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THNWithdrawRow.h; sourceTree = "<group>"; };
 		D857C4BD1E2F632500569B3D /* THNWithdrawRow.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THNWithdrawRow.m; sourceTree = "<group>"; };
+		D857C4C41E3067AE00569B3D /* THNRecordTableHeaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THNRecordTableHeaderView.h; sourceTree = "<group>"; };
+		D857C4C51E3067AE00569B3D /* THNRecordTableHeaderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THNRecordTableHeaderView.m; sourceTree = "<group>"; };
 		D861BC6C1D7E977700A26022 /* THNBrandInfoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THNBrandInfoViewController.h; sourceTree = "<group>"; };
 		D861BC6D1D7E977700A26022 /* THNBrandInfoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THNBrandInfoViewController.m; sourceTree = "<group>"; };
 		D861BC6F1D7E995600A26022 /* THNBrandInfoCollectionReusableView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THNBrandInfoCollectionReusableView.h; sourceTree = "<group>"; };
@@ -4504,6 +4507,8 @@
 				D857C4751E2DB50D00569B3D /* THNRecordStateTableViewCell.m */,
 				D857C4771E2DB51A00569B3D /* THNRecordInfoTableViewCell.h */,
 				D857C4781E2DB51A00569B3D /* THNRecordInfoTableViewCell.m */,
+				D857C4C41E3067AE00569B3D /* THNRecordTableHeaderView.h */,
+				D857C4C51E3067AE00569B3D /* THNRecordTableHeaderView.m */,
 			);
 			path = RecordCell;
 			sourceTree = "<group>";
@@ -5308,6 +5313,7 @@
 				1F2AFDE11D8818A400DA6035 /* ProductInfoView.m in Sources */,
 				1F2A8F4E1CF40277005116C7 /* PhotoAlbumsTableViewCell.m in Sources */,
 				D80878E21D6AE3DF00C1FFA0 /* MallListGoodsCollectionViewCell.m in Sources */,
+				D857C4C61E3067AE00569B3D /* THNRecordTableHeaderView.m in Sources */,
 				1F2AFC9E1D88170B00DA6035 /* ScenarioNonView.m in Sources */,
 				D813181D1D928DD4007CE71C /* ShareStyleViewOne.m in Sources */,
 				D8ACF4611D6DA2BD00DB79D8 /* THNSceneImageViewController.m in Sources */,

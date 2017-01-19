@@ -7,6 +7,7 @@
 //
 
 #import "THNViewController.h"
+#import "THNRecordTableHeaderView.h"
 
 @interface THNSettlementInfoViewController : THNViewController <
     UITableViewDelegate,
@@ -17,5 +18,7 @@
 @property (nonatomic, strong) FBRequest *infoRequest;
 @property (nonatomic, strong) NSMutableArray *dataMarr;
 @property (nonatomic, strong) UITableView *infoTable;
+@property (nonatomic, strong) THNRecordTableHeaderView *headerView;
+@property (nonatomic, strong) NSString *money;
 
 @end

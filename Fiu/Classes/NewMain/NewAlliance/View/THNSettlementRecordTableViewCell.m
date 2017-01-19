@@ -88,7 +88,7 @@
 - (UIImageView *)icon {
     if (!_icon) {
         _icon = [[UIImageView alloc] init];
-        _icon.image = [UIImage imageNamed:@"icon_Next"];
+        _icon.image = [UIImage imageNamed:@"thn_icon_back"];
         _icon.contentMode = UIViewContentModeScaleAspectFit;
     }
     return _icon;

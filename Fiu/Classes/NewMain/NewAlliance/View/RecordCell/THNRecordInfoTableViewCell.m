@@ -21,31 +21,30 @@
 
 #pragma mark - 交易详情
 - (void)thn_setTradingRecordInfoData:(THNTradingInfoData *)model {
-    NSArray *textArr = @[@"产品", @"单价", @"佣金", @"收益比率", @"数量"];
+    NSArray *textArr = @[@"产品", @"单价", @"收益比率", @"佣金", @"数量"];
     [self setTradingInfoText:textArr];
 
     if (model) {
-        NSString *unitPrice = [NSString stringWithFormat:@"%.2f", model.skuPrice];
-        NSString *totlaPrice = [NSString stringWithFormat:@"%.2f", model.totalPrice];
+        NSString *goodsPrice = [NSString stringWithFormat:@"￥%.2f", model.skuPrice];
+        NSString *unitPrice = [NSString stringWithFormat:@"￥%.2f", model.unitPrice];
         NSString *percent = [NSString stringWithFormat:@"%.2f％", model.commisionPercent *100];
         NSString *number = [NSString stringWithFormat:@"%zi", model.quantity];
-        NSArray *dataArr = @[model.product.shortTitle, unitPrice, totlaPrice, percent, number];
+        NSArray *dataArr = @[model.product.shortTitle, goodsPrice, percent, unitPrice, number];
         [self setTradingInfoData:dataArr];
     }
 }
 
 #pragma mark - 结算详情
 - (void)thn_setSettlementRecordInfoData:(THNSettlementInfoRow *)model {
-    NSArray *textArr = @[@"产品", @"单价", @"佣金", @"收益比率", @"数量", @"时间"];
+    NSArray *textArr = @[@"产品", @"单价", @"收益比率", @"佣金", @"数量"];
     [self setTradingInfoText:textArr];
     
     if (model) {
-        NSString *unitPrice = [NSString stringWithFormat:@"%.2f", model.balance.skuPrice];
-        NSString *totlaPrice = [NSString stringWithFormat:@"%.2f", model.balance.totalPrice];
+        NSString *goodsPrice = [NSString stringWithFormat:@"￥%.2f", model.balance.skuPrice];
+        NSString *unitPrice = [NSString stringWithFormat:@"￥%.2f", model.balance.unitPrice];
         NSString *percent = [NSString stringWithFormat:@"%.2f％", model.balance.commisionPercent *100];
         NSString *number = [NSString stringWithFormat:@"%zi", model.balance.quantity];
-        NSString *time = model.createdAt;
-        NSArray *dataArr = @[model.balance.product.shortTitle, unitPrice, totlaPrice, percent, number, time];
+        NSArray *dataArr = @[model.balance.product.shortTitle, goodsPrice, percent, unitPrice, number];
         [self setTradingInfoData:dataArr];
     }
 }

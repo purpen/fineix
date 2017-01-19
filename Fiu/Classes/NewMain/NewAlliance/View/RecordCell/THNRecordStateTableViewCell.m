@@ -30,14 +30,22 @@
 
 - (void)thn_setTradingRecordInfoDataBottom:(THNTradingInfoData *)model {
     self.leftLable.text = @"分成收益";
+    self.rightLable.font = [UIFont boldSystemFontOfSize:14];
+    self.rightLable.textColor = [UIColor colorWithHexString:MAIN_COLOR];
     self.rightLable.text = [NSString stringWithFormat:@"￥%.2f", model.totalPrice];
 }
 
 #pragma mark - 结算明细
 - (void)thn_setSettlementRecordInfoData:(THNSettlementInfoRow *)model {
+    self.leftLable.text = [NSString stringWithFormat:@"%@", model.createdAt];
+    self.rightLable.text = @"";
+}
+
+- (void)thn_setSettlementRecordInfoDataBottom:(THNSettlementInfoRow *)model {
     self.leftLable.text = @"已结算收益";
+    self.rightLable.font = [UIFont boldSystemFontOfSize:14];
     self.rightLable.textColor = [UIColor colorWithHexString:MAIN_COLOR];
-    self.rightLable.text = [NSString stringWithFormat:@"＋￥%.2f", model.amount];
+    self.rightLable.text = [NSString stringWithFormat:@"￥%.2f", model.amount];
 }
 
 - (void)setCellViewUI {
@@ -59,7 +67,7 @@
 - (UILabel *)leftLable {
     if (!_leftLable) {
         _leftLable = [[UILabel alloc] init];
-        _leftLable.textColor = [UIColor colorWithHexString:@"#222222"];
+        _leftLable.textColor = [UIColor colorWithHexString:@"#666666"];
         _leftLable.font = [UIFont systemFontOfSize:12];
     }
     return _leftLable;
@@ -69,7 +77,7 @@
     if (!_rightLable) {
         _rightLable = [[UILabel alloc] init];
         _rightLable.textColor = [UIColor colorWithHexString:@"#222222"];
-        _rightLable.font = [UIFont boldSystemFontOfSize:14];
+        _rightLable.font = [UIFont systemFontOfSize:12];
         _rightLable.textAlignment = NSTextAlignmentRight;
     }
     return _rightLable;

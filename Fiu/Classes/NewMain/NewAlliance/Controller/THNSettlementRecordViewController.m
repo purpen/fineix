@@ -44,6 +44,7 @@ static NSString *const recordCellId = @"THNSettlementRecordTableViewCellId";
             THNBalanceRow *model = [[THNBalanceRow alloc] initWithDictionary:modelDict];
             [self.dataMarr addObject:model];
             [self.idMarr addObject:model.idField];
+            [self.moneyMarr addObject:[NSString stringWithFormat:@"%.2f", model.amount]];
         }
     
         if (self.dataMarr.count > 0) {
@@ -114,6 +115,7 @@ static NSString *const recordCellId = @"THNSettlementRecordTableViewCellId";
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     THNSettlementInfoViewController *settlementInfoVC = [[THNSettlementInfoViewController alloc] init];
     settlementInfoVC.recordId = self.idMarr[indexPath.row];
+    settlementInfoVC.money = self.moneyMarr[indexPath.row];
     [self.navigationController pushViewController:settlementInfoVC animated:YES];
 }
 
@@ -136,6 +138,13 @@ static NSString *const recordCellId = @"THNSettlementRecordTableViewCellId";
         _idMarr = [NSMutableArray array];
     }
     return _idMarr;
+}
+
+- (NSMutableArray *)moneyMarr {
+    if (!_moneyMarr) {
+        _moneyMarr = [NSMutableArray array];
+    }
+    return _moneyMarr;
 }
 
 @end
