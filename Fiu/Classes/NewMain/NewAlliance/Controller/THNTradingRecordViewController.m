@@ -78,7 +78,6 @@ static NSString *const recordCellId = @"THNWithdrawRecordTableViewCellId";
         _recordTable.dataSource = self;
         _recordTable.backgroundColor = [UIColor colorWithHexString:@"#F8F8F8"];
         _recordTable.tableFooterView = [UIView new];
-        _recordTable.bounces = NO;
         if ([_recordTable respondsToSelector:@selector(setSeparatorInset:)]) {
             [_recordTable setSeparatorInset:(UIEdgeInsetsZero)];
         }

@@ -25,11 +25,11 @@
     [self setTradingInfoText:textArr];
 
     if (model) {
-        NSString *unitPrice = [NSString stringWithFormat:@"%.2f", model.unitPrice];
+        NSString *unitPrice = [NSString stringWithFormat:@"%.2f", model.skuPrice];
         NSString *totlaPrice = [NSString stringWithFormat:@"%.2f", model.totalPrice];
         NSString *percent = [NSString stringWithFormat:@"%.2f％", model.commisionPercent *100];
         NSString *number = [NSString stringWithFormat:@"%zi", model.quantity];
-        NSArray *dataArr = @[model.product.title, unitPrice, totlaPrice, percent, number];
+        NSArray *dataArr = @[model.product.shortTitle, unitPrice, totlaPrice, percent, number];
         [self setTradingInfoData:dataArr];
     }
 }
@@ -40,12 +40,12 @@
     [self setTradingInfoText:textArr];
     
     if (model) {
-        NSString *unitPrice = [NSString stringWithFormat:@"%.2f", model.balance.unitPrice];
+        NSString *unitPrice = [NSString stringWithFormat:@"%.2f", model.balance.skuPrice];
         NSString *totlaPrice = [NSString stringWithFormat:@"%.2f", model.balance.totalPrice];
         NSString *percent = [NSString stringWithFormat:@"%.2f％", model.balance.commisionPercent *100];
         NSString *number = [NSString stringWithFormat:@"%zi", model.balance.quantity];
         NSString *time = model.createdAt;
-        NSArray *dataArr = @[model.balance.product.title, unitPrice, totlaPrice, percent, number, time];
+        NSArray *dataArr = @[model.balance.product.shortTitle, unitPrice, totlaPrice, percent, number, time];
         [self setTradingInfoData:dataArr];
     }
 }

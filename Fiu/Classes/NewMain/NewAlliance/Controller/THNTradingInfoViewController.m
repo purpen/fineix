@@ -63,7 +63,6 @@ static NSString *const stateCellId = @"THNRecordStateTableViewCellId";
         _infoTable.dataSource = self;
         _infoTable.backgroundColor = [UIColor colorWithHexString:@"#F8F8F8"];
         _infoTable.tableFooterView = [UIView new];
-        _infoTable.bounces = NO;
         if ([_infoTable respondsToSelector:@selector(setSeparatorInset:)]) {
             [_infoTable setSeparatorInset:(UIEdgeInsetsZero)];
         }

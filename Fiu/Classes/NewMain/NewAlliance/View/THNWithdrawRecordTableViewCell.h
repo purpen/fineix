@@ -22,6 +22,4 @@
 
 - (void)thn_setTradingRecordData:(THNTradingRow *)model;
 
-- (void)thn_showTotalMoney;
-
 @end

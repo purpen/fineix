@@ -44,6 +44,7 @@
 {
     ChanelView *_chanelV;
     CounterModel *_counterModel;
+    UserInfo *_userInfo;
 }
 @property (nonatomic,strong) UICollectionView *myCollectionView;
 @property(nonatomic,strong) UITapGestureRecognizer *myTap;
@@ -165,7 +166,7 @@
         _chanelV.focusNumLabel.text = [NSString stringWithFormat:@"%@",dataDict[@"follow_count"]];
         _chanelV.fansNumLabel.text = [NSString stringWithFormat:@"%@",dataDict[@"fans_count"]];
         
-        UserInfo *userInfo = [UserInfo mj_objectWithKeyValues:[result objectForKey:@"data"]];
+        _userInfo = [UserInfo mj_objectWithKeyValues:[result objectForKey:@"data"]];
         NSArray *ary = [result objectForKey:@"data"][@"interest_scene_cate"];
         NSMutableString *str = [NSMutableString string];
         for (int i = 0; i < ary.count; i ++) {
@@ -175,18 +176,18 @@
             }
             [str appendString:@","];
         }
-        userInfo.interest_scene_cate = str;
+        _userInfo.interest_scene_cate = str;
         
-        userInfo.head_pic_url = [result objectForKey:@"data"][@"head_pic_url"];
+        _userInfo.head_pic_url = [result objectForKey:@"data"][@"head_pic_url"];
         NSArray *areasAry = [NSArray arrayWithArray:dataDict[@"areas"]];
         if (areasAry.count) {
-            userInfo.prin = areasAry[0];
-            userInfo.city = areasAry[1];
+            _userInfo.prin = areasAry[0];
+            _userInfo.city = areasAry[1];
         }
-        userInfo.is_expert = [result objectForKey:@"data"][@"identify"][@"is_expert"];
-        [userInfo saveOrUpdate];
-        [userInfo updateUserInfoEntity];
-        
+        _userInfo.is_expert = [result objectForKey:@"data"][@"identify"][@"is_expert"];
+        _userInfo.allianceId = [result objectForKey:@"data"][@"identify"][@"alliance_id"];
+        [_userInfo saveOrUpdate];
+        [_userInfo updateUserInfoEntity];
         
         UserInfoEntity *entity = [UserInfoEntity defaultUserInfoEntity];
         entity.isLogin = YES;
@@ -323,6 +324,14 @@
                 
                 make.top.mas_equalTo(cell.btn8.mas_top).with.offset(0/667.0*SCREEN_HEIGHT);
             }];
+        }
+        
+        if ( _userInfo.allianceId.length == 0) {
+            cell.allianceLabel.hidden = YES;
+            cell.allianceBtn.hidden = YES;
+        } else {
+            cell.allianceLabel.hidden = NO;
+            cell.allianceBtn.hidden = NO;
         }
         
         [cell.btn1 addTarget:self action:@selector(orderBtn:) forControlEvents:UIControlEventTouchUpInside];

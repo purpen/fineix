@@ -43,14 +43,14 @@
 - (void)setCellViewUI {
     [self addSubview:self.leftLable];
     [_leftLable mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.size.mas_equalTo(CGSizeMake(100, 13));
+        make.size.mas_equalTo(CGSizeMake(150, 13));
         make.left.equalTo(self.mas_left).with.offset(15);
         make.centerY.equalTo(self);
     }];
     
     [self addSubview:self.rightLable];
     [_rightLable mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.size.mas_equalTo(CGSizeMake(100, 15));
+        make.size.mas_equalTo(CGSizeMake(150, 15));
         make.right.equalTo(self.mas_right).with.offset(-15);
         make.centerY.equalTo(self);
     }];

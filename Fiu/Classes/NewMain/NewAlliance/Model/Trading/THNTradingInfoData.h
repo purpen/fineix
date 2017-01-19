@@ -26,7 +26,7 @@
 @property (nonatomic, assign) NSInteger productId;
 @property (nonatomic, assign) NSInteger quantity;
 @property (nonatomic, assign) NSInteger skuId;
-@property (nonatomic, assign) NSInteger skuPrice;
+@property (nonatomic, assign) CGFloat skuPrice;
 @property (nonatomic, assign) NSInteger stage;
 @property (nonatomic, assign) NSInteger status;
 @property (nonatomic, strong) NSString * statusLabel;

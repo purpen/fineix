@@ -53,6 +53,8 @@
     userInfo.interest_scene_cate = self.interest_scene_cate;
     
     userInfo.is_bonus = self.is_bonus;
+    userInfo.allianceId = self.allianceId;
+    
     dispatch_async(dispatch_get_global_queue(0, 0), ^{
         [userInfo saveOrUpdate];
     });
@@ -84,6 +86,7 @@
     self.age_group = @"";
     self.assets = @"";
     self.interest_scene_cate = nil;
+    self.allianceId = @"";
 }
 
 @end

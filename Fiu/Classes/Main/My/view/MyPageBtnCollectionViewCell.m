@@ -362,7 +362,7 @@
 -(UIButton *)allianceBtn{
     if (!_allianceBtn) {
         _allianceBtn = [[UIButton alloc] init];
-        [_allianceBtn setImage:[UIImage imageNamed:@"my_ refund"] forState:UIControlStateNormal];
+        [_allianceBtn setImage:[UIImage imageNamed:@"geren_tuikuanshouhou"] forState:UIControlStateNormal];
     }
     return _allianceBtn;
 }

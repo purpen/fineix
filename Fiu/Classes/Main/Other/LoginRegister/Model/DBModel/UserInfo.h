@@ -52,6 +52,10 @@
  */
 @property (nonatomic, assign) NSInteger is_bonus;
 
+/**
+ 联盟用户id
+ */
+@property (nonatomic, strong) NSString *allianceId;
 
 - (void)updateUserInfoEntity;
 

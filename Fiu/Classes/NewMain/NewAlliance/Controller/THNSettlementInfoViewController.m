@@ -74,7 +74,6 @@ static NSString *const stateCellId = @"THNRecordStateTableViewCellId";
         _infoTable.dataSource = self;
         _infoTable.backgroundColor = [UIColor colorWithHexString:@"#F8F8F8"];
         _infoTable.tableFooterView = [UIView new];
-        _infoTable.bounces = NO;
         if ([_infoTable respondsToSelector:@selector(setSeparatorInset:)]) {
             [_infoTable setSeparatorInset:(UIEdgeInsetsZero)];
         }
@@ -95,7 +94,7 @@ static NSString *const stateCellId = @"THNRecordStateTableViewCellId";
         THNRecordStateTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:stateCellId];
         if (!cell) {
             cell = [[THNRecordStateTableViewCell alloc] initWithStyle:(UITableViewCellStyleDefault) reuseIdentifier:stateCellId];
-            [cell thn_setSettlementRecordInfoData:self.dataMarr[indexPath.row]];
+            [cell thn_setSettlementRecordInfoData:self.dataMarr[indexPath.section]];
         }
         return cell;
         
@@ -103,7 +102,7 @@ static NSString *const stateCellId = @"THNRecordStateTableViewCellId";
         THNRecordInfoTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:infoCellId];
         if (!cell) {
             cell = [[THNRecordInfoTableViewCell alloc] initWithStyle:(UITableViewCellStyleDefault) reuseIdentifier:infoCellId];
-            [cell thn_setSettlementRecordInfoData:self.dataMarr[indexPath.row]];
+            [cell thn_setSettlementRecordInfoData:self.dataMarr[indexPath.section]];
         }
         return cell;
     }

@@ -27,30 +27,28 @@
         if (model.status == 5) {
             model.status = 3;
         }
-        NSArray *stateArr = @[@"提现失败", @"提现申请中", @"提现审核中", @"提现成功"];
-        if (model.status == 0) {
-            self.stateLable.textColor = [UIColor redColor];
-        }
+        NSArray *stateArr = @[@"提现失败", @"等待审核", @"审核中", @"提现成功"];
         self.stateLable.text = stateArr[model.status];
         self.moneyLable.text = [NSString stringWithFormat:@"- ￥%.2f", model.amount];
         self.timeLable.text = [NSString getTimesTamp:model.createdOn];
     }
 }
 
-- (void)thn_showTotalMoney {
-    self.stateLable.text = @"已提现的总金额";
-    [self.stateLable mas_updateConstraints:^(MASConstraintMaker *make) {
-        make.centerY.equalTo(self);
-    }];
-    
-    self.moneyLable.text = @"￥390.12";
-    self.moneyLable.textColor = [UIColor colorWithHexString:MAIN_COLOR];
-    self.moneyLable.font = [UIFont systemFontOfSize:17];
-}
+//- (void)thn_showTotalMoney {
+//    self.stateLable.text = @"已提现的总金额";
+//    [self.stateLable mas_updateConstraints:^(MASConstraintMaker *make) {
+//        make.centerY.equalTo(self);
+//    }];
+//    
+//    self.moneyLable.text = @"￥390.12";
+//    self.moneyLable.textColor = [UIColor colorWithHexString:MAIN_COLOR];
+//    self.moneyLable.font = [UIFont systemFontOfSize:17];
+//}
 
 #pragma mark - 交易记录
 - (void)thn_setTradingRecordData:(THNTradingRow *)model {
     self.stateLable.text = [NSString stringWithFormat:@"￥%.2f", model.totalPrice];
+    self.stateLable.font = [UIFont boldSystemFontOfSize:14];
     self.moneyLable.text = model.statusLabel;
     self.timeLable.text = model.createdAt;
     [self showNextIcon];
@@ -96,7 +94,7 @@
 - (UILabel *)stateLable {
     if (!_stateLable) {
         _stateLable = [[UILabel alloc] init];
-        _stateLable.font = [UIFont boldSystemFontOfSize:14];
+        _stateLable.font = [UIFont systemFontOfSize:14];
         _stateLable.textColor = [UIColor colorWithHexString:@"#222222"];
     }
     return _stateLable;

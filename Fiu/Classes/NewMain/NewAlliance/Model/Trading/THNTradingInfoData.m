@@ -105,7 +105,7 @@ NSString *const kTHNTradingInfoDataUserId = @"user_id";
 	}
 
 	if(![dictionary[kTHNTradingInfoDataSkuPrice] isKindOfClass:[NSNull class]]){
-		self.skuPrice = [dictionary[kTHNTradingInfoDataSkuPrice] integerValue];
+		self.skuPrice = [dictionary[kTHNTradingInfoDataSkuPrice] floatValue];
 	}
 
 	if(![dictionary[kTHNTradingInfoDataStage] isKindOfClass:[NSNull class]]){

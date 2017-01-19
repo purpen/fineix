@@ -36,7 +36,7 @@
 }
 
 - (void)setTradingRecord {
-    self.leftLable.text = @"时间／佣金";
+    self.leftLable.text = @"佣金／时间";
     self.rightLable.text = @"状态";
 }
 

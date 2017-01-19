@@ -117,7 +117,7 @@ NSString *const kTHNSettlementInfoBalanceUserId = @"user_id";
 	}
 
 	if(![dictionary[kTHNSettlementInfoBalanceSkuPrice] isKindOfClass:[NSNull class]]){
-		self.skuPrice = [dictionary[kTHNSettlementInfoBalanceSkuPrice] integerValue];
+		self.skuPrice = [dictionary[kTHNSettlementInfoBalanceSkuPrice] floatValue];
 	}
 
 	if(![dictionary[kTHNSettlementInfoBalanceStage] isKindOfClass:[NSNull class]]){
