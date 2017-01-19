@@ -16,6 +16,8 @@
 
 @property (nonatomic, strong) NSString *recordId;
 @property (nonatomic, strong) FBRequest *infoRequest;
+@property (nonatomic, assign) NSInteger currentpageNum;
+@property (nonatomic, assign) NSInteger totalPageNum;
 @property (nonatomic, strong) NSMutableArray *dataMarr;
 @property (nonatomic, strong) UITableView *infoTable;
 @property (nonatomic, strong) THNRecordTableHeaderView *headerView;

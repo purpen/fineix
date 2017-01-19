@@ -15,6 +15,8 @@
 >
 
 @property (nonatomic, strong) FBRequest *balanceRequest;
+@property (nonatomic, assign) NSInteger currentpageNum;
+@property (nonatomic, assign) NSInteger totalPageNum;
 @property (nonatomic, strong) NSMutableArray *dataMarr;
 @property (nonatomic, strong) NSMutableArray *idMarr;
 @property (nonatomic, strong) NSMutableArray *moneyMarr;

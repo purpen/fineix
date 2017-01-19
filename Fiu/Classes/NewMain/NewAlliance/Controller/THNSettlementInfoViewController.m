@@ -9,8 +9,8 @@
 #import "THNSettlementInfoViewController.h"
 #import "THNRecordStateTableViewCell.h"
 #import "THNRecordInfoTableViewCell.h"
-#import "NSString+JSON.h"
 #import "THNSettlementInfoRow.h"
+#import "MJRefresh.h"
 
 static NSString *const URLSettlementInfo = @"/balance_record/item_list";
 static NSString *const infoCellId = @"THNRecordInfoTableViewCellId";
@@ -41,7 +41,7 @@ static NSString *const stateCellId = @"THNRecordStateTableViewCellId";
 - (void)thn_networkSettlementRecordInfoData {
     [SVProgressHUD show];
     self.infoRequest = [FBAPI postWithUrlString:URLSettlementInfo
-                              requestDictionary:@{@"balance_record_id":self.recordId, @"page":@"1", @"size":@"10000", @"sort":@"0"}
+                              requestDictionary:@{@"balance_record_id":self.recordId, @"page":@(self.currentpageNum + 1), @"size":@"10", @"sort":@"0"}
                                        delegate:self];
     [self.infoRequest startRequestSuccess:^(FBRequest *request, id result) {
         NSDictionary *dict = [result valueForKey:@"data"];
@@ -55,10 +55,53 @@ static NSString *const stateCellId = @"THNRecordStateTableViewCellId";
             [self.infoTable reloadData];
         }
 
+        self.currentpageNum = [[[result valueForKey:@"data"] valueForKey:@"current_page"] integerValue];
+        self.totalPageNum = [[[result valueForKey:@"data"] valueForKey:@"total_page"] integerValue];
+        [self requestIsLastData:self.infoTable currentPage:self.currentpageNum withTotalPage:self.totalPageNum];
+        
         [SVProgressHUD dismiss];
         
     } failure:^(FBRequest *request, NSError *error) {
         NSLog(@"-- %@", [error localizedDescription]);
+    }];
+}
+
+- (void)requestIsLastData:(UITableView *)table currentPage:(NSInteger )current withTotalPage:(NSInteger)total {
+    if (total == 0) {
+        table.mj_footer.state = MJRefreshStateNoMoreData;
+        table.mj_footer.hidden = true;
+    }
+    
+    BOOL isLastPage = (current == total);
+    
+    if (!isLastPage) {
+        if (table.mj_footer.state == MJRefreshStateNoMoreData) {
+            [table.mj_footer resetNoMoreData];
+        }
+    }
+    
+    if (current == total == 1) {
+        table.mj_footer.state = MJRefreshStateNoMoreData;
+        table.mj_footer.hidden = true;
+    }
+    
+    if ([table.mj_footer isRefreshing]) {
+        if (isLastPage) {
+            [table.mj_footer endRefreshingWithNoMoreData];
+        } else  {
+            [table.mj_footer endRefreshing];
+        }
+    }
+}
+
+#pragma mark - 上拉加载更多
+- (void)addMJRefresh:(UITableView *)table {
+    table.mj_footer = [MJRefreshAutoNormalFooter footerWithRefreshingBlock:^{
+        if (self.currentpageNum < self.totalPageNum) {
+            [self thn_networkSettlementRecordInfoData];
+        } else {
+            [table.mj_footer endRefreshing];
+        }
     }];
 }
 
@@ -86,6 +129,7 @@ static NSString *const stateCellId = @"THNRecordStateTableViewCellId";
         if ([_infoTable respondsToSelector:@selector(setSeparatorInset:)]) {
             [_infoTable setSeparatorInset:(UIEdgeInsetsZero)];
         }
+        [self addMJRefresh:_infoTable];
     }
     return _infoTable;
 }

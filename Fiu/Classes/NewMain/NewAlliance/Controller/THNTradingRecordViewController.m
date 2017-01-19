@@ -10,6 +10,7 @@
 #import "THNTradingInfoViewController.h"
 #import "THNWithdrawRecordTableViewCell.h"
 #import "THNTradingRow.h"
+#import "MJRefresh.h"
 
 static NSString *const URLTrading = @"/balance/getlist";
 static NSString *const recordCellId = @"THNWithdrawRecordTableViewCellId";
@@ -36,7 +37,9 @@ static NSString *const recordCellId = @"THNWithdrawRecordTableViewCellId";
 #pragma mark - 请求交易列表数据
 - (void)thn_networkTradingRecordListData {
     [SVProgressHUD show];
-    self.tradingRequest = [FBAPI postWithUrlString:URLTrading requestDictionary:@{@"page":@"1", @"size":@"10000", @"sort":@"0"} delegate:self];
+    self.tradingRequest = [FBAPI postWithUrlString:URLTrading
+                                 requestDictionary:@{@"page":@(self.currentpageNum + 1), @"size":@"10", @"sort":@"0"}
+                                          delegate:self];
     [self.tradingRequest startRequestSuccess:^(FBRequest *request, id result) {
         NSDictionary *dict = [result valueForKey:@"data"];
         NSArray *dataArr = dict[@"rows"];
@@ -50,10 +53,53 @@ static NSString *const recordCellId = @"THNWithdrawRecordTableViewCellId";
             [self.recordTable reloadData];
         }
         
+        self.currentpageNum = [[[result valueForKey:@"data"] valueForKey:@"current_page"] integerValue];
+        self.totalPageNum = [[[result valueForKey:@"data"] valueForKey:@"total_page"] integerValue];
+        [self requestIsLastData:self.recordTable currentPage:self.currentpageNum withTotalPage:self.totalPageNum];
+        
         [SVProgressHUD dismiss];
         
     } failure:^(FBRequest *request, NSError *error) {
         NSLog(@"-- %@", [error localizedDescription]);
+    }];
+}
+
+- (void)requestIsLastData:(UITableView *)table currentPage:(NSInteger )current withTotalPage:(NSInteger)total {
+    if (total == 0) {
+        table.mj_footer.state = MJRefreshStateNoMoreData;
+        table.mj_footer.hidden = true;
+    }
+    
+    BOOL isLastPage = (current == total);
+    
+    if (!isLastPage) {
+        if (table.mj_footer.state == MJRefreshStateNoMoreData) {
+            [table.mj_footer resetNoMoreData];
+        }
+    }
+    
+    if (current == total == 1) {
+        table.mj_footer.state = MJRefreshStateNoMoreData;
+        table.mj_footer.hidden = true;
+    }
+    
+    if ([table.mj_footer isRefreshing]) {
+        if (isLastPage) {
+            [table.mj_footer endRefreshingWithNoMoreData];
+        } else  {
+            [table.mj_footer endRefreshing];
+        }
+    }
+}
+
+#pragma mark - 上拉加载更多
+- (void)addMJRefresh:(UITableView *)table {
+    table.mj_footer = [MJRefreshAutoNormalFooter footerWithRefreshingBlock:^{
+        if (self.currentpageNum < self.totalPageNum) {
+            [self thn_networkTradingRecordListData];
+        } else {
+            [table.mj_footer endRefreshing];
+        }
     }];
 }
 
@@ -81,6 +127,7 @@ static NSString *const recordCellId = @"THNWithdrawRecordTableViewCellId";
         if ([_recordTable respondsToSelector:@selector(setSeparatorInset:)]) {
             [_recordTable setSeparatorInset:(UIEdgeInsetsZero)];
         }
+        [self addMJRefresh:_recordTable];
     }
     return _recordTable;
 }
