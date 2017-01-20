@@ -41,7 +41,7 @@ static NSString *const stateCellId = @"THNRecordStateTableViewCellId";
 - (void)thn_networkSettlementRecordInfoData {
     [SVProgressHUD show];
     self.infoRequest = [FBAPI postWithUrlString:URLSettlementInfo
-                              requestDictionary:@{@"balance_record_id":self.recordId, @"page":@(self.currentpageNum + 1), @"size":@"10", @"sort":@"0"}
+                              requestDictionary:@{@"balance_record_id":self.recordId, @"page":@(self.currentpageNum + 1), @"size":@"8", @"sort":@"0"}
                                        delegate:self];
     [self.infoRequest startRequestSuccess:^(FBRequest *request, id result) {
         NSDictionary *dict = [result valueForKey:@"data"];

@@ -37,7 +37,7 @@ static NSString *const recordCellId = @"THNWithdrawRecordTableViewCellId";
 - (void)thn_networkWithdrawRecordListData {
     [SVProgressHUD show];
     self.withdrawRequest = [FBAPI postWithUrlString:URLWithdraw
-                                  requestDictionary:@{@"page":@(self.currentpageNum + 1), @"size":@"10", @"sort":@"0"}
+                                  requestDictionary:@{@"page":@(self.currentpageNum + 1), @"size":@"12", @"sort":@"0"}
                                            delegate:self];
     [self.withdrawRequest startRequestSuccess:^(FBRequest *request, id result) {
         NSDictionary *dict = [result valueForKey:@"data"];

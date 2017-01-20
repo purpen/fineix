@@ -38,7 +38,7 @@ static NSString *const recordCellId = @"THNSettlementRecordTableViewCellId";
 - (void)thn_networkBalanceRecordListData {
     [SVProgressHUD show];
     self.balanceRequest = [FBAPI postWithUrlString:URLbalance
-                                 requestDictionary:@{@"page":@(self.currentpageNum + 1), @"size":@"10", @"sort":@"0"}
+                                 requestDictionary:@{@"page":@(self.currentpageNum + 1), @"size":@"12", @"sort":@"0"}
                                           delegate:self];
     [self.balanceRequest startRequestSuccess:^(FBRequest *request, id result) {
         NSDictionary *dict = [result valueForKey:@"data"];

@@ -48,7 +48,7 @@
     
     [self addSubview:self.rmbLabel];
     [_rmbLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.size.mas_equalTo(CGSizeMake(30, 40));
+        make.size.mas_equalTo(CGSizeMake(35, 40));
         make.left.equalTo(self.mas_left).with.offset(12);
         make.top.equalTo(_hintLabel.mas_bottom).with.offset(15);
     }];

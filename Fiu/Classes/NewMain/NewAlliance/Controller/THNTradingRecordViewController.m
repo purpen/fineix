@@ -38,7 +38,7 @@ static NSString *const recordCellId = @"THNWithdrawRecordTableViewCellId";
 - (void)thn_networkTradingRecordListData {
     [SVProgressHUD show];
     self.tradingRequest = [FBAPI postWithUrlString:URLTrading
-                                 requestDictionary:@{@"page":@(self.currentpageNum + 1), @"size":@"10", @"sort":@"0"}
+                                 requestDictionary:@{@"page":@(self.currentpageNum + 1), @"size":@"12", @"sort":@"0"}
                                           delegate:self];
     [self.tradingRequest startRequestSuccess:^(FBRequest *request, id result) {
         NSDictionary *dict = [result valueForKey:@"data"];
