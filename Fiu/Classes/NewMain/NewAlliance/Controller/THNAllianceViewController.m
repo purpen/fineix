@@ -59,6 +59,14 @@ static NSString *const headerCellId = @"THNAlianceHeaderTableViewCellId";
     [self.view addSubview:self.alianceTable];
 }
 
+- (THNAllianceFootView *)footerView {
+    if (!_footerView) {
+        _footerView = [[THNAllianceFootView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 30)];
+        _footerView.nav = self.navigationController;
+    }
+    return _footerView;
+}
+
 - (UITableView *)alianceTable {
     if (!_alianceTable) {
         _alianceTable = [[UITableView alloc] initWithFrame:CGRectMake(0, 64, SCREEN_WIDTH, SCREEN_HEIGHT -64) style:(UITableViewStyleGrouped)];
@@ -67,6 +75,7 @@ static NSString *const headerCellId = @"THNAlianceHeaderTableViewCellId";
         _alianceTable.sectionFooterHeight = 10.0f;
         _alianceTable.backgroundColor = [UIColor colorWithHexString:@"#F8F8F8"];
         _alianceTable.separatorStyle = UITableViewCellSeparatorStyleNone;
+        _alianceTable.tableFooterView = self.footerView;
     }
     return _alianceTable;
 }

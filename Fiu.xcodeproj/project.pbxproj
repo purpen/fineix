@@ -561,6 +561,8 @@
 		D857C4BF1E2F632500569B3D /* THNWithdrawData.m in Sources */ = {isa = PBXBuildFile; fileRef = D857C4BB1E2F632500569B3D /* THNWithdrawData.m */; };
 		D857C4C01E2F632500569B3D /* THNWithdrawRow.m in Sources */ = {isa = PBXBuildFile; fileRef = D857C4BD1E2F632500569B3D /* THNWithdrawRow.m */; };
 		D857C4C61E3067AE00569B3D /* THNRecordTableHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = D857C4C51E3067AE00569B3D /* THNRecordTableHeaderView.m */; };
+		D857C4C91E31F07000569B3D /* THNAllianceInfoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D857C4C81E31F07000569B3D /* THNAllianceInfoViewController.m */; };
+		D857C4CC1E31F0E100569B3D /* THNAllianceFootView.m in Sources */ = {isa = PBXBuildFile; fileRef = D857C4CB1E31F0E100569B3D /* THNAllianceFootView.m */; };
 		D861BC6E1D7E977700A26022 /* THNBrandInfoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D861BC6D1D7E977700A26022 /* THNBrandInfoViewController.m */; };
 		D861BC711D7E995600A26022 /* THNBrandInfoCollectionReusableView.m in Sources */ = {isa = PBXBuildFile; fileRef = D861BC701D7E995600A26022 /* THNBrandInfoCollectionReusableView.m */; };
 		D86809031D622049002714B2 /* FBImageScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = D86809021D622049002714B2 /* FBImageScrollView.m */; };
@@ -1734,6 +1736,10 @@
 		D857C4BD1E2F632500569B3D /* THNWithdrawRow.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THNWithdrawRow.m; sourceTree = "<group>"; };
 		D857C4C41E3067AE00569B3D /* THNRecordTableHeaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THNRecordTableHeaderView.h; sourceTree = "<group>"; };
 		D857C4C51E3067AE00569B3D /* THNRecordTableHeaderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THNRecordTableHeaderView.m; sourceTree = "<group>"; };
+		D857C4C71E31F07000569B3D /* THNAllianceInfoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THNAllianceInfoViewController.h; sourceTree = "<group>"; };
+		D857C4C81E31F07000569B3D /* THNAllianceInfoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THNAllianceInfoViewController.m; sourceTree = "<group>"; };
+		D857C4CA1E31F0E100569B3D /* THNAllianceFootView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THNAllianceFootView.h; sourceTree = "<group>"; };
+		D857C4CB1E31F0E100569B3D /* THNAllianceFootView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THNAllianceFootView.m; sourceTree = "<group>"; };
 		D861BC6C1D7E977700A26022 /* THNBrandInfoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THNBrandInfoViewController.h; sourceTree = "<group>"; };
 		D861BC6D1D7E977700A26022 /* THNBrandInfoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THNBrandInfoViewController.m; sourceTree = "<group>"; };
 		D861BC6F1D7E995600A26022 /* THNBrandInfoCollectionReusableView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THNBrandInfoCollectionReusableView.h; sourceTree = "<group>"; };
@@ -3959,6 +3965,8 @@
 			children = (
 				D83625B81E28C7C5005F2BB9 /* THNAllianceViewController.h */,
 				D83625B91E28C7C5005F2BB9 /* THNAllianceViewController.m */,
+				D857C4C71E31F07000569B3D /* THNAllianceInfoViewController.h */,
+				D857C4C81E31F07000569B3D /* THNAllianceInfoViewController.m */,
 				D857C4581E2CADB900569B3D /* THNWithdrawViewController.h */,
 				D857C4591E2CADB900569B3D /* THNWithdrawViewController.m */,
 				D857C45B1E2CAF7600569B3D /* THNWithdrawRecordViewController.h */,
@@ -4002,6 +4010,8 @@
 				D857C46B1E2CC07400569B3D /* THNRecordHintView.m */,
 				D857C47A1E2DF37F00569B3D /* THNWithdrawView.h */,
 				D857C47B1E2DF37F00569B3D /* THNWithdrawView.m */,
+				D857C4CA1E31F0E100569B3D /* THNAllianceFootView.h */,
+				D857C4CB1E31F0E100569B3D /* THNAllianceFootView.m */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -5550,6 +5560,7 @@
 				1F2A903E1CF40277005116C7 /* CityModel.m in Sources */,
 				1F2AFDD51D8818A400DA6035 /* TaoBaoOrderViewController.m in Sources */,
 				D81318001D9228BA007CE71C /* THNUserModelCounter.m in Sources */,
+				D857C4C91E31F07000569B3D /* THNAllianceInfoViewController.m in Sources */,
 				D8C094E11D752D2200908491 /* RollImageRow.m in Sources */,
 				1F2A8FC51CF40277005116C7 /* GoodsData.m in Sources */,
 				1F2AFD931D88186C00DA6035 /* THNTFCodeView.m in Sources */,
@@ -5562,6 +5573,7 @@
 				1F2AFC951D88170B00DA6035 /* FocusOnTableViewCell.m in Sources */,
 				1F2AFD8E1D88186C00DA6035 /* THNTopicsModel.m in Sources */,
 				D8C094E71D752D2200908491 /* SceneInfoUserInfo.m in Sources */,
+				D857C4CC1E31F0E100569B3D /* THNAllianceFootView.m in Sources */,
 				D857C49F1E2F46A800569B3D /* THNTradingInfoProduct.m in Sources */,
 				D857C4571E2CA05600569B3D /* THNAlianceHeaderTableViewCell.m in Sources */,
 				D86E54BB1DD444230075ED88 /* FSFiveInputFilter.m in Sources */,

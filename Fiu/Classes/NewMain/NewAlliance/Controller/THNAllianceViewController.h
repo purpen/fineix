@@ -8,6 +8,7 @@
 
 #import "THNViewController.h"
 #import "THNAllinaceData.h"
+#import "THNAllianceFootView.h"
 
 @interface THNAllianceViewController : THNViewController <
     UITableViewDelegate,
@@ -17,5 +18,6 @@
 @property (nonatomic, strong) THNAllinaceData *dataModel;
 @property (nonatomic, strong) FBRequest *alianceRequest;
 @property (nonatomic, strong) UITableView *alianceTable;
+@property (nonatomic, strong) THNAllianceFootView *footerView;
 
 @end

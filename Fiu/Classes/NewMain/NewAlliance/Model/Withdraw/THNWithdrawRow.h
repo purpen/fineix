@@ -14,6 +14,7 @@
 @property (nonatomic, strong) NSString * allianceId;
 @property (nonatomic, assign) CGFloat amount;
 @property (nonatomic, assign) NSInteger createdOn;
+@property (nonatomic, strong) NSString * createdAt;
 @property (nonatomic, assign) NSInteger presentOn;
 @property (nonatomic, assign) NSInteger status;
 @property (nonatomic, assign) NSInteger updatedOn;

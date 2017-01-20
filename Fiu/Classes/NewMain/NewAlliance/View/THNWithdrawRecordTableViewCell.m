@@ -30,7 +30,7 @@
         NSArray *stateArr = @[@"提现失败", @"等待审核", @"审核中", @"提现成功"];
         self.stateLable.text = stateArr[model.status];
         self.moneyLable.text = [NSString stringWithFormat:@"- ￥%.2f", model.amount];
-        self.timeLable.text = [NSString getTimesTamp:model.createdOn];
+        self.timeLable.text = model.createdAt;
     }
 }
 

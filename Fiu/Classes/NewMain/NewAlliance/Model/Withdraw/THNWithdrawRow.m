@@ -12,6 +12,7 @@ NSString *const kTHNWithdrawRowIdField = @"_id";
 NSString *const kTHNWithdrawRowAllianceId = @"alliance_id";
 NSString *const kTHNWithdrawRowAmount = @"amount";
 NSString *const kTHNWithdrawRowCreatedOn = @"created_on";
+NSString *const kTHNWithdrawRowCreatedAt = @"created_at";
 NSString *const kTHNWithdrawRowPresentOn = @"present_on";
 NSString *const kTHNWithdrawRowStatus = @"status";
 NSString *const kTHNWithdrawRowUpdatedOn = @"updated_on";
@@ -60,6 +61,10 @@ NSString *const kTHNWithdrawRowUserId = @"user_id";
 	if(![dictionary[kTHNWithdrawRowUserId] isKindOfClass:[NSNull class]]){
 		self.userId = [dictionary[kTHNWithdrawRowUserId] integerValue];
 	}
+    
+    if(![dictionary[kTHNWithdrawRowCreatedAt] isKindOfClass:[NSNull class]]){
+        self.createdAt = dictionary[kTHNWithdrawRowCreatedAt];
+    }
 
 	return self;
 }
