@@ -13,6 +13,7 @@
 #import "THNDiscoverViewController.h"
 #import "THNMallViewController.h"
 #import "THNMallViewController.h"
+#import "GoodsCarViewController.h"
 #import "MyPageViewController.h"
 
 #import "UserInfoEntity.h"
@@ -28,7 +29,7 @@
     THNNavigationController *_discoverNav;
     THNNavigationController *_mallNav;
     THNNavigationController *_myNav;
-    THNNavigationController *_messNav;
+    THNNavigationController *_goodsCarNav;
     UIWindow *_window;
 }
 
@@ -111,16 +112,17 @@
 
     THNTabBar *tabBar = [[THNTabBar alloc] init];
     [self setValue:tabBar forKey:@"tabBar"];
-    [tabBar.createBtn addTarget:self action:@selector(createBtnClick) forControlEvents:(UIControlEventTouchUpInside)];
     
     THNHomeViewController *homeVC = [[THNHomeViewController alloc] init];
     THNDiscoverViewController *discoverVC = [[THNDiscoverViewController alloc] init];
     THNMallViewController *mallVC = [[THNMallViewController alloc] init];
+    GoodsCarViewController *goodsCarVC = [[GoodsCarViewController alloc] init];
     MyPageViewController *myVC = [[MyPageViewController alloc] init];
     
     _homeNav = [[THNNavigationController alloc] initWithRootViewController:homeVC];
     _discoverNav = [[THNNavigationController alloc] initWithRootViewController:discoverVC];
     _mallNav = [[THNNavigationController alloc] initWithRootViewController:mallVC];
+    _goodsCarNav = [[THNNavigationController alloc] initWithRootViewController:goodsCarVC];
     _myNav = [[THNNavigationController alloc] initWithRootViewController:myVC];
     
     [self setChildViewController:_homeNav
@@ -135,12 +137,16 @@
                            image:@"tabBar_Mall"
                     seletedImage:@"tabBar_Mall_Se"
                        itemTitle:NSLocalizedString(@"TabBar_Mall", nil)];
+    [self setChildViewController:_goodsCarNav
+                           image:@"tabBar_goodsCar"
+                    seletedImage:@"tabBar_goodsCar_Se"
+                       itemTitle:NSLocalizedString(@"GoodsCarVcTitle", nil)];
     [self setChildViewController:_myNav
                            image:@"tabBar_MyCenter"
                     seletedImage:@"tabBar_MyCenter_Se"
                        itemTitle:NSLocalizedString(@"TabBar_MyCenter", nil)];
     
-    self.viewControllers = @[_homeNav, _discoverNav, _mallNav, _myNav];
+    self.viewControllers = @[_homeNav, _discoverNav, _mallNav, _goodsCarNav, _myNav];
 }
 
 #pragma mark - 显示消息角标
@@ -202,13 +208,13 @@
 }
 
 #pragma mark - 消息气泡
-- (FBTabBarItemBadgeBtn *)badgeBtn {
-    if (!_badgeBtn) {
-        _badgeBtn = [[FBTabBarItemBadgeBtn alloc] init];
+//- (FBTabBarItemBadgeBtn *)badgeBtn {
+//    if (!_badgeBtn) {
+//        _badgeBtn = [[FBTabBarItemBadgeBtn alloc] init];
 //        [_badgeBtn addTarget:self action:@selector(openMessVC:) forControlEvents:(UIControlEventTouchUpInside)];
-    }
-    return _badgeBtn;
-}
+//    }
+//    return _badgeBtn;
+//}
 
 //  消息气泡点击跳转消息列表
 //- (void)openMessVC:(FBTabBarItemBadgeBtn *)button {
@@ -219,24 +225,24 @@
 //}
 
 #pragma mark “创建情景”的按钮事件
-- (void)createBtnClick {
-    UserInfoEntity *entity = [UserInfoEntity defaultUserInfoEntity];
-    FBRequest *request = [FBAPI postWithUrlString:@"/auth/check_login" requestDictionary:nil delegate:self];
-    [request startRequestSuccess:^(FBRequest *request, id result) {
-        NSDictionary * dataDic = [result objectForKey:@"data"];
-        entity.isLogin = [[dataDic objectForKey:@"is_login"] boolValue];
-    } failure:^(FBRequest *request, NSError *error) {
-        [SVProgressHUD showInfoWithStatus:[error localizedDescription]];
-    }];
-    
-    if (entity.isLogin) {
-        PictureToolViewController * pictureToolVC = [[PictureToolViewController alloc] init];
-        [self presentViewController:pictureToolVC animated:YES completion:nil];
-    } else {
-        THNLoginRegisterViewController *loginSignupVC = [[THNLoginRegisterViewController alloc] init];
-        UINavigationController *navi = [[UINavigationController alloc] initWithRootViewController:loginSignupVC];
-        [self presentViewController:navi animated:YES completion:nil];
-    }
-}
+//- (void)createBtnClick {
+//    UserInfoEntity *entity = [UserInfoEntity defaultUserInfoEntity];
+//    FBRequest *request = [FBAPI postWithUrlString:@"/auth/check_login" requestDictionary:nil delegate:self];
+//    [request startRequestSuccess:^(FBRequest *request, id result) {
+//        NSDictionary * dataDic = [result objectForKey:@"data"];
+//        entity.isLogin = [[dataDic objectForKey:@"is_login"] boolValue];
+//    } failure:^(FBRequest *request, NSError *error) {
+//        [SVProgressHUD showInfoWithStatus:[error localizedDescription]];
+//    }];
+//    
+//    if (entity.isLogin) {
+//        PictureToolViewController * pictureToolVC = [[PictureToolViewController alloc] init];
+//        [self presentViewController:pictureToolVC animated:YES completion:nil];
+//    } else {
+//        THNLoginRegisterViewController *loginSignupVC = [[THNLoginRegisterViewController alloc] init];
+//        UINavigationController *navi = [[UINavigationController alloc] initWithRootViewController:loginSignupVC];
+//        [self presentViewController:navi animated:YES completion:nil];
+//    }
+//}
 
 @end

@@ -25,6 +25,7 @@
 #import "THNSceneInfoTableViewCell.h"
 #import "THNSceneCommentTableViewCell.h"
 #import "THNLookAllCommentTableViewCell.h"
+#import "QRCodeScanViewController.h"
 
 #import "HomeSceneListRow.h"
 #import "CommentRow.h"
@@ -923,23 +924,19 @@ static NSString *const homeDataPath = [NSHomeDirectory() stringByAppendingPathCo
     self.baseTable = self.homeTable;
     self.navViewTitle.hidden = YES;
     [self thn_addNavLogoImage];
-    [self thn_addBarItemLeftBarButton:@"" image:@"shouye_search"];
-    [self thn_addBarItemRightBarButton:@"" image:@"icon_shouye_dingyue"];
+    [self thn_addBarItemLeftBarButton:@"" image:@"mall_saoma"];
+    [self thn_addBarItemRightBarButton:@"" image:@"shouye_search"];
 }
 
 - (void)thn_leftBarItemSelected {
-    SearchViewController *searchVC = [[SearchViewController alloc] init];
-    searchVC.index = 0;
-    [self.navigationController pushViewController:searchVC animated:YES];
+    QRCodeScanViewController * qrVC = [[QRCodeScanViewController alloc] init];
+    [self.navigationController pushViewController:qrVC animated:YES];
 }
 
 - (void)thn_rightBarItemSelected {
-    if ([self isUserLogin]) {
-        THNSubscribeViewController * sceneSubVC = [[THNSubscribeViewController alloc] init];
-        [self.navigationController pushViewController:sceneSubVC animated:YES];
-    } else {
-        [self openUserLoginVC];
-    }
+    SearchViewController *searchVC = [[SearchViewController alloc] init];
+    searchVC.index = 0;
+    [self.navigationController pushViewController:searchVC animated:YES];
 }
 
 #pragma mark - 首次打开加载指示图

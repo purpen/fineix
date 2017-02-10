@@ -33,14 +33,15 @@ static NSString *const URLCarGoPay = @"/shopping/checkout";
     
     [self setNavigationViewUI];
     
-    [self networkGoodsCarList];
-    
     self.chooseAllBtn.selected = NO;
     [[NSNotificationCenter defaultCenter] postNotificationName:@"cacelAll" object:nil];
 }
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    [self networkGoodsCarList];
+    
     [self setGoodsCarVcUI];
 }
 
@@ -331,10 +332,10 @@ static NSString *const URLCarGoPay = @"/shopping/checkout";
     [self.navigationController popViewControllerAnimated:YES];
 }
 
-#pragma mark - 底部视图
+#pragma mark - 底部视图·
 - (UIView *)bottomView {
     if (!_bottomView) {
-        _bottomView = [[UIView alloc] initWithFrame:CGRectMake(0, SCREEN_HEIGHT - 44, SCREEN_WIDTH, 44)];
+        _bottomView = [[UIView alloc] initWithFrame:CGRectMake(0, SCREEN_HEIGHT - 93, SCREEN_WIDTH, 44)];
         
         [_bottomView addSubview:self.chooseAllBtn];
         [_bottomView addSubview:self.goPayBtn];
