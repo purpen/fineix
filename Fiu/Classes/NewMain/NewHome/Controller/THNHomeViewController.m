@@ -38,6 +38,8 @@
 #import "FBRefresh.h"
 #import "THNHotUserFlowLayout.h"
 
+#import "LocationManager.h"
+
 static NSString *const URLBannerSlide = @"/gateway/slide";
 static NSString *const URLSceneList = @"/scene_sight/";
 static NSString *const URLSubject = @"/scene_subject/index_subject_stick";
@@ -76,6 +78,9 @@ static NSString *const homeDataPath = [NSHomeDirectory() stringByAppendingPathCo
     BOOL _rollDown;                  //  是否下拉
     CGFloat _lastContentOffset;      //  滚动的偏移量
 }
+
+/**  */
+@property (nonatomic, strong) UILabel *addressCityLabel;
 
 @end
 
@@ -916,6 +921,16 @@ static NSString *const homeDataPath = [NSHomeDirectory() stringByAppendingPathCo
     }
 }
 
+-(UILabel *)addressCityLabel{
+    if (!_addressCityLabel) {
+        _addressCityLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 30, 20)];
+        _addressCityLabel.center = CGPointMake(self.view.center.x + 40, 45);
+        _addressCityLabel.font = [UIFont systemFontOfSize:12];
+        _addressCityLabel.textColor = [UIColor whiteColor];
+    }
+    return _addressCityLabel;
+}
+
 #pragma mark - 设置Nav
 - (void)thn_setNavigationViewUI {
     self.view.backgroundColor = [UIColor whiteColor];
@@ -926,6 +941,20 @@ static NSString *const homeDataPath = [NSHomeDirectory() stringByAppendingPathCo
     [self thn_addNavLogoImage];
     [self thn_addBarItemLeftBarButton:@"" image:@"mall_saoma"];
     [self thn_addBarItemRightBarButton:@"" image:@"shouye_search"];
+    
+    [self getCity];
+    [self.navView addSubview:self.addressCityLabel];
+}
+
+-(void)getCity
+{
+    LocationManager *l = [[LocationManager alloc] init];
+}
+
+-(void)setLabelText:(NSString *)text
+{
+    NSLog(@"text %@",text);
+    self.addressCityLabel.text = text;
 }
 
 - (void)thn_leftBarItemSelected {

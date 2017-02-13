@@ -385,6 +385,8 @@
 		1F99E1681E516084000D3D73 /* CollectionViewHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F99E1671E516084000D3D73 /* CollectionViewHeaderView.m */; };
 		1F99E16B1E5181D1000D3D73 /* NSObject+Property.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F99E16A1E5181D1000D3D73 /* NSObject+Property.m */; };
 		1F99E16D1E518272000D3D73 /* liwushuo.json in Resources */ = {isa = PBXBuildFile; fileRef = 1F99E16C1E518272000D3D73 /* liwushuo.json */; };
+		1F99E1731E51A4A6000D3D73 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1F99E1721E51A4A6000D3D73 /* MapKit.framework */; };
+		1F99E17F1E51B714000D3D73 /* LocationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F99E17E1E51B714000D3D73 /* LocationManager.m */; };
 		1FA204E51D378AAB00B89699 /* UIView+Size.m in Sources */ = {isa = PBXBuildFile; fileRef = 1FA204E41D378AAB00B89699 /* UIView+Size.m */; };
 		1FBA9EA81D9E07C800D7FDA6 /* RecipeCollectionHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1FBA9EA61D9E07C800D7FDA6 /* RecipeCollectionHeaderView.m */; };
 		1FBA9EA91D9E07C800D7FDA6 /* RecipeCollectionHeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1FBA9EA71D9E07C800D7FDA6 /* RecipeCollectionHeaderView.xib */; };
@@ -1410,6 +1412,9 @@
 		1F99E1691E5181D1000D3D73 /* NSObject+Property.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSObject+Property.h"; sourceTree = "<group>"; };
 		1F99E16A1E5181D1000D3D73 /* NSObject+Property.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSObject+Property.m"; sourceTree = "<group>"; };
 		1F99E16C1E518272000D3D73 /* liwushuo.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = liwushuo.json; sourceTree = "<group>"; };
+		1F99E1721E51A4A6000D3D73 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
+		1F99E17D1E51B714000D3D73 /* LocationManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LocationManager.h; sourceTree = "<group>"; };
+		1F99E17E1E51B714000D3D73 /* LocationManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LocationManager.m; sourceTree = "<group>"; };
 		1FA204E31D378AAB00B89699 /* UIView+Size.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+Size.h"; sourceTree = "<group>"; };
 		1FA204E41D378AAB00B89699 /* UIView+Size.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+Size.m"; sourceTree = "<group>"; };
 		1FBA9EA51D9E07C800D7FDA6 /* RecipeCollectionHeaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RecipeCollectionHeaderView.h; sourceTree = "<group>"; };
@@ -2088,6 +2093,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1F99E1731E51A4A6000D3D73 /* MapKit.framework in Frameworks */,
 				D8482D211E136231000B511C /* BaiduMapAPI_Base.framework in Frameworks */,
 				D8F0DBC71DD4619700CB20BE /* libGPUImage.a in Frameworks */,
 				D8482D221E136231000B511C /* BaiduMapAPI_Cloud.framework in Frameworks */,
@@ -2906,6 +2912,7 @@
 		1F2A8E321CF40277005116C7 /* Location */ = {
 			isa = PBXGroup;
 			children = (
+				1F99E16E1E519F41000D3D73 /* Manager */,
 				1F2A8E331CF40277005116C7 /* Controller */,
 				1F2A8E3C1CF40277005116C7 /* Model */,
 				1F2A8E3F1CF40277005116C7 /* View */,
@@ -3731,6 +3738,15 @@
 			path = View;
 			sourceTree = "<group>";
 		};
+		1F99E16E1E519F41000D3D73 /* Manager */ = {
+			isa = PBXGroup;
+			children = (
+				1F99E17D1E51B714000D3D73 /* LocationManager.h */,
+				1F99E17E1E51B714000D3D73 /* LocationManager.m */,
+			);
+			path = Manager;
+			sourceTree = "<group>";
+		};
 		1FCDCC891D08082900C92E78 /* InviteCode */ = {
 			isa = PBXGroup;
 			children = (
@@ -3744,6 +3760,7 @@
 		4121957EDE4D4049941B2B88 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				1F99E1721E51A4A6000D3D73 /* MapKit.framework */,
 				D8F0DBC61DD4619700CB20BE /* libGPUImage.a */,
 				D80FB1461DAB30190060C561 /* UserNotifications.framework */,
 				1F6CA25C1D5B0FA600DFB79E /* MediaPlayer.framework */,
@@ -5626,6 +5643,7 @@
 				D857ABF61DE5706C00F924E8 /* THNSalesReturnViewController.m in Sources */,
 				D869BD741D6036A000432423 /* ReportViewController.m in Sources */,
 				1F2AFDCD1D8818A400DA6035 /* MyOderInfoViewController.m in Sources */,
+				1F99E17F1E51B714000D3D73 /* LocationManager.m in Sources */,
 				1F45A7931D2F5263009D7EE1 /* MapAnnotionViewController.m in Sources */,
 				1F2AFC931D88170B00DA6035 /* FiuSceneCollectionViewCell.m in Sources */,
 				1F2AFCA41D88170B00DA6035 /* THNHomeSenceCollectionViewCell.m in Sources */,
