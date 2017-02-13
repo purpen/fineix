@@ -10,7 +10,7 @@
 #import "THNNavigationController.h"
 #import "THNTabBar.h"
 #import "THNHomeViewController.h"
-#import "THNDiscoverViewController.h"
+//#import "THNDiscoverViewController.h"
 #import "THNMallViewController.h"
 #import "THNMallViewController.h"
 #import "GoodsCarViewController.h"
@@ -22,6 +22,7 @@
 #import "THNLoginRegisterViewController.h"
 #import "THNMessageViewController.h"
 #import "UITabBar+badge.h"
+#import "THNDiscoverVC.h"
 
 
 @implementation THNTabBarController {
@@ -114,7 +115,8 @@
     [self setValue:tabBar forKey:@"tabBar"];
     
     THNHomeViewController *homeVC = [[THNHomeViewController alloc] init];
-    THNDiscoverViewController *discoverVC = [[THNDiscoverViewController alloc] init];
+//    THNDiscoverViewController *discoverVC = [[THNDiscoverViewController alloc] init];
+    THNDiscoverVC *discoverVC = [[THNDiscoverVC alloc] init];
     THNMallViewController *mallVC = [[THNMallViewController alloc] init];
     GoodsCarViewController *goodsCarVC = [[GoodsCarViewController alloc] init];
     MyPageViewController *myVC = [[MyPageViewController alloc] init];
