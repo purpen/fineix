@@ -19,6 +19,8 @@
     UITableViewDataSource
 >
 
+/**  */
+@property (nonatomic, strong) UILabel *addressCityLabel;
 @pro_strong FBRequest *rollImgRequest;
 @pro_strong FBRequest *subjectRequest;
 @pro_strong FBRequest *subjectInfoRequest;

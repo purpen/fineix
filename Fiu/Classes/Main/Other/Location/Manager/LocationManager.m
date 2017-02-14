@@ -7,19 +7,12 @@
 //
 
 #import "LocationManager.h"
-#import <BaiduMapAPI_Location/BMKLocationComponent.h>
-#import <BaiduMapAPI_Search/BMKSearchComponent.h>
+#import <CoreLocation/CoreLocation.h>
 
-@interface LocationManager () <BMKLocationServiceDelegate, BMKGeoCodeSearchDelegate>
+@interface LocationManager () <CLLocationManagerDelegate>
 
-{
-    float _la;
-    float _lo;
-    BMKReverseGeoCodeOption *_reverseGeoCodeSearchOption;//反向地理编码对象
-}
-
-@property (nonatomic, strong) BMKLocationService *locationSevice;
-@property (nonatomic, strong) BMKGeoCodeSearch *codeSearch;//地理位置搜索对象（地理位置坐标编码）
+/**  */
+@property (nonatomic, strong) CLLocationManager *locationManager;
 
 @end
 
@@ -38,58 +31,53 @@
 - (id)init {
     self = [super init];
     if (self) {
-        //创建定为服务对象
-        self.locationSevice = [[BMKLocationService alloc] init];
-        //设置定位服务对象代理
-        self.locationSevice.delegate = self;
-        self.locationSevice.desiredAccuracy = kCLLocationAccuracyBestForNavigation;
-        //1，开启定位服务
-        [self.locationSevice startUserLocationService];
+        self.locationManager = [[CLLocationManager alloc] init];
+        self.locationManager.delegate = self;
+        self.locationManager.desiredAccuracy = kCLLocationAccuracyBest;
     }
     return self;
 }
 
-#pragma mark -BMKLocationServiceDelegate
--(void)willStartLocatingUser{
-}
-
--(void)didFailToLocateUserWithError:(NSError *)error{
-    //[_hud hideAnimated:YES];
-}
-
-//定位成功，再次定位
--(void)didUpdateBMKUserLocation:(BMKUserLocation *)userLocation{
-    _la = userLocation.location.coordinate.latitude;
-    _lo = userLocation.location.coordinate.longitude;
+- (void)findMe
+{
+    /** 由于IOS8中定位的授权机制改变 需要进行手动授权
+     * 获取授权认证，两个方法：
+     * [self.locationManager requestWhenInUseAuthorization];
+     * [self.locationManager requestAlwaysAuthorization];
+     */
+    if ([self.locationManager respondsToSelector:@selector(requestAlwaysAuthorization)]) {
+        [self.locationManager requestAlwaysAuthorization];
+    }
     
-    [_locationSevice stopUserLocationService];
-    
-    //发起反向地理编码检索
-    //创建地理位置搜索对象
-    self.codeSearch = [[BMKGeoCodeSearch alloc] init];
-    //设置地理位置搜索对象代理
-    self.codeSearch.delegate = self;
-    _reverseGeoCodeSearchOption = [[
-                                    BMKReverseGeoCodeOption alloc]init];
-    _reverseGeoCodeSearchOption.reverseGeoPoint = userLocation.location.coordinate;
-    BOOL flag = [self.codeSearch reverseGeoCode:_reverseGeoCodeSearchOption];
-    if(flag)
-    {
-    }
-    else
-    {
-    }
+    //开始定位，不断调用其代理方法
+    [self.locationManager startUpdatingLocation];
 }
 
-//接收反向地理编码结果
--(void) onGetReverseGeoCodeResult:(BMKGeoCodeSearch *)searcher result:
-(BMKReverseGeoCodeResult *)result
-                        errorCode:(BMKSearchErrorCode)error{
-    if (error == BMK_SEARCH_NO_ERROR) {
-        //在此处理正常结果
-        NSLog(@"%@", result);
-    }
-    else {
+- (void)locationManager:(CLLocationManager *)manager
+     didUpdateLocations:(NSArray *)locations
+{
+    // 1.获取用户位置的对象
+    CLLocation *location = [locations lastObject];
+    CLGeocoder *clGeoCoder = [[CLGeocoder alloc] init];
+    __block NSString *city;
+    [clGeoCoder reverseGeocodeLocation:location completionHandler: ^(NSArray *placemarks,NSError *error) {
+        CLPlacemark *placeMark = placemarks[0];
+        NSDictionary *addressDic=placeMark.addressDictionary;
+        city=[addressDic objectForKey:@"City"];
+        if ([self.locationDelegate respondsToSelector:@selector(setLocalCityStr:)]) {
+            [self.locationDelegate setLocalCityStr:city];
+        }
+        // 2.停止定位
+        [manager stopUpdatingLocation];
+    }];
+    
+}
+
+- (void)locationManager:(CLLocationManager *)manager
+       didFailWithError:(NSError *)error
+{
+    if (error.code == kCLErrorDenied) {
+        // 提示用户出错原因，可按住Option键点击 KCLErrorDenied的查看更多出错信息，可打印error.code值查找原因所在
     }
 }
 

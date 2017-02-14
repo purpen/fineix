@@ -39,6 +39,7 @@
 #import "THNHotUserFlowLayout.h"
 
 #import "LocationManager.h"
+#import "THNSelecteCityViewController.h"
 
 static NSString *const URLBannerSlide = @"/gateway/slide";
 static NSString *const URLSceneList = @"/scene_sight/";
@@ -65,7 +66,7 @@ static NSString *const allCommentsCellId = @"AllCommentsCellId";
 //  归档地址
 static NSString *const homeDataPath = [NSHomeDirectory() stringByAppendingPathComponent:@"homeData.archiver"];
 
-@interface THNHomeViewController () {
+@interface THNHomeViewController () <locationManagerDelegate, selectedCityDelegate>{
     NSIndexPath *_selectedIndexPath;
     CGFloat _contentHigh;
     CGFloat _defaultContentHigh;
@@ -80,7 +81,7 @@ static NSString *const homeDataPath = [NSHomeDirectory() stringByAppendingPathCo
 }
 
 /**  */
-@property (nonatomic, strong) UILabel *addressCityLabel;
+@property (nonatomic, strong) UIImageView *downImage;
 
 @end
 
@@ -101,8 +102,11 @@ static NSString *const homeDataPath = [NSHomeDirectory() stringByAppendingPathCo
     [self setHotUserListData];
     [self thn_registerNSNotification];
     [self thn_netWorkGroup];
-    
+    [self getCity];
+    [self.navView addSubview:self.addressCityLabel];
+    [self.navView addSubview:self.downImage];
 }
+
 
 #pragma mark - 推送通知
 - (void)thn_setReceiveUmengNotice {
@@ -923,12 +927,34 @@ static NSString *const homeDataPath = [NSHomeDirectory() stringByAppendingPathCo
 
 -(UILabel *)addressCityLabel{
     if (!_addressCityLabel) {
-        _addressCityLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 30, 20)];
-        _addressCityLabel.center = CGPointMake(self.view.center.x + 40, 45);
+        _addressCityLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 50, 20)];
+        _addressCityLabel.center = CGPointMake(self.view.center.x + 50, 45);
         _addressCityLabel.font = [UIFont systemFontOfSize:12];
         _addressCityLabel.textColor = [UIColor whiteColor];
+        _addressCityLabel.userInteractionEnabled = YES;
+        [_addressCityLabel addGestureRecognizer:[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(labelTap)]];
     }
     return _addressCityLabel;
+}
+
+-(void)labelTap{
+    THNSelecteCityViewController *vc = [[THNSelecteCityViewController alloc] init];
+    vc.selectedCityDelegate = self;
+    [self presentViewController:vc animated:YES completion:nil];
+}
+
+-(void)setSelectedCityStr:(NSString *)str{
+    self.addressCityLabel.text = str;
+}
+
+-(UIImageView *)downImage{
+    if (!_downImage) {
+        _downImage = [[UIImageView alloc] initWithFrame:CGRectMake(self.addressCityLabel.frame.origin.x + self.addressCityLabel.frame.size.width - 20, self.addressCityLabel.frame.origin.y + 9, 11, 6)];
+        _downImage.image = [UIImage imageNamed:@"nav_down"];
+        _downImage.userInteractionEnabled = YES;
+        [_downImage addGestureRecognizer:[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(labelTap)]];
+    }
+    return _downImage;
 }
 
 #pragma mark - 设置Nav
@@ -941,20 +967,17 @@ static NSString *const homeDataPath = [NSHomeDirectory() stringByAppendingPathCo
     [self thn_addNavLogoImage];
     [self thn_addBarItemLeftBarButton:@"" image:@"mall_saoma"];
     [self thn_addBarItemRightBarButton:@"" image:@"shouye_search"];
-    
-    [self getCity];
-    [self.navView addSubview:self.addressCityLabel];
 }
 
 -(void)getCity
 {
-    LocationManager *l = [[LocationManager alloc] init];
+    [LocationManager shareLocation].locationDelegate = self;
+    [[LocationManager shareLocation] findMe];
 }
 
--(void)setLabelText:(NSString *)text
-{
-    NSLog(@"text %@",text);
-    self.addressCityLabel.text = text;
+-(void)setLocalCityStr:(NSString *)str{
+    NSString *cityStr = [str substringToIndex:[str length] - 1];
+    self.addressCityLabel.text = cityStr;
 }
 
 - (void)thn_leftBarItemSelected {

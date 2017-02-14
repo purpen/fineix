@@ -10,6 +10,8 @@
 		1F0EE6A71C9FA4E7000631F0 /* libstdc++.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 1F0EE6A61C9FA4E7000631F0 /* libstdc++.tbd */; };
 		1F0EE6A91C9FA4F6000631F0 /* libz.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 1F0EE6A81C9FA4F6000631F0 /* libz.tbd */; };
 		1F1134AC1D17F5CB00DFFA74 /* Fiu.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = 1F1134AB1D17F5CB00DFFA74 /* Fiu.mp4 */; };
+		1F1804081E52B2AD00722AF5 /* THNSelecteCityViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F1804071E52B2AD00722AF5 /* THNSelecteCityViewController.m */; };
+		1F18040E1E52F26200722AF5 /* THNCityCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F18040D1E52F26200722AF5 /* THNCityCollectionViewCell.m */; };
 		1F1AF3B21CF58A6B00CAA525 /* IntegralViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F1AF3B01CF58A6B00CAA525 /* IntegralViewController.m */; };
 		1F1AF3B31CF58A6B00CAA525 /* IntegralViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1F1AF3B11CF58A6B00CAA525 /* IntegralViewController.xib */; };
 		1F223B1D1CD714F3007687F7 /* messages.plist in Resources */ = {isa = PBXBuildFile; fileRef = 1F223B1C1CD714F3007687F7 /* messages.plist */; };
@@ -769,6 +771,10 @@
 		1F0EE6A61C9FA4E7000631F0 /* libstdc++.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = "libstdc++.tbd"; path = "usr/lib/libstdc++.tbd"; sourceTree = SDKROOT; };
 		1F0EE6A81C9FA4F6000631F0 /* libz.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libz.tbd; path = usr/lib/libz.tbd; sourceTree = SDKROOT; };
 		1F1134AB1D17F5CB00DFFA74 /* Fiu.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = Fiu.mp4; sourceTree = "<group>"; };
+		1F1804061E52B2AD00722AF5 /* THNSelecteCityViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THNSelecteCityViewController.h; sourceTree = "<group>"; };
+		1F1804071E52B2AD00722AF5 /* THNSelecteCityViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THNSelecteCityViewController.m; sourceTree = "<group>"; };
+		1F18040C1E52F26200722AF5 /* THNCityCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THNCityCollectionViewCell.h; sourceTree = "<group>"; };
+		1F18040D1E52F26200722AF5 /* THNCityCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THNCityCollectionViewCell.m; sourceTree = "<group>"; };
 		1F1AF3AF1CF58A6B00CAA525 /* IntegralViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IntegralViewController.h; sourceTree = "<group>"; };
 		1F1AF3B01CF58A6B00CAA525 /* IntegralViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IntegralViewController.m; sourceTree = "<group>"; };
 		1F1AF3B11CF58A6B00CAA525 /* IntegralViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = IntegralViewController.xib; sourceTree = "<group>"; };
@@ -2093,6 +2099,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				280045111C805B78005F5C2E /* CoreLocation.framework in Frameworks */,
 				1F99E1731E51A4A6000D3D73 /* MapKit.framework in Frameworks */,
 				D8482D211E136231000B511C /* BaiduMapAPI_Base.framework in Frameworks */,
 				D8F0DBC71DD4619700CB20BE /* libGPUImage.a in Frameworks */,
@@ -2137,7 +2144,6 @@
 				D8482D2C1E136232000B511C /* libUMessage_Sdk_1.4.0.a in Frameworks */,
 				2800451B1C805CAC005F5C2E /* Security.framework in Frameworks */,
 				280045151C805B8C005F5C2E /* OpenGLES.framework in Frameworks */,
-				280045111C805B78005F5C2E /* CoreLocation.framework in Frameworks */,
 				D8482D261E136231000B511C /* BaiduMapAPI_Search.framework in Frameworks */,
 				AA58DD9AA6D768D60E22B45A /* libPods-Fiu.a in Frameworks */,
 			);
@@ -2931,6 +2937,8 @@
 				1F2A8E391CF40277005116C7 /* FBMapLocatinViewController.h */,
 				1F2A8E3A1CF40277005116C7 /* FBMapLocatinViewController.m */,
 				1F2A8E3B1CF40277005116C7 /* FBMapLocatinViewController.xib */,
+				1F1804061E52B2AD00722AF5 /* THNSelecteCityViewController.h */,
+				1F1804071E52B2AD00722AF5 /* THNSelecteCityViewController.m */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -2951,6 +2959,8 @@
 				1F2A8E411CF40277005116C7 /* CityTableViewCell.m */,
 				1F2A8E421CF40277005116C7 /* CityTwoTableViewCell.h */,
 				1F2A8E431CF40277005116C7 /* CityTwoTableViewCell.m */,
+				1F18040C1E52F26200722AF5 /* THNCityCollectionViewCell.h */,
+				1F18040D1E52F26200722AF5 /* THNCityCollectionViewCell.m */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -5446,6 +5456,7 @@
 				1F2A8FC71CF40277005116C7 /* GoodsInfoBrand.m in Sources */,
 				D80669881D6F3F82007FD81E /* FBGoodsInfoModelData.m in Sources */,
 				1F2A8F401CF40277005116C7 /* MarkGoods.m in Sources */,
+				1F1804081E52B2AD00722AF5 /* THNSelecteCityViewController.m in Sources */,
 				D8C094E41D752D2200908491 /* SceneInfoData.m in Sources */,
 				D80D415E1CAD144D005D72B1 /* UIBarButtonItem+Helper.m in Sources */,
 				1F2AFC8D1D88170B00DA6035 /* AccountView.m in Sources */,
@@ -5528,6 +5539,7 @@
 				D81EA4011D2A52DD0032FAAB /* FiuBrandListViewController.m in Sources */,
 				D857C4BF1E2F632500569B3D /* THNWithdrawData.m in Sources */,
 				D857C4B71E2F58A500569B3D /* THNAllinaceData.m in Sources */,
+				1F18040E1E52F26200722AF5 /* THNCityCollectionViewCell.m in Sources */,
 				1F2AFD001D8817CC00DA6035 /* THNArticleDetalViewController.m in Sources */,
 				D86E548F1DD444230075ED88 /* FS1977Filter.m in Sources */,
 				D86E54BE1DD444230075ED88 /* FSLomofiFilter.m in Sources */,

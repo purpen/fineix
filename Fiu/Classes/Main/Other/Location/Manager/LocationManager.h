@@ -8,7 +8,18 @@
 
 #import <Foundation/Foundation.h>
 
+@protocol locationManagerDelegate <NSObject>
+
+-(void)setLocalCityStr:(NSString*)str;
+
+@end
+
 @interface LocationManager : NSObject
 
+/**  */
+@property (nonatomic, weak) id <locationManagerDelegate> locationDelegate;
+
++ (LocationManager *)shareLocation;
+- (void)findMe;
 
 @end
