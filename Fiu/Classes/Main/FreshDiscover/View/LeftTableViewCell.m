@@ -7,8 +7,9 @@
 //
 
 #import "LeftTableViewCell.h"
+#import "UIColor+Extension.h"
 
-#define defaultColor rgba(253, 212, 49, 1)
+#define defaultColor [UIColor colorWithHexString:@"#be8914"]
 #define rgba(r,g,b,a) [UIColor colorWithRed:r/255.0 green:g/255.0 blue:b/255.0 alpha:a]
 
 @interface LeftTableViewCell ()
