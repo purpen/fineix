@@ -12,6 +12,10 @@
 		1F1134AC1D17F5CB00DFFA74 /* Fiu.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = 1F1134AB1D17F5CB00DFFA74 /* Fiu.mp4 */; };
 		1F1804081E52B2AD00722AF5 /* THNSelecteCityViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F1804071E52B2AD00722AF5 /* THNSelecteCityViewController.m */; };
 		1F18040E1E52F26200722AF5 /* THNCityCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F18040D1E52F26200722AF5 /* THNCityCollectionViewCell.m */; };
+		1F1804111E53EEF200722AF5 /* THNDivideCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F1804101E53EEF200722AF5 /* THNDivideCollectionViewCell.m */; };
+		1F1804141E54009A00722AF5 /* THNOrderCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F1804131E54009A00722AF5 /* THNOrderCollectionViewCell.m */; };
+		1F18041B1E5432C100722AF5 /* UIButton+Layout.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F1804171E5432C100722AF5 /* UIButton+Layout.m */; };
+		1F18041C1E5432C100722AF5 /* YLButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F18041A1E5432C100722AF5 /* YLButton.m */; };
 		1F1AF3B21CF58A6B00CAA525 /* IntegralViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F1AF3B01CF58A6B00CAA525 /* IntegralViewController.m */; };
 		1F1AF3B31CF58A6B00CAA525 /* IntegralViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1F1AF3B11CF58A6B00CAA525 /* IntegralViewController.xib */; };
 		1F223B1D1CD714F3007687F7 /* messages.plist in Resources */ = {isa = PBXBuildFile; fileRef = 1F223B1C1CD714F3007687F7 /* messages.plist */; };
@@ -775,6 +779,14 @@
 		1F1804071E52B2AD00722AF5 /* THNSelecteCityViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THNSelecteCityViewController.m; sourceTree = "<group>"; };
 		1F18040C1E52F26200722AF5 /* THNCityCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THNCityCollectionViewCell.h; sourceTree = "<group>"; };
 		1F18040D1E52F26200722AF5 /* THNCityCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THNCityCollectionViewCell.m; sourceTree = "<group>"; };
+		1F18040F1E53EEF200722AF5 /* THNDivideCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THNDivideCollectionViewCell.h; sourceTree = "<group>"; };
+		1F1804101E53EEF200722AF5 /* THNDivideCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THNDivideCollectionViewCell.m; sourceTree = "<group>"; };
+		1F1804121E54009A00722AF5 /* THNOrderCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THNOrderCollectionViewCell.h; sourceTree = "<group>"; };
+		1F1804131E54009A00722AF5 /* THNOrderCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THNOrderCollectionViewCell.m; sourceTree = "<group>"; };
+		1F1804161E5432C100722AF5 /* UIButton+Layout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIButton+Layout.h"; sourceTree = "<group>"; };
+		1F1804171E5432C100722AF5 /* UIButton+Layout.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIButton+Layout.m"; sourceTree = "<group>"; };
+		1F1804191E5432C100722AF5 /* YLButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YLButton.h; sourceTree = "<group>"; };
+		1F18041A1E5432C100722AF5 /* YLButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YLButton.m; sourceTree = "<group>"; };
 		1F1AF3AF1CF58A6B00CAA525 /* IntegralViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IntegralViewController.h; sourceTree = "<group>"; };
 		1F1AF3B01CF58A6B00CAA525 /* IntegralViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IntegralViewController.m; sourceTree = "<group>"; };
 		1F1AF3B11CF58A6B00CAA525 /* IntegralViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = IntegralViewController.xib; sourceTree = "<group>"; };
@@ -2192,6 +2204,24 @@
 			path = View;
 			sourceTree = "<group>";
 		};
+		1F1804151E5432C100722AF5 /* UIButton+Layout */ = {
+			isa = PBXGroup;
+			children = (
+				1F1804161E5432C100722AF5 /* UIButton+Layout.h */,
+				1F1804171E5432C100722AF5 /* UIButton+Layout.m */,
+			);
+			path = "UIButton+Layout";
+			sourceTree = "<group>";
+		};
+		1F1804181E5432C100722AF5 /* YLButton */ = {
+			isa = PBXGroup;
+			children = (
+				1F1804191E5432C100722AF5 /* YLButton.h */,
+				1F18041A1E5432C100722AF5 /* YLButton.m */,
+			);
+			path = YLButton;
+			sourceTree = "<group>";
+		};
 		1F2A8BCE1CF40276005116C7 /* Main */ = {
 			isa = PBXGroup;
 			children = (
@@ -3346,6 +3376,10 @@
 				1F2AFC5D1D88170B00DA6035 /* THNSubHeadView.m */,
 				1F2AFC5E1D88170B00DA6035 /* TipNumberView.h */,
 				1F2AFC5F1D88170B00DA6035 /* TipNumberView.m */,
+				1F18040F1E53EEF200722AF5 /* THNDivideCollectionViewCell.h */,
+				1F1804101E53EEF200722AF5 /* THNDivideCollectionViewCell.m */,
+				1F1804121E54009A00722AF5 /* THNOrderCollectionViewCell.h */,
+				1F1804131E54009A00722AF5 /* THNOrderCollectionViewCell.m */,
 			);
 			path = view;
 			sourceTree = "<group>";
@@ -4116,6 +4150,8 @@
 		D8482D061E136231000B511C /* Vendors */ = {
 			isa = PBXGroup;
 			children = (
+				1F1804151E5432C100722AF5 /* UIButton+Layout */,
+				1F1804181E5432C100722AF5 /* YLButton */,
 				D8482D071E136231000B511C /* AliPay */,
 				D8482D0A1E136231000B511C /* BaiduMapSDK */,
 				D8482D121E136231000B511C /* DBModel */,
@@ -5376,6 +5412,7 @@
 				D8F80B911DD3103500C086FA /* THNAdjustCollectionViewCell.m in Sources */,
 				D80FB14A1DAF89BA0060C561 /* NSString+TimeDate.m in Sources */,
 				D869BD6E1D6036A000432423 /* CommentId.m in Sources */,
+				1F1804141E54009A00722AF5 /* THNOrderCollectionViewCell.m in Sources */,
 				1F2A90621CF40277005116C7 /* SystemInformsViewController.m in Sources */,
 				D806697B1D6F0206007FD81E /* MallSearchViewController.m in Sources */,
 				D86E54C41DD444230075ED88 /* FSWaldenFilter.m in Sources */,
@@ -5472,7 +5509,9 @@
 				1F2AFC671D88170B00DA6035 /* EditNickNameViewController.m in Sources */,
 				D857C4B61E2F58A500569B3D /* THNAllinaceContact.m in Sources */,
 				D88F47EE1D5C5BD300C83A0C /* FBCategoryView.m in Sources */,
+				1F1804111E53EEF200722AF5 /* THNDivideCollectionViewCell.m in Sources */,
 				D861BC6E1D7E977700A26022 /* THNBrandInfoViewController.m in Sources */,
+				1F18041B1E5432C100722AF5 /* UIButton+Layout.m in Sources */,
 				D8A9AE401CE304FF00A9FCFB /* NSTimer+Addition.m in Sources */,
 				D8E3AEBC1CFC9B84006E5E8C /* SceneAddViewController.m in Sources */,
 				D87035241DEBFCFB001FBBF1 /* THNStateHeaderView.m in Sources */,
@@ -5595,6 +5634,7 @@
 				1F2AFDDD1D8818A400DA6035 /* CommentView.m in Sources */,
 				D81281591CAA8532007CF08B /* UIImageView+SDWedImage.m in Sources */,
 				D857C48C1E2F3E8600569B3D /* THNBalanceRow.m in Sources */,
+				1F18041C1E5432C100722AF5 /* YLButton.m in Sources */,
 				D86809181D65EE5F002714B2 /* THNSearchBrandTableViewCell.m in Sources */,
 				1F2A8F501CF40277005116C7 /* PictureView.m in Sources */,
 				1F2A901F1CF40277005116C7 /* InvalidBonusCell.m in Sources */,

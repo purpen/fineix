@@ -39,6 +39,8 @@
 #import "THNMessageViewController.h"
 #import "THNRefundListViewController.h"
 #import "THNAllianceViewController.h"
+#import "THNDivideCollectionViewCell.h"
+#import "THNOrderCollectionViewCell.h"
 
 @interface MyPageViewController ()<THNNavigationBarItemsDelegate,UICollectionViewDelegate,UICollectionViewDataSource>
 {
@@ -216,7 +218,7 @@
         UICollectionViewFlowLayout *layout = [[UICollectionViewFlowLayout alloc] init];
         
         _myCollectionView = [[UICollectionView alloc] initWithFrame:CGRectMake(0, -54, SCREEN_WIDTH, SCREEN_HEIGHT+54) collectionViewLayout:layout];
-        _myCollectionView.backgroundColor = [UIColor whiteColor];
+        _myCollectionView.backgroundColor = [UIColor colorWithHexString:@"#f7f7f7"];
         _myCollectionView.showsVerticalScrollIndicator = NO;
         _myCollectionView.delegate = self;
         _myCollectionView.dataSource = self;
@@ -224,6 +226,8 @@
         [_myCollectionView registerClass:[UICollectionViewCell class] forCellWithReuseIdentifier:@"UICollectionViewCell"];
         [_myCollectionView registerClass:[UICollectionViewCell class] forCellWithReuseIdentifier:@"UICollectionViewCell1"];
         [_myCollectionView registerClass:[MyPageBtnCollectionViewCell class] forCellWithReuseIdentifier:@"MyPageBtnCollectionViewCell"];
+        [_myCollectionView registerClass:[THNDivideCollectionViewCell class] forCellWithReuseIdentifier:THNDIVIDECollectionViewCell];
+        [_myCollectionView registerClass:[THNOrderCollectionViewCell class] forCellWithReuseIdentifier:THNORDErCollectionViewCell];
     }
     return _myCollectionView;
 }
@@ -241,13 +245,18 @@
 -(UIEdgeInsets)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout insetForSectionAtIndex:(NSInteger)section{
     if (section == 0) {
         return UIEdgeInsetsMake(0, 0, 0, 0);
-    }else{
+    } else if (section == 2) {
+        return UIEdgeInsetsMake(8, 0, 10, 0);
+    }else if (section == 3) {
+        return UIEdgeInsetsMake(0, 0, 10, 0);
+    }
+    else{
         return UIEdgeInsetsMake(0, 5, 0, 5);
     }
 }
 
 -(NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView{
-    return 4;
+    return 6;
 }
 
 -(UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath{
@@ -262,14 +271,22 @@
         [cell.contentView addSubview:_chanelV];
         return cell;
     }else if (indexPath.section == 2){
+        THNDivideCollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:THNDIVIDECollectionViewCell forIndexPath:indexPath];
+        return cell;
+    }
+    else if(indexPath.section == 3){
+        THNOrderCollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:THNORDErCollectionViewCell forIndexPath:indexPath];
+        return cell;
+    }
+    else if(indexPath.section == 4){
         MyPageBtnCollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"MyPageBtnCollectionViewCell" forIndexPath:indexPath];
-        if ([_counterModel.order_total_count intValue] == 0) {
+        if ([_counterModel.message_total_count intValue] == 0) {
             //不显示
             [self.tipNumView1 removeFromSuperview];
         }else{
             //显示
-
-            self.tipNumView1.tipNumLabel.text = [NSString stringWithFormat:@"%@",_counterModel.order_total_count];
+            
+            self.tipNumView1.tipNumLabel.text = [NSString stringWithFormat:@"%@",_counterModel.message_total_count];
             CGSize size = [self.tipNumView1.tipNumLabel.text sizeWithAttributes:@{NSFontAttributeName: [UIFont systemFontOfSize:12]}];
             [cell.btn1 addSubview:self.tipNumView1];
             [self.tipNumView1 mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -284,27 +301,6 @@
             }];
         }
         
-        if ([_counterModel.message_total_count intValue] == 0) {
-            //不显示
-            [self.tipNumView2 removeFromSuperview];
-        }else{
-            //显示
-            self.tipNumView2.tipNumLabel.text = [NSString stringWithFormat:@"%@",_counterModel.message_total_count];
-            CGSize size = [self.tipNumView2.tipNumLabel.text sizeWithAttributes:@{NSFontAttributeName: [UIFont systemFontOfSize:12]}];
-            [cell.btn2 addSubview:self.tipNumView2];
-            [self.tipNumView2 mas_makeConstraints:^(MASConstraintMaker *make) {
-                if ((size.width+9) > 15) {
-                    make.size.mas_equalTo(CGSizeMake(size.width+11, 17));
-                    make.right.mas_equalTo(cell.btn2.mas_right).with.offset(5);
-                }else{
-                    make.size.mas_equalTo(CGSizeMake(17, 17));
-                    make.right.mas_equalTo(cell.btn2.mas_right).with.offset(2);
-                }
-                
-                make.top.mas_equalTo(cell.btn2.mas_top).with.offset(0/667.0*SCREEN_HEIGHT);
-            }];
-        }
-
         if ([_counterModel.fiu_bonus_count intValue] == 0) {
             //不显示
             [self.tipNumView3 removeFromSuperview];
@@ -312,43 +308,41 @@
             //显示
             self.tipNumView3.tipNumLabel.text = [NSString stringWithFormat:@"%@",_counterModel.fiu_bonus_count];
             CGSize size = [self.tipNumView3.tipNumLabel.text sizeWithAttributes:@{NSFontAttributeName: [UIFont systemFontOfSize:12]}];
-            [cell.btn8 addSubview:self.tipNumView3];
+            [cell.btn7 addSubview:self.tipNumView3];
             [self.tipNumView3 mas_makeConstraints:^(MASConstraintMaker *make) {
                 if ((size.width+9) > 15) {
                     make.size.mas_equalTo(CGSizeMake(size.width+11, 17));
-                    make.right.mas_equalTo(cell.btn8.mas_right).with.offset(5);
+                    make.right.mas_equalTo(cell.btn7.mas_right).with.offset(5);
                 }else{
                     make.size.mas_equalTo(CGSizeMake(17, 17));
-                    make.right.mas_equalTo(cell.btn8.mas_right).with.offset(2);
+                    make.right.mas_equalTo(cell.btn7.mas_right).with.offset(2);
                 }
                 
-                make.top.mas_equalTo(cell.btn8.mas_top).with.offset(0/667.0*SCREEN_HEIGHT);
+                make.top.mas_equalTo(cell.btn7.mas_top).with.offset(0/667.0*SCREEN_HEIGHT);
             }];
         }
         
-        if ( _userInfo.allianceId.length == 0) {
-            cell.allianceLabel.hidden = YES;
-            cell.allianceBtn.hidden = YES;
-        } else {
-            cell.allianceLabel.hidden = NO;
-            cell.allianceBtn.hidden = NO;
-        }
+//        if ( _userInfo.allianceId.length == 0) {
+//            cell.allianceLabel.hidden = YES;
+//            cell.allianceBtn.hidden = YES;
+//        } else {
+//            cell.allianceLabel.hidden = NO;
+//            cell.allianceBtn.hidden = NO;
+//        }
         
-        [cell.btn1 addTarget:self action:@selector(orderBtn:) forControlEvents:UIControlEventTouchUpInside];
-        [cell.btn2 addTarget:self action:@selector(messageBtn:) forControlEvents:UIControlEventTouchUpInside];
-        [cell.btn3 addTarget:self action:@selector(subscribeBtn:) forControlEvents:UIControlEventTouchUpInside];
-        [cell.btn4 addTarget:self action:@selector(collectionBtnbtn:) forControlEvents:UIControlEventTouchUpInside];
-        [cell.btn6 addTarget:self action:@selector(praiseBtn:) forControlEvents:UIControlEventTouchUpInside];
-        [cell.btn7 addTarget:self action:@selector(integralBtn:) forControlEvents:UIControlEventTouchUpInside];
-        [cell.btn8 addTarget:self action:@selector(giftBtn:) forControlEvents:UIControlEventTouchUpInside];
+        [cell.btn1 addTarget:self action:@selector(messageBtn:) forControlEvents:UIControlEventTouchUpInside];
+        [cell.btn2 addTarget:self action:@selector(subscribeBtn:) forControlEvents:UIControlEventTouchUpInside];
+        [cell.btn3 addTarget:self action:@selector(collectionBtnbtn:) forControlEvents:UIControlEventTouchUpInside];
+        [cell.btn4 addTarget:self action:@selector(praiseBtn:) forControlEvents:UIControlEventTouchUpInside];
+        [cell.btn6 addTarget:self action:@selector(integralBtn:) forControlEvents:UIControlEventTouchUpInside];
+        [cell.btn7 addTarget:self action:@selector(giftBtn:) forControlEvents:UIControlEventTouchUpInside];
+        [cell.btn8 addTarget:self action:@selector(shippingAddressBtn:) forControlEvents:UIControlEventTouchUpInside];
         [cell.btn9 addTarget:self action:@selector(shippingAddressBtn:) forControlEvents:UIControlEventTouchUpInside];
-        [cell.refundBtn addTarget:self action:@selector(refundAction) forControlEvents:UIControlEventTouchUpInside];
-        [cell.allianceBtn addTarget:self action:@selector(allianceAction:) forControlEvents:UIControlEventTouchUpInside];
         return cell;
-    }
-    else if(indexPath.section == 3){
+        
+    } else if (indexPath.section == 5) {
         UICollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"UICollectionViewCell1" forIndexPath:indexPath];
-        self.botView.frame = CGRectMake(146/667.0*SCREEN_HEIGHT, 0, SCREEN_WIDTH, 100);
+        self.botView.frame = CGRectMake(146/667.0*SCREEN_HEIGHT, 0, SCREEN_WIDTH, 88);
         [self.botView.aboutBtn addTarget:self action:@selector(aboutBtn:) forControlEvents:UIControlEventTouchUpInside];
         [self.botView.optionBtn addTarget:self action:@selector(optionBtn:) forControlEvents:UIControlEventTouchUpInside];
         [cell.contentView addSubview:self.botView];
@@ -424,13 +418,20 @@
         return CGSizeMake(SCREEN_WIDTH, 60/667.0*SCREEN_HEIGHT);
     }
     if (indexPath.section == 2) {
-        return CGSizeMake(SCREEN_WIDTH, 257/667.0*SCREEN_HEIGHT);
+        return CGSizeMake(SCREEN_WIDTH, 44/667.0*SCREEN_HEIGHT);
     }
     if (indexPath.section == 3) {
+        return CGSizeMake(SCREEN_WIDTH, 120.5/667.0*SCREEN_HEIGHT);
+    }
+    if (indexPath.section == 4) {
+        return CGSizeMake(SCREEN_WIDTH, 190/667.0*SCREEN_HEIGHT);
+    }
+    if (indexPath.section == 5) {
         return CGSizeMake(SCREEN_HEIGHT, 200);
     }
     return CGSizeMake(0, 0);
 }
+
 
 //订单按钮
 -(void)orderBtn:(UIButton*)sender{
@@ -522,15 +523,5 @@
     myHomeVC.isMySelf = YES;
     [self.navigationController pushViewController:myHomeVC animated:YES];
 }
-
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
 
 @end
