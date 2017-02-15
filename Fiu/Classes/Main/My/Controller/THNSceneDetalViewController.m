@@ -23,7 +23,7 @@
 #import "UserInfoEntity.h"
 #import "THNLoginRegisterViewController.h"
 
-@interface THNSceneDetalViewController ()<UITableViewDelegate,UITableViewDataSource>
+@interface THNSceneDetalViewController ()<UITableViewDelegate,UITableViewDataSource, FBNavigationBarItemsDelegate>
 {
     CGFloat _contentHigh;
     CGFloat _defaultContentHigh;
@@ -73,11 +73,17 @@ static NSString *const URLDeleteScene = @"/scene_sight/delete";
     [UIApplication sharedApplication].statusBarStyle = UIStatusBarStyleLightContent;
 }
 
+-(void)rightBarItemSelected{
+    
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     
     [[UIApplication sharedApplication] setStatusBarHidden:NO];
-    self.navViewTitle.text = NSLocalizedString(@"situation", nil);
+    self.navViewTitle.text = @"情境详情";
+    self.delegate = self;
+    [self addBarItemRightBarButton:@"" image:@"share_icon" isTransparent:NO];
     
     self.view.backgroundColor = [UIColor colorWithHexString:@"#F8F8F8"];
     [self.view addSubview:self.sceneTable];
