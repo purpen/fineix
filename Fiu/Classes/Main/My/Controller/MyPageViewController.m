@@ -41,6 +41,7 @@
 #import "THNAllianceViewController.h"
 #import "THNDivideCollectionViewCell.h"
 #import "THNOrderCollectionViewCell.h"
+#import "PictureToolViewController.h"
 
 @interface MyPageViewController ()<THNNavigationBarItemsDelegate,UICollectionViewDelegate,UICollectionViewDataSource>
 {
@@ -276,6 +277,11 @@
     }
     else if(indexPath.section == 3){
         THNOrderCollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:THNORDErCollectionViewCell forIndexPath:indexPath];
+        [cell.btn1 addTarget:self action:@selector(oderActionBtn:) forControlEvents:UIControlEventTouchUpInside];
+        [cell.btn2 addTarget:self action:@selector(oderActionBtn:) forControlEvents:UIControlEventTouchUpInside];
+        [cell.btn3 addTarget:self action:@selector(oderActionBtn:) forControlEvents:UIControlEventTouchUpInside];
+        [cell.btn4 addTarget:self action:@selector(oderActionBtn:) forControlEvents:UIControlEventTouchUpInside];
+        [cell.btn5 addTarget:self action:@selector(refundAction) forControlEvents:UIControlEventTouchUpInside];
         return cell;
     }
     else if(indexPath.section == 4){
@@ -337,7 +343,7 @@
         [cell.btn6 addTarget:self action:@selector(integralBtn:) forControlEvents:UIControlEventTouchUpInside];
         [cell.btn7 addTarget:self action:@selector(giftBtn:) forControlEvents:UIControlEventTouchUpInside];
         [cell.btn8 addTarget:self action:@selector(shippingAddressBtn:) forControlEvents:UIControlEventTouchUpInside];
-        [cell.btn9 addTarget:self action:@selector(shippingAddressBtn:) forControlEvents:UIControlEventTouchUpInside];
+        [cell.btn9 addTarget:self action:@selector(createBtnClick) forControlEvents:UIControlEventTouchUpInside];
         return cell;
         
     } else if (indexPath.section == 5) {
@@ -350,6 +356,12 @@
     }
     return nil;
     
+}
+
+#pragma mark “创建情景”的按钮事件
+- (void)createBtnClick {
+    PictureToolViewController * pictureToolVC = [[PictureToolViewController alloc] init];
+    [self presentViewController:pictureToolVC animated:YES completion:nil];
 }
 
 #pragma mark - 退款售后
@@ -433,11 +445,21 @@
 }
 
 
-//订单按钮
--(void)orderBtn:(UIButton*)sender{
-    //跳转到全部订单页
+-(void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath{
+    if (indexPath.section == 2) {
+        THNAllianceViewController *allianceVC = [[THNAllianceViewController alloc] init];
+        [self.navigationController pushViewController:allianceVC animated:YES];
+    } else if (indexPath.section == 3) {
+        MyOderInfoViewController *vc = [[MyOderInfoViewController alloc] init];
+        vc.type = @0;
+        [self.navigationController pushViewController:vc animated:YES];
+    }
+}
+
+#pragma mark - 订单的不同action
+-(void)oderActionBtn:(UIButton*)sender{
     MyOderInfoViewController *vc = [[MyOderInfoViewController alloc] init];
-    vc.type = @0;
+    vc.type = @(sender.tag);
     [self.navigationController pushViewController:vc animated:YES];
 }
 
@@ -497,13 +519,6 @@
 -(void)accountManagementBtn:(UIButton*)sender{
     
 }
-
-//分成管理
-- (void)allianceAction:(UIButton *)button {
-    THNAllianceViewController *allianceVC = [[THNAllianceViewController alloc] init];
-    [self.navigationController pushViewController:allianceVC animated:YES];
-}
-
 
 -(UITapGestureRecognizer *)myTap{
     if (!_myTap) {

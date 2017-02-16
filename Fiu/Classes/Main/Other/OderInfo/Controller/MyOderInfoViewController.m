@@ -55,10 +55,10 @@ static NSString *const OrderInfoCellIdentifier  = @"orderInfoCell";
 
     if (!_segmentedControl) {
         _segmentedControl = [[SGTopTitleView alloc] initWithFrame:CGRectMake(0, 64, SCREEN_WIDTH, 44)];
-//        _segmentedControl.scrollTitleArr = @[@"全部", @"待付款", @"待发货", @"待收货", @"待评价", @"退货/售后"];
-        _segmentedControl.staticTitleArr = @[@"全部", @"待付款", @"待发货", @"待收货", @"待评价"];
+        _segmentedControl.staticTitleArr = @[@"全部", @"未付款", @"待发货", @"待收货", @"待评价"];
         _segmentedControl.backgroundColor = [UIColor whiteColor];
         _segmentedControl.delegate_SG = self;
+        [_segmentedControl staticTitleLabelSelecteded:_segmentedControl.allTitleLabel[[self.type intValue]]];
     }
     return _segmentedControl;
 }
@@ -167,7 +167,6 @@ static NSString *const OrderInfoCellIdentifier  = @"orderInfoCell";
             }];
         }
 
-        
         
     } failure:^(FBRequest *request, NSError *error) {
         [SVProgressHUD showErrorWithStatus:@"加载失败"];
@@ -345,11 +344,6 @@ static NSString *const OrderInfoCellIdentifier  = @"orderInfoCell";
         [self requestDataForOderListOperationWith:type withURL:OrderListURL];
     }
 }
-
-//-(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
-//    return 222;
-//}
-
 
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
     return self.orderListAry.count;

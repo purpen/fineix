@@ -20,6 +20,8 @@
 
 @end
 
+static NSString *const URLAliance = @"/alliance/view";
+
 @implementation THNDivideCollectionViewCell
 
 - (instancetype)initWithFrame:(CGRect)frame
@@ -46,7 +48,7 @@
         [self.contentView addSubview:self.textLabel];
         [_textLabel mas_makeConstraints:^(MASConstraintMaker *make) {
             make.left.mas_equalTo(self.contentView.mas_left).mas_offset(16);
-            make.top.mas_equalTo(self.contentView.mas_top).mas_offset(10);
+            make.top.mas_equalTo(self.contentView.mas_top).mas_offset(8);
         }];
         
         self.tipLabel = [[UILabel alloc] init];
@@ -56,12 +58,11 @@
         [self.contentView addSubview:self.tipLabel];
         [_tipLabel mas_makeConstraints:^(MASConstraintMaker *make) {
             make.left.mas_equalTo(self.textLabel.mas_left).mas_offset(0);
-            make.top.mas_equalTo(self.textLabel.mas_bottom).mas_offset(5);
+            make.top.mas_equalTo(self.textLabel.mas_bottom).mas_offset(3);
         }];
         
         self.numberLabel = [[UILabel alloc] init];
         self.numberLabel.font = [UIFont systemFontOfSize:11];
-        self.numberLabel.text = @"100.08元";
         self.numberLabel.textColor = [UIColor colorWithHexString:fineixColor];
         [self.contentView addSubview:self.numberLabel];
         [_numberLabel mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -69,8 +70,20 @@
             make.centerY.mas_equalTo(self.imageV.mas_centerY).mas_offset(0);
         }];
         
+        [self thn_networkAllinaceListData];
+        
     }
     return self;
+}
+
+#pragma mark - 请求账户数据
+- (void)thn_networkAllinaceListData {
+    FBRequest *request = [FBAPI postWithUrlString:URLAliance requestDictionary:@{} delegate:self];
+    [request startRequestSuccess:^(FBRequest *request, id result) {
+        NSDictionary *dict = [result valueForKey:@"data"];
+        self.numberLabel.text = [NSString stringWithFormat:@"%0.2f元",[dict[@"total_balance_amount"] floatValue]];
+    } failure:^(FBRequest *request, NSError *error) {
+    }];
 }
 
 @end

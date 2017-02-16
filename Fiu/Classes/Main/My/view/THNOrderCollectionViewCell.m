@@ -163,6 +163,7 @@
 -(UIButton *)btn1{
     if (!_btn1) {
         _btn1 = [[UIButton alloc] init];
+        _btn1.tag = 1;
         [_btn1 setImage:[UIImage imageNamed:@"weifukuan"] forState:UIControlStateNormal];
     }
     return _btn1;
@@ -185,6 +186,7 @@
 -(UIButton *)btn2{
     if (!_btn2) {
         _btn2 = [[UIButton alloc] init];
+        _btn2.tag = 2;
         [_btn2 setImage:[UIImage imageNamed:@"daifahuo"] forState:UIControlStateNormal];
     }
     return _btn2;
@@ -207,6 +209,7 @@
 -(UIButton *)btn3{
     if (!_btn3) {
         _btn3 = [[UIButton alloc] init];
+        _btn3.tag = 3;
         [_btn3 setImage:[UIImage imageNamed:@"daishouhuo"] forState:UIControlStateNormal];
         
     }
@@ -230,6 +233,7 @@
 -(UIButton *)btn4{
     if (!_btn4) {
         _btn4 = [[UIButton alloc] init];
+        _btn4.tag = 4;
         [_btn4 setImage:[UIImage imageNamed:@"daipingjia"] forState:UIControlStateNormal];
     }
     return _btn4;
@@ -253,6 +257,7 @@
 -(UIButton *)btn5{
     if (!_btn5) {
         _btn5 = [[UIButton alloc] init];
+        _btn5.tag = 5;
         [_btn5 setImage:[UIImage imageNamed:@"tuikuanshouhou"] forState:UIControlStateNormal];
     }
     return _btn5;
