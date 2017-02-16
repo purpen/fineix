@@ -16,6 +16,8 @@
 		1F1804141E54009A00722AF5 /* THNOrderCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F1804131E54009A00722AF5 /* THNOrderCollectionViewCell.m */; };
 		1F18041B1E5432C100722AF5 /* UIButton+Layout.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F1804171E5432C100722AF5 /* UIButton+Layout.m */; };
 		1F18041C1E5432C100722AF5 /* YLButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F18041A1E5432C100722AF5 /* YLButton.m */; };
+		1F18041F1E55976100722AF5 /* THNClassificationModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F18041E1E55976100722AF5 /* THNClassificationModel.m */; };
+		1F1804221E55B0DB00722AF5 /* THNRommendCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F1804211E55B0DB00722AF5 /* THNRommendCollectionViewCell.m */; };
 		1F1AF3B21CF58A6B00CAA525 /* IntegralViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F1AF3B01CF58A6B00CAA525 /* IntegralViewController.m */; };
 		1F1AF3B31CF58A6B00CAA525 /* IntegralViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1F1AF3B11CF58A6B00CAA525 /* IntegralViewController.xib */; };
 		1F223B1D1CD714F3007687F7 /* messages.plist in Resources */ = {isa = PBXBuildFile; fileRef = 1F223B1C1CD714F3007687F7 /* messages.plist */; };
@@ -787,6 +789,10 @@
 		1F1804171E5432C100722AF5 /* UIButton+Layout.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIButton+Layout.m"; sourceTree = "<group>"; };
 		1F1804191E5432C100722AF5 /* YLButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YLButton.h; sourceTree = "<group>"; };
 		1F18041A1E5432C100722AF5 /* YLButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YLButton.m; sourceTree = "<group>"; };
+		1F18041D1E55976000722AF5 /* THNClassificationModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THNClassificationModel.h; sourceTree = "<group>"; };
+		1F18041E1E55976100722AF5 /* THNClassificationModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THNClassificationModel.m; sourceTree = "<group>"; };
+		1F1804201E55B0DB00722AF5 /* THNRommendCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THNRommendCollectionViewCell.h; sourceTree = "<group>"; };
+		1F1804211E55B0DB00722AF5 /* THNRommendCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THNRommendCollectionViewCell.m; sourceTree = "<group>"; };
 		1F1AF3AF1CF58A6B00CAA525 /* IntegralViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IntegralViewController.h; sourceTree = "<group>"; };
 		1F1AF3B01CF58A6B00CAA525 /* IntegralViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IntegralViewController.m; sourceTree = "<group>"; };
 		1F1AF3B11CF58A6B00CAA525 /* IntegralViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = IntegralViewController.xib; sourceTree = "<group>"; };
@@ -3763,6 +3769,8 @@
 			children = (
 				1F99E1631E515CDF000D3D73 /* CollectionCategoryModel.h */,
 				1F99E1641E515CDF000D3D73 /* CollectionCategoryModel.m */,
+				1F18041D1E55976000722AF5 /* THNClassificationModel.h */,
+				1F18041E1E55976100722AF5 /* THNClassificationModel.m */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -3778,6 +3786,8 @@
 				1F99E15E1E515B2D000D3D73 /* CollectionViewCell.m */,
 				1F99E1661E516084000D3D73 /* CollectionViewHeaderView.h */,
 				1F99E1671E516084000D3D73 /* CollectionViewHeaderView.m */,
+				1F1804201E55B0DB00722AF5 /* THNRommendCollectionViewCell.h */,
+				1F1804211E55B0DB00722AF5 /* THNRommendCollectionViewCell.m */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -5603,6 +5613,7 @@
 				D857C4961E2F427B00569B3D /* THNTradingRow.m in Sources */,
 				1F2A8F641CF40277005116C7 /* UserGoodsTag.m in Sources */,
 				1F2AFC7D1D88170B00DA6035 /* FindFriendModel.m in Sources */,
+				1F1804221E55B0DB00722AF5 /* THNRommendCollectionViewCell.m in Sources */,
 				1F2A90331CF40277005116C7 /* ChatTableViewCell.m in Sources */,
 				1F2A90271CF40277005116C7 /* CertIdView.m in Sources */,
 				1F2AFDF21D8818EB00DA6035 /* ChanePwdViewController.m in Sources */,
@@ -5628,6 +5639,7 @@
 				D857AC3C1DE836F000F924E8 /* THNOrderOperationView.m in Sources */,
 				1F2AFD8A1D88186C00DA6035 /* UserInfo.m in Sources */,
 				D80878E51D6B015100C1FFA0 /* THNCategoryViewController.m in Sources */,
+				1F18041F1E55976100722AF5 /* THNClassificationModel.m in Sources */,
 				D80669671D6ECCF4007FD81E /* UserModel.m in Sources */,
 				1F2AFD741D88186C00DA6035 /* THNBingViewController.m in Sources */,
 				D8C094E51D752D2200908491 /* SceneInfoLocation.m in Sources */,

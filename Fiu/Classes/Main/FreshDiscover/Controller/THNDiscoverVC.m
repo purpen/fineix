@@ -13,8 +13,9 @@
 #import "LJCollectionViewFlowLayout.h"
 #import "CollectionViewCell.h"
 #import "CollectionViewHeaderView.h"
-#import "CollectionCategoryModel.h"
 #import "NSObject+Property.h"
+#import "THNClassificationModel.h"
+#import "CollectionCategoryModel.h"
 
 @interface THNDiscoverVC ()<
 THNNavigationBarItemsDelegate,
@@ -27,7 +28,7 @@ UITableViewDataSource
 
 @property (nonatomic, strong) UITableView *tableView;
 @property (nonatomic, strong) UICollectionView *collectionView;
-@property (nonatomic, strong) NSMutableArray *dataSource;
+@property (nonatomic, strong) NSMutableArray *tableViewDataSource;
 @property (nonatomic, strong) NSMutableArray *collectionDatas;
 
 @end
@@ -87,37 +88,79 @@ UITableViewDataSource
     [self.view addSubview:self.tableView];
     [self.view addSubview:self.collectionView];
     
-    NSString *path = [[NSBundle mainBundle] pathForResource:@"liwushuo" ofType:@"json"];
-    NSData *data = [NSData dataWithContentsOfFile:path];
-    NSDictionary *dict = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingAllowFragments error:nil];
-    NSArray *categories = dict[@"data"][@"categories"];
-    for (NSDictionary *dict in categories)
-    {
-        CollectionCategoryModel *model =
-        [CollectionCategoryModel objectWithDictionary:dict];
-        [self.dataSource addObject:model];
-        
-        NSMutableArray *datas = [NSMutableArray array];
-        for (SubCategoryModel *sModel in model.subcategories)
-        {
-            [datas addObject:sModel];
-        }
-        [self.collectionDatas addObject:datas];
+    NSArray *ary = @[@"为你推荐", @"分类", @"地盘", @"情境", @"品牌",@"发现好友"];
+    for (int i = 0; i < 5; i ++) {
+        THNClassificationModel *model = [THNClassificationModel new];
+        model.name = ary[i];
+        [self.tableViewDataSource addObject:model];
     }
     
-    [self.tableView reloadData];
-    [self.collectionView reloadData];
+    FBRequest *request = [FBAPI postWithUrlString:@"/gateway/find" requestDictionary:@{} delegate:self];
+    [request startRequestSuccess:^(FBRequest *request, id result) {
+        NSDictionary *dataDict = result[@"data"];
+        NSDictionary *stickDict = dataDict[@"stick"];
+        StickModel *stickModel = [StickModel mj_objectWithKeyValues:stickDict];
+        [self.collectionDatas addObject:stickModel];
+        
+        NSArray *pro_categoryAry = result[@"pro_category"];
+        NSArray *categorys = [Pro_categoryModel mj_objectArrayWithKeyValuesArray:pro_categoryAry];
+        [self.collectionDatas addObject:categorys];
+        
+        NSDictionary *sceneDict = result[@"scene"];
+        NSArray *stickAry = sceneDict[@"stick"];
+        NSArray *sticks = [StickModel mj_objectArrayWithKeyValuesArray:stickAry];
+        [self.collectionDatas addObject:sticks];
+        
+        NSArray *categoryAry = sceneDict[@"category"];
+        NSArray *categoryss = [StickModel mj_objectArrayWithKeyValuesArray:categoryAry];
+        [self.collectionDatas addObject:categoryss];
+        
+        NSDictionary *sightDict = result[@"sight"];
+        NSArray *stickAryy = sightDict[@"stick"];
+        NSArray *stickss = [StickModel mj_objectArrayWithKeyValuesArray:stickAryy];
+        [self.collectionDatas addObject:stickss];
+        
+        NSArray *categoryAryy = sceneDict[@"category"];
+        NSArray *categorysss = [StickModel mj_objectArrayWithKeyValuesArray:categoryAryy];
+        [self.collectionDatas addObject:categorysss];
+        
+        NSArray *userAry = result[@"users"];
+        NSArray *users = [Pro_categoryModel mj_objectArrayWithKeyValuesArray:userAry];
+        [self.collectionDatas addObject:users];
+        
+        [self.tableView reloadData];
+        [self.collectionView reloadData];
+    } failure:^(FBRequest *request, NSError *error) {
+    }];
+    
+//    NSString *path = [[NSBundle mainBundle] pathForResource:@"liwushuo" ofType:@"json"];
+//    NSData *data = [NSData dataWithContentsOfFile:path];
+//    NSDictionary *dict = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingAllowFragments error:nil];
+//    NSArray *categories = dict[@"data"][@"categories"];
+//    for (NSDictionary *dict in categories)
+//    {
+//        CollectionCategoryModel *model =
+//        [CollectionCategoryModel objectWithDictionary:dict];
+//        [self.dataSource addObject:model];
+//        
+//        NSMutableArray *datas = [NSMutableArray array];
+//        for (SubCategoryModel *sModel in model.subcategories)
+//        {
+//            [datas addObject:sModel];
+//        }
+//        [self.collectionDatas addObject:datas];
+//    }
+    
     [self.tableView selectRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0] animated:YES scrollPosition:UITableViewScrollPositionTop];
 }
 
-- (NSMutableArray *)dataSource
-{
-    if (!_dataSource)
-    {
-        _dataSource = [NSMutableArray array];
+-(NSMutableArray *)tableViewDataSource{
+    if (!_tableViewDataSource) {
+        _tableViewDataSource = [NSMutableArray array];
     }
-    return _dataSource;
+    return _tableViewDataSource;
 }
+
 
 - (NSMutableArray *)collectionDatas
 {
@@ -167,6 +210,13 @@ UITableViewDataSource
         _tableView.showsVerticalScrollIndicator = NO;
         _tableView.separatorColor = [UIColor clearColor];
         [_tableView registerClass:[LeftTableViewCell class] forCellReuseIdentifier:kCellIdentifier_Left];
+        UIView *lineView = [[UIView alloc] init];
+        lineView.backgroundColor = [UIColor colorWithWhite:0 alpha:0.1];
+        [_tableView addSubview:lineView];
+        [lineView mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.top.right.bottom.mas_equalTo(_tableView).mas_offset(0);
+            make.width.mas_equalTo(0.5);
+        }];
     }
     return _tableView;
 }
@@ -175,13 +225,13 @@ UITableViewDataSource
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return self.dataSource.count;
+    return self.tableViewDataSource.count;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     LeftTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:kCellIdentifier_Left forIndexPath:indexPath];
-    CollectionCategoryModel *model = self.dataSource[indexPath.row];
+    THNClassificationModel *model = self.tableViewDataSource[indexPath.row];
     cell.name.text = model.name;
     return cell;
 }
@@ -197,17 +247,50 @@ UITableViewDataSource
 
 - (NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView
 {
-    return self.dataSource.count;
+    return self.tableViewDataSource.count;
 }
 
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section
 {
-    CollectionCategoryModel *model = self.dataSource[section];
-    return model.subcategories.count;
+    if (section == 0) {
+        return 1;
+    } else if (section == 1) {
+        NSArray *ary = self.collectionDatas[1];
+        return ary.count;
+    } else if (section == 2) {
+        NSArray *ary = self.collectionDatas[2];
+        NSArray *ary2 = self.collectionDatas[3];
+        return ary.count + ary2.count;
+    } else if (section == 3) {
+        NSArray *ary = self.collectionDatas[4];
+        NSArray *ary2 = self.collectionDatas[5];
+        return ary.count + ary2.count;
+    } else if (section == 4) {
+        NSArray *ary = self.collectionDatas[6];
+        return ary.count + 3;
+    }
+    return 0;
 }
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
 {
+//    if (indexPath.section == 0) {
+//        return 1;
+//    } else if (indexPath.section == 1) {
+//        NSArray *ary = self.collectionDatas[1];
+//        return ary.count;
+//    } else if (indexPath.section == 2) {
+//        NSArray *ary = self.collectionDatas[2];
+//        NSArray *ary2 = self.collectionDatas[3];
+//        return ary.count + ary2.count;
+//    } else if (indexPath.section == 3) {
+//        NSArray *ary = self.collectionDatas[4];
+//        NSArray *ary2 = self.collectionDatas[5];
+//        return ary.count + ary2.count;
+//    } else if (indexPath.section == 4) {
+//        NSArray *ary = self.collectionDatas[6];
+//        return ary.count + 3;
+//    }
     CollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:kCellIdentifier_CollectionView forIndexPath:indexPath];
     SubCategoryModel *model = self.collectionDatas[indexPath.section][indexPath.row];
     cell.model = model;
@@ -236,7 +319,7 @@ UITableViewDataSource
                                                                                forIndexPath:indexPath];
     if ([kind isEqualToString:UICollectionElementKindSectionHeader])
     {
-        CollectionCategoryModel *model = self.dataSource[indexPath.section];
+        THNClassificationModel *model = self.tableViewDataSource[indexPath.section];
         view.title.text = model.name;
     }
     return view;
