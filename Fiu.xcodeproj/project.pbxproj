@@ -18,6 +18,9 @@
 		1F18041C1E5432C100722AF5 /* YLButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F18041A1E5432C100722AF5 /* YLButton.m */; };
 		1F18041F1E55976100722AF5 /* THNClassificationModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F18041E1E55976100722AF5 /* THNClassificationModel.m */; };
 		1F1804221E55B0DB00722AF5 /* THNRommendCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F1804211E55B0DB00722AF5 /* THNRommendCollectionViewCell.m */; };
+		1F1804251E56961700722AF5 /* THNSortCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F1804241E56961700722AF5 /* THNSortCollectionViewCell.m */; };
+		1F1804281E56CE1100722AF5 /* THNDiPanZhuanTiCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F1804271E56CE1100722AF5 /* THNDiPanZhuanTiCollectionViewCell.m */; };
+		1F18042B1E56D0F700722AF5 /* THNQingJingFenLeiCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F18042A1E56D0F700722AF5 /* THNQingJingFenLeiCollectionViewCell.m */; };
 		1F1AF3B21CF58A6B00CAA525 /* IntegralViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F1AF3B01CF58A6B00CAA525 /* IntegralViewController.m */; };
 		1F1AF3B31CF58A6B00CAA525 /* IntegralViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1F1AF3B11CF58A6B00CAA525 /* IntegralViewController.xib */; };
 		1F223B1D1CD714F3007687F7 /* messages.plist in Resources */ = {isa = PBXBuildFile; fileRef = 1F223B1C1CD714F3007687F7 /* messages.plist */; };
@@ -804,6 +807,12 @@
 		1F18041E1E55976100722AF5 /* THNClassificationModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THNClassificationModel.m; sourceTree = "<group>"; };
 		1F1804201E55B0DB00722AF5 /* THNRommendCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THNRommendCollectionViewCell.h; sourceTree = "<group>"; };
 		1F1804211E55B0DB00722AF5 /* THNRommendCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THNRommendCollectionViewCell.m; sourceTree = "<group>"; };
+		1F1804231E56961700722AF5 /* THNSortCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THNSortCollectionViewCell.h; sourceTree = "<group>"; };
+		1F1804241E56961700722AF5 /* THNSortCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THNSortCollectionViewCell.m; sourceTree = "<group>"; };
+		1F1804261E56CE1100722AF5 /* THNDiPanZhuanTiCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THNDiPanZhuanTiCollectionViewCell.h; sourceTree = "<group>"; };
+		1F1804271E56CE1100722AF5 /* THNDiPanZhuanTiCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THNDiPanZhuanTiCollectionViewCell.m; sourceTree = "<group>"; };
+		1F1804291E56D0F700722AF5 /* THNQingJingFenLeiCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THNQingJingFenLeiCollectionViewCell.h; sourceTree = "<group>"; };
+		1F18042A1E56D0F700722AF5 /* THNQingJingFenLeiCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THNQingJingFenLeiCollectionViewCell.m; sourceTree = "<group>"; };
 		1F1AF3AF1CF58A6B00CAA525 /* IntegralViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IntegralViewController.h; sourceTree = "<group>"; };
 		1F1AF3B01CF58A6B00CAA525 /* IntegralViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IntegralViewController.m; sourceTree = "<group>"; };
 		1F1AF3B11CF58A6B00CAA525 /* IntegralViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = IntegralViewController.xib; sourceTree = "<group>"; };
@@ -3821,6 +3830,12 @@
 				1F99E1671E516084000D3D73 /* CollectionViewHeaderView.m */,
 				1F1804201E55B0DB00722AF5 /* THNRommendCollectionViewCell.h */,
 				1F1804211E55B0DB00722AF5 /* THNRommendCollectionViewCell.m */,
+				1F1804231E56961700722AF5 /* THNSortCollectionViewCell.h */,
+				1F1804241E56961700722AF5 /* THNSortCollectionViewCell.m */,
+				1F1804261E56CE1100722AF5 /* THNDiPanZhuanTiCollectionViewCell.h */,
+				1F1804271E56CE1100722AF5 /* THNDiPanZhuanTiCollectionViewCell.m */,
+				1F1804291E56D0F700722AF5 /* THNQingJingFenLeiCollectionViewCell.h */,
+				1F18042A1E56D0F700722AF5 /* THNQingJingFenLeiCollectionViewCell.m */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -5615,6 +5630,7 @@
 				1F2A90291CF40277005116C7 /* TagsCollectionViewCell.m in Sources */,
 				D86E54C61DD444230075ED88 /* GPUImageFourInputFilter.m in Sources */,
 				1F2AFC671D88170B00DA6035 /* EditNickNameViewController.m in Sources */,
+				1F1804251E56961700722AF5 /* THNSortCollectionViewCell.m in Sources */,
 				D857C4B61E2F58A500569B3D /* THNAllinaceContact.m in Sources */,
 				D88F47EE1D5C5BD300C83A0C /* FBCategoryView.m in Sources */,
 				1F1804111E53EEF200722AF5 /* THNDivideCollectionViewCell.m in Sources */,
@@ -5924,6 +5940,7 @@
 				1F2A90401CF40277005116C7 /* CityTwoTableViewCell.m in Sources */,
 				1F2A8F481CF40277005116C7 /* CameraView.m in Sources */,
 				1F2A8F471CF40277005116C7 /* PictureToolViewController.m in Sources */,
+				1F1804281E56CE1100722AF5 /* THNDiPanZhuanTiCollectionViewCell.m in Sources */,
 				1F2AFC831D88170B00DA6035 /* FiuSceneInfoData.m in Sources */,
 				D840F0971D93B87100CE9FB7 /* THNRedEnvelopeView.m in Sources */,
 				1F2AFC751D88170B00DA6035 /* SubscribeViewController.m in Sources */,
@@ -6021,6 +6038,7 @@
 				D8ACA2221DD9B35F00A5CDA7 /* THNFilterValueView.m in Sources */,
 				1F2A8FD61CF40277005116C7 /* FBOrderOtherTableViewCell.m in Sources */,
 				1F2AFCFE1D8817CC00DA6035 /* THNActivityViewController.m in Sources */,
+				1F18042B1E56D0F700722AF5 /* THNQingJingFenLeiCollectionViewCell.m in Sources */,
 				D8ACF44A1D6BFE0300DB79D8 /* THNMallGoodsModel.m in Sources */,
 				1F2AFC6D1D88170B00DA6035 /* MyFansActionSheetViewController.m in Sources */,
 				D80669721D6EE346007FD81E /* ThemeModelRow.m in Sources */,

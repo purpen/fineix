@@ -16,6 +16,10 @@
 #import "NSObject+Property.h"
 #import "THNClassificationModel.h"
 #import "CollectionCategoryModel.h"
+#import "THNRommendCollectionViewCell.h"
+#import "THNSortCollectionViewCell.h"
+#import "THNDiPanZhuanTiCollectionViewCell.h"
+#import "THNQingJingFenLeiCollectionViewCell.h"
 
 @interface THNDiscoverVC ()<
 THNNavigationBarItemsDelegate,
@@ -88,8 +92,8 @@ UITableViewDataSource
     [self.view addSubview:self.tableView];
     [self.view addSubview:self.collectionView];
     
-    NSArray *ary = @[@"为你推荐", @"分类", @"地盘", @"情境", @"品牌",@"发现好友"];
-    for (int i = 0; i < 5; i ++) {
+    NSArray *ary = @[@"为你推荐", @"分类", @"地盘", @"情境", @"品牌",@"专辑",@"发现好友"];
+    for (int i = 0; i < ary.count; i ++) {
         THNClassificationModel *model = [THNClassificationModel new];
         model.name = ary[i];
         [self.tableViewDataSource addObject:model];
@@ -98,34 +102,43 @@ UITableViewDataSource
     FBRequest *request = [FBAPI postWithUrlString:@"/gateway/find" requestDictionary:@{} delegate:self];
     [request startRequestSuccess:^(FBRequest *request, id result) {
         NSDictionary *dataDict = result[@"data"];
+        
         NSDictionary *stickDict = dataDict[@"stick"];
         StickModel *stickModel = [StickModel mj_objectWithKeyValues:stickDict];
         [self.collectionDatas addObject:stickModel];
         
-        NSArray *pro_categoryAry = result[@"pro_category"];
+        NSArray *pro_categoryAry = dataDict[@"pro_category"];
         NSArray *categorys = [Pro_categoryModel mj_objectArrayWithKeyValuesArray:pro_categoryAry];
         [self.collectionDatas addObject:categorys];
-        
-        NSDictionary *sceneDict = result[@"scene"];
+
+        NSDictionary *sceneDict = dataDict[@"scene"];
         NSArray *stickAry = sceneDict[@"stick"];
         NSArray *sticks = [StickModel mj_objectArrayWithKeyValuesArray:stickAry];
         [self.collectionDatas addObject:sticks];
         
         NSArray *categoryAry = sceneDict[@"category"];
-        NSArray *categoryss = [StickModel mj_objectArrayWithKeyValuesArray:categoryAry];
+        NSArray *categoryss = [Pro_categoryModel mj_objectArrayWithKeyValuesArray:categoryAry];
         [self.collectionDatas addObject:categoryss];
         
-        NSDictionary *sightDict = result[@"sight"];
+        NSDictionary *sightDict = dataDict[@"sight"];
         NSArray *stickAryy = sightDict[@"stick"];
         NSArray *stickss = [StickModel mj_objectArrayWithKeyValuesArray:stickAryy];
         [self.collectionDatas addObject:stickss];
         
-        NSArray *categoryAryy = sceneDict[@"category"];
-        NSArray *categorysss = [StickModel mj_objectArrayWithKeyValuesArray:categoryAryy];
+        NSArray *categoryAryy = sightDict[@"category"];
+        NSArray *categorysss = [Pro_categoryModel mj_objectArrayWithKeyValuesArray:categoryAryy];
         [self.collectionDatas addObject:categorysss];
         
-        NSArray *userAry = result[@"users"];
-        NSArray *users = [Pro_categoryModel mj_objectArrayWithKeyValuesArray:userAry];
+        NSArray *brandAry = dataDict[@"brand"];
+        NSArray *brands = [Pro_categoryModel mj_objectArrayWithKeyValuesArray:brandAry];
+        [self.collectionDatas addObject:brands];
+        
+        NSArray *product_subjectAry = dataDict[@"product_subject"];
+        NSArray *product_subjects = [StickModel mj_objectArrayWithKeyValuesArray:product_subjectAry];
+        [self.collectionDatas addObject:product_subjects];
+        
+        NSArray *userAry = dataDict[@"users"];
+        NSArray *users = [UsersModel mj_objectArrayWithKeyValuesArray:userAry];
         [self.collectionDatas addObject:users];
         
         [self.tableView reloadData];
@@ -175,7 +188,7 @@ UITableViewDataSource
 {
     if (!_collectionView)
     {
-        LJCollectionViewFlowLayout *flowlayout = [[LJCollectionViewFlowLayout alloc] init];
+        UICollectionViewFlowLayout *flowlayout = [[UICollectionViewFlowLayout alloc] init];
         //设置滚动方向
         [flowlayout setScrollDirection:UICollectionViewScrollDirectionVertical];
         //左右间距
@@ -190,6 +203,10 @@ UITableViewDataSource
         [_collectionView setBackgroundColor:[UIColor clearColor]];
         //注册cell
         [_collectionView registerClass:[CollectionViewCell class] forCellWithReuseIdentifier:kCellIdentifier_CollectionView];
+        [_collectionView registerClass:[THNRommendCollectionViewCell class] forCellWithReuseIdentifier:THNRECOmmendCollectionViewCell];
+        [_collectionView registerClass:[THNSortCollectionViewCell class] forCellWithReuseIdentifier:THNSORTCollectionViewCell];
+        [_collectionView registerClass:[THNDiPanZhuanTiCollectionViewCell class] forCellWithReuseIdentifier:THNDIPANZhuanTiCollectionViewCell];
+        [_collectionView registerClass:[THNQingJingFenLeiCollectionViewCell class] forCellWithReuseIdentifier:THNQINGJingFenLeiCollectionViewCell];
         //注册分区头标题
         [_collectionView registerClass:[CollectionViewHeaderView class]
             forSupplementaryViewOfKind:UICollectionElementKindSectionHeader
@@ -252,6 +269,9 @@ UITableViewDataSource
 
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section
 {
+    if (self.collectionDatas.count == 0) {
+        return 0;
+    }
     if (section == 0) {
         return 1;
     } else if (section == 1) {
@@ -259,14 +279,20 @@ UITableViewDataSource
         return ary.count;
     } else if (section == 2) {
         NSArray *ary = self.collectionDatas[2];
-        NSArray *ary2 = self.collectionDatas[3];
-        return ary.count + ary2.count;
+//        NSArray *ary2 = self.collectionDatas[3];
+        return ary.count;
     } else if (section == 3) {
         NSArray *ary = self.collectionDatas[4];
         NSArray *ary2 = self.collectionDatas[5];
         return ary.count + ary2.count;
     } else if (section == 4) {
         NSArray *ary = self.collectionDatas[6];
+        return ary.count;
+    } else if (section == 5) {
+        NSArray *ary = self.collectionDatas[7];
+        return ary.count;
+    } else if (section == 6) {
+        NSArray *ary = self.collectionDatas[8];
         return ary.count + 3;
     }
     return 0;
@@ -274,26 +300,72 @@ UITableViewDataSource
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
 {
-//    if (indexPath.section == 0) {
-//        return 1;
-//    } else if (indexPath.section == 1) {
-//        NSArray *ary = self.collectionDatas[1];
-//        return ary.count;
-//    } else if (indexPath.section == 2) {
-//        NSArray *ary = self.collectionDatas[2];
-//        NSArray *ary2 = self.collectionDatas[3];
-//        return ary.count + ary2.count;
-//    } else if (indexPath.section == 3) {
-//        NSArray *ary = self.collectionDatas[4];
-//        NSArray *ary2 = self.collectionDatas[5];
-//        return ary.count + ary2.count;
-//    } else if (indexPath.section == 4) {
-//        NSArray *ary = self.collectionDatas[6];
-//        return ary.count + 3;
-//    }
+    if (indexPath.section == 0) {
+        THNRommendCollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:THNRECOmmendCollectionViewCell forIndexPath:indexPath];
+        StickModel *model = self.collectionDatas[0];
+        cell.model = model;
+        return cell;
+    } else if (indexPath.section == 1) {
+        THNSortCollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:THNSORTCollectionViewCell forIndexPath:indexPath];
+        NSArray *ary = self.collectionDatas[1];
+        Pro_categoryModel *model = ary[indexPath.row];
+        cell.model = model;
+        return cell;
+    } else if (indexPath.section == 2) {
+        if (indexPath.row <= 1) {
+            THNDiPanZhuanTiCollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:THNDIPANZhuanTiCollectionViewCell forIndexPath:indexPath];
+            NSArray *ary = self.collectionDatas[2];
+            StickModel *model = ary[indexPath.row];
+            cell.model = model;
+            return cell;
+        } else {
+            THNSortCollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:THNSORTCollectionViewCell forIndexPath:indexPath];
+            NSArray *ary = self.collectionDatas[3];
+            Pro_categoryModel *model = ary[indexPath.row - 2];
+            cell.model = model;
+            return cell;   
+        }
+    } else if (indexPath.section == 3) {
+        if (indexPath.row <= 1) {
+            THNDiPanZhuanTiCollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:THNDIPANZhuanTiCollectionViewCell forIndexPath:indexPath];
+            NSArray *ary = self.collectionDatas[4];
+            StickModel *model = ary[indexPath.row];
+            cell.model = model;
+            return cell;
+        } else {
+            THNQingJingFenLeiCollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:THNQINGJingFenLeiCollectionViewCell forIndexPath:indexPath];
+            NSArray *ary = self.collectionDatas[5];
+            Pro_categoryModel *model = ary[indexPath.row - 2];
+            cell.model = model;
+            return cell;
+        }
+    } else if (indexPath.section == 4) {
+        THNSortCollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:THNSORTCollectionViewCell forIndexPath:indexPath];
+        NSArray *ary = self.collectionDatas[6];
+        Pro_categoryModel *model = ary[indexPath.row];
+        cell.model = model;
+        return cell;
+    } else if (indexPath.section == 5) {
+        THNDiPanZhuanTiCollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:THNDIPANZhuanTiCollectionViewCell forIndexPath:indexPath];
+        NSArray *ary = self.collectionDatas[7];
+        StickModel *model = ary[indexPath.row];
+        cell.model = model;
+        return cell;
+    } else if (indexPath.section == 6) {
+        if (indexPath.row <= 2) {
+            THNSortCollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:THNSORTCollectionViewCell forIndexPath:indexPath];
+            NSArray *ary = @[[Pro_categoryModel getPro_categoryModelWithTitle:@"邀请微信好友" andCoverUrl:@""],[Pro_categoryModel getPro_categoryModelWithTitle:@"连接微博" andCoverUrl:@""],[Pro_categoryModel getPro_categoryModelWithTitle:@"连接通讯录" andCoverUrl:@""]];
+            Pro_categoryModel *model = ary[indexPath.row];
+            cell.model = model;
+            return cell;
+        }
+        THNSortCollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:THNSORTCollectionViewCell forIndexPath:indexPath];
+        NSArray *ary = self.collectionDatas[8];
+        UsersModel *model = ary[indexPath.row - 3];
+        cell.userModel = model;
+        return cell;
+    }
     CollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:kCellIdentifier_CollectionView forIndexPath:indexPath];
-    SubCategoryModel *model = self.collectionDatas[indexPath.section][indexPath.row];
-    cell.model = model;
     return cell;
 }
 
@@ -301,6 +373,35 @@ UITableViewDataSource
                   layout:(UICollectionViewLayout *)collectionViewLayout
   sizeForItemAtIndexPath:(NSIndexPath *)indexPath
 {
+    if (indexPath.section == 0) {
+        return CGSizeMake(531.4/2,
+                          299/2);
+    } else if (indexPath.section == 1) {
+        return CGSizeMake(60,
+                          100);
+    } else if (indexPath.section == 2) {
+        if (indexPath.row <= 1) {
+            return CGSizeMake(120, 135/2.0);
+        } else {
+            return CGSizeMake(60,
+                              100);
+        }
+    } else if (indexPath.section == 3) {
+        if (indexPath.row <= 1) {
+            return CGSizeMake(120, 135/2.0);
+        } else {
+            return CGSizeMake(60,
+                             60);
+        }
+    } else if (indexPath.section == 4) {
+        return CGSizeMake(60,
+                          100);
+    } else if (indexPath.section == 5) {
+        return CGSizeMake(120, 135/2.0);
+    } else if (indexPath.section == 6) {
+        return CGSizeMake(60,
+                          100);
+    }
     return CGSizeMake((SCREEN_WIDTH - 80 - 4 - 4) / 3,
                       (SCREEN_WIDTH - 80 - 4 - 4) / 3 + 30);
 }

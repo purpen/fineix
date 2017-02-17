@@ -85,4 +85,5 @@
     self.subTextLabel.text = model.sub_title;
 }
 
+
 @end

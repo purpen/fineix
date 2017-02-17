@@ -26,7 +26,8 @@
     {
         self.selectionStyle = UITableViewCellSelectionStyleNone;
         
-        self.name = [[UILabel alloc] initWithFrame:CGRectMake(10, 10, 60, 40)];
+        self.name = [[UILabel alloc] initWithFrame:CGRectMake(3, 10, 70, 40)];
+        self.name.textAlignment = NSTextAlignmentCenter;
         self.name.numberOfLines = 0;
         self.name.font = [UIFont systemFontOfSize:15];
         self.name.textColor = rgba(130, 130, 130, 1);
