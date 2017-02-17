@@ -25,6 +25,7 @@
 @property (nonatomic, copy) NSString *title;
 @property (nonatomic, copy) NSString *app_cover_url;
 @property (nonatomic, copy) NSString *back_url;
++(instancetype)getPro_categoryModelWithTitle:(NSString*)title andCoverUrl:(NSString*)coverUrl;
 
 @end
 
