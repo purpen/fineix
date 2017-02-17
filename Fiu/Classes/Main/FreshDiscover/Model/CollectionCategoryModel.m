@@ -8,15 +8,35 @@
 
 #import "CollectionCategoryModel.h"
 
+@implementation StickModel
+
+
+@end
+
+
+@implementation Pro_categoryModel
+
+
+@end
+
+@implementation SceneModel
+
+
+@end
+
+@implementation SightModel
+
+
+@end
+
+@implementation UsersModel
+
+
+@end
+
 @implementation CollectionCategoryModel
 
-+ (NSDictionary *)objectClassInArray
-{
-    return @{ @"subcategories": @"SubCategoryModel"};
-}
 
 @end
 
-@implementation SubCategoryModel
 
-@end
