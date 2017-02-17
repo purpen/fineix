@@ -26,6 +26,7 @@
 #import "THNSceneCommentTableViewCell.h"
 #import "THNLookAllCommentTableViewCell.h"
 #import "QRCodeScanViewController.h"
+#import "THNDomainInfoViewController.h"
 
 #import "HomeSceneListRow.h"
 #import "CommentRow.h"
@@ -969,6 +970,21 @@ static NSString *const homeDataPath = [NSHomeDirectory() stringByAppendingPathCo
     [self thn_addBarItemRightBarButton:@"" image:@"shouye_search"];
 }
 
+- (void)thn_leftBarItemSelected {
+    QRCodeScanViewController * qrVC = [[QRCodeScanViewController alloc] init];
+    [self.navigationController pushViewController:qrVC animated:YES];
+}
+
+- (void)thn_rightBarItemSelected {
+//    SearchViewController *searchVC = [[SearchViewController alloc] init];
+//    searchVC.index = 0;
+//    [self.navigationController pushViewController:searchVC animated:YES];
+    
+    THNDomainInfoViewController *domainInfoVC = [[THNDomainInfoViewController alloc] init];
+    [self.navigationController pushViewController:domainInfoVC animated:YES];
+}
+
+#pragma mark - 获取当前城市信息
 -(void)getCity
 {
     [LocationManager shareLocation].locationDelegate = self;
@@ -978,17 +994,6 @@ static NSString *const homeDataPath = [NSHomeDirectory() stringByAppendingPathCo
 -(void)setLocalCityStr:(NSString *)str{
     NSString *cityStr = [str substringToIndex:[str length] - 1];
     self.addressCityLabel.text = cityStr;
-}
-
-- (void)thn_leftBarItemSelected {
-    QRCodeScanViewController * qrVC = [[QRCodeScanViewController alloc] init];
-    [self.navigationController pushViewController:qrVC animated:YES];
-}
-
-- (void)thn_rightBarItemSelected {
-    SearchViewController *searchVC = [[SearchViewController alloc] init];
-    searchVC.index = 0;
-    [self.navigationController pushViewController:searchVC animated:YES];
 }
 
 #pragma mark - 首次打开加载指示图
