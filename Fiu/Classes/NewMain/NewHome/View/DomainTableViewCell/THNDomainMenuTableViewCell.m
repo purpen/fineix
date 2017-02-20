@@ -50,7 +50,7 @@ static NSString *const domainMenuCollectionCellID = @"THNDomainMenuCollectionVie
     if (!_menuCollectionView) {
         UICollectionViewFlowLayout * flowLayout = [[UICollectionViewFlowLayout alloc] init];
         flowLayout.minimumLineSpacing = 0.01f;
-        flowLayout.sectionInset = UIEdgeInsetsMake(0, 15, 0, 15);
+        flowLayout.sectionInset = UIEdgeInsetsMake(0, 0, 0, 0);
         flowLayout.scrollDirection = UICollectionViewScrollDirectionHorizontal;
         
         _menuCollectionView = [[UICollectionView alloc] initWithFrame:CGRectMake(0, 10, SCREEN_WIDTH, 60)
