@@ -338,7 +338,7 @@ UITableViewDataSource
     } else if (indexPath.section == 6) {
         if (indexPath.row <= 2) {
             THNSortCollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:THNSORTCollectionViewCell forIndexPath:indexPath];
-            NSArray *ary = @[[Pro_categoryModel getPro_categoryModelWithTitle:@"邀请微信好友" andCoverUrl:@""],[Pro_categoryModel getPro_categoryModelWithTitle:@"连接微博" andCoverUrl:@""],[Pro_categoryModel getPro_categoryModelWithTitle:@"连接通讯录" andCoverUrl:@""]];
+            NSArray *ary = @[[Pro_categoryModel getPro_categoryModelWithTitle:@"邀请微信好友" andCoverUrl:@"weixin_icon"],[Pro_categoryModel getPro_categoryModelWithTitle:@"连接微博" andCoverUrl:@"weibo_icon"],[Pro_categoryModel getPro_categoryModelWithTitle:@"连接通讯录" andCoverUrl:@"tongxunlu"]];
             Pro_categoryModel *model = ary[indexPath.row];
             cell.model = model;
             return cell;

@@ -19,7 +19,7 @@
 +(instancetype)getPro_categoryModelWithTitle:(NSString *)title andCoverUrl:(NSString *)coverUrl{
     Pro_categoryModel *instance = [[Pro_categoryModel alloc] init];
     instance.title = title;
-    instance.app_cover_url = coverUrl;
+    instance.cover_url = coverUrl;
     return instance;
 }
 

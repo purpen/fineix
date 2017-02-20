@@ -21,6 +21,7 @@
 		1F1804251E56961700722AF5 /* THNSortCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F1804241E56961700722AF5 /* THNSortCollectionViewCell.m */; };
 		1F1804281E56CE1100722AF5 /* THNDiPanZhuanTiCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F1804271E56CE1100722AF5 /* THNDiPanZhuanTiCollectionViewCell.m */; };
 		1F18042B1E56D0F700722AF5 /* THNQingJingFenLeiCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F18042A1E56D0F700722AF5 /* THNQingJingFenLeiCollectionViewCell.m */; };
+		1F1804311E5AF9E800722AF5 /* THNShangPinCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F1804301E5AF9E700722AF5 /* THNShangPinCollectionViewCell.m */; };
 		1F1AF3B21CF58A6B00CAA525 /* IntegralViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F1AF3B01CF58A6B00CAA525 /* IntegralViewController.m */; };
 		1F1AF3B31CF58A6B00CAA525 /* IntegralViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1F1AF3B11CF58A6B00CAA525 /* IntegralViewController.xib */; };
 		1F223B1D1CD714F3007687F7 /* messages.plist in Resources */ = {isa = PBXBuildFile; fileRef = 1F223B1C1CD714F3007687F7 /* messages.plist */; };
@@ -840,6 +841,8 @@
 		1F1804271E56CE1100722AF5 /* THNDiPanZhuanTiCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THNDiPanZhuanTiCollectionViewCell.m; sourceTree = "<group>"; };
 		1F1804291E56D0F700722AF5 /* THNQingJingFenLeiCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THNQingJingFenLeiCollectionViewCell.h; sourceTree = "<group>"; };
 		1F18042A1E56D0F700722AF5 /* THNQingJingFenLeiCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THNQingJingFenLeiCollectionViewCell.m; sourceTree = "<group>"; };
+		1F18042F1E5AF9E700722AF5 /* THNShangPinCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THNShangPinCollectionViewCell.h; sourceTree = "<group>"; };
+		1F1804301E5AF9E700722AF5 /* THNShangPinCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THNShangPinCollectionViewCell.m; sourceTree = "<group>"; };
 		1F1AF3AF1CF58A6B00CAA525 /* IntegralViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IntegralViewController.h; sourceTree = "<group>"; };
 		1F1AF3B01CF58A6B00CAA525 /* IntegralViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IntegralViewController.m; sourceTree = "<group>"; };
 		1F1AF3B11CF58A6B00CAA525 /* IntegralViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = IntegralViewController.xib; sourceTree = "<group>"; };
@@ -3509,6 +3512,8 @@
 				1F1804101E53EEF200722AF5 /* THNDivideCollectionViewCell.m */,
 				1F1804121E54009A00722AF5 /* THNOrderCollectionViewCell.h */,
 				1F1804131E54009A00722AF5 /* THNOrderCollectionViewCell.m */,
+				1F18042F1E5AF9E700722AF5 /* THNShangPinCollectionViewCell.h */,
+				1F1804301E5AF9E700722AF5 /* THNShangPinCollectionViewCell.m */,
 			);
 			path = view;
 			sourceTree = "<group>";
@@ -5769,6 +5774,7 @@
 				D8E3AEBB1CFC9B84006E5E8C /* ReleaseViewController.m in Sources */,
 				D857C4631E2CB06200569B3D /* THNTradingRecordViewController.m in Sources */,
 				D8C0951F1D7533FD00908491 /* ShareInfo.m in Sources */,
+				1F1804311E5AF9E800722AF5 /* THNShangPinCollectionViewCell.m in Sources */,
 				D869BD6B1D6036A000432423 /* CommentNViewController.m in Sources */,
 				D857AC1E1DE7E6EE00F924E8 /* SubOrderModel.m in Sources */,
 				D86E54C01DD444230075ED88 /* FSNashvilleFilter.m in Sources */,
