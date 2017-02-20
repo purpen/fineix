@@ -466,6 +466,7 @@ static NSString *const DefaultFilter = @"original";
             releaseVC.goodsX = originX;
             releaseVC.goodsY = originY;
             releaseVC.goodsLoc = loc;
+            releaseVC.domainId = self.domainId;
             [releaseVC thn_releaseTheSceneType:0 withSceneId:nil withSceneData:nil];
             [self.navigationController pushViewController:releaseVC animated:YES];
         }

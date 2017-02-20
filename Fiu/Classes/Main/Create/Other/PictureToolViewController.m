@@ -24,6 +24,7 @@
     _clipImageVC = [[ClipImageViewController alloc] init];
     _clipImageVC.actionId = self.actionId;
     _clipImageVC.activeTitle = self.activeTitle;
+    _clipImageVC.domainId = self.domainId;
     [self addChildViewController:_clipImageVC];
 }
 

@@ -28,6 +28,9 @@ static NSString *const URLReleaseFiuScenen = @"/scene_scene/save";
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    if (self.domainId.length == 0) {
+        self.domainId = @"";
+    }
     [self setReleaseViewUI];
 }
 
@@ -125,6 +128,7 @@ static NSString *const URLReleaseFiuScenen = @"/scene_scene/save";
     }
 
     NSDictionary * paramDict = @{
+                                 @"scene_id":self.domainId,
                                  @"id":sceneId,
                                  @"tmp":img64Str,
                                  @"title":title,

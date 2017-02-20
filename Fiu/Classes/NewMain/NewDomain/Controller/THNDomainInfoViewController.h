@@ -13,7 +13,8 @@
 
 @interface THNDomainInfoViewController : THNViewController <
     UITableViewDelegate,
-    UITableViewDataSource
+    UITableViewDataSource,
+    THNNavigationBarItemsDelegate
 >
 
 @property (nonatomic, strong) THNDomainInfoHeaderImage *headerImages;
@@ -22,5 +23,6 @@
 @property (nonatomic, strong) NSString *infoId;
 @property (nonatomic, strong) UITableView *domainInfoTable;
 @property (nonatomic, strong) THNDomainInfoFooter *footerView;
+@property (nonatomic, strong) UIButton *favoriteButton;
 
 @end

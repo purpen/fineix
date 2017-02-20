@@ -28,8 +28,6 @@
 #import "THNSceneImageTableViewCell.h"
 #import "THNDataInfoTableViewCell.h"
 #import "THNSceneInfoTableViewCell.h"
-#import "THNSceneCommentTableViewCell.h"
-#import "THNLookAllCommentTableViewCell.h"
 #import "THNHomeSubjectTableViewCell.h"
 
 #import "HomeSceneListRow.h"
@@ -77,9 +75,6 @@ static NSString *const userInfoCellId       = @"UserInfoCellId";
 static NSString *const sceneImgCellId       = @"SceneImgCellId";
 static NSString *const dataInfoCellId       = @"DataInfoCellId";
 static NSString *const sceneInfoCellId      = @"SceneInfoCellId";
-static NSString *const commentsCellId       = @"CommentsCellId";
-static NSString *const twoCommentsCellId    = @"TwoCommentsCellId";
-static NSString *const allCommentsCellId    = @"AllCommentsCellId";
 
 //  归档地址
 static NSString *const homeDataPath = [NSHomeDirectory() stringByAppendingPathComponent:@"homeData.archiver"];
@@ -870,12 +865,13 @@ static NSString *const homeDataPath = [NSHomeDirectory() stringByAppendingPathCo
     if (indexPath.section == 0) {
         if (indexPath.row == 0) {
             if (_isNewUser == YES) {
-                return SCREEN_WIDTH * 0.48;
+                return (SCREEN_WIDTH * 0.48) + 15;
             } else {
                 return 0.01;
             }
         } else if (indexPath.row == 1) {
-            return 80;
+//            return 80;
+            return 0.01;
         } else
             return (SCREEN_WIDTH * 0.48) + 15;
         

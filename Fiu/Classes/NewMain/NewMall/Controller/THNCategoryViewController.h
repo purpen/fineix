@@ -29,7 +29,6 @@
 
 @pro_strong NSMutableArray *goodsListMarr;
 @pro_strong NSMutableArray *goodsIdMarr;
-@pro_strong NSMutableArray *goodsMarr;
 @pro_strong NSMutableArray *childTagsList;
 @pro_strong NSMutableArray *childTagsId;
 

@@ -69,5 +69,9 @@
 @pro_strong NSString *actionId;
 /** 活动标题 */
 @pro_strong NSString *activeTitle;
+/**
+ 所属地盘id
+ */
+@property (nonatomic, strong) NSString *domainId;
 
 @end

@@ -72,6 +72,7 @@
     addVC.filtersImg = self.clipImageView.capture;
     addVC.actionId = self.actionId;
     addVC.activeTitle = self.activeTitle;
+    addVC.domainId = self.domainId;
     [self.navigationController pushViewController:addVC animated:YES];
 }
 

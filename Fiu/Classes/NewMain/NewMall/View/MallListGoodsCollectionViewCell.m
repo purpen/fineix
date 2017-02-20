@@ -55,11 +55,11 @@
     }];
     self.title.text = model.title;
     self.price.text = [NSString stringWithFormat:@"¥%.0f", model.salePrice];
-    if (model.stage == 9) {
-        self.price.hidden = NO;
-    } else {
-        self.price.hidden = YES;
-    }
+//    if (model.stage == 9) {
+//        self.price.hidden = NO;
+//    } else {
+//        self.price.hidden = YES;
+//    }
 }
 
 #pragma mark - setViewUI

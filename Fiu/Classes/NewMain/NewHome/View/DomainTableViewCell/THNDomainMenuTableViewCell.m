@@ -20,6 +20,9 @@ static NSString *const domainMenuCollectionCellID = @"THNDomainMenuCollectionVie
         self.selectionStyle = UITableViewCellSelectionStyleNone;
         self.backgroundColor = [UIColor whiteColor];
         [self addSubview:self.menuCollectionView];
+        [_menuCollectionView mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.top.left.right.bottom.equalTo(self).with.offset(0);
+        }];
     }
     return self;
 }
@@ -68,7 +71,7 @@ static NSString *const domainMenuCollectionCellID = @"THNDomainMenuCollectionVie
     return self.menuMarr.count;
 }
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath {
-    return CGSizeMake((SCREEN_WIDTH - 30) / 5.3, 60);
+    return CGSizeMake((SCREEN_WIDTH - 30) / 5, 60);
 }
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {

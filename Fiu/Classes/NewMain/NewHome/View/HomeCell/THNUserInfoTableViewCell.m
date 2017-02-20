@@ -54,12 +54,6 @@ static NSString *const hotUserCellId = @"HotUserCellId";
     [self.head downloadImage:userModel.user.avatarUrl place:[UIImage imageNamed:@""]];
     self.name.text = userModel.user.nickname;
     
-//    [self.time setTitle:userModel.createdAt forState:(UIControlStateNormal)];
-//    NSString *timeStr = [NSString stringWithFormat:@"      %@",userModel.createdAt];
-//    [self.time mas_updateConstraints:^(MASConstraintMaker *make) {
-//        make.width.equalTo(@([self getTextSizeWidth:timeStr].width));
-//    }];
-    
     [self.address setTitle:[NSString stringWithFormat:@"%@ %@", userModel.city, userModel.address]
                                              forState:(UIControlStateNormal)];
     if (userModel.user.isExpert == 1) {
@@ -67,13 +61,7 @@ static NSString *const hotUserCellId = @"HotUserCellId";
     } else {
         self.certificate.hidden = YES;
     }
-    
-//    if (userModel.user.isFollow == 0) {
-//        self.follow.selected = NO;
-//    } else if (userModel.user.isFollow == 1) {
-//        self.follow.selected = YES;
-//    }
-    
+
     _userId = userModel.user._id;
 }
 
@@ -84,14 +72,7 @@ static NSString *const hotUserCellId = @"HotUserCellId";
     [self.head downloadImage:userModel.user.avatarUrl place:[UIImage imageNamed:@""]];
     [self.address setTitle:[NSString stringWithFormat:@"%@ %@", userModel.city, userModel.address]
                   forState:(UIControlStateNormal)];
-    
-//    [self.time setTitle:userModel.createdAt
-//               forState:(UIControlStateNormal)];
-//    NSString *timeStr = [NSString stringWithFormat:@"      %@",userModel.createdAt];
-//    [self.time mas_updateConstraints:^(MASConstraintMaker *make) {
-//        make.width.equalTo(@([self getTextSizeWidth:timeStr].width));
-//    }];
-    
+
     if (userModel.address.length == 0) {
         self.address.hidden = YES;
     } else {
@@ -103,34 +84,11 @@ static NSString *const hotUserCellId = @"HotUserCellId";
     } else {
         self.certificate.hidden = YES;
     }
-    
-//    if (userModel.user.isFollow == 0) {
-//        self.follow.selected = NO;
-//    } else if (userModel.user.isFollow == 1) {
-//        self.follow.selected = YES;
-//    }
-    
-    //用于解决关注判断失效的问题
-//    if (!self.follow.selected) {
-//        if (userModel.user.is_follow == 0) {
-//            self.follow.selected = NO;
-//        } else if (userModel.user.is_follow == 1) {
-//            self.follow.selected = YES;
-//        }
-//    }
-    
+
     _userId = [NSString stringWithFormat:@"%zi", userModel.userId];
     if ([_userId isEqualToString:@"0"]) {
         _userId = userModel.user._id;
     }
-    
-//    if ([_userId isEqualToString:userID]) {
-//        self.follow.hidden = YES;
-//        _isUserSelf = YES;
-//    } else {
-//        self.follow.hidden = NO;
-//        _isUserSelf = NO;
-//    }
 }
 
 - (CGSize)getTextSizeWidth:(NSString *)text {
@@ -244,67 +202,6 @@ static NSString *const hotUserCellId = @"HotUserCellId";
     }
     return _name;
 }
-
-//- (UIButton *)follow {
-//    if (!_follow) {
-//        _follow = [[UIButton alloc] init];
-//        _follow.layer.cornerRadius = 5.0f;
-//        _follow.layer.borderColor = [UIColor colorWithHexString:WHITE_COLOR alpha:0.6f].CGColor;
-//        _follow.layer.borderWidth = 0.5f;
-//        _follow.backgroundColor = [UIColor colorWithHexString:@"#222222"];
-//        [_follow setTitle:NSLocalizedString(@"User_follow", nil) forState:(UIControlStateNormal)];
-//        [_follow setTitle:NSLocalizedString(@"User_followDone", nil) forState:(UIControlStateSelected)];
-//        _follow.titleLabel.font = [UIFont systemFontOfSize:12];
-//        [_follow addTarget:self action:@selector(followClick:) forControlEvents:(UIControlEventTouchUpInside)];
-//        [_follow setImage:[UIImage imageNamed:@"icon_success"] forState:(UIControlStateSelected)];
-//        [_follow setImageEdgeInsets:(UIEdgeInsetsMake(0, -6, 0, 0))];
-//    }
-//    return _follow;
-//}
-
-//- (void)followClick:(UIButton *)button {
-//    if (_isLogin) {
-//        if (button.selected == NO) {
-//            button.selected = YES;
-//            POPSpringAnimation *scaleAnimation = [POPSpringAnimation animationWithPropertyNamed:kPOPLayerScaleXY];
-//            scaleAnimation.fromValue = [NSValue valueWithCGSize:CGSizeMake(0.5, 0.5)];
-//            scaleAnimation.toValue = [NSValue valueWithCGSize:CGSizeMake(1.0, 1.0)];
-//            scaleAnimation.springBounciness = 10.f;
-//            scaleAnimation.springSpeed = 10.0f;
-//            [button.layer pop_addAnimation:scaleAnimation forKey:@"scaleAnim"];
-//            
-//            self.beginFollowTheUserBlock(_userId);
-//            
-//        } else if (button.selected == YES) {
-//            button.selected = NO;
-//            POPSpringAnimation *scaleAnimation = [POPSpringAnimation animationWithPropertyNamed:kPOPLayerScaleXY];
-//            scaleAnimation.fromValue = [NSValue valueWithCGSize:CGSizeMake(0.5, 0.5)];
-//            scaleAnimation.toValue = [NSValue valueWithCGSize:CGSizeMake(1.0, 1.0)];
-//            scaleAnimation.springBounciness = 10.f;
-//            scaleAnimation.springSpeed = 10.0f;
-//            [button.layer pop_addAnimation:scaleAnimation forKey:@"scaleAnim"];
-//            
-//            self.cancelFollowTheUserBlock(_userId);
-//        }
-//        
-//    } else {
-//        THNLoginRegisterViewController * loginSignupVC = [[THNLoginRegisterViewController alloc] init];
-//        UINavigationController * navi = [[UINavigationController alloc] initWithRootViewController:loginSignupVC];
-//        [self.vc presentViewController:navi animated:YES completion:nil];
-//    }
-//}
-
-//- (UIButton *)time {
-//    if (!_time) {
-//        _time = [[UIButton alloc] init];
-//        [_time setImage:[UIImage imageNamed:@"icon_time"] forState:(UIControlStateNormal)];
-//        [_time setTitleEdgeInsets:(UIEdgeInsetsMake(0, 5, 0, 0))];
-//        _time.titleLabel.font = [UIFont systemFontOfSize:10];
-//        [_time setTitleColor:[UIColor colorWithHexString:@"#999999"] forState:(UIControlStateNormal)];
-//        _time.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
-//    }
-//    return _time;
-//}
 
 - (UIButton *)address {
     if (!_address) {

@@ -9,6 +9,7 @@
 #import <UIKit/UIKit.h>
 #import "THNMacro.h"
 #import "SGTopTitleView.h"
+#import "DominInfoData.h"
 
 @interface THNDomainInfoFooter : UIView <
     UITableViewDelegate,
@@ -18,6 +19,8 @@
     SGTopTitleViewDelegate
 >
 
+@property (nonatomic, strong) UIViewController *vc;
+@property (nonatomic, strong) UINavigationController *nav;
 @property (nonatomic, strong) SGTopTitleView *menuView;
 @property (nonatomic, strong) UIScrollView *rollView;
 @property (nonatomic, strong) UITableView *sceneTable;
@@ -26,8 +29,27 @@
 @property (nonatomic, strong) UILabel *backLabel;
 @property (nonatomic, strong) UIView *commentView;
 @property (nonatomic, strong) UIView *mapView;
+@property (nonatomic, strong) UIView *creatSceneView;
+@property (nonatomic, strong) DominInfoData *infoModel;
 
-- (void)thn_setTableViewData:(id)sceneData goods:(id)goodsData info:(id)infoData;
+@property (nonatomic, strong) FBRequest *sceneListRequest;
+@property (nonatomic, strong) NSMutableArray *sceneListMarr;
+@property (nonatomic, strong) NSMutableArray *sceneIdMarr;
+@property (nonatomic, strong) NSMutableArray *userIdMarr;
+@property (nonatomic, assign) NSInteger sceneCurrentpage;
+@property (nonatomic, assign) NSInteger sceneTotalPage;
+
+@property (nonatomic, strong) FBRequest *goodsListRequest;
+@property (nonatomic, strong) NSMutableArray *goodsListMarr;
+@property (nonatomic, strong) NSMutableArray *goodsIdMarr;
+@property (nonatomic, strong) NSMutableArray *goodsMarr;
+@property (nonatomic, assign) NSInteger currentpageNum;
+@property (nonatomic, assign) NSInteger totalPageNum;
+
+@property (nonatomic, strong) UIButton *fineButton;
+@property (nonatomic, strong) UIButton *nowButton;
+
+- (void)thn_setDomainInfo:(DominInfoData *)model;
 
 - (void)thn_tableViewStartRolling:(BOOL)roll;
 
