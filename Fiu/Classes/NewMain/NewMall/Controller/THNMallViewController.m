@@ -434,4 +434,5 @@ static NSString *const MallListHeaderCellViewId = @"mallListHeaderCellViewId";
     return _subjectTypeMarr;
 }
 
+
 @end

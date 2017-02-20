@@ -88,7 +88,7 @@ static NSInteger const actionBtnTag = 686;
         if ([actionBtn.titleLabel.text isEqualToString:NSLocalizedString(@"reportScene", nil)]) {
             [actionBtn setTitleColor:[UIColor colorWithHexString:@"#E30B0B"] forState:(UIControlStateNormal)];
         } else if ([actionBtn.titleLabel.text isEqualToString:NSLocalizedString(@"saveScene", nil)] || [actionBtn.titleLabel.text isEqualToString:NSLocalizedString(@"cancelSaveScene", nil)] ) {
-            [actionBtn setTitleColor:[UIColor colorWithHexString:@"#0B78F7"] forState:(UIControlStateNormal)];
+            [actionBtn setTitleColor:[UIColor colorWithHexString:MAIN_COLOR] forState:(UIControlStateNormal)];
         } else {
             [actionBtn setTitleColor:[UIColor blackColor] forState:(UIControlStateNormal)];
         }

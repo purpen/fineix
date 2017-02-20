@@ -153,10 +153,6 @@
         weakSelf.deleteTheSceneBlock(sceneId);
     };
     
-//    alertVC.editDoneAndRefresh = ^ () {
-//        weakSelf.refreshData();
-//    };
-    
     [self.vc presentViewController:alertVC animated:YES completion:nil];
 }
 

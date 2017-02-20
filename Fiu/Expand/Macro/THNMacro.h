@@ -18,6 +18,7 @@
 #import "UIColor+Extension.h"
 #import "UIImageView+SDWedImage.h"
 #import "SVProgressHUD.h"
+#import "NSString+JSON.h"
 
 #undef 宽高尺寸
 #define SCREEN_HEIGHT       [[UIScreen mainScreen] bounds].size.height

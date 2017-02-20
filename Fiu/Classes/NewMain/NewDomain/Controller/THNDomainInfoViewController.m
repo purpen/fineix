@@ -11,12 +11,16 @@
 #import "THNCouponTableViewCell.h"
 #import "THNDesTableViewCell.h"
 #import "THNMoreDesTableViewCell.h"
+#import "THNTitleTableViewCell.h"
+#import "THNLightspotTableViewCell.h"
 #import "NSString+JSON.h"
 
 static NSString *const businessCellId = @"THNBusinessTableViewCellId";
 static NSString *const couponCellId = @"THNCouponTableViewCellId";
 static NSString *const desCellId = @"THNDesTableViewCellId";
 static NSString *const moreCellId = @"THNMoreDesTableViewCellId";
+static NSString *const lightTitleCellId = @"THNTitleTableViewCellId";
+static NSString *const lightspotCellId = @"THNLightspotTableViewCellId";
 static NSString *const URLDomainInfo = @"/scene_scene/view";
 
 @interface THNDomainInfoViewController () {
@@ -24,6 +28,10 @@ static NSString *const URLDomainInfo = @"/scene_scene/view";
     NSIndexPath *_selectedIndexPath;
     CGFloat _contentHigh;
     CGFloat _defaultContentHigh;
+    CGFloat _lastContentOffset;
+    CGFloat _lightTextHeight;
+    BOOL _rollDown;
+    BOOL _onFooterView;
 }
 
 @end
@@ -39,22 +47,24 @@ static NSString *const URLDomainInfo = @"/scene_scene/view";
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    self.infoId = @"62";
+    _onFooterView = NO;
     [self thn_networkDomainInfoData];
     [self thn_setViewUI];
 }
 
 - (void)thn_networkDomainInfoData {
+    [SVProgressHUD show];
     self.infoRequest = [FBAPI postWithUrlString:URLDomainInfo requestDictionary:@{@"id":self.infoId} delegate:self];
     [self.infoRequest startRequestSuccess:^(FBRequest *request, id result) {
         if ([[result valueForKey:@"success"] isEqualToNumber:@1]) {
-            NSLog(@"==== %@", [NSString jsonStringWithObject:result]);
+//            NSLog(@"==== %@", [NSString jsonStringWithObject:result]);
             NSDictionary *dict =  [result valueForKey:@"data"];
             self.infoModel = [[DominInfoData alloc] initWithDictionary:dict];
             [self.headerImages thn_setRollimageView:self.infoModel];
         
             self.navViewTitle.text = self.infoModel.title;
             [self.domainInfoTable reloadData];
+            [SVProgressHUD dismiss];
         }
         
     } failure:^(FBRequest *request, NSError *error) {
@@ -75,83 +85,176 @@ static NSString *const URLDomainInfo = @"/scene_scene/view";
 
 - (UITableView *)domainInfoTable {
     if (!_domainInfoTable) {
-        _domainInfoTable = [[UITableView alloc] initWithFrame:CGRectMake(0, 64, SCREEN_WIDTH, SCREEN_HEIGHT - 64) style:(UITableViewStylePlain)];
+        _domainInfoTable = [[UITableView alloc] initWithFrame:CGRectMake(0, 64, SCREEN_WIDTH, SCREEN_HEIGHT - 64) style:(UITableViewStyleGrouped)];
         _domainInfoTable.delegate = self;
         _domainInfoTable.dataSource = self;
         _domainInfoTable.tableHeaderView = self.headerImages;
-        _domainInfoTable.tableFooterView = [UIView new];
+        _domainInfoTable.tableFooterView = self.footerView;
         _domainInfoTable.showsVerticalScrollIndicator = NO;
+        _domainInfoTable.bounces = NO;
         _domainInfoTable.separatorStyle = UITableViewCellSeparatorStyleNone;
+        _domainInfoTable.sectionHeaderHeight = 0.01f;
+        _domainInfoTable.sectionFooterHeight = 0.01f;
     }
     return _domainInfoTable;
 }
 
+- (THNDomainInfoFooter *)footerView {
+    if (!_footerView) {
+        _footerView = [[THNDomainInfoFooter alloc] initWithFrame:CGRectMake(0, 64, SCREEN_WIDTH, SCREEN_HEIGHT - 64)];
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(tableBackTop:) name:@"tableOnHeader" object:nil];
+    }
+    return _footerView;
+}
+
+- (void)tableBackTop:(NSNotification *)notification {
+    [UIView animateWithDuration:0.3 animations:^{
+        self.domainInfoTable.contentOffset = CGPointMake(0, 0);
+    }];
+}
+
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
+    return 2;
+}
+
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return 10;
+    if (section == 0) {
+        return 4;
+    } else if (section == 1) {
+        return 3;
+    }
+    return 2;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    if (indexPath.row == 0) {
-        THNBusinessTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:businessCellId];
-        cell = [[THNBusinessTableViewCell alloc] initWithStyle:(UITableViewCellStyleDefault) reuseIdentifier:businessCellId];
-        [cell thn_setBusinessData:self.infoModel];
-        return cell;
+    if (indexPath.section == 0) {
+        if (indexPath.row == 0) {
+            THNBusinessTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:businessCellId];
+            cell = [[THNBusinessTableViewCell alloc] initWithStyle:(UITableViewCellStyleDefault) reuseIdentifier:businessCellId];
+            [cell thn_setBusinessData:self.infoModel];
+            return cell;
+            
+        } else if (indexPath.row == 1) {
+            THNCouponTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:couponCellId];
+            cell = [[THNCouponTableViewCell alloc] initWithStyle:(UITableViewCellStyleDefault) reuseIdentifier:couponCellId];
+            //        [cell thn_setCouponCount];
+            return cell;
+        } else if (indexPath.row == 2) {
+            THNDesTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:desCellId];
+            cell = [[THNDesTableViewCell alloc] initWithStyle:(UITableViewCellStyleDefault) reuseIdentifier:desCellId];
+            [cell thn_setDesData:self.infoModel];
+            _contentHigh = cell.cellHigh;
+            _defaultContentHigh = cell.defaultCellHigh;
+            return cell;
+        } else if (indexPath.row == 3) {
+            THNMoreDesTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:moreCellId];
+            cell = [[THNMoreDesTableViewCell alloc] initWithStyle:(UITableViewCellStyleDefault) reuseIdentifier:moreCellId];
+            cell.moreButton.selected = _rowSelected;
+            return cell;
+        }
         
-    } else if (indexPath.row == 1) {
-        THNCouponTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:couponCellId];
-        cell = [[THNCouponTableViewCell alloc] initWithStyle:(UITableViewCellStyleDefault) reuseIdentifier:couponCellId];
-//        [cell thn_setCouponCount];
-        return cell;
-    } else if (indexPath.row == 2) {
-        THNDesTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:desCellId];
-        cell = [[THNDesTableViewCell alloc] initWithStyle:(UITableViewCellStyleDefault) reuseIdentifier:desCellId];
-        [cell thn_setDesData:self.infoModel];
-        _contentHigh = cell.cellHigh;
-        _defaultContentHigh = cell.defaultCellHigh;
-        return cell;
-    } else if (indexPath.row == 3) {
-        THNMoreDesTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:moreCellId];
-        cell = [[THNMoreDesTableViewCell alloc] initWithStyle:(UITableViewCellStyleDefault) reuseIdentifier:moreCellId];
-        cell.moreButton.selected = _rowSelected;
-        return cell;
+    } else if (indexPath.section == 1) {
+        if (indexPath.row == 0) {
+            THNTitleTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:lightTitleCellId];
+            cell = [[THNTitleTableViewCell alloc] initWithStyle:(UITableViewCellStyleDefault) reuseIdentifier:lightTitleCellId];
+            return cell;
+        } else if (indexPath.row == 2) {
+            THNMoreDesTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:moreCellId];
+            cell = [[THNMoreDesTableViewCell alloc] initWithStyle:(UITableViewCellStyleDefault) reuseIdentifier:moreCellId];
+            return cell;
+        } else {
+            THNLightspotTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:lightspotCellId];
+            cell = [[THNLightspotTableViewCell alloc] initWithStyle:(UITableViewCellStyleDefault) reuseIdentifier:lightspotCellId];
+            if (self.infoModel.brightSpot.count) {
+                [cell thn_setBrightSpotData:self.infoModel.brightSpot];
+                _lightTextHeight = cell.viewHeiight;
+            }
+            return cell;
+        }
     }
     
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"CellID"];
-    cell = [[UITableViewCell alloc] initWithStyle:(UITableViewCellStyleDefault) reuseIdentifier:@"CellID"];
-    return cell;
+    return nil;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-    if (indexPath.row == 0) {
-//        return 170;
-        return 150;
-    } else if (indexPath.row == 1) {
-        return 0.01;
-    } else if (indexPath.row == 2) {
-        if (_selectedIndexPath && _selectedIndexPath.section == indexPath.section) {
-            return _contentHigh;
-        } else {
-            return _defaultContentHigh;
+    if (indexPath.section == 0) {
+        if (indexPath.row == 0) {
+            return 150;
+        } else if (indexPath.row == 1) {
+            return 0.01;
+        } else if (indexPath.row == 2) {
+            if (_selectedIndexPath && _selectedIndexPath.section == indexPath.section) {
+                return _contentHigh;
+            } else {
+                return _defaultContentHigh;
+            }
+            return 80;
+        } else if (indexPath.row == 3 ) {
+            return 44;
         }
-        return 80;
-    } else if (indexPath.row == 3 ) {
-        return 44;
+    
+    } else if (indexPath.section == 1) {
+        if (indexPath.row == 1) {
+            if (self.infoModel.brightSpot.count) {
+                return _lightTextHeight;
+            }
+        }
+        return 40;
     }
-    return 120;
+    return 44;
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    if (indexPath.row == 3) {
-        if (_contentHigh > 90) {
-            if (_selectedIndexPath && _selectedIndexPath.section == indexPath.section) {
-                _selectedIndexPath = nil;
-                _rowSelected = NO;
-            } else {
-                _selectedIndexPath = indexPath;
-                _rowSelected = YES;
+    if (indexPath.section == 0) {
+        if (indexPath.row == 3) {
+            if (_contentHigh > 90) {
+                if (_selectedIndexPath && _selectedIndexPath.section == indexPath.section) {
+                    _selectedIndexPath = nil;
+                    _rowSelected = NO;
+                } else {
+                    _selectedIndexPath = indexPath;
+                    _rowSelected = YES;
+                }
+                [tableView reloadRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
             }
-            [tableView reloadRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
         }
+    }
+}
+
+#pragma mark - 判断上／下滑状态
+- (void)scrollViewWillBeginDragging:(UIScrollView *)scrollView {
+    if (scrollView == self.domainInfoTable) {
+        _lastContentOffset = scrollView.contentOffset.y;
+    }
+}
+
+- (void)scrollViewWillBeginDecelerating:(UIScrollView *)scrollView {
+    if (scrollView == self.domainInfoTable) {
+        if (_lastContentOffset < scrollView.contentOffset.y) {
+            _rollDown = YES;
+        }else{
+            _rollDown = NO;
+        }
+    }
+}
+
+- (void)scrollViewDidScroll:(UIScrollView *)scrollView {
+    if (scrollView == self.domainInfoTable) {
+        NSInteger contentOffset = scrollView.contentOffset.y;
+        NSInteger scrollHeight = scrollView.contentSize.height - (SCREEN_HEIGHT - 64);
+        
+        if (contentOffset == scrollHeight) {
+            _onFooterView = YES;
+        } else {
+            _onFooterView = NO;
+        }
+        [self.footerView thn_tableViewStartRolling:_onFooterView];
+
+//        if (_rollDown == YES) {
+
+//        } else if (_rollDown == NO) {
+
+//        }
     }
 }
 
@@ -160,6 +263,10 @@ static NSString *const URLDomainInfo = @"/scene_scene/view";
     self.view.backgroundColor = [UIColor whiteColor];
     [[UIApplication sharedApplication] setStatusBarHidden:NO withAnimation:(UIStatusBarAnimationFade)];
     self.baseTable = self.domainInfoTable;
+}
+
+- (void)dealloc {
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:@"tableOnHeader" object:nil];
 }
 
 @end

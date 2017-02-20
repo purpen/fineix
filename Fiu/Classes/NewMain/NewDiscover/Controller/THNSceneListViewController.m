@@ -274,14 +274,6 @@ static NSString *const twoCommentsCellId = @"TwoCommentsCellId";
         }
         if (self.sceneListMarr.count) {
             [cell thn_setHomeSceneUserInfoData:self.sceneListMarr[indexPath.section] userId:[self getLoginUserID] isLogin:[self isUserLogin]];
-            
-            cell.beginFollowTheUserBlock = ^(NSString *userId) {
-                [weakSelf beginFollowUser:userId];
-            };
-            
-            cell.cancelFollowTheUserBlock = ^(NSString *userId) {
-                [weakSelf cancelFollowUser:userId];
-            };
         }
         cell.nav = self.navigationController;
         return cell;
@@ -446,18 +438,18 @@ static NSString *const twoCommentsCellId = @"TwoCommentsCellId";
 }
 
 //  关注用户
-- (void)beginFollowUser:(NSString *)userId {
-    NSInteger index = [self.userIdMarr indexOfObject:userId];
-    [[self.sceneListMarr valueForKey:@"user"][index] setValue:@"1" forKey:@"isFollow"];
-    [self thn_networkBeginFollowUserData:userId];
-}
-
-//  取消关注用户
-- (void)cancelFollowUser:(NSString *)userId {
-    NSInteger index = [self.userIdMarr indexOfObject:userId];
-    [[self.sceneListMarr valueForKey:@"user"][index] setValue:@"0" forKey:@"isFollow"];
-    [self thn_networkCancelFollowUserData:userId];
-}
+//- (void)beginFollowUser:(NSString *)userId {
+//    NSInteger index = [self.userIdMarr indexOfObject:userId];
+//    [[self.sceneListMarr valueForKey:@"user"][index] setValue:@"1" forKey:@"isFollow"];
+//    [self thn_networkBeginFollowUserData:userId];
+//}
+//
+////  取消关注用户
+//- (void)cancelFollowUser:(NSString *)userId {
+//    NSInteger index = [self.userIdMarr indexOfObject:userId];
+//    [[self.sceneListMarr valueForKey:@"user"][index] setValue:@"0" forKey:@"isFollow"];
+//    [self thn_networkCancelFollowUserData:userId];
+//}
 
 #pragma mark - 设置Nav
 - (void)thn_setNavigationViewUI {

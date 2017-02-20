@@ -9,6 +9,7 @@
 #import "THNViewController.h"
 #import "THNDomainInfoHeaderImage.h"
 #import "DominInfoData.h"
+#import "THNDomainInfoFooter.h"
 
 @interface THNDomainInfoViewController : THNViewController <
     UITableViewDelegate,
@@ -20,5 +21,6 @@
 @property (nonatomic, strong) DominInfoData *infoModel;
 @property (nonatomic, strong) NSString *infoId;
 @property (nonatomic, strong) UITableView *domainInfoTable;
+@property (nonatomic, strong) THNDomainInfoFooter *footerView;
 
 @end

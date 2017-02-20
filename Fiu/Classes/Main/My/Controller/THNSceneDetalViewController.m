@@ -164,14 +164,7 @@ static NSString *const URLDeleteScene = @"/scene_sight/delete";
         THNUserInfoTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:userInfoCellId];
         cell = [[THNUserInfoTableViewCell alloc] initWithStyle:(UITableViewCellStyleDefault) reuseIdentifier:userInfoCellId];
         [cell thn_setHomeSceneUserInfoData:self.model userId:[self getLoginUserID] isLogin:[self isUserLogin]];
-        cell.follow.tag = indexPath.row;
-        cell.beginFollowTheUserBlock = ^(NSString *userId) {
-            [weakSelf beginFollowUser:userId];
-        };
         cell.nav = self.navigationController;
-        cell.cancelFollowTheUserBlock = ^(NSString *userId) {
-            [weakSelf cancelFollowUser:userId];
-        };
         return cell;
         
     } else if (indexPath.row == 1) {
@@ -347,49 +340,49 @@ static NSString *const URLDeleteScene = @"/scene_sight/delete";
     }];
 }
 
-//  关注用户
-- (void)beginFollowUser:(NSString *)userId {
-    [self.model.user setValue:@"1" forKey:@"isFollow"];
-    [self thn_networkBeginFollowUserData:userId];
-}
-
-//  关注
-- (void)thn_networkBeginFollowUserData:(NSString *)idx {
-    UserInfoEntity *entity = [UserInfoEntity defaultUserInfoEntity];
-    if (entity.isLogin == NO) {
-        THNLoginRegisterViewController *vc = [[THNLoginRegisterViewController alloc] init];
-        [self presentViewController:vc animated:YES completion:nil];
-    }else{
-        self.followRequest = [FBAPI postWithUrlString:URLFollowUser requestDictionary:@{@"follow_id":idx} delegate:self];
-        [self.followRequest startRequestSuccess:^(FBRequest *request, id result) {
-            if ([[result valueForKey:@"success"] isEqualToNumber:@1]) {
-                
-            }
-            
-        } failure:^(FBRequest *request, NSError *error) {
-            [SVProgressHUD showErrorWithStatus:[error localizedDescription]];
-        }];
-    }
-}
-
-//  取消关注用户
-- (void)cancelFollowUser:(NSString *)userId {
-    [self.model.user setValue:@"0" forKey:@"isFollow"];
-    [self thn_networkCancelFollowUserData:userId];
-}
-
-//  取消关注
-- (void)thn_networkCancelFollowUserData:(NSString *)idx {
-    self.cancelFollowRequest = [FBAPI postWithUrlString:URLCancelFollowUser requestDictionary:@{@"follow_id":idx} delegate:self];
-    [self.cancelFollowRequest startRequestSuccess:^(FBRequest *request, id result) {
-        if ([[result valueForKey:@"success"] isEqualToNumber:@1]) {
-            
-        }
-        
-    } failure:^(FBRequest *request, NSError *error) {
-        [SVProgressHUD showErrorWithStatus:[error localizedDescription]];
-    }];
-}
+////  关注用户
+//- (void)beginFollowUser:(NSString *)userId {
+//    [self.model.user setValue:@"1" forKey:@"isFollow"];
+//    [self thn_networkBeginFollowUserData:userId];
+//}
+//
+////  关注
+//- (void)thn_networkBeginFollowUserData:(NSString *)idx {
+//    UserInfoEntity *entity = [UserInfoEntity defaultUserInfoEntity];
+//    if (entity.isLogin == NO) {
+//        THNLoginRegisterViewController *vc = [[THNLoginRegisterViewController alloc] init];
+//        [self presentViewController:vc animated:YES completion:nil];
+//    }else{
+//        self.followRequest = [FBAPI postWithUrlString:URLFollowUser requestDictionary:@{@"follow_id":idx} delegate:self];
+//        [self.followRequest startRequestSuccess:^(FBRequest *request, id result) {
+//            if ([[result valueForKey:@"success"] isEqualToNumber:@1]) {
+//                
+//            }
+//            
+//        } failure:^(FBRequest *request, NSError *error) {
+//            [SVProgressHUD showErrorWithStatus:[error localizedDescription]];
+//        }];
+//    }
+//}
+//
+////  取消关注用户
+//- (void)cancelFollowUser:(NSString *)userId {
+//    [self.model.user setValue:@"0" forKey:@"isFollow"];
+//    [self thn_networkCancelFollowUserData:userId];
+//}
+//
+////  取消关注
+//- (void)thn_networkCancelFollowUserData:(NSString *)idx {
+//    self.cancelFollowRequest = [FBAPI postWithUrlString:URLCancelFollowUser requestDictionary:@{@"follow_id":idx} delegate:self];
+//    [self.cancelFollowRequest startRequestSuccess:^(FBRequest *request, id result) {
+//        if ([[result valueForKey:@"success"] isEqualToNumber:@1]) {
+//            
+//        }
+//        
+//    } failure:^(FBRequest *request, NSError *error) {
+//        [SVProgressHUD showErrorWithStatus:[error localizedDescription]];
+//    }];
+//}
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
     if (indexPath.row == 0) {

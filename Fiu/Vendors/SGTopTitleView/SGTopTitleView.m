@@ -86,6 +86,7 @@ static CGFloat const indicatorHeight = 3;
         _staticTitleLabel.text = self.staticTitleArr[j];
         _staticTitleLabel.textAlignment = NSTextAlignmentCenter;
         _staticTitleLabel.tag = j;
+        _staticTitleLabel.font = [UIFont systemFontOfSize:14];
         
         // 设置高亮文字颜色
         _staticTitleLabel.highlightedTextColor = [UIColor colorWithHexString:@"#BE8914"];
