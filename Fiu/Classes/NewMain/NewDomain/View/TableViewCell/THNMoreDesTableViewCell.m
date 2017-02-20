@@ -37,7 +37,8 @@
         [_moreButton setImage:[UIImage imageNamed:@"icon_more_open"] forState:(UIControlStateNormal)];
         [_moreButton setTitle:@"点击收起" forState:(UIControlStateSelected)];
         [_moreButton setImage:[UIImage imageNamed:@"icon_more_close"] forState:(UIControlStateSelected)];
-        [_moreButton setImageEdgeInsets:(UIEdgeInsetsMake(0, 85, 0, 0))];
+        [_moreButton setImageEdgeInsets:(UIEdgeInsetsMake(0, 80, 0, 0))];
+        [_moreButton setTitleEdgeInsets:(UIEdgeInsetsMake(0, -10, 0, 0))];
         _moreButton.selected = NO;
         _moreButton.userInteractionEnabled = NO;
     }

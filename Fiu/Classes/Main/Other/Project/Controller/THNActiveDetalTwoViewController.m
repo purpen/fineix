@@ -358,13 +358,6 @@ static NSString *const URLCancelFollowUser = @"/follow/ajax_cancel_follow";
                 _top = [[THNUserInfoTableViewCell alloc] init];
                 _top.vc = self;
                 _top.nav = self.navigationController;
-                _top.beginFollowTheUserBlock = ^(NSString *userId) {
-                    [weakSelf beginFollowUser:userId];
-                };
-                
-                _top.cancelFollowTheUserBlock = ^(NSString *userId) {
-                    [weakSelf cancelFollowUser:userId];
-                };
                 
                 THNResoltCollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:resultCellId forIndexPath:indexPath];
                 
@@ -461,68 +454,68 @@ static NSString *const URLCancelFollowUser = @"/follow/ajax_cancel_follow";
     }];
 }
 
-//  关注用户
-- (void)beginFollowUser:(NSString *)userId {
-    int i;
-    for (i = 0; i < self.resultsAry.count; i ++) {
-        NSDictionary *dict = self.resultsAry[i];
-        NSArray *ary = dict[@"data"];
-        for (int j = 0; j < ary.count; j ++) {
-            HomeSceneListRow *row = ary[j];
-            if ([row.user._id isEqualToString:userId]) {
-                [[row valueForKey:@"user"] setValue:@"1" forKey:@"is_follow"];
-                [self thn_networkBeginFollowUserData:userId];
-                
-                [self.contentView reloadData];
-            }
-        }
-    }
-}
+////  关注用户
+//- (void)beginFollowUser:(NSString *)userId {
+//    int i;
+//    for (i = 0; i < self.resultsAry.count; i ++) {
+//        NSDictionary *dict = self.resultsAry[i];
+//        NSArray *ary = dict[@"data"];
+//        for (int j = 0; j < ary.count; j ++) {
+//            HomeSceneListRow *row = ary[j];
+//            if ([row.user._id isEqualToString:userId]) {
+//                [[row valueForKey:@"user"] setValue:@"1" forKey:@"is_follow"];
+//                [self thn_networkBeginFollowUserData:userId];
+//                
+//                [self.contentView reloadData];
+//            }
+//        }
+//    }
+//}
 
-//  取消关注用户
-- (void)cancelFollowUser:(NSString *)userId {
-    int i;
-    for (i = 0; i < self.resultsAry.count; i ++) {
-        NSDictionary *dict = self.resultsAry[i];
-        NSArray *ary = dict[@"data"];
-        for (int j = 0; j < ary.count; j ++) {
-            HomeSceneListRow *row = ary[j];
-            if ([row.user._id isEqualToString:userId]) {
-                [[row valueForKey:@"user"] setValue:@"0" forKey:@"is_follow"];
-                [self thn_networkCancelFollowUserData:userId];
-                
-                [self.contentView reloadData];
-                
-            }
-        }
-    }
-}
-
-//  关注
-- (void)thn_networkBeginFollowUserData:(NSString *)idx {
-    self.followRequest = [FBAPI postWithUrlString:URLFollowUser requestDictionary:@{@"follow_id":idx} delegate:self];
-    [self.followRequest startRequestSuccess:^(FBRequest *request, id result) {
-        if ([[result valueForKey:@"success"] isEqualToNumber:@1]) {
-            
-        }
-        
-    } failure:^(FBRequest *request, NSError *error) {
-        [SVProgressHUD showErrorWithStatus:[error localizedDescription]];
-    }];
-}
-
-//  取消关注
-- (void)thn_networkCancelFollowUserData:(NSString *)idx {
-    self.cancelFollowRequest = [FBAPI postWithUrlString:URLCancelFollowUser requestDictionary:@{@"follow_id":idx} delegate:self];
-    [self.cancelFollowRequest startRequestSuccess:^(FBRequest *request, id result) {
-        if ([[result valueForKey:@"success"] isEqualToNumber:@1]) {
-            
-        }
-        
-    } failure:^(FBRequest *request, NSError *error) {
-        [SVProgressHUD showErrorWithStatus:[error localizedDescription]];
-    }];
-}
+////  取消关注用户
+//- (void)cancelFollowUser:(NSString *)userId {
+//    int i;
+//    for (i = 0; i < self.resultsAry.count; i ++) {
+//        NSDictionary *dict = self.resultsAry[i];
+//        NSArray *ary = dict[@"data"];
+//        for (int j = 0; j < ary.count; j ++) {
+//            HomeSceneListRow *row = ary[j];
+//            if ([row.user._id isEqualToString:userId]) {
+//                [[row valueForKey:@"user"] setValue:@"0" forKey:@"is_follow"];
+//                [self thn_networkCancelFollowUserData:userId];
+//                
+//                [self.contentView reloadData];
+//                
+//            }
+//        }
+//    }
+//}
+//
+////  关注
+//- (void)thn_networkBeginFollowUserData:(NSString *)idx {
+//    self.followRequest = [FBAPI postWithUrlString:URLFollowUser requestDictionary:@{@"follow_id":idx} delegate:self];
+//    [self.followRequest startRequestSuccess:^(FBRequest *request, id result) {
+//        if ([[result valueForKey:@"success"] isEqualToNumber:@1]) {
+//            
+//        }
+//        
+//    } failure:^(FBRequest *request, NSError *error) {
+//        [SVProgressHUD showErrorWithStatus:[error localizedDescription]];
+//    }];
+//}
+//
+////  取消关注
+//- (void)thn_networkCancelFollowUserData:(NSString *)idx {
+//    self.cancelFollowRequest = [FBAPI postWithUrlString:URLCancelFollowUser requestDictionary:@{@"follow_id":idx} delegate:self];
+//    [self.cancelFollowRequest startRequestSuccess:^(FBRequest *request, id result) {
+//        if ([[result valueForKey:@"success"] isEqualToNumber:@1]) {
+//            
+//        }
+//        
+//    } failure:^(FBRequest *request, NSError *error) {
+//        [SVProgressHUD showErrorWithStatus:[error localizedDescription]];
+//    }];
+//}
 
 
 -(void)attend{

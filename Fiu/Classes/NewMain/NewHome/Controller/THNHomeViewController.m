@@ -18,6 +18,12 @@
 #import "FBGoodsInfoViewController.h"
 #import "THNSceneDetalViewController.h"
 #import "HomePageViewController.h"
+
+#import "THNDomainTableViewCell.h"
+#import "THNDomainMenuTableViewCell.h"
+#import "THNNewGoodsTableViewCell.h"
+#import "THNGoodsSubjectTableViewCell.h"
+
 #import "HomeThemeTableViewCell.h"
 #import "THNUserInfoTableViewCell.h"
 #import "THNSceneImageTableViewCell.h"
@@ -26,7 +32,6 @@
 #import "THNSceneCommentTableViewCell.h"
 #import "THNLookAllCommentTableViewCell.h"
 #import "QRCodeScanViewController.h"
-#import "THNDomainInfoViewController.h"
 
 #import "HomeSceneListRow.h"
 #import "CommentRow.h"
@@ -34,6 +39,11 @@
 #import "FBSubjectModelRow.h"
 #import "HotUserListUser.h"
 #import "THNArticleModel.h"
+#import "DomainCategoryRow.h"
+#import "HelpUserRow.h"
+#import "NiceDomainRow.h"
+#import "HomeGoodsRow.h"
+#import "THNMallSubjectModelRow.h"
 
 #import "MJRefresh.h"
 #import "FBRefresh.h"
@@ -42,27 +52,35 @@
 #import "LocationManager.h"
 #import "THNSelecteCityViewController.h"
 
-static NSString *const URLBannerSlide = @"/gateway/slide";
-static NSString *const URLSceneList = @"/scene_sight/";
-static NSString *const URLSubject = @"/scene_subject/index_subject_stick";
-static NSString *const URLSubjectView = @"/scene_subject/view";
-static NSString *const URLLikeScene = @"/favorite/ajax_love";
-static NSString *const URLCancelLike = @"/favorite/ajax_cancel_love";
-static NSString *const URLFollowUser = @"/follow/ajax_follow";
-static NSString *const URLCancelFollowUser = @"/follow/ajax_cancel_follow";
-static NSString *const URLFavorite = @"/favorite/ajax_favorite";
-static NSString *const URLCancelFavorite = @"/favorite/ajax_cancel_favorite";
-static NSString *const URLHotUserList = @"/user/find_user";
-static NSString *const URLDeleteScene = @"/scene_sight/delete";
+static const CGFloat goodsCellHeight = ((SCREEN_WIDTH - 45)/2)*1.21;
 
-static NSString *const themeCellId = @"ThemeCellId";
-static NSString *const userInfoCellId = @"UserInfoCellId";
-static NSString *const sceneImgCellId = @"SceneImgCellId";
-static NSString *const dataInfoCellId = @"DataInfoCellId";
-static NSString *const sceneInfoCellId = @"SceneInfoCellId";
-static NSString *const commentsCellId = @"CommentsCellId";
-static NSString *const twoCommentsCellId = @"TwoCommentsCellId";
-static NSString *const allCommentsCellId = @"AllCommentsCellId";
+static NSString *const URLBannerSlide       = @"/gateway/slide";
+static NSString *const URLCategory          = @"/category/getlist";
+static NSString *const URLSceneList         = @"/scene_sight/";
+static NSString *const URLSubject           = @"/scene_subject/getlist";
+static NSString *const URLSubjectView       = @"/scene_subject/view";
+static NSString *const URLLikeScene         = @"/favorite/ajax_love";
+static NSString *const URLCancelLike        = @"/favorite/ajax_cancel_love";
+static NSString *const URLFollowUser        = @"/follow/ajax_follow";
+static NSString *const URLCancelFollowUser  = @"/follow/ajax_cancel_follow";
+static NSString *const URLFavorite          = @"/favorite/ajax_favorite";
+static NSString *const URLCancelFavorite    = @"/favorite/ajax_cancel_favorite";
+static NSString *const URLHotUserList       = @"/user/find_user";
+static NSString *const URLDeleteScene       = @"/scene_sight/delete";
+static NSString *const URLGoodsList         = @"/product/getlist";
+
+static NSString *const domainCellId         = @"THNDomainTableViewCellId";
+static NSString *const domainMenuCellId     = @"THNDomainMenuTableViewCellId";
+static NSString *const newGoodsCellId       = @"newGoodsCellId";
+static NSString *const goodsSubjectCellId   = @"THNGoodsSubjectTableViewCellId";
+
+static NSString *const userInfoCellId       = @"UserInfoCellId";
+static NSString *const sceneImgCellId       = @"SceneImgCellId";
+static NSString *const dataInfoCellId       = @"DataInfoCellId";
+static NSString *const sceneInfoCellId      = @"SceneInfoCellId";
+static NSString *const commentsCellId       = @"CommentsCellId";
+static NSString *const twoCommentsCellId    = @"TwoCommentsCellId";
+static NSString *const allCommentsCellId    = @"AllCommentsCellId";
 
 //  归档地址
 static NSString *const homeDataPath = [NSHomeDirectory() stringByAppendingPathComponent:@"homeData.archiver"];
@@ -79,6 +97,7 @@ static NSString *const homeDataPath = [NSHomeDirectory() stringByAppendingPathCo
     NSInteger _subjectType;
     BOOL _rollDown;                  //  是否下拉
     CGFloat _lastContentOffset;      //  滚动的偏移量
+    BOOL _isNewUser;                 //  是否是新用户
 }
 
 /**  */
@@ -99,6 +118,8 @@ static NSString *const homeDataPath = [NSHomeDirectory() stringByAppendingPathCo
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    _isNewUser = YES;
     
     [self setHotUserListData];
     [self thn_registerNSNotification];
@@ -193,14 +214,20 @@ static NSString *const homeDataPath = [NSHomeDirectory() stringByAppendingPathCo
 
 #pragma mark - 网络请求
 - (void)thn_netWorkGroup {
-    
-    [self thn_networkRollImageData];
-    [self thn_networkSubjectData];
-    [self thn_networkHotUserListData];
-    [self thn_networkSceneListData];
+    dispatch_async(dispatch_get_global_queue(0, 0), ^{
+        [self thn_networkRollImageData];
+        [self thn_networkNewUserData];
+        [self thn_networkDomainCategoryData];
+        [self thn_networkNiceDomainData];
+        [self thn_networkGoodsSubjectListData];
+        [self thn_networkNewGoodsData];
+        [self thn_networkSubjectData];
+        [self thn_networkHotUserListData];
+        [self thn_networkSceneListData];
+    });
 }
 
-//  轮播图
+#pragma mark 轮播图
 - (void)thn_networkRollImageData {
     NSDictionary *requestDic = @{@"name":@"app_fiu_sight_index_slide",
                                  @"size":@"5",
@@ -219,7 +246,134 @@ static NSString *const homeDataPath = [NSHomeDirectory() stringByAppendingPathCo
     }];
 }
 
-//  点赞
+#pragma mark 新人专区
+- (void)thn_networkNewUserData {
+    self.userHelpRequest = [FBAPI getWithUrlString:URLBannerSlide requestDictionary:@{@"name":@"app_fiu_index_new_zone"} delegate:self];
+    [self.userHelpRequest startRequestSuccess:^(FBRequest *request, id result) {
+        NSArray *dataArr = [[result valueForKey:@"data"] valueForKey:@"rows"];
+        for (NSDictionary *dict in dataArr) {
+            HelpUserRow *model = [[HelpUserRow alloc] initWithDictionary:dict];
+            [self.userHelpMarr addObject:model];
+        }
+        
+        if (self.sceneListMarr.count) {
+            NSIndexPath *indexPath = [NSIndexPath indexPathForRow:0 inSection:0];
+            [self.homeTable reloadRowsAtIndexPaths:@[indexPath] withRowAnimation:(UITableViewRowAnimationFade)];
+        }
+
+    } failure:^(FBRequest *request, NSError *error) {
+        [SVProgressHUD showErrorWithStatus:[error localizedDescription]];
+    }];
+}
+
+#pragma mark 地盘分类
+- (void)thn_networkDomainCategoryData {
+    self.categoryRequest = [FBAPI getWithUrlString:URLCategory requestDictionary:@{@"domain":@"12", @"show_sub":@"1"} delegate:self];
+    [self.categoryRequest startRequestSuccess:^(FBRequest *request, id result) {
+        NSArray *dataArr = [[result valueForKey:@"data"] valueForKey:@"rows"];
+        for (NSDictionary *dict in dataArr) {
+            DomainCategoryRow *model = [[DomainCategoryRow alloc] initWithDictionary:dict];
+            [self.domainCategoryMarr addObject:model];
+        }
+        
+        if (self.sceneListMarr.count) {
+            NSIndexPath *indexPath = [NSIndexPath indexPathForRow:1 inSection:0];
+            [self.homeTable reloadRowsAtIndexPaths:@[indexPath] withRowAnimation:(UITableViewRowAnimationFade)];
+        }
+        
+    } failure:^(FBRequest *request, NSError *error) {
+        [SVProgressHUD showErrorWithStatus:[error localizedDescription]];
+    }];
+}
+
+#pragma mark 推荐地盘
+- (void)thn_networkNiceDomainData {
+    self.niceDomainRequest = [FBAPI getWithUrlString:URLBannerSlide requestDictionary:@{@"name":@"app_fiu_index_scene_stick"} delegate:self];
+    [self.niceDomainRequest startRequestSuccess:^(FBRequest *request, id result) {
+        NSArray *dataArr = [[result valueForKey:@"data"] valueForKey:@"rows"];
+        for (NSDictionary *dict in dataArr) {
+            NiceDomainRow *model = [[NiceDomainRow alloc] initWithDictionary:dict];
+            [self.niceDomainMarr addObject:model];
+        }
+        
+        if (self.sceneListMarr.count) {
+            NSIndexPath *indexPath = [NSIndexPath indexPathForRow:2 inSection:0];
+            [self.homeTable reloadRowsAtIndexPaths:@[indexPath] withRowAnimation:(UITableViewRowAnimationFade)];
+        }
+        
+    } failure:^(FBRequest *request, NSError *error) {
+        [SVProgressHUD showErrorWithStatus:[error localizedDescription]];
+    }];
+}
+
+#pragma mark 最新商品
+- (void)thn_networkNewGoodsData {
+    self.goodsRequest = [FBAPI getWithUrlString:URLGoodsList requestDictionary:@{@"fine":@"1", @"size":@"4"} delegate:self];
+    [self.goodsRequest startRequestSuccess:^(FBRequest *request, id result) {
+        NSArray *dataArr = [[result valueForKey:@"data"] valueForKey:@"rows"];
+        for (NSDictionary *dict in dataArr) {
+            HomeGoodsRow *model = [[HomeGoodsRow alloc] initWithDictionary:dict];
+            [self.goodsMarr addObject:model];
+        }
+        
+        if (self.sceneListMarr.count) {
+            NSIndexPath *indexPath = [NSIndexPath indexPathForRow:0 inSection:1];
+            [self.homeTable reloadRowsAtIndexPaths:@[indexPath] withRowAnimation:(UITableViewRowAnimationFade)];
+        }
+        
+    } failure:^(FBRequest *request, NSError *error) {
+        [SVProgressHUD showErrorWithStatus:[error localizedDescription]];
+    }];
+}
+
+#pragma mark 商品专辑
+- (void)thn_networkGoodsSubjectListData {
+    NSDictionary *requestDic = @{@"page":@"1",
+                                 @"size":@"1",
+                                 @"sort":@"2",
+                                 @"type":@"5",
+                                 @"fine":@"1",
+                                 @"use_cache":@"1"};
+    self.goodsSubjectRequest = [FBAPI getWithUrlString:URLSubject requestDictionary:requestDic delegate:self];
+    [self.goodsSubjectRequest startRequestSuccess:^(FBRequest *request, id result) {
+        NSArray *goodsArr = [[result valueForKey:@"data"] valueForKey:@"rows"];
+        for (NSDictionary * goodsDic in goodsArr) {
+            THNMallSubjectModelRow *goodsModel = [[THNMallSubjectModelRow alloc] initWithDictionary:goodsDic];
+            [self.goodsSubjectMarr addObject:goodsModel];
+        }
+        
+        if (self.sceneListMarr.count) {
+            NSIndexPath *indexPath = [NSIndexPath indexPathForRow:0 inSection:2];
+            [self.homeTable reloadRowsAtIndexPaths:@[indexPath] withRowAnimation:(UITableViewRowAnimationBottom)];
+        }
+        
+    } failure:^(FBRequest *request, NSError *error) {
+        [SVProgressHUD showErrorWithStatus:[error localizedDescription]];
+    }];
+}
+
+#pragma mark 专辑推荐
+- (void)thn_networkSubjectData {
+    self.subjectRequest = [FBAPI getWithUrlString:URLSubject requestDictionary:@{@"type":@"0", @"fine":@"1", @"sort":@"2"} delegate:self];
+    [self.subjectRequest startRequestSuccess:^(FBRequest *request, id result) {
+        NSLog(@"======= 专辑：%@", [NSString jsonStringWithObject:result]);
+        NSArray *subArr = [[result valueForKey:@"data"] valueForKey:@"rows"];
+        for (NSDictionary *subDic in subArr) {
+            FBSubjectModelRow *subModel = [[FBSubjectModelRow alloc] initWithDictionary:subDic];
+            [self.subjectMarr addObject:subModel];
+        }
+
+//        if (self.sceneListMarr.count) {
+//            NSIndexSet *indexSet = [[NSIndexSet alloc] initWithIndex:0];
+//            [self.homeTable reloadSections:indexSet withRowAnimation:UITableViewRowAnimationAutomatic];
+//        }
+        
+    } failure:^(FBRequest *request, NSError *error) {
+        [SVProgressHUD showErrorWithStatus:[error localizedDescription]];
+    }];
+}
+
+#pragma mark 点赞
 - (void)thn_networkLikeSceneData:(NSString *)idx {
     self.likeSceneRequest = [FBAPI postWithUrlString:URLLikeScene requestDictionary:@{@"id":idx, @"type":@"12"} delegate:self];
     [self.likeSceneRequest startRequestSuccess:^(FBRequest *request, id result) {
@@ -235,7 +389,7 @@ static NSString *const homeDataPath = [NSHomeDirectory() stringByAppendingPathCo
     }];
 }
 
-//  取消点赞
+#pragma mark 取消点赞
 - (void)thn_networkCancelLikeData:(NSString *)idx {
     self.cancelLikeRequest = [FBAPI postWithUrlString:URLCancelLike requestDictionary:@{@"id":idx, @"type":@"12"} delegate:self];
     [self.cancelLikeRequest startRequestSuccess:^(FBRequest *request, id result) {
@@ -251,7 +405,7 @@ static NSString *const homeDataPath = [NSHomeDirectory() stringByAppendingPathCo
     }];
 }
 
-//  关注
+#pragma mark 关注
 - (void)thn_networkBeginFollowUserData:(NSString *)idx {
     self.followRequest = [FBAPI postWithUrlString:URLFollowUser requestDictionary:@{@"follow_id":idx} delegate:self];
     [self.followRequest startRequestSuccess:^(FBRequest *request, id result) {
@@ -264,7 +418,7 @@ static NSString *const homeDataPath = [NSHomeDirectory() stringByAppendingPathCo
     }];
 }
 
-//  取消关注
+#pragma mark 取消关注
 - (void)thn_networkCancelFollowUserData:(NSString *)idx {
     self.cancelFollowRequest = [FBAPI postWithUrlString:URLCancelFollowUser requestDictionary:@{@"follow_id":idx} delegate:self];
     [self.cancelFollowRequest startRequestSuccess:^(FBRequest *request, id result) {
@@ -277,7 +431,7 @@ static NSString *const homeDataPath = [NSHomeDirectory() stringByAppendingPathCo
     }];
 }
 
-//  收藏
+#pragma mark 收藏
 - (void)thn_networkFavoriteData:(NSString *)idx {
     self.favoriteRequest = [FBAPI postWithUrlString:URLFavorite requestDictionary:@{@"id":idx, @"type":@"12"} delegate:self];
     [self.favoriteRequest startRequestSuccess:^(FBRequest *request, id result) {
@@ -292,7 +446,7 @@ static NSString *const homeDataPath = [NSHomeDirectory() stringByAppendingPathCo
     }];
 }
 
-//  取消收藏
+#pragma mark 取消收藏
 - (void)thn_networkCancelFavoriteData:(NSString *)idx {
     self.cancelFavoriteRequest = [FBAPI postWithUrlString:URLCancelFavorite requestDictionary:@{@"id":idx, @"type":@"12"} delegate:self];
     [self.cancelFavoriteRequest startRequestSuccess:^(FBRequest *request, id result) {
@@ -307,32 +461,7 @@ static NSString *const homeDataPath = [NSHomeDirectory() stringByAppendingPathCo
     }];
 }
 
-//  精选主题列表
-- (void)thn_networkSubjectData {
-    NSDictionary *requestDic = @{@"page":@"1",
-                                 @"size":@"4",
-                                 @"fine":@"1",
-                                 @"sort":@"2",
-                                 @"use_cache":@"1"};
-    self.subjectRequest = [FBAPI getWithUrlString:URLSubject requestDictionary:requestDic delegate:self];
-    [self.subjectRequest startRequestSuccess:^(FBRequest *request, id result) {
-        NSArray *subArr = [[result valueForKey:@"data"] valueForKey:@"rows"];
-        for (NSDictionary *subDic in subArr) {
-            FBSubjectModelRow *subModel = [[FBSubjectModelRow alloc] initWithDictionary:subDic];
-            [self.subjectMarr addObject:subModel];
-        }
-    
-        if (self.sceneListMarr.count) {
-            NSIndexSet *indexSet = [[NSIndexSet alloc] initWithIndex:0];
-            [self.homeTable reloadSections:indexSet withRowAnimation:UITableViewRowAnimationAutomatic];
-        }
-    
-    } failure:^(FBRequest *request, NSError *error) {
-        [SVProgressHUD showErrorWithStatus:[error localizedDescription]];
-    }];
-}
-
-//  专题详情
+#pragma mark 专题详情
 - (void)thn_networkSubjectInfoData:(NSString *)idx {
     self.subjectInfoRequest = [FBAPI getWithUrlString:URLSubjectView requestDictionary:@{@"id":idx} delegate:self];
     [self.subjectInfoRequest startRequestSuccess:^(FBRequest *request, id result) {
@@ -373,7 +502,7 @@ static NSString *const homeDataPath = [NSHomeDirectory() stringByAppendingPathCo
     }];
 }
 
-//  热门用户推荐
+#pragma mark 热门用户推荐
 - (void)thn_networkHotUserListData {
     NSDictionary *requestDic = @{@"page":@"1",
                                  @"edit_stick":@"1",
@@ -398,7 +527,7 @@ static NSString *const homeDataPath = [NSHomeDirectory() stringByAppendingPathCo
     }];
 }
 
-//  删除情境
+#pragma mark 删除情境
 - (void)thn_networkDeleteScene:(NSString *)idx {
     self.deleteRequest = [FBAPI postWithUrlString:URLDeleteScene requestDictionary:@{@"id":idx} delegate:self];
     [self.deleteRequest startRequestSuccess:^(FBRequest *request, id result) {
@@ -407,8 +536,6 @@ static NSString *const homeDataPath = [NSHomeDirectory() stringByAppendingPathCo
             [self.sceneListMarr removeObjectAtIndex:index];
             [self.sceneIdMarr removeObjectAtIndex:index];
             [self.userIdMarr removeObjectAtIndex:index];
-            [self.commentsCountMarr removeObjectAtIndex:index];
-            [                                       self.commentsMarr removeObjectAtIndex:index];
             [self.homeTable deleteSections:[NSIndexSet indexSetWithIndex:index + 1] withRowAnimation:(UITableViewRowAnimationFade)];
         }
         
@@ -417,11 +544,11 @@ static NSString *const homeDataPath = [NSHomeDirectory() stringByAppendingPathCo
     }];
 }
 
-//  情境列表
+#pragma mark 情境列表
 - (void)thn_networkSceneListData {
     [SVProgressHUD show];
-    NSDictionary *requestDic = @{@"page":@(self.currentpageNum + 1),
-                                 @"size":@"15",
+    NSDictionary *requestDic = @{@"page":@"1",
+                                 @"size":@"10",
                                  @"sort":@"2",
                                  @"fine":@"1",
                                  @"use_cache":@"1"};
@@ -437,14 +564,13 @@ static NSString *const homeDataPath = [NSHomeDirectory() stringByAppendingPathCo
             [self.sceneListMarr addObject:homeSceneModel];
             [self.sceneIdMarr addObject:[NSString stringWithFormat:@"%zi", homeSceneModel.idField]];
             [self.userIdMarr addObject:[NSString stringWithFormat:@"%zi", homeSceneModel.userId]];
-            [self.commentsCountMarr addObject:[NSString stringWithFormat:@"%zi", homeSceneModel.commentCount]];
         }
-        [self.commentsMarr addObjectsFromArray:[sceneArr valueForKey:@"comments"]];
-        [self.homeTable reloadData];
         
-        self.currentpageNum = [[[result valueForKey:@"data"] valueForKey:@"current_page"] integerValue];
-        self.totalPageNum = [[[result valueForKey:@"data"] valueForKey:@"total_page"] integerValue];
-        [self requestIsLastData:self.homeTable currentPage:self.currentpageNum withTotalPage:self.totalPageNum];
+        [self.homeTable reloadData];
+        if ([self.homeTable.mj_header isRefreshing]) {
+            [self.homeTable.mj_header endRefreshing];
+        }
+        
         [SVProgressHUD dismiss];
         
     } failure:^(FBRequest *request, NSError *error) {
@@ -456,73 +582,37 @@ static NSString *const homeDataPath = [NSHomeDirectory() stringByAppendingPathCo
     }];
 }
 
-- (void)requestIsLastData:(UITableView *)table currentPage:(NSInteger )current withTotalPage:(NSInteger)total {
-    if (total == 0) {
-        table.mj_footer.state = MJRefreshStateNoMoreData;
-        table.mj_footer.hidden = true;
-    }
-    
-    BOOL isLastPage = (current == total);
-    
-    if (!isLastPage) {
-        if (table.mj_footer.state == MJRefreshStateNoMoreData) {
-            [table.mj_footer resetNoMoreData];
-        }
-    }
-    if (current == total == 1) {
-        table.mj_footer.state = MJRefreshStateNoMoreData;
-        table.mj_footer.hidden = true;
-    }
-    if ([table.mj_header isRefreshing]) {
-        CGPoint tableY = table.contentOffset;
-        tableY.y = 0;
-        if (table.bounds.origin.y > 0) {
-            [UIView animateWithDuration:.3 animations:^{
-                table.contentOffset = tableY;
-            }];
-        }
-        [table.mj_header endRefreshing];
-    }
-    if ([table.mj_footer isRefreshing]) {
-        if (isLastPage) {
-            [table.mj_footer endRefreshingWithNoMoreData];
-        } else  {
-            [table.mj_footer endRefreshing];
-        }
-    }
-}
-
-#pragma mark - 上拉加载 & 下拉刷新
+#pragma mark - 下拉刷新
 - (void)addMJRefresh:(UITableView *)table {
     FBRefresh * header = [FBRefresh headerWithRefreshingBlock:^{
         [self loadNewData];
     }];
     table.mj_header = header;
-    
-    table.mj_footer = [MJRefreshAutoNormalFooter footerWithRefreshingBlock:^{
-        if (self.currentpageNum < self.totalPageNum) {
-            [self thn_networkSceneListData];
-        } else {
-            [table.mj_footer endRefreshing];
-        }
-    }];
 }
 
 #pragma mark 刷新移除旧数据
 - (void)loadNewData {
-    self.currentpageNum = 0;
     [self.rollList removeAllObjects];
     [self.sceneListMarr removeAllObjects];
     [self.sceneIdMarr removeAllObjects];
     [self.userIdMarr removeAllObjects];
-    [self.commentsMarr removeAllObjects];
     [self.subjectMarr removeAllObjects];
-    [self.commentsCountMarr removeAllObjects];
     [self.hotUserMarr removeAllObjects];
+    [self.domainCategoryMarr removeAllObjects];
+    [self.userHelpMarr removeAllObjects];
+    [self.niceDomainMarr removeAllObjects];
+    [self.goodsMarr removeAllObjects];
+    [self.goodsSubjectMarr removeAllObjects];
+
     [self thn_networkSceneListData];
     [self thn_networkRollImageData];
     [self thn_networkSubjectData];
     [self thn_networkHotUserListData];
+    [self thn_networkNewUserData];
+    [self thn_networkDomainCategoryData];
+    [self thn_networkNiceDomainData];
+    [self thn_networkNewGoodsData];
+    [self thn_networkGoodsSubjectListData];
 }
 
 #pragma mark - 设置视图UI
@@ -592,7 +682,7 @@ static NSString *const homeDataPath = [NSHomeDirectory() stringByAppendingPathCo
         _homeTable.dataSource = self;
         _homeTable.tableHeaderView = self.homerollView;
         _homeTable.showsVerticalScrollIndicator = NO;
-        _homeTable.backgroundColor = [UIColor colorWithHexString:WHITE_COLOR];
+        _homeTable.backgroundColor = [UIColor colorWithHexString:@"#F8F8F8"];
         _homeTable.separatorStyle = UITableViewCellSeparatorStyleNone;
         [self addMJRefresh:_homeTable];
     }
@@ -601,14 +691,18 @@ static NSString *const homeDataPath = [NSHomeDirectory() stringByAppendingPathCo
 
 #pragma mark tableViewDelegate & dataSource
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-    return self.sceneListMarr.count + 1;
+    return self.sceneListMarr.count + 3;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     if (section == 0) {
+        return 3;
+    } else if (section == 1) {
+        return 1;
+    } else if (section == 2) {
         return 1;
     } else {
-        return 7;
+        return 4;
     }
     return 0;
 }
@@ -618,58 +712,109 @@ static NSString *const homeDataPath = [NSHomeDirectory() stringByAppendingPathCo
     __weak __typeof(self)weakSelf = self;
     
     if (indexPath.section == 0) {
-        HomeThemeTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:themeCellId];
-        if (!cell) {
-            cell = [[HomeThemeTableViewCell alloc] initWithStyle:(UITableViewCellStyleDefault) reuseIdentifier:themeCellId];
+        if (indexPath.row == 0) {
+            if (_isNewUser) {
+                THNDomainTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:domainCellId];
+                cell = [[THNDomainTableViewCell alloc] initWithStyle:(UITableViewCellStyleDefault) reuseIdentifier:domainCellId];
+                if (self.userHelpMarr.count) {
+                    [cell thn_setUserHelpModelArr:self.userHelpMarr type:0];
+                }
+                cell.nav = self.navigationController;
+                return cell;
+            } else {
+                UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:domainCellId];
+                if (!cell) {
+                    cell = [[UITableViewCell alloc] initWithStyle:(UITableViewCellStyleDefault) reuseIdentifier:domainCellId];
+                }
+                return cell;
+            }
+            
+        } else if (indexPath.row == 1) {
+            THNDomainMenuTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:domainMenuCellId];
+            cell = [[THNDomainMenuTableViewCell alloc] initWithStyle:(UITableViewCellStyleDefault) reuseIdentifier:domainMenuCellId];
+            cell.nav = self.navigationController;
+            if (self.domainCategoryMarr.count) {
+                [cell setDomainMenuModelArr:self.domainCategoryMarr];
+            }
+            return cell;
+            
+        } else if (indexPath.row == 2) {
+            THNDomainTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:domainCellId];
+            cell = [[THNDomainTableViewCell alloc] initWithStyle:(UITableViewCellStyleDefault) reuseIdentifier:domainCellId];
+            cell.nav = self.navigationController;
+            if (self.niceDomainMarr.count) {
+                [cell thn_setDomainModelArr:self.niceDomainMarr type:1];
+            }
+            return cell;
         }
-        if (self.subjectMarr.count) {
-            [cell setThemeModelArr:self.subjectMarr];
+        return nil;
+        
+    } else if (indexPath.section == 1) {
+        THNNewGoodsTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:newGoodsCellId];
+        cell = [[THNNewGoodsTableViewCell alloc] initWithStyle:(UITableViewCellStyleDefault) reuseIdentifier:newGoodsCellId];
+        if (self.goodsMarr.count) {
+            [cell thn_setHomeGoodsModelArr:self.goodsMarr];
         }
         cell.nav = self.navigationController;
         return cell;
         
-    } else {
+    } else if (indexPath.section == 2) {
+        THNGoodsSubjectTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:goodsSubjectCellId];
+        cell = [[THNGoodsSubjectTableViewCell alloc] initWithStyle:(UITableViewCellStyleDefault) reuseIdentifier:goodsSubjectCellId];
+        if (self.goodsSubjectMarr.count) {
+            [cell thn_setGoodsSubjectData:self.goodsSubjectMarr];
+        }
+        cell.nav = self.navigationController;
+        return cell;
+    }
+    
+    else {
         if (indexPath.row == 0) {
-            THNUserInfoTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:userInfoCellId];
+            THNSceneImageTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:sceneImgCellId];
             if (!cell) {
-                cell = [[THNUserInfoTableViewCell alloc] initWithStyle:(UITableViewCellStyleDefault) reuseIdentifier:userInfoCellId];
+                cell = [[THNSceneImageTableViewCell alloc] initWithStyle:(UITableViewCellStyleDefault) reuseIdentifier:sceneImgCellId];
             }
             if (self.sceneListMarr.count) {
-                [cell thn_setHomeSceneUserInfoData:self.sceneListMarr[indexPath.section - 1] userId:[self getLoginUserID] isLogin:[self isUserLogin]];
-                
-                cell.beginFollowTheUserBlock = ^(NSString *userId) {
-                    [weakSelf beginFollowUser:userId];
-                };
-                
-                cell.cancelFollowTheUserBlock = ^(NSString *userId) {
-                    [weakSelf cancelFollowUser:userId];
-                };
+                [cell thn_setSceneImageData:self.sceneListMarr[indexPath.section - 3]];
             }
             cell.vc = self;
             cell.nav = self.navigationController;
             return cell;
 
         } else if (indexPath.row == 1) {
-            THNSceneImageTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:sceneImgCellId];
+            THNUserInfoTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:userInfoCellId];
             if (!cell) {
-                cell = [[THNSceneImageTableViewCell alloc] initWithStyle:(UITableViewCellStyleDefault) reuseIdentifier:sceneImgCellId];
+                cell = [[THNUserInfoTableViewCell alloc] initWithStyle:(UITableViewCellStyleDefault) reuseIdentifier:userInfoCellId];
             }
             if (self.sceneListMarr.count) {
-                [cell thn_setSceneImageData:self.sceneListMarr[indexPath.section - 1]];
+                [cell thn_setHomeSceneUserInfoData:self.sceneListMarr[indexPath.section - 3] userId:[self getLoginUserID] isLogin:[self isUserLogin]];
             }
             cell.vc = self;
             cell.nav = self.navigationController;
             return cell;
             
         } else if (indexPath.row == 2) {
+            THNSceneInfoTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:sceneInfoCellId];
+            if (!cell) {
+                cell = [[THNSceneInfoTableViewCell alloc] initWithStyle:(UITableViewCellStyleDefault) reuseIdentifier:sceneInfoCellId];
+            }
+            if (self.sceneListMarr.count) {
+                [cell thn_setSceneContentData:self.sceneListMarr[indexPath.section - 3]];
+                _contentHigh = cell.cellHigh;
+                _defaultContentHigh = cell.defaultCellHigh;
+            }
+            cell.nav = self.navigationController;
+            return cell;
+            
+        } else if (indexPath.row == 3) {
             THNDataInfoTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:dataInfoCellId];
             if (!cell) {
                 cell = [[THNDataInfoTableViewCell alloc] initWithStyle:(UITableViewCellStyleDefault) reuseIdentifier:dataInfoCellId];
             }
             if (self.sceneListMarr.count) {
-                [cell thn_setSceneData:self.sceneListMarr[indexPath.section - 1]
+                [cell thn_setSceneData:self.sceneListMarr[indexPath.section - 3]
                                isLogin:[self isUserLogin]
-                            isUserSelf:[self isLoginUserSelf:self.userIdMarr[indexPath.section - 1]]];
+                            isUserSelf:[self isLoginUserSelf:self.userIdMarr[indexPath.section - 3]]];
                 
                 cell.beginLikeTheSceneBlock = ^(NSString *idx) {
                     [weakSelf thn_networkLikeSceneData:idx];
@@ -694,62 +839,6 @@ static NSString *const homeDataPath = [NSHomeDirectory() stringByAppendingPathCo
             cell.vc = self;
             cell.nav = self.navigationController;
             return cell;
-            
-        } else if (indexPath.row == 3) {
-            THNSceneInfoTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:sceneInfoCellId];
-            if (!cell) {
-                cell = [[THNSceneInfoTableViewCell alloc] initWithStyle:(UITableViewCellStyleDefault) reuseIdentifier:sceneInfoCellId];
-            }
-            if (self.sceneListMarr.count) {
-                [cell thn_setSceneContentData:self.sceneListMarr[indexPath.section - 1]];
-                _contentHigh = cell.cellHigh;
-                _defaultContentHigh = cell.defaultCellHigh;
-            }
-            cell.nav = self.navigationController;
-            return cell;
-            
-        } else if (indexPath.row == 4) {
-            NSArray *commentArr = self.commentsMarr[indexPath.section - 1];
-            if (commentArr.count > 0) {
-                THNSceneCommentTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:commentsCellId];
-                cell = [[THNSceneCommentTableViewCell alloc] initWithStyle:(UITableViewCellStyleDefault) reuseIdentifier:commentsCellId];
-                [cell thn_setScenecommentData:commentArr[0]];
-                _commentHigh = cell.cellHigh;
-                return cell;
-            
-            } else {
-                UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:commentsCellId];
-                cell = [[UITableViewCell alloc] initWithStyle:(UITableViewCellStyleDefault) reuseIdentifier:commentsCellId];
-                return cell;
-            }
-            
-        } else if (indexPath.row == 5) {
-            NSArray *commentArr = self.commentsMarr[indexPath.section - 1];
-            if (commentArr.count > 1) {
-                THNSceneCommentTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:twoCommentsCellId];
-                cell = [[THNSceneCommentTableViewCell alloc] initWithStyle:(UITableViewCellStyleDefault) reuseIdentifier:twoCommentsCellId];
-                [cell thn_setScenecommentData:commentArr[1]];
-                _commentHigh = cell.cellHigh;
-                return cell;
-                
-            } else {
-                UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:twoCommentsCellId];
-                cell = [[UITableViewCell alloc] initWithStyle:(UITableViewCellStyleDefault) reuseIdentifier:twoCommentsCellId];
-                return cell;
-            }
-            
-        } else if (indexPath.row == 6) {
-            if ([self.commentsMarr[indexPath.section - 1] count] > 1) {
-                THNLookAllCommentTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:allCommentsCellId];
-                cell = [[THNLookAllCommentTableViewCell alloc] initWithStyle:(UITableViewCellStyleDefault) reuseIdentifier:allCommentsCellId];
-                [cell thn_setAllCommentCountData:[self.commentsCountMarr[indexPath.section - 1] integerValue]];
-                return cell;
-                
-            } else {
-                UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:twoCommentsCellId];
-                cell = [[UITableViewCell alloc] initWithStyle:(UITableViewCellStyleDefault) reuseIdentifier:twoCommentsCellId];
-                return cell;
-            }
         }
     }
     return nil;
@@ -757,40 +846,39 @@ static NSString *const homeDataPath = [NSHomeDirectory() stringByAppendingPathCo
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
     if (indexPath.section == 0) {
-        return 70;
+        if (indexPath.row == 0) {
+            if (_isNewUser == YES) {
+                return SCREEN_WIDTH * 0.48;
+            } else {
+                return 0.01;
+            }
+        } else if (indexPath.row == 1) {
+            return 80;
+        } else
+            return (SCREEN_WIDTH * 0.48) + 15;
+        
+    } else if (indexPath.section == 1) {
+        return (goodsCellHeight * 2);
+        
+    } else if (indexPath.section == 2) {
+        return 366;
         
     } else {
         if (indexPath.row == 0) {
-                return 50;
-        } else if (indexPath.row == 1) {
             return SCREEN_WIDTH;
+            
+        } else if (indexPath.row == 1) {
+            return 50;
+            
         } else if (indexPath.row == 2) {
-            return 40;
-        } else if (indexPath.row == 3) {
             if (_selectedIndexPath && _selectedIndexPath.section == indexPath.section) {
-                return _contentHigh;
+                return _contentHigh + 15;
             } else {
-                return _defaultContentHigh;
-            }
-        } else if (indexPath.row == 4) {
-            if ([self.commentsMarr[indexPath.section -1] count] > 0) {
-                return _commentHigh;
-            } else {
-                return 0.01f;
-            }
-        } else if (indexPath.row == 5) {
-            if ([self.commentsMarr[indexPath.section -1] count] > 1) {
-                return _commentHigh;
-            } else {
-                return 0.01f;
+                return _defaultContentHigh + 15;
             }
             
-        } else if (indexPath.row == 6) {
-            if ([self.commentsMarr[indexPath.section -1] count] > 1) {
-                return 25.0f;
-            } else {
-                return 0.01f;
-            }
+        } else if (indexPath.row == 3) {
+            return 50;
         }
     }
     return 0;
@@ -800,18 +888,35 @@ static NSString *const homeDataPath = [NSHomeDirectory() stringByAppendingPathCo
     self.headerView = [[GroupHeaderView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 44)];
     self.headerView.nav = self.navigationController;
     if (section == 0) {
-        [self.headerView addGroupHeaderViewIcon:@"shouye_zhuti"
-                                      withTitle:NSLocalizedString(@"Home_Theme", nil)
+        if (_isNewUser == YES) {
+            [self.headerView addGroupHeaderViewIcon:@"shouye_zhuti"
+                                          withTitle:@"新手指南"
+                                       withSubtitle:@""
+                                      withRightMore:@""
+                                       withMoreType:0];
+        }
+    } else if (section == 1) {
+        self.headerView.backgroundColor = [UIColor colorWithHexString:@"#F8F8F8"];
+        [self.headerView addGroupHeaderViewIcon:@"shouye_jingxuan"
+                                      withTitle:@"新品"
                                    withSubtitle:@""
                                   withRightMore:@""
-                                   withMoreType:1];
-    } else if (section == 1) {
+                                   withMoreType:0];
+    } else if (section == 2) {
+        self.headerView.backgroundColor = [UIColor colorWithHexString:@"#F8F8F8"];
+        [self.headerView addGroupHeaderViewIcon:@"shouye_jingxuan"
+                                      withTitle:@"产品专辑"
+                                   withSubtitle:@""
+                                  withRightMore:@"查看更多"
+                                   withMoreType:0];
+    } else if (section == 3) {
         [self.headerView addGroupHeaderViewIcon:@"shouye_jingxuan"
                                       withTitle:NSLocalizedString(@"Home_Scene", nil)
                                    withSubtitle:@""
                                   withRightMore:@""
                                    withMoreType:0];
     }
+
     return self.headerView;
 }
 
@@ -826,40 +931,37 @@ static NSString *const homeDataPath = [NSHomeDirectory() stringByAppendingPathCo
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
-    if (section == 0 || section == 1) {
+    if (section == 0) {
+        if (_isNewUser) {
+            return 44.0f;
+        } else {
+            return 0.01f;
+        }
+    } else if (section == 1 || section == 2 || section == 3) {
         return 44.0f;
-    } else {
+    } else
         return 0.01f;
-    }
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section {
     if (section == 0) {
         return 0.01;
+        
     } else if (section == _hotUserListIndex) {
         if (self.hotUserMarr.count) {
             return _hotUserCellHeight;
         } else {
             return 15.0f;
         }
+        
     } else {
-        return 15;
+        return 10.0f;
     }
 }
 
-//- (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath {
-//    if (indexPath.section != 0) {
-//        cell.layer.transform = CATransform3DMakeScale(0.8, 0.8, 0.8);
-//        [UIView animateWithDuration:0.5 animations:^{
-//            cell.layer.transform = CATransform3DMakeScale(1, 1, 1);
-//        }];
-//
-//    }
-//}
-
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    if (indexPath.section != 0) {
-        if (indexPath.row == 3) {
+    if (indexPath.section != 0 && indexPath.section != 1 && indexPath.section != 2) {
+        if (indexPath.row == 2) {
             if (_contentHigh > 65.0f) {
                 if (_selectedIndexPath && _selectedIndexPath.section == indexPath.section) {
                     _selectedIndexPath = nil;
@@ -869,11 +971,6 @@ static NSString *const homeDataPath = [NSHomeDirectory() stringByAppendingPathCo
                 [tableView reloadRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
             }
             
-        } else if (indexPath.row == 4 || indexPath.row == 5 || indexPath.row == 6) {
-            CommentNViewController * commentVC = [[CommentNViewController alloc] init];
-            commentVC.targetId = self.sceneIdMarr[indexPath.section - 1];
-            commentVC.sceneUserId = self.userIdMarr[indexPath.section - 1];
-            [self.navigationController pushViewController:commentVC animated:YES];
         }
     }
 }
@@ -976,12 +1073,9 @@ static NSString *const homeDataPath = [NSHomeDirectory() stringByAppendingPathCo
 }
 
 - (void)thn_rightBarItemSelected {
-//    SearchViewController *searchVC = [[SearchViewController alloc] init];
-//    searchVC.index = 0;
-//    [self.navigationController pushViewController:searchVC animated:YES];
-    
-    THNDomainInfoViewController *domainInfoVC = [[THNDomainInfoViewController alloc] init];
-    [self.navigationController pushViewController:domainInfoVC animated:YES];
+    SearchViewController *searchVC = [[SearchViewController alloc] init];
+    searchVC.index = 0;
+    [self.navigationController pushViewController:searchVC animated:YES];
 }
 
 #pragma mark - 获取当前城市信息
@@ -1026,20 +1120,6 @@ static NSString *const homeDataPath = [NSHomeDirectory() stringByAppendingPathCo
 //  取消关注热门用户
 - (void)cancelFollowHotUserAction:(NSNotification *)userId {
     [self thn_networkCancelFollowUserData:[userId object]];
-}
-
-//  关注用户
-- (void)beginFollowUser:(NSString *)userId {
-    NSInteger index = [self.userIdMarr indexOfObject:userId];
-    [[self.sceneListMarr valueForKey:@"user"][index] setValue:@"1" forKey:@"isFollow"];
-    [self thn_networkBeginFollowUserData:userId];
-}
-
-//  取消关注用户
-- (void)cancelFollowUser:(NSString *)userId {
-    NSInteger index = [self.userIdMarr indexOfObject:userId];
-    [[self.sceneListMarr valueForKey:@"user"][index] setValue:@"0" forKey:@"isFollow"];
-    [self thn_networkCancelFollowUserData:userId];
 }
 
 - (void)dealloc {
@@ -1091,25 +1171,47 @@ static NSString *const homeDataPath = [NSHomeDirectory() stringByAppendingPathCo
     return _userIdMarr;
 }
 
-- (NSMutableArray *)commentsMarr {
-    if (!_commentsMarr) {
-        _commentsMarr = [NSMutableArray array];
-    }
-    return _commentsMarr;
-}
-
-- (NSMutableArray *)commentsCountMarr {
-    if (!_commentsCountMarr) {
-        _commentsCountMarr = [NSMutableArray array];
-    }
-    return _commentsCountMarr;
-}
-
 - (NSMutableArray *)hotUserMarr {
     if (!_hotUserMarr) {
         _hotUserMarr = [NSMutableArray array];
     }
     return _hotUserMarr;
 }
+
+- (NSMutableArray *)domainCategoryMarr {
+    if (!_domainCategoryMarr) {
+        _domainCategoryMarr = [NSMutableArray array];
+    }
+    return _domainCategoryMarr;
+}
+
+- (NSMutableArray *)userHelpMarr {
+    if (!_userHelpMarr) {
+        _userHelpMarr = [NSMutableArray array];
+    }
+    return _userHelpMarr;
+}
+
+- (NSMutableArray *)niceDomainMarr {
+    if (!_niceDomainMarr) {
+        _niceDomainMarr = [NSMutableArray array];
+    }
+    return _niceDomainMarr;
+}
+
+- (NSMutableArray *)goodsMarr {
+    if (!_goodsMarr) {
+        _goodsMarr = [NSMutableArray array];
+    }
+    return _goodsMarr;
+}
+
+- (NSMutableArray *)goodsSubjectMarr {
+    if (!_goodsSubjectMarr) {
+        _goodsSubjectMarr = [NSMutableArray array];
+    }
+    return _goodsSubjectMarr;
+}
+
 
 @end
