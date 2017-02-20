@@ -18,32 +18,30 @@
 #import "FBGoodsInfoViewController.h"
 #import "THNSceneDetalViewController.h"
 #import "HomePageViewController.h"
+#import "QRCodeScanViewController.h"
 
 #import "THNDomainTableViewCell.h"
 #import "THNDomainMenuTableViewCell.h"
 #import "THNNewGoodsTableViewCell.h"
 #import "THNGoodsSubjectTableViewCell.h"
-
-#import "HomeThemeTableViewCell.h"
 #import "THNUserInfoTableViewCell.h"
 #import "THNSceneImageTableViewCell.h"
 #import "THNDataInfoTableViewCell.h"
 #import "THNSceneInfoTableViewCell.h"
 #import "THNSceneCommentTableViewCell.h"
 #import "THNLookAllCommentTableViewCell.h"
-#import "QRCodeScanViewController.h"
+#import "THNHomeSubjectTableViewCell.h"
 
 #import "HomeSceneListRow.h"
 #import "CommentRow.h"
 #import "RollImageRow.h"
-#import "FBSubjectModelRow.h"
+#import "HomeSubjectRow.h"
 #import "HotUserListUser.h"
 #import "THNArticleModel.h"
 #import "DomainCategoryRow.h"
 #import "HelpUserRow.h"
 #import "NiceDomainRow.h"
 #import "HomeGoodsRow.h"
-#import "THNMallSubjectModelRow.h"
 
 #import "MJRefresh.h"
 #import "FBRefresh.h"
@@ -58,6 +56,7 @@ static NSString *const URLBannerSlide       = @"/gateway/slide";
 static NSString *const URLCategory          = @"/category/getlist";
 static NSString *const URLSceneList         = @"/scene_sight/";
 static NSString *const URLSubject           = @"/scene_subject/getlist";
+static NSString *const URLHomeSubject       = @"/scene_subject/index_subject_stick";
 static NSString *const URLSubjectView       = @"/scene_subject/view";
 static NSString *const URLLikeScene         = @"/favorite/ajax_love";
 static NSString *const URLCancelLike        = @"/favorite/ajax_cancel_love";
@@ -73,7 +72,7 @@ static NSString *const domainCellId         = @"THNDomainTableViewCellId";
 static NSString *const domainMenuCellId     = @"THNDomainMenuTableViewCellId";
 static NSString *const newGoodsCellId       = @"newGoodsCellId";
 static NSString *const goodsSubjectCellId   = @"THNGoodsSubjectTableViewCellId";
-
+static NSString *const subjectCellId        = @"THNHomeSubjectTableViewCellId";
 static NSString *const userInfoCellId       = @"UserInfoCellId";
 static NSString *const sceneImgCellId       = @"SceneImgCellId";
 static NSString *const dataInfoCellId       = @"DataInfoCellId";
@@ -340,6 +339,8 @@ static NSString *const homeDataPath = [NSHomeDirectory() stringByAppendingPathCo
         for (NSDictionary * goodsDic in goodsArr) {
             THNMallSubjectModelRow *goodsModel = [[THNMallSubjectModelRow alloc] initWithDictionary:goodsDic];
             [self.goodsSubjectMarr addObject:goodsModel];
+            [self.goodsSubjectIdMarr addObject:[NSString stringWithFormat:@"%zi", goodsModel.idField]];
+            [self.goodsSubjectTypeMarr addObject:[NSString stringWithFormat:@"%zi", goodsModel.type]];
         }
         
         if (self.sceneListMarr.count) {
@@ -354,22 +355,47 @@ static NSString *const homeDataPath = [NSHomeDirectory() stringByAppendingPathCo
 
 #pragma mark 专辑推荐
 - (void)thn_networkSubjectData {
-    self.subjectRequest = [FBAPI getWithUrlString:URLSubject requestDictionary:@{@"type":@"0", @"fine":@"1", @"sort":@"2"} delegate:self];
+    self.subjectRequest = [FBAPI getWithUrlString:URLHomeSubject requestDictionary:@{} delegate:self];
     [self.subjectRequest startRequestSuccess:^(FBRequest *request, id result) {
-        NSLog(@"======= 专辑：%@", [NSString jsonStringWithObject:result]);
         NSArray *subArr = [[result valueForKey:@"data"] valueForKey:@"rows"];
-        for (NSDictionary *subDic in subArr) {
-            FBSubjectModelRow *subModel = [[FBSubjectModelRow alloc] initWithDictionary:subDic];
+        for (NSInteger idx = 0; idx < 2; ++ idx) {
+            HomeSubjectRow *subModel = [[HomeSubjectRow alloc] initWithDictionary:subArr[idx]];
             [self.subjectMarr addObject:subModel];
+            [self.subjectIdMarr addObject:[NSString stringWithFormat:@"%zi", subModel.idField]];
         }
 
-//        if (self.sceneListMarr.count) {
-//            NSIndexSet *indexSet = [[NSIndexSet alloc] initWithIndex:0];
-//            [self.homeTable reloadSections:indexSet withRowAnimation:UITableViewRowAnimationAutomatic];
-//        }
+        if (self.sceneListMarr.count) {
+            NSIndexSet *indexSet = [[NSIndexSet alloc] initWithIndex:6];
+            [self.homeTable reloadSections:indexSet withRowAnimation:UITableViewRowAnimationAutomatic];
+        }
         
     } failure:^(FBRequest *request, NSError *error) {
         [SVProgressHUD showErrorWithStatus:[error localizedDescription]];
+    }];
+}
+
+#pragma mark 热门用户推荐
+- (void)thn_networkHotUserListData {
+    NSDictionary *requestDic = @{@"page":@"1",
+                                 @"edit_stick":@"1",
+                                 @"sort":@"1",
+                                 @"type":@"1",
+                                 @"use_cache":@"1"};
+    self.hotUserRequest = [FBAPI getWithUrlString:URLHotUserList requestDictionary:requestDic delegate:self];
+    [self.hotUserRequest startRequestSuccess:^(FBRequest *request, id result) {
+        NSArray *userArr = [[result valueForKey:@"data"] valueForKey:@"users"];
+        for (NSDictionary *userDic in userArr) {
+            HotUserListUser *userModel = [[HotUserListUser alloc] initWithDictionary:userDic];
+            [self.hotUserMarr addObject:userModel];
+        }
+        
+        if (self.hotUserMarr.count && self.sceneListMarr.count) {
+            NSIndexPath *indexPath = [NSIndexPath indexPathForRow:0 inSection:_hotUserListIndex];
+            [self.homeTable reloadRowsAtIndexPaths:@[indexPath] withRowAnimation:(UITableViewRowAnimationBottom)];
+        }
+        
+    } failure:^(FBRequest *request, NSError *error) {
+        NSLog(@"%@", error);
     }];
 }
 
@@ -468,33 +494,7 @@ static NSString *const homeDataPath = [NSHomeDirectory() stringByAppendingPathCo
 
         if (![[[result valueForKey:@"data"] valueForKey:@"type"] isKindOfClass:[NSNull class]]) {
             _subjectType = [[[result valueForKey:@"data"] valueForKey:@"type"] integerValue];
-            if (_subjectType == 1) {
-                THNArticleDetalViewController *articleVC = [[THNArticleDetalViewController alloc] init];
-                articleVC.articleDetalid = idx;
-                [self.navigationController pushViewController:articleVC animated:YES];
-                
-            } else if (_subjectType == 2) {
-                THNActiveDetalTwoViewController *activity = [[THNActiveDetalTwoViewController alloc] init];
-                activity.activeDetalId = idx;
-                [self.navigationController pushViewController:activity animated:YES];
-                
-            } else if (_subjectType == 3) {
-                THNCuXiaoDetalViewController *cuXiao = [[THNCuXiaoDetalViewController alloc] init];
-                cuXiao.cuXiaoDetalId = idx;
-                cuXiao.vcType = 1;
-                [self.navigationController pushViewController:cuXiao animated:YES];
-                
-            } else if (_subjectType == 4) {
-                THNXinPinDetalViewController *xinPin = [[THNXinPinDetalViewController alloc] init];
-                xinPin.xinPinDetalId = idx;
-                [self.navigationController pushViewController:xinPin animated:YES];
-                
-            } else if (_subjectType == 5) {
-                THNCuXiaoDetalViewController *cuXiao = [[THNCuXiaoDetalViewController alloc] init];
-                cuXiao.cuXiaoDetalId = idx;
-                cuXiao.vcType = 2;
-                [self.navigationController pushViewController:cuXiao animated:YES];
-            }
+            [self thn_openSubjectTypeController:_subjectType subjectId:idx];
         }
         
     } failure:^(FBRequest *request, NSError *error) {
@@ -502,29 +502,35 @@ static NSString *const homeDataPath = [NSHomeDirectory() stringByAppendingPathCo
     }];
 }
 
-#pragma mark 热门用户推荐
-- (void)thn_networkHotUserListData {
-    NSDictionary *requestDic = @{@"page":@"1",
-                                 @"edit_stick":@"1",
-                                 @"sort":@"1",
-                                 @"type":@"1",
-                                 @"use_cache":@"1"};
-    self.hotUserRequest = [FBAPI getWithUrlString:URLHotUserList requestDictionary:requestDic delegate:self];
-    [self.hotUserRequest startRequestSuccess:^(FBRequest *request, id result) {
-        NSArray *userArr = [[result valueForKey:@"data"] valueForKey:@"users"];
-        for (NSDictionary *userDic in userArr) {
-            HotUserListUser *userModel = [[HotUserListUser alloc] initWithDictionary:userDic];
-            [self.hotUserMarr addObject:userModel];
-        }
+#pragma mark - 跳转专题详情
+- (void)thn_openSubjectTypeController:(NSInteger)type subjectId:(NSString *)idx {
+    if (type == 1) {
+        THNArticleDetalViewController *articleVC = [[THNArticleDetalViewController alloc] init];
+        articleVC.articleDetalid = idx;
+        [self.navigationController pushViewController:articleVC animated:YES];
         
-        if (self.hotUserMarr.count && self.sceneListMarr.count) {
-            NSIndexPath *indexPath = [NSIndexPath indexPathForRow:0 inSection:_hotUserListIndex];
-            [self.homeTable reloadRowsAtIndexPaths:@[indexPath] withRowAnimation:(UITableViewRowAnimationBottom)];
-        }
-
-    } failure:^(FBRequest *request, NSError *error) {
-        NSLog(@"%@", error);
-    }];
+    } else if (type == 2) {
+        THNActiveDetalTwoViewController *activity = [[THNActiveDetalTwoViewController alloc] init];
+        activity.activeDetalId = idx;
+        [self.navigationController pushViewController:activity animated:YES];
+        
+    } else if (type == 3) {
+        THNCuXiaoDetalViewController *cuXiao = [[THNCuXiaoDetalViewController alloc] init];
+        cuXiao.cuXiaoDetalId = idx;
+        cuXiao.vcType = 1;
+        [self.navigationController pushViewController:cuXiao animated:YES];
+        
+    } else if (type == 4) {
+        THNXinPinDetalViewController *xinPin = [[THNXinPinDetalViewController alloc] init];
+        xinPin.xinPinDetalId = idx;
+        [self.navigationController pushViewController:xinPin animated:YES];
+        
+    } else if (type == 5) {
+        THNCuXiaoDetalViewController *cuXiao = [[THNCuXiaoDetalViewController alloc] init];
+        cuXiao.cuXiaoDetalId = idx;
+        cuXiao.vcType = 2;
+        [self.navigationController pushViewController:cuXiao animated:YES];
+    }
 }
 
 #pragma mark 删除情境
@@ -597,12 +603,15 @@ static NSString *const homeDataPath = [NSHomeDirectory() stringByAppendingPathCo
     [self.sceneIdMarr removeAllObjects];
     [self.userIdMarr removeAllObjects];
     [self.subjectMarr removeAllObjects];
+    [self.subjectIdMarr removeAllObjects];
     [self.hotUserMarr removeAllObjects];
     [self.domainCategoryMarr removeAllObjects];
     [self.userHelpMarr removeAllObjects];
     [self.niceDomainMarr removeAllObjects];
     [self.goodsMarr removeAllObjects];
     [self.goodsSubjectMarr removeAllObjects];
+    [self.goodsSubjectIdMarr removeAllObjects];
+    [self.goodsSubjectTypeMarr removeAllObjects];
 
     [self thn_networkSceneListData];
     [self thn_networkRollImageData];
@@ -701,6 +710,8 @@ static NSString *const homeDataPath = [NSHomeDirectory() stringByAppendingPathCo
         return 1;
     } else if (section == 2) {
         return 1;
+    } else if (section == 6 || section == 9) {
+        return 5;
     } else {
         return 4;
     }
@@ -840,6 +851,17 @@ static NSString *const homeDataPath = [NSHomeDirectory() stringByAppendingPathCo
             cell.nav = self.navigationController;
             return cell;
         }
+        
+        if (indexPath.section == 6 || indexPath.section == 9) {
+            if (indexPath.row == 4) {
+                THNHomeSubjectTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:subjectCellId];
+                cell = [[THNHomeSubjectTableViewCell alloc] initWithStyle:(UITableViewCellStyleDefault) reuseIdentifier:subjectCellId];
+                if (self.subjectMarr.count) {
+                    [cell thn_setSubjectModel:self.subjectMarr[(indexPath.section - 6) / 3]];
+                }
+                return cell;
+            }
+        }
     }
     return nil;
 }
@@ -879,6 +901,12 @@ static NSString *const homeDataPath = [NSHomeDirectory() stringByAppendingPathCo
             
         } else if (indexPath.row == 3) {
             return 50;
+        }
+        
+        if (indexPath.section == 6 || indexPath.section == 9) {
+            if (indexPath.row == 4) {
+                return (SCREEN_WIDTH * 0.56) + 20;
+            }
         }
     }
     return 0;
@@ -970,8 +998,18 @@ static NSString *const homeDataPath = [NSHomeDirectory() stringByAppendingPathCo
                 }
                 [tableView reloadRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
             }
-            
         }
+        
+        if (indexPath.section == 6 || indexPath.section == 9) {
+            if (indexPath.row == 4) {
+                [self thn_networkSubjectInfoData:self.subjectIdMarr[(indexPath.section - 6) / 3]];
+            }
+        }
+        
+    } else if (indexPath.section == 2) {
+        NSInteger type = [self.goodsSubjectTypeMarr[indexPath.row] integerValue];
+        NSString *idx = self.goodsSubjectIdMarr[indexPath.row];
+        [self thn_openSubjectTypeController:type subjectId:idx];
     }
 }
 
@@ -1150,6 +1188,13 @@ static NSString *const homeDataPath = [NSHomeDirectory() stringByAppendingPathCo
     return _subjectMarr;
 }
 
+- (NSMutableArray *)subjectIdMarr {
+    if (!_subjectIdMarr) {
+        _subjectIdMarr = [NSMutableArray array];
+    }
+    return _subjectIdMarr;
+}
+
 - (NSMutableArray *)sceneListMarr {
     if (!_sceneListMarr) {
         _sceneListMarr = [NSMutableArray array];
@@ -1211,6 +1256,20 @@ static NSString *const homeDataPath = [NSHomeDirectory() stringByAppendingPathCo
         _goodsSubjectMarr = [NSMutableArray array];
     }
     return _goodsSubjectMarr;
+}
+
+- (NSMutableArray *)goodsSubjectIdMarr {
+    if (!_goodsSubjectIdMarr) {
+        _goodsSubjectIdMarr = [NSMutableArray array];
+    }
+    return _goodsSubjectIdMarr;
+}
+
+- (NSMutableArray *)goodsSubjectTypeMarr {
+    if (!_goodsSubjectTypeMarr) {
+        _goodsSubjectTypeMarr = [NSMutableArray array];
+    }
+    return _goodsSubjectTypeMarr;
 }
 
 

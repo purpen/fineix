@@ -45,6 +45,7 @@
 
 @pro_strong NSMutableArray *rollList;
 @pro_strong NSMutableArray *subjectMarr;
+@pro_strong NSMutableArray *subjectIdMarr;
 @pro_strong NSMutableArray *sceneListMarr;
 @pro_strong NSMutableArray *sceneIdMarr;
 @pro_strong NSMutableArray *userIdMarr;
@@ -54,6 +55,8 @@
 @pro_strong NSMutableArray *niceDomainMarr;
 @pro_strong NSMutableArray *goodsMarr;
 @pro_strong NSMutableArray *goodsSubjectMarr;
+@pro_strong NSMutableArray *goodsSubjectIdMarr;
+@pro_strong NSMutableArray *goodsSubjectTypeMarr;
 
 @pro_strong THNHotUserView *hotUserList;
 @pro_strong UIView *hotUserView;
