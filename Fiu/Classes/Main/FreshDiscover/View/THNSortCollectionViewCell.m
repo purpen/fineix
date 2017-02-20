@@ -25,13 +25,13 @@
     if (self = [super initWithFrame:frame])
     {
         self.imageV = [[UIImageView alloc] init];
-        self.imageV.contentMode = UIViewContentModeScaleAspectFit;
+//        self.imageV.contentMode = UIViewContentModeScaleAspectFit;
         [self.contentView addSubview:self.imageV];
         self.imageV.layer.masksToBounds = YES;
         self.imageV.layer.cornerRadius = 30;
         [_imageV mas_makeConstraints:^(MASConstraintMaker *make) {
             make.left.top.right.mas_equalTo(self.contentView).mas_offset(0);
-            make.bottom.mas_equalTo(self.contentView.mas_bottom).mas_offset(-30);
+            make.bottom.mas_equalTo(self.contentView.mas_bottom).mas_offset(-40);
         }];
         
         self.textLabel = [[UILabel alloc] init];
@@ -52,6 +52,12 @@
     _model = model;
     [self.imageV sd_setImageWithURL:[NSURL URLWithString:model.app_cover_url]];
     self.textLabel.text = model.title;
+}
+
+-(void)setPModel:(Pro_categoryModel *)pModel{
+    _pModel = pModel;
+    [self.imageV sd_setImageWithURL:[NSURL URLWithString:pModel.cover_url]];
+    self.textLabel.text = pModel.title;
 }
 
 -(void)setUserModel:(UsersModel *)userModel{

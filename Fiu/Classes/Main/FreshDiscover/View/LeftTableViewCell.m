@@ -34,7 +34,7 @@
         self.name.highlightedTextColor = defaultColor;
         [self.contentView addSubview:self.name];
         
-        self.yellowView = [[UIView alloc] initWithFrame:CGRectMake(0, 5, 5, 45)];
+        self.yellowView = [[UIView alloc] initWithFrame:CGRectMake(0, 5, 4, 45)];
         self.yellowView.backgroundColor = defaultColor;
         [self.contentView addSubview:self.yellowView];
     }
@@ -46,7 +46,7 @@
     [super setSelected:selected animated:animated];
     // Configure the view for the selected state
     
-    self.contentView.backgroundColor = selected ? [UIColor whiteColor] : [UIColor colorWithWhite:0 alpha:0.1];
+//    self.contentView.backgroundColor = selected ? [UIColor whiteColor] : [UIColor colorWithWhite:0 alpha:0.1];
     self.highlighted = selected;
     self.name.highlighted = selected;
     self.yellowView.hidden = !selected;

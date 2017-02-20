@@ -14,4 +14,6 @@
 @property (nonatomic, strong) Pro_categoryModel *model;
 /**  */
 @property (nonatomic, strong) UsersModel *userModel;
+/**  */
+@property (nonatomic, strong) Pro_categoryModel *pModel;
 @end

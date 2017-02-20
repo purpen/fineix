@@ -60,7 +60,7 @@
 
 -(void)setModel:(Pro_categoryModel *)model{
     _model = model;
-    [self.imageV sd_setImageWithURL:[NSURL URLWithString:model.app_cover_url]];
+    [self.imageV sd_setImageWithURL:[NSURL URLWithString:model.cover_url]];
     self.textLabel.text = model.title;
 }
 
