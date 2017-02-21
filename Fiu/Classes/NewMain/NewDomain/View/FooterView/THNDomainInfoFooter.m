@@ -475,7 +475,7 @@ static NSInteger const actionButtonTag  = 611;
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
     if (tableView == self.infoTable) {
-        return 2;
+        return 1;
     } else if (tableView == self.sceneTable) {
         return self.sceneListMarr.count;
     }
@@ -486,27 +486,19 @@ static NSInteger const actionButtonTag  = 611;
     if (tableView == self.sceneTable) {
         return 3;
     } else if (tableView == self.infoTable) {
-        if (section == 0) {
-            return 3;
-        } else
-            return 5;
+        return 3;
     }
     return 1;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     if (tableView == self.infoTable) {
-        if (indexPath.section == 0) {
-            THNBusinessInfoTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:infoCellId];
-            cell = [[THNBusinessInfoTableViewCell alloc] initWithStyle:(UITableViewCellStyleDefault) reuseIdentifier:infoCellId];
-            [cell thn_setBusinessInfoData:_leftArr[indexPath.row] right:_rightArr[indexPath.row]];
-            if (indexPath.row == 2) {
-                cell.line.hidden = YES;
-            }
-            return cell;
+        THNBusinessInfoTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:infoCellId];
+        cell = [[THNBusinessInfoTableViewCell alloc] initWithStyle:(UITableViewCellStyleDefault) reuseIdentifier:infoCellId];
+        [cell thn_setBusinessInfoData:_leftArr[indexPath.row] right:_rightArr[indexPath.row]];
+        if (indexPath.row == 2) {
+            cell.line.hidden = YES;
         }
-        UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:commentCellId];
-        cell = [[UITableViewCell alloc] initWithStyle:(UITableViewCellStyleDefault) reuseIdentifier:commentCellId];
         return cell;
         
     } else if (tableView == self.sceneTable) {
@@ -556,32 +548,31 @@ static NSInteger const actionButtonTag  = 611;
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
     if (tableView == self.infoTable) {
-        if (section == 0) {
+//        if (section == 0) {
             return 0.01;
-        } else
-            return 50;
+//        } else
+//            return 50;
     }
     
     return 0.01;
 }
 
-- (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
-    if (tableView == self.infoTable) {
-        if (section == 1) {
-            return self.commentView;
-        }
-    }
-    return [UIView new];
-    
-}
+//- (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
+//    if (tableView == self.infoTable) {
+//        if (section == 1) {
+//            return self.commentView;
+//        }
+//    }
+//    return [UIView new];
+//}
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
     if (tableView == self.infoTable) {
-        if (indexPath.section == 0) {
+//        if (indexPath.section == 0) {
             return 35;
-        } else {
-            return 100;
-        }
+//        } else {
+//            return 100;
+//        }
         
     } else if (tableView == self.sceneTable) {
         if (indexPath.row == 0) {
