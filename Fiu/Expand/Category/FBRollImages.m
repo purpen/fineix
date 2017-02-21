@@ -79,7 +79,7 @@
 - (void)cycleScrollView:(SDCycleScrollView *)cycleScrollView didSelectItemAtIndex:(NSInteger)index {
     if (self.typeMarr.count > 0) {
         NSInteger type = [self.typeMarr[index] integerValue];
-        NSString * ids = self.targetIdMarr[index];
+        NSString *ids = self.targetIdMarr[index];
         
         if (type == 8) {
 

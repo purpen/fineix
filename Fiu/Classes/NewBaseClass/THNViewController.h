@@ -126,4 +126,13 @@
 @pro_weak id <THNNavigationBarItemsDelegate> delegate;
 
 
+/**
+ 轮播图点击跳转
+
+ @param nav 当前控制器
+ @param type 类型
+ @param idx 轮播图id
+ */
+- (void)thn_openSubjectTypeController:(UINavigationController *)nav type:(NSInteger)type subjectId:(NSString *)idx;
+
 @end

@@ -27,8 +27,9 @@ static NSString *const domainCollectionCellID = @"THNDomainCollectionViewCellId"
         self.backgroundColor = [UIColor whiteColor];
         [self addSubview:self.domainCollectionView];
         [_domainCollectionView mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.top.left.right.equalTo(self).with.offset(0);
-            make.bottom.equalTo(self.mas_bottom).with.offset(-5);
+            make.top.equalTo(self.mas_top).with.offset(15);
+            make.left.right.equalTo(self).with.offset(0);
+            make.bottom.equalTo(self.mas_bottom).with.offset(-15);
         }];
     }
     return self;

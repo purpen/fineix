@@ -113,7 +113,7 @@ static NSString *const homeDataPath = [NSHomeDirectory() stringByAppendingPathCo
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    _isNewUser = YES;
+    _isNewUser = NO;
     
     [self setHotUserListData];
     [self thn_registerNSNotification];
@@ -489,43 +489,12 @@ static NSString *const homeDataPath = [NSHomeDirectory() stringByAppendingPathCo
 
         if (![[[result valueForKey:@"data"] valueForKey:@"type"] isKindOfClass:[NSNull class]]) {
             _subjectType = [[[result valueForKey:@"data"] valueForKey:@"type"] integerValue];
-            [self thn_openSubjectTypeController:_subjectType subjectId:idx];
+            [self thn_openSubjectTypeController:self.navigationController type:_subjectType subjectId:idx];
         }
         
     } failure:^(FBRequest *request, NSError *error) {
         NSLog(@"%@",error);
     }];
-}
-
-#pragma mark - 跳转专题详情
-- (void)thn_openSubjectTypeController:(NSInteger)type subjectId:(NSString *)idx {
-    if (type == 1) {
-        THNArticleDetalViewController *articleVC = [[THNArticleDetalViewController alloc] init];
-        articleVC.articleDetalid = idx;
-        [self.navigationController pushViewController:articleVC animated:YES];
-        
-    } else if (type == 2) {
-        THNActiveDetalTwoViewController *activity = [[THNActiveDetalTwoViewController alloc] init];
-        activity.activeDetalId = idx;
-        [self.navigationController pushViewController:activity animated:YES];
-        
-    } else if (type == 3) {
-        THNCuXiaoDetalViewController *cuXiao = [[THNCuXiaoDetalViewController alloc] init];
-        cuXiao.cuXiaoDetalId = idx;
-        cuXiao.vcType = 1;
-        [self.navigationController pushViewController:cuXiao animated:YES];
-        
-    } else if (type == 4) {
-        THNXinPinDetalViewController *xinPin = [[THNXinPinDetalViewController alloc] init];
-        xinPin.xinPinDetalId = idx;
-        [self.navigationController pushViewController:xinPin animated:YES];
-        
-    } else if (type == 5) {
-        THNCuXiaoDetalViewController *cuXiao = [[THNCuXiaoDetalViewController alloc] init];
-        cuXiao.cuXiaoDetalId = idx;
-        cuXiao.vcType = 2;
-        [self.navigationController pushViewController:cuXiao animated:YES];
-    }
 }
 
 #pragma mark 删除情境
@@ -870,8 +839,8 @@ static NSString *const homeDataPath = [NSHomeDirectory() stringByAppendingPathCo
                 return 0.01;
             }
         } else if (indexPath.row == 1) {
-            return 80;
-//            return 0.01;
+//            return 60;
+            return 0.01;
         } else
             return (SCREEN_WIDTH * 0.48) + 15;
         
@@ -1005,7 +974,7 @@ static NSString *const homeDataPath = [NSHomeDirectory() stringByAppendingPathCo
     } else if (indexPath.section == 2) {
         NSInteger type = [self.goodsSubjectTypeMarr[indexPath.row] integerValue];
         NSString *idx = self.goodsSubjectIdMarr[indexPath.row];
-        [self thn_openSubjectTypeController:type subjectId:idx];
+        [self thn_openSubjectTypeController:self.navigationController type:type subjectId:idx];
     }
 }
 

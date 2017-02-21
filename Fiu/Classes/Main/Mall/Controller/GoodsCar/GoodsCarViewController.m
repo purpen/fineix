@@ -40,9 +40,9 @@ static NSString *const URLCarGoPay = @"/shopping/checkout";
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    [self networkGoodsCarList];
+//    [self networkGoodsCarList];
     
-    [self setGoodsCarVcUI];
+//    [self setGoodsCarVcUI];
 }
 
 #pragma mark - 网络请求
@@ -181,6 +181,7 @@ static NSString *const URLCarGoPay = @"/shopping/checkout";
 
 #pragma mark - 设置视图
 - (void)setGoodsCarVcUI {
+    [self.navView addSubview:self.editBtn];
     [self.view addSubview:self.carItemTable];
     [self.view addSubview:self.bottomView];
 }
@@ -535,7 +536,6 @@ static NSString *const URLCarGoPay = @"/shopping/checkout";
     [[UIApplication sharedApplication] setStatusBarHidden:NO withAnimation:(UIStatusBarAnimationSlide)];
     self.navViewTitle.text = NSLocalizedString(@"GoodsCarVcTitle", nil);
     self.view.backgroundColor = [UIColor colorWithHexString:@"#FFFFFF"];
-    [self.navView addSubview:self.editBtn];
 }
 
 - (void)viewWillDisappear:(BOOL)animated {
@@ -581,5 +581,8 @@ static NSString *const URLCarGoPay = @"/shopping/checkout";
     [self.carGoodsCount removeAllObjects];
 }
 
+- (void)dealloc {
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:@"cacelAll" object:nil];
+}
 
 @end

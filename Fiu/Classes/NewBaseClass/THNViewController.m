@@ -13,6 +13,12 @@
 #import "MallSearchViewController.h"
 #import "GuidePageViewController.h"
 
+#import "THNArticleDetalViewController.h"
+#import "THNActiveDetalTwoViewController.h"
+#import "THNXinPinDetalViewController.h"
+#import "THNCuXiaoDetalViewController.h"
+#import "THNProjectViewController.h"
+
 static NSString *const URLGoodsCarNum = @"/shopping/fetch_cart_count";
 static NSInteger const saveTime = 30 * 24 * 60;
 
@@ -33,6 +39,37 @@ static NSInteger const saveTime = 30 * 24 * 60;
     
     [self setSlideBackVC];
     [self thn_setNavViewUI];
+}
+
+#pragma mark - 轮播图类型跳转
+- (void)thn_openSubjectTypeController:(UINavigationController *)nav type:(NSInteger)type subjectId:(NSString *)idx {
+    if (type == 1) {
+        THNArticleDetalViewController *articleVC = [[THNArticleDetalViewController alloc] init];
+        articleVC.articleDetalid = idx;
+        [nav pushViewController:articleVC animated:YES];
+        
+    } else if (type == 2) {
+        THNActiveDetalTwoViewController *activity = [[THNActiveDetalTwoViewController alloc] init];
+        activity.activeDetalId = idx;
+        [nav pushViewController:activity animated:YES];
+        
+    } else if (type == 3) {
+        THNCuXiaoDetalViewController *cuXiao = [[THNCuXiaoDetalViewController alloc] init];
+        cuXiao.cuXiaoDetalId = idx;
+        cuXiao.vcType = 1;
+        [nav pushViewController:cuXiao animated:YES];
+        
+    } else if (type == 4) {
+        THNXinPinDetalViewController *xinPin = [[THNXinPinDetalViewController alloc] init];
+        xinPin.xinPinDetalId = idx;
+        [nav pushViewController:xinPin animated:YES];
+        
+    } else if (type == 5) {
+        THNCuXiaoDetalViewController *cuXiao = [[THNCuXiaoDetalViewController alloc] init];
+        cuXiao.cuXiaoDetalId = idx;
+        cuXiao.vcType = 2;
+        [nav pushViewController:cuXiao animated:YES];
+    }
 }
 
 #pragma mark 是否有商品推广

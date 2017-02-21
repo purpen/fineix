@@ -27,10 +27,15 @@
 
 - (void)setCellViewUI {
     [self addSubview:self.line];
+    [_line mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.size.mas_equalTo(CGSizeMake(SCREEN_WIDTH - 30, 0.5));
+        make.left.equalTo(self.mas_left).with.offset(15);
+        make.bottom.equalTo(self.mas_bottom).with.offset(0);
+    }];
     
     [self addSubview:self.leftLabel];
     [_leftLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.size.mas_equalTo(CGSizeMake(55, 10));
+        make.size.mas_equalTo(CGSizeMake(65, 10));
         make.left.equalTo(self.mas_left).with.offset(15);
         make.centerY.equalTo(self);
     }];
@@ -45,7 +50,7 @@
 
 - (UILabel *)line {
     if (!_line) {
-        _line = [[UILabel alloc] initWithFrame:CGRectMake(15, 34, SCREEN_WIDTH - 30, 0.5)];
+        _line = [[UILabel alloc] init];
         _line.backgroundColor = [UIColor colorWithHexString:@"#E5E5E5"];
     }
     return _line;
@@ -54,7 +59,7 @@
 - (UILabel *)leftLabel {
     if (!_leftLabel) {
         _leftLabel = [[UILabel alloc] init];
-        _leftLabel.font = [UIFont systemFontOfSize:10];
+        _leftLabel.font = [UIFont systemFontOfSize:12];
         _leftLabel.textColor = [UIColor colorWithHexString:@"#666666"];
     }
     return _leftLabel;
@@ -63,7 +68,7 @@
 - (UILabel *)rightLabel {
     if (!_rightLabel) {
         _rightLabel = [[UILabel alloc] init];
-        _rightLabel.font = [UIFont systemFontOfSize:10];
+        _rightLabel.font = [UIFont systemFontOfSize:12];
         _rightLabel.textColor = [UIColor colorWithHexString:@"#222222"];
     }
     return _rightLabel;

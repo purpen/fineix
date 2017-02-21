@@ -54,7 +54,7 @@ static NSInteger const actionButtonTag  = 611;
 - (instancetype)initWithFrame:(CGRect)frame {
     self = [super initWithFrame:frame];
     if (self) {
-        _leftArr = @[@"营业时间：", @"联系电话：", @"店铺标签："];
+        _leftArr = @[@"联系电话：", @"营业时间：", @"店铺标签："];
         [self setViewUI];
     }
     return self;
@@ -77,7 +77,7 @@ static NSInteger const actionButtonTag  = 611;
     [self.infoTable reloadData];
     
     //  加载情景列表
-    _sort = @"0";
+    _sort = @"1";
     self.sceneCurrentpage = 0;
     [self addMJRefreshTable:self.sceneTable];
     [self thn_networkDomainSceneList:_domainId sort:_sort];
@@ -221,7 +221,7 @@ static NSInteger const actionButtonTag  = 611;
 }
 
 #pragma mark - 商家信息头部地图视图
-- (UIView *)mapView {
+- (THNShangJiaLocationMapView *)mapView {
     if (!_mapView) {
         _mapView = [[THNShangJiaLocationMapView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 120)];
     }
@@ -571,7 +571,7 @@ static NSInteger const actionButtonTag  = 611;
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
     if (tableView == self.infoTable) {
 //        if (indexPath.section == 0) {
-            return 35;
+            return 44;
 //        } else {
 //            return 100;
 //        }

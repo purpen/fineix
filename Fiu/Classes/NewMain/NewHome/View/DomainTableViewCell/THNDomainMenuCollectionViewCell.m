@@ -13,7 +13,6 @@
 - (instancetype)initWithFrame:(CGRect)frame {
     self = [super initWithFrame:frame];
     if (self) {
-        self.backgroundColor = [UIColor whiteColor];
         self.clipsToBounds = YES;
         [self setCellUI];
     }
@@ -30,7 +29,7 @@
     [self addSubview:self.image];
     [_image mas_makeConstraints:^(MASConstraintMaker *make) {
         make.size.mas_equalTo(CGSizeMake(30, 30));
-        make.top.equalTo(self.mas_top).with.offset(5);
+        make.top.equalTo(self.mas_top).with.offset(10);
         make.centerX.equalTo(self);
     }];
     
