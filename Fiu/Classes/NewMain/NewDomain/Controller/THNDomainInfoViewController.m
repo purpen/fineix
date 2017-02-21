@@ -31,6 +31,7 @@ static NSString *const URLDomainInfo = @"/scene_scene/view";
     CGFloat _lastContentOffset;
     CGFloat _lightTextHeight;
     BOOL _onFooterView;
+    NSString *_domainId;
 }
 
 @end
@@ -58,9 +59,12 @@ static NSString *const URLDomainInfo = @"/scene_scene/view";
     self.infoRequest = [FBAPI postWithUrlString:URLDomainInfo requestDictionary:@{@"id":self.infoId} delegate:self];
     [self.infoRequest startRequestSuccess:^(FBRequest *request, id result) {
         if ([[result valueForKey:@"success"] isEqualToNumber:@1]) {
-            NSLog(@"============ 地盘详情： %@", [NSString jsonStringWithObject:result]);
+//            NSLog(@"============ 地盘详情： %@", [NSString jsonStringWithObject:result]);
             NSDictionary *dict =  [result valueForKey:@"data"];
             self.infoModel = [[DominInfoData alloc] initWithDictionary:dict];
+            _domainId = [NSString stringWithFormat:@"%zi",self.infoModel.idField];
+            self.favoriteButton.selected = self.infoModel.isFavorite;
+            
             [self.headerImages thn_setRollimageView:self.infoModel];
             [self.footerView thn_setDomainInfo:self.infoModel];
             self.navViewTitle.text = self.infoModel.title;
@@ -75,11 +79,25 @@ static NSString *const URLDomainInfo = @"/scene_scene/view";
 
 #pragma mark 收藏／取消收藏地盘
 - (void)thn_networkFavoriteDomain:(BOOL)favorite {
+    NSString *url;
     if (favorite) {
-        [SVProgressHUD showInfoWithStatus:@"收藏"];
+        url = @"/favorite/ajax_favorite";
     } else {
-        [SVProgressHUD showInfoWithStatus:@"取消收藏"];
+        url = @"/favorite/ajax_cancel_favorite";
     }
+    self.favoriteRequest = [FBAPI postWithUrlString:url requestDictionary:@{@"id":_domainId, @"type":@"11"} delegate:self];
+    [self.favoriteRequest startRequestSuccess:^(FBRequest *request, id result) {
+        if ([[result valueForKey:@"success"] integerValue] == 1) {
+            if (favorite) {
+                [SVProgressHUD showSuccessWithStatus:@"已收藏"];
+            } else {
+                [SVProgressHUD showSuccessWithStatus:@"取消收藏"];
+            }
+        }
+        
+    } failure:^(FBRequest *request, NSError *error) {
+        NSLog(@"");
+    }];
 }
 
 #pragma mark - 设置界面UI
@@ -274,7 +292,7 @@ static NSString *const URLDomainInfo = @"/scene_scene/view";
 #pragma mark - 收藏按钮
 - (UIButton *)favoriteButton {
     if (!_favoriteButton) {
-        _favoriteButton = [[UIButton alloc] initWithFrame:CGRectMake(SCREEN_WIDTH - 80, 20, 44, 44)];
+        _favoriteButton = [[UIButton alloc] initWithFrame:CGRectMake(SCREEN_WIDTH - 80, 18, 44, 44)];
         [_favoriteButton setImage:[UIImage imageNamed:@"icon_favorite"] forState:(UIControlStateNormal)];
         [_favoriteButton setImage:[UIImage imageNamed:@"icon_favorite_seleted"] forState:(UIControlStateSelected)];
         [_favoriteButton addTarget:self action:@selector(favoriteButtonClick:) forControlEvents:(UIControlEventTouchUpInside)];
@@ -288,7 +306,14 @@ static NSString *const URLDomainInfo = @"/scene_scene/view";
     } else if (button.selected == YES){
         button.selected = NO;
     }
-    [self thn_networkFavoriteDomain:button.selected];
+    
+    if (_domainId.length) {
+        if ([self isUserLogin]) {
+            [self thn_networkFavoriteDomain:button.selected];
+        } else {
+            [self openUserLoginVC];
+        }
+    }
 }
 
 - (void)dealloc {

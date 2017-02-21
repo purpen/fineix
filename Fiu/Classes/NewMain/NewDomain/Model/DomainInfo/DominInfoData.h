@@ -24,6 +24,7 @@
 @property (nonatomic, strong) NSString * des;
 @property (nonatomic, strong) DominInfoExtra * extra;
 @property (nonatomic, assign) NSInteger isLove;
+@property (nonatomic, assign) NSInteger isFavorite;
 @property (nonatomic, strong) DominInfoLocation * location;
 @property (nonatomic, assign) NSInteger loveCount;
 @property (nonatomic, strong) NSArray * products;

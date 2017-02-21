@@ -91,7 +91,7 @@ static NSInteger const actionButtonTag  = 611;
                                  @"page":@(self.sceneCurrentpage + 1),
                                  @"size":@"10",
                                  @"sort":sort,
-                                 @"use_cache":@"1"};
+                                 @"use_cache":@"0"};
     self.sceneListRequest = [FBAPI getWithUrlString:URLSceneList requestDictionary:requestDic delegate:self];
     [self.sceneListRequest startRequestSuccess:^(FBRequest *request, id result) {
         NSArray *sceneArr = [[result valueForKey:@"data"] valueForKey:@"rows"];
@@ -297,6 +297,19 @@ static NSInteger const actionButtonTag  = 611;
 
 #pragma mark - 上传情境
 - (void)creatButtonClick:(UIButton *)button {
+    if ([self thn_userIsLogin]) {
+        PictureToolViewController *pictureToolVC = [[PictureToolViewController alloc] init];
+        pictureToolVC.domainId = _domainId;
+        [self.vc presentViewController:pictureToolVC animated:YES completion:nil];
+    } else {
+        THNLoginRegisterViewController *loginSignupVC = [[THNLoginRegisterViewController alloc] init];
+        UINavigationController *navi = [[UINavigationController alloc] initWithRootViewController:loginSignupVC];
+        [self.vc presentViewController:navi animated:YES completion:nil];
+    }
+}
+
+#pragma mark - 用户是否登录账户
+- (BOOL)thn_userIsLogin {
     UserInfoEntity *entity = [UserInfoEntity defaultUserInfoEntity];
     FBRequest *request = [FBAPI postWithUrlString:@"/auth/check_login" requestDictionary:nil delegate:self];
     [request startRequestSuccess:^(FBRequest *request, id result) {
@@ -306,16 +319,7 @@ static NSInteger const actionButtonTag  = 611;
         [SVProgressHUD showInfoWithStatus:[error localizedDescription]];
     }];
     
-    if (entity.isLogin) {
-        PictureToolViewController *pictureToolVC = [[PictureToolViewController alloc] init];
-        pictureToolVC.domainId = _domainId;
-        [self.vc presentViewController:pictureToolVC animated:YES completion:nil];
-    } else {
-        THNLoginRegisterViewController *loginSignupVC = [[THNLoginRegisterViewController alloc] init];
-        UINavigationController *navi = [[UINavigationController alloc] initWithRootViewController:loginSignupVC];
-        [self.vc presentViewController:navi animated:YES completion:nil];
-    }
-
+    return entity.isLogin;
 }
 
 #pragma mark - 地盘评价头部视图

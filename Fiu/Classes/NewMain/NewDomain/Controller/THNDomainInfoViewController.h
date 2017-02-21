@@ -24,5 +24,6 @@
 @property (nonatomic, strong) UITableView *domainInfoTable;
 @property (nonatomic, strong) THNDomainInfoFooter *footerView;
 @property (nonatomic, strong) UIButton *favoriteButton;
+@property (nonatomic, strong) FBRequest *favoriteRequest;
 
 @end

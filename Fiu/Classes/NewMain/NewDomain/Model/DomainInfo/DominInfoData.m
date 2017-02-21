@@ -19,6 +19,7 @@ NSString *const kDominInfoDataCurrentUserId = @"current_user_id";
 NSString *const kDominInfoDataDes = @"des";
 NSString *const kDominInfoDataExtra = @"extra";
 NSString *const kDominInfoDataIsLove = @"is_love";
+NSString *const kDominInfoDataIsFavorite = @"is_favorite";
 NSString *const kDominInfoDataLocation = @"location";
 NSString *const kDominInfoDataLoveCount = @"love_count";
 NSString *const kDominInfoDataProducts = @"products";
@@ -77,9 +78,12 @@ NSString *const kDominInfoDataViewCount = @"view_count";
 		self.extra = [[DominInfoExtra alloc] initWithDictionary:dictionary[kDominInfoDataExtra]];
 	}
 
-	if(![dictionary[kDominInfoDataIsLove] isKindOfClass:[NSNull class]]){
-		self.isLove = [dictionary[kDominInfoDataIsLove] integerValue];
-	}
+    if(![dictionary[kDominInfoDataIsLove] isKindOfClass:[NSNull class]]){
+        self.isLove = [dictionary[kDominInfoDataIsLove] integerValue];
+    }
+    if(![dictionary[kDominInfoDataIsFavorite] isKindOfClass:[NSNull class]]){
+        self.isFavorite = [dictionary[kDominInfoDataIsFavorite] integerValue];
+    }
 
 	if(![dictionary[kDominInfoDataLocation] isKindOfClass:[NSNull class]]){
 		self.location = [[DominInfoLocation alloc] initWithDictionary:dictionary[kDominInfoDataLocation]];
