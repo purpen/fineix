@@ -600,7 +600,7 @@ static NSString *const homeDataPath = [NSHomeDirectory() stringByAppendingPathCo
         _defaultHomeView.backgroundColor = [UIColor colorWithHexString:@"#FFFFFF" alpha:0];
         [_defaultHomeView.defaultBtn setTitle:NSLocalizedString(@"reloadData", nil) forState:(UIControlStateNormal)];
         [_defaultHomeView.defaultBtn addTarget:self action:@selector(reloadDataClick) forControlEvents:(UIControlEventTouchUpInside)];
-        [_defaultHomeView thn_setDefaultViewImage:@"icon_no_network" promptText:NSLocalizedString(@"noNetworking", nil) showButton:NO];
+        [_defaultHomeView thn_setDefaultViewImage:@"icon_no_network" promptText:NSLocalizedString(@"noNetworking", nil) hiddenButton:NO];
     }
     return _defaultHomeView;
 }

@@ -20,9 +20,8 @@
 @pro_strong NSString *categoryId;
 @pro_strong NSString *vcTitle;
 @pro_strong FBMenuView *menuView;
-@pro_strong UICollectionView *goodsList;
-
 @pro_strong FBRequest *childTagsRequest;
+@pro_strong UICollectionView *goodsList;
 @pro_strong FBRequest *goodsListRequest;
 @pro_assign NSInteger currentpageNum;
 @pro_assign NSInteger totalPageNum;

@@ -9,31 +9,46 @@
 #import "FBViewController.h"
 #import "BuyCarDefault.h"
 #import <SVProgressHUD/SVProgressHUD.h>
+#import "THNMacro.h"
 
-@interface GoodsCarViewController : FBViewController <UITableViewDelegate, UITableViewDataSource>
+@interface GoodsCarViewController : FBViewController <
+    UITableViewDelegate,
+    UITableViewDataSource,
+    UICollectionViewDelegate,
+    UICollectionViewDataSource
+>
 
-@pro_strong FBRequest               *   goodsListRequest;
-@pro_strong FBRequest               *   stockRequest;
-@pro_strong FBRequest               *   deleteRequest;
-@pro_strong FBRequest               *   editCarItemRequest;
-@pro_strong FBRequest               *   carPayRequest;
-@pro_strong BuyCarDefault           *   defaultCarView;     //  没有商品的购物车背景
+@property (nonatomic, strong) FBRequest               *stockRequest;
+@property (nonatomic, strong) FBRequest               *deleteRequest;
+@property (nonatomic, strong) FBRequest               *editCarItemRequest;
+@property (nonatomic, strong) FBRequest               *carPayRequest;
+@property (nonatomic, strong) BuyCarDefault           *defaultCarView;     //  没有商品的购物车背景
 
-@pro_strong UITableView             *   carItemTabel;
-@pro_strong UIButton                *   editBtn;
-@pro_strong UIView                  *   bottomView;
-@pro_strong UIButton                *   goPayBtn;
-@pro_strong UIButton                *   chooseAllBtn;
-@pro_assign CGFloat                     payPrice;
-@pro_strong UILabel                 *   sumPrice;
-@pro_strong UILabel                 *   sumLab;
-@pro_strong UILabel                 *   haveJDGoodsLab;
+@property (nonatomic, strong) UITableView           *carItemTabel;
+@property (nonatomic, strong) UIButton              *editBtn;
+@property (nonatomic, strong) UIView                *bottomView;
+@property (nonatomic, strong) UIButton              *goPayBtn;
+@property (nonatomic, strong) UIButton              *chooseAllBtn;
+@property (nonatomic, assign) CGFloat               payPrice;
+@property (nonatomic, strong) UILabel               *sumPrice;
+@property (nonatomic, strong) UILabel               *sumLab;
+@property (nonatomic, strong) UILabel               *haveJDGoodsLab;
 
-@pro_strong NSMutableArray      *   carItemList;
-@pro_strong NSMutableArray      *   stockList;
-@pro_strong NSMutableArray      *   goodsIdList;
-@pro_strong NSMutableArray      *   chooseItems;
-@pro_strong NSMutableArray      *   priceMarr;
-@pro_strong NSMutableArray      *   carGoodsCount;
+@property (nonatomic, strong) NSMutableArray        *carItemList;
+@property (nonatomic, strong) NSMutableArray        *stockList;
+@property (nonatomic, strong) NSMutableArray        *goodsIdList;
+@property (nonatomic, strong) NSMutableArray        *chooseItems;
+@property (nonatomic, strong) NSMutableArray        *priceMarr;
+@property (nonatomic, strong) NSMutableArray        *carGoodsCount;
+
+@property (nonatomic, strong) UICollectionView      *productList;
+@property (nonatomic, strong) FBRequest             *productListRequest;
+@property (nonatomic, strong) NSMutableArray        *productDataMarr;
+@property (nonatomic, strong) NSMutableArray        *productIdMarr;
+
+/**
+ 跳转购物车的入口，nav还是tabBar
+ */
+@property (nonatomic, assign) NSInteger              openType;
 
 @end

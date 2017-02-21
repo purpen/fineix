@@ -630,7 +630,8 @@ static NSString *const ShareURlText = @"我在Fiu浮游™寻找同路人；希�
 }
 
 - (void)rightBarItemSelected {
-    GoodsCarViewController * goodsCarVC = [[GoodsCarViewController alloc] init];
+    GoodsCarViewController *goodsCarVC = [[GoodsCarViewController alloc] init];
+    goodsCarVC.openType = 1;
     [self.navigationController pushViewController:goodsCarVC animated:YES];
 }
 

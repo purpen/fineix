@@ -390,6 +390,7 @@ static NSString *const MallListHeaderCellViewId = @"mallListHeaderCellViewId";
 - (void)thn_rightBarItemSelected {
     if ([self isUserLogin]) {
         GoodsCarViewController * goodsCarVC = [[GoodsCarViewController alloc] init];
+        goodsCarVC.openType = 1;
         [self.navigationController pushViewController:goodsCarVC animated:YES];
         
     } else {

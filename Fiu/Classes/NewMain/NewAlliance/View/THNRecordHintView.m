@@ -36,14 +36,14 @@
 }
 
 - (void)setTradingRecord {
-    self.leftLable.text = @"佣金／时间";
+    self.leftLable.text = @"金额／时间";
     self.rightLable.text = @"状态";
 }
 
 - (void)setSettlementRecord {
     self.leftLable.text = @"时间";
     self.centerLable.text = @"数量";
-    self.rightLable.text = @"佣金";
+    self.rightLable.text = @"金额";
     
     [self addSubview:self.centerLable];
     [_centerLable mas_makeConstraints:^(MASConstraintMaker *make) {
