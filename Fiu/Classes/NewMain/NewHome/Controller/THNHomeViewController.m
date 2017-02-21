@@ -845,7 +845,7 @@ static NSString *const homeDataPath = [NSHomeDirectory() stringByAppendingPathCo
             return (SCREEN_WIDTH * 0.48) + 15;
         
     } else if (indexPath.section == 1) {
-        return (goodsCellHeight * 2);
+        return (goodsCellHeight * 2) + 10;
         
     } else if (indexPath.section == 2) {
         return 366;

@@ -60,15 +60,17 @@ static NSString *const URLDomainInfo = @"/scene_scene/view";
     self.infoRequest = [FBAPI postWithUrlString:URLDomainInfo requestDictionary:@{@"id":self.infoId} delegate:self];
     [self.infoRequest startRequestSuccess:^(FBRequest *request, id result) {
         if ([[result valueForKey:@"success"] isEqualToNumber:@1]) {
-            NSLog(@"============ 地盘详情： %@", [NSString jsonStringWithObject:result]);
+//            NSLog(@"============ 地盘详情： %@", [NSString jsonStringWithObject:result]);
             NSDictionary *dict =  [result valueForKey:@"data"];
             self.infoModel = [[DominInfoData alloc] initWithDictionary:dict];
-            _domainId = [NSString stringWithFormat:@"%zi",self.infoModel.idField];
-            self.favoriteButton.selected = self.infoModel.isFavorite;
-            [self.headerImages thn_setRollimageView:self.infoModel];
-            [self.footerView thn_setDomainInfo:self.infoModel];
-            self.navViewTitle.text = self.infoModel.title;
-            [self.domainInfoTable reloadData];
+            if (self.infoModel) {
+                _domainId = [NSString stringWithFormat:@"%zi",self.infoModel.idField];
+                self.favoriteButton.selected = self.infoModel.isFavorite;
+                [self.headerImages thn_setRollimageView:self.infoModel];
+                [self.footerView thn_setDomainInfo:self.infoModel];
+                self.navViewTitle.text = self.infoModel.title;
+                [self.domainInfoTable reloadData];
+            }
             [SVProgressHUD dismiss];
         }
         
