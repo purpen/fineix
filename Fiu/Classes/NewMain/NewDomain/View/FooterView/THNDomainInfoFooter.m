@@ -62,6 +62,9 @@ static NSInteger const actionButtonTag  = 611;
 
 - (void)thn_setDomainInfo:(DominInfoData *)model {
     NSLog(@"---- 经纬度 ----：%@", model.location.coordinates);
+    self.mapView.latitude = [model.location.coordinates[1] floatValue];
+    self.mapView.longitude = [model.location.coordinates[0] floatValue];
+    [self.mapView setPoint];
     
     //  地盘id
     _domainId = [NSString stringWithFormat:@"%zi", model.idField];
@@ -220,8 +223,7 @@ static NSInteger const actionButtonTag  = 611;
 #pragma mark - 商家信息头部地图视图
 - (UIView *)mapView {
     if (!_mapView) {
-        _mapView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 120)];
-        _mapView.backgroundColor = [UIColor grayColor];
+        _mapView = [[THNShangJiaLocationMapView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 120)];
     }
     return _mapView;
 }

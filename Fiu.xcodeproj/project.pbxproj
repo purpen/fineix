@@ -22,6 +22,7 @@
 		1F1804281E56CE1100722AF5 /* THNDiPanZhuanTiCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F1804271E56CE1100722AF5 /* THNDiPanZhuanTiCollectionViewCell.m */; };
 		1F18042B1E56D0F700722AF5 /* THNQingJingFenLeiCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F18042A1E56D0F700722AF5 /* THNQingJingFenLeiCollectionViewCell.m */; };
 		1F1804311E5AF9E800722AF5 /* THNShangPinCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F1804301E5AF9E700722AF5 /* THNShangPinCollectionViewCell.m */; };
+		1F1804341E5BD4A000722AF5 /* THNShangJiaLocationMapView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F1804331E5BD4A000722AF5 /* THNShangJiaLocationMapView.m */; };
 		1F1AF3B21CF58A6B00CAA525 /* IntegralViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F1AF3B01CF58A6B00CAA525 /* IntegralViewController.m */; };
 		1F1AF3B31CF58A6B00CAA525 /* IntegralViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1F1AF3B11CF58A6B00CAA525 /* IntegralViewController.xib */; };
 		1F223B1D1CD714F3007687F7 /* messages.plist in Resources */ = {isa = PBXBuildFile; fileRef = 1F223B1C1CD714F3007687F7 /* messages.plist */; };
@@ -843,6 +844,8 @@
 		1F18042A1E56D0F700722AF5 /* THNQingJingFenLeiCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THNQingJingFenLeiCollectionViewCell.m; sourceTree = "<group>"; };
 		1F18042F1E5AF9E700722AF5 /* THNShangPinCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THNShangPinCollectionViewCell.h; sourceTree = "<group>"; };
 		1F1804301E5AF9E700722AF5 /* THNShangPinCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THNShangPinCollectionViewCell.m; sourceTree = "<group>"; };
+		1F1804321E5BD4A000722AF5 /* THNShangJiaLocationMapView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THNShangJiaLocationMapView.h; sourceTree = "<group>"; };
+		1F1804331E5BD4A000722AF5 /* THNShangJiaLocationMapView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THNShangJiaLocationMapView.m; sourceTree = "<group>"; };
 		1F1AF3AF1CF58A6B00CAA525 /* IntegralViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IntegralViewController.h; sourceTree = "<group>"; };
 		1F1AF3B01CF58A6B00CAA525 /* IntegralViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IntegralViewController.m; sourceTree = "<group>"; };
 		1F1AF3B11CF58A6B00CAA525 /* IntegralViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = IntegralViewController.xib; sourceTree = "<group>"; };
@@ -5375,6 +5378,8 @@
 			children = (
 				D8884E151E59650700CEE159 /* THNDomainInfoFooter.h */,
 				D8884E161E59650700CEE159 /* THNDomainInfoFooter.m */,
+				1F1804321E5BD4A000722AF5 /* THNShangJiaLocationMapView.h */,
+				1F1804331E5BD4A000722AF5 /* THNShangJiaLocationMapView.m */,
 			);
 			path = FooterView;
 			sourceTree = "<group>";
@@ -6030,6 +6035,7 @@
 				1F9309901D9D1E8800832D90 /* THNResoltCollectionViewCell.m in Sources */,
 				D857AC241DE8218700F924E8 /* ProductModel.m in Sources */,
 				1F2A8FBE1CF40277005116C7 /* ChildTagsTag.m in Sources */,
+				1F1804341E5BD4A000722AF5 /* THNShangJiaLocationMapView.m in Sources */,
 				D840F0941D93B57700CE9FB7 /* THNRemindModelTargetObj.m in Sources */,
 				D8884DF21E57007800CEE159 /* DominInfoLocation.m in Sources */,
 				D857AC3C1DE836F000F924E8 /* THNOrderOperationView.m in Sources */,
