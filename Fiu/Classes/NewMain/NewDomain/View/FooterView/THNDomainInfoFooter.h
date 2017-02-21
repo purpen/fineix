@@ -10,6 +10,7 @@
 #import "THNMacro.h"
 #import "SGTopTitleView.h"
 #import "DominInfoData.h"
+#import "THNShangJiaLocationMapView.h"
 
 @interface THNDomainInfoFooter : UIView <
     UITableViewDelegate,
@@ -28,7 +29,7 @@
 @property (nonatomic, strong) UITableView *infoTable;
 @property (nonatomic, strong) UILabel *backLabel;
 @property (nonatomic, strong) UIView *commentView;
-@property (nonatomic, strong) UIView *mapView;
+@property (nonatomic, strong) THNShangJiaLocationMapView *mapView;
 @property (nonatomic, strong) UIView *creatSceneView;
 @property (nonatomic, strong) DominInfoData *infoModel;
 
