@@ -22,6 +22,7 @@
 #import "FBAlertViewController.h"
 #import "UserInfoEntity.h"
 #import "THNLoginRegisterViewController.h"
+#import "FBShareViewController.h"
 
 @interface THNSceneDetalViewController ()<UITableViewDelegate,UITableViewDataSource, FBNavigationBarItemsDelegate>
 {
@@ -74,7 +75,10 @@ static NSString *const URLDeleteScene = @"/scene_sight/delete";
 }
 
 -(void)rightBarItemSelected{
-    
+    FBShareViewController * shareVC = [[FBShareViewController alloc] init];
+    shareVC.sceneModel = self.model;
+    shareVC.sceneId = [NSString stringWithFormat:@"%zi", self.model.idField];
+    [self presentViewController:shareVC animated:YES completion:nil];
 }
 
 - (void)viewDidLoad {
@@ -161,13 +165,6 @@ static NSString *const URLDeleteScene = @"/scene_sight/delete";
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     __weak __typeof(self)weakSelf = self;
     if (indexPath.row == 0) {
-        THNUserInfoTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:userInfoCellId];
-        cell = [[THNUserInfoTableViewCell alloc] initWithStyle:(UITableViewCellStyleDefault) reuseIdentifier:userInfoCellId];
-        [cell thn_setHomeSceneUserInfoData:self.model userId:[self getLoginUserID] isLogin:[self isUserLogin]];
-        cell.nav = self.navigationController;
-        return cell;
-        
-    } else if (indexPath.row == 1) {
         THNSceneImageTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:sceneImgCellId];
         cell = [[THNSceneImageTableViewCell alloc] initWithStyle:(UITableViewCellStyleDefault) reuseIdentifier:sceneImgCellId];
         if (self.model) {
@@ -177,7 +174,27 @@ static NSString *const URLDeleteScene = @"/scene_sight/delete";
         }
         return cell;
         
+    } else if (indexPath.row == 1) {
+        THNUserInfoTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:userInfoCellId];
+        cell = [[THNUserInfoTableViewCell alloc] initWithStyle:(UITableViewCellStyleDefault) reuseIdentifier:userInfoCellId];
+        [cell thn_setHomeSceneUserInfoData:self.model userId:[self getLoginUserID] isLogin:[self isUserLogin]];
+        cell.nav = self.navigationController;
+        return cell;
+        
     } else if (indexPath.row == 2) {
+        
+        THNSceneInfoTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:sceneInfoCellId];
+        cell = [[THNSceneInfoTableViewCell alloc] initWithStyle:(UITableViewCellStyleDefault) reuseIdentifier:sceneInfoCellId];
+        if (self.model) {
+            [cell thn_setSceneContentData:self.model];
+            _contentHigh = cell.cellHigh;
+            _defaultContentHigh = cell.defaultCellHigh;
+            cell.nav = self.navigationController;
+        }
+        return cell;
+        
+    } else if (indexPath.row == 3) {
+        
         THNDataInfoTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:dataInfoCellId];
         cell = [[THNDataInfoTableViewCell alloc] initWithStyle:(UITableViewCellStyleDefault) reuseIdentifier:dataInfoCellId];
         if (self.model) {
@@ -209,17 +226,6 @@ static NSString *const URLDeleteScene = @"/scene_sight/delete";
         [cell.more addTarget:self action:@selector(moreClick) forControlEvents:UIControlEventTouchUpInside];
         return cell;
         
-    } else if (indexPath.row == 3) {
-        THNSceneInfoTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:sceneInfoCellId];
-        cell = [[THNSceneInfoTableViewCell alloc] initWithStyle:(UITableViewCellStyleDefault) reuseIdentifier:sceneInfoCellId];
-        if (self.model) {
-            [cell thn_setSceneContentData:self.model];
-            _contentHigh = cell.cellHigh;
-            _defaultContentHigh = cell.defaultCellHigh;
-            cell.nav = self.navigationController;
-        }
-        return cell;
-        
     } else if (indexPath.row == 4) {
         if ([self.comments count] > 0) {
             THNSceneCommentTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:commentsCellId];
@@ -248,7 +254,6 @@ static NSString *const URLDeleteScene = @"/scene_sight/delete";
             return cell;
         }
     }
-    
     return nil;
 }
 
@@ -334,69 +339,24 @@ static NSString *const URLDeleteScene = @"/scene_sight/delete";
             [self.model setValue:loveCount forKey:@"loveCount"];
             [self.model setValue:@"0" forKey:@"isLove"];
         }
-        
     } failure:^(FBRequest *request, NSError *error) {
-        NSLog(@"%@", error);
     }];
 }
 
-////  关注用户
-//- (void)beginFollowUser:(NSString *)userId {
-//    [self.model.user setValue:@"1" forKey:@"isFollow"];
-//    [self thn_networkBeginFollowUserData:userId];
-//}
-//
-////  关注
-//- (void)thn_networkBeginFollowUserData:(NSString *)idx {
-//    UserInfoEntity *entity = [UserInfoEntity defaultUserInfoEntity];
-//    if (entity.isLogin == NO) {
-//        THNLoginRegisterViewController *vc = [[THNLoginRegisterViewController alloc] init];
-//        [self presentViewController:vc animated:YES completion:nil];
-//    }else{
-//        self.followRequest = [FBAPI postWithUrlString:URLFollowUser requestDictionary:@{@"follow_id":idx} delegate:self];
-//        [self.followRequest startRequestSuccess:^(FBRequest *request, id result) {
-//            if ([[result valueForKey:@"success"] isEqualToNumber:@1]) {
-//                
-//            }
-//            
-//        } failure:^(FBRequest *request, NSError *error) {
-//            [SVProgressHUD showErrorWithStatus:[error localizedDescription]];
-//        }];
-//    }
-//}
-//
-////  取消关注用户
-//- (void)cancelFollowUser:(NSString *)userId {
-//    [self.model.user setValue:@"0" forKey:@"isFollow"];
-//    [self thn_networkCancelFollowUserData:userId];
-//}
-//
-////  取消关注
-//- (void)thn_networkCancelFollowUserData:(NSString *)idx {
-//    self.cancelFollowRequest = [FBAPI postWithUrlString:URLCancelFollowUser requestDictionary:@{@"follow_id":idx} delegate:self];
-//    [self.cancelFollowRequest startRequestSuccess:^(FBRequest *request, id result) {
-//        if ([[result valueForKey:@"success"] isEqualToNumber:@1]) {
-//            
-//        }
-//        
-//    } failure:^(FBRequest *request, NSError *error) {
-//        [SVProgressHUD showErrorWithStatus:[error localizedDescription]];
-//    }];
-//}
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
     if (indexPath.row == 0) {
-        return 50;
-    } else if (indexPath.row == 1) {
         return SCREEN_WIDTH;
+    } else if (indexPath.row == 1) {
+        return 50;
     } else if (indexPath.row == 2) {
-        return 40;
-    } else if (indexPath.row == 3) {
         if (_selectedIndexPath && _selectedIndexPath.section == indexPath.section) {
             return _contentHigh;
         } else {
             return _defaultContentHigh;
         }
+    } else if (indexPath.row == 3) {
+        return 40;
     } else if (indexPath.row == 4) {
         if ([self.comments count] > 0) {
             return _commentHigh;
@@ -422,7 +382,7 @@ static NSString *const URLDeleteScene = @"/scene_sight/delete";
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    if (indexPath.row == 3) {
+    if (indexPath.row == 2) {
         if (_contentHigh > 70.0f) {
             if (_selectedIndexPath && _selectedIndexPath.section == indexPath.section) {
                 _selectedIndexPath = nil;

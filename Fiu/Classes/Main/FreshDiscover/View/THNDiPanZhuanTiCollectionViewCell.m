@@ -26,7 +26,7 @@
     if (self = [super initWithFrame:frame])
     {
         self.imageV = [[UIImageView alloc] init];
-        self.imageV.contentMode = UIViewContentModeScaleAspectFit;
+//        self.imageV.contentMode = UIViewContentModeScaleAspectFit;
         [self.contentView addSubview:self.imageV];
         self.imageV.layer.masksToBounds = YES;
         self.imageV.layer.cornerRadius = 3;

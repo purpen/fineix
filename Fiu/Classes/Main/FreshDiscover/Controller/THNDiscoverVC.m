@@ -146,26 +146,10 @@ UITableViewDataSource
     } failure:^(FBRequest *request, NSError *error) {
     }];
     
-//    NSString *path = [[NSBundle mainBundle] pathForResource:@"liwushuo" ofType:@"json"];
-//    NSData *data = [NSData dataWithContentsOfFile:path];
-//    NSDictionary *dict = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingAllowFragments error:nil];
-//    NSArray *categories = dict[@"data"][@"categories"];
-//    for (NSDictionary *dict in categories)
-//    {
-//        CollectionCategoryModel *model =
-//        [CollectionCategoryModel objectWithDictionary:dict];
-//        [self.dataSource addObject:model];
-//        
-//        NSMutableArray *datas = [NSMutableArray array];
-//        for (SubCategoryModel *sModel in model.subcategories)
-//        {
-//            [datas addObject:sModel];
-//        }
-//        [self.collectionDatas addObject:datas];
-//    }
-    
     [self.tableView selectRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0] animated:YES scrollPosition:UITableViewScrollPositionTop];
+
 }
+
 
 -(NSMutableArray *)tableViewDataSource{
     if (!_tableViewDataSource) {
@@ -200,7 +184,7 @@ UITableViewDataSource
         _collectionView.dataSource = self;
         _collectionView.showsVerticalScrollIndicator = NO;
         _collectionView.showsHorizontalScrollIndicator = NO;
-        [_collectionView setBackgroundColor:[UIColor clearColor]];
+        [_collectionView setBackgroundColor:[UIColor whiteColor]];
         //注册cell
         [_collectionView registerClass:[CollectionViewCell class] forCellWithReuseIdentifier:kCellIdentifier_CollectionView];
         [_collectionView registerClass:[THNRommendCollectionViewCell class] forCellWithReuseIdentifier:THNRECOmmendCollectionViewCell];
@@ -225,7 +209,7 @@ UITableViewDataSource
         _tableView.tableFooterView = [UIView new];
         _tableView.rowHeight = 55;
         _tableView.showsVerticalScrollIndicator = NO;
-        _tableView.separatorColor = [UIColor clearColor];
+        _tableView.separatorColor = [UIColor whiteColor];
         [_tableView registerClass:[LeftTableViewCell class] forCellReuseIdentifier:kCellIdentifier_Left];
         UIView *lineView = [[UIView alloc] init];
         lineView.backgroundColor = [UIColor colorWithWhite:0 alpha:0.1];
@@ -343,7 +327,7 @@ UITableViewDataSource
         THNSortCollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:THNSORTCollectionViewCell forIndexPath:indexPath];
         NSArray *ary = self.collectionDatas[6];
         Pro_categoryModel *model = ary[indexPath.row];
-        cell.model = model;
+        cell.pModel = model;
         return cell;
     } else if (indexPath.section == 5) {
         THNDiPanZhuanTiCollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:THNDIPANZhuanTiCollectionViewCell forIndexPath:indexPath];
@@ -354,7 +338,7 @@ UITableViewDataSource
     } else if (indexPath.section == 6) {
         if (indexPath.row <= 2) {
             THNSortCollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:THNSORTCollectionViewCell forIndexPath:indexPath];
-            NSArray *ary = @[[Pro_categoryModel getPro_categoryModelWithTitle:@"邀请微信好友" andCoverUrl:@""],[Pro_categoryModel getPro_categoryModelWithTitle:@"连接微博" andCoverUrl:@""],[Pro_categoryModel getPro_categoryModelWithTitle:@"连接通讯录" andCoverUrl:@""]];
+            NSArray *ary = @[[Pro_categoryModel getPro_categoryModelWithTitle:@"邀请微信好友" andCoverUrl:@"weixin_icon"],[Pro_categoryModel getPro_categoryModelWithTitle:@"连接微博" andCoverUrl:@"weibo_icon"],[Pro_categoryModel getPro_categoryModelWithTitle:@"连接通讯录" andCoverUrl:@"tongxunlu"]];
             Pro_categoryModel *model = ary[indexPath.row];
             cell.model = model;
             return cell;
@@ -367,6 +351,40 @@ UITableViewDataSource
     }
     CollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:kCellIdentifier_CollectionView forIndexPath:indexPath];
     return cell;
+}
+
+-(UIEdgeInsets)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout insetForSectionAtIndex:(NSInteger)section{
+    if (section == 1) {
+        return UIEdgeInsetsMake(0, 18, 0, 18);
+    } else if (section == 2) {
+        return UIEdgeInsetsMake(0, 22, 0, 22);
+    } else if (section == 3) {
+        return UIEdgeInsetsMake(0, 22, 0, 22);
+    } else if (section == 4) {
+        return UIEdgeInsetsMake(0, 18, 0, 18);
+    } else if (section == 5) {
+        return UIEdgeInsetsMake(0, 22, 0, 22);
+    } else if (section == 6) {
+        return UIEdgeInsetsMake(0, 18, 0, 18);
+    }
+    return UIEdgeInsetsMake(0, 0, 0, 0);
+}
+
+-(CGFloat)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout minimumInteritemSpacingForSectionAtIndex:(NSInteger)section{
+    if (section == 1) {
+        return 18;
+    } else if (section == 2) {
+        return 3;
+    } else if (section == 3) {
+        return 3;
+    } else if (section == 4) {
+        return 18;
+    } else if (section == 5) {
+        return 3;
+    } else if (section == 6) {
+        return 18;
+    }
+    return 0;
 }
 
 - (CGSize)collectionView:(UICollectionView *)collectionView
@@ -391,7 +409,7 @@ UITableViewDataSource
             return CGSizeMake(120, 135/2.0);
         } else {
             return CGSizeMake(60,
-                             60);
+                             100);
         }
     } else if (indexPath.section == 4) {
         return CGSizeMake(60,
@@ -428,7 +446,7 @@ UITableViewDataSource
 
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout referenceSizeForHeaderInSection:(NSInteger)section
 {
-    return CGSizeMake(SCREEN_WIDTH, 30);
+    return CGSizeMake(SCREEN_WIDTH, 50);
 }
 
 // CollectionView分区标题即将展示

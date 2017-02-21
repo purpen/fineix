@@ -44,13 +44,14 @@
         [_labelView mas_makeConstraints:^(MASConstraintMaker *make) {
             make.top.mas_equalTo(self.contentView.mas_top).mas_offset(96/2);
             make.height.mas_equalTo(58/2);
+            make.centerX.mas_equalTo(self.contentView.mas_centerX).mas_offset(0);
         }];
         
         self.yellowLineView = [[UIView alloc] init];
         self.yellowLineView.backgroundColor = [UIColor colorWithHexString:fineixColor];
         [self.labelView addSubview:self.yellowLineView];
         [_yellowLineView mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.left.right.bottom.mas_equalTo(self.contentView).mas_offset(0);
+            make.left.right.bottom.mas_equalTo(self.labelView).mas_offset(0);
             make.height.mas_equalTo(1);
         }];
         
@@ -64,6 +65,7 @@
             make.top.mas_equalTo(self.labelView.mas_top).mas_offset(5);
             make.right.mas_equalTo(self.labelView.mas_right).mas_offset(-15);
             make.bottom.mas_equalTo(self.labelView.mas_bottom).mas_offset(-5);
+            make.width.mas_lessThanOrEqualTo(200);
         }];
         
         self.subTextLabel = [[UILabel alloc] init];
@@ -73,6 +75,8 @@
         [self.contentView addSubview:self.subTextLabel];
         [_subTextLabel mas_makeConstraints:^(MASConstraintMaker *make) {
             make.top.mas_equalTo(self.labelView.mas_bottom).mas_offset(10);
+            make.centerX.mas_equalTo(self.contentView.mas_centerX).mas_offset(0);
+            make.width.mas_lessThanOrEqualTo(200);
         }];
     }
     return self;
