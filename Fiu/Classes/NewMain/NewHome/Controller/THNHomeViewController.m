@@ -870,8 +870,8 @@ static NSString *const homeDataPath = [NSHomeDirectory() stringByAppendingPathCo
                 return 0.01;
             }
         } else if (indexPath.row == 1) {
-//            return 80;
-            return 0.01;
+            return 80;
+//            return 0.01;
         } else
             return (SCREEN_WIDTH * 0.48) + 15;
         

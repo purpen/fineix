@@ -14,6 +14,7 @@
 #import "THNTitleTableViewCell.h"
 #import "THNLightspotTableViewCell.h"
 #import "NSString+JSON.h"
+#import <UMSocialCore/UMSocialCore.h>
 
 static NSString *const businessCellId = @"THNBusinessTableViewCellId";
 static NSString *const couponCellId = @"THNCouponTableViewCellId";
@@ -59,12 +60,11 @@ static NSString *const URLDomainInfo = @"/scene_scene/view";
     self.infoRequest = [FBAPI postWithUrlString:URLDomainInfo requestDictionary:@{@"id":self.infoId} delegate:self];
     [self.infoRequest startRequestSuccess:^(FBRequest *request, id result) {
         if ([[result valueForKey:@"success"] isEqualToNumber:@1]) {
-//            NSLog(@"============ 地盘详情： %@", [NSString jsonStringWithObject:result]);
+            NSLog(@"============ 地盘详情： %@", [NSString jsonStringWithObject:result]);
             NSDictionary *dict =  [result valueForKey:@"data"];
             self.infoModel = [[DominInfoData alloc] initWithDictionary:dict];
             _domainId = [NSString stringWithFormat:@"%zi",self.infoModel.idField];
             self.favoriteButton.selected = self.infoModel.isFavorite;
-            
             [self.headerImages thn_setRollimageView:self.infoModel];
             [self.footerView thn_setDomainInfo:self.infoModel];
             self.navViewTitle.text = self.infoModel.title;
@@ -286,7 +286,56 @@ static NSString *const URLDomainInfo = @"/scene_scene/view";
 
 
 - (void)thn_rightBarItemSelected {
-    [SVProgressHUD showInfoWithStatus:@"分享地盘的H5"];
+    if (self.infoModel) {
+        self.shareVC = [[ShareViewController alloc] init];
+        self.shareVC.modalPresentationStyle = UIModalPresentationOverCurrentContext;
+        self.shareVC.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;
+        [self presentViewController:self.shareVC animated:YES completion:nil];
+        [self.shareVC.wechatBtn addTarget:self action:@selector(wechatShareBtnAction) forControlEvents:(UIControlEventTouchUpInside)];
+        [self.shareVC.friendBtn addTarget:self action:@selector(timelineShareBtnAction) forControlEvents:(UIControlEventTouchUpInside)];
+        [self.shareVC.weiBoBtn addTarget:self action:@selector(sinaShareBtnAction) forControlEvents:(UIControlEventTouchUpInside)];
+        [self.shareVC.qqBtn addTarget:self action:@selector(qqShareBtnAction) forControlEvents:(UIControlEventTouchUpInside)];
+    }
+}
+
+- (void)wechatShareBtnAction {
+    [self shareToPlatform:UMSocialPlatformType_WechatSession];
+}
+
+- (void)timelineShareBtnAction {
+    [self shareToPlatform:UMSocialPlatformType_WechatTimeLine];
+}
+
+- (void)qqShareBtnAction {
+    [self shareToPlatform:UMSocialPlatformType_QQ];
+}
+
+- (void)sinaShareBtnAction {
+    [self shareToPlatform:UMSocialPlatformType_Sina];
+}
+
+- (void)shareToPlatform:(UMSocialPlatformType)type {
+    [[UMSocialManager defaultManager] shareToPlatform:(type)
+                                        messageObject:[self shareMessageObject]
+                                currentViewController:self
+                                           completion:^(id result, NSError *error) {
+                                               if (error) {
+                                                   NSLog(@"************Share fail with error %@*********",error);
+                                               } else{
+                                                   [self.shareVC dismissViewControllerAnimated:YES completion:^{
+                                                       [SVProgressHUD showSuccessWithStatus:@"分享成功"];
+                                                   }];
+                                               }
+                                           }];
+}
+
+- (UMSocialMessageObject *)shareMessageObject {
+    //  创建分享消息对象
+    UMSocialMessageObject *messageObject = [UMSocialMessageObject messageObject];
+    UMShareWebpageObject *shareObject = [UMShareWebpageObject shareObjectWithTitle:self.infoModel.title descr:self.infoModel.des thumImage:self.infoModel.avatarUrl];
+    shareObject.webpageUrl = self.infoModel.viewUrl;
+    messageObject.shareObject = shareObject;
+    return messageObject;
 }
 
 #pragma mark - 收藏按钮

@@ -17,6 +17,7 @@
 @property (nonatomic, strong) NSString * address;
 @property (nonatomic, strong) NSString * avatarUrl;
 @property (nonatomic, strong) NSArray * banners;
+@property (nonatomic, strong) NSArray * covers;
 @property (nonatomic, strong) NSArray * brightSpot;
 @property (nonatomic, strong) NSString * city;
 @property (nonatomic, strong) NSString * createdAt;
@@ -31,6 +32,7 @@
 @property (nonatomic, assign) NSInteger scoreAverage;
 @property (nonatomic, strong) NSArray * sights;
 @property (nonatomic, strong) NSString * subTitle;
+@property (nonatomic, strong) NSString * viewUrl;
 @property (nonatomic, strong) NSArray * tags;
 @property (nonatomic, strong) NSString * title;
 @property (nonatomic, strong) DominInfoUser * user;

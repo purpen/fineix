@@ -26,7 +26,9 @@
 }
 
 - (void)thn_setRollimageView:(DominInfoData *)model {
-    self.rollImageView.imageURLStringsGroup = model.banners;
+    if (model.covers.count) {
+        self.rollImageView.imageURLStringsGroup = model.covers;
+    }
 }
 
 - (SDCycleScrollView *)rollImageView {

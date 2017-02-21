@@ -12,6 +12,7 @@ NSString *const kDominInfoDataIdField = @"_id";
 NSString *const kDominInfoDataAddress = @"address";
 NSString *const kDominInfoDataAvatarUrl = @"avatar_url";
 NSString *const kDominInfoDataBanners = @"banners";
+NSString *const kDominInfoDataCovers = @"covers";
 NSString *const kDominInfoDataBrightSpot = @"bright_spot";
 NSString *const kDominInfoDataCity = @"city";
 NSString *const kDominInfoDataCreatedAt = @"created_at";
@@ -28,6 +29,7 @@ NSString *const kDominInfoDataSights = @"sights";
 NSString *const kDominInfoDataSubTitle = @"sub_title";
 NSString *const kDominInfoDataTags = @"tags";
 NSString *const kDominInfoDataTitle = @"title";
+NSString *const kDominInfoDataViewUrl = @"view_url";
 NSString *const kDominInfoDataUser = @"user";
 NSString *const kDominInfoDataViewCount = @"view_count";
 
@@ -55,9 +57,12 @@ NSString *const kDominInfoDataViewCount = @"view_count";
 	if(![dictionary[kDominInfoDataAvatarUrl] isKindOfClass:[NSNull class]]){
 		self.avatarUrl = dictionary[kDominInfoDataAvatarUrl];
 	}	
-	if(![dictionary[kDominInfoDataBanners] isKindOfClass:[NSNull class]]){
-		self.banners = dictionary[kDominInfoDataBanners];
-	}	
+    if(![dictionary[kDominInfoDataBanners] isKindOfClass:[NSNull class]]){
+        self.banners = dictionary[kDominInfoDataBanners];
+    }
+    if(![dictionary[kDominInfoDataCovers] isKindOfClass:[NSNull class]]){
+        self.covers = dictionary[kDominInfoDataCovers];
+    }
 	if(![dictionary[kDominInfoDataBrightSpot] isKindOfClass:[NSNull class]]){
 		self.brightSpot = dictionary[kDominInfoDataBrightSpot];
 	}	
@@ -109,9 +114,12 @@ NSString *const kDominInfoDataViewCount = @"view_count";
 	if(![dictionary[kDominInfoDataTags] isKindOfClass:[NSNull class]]){
 		self.tags = dictionary[kDominInfoDataTags];
 	}	
-	if(![dictionary[kDominInfoDataTitle] isKindOfClass:[NSNull class]]){
-		self.title = dictionary[kDominInfoDataTitle];
-	}	
+    if(![dictionary[kDominInfoDataTitle] isKindOfClass:[NSNull class]]){
+        self.title = dictionary[kDominInfoDataTitle];
+    }
+    if(![dictionary[kDominInfoDataViewUrl] isKindOfClass:[NSNull class]]){
+        self.viewUrl = dictionary[kDominInfoDataViewUrl];
+    }
 	if(![dictionary[kDominInfoDataUser] isKindOfClass:[NSNull class]]){
 		self.user = [[DominInfoUser alloc] initWithDictionary:dictionary[kDominInfoDataUser]];
 	}
