@@ -21,7 +21,7 @@
 
 #pragma mark - 交易详情
 - (void)thn_setTradingRecordInfoData:(THNTradingInfoData *)model {
-    NSArray *textArr = @[@"产品", @"单价", @"收益比率", @"佣金", @"数量"];
+    NSArray *textArr = @[@"产品", @"单价", @"收益比率", @"金额", @"数量"];
     [self setTradingInfoText:textArr];
 
     if (model) {
@@ -36,7 +36,7 @@
 
 #pragma mark - 结算详情
 - (void)thn_setSettlementRecordInfoData:(THNSettlementInfoRow *)model {
-    NSArray *textArr = @[@"产品", @"单价", @"收益比率", @"佣金", @"数量"];
+    NSArray *textArr = @[@"产品", @"单价", @"收益比率", @"金额", @"数量"];
     [self setTradingInfoText:textArr];
     
     if (model) {

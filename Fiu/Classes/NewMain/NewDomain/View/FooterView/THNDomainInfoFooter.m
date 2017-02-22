@@ -61,30 +61,32 @@ static NSInteger const actionButtonTag  = 611;
 }
 
 - (void)thn_setDomainInfo:(DominInfoData *)model {
-    NSLog(@"---- 经纬度 ----：%@", model.location.coordinates);
-    self.mapView.latitude = [model.location.coordinates[1] floatValue];
-    self.mapView.longitude = [model.location.coordinates[0] floatValue];
-    [self.mapView setPoint];
-    
-    //  地盘id
-    _domainId = [NSString stringWithFormat:@"%zi", model.idField];
-    
-    //  商家基本信息
-    _rightArr = [NSMutableArray array];
-    [_rightArr addObject:model.extra.tel];
-    [_rightArr addObject:model.extra.shopHours];
-    [_rightArr addObject:[model.tags componentsJoinedByString:@"、"]];
-    [self.infoTable reloadData];
-    
-    //  加载情景列表
-    _sort = @"1";
-    self.sceneCurrentpage = 0;
-    [self addMJRefreshTable:self.sceneTable];
-    [self thn_networkDomainSceneList:_domainId sort:_sort];
-    
-    //  加载商品列表
-    self.currentpageNum = 0;
-    [self thn_networkGoodsListData:_domainId];
+    if (model) {
+        //    NSLog(@"---- 经纬度 ----：%@", model.location.coordinates);
+        self.mapView.latitude = [model.location.coordinates[1] floatValue];
+        self.mapView.longitude = [model.location.coordinates[0] floatValue];
+        [self.mapView setPoint];
+        
+        //  地盘id
+        _domainId = [NSString stringWithFormat:@"%zi", model.idField];
+        
+        //  商家基本信息
+        _rightArr = [NSMutableArray array];
+        [_rightArr addObject:model.extra.tel];
+        [_rightArr addObject:model.extra.shopHours];
+        [_rightArr addObject:[model.tags componentsJoinedByString:@"、"]];
+        [self.infoTable reloadData];
+        
+        //  加载情景列表
+        _sort = @"1";
+        self.sceneCurrentpage = 0;
+        [self addMJRefreshTable:self.sceneTable];
+        [self thn_networkDomainSceneList:_domainId sort:_sort];
+        
+        //  加载商品列表
+        self.currentpageNum = 0;
+        [self thn_networkGoodsListData:_domainId];
+    }
 }
 
 #pragma mark - 网络请求情景列表数据
@@ -124,17 +126,22 @@ static NSInteger const actionButtonTag  = 611;
                                                                                      @"scene_id":domainId} delegate:self];
     [self.goodsListRequest startRequestSuccess:^(FBRequest *request, id result) {
         NSArray *goodsArr = [[[result valueForKey:@"data"] valueForKey:@"rows"] valueForKey:@"product"];
-        for (NSDictionary * goodsDic in goodsArr) {
-            GoodsRow *goodsModel = [[GoodsRow alloc] initWithDictionary:goodsDic];
-            [self.goodsListMarr addObject:goodsModel];
-            [self.goodsIdMarr addObject:[NSString stringWithFormat:@"%zi",goodsModel.idField]];
+//        NSLog(@"============ 地盘商品详情： %@", [NSString jsonStringWithObject:result]);
+        if (![goodsArr[0] isKindOfClass:[NSNull class]]) {
+            for (NSDictionary * goodsDic in goodsArr) {
+                GoodsRow *goodsModel = [[GoodsRow alloc] initWithDictionary:goodsDic];
+                [self.goodsListMarr addObject:goodsModel];
+                [self.goodsIdMarr addObject:[NSString stringWithFormat:@"%zi",goodsModel.idField]];
+            }
+            
+            [self.goodsList reloadData];
+            self.currentpageNum = [[[result valueForKey:@"data"] valueForKey:@"current_page"] integerValue];
+            self.totalPageNum = [[[result valueForKey:@"data"] valueForKey:@"total_page"] integerValue];
+            [self requestIsLastData:self.goodsList currentPage:self.currentpageNum withTotalPage:self.totalPageNum];
+            [SVProgressHUD dismiss];
+        } else {
+            NSLog(@"---- error ---- %@", [NSString jsonStringWithObject:result]);
         }
-        
-        [self.goodsList reloadData];
-        self.currentpageNum = [[[result valueForKey:@"data"] valueForKey:@"current_page"] integerValue];
-        self.totalPageNum = [[[result valueForKey:@"data"] valueForKey:@"total_page"] integerValue];
-        [self requestIsLastData:self.goodsList currentPage:self.currentpageNum withTotalPage:self.totalPageNum];
-        [SVProgressHUD dismiss];
         
     } failure:^(FBRequest *request, NSError *error) {
         [SVProgressHUD showErrorWithStatus:[error localizedDescription]];
@@ -351,7 +358,7 @@ static NSInteger const actionButtonTag  = 611;
 - (SGTopTitleView *)menuView {
     if (!_menuView) {
         _menuView = [[SGTopTitleView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 44)];
-        _menuView.staticTitleArr = @[@"相关情景", @"相关产品", @"商家信息"];
+        _menuView.staticTitleArr = @[@"相关情境", @"相关产品", @"商家信息"];
         _menuView.backgroundColor = [UIColor whiteColor];
         _menuView.delegate_SG = self;
         [_menuView staticTitleLabelSelecteded:_menuView.allTitleLabel[0]];

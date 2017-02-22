@@ -13,12 +13,19 @@
 #import "FBGoodsInfoViewController.h"
 #import "UIView+TYAlertView.h"
 #import "FBSureOrderViewController.h"
+#import "GoodsRow.h"
+#import "MallListGoodsCollectionViewCell.h"
+#import "THNRecommendCollectionReusableView.h"
 
 static NSString *const URLGoodsCar = @"/shopping/fetch_cart";
 static NSString *const URLCarGoodsStock = @"/shopping/fetch_cart_product_count";
 static NSString *const URLDeleteCarItem = @"/shopping/remove_cart";
 static NSString *const URLEditItemsNum = @"/shopping/edit_cart";
 static NSString *const URLCarGoPay = @"/shopping/checkout";
+static NSString *const URLMallList = @"/product/getlist";
+static NSString *const goodsListCellId = @"MallListGoodsCollectionViewCellId";
+static NSString *const MallListHeaderCellViewId = @"mallListHeaderCellViewId";
+static CGFloat const itemHeight = ((SCREEN_WIDTH - 45)/2)*1.21;
 
 @interface GoodsCarViewController () {
     BOOL    _isEdit;
@@ -33,6 +40,12 @@ static NSString *const URLCarGoPay = @"/shopping/checkout";
     
     [self setNavigationViewUI];
     
+    if ([self isUserLogin]) {
+        [self networkGoodsCarList];
+    } else {
+        [self showDefaultBackView:0];
+    }
+    
     self.chooseAllBtn.selected = NO;
     [[NSNotificationCenter defaultCenter] postNotificationName:@"cacelAll" object:nil];
 }
@@ -40,9 +53,8 @@ static NSString *const URLCarGoPay = @"/shopping/checkout";
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-//    [self networkGoodsCarList];
-    
-//    [self setGoodsCarVcUI];
+    [self setGoodsCarVcUI];
+    [self thn_networkGoodsListData];
 }
 
 #pragma mark - 网络请求
@@ -56,35 +68,29 @@ static NSString *const URLCarGoPay = @"/shopping/checkout";
         self.payPrice = 0.0f;
         self.sumPrice.text = [NSString stringWithFormat:@"￥%.2f", self.payPrice];
         
-        NSArray * carItems = [[result valueForKey:@"data"] valueForKey:@"items"];
-        if (carItems.count == 0) {
-            self.carItemTable.tableHeaderView = self.defaultCarView;
-            self.bottomView.hidden = YES;
-            self.editBtn.hidden = YES;
+        NSArray *carItems = [[result valueForKey:@"data"] valueForKey:@"items"];
+        //  没有购物车数据的时候默认背景
+        [self showDefaultBackView:carItems.count];
+        
+        for (NSDictionary * carItemDict in carItems) {
+            CarGoodsModelItem * carModel = [[CarGoodsModelItem alloc] initWithDictionary:carItemDict];
+            [self.carItemList addObject:carModel];
+            [self.goodsIdList addObject:[NSString stringWithFormat:@"%zi", carModel.productId]];
             
-        } else {
-            self.bottomView.hidden = NO;
-            self.editBtn.hidden = NO;
-            
-            for (NSDictionary * carItemDict in carItems) {
-                CarGoodsModelItem * carModel = [[CarGoodsModelItem alloc] initWithDictionary:carItemDict];
-                [self.carItemList addObject:carModel];
-                [self.goodsIdList addObject:[NSString stringWithFormat:@"%zi", carModel.productId]];
-                
-                //  是否有京东的商品,给出提示
-                if (carModel.vopId > 0) {
-                    self.carItemTabel.tableHeaderView = self.haveJDGoodsLab;
-                }
+            //  是否有京东的商品,给出提示
+            if (carModel.vopId > 0) {
+                self.carItemTabel.tableHeaderView = self.haveJDGoodsLab;
             }
-            
-            [self getCarItemMarrSort:self.carItemList];
-            
-            for (NSInteger idx = 0; idx < self.carItemList.count; ++ idx) {
-                 [self.carGoodsCount addObject:[NSString stringWithFormat:@"%zi", [[self.carItemList valueForKey:@"n"][idx] integerValue]]];
-            }
-            
-            self.priceMarr = [NSMutableArray arrayWithArray:[self.carItemList valueForKey:@"price"]];
         }
+        
+        [self getCarItemMarrSort:self.carItemList];
+        
+        for (NSInteger idx = 0; idx < self.carItemList.count; ++ idx) {
+            [self.carGoodsCount addObject:[NSString stringWithFormat:@"%zi", [[self.carItemList valueForKey:@"n"][idx] integerValue]]];
+        }
+        
+        self.priceMarr = [NSMutableArray arrayWithArray:[self.carItemList valueForKey:@"price"]];
+        
         [self.carItemTabel reloadData];
         [SVProgressHUD dismiss];
         
@@ -158,6 +164,29 @@ static NSString *const URLCarGoPay = @"/shopping/checkout";
     }];
 }
 
+#pragma mark 推荐商品列表
+- (void)thn_networkGoodsListData {
+    [SVProgressHUD show];
+    self.productListRequest = [FBAPI getWithUrlString:URLMallList requestDictionary:@{@"page":@"1",
+                                                                                      @"size":@"8",
+                                                                                      @"stick":@"1",
+                                                                                      @"sort":@"0"} delegate:self];
+    [self.productListRequest startRequestSuccess:^(FBRequest *request, id result) {
+        NSArray *goodsArr = [[result valueForKey:@"data"] valueForKey:@"rows"];
+        for (NSDictionary * goodsDic in goodsArr) {
+            GoodsRow *goodsModel = [[GoodsRow alloc] initWithDictionary:goodsDic];
+            [self.productDataMarr addObject:goodsModel];
+            [self.productIdMarr addObject:[NSString stringWithFormat:@"%zi",goodsModel.idField]];
+        }
+        
+        [self.productList reloadData];
+        [SVProgressHUD dismiss];
+        
+    } failure:^(FBRequest *request, NSError *error) {
+        [SVProgressHUD showErrorWithStatus:[error localizedDescription]];
+    }];
+}
+
 - (void)getCarItemMarrSort:(NSMutableArray *)carItem {
     if (carItem.count > 1) {
         NSMutableArray *JDGoodsMarr = [NSMutableArray array];
@@ -182,14 +211,38 @@ static NSString *const URLCarGoPay = @"/shopping/checkout";
 #pragma mark - 设置视图
 - (void)setGoodsCarVcUI {
     [self.navView addSubview:self.editBtn];
+    [self.view addSubview:self.headerTextView];
     [self.view addSubview:self.carItemTable];
     [self.view addSubview:self.bottomView];
+    [_bottomView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.size.mas_equalTo(CGSizeMake(SCREEN_WIDTH, 44));
+        make.left.equalTo(self.view.mas_left).with.offset(0);
+        make.bottom.equalTo(_carItemTabel.mas_bottom).with.offset(0);
+    }];
+}
+
+- (void)changTableHeight {
+    CGRect rect = self.carItemTabel.frame;
+    rect = CGRectMake(0, 64, SCREEN_WIDTH, SCREEN_HEIGHT - 64);
+    self.carItemTabel.frame = rect;
+}
+
+#pragma mark - 服务描述性文字视图
+- (THNCarServiceTextView *)headerTextView {
+    if (!_headerTextView) {
+        _headerTextView = [[THNCarServiceTextView alloc] initWithFrame:CGRectMake(0, 64, SCREEN_WIDTH, 40)];
+    }
+    return _headerTextView;
 }
 
 #pragma mark 加载商品的列表
 - (UITableView *)carItemTable {
     if (!_carItemTabel) {
-        _carItemTabel = [[UITableView alloc] initWithFrame:CGRectMake(0, 64, SCREEN_WIDTH, SCREEN_HEIGHT-108) style:(UITableViewStyleGrouped)];
+        if (self.openType == 1) {
+            _carItemTabel = [[UITableView alloc] initWithFrame:CGRectMake(0, 104, SCREEN_WIDTH, SCREEN_HEIGHT - 104) style:(UITableViewStyleGrouped)];
+        } else {
+            _carItemTabel = [[UITableView alloc] initWithFrame:CGRectMake(0, 104, SCREEN_WIDTH, SCREEN_HEIGHT - 153) style:(UITableViewStyleGrouped)];
+        }
         _carItemTabel.delegate = self;
         _carItemTabel.dataSource = self;
         _carItemTabel.backgroundColor = [UIColor colorWithHexString:grayLineColor];
@@ -318,25 +371,36 @@ static NSString *const URLCarGoPay = @"/shopping/checkout";
     return _haveJDGoodsLab;
 }
 
-#pragma mark - 没有商品的购物车背景
+#pragma mark - 默认背景_没有商品的购物车
 - (BuyCarDefault *)defaultCarView {
     if (!_defaultCarView) {
-        _defaultCarView = [[BuyCarDefault alloc] initWithFrame:CGRectMake(0, 64, SCREEN_WIDTH, SCREEN_HEIGHT - 64)];
-        [_defaultCarView.defaultBtn setTitle:NSLocalizedString(@"goLookGoods", nil) forState:(UIControlStateNormal)];
-        [_defaultCarView.defaultBtn addTarget:self action:@selector(goHomeBtnClick) forControlEvents:(UIControlEventTouchUpInside)];
-        [_defaultCarView thn_setDefaultViewImage:@"shopcarbig" promptText:NSLocalizedString(@"NoGoods", nil) showButton:NO];
+        _defaultCarView = [[BuyCarDefault alloc] initWithFrame:CGRectMake(0, 64, SCREEN_WIDTH, 300)];
+        [_defaultCarView thn_setDefaultViewImage:@"shopcarbig" promptText:NSLocalizedString(@"NoGoods", nil) hiddenButton:YES];
     }
     return _defaultCarView;
 }
 
-- (void)goHomeBtnClick {
-    [self.navigationController popViewControllerAnimated:YES];
+- (void)showDefaultBackView:(NSInteger)count {
+    if (count == 0) {
+        self.carItemTable.tableHeaderView = self.defaultCarView;
+        self.carItemTabel.tableFooterView = self.productList;
+        self.bottomView.hidden = YES;
+        self.editBtn.hidden = YES;
+        
+    } else {
+        UIView *headerView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 0.01)];
+        self.carItemTabel.tableHeaderView = headerView;
+        self.carItemTabel.tableFooterView = [UIView new];
+        self.bottomView.hidden = NO;
+        self.editBtn.hidden = NO;
+    }
 }
 
 #pragma mark - 底部视图·
 - (UIView *)bottomView {
     if (!_bottomView) {
-        _bottomView = [[UIView alloc] initWithFrame:CGRectMake(0, SCREEN_HEIGHT - 93, SCREEN_WIDTH, 44)];
+        _bottomView = [[UIView alloc] init];
+        _bottomView.backgroundColor = [UIColor colorWithHexString:@"#FFFFFF"];
         
         [_bottomView addSubview:self.chooseAllBtn];
         [_bottomView addSubview:self.goPayBtn];
@@ -531,6 +595,59 @@ static NSString *const URLCarGoPay = @"/shopping/checkout";
     }
 }
 
+#pragma mark - 推荐商品列表
+- (UICollectionView *)productList {
+    if (!_productList) {
+        UICollectionViewFlowLayout *flowLayou = [[UICollectionViewFlowLayout alloc] init];
+        flowLayou.itemSize = CGSizeMake((SCREEN_WIDTH - 45)/2, itemHeight);
+        flowLayou.minimumLineSpacing = 15.0f;
+        flowLayou.sectionInset = UIEdgeInsetsMake(15, 15, 15, 15);
+        flowLayou.scrollDirection = UICollectionViewScrollDirectionVertical;
+        flowLayou.headerReferenceSize = CGSizeMake(SCREEN_WIDTH, 40);
+        
+        _productList = [[UICollectionView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, (itemHeight * 4) + 130)
+                                        collectionViewLayout:flowLayou];
+        _productList.showsVerticalScrollIndicator = NO;
+        _productList.delegate = self;
+        _productList.dataSource = self;
+        _productList.scrollEnabled = NO;
+        _productList.backgroundColor = [UIColor colorWithHexString:@"#F8F8F8"];
+        [_productList registerClass:[MallListGoodsCollectionViewCell class] forCellWithReuseIdentifier:goodsListCellId];
+        [_productList registerClass:[THNRecommendCollectionReusableView class] forSupplementaryViewOfKind:UICollectionElementKindSectionHeader
+                                                                                      withReuseIdentifier:MallListHeaderCellViewId];
+    }
+    return _productList;
+}
+
+- (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
+    return self.productDataMarr.count;
+}
+
+- (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
+    MallListGoodsCollectionViewCell * cell = [collectionView dequeueReusableCellWithReuseIdentifier:goodsListCellId
+                                                                                       forIndexPath:indexPath];
+    if (self.productDataMarr.count) {
+        [cell setGoodsListData:self.productDataMarr[indexPath.row]];
+    }
+    return cell;
+}
+
+- (UICollectionReusableView *)collectionView:(UICollectionView *)collectionView
+           viewForSupplementaryElementOfKind:(NSString *)kind
+                                 atIndexPath:(NSIndexPath *)indexPath {
+    
+    THNRecommendCollectionReusableView *headerView = [collectionView dequeueReusableSupplementaryViewOfKind:UICollectionElementKindSectionHeader
+                                                                                       withReuseIdentifier:MallListHeaderCellViewId
+                                                                                               forIndexPath:indexPath];
+    return headerView;
+}
+
+- (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
+    FBGoodsInfoViewController *goodsVC = [[FBGoodsInfoViewController alloc] init];
+    goodsVC.goodsID = self.productIdMarr[indexPath.row];
+    [self.navigationController pushViewController:goodsVC animated:YES];
+}
+
 #pragma mark - 设置导航栏
 - (void)setNavigationViewUI {
     [[UIApplication sharedApplication] setStatusBarHidden:NO withAnimation:(UIStatusBarAnimationSlide)];
@@ -570,6 +687,20 @@ static NSString *const URLCarGoPay = @"/shopping/checkout";
         _carGoodsCount = [NSMutableArray array];
     }
     return _carGoodsCount;
+}
+
+- (NSMutableArray *)productIdMarr {
+    if (!_productIdMarr) {
+        _productIdMarr = [NSMutableArray array];
+    }
+    return _productIdMarr;
+}
+
+- (NSMutableArray *)productDataMarr {
+    if (!_productDataMarr) {
+        _productDataMarr = [NSMutableArray array];
+    }
+    return _productDataMarr;
 }
 
 #pragma mark - clear

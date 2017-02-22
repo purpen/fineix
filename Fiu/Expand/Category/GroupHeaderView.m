@@ -36,6 +36,10 @@
     self.subTitle.text = subTitle;
     if (more.length > 0) {
         [self.moreBtn setTitle:more forState:(UIControlStateNormal)];
+        CGFloat moreLength = [more boundingRectWithSize:CGSizeMake(320, 1000) options:(NSStringDrawingUsesLineFragmentOrigin) attributes:nil context:nil].size.width;
+        [_moreBtn mas_updateConstraints:^(MASConstraintMaker *make) {
+            make.size.mas_equalTo(CGSizeMake(moreLength * 1.3, 15));
+        }];
     } else {
         [self.moreBtn setImage:[UIImage imageNamed:@"icon_Next"] forState:(UIControlStateNormal)];
     }
@@ -76,8 +80,8 @@
     
     [self addSubview:self.moreBtn];
     [_moreBtn mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.size.mas_equalTo(CGSizeMake(200, 20));
-        make.centerY.equalTo(_icon);
+        make.size.mas_equalTo(CGSizeMake(200, 15));
+        make.centerY.equalTo(_headerTitle);
         make.right.equalTo(self.mas_right).with.offset(-10);
     }];
 }

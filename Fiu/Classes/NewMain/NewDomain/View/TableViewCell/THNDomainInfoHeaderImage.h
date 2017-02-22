@@ -13,7 +13,9 @@
 
 @interface THNDomainInfoHeaderImage : UIView <SDCycleScrollViewDelegate>
 
-@property (nonatomic, strong)  SDCycleScrollView *rollImageView;
+@property (nonatomic, strong) SDCycleScrollView *rollImageView;
+@property (nonatomic, strong) UILabel *indexLabel;
+@property (nonatomic, strong) UILabel *sumLabel;
 
 - (void)thn_setRollimageView:(DominInfoData *)model;
 

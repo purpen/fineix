@@ -291,7 +291,7 @@ static NSString *const homeDataPath = [NSHomeDirectory() stringByAppendingPathCo
         }
         
         if (self.sceneListMarr.count) {
-            NSIndexPath *indexPath = [NSIndexPath indexPathForRow:2 inSection:0];
+            NSIndexPath *indexPath = [NSIndexPath indexPathForRow:2 inSection:1];
             [self.homeTable reloadRowsAtIndexPaths:@[indexPath] withRowAnimation:(UITableViewRowAnimationFade)];
         }
         
@@ -600,7 +600,7 @@ static NSString *const homeDataPath = [NSHomeDirectory() stringByAppendingPathCo
         _defaultHomeView.backgroundColor = [UIColor colorWithHexString:@"#FFFFFF" alpha:0];
         [_defaultHomeView.defaultBtn setTitle:NSLocalizedString(@"reloadData", nil) forState:(UIControlStateNormal)];
         [_defaultHomeView.defaultBtn addTarget:self action:@selector(reloadDataClick) forControlEvents:(UIControlEventTouchUpInside)];
-        [_defaultHomeView thn_setDefaultViewImage:@"icon_no_network" promptText:NSLocalizedString(@"noNetworking", nil) showButton:NO];
+        [_defaultHomeView thn_setDefaultViewImage:@"icon_no_network" promptText:NSLocalizedString(@"noNetworking", nil) hiddenButton:NO];
     }
     return _defaultHomeView;
 }
@@ -654,6 +654,7 @@ static NSString *const homeDataPath = [NSHomeDirectory() stringByAppendingPathCo
         _homeTable.delegate = self;
         _homeTable.dataSource = self;
         _homeTable.tableHeaderView = self.homerollView;
+        _homeTable.tableFooterView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 40)];
         _homeTable.showsVerticalScrollIndicator = NO;
         _homeTable.backgroundColor = [UIColor colorWithHexString:@"#F8F8F8"];
         _homeTable.separatorStyle = UITableViewCellSeparatorStyleNone;
@@ -664,17 +665,19 @@ static NSString *const homeDataPath = [NSHomeDirectory() stringByAppendingPathCo
 
 #pragma mark tableViewDelegate & dataSource
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-    return self.sceneListMarr.count + 3;
+    return self.sceneListMarr.count + 4;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     if (section == 0) {
-        return 3;
-    } else if (section == 1) {
         return 1;
+    } else if (section == 1) {
+        return 2;
     } else if (section == 2) {
         return 1;
-    } else if (section == 6 || section == 9) {
+    } else if (section == 3) {
+        return 1;
+    } else if (section == 7 || section == 10) {
         return 5;
     } else {
         return 4;
@@ -687,24 +690,24 @@ static NSString *const homeDataPath = [NSHomeDirectory() stringByAppendingPathCo
     __weak __typeof(self)weakSelf = self;
     
     if (indexPath.section == 0) {
-        if (indexPath.row == 0) {
-            if (_isNewUser) {
-                THNDomainTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:domainCellId];
-                cell = [[THNDomainTableViewCell alloc] initWithStyle:(UITableViewCellStyleDefault) reuseIdentifier:domainCellId];
-                if (self.userHelpMarr.count) {
-                    [cell thn_setUserHelpModelArr:self.userHelpMarr type:0];
-                }
-                cell.nav = self.navigationController;
-                return cell;
-            } else {
-                UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:domainCellId];
-                if (!cell) {
-                    cell = [[UITableViewCell alloc] initWithStyle:(UITableViewCellStyleDefault) reuseIdentifier:domainCellId];
-                }
-                return cell;
+        if (_isNewUser) {
+            THNDomainTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:domainCellId];
+            cell = [[THNDomainTableViewCell alloc] initWithStyle:(UITableViewCellStyleDefault) reuseIdentifier:domainCellId];
+            if (self.userHelpMarr.count) {
+                [cell thn_setUserHelpModelArr:self.userHelpMarr type:0];
             }
-            
-        } else if (indexPath.row == 1) {
+            cell.nav = self.navigationController;
+            return cell;
+        }
+        
+        UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:domainCellId];
+        if (!cell) {
+            cell = [[UITableViewCell alloc] initWithStyle:(UITableViewCellStyleDefault) reuseIdentifier:domainCellId];
+        }
+        return cell;
+    
+    } else if (indexPath.section == 1) {
+        if (indexPath.row == 0) {
             THNDomainMenuTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:domainMenuCellId];
             cell = [[THNDomainMenuTableViewCell alloc] initWithStyle:(UITableViewCellStyleDefault) reuseIdentifier:domainMenuCellId];
             cell.nav = self.navigationController;
@@ -713,18 +716,17 @@ static NSString *const homeDataPath = [NSHomeDirectory() stringByAppendingPathCo
             }
             return cell;
             
-        } else if (indexPath.row == 2) {
-            THNDomainTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:domainCellId];
-            cell = [[THNDomainTableViewCell alloc] initWithStyle:(UITableViewCellStyleDefault) reuseIdentifier:domainCellId];
-            cell.nav = self.navigationController;
-            if (self.niceDomainMarr.count) {
-                [cell thn_setDomainModelArr:self.niceDomainMarr type:1];
-            }
-            return cell;
         }
-        return nil;
         
-    } else if (indexPath.section == 1) {
+        THNDomainTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:domainCellId];
+        cell = [[THNDomainTableViewCell alloc] initWithStyle:(UITableViewCellStyleDefault) reuseIdentifier:domainCellId];
+        cell.nav = self.navigationController;
+        if (self.niceDomainMarr.count) {
+            [cell thn_setDomainModelArr:self.niceDomainMarr type:1];
+        }
+        return cell;
+        
+    } else if (indexPath.section == 2) {
         THNNewGoodsTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:newGoodsCellId];
         cell = [[THNNewGoodsTableViewCell alloc] initWithStyle:(UITableViewCellStyleDefault) reuseIdentifier:newGoodsCellId];
         if (self.goodsMarr.count) {
@@ -733,7 +735,7 @@ static NSString *const homeDataPath = [NSHomeDirectory() stringByAppendingPathCo
         cell.nav = self.navigationController;
         return cell;
         
-    } else if (indexPath.section == 2) {
+    } else if (indexPath.section == 3) {
         THNGoodsSubjectTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:goodsSubjectCellId];
         cell = [[THNGoodsSubjectTableViewCell alloc] initWithStyle:(UITableViewCellStyleDefault) reuseIdentifier:goodsSubjectCellId];
         if (self.goodsSubjectMarr.count) {
@@ -750,7 +752,7 @@ static NSString *const homeDataPath = [NSHomeDirectory() stringByAppendingPathCo
                 cell = [[THNSceneImageTableViewCell alloc] initWithStyle:(UITableViewCellStyleDefault) reuseIdentifier:sceneImgCellId];
             }
             if (self.sceneListMarr.count) {
-                [cell thn_setSceneImageData:self.sceneListMarr[indexPath.section - 3]];
+                [cell thn_setSceneImageData:self.sceneListMarr[indexPath.section - 4]];
             }
             cell.vc = self;
             cell.nav = self.navigationController;
@@ -762,7 +764,7 @@ static NSString *const homeDataPath = [NSHomeDirectory() stringByAppendingPathCo
                 cell = [[THNUserInfoTableViewCell alloc] initWithStyle:(UITableViewCellStyleDefault) reuseIdentifier:userInfoCellId];
             }
             if (self.sceneListMarr.count) {
-                [cell thn_setHomeSceneUserInfoData:self.sceneListMarr[indexPath.section - 3] userId:[self getLoginUserID] isLogin:[self isUserLogin]];
+                [cell thn_setHomeSceneUserInfoData:self.sceneListMarr[indexPath.section - 4] userId:[self getLoginUserID] isLogin:[self isUserLogin]];
             }
             cell.vc = self;
             cell.nav = self.navigationController;
@@ -774,7 +776,7 @@ static NSString *const homeDataPath = [NSHomeDirectory() stringByAppendingPathCo
                 cell = [[THNSceneInfoTableViewCell alloc] initWithStyle:(UITableViewCellStyleDefault) reuseIdentifier:sceneInfoCellId];
             }
             if (self.sceneListMarr.count) {
-                [cell thn_setSceneContentData:self.sceneListMarr[indexPath.section - 3]];
+                [cell thn_setSceneContentData:self.sceneListMarr[indexPath.section - 4]];
                 _contentHigh = cell.cellHigh;
                 _defaultContentHigh = cell.defaultCellHigh;
             }
@@ -787,9 +789,9 @@ static NSString *const homeDataPath = [NSHomeDirectory() stringByAppendingPathCo
                 cell = [[THNDataInfoTableViewCell alloc] initWithStyle:(UITableViewCellStyleDefault) reuseIdentifier:dataInfoCellId];
             }
             if (self.sceneListMarr.count) {
-                [cell thn_setSceneData:self.sceneListMarr[indexPath.section - 3]
+                [cell thn_setSceneData:self.sceneListMarr[indexPath.section - 4]
                                isLogin:[self isUserLogin]
-                            isUserSelf:[self isLoginUserSelf:self.userIdMarr[indexPath.section - 3]]];
+                            isUserSelf:[self isLoginUserSelf:self.userIdMarr[indexPath.section - 4]]];
                 
                 cell.beginLikeTheSceneBlock = ^(NSString *idx) {
                     [weakSelf thn_networkLikeSceneData:idx];
@@ -816,12 +818,12 @@ static NSString *const homeDataPath = [NSHomeDirectory() stringByAppendingPathCo
             return cell;
         }
         
-        if (indexPath.section == 6 || indexPath.section == 9) {
+        if (indexPath.section == 7 || indexPath.section == 10) {
             if (indexPath.row == 4) {
                 THNHomeSubjectTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:subjectCellId];
                 cell = [[THNHomeSubjectTableViewCell alloc] initWithStyle:(UITableViewCellStyleDefault) reuseIdentifier:subjectCellId];
                 if (self.subjectMarr.count) {
-                    [cell thn_setSubjectModel:self.subjectMarr[(indexPath.section - 6) / 3]];
+                    [cell thn_setSubjectModel:self.subjectMarr[(indexPath.section - 7) / 3]];
                 }
                 return cell;
             }
@@ -832,22 +834,22 @@ static NSString *const homeDataPath = [NSHomeDirectory() stringByAppendingPathCo
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
     if (indexPath.section == 0) {
-        if (indexPath.row == 0) {
-            if (_isNewUser == YES) {
-                return (SCREEN_WIDTH * 0.48) + 15;
-            } else {
-                return 0.01;
-            }
-        } else if (indexPath.row == 1) {
-//            return 60;
-            return 0.01;
-        } else
-            return (SCREEN_WIDTH * 0.48) + 15;
+        if (_isNewUser == YES) {
+            return 195;
+        }
+        return 0.01;
         
     } else if (indexPath.section == 1) {
-        return (goodsCellHeight * 2);
-        
+        if (indexPath.row == 0) {
+//            return 75;
+            return 0.01;
+        }
+        return 195;
+
     } else if (indexPath.section == 2) {
+        return (goodsCellHeight * 2) + 10;
+        
+    } else if (indexPath.section == 3) {
         return 366;
         
     } else {
@@ -868,7 +870,7 @@ static NSString *const homeDataPath = [NSHomeDirectory() stringByAppendingPathCo
             return 50;
         }
         
-        if (indexPath.section == 6 || indexPath.section == 9) {
+        if (indexPath.section == 7 || indexPath.section == 10) {
             if (indexPath.row == 4) {
                 return (SCREEN_WIDTH * 0.56) + 20;
             }
@@ -889,20 +891,26 @@ static NSString *const homeDataPath = [NSHomeDirectory() stringByAppendingPathCo
                                        withMoreType:0];
         }
     } else if (section == 1) {
-        self.headerView.backgroundColor = [UIColor colorWithHexString:@"#F8F8F8"];
         [self.headerView addGroupHeaderViewIcon:@"shouye_jingxuan"
-                                      withTitle:@"新品"
+                                      withTitle:@"热门地盘"
                                    withSubtitle:@""
                                   withRightMore:@""
                                    withMoreType:0];
     } else if (section == 2) {
         self.headerView.backgroundColor = [UIColor colorWithHexString:@"#F8F8F8"];
         [self.headerView addGroupHeaderViewIcon:@"shouye_jingxuan"
+                                      withTitle:@"新品"
+                                   withSubtitle:@""
+                                  withRightMore:@""
+                                   withMoreType:0];
+    } else if (section == 3) {
+        self.headerView.backgroundColor = [UIColor colorWithHexString:@"#F8F8F8"];
+        [self.headerView addGroupHeaderViewIcon:@"shouye_jingxuan"
                                       withTitle:@"产品专辑"
                                    withSubtitle:@""
                                   withRightMore:@"查看更多"
-                                   withMoreType:0];
-    } else if (section == 3) {
+                                   withMoreType:1];
+    } else if (section == 4) {
         [self.headerView addGroupHeaderViewIcon:@"shouye_jingxuan"
                                       withTitle:NSLocalizedString(@"Home_Scene", nil)
                                    withSubtitle:@""
@@ -930,14 +938,14 @@ static NSString *const homeDataPath = [NSHomeDirectory() stringByAppendingPathCo
         } else {
             return 0.01f;
         }
-    } else if (section == 1 || section == 2 || section == 3) {
+    } else if (section == 1 || section == 2 || section == 3 || section == 4) {
         return 44.0f;
     } else
         return 0.01f;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section {
-    if (section == 0) {
+    if (section == 0 || section == 1) {
         return 0.01;
         
     } else if (section == _hotUserListIndex) {
@@ -953,7 +961,7 @@ static NSString *const homeDataPath = [NSHomeDirectory() stringByAppendingPathCo
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    if (indexPath.section != 0 && indexPath.section != 1 && indexPath.section != 2) {
+    if (indexPath.section != 0 && indexPath.section != 1 && indexPath.section != 2 && indexPath.section != 3) {
         if (indexPath.row == 2) {
             if (_contentHigh > 65.0f) {
                 if (_selectedIndexPath && _selectedIndexPath.section == indexPath.section) {
@@ -965,13 +973,13 @@ static NSString *const homeDataPath = [NSHomeDirectory() stringByAppendingPathCo
             }
         }
         
-        if (indexPath.section == 6 || indexPath.section == 9) {
+        if (indexPath.section == 7 || indexPath.section == 10) {
             if (indexPath.row == 4) {
-                [self thn_networkSubjectInfoData:self.subjectIdMarr[(indexPath.section - 6) / 3]];
+                [self thn_networkSubjectInfoData:self.subjectIdMarr[(indexPath.section - 7) / 3]];
             }
         }
         
-    } else if (indexPath.section == 2) {
+    } else if (indexPath.section == 3) {
         NSInteger type = [self.goodsSubjectTypeMarr[indexPath.row] integerValue];
         NSString *idx = self.goodsSubjectIdMarr[indexPath.row];
         [self thn_openSubjectTypeController:self.navigationController type:type subjectId:idx];

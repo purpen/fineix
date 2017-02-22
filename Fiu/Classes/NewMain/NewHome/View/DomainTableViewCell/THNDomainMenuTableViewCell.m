@@ -21,7 +21,8 @@ static NSString *const domainMenuCollectionCellID = @"THNDomainMenuCollectionVie
         self.backgroundColor = [UIColor whiteColor];
         [self addSubview:self.menuCollectionView];
         [_menuCollectionView mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.top.left.right.bottom.equalTo(self).with.offset(0);
+            make.top.left.right.equalTo(self).with.offset(0);
+            make.bottom.equalTo(self.mas_bottom).with.offset(-15);
         }];
     }
     return self;

@@ -24,6 +24,6 @@
  @param promptText 提示文字
  @param isShowButton 显示按钮
  */
-- (void)thn_setDefaultViewImage:(NSString *)imageName promptText:(NSString *)promptText showButton:(BOOL)isShowButton;
+- (void)thn_setDefaultViewImage:(NSString *)imageName promptText:(NSString *)promptText hiddenButton:(BOOL)isHidden;
 
 @end
