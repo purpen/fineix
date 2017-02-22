@@ -27,8 +27,7 @@ static NSString *const domainCollectionCellID = @"THNDomainCollectionViewCellId"
         self.backgroundColor = [UIColor whiteColor];
         [self addSubview:self.domainCollectionView];
         [_domainCollectionView mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.top.equalTo(self.mas_top).with.offset(15);
-            make.left.right.equalTo(self).with.offset(0);
+            make.top.left.right.equalTo(self).with.offset(0);
             make.bottom.equalTo(self.mas_bottom).with.offset(-15);
         }];
     }
@@ -94,7 +93,7 @@ static NSString *const domainCollectionCellID = @"THNDomainCollectionViewCellId"
         flowLayout.sectionInset = UIEdgeInsetsMake(0, 15, 0, 15);
         flowLayout.scrollDirection = UICollectionViewScrollDirectionHorizontal;
         
-        _domainCollectionView = [[UICollectionView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_WIDTH * 0.48)
+        _domainCollectionView = [[UICollectionView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 195)
                                                   collectionViewLayout:flowLayout];
         _domainCollectionView.backgroundColor = [UIColor whiteColor];
         _domainCollectionView.delegate = self;
@@ -112,7 +111,7 @@ static NSString *const domainCollectionCellID = @"THNDomainCollectionViewCellId"
         return self.userHelpMarr.count;
 }
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath {
-    return CGSizeMake(SCREEN_WIDTH * 0.85, SCREEN_WIDTH * 0.48);
+    return CGSizeMake(320, 180);
 }
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {

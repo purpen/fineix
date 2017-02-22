@@ -358,7 +358,7 @@ static NSInteger const actionButtonTag  = 611;
 - (SGTopTitleView *)menuView {
     if (!_menuView) {
         _menuView = [[SGTopTitleView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 44)];
-        _menuView.staticTitleArr = @[@"相关情景", @"相关产品", @"商家信息"];
+        _menuView.staticTitleArr = @[@"相关情境", @"相关产品", @"商家信息"];
         _menuView.backgroundColor = [UIColor whiteColor];
         _menuView.delegate_SG = self;
         [_menuView staticTitleLabelSelecteded:_menuView.allTitleLabel[0]];

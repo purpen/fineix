@@ -211,6 +211,7 @@ static CGFloat const itemHeight = ((SCREEN_WIDTH - 45)/2)*1.21;
 #pragma mark - 设置视图
 - (void)setGoodsCarVcUI {
     [self.navView addSubview:self.editBtn];
+    [self.view addSubview:self.headerTextView];
     [self.view addSubview:self.carItemTable];
     [self.view addSubview:self.bottomView];
     [_bottomView mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -226,13 +227,21 @@ static CGFloat const itemHeight = ((SCREEN_WIDTH - 45)/2)*1.21;
     self.carItemTabel.frame = rect;
 }
 
+#pragma mark - 服务描述性文字视图
+- (THNCarServiceTextView *)headerTextView {
+    if (!_headerTextView) {
+        _headerTextView = [[THNCarServiceTextView alloc] initWithFrame:CGRectMake(0, 64, SCREEN_WIDTH, 40)];
+    }
+    return _headerTextView;
+}
+
 #pragma mark 加载商品的列表
 - (UITableView *)carItemTable {
     if (!_carItemTabel) {
         if (self.openType == 1) {
-            _carItemTabel = [[UITableView alloc] initWithFrame:CGRectMake(0, 64, SCREEN_WIDTH, SCREEN_HEIGHT - 64) style:(UITableViewStyleGrouped)];
+            _carItemTabel = [[UITableView alloc] initWithFrame:CGRectMake(0, 104, SCREEN_WIDTH, SCREEN_HEIGHT - 104) style:(UITableViewStyleGrouped)];
         } else {
-            _carItemTabel = [[UITableView alloc] initWithFrame:CGRectMake(0, 64, SCREEN_WIDTH, SCREEN_HEIGHT - 113) style:(UITableViewStyleGrouped)];
+            _carItemTabel = [[UITableView alloc] initWithFrame:CGRectMake(0, 104, SCREEN_WIDTH, SCREEN_HEIGHT - 153) style:(UITableViewStyleGrouped)];
         }
         _carItemTabel.delegate = self;
         _carItemTabel.dataSource = self;

@@ -633,6 +633,7 @@
 		D857C4C91E31F07000569B3D /* THNAllianceInfoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D857C4C81E31F07000569B3D /* THNAllianceInfoViewController.m */; };
 		D857C4CC1E31F0E100569B3D /* THNAllianceFootView.m in Sources */ = {isa = PBXBuildFile; fileRef = D857C4CB1E31F0E100569B3D /* THNAllianceFootView.m */; };
 		D85F169D1E5C371B0038E0BB /* THNRecommendCollectionReusableView.m in Sources */ = {isa = PBXBuildFile; fileRef = D85F169C1E5C371B0038E0BB /* THNRecommendCollectionReusableView.m */; };
+		D85F16A01E5D30220038E0BB /* THNCarServiceTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = D85F169F1E5D30220038E0BB /* THNCarServiceTextView.m */; };
 		D861BC6E1D7E977700A26022 /* THNBrandInfoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D861BC6D1D7E977700A26022 /* THNBrandInfoViewController.m */; };
 		D861BC711D7E995600A26022 /* THNBrandInfoCollectionReusableView.m in Sources */ = {isa = PBXBuildFile; fileRef = D861BC701D7E995600A26022 /* THNBrandInfoCollectionReusableView.m */; };
 		D86809031D622049002714B2 /* FBImageScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = D86809021D622049002714B2 /* FBImageScrollView.m */; };
@@ -1940,6 +1941,8 @@
 		D857C4CB1E31F0E100569B3D /* THNAllianceFootView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THNAllianceFootView.m; sourceTree = "<group>"; };
 		D85F169B1E5C371B0038E0BB /* THNRecommendCollectionReusableView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THNRecommendCollectionReusableView.h; sourceTree = "<group>"; };
 		D85F169C1E5C371B0038E0BB /* THNRecommendCollectionReusableView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THNRecommendCollectionReusableView.m; sourceTree = "<group>"; };
+		D85F169E1E5D30220038E0BB /* THNCarServiceTextView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THNCarServiceTextView.h; sourceTree = "<group>"; };
+		D85F169F1E5D30220038E0BB /* THNCarServiceTextView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THNCarServiceTextView.m; sourceTree = "<group>"; };
 		D861BC6C1D7E977700A26022 /* THNBrandInfoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THNBrandInfoViewController.h; sourceTree = "<group>"; };
 		D861BC6D1D7E977700A26022 /* THNBrandInfoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THNBrandInfoViewController.m; sourceTree = "<group>"; };
 		D861BC6F1D7E995600A26022 /* THNBrandInfoCollectionReusableView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THNBrandInfoCollectionReusableView.h; sourceTree = "<group>"; };
@@ -2788,6 +2791,8 @@
 				1F2A8D611CF40276005116C7 /* FBEditCarItemTableViewCell.m */,
 				D85F169B1E5C371B0038E0BB /* THNRecommendCollectionReusableView.h */,
 				D85F169C1E5C371B0038E0BB /* THNRecommendCollectionReusableView.m */,
+				D85F169E1E5D30220038E0BB /* THNCarServiceTextView.h */,
+				D85F169F1E5D30220038E0BB /* THNCarServiceTextView.m */,
 			);
 			path = GoodsCar;
 			sourceTree = "<group>";
@@ -6057,6 +6062,7 @@
 				1F2A8F501CF40277005116C7 /* PictureView.m in Sources */,
 				1F2A901F1CF40277005116C7 /* InvalidBonusCell.m in Sources */,
 				D8ACF4561D6C1F9400DB79D8 /* THNMallSubjectModelData.m in Sources */,
+				D85F16A01E5D30220038E0BB /* THNCarServiceTextView.m in Sources */,
 				1F2A8F4F1CF40277005116C7 /* PhotoAlbumsView.m in Sources */,
 				1F2A8FD01CF40277005116C7 /* MallMenuCollectionViewCell.m in Sources */,
 				D81281541CAA8532007CF08B /* FBRequest.m in Sources */,

@@ -10,6 +10,7 @@
 #import "BuyCarDefault.h"
 #import <SVProgressHUD/SVProgressHUD.h>
 #import "THNMacro.h"
+#import "THNCarServiceTextView.h"
 
 @interface GoodsCarViewController : FBViewController <
     UITableViewDelegate,
@@ -24,6 +25,7 @@
 @property (nonatomic, strong) FBRequest               *carPayRequest;
 @property (nonatomic, strong) BuyCarDefault           *defaultCarView;     //  没有商品的购物车背景
 
+@property (nonatomic, strong) THNCarServiceTextView *headerTextView;
 @property (nonatomic, strong) UITableView           *carItemTabel;
 @property (nonatomic, strong) UIButton              *editBtn;
 @property (nonatomic, strong) UIView                *bottomView;
