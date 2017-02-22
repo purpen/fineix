@@ -7,6 +7,9 @@
 //
 
 #import "THNShangPinCollectionViewCell.h"
+#import "Masonry.h"
+#import "Fiu.h"
+#import "UIImageView+WebCache.h"
 
 @interface THNShangPinCollectionViewCell ()
 
@@ -22,5 +25,14 @@
 @end
 
 @implementation THNShangPinCollectionViewCell
+
+- (instancetype)initWithFrame:(CGRect)frame
+{
+    if (self = [super initWithFrame:frame])
+    {
+        
+    }
+    return self;
+}
 
 @end

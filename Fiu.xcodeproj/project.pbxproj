@@ -384,6 +384,8 @@
 		1F45A7931D2F5263009D7EE1 /* MapAnnotionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F45A7911D2F5263009D7EE1 /* MapAnnotionViewController.m */; };
 		1F45A7941D2F5263009D7EE1 /* MapAnnotionViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1F45A7921D2F5263009D7EE1 /* MapAnnotionViewController.xib */; };
 		1F59E5FC1C9ABBA500E96C60 /* Accelerate.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1F59E5FB1C9ABBA500E96C60 /* Accelerate.framework */; };
+		1F5C57B81E5C45A8003B585D /* THNYaoQingHaoYouCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F5C57B71E5C45A8003B585D /* THNYaoQingHaoYouCollectionViewCell.m */; };
+		1F5C57BB1E5C4F0C003B585D /* THNNewSortCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F5C57BA1E5C4F0C003B585D /* THNNewSortCollectionViewCell.m */; };
 		1F69CE201CF70BFA00AE3271 /* OfficialCertificationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F69CE1E1CF70BFA00AE3271 /* OfficialCertificationViewController.m */; };
 		1F69CE211CF70BFA00AE3271 /* OfficialCertificationViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1F69CE1F1CF70BFA00AE3271 /* OfficialCertificationViewController.xib */; };
 		1F6CA25D1D5B0FA600DFB79E /* MediaPlayer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1F6CA25C1D5B0FA600DFB79E /* MediaPlayer.framework */; };
@@ -1466,6 +1468,10 @@
 		1F45A7911D2F5263009D7EE1 /* MapAnnotionViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MapAnnotionViewController.m; sourceTree = "<group>"; };
 		1F45A7921D2F5263009D7EE1 /* MapAnnotionViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MapAnnotionViewController.xib; sourceTree = "<group>"; };
 		1F59E5FB1C9ABBA500E96C60 /* Accelerate.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Accelerate.framework; path = System/Library/Frameworks/Accelerate.framework; sourceTree = SDKROOT; };
+		1F5C57B61E5C45A8003B585D /* THNYaoQingHaoYouCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THNYaoQingHaoYouCollectionViewCell.h; sourceTree = "<group>"; };
+		1F5C57B71E5C45A8003B585D /* THNYaoQingHaoYouCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THNYaoQingHaoYouCollectionViewCell.m; sourceTree = "<group>"; };
+		1F5C57B91E5C4F0C003B585D /* THNNewSortCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THNNewSortCollectionViewCell.h; sourceTree = "<group>"; };
+		1F5C57BA1E5C4F0C003B585D /* THNNewSortCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THNNewSortCollectionViewCell.m; sourceTree = "<group>"; };
 		1F69CE1D1CF70BFA00AE3271 /* OfficialCertificationViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OfficialCertificationViewController.h; sourceTree = "<group>"; };
 		1F69CE1E1CF70BFA00AE3271 /* OfficialCertificationViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OfficialCertificationViewController.m; sourceTree = "<group>"; };
 		1F69CE1F1CF70BFA00AE3271 /* OfficialCertificationViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = OfficialCertificationViewController.xib; sourceTree = "<group>"; };
@@ -3925,6 +3931,10 @@
 				1F1804271E56CE1100722AF5 /* THNDiPanZhuanTiCollectionViewCell.m */,
 				1F1804291E56D0F700722AF5 /* THNQingJingFenLeiCollectionViewCell.h */,
 				1F18042A1E56D0F700722AF5 /* THNQingJingFenLeiCollectionViewCell.m */,
+				1F5C57B61E5C45A8003B585D /* THNYaoQingHaoYouCollectionViewCell.h */,
+				1F5C57B71E5C45A8003B585D /* THNYaoQingHaoYouCollectionViewCell.m */,
+				1F5C57B91E5C4F0C003B585D /* THNNewSortCollectionViewCell.h */,
+				1F5C57BA1E5C4F0C003B585D /* THNNewSortCollectionViewCell.m */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -6269,6 +6279,7 @@
 				D8117AD61E5A89D50094E7EB /* NiceDomain.m in Sources */,
 				1F2AFC8E1D88170B00DA6035 /* BackgroundCollectionViewCell.m in Sources */,
 				1F2A90691CF40277005116C7 /* SystemInfoTableViewCell.m in Sources */,
+				1F5C57BB1E5C4F0C003B585D /* THNNewSortCollectionViewCell.m in Sources */,
 				D81318011D9228BA007CE71C /* THNUserModelData.m in Sources */,
 				1F2A90651CF40277005116C7 /* SystemNoticeModel.m in Sources */,
 				D80878D91D6AD4C800C1FFA0 /* NewGoodsCollectionViewCell.m in Sources */,
@@ -6347,6 +6358,7 @@
 				D857ABF31DE436D700F924E8 /* THNShareView.m in Sources */,
 				D8117ACA1E5A89D50094E7EB /* RollImageRow.m in Sources */,
 				1F2AFCFC1D8817CC00DA6035 /* THNActivityCollectionViewCell.m in Sources */,
+				1F5C57B81E5C45A8003B585D /* THNYaoQingHaoYouCollectionViewCell.m in Sources */,
 				1F2AFDD11D8818A400DA6035 /* RefundmentViewController.m in Sources */,
 				1F2A90891CF40277005116C7 /* FBPayTheWayViewController.m in Sources */,
 				1F2A90A51CF40277005116C7 /* FBSearchView.m in Sources */,

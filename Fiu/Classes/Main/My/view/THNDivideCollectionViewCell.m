@@ -44,7 +44,7 @@ static NSString *const URLAliance = @"/alliance/view";
         
         self.textLabel = [[UILabel alloc] init];
         self.textLabel.font = [UIFont systemFontOfSize:13];
-        self.textLabel.text = @"我的分成";
+        self.textLabel.text = @"我的收益";
         [self.contentView addSubview:self.textLabel];
         [_textLabel mas_makeConstraints:^(MASConstraintMaker *make) {
             make.left.mas_equalTo(self.contentView.mas_left).mas_offset(16);

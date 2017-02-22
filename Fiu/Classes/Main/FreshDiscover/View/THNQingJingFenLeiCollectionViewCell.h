@@ -11,4 +11,5 @@
 @class Pro_categoryModel;
 @interface THNQingJingFenLeiCollectionViewCell : UICollectionViewCell
 @property (nonatomic, strong) Pro_categoryModel *model;
+@property (nonatomic, strong) Pro_categoryModel *pModel;
 @end

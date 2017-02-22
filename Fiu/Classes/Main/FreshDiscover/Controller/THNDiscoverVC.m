@@ -20,6 +20,16 @@
 #import "THNSortCollectionViewCell.h"
 #import "THNDiPanZhuanTiCollectionViewCell.h"
 #import "THNQingJingFenLeiCollectionViewCell.h"
+#import "THNCategoryViewController.h"
+#import "THNDomainInfoViewController.h"
+#import "THNSceneDetalViewController.h"
+#import "THNBrandInfoViewController.h"
+#import "THNYaoQingHaoYouCollectionViewCell.h"
+#import <UMSocialCore/UMSocialCore.h>
+#import "HomePageViewController.h"
+#import "THNNewSortCollectionViewCell.h"
+
+static NSString *const ShareURlText = @"我在Fiu浮游™寻找同路人；希望和你一起用文字来记录内心情绪，用滤镜来表达情感色彩，用分享去变现原创价值；带你发现美学科技的力量和感性生活的温度！来吧，去Fiu一下 >>> http://m.taihuoniao.com/fiu";
 
 @interface THNDiscoverVC ()<
 THNNavigationBarItemsDelegate,
@@ -189,8 +199,10 @@ UITableViewDataSource
         [_collectionView registerClass:[CollectionViewCell class] forCellWithReuseIdentifier:kCellIdentifier_CollectionView];
         [_collectionView registerClass:[THNRommendCollectionViewCell class] forCellWithReuseIdentifier:THNRECOmmendCollectionViewCell];
         [_collectionView registerClass:[THNSortCollectionViewCell class] forCellWithReuseIdentifier:THNSORTCollectionViewCell];
+        [_collectionView registerClass:[THNNewSortCollectionViewCell class] forCellWithReuseIdentifier:THNNEWSortCollectionViewCell];
         [_collectionView registerClass:[THNDiPanZhuanTiCollectionViewCell class] forCellWithReuseIdentifier:THNDIPANZhuanTiCollectionViewCell];
         [_collectionView registerClass:[THNQingJingFenLeiCollectionViewCell class] forCellWithReuseIdentifier:THNQINGJingFenLeiCollectionViewCell];
+        [_collectionView registerClass:[THNYaoQingHaoYouCollectionViewCell class] forCellWithReuseIdentifier:THNYAOQingHaoYouCollectionViewCell];
         //注册分区头标题
         [_collectionView registerClass:[CollectionViewHeaderView class]
             forSupplementaryViewOfKind:UICollectionElementKindSectionHeader
@@ -290,7 +302,7 @@ UITableViewDataSource
         cell.model = model;
         return cell;
     } else if (indexPath.section == 1) {
-        THNSortCollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:THNSORTCollectionViewCell forIndexPath:indexPath];
+        THNNewSortCollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:THNNEWSortCollectionViewCell forIndexPath:indexPath];
         NSArray *ary = self.collectionDatas[1];
         Pro_categoryModel *model = ary[indexPath.row];
         cell.model = model;
@@ -320,7 +332,7 @@ UITableViewDataSource
             THNQingJingFenLeiCollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:THNQINGJingFenLeiCollectionViewCell forIndexPath:indexPath];
             NSArray *ary = self.collectionDatas[5];
             Pro_categoryModel *model = ary[indexPath.row - 2];
-            cell.model = model;
+            cell.pModel = model;
             return cell;
         }
     } else if (indexPath.section == 4) {
@@ -337,7 +349,7 @@ UITableViewDataSource
         return cell;
     } else if (indexPath.section == 6) {
         if (indexPath.row <= 2) {
-            THNSortCollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:THNSORTCollectionViewCell forIndexPath:indexPath];
+            THNYaoQingHaoYouCollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:THNYAOQingHaoYouCollectionViewCell forIndexPath:indexPath];
             NSArray *ary = @[[Pro_categoryModel getPro_categoryModelWithTitle:@"邀请微信好友" andCoverUrl:@"weixin_icon"],[Pro_categoryModel getPro_categoryModelWithTitle:@"连接微博" andCoverUrl:@"weibo_icon"],[Pro_categoryModel getPro_categoryModelWithTitle:@"连接通讯录" andCoverUrl:@"tongxunlu"]];
             Pro_categoryModel *model = ary[indexPath.row];
             cell.model = model;
@@ -387,6 +399,97 @@ UITableViewDataSource
     return 0;
 }
 
+-(void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath{
+    if (indexPath.section == 0) {
+        StickModel *model = self.collectionDatas[0];
+        __block NSString *dataId;
+        __block NSString *dataType;
+        if ([model.type isEqualToString:@"11"]) {
+            FBRequest *request = [FBAPI postWithUrlString:@"/scene_subject/view" requestDictionary:@{@"id" : model._id} delegate:self];
+            [request startRequestSuccess:^(FBRequest *request, id result) {
+                NSDictionary *dataDict = result[@"data"];
+                dataId = dataDict[@"_id"];
+                dataType = dataDict[@"type"];
+                [self thn_openSubjectTypeController:self.navigationController type:[dataType integerValue] subjectId:dataId];
+            } failure:^(FBRequest *request, NSError *error) {
+                
+            }];
+        }
+    } else if (indexPath.section == 1) {
+        NSArray *ary = self.collectionDatas[1];
+        Pro_categoryModel *model = ary[indexPath.row];
+        THNCategoryViewController *mallCategoryVC = [[THNCategoryViewController alloc] init];
+        mallCategoryVC.vcTitle = model.title;
+        mallCategoryVC.categoryId = model._id;
+        [self.navigationController pushViewController:mallCategoryVC animated:YES];
+    } else if (indexPath.section == 2) {
+        NSArray *ary = self.collectionDatas[2];
+        StickModel *model = ary[indexPath.row];
+        THNDomainInfoViewController *domainInfoVC = [[THNDomainInfoViewController alloc] init];
+        domainInfoVC.infoId = model._id;
+        [self.navigationController pushViewController:domainInfoVC animated:YES];
+    } else if (indexPath.section == 3) {
+        NSArray *ary = self.collectionDatas[4];
+        if (indexPath.row < ary.count) {
+            THNSceneDetalViewController *vc = [[THNSceneDetalViewController alloc] init];
+            StickModel *model = ary[indexPath.row];
+            vc.sceneDetalId = model._id;
+            [self.navigationController pushViewController:vc animated:YES];
+        } else {
+            
+        }
+    } else if (indexPath.section == 4) {
+        NSArray *ary = self.collectionDatas[5];
+        THNBrandInfoViewController *vc = [[THNBrandInfoViewController alloc] init];
+        Pro_categoryModel *model = ary[indexPath.row];
+        vc.brandId = model._id;
+        [self.navigationController pushViewController:vc animated:YES];
+    } else if (indexPath.section == 5) {
+        //专辑
+    } else if (indexPath.section == 6) {
+        UMSocialMessageObject *messageObject = [UMSocialMessageObject messageObject];
+        messageObject.text = ShareURlText;
+        
+        if (indexPath.row == 0) {
+            //微信
+            [[UMSocialManager defaultManager] shareToPlatform:(UMSocialPlatformType_WechatSession) messageObject:messageObject currentViewController:self completion:^(id result, NSError *error) {
+                if (error) {
+                    NSLog(@"************Share fail with error %@*********",error);
+                }else{
+                    [SVProgressHUD showSuccessWithStatus:@"让分享变成生产力，别让生活偷走远方的精彩"];
+                }
+            }];
+            
+        }else if (indexPath.row == 1){
+            //w微博
+            [[UMSocialManager defaultManager] shareToPlatform:(UMSocialPlatformType_Sina) messageObject:messageObject currentViewController:self completion:^(id result, NSError *error) {
+                if (error) {
+                    NSLog(@"************Share fail with error %@*********",error);
+                }else{
+                    [SVProgressHUD showSuccessWithStatus:@"让分享变成生产力，别让生活偷走远方的精彩"];
+                }
+            }];
+        }else if (indexPath.row == 2){
+            //通讯录
+            [[UMSocialManager defaultManager] shareToPlatform:(UMSocialPlatformType_Sms) messageObject:messageObject currentViewController:self completion:^(id result, NSError *error) {
+                if (error) {
+                    NSLog(@"************Share fail with error %@*********",error);
+                }else{
+                    [SVProgressHUD showSuccessWithStatus:@"让分享变成生产力，别让生活偷走远方的精彩"];
+                }
+            }];
+        } else{
+        NSArray *ary = self.collectionDatas[8];
+        UsersModel *model = ary[indexPath.row - 3];
+        HomePageViewController *vc = [[HomePageViewController alloc] init];
+        vc.type = @2;
+        vc.isMySelf = NO;
+        vc.userId = [NSString stringWithFormat:@"%@",model._id];
+        [self.navigationController pushViewController:vc animated:YES];
+        }
+    }
+}
+
 - (CGSize)collectionView:(UICollectionView *)collectionView
                   layout:(UICollectionViewLayout *)collectionViewLayout
   sizeForItemAtIndexPath:(NSIndexPath *)indexPath
@@ -408,7 +511,7 @@ UITableViewDataSource
         if (indexPath.row <= 1) {
             return CGSizeMake(120, 135/2.0);
         } else {
-            return CGSizeMake(60,
+            return CGSizeMake(80,
                              100);
         }
     } else if (indexPath.section == 4) {
@@ -472,6 +575,9 @@ UITableViewDataSource
 // 当拖动CollectionView的时候，处理TableView
 - (void)selectRowAtIndexPath:(NSInteger)index
 {
+    if (index > 6) {
+        return;
+    }
     [self.tableView selectRowAtIndexPath:[NSIndexPath indexPathForRow:index inSection:0] animated:YES scrollPosition:UITableViewScrollPositionMiddle];
 }
 
