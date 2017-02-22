@@ -16,6 +16,9 @@
 @property (nonatomic, strong) SDCycleScrollView *rollImageView;
 @property (nonatomic, strong) UILabel *indexLabel;
 @property (nonatomic, strong) UILabel *sumLabel;
+@property (nonatomic, strong) UIImageView *iconImage;
+@property (nonatomic, strong) UIImageView *locImage;
+@property (nonatomic, strong) UILabel *locLabel;
 
 - (void)thn_setRollimageView:(DominInfoData *)model;
 

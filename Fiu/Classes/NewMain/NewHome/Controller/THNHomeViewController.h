@@ -12,6 +12,7 @@
 #import "THNHotUserView.h"
 #import "FBTabBarItemBadgeBtn.h"
 #import "BuyCarDefault.h"
+#import "THNHomeTableViewFooter.h"
 
 @interface THNHomeViewController : THNViewController <
     THNNavigationBarItemsDelegate,
@@ -61,5 +62,6 @@
 @pro_strong THNHotUserView *hotUserList;
 @pro_strong UIView *hotUserView;
 @pro_strong BuyCarDefault *defaultHomeView;
+@property (nonatomic, strong) THNHomeTableViewFooter *footerImageView;
 
 @end

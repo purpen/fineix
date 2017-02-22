@@ -29,6 +29,7 @@ NSString *const kTHNTradingInfoDataStatus = @"status";
 NSString *const kTHNTradingInfoDataStatusLabel = @"status_label";
 NSString *const kTHNTradingInfoDataSubOrderId = @"sub_order_id";
 NSString *const kTHNTradingInfoDataSummary = @"summary";
+NSString *const kTHNTradingInfoDataTitle = @"title";
 NSString *const kTHNTradingInfoDataTotalPrice = @"total_price";
 NSString *const kTHNTradingInfoDataType = @"type";
 NSString *const kTHNTradingInfoDataUnitPrice = @"unit_price";
@@ -122,9 +123,12 @@ NSString *const kTHNTradingInfoDataUserId = @"user_id";
 	if(![dictionary[kTHNTradingInfoDataSubOrderId] isKindOfClass:[NSNull class]]){
 		self.subOrderId = dictionary[kTHNTradingInfoDataSubOrderId];
 	}	
-	if(![dictionary[kTHNTradingInfoDataSummary] isKindOfClass:[NSNull class]]){
-		self.summary = dictionary[kTHNTradingInfoDataSummary];
-	}	
+    if(![dictionary[kTHNTradingInfoDataSummary] isKindOfClass:[NSNull class]]){
+        self.summary = dictionary[kTHNTradingInfoDataSummary];
+    }
+    if(![dictionary[kTHNTradingInfoDataTitle] isKindOfClass:[NSNull class]]){
+        self.title = dictionary[kTHNTradingInfoDataTitle];
+    }
 	if(![dictionary[kTHNTradingInfoDataTotalPrice] isKindOfClass:[NSNull class]]){
 		self.totalPrice = [dictionary[kTHNTradingInfoDataTotalPrice] floatValue];
 	}

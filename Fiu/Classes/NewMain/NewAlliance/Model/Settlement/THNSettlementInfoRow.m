@@ -12,6 +12,7 @@ NSString *const kTHNSettlementInfoRowIdField = @"_id";
 NSString *const kTHNSettlementInfoRowAllianceId = @"alliance_id";
 NSString *const kTHNSettlementInfoRowAmount = @"amount";
 NSString *const kTHNSettlementInfoRowBalance = @"balance";
+
 NSString *const kTHNSettlementInfoRowBalanceId = @"balance_id";
 NSString *const kTHNSettlementInfoRowBalanceRecordId = @"balance_record_id";
 NSString *const kTHNSettlementInfoRowCreatedAt = @"created_at";
@@ -54,9 +55,10 @@ NSString *const kTHNSettlementInfoRowUserId = @"user_id";
 	if(![dictionary[kTHNSettlementInfoRowBalanceRecordId] isKindOfClass:[NSNull class]]){
 		self.balanceRecordId = dictionary[kTHNSettlementInfoRowBalanceRecordId];
 	}	
-	if(![dictionary[kTHNSettlementInfoRowCreatedAt] isKindOfClass:[NSNull class]]){
-		self.createdAt = dictionary[kTHNSettlementInfoRowCreatedAt];
-	}	
+    if(![dictionary[kTHNSettlementInfoRowCreatedAt] isKindOfClass:[NSNull class]]){
+        self.createdAt = dictionary[kTHNSettlementInfoRowCreatedAt];
+    }
+
 	if(![dictionary[kTHNSettlementInfoRowCreatedOn] isKindOfClass:[NSNull class]]){
 		self.createdOn = [dictionary[kTHNSettlementInfoRowCreatedOn] integerValue];
 	}

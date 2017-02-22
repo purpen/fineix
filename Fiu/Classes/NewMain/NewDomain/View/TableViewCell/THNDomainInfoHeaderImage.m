@@ -30,6 +30,7 @@
         [self thn_setCurrentImageIndex:_imageIndex];
         self.sumLabel.text = [NSString stringWithFormat:@" / %zi", model.covers.count];
         self.rollImageView.imageURLStringsGroup = model.covers;
+        self.locLabel.text = @"1921km";
     }
 }
 
@@ -49,16 +50,37 @@
     
     [self addSubview:self.sumLabel];
     [_sumLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.size.mas_equalTo(CGSizeMake(27, 15));
+        make.size.mas_equalTo(CGSizeMake(27, 18));
         make.right.equalTo(self.mas_right).with.offset(-15);
         make.bottom.equalTo(self.mas_bottom).with.offset(-15);
     }];
     
     [self addSubview:self.indexLabel];
     [_indexLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.size.mas_equalTo(CGSizeMake(15, 15));
+        make.size.mas_equalTo(CGSizeMake(28, 18));
         make.right.equalTo(_sumLabel.mas_left).with.offset(0);
         make.bottom.equalTo(self.mas_bottom).with.offset(-15);
+    }];
+    
+    [self addSubview:self.iconImage];
+    [_iconImage mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.size.mas_equalTo(CGSizeMake(10, 10));
+        make.left.equalTo(_indexLabel.mas_left).with.offset(4);
+        make.centerY.equalTo(_indexLabel);
+    }];
+    
+    [self addSubview:self.locImage];
+    [_locImage mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.size.mas_equalTo(CGSizeMake(10, 10));
+        make.left.equalTo(self.mas_left).with.offset(15);
+        make.centerY.equalTo(_indexLabel);
+    }];
+    
+    [self addSubview:self.locLabel];
+    [_locLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.size.mas_equalTo(CGSizeMake(70, 10));
+        make.left.equalTo(_locImage.mas_right).with.offset(5);
+        make.centerY.equalTo(_locImage);
     }];
 }
 
@@ -82,6 +104,33 @@
     }
     return _sumLabel;
 }
+
+- (UIImageView *)iconImage {
+    if (!_iconImage) {
+        _iconImage = [[UIImageView alloc] init];
+        _iconImage.image = [UIImage imageNamed:@"icon_domain_photos"];
+    }
+    return _iconImage;
+}
+
+- (UIImageView *)locImage {
+    if (!_locImage) {
+        _locImage = [[UIImageView alloc] init];
+        _locImage.image = [UIImage imageNamed:@"icon_domain_loc"];
+    }
+    return _locImage;
+}
+
+- (UILabel *)locLabel {
+    if (!_locLabel) {
+        _locLabel = [[UILabel alloc] init];
+        _locLabel.textColor = [UIColor colorWithHexString:@"#FFFFFF"];
+        _locLabel.font = [UIFont systemFontOfSize:12];
+//        _locLabel.backgroundColor = [UIColor colorWithHexString:@"#000000" alpha:0.5];
+    }
+    return _locLabel;
+}
+
 
 - (SDCycleScrollView *)rollImageView {
     if (!_rollImageView) {

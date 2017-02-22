@@ -29,7 +29,7 @@
 }
 
 - (void)thn_setTradingRecordInfoDataBottom:(THNTradingInfoData *)model {
-    self.leftLable.text = @"分成收益";
+    self.leftLable.text = @"合计收益";
     self.rightLable.font = [UIFont boldSystemFontOfSize:14];
     self.rightLable.textColor = [UIColor colorWithHexString:MAIN_COLOR];
     self.rightLable.text = [NSString stringWithFormat:@"￥%.2f", model.totalPrice];
