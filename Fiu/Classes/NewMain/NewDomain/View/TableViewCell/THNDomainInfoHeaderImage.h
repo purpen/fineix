@@ -19,6 +19,8 @@
 @property (nonatomic, strong) UIImageView *iconImage;
 @property (nonatomic, strong) UIImageView *locImage;
 @property (nonatomic, strong) UILabel *locLabel;
+/**  */
+@property (nonatomic, strong) NSArray *ary;
 
 - (void)thn_setRollimageView:(DominInfoData *)model;
 
