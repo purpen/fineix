@@ -25,12 +25,8 @@
         [self getDesText:model.des];
         
         CGSize size = [self getTextFrame:model.des];
-        if (size.height * 1.4 <= 90) {
-            self.defaultCellHigh = size.height * 1.4;
-        } else {
-            self.defaultCellHigh = 90;
-        }
-        self.cellHigh = size.height * 1.4;
+        
+        self.defaultCellHigh = size.height * 1.4 + 15;
     }
 }
 
@@ -64,7 +60,7 @@
 - (UILabel *)desLabel {
     if (!_desLabel) {
         _desLabel = [[UILabel alloc] init];
-        _desLabel.textColor = [UIColor colorWithHexString:@"#222222"];
+        _desLabel.textColor = [UIColor colorWithHexString:@"#666666"];
         _desLabel.font = [UIFont systemFontOfSize:14];
         _desLabel.numberOfLines = 0;
     }

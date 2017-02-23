@@ -61,7 +61,7 @@ static NSString *const URLDomainInfo = @"/scene_scene/view";
     self.infoRequest = [FBAPI postWithUrlString:URLDomainInfo requestDictionary:@{@"id":self.infoId} delegate:self];
     [self.infoRequest startRequestSuccess:^(FBRequest *request, id result) {
         if ([[result valueForKey:@"success"] isEqualToNumber:@1]) {
-//            NSLog(@"============ 地盘详情： %@", [NSString jsonStringWithObject:result]);
+            NSLog(@"============ 地盘详情： %@", [NSString jsonStringWithObject:result]);
             NSDictionary *dict =  [result valueForKey:@"data"];
             self.infoModel = [[DominInfoData alloc] initWithDictionary:dict];
             if (self.infoModel) {
@@ -158,7 +158,7 @@ static NSString *const URLDomainInfo = @"/scene_scene/view";
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     if (section == 0) {
-        return 4;
+        return 3;
     } else if (section == 1) {
         return 3;
     }
@@ -182,13 +182,7 @@ static NSString *const URLDomainInfo = @"/scene_scene/view";
             THNDesTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:desCellId];
             cell = [[THNDesTableViewCell alloc] initWithStyle:(UITableViewCellStyleDefault) reuseIdentifier:desCellId];
             [cell thn_setDesData:self.infoModel];
-            _contentHigh = cell.cellHigh;
-            _defaultContentHigh = cell.defaultCellHigh;
-            return cell;
-        } else if (indexPath.row == 3) {
-            THNMoreDesTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:moreCellId];
-            cell = [[THNMoreDesTableViewCell alloc] initWithStyle:(UITableViewCellStyleDefault) reuseIdentifier:moreCellId];
-            cell.moreButton.selected = _rowSelected;
+            _contentHigh = cell.defaultCellHigh;
             return cell;
         }
         
@@ -218,18 +212,11 @@ static NSString *const URLDomainInfo = @"/scene_scene/view";
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
     if (indexPath.section == 0) {
         if (indexPath.row == 0) {
-            return 150;
+            return 175;
         } else if (indexPath.row == 1) {
             return 0.01;
         } else if (indexPath.row == 2) {
-            if (_selectedIndexPath && _selectedIndexPath.section == indexPath.section) {
-                return _contentHigh;
-            } else {
-                return _defaultContentHigh;
-            }
-            return 80;
-        } else if (indexPath.row == 3 ) {
-            return 44;
+            return _contentHigh;
         }
     
     } else if (indexPath.section == 1) {
@@ -247,18 +234,7 @@ static NSString *const URLDomainInfo = @"/scene_scene/view";
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     if (indexPath.section == 0) {
-        if (indexPath.row == 3) {
-            if (_contentHigh > 90) {
-                if (_selectedIndexPath && _selectedIndexPath.section == indexPath.section) {
-                    _selectedIndexPath = nil;
-                    _rowSelected = NO;
-                } else {
-                    _selectedIndexPath = indexPath;
-                    _rowSelected = YES;
-                }
-                [tableView reloadRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
-            }
-        }
+
     }
 }
 
@@ -267,8 +243,7 @@ static NSString *const URLDomainInfo = @"/scene_scene/view";
     if (scrollView == self.domainInfoTable) {
         NSInteger contentOffset = scrollView.contentOffset.y;
         NSInteger scrollHeight = scrollView.contentSize.height - (SCREEN_HEIGHT - 64);
-        
-        if (contentOffset == scrollHeight) {
+        if (contentOffset >= scrollHeight + 1) {
             _onFooterView = YES;
         } else {
             _onFooterView = NO;

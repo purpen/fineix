@@ -131,12 +131,14 @@
         CGFloat btnX = [[self.tagDataMarr[idx] valueForKey:@"x"] floatValue];
         CGFloat btnY = [[self.tagDataMarr[idx] valueForKey:@"y"] floatValue];
         NSString *title = [NSString stringWithFormat:@"%@  ", [self.tagDataMarr[idx] valueForKey:@"title"]];
+        NSString *price = [NSString stringWithFormat:@"￥%.2f", [[self.tagDataMarr[idx] valueForKey:@"price"] floatValue]];
         NSInteger loc = [[self.tagDataMarr[idx] valueForKey:@"loc"] integerValue];
         _goodsTitle = [self.tagDataMarr[idx] valueForKey:@"title"];
         
         UserGoodsTag * userTag = [[UserGoodsTag alloc] init];
         userTag.dele.hidden = YES;
         userTag.title.text = title;
+        userTag.price.text = price;
         userTag.isMove = NO;
         CGFloat width = [userTag.title boundingRectWithSize:CGSizeMake(320, 0)].width;
         if (width*1.3 > SCREEN_WIDTH/2) {
@@ -146,9 +148,9 @@
         }
         
         if (loc == 1) {
-            userTag.frame = CGRectMake((btnX*SCREEN_WIDTH) - ((width+25)-18), btnY*SCREEN_WIDTH-32, width+25, 32);
+            userTag.frame = CGRectMake((btnX*SCREEN_WIDTH) - ((width+25)-18), btnY*SCREEN_WIDTH-32, width+25, 46);
         } else if (loc == 2) {
-            userTag.frame = CGRectMake(btnX*SCREEN_WIDTH-44, btnY*SCREEN_WIDTH-32, width+25, 32);
+            userTag.frame = CGRectMake(btnX*SCREEN_WIDTH-44, btnY*SCREEN_WIDTH-32, width+25, 46);
         }
         [userTag thn_setSceneImageUserGoodsTagLoc:loc];
 

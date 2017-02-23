@@ -54,7 +54,7 @@ static NSInteger const actionButtonTag  = 611;
 - (instancetype)initWithFrame:(CGRect)frame {
     self = [super initWithFrame:frame];
     if (self) {
-        _leftArr = @[@"联系电话：", @"营业时间：", @"店铺标签："];
+        _leftArr = @[@"详细地址：", @"联系电话：", @"营业时间："];
         [self setViewUI];
     }
     return self;
@@ -72,9 +72,9 @@ static NSInteger const actionButtonTag  = 611;
         
         //  商家基本信息
         _rightArr = [NSMutableArray array];
+        [_rightArr addObject:model.address];
         [_rightArr addObject:model.extra.tel];
         [_rightArr addObject:model.extra.shopHours];
-        [_rightArr addObject:[model.tags componentsJoinedByString:@"、"]];
         [self.infoTable reloadData];
         
         //  加载情景列表

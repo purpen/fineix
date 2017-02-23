@@ -14,6 +14,7 @@
 
 @property (nonatomic, strong) UIImageView *headerImage;
 @property (nonatomic, strong) UILabel *name;
+@property (nonatomic, strong) UILabel *subName;
 @property (nonatomic, strong) UILabel *persoMoney;
 
 - (void)thn_setBusinessData:(DominInfoData *)model;

@@ -29,7 +29,7 @@
     [self.image downloadImage:model.coverUrl place:[UIImage imageNamed:@""]];
     self.title.text = model.title;
     
-    [self.iconImage setImage:[UIImage imageNamed:@"icon_domain_tiyandian"] forState:(UIControlStateNormal)];
+    [self.iconImage setImage:[UIImage imageNamed:[NSString stringWithFormat:@"icon_domain_%zi", model.cateTitle]] forState:(UIControlStateNormal)];
     self.subTitle.text = model.subTitle;
     [self setDomainRollView];
 }
@@ -61,7 +61,7 @@
     [self addSubview:self.iconImage];
     [_iconImage mas_makeConstraints:^(MASConstraintMaker *make) {
         make.size.mas_equalTo(CGSizeMake(50, 16));
-        make.left.top.equalTo(self).with.offset(10);
+        make.left.top.equalTo(self).with.offset(5);
     }];
 }
 

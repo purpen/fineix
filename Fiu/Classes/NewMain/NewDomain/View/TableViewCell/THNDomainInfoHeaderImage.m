@@ -68,6 +68,20 @@
         make.left.equalTo(self.mas_left).with.offset(0);
     }];
     
+    UIView *backView = [[UIView alloc] init];
+    backView.backgroundColor = [UIColor colorWithHexString:@"#000000" alpha:0.5];
+    backView.layer.cornerRadius = 3;
+    [self addSubview:backView];
+    [backView mas_makeConstraints:^(MASConstraintMaker *make) {
+//        make.left.equalTo(_iconImage.mas_left).with.offset(-5);
+//        make.right.equalTo(_sumLabel.mas_right).with.offset(5);
+//        make.top.equalTo(_indexLabel.mas_top).with.offset(-2);
+//        make.bottom.equalTo(_indexLabel.mas_bottom).with.offset(2);
+        make.size.mas_equalTo(CGSizeMake(58, 20));
+        make.right.equalTo(self.mas_right).with.offset(-14);
+        make.bottom.equalTo(self.mas_bottom).with.offset(-14);
+    }];
+    
     [self addSubview:self.sumLabel];
     [_sumLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.size.mas_equalTo(CGSizeMake(27, 18));
@@ -85,7 +99,7 @@
     [self addSubview:self.iconImage];
     [_iconImage mas_makeConstraints:^(MASConstraintMaker *make) {
         make.size.mas_equalTo(CGSizeMake(10, 10));
-        make.left.equalTo(_indexLabel.mas_left).with.offset(4);
+        make.left.equalTo(_indexLabel.mas_left).with.offset(5);
         make.centerY.equalTo(_indexLabel);
     }];
     
@@ -110,7 +124,7 @@
         _indexLabel.textColor = [UIColor colorWithHexString:@"#FFFFFF"];
         _indexLabel.font = [UIFont systemFontOfSize:12];
         _indexLabel.textAlignment = NSTextAlignmentRight;
-        _indexLabel.backgroundColor = [UIColor colorWithHexString:@"#000000" alpha:0.5];
+//        _indexLabel.backgroundColor = [UIColor colorWithHexString:@"#000000" alpha:0.5];
     }
     return _indexLabel;
 }
@@ -120,7 +134,7 @@
         _sumLabel = [[UILabel alloc] init];
         _sumLabel.textColor = [UIColor colorWithHexString:@"#FFFFFF"];
         _sumLabel.font = [UIFont systemFontOfSize:12];
-        _sumLabel.backgroundColor = [UIColor colorWithHexString:@"#000000" alpha:0.5];
+//        _sumLabel.backgroundColor = [UIColor colorWithHexString:@"#000000" alpha:0.5];
     }
     return _sumLabel;
 }

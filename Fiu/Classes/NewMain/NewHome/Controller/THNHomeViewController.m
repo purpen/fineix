@@ -725,7 +725,6 @@ static NSString *const homeDataPath = [NSHomeDirectory() stringByAppendingPathCo
                 [cell setDomainMenuModelArr:self.domainCategoryMarr];
             }
             return cell;
-            
         }
         
         THNDomainTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:domainCellId];

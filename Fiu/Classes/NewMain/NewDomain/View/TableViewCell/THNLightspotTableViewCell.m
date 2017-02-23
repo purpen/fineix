@@ -45,7 +45,7 @@
             imageStr = [str substringFromIndex:7];
             [self.imageMarr addObject:imageStr];
             [strMarr addObject:imageStr];
-            self.viewHeiight += 230;
+            self.viewHeiight += SCREEN_WIDTH *0.58 + 10;
         }
     }
     
@@ -53,7 +53,7 @@
     for (NSInteger idx = 0; idx < self.imageMarr.count; ++ idx) {
         NSString *str = self.imageMarr[idx];
         NSInteger location = [totalText rangeOfString:str].location;
-        totalText = [totalText stringByReplacingOccurrencesOfString:str withString:@"\n\n\n"];
+        totalText = [totalText stringByReplacingOccurrencesOfString:str withString:@"\n\n"];
         [self.imageIndexMarr addObject:[NSString stringWithFormat:@"%zi", location]];
     }
     
@@ -61,24 +61,26 @@
 }
 
 - (void)thn_crearBrightSpotInfoUI:(NSMutableArray *)textMarr image:(NSMutableArray *)imageMarr {
-    NSString *textStr = [textMarr componentsJoinedByString:@"\n\n"];
+    NSString *textStr = [textMarr componentsJoinedByString:@"\n"];
     
     [self getAttributedStringWithString:textStr lineSpace:5.0f];
     
     [self addSubview:self.textView];
     [_textView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.left.equalTo(self).with.offset(15);
-        make.bottom.right.equalTo(self).with.offset(-15);
+        make.top.equalTo(self.mas_top).with.offset(0);
+        make.left.equalTo(self.mas_left).with.offset(15);
+        make.bottom.equalTo(self.mas_bottom).with.offset(0);
+        make.right.equalTo(self.mas_right).with.offset(-15);
     }];
 }
 
 - (UITextView *)textView {
     if (!_textView) {
         _textView = [[UITextView alloc] init];
-        _textView.font = [UIFont systemFontOfSize:12];
         _textView.showsVerticalScrollIndicator = NO;
         _textView.editable = NO;
         _textView.scrollEnabled = NO;
+        _textView.backgroundColor = [UIColor whiteColor];
     }
     return _textView;
 }
@@ -92,6 +94,7 @@
     NSRange range = NSMakeRange(0, [string length]);
     [attributedString addAttribute:NSParagraphStyleAttributeName value:paragraphStyle range:range];
     [attributedString addAttribute:NSForegroundColorAttributeName value:[UIColor colorWithHexString:@"#666666"] range:range];
+    [attributedString addAttribute:NSFontAttributeName value:[UIFont systemFontOfSize:14] range:range];
     
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
         for (NSInteger idx = 0; idx < self.imageMarr.count; ++ idx) {
@@ -110,7 +113,7 @@
 }
 
 - (CGFloat)getTextFrameHeight:(NSString *)text {
-    NSDictionary *attribute = @{NSFontAttributeName:[UIFont systemFontOfSize:12]};
+    NSDictionary *attribute = @{NSFontAttributeName:[UIFont systemFontOfSize:14]};
     CGFloat textHeight = [text boundingRectWithSize:CGSizeMake(SCREEN_WIDTH - 30, 0)
                                          options:\
                        NSStringDrawingTruncatesLastVisibleLine |
@@ -118,7 +121,7 @@
                        NSStringDrawingUsesFontLeading |
                        NSStringDrawingUsesDeviceMetrics
                                       attributes:attribute
-                                         context:nil].size.height;
+                                         context:nil].size.height + 5;
     return textHeight;
 }
 

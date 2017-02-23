@@ -11,7 +11,7 @@
 @interface HomeSceneListProduct : NSObject
 
 @property (nonatomic, assign) NSInteger idField;
-@property (nonatomic, assign) NSInteger price;
+@property (nonatomic, assign) CGFloat price;
 @property (nonatomic, strong) NSString * title;
 @property (nonatomic, assign) CGFloat x;
 @property (nonatomic, assign) CGFloat y;

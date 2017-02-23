@@ -151,9 +151,18 @@
     
     [self.bgBtn addSubview:self.title];
     [_title mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.bottom.right.equalTo(_bgBtn).with.offset(-5);
+        make.right.equalTo(_bgBtn.mas_right).with.offset(-5);
+        make.bottom.equalTo(_bgBtn.mas_bottom).with.offset(-13);
         make.left.equalTo(_bgBtn.mas_left).with.offset(5);
-        make.top.equalTo(_bgBtn.mas_top).with.offset(0);
+        make.height.mas_equalTo(@12);
+    }];
+    
+    [self.bgBtn addSubview:self.price];
+    [_price mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.bottom.equalTo(_title.mas_top).with.offset(-3);
+        make.left.equalTo(_bgBtn.mas_left).with.offset(6);
+        make.right.equalTo(_bgBtn.mas_right).with.offset(-10);
+        make.height.mas_equalTo(@12);
     }];
     
     [self addSubview:self.dele];
@@ -219,12 +228,8 @@
     if (!_price) {
         _price = [[UILabel alloc] init];
         _price.textColor = [UIColor whiteColor];
-        if (IS_iOS9) {
-            _price.font = [UIFont fontWithName:@"PingFangSC-Light" size:12];
-        } else {
-            _price.font = [UIFont systemFontOfSize:12];
-        }
-        _price.textAlignment = NSTextAlignmentCenter;
+        _price.font = [UIFont systemFontOfSize:12];
+        _price.textAlignment = NSTextAlignmentLeft;
     }
     return _price;
 }

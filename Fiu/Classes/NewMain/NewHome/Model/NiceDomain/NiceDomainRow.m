@@ -16,6 +16,7 @@ NSString *const kNiceDomainRowKind = @"kind";
 NSString *const kNiceDomainRowOrdby = @"ordby";
 NSString *const kNiceDomainRowSpaceId = @"space_id";
 NSString *const kNiceDomainRowState = @"state";
+NSString *const kNiceDomainRowCateTitle = @"cate_title";
 NSString *const kNiceDomainRowSubTitle = @"sub_title";
 NSString *const kNiceDomainRowSummary = @"summary";
 NSString *const kNiceDomainRowTitle = @"title";
@@ -62,9 +63,13 @@ NSString *const kNiceDomainRowWebUrl = @"web_url";
 		self.spaceId = [dictionary[kNiceDomainRowSpaceId] integerValue];
 	}
 
-	if(![dictionary[kNiceDomainRowState] isKindOfClass:[NSNull class]]){
-		self.state = [dictionary[kNiceDomainRowState] integerValue];
-	}
+    if(![dictionary[kNiceDomainRowState] isKindOfClass:[NSNull class]]){
+        self.state = [dictionary[kNiceDomainRowState] integerValue];
+    }
+
+    if(![dictionary[kNiceDomainRowCateTitle] isKindOfClass:[NSNull class]]){
+        self.cateTitle = [dictionary[kNiceDomainRowCateTitle] integerValue];
+    }
 
 	if(![dictionary[kNiceDomainRowSubTitle] isKindOfClass:[NSNull class]]){
 		self.subTitle = dictionary[kNiceDomainRowSubTitle];

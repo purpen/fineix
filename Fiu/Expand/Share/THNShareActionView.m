@@ -212,6 +212,8 @@ static const NSInteger shareButtonTag = 810;
 //        [alertView addAction:[TYAlertAction actionWithTitle:NSLocalizedString(@"sure", nil) style:(TYAlertActionStyleDefault) handler:^(TYAlertAction *action) {
 //        }]];
 //        [alertView showInWindowWithBackgoundTapDismissEnable:YES];
+    } else {
+        [SVProgressHUD showErrorWithStatus:@"没有链接内容"];
     }
 }
 

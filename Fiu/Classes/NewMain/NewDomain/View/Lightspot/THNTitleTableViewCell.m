@@ -33,7 +33,7 @@
     if (!_title) {
         _title = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 40)];
         _title.textColor = [UIColor colorWithHexString:@"#666666"];
-        _title.font = [UIFont systemFontOfSize:14];
+        _title.font = [UIFont systemFontOfSize:16];
         _title.textAlignment = NSTextAlignmentCenter;
         _title.text = @"亮点";
     }

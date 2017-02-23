@@ -27,7 +27,7 @@
 	}
 
 	if(![dictionary[@"price"] isKindOfClass:[NSNull class]]){
-		self.price = [dictionary[@"price"] integerValue];
+		self.price = [dictionary[@"price"] floatValue];
 	}
 
 	if(![dictionary[@"title"] isKindOfClass:[NSNull class]]){

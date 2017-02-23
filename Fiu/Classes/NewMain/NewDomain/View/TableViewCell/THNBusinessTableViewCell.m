@@ -21,9 +21,13 @@
 }
 
 - (void)thn_setBusinessData:(DominInfoData *)model {
-    [self set_BusinessStarCount:model.scoreAverage];
+//    [self set_BusinessStarCount:model.scoreAverage];
     [self.headerImage downloadImage:model.avatarUrl place:[UIImage imageNamed:@""]];
     self.name.text = model.title;
+    self.subName.text = model.subTitle;
+    if (model.tags.count) {
+        [self set_BusinessTagsCount:model.tags];
+    }
 //    self.persoMoney.text = @"人均消费￥2500";
 }
 
@@ -42,12 +46,42 @@
         make.centerX.equalTo(self);
     }];
     
+    [self addSubview:self.subName];
+    [_subName mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.size.mas_equalTo(CGSizeMake(SCREEN_WIDTH - 30, 20));
+        make.top.equalTo(_name.mas_bottom).with.offset(5);
+        make.centerX.equalTo(self);
+    }];
+    
 //    [self addSubview:self.persoMoney];
 //    [_persoMoney mas_makeConstraints:^(MASConstraintMaker *make) {
 //        make.size.mas_equalTo(CGSizeMake(SCREEN_WIDTH - 30, 20));
 //        make.bottom.equalTo(self.mas_bottom).with.offset(0);
 //        make.centerX.equalTo(self);
 //    }];
+}
+
+- (void)set_BusinessTagsCount:(NSArray *)tags {
+    UIView *tagsView = [[UIView alloc] init];
+    tagsView.backgroundColor = [UIColor whiteColor];
+    [self addSubview:tagsView];
+    [tagsView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.size.mas_equalTo(CGSizeMake(75 * tags.count, 25));
+        make.top.equalTo(self.subName.mas_bottom).with.offset(8);
+        make.centerX.equalTo(self);
+    }];
+    
+    for (NSInteger idx = 0; idx < tags.count; ++ idx) {
+        UILabel *tagsLabel = [[UILabel alloc] initWithFrame:CGRectMake(idx * 75, 0, 65, 25)];
+        tagsLabel.text = tags[idx];
+        tagsLabel.textColor = [UIColor colorWithHexString:@"#666666"];
+        tagsLabel.font = [UIFont systemFontOfSize:12];
+        tagsLabel.textAlignment = NSTextAlignmentCenter;
+        tagsLabel.layer.borderColor = [UIColor colorWithHexString:@"#666666"].CGColor;
+        tagsLabel.layer.borderWidth = 0.5;
+        tagsLabel.layer.cornerRadius = 3;
+        [tagsView addSubview:tagsLabel];
+    }
 }
 
 - (void)set_BusinessStarCount:(NSInteger)count {
@@ -92,6 +126,16 @@
     return _name;
 }
 
+- (UILabel *)subName {
+    if (!_subName) {
+        _subName = [[UILabel alloc] init];
+        _subName.textColor = [UIColor colorWithHexString:@"#666666"];
+        _subName.font = [UIFont systemFontOfSize:12];
+        _subName.textAlignment = NSTextAlignmentCenter;
+    }
+    return _subName;
+}
+
 - (UILabel *)persoMoney {
     if (!_persoMoney) {
         _persoMoney = [[UILabel alloc] init];
@@ -100,6 +144,19 @@
         _persoMoney.textAlignment = NSTextAlignmentCenter;
     }
     return _persoMoney;
+}
+
+- (CGSize)getTextFrame:(NSString *)text {
+    NSDictionary *attribute = @{NSFontAttributeName:[UIFont systemFontOfSize:14]};
+    CGSize textSize = [text boundingRectWithSize:CGSizeMake(SCREEN_WIDTH - 30, 0)
+                                         options:\
+                       NSStringDrawingTruncatesLastVisibleLine |
+                       NSStringDrawingUsesLineFragmentOrigin |
+                       NSStringDrawingUsesFontLeading |
+                       NSStringDrawingUsesDeviceMetrics
+                                      attributes:attribute
+                                         context:nil].size;
+    return textSize;
 }
 
 @end

@@ -18,6 +18,7 @@
 @property (nonatomic, assign) NSInteger ordby;
 @property (nonatomic, assign) NSInteger spaceId;
 @property (nonatomic, assign) NSInteger state;
+@property (nonatomic, assign) NSInteger cateTitle;
 @property (nonatomic, strong) NSString * subTitle;
 @property (nonatomic, strong) NSString * summary;
 @property (nonatomic, strong) NSString * title;
