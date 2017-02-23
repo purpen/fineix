@@ -8,7 +8,7 @@
 
 #import "THNShangJiaLocationMapView.h"
 #import "Masonry.h"
-#import "FBMapLocatinViewController.h"
+#import "THNShangPinWeiZhiMapViewController.h"
 
 @interface THNShangJiaLocationMapView ()<BMKMapViewDelegate,BMKLocationServiceDelegate>
 
@@ -33,7 +33,8 @@
 }
 
 -(void)tapClick{
-    FBMapLocatinViewController *vc = [[FBMapLocatinViewController alloc] init];
+    THNShangPinWeiZhiMapViewController *vc = [[THNShangPinWeiZhiMapViewController alloc] init];
+    vc.model = self.model;
     [self.nav pushViewController:vc animated:YES];
 }
 

@@ -405,13 +405,13 @@ static NSString *const URLDeleteScene = @"/scene_sight/delete";
         return 40;
     } else if (indexPath.row == 5) {
         if ([self.comments count] > 0) {
-            return _commentHigh;
+            return _commentHigh + 2;
         } else {
             return 0.01f;
         }
     } else if (indexPath.row == 6) {
         if ([self.comments count] > 1) {
-            return _commentHigh;
+            return _commentHigh + 2;
         } else {
             return 0.01f;
         }
