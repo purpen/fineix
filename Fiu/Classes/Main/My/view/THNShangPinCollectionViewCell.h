@@ -10,6 +10,24 @@
 
 #define THNSHANGPinCollectionViewCell @"THNShangPinCollectionViewCell"
 
-@interface THNShangPinCollectionViewCell : UICollectionViewCell
+@interface THNShangPinCollectionViewCell : UITableViewCell
+
+@property (nonatomic, strong) UITableView *tableview;
+/**  */
+@property (nonatomic, strong) NSArray *modelAry;
+/**  */
+@property (nonatomic, strong) UINavigationController *nav;
+
+@end
+
+#define CELL @"Cell"
+
+@class THNProductDongModel;
+
+@interface Cell : UITableViewCell
+
+@property (nonatomic, strong) THNProductDongModel *model;
+/**  */
+@property (nonatomic, strong) UIView *lineView;
 
 @end

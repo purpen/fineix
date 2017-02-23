@@ -42,9 +42,13 @@
 @property (nonatomic, assign) NSInteger userId;
 @property (nonatomic, assign) NSInteger viewCount;
 /**  */
+@property (nonatomic, strong) NSArray *category_ids;
+/**  */
 @property(nonatomic,copy) NSString *_id;
 /**  */
 @property(nonatomic,copy) NSString *prize;
+/**  */
+@property (nonatomic, strong) NSArray *products;
 
 -(instancetype)initWithDictionary:(NSDictionary *)dictionary;
 @end

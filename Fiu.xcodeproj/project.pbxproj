@@ -386,6 +386,9 @@
 		1F59E5FC1C9ABBA500E96C60 /* Accelerate.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1F59E5FB1C9ABBA500E96C60 /* Accelerate.framework */; };
 		1F5C57B81E5C45A8003B585D /* THNYaoQingHaoYouCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F5C57B71E5C45A8003B585D /* THNYaoQingHaoYouCollectionViewCell.m */; };
 		1F5C57BB1E5C4F0C003B585D /* THNNewSortCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F5C57BA1E5C4F0C003B585D /* THNNewSortCollectionViewCell.m */; };
+		1F5C57BE1E5D4483003B585D /* THNProductDongModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F5C57BD1E5D4483003B585D /* THNProductDongModel.m */; };
+		1F5C57C11E5D88F3003B585D /* THNMabeLikeTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F5C57C01E5D88F3003B585D /* THNMabeLikeTableViewCell.m */; };
+		1F5C57C41E5DAB98003B585D /* THNXiangGuanQingJingTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F5C57C31E5DAB98003B585D /* THNXiangGuanQingJingTableViewCell.m */; };
 		1F69CE201CF70BFA00AE3271 /* OfficialCertificationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F69CE1E1CF70BFA00AE3271 /* OfficialCertificationViewController.m */; };
 		1F69CE211CF70BFA00AE3271 /* OfficialCertificationViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1F69CE1F1CF70BFA00AE3271 /* OfficialCertificationViewController.xib */; };
 		1F6CA25D1D5B0FA600DFB79E /* MediaPlayer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1F6CA25C1D5B0FA600DFB79E /* MediaPlayer.framework */; };
@@ -1474,6 +1477,12 @@
 		1F5C57B71E5C45A8003B585D /* THNYaoQingHaoYouCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THNYaoQingHaoYouCollectionViewCell.m; sourceTree = "<group>"; };
 		1F5C57B91E5C4F0C003B585D /* THNNewSortCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THNNewSortCollectionViewCell.h; sourceTree = "<group>"; };
 		1F5C57BA1E5C4F0C003B585D /* THNNewSortCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THNNewSortCollectionViewCell.m; sourceTree = "<group>"; };
+		1F5C57BC1E5D4483003B585D /* THNProductDongModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THNProductDongModel.h; sourceTree = "<group>"; };
+		1F5C57BD1E5D4483003B585D /* THNProductDongModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THNProductDongModel.m; sourceTree = "<group>"; };
+		1F5C57BF1E5D88F3003B585D /* THNMabeLikeTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THNMabeLikeTableViewCell.h; sourceTree = "<group>"; };
+		1F5C57C01E5D88F3003B585D /* THNMabeLikeTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THNMabeLikeTableViewCell.m; sourceTree = "<group>"; };
+		1F5C57C21E5DAB98003B585D /* THNXiangGuanQingJingTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THNXiangGuanQingJingTableViewCell.h; sourceTree = "<group>"; };
+		1F5C57C31E5DAB98003B585D /* THNXiangGuanQingJingTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THNXiangGuanQingJingTableViewCell.m; sourceTree = "<group>"; };
 		1F69CE1D1CF70BFA00AE3271 /* OfficialCertificationViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OfficialCertificationViewController.h; sourceTree = "<group>"; };
 		1F69CE1E1CF70BFA00AE3271 /* OfficialCertificationViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OfficialCertificationViewController.m; sourceTree = "<group>"; };
 		1F69CE1F1CF70BFA00AE3271 /* OfficialCertificationViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = OfficialCertificationViewController.xib; sourceTree = "<group>"; };
@@ -3430,6 +3439,8 @@
 				1F2AFC201D88170B00DA6035 /* InvitationModel.m */,
 				1F2AFC211D88170B00DA6035 /* THNSenceModel.h */,
 				1F2AFC221D88170B00DA6035 /* THNSenceModel.m */,
+				1F5C57BC1E5D4483003B585D /* THNProductDongModel.h */,
+				1F5C57BD1E5D4483003B585D /* THNProductDongModel.m */,
 			);
 			path = model;
 			sourceTree = "<group>";
@@ -3533,6 +3544,10 @@
 				1F1804131E54009A00722AF5 /* THNOrderCollectionViewCell.m */,
 				1F18042F1E5AF9E700722AF5 /* THNShangPinCollectionViewCell.h */,
 				1F1804301E5AF9E700722AF5 /* THNShangPinCollectionViewCell.m */,
+				1F5C57BF1E5D88F3003B585D /* THNMabeLikeTableViewCell.h */,
+				1F5C57C01E5D88F3003B585D /* THNMabeLikeTableViewCell.m */,
+				1F5C57C21E5DAB98003B585D /* THNXiangGuanQingJingTableViewCell.h */,
+				1F5C57C31E5DAB98003B585D /* THNXiangGuanQingJingTableViewCell.m */,
 			);
 			path = view;
 			sourceTree = "<group>";
@@ -5908,6 +5923,7 @@
 				D8C095181D7533D000908491 /* CatagoryFiuSceneModel.m in Sources */,
 				D81318021D9228BA007CE71C /* THNUserModelIdentify.m in Sources */,
 				D8884E0F1E595FC000CEE159 /* THNDesTableViewCell.m in Sources */,
+				1F5C57BE1E5D4483003B585D /* THNProductDongModel.m in Sources */,
 				1F2AFCA81D88170B00DA6035 /* THNSenecCollectionViewCell.m in Sources */,
 				1F2AFD8D1D88186C00DA6035 /* THNFocusUserModel.m in Sources */,
 				1F2AFC801D88170B00DA6035 /* FiuSceneData.m in Sources */,
@@ -5993,6 +6009,7 @@
 				1F2A8FD51CF40277005116C7 /* FbGoodsItemsTableViewCell.m in Sources */,
 				1F2AFD021D8817CC00DA6035 /* THNArticleViewController.m in Sources */,
 				D8C0950D1D752E9500908491 /* FBEditShareInfoViewController.m in Sources */,
+				1F5C57C41E5DAB98003B585D /* THNXiangGuanQingJingTableViewCell.m in Sources */,
 				1F2A90601CF40277005116C7 /* MessageViewController.m in Sources */,
 				D869BD6D1D6036A000432423 /* CommentData.m in Sources */,
 				D8117AE01E5A89D50094E7EB /* HomeSceneListUser.m in Sources */,
@@ -6204,6 +6221,7 @@
 				1F2AFC811D88170B00DA6035 /* FiuSceneInfo.m in Sources */,
 				1F2AFDCB1D8818A400DA6035 /* JDOrderViewController.m in Sources */,
 				D8117AE11E5A89D50094E7EB /* SceneInfo.m in Sources */,
+				1F5C57C11E5D88F3003B585D /* THNMabeLikeTableViewCell.m in Sources */,
 				D806698A1D6F3F82007FD81E /* FBGoodsInfoModelSku.m in Sources */,
 				1F2A8F431CF40277005116C7 /* FBFilters.m in Sources */,
 				1F2A8FD71CF40277005116C7 /* FBUserAddressTableViewCell.m in Sources */,

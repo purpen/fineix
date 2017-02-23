@@ -136,7 +136,12 @@
 	if(![dictionary[@"view_count"] isKindOfClass:[NSNull class]]){
 		self.viewCount = [dictionary[@"view_count"] integerValue];
 	}
-    
+    if(![dictionary[@"products"] isKindOfClass:[NSNull class]]){
+        self.products = dictionary[@"products"];
+    }
+    if(![dictionary[@"category_ids"] isKindOfClass:[NSNull class]]){
+        self.category_ids = dictionary[@"category_ids"];
+    }
 
 	return self;
 }

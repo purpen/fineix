@@ -23,6 +23,11 @@
 #import "UserInfoEntity.h"
 #import "THNLoginRegisterViewController.h"
 #import "FBShareViewController.h"
+#import "THNShangPinCollectionViewCell.h"
+#import "MJExtension.h"
+#import "THNProductDongModel.h"
+#import "THNMabeLikeTableViewCell.h"
+#import "THNXiangGuanQingJingTableViewCell.h"
 
 @interface THNSceneDetalViewController ()<UITableViewDelegate,UITableViewDataSource, FBNavigationBarItemsDelegate>
 {
@@ -103,6 +108,8 @@ static NSString *const URLDeleteScene = @"/scene_sight/delete";
     [request startRequestSuccess:^(FBRequest *request, id result) {
         if ([result[@"success"] isEqualToNumber:@1]) {
             self.model = [[HomeSceneListRow alloc] initWithDictionary:[result valueForKey:@"data"]];
+            NSArray *ary = [THNProductDongModel mj_objectArrayWithKeyValuesArray:self.model.products];
+            self.model.products = ary;
             self.comments = [result valueForKey:@"data"][@"comments"];
             [self.sceneTable reloadData];
             [SVProgressHUD dismiss];
@@ -119,6 +126,9 @@ static NSString *const URLDeleteScene = @"/scene_sight/delete";
         _sceneTable.showsVerticalScrollIndicator = NO;
         _sceneTable.backgroundColor = [UIColor colorWithHexString:@"#FFFFFF"];
         _sceneTable.separatorStyle = UITableViewCellSeparatorStyleNone;
+        [_sceneTable registerClass:[THNShangPinCollectionViewCell class] forCellReuseIdentifier:THNSHANGPinCollectionViewCell];
+        [_sceneTable registerClass:[THNMabeLikeTableViewCell class] forCellReuseIdentifier:THNMABLELikeTableViewCell];
+        [_sceneTable registerClass:[THNXiangGuanQingJingTableViewCell class] forCellReuseIdentifier:THNXIANGGuanQingJingTableViewCell];
     }
     return _sceneTable;
 }
@@ -159,7 +169,7 @@ static NSString *const URLDeleteScene = @"/scene_sight/delete";
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return 6;
+    return 9;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -227,9 +237,22 @@ static NSString *const URLDeleteScene = @"/scene_sight/delete";
         return cell;
         
     } else if (indexPath.row == 4) {
+        if ([self.model.products count] > 1) {
+            THNShangPinCollectionViewCell *cell = [tableView dequeueReusableCellWithIdentifier:THNSHANGPinCollectionViewCell];
+            cell.modelAry = self.model.products;
+            cell.nav = self.navigationController;
+            return cell;
+            
+        } else {
+            UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:twoCommentsCellId];
+            cell = [[UITableViewCell alloc] initWithStyle:(UITableViewCellStyleDefault) reuseIdentifier:twoCommentsCellId];
+            return cell;
+        }
+    } else if (indexPath.row == 5) {
         if ([self.comments count] > 0) {
             THNSceneCommentTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:commentsCellId];
             cell = [[THNSceneCommentTableViewCell alloc] initWithStyle:(UITableViewCellStyleDefault) reuseIdentifier:commentsCellId];
+            cell.graybackView.backgroundColor = [UIColor whiteColor];
             [cell thn_setScenecommentData:self.comments[0]];
             _commentHigh = cell.cellHigh;
             return cell;
@@ -240,10 +263,11 @@ static NSString *const URLDeleteScene = @"/scene_sight/delete";
             return cell;
         }
         
-    } else if (indexPath.row == 5) {
+    } else if (indexPath.row == 6) {
         if ([self.comments count] > 1) {
             THNSceneCommentTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:twoCommentsCellId];
             cell = [[THNSceneCommentTableViewCell alloc] initWithStyle:(UITableViewCellStyleDefault) reuseIdentifier:twoCommentsCellId];
+            cell.graybackView.backgroundColor = [UIColor whiteColor];
             [cell thn_setScenecommentData:self.comments[1]];
             _commentHigh = cell.cellHigh;
             return cell;
@@ -253,6 +277,28 @@ static NSString *const URLDeleteScene = @"/scene_sight/delete";
             cell = [[UITableViewCell alloc] initWithStyle:(UITableViewCellStyleDefault) reuseIdentifier:twoCommentsCellId];
             return cell;
         }
+    } else if (indexPath.row == 7) {
+        THNMabeLikeTableViewCell * cell = [tableView dequeueReusableCellWithIdentifier:THNMABLELikeTableViewCell];
+        cell.nav = self.navigationController;
+        NSMutableArray *ary = [NSMutableArray array];
+        for (THNProductDongModel *model in self.model.products) {
+            if (model.category_ids.count > 1) {
+                [ary addObjectsFromArray:model.category_ids];
+            }
+        }
+        NSString *string = [ary componentsJoinedByString:@","];
+        cell.string = string;
+        return cell;
+    } else if (indexPath.row == 8) {
+        THNXiangGuanQingJingTableViewCell * cell = [tableView dequeueReusableCellWithIdentifier:THNXIANGGuanQingJingTableViewCell];
+        cell.nav = self.navigationController;
+        NSMutableArray *ary = [NSMutableArray array];
+        if (self.model.category_ids.count > 1) {
+            [ary addObjectsFromArray:self.model.category_ids];
+        }
+        NSString *string = [ary componentsJoinedByString:@","];
+        cell.string = string;
+        return cell;
     }
     return nil;
 }
@@ -357,18 +403,28 @@ static NSString *const URLDeleteScene = @"/scene_sight/delete";
         }
     } else if (indexPath.row == 3) {
         return 40;
-    } else if (indexPath.row == 4) {
+    } else if (indexPath.row == 5) {
         if ([self.comments count] > 0) {
             return _commentHigh;
         } else {
             return 0.01f;
         }
-    } else if (indexPath.row == 5) {
+    } else if (indexPath.row == 6) {
         if ([self.comments count] > 1) {
             return _commentHigh;
         } else {
             return 0.01f;
         }
+    } else if (indexPath.row == 4) {
+        if ([self.model.products count] > 1) {
+            return 50 * [self.model.products count] + 10;
+        } else {
+            return 0.01f;
+        }
+    } else if (indexPath.row == 7) {
+        return 450;
+    } else if (indexPath.row == 8) {
+        return 660;
     }
     return 44;
 }
