@@ -8,6 +8,10 @@
 
 #import "THNShareActionView.h"
 #import "THNMacro.h"
+#import "THND3inExplainViewController.h"
+#import "UIView+TYAlertView.h"
+
+static const NSInteger shareButtonTag = 810;
 
 @implementation THNShareActionView
 
@@ -18,7 +22,6 @@
     return shareView;
 }
 
-
 - (instancetype)initWithFrame:(CGRect)frame {
     self = [super initWithFrame:frame];
     if (self) {
@@ -28,10 +31,17 @@
     return self;
 }
 
-+ (void)showShareTitle {
++ (void)showShare:(UIViewController *)controller shareMessageObject:(UMSocialMessageObject *)object linkUrl:(NSString *)linkUrl {
     NSArray *titleArr = @[@"微信", @"朋友圈", @"微博", @"QQ", @"复制链接"];
     NSArray *iconImageArr = @[@"icon_share_wechatSession", @"icon_share_wechatTimeLine", @"icon_share_sina", @"icon_share_qq", @"icon_share_link"];
     
+    if (linkUrl.length > 0) {
+        [self shareView].linkUrl = linkUrl;
+    } else {
+        [self shareView].linkUrl = @"";
+    }
+    [self shareView].shareMessageObject = object;
+    [self shareView].vc = controller;
     [[self shareView] thn_creatShareButton:titleArr iconImage:iconImageArr];
 }
 
@@ -131,6 +141,7 @@
         for (NSInteger idx = 0; idx < title.count; ++ idx) {
             UIButton *button = [[UIButton alloc] init];
             [button setImage:[UIImage imageNamed:iconImage[idx]] forState:(UIControlStateNormal)];
+            button.tag = shareButtonTag + idx;
             [button addTarget:self action:@selector(shareButton:) forControlEvents:(UIControlEventTouchUpInside)];
             [self addSubview:button];
             [button mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -155,7 +166,53 @@
 }
 
 - (void)shareButton:(UIButton *)button {
-    NSLog(@"分享");
+    switch (button.tag - shareButtonTag) {
+        case 0:
+            [self shareToPlatform:UMSocialPlatformType_WechatSession];
+            break;
+        case 1:
+            [self shareToPlatform:UMSocialPlatformType_WechatTimeLine];
+            break;
+        case 2:
+            [self shareToPlatform:UMSocialPlatformType_Sina];
+            break;
+        case 3:
+            [self shareToPlatform:UMSocialPlatformType_QQ];
+            break;
+        case 4:
+            [self copyLink];
+            break;
+    }
+}
+
+- (void)shareToPlatform:(UMSocialPlatformType)type {
+    [[UMSocialManager defaultManager] shareToPlatform:(type)
+                                        messageObject:self.shareMessageObject
+                                currentViewController:self
+                                           completion:^(id result, NSError *error) {
+                                               if (error) {
+                                                   [SVProgressHUD showErrorWithStatus:@"取消分享"];
+                                               } else{
+                                                   [SVProgressHUD showSuccessWithStatus:@"分享成功"];
+                                                   [self thn_removeFromSuperview];
+                                               }
+                                           }];
+}
+
+- (void)copyLink {
+    if (self.linkUrl.length > 0) {
+        UIPasteboard *pasteboard = [UIPasteboard generalPasteboard];
+        pasteboard.string = self.linkUrl;
+        [self thn_removeFromSuperview];
+        [SVProgressHUD showSuccessWithStatus:@"复制成功"];
+        
+//        TYAlertView *alertView = [TYAlertView alertViewWithTitle:@"" message:@"已复制到剪切板"];
+//        alertView.layer.cornerRadius = 10;
+//        alertView.buttonDefaultBgColor = [UIColor colorWithHexString:MAIN_COLOR];
+//        [alertView addAction:[TYAlertAction actionWithTitle:NSLocalizedString(@"sure", nil) style:(TYAlertActionStyleDefault) handler:^(TYAlertAction *action) {
+//        }]];
+//        [alertView showInWindowWithBackgoundTapDismissEnable:YES];
+    }
 }
 
 - (UILabel *)headerlable {
@@ -212,7 +269,9 @@
 }
 
 - (void)lookButtonClick:(UIButton *)button {
-    NSLog(@"查看合伙计划");
+    [self thn_removeFromSuperview];
+    THND3inExplainViewController *explainVC = [[THND3inExplainViewController alloc] init];
+    [self.vc presentViewController:explainVC animated:YES completion:nil];
 }
 
 - (NSAttributedString *)getAttributedStringWithString:(NSString *)string {

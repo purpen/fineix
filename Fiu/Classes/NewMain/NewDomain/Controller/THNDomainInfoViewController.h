@@ -10,7 +10,6 @@
 #import "THNDomainInfoHeaderImage.h"
 #import "DominInfoData.h"
 #import "THNDomainInfoFooter.h"
-#import "ShareViewController.h"
 
 @interface THNDomainInfoViewController : THNViewController <
     UITableViewDelegate,
@@ -26,6 +25,5 @@
 @property (nonatomic, strong) THNDomainInfoFooter *footerView;
 @property (nonatomic, strong) UIButton *favoriteButton;
 @property (nonatomic, strong) FBRequest *favoriteRequest;
-@property (nonatomic, strong) ShareViewController *shareVC;
 
 @end
