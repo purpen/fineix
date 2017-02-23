@@ -7,8 +7,13 @@
 //
 
 #import "THNShangJiaLocationMapView.h"
+#import "Masonry.h"
+#import "FBMapLocatinViewController.h"
 
 @interface THNShangJiaLocationMapView ()<BMKMapViewDelegate,BMKLocationServiceDelegate>
+
+/**  */
+@property (nonatomic, strong) UIButton *tapBtn;
 
 @end
 
@@ -17,8 +22,19 @@
 -(instancetype)initWithFrame:(CGRect)frame{
     if (self = [super initWithFrame:frame]) {
         self.zoomLevel = 15;
+        self.tapBtn = [[UIButton alloc] init];
+        [self addSubview:self.tapBtn];
+        [self.tapBtn addTarget:self action:@selector(tapClick) forControlEvents:UIControlEventTouchUpInside];
+        [_tapBtn mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.left.right.top.bottom.mas_equalTo(self).mas_offset(0);
+        }];
     }
     return self;
+}
+
+-(void)tapClick{
+    FBMapLocatinViewController *vc = [[FBMapLocatinViewController alloc] init];
+    [self.nav pushViewController:vc animated:YES];
 }
 
 -(void)setPoint{
@@ -28,7 +44,7 @@
 
 // 添加一个PointAnnotation
 -(void)addPointAnnotation:(float)latitude andLongitude:(float)longitude{
-    BMKPointAnnotation* annotation = [[BMKPointAnnotation alloc]init];
+    BMKPointAnnotation* annotation = [[BMKPointAnnotation alloc] init];
     CLLocationCoordinate2D coor;
     coor.latitude = latitude;
     coor.longitude = longitude;

@@ -14,10 +14,6 @@
 
 @interface CollectionViewHeaderView ()
 
-/**  */
-@property (nonatomic, strong) UIView *leftLineView;
-@property (nonatomic, strong) UIView *rightLineView;
-
 @end
 
 @implementation CollectionViewHeaderView

@@ -231,6 +231,7 @@ static NSInteger const actionButtonTag  = 611;
 - (THNShangJiaLocationMapView *)mapView {
     if (!_mapView) {
         _mapView = [[THNShangJiaLocationMapView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 120)];
+        _mapView.nav = self.nav;
     }
     return _mapView;
 }
