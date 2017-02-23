@@ -152,14 +152,14 @@
     [self.bgBtn addSubview:self.title];
     [_title mas_makeConstraints:^(MASConstraintMaker *make) {
         make.right.equalTo(_bgBtn.mas_right).with.offset(-5);
-        make.bottom.equalTo(_bgBtn.mas_bottom).with.offset(-13);
-        make.left.equalTo(_bgBtn.mas_left).with.offset(5);
+        make.top.equalTo(_bgBtn.mas_top).with.offset(7);
+        make.left.equalTo(_bgBtn.mas_left).with.offset(6);
         make.height.mas_equalTo(@12);
     }];
     
     [self.bgBtn addSubview:self.price];
     [_price mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.bottom.equalTo(_title.mas_top).with.offset(-3);
+        make.top.equalTo(_title.mas_bottom).with.offset(3);
         make.left.equalTo(_bgBtn.mas_left).with.offset(6);
         make.right.equalTo(_bgBtn.mas_right).with.offset(-10);
         make.height.mas_equalTo(@12);
@@ -218,7 +218,7 @@
         _title = [[UILabel alloc] init];
         _title.textColor = [UIColor colorWithHexString:@"#FFFFFF"];
         _title.font = [UIFont systemFontOfSize:12];
-        _title.textAlignment = NSTextAlignmentCenter;
+        _title.textAlignment = NSTextAlignmentLeft;
     }
     return _title;
 }

@@ -148,9 +148,9 @@
         }
         
         if (loc == 1) {
-            userTag.frame = CGRectMake((btnX*SCREEN_WIDTH) - ((width+25)-18), btnY*SCREEN_WIDTH-32, width+25, 46);
+            userTag.frame = CGRectMake((btnX*SCREEN_WIDTH) - ((width+25)-18), btnY*SCREEN_WIDTH-32, width, 46);
         } else if (loc == 2) {
-            userTag.frame = CGRectMake(btnX*SCREEN_WIDTH-44, btnY*SCREEN_WIDTH-32, width+25, 46);
+            userTag.frame = CGRectMake(btnX*SCREEN_WIDTH-44, btnY*SCREEN_WIDTH-32, width, 46);
         }
         [userTag thn_setSceneImageUserGoodsTagLoc:loc];
 

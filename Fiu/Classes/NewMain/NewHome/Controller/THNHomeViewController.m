@@ -113,7 +113,7 @@ static NSString *const homeDataPath = [NSHomeDirectory() stringByAppendingPathCo
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    _isNewUser = NO;
+    _isNewUser = YES;
     
     [self setHotUserListData];
     [self thn_registerNSNotification];

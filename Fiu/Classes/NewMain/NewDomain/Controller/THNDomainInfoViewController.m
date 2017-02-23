@@ -212,7 +212,7 @@ static NSString *const URLDomainInfo = @"/scene_scene/view";
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
     if (indexPath.section == 0) {
         if (indexPath.row == 0) {
-            return 175;
+            return 180;
         } else if (indexPath.row == 1) {
             return 0.01;
         } else if (indexPath.row == 2) {
