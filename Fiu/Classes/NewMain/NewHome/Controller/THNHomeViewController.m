@@ -312,7 +312,7 @@ static NSString *const homeDataPath = [NSHomeDirectory() stringByAppendingPathCo
         }
         
         if (self.sceneListMarr.count) {
-            NSIndexPath *indexPath = [NSIndexPath indexPathForRow:0 inSection:1];
+            NSIndexPath *indexPath = [NSIndexPath indexPathForRow:0 inSection:2];
             [self.homeTable reloadRowsAtIndexPaths:@[indexPath] withRowAnimation:(UITableViewRowAnimationFade)];
         }
         
@@ -340,7 +340,7 @@ static NSString *const homeDataPath = [NSHomeDirectory() stringByAppendingPathCo
         }
         
         if (self.sceneListMarr.count) {
-            NSIndexPath *indexPath = [NSIndexPath indexPathForRow:0 inSection:2];
+            NSIndexPath *indexPath = [NSIndexPath indexPathForRow:0 inSection:3];
             [self.homeTable reloadRowsAtIndexPaths:@[indexPath] withRowAnimation:(UITableViewRowAnimationBottom)];
         }
         

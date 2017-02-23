@@ -15,6 +15,7 @@
 #import "THNLightspotTableViewCell.h"
 #import "NSString+JSON.h"
 #import <UMSocialCore/UMSocialCore.h>
+#import "THNShareActionView.h"
 
 static NSString *const businessCellId = @"THNBusinessTableViewCellId";
 static NSString *const couponCellId = @"THNCouponTableViewCellId";
@@ -287,53 +288,14 @@ static NSString *const URLDomainInfo = @"/scene_scene/view";
     self.favoriteButton.selected = NO;
 }
 
-
 - (void)thn_rightBarItemSelected {
     if (self.infoModel) {
-        self.shareVC = [[ShareViewController alloc] init];
-        self.shareVC.modalPresentationStyle = UIModalPresentationOverCurrentContext;
-        self.shareVC.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;
-        [self presentViewController:self.shareVC animated:YES completion:nil];
-        [self.shareVC.wechatBtn addTarget:self action:@selector(wechatShareBtnAction) forControlEvents:(UIControlEventTouchUpInside)];
-        [self.shareVC.friendBtn addTarget:self action:@selector(timelineShareBtnAction) forControlEvents:(UIControlEventTouchUpInside)];
-        [self.shareVC.weiBoBtn addTarget:self action:@selector(sinaShareBtnAction) forControlEvents:(UIControlEventTouchUpInside)];
-        [self.shareVC.qqBtn addTarget:self action:@selector(qqShareBtnAction) forControlEvents:(UIControlEventTouchUpInside)];
+        [THNShareActionView showShare:self shareMessageObject:[self shareMessageObject] linkUrl:self.infoModel.viewUrl];
     }
 }
 
-- (void)wechatShareBtnAction {
-    [self shareToPlatform:UMSocialPlatformType_WechatSession];
-}
-
-- (void)timelineShareBtnAction {
-    [self shareToPlatform:UMSocialPlatformType_WechatTimeLine];
-}
-
-- (void)qqShareBtnAction {
-    [self shareToPlatform:UMSocialPlatformType_QQ];
-}
-
-- (void)sinaShareBtnAction {
-    [self shareToPlatform:UMSocialPlatformType_Sina];
-}
-
-- (void)shareToPlatform:(UMSocialPlatformType)type {
-    [[UMSocialManager defaultManager] shareToPlatform:(type)
-                                        messageObject:[self shareMessageObject]
-                                currentViewController:self
-                                           completion:^(id result, NSError *error) {
-                                               if (error) {
-                                                   NSLog(@"************Share fail with error %@*********",error);
-                                               } else{
-                                                   [self.shareVC dismissViewControllerAnimated:YES completion:^{
-                                                       [SVProgressHUD showSuccessWithStatus:@"分享成功"];
-                                                   }];
-                                               }
-                                           }];
-}
-
+#pragma mark - 创建分享消息对象
 - (UMSocialMessageObject *)shareMessageObject {
-    //  创建分享消息对象
     UMSocialMessageObject *messageObject = [UMSocialMessageObject messageObject];
     UMShareWebpageObject *shareObject = [UMShareWebpageObject shareObjectWithTitle:self.infoModel.title descr:self.infoModel.des thumImage:self.infoModel.avatarUrl];
     shareObject.webpageUrl = self.infoModel.viewUrl;
