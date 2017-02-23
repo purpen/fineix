@@ -32,6 +32,7 @@
 @property (nonatomic, strong) NSString * statusLabel;
 @property (nonatomic, strong) NSString * subOrderId;
 @property (nonatomic, strong) NSString * summary;
+@property (nonatomic, strong) NSString * title;
 @property (nonatomic, assign) CGFloat totalPrice;
 @property (nonatomic, assign) NSInteger type;
 @property (nonatomic, assign) CGFloat unitPrice;

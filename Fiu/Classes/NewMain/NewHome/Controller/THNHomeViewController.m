@@ -211,7 +211,7 @@ static NSString *const homeDataPath = [NSHomeDirectory() stringByAppendingPathCo
     dispatch_async(dispatch_get_global_queue(0, 0), ^{
         [self thn_networkRollImageData];
         [self thn_networkNewUserData];
-        [self thn_networkDomainCategoryData];
+//        [self thn_networkDomainCategoryData];
         [self thn_networkNiceDomainData];
         [self thn_networkGoodsSubjectListData];
         [self thn_networkNewGoodsData];
@@ -261,29 +261,30 @@ static NSString *const homeDataPath = [NSHomeDirectory() stringByAppendingPathCo
 }
 
 #pragma mark 地盘分类
-- (void)thn_networkDomainCategoryData {
-    self.categoryRequest = [FBAPI getWithUrlString:URLCategory requestDictionary:@{@"domain":@"12", @"show_sub":@"1"} delegate:self];
-    [self.categoryRequest startRequestSuccess:^(FBRequest *request, id result) {
-        NSArray *dataArr = [[result valueForKey:@"data"] valueForKey:@"rows"];
-        for (NSDictionary *dict in dataArr) {
-            DomainCategoryRow *model = [[DomainCategoryRow alloc] initWithDictionary:dict];
-            [self.domainCategoryMarr addObject:model];
-        }
-        
-        if (self.sceneListMarr.count) {
-            NSIndexPath *indexPath = [NSIndexPath indexPathForRow:1 inSection:0];
-            [self.homeTable reloadRowsAtIndexPaths:@[indexPath] withRowAnimation:(UITableViewRowAnimationFade)];
-        }
-        
-    } failure:^(FBRequest *request, NSError *error) {
-        [SVProgressHUD showErrorWithStatus:[error localizedDescription]];
-    }];
-}
+//- (void)thn_networkDomainCategoryData {
+//    self.categoryRequest = [FBAPI getWithUrlString:URLCategory requestDictionary:@{@"domain":@"12", @"show_sub":@"1"} delegate:self];
+//    [self.categoryRequest startRequestSuccess:^(FBRequest *request, id result) {
+//        NSArray *dataArr = [[result valueForKey:@"data"] valueForKey:@"rows"];
+//        for (NSDictionary *dict in dataArr) {
+//            DomainCategoryRow *model = [[DomainCategoryRow alloc] initWithDictionary:dict];
+//            [self.domainCategoryMarr addObject:model];
+//        }
+//        
+//        if (self.sceneListMarr.count) {
+//            NSIndexPath *indexPath = [NSIndexPath indexPathForRow:1 inSection:0];
+//            [self.homeTable reloadRowsAtIndexPaths:@[indexPath] withRowAnimation:(UITableViewRowAnimationFade)];
+//        }
+//        
+//    } failure:^(FBRequest *request, NSError *error) {
+//        [SVProgressHUD showErrorWithStatus:[error localizedDescription]];
+//    }];
+//}
 
 #pragma mark 推荐地盘
 - (void)thn_networkNiceDomainData {
     self.niceDomainRequest = [FBAPI getWithUrlString:URLBannerSlide requestDictionary:@{@"name":@"app_fiu_index_scene_stick"} delegate:self];
     [self.niceDomainRequest startRequestSuccess:^(FBRequest *request, id result) {
+        NSLog(@"============ 热门地盘：%@", result);
         NSArray *dataArr = [[result valueForKey:@"data"] valueForKey:@"rows"];
         for (NSDictionary *dict in dataArr) {
             NiceDomainRow *model = [[NiceDomainRow alloc] initWithDictionary:dict];
@@ -291,7 +292,7 @@ static NSString *const homeDataPath = [NSHomeDirectory() stringByAppendingPathCo
         }
         
         if (self.sceneListMarr.count) {
-            NSIndexPath *indexPath = [NSIndexPath indexPathForRow:2 inSection:1];
+            NSIndexPath *indexPath = [NSIndexPath indexPathForRow:1 inSection:1];
             [self.homeTable reloadRowsAtIndexPaths:@[indexPath] withRowAnimation:(UITableViewRowAnimationFade)];
         }
         
@@ -521,7 +522,8 @@ static NSString *const homeDataPath = [NSHomeDirectory() stringByAppendingPathCo
                                  @"size":@"10",
                                  @"sort":@"2",
                                  @"fine":@"1",
-                                 @"use_cache":@"1"};
+                                 @"use_cache":@"1",
+                                 @"is_product":@"1"};
     self.sceneListRequest = [FBAPI getWithUrlString:URLSceneList requestDictionary:requestDic delegate:self];
     [self.sceneListRequest startRequestSuccess:^(FBRequest *request, id result) {
         [self.defaultHomeView removeFromSuperview];
@@ -569,7 +571,7 @@ static NSString *const homeDataPath = [NSHomeDirectory() stringByAppendingPathCo
     [self.subjectMarr removeAllObjects];
     [self.subjectIdMarr removeAllObjects];
     [self.hotUserMarr removeAllObjects];
-    [self.domainCategoryMarr removeAllObjects];
+//    [self.domainCategoryMarr removeAllObjects];
     [self.userHelpMarr removeAllObjects];
     [self.niceDomainMarr removeAllObjects];
     [self.goodsMarr removeAllObjects];
@@ -582,7 +584,7 @@ static NSString *const homeDataPath = [NSHomeDirectory() stringByAppendingPathCo
     [self thn_networkSubjectData];
     [self thn_networkHotUserListData];
     [self thn_networkNewUserData];
-    [self thn_networkDomainCategoryData];
+//    [self thn_networkDomainCategoryData];
     [self thn_networkNiceDomainData];
     [self thn_networkNewGoodsData];
     [self thn_networkGoodsSubjectListData];
@@ -607,6 +609,14 @@ static NSString *const homeDataPath = [NSHomeDirectory() stringByAppendingPathCo
 
 - (void)reloadDataClick {
     [self loadNewData];
+}
+
+#pragma mark - 列表滚动到底部的背景
+- (THNHomeTableViewFooter *)footerImageView {
+    if (!_footerImageView) {
+        _footerImageView = [[THNHomeTableViewFooter alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 40)];
+    }
+    return _footerImageView;
 }
 
 #pragma mark - 设置"发现用户"的位置和高度
@@ -654,7 +664,7 @@ static NSString *const homeDataPath = [NSHomeDirectory() stringByAppendingPathCo
         _homeTable.delegate = self;
         _homeTable.dataSource = self;
         _homeTable.tableHeaderView = self.homerollView;
-        _homeTable.tableFooterView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 40)];
+        _homeTable.tableFooterView = self.footerImageView;
         _homeTable.showsVerticalScrollIndicator = NO;
         _homeTable.backgroundColor = [UIColor colorWithHexString:@"#F8F8F8"];
         _homeTable.separatorStyle = UITableViewCellSeparatorStyleNone;

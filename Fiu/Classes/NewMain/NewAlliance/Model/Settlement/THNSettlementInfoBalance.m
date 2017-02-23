@@ -38,6 +38,7 @@ NSString *const kTHNSettlementInfoBalanceTypeLabel = @"type_label";
 NSString *const kTHNSettlementInfoBalanceUnitPrice = @"unit_price";
 NSString *const kTHNSettlementInfoBalanceUpdatedOn = @"updated_on";
 NSString *const kTHNSettlementInfoBalanceUserId = @"user_id";
+NSString *const kTHNSettlementInfoRowTitle = @"title";
 
 @interface THNSettlementInfoBalance ()
 @end
@@ -158,7 +159,10 @@ NSString *const kTHNSettlementInfoBalanceUserId = @"user_id";
 	if(![dictionary[kTHNSettlementInfoBalanceUpdatedOn] isKindOfClass:[NSNull class]]){
 		self.updatedOn = [dictionary[kTHNSettlementInfoBalanceUpdatedOn] integerValue];
 	}
-
+    
+    if(![dictionary[kTHNSettlementInfoRowTitle] isKindOfClass:[NSNull class]]){
+        self.title = dictionary[kTHNSettlementInfoRowTitle];
+    }
 	if(![dictionary[kTHNSettlementInfoBalanceUserId] isKindOfClass:[NSNull class]]){
 		self.userId = [dictionary[kTHNSettlementInfoBalanceUserId] integerValue];
 	}

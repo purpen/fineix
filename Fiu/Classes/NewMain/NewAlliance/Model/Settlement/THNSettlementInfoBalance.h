@@ -41,6 +41,7 @@
 @property (nonatomic, assign) CGFloat unitPrice;
 @property (nonatomic, assign) NSInteger updatedOn;
 @property (nonatomic, assign) NSInteger userId;
+@property (nonatomic, strong) NSString * title;
 
 -(instancetype)initWithDictionary:(NSDictionary *)dictionary;
 @end

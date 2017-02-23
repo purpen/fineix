@@ -40,6 +40,7 @@ static NSString *const stateCellId = @"THNRecordStateTableViewCellId";
     [SVProgressHUD show];
     self.infoRequest = [FBAPI postWithUrlString:URLTradingInfo requestDictionary:@{@"id":self.recordId} delegate:self];
     [self.infoRequest startRequestSuccess:^(FBRequest *request, id result) {
+        NSLog(@"======== %@", result);
         NSDictionary *dict = [result valueForKey:@"data"];
         self.dataModel = [[THNTradingInfoData alloc] initWithDictionary:dict];
         [self.infoTable reloadData];

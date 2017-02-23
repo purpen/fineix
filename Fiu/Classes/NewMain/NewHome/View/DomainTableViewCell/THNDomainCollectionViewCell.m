@@ -28,6 +28,10 @@
 - (void)thn_setDomainDataModel:(NiceDomainRow *)model {
     [self.image downloadImage:model.coverUrl place:[UIImage imageNamed:@""]];
     self.title.text = model.title;
+    
+    [self.iconImage setImage:[UIImage imageNamed:@"icon_domain_tiyandian"] forState:(UIControlStateNormal)];
+    self.subTitle.text = model.subTitle;
+    [self setDomainRollView];
 }
 
 #pragma mark - setUI
@@ -41,7 +45,23 @@
     [_title mas_makeConstraints:^(MASConstraintMaker *make) {
         make.height.equalTo(@25);
         make.left.right.equalTo(self).with.offset(0);
-        make.centerX.centerY.equalTo(self);
+        make.bottom.equalTo(self.mas_centerY).with.offset(0);
+        make.centerX.equalTo(self);
+    }];
+}
+
+- (void)setDomainRollView {
+    [self addSubview:self.subTitle];
+    [_subTitle mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.height.mas_equalTo(@20);
+        make.top.equalTo(self.mas_centerY).with.offset(5);
+        make.centerX.equalTo(self);
+    }];
+    
+    [self addSubview:self.iconImage];
+    [_iconImage mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.size.mas_equalTo(CGSizeMake(50, 16));
+        make.left.top.equalTo(self).with.offset(10);
     }];
 }
 
@@ -55,6 +75,13 @@
     return _image;
 }
 
+- (UIButton *)iconImage {
+    if (!_iconImage) {
+        _iconImage = [[UIButton alloc] init];
+    }
+    return _iconImage;
+}
+
 - (UILabel *)title {
     if (!_title) {
         _title = [[UILabel alloc] init];
@@ -64,5 +91,16 @@
     }
     return _title;
 }
+
+- (UILabel *)subTitle {
+    if (!_subTitle) {
+        _subTitle = [[UILabel alloc] init];
+        _subTitle.textColor = [UIColor whiteColor];
+        _subTitle.font = [UIFont systemFontOfSize:16];
+        _subTitle.textAlignment = NSTextAlignmentCenter;
+    }
+    return _subTitle;
+}
+
 
 @end

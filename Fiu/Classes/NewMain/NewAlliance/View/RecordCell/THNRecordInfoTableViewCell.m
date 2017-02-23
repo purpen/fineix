@@ -21,7 +21,7 @@
 
 #pragma mark - 交易详情
 - (void)thn_setTradingRecordInfoData:(THNTradingInfoData *)model {
-    NSArray *textArr = @[@"产品", @"单价", @"收益比率", @"金额", @"数量"];
+    NSArray *textArr = @[@"名称", @"单价", @"收益比率", @"收益", @"数量"];
     [self setTradingInfoText:textArr];
 
     if (model) {
@@ -29,14 +29,14 @@
         NSString *unitPrice = [NSString stringWithFormat:@"￥%.2f", model.unitPrice];
         NSString *percent = [NSString stringWithFormat:@"%.2f％", model.commisionPercent *100];
         NSString *number = [NSString stringWithFormat:@"%zi", model.quantity];
-        NSArray *dataArr = @[model.product.shortTitle, goodsPrice, percent, unitPrice, number];
+        NSArray *dataArr = @[model.title, goodsPrice, percent, unitPrice, number];
         [self setTradingInfoData:dataArr];
     }
 }
 
 #pragma mark - 结算详情
 - (void)thn_setSettlementRecordInfoData:(THNSettlementInfoRow *)model {
-    NSArray *textArr = @[@"产品", @"单价", @"收益比率", @"金额", @"数量"];
+    NSArray *textArr = @[@"名称", @"单价", @"收益比率", @"收益", @"数量"];
     [self setTradingInfoText:textArr];
     
     if (model) {
@@ -44,7 +44,7 @@
         NSString *unitPrice = [NSString stringWithFormat:@"￥%.2f", model.balance.unitPrice];
         NSString *percent = [NSString stringWithFormat:@"%.2f％", model.balance.commisionPercent *100];
         NSString *number = [NSString stringWithFormat:@"%zi", model.balance.quantity];
-        NSArray *dataArr = @[model.balance.product.shortTitle, goodsPrice, percent, unitPrice, number];
+        NSArray *dataArr = @[model.balance.title, goodsPrice, percent, unitPrice, number];
         [self setTradingInfoData:dataArr];
     }
 }

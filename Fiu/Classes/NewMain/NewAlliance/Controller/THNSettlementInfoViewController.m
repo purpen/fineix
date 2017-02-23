@@ -44,6 +44,7 @@ static NSString *const stateCellId = @"THNRecordStateTableViewCellId";
                               requestDictionary:@{@"balance_record_id":self.recordId, @"page":@(self.currentpageNum + 1), @"size":@"8", @"sort":@"0"}
                                        delegate:self];
     [self.infoRequest startRequestSuccess:^(FBRequest *request, id result) {
+        NSLog(@"====== %@", result);
         NSDictionary *dict = [result valueForKey:@"data"];
         NSArray *dataArr = dict[@"rows"];
         for (NSDictionary *modelDict in dataArr) {

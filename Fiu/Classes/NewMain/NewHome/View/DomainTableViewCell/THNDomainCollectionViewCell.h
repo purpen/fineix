@@ -14,7 +14,9 @@
 @interface THNDomainCollectionViewCell : UICollectionViewCell
 
 @property (nonatomic, strong) UIImageView *image;
+@property (nonatomic, strong) UIButton *iconImage;
 @property (nonatomic, strong) UILabel *title;
+@property (nonatomic, strong) UILabel *subTitle;
 
 - (void)thn_setDomainDataModel:(NiceDomainRow *)model;
 
