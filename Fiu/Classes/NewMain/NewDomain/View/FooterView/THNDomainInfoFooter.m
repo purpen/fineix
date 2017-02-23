@@ -66,6 +66,8 @@ static NSInteger const actionButtonTag  = 611;
         self.mapView.latitude = [model.location.coordinates[1] floatValue];
         self.mapView.longitude = [model.location.coordinates[0] floatValue];
         [self.mapView setPoint];
+        self.mapView.nav = self.nav;
+        self.mapView.model = model;
         
         //  地盘id
         _domainId = [NSString stringWithFormat:@"%zi", model.idField];

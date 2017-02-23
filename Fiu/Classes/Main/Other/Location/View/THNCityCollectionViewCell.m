@@ -27,7 +27,7 @@
         self.name = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, self.frame.size.width, self.frame.size.height)];
         self.name.font = [UIFont systemFontOfSize:14];
         self.name.textAlignment = NSTextAlignmentCenter;
-        self.bgImageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"city_boder"]];
+        self.bgImageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"chengchiBianKuan"]];
         [self.contentView addSubview:self.bgImageView];
         [_bgImageView mas_makeConstraints:^(MASConstraintMaker *make) {
             make.left.right.top.bottom.mas_equalTo(self.contentView).offset(0);

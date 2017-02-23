@@ -37,7 +37,7 @@ UICollectionViewDataSource>
         _collectionView.dataSource = self;
         _collectionView.showsVerticalScrollIndicator = NO;
         _collectionView.showsHorizontalScrollIndicator = NO;
-        [_collectionView setBackgroundColor:[UIColor clearColor]];
+        [_collectionView setBackgroundColor:[UIColor whiteColor]];
         //注册cell
         [_collectionView registerClass:[THNCityCollectionViewCell class] forCellWithReuseIdentifier:@"UICollectionViewCell"];
         //注册分区头标题
@@ -51,7 +51,7 @@ UICollectionViewDataSource>
 //定义每个Section的四边间距
 -(UIEdgeInsets)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout insetForSectionAtIndex:(NSInteger)section
 {
-    return UIEdgeInsetsMake(10, 47/2, 5, 10);//分别为上、左、下、右
+    return UIEdgeInsetsMake(25/2 + 5, 47/2, 0, 47/2);//分别为上、左、下、右
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -76,7 +76,7 @@ UICollectionViewDataSource>
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self.view addSubview:self.collectionView];
-    NSArray *ary = @[@{@"name" : @"北京"}, @{@"name" : @"上海"}, @{@"name" : @"沧州"}];
+    NSArray *ary = @[@{@"name" : @"北京"}, @{@"name" : @"上海"}];
     self.modelAry = [CityModel mj_objectArrayWithKeyValuesArray:ary];
     [self.collectionView reloadData];
 }
@@ -110,8 +110,8 @@ UICollectionViewDataSource>
                   layout:(UICollectionViewLayout *)collectionViewLayout
   sizeForItemAtIndexPath:(NSIndexPath *)indexPath
 {
-    return CGSizeMake((SCREEN_WIDTH - 68 - 47) / 3,
-                      44);
+    return CGSizeMake((SCREEN_WIDTH - 61 - 47) / 3,
+                      40);
 }
 
 - (UICollectionReusableView *)collectionView:(UICollectionView *)collectionView
@@ -127,6 +127,7 @@ UICollectionViewDataSource>
                                                                         withReuseIdentifier:reuseIdentifier
                                                                                forIndexPath:indexPath];
     CGRect frame = view.frame;
+    view.backgroundColor = [UIColor colorWithHexString:@"#f8f8f8"];
     frame.size.height = 50;
     view.frame = frame;
     CGRect titleFrame = view.title.frame;
@@ -136,6 +137,12 @@ UICollectionViewDataSource>
     if ([kind isEqualToString:UICollectionElementKindSectionHeader])
     {
         view.title.text = @"已开通城市";
+        view.leftLineView.hidden = YES;
+        view.rightLineView.hidden = YES;
+        [view.title mas_remakeConstraints:^(MASConstraintMaker *make) {
+            make.left.mas_equalTo(view.mas_left).mas_offset(15);
+            make.centerY.mas_equalTo(view.mas_centerY).mas_offset(0);
+        }];
     }
     return view;
 }

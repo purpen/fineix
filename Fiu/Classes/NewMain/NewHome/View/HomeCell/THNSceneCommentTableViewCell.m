@@ -72,7 +72,7 @@
     [_graybackView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.equalTo(self.mas_left).with.offset(15);
         make.right.equalTo(self.mas_right).with.offset(-15);
-        make.top.equalTo(self.mas_top).with.offset(-1);
+        make.top.equalTo(self.mas_top).with.offset(1);
         make.bottom.equalTo(self.mas_bottom).with.offset(1);
     }];
     

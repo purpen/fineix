@@ -11,5 +11,7 @@
 @interface CollectionViewHeaderView : UICollectionReusableView
 
 @property (nonatomic, strong) UILabel *title;
+@property (nonatomic, strong) UIView *leftLineView;
+@property (nonatomic, strong) UIView *rightLineView;
 
 @end

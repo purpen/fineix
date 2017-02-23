@@ -418,6 +418,8 @@
 		1FD10CB31D62E89D005898EE /* THNContentViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1FD10CB11D62E89D005898EE /* THNContentViewController.xib */; };
 		1FD10CBA1D62FBF5005898EE /* THNGoodsCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 1FD10CB81D62FBF5005898EE /* THNGoodsCollectionViewCell.m */; };
 		1FD10CBB1D62FBF5005898EE /* THNGoodsCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1FD10CB91D62FBF5005898EE /* THNGoodsCollectionViewCell.xib */; };
+		1FEB239E1E5ED49600FFF692 /* THNShangPinWeiZhiMapViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1FEB239D1E5ED49600FFF692 /* THNShangPinWeiZhiMapViewController.m */; };
+		1FEB23A21E5EDFC300FFF692 /* LSActionSheet.m in Sources */ = {isa = PBXBuildFile; fileRef = 1FEB23A11E5EDFC300FFF692 /* LSActionSheet.m */; };
 		1FF36E9A1D4F192400EB3C93 /* JDPayViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1FF36E981D4F192400EB3C93 /* JDPayViewController.m */; };
 		1FF36E9B1D4F192400EB3C93 /* JDPayViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1FF36E991D4F192400EB3C93 /* JDPayViewController.xib */; };
 		1FF36EA01D4F401600EB3C93 /* JDPayModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 1FF36E9F1D4F401600EB3C93 /* JDPayModel.m */; };
@@ -1528,6 +1530,10 @@
 		1FD10CB71D62FBF5005898EE /* THNGoodsCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = THNGoodsCollectionViewCell.h; path = Fiu/Classes/Main/Other/Collection/Controller/THNGoodsCollectionViewCell.h; sourceTree = SOURCE_ROOT; };
 		1FD10CB81D62FBF5005898EE /* THNGoodsCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = THNGoodsCollectionViewCell.m; path = Fiu/Classes/Main/Other/Collection/Controller/THNGoodsCollectionViewCell.m; sourceTree = SOURCE_ROOT; };
 		1FD10CB91D62FBF5005898EE /* THNGoodsCollectionViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = THNGoodsCollectionViewCell.xib; path = Fiu/Classes/Main/Other/Collection/Controller/THNGoodsCollectionViewCell.xib; sourceTree = SOURCE_ROOT; };
+		1FEB239C1E5ED49600FFF692 /* THNShangPinWeiZhiMapViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THNShangPinWeiZhiMapViewController.h; sourceTree = "<group>"; };
+		1FEB239D1E5ED49600FFF692 /* THNShangPinWeiZhiMapViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THNShangPinWeiZhiMapViewController.m; sourceTree = "<group>"; };
+		1FEB23A01E5EDFC300FFF692 /* LSActionSheet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LSActionSheet.h; sourceTree = "<group>"; };
+		1FEB23A11E5EDFC300FFF692 /* LSActionSheet.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LSActionSheet.m; sourceTree = "<group>"; };
 		1FF36E971D4F192400EB3C93 /* JDPayViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JDPayViewController.h; sourceTree = "<group>"; };
 		1FF36E981D4F192400EB3C93 /* JDPayViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JDPayViewController.m; sourceTree = "<group>"; };
 		1FF36E991D4F192400EB3C93 /* JDPayViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = JDPayViewController.xib; sourceTree = "<group>"; };
@@ -3126,6 +3132,8 @@
 				1F2A8E3B1CF40277005116C7 /* FBMapLocatinViewController.xib */,
 				1F1804061E52B2AD00722AF5 /* THNSelecteCityViewController.h */,
 				1F1804071E52B2AD00722AF5 /* THNSelecteCityViewController.m */,
+				1FEB239C1E5ED49600FFF692 /* THNShangPinWeiZhiMapViewController.h */,
+				1FEB239D1E5ED49600FFF692 /* THNShangPinWeiZhiMapViewController.m */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -3937,6 +3945,7 @@
 		1F99E1531E5146A0000D3D73 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				1FEB239F1E5EDFC300FFF692 /* LSActionSheet */,
 				1F99E1571E51581E000D3D73 /* LeftTableViewCell.h */,
 				1F99E1581E51581E000D3D73 /* LeftTableViewCell.m */,
 				1F99E15A1E515A94000D3D73 /* LJCollectionViewFlowLayout.h */,
@@ -3978,6 +3987,15 @@
 				1FCDCC8C1D08085000C92E78 /* InviteCCodeViewController.xib */,
 			);
 			path = InviteCode;
+			sourceTree = "<group>";
+		};
+		1FEB239F1E5EDFC300FFF692 /* LSActionSheet */ = {
+			isa = PBXGroup;
+			children = (
+				1FEB23A01E5EDFC300FFF692 /* LSActionSheet.h */,
+				1FEB23A11E5EDFC300FFF692 /* LSActionSheet.m */,
+			);
+			path = LSActionSheet;
 			sourceTree = "<group>";
 		};
 		4121957EDE4D4049941B2B88 /* Frameworks */ = {
@@ -5907,6 +5925,7 @@
 				1F2AFC6E1D88170B00DA6035 /* MyFansViewController.m in Sources */,
 				1F2A90A41CF40277005116C7 /* SearchViewController.m in Sources */,
 				D86E54BD1DD444230075ED88 /* FSInkwellFilter.m in Sources */,
+				1FEB23A21E5EDFC300FFF692 /* LSActionSheet.m in Sources */,
 				D870351E1DEBD815001FBBF1 /* THNRefundInfoViewController.m in Sources */,
 				1F2AFD1C1D8817CC00DA6035 /* THNCuXiaoDetalModel.m in Sources */,
 				1F99E16B1E5181D1000D3D73 /* NSObject+Property.m in Sources */,
@@ -6087,6 +6106,7 @@
 				1F2AFD741D88186C00DA6035 /* THNBingViewController.m in Sources */,
 				1F2AFDDD1D8818A400DA6035 /* CommentView.m in Sources */,
 				D81281591CAA8532007CF08B /* UIImageView+SDWedImage.m in Sources */,
+				1FEB239E1E5ED49600FFF692 /* THNShangPinWeiZhiMapViewController.m in Sources */,
 				D857C48C1E2F3E8600569B3D /* THNBalanceRow.m in Sources */,
 				1F18041C1E5432C100722AF5 /* YLButton.m in Sources */,
 				D86809181D65EE5F002714B2 /* THNSearchBrandTableViewCell.m in Sources */,

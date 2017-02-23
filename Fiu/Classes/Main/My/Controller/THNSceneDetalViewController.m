@@ -100,6 +100,7 @@ static NSString *const URLDeleteScene = @"/scene_sight/delete";
     [SVProgressHUD show];
     FBAPI *api = [[FBAPI alloc] init];
     NSString *uuid = [api uuid];
+    NSLog(@"类别 %@", self.sceneDetalId);
     FBRequest *request = [FBAPI postWithUrlString:@"/scene_sight/view" requestDictionary:@{
                                                                                            @"id" : self.sceneDetalId,
                                                                                            @"uuid" : uuid,
@@ -237,12 +238,11 @@ static NSString *const URLDeleteScene = @"/scene_sight/delete";
         return cell;
         
     } else if (indexPath.row == 4) {
-        if ([self.model.products count] > 1) {
+        if ([self.model.products count] >= 1) {
             THNShangPinCollectionViewCell *cell = [tableView dequeueReusableCellWithIdentifier:THNSHANGPinCollectionViewCell];
             cell.modelAry = self.model.products;
             cell.nav = self.navigationController;
             return cell;
-            
         } else {
             UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:twoCommentsCellId];
             cell = [[UITableViewCell alloc] initWithStyle:(UITableViewCellStyleDefault) reuseIdentifier:twoCommentsCellId];
@@ -405,18 +405,18 @@ static NSString *const URLDeleteScene = @"/scene_sight/delete";
         return 40;
     } else if (indexPath.row == 5) {
         if ([self.comments count] > 0) {
-            return _commentHigh;
+            return _commentHigh + 2;
         } else {
             return 0.01f;
         }
     } else if (indexPath.row == 6) {
         if ([self.comments count] > 1) {
-            return _commentHigh;
+            return _commentHigh + 2;
         } else {
             return 0.01f;
         }
     } else if (indexPath.row == 4) {
-        if ([self.model.products count] > 1) {
+        if ([self.model.products count] >= 1) {
             return 50 * [self.model.products count] + 10;
         } else {
             return 0.01f;

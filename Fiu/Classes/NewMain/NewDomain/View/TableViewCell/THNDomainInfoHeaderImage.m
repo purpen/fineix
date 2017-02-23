@@ -39,7 +39,7 @@
 //处理位置坐标更新
 - (void)didUpdateBMKUserLocation:(BMKUserLocation *)userLocation
 {
-    BMKMapPoint point1 = BMKMapPointForCoordinate(CLLocationCoordinate2DMake([self.ary[0] doubleValue],[self.ary[1] doubleValue]));
+    BMKMapPoint point1 = BMKMapPointForCoordinate(CLLocationCoordinate2DMake([self.ary[1] doubleValue],[self.ary[0] doubleValue]));
     BMKMapPoint point2 = BMKMapPointForCoordinate(CLLocationCoordinate2DMake(userLocation.location.coordinate.latitude,userLocation.location.coordinate.longitude));
     CLLocationDistance distance = BMKMetersBetweenMapPoints(point1,point2);
     self.locLabel.text = [NSString stringWithFormat:@"%0.1fkm",distance/1000.0];

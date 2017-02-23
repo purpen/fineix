@@ -80,6 +80,26 @@
 				<string>tencent1105329592</string>
 			</array>
 		</dict>
+		<dict>
+			<key>CFBundleTypeRole</key>
+			<string>Editor</string>
+			<key>CFBundleURLName</key>
+			<string>百度地图</string>
+			<key>CFBundleURLSchemes</key>
+			<array>
+				<string>baidumap://</string>
+			</array>
+		</dict>
+		<dict>
+			<key>CFBundleTypeRole</key>
+			<string>Editor</string>
+			<key>CFBundleURLName</key>
+			<string>谷歌地图</string>
+			<key>CFBundleURLSchemes</key>
+			<array>
+				<string>comgooglemapsurl://</string>
+			</array>
+		</dict>
 	</array>
 	<key>CFBundleVersion</key>
 	<string>1</string>
