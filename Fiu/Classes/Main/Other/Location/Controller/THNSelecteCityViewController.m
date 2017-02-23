@@ -51,7 +51,7 @@ UICollectionViewDataSource>
 //定义每个Section的四边间距
 -(UIEdgeInsets)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout insetForSectionAtIndex:(NSInteger)section
 {
-    return UIEdgeInsetsMake(25/2, 47/2, 0, 47/2);//分别为上、左、下、右
+    return UIEdgeInsetsMake(25/2 + 5, 47/2, 0, 47/2);//分别为上、左、下、右
 }
 
 - (void)viewWillAppear:(BOOL)animated {
