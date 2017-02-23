@@ -15,6 +15,7 @@
 #import "THNLightspotTableViewCell.h"
 #import "NSString+JSON.h"
 #import <UMSocialCore/UMSocialCore.h>
+#import "THNShareActionView.h"
 
 static NSString *const businessCellId = @"THNBusinessTableViewCellId";
 static NSString *const couponCellId = @"THNCouponTableViewCellId";
@@ -289,14 +290,16 @@ static NSString *const URLDomainInfo = @"/scene_scene/view";
 
 - (void)thn_rightBarItemSelected {
     if (self.infoModel) {
-        self.shareVC = [[ShareViewController alloc] init];
-        self.shareVC.modalPresentationStyle = UIModalPresentationOverCurrentContext;
-        self.shareVC.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;
-        [self presentViewController:self.shareVC animated:YES completion:nil];
-        [self.shareVC.wechatBtn addTarget:self action:@selector(wechatShareBtnAction) forControlEvents:(UIControlEventTouchUpInside)];
-        [self.shareVC.friendBtn addTarget:self action:@selector(timelineShareBtnAction) forControlEvents:(UIControlEventTouchUpInside)];
-        [self.shareVC.weiBoBtn addTarget:self action:@selector(sinaShareBtnAction) forControlEvents:(UIControlEventTouchUpInside)];
-        [self.shareVC.qqBtn addTarget:self action:@selector(qqShareBtnAction) forControlEvents:(UIControlEventTouchUpInside)];
+        [THNShareActionView showShareTitle];
+        
+//        self.shareVC = [[ShareViewController alloc] init];
+//        self.shareVC.modalPresentationStyle = UIModalPresentationOverCurrentContext;
+//        self.shareVC.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;
+//        [self presentViewController:self.shareVC animated:YES completion:nil];
+//        [self.shareVC.wechatBtn addTarget:self action:@selector(wechatShareBtnAction) forControlEvents:(UIControlEventTouchUpInside)];
+//        [self.shareVC.friendBtn addTarget:self action:@selector(timelineShareBtnAction) forControlEvents:(UIControlEventTouchUpInside)];
+//        [self.shareVC.weiBoBtn addTarget:self action:@selector(sinaShareBtnAction) forControlEvents:(UIControlEventTouchUpInside)];
+//        [self.shareVC.qqBtn addTarget:self action:@selector(qqShareBtnAction) forControlEvents:(UIControlEventTouchUpInside)];
     }
 }
 

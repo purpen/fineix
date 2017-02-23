@@ -637,6 +637,8 @@
 		D85F169D1E5C371B0038E0BB /* THNRecommendCollectionReusableView.m in Sources */ = {isa = PBXBuildFile; fileRef = D85F169C1E5C371B0038E0BB /* THNRecommendCollectionReusableView.m */; };
 		D85F16A01E5D30220038E0BB /* THNCarServiceTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = D85F169F1E5D30220038E0BB /* THNCarServiceTextView.m */; };
 		D85F16A31E5D636F0038E0BB /* THNHomeTableViewFooter.m in Sources */ = {isa = PBXBuildFile; fileRef = D85F16A21E5D636F0038E0BB /* THNHomeTableViewFooter.m */; };
+		D85F16A51E5E737F0038E0BB /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D85F16A41E5E737F0038E0BB /* Assets.xcassets */; };
+		D85F16AC1E5E76A40038E0BB /* THNShareActionView.m in Sources */ = {isa = PBXBuildFile; fileRef = D85F16AB1E5E76A40038E0BB /* THNShareActionView.m */; };
 		D861BC6E1D7E977700A26022 /* THNBrandInfoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D861BC6D1D7E977700A26022 /* THNBrandInfoViewController.m */; };
 		D861BC711D7E995600A26022 /* THNBrandInfoCollectionReusableView.m in Sources */ = {isa = PBXBuildFile; fileRef = D861BC701D7E995600A26022 /* THNBrandInfoCollectionReusableView.m */; };
 		D86809031D622049002714B2 /* FBImageScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = D86809021D622049002714B2 /* FBImageScrollView.m */; };
@@ -752,7 +754,6 @@
 		D8932E461D17FE8100428FC7 /* Launch Screen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D8932E451D17FE8100428FC7 /* Launch Screen.storyboard */; };
 		D89478D91D867D9A00200ACD /* THNSceneImageScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = D89478D81D867D9A00200ACD /* THNSceneImageScrollView.m */; };
 		D89CFE031D041819002701B8 /* GoodsDesTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D89CFE021D041819002701B8 /* GoodsDesTableViewCell.m */; };
-		D8A9AD091CD9CCA900A9FCFB /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D8A9AD081CD9CCA900A9FCFB /* Assets.xcassets */; };
 		D8A9ADC91CD9E34600A9FCFB /* FBFootView.m in Sources */ = {isa = PBXBuildFile; fileRef = D8A9ADC81CD9E34600A9FCFB /* FBFootView.m */; };
 		D8A9AE401CE304FF00A9FCFB /* NSTimer+Addition.m in Sources */ = {isa = PBXBuildFile; fileRef = D8A9AE3F1CE304FF00A9FCFB /* NSTimer+Addition.m */; };
 		D8AC3DFB1D2CFFA000148522 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D8AC3DFA1D2CFFA000148522 /* CoreData.framework */; };
@@ -1952,6 +1953,9 @@
 		D85F169F1E5D30220038E0BB /* THNCarServiceTextView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THNCarServiceTextView.m; sourceTree = "<group>"; };
 		D85F16A11E5D636F0038E0BB /* THNHomeTableViewFooter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THNHomeTableViewFooter.h; sourceTree = "<group>"; };
 		D85F16A21E5D636F0038E0BB /* THNHomeTableViewFooter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THNHomeTableViewFooter.m; sourceTree = "<group>"; };
+		D85F16A41E5E737F0038E0BB /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		D85F16AA1E5E76A40038E0BB /* THNShareActionView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THNShareActionView.h; sourceTree = "<group>"; };
+		D85F16AB1E5E76A40038E0BB /* THNShareActionView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THNShareActionView.m; sourceTree = "<group>"; };
 		D861BC6C1D7E977700A26022 /* THNBrandInfoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THNBrandInfoViewController.h; sourceTree = "<group>"; };
 		D861BC6D1D7E977700A26022 /* THNBrandInfoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THNBrandInfoViewController.m; sourceTree = "<group>"; };
 		D861BC6F1D7E995600A26022 /* THNBrandInfoCollectionReusableView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THNBrandInfoCollectionReusableView.h; sourceTree = "<group>"; };
@@ -2138,7 +2142,6 @@
 		D89478D81D867D9A00200ACD /* THNSceneImageScrollView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THNSceneImageScrollView.m; sourceTree = "<group>"; };
 		D89CFE011D041819002701B8 /* GoodsDesTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GoodsDesTableViewCell.h; sourceTree = "<group>"; };
 		D89CFE021D041819002701B8 /* GoodsDesTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GoodsDesTableViewCell.m; sourceTree = "<group>"; };
-		D8A9AD081CD9CCA900A9FCFB /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		D8A9ADC71CD9E34600A9FCFB /* FBFootView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FBFootView.h; sourceTree = "<group>"; };
 		D8A9ADC81CD9E34600A9FCFB /* FBFootView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FBFootView.m; sourceTree = "<group>"; };
 		D8A9AE3E1CE304FF00A9FCFB /* NSTimer+Addition.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSTimer+Addition.h"; sourceTree = "<group>"; };
@@ -4252,6 +4255,7 @@
 		D81280131CAA8532007CF08B /* Fiu */ = {
 			isa = PBXGroup;
 			children = (
+				D85F16A41E5E737F0038E0BB /* Assets.xcassets */,
 				D82562401D8FC4E400C3C2A7 /* Fiu.entitlements */,
 				D81280191CAA8532007CF08B /* Classes */,
 				D81280AC1CAA8532007CF08B /* Expand */,
@@ -4263,7 +4267,6 @@
 				D84763361D427F7500C88379 /* AppDelegate+UMAnalytics.h */,
 				D84763371D427F7500C88379 /* AppDelegate+UMAnalytics.m */,
 				D8932E451D17FE8100428FC7 /* Launch Screen.storyboard */,
-				D8A9AD081CD9CCA900A9FCFB /* Assets.xcassets */,
 				D81280C01CAA8532007CF08B /* fineix.xcdatamodeld */,
 				D81280C21CAA8532007CF08B /* Info.plist */,
 				D81280CA1CAA8532007CF08B /* main.m */,
@@ -4298,6 +4301,7 @@
 		D81280AC1CAA8532007CF08B /* Expand */ = {
 			isa = PBXGroup;
 			children = (
+				D85F16A91E5E769B0038E0BB /* Share */,
 				D86E543E1DD444220075ED88 /* ImageEdit */,
 				D87B69B91CC726BA00199EFE /* Category */,
 				D87B69BE1CC726BA00199EFE /* DataBase */,
@@ -5046,6 +5050,15 @@
 			path = Trading;
 			sourceTree = "<group>";
 		};
+		D85F16A91E5E769B0038E0BB /* Share */ = {
+			isa = PBXGroup;
+			children = (
+				D85F16AA1E5E76A40038E0BB /* THNShareActionView.h */,
+				D85F16AB1E5E76A40038E0BB /* THNShareActionView.m */,
+			);
+			path = Share;
+			sourceTree = "<group>";
+		};
 		D869BD3E1D6036A000432423 /* Alert */ = {
 			isa = PBXGroup;
 			children = (
@@ -5598,6 +5611,7 @@
 				1F2AFCFD1D8817CC00DA6035 /* THNActivityCollectionViewCell.xib in Resources */,
 				1F223B1D1CD714F3007687F7 /* messages.plist in Resources */,
 				D86E54A81DD444230075ED88 /* nashvilleMap.png in Resources */,
+				D85F16A51E5E737F0038E0BB /* Assets.xcassets in Resources */,
 				D86E54AC1DD444230075ED88 /* sierraVignette.png in Resources */,
 				D86E54A91DD444230075ED88 /* overlayMap.png in Resources */,
 				1F2AFCFB1D8817CC00DA6035 /* THNActiveRuleCollectionViewCell.xib in Resources */,
@@ -5617,7 +5631,6 @@
 				1F2AFC901D88170B00DA6035 /* chanel.xib in Resources */,
 				1F2AFDC81D8818A400DA6035 /* AllOderViewController.xib in Resources */,
 				D86E54BA1DD444230075ED88 /* xproMap.png in Resources */,
-				D8A9AD091CD9CCA900A9FCFB /* Assets.xcassets in Resources */,
 				1F2AFC9C1D88170B00DA6035 /* MyView.xib in Resources */,
 				1F2AFD731D88186C00DA6035 /* THNAgeViewController.xib in Resources */,
 				1F35F0511CD2336E0000DB95 /* areas.plist in Resources */,
@@ -5911,6 +5924,7 @@
 				D857C4691E2CBC8F00569B3D /* THNSettlementRecordTableViewCell.m in Sources */,
 				1F2A90661CF40277005116C7 /* CommentsTableViewCell.m in Sources */,
 				D8C095181D7533D000908491 /* CatagoryFiuSceneModel.m in Sources */,
+				D85F16AC1E5E76A40038E0BB /* THNShareActionView.m in Sources */,
 				D81318021D9228BA007CE71C /* THNUserModelIdentify.m in Sources */,
 				D8884E0F1E595FC000CEE159 /* THNDesTableViewCell.m in Sources */,
 				1F2AFCA81D88170B00DA6035 /* THNSenecCollectionViewCell.m in Sources */,
