@@ -28,7 +28,7 @@ static NSString *const URLAliance = @"/alliance/view";
 {
     if (self = [super initWithFrame:frame])
     {
-        self.bgImageV = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"m "]];
+        self.bgImageV = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"cell_bgImage"]];
         [self.contentView addSubview:self.bgImageV];
         [_bgImageV mas_makeConstraints:^(MASConstraintMaker *make) {
             make.left.right.bottom.top.mas_equalTo(self.contentView).mas_offset(0);

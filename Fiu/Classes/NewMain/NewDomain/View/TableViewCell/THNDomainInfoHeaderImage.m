@@ -7,9 +7,12 @@
 //
 
 #import "THNDomainInfoHeaderImage.h"
+#import <BaiduMapAPI_Utils/BMKUtilsComponent.h>//引入计算工具所有的头文件
+#import <BaiduMapAPI_Location/BMKLocationComponent.h>//引入定位功能所有的头文件
 
-@interface THNDomainInfoHeaderImage () {
+@interface THNDomainInfoHeaderImage () <BMKLocationServiceDelegate> {
     NSInteger _imageIndex;
+    BMKLocationService *_locService;
 }
 
 @end
@@ -25,12 +28,29 @@
     return self;
 }
 
+-(void)setAry:(NSArray *)ary{
+    _ary = ary;
+    _locService = [[BMKLocationService alloc]init];
+    _locService.delegate = self;
+    //启动LocationService
+    [_locService startUserLocationService];
+}
+
+//处理位置坐标更新
+- (void)didUpdateBMKUserLocation:(BMKUserLocation *)userLocation
+{
+    BMKMapPoint point1 = BMKMapPointForCoordinate(CLLocationCoordinate2DMake([self.ary[0] doubleValue],[self.ary[1] doubleValue]));
+    BMKMapPoint point2 = BMKMapPointForCoordinate(CLLocationCoordinate2DMake(userLocation.location.coordinate.latitude,userLocation.location.coordinate.longitude));
+    CLLocationDistance distance = BMKMetersBetweenMapPoints(point1,point2);
+    self.locLabel.text = [NSString stringWithFormat:@"%0.1fkm",distance/1000.0];
+    [_locService stopUserLocationService];
+}
+
 - (void)thn_setRollimageView:(DominInfoData *)model {
     if (model.covers.count) {
         [self thn_setCurrentImageIndex:_imageIndex];
         self.sumLabel.text = [NSString stringWithFormat:@" / %zi", model.covers.count];
         self.rollImageView.imageURLStringsGroup = model.covers;
-        self.locLabel.text = @"1921km";
     }
 }
 

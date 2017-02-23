@@ -70,6 +70,7 @@ static NSString *const URLDomainInfo = @"/scene_scene/view";
                 [self.footerView thn_setDomainInfo:self.infoModel];
                 self.navViewTitle.text = self.infoModel.title;
                 [self.domainInfoTable reloadData];
+                self.headerImages.ary = self.infoModel.location.coordinates;
             }
             [SVProgressHUD dismiss];
         }
