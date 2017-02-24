@@ -8,11 +8,11 @@
 
 #import "THNInputCodeViewController.h"
 #import "THNTFCodeView.h"
-#import <Masonry.h>
+#import "Masonry.h"
 #import "THNSetPwdViewController.h"
 #import "FBRequest.h"
 #import "FBAPI.h"
-#import <SVProgressHUD.h>
+#import "SVProgressHUD.h"
 
 @interface THNInputCodeViewController ()
 @property (weak, nonatomic) IBOutlet UILabel *tipLabel;

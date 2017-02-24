@@ -10,7 +10,7 @@
 #import "FBAPI.h"
 #import "FBRequest.h"
 #import "THNArticleDetalModel.h"
-#import <MJExtension.h>
+#import "MJExtension.h"
 #import "SVProgressHUD.h"
 #import "ProjectViewCommentsViewController.h"
 #import "ShareViewController.h"

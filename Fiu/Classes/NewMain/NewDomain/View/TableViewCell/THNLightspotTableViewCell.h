@@ -15,7 +15,10 @@
 @property (nonatomic, strong) NSMutableArray *textMarr;
 @property (nonatomic, strong) NSMutableArray *imageMarr;
 @property (nonatomic, strong) NSMutableArray *imageIndexMarr;
+
 @property (nonatomic, assign) CGFloat viewHeiight;
+@property (nonatomic, strong) UILabel *textLable;
+@property (nonatomic, strong) UIImageView *textImage;
 
 - (void)thn_setBrightSpotData:(NSArray *)model;
 

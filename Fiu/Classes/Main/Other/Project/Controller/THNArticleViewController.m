@@ -10,11 +10,11 @@
 #import "FBAPI.h"
 #import "FBRequest.h"
 #import "THNArticleModel.h"
-#import <MJExtension.h>
+#import "MJExtension.h"
 #import "Fiu.h"
 #import "UIView+FSExtension.h"
 #import "THNArticleCollectionViewCell.h"
-#import <MJRefresh.h>
+#import "MJRefresh.h"
 #import "SVProgressHUD.h"
 #import "THNArticleDetalViewController.h"
 
@@ -181,7 +181,7 @@ static NSString *const cellId = @"THNArticleCollectionViewCell";
 -(void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath{
     THNArticleDetalViewController *vc = [[THNArticleDetalViewController alloc] init];
     vc.articleDetalid = ((THNArticleModel*)self.modelAry[indexPath.row])._id;
-    vc.title = @"文章详情";
+    vc.title = @"话题详情";
     [self.navigationController pushViewController:vc animated:YES];
 }
 

@@ -8,7 +8,7 @@
 
 #import "THNCuXiaoDetalTopView.h"
 #import "THNCuXiaoDetalModel.h"
-#import <UIImageView+WebCache.h>
+#import "UIImageView+WebCache.h"
 
 @interface THNCuXiaoDetalTopView ()
 

@@ -30,7 +30,7 @@
 - (UILabel *)textlabel {
     if (!_textlabel) {
         _textlabel = [[UILabel alloc] init];
-        _textlabel.text = @"为你推荐";
+        _textlabel.text = @"猜你喜欢";
         _textlabel.textColor = [UIColor colorWithHexString:@"#666666"];
         _textlabel.font = [UIFont systemFontOfSize:14];
         _textlabel.textAlignment = NSTextAlignmentCenter;

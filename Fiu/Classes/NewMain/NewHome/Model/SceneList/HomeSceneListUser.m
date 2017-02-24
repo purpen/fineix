@@ -7,7 +7,7 @@
 
 
 #import "HomeSceneListUser.h"
-#import <MJExtension.h>
+#import "MJExtension.h"
 
 @interface HomeSceneListUser ()
 @end

@@ -60,7 +60,7 @@
         
         self.biaoTiLabel = [[UILabel alloc] init];
         self.biaoTiLabel.font = [UIFont systemFontOfSize:13];
-        self.biaoTiLabel.text = @"相关情境";
+        self.biaoTiLabel.text = @"情境推荐";
         self.biaoTiLabel.textColor = [UIColor colorWithHexString:@"#666666"];
         [self.contentView addSubview:self.biaoTiLabel];
         [_biaoTiLabel mas_makeConstraints:^(MASConstraintMaker *make) {

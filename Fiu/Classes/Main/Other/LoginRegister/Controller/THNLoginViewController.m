@@ -8,7 +8,7 @@
 
 #import "THNLoginViewController.h"
 #import "NSString+Helper.h"
-#import <SVProgressHUD.h>
+#import "SVProgressHUD.h"
 #import "FBRequest.h"
 #import "FBAPI.h"
 #import "UserInfo.h"

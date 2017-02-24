@@ -12,7 +12,7 @@
 #import "FiuSceneRow.h"
 #import "FindSceneModel.h"
 #import <SDWebImage/UIImageView+WebCache.h>
-#import <POP.h>
+#import "POP.h"
 #import "THNMacro.h"
 #import "THNSceneDetalViewController.h"
 

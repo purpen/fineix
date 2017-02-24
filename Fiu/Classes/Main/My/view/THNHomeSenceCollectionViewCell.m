@@ -8,7 +8,7 @@
 
 #import "THNHomeSenceCollectionViewCell.h"
 #import "HomeSceneListRow.h"
-#import <UIImageView+WebCache.h>
+#import "UIImageView+WebCache.h"
 #import "UIView+FSExtension.h"
 
 @interface THNHomeSenceCollectionViewCell ()

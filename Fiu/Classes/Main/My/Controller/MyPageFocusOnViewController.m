@@ -12,7 +12,7 @@
 #import "FBAPI.h"
 #import "FBRequest.h"
 #import "UserInfo.h"
-#import <SVProgressHUD.h>
+#import "SVProgressHUD.h"
 #import "MJRefresh.h"
 #import "MyFansActionSheetViewController.h"
 #import "UserInfoEntity.h"

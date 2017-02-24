@@ -11,11 +11,11 @@
 #import "FBAPI.h"
 #import "UIView+FSExtension.h"
 #import "THNFocusUserModel.h"
-#import <MJExtension.h>
+#import "MJExtension.h"
 #import "UIColor+Extension.h"
-#import <Masonry.h>
+#import "Masonry.h"
 #import "THNPeopleView.h"
-#import <SVProgressHUD.h>
+#import "SVProgressHUD.h"
 #import "THNRedEnvelopeView.h"
 
 @interface THNFocusViewController ()<UIScrollViewDelegate>

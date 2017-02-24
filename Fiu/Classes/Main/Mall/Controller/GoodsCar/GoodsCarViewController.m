@@ -211,7 +211,6 @@ static CGFloat const itemHeight = ((SCREEN_WIDTH - 45)/2)*1.21;
 #pragma mark - 设置视图
 - (void)setGoodsCarVcUI {
     [self.navView addSubview:self.editBtn];
-    [self.view addSubview:self.headerTextView];
     [self.view addSubview:self.carItemTable];
     [self.view addSubview:self.bottomView];
     [_bottomView mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -230,7 +229,7 @@ static CGFloat const itemHeight = ((SCREEN_WIDTH - 45)/2)*1.21;
 #pragma mark - 服务描述性文字视图
 - (THNCarServiceTextView *)headerTextView {
     if (!_headerTextView) {
-        _headerTextView = [[THNCarServiceTextView alloc] initWithFrame:CGRectMake(0, 64, SCREEN_WIDTH, 40)];
+        _headerTextView = [[THNCarServiceTextView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 40)];
     }
     return _headerTextView;
 }
@@ -239,9 +238,9 @@ static CGFloat const itemHeight = ((SCREEN_WIDTH - 45)/2)*1.21;
 - (UITableView *)carItemTable {
     if (!_carItemTabel) {
         if (self.openType == 1) {
-            _carItemTabel = [[UITableView alloc] initWithFrame:CGRectMake(0, 104, SCREEN_WIDTH, SCREEN_HEIGHT - 104) style:(UITableViewStyleGrouped)];
+            _carItemTabel = [[UITableView alloc] initWithFrame:CGRectMake(0, 64, SCREEN_WIDTH, SCREEN_HEIGHT - 64) style:(UITableViewStyleGrouped)];
         } else {
-            _carItemTabel = [[UITableView alloc] initWithFrame:CGRectMake(0, 104, SCREEN_WIDTH, SCREEN_HEIGHT - 153) style:(UITableViewStyleGrouped)];
+            _carItemTabel = [[UITableView alloc] initWithFrame:CGRectMake(0, 64, SCREEN_WIDTH, SCREEN_HEIGHT - 113) style:(UITableViewStyleGrouped)];
         }
         _carItemTabel.delegate = self;
         _carItemTabel.dataSource = self;
@@ -376,6 +375,8 @@ static CGFloat const itemHeight = ((SCREEN_WIDTH - 45)/2)*1.21;
     if (!_defaultCarView) {
         _defaultCarView = [[BuyCarDefault alloc] initWithFrame:CGRectMake(0, 64, SCREEN_WIDTH, 300)];
         [_defaultCarView thn_setDefaultViewImage:@"shopcarbig" promptText:NSLocalizedString(@"NoGoods", nil) hiddenButton:YES];
+        THNCarServiceTextView *textView = [[THNCarServiceTextView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 40)];
+        [_defaultCarView addSubview:textView];
     }
     return _defaultCarView;
 }
@@ -388,8 +389,7 @@ static CGFloat const itemHeight = ((SCREEN_WIDTH - 45)/2)*1.21;
         self.editBtn.hidden = YES;
         
     } else {
-        UIView *headerView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 0.01)];
-        self.carItemTabel.tableHeaderView = headerView;
+        self.carItemTabel.tableHeaderView = self.headerTextView;
         self.carItemTabel.tableFooterView = [UIView new];
         self.bottomView.hidden = NO;
         self.editBtn.hidden = NO;

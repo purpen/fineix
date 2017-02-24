@@ -7,7 +7,7 @@
 
 
 #import "HomeSceneListRow.h"
-#import <MJExtension.h>
+#import "MJExtension.h"
 
 @interface HomeSceneListRow ()
 @end

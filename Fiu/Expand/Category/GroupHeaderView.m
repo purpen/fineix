@@ -10,6 +10,7 @@
 #import "FiuPeopleListViewController.h"
 #import "FiuBrandListViewController.h"
 #import "THNProjectViewController.h"
+#import "THNNiceGoodsViewController.h"
 
 @implementation GroupHeaderView
 
@@ -126,6 +127,10 @@
     if (self.openType == 1) {
         THNProjectViewController *projectVC = [[THNProjectViewController alloc] init];
         [self.nav pushViewController:projectVC animated:YES];
+    } else if (self.openType == 3) {
+        THNNiceGoodsViewController *niceGoodsVC = [[THNNiceGoodsViewController alloc] init];
+        [self.nav pushViewController:niceGoodsVC animated:YES];
+
     }
 }
 

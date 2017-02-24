@@ -8,9 +8,12 @@
 
 #import <UIKit/UIKit.h>
 #import "THNMacro.h"
+#import "DominInfoData.h"
 
 @interface THNMoreDesTableViewCell : UITableViewCell
 
+@property (nonatomic, strong) UINavigationController *nav;
 @property (nonatomic, strong) UIButton *moreButton;
+@property (nonatomic, strong) DominInfoData *infoModel;
 
 @end

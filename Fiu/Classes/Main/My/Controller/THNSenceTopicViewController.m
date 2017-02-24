@@ -7,14 +7,14 @@
 //
 
 #import "THNSenceTopicViewController.h"
-#import <MJExtension.h>
+#import "MJExtension.h"
 #import "THNTopicsModel.h"
 #import "THNSenceTopicView.h"
 #import "UIView+FSExtension.h"
 #import "UIColor+Extension.h"
 #import "FBRequest.h"
 #import "FBAPI.h"
-#import <SVProgressHUD.h>
+#import "SVProgressHUD.h"
 #import "UserInfoEntity.h"
 #import "UserInfo.h"
 

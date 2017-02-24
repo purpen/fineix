@@ -35,7 +35,7 @@
         _title.textColor = [UIColor colorWithHexString:@"#666666"];
         _title.font = [UIFont systemFontOfSize:16];
         _title.textAlignment = NSTextAlignmentCenter;
-        _title.text = @"亮点";
+        _title.text = @"地盘特色";
     }
     return _title;
 }

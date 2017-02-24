@@ -51,9 +51,9 @@
 "goBuyGoods" = "去购买";
 "likeTheGoods" = "收藏";
 "likeDoneGoods" = "已收藏";
-"goodsStern" = "产品亮点";
+"goodsStern" = "推荐理由";
 "niceGoods" = "好货";
-"niceGoodsInfo" = "好货详情";
+"niceGoodsInfo" = "商品详情";
 "goodsComment" = "评价";
 
 //  品牌
@@ -134,7 +134,7 @@
 "chooseSceneVcTitle" = "选择地盘";
 "filterVcTitle" = "选择滤镜";
 "GoodsCategoryVcTitle" = "好货分类";
-"GoodsInfoVcTitle" = "好货详情";
+"GoodsInfoVcTitle" = "商品详情";
 "CommentVcTitle" = "评论";
 "AllSceneVcTitle" = "全部地盘";
 "GoodsCarVcTitle" = "购物车";

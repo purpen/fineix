@@ -11,7 +11,7 @@
 #import "THNCuXiaoDetalTopView.h"
 #import "UIView+FSExtension.h"
 #import "THNCuXiaoDetalContentTableViewCell.h"
-#import <MJExtension.h>
+#import "MJExtension.h"
 #import "THNProductModel.h"
 #import "ShareViewController.h"
 #import "ProjectViewCommentsViewController.h"
@@ -68,7 +68,7 @@ static NSString *const cellId = @"THNCuXiaoDetalContentTableViewCell";
     if (self.vcType == 1) {
         self.navViewTitle.text = @"促销详情";
     }else if (self.vcType == 2){
-        self.navViewTitle.text = @"好货详情";
+        self.navViewTitle.text = @"商品详情";
     }
     
     

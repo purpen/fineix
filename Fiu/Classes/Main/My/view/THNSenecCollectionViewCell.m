@@ -10,10 +10,10 @@
 #import <SDWebImage/UIImageView+WebCache.h>
 #import "THNSenceModel.h"
 #import "UserInfo.h"
-#import <Masonry.h>
+#import "Masonry.h"
 #import "FBRequest.h"
 #import "FBAPI.h"
-#import <SVProgressHUD.h>
+#import "SVProgressHUD.h"
 
 @interface THNSenecCollectionViewCell ()
 

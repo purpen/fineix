@@ -8,7 +8,7 @@
 
 #import "THNSetPwdViewController.h"
 #import "UIColor+Extension.h"
-#import <SVProgressHUD.h>
+#import "SVProgressHUD.h"
 #import "FBRequest.h"
 #import "FBAPI.h"
 #import "UserInfo.h"
