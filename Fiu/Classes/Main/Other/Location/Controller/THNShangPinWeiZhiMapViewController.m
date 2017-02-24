@@ -119,17 +119,17 @@
 -(void)setViewView:(UIView*)view{
     
     UIImageView *imgV = [[UIImageView alloc] initWithFrame:view.frame];
-    imgV.image = [UIImage imageNamed:@"Group"];
+    imgV.image = [UIImage imageNamed:@"paopaoTu"];
     [view addSubview:imgV];
-    UIImageView *image = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 40, 40)];
+    UIImageView *image = [[UIImageView alloc] initWithFrame:CGRectMake(2, 1, 43, 43)];
     [image sd_setImageWithURL:[NSURL URLWithString:self.model.avatarUrl]];
     [imgV addSubview:image];
-    UIImageView *imgVV = [[UIImageView alloc] initWithFrame:CGRectMake(view.frame.size.width-5 - 65, 5, 65, 30)];
+    UIImageView *imgVV = [[UIImageView alloc] initWithFrame:CGRectMake(view.frame.size.width-8 - 65, 8, 65, 30)];
     imgVV.image = [UIImage imageNamed:@"daoHangBtn"];
     [view addSubview:imgVV];
     
-    [self setLabel:CGRectMake(50, 6, 100, 10) andText:self.model.title andFont:13 andView:imgV andtextColor:[UIColor blackColor]];
-    [self setLabel:CGRectMake(50, 22, 100, 10) andText:[NSString stringWithFormat:@"%@%@",self.model.city,self.model.address] andFont:10 andView:imgV andtextColor:[UIColor grayColor]];
+    [self setLabel:CGRectMake(50, 10, 110, 10) andText:self.model.title andFont:13 andView:imgV andtextColor:[UIColor blackColor]];
+    [self setLabel:CGRectMake(50, 26, 130, 10) andText:[NSString stringWithFormat:@"%@%@",self.model.city,self.model.address] andFont:10 andView:imgV andtextColor:[UIColor grayColor]];
 }
 
 -(void)setLabel:(CGRect)frame andText:(NSString*)title andFont:(int)font andView:(UIView *)view andtextColor:(UIColor*)color{

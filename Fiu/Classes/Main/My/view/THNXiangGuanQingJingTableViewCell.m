@@ -132,6 +132,7 @@
             vc.sceneDetalId = model._id;
             [self.nav pushViewController:vc animated:YES];
         }
-    } failure:nil];}
+    } failure:nil];
+}
 
 @end

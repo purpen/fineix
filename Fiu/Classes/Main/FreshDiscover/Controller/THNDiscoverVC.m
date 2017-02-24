@@ -25,11 +25,10 @@
 #import "THNSceneDetalViewController.h"
 #import "THNBrandInfoViewController.h"
 #import "THNYaoQingHaoYouCollectionViewCell.h"
-#import <UMSocialCore/UMSocialCore.h>
 #import "HomePageViewController.h"
 #import "THNNewSortCollectionViewCell.h"
-
-static NSString *const ShareURlText = @"我在Fiu浮游™寻找同路人；希望和你一起用文字来记录内心情绪，用滤镜来表达情感色彩，用分享去变现原创价值；带你发现美学科技的力量和感性生活的温度！来吧，去Fiu一下 >>> http://m.taihuoniao.com/fiu";
+#import "THNFindFriendTableViewCell.h"
+#import "THNQingjingCollectionViewCell.h"
 
 @interface THNDiscoverVC ()<
 THNNavigationBarItemsDelegate,
@@ -51,12 +50,14 @@ UITableViewDataSource
 {
     NSInteger _selectIndex;
     BOOL _isScrollDown;
+    BOOL _isFirst;
 }
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     [self thn_setFirstAppStart];
     [self thn_setNavigationViewUI];
+    _isFirst = YES;
 }
 
 #pragma mark - 设置Nav
@@ -102,7 +103,7 @@ UITableViewDataSource
     [self.view addSubview:self.tableView];
     [self.view addSubview:self.collectionView];
     
-    NSArray *ary = @[@"为你推荐", @"分类", @"地盘", @"情境", @"品牌",@"专辑",@"发现好友"];
+    NSArray *ary = @[@"为你推荐", @"分类", @"地盘", @"情境", @"品牌",@"好货合辑",@"发现好友"];
     for (int i = 0; i < ary.count; i ++) {
         THNClassificationModel *model = [THNClassificationModel new];
         model.name = ary[i];
@@ -203,6 +204,8 @@ UITableViewDataSource
         [_collectionView registerClass:[THNDiPanZhuanTiCollectionViewCell class] forCellWithReuseIdentifier:THNDIPANZhuanTiCollectionViewCell];
         [_collectionView registerClass:[THNQingJingFenLeiCollectionViewCell class] forCellWithReuseIdentifier:THNQINGJingFenLeiCollectionViewCell];
         [_collectionView registerClass:[THNYaoQingHaoYouCollectionViewCell class] forCellWithReuseIdentifier:THNYAOQingHaoYouCollectionViewCell];
+        [_collectionView registerClass:[THNFindFriendTableViewCell class] forCellWithReuseIdentifier:THNFINDFriendTableViewCell];
+        [_collectionView registerClass:[THNQingjingCollectionViewCell class] forCellWithReuseIdentifier:THNQINGjingCollectionViewCell];
         //注册分区头标题
         [_collectionView registerClass:[CollectionViewHeaderView class]
             forSupplementaryViewOfKind:UICollectionElementKindSectionHeader
@@ -275,12 +278,9 @@ UITableViewDataSource
         return ary.count;
     } else if (section == 2) {
         NSArray *ary = self.collectionDatas[2];
-//        NSArray *ary2 = self.collectionDatas[3];
         return ary.count;
     } else if (section == 3) {
-        NSArray *ary = self.collectionDatas[4];
-        NSArray *ary2 = self.collectionDatas[5];
-        return ary.count + ary2.count;
+        return 1;
     } else if (section == 4) {
         NSArray *ary = self.collectionDatas[6];
         return ary.count;
@@ -288,8 +288,7 @@ UITableViewDataSource
         NSArray *ary = self.collectionDatas[7];
         return ary.count;
     } else if (section == 6) {
-        NSArray *ary = self.collectionDatas[8];
-        return ary.count + 3;
+        return 1;
     }
     return 0;
 }
@@ -322,19 +321,14 @@ UITableViewDataSource
             return cell;   
         }
     } else if (indexPath.section == 3) {
-        if (indexPath.row <= 1) {
-            THNDiPanZhuanTiCollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:THNDIPANZhuanTiCollectionViewCell forIndexPath:indexPath];
-            NSArray *ary = self.collectionDatas[4];
-            StickModel *model = ary[indexPath.row];
-            cell.model = model;
-            return cell;
-        } else {
-            THNQingJingFenLeiCollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:THNQINGJingFenLeiCollectionViewCell forIndexPath:indexPath];
-            NSArray *ary = self.collectionDatas[5];
-            Pro_categoryModel *model = ary[indexPath.row - 2];
-            cell.pModel = model;
-            return cell;
-        }
+        NSMutableArray *ary1 = [NSMutableArray array];
+        [ary1 addObjectsFromArray:self.collectionDatas[4]];
+        [ary1 addObjectsFromArray:self.collectionDatas[5]];
+        NSArray *ary = [NSArray arrayWithArray:ary1];
+        THNQingjingCollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:THNQINGjingCollectionViewCell forIndexPath:indexPath];
+        cell.modelAry = ary;
+        cell.nav = self.navigationController;
+        return cell;
     } else if (indexPath.section == 4) {
         THNSortCollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:THNSORTCollectionViewCell forIndexPath:indexPath];
         NSArray *ary = self.collectionDatas[6];
@@ -348,17 +342,7 @@ UITableViewDataSource
         cell.model = model;
         return cell;
     } else if (indexPath.section == 6) {
-        if (indexPath.row <= 2) {
-            THNYaoQingHaoYouCollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:THNYAOQingHaoYouCollectionViewCell forIndexPath:indexPath];
-            NSArray *ary = @[[Pro_categoryModel getPro_categoryModelWithTitle:@"邀请微信好友" andCoverUrl:@"weixin_icon"],[Pro_categoryModel getPro_categoryModelWithTitle:@"连接微博" andCoverUrl:@"weibo_icon"],[Pro_categoryModel getPro_categoryModelWithTitle:@"连接通讯录" andCoverUrl:@"tongxunlu"]];
-            Pro_categoryModel *model = ary[indexPath.row];
-            cell.model = model;
-            return cell;
-        }
-        THNSortCollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:THNSORTCollectionViewCell forIndexPath:indexPath];
-        NSArray *ary = self.collectionDatas[8];
-        UsersModel *model = ary[indexPath.row - 3];
-        cell.userModel = model;
+        THNFindFriendTableViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:THNFINDFriendTableViewCell forIndexPath:indexPath];
         return cell;
     }
     CollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:kCellIdentifier_CollectionView forIndexPath:indexPath];
@@ -367,34 +351,26 @@ UITableViewDataSource
 
 -(UIEdgeInsets)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout insetForSectionAtIndex:(NSInteger)section{
     if (section == 1) {
-        return UIEdgeInsetsMake(0, 18, 0, 18);
+        return UIEdgeInsetsMake(0, 18*SCREEN_HEIGHT/667.0, 0, 18*SCREEN_HEIGHT/667.0);
     } else if (section == 2) {
-        return UIEdgeInsetsMake(0, 22, 0, 22);
-    } else if (section == 3) {
-        return UIEdgeInsetsMake(0, 22, 0, 22);
+        return UIEdgeInsetsMake(0, 22*SCREEN_HEIGHT/667.0, 0, 22*SCREEN_HEIGHT/667.0);
     } else if (section == 4) {
-        return UIEdgeInsetsMake(0, 18, 0, 18);
+        return UIEdgeInsetsMake(0, 18*SCREEN_HEIGHT/667.0, 0, 18*SCREEN_HEIGHT/667.0);
     } else if (section == 5) {
-        return UIEdgeInsetsMake(0, 22, 0, 22);
-    } else if (section == 6) {
-        return UIEdgeInsetsMake(0, 18, 0, 18);
+        return UIEdgeInsetsMake(0, 22*SCREEN_HEIGHT/667.0, 0, 22*SCREEN_HEIGHT/667.0);
     }
     return UIEdgeInsetsMake(0, 0, 0, 0);
 }
 
 -(CGFloat)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout minimumInteritemSpacingForSectionAtIndex:(NSInteger)section{
     if (section == 1) {
-        return 18;
+        return 18*SCREEN_HEIGHT/667.0;
     } else if (section == 2) {
-        return 3;
-    } else if (section == 3) {
-        return 3;
+        return 3*SCREEN_HEIGHT/667.0;
     } else if (section == 4) {
-        return 18;
+        return 18*SCREEN_HEIGHT/667.0;
     } else if (section == 5) {
-        return 3;
-    } else if (section == 6) {
-        return 18;
+        return 3*SCREEN_HEIGHT/667.0;
     }
     return 0;
 }
@@ -405,7 +381,7 @@ UITableViewDataSource
         __block NSString *dataId;
         __block NSString *dataType;
         if ([model.type isEqualToString:@"11"]) {
-            FBRequest *request = [FBAPI postWithUrlString:@"/scene_subject/view" requestDictionary:@{@"id" : model._id} delegate:self];
+            FBRequest *request = [FBAPI postWithUrlString:@"/scene_subject/view" requestDictionary:@{@"id" : model.web_url} delegate:self];
             [request startRequestSuccess:^(FBRequest *request, id result) {
                 NSDictionary *dataDict = result[@"data"];
                 dataId = dataDict[@"_id"];
@@ -426,18 +402,8 @@ UITableViewDataSource
         NSArray *ary = self.collectionDatas[2];
         StickModel *model = ary[indexPath.row];
         THNDomainInfoViewController *domainInfoVC = [[THNDomainInfoViewController alloc] init];
-        domainInfoVC.infoId = model._id;
+        domainInfoVC.infoId = model.web_url;
         [self.navigationController pushViewController:domainInfoVC animated:YES];
-    } else if (indexPath.section == 3) {
-        NSArray *ary = self.collectionDatas[4];
-        if (indexPath.row < ary.count) {
-            THNSceneDetalViewController *vc = [[THNSceneDetalViewController alloc] init];
-            StickModel *model = ary[indexPath.row];
-            vc.sceneDetalId = model._id;
-            [self.navigationController pushViewController:vc animated:YES];
-        } else {
-            
-        }
     } else if (indexPath.section == 4) {
         NSArray *ary = self.collectionDatas[5];
         THNBrandInfoViewController *vc = [[THNBrandInfoViewController alloc] init];
@@ -446,47 +412,6 @@ UITableViewDataSource
         [self.navigationController pushViewController:vc animated:YES];
     } else if (indexPath.section == 5) {
         //专辑
-    } else if (indexPath.section == 6) {
-        UMSocialMessageObject *messageObject = [UMSocialMessageObject messageObject];
-        messageObject.text = ShareURlText;
-        
-        if (indexPath.row == 0) {
-            //微信
-            [[UMSocialManager defaultManager] shareToPlatform:(UMSocialPlatformType_WechatSession) messageObject:messageObject currentViewController:self completion:^(id result, NSError *error) {
-                if (error) {
-                    NSLog(@"************Share fail with error %@*********",error);
-                }else{
-                    [SVProgressHUD showSuccessWithStatus:@"让分享变成生产力，别让生活偷走远方的精彩"];
-                }
-            }];
-            
-        }else if (indexPath.row == 1){
-            //w微博
-            [[UMSocialManager defaultManager] shareToPlatform:(UMSocialPlatformType_Sina) messageObject:messageObject currentViewController:self completion:^(id result, NSError *error) {
-                if (error) {
-                    NSLog(@"************Share fail with error %@*********",error);
-                }else{
-                    [SVProgressHUD showSuccessWithStatus:@"让分享变成生产力，别让生活偷走远方的精彩"];
-                }
-            }];
-        }else if (indexPath.row == 2){
-            //通讯录
-            [[UMSocialManager defaultManager] shareToPlatform:(UMSocialPlatformType_Sms) messageObject:messageObject currentViewController:self completion:^(id result, NSError *error) {
-                if (error) {
-                    NSLog(@"************Share fail with error %@*********",error);
-                }else{
-                    [SVProgressHUD showSuccessWithStatus:@"让分享变成生产力，别让生活偷走远方的精彩"];
-                }
-            }];
-        } else{
-        NSArray *ary = self.collectionDatas[8];
-        UsersModel *model = ary[indexPath.row - 3];
-        HomePageViewController *vc = [[HomePageViewController alloc] init];
-        vc.type = @2;
-        vc.isMySelf = NO;
-        vc.userId = [NSString stringWithFormat:@"%@",model._id];
-        [self.navigationController pushViewController:vc animated:YES];
-        }
     }
 }
 
@@ -495,36 +420,34 @@ UITableViewDataSource
   sizeForItemAtIndexPath:(NSIndexPath *)indexPath
 {
     if (indexPath.section == 0) {
-        return CGSizeMake(531.4/2,
-                          299/2);
+        return CGSizeMake(531.4/2*SCREEN_HEIGHT/667.0,
+                          299/2*SCREEN_HEIGHT/667.0);
     } else if (indexPath.section == 1) {
-        return CGSizeMake(60,
-                          100);
+        return CGSizeMake(60*SCREEN_HEIGHT/667.0,
+                          100*SCREEN_HEIGHT/667.0);
     } else if (indexPath.section == 2) {
         if (indexPath.row <= 1) {
-            return CGSizeMake(120, 135/2.0);
+            return CGSizeMake(120*SCREEN_HEIGHT/667.0, 135/2.0*SCREEN_HEIGHT/667.0);
         } else {
-            return CGSizeMake(60,
-                              100);
+            return CGSizeMake(60*SCREEN_HEIGHT/667.0,
+                              100*SCREEN_HEIGHT/667.0);
         }
     } else if (indexPath.section == 3) {
-        if (indexPath.row <= 1) {
-            return CGSizeMake(120, 135/2.0);
-        } else {
-            return CGSizeMake(80,
-                             100);
-        }
+        NSMutableArray *ary1 = [NSMutableArray array];
+        [ary1 addObjectsFromArray:self.collectionDatas[4]];
+        [ary1 addObjectsFromArray:self.collectionDatas[5]];
+        return CGSizeMake(SCREEN_WIDTH - 80, (135/2+20+((ary1.count-2)/3)*(60+20))*SCREEN_HEIGHT/667.0);
     } else if (indexPath.section == 4) {
-        return CGSizeMake(60,
-                          100);
+        return CGSizeMake(60*SCREEN_HEIGHT/667.0,
+                          100*SCREEN_HEIGHT/667.0);
     } else if (indexPath.section == 5) {
-        return CGSizeMake(120, 135/2.0);
+        return CGSizeMake(120*SCREEN_HEIGHT/667.0, 135/2.0*SCREEN_HEIGHT/667.0);
     } else if (indexPath.section == 6) {
-        return CGSizeMake(60,
-                          100);
+        return CGSizeMake(SCREEN_WIDTH-80,
+                          535/2*SCREEN_HEIGHT/667.0);
     }
-    return CGSizeMake((SCREEN_WIDTH - 80 - 4 - 4) / 3,
-                      (SCREEN_WIDTH - 80 - 4 - 4) / 3 + 30);
+    return CGSizeMake(((SCREEN_WIDTH - 80 - 4 - 4) / 3)*SCREEN_HEIGHT/667.0,
+                      ((SCREEN_WIDTH - 80 - 4 - 4) / 3 + 30)*SCREEN_HEIGHT/667.0);
 }
 
 - (UICollectionReusableView *)collectionView:(UICollectionView *)collectionView
@@ -549,7 +472,7 @@ UITableViewDataSource
 
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout referenceSizeForHeaderInSection:(NSInteger)section
 {
-    return CGSizeMake(SCREEN_WIDTH, 50);
+    return CGSizeMake(SCREEN_WIDTH, 50*SCREEN_HEIGHT/667.0);
 }
 
 // CollectionView分区标题即将展示
@@ -569,6 +492,10 @@ UITableViewDataSource
     if (_isScrollDown && collectionView.dragging)
     {
         [self selectRowAtIndexPath:indexPath.section + 1];
+    }
+    if (_isFirst) {
+        [self.tableView selectRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0] animated:YES scrollPosition:UITableViewScrollPositionMiddle];
+        _isFirst = NO;
     }
 }
 

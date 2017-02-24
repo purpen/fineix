@@ -29,7 +29,7 @@
 //        self.imageV.contentMode = UIViewContentModeScaleAspectFit;
         [self.contentView addSubview:self.imageV];
         self.imageV.layer.masksToBounds = YES;
-        self.imageV.layer.cornerRadius = 3;
+        self.imageV.layer.cornerRadius = 3*SCREEN_HEIGHT/667.0;
         [_imageV mas_makeConstraints:^(MASConstraintMaker *make) {
             make.left.top.right.bottom.mas_equalTo(self.contentView).mas_offset(0);
         }];
