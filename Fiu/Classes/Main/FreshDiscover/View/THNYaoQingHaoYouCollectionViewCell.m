@@ -10,6 +10,7 @@
 #import "Masonry.h"
 #import "CollectionCategoryModel.h"
 #import "UIImageView+WebCache.h"
+#import "Fiu.h"
 
 @interface THNYaoQingHaoYouCollectionViewCell ()
 
@@ -28,10 +29,10 @@
         self.imageV.contentMode = UIViewContentModeScaleAspectFit;
         [self.contentView addSubview:self.imageV];
         self.imageV.layer.masksToBounds = YES;
-        self.imageV.layer.cornerRadius = 25;
+        self.imageV.layer.cornerRadius = 25*SCREEN_HEIGHT/667.0;
         [_imageV mas_makeConstraints:^(MASConstraintMaker *make) {
             make.top.mas_equalTo(self.contentView).mas_offset(0);
-            make.width.height.mas_equalTo(50);
+            make.width.height.mas_equalTo(50*SCREEN_HEIGHT/667.0);
             make.centerX.mas_equalTo(self.contentView.mas_centerX).mas_offset(0);
         }];
         
@@ -41,7 +42,7 @@
         self.textLabel.textColor = [UIColor blackColor];
         [self.contentView addSubview:self.textLabel];
         [_textLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.top.mas_equalTo(self.imageV.mas_bottom).mas_offset(5);
+            make.top.mas_equalTo(self.imageV.mas_bottom).mas_offset(5*SCREEN_HEIGHT/667.0);
             make.centerX.mas_equalTo(self.contentView.mas_centerX).mas_offset(0);
         }];
         

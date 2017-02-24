@@ -420,6 +420,8 @@
 		1FD10CBB1D62FBF5005898EE /* THNGoodsCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1FD10CB91D62FBF5005898EE /* THNGoodsCollectionViewCell.xib */; };
 		1FEB239E1E5ED49600FFF692 /* THNShangPinWeiZhiMapViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1FEB239D1E5ED49600FFF692 /* THNShangPinWeiZhiMapViewController.m */; };
 		1FEB23A21E5EDFC300FFF692 /* LSActionSheet.m in Sources */ = {isa = PBXBuildFile; fileRef = 1FEB23A11E5EDFC300FFF692 /* LSActionSheet.m */; };
+		1FEB23A51E5FE70C00FFF692 /* THNFindFriendTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 1FEB23A41E5FE70C00FFF692 /* THNFindFriendTableViewCell.m */; };
+		1FEB23A81E60190000FFF692 /* THNQingjingCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 1FEB23A71E60190000FFF692 /* THNQingjingCollectionViewCell.m */; };
 		1FF36E9A1D4F192400EB3C93 /* JDPayViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1FF36E981D4F192400EB3C93 /* JDPayViewController.m */; };
 		1FF36E9B1D4F192400EB3C93 /* JDPayViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1FF36E991D4F192400EB3C93 /* JDPayViewController.xib */; };
 		1FF36EA01D4F401600EB3C93 /* JDPayModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 1FF36E9F1D4F401600EB3C93 /* JDPayModel.m */; };
@@ -1534,6 +1536,10 @@
 		1FEB239D1E5ED49600FFF692 /* THNShangPinWeiZhiMapViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THNShangPinWeiZhiMapViewController.m; sourceTree = "<group>"; };
 		1FEB23A01E5EDFC300FFF692 /* LSActionSheet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LSActionSheet.h; sourceTree = "<group>"; };
 		1FEB23A11E5EDFC300FFF692 /* LSActionSheet.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LSActionSheet.m; sourceTree = "<group>"; };
+		1FEB23A31E5FE70C00FFF692 /* THNFindFriendTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THNFindFriendTableViewCell.h; sourceTree = "<group>"; };
+		1FEB23A41E5FE70C00FFF692 /* THNFindFriendTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THNFindFriendTableViewCell.m; sourceTree = "<group>"; };
+		1FEB23A61E60190000FFF692 /* THNQingjingCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THNQingjingCollectionViewCell.h; sourceTree = "<group>"; };
+		1FEB23A71E60190000FFF692 /* THNQingjingCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THNQingjingCollectionViewCell.m; sourceTree = "<group>"; };
 		1FF36E971D4F192400EB3C93 /* JDPayViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JDPayViewController.h; sourceTree = "<group>"; };
 		1FF36E981D4F192400EB3C93 /* JDPayViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JDPayViewController.m; sourceTree = "<group>"; };
 		1FF36E991D4F192400EB3C93 /* JDPayViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = JDPayViewController.xib; sourceTree = "<group>"; };
@@ -3966,6 +3972,10 @@
 				1F5C57B71E5C45A8003B585D /* THNYaoQingHaoYouCollectionViewCell.m */,
 				1F5C57B91E5C4F0C003B585D /* THNNewSortCollectionViewCell.h */,
 				1F5C57BA1E5C4F0C003B585D /* THNNewSortCollectionViewCell.m */,
+				1FEB23A31E5FE70C00FFF692 /* THNFindFriendTableViewCell.h */,
+				1FEB23A41E5FE70C00FFF692 /* THNFindFriendTableViewCell.m */,
+				1FEB23A61E60190000FFF692 /* THNQingjingCollectionViewCell.h */,
+				1FEB23A71E60190000FFF692 /* THNQingjingCollectionViewCell.m */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -5867,6 +5877,7 @@
 				D8117AEB1E5A89D60094E7EB /* UserModelData.m in Sources */,
 				1F2AFDD91D8818A400DA6035 /* ExpressInfoModel.m in Sources */,
 				D8AC3E131D2DF9D900148522 /* UITabBar+badge.m in Sources */,
+				1FEB23A81E60190000FFF692 /* THNQingjingCollectionViewCell.m in Sources */,
 				1F2AFD891D88186C00DA6035 /* NSString+UserModel.m in Sources */,
 				1FD10CAD1D62DE0E005898EE /* THNCollectionViewController.m in Sources */,
 				1F2A8F411CF40277005116C7 /* MarkGoodsData.m in Sources */,
@@ -6295,6 +6306,7 @@
 				1F2A8F481CF40277005116C7 /* CameraView.m in Sources */,
 				1F2A8F471CF40277005116C7 /* PictureToolViewController.m in Sources */,
 				1F1804281E56CE1100722AF5 /* THNDiPanZhuanTiCollectionViewCell.m in Sources */,
+				1FEB23A51E5FE70C00FFF692 /* THNFindFriendTableViewCell.m in Sources */,
 				1F2AFC831D88170B00DA6035 /* FiuSceneInfoData.m in Sources */,
 				D840F0971D93B87100CE9FB7 /* THNRedEnvelopeView.m in Sources */,
 				1F2AFC751D88170B00DA6035 /* SubscribeViewController.m in Sources */,
