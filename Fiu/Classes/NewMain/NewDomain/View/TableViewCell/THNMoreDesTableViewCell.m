@@ -7,6 +7,7 @@
 //
 
 #import "THNMoreDesTableViewCell.h"
+#import "THNDomianLightViewController.h"
 
 @implementation THNMoreDesTableViewCell
 
@@ -34,15 +35,23 @@
         _moreButton.titleLabel.font = [UIFont systemFontOfSize:12];
         [_moreButton setTitleColor:[UIColor colorWithHexString:@"#222222"] forState:(UIControlStateNormal)];
         [_moreButton setTitle:@"查看更多" forState:(UIControlStateNormal)];
-        [_moreButton setImage:[UIImage imageNamed:@"icon_more_open"] forState:(UIControlStateNormal)];
-        [_moreButton setTitle:@"点击收起" forState:(UIControlStateSelected)];
-        [_moreButton setImage:[UIImage imageNamed:@"icon_more_close"] forState:(UIControlStateSelected)];
+        [_moreButton setImage:[UIImage imageNamed:@"icon_Next"] forState:(UIControlStateNormal)];
+//        [_moreButton setTitle:@"点击收起" forState:(UIControlStateSelected)];
+//        [_moreButton setImage:[UIImage imageNamed:@"icon_more_close"] forState:(UIControlStateSelected)];
         [_moreButton setImageEdgeInsets:(UIEdgeInsetsMake(0, 80, 0, 0))];
         [_moreButton setTitleEdgeInsets:(UIEdgeInsetsMake(0, -10, 0, 0))];
         _moreButton.selected = NO;
-        _moreButton.userInteractionEnabled = NO;
+//        _moreButton.userInteractionEnabled = NO;
+        [_moreButton addTarget:self action:@selector(moreButtonClick:) forControlEvents:(UIControlEventTouchUpInside)];
     }
     return _moreButton;
+}
+
+- (void)moreButtonClick:(UIButton *)button {
+    THNDomianLightViewController *domainLightVC = [[THNDomianLightViewController alloc] init];
+    domainLightVC.navViewTitle.text = self.infoModel.title;
+    [domainLightVC thn_setBrightSpotData:self.infoModel.brightSpot];
+    [self.nav pushViewController:domainLightVC animated:YES];
 }
 
 @end

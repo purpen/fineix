@@ -284,7 +284,6 @@ static NSString *const homeDataPath = [NSHomeDirectory() stringByAppendingPathCo
 - (void)thn_networkNiceDomainData {
     self.niceDomainRequest = [FBAPI getWithUrlString:URLBannerSlide requestDictionary:@{@"name":@"app_fiu_index_scene_stick"} delegate:self];
     [self.niceDomainRequest startRequestSuccess:^(FBRequest *request, id result) {
-        NSLog(@"============ 热门地盘：%@", result);
         NSArray *dataArr = [[result valueForKey:@"data"] valueForKey:@"rows"];
         for (NSDictionary *dict in dataArr) {
             NiceDomainRow *model = [[NiceDomainRow alloc] initWithDictionary:dict];
@@ -894,34 +893,34 @@ static NSString *const homeDataPath = [NSHomeDirectory() stringByAppendingPathCo
     if (section == 0) {
         if (_isNewUser == YES) {
             [self.headerView addGroupHeaderViewIcon:@"shouye_zhuti"
-                                          withTitle:@"新手指南"
+                                          withTitle:@"新手福利见面礼"
                                        withSubtitle:@""
                                       withRightMore:@""
                                        withMoreType:0];
         }
     } else if (section == 1) {
         [self.headerView addGroupHeaderViewIcon:@"shouye_jingxuan"
-                                      withTitle:@"热门地盘"
+                                      withTitle:@"D3IN在这里"
                                    withSubtitle:@""
                                   withRightMore:@""
                                    withMoreType:0];
     } else if (section == 2) {
         self.headerView.backgroundColor = [UIColor colorWithHexString:@"#F8F8F8"];
         [self.headerView addGroupHeaderViewIcon:@"shouye_jingxuan"
-                                      withTitle:@"新品"
+                                      withTitle:@"新鲜好货早知道"
                                    withSubtitle:@""
                                   withRightMore:@""
                                    withMoreType:0];
     } else if (section == 3) {
         self.headerView.backgroundColor = [UIColor colorWithHexString:@"#F8F8F8"];
         [self.headerView addGroupHeaderViewIcon:@"shouye_jingxuan"
-                                      withTitle:@"产品专辑"
+                                      withTitle:@"好货合集"
                                    withSubtitle:@""
                                   withRightMore:@"查看更多"
-                                   withMoreType:1];
+                                   withMoreType:3];
     } else if (section == 4) {
         [self.headerView addGroupHeaderViewIcon:@"shouye_jingxuan"
-                                      withTitle:NSLocalizedString(@"Home_Scene", nil)
+                                      withTitle:@"大家都在看"
                                    withSubtitle:@""
                                   withRightMore:@""
                                    withMoreType:0];

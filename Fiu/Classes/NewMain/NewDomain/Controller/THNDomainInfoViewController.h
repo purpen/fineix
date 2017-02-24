@@ -19,6 +19,7 @@
 
 @property (nonatomic, strong) THNDomainInfoHeaderImage *headerImages;
 @property (nonatomic, strong) FBRequest *infoRequest;
+@property (nonatomic, strong) FBRequest *shareRequest;
 @property (nonatomic, strong) DominInfoData *infoModel;
 @property (nonatomic, strong) NSString *infoId;
 @property (nonatomic, strong) UITableView *domainInfoTable;

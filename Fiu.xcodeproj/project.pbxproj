@@ -641,6 +641,8 @@
 		D85F16A51E5E737F0038E0BB /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D85F16A41E5E737F0038E0BB /* Assets.xcassets */; };
 		D85F16AC1E5E76A40038E0BB /* THNShareActionView.m in Sources */ = {isa = PBXBuildFile; fileRef = D85F16AB1E5E76A40038E0BB /* THNShareActionView.m */; };
 		D85F16B01E5EB0850038E0BB /* THND3inExplainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D85F16AF1E5EB0850038E0BB /* THND3inExplainViewController.m */; };
+		D85F16B31E5FD3320038E0BB /* THNDomianLightViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D85F16B21E5FD3320038E0BB /* THNDomianLightViewController.m */; };
+		D85F16B61E5FDDAE0038E0BB /* THNNiceGoodsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D85F16B51E5FDDAE0038E0BB /* THNNiceGoodsViewController.m */; };
 		D861BC6E1D7E977700A26022 /* THNBrandInfoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D861BC6D1D7E977700A26022 /* THNBrandInfoViewController.m */; };
 		D861BC711D7E995600A26022 /* THNBrandInfoCollectionReusableView.m in Sources */ = {isa = PBXBuildFile; fileRef = D861BC701D7E995600A26022 /* THNBrandInfoCollectionReusableView.m */; };
 		D86809031D622049002714B2 /* FBImageScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = D86809021D622049002714B2 /* FBImageScrollView.m */; };
@@ -1962,6 +1964,10 @@
 		D85F16AB1E5E76A40038E0BB /* THNShareActionView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THNShareActionView.m; sourceTree = "<group>"; };
 		D85F16AE1E5EB0850038E0BB /* THND3inExplainViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THND3inExplainViewController.h; sourceTree = "<group>"; };
 		D85F16AF1E5EB0850038E0BB /* THND3inExplainViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THND3inExplainViewController.m; sourceTree = "<group>"; };
+		D85F16B11E5FD3320038E0BB /* THNDomianLightViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THNDomianLightViewController.h; sourceTree = "<group>"; };
+		D85F16B21E5FD3320038E0BB /* THNDomianLightViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THNDomianLightViewController.m; sourceTree = "<group>"; };
+		D85F16B41E5FDDAE0038E0BB /* THNNiceGoodsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THNNiceGoodsViewController.h; sourceTree = "<group>"; };
+		D85F16B51E5FDDAE0038E0BB /* THNNiceGoodsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THNNiceGoodsViewController.m; sourceTree = "<group>"; };
 		D861BC6C1D7E977700A26022 /* THNBrandInfoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THNBrandInfoViewController.h; sourceTree = "<group>"; };
 		D861BC6D1D7E977700A26022 /* THNBrandInfoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THNBrandInfoViewController.m; sourceTree = "<group>"; };
 		D861BC6F1D7E995600A26022 /* THNBrandInfoCollectionReusableView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THNBrandInfoCollectionReusableView.h; sourceTree = "<group>"; };
@@ -4808,6 +4814,8 @@
 				D806697A1D6F0206007FD81E /* MallSearchViewController.m */,
 				D8E8FFC91D77393400DDC3E0 /* THNUserAddGoodsViewController.h */,
 				D8E8FFCA1D77393400DDC3E0 /* THNUserAddGoodsViewController.m */,
+				D85F16B41E5FDDAE0038E0BB /* THNNiceGoodsViewController.h */,
+				D85F16B51E5FDDAE0038E0BB /* THNNiceGoodsViewController.m */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -5381,6 +5389,8 @@
 			children = (
 				D8884DDB1E56D58400CEE159 /* THNDomainInfoViewController.h */,
 				D8884DDC1E56D58400CEE159 /* THNDomainInfoViewController.m */,
+				D85F16B11E5FD3320038E0BB /* THNDomianLightViewController.h */,
+				D85F16B21E5FD3320038E0BB /* THNDomianLightViewController.m */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -5956,6 +5966,7 @@
 				1F1804081E52B2AD00722AF5 /* THNSelecteCityViewController.m in Sources */,
 				D80D415E1CAD144D005D72B1 /* UIBarButtonItem+Helper.m in Sources */,
 				1F2AFC8D1D88170B00DA6035 /* AccountView.m in Sources */,
+				D85F16B61E5FDDAE0038E0BB /* THNNiceGoodsViewController.m in Sources */,
 				1F2AFDDB1D8818A400DA6035 /* OrderInfoModel.m in Sources */,
 				D8117AF61E5A96BB0094E7EB /* HomeGoods.m in Sources */,
 				1F2A8FD91CF40277005116C7 /* FBGoodsCommentTableViewCell.m in Sources */,
@@ -6197,6 +6208,7 @@
 				1F2AFC951D88170B00DA6035 /* FocusOnTableViewCell.m in Sources */,
 				1F2AFD8E1D88186C00DA6035 /* THNTopicsModel.m in Sources */,
 				D8117ADB1E5A89D50094E7EB /* HomeSceneListCounter.m in Sources */,
+				D85F16B31E5FD3320038E0BB /* THNDomianLightViewController.m in Sources */,
 				D857C4CC1E31F0E100569B3D /* THNAllianceFootView.m in Sources */,
 				D857C49F1E2F46A800569B3D /* THNTradingInfoProduct.m in Sources */,
 				D857C4571E2CA05600569B3D /* THNAlianceHeaderTableViewCell.m in Sources */,

@@ -36,7 +36,8 @@
     [self addSubview:self.promptLab];
     [_promptLab mas_makeConstraints:^(MASConstraintMaker *make) {
         make.size.mas_equalTo(CGSizeMake(SCREEN_WIDTH, 13));
-        make.centerY.centerX.equalTo(self);
+        make.centerX.equalTo(self);
+        make.top.equalTo(self.mas_centerY).with.offset(20);
     }];
     
     [self addSubview:self.defaultBtn];

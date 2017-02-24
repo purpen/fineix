@@ -1,24 +1,18 @@
 //
-//  THNLightspotTableViewCell.h
+//  THNDomianLightViewController.h
 //  Fiu
 //
-//  Created by FLYang on 2017/2/19.
+//  Created by FLYang on 2017/2/24.
 //  Copyright © 2017年 taihuoniao. All rights reserved.
 //
 
-#import <UIKit/UIKit.h>
-#import "THNMacro.h"
+#import "THNViewController.h"
 
-@interface THNLightspotTableViewCell : UITableViewCell
-
+@interface THNDomianLightViewController : THNViewController
 @property (nonatomic, strong) UITextView *textView;
 @property (nonatomic, strong) NSMutableArray *textMarr;
 @property (nonatomic, strong) NSMutableArray *imageMarr;
 @property (nonatomic, strong) NSMutableArray *imageIndexMarr;
-
-@property (nonatomic, assign) CGFloat viewHeiight;
-@property (nonatomic, strong) UILabel *textLable;
-@property (nonatomic, strong) UIImageView *textImage;
 
 - (void)thn_setBrightSpotData:(NSArray *)model;
 

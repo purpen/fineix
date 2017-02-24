@@ -16,6 +16,7 @@
 #import "NSString+JSON.h"
 #import <UMSocialCore/UMSocialCore.h>
 #import "THNShareActionView.h"
+#import "THNDomianLightViewController.h"
 
 static NSString *const businessCellId = @"THNBusinessTableViewCellId";
 static NSString *const couponCellId = @"THNCouponTableViewCellId";
@@ -24,6 +25,7 @@ static NSString *const moreCellId = @"THNMoreDesTableViewCellId";
 static NSString *const lightTitleCellId = @"THNTitleTableViewCellId";
 static NSString *const lightspotCellId = @"THNLightspotTableViewCellId";
 static NSString *const URLDomainInfo = @"/scene_scene/view";
+static NSString *const URLShareLink = @"/gateway/share_link";
 
 @interface THNDomainInfoViewController () {
     BOOL _rowSelected;
@@ -34,6 +36,7 @@ static NSString *const URLDomainInfo = @"/scene_scene/view";
     CGFloat _lightTextHeight;
     BOOL _onFooterView;
     NSString *_domainId;
+    NSString *_linkUrl;
 }
 
 @end
@@ -77,7 +80,22 @@ static NSString *const URLDomainInfo = @"/scene_scene/view";
         }
         
     } failure:^(FBRequest *request, NSError *error) {
-        NSLog(@"%@", error);
+        NSLog(@" ---- %@ ----", error);
+    }];
+}
+
+#pragma mark 获取分享链接
+- (void)thn_networkShareInfoData {
+    self.shareRequest = [FBAPI postWithUrlString:URLShareLink requestDictionary:@{@"id":self.infoId, @"type":@"3"} delegate:self];
+    [self.shareRequest startRequestSuccess:^(FBRequest *request, id result) {
+        if ([[result valueForKey:@"success"] isEqualToNumber:@1]) {
+            NSDictionary *dict =  [result valueForKey:@"data"];
+            _linkUrl = [dict valueForKey:@"url"];
+            [THNShareActionView showShare:self shareMessageObject:[self shareMessageObject] linkUrl:_linkUrl];
+        }
+        
+    } failure:^(FBRequest *request, NSError *error) {
+        NSLog(@" ---- %@ ----", error);
     }];
 }
 
@@ -194,6 +212,10 @@ static NSString *const URLDomainInfo = @"/scene_scene/view";
         } else if (indexPath.row == 2) {
             THNMoreDesTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:moreCellId];
             cell = [[THNMoreDesTableViewCell alloc] initWithStyle:(UITableViewCellStyleDefault) reuseIdentifier:moreCellId];
+            if (self.infoModel) {
+                cell.nav = self.navigationController;
+                cell.infoModel = self.infoModel;
+            }
             return cell;
         } else {
             THNLightspotTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:lightspotCellId];
@@ -223,19 +245,16 @@ static NSString *const URLDomainInfo = @"/scene_scene/view";
         if (indexPath.row == 1) {
             if (self.infoModel.brightSpot.count) {
                 return _lightTextHeight;
-            }
-        } else if (indexPath.row == 2) {
-            return 0.01;
+            } else
+                return 0.01;
         }
-        return 40;
+        return 44;
     }
     return 44;
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    if (indexPath.section == 0) {
 
-    }
 }
 
 #pragma mark - 判断上／下滑状态
@@ -243,7 +262,7 @@ static NSString *const URLDomainInfo = @"/scene_scene/view";
     if (scrollView == self.domainInfoTable) {
         NSInteger contentOffset = scrollView.contentOffset.y;
         NSInteger scrollHeight = scrollView.contentSize.height - (SCREEN_HEIGHT - 64);
-        if (contentOffset >= scrollHeight + 1) {
+        if (contentOffset >= scrollHeight + 1 || contentOffset == scrollHeight) {
             _onFooterView = YES;
         } else {
             _onFooterView = NO;
@@ -265,7 +284,7 @@ static NSString *const URLDomainInfo = @"/scene_scene/view";
 
 - (void)thn_rightBarItemSelected {
     if (self.infoModel) {
-        [THNShareActionView showShare:self shareMessageObject:[self shareMessageObject] linkUrl:self.infoModel.viewUrl];
+        [self thn_networkShareInfoData];
     }
 }
 

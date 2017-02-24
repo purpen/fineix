@@ -71,7 +71,12 @@
         make.centerX.equalTo(self);
     }];
     
-    for (NSInteger idx = 0; idx < tags.count; ++ idx) {
+    NSInteger count = tags.count;
+    if (count > 4) {
+        count = 4;
+    }
+    
+    for (NSInteger idx = 0; idx < count; ++ idx) {
         UILabel *tagsLabel = [[UILabel alloc] initWithFrame:CGRectMake(idx * 75, 0, 65, 25)];
         tagsLabel.text = tags[idx];
         tagsLabel.textColor = [UIColor colorWithHexString:@"#666666"];
