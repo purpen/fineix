@@ -8,7 +8,7 @@
 
 #import "THNSignUpViewController.h"
 #import "THNTFView.h"
-#import <Masonry.h>
+#import "Masonry.h"
 #import "NSString+Helper.h"
 #import "FBRequest.h"
 #import "FBAPI.h"

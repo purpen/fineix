@@ -140,11 +140,12 @@
         userTag.title.text = title;
         userTag.price.text = price;
         userTag.isMove = NO;
-        CGFloat width = [userTag.title boundingRectWithSize:CGSizeMake(320, 0)].width;
-        if (width*1.3 > SCREEN_WIDTH/2) {
+        CGFloat width = [userTag.title boundingRectWithSize:CGSizeMake(SCREEN_WIDTH, 0)].width * 1.3 -3;
+        NSLog(@"========%f", width);
+        if (width > SCREEN_WIDTH/2) {
             width = SCREEN_WIDTH/2;
-        } else {
-            width = [userTag.title boundingRectWithSize:CGSizeMake(320, 0)].width * 1.3;
+        } else if (width < 80) {
+            width = 80;
         }
         
         if (loc == 1) {

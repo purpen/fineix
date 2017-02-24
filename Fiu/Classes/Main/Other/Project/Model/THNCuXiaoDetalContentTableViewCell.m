@@ -8,7 +8,7 @@
 
 #import "THNCuXiaoDetalContentTableViewCell.h"
 #import "THNProductModel.h"
-#import <UIImageView+WebCache.h>
+#import "UIImageView+WebCache.h"
 #import "FBGoodsInfoViewController.h"
 
 @interface THNCuXiaoDetalContentTableViewCell ()

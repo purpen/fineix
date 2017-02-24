@@ -10,11 +10,11 @@
 #import "FBAPI.h"
 #import "FBRequest.h"
 #import "THNArticleModel.h"
-#import <MJExtension.h>
+#import "MJExtension.h"
 #import "Fiu.h"
 #import "UIView+FSExtension.h"
 #import "THNArticleCollectionViewCell.h"
-#import <MJRefresh.h>
+#import "MJRefresh.h"
 #import "SVProgressHUD.h"
 #import "THNArticleDetalViewController.h"
 

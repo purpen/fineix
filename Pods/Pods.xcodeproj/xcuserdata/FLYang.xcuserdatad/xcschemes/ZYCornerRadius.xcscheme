@@ -14,10 +14,10 @@
             buildForArchiving = "YES">
             <BuildableReference
                BuildableIdentifier = 'primary'
-               BlueprintIdentifier = 'CA2FFDC4E291EBFAF9AC5D77C4F65861'
+               BlueprintIdentifier = '4D2B220DBA0D3139F6FE25A59E1CE1C2'
                BlueprintName = 'ZYCornerRadius'
                ReferencedContainer = 'container:Pods.xcodeproj'
-               BuildableName = 'libZYCornerRadius.a'>
+               BuildableName = 'ZYCornerRadius.framework'>
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>

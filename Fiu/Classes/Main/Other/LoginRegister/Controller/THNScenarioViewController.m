@@ -9,14 +9,14 @@
 #import "THNScenarioViewController.h"
 #import "FBRequest.h"
 #import "FBAPI.h"
-#import <MJExtension.h>
+#import "MJExtension.h"
 #import "THNTopicsModel.h"
 #import "THNTopicView.h"
 #import "UIView+FSExtension.h"
 #import "UIColor+Extension.h"
 #import "FBRequest.h"
 #import "FBAPI.h"
-#import <SVProgressHUD.h>
+#import "SVProgressHUD.h"
 #import "UserInfoEntity.h"
 #import "THNFocusViewController.h"
 

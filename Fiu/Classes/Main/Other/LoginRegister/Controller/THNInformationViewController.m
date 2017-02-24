@@ -14,7 +14,7 @@
 #import "FBRequest.h"
 #import "FBAPI.h"
 #import <SDWebImage/UIImageView+WebCache.h>
-#import <SVProgressHUD.h>
+#import "SVProgressHUD.h"
 #import "THNAgeViewController.h"
 
 @interface THNInformationViewController ()<UIImagePickerControllerDelegate,UINavigationControllerDelegate,UITextFieldDelegate>

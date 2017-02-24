@@ -8,7 +8,7 @@
 
 #import "THNActiveTopView.h"
 #import "THNArticleModel.h"
-#import <UIImageView+WebCache.h>
+#import "UIImageView+WebCache.h"
 
 @interface THNActiveTopView ()
 

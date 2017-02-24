@@ -38,12 +38,14 @@ static NSString *const URLMallSubject = @"/scene_subject/getlist";
     [super viewDidLoad];
     
     [self.view addSubview:self.mallList];
+    self.currentpageNum = 0;
     [self thn_networkSubjectListData];
 }
 
 #pragma mark 商品专题列表
 - (void)thn_networkSubjectListData {
-    NSDictionary *requestDic = @{@"page":@(self.currentpageNum),
+    [SVProgressHUD show];
+    NSDictionary *requestDic = @{@"page":@(self.currentpageNum + 1),
                                  @"size":@"10",
                                  @"sort":@"2",
                                  @"type":@"5",
@@ -62,6 +64,7 @@ static NSString *const URLMallSubject = @"/scene_subject/getlist";
         self.currentpageNum = [[[result valueForKey:@"data"] valueForKey:@"current_page"] integerValue];
         self.totalPageNum = [[[result valueForKey:@"data"] valueForKey:@"total_page"] integerValue];
         [self requestIsLastData:self.mallList currentPage:self.currentpageNum withTotalPage:self.totalPageNum];
+        [SVProgressHUD dismiss];
         
     } failure:^(FBRequest *request, NSError *error) {
         [SVProgressHUD showErrorWithStatus:[error localizedDescription]];

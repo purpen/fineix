@@ -229,7 +229,7 @@
         _price = [[UILabel alloc] init];
         _price.textColor = [UIColor whiteColor];
         _price.font = [UIFont systemFontOfSize:12];
-        _price.textAlignment = NSTextAlignmentLeft;
+//        _price.textAlignment = NSTextAlignmentRight;
     }
     return _price;
 }

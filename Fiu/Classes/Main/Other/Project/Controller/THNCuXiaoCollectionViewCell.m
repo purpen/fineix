@@ -8,11 +8,11 @@
 
 #import "THNCuXiaoCollectionViewCell.h"
 #import "THNArticleModel.h"
-#import <UIImageView+WebCache.h>
+#import "UIImageView+WebCache.h"
 #import "Fiu.h"
 #import "UIView+FSExtension.h"
 #import "THNCuXiaoProductModel.h"
-#import <MJExtension.h>
+#import "MJExtension.h"
 #import "THNProjectGoodsCollectionViewCell.h"
 #import "FBGoodsInfoViewController.h"
 

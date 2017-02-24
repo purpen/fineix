@@ -7,7 +7,7 @@
 //
 
 #import "THNProjectGoodsCollectionViewCell.h"
-#import <UIImageView+WebCache.h>
+#import "UIImageView+WebCache.h"
 #import "THNCuXiaoProductModel.h"
 
 @interface THNProjectGoodsCollectionViewCell ()

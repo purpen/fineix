@@ -9,7 +9,7 @@
 #import "JDPayViewController.h"
 #import "SVProgressHUD.h"
 #import "JDPayModel.h"
-#import <MJExtension.h>
+#import "MJExtension.h"
 #import "PaySuccessViewController.h"
 #import "OrderInfoModel.h"
 

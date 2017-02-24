@@ -7,7 +7,7 @@
 //
 
 #import "THNArticleCollectionViewCell.h"
-#import <UIImageView+WebCache.h>
+#import "UIImageView+WebCache.h"
 #import "THNArticleModel.h"
 
 @interface THNArticleCollectionViewCell ()

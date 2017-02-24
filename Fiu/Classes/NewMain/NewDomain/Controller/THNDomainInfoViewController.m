@@ -61,7 +61,7 @@ static NSString *const URLShareLink = @"/gateway/share_link";
 #pragma mark 地盘详情数据
 - (void)thn_networkDomainInfoData {
     [SVProgressHUD show];
-    self.infoRequest = [FBAPI postWithUrlString:URLDomainInfo requestDictionary:@{@"id":self.infoId} delegate:self];
+    self.infoRequest = [FBAPI getWithUrlString:URLDomainInfo requestDictionary:@{@"id":self.infoId} delegate:self];
     [self.infoRequest startRequestSuccess:^(FBRequest *request, id result) {
         if ([[result valueForKey:@"success"] isEqualToNumber:@1]) {
             NSLog(@"============ 地盘详情： %@", [NSString jsonStringWithObject:result]);

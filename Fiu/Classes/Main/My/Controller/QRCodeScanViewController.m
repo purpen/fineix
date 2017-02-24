@@ -19,6 +19,7 @@
 #import "FBGoodsInfoViewController.h"
 #import "UserInfoEntity.h"
 #import "THNSceneDetalViewController.h"
+#import "THNDomainInfoViewController.h"
 
 static NSString *const referral_code = @"referral_code=";
 
@@ -266,7 +267,7 @@ static NSString *const referral_code = @"referral_code=";
             [SVProgressHUD showErrorWithStatus:resultObj];
         }
         
-    } else if([resultStr rangeOfString:@"infoType"].location == NSNotFound){
+    } else if([resultStr rangeOfString:@"infoType"].location == NSNotFound) {
         [SVProgressHUD showErrorWithStatus:@"参数不足"];
     
     } else if ([resultStr rangeOfString:@"taihuoniao.com"].location != NSNotFound && [resultStr rangeOfString:@"infoType"].location != NSNotFound){
@@ -296,7 +297,13 @@ static NSString *const referral_code = @"referral_code=";
             FBGoodsInfoViewController * fbGoodsInfoVC = [[FBGoodsInfoViewController alloc] init];
             fbGoodsInfoVC.goodsID = infoId;
             [self.navigationController pushViewController:fbGoodsInfoVC animated:YES];
-       
+            
+        } else if ([infoType isEqualToString:@"10"]) {
+            //地盘
+            THNDomainInfoViewController *domainInfoVC = [[THNDomainInfoViewController alloc] init];
+            domainInfoVC.infoId = infoId;
+            [self.navigationController pushViewController:domainInfoVC animated:YES];
+            
         } else if ([infoType isEqualToString:@"13"]) {
             //用户
             HomePageViewController *homeOpage = [[HomePageViewController alloc] init];

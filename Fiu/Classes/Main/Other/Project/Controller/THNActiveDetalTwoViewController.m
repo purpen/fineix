@@ -19,7 +19,7 @@
 #import "THNUserInfoTableViewCell.h"
 #import "THNSceneImageTableViewCell.h"
 #import "THNSceneDetalViewController.h"
-#import <MJRefresh.h>
+#import "MJRefresh.h"
 #import "THNSceneImageViewController.h"
 #import "HomeSceneListRow.h"
 #import "THNResoltCollectionViewCell.h"
