@@ -128,8 +128,8 @@ static NSInteger const actionButtonTag  = 611;
                                                                                      @"scene_id":domainId} delegate:self];
     [self.goodsListRequest startRequestSuccess:^(FBRequest *request, id result) {
         NSArray *goodsArr = [[[result valueForKey:@"data"] valueForKey:@"rows"] valueForKey:@"product"];
-//        NSLog(@"============ 地盘商品详情： %@", [NSString jsonStringWithObject:result]);
-        if (![goodsArr[0] isKindOfClass:[NSNull class]]) {
+        NSLog(@"============ 地盘商品详情： %@", [NSString jsonStringWithObject:result]);
+        if (goodsArr.count) {
             for (NSDictionary * goodsDic in goodsArr) {
                 GoodsRow *goodsModel = [[GoodsRow alloc] initWithDictionary:goodsDic];
                 [self.goodsListMarr addObject:goodsModel];
