@@ -26,6 +26,9 @@
 		1F1AF3B21CF58A6B00CAA525 /* IntegralViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F1AF3B01CF58A6B00CAA525 /* IntegralViewController.m */; };
 		1F1AF3B31CF58A6B00CAA525 /* IntegralViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1F1AF3B11CF58A6B00CAA525 /* IntegralViewController.xib */; };
 		1F223B1D1CD714F3007687F7 /* messages.plist in Resources */ = {isa = PBXBuildFile; fileRef = 1F223B1C1CD714F3007687F7 /* messages.plist */; };
+		1F2362511E643D9200A6178C /* THNQingJingZhuanTiViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F2362501E643D9200A6178C /* THNQingJingZhuanTiViewController.m */; };
+		1F2362591E64404600A6178C /* THNQiYeQingDingZhiViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F2362581E64404600A6178C /* THNQiYeQingDingZhiViewController.m */; };
+		1F23625C1E64417B00A6178C /* THNZhaoMuViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F23625B1E64417B00A6178C /* THNZhaoMuViewController.m */; };
 		1F27AE8B1CE06BFA005A434B /* libc++.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 1F27AE8A1CE06BFA005A434B /* libc++.tbd */; };
 		1F27AE8D1CE06C3C005A434B /* CoreText.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1F27AE8C1CE06C3C005A434B /* CoreText.framework */; };
 		1F27AE8E1CE06C48005A434B /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 280045181C805CA3005F5C2E /* CoreGraphics.framework */; };
@@ -862,6 +865,12 @@
 		1F1AF3B01CF58A6B00CAA525 /* IntegralViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IntegralViewController.m; sourceTree = "<group>"; };
 		1F1AF3B11CF58A6B00CAA525 /* IntegralViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = IntegralViewController.xib; sourceTree = "<group>"; };
 		1F223B1C1CD714F3007687F7 /* messages.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = messages.plist; sourceTree = "<group>"; };
+		1F23624F1E643D9200A6178C /* THNQingJingZhuanTiViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THNQingJingZhuanTiViewController.h; sourceTree = "<group>"; };
+		1F2362501E643D9200A6178C /* THNQingJingZhuanTiViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THNQingJingZhuanTiViewController.m; sourceTree = "<group>"; };
+		1F2362571E64404600A6178C /* THNQiYeQingDingZhiViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THNQiYeQingDingZhiViewController.h; sourceTree = "<group>"; };
+		1F2362581E64404600A6178C /* THNQiYeQingDingZhiViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THNQiYeQingDingZhiViewController.m; sourceTree = "<group>"; };
+		1F23625A1E64417B00A6178C /* THNZhaoMuViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THNZhaoMuViewController.h; sourceTree = "<group>"; };
+		1F23625B1E64417B00A6178C /* THNZhaoMuViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THNZhaoMuViewController.m; sourceTree = "<group>"; };
 		1F27AE8A1CE06BFA005A434B /* libc++.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = "libc++.tbd"; path = "usr/lib/libc++.tbd"; sourceTree = SDKROOT; };
 		1F27AE8C1CE06C3C005A434B /* CoreText.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreText.framework; path = System/Library/Frameworks/CoreText.framework; sourceTree = SDKROOT; };
 		1F27AE8F1CE06C56005A434B /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
@@ -3433,6 +3442,10 @@
 				1F2AFBFC1D88170B00DA6035 /* THNSenceTopicViewController.h */,
 				1F2AFBFD1D88170B00DA6035 /* THNSenceTopicViewController.m */,
 				1F2AFBFE1D88170B00DA6035 /* THNSenceTopicViewController.xib */,
+				1F2362571E64404600A6178C /* THNQiYeQingDingZhiViewController.h */,
+				1F2362581E64404600A6178C /* THNQiYeQingDingZhiViewController.m */,
+				1F23625A1E64417B00A6178C /* THNZhaoMuViewController.h */,
+				1F23625B1E64417B00A6178C /* THNZhaoMuViewController.m */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -3624,6 +3637,8 @@
 				1F2AFCD41D8817CC00DA6035 /* THNXinPinViewController.h */,
 				1F2AFCD51D8817CC00DA6035 /* THNXinPinViewController.m */,
 				1F2AFCD61D8817CC00DA6035 /* THNXinPinViewController.xib */,
+				1F23624F1E643D9200A6178C /* THNQingJingZhuanTiViewController.h */,
+				1F2362501E643D9200A6178C /* THNQingJingZhuanTiViewController.m */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -5871,6 +5886,7 @@
 				D85174571D587917005F5722 /* THNMyCenterViewController.m in Sources */,
 				D8117B2E1E5AAEA70094E7EB /* THNSceneInfoTableViewCell.m in Sources */,
 				1F2A8FDF1CF40277005116C7 /* InfoGoodsHighlightsTableViewCell.m in Sources */,
+				1F2362511E643D9200A6178C /* THNQingJingZhuanTiViewController.m in Sources */,
 				D80669781D6EF8FA007FD81E /* DiscoverSearchViewController.m in Sources */,
 				1F2AFD181D8817CC00DA6035 /* THNArticleDetalModel.m in Sources */,
 				D8ACF44B1D6BFE0300DB79D8 /* THNMallGoodsModelData.m in Sources */,
@@ -6040,6 +6056,7 @@
 				D8117B2C1E5AAEA70094E7EB /* THNSceneCommentTableViewCell.m in Sources */,
 				1F2AFC841D88170B00DA6035 /* FiuSceneInfoLocation.m in Sources */,
 				D81179F71E5987510094E7EB /* THNDomainTableViewCell.m in Sources */,
+				1F2362591E64404600A6178C /* THNQiYeQingDingZhiViewController.m in Sources */,
 				D86E54BF1DD444230075ED88 /* FSLordKelvinFilter.m in Sources */,
 				1FBA9EA81D9E07C800D7FDA6 /* RecipeCollectionHeaderView.m in Sources */,
 				D857C45A1E2CADB900569B3D /* THNWithdrawViewController.m in Sources */,
@@ -6170,6 +6187,7 @@
 				D8DD22581DB756C0007D80CE /* THNChooseCityViewController.m in Sources */,
 				1F2A90A01CF40277005116C7 /* SubscribePeopleViewController.m in Sources */,
 				1F2A90251CF40277005116C7 /* IdentityTagModel.m in Sources */,
+				1F23625C1E64417B00A6178C /* THNZhaoMuViewController.m in Sources */,
 				D8117AEF1E5A89D60094E7EB /* HelpUserRow.m in Sources */,
 				D857C48A1E2F3E8600569B3D /* THNBalance.m in Sources */,
 				D81317E81D92237E007CE71C /* THNMessageViewController.m in Sources */,

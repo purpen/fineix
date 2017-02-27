@@ -39,7 +39,7 @@ static NSString *const ShareURlText = @"我在D3IN寻找同路人；希望和你
             make.left.mas_equalTo(self.contentView.mas_left).mas_offset(22*SCREEN_HEIGHT/667.0);
             make.top.mas_equalTo(self.contentView.mas_top).mas_offset(10*SCREEN_HEIGHT/667.0);
             make.width.mas_equalTo(526/2);
-            make.height.mas_equalTo(135/2);
+            make.height.mas_equalTo(0);
         }];
         
         self.weibo = [[UIImageView alloc] init];
@@ -48,7 +48,7 @@ static NSString *const ShareURlText = @"我在D3IN寻找同路人；希望和你
         self.weibo.layer.masksToBounds = YES;
         self.weibo.layer.cornerRadius = 20*SCREEN_HEIGHT/667.0;
         [_weibo mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.top.mas_equalTo(self.imageV.mas_bottom).mas_offset(35*SCREEN_HEIGHT/667.0);
+            make.top.mas_equalTo(self.imageV.mas_bottom).mas_offset(5*SCREEN_HEIGHT/667.0);
             make.centerX.mas_equalTo(self.contentView.mas_centerX).mas_offset(0);
             make.width.height.mas_equalTo(40*SCREEN_HEIGHT/667.0);
         }];
@@ -73,7 +73,7 @@ static NSString *const ShareURlText = @"我在D3IN寻找同路人；希望和你
         self.touXiang.layer.cornerRadius = 20*SCREEN_HEIGHT/667.0;
         [_touXiang mas_makeConstraints:^(MASConstraintMaker *make) {
             make.right.mas_equalTo(self.weibo.mas_left).mas_offset(-102/2*SCREEN_HEIGHT/667.0);
-            make.top.mas_equalTo(self.imageV.mas_bottom).mas_offset(35*SCREEN_HEIGHT/667.0);
+            make.top.mas_equalTo(self.imageV.mas_bottom).mas_offset(5*SCREEN_HEIGHT/667.0);
             make.width.height.mas_equalTo(40*SCREEN_HEIGHT/667.0);
         }];
         self.touXiang.userInteractionEnabled = YES;

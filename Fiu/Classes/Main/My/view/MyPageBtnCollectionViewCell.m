@@ -10,6 +10,7 @@
 #import "Fiu.h"
 #import "UIColor+Extension.h"
 #import "AboutViewController.h"
+#import "THNZhaoMuViewController.h"
 
 @implementation MyPageBtnCollectionViewCell
 
@@ -143,9 +144,7 @@
 }
 
 -(void)tapZhaoMu{
-    AboutViewController *vc = [[AboutViewController alloc] init];
-    vc.text = @"招募计划";
-    vc.url = @"https://m.taihuoniao.com/storage/plan?from=app";
+    THNZhaoMuViewController *vc = [[THNZhaoMuViewController alloc] init];
     [self.nav pushViewController:vc animated:YES];
 }
 

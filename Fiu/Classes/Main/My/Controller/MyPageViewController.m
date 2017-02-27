@@ -43,6 +43,8 @@
 #import "THNOrderCollectionViewCell.h"
 #import "PictureToolViewController.h"
 #import "AboutViewController.h"
+#import "THNQiYeQingDingZhiViewController.h"
+#import "THNZhaoMuViewController.h"
 
 @interface MyPageViewController ()<THNNavigationBarItemsDelegate,UICollectionViewDelegate,UICollectionViewDataSource>
 {
@@ -362,9 +364,7 @@
 }
 
 -(void)qiye{
-    AboutViewController *vc = [[AboutViewController alloc] init];
-    vc.text = @"企业轻定制";
-    vc.url = @"https://m.taihuoniao.com/storage/custom?from=app";
+    THNQiYeQingDingZhiViewController *vc = [[THNQiYeQingDingZhiViewController alloc] init];
     [self.navigationController pushViewController:vc animated:YES];
 }
 

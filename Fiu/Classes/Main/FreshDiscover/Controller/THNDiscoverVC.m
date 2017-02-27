@@ -56,7 +56,7 @@ UITableViewDataSource
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
-    [self thn_setFirstAppStart];
+//    [self thn_setFirstAppStart];
     [self thn_setNavigationViewUI];
     _isFirst = YES;
 }
@@ -104,7 +104,7 @@ UITableViewDataSource
     [self.view addSubview:self.tableView];
     [self.view addSubview:self.collectionView];
     
-    NSArray *ary = @[@"为你推荐", @"分类", @"地盘", @"情境", @"品牌",@"好货合辑",@"发现好友"];
+    NSArray *ary = @[@"为你推荐", @"分类", @"地盘", @"情境", @"品牌",@"好货合集",@"发现好友"];
     for (int i = 0; i < ary.count; i ++) {
         THNClassificationModel *model = [THNClassificationModel new];
         model.name = ary[i];
