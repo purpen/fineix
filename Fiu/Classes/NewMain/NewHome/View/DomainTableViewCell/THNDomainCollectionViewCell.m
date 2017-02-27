@@ -23,6 +23,7 @@
 - (void)thn_setHelpUserDataModel:(HelpUserRow *)model {
     [self.image downloadImage:model.coverUrl place:[UIImage imageNamed:@""]];
     self.title.text = model.title;
+    self.subTitle.text = model.subTitle;
 }
 
 - (void)thn_setDomainDataModel:(NiceDomainRow *)model {
@@ -53,16 +54,16 @@
         make.bottom.equalTo(self.mas_centerY).with.offset(0);
         make.centerX.equalTo(self);
     }];
-}
-
-- (void)setDomainRollView {
+    
     [self addSubview:self.subTitle];
     [_subTitle mas_makeConstraints:^(MASConstraintMaker *make) {
         make.height.mas_equalTo(@15);
         make.top.equalTo(self.mas_centerY).with.offset(5);
         make.centerX.equalTo(self);
     }];
-    
+}
+
+- (void)setDomainRollView {
     [self addSubview:self.iconImage];
     [_iconImage mas_makeConstraints:^(MASConstraintMaker *make) {
         make.size.mas_equalTo(CGSizeMake(50, 16));

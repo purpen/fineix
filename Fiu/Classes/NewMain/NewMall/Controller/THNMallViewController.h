@@ -19,19 +19,18 @@
     UICollectionViewDelegateFlowLayout
 >
 
-@pro_strong FBRequest *categoryRequest;
-@pro_strong FBRequest *mallListRequest;
-@pro_strong FBRequest *subjectRequest;
-@pro_assign NSInteger currentpageNum;
-@pro_assign NSInteger totalPageNum;
-@pro_strong UICollectionView *mallList;
-@pro_strong NSMutableArray *categoryMarr;
-@pro_strong NSMutableArray *goodsDataMarr;
-@pro_strong NSMutableArray *subjectMarr;
-@pro_strong NSMutableArray *subjectIdMarr;
-@pro_strong NSMutableArray *subjectTypeMarr;
-
-@pro_strong CategoryMenuView *topCategoryView;
-@pro_strong UIButton *goTopBtn;
+@property (nonatomic, strong) FBRequest *categoryRequest;
+@property (nonatomic, strong) FBRequest *mallListRequest;
+@property (nonatomic, strong) FBRequest *subjectRequest;
+@property (nonatomic, assign) NSInteger currentpageNum;
+@property (nonatomic, assign) NSInteger totalPageNum;
+@property (nonatomic, strong) UICollectionView *mallList;
+@property (nonatomic, strong) NSMutableArray *categoryMarr;
+@property (nonatomic, strong) NSMutableArray *goodsDataMarr;
+@property (nonatomic, strong) NSMutableArray *subjectMarr;
+@property (nonatomic, strong) NSMutableArray *subjectIdMarr;
+@property (nonatomic, strong) NSMutableArray *subjectTypeMarr;
+@property (nonatomic, strong) CategoryMenuView *topCategoryView;
+@property (nonatomic, strong) UIButton *goTopBtn;
 
 @end

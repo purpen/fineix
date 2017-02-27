@@ -17,18 +17,18 @@
     UICollectionViewDataSource
 >
 
-@pro_strong NSString *categoryId;
-@pro_strong NSString *vcTitle;
-@pro_strong FBMenuView *menuView;
-@pro_strong FBRequest *childTagsRequest;
-@pro_strong UICollectionView *goodsList;
-@pro_strong FBRequest *goodsListRequest;
-@pro_assign NSInteger currentpageNum;
-@pro_assign NSInteger totalPageNum;
+@property (nonatomic, strong) NSString          *categoryId;
+@property (nonatomic, strong) NSString          *vcTitle;
+@property (nonatomic, strong) FBMenuView        *menuView;
+@property (nonatomic, strong) FBRequest         *categoryRequest;
+@property (nonatomic, strong) UICollectionView  *goodsList;
+@property (nonatomic, strong) FBRequest         *goodsListRequest;
+@property (nonatomic, assign) NSInteger          currentpageNum;
+@property (nonatomic, assign) NSInteger          totalPageNum;
 
-@pro_strong NSMutableArray *goodsListMarr;
-@pro_strong NSMutableArray *goodsIdMarr;
-@pro_strong NSMutableArray *childTagsList;
-@pro_strong NSMutableArray *childTagsId;
+@property (nonatomic, strong) NSMutableArray *goodsListMarr;
+@property (nonatomic, strong) NSMutableArray *goodsIdMarr;
+@property (nonatomic, strong) NSMutableArray *categoryMarr;
+@property (nonatomic, strong) NSMutableArray *categoryIdMarr;
 
 @end

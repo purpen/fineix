@@ -64,7 +64,6 @@ static NSString *const URLShareLink = @"/gateway/share_link";
     self.infoRequest = [FBAPI getWithUrlString:URLDomainInfo requestDictionary:@{@"id":self.infoId} delegate:self];
     [self.infoRequest startRequestSuccess:^(FBRequest *request, id result) {
         if ([[result valueForKey:@"success"] isEqualToNumber:@1]) {
-            NSLog(@"============ 地盘详情： %@", [NSString jsonStringWithObject:result]);
             NSDictionary *dict =  [result valueForKey:@"data"];
             self.infoModel = [[DominInfoData alloc] initWithDictionary:dict];
             if (self.infoModel) {

@@ -34,7 +34,7 @@
 @property (nonatomic, assign) CGFloat               payPrice;
 @property (nonatomic, strong) UILabel               *sumPrice;
 @property (nonatomic, strong) UILabel               *sumLab;
-@property (nonatomic, strong) UILabel               *haveJDGoodsLab;
+@property (nonatomic, strong) UIView                *haveJDGoodsLab;
 
 @property (nonatomic, strong) NSMutableArray        *carItemList;
 @property (nonatomic, strong) NSMutableArray        *stockList;

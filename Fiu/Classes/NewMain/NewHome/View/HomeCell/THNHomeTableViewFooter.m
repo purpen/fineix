@@ -16,9 +16,7 @@
         self.backgroundColor = [UIColor colorWithHexString:@"#F8F8F8"];
         [self addSubview:self.bottomImage];
         [_bottomImage mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.size.mas_equalTo(CGSizeMake(100, 20));
-            make.centerX.equalTo(self);
-            make.bottom.equalTo(self.mas_bottom).with.offset(-10);
+            make.centerX.centerY.equalTo(self);
         }];
     }
     return self;

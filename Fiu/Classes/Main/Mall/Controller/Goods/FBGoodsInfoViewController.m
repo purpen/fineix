@@ -22,6 +22,7 @@
 #import "GoodsDesTableViewCell.h"
 #import "InfoBrandTableViewCell.h"
 #import "ShareViewController.h"
+#import "NSString+JSON.h"
 #import <UMSocialCore/UMSocialCore.h>
 
 static NSString *const URLGoodsInfo = @"/product/view";
@@ -34,7 +35,7 @@ static NSString *const URLCancelLike = @"/favorite/ajax_cancel_love";
 static NSString *const URLBuying = @"/shopping/now_buy";
 static NSString *const SceneListCellId = @"SceneListCellId";
 
-static NSString *const ShareURlText = @"我在Fiu浮游™寻找同路人；希望和你一起用文字来记录内心情绪，用滤镜来表达情感色彩，用分享去变现原创价值；带你发现美学科技的力量和感性生活的温度！来吧，去Fiu一下 >>> http://m.taihuoniao.com/fiu";
+static NSString *const ShareURlText = @"我在D3IN寻找同路人；希望和你一起用文字来记录内心情绪，用滤镜来表达情感色彩，用分享去变现原创价值；带你发现美学科技的力量和感性生活的温度！>>> http://m.taihuoniao.com/fiu";
 
 @interface FBGoodsInfoViewController () {
     NSString * _goodsInfoUrl;
@@ -72,8 +73,13 @@ static NSString *const ShareURlText = @"我在Fiu浮游™寻找同路人；希�
 #pragma mark 商品详情
 - (void)networkGoodsInfoData {
     [SVProgressHUD show];
-    self.goodsInfoRequest = [FBAPI getWithUrlString:URLGoodsInfo requestDictionary:@{@"id":self.goodsID} delegate:self];
+    if (self.storageId.length == 0) {
+        self.storageId = @"";
+    }
+    self.goodsInfoRequest = [FBAPI getWithUrlString:URLGoodsInfo requestDictionary:@{@"id":self.goodsID, @"storage_id":self.storageId} delegate:self];
     [self.goodsInfoRequest startRequestSuccess:^(FBRequest *request, id result) {
+        NSLog(@"======== 商品详情：%@",[NSString jsonStringWithObject:result]);
+        
         NSDictionary *goodsDict = [result valueForKey:@"data"];
         _goodsDes = goodsDict[@"advantage"];
         _goodsInfoUrl = goodsDict[@"content_view_url"];
@@ -150,7 +156,6 @@ static NSString *const ShareURlText = @"我在Fiu浮游™寻找同路人；希�
         [SVProgressHUD showErrorWithStatus:[error localizedDescription]];
     }];
 }
-
 
 #pragma mark 商品收藏
 - (void)networkCollectGoods:(BOOL)selected {
@@ -601,6 +606,7 @@ static NSString *const ShareURlText = @"我在Fiu浮游™寻找同路人；希�
     buyVC.modalPresentationStyle = UIModalPresentationOverCurrentContext;
     buyVC.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;
     buyVC.buyState = buyState;
+    buyVC.storageId = self.storageId;
     
     //  立即购买
     buyVC.buyingGoodsBlock = ^(NSDictionary * dict) {

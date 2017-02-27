@@ -9,7 +9,10 @@
 #import "THNViewController.h"
 
 @interface THND3inExplainViewController : THNViewController <
-    THNNavigationBarItemsDelegate
+    THNNavigationBarItemsDelegate,
+    UIWebViewDelegate
 >
+
+@property (nonatomic, strong) UIWebView *webView;
 
 @end

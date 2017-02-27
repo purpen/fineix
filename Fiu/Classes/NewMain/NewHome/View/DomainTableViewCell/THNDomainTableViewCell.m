@@ -41,7 +41,7 @@ static NSString *const domainCollectionCellID = @"THNDomainCollectionViewCellId"
     
     self.userHelpMarr = data;
     for (HelpUserRow *model in data) {
-        [self.userHelpIdMarr addObject:model.webUrl];
+        [self.userHelpIdMarr addObject:[NSString stringWithFormat:@"%zi", [model.webUrl integerValue]]];
     }
     [self.domainCollectionView reloadData];
 }
@@ -53,7 +53,7 @@ static NSString *const domainCollectionCellID = @"THNDomainCollectionViewCellId"
     
     self.domainMarr = data;
     for (NiceDomainRow *model in data) {
-        [self.domainIdMarr addObject:model.webUrl];
+        [self.domainIdMarr addObject:[NSString stringWithFormat:@"%zi", [model.webUrl integerValue]]];
     }
     [self.domainCollectionView reloadData];
 }
@@ -137,7 +137,7 @@ static NSString *const domainCollectionCellID = @"THNDomainCollectionViewCellId"
         [self.nav pushViewController:domainInfoVC animated:YES];
     
     } else {
-        [SVProgressHUD showInfoWithStatus:@"打开新人专区"];
+        self.openUserHelp(self.userHelpIdMarr[indexPath.row]);
     }
 }
 

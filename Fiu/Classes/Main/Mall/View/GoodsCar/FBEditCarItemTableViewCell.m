@@ -127,6 +127,10 @@
 - (UIImageView *)goodsImg {
     if (!_goodsImg) {
         _goodsImg = [[UIImageView alloc] init];
+        _goodsImg.contentMode = UIViewContentModeScaleAspectFill;
+        _goodsImg.clipsToBounds = YES;
+        _goodsImg.layer.borderWidth = 0.5f;
+        _goodsImg.layer.borderColor = [UIColor colorWithHexString:@"#999999" alpha:0.8].CGColor;
     }
     return _goodsImg;
 }

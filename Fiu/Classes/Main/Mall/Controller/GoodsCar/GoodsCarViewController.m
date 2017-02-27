@@ -359,13 +359,18 @@ static CGFloat const itemHeight = ((SCREEN_WIDTH - 45)/2)*1.21;
 }
 
 #pragma mark - 有京东商品时的提示
-- (UILabel *)haveJDGoodsLab {
+- (UIView *)haveJDGoodsLab {
     if (!_haveJDGoodsLab) {
-        _haveJDGoodsLab = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 35)];
-        _haveJDGoodsLab.font = [UIFont systemFontOfSize:12];
-        _haveJDGoodsLab.textAlignment = NSTextAlignmentCenter;
-        _haveJDGoodsLab.textColor = [UIColor colorWithHexString:@"#999999" alpha:1];
-        _haveJDGoodsLab.text = @"由京东配货的商品需要单独结算";
+        _haveJDGoodsLab = [[UIView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 55)];
+        THNCarServiceTextView *textView = [[THNCarServiceTextView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 30)];
+        [_haveJDGoodsLab addSubview:textView];
+        
+        UILabel *haveJDGoods = [[UILabel alloc] initWithFrame:CGRectMake(0, 35, SCREEN_WIDTH, 15)];
+        haveJDGoods.font = [UIFont systemFontOfSize:12];
+        haveJDGoods.textAlignment = NSTextAlignmentCenter;
+        haveJDGoods.textColor = [UIColor colorWithHexString:@"#999999" alpha:1];
+        haveJDGoods.text = @"由京东配货的商品需要单独结算";
+        [_haveJDGoodsLab addSubview:haveJDGoods];
     }
     return _haveJDGoodsLab;
 }

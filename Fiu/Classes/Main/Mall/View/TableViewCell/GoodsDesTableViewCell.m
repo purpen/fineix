@@ -27,9 +27,7 @@
 
 #pragma mark - 获取高度
 - (void)getContentCellHeight:(NSString *)content {
-    self.desContent.text = content;
-    CGSize size = [self.desContent boundingRectWithSize:CGSizeMake(SCREEN_WIDTH - 30, 0)];
-    self.cellHeight = size.height + 40;
+    self.cellHeight = [self getTextFrame:content];
 }
 
 #pragma mark -
@@ -43,9 +41,10 @@
     
     [self addSubview:self.desContent];
     [_desContent mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.size.mas_equalTo(CGSizeMake(SCREEN_WIDTH - 40, 15));
-        make.top.equalTo(self.headerTitle.mas_bottom).with.offset(0);
+        make.width.mas_equalTo(@(SCREEN_WIDTH - 40));
+        make.top.equalTo(self.headerTitle.mas_bottom).with.offset(5);
         make.left.equalTo(self.headerTitle.mas_left).with.offset(0);
+        make.bottom.equalTo(self.mas_bottom).with.offset(-10);
     }];
     
 }
@@ -54,16 +53,26 @@
 - (void)changeContentLabStyle:(UILabel *)lable withText:(NSString *)str {
     NSMutableAttributedString * contentText = [[NSMutableAttributedString alloc] initWithString:str];
     NSMutableParagraphStyle * paragraphStyle = [[NSMutableParagraphStyle alloc] init];
-    paragraphStyle.lineSpacing = 3.0f;
-    NSDictionary * textDict = @{NSParagraphStyleAttributeName :paragraphStyle};
+    paragraphStyle.lineSpacing = 5.0f;
+    NSDictionary * textDict = @{NSParagraphStyleAttributeName :paragraphStyle, NSFontAttributeName:[UIFont systemFontOfSize:12]};
     [contentText addAttributes:textDict range:NSMakeRange(0, contentText.length)];
     lable.attributedText = contentText;
-    
-    CGSize size = [lable boundingRectWithSize:CGSizeMake(SCREEN_WIDTH - 30, 0)];
-    
-    [lable mas_updateConstraints:^(MASConstraintMaker *make) {
-        make.size.mas_equalTo(CGSizeMake(size.width , size.height + 10));
-    }];
+}
+
+//  文字高度
+- (CGFloat)getTextFrame:(NSString *)text {
+    NSMutableParagraphStyle * paragraphStyle = [[NSMutableParagraphStyle alloc] init];
+    paragraphStyle.lineSpacing = 5.0f;
+    NSDictionary *attribute = @{NSParagraphStyleAttributeName :paragraphStyle, NSFontAttributeName:[UIFont systemFontOfSize:12]};
+    CGFloat textHeight = [text boundingRectWithSize:CGSizeMake(SCREEN_WIDTH - 40, 0)
+                                           options:\
+                          NSStringDrawingTruncatesLastVisibleLine |
+                          NSStringDrawingUsesLineFragmentOrigin |
+                          NSStringDrawingUsesFontLeading |
+                          NSStringDrawingUsesDeviceMetrics
+                                        attributes:attribute
+                                           context:nil].size.height * 1.2;
+    return textHeight + 40;
 }
 
 #pragma mark - 标题
@@ -81,7 +90,6 @@
 - (UILabel *)desContent {
     if (!_desContent) {
         _desContent = [[UILabel alloc] init];
-        _desContent.font = [UIFont systemFontOfSize:12];
         _desContent.textColor = [UIColor colorWithHexString:@"#222222"];
         _desContent.numberOfLines = 0;
     }

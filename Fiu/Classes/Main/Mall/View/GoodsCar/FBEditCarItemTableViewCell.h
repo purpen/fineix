@@ -13,16 +13,16 @@
 
 @interface FBEditCarItemTableViewCell : UITableViewCell
 
-@pro_strong UIButton        *   chooseBtn;      //  选择按钮
-@pro_strong UIImageView     *   goodsImg;       //  商品图片
-@pro_strong UILabel         *   goodsColor;     //  商品颜色
-@pro_strong UILabel         *   goodsNum;       //  商品数量
-@pro_strong UIButton        *   addNumBtn;      //  增加数量
-@pro_strong UIButton        *   subNumBtn;      //  减少数量
-@pro_strong UILabel         *   numLab;         //  显示数量
-@pro_assign NSInteger           nowNum;
-@pro_assign NSInteger           stockNum;
-@pro_assign NSInteger           newNum;
+@property (nonatomic, strong) UIButton        *   chooseBtn;      //  选择按钮
+@property (nonatomic, strong) UIImageView     *   goodsImg;       //  商品图片
+@property (nonatomic, strong) UILabel         *   goodsColor;     //  商品颜色
+@property (nonatomic, strong) UILabel         *   goodsNum;       //  商品数量
+@property (nonatomic, strong) UIButton        *   addNumBtn;      //  增加数量
+@property (nonatomic, strong) UIButton        *   subNumBtn;      //  减少数量
+@property (nonatomic, strong) UILabel         *   numLab;         //  显示数量
+@property (nonatomic, assign) NSInteger           nowNum;
+@property (nonatomic, assign) NSInteger           stockNum;
+@property (nonatomic, assign) NSInteger           newNum;
 
 - (void)setEditCarItemData:(CarGoodsModelItem *)model withStock:(NSInteger)stock;
 

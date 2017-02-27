@@ -19,34 +19,35 @@ typedef void(^AddGoodsCarBlock)(NSDictionary * addCarGoodsData);
     UICollectionViewDataSource,
     UICollectionViewDelegateFlowLayout>
 
-@pro_strong FBGoodsInfoModelData    *goodsInfo;
-@pro_strong UIView                  *buyView;
-@pro_strong UIButton                *cancelBtn;
-@pro_strong UIImageView             *goodsImg;
-@pro_strong UILabel                 *goodsTitle;
-@pro_strong UILabel                 *goodsPrice;
-@pro_strong UILabel                 *goodsChoose;
-@pro_strong UIView                  *chooseNumView;
-@pro_strong UILabel                 *chooseNum;
-@pro_strong UICollectionView        *goodsColorView;
-@pro_strong NSMutableArray          *goodsSkus;
-@pro_strong NSMutableArray          *goodsSkusImage;
-@pro_strong UIButton                *addBtn;
-@pro_strong UIButton                *subBtn;
-@pro_strong NSString                *skuId;
-@pro_assign NSInteger                num;
-@pro_assign NSInteger                quantity;
+@property (nonatomic, strong) FBGoodsInfoModelData    *goodsInfo;
+@property (nonatomic, strong) UIView                  *buyView;
+@property (nonatomic, strong) UIButton                *cancelBtn;
+@property (nonatomic, strong) UIImageView             *goodsImg;
+@property (nonatomic, strong) UILabel                 *goodsTitle;
+@property (nonatomic, strong) UILabel                 *goodsPrice;
+@property (nonatomic, strong) UILabel                 *goodsChoose;
+@property (nonatomic, strong) UIView                  *chooseNumView;
+@property (nonatomic, strong) UILabel                 *chooseNum;
+@property (nonatomic, strong) UICollectionView        *goodsColorView;
+@property (nonatomic, strong) NSMutableArray          *goodsSkus;
+@property (nonatomic, strong) NSMutableArray          *goodsSkusImage;
+@property (nonatomic, strong) UIButton                *addBtn;
+@property (nonatomic, strong) UIButton                *subBtn;
+@property (nonatomic, strong) NSString                *skuId;
+@property (nonatomic, assign) NSInteger                num;
+@property (nonatomic, assign) NSInteger                quantity;
 
-@pro_strong GetGoodsInfoModelBlock  getGoodsModel;
-@pro_strong BuyingGoodsBlock        buyingGoodsBlock;
-@pro_strong AddGoodsCarBlock        addGoodsCarBlock;
+@property (nonatomic, strong) GetGoodsInfoModelBlock  getGoodsModel;
+@property (nonatomic, strong) BuyingGoodsBlock        buyingGoodsBlock;
+@property (nonatomic, strong) AddGoodsCarBlock        addGoodsCarBlock;
 
 /**
  * buyState
  * 1:加入购物车／2:立即购买
  */
-@pro_assign NSInteger buyState;
-@pro_strong UIButton *sureBtn;
-@pro_strong UIButton *closeBtn;
+@property (nonatomic, assign) NSInteger buyState;
+@property (nonatomic, strong) UIButton *sureBtn;
+@property (nonatomic, strong) UIButton *closeBtn;
+@property (nonatomic, strong) NSString *storageId;  //  地盘id
 
 @end
