@@ -79,6 +79,7 @@
             NSURLRequest *webRequest = [NSURLRequest requestWithURL:url];
             [self.contentWebView loadRequest:webRequest];
             self.contentWebView.delegate = self;
+            self.contentWebView.scalesPageToFit = YES;
         }
     } failure:nil];
 }

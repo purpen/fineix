@@ -191,7 +191,7 @@ UITableViewDataSource
         flowlayout.minimumInteritemSpacing = 2;
         //上下间距
         flowlayout.minimumLineSpacing = 2;
-        _collectionView = [[UICollectionView alloc] initWithFrame:CGRectMake(2 + 80, 2 + 64, SCREEN_WIDTH - 80 - 4, SCREEN_HEIGHT - 64 - 2 - 49) collectionViewLayout:flowlayout];
+        _collectionView = [[UICollectionView alloc] initWithFrame:CGRectMake(2 + 80, 64, SCREEN_WIDTH - 80 - 4, SCREEN_HEIGHT - 64 - 49) collectionViewLayout:flowlayout];
         _collectionView.delegate = self;
         _collectionView.dataSource = self;
         _collectionView.showsVerticalScrollIndicator = NO;
@@ -411,6 +411,8 @@ UITableViewDataSource
         [self.navigationController pushViewController:vc animated:YES];
     } else if (indexPath.section == 5) {
         //专辑
+        StickModel *model = self.collectionDatas[7];
+        [self thn_tiaoZhuanLanMuWeiWithType:[model.type integerValue] andId:model._id andDelegate:self andNav:self.navigationController];
     }
 }
 
