@@ -11,6 +11,7 @@
 #import "MJExtension.h"
 #import "CollectionViewHeaderView.h"
 #import "THNCityCollectionViewCell.h"
+#import "Fiu.h"
 
 @interface THNSelecteCityViewController () <THNNavigationBarItemsDelegate, UICollectionViewDelegate,
 UICollectionViewDataSource>
@@ -76,9 +77,13 @@ UICollectionViewDataSource>
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self.view addSubview:self.collectionView];
+}
+
+-(void)setLocalCity:(NSString *)localCity{
     NSArray *ary = @[@{@"name" : @"北京"}, @{@"name" : @"上海"}];
     self.modelAry = [CityModel mj_objectArrayWithKeyValuesArray:ary];
     [self.collectionView reloadData];
+    _localCity = localCity;
 }
 
 - (void)didReceiveMemoryWarning {
@@ -103,6 +108,10 @@ UICollectionViewDataSource>
     THNCityCollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"UICollectionViewCell" forIndexPath:indexPath];
     CityModel *model = self.modelAry[indexPath.row];
     cell.model = model;
+    if ([self.localCity isEqualToString:cell.name.text]) {
+        cell.name.textColor = [UIColor colorWithHexString:fineixColor];
+        cell.bgImageView.image = [UIImage imageNamed:@"selectedCity"];
+    }
     return cell;
 }
 
@@ -157,6 +166,9 @@ UICollectionViewDataSource>
     if ([self.selectedCityDelegate respondsToSelector:@selector(setSelectedCityStr:)]) {
         [self.selectedCityDelegate setSelectedCityStr:model.name];
     }
+    THNCityCollectionViewCell *cell = (THNCityCollectionViewCell*)[self.collectionView cellForItemAtIndexPath:indexPath];
+    cell.name.textColor = [UIColor colorWithHexString:fineixColor];
+    cell.bgImageView.image = [UIImage imageNamed:@"selectedCity"];
     [self dismissViewControllerAnimated:YES completion:nil];
 }
 

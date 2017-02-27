@@ -13,5 +13,10 @@
 @interface THNCityCollectionViewCell : UICollectionViewCell
 
 @property (nonatomic, strong) CityModel *model;
+/**  */
+@property (nonatomic, assign) BOOL selekt;
+@property (nonatomic, strong) UILabel *name;
+/**  */
+@property (nonatomic, strong) UIImageView *bgImageView;
 
 @end

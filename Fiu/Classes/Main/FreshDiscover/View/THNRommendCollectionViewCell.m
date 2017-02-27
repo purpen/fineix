@@ -32,7 +32,7 @@
     if (self = [super initWithFrame:frame])
     {
         self.imageV = [[UIImageView alloc] init];
-        self.imageV.contentMode = UIViewContentModeScaleAspectFit;
+//        self.imageV.contentMode = UIViewContentModeScaleAspectFit;
         [self.contentView addSubview:self.imageV];
         [_imageV mas_makeConstraints:^(MASConstraintMaker *make) {
             make.left.top.right.bottom.mas_equalTo(self.contentView).mas_offset(0);

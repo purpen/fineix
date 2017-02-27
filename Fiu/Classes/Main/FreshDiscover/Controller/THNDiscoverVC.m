@@ -29,6 +29,7 @@
 #import "THNNewSortCollectionViewCell.h"
 #import "THNFindFriendTableViewCell.h"
 #import "THNQingjingCollectionViewCell.h"
+#import "UIView+FSExtension.h"
 
 @interface THNDiscoverVC ()<
 THNNavigationBarItemsDelegate,
@@ -277,8 +278,8 @@ UITableViewDataSource
         NSArray *ary = self.collectionDatas[1];
         return ary.count;
     } else if (section == 2) {
-        NSArray *ary = self.collectionDatas[2];
-        return ary.count;
+//        NSArray *ary = self.collectionDatas[2];
+        return 1;
     } else if (section == 3) {
         return 1;
     } else if (section == 4) {
@@ -353,11 +354,11 @@ UITableViewDataSource
     if (section == 1) {
         return UIEdgeInsetsMake(0, 18*SCREEN_HEIGHT/667.0, 0, 18*SCREEN_HEIGHT/667.0);
     } else if (section == 2) {
-        return UIEdgeInsetsMake(0, 22*SCREEN_HEIGHT/667.0, 0, 22*SCREEN_HEIGHT/667.0);
+        return UIEdgeInsetsMake(0, (self.collectionView.width-120*SCREEN_HEIGHT/667.0)/2, 0, (self.collectionView.width-120*SCREEN_HEIGHT/667.0)/2);
     } else if (section == 4) {
         return UIEdgeInsetsMake(0, 18*SCREEN_HEIGHT/667.0, 0, 18*SCREEN_HEIGHT/667.0);
     } else if (section == 5) {
-        return UIEdgeInsetsMake(0, 22*SCREEN_HEIGHT/667.0, 0, 22*SCREEN_HEIGHT/667.0);
+        return UIEdgeInsetsMake(0, 18*SCREEN_HEIGHT/667.0, 14, 18*SCREEN_HEIGHT/667.0);
     }
     return UIEdgeInsetsMake(0, 0, 0, 0);
 }
@@ -371,6 +372,13 @@ UITableViewDataSource
         return 18*SCREEN_HEIGHT/667.0;
     } else if (section == 5) {
         return 3*SCREEN_HEIGHT/667.0;
+    }
+    return 0;
+}
+
+-(CGFloat)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout minimumLineSpacingForSectionAtIndex:(NSInteger)section{
+    if (section == 5) {
+        return 18*SCREEN_HEIGHT/667.0;
     }
     return 0;
 }
@@ -436,7 +444,13 @@ UITableViewDataSource
         NSMutableArray *ary1 = [NSMutableArray array];
         [ary1 addObjectsFromArray:self.collectionDatas[4]];
         [ary1 addObjectsFromArray:self.collectionDatas[5]];
-        return CGSizeMake(SCREEN_WIDTH - 80, (135/2+20+((ary1.count-2)/3)*(60+20))*SCREEN_HEIGHT/667.0);
+        NSInteger n = 0;
+        if ((ary1.count - ary1.count/3*3)>0) {
+            n = ary1.count/3+1;
+        } else {
+            n = ary1.count/3;
+        }
+        return CGSizeMake(SCREEN_WIDTH - 80, (135/2+n*(60+20))*SCREEN_HEIGHT/667.0);
     } else if (indexPath.section == 4) {
         return CGSizeMake(60*SCREEN_HEIGHT/667.0,
                           100*SCREEN_HEIGHT/667.0);

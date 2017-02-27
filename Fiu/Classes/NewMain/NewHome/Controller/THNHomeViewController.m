@@ -1056,6 +1056,7 @@ static NSString *const homeDataPath = [NSHomeDirectory() stringByAppendingPathCo
 
 -(void)labelTap{
     THNSelecteCityViewController *vc = [[THNSelecteCityViewController alloc] init];
+    vc.localCity = self.addressCityLabel.text;
     vc.selectedCityDelegate = self;
     [self presentViewController:vc animated:YES completion:nil];
 }
@@ -1064,15 +1065,15 @@ static NSString *const homeDataPath = [NSHomeDirectory() stringByAppendingPathCo
     self.addressCityLabel.text = str;
 }
 
--(UIImageView *)downImage{
-    if (!_downImage) {
-        _downImage = [[UIImageView alloc] initWithFrame:CGRectMake(self.addressCityLabel.frame.origin.x + self.addressCityLabel.frame.size.width - 20, self.addressCityLabel.frame.origin.y + 9, 11, 6)];
-        _downImage.image = [UIImage imageNamed:@"nav_down"];
-        _downImage.userInteractionEnabled = YES;
-        [_downImage addGestureRecognizer:[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(labelTap)]];
-    }
-    return _downImage;
-}
+//-(UIImageView *)downImage{
+//    if (!_downImage) {
+//        _downImage = [[UIImageView alloc] initWithFrame:CGRectMake(self.addressCityLabel.frame.origin.x + self.addressCityLabel.frame.size.width - 20, self.addressCityLabel.frame.origin.y + 9, 11, 6)];
+//        _downImage.image = [UIImage imageNamed:@"nav_down"];
+//        _downImage.userInteractionEnabled = YES;
+//        [_downImage addGestureRecognizer:[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(labelTap)]];
+//    }
+//    return _downImage;
+//}
 
 #pragma mark - 设置Nav
 - (void)thn_setNavigationViewUI {
