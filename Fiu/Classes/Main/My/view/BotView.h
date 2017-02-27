@@ -12,6 +12,7 @@
 @property (weak, nonatomic) IBOutlet UIButton *aboutBtn;
 
 @property (weak, nonatomic) IBOutlet UIButton *optionBtn;
+@property (weak, nonatomic) IBOutlet UIButton *qiyeQingdingzhiBtn;
 
 +(instancetype)getBotView;
 @end

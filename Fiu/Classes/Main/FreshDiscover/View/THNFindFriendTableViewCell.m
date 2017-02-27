@@ -59,7 +59,7 @@ static NSString *const ShareURlText = @"我在D3IN寻找同路人；希望和你
         self.weiboLabel.text = @"连接微博";
         self.weiboLabel.font = [UIFont systemFontOfSize:12];
         self.weiboLabel.textAlignment = NSTextAlignmentCenter;
-        self.weiboLabel.textColor = [UIColor blackColor];
+        self.weiboLabel.textColor = [UIColor colorWithHexString:@"#727272"];
         [self.contentView addSubview:self.weiboLabel];
         [_weiboLabel mas_makeConstraints:^(MASConstraintMaker *make) {
             make.top.mas_equalTo(self.weibo.mas_bottom).mas_offset(5*SCREEN_HEIGHT/667.0);

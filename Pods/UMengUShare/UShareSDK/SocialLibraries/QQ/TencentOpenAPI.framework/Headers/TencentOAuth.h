@@ -10,7 +10,6 @@
 #import "sdkdef.h"
 #import "TencentOAuthObject.h"
 #import "TencentApiInterface.h"
-
 @protocol TencentSessionDelegate;
 @protocol TencentLoginDelegate;
 @protocol TencentApiInterfaceDelegate;
@@ -83,9 +82,6 @@ typedef enum
 
 /** 授权方式(Client Side Token或者Server Side Code) */
 @property(nonatomic, assign) TencentAuthMode authMode;
-
-/** union id */
-@property(nonatomic, retain) NSString* unionid;
 
 /**
  * 用来获得当前sdk的版本号
@@ -196,12 +192,6 @@ typedef enum
  * \return 授权调用是否成功
  */
 - (BOOL)reauthorizeWithPermissions:(NSArray *)permissions;
-
-/**
- * 获取UnindID,可以根据UnindID的比较来确定OpenID是否属于同一个用户
- * \return NO未登录，信息不足；YES条件满足，发送请求成功，请等待回调
- */
-- (BOOL)RequestUnionId;
 
 /**
  * (静态方法)处理应用拉起协议
@@ -453,11 +443,6 @@ typedef enum
  * 登录时权限信息的获得
  */
 - (NSArray *)getAuthorizedPermissions:(NSArray *)permissions withExtraParams:(NSDictionary *)extraParams;
-
-/**
- * unionID获得
- */
-- (void)didGetUnionID;
 
 @end
 

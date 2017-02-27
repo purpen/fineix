@@ -9,12 +9,9 @@
 #import "THNCityCollectionViewCell.h"
 #import "CityModel.h"
 #import "Masonry.h"
+#import "Fiu.h"
 
 @interface THNCityCollectionViewCell ()
-
-@property (nonatomic, strong) UILabel *name;
-/**  */
-@property (nonatomic, strong) UIImageView *bgImageView;
 
 @end
 
@@ -41,5 +38,6 @@
 {
     self.name.text = model.name;
 }
+
 
 @end

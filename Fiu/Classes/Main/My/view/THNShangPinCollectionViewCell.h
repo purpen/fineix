@@ -27,7 +27,5 @@
 @interface Cell : UITableViewCell
 
 @property (nonatomic, strong) THNProductDongModel *model;
-/**  */
-@property (nonatomic, strong) UIView *lineView;
 
 @end

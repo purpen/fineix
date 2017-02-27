@@ -55,10 +55,7 @@
 @property (nonatomic) BOOL usePopAnimation;
 @property (nonatomic) BOOL disableVerticalSwipe;
 
-@property (nonatomic) BOOL dismissOnTouch;
-
-// Default value: true
-// Set to false to tell the photo viewer not to hide the interface when scrolling
+// Default value: true. Set to false to tell the photo viewer not to hide the interface when scrolling
 @property (nonatomic) BOOL autoHideInterface;
 
 // Defines zooming of the background (default 1.0)
@@ -70,13 +67,13 @@
 // Init
 - (id)initWithPhotos:(NSArray *)photosArray;
 
-// Init (animated from view)
+// Init (animated)
 - (id)initWithPhotos:(NSArray *)photosArray animatedFromView:(UIView*)view;
 
 // Init with NSURL objects
 - (id)initWithPhotoURLs:(NSArray *)photoURLsArray;
 
-// Init with NSURL objects (animated from view)
+// Init with NSURL objects (animated)
 - (id)initWithPhotoURLs:(NSArray *)photoURLsArray animatedFromView:(UIView*)view;
 
 // Reloads the photo browser and refetches data

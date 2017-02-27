@@ -16,7 +16,6 @@
 @interface THNQingjingCollectionViewCell () <UICollectionViewDelegate, UICollectionViewDataSource>
 
 
-
 @end
 
 @implementation THNQingjingCollectionViewCell
@@ -51,7 +50,7 @@
     if (section == 1) {
         return UIEdgeInsetsMake(20*SCREEN_HEIGHT/667.0, 18*SCREEN_HEIGHT/667.0, 0, 18*SCREEN_HEIGHT/667.0);
     } else if (section == 0) {
-        return UIEdgeInsetsMake(0, 22*SCREEN_HEIGHT/667.0, 0, 22*SCREEN_HEIGHT/667.0);
+        return UIEdgeInsetsMake(0, 18*SCREEN_HEIGHT/667.0, 0, 18*SCREEN_HEIGHT/667.0);
     }
     return UIEdgeInsetsMake(0, 0, 0, 0);
 }

@@ -32,6 +32,10 @@
 @property(nonatomic,strong) UILabel *label8;
 @property(nonatomic,strong) UILabel *label9;
 @property(nonatomic,strong) UILabel *label10;
+/**  */
+@property (nonatomic, strong) UIImageView *zhaoMuTu;
+/**  */
+@property (nonatomic, strong) UINavigationController *nav;
 
 
 @end

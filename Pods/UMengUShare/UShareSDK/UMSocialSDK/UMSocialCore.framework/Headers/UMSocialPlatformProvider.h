@@ -17,7 +17,6 @@
  */
 @protocol UMSocialPlatformProvider <NSObject>
 
-@optional
 /**
  *  当前UMSocialPlatformProvider对应操作的UMSocialPlatformType
  *  @discuss 当前很多平台对应多个平台类型，出现一对多的关系
@@ -84,6 +83,7 @@
 /**
  *  取消授权
  *
+ *  @param userInfo          用户的授权的自定义数据
  *  @param completionHandler 授权后的回调
  *  @discuss userInfo在有些平台可以带入，如果没有就传入nil.
  */
@@ -125,8 +125,7 @@
 /**
  *  平台的特性
  *
- *  @return 返回平台特性
- *
+ *  @return @see
  */
 -(UMSocialPlatformFeature)umSocial_SupportedFeatures;
 

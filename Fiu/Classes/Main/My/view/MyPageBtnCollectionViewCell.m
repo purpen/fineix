@@ -9,6 +9,7 @@
 #import "MyPageBtnCollectionViewCell.h"
 #import "Fiu.h"
 #import "UIColor+Extension.h"
+#import "AboutViewController.h"
 
 @implementation MyPageBtnCollectionViewCell
 
@@ -128,8 +129,24 @@
             make.centerX.mas_equalTo(self.btn9.mas_centerX);
             make.top.mas_equalTo(self.btn9.mas_bottom).with.offset(8/667.*SCREEN_HEIGHT);
         }];
+        
+        self.zhaoMuTu = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"zhaoMu"]];
+        [self.contentView addSubview:self.zhaoMuTu];
+        [_zhaoMuTu mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.centerX.mas_equalTo(self.contentView.mas_centerX);
+            make.top.mas_equalTo(self.btn9.mas_bottom).with.offset(50/667.0*SCREEN_HEIGHT);
+        }];
+        self.zhaoMuTu.userInteractionEnabled = YES;
+        [self.zhaoMuTu addGestureRecognizer:[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapZhaoMu)]];
     }
     return self;
+}
+
+-(void)tapZhaoMu{
+    AboutViewController *vc = [[AboutViewController alloc] init];
+    vc.text = @"招募计划";
+    vc.url = @"https://m.taihuoniao.com/storage/plan?from=app";
+    [self.nav pushViewController:vc animated:YES];
 }
 
 -(UIButton *)btn1{

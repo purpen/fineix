@@ -38,7 +38,7 @@
         self.textLabel = [[UILabel alloc] init];
         self.textLabel.font = [UIFont systemFontOfSize:13];
         self.textLabel.textAlignment = NSTextAlignmentCenter;
-        self.textLabel.textColor = [UIColor blackColor];
+        self.textLabel.textColor = [UIColor colorWithHexString:@"#727272"];
         [self.contentView addSubview:self.textLabel];
         [_textLabel mas_makeConstraints:^(MASConstraintMaker *make) {
             make.top.mas_equalTo(self.imageV.mas_bottom).mas_offset(5*SCREEN_HEIGHT/667.0);

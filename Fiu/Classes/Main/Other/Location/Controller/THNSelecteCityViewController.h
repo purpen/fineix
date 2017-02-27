@@ -19,5 +19,7 @@
 
 /**  */
 @property (nonatomic, weak) id <selectedCityDelegate> selectedCityDelegate;
+/**  */
+@property(nonatomic,copy) NSString *localCity;
 
 @end

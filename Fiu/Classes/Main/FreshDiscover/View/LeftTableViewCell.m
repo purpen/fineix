@@ -8,6 +8,7 @@
 
 #import "LeftTableViewCell.h"
 #import "UIColor+Extension.h"
+#import "UIView+FSExtension.h"
 
 #define defaultColor [UIColor colorWithHexString:@"#be8914"]
 #define rgba(r,g,b,a) [UIColor colorWithRed:r/255.0 green:g/255.0 blue:b/255.0 alpha:a]
@@ -34,7 +35,8 @@
         self.name.highlightedTextColor = defaultColor;
         [self.contentView addSubview:self.name];
         
-        self.yellowView = [[UIView alloc] initWithFrame:CGRectMake(0, 5, 4, 45)];
+        self.yellowView = [[UIView alloc] initWithFrame:CGRectMake(0, 5, 4, 20)];
+        self.yellowView.centerY = self.name.centerY;
         self.yellowView.backgroundColor = defaultColor;
         [self.contentView addSubview:self.yellowView];
     }
