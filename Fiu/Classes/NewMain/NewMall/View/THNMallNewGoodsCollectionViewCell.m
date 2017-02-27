@@ -18,6 +18,7 @@ static NSString *const GoodsCellId = @"goodsCellId";
     self = [super initWithFrame:frame];
     if (self) {
         self.backgroundColor = [UIColor colorWithHexString:@"#F8F8F8"];
+        [self addSubview:self.titleLabel];
         [self addSubview:self.goodList];
     }
     return self;
@@ -33,6 +34,16 @@ static NSString *const GoodsCellId = @"goodsCellId";
     [self.goodList reloadData];
 }
 
+- (UILabel *)titleLabel {
+    if (!_titleLabel) {
+        _titleLabel = [[UILabel alloc] initWithFrame:CGRectMake(15, 12, 200, 15)];
+        _titleLabel.font = [UIFont systemFontOfSize:12];
+        _titleLabel.textColor = [UIColor colorWithHexString:@"#666666"];
+        _titleLabel.text = @"新鲜好货早知道";
+    }
+    return _titleLabel;
+}
+
 - (UICollectionView *)goodList {
     if (!_goodList) {
         UICollectionViewFlowLayout *flowLayout = [[UICollectionViewFlowLayout alloc] init];
@@ -41,7 +52,7 @@ static NSString *const GoodsCellId = @"goodsCellId";
         flowLayout.sectionInset = UIEdgeInsetsMake(0, 15, 0, 15);
         flowLayout.scrollDirection = UICollectionViewScrollDirectionHorizontal;
         
-        _goodList = [[UICollectionView alloc] initWithFrame:CGRectMake(0, 10, SCREEN_WIDTH, 185) collectionViewLayout:flowLayout];
+        _goodList = [[UICollectionView alloc] initWithFrame:CGRectMake(0, 40, SCREEN_WIDTH, 185) collectionViewLayout:flowLayout];
         _goodList.backgroundColor = [UIColor colorWithHexString:@"#F8F8F8"];
         _goodList.delegate = self;
         _goodList.dataSource = self;

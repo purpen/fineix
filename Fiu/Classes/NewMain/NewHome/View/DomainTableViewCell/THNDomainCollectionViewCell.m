@@ -22,8 +22,11 @@
 
 - (void)thn_setHelpUserDataModel:(HelpUserRow *)model {
     [self.image downloadImage:model.coverUrl place:[UIImage imageNamed:@""]];
-    self.title.text = model.title;
-    self.subTitle.text = model.subTitle;
+//    self.title.text = model.title;
+//    self.subTitle.text = model.subTitle;
+    self.title.hidden = YES;
+    self.subTitle.hidden = YES;
+    self.backView.hidden = YES;
 }
 
 - (void)thn_setDomainDataModel:(NiceDomainRow *)model {

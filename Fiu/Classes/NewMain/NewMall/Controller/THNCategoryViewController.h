@@ -14,13 +14,15 @@
     THNNavigationBarItemsDelegate,
     FBMenuViewDelegate,
     UICollectionViewDelegate,
-    UICollectionViewDataSource
+    UICollectionViewDataSource,
+    UICollectionViewDelegateFlowLayout
 >
 
 @property (nonatomic, strong) NSString          *categoryId;
 @property (nonatomic, strong) NSString          *vcTitle;
 @property (nonatomic, strong) FBMenuView        *menuView;
 @property (nonatomic, strong) FBRequest         *categoryRequest;
+@property (nonatomic, strong) FBRequest         *subjectRequest;
 @property (nonatomic, strong) UICollectionView  *goodsList;
 @property (nonatomic, strong) FBRequest         *goodsListRequest;
 @property (nonatomic, assign) NSInteger          currentpageNum;
@@ -30,5 +32,8 @@
 @property (nonatomic, strong) NSMutableArray *goodsIdMarr;
 @property (nonatomic, strong) NSMutableArray *categoryMarr;
 @property (nonatomic, strong) NSMutableArray *categoryIdMarr;
+@property (nonatomic, strong) NSMutableArray *subjectMarr;
+@property (nonatomic, strong) NSMutableArray *subjectIdMarr;
+@property (nonatomic, strong) NSMutableArray *subjectTypeMarr;
 
 @end
