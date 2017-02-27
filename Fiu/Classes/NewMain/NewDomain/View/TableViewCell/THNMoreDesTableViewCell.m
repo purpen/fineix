@@ -7,7 +7,6 @@
 //
 
 #import "THNMoreDesTableViewCell.h"
-#import "THNDomianLightViewController.h"
 
 @implementation THNMoreDesTableViewCell
 
@@ -41,17 +40,9 @@
         [_moreButton setImageEdgeInsets:(UIEdgeInsetsMake(0, 80, 0, 0))];
         [_moreButton setTitleEdgeInsets:(UIEdgeInsetsMake(0, -10, 0, 0))];
         _moreButton.selected = NO;
-//        _moreButton.userInteractionEnabled = NO;
-        [_moreButton addTarget:self action:@selector(moreButtonClick:) forControlEvents:(UIControlEventTouchUpInside)];
+        _moreButton.userInteractionEnabled = NO;
     }
     return _moreButton;
-}
-
-- (void)moreButtonClick:(UIButton *)button {
-    THNDomianLightViewController *domainLightVC = [[THNDomianLightViewController alloc] init];
-    domainLightVC.navViewTitle.text = self.infoModel.title;
-    [domainLightVC thn_setBrightSpotData:self.infoModel.brightSpot];
-    [self.nav pushViewController:domainLightVC animated:YES];
 }
 
 @end

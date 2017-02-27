@@ -128,7 +128,7 @@ static NSInteger const actionButtonTag  = 611;
                                                                                      @"scene_id":domainId} delegate:self];
     [self.goodsListRequest startRequestSuccess:^(FBRequest *request, id result) {
         NSArray *goodsArr = [[[result valueForKey:@"data"] valueForKey:@"rows"] valueForKey:@"product"];
-        NSLog(@"============ 地盘商品详情： %@", [NSString jsonStringWithObject:result]);
+//        NSLog(@"============ 地盘商品详情： %@", [NSString jsonStringWithObject:result]);
         if (goodsArr.count) {
             for (NSDictionary * goodsDic in goodsArr) {
                 GoodsRow *goodsModel = [[GoodsRow alloc] initWithDictionary:goodsDic];
@@ -360,7 +360,7 @@ static NSInteger const actionButtonTag  = 611;
 - (SGTopTitleView *)menuView {
     if (!_menuView) {
         _menuView = [[SGTopTitleView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 44)];
-        _menuView.staticTitleArr = @[@"情境推荐", @"产品推荐", @"地盘详情"];
+        _menuView.staticTitleArr = @[@"情境推荐", @"产品推荐", @"地盘信息"];
         _menuView.backgroundColor = [UIColor whiteColor];
         _menuView.delegate_SG = self;
         [_menuView staticTitleLabelSelecteded:_menuView.allTitleLabel[0]];

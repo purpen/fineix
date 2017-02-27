@@ -148,6 +148,12 @@
 - (void)thn_setNavigationViewUI {
     self.view.backgroundColor = [UIColor whiteColor];
     [[UIApplication sharedApplication] setStatusBarHidden:NO withAnimation:(UIStatusBarAnimationFade)];
+    self.delegate = self;
+    [self thn_addBarItemLeftBarButton:@"" image:@"icon_cancel"];
+}
+
+- (void)thn_leftBarItemSelected {
+    [self dismissViewControllerAnimated:YES completion:nil];
 }
 
 @end

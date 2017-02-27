@@ -247,6 +247,8 @@ static NSString *const URLShareLink = @"/gateway/share_link";
                 return _lightTextHeight;
             } else
                 return 0.01;
+        } else if (indexPath.row == 0) {
+            return 50;
         }
         return 44;
     }
@@ -254,7 +256,15 @@ static NSString *const URLShareLink = @"/gateway/share_link";
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-
+    if (indexPath.section == 1) {
+        if (indexPath.row == 2) {
+            THNDomianLightViewController *domainLightVC = [[THNDomianLightViewController alloc] init];
+            domainLightVC.navViewTitle.text = self.infoModel.title;
+            [domainLightVC thn_setBrightSpotData:self.infoModel.brightSpot];
+//            [self.navigationController pushViewController:domainLightVC animated:YES];
+            [self presentViewController:domainLightVC animated:YES completion:nil];
+        }
+    }
 }
 
 #pragma mark - 判断上／下滑状态

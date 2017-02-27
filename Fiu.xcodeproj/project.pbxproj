@@ -643,6 +643,9 @@
 		D85F16A51E5E737F0038E0BB /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D85F16A41E5E737F0038E0BB /* Assets.xcassets */; };
 		D85F16AC1E5E76A40038E0BB /* THNShareActionView.m in Sources */ = {isa = PBXBuildFile; fileRef = D85F16AB1E5E76A40038E0BB /* THNShareActionView.m */; };
 		D85F16B01E5EB0850038E0BB /* THND3inExplainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D85F16AF1E5EB0850038E0BB /* THND3inExplainViewController.m */; };
+		D85F19271E6033D20038E0BB /* THNNiceGoodsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D85F19261E6033D20038E0BB /* THNNiceGoodsViewController.m */; };
+		D85F192A1E60345E0038E0BB /* THNDomianLightViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D85F19291E60345E0038E0BB /* THNDomianLightViewController.m */; };
+		D85F192C1E6034EA0038E0BB /* GPUImage.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D85F192B1E6034EA0038E0BB /* GPUImage.framework */; };
 		D861BC6E1D7E977700A26022 /* THNBrandInfoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D861BC6D1D7E977700A26022 /* THNBrandInfoViewController.m */; };
 		D861BC711D7E995600A26022 /* THNBrandInfoCollectionReusableView.m in Sources */ = {isa = PBXBuildFile; fileRef = D861BC701D7E995600A26022 /* THNBrandInfoCollectionReusableView.m */; };
 		D86809031D622049002714B2 /* FBImageScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = D86809021D622049002714B2 /* FBImageScrollView.m */; };
@@ -819,7 +822,6 @@
 		D8E8FFC81D76D01B00DDC3E0 /* TagFlowLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = D8E8FFC71D76D01B00DDC3E0 /* TagFlowLayout.m */; };
 		D8E8FFCB1D77393400DDC3E0 /* THNUserAddGoodsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D8E8FFCA1D77393400DDC3E0 /* THNUserAddGoodsViewController.m */; };
 		D8E8FFCE1D773F6E00DDC3E0 /* THNUserAddGoodsTitleTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D8E8FFCD1D773F6E00DDC3E0 /* THNUserAddGoodsTitleTableViewCell.m */; };
-		D8F0DBC71DD4619700CB20BE /* libGPUImage.a in Frameworks */ = {isa = PBXBuildFile; fileRef = D8F0DBC61DD4619700CB20BE /* libGPUImage.a */; };
 		D8F80B8E1DD30F2700C086FA /* THNAdjustView.m in Sources */ = {isa = PBXBuildFile; fileRef = D8F80B8D1DD30F2700C086FA /* THNAdjustView.m */; };
 		D8F80B911DD3103500C086FA /* THNAdjustCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D8F80B901DD3103500C086FA /* THNAdjustCollectionViewCell.m */; };
 /* End PBXBuildFile section */
@@ -1968,6 +1970,11 @@
 		D85F16AB1E5E76A40038E0BB /* THNShareActionView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THNShareActionView.m; sourceTree = "<group>"; };
 		D85F16AE1E5EB0850038E0BB /* THND3inExplainViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THND3inExplainViewController.h; sourceTree = "<group>"; };
 		D85F16AF1E5EB0850038E0BB /* THND3inExplainViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THND3inExplainViewController.m; sourceTree = "<group>"; };
+		D85F19251E6033D20038E0BB /* THNNiceGoodsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THNNiceGoodsViewController.h; sourceTree = "<group>"; };
+		D85F19261E6033D20038E0BB /* THNNiceGoodsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THNNiceGoodsViewController.m; sourceTree = "<group>"; };
+		D85F19281E60345E0038E0BB /* THNDomianLightViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THNDomianLightViewController.h; sourceTree = "<group>"; };
+		D85F19291E60345E0038E0BB /* THNDomianLightViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THNDomianLightViewController.m; sourceTree = "<group>"; };
+		D85F192B1E6034EA0038E0BB /* GPUImage.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GPUImage.framework; path = "../../Library/Developer/Xcode/DerivedData/Fiu-ehypromuoffezodsteqohuqxbmoz/Build/Products/Debug-iphoneos/GPUImage/GPUImage.framework"; sourceTree = "<group>"; };
 		D861BC6C1D7E977700A26022 /* THNBrandInfoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THNBrandInfoViewController.h; sourceTree = "<group>"; };
 		D861BC6D1D7E977700A26022 /* THNBrandInfoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THNBrandInfoViewController.m; sourceTree = "<group>"; };
 		D861BC6F1D7E995600A26022 /* THNBrandInfoCollectionReusableView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THNBrandInfoCollectionReusableView.h; sourceTree = "<group>"; };
@@ -2276,10 +2283,10 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D85F192C1E6034EA0038E0BB /* GPUImage.framework in Frameworks */,
 				280045111C805B78005F5C2E /* CoreLocation.framework in Frameworks */,
 				1F99E1731E51A4A6000D3D73 /* MapKit.framework in Frameworks */,
 				D8482D211E136231000B511C /* BaiduMapAPI_Base.framework in Frameworks */,
-				D8F0DBC71DD4619700CB20BE /* libGPUImage.a in Frameworks */,
 				D8482D221E136231000B511C /* BaiduMapAPI_Cloud.framework in Frameworks */,
 				D8AC3DFD1D2CFFB200148522 /* ImageIO.framework in Frameworks */,
 				D80FB1471DAB30190060C561 /* UserNotifications.framework in Frameworks */,
@@ -4011,6 +4018,7 @@
 		4121957EDE4D4049941B2B88 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				D85F192B1E6034EA0038E0BB /* GPUImage.framework */,
 				1F99E1721E51A4A6000D3D73 /* MapKit.framework */,
 				D8F0DBC61DD4619700CB20BE /* libGPUImage.a */,
 				D80FB1461DAB30190060C561 /* UserNotifications.framework */,
@@ -4808,6 +4816,8 @@
 		D85174481D5878C8005F5722 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
+				D85F19251E6033D20038E0BB /* THNNiceGoodsViewController.h */,
+				D85F19261E6033D20038E0BB /* THNNiceGoodsViewController.m */,
 				D85174521D587908005F5722 /* THNMallViewController.h */,
 				D85174531D587908005F5722 /* THNMallViewController.m */,
 				D861BC6C1D7E977700A26022 /* THNBrandInfoViewController.h */,
@@ -5391,6 +5401,8 @@
 			children = (
 				D8884DDB1E56D58400CEE159 /* THNDomainInfoViewController.h */,
 				D8884DDC1E56D58400CEE159 /* THNDomainInfoViewController.m */,
+				D85F19281E60345E0038E0BB /* THNDomianLightViewController.h */,
+				D85F19291E60345E0038E0BB /* THNDomianLightViewController.m */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -6249,6 +6261,7 @@
 				D84763381D427F7500C88379 /* AppDelegate+UMAnalytics.m in Sources */,
 				D869DB4F1DF7A98000793038 /* THNLogisticsInfoViewController.m in Sources */,
 				1F2A8FB81CF40277005116C7 /* FiuBrandRow.m in Sources */,
+				D85F192A1E60345E0038E0BB /* THNDomianLightViewController.m in Sources */,
 				D8117A001E598A310094E7EB /* THNDomainMenuTableViewCell.m in Sources */,
 				D8117ADC1E5A89D50094E7EB /* HomeSceneListData.m in Sources */,
 				1F2AFC811D88170B00DA6035 /* FiuSceneInfo.m in Sources */,
@@ -6409,6 +6422,7 @@
 				1F2A8FE01CF40277005116C7 /* InfoRecommendTableViewCell.m in Sources */,
 				1F2AFC861D88170B00DA6035 /* FiuSceneLocation.m in Sources */,
 				1F2AFC991D88170B00DA6035 /* MyPageBtnCollectionViewCell.m in Sources */,
+				D85F19271E6033D20038E0BB /* THNNiceGoodsViewController.m in Sources */,
 				D8DDEE101D338D760020FF66 /* FBPopupView.m in Sources */,
 				D8ACA2221DD9B35F00A5CDA7 /* THNFilterValueView.m in Sources */,
 				1F2A8FD61CF40277005116C7 /* FBOrderOtherTableViewCell.m in Sources */,
