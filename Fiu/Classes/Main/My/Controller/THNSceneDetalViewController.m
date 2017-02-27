@@ -292,6 +292,7 @@ static NSString *const URLDeleteScene = @"/scene_sight/delete";
     } else if (indexPath.row == 8) {
         THNXiangGuanQingJingTableViewCell * cell = [tableView dequeueReusableCellWithIdentifier:THNXIANGGuanQingJingTableViewCell];
         cell.nav = self.navigationController;
+        cell.vc = self;
         NSMutableArray *ary = [NSMutableArray array];
         if (self.model.category_ids.count > 1) {
             [ary addObjectsFromArray:self.model.category_ids];
@@ -407,7 +408,7 @@ static NSString *const URLDeleteScene = @"/scene_sight/delete";
         if ([self.comments count] > 0) {
             return _commentHigh + 2;
         } else {
-            return 0.01f;
+            return 0.001f;
         }
     } else if (indexPath.row == 6) {
         if ([self.comments count] > 1) {
@@ -417,14 +418,14 @@ static NSString *const URLDeleteScene = @"/scene_sight/delete";
         }
     } else if (indexPath.row == 4) {
         if ([self.model.products count] >= 1) {
-            return 50 * [self.model.products count] + 10;
+            return 65 * [self.model.products count] + 10;
         } else {
             return 0.01f;
         }
     } else if (indexPath.row == 7) {
         return 450;
     } else if (indexPath.row == 8) {
-        return 660;
+        return (900/2 + 10) * 6 ;
     }
     return 44;
 }

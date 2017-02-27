@@ -13,12 +13,14 @@
 
 @interface THNXiangGuanQingJingTableViewCell : UITableViewCell
 
-@property (nonatomic, strong) UICollectionView *collectionView;
+@property (nonatomic, strong) UITableView *tableView;
 /**  */
 @property (nonatomic, strong) NSMutableArray *modelAry;
 /**  */
 @property (nonatomic, strong) UINavigationController *nav;
 /**  */
 @property(nonatomic,copy) NSString *string;
+/**  */
+@property (nonatomic, strong) UIViewController *vc;
 
 @end

@@ -287,6 +287,7 @@
     }
     else if(indexPath.section == 4){
         MyPageBtnCollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"MyPageBtnCollectionViewCell" forIndexPath:indexPath];
+        cell.nav = self.navigationController;
         if ([_counterModel.message_total_count intValue] == 0) {
             //不显示
             [self.tipNumView1 removeFromSuperview];
@@ -445,7 +446,7 @@
         return CGSizeMake(SCREEN_WIDTH, 120.5/667.0*SCREEN_HEIGHT);
     }
     if (indexPath.section == 4) {
-        return CGSizeMake(SCREEN_WIDTH, 190/667.0*SCREEN_HEIGHT);
+        return CGSizeMake(SCREEN_WIDTH, (190 + 140)/667.0*SCREEN_HEIGHT);
     }
     if (indexPath.section == 5) {
         return CGSizeMake(SCREEN_HEIGHT, 200);

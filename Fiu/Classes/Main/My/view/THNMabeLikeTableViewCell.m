@@ -59,7 +59,7 @@
         self.biaoTiLabel.textColor = [UIColor colorWithHexString:@"#666666"];
         [self.contentView addSubview:self.biaoTiLabel];
         [_biaoTiLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.left.mas_equalTo(self.contentView.mas_left).mas_offset(20);
+            make.left.mas_equalTo(self.contentView.mas_left).mas_offset(15);
             make.top.mas_equalTo(self.contentView.mas_top).mas_offset(17);
         }];
     }
