@@ -422,6 +422,8 @@
 		1FEB23A21E5EDFC300FFF692 /* LSActionSheet.m in Sources */ = {isa = PBXBuildFile; fileRef = 1FEB23A11E5EDFC300FFF692 /* LSActionSheet.m */; };
 		1FEB23A51E5FE70C00FFF692 /* THNFindFriendTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 1FEB23A41E5FE70C00FFF692 /* THNFindFriendTableViewCell.m */; };
 		1FEB23A81E60190000FFF692 /* THNQingjingCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 1FEB23A71E60190000FFF692 /* THNQingjingCollectionViewCell.m */; };
+		1FEB23B61E63BA3000FFF692 /* THNDomianLightViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1FEB23B51E63BA3000FFF692 /* THNDomianLightViewController.m */; };
+		1FEB23B91E63BA9F00FFF692 /* THNNiceGoodsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1FEB23B81E63BA9F00FFF692 /* THNNiceGoodsViewController.m */; };
 		1FF36E9A1D4F192400EB3C93 /* JDPayViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1FF36E981D4F192400EB3C93 /* JDPayViewController.m */; };
 		1FF36E9B1D4F192400EB3C93 /* JDPayViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1FF36E991D4F192400EB3C93 /* JDPayViewController.xib */; };
 		1FF36EA01D4F401600EB3C93 /* JDPayModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 1FF36E9F1D4F401600EB3C93 /* JDPayModel.m */; };
@@ -432,7 +434,7 @@
 		280045171C805C92005F5C2E /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 280045161C805C92005F5C2E /* SystemConfiguration.framework */; };
 		2800451B1C805CAC005F5C2E /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2800451A1C805CAC005F5C2E /* Security.framework */; };
 		2800451F1C805CCA005F5C2E /* CoreTelephony.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2800451E1C805CCA005F5C2E /* CoreTelephony.framework */; };
-		AA58DD9AA6D768D60E22B45A /* libPods-Fiu.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 4217876D8DC0B7BF26D9A2F0 /* libPods-Fiu.a */; };
+		A0B56FAC003975C512B27F85 /* Pods_Fiu.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 68A0057D6F84E0F916A86DAD /* Pods_Fiu.framework */; };
 		D802D7791C821D41007AFA3D /* AssetsLibrary.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D802D7781C821D41007AFA3D /* AssetsLibrary.framework */; };
 		D8035F2F1CB77D0C001920F9 /* UIImage+Helper.m in Sources */ = {isa = PBXBuildFile; fileRef = D8035F2E1CB77D0C001920F9 /* UIImage+Helper.m */; };
 		D8035F3B1CB784B3001920F9 /* UILable+Frame.m in Sources */ = {isa = PBXBuildFile; fileRef = D8035F3A1CB784B3001920F9 /* UILable+Frame.m */; };
@@ -819,7 +821,6 @@
 		D8E8FFC81D76D01B00DDC3E0 /* TagFlowLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = D8E8FFC71D76D01B00DDC3E0 /* TagFlowLayout.m */; };
 		D8E8FFCB1D77393400DDC3E0 /* THNUserAddGoodsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D8E8FFCA1D77393400DDC3E0 /* THNUserAddGoodsViewController.m */; };
 		D8E8FFCE1D773F6E00DDC3E0 /* THNUserAddGoodsTitleTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D8E8FFCD1D773F6E00DDC3E0 /* THNUserAddGoodsTitleTableViewCell.m */; };
-		D8F0DBC71DD4619700CB20BE /* libGPUImage.a in Frameworks */ = {isa = PBXBuildFile; fileRef = D8F0DBC61DD4619700CB20BE /* libGPUImage.a */; };
 		D8F80B8E1DD30F2700C086FA /* THNAdjustView.m in Sources */ = {isa = PBXBuildFile; fileRef = D8F80B8D1DD30F2700C086FA /* THNAdjustView.m */; };
 		D8F80B911DD3103500C086FA /* THNAdjustCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D8F80B901DD3103500C086FA /* THNAdjustCollectionViewCell.m */; };
 /* End PBXBuildFile section */
@@ -1540,6 +1541,10 @@
 		1FEB23A41E5FE70C00FFF692 /* THNFindFriendTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THNFindFriendTableViewCell.m; sourceTree = "<group>"; };
 		1FEB23A61E60190000FFF692 /* THNQingjingCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THNQingjingCollectionViewCell.h; sourceTree = "<group>"; };
 		1FEB23A71E60190000FFF692 /* THNQingjingCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THNQingjingCollectionViewCell.m; sourceTree = "<group>"; };
+		1FEB23B41E63BA3000FFF692 /* THNDomianLightViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THNDomianLightViewController.h; sourceTree = "<group>"; };
+		1FEB23B51E63BA3000FFF692 /* THNDomianLightViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THNDomianLightViewController.m; sourceTree = "<group>"; };
+		1FEB23B71E63BA9F00FFF692 /* THNNiceGoodsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THNNiceGoodsViewController.h; sourceTree = "<group>"; };
+		1FEB23B81E63BA9F00FFF692 /* THNNiceGoodsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THNNiceGoodsViewController.m; sourceTree = "<group>"; };
 		1FF36E971D4F192400EB3C93 /* JDPayViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JDPayViewController.h; sourceTree = "<group>"; };
 		1FF36E981D4F192400EB3C93 /* JDPayViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JDPayViewController.m; sourceTree = "<group>"; };
 		1FF36E991D4F192400EB3C93 /* JDPayViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = JDPayViewController.xib; sourceTree = "<group>"; };
@@ -1556,7 +1561,7 @@
 		2800451C1C805CBD005F5C2E /* libsqlite3.0.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libsqlite3.0.tbd; path = usr/lib/libsqlite3.0.tbd; sourceTree = SDKROOT; };
 		2800451E1C805CCA005F5C2E /* CoreTelephony.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreTelephony.framework; path = System/Library/Frameworks/CoreTelephony.framework; sourceTree = SDKROOT; };
 		280045201C805CD7005F5C2E /* libstdc++.6.0.9.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = "libstdc++.6.0.9.tbd"; path = "usr/lib/libstdc++.6.0.9.tbd"; sourceTree = SDKROOT; };
-		4217876D8DC0B7BF26D9A2F0 /* libPods-Fiu.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Fiu.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		68A0057D6F84E0F916A86DAD /* Pods_Fiu.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Fiu.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		800507341C7A9CDD005AF0BE /* Fiu.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Fiu.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C47EFC95D2619288EFC17844 /* Pods-Fiu.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Fiu.release.xcconfig"; path = "Pods/Target Support Files/Pods-Fiu/Pods-Fiu.release.xcconfig"; sourceTree = "<group>"; };
 		CDFDA58CBF04D1AABBF70FFD /* Pods-Fiu.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Fiu.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Fiu/Pods-Fiu.debug.xcconfig"; sourceTree = "<group>"; };
@@ -2279,7 +2284,6 @@
 				280045111C805B78005F5C2E /* CoreLocation.framework in Frameworks */,
 				1F99E1731E51A4A6000D3D73 /* MapKit.framework in Frameworks */,
 				D8482D211E136231000B511C /* BaiduMapAPI_Base.framework in Frameworks */,
-				D8F0DBC71DD4619700CB20BE /* libGPUImage.a in Frameworks */,
 				D8482D221E136231000B511C /* BaiduMapAPI_Cloud.framework in Frameworks */,
 				D8AC3DFD1D2CFFB200148522 /* ImageIO.framework in Frameworks */,
 				D80FB1471DAB30190060C561 /* UserNotifications.framework in Frameworks */,
@@ -2322,7 +2326,7 @@
 				2800451B1C805CAC005F5C2E /* Security.framework in Frameworks */,
 				280045151C805B8C005F5C2E /* OpenGLES.framework in Frameworks */,
 				D8482D261E136231000B511C /* BaiduMapAPI_Search.framework in Frameworks */,
-				AA58DD9AA6D768D60E22B45A /* libPods-Fiu.a in Frameworks */,
+				A0B56FAC003975C512B27F85 /* Pods_Fiu.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -4050,7 +4054,7 @@
 				280045141C805B8C005F5C2E /* OpenGLES.framework */,
 				280045121C805B82005F5C2E /* QuartzCore.framework */,
 				280045101C805B78005F5C2E /* CoreLocation.framework */,
-				4217876D8DC0B7BF26D9A2F0 /* libPods-Fiu.a */,
+				68A0057D6F84E0F916A86DAD /* Pods_Fiu.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -4808,6 +4812,8 @@
 		D85174481D5878C8005F5722 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
+				1FEB23B71E63BA9F00FFF692 /* THNNiceGoodsViewController.h */,
+				1FEB23B81E63BA9F00FFF692 /* THNNiceGoodsViewController.m */,
 				D85174521D587908005F5722 /* THNMallViewController.h */,
 				D85174531D587908005F5722 /* THNMallViewController.m */,
 				D861BC6C1D7E977700A26022 /* THNBrandInfoViewController.h */,
@@ -5389,6 +5395,8 @@
 		D8884DD81E56D55F00CEE159 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
+				1FEB23B41E63BA3000FFF692 /* THNDomianLightViewController.h */,
+				1FEB23B51E63BA3000FFF692 /* THNDomianLightViewController.m */,
 				D8884DDB1E56D58400CEE159 /* THNDomainInfoViewController.h */,
 				D8884DDC1E56D58400CEE159 /* THNDomainInfoViewController.m */,
 			);
@@ -5838,6 +5846,7 @@
 				D80878D61D6AD18E00C1FFA0 /* THNMallNewGoodsCollectionViewCell.m in Sources */,
 				D857C45D1E2CAF7700569B3D /* THNWithdrawRecordViewController.m in Sources */,
 				D8F80B8E1DD30F2700C086FA /* THNAdjustView.m in Sources */,
+				1FEB23B91E63BA9F00FFF692 /* THNNiceGoodsViewController.m in Sources */,
 				1F2AFD281D88182200DA6035 /* GuidePageViewController.m in Sources */,
 				1F2AFD8C1D88186C00DA6035 /* RecommendedScenarioModel.m in Sources */,
 				D8117B041E5AADC30094E7EB /* HomeSubjectData.m in Sources */,
@@ -5854,6 +5863,7 @@
 				D81318081D923A8C007CE71C /* THNRemindViewController.m in Sources */,
 				1F2A8FC31CF40277005116C7 /* CommentModelUser.m in Sources */,
 				1F2AFDC71D8818A400DA6035 /* AllOderViewController.m in Sources */,
+				1FEB23B61E63BA3000FFF692 /* THNDomianLightViewController.m in Sources */,
 				1FD10CB21D62E89D005898EE /* THNContentViewController.m in Sources */,
 				D8117AC91E5A89D50094E7EB /* RollImageData.m in Sources */,
 				D85174571D587917005F5722 /* THNMyCenterViewController.m in Sources */,

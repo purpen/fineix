@@ -13,5 +13,4 @@
 @interface THNFindFriendTableViewCell : UICollectionViewCell
 
 
-
 @end

@@ -148,17 +148,6 @@ caption = _caption;
                     [self performSelectorOnMainThread:@selector(imageLoadingComplete) withObject:nil waitUntilDone:NO];
                 }
             }];
-//            [manager loadImageWithURL:_photoURL options:SDWebImageRetryFailed|SDWebImageHandleCookies progress:^(NSInteger receivedSize, NSInteger expectedSize, NSURL * _Nullable targetURL) {
-//                CGFloat progress = ((CGFloat)receivedSize)/((CGFloat)expectedSize);
-//                if (self.progressUpdateBlock) {
-//                    self.progressUpdateBlock(progress);
-//                }
-//            } completed:^(UIImage * _Nullable image, NSData * _Nullable data, NSError * _Nullable error, SDImageCacheType cacheType, BOOL finished, NSURL * _Nullable imageURL) {
-//                if (image) {
-//                    self.underlyingImage = image;
-//                    [self performSelectorOnMainThread:@selector(imageLoadingComplete) withObject:nil waitUntilDone:NO];
-//                }
-//            }];
 
         } else {
             // Failed - no source
@@ -212,7 +201,8 @@ caption = _caption;
 }*/
 
 - (UIImage *)decodedImageWithImage:(UIImage *)image {
-    if (image.images) {
+    if (image.images)
+    {
         // Do not decode animated images
         return image;
     }

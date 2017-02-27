@@ -8,20 +8,16 @@
 
 #import <UIKit/UIKit.h>
 #import "UMSocialPlatformConfig.h"
-#import "UMSBaeViewController.h"
 
 @class UMSocialMessageObject;
 
-@interface UMSocialShareEditViewController : UMSBaeViewController
+@interface UMSocialShareEditViewController : UIViewController
 
 @property (nonatomic,strong) UIImageView* editBar;
 @property (nonatomic,strong) UILabel* numLabel;
 @property (nonatomic,strong) UIImageView* imageView;
 @property (nonatomic,strong) UIButton* delBtn;
 @property (nonatomic,strong) UITextView* editView;
-@property (nonatomic,strong) UIView* editViewBack;
-@property (nonatomic,strong) UILabel* titleLabel;
-@property (nonatomic,strong) UILabel* desLabel;
 @property (nonatomic,strong) UMSocialMessageObject *shareContent;
 @property (nonatomic, copy)  UMSocialRequestCompletionHandler shareCompletionBlock;
 @property (nonatomic,strong) NSString* usid;

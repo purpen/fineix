@@ -128,6 +128,13 @@
             make.centerX.mas_equalTo(self.btn9.mas_centerX);
             make.top.mas_equalTo(self.btn9.mas_bottom).with.offset(8/667.*SCREEN_HEIGHT);
         }];
+        
+        self.zhaoMuTu = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"zhaoMu"]];
+        [self.contentView addSubview:self.zhaoMuTu];
+        [_zhaoMuTu mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.centerX.mas_equalTo(self.contentView.mas_centerX);
+            make.top.mas_equalTo(self.btn9.mas_bottom).with.offset(20/667.0*SCREEN_HEIGHT);
+        }];
     }
     return self;
 }

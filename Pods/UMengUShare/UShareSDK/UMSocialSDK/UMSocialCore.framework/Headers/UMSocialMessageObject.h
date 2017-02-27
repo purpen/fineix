@@ -21,7 +21,7 @@
 @property (nonatomic,copy)NSString* title;
 
 /**
- * text 文本内容
+ * @param text 文本内容
  * @note 非纯文本分享文本
  */
 @property (nonatomic, copy) NSString  *text;
@@ -207,11 +207,6 @@
 @interface UMShareEmailObject : UMShareObject
 
 /**
- *  主题
- */
-@property (nonatomic, strong) NSString *subject;
-
-/**
  * 接收人
  */
 @property (nonatomic, strong) NSArray *toRecipients;
@@ -232,20 +227,9 @@
 @property (nonatomic, copy) NSString *emailContent;
 
 /**
- * 图片,最好是本地图片（UIImage,或者NSdata）
+ * 图片
  */
 @property (nonatomic, strong) id emailImage;
-
-/**
- *  发送图片的类型 @see MIME 
- *   默认 "image/ *"
- */
-@property (nonatomic, copy) NSString* emailImageType;
-/**
- *  发送图片的名字
- *   默认 "um_share_image.png"
- */
-@property (nonatomic, copy) NSString* emailImageName;
 
 /**
  * 文件（NSData）
@@ -254,14 +238,11 @@
 
 /**
  * 文件格式
- *  @see MIME
- *  默认 "text/ *"
  */
 @property (nonatomic, copy) NSString *fileType;
 
 /**
  * 文件名,(例如图片 imageName.png, 文件名后要跟文件后缀名，否则没法识别，导致类似图片不显示的问题)
- * 默认 "um_share_file.txt"
  */
 @property (nonatomic, copy) NSString *fileName;
 
@@ -271,8 +252,6 @@
 /*! @brief 分享消息中的短信分享对象
  *
  * @see UMSocialMessageObject
- * @discuss UMShareSmsObject只能发送的附件是图片！！！！
- *  如果发送其他的文件的话，虽然能在短信界面显示发送的文件，但是会发送不成功
  */
 @interface UMShareSmsObject : UMShareObject
 
@@ -282,11 +261,6 @@
 @property (nonatomic, strong) NSArray *recipients;
 
 /**
- *  主题
- */
-@property (nonatomic, strong) NSString *subject;
-
-/**
  * 文本内容
  */
 @property (nonatomic, copy) NSString *smsContent;
@@ -294,12 +268,8 @@
 /**
  * 图片
  */
-@property (nonatomic, strong) id smsImage;//UIImage对象必填
-@property (nonatomic, copy) NSString *imageType;//图片格式必填，必须指定数据格式，如png图片格式应传入@"png"
-@property (nonatomic, copy) NSString *imageName;//图片 例如 imageName.png, 文件名后要跟文件后缀名，否则没法识别，导致类似图片不显示的问题)
+@property (nonatomic, strong) id smsImage;
 
-
-#pragma mark - 以下字段为非图片的属性
 /**
  * 文件数据（NSData）
  * 必填
@@ -308,17 +278,17 @@
 
 /**
  * 文件格式
- * 必填，必须指定数据格式，如png图片格式应传入@"txt"
+ * 必填，必须指定数据格式，如png图片格式应传入@"png"
  */
 @property (nonatomic, copy) NSString *fileType;
 
 /**
- * 文件名,(例如图片 fileName.txt, 文件名后要跟文件后缀名，否则没法识别，导致类似图片不显示的问题)
+ * 文件名,(例如图片 imageName.png, 文件名后要跟文件后缀名，否则没法识别，导致类似图片不显示的问题)
  */
 @property (nonatomic, copy) NSString *fileName;
 
 /**
- * 文件地址url(http:// or file:// ...../fileName.txt)
+ * 文件地址url
  */
 @property (nonatomic, copy) NSString *fileUrl;
 

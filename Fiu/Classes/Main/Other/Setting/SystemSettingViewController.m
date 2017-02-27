@@ -172,9 +172,6 @@ static NSString *const logOut = @"/auth/logout";
     
     AboutViewController *vc = [[AboutViewController alloc] init];
     [self.navigationController pushViewController:vc animated:YES];
-    
-    
-    
 }
 
 

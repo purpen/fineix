@@ -34,7 +34,7 @@
         self.name.highlightedTextColor = defaultColor;
         [self.contentView addSubview:self.name];
         
-        self.yellowView = [[UIView alloc] initWithFrame:CGRectMake(0, 5, 4, 45)];
+        self.yellowView = [[UIView alloc] initWithFrame:CGRectMake(0, 5, 4, 20)];
         self.yellowView.backgroundColor = defaultColor;
         [self.contentView addSubview:self.yellowView];
     }

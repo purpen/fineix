@@ -15,8 +15,7 @@
 - (UIImage *)imageForPhoto:(id<IDMPhoto>)photo;
 - (void)cancelControlHiding;
 - (void)hideControlsAfterDelay;
-//- (void)toggleControls;
-- (void)handleSingleTap;
+- (void)toggleControls;
 @end
 
 // Private methods and properties
@@ -52,7 +51,8 @@
         CGFloat screenWidth = screenBound.size.width;
         CGFloat screenHeight = screenBound.size.height;
         
-        if ([[UIApplication sharedApplication] statusBarOrientation] == UIInterfaceOrientationLandscapeLeft || [[UIApplication sharedApplication] statusBarOrientation] == UIInterfaceOrientationLandscapeRight) {
+        if ([[UIDevice currentDevice] orientation] == UIDeviceOrientationLandscapeLeft ||
+            [[UIDevice currentDevice] orientation] == UIDeviceOrientationLandscapeRight) {
             screenWidth = screenBound.size.height;
             screenHeight = screenBound.size.width;
         }
@@ -274,8 +274,7 @@
 #pragma mark - Tap Detection
 
 - (void)handleSingleTap:(CGPoint)touchPoint {
-//	[_photoBrowser performSelector:@selector(toggleControls) withObject:nil afterDelay:0.2];
-	[_photoBrowser performSelector:@selector(handleSingleTap) withObject:nil afterDelay:0.2];
+	[_photoBrowser performSelector:@selector(toggleControls) withObject:nil afterDelay:0.2];
 }
 
 - (void)handleDoubleTap:(CGPoint)touchPoint {
@@ -284,7 +283,7 @@
 	[NSObject cancelPreviousPerformRequestsWithTarget:_photoBrowser];
 	
 	// Zoom
-	if (self.zoomScale == self.maximumDoubleTapZoomScale) {
+	if (self.zoomScale == self.maximumZoomScale) {
 		
 		// Zoom out
 		[self setZoomScale:self.minimumZoomScale animated:YES];
@@ -294,8 +293,8 @@
 		// Zoom in
 		CGSize targetSize = CGSizeMake(self.frame.size.width / self.maximumDoubleTapZoomScale, self.frame.size.height / self.maximumDoubleTapZoomScale);
 		CGPoint targetPoint = CGPointMake(touchPoint.x - targetSize.width / 2, touchPoint.y - targetSize.height / 2);
-		
-		[self zoomToRect:CGRectMake(targetPoint.x, targetPoint.y, targetSize.width, targetSize.height) animated:YES];
+
+		[self zoomToRect:CGRectMake(touchPoint.x, touchPoint.y, 1, 1) animated:YES];
 		
 	}
 	

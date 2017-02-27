@@ -42,6 +42,7 @@
 #import "THNDivideCollectionViewCell.h"
 #import "THNOrderCollectionViewCell.h"
 #import "PictureToolViewController.h"
+#import "AboutViewController.h"
 
 @interface MyPageViewController ()<THNNavigationBarItemsDelegate,UICollectionViewDelegate,UICollectionViewDataSource>
 {
@@ -351,11 +352,19 @@
         self.botView.frame = CGRectMake(146/667.0*SCREEN_HEIGHT, 0, SCREEN_WIDTH, 88);
         [self.botView.aboutBtn addTarget:self action:@selector(aboutBtn:) forControlEvents:UIControlEventTouchUpInside];
         [self.botView.optionBtn addTarget:self action:@selector(optionBtn:) forControlEvents:UIControlEventTouchUpInside];
+        [self.botView.qiyeQingdingzhiBtn addTarget:self action:@selector(qiye) forControlEvents:UIControlEventTouchUpInside];
         [cell.contentView addSubview:self.botView];
         return cell;
     }
     return nil;
     
+}
+
+-(void)qiye{
+    AboutViewController *vc = [[AboutViewController alloc] init];
+    vc.text = @"企业轻定制";
+    vc.url = @"https://m.taihuoniao.com/storage/custom?from=app";
+    [self.navigationController pushViewController:vc animated:YES];
 }
 
 #pragma mark “创建情景”的按钮事件

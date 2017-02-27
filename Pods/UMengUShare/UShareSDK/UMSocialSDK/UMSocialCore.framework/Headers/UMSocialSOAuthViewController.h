@@ -7,11 +7,10 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "UMSBaeViewController.h"
 
 #import "UMSocialPlatformConfig.h"
 
-@interface UMSocialSOAuthViewController : UMSBaeViewController<UIWebViewDelegate,UIAlertViewDelegate>
+@interface UMSocialSOAuthViewController : UIViewController<UIWebViewDelegate,UIAlertViewDelegate>
 
 @property (nonatomic,strong)  UIWebView *webView;
 
