@@ -12,13 +12,13 @@
 
 @interface FBCarItemsTableViewCell : UITableViewCell
 
-@pro_strong UIButton              *chooseBtn;          //  选择按钮
-@pro_strong UIImageView           *goodsImg;           //  商品图片
-@pro_strong UILabel               *goodsTitle;         //  商品标题
-@pro_strong UILabel               *goodsColor;         //  商品颜色
-@pro_strong UILabel               *goodsNum;           //  商品数量
-@pro_strong UILabel               *goodsPrice;         //  商品价格
-@pro_strong UILabel               *JDGoodsLab;         //  京东商品
+@property (nonatomic, strong) UIButton              *chooseBtn;          //  选择按钮
+@property (nonatomic, strong) UIImageView           *goodsImg;           //  商品图片
+@property (nonatomic, strong) UILabel               *goodsTitle;         //  商品标题
+@property (nonatomic, strong) UILabel               *goodsColor;         //  商品颜色
+@property (nonatomic, strong) UILabel               *goodsNum;           //  商品数量
+@property (nonatomic, strong) UILabel               *goodsPrice;         //  商品价格
+@property (nonatomic, strong) UILabel               *JDGoodsLab;         //  京东商品
 
 - (void)setGoodsCarItemData:(CarGoodsModelItem *)model;
 

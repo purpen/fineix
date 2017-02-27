@@ -191,6 +191,7 @@
     [self dismissViewControllerAnimated:YES completion:nil];
 }
 
+#pragma mark - 立即购买
 - (void)buyingBtnClick {
     if ([self isUserLogin]) {
         if (self.skuId.length > 0) {
@@ -198,7 +199,10 @@
             NSString * type = @"2";
             NSString * targetId;
             targetId = self.skuId;
-            NSDictionary * orderDict = @{@"target_id":targetId, @"type":type, @"n":num, @"referral_code":[self thn_getGoodsReferralCode]};
+            if (self.storageId.length == 0) {
+                self.storageId = @"";
+            }
+            NSDictionary * orderDict = @{@"target_id":targetId, @"type":type, @"n":num, @"referral_code":[self thn_getGoodsReferralCode], @"storage_id":self.storageId};
             [self dismissViewControllerAnimated:YES completion:^{
                 self.buyingGoodsBlock(orderDict); 
             }];
@@ -212,6 +216,7 @@
     }
 }
 
+#pragma mark - 加入购物车
 - (void)addCarBtnClick {
     if ([self isUserLogin]) {
         if (self.skuId.length > 0) {
@@ -219,7 +224,10 @@
             NSString * type = @"2";
             NSString * targetId;
             targetId = self.skuId;
-            NSDictionary *orderDict = @{@"target_id":targetId, @"type":type, @"n":num, @"referral_code":[self thn_getGoodsReferralCode]};
+            if (self.storageId.length == 0) {
+                self.storageId = @"";
+            }
+            NSDictionary *orderDict = @{@"target_id":targetId, @"type":type, @"n":num, @"referral_code":[self thn_getGoodsReferralCode], @"storage_id":self.storageId};
             [self dismissViewControllerAnimated:YES completion:^{
                 self.addGoodsCarBlock(orderDict);
             }];

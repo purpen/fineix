@@ -11,6 +11,8 @@
 #import "NiceDomainRow.h"
 #import "HelpUserRow.h"
 
+typedef void(^OpenUserHelp)(NSString *idx);
+
 @interface THNDomainTableViewCell : UITableViewCell <
     UICollectionViewDelegate,
     UICollectionViewDataSource,
@@ -23,6 +25,7 @@
 @property (nonatomic, strong) NSMutableArray *domainIdMarr;
 @property (nonatomic, strong) NSMutableArray *userHelpMarr;
 @property (nonatomic, strong) NSMutableArray *userHelpIdMarr;
+@property (nonatomic, copy) OpenUserHelp openUserHelp;
 
 /**
  数据赋值

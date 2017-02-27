@@ -486,7 +486,7 @@ static NSString *const homeDataPath = [NSHomeDirectory() stringByAppendingPathCo
 - (void)thn_networkSubjectInfoData:(NSString *)idx {
     self.subjectInfoRequest = [FBAPI getWithUrlString:URLSubjectView requestDictionary:@{@"id":idx} delegate:self];
     [self.subjectInfoRequest startRequestSuccess:^(FBRequest *request, id result) {
-
+        NSLog(@"===== 专题详情%@", [NSString jsonStringWithObject:result]);
         if (![[[result valueForKey:@"data"] valueForKey:@"type"] isKindOfClass:[NSNull class]]) {
             _subjectType = [[[result valueForKey:@"data"] valueForKey:@"type"] integerValue];
             [self thn_openSubjectTypeController:self.navigationController type:_subjectType subjectId:idx];
@@ -613,7 +613,7 @@ static NSString *const homeDataPath = [NSHomeDirectory() stringByAppendingPathCo
 #pragma mark - 列表滚动到底部的背景
 - (THNHomeTableViewFooter *)footerImageView {
     if (!_footerImageView) {
-        _footerImageView = [[THNHomeTableViewFooter alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 40)];
+        _footerImageView = [[THNHomeTableViewFooter alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 60)];
     }
     return _footerImageView;
 }
@@ -704,6 +704,9 @@ static NSString *const homeDataPath = [NSHomeDirectory() stringByAppendingPathCo
             cell = [[THNDomainTableViewCell alloc] initWithStyle:(UITableViewCellStyleDefault) reuseIdentifier:domainCellId];
             if (self.userHelpMarr.count) {
                 [cell thn_setUserHelpModelArr:self.userHelpMarr type:0];
+                cell.openUserHelp = ^(NSString *idx) {
+                    [weakSelf thn_networkSubjectInfoData:idx];
+                };
             }
             cell.nav = self.navigationController;
             return cell;

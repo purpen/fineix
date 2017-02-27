@@ -18,17 +18,16 @@
 
 @interface FBMenuView : UIView
 
-@pro_strong UIScrollView            *   menuRollView;   //  滑动视图
-@pro_strong UILabel                 *   line;           //  底部导航线
-@pro_strong UILabel                 *   viewLine;       //  视图分割线
-@pro_strong NSArray                 *   menuTitle;      //  导航按钮名称
-@pro_strong NSMutableArray          *   btnMarr;        //  全部按钮
-@pro_strong NSArray                 *   widthArr;       //  动态宽度
-@pro_strong NSString                *   defaultColor;
-@pro_strong UIButton                *   selectedBtn;
-@pro_strong UIButton                *   nowSelectedBtn;
-
-@pro_weak id <FBMenuViewDelegate> delegate;
+@property (nonatomic, strong) UIScrollView            *menuRollView;   //  滑动视图
+@property (nonatomic, strong) UILabel                 *line;           //  底部导航线
+@property (nonatomic, strong) UILabel                 *viewLine;       //  视图分割线
+@property (nonatomic, strong) NSArray                 *menuTitle;      //  导航按钮名称
+@property (nonatomic, strong) NSMutableArray          *btnMarr;        //  全部按钮
+@property (nonatomic, strong) NSArray                 *widthArr;       //  动态宽度
+@property (nonatomic, strong) NSString                *defaultColor;
+@property (nonatomic, strong) UIButton                *selectedBtn;
+@property (nonatomic, strong) UIButton                *nowSelectedBtn;
+@property (nonatomic, weak) id <FBMenuViewDelegate> delegate;
 
 - (void)updateMenuButtonData;
 

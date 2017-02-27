@@ -443,6 +443,7 @@ static NSInteger const actionButtonTag  = 611;
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
     FBGoodsInfoViewController *goodsVC = [[FBGoodsInfoViewController alloc] init];
     goodsVC.goodsID = self.goodsIdMarr[indexPath.row];
+    goodsVC.storageId = _domainId;
     [self.nav pushViewController:goodsVC animated:YES];
 }
 

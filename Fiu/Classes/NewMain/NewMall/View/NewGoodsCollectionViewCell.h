@@ -13,11 +13,11 @@
 
 @interface NewGoodsCollectionViewCell : UICollectionViewCell
 
-@pro_strong UIImageView *goodsImageView;
-@pro_strong UIView *blackView;
-@pro_strong UIImageView *brandImage;
-@pro_strong UILabel *name;
-@pro_strong UILabel *price;
+@property (nonatomic, strong) UIImageView *goodsImageView;
+@property (nonatomic, strong) UIView *blackView;
+@property (nonatomic, strong) UIImageView *brandImage;
+@property (nonatomic, strong) UILabel *name;
+@property (nonatomic, strong) UILabel *price;
 
 - (void)setGoodsData:(THNMallGoodsModelItem *)model;
 

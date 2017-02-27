@@ -24,7 +24,6 @@
 static NSString *const URLNewGoodsList = @"/product/index_new";
 static NSString *const URLCategory = @"/category/getlist";
 static NSString *const URLMallSubject = @"/scene_subject/getlist";
-
 static NSString *const DiscoverCellId = @"discoverCellId";
 static NSString *const MallListCellId = @"mallListCellId";
 static NSString *const NewGoodsListCellId = @"newGoodsListCellId";
@@ -43,8 +42,8 @@ static NSString *const MallListHeaderCellViewId = @"mallListHeaderCellViewId";
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
+    
     [self thn_setFirstAppStart];
-    [self getGoodsCarNumData];
     [self thn_setNavigationViewUI];
 }
 
@@ -377,25 +376,13 @@ static NSString *const MallListHeaderCellViewId = @"mallListHeaderCellViewId";
     self.delegate = self;
     self.navViewTitle.hidden = YES;
     [self thn_addSearchBtnText:NSLocalizedString(@"mallSearch", nil) type:2];
+    self.searchBtn.frame = CGRectMake(50, 29, SCREEN_WIDTH - 65, 26);
     [self thn_addBarItemLeftBarButton:@"" image:@"mall_saoma"];
-    [self thn_addBarItemRightBarButton:@"" image:@"mall_car"];
-    [self setNavGoodsCarNumLab];
 }
 
 - (void)thn_leftBarItemSelected {
     QRCodeScanViewController * qrVC = [[QRCodeScanViewController alloc] init];
     [self.navigationController pushViewController:qrVC animated:YES];
-}
-
-- (void)thn_rightBarItemSelected {
-    if ([self isUserLogin]) {
-        GoodsCarViewController * goodsCarVC = [[GoodsCarViewController alloc] init];
-        goodsCarVC.openType = 1;
-        [self.navigationController pushViewController:goodsCarVC animated:YES];
-        
-    } else {
-        [self openUserLoginVC];
-    }
 }
 
 #pragma mark - 首次打开加载指示图
