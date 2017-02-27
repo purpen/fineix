@@ -16,6 +16,8 @@
 
 @property (nonatomic, strong) UIImageView *imageV;
 @property (nonatomic, strong) UILabel *textLabel;
+/**  */
+@property (nonatomic, strong) UIView *bgView;
 
 @end
 
@@ -34,14 +36,25 @@
             make.left.top.right.bottom.mas_equalTo(self.contentView).mas_offset(0);
         }];
         
+        self.bgView = [[UIView alloc] init];
+        [self.contentView addSubview:self.bgView];
+        self.bgView.layer.masksToBounds = YES;
+        self.bgView.layer.cornerRadius = 3*SCREEN_HEIGHT/667.0;
+        self.bgView.backgroundColor = [UIColor colorWithWhite:0 alpha:0.2];
+        [_bgView mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.left.top.right.bottom.mas_equalTo(self.contentView).mas_offset(0);
+        }];
+        
         self.textLabel = [[UILabel alloc] init];
         self.textLabel.font = [UIFont systemFontOfSize:13];
+        self.textLabel.numberOfLines = 0;
         self.textLabel.textAlignment = NSTextAlignmentCenter;
         self.textLabel.textColor = [UIColor whiteColor];
-        [self.contentView addSubview:self.textLabel];
+        [self.bgView addSubview:self.textLabel];
         [_textLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.centerX.mas_equalTo(self.contentView.mas_centerX).mas_offset(0);
-            make.centerY.mas_equalTo(self.contentView.mas_centerY).mas_offset(0);
+            make.centerX.mas_equalTo(self.bgView.mas_centerX).mas_offset(0);
+            make.centerY.mas_equalTo(self.bgView.mas_centerY).mas_offset(0);
+            make.width.mas_lessThanOrEqualTo(135/2);
         }];
     }
     return self;

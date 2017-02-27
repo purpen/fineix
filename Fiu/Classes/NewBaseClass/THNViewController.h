@@ -135,4 +135,6 @@
  */
 - (void)thn_openSubjectTypeController:(UINavigationController *)nav type:(NSInteger)type subjectId:(NSString *)idx;
 
+-(void)thn_tiaoZhuanLanMuWeiWithType:(NSInteger)type andId:(NSString*)theId andDelegate:(id)delegate andNav:(UINavigationController*)nav;
+
 @end

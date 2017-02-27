@@ -12,6 +12,7 @@
 #import "THNQingJingFenLeiCollectionViewCell.h"
 #import "THNSceneDetalViewController.h"
 #import "CollectionCategoryModel.h"
+#import "THNViewController.h"
 
 @interface THNQingjingCollectionViewCell () <UICollectionViewDelegate, UICollectionViewDataSource>
 
@@ -105,14 +106,14 @@
 
 -(void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath{
     if (indexPath.section == 0) {
-        THNSceneDetalViewController *vc = [[THNSceneDetalViewController alloc] init];
         StickModel *model = self.modelAry[indexPath.row];
-        vc.sceneDetalId = model.web_url;
-        [self.nav pushViewController:vc animated:YES];
+        THNViewController *vc1 = [[THNViewController alloc] init];
+        [vc1 thn_tiaoZhuanLanMuWeiWithType:[model.type integerValue] andId:model.web_url andDelegate:self andNav:self.nav];
     } else {
         THNSceneDetalViewController *vc = [[THNSceneDetalViewController alloc] init];
         Pro_categoryModel *model = self.modelAry[indexPath.row + 2];
         vc.sceneDetalId = model._id;
+        NSLog(@"weewfweifwefwueid  %@", model._id);
         [self.nav pushViewController:vc animated:YES];
     }
 }

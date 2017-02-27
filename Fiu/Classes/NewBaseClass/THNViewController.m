@@ -41,6 +41,83 @@ static NSInteger const saveTime = 30 * 24 * 60;
     [self thn_setNavViewUI];
 }
 
+-(void)thn_tiaoZhuanLanMuWeiWithType:(NSInteger)type andId:(NSString*)theId andDelegate:(id)delegate andNav:(UINavigationController*)nav{
+    switch (type) {
+        case 1:
+        {
+            //url类型
+        }
+            break;
+        case 2:
+        {
+            //商品ID
+        }
+            break;
+
+        case 3:
+        {
+            //字符串
+        }
+            break;
+
+        case 4:
+        {
+            //app专题
+        }
+            break;
+
+        case 5:
+        {
+            //试用
+        }
+            break;
+
+        case 6:
+        {
+            //(话题)评测
+        }
+            break;
+
+        case 7:
+        {
+            //－－
+        }
+            break;
+
+        case 8:
+        {
+            //情境
+        }
+            break;
+
+        case 11:
+        {
+            //情境专题
+            __block NSString *dataId;
+            __block NSString *dataType;
+            FBRequest *request = [FBAPI postWithUrlString:@"/scene_subject/view" requestDictionary:@{@"id" : theId} delegate:delegate];
+            [request startRequestSuccess:^(FBRequest *request, id result) {
+                NSDictionary *dataDict = result[@"data"];
+                dataId = dataDict[@"_id"];
+                dataType = dataDict[@"type"];
+                [self thn_openSubjectTypeController:nav type:[dataType integerValue] subjectId:dataId];
+            } failure:^(FBRequest *request, NSError *error) {
+                
+            }];
+        }
+            break;
+
+        case 12:
+        {
+            //地盘
+        }
+            break;
+            
+        default:
+            break;
+    }
+}
+
 #pragma mark - 轮播图类型跳转
 - (void)thn_openSubjectTypeController:(UINavigationController *)nav type:(NSInteger)type subjectId:(NSString *)idx {
     if (type == 1) {

@@ -364,10 +364,13 @@ UITableViewDataSource
 }
 
 -(CGFloat)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout minimumInteritemSpacingForSectionAtIndex:(NSInteger)section{
+    if (section == 0) {
+        return 18*SCREEN_HEIGHT/667.0;
+    }
     if (section == 1) {
         return 18*SCREEN_HEIGHT/667.0;
     } else if (section == 2) {
-        return 3*SCREEN_HEIGHT/667.0;
+        return 18*SCREEN_HEIGHT/667.0;
     } else if (section == 4) {
         return 18*SCREEN_HEIGHT/667.0;
     } else if (section == 5) {
@@ -386,19 +389,7 @@ UITableViewDataSource
 -(void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath{
     if (indexPath.section == 0) {
         StickModel *model = self.collectionDatas[0];
-        __block NSString *dataId;
-        __block NSString *dataType;
-        if ([model.type isEqualToString:@"11"]) {
-            FBRequest *request = [FBAPI postWithUrlString:@"/scene_subject/view" requestDictionary:@{@"id" : model.web_url} delegate:self];
-            [request startRequestSuccess:^(FBRequest *request, id result) {
-                NSDictionary *dataDict = result[@"data"];
-                dataId = dataDict[@"_id"];
-                dataType = dataDict[@"type"];
-                [self thn_openSubjectTypeController:self.navigationController type:[dataType integerValue] subjectId:dataId];
-            } failure:^(FBRequest *request, NSError *error) {
-                
-            }];
-        }
+        [self thn_tiaoZhuanLanMuWeiWithType:[model.type integerValue] andId:model.web_url andDelegate:self andNav:self.navigationController];
     } else if (indexPath.section == 1) {
         NSArray *ary = self.collectionDatas[1];
         Pro_categoryModel *model = ary[indexPath.row];
