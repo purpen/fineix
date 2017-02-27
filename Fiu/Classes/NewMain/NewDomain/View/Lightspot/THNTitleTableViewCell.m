@@ -31,9 +31,9 @@
 
 - (UILabel *)title {
     if (!_title) {
-        _title = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 40)];
+        _title = [[UILabel alloc] initWithFrame:CGRectMake(0, 12, SCREEN_WIDTH, 30)];
         _title.textColor = [UIColor colorWithHexString:@"#666666"];
-        _title.font = [UIFont systemFontOfSize:16];
+        _title.font = [UIFont boldSystemFontOfSize:16];
         _title.textAlignment = NSTextAlignmentCenter;
         _title.text = @"地盘特色";
     }

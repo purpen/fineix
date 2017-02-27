@@ -8,7 +8,10 @@
 
 #import "THNViewController.h"
 
-@interface THNDomianLightViewController : THNViewController
+@interface THNDomianLightViewController : THNViewController <
+    THNNavigationBarItemsDelegate
+>
+
 @property (nonatomic, strong) UITextView *textView;
 @property (nonatomic, strong) NSMutableArray *textMarr;
 @property (nonatomic, strong) NSMutableArray *imageMarr;

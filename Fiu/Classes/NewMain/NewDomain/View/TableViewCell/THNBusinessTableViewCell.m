@@ -62,19 +62,19 @@
 }
 
 - (void)set_BusinessTagsCount:(NSArray *)tags {
-    UIView *tagsView = [[UIView alloc] init];
-    tagsView.backgroundColor = [UIColor whiteColor];
-    [self addSubview:tagsView];
-    [tagsView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.size.mas_equalTo(CGSizeMake(75 * tags.count, 25));
-        make.top.equalTo(self.subName.mas_bottom).with.offset(8);
-        make.centerX.equalTo(self);
-    }];
-    
     NSInteger count = tags.count;
     if (count > 4) {
         count = 4;
     }
+    
+    UIView *tagsView = [[UIView alloc] init];
+    tagsView.backgroundColor = [UIColor whiteColor];
+    [self addSubview:tagsView];
+    [tagsView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.size.mas_equalTo(CGSizeMake(75 * count, 25));
+        make.top.equalTo(self.subName.mas_bottom).with.offset(8);
+        make.centerX.equalTo(self);
+    }];
     
     for (NSInteger idx = 0; idx < count; ++ idx) {
         UILabel *tagsLabel = [[UILabel alloc] initWithFrame:CGRectMake(idx * 75, 0, 65, 25)];

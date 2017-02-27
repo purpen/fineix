@@ -42,8 +42,9 @@
     
     [self addSubview:self.rightLabel];
     [_rightLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.size.mas_equalTo(CGSizeMake(200, 10));
+        make.height.mas_equalTo(@10);
         make.left.equalTo(_leftLabel.mas_right).with.offset(0);
+        make.right.equalTo(self.mas_right).with.offset(-10);
         make.centerY.equalTo(self);
     }];
 }

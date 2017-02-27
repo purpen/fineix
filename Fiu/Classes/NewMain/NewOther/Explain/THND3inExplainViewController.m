@@ -30,11 +30,11 @@
     self.view.backgroundColor = [UIColor whiteColor];
     [[UIApplication sharedApplication] setStatusBarHidden:NO withAnimation:(UIStatusBarAnimationFade)];
     self.delegate = self;
-    [self thn_addBarItemRightBarButton:@"" image:@"icon_cancel"];
+    [self thn_addBarItemLeftBarButton:@"" image:@"icon_cancel"];
     self.navViewTitle.text = @"合伙人招募计划";
 }
 
-- (void)thn_rightBarItemSelected {
+- (void)thn_leftBarItemSelected {
     [self dismissViewControllerAnimated:YES completion:nil];
 }
 

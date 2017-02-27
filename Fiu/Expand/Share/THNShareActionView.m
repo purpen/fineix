@@ -57,7 +57,7 @@ static const NSInteger shareButtonTag = 810;
     [_closeButton mas_makeConstraints:^(MASConstraintMaker *make) {
         make.size.mas_equalTo(CGSizeMake(40, 40));
         make.top.equalTo(self.mas_top).with.offset(5);
-        make.left.equalTo(self.mas_left).with.offset(5);
+        make.right.equalTo(self.mas_right).with.offset(-5);
     }];
     
     [self addSubview:self.goldImage];

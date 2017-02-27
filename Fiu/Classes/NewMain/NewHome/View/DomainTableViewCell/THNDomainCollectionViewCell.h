@@ -17,6 +17,7 @@
 @property (nonatomic, strong) UIButton *iconImage;
 @property (nonatomic, strong) UILabel *title;
 @property (nonatomic, strong) UILabel *subTitle;
+@property (nonatomic, strong) UIView *backView;
 
 - (void)thn_setDomainDataModel:(NiceDomainRow *)model;
 

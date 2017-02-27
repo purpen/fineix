@@ -41,9 +41,14 @@
         make.left.right.bottom.top.equalTo(self).with.offset(0);
     }];
     
+    [self addSubview:self.backView];
+    [_backView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.right.bottom.top.equalTo(_image).with.offset(0);
+    }];
+    
     [self addSubview:self.title];
     [_title mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.height.equalTo(@25);
+        make.height.equalTo(@22);
         make.left.right.equalTo(self).with.offset(0);
         make.bottom.equalTo(self.mas_centerY).with.offset(0);
         make.centerX.equalTo(self);
@@ -53,7 +58,7 @@
 - (void)setDomainRollView {
     [self addSubview:self.subTitle];
     [_subTitle mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.height.mas_equalTo(@20);
+        make.height.mas_equalTo(@15);
         make.top.equalTo(self.mas_centerY).with.offset(5);
         make.centerX.equalTo(self);
     }];
@@ -86,7 +91,7 @@
     if (!_title) {
         _title = [[UILabel alloc] init];
         _title.textColor = [UIColor whiteColor];
-        _title.font = [UIFont systemFontOfSize:22];
+        _title.font = [UIFont systemFontOfSize:20];
         _title.textAlignment = NSTextAlignmentCenter;
     }
     return _title;
@@ -96,10 +101,18 @@
     if (!_subTitle) {
         _subTitle = [[UILabel alloc] init];
         _subTitle.textColor = [UIColor whiteColor];
-        _subTitle.font = [UIFont systemFontOfSize:16];
+        _subTitle.font = [UIFont systemFontOfSize:12];
         _subTitle.textAlignment = NSTextAlignmentCenter;
     }
     return _subTitle;
+}
+
+- (UIView *)backView {
+    if (!_backView) {
+        _backView = [[UIView alloc] init];
+        _backView.backgroundColor = [UIColor colorWithHexString:@"#000000" alpha:0.3];
+    }
+    return _backView;
 }
 
 
