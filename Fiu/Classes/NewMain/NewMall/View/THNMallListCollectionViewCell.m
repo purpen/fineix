@@ -25,6 +25,10 @@ static NSString *const MallListGoodsCellId = @"mallListGoodsCellId";
     return self;
 }
 
+- (void)thn_hiddenCellView {
+    self.alpha = 0;
+}
+
 - (void)setMallSubjectData:(THNMallSubjectModelRow *)model {
     self.banner.alpha = 0.0f;
     

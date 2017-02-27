@@ -14,10 +14,11 @@
     UICollectionViewDataSource
 >
 
-@pro_strong UINavigationController *nav;
-@pro_strong UICollectionView *goodList;
-@pro_strong NSMutableArray *goodsMarr;
-@pro_strong NSMutableArray *goodsIdMarr;
+@property (nonatomic, strong) UINavigationController *nav;
+@property (nonatomic, strong) UICollectionView *goodList;
+@property (nonatomic, strong) NSMutableArray *goodsMarr;
+@property (nonatomic, strong) NSMutableArray *goodsIdMarr;
+@property (nonatomic, strong) UILabel *titleLabel;
 
 - (void)setNewGoodsData:(NSMutableArray *)data;
 

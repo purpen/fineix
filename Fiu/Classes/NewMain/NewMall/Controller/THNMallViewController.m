@@ -7,7 +7,6 @@
 //
 
 #import "THNMallViewController.h"
-#import "THNCategoryCollectionReusableView.h"
 #import "THNMallNewGoodsCollectionViewCell.h"
 #import "THNMallListCollectionViewCell.h"
 #import "GoodsCarViewController.h"
@@ -27,13 +26,13 @@ static NSString *const URLMallSubject = @"/scene_subject/getlist";
 static NSString *const DiscoverCellId = @"discoverCellId";
 static NSString *const MallListCellId = @"mallListCellId";
 static NSString *const NewGoodsListCellId = @"newGoodsListCellId";
-static NSString *const MallListHeaderCellViewId = @"mallListHeaderCellViewId";
 
 @interface THNMallViewController () {
-    NSInteger _type;
-    BOOL _rollDown;                  //  是否下拉
-    CGFloat _lastContentOffset;      //  滚动的偏移量
-    BOOL _goTop;
+    NSInteger   _type;
+    BOOL        _rollDown;              //  是否下拉
+    CGFloat     _lastContentOffset;     //  滚动的偏移量
+    BOOL        _goTop;
+    NSString   *_idx;
 }
 
 @end
@@ -50,10 +49,10 @@ static NSString *const MallListHeaderCellViewId = @"mallListHeaderCellViewId";
 - (void)viewDidLoad {
     [super viewDidLoad];
 
+    [self thn_setMallViewUI];
     [self networkCategoryData];
     [self thn_networkNewGoodsListData];
     [self thn_networkSubjectListData];
-    [self thn_setMallViewUI];
 }
 
 #pragma mark - 网络请求
@@ -61,8 +60,24 @@ static NSString *const MallListHeaderCellViewId = @"mallListHeaderCellViewId";
 - (void)networkCategoryData {
     self.categoryRequest = [FBAPI getWithUrlString:URLCategory requestDictionary:@{@"domain":@"1", @"page":@"1", @"size":@"10", @"use_cache":@"1"} delegate:self];
     [self.categoryRequest startRequestSuccess:^(FBRequest *request, id result) {
-        self.categoryMarr = [NSMutableArray arrayWithArray:[[result valueForKey:@"data"] valueForKey:@"rows"]];
-        [self.topCategoryView setCategoryData:self.categoryMarr withType:2];
+        [self.categoryMarr addObject:@"推荐"];
+        NSMutableArray *idxMarr = [NSMutableArray array];
+        NSArray *dataArr = [[result valueForKey:@"data"] valueForKey:@"rows"];
+        for (NSDictionary *dataDict in dataArr) {
+            CategoryRow *model = [[CategoryRow alloc] initWithDictionary:dataDict];
+            [self.categoryMarr addObject:model.title];
+            [idxMarr addObject:[NSString stringWithFormat:@"%zi",model.idField]];
+        }
+        
+        NSString *allId = [idxMarr componentsJoinedByString:@","];
+        [self.categoryIdMarr addObject:allId];
+        [self.categoryIdMarr addObjectsFromArray:idxMarr];
+        
+        if (self.categoryMarr.count) {
+            self.menuView.menuTitle = self.categoryMarr;
+            [self.menuView updateMenuButtonData];
+            [self.menuView updateMenuBtnState:0];
+        }
         
     } failure:^(FBRequest *request, NSError *error) {
         NSLog(@"%@", error);
@@ -89,6 +104,7 @@ static NSString *const MallListHeaderCellViewId = @"mallListHeaderCellViewId";
 
 #pragma mark 商品专题列表
 - (void)thn_networkSubjectListData {
+    [SVProgressHUD show];
     NSDictionary *requestDic = @{@"page":@"1",
                                  @"size":@"100",
                                  @"sort":@"2",
@@ -106,6 +122,7 @@ static NSString *const MallListHeaderCellViewId = @"mallListHeaderCellViewId";
         
         [self.mallList reloadData];
         [self requestIsLastData:self.mallList];
+        [SVProgressHUD dismiss];
         
     } failure:^(FBRequest *request, NSError *error) {
         [SVProgressHUD showErrorWithStatus:[error localizedDescription]];
@@ -121,9 +138,9 @@ static NSString *const MallListHeaderCellViewId = @"mallListHeaderCellViewId";
 #pragma mark - 设置视图UI
 - (void)thn_setMallViewUI {
     _goTop = NO;
+    [self.view addSubview:self.menuView];
     [self.view addSubview:self.mallList];
     [self.view addSubview:self.topCategoryView];
-    [self.view addSubview:self.goTopBtn];
 }
 
 #pragma mark - 滚动后的顶部分类视图
@@ -156,13 +173,25 @@ static NSString *const MallListHeaderCellViewId = @"mallListHeaderCellViewId";
 }
 
 #pragma mark - init
+- (FBMenuView *)menuView {
+    if (!_menuView) {
+        _menuView = [[FBMenuView alloc] initWithFrame:CGRectMake(0, 64, SCREEN_WIDTH, 44)];
+        _menuView.delegate = self;
+        _menuView.defaultColor = @"#666666";
+    }
+    return _menuView;
+}
+
+- (void)menuItemSelectedWithIndex:(NSInteger)index {
+
+}
+
 - (UICollectionView *)mallList {
     if (!_mallList) {
         UICollectionViewFlowLayout *flowLayou = [[UICollectionViewFlowLayout alloc] init];
-        flowLayou.headerReferenceSize = CGSizeMake(SCREEN_WIDTH, SCREEN_WIDTH * 0.4 + 64);
         flowLayou.scrollDirection = UICollectionViewScrollDirectionVertical;
         
-        _mallList = [[UICollectionView alloc] initWithFrame:CGRectMake(0, 64, SCREEN_WIDTH, SCREEN_HEIGHT - 113)
+        _mallList = [[UICollectionView alloc] initWithFrame:CGRectMake(0, 108, SCREEN_WIDTH, SCREEN_HEIGHT - 157)
                                         collectionViewLayout:flowLayou];
         _mallList.showsVerticalScrollIndicator = NO;
         _mallList.delegate = self;
@@ -170,8 +199,6 @@ static NSString *const MallListHeaderCellViewId = @"mallListHeaderCellViewId";
         _mallList.backgroundColor = [UIColor colorWithHexString:@"#F8F8F8"];
         [_mallList registerClass:[THNMallListCollectionViewCell class] forCellWithReuseIdentifier:MallListCellId];
         [_mallList registerClass:[THNMallNewGoodsCollectionViewCell class] forCellWithReuseIdentifier:NewGoodsListCellId];
-        [_mallList registerClass:[THNCategoryCollectionReusableView class] forSupplementaryViewOfKind:UICollectionElementKindSectionHeader
-              withReuseIdentifier:MallListHeaderCellViewId];
         [self addMJRefresh:_mallList];
     }
     return _mallList;
@@ -204,23 +231,9 @@ static NSString *const MallListHeaderCellViewId = @"mallListHeaderCellViewId";
 
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath {
     if (indexPath.row == 0) {
-        return CGSizeMake(SCREEN_WIDTH, 195);
+        return CGSizeMake(SCREEN_WIDTH, 230);
     } else
         return CGSizeMake(SCREEN_WIDTH, 366);
-}
-
-- (UICollectionReusableView *)collectionView:(UICollectionView *)collectionView
-           viewForSupplementaryElementOfKind:(NSString *)kind
-                                 atIndexPath:(NSIndexPath *)indexPath {
-    
-    THNCategoryCollectionReusableView *headerView = [collectionView dequeueReusableSupplementaryViewOfKind:UICollectionElementKindSectionHeader
-                                                                                       withReuseIdentifier:MallListHeaderCellViewId
-                                                                                              forIndexPath:indexPath];
-    if (self.categoryMarr.count) {
-        [headerView setCategoryData:self.categoryMarr type:1];
-    }
-    headerView.nav = self.navigationController;
-    return headerView;
 }
 
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
@@ -259,116 +272,6 @@ static NSString *const MallListHeaderCellViewId = @"mallListHeaderCellViewId";
     }
 }
 
-#pragma mark - 判断上／下滑状态，显示/隐藏Nav/tabBar
-- (void)scrollViewWillBeginDragging:(UIScrollView *)scrollView {
-    if (scrollView == self.mallList) {
-        _lastContentOffset = scrollView.contentOffset.y;
-    }
-}
-
-- (void)scrollViewWillBeginDecelerating:(UIScrollView *)scrollView {
-    if (scrollView == self.mallList) {
-        if (_lastContentOffset < scrollView.contentOffset.y) {
-            _rollDown = YES;
-        } else {
-            _rollDown = NO;
-        }
-    }
-}
-
-- (void)scrollViewDidScroll:(UIScrollView *)scrollView {
-    if (scrollView == self.mallList) {
-        CGRect tabBarRect = self.tabBarController.tabBar.frame;
-        CGRect tableRect = self.mallList.frame;
-        CGRect topCategoryRect = self.topCategoryView.frame;
-        CGRect goTopBtnRect = self.goTopBtn.frame;
-        
-        if (_rollDown == YES && self.subjectMarr.count > 2) {
-            tabBarRect = CGRectMake(0, SCREEN_HEIGHT + 20, SCREEN_WIDTH, 49);
-            tableRect = CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT);
-            topCategoryRect = CGRectMake(0, 0, SCREEN_WIDTH, 60);
-            goTopBtnRect = CGRectMake(SCREEN_WIDTH - 55, SCREEN_HEIGHT - 100, 40, 40);
-            [UIView animateWithDuration:.3 animations:^{
-                self.tabBarController.tabBar.frame = tabBarRect;
-                self.mallList.frame = tableRect;
-                self.navView.alpha = 0;
-                self.leftBtn.alpha = 0;
-                self.rightBtn.alpha = 0;
-                self.topCategoryView.frame = topCategoryRect;
-                self.goTopBtn.frame = goTopBtnRect;
-                [[UIApplication sharedApplication] setStatusBarHidden:YES withAnimation:(UIStatusBarAnimationSlide)];
-            }];
-            
-        } else if (_rollDown == NO) {
-            tabBarRect = CGRectMake(0, SCREEN_HEIGHT - 49, SCREEN_WIDTH, 49);
-            tableRect = CGRectMake(0, 64, SCREEN_WIDTH, SCREEN_HEIGHT - 113);
-            topCategoryRect = CGRectMake(0, -60, SCREEN_WIDTH, 60);
-            [UIView animateWithDuration:.3 animations:^{
-                self.topCategoryView.frame = topCategoryRect;
-                self.mallList.frame = tableRect;
-                self.navView.alpha = 1;
-                self.leftBtn.alpha = 1;
-                self.rightBtn.alpha = 1;
-                self.tabBarController.tabBar.frame = tabBarRect;
-                [[UIApplication sharedApplication] setStatusBarHidden:NO withAnimation:(UIStatusBarAnimationSlide)];
-            }];
-        }
-        
-        //  隐藏“返回顶部”按钮
-        if (scrollView.contentOffset.y < SCREEN_HEIGHT) {
-            goTopBtnRect = CGRectMake(SCREEN_WIDTH, SCREEN_HEIGHT - 100, 40, 40);
-            [UIView animateWithDuration:.3 animations:^{
-                self.goTopBtn.frame = goTopBtnRect;
-            }];
-        }
-        
-        if (_goTop) {
-            //  滚动到顶恢复视图
-            if (scrollView.contentOffset.y == 0) {
-                tabBarRect = CGRectMake(0, SCREEN_HEIGHT - 49, SCREEN_WIDTH, 49);
-                tableRect = CGRectMake(0, 64, SCREEN_WIDTH, SCREEN_HEIGHT - 113);
-                topCategoryRect = CGRectMake(0, -60, SCREEN_WIDTH, 60);
-                
-                [UIView animateWithDuration:.2
-                                      delay:0
-                     usingSpringWithDamping:10.0f
-                      initialSpringVelocity:5.0f
-                                    options:(UIViewAnimationOptionCurveEaseInOut) animations:^{
-                                        self.topCategoryView.frame = topCategoryRect;
-                                        self.mallList.frame = tableRect;
-                                        self.navView.alpha = 1;
-                                        self.leftBtn.alpha = 1;
-                                        self.rightBtn.alpha = 1;
-                                        self.tabBarController.tabBar.frame = tabBarRect;
-                                        [[UIApplication sharedApplication] setStatusBarHidden:NO withAnimation:(UIStatusBarAnimationSlide)];
-                                    }
-                                 completion:^(BOOL finished) {
-                                     _goTop = NO;
-                                 }
-                 ];
-            }
-        }
-        
-    }
-}
-
-#pragma mark - 返回顶部按钮
-- (UIButton *)goTopBtn {
-    if (!_goTopBtn) {
-        _goTopBtn = [[UIButton alloc] initWithFrame:CGRectMake(SCREEN_WIDTH, SCREEN_HEIGHT - 100, 40, 40)];
-        [_goTopBtn setImage:[UIImage imageNamed:@"top_icon"] forState:(UIControlStateNormal)];
-        _goTopBtn.layer.cornerRadius = 40/2;
-        _goTopBtn.layer.masksToBounds = YES;
-        [_goTopBtn addTarget:self action:@selector(goTopBtnClick:) forControlEvents:(UIControlEventTouchUpInside)];
-    }
-    return _goTopBtn;
-}
-
-- (void)goTopBtnClick:(UIButton *)button {
-    _goTop = YES;
-    [self.mallList scrollRectToVisible:CGRectMake(0, 0, 1, 1) animated:YES];
-}
-
 #pragma mark - 设置Nav
 - (void)thn_setNavigationViewUI {
     self.view.backgroundColor = [UIColor whiteColor];
@@ -399,6 +302,20 @@ static NSString *const MallListHeaderCellViewId = @"mallListHeaderCellViewId";
         _goodsDataMarr = [NSMutableArray array];
     }
     return _goodsDataMarr;
+}
+
+- (NSMutableArray *)categoryMarr {
+    if (!_categoryMarr) {
+        _categoryMarr = [NSMutableArray array];
+    }
+    return _categoryMarr;
+}
+
+- (NSMutableArray *)categoryIdMarr {
+    if (!_categoryIdMarr) {
+        _categoryIdMarr = [NSMutableArray array];
+    }
+    return _categoryIdMarr;
 }
 
 - (NSMutableArray *)subjectMarr {

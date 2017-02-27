@@ -16,17 +16,19 @@
     UICollectionViewDataSource
 >
 
-@pro_strong UINavigationController *nav;
-@pro_strong UIImageView *banner;
-@pro_strong UILabel *title;
-@pro_strong UILabel *suTitle;
-@pro_strong UIButton *bannerBot;
-@pro_strong UILabel *botLine;
-@pro_strong UIView *bannerBg;
-@pro_strong UICollectionView *goodsList;
-@pro_strong NSMutableArray *goodsListMarr;
-@pro_strong NSMutableArray *goodsIdMarr;
+@property (nonatomic, strong) UINavigationController *nav;
+@property (nonatomic, strong) UIImageView *banner;
+@property (nonatomic, strong) UILabel *title;
+@property (nonatomic, strong) UILabel *suTitle;
+@property (nonatomic, strong) UIButton *bannerBot;
+@property (nonatomic, strong) UILabel *botLine;
+@property (nonatomic, strong) UIView *bannerBg;
+@property (nonatomic, strong) UICollectionView *goodsList;
+@property (nonatomic, strong) NSMutableArray *goodsListMarr;
+@property (nonatomic, strong) NSMutableArray *goodsIdMarr;
 
 - (void)setMallSubjectData:(THNMallSubjectModelRow *)model;
+
+- (void)thn_hiddenCellView;
 
 @end
