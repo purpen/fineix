@@ -457,6 +457,9 @@ static NSString *const NewGoodsListCellId       = @"newGoodsListCellId";
     
     if (index == 1) {
         self.sceneCurrentpage = 0;
+        [self.sceneListMarr removeAllObjects];
+        [self.sceneIdMarr removeAllObjects];
+        [self.userIdMarr removeAllObjects];
         [self thn_networkSceneListData];
         
     } else if (index == 2) {
