@@ -94,24 +94,22 @@
         }];
         
         self.bottomLabelView = [[UIView alloc] init];
-        [self.contentView addSubview:self.bottomLabelView];
         self.bottomLabelView.backgroundColor = [UIColor whiteColor];
+        [self.contentView addSubview:self.bottomLabelView];
         [_bottomLabelView mas_makeConstraints:^(MASConstraintMaker *make) {
             make.top.mas_equalTo(self.bgImageView.mas_bottom).mas_offset(0);
-            make.left.right.mas_equalTo(self.contentView).mas_offset(0);
+            make.left.right.mas_equalTo(self.contentView);
+            make.height.mas_equalTo(186/2);
         }];
         
-        self.bottomLabel = [[UILabel alloc] initWithFrame:CGRectMake(15, 15, 200, 100)];
-        self.bottomLabel.font = [UIFont systemFontOfSize:13];
-        self.bottomLabel.textAlignment = NSTextAlignmentCenter;
-        self.bottomLabel.textColor = [UIColor colorWithHexString:@"#757575"];
-        [self.bottomLabelView addSubview:self.subTextLabel];
-//        [_bottomLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-//            make.left.mas_equalTo(self.bottomLabelView.mas_left).mas_offset(15*SCREEN_HEIGHT/667.0);
-//            make.top.mas_equalTo(self.bottomLabelView.mas_top).mas_offset(15*SCREEN_HEIGHT/667.0);
-//            make.right.mas_equalTo(self.bottomLabelView.mas_right).mas_offset(-15*SCREEN_HEIGHT/667.0);
-//            make.bottom.mas_equalTo(self.bottomLabelView.mas_bottom).mas_offset(-24*SCREEN_HEIGHT/667.0);
-//        }];
+        self.bottomLabel = [[UILabel alloc] init];
+        [self.bottomLabelView addSubview:self.bottomLabel];
+        [_bottomLabelView mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.left.mas_equalTo(self.bottomLabelView.mas_left).mas_offset(15);
+            make.right.mas_equalTo(self.bottomLabelView.mas_right).mas_offset(-15);
+            make.top.mas_equalTo(self.bottomLabelView.mas_top).mas_offset(15);
+            make.bottom.mas_equalTo(self.bottomLabelView.mas_bottom).mas_offset(-15);
+        }];
     }
     return self;
 }
