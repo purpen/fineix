@@ -30,6 +30,7 @@
 #import "THNFindFriendTableViewCell.h"
 #import "THNQingjingCollectionViewCell.h"
 #import "UIView+FSExtension.h"
+#import "THNQingJingZhuanTiViewController.h"
 
 @interface THNDiscoverVC ()<
 THNNavigationBarItemsDelegate,
@@ -191,7 +192,7 @@ UITableViewDataSource
         flowlayout.minimumInteritemSpacing = 2;
         //上下间距
         flowlayout.minimumLineSpacing = 2;
-        _collectionView = [[UICollectionView alloc] initWithFrame:CGRectMake(2 + 80, 64, SCREEN_WIDTH - 80 - 4, SCREEN_HEIGHT - 64 - 49) collectionViewLayout:flowlayout];
+        _collectionView = [[UICollectionView alloc] initWithFrame:CGRectMake(2 + 90, 64, SCREEN_WIDTH - 90 - 4, SCREEN_HEIGHT - 64 - 49) collectionViewLayout:flowlayout];
         _collectionView.delegate = self;
         _collectionView.dataSource = self;
         _collectionView.showsVerticalScrollIndicator = NO;
@@ -219,7 +220,7 @@ UITableViewDataSource
 {
     if (!_tableView)
     {
-        _tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 64, 80, SCREEN_HEIGHT - 64 - 49)];
+        _tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 64, 90, SCREEN_HEIGHT - 64 - 49)];
         _tableView.delegate = self;
         _tableView.dataSource = self;
         _tableView.tableFooterView = [UIView new];
@@ -313,6 +314,7 @@ UITableViewDataSource
             NSArray *ary = self.collectionDatas[2];
             StickModel *model = ary[indexPath.row];
             cell.model = model;
+            cell.textLabel.font = [UIFont systemFontOfSize:16];
             return cell;
         } else {
             THNSortCollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:THNSORTCollectionViewCell forIndexPath:indexPath];
@@ -381,7 +383,7 @@ UITableViewDataSource
 
 -(CGFloat)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout minimumLineSpacingForSectionAtIndex:(NSInteger)section{
     if (section == 5) {
-        return 18*SCREEN_HEIGHT/667.0;
+        return 3*SCREEN_HEIGHT/667.0;
     }
     return 0;
 }
@@ -411,8 +413,9 @@ UITableViewDataSource
         [self.navigationController pushViewController:vc animated:YES];
     } else if (indexPath.section == 5) {
         //专辑
-        StickModel *model = self.collectionDatas[7];
-        [self thn_tiaoZhuanLanMuWeiWithType:[model.type integerValue] andId:model._id andDelegate:self andNav:self.navigationController];
+        NSArray *ary = self.collectionDatas[7];
+        StickModel *model = ary[indexPath.row];
+        [self thn_tiaoZhuanLanMuWeiWithType:11 andId:model.web_url andDelegate:self andNav:self.navigationController];
     }
 }
 
@@ -425,10 +428,11 @@ UITableViewDataSource
                           299/2*SCREEN_HEIGHT/667.0);
     } else if (indexPath.section == 1) {
         return CGSizeMake(60*SCREEN_HEIGHT/667.0,
-                          100*SCREEN_HEIGHT/667.0);
+                          80*SCREEN_HEIGHT/667.0);
     } else if (indexPath.section == 2) {
         if (indexPath.row <= 1) {
-            return CGSizeMake(120*SCREEN_HEIGHT/667.0, 135/2.0*SCREEN_HEIGHT/667.0);
+            return CGSizeMake(531.4/2*SCREEN_HEIGHT/667.0,
+                              299/2*SCREEN_HEIGHT/667.0);
         } else {
             return CGSizeMake(60*SCREEN_HEIGHT/667.0,
                               100*SCREEN_HEIGHT/667.0);

@@ -84,7 +84,7 @@
 			<key>CFBundleTypeRole</key>
 			<string>Editor</string>
 			<key>CFBundleURLName</key>
-			<string>百度地图</string>
+			<string>baidumap</string>
 			<key>CFBundleURLSchemes</key>
 			<array>
 				<string>baidumap://</string>
@@ -107,7 +107,7 @@
 	<string></string>
 	<key>LSApplicationQueriesSchemes</key>
 	<array>
-        <string>百度地图</string>
+		<string>baidumap</string>
 		<string>wechat</string>
 		<string>weixin</string>
 		<string>sinaweibohd</string>

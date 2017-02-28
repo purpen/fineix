@@ -1046,17 +1046,17 @@ static NSString *const homeDataPath = [NSHomeDirectory() stringByAppendingPathCo
 
 
 #pragma mark - 选择城市
--(UILabel *)addressCityLabel{
-    if (!_addressCityLabel) {
-        _addressCityLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 50, 20)];
-        _addressCityLabel.center = CGPointMake(self.view.center.x + 50, 45);
-        _addressCityLabel.font = [UIFont systemFontOfSize:12];
-        _addressCityLabel.textColor = [UIColor whiteColor];
-        _addressCityLabel.userInteractionEnabled = YES;
-        [_addressCityLabel addGestureRecognizer:[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(labelTap)]];
-    }
-    return _addressCityLabel;
-}
+//-(UILabel *)addressCityLabel{
+//    if (!_addressCityLabel) {
+//        _addressCityLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 50, 20)];
+//        _addressCityLabel.center = CGPointMake(self.view.center.x + 50, 45);
+//        _addressCityLabel.font = [UIFont systemFontOfSize:12];
+//        _addressCityLabel.textColor = [UIColor whiteColor];
+//        _addressCityLabel.userInteractionEnabled = YES;
+//        [_addressCityLabel addGestureRecognizer:[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(labelTap)]];
+//    }
+//    return _addressCityLabel;
+//}
 
 -(void)labelTap{
     THNSelecteCityViewController *vc = [[THNSelecteCityViewController alloc] init];

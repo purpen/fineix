@@ -21,6 +21,7 @@
 #import "THNSceneInfoTableViewCell.h"
 #import "THNDataInfoTableViewCell.h"
 #import "THNLoginRegisterViewController.h"
+#import "FBAlertViewController.h"
 
 static NSString *const sceneImgCellId = @"SceneImgCellId";
 static NSString *const userInfoCellId = @"UserInfoCellId";
@@ -40,8 +41,6 @@ static NSString *const URLCancelLike = @"/favorite/ajax_cancel_love";
 }
 /**  */
 @property (nonatomic, strong) UIView *lineView;
-/**  */
-@property (nonatomic, strong) UILabel *biaoTiLabel;
 /**  */
 @property (nonatomic, assign) BOOL b;
 
@@ -210,7 +209,9 @@ static NSString *const URLCancelLike = @"/favorite/ajax_cancel_love";
             };
         }
         [cell.like addTarget:self action:@selector(commentsClick:) forControlEvents:UIControlEventTouchUpInside];
-        [cell.more addTarget:self action:@selector(moreClick) forControlEvents:UIControlEventTouchUpInside];
+        cell.like.tag = indexPath.section;
+        cell.more.tag = indexPath.section;
+        [cell.more addTarget:self action:@selector(moreClick:) forControlEvents:UIControlEventTouchUpInside];
         return cell;
         
     }
@@ -234,53 +235,55 @@ static NSString *const URLCancelLike = @"/favorite/ajax_cancel_love";
     return 44;
 }
 
-//-(void)commentsClick:(UIButton*)sender{
-//    if (sender.selected) {
-//        FBRequest *likeSceneRequest = [FBAPI postWithUrlString:URLLikeScene requestDictionary:@{@"id":@(self.model.idField), @"type":@"12"} delegate:self];
-//        [likeSceneRequest startRequestSuccess:^(FBRequest *request, id result) {
-//            if ([[result valueForKey:@"success"] isEqualToNumber:@1]) {
-//                NSString *loveCount = [NSString stringWithFormat:@"%zi", [[[result valueForKey:@"data"] valueForKey:@"love_count"] integerValue]];
-//                self.model.loveCount = [loveCount integerValue];
-//                self.model.isLove = 1;
-//            }
-//            
-//        } failure:^(FBRequest *request, NSError *error) {
-//            [SVProgressHUD showErrorWithStatus:[error localizedDescription]];
-//        }];
-//        
-//    }else{
-//        
-//        self.cancelLikeRequest = [FBAPI postWithUrlString:URLCancelLike requestDictionary:@{@"id":@(self.model.idField), @"type":@"12"} delegate:self];
-//        [self.cancelLikeRequest startRequestSuccess:^(FBRequest *request, id result) {
-//            if ([[result valueForKey:@"success"] isEqualToNumber:@1]) {
-//                NSString *loveCount = [NSString stringWithFormat:@"%zi", [[[result valueForKey:@"data"] valueForKey:@"love_count"] integerValue]];
-//                self.model.loveCount = [loveCount integerValue];
-//                self.model.isLove = 0;
-//            }
-//            
-//        } failure:^(FBRequest *request, NSError *error) {
-//            [SVProgressHUD showErrorWithStatus:[error localizedDescription]];
-//        }];
-//        
-//    }
-//}
-//
-//-(void)moreClick{
-//    FBAlertViewController * alertVC = [[FBAlertViewController alloc] init];
-//    alertVC.modalPresentationStyle = UIModalPresentationOverFullScreen;
-//    alertVC.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;
-//    [alertVC initFBAlertVcStyle:NO isFavorite:self.model.isFavorite];
-//    alertVC.targetId = [NSString stringWithFormat:@"%ld",(long)self.model.idField];
-//    alertVC.favoriteTheScene = ^(NSString *sceneId) {
-//        self.model.isFavorite = 1;
-//        [self thn_networkFavoriteData];
-//    };
-//    alertVC.cancelFavoriteTheScene = ^(NSString *sceneId) {
-//        self.model.isFavorite = 0;
-//        [self thn_networkCancelFavoriteData];
-//    };
-//    [self presentViewController:alertVC animated:YES completion:nil];
-//}
+-(void)commentsClick:(UIButton*)sender{
+    HomeSceneListRow *model = self.modelAry[sender.tag];
+    if (sender.selected) {
+        FBRequest *likeSceneRequest = [FBAPI postWithUrlString:@"/favorite/ajax_love" requestDictionary:@{@"id":@(model.idField), @"type":@"12"} delegate:self];
+        [likeSceneRequest startRequestSuccess:^(FBRequest *request, id result) {
+            if ([[result valueForKey:@"success"] isEqualToNumber:@1]) {
+                NSString *loveCount = [NSString stringWithFormat:@"%zi", [[[result valueForKey:@"data"] valueForKey:@"love_count"] integerValue]];
+                model.loveCount = [loveCount integerValue];
+                model.isLove = 1;
+            }
+            
+        } failure:^(FBRequest *request, NSError *error) {
+            [SVProgressHUD showErrorWithStatus:[error localizedDescription]];
+        }];
+        
+    }else{
+        
+        FBRequest *cancelLikeRequest = [FBAPI postWithUrlString:URLCancelLike requestDictionary:@{@"id":@(model.idField), @"type":@"12"} delegate:self];
+        [cancelLikeRequest startRequestSuccess:^(FBRequest *request, id result) {
+            if ([[result valueForKey:@"success"] isEqualToNumber:@1]) {
+                NSString *loveCount = [NSString stringWithFormat:@"%zi", [[[result valueForKey:@"data"] valueForKey:@"love_count"] integerValue]];
+                model.loveCount = [loveCount integerValue];
+                model.isLove = 0;
+            }
+            
+        } failure:^(FBRequest *request, NSError *error) {
+            [SVProgressHUD showErrorWithStatus:[error localizedDescription]];
+        }];
+        
+    }
+}
+
+-(void)moreClick:(UIButton*)sender{
+    HomeSceneListRow *model = self.modelAry[sender.tag];
+    FBAlertViewController * alertVC = [[FBAlertViewController alloc] init];
+    alertVC.modalPresentationStyle = UIModalPresentationOverFullScreen;
+    alertVC.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;
+    [alertVC initFBAlertVcStyle:NO isFavorite:model.isFavorite];
+    alertVC.targetId = [NSString stringWithFormat:@"%ld",(long)model.idField];
+    alertVC.favoriteTheScene = ^(NSString *sceneId) {
+        model.isFavorite = 1;
+        [self thn_networkFavoriteData];
+    };
+    alertVC.cancelFavoriteTheScene = ^(NSString *sceneId) {
+        model.isFavorite = 0;
+        [self thn_networkCancelFavoriteData];
+    };
+    [self.vc presentViewController:alertVC animated:YES completion:nil];
+}
 
 //  删除情境
 - (void)thn_networkDeleteScene:(NSString *)idx {
@@ -384,20 +387,28 @@ static NSString *const URLCancelLike = @"/favorite/ajax_cancel_love";
         THNLoginRegisterViewController *vc = [[THNLoginRegisterViewController alloc] init];
         [self.vc presentViewController:vc animated:YES completion:nil];
     }else{
-//        self.likeSceneRequest = [FBAPI postWithUrlString:URLLikeScene requestDictionary:@{@"id":idx, @"type":@"12"} delegate:self];
-//        [self.likeSceneRequest startRequestSuccess:^(FBRequest *request, id result) {
-//            if ([[result valueForKey:@"success"] isEqualToNumber:@1]) {
-//                NSString *loveCount = [NSString stringWithFormat:@"%zi", [[[result valueForKey:@"data"] valueForKey:@"love_count"] integerValue]];
+        FBRequest *likeSceneRequest = [FBAPI postWithUrlString:@"/favorite/ajax_love" requestDictionary:@{@"id":idx, @"type":@"12"} delegate:self];
+        [likeSceneRequest startRequestSuccess:^(FBRequest *request, id result) {
+            if ([[result valueForKey:@"success"] isEqualToNumber:@1]) {
+                NSString *loveCount = [NSString stringWithFormat:@"%zi", [[[result valueForKey:@"data"] valueForKey:@"love_count"] integerValue]];
 //                [self.model setValue:loveCount forKey:@"loveCount"];
 //                [self.model setValue:@"1" forKey:@"isLove"];
-//            }
-//            
-//        } failure:^(FBRequest *request, NSError *error) {
-//            NSLog(@"%@", error);
-//        }];
-        
+            }
+            
+        } failure:^(FBRequest *request, NSError *error) {
+            NSLog(@"%@", error);
+        }];
     }
     
+}
+
+-(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+    if (indexPath.row == 1) {
+        HomeSceneListRow *model = self.modelAry[indexPath.section];
+        THNSceneDetalViewController *vc = [[THNSceneDetalViewController alloc] init];
+        vc.sceneDetalId = [NSString stringWithFormat:@"%ld",(long)model.idField];
+        [self.nav pushViewController:vc animated:YES];
+    }
 }
 
 @end
