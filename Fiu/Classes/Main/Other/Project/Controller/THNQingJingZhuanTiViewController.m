@@ -13,6 +13,7 @@
 #import "THNQingJingOneCell.h"
 #import "THNXiangGuanQingJingTableViewCell.h"
 #import "THNSceneDetalViewController.h"
+#import "Fiu.h"
 
 @interface THNQingJingZhuanTiViewController () <UITableViewDelegate, UITableViewDataSource>
 
@@ -48,6 +49,7 @@
     [request startRequestSuccess:^(FBRequest *request, id result) {
         [self.modelAry removeAllObjects];
         NSDictionary *dataDict = result[@"data"];
+        self.navViewTitle.text = dataDict[@"title"];
         THNOneModel *modelOne = [THNOneModel mj_objectWithKeyValues:dataDict];
         [self.modelAry addObject:modelOne];
         NSArray *ary = dataDict[@"sights"];
@@ -116,7 +118,11 @@
         if (model.summary.length == 0) {
             return 422/2;
         }
-        return (422+186)/2;
+        CGRect rect = [model.summary boundingRectWithSize:CGSizeMake(300, 999)
+                                            options:NSStringDrawingUsesLineFragmentOrigin
+                                         attributes:@{NSFontAttributeName:[UIFont systemFontOfSize:13]}
+                                            context:nil];
+        return (422)/2+rect.size.height+30*SCREEN_HEIGHT/667.0;
     } else {
         return (900/2 + 10) * (self.modelAry.count);
     }
