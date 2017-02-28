@@ -29,7 +29,6 @@
 #import "ScenarioNonView.h"
 #import "THNHomeSenceCollectionViewCell.h"
 #import "UIView+FSExtension.h"
-#import "THNSceneListViewController.h"
 #import "THNSceneDetalViewController.h"
 
 #define UserHeadTag 1

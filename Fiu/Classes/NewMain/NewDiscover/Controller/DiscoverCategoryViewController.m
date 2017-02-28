@@ -9,7 +9,6 @@
 #import "DiscoverCategoryViewController.h"
 #import "THNDiscoverSceneCollectionViewCell.h"
 #import "HomeSceneListRow.h"
-#import "THNSceneListViewController.h"
 #import "THNSceneDetalViewController.h"
 #import "THNLoginRegisterViewController.h"
 

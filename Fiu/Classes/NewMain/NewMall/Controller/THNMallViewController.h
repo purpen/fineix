@@ -31,11 +31,19 @@
 @property (nonatomic, strong) NSMutableArray *subjectMarr;
 @property (nonatomic, strong) NSMutableArray *subjectIdMarr;
 @property (nonatomic, strong) NSMutableArray *subjectTypeMarr;
-@property (nonatomic, strong) CategoryMenuView *topCategoryView;
-//@property (nonatomic, strong) UIButton *goTopBtn;
 
 @property (nonatomic, strong) FBMenuView *menuView;
 @property (nonatomic, strong) NSMutableArray *categoryMarr;
 @property (nonatomic, strong) NSMutableArray *categoryIdMarr;
+
+@property (nonatomic, strong) UICollectionView  *goodsList;
+@property (nonatomic, strong) FBRequest *goodsListRequest;
+@property (nonatomic, assign) NSInteger goodsCurrentpageNum;
+@property (nonatomic, assign) NSInteger goodsTotalPageNum;
+@property (nonatomic, strong) NSMutableArray *goodsListMarr;
+@property (nonatomic, strong) NSMutableArray *goodsIdMarr;
+@property (nonatomic, strong) NSMutableArray *cageSubjectMarr;
+@property (nonatomic, strong) NSMutableArray *cageSubjectIdMarr;
+@property (nonatomic, strong) NSMutableArray *cageSubjectTypeMarr;
 
 @end
