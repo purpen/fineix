@@ -191,9 +191,10 @@ static NSString *userActivationUrl = @"/gateway/record_fiu_user_active";
     
     if (self.flag == shouYe) {
         //播放
-        [self.moviePlayer play];
+//        [self.moviePlayer play];
         //添加通知
-        [self addNotification];
+//        [self addNotification];
+        [self startRollImg];
         
     }else if (self.flag == welcomePage){
         [self startRollImg];

@@ -9,7 +9,6 @@
 /* Begin PBXBuildFile section */
 		1F0EE6A71C9FA4E7000631F0 /* libstdc++.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 1F0EE6A61C9FA4E7000631F0 /* libstdc++.tbd */; };
 		1F0EE6A91C9FA4F6000631F0 /* libz.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 1F0EE6A81C9FA4F6000631F0 /* libz.tbd */; };
-		1F1134AC1D17F5CB00DFFA74 /* Fiu.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = 1F1134AB1D17F5CB00DFFA74 /* Fiu.mp4 */; };
 		1F1804081E52B2AD00722AF5 /* THNSelecteCityViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F1804071E52B2AD00722AF5 /* THNSelecteCityViewController.m */; };
 		1F18040E1E52F26200722AF5 /* THNCityCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F18040D1E52F26200722AF5 /* THNCityCollectionViewCell.m */; };
 		1F1804111E53EEF200722AF5 /* THNDivideCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F1804101E53EEF200722AF5 /* THNDivideCollectionViewCell.m */; };
@@ -836,7 +835,6 @@
 		1F0EE6A41C9FA47B000631F0 /* libsqlite3.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libsqlite3.tbd; path = usr/lib/libsqlite3.tbd; sourceTree = SDKROOT; };
 		1F0EE6A61C9FA4E7000631F0 /* libstdc++.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = "libstdc++.tbd"; path = "usr/lib/libstdc++.tbd"; sourceTree = SDKROOT; };
 		1F0EE6A81C9FA4F6000631F0 /* libz.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libz.tbd; path = usr/lib/libz.tbd; sourceTree = SDKROOT; };
-		1F1134AB1D17F5CB00DFFA74 /* Fiu.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = Fiu.mp4; sourceTree = "<group>"; };
 		1F1804061E52B2AD00722AF5 /* THNSelecteCityViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THNSelecteCityViewController.h; sourceTree = "<group>"; };
 		1F1804071E52B2AD00722AF5 /* THNSelecteCityViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THNSelecteCityViewController.m; sourceTree = "<group>"; };
 		1F18040C1E52F26200722AF5 /* THNCityCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THNCityCollectionViewCell.h; sourceTree = "<group>"; };
@@ -3925,7 +3923,6 @@
 			isa = PBXGroup;
 			children = (
 				1F99E16C1E518272000D3D73 /* liwushuo.json */,
-				1F1134AB1D17F5CB00DFFA74 /* Fiu.mp4 */,
 				1F223B1C1CD714F3007687F7 /* messages.plist */,
 				1F35F0501CD2336E0000DB95 /* areas.plist */,
 			);
@@ -5706,7 +5703,6 @@
 				D86E54911DD444230075ED88 /* 1977blowout.png in Resources */,
 				D86E54B91DD444230075ED88 /* waldenMap.png in Resources */,
 				1F2A905B1CF40277005116C7 /* CommentsViewController.xib in Resources */,
-				1F1134AC1D17F5CB00DFFA74 /* Fiu.mp4 in Resources */,
 				1F99E16D1E518272000D3D73 /* liwushuo.json in Resources */,
 				D86E54AE1DD444230075ED88 /* sutroCurves.png in Resources */,
 				1F2AFDF71D8818EB00DA6035 /* SystemSettingViewController.xib in Resources */,

@@ -126,6 +126,8 @@
     [imgV addSubview:image];
     UIImageView *imgVV = [[UIImageView alloc] initWithFrame:CGRectMake(view.frame.size.width-8 - 65, 8, 65, 30)];
     imgVV.image = [UIImage imageNamed:@"daoHangBtn"];
+    imgVV.userInteractionEnabled = YES;
+    [imgVV addGestureRecognizer:[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(handleSingleTapFrom)]];
     [view addSubview:imgVV];
     
     [self setLabel:CGRectMake(50, 10, 110, 10) andText:self.model.title andFont:13 andView:imgV andtextColor:[UIColor blackColor]];

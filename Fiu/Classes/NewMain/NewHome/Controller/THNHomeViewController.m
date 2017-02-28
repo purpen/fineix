@@ -105,7 +105,7 @@ static NSString *const homeDataPath = [NSHomeDirectory() stringByAppendingPathCo
     [super viewWillAppear:animated];
     
     [self thn_setReceiveUmengNotice];
-    [self thn_setFirstAppStart];
+//    [self thn_setFirstAppStart];
     [self thn_setNavigationViewUI];
     
 }
