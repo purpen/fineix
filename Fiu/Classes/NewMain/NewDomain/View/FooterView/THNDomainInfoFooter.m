@@ -94,11 +94,21 @@ static NSInteger const actionButtonTag  = 611;
 #pragma mark - 网络请求情景列表数据
 - (void)thn_networkDomainSceneList:(NSString *)domainId sort:(NSString *)sort {
     [SVProgressHUD show];
-    NSDictionary *requestDic = @{@"scene_id":domainId,
-                                 @"page":@(self.sceneCurrentpage + 1),
-                                 @"size":@"10",
-                                 @"sort":sort,
-                                 @"use_cache":@"0"};
+    NSDictionary *requestDic = [NSDictionary dictionary];
+    if ([sort isEqualToString:@"1"]) {
+        requestDic = @{@"scene_id":domainId,
+                           @"page":@(self.sceneCurrentpage + 1),
+                           @"size":@"10",
+                           @"sort":sort,
+                          @"stick":@"1",
+                      @"use_cache":@"0"};
+    } else {
+        requestDic = @{@"scene_id":domainId,
+                       @"page":@(self.sceneCurrentpage + 1),
+                       @"size":@"10",
+                       @"sort":sort,
+                       @"use_cache":@"0"};
+    }
     self.sceneListRequest = [FBAPI getWithUrlString:URLSceneList requestDictionary:requestDic delegate:self];
     [self.sceneListRequest startRequestSuccess:^(FBRequest *request, id result) {
         NSArray *sceneArr = [[result valueForKey:@"data"] valueForKey:@"rows"];
@@ -293,7 +303,7 @@ static NSInteger const actionButtonTag  = 611;
     if (button.selected == NO) {
         button.selected = YES;
         self.fineButton.selected = NO;
-        [self thn_sortSceneList:@"0"];
+        [self thn_sortSceneList:@"3"];
     }
 }
 

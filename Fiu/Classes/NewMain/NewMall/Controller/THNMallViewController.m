@@ -67,7 +67,7 @@ static NSString *const NewGoodsListCellId       = @"newGoodsListCellId";
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     
-    [self thn_setFirstAppStart];
+//    [self thn_setFirstAppStart];
     [self thn_setNavigationViewUI];
 }
 

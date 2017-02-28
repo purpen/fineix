@@ -49,4 +49,6 @@
 @property (nonatomic, strong) NSMutableArray *sceneIdMarr;
 @property (nonatomic, strong) THNGoodsBuyView *goodsBuyView;
 
+@property (nonatomic, strong) FBRequest *shareRequest;
+
 @end
