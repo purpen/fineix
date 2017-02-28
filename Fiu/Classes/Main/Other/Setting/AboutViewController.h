@@ -10,9 +10,5 @@
 
 @interface AboutViewController : FBViewController
 
-/**  */
-@property (nonatomic, copy) NSString *text;
-/**  */
-@property(nonatomic,copy) NSString *url;
 
 @end

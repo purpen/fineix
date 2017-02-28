@@ -22,30 +22,15 @@
     // Do any additional setup after loading the view from its nib.
     self.delegate = self;
     self.view.backgroundColor = [UIColor whiteColor];
-    if ([self.text isEqualToString:@""]) {
-        self.navViewTitle.text = @"关于Fiu";
-        //地址
-        NSURL *url = [NSURL URLWithString:@"http://m.taihuoniao.com/app/api/view/about"];
-        //在网页上加载
-        NSURLRequest *request = [NSURLRequest requestWithURL:url];
-        [self.aboutWebView loadRequest:request];
-        self.aboutWebView.delegate = self;
-    }
-}
-
--(void)setText:(NSString *)text{
-    _text = text;
-    self.navViewTitle.text = text;
-}
-
--(void)setUrl:(NSString *)url{
-    _url = url;
-    NSURL *url1 = [NSURL URLWithString:url];
+    self.navViewTitle.text = @"关于D3IN";
+    //地址
+    NSURL *url = [NSURL URLWithString:@"http://m.taihuoniao.com/app/api/view/about"];
     //在网页上加载
-    NSURLRequest *request = [NSURLRequest requestWithURL:url1];
+    NSURLRequest *request = [NSURLRequest requestWithURL:url];
     [self.aboutWebView loadRequest:request];
     self.aboutWebView.delegate = self;
 }
+
 
 -(void)leftBarItemSelected{
     [self.navigationController popViewControllerAnimated:YES];
