@@ -23,16 +23,31 @@
 #import "THNCuXiaoDetalViewController.h"
 #import "THNProjectViewController.h"
 
-static NSString *const URLMallList = @"/product/getlist";
-static NSString *const URLNewGoodsList = @"/product/index_new";
-static NSString *const URLHotGoodsList = @"/product/index_hot";
-static NSString *const URLCategory = @"/category/getlist";
-static NSString *const URLMallSubject = @"/scene_subject/getlist";
-static NSString *const DiscoverCellId = @"discoverCellId";
-static NSString *const MallListCellId = @"mallListCellId";
-static NSString *const CategoryGoodsListCellId = @"CategoryGoodsListCellId";
-static NSString *const NewGoodsListCellId = @"newGoodsListCellId";
-static NSString *const goodsListCellId = @"GoodsListCellId";
+#import "THNUserInfoTableViewCell.h"
+#import "THNSceneImageTableViewCell.h"
+#import "THNDataInfoTableViewCell.h"
+#import "THNSceneInfoTableViewCell.h"
+
+static NSString *const URLSceneList         = @"/scene_sight/";
+static NSString *const URLDeleteScene       = @"/scene_sight/delete";
+static NSString *const URLLikeScene         = @"/favorite/ajax_love";
+static NSString *const URLCancelLike        = @"/favorite/ajax_cancel_love";
+static NSString *const URLFavorite          = @"/favorite/ajax_favorite";
+static NSString *const URLCancelFavorite    = @"/favorite/ajax_cancel_favorite";
+static NSString *const URLMallList          = @"/product/getlist";
+static NSString *const URLNewGoodsList      = @"/product/index_new";
+static NSString *const URLHotGoodsList      = @"/product/index_hot";
+static NSString *const URLCategory          = @"/category/getlist";
+static NSString *const URLMallSubject       = @"/scene_subject/getlist";
+static NSString *const DiscoverCellId       = @"discoverCellId";
+static NSString *const MallListCellId       = @"mallListCellId";
+static NSString *const goodsListCellId      = @"GoodsListCellId";
+static NSString *const userInfoCellId       = @"UserInfoCellId";
+static NSString *const sceneImgCellId       = @"SceneImgCellId";
+static NSString *const dataInfoCellId       = @"DataInfoCellId";
+static NSString *const sceneInfoCellId      = @"SceneInfoCellId";
+static NSString *const CategoryGoodsListCellId  = @"CategoryGoodsListCellId";
+static NSString *const NewGoodsListCellId       = @"newGoodsListCellId";
 
 @interface THNMallViewController () {
     NSInteger   _type;
@@ -40,6 +55,9 @@ static NSString *const goodsListCellId = @"GoodsListCellId";
     CGFloat     _lastContentOffset;     //  滚动的偏移量
     BOOL        _goTop;
     NSString   *_idx;
+    NSIndexPath *_selectedIndexPath;
+    CGFloat      _contentHigh;
+    CGFloat      _defaultContentHigh;
 }
 
 @end
@@ -69,6 +87,7 @@ static NSString *const goodsListCellId = @"GoodsListCellId";
     self.categoryRequest = [FBAPI getWithUrlString:URLCategory requestDictionary:@{@"domain":@"1", @"page":@"1", @"size":@"100", @"use_cache":@"1"} delegate:self];
     [self.categoryRequest startRequestSuccess:^(FBRequest *request, id result) {
         [self.categoryMarr addObject:@"推荐"];
+        [self.categoryMarr addObject:@"情境"];
         [self.categoryMarr addObject:@"全部"];
         NSMutableArray *idxMarr = [NSMutableArray array];
         NSArray *dataArr = [[result valueForKey:@"data"] valueForKey:@"rows"];
@@ -78,6 +97,7 @@ static NSString *const goodsListCellId = @"GoodsListCellId";
             [idxMarr addObject:[NSString stringWithFormat:@"%zi",model.idField]];
         }
         
+        [self.categoryIdMarr addObject:@"0"];
         [self.categoryIdMarr addObject:@"0"];
         NSString *allId = [idxMarr componentsJoinedByString:@","];
         [self.categoryIdMarr addObject:allId];
@@ -196,33 +216,6 @@ static NSString *const goodsListCellId = @"GoodsListCellId";
     }];
 }
 
-- (void)requestIsLastData:(UICollectionView *)collectionView currentPage:(NSInteger )current withTotalPage:(NSInteger)total {
-    if (total == 0) {
-        collectionView.mj_footer.state = MJRefreshStateNoMoreData;
-        collectionView.mj_footer.hidden = true;
-    }
-    
-    BOOL isLastPage = (current == total);
-    
-    if (!isLastPage) {
-        if (collectionView.mj_footer.state == MJRefreshStateNoMoreData) {
-            [collectionView.mj_footer resetNoMoreData];
-        }
-    }
-    if (current == total == 1) {
-        collectionView.mj_footer.state = MJRefreshStateNoMoreData;
-        collectionView.mj_footer.hidden = true;
-    }
-    
-    if ([collectionView.mj_footer isRefreshing]) {
-        if (isLastPage) {
-            [collectionView.mj_footer endRefreshingWithNoMoreData];
-        } else  {
-            [collectionView.mj_footer endRefreshing];
-        }
-    }
-}
-
 #pragma mark - 分类商品专题列表
 - (void)thn_networkCagetorySubjectListData:(NSString *)categoryId size:(NSString *)size {
     NSDictionary *requestDic = @{@"category_id":categoryId,
@@ -260,12 +253,161 @@ static NSString *const goodsListCellId = @"GoodsListCellId";
     [self.goodsListMarr removeAllObjects];
 }
 
+#pragma mark - 情境列表
+- (void)thn_networkSceneListData {
+    [SVProgressHUD show];
+    NSDictionary *requestDic = @{@"page":@(self.sceneCurrentpage + 1),
+                                 @"size":@"10",
+                                 @"sort":@"2",
+                                 @"fine":@"1",
+                                 @"use_cache":@"1",
+                                 @"is_product":@"1"};
+    self.sceneListRequest = [FBAPI getWithUrlString:URLSceneList requestDictionary:requestDic delegate:self];
+    [self.sceneListRequest startRequestSuccess:^(FBRequest *request, id result) {
+        NSArray *sceneArr = [[result valueForKey:@"data"] valueForKey:@"rows"];
+        for (NSDictionary * sceneDic in sceneArr) {
+            HomeSceneListRow *homeSceneModel = [[HomeSceneListRow alloc] initWithDictionary:sceneDic];
+            [self.sceneListMarr addObject:homeSceneModel];
+            [self.sceneIdMarr addObject:[NSString stringWithFormat:@"%zi", homeSceneModel.idField]];
+            [self.userIdMarr addObject:[NSString stringWithFormat:@"%zi", homeSceneModel.userId]];
+        }
+        [self.sceneTable reloadData];
+        self.sceneCurrentpage = [[[result valueForKey:@"data"] valueForKey:@"current_page"] integerValue];
+        self.sceneTotalPage = [[[result valueForKey:@"data"] valueForKey:@"total_page"] integerValue];
+        [self requestIsLastData:self.sceneTable currentPage:self.sceneCurrentpage withTotalPage:self.sceneTotalPage];
+
+        [SVProgressHUD dismiss];
+        
+    } failure:^(FBRequest *request, NSError *error) {
+        [SVProgressHUD showErrorWithStatus:[error localizedDescription]];
+    }];
+}
+
+#pragma mark - 是否分页加载
+- (void)requestIsLastData:(UIScrollView *)scrollView currentPage:(NSInteger )current withTotalPage:(NSInteger)total {
+    if (total == 0) {
+        scrollView.mj_footer.state = MJRefreshStateNoMoreData;
+        scrollView.mj_footer.hidden = true;
+    }
+    
+    BOOL isLastPage = (current == total);
+    
+    if (!isLastPage) {
+        if (scrollView.mj_footer.state == MJRefreshStateNoMoreData) {
+            [scrollView.mj_footer resetNoMoreData];
+        }
+    }
+    if (current == total == 1) {
+        scrollView.mj_footer.state = MJRefreshStateNoMoreData;
+        scrollView.mj_footer.hidden = true;
+    }
+    
+    if ([scrollView.mj_footer isRefreshing]) {
+        if (isLastPage) {
+            [scrollView.mj_footer endRefreshingWithNoMoreData];
+        } else  {
+            [scrollView.mj_footer endRefreshing];
+        }
+    }
+}
+
+#pragma mark - 情境上拉加载
+- (void)addMJRefreshTable:(UITableView *)table {
+    table.mj_footer = [MJRefreshAutoNormalFooter footerWithRefreshingBlock:^{
+        if (self.sceneCurrentpage < self.sceneTotalPage) {
+            [self thn_networkSceneListData];
+        } else {
+            [table.mj_footer endRefreshing];
+        }
+    }];
+}
+
+#pragma mark 点赞
+- (void)thn_networkLikeSceneData:(NSString *)idx {
+    self.likeSceneRequest = [FBAPI postWithUrlString:URLLikeScene requestDictionary:@{@"id":idx, @"type":@"12"} delegate:self];
+    [self.likeSceneRequest startRequestSuccess:^(FBRequest *request, id result) {
+        if ([[result valueForKey:@"success"] isEqualToNumber:@1]) {
+            NSInteger index = [self.sceneIdMarr indexOfObject:idx];
+            NSString *loveCount = [NSString stringWithFormat:@"%zi", [[[result valueForKey:@"data"] valueForKey:@"love_count"] integerValue]];
+            [self.sceneListMarr[index] setValue:loveCount forKey:@"loveCount"];
+            [self.sceneListMarr[index] setValue:@"1" forKey:@"isLove"];
+        }
+        
+    } failure:^(FBRequest *request, NSError *error) {
+        NSLog(@"%@", error);
+    }];
+}
+
+#pragma mark 取消点赞
+- (void)thn_networkCancelLikeData:(NSString *)idx {
+    self.cancelLikeRequest = [FBAPI postWithUrlString:URLCancelLike requestDictionary:@{@"id":idx, @"type":@"12"} delegate:self];
+    [self.cancelLikeRequest startRequestSuccess:^(FBRequest *request, id result) {
+        if ([[result valueForKey:@"success"] isEqualToNumber:@1]) {
+            NSInteger index = [self.sceneIdMarr indexOfObject:idx];
+            NSString *loveCount = [NSString stringWithFormat:@"%zi", [[[result valueForKey:@"data"] valueForKey:@"love_count"] integerValue]];
+            [self.sceneListMarr[index] setValue:loveCount forKey:@"loveCount"];
+            [self.sceneListMarr[index] setValue:@"0" forKey:@"isLove"];
+        }
+        
+    } failure:^(FBRequest *request, NSError *error) {
+        NSLog(@"%@", error);
+    }];
+}
+
+#pragma mark 收藏
+- (void)thn_networkFavoriteData:(NSString *)idx {
+    self.favoriteRequest = [FBAPI postWithUrlString:URLFavorite requestDictionary:@{@"id":idx, @"type":@"12"} delegate:self];
+    [self.favoriteRequest startRequestSuccess:^(FBRequest *request, id result) {
+        if ([[result valueForKey:@"success"] isEqualToNumber:@1]) {
+            [SVProgressHUD showSuccessWithStatus:NSLocalizedString(@"favoriteDone", nil)];
+            NSInteger index = [self.sceneIdMarr indexOfObject:idx];
+            [self.sceneListMarr[index] setValue:@"1" forKey:@"isFavorite"];
+        }
+        
+    } failure:^(FBRequest *request, NSError *error) {
+        [SVProgressHUD showErrorWithStatus:[error localizedDescription]];
+    }];
+}
+
+#pragma mark 取消收藏
+- (void)thn_networkCancelFavoriteData:(NSString *)idx {
+    self.cancelFavoriteRequest = [FBAPI postWithUrlString:URLCancelFavorite requestDictionary:@{@"id":idx, @"type":@"12"} delegate:self];
+    [self.cancelFavoriteRequest startRequestSuccess:^(FBRequest *request, id result) {
+        if ([[result valueForKey:@"success"] isEqualToNumber:@1]) {
+            [SVProgressHUD showSuccessWithStatus:NSLocalizedString(@"cancelSaveScene", nil)];
+            NSInteger index = [self.sceneIdMarr indexOfObject:idx];
+            [self.sceneListMarr[index] setValue:@"0" forKey:@"isFavorite"];
+        }
+        
+    } failure:^(FBRequest *request, NSError *error) {
+        [SVProgressHUD showErrorWithStatus:[error localizedDescription]];
+    }];
+}
+
+#pragma mark 删除情境
+- (void)thn_networkDeleteScene:(NSString *)idx {
+    self.deleteRequest = [FBAPI postWithUrlString:URLDeleteScene requestDictionary:@{@"id":idx} delegate:self];
+    [self.deleteRequest startRequestSuccess:^(FBRequest *request, id result) {
+        if ([[result valueForKey:@"success"] isEqualToNumber:@1]) {
+            NSInteger index = [self.sceneIdMarr indexOfObject:idx];
+            [self.sceneListMarr removeObjectAtIndex:index];
+            [self.sceneIdMarr removeObjectAtIndex:index];
+            [self.userIdMarr removeObjectAtIndex:index];
+            [self.sceneTable deleteSections:[NSIndexSet indexSetWithIndex:index + 1] withRowAnimation:(UITableViewRowAnimationFade)];
+        }
+        
+    } failure:^(FBRequest *request, NSError *error) {
+        [SVProgressHUD showErrorWithStatus:[error localizedDescription]];
+    }];
+}
+
 #pragma mark - 设置视图UI
 - (void)thn_setMallViewUI {
     _goTop = NO;
     [self.view addSubview:self.menuView];
     [self.view addSubview:self.mallList];
     [self.view addSubview:self.goodsList];
+    [self.view addSubview:self.sceneTable];
 }
 
 #pragma mark - 上拉加载 & 下拉刷新
@@ -314,12 +456,16 @@ static NSString *const goodsListCellId = @"GoodsListCellId";
     _idx = self.categoryIdMarr[index];
     
     if (index == 1) {
+        self.sceneCurrentpage = 0;
+        [self thn_networkSceneListData];
+        
+    } else if (index == 2) {
         [SVProgressHUD show];
         [self removeCategorySubjectMarrData];
         [self thn_networkCagetorySubjectListData:@"0" size:@"1000"];
         [self.goodsList.mj_footer endRefreshingWithNoMoreData];
         
-    } else if (index > 1) {
+    } else if (index > 2) {
         [self removeCategorySubjectMarrData];
         [self thn_networkCagetorySubjectListData:_idx size:@"1"];
         
@@ -330,25 +476,166 @@ static NSString *const goodsListCellId = @"GoodsListCellId";
 }
 
 - (void)changeCollectionViewFrame:(NSInteger)index {
-    if (index > 0) {
-        CGRect goodsRect = self.goodsList.frame;
-        goodsRect = CGRectMake(0, 108, SCREEN_WIDTH, SCREEN_HEIGHT - 157);
-        CGRect mallRect = self.mallList.frame;
-        mallRect = CGRectMake(-SCREEN_WIDTH, 108, SCREEN_WIDTH, SCREEN_HEIGHT - 157);
-        [UIView animateWithDuration:0.3 animations:^{
-            self.goodsList.frame = goodsRect;
-            self.mallList.frame = mallRect;
-        }];
+    if (index > 2) {
+        index = 2;
+    }
+    
+    CGRect goodsRect = self.goodsList.frame;
+    goodsRect = CGRectMake((SCREEN_WIDTH * 2) - (SCREEN_WIDTH * index), 108, SCREEN_WIDTH, SCREEN_HEIGHT - 157);
+    
+    CGRect sceneRect = self.sceneTable.frame;
+    sceneRect = CGRectMake(SCREEN_WIDTH - SCREEN_WIDTH * index, 108, SCREEN_WIDTH, SCREEN_HEIGHT - 157);
+    
+    CGRect mallRect = self.mallList.frame;
+    mallRect = CGRectMake(-SCREEN_WIDTH * index, 108, SCREEN_WIDTH, SCREEN_HEIGHT - 157);
+    
+    [UIView animateWithDuration:0.3 animations:^{
+        self.goodsList.frame = goodsRect;
+        self.sceneTable.frame = sceneRect;
+        self.mallList.frame = mallRect;
+    }];
+}
+
+#pragma mark - 情境列表
+- (UITableView *)sceneTable {
+    if (!_sceneTable) {
+        _sceneTable = [[UITableView alloc] initWithFrame:CGRectMake(SCREEN_WIDTH, 108, SCREEN_WIDTH, SCREEN_HEIGHT - 157) style:(UITableViewStyleGrouped)];
+        _sceneTable.delegate = self;
+        _sceneTable.dataSource = self;
+        _sceneTable.tableFooterView = [UIView new];
+        _sceneTable.showsVerticalScrollIndicator = NO;
+        _sceneTable.backgroundColor = [UIColor colorWithHexString:@"#F8F8F8"];
+        _sceneTable.separatorStyle = UITableViewCellSeparatorStyleNone;
+        [self addMJRefreshTable:_sceneTable];
+    }
+    return _sceneTable;
+}
+
+#pragma mark tableViewDelegate & dataSource
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
+    return self.sceneListMarr.count;
+}
+
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+    return 4;
+}
+
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+    __weak __typeof(self)weakSelf = self;
+    
+    if (indexPath.row == 0) {
+        THNSceneImageTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:sceneImgCellId];
+        if (!cell) {
+            cell = [[THNSceneImageTableViewCell alloc] initWithStyle:(UITableViewCellStyleDefault) reuseIdentifier:sceneImgCellId];
+        }
+        if (self.sceneListMarr.count) {
+            [cell thn_setSceneImageData:self.sceneListMarr[indexPath.section]];
+        }
+        cell.vc = self;
+        cell.nav = self.navigationController;
+        return cell;
         
-    } else if (index == 0) {
-        CGRect goodsRect = self.goodsList.frame;
-        goodsRect = CGRectMake(SCREEN_WIDTH, 108, SCREEN_WIDTH, SCREEN_HEIGHT - 157);
-        CGRect mallRect = self.mallList.frame;
-        mallRect = CGRectMake(0, 108, SCREEN_WIDTH, SCREEN_HEIGHT - 157);
-        [UIView animateWithDuration:0.3 animations:^{
-            self.goodsList.frame = goodsRect;
-            self.mallList.frame = mallRect;
-        }];
+    } else if (indexPath.row == 1) {
+        THNUserInfoTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:userInfoCellId];
+        if (!cell) {
+            cell = [[THNUserInfoTableViewCell alloc] initWithStyle:(UITableViewCellStyleDefault) reuseIdentifier:userInfoCellId];
+        }
+        if (self.sceneListMarr.count) {
+            [cell thn_setHomeSceneUserInfoData:self.sceneListMarr[indexPath.section] userId:[self getLoginUserID] isLogin:[self isUserLogin]];
+        }
+        cell.vc = self;
+        cell.nav = self.navigationController;
+        return cell;
+        
+    } else if (indexPath.row == 2) {
+        THNSceneInfoTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:sceneInfoCellId];
+        if (!cell) {
+            cell = [[THNSceneInfoTableViewCell alloc] initWithStyle:(UITableViewCellStyleDefault) reuseIdentifier:sceneInfoCellId];
+        }
+        if (self.sceneListMarr.count) {
+            [cell thn_setSceneContentData:self.sceneListMarr[indexPath.section]];
+            _contentHigh = cell.cellHigh;
+            _defaultContentHigh = cell.defaultCellHigh;
+        }
+        cell.nav = self.navigationController;
+        return cell;
+        
+    } else if (indexPath.row == 3) {
+        THNDataInfoTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:dataInfoCellId];
+        if (!cell) {
+            cell = [[THNDataInfoTableViewCell alloc] initWithStyle:(UITableViewCellStyleDefault) reuseIdentifier:dataInfoCellId];
+        }
+        if (self.sceneListMarr.count) {
+            [cell thn_setSceneData:self.sceneListMarr[indexPath.section]
+                           isLogin:[self isUserLogin]
+                        isUserSelf:[self isLoginUserSelf:self.userIdMarr[indexPath.section]]];
+            
+            cell.beginLikeTheSceneBlock = ^(NSString *idx) {
+                [weakSelf thn_networkLikeSceneData:idx];
+            };
+            
+            cell.cancelLikeTheSceneBlock = ^(NSString *idx) {
+                [weakSelf thn_networkCancelLikeData:idx];
+            };
+            
+            cell.beginFavoriteTheSceneBlock = ^(NSString *idx) {
+                [weakSelf thn_networkFavoriteData:idx];
+            };
+            
+            cell.cancelFavoriteTheSceneBlock = ^(NSString *idx) {
+                [weakSelf thn_networkCancelFavoriteData:idx];
+            };
+            
+            cell.deleteTheSceneBlock = ^(NSString *idx) {
+                [weakSelf thn_networkDeleteScene:idx];
+            };
+        }
+        cell.vc = self;
+        cell.nav = self.navigationController;
+        return cell;
+    }
+
+    return nil;
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
+    if (indexPath.row == 0) {
+        return SCREEN_WIDTH;
+        
+    } else if (indexPath.row == 1) {
+        return 50;
+        
+    } else if (indexPath.row == 2) {
+        if (_selectedIndexPath && _selectedIndexPath.section == indexPath.section) {
+            return _contentHigh + 15;
+        } else {
+            return _defaultContentHigh + 15;
+        }
+        
+    } else if (indexPath.row == 3) {
+        return 50;
+    }
+    return 0;
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section {
+    return 0.01f;
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
+    return 10.0f;
+}
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    if (indexPath.row == 2) {
+        if (_contentHigh > 65.0f) {
+            if (_selectedIndexPath && _selectedIndexPath.section == indexPath.section) {
+                _selectedIndexPath = nil;
+            } else {
+                _selectedIndexPath = indexPath;
+            }
+            [tableView reloadRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
+        }
     }
 }
 
@@ -359,7 +646,7 @@ static NSString *const goodsListCellId = @"GoodsListCellId";
         flowLayou.minimumLineSpacing = 15.0f;
         flowLayou.scrollDirection = UICollectionViewScrollDirectionVertical;
         
-        _goodsList = [[UICollectionView alloc] initWithFrame:CGRectMake(SCREEN_WIDTH, 108, SCREEN_WIDTH, SCREEN_HEIGHT - 157) collectionViewLayout:flowLayou];
+        _goodsList = [[UICollectionView alloc] initWithFrame:CGRectMake(SCREEN_WIDTH *2, 108, SCREEN_WIDTH, SCREEN_HEIGHT - 157) collectionViewLayout:flowLayou];
         _goodsList.showsVerticalScrollIndicator = NO;
         _goodsList.delegate = self;
         _goodsList.dataSource = self;
@@ -643,5 +930,25 @@ static NSString *const goodsListCellId = @"GoodsListCellId";
     return _cageSubjectTypeMarr;
 }
 
+- (NSMutableArray *)sceneListMarr {
+    if (!_sceneListMarr) {
+        _sceneListMarr = [NSMutableArray array];
+    }
+    return _sceneListMarr;
+}
+
+- (NSMutableArray *)sceneIdMarr {
+    if (!_sceneIdMarr) {
+        _sceneIdMarr = [NSMutableArray array];
+    }
+    return _sceneIdMarr;
+}
+
+- (NSMutableArray *)userIdMarr {
+    if (!_userIdMarr) {
+        _userIdMarr = [NSMutableArray array];
+    }
+    return _userIdMarr;
+}
 
 @end
