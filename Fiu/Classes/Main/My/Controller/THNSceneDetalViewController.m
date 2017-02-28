@@ -90,7 +90,6 @@ static NSString *const URLDeleteScene = @"/scene_sight/delete";
     [super viewDidLoad];
     
     [[UIApplication sharedApplication] setStatusBarHidden:NO];
-    self.navViewTitle.text = @"情境详情";
     self.delegate = self;
     [self addBarItemRightBarButton:@"" image:@"share_icon" isTransparent:NO];
     
@@ -100,7 +99,6 @@ static NSString *const URLDeleteScene = @"/scene_sight/delete";
     [SVProgressHUD show];
     FBAPI *api = [[FBAPI alloc] init];
     NSString *uuid = [api uuid];
-    NSLog(@"类别 %@", self.sceneDetalId);
     FBRequest *request = [FBAPI postWithUrlString:@"/scene_sight/view" requestDictionary:@{
                                                                                            @"id" : self.sceneDetalId,
                                                                                            @"uuid" : uuid,
@@ -111,6 +109,7 @@ static NSString *const URLDeleteScene = @"/scene_sight/delete";
             self.model = [[HomeSceneListRow alloc] initWithDictionary:[result valueForKey:@"data"]];
             NSArray *ary = [THNProductDongModel mj_objectArrayWithKeyValuesArray:self.model.products];
             self.model.products = ary;
+            self.navViewTitle.text = self.model.title;
             self.comments = [result valueForKey:@"data"][@"comments"];
             [self.sceneTable reloadData];
             [SVProgressHUD dismiss];
@@ -296,6 +295,8 @@ static NSString *const URLDeleteScene = @"/scene_sight/delete";
         NSMutableArray *ary = [NSMutableArray array];
         if (self.model.category_ids.count > 1) {
             [ary addObjectsFromArray:self.model.category_ids];
+        } else {
+            cell.biaoTiLabel.text = @"";
         }
         NSString *string = [ary componentsJoinedByString:@","];
         cell.string = string;

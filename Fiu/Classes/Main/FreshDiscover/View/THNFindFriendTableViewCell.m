@@ -83,7 +83,7 @@ static NSString *const ShareURlText = @"我在D3IN寻找同路人；希望和你
         self.weixinLabel.text = @"邀请微信好友";
         self.weixinLabel.font = [UIFont systemFontOfSize:12];
         self.weixinLabel.textAlignment = NSTextAlignmentCenter;
-        self.weixinLabel.textColor = [UIColor blackColor];
+        self.weixinLabel.textColor = [UIColor colorWithHexString:@"#727272"];
         [self.contentView addSubview:self.weixinLabel];
         [_weixinLabel mas_makeConstraints:^(MASConstraintMaker *make) {
             make.top.mas_equalTo(self.touXiang.mas_bottom).mas_offset(5*SCREEN_HEIGHT/667.0);
@@ -107,7 +107,7 @@ static NSString *const ShareURlText = @"我在D3IN寻找同路人；希望和你
         self.tongxunluLabel.text = @"连接通讯录";
         self.tongxunluLabel.font = [UIFont systemFontOfSize:12];
         self.tongxunluLabel.textAlignment = NSTextAlignmentCenter;
-        self.tongxunluLabel.textColor = [UIColor blackColor];
+        self.tongxunluLabel.textColor = [UIColor colorWithHexString:@"#727272"];
         [self.contentView addSubview:self.tongxunluLabel];
         [_tongxunluLabel mas_makeConstraints:^(MASConstraintMaker *make) {
             make.top.mas_equalTo(self.tongxunlu.mas_bottom).mas_offset(5*SCREEN_HEIGHT/667.0);

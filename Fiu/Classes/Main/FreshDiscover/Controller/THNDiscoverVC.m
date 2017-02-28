@@ -406,7 +406,7 @@ UITableViewDataSource
         domainInfoVC.infoId = model.web_url;
         [self.navigationController pushViewController:domainInfoVC animated:YES];
     } else if (indexPath.section == 4) {
-        NSArray *ary = self.collectionDatas[5];
+        NSArray *ary = self.collectionDatas[6];
         THNBrandInfoViewController *vc = [[THNBrandInfoViewController alloc] init];
         Pro_categoryModel *model = ary[indexPath.row];
         vc.brandId = model._id;
