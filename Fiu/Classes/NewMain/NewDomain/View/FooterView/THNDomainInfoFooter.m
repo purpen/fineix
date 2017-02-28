@@ -376,7 +376,7 @@ static NSInteger const actionButtonTag  = 611;
 - (UIScrollView *)rollView {
     if (!_rollView) {
         _rollView = [[UIScrollView alloc] init];
-        _rollView.contentSize = CGSizeMake(SCREEN_WIDTH * tableViewCount, 0);
+        _rollView.contentSize = CGSizeMake(SCREEN_WIDTH * 3, 0);
         _rollView.pagingEnabled = YES;
         _rollView.showsVerticalScrollIndicator = NO;
         _rollView.showsHorizontalScrollIndicator = NO;
