@@ -25,6 +25,18 @@ static NSString *const GoodsCellId = @"goodsCellId";
 }
 
 - (void)setNewGoodsData:(NSMutableArray *)data {
+    self.titleLabel.text = @"新鲜好货早知道";
+    [self.goodsIdMarr removeAllObjects];
+    
+    self.goodsMarr = data;
+    for (THNMallGoodsModelItem *model in self.goodsMarr) {
+        [self.goodsIdMarr addObject:[NSString stringWithFormat:@"%zi",model.idField]];
+    }
+    [self.goodList reloadData];
+}
+
+- (void)setHotGoodsData:(NSMutableArray *)data {
+    self.titleLabel.text = @"好货人气王";
     [self.goodsIdMarr removeAllObjects];
     
     self.goodsMarr = data;
@@ -39,7 +51,6 @@ static NSString *const GoodsCellId = @"goodsCellId";
         _titleLabel = [[UILabel alloc] initWithFrame:CGRectMake(15, 12, 200, 15)];
         _titleLabel.font = [UIFont systemFontOfSize:12];
         _titleLabel.textColor = [UIColor colorWithHexString:@"#666666"];
-        _titleLabel.text = @"新鲜好货早知道";
     }
     return _titleLabel;
 }

@@ -112,7 +112,7 @@ static NSInteger const actionButtonTag  = 611;
         [self.sceneTable reloadData];
         self.sceneCurrentpage = [[[result valueForKey:@"data"] valueForKey:@"current_page"] integerValue];
         self.sceneTotalPage = [[[result valueForKey:@"data"] valueForKey:@"total_page"] integerValue];
-         [self requestIsLastData:self.sceneTable currentPage:self.sceneCurrentpage withTotalPage:self.sceneTotalPage];
+        [self requestIsLastData:self.sceneTable currentPage:self.sceneCurrentpage withTotalPage:self.sceneTotalPage];
         [SVProgressHUD dismiss];
         
     } failure:^(FBRequest *request, NSError *error) {

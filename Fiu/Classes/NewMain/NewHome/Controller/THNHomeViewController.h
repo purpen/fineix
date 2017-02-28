@@ -22,46 +22,46 @@
 
 /**  */
 @property (nonatomic, strong) UILabel *addressCityLabel;
-@pro_strong FBRequest *rollImgRequest;
-@pro_strong FBRequest *userHelpRequest;
-@pro_strong FBRequest *categoryRequest;
-@pro_strong FBRequest *niceDomainRequest;
-@pro_strong FBRequest *goodsRequest;
-@pro_strong FBRequest *goodsSubjectRequest;
-@pro_strong FBRequest *subjectRequest;
-@pro_strong FBRequest *subjectInfoRequest;
-@pro_strong FBRequest *sceneListRequest;
-@pro_strong FBRequest *likeSceneRequest;
-@pro_strong FBRequest *cancelLikeRequest;
-@pro_strong FBRequest *followRequest;
-@pro_strong FBRequest *cancelFollowRequest;
-@pro_strong FBRequest *favoriteRequest;
-@pro_strong FBRequest *cancelFavoriteRequest;
-@pro_strong FBRequest *hotUserRequest;
-@pro_strong FBRequest *deleteRequest;
+@property (nonatomic, strong) FBRequest *rollImgRequest;
+@property (nonatomic, strong) FBRequest *userHelpRequest;
+@property (nonatomic, strong) FBRequest *categoryRequest;
+@property (nonatomic, strong) FBRequest *niceDomainRequest;
+@property (nonatomic, strong) FBRequest *goodsRequest;
+@property (nonatomic, strong) FBRequest *goodsSubjectRequest;
+@property (nonatomic, strong) FBRequest *subjectRequest;
+@property (nonatomic, strong) FBRequest *subjectInfoRequest;
+@property (nonatomic, strong) FBRequest *followRequest;
+@property (nonatomic, strong) FBRequest *cancelFollowRequest;
+@property (nonatomic, strong) FBRequest *sceneListRequest;
+@property (nonatomic, strong) FBRequest *likeSceneRequest;
+@property (nonatomic, strong) FBRequest *cancelLikeRequest;
+@property (nonatomic, strong) FBRequest *favoriteRequest;
+@property (nonatomic, strong) FBRequest *cancelFavoriteRequest;
+@property (nonatomic, strong) FBRequest *deleteRequest;
+@property (nonatomic, strong) FBRequest *hotUserRequest;
 
-@pro_strong FBRollImages *homerollView;
-@pro_strong UITableView *homeTable;
-@pro_strong GroupHeaderView *headerView;
+@property (nonatomic, strong) FBRollImages *homerollView;
+@property (nonatomic, strong) GroupHeaderView *headerView;
+@property (nonatomic, strong) UITableView *homeTable;
+@property (nonatomic, strong) NSMutableArray *sceneListMarr;
+@property (nonatomic, strong) NSMutableArray *sceneIdMarr;
+@property (nonatomic, strong) NSMutableArray *userIdMarr;
 
-@pro_strong NSMutableArray *rollList;
-@pro_strong NSMutableArray *subjectMarr;
-@pro_strong NSMutableArray *subjectIdMarr;
-@pro_strong NSMutableArray *sceneListMarr;
-@pro_strong NSMutableArray *sceneIdMarr;
-@pro_strong NSMutableArray *userIdMarr;
-@pro_strong NSMutableArray *hotUserMarr;
-@pro_strong NSMutableArray *domainCategoryMarr;
-@pro_strong NSMutableArray *userHelpMarr;
-@pro_strong NSMutableArray *niceDomainMarr;
-@pro_strong NSMutableArray *goodsMarr;
-@pro_strong NSMutableArray *goodsSubjectMarr;
-@pro_strong NSMutableArray *goodsSubjectIdMarr;
-@pro_strong NSMutableArray *goodsSubjectTypeMarr;
+@property (nonatomic, strong) NSMutableArray *rollList;
+@property (nonatomic, strong) NSMutableArray *subjectMarr;
+@property (nonatomic, strong) NSMutableArray *subjectIdMarr;
+@property (nonatomic, strong) NSMutableArray *hotUserMarr;
+@property (nonatomic, strong) NSMutableArray *domainCategoryMarr;
+@property (nonatomic, strong) NSMutableArray *userHelpMarr;
+@property (nonatomic, strong) NSMutableArray *niceDomainMarr;
+@property (nonatomic, strong) NSMutableArray *goodsMarr;
+@property (nonatomic, strong) NSMutableArray *goodsSubjectMarr;
+@property (nonatomic, strong) NSMutableArray *goodsSubjectIdMarr;
+@property (nonatomic, strong) NSMutableArray *goodsSubjectTypeMarr;
 
-@pro_strong THNHotUserView *hotUserList;
-@pro_strong UIView *hotUserView;
-@pro_strong BuyCarDefault *defaultHomeView;
+@property (nonatomic, strong) THNHotUserView *hotUserList;
+@property (nonatomic, strong) UIView *hotUserView;
+@property (nonatomic, strong) BuyCarDefault *defaultHomeView;
 @property (nonatomic, strong) THNHomeTableViewFooter *footerImageView;
 
 @end

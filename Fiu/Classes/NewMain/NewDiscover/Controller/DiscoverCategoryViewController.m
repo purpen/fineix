@@ -9,7 +9,6 @@
 #import "DiscoverCategoryViewController.h"
 #import "THNDiscoverSceneCollectionViewCell.h"
 #import "HomeSceneListRow.h"
-#import "THNSceneListViewController.h"
 #import "THNSceneDetalViewController.h"
 #import "THNLoginRegisterViewController.h"
 
@@ -281,44 +280,6 @@ static NSString *const URLCancelLike = @"/favorite/ajax_cancel_love";
     [[UIApplication sharedApplication] setStatusBarHidden:NO];
     self.navViewTitle.text = self.vcTitle;
     self.delegate = self;
-    [self thn_addSubscribeBtn];
-    [self.subscribeBtn addTarget:self action:@selector(subscribeBtnClick:) forControlEvents:(UIControlEventTouchUpInside)];
-}
-
-- (void)subscribeBtnClick:(UIButton *)button {
-    if ([self isUserLogin]) {
-        if (button.selected == NO) {
-            button.selected = YES;
-            POPSpringAnimation *scaleAnimation = [POPSpringAnimation animationWithPropertyNamed:kPOPLayerScaleXY];
-            scaleAnimation.fromValue = [NSValue valueWithCGSize:CGSizeMake(0.5, 0.5)];
-            scaleAnimation.toValue = [NSValue valueWithCGSize:CGSizeMake(1.0, 1.0)];
-            scaleAnimation.springBounciness = 10.f;
-            scaleAnimation.springSpeed = 10.0f;
-            [button.layer pop_addAnimation:scaleAnimation forKey:@"scaleAnim"];
-            button.layer.borderColor = [UIColor colorWithHexString:MAIN_COLOR].CGColor;
-            button.backgroundColor = [UIColor colorWithHexString:MAIN_COLOR];
-            
-            [self thn_AddOrRemThemeData:1];
-            
-        } else if (button.selected == YES) {
-            button.selected = NO;
-            POPSpringAnimation *scaleAnimation = [POPSpringAnimation animationWithPropertyNamed:kPOPLayerScaleXY];
-            scaleAnimation.fromValue = [NSValue valueWithCGSize:CGSizeMake(0.5, 0.5)];
-            scaleAnimation.toValue = [NSValue valueWithCGSize:CGSizeMake(1.0, 1.0)];
-            scaleAnimation.springBounciness = 10.f;
-            scaleAnimation.springSpeed = 10.0f;
-            [button.layer pop_addAnimation:scaleAnimation forKey:@"scaleAnim"];
-            button.layer.borderColor = [UIColor colorWithHexString:WHITE_COLOR alpha:0.6].CGColor;
-            button.backgroundColor = [UIColor colorWithHexString:BLACK_COLOR];
-            
-            [self thn_AddOrRemThemeData:2];
-        }
-    
-    } else {
-        THNLoginRegisterViewController * loginSignupVC = [[THNLoginRegisterViewController alloc] init];
-        UINavigationController * navi = [[UINavigationController alloc] initWithRootViewController:loginSignupVC];
-        [self presentViewController:navi animated:YES completion:nil];
-    }
 }
 
 #pragma mark - NSMutableArray
