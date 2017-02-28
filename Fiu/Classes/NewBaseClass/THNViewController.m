@@ -18,6 +18,7 @@
 #import "THNXinPinDetalViewController.h"
 #import "THNCuXiaoDetalViewController.h"
 #import "THNProjectViewController.h"
+#import "THNQingJingZhuanTiViewController.h"
 
 static NSString *const URLGoodsCarNum = @"/shopping/fetch_cart_count";
 static NSInteger const saveTime = 30 * 24 * 60;
@@ -146,6 +147,10 @@ static NSInteger const saveTime = 30 * 24 * 60;
         cuXiao.cuXiaoDetalId = idx;
         cuXiao.vcType = 2;
         [nav pushViewController:cuXiao animated:YES];
+    } else if (type == 6) {
+        THNQingJingZhuanTiViewController *vc = [[THNQingJingZhuanTiViewController alloc] init];
+        vc.qingJingZhuanTiID = idx;
+        [nav pushViewController:vc animated:YES];
     }
 }
 

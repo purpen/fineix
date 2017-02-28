@@ -29,6 +29,8 @@
 		1F2362511E643D9200A6178C /* THNQingJingZhuanTiViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F2362501E643D9200A6178C /* THNQingJingZhuanTiViewController.m */; };
 		1F2362591E64404600A6178C /* THNQiYeQingDingZhiViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F2362581E64404600A6178C /* THNQiYeQingDingZhiViewController.m */; };
 		1F23625C1E64417B00A6178C /* THNZhaoMuViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F23625B1E64417B00A6178C /* THNZhaoMuViewController.m */; };
+		1F23625F1E6517F400A6178C /* THNOneModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F23625E1E6517F400A6178C /* THNOneModel.m */; };
+		1F2362621E651A0D00A6178C /* THNQingJingOneCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F2362611E651A0D00A6178C /* THNQingJingOneCell.m */; };
 		1F27AE8B1CE06BFA005A434B /* libc++.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 1F27AE8A1CE06BFA005A434B /* libc++.tbd */; };
 		1F27AE8D1CE06C3C005A434B /* CoreText.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1F27AE8C1CE06C3C005A434B /* CoreText.framework */; };
 		1F27AE8E1CE06C48005A434B /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 280045181C805CA3005F5C2E /* CoreGraphics.framework */; };
@@ -871,6 +873,10 @@
 		1F2362581E64404600A6178C /* THNQiYeQingDingZhiViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THNQiYeQingDingZhiViewController.m; sourceTree = "<group>"; };
 		1F23625A1E64417B00A6178C /* THNZhaoMuViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THNZhaoMuViewController.h; sourceTree = "<group>"; };
 		1F23625B1E64417B00A6178C /* THNZhaoMuViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THNZhaoMuViewController.m; sourceTree = "<group>"; };
+		1F23625D1E6517F400A6178C /* THNOneModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THNOneModel.h; sourceTree = "<group>"; };
+		1F23625E1E6517F400A6178C /* THNOneModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THNOneModel.m; sourceTree = "<group>"; };
+		1F2362601E651A0D00A6178C /* THNQingJingOneCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THNQingJingOneCell.h; sourceTree = "<group>"; };
+		1F2362611E651A0D00A6178C /* THNQingJingOneCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THNQingJingOneCell.m; sourceTree = "<group>"; };
 		1F27AE8A1CE06BFA005A434B /* libc++.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = "libc++.tbd"; path = "usr/lib/libc++.tbd"; sourceTree = SDKROOT; };
 		1F27AE8C1CE06C3C005A434B /* CoreText.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreText.framework; path = System/Library/Frameworks/CoreText.framework; sourceTree = SDKROOT; };
 		1F27AE8F1CE06C56005A434B /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
@@ -3677,6 +3683,8 @@
 				1F2AFCF41D8817CC00DA6035 /* THNXinPinCollectionViewCell.h */,
 				1F2AFCF51D8817CC00DA6035 /* THNXinPinCollectionViewCell.m */,
 				1F2AFCF61D8817CC00DA6035 /* THNXinPinCollectionViewCell.xib */,
+				1F23625D1E6517F400A6178C /* THNOneModel.h */,
+				1F23625E1E6517F400A6178C /* THNOneModel.m */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -3934,6 +3942,8 @@
 				1FBA9EA51D9E07C800D7FDA6 /* RecipeCollectionHeaderView.h */,
 				1FBA9EA61D9E07C800D7FDA6 /* RecipeCollectionHeaderView.m */,
 				1FBA9EA71D9E07C800D7FDA6 /* RecipeCollectionHeaderView.xib */,
+				1F2362601E651A0D00A6178C /* THNQingJingOneCell.h */,
+				1F2362611E651A0D00A6178C /* THNQingJingOneCell.m */,
 			);
 			path = view;
 			sourceTree = "<group>";
@@ -6069,6 +6079,7 @@
 				D840F0931D93B57700CE9FB7 /* THNRemindModelRow.m in Sources */,
 				1FCDCC8D1D08085000C92E78 /* InviteCCodeViewController.m in Sources */,
 				D8117ADD1E5A89D50094E7EB /* HomeSceneListLocation.m in Sources */,
+				1F2362621E651A0D00A6178C /* THNQingJingOneCell.m in Sources */,
 				1F2A8FD51CF40277005116C7 /* FbGoodsItemsTableViewCell.m in Sources */,
 				1F2AFD021D8817CC00DA6035 /* THNArticleViewController.m in Sources */,
 				D8C0950D1D752E9500908491 /* FBEditShareInfoViewController.m in Sources */,
@@ -6307,6 +6318,7 @@
 				1F2A8FB41CF40277005116C7 /* BrandInfoData.m in Sources */,
 				D8117AE21E5A89D50094E7EB /* SceneInfoCounter.m in Sources */,
 				1F2AFD081D8817CC00DA6035 /* THNProjectGoodsCollectionViewCell.m in Sources */,
+				1F23625F1E6517F400A6178C /* THNOneModel.m in Sources */,
 				1F2A8FAA1CF40277005116C7 /* FBGoodsCommentViewController.m in Sources */,
 				D8B855C21D3F6BA10008BD57 /* AddLocationView.m in Sources */,
 				D8117AFB1E5AAB570094E7EB /* THNHomeSubjectTableViewCell.m in Sources */,

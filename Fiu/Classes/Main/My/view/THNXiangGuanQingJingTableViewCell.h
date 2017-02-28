@@ -22,5 +22,7 @@
 @property(nonatomic,copy) NSString *string;
 /**  */
 @property (nonatomic, strong) UIViewController *vc;
+/**  */
+@property (nonatomic, strong) UILabel *biaoTiLabel;
 
 @end

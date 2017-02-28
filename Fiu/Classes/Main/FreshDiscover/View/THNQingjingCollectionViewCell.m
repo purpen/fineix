@@ -13,6 +13,7 @@
 #import "THNSceneDetalViewController.h"
 #import "CollectionCategoryModel.h"
 #import "THNViewController.h"
+#import "DiscoverCategoryViewController.h"
 
 @interface THNQingjingCollectionViewCell () <UICollectionViewDelegate, UICollectionViewDataSource>
 
@@ -49,9 +50,9 @@
 
 -(UIEdgeInsets)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout insetForSectionAtIndex:(NSInteger)section{
     if (section == 1) {
-        return UIEdgeInsetsMake(20*SCREEN_HEIGHT/667.0, 18*SCREEN_HEIGHT/667.0, 0, 18*SCREEN_HEIGHT/667.0);
+        return UIEdgeInsetsMake(20*SCREEN_HEIGHT/667.0, 25*SCREEN_HEIGHT/667.0, 0, 25*SCREEN_HEIGHT/667.0);
     } else if (section == 0) {
-        return UIEdgeInsetsMake(0, 18*SCREEN_HEIGHT/667.0, 0, 18*SCREEN_HEIGHT/667.0);
+        return UIEdgeInsetsMake(0, 25*SCREEN_HEIGHT/667.0, 0, 25*SCREEN_HEIGHT/667.0);
     }
     return UIEdgeInsetsMake(0, 0, 0, 0);
 }
@@ -86,10 +87,11 @@
     if (section == 1) {
         return 18*SCREEN_HEIGHT/667.0;
     } else if (section == 0) {
-        return 10*SCREEN_HEIGHT/667.0;
+        return 3*SCREEN_HEIGHT/667.0;
     }
     return 0;
 }
+
 
 -(UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath{
     if (indexPath.section == 0) {
@@ -108,13 +110,14 @@
     if (indexPath.section == 0) {
         StickModel *model = self.modelAry[indexPath.row];
         THNViewController *vc1 = [[THNViewController alloc] init];
+        NSLog(@"sdsadasbdasdbsab  %@",model.web_url);
         [vc1 thn_tiaoZhuanLanMuWeiWithType:[model.type integerValue] andId:model.web_url andDelegate:self andNav:self.nav];
     } else {
-        THNSceneDetalViewController *vc = [[THNSceneDetalViewController alloc] init];
-        Pro_categoryModel *model = self.modelAry[indexPath.row + 2];
-        vc.sceneDetalId = model._id;
-        NSLog(@"weewfweifwefwueid  %@", model._id);
-        [self.nav pushViewController:vc animated:YES];
+        Pro_categoryModel *model = self.modelAry[indexPath.row+2];
+        DiscoverCategoryViewController *categoryVC = [[DiscoverCategoryViewController alloc] init];
+        categoryVC.vcTitle = model.title;
+        categoryVC.categoryId = model._id;
+        [self.nav pushViewController:categoryVC animated:YES];
     }
 }
 

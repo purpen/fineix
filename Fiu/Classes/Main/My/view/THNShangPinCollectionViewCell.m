@@ -117,7 +117,7 @@
         [self.bgImageView addSubview:self.extLabel];
         [_extLabel mas_makeConstraints:^(MASConstraintMaker *make) {
             make.left.mas_equalTo(self.iconImageView.mas_right).mas_offset(10);
-            make.top.mas_equalTo(self.bgImageView.mas_top).mas_offset(10);
+            make.top.mas_equalTo(self.bgImageView.mas_top).mas_offset(12);
             make.width.mas_lessThanOrEqualTo(200);
         }];
         
@@ -128,7 +128,7 @@
         [self.contentView addSubview:self.priceLabel];
         [_priceLabel mas_makeConstraints:^(MASConstraintMaker *make) {
             make.left.mas_equalTo(self.extLabel.mas_left).mas_offset(-1);
-            make.bottom.mas_equalTo(self.iconImageView.mas_bottom).mas_offset(-5);
+            make.bottom.mas_equalTo(self.iconImageView.mas_bottom).mas_offset(-7);
         }];
         
         self.goImageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"cell_go_black"]];

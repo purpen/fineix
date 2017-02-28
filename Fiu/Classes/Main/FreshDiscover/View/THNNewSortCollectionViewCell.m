@@ -32,17 +32,17 @@
         self.imageV.layer.cornerRadius = 30*SCREEN_HEIGHT/667.0;
         [_imageV mas_makeConstraints:^(MASConstraintMaker *make) {
             make.left.top.right.mas_equalTo(self.contentView).mas_offset(0);
-            make.bottom.mas_equalTo(self.contentView.mas_bottom).mas_offset(-40*SCREEN_HEIGHT/667.0);
+            make.bottom.mas_equalTo(self.contentView.mas_bottom).mas_offset(-20*SCREEN_HEIGHT/667.0);
         }];
         
         self.textLabel = [[UILabel alloc] init];
-        self.textLabel.font = [UIFont systemFontOfSize:13];
+        self.textLabel.font = [UIFont systemFontOfSize:11];
         self.textLabel.textAlignment = NSTextAlignmentCenter;
-        self.textLabel.textColor = [UIColor colorWithHexString:@"#727272"];
-        [self.contentView addSubview:self.textLabel];
+        self.textLabel.textColor = [UIColor whiteColor];
+        [self.imageV addSubview:self.textLabel];
         [_textLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.top.mas_equalTo(self.imageV.mas_bottom).mas_offset(5*SCREEN_HEIGHT/667.0);
-            make.centerX.mas_equalTo(self.contentView.mas_centerX).mas_offset(0);
+            make.top.mas_equalTo(self.imageV.mas_top).mas_offset(37*SCREEN_HEIGHT/667.0);
+            make.centerX.mas_equalTo(self.imageV.mas_centerX).mas_offset(0);
         }];
         
     }

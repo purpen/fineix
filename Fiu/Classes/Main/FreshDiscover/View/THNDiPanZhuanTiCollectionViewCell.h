@@ -11,4 +11,5 @@
 @class StickModel;
 @interface THNDiPanZhuanTiCollectionViewCell : UICollectionViewCell
 @property (nonatomic, strong) StickModel *model;
+@property (nonatomic, strong) UILabel *textLabel;
 @end

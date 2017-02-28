@@ -7,31 +7,120 @@
 //
 
 #import "THNQingJingZhuanTiViewController.h"
+#import "HomeSceneListRow.h"
+#import "MJExtension.h"
+#import "THNOneModel.h"
+#import "THNQingJingOneCell.h"
+#import "THNXiangGuanQingJingTableViewCell.h"
+#import "THNSceneDetalViewController.h"
 
-@interface THNQingJingZhuanTiViewController ()
+@interface THNQingJingZhuanTiViewController () <UITableViewDelegate, UITableViewDataSource>
+
+/**  */
+@property (nonatomic, strong) UITableView *tableView;
+/**  */
+@property (nonatomic, strong) NSMutableArray *modelAry;
 
 @end
 
 @implementation THNQingJingZhuanTiViewController
 
+-(NSMutableArray *)modelAry{
+    if (!_modelAry) {
+        _modelAry = [NSMutableArray array];
+    }
+    return _modelAry;
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
+    self.tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 64, SCREEN_WIDTH, SCREEN_HEIGHT-64) style:UITableViewStylePlain];
+    self.tableView.delegate = self;
+    self.tableView.dataSource = self;
+    [self.view addSubview:self.tableView];
+    self.tableView.showsVerticalScrollIndicator = NO;
+    self.tableView.showsHorizontalScrollIndicator = NO;
+    self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
+    [self.tableView registerClass:[THNQingJingOneCell class] forCellReuseIdentifier:THNQINGJingOneCell];
+    [self.tableView registerClass:[THNXiangGuanQingJingTableViewCell class] forCellReuseIdentifier:THNXIANGGuanQingJingTableViewCell];
     // Do any additional setup after loading the view.
+    FBRequest *request = [FBAPI postWithUrlString:@"/scene_subject/view" requestDictionary:@{@"id":self.qingJingZhuanTiID} delegate:self];
+    [request startRequestSuccess:^(FBRequest *request, id result) {
+        [self.modelAry removeAllObjects];
+        NSDictionary *dataDict = result[@"data"];
+        THNOneModel *modelOne = [THNOneModel mj_objectWithKeyValues:dataDict];
+        [self.modelAry addObject:modelOne];
+        NSArray *ary = dataDict[@"sights"];
+        for (NSDictionary *dict in ary) {
+            HomeSceneListRow *model = [[HomeSceneListRow alloc] initWithDictionary:dict];
+            [self.modelAry addObject:model];
+        }
+        [self.tableView reloadData];
+    } failure:^(FBRequest *request, NSError *error) {
+        
+    }];
 }
 
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
+-(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
+    return 2;
 }
 
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
+-(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
+    if (self.modelAry.count == 0) {
+        return 0;
+    }
+    if (section == 0) {
+        return 1;
+    } else {
+        return 1;
+    }
 }
-*/
+
+
+-(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
+    if (indexPath.section == 0) {
+        THNQingJingOneCell *cell = [tableView dequeueReusableCellWithIdentifier:THNQINGJingOneCell];
+        THNOneModel *model = self.modelAry[0];
+        cell.model = model;
+        return cell;
+    } else if (indexPath.section == 1) {
+        HomeSceneListRow *model = self.modelAry[indexPath.row + 1];
+        THNXiangGuanQingJingTableViewCell * cell = [tableView dequeueReusableCellWithIdentifier:THNXIANGGuanQingJingTableViewCell];
+        cell.nav = self.navigationController;
+        cell.vc = self;
+        cell.biaoTiLabel.text = @"默认排序";
+        NSMutableArray *ary = [NSMutableArray array];
+        if (model.category_ids.count > 1) {
+            [ary addObjectsFromArray:model.category_ids];
+        }
+        NSString *string = [ary componentsJoinedByString:@","];
+        cell.string = string;
+        return cell;
+    }
+    UITableViewCell *cell;
+    return cell;
+}
+
+-(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+    if (indexPath.section == 1) {
+        HomeSceneListRow *model = self.modelAry[indexPath.row + 1];
+        THNSceneDetalViewController *vc = [[THNSceneDetalViewController alloc] init];
+        vc.sceneDetalId = [NSString stringWithFormat:@"%ld",(long)model.idField];
+        [self.navigationController pushViewController:vc animated:YES];
+    }
+}
+
+-(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
+    if (indexPath.section == 0) {
+        THNOneModel *model = self.modelAry[0];
+        if (model.summary.length == 0) {
+            return 422/2;
+        }
+        return (422+186)/2;
+    } else {
+        return (900/2 + 10) * (self.modelAry.count);
+    }
+    return 0;
+}
 
 @end
