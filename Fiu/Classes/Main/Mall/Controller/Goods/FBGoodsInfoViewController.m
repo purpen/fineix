@@ -24,7 +24,9 @@
 #import "ShareViewController.h"
 #import "NSString+JSON.h"
 #import <UMSocialCore/UMSocialCore.h>
+#import "THNShareActionView.h"
 
+static NSString *const URLShareLink = @"/gateway/share_link";
 static NSString *const URLGoodsInfo = @"/product/view";
 static NSString *const URLAddCar = @"/shopping/add_cart";
 static NSString *const URlGoodsCollect = @"/favorite/ajax_favorite";
@@ -45,6 +47,7 @@ static NSString *const ShareURlText = @"我在D3IN寻找同路人；希望和你
     CGFloat _sceneListHeight;
     FBGoodsCommentViewController *_goodsCommentVC;
     ShareViewController *_shareVC;
+    NSString *_linkUrl;
 }
 
 @pro_strong FBGoodsInfoModelData        *   goodsInfo;
@@ -179,6 +182,21 @@ static NSString *const ShareURlText = @"我在D3IN寻找同路人；希望和你
             [SVProgressHUD showErrorWithStatus:[error localizedDescription]];
         }];
     }
+}
+
+#pragma mark 获取分享链接
+- (void)thn_networkShareInfoData {
+    self.shareRequest = [FBAPI postWithUrlString:URLShareLink requestDictionary:@{@"id":self.goodsID, @"type":@"1", @"storage_id":self.storageId} delegate:self];
+    [self.shareRequest startRequestSuccess:^(FBRequest *request, id result) {
+        if ([[result valueForKey:@"success"] isEqualToNumber:@1]) {
+            NSDictionary *dict =  [result valueForKey:@"data"];
+            _linkUrl = [dict valueForKey:@"url"];
+            [THNShareActionView showShare:self shareMessageObject:[self shareMessageObject] linkUrl:_linkUrl];
+        }
+        
+    } failure:^(FBRequest *request, NSError *error) {
+        NSLog(@" ---- %@ ----", error);
+    }];
 }
 
 #pragma mark 情景列表
@@ -550,55 +568,19 @@ static NSString *const ShareURlText = @"我在D3IN寻找同路人；希望和你
 
 #pragma mark - 分享商品
 - (void)showSharView {
-    _shareVC = [[ShareViewController alloc] init];
-    _shareVC.modalPresentationStyle = UIModalPresentationOverCurrentContext;
-    _shareVC.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;
-    [self presentViewController:_shareVC animated:YES completion:nil];
-    [_shareVC.wechatBtn addTarget:self action:@selector(wechatShareBtnAction:) forControlEvents:(UIControlEventTouchUpInside)];
-    [_shareVC.friendBtn addTarget:self action:@selector(timelineShareBtnAction:) forControlEvents:(UIControlEventTouchUpInside)];
-    [_shareVC.weiBoBtn addTarget:self action:@selector(sinaShareBtnAction:) forControlEvents:(UIControlEventTouchUpInside)];
-    [_shareVC.qqBtn addTarget:self action:@selector(qqShareBtnAction:) forControlEvents:(UIControlEventTouchUpInside)];
+    if (self.goodsInfo) {
+        [self thn_networkShareInfoData];
+    }
 }
 
-- (void)shareTextToPlatformType:(UMSocialPlatformType)platformType {
-    //创建分享消息对象
+#pragma mark - 创建分享消息对象
+- (UMSocialMessageObject *)shareMessageObject {
     UMSocialMessageObject *messageObject = [UMSocialMessageObject messageObject];
-    //创建网页内容对象
-    UMShareWebpageObject *shareObject = [UMShareWebpageObject shareObjectWithTitle:self.goodsInfo.title descr:self.goodsInfo.advantage thumImage:self.goodsInfo.coverUrl];
-    //设置网页地址
-    shareObject.webpageUrl = self.goodsInfo.shareViewUrl;
-    //分享消息对象设置分享内容对象
+    UMShareWebpageObject *shareObject = [UMShareWebpageObject shareObjectWithTitle:self.goodsInfo.title descr:self.goodsInfo.summary thumImage:self.goodsInfo.coverUrl];
+    shareObject.webpageUrl = self.goodsInfo.wapViewUrl;
     messageObject.shareObject = shareObject;
-    //调用分享接口
-    //调用分享接口
-    [[UMSocialManager defaultManager] shareToPlatform:platformType messageObject:messageObject currentViewController:self completion:^(id data, NSError *error) {
-        if (error) {
-            [_shareVC dismissViewControllerAnimated:NO completion:nil];
-            [SVProgressHUD showErrorWithStatus:@"分享失败"];
-            
-        } else {
-            [_shareVC dismissViewControllerAnimated:NO completion:nil];
-            [SVProgressHUD showSuccessWithStatus:@"让分享变成生产力，别让生活偷走远方的精彩"];
-        }
-    }];
+    return messageObject;
 }
-
--(void)wechatShareBtnAction:(UIButton*)sender{
-    [self shareTextToPlatformType:(UMSocialPlatformType_WechatSession)];
-}
-
--(void)timelineShareBtnAction:(UIButton*)sender{
-    [self shareTextToPlatformType:(UMSocialPlatformType_WechatTimeLine)];
-}
-
--(void)qqShareBtnAction:(UIButton*)sender{
-    [self shareTextToPlatformType:(UMSocialPlatformType_QQ)];
-}
-
--(void)sinaShareBtnAction:(UIButton*)sender{
-    [self shareTextToPlatformType:(UMSocialPlatformType_Sina)];
-}
-
 
 #pragma mark - 打开商品购买视图
 - (void)OpenGoodsBuyView:(NSInteger)buyState {
