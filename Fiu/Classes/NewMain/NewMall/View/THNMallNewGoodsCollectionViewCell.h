@@ -22,4 +22,6 @@
 
 - (void)setNewGoodsData:(NSMutableArray *)data;
 
+- (void)setHotGoodsData:(NSMutableArray *)data;
+
 @end

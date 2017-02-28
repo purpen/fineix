@@ -25,6 +25,7 @@
 
 static NSString *const URLMallList = @"/product/getlist";
 static NSString *const URLNewGoodsList = @"/product/index_new";
+static NSString *const URLHotGoodsList = @"/product/index_hot";
 static NSString *const URLCategory = @"/category/getlist";
 static NSString *const URLMallSubject = @"/scene_subject/getlist";
 static NSString *const DiscoverCellId = @"discoverCellId";
@@ -58,13 +59,14 @@ static NSString *const goodsListCellId = @"GoodsListCellId";
     [self thn_setMallViewUI];
     [self networkCategoryData];
     [self thn_networkNewGoodsListData];
+    [self thn_networkHotGoodsListData];
     [self thn_networkSubjectListData];
 }
 
 #pragma mark - 网络请求
 #pragma mark 分类
 - (void)networkCategoryData {
-    self.categoryRequest = [FBAPI getWithUrlString:URLCategory requestDictionary:@{@"domain":@"1", @"page":@"1", @"size":@"10", @"use_cache":@"1"} delegate:self];
+    self.categoryRequest = [FBAPI getWithUrlString:URLCategory requestDictionary:@{@"domain":@"1", @"page":@"1", @"size":@"100", @"use_cache":@"1"} delegate:self];
     [self.categoryRequest startRequestSuccess:^(FBRequest *request, id result) {
         [self.categoryMarr addObject:@"推荐"];
         [self.categoryMarr addObject:@"全部"];
@@ -101,7 +103,25 @@ static NSString *const goodsListCellId = @"GoodsListCellId";
             THNMallGoodsModelItem *goodsModel = [[THNMallGoodsModelItem alloc] initWithDictionary:goodsDic];
             [self.goodsDataMarr addObject:goodsModel];
         }
-    
+        
+        [self.mallList reloadData];
+        [self requestIsLastData:self.mallList];
+        
+    } failure:^(FBRequest *request, NSError *error) {
+        [SVProgressHUD showErrorWithStatus:[error localizedDescription]];
+    }];
+}
+
+#pragma mark 最热商品列表
+- (void)thn_networkHotGoodsListData {
+    self.hotGoodsRequest = [FBAPI getWithUrlString:URLHotGoodsList requestDictionary:@{@"type":@"1"} delegate:self];
+    [self.hotGoodsRequest startRequestSuccess:^(FBRequest *request, id result) {
+        NSArray *goodsArr = [[result valueForKey:@"data"] valueForKey:@"items"];
+        for (NSDictionary * goodsDic in goodsArr) {
+            THNMallGoodsModelItem *goodsModel = [[THNMallGoodsModelItem alloc] initWithDictionary:goodsDic];
+            [self.hotGoodsMarr addObject:goodsModel];
+        }
+        
         [self.mallList reloadData];
         [self requestIsLastData:self.mallList];
         
@@ -114,9 +134,10 @@ static NSString *const goodsListCellId = @"GoodsListCellId";
 - (void)thn_networkSubjectListData {
     [SVProgressHUD show];
     NSDictionary *requestDic = @{@"page":@"1",
-                                 @"size":@"100",
-                                 @"sort":@"2",
+                                 @"size":@"5",
+                                 @"sort":@"1",
                                  @"type":@"5",
+//                                 @"stick":@"1",
                                  @"use_cache":@"1"};
     self.subjectRequest = [FBAPI getWithUrlString:URLMallSubject requestDictionary:requestDic delegate:self];
     [self.subjectRequest startRequestSuccess:^(FBRequest *request, id result) {
@@ -203,13 +224,14 @@ static NSString *const goodsListCellId = @"GoodsListCellId";
 }
 
 #pragma mark - 分类商品专题列表
-- (void)thn_networkCagetorySubjectListData:(NSString *)categoryId {
+- (void)thn_networkCagetorySubjectListData:(NSString *)categoryId size:(NSString *)size {
     NSDictionary *requestDic = @{@"category_id":categoryId,
                                  @"page":@"1",
-                                 @"size":@"10",
+                                 @"size":size,
                                  @"sort":@"2",
                                  @"type":@"5",
                                  @"use_cache":@"1"};
+    
     self.subjectRequest = [FBAPI getWithUrlString:URLMallSubject requestDictionary:requestDic delegate:self];
     [self.subjectRequest startRequestSuccess:^(FBRequest *request, id result) {
         NSArray *goodsArr = [[result valueForKey:@"data"] valueForKey:@"rows"];
@@ -219,6 +241,8 @@ static NSString *const goodsListCellId = @"GoodsListCellId";
             [self.cageSubjectTypeMarr addObject:[NSString stringWithFormat:@"%zi",goodsModel.type]];
             [self.cageSubjectIdMarr addObject:[NSString stringWithFormat:@"%zi",goodsModel.idField]];
         }
+        [self.goodsList reloadData];
+        [SVProgressHUD dismiss];
         
     } failure:^(FBRequest *request, NSError *error) {
         [SVProgressHUD showErrorWithStatus:[error localizedDescription]];
@@ -259,7 +283,7 @@ static NSString *const goodsListCellId = @"GoodsListCellId";
     [self.subjectIdMarr removeAllObjects];
     [self.subjectTypeMarr removeAllObjects];
     [self.categoryMarr removeAllObjects];
-    [self networkCategoryData];
+    
     [self thn_networkNewGoodsListData];
     [self thn_networkSubjectListData];
 }
@@ -289,9 +313,15 @@ static NSString *const goodsListCellId = @"GoodsListCellId";
     [self changeCollectionViewFrame:index];
     _idx = self.categoryIdMarr[index];
     
-    if (index > 0) {
+    if (index == 1) {
+        [SVProgressHUD show];
         [self removeCategorySubjectMarrData];
-        [self thn_networkCagetorySubjectListData:_idx];
+        [self thn_networkCagetorySubjectListData:@"0" size:@"1000"];
+        [self.goodsList.mj_footer endRefreshingWithNoMoreData];
+        
+    } else if (index > 1) {
+        [self removeCategorySubjectMarrData];
+        [self thn_networkCagetorySubjectListData:_idx size:@"1"];
         
         [self removeGoodsListMarrData];
         self.goodsCurrentpageNum = 0;
@@ -374,8 +404,7 @@ static NSString *const goodsListCellId = @"GoodsListCellId";
             return 1;
         }
     }
-    
-    return self.subjectMarr.count + 1;
+    return self.subjectMarr.count + 2;
 }
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
@@ -390,7 +419,7 @@ static NSString *const goodsListCellId = @"GoodsListCellId";
         
         THNMallListCollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:CategoryGoodsListCellId forIndexPath:indexPath];
         if (self.cageSubjectMarr.count > 0) {
-            [cell setMallSubjectData:self.cageSubjectMarr[indexPath.row]];
+            [cell setMallSubjectData:self.cageSubjectMarr[indexPath.section]];
             cell.nav = self.navigationController;
         } else {
             [cell thn_hiddenCellView];
@@ -398,11 +427,15 @@ static NSString *const goodsListCellId = @"GoodsListCellId";
         return cell;
         
     } else if (collectionView == self.mallList) {
-        if (indexPath.row == 0) {
+        if (indexPath.row == 0 || indexPath.row == 1) {
             THNMallNewGoodsCollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:NewGoodsListCellId
                                                                                                 forIndexPath:indexPath];
             if (self.goodsDataMarr.count) {
-                [cell setNewGoodsData:self.goodsDataMarr];
+                if (indexPath.row == 0) {
+                    [cell setNewGoodsData:self.goodsDataMarr];
+                } else if (indexPath.row == 1) {
+                    [cell setHotGoodsData:self.hotGoodsMarr];
+                }
             }
             cell.nav = self.navigationController;
             return cell;
@@ -411,7 +444,7 @@ static NSString *const goodsListCellId = @"GoodsListCellId";
             THNMallListCollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:MallListCellId
                                                                                             forIndexPath:indexPath];
             if (self.subjectMarr.count) {
-                [cell setMallSubjectData:self.subjectMarr[indexPath.row - 1]];
+                [cell setMallSubjectData:self.subjectMarr[indexPath.row - 2]];
             }
             cell.nav = self.navigationController;
             return cell;
@@ -434,7 +467,7 @@ static NSString *const goodsListCellId = @"GoodsListCellId";
         }
  
     } else if (collectionView == self.mallList) {
-        if (indexPath.row == 0) {
+        if (indexPath.row == 0 || indexPath.row == 1) {
             return CGSizeMake(SCREEN_WIDTH, 230);
         } else
             return CGSizeMake(SCREEN_WIDTH, 366);
@@ -466,16 +499,15 @@ static NSString *const goodsListCellId = @"GoodsListCellId";
             [self.navigationController pushViewController:goodsVC animated:YES];
             
         } else {
-            NSInteger type = [self.cageSubjectTypeMarr[indexPath.row] integerValue];
-            NSString *subjectId = self.cageSubjectIdMarr[indexPath.row];
+            NSInteger type = [self.cageSubjectTypeMarr[indexPath.section] integerValue];
+            NSString *subjectId = self.cageSubjectIdMarr[indexPath.section];
             [self openSubjectInfoController:type subjectId:subjectId];
         }
         
     } else if (collectionView == self.mallList) {
-        if (indexPath.row != 0) {
-            
-            NSInteger type = [self.subjectTypeMarr[indexPath.row - 1] integerValue];
-            NSString *subjectId = self.subjectIdMarr[indexPath.row - 1];
+        if (indexPath.row != 0 || indexPath.row != 1) {
+            NSInteger type = [self.subjectTypeMarr[indexPath.row - 2] integerValue];
+            NSString *subjectId = self.subjectIdMarr[indexPath.row - 2];
             [self openSubjectInfoController:type subjectId:subjectId];
         }
     }
@@ -532,6 +564,13 @@ static NSString *const goodsListCellId = @"GoodsListCellId";
         _goodsDataMarr = [NSMutableArray array];
     }
     return _goodsDataMarr;
+}
+
+- (NSMutableArray *)hotGoodsMarr {
+    if (!_hotGoodsMarr) {
+        _hotGoodsMarr = [NSMutableArray array];
+    }
+    return _hotGoodsMarr;
 }
 
 - (NSMutableArray *)goodsListMarr {

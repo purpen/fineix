@@ -46,4 +46,7 @@
 @property (nonatomic, strong) NSMutableArray *cageSubjectIdMarr;
 @property (nonatomic, strong) NSMutableArray *cageSubjectTypeMarr;
 
+@property (nonatomic, strong) FBRequest *hotGoodsRequest;
+@property (nonatomic, strong) NSMutableArray *hotGoodsMarr;
+
 @end
