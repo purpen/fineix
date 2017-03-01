@@ -360,7 +360,7 @@ UITableViewDataSource
     } else if (section == 4) {
         return UIEdgeInsetsMake(0, 18*SCREEN_HEIGHT/667.0, 0, 18*SCREEN_HEIGHT/667.0);
     } else if (section == 5) {
-        return UIEdgeInsetsMake(0, 3*SCREEN_HEIGHT/667.0, 14, 3*SCREEN_HEIGHT/667.0);
+        return UIEdgeInsetsMake(0, 18*SCREEN_HEIGHT/667.0, 14, 18*SCREEN_HEIGHT/667.0);
     }
     return UIEdgeInsetsMake(0, 0, 0, 0);
 }
