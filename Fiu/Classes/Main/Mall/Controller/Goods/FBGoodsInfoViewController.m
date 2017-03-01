@@ -81,7 +81,7 @@ static NSString *const ShareURlText = @"我在D3IN寻找同路人；希望和你
     }
     self.goodsInfoRequest = [FBAPI getWithUrlString:URLGoodsInfo requestDictionary:@{@"id":self.goodsID, @"storage_id":self.storageId} delegate:self];
     [self.goodsInfoRequest startRequestSuccess:^(FBRequest *request, id result) {
-        NSLog(@"======== 商品详情：%@",[NSString jsonStringWithObject:result]);
+//        NSLog(@"======== 商品详情：%@",[NSString jsonStringWithObject:result]);
         
         NSDictionary *goodsDict = [result valueForKey:@"data"];
         _goodsDes = goodsDict[@"advantage"];
@@ -191,7 +191,9 @@ static NSString *const ShareURlText = @"我在D3IN寻找同路人；希望和你
         if ([[result valueForKey:@"success"] isEqualToNumber:@1]) {
             NSDictionary *dict =  [result valueForKey:@"data"];
             _linkUrl = [dict valueForKey:@"url"];
-            [THNShareActionView showShare:self shareMessageObject:[self shareMessageObject] linkUrl:_linkUrl];
+            if (_linkUrl.length > 0) {
+                [THNShareActionView showShare:self shareMessageObject:[self shareMessageObject] linkUrl:_linkUrl];
+            }
         }
         
     } failure:^(FBRequest *request, NSError *error) {
@@ -577,7 +579,7 @@ static NSString *const ShareURlText = @"我在D3IN寻找同路人；希望和你
 - (UMSocialMessageObject *)shareMessageObject {
     UMSocialMessageObject *messageObject = [UMSocialMessageObject messageObject];
     UMShareWebpageObject *shareObject = [UMShareWebpageObject shareObjectWithTitle:self.goodsInfo.title descr:self.goodsInfo.summary thumImage:self.goodsInfo.coverUrl];
-    shareObject.webpageUrl = self.goodsInfo.wapViewUrl;
+    shareObject.webpageUrl = _linkUrl;
     messageObject.shareObject = shareObject;
     return messageObject;
 }
