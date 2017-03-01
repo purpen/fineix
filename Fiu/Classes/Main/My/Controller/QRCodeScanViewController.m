@@ -293,9 +293,20 @@ static NSString *const referral_code = @"referral_code=";
             if ([resultStr containsString:referral_code]) {
                 [self thn_getGoodsReferralCodeWithResult:resultStr];
             }
+            
+            NSString *storageId;
+            if ([resultStr containsString:@"storage_id"]) {
+                NSUInteger index = [resultStr rangeOfString:@"storage_id="].location;
+                NSString *subCodeStr = [resultStr substringFromIndex:index];
+                //  获取地盘码
+                storageId = [subCodeStr substringFromIndex:@"storage_id=".length];
+            }
             //自营商品
             FBGoodsInfoViewController * fbGoodsInfoVC = [[FBGoodsInfoViewController alloc] init];
             fbGoodsInfoVC.goodsID = infoId;
+            if (storageId.length > 0) {
+                fbGoodsInfoVC.storageId = storageId;
+            }
             [self.navigationController pushViewController:fbGoodsInfoVC animated:YES];
             
         } else if ([infoType isEqualToString:@"10"]) {
