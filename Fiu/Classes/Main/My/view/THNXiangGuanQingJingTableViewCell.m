@@ -119,6 +119,7 @@ static NSString *const URLCancelLike = @"/favorite/ajax_cancel_love";
 }
 
 -(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
+    NSLog(@"asdsadsa  %ld",self.modelAry.count);
     return self.modelAry.count;
 }
 

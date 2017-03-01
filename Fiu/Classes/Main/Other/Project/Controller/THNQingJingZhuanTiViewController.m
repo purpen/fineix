@@ -45,6 +45,7 @@
     [self.tableView registerClass:[THNQingJingOneCell class] forCellReuseIdentifier:THNQINGJingOneCell];
     [self.tableView registerClass:[THNXiangGuanQingJingTableViewCell class] forCellReuseIdentifier:THNXIANGGuanQingJingTableViewCell];
     // Do any additional setup after loading the view.
+    NSLog(@"weqweqw %@", self.qingJingZhuanTiID);
     FBRequest *request = [FBAPI postWithUrlString:@"/scene_subject/view" requestDictionary:@{@"id":self.qingJingZhuanTiID} delegate:self];
     [request startRequestSuccess:^(FBRequest *request, id result) {
         [self.modelAry removeAllObjects];
@@ -90,7 +91,7 @@
         THNXiangGuanQingJingTableViewCell * cell = [tableView dequeueReusableCellWithIdentifier:THNXIANGGuanQingJingTableViewCell];
         cell.nav = self.navigationController;
         cell.vc = self;
-        cell.biaoTiLabel.text = @"默认排序";
+//        cell.biaoTiLabel.text = @"默认排序";
         NSMutableArray *ary = [NSMutableArray array];
         if (model.category_ids.count > 1) {
             [ary addObjectsFromArray:model.category_ids];
@@ -124,7 +125,10 @@
                                             context:nil];
         return (422)/2+rect.size.height+30*SCREEN_HEIGHT/667.0;
     } else {
-        return (900/2 + 10) * (self.modelAry.count);
+        if (self.modelAry.count-1>4) {
+            return (1177/2) * (4);
+        }
+        return (1177/2) * (self.modelAry.count-1);
     }
     return 0;
 }

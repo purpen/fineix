@@ -360,7 +360,7 @@ UITableViewDataSource
     } else if (section == 4) {
         return UIEdgeInsetsMake(0, 18*SCREEN_HEIGHT/667.0, 0, 18*SCREEN_HEIGHT/667.0);
     } else if (section == 5) {
-        return UIEdgeInsetsMake(0, 18*SCREEN_HEIGHT/667.0, 14, 18*SCREEN_HEIGHT/667.0);
+        return UIEdgeInsetsMake(0, 3*SCREEN_HEIGHT/667.0, 14, 3*SCREEN_HEIGHT/667.0);
     }
     return UIEdgeInsetsMake(0, 0, 0, 0);
 }
@@ -383,7 +383,7 @@ UITableViewDataSource
 
 -(CGFloat)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout minimumLineSpacingForSectionAtIndex:(NSInteger)section{
     if (section == 5) {
-        return 3*SCREEN_HEIGHT/667.0;
+        return 4*SCREEN_HEIGHT/667.0;
     }
     return 0;
 }
@@ -406,7 +406,7 @@ UITableViewDataSource
         domainInfoVC.infoId = model.web_url;
         [self.navigationController pushViewController:domainInfoVC animated:YES];
     } else if (indexPath.section == 4) {
-        NSArray *ary = self.collectionDatas[5];
+        NSArray *ary = self.collectionDatas[6];
         THNBrandInfoViewController *vc = [[THNBrandInfoViewController alloc] init];
         Pro_categoryModel *model = ary[indexPath.row];
         vc.brandId = model._id;
