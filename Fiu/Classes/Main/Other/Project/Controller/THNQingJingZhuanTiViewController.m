@@ -45,7 +45,6 @@
     [self.tableView registerClass:[THNQingJingOneCell class] forCellReuseIdentifier:THNQINGJingOneCell];
     [self.tableView registerClass:[THNXiangGuanQingJingTableViewCell class] forCellReuseIdentifier:THNXIANGGuanQingJingTableViewCell];
     // Do any additional setup after loading the view.
-    NSLog(@"weqweqw %@", self.qingJingZhuanTiID);
     FBRequest *request = [FBAPI postWithUrlString:@"/scene_subject/view" requestDictionary:@{@"id":self.qingJingZhuanTiID} delegate:self];
     [request startRequestSuccess:^(FBRequest *request, id result) {
         [self.modelAry removeAllObjects];
@@ -87,17 +86,18 @@
         cell.model = model;
         return cell;
     } else if (indexPath.section == 1) {
-        HomeSceneListRow *model = self.modelAry[indexPath.row + 1];
         THNXiangGuanQingJingTableViewCell * cell = [tableView dequeueReusableCellWithIdentifier:THNXIANGGuanQingJingTableViewCell];
         cell.nav = self.navigationController;
         cell.vc = self;
 //        cell.biaoTiLabel.text = @"默认排序";
         NSMutableArray *ary = [NSMutableArray array];
-        if (model.category_ids.count > 1) {
-            [ary addObjectsFromArray:model.category_ids];
+        if (self.modelAry.count > 1) {
+            for (int y = 1; y<self.modelAry.count; y++) {
+                HomeSceneListRow *model = self.modelAry[y];
+                [ary addObject:model];
+            }
         }
-        NSString *string = [ary componentsJoinedByString:@","];
-        cell.string = string;
+        [cell haModelAry:ary];
         return cell;
     }
     UITableViewCell *cell;
@@ -125,10 +125,10 @@
                                             context:nil];
         return (422)/2+rect.size.height+30*SCREEN_HEIGHT/667.0;
     } else {
-        if (self.modelAry.count-1>4) {
-            return (1177/2) * (4);
-        }
-        return (1177/2) * (self.modelAry.count-1);
+//        if (self.modelAry.count-1>4) {
+//            return (1177/2) * (4);
+//        }
+        return (1100/2) * (self.modelAry.count - 1);
     }
     return 0;
 }

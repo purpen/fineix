@@ -110,7 +110,6 @@
     if (indexPath.section == 0) {
         StickModel *model = self.modelAry[indexPath.row];
         THNViewController *vc1 = [[THNViewController alloc] init];
-        NSLog(@"sdsadasbdasdbsab  %@",model.web_url);
         [vc1 thn_tiaoZhuanLanMuWeiWithType:[model.type integerValue] andId:model.web_url andDelegate:self andNav:self.nav];
     } else {
         Pro_categoryModel *model = self.modelAry[indexPath.row+2];

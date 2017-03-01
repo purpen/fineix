@@ -25,4 +25,6 @@
 /**  */
 @property (nonatomic, strong) UILabel *biaoTiLabel;
 
+-(void)haModelAry:(NSMutableArray*)ary;
+
 @end

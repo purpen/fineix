@@ -68,7 +68,7 @@ static NSString *const cellId = @"THNCuXiaoDetalContentTableViewCell";
     if (self.vcType == 1) {
         self.navViewTitle.text = @"促销详情";
     }else if (self.vcType == 2){
-        self.navViewTitle.text = @"商品详情";
+        self.navViewTitle.text = @"好货合集";
     }
     
     

@@ -50,6 +50,7 @@ static NSString *const URLCancelLike = @"/favorite/ajax_cancel_love";
 
 -(instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier{
     if (self = [super initWithStyle:UITableViewCellStyleDefault reuseIdentifier:reuseIdentifier]) {
+        
         self.tableView = [[UITableView alloc] init];
         self.tableView.scrollEnabled = NO;
 //        self.tableView.rowHeight = 1177/2;
@@ -87,6 +88,10 @@ static NSString *const URLCancelLike = @"/favorite/ajax_cancel_love";
     return self;
 }
 
+-(void)haModelAry:(NSMutableArray *)ary{
+    self.modelAry = ary;
+    [self.tableView reloadData];
+}
 
 -(NSMutableArray *)modelAry{
     if (!_modelAry) {
@@ -119,7 +124,6 @@ static NSString *const URLCancelLike = @"/favorite/ajax_cancel_love";
 }
 
 -(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
-    NSLog(@"asdsadsa  %ld",self.modelAry.count);
     return self.modelAry.count;
 }
 
