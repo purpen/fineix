@@ -22,7 +22,7 @@
     // Do any additional setup after loading the view from its nib.
     self.delegate = self;
     self.view.backgroundColor = [UIColor whiteColor];
-    self.navViewTitle.text = @"关于D3IN";
+    self.navViewTitle.text = @"关于D³IN";
     //地址
     NSURL *url = [NSURL URLWithString:@"http://m.taihuoniao.com/app/api/view/about"];
     //在网页上加载

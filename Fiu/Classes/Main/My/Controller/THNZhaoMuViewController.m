@@ -25,7 +25,7 @@
     
     self.delegate = self;
     self.view.backgroundColor = [UIColor whiteColor];
-    self.navViewTitle.text = @"D3IN合伙招募计划";
+    self.navViewTitle.text = @"D³IN合伙招募计划";
     //地址
     NSURL *url = [NSURL URLWithString:@"https://m.taihuoniao.com/storage/plan?from=app"];
     //在网页上加载
