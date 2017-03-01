@@ -218,7 +218,6 @@ static NSString *const URLCancelLike = @"/favorite/ajax_cancel_love";
         cell.more.tag = indexPath.section;
         [cell.more addTarget:self action:@selector(moreClick:) forControlEvents:UIControlEventTouchUpInside];
         return cell;
-        
     }
     return nil;
 }

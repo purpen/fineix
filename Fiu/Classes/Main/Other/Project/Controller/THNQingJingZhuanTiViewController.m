@@ -125,9 +125,6 @@
                                             context:nil];
         return (422)/2+rect.size.height+30*SCREEN_HEIGHT/667.0;
     } else {
-//        if (self.modelAry.count-1>4) {
-//            return (1177/2) * (4);
-//        }
         return (1100/2) * (self.modelAry.count - 1);
     }
     return 0;
