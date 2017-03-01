@@ -116,6 +116,9 @@ static NSString *const URLCancelLike = @"/favorite/ajax_cancel_love";
             HomeSceneListRow *model = [[HomeSceneListRow alloc] initWithDictionary:sceneDic];
             [self.modelAry addObject:model];
         }
+        if (self.modelAry.count == 0) {
+            self.biaoTiLabel.text = @"";
+        }
         if (self.b == NO) {
             [self.tableView reloadData];
             self.b = YES;
