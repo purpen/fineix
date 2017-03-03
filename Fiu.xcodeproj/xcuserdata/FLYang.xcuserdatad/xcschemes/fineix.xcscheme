@@ -86,7 +86,7 @@
    </AnalyzeAction>
    <ArchiveAction
       buildConfiguration = "Release"
-      customArchiveName = "Fiu"
+      customArchiveName = "D3IN"
       revealArchiveInOrganizer = "YES">
    </ArchiveAction>
 </Scheme>
