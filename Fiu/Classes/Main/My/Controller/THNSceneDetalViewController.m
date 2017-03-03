@@ -295,8 +295,6 @@ static NSString *const URLDeleteScene = @"/scene_sight/delete";
         NSMutableArray *ary = [NSMutableArray array];
         if (self.model.category_ids.count > 1) {
             [ary addObjectsFromArray:self.model.category_ids];
-        } else {
-            cell.biaoTiLabel.text = @"";
         }
         NSString *string = [ary componentsJoinedByString:@","];
         cell.string = string;
