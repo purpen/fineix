@@ -97,7 +97,7 @@
         _moneyTextField.textColor = [UIColor colorWithHexString:@"#222222"];
         _moneyTextField.delegate = self;
         _moneyTextField.keyboardType = UIKeyboardTypeDecimalPad;
-        _moneyTextField.placeholder = @"100元";
+        _moneyTextField.placeholder = @"10元";
         [_moneyTextField addTarget:self action:@selector(setRefreshMoney:) forControlEvents:(UIControlEventEditingChanged)];
     }
     return _moneyTextField;
@@ -145,7 +145,7 @@
         _errorLabel = [[UILabel alloc] init];
         _errorLabel.font = [UIFont systemFontOfSize:11];
         _errorLabel.textColor = [UIColor colorWithHexString:@"#F76260"];
-        _errorLabel.text = @"* 每次提现金额不得少于100元";
+        _errorLabel.text = @"* 每次提现金额不得少于10元";
         _errorLabel.hidden = YES;
     }
     return _errorLabel;
@@ -179,7 +179,7 @@
 
 #pragma mark - 小于最低提现金额
 - (void)isWithdrawalMonryLessThanMin {
-    self.errorLabel.text = @"* 每次提现金额不得少于100元";
+    self.errorLabel.text = @"* 每次提现金额不得少于10元";
     if ([self.moneyTextField.text floatValue] >= 100.00) {
         self.errorLabel.hidden = YES;
         [[NSNotificationCenter defaultCenter] postNotificationName:@"canWithdrawalMoney" object:nil];
