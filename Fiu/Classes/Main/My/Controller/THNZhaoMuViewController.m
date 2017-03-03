@@ -8,6 +8,9 @@
 
 #import "THNZhaoMuViewController.h"
 #import "SVProgressHUD.h"
+#import "THNShareActionView.h"
+
+static NSString *const URLPlan = @"https://m.taihuoniao.com/storage/plan?from=app";
 
 @interface THNZhaoMuViewController () <FBNavigationBarItemsDelegate,UIWebViewDelegate>
 {
@@ -16,6 +19,26 @@
 @end
 
 @implementation THNZhaoMuViewController
+
+-(void)viewWillAppear:(BOOL)animated{
+    [super viewWillAppear:animated];
+    [self addBarItemRightBarButton:@"" image:@"shouye_share_white" isTransparent:NO];
+}
+
+-(void)rightBarItemSelected{
+    [THNShareActionView showShare:self shareMessageObject:[self shareMessageObject] linkUrl:URLPlan];
+}
+
+#pragma mark - 创建分享消息对象
+- (UMSocialMessageObject *)shareMessageObject {
+    UMSocialMessageObject *messageObject = [UMSocialMessageObject messageObject];
+    UMShareWebpageObject *shareObject = [UMShareWebpageObject shareObjectWithTitle:@"D3IN合伙人招募计划"
+                                                                             descr:@"分享有理，赚钱无罪。一键分享，轻松提现"
+                                                                         thumImage:[UIImage imageNamed:@"D3IN_plan"]];
+    shareObject.webpageUrl = URLPlan;
+    messageObject.shareObject = shareObject;
+    return messageObject;
+}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
