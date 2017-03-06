@@ -19,16 +19,16 @@
 
 @interface UserGoodsTag : UIButton
 
-@pro_weak id <FBUserGoodsTagDelegaet> delegate;
-@pro_assign NSInteger       index;
-@pro_strong UIButton    *   bgBtn;
-@pro_strong UIButton    *   dele;
-@pro_strong UILabel     *   title;
-@pro_strong UILabel     *   price;
-@pro_assign BOOL            isMove;
-@pro_strong NSString    *   goodsId;
-@pro_strong UIView      *   posPoint;
-@pro_assign BOOL            isFlip;
+@property (nonatomic, weak) id <FBUserGoodsTagDelegaet> delegate;
+@property (nonatomic, assign) NSInteger       index;
+@property (nonatomic, strong) UIButton    *   bgBtn;
+@property (nonatomic, strong) UIButton    *   dele;
+@property (nonatomic, strong) UILabel     *   title;
+@property (nonatomic, strong) UILabel     *   price;
+@property (nonatomic, assign) BOOL            isMove;
+@property (nonatomic, strong) NSString    *   goodsId;
+@property (nonatomic, strong) UIView      *   posPoint;
+@property (nonatomic, assign) BOOL            isFlip;
 
 - (void)userTag_SetGoodsInfo:(NSString *)text;
 

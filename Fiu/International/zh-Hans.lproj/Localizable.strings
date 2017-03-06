@@ -7,7 +7,6 @@
 */
 
 //  控制器
-"TabBar_Creat" = "Fiu";
 "TabBar_Home" = "首页";
 "TabBar_Discover" = "发现";
 "TabBar_Mall" = "好货";
@@ -86,7 +85,7 @@
 "addTitleText" =  "添加20字以内的标题";
 "addDescription" = "说说你现在的想法";
 "addFiuSceneDes" = "请添加140字以内的地盘描述";
-"addTitle" = "想省事？向右看，Fiu语境有你要的文字";
+"addTitle" = "想省事？向右看，推荐语境有你要的文字";
 "addLocation" = "添加地点";
 "addCategory" = "选择地盘";
 "addContent" = "点击添加情境标题";
@@ -151,7 +150,7 @@
 "addSceneInfoVC" = "添加语境";
 "remindVC" = "提醒";
 "MessageVC" = "消息";
-"AlianceVCTitle" = "我的分成";
+"AlianceVCTitle" = "我的钱包";
 
 //  提示信息
 "netError" = "网络连接错误";
@@ -170,7 +169,7 @@
 "deleteSuccess" = "删除成功";
 "deleteError" = "删除失败";
 "userBouns" = "使用红包优惠￥";
-"noneSearch" = "没找到？或许Fiu首页有你要查的东西";
+"noneSearch" = "没找到？或许D3IN首页有你要查的东西";
 "goLookGoods" = "去逛逛";
 "collectSuccess" = "收藏成功";
 "cancelCollect" = "取消收藏";
@@ -288,7 +287,7 @@
 "fiuFSceneText" = "[圈地盘有收益]";
 "fiuBrand" = "牛Brands";
 "fiuBrandText" = "[尖货这里找]";
-"fiuGoods" = "Fiu好货";
+"fiuGoods" = "D3IN好货";
 "fiuGoodsText" = "[东西不少，牌子不小]";
 "peopleLike" = "人赞";
 "sceneGoods" = "此情境下的好货";

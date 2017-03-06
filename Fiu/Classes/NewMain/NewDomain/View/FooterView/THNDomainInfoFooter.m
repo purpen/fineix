@@ -138,7 +138,6 @@ static NSInteger const actionButtonTag  = 611;
                                                                                      @"scene_id":domainId} delegate:self];
     [self.goodsListRequest startRequestSuccess:^(FBRequest *request, id result) {
         NSArray *goodsArr = [[[result valueForKey:@"data"] valueForKey:@"rows"] valueForKey:@"product"];
-//        NSLog(@"============ 地盘商品详情： %@", [NSString jsonStringWithObject:result]);
         if (goodsArr.count) {
             for (NSDictionary * goodsDic in goodsArr) {
                 GoodsRow *goodsModel = [[GoodsRow alloc] initWithDictionary:goodsDic];
@@ -526,12 +525,11 @@ static NSInteger const actionButtonTag  = 611;
     } else if (tableView == self.sceneTable) {
         if (indexPath.row == 0) {
             THNSceneImageTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:sceneImgCellId];
-            if (!cell) {
-                cell = [[THNSceneImageTableViewCell alloc] initWithStyle:(UITableViewCellStyleDefault) reuseIdentifier:sceneImgCellId];
-                cell.sceneImage.userInteractionEnabled = NO;
-            }
+            cell = [[THNSceneImageTableViewCell alloc] initWithStyle:(UITableViewCellStyleDefault) reuseIdentifier:sceneImgCellId];
+            cell.sceneImage.userInteractionEnabled = NO;
             if (self.sceneListMarr.count) {
                 [cell thn_setSceneImageData:self.sceneListMarr[indexPath.section]];
+                [cell thn_touchUpOpenControllerType:(ClickOpenTypeSceneList)];
             }
             return cell;
             
@@ -629,7 +627,6 @@ static NSInteger const actionButtonTag  = 611;
             }
             
         } else {
-            [SVProgressHUD showInfoWithStatus:@"打开情景详情"];
             THNSceneDetalViewController *vc = [[THNSceneDetalViewController alloc] init];
             vc.sceneDetalId = self.sceneIdMarr[indexPath.section];
             [self.nav pushViewController:vc animated:YES];

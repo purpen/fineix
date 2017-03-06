@@ -763,6 +763,7 @@ static NSString *const homeDataPath = [NSHomeDirectory() stringByAppendingPathCo
             }
             if (self.sceneListMarr.count) {
                 [cell thn_setSceneImageData:self.sceneListMarr[indexPath.section - 4]];
+                [cell thn_touchUpOpenControllerType:(ClickOpenTypeSceneList)];
             }
             cell.vc = self;
             cell.nav = self.navigationController;
@@ -1043,7 +1044,6 @@ static NSString *const homeDataPath = [NSHomeDirectory() stringByAppendingPathCo
         }
     }
 }
-
 
 #pragma mark - 选择城市
 //-(UILabel *)addressCityLabel{

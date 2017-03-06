@@ -15,8 +15,8 @@
     FBSegmentViewDelegate
 >
 
-@pro_strong FBSearchView *searchView;   //  搜索框
-@pro_strong FBSegmentView *menuView;
-@pro_strong UIScrollView *resultsView;  //  搜索结果视图
+@property (nonatomic, strong) FBSearchView  *searchView;   //  搜索框
+@property (nonatomic, strong) FBSegmentView *menuView;
+@property (nonatomic, strong) UIScrollView  *resultsView;  //  搜索结果视图
 
 @end

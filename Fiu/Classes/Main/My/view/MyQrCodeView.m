@@ -106,7 +106,7 @@
             _tipLabel.font = [UIFont systemFontOfSize:13];
         }
         _tipLabel.textColor = [UIColor colorWithHexString:fineixColor];
-        _tipLabel.text = @"扫描我的二维码关注我的Fiu";
+        _tipLabel.text = @"扫描我的二维码关注我";
     }
     return _tipLabel;
 }

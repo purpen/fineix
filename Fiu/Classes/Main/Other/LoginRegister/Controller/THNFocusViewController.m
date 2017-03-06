@@ -151,7 +151,7 @@
 -(UIButton *)enterBtn{
     if (!_enterBtn) {
         _enterBtn = [UIButton buttonWithType:UIButtonTypeCustom];
-        [_enterBtn setTitle:@"进入Fiu世界" forState:UIControlStateNormal];
+        [_enterBtn setTitle:@"进入D3IN世界" forState:UIControlStateNormal];
         _enterBtn.titleLabel.font = [UIFont systemFontOfSize:14];
         _enterBtn.backgroundColor = [UIColor colorWithHexString:@"#BE8914"];
         [_enterBtn setTitleColor:[UIColor colorWithHexString:@"#161002"] forState:UIControlStateNormal];

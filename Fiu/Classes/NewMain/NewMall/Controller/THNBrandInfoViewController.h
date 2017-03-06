@@ -17,18 +17,18 @@
     UICollectionViewDataSource
 >
 
-@pro_strong NSString *brandId;
-@pro_strong UICollectionView *brandCollection;
-@pro_strong FBRequest *brandRequest;
-@pro_strong FBRequest *brandGoodsRequest;
-@pro_strong FBRequest *sceneRequest;
-@pro_strong FBRequest *likeSceneRequest;
-@pro_strong FBRequest *cancelLikeRequest;
-@pro_assign NSInteger currentpageNum;
-@pro_assign NSInteger totalPageNum;
-@pro_strong NSMutableArray *goodsListMarr;
-@pro_strong NSMutableArray *goodsIdMarr;
-@pro_strong NSMutableArray *sceneListMarr;
-@pro_strong NSMutableArray *sceneIdMarr;
+@property (nonatomic, strong) NSString *brandId;
+@property (nonatomic, strong) UICollectionView *brandCollection;
+@property (nonatomic, strong) FBRequest *brandRequest;
+@property (nonatomic, strong) FBRequest *brandGoodsRequest;
+@property (nonatomic, strong) FBRequest *sceneRequest;
+@property (nonatomic, strong) FBRequest *likeSceneRequest;
+@property (nonatomic, strong) FBRequest *cancelLikeRequest;
+@property (nonatomic, assign) NSInteger currentpageNum;
+@property (nonatomic, assign) NSInteger totalPageNum;
+@property (nonatomic, strong) NSMutableArray *goodsListMarr;
+@property (nonatomic, strong) NSMutableArray *goodsIdMarr;
+@property (nonatomic, strong) NSMutableArray *sceneListMarr;
+@property (nonatomic, strong) NSMutableArray *sceneIdMarr;
 
 @end
