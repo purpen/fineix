@@ -165,6 +165,7 @@ static NSString *const URLCancelLike = @"/favorite/ajax_cancel_love";
             [cell thn_setSceneImageData:model];
             cell.vc = self.vc;
             cell.nav = self.nav;
+            [cell thn_touchUpOpenControllerType:(ClickOpenTypeSceneList)];
         }
         return cell;
         

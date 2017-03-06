@@ -42,15 +42,15 @@
 @property (nonatomic, strong) HomeSceneListRow *model;
 /**  */
 @property (nonatomic, strong) NSArray *comments;
-@pro_strong FBRequest *sceneListRequest;
-@pro_strong FBRequest *likeSceneRequest;
-@pro_strong FBRequest *cancelLikeRequest;
-@pro_strong FBRequest *cancelFavoriteRequest;
-@pro_strong FBRequest *followRequest;
-@pro_strong FBRequest *cancelFollowRequest;
-@pro_strong FBRequest *viewCountRequest;
-@pro_strong FBRequest *favoriteRequest;
-@pro_strong FBRequest *deleteRequest;
+@property (nonatomic, strong) FBRequest *sceneListRequest;
+@property (nonatomic, strong) FBRequest *likeSceneRequest;
+@property (nonatomic, strong) FBRequest *cancelLikeRequest;
+@property (nonatomic, strong) FBRequest *cancelFavoriteRequest;
+@property (nonatomic, strong) FBRequest *followRequest;
+@property (nonatomic, strong) FBRequest *cancelFollowRequest;
+@property (nonatomic, strong) FBRequest *viewCountRequest;
+@property (nonatomic, strong) FBRequest *favoriteRequest;
+@property (nonatomic, strong) FBRequest *deleteRequest;
 
 @end
 
@@ -181,6 +181,7 @@ static NSString *const URLDeleteScene = @"/scene_sight/delete";
             [cell thn_setSceneImageData:self.model];
             cell.vc = self;
             cell.nav = self.navigationController;
+            [cell thn_touchUpOpenControllerType:(ClickOpenTypeSceneInfo)];
         }
         return cell;
         

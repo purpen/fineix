@@ -12,6 +12,7 @@
 #import "UIImage+Helper.h"
 #import "THNSceneImageViewController.h"
 #import "THNUserAddGoodsViewController.h"
+#import "THNSceneDetalViewController.h"
 
 @interface THNSceneImageTableViewCell () {
     NSString *_titleStr;
@@ -22,6 +23,7 @@
     NSInteger _isFine;
     NSInteger _isStick;
     NSInteger _isCheck;
+    ClickOpenType _openType;
 }
 
 @end
@@ -39,6 +41,10 @@
 }
 
 #pragma mark - setModel
+- (void)thn_touchUpOpenControllerType:(ClickOpenType)type {
+    _openType = type;
+}
+
 - (void)thn_setSceneImageData:(HomeSceneListRow *)sceneModel {
     self.tagDataMarr = [NSMutableArray arrayWithArray:sceneModel.product];
     self.goodsIds = [NSMutableArray arrayWithArray:[sceneModel.product valueForKey:@"idField"]];
@@ -118,7 +124,7 @@
 
 #pragma mark - 创建用户添加商品按钮
 - (void)setUserTagBtn {
-    self.userTagMarr = [NSMutableArray array];
+    [self.userTagMarr removeAllObjects];
     
     for (UIView * view in self.subviews) {
         if ([view isKindOfClass:[UserGoodsTag class]]) {
@@ -211,6 +217,25 @@
 }
 
 - (void)sceneImageClick:(UITapGestureRecognizer *)tap {
+    switch (_openType) {
+        case ClickOpenTypeSceneList:
+            [self openSceneInfoController];
+            break;
+        case ClickOpenTypeSceneInfo:
+            [self openSceneInfoImage];
+            break;
+    }
+}
+
+#pragma mark - 打开情境详情
+- (void)openSceneInfoController {
+    THNSceneDetalViewController *sceneDataVC = [[THNSceneDetalViewController alloc] init];
+    sceneDataVC.sceneDetalId = _sceneId;
+    [self.nav pushViewController:sceneDataVC animated:YES];
+}
+
+#pragma mark - 打开情境大图
+- (void)openSceneInfoImage {
     THNSceneImageViewController *sceneImageVC = [[THNSceneImageViewController alloc] init];
     sceneImageVC.modalPresentationStyle = UIModalPresentationOverFullScreen;
     sceneImageVC.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;
@@ -218,6 +243,7 @@
     [sceneImageVC thn_setLookSceneImage:_image];
     [sceneImageVC thn_getSceneState:_isFine stick:_isStick check:_isCheck];
     [self.vc presentViewController:sceneImageVC animated:YES completion:nil];
+
 }
 
 - (UILabel *)title {
@@ -238,6 +264,13 @@
         _suTitle.font = [UIFont systemFontOfSize:17];
     }
     return _suTitle;
+}
+
+- (NSMutableArray *)userTagMarr {
+    if (!_userTagMarr) {
+        _userTagMarr = [NSMutableArray array];
+    }
+    return _userTagMarr;
 }
 
 @end

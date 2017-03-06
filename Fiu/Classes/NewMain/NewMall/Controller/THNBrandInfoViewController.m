@@ -134,7 +134,7 @@ static NSString *const brandInfoHeader = @"BrandInfoHeader";
 #pragma mark 品牌商品
 - (void)networkBrandGoodsList {
     [SVProgressHUD show];
-    self.brandGoodsRequest = [FBAPI getWithUrlString:URLGoodslist requestDictionary:@{@"stage":@"9,16", @"size":@"8", @"page":@(self.currentpageNum + 1), @"brand_id":self.brandId} delegate:self];
+    self.brandGoodsRequest = [FBAPI getWithUrlString:URLGoodslist requestDictionary:@{@"stage":@"9", @"size":@"8", @"page":@(self.currentpageNum + 1), @"brand_id":self.brandId} delegate:self];
     [self.brandGoodsRequest startRequestSuccess:^(FBRequest *request, id result) {
         NSArray * goodsArr = [[result valueForKey:@"data"] valueForKey:@"rows"];
         for (NSDictionary * goodsDic in goodsArr) {
