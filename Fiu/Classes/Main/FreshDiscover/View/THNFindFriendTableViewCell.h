@@ -12,5 +12,7 @@
 
 @interface THNFindFriendTableViewCell : UICollectionViewCell
 
+@property (nonatomic, strong) UIImageView *tongxunlu;
+@property (nonatomic, strong) UILabel *tongxunluLabel;
 
 @end

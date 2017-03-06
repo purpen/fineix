@@ -424,7 +424,7 @@ static NSString *const URLDeleteScene = @"/scene_sight/delete";
     } else if (indexPath.row == 7) {
         return 450;
     } else if (indexPath.row == 8) {
-        return (900/2 + 10) * 6 ;
+        return (1100/2 + 10) * 6;
     }
     return 44;
 }

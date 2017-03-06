@@ -18,11 +18,9 @@ static NSString *const ShareURlText = @"我在D³IN寻找同路人；希望和�
 @property (nonatomic, strong) UIImageView *imageV;
 @property (nonatomic, strong) UIImageView *touXiang;
 @property (nonatomic, strong) UIImageView *weibo;
-@property (nonatomic, strong) UIImageView *tongxunlu;
 /**  */
 @property (nonatomic, strong) UILabel *weixinLabel;
 @property (nonatomic, strong) UILabel *weiboLabel;
-@property (nonatomic, strong) UILabel *tongxunluLabel;
 
 @end
 
@@ -101,7 +99,6 @@ static NSString *const ShareURlText = @"我在D³IN寻找同路人；希望和�
             make.width.height.mas_equalTo(40*SCREEN_HEIGHT/667.0);
         }];
         self.tongxunlu.userInteractionEnabled = YES;
-        [self.tongxunlu addGestureRecognizer:[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tongxunluTap)]];
         
         self.tongxunluLabel = [[UILabel alloc] init];
         self.tongxunluLabel.text = @"连接通讯录";
@@ -115,19 +112,6 @@ static NSString *const ShareURlText = @"我在D³IN寻找同路人；希望和�
         }];
     }
     return self;
-}
-
--(void)tongxunluTap{
-    UMSocialMessageObject *messageObject = [UMSocialMessageObject messageObject];
-    messageObject.text = ShareURlText;
-    //通讯录
-    [[UMSocialManager defaultManager] shareToPlatform:(UMSocialPlatformType_Sms) messageObject:messageObject currentViewController:self completion:^(id result, NSError *error) {
-        if (error) {
-            NSLog(@"************Share fail with error %@*********",error);
-        }else{
-            [SVProgressHUD showSuccessWithStatus:@"让分享变成生产力，别让生活偷走远方的精彩"];
-        }
-    }];
 }
 
 -(void)touXiangTap{

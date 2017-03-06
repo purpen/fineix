@@ -31,6 +31,10 @@
 #import "THNQingjingCollectionViewCell.h"
 #import "UIView+FSExtension.h"
 #import "THNQingJingZhuanTiViewController.h"
+#import <UMSocialCore/UMSocialCore.h>
+#import "SVProgressHUD.h"
+
+static NSString *const ShareURlText = @"我在D³IN寻找同路人；希望和你一起用文字来记录内心情绪，用滤镜来表达情感色彩，用分享去变现原创价值；带你发现美学科技的力量和感性生活的温度！>>> https://m.taihuoniao.com/d3in";
 
 @interface THNDiscoverVC ()<
 THNNavigationBarItemsDelegate,
@@ -346,11 +350,26 @@ UITableViewDataSource
         return cell;
     } else if (indexPath.section == 6) {
         THNFindFriendTableViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:THNFINDFriendTableViewCell forIndexPath:indexPath];
+        [cell.tongxunlu addGestureRecognizer:[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tongxunluTap)]];
         return cell;
     }
     CollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:kCellIdentifier_CollectionView forIndexPath:indexPath];
     return cell;
 }
+
+-(void)tongxunluTap{
+    UMSocialMessageObject *messageObject = [UMSocialMessageObject messageObject];
+    messageObject.text = ShareURlText;
+    //通讯录
+    [[UMSocialManager defaultManager] shareToPlatform:(UMSocialPlatformType_Sms) messageObject:messageObject currentViewController:self completion:^(id result, NSError *error) {
+        if (error) {
+            NSLog(@"************Share fail with error %@*********",error);
+        }else{
+            [SVProgressHUD showSuccessWithStatus:@"让分享变成生产力，别让生活偷走远方的精彩"];
+        }
+    }];
+}
+
 
 -(UIEdgeInsets)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout insetForSectionAtIndex:(NSInteger)section{
     if (section == 1) {
