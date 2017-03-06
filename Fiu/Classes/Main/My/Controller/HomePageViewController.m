@@ -503,7 +503,7 @@ static NSString *sceneCellId = @"THNHomeSenceCollectionViewCell";
     if (!_defaultView) {
         _defaultView = [ScenarioNonView getScenarioNonView];
         if (self.isMySelf) {
-            _defaultView.tipLabel.text = @"你还没有发表过新情景哦，快来Fiu一下嘛";
+            _defaultView.tipLabel.text = @"你还没有发表过新情景哦";
             _defaultView.creatBtn.hidden = NO;
         }else{
             _defaultView.tipLabel.text = @"你们好像在哪儿见过，来看看他的足迹吧";

@@ -33,6 +33,8 @@ static NSString *const brandInfoHeader = @"BrandInfoHeader";
     NSInteger _showType;
     BrandInfoData *_brandInfo;
     NSString *_brandDes;
+    BOOL _rollDown;                  //  是否下拉
+    CGFloat _lastContentOffset;      //  滚动的偏移量
 }
 
 
@@ -319,6 +321,34 @@ static NSString *const brandInfoHeader = @"BrandInfoHeader";
         
         } else {
             [self.brandCollection reloadData];
+        }
+    }
+}
+
+#pragma mark - 判断上／下滑状态，显示/隐藏Nav
+- (void)scrollViewWillBeginDragging:(UIScrollView *)scrollView {
+    if (scrollView == self.brandCollection) {
+        _lastContentOffset = scrollView.contentOffset.y;
+    }
+}
+
+- (void)scrollViewWillBeginDecelerating:(UIScrollView *)scrollView {
+    if (scrollView == self.brandCollection) {
+        if (_lastContentOffset < scrollView.contentOffset.y) {
+            _rollDown = YES;
+        }else{
+            _rollDown = NO;
+        }
+    }
+}
+
+- (void)scrollViewDidScroll:(UIScrollView *)scrollView {
+    if (scrollView == self.brandCollection) {
+        CGFloat alphaValue = scrollView.contentOffset.y / 100;
+        if (_rollDown == YES) {
+            self.navView.backgroundColor = [UIColor colorWithHexString:@"#000000" alpha:alphaValue];
+        } else if (_rollDown == NO) {
+            self.navView.backgroundColor = [UIColor colorWithHexString:@"#000000" alpha:alphaValue];
         }
     }
 }

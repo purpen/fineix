@@ -14,9 +14,9 @@
     UITableViewDataSource
 >
 
-@pro_strong UIImageView *rollImageView;
-@pro_strong UITableView *goodsTable;
-@pro_strong NSString *brandTitle;
-@pro_strong NSString *goodsTitle;
+@property (nonatomic, strong) UIImageView *rollImageView;
+@property (nonatomic, strong) UITableView *goodsTable;
+@property (nonatomic, strong) NSString *brandTitle;
+@property (nonatomic, strong) NSString *goodsTitle;
 
 @end

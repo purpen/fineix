@@ -17,7 +17,6 @@
     NSString *_titleStr;
     NSString *_suTitleStr;
     NSString *_image;
-    NSString *_goodsTitle;
     NSString *_brandTitle;
     NSString *_sceneId;
     NSInteger _isFine;
@@ -74,11 +73,11 @@
         self.suTitle.text = suTitleStr;
         
         [self.suTitle mas_updateConstraints:^(MASConstraintMaker *make) {
-            make.width.equalTo(@([self getTextSizeWidth:suTitleStr].width));
+            make.width.equalTo(@([self getTextSizeWidth:suTitleStr font:17].width));
         }];
         
         [self.title mas_updateConstraints:^(MASConstraintMaker *make) {
-            make.width.equalTo(@([self getTextSizeWidth:titleStr].width));
+            make.width.equalTo(@([self getTextSizeWidth:titleStr font:17].width));
             make.bottom.equalTo(self.mas_bottom).with.offset(-48);
         }];
         
@@ -89,7 +88,7 @@
         NSString *titleStr = [NSString stringWithFormat:@"    %@  ", sceneModel.title];
         self.title.text = titleStr;
         [self.title mas_updateConstraints:^(MASConstraintMaker *make) {
-            make.width.equalTo(@([self getTextSizeWidth:titleStr].width));
+            make.width.equalTo(@([self getTextSizeWidth:titleStr font:17].width));
         }];
     }
     
@@ -104,8 +103,8 @@
     }
 }
 
-- (CGSize)getTextSizeWidth:(NSString *)text {
-    NSDictionary *attribute = @{NSFontAttributeName: [UIFont systemFontOfSize:17]};
+- (CGSize)getTextSizeWidth:(NSString *)text font:(CGFloat)fontSize {
+    NSDictionary *attribute = @{NSFontAttributeName: [UIFont systemFontOfSize:fontSize]};
     
     CGSize retSize = [text boundingRectWithSize:CGSizeMake(SCREEN_WIDTH, 0)
                                         options:\
@@ -133,25 +132,26 @@
         NSString *title = [NSString stringWithFormat:@"%@  ", [self.tagDataMarr[idx] valueForKey:@"title"]];
         NSString *price = [NSString stringWithFormat:@"￥%.2f", [[self.tagDataMarr[idx] valueForKey:@"price"] floatValue]];
         NSInteger loc = [[self.tagDataMarr[idx] valueForKey:@"loc"] integerValue];
-        _goodsTitle = [self.tagDataMarr[idx] valueForKey:@"title"];
+        CGFloat buttonWidth = [self getTextSizeWidth:title font:12].width + 25;
         
         UserGoodsTag * userTag = [[UserGoodsTag alloc] init];
         userTag.dele.hidden = YES;
         userTag.title.text = title;
+        if ([price isEqualToString:@"￥0.00"]) {
+            userTag.price.font = [UIFont systemFontOfSize:10];
+            price = @"￥暂未销售";
+        }
         userTag.price.text = price;
         userTag.isMove = NO;
-        CGFloat width = [userTag.title boundingRectWithSize:CGSizeMake(SCREEN_WIDTH, 0)].width * 1.3 -3;
-        NSLog(@"========%f", width);
-        if (width > SCREEN_WIDTH/2) {
-            width = SCREEN_WIDTH/2;
-        } else if (width < 80) {
-            width = 80;
+        
+        if (buttonWidth > SCREEN_WIDTH/2) {
+            buttonWidth = SCREEN_WIDTH/2;
         }
         
         if (loc == 1) {
-            userTag.frame = CGRectMake((btnX*SCREEN_WIDTH) - ((width+25)-18), btnY*SCREEN_WIDTH-32, width, 46);
+            userTag.frame = CGRectMake((btnX * SCREEN_WIDTH) - (buttonWidth - 18), btnY * SCREEN_WIDTH - 32, buttonWidth + 7, 46);
         } else if (loc == 2) {
-            userTag.frame = CGRectMake(btnX*SCREEN_WIDTH-44, btnY*SCREEN_WIDTH-32, width, 46);
+            userTag.frame = CGRectMake(btnX * SCREEN_WIDTH - 44, btnY * SCREEN_WIDTH - 32, buttonWidth + 7, 46);
         }
         [userTag thn_setSceneImageUserGoodsTagLoc:loc];
 

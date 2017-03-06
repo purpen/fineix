@@ -51,7 +51,7 @@
         
     } else {
         self.goodsPrice.font = [UIFont systemFontOfSize:11];
-        self.goodsPrice.text = @"此产品为用户标记，暂未销售。浮游正在努力上架产品中ing...";
+        self.goodsPrice.text = @"此产品为用户标记，暂未销售。D3IN正在努力上架产品中ing...";
         [self.goodsPrice mas_updateConstraints:^(MASConstraintMaker *make) {
             make.right.equalTo(self.mas_right).with.offset(-15);
         }];
