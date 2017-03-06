@@ -393,6 +393,7 @@
 		1F5C57BE1E5D4483003B585D /* THNProductDongModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F5C57BD1E5D4483003B585D /* THNProductDongModel.m */; };
 		1F5C57C11E5D88F3003B585D /* THNMabeLikeTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F5C57C01E5D88F3003B585D /* THNMabeLikeTableViewCell.m */; };
 		1F5C57C41E5DAB98003B585D /* THNXiangGuanQingJingTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F5C57C31E5DAB98003B585D /* THNXiangGuanQingJingTableViewCell.m */; };
+		1F5E9FBC1E6D35E200822312 /* THNSceneInfoTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D8117B231E5AAEA70094E7EB /* THNSceneInfoTableViewCell.m */; };
 		1F69CE201CF70BFA00AE3271 /* OfficialCertificationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F69CE1E1CF70BFA00AE3271 /* OfficialCertificationViewController.m */; };
 		1F69CE211CF70BFA00AE3271 /* OfficialCertificationViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1F69CE1F1CF70BFA00AE3271 /* OfficialCertificationViewController.xib */; };
 		1F6CA25D1D5B0FA600DFB79E /* MediaPlayer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1F6CA25C1D5B0FA600DFB79E /* MediaPlayer.framework */; };
@@ -523,7 +524,6 @@
 		D8117B2B1E5AAEA70094E7EB /* THNLookAllCommentTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D8117B1D1E5AAEA70094E7EB /* THNLookAllCommentTableViewCell.m */; };
 		D8117B2C1E5AAEA70094E7EB /* THNSceneCommentTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D8117B1F1E5AAEA70094E7EB /* THNSceneCommentTableViewCell.m */; };
 		D8117B2D1E5AAEA70094E7EB /* THNSceneImageTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D8117B211E5AAEA70094E7EB /* THNSceneImageTableViewCell.m */; };
-		D8117B2E1E5AAEA70094E7EB /* THNSceneInfoTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D8117B231E5AAEA70094E7EB /* THNSceneInfoTableViewCell.m */; };
 		D8117B2F1E5AAEA70094E7EB /* THNSceneTagsCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D8117B251E5AAEA70094E7EB /* THNSceneTagsCollectionViewCell.m */; };
 		D8117B301E5AAEA70094E7EB /* THNUserInfoTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D8117B271E5AAEA70094E7EB /* THNUserInfoTableViewCell.m */; };
 		D81281131CAA8532007CF08B /* FBViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D812801C1CAA8532007CF08B /* FBViewController.m */; };
@@ -5882,7 +5882,6 @@
 				1FD10CB21D62E89D005898EE /* THNContentViewController.m in Sources */,
 				D8117AC91E5A89D50094E7EB /* RollImageData.m in Sources */,
 				D85174571D587917005F5722 /* THNMyCenterViewController.m in Sources */,
-				D8117B2E1E5AAEA70094E7EB /* THNSceneInfoTableViewCell.m in Sources */,
 				1F2A8FDF1CF40277005116C7 /* InfoGoodsHighlightsTableViewCell.m in Sources */,
 				1F2362511E643D9200A6178C /* THNQingJingZhuanTiViewController.m in Sources */,
 				D80669781D6EF8FA007FD81E /* DiscoverSearchViewController.m in Sources */,
@@ -6190,6 +6189,7 @@
 				D8117AEF1E5A89D60094E7EB /* HelpUserRow.m in Sources */,
 				D857C48A1E2F3E8600569B3D /* THNBalance.m in Sources */,
 				D81317E81D92237E007CE71C /* THNMessageViewController.m in Sources */,
+				1F5E9FBC1E6D35E200822312 /* THNSceneInfoTableViewCell.m in Sources */,
 				D869DB521DF7E49200793038 /* THNLogisticTableViewCell.m in Sources */,
 				D8117B2B1E5AAEA70094E7EB /* THNLookAllCommentTableViewCell.m in Sources */,
 				1F99E1681E516084000D3D73 /* CollectionViewHeaderView.m in Sources */,

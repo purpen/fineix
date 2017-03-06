@@ -28,13 +28,16 @@
 #import "THNProductDongModel.h"
 #import "THNMabeLikeTableViewCell.h"
 #import "THNXiangGuanQingJingTableViewCell.h"
+#import "FBRequest.h"
 
-@interface THNSceneDetalViewController ()<UITableViewDelegate,UITableViewDataSource, FBNavigationBarItemsDelegate>
+@interface THNSceneDetalViewController ()<UITableViewDelegate,UITableViewDataSource, FBNavigationBarItemsDelegate,FBRequestDelegate>
 {
     CGFloat _contentHigh;
     CGFloat _defaultContentHigh;
     CGFloat _commentHigh;
     NSIndexPath *_selectedIndexPath;
+    CGFloat _qingJingCellHeight;
+    CGFloat _hh;
 }
 @pro_strong UITableView *sceneTable;
 
@@ -192,7 +195,7 @@ static NSString *const URLDeleteScene = @"/scene_sight/delete";
         return cell;
         
     } else if (indexPath.row == 2) {
-        
+
         THNSceneInfoTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:sceneInfoCellId];
         cell = [[THNSceneInfoTableViewCell alloc] initWithStyle:(UITableViewCellStyleDefault) reuseIdentifier:sceneInfoCellId];
         if (self.model) {
@@ -397,12 +400,12 @@ static NSString *const URLDeleteScene = @"/scene_sight/delete";
         return 50;
     } else if (indexPath.row == 2) {
         if (_selectedIndexPath && _selectedIndexPath.section == indexPath.section) {
-            return _contentHigh;
+            return _contentHigh*SCREEN_HEIGHT/667.0;
         } else {
-            return _defaultContentHigh;
+            return _defaultContentHigh*SCREEN_HEIGHT/667.0;
         }
     } else if (indexPath.row == 3) {
-        return 40;
+        return 40*SCREEN_HEIGHT/667.0;
     } else if (indexPath.row == 5) {
         if ([self.comments count] > 0) {
             return _commentHigh + 2;
@@ -424,7 +427,35 @@ static NSString *const URLDeleteScene = @"/scene_sight/delete";
     } else if (indexPath.row == 7) {
         return 450;
     } else if (indexPath.row == 8) {
-        return (1100/2 + 10) * 6;
+        NSMutableArray *ary = [NSMutableArray array];
+        if (self.model.category_ids.count > 1) {
+            [ary addObjectsFromArray:self.model.category_ids];
+        }
+        NSString *string = [ary componentsJoinedByString:@","];
+        NSMutableArray *numAry = [NSMutableArray array];
+        __block CGFloat height;
+        FBRequest *request = [FBAPI postWithUrlString:@"/scene_sight/getlist" requestDictionary:@{
+                                                                                                  @"page" : @(1),
+                                                                                                  @"size" : @(6),
+                                                                                                  @"category_ids" : string,
+                                                                                                  @"stick" : @(1),
+                                                                                                  @"sort" : @(1)
+                                                                                                  } delegate:(id<FBRequestDelegate>)self];
+        [request startRequestSuccess:^(FBRequest *request, id result) {
+            NSArray *rows = result[@"data"][@"rows"];
+            [numAry removeAllObjects];
+            for (NSDictionary * sceneDic in rows) {
+                HomeSceneListRow *model = [[HomeSceneListRow alloc] initWithDictionary:sceneDic];
+                [numAry addObject:model];
+            }
+            height = (1100/2+10)*numAry.count;
+        } failure:^(FBRequest *request, NSError *error) {
+            nil;
+        }];
+        if (height > 0) {
+            _hh = height;
+        }
+        return (1100/2+10)*6;
     }
     return 44;
 }
