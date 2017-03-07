@@ -81,8 +81,6 @@ static NSString *const ShareURlText = @"我在D3IN寻找同路人；希望和你
     }
     self.goodsInfoRequest = [FBAPI getWithUrlString:URLGoodsInfo requestDictionary:@{@"id":self.goodsID, @"storage_id":self.storageId} delegate:self];
     [self.goodsInfoRequest startRequestSuccess:^(FBRequest *request, id result) {
-//        NSLog(@"======== 商品详情：%@",[NSString jsonStringWithObject:result]);
-        
         NSDictionary *goodsDict = [result valueForKey:@"data"];
         _goodsDes = goodsDict[@"advantage"];
         _goodsInfoUrl = goodsDict[@"content_view_url"];
@@ -302,9 +300,7 @@ static NSString *const ShareURlText = @"我在D3IN寻找同路人；希望和你
 
 - (FBSegmentView *)menuView {
     if (!_menuView) {
-        NSArray *menuTitle = @[NSLocalizedString(@"niceGoods", nil),
-                               NSLocalizedString(@"niceGoodsInfo", nil),
-                               NSLocalizedString(@"goodsComment", nil)];
+        NSArray *menuTitle = @[@"商品", @"详情", @"评价"];
         _menuView = [[FBSegmentView alloc] initWithFrame:CGRectMake(0, 64, SCREEN_WIDTH, 44)];
         _menuView.delegate = self;
         [_menuView set_menuItemTitle:menuTitle];

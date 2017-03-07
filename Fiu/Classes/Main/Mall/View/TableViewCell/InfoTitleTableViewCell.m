@@ -110,7 +110,7 @@
     
     [self addSubview:self.nextBtn];
     [_nextBtn mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.size.mas_equalTo(CGSizeMake(70 , 20));
+        make.size.mas_equalTo(CGSizeMake(50 , 20));
         make.centerY.equalTo(self);
         make.right.equalTo(self.mas_right).with.offset(-15);
     }];
@@ -191,10 +191,10 @@
         _nextBtn = [[UIButton alloc] init];
         [_nextBtn setTitleColor:[UIColor colorWithHexString:@"#999999"] forState:(UIControlStateNormal)];
         _nextBtn.titleLabel.font = [UIFont systemFontOfSize:12];
-        [_nextBtn setTitle:NSLocalizedString(@"goodsInfoShow", nil) forState:(UIControlStateNormal)];
+        [_nextBtn setTitle:@"详情" forState:(UIControlStateNormal)];
         _nextBtn.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
         [_nextBtn setImage:[UIImage imageNamed:@"button_right_next"] forState:(UIControlStateNormal)];
-        [_nextBtn setImageEdgeInsets:(UIEdgeInsetsMake(0, 60, 0, 0))];
+        [_nextBtn setImageEdgeInsets:(UIEdgeInsetsMake(0, 40, 0, 0))];
         _nextBtn.userInteractionEnabled = NO;
     }
     return _nextBtn;
