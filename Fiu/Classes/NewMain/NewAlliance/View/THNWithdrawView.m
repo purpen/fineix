@@ -12,9 +12,19 @@
     CGFloat _maxMoney;
 }
 
+
 @end
 
 @implementation THNWithdrawView
+
+-(instancetype)init{
+    self = [super init];
+    if (self) {
+        self.backgroundColor = [UIColor whiteColor];
+        [self setViewUI];
+    }
+    return self;
+}
 
 - (instancetype)initWithFrame:(CGRect)frame {
     self = [super initWithFrame:frame];
@@ -39,6 +49,8 @@
 }
 
 - (void)setViewUI {
+    
+    
     [self addSubview:self.hintLabel];
     [_hintLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.size.mas_equalTo(CGSizeMake(50, 12));

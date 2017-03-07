@@ -394,6 +394,10 @@
 		1F5C57C11E5D88F3003B585D /* THNMabeLikeTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F5C57C01E5D88F3003B585D /* THNMabeLikeTableViewCell.m */; };
 		1F5C57C41E5DAB98003B585D /* THNXiangGuanQingJingTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F5C57C31E5DAB98003B585D /* THNXiangGuanQingJingTableViewCell.m */; };
 		1F5E9FBC1E6D35E200822312 /* THNSceneInfoTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D8117B231E5AAEA70094E7EB /* THNSceneInfoTableViewCell.m */; };
+		1F5E9FBF1E6E4EB500822312 /* THNZhangHuView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F5E9FBE1E6E4EB500822312 /* THNZhangHuView.m */; };
+		1F5E9FC21E6E578500822312 /* THNZhangHuModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F5E9FC11E6E578500822312 /* THNZhangHuModel.m */; };
+		1F5E9FC51E6E657400822312 /* THNBangDingTiXianZhangHuViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F5E9FC41E6E657400822312 /* THNBangDingTiXianZhangHuViewController.m */; };
+		1F5E9FC81E6EA19000822312 /* THNZhiFuXinXiViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F5E9FC71E6EA19000822312 /* THNZhiFuXinXiViewController.m */; };
 		1F69CE201CF70BFA00AE3271 /* OfficialCertificationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F69CE1E1CF70BFA00AE3271 /* OfficialCertificationViewController.m */; };
 		1F69CE211CF70BFA00AE3271 /* OfficialCertificationViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1F69CE1F1CF70BFA00AE3271 /* OfficialCertificationViewController.xib */; };
 		1F6CA25D1D5B0FA600DFB79E /* MediaPlayer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1F6CA25C1D5B0FA600DFB79E /* MediaPlayer.framework */; };
@@ -1499,6 +1503,14 @@
 		1F5C57C01E5D88F3003B585D /* THNMabeLikeTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THNMabeLikeTableViewCell.m; sourceTree = "<group>"; };
 		1F5C57C21E5DAB98003B585D /* THNXiangGuanQingJingTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THNXiangGuanQingJingTableViewCell.h; sourceTree = "<group>"; };
 		1F5C57C31E5DAB98003B585D /* THNXiangGuanQingJingTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THNXiangGuanQingJingTableViewCell.m; sourceTree = "<group>"; };
+		1F5E9FBD1E6E4EB500822312 /* THNZhangHuView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THNZhangHuView.h; sourceTree = "<group>"; };
+		1F5E9FBE1E6E4EB500822312 /* THNZhangHuView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THNZhangHuView.m; sourceTree = "<group>"; };
+		1F5E9FC01E6E578500822312 /* THNZhangHuModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THNZhangHuModel.h; sourceTree = "<group>"; };
+		1F5E9FC11E6E578500822312 /* THNZhangHuModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THNZhangHuModel.m; sourceTree = "<group>"; };
+		1F5E9FC31E6E657400822312 /* THNBangDingTiXianZhangHuViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THNBangDingTiXianZhangHuViewController.h; sourceTree = "<group>"; };
+		1F5E9FC41E6E657400822312 /* THNBangDingTiXianZhangHuViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THNBangDingTiXianZhangHuViewController.m; sourceTree = "<group>"; };
+		1F5E9FC61E6EA19000822312 /* THNZhiFuXinXiViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THNZhiFuXinXiViewController.h; sourceTree = "<group>"; };
+		1F5E9FC71E6EA19000822312 /* THNZhiFuXinXiViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THNZhiFuXinXiViewController.m; sourceTree = "<group>"; };
 		1F69CE1D1CF70BFA00AE3271 /* OfficialCertificationViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OfficialCertificationViewController.h; sourceTree = "<group>"; };
 		1F69CE1E1CF70BFA00AE3271 /* OfficialCertificationViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OfficialCertificationViewController.m; sourceTree = "<group>"; };
 		1F69CE1F1CF70BFA00AE3271 /* OfficialCertificationViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = OfficialCertificationViewController.xib; sourceTree = "<group>"; };
@@ -4555,6 +4567,10 @@
 				D857C45F1E2CAFAA00569B3D /* THNSettlementRecordViewController.m */,
 				D857C4701E2CC53900569B3D /* THNSettlementInfoViewController.h */,
 				D857C4711E2CC53900569B3D /* THNSettlementInfoViewController.m */,
+				1F5E9FC31E6E657400822312 /* THNBangDingTiXianZhangHuViewController.h */,
+				1F5E9FC41E6E657400822312 /* THNBangDingTiXianZhangHuViewController.m */,
+				1F5E9FC61E6EA19000822312 /* THNZhiFuXinXiViewController.h */,
+				1F5E9FC71E6EA19000822312 /* THNZhiFuXinXiViewController.m */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -4566,6 +4582,8 @@
 				D857C4801E2F3E8600569B3D /* Alliance */,
 				D857C4811E2F3E8600569B3D /* Settlement */,
 				D857C4891E2F3E8600569B3D /* Withdraw */,
+				1F5E9FC01E6E578500822312 /* THNZhangHuModel.h */,
+				1F5E9FC11E6E578500822312 /* THNZhangHuModel.m */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -4588,6 +4606,8 @@
 				D857C47B1E2DF37F00569B3D /* THNWithdrawView.m */,
 				D857C4CA1E31F0E100569B3D /* THNAllianceFootView.h */,
 				D857C4CB1E31F0E100569B3D /* THNAllianceFootView.m */,
+				1F5E9FBD1E6E4EB500822312 /* THNZhangHuView.h */,
+				1F5E9FBE1E6E4EB500822312 /* THNZhangHuView.m */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -6161,6 +6181,7 @@
 				D8117ACB1E5A89D50094E7EB /* DomainCategory.m in Sources */,
 				D8A9ADC91CD9E34600A9FCFB /* FBFootView.m in Sources */,
 				1F2AFC771D88170B00DA6035 /* THNSenceTopicViewController.m in Sources */,
+				1F5E9FBF1E6E4EB500822312 /* THNZhangHuView.m in Sources */,
 				1F99E15C1E515A94000D3D73 /* LJCollectionViewFlowLayout.m in Sources */,
 				1F2A903A1CF40277005116C7 /* FBLocationViewController.m in Sources */,
 				1F2A90391CF40277005116C7 /* FBCityViewController.m in Sources */,
@@ -6215,6 +6236,7 @@
 				1F99E17F1E51B714000D3D73 /* LocationManager.m in Sources */,
 				1F45A7931D2F5263009D7EE1 /* MapAnnotionViewController.m in Sources */,
 				1F2AFC931D88170B00DA6035 /* FiuSceneCollectionViewCell.m in Sources */,
+				1F5E9FC51E6E657400822312 /* THNBangDingTiXianZhangHuViewController.m in Sources */,
 				1F2AFCA41D88170B00DA6035 /* THNHomeSenceCollectionViewCell.m in Sources */,
 				1F2A8F561CF40277005116C7 /* MapTableViewCell.m in Sources */,
 				1F2A8FBD1CF40277005116C7 /* ChildTagsData.m in Sources */,
@@ -6304,6 +6326,7 @@
 				D868090F1D6349B0002714B2 /* THNMarkGoodsView.m in Sources */,
 				1F2A8F351CF40277005116C7 /* MarkGoodsViewController.m in Sources */,
 				1F2A8FB41CF40277005116C7 /* BrandInfoData.m in Sources */,
+				1F5E9FC21E6E578500822312 /* THNZhangHuModel.m in Sources */,
 				D8117AE21E5A89D50094E7EB /* SceneInfoCounter.m in Sources */,
 				1F2AFD081D8817CC00DA6035 /* THNProjectGoodsCollectionViewCell.m in Sources */,
 				1F23625F1E6517F400A6178C /* THNOneModel.m in Sources */,
@@ -6408,6 +6431,7 @@
 				1F2A8FCB1CF40277005116C7 /* CarGoodsModelItem.m in Sources */,
 				1F2A8FE11CF40277005116C7 /* InfoTitleTableViewCell.m in Sources */,
 				1F2AFC7C1D88170B00DA6035 /* FindeFirendTwoModel.m in Sources */,
+				1F5E9FC81E6EA19000822312 /* THNZhiFuXinXiViewController.m in Sources */,
 				D81179FA1E5987730094E7EB /* THNDomainCollectionViewCell.m in Sources */,
 				1F2A8FD21CF40277005116C7 /* BuyCarDefault.m in Sources */,
 				D80669871D6F3F82007FD81E /* FBGoodsInfoModelBrand.m in Sources */,
