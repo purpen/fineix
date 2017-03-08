@@ -12,8 +12,8 @@
 
 @interface FBPopupView : UIView
 
-@pro_strong UIViewController    *   vc;
-@pro_strong NSString            *   sceneId;
+@property (nonatomic, strong) UIViewController    *vc;
+@property (nonatomic, strong) NSString            *sceneId;
 
 - (void)showPopupViewOnWindowStyleOne:(NSString *)text;
 

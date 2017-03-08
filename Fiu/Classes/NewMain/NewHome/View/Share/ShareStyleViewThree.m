@@ -199,14 +199,14 @@
         make.bottom.equalTo(self.mas_bottom).with.offset(-SCREEN_WIDTH *0.33);
         make.centerX.equalTo(self);
     }];
-    
-    [self addSubview:self.sendText];
-    [_sendText mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.size.mas_equalTo(CGSizeMake(200, 15));
-        make.centerX.equalTo(self);
-        make.bottom.equalTo(self.mas_bottom).with.offset(-SCREEN_WIDTH*0.066);
-    }];
-    
+//    
+//    [self addSubview:self.sendText];
+//    [_sendText mas_makeConstraints:^(MASConstraintMaker *make) {
+//        make.size.mas_equalTo(CGSizeMake(200, 15));
+//        make.centerX.equalTo(self);
+//        make.bottom.equalTo(self.mas_bottom).with.offset(-SCREEN_WIDTH*0.066);
+//    }];
+//    
     [self addSubview:self.describe];
     [_describe mas_makeConstraints:^(MASConstraintMaker *make) {
         make.width.equalTo(@(SCREEN_WIDTH - 80));
